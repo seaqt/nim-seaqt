@@ -1,2 +1,0 @@
-import ./QtScript/gen_qscriptextensionplugin
-export gen_qscriptextensionplugin

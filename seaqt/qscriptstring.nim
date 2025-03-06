@@ -1,2 +1,0 @@
-import ./QtScript/gen_qscriptstring
-export gen_qscriptstring

@@ -1,2 +1,0 @@
-import ./QtScript/gen_qscriptextensioninterface
-export gen_qscriptextensioninterface

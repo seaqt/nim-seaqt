@@ -1,2 +1,0 @@
-import ./QtScript/gen_qscriptvalueiterator
-export gen_qscriptvalueiterator
