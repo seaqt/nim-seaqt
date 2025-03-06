@@ -21,6 +21,9 @@ extern "C" {
 
 void miqt_exec_callback_QQuickRenderControl_renderRequested(intptr_t);
 void miqt_exec_callback_QQuickRenderControl_sceneChanged(intptr_t);
+QMetaObject* miqt_exec_callback_QQuickRenderControl_metaObject(const QQuickRenderControl*, intptr_t);
+void* miqt_exec_callback_QQuickRenderControl_metacast(QQuickRenderControl*, intptr_t, const char*);
+int miqt_exec_callback_QQuickRenderControl_metacall(QQuickRenderControl*, intptr_t, int, int, void**);
 QWindow* miqt_exec_callback_QQuickRenderControl_renderWindow(QQuickRenderControl*, intptr_t, QPoint*);
 bool miqt_exec_callback_QQuickRenderControl_event(QQuickRenderControl*, intptr_t, QEvent*);
 bool miqt_exec_callback_QQuickRenderControl_eventFilter(QQuickRenderControl*, intptr_t, QObject*, QEvent*);
@@ -40,6 +43,62 @@ public:
 	VirtualQQuickRenderControl(QObject* parent): QQuickRenderControl(parent) {};
 
 	virtual ~VirtualQQuickRenderControl() override = default;
+
+	// cgo.Handle value for overwritten implementation
+	intptr_t handle__metaObject = 0;
+
+	// Subclass to allow providing a Go implementation
+	virtual const QMetaObject* metaObject() const override {
+		if (handle__metaObject == 0) {
+			return QQuickRenderControl::metaObject();
+		}
+		
+
+		QMetaObject* callback_return_value = miqt_exec_callback_QQuickRenderControl_metaObject(this, handle__metaObject);
+
+		return callback_return_value;
+	}
+
+	friend QMetaObject* QQuickRenderControl_virtualbase_metaObject(const void* self);
+
+	// cgo.Handle value for overwritten implementation
+	intptr_t handle__metacast = 0;
+
+	// Subclass to allow providing a Go implementation
+	virtual void* qt_metacast(const char* param1) override {
+		if (handle__metacast == 0) {
+			return QQuickRenderControl::qt_metacast(param1);
+		}
+		
+		const char* sigval1 = (const char*) param1;
+
+		void* callback_return_value = miqt_exec_callback_QQuickRenderControl_metacast(this, handle__metacast, sigval1);
+
+		return callback_return_value;
+	}
+
+	friend void* QQuickRenderControl_virtualbase_metacast(void* self, const char* param1);
+
+	// cgo.Handle value for overwritten implementation
+	intptr_t handle__metacall = 0;
+
+	// Subclass to allow providing a Go implementation
+	virtual int qt_metacall(QMetaObject::Call param1, int param2, void** param3) override {
+		if (handle__metacall == 0) {
+			return QQuickRenderControl::qt_metacall(param1, param2, param3);
+		}
+		
+		QMetaObject::Call param1_ret = param1;
+		int sigval1 = static_cast<int>(param1_ret);
+		int sigval2 = param2;
+		void** sigval3 = param3;
+
+		int callback_return_value = miqt_exec_callback_QQuickRenderControl_metacall(this, handle__metacall, sigval1, sigval2, sigval3);
+
+		return static_cast<int>(callback_return_value);
+	}
+
+	friend int QQuickRenderControl_virtualbase_metacall(void* self, int param1, int param2, void** param3);
 
 	// cgo.Handle value for overwritten implementation
 	intptr_t handle__renderWindow = 0;
@@ -222,6 +281,10 @@ void* QQuickRenderControl_metacast(QQuickRenderControl* self, const char* param1
 	return self->qt_metacast(param1);
 }
 
+int QQuickRenderControl_metacall(QQuickRenderControl* self, int param1, int param2, void** param3) {
+	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
+}
+
 struct miqt_string QQuickRenderControl_tr(const char* s) {
 	QString _ret = QQuickRenderControl::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
@@ -329,6 +392,54 @@ struct miqt_string QQuickRenderControl_tr3(const char* s, const char* c, int n) 
 
 QWindow* QQuickRenderControl_renderWindowFor2(QQuickWindow* win, QPoint* offset) {
 	return QQuickRenderControl::renderWindowFor(win, offset);
+}
+
+bool QQuickRenderControl_override_virtual_metaObject(void* self, intptr_t slot) {
+	VirtualQQuickRenderControl* self_cast = dynamic_cast<VirtualQQuickRenderControl*>( (QQuickRenderControl*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+	
+	self_cast->handle__metaObject = slot;
+	return true;
+}
+
+QMetaObject* QQuickRenderControl_virtualbase_metaObject(const void* self) {
+
+	return (QMetaObject*) ( (const VirtualQQuickRenderControl*)(self) )->QQuickRenderControl::metaObject();
+
+}
+
+bool QQuickRenderControl_override_virtual_metacast(void* self, intptr_t slot) {
+	VirtualQQuickRenderControl* self_cast = dynamic_cast<VirtualQQuickRenderControl*>( (QQuickRenderControl*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+	
+	self_cast->handle__metacast = slot;
+	return true;
+}
+
+void* QQuickRenderControl_virtualbase_metacast(void* self, const char* param1) {
+
+	return ( (VirtualQQuickRenderControl*)(self) )->QQuickRenderControl::qt_metacast(param1);
+
+}
+
+bool QQuickRenderControl_override_virtual_metacall(void* self, intptr_t slot) {
+	VirtualQQuickRenderControl* self_cast = dynamic_cast<VirtualQQuickRenderControl*>( (QQuickRenderControl*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+	
+	self_cast->handle__metacall = slot;
+	return true;
+}
+
+int QQuickRenderControl_virtualbase_metacall(void* self, int param1, int param2, void** param3) {
+
+	return ( (VirtualQQuickRenderControl*)(self) )->QQuickRenderControl::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
+
 }
 
 bool QQuickRenderControl_override_virtual_renderWindow(void* self, intptr_t slot) {
@@ -459,6 +570,7 @@ void QQuickRenderControl_virtualbase_disconnectNotify(void* self, QMetaMethod* s
 
 }
 
+const QMetaObject* QQuickRenderControl_staticMetaObject() { return &QQuickRenderControl::staticMetaObject; }
 QObject* QQuickRenderControl_protectedbase_sender(bool* _dynamic_cast_ok, const void* self) {
 	VirtualQQuickRenderControl* self_cast = dynamic_cast<VirtualQQuickRenderControl*>( (QQuickRenderControl*)(self) );
 	if (self_cast == nullptr) {

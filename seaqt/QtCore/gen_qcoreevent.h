@@ -45,6 +45,7 @@ bool QEvent_override_virtual_setAccepted(void* self, intptr_t slot);
 void QEvent_virtualbase_setAccepted(void* self, bool accepted);
 bool QEvent_override_virtual_clone(void* self, intptr_t slot);
 QEvent* QEvent_virtualbase_clone(const void* self);
+const QMetaObject* QEvent_staticMetaObject();
 void QEvent_delete(QEvent* self);
 
 QTimerEvent* QTimerEvent_new(int timerId);

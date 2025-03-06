@@ -99,6 +99,7 @@ type cQNetworkReply*{.exportc: "QNetworkReply", incompleteStruct.} = object
 
 proc fcQNetworkReply_metaObject(self: pointer, ): pointer {.importc: "QNetworkReply_metaObject".}
 proc fcQNetworkReply_metacast(self: pointer, param1: cstring): pointer {.importc: "QNetworkReply_metacast".}
+proc fcQNetworkReply_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QNetworkReply_metacall".}
 proc fcQNetworkReply_tr(s: cstring): struct_miqt_string {.importc: "QNetworkReply_tr".}
 proc fcQNetworkReply_close(self: pointer, ): void {.importc: "QNetworkReply_close".}
 proc fcQNetworkReply_isSequential(self: pointer, ): bool {.importc: "QNetworkReply_isSequential".}
@@ -148,6 +149,7 @@ proc fcQNetworkReply_downloadProgress(self: pointer, bytesReceived: clonglong, b
 proc fcQNetworkReply_connect_downloadProgress(self: pointer, slot: int) {.importc: "QNetworkReply_connect_downloadProgress".}
 proc fcQNetworkReply_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QNetworkReply_tr2".}
 proc fcQNetworkReply_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QNetworkReply_tr3".}
+proc fcQNetworkReply_staticMetaObject(): pointer {.importc: "QNetworkReply_staticMetaObject".}
 proc fcQNetworkReply_delete(self: pointer) {.importc: "QNetworkReply_delete".}
 
 
@@ -158,6 +160,9 @@ proc metaObject*(self: gen_qnetworkreply_types.QNetworkReply, ): gen_qobjectdefs
 
 proc metacast*(self: gen_qnetworkreply_types.QNetworkReply, param1: cstring): pointer =
   fcQNetworkReply_metacast(self.h, param1)
+
+proc metacall*(self: gen_qnetworkreply_types.QNetworkReply, param1: cint, param2: cint, param3: pointer): cint =
+  fcQNetworkReply_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qnetworkreply_types.QNetworkReply, s: cstring): string =
   let v_ms = fcQNetworkReply_tr(s)
@@ -469,5 +474,7 @@ proc tr*(_: type gen_qnetworkreply_types.QNetworkReply, s: cstring, c: cstring, 
   c_free(v_ms.data)
   vx_ret
 
+proc staticMetaObject*(_: type gen_qnetworkreply_types.QNetworkReply): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fcQNetworkReply_staticMetaObject())
 proc delete*(self: gen_qnetworkreply_types.QNetworkReply) =
   fcQNetworkReply_delete(self.h)

@@ -256,6 +256,7 @@ struct miqt_string QCalendar_standaloneWeekDayName3(const QCalendar* self, QLoca
 	return _ms;
 }
 
+const QMetaObject* QCalendar_staticMetaObject() { return &QCalendar::staticMetaObject; }
 void QCalendar_delete(QCalendar* self) {
 	delete self;
 }

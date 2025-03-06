@@ -219,6 +219,7 @@ QTreeWidget* QTreeWidget_new2();
 void QTreeWidget_virtbase(QTreeWidget* src, QTreeView** outptr_QTreeView);
 QMetaObject* QTreeWidget_metaObject(const QTreeWidget* self);
 void* QTreeWidget_metacast(QTreeWidget* self, const char* param1);
+int QTreeWidget_metacall(QTreeWidget* self, int param1, int param2, void** param3);
 struct miqt_string QTreeWidget_tr(const char* s);
 int QTreeWidget_columnCount(const QTreeWidget* self);
 void QTreeWidget_setColumnCount(QTreeWidget* self, int columns);
@@ -298,6 +299,12 @@ bool QTreeWidget_isPersistentEditorOpen2(const QTreeWidget* self, QTreeWidgetIte
 struct miqt_array /* of QTreeWidgetItem* */  QTreeWidget_findItems3(const QTreeWidget* self, struct miqt_string text, int flags, int column);
 QModelIndex* QTreeWidget_indexFromItem2(const QTreeWidget* self, QTreeWidgetItem* item, int column);
 void QTreeWidget_scrollToItem2(QTreeWidget* self, QTreeWidgetItem* item, int hint);
+bool QTreeWidget_override_virtual_metaObject(void* self, intptr_t slot);
+QMetaObject* QTreeWidget_virtualbase_metaObject(const void* self);
+bool QTreeWidget_override_virtual_metacast(void* self, intptr_t slot);
+void* QTreeWidget_virtualbase_metacast(void* self, const char* param1);
+bool QTreeWidget_override_virtual_metacall(void* self, intptr_t slot);
+int QTreeWidget_virtualbase_metacall(void* self, int param1, int param2, void** param3);
 bool QTreeWidget_override_virtual_setSelectionModel(void* self, intptr_t slot);
 void QTreeWidget_virtualbase_setSelectionModel(void* self, QItemSelectionModel* selectionModel);
 bool QTreeWidget_override_virtual_event(void* self, intptr_t slot);
@@ -521,6 +528,7 @@ QObject* QTreeWidget_protectedbase_sender(bool* _dynamic_cast_ok, const void* se
 int QTreeWidget_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
 int QTreeWidget_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
 bool QTreeWidget_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+const QMetaObject* QTreeWidget_staticMetaObject();
 void QTreeWidget_delete(QTreeWidget* self);
 
 #ifdef __cplusplus

@@ -88,6 +88,7 @@ proc fcQAbstractSlider_new(parent: pointer): ptr cQAbstractSlider {.importc: "QA
 proc fcQAbstractSlider_new2(): ptr cQAbstractSlider {.importc: "QAbstractSlider_new2".}
 proc fcQAbstractSlider_metaObject(self: pointer, ): pointer {.importc: "QAbstractSlider_metaObject".}
 proc fcQAbstractSlider_metacast(self: pointer, param1: cstring): pointer {.importc: "QAbstractSlider_metacast".}
+proc fcQAbstractSlider_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QAbstractSlider_metacall".}
 proc fcQAbstractSlider_tr(s: cstring): struct_miqt_string {.importc: "QAbstractSlider_tr".}
 proc fcQAbstractSlider_orientation(self: pointer, ): cint {.importc: "QAbstractSlider_orientation".}
 proc fcQAbstractSlider_setMinimum(self: pointer, minimum: cint): void {.importc: "QAbstractSlider_setMinimum".}
@@ -127,6 +128,12 @@ proc fcQAbstractSlider_actionTriggered(self: pointer, action: cint): void {.impo
 proc fcQAbstractSlider_connect_actionTriggered(self: pointer, slot: int) {.importc: "QAbstractSlider_connect_actionTriggered".}
 proc fcQAbstractSlider_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QAbstractSlider_tr2".}
 proc fcQAbstractSlider_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QAbstractSlider_tr3".}
+proc fQAbstractSlider_virtualbase_metaObject(self: pointer, ): pointer{.importc: "QAbstractSlider_virtualbase_metaObject".}
+proc fcQAbstractSlider_override_virtual_metaObject(self: pointer, slot: int) {.importc: "QAbstractSlider_override_virtual_metaObject".}
+proc fQAbstractSlider_virtualbase_metacast(self: pointer, param1: cstring): pointer{.importc: "QAbstractSlider_virtualbase_metacast".}
+proc fcQAbstractSlider_override_virtual_metacast(self: pointer, slot: int) {.importc: "QAbstractSlider_override_virtual_metacast".}
+proc fQAbstractSlider_virtualbase_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint{.importc: "QAbstractSlider_virtualbase_metacall".}
+proc fcQAbstractSlider_override_virtual_metacall(self: pointer, slot: int) {.importc: "QAbstractSlider_override_virtual_metacall".}
 proc fQAbstractSlider_virtualbase_event(self: pointer, e: pointer): bool{.importc: "QAbstractSlider_virtualbase_event".}
 proc fcQAbstractSlider_override_virtual_event(self: pointer, slot: int) {.importc: "QAbstractSlider_override_virtual_event".}
 proc fQAbstractSlider_virtualbase_sliderChange(self: pointer, change: cint): void{.importc: "QAbstractSlider_virtualbase_sliderChange".}
@@ -223,6 +230,7 @@ proc fQAbstractSlider_virtualbase_connectNotify(self: pointer, signal: pointer):
 proc fcQAbstractSlider_override_virtual_connectNotify(self: pointer, slot: int) {.importc: "QAbstractSlider_override_virtual_connectNotify".}
 proc fQAbstractSlider_virtualbase_disconnectNotify(self: pointer, signal: pointer): void{.importc: "QAbstractSlider_virtualbase_disconnectNotify".}
 proc fcQAbstractSlider_override_virtual_disconnectNotify(self: pointer, slot: int) {.importc: "QAbstractSlider_override_virtual_disconnectNotify".}
+proc fcQAbstractSlider_staticMetaObject(): pointer {.importc: "QAbstractSlider_staticMetaObject".}
 proc fcQAbstractSlider_delete(self: pointer) {.importc: "QAbstractSlider_delete".}
 
 
@@ -239,6 +247,9 @@ proc metaObject*(self: gen_qabstractslider_types.QAbstractSlider, ): gen_qobject
 
 proc metacast*(self: gen_qabstractslider_types.QAbstractSlider, param1: cstring): pointer =
   fcQAbstractSlider_metacast(self.h, param1)
+
+proc metacall*(self: gen_qabstractslider_types.QAbstractSlider, param1: cint, param2: cint, param3: pointer): cint =
+  fcQAbstractSlider_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qabstractslider_types.QAbstractSlider, s: cstring): string =
   let v_ms = fcQAbstractSlider_tr(s)
@@ -424,6 +435,65 @@ proc tr*(_: type gen_qabstractslider_types.QAbstractSlider, s: cstring, c: cstri
   c_free(v_ms.data)
   vx_ret
 
+proc QAbstractSlidermetaObject*(self: gen_qabstractslider_types.QAbstractSlider, ): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fQAbstractSlider_virtualbase_metaObject(self.h))
+
+type QAbstractSlidermetaObjectProc* = proc(): gen_qobjectdefs_types.QMetaObject
+proc onmetaObject*(self: gen_qabstractslider_types.QAbstractSlider, slot: QAbstractSlidermetaObjectProc) =
+  # TODO check subclass
+  var tmp = new QAbstractSlidermetaObjectProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQAbstractSlider_override_virtual_metaObject(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QAbstractSlider_metaObject(self: ptr cQAbstractSlider, slot: int): pointer {.exportc: "miqt_exec_callback_QAbstractSlider_metaObject ".} =
+  var nimfunc = cast[ptr QAbstractSlidermetaObjectProc](cast[pointer](slot))
+
+  let virtualReturn = nimfunc[]( )
+
+  virtualReturn.h
+proc QAbstractSlidermetacast*(self: gen_qabstractslider_types.QAbstractSlider, param1: cstring): pointer =
+  fQAbstractSlider_virtualbase_metacast(self.h, param1)
+
+type QAbstractSlidermetacastProc* = proc(param1: cstring): pointer
+proc onmetacast*(self: gen_qabstractslider_types.QAbstractSlider, slot: QAbstractSlidermetacastProc) =
+  # TODO check subclass
+  var tmp = new QAbstractSlidermetacastProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQAbstractSlider_override_virtual_metacast(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QAbstractSlider_metacast(self: ptr cQAbstractSlider, slot: int, param1: cstring): pointer {.exportc: "miqt_exec_callback_QAbstractSlider_metacast ".} =
+  var nimfunc = cast[ptr QAbstractSlidermetacastProc](cast[pointer](slot))
+  let slotval1 = (param1)
+
+
+  let virtualReturn = nimfunc[](slotval1 )
+
+  virtualReturn
+proc QAbstractSlidermetacall*(self: gen_qabstractslider_types.QAbstractSlider, param1: cint, param2: cint, param3: pointer): cint =
+  fQAbstractSlider_virtualbase_metacall(self.h, cint(param1), param2, param3)
+
+type QAbstractSlidermetacallProc* = proc(param1: cint, param2: cint, param3: pointer): cint
+proc onmetacall*(self: gen_qabstractslider_types.QAbstractSlider, slot: QAbstractSlidermetacallProc) =
+  # TODO check subclass
+  var tmp = new QAbstractSlidermetacallProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQAbstractSlider_override_virtual_metacall(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QAbstractSlider_metacall(self: ptr cQAbstractSlider, slot: int, param1: cint, param2: cint, param3: pointer): cint {.exportc: "miqt_exec_callback_QAbstractSlider_metacall ".} =
+  var nimfunc = cast[ptr QAbstractSlidermetacallProc](cast[pointer](slot))
+  let slotval1 = cint(param1)
+
+  let slotval2 = param2
+
+  let slotval3 = param3
+
+
+  let virtualReturn = nimfunc[](slotval1, slotval2, slotval3 )
+
+  virtualReturn
 proc QAbstractSliderevent*(self: gen_qabstractslider_types.QAbstractSlider, e: gen_qcoreevent_types.QEvent): bool =
   fQAbstractSlider_virtualbase_event(self.h, e.h)
 
@@ -1265,5 +1335,7 @@ proc miqt_exec_callback_QAbstractSlider_disconnectNotify(self: ptr cQAbstractSli
 
 
   nimfunc[](slotval1)
+proc staticMetaObject*(_: type gen_qabstractslider_types.QAbstractSlider): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fcQAbstractSlider_staticMetaObject())
 proc delete*(self: gen_qabstractslider_types.QAbstractSlider) =
   fcQAbstractSlider_delete(self.h)

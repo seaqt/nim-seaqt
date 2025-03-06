@@ -27,6 +27,9 @@ void miqt_exec_callback_QAbstractSocket_disconnected(intptr_t);
 void miqt_exec_callback_QAbstractSocket_stateChanged(intptr_t, int);
 void miqt_exec_callback_QAbstractSocket_errorOccurred(intptr_t, int);
 void miqt_exec_callback_QAbstractSocket_proxyAuthenticationRequired(intptr_t, QNetworkProxy*, QAuthenticator*);
+QMetaObject* miqt_exec_callback_QAbstractSocket_metaObject(const QAbstractSocket*, intptr_t);
+void* miqt_exec_callback_QAbstractSocket_metacast(QAbstractSocket*, intptr_t, const char*);
+int miqt_exec_callback_QAbstractSocket_metacall(QAbstractSocket*, intptr_t, int, int, void**);
 void miqt_exec_callback_QAbstractSocket_resume(QAbstractSocket*, intptr_t);
 bool miqt_exec_callback_QAbstractSocket_bind(QAbstractSocket*, intptr_t, QHostAddress*, uint16_t, int);
 void miqt_exec_callback_QAbstractSocket_connectToHost(QAbstractSocket*, intptr_t, struct miqt_string, uint16_t, int, int);
@@ -72,6 +75,62 @@ public:
 	VirtualQAbstractSocket(QAbstractSocket::SocketType socketType, QObject* parent): QAbstractSocket(socketType, parent) {};
 
 	virtual ~VirtualQAbstractSocket() override = default;
+
+	// cgo.Handle value for overwritten implementation
+	intptr_t handle__metaObject = 0;
+
+	// Subclass to allow providing a Go implementation
+	virtual const QMetaObject* metaObject() const override {
+		if (handle__metaObject == 0) {
+			return QAbstractSocket::metaObject();
+		}
+		
+
+		QMetaObject* callback_return_value = miqt_exec_callback_QAbstractSocket_metaObject(this, handle__metaObject);
+
+		return callback_return_value;
+	}
+
+	friend QMetaObject* QAbstractSocket_virtualbase_metaObject(const void* self);
+
+	// cgo.Handle value for overwritten implementation
+	intptr_t handle__metacast = 0;
+
+	// Subclass to allow providing a Go implementation
+	virtual void* qt_metacast(const char* param1) override {
+		if (handle__metacast == 0) {
+			return QAbstractSocket::qt_metacast(param1);
+		}
+		
+		const char* sigval1 = (const char*) param1;
+
+		void* callback_return_value = miqt_exec_callback_QAbstractSocket_metacast(this, handle__metacast, sigval1);
+
+		return callback_return_value;
+	}
+
+	friend void* QAbstractSocket_virtualbase_metacast(void* self, const char* param1);
+
+	// cgo.Handle value for overwritten implementation
+	intptr_t handle__metacall = 0;
+
+	// Subclass to allow providing a Go implementation
+	virtual int qt_metacall(QMetaObject::Call param1, int param2, void** param3) override {
+		if (handle__metacall == 0) {
+			return QAbstractSocket::qt_metacall(param1, param2, param3);
+		}
+		
+		QMetaObject::Call param1_ret = param1;
+		int sigval1 = static_cast<int>(param1_ret);
+		int sigval2 = param2;
+		void** sigval3 = param3;
+
+		int callback_return_value = miqt_exec_callback_QAbstractSocket_metacall(this, handle__metacall, sigval1, sigval2, sigval3);
+
+		return static_cast<int>(callback_return_value);
+	}
+
+	friend int QAbstractSocket_virtualbase_metacall(void* self, int param1, int param2, void** param3);
 
 	// cgo.Handle value for overwritten implementation
 	intptr_t handle__resume = 0;
@@ -778,6 +837,10 @@ void* QAbstractSocket_metacast(QAbstractSocket* self, const char* param1) {
 	return self->qt_metacast(param1);
 }
 
+int QAbstractSocket_metacall(QAbstractSocket* self, int param1, int param2, void** param3) {
+	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
+}
+
 struct miqt_string QAbstractSocket_tr(const char* s) {
 	QString _ret = QAbstractSocket::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
@@ -1063,6 +1126,54 @@ bool QAbstractSocket_bind22(QAbstractSocket* self, uint16_t port, int mode) {
 
 void QAbstractSocket_connectToHost3(QAbstractSocket* self, QHostAddress* address, uint16_t port, int mode) {
 	self->connectToHost(*address, static_cast<quint16>(port), static_cast<QIODeviceBase::OpenMode>(mode));
+}
+
+bool QAbstractSocket_override_virtual_metaObject(void* self, intptr_t slot) {
+	VirtualQAbstractSocket* self_cast = dynamic_cast<VirtualQAbstractSocket*>( (QAbstractSocket*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+	
+	self_cast->handle__metaObject = slot;
+	return true;
+}
+
+QMetaObject* QAbstractSocket_virtualbase_metaObject(const void* self) {
+
+	return (QMetaObject*) ( (const VirtualQAbstractSocket*)(self) )->QAbstractSocket::metaObject();
+
+}
+
+bool QAbstractSocket_override_virtual_metacast(void* self, intptr_t slot) {
+	VirtualQAbstractSocket* self_cast = dynamic_cast<VirtualQAbstractSocket*>( (QAbstractSocket*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+	
+	self_cast->handle__metacast = slot;
+	return true;
+}
+
+void* QAbstractSocket_virtualbase_metacast(void* self, const char* param1) {
+
+	return ( (VirtualQAbstractSocket*)(self) )->QAbstractSocket::qt_metacast(param1);
+
+}
+
+bool QAbstractSocket_override_virtual_metacall(void* self, intptr_t slot) {
+	VirtualQAbstractSocket* self_cast = dynamic_cast<VirtualQAbstractSocket*>( (QAbstractSocket*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+	
+	self_cast->handle__metacall = slot;
+	return true;
+}
+
+int QAbstractSocket_virtualbase_metacall(void* self, int param1, int param2, void** param3) {
+
+	return ( (VirtualQAbstractSocket*)(self) )->QAbstractSocket::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
+
 }
 
 bool QAbstractSocket_override_virtual_resume(void* self, intptr_t slot) {
@@ -1635,6 +1746,7 @@ void QAbstractSocket_virtualbase_disconnectNotify(void* self, QMetaMethod* signa
 
 }
 
+const QMetaObject* QAbstractSocket_staticMetaObject() { return &QAbstractSocket::staticMetaObject; }
 void QAbstractSocket_protectedbase_setSocketState(bool* _dynamic_cast_ok, void* self, int state) {
 	VirtualQAbstractSocket* self_cast = dynamic_cast<VirtualQAbstractSocket*>( (QAbstractSocket*)(self) );
 	if (self_cast == nullptr) {

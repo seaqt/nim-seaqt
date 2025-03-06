@@ -47,6 +47,7 @@ QAudioSource* QAudioSource_new6(QAudioDevice* audioDeviceInfo, QAudioFormat* for
 void QAudioSource_virtbase(QAudioSource* src, QObject** outptr_QObject);
 QMetaObject* QAudioSource_metaObject(const QAudioSource* self);
 void* QAudioSource_metacast(QAudioSource* self, const char* param1);
+int QAudioSource_metacall(QAudioSource* self, int param1, int param2, void** param3);
 struct miqt_string QAudioSource_tr(const char* s);
 bool QAudioSource_isNull(const QAudioSource* self);
 QAudioFormat* QAudioSource_format(const QAudioSource* self);
@@ -69,6 +70,12 @@ void QAudioSource_stateChanged(QAudioSource* self, int state);
 void QAudioSource_connect_stateChanged(QAudioSource* self, intptr_t slot);
 struct miqt_string QAudioSource_tr2(const char* s, const char* c);
 struct miqt_string QAudioSource_tr3(const char* s, const char* c, int n);
+bool QAudioSource_override_virtual_metaObject(void* self, intptr_t slot);
+QMetaObject* QAudioSource_virtualbase_metaObject(const void* self);
+bool QAudioSource_override_virtual_metacast(void* self, intptr_t slot);
+void* QAudioSource_virtualbase_metacast(void* self, const char* param1);
+bool QAudioSource_override_virtual_metacall(void* self, intptr_t slot);
+int QAudioSource_virtualbase_metacall(void* self, int param1, int param2, void** param3);
 bool QAudioSource_override_virtual_event(void* self, intptr_t slot);
 bool QAudioSource_virtualbase_event(void* self, QEvent* event);
 bool QAudioSource_override_virtual_eventFilter(void* self, intptr_t slot);
@@ -87,6 +94,7 @@ QObject* QAudioSource_protectedbase_sender(bool* _dynamic_cast_ok, const void* s
 int QAudioSource_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
 int QAudioSource_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
 bool QAudioSource_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+const QMetaObject* QAudioSource_staticMetaObject();
 void QAudioSource_delete(QAudioSource* self);
 
 #ifdef __cplusplus

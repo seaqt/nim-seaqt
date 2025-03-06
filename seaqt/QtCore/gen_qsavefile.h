@@ -45,6 +45,7 @@ QSaveFile* QSaveFile_new4(QObject* parent);
 void QSaveFile_virtbase(QSaveFile* src, QFileDevice** outptr_QFileDevice);
 QMetaObject* QSaveFile_metaObject(const QSaveFile* self);
 void* QSaveFile_metacast(QSaveFile* self, const char* param1);
+int QSaveFile_metacall(QSaveFile* self, int param1, int param2, void** param3);
 struct miqt_string QSaveFile_tr(const char* s);
 struct miqt_string QSaveFile_fileName(const QSaveFile* self);
 void QSaveFile_setFileName(QSaveFile* self, struct miqt_string name);
@@ -56,6 +57,12 @@ bool QSaveFile_directWriteFallback(const QSaveFile* self);
 long long QSaveFile_writeData(QSaveFile* self, const char* data, long long len);
 struct miqt_string QSaveFile_tr2(const char* s, const char* c);
 struct miqt_string QSaveFile_tr3(const char* s, const char* c, int n);
+bool QSaveFile_override_virtual_metaObject(void* self, intptr_t slot);
+QMetaObject* QSaveFile_virtualbase_metaObject(const void* self);
+bool QSaveFile_override_virtual_metacast(void* self, intptr_t slot);
+void* QSaveFile_virtualbase_metacast(void* self, const char* param1);
+bool QSaveFile_override_virtual_metacall(void* self, intptr_t slot);
+int QSaveFile_virtualbase_metacall(void* self, int param1, int param2, void** param3);
 bool QSaveFile_override_virtual_fileName(void* self, intptr_t slot);
 struct miqt_string QSaveFile_virtualbase_fileName(const void* self);
 bool QSaveFile_override_virtual_open(void* self, intptr_t slot);
@@ -116,6 +123,7 @@ QObject* QSaveFile_protectedbase_sender(bool* _dynamic_cast_ok, const void* self
 int QSaveFile_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
 int QSaveFile_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
 bool QSaveFile_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+const QMetaObject* QSaveFile_staticMetaObject();
 void QSaveFile_delete(QSaveFile* self);
 
 #ifdef __cplusplus

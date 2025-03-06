@@ -62,10 +62,12 @@ import ./gen_qcolorspace_types
 export gen_qcolorspace_types
 
 import
+  ../QtCore/gen_qobjectdefs_types,
   ../QtCore/gen_qpoint_types,
   ../QtCore/gen_qvariant_types,
   ./gen_qcolortransform_types
 export
+  gen_qobjectdefs_types,
   gen_qpoint_types,
   gen_qvariant_types,
   gen_qcolortransform_types
@@ -106,6 +108,7 @@ proc fcQColorSpace_transformationToColorSpace(self: pointer, colorspace: pointer
 proc fcQColorSpace_ToQVariant(self: pointer, ): pointer {.importc: "QColorSpace_ToQVariant".}
 proc fcQColorSpace_setTransferFunction2(self: pointer, transferFunction: cint, gamma: float32): void {.importc: "QColorSpace_setTransferFunction2".}
 proc fcQColorSpace_withTransferFunction2(self: pointer, transferFunction: cint, gamma: float32): pointer {.importc: "QColorSpace_withTransferFunction2".}
+proc fcQColorSpace_staticMetaObject(): pointer {.importc: "QColorSpace_staticMetaObject".}
 proc fcQColorSpace_delete(self: pointer) {.importc: "QColorSpace_delete".}
 
 
@@ -271,5 +274,7 @@ proc setTransferFunction*(self: gen_qcolorspace_types.QColorSpace, transferFunct
 proc withTransferFunction*(self: gen_qcolorspace_types.QColorSpace, transferFunction: cint, gamma: float32): gen_qcolorspace_types.QColorSpace =
   gen_qcolorspace_types.QColorSpace(h: fcQColorSpace_withTransferFunction2(self.h, cint(transferFunction), gamma))
 
+proc staticMetaObject*(_: type gen_qcolorspace_types.QColorSpace): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fcQColorSpace_staticMetaObject())
 proc delete*(self: gen_qcolorspace_types.QColorSpace) =
   fcQColorSpace_delete(self.h)

@@ -124,9 +124,11 @@ export gen_qkeysequence_types
 
 import
   ../QtCore/gen_qnamespace_types,
+  ../QtCore/gen_qobjectdefs_types,
   ../QtCore/gen_qvariant_types
 export
   gen_qnamespace_types,
+  gen_qobjectdefs_types,
   gen_qvariant_types
 
 type cQKeySequence*{.exportc: "QKeySequence", incompleteStruct.} = object
@@ -168,6 +170,7 @@ proc fcQKeySequence_toString1(self: pointer, format: cint): struct_miqt_string {
 proc fcQKeySequence_fromString2(str: struct_miqt_string, format: cint): pointer {.importc: "QKeySequence_fromString2".}
 proc fcQKeySequence_listFromString2(str: struct_miqt_string, format: cint): struct_miqt_array {.importc: "QKeySequence_listFromString2".}
 proc fcQKeySequence_listToString2(list: struct_miqt_array, format: cint): struct_miqt_string {.importc: "QKeySequence_listToString2".}
+proc fcQKeySequence_staticMetaObject(): pointer {.importc: "QKeySequence_staticMetaObject".}
 proc fcQKeySequence_delete(self: pointer) {.importc: "QKeySequence_delete".}
 
 
@@ -319,5 +322,7 @@ proc listToString*(_: type gen_qkeysequence_types.QKeySequence, list: seq[gen_qk
   c_free(v_ms.data)
   vx_ret
 
+proc staticMetaObject*(_: type gen_qkeysequence_types.QKeySequence): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fcQKeySequence_staticMetaObject())
 proc delete*(self: gen_qkeysequence_types.QKeySequence) =
   fcQKeySequence_delete(self.h)

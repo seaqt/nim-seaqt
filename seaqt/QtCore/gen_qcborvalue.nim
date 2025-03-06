@@ -78,6 +78,7 @@ import
   ./gen_qcborstreamwriter_types,
   ./gen_qdatetime_types,
   ./gen_qjsonvalue_types,
+  ./gen_qobjectdefs_types,
   ./gen_qregularexpression_types,
   ./gen_qurl_types,
   ./gen_quuid_types,
@@ -89,6 +90,7 @@ export
   gen_qcborstreamwriter_types,
   gen_qdatetime_types,
   gen_qjsonvalue_types,
+  gen_qobjectdefs_types,
   gen_qregularexpression_types,
   gen_qurl_types,
   gen_quuid_types,
@@ -199,6 +201,7 @@ proc fcQCborValue_fromCbor33(data: ptr uint8, len: int64, error: pointer): point
 proc fcQCborValue_toCbor1(self: pointer, opt: cint): struct_miqt_string {.importc: "QCborValue_toCbor1".}
 proc fcQCborValue_toCbor2(self: pointer, writer: pointer, opt: cint): void {.importc: "QCborValue_toCbor2".}
 proc fcQCborValue_toDiagnosticNotation1(self: pointer, opts: cint): struct_miqt_string {.importc: "QCborValue_toDiagnosticNotation1".}
+proc fcQCborValue_staticMetaObject(): pointer {.importc: "QCborValue_staticMetaObject".}
 proc fcQCborValue_delete(self: pointer) {.importc: "QCborValue_delete".}
 proc fcQCborValueConstRef_new(param1: pointer): ptr cQCborValueConstRef {.importc: "QCborValueConstRef_new".}
 proc fcQCborValueConstRef_ToQCborValue(self: pointer, ): pointer {.importc: "QCborValueConstRef_ToQCborValue".}
@@ -669,6 +672,8 @@ proc toDiagnosticNotation*(self: gen_qcborvalue_types.QCborValue, opts: cint): s
   c_free(v_ms.data)
   vx_ret
 
+proc staticMetaObject*(_: type gen_qcborvalue_types.QCborValue): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fcQCborValue_staticMetaObject())
 proc delete*(self: gen_qcborvalue_types.QCborValue) =
   fcQCborValue_delete(self.h)
 

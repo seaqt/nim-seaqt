@@ -54,6 +54,7 @@ bool QNetworkCookie_hasSameIdentifier(const QNetworkCookie* self, QNetworkCookie
 void QNetworkCookie_normalize(QNetworkCookie* self, QUrl* url);
 struct miqt_array /* of QNetworkCookie* */  QNetworkCookie_parseCookies(struct miqt_string cookieString);
 struct miqt_string QNetworkCookie_toRawForm1(const QNetworkCookie* self, int form);
+const QMetaObject* QNetworkCookie_staticMetaObject();
 void QNetworkCookie_delete(QNetworkCookie* self);
 
 #ifdef __cplusplus

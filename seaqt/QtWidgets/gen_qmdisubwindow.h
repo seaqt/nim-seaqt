@@ -94,6 +94,7 @@ QMdiSubWindow* QMdiSubWindow_new3(QWidget* parent, int flags);
 void QMdiSubWindow_virtbase(QMdiSubWindow* src, QWidget** outptr_QWidget);
 QMetaObject* QMdiSubWindow_metaObject(const QMdiSubWindow* self);
 void* QMdiSubWindow_metacast(QMdiSubWindow* self, const char* param1);
+int QMdiSubWindow_metacall(QMdiSubWindow* self, int param1, int param2, void** param3);
 struct miqt_string QMdiSubWindow_tr(const char* s);
 QSize* QMdiSubWindow_sizeHint(const QMdiSubWindow* self);
 QSize* QMdiSubWindow_minimumSizeHint(const QMdiSubWindow* self);
@@ -140,6 +141,12 @@ void QMdiSubWindow_childEvent(QMdiSubWindow* self, QChildEvent* childEvent);
 struct miqt_string QMdiSubWindow_tr2(const char* s, const char* c);
 struct miqt_string QMdiSubWindow_tr3(const char* s, const char* c, int n);
 void QMdiSubWindow_setOption2(QMdiSubWindow* self, int option, bool on);
+bool QMdiSubWindow_override_virtual_metaObject(void* self, intptr_t slot);
+QMetaObject* QMdiSubWindow_virtualbase_metaObject(const void* self);
+bool QMdiSubWindow_override_virtual_metacast(void* self, intptr_t slot);
+void* QMdiSubWindow_virtualbase_metacast(void* self, const char* param1);
+bool QMdiSubWindow_override_virtual_metacall(void* self, intptr_t slot);
+int QMdiSubWindow_virtualbase_metacall(void* self, int param1, int param2, void** param3);
 bool QMdiSubWindow_override_virtual_sizeHint(void* self, intptr_t slot);
 QSize* QMdiSubWindow_virtualbase_sizeHint(const void* self);
 bool QMdiSubWindow_override_virtual_minimumSizeHint(void* self, intptr_t slot);
@@ -243,6 +250,7 @@ QObject* QMdiSubWindow_protectedbase_sender(bool* _dynamic_cast_ok, const void* 
 int QMdiSubWindow_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
 int QMdiSubWindow_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
 bool QMdiSubWindow_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+const QMetaObject* QMdiSubWindow_staticMetaObject();
 void QMdiSubWindow_delete(QMdiSubWindow* self);
 
 #ifdef __cplusplus

@@ -78,6 +78,7 @@ QTextDocument* QTextDocument_new4(struct miqt_string text, QObject* parent);
 void QTextDocument_virtbase(QTextDocument* src, QObject** outptr_QObject);
 QMetaObject* QTextDocument_metaObject(const QTextDocument* self);
 void* QTextDocument_metacast(QTextDocument* self, const char* param1);
+int QTextDocument_metacall(QTextDocument* self, int param1, int param2, void** param3);
 struct miqt_string QTextDocument_tr(const char* s);
 QTextDocument* QTextDocument_clone(const QTextDocument* self);
 bool QTextDocument_isEmpty(const QTextDocument* self);
@@ -203,6 +204,12 @@ QTextCursor* QTextDocument_find35(const QTextDocument* self, QRegularExpression*
 void QTextDocument_drawContents2(QTextDocument* self, QPainter* painter, QRectF* rect);
 void QTextDocument_clearUndoRedoStacks1(QTextDocument* self, int historyToClear);
 void QTextDocument_setModified1(QTextDocument* self, bool m);
+bool QTextDocument_override_virtual_metaObject(void* self, intptr_t slot);
+QMetaObject* QTextDocument_virtualbase_metaObject(const void* self);
+bool QTextDocument_override_virtual_metacast(void* self, intptr_t slot);
+void* QTextDocument_virtualbase_metacast(void* self, const char* param1);
+bool QTextDocument_override_virtual_metacall(void* self, intptr_t slot);
+int QTextDocument_virtualbase_metacall(void* self, int param1, int param2, void** param3);
 bool QTextDocument_override_virtual_clear(void* self, intptr_t slot);
 void QTextDocument_virtualbase_clear(void* self);
 bool QTextDocument_override_virtual_createObject(void* self, intptr_t slot);
@@ -227,6 +234,7 @@ QObject* QTextDocument_protectedbase_sender(bool* _dynamic_cast_ok, const void* 
 int QTextDocument_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
 int QTextDocument_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
 bool QTextDocument_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+const QMetaObject* QTextDocument_staticMetaObject();
 void QTextDocument_delete(QTextDocument* self);
 
 #ifdef __cplusplus

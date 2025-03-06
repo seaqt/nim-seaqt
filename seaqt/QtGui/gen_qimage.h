@@ -218,6 +218,7 @@ bool QImage_protectedbase_convertToFormatInplace(bool* _dynamic_cast_ok, void* s
 QImage* QImage_protectedbase_smoothScaled(bool* _dynamic_cast_ok, const void* self, int w, int h);
 void QImage_protectedbase_detachMetadata(bool* _dynamic_cast_ok, void* self);
 void QImage_protectedbase_detachMetadata1(bool* _dynamic_cast_ok, void* self, bool invalidateCache);
+const QMetaObject* QImage_staticMetaObject();
 void QImage_delete(QImage* self);
 
 #ifdef __cplusplus

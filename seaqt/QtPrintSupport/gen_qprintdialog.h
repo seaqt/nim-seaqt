@@ -97,6 +97,7 @@ QPrintDialog* QPrintDialog_new4(QPrinter* printer, QWidget* parent);
 void QPrintDialog_virtbase(QPrintDialog* src, QAbstractPrintDialog** outptr_QAbstractPrintDialog);
 QMetaObject* QPrintDialog_metaObject(const QPrintDialog* self);
 void* QPrintDialog_metacast(QPrintDialog* self, const char* param1);
+int QPrintDialog_metacall(QPrintDialog* self, int param1, int param2, void** param3);
 struct miqt_string QPrintDialog_tr(const char* s);
 int QPrintDialog_exec(QPrintDialog* self);
 void QPrintDialog_accept(QPrintDialog* self);
@@ -111,6 +112,12 @@ void QPrintDialog_connect_accepted(QPrintDialog* self, intptr_t slot);
 struct miqt_string QPrintDialog_tr2(const char* s, const char* c);
 struct miqt_string QPrintDialog_tr3(const char* s, const char* c, int n);
 void QPrintDialog_setOption2(QPrintDialog* self, int option, bool on);
+bool QPrintDialog_override_virtual_metaObject(void* self, intptr_t slot);
+QMetaObject* QPrintDialog_virtualbase_metaObject(const void* self);
+bool QPrintDialog_override_virtual_metacast(void* self, intptr_t slot);
+void* QPrintDialog_virtualbase_metacast(void* self, const char* param1);
+bool QPrintDialog_override_virtual_metacall(void* self, intptr_t slot);
+int QPrintDialog_virtualbase_metacall(void* self, int param1, int param2, void** param3);
 bool QPrintDialog_override_virtual_exec(void* self, intptr_t slot);
 int QPrintDialog_virtualbase_exec(void* self);
 bool QPrintDialog_override_virtual_accept(void* self, intptr_t slot);
@@ -225,6 +232,7 @@ QObject* QPrintDialog_protectedbase_sender(bool* _dynamic_cast_ok, const void* s
 int QPrintDialog_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
 int QPrintDialog_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
 bool QPrintDialog_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+const QMetaObject* QPrintDialog_staticMetaObject();
 void QPrintDialog_delete(QPrintDialog* self);
 
 #ifdef __cplusplus

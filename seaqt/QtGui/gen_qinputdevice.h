@@ -42,6 +42,7 @@ QInputDevice* QInputDevice_new5(struct miqt_string name, long long systemId, int
 void QInputDevice_virtbase(QInputDevice* src, QObject** outptr_QObject);
 QMetaObject* QInputDevice_metaObject(const QInputDevice* self);
 void* QInputDevice_metacast(QInputDevice* self, const char* param1);
+int QInputDevice_metacall(QInputDevice* self, int param1, int param2, void** param3);
 struct miqt_string QInputDevice_tr(const char* s);
 struct miqt_string QInputDevice_name(const QInputDevice* self);
 int QInputDevice_type(const QInputDevice* self);
@@ -59,6 +60,12 @@ void QInputDevice_connect_availableVirtualGeometryChanged(QInputDevice* self, in
 struct miqt_string QInputDevice_tr2(const char* s, const char* c);
 struct miqt_string QInputDevice_tr3(const char* s, const char* c, int n);
 QInputDevice* QInputDevice_primaryKeyboard1(struct miqt_string seatName);
+bool QInputDevice_override_virtual_metaObject(void* self, intptr_t slot);
+QMetaObject* QInputDevice_virtualbase_metaObject(const void* self);
+bool QInputDevice_override_virtual_metacast(void* self, intptr_t slot);
+void* QInputDevice_virtualbase_metacast(void* self, const char* param1);
+bool QInputDevice_override_virtual_metacall(void* self, intptr_t slot);
+int QInputDevice_virtualbase_metacall(void* self, int param1, int param2, void** param3);
 bool QInputDevice_override_virtual_event(void* self, intptr_t slot);
 bool QInputDevice_virtualbase_event(void* self, QEvent* event);
 bool QInputDevice_override_virtual_eventFilter(void* self, intptr_t slot);
@@ -77,6 +84,7 @@ QObject* QInputDevice_protectedbase_sender(bool* _dynamic_cast_ok, const void* s
 int QInputDevice_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
 int QInputDevice_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
 bool QInputDevice_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+const QMetaObject* QInputDevice_staticMetaObject();
 void QInputDevice_delete(QInputDevice* self);
 
 #ifdef __cplusplus

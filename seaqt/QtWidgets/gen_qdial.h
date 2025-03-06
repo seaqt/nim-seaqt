@@ -93,6 +93,7 @@ QDial* QDial_new2();
 void QDial_virtbase(QDial* src, QAbstractSlider** outptr_QAbstractSlider);
 QMetaObject* QDial_metaObject(const QDial* self);
 void* QDial_metacast(QDial* self, const char* param1);
+int QDial_metacall(QDial* self, int param1, int param2, void** param3);
 struct miqt_string QDial_tr(const char* s);
 bool QDial_wrapping(const QDial* self);
 int QDial_notchSize(const QDial* self);
@@ -113,6 +114,12 @@ void QDial_sliderChange(QDial* self, int change);
 void QDial_initStyleOption(const QDial* self, QStyleOptionSlider* option);
 struct miqt_string QDial_tr2(const char* s, const char* c);
 struct miqt_string QDial_tr3(const char* s, const char* c, int n);
+bool QDial_override_virtual_metaObject(void* self, intptr_t slot);
+QMetaObject* QDial_virtualbase_metaObject(const void* self);
+bool QDial_override_virtual_metacast(void* self, intptr_t slot);
+void* QDial_virtualbase_metacast(void* self, const char* param1);
+bool QDial_override_virtual_metacall(void* self, intptr_t slot);
+int QDial_virtualbase_metacall(void* self, int param1, int param2, void** param3);
 bool QDial_override_virtual_sizeHint(void* self, intptr_t slot);
 QSize* QDial_virtualbase_sizeHint(const void* self);
 bool QDial_override_virtual_minimumSizeHint(void* self, intptr_t slot);
@@ -222,6 +229,7 @@ QObject* QDial_protectedbase_sender(bool* _dynamic_cast_ok, const void* self);
 int QDial_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
 int QDial_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
 bool QDial_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+const QMetaObject* QDial_staticMetaObject();
 void QDial_delete(QDial* self);
 
 #ifdef __cplusplus

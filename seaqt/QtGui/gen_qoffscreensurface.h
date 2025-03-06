@@ -46,6 +46,7 @@ QOffscreenSurface* QOffscreenSurface_new3(QScreen* screen, QObject* parent);
 void QOffscreenSurface_virtbase(QOffscreenSurface* src, QObject** outptr_QObject, QSurface** outptr_QSurface);
 QMetaObject* QOffscreenSurface_metaObject(const QOffscreenSurface* self);
 void* QOffscreenSurface_metacast(QOffscreenSurface* self, const char* param1);
+int QOffscreenSurface_metacall(QOffscreenSurface* self, int param1, int param2, void** param3);
 struct miqt_string QOffscreenSurface_tr(const char* s);
 int QOffscreenSurface_surfaceType(const QOffscreenSurface* self);
 void QOffscreenSurface_create(QOffscreenSurface* self);
@@ -61,6 +62,12 @@ void QOffscreenSurface_screenChanged(QOffscreenSurface* self, QScreen* screen);
 void QOffscreenSurface_connect_screenChanged(QOffscreenSurface* self, intptr_t slot);
 struct miqt_string QOffscreenSurface_tr2(const char* s, const char* c);
 struct miqt_string QOffscreenSurface_tr3(const char* s, const char* c, int n);
+bool QOffscreenSurface_override_virtual_metaObject(void* self, intptr_t slot);
+QMetaObject* QOffscreenSurface_virtualbase_metaObject(const void* self);
+bool QOffscreenSurface_override_virtual_metacast(void* self, intptr_t slot);
+void* QOffscreenSurface_virtualbase_metacast(void* self, const char* param1);
+bool QOffscreenSurface_override_virtual_metacall(void* self, intptr_t slot);
+int QOffscreenSurface_virtualbase_metacall(void* self, int param1, int param2, void** param3);
 bool QOffscreenSurface_override_virtual_surfaceType(void* self, intptr_t slot);
 int QOffscreenSurface_virtualbase_surfaceType(const void* self);
 bool QOffscreenSurface_override_virtual_format(void* self, intptr_t slot);
@@ -86,6 +93,7 @@ QObject* QOffscreenSurface_protectedbase_sender(bool* _dynamic_cast_ok, const vo
 int QOffscreenSurface_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
 int QOffscreenSurface_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
 bool QOffscreenSurface_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+const QMetaObject* QOffscreenSurface_staticMetaObject();
 void QOffscreenSurface_delete(QOffscreenSurface* self);
 
 #ifdef __cplusplus

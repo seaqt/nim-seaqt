@@ -56,10 +56,17 @@ proc fcQIconEnginePlugin_new(): ptr cQIconEnginePlugin {.importc: "QIconEnginePl
 proc fcQIconEnginePlugin_new2(parent: pointer): ptr cQIconEnginePlugin {.importc: "QIconEnginePlugin_new2".}
 proc fcQIconEnginePlugin_metaObject(self: pointer, ): pointer {.importc: "QIconEnginePlugin_metaObject".}
 proc fcQIconEnginePlugin_metacast(self: pointer, param1: cstring): pointer {.importc: "QIconEnginePlugin_metacast".}
+proc fcQIconEnginePlugin_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QIconEnginePlugin_metacall".}
 proc fcQIconEnginePlugin_tr(s: cstring): struct_miqt_string {.importc: "QIconEnginePlugin_tr".}
 proc fcQIconEnginePlugin_create(self: pointer, filename: struct_miqt_string): pointer {.importc: "QIconEnginePlugin_create".}
 proc fcQIconEnginePlugin_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QIconEnginePlugin_tr2".}
 proc fcQIconEnginePlugin_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QIconEnginePlugin_tr3".}
+proc fQIconEnginePlugin_virtualbase_metaObject(self: pointer, ): pointer{.importc: "QIconEnginePlugin_virtualbase_metaObject".}
+proc fcQIconEnginePlugin_override_virtual_metaObject(self: pointer, slot: int) {.importc: "QIconEnginePlugin_override_virtual_metaObject".}
+proc fQIconEnginePlugin_virtualbase_metacast(self: pointer, param1: cstring): pointer{.importc: "QIconEnginePlugin_virtualbase_metacast".}
+proc fcQIconEnginePlugin_override_virtual_metacast(self: pointer, slot: int) {.importc: "QIconEnginePlugin_override_virtual_metacast".}
+proc fQIconEnginePlugin_virtualbase_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint{.importc: "QIconEnginePlugin_virtualbase_metacall".}
+proc fcQIconEnginePlugin_override_virtual_metacall(self: pointer, slot: int) {.importc: "QIconEnginePlugin_override_virtual_metacall".}
 proc fcQIconEnginePlugin_override_virtual_create(self: pointer, slot: int) {.importc: "QIconEnginePlugin_override_virtual_create".}
 proc fQIconEnginePlugin_virtualbase_event(self: pointer, event: pointer): bool{.importc: "QIconEnginePlugin_virtualbase_event".}
 proc fcQIconEnginePlugin_override_virtual_event(self: pointer, slot: int) {.importc: "QIconEnginePlugin_override_virtual_event".}
@@ -75,6 +82,7 @@ proc fQIconEnginePlugin_virtualbase_connectNotify(self: pointer, signal: pointer
 proc fcQIconEnginePlugin_override_virtual_connectNotify(self: pointer, slot: int) {.importc: "QIconEnginePlugin_override_virtual_connectNotify".}
 proc fQIconEnginePlugin_virtualbase_disconnectNotify(self: pointer, signal: pointer): void{.importc: "QIconEnginePlugin_virtualbase_disconnectNotify".}
 proc fcQIconEnginePlugin_override_virtual_disconnectNotify(self: pointer, slot: int) {.importc: "QIconEnginePlugin_override_virtual_disconnectNotify".}
+proc fcQIconEnginePlugin_staticMetaObject(): pointer {.importc: "QIconEnginePlugin_staticMetaObject".}
 proc fcQIconEnginePlugin_delete(self: pointer) {.importc: "QIconEnginePlugin_delete".}
 
 
@@ -91,6 +99,9 @@ proc metaObject*(self: gen_qiconengineplugin_types.QIconEnginePlugin, ): gen_qob
 
 proc metacast*(self: gen_qiconengineplugin_types.QIconEnginePlugin, param1: cstring): pointer =
   fcQIconEnginePlugin_metacast(self.h, param1)
+
+proc metacall*(self: gen_qiconengineplugin_types.QIconEnginePlugin, param1: cint, param2: cint, param3: pointer): cint =
+  fcQIconEnginePlugin_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qiconengineplugin_types.QIconEnginePlugin, s: cstring): string =
   let v_ms = fcQIconEnginePlugin_tr(s)
@@ -113,6 +124,65 @@ proc tr*(_: type gen_qiconengineplugin_types.QIconEnginePlugin, s: cstring, c: c
   c_free(v_ms.data)
   vx_ret
 
+proc QIconEnginePluginmetaObject*(self: gen_qiconengineplugin_types.QIconEnginePlugin, ): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fQIconEnginePlugin_virtualbase_metaObject(self.h))
+
+type QIconEnginePluginmetaObjectProc* = proc(): gen_qobjectdefs_types.QMetaObject
+proc onmetaObject*(self: gen_qiconengineplugin_types.QIconEnginePlugin, slot: QIconEnginePluginmetaObjectProc) =
+  # TODO check subclass
+  var tmp = new QIconEnginePluginmetaObjectProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQIconEnginePlugin_override_virtual_metaObject(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QIconEnginePlugin_metaObject(self: ptr cQIconEnginePlugin, slot: int): pointer {.exportc: "miqt_exec_callback_QIconEnginePlugin_metaObject ".} =
+  var nimfunc = cast[ptr QIconEnginePluginmetaObjectProc](cast[pointer](slot))
+
+  let virtualReturn = nimfunc[]( )
+
+  virtualReturn.h
+proc QIconEnginePluginmetacast*(self: gen_qiconengineplugin_types.QIconEnginePlugin, param1: cstring): pointer =
+  fQIconEnginePlugin_virtualbase_metacast(self.h, param1)
+
+type QIconEnginePluginmetacastProc* = proc(param1: cstring): pointer
+proc onmetacast*(self: gen_qiconengineplugin_types.QIconEnginePlugin, slot: QIconEnginePluginmetacastProc) =
+  # TODO check subclass
+  var tmp = new QIconEnginePluginmetacastProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQIconEnginePlugin_override_virtual_metacast(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QIconEnginePlugin_metacast(self: ptr cQIconEnginePlugin, slot: int, param1: cstring): pointer {.exportc: "miqt_exec_callback_QIconEnginePlugin_metacast ".} =
+  var nimfunc = cast[ptr QIconEnginePluginmetacastProc](cast[pointer](slot))
+  let slotval1 = (param1)
+
+
+  let virtualReturn = nimfunc[](slotval1 )
+
+  virtualReturn
+proc QIconEnginePluginmetacall*(self: gen_qiconengineplugin_types.QIconEnginePlugin, param1: cint, param2: cint, param3: pointer): cint =
+  fQIconEnginePlugin_virtualbase_metacall(self.h, cint(param1), param2, param3)
+
+type QIconEnginePluginmetacallProc* = proc(param1: cint, param2: cint, param3: pointer): cint
+proc onmetacall*(self: gen_qiconengineplugin_types.QIconEnginePlugin, slot: QIconEnginePluginmetacallProc) =
+  # TODO check subclass
+  var tmp = new QIconEnginePluginmetacallProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQIconEnginePlugin_override_virtual_metacall(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QIconEnginePlugin_metacall(self: ptr cQIconEnginePlugin, slot: int, param1: cint, param2: cint, param3: pointer): cint {.exportc: "miqt_exec_callback_QIconEnginePlugin_metacall ".} =
+  var nimfunc = cast[ptr QIconEnginePluginmetacallProc](cast[pointer](slot))
+  let slotval1 = cint(param1)
+
+  let slotval2 = param2
+
+  let slotval3 = param3
+
+
+  let virtualReturn = nimfunc[](slotval1, slotval2, slotval3 )
+
+  virtualReturn
 type QIconEnginePlugincreateProc* = proc(filename: string): gen_qiconengine_types.QIconEngine
 proc oncreate*(self: gen_qiconengineplugin_types.QIconEnginePlugin, slot: QIconEnginePlugincreateProc) =
   # TODO check subclass
@@ -257,5 +327,7 @@ proc miqt_exec_callback_QIconEnginePlugin_disconnectNotify(self: ptr cQIconEngin
 
 
   nimfunc[](slotval1)
+proc staticMetaObject*(_: type gen_qiconengineplugin_types.QIconEnginePlugin): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fcQIconEnginePlugin_staticMetaObject())
 proc delete*(self: gen_qiconengineplugin_types.QIconEnginePlugin) =
   fcQIconEnginePlugin_delete(self.h)

@@ -119,11 +119,16 @@ proc fcQMetaObject_connect(sender: pointer, signal_index: cint, receiver: pointe
 proc fcQMetaObject_disconnect(sender: pointer, signal_index: cint, receiver: pointer, method_index: cint): bool {.importc: "QMetaObject_disconnect".}
 proc fcQMetaObject_disconnectOne(sender: pointer, signal_index: cint, receiver: pointer, method_index: cint): bool {.importc: "QMetaObject_disconnectOne".}
 proc fcQMetaObject_connectSlotsByName(o: pointer): void {.importc: "QMetaObject_connectSlotsByName".}
+proc fcQMetaObject_activate(sender: pointer, signal_index: cint, argv: pointer): void {.importc: "QMetaObject_activate".}
+proc fcQMetaObject_activate2(sender: pointer, param2: pointer, local_signal_index: cint, argv: pointer): void {.importc: "QMetaObject_activate2".}
+proc fcQMetaObject_activate3(sender: pointer, signal_offset: cint, local_signal_index: cint, argv: pointer): void {.importc: "QMetaObject_activate3".}
 proc fcQMetaObject_invokeMethod(obj: pointer, member: cstring, param3: cint, retVal: pointer): bool {.importc: "QMetaObject_invokeMethod".}
 proc fcQMetaObject_invokeMethod2(obj: pointer, member: cstring, retVal: pointer): bool {.importc: "QMetaObject_invokeMethod2".}
 proc fcQMetaObject_invokeMethod3(obj: pointer, member: cstring, typeVal: cint): bool {.importc: "QMetaObject_invokeMethod3".}
 proc fcQMetaObject_invokeMethod4(obj: pointer, member: cstring): bool {.importc: "QMetaObject_invokeMethod4".}
 proc fcQMetaObject_newInstance(self: pointer, ): pointer {.importc: "QMetaObject_newInstance".}
+proc fcQMetaObject_staticMetacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QMetaObject_staticMetacall".}
+proc fcQMetaObject_metacall(param1: pointer, param2: cint, param3: cint, param4: pointer): cint {.importc: "QMetaObject_metacall".}
 proc fcQMetaObject_tr3(self: pointer, s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QMetaObject_tr3".}
 proc fcQMetaObject_connect5(sender: pointer, signal_index: cint, receiver: pointer, method_index: cint, typeVal: cint): pointer {.importc: "QMetaObject_connect5".}
 proc fcQMetaObject_connect6(sender: pointer, signal_index: cint, receiver: pointer, method_index: cint, typeVal: cint, types: ptr cint): pointer {.importc: "QMetaObject_connect6".}
@@ -369,6 +374,15 @@ proc disconnectOne*(_: type gen_qobjectdefs_types.QMetaObject, sender: gen_qobje
 proc connectSlotsByName*(_: type gen_qobjectdefs_types.QMetaObject, o: gen_qobject_types.QObject): void =
   fcQMetaObject_connectSlotsByName(o.h)
 
+proc activate*(_: type gen_qobjectdefs_types.QMetaObject, sender: gen_qobject_types.QObject, signal_index: cint, argv: pointer): void =
+  fcQMetaObject_activate(sender.h, signal_index, argv)
+
+proc activate*(_: type gen_qobjectdefs_types.QMetaObject, sender: gen_qobject_types.QObject, param2: gen_qobjectdefs_types.QMetaObject, local_signal_index: cint, argv: pointer): void =
+  fcQMetaObject_activate2(sender.h, param2.h, local_signal_index, argv)
+
+proc activate*(_: type gen_qobjectdefs_types.QMetaObject, sender: gen_qobject_types.QObject, signal_offset: cint, local_signal_index: cint, argv: pointer): void =
+  fcQMetaObject_activate3(sender.h, signal_offset, local_signal_index, argv)
+
 proc invokeMethod*(_: type gen_qobjectdefs_types.QMetaObject, obj: gen_qobject_types.QObject, member: cstring, param3: cint, retVal: gen_qobjectdefs_types.QGenericReturnArgument): bool =
   fcQMetaObject_invokeMethod(obj.h, member, cint(param3), retVal.h)
 
@@ -383,6 +397,12 @@ proc invokeMethod*(_: type gen_qobjectdefs_types.QMetaObject, obj: gen_qobject_t
 
 proc newInstance*(self: gen_qobjectdefs_types.QMetaObject, ): gen_qobject_types.QObject =
   gen_qobject_types.QObject(h: fcQMetaObject_newInstance(self.h))
+
+proc staticMetacall*(self: gen_qobjectdefs_types.QMetaObject, param1: cint, param2: cint, param3: pointer): cint =
+  fcQMetaObject_staticMetacall(self.h, cint(param1), param2, param3)
+
+proc metacall*(_: type gen_qobjectdefs_types.QMetaObject, param1: gen_qobject_types.QObject, param2: cint, param3: cint, param4: pointer): cint =
+  fcQMetaObject_metacall(param1.h, cint(param2), param3, param4)
 
 proc tr*(self: gen_qobjectdefs_types.QMetaObject, s: cstring, c: cstring, n: cint): string =
   let v_ms = fcQMetaObject_tr3(self.h, s, c, n)

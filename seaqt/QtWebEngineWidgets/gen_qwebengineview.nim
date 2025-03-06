@@ -100,6 +100,7 @@ proc fcQWebEngineView_new5(profile: pointer, parent: pointer): ptr cQWebEngineVi
 proc fcQWebEngineView_new6(page: pointer, parent: pointer): ptr cQWebEngineView {.importc: "QWebEngineView_new6".}
 proc fcQWebEngineView_metaObject(self: pointer, ): pointer {.importc: "QWebEngineView_metaObject".}
 proc fcQWebEngineView_metacast(self: pointer, param1: cstring): pointer {.importc: "QWebEngineView_metacast".}
+proc fcQWebEngineView_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QWebEngineView_metacall".}
 proc fcQWebEngineView_tr(s: cstring): struct_miqt_string {.importc: "QWebEngineView_tr".}
 proc fcQWebEngineView_forPage(page: pointer): pointer {.importc: "QWebEngineView_forPage".}
 proc fcQWebEngineView_page(self: pointer, ): pointer {.importc: "QWebEngineView_page".}
@@ -162,6 +163,12 @@ proc fcQWebEngineView_setContent3(self: pointer, data: struct_miqt_string, mimeT
 proc fcQWebEngineView_triggerPageAction2(self: pointer, action: cint, checked: bool): void {.importc: "QWebEngineView_triggerPageAction2".}
 proc fcQWebEngineView_printToPdf2(self: pointer, filePath: struct_miqt_string, layout: pointer): void {.importc: "QWebEngineView_printToPdf2".}
 proc fcQWebEngineView_printToPdf3(self: pointer, filePath: struct_miqt_string, layout: pointer, ranges: pointer): void {.importc: "QWebEngineView_printToPdf3".}
+proc fQWebEngineView_virtualbase_metaObject(self: pointer, ): pointer{.importc: "QWebEngineView_virtualbase_metaObject".}
+proc fcQWebEngineView_override_virtual_metaObject(self: pointer, slot: int) {.importc: "QWebEngineView_override_virtual_metaObject".}
+proc fQWebEngineView_virtualbase_metacast(self: pointer, param1: cstring): pointer{.importc: "QWebEngineView_virtualbase_metacast".}
+proc fcQWebEngineView_override_virtual_metacast(self: pointer, slot: int) {.importc: "QWebEngineView_override_virtual_metacast".}
+proc fQWebEngineView_virtualbase_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint{.importc: "QWebEngineView_virtualbase_metacall".}
+proc fcQWebEngineView_override_virtual_metacall(self: pointer, slot: int) {.importc: "QWebEngineView_override_virtual_metacall".}
 proc fQWebEngineView_virtualbase_sizeHint(self: pointer, ): pointer{.importc: "QWebEngineView_virtualbase_sizeHint".}
 proc fcQWebEngineView_override_virtual_sizeHint(self: pointer, slot: int) {.importc: "QWebEngineView_override_virtual_sizeHint".}
 proc fQWebEngineView_virtualbase_createWindow(self: pointer, typeVal: cint): pointer{.importc: "QWebEngineView_virtualbase_createWindow".}
@@ -258,6 +265,7 @@ proc fQWebEngineView_virtualbase_connectNotify(self: pointer, signal: pointer): 
 proc fcQWebEngineView_override_virtual_connectNotify(self: pointer, slot: int) {.importc: "QWebEngineView_override_virtual_connectNotify".}
 proc fQWebEngineView_virtualbase_disconnectNotify(self: pointer, signal: pointer): void{.importc: "QWebEngineView_virtualbase_disconnectNotify".}
 proc fcQWebEngineView_override_virtual_disconnectNotify(self: pointer, slot: int) {.importc: "QWebEngineView_override_virtual_disconnectNotify".}
+proc fcQWebEngineView_staticMetaObject(): pointer {.importc: "QWebEngineView_staticMetaObject".}
 proc fcQWebEngineView_delete(self: pointer) {.importc: "QWebEngineView_delete".}
 
 
@@ -286,6 +294,9 @@ proc metaObject*(self: gen_qwebengineview_types.QWebEngineView, ): gen_qobjectde
 
 proc metacast*(self: gen_qwebengineview_types.QWebEngineView, param1: cstring): pointer =
   fcQWebEngineView_metacast(self.h, param1)
+
+proc metacall*(self: gen_qwebengineview_types.QWebEngineView, param1: cint, param2: cint, param3: pointer): cint =
+  fcQWebEngineView_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qwebengineview_types.QWebEngineView, s: cstring): string =
   let v_ms = fcQWebEngineView_tr(s)
@@ -612,6 +623,65 @@ proc printToPdf*(self: gen_qwebengineview_types.QWebEngineView, filePath: string
 proc printToPdf*(self: gen_qwebengineview_types.QWebEngineView, filePath: string, layout: gen_qpagelayout_types.QPageLayout, ranges: gen_qpageranges_types.QPageRanges): void =
   fcQWebEngineView_printToPdf3(self.h, struct_miqt_string(data: filePath, len: csize_t(len(filePath))), layout.h, ranges.h)
 
+proc QWebEngineViewmetaObject*(self: gen_qwebengineview_types.QWebEngineView, ): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fQWebEngineView_virtualbase_metaObject(self.h))
+
+type QWebEngineViewmetaObjectProc* = proc(): gen_qobjectdefs_types.QMetaObject
+proc onmetaObject*(self: gen_qwebengineview_types.QWebEngineView, slot: QWebEngineViewmetaObjectProc) =
+  # TODO check subclass
+  var tmp = new QWebEngineViewmetaObjectProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQWebEngineView_override_virtual_metaObject(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QWebEngineView_metaObject(self: ptr cQWebEngineView, slot: int): pointer {.exportc: "miqt_exec_callback_QWebEngineView_metaObject ".} =
+  var nimfunc = cast[ptr QWebEngineViewmetaObjectProc](cast[pointer](slot))
+
+  let virtualReturn = nimfunc[]( )
+
+  virtualReturn.h
+proc QWebEngineViewmetacast*(self: gen_qwebengineview_types.QWebEngineView, param1: cstring): pointer =
+  fQWebEngineView_virtualbase_metacast(self.h, param1)
+
+type QWebEngineViewmetacastProc* = proc(param1: cstring): pointer
+proc onmetacast*(self: gen_qwebengineview_types.QWebEngineView, slot: QWebEngineViewmetacastProc) =
+  # TODO check subclass
+  var tmp = new QWebEngineViewmetacastProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQWebEngineView_override_virtual_metacast(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QWebEngineView_metacast(self: ptr cQWebEngineView, slot: int, param1: cstring): pointer {.exportc: "miqt_exec_callback_QWebEngineView_metacast ".} =
+  var nimfunc = cast[ptr QWebEngineViewmetacastProc](cast[pointer](slot))
+  let slotval1 = (param1)
+
+
+  let virtualReturn = nimfunc[](slotval1 )
+
+  virtualReturn
+proc QWebEngineViewmetacall*(self: gen_qwebengineview_types.QWebEngineView, param1: cint, param2: cint, param3: pointer): cint =
+  fQWebEngineView_virtualbase_metacall(self.h, cint(param1), param2, param3)
+
+type QWebEngineViewmetacallProc* = proc(param1: cint, param2: cint, param3: pointer): cint
+proc onmetacall*(self: gen_qwebengineview_types.QWebEngineView, slot: QWebEngineViewmetacallProc) =
+  # TODO check subclass
+  var tmp = new QWebEngineViewmetacallProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQWebEngineView_override_virtual_metacall(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QWebEngineView_metacall(self: ptr cQWebEngineView, slot: int, param1: cint, param2: cint, param3: pointer): cint {.exportc: "miqt_exec_callback_QWebEngineView_metacall ".} =
+  var nimfunc = cast[ptr QWebEngineViewmetacallProc](cast[pointer](slot))
+  let slotval1 = cint(param1)
+
+  let slotval2 = param2
+
+  let slotval3 = param3
+
+
+  let virtualReturn = nimfunc[](slotval1, slotval2, slotval3 )
+
+  virtualReturn
 proc QWebEngineViewsizeHint*(self: gen_qwebengineview_types.QWebEngineView, ): gen_qsize_types.QSize =
   gen_qsize_types.QSize(h: fQWebEngineView_virtualbase_sizeHint(self.h))
 
@@ -1455,5 +1525,7 @@ proc miqt_exec_callback_QWebEngineView_disconnectNotify(self: ptr cQWebEngineVie
 
 
   nimfunc[](slotval1)
+proc staticMetaObject*(_: type gen_qwebengineview_types.QWebEngineView): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fcQWebEngineView_staticMetaObject())
 proc delete*(self: gen_qwebengineview_types.QWebEngineView) =
   fcQWebEngineView_delete(self.h)

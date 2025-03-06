@@ -72,6 +72,7 @@ import
   ../QtCore/gen_qmimedata_types,
   ../QtCore/gen_qnamespace_types,
   ../QtCore/gen_qobject_types,
+  ../QtCore/gen_qobjectdefs_types,
   ../QtCore/gen_qpoint_types,
   ../QtCore/gen_qrect_types,
   ../QtCore/gen_qsize_types,
@@ -90,6 +91,7 @@ export
   gen_qmimedata_types,
   gen_qnamespace_types,
   gen_qobject_types,
+  gen_qobjectdefs_types,
   gen_qpoint_types,
   gen_qrect_types,
   gen_qsize_types,
@@ -207,6 +209,7 @@ proc fcQSinglePointEvent_isUpdateEvent(self: pointer, ): bool {.importc: "QSingl
 proc fcQSinglePointEvent_isEndEvent(self: pointer, ): bool {.importc: "QSinglePointEvent_isEndEvent".}
 proc fcQSinglePointEvent_exclusivePointGrabber(self: pointer, ): pointer {.importc: "QSinglePointEvent_exclusivePointGrabber".}
 proc fcQSinglePointEvent_setExclusivePointGrabber(self: pointer, exclusiveGrabber: pointer): void {.importc: "QSinglePointEvent_setExclusivePointGrabber".}
+proc fcQSinglePointEvent_staticMetaObject(): pointer {.importc: "QSinglePointEvent_staticMetaObject".}
 proc fcQSinglePointEvent_delete(self: pointer) {.importc: "QSinglePointEvent_delete".}
 proc fcQEnterEvent_new(localPos: pointer, scenePos: pointer, globalPos: pointer): ptr cQEnterEvent {.importc: "QEnterEvent_new".}
 proc fcQEnterEvent_new2(localPos: pointer, scenePos: pointer, globalPos: pointer, device: pointer): ptr cQEnterEvent {.importc: "QEnterEvent_new2".}
@@ -317,6 +320,7 @@ proc fQWheelEvent_virtualbase_setTimestamp(self: pointer, timestamp: culonglong)
 proc fcQWheelEvent_override_virtual_setTimestamp(self: pointer, slot: int) {.importc: "QWheelEvent_override_virtual_setTimestamp".}
 proc fQWheelEvent_virtualbase_setAccepted(self: pointer, accepted: bool): void{.importc: "QWheelEvent_virtualbase_setAccepted".}
 proc fcQWheelEvent_override_virtual_setAccepted(self: pointer, slot: int) {.importc: "QWheelEvent_override_virtual_setAccepted".}
+proc fcQWheelEvent_staticMetaObject(): pointer {.importc: "QWheelEvent_staticMetaObject".}
 proc fcQWheelEvent_delete(self: pointer) {.importc: "QWheelEvent_delete".}
 proc fcQTabletEvent_new(t: cint, device: pointer, pos: pointer, globalPos: pointer, pressure: float64, xTilt: float32, yTilt: float32, tangentialPressure: float32, rotation: float64, z: float32, keyState: cint, button: cint, buttons: cint): ptr cQTabletEvent {.importc: "QTabletEvent_new".}
 proc fcQTabletEvent_clone(self: pointer, ): pointer {.importc: "QTabletEvent_clone".}
@@ -1030,6 +1034,8 @@ proc exclusivePointGrabber*(self: gen_qevent_types.QSinglePointEvent, ): gen_qob
 proc setExclusivePointGrabber*(self: gen_qevent_types.QSinglePointEvent, exclusiveGrabber: gen_qobject_types.QObject): void =
   fcQSinglePointEvent_setExclusivePointGrabber(self.h, exclusiveGrabber.h)
 
+proc staticMetaObject*(_: type gen_qevent_types.QSinglePointEvent): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fcQSinglePointEvent_staticMetaObject())
 proc delete*(self: gen_qevent_types.QSinglePointEvent) =
   fcQSinglePointEvent_delete(self.h)
 
@@ -1632,6 +1638,8 @@ proc miqt_exec_callback_QWheelEvent_setAccepted(self: ptr cQWheelEvent, slot: in
 
 
   nimfunc[](slotval1)
+proc staticMetaObject*(_: type gen_qevent_types.QWheelEvent): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fcQWheelEvent_staticMetaObject())
 proc delete*(self: gen_qevent_types.QWheelEvent) =
   fcQWheelEvent_delete(self.h)
 

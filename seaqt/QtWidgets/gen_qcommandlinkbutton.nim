@@ -78,6 +78,7 @@ proc fcQCommandLinkButton_new5(text: struct_miqt_string, parent: pointer): ptr c
 proc fcQCommandLinkButton_new6(text: struct_miqt_string, description: struct_miqt_string, parent: pointer): ptr cQCommandLinkButton {.importc: "QCommandLinkButton_new6".}
 proc fcQCommandLinkButton_metaObject(self: pointer, ): pointer {.importc: "QCommandLinkButton_metaObject".}
 proc fcQCommandLinkButton_metacast(self: pointer, param1: cstring): pointer {.importc: "QCommandLinkButton_metacast".}
+proc fcQCommandLinkButton_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QCommandLinkButton_metacall".}
 proc fcQCommandLinkButton_tr(s: cstring): struct_miqt_string {.importc: "QCommandLinkButton_tr".}
 proc fcQCommandLinkButton_description(self: pointer, ): struct_miqt_string {.importc: "QCommandLinkButton_description".}
 proc fcQCommandLinkButton_setDescription(self: pointer, description: struct_miqt_string): void {.importc: "QCommandLinkButton_setDescription".}
@@ -87,6 +88,12 @@ proc fcQCommandLinkButton_minimumSizeHint(self: pointer, ): pointer {.importc: "
 proc fcQCommandLinkButton_initStyleOption(self: pointer, option: pointer): void {.importc: "QCommandLinkButton_initStyleOption".}
 proc fcQCommandLinkButton_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QCommandLinkButton_tr2".}
 proc fcQCommandLinkButton_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QCommandLinkButton_tr3".}
+proc fQCommandLinkButton_virtualbase_metaObject(self: pointer, ): pointer{.importc: "QCommandLinkButton_virtualbase_metaObject".}
+proc fcQCommandLinkButton_override_virtual_metaObject(self: pointer, slot: int) {.importc: "QCommandLinkButton_override_virtual_metaObject".}
+proc fQCommandLinkButton_virtualbase_metacast(self: pointer, param1: cstring): pointer{.importc: "QCommandLinkButton_virtualbase_metacast".}
+proc fcQCommandLinkButton_override_virtual_metacast(self: pointer, slot: int) {.importc: "QCommandLinkButton_override_virtual_metacast".}
+proc fQCommandLinkButton_virtualbase_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint{.importc: "QCommandLinkButton_virtualbase_metacall".}
+proc fcQCommandLinkButton_override_virtual_metacall(self: pointer, slot: int) {.importc: "QCommandLinkButton_override_virtual_metacall".}
 proc fQCommandLinkButton_virtualbase_sizeHint(self: pointer, ): pointer{.importc: "QCommandLinkButton_virtualbase_sizeHint".}
 proc fcQCommandLinkButton_override_virtual_sizeHint(self: pointer, slot: int) {.importc: "QCommandLinkButton_override_virtual_sizeHint".}
 proc fQCommandLinkButton_virtualbase_heightForWidth(self: pointer, param1: cint): cint{.importc: "QCommandLinkButton_virtualbase_heightForWidth".}
@@ -189,6 +196,7 @@ proc fQCommandLinkButton_virtualbase_connectNotify(self: pointer, signal: pointe
 proc fcQCommandLinkButton_override_virtual_connectNotify(self: pointer, slot: int) {.importc: "QCommandLinkButton_override_virtual_connectNotify".}
 proc fQCommandLinkButton_virtualbase_disconnectNotify(self: pointer, signal: pointer): void{.importc: "QCommandLinkButton_virtualbase_disconnectNotify".}
 proc fcQCommandLinkButton_override_virtual_disconnectNotify(self: pointer, slot: int) {.importc: "QCommandLinkButton_override_virtual_disconnectNotify".}
+proc fcQCommandLinkButton_staticMetaObject(): pointer {.importc: "QCommandLinkButton_staticMetaObject".}
 proc fcQCommandLinkButton_delete(self: pointer) {.importc: "QCommandLinkButton_delete".}
 
 
@@ -217,6 +225,9 @@ proc metaObject*(self: gen_qcommandlinkbutton_types.QCommandLinkButton, ): gen_q
 
 proc metacast*(self: gen_qcommandlinkbutton_types.QCommandLinkButton, param1: cstring): pointer =
   fcQCommandLinkButton_metacast(self.h, param1)
+
+proc metacall*(self: gen_qcommandlinkbutton_types.QCommandLinkButton, param1: cint, param2: cint, param3: pointer): cint =
+  fcQCommandLinkButton_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qcommandlinkbutton_types.QCommandLinkButton, s: cstring): string =
   let v_ms = fcQCommandLinkButton_tr(s)
@@ -257,6 +268,65 @@ proc tr*(_: type gen_qcommandlinkbutton_types.QCommandLinkButton, s: cstring, c:
   c_free(v_ms.data)
   vx_ret
 
+proc QCommandLinkButtonmetaObject*(self: gen_qcommandlinkbutton_types.QCommandLinkButton, ): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fQCommandLinkButton_virtualbase_metaObject(self.h))
+
+type QCommandLinkButtonmetaObjectProc* = proc(): gen_qobjectdefs_types.QMetaObject
+proc onmetaObject*(self: gen_qcommandlinkbutton_types.QCommandLinkButton, slot: QCommandLinkButtonmetaObjectProc) =
+  # TODO check subclass
+  var tmp = new QCommandLinkButtonmetaObjectProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQCommandLinkButton_override_virtual_metaObject(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QCommandLinkButton_metaObject(self: ptr cQCommandLinkButton, slot: int): pointer {.exportc: "miqt_exec_callback_QCommandLinkButton_metaObject ".} =
+  var nimfunc = cast[ptr QCommandLinkButtonmetaObjectProc](cast[pointer](slot))
+
+  let virtualReturn = nimfunc[]( )
+
+  virtualReturn.h
+proc QCommandLinkButtonmetacast*(self: gen_qcommandlinkbutton_types.QCommandLinkButton, param1: cstring): pointer =
+  fQCommandLinkButton_virtualbase_metacast(self.h, param1)
+
+type QCommandLinkButtonmetacastProc* = proc(param1: cstring): pointer
+proc onmetacast*(self: gen_qcommandlinkbutton_types.QCommandLinkButton, slot: QCommandLinkButtonmetacastProc) =
+  # TODO check subclass
+  var tmp = new QCommandLinkButtonmetacastProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQCommandLinkButton_override_virtual_metacast(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QCommandLinkButton_metacast(self: ptr cQCommandLinkButton, slot: int, param1: cstring): pointer {.exportc: "miqt_exec_callback_QCommandLinkButton_metacast ".} =
+  var nimfunc = cast[ptr QCommandLinkButtonmetacastProc](cast[pointer](slot))
+  let slotval1 = (param1)
+
+
+  let virtualReturn = nimfunc[](slotval1 )
+
+  virtualReturn
+proc QCommandLinkButtonmetacall*(self: gen_qcommandlinkbutton_types.QCommandLinkButton, param1: cint, param2: cint, param3: pointer): cint =
+  fQCommandLinkButton_virtualbase_metacall(self.h, cint(param1), param2, param3)
+
+type QCommandLinkButtonmetacallProc* = proc(param1: cint, param2: cint, param3: pointer): cint
+proc onmetacall*(self: gen_qcommandlinkbutton_types.QCommandLinkButton, slot: QCommandLinkButtonmetacallProc) =
+  # TODO check subclass
+  var tmp = new QCommandLinkButtonmetacallProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQCommandLinkButton_override_virtual_metacall(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QCommandLinkButton_metacall(self: ptr cQCommandLinkButton, slot: int, param1: cint, param2: cint, param3: pointer): cint {.exportc: "miqt_exec_callback_QCommandLinkButton_metacall ".} =
+  var nimfunc = cast[ptr QCommandLinkButtonmetacallProc](cast[pointer](slot))
+  let slotval1 = cint(param1)
+
+  let slotval2 = param2
+
+  let slotval3 = param3
+
+
+  let virtualReturn = nimfunc[](slotval1, slotval2, slotval3 )
+
+  virtualReturn
 proc QCommandLinkButtonsizeHint*(self: gen_qcommandlinkbutton_types.QCommandLinkButton, ): gen_qsize_types.QSize =
   gen_qsize_types.QSize(h: fQCommandLinkButton_virtualbase_sizeHint(self.h))
 
@@ -1147,5 +1217,7 @@ proc miqt_exec_callback_QCommandLinkButton_disconnectNotify(self: ptr cQCommandL
 
 
   nimfunc[](slotval1)
+proc staticMetaObject*(_: type gen_qcommandlinkbutton_types.QCommandLinkButton): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fcQCommandLinkButton_staticMetaObject())
 proc delete*(self: gen_qcommandlinkbutton_types.QCommandLinkButton) =
   fcQCommandLinkButton_delete(self.h)

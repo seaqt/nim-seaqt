@@ -140,6 +140,7 @@ QWidget* QWidget_new3(QWidget* parent, int f);
 void QWidget_virtbase(QWidget* src, QObject** outptr_QObject, QPaintDevice** outptr_QPaintDevice);
 QMetaObject* QWidget_metaObject(const QWidget* self);
 void* QWidget_metacast(QWidget* self, const char* param1);
+int QWidget_metacall(QWidget* self, int param1, int param2, void** param3);
 struct miqt_string QWidget_tr(const char* s);
 int QWidget_devType(const QWidget* self);
 uintptr_t QWidget_winId(const QWidget* self);
@@ -455,6 +456,12 @@ void QWidget_setWindowFlag2(QWidget* self, int param1, bool on);
 void QWidget_setAttribute2(QWidget* self, int param1, bool on);
 QWidget* QWidget_createWindowContainer2(QWindow* window, QWidget* parent);
 QWidget* QWidget_createWindowContainer3(QWindow* window, QWidget* parent, int flags);
+bool QWidget_override_virtual_metaObject(void* self, intptr_t slot);
+QMetaObject* QWidget_virtualbase_metaObject(const void* self);
+bool QWidget_override_virtual_metacast(void* self, intptr_t slot);
+void* QWidget_virtualbase_metacast(void* self, const char* param1);
+bool QWidget_override_virtual_metacall(void* self, intptr_t slot);
+int QWidget_virtualbase_metacall(void* self, int param1, int param2, void** param3);
 bool QWidget_override_virtual_devType(void* self, intptr_t slot);
 int QWidget_virtualbase_devType(const void* self);
 bool QWidget_override_virtual_setVisible(void* self, intptr_t slot);
@@ -564,6 +571,7 @@ QObject* QWidget_protectedbase_sender(bool* _dynamic_cast_ok, const void* self);
 int QWidget_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
 int QWidget_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
 bool QWidget_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+const QMetaObject* QWidget_staticMetaObject();
 void QWidget_delete(QWidget* self);
 
 #ifdef __cplusplus

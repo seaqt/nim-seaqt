@@ -45,6 +45,7 @@ typedef struct QWindow QWindow;
 void QPaintDeviceWindow_virtbase(QPaintDeviceWindow* src, QWindow** outptr_QWindow, QPaintDevice** outptr_QPaintDevice);
 QMetaObject* QPaintDeviceWindow_metaObject(const QPaintDeviceWindow* self);
 void* QPaintDeviceWindow_metacast(QPaintDeviceWindow* self, const char* param1);
+int QPaintDeviceWindow_metacall(QPaintDeviceWindow* self, int param1, int param2, void** param3);
 struct miqt_string QPaintDeviceWindow_tr(const char* s);
 void QPaintDeviceWindow_update(QPaintDeviceWindow* self, QRect* rect);
 void QPaintDeviceWindow_updateWithRegion(QPaintDeviceWindow* self, QRegion* region);
@@ -55,6 +56,7 @@ int QPaintDeviceWindow_metric(const QPaintDeviceWindow* self, int metric);
 bool QPaintDeviceWindow_event(QPaintDeviceWindow* self, QEvent* event);
 struct miqt_string QPaintDeviceWindow_tr2(const char* s, const char* c);
 struct miqt_string QPaintDeviceWindow_tr3(const char* s, const char* c, int n);
+const QMetaObject* QPaintDeviceWindow_staticMetaObject();
 void QPaintDeviceWindow_delete(QPaintDeviceWindow* self);
 
 #ifdef __cplusplus

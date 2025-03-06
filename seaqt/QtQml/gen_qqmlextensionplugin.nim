@@ -59,6 +59,7 @@ proc fcQQmlExtensionPlugin_new(): ptr cQQmlExtensionPlugin {.importc: "QQmlExten
 proc fcQQmlExtensionPlugin_new2(parent: pointer): ptr cQQmlExtensionPlugin {.importc: "QQmlExtensionPlugin_new2".}
 proc fcQQmlExtensionPlugin_metaObject(self: pointer, ): pointer {.importc: "QQmlExtensionPlugin_metaObject".}
 proc fcQQmlExtensionPlugin_metacast(self: pointer, param1: cstring): pointer {.importc: "QQmlExtensionPlugin_metacast".}
+proc fcQQmlExtensionPlugin_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QQmlExtensionPlugin_metacall".}
 proc fcQQmlExtensionPlugin_tr(s: cstring): struct_miqt_string {.importc: "QQmlExtensionPlugin_tr".}
 proc fcQQmlExtensionPlugin_baseUrl(self: pointer, ): pointer {.importc: "QQmlExtensionPlugin_baseUrl".}
 proc fcQQmlExtensionPlugin_registerTypes(self: pointer, uri: cstring): void {.importc: "QQmlExtensionPlugin_registerTypes".}
@@ -66,6 +67,12 @@ proc fcQQmlExtensionPlugin_unregisterTypes(self: pointer, ): void {.importc: "QQ
 proc fcQQmlExtensionPlugin_initializeEngine(self: pointer, engine: pointer, uri: cstring): void {.importc: "QQmlExtensionPlugin_initializeEngine".}
 proc fcQQmlExtensionPlugin_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QQmlExtensionPlugin_tr2".}
 proc fcQQmlExtensionPlugin_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QQmlExtensionPlugin_tr3".}
+proc fQQmlExtensionPlugin_virtualbase_metaObject(self: pointer, ): pointer{.importc: "QQmlExtensionPlugin_virtualbase_metaObject".}
+proc fcQQmlExtensionPlugin_override_virtual_metaObject(self: pointer, slot: int) {.importc: "QQmlExtensionPlugin_override_virtual_metaObject".}
+proc fQQmlExtensionPlugin_virtualbase_metacast(self: pointer, param1: cstring): pointer{.importc: "QQmlExtensionPlugin_virtualbase_metacast".}
+proc fcQQmlExtensionPlugin_override_virtual_metacast(self: pointer, slot: int) {.importc: "QQmlExtensionPlugin_override_virtual_metacast".}
+proc fQQmlExtensionPlugin_virtualbase_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint{.importc: "QQmlExtensionPlugin_virtualbase_metacall".}
+proc fcQQmlExtensionPlugin_override_virtual_metacall(self: pointer, slot: int) {.importc: "QQmlExtensionPlugin_override_virtual_metacall".}
 proc fcQQmlExtensionPlugin_override_virtual_registerTypes(self: pointer, slot: int) {.importc: "QQmlExtensionPlugin_override_virtual_registerTypes".}
 proc fQQmlExtensionPlugin_virtualbase_unregisterTypes(self: pointer, ): void{.importc: "QQmlExtensionPlugin_virtualbase_unregisterTypes".}
 proc fcQQmlExtensionPlugin_override_virtual_unregisterTypes(self: pointer, slot: int) {.importc: "QQmlExtensionPlugin_override_virtual_unregisterTypes".}
@@ -85,15 +92,23 @@ proc fQQmlExtensionPlugin_virtualbase_connectNotify(self: pointer, signal: point
 proc fcQQmlExtensionPlugin_override_virtual_connectNotify(self: pointer, slot: int) {.importc: "QQmlExtensionPlugin_override_virtual_connectNotify".}
 proc fQQmlExtensionPlugin_virtualbase_disconnectNotify(self: pointer, signal: pointer): void{.importc: "QQmlExtensionPlugin_virtualbase_disconnectNotify".}
 proc fcQQmlExtensionPlugin_override_virtual_disconnectNotify(self: pointer, slot: int) {.importc: "QQmlExtensionPlugin_override_virtual_disconnectNotify".}
+proc fcQQmlExtensionPlugin_staticMetaObject(): pointer {.importc: "QQmlExtensionPlugin_staticMetaObject".}
 proc fcQQmlExtensionPlugin_delete(self: pointer) {.importc: "QQmlExtensionPlugin_delete".}
 proc fcQQmlEngineExtensionPlugin_new(): ptr cQQmlEngineExtensionPlugin {.importc: "QQmlEngineExtensionPlugin_new".}
 proc fcQQmlEngineExtensionPlugin_new2(parent: pointer): ptr cQQmlEngineExtensionPlugin {.importc: "QQmlEngineExtensionPlugin_new2".}
 proc fcQQmlEngineExtensionPlugin_metaObject(self: pointer, ): pointer {.importc: "QQmlEngineExtensionPlugin_metaObject".}
 proc fcQQmlEngineExtensionPlugin_metacast(self: pointer, param1: cstring): pointer {.importc: "QQmlEngineExtensionPlugin_metacast".}
+proc fcQQmlEngineExtensionPlugin_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QQmlEngineExtensionPlugin_metacall".}
 proc fcQQmlEngineExtensionPlugin_tr(s: cstring): struct_miqt_string {.importc: "QQmlEngineExtensionPlugin_tr".}
 proc fcQQmlEngineExtensionPlugin_initializeEngine(self: pointer, engine: pointer, uri: cstring): void {.importc: "QQmlEngineExtensionPlugin_initializeEngine".}
 proc fcQQmlEngineExtensionPlugin_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QQmlEngineExtensionPlugin_tr2".}
 proc fcQQmlEngineExtensionPlugin_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QQmlEngineExtensionPlugin_tr3".}
+proc fQQmlEngineExtensionPlugin_virtualbase_metaObject(self: pointer, ): pointer{.importc: "QQmlEngineExtensionPlugin_virtualbase_metaObject".}
+proc fcQQmlEngineExtensionPlugin_override_virtual_metaObject(self: pointer, slot: int) {.importc: "QQmlEngineExtensionPlugin_override_virtual_metaObject".}
+proc fQQmlEngineExtensionPlugin_virtualbase_metacast(self: pointer, param1: cstring): pointer{.importc: "QQmlEngineExtensionPlugin_virtualbase_metacast".}
+proc fcQQmlEngineExtensionPlugin_override_virtual_metacast(self: pointer, slot: int) {.importc: "QQmlEngineExtensionPlugin_override_virtual_metacast".}
+proc fQQmlEngineExtensionPlugin_virtualbase_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint{.importc: "QQmlEngineExtensionPlugin_virtualbase_metacall".}
+proc fcQQmlEngineExtensionPlugin_override_virtual_metacall(self: pointer, slot: int) {.importc: "QQmlEngineExtensionPlugin_override_virtual_metacall".}
 proc fQQmlEngineExtensionPlugin_virtualbase_initializeEngine(self: pointer, engine: pointer, uri: cstring): void{.importc: "QQmlEngineExtensionPlugin_virtualbase_initializeEngine".}
 proc fcQQmlEngineExtensionPlugin_override_virtual_initializeEngine(self: pointer, slot: int) {.importc: "QQmlEngineExtensionPlugin_override_virtual_initializeEngine".}
 proc fQQmlEngineExtensionPlugin_virtualbase_event(self: pointer, event: pointer): bool{.importc: "QQmlEngineExtensionPlugin_virtualbase_event".}
@@ -110,6 +125,7 @@ proc fQQmlEngineExtensionPlugin_virtualbase_connectNotify(self: pointer, signal:
 proc fcQQmlEngineExtensionPlugin_override_virtual_connectNotify(self: pointer, slot: int) {.importc: "QQmlEngineExtensionPlugin_override_virtual_connectNotify".}
 proc fQQmlEngineExtensionPlugin_virtualbase_disconnectNotify(self: pointer, signal: pointer): void{.importc: "QQmlEngineExtensionPlugin_virtualbase_disconnectNotify".}
 proc fcQQmlEngineExtensionPlugin_override_virtual_disconnectNotify(self: pointer, slot: int) {.importc: "QQmlEngineExtensionPlugin_override_virtual_disconnectNotify".}
+proc fcQQmlEngineExtensionPlugin_staticMetaObject(): pointer {.importc: "QQmlEngineExtensionPlugin_staticMetaObject".}
 proc fcQQmlEngineExtensionPlugin_delete(self: pointer) {.importc: "QQmlEngineExtensionPlugin_delete".}
 
 
@@ -126,6 +142,9 @@ proc metaObject*(self: gen_qqmlextensionplugin_types.QQmlExtensionPlugin, ): gen
 
 proc metacast*(self: gen_qqmlextensionplugin_types.QQmlExtensionPlugin, param1: cstring): pointer =
   fcQQmlExtensionPlugin_metacast(self.h, param1)
+
+proc metacall*(self: gen_qqmlextensionplugin_types.QQmlExtensionPlugin, param1: cint, param2: cint, param3: pointer): cint =
+  fcQQmlExtensionPlugin_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qqmlextensionplugin_types.QQmlExtensionPlugin, s: cstring): string =
   let v_ms = fcQQmlExtensionPlugin_tr(s)
@@ -157,6 +176,65 @@ proc tr*(_: type gen_qqmlextensionplugin_types.QQmlExtensionPlugin, s: cstring, 
   c_free(v_ms.data)
   vx_ret
 
+proc QQmlExtensionPluginmetaObject*(self: gen_qqmlextensionplugin_types.QQmlExtensionPlugin, ): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fQQmlExtensionPlugin_virtualbase_metaObject(self.h))
+
+type QQmlExtensionPluginmetaObjectProc* = proc(): gen_qobjectdefs_types.QMetaObject
+proc onmetaObject*(self: gen_qqmlextensionplugin_types.QQmlExtensionPlugin, slot: QQmlExtensionPluginmetaObjectProc) =
+  # TODO check subclass
+  var tmp = new QQmlExtensionPluginmetaObjectProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQQmlExtensionPlugin_override_virtual_metaObject(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QQmlExtensionPlugin_metaObject(self: ptr cQQmlExtensionPlugin, slot: int): pointer {.exportc: "miqt_exec_callback_QQmlExtensionPlugin_metaObject ".} =
+  var nimfunc = cast[ptr QQmlExtensionPluginmetaObjectProc](cast[pointer](slot))
+
+  let virtualReturn = nimfunc[]( )
+
+  virtualReturn.h
+proc QQmlExtensionPluginmetacast*(self: gen_qqmlextensionplugin_types.QQmlExtensionPlugin, param1: cstring): pointer =
+  fQQmlExtensionPlugin_virtualbase_metacast(self.h, param1)
+
+type QQmlExtensionPluginmetacastProc* = proc(param1: cstring): pointer
+proc onmetacast*(self: gen_qqmlextensionplugin_types.QQmlExtensionPlugin, slot: QQmlExtensionPluginmetacastProc) =
+  # TODO check subclass
+  var tmp = new QQmlExtensionPluginmetacastProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQQmlExtensionPlugin_override_virtual_metacast(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QQmlExtensionPlugin_metacast(self: ptr cQQmlExtensionPlugin, slot: int, param1: cstring): pointer {.exportc: "miqt_exec_callback_QQmlExtensionPlugin_metacast ".} =
+  var nimfunc = cast[ptr QQmlExtensionPluginmetacastProc](cast[pointer](slot))
+  let slotval1 = (param1)
+
+
+  let virtualReturn = nimfunc[](slotval1 )
+
+  virtualReturn
+proc QQmlExtensionPluginmetacall*(self: gen_qqmlextensionplugin_types.QQmlExtensionPlugin, param1: cint, param2: cint, param3: pointer): cint =
+  fQQmlExtensionPlugin_virtualbase_metacall(self.h, cint(param1), param2, param3)
+
+type QQmlExtensionPluginmetacallProc* = proc(param1: cint, param2: cint, param3: pointer): cint
+proc onmetacall*(self: gen_qqmlextensionplugin_types.QQmlExtensionPlugin, slot: QQmlExtensionPluginmetacallProc) =
+  # TODO check subclass
+  var tmp = new QQmlExtensionPluginmetacallProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQQmlExtensionPlugin_override_virtual_metacall(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QQmlExtensionPlugin_metacall(self: ptr cQQmlExtensionPlugin, slot: int, param1: cint, param2: cint, param3: pointer): cint {.exportc: "miqt_exec_callback_QQmlExtensionPlugin_metacall ".} =
+  var nimfunc = cast[ptr QQmlExtensionPluginmetacallProc](cast[pointer](slot))
+  let slotval1 = cint(param1)
+
+  let slotval2 = param2
+
+  let slotval3 = param3
+
+
+  let virtualReturn = nimfunc[](slotval1, slotval2, slotval3 )
+
+  virtualReturn
 type QQmlExtensionPluginregisterTypesProc* = proc(uri: cstring): void
 proc onregisterTypes*(self: gen_qqmlextensionplugin_types.QQmlExtensionPlugin, slot: QQmlExtensionPluginregisterTypesProc) =
   # TODO check subclass
@@ -330,6 +408,8 @@ proc miqt_exec_callback_QQmlExtensionPlugin_disconnectNotify(self: ptr cQQmlExte
 
 
   nimfunc[](slotval1)
+proc staticMetaObject*(_: type gen_qqmlextensionplugin_types.QQmlExtensionPlugin): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fcQQmlExtensionPlugin_staticMetaObject())
 proc delete*(self: gen_qqmlextensionplugin_types.QQmlExtensionPlugin) =
   fcQQmlExtensionPlugin_delete(self.h)
 
@@ -346,6 +426,9 @@ proc metaObject*(self: gen_qqmlextensionplugin_types.QQmlEngineExtensionPlugin, 
 
 proc metacast*(self: gen_qqmlextensionplugin_types.QQmlEngineExtensionPlugin, param1: cstring): pointer =
   fcQQmlEngineExtensionPlugin_metacast(self.h, param1)
+
+proc metacall*(self: gen_qqmlextensionplugin_types.QQmlEngineExtensionPlugin, param1: cint, param2: cint, param3: pointer): cint =
+  fcQQmlEngineExtensionPlugin_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qqmlextensionplugin_types.QQmlEngineExtensionPlugin, s: cstring): string =
   let v_ms = fcQQmlEngineExtensionPlugin_tr(s)
@@ -368,6 +451,65 @@ proc tr*(_: type gen_qqmlextensionplugin_types.QQmlEngineExtensionPlugin, s: cst
   c_free(v_ms.data)
   vx_ret
 
+proc QQmlEngineExtensionPluginmetaObject*(self: gen_qqmlextensionplugin_types.QQmlEngineExtensionPlugin, ): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fQQmlEngineExtensionPlugin_virtualbase_metaObject(self.h))
+
+type QQmlEngineExtensionPluginmetaObjectProc* = proc(): gen_qobjectdefs_types.QMetaObject
+proc onmetaObject*(self: gen_qqmlextensionplugin_types.QQmlEngineExtensionPlugin, slot: QQmlEngineExtensionPluginmetaObjectProc) =
+  # TODO check subclass
+  var tmp = new QQmlEngineExtensionPluginmetaObjectProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQQmlEngineExtensionPlugin_override_virtual_metaObject(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QQmlEngineExtensionPlugin_metaObject(self: ptr cQQmlEngineExtensionPlugin, slot: int): pointer {.exportc: "miqt_exec_callback_QQmlEngineExtensionPlugin_metaObject ".} =
+  var nimfunc = cast[ptr QQmlEngineExtensionPluginmetaObjectProc](cast[pointer](slot))
+
+  let virtualReturn = nimfunc[]( )
+
+  virtualReturn.h
+proc QQmlEngineExtensionPluginmetacast*(self: gen_qqmlextensionplugin_types.QQmlEngineExtensionPlugin, param1: cstring): pointer =
+  fQQmlEngineExtensionPlugin_virtualbase_metacast(self.h, param1)
+
+type QQmlEngineExtensionPluginmetacastProc* = proc(param1: cstring): pointer
+proc onmetacast*(self: gen_qqmlextensionplugin_types.QQmlEngineExtensionPlugin, slot: QQmlEngineExtensionPluginmetacastProc) =
+  # TODO check subclass
+  var tmp = new QQmlEngineExtensionPluginmetacastProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQQmlEngineExtensionPlugin_override_virtual_metacast(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QQmlEngineExtensionPlugin_metacast(self: ptr cQQmlEngineExtensionPlugin, slot: int, param1: cstring): pointer {.exportc: "miqt_exec_callback_QQmlEngineExtensionPlugin_metacast ".} =
+  var nimfunc = cast[ptr QQmlEngineExtensionPluginmetacastProc](cast[pointer](slot))
+  let slotval1 = (param1)
+
+
+  let virtualReturn = nimfunc[](slotval1 )
+
+  virtualReturn
+proc QQmlEngineExtensionPluginmetacall*(self: gen_qqmlextensionplugin_types.QQmlEngineExtensionPlugin, param1: cint, param2: cint, param3: pointer): cint =
+  fQQmlEngineExtensionPlugin_virtualbase_metacall(self.h, cint(param1), param2, param3)
+
+type QQmlEngineExtensionPluginmetacallProc* = proc(param1: cint, param2: cint, param3: pointer): cint
+proc onmetacall*(self: gen_qqmlextensionplugin_types.QQmlEngineExtensionPlugin, slot: QQmlEngineExtensionPluginmetacallProc) =
+  # TODO check subclass
+  var tmp = new QQmlEngineExtensionPluginmetacallProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQQmlEngineExtensionPlugin_override_virtual_metacall(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QQmlEngineExtensionPlugin_metacall(self: ptr cQQmlEngineExtensionPlugin, slot: int, param1: cint, param2: cint, param3: pointer): cint {.exportc: "miqt_exec_callback_QQmlEngineExtensionPlugin_metacall ".} =
+  var nimfunc = cast[ptr QQmlEngineExtensionPluginmetacallProc](cast[pointer](slot))
+  let slotval1 = cint(param1)
+
+  let slotval2 = param2
+
+  let slotval3 = param3
+
+
+  let virtualReturn = nimfunc[](slotval1, slotval2, slotval3 )
+
+  virtualReturn
 proc QQmlEngineExtensionPlugininitializeEngine*(self: gen_qqmlextensionplugin_types.QQmlEngineExtensionPlugin, engine: gen_qqmlengine_types.QQmlEngine, uri: cstring): void =
   fQQmlEngineExtensionPlugin_virtualbase_initializeEngine(self.h, engine.h, uri)
 
@@ -512,5 +654,7 @@ proc miqt_exec_callback_QQmlEngineExtensionPlugin_disconnectNotify(self: ptr cQQ
 
 
   nimfunc[](slotval1)
+proc staticMetaObject*(_: type gen_qqmlextensionplugin_types.QQmlEngineExtensionPlugin): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fcQQmlEngineExtensionPlugin_staticMetaObject())
 proc delete*(self: gen_qqmlextensionplugin_types.QQmlEngineExtensionPlugin) =
   fcQQmlEngineExtensionPlugin_delete(self.h)

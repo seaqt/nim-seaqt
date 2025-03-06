@@ -71,6 +71,7 @@ type cQNetworkInformation*{.exportc: "QNetworkInformation", incompleteStruct.} =
 
 proc fcQNetworkInformation_metaObject(self: pointer, ): pointer {.importc: "QNetworkInformation_metaObject".}
 proc fcQNetworkInformation_metacast(self: pointer, param1: cstring): pointer {.importc: "QNetworkInformation_metacast".}
+proc fcQNetworkInformation_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QNetworkInformation_metacall".}
 proc fcQNetworkInformation_tr(s: cstring): struct_miqt_string {.importc: "QNetworkInformation_tr".}
 proc fcQNetworkInformation_reachability(self: pointer, ): cint {.importc: "QNetworkInformation_reachability".}
 proc fcQNetworkInformation_isBehindCaptivePortal(self: pointer, ): bool {.importc: "QNetworkInformation_isBehindCaptivePortal".}
@@ -94,6 +95,7 @@ proc fcQNetworkInformation_isMeteredChanged(self: pointer, isMetered: bool): voi
 proc fcQNetworkInformation_connect_isMeteredChanged(self: pointer, slot: int) {.importc: "QNetworkInformation_connect_isMeteredChanged".}
 proc fcQNetworkInformation_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QNetworkInformation_tr2".}
 proc fcQNetworkInformation_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QNetworkInformation_tr3".}
+proc fcQNetworkInformation_staticMetaObject(): pointer {.importc: "QNetworkInformation_staticMetaObject".}
 
 
 func init*(T: type gen_qnetworkinformation_types.QNetworkInformation, h: ptr cQNetworkInformation): gen_qnetworkinformation_types.QNetworkInformation =
@@ -103,6 +105,9 @@ proc metaObject*(self: gen_qnetworkinformation_types.QNetworkInformation, ): gen
 
 proc metacast*(self: gen_qnetworkinformation_types.QNetworkInformation, param1: cstring): pointer =
   fcQNetworkInformation_metacast(self.h, param1)
+
+proc metacall*(self: gen_qnetworkinformation_types.QNetworkInformation, param1: cint, param2: cint, param3: pointer): cint =
+  fcQNetworkInformation_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qnetworkinformation_types.QNetworkInformation, s: cstring): string =
   let v_ms = fcQNetworkInformation_tr(s)
@@ -233,3 +238,5 @@ proc tr*(_: type gen_qnetworkinformation_types.QNetworkInformation, s: cstring, 
   c_free(v_ms.data)
   vx_ret
 
+proc staticMetaObject*(_: type gen_qnetworkinformation_types.QNetworkInformation): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fcQNetworkInformation_staticMetaObject())

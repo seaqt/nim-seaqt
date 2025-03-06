@@ -78,6 +78,9 @@ void miqt_exec_callback_QTreeWidget_itemExpanded(intptr_t, QTreeWidgetItem*);
 void miqt_exec_callback_QTreeWidget_itemCollapsed(intptr_t, QTreeWidgetItem*);
 void miqt_exec_callback_QTreeWidget_currentItemChanged(intptr_t, QTreeWidgetItem*, QTreeWidgetItem*);
 void miqt_exec_callback_QTreeWidget_itemSelectionChanged(intptr_t);
+QMetaObject* miqt_exec_callback_QTreeWidget_metaObject(const QTreeWidget*, intptr_t);
+void* miqt_exec_callback_QTreeWidget_metacast(QTreeWidget*, intptr_t, const char*);
+int miqt_exec_callback_QTreeWidget_metacall(QTreeWidget*, intptr_t, int, int, void**);
 void miqt_exec_callback_QTreeWidget_setSelectionModel(QTreeWidget*, intptr_t, QItemSelectionModel*);
 bool miqt_exec_callback_QTreeWidget_event(QTreeWidget*, intptr_t, QEvent*);
 struct miqt_array /* of struct miqt_string */  miqt_exec_callback_QTreeWidget_mimeTypes(const QTreeWidget*, intptr_t);
@@ -852,6 +855,62 @@ public:
 	VirtualQTreeWidget(): QTreeWidget() {};
 
 	virtual ~VirtualQTreeWidget() override = default;
+
+	// cgo.Handle value for overwritten implementation
+	intptr_t handle__metaObject = 0;
+
+	// Subclass to allow providing a Go implementation
+	virtual const QMetaObject* metaObject() const override {
+		if (handle__metaObject == 0) {
+			return QTreeWidget::metaObject();
+		}
+		
+
+		QMetaObject* callback_return_value = miqt_exec_callback_QTreeWidget_metaObject(this, handle__metaObject);
+
+		return callback_return_value;
+	}
+
+	friend QMetaObject* QTreeWidget_virtualbase_metaObject(const void* self);
+
+	// cgo.Handle value for overwritten implementation
+	intptr_t handle__metacast = 0;
+
+	// Subclass to allow providing a Go implementation
+	virtual void* qt_metacast(const char* param1) override {
+		if (handle__metacast == 0) {
+			return QTreeWidget::qt_metacast(param1);
+		}
+		
+		const char* sigval1 = (const char*) param1;
+
+		void* callback_return_value = miqt_exec_callback_QTreeWidget_metacast(this, handle__metacast, sigval1);
+
+		return callback_return_value;
+	}
+
+	friend void* QTreeWidget_virtualbase_metacast(void* self, const char* param1);
+
+	// cgo.Handle value for overwritten implementation
+	intptr_t handle__metacall = 0;
+
+	// Subclass to allow providing a Go implementation
+	virtual int qt_metacall(QMetaObject::Call param1, int param2, void** param3) override {
+		if (handle__metacall == 0) {
+			return QTreeWidget::qt_metacall(param1, param2, param3);
+		}
+		
+		QMetaObject::Call param1_ret = param1;
+		int sigval1 = static_cast<int>(param1_ret);
+		int sigval2 = param2;
+		void** sigval3 = param3;
+
+		int callback_return_value = miqt_exec_callback_QTreeWidget_metacall(this, handle__metacall, sigval1, sigval2, sigval3);
+
+		return static_cast<int>(callback_return_value);
+	}
+
+	friend int QTreeWidget_virtualbase_metacall(void* self, int param1, int param2, void** param3);
 
 	// cgo.Handle value for overwritten implementation
 	intptr_t handle__setSelectionModel = 0;
@@ -2808,6 +2867,10 @@ void* QTreeWidget_metacast(QTreeWidget* self, const char* param1) {
 	return self->qt_metacast(param1);
 }
 
+int QTreeWidget_metacall(QTreeWidget* self, int param1, int param2, void** param3) {
+	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
+}
+
 struct miqt_string QTreeWidget_tr(const char* s) {
 	QString _ret = QTreeWidget::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
@@ -3204,6 +3267,54 @@ QModelIndex* QTreeWidget_indexFromItem2(const QTreeWidget* self, QTreeWidgetItem
 
 void QTreeWidget_scrollToItem2(QTreeWidget* self, QTreeWidgetItem* item, int hint) {
 	self->scrollToItem(item, static_cast<QAbstractItemView::ScrollHint>(hint));
+}
+
+bool QTreeWidget_override_virtual_metaObject(void* self, intptr_t slot) {
+	VirtualQTreeWidget* self_cast = dynamic_cast<VirtualQTreeWidget*>( (QTreeWidget*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+	
+	self_cast->handle__metaObject = slot;
+	return true;
+}
+
+QMetaObject* QTreeWidget_virtualbase_metaObject(const void* self) {
+
+	return (QMetaObject*) ( (const VirtualQTreeWidget*)(self) )->QTreeWidget::metaObject();
+
+}
+
+bool QTreeWidget_override_virtual_metacast(void* self, intptr_t slot) {
+	VirtualQTreeWidget* self_cast = dynamic_cast<VirtualQTreeWidget*>( (QTreeWidget*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+	
+	self_cast->handle__metacast = slot;
+	return true;
+}
+
+void* QTreeWidget_virtualbase_metacast(void* self, const char* param1) {
+
+	return ( (VirtualQTreeWidget*)(self) )->QTreeWidget::qt_metacast(param1);
+
+}
+
+bool QTreeWidget_override_virtual_metacall(void* self, intptr_t slot) {
+	VirtualQTreeWidget* self_cast = dynamic_cast<VirtualQTreeWidget*>( (QTreeWidget*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+	
+	self_cast->handle__metacall = slot;
+	return true;
+}
+
+int QTreeWidget_virtualbase_metacall(void* self, int param1, int param2, void** param3) {
+
+	return ( (VirtualQTreeWidget*)(self) )->QTreeWidget::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
+
 }
 
 bool QTreeWidget_override_virtual_setSelectionModel(void* self, intptr_t slot) {
@@ -4783,6 +4894,7 @@ void QTreeWidget_virtualbase_disconnectNotify(void* self, QMetaMethod* signal) {
 
 }
 
+const QMetaObject* QTreeWidget_staticMetaObject() { return &QTreeWidget::staticMetaObject; }
 void QTreeWidget_protectedbase_columnResized(bool* _dynamic_cast_ok, void* self, int column, int oldSize, int newSize) {
 	VirtualQTreeWidget* self_cast = dynamic_cast<VirtualQTreeWidget*>( (QTreeWidget*)(self) );
 	if (self_cast == nullptr) {

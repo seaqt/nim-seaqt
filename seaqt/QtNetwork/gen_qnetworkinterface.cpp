@@ -249,6 +249,7 @@ struct miqt_array /* of QHostAddress* */  QNetworkInterface_allAddresses() {
 	return _out;
 }
 
+const QMetaObject* QNetworkInterface_staticMetaObject() { return &QNetworkInterface::staticMetaObject; }
 void QNetworkInterface_delete(QNetworkInterface* self) {
 	delete self;
 }

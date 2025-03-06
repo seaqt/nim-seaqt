@@ -56,8 +56,10 @@ import ./gen_qwebengineloadinginfo_types
 export gen_qwebengineloadinginfo_types
 
 import
+  ../QtCore/gen_qobjectdefs_types,
   ../QtCore/gen_qurl_types
 export
+  gen_qobjectdefs_types,
   gen_qurl_types
 
 type cQWebEngineLoadingInfo*{.exportc: "QWebEngineLoadingInfo", incompleteStruct.} = object
@@ -70,6 +72,7 @@ proc fcQWebEngineLoadingInfo_status(self: pointer, ): cint {.importc: "QWebEngin
 proc fcQWebEngineLoadingInfo_errorString(self: pointer, ): struct_miqt_string {.importc: "QWebEngineLoadingInfo_errorString".}
 proc fcQWebEngineLoadingInfo_errorDomain(self: pointer, ): cint {.importc: "QWebEngineLoadingInfo_errorDomain".}
 proc fcQWebEngineLoadingInfo_errorCode(self: pointer, ): cint {.importc: "QWebEngineLoadingInfo_errorCode".}
+proc fcQWebEngineLoadingInfo_staticMetaObject(): pointer {.importc: "QWebEngineLoadingInfo_staticMetaObject".}
 proc fcQWebEngineLoadingInfo_delete(self: pointer) {.importc: "QWebEngineLoadingInfo_delete".}
 
 
@@ -102,5 +105,7 @@ proc errorDomain*(self: gen_qwebengineloadinginfo_types.QWebEngineLoadingInfo, )
 proc errorCode*(self: gen_qwebengineloadinginfo_types.QWebEngineLoadingInfo, ): cint =
   fcQWebEngineLoadingInfo_errorCode(self.h)
 
+proc staticMetaObject*(_: type gen_qwebengineloadinginfo_types.QWebEngineLoadingInfo): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fcQWebEngineLoadingInfo_staticMetaObject())
 proc delete*(self: gen_qwebengineloadinginfo_types.QWebEngineLoadingInfo) =
   fcQWebEngineLoadingInfo_delete(self.h)

@@ -56,6 +56,7 @@ proc fcQAnimationGroup_new(): ptr cQAnimationGroup {.importc: "QAnimationGroup_n
 proc fcQAnimationGroup_new2(parent: pointer): ptr cQAnimationGroup {.importc: "QAnimationGroup_new2".}
 proc fcQAnimationGroup_metaObject(self: pointer, ): pointer {.importc: "QAnimationGroup_metaObject".}
 proc fcQAnimationGroup_metacast(self: pointer, param1: cstring): pointer {.importc: "QAnimationGroup_metacast".}
+proc fcQAnimationGroup_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QAnimationGroup_metacall".}
 proc fcQAnimationGroup_tr(s: cstring): struct_miqt_string {.importc: "QAnimationGroup_tr".}
 proc fcQAnimationGroup_animationAt(self: pointer, index: cint): pointer {.importc: "QAnimationGroup_animationAt".}
 proc fcQAnimationGroup_animationCount(self: pointer, ): cint {.importc: "QAnimationGroup_animationCount".}
@@ -67,6 +68,12 @@ proc fcQAnimationGroup_takeAnimation(self: pointer, index: cint): pointer {.impo
 proc fcQAnimationGroup_clear(self: pointer, ): void {.importc: "QAnimationGroup_clear".}
 proc fcQAnimationGroup_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QAnimationGroup_tr2".}
 proc fcQAnimationGroup_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QAnimationGroup_tr3".}
+proc fQAnimationGroup_virtualbase_metaObject(self: pointer, ): pointer{.importc: "QAnimationGroup_virtualbase_metaObject".}
+proc fcQAnimationGroup_override_virtual_metaObject(self: pointer, slot: int) {.importc: "QAnimationGroup_override_virtual_metaObject".}
+proc fQAnimationGroup_virtualbase_metacast(self: pointer, param1: cstring): pointer{.importc: "QAnimationGroup_virtualbase_metacast".}
+proc fcQAnimationGroup_override_virtual_metacast(self: pointer, slot: int) {.importc: "QAnimationGroup_override_virtual_metacast".}
+proc fQAnimationGroup_virtualbase_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint{.importc: "QAnimationGroup_virtualbase_metacall".}
+proc fcQAnimationGroup_override_virtual_metacall(self: pointer, slot: int) {.importc: "QAnimationGroup_override_virtual_metacall".}
 proc fQAnimationGroup_virtualbase_event(self: pointer, event: pointer): bool{.importc: "QAnimationGroup_virtualbase_event".}
 proc fcQAnimationGroup_override_virtual_event(self: pointer, slot: int) {.importc: "QAnimationGroup_override_virtual_event".}
 proc fcQAnimationGroup_override_virtual_duration(self: pointer, slot: int) {.importc: "QAnimationGroup_override_virtual_duration".}
@@ -87,6 +94,7 @@ proc fQAnimationGroup_virtualbase_connectNotify(self: pointer, signal: pointer):
 proc fcQAnimationGroup_override_virtual_connectNotify(self: pointer, slot: int) {.importc: "QAnimationGroup_override_virtual_connectNotify".}
 proc fQAnimationGroup_virtualbase_disconnectNotify(self: pointer, signal: pointer): void{.importc: "QAnimationGroup_virtualbase_disconnectNotify".}
 proc fcQAnimationGroup_override_virtual_disconnectNotify(self: pointer, slot: int) {.importc: "QAnimationGroup_override_virtual_disconnectNotify".}
+proc fcQAnimationGroup_staticMetaObject(): pointer {.importc: "QAnimationGroup_staticMetaObject".}
 proc fcQAnimationGroup_delete(self: pointer) {.importc: "QAnimationGroup_delete".}
 
 
@@ -103,6 +111,9 @@ proc metaObject*(self: gen_qanimationgroup_types.QAnimationGroup, ): gen_qobject
 
 proc metacast*(self: gen_qanimationgroup_types.QAnimationGroup, param1: cstring): pointer =
   fcQAnimationGroup_metacast(self.h, param1)
+
+proc metacall*(self: gen_qanimationgroup_types.QAnimationGroup, param1: cint, param2: cint, param3: pointer): cint =
+  fcQAnimationGroup_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qanimationgroup_types.QAnimationGroup, s: cstring): string =
   let v_ms = fcQAnimationGroup_tr(s)
@@ -146,6 +157,65 @@ proc tr*(_: type gen_qanimationgroup_types.QAnimationGroup, s: cstring, c: cstri
   c_free(v_ms.data)
   vx_ret
 
+proc QAnimationGroupmetaObject*(self: gen_qanimationgroup_types.QAnimationGroup, ): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fQAnimationGroup_virtualbase_metaObject(self.h))
+
+type QAnimationGroupmetaObjectProc* = proc(): gen_qobjectdefs_types.QMetaObject
+proc onmetaObject*(self: gen_qanimationgroup_types.QAnimationGroup, slot: QAnimationGroupmetaObjectProc) =
+  # TODO check subclass
+  var tmp = new QAnimationGroupmetaObjectProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQAnimationGroup_override_virtual_metaObject(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QAnimationGroup_metaObject(self: ptr cQAnimationGroup, slot: int): pointer {.exportc: "miqt_exec_callback_QAnimationGroup_metaObject ".} =
+  var nimfunc = cast[ptr QAnimationGroupmetaObjectProc](cast[pointer](slot))
+
+  let virtualReturn = nimfunc[]( )
+
+  virtualReturn.h
+proc QAnimationGroupmetacast*(self: gen_qanimationgroup_types.QAnimationGroup, param1: cstring): pointer =
+  fQAnimationGroup_virtualbase_metacast(self.h, param1)
+
+type QAnimationGroupmetacastProc* = proc(param1: cstring): pointer
+proc onmetacast*(self: gen_qanimationgroup_types.QAnimationGroup, slot: QAnimationGroupmetacastProc) =
+  # TODO check subclass
+  var tmp = new QAnimationGroupmetacastProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQAnimationGroup_override_virtual_metacast(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QAnimationGroup_metacast(self: ptr cQAnimationGroup, slot: int, param1: cstring): pointer {.exportc: "miqt_exec_callback_QAnimationGroup_metacast ".} =
+  var nimfunc = cast[ptr QAnimationGroupmetacastProc](cast[pointer](slot))
+  let slotval1 = (param1)
+
+
+  let virtualReturn = nimfunc[](slotval1 )
+
+  virtualReturn
+proc QAnimationGroupmetacall*(self: gen_qanimationgroup_types.QAnimationGroup, param1: cint, param2: cint, param3: pointer): cint =
+  fQAnimationGroup_virtualbase_metacall(self.h, cint(param1), param2, param3)
+
+type QAnimationGroupmetacallProc* = proc(param1: cint, param2: cint, param3: pointer): cint
+proc onmetacall*(self: gen_qanimationgroup_types.QAnimationGroup, slot: QAnimationGroupmetacallProc) =
+  # TODO check subclass
+  var tmp = new QAnimationGroupmetacallProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQAnimationGroup_override_virtual_metacall(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QAnimationGroup_metacall(self: ptr cQAnimationGroup, slot: int, param1: cint, param2: cint, param3: pointer): cint {.exportc: "miqt_exec_callback_QAnimationGroup_metacall ".} =
+  var nimfunc = cast[ptr QAnimationGroupmetacallProc](cast[pointer](slot))
+  let slotval1 = cint(param1)
+
+  let slotval2 = param2
+
+  let slotval3 = param3
+
+
+  let virtualReturn = nimfunc[](slotval1, slotval2, slotval3 )
+
+  virtualReturn
 proc QAnimationGroupevent*(self: gen_qanimationgroup_types.QAnimationGroup, event: gen_qcoreevent_types.QEvent): bool =
   fQAnimationGroup_virtualbase_event(self.h, event.h)
 
@@ -335,5 +405,7 @@ proc miqt_exec_callback_QAnimationGroup_disconnectNotify(self: ptr cQAnimationGr
 
 
   nimfunc[](slotval1)
+proc staticMetaObject*(_: type gen_qanimationgroup_types.QAnimationGroup): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fcQAnimationGroup_staticMetaObject())
 proc delete*(self: gen_qanimationgroup_types.QAnimationGroup) =
   fcQAnimationGroup_delete(self.h)

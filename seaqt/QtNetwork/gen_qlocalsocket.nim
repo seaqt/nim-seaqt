@@ -82,6 +82,7 @@ proc fcQLocalSocket_new(): ptr cQLocalSocket {.importc: "QLocalSocket_new".}
 proc fcQLocalSocket_new2(parent: pointer): ptr cQLocalSocket {.importc: "QLocalSocket_new2".}
 proc fcQLocalSocket_metaObject(self: pointer, ): pointer {.importc: "QLocalSocket_metaObject".}
 proc fcQLocalSocket_metacast(self: pointer, param1: cstring): pointer {.importc: "QLocalSocket_metacast".}
+proc fcQLocalSocket_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QLocalSocket_metacall".}
 proc fcQLocalSocket_tr(s: cstring): struct_miqt_string {.importc: "QLocalSocket_tr".}
 proc fcQLocalSocket_connectToServer(self: pointer, ): void {.importc: "QLocalSocket_connectToServer".}
 proc fcQLocalSocket_connectToServerWithName(self: pointer, name: struct_miqt_string): void {.importc: "QLocalSocket_connectToServerWithName".}
@@ -126,6 +127,12 @@ proc fcQLocalSocket_setSocketDescriptor2(self: pointer, socketDescriptor: uint, 
 proc fcQLocalSocket_setSocketDescriptor3(self: pointer, socketDescriptor: uint, socketState: cint, openMode: cint): bool {.importc: "QLocalSocket_setSocketDescriptor3".}
 proc fcQLocalSocket_waitForConnected1(self: pointer, msecs: cint): bool {.importc: "QLocalSocket_waitForConnected1".}
 proc fcQLocalSocket_waitForDisconnected1(self: pointer, msecs: cint): bool {.importc: "QLocalSocket_waitForDisconnected1".}
+proc fQLocalSocket_virtualbase_metaObject(self: pointer, ): pointer{.importc: "QLocalSocket_virtualbase_metaObject".}
+proc fcQLocalSocket_override_virtual_metaObject(self: pointer, slot: int) {.importc: "QLocalSocket_override_virtual_metaObject".}
+proc fQLocalSocket_virtualbase_metacast(self: pointer, param1: cstring): pointer{.importc: "QLocalSocket_virtualbase_metacast".}
+proc fcQLocalSocket_override_virtual_metacast(self: pointer, slot: int) {.importc: "QLocalSocket_override_virtual_metacast".}
+proc fQLocalSocket_virtualbase_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint{.importc: "QLocalSocket_virtualbase_metacall".}
+proc fcQLocalSocket_override_virtual_metacall(self: pointer, slot: int) {.importc: "QLocalSocket_override_virtual_metacall".}
 proc fQLocalSocket_virtualbase_isSequential(self: pointer, ): bool{.importc: "QLocalSocket_virtualbase_isSequential".}
 proc fcQLocalSocket_override_virtual_isSequential(self: pointer, slot: int) {.importc: "QLocalSocket_override_virtual_isSequential".}
 proc fQLocalSocket_virtualbase_bytesAvailable(self: pointer, ): clonglong{.importc: "QLocalSocket_virtualbase_bytesAvailable".}
@@ -174,6 +181,7 @@ proc fQLocalSocket_virtualbase_connectNotify(self: pointer, signal: pointer): vo
 proc fcQLocalSocket_override_virtual_connectNotify(self: pointer, slot: int) {.importc: "QLocalSocket_override_virtual_connectNotify".}
 proc fQLocalSocket_virtualbase_disconnectNotify(self: pointer, signal: pointer): void{.importc: "QLocalSocket_virtualbase_disconnectNotify".}
 proc fcQLocalSocket_override_virtual_disconnectNotify(self: pointer, slot: int) {.importc: "QLocalSocket_override_virtual_disconnectNotify".}
+proc fcQLocalSocket_staticMetaObject(): pointer {.importc: "QLocalSocket_staticMetaObject".}
 proc fcQLocalSocket_delete(self: pointer) {.importc: "QLocalSocket_delete".}
 
 
@@ -190,6 +198,9 @@ proc metaObject*(self: gen_qlocalsocket_types.QLocalSocket, ): gen_qobjectdefs_t
 
 proc metacast*(self: gen_qlocalsocket_types.QLocalSocket, param1: cstring): pointer =
   fcQLocalSocket_metacast(self.h, param1)
+
+proc metacall*(self: gen_qlocalsocket_types.QLocalSocket, param1: cint, param2: cint, param3: pointer): cint =
+  fcQLocalSocket_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qlocalsocket_types.QLocalSocket, s: cstring): string =
   let v_ms = fcQLocalSocket_tr(s)
@@ -374,6 +385,65 @@ proc waitForConnected*(self: gen_qlocalsocket_types.QLocalSocket, msecs: cint): 
 proc waitForDisconnected*(self: gen_qlocalsocket_types.QLocalSocket, msecs: cint): bool =
   fcQLocalSocket_waitForDisconnected1(self.h, msecs)
 
+proc QLocalSocketmetaObject*(self: gen_qlocalsocket_types.QLocalSocket, ): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fQLocalSocket_virtualbase_metaObject(self.h))
+
+type QLocalSocketmetaObjectProc* = proc(): gen_qobjectdefs_types.QMetaObject
+proc onmetaObject*(self: gen_qlocalsocket_types.QLocalSocket, slot: QLocalSocketmetaObjectProc) =
+  # TODO check subclass
+  var tmp = new QLocalSocketmetaObjectProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQLocalSocket_override_virtual_metaObject(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QLocalSocket_metaObject(self: ptr cQLocalSocket, slot: int): pointer {.exportc: "miqt_exec_callback_QLocalSocket_metaObject ".} =
+  var nimfunc = cast[ptr QLocalSocketmetaObjectProc](cast[pointer](slot))
+
+  let virtualReturn = nimfunc[]( )
+
+  virtualReturn.h
+proc QLocalSocketmetacast*(self: gen_qlocalsocket_types.QLocalSocket, param1: cstring): pointer =
+  fQLocalSocket_virtualbase_metacast(self.h, param1)
+
+type QLocalSocketmetacastProc* = proc(param1: cstring): pointer
+proc onmetacast*(self: gen_qlocalsocket_types.QLocalSocket, slot: QLocalSocketmetacastProc) =
+  # TODO check subclass
+  var tmp = new QLocalSocketmetacastProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQLocalSocket_override_virtual_metacast(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QLocalSocket_metacast(self: ptr cQLocalSocket, slot: int, param1: cstring): pointer {.exportc: "miqt_exec_callback_QLocalSocket_metacast ".} =
+  var nimfunc = cast[ptr QLocalSocketmetacastProc](cast[pointer](slot))
+  let slotval1 = (param1)
+
+
+  let virtualReturn = nimfunc[](slotval1 )
+
+  virtualReturn
+proc QLocalSocketmetacall*(self: gen_qlocalsocket_types.QLocalSocket, param1: cint, param2: cint, param3: pointer): cint =
+  fQLocalSocket_virtualbase_metacall(self.h, cint(param1), param2, param3)
+
+type QLocalSocketmetacallProc* = proc(param1: cint, param2: cint, param3: pointer): cint
+proc onmetacall*(self: gen_qlocalsocket_types.QLocalSocket, slot: QLocalSocketmetacallProc) =
+  # TODO check subclass
+  var tmp = new QLocalSocketmetacallProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQLocalSocket_override_virtual_metacall(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QLocalSocket_metacall(self: ptr cQLocalSocket, slot: int, param1: cint, param2: cint, param3: pointer): cint {.exportc: "miqt_exec_callback_QLocalSocket_metacall ".} =
+  var nimfunc = cast[ptr QLocalSocketmetacallProc](cast[pointer](slot))
+  let slotval1 = cint(param1)
+
+  let slotval2 = param2
+
+  let slotval3 = param3
+
+
+  let virtualReturn = nimfunc[](slotval1, slotval2, slotval3 )
+
+  virtualReturn
 proc QLocalSocketisSequential*(self: gen_qlocalsocket_types.QLocalSocket, ): bool =
   fQLocalSocket_virtualbase_isSequential(self.h)
 
@@ -808,5 +878,7 @@ proc miqt_exec_callback_QLocalSocket_disconnectNotify(self: ptr cQLocalSocket, s
 
 
   nimfunc[](slotval1)
+proc staticMetaObject*(_: type gen_qlocalsocket_types.QLocalSocket): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fcQLocalSocket_staticMetaObject())
 proc delete*(self: gen_qlocalsocket_types.QLocalSocket) =
   fcQLocalSocket_delete(self.h)

@@ -67,6 +67,9 @@ void miqt_exec_callback_QQuickWindow_paletteChanged(intptr_t);
 void miqt_exec_callback_QQuickWindow_paletteCreated(intptr_t);
 void miqt_exec_callback_QQuickWindow_beforeFrameBegin(intptr_t);
 void miqt_exec_callback_QQuickWindow_afterFrameEnd(intptr_t);
+QMetaObject* miqt_exec_callback_QQuickWindow_metaObject(const QQuickWindow*, intptr_t);
+void* miqt_exec_callback_QQuickWindow_metacast(QQuickWindow*, intptr_t, const char*);
+int miqt_exec_callback_QQuickWindow_metacall(QQuickWindow*, intptr_t, int, int, void**);
 QObject* miqt_exec_callback_QQuickWindow_focusObject(const QQuickWindow*, intptr_t);
 QAccessibleInterface* miqt_exec_callback_QQuickWindow_accessibleRoot(const QQuickWindow*, intptr_t);
 void miqt_exec_callback_QQuickWindow_exposeEvent(QQuickWindow*, intptr_t, QExposeEvent*);
@@ -110,6 +113,62 @@ public:
 	VirtualQQuickWindow(QWindow* parent): QQuickWindow(parent) {};
 
 	virtual ~VirtualQQuickWindow() override = default;
+
+	// cgo.Handle value for overwritten implementation
+	intptr_t handle__metaObject = 0;
+
+	// Subclass to allow providing a Go implementation
+	virtual const QMetaObject* metaObject() const override {
+		if (handle__metaObject == 0) {
+			return QQuickWindow::metaObject();
+		}
+		
+
+		QMetaObject* callback_return_value = miqt_exec_callback_QQuickWindow_metaObject(this, handle__metaObject);
+
+		return callback_return_value;
+	}
+
+	friend QMetaObject* QQuickWindow_virtualbase_metaObject(const void* self);
+
+	// cgo.Handle value for overwritten implementation
+	intptr_t handle__metacast = 0;
+
+	// Subclass to allow providing a Go implementation
+	virtual void* qt_metacast(const char* param1) override {
+		if (handle__metacast == 0) {
+			return QQuickWindow::qt_metacast(param1);
+		}
+		
+		const char* sigval1 = (const char*) param1;
+
+		void* callback_return_value = miqt_exec_callback_QQuickWindow_metacast(this, handle__metacast, sigval1);
+
+		return callback_return_value;
+	}
+
+	friend void* QQuickWindow_virtualbase_metacast(void* self, const char* param1);
+
+	// cgo.Handle value for overwritten implementation
+	intptr_t handle__metacall = 0;
+
+	// Subclass to allow providing a Go implementation
+	virtual int qt_metacall(QMetaObject::Call param1, int param2, void** param3) override {
+		if (handle__metacall == 0) {
+			return QQuickWindow::qt_metacall(param1, param2, param3);
+		}
+		
+		QMetaObject::Call param1_ret = param1;
+		int sigval1 = static_cast<int>(param1_ret);
+		int sigval2 = param2;
+		void** sigval3 = param3;
+
+		int callback_return_value = miqt_exec_callback_QQuickWindow_metacall(this, handle__metacall, sigval1, sigval2, sigval3);
+
+		return static_cast<int>(callback_return_value);
+	}
+
+	friend int QQuickWindow_virtualbase_metacall(void* self, int param1, int param2, void** param3);
 
 	// cgo.Handle value for overwritten implementation
 	intptr_t handle__focusObject = 0;
@@ -732,6 +791,10 @@ void* QQuickWindow_metacast(QQuickWindow* self, const char* param1) {
 	return self->qt_metacast(param1);
 }
 
+int QQuickWindow_metacall(QQuickWindow* self, int param1, int param2, void** param3) {
+	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
+}
+
 struct miqt_string QQuickWindow_tr(const char* s) {
 	QString _ret = QQuickWindow::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
@@ -1134,6 +1197,54 @@ struct miqt_string QQuickWindow_tr3(const char* s, const char* c, int n) {
 	_ms.data = static_cast<char*>(malloc(_ms.len));
 	memcpy(_ms.data, _b.data(), _ms.len);
 	return _ms;
+}
+
+bool QQuickWindow_override_virtual_metaObject(void* self, intptr_t slot) {
+	VirtualQQuickWindow* self_cast = dynamic_cast<VirtualQQuickWindow*>( (QQuickWindow*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+	
+	self_cast->handle__metaObject = slot;
+	return true;
+}
+
+QMetaObject* QQuickWindow_virtualbase_metaObject(const void* self) {
+
+	return (QMetaObject*) ( (const VirtualQQuickWindow*)(self) )->QQuickWindow::metaObject();
+
+}
+
+bool QQuickWindow_override_virtual_metacast(void* self, intptr_t slot) {
+	VirtualQQuickWindow* self_cast = dynamic_cast<VirtualQQuickWindow*>( (QQuickWindow*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+	
+	self_cast->handle__metacast = slot;
+	return true;
+}
+
+void* QQuickWindow_virtualbase_metacast(void* self, const char* param1) {
+
+	return ( (VirtualQQuickWindow*)(self) )->QQuickWindow::qt_metacast(param1);
+
+}
+
+bool QQuickWindow_override_virtual_metacall(void* self, intptr_t slot) {
+	VirtualQQuickWindow* self_cast = dynamic_cast<VirtualQQuickWindow*>( (QQuickWindow*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+	
+	self_cast->handle__metacall = slot;
+	return true;
+}
+
+int QQuickWindow_virtualbase_metacall(void* self, int param1, int param2, void** param3) {
+
+	return ( (VirtualQQuickWindow*)(self) )->QQuickWindow::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
+
 }
 
 bool QQuickWindow_override_virtual_focusObject(void* self, intptr_t slot) {
@@ -1634,6 +1745,7 @@ void QQuickWindow_virtualbase_disconnectNotify(void* self, QMetaMethod* signal) 
 
 }
 
+const QMetaObject* QQuickWindow_staticMetaObject() { return &QQuickWindow::staticMetaObject; }
 void* QQuickWindow_protectedbase_resolveInterface(bool* _dynamic_cast_ok, const void* self, const char* name, int revision) {
 	VirtualQQuickWindow* self_cast = dynamic_cast<VirtualQQuickWindow*>( (QQuickWindow*)(self) );
 	if (self_cast == nullptr) {

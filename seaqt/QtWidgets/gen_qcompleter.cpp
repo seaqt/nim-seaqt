@@ -25,6 +25,9 @@ void miqt_exec_callback_QCompleter_activated(intptr_t, struct miqt_string);
 void miqt_exec_callback_QCompleter_activatedWithIndex(intptr_t, QModelIndex*);
 void miqt_exec_callback_QCompleter_highlighted(intptr_t, struct miqt_string);
 void miqt_exec_callback_QCompleter_highlightedWithIndex(intptr_t, QModelIndex*);
+QMetaObject* miqt_exec_callback_QCompleter_metaObject(const QCompleter*, intptr_t);
+void* miqt_exec_callback_QCompleter_metacast(QCompleter*, intptr_t, const char*);
+int miqt_exec_callback_QCompleter_metacall(QCompleter*, intptr_t, int, int, void**);
 struct miqt_string miqt_exec_callback_QCompleter_pathFromIndex(const QCompleter*, intptr_t, QModelIndex*);
 struct miqt_array /* of struct miqt_string */  miqt_exec_callback_QCompleter_splitPath(const QCompleter*, intptr_t, struct miqt_string);
 bool miqt_exec_callback_QCompleter_eventFilter(QCompleter*, intptr_t, QObject*, QEvent*);
@@ -49,6 +52,62 @@ public:
 	VirtualQCompleter(const QStringList& completions, QObject* parent): QCompleter(completions, parent) {};
 
 	virtual ~VirtualQCompleter() override = default;
+
+	// cgo.Handle value for overwritten implementation
+	intptr_t handle__metaObject = 0;
+
+	// Subclass to allow providing a Go implementation
+	virtual const QMetaObject* metaObject() const override {
+		if (handle__metaObject == 0) {
+			return QCompleter::metaObject();
+		}
+		
+
+		QMetaObject* callback_return_value = miqt_exec_callback_QCompleter_metaObject(this, handle__metaObject);
+
+		return callback_return_value;
+	}
+
+	friend QMetaObject* QCompleter_virtualbase_metaObject(const void* self);
+
+	// cgo.Handle value for overwritten implementation
+	intptr_t handle__metacast = 0;
+
+	// Subclass to allow providing a Go implementation
+	virtual void* qt_metacast(const char* param1) override {
+		if (handle__metacast == 0) {
+			return QCompleter::qt_metacast(param1);
+		}
+		
+		const char* sigval1 = (const char*) param1;
+
+		void* callback_return_value = miqt_exec_callback_QCompleter_metacast(this, handle__metacast, sigval1);
+
+		return callback_return_value;
+	}
+
+	friend void* QCompleter_virtualbase_metacast(void* self, const char* param1);
+
+	// cgo.Handle value for overwritten implementation
+	intptr_t handle__metacall = 0;
+
+	// Subclass to allow providing a Go implementation
+	virtual int qt_metacall(QMetaObject::Call param1, int param2, void** param3) override {
+		if (handle__metacall == 0) {
+			return QCompleter::qt_metacall(param1, param2, param3);
+		}
+		
+		QMetaObject::Call param1_ret = param1;
+		int sigval1 = static_cast<int>(param1_ret);
+		int sigval2 = param2;
+		void** sigval3 = param3;
+
+		int callback_return_value = miqt_exec_callback_QCompleter_metacall(this, handle__metacall, sigval1, sigval2, sigval3);
+
+		return static_cast<int>(callback_return_value);
+	}
+
+	friend int QCompleter_virtualbase_metacall(void* self, int param1, int param2, void** param3);
 
 	// cgo.Handle value for overwritten implementation
 	intptr_t handle__pathFromIndex = 0;
@@ -294,6 +353,10 @@ QMetaObject* QCompleter_metaObject(const QCompleter* self) {
 
 void* QCompleter_metacast(QCompleter* self, const char* param1) {
 	return self->qt_metacast(param1);
+}
+
+int QCompleter_metacall(QCompleter* self, int param1, int param2, void** param3) {
+	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
 struct miqt_string QCompleter_tr(const char* s) {
@@ -572,6 +635,54 @@ void QCompleter_complete1(QCompleter* self, QRect* rect) {
 	self->complete(*rect);
 }
 
+bool QCompleter_override_virtual_metaObject(void* self, intptr_t slot) {
+	VirtualQCompleter* self_cast = dynamic_cast<VirtualQCompleter*>( (QCompleter*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+	
+	self_cast->handle__metaObject = slot;
+	return true;
+}
+
+QMetaObject* QCompleter_virtualbase_metaObject(const void* self) {
+
+	return (QMetaObject*) ( (const VirtualQCompleter*)(self) )->QCompleter::metaObject();
+
+}
+
+bool QCompleter_override_virtual_metacast(void* self, intptr_t slot) {
+	VirtualQCompleter* self_cast = dynamic_cast<VirtualQCompleter*>( (QCompleter*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+	
+	self_cast->handle__metacast = slot;
+	return true;
+}
+
+void* QCompleter_virtualbase_metacast(void* self, const char* param1) {
+
+	return ( (VirtualQCompleter*)(self) )->QCompleter::qt_metacast(param1);
+
+}
+
+bool QCompleter_override_virtual_metacall(void* self, intptr_t slot) {
+	VirtualQCompleter* self_cast = dynamic_cast<VirtualQCompleter*>( (QCompleter*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+	
+	self_cast->handle__metacall = slot;
+	return true;
+}
+
+int QCompleter_virtualbase_metacall(void* self, int param1, int param2, void** param3) {
+
+	return ( (VirtualQCompleter*)(self) )->QCompleter::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
+
+}
+
 bool QCompleter_override_virtual_pathFromIndex(void* self, intptr_t slot) {
 	VirtualQCompleter* self_cast = dynamic_cast<VirtualQCompleter*>( (QCompleter*)(self) );
 	if (self_cast == nullptr) {
@@ -740,6 +851,7 @@ void QCompleter_virtualbase_disconnectNotify(void* self, QMetaMethod* signal) {
 
 }
 
+const QMetaObject* QCompleter_staticMetaObject() { return &QCompleter::staticMetaObject; }
 QObject* QCompleter_protectedbase_sender(bool* _dynamic_cast_ok, const void* self) {
 	VirtualQCompleter* self_cast = dynamic_cast<VirtualQCompleter*>( (QCompleter*)(self) );
 	if (self_cast == nullptr) {

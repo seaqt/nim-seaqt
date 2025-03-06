@@ -59,9 +59,11 @@ import ./gen_qwebenginecertificateerror_types
 export gen_qwebenginecertificateerror_types
 
 import
+  ../QtCore/gen_qobjectdefs_types,
   ../QtCore/gen_qurl_types,
   ../QtNetwork/gen_qsslcertificate_types
 export
+  gen_qobjectdefs_types,
   gen_qurl_types,
   gen_qsslcertificate_types
 
@@ -77,6 +79,7 @@ proc fcQWebEngineCertificateError_deferX(self: pointer, ): void {.importc: "QWeb
 proc fcQWebEngineCertificateError_rejectCertificate(self: pointer, ): void {.importc: "QWebEngineCertificateError_rejectCertificate".}
 proc fcQWebEngineCertificateError_acceptCertificate(self: pointer, ): void {.importc: "QWebEngineCertificateError_acceptCertificate".}
 proc fcQWebEngineCertificateError_certificateChain(self: pointer, ): struct_miqt_array {.importc: "QWebEngineCertificateError_certificateChain".}
+proc fcQWebEngineCertificateError_staticMetaObject(): pointer {.importc: "QWebEngineCertificateError_staticMetaObject".}
 proc fcQWebEngineCertificateError_delete(self: pointer) {.importc: "QWebEngineCertificateError_delete".}
 
 
@@ -120,5 +123,7 @@ proc certificateChain*(self: gen_qwebenginecertificateerror_types.QWebEngineCert
     vx_ret[i] = gen_qsslcertificate_types.QSslCertificate(h: v_outCast[i])
   vx_ret
 
+proc staticMetaObject*(_: type gen_qwebenginecertificateerror_types.QWebEngineCertificateError): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fcQWebEngineCertificateError_staticMetaObject())
 proc delete*(self: gen_qwebenginecertificateerror_types.QWebEngineCertificateError) =
   fcQWebEngineCertificateError_delete(self.h)

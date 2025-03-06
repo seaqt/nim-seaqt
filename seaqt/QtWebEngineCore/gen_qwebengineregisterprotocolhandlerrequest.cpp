@@ -53,6 +53,7 @@ bool QWebEngineRegisterProtocolHandlerRequest_operatorNotEqual(const QWebEngineR
 	return (*self != *that);
 }
 
+const QMetaObject* QWebEngineRegisterProtocolHandlerRequest_staticMetaObject() { return &QWebEngineRegisterProtocolHandlerRequest::staticMetaObject; }
 void QWebEngineRegisterProtocolHandlerRequest_delete(QWebEngineRegisterProtocolHandlerRequest* self) {
 	delete self;
 }

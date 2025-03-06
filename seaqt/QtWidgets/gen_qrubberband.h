@@ -93,6 +93,7 @@ QRubberBand* QRubberBand_new2(int param1, QWidget* param2);
 void QRubberBand_virtbase(QRubberBand* src, QWidget** outptr_QWidget);
 QMetaObject* QRubberBand_metaObject(const QRubberBand* self);
 void* QRubberBand_metacast(QRubberBand* self, const char* param1);
+int QRubberBand_metacall(QRubberBand* self, int param1, int param2, void** param3);
 struct miqt_string QRubberBand_tr(const char* s);
 int QRubberBand_shape(const QRubberBand* self);
 void QRubberBand_setGeometry(QRubberBand* self, QRect* r);
@@ -110,6 +111,12 @@ void QRubberBand_moveEvent(QRubberBand* self, QMoveEvent* param1);
 void QRubberBand_initStyleOption(const QRubberBand* self, QStyleOptionRubberBand* option);
 struct miqt_string QRubberBand_tr2(const char* s, const char* c);
 struct miqt_string QRubberBand_tr3(const char* s, const char* c, int n);
+bool QRubberBand_override_virtual_metaObject(void* self, intptr_t slot);
+QMetaObject* QRubberBand_virtualbase_metaObject(const void* self);
+bool QRubberBand_override_virtual_metacast(void* self, intptr_t slot);
+void* QRubberBand_virtualbase_metacast(void* self, const char* param1);
+bool QRubberBand_override_virtual_metacall(void* self, intptr_t slot);
+int QRubberBand_virtualbase_metacall(void* self, int param1, int param2, void** param3);
 bool QRubberBand_override_virtual_event(void* self, intptr_t slot);
 bool QRubberBand_virtualbase_event(void* self, QEvent* e);
 bool QRubberBand_override_virtual_paintEvent(void* self, intptr_t slot);
@@ -215,6 +222,7 @@ QObject* QRubberBand_protectedbase_sender(bool* _dynamic_cast_ok, const void* se
 int QRubberBand_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
 int QRubberBand_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
 bool QRubberBand_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+const QMetaObject* QRubberBand_staticMetaObject();
 void QRubberBand_delete(QRubberBand* self);
 
 #ifdef __cplusplus

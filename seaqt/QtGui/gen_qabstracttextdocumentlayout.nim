@@ -74,6 +74,7 @@ type cQAbstractTextDocumentLayoutPaintContext*{.exportc: "QAbstractTextDocumentL
 proc fcQAbstractTextDocumentLayout_new(doc: pointer): ptr cQAbstractTextDocumentLayout {.importc: "QAbstractTextDocumentLayout_new".}
 proc fcQAbstractTextDocumentLayout_metaObject(self: pointer, ): pointer {.importc: "QAbstractTextDocumentLayout_metaObject".}
 proc fcQAbstractTextDocumentLayout_metacast(self: pointer, param1: cstring): pointer {.importc: "QAbstractTextDocumentLayout_metacast".}
+proc fcQAbstractTextDocumentLayout_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QAbstractTextDocumentLayout_metacall".}
 proc fcQAbstractTextDocumentLayout_tr(s: cstring): struct_miqt_string {.importc: "QAbstractTextDocumentLayout_tr".}
 proc fcQAbstractTextDocumentLayout_draw(self: pointer, painter: pointer, context: pointer): void {.importc: "QAbstractTextDocumentLayout_draw".}
 proc fcQAbstractTextDocumentLayout_hitTest(self: pointer, point: pointer, accuracy: cint): cint {.importc: "QAbstractTextDocumentLayout_hitTest".}
@@ -104,6 +105,12 @@ proc fcQAbstractTextDocumentLayout_tr3(s: cstring, c: cstring, n: cint): struct_
 proc fcQAbstractTextDocumentLayout_unregisterHandler2(self: pointer, objectType: cint, component: pointer): void {.importc: "QAbstractTextDocumentLayout_unregisterHandler2".}
 proc fcQAbstractTextDocumentLayout_update1(self: pointer, param1: pointer): void {.importc: "QAbstractTextDocumentLayout_update1".}
 proc fcQAbstractTextDocumentLayout_connect_update1(self: pointer, slot: int) {.importc: "QAbstractTextDocumentLayout_connect_update1".}
+proc fQAbstractTextDocumentLayout_virtualbase_metaObject(self: pointer, ): pointer{.importc: "QAbstractTextDocumentLayout_virtualbase_metaObject".}
+proc fcQAbstractTextDocumentLayout_override_virtual_metaObject(self: pointer, slot: int) {.importc: "QAbstractTextDocumentLayout_override_virtual_metaObject".}
+proc fQAbstractTextDocumentLayout_virtualbase_metacast(self: pointer, param1: cstring): pointer{.importc: "QAbstractTextDocumentLayout_virtualbase_metacast".}
+proc fcQAbstractTextDocumentLayout_override_virtual_metacast(self: pointer, slot: int) {.importc: "QAbstractTextDocumentLayout_override_virtual_metacast".}
+proc fQAbstractTextDocumentLayout_virtualbase_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint{.importc: "QAbstractTextDocumentLayout_virtualbase_metacall".}
+proc fcQAbstractTextDocumentLayout_override_virtual_metacall(self: pointer, slot: int) {.importc: "QAbstractTextDocumentLayout_override_virtual_metacall".}
 proc fcQAbstractTextDocumentLayout_override_virtual_draw(self: pointer, slot: int) {.importc: "QAbstractTextDocumentLayout_override_virtual_draw".}
 proc fcQAbstractTextDocumentLayout_override_virtual_hitTest(self: pointer, slot: int) {.importc: "QAbstractTextDocumentLayout_override_virtual_hitTest".}
 proc fcQAbstractTextDocumentLayout_override_virtual_pageCount(self: pointer, slot: int) {.importc: "QAbstractTextDocumentLayout_override_virtual_pageCount".}
@@ -131,6 +138,7 @@ proc fQAbstractTextDocumentLayout_virtualbase_connectNotify(self: pointer, signa
 proc fcQAbstractTextDocumentLayout_override_virtual_connectNotify(self: pointer, slot: int) {.importc: "QAbstractTextDocumentLayout_override_virtual_connectNotify".}
 proc fQAbstractTextDocumentLayout_virtualbase_disconnectNotify(self: pointer, signal: pointer): void{.importc: "QAbstractTextDocumentLayout_virtualbase_disconnectNotify".}
 proc fcQAbstractTextDocumentLayout_override_virtual_disconnectNotify(self: pointer, slot: int) {.importc: "QAbstractTextDocumentLayout_override_virtual_disconnectNotify".}
+proc fcQAbstractTextDocumentLayout_staticMetaObject(): pointer {.importc: "QAbstractTextDocumentLayout_staticMetaObject".}
 proc fcQAbstractTextDocumentLayout_delete(self: pointer) {.importc: "QAbstractTextDocumentLayout_delete".}
 proc fcQTextObjectInterface_intrinsicSize(self: pointer, doc: pointer, posInDocument: cint, format: pointer): pointer {.importc: "QTextObjectInterface_intrinsicSize".}
 proc fcQTextObjectInterface_drawObject(self: pointer, painter: pointer, rect: pointer, doc: pointer, posInDocument: cint, format: pointer): void {.importc: "QTextObjectInterface_drawObject".}
@@ -155,6 +163,9 @@ proc metaObject*(self: gen_qabstracttextdocumentlayout_types.QAbstractTextDocume
 
 proc metacast*(self: gen_qabstracttextdocumentlayout_types.QAbstractTextDocumentLayout, param1: cstring): pointer =
   fcQAbstractTextDocumentLayout_metacast(self.h, param1)
+
+proc metacall*(self: gen_qabstracttextdocumentlayout_types.QAbstractTextDocumentLayout, param1: cint, param2: cint, param3: pointer): cint =
+  fcQAbstractTextDocumentLayout_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qabstracttextdocumentlayout_types.QAbstractTextDocumentLayout, s: cstring): string =
   let v_ms = fcQAbstractTextDocumentLayout_tr(s)
@@ -309,6 +320,65 @@ proc onupdate*(self: gen_qabstracttextdocumentlayout_types.QAbstractTextDocument
   GC_ref(tmp)
   fcQAbstractTextDocumentLayout_connect_update1(self.h, cast[int](addr tmp[]))
 
+proc QAbstractTextDocumentLayoutmetaObject*(self: gen_qabstracttextdocumentlayout_types.QAbstractTextDocumentLayout, ): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fQAbstractTextDocumentLayout_virtualbase_metaObject(self.h))
+
+type QAbstractTextDocumentLayoutmetaObjectProc* = proc(): gen_qobjectdefs_types.QMetaObject
+proc onmetaObject*(self: gen_qabstracttextdocumentlayout_types.QAbstractTextDocumentLayout, slot: QAbstractTextDocumentLayoutmetaObjectProc) =
+  # TODO check subclass
+  var tmp = new QAbstractTextDocumentLayoutmetaObjectProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQAbstractTextDocumentLayout_override_virtual_metaObject(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QAbstractTextDocumentLayout_metaObject(self: ptr cQAbstractTextDocumentLayout, slot: int): pointer {.exportc: "miqt_exec_callback_QAbstractTextDocumentLayout_metaObject ".} =
+  var nimfunc = cast[ptr QAbstractTextDocumentLayoutmetaObjectProc](cast[pointer](slot))
+
+  let virtualReturn = nimfunc[]( )
+
+  virtualReturn.h
+proc QAbstractTextDocumentLayoutmetacast*(self: gen_qabstracttextdocumentlayout_types.QAbstractTextDocumentLayout, param1: cstring): pointer =
+  fQAbstractTextDocumentLayout_virtualbase_metacast(self.h, param1)
+
+type QAbstractTextDocumentLayoutmetacastProc* = proc(param1: cstring): pointer
+proc onmetacast*(self: gen_qabstracttextdocumentlayout_types.QAbstractTextDocumentLayout, slot: QAbstractTextDocumentLayoutmetacastProc) =
+  # TODO check subclass
+  var tmp = new QAbstractTextDocumentLayoutmetacastProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQAbstractTextDocumentLayout_override_virtual_metacast(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QAbstractTextDocumentLayout_metacast(self: ptr cQAbstractTextDocumentLayout, slot: int, param1: cstring): pointer {.exportc: "miqt_exec_callback_QAbstractTextDocumentLayout_metacast ".} =
+  var nimfunc = cast[ptr QAbstractTextDocumentLayoutmetacastProc](cast[pointer](slot))
+  let slotval1 = (param1)
+
+
+  let virtualReturn = nimfunc[](slotval1 )
+
+  virtualReturn
+proc QAbstractTextDocumentLayoutmetacall*(self: gen_qabstracttextdocumentlayout_types.QAbstractTextDocumentLayout, param1: cint, param2: cint, param3: pointer): cint =
+  fQAbstractTextDocumentLayout_virtualbase_metacall(self.h, cint(param1), param2, param3)
+
+type QAbstractTextDocumentLayoutmetacallProc* = proc(param1: cint, param2: cint, param3: pointer): cint
+proc onmetacall*(self: gen_qabstracttextdocumentlayout_types.QAbstractTextDocumentLayout, slot: QAbstractTextDocumentLayoutmetacallProc) =
+  # TODO check subclass
+  var tmp = new QAbstractTextDocumentLayoutmetacallProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQAbstractTextDocumentLayout_override_virtual_metacall(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QAbstractTextDocumentLayout_metacall(self: ptr cQAbstractTextDocumentLayout, slot: int, param1: cint, param2: cint, param3: pointer): cint {.exportc: "miqt_exec_callback_QAbstractTextDocumentLayout_metacall ".} =
+  var nimfunc = cast[ptr QAbstractTextDocumentLayoutmetacallProc](cast[pointer](slot))
+  let slotval1 = cint(param1)
+
+  let slotval2 = param2
+
+  let slotval3 = param3
+
+
+  let virtualReturn = nimfunc[](slotval1, slotval2, slotval3 )
+
+  virtualReturn
 type QAbstractTextDocumentLayoutdrawProc* = proc(painter: gen_qpainter_types.QPainter, context: gen_qabstracttextdocumentlayout_types.QAbstractTextDocumentLayoutPaintContext): void
 proc ondraw*(self: gen_qabstracttextdocumentlayout_types.QAbstractTextDocumentLayout, slot: QAbstractTextDocumentLayoutdrawProc) =
   # TODO check subclass
@@ -613,6 +683,8 @@ proc miqt_exec_callback_QAbstractTextDocumentLayout_disconnectNotify(self: ptr c
 
 
   nimfunc[](slotval1)
+proc staticMetaObject*(_: type gen_qabstracttextdocumentlayout_types.QAbstractTextDocumentLayout): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fcQAbstractTextDocumentLayout_staticMetaObject())
 proc delete*(self: gen_qabstracttextdocumentlayout_types.QAbstractTextDocumentLayout) =
   fcQAbstractTextDocumentLayout_delete(self.h)
 

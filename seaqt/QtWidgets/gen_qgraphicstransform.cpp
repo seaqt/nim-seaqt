@@ -19,6 +19,9 @@
 extern "C" {
 #endif
 
+QMetaObject* miqt_exec_callback_QGraphicsTransform_metaObject(const QGraphicsTransform*, intptr_t);
+void* miqt_exec_callback_QGraphicsTransform_metacast(QGraphicsTransform*, intptr_t, const char*);
+int miqt_exec_callback_QGraphicsTransform_metacall(QGraphicsTransform*, intptr_t, int, int, void**);
 void miqt_exec_callback_QGraphicsTransform_applyTo(const QGraphicsTransform*, intptr_t, QMatrix4x4*);
 bool miqt_exec_callback_QGraphicsTransform_event(QGraphicsTransform*, intptr_t, QEvent*);
 bool miqt_exec_callback_QGraphicsTransform_eventFilter(QGraphicsTransform*, intptr_t, QObject*, QEvent*);
@@ -32,6 +35,9 @@ void miqt_exec_callback_QGraphicsScale_xScaleChanged(intptr_t);
 void miqt_exec_callback_QGraphicsScale_yScaleChanged(intptr_t);
 void miqt_exec_callback_QGraphicsScale_zScaleChanged(intptr_t);
 void miqt_exec_callback_QGraphicsScale_scaleChanged(intptr_t);
+QMetaObject* miqt_exec_callback_QGraphicsScale_metaObject(const QGraphicsScale*, intptr_t);
+void* miqt_exec_callback_QGraphicsScale_metacast(QGraphicsScale*, intptr_t, const char*);
+int miqt_exec_callback_QGraphicsScale_metacall(QGraphicsScale*, intptr_t, int, int, void**);
 void miqt_exec_callback_QGraphicsScale_applyTo(const QGraphicsScale*, intptr_t, QMatrix4x4*);
 bool miqt_exec_callback_QGraphicsScale_event(QGraphicsScale*, intptr_t, QEvent*);
 bool miqt_exec_callback_QGraphicsScale_eventFilter(QGraphicsScale*, intptr_t, QObject*, QEvent*);
@@ -43,6 +49,9 @@ void miqt_exec_callback_QGraphicsScale_disconnectNotify(QGraphicsScale*, intptr_
 void miqt_exec_callback_QGraphicsRotation_originChanged(intptr_t);
 void miqt_exec_callback_QGraphicsRotation_angleChanged(intptr_t);
 void miqt_exec_callback_QGraphicsRotation_axisChanged(intptr_t);
+QMetaObject* miqt_exec_callback_QGraphicsRotation_metaObject(const QGraphicsRotation*, intptr_t);
+void* miqt_exec_callback_QGraphicsRotation_metacast(QGraphicsRotation*, intptr_t, const char*);
+int miqt_exec_callback_QGraphicsRotation_metacall(QGraphicsRotation*, intptr_t, int, int, void**);
 void miqt_exec_callback_QGraphicsRotation_applyTo(const QGraphicsRotation*, intptr_t, QMatrix4x4*);
 bool miqt_exec_callback_QGraphicsRotation_event(QGraphicsRotation*, intptr_t, QEvent*);
 bool miqt_exec_callback_QGraphicsRotation_eventFilter(QGraphicsRotation*, intptr_t, QObject*, QEvent*);
@@ -62,6 +71,62 @@ public:
 	VirtualQGraphicsTransform(QObject* parent): QGraphicsTransform(parent) {};
 
 	virtual ~VirtualQGraphicsTransform() override = default;
+
+	// cgo.Handle value for overwritten implementation
+	intptr_t handle__metaObject = 0;
+
+	// Subclass to allow providing a Go implementation
+	virtual const QMetaObject* metaObject() const override {
+		if (handle__metaObject == 0) {
+			return QGraphicsTransform::metaObject();
+		}
+		
+
+		QMetaObject* callback_return_value = miqt_exec_callback_QGraphicsTransform_metaObject(this, handle__metaObject);
+
+		return callback_return_value;
+	}
+
+	friend QMetaObject* QGraphicsTransform_virtualbase_metaObject(const void* self);
+
+	// cgo.Handle value for overwritten implementation
+	intptr_t handle__metacast = 0;
+
+	// Subclass to allow providing a Go implementation
+	virtual void* qt_metacast(const char* param1) override {
+		if (handle__metacast == 0) {
+			return QGraphicsTransform::qt_metacast(param1);
+		}
+		
+		const char* sigval1 = (const char*) param1;
+
+		void* callback_return_value = miqt_exec_callback_QGraphicsTransform_metacast(this, handle__metacast, sigval1);
+
+		return callback_return_value;
+	}
+
+	friend void* QGraphicsTransform_virtualbase_metacast(void* self, const char* param1);
+
+	// cgo.Handle value for overwritten implementation
+	intptr_t handle__metacall = 0;
+
+	// Subclass to allow providing a Go implementation
+	virtual int qt_metacall(QMetaObject::Call param1, int param2, void** param3) override {
+		if (handle__metacall == 0) {
+			return QGraphicsTransform::qt_metacall(param1, param2, param3);
+		}
+		
+		QMetaObject::Call param1_ret = param1;
+		int sigval1 = static_cast<int>(param1_ret);
+		int sigval2 = param2;
+		void** sigval3 = param3;
+
+		int callback_return_value = miqt_exec_callback_QGraphicsTransform_metacall(this, handle__metacall, sigval1, sigval2, sigval3);
+
+		return static_cast<int>(callback_return_value);
+	}
+
+	friend int QGraphicsTransform_virtualbase_metacall(void* self, int param1, int param2, void** param3);
 
 	// cgo.Handle value for overwritten implementation
 	intptr_t handle__applyTo = 0;
@@ -243,6 +308,10 @@ void* QGraphicsTransform_metacast(QGraphicsTransform* self, const char* param1) 
 	return self->qt_metacast(param1);
 }
 
+int QGraphicsTransform_metacall(QGraphicsTransform* self, int param1, int param2, void** param3) {
+	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
+}
+
 struct miqt_string QGraphicsTransform_tr(const char* s) {
 	QString _ret = QGraphicsTransform::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
@@ -278,6 +347,54 @@ struct miqt_string QGraphicsTransform_tr3(const char* s, const char* c, int n) {
 	_ms.data = static_cast<char*>(malloc(_ms.len));
 	memcpy(_ms.data, _b.data(), _ms.len);
 	return _ms;
+}
+
+bool QGraphicsTransform_override_virtual_metaObject(void* self, intptr_t slot) {
+	VirtualQGraphicsTransform* self_cast = dynamic_cast<VirtualQGraphicsTransform*>( (QGraphicsTransform*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+	
+	self_cast->handle__metaObject = slot;
+	return true;
+}
+
+QMetaObject* QGraphicsTransform_virtualbase_metaObject(const void* self) {
+
+	return (QMetaObject*) ( (const VirtualQGraphicsTransform*)(self) )->QGraphicsTransform::metaObject();
+
+}
+
+bool QGraphicsTransform_override_virtual_metacast(void* self, intptr_t slot) {
+	VirtualQGraphicsTransform* self_cast = dynamic_cast<VirtualQGraphicsTransform*>( (QGraphicsTransform*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+	
+	self_cast->handle__metacast = slot;
+	return true;
+}
+
+void* QGraphicsTransform_virtualbase_metacast(void* self, const char* param1) {
+
+	return ( (VirtualQGraphicsTransform*)(self) )->QGraphicsTransform::qt_metacast(param1);
+
+}
+
+bool QGraphicsTransform_override_virtual_metacall(void* self, intptr_t slot) {
+	VirtualQGraphicsTransform* self_cast = dynamic_cast<VirtualQGraphicsTransform*>( (QGraphicsTransform*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+	
+	self_cast->handle__metacall = slot;
+	return true;
+}
+
+int QGraphicsTransform_virtualbase_metacall(void* self, int param1, int param2, void** param3) {
+
+	return ( (VirtualQGraphicsTransform*)(self) )->QGraphicsTransform::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
+
 }
 
 bool QGraphicsTransform_override_virtual_applyTo(void* self, intptr_t slot) {
@@ -402,6 +519,7 @@ void QGraphicsTransform_virtualbase_disconnectNotify(void* self, QMetaMethod* si
 
 }
 
+const QMetaObject* QGraphicsTransform_staticMetaObject() { return &QGraphicsTransform::staticMetaObject; }
 void QGraphicsTransform_protectedbase_update(bool* _dynamic_cast_ok, void* self) {
 	VirtualQGraphicsTransform* self_cast = dynamic_cast<VirtualQGraphicsTransform*>( (QGraphicsTransform*)(self) );
 	if (self_cast == nullptr) {
@@ -478,6 +596,62 @@ public:
 	VirtualQGraphicsScale(QObject* parent): QGraphicsScale(parent) {};
 
 	virtual ~VirtualQGraphicsScale() override = default;
+
+	// cgo.Handle value for overwritten implementation
+	intptr_t handle__metaObject = 0;
+
+	// Subclass to allow providing a Go implementation
+	virtual const QMetaObject* metaObject() const override {
+		if (handle__metaObject == 0) {
+			return QGraphicsScale::metaObject();
+		}
+		
+
+		QMetaObject* callback_return_value = miqt_exec_callback_QGraphicsScale_metaObject(this, handle__metaObject);
+
+		return callback_return_value;
+	}
+
+	friend QMetaObject* QGraphicsScale_virtualbase_metaObject(const void* self);
+
+	// cgo.Handle value for overwritten implementation
+	intptr_t handle__metacast = 0;
+
+	// Subclass to allow providing a Go implementation
+	virtual void* qt_metacast(const char* param1) override {
+		if (handle__metacast == 0) {
+			return QGraphicsScale::qt_metacast(param1);
+		}
+		
+		const char* sigval1 = (const char*) param1;
+
+		void* callback_return_value = miqt_exec_callback_QGraphicsScale_metacast(this, handle__metacast, sigval1);
+
+		return callback_return_value;
+	}
+
+	friend void* QGraphicsScale_virtualbase_metacast(void* self, const char* param1);
+
+	// cgo.Handle value for overwritten implementation
+	intptr_t handle__metacall = 0;
+
+	// Subclass to allow providing a Go implementation
+	virtual int qt_metacall(QMetaObject::Call param1, int param2, void** param3) override {
+		if (handle__metacall == 0) {
+			return QGraphicsScale::qt_metacall(param1, param2, param3);
+		}
+		
+		QMetaObject::Call param1_ret = param1;
+		int sigval1 = static_cast<int>(param1_ret);
+		int sigval2 = param2;
+		void** sigval3 = param3;
+
+		int callback_return_value = miqt_exec_callback_QGraphicsScale_metacall(this, handle__metacall, sigval1, sigval2, sigval3);
+
+		return static_cast<int>(callback_return_value);
+	}
+
+	friend int QGraphicsScale_virtualbase_metacall(void* self, int param1, int param2, void** param3);
 
 	// cgo.Handle value for overwritten implementation
 	intptr_t handle__applyTo = 0;
@@ -662,6 +836,10 @@ void* QGraphicsScale_metacast(QGraphicsScale* self, const char* param1) {
 	return self->qt_metacast(param1);
 }
 
+int QGraphicsScale_metacall(QGraphicsScale* self, int param1, int param2, void** param3) {
+	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
+}
+
 struct miqt_string QGraphicsScale_tr(const char* s) {
 	QString _ret = QGraphicsScale::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
@@ -782,6 +960,54 @@ struct miqt_string QGraphicsScale_tr3(const char* s, const char* c, int n) {
 	_ms.data = static_cast<char*>(malloc(_ms.len));
 	memcpy(_ms.data, _b.data(), _ms.len);
 	return _ms;
+}
+
+bool QGraphicsScale_override_virtual_metaObject(void* self, intptr_t slot) {
+	VirtualQGraphicsScale* self_cast = dynamic_cast<VirtualQGraphicsScale*>( (QGraphicsScale*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+	
+	self_cast->handle__metaObject = slot;
+	return true;
+}
+
+QMetaObject* QGraphicsScale_virtualbase_metaObject(const void* self) {
+
+	return (QMetaObject*) ( (const VirtualQGraphicsScale*)(self) )->QGraphicsScale::metaObject();
+
+}
+
+bool QGraphicsScale_override_virtual_metacast(void* self, intptr_t slot) {
+	VirtualQGraphicsScale* self_cast = dynamic_cast<VirtualQGraphicsScale*>( (QGraphicsScale*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+	
+	self_cast->handle__metacast = slot;
+	return true;
+}
+
+void* QGraphicsScale_virtualbase_metacast(void* self, const char* param1) {
+
+	return ( (VirtualQGraphicsScale*)(self) )->QGraphicsScale::qt_metacast(param1);
+
+}
+
+bool QGraphicsScale_override_virtual_metacall(void* self, intptr_t slot) {
+	VirtualQGraphicsScale* self_cast = dynamic_cast<VirtualQGraphicsScale*>( (QGraphicsScale*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+	
+	self_cast->handle__metacall = slot;
+	return true;
+}
+
+int QGraphicsScale_virtualbase_metacall(void* self, int param1, int param2, void** param3) {
+
+	return ( (VirtualQGraphicsScale*)(self) )->QGraphicsScale::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
+
 }
 
 bool QGraphicsScale_override_virtual_applyTo(void* self, intptr_t slot) {
@@ -912,6 +1138,7 @@ void QGraphicsScale_virtualbase_disconnectNotify(void* self, QMetaMethod* signal
 
 }
 
+const QMetaObject* QGraphicsScale_staticMetaObject() { return &QGraphicsScale::staticMetaObject; }
 void QGraphicsScale_protectedbase_update(bool* _dynamic_cast_ok, void* self) {
 	VirtualQGraphicsScale* self_cast = dynamic_cast<VirtualQGraphicsScale*>( (QGraphicsScale*)(self) );
 	if (self_cast == nullptr) {
@@ -988,6 +1215,62 @@ public:
 	VirtualQGraphicsRotation(QObject* parent): QGraphicsRotation(parent) {};
 
 	virtual ~VirtualQGraphicsRotation() override = default;
+
+	// cgo.Handle value for overwritten implementation
+	intptr_t handle__metaObject = 0;
+
+	// Subclass to allow providing a Go implementation
+	virtual const QMetaObject* metaObject() const override {
+		if (handle__metaObject == 0) {
+			return QGraphicsRotation::metaObject();
+		}
+		
+
+		QMetaObject* callback_return_value = miqt_exec_callback_QGraphicsRotation_metaObject(this, handle__metaObject);
+
+		return callback_return_value;
+	}
+
+	friend QMetaObject* QGraphicsRotation_virtualbase_metaObject(const void* self);
+
+	// cgo.Handle value for overwritten implementation
+	intptr_t handle__metacast = 0;
+
+	// Subclass to allow providing a Go implementation
+	virtual void* qt_metacast(const char* param1) override {
+		if (handle__metacast == 0) {
+			return QGraphicsRotation::qt_metacast(param1);
+		}
+		
+		const char* sigval1 = (const char*) param1;
+
+		void* callback_return_value = miqt_exec_callback_QGraphicsRotation_metacast(this, handle__metacast, sigval1);
+
+		return callback_return_value;
+	}
+
+	friend void* QGraphicsRotation_virtualbase_metacast(void* self, const char* param1);
+
+	// cgo.Handle value for overwritten implementation
+	intptr_t handle__metacall = 0;
+
+	// Subclass to allow providing a Go implementation
+	virtual int qt_metacall(QMetaObject::Call param1, int param2, void** param3) override {
+		if (handle__metacall == 0) {
+			return QGraphicsRotation::qt_metacall(param1, param2, param3);
+		}
+		
+		QMetaObject::Call param1_ret = param1;
+		int sigval1 = static_cast<int>(param1_ret);
+		int sigval2 = param2;
+		void** sigval3 = param3;
+
+		int callback_return_value = miqt_exec_callback_QGraphicsRotation_metacall(this, handle__metacall, sigval1, sigval2, sigval3);
+
+		return static_cast<int>(callback_return_value);
+	}
+
+	friend int QGraphicsRotation_virtualbase_metacall(void* self, int param1, int param2, void** param3);
 
 	// cgo.Handle value for overwritten implementation
 	intptr_t handle__applyTo = 0;
@@ -1172,6 +1455,10 @@ void* QGraphicsRotation_metacast(QGraphicsRotation* self, const char* param1) {
 	return self->qt_metacast(param1);
 }
 
+int QGraphicsRotation_metacall(QGraphicsRotation* self, int param1, int param2, void** param3) {
+	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
+}
+
 struct miqt_string QGraphicsRotation_tr(const char* s) {
 	QString _ret = QGraphicsRotation::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
@@ -1266,6 +1553,54 @@ struct miqt_string QGraphicsRotation_tr3(const char* s, const char* c, int n) {
 	_ms.data = static_cast<char*>(malloc(_ms.len));
 	memcpy(_ms.data, _b.data(), _ms.len);
 	return _ms;
+}
+
+bool QGraphicsRotation_override_virtual_metaObject(void* self, intptr_t slot) {
+	VirtualQGraphicsRotation* self_cast = dynamic_cast<VirtualQGraphicsRotation*>( (QGraphicsRotation*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+	
+	self_cast->handle__metaObject = slot;
+	return true;
+}
+
+QMetaObject* QGraphicsRotation_virtualbase_metaObject(const void* self) {
+
+	return (QMetaObject*) ( (const VirtualQGraphicsRotation*)(self) )->QGraphicsRotation::metaObject();
+
+}
+
+bool QGraphicsRotation_override_virtual_metacast(void* self, intptr_t slot) {
+	VirtualQGraphicsRotation* self_cast = dynamic_cast<VirtualQGraphicsRotation*>( (QGraphicsRotation*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+	
+	self_cast->handle__metacast = slot;
+	return true;
+}
+
+void* QGraphicsRotation_virtualbase_metacast(void* self, const char* param1) {
+
+	return ( (VirtualQGraphicsRotation*)(self) )->QGraphicsRotation::qt_metacast(param1);
+
+}
+
+bool QGraphicsRotation_override_virtual_metacall(void* self, intptr_t slot) {
+	VirtualQGraphicsRotation* self_cast = dynamic_cast<VirtualQGraphicsRotation*>( (QGraphicsRotation*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+	
+	self_cast->handle__metacall = slot;
+	return true;
+}
+
+int QGraphicsRotation_virtualbase_metacall(void* self, int param1, int param2, void** param3) {
+
+	return ( (VirtualQGraphicsRotation*)(self) )->QGraphicsRotation::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
+
 }
 
 bool QGraphicsRotation_override_virtual_applyTo(void* self, intptr_t slot) {
@@ -1396,6 +1731,7 @@ void QGraphicsRotation_virtualbase_disconnectNotify(void* self, QMetaMethod* sig
 
 }
 
+const QMetaObject* QGraphicsRotation_staticMetaObject() { return &QGraphicsRotation::staticMetaObject; }
 void QGraphicsRotation_protectedbase_update(bool* _dynamic_cast_ok, void* self) {
 	VirtualQGraphicsRotation* self_cast = dynamic_cast<VirtualQGraphicsRotation*>( (QGraphicsRotation*)(self) );
 	if (self_cast == nullptr) {

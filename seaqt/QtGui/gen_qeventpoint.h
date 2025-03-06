@@ -79,6 +79,7 @@ QSizeF* QEventPoint_ellipseDiameters(const QEventPoint* self);
 bool QEventPoint_isAccepted(const QEventPoint* self);
 void QEventPoint_setAccepted(QEventPoint* self);
 void QEventPoint_setAccepted1(QEventPoint* self, bool accepted);
+const QMetaObject* QEventPoint_staticMetaObject();
 void QEventPoint_delete(QEventPoint* self);
 
 #ifdef __cplusplus

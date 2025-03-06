@@ -110,6 +110,7 @@ proc fcQListView_new(parent: pointer): ptr cQListView {.importc: "QListView_new"
 proc fcQListView_new2(): ptr cQListView {.importc: "QListView_new2".}
 proc fcQListView_metaObject(self: pointer, ): pointer {.importc: "QListView_metaObject".}
 proc fcQListView_metacast(self: pointer, param1: cstring): pointer {.importc: "QListView_metacast".}
+proc fcQListView_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QListView_metacall".}
 proc fcQListView_tr(s: cstring): struct_miqt_string {.importc: "QListView_tr".}
 proc fcQListView_setMovement(self: pointer, movement: cint): void {.importc: "QListView_setMovement".}
 proc fcQListView_movement(self: pointer, ): cint {.importc: "QListView_movement".}
@@ -152,6 +153,12 @@ proc fcQListView_indexesMoved(self: pointer, indexes: struct_miqt_array): void {
 proc fcQListView_connect_indexesMoved(self: pointer, slot: int) {.importc: "QListView_connect_indexesMoved".}
 proc fcQListView_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QListView_tr2".}
 proc fcQListView_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QListView_tr3".}
+proc fQListView_virtualbase_metaObject(self: pointer, ): pointer{.importc: "QListView_virtualbase_metaObject".}
+proc fcQListView_override_virtual_metaObject(self: pointer, slot: int) {.importc: "QListView_override_virtual_metaObject".}
+proc fQListView_virtualbase_metacast(self: pointer, param1: cstring): pointer{.importc: "QListView_virtualbase_metacast".}
+proc fcQListView_override_virtual_metacast(self: pointer, slot: int) {.importc: "QListView_override_virtual_metacast".}
+proc fQListView_virtualbase_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint{.importc: "QListView_virtualbase_metacall".}
+proc fcQListView_override_virtual_metacall(self: pointer, slot: int) {.importc: "QListView_override_virtual_metacall".}
 proc fQListView_virtualbase_visualRect(self: pointer, index: pointer): pointer{.importc: "QListView_virtualbase_visualRect".}
 proc fcQListView_override_virtual_visualRect(self: pointer, slot: int) {.importc: "QListView_override_virtual_visualRect".}
 proc fQListView_virtualbase_scrollTo(self: pointer, index: pointer, hint: cint): void{.importc: "QListView_virtualbase_scrollTo".}
@@ -334,6 +341,7 @@ proc fQListView_virtualbase_connectNotify(self: pointer, signal: pointer): void{
 proc fcQListView_override_virtual_connectNotify(self: pointer, slot: int) {.importc: "QListView_override_virtual_connectNotify".}
 proc fQListView_virtualbase_disconnectNotify(self: pointer, signal: pointer): void{.importc: "QListView_virtualbase_disconnectNotify".}
 proc fcQListView_override_virtual_disconnectNotify(self: pointer, slot: int) {.importc: "QListView_override_virtual_disconnectNotify".}
+proc fcQListView_staticMetaObject(): pointer {.importc: "QListView_staticMetaObject".}
 proc fcQListView_delete(self: pointer) {.importc: "QListView_delete".}
 
 
@@ -350,6 +358,9 @@ proc metaObject*(self: gen_qlistview_types.QListView, ): gen_qobjectdefs_types.Q
 
 proc metacast*(self: gen_qlistview_types.QListView, param1: cstring): pointer =
   fcQListView_metacast(self.h, param1)
+
+proc metacall*(self: gen_qlistview_types.QListView, param1: cint, param2: cint, param3: pointer): cint =
+  fcQListView_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qlistview_types.QListView, s: cstring): string =
   let v_ms = fcQListView_tr(s)
@@ -505,6 +516,65 @@ proc tr*(_: type gen_qlistview_types.QListView, s: cstring, c: cstring, n: cint)
   c_free(v_ms.data)
   vx_ret
 
+proc QListViewmetaObject*(self: gen_qlistview_types.QListView, ): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fQListView_virtualbase_metaObject(self.h))
+
+type QListViewmetaObjectProc* = proc(): gen_qobjectdefs_types.QMetaObject
+proc onmetaObject*(self: gen_qlistview_types.QListView, slot: QListViewmetaObjectProc) =
+  # TODO check subclass
+  var tmp = new QListViewmetaObjectProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQListView_override_virtual_metaObject(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QListView_metaObject(self: ptr cQListView, slot: int): pointer {.exportc: "miqt_exec_callback_QListView_metaObject ".} =
+  var nimfunc = cast[ptr QListViewmetaObjectProc](cast[pointer](slot))
+
+  let virtualReturn = nimfunc[]( )
+
+  virtualReturn.h
+proc QListViewmetacast*(self: gen_qlistview_types.QListView, param1: cstring): pointer =
+  fQListView_virtualbase_metacast(self.h, param1)
+
+type QListViewmetacastProc* = proc(param1: cstring): pointer
+proc onmetacast*(self: gen_qlistview_types.QListView, slot: QListViewmetacastProc) =
+  # TODO check subclass
+  var tmp = new QListViewmetacastProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQListView_override_virtual_metacast(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QListView_metacast(self: ptr cQListView, slot: int, param1: cstring): pointer {.exportc: "miqt_exec_callback_QListView_metacast ".} =
+  var nimfunc = cast[ptr QListViewmetacastProc](cast[pointer](slot))
+  let slotval1 = (param1)
+
+
+  let virtualReturn = nimfunc[](slotval1 )
+
+  virtualReturn
+proc QListViewmetacall*(self: gen_qlistview_types.QListView, param1: cint, param2: cint, param3: pointer): cint =
+  fQListView_virtualbase_metacall(self.h, cint(param1), param2, param3)
+
+type QListViewmetacallProc* = proc(param1: cint, param2: cint, param3: pointer): cint
+proc onmetacall*(self: gen_qlistview_types.QListView, slot: QListViewmetacallProc) =
+  # TODO check subclass
+  var tmp = new QListViewmetacallProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQListView_override_virtual_metacall(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QListView_metacall(self: ptr cQListView, slot: int, param1: cint, param2: cint, param3: pointer): cint {.exportc: "miqt_exec_callback_QListView_metacall ".} =
+  var nimfunc = cast[ptr QListViewmetacallProc](cast[pointer](slot))
+  let slotval1 = cint(param1)
+
+  let slotval2 = param2
+
+  let slotval3 = param3
+
+
+  let virtualReturn = nimfunc[](slotval1, slotval2, slotval3 )
+
+  virtualReturn
 proc QListViewvisualRect*(self: gen_qlistview_types.QListView, index: gen_qabstractitemmodel_types.QModelIndex): gen_qrect_types.QRect =
   gen_qrect_types.QRect(h: fQListView_virtualbase_visualRect(self.h, index.h))
 
@@ -2140,5 +2210,7 @@ proc miqt_exec_callback_QListView_disconnectNotify(self: ptr cQListView, slot: i
 
 
   nimfunc[](slotval1)
+proc staticMetaObject*(_: type gen_qlistview_types.QListView): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fcQListView_staticMetaObject())
 proc delete*(self: gen_qlistview_types.QListView) =
   fcQListView_delete(self.h)

@@ -76,6 +76,7 @@ proc fcQAbstractButton_new(parent: pointer): ptr cQAbstractButton {.importc: "QA
 proc fcQAbstractButton_new2(): ptr cQAbstractButton {.importc: "QAbstractButton_new2".}
 proc fcQAbstractButton_metaObject(self: pointer, ): pointer {.importc: "QAbstractButton_metaObject".}
 proc fcQAbstractButton_metacast(self: pointer, param1: cstring): pointer {.importc: "QAbstractButton_metacast".}
+proc fcQAbstractButton_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QAbstractButton_metacall".}
 proc fcQAbstractButton_tr(s: cstring): struct_miqt_string {.importc: "QAbstractButton_tr".}
 proc fcQAbstractButton_setText(self: pointer, text: struct_miqt_string): void {.importc: "QAbstractButton_setText".}
 proc fcQAbstractButton_text(self: pointer, ): struct_miqt_string {.importc: "QAbstractButton_text".}
@@ -115,6 +116,12 @@ proc fcQAbstractButton_tr2(s: cstring, c: cstring): struct_miqt_string {.importc
 proc fcQAbstractButton_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QAbstractButton_tr3".}
 proc fcQAbstractButton_clicked1(self: pointer, checked: bool): void {.importc: "QAbstractButton_clicked1".}
 proc fcQAbstractButton_connect_clicked1(self: pointer, slot: int) {.importc: "QAbstractButton_connect_clicked1".}
+proc fQAbstractButton_virtualbase_metaObject(self: pointer, ): pointer{.importc: "QAbstractButton_virtualbase_metaObject".}
+proc fcQAbstractButton_override_virtual_metaObject(self: pointer, slot: int) {.importc: "QAbstractButton_override_virtual_metaObject".}
+proc fQAbstractButton_virtualbase_metacast(self: pointer, param1: cstring): pointer{.importc: "QAbstractButton_virtualbase_metacast".}
+proc fcQAbstractButton_override_virtual_metacast(self: pointer, slot: int) {.importc: "QAbstractButton_override_virtual_metacast".}
+proc fQAbstractButton_virtualbase_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint{.importc: "QAbstractButton_virtualbase_metacall".}
+proc fcQAbstractButton_override_virtual_metacall(self: pointer, slot: int) {.importc: "QAbstractButton_override_virtual_metacall".}
 proc fcQAbstractButton_override_virtual_paintEvent(self: pointer, slot: int) {.importc: "QAbstractButton_override_virtual_paintEvent".}
 proc fQAbstractButton_virtualbase_hitButton(self: pointer, pos: pointer): bool{.importc: "QAbstractButton_virtualbase_hitButton".}
 proc fcQAbstractButton_override_virtual_hitButton(self: pointer, slot: int) {.importc: "QAbstractButton_override_virtual_hitButton".}
@@ -214,6 +221,7 @@ proc fQAbstractButton_virtualbase_connectNotify(self: pointer, signal: pointer):
 proc fcQAbstractButton_override_virtual_connectNotify(self: pointer, slot: int) {.importc: "QAbstractButton_override_virtual_connectNotify".}
 proc fQAbstractButton_virtualbase_disconnectNotify(self: pointer, signal: pointer): void{.importc: "QAbstractButton_virtualbase_disconnectNotify".}
 proc fcQAbstractButton_override_virtual_disconnectNotify(self: pointer, slot: int) {.importc: "QAbstractButton_override_virtual_disconnectNotify".}
+proc fcQAbstractButton_staticMetaObject(): pointer {.importc: "QAbstractButton_staticMetaObject".}
 proc fcQAbstractButton_delete(self: pointer) {.importc: "QAbstractButton_delete".}
 
 
@@ -230,6 +238,9 @@ proc metaObject*(self: gen_qabstractbutton_types.QAbstractButton, ): gen_qobject
 
 proc metacast*(self: gen_qabstractbutton_types.QAbstractButton, param1: cstring): pointer =
   fcQAbstractButton_metacast(self.h, param1)
+
+proc metacall*(self: gen_qabstractbutton_types.QAbstractButton, param1: cint, param2: cint, param3: pointer): cint =
+  fcQAbstractButton_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qabstractbutton_types.QAbstractButton, s: cstring): string =
   let v_ms = fcQAbstractButton_tr(s)
@@ -404,6 +415,65 @@ proc onclicked*(self: gen_qabstractbutton_types.QAbstractButton, slot: QAbstract
   GC_ref(tmp)
   fcQAbstractButton_connect_clicked1(self.h, cast[int](addr tmp[]))
 
+proc QAbstractButtonmetaObject*(self: gen_qabstractbutton_types.QAbstractButton, ): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fQAbstractButton_virtualbase_metaObject(self.h))
+
+type QAbstractButtonmetaObjectProc* = proc(): gen_qobjectdefs_types.QMetaObject
+proc onmetaObject*(self: gen_qabstractbutton_types.QAbstractButton, slot: QAbstractButtonmetaObjectProc) =
+  # TODO check subclass
+  var tmp = new QAbstractButtonmetaObjectProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQAbstractButton_override_virtual_metaObject(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QAbstractButton_metaObject(self: ptr cQAbstractButton, slot: int): pointer {.exportc: "miqt_exec_callback_QAbstractButton_metaObject ".} =
+  var nimfunc = cast[ptr QAbstractButtonmetaObjectProc](cast[pointer](slot))
+
+  let virtualReturn = nimfunc[]( )
+
+  virtualReturn.h
+proc QAbstractButtonmetacast*(self: gen_qabstractbutton_types.QAbstractButton, param1: cstring): pointer =
+  fQAbstractButton_virtualbase_metacast(self.h, param1)
+
+type QAbstractButtonmetacastProc* = proc(param1: cstring): pointer
+proc onmetacast*(self: gen_qabstractbutton_types.QAbstractButton, slot: QAbstractButtonmetacastProc) =
+  # TODO check subclass
+  var tmp = new QAbstractButtonmetacastProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQAbstractButton_override_virtual_metacast(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QAbstractButton_metacast(self: ptr cQAbstractButton, slot: int, param1: cstring): pointer {.exportc: "miqt_exec_callback_QAbstractButton_metacast ".} =
+  var nimfunc = cast[ptr QAbstractButtonmetacastProc](cast[pointer](slot))
+  let slotval1 = (param1)
+
+
+  let virtualReturn = nimfunc[](slotval1 )
+
+  virtualReturn
+proc QAbstractButtonmetacall*(self: gen_qabstractbutton_types.QAbstractButton, param1: cint, param2: cint, param3: pointer): cint =
+  fQAbstractButton_virtualbase_metacall(self.h, cint(param1), param2, param3)
+
+type QAbstractButtonmetacallProc* = proc(param1: cint, param2: cint, param3: pointer): cint
+proc onmetacall*(self: gen_qabstractbutton_types.QAbstractButton, slot: QAbstractButtonmetacallProc) =
+  # TODO check subclass
+  var tmp = new QAbstractButtonmetacallProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQAbstractButton_override_virtual_metacall(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QAbstractButton_metacall(self: ptr cQAbstractButton, slot: int, param1: cint, param2: cint, param3: pointer): cint {.exportc: "miqt_exec_callback_QAbstractButton_metacall ".} =
+  var nimfunc = cast[ptr QAbstractButtonmetacallProc](cast[pointer](slot))
+  let slotval1 = cint(param1)
+
+  let slotval2 = param2
+
+  let slotval3 = param3
+
+
+  let virtualReturn = nimfunc[](slotval1, slotval2, slotval3 )
+
+  virtualReturn
 type QAbstractButtonpaintEventProc* = proc(e: gen_qevent_types.QPaintEvent): void
 proc onpaintEvent*(self: gen_qabstractbutton_types.QAbstractButton, slot: QAbstractButtonpaintEventProc) =
   # TODO check subclass
@@ -1274,5 +1344,7 @@ proc miqt_exec_callback_QAbstractButton_disconnectNotify(self: ptr cQAbstractBut
 
 
   nimfunc[](slotval1)
+proc staticMetaObject*(_: type gen_qabstractbutton_types.QAbstractButton): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fcQAbstractButton_staticMetaObject())
 proc delete*(self: gen_qabstractbutton_types.QAbstractButton) =
   fcQAbstractButton_delete(self.h)

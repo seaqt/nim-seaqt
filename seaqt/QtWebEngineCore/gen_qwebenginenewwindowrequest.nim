@@ -61,6 +61,7 @@ type cQWebEngineNewWindowRequest*{.exportc: "QWebEngineNewWindowRequest", incomp
 
 proc fcQWebEngineNewWindowRequest_metaObject(self: pointer, ): pointer {.importc: "QWebEngineNewWindowRequest_metaObject".}
 proc fcQWebEngineNewWindowRequest_metacast(self: pointer, param1: cstring): pointer {.importc: "QWebEngineNewWindowRequest_metacast".}
+proc fcQWebEngineNewWindowRequest_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QWebEngineNewWindowRequest_metacall".}
 proc fcQWebEngineNewWindowRequest_tr(s: cstring): struct_miqt_string {.importc: "QWebEngineNewWindowRequest_tr".}
 proc fcQWebEngineNewWindowRequest_destination(self: pointer, ): cint {.importc: "QWebEngineNewWindowRequest_destination".}
 proc fcQWebEngineNewWindowRequest_requestedUrl(self: pointer, ): pointer {.importc: "QWebEngineNewWindowRequest_requestedUrl".}
@@ -69,6 +70,7 @@ proc fcQWebEngineNewWindowRequest_isUserInitiated(self: pointer, ): bool {.impor
 proc fcQWebEngineNewWindowRequest_openIn(self: pointer, param1: pointer): void {.importc: "QWebEngineNewWindowRequest_openIn".}
 proc fcQWebEngineNewWindowRequest_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QWebEngineNewWindowRequest_tr2".}
 proc fcQWebEngineNewWindowRequest_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QWebEngineNewWindowRequest_tr3".}
+proc fcQWebEngineNewWindowRequest_staticMetaObject(): pointer {.importc: "QWebEngineNewWindowRequest_staticMetaObject".}
 proc fcQWebEngineNewWindowRequest_delete(self: pointer) {.importc: "QWebEngineNewWindowRequest_delete".}
 
 
@@ -79,6 +81,9 @@ proc metaObject*(self: gen_qwebenginenewwindowrequest_types.QWebEngineNewWindowR
 
 proc metacast*(self: gen_qwebenginenewwindowrequest_types.QWebEngineNewWindowRequest, param1: cstring): pointer =
   fcQWebEngineNewWindowRequest_metacast(self.h, param1)
+
+proc metacall*(self: gen_qwebenginenewwindowrequest_types.QWebEngineNewWindowRequest, param1: cint, param2: cint, param3: pointer): cint =
+  fcQWebEngineNewWindowRequest_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qwebenginenewwindowrequest_types.QWebEngineNewWindowRequest, s: cstring): string =
   let v_ms = fcQWebEngineNewWindowRequest_tr(s)
@@ -113,5 +118,7 @@ proc tr*(_: type gen_qwebenginenewwindowrequest_types.QWebEngineNewWindowRequest
   c_free(v_ms.data)
   vx_ret
 
+proc staticMetaObject*(_: type gen_qwebenginenewwindowrequest_types.QWebEngineNewWindowRequest): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fcQWebEngineNewWindowRequest_staticMetaObject())
 proc delete*(self: gen_qwebenginenewwindowrequest_types.QWebEngineNewWindowRequest) =
   fcQWebEngineNewWindowRequest_delete(self.h)

@@ -32,6 +32,7 @@ Disambiguated_t* Disambiguated_t_new();
 Disambiguated_t* Disambiguated_t_new2(Disambiguated_t* param1);
 void Disambiguated_t_delete(Disambiguated_t* self);
 
+bool QInternal_activateCallbacks(int param1, void** param2);
 void QInternal_delete(QInternal* self);
 
 QKeyCombination* QKeyCombination_new();

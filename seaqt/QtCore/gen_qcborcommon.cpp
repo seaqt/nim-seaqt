@@ -29,6 +29,7 @@ struct miqt_string QCborError_toString(const QCborError* self) {
 	return _ms;
 }
 
+const QMetaObject* QCborError_staticMetaObject() { return &QCborError::staticMetaObject; }
 void QCborError_delete(QCborError* self) {
 	delete self;
 }

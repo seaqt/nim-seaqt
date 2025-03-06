@@ -96,6 +96,7 @@ proc fcQFrame_new2(): ptr cQFrame {.importc: "QFrame_new2".}
 proc fcQFrame_new3(parent: pointer, f: cint): ptr cQFrame {.importc: "QFrame_new3".}
 proc fcQFrame_metaObject(self: pointer, ): pointer {.importc: "QFrame_metaObject".}
 proc fcQFrame_metacast(self: pointer, param1: cstring): pointer {.importc: "QFrame_metacast".}
+proc fcQFrame_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QFrame_metacall".}
 proc fcQFrame_tr(s: cstring): struct_miqt_string {.importc: "QFrame_tr".}
 proc fcQFrame_frameStyle(self: pointer, ): cint {.importc: "QFrame_frameStyle".}
 proc fcQFrame_setFrameStyle(self: pointer, frameStyle: cint): void {.importc: "QFrame_setFrameStyle".}
@@ -113,6 +114,12 @@ proc fcQFrame_frameRect(self: pointer, ): pointer {.importc: "QFrame_frameRect".
 proc fcQFrame_setFrameRect(self: pointer, frameRect: pointer): void {.importc: "QFrame_setFrameRect".}
 proc fcQFrame_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QFrame_tr2".}
 proc fcQFrame_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QFrame_tr3".}
+proc fQFrame_virtualbase_metaObject(self: pointer, ): pointer{.importc: "QFrame_virtualbase_metaObject".}
+proc fcQFrame_override_virtual_metaObject(self: pointer, slot: int) {.importc: "QFrame_override_virtual_metaObject".}
+proc fQFrame_virtualbase_metacast(self: pointer, param1: cstring): pointer{.importc: "QFrame_virtualbase_metacast".}
+proc fcQFrame_override_virtual_metacast(self: pointer, slot: int) {.importc: "QFrame_override_virtual_metacast".}
+proc fQFrame_virtualbase_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint{.importc: "QFrame_virtualbase_metacall".}
+proc fcQFrame_override_virtual_metacall(self: pointer, slot: int) {.importc: "QFrame_override_virtual_metacall".}
 proc fQFrame_virtualbase_sizeHint(self: pointer, ): pointer{.importc: "QFrame_virtualbase_sizeHint".}
 proc fcQFrame_override_virtual_sizeHint(self: pointer, slot: int) {.importc: "QFrame_override_virtual_sizeHint".}
 proc fQFrame_virtualbase_event(self: pointer, e: pointer): bool{.importc: "QFrame_virtualbase_event".}
@@ -209,6 +216,7 @@ proc fQFrame_virtualbase_connectNotify(self: pointer, signal: pointer): void{.im
 proc fcQFrame_override_virtual_connectNotify(self: pointer, slot: int) {.importc: "QFrame_override_virtual_connectNotify".}
 proc fQFrame_virtualbase_disconnectNotify(self: pointer, signal: pointer): void{.importc: "QFrame_virtualbase_disconnectNotify".}
 proc fcQFrame_override_virtual_disconnectNotify(self: pointer, slot: int) {.importc: "QFrame_override_virtual_disconnectNotify".}
+proc fcQFrame_staticMetaObject(): pointer {.importc: "QFrame_staticMetaObject".}
 proc fcQFrame_delete(self: pointer) {.importc: "QFrame_delete".}
 
 
@@ -228,6 +236,9 @@ proc metaObject*(self: gen_qframe_types.QFrame, ): gen_qobjectdefs_types.QMetaOb
 
 proc metacast*(self: gen_qframe_types.QFrame, param1: cstring): pointer =
   fcQFrame_metacast(self.h, param1)
+
+proc metacall*(self: gen_qframe_types.QFrame, param1: cint, param2: cint, param3: pointer): cint =
+  fcQFrame_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qframe_types.QFrame, s: cstring): string =
   let v_ms = fcQFrame_tr(s)
@@ -289,6 +300,65 @@ proc tr*(_: type gen_qframe_types.QFrame, s: cstring, c: cstring, n: cint): stri
   c_free(v_ms.data)
   vx_ret
 
+proc QFramemetaObject*(self: gen_qframe_types.QFrame, ): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fQFrame_virtualbase_metaObject(self.h))
+
+type QFramemetaObjectProc* = proc(): gen_qobjectdefs_types.QMetaObject
+proc onmetaObject*(self: gen_qframe_types.QFrame, slot: QFramemetaObjectProc) =
+  # TODO check subclass
+  var tmp = new QFramemetaObjectProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQFrame_override_virtual_metaObject(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QFrame_metaObject(self: ptr cQFrame, slot: int): pointer {.exportc: "miqt_exec_callback_QFrame_metaObject ".} =
+  var nimfunc = cast[ptr QFramemetaObjectProc](cast[pointer](slot))
+
+  let virtualReturn = nimfunc[]( )
+
+  virtualReturn.h
+proc QFramemetacast*(self: gen_qframe_types.QFrame, param1: cstring): pointer =
+  fQFrame_virtualbase_metacast(self.h, param1)
+
+type QFramemetacastProc* = proc(param1: cstring): pointer
+proc onmetacast*(self: gen_qframe_types.QFrame, slot: QFramemetacastProc) =
+  # TODO check subclass
+  var tmp = new QFramemetacastProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQFrame_override_virtual_metacast(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QFrame_metacast(self: ptr cQFrame, slot: int, param1: cstring): pointer {.exportc: "miqt_exec_callback_QFrame_metacast ".} =
+  var nimfunc = cast[ptr QFramemetacastProc](cast[pointer](slot))
+  let slotval1 = (param1)
+
+
+  let virtualReturn = nimfunc[](slotval1 )
+
+  virtualReturn
+proc QFramemetacall*(self: gen_qframe_types.QFrame, param1: cint, param2: cint, param3: pointer): cint =
+  fQFrame_virtualbase_metacall(self.h, cint(param1), param2, param3)
+
+type QFramemetacallProc* = proc(param1: cint, param2: cint, param3: pointer): cint
+proc onmetacall*(self: gen_qframe_types.QFrame, slot: QFramemetacallProc) =
+  # TODO check subclass
+  var tmp = new QFramemetacallProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQFrame_override_virtual_metacall(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QFrame_metacall(self: ptr cQFrame, slot: int, param1: cint, param2: cint, param3: pointer): cint {.exportc: "miqt_exec_callback_QFrame_metacall ".} =
+  var nimfunc = cast[ptr QFramemetacallProc](cast[pointer](slot))
+  let slotval1 = cint(param1)
+
+  let slotval2 = param2
+
+  let slotval3 = param3
+
+
+  let virtualReturn = nimfunc[](slotval1, slotval2, slotval3 )
+
+  virtualReturn
 proc QFramesizeHint*(self: gen_qframe_types.QFrame, ): gen_qsize_types.QSize =
   gen_qsize_types.QSize(h: fQFrame_virtualbase_sizeHint(self.h))
 
@@ -1130,5 +1200,7 @@ proc miqt_exec_callback_QFrame_disconnectNotify(self: ptr cQFrame, slot: int, si
 
 
   nimfunc[](slotval1)
+proc staticMetaObject*(_: type gen_qframe_types.QFrame): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fcQFrame_staticMetaObject())
 proc delete*(self: gen_qframe_types.QFrame) =
   fcQFrame_delete(self.h)

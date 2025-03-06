@@ -50,6 +50,9 @@ void miqt_exec_callback_QInputDialog_intValueChanged(intptr_t, int);
 void miqt_exec_callback_QInputDialog_intValueSelected(intptr_t, int);
 void miqt_exec_callback_QInputDialog_doubleValueChanged(intptr_t, double);
 void miqt_exec_callback_QInputDialog_doubleValueSelected(intptr_t, double);
+QMetaObject* miqt_exec_callback_QInputDialog_metaObject(const QInputDialog*, intptr_t);
+void* miqt_exec_callback_QInputDialog_metacast(QInputDialog*, intptr_t, const char*);
+int miqt_exec_callback_QInputDialog_metacall(QInputDialog*, intptr_t, int, int, void**);
 QSize* miqt_exec_callback_QInputDialog_minimumSizeHint(const QInputDialog*, intptr_t);
 QSize* miqt_exec_callback_QInputDialog_sizeHint(const QInputDialog*, intptr_t);
 void miqt_exec_callback_QInputDialog_setVisible(QInputDialog*, intptr_t, bool);
@@ -114,6 +117,62 @@ public:
 	VirtualQInputDialog(QWidget* parent, Qt::WindowFlags flags): QInputDialog(parent, flags) {};
 
 	virtual ~VirtualQInputDialog() override = default;
+
+	// cgo.Handle value for overwritten implementation
+	intptr_t handle__metaObject = 0;
+
+	// Subclass to allow providing a Go implementation
+	virtual const QMetaObject* metaObject() const override {
+		if (handle__metaObject == 0) {
+			return QInputDialog::metaObject();
+		}
+		
+
+		QMetaObject* callback_return_value = miqt_exec_callback_QInputDialog_metaObject(this, handle__metaObject);
+
+		return callback_return_value;
+	}
+
+	friend QMetaObject* QInputDialog_virtualbase_metaObject(const void* self);
+
+	// cgo.Handle value for overwritten implementation
+	intptr_t handle__metacast = 0;
+
+	// Subclass to allow providing a Go implementation
+	virtual void* qt_metacast(const char* param1) override {
+		if (handle__metacast == 0) {
+			return QInputDialog::qt_metacast(param1);
+		}
+		
+		const char* sigval1 = (const char*) param1;
+
+		void* callback_return_value = miqt_exec_callback_QInputDialog_metacast(this, handle__metacast, sigval1);
+
+		return callback_return_value;
+	}
+
+	friend void* QInputDialog_virtualbase_metacast(void* self, const char* param1);
+
+	// cgo.Handle value for overwritten implementation
+	intptr_t handle__metacall = 0;
+
+	// Subclass to allow providing a Go implementation
+	virtual int qt_metacall(QMetaObject::Call param1, int param2, void** param3) override {
+		if (handle__metacall == 0) {
+			return QInputDialog::qt_metacall(param1, param2, param3);
+		}
+		
+		QMetaObject::Call param1_ret = param1;
+		int sigval1 = static_cast<int>(param1_ret);
+		int sigval2 = param2;
+		void** sigval3 = param3;
+
+		int callback_return_value = miqt_exec_callback_QInputDialog_metacall(this, handle__metacall, sigval1, sigval2, sigval3);
+
+		return static_cast<int>(callback_return_value);
+	}
+
+	friend int QInputDialog_virtualbase_metacall(void* self, int param1, int param2, void** param3);
 
 	// cgo.Handle value for overwritten implementation
 	intptr_t handle__minimumSizeHint = 0;
@@ -1130,6 +1189,10 @@ void* QInputDialog_metacast(QInputDialog* self, const char* param1) {
 	return self->qt_metacast(param1);
 }
 
+int QInputDialog_metacall(QInputDialog* self, int param1, int param2, void** param3) {
+	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
+}
+
 struct miqt_string QInputDialog_tr(const char* s) {
 	QString _ret = QInputDialog::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
@@ -1842,6 +1905,54 @@ double QInputDialog_getDouble10(QWidget* parent, struct miqt_string title, struc
 	QString title_QString = QString::fromUtf8(title.data, title.len);
 	QString label_QString = QString::fromUtf8(label.data, label.len);
 	return QInputDialog::getDouble(parent, title_QString, label_QString, static_cast<double>(value), static_cast<double>(minValue), static_cast<double>(maxValue), static_cast<int>(decimals), ok, static_cast<Qt::WindowFlags>(flags), static_cast<double>(step));
+}
+
+bool QInputDialog_override_virtual_metaObject(void* self, intptr_t slot) {
+	VirtualQInputDialog* self_cast = dynamic_cast<VirtualQInputDialog*>( (QInputDialog*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+	
+	self_cast->handle__metaObject = slot;
+	return true;
+}
+
+QMetaObject* QInputDialog_virtualbase_metaObject(const void* self) {
+
+	return (QMetaObject*) ( (const VirtualQInputDialog*)(self) )->QInputDialog::metaObject();
+
+}
+
+bool QInputDialog_override_virtual_metacast(void* self, intptr_t slot) {
+	VirtualQInputDialog* self_cast = dynamic_cast<VirtualQInputDialog*>( (QInputDialog*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+	
+	self_cast->handle__metacast = slot;
+	return true;
+}
+
+void* QInputDialog_virtualbase_metacast(void* self, const char* param1) {
+
+	return ( (VirtualQInputDialog*)(self) )->QInputDialog::qt_metacast(param1);
+
+}
+
+bool QInputDialog_override_virtual_metacall(void* self, intptr_t slot) {
+	VirtualQInputDialog* self_cast = dynamic_cast<VirtualQInputDialog*>( (QInputDialog*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+	
+	self_cast->handle__metacall = slot;
+	return true;
+}
+
+int QInputDialog_virtualbase_metacall(void* self, int param1, int param2, void** param3) {
+
+	return ( (VirtualQInputDialog*)(self) )->QInputDialog::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
+
 }
 
 bool QInputDialog_override_virtual_minimumSizeHint(void* self, intptr_t slot) {
@@ -2677,6 +2788,7 @@ void QInputDialog_virtualbase_disconnectNotify(void* self, QMetaMethod* signal) 
 
 }
 
+const QMetaObject* QInputDialog_staticMetaObject() { return &QInputDialog::staticMetaObject; }
 void QInputDialog_protectedbase_adjustPosition(bool* _dynamic_cast_ok, void* self, QWidget* param1) {
 	VirtualQInputDialog* self_cast = dynamic_cast<VirtualQInputDialog*>( (QInputDialog*)(self) );
 	if (self_cast == nullptr) {

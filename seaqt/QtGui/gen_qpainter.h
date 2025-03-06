@@ -295,6 +295,7 @@ void QPainter_drawText32(QPainter* self, QRectF* r, struct miqt_string text, QTe
 QRectF* QPainter_boundingRect32(QPainter* self, QRectF* rect, struct miqt_string text, QTextOption* o);
 void QPainter_setRenderHint2(QPainter* self, int hint, bool on);
 void QPainter_setRenderHints2(QPainter* self, int hints, bool on);
+const QMetaObject* QPainter_staticMetaObject();
 void QPainter_delete(QPainter* self);
 
 QPainter__PixmapFragment* QPainter__PixmapFragment_create(QPointF* pos, QRectF* sourceRect);

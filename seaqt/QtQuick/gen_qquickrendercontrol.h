@@ -45,6 +45,7 @@ QQuickRenderControl* QQuickRenderControl_new2(QObject* parent);
 void QQuickRenderControl_virtbase(QQuickRenderControl* src, QObject** outptr_QObject);
 QMetaObject* QQuickRenderControl_metaObject(const QQuickRenderControl* self);
 void* QQuickRenderControl_metacast(QQuickRenderControl* self, const char* param1);
+int QQuickRenderControl_metacall(QQuickRenderControl* self, int param1, int param2, void** param3);
 struct miqt_string QQuickRenderControl_tr(const char* s);
 void QQuickRenderControl_prepareThread(QQuickRenderControl* self, QThread* targetThread);
 void QQuickRenderControl_setSamples(QQuickRenderControl* self, int sampleCount);
@@ -66,6 +67,12 @@ void QQuickRenderControl_connect_sceneChanged(QQuickRenderControl* self, intptr_
 struct miqt_string QQuickRenderControl_tr2(const char* s, const char* c);
 struct miqt_string QQuickRenderControl_tr3(const char* s, const char* c, int n);
 QWindow* QQuickRenderControl_renderWindowFor2(QQuickWindow* win, QPoint* offset);
+bool QQuickRenderControl_override_virtual_metaObject(void* self, intptr_t slot);
+QMetaObject* QQuickRenderControl_virtualbase_metaObject(const void* self);
+bool QQuickRenderControl_override_virtual_metacast(void* self, intptr_t slot);
+void* QQuickRenderControl_virtualbase_metacast(void* self, const char* param1);
+bool QQuickRenderControl_override_virtual_metacall(void* self, intptr_t slot);
+int QQuickRenderControl_virtualbase_metacall(void* self, int param1, int param2, void** param3);
 bool QQuickRenderControl_override_virtual_renderWindow(void* self, intptr_t slot);
 QWindow* QQuickRenderControl_virtualbase_renderWindow(void* self, QPoint* offset);
 bool QQuickRenderControl_override_virtual_event(void* self, intptr_t slot);
@@ -86,6 +93,7 @@ QObject* QQuickRenderControl_protectedbase_sender(bool* _dynamic_cast_ok, const 
 int QQuickRenderControl_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
 int QQuickRenderControl_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
 bool QQuickRenderControl_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+const QMetaObject* QQuickRenderControl_staticMetaObject();
 void QQuickRenderControl_delete(QQuickRenderControl* self);
 
 #ifdef __cplusplus

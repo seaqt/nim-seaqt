@@ -28,6 +28,9 @@
 extern "C" {
 #endif
 
+QMetaObject* miqt_exec_callback_QStyle_metaObject(const QStyle*, intptr_t);
+void* miqt_exec_callback_QStyle_metacast(QStyle*, intptr_t, const char*);
+int miqt_exec_callback_QStyle_metacall(QStyle*, intptr_t, int, int, void**);
 void miqt_exec_callback_QStyle_polish(QStyle*, intptr_t, QWidget*);
 void miqt_exec_callback_QStyle_unpolish(QStyle*, intptr_t, QWidget*);
 void miqt_exec_callback_QStyle_polishWithApplication(QStyle*, intptr_t, QApplication*);
@@ -68,6 +71,62 @@ public:
 	VirtualQStyle(): QStyle() {};
 
 	virtual ~VirtualQStyle() override = default;
+
+	// cgo.Handle value for overwritten implementation
+	intptr_t handle__metaObject = 0;
+
+	// Subclass to allow providing a Go implementation
+	virtual const QMetaObject* metaObject() const override {
+		if (handle__metaObject == 0) {
+			return QStyle::metaObject();
+		}
+		
+
+		QMetaObject* callback_return_value = miqt_exec_callback_QStyle_metaObject(this, handle__metaObject);
+
+		return callback_return_value;
+	}
+
+	friend QMetaObject* QStyle_virtualbase_metaObject(const void* self);
+
+	// cgo.Handle value for overwritten implementation
+	intptr_t handle__metacast = 0;
+
+	// Subclass to allow providing a Go implementation
+	virtual void* qt_metacast(const char* param1) override {
+		if (handle__metacast == 0) {
+			return QStyle::qt_metacast(param1);
+		}
+		
+		const char* sigval1 = (const char*) param1;
+
+		void* callback_return_value = miqt_exec_callback_QStyle_metacast(this, handle__metacast, sigval1);
+
+		return callback_return_value;
+	}
+
+	friend void* QStyle_virtualbase_metacast(void* self, const char* param1);
+
+	// cgo.Handle value for overwritten implementation
+	intptr_t handle__metacall = 0;
+
+	// Subclass to allow providing a Go implementation
+	virtual int qt_metacall(QMetaObject::Call param1, int param2, void** param3) override {
+		if (handle__metacall == 0) {
+			return QStyle::qt_metacall(param1, param2, param3);
+		}
+		
+		QMetaObject::Call param1_ret = param1;
+		int sigval1 = static_cast<int>(param1_ret);
+		int sigval2 = param2;
+		void** sigval3 = param3;
+
+		int callback_return_value = miqt_exec_callback_QStyle_metacall(this, handle__metacall, sigval1, sigval2, sigval3);
+
+		return static_cast<int>(callback_return_value);
+	}
+
+	friend int QStyle_virtualbase_metacall(void* self, int param1, int param2, void** param3);
 
 	// cgo.Handle value for overwritten implementation
 	intptr_t handle__polish = 0;
@@ -727,6 +786,10 @@ void* QStyle_metacast(QStyle* self, const char* param1) {
 	return self->qt_metacast(param1);
 }
 
+int QStyle_metacall(QStyle* self, int param1, int param2, void** param3) {
+	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
+}
+
 struct miqt_string QStyle_tr(const char* s) {
 	QString _ret = QStyle::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
@@ -913,6 +976,54 @@ int QStyle_combinedLayoutSpacing4(const QStyle* self, int controls1, int control
 
 int QStyle_combinedLayoutSpacing5(const QStyle* self, int controls1, int controls2, int orientation, QStyleOption* option, QWidget* widget) {
 	return self->combinedLayoutSpacing(static_cast<QSizePolicy::ControlTypes>(controls1), static_cast<QSizePolicy::ControlTypes>(controls2), static_cast<Qt::Orientation>(orientation), option, widget);
+}
+
+bool QStyle_override_virtual_metaObject(void* self, intptr_t slot) {
+	VirtualQStyle* self_cast = dynamic_cast<VirtualQStyle*>( (QStyle*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+	
+	self_cast->handle__metaObject = slot;
+	return true;
+}
+
+QMetaObject* QStyle_virtualbase_metaObject(const void* self) {
+
+	return (QMetaObject*) ( (const VirtualQStyle*)(self) )->QStyle::metaObject();
+
+}
+
+bool QStyle_override_virtual_metacast(void* self, intptr_t slot) {
+	VirtualQStyle* self_cast = dynamic_cast<VirtualQStyle*>( (QStyle*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+	
+	self_cast->handle__metacast = slot;
+	return true;
+}
+
+void* QStyle_virtualbase_metacast(void* self, const char* param1) {
+
+	return ( (VirtualQStyle*)(self) )->QStyle::qt_metacast(param1);
+
+}
+
+bool QStyle_override_virtual_metacall(void* self, intptr_t slot) {
+	VirtualQStyle* self_cast = dynamic_cast<VirtualQStyle*>( (QStyle*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+	
+	self_cast->handle__metacall = slot;
+	return true;
+}
+
+int QStyle_virtualbase_metacall(void* self, int param1, int param2, void** param3) {
+
+	return ( (VirtualQStyle*)(self) )->QStyle::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
+
 }
 
 bool QStyle_override_virtual_polish(void* self, intptr_t slot) {
@@ -1319,6 +1430,7 @@ void QStyle_virtualbase_disconnectNotify(void* self, QMetaMethod* signal) {
 
 }
 
+const QMetaObject* QStyle_staticMetaObject() { return &QStyle::staticMetaObject; }
 QObject* QStyle_protectedbase_sender(bool* _dynamic_cast_ok, const void* self) {
 	VirtualQStyle* self_cast = dynamic_cast<VirtualQStyle*>( (QStyle*)(self) );
 	if (self_cast == nullptr) {

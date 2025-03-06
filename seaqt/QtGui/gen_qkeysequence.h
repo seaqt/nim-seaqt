@@ -61,6 +61,7 @@ struct miqt_string QKeySequence_toString1(const QKeySequence* self, int format);
 QKeySequence* QKeySequence_fromString2(struct miqt_string str, int format);
 struct miqt_array /* of QKeySequence* */  QKeySequence_listFromString2(struct miqt_string str, int format);
 struct miqt_string QKeySequence_listToString2(struct miqt_array /* of QKeySequence* */  list, int format);
+const QMetaObject* QKeySequence_staticMetaObject();
 void QKeySequence_delete(QKeySequence* self);
 
 #ifdef __cplusplus

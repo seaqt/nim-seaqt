@@ -50,6 +50,7 @@ type cQStyleHints*{.exportc: "QStyleHints", incompleteStruct.} = object
 
 proc fcQStyleHints_metaObject(self: pointer, ): pointer {.importc: "QStyleHints_metaObject".}
 proc fcQStyleHints_metacast(self: pointer, param1: cstring): pointer {.importc: "QStyleHints_metacast".}
+proc fcQStyleHints_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QStyleHints_metacall".}
 proc fcQStyleHints_tr(s: cstring): struct_miqt_string {.importc: "QStyleHints_tr".}
 proc fcQStyleHints_setMouseDoubleClickInterval(self: pointer, mouseDoubleClickInterval: cint): void {.importc: "QStyleHints_setMouseDoubleClickInterval".}
 proc fcQStyleHints_mouseDoubleClickInterval(self: pointer, ): cint {.importc: "QStyleHints_mouseDoubleClickInterval".}
@@ -109,6 +110,7 @@ proc fcQStyleHints_mouseQuickSelectionThresholdChanged(self: pointer, threshold:
 proc fcQStyleHints_connect_mouseQuickSelectionThresholdChanged(self: pointer, slot: int) {.importc: "QStyleHints_connect_mouseQuickSelectionThresholdChanged".}
 proc fcQStyleHints_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QStyleHints_tr2".}
 proc fcQStyleHints_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QStyleHints_tr3".}
+proc fcQStyleHints_staticMetaObject(): pointer {.importc: "QStyleHints_staticMetaObject".}
 proc fcQStyleHints_delete(self: pointer) {.importc: "QStyleHints_delete".}
 
 
@@ -119,6 +121,9 @@ proc metaObject*(self: gen_qstylehints_types.QStyleHints, ): gen_qobjectdefs_typ
 
 proc metacast*(self: gen_qstylehints_types.QStyleHints, param1: cstring): pointer =
   fcQStyleHints_metacast(self.h, param1)
+
+proc metacall*(self: gen_qstylehints_types.QStyleHints, param1: cint, param2: cint, param3: pointer): cint =
+  fcQStyleHints_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qstylehints_types.QStyleHints, s: cstring): string =
   let v_ms = fcQStyleHints_tr(s)
@@ -416,5 +421,7 @@ proc tr*(_: type gen_qstylehints_types.QStyleHints, s: cstring, c: cstring, n: c
   c_free(v_ms.data)
   vx_ret
 
+proc staticMetaObject*(_: type gen_qstylehints_types.QStyleHints): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fcQStyleHints_staticMetaObject())
 proc delete*(self: gen_qstylehints_types.QStyleHints) =
   fcQStyleHints_delete(self.h)

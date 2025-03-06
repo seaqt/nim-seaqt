@@ -55,6 +55,7 @@ type cQAbstractEventDispatcherTimerInfo*{.exportc: "QAbstractEventDispatcher__Ti
 
 proc fcQAbstractEventDispatcher_metaObject(self: pointer, ): pointer {.importc: "QAbstractEventDispatcher_metaObject".}
 proc fcQAbstractEventDispatcher_metacast(self: pointer, param1: cstring): pointer {.importc: "QAbstractEventDispatcher_metacast".}
+proc fcQAbstractEventDispatcher_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QAbstractEventDispatcher_metacall".}
 proc fcQAbstractEventDispatcher_tr(s: cstring): struct_miqt_string {.importc: "QAbstractEventDispatcher_tr".}
 proc fcQAbstractEventDispatcher_instance(): pointer {.importc: "QAbstractEventDispatcher_instance".}
 proc fcQAbstractEventDispatcher_processEvents(self: pointer, flags: cint): bool {.importc: "QAbstractEventDispatcher_processEvents".}
@@ -80,6 +81,7 @@ proc fcQAbstractEventDispatcher_connect_awake(self: pointer, slot: int) {.import
 proc fcQAbstractEventDispatcher_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QAbstractEventDispatcher_tr2".}
 proc fcQAbstractEventDispatcher_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QAbstractEventDispatcher_tr3".}
 proc fcQAbstractEventDispatcher_instance1(thread: pointer): pointer {.importc: "QAbstractEventDispatcher_instance1".}
+proc fcQAbstractEventDispatcher_staticMetaObject(): pointer {.importc: "QAbstractEventDispatcher_staticMetaObject".}
 proc fcQAbstractEventDispatcher_delete(self: pointer) {.importc: "QAbstractEventDispatcher_delete".}
 proc fcQAbstractEventDispatcherTimerInfo_new(id: cint, i: cint, t: cint): ptr cQAbstractEventDispatcherTimerInfo {.importc: "QAbstractEventDispatcher__TimerInfo_new".}
 proc fcQAbstractEventDispatcherTimerInfo_delete(self: pointer) {.importc: "QAbstractEventDispatcher__TimerInfo_delete".}
@@ -92,6 +94,9 @@ proc metaObject*(self: gen_qabstracteventdispatcher_types.QAbstractEventDispatch
 
 proc metacast*(self: gen_qabstracteventdispatcher_types.QAbstractEventDispatcher, param1: cstring): pointer =
   fcQAbstractEventDispatcher_metacast(self.h, param1)
+
+proc metacall*(self: gen_qabstracteventdispatcher_types.QAbstractEventDispatcher, param1: cint, param2: cint, param3: pointer): cint =
+  fcQAbstractEventDispatcher_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qabstracteventdispatcher_types.QAbstractEventDispatcher, s: cstring): string =
   let v_ms = fcQAbstractEventDispatcher_tr(s)
@@ -198,6 +203,8 @@ proc tr*(_: type gen_qabstracteventdispatcher_types.QAbstractEventDispatcher, s:
 proc instance*(_: type gen_qabstracteventdispatcher_types.QAbstractEventDispatcher, thread: gen_qthread_types.QThread): gen_qabstracteventdispatcher_types.QAbstractEventDispatcher =
   gen_qabstracteventdispatcher_types.QAbstractEventDispatcher(h: fcQAbstractEventDispatcher_instance1(thread.h))
 
+proc staticMetaObject*(_: type gen_qabstracteventdispatcher_types.QAbstractEventDispatcher): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fcQAbstractEventDispatcher_staticMetaObject())
 proc delete*(self: gen_qabstracteventdispatcher_types.QAbstractEventDispatcher) =
   fcQAbstractEventDispatcher_delete(self.h)
 

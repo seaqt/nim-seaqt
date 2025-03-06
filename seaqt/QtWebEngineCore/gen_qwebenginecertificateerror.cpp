@@ -73,6 +73,7 @@ struct miqt_array /* of QSslCertificate* */  QWebEngineCertificateError_certific
 	return _out;
 }
 
+const QMetaObject* QWebEngineCertificateError_staticMetaObject() { return &QWebEngineCertificateError::staticMetaObject; }
 void QWebEngineCertificateError_delete(QWebEngineCertificateError* self) {
 	delete self;
 }

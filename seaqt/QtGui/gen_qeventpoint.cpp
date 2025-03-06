@@ -218,6 +218,7 @@ void QEventPoint_setAccepted1(QEventPoint* self, bool accepted) {
 	self->setAccepted(accepted);
 }
 
+const QMetaObject* QEventPoint_staticMetaObject() { return &QEventPoint::staticMetaObject; }
 void QEventPoint_delete(QEventPoint* self) {
 	delete self;
 }

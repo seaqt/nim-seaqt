@@ -79,8 +79,10 @@ import ./gen_qsslerror_types
 export gen_qsslerror_types
 
 import
+  ../QtCore/gen_qobjectdefs_types,
   ./gen_qsslcertificate_types
 export
+  gen_qobjectdefs_types,
   gen_qsslcertificate_types
 
 type cQSslError*{.exportc: "QSslError", incompleteStruct.} = object
@@ -96,6 +98,7 @@ proc fcQSslError_operatorNotEqual(self: pointer, other: pointer): bool {.importc
 proc fcQSslError_error(self: pointer, ): cint {.importc: "QSslError_error".}
 proc fcQSslError_errorString(self: pointer, ): struct_miqt_string {.importc: "QSslError_errorString".}
 proc fcQSslError_certificate(self: pointer, ): pointer {.importc: "QSslError_certificate".}
+proc fcQSslError_staticMetaObject(): pointer {.importc: "QSslError_staticMetaObject".}
 proc fcQSslError_delete(self: pointer) {.importc: "QSslError_delete".}
 
 
@@ -137,5 +140,7 @@ proc errorString*(self: gen_qsslerror_types.QSslError, ): string =
 proc certificate*(self: gen_qsslerror_types.QSslError, ): gen_qsslcertificate_types.QSslCertificate =
   gen_qsslcertificate_types.QSslCertificate(h: fcQSslError_certificate(self.h))
 
+proc staticMetaObject*(_: type gen_qsslerror_types.QSslError): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fcQSslError_staticMetaObject())
 proc delete*(self: gen_qsslerror_types.QSslError) =
   fcQSslError_delete(self.h)

@@ -49,6 +49,7 @@ QQmlExtensionPlugin* QQmlExtensionPlugin_new2(QObject* parent);
 void QQmlExtensionPlugin_virtbase(QQmlExtensionPlugin* src, QObject** outptr_QObject, QQmlExtensionInterface** outptr_QQmlExtensionInterface);
 QMetaObject* QQmlExtensionPlugin_metaObject(const QQmlExtensionPlugin* self);
 void* QQmlExtensionPlugin_metacast(QQmlExtensionPlugin* self, const char* param1);
+int QQmlExtensionPlugin_metacall(QQmlExtensionPlugin* self, int param1, int param2, void** param3);
 struct miqt_string QQmlExtensionPlugin_tr(const char* s);
 QUrl* QQmlExtensionPlugin_baseUrl(const QQmlExtensionPlugin* self);
 void QQmlExtensionPlugin_registerTypes(QQmlExtensionPlugin* self, const char* uri);
@@ -56,6 +57,12 @@ void QQmlExtensionPlugin_unregisterTypes(QQmlExtensionPlugin* self);
 void QQmlExtensionPlugin_initializeEngine(QQmlExtensionPlugin* self, QQmlEngine* engine, const char* uri);
 struct miqt_string QQmlExtensionPlugin_tr2(const char* s, const char* c);
 struct miqt_string QQmlExtensionPlugin_tr3(const char* s, const char* c, int n);
+bool QQmlExtensionPlugin_override_virtual_metaObject(void* self, intptr_t slot);
+QMetaObject* QQmlExtensionPlugin_virtualbase_metaObject(const void* self);
+bool QQmlExtensionPlugin_override_virtual_metacast(void* self, intptr_t slot);
+void* QQmlExtensionPlugin_virtualbase_metacast(void* self, const char* param1);
+bool QQmlExtensionPlugin_override_virtual_metacall(void* self, intptr_t slot);
+int QQmlExtensionPlugin_virtualbase_metacall(void* self, int param1, int param2, void** param3);
 bool QQmlExtensionPlugin_override_virtual_registerTypes(void* self, intptr_t slot);
 void QQmlExtensionPlugin_virtualbase_registerTypes(void* self, const char* uri);
 bool QQmlExtensionPlugin_override_virtual_unregisterTypes(void* self, intptr_t slot);
@@ -80,6 +87,7 @@ QObject* QQmlExtensionPlugin_protectedbase_sender(bool* _dynamic_cast_ok, const 
 int QQmlExtensionPlugin_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
 int QQmlExtensionPlugin_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
 bool QQmlExtensionPlugin_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+const QMetaObject* QQmlExtensionPlugin_staticMetaObject();
 void QQmlExtensionPlugin_delete(QQmlExtensionPlugin* self);
 
 QQmlEngineExtensionPlugin* QQmlEngineExtensionPlugin_new();
@@ -87,10 +95,17 @@ QQmlEngineExtensionPlugin* QQmlEngineExtensionPlugin_new2(QObject* parent);
 void QQmlEngineExtensionPlugin_virtbase(QQmlEngineExtensionPlugin* src, QObject** outptr_QObject, QQmlEngineExtensionInterface** outptr_QQmlEngineExtensionInterface);
 QMetaObject* QQmlEngineExtensionPlugin_metaObject(const QQmlEngineExtensionPlugin* self);
 void* QQmlEngineExtensionPlugin_metacast(QQmlEngineExtensionPlugin* self, const char* param1);
+int QQmlEngineExtensionPlugin_metacall(QQmlEngineExtensionPlugin* self, int param1, int param2, void** param3);
 struct miqt_string QQmlEngineExtensionPlugin_tr(const char* s);
 void QQmlEngineExtensionPlugin_initializeEngine(QQmlEngineExtensionPlugin* self, QQmlEngine* engine, const char* uri);
 struct miqt_string QQmlEngineExtensionPlugin_tr2(const char* s, const char* c);
 struct miqt_string QQmlEngineExtensionPlugin_tr3(const char* s, const char* c, int n);
+bool QQmlEngineExtensionPlugin_override_virtual_metaObject(void* self, intptr_t slot);
+QMetaObject* QQmlEngineExtensionPlugin_virtualbase_metaObject(const void* self);
+bool QQmlEngineExtensionPlugin_override_virtual_metacast(void* self, intptr_t slot);
+void* QQmlEngineExtensionPlugin_virtualbase_metacast(void* self, const char* param1);
+bool QQmlEngineExtensionPlugin_override_virtual_metacall(void* self, intptr_t slot);
+int QQmlEngineExtensionPlugin_virtualbase_metacall(void* self, int param1, int param2, void** param3);
 bool QQmlEngineExtensionPlugin_override_virtual_initializeEngine(void* self, intptr_t slot);
 void QQmlEngineExtensionPlugin_virtualbase_initializeEngine(void* self, QQmlEngine* engine, const char* uri);
 bool QQmlEngineExtensionPlugin_override_virtual_event(void* self, intptr_t slot);
@@ -111,6 +126,7 @@ QObject* QQmlEngineExtensionPlugin_protectedbase_sender(bool* _dynamic_cast_ok, 
 int QQmlEngineExtensionPlugin_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
 int QQmlEngineExtensionPlugin_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
 bool QQmlEngineExtensionPlugin_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+const QMetaObject* QQmlEngineExtensionPlugin_staticMetaObject();
 void QQmlEngineExtensionPlugin_delete(QQmlEngineExtensionPlugin* self);
 
 #ifdef __cplusplus

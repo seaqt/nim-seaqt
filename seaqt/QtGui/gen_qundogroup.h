@@ -41,6 +41,7 @@ QUndoGroup* QUndoGroup_new2(QObject* parent);
 void QUndoGroup_virtbase(QUndoGroup* src, QObject** outptr_QObject);
 QMetaObject* QUndoGroup_metaObject(const QUndoGroup* self);
 void* QUndoGroup_metacast(QUndoGroup* self, const char* param1);
+int QUndoGroup_metacall(QUndoGroup* self, int param1, int param2, void** param3);
 struct miqt_string QUndoGroup_tr(const char* s);
 void QUndoGroup_addStack(QUndoGroup* self, QUndoStack* stack);
 void QUndoGroup_removeStack(QUndoGroup* self, QUndoStack* stack);
@@ -74,6 +75,12 @@ struct miqt_string QUndoGroup_tr2(const char* s, const char* c);
 struct miqt_string QUndoGroup_tr3(const char* s, const char* c, int n);
 QAction* QUndoGroup_createUndoAction2(const QUndoGroup* self, QObject* parent, struct miqt_string prefix);
 QAction* QUndoGroup_createRedoAction2(const QUndoGroup* self, QObject* parent, struct miqt_string prefix);
+bool QUndoGroup_override_virtual_metaObject(void* self, intptr_t slot);
+QMetaObject* QUndoGroup_virtualbase_metaObject(const void* self);
+bool QUndoGroup_override_virtual_metacast(void* self, intptr_t slot);
+void* QUndoGroup_virtualbase_metacast(void* self, const char* param1);
+bool QUndoGroup_override_virtual_metacall(void* self, intptr_t slot);
+int QUndoGroup_virtualbase_metacall(void* self, int param1, int param2, void** param3);
 bool QUndoGroup_override_virtual_event(void* self, intptr_t slot);
 bool QUndoGroup_virtualbase_event(void* self, QEvent* event);
 bool QUndoGroup_override_virtual_eventFilter(void* self, intptr_t slot);
@@ -92,6 +99,7 @@ QObject* QUndoGroup_protectedbase_sender(bool* _dynamic_cast_ok, const void* sel
 int QUndoGroup_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
 int QUndoGroup_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
 bool QUndoGroup_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+const QMetaObject* QUndoGroup_staticMetaObject();
 void QUndoGroup_delete(QUndoGroup* self);
 
 #ifdef __cplusplus

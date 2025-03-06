@@ -39,6 +39,7 @@ QButtonGroup* QButtonGroup_new2(QObject* parent);
 void QButtonGroup_virtbase(QButtonGroup* src, QObject** outptr_QObject);
 QMetaObject* QButtonGroup_metaObject(const QButtonGroup* self);
 void* QButtonGroup_metacast(QButtonGroup* self, const char* param1);
+int QButtonGroup_metacall(QButtonGroup* self, int param1, int param2, void** param3);
 struct miqt_string QButtonGroup_tr(const char* s);
 void QButtonGroup_setExclusive(QButtonGroup* self, bool exclusive);
 bool QButtonGroup_exclusive(const QButtonGroup* self);
@@ -69,6 +70,12 @@ void QButtonGroup_connect_idToggled(QButtonGroup* self, intptr_t slot);
 struct miqt_string QButtonGroup_tr2(const char* s, const char* c);
 struct miqt_string QButtonGroup_tr3(const char* s, const char* c, int n);
 void QButtonGroup_addButton2(QButtonGroup* self, QAbstractButton* param1, int id);
+bool QButtonGroup_override_virtual_metaObject(void* self, intptr_t slot);
+QMetaObject* QButtonGroup_virtualbase_metaObject(const void* self);
+bool QButtonGroup_override_virtual_metacast(void* self, intptr_t slot);
+void* QButtonGroup_virtualbase_metacast(void* self, const char* param1);
+bool QButtonGroup_override_virtual_metacall(void* self, intptr_t slot);
+int QButtonGroup_virtualbase_metacall(void* self, int param1, int param2, void** param3);
 bool QButtonGroup_override_virtual_event(void* self, intptr_t slot);
 bool QButtonGroup_virtualbase_event(void* self, QEvent* event);
 bool QButtonGroup_override_virtual_eventFilter(void* self, intptr_t slot);
@@ -87,6 +94,7 @@ QObject* QButtonGroup_protectedbase_sender(bool* _dynamic_cast_ok, const void* s
 int QButtonGroup_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
 int QButtonGroup_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
 bool QButtonGroup_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+const QMetaObject* QButtonGroup_staticMetaObject();
 void QButtonGroup_delete(QButtonGroup* self);
 
 #ifdef __cplusplus

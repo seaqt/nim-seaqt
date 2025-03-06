@@ -108,6 +108,7 @@ QQuickWindow* QQuickWindow_new3(QWindow* parent);
 void QQuickWindow_virtbase(QQuickWindow* src, QWindow** outptr_QWindow);
 QMetaObject* QQuickWindow_metaObject(const QQuickWindow* self);
 void* QQuickWindow_metacast(QQuickWindow* self, const char* param1);
+int QQuickWindow_metacall(QQuickWindow* self, int param1, int param2, void** param3);
 struct miqt_string QQuickWindow_tr(const char* s);
 QQuickItem* QQuickWindow_contentItem(const QQuickWindow* self);
 QQuickItem* QQuickWindow_activeFocusItem(const QQuickWindow* self);
@@ -204,6 +205,12 @@ void QQuickWindow_wheelEvent(QQuickWindow* self, QWheelEvent* param1);
 void QQuickWindow_tabletEvent(QQuickWindow* self, QTabletEvent* param1);
 struct miqt_string QQuickWindow_tr2(const char* s, const char* c);
 struct miqt_string QQuickWindow_tr3(const char* s, const char* c, int n);
+bool QQuickWindow_override_virtual_metaObject(void* self, intptr_t slot);
+QMetaObject* QQuickWindow_virtualbase_metaObject(const void* self);
+bool QQuickWindow_override_virtual_metacast(void* self, intptr_t slot);
+void* QQuickWindow_virtualbase_metacast(void* self, const char* param1);
+bool QQuickWindow_override_virtual_metacall(void* self, intptr_t slot);
+int QQuickWindow_virtualbase_metacall(void* self, int param1, int param2, void** param3);
 bool QQuickWindow_override_virtual_focusObject(void* self, intptr_t slot);
 QObject* QQuickWindow_virtualbase_focusObject(const void* self);
 bool QQuickWindow_override_virtual_accessibleRoot(void* self, intptr_t slot);
@@ -271,6 +278,7 @@ QObject* QQuickWindow_protectedbase_sender(bool* _dynamic_cast_ok, const void* s
 int QQuickWindow_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
 int QQuickWindow_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
 bool QQuickWindow_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+const QMetaObject* QQuickWindow_staticMetaObject();
 void QQuickWindow_delete(QQuickWindow* self);
 
 void QQuickWindow__GraphicsStateInfo_delete(QQuickWindow__GraphicsStateInfo* self);

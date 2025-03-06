@@ -239,6 +239,7 @@ struct miqt_string QKeySequence_listToString2(struct miqt_array /* of QKeySequen
 	return _ms;
 }
 
+const QMetaObject* QKeySequence_staticMetaObject() { return &QKeySequence::staticMetaObject; }
 void QKeySequence_delete(QKeySequence* self) {
 	delete self;
 }

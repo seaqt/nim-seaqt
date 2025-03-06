@@ -70,6 +70,7 @@ QNetworkInterface* QNetworkInterface_interfaceFromIndex(int index);
 struct miqt_string QNetworkInterface_interfaceNameFromIndex(int index);
 struct miqt_array /* of QNetworkInterface* */  QNetworkInterface_allInterfaces();
 struct miqt_array /* of QHostAddress* */  QNetworkInterface_allAddresses();
+const QMetaObject* QNetworkInterface_staticMetaObject();
 void QNetworkInterface_delete(QNetworkInterface* self);
 
 #ifdef __cplusplus

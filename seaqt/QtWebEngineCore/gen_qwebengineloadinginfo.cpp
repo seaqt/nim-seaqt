@@ -55,6 +55,7 @@ int QWebEngineLoadingInfo_errorCode(const QWebEngineLoadingInfo* self) {
 	return self->errorCode();
 }
 
+const QMetaObject* QWebEngineLoadingInfo_staticMetaObject() { return &QWebEngineLoadingInfo::staticMetaObject; }
 void QWebEngineLoadingInfo_delete(QWebEngineLoadingInfo* self) {
 	delete self;
 }

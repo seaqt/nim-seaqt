@@ -27,6 +27,9 @@ void miqt_exec_callback_QUndoStack_canUndoChanged(intptr_t, bool);
 void miqt_exec_callback_QUndoStack_canRedoChanged(intptr_t, bool);
 void miqt_exec_callback_QUndoStack_undoTextChanged(intptr_t, struct miqt_string);
 void miqt_exec_callback_QUndoStack_redoTextChanged(intptr_t, struct miqt_string);
+QMetaObject* miqt_exec_callback_QUndoStack_metaObject(const QUndoStack*, intptr_t);
+void* miqt_exec_callback_QUndoStack_metacast(QUndoStack*, intptr_t, const char*);
+int miqt_exec_callback_QUndoStack_metacall(QUndoStack*, intptr_t, int, int, void**);
 bool miqt_exec_callback_QUndoStack_event(QUndoStack*, intptr_t, QEvent*);
 bool miqt_exec_callback_QUndoStack_eventFilter(QUndoStack*, intptr_t, QObject*, QEvent*);
 void miqt_exec_callback_QUndoStack_timerEvent(QUndoStack*, intptr_t, QTimerEvent*);
@@ -275,6 +278,62 @@ public:
 	virtual ~VirtualQUndoStack() override = default;
 
 	// cgo.Handle value for overwritten implementation
+	intptr_t handle__metaObject = 0;
+
+	// Subclass to allow providing a Go implementation
+	virtual const QMetaObject* metaObject() const override {
+		if (handle__metaObject == 0) {
+			return QUndoStack::metaObject();
+		}
+		
+
+		QMetaObject* callback_return_value = miqt_exec_callback_QUndoStack_metaObject(this, handle__metaObject);
+
+		return callback_return_value;
+	}
+
+	friend QMetaObject* QUndoStack_virtualbase_metaObject(const void* self);
+
+	// cgo.Handle value for overwritten implementation
+	intptr_t handle__metacast = 0;
+
+	// Subclass to allow providing a Go implementation
+	virtual void* qt_metacast(const char* param1) override {
+		if (handle__metacast == 0) {
+			return QUndoStack::qt_metacast(param1);
+		}
+		
+		const char* sigval1 = (const char*) param1;
+
+		void* callback_return_value = miqt_exec_callback_QUndoStack_metacast(this, handle__metacast, sigval1);
+
+		return callback_return_value;
+	}
+
+	friend void* QUndoStack_virtualbase_metacast(void* self, const char* param1);
+
+	// cgo.Handle value for overwritten implementation
+	intptr_t handle__metacall = 0;
+
+	// Subclass to allow providing a Go implementation
+	virtual int qt_metacall(QMetaObject::Call param1, int param2, void** param3) override {
+		if (handle__metacall == 0) {
+			return QUndoStack::qt_metacall(param1, param2, param3);
+		}
+		
+		QMetaObject::Call param1_ret = param1;
+		int sigval1 = static_cast<int>(param1_ret);
+		int sigval2 = param2;
+		void** sigval3 = param3;
+
+		int callback_return_value = miqt_exec_callback_QUndoStack_metacall(this, handle__metacall, sigval1, sigval2, sigval3);
+
+		return static_cast<int>(callback_return_value);
+	}
+
+	friend int QUndoStack_virtualbase_metacall(void* self, int param1, int param2, void** param3);
+
+	// cgo.Handle value for overwritten implementation
 	intptr_t handle__event = 0;
 
 	// Subclass to allow providing a Go implementation
@@ -435,6 +494,10 @@ QMetaObject* QUndoStack_metaObject(const QUndoStack* self) {
 
 void* QUndoStack_metacast(QUndoStack* self, const char* param1) {
 	return self->qt_metacast(param1);
+}
+
+int QUndoStack_metacall(QUndoStack* self, int param1, int param2, void** param3) {
+	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
 struct miqt_string QUndoStack_tr(const char* s) {
@@ -688,6 +751,54 @@ void QUndoStack_setActive1(QUndoStack* self, bool active) {
 	self->setActive(active);
 }
 
+bool QUndoStack_override_virtual_metaObject(void* self, intptr_t slot) {
+	VirtualQUndoStack* self_cast = dynamic_cast<VirtualQUndoStack*>( (QUndoStack*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+	
+	self_cast->handle__metaObject = slot;
+	return true;
+}
+
+QMetaObject* QUndoStack_virtualbase_metaObject(const void* self) {
+
+	return (QMetaObject*) ( (const VirtualQUndoStack*)(self) )->QUndoStack::metaObject();
+
+}
+
+bool QUndoStack_override_virtual_metacast(void* self, intptr_t slot) {
+	VirtualQUndoStack* self_cast = dynamic_cast<VirtualQUndoStack*>( (QUndoStack*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+	
+	self_cast->handle__metacast = slot;
+	return true;
+}
+
+void* QUndoStack_virtualbase_metacast(void* self, const char* param1) {
+
+	return ( (VirtualQUndoStack*)(self) )->QUndoStack::qt_metacast(param1);
+
+}
+
+bool QUndoStack_override_virtual_metacall(void* self, intptr_t slot) {
+	VirtualQUndoStack* self_cast = dynamic_cast<VirtualQUndoStack*>( (QUndoStack*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+	
+	self_cast->handle__metacall = slot;
+	return true;
+}
+
+int QUndoStack_virtualbase_metacall(void* self, int param1, int param2, void** param3) {
+
+	return ( (VirtualQUndoStack*)(self) )->QUndoStack::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
+
+}
+
 bool QUndoStack_override_virtual_event(void* self, intptr_t slot) {
 	VirtualQUndoStack* self_cast = dynamic_cast<VirtualQUndoStack*>( (QUndoStack*)(self) );
 	if (self_cast == nullptr) {
@@ -800,6 +911,7 @@ void QUndoStack_virtualbase_disconnectNotify(void* self, QMetaMethod* signal) {
 
 }
 
+const QMetaObject* QUndoStack_staticMetaObject() { return &QUndoStack::staticMetaObject; }
 QObject* QUndoStack_protectedbase_sender(bool* _dynamic_cast_ok, const void* self) {
 	VirtualQUndoStack* self_cast = dynamic_cast<VirtualQUndoStack*>( (QUndoStack*)(self) );
 	if (self_cast == nullptr) {

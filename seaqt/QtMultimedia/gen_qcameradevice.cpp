@@ -58,6 +58,7 @@ bool QCameraFormat_operatorNotEqual(const QCameraFormat* self, QCameraFormat* ot
 	return (*self != *other);
 }
 
+const QMetaObject* QCameraFormat_staticMetaObject() { return &QCameraFormat::staticMetaObject; }
 void QCameraFormat_delete(QCameraFormat* self) {
 	delete self;
 }
@@ -141,6 +142,7 @@ struct miqt_array /* of QCameraFormat* */  QCameraDevice_videoFormats(const QCam
 	return _out;
 }
 
+const QMetaObject* QCameraDevice_staticMetaObject() { return &QCameraDevice::staticMetaObject; }
 void QCameraDevice_delete(QCameraDevice* self) {
 	delete self;
 }

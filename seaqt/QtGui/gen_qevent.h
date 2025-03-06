@@ -211,6 +211,7 @@ bool QSinglePointEvent_isUpdateEvent(const QSinglePointEvent* self);
 bool QSinglePointEvent_isEndEvent(const QSinglePointEvent* self);
 QObject* QSinglePointEvent_exclusivePointGrabber(const QSinglePointEvent* self);
 void QSinglePointEvent_setExclusivePointGrabber(QSinglePointEvent* self, QObject* exclusiveGrabber);
+const QMetaObject* QSinglePointEvent_staticMetaObject();
 void QSinglePointEvent_delete(QSinglePointEvent* self);
 
 QEnterEvent* QEnterEvent_new(QPointF* localPos, QPointF* scenePos, QPointF* globalPos);
@@ -329,6 +330,7 @@ bool QWheelEvent_override_virtual_setTimestamp(void* self, intptr_t slot);
 void QWheelEvent_virtualbase_setTimestamp(void* self, unsigned long long timestamp);
 bool QWheelEvent_override_virtual_setAccepted(void* self, intptr_t slot);
 void QWheelEvent_virtualbase_setAccepted(void* self, bool accepted);
+const QMetaObject* QWheelEvent_staticMetaObject();
 void QWheelEvent_delete(QWheelEvent* self);
 
 QTabletEvent* QTabletEvent_new(int t, QPointingDevice* device, QPointF* pos, QPointF* globalPos, double pressure, float xTilt, float yTilt, float tangentialPressure, double rotation, float z, int keyState, int button, int buttons);

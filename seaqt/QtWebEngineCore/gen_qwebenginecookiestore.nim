@@ -53,6 +53,7 @@ type cQWebEngineCookieStoreFilterRequest*{.exportc: "QWebEngineCookieStore__Filt
 
 proc fcQWebEngineCookieStore_metaObject(self: pointer, ): pointer {.importc: "QWebEngineCookieStore_metaObject".}
 proc fcQWebEngineCookieStore_metacast(self: pointer, param1: cstring): pointer {.importc: "QWebEngineCookieStore_metacast".}
+proc fcQWebEngineCookieStore_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QWebEngineCookieStore_metacall".}
 proc fcQWebEngineCookieStore_tr(s: cstring): struct_miqt_string {.importc: "QWebEngineCookieStore_tr".}
 proc fcQWebEngineCookieStore_setCookie(self: pointer, cookie: pointer): void {.importc: "QWebEngineCookieStore_setCookie".}
 proc fcQWebEngineCookieStore_deleteCookie(self: pointer, cookie: pointer): void {.importc: "QWebEngineCookieStore_deleteCookie".}
@@ -67,6 +68,7 @@ proc fcQWebEngineCookieStore_tr2(s: cstring, c: cstring): struct_miqt_string {.i
 proc fcQWebEngineCookieStore_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QWebEngineCookieStore_tr3".}
 proc fcQWebEngineCookieStore_setCookie2(self: pointer, cookie: pointer, origin: pointer): void {.importc: "QWebEngineCookieStore_setCookie2".}
 proc fcQWebEngineCookieStore_deleteCookie2(self: pointer, cookie: pointer, origin: pointer): void {.importc: "QWebEngineCookieStore_deleteCookie2".}
+proc fcQWebEngineCookieStore_staticMetaObject(): pointer {.importc: "QWebEngineCookieStore_staticMetaObject".}
 proc fcQWebEngineCookieStore_delete(self: pointer) {.importc: "QWebEngineCookieStore_delete".}
 proc fcQWebEngineCookieStoreFilterRequest_new(param1: pointer): ptr cQWebEngineCookieStoreFilterRequest {.importc: "QWebEngineCookieStore__FilterRequest_new".}
 proc fcQWebEngineCookieStoreFilterRequest_operatorAssign(self: pointer, param1: pointer): void {.importc: "QWebEngineCookieStore__FilterRequest_operatorAssign".}
@@ -80,6 +82,9 @@ proc metaObject*(self: gen_qwebenginecookiestore_types.QWebEngineCookieStore, ):
 
 proc metacast*(self: gen_qwebenginecookiestore_types.QWebEngineCookieStore, param1: cstring): pointer =
   fcQWebEngineCookieStore_metacast(self.h, param1)
+
+proc metacall*(self: gen_qwebenginecookiestore_types.QWebEngineCookieStore, param1: cint, param2: cint, param3: pointer): cint =
+  fcQWebEngineCookieStore_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qwebenginecookiestore_types.QWebEngineCookieStore, s: cstring): string =
   let v_ms = fcQWebEngineCookieStore_tr(s)
@@ -152,6 +157,8 @@ proc setCookie*(self: gen_qwebenginecookiestore_types.QWebEngineCookieStore, coo
 proc deleteCookie*(self: gen_qwebenginecookiestore_types.QWebEngineCookieStore, cookie: gen_qnetworkcookie_types.QNetworkCookie, origin: gen_qurl_types.QUrl): void =
   fcQWebEngineCookieStore_deleteCookie2(self.h, cookie.h, origin.h)
 
+proc staticMetaObject*(_: type gen_qwebenginecookiestore_types.QWebEngineCookieStore): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fcQWebEngineCookieStore_staticMetaObject())
 proc delete*(self: gen_qwebenginecookiestore_types.QWebEngineCookieStore) =
   fcQWebEngineCookieStore_delete(self.h)
 

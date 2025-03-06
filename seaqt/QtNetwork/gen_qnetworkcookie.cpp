@@ -189,6 +189,7 @@ struct miqt_string QNetworkCookie_toRawForm1(const QNetworkCookie* self, int for
 	return _ms;
 }
 
+const QMetaObject* QNetworkCookie_staticMetaObject() { return &QNetworkCookie::staticMetaObject; }
 void QNetworkCookie_delete(QNetworkCookie* self) {
 	delete self;
 }

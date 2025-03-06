@@ -46,6 +46,7 @@ QTextList* QTextList_new(QTextDocument* doc);
 void QTextList_virtbase(QTextList* src, QTextBlockGroup** outptr_QTextBlockGroup);
 QMetaObject* QTextList_metaObject(const QTextList* self);
 void* QTextList_metacast(QTextList* self, const char* param1);
+int QTextList_metacall(QTextList* self, int param1, int param2, void** param3);
 struct miqt_string QTextList_tr(const char* s);
 int QTextList_count(const QTextList* self);
 QTextBlock* QTextList_item(const QTextList* self, int i);
@@ -58,6 +59,12 @@ void QTextList_setFormat(QTextList* self, QTextListFormat* format);
 QTextListFormat* QTextList_format(const QTextList* self);
 struct miqt_string QTextList_tr2(const char* s, const char* c);
 struct miqt_string QTextList_tr3(const char* s, const char* c, int n);
+bool QTextList_override_virtual_metaObject(void* self, intptr_t slot);
+QMetaObject* QTextList_virtualbase_metaObject(const void* self);
+bool QTextList_override_virtual_metacast(void* self, intptr_t slot);
+void* QTextList_virtualbase_metacast(void* self, const char* param1);
+bool QTextList_override_virtual_metacall(void* self, intptr_t slot);
+int QTextList_virtualbase_metacall(void* self, int param1, int param2, void** param3);
 bool QTextList_override_virtual_blockInserted(void* self, intptr_t slot);
 void QTextList_virtualbase_blockInserted(void* self, QTextBlock* block);
 bool QTextList_override_virtual_blockRemoved(void* self, intptr_t slot);
@@ -83,6 +90,7 @@ QObject* QTextList_protectedbase_sender(bool* _dynamic_cast_ok, const void* self
 int QTextList_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
 int QTextList_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
 bool QTextList_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+const QMetaObject* QTextList_staticMetaObject();
 void QTextList_delete(QTextList* self);
 
 #ifdef __cplusplus

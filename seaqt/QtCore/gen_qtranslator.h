@@ -39,6 +39,7 @@ QTranslator* QTranslator_new2(QObject* parent);
 void QTranslator_virtbase(QTranslator* src, QObject** outptr_QObject);
 QMetaObject* QTranslator_metaObject(const QTranslator* self);
 void* QTranslator_metacast(QTranslator* self, const char* param1);
+int QTranslator_metacall(QTranslator* self, int param1, int param2, void** param3);
 struct miqt_string QTranslator_tr(const char* s);
 struct miqt_string QTranslator_translate(const QTranslator* self, const char* context, const char* sourceText, const char* disambiguation, int n);
 bool QTranslator_isEmpty(const QTranslator* self);
@@ -56,6 +57,12 @@ bool QTranslator_load33(QTranslator* self, QLocale* locale, struct miqt_string f
 bool QTranslator_load42(QTranslator* self, QLocale* locale, struct miqt_string filename, struct miqt_string prefix, struct miqt_string directory);
 bool QTranslator_load5(QTranslator* self, QLocale* locale, struct miqt_string filename, struct miqt_string prefix, struct miqt_string directory, struct miqt_string suffix);
 bool QTranslator_load34(QTranslator* self, const unsigned char* data, int len, struct miqt_string directory);
+bool QTranslator_override_virtual_metaObject(void* self, intptr_t slot);
+QMetaObject* QTranslator_virtualbase_metaObject(const void* self);
+bool QTranslator_override_virtual_metacast(void* self, intptr_t slot);
+void* QTranslator_virtualbase_metacast(void* self, const char* param1);
+bool QTranslator_override_virtual_metacall(void* self, intptr_t slot);
+int QTranslator_virtualbase_metacall(void* self, int param1, int param2, void** param3);
 bool QTranslator_override_virtual_translate(void* self, intptr_t slot);
 struct miqt_string QTranslator_virtualbase_translate(const void* self, const char* context, const char* sourceText, const char* disambiguation, int n);
 bool QTranslator_override_virtual_isEmpty(void* self, intptr_t slot);
@@ -78,6 +85,7 @@ QObject* QTranslator_protectedbase_sender(bool* _dynamic_cast_ok, const void* se
 int QTranslator_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
 int QTranslator_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
 bool QTranslator_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+const QMetaObject* QTranslator_staticMetaObject();
 void QTranslator_delete(QTranslator* self);
 
 #ifdef __cplusplus

@@ -43,6 +43,7 @@ typedef struct QSizeF QSizeF;
 void QGraphicsAnchor_virtbase(QGraphicsAnchor* src, QObject** outptr_QObject);
 QMetaObject* QGraphicsAnchor_metaObject(const QGraphicsAnchor* self);
 void* QGraphicsAnchor_metacast(QGraphicsAnchor* self, const char* param1);
+int QGraphicsAnchor_metacall(QGraphicsAnchor* self, int param1, int param2, void** param3);
 struct miqt_string QGraphicsAnchor_tr(const char* s);
 void QGraphicsAnchor_setSpacing(QGraphicsAnchor* self, double spacing);
 void QGraphicsAnchor_unsetSpacing(QGraphicsAnchor* self);
@@ -51,6 +52,7 @@ void QGraphicsAnchor_setSizePolicy(QGraphicsAnchor* self, int policy);
 int QGraphicsAnchor_sizePolicy(const QGraphicsAnchor* self);
 struct miqt_string QGraphicsAnchor_tr2(const char* s, const char* c);
 struct miqt_string QGraphicsAnchor_tr3(const char* s, const char* c, int n);
+const QMetaObject* QGraphicsAnchor_staticMetaObject();
 void QGraphicsAnchor_delete(QGraphicsAnchor* self);
 
 QGraphicsAnchorLayout* QGraphicsAnchorLayout_new();

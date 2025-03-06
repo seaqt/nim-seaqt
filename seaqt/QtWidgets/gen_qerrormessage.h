@@ -91,6 +91,7 @@ QErrorMessage* QErrorMessage_new2();
 void QErrorMessage_virtbase(QErrorMessage* src, QDialog** outptr_QDialog);
 QMetaObject* QErrorMessage_metaObject(const QErrorMessage* self);
 void* QErrorMessage_metacast(QErrorMessage* self, const char* param1);
+int QErrorMessage_metacall(QErrorMessage* self, int param1, int param2, void** param3);
 struct miqt_string QErrorMessage_tr(const char* s);
 QErrorMessage* QErrorMessage_qtHandler();
 void QErrorMessage_showMessage(QErrorMessage* self, struct miqt_string message);
@@ -99,6 +100,12 @@ void QErrorMessage_done(QErrorMessage* self, int param1);
 void QErrorMessage_changeEvent(QErrorMessage* self, QEvent* e);
 struct miqt_string QErrorMessage_tr2(const char* s, const char* c);
 struct miqt_string QErrorMessage_tr3(const char* s, const char* c, int n);
+bool QErrorMessage_override_virtual_metaObject(void* self, intptr_t slot);
+QMetaObject* QErrorMessage_virtualbase_metaObject(const void* self);
+bool QErrorMessage_override_virtual_metacast(void* self, intptr_t slot);
+void* QErrorMessage_virtualbase_metacast(void* self, const char* param1);
+bool QErrorMessage_override_virtual_metacall(void* self, intptr_t slot);
+int QErrorMessage_virtualbase_metacall(void* self, int param1, int param2, void** param3);
 bool QErrorMessage_override_virtual_done(void* self, intptr_t slot);
 void QErrorMessage_virtualbase_done(void* self, int param1);
 bool QErrorMessage_override_virtual_changeEvent(void* self, intptr_t slot);
@@ -213,6 +220,7 @@ QObject* QErrorMessage_protectedbase_sender(bool* _dynamic_cast_ok, const void* 
 int QErrorMessage_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
 int QErrorMessage_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
 bool QErrorMessage_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+const QMetaObject* QErrorMessage_staticMetaObject();
 void QErrorMessage_delete(QErrorMessage* self);
 
 #ifdef __cplusplus

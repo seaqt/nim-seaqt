@@ -131,6 +131,7 @@ proc fcQCamera_new5(cameraDevice: pointer, parent: pointer): ptr cQCamera {.impo
 proc fcQCamera_new6(position: cint, parent: pointer): ptr cQCamera {.importc: "QCamera_new6".}
 proc fcQCamera_metaObject(self: pointer, ): pointer {.importc: "QCamera_metaObject".}
 proc fcQCamera_metacast(self: pointer, param1: cstring): pointer {.importc: "QCamera_metacast".}
+proc fcQCamera_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QCamera_metacall".}
 proc fcQCamera_tr(s: cstring): struct_miqt_string {.importc: "QCamera_tr".}
 proc fcQCamera_isAvailable(self: pointer, ): bool {.importc: "QCamera_isAvailable".}
 proc fcQCamera_isActive(self: pointer, ): bool {.importc: "QCamera_isActive".}
@@ -245,6 +246,12 @@ proc fcQCamera_hueChanged(self: pointer, ): void {.importc: "QCamera_hueChanged"
 proc fcQCamera_connect_hueChanged(self: pointer, slot: int) {.importc: "QCamera_connect_hueChanged".}
 proc fcQCamera_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QCamera_tr2".}
 proc fcQCamera_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QCamera_tr3".}
+proc fQCamera_virtualbase_metaObject(self: pointer, ): pointer{.importc: "QCamera_virtualbase_metaObject".}
+proc fcQCamera_override_virtual_metaObject(self: pointer, slot: int) {.importc: "QCamera_override_virtual_metaObject".}
+proc fQCamera_virtualbase_metacast(self: pointer, param1: cstring): pointer{.importc: "QCamera_virtualbase_metacast".}
+proc fcQCamera_override_virtual_metacast(self: pointer, slot: int) {.importc: "QCamera_override_virtual_metacast".}
+proc fQCamera_virtualbase_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint{.importc: "QCamera_virtualbase_metacall".}
+proc fcQCamera_override_virtual_metacall(self: pointer, slot: int) {.importc: "QCamera_override_virtual_metacall".}
 proc fQCamera_virtualbase_event(self: pointer, event: pointer): bool{.importc: "QCamera_virtualbase_event".}
 proc fcQCamera_override_virtual_event(self: pointer, slot: int) {.importc: "QCamera_override_virtual_event".}
 proc fQCamera_virtualbase_eventFilter(self: pointer, watched: pointer, event: pointer): bool{.importc: "QCamera_virtualbase_eventFilter".}
@@ -259,6 +266,7 @@ proc fQCamera_virtualbase_connectNotify(self: pointer, signal: pointer): void{.i
 proc fcQCamera_override_virtual_connectNotify(self: pointer, slot: int) {.importc: "QCamera_override_virtual_connectNotify".}
 proc fQCamera_virtualbase_disconnectNotify(self: pointer, signal: pointer): void{.importc: "QCamera_virtualbase_disconnectNotify".}
 proc fcQCamera_override_virtual_disconnectNotify(self: pointer, slot: int) {.importc: "QCamera_override_virtual_disconnectNotify".}
+proc fcQCamera_staticMetaObject(): pointer {.importc: "QCamera_staticMetaObject".}
 proc fcQCamera_delete(self: pointer) {.importc: "QCamera_delete".}
 
 
@@ -287,6 +295,9 @@ proc metaObject*(self: gen_qcamera_types.QCamera, ): gen_qobjectdefs_types.QMeta
 
 proc metacast*(self: gen_qcamera_types.QCamera, param1: cstring): pointer =
   fcQCamera_metacast(self.h, param1)
+
+proc metacall*(self: gen_qcamera_types.QCamera, param1: cint, param2: cint, param3: pointer): cint =
+  fcQCamera_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qcamera_types.QCamera, s: cstring): string =
   let v_ms = fcQCamera_tr(s)
@@ -895,6 +906,65 @@ proc tr*(_: type gen_qcamera_types.QCamera, s: cstring, c: cstring, n: cint): st
   c_free(v_ms.data)
   vx_ret
 
+proc QCamerametaObject*(self: gen_qcamera_types.QCamera, ): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fQCamera_virtualbase_metaObject(self.h))
+
+type QCamerametaObjectProc* = proc(): gen_qobjectdefs_types.QMetaObject
+proc onmetaObject*(self: gen_qcamera_types.QCamera, slot: QCamerametaObjectProc) =
+  # TODO check subclass
+  var tmp = new QCamerametaObjectProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQCamera_override_virtual_metaObject(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QCamera_metaObject(self: ptr cQCamera, slot: int): pointer {.exportc: "miqt_exec_callback_QCamera_metaObject ".} =
+  var nimfunc = cast[ptr QCamerametaObjectProc](cast[pointer](slot))
+
+  let virtualReturn = nimfunc[]( )
+
+  virtualReturn.h
+proc QCamerametacast*(self: gen_qcamera_types.QCamera, param1: cstring): pointer =
+  fQCamera_virtualbase_metacast(self.h, param1)
+
+type QCamerametacastProc* = proc(param1: cstring): pointer
+proc onmetacast*(self: gen_qcamera_types.QCamera, slot: QCamerametacastProc) =
+  # TODO check subclass
+  var tmp = new QCamerametacastProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQCamera_override_virtual_metacast(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QCamera_metacast(self: ptr cQCamera, slot: int, param1: cstring): pointer {.exportc: "miqt_exec_callback_QCamera_metacast ".} =
+  var nimfunc = cast[ptr QCamerametacastProc](cast[pointer](slot))
+  let slotval1 = (param1)
+
+
+  let virtualReturn = nimfunc[](slotval1 )
+
+  virtualReturn
+proc QCamerametacall*(self: gen_qcamera_types.QCamera, param1: cint, param2: cint, param3: pointer): cint =
+  fQCamera_virtualbase_metacall(self.h, cint(param1), param2, param3)
+
+type QCamerametacallProc* = proc(param1: cint, param2: cint, param3: pointer): cint
+proc onmetacall*(self: gen_qcamera_types.QCamera, slot: QCamerametacallProc) =
+  # TODO check subclass
+  var tmp = new QCamerametacallProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQCamera_override_virtual_metacall(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QCamera_metacall(self: ptr cQCamera, slot: int, param1: cint, param2: cint, param3: pointer): cint {.exportc: "miqt_exec_callback_QCamera_metacall ".} =
+  var nimfunc = cast[ptr QCamerametacallProc](cast[pointer](slot))
+  let slotval1 = cint(param1)
+
+  let slotval2 = param2
+
+  let slotval3 = param3
+
+
+  let virtualReturn = nimfunc[](slotval1, slotval2, slotval3 )
+
+  virtualReturn
 proc QCameraevent*(self: gen_qcamera_types.QCamera, event: gen_qcoreevent_types.QEvent): bool =
   fQCamera_virtualbase_event(self.h, event.h)
 
@@ -1020,5 +1090,7 @@ proc miqt_exec_callback_QCamera_disconnectNotify(self: ptr cQCamera, slot: int, 
 
 
   nimfunc[](slotval1)
+proc staticMetaObject*(_: type gen_qcamera_types.QCamera): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fcQCamera_staticMetaObject())
 proc delete*(self: gen_qcamera_types.QCamera) =
   fcQCamera_delete(self.h)

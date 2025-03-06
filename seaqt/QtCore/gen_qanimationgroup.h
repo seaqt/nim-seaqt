@@ -39,6 +39,7 @@ QAnimationGroup* QAnimationGroup_new2(QObject* parent);
 void QAnimationGroup_virtbase(QAnimationGroup* src, QAbstractAnimation** outptr_QAbstractAnimation);
 QMetaObject* QAnimationGroup_metaObject(const QAnimationGroup* self);
 void* QAnimationGroup_metacast(QAnimationGroup* self, const char* param1);
+int QAnimationGroup_metacall(QAnimationGroup* self, int param1, int param2, void** param3);
 struct miqt_string QAnimationGroup_tr(const char* s);
 QAbstractAnimation* QAnimationGroup_animationAt(const QAnimationGroup* self, int index);
 int QAnimationGroup_animationCount(const QAnimationGroup* self);
@@ -51,6 +52,12 @@ void QAnimationGroup_clear(QAnimationGroup* self);
 bool QAnimationGroup_event(QAnimationGroup* self, QEvent* event);
 struct miqt_string QAnimationGroup_tr2(const char* s, const char* c);
 struct miqt_string QAnimationGroup_tr3(const char* s, const char* c, int n);
+bool QAnimationGroup_override_virtual_metaObject(void* self, intptr_t slot);
+QMetaObject* QAnimationGroup_virtualbase_metaObject(const void* self);
+bool QAnimationGroup_override_virtual_metacast(void* self, intptr_t slot);
+void* QAnimationGroup_virtualbase_metacast(void* self, const char* param1);
+bool QAnimationGroup_override_virtual_metacall(void* self, intptr_t slot);
+int QAnimationGroup_virtualbase_metacall(void* self, int param1, int param2, void** param3);
 bool QAnimationGroup_override_virtual_event(void* self, intptr_t slot);
 bool QAnimationGroup_virtualbase_event(void* self, QEvent* event);
 bool QAnimationGroup_override_virtual_duration(void* self, intptr_t slot);
@@ -77,6 +84,7 @@ QObject* QAnimationGroup_protectedbase_sender(bool* _dynamic_cast_ok, const void
 int QAnimationGroup_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
 int QAnimationGroup_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
 bool QAnimationGroup_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+const QMetaObject* QAnimationGroup_staticMetaObject();
 void QAnimationGroup_delete(QAnimationGroup* self);
 
 #ifdef __cplusplus

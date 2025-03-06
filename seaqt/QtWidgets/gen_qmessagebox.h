@@ -106,6 +106,7 @@ QMessageBox* QMessageBox_new9(struct miqt_string title, struct miqt_string text,
 void QMessageBox_virtbase(QMessageBox* src, QDialog** outptr_QDialog);
 QMetaObject* QMessageBox_metaObject(const QMessageBox* self);
 void* QMessageBox_metacast(QMessageBox* self, const char* param1);
+int QMessageBox_metacall(QMessageBox* self, int param1, int param2, void** param3);
 struct miqt_string QMessageBox_tr(const char* s);
 void QMessageBox_addButton(QMessageBox* self, QAbstractButton* button, int role);
 QPushButton* QMessageBox_addButton2(QMessageBox* self, struct miqt_string text, int role);
@@ -205,6 +206,12 @@ int QMessageBox_critical52(QWidget* parent, struct miqt_string title, struct miq
 int QMessageBox_critical62(QWidget* parent, struct miqt_string title, struct miqt_string text, struct miqt_string button0Text, struct miqt_string button1Text, struct miqt_string button2Text);
 int QMessageBox_critical7(QWidget* parent, struct miqt_string title, struct miqt_string text, struct miqt_string button0Text, struct miqt_string button1Text, struct miqt_string button2Text, int defaultButtonNumber);
 int QMessageBox_critical8(QWidget* parent, struct miqt_string title, struct miqt_string text, struct miqt_string button0Text, struct miqt_string button1Text, struct miqt_string button2Text, int defaultButtonNumber, int escapeButtonNumber);
+bool QMessageBox_override_virtual_metaObject(void* self, intptr_t slot);
+QMetaObject* QMessageBox_virtualbase_metaObject(const void* self);
+bool QMessageBox_override_virtual_metacast(void* self, intptr_t slot);
+void* QMessageBox_virtualbase_metacast(void* self, const char* param1);
+bool QMessageBox_override_virtual_metacall(void* self, intptr_t slot);
+int QMessageBox_virtualbase_metacall(void* self, int param1, int param2, void** param3);
 bool QMessageBox_override_virtual_event(void* self, intptr_t slot);
 bool QMessageBox_virtualbase_event(void* self, QEvent* e);
 bool QMessageBox_override_virtual_resizeEvent(void* self, intptr_t slot);
@@ -319,6 +326,7 @@ QObject* QMessageBox_protectedbase_sender(bool* _dynamic_cast_ok, const void* se
 int QMessageBox_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
 int QMessageBox_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
 bool QMessageBox_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+const QMetaObject* QMessageBox_staticMetaObject();
 void QMessageBox_delete(QMessageBox* self);
 
 #ifdef __cplusplus

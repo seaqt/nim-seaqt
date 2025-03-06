@@ -39,6 +39,7 @@ QFileSelector* QFileSelector_new2(QObject* parent);
 void QFileSelector_virtbase(QFileSelector* src, QObject** outptr_QObject);
 QMetaObject* QFileSelector_metaObject(const QFileSelector* self);
 void* QFileSelector_metacast(QFileSelector* self, const char* param1);
+int QFileSelector_metacall(QFileSelector* self, int param1, int param2, void** param3);
 struct miqt_string QFileSelector_tr(const char* s);
 struct miqt_string QFileSelector_select(const QFileSelector* self, struct miqt_string filePath);
 QUrl* QFileSelector_selectWithFilePath(const QFileSelector* self, QUrl* filePath);
@@ -47,6 +48,12 @@ void QFileSelector_setExtraSelectors(QFileSelector* self, struct miqt_array /* o
 struct miqt_array /* of struct miqt_string */  QFileSelector_allSelectors(const QFileSelector* self);
 struct miqt_string QFileSelector_tr2(const char* s, const char* c);
 struct miqt_string QFileSelector_tr3(const char* s, const char* c, int n);
+bool QFileSelector_override_virtual_metaObject(void* self, intptr_t slot);
+QMetaObject* QFileSelector_virtualbase_metaObject(const void* self);
+bool QFileSelector_override_virtual_metacast(void* self, intptr_t slot);
+void* QFileSelector_virtualbase_metacast(void* self, const char* param1);
+bool QFileSelector_override_virtual_metacall(void* self, intptr_t slot);
+int QFileSelector_virtualbase_metacall(void* self, int param1, int param2, void** param3);
 bool QFileSelector_override_virtual_event(void* self, intptr_t slot);
 bool QFileSelector_virtualbase_event(void* self, QEvent* event);
 bool QFileSelector_override_virtual_eventFilter(void* self, intptr_t slot);
@@ -65,6 +72,7 @@ QObject* QFileSelector_protectedbase_sender(bool* _dynamic_cast_ok, const void* 
 int QFileSelector_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
 int QFileSelector_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
 bool QFileSelector_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+const QMetaObject* QFileSelector_staticMetaObject();
 void QFileSelector_delete(QFileSelector* self);
 
 #ifdef __cplusplus

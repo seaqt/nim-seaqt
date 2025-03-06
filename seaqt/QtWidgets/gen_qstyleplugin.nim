@@ -56,10 +56,17 @@ proc fcQStylePlugin_new(): ptr cQStylePlugin {.importc: "QStylePlugin_new".}
 proc fcQStylePlugin_new2(parent: pointer): ptr cQStylePlugin {.importc: "QStylePlugin_new2".}
 proc fcQStylePlugin_metaObject(self: pointer, ): pointer {.importc: "QStylePlugin_metaObject".}
 proc fcQStylePlugin_metacast(self: pointer, param1: cstring): pointer {.importc: "QStylePlugin_metacast".}
+proc fcQStylePlugin_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QStylePlugin_metacall".}
 proc fcQStylePlugin_tr(s: cstring): struct_miqt_string {.importc: "QStylePlugin_tr".}
 proc fcQStylePlugin_create(self: pointer, key: struct_miqt_string): pointer {.importc: "QStylePlugin_create".}
 proc fcQStylePlugin_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QStylePlugin_tr2".}
 proc fcQStylePlugin_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QStylePlugin_tr3".}
+proc fQStylePlugin_virtualbase_metaObject(self: pointer, ): pointer{.importc: "QStylePlugin_virtualbase_metaObject".}
+proc fcQStylePlugin_override_virtual_metaObject(self: pointer, slot: int) {.importc: "QStylePlugin_override_virtual_metaObject".}
+proc fQStylePlugin_virtualbase_metacast(self: pointer, param1: cstring): pointer{.importc: "QStylePlugin_virtualbase_metacast".}
+proc fcQStylePlugin_override_virtual_metacast(self: pointer, slot: int) {.importc: "QStylePlugin_override_virtual_metacast".}
+proc fQStylePlugin_virtualbase_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint{.importc: "QStylePlugin_virtualbase_metacall".}
+proc fcQStylePlugin_override_virtual_metacall(self: pointer, slot: int) {.importc: "QStylePlugin_override_virtual_metacall".}
 proc fcQStylePlugin_override_virtual_create(self: pointer, slot: int) {.importc: "QStylePlugin_override_virtual_create".}
 proc fQStylePlugin_virtualbase_event(self: pointer, event: pointer): bool{.importc: "QStylePlugin_virtualbase_event".}
 proc fcQStylePlugin_override_virtual_event(self: pointer, slot: int) {.importc: "QStylePlugin_override_virtual_event".}
@@ -75,6 +82,7 @@ proc fQStylePlugin_virtualbase_connectNotify(self: pointer, signal: pointer): vo
 proc fcQStylePlugin_override_virtual_connectNotify(self: pointer, slot: int) {.importc: "QStylePlugin_override_virtual_connectNotify".}
 proc fQStylePlugin_virtualbase_disconnectNotify(self: pointer, signal: pointer): void{.importc: "QStylePlugin_virtualbase_disconnectNotify".}
 proc fcQStylePlugin_override_virtual_disconnectNotify(self: pointer, slot: int) {.importc: "QStylePlugin_override_virtual_disconnectNotify".}
+proc fcQStylePlugin_staticMetaObject(): pointer {.importc: "QStylePlugin_staticMetaObject".}
 proc fcQStylePlugin_delete(self: pointer) {.importc: "QStylePlugin_delete".}
 
 
@@ -91,6 +99,9 @@ proc metaObject*(self: gen_qstyleplugin_types.QStylePlugin, ): gen_qobjectdefs_t
 
 proc metacast*(self: gen_qstyleplugin_types.QStylePlugin, param1: cstring): pointer =
   fcQStylePlugin_metacast(self.h, param1)
+
+proc metacall*(self: gen_qstyleplugin_types.QStylePlugin, param1: cint, param2: cint, param3: pointer): cint =
+  fcQStylePlugin_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qstyleplugin_types.QStylePlugin, s: cstring): string =
   let v_ms = fcQStylePlugin_tr(s)
@@ -113,6 +124,65 @@ proc tr*(_: type gen_qstyleplugin_types.QStylePlugin, s: cstring, c: cstring, n:
   c_free(v_ms.data)
   vx_ret
 
+proc QStylePluginmetaObject*(self: gen_qstyleplugin_types.QStylePlugin, ): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fQStylePlugin_virtualbase_metaObject(self.h))
+
+type QStylePluginmetaObjectProc* = proc(): gen_qobjectdefs_types.QMetaObject
+proc onmetaObject*(self: gen_qstyleplugin_types.QStylePlugin, slot: QStylePluginmetaObjectProc) =
+  # TODO check subclass
+  var tmp = new QStylePluginmetaObjectProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQStylePlugin_override_virtual_metaObject(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QStylePlugin_metaObject(self: ptr cQStylePlugin, slot: int): pointer {.exportc: "miqt_exec_callback_QStylePlugin_metaObject ".} =
+  var nimfunc = cast[ptr QStylePluginmetaObjectProc](cast[pointer](slot))
+
+  let virtualReturn = nimfunc[]( )
+
+  virtualReturn.h
+proc QStylePluginmetacast*(self: gen_qstyleplugin_types.QStylePlugin, param1: cstring): pointer =
+  fQStylePlugin_virtualbase_metacast(self.h, param1)
+
+type QStylePluginmetacastProc* = proc(param1: cstring): pointer
+proc onmetacast*(self: gen_qstyleplugin_types.QStylePlugin, slot: QStylePluginmetacastProc) =
+  # TODO check subclass
+  var tmp = new QStylePluginmetacastProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQStylePlugin_override_virtual_metacast(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QStylePlugin_metacast(self: ptr cQStylePlugin, slot: int, param1: cstring): pointer {.exportc: "miqt_exec_callback_QStylePlugin_metacast ".} =
+  var nimfunc = cast[ptr QStylePluginmetacastProc](cast[pointer](slot))
+  let slotval1 = (param1)
+
+
+  let virtualReturn = nimfunc[](slotval1 )
+
+  virtualReturn
+proc QStylePluginmetacall*(self: gen_qstyleplugin_types.QStylePlugin, param1: cint, param2: cint, param3: pointer): cint =
+  fQStylePlugin_virtualbase_metacall(self.h, cint(param1), param2, param3)
+
+type QStylePluginmetacallProc* = proc(param1: cint, param2: cint, param3: pointer): cint
+proc onmetacall*(self: gen_qstyleplugin_types.QStylePlugin, slot: QStylePluginmetacallProc) =
+  # TODO check subclass
+  var tmp = new QStylePluginmetacallProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQStylePlugin_override_virtual_metacall(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QStylePlugin_metacall(self: ptr cQStylePlugin, slot: int, param1: cint, param2: cint, param3: pointer): cint {.exportc: "miqt_exec_callback_QStylePlugin_metacall ".} =
+  var nimfunc = cast[ptr QStylePluginmetacallProc](cast[pointer](slot))
+  let slotval1 = cint(param1)
+
+  let slotval2 = param2
+
+  let slotval3 = param3
+
+
+  let virtualReturn = nimfunc[](slotval1, slotval2, slotval3 )
+
+  virtualReturn
 type QStylePlugincreateProc* = proc(key: string): gen_qstyle_types.QStyle
 proc oncreate*(self: gen_qstyleplugin_types.QStylePlugin, slot: QStylePlugincreateProc) =
   # TODO check subclass
@@ -257,5 +327,7 @@ proc miqt_exec_callback_QStylePlugin_disconnectNotify(self: ptr cQStylePlugin, s
 
 
   nimfunc[](slotval1)
+proc staticMetaObject*(_: type gen_qstyleplugin_types.QStylePlugin): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fcQStylePlugin_staticMetaObject())
 proc delete*(self: gen_qstyleplugin_types.QStylePlugin) =
   fcQStylePlugin_delete(self.h)

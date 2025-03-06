@@ -31,6 +31,10 @@ void* QWebEngineUrlRequestJob_metacast(QWebEngineUrlRequestJob* self, const char
 	return self->qt_metacast(param1);
 }
 
+int QWebEngineUrlRequestJob_metacall(QWebEngineUrlRequestJob* self, int param1, int param2, void** param3) {
+	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
+}
+
 struct miqt_string QWebEngineUrlRequestJob_tr(const char* s) {
 	QString _ret = QWebEngineUrlRequestJob::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
@@ -94,6 +98,7 @@ struct miqt_string QWebEngineUrlRequestJob_tr3(const char* s, const char* c, int
 	return _ms;
 }
 
+const QMetaObject* QWebEngineUrlRequestJob_staticMetaObject() { return &QWebEngineUrlRequestJob::staticMetaObject; }
 void QWebEngineUrlRequestJob_delete(QWebEngineUrlRequestJob* self) {
 	delete self;
 }

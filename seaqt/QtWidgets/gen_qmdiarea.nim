@@ -93,6 +93,7 @@ proc fcQMdiArea_new(parent: pointer): ptr cQMdiArea {.importc: "QMdiArea_new".}
 proc fcQMdiArea_new2(): ptr cQMdiArea {.importc: "QMdiArea_new2".}
 proc fcQMdiArea_metaObject(self: pointer, ): pointer {.importc: "QMdiArea_metaObject".}
 proc fcQMdiArea_metacast(self: pointer, param1: cstring): pointer {.importc: "QMdiArea_metacast".}
+proc fcQMdiArea_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QMdiArea_metacall".}
 proc fcQMdiArea_tr(s: cstring): struct_miqt_string {.importc: "QMdiArea_tr".}
 proc fcQMdiArea_sizeHint(self: pointer, ): pointer {.importc: "QMdiArea_sizeHint".}
 proc fcQMdiArea_minimumSizeHint(self: pointer, ): pointer {.importc: "QMdiArea_minimumSizeHint".}
@@ -133,6 +134,12 @@ proc fcQMdiArea_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.impor
 proc fcQMdiArea_subWindowList1(self: pointer, order: cint): struct_miqt_array {.importc: "QMdiArea_subWindowList1".}
 proc fcQMdiArea_addSubWindow2(self: pointer, widget: pointer, flags: cint): pointer {.importc: "QMdiArea_addSubWindow2".}
 proc fcQMdiArea_setOption2(self: pointer, option: cint, on: bool): void {.importc: "QMdiArea_setOption2".}
+proc fQMdiArea_virtualbase_metaObject(self: pointer, ): pointer{.importc: "QMdiArea_virtualbase_metaObject".}
+proc fcQMdiArea_override_virtual_metaObject(self: pointer, slot: int) {.importc: "QMdiArea_override_virtual_metaObject".}
+proc fQMdiArea_virtualbase_metacast(self: pointer, param1: cstring): pointer{.importc: "QMdiArea_virtualbase_metacast".}
+proc fcQMdiArea_override_virtual_metacast(self: pointer, slot: int) {.importc: "QMdiArea_override_virtual_metacast".}
+proc fQMdiArea_virtualbase_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint{.importc: "QMdiArea_virtualbase_metacall".}
+proc fcQMdiArea_override_virtual_metacall(self: pointer, slot: int) {.importc: "QMdiArea_override_virtual_metacall".}
 proc fQMdiArea_virtualbase_sizeHint(self: pointer, ): pointer{.importc: "QMdiArea_virtualbase_sizeHint".}
 proc fcQMdiArea_override_virtual_sizeHint(self: pointer, slot: int) {.importc: "QMdiArea_override_virtual_sizeHint".}
 proc fQMdiArea_virtualbase_minimumSizeHint(self: pointer, ): pointer{.importc: "QMdiArea_virtualbase_minimumSizeHint".}
@@ -237,6 +244,7 @@ proc fQMdiArea_virtualbase_connectNotify(self: pointer, signal: pointer): void{.
 proc fcQMdiArea_override_virtual_connectNotify(self: pointer, slot: int) {.importc: "QMdiArea_override_virtual_connectNotify".}
 proc fQMdiArea_virtualbase_disconnectNotify(self: pointer, signal: pointer): void{.importc: "QMdiArea_virtualbase_disconnectNotify".}
 proc fcQMdiArea_override_virtual_disconnectNotify(self: pointer, slot: int) {.importc: "QMdiArea_override_virtual_disconnectNotify".}
+proc fcQMdiArea_staticMetaObject(): pointer {.importc: "QMdiArea_staticMetaObject".}
 proc fcQMdiArea_delete(self: pointer) {.importc: "QMdiArea_delete".}
 
 
@@ -253,6 +261,9 @@ proc metaObject*(self: gen_qmdiarea_types.QMdiArea, ): gen_qobjectdefs_types.QMe
 
 proc metacast*(self: gen_qmdiarea_types.QMdiArea, param1: cstring): pointer =
   fcQMdiArea_metacast(self.h, param1)
+
+proc metacall*(self: gen_qmdiarea_types.QMdiArea, param1: cint, param2: cint, param3: pointer): cint =
+  fcQMdiArea_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qmdiarea_types.QMdiArea, s: cstring): string =
   let v_ms = fcQMdiArea_tr(s)
@@ -403,6 +414,65 @@ proc addSubWindow*(self: gen_qmdiarea_types.QMdiArea, widget: gen_qwidget_types.
 proc setOption*(self: gen_qmdiarea_types.QMdiArea, option: cint, on: bool): void =
   fcQMdiArea_setOption2(self.h, cint(option), on)
 
+proc QMdiAreametaObject*(self: gen_qmdiarea_types.QMdiArea, ): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fQMdiArea_virtualbase_metaObject(self.h))
+
+type QMdiAreametaObjectProc* = proc(): gen_qobjectdefs_types.QMetaObject
+proc onmetaObject*(self: gen_qmdiarea_types.QMdiArea, slot: QMdiAreametaObjectProc) =
+  # TODO check subclass
+  var tmp = new QMdiAreametaObjectProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQMdiArea_override_virtual_metaObject(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QMdiArea_metaObject(self: ptr cQMdiArea, slot: int): pointer {.exportc: "miqt_exec_callback_QMdiArea_metaObject ".} =
+  var nimfunc = cast[ptr QMdiAreametaObjectProc](cast[pointer](slot))
+
+  let virtualReturn = nimfunc[]( )
+
+  virtualReturn.h
+proc QMdiAreametacast*(self: gen_qmdiarea_types.QMdiArea, param1: cstring): pointer =
+  fQMdiArea_virtualbase_metacast(self.h, param1)
+
+type QMdiAreametacastProc* = proc(param1: cstring): pointer
+proc onmetacast*(self: gen_qmdiarea_types.QMdiArea, slot: QMdiAreametacastProc) =
+  # TODO check subclass
+  var tmp = new QMdiAreametacastProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQMdiArea_override_virtual_metacast(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QMdiArea_metacast(self: ptr cQMdiArea, slot: int, param1: cstring): pointer {.exportc: "miqt_exec_callback_QMdiArea_metacast ".} =
+  var nimfunc = cast[ptr QMdiAreametacastProc](cast[pointer](slot))
+  let slotval1 = (param1)
+
+
+  let virtualReturn = nimfunc[](slotval1 )
+
+  virtualReturn
+proc QMdiAreametacall*(self: gen_qmdiarea_types.QMdiArea, param1: cint, param2: cint, param3: pointer): cint =
+  fQMdiArea_virtualbase_metacall(self.h, cint(param1), param2, param3)
+
+type QMdiAreametacallProc* = proc(param1: cint, param2: cint, param3: pointer): cint
+proc onmetacall*(self: gen_qmdiarea_types.QMdiArea, slot: QMdiAreametacallProc) =
+  # TODO check subclass
+  var tmp = new QMdiAreametacallProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQMdiArea_override_virtual_metacall(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QMdiArea_metacall(self: ptr cQMdiArea, slot: int, param1: cint, param2: cint, param3: pointer): cint {.exportc: "miqt_exec_callback_QMdiArea_metacall ".} =
+  var nimfunc = cast[ptr QMdiAreametacallProc](cast[pointer](slot))
+  let slotval1 = cint(param1)
+
+  let slotval2 = param2
+
+  let slotval3 = param3
+
+
+  let virtualReturn = nimfunc[](slotval1, slotval2, slotval3 )
+
+  virtualReturn
 proc QMdiAreasizeHint*(self: gen_qmdiarea_types.QMdiArea, ): gen_qsize_types.QSize =
   gen_qsize_types.QSize(h: fQMdiArea_virtualbase_sizeHint(self.h))
 
@@ -1316,5 +1386,7 @@ proc miqt_exec_callback_QMdiArea_disconnectNotify(self: ptr cQMdiArea, slot: int
 
 
   nimfunc[](slotval1)
+proc staticMetaObject*(_: type gen_qmdiarea_types.QMdiArea): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fcQMdiArea_staticMetaObject())
 proc delete*(self: gen_qmdiarea_types.QMdiArea) =
   fcQMdiArea_delete(self.h)

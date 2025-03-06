@@ -66,6 +66,7 @@ QSslCertificate* QSslError_certificate(const QSslError* self) {
 	return new QSslCertificate(self->certificate());
 }
 
+const QMetaObject* QSslError_staticMetaObject() { return &QSslError::staticMetaObject; }
 void QSslError_delete(QSslError* self) {
 	delete self;
 }

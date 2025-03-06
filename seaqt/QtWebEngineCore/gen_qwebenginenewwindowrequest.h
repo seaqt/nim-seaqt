@@ -35,6 +35,7 @@ typedef struct QWebEnginePage QWebEnginePage;
 void QWebEngineNewWindowRequest_virtbase(QWebEngineNewWindowRequest* src, QObject** outptr_QObject);
 QMetaObject* QWebEngineNewWindowRequest_metaObject(const QWebEngineNewWindowRequest* self);
 void* QWebEngineNewWindowRequest_metacast(QWebEngineNewWindowRequest* self, const char* param1);
+int QWebEngineNewWindowRequest_metacall(QWebEngineNewWindowRequest* self, int param1, int param2, void** param3);
 struct miqt_string QWebEngineNewWindowRequest_tr(const char* s);
 int QWebEngineNewWindowRequest_destination(const QWebEngineNewWindowRequest* self);
 QUrl* QWebEngineNewWindowRequest_requestedUrl(const QWebEngineNewWindowRequest* self);
@@ -43,6 +44,7 @@ bool QWebEngineNewWindowRequest_isUserInitiated(const QWebEngineNewWindowRequest
 void QWebEngineNewWindowRequest_openIn(QWebEngineNewWindowRequest* self, QWebEnginePage* param1);
 struct miqt_string QWebEngineNewWindowRequest_tr2(const char* s, const char* c);
 struct miqt_string QWebEngineNewWindowRequest_tr3(const char* s, const char* c, int n);
+const QMetaObject* QWebEngineNewWindowRequest_staticMetaObject();
 void QWebEngineNewWindowRequest_delete(QWebEngineNewWindowRequest* self);
 
 #ifdef __cplusplus

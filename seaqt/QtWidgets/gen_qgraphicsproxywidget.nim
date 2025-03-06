@@ -83,6 +83,7 @@ proc fcQGraphicsProxyWidget_new2(parent: pointer): ptr cQGraphicsProxyWidget {.i
 proc fcQGraphicsProxyWidget_new3(parent: pointer, wFlags: cint): ptr cQGraphicsProxyWidget {.importc: "QGraphicsProxyWidget_new3".}
 proc fcQGraphicsProxyWidget_metaObject(self: pointer, ): pointer {.importc: "QGraphicsProxyWidget_metaObject".}
 proc fcQGraphicsProxyWidget_metacast(self: pointer, param1: cstring): pointer {.importc: "QGraphicsProxyWidget_metacast".}
+proc fcQGraphicsProxyWidget_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QGraphicsProxyWidget_metacall".}
 proc fcQGraphicsProxyWidget_tr(s: cstring): struct_miqt_string {.importc: "QGraphicsProxyWidget_tr".}
 proc fcQGraphicsProxyWidget_setWidget(self: pointer, widget: pointer): void {.importc: "QGraphicsProxyWidget_setWidget".}
 proc fcQGraphicsProxyWidget_widget(self: pointer, ): pointer {.importc: "QGraphicsProxyWidget_widget".}
@@ -93,6 +94,12 @@ proc fcQGraphicsProxyWidget_typeX(self: pointer, ): cint {.importc: "QGraphicsPr
 proc fcQGraphicsProxyWidget_createProxyForChildWidget(self: pointer, child: pointer): pointer {.importc: "QGraphicsProxyWidget_createProxyForChildWidget".}
 proc fcQGraphicsProxyWidget_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QGraphicsProxyWidget_tr2".}
 proc fcQGraphicsProxyWidget_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QGraphicsProxyWidget_tr3".}
+proc fQGraphicsProxyWidget_virtualbase_metaObject(self: pointer, ): pointer{.importc: "QGraphicsProxyWidget_virtualbase_metaObject".}
+proc fcQGraphicsProxyWidget_override_virtual_metaObject(self: pointer, slot: int) {.importc: "QGraphicsProxyWidget_override_virtual_metaObject".}
+proc fQGraphicsProxyWidget_virtualbase_metacast(self: pointer, param1: cstring): pointer{.importc: "QGraphicsProxyWidget_virtualbase_metacast".}
+proc fcQGraphicsProxyWidget_override_virtual_metacast(self: pointer, slot: int) {.importc: "QGraphicsProxyWidget_override_virtual_metacast".}
+proc fQGraphicsProxyWidget_virtualbase_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint{.importc: "QGraphicsProxyWidget_virtualbase_metacall".}
+proc fcQGraphicsProxyWidget_override_virtual_metacall(self: pointer, slot: int) {.importc: "QGraphicsProxyWidget_override_virtual_metacall".}
 proc fQGraphicsProxyWidget_virtualbase_setGeometry(self: pointer, rect: pointer): void{.importc: "QGraphicsProxyWidget_virtualbase_setGeometry".}
 proc fcQGraphicsProxyWidget_override_virtual_setGeometry(self: pointer, slot: int) {.importc: "QGraphicsProxyWidget_override_virtual_setGeometry".}
 proc fQGraphicsProxyWidget_virtualbase_paint(self: pointer, painter: pointer, option: pointer, widget: pointer): void{.importc: "QGraphicsProxyWidget_virtualbase_paint".}
@@ -221,6 +228,7 @@ proc fQGraphicsProxyWidget_virtualbase_extension(self: pointer, variant: pointer
 proc fcQGraphicsProxyWidget_override_virtual_extension(self: pointer, slot: int) {.importc: "QGraphicsProxyWidget_override_virtual_extension".}
 proc fQGraphicsProxyWidget_virtualbase_isEmpty(self: pointer, ): bool{.importc: "QGraphicsProxyWidget_virtualbase_isEmpty".}
 proc fcQGraphicsProxyWidget_override_virtual_isEmpty(self: pointer, slot: int) {.importc: "QGraphicsProxyWidget_override_virtual_isEmpty".}
+proc fcQGraphicsProxyWidget_staticMetaObject(): pointer {.importc: "QGraphicsProxyWidget_staticMetaObject".}
 proc fcQGraphicsProxyWidget_delete(self: pointer) {.importc: "QGraphicsProxyWidget_delete".}
 
 
@@ -240,6 +248,9 @@ proc metaObject*(self: gen_qgraphicsproxywidget_types.QGraphicsProxyWidget, ): g
 
 proc metacast*(self: gen_qgraphicsproxywidget_types.QGraphicsProxyWidget, param1: cstring): pointer =
   fcQGraphicsProxyWidget_metacast(self.h, param1)
+
+proc metacall*(self: gen_qgraphicsproxywidget_types.QGraphicsProxyWidget, param1: cint, param2: cint, param3: pointer): cint =
+  fcQGraphicsProxyWidget_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qgraphicsproxywidget_types.QGraphicsProxyWidget, s: cstring): string =
   let v_ms = fcQGraphicsProxyWidget_tr(s)
@@ -280,6 +291,65 @@ proc tr*(_: type gen_qgraphicsproxywidget_types.QGraphicsProxyWidget, s: cstring
   c_free(v_ms.data)
   vx_ret
 
+proc QGraphicsProxyWidgetmetaObject*(self: gen_qgraphicsproxywidget_types.QGraphicsProxyWidget, ): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fQGraphicsProxyWidget_virtualbase_metaObject(self.h))
+
+type QGraphicsProxyWidgetmetaObjectProc* = proc(): gen_qobjectdefs_types.QMetaObject
+proc onmetaObject*(self: gen_qgraphicsproxywidget_types.QGraphicsProxyWidget, slot: QGraphicsProxyWidgetmetaObjectProc) =
+  # TODO check subclass
+  var tmp = new QGraphicsProxyWidgetmetaObjectProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQGraphicsProxyWidget_override_virtual_metaObject(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QGraphicsProxyWidget_metaObject(self: ptr cQGraphicsProxyWidget, slot: int): pointer {.exportc: "miqt_exec_callback_QGraphicsProxyWidget_metaObject ".} =
+  var nimfunc = cast[ptr QGraphicsProxyWidgetmetaObjectProc](cast[pointer](slot))
+
+  let virtualReturn = nimfunc[]( )
+
+  virtualReturn.h
+proc QGraphicsProxyWidgetmetacast*(self: gen_qgraphicsproxywidget_types.QGraphicsProxyWidget, param1: cstring): pointer =
+  fQGraphicsProxyWidget_virtualbase_metacast(self.h, param1)
+
+type QGraphicsProxyWidgetmetacastProc* = proc(param1: cstring): pointer
+proc onmetacast*(self: gen_qgraphicsproxywidget_types.QGraphicsProxyWidget, slot: QGraphicsProxyWidgetmetacastProc) =
+  # TODO check subclass
+  var tmp = new QGraphicsProxyWidgetmetacastProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQGraphicsProxyWidget_override_virtual_metacast(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QGraphicsProxyWidget_metacast(self: ptr cQGraphicsProxyWidget, slot: int, param1: cstring): pointer {.exportc: "miqt_exec_callback_QGraphicsProxyWidget_metacast ".} =
+  var nimfunc = cast[ptr QGraphicsProxyWidgetmetacastProc](cast[pointer](slot))
+  let slotval1 = (param1)
+
+
+  let virtualReturn = nimfunc[](slotval1 )
+
+  virtualReturn
+proc QGraphicsProxyWidgetmetacall*(self: gen_qgraphicsproxywidget_types.QGraphicsProxyWidget, param1: cint, param2: cint, param3: pointer): cint =
+  fQGraphicsProxyWidget_virtualbase_metacall(self.h, cint(param1), param2, param3)
+
+type QGraphicsProxyWidgetmetacallProc* = proc(param1: cint, param2: cint, param3: pointer): cint
+proc onmetacall*(self: gen_qgraphicsproxywidget_types.QGraphicsProxyWidget, slot: QGraphicsProxyWidgetmetacallProc) =
+  # TODO check subclass
+  var tmp = new QGraphicsProxyWidgetmetacallProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQGraphicsProxyWidget_override_virtual_metacall(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QGraphicsProxyWidget_metacall(self: ptr cQGraphicsProxyWidget, slot: int, param1: cint, param2: cint, param3: pointer): cint {.exportc: "miqt_exec_callback_QGraphicsProxyWidget_metacall ".} =
+  var nimfunc = cast[ptr QGraphicsProxyWidgetmetacallProc](cast[pointer](slot))
+  let slotval1 = cint(param1)
+
+  let slotval2 = param2
+
+  let slotval3 = param3
+
+
+  let virtualReturn = nimfunc[](slotval1, slotval2, slotval3 )
+
+  virtualReturn
 proc QGraphicsProxyWidgetsetGeometry*(self: gen_qgraphicsproxywidget_types.QGraphicsProxyWidget, rect: gen_qrect_types.QRectF): void =
   fQGraphicsProxyWidget_virtualbase_setGeometry(self.h, rect.h)
 
@@ -1431,5 +1501,7 @@ proc miqt_exec_callback_QGraphicsProxyWidget_isEmpty(self: ptr cQGraphicsProxyWi
   let virtualReturn = nimfunc[]( )
 
   virtualReturn
+proc staticMetaObject*(_: type gen_qgraphicsproxywidget_types.QGraphicsProxyWidget): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fcQGraphicsProxyWidget_staticMetaObject())
 proc delete*(self: gen_qgraphicsproxywidget_types.QGraphicsProxyWidget) =
   fcQGraphicsProxyWidget_delete(self.h)

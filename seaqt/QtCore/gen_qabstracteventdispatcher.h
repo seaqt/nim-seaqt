@@ -41,6 +41,7 @@ typedef struct QThread QThread;
 void QAbstractEventDispatcher_virtbase(QAbstractEventDispatcher* src, QObject** outptr_QObject);
 QMetaObject* QAbstractEventDispatcher_metaObject(const QAbstractEventDispatcher* self);
 void* QAbstractEventDispatcher_metacast(QAbstractEventDispatcher* self, const char* param1);
+int QAbstractEventDispatcher_metacall(QAbstractEventDispatcher* self, int param1, int param2, void** param3);
 struct miqt_string QAbstractEventDispatcher_tr(const char* s);
 QAbstractEventDispatcher* QAbstractEventDispatcher_instance();
 bool QAbstractEventDispatcher_processEvents(QAbstractEventDispatcher* self, int flags);
@@ -66,6 +67,7 @@ void QAbstractEventDispatcher_connect_awake(QAbstractEventDispatcher* self, intp
 struct miqt_string QAbstractEventDispatcher_tr2(const char* s, const char* c);
 struct miqt_string QAbstractEventDispatcher_tr3(const char* s, const char* c, int n);
 QAbstractEventDispatcher* QAbstractEventDispatcher_instance1(QThread* thread);
+const QMetaObject* QAbstractEventDispatcher_staticMetaObject();
 void QAbstractEventDispatcher_delete(QAbstractEventDispatcher* self);
 
 QAbstractEventDispatcher__TimerInfo* QAbstractEventDispatcher__TimerInfo_new(int id, int i, int t);

@@ -46,11 +46,13 @@ import ./gen_qeventpoint_types
 export gen_qeventpoint_types
 
 import
+  ../QtCore/gen_qobjectdefs_types,
   ../QtCore/gen_qpoint_types,
   ../QtCore/gen_qsize_types,
   ./gen_qpointingdevice_types,
   ./gen_qvectornd_types
 export
+  gen_qobjectdefs_types,
   gen_qpoint_types,
   gen_qsize_types,
   gen_qpointingdevice_types,
@@ -107,6 +109,7 @@ proc fcQEventPoint_ellipseDiameters(self: pointer, ): pointer {.importc: "QEvent
 proc fcQEventPoint_isAccepted(self: pointer, ): bool {.importc: "QEventPoint_isAccepted".}
 proc fcQEventPoint_setAccepted(self: pointer, ): void {.importc: "QEventPoint_setAccepted".}
 proc fcQEventPoint_setAccepted1(self: pointer, accepted: bool): void {.importc: "QEventPoint_setAccepted1".}
+proc fcQEventPoint_staticMetaObject(): pointer {.importc: "QEventPoint_staticMetaObject".}
 proc fcQEventPoint_delete(self: pointer) {.importc: "QEventPoint_delete".}
 
 
@@ -259,5 +262,7 @@ proc setAccepted*(self: gen_qeventpoint_types.QEventPoint, ): void =
 proc setAccepted*(self: gen_qeventpoint_types.QEventPoint, accepted: bool): void =
   fcQEventPoint_setAccepted1(self.h, accepted)
 
+proc staticMetaObject*(_: type gen_qeventpoint_types.QEventPoint): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fcQEventPoint_staticMetaObject())
 proc delete*(self: gen_qeventpoint_types.QEventPoint) =
   fcQEventPoint_delete(self.h)

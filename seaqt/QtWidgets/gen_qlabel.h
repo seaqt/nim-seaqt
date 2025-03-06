@@ -103,6 +103,7 @@ QLabel* QLabel_new6(struct miqt_string text, QWidget* parent, int f);
 void QLabel_virtbase(QLabel* src, QFrame** outptr_QFrame);
 QMetaObject* QLabel_metaObject(const QLabel* self);
 void* QLabel_metacast(QLabel* self, const char* param1);
+int QLabel_metacall(QLabel* self, int param1, int param2, void** param3);
 struct miqt_string QLabel_tr(const char* s);
 struct miqt_string QLabel_text(const QLabel* self);
 QPixmap* QLabel_pixmap(const QLabel* self, int param1);
@@ -159,6 +160,12 @@ void QLabel_focusOutEvent(QLabel* self, QFocusEvent* ev);
 bool QLabel_focusNextPrevChild(QLabel* self, bool next);
 struct miqt_string QLabel_tr2(const char* s, const char* c);
 struct miqt_string QLabel_tr3(const char* s, const char* c, int n);
+bool QLabel_override_virtual_metaObject(void* self, intptr_t slot);
+QMetaObject* QLabel_virtualbase_metaObject(const void* self);
+bool QLabel_override_virtual_metacast(void* self, intptr_t slot);
+void* QLabel_virtualbase_metacast(void* self, const char* param1);
+bool QLabel_override_virtual_metacall(void* self, intptr_t slot);
+int QLabel_virtualbase_metacall(void* self, int param1, int param2, void** param3);
 bool QLabel_override_virtual_sizeHint(void* self, intptr_t slot);
 QSize* QLabel_virtualbase_sizeHint(const void* self);
 bool QLabel_override_virtual_minimumSizeHint(void* self, intptr_t slot);
@@ -265,6 +272,7 @@ QObject* QLabel_protectedbase_sender(bool* _dynamic_cast_ok, const void* self);
 int QLabel_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
 int QLabel_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
 bool QLabel_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+const QMetaObject* QLabel_staticMetaObject();
 void QLabel_delete(QLabel* self);
 
 #ifdef __cplusplus

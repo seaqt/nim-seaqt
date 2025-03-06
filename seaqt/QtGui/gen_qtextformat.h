@@ -117,6 +117,7 @@ void QTextFormat_clearBackground(QTextFormat* self);
 void QTextFormat_setForeground(QTextFormat* self, QBrush* brush);
 QBrush* QTextFormat_foreground(const QTextFormat* self);
 void QTextFormat_clearForeground(QTextFormat* self);
+const QMetaObject* QTextFormat_staticMetaObject();
 void QTextFormat_delete(QTextFormat* self);
 
 QTextCharFormat* QTextCharFormat_new();

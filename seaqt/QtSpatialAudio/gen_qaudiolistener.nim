@@ -41,6 +41,7 @@ import
   ../QtCore/gen_qcoreevent_types,
   ../QtCore/gen_qmetaobject_types,
   ../QtCore/gen_qobject,
+  ../QtCore/gen_qobjectdefs_types,
   ../QtGui/gen_qquaternion_types,
   ../QtGui/gen_qvectornd_types,
   ./gen_qaudioengine_types
@@ -48,6 +49,7 @@ export
   gen_qcoreevent_types,
   gen_qmetaobject_types,
   gen_qobject,
+  gen_qobjectdefs_types,
   gen_qquaternion_types,
   gen_qvectornd_types,
   gen_qaudioengine_types
@@ -60,6 +62,12 @@ proc fcQAudioListener_position(self: pointer, ): pointer {.importc: "QAudioListe
 proc fcQAudioListener_setRotation(self: pointer, q: pointer): void {.importc: "QAudioListener_setRotation".}
 proc fcQAudioListener_rotation(self: pointer, ): pointer {.importc: "QAudioListener_rotation".}
 proc fcQAudioListener_engine(self: pointer, ): pointer {.importc: "QAudioListener_engine".}
+proc fQAudioListener_virtualbase_metaObject(self: pointer, ): pointer{.importc: "QAudioListener_virtualbase_metaObject".}
+proc fcQAudioListener_override_virtual_metaObject(self: pointer, slot: int) {.importc: "QAudioListener_override_virtual_metaObject".}
+proc fQAudioListener_virtualbase_metacast(self: pointer, param1: cstring): pointer{.importc: "QAudioListener_virtualbase_metacast".}
+proc fcQAudioListener_override_virtual_metacast(self: pointer, slot: int) {.importc: "QAudioListener_override_virtual_metacast".}
+proc fQAudioListener_virtualbase_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint{.importc: "QAudioListener_virtualbase_metacall".}
+proc fcQAudioListener_override_virtual_metacall(self: pointer, slot: int) {.importc: "QAudioListener_override_virtual_metacall".}
 proc fQAudioListener_virtualbase_event(self: pointer, event: pointer): bool{.importc: "QAudioListener_virtualbase_event".}
 proc fcQAudioListener_override_virtual_event(self: pointer, slot: int) {.importc: "QAudioListener_override_virtual_event".}
 proc fQAudioListener_virtualbase_eventFilter(self: pointer, watched: pointer, event: pointer): bool{.importc: "QAudioListener_virtualbase_eventFilter".}
@@ -97,6 +105,65 @@ proc rotation*(self: gen_qaudiolistener_types.QAudioListener, ): gen_qquaternion
 proc engine*(self: gen_qaudiolistener_types.QAudioListener, ): gen_qaudioengine_types.QAudioEngine =
   gen_qaudioengine_types.QAudioEngine(h: fcQAudioListener_engine(self.h))
 
+proc QAudioListenermetaObject*(self: gen_qaudiolistener_types.QAudioListener, ): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fQAudioListener_virtualbase_metaObject(self.h))
+
+type QAudioListenermetaObjectProc* = proc(): gen_qobjectdefs_types.QMetaObject
+proc onmetaObject*(self: gen_qaudiolistener_types.QAudioListener, slot: QAudioListenermetaObjectProc) =
+  # TODO check subclass
+  var tmp = new QAudioListenermetaObjectProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQAudioListener_override_virtual_metaObject(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QAudioListener_metaObject(self: ptr cQAudioListener, slot: int): pointer {.exportc: "miqt_exec_callback_QAudioListener_metaObject ".} =
+  var nimfunc = cast[ptr QAudioListenermetaObjectProc](cast[pointer](slot))
+
+  let virtualReturn = nimfunc[]( )
+
+  virtualReturn.h
+proc QAudioListenermetacast*(self: gen_qaudiolistener_types.QAudioListener, param1: cstring): pointer =
+  fQAudioListener_virtualbase_metacast(self.h, param1)
+
+type QAudioListenermetacastProc* = proc(param1: cstring): pointer
+proc onmetacast*(self: gen_qaudiolistener_types.QAudioListener, slot: QAudioListenermetacastProc) =
+  # TODO check subclass
+  var tmp = new QAudioListenermetacastProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQAudioListener_override_virtual_metacast(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QAudioListener_metacast(self: ptr cQAudioListener, slot: int, param1: cstring): pointer {.exportc: "miqt_exec_callback_QAudioListener_metacast ".} =
+  var nimfunc = cast[ptr QAudioListenermetacastProc](cast[pointer](slot))
+  let slotval1 = (param1)
+
+
+  let virtualReturn = nimfunc[](slotval1 )
+
+  virtualReturn
+proc QAudioListenermetacall*(self: gen_qaudiolistener_types.QAudioListener, param1: cint, param2: cint, param3: pointer): cint =
+  fQAudioListener_virtualbase_metacall(self.h, cint(param1), param2, param3)
+
+type QAudioListenermetacallProc* = proc(param1: cint, param2: cint, param3: pointer): cint
+proc onmetacall*(self: gen_qaudiolistener_types.QAudioListener, slot: QAudioListenermetacallProc) =
+  # TODO check subclass
+  var tmp = new QAudioListenermetacallProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQAudioListener_override_virtual_metacall(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QAudioListener_metacall(self: ptr cQAudioListener, slot: int, param1: cint, param2: cint, param3: pointer): cint {.exportc: "miqt_exec_callback_QAudioListener_metacall ".} =
+  var nimfunc = cast[ptr QAudioListenermetacallProc](cast[pointer](slot))
+  let slotval1 = cint(param1)
+
+  let slotval2 = param2
+
+  let slotval3 = param3
+
+
+  let virtualReturn = nimfunc[](slotval1, slotval2, slotval3 )
+
+  virtualReturn
 proc QAudioListenerevent*(self: gen_qaudiolistener_types.QAudioListener, event: gen_qcoreevent_types.QEvent): bool =
   fQAudioListener_virtualbase_event(self.h, event.h)
 

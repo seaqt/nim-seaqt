@@ -45,6 +45,9 @@ extern "C" {
 #endif
 
 void miqt_exec_callback_QCheckBox_stateChanged(intptr_t, int);
+QMetaObject* miqt_exec_callback_QCheckBox_metaObject(const QCheckBox*, intptr_t);
+void* miqt_exec_callback_QCheckBox_metacast(QCheckBox*, intptr_t, const char*);
+int miqt_exec_callback_QCheckBox_metacall(QCheckBox*, intptr_t, int, int, void**);
 QSize* miqt_exec_callback_QCheckBox_sizeHint(const QCheckBox*, intptr_t);
 QSize* miqt_exec_callback_QCheckBox_minimumSizeHint(const QCheckBox*, intptr_t);
 bool miqt_exec_callback_QCheckBox_event(QCheckBox*, intptr_t, QEvent*);
@@ -109,6 +112,62 @@ public:
 	VirtualQCheckBox(const QString& text, QWidget* parent): QCheckBox(text, parent) {};
 
 	virtual ~VirtualQCheckBox() override = default;
+
+	// cgo.Handle value for overwritten implementation
+	intptr_t handle__metaObject = 0;
+
+	// Subclass to allow providing a Go implementation
+	virtual const QMetaObject* metaObject() const override {
+		if (handle__metaObject == 0) {
+			return QCheckBox::metaObject();
+		}
+		
+
+		QMetaObject* callback_return_value = miqt_exec_callback_QCheckBox_metaObject(this, handle__metaObject);
+
+		return callback_return_value;
+	}
+
+	friend QMetaObject* QCheckBox_virtualbase_metaObject(const void* self);
+
+	// cgo.Handle value for overwritten implementation
+	intptr_t handle__metacast = 0;
+
+	// Subclass to allow providing a Go implementation
+	virtual void* qt_metacast(const char* param1) override {
+		if (handle__metacast == 0) {
+			return QCheckBox::qt_metacast(param1);
+		}
+		
+		const char* sigval1 = (const char*) param1;
+
+		void* callback_return_value = miqt_exec_callback_QCheckBox_metacast(this, handle__metacast, sigval1);
+
+		return callback_return_value;
+	}
+
+	friend void* QCheckBox_virtualbase_metacast(void* self, const char* param1);
+
+	// cgo.Handle value for overwritten implementation
+	intptr_t handle__metacall = 0;
+
+	// Subclass to allow providing a Go implementation
+	virtual int qt_metacall(QMetaObject::Call param1, int param2, void** param3) override {
+		if (handle__metacall == 0) {
+			return QCheckBox::qt_metacall(param1, param2, param3);
+		}
+		
+		QMetaObject::Call param1_ret = param1;
+		int sigval1 = static_cast<int>(param1_ret);
+		int sigval2 = param2;
+		void** sigval3 = param3;
+
+		int callback_return_value = miqt_exec_callback_QCheckBox_metacall(this, handle__metacall, sigval1, sigval2, sigval3);
+
+		return static_cast<int>(callback_return_value);
+	}
+
+	friend int QCheckBox_virtualbase_metacall(void* self, int param1, int param2, void** param3);
 
 	// cgo.Handle value for overwritten implementation
 	intptr_t handle__sizeHint = 0;
@@ -1115,6 +1174,10 @@ void* QCheckBox_metacast(QCheckBox* self, const char* param1) {
 	return self->qt_metacast(param1);
 }
 
+int QCheckBox_metacall(QCheckBox* self, int param1, int param2, void** param3) {
+	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
+}
+
 struct miqt_string QCheckBox_tr(const char* s) {
 	QString _ret = QCheckBox::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
@@ -1186,6 +1249,54 @@ struct miqt_string QCheckBox_tr3(const char* s, const char* c, int n) {
 
 void QCheckBox_setTristate1(QCheckBox* self, bool y) {
 	self->setTristate(y);
+}
+
+bool QCheckBox_override_virtual_metaObject(void* self, intptr_t slot) {
+	VirtualQCheckBox* self_cast = dynamic_cast<VirtualQCheckBox*>( (QCheckBox*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+	
+	self_cast->handle__metaObject = slot;
+	return true;
+}
+
+QMetaObject* QCheckBox_virtualbase_metaObject(const void* self) {
+
+	return (QMetaObject*) ( (const VirtualQCheckBox*)(self) )->QCheckBox::metaObject();
+
+}
+
+bool QCheckBox_override_virtual_metacast(void* self, intptr_t slot) {
+	VirtualQCheckBox* self_cast = dynamic_cast<VirtualQCheckBox*>( (QCheckBox*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+	
+	self_cast->handle__metacast = slot;
+	return true;
+}
+
+void* QCheckBox_virtualbase_metacast(void* self, const char* param1) {
+
+	return ( (VirtualQCheckBox*)(self) )->QCheckBox::qt_metacast(param1);
+
+}
+
+bool QCheckBox_override_virtual_metacall(void* self, intptr_t slot) {
+	VirtualQCheckBox* self_cast = dynamic_cast<VirtualQCheckBox*>( (QCheckBox*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+	
+	self_cast->handle__metacall = slot;
+	return true;
+}
+
+int QCheckBox_virtualbase_metacall(void* self, int param1, int param2, void** param3) {
+
+	return ( (VirtualQCheckBox*)(self) )->QCheckBox::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
+
 }
 
 bool QCheckBox_override_virtual_sizeHint(void* self, intptr_t slot) {
@@ -2005,6 +2116,7 @@ void QCheckBox_virtualbase_disconnectNotify(void* self, QMetaMethod* signal) {
 
 }
 
+const QMetaObject* QCheckBox_staticMetaObject() { return &QCheckBox::staticMetaObject; }
 void QCheckBox_protectedbase_updateMicroFocus(bool* _dynamic_cast_ok, void* self) {
 	VirtualQCheckBox* self_cast = dynamic_cast<VirtualQCheckBox*>( (QCheckBox*)(self) );
 	if (self_cast == nullptr) {

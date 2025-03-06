@@ -95,6 +95,7 @@ QRadioButton* QRadioButton_new4(struct miqt_string text, QWidget* parent);
 void QRadioButton_virtbase(QRadioButton* src, QAbstractButton** outptr_QAbstractButton);
 QMetaObject* QRadioButton_metaObject(const QRadioButton* self);
 void* QRadioButton_metacast(QRadioButton* self, const char* param1);
+int QRadioButton_metacall(QRadioButton* self, int param1, int param2, void** param3);
 struct miqt_string QRadioButton_tr(const char* s);
 QSize* QRadioButton_sizeHint(const QRadioButton* self);
 QSize* QRadioButton_minimumSizeHint(const QRadioButton* self);
@@ -105,6 +106,12 @@ void QRadioButton_mouseMoveEvent(QRadioButton* self, QMouseEvent* param1);
 void QRadioButton_initStyleOption(const QRadioButton* self, QStyleOptionButton* button);
 struct miqt_string QRadioButton_tr2(const char* s, const char* c);
 struct miqt_string QRadioButton_tr3(const char* s, const char* c, int n);
+bool QRadioButton_override_virtual_metaObject(void* self, intptr_t slot);
+QMetaObject* QRadioButton_virtualbase_metaObject(const void* self);
+bool QRadioButton_override_virtual_metacast(void* self, intptr_t slot);
+void* QRadioButton_virtualbase_metacast(void* self, const char* param1);
+bool QRadioButton_override_virtual_metacall(void* self, intptr_t slot);
+int QRadioButton_virtualbase_metacall(void* self, int param1, int param2, void** param3);
 bool QRadioButton_override_virtual_sizeHint(void* self, intptr_t slot);
 QSize* QRadioButton_virtualbase_sizeHint(const void* self);
 bool QRadioButton_override_virtual_minimumSizeHint(void* self, intptr_t slot);
@@ -216,6 +223,7 @@ QObject* QRadioButton_protectedbase_sender(bool* _dynamic_cast_ok, const void* s
 int QRadioButton_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
 int QRadioButton_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
 bool QRadioButton_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+const QMetaObject* QRadioButton_staticMetaObject();
 void QRadioButton_delete(QRadioButton* self);
 
 #ifdef __cplusplus

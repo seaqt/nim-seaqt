@@ -50,6 +50,7 @@ type cQFutureWatcherBase*{.exportc: "QFutureWatcherBase", incompleteStruct.} = o
 
 proc fcQFutureWatcherBase_metaObject(self: pointer, ): pointer {.importc: "QFutureWatcherBase_metaObject".}
 proc fcQFutureWatcherBase_metacast(self: pointer, param1: cstring): pointer {.importc: "QFutureWatcherBase_metacast".}
+proc fcQFutureWatcherBase_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QFutureWatcherBase_metacall".}
 proc fcQFutureWatcherBase_tr(s: cstring): struct_miqt_string {.importc: "QFutureWatcherBase_tr".}
 proc fcQFutureWatcherBase_progressValue(self: pointer, ): cint {.importc: "QFutureWatcherBase_progressValue".}
 proc fcQFutureWatcherBase_progressMinimum(self: pointer, ): cint {.importc: "QFutureWatcherBase_progressMinimum".}
@@ -99,6 +100,7 @@ proc fcQFutureWatcherBase_pause(self: pointer, ): void {.importc: "QFutureWatche
 proc fcQFutureWatcherBase_togglePaused(self: pointer, ): void {.importc: "QFutureWatcherBase_togglePaused".}
 proc fcQFutureWatcherBase_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QFutureWatcherBase_tr2".}
 proc fcQFutureWatcherBase_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QFutureWatcherBase_tr3".}
+proc fcQFutureWatcherBase_staticMetaObject(): pointer {.importc: "QFutureWatcherBase_staticMetaObject".}
 proc fcQFutureWatcherBase_delete(self: pointer) {.importc: "QFutureWatcherBase_delete".}
 
 
@@ -109,6 +111,9 @@ proc metaObject*(self: gen_qfuturewatcher_types.QFutureWatcherBase, ): gen_qobje
 
 proc metacast*(self: gen_qfuturewatcher_types.QFutureWatcherBase, param1: cstring): pointer =
   fcQFutureWatcherBase_metacast(self.h, param1)
+
+proc metacall*(self: gen_qfuturewatcher_types.QFutureWatcherBase, param1: cint, param2: cint, param3: pointer): cint =
+  fcQFutureWatcherBase_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qfuturewatcher_types.QFutureWatcherBase, s: cstring): string =
   let v_ms = fcQFutureWatcherBase_tr(s)
@@ -382,5 +387,7 @@ proc tr*(_: type gen_qfuturewatcher_types.QFutureWatcherBase, s: cstring, c: cst
   c_free(v_ms.data)
   vx_ret
 
+proc staticMetaObject*(_: type gen_qfuturewatcher_types.QFutureWatcherBase): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fcQFutureWatcherBase_staticMetaObject())
 proc delete*(self: gen_qfuturewatcher_types.QFutureWatcherBase) =
   fcQFutureWatcherBase_delete(self.h)

@@ -94,6 +94,7 @@ proc fcQAbstractSpinBox_new(parent: pointer): ptr cQAbstractSpinBox {.importc: "
 proc fcQAbstractSpinBox_new2(): ptr cQAbstractSpinBox {.importc: "QAbstractSpinBox_new2".}
 proc fcQAbstractSpinBox_metaObject(self: pointer, ): pointer {.importc: "QAbstractSpinBox_metaObject".}
 proc fcQAbstractSpinBox_metacast(self: pointer, param1: cstring): pointer {.importc: "QAbstractSpinBox_metacast".}
+proc fcQAbstractSpinBox_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QAbstractSpinBox_metacall".}
 proc fcQAbstractSpinBox_tr(s: cstring): struct_miqt_string {.importc: "QAbstractSpinBox_tr".}
 proc fcQAbstractSpinBox_buttonSymbols(self: pointer, ): cint {.importc: "QAbstractSpinBox_buttonSymbols".}
 proc fcQAbstractSpinBox_setButtonSymbols(self: pointer, bs: cint): void {.importc: "QAbstractSpinBox_setButtonSymbols".}
@@ -133,6 +134,12 @@ proc fcQAbstractSpinBox_editingFinished(self: pointer, ): void {.importc: "QAbst
 proc fcQAbstractSpinBox_connect_editingFinished(self: pointer, slot: int) {.importc: "QAbstractSpinBox_connect_editingFinished".}
 proc fcQAbstractSpinBox_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QAbstractSpinBox_tr2".}
 proc fcQAbstractSpinBox_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QAbstractSpinBox_tr3".}
+proc fQAbstractSpinBox_virtualbase_metaObject(self: pointer, ): pointer{.importc: "QAbstractSpinBox_virtualbase_metaObject".}
+proc fcQAbstractSpinBox_override_virtual_metaObject(self: pointer, slot: int) {.importc: "QAbstractSpinBox_override_virtual_metaObject".}
+proc fQAbstractSpinBox_virtualbase_metacast(self: pointer, param1: cstring): pointer{.importc: "QAbstractSpinBox_virtualbase_metacast".}
+proc fcQAbstractSpinBox_override_virtual_metacast(self: pointer, slot: int) {.importc: "QAbstractSpinBox_override_virtual_metacast".}
+proc fQAbstractSpinBox_virtualbase_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint{.importc: "QAbstractSpinBox_virtualbase_metacall".}
+proc fcQAbstractSpinBox_override_virtual_metacall(self: pointer, slot: int) {.importc: "QAbstractSpinBox_override_virtual_metacall".}
 proc fQAbstractSpinBox_virtualbase_sizeHint(self: pointer, ): pointer{.importc: "QAbstractSpinBox_virtualbase_sizeHint".}
 proc fcQAbstractSpinBox_override_virtual_sizeHint(self: pointer, slot: int) {.importc: "QAbstractSpinBox_override_virtual_sizeHint".}
 proc fQAbstractSpinBox_virtualbase_minimumSizeHint(self: pointer, ): pointer{.importc: "QAbstractSpinBox_virtualbase_minimumSizeHint".}
@@ -239,6 +246,7 @@ proc fQAbstractSpinBox_virtualbase_connectNotify(self: pointer, signal: pointer)
 proc fcQAbstractSpinBox_override_virtual_connectNotify(self: pointer, slot: int) {.importc: "QAbstractSpinBox_override_virtual_connectNotify".}
 proc fQAbstractSpinBox_virtualbase_disconnectNotify(self: pointer, signal: pointer): void{.importc: "QAbstractSpinBox_virtualbase_disconnectNotify".}
 proc fcQAbstractSpinBox_override_virtual_disconnectNotify(self: pointer, slot: int) {.importc: "QAbstractSpinBox_override_virtual_disconnectNotify".}
+proc fcQAbstractSpinBox_staticMetaObject(): pointer {.importc: "QAbstractSpinBox_staticMetaObject".}
 proc fcQAbstractSpinBox_delete(self: pointer) {.importc: "QAbstractSpinBox_delete".}
 
 
@@ -255,6 +263,9 @@ proc metaObject*(self: gen_qabstractspinbox_types.QAbstractSpinBox, ): gen_qobje
 
 proc metacast*(self: gen_qabstractspinbox_types.QAbstractSpinBox, param1: cstring): pointer =
   fcQAbstractSpinBox_metacast(self.h, param1)
+
+proc metacall*(self: gen_qabstractspinbox_types.QAbstractSpinBox, param1: cint, param2: cint, param3: pointer): cint =
+  fcQAbstractSpinBox_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qabstractspinbox_types.QAbstractSpinBox, s: cstring): string =
   let v_ms = fcQAbstractSpinBox_tr(s)
@@ -396,6 +407,65 @@ proc tr*(_: type gen_qabstractspinbox_types.QAbstractSpinBox, s: cstring, c: cst
   c_free(v_ms.data)
   vx_ret
 
+proc QAbstractSpinBoxmetaObject*(self: gen_qabstractspinbox_types.QAbstractSpinBox, ): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fQAbstractSpinBox_virtualbase_metaObject(self.h))
+
+type QAbstractSpinBoxmetaObjectProc* = proc(): gen_qobjectdefs_types.QMetaObject
+proc onmetaObject*(self: gen_qabstractspinbox_types.QAbstractSpinBox, slot: QAbstractSpinBoxmetaObjectProc) =
+  # TODO check subclass
+  var tmp = new QAbstractSpinBoxmetaObjectProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQAbstractSpinBox_override_virtual_metaObject(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QAbstractSpinBox_metaObject(self: ptr cQAbstractSpinBox, slot: int): pointer {.exportc: "miqt_exec_callback_QAbstractSpinBox_metaObject ".} =
+  var nimfunc = cast[ptr QAbstractSpinBoxmetaObjectProc](cast[pointer](slot))
+
+  let virtualReturn = nimfunc[]( )
+
+  virtualReturn.h
+proc QAbstractSpinBoxmetacast*(self: gen_qabstractspinbox_types.QAbstractSpinBox, param1: cstring): pointer =
+  fQAbstractSpinBox_virtualbase_metacast(self.h, param1)
+
+type QAbstractSpinBoxmetacastProc* = proc(param1: cstring): pointer
+proc onmetacast*(self: gen_qabstractspinbox_types.QAbstractSpinBox, slot: QAbstractSpinBoxmetacastProc) =
+  # TODO check subclass
+  var tmp = new QAbstractSpinBoxmetacastProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQAbstractSpinBox_override_virtual_metacast(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QAbstractSpinBox_metacast(self: ptr cQAbstractSpinBox, slot: int, param1: cstring): pointer {.exportc: "miqt_exec_callback_QAbstractSpinBox_metacast ".} =
+  var nimfunc = cast[ptr QAbstractSpinBoxmetacastProc](cast[pointer](slot))
+  let slotval1 = (param1)
+
+
+  let virtualReturn = nimfunc[](slotval1 )
+
+  virtualReturn
+proc QAbstractSpinBoxmetacall*(self: gen_qabstractspinbox_types.QAbstractSpinBox, param1: cint, param2: cint, param3: pointer): cint =
+  fQAbstractSpinBox_virtualbase_metacall(self.h, cint(param1), param2, param3)
+
+type QAbstractSpinBoxmetacallProc* = proc(param1: cint, param2: cint, param3: pointer): cint
+proc onmetacall*(self: gen_qabstractspinbox_types.QAbstractSpinBox, slot: QAbstractSpinBoxmetacallProc) =
+  # TODO check subclass
+  var tmp = new QAbstractSpinBoxmetacallProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQAbstractSpinBox_override_virtual_metacall(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QAbstractSpinBox_metacall(self: ptr cQAbstractSpinBox, slot: int, param1: cint, param2: cint, param3: pointer): cint {.exportc: "miqt_exec_callback_QAbstractSpinBox_metacall ".} =
+  var nimfunc = cast[ptr QAbstractSpinBoxmetacallProc](cast[pointer](slot))
+  let slotval1 = cint(param1)
+
+  let slotval2 = param2
+
+  let slotval3 = param3
+
+
+  let virtualReturn = nimfunc[](slotval1, slotval2, slotval3 )
+
+  virtualReturn
 proc QAbstractSpinBoxsizeHint*(self: gen_qabstractspinbox_types.QAbstractSpinBox, ): gen_qsize_types.QSize =
   gen_qsize_types.QSize(h: fQAbstractSpinBox_virtualbase_sizeHint(self.h))
 
@@ -1330,5 +1400,7 @@ proc miqt_exec_callback_QAbstractSpinBox_disconnectNotify(self: ptr cQAbstractSp
 
 
   nimfunc[](slotval1)
+proc staticMetaObject*(_: type gen_qabstractspinbox_types.QAbstractSpinBox): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fcQAbstractSpinBox_staticMetaObject())
 proc delete*(self: gen_qabstractspinbox_types.QAbstractSpinBox) =
   fcQAbstractSpinBox_delete(self.h)

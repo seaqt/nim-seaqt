@@ -86,6 +86,7 @@ proc fcQTreeView_new(parent: pointer): ptr cQTreeView {.importc: "QTreeView_new"
 proc fcQTreeView_new2(): ptr cQTreeView {.importc: "QTreeView_new2".}
 proc fcQTreeView_metaObject(self: pointer, ): pointer {.importc: "QTreeView_metaObject".}
 proc fcQTreeView_metacast(self: pointer, param1: cstring): pointer {.importc: "QTreeView_metacast".}
+proc fcQTreeView_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QTreeView_metacall".}
 proc fcQTreeView_tr(s: cstring): struct_miqt_string {.importc: "QTreeView_tr".}
 proc fcQTreeView_setModel(self: pointer, model: pointer): void {.importc: "QTreeView_setModel".}
 proc fcQTreeView_setRootIndex(self: pointer, index: pointer): void {.importc: "QTreeView_setRootIndex".}
@@ -156,6 +157,12 @@ proc fcQTreeView_expandToDepth(self: pointer, depth: cint): void {.importc: "QTr
 proc fcQTreeView_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QTreeView_tr2".}
 proc fcQTreeView_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QTreeView_tr3".}
 proc fcQTreeView_expandRecursively2(self: pointer, index: pointer, depth: cint): void {.importc: "QTreeView_expandRecursively2".}
+proc fQTreeView_virtualbase_metaObject(self: pointer, ): pointer{.importc: "QTreeView_virtualbase_metaObject".}
+proc fcQTreeView_override_virtual_metaObject(self: pointer, slot: int) {.importc: "QTreeView_override_virtual_metaObject".}
+proc fQTreeView_virtualbase_metacast(self: pointer, param1: cstring): pointer{.importc: "QTreeView_virtualbase_metacast".}
+proc fcQTreeView_override_virtual_metacast(self: pointer, slot: int) {.importc: "QTreeView_override_virtual_metacast".}
+proc fQTreeView_virtualbase_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint{.importc: "QTreeView_virtualbase_metacall".}
+proc fcQTreeView_override_virtual_metacall(self: pointer, slot: int) {.importc: "QTreeView_override_virtual_metacall".}
 proc fQTreeView_virtualbase_setModel(self: pointer, model: pointer): void{.importc: "QTreeView_virtualbase_setModel".}
 proc fcQTreeView_override_virtual_setModel(self: pointer, slot: int) {.importc: "QTreeView_override_virtual_setModel".}
 proc fQTreeView_virtualbase_setRootIndex(self: pointer, index: pointer): void{.importc: "QTreeView_virtualbase_setRootIndex".}
@@ -342,6 +349,7 @@ proc fQTreeView_virtualbase_connectNotify(self: pointer, signal: pointer): void{
 proc fcQTreeView_override_virtual_connectNotify(self: pointer, slot: int) {.importc: "QTreeView_override_virtual_connectNotify".}
 proc fQTreeView_virtualbase_disconnectNotify(self: pointer, signal: pointer): void{.importc: "QTreeView_virtualbase_disconnectNotify".}
 proc fcQTreeView_override_virtual_disconnectNotify(self: pointer, slot: int) {.importc: "QTreeView_override_virtual_disconnectNotify".}
+proc fcQTreeView_staticMetaObject(): pointer {.importc: "QTreeView_staticMetaObject".}
 proc fcQTreeView_delete(self: pointer) {.importc: "QTreeView_delete".}
 
 
@@ -358,6 +366,9 @@ proc metaObject*(self: gen_qtreeview_types.QTreeView, ): gen_qobjectdefs_types.Q
 
 proc metacast*(self: gen_qtreeview_types.QTreeView, param1: cstring): pointer =
   fcQTreeView_metacast(self.h, param1)
+
+proc metacall*(self: gen_qtreeview_types.QTreeView, param1: cint, param2: cint, param3: pointer): cint =
+  fcQTreeView_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qtreeview_types.QTreeView, s: cstring): string =
   let v_ms = fcQTreeView_tr(s)
@@ -602,6 +613,65 @@ proc tr*(_: type gen_qtreeview_types.QTreeView, s: cstring, c: cstring, n: cint)
 proc expandRecursively*(self: gen_qtreeview_types.QTreeView, index: gen_qabstractitemmodel_types.QModelIndex, depth: cint): void =
   fcQTreeView_expandRecursively2(self.h, index.h, depth)
 
+proc QTreeViewmetaObject*(self: gen_qtreeview_types.QTreeView, ): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fQTreeView_virtualbase_metaObject(self.h))
+
+type QTreeViewmetaObjectProc* = proc(): gen_qobjectdefs_types.QMetaObject
+proc onmetaObject*(self: gen_qtreeview_types.QTreeView, slot: QTreeViewmetaObjectProc) =
+  # TODO check subclass
+  var tmp = new QTreeViewmetaObjectProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQTreeView_override_virtual_metaObject(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QTreeView_metaObject(self: ptr cQTreeView, slot: int): pointer {.exportc: "miqt_exec_callback_QTreeView_metaObject ".} =
+  var nimfunc = cast[ptr QTreeViewmetaObjectProc](cast[pointer](slot))
+
+  let virtualReturn = nimfunc[]( )
+
+  virtualReturn.h
+proc QTreeViewmetacast*(self: gen_qtreeview_types.QTreeView, param1: cstring): pointer =
+  fQTreeView_virtualbase_metacast(self.h, param1)
+
+type QTreeViewmetacastProc* = proc(param1: cstring): pointer
+proc onmetacast*(self: gen_qtreeview_types.QTreeView, slot: QTreeViewmetacastProc) =
+  # TODO check subclass
+  var tmp = new QTreeViewmetacastProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQTreeView_override_virtual_metacast(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QTreeView_metacast(self: ptr cQTreeView, slot: int, param1: cstring): pointer {.exportc: "miqt_exec_callback_QTreeView_metacast ".} =
+  var nimfunc = cast[ptr QTreeViewmetacastProc](cast[pointer](slot))
+  let slotval1 = (param1)
+
+
+  let virtualReturn = nimfunc[](slotval1 )
+
+  virtualReturn
+proc QTreeViewmetacall*(self: gen_qtreeview_types.QTreeView, param1: cint, param2: cint, param3: pointer): cint =
+  fQTreeView_virtualbase_metacall(self.h, cint(param1), param2, param3)
+
+type QTreeViewmetacallProc* = proc(param1: cint, param2: cint, param3: pointer): cint
+proc onmetacall*(self: gen_qtreeview_types.QTreeView, slot: QTreeViewmetacallProc) =
+  # TODO check subclass
+  var tmp = new QTreeViewmetacallProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQTreeView_override_virtual_metacall(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QTreeView_metacall(self: ptr cQTreeView, slot: int, param1: cint, param2: cint, param3: pointer): cint {.exportc: "miqt_exec_callback_QTreeView_metacall ".} =
+  var nimfunc = cast[ptr QTreeViewmetacallProc](cast[pointer](slot))
+  let slotval1 = cint(param1)
+
+  let slotval2 = param2
+
+  let slotval3 = param3
+
+
+  let virtualReturn = nimfunc[](slotval1, slotval2, slotval3 )
+
+  virtualReturn
 proc QTreeViewsetModel*(self: gen_qtreeview_types.QTreeView, model: gen_qabstractitemmodel_types.QAbstractItemModel): void =
   fQTreeView_virtualbase_setModel(self.h, model.h)
 
@@ -2279,5 +2349,7 @@ proc miqt_exec_callback_QTreeView_disconnectNotify(self: ptr cQTreeView, slot: i
 
 
   nimfunc[](slotval1)
+proc staticMetaObject*(_: type gen_qtreeview_types.QTreeView): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fcQTreeView_staticMetaObject())
 proc delete*(self: gen_qtreeview_types.QTreeView) =
   fcQTreeView_delete(self.h)

@@ -76,12 +76,19 @@ proc fcQPageSetupDialog_new3(): ptr cQPageSetupDialog {.importc: "QPageSetupDial
 proc fcQPageSetupDialog_new4(printer: pointer, parent: pointer): ptr cQPageSetupDialog {.importc: "QPageSetupDialog_new4".}
 proc fcQPageSetupDialog_metaObject(self: pointer, ): pointer {.importc: "QPageSetupDialog_metaObject".}
 proc fcQPageSetupDialog_metacast(self: pointer, param1: cstring): pointer {.importc: "QPageSetupDialog_metacast".}
+proc fcQPageSetupDialog_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QPageSetupDialog_metacall".}
 proc fcQPageSetupDialog_tr(s: cstring): struct_miqt_string {.importc: "QPageSetupDialog_tr".}
 proc fcQPageSetupDialog_exec(self: pointer, ): cint {.importc: "QPageSetupDialog_exec".}
 proc fcQPageSetupDialog_done(self: pointer, resultVal: cint): void {.importc: "QPageSetupDialog_done".}
 proc fcQPageSetupDialog_printer(self: pointer, ): pointer {.importc: "QPageSetupDialog_printer".}
 proc fcQPageSetupDialog_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QPageSetupDialog_tr2".}
 proc fcQPageSetupDialog_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QPageSetupDialog_tr3".}
+proc fQPageSetupDialog_virtualbase_metaObject(self: pointer, ): pointer{.importc: "QPageSetupDialog_virtualbase_metaObject".}
+proc fcQPageSetupDialog_override_virtual_metaObject(self: pointer, slot: int) {.importc: "QPageSetupDialog_override_virtual_metaObject".}
+proc fQPageSetupDialog_virtualbase_metacast(self: pointer, param1: cstring): pointer{.importc: "QPageSetupDialog_virtualbase_metacast".}
+proc fcQPageSetupDialog_override_virtual_metacast(self: pointer, slot: int) {.importc: "QPageSetupDialog_override_virtual_metacast".}
+proc fQPageSetupDialog_virtualbase_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint{.importc: "QPageSetupDialog_virtualbase_metacall".}
+proc fcQPageSetupDialog_override_virtual_metacall(self: pointer, slot: int) {.importc: "QPageSetupDialog_override_virtual_metacall".}
 proc fQPageSetupDialog_virtualbase_exec(self: pointer, ): cint{.importc: "QPageSetupDialog_virtualbase_exec".}
 proc fcQPageSetupDialog_override_virtual_exec(self: pointer, slot: int) {.importc: "QPageSetupDialog_override_virtual_exec".}
 proc fQPageSetupDialog_virtualbase_done(self: pointer, resultVal: cint): void{.importc: "QPageSetupDialog_virtualbase_done".}
@@ -186,6 +193,7 @@ proc fQPageSetupDialog_virtualbase_connectNotify(self: pointer, signal: pointer)
 proc fcQPageSetupDialog_override_virtual_connectNotify(self: pointer, slot: int) {.importc: "QPageSetupDialog_override_virtual_connectNotify".}
 proc fQPageSetupDialog_virtualbase_disconnectNotify(self: pointer, signal: pointer): void{.importc: "QPageSetupDialog_virtualbase_disconnectNotify".}
 proc fcQPageSetupDialog_override_virtual_disconnectNotify(self: pointer, slot: int) {.importc: "QPageSetupDialog_override_virtual_disconnectNotify".}
+proc fcQPageSetupDialog_staticMetaObject(): pointer {.importc: "QPageSetupDialog_staticMetaObject".}
 proc fcQPageSetupDialog_delete(self: pointer) {.importc: "QPageSetupDialog_delete".}
 
 
@@ -208,6 +216,9 @@ proc metaObject*(self: gen_qpagesetupdialog_types.QPageSetupDialog, ): gen_qobje
 
 proc metacast*(self: gen_qpagesetupdialog_types.QPageSetupDialog, param1: cstring): pointer =
   fcQPageSetupDialog_metacast(self.h, param1)
+
+proc metacall*(self: gen_qpagesetupdialog_types.QPageSetupDialog, param1: cint, param2: cint, param3: pointer): cint =
+  fcQPageSetupDialog_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qpagesetupdialog_types.QPageSetupDialog, s: cstring): string =
   let v_ms = fcQPageSetupDialog_tr(s)
@@ -236,6 +247,65 @@ proc tr*(_: type gen_qpagesetupdialog_types.QPageSetupDialog, s: cstring, c: cst
   c_free(v_ms.data)
   vx_ret
 
+proc QPageSetupDialogmetaObject*(self: gen_qpagesetupdialog_types.QPageSetupDialog, ): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fQPageSetupDialog_virtualbase_metaObject(self.h))
+
+type QPageSetupDialogmetaObjectProc* = proc(): gen_qobjectdefs_types.QMetaObject
+proc onmetaObject*(self: gen_qpagesetupdialog_types.QPageSetupDialog, slot: QPageSetupDialogmetaObjectProc) =
+  # TODO check subclass
+  var tmp = new QPageSetupDialogmetaObjectProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQPageSetupDialog_override_virtual_metaObject(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QPageSetupDialog_metaObject(self: ptr cQPageSetupDialog, slot: int): pointer {.exportc: "miqt_exec_callback_QPageSetupDialog_metaObject ".} =
+  var nimfunc = cast[ptr QPageSetupDialogmetaObjectProc](cast[pointer](slot))
+
+  let virtualReturn = nimfunc[]( )
+
+  virtualReturn.h
+proc QPageSetupDialogmetacast*(self: gen_qpagesetupdialog_types.QPageSetupDialog, param1: cstring): pointer =
+  fQPageSetupDialog_virtualbase_metacast(self.h, param1)
+
+type QPageSetupDialogmetacastProc* = proc(param1: cstring): pointer
+proc onmetacast*(self: gen_qpagesetupdialog_types.QPageSetupDialog, slot: QPageSetupDialogmetacastProc) =
+  # TODO check subclass
+  var tmp = new QPageSetupDialogmetacastProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQPageSetupDialog_override_virtual_metacast(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QPageSetupDialog_metacast(self: ptr cQPageSetupDialog, slot: int, param1: cstring): pointer {.exportc: "miqt_exec_callback_QPageSetupDialog_metacast ".} =
+  var nimfunc = cast[ptr QPageSetupDialogmetacastProc](cast[pointer](slot))
+  let slotval1 = (param1)
+
+
+  let virtualReturn = nimfunc[](slotval1 )
+
+  virtualReturn
+proc QPageSetupDialogmetacall*(self: gen_qpagesetupdialog_types.QPageSetupDialog, param1: cint, param2: cint, param3: pointer): cint =
+  fQPageSetupDialog_virtualbase_metacall(self.h, cint(param1), param2, param3)
+
+type QPageSetupDialogmetacallProc* = proc(param1: cint, param2: cint, param3: pointer): cint
+proc onmetacall*(self: gen_qpagesetupdialog_types.QPageSetupDialog, slot: QPageSetupDialogmetacallProc) =
+  # TODO check subclass
+  var tmp = new QPageSetupDialogmetacallProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQPageSetupDialog_override_virtual_metacall(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QPageSetupDialog_metacall(self: ptr cQPageSetupDialog, slot: int, param1: cint, param2: cint, param3: pointer): cint {.exportc: "miqt_exec_callback_QPageSetupDialog_metacall ".} =
+  var nimfunc = cast[ptr QPageSetupDialogmetacallProc](cast[pointer](slot))
+  let slotval1 = cint(param1)
+
+  let slotval2 = param2
+
+  let slotval3 = param3
+
+
+  let virtualReturn = nimfunc[](slotval1, slotval2, slotval3 )
+
+  virtualReturn
 proc QPageSetupDialogexec*(self: gen_qpagesetupdialog_types.QPageSetupDialog, ): cint =
   fQPageSetupDialog_virtualbase_exec(self.h)
 
@@ -1139,5 +1209,7 @@ proc miqt_exec_callback_QPageSetupDialog_disconnectNotify(self: ptr cQPageSetupD
 
 
   nimfunc[](slotval1)
+proc staticMetaObject*(_: type gen_qpagesetupdialog_types.QPageSetupDialog): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fcQPageSetupDialog_staticMetaObject())
 proc delete*(self: gen_qpagesetupdialog_types.QPageSetupDialog) =
   fcQPageSetupDialog_delete(self.h)

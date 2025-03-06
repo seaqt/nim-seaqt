@@ -220,6 +220,7 @@ bool QHostAddress_isEqual2(const QHostAddress* self, QHostAddress* address, int 
 	return self->isEqual(*address, static_cast<QHostAddress::ConversionMode>(mode));
 }
 
+const QMetaObject* QHostAddress_staticMetaObject() { return &QHostAddress::staticMetaObject; }
 void QHostAddress_delete(QHostAddress* self) {
 	delete self;
 }

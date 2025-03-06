@@ -127,6 +127,7 @@ QUndoView* QUndoView_new6(QUndoGroup* group, QWidget* parent);
 void QUndoView_virtbase(QUndoView* src, QListView** outptr_QListView);
 QMetaObject* QUndoView_metaObject(const QUndoView* self);
 void* QUndoView_metacast(QUndoView* self, const char* param1);
+int QUndoView_metacall(QUndoView* self, int param1, int param2, void** param3);
 struct miqt_string QUndoView_tr(const char* s);
 QUndoStack* QUndoView_stack(const QUndoView* self);
 QUndoGroup* QUndoView_group(const QUndoView* self);
@@ -138,6 +139,12 @@ void QUndoView_setStack(QUndoView* self, QUndoStack* stack);
 void QUndoView_setGroup(QUndoView* self, QUndoGroup* group);
 struct miqt_string QUndoView_tr2(const char* s, const char* c);
 struct miqt_string QUndoView_tr3(const char* s, const char* c, int n);
+bool QUndoView_override_virtual_metaObject(void* self, intptr_t slot);
+QMetaObject* QUndoView_virtualbase_metaObject(const void* self);
+bool QUndoView_override_virtual_metacast(void* self, intptr_t slot);
+void* QUndoView_virtualbase_metacast(void* self, const char* param1);
+bool QUndoView_override_virtual_metacall(void* self, intptr_t slot);
+int QUndoView_virtualbase_metacall(void* self, int param1, int param2, void** param3);
 bool QUndoView_override_virtual_visualRect(void* self, intptr_t slot);
 QRect* QUndoView_virtualbase_visualRect(const void* self, QModelIndex* index);
 bool QUndoView_override_virtual_scrollTo(void* self, intptr_t slot);
@@ -347,6 +354,7 @@ QObject* QUndoView_protectedbase_sender(bool* _dynamic_cast_ok, const void* self
 int QUndoView_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
 int QUndoView_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
 bool QUndoView_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+const QMetaObject* QUndoView_staticMetaObject();
 void QUndoView_delete(QUndoView* self);
 
 #ifdef __cplusplus

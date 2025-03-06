@@ -90,6 +90,7 @@ proc fcQInputDevice_new4(name: struct_miqt_string, systemId: clonglong, typeVal:
 proc fcQInputDevice_new5(name: struct_miqt_string, systemId: clonglong, typeVal: cint, seatName: struct_miqt_string, parent: pointer): ptr cQInputDevice {.importc: "QInputDevice_new5".}
 proc fcQInputDevice_metaObject(self: pointer, ): pointer {.importc: "QInputDevice_metaObject".}
 proc fcQInputDevice_metacast(self: pointer, param1: cstring): pointer {.importc: "QInputDevice_metacast".}
+proc fcQInputDevice_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QInputDevice_metacall".}
 proc fcQInputDevice_tr(s: cstring): struct_miqt_string {.importc: "QInputDevice_tr".}
 proc fcQInputDevice_name(self: pointer, ): struct_miqt_string {.importc: "QInputDevice_name".}
 proc fcQInputDevice_typeX(self: pointer, ): cint {.importc: "QInputDevice_type".}
@@ -107,6 +108,12 @@ proc fcQInputDevice_connect_availableVirtualGeometryChanged(self: pointer, slot:
 proc fcQInputDevice_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QInputDevice_tr2".}
 proc fcQInputDevice_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QInputDevice_tr3".}
 proc fcQInputDevice_primaryKeyboard1(seatName: struct_miqt_string): pointer {.importc: "QInputDevice_primaryKeyboard1".}
+proc fQInputDevice_virtualbase_metaObject(self: pointer, ): pointer{.importc: "QInputDevice_virtualbase_metaObject".}
+proc fcQInputDevice_override_virtual_metaObject(self: pointer, slot: int) {.importc: "QInputDevice_override_virtual_metaObject".}
+proc fQInputDevice_virtualbase_metacast(self: pointer, param1: cstring): pointer{.importc: "QInputDevice_virtualbase_metacast".}
+proc fcQInputDevice_override_virtual_metacast(self: pointer, slot: int) {.importc: "QInputDevice_override_virtual_metacast".}
+proc fQInputDevice_virtualbase_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint{.importc: "QInputDevice_virtualbase_metacall".}
+proc fcQInputDevice_override_virtual_metacall(self: pointer, slot: int) {.importc: "QInputDevice_override_virtual_metacall".}
 proc fQInputDevice_virtualbase_event(self: pointer, event: pointer): bool{.importc: "QInputDevice_virtualbase_event".}
 proc fcQInputDevice_override_virtual_event(self: pointer, slot: int) {.importc: "QInputDevice_override_virtual_event".}
 proc fQInputDevice_virtualbase_eventFilter(self: pointer, watched: pointer, event: pointer): bool{.importc: "QInputDevice_virtualbase_eventFilter".}
@@ -121,6 +128,7 @@ proc fQInputDevice_virtualbase_connectNotify(self: pointer, signal: pointer): vo
 proc fcQInputDevice_override_virtual_connectNotify(self: pointer, slot: int) {.importc: "QInputDevice_override_virtual_connectNotify".}
 proc fQInputDevice_virtualbase_disconnectNotify(self: pointer, signal: pointer): void{.importc: "QInputDevice_virtualbase_disconnectNotify".}
 proc fcQInputDevice_override_virtual_disconnectNotify(self: pointer, slot: int) {.importc: "QInputDevice_override_virtual_disconnectNotify".}
+proc fcQInputDevice_staticMetaObject(): pointer {.importc: "QInputDevice_staticMetaObject".}
 proc fcQInputDevice_delete(self: pointer) {.importc: "QInputDevice_delete".}
 
 
@@ -146,6 +154,9 @@ proc metaObject*(self: gen_qinputdevice_types.QInputDevice, ): gen_qobjectdefs_t
 
 proc metacast*(self: gen_qinputdevice_types.QInputDevice, param1: cstring): pointer =
   fcQInputDevice_metacast(self.h, param1)
+
+proc metacall*(self: gen_qinputdevice_types.QInputDevice, param1: cint, param2: cint, param3: pointer): cint =
+  fcQInputDevice_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qinputdevice_types.QInputDevice, s: cstring): string =
   let v_ms = fcQInputDevice_tr(s)
@@ -236,6 +247,65 @@ proc tr*(_: type gen_qinputdevice_types.QInputDevice, s: cstring, c: cstring, n:
 proc primaryKeyboard*(_: type gen_qinputdevice_types.QInputDevice, seatName: string): gen_qinputdevice_types.QInputDevice =
   gen_qinputdevice_types.QInputDevice(h: fcQInputDevice_primaryKeyboard1(struct_miqt_string(data: seatName, len: csize_t(len(seatName)))))
 
+proc QInputDevicemetaObject*(self: gen_qinputdevice_types.QInputDevice, ): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fQInputDevice_virtualbase_metaObject(self.h))
+
+type QInputDevicemetaObjectProc* = proc(): gen_qobjectdefs_types.QMetaObject
+proc onmetaObject*(self: gen_qinputdevice_types.QInputDevice, slot: QInputDevicemetaObjectProc) =
+  # TODO check subclass
+  var tmp = new QInputDevicemetaObjectProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQInputDevice_override_virtual_metaObject(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QInputDevice_metaObject(self: ptr cQInputDevice, slot: int): pointer {.exportc: "miqt_exec_callback_QInputDevice_metaObject ".} =
+  var nimfunc = cast[ptr QInputDevicemetaObjectProc](cast[pointer](slot))
+
+  let virtualReturn = nimfunc[]( )
+
+  virtualReturn.h
+proc QInputDevicemetacast*(self: gen_qinputdevice_types.QInputDevice, param1: cstring): pointer =
+  fQInputDevice_virtualbase_metacast(self.h, param1)
+
+type QInputDevicemetacastProc* = proc(param1: cstring): pointer
+proc onmetacast*(self: gen_qinputdevice_types.QInputDevice, slot: QInputDevicemetacastProc) =
+  # TODO check subclass
+  var tmp = new QInputDevicemetacastProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQInputDevice_override_virtual_metacast(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QInputDevice_metacast(self: ptr cQInputDevice, slot: int, param1: cstring): pointer {.exportc: "miqt_exec_callback_QInputDevice_metacast ".} =
+  var nimfunc = cast[ptr QInputDevicemetacastProc](cast[pointer](slot))
+  let slotval1 = (param1)
+
+
+  let virtualReturn = nimfunc[](slotval1 )
+
+  virtualReturn
+proc QInputDevicemetacall*(self: gen_qinputdevice_types.QInputDevice, param1: cint, param2: cint, param3: pointer): cint =
+  fQInputDevice_virtualbase_metacall(self.h, cint(param1), param2, param3)
+
+type QInputDevicemetacallProc* = proc(param1: cint, param2: cint, param3: pointer): cint
+proc onmetacall*(self: gen_qinputdevice_types.QInputDevice, slot: QInputDevicemetacallProc) =
+  # TODO check subclass
+  var tmp = new QInputDevicemetacallProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQInputDevice_override_virtual_metacall(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QInputDevice_metacall(self: ptr cQInputDevice, slot: int, param1: cint, param2: cint, param3: pointer): cint {.exportc: "miqt_exec_callback_QInputDevice_metacall ".} =
+  var nimfunc = cast[ptr QInputDevicemetacallProc](cast[pointer](slot))
+  let slotval1 = cint(param1)
+
+  let slotval2 = param2
+
+  let slotval3 = param3
+
+
+  let virtualReturn = nimfunc[](slotval1, slotval2, slotval3 )
+
+  virtualReturn
 proc QInputDeviceevent*(self: gen_qinputdevice_types.QInputDevice, event: gen_qcoreevent_types.QEvent): bool =
   fQInputDevice_virtualbase_event(self.h, event.h)
 
@@ -361,5 +431,7 @@ proc miqt_exec_callback_QInputDevice_disconnectNotify(self: ptr cQInputDevice, s
 
 
   nimfunc[](slotval1)
+proc staticMetaObject*(_: type gen_qinputdevice_types.QInputDevice): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fcQInputDevice_staticMetaObject())
 proc delete*(self: gen_qinputdevice_types.QInputDevice) =
   fcQInputDevice_delete(self.h)

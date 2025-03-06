@@ -1519,6 +1519,7 @@ type cQKeyCombination*{.exportc: "QKeyCombination", incompleteStruct.} = object
 proc fcDisambiguated_t_new(): ptr cDisambiguated_t {.importc: "Disambiguated_t_new".}
 proc fcDisambiguated_t_new2(param1: pointer): ptr cDisambiguated_t {.importc: "Disambiguated_t_new2".}
 proc fcDisambiguated_t_delete(self: pointer) {.importc: "Disambiguated_t_delete".}
+proc fcQInternal_activateCallbacks(param1: cint, param2: pointer): bool {.importc: "QInternal_activateCallbacks".}
 proc fcQInternal_delete(self: pointer) {.importc: "QInternal_delete".}
 proc fcQKeyCombination_new(): ptr cQKeyCombination {.importc: "QKeyCombination_new".}
 proc fcQKeyCombination_new2(modifiers: cint): ptr cQKeyCombination {.importc: "QKeyCombination_new2".}
@@ -1548,6 +1549,9 @@ proc delete*(self: gen_qnamespace_types.Disambiguated_t) =
 
 func init*(T: type gen_qnamespace_types.QInternal, h: ptr cQInternal): gen_qnamespace_types.QInternal =
   T(h: h)
+proc activateCallbacks*(_: type gen_qnamespace_types.QInternal, param1: cint, param2: pointer): bool =
+  fcQInternal_activateCallbacks(cint(param1), param2)
+
 proc delete*(self: gen_qnamespace_types.QInternal) =
   fcQInternal_delete(self.h)
 

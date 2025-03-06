@@ -95,6 +95,7 @@ QTabWidget* QTabWidget_new2();
 void QTabWidget_virtbase(QTabWidget* src, QWidget** outptr_QWidget);
 QMetaObject* QTabWidget_metaObject(const QTabWidget* self);
 void* QTabWidget_metacast(QTabWidget* self, const char* param1);
+int QTabWidget_metacall(QTabWidget* self, int param1, int param2, void** param3);
 struct miqt_string QTabWidget_tr(const char* s);
 int QTabWidget_addTab(QTabWidget* self, QWidget* widget, struct miqt_string param2);
 int QTabWidget_addTab2(QTabWidget* self, QWidget* widget, QIcon* icon, struct miqt_string label);
@@ -167,6 +168,12 @@ struct miqt_string QTabWidget_tr2(const char* s, const char* c);
 struct miqt_string QTabWidget_tr3(const char* s, const char* c, int n);
 void QTabWidget_setCornerWidget2(QTabWidget* self, QWidget* w, int corner);
 QWidget* QTabWidget_cornerWidget1(const QTabWidget* self, int corner);
+bool QTabWidget_override_virtual_metaObject(void* self, intptr_t slot);
+QMetaObject* QTabWidget_virtualbase_metaObject(const void* self);
+bool QTabWidget_override_virtual_metacast(void* self, intptr_t slot);
+void* QTabWidget_virtualbase_metacast(void* self, const char* param1);
+bool QTabWidget_override_virtual_metacall(void* self, intptr_t slot);
+int QTabWidget_virtualbase_metacall(void* self, int param1, int param2, void** param3);
 bool QTabWidget_override_virtual_sizeHint(void* self, intptr_t slot);
 QSize* QTabWidget_virtualbase_sizeHint(const void* self);
 bool QTabWidget_override_virtual_minimumSizeHint(void* self, intptr_t slot);
@@ -277,6 +284,7 @@ QObject* QTabWidget_protectedbase_sender(bool* _dynamic_cast_ok, const void* sel
 int QTabWidget_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
 int QTabWidget_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
 bool QTabWidget_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+const QMetaObject* QTabWidget_staticMetaObject();
 void QTabWidget_delete(QTabWidget* self);
 
 #ifdef __cplusplus

@@ -76,6 +76,7 @@ proc fcQWebEngineHistoryItem_swap(self: pointer, other: pointer): void {.importc
 proc fcQWebEngineHistoryItem_delete(self: pointer) {.importc: "QWebEngineHistoryItem_delete".}
 proc fcQWebEngineHistoryModel_metaObject(self: pointer, ): pointer {.importc: "QWebEngineHistoryModel_metaObject".}
 proc fcQWebEngineHistoryModel_metacast(self: pointer, param1: cstring): pointer {.importc: "QWebEngineHistoryModel_metacast".}
+proc fcQWebEngineHistoryModel_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QWebEngineHistoryModel_metacall".}
 proc fcQWebEngineHistoryModel_tr(s: cstring): struct_miqt_string {.importc: "QWebEngineHistoryModel_tr".}
 proc fcQWebEngineHistoryModel_rowCount(self: pointer, parent: pointer): cint {.importc: "QWebEngineHistoryModel_rowCount".}
 proc fcQWebEngineHistoryModel_data(self: pointer, index: pointer, role: cint): pointer {.importc: "QWebEngineHistoryModel_data".}
@@ -83,8 +84,10 @@ proc fcQWebEngineHistoryModel_roleNames(self: pointer, ): struct_miqt_map {.impo
 proc fcQWebEngineHistoryModel_reset(self: pointer, ): void {.importc: "QWebEngineHistoryModel_reset".}
 proc fcQWebEngineHistoryModel_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QWebEngineHistoryModel_tr2".}
 proc fcQWebEngineHistoryModel_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QWebEngineHistoryModel_tr3".}
+proc fcQWebEngineHistoryModel_staticMetaObject(): pointer {.importc: "QWebEngineHistoryModel_staticMetaObject".}
 proc fcQWebEngineHistory_metaObject(self: pointer, ): pointer {.importc: "QWebEngineHistory_metaObject".}
 proc fcQWebEngineHistory_metacast(self: pointer, param1: cstring): pointer {.importc: "QWebEngineHistory_metacast".}
+proc fcQWebEngineHistory_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QWebEngineHistory_metacall".}
 proc fcQWebEngineHistory_tr(s: cstring): struct_miqt_string {.importc: "QWebEngineHistory_tr".}
 proc fcQWebEngineHistory_clear(self: pointer, ): void {.importc: "QWebEngineHistory_clear".}
 proc fcQWebEngineHistory_items(self: pointer, ): struct_miqt_array {.importc: "QWebEngineHistory_items".}
@@ -106,6 +109,7 @@ proc fcQWebEngineHistory_backItemsModel(self: pointer, ): pointer {.importc: "QW
 proc fcQWebEngineHistory_forwardItemsModel(self: pointer, ): pointer {.importc: "QWebEngineHistory_forwardItemsModel".}
 proc fcQWebEngineHistory_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QWebEngineHistory_tr2".}
 proc fcQWebEngineHistory_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QWebEngineHistory_tr3".}
+proc fcQWebEngineHistory_staticMetaObject(): pointer {.importc: "QWebEngineHistory_staticMetaObject".}
 
 
 func init*(T: type gen_qwebenginehistory_types.QWebEngineHistoryItem, h: ptr cQWebEngineHistoryItem): gen_qwebenginehistory_types.QWebEngineHistoryItem =
@@ -151,6 +155,9 @@ proc metaObject*(self: gen_qwebenginehistory_types.QWebEngineHistoryModel, ): ge
 proc metacast*(self: gen_qwebenginehistory_types.QWebEngineHistoryModel, param1: cstring): pointer =
   fcQWebEngineHistoryModel_metacast(self.h, param1)
 
+proc metacall*(self: gen_qwebenginehistory_types.QWebEngineHistoryModel, param1: cint, param2: cint, param3: pointer): cint =
+  fcQWebEngineHistoryModel_metacall(self.h, cint(param1), param2, param3)
+
 proc tr*(_: type gen_qwebenginehistory_types.QWebEngineHistoryModel, s: cstring): string =
   let v_ms = fcQWebEngineHistoryModel_tr(s)
   let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
@@ -194,6 +201,8 @@ proc tr*(_: type gen_qwebenginehistory_types.QWebEngineHistoryModel, s: cstring,
   c_free(v_ms.data)
   vx_ret
 
+proc staticMetaObject*(_: type gen_qwebenginehistory_types.QWebEngineHistoryModel): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fcQWebEngineHistoryModel_staticMetaObject())
 
 func init*(T: type gen_qwebenginehistory_types.QWebEngineHistory, h: ptr cQWebEngineHistory): gen_qwebenginehistory_types.QWebEngineHistory =
   T(h: h)
@@ -202,6 +211,9 @@ proc metaObject*(self: gen_qwebenginehistory_types.QWebEngineHistory, ): gen_qob
 
 proc metacast*(self: gen_qwebenginehistory_types.QWebEngineHistory, param1: cstring): pointer =
   fcQWebEngineHistory_metacast(self.h, param1)
+
+proc metacall*(self: gen_qwebenginehistory_types.QWebEngineHistory, param1: cint, param2: cint, param3: pointer): cint =
+  fcQWebEngineHistory_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qwebenginehistory_types.QWebEngineHistory, s: cstring): string =
   let v_ms = fcQWebEngineHistory_tr(s)
@@ -290,3 +302,5 @@ proc tr*(_: type gen_qwebenginehistory_types.QWebEngineHistory, s: cstring, c: c
   c_free(v_ms.data)
   vx_ret
 
+proc staticMetaObject*(_: type gen_qwebenginehistory_types.QWebEngineHistory): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fcQWebEngineHistory_staticMetaObject())

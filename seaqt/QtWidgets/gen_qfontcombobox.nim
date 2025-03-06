@@ -86,6 +86,7 @@ proc fcQFontComboBox_new(parent: pointer): ptr cQFontComboBox {.importc: "QFontC
 proc fcQFontComboBox_new2(): ptr cQFontComboBox {.importc: "QFontComboBox_new2".}
 proc fcQFontComboBox_metaObject(self: pointer, ): pointer {.importc: "QFontComboBox_metaObject".}
 proc fcQFontComboBox_metacast(self: pointer, param1: cstring): pointer {.importc: "QFontComboBox_metacast".}
+proc fcQFontComboBox_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QFontComboBox_metacall".}
 proc fcQFontComboBox_tr(s: cstring): struct_miqt_string {.importc: "QFontComboBox_tr".}
 proc fcQFontComboBox_setWritingSystem(self: pointer, writingSystem: cint): void {.importc: "QFontComboBox_setWritingSystem".}
 proc fcQFontComboBox_writingSystem(self: pointer, ): cint {.importc: "QFontComboBox_writingSystem".}
@@ -103,6 +104,12 @@ proc fcQFontComboBox_currentFontChanged(self: pointer, f: pointer): void {.impor
 proc fcQFontComboBox_connect_currentFontChanged(self: pointer, slot: int) {.importc: "QFontComboBox_connect_currentFontChanged".}
 proc fcQFontComboBox_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QFontComboBox_tr2".}
 proc fcQFontComboBox_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QFontComboBox_tr3".}
+proc fQFontComboBox_virtualbase_metaObject(self: pointer, ): pointer{.importc: "QFontComboBox_virtualbase_metaObject".}
+proc fcQFontComboBox_override_virtual_metaObject(self: pointer, slot: int) {.importc: "QFontComboBox_override_virtual_metaObject".}
+proc fQFontComboBox_virtualbase_metacast(self: pointer, param1: cstring): pointer{.importc: "QFontComboBox_virtualbase_metacast".}
+proc fcQFontComboBox_override_virtual_metacast(self: pointer, slot: int) {.importc: "QFontComboBox_override_virtual_metacast".}
+proc fQFontComboBox_virtualbase_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint{.importc: "QFontComboBox_virtualbase_metacall".}
+proc fcQFontComboBox_override_virtual_metacall(self: pointer, slot: int) {.importc: "QFontComboBox_override_virtual_metacall".}
 proc fQFontComboBox_virtualbase_sizeHint(self: pointer, ): pointer{.importc: "QFontComboBox_virtualbase_sizeHint".}
 proc fcQFontComboBox_override_virtual_sizeHint(self: pointer, slot: int) {.importc: "QFontComboBox_override_virtual_sizeHint".}
 proc fQFontComboBox_virtualbase_event(self: pointer, e: pointer): bool{.importc: "QFontComboBox_virtualbase_event".}
@@ -205,6 +212,7 @@ proc fQFontComboBox_virtualbase_connectNotify(self: pointer, signal: pointer): v
 proc fcQFontComboBox_override_virtual_connectNotify(self: pointer, slot: int) {.importc: "QFontComboBox_override_virtual_connectNotify".}
 proc fQFontComboBox_virtualbase_disconnectNotify(self: pointer, signal: pointer): void{.importc: "QFontComboBox_virtualbase_disconnectNotify".}
 proc fcQFontComboBox_override_virtual_disconnectNotify(self: pointer, slot: int) {.importc: "QFontComboBox_override_virtual_disconnectNotify".}
+proc fcQFontComboBox_staticMetaObject(): pointer {.importc: "QFontComboBox_staticMetaObject".}
 proc fcQFontComboBox_delete(self: pointer) {.importc: "QFontComboBox_delete".}
 
 
@@ -221,6 +229,9 @@ proc metaObject*(self: gen_qfontcombobox_types.QFontComboBox, ): gen_qobjectdefs
 
 proc metacast*(self: gen_qfontcombobox_types.QFontComboBox, param1: cstring): pointer =
   fcQFontComboBox_metacast(self.h, param1)
+
+proc metacall*(self: gen_qfontcombobox_types.QFontComboBox, param1: cint, param2: cint, param3: pointer): cint =
+  fcQFontComboBox_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qfontcombobox_types.QFontComboBox, s: cstring): string =
   let v_ms = fcQFontComboBox_tr(s)
@@ -298,6 +309,65 @@ proc tr*(_: type gen_qfontcombobox_types.QFontComboBox, s: cstring, c: cstring, 
   c_free(v_ms.data)
   vx_ret
 
+proc QFontComboBoxmetaObject*(self: gen_qfontcombobox_types.QFontComboBox, ): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fQFontComboBox_virtualbase_metaObject(self.h))
+
+type QFontComboBoxmetaObjectProc* = proc(): gen_qobjectdefs_types.QMetaObject
+proc onmetaObject*(self: gen_qfontcombobox_types.QFontComboBox, slot: QFontComboBoxmetaObjectProc) =
+  # TODO check subclass
+  var tmp = new QFontComboBoxmetaObjectProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQFontComboBox_override_virtual_metaObject(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QFontComboBox_metaObject(self: ptr cQFontComboBox, slot: int): pointer {.exportc: "miqt_exec_callback_QFontComboBox_metaObject ".} =
+  var nimfunc = cast[ptr QFontComboBoxmetaObjectProc](cast[pointer](slot))
+
+  let virtualReturn = nimfunc[]( )
+
+  virtualReturn.h
+proc QFontComboBoxmetacast*(self: gen_qfontcombobox_types.QFontComboBox, param1: cstring): pointer =
+  fQFontComboBox_virtualbase_metacast(self.h, param1)
+
+type QFontComboBoxmetacastProc* = proc(param1: cstring): pointer
+proc onmetacast*(self: gen_qfontcombobox_types.QFontComboBox, slot: QFontComboBoxmetacastProc) =
+  # TODO check subclass
+  var tmp = new QFontComboBoxmetacastProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQFontComboBox_override_virtual_metacast(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QFontComboBox_metacast(self: ptr cQFontComboBox, slot: int, param1: cstring): pointer {.exportc: "miqt_exec_callback_QFontComboBox_metacast ".} =
+  var nimfunc = cast[ptr QFontComboBoxmetacastProc](cast[pointer](slot))
+  let slotval1 = (param1)
+
+
+  let virtualReturn = nimfunc[](slotval1 )
+
+  virtualReturn
+proc QFontComboBoxmetacall*(self: gen_qfontcombobox_types.QFontComboBox, param1: cint, param2: cint, param3: pointer): cint =
+  fQFontComboBox_virtualbase_metacall(self.h, cint(param1), param2, param3)
+
+type QFontComboBoxmetacallProc* = proc(param1: cint, param2: cint, param3: pointer): cint
+proc onmetacall*(self: gen_qfontcombobox_types.QFontComboBox, slot: QFontComboBoxmetacallProc) =
+  # TODO check subclass
+  var tmp = new QFontComboBoxmetacallProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQFontComboBox_override_virtual_metacall(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QFontComboBox_metacall(self: ptr cQFontComboBox, slot: int, param1: cint, param2: cint, param3: pointer): cint {.exportc: "miqt_exec_callback_QFontComboBox_metacall ".} =
+  var nimfunc = cast[ptr QFontComboBoxmetacallProc](cast[pointer](slot))
+  let slotval1 = cint(param1)
+
+  let slotval2 = param2
+
+  let slotval3 = param3
+
+
+  let virtualReturn = nimfunc[](slotval1, slotval2, slotval3 )
+
+  virtualReturn
 proc QFontComboBoxsizeHint*(self: gen_qfontcombobox_types.QFontComboBox, ): gen_qsize_types.QSize =
   gen_qsize_types.QSize(h: fQFontComboBox_virtualbase_sizeHint(self.h))
 
@@ -1186,5 +1256,7 @@ proc miqt_exec_callback_QFontComboBox_disconnectNotify(self: ptr cQFontComboBox,
 
 
   nimfunc[](slotval1)
+proc staticMetaObject*(_: type gen_qfontcombobox_types.QFontComboBox): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fcQFontComboBox_staticMetaObject())
 proc delete*(self: gen_qfontcombobox_types.QFontComboBox) =
   fcQFontComboBox_delete(self.h)

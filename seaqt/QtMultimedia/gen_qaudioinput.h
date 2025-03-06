@@ -41,6 +41,7 @@ QAudioInput* QAudioInput_new4(QAudioDevice* deviceInfo, QObject* parent);
 void QAudioInput_virtbase(QAudioInput* src, QObject** outptr_QObject);
 QMetaObject* QAudioInput_metaObject(const QAudioInput* self);
 void* QAudioInput_metacast(QAudioInput* self, const char* param1);
+int QAudioInput_metacall(QAudioInput* self, int param1, int param2, void** param3);
 struct miqt_string QAudioInput_tr(const char* s);
 QAudioDevice* QAudioInput_device(const QAudioInput* self);
 float QAudioInput_volume(const QAudioInput* self);
@@ -56,6 +57,12 @@ void QAudioInput_mutedChanged(QAudioInput* self, bool muted);
 void QAudioInput_connect_mutedChanged(QAudioInput* self, intptr_t slot);
 struct miqt_string QAudioInput_tr2(const char* s, const char* c);
 struct miqt_string QAudioInput_tr3(const char* s, const char* c, int n);
+bool QAudioInput_override_virtual_metaObject(void* self, intptr_t slot);
+QMetaObject* QAudioInput_virtualbase_metaObject(const void* self);
+bool QAudioInput_override_virtual_metacast(void* self, intptr_t slot);
+void* QAudioInput_virtualbase_metacast(void* self, const char* param1);
+bool QAudioInput_override_virtual_metacall(void* self, intptr_t slot);
+int QAudioInput_virtualbase_metacall(void* self, int param1, int param2, void** param3);
 bool QAudioInput_override_virtual_event(void* self, intptr_t slot);
 bool QAudioInput_virtualbase_event(void* self, QEvent* event);
 bool QAudioInput_override_virtual_eventFilter(void* self, intptr_t slot);
@@ -74,6 +81,7 @@ QObject* QAudioInput_protectedbase_sender(bool* _dynamic_cast_ok, const void* se
 int QAudioInput_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
 int QAudioInput_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
 bool QAudioInput_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+const QMetaObject* QAudioInput_staticMetaObject();
 void QAudioInput_delete(QAudioInput* self);
 
 #ifdef __cplusplus

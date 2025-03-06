@@ -66,6 +66,9 @@ void miqt_exec_callback_QTextEdit_currentCharFormatChanged(intptr_t, QTextCharFo
 void miqt_exec_callback_QTextEdit_copyAvailable(intptr_t, bool);
 void miqt_exec_callback_QTextEdit_selectionChanged(intptr_t);
 void miqt_exec_callback_QTextEdit_cursorPositionChanged(intptr_t);
+QMetaObject* miqt_exec_callback_QTextEdit_metaObject(const QTextEdit*, intptr_t);
+void* miqt_exec_callback_QTextEdit_metacast(QTextEdit*, intptr_t, const char*);
+int miqt_exec_callback_QTextEdit_metacall(QTextEdit*, intptr_t, int, int, void**);
 QVariant* miqt_exec_callback_QTextEdit_loadResource(QTextEdit*, intptr_t, int, QUrl*);
 QVariant* miqt_exec_callback_QTextEdit_inputMethodQuery(const QTextEdit*, intptr_t, int);
 bool miqt_exec_callback_QTextEdit_event(QTextEdit*, intptr_t, QEvent*);
@@ -136,6 +139,62 @@ public:
 	VirtualQTextEdit(const QString& text, QWidget* parent): QTextEdit(text, parent) {};
 
 	virtual ~VirtualQTextEdit() override = default;
+
+	// cgo.Handle value for overwritten implementation
+	intptr_t handle__metaObject = 0;
+
+	// Subclass to allow providing a Go implementation
+	virtual const QMetaObject* metaObject() const override {
+		if (handle__metaObject == 0) {
+			return QTextEdit::metaObject();
+		}
+		
+
+		QMetaObject* callback_return_value = miqt_exec_callback_QTextEdit_metaObject(this, handle__metaObject);
+
+		return callback_return_value;
+	}
+
+	friend QMetaObject* QTextEdit_virtualbase_metaObject(const void* self);
+
+	// cgo.Handle value for overwritten implementation
+	intptr_t handle__metacast = 0;
+
+	// Subclass to allow providing a Go implementation
+	virtual void* qt_metacast(const char* param1) override {
+		if (handle__metacast == 0) {
+			return QTextEdit::qt_metacast(param1);
+		}
+		
+		const char* sigval1 = (const char*) param1;
+
+		void* callback_return_value = miqt_exec_callback_QTextEdit_metacast(this, handle__metacast, sigval1);
+
+		return callback_return_value;
+	}
+
+	friend void* QTextEdit_virtualbase_metacast(void* self, const char* param1);
+
+	// cgo.Handle value for overwritten implementation
+	intptr_t handle__metacall = 0;
+
+	// Subclass to allow providing a Go implementation
+	virtual int qt_metacall(QMetaObject::Call param1, int param2, void** param3) override {
+		if (handle__metacall == 0) {
+			return QTextEdit::qt_metacall(param1, param2, param3);
+		}
+		
+		QMetaObject::Call param1_ret = param1;
+		int sigval1 = static_cast<int>(param1_ret);
+		int sigval2 = param2;
+		void** sigval3 = param3;
+
+		int callback_return_value = miqt_exec_callback_QTextEdit_metacall(this, handle__metacall, sigval1, sigval2, sigval3);
+
+		return static_cast<int>(callback_return_value);
+	}
+
+	friend int QTextEdit_virtualbase_metacall(void* self, int param1, int param2, void** param3);
 
 	// cgo.Handle value for overwritten implementation
 	intptr_t handle__loadResource = 0;
@@ -1260,6 +1319,10 @@ void* QTextEdit_metacast(QTextEdit* self, const char* param1) {
 	return self->qt_metacast(param1);
 }
 
+int QTextEdit_metacall(QTextEdit* self, int param1, int param2, void** param3) {
+	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
+}
+
 struct miqt_string QTextEdit_tr(const char* s) {
 	QString _ret = QTextEdit::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
@@ -1842,6 +1905,54 @@ void QTextEdit_zoomIn1(QTextEdit* self, int range) {
 
 void QTextEdit_zoomOut1(QTextEdit* self, int range) {
 	self->zoomOut(static_cast<int>(range));
+}
+
+bool QTextEdit_override_virtual_metaObject(void* self, intptr_t slot) {
+	VirtualQTextEdit* self_cast = dynamic_cast<VirtualQTextEdit*>( (QTextEdit*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+	
+	self_cast->handle__metaObject = slot;
+	return true;
+}
+
+QMetaObject* QTextEdit_virtualbase_metaObject(const void* self) {
+
+	return (QMetaObject*) ( (const VirtualQTextEdit*)(self) )->QTextEdit::metaObject();
+
+}
+
+bool QTextEdit_override_virtual_metacast(void* self, intptr_t slot) {
+	VirtualQTextEdit* self_cast = dynamic_cast<VirtualQTextEdit*>( (QTextEdit*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+	
+	self_cast->handle__metacast = slot;
+	return true;
+}
+
+void* QTextEdit_virtualbase_metacast(void* self, const char* param1) {
+
+	return ( (VirtualQTextEdit*)(self) )->QTextEdit::qt_metacast(param1);
+
+}
+
+bool QTextEdit_override_virtual_metacall(void* self, intptr_t slot) {
+	VirtualQTextEdit* self_cast = dynamic_cast<VirtualQTextEdit*>( (QTextEdit*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+	
+	self_cast->handle__metacall = slot;
+	return true;
+}
+
+int QTextEdit_virtualbase_metacall(void* self, int param1, int param2, void** param3) {
+
+	return ( (VirtualQTextEdit*)(self) )->QTextEdit::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
+
 }
 
 bool QTextEdit_override_virtual_loadResource(void* self, intptr_t slot) {
@@ -2757,6 +2868,7 @@ void QTextEdit_virtualbase_disconnectNotify(void* self, QMetaMethod* signal) {
 
 }
 
+const QMetaObject* QTextEdit_staticMetaObject() { return &QTextEdit::staticMetaObject; }
 void QTextEdit_protectedbase_zoomInF(bool* _dynamic_cast_ok, void* self, float range) {
 	VirtualQTextEdit* self_cast = dynamic_cast<VirtualQTextEdit*>( (QTextEdit*)(self) );
 	if (self_cast == nullptr) {

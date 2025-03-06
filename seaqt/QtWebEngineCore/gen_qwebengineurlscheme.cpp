@@ -85,6 +85,7 @@ QWebEngineUrlScheme* QWebEngineUrlScheme_schemeByName(struct miqt_string name) {
 	return new QWebEngineUrlScheme(QWebEngineUrlScheme::schemeByName(name_QByteArray));
 }
 
+const QMetaObject* QWebEngineUrlScheme_staticMetaObject() { return &QWebEngineUrlScheme::staticMetaObject; }
 void QWebEngineUrlScheme_delete(QWebEngineUrlScheme* self) {
 	delete self;
 }

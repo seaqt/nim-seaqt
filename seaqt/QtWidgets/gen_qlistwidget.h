@@ -190,6 +190,7 @@ QListWidget* QListWidget_new2();
 void QListWidget_virtbase(QListWidget* src, QListView** outptr_QListView);
 QMetaObject* QListWidget_metaObject(const QListWidget* self);
 void* QListWidget_metacast(QListWidget* self, const char* param1);
+int QListWidget_metacall(QListWidget* self, int param1, int param2, void** param3);
 struct miqt_string QListWidget_tr(const char* s);
 void QListWidget_setSelectionModel(QListWidget* self, QItemSelectionModel* selectionModel);
 QListWidgetItem* QListWidget_item(const QListWidget* self, int row);
@@ -258,6 +259,12 @@ struct miqt_string QListWidget_tr2(const char* s, const char* c);
 struct miqt_string QListWidget_tr3(const char* s, const char* c, int n);
 void QListWidget_sortItems1(QListWidget* self, int order);
 void QListWidget_scrollToItem2(QListWidget* self, QListWidgetItem* item, int hint);
+bool QListWidget_override_virtual_metaObject(void* self, intptr_t slot);
+QMetaObject* QListWidget_virtualbase_metaObject(const void* self);
+bool QListWidget_override_virtual_metacast(void* self, intptr_t slot);
+void* QListWidget_virtualbase_metacast(void* self, const char* param1);
+bool QListWidget_override_virtual_metacall(void* self, intptr_t slot);
+int QListWidget_virtualbase_metacall(void* self, int param1, int param2, void** param3);
 bool QListWidget_override_virtual_setSelectionModel(void* self, intptr_t slot);
 void QListWidget_virtualbase_setSelectionModel(void* self, QItemSelectionModel* selectionModel);
 bool QListWidget_override_virtual_dropEvent(void* self, intptr_t slot);
@@ -473,6 +480,7 @@ QObject* QListWidget_protectedbase_sender(bool* _dynamic_cast_ok, const void* se
 int QListWidget_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
 int QListWidget_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
 bool QListWidget_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+const QMetaObject* QListWidget_staticMetaObject();
 void QListWidget_delete(QListWidget* self);
 
 #ifdef __cplusplus

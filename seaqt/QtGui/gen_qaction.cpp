@@ -29,6 +29,9 @@ void miqt_exec_callback_QAction_triggered(intptr_t);
 void miqt_exec_callback_QAction_hovered(intptr_t);
 void miqt_exec_callback_QAction_toggled(intptr_t, bool);
 void miqt_exec_callback_QAction_triggered1(intptr_t, bool);
+QMetaObject* miqt_exec_callback_QAction_metaObject(const QAction*, intptr_t);
+void* miqt_exec_callback_QAction_metacast(QAction*, intptr_t, const char*);
+int miqt_exec_callback_QAction_metacall(QAction*, intptr_t, int, int, void**);
 bool miqt_exec_callback_QAction_event(QAction*, intptr_t, QEvent*);
 bool miqt_exec_callback_QAction_eventFilter(QAction*, intptr_t, QObject*, QEvent*);
 void miqt_exec_callback_QAction_timerEvent(QAction*, intptr_t, QTimerEvent*);
@@ -51,6 +54,62 @@ public:
 	VirtualQAction(const QIcon& icon, const QString& text, QObject* parent): QAction(icon, text, parent) {};
 
 	virtual ~VirtualQAction() override = default;
+
+	// cgo.Handle value for overwritten implementation
+	intptr_t handle__metaObject = 0;
+
+	// Subclass to allow providing a Go implementation
+	virtual const QMetaObject* metaObject() const override {
+		if (handle__metaObject == 0) {
+			return QAction::metaObject();
+		}
+		
+
+		QMetaObject* callback_return_value = miqt_exec_callback_QAction_metaObject(this, handle__metaObject);
+
+		return callback_return_value;
+	}
+
+	friend QMetaObject* QAction_virtualbase_metaObject(const void* self);
+
+	// cgo.Handle value for overwritten implementation
+	intptr_t handle__metacast = 0;
+
+	// Subclass to allow providing a Go implementation
+	virtual void* qt_metacast(const char* param1) override {
+		if (handle__metacast == 0) {
+			return QAction::qt_metacast(param1);
+		}
+		
+		const char* sigval1 = (const char*) param1;
+
+		void* callback_return_value = miqt_exec_callback_QAction_metacast(this, handle__metacast, sigval1);
+
+		return callback_return_value;
+	}
+
+	friend void* QAction_virtualbase_metacast(void* self, const char* param1);
+
+	// cgo.Handle value for overwritten implementation
+	intptr_t handle__metacall = 0;
+
+	// Subclass to allow providing a Go implementation
+	virtual int qt_metacall(QMetaObject::Call param1, int param2, void** param3) override {
+		if (handle__metacall == 0) {
+			return QAction::qt_metacall(param1, param2, param3);
+		}
+		
+		QMetaObject::Call param1_ret = param1;
+		int sigval1 = static_cast<int>(param1_ret);
+		int sigval2 = param2;
+		void** sigval3 = param3;
+
+		int callback_return_value = miqt_exec_callback_QAction_metacall(this, handle__metacall, sigval1, sigval2, sigval3);
+
+		return static_cast<int>(callback_return_value);
+	}
+
+	friend int QAction_virtualbase_metacall(void* self, int param1, int param2, void** param3);
 
 	// cgo.Handle value for overwritten implementation
 	intptr_t handle__event = 0;
@@ -233,6 +292,10 @@ QMetaObject* QAction_metaObject(const QAction* self) {
 
 void* QAction_metacast(QAction* self, const char* param1) {
 	return self->qt_metacast(param1);
+}
+
+int QAction_metacall(QAction* self, int param1, int param2, void** param3) {
+	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
 struct miqt_string QAction_tr(const char* s) {
@@ -635,6 +698,54 @@ void QAction_connect_triggered1(QAction* self, intptr_t slot) {
 	});
 }
 
+bool QAction_override_virtual_metaObject(void* self, intptr_t slot) {
+	VirtualQAction* self_cast = dynamic_cast<VirtualQAction*>( (QAction*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+	
+	self_cast->handle__metaObject = slot;
+	return true;
+}
+
+QMetaObject* QAction_virtualbase_metaObject(const void* self) {
+
+	return (QMetaObject*) ( (const VirtualQAction*)(self) )->QAction::metaObject();
+
+}
+
+bool QAction_override_virtual_metacast(void* self, intptr_t slot) {
+	VirtualQAction* self_cast = dynamic_cast<VirtualQAction*>( (QAction*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+	
+	self_cast->handle__metacast = slot;
+	return true;
+}
+
+void* QAction_virtualbase_metacast(void* self, const char* param1) {
+
+	return ( (VirtualQAction*)(self) )->QAction::qt_metacast(param1);
+
+}
+
+bool QAction_override_virtual_metacall(void* self, intptr_t slot) {
+	VirtualQAction* self_cast = dynamic_cast<VirtualQAction*>( (QAction*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+	
+	self_cast->handle__metacall = slot;
+	return true;
+}
+
+int QAction_virtualbase_metacall(void* self, int param1, int param2, void** param3) {
+
+	return ( (VirtualQAction*)(self) )->QAction::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
+
+}
+
 bool QAction_override_virtual_event(void* self, intptr_t slot) {
 	VirtualQAction* self_cast = dynamic_cast<VirtualQAction*>( (QAction*)(self) );
 	if (self_cast == nullptr) {
@@ -747,6 +858,7 @@ void QAction_virtualbase_disconnectNotify(void* self, QMetaMethod* signal) {
 
 }
 
+const QMetaObject* QAction_staticMetaObject() { return &QAction::staticMetaObject; }
 QObject* QAction_protectedbase_sender(bool* _dynamic_cast_ok, const void* self) {
 	VirtualQAction* self_cast = dynamic_cast<VirtualQAction*>( (QAction*)(self) );
 	if (self_cast == nullptr) {

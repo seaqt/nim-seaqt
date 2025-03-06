@@ -51,6 +51,7 @@ QSctpSocket* QSctpSocket_new2(QObject* parent);
 void QSctpSocket_virtbase(QSctpSocket* src, QTcpSocket** outptr_QTcpSocket);
 QMetaObject* QSctpSocket_metaObject(const QSctpSocket* self);
 void* QSctpSocket_metacast(QSctpSocket* self, const char* param1);
+int QSctpSocket_metacall(QSctpSocket* self, int param1, int param2, void** param3);
 struct miqt_string QSctpSocket_tr(const char* s);
 void QSctpSocket_close(QSctpSocket* self);
 void QSctpSocket_disconnectFromHost(QSctpSocket* self);
@@ -63,6 +64,12 @@ long long QSctpSocket_readData(QSctpSocket* self, char* data, long long maxlen);
 long long QSctpSocket_readLineData(QSctpSocket* self, char* data, long long maxlen);
 struct miqt_string QSctpSocket_tr2(const char* s, const char* c);
 struct miqt_string QSctpSocket_tr3(const char* s, const char* c, int n);
+bool QSctpSocket_override_virtual_metaObject(void* self, intptr_t slot);
+QMetaObject* QSctpSocket_virtualbase_metaObject(const void* self);
+bool QSctpSocket_override_virtual_metacast(void* self, intptr_t slot);
+void* QSctpSocket_virtualbase_metacast(void* self, const char* param1);
+bool QSctpSocket_override_virtual_metacall(void* self, intptr_t slot);
+int QSctpSocket_virtualbase_metacall(void* self, int param1, int param2, void** param3);
 bool QSctpSocket_override_virtual_close(void* self, intptr_t slot);
 void QSctpSocket_virtualbase_close(void* self);
 bool QSctpSocket_override_virtual_disconnectFromHost(void* self, intptr_t slot);
@@ -146,6 +153,7 @@ QObject* QSctpSocket_protectedbase_sender(bool* _dynamic_cast_ok, const void* se
 int QSctpSocket_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
 int QSctpSocket_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
 bool QSctpSocket_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+const QMetaObject* QSctpSocket_staticMetaObject();
 void QSctpSocket_delete(QSctpSocket* self);
 
 #ifdef __cplusplus

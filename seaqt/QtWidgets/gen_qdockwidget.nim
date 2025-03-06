@@ -88,6 +88,7 @@ proc fcQDockWidget_new5(title: struct_miqt_string, parent: pointer, flags: cint)
 proc fcQDockWidget_new6(parent: pointer, flags: cint): ptr cQDockWidget {.importc: "QDockWidget_new6".}
 proc fcQDockWidget_metaObject(self: pointer, ): pointer {.importc: "QDockWidget_metaObject".}
 proc fcQDockWidget_metacast(self: pointer, param1: cstring): pointer {.importc: "QDockWidget_metacast".}
+proc fcQDockWidget_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QDockWidget_metacall".}
 proc fcQDockWidget_tr(s: cstring): struct_miqt_string {.importc: "QDockWidget_tr".}
 proc fcQDockWidget_widget(self: pointer, ): pointer {.importc: "QDockWidget_widget".}
 proc fcQDockWidget_setWidget(self: pointer, widget: pointer): void {.importc: "QDockWidget_setWidget".}
@@ -113,6 +114,12 @@ proc fcQDockWidget_dockLocationChanged(self: pointer, area: cint): void {.import
 proc fcQDockWidget_connect_dockLocationChanged(self: pointer, slot: int) {.importc: "QDockWidget_connect_dockLocationChanged".}
 proc fcQDockWidget_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QDockWidget_tr2".}
 proc fcQDockWidget_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QDockWidget_tr3".}
+proc fQDockWidget_virtualbase_metaObject(self: pointer, ): pointer{.importc: "QDockWidget_virtualbase_metaObject".}
+proc fcQDockWidget_override_virtual_metaObject(self: pointer, slot: int) {.importc: "QDockWidget_override_virtual_metaObject".}
+proc fQDockWidget_virtualbase_metacast(self: pointer, param1: cstring): pointer{.importc: "QDockWidget_virtualbase_metacast".}
+proc fcQDockWidget_override_virtual_metacast(self: pointer, slot: int) {.importc: "QDockWidget_override_virtual_metacast".}
+proc fQDockWidget_virtualbase_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint{.importc: "QDockWidget_virtualbase_metacall".}
+proc fcQDockWidget_override_virtual_metacall(self: pointer, slot: int) {.importc: "QDockWidget_override_virtual_metacall".}
 proc fQDockWidget_virtualbase_changeEvent(self: pointer, event: pointer): void{.importc: "QDockWidget_virtualbase_changeEvent".}
 proc fcQDockWidget_override_virtual_changeEvent(self: pointer, slot: int) {.importc: "QDockWidget_override_virtual_changeEvent".}
 proc fQDockWidget_virtualbase_closeEvent(self: pointer, event: pointer): void{.importc: "QDockWidget_virtualbase_closeEvent".}
@@ -209,6 +216,7 @@ proc fQDockWidget_virtualbase_connectNotify(self: pointer, signal: pointer): voi
 proc fcQDockWidget_override_virtual_connectNotify(self: pointer, slot: int) {.importc: "QDockWidget_override_virtual_connectNotify".}
 proc fQDockWidget_virtualbase_disconnectNotify(self: pointer, signal: pointer): void{.importc: "QDockWidget_virtualbase_disconnectNotify".}
 proc fcQDockWidget_override_virtual_disconnectNotify(self: pointer, slot: int) {.importc: "QDockWidget_override_virtual_disconnectNotify".}
+proc fcQDockWidget_staticMetaObject(): pointer {.importc: "QDockWidget_staticMetaObject".}
 proc fcQDockWidget_delete(self: pointer) {.importc: "QDockWidget_delete".}
 
 
@@ -237,6 +245,9 @@ proc metaObject*(self: gen_qdockwidget_types.QDockWidget, ): gen_qobjectdefs_typ
 
 proc metacast*(self: gen_qdockwidget_types.QDockWidget, param1: cstring): pointer =
   fcQDockWidget_metacast(self.h, param1)
+
+proc metacall*(self: gen_qdockwidget_types.QDockWidget, param1: cint, param2: cint, param3: pointer): cint =
+  fcQDockWidget_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qdockwidget_types.QDockWidget, s: cstring): string =
   let v_ms = fcQDockWidget_tr(s)
@@ -372,6 +383,65 @@ proc tr*(_: type gen_qdockwidget_types.QDockWidget, s: cstring, c: cstring, n: c
   c_free(v_ms.data)
   vx_ret
 
+proc QDockWidgetmetaObject*(self: gen_qdockwidget_types.QDockWidget, ): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fQDockWidget_virtualbase_metaObject(self.h))
+
+type QDockWidgetmetaObjectProc* = proc(): gen_qobjectdefs_types.QMetaObject
+proc onmetaObject*(self: gen_qdockwidget_types.QDockWidget, slot: QDockWidgetmetaObjectProc) =
+  # TODO check subclass
+  var tmp = new QDockWidgetmetaObjectProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQDockWidget_override_virtual_metaObject(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QDockWidget_metaObject(self: ptr cQDockWidget, slot: int): pointer {.exportc: "miqt_exec_callback_QDockWidget_metaObject ".} =
+  var nimfunc = cast[ptr QDockWidgetmetaObjectProc](cast[pointer](slot))
+
+  let virtualReturn = nimfunc[]( )
+
+  virtualReturn.h
+proc QDockWidgetmetacast*(self: gen_qdockwidget_types.QDockWidget, param1: cstring): pointer =
+  fQDockWidget_virtualbase_metacast(self.h, param1)
+
+type QDockWidgetmetacastProc* = proc(param1: cstring): pointer
+proc onmetacast*(self: gen_qdockwidget_types.QDockWidget, slot: QDockWidgetmetacastProc) =
+  # TODO check subclass
+  var tmp = new QDockWidgetmetacastProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQDockWidget_override_virtual_metacast(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QDockWidget_metacast(self: ptr cQDockWidget, slot: int, param1: cstring): pointer {.exportc: "miqt_exec_callback_QDockWidget_metacast ".} =
+  var nimfunc = cast[ptr QDockWidgetmetacastProc](cast[pointer](slot))
+  let slotval1 = (param1)
+
+
+  let virtualReturn = nimfunc[](slotval1 )
+
+  virtualReturn
+proc QDockWidgetmetacall*(self: gen_qdockwidget_types.QDockWidget, param1: cint, param2: cint, param3: pointer): cint =
+  fQDockWidget_virtualbase_metacall(self.h, cint(param1), param2, param3)
+
+type QDockWidgetmetacallProc* = proc(param1: cint, param2: cint, param3: pointer): cint
+proc onmetacall*(self: gen_qdockwidget_types.QDockWidget, slot: QDockWidgetmetacallProc) =
+  # TODO check subclass
+  var tmp = new QDockWidgetmetacallProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQDockWidget_override_virtual_metacall(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QDockWidget_metacall(self: ptr cQDockWidget, slot: int, param1: cint, param2: cint, param3: pointer): cint {.exportc: "miqt_exec_callback_QDockWidget_metacall ".} =
+  var nimfunc = cast[ptr QDockWidgetmetacallProc](cast[pointer](slot))
+  let slotval1 = cint(param1)
+
+  let slotval2 = param2
+
+  let slotval3 = param3
+
+
+  let virtualReturn = nimfunc[](slotval1, slotval2, slotval3 )
+
+  virtualReturn
 proc QDockWidgetchangeEvent*(self: gen_qdockwidget_types.QDockWidget, event: gen_qcoreevent_types.QEvent): void =
   fQDockWidget_virtualbase_changeEvent(self.h, event.h)
 
@@ -1213,5 +1283,7 @@ proc miqt_exec_callback_QDockWidget_disconnectNotify(self: ptr cQDockWidget, slo
 
 
   nimfunc[](slotval1)
+proc staticMetaObject*(_: type gen_qdockwidget_types.QDockWidget): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fcQDockWidget_staticMetaObject())
 proc delete*(self: gen_qdockwidget_types.QDockWidget) =
   fcQDockWidget_delete(self.h)

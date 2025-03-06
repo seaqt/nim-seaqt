@@ -893,10 +893,12 @@ export gen_qlocale_types
 
 import
   ./gen_qcalendar_types,
-  ./gen_qdatetime_types
+  ./gen_qdatetime_types,
+  ./gen_qobjectdefs_types
 export
   gen_qcalendar_types,
-  gen_qdatetime_types
+  gen_qdatetime_types,
+  gen_qobjectdefs_types
 
 type cQLocale*{.exportc: "QLocale", incompleteStruct.} = object
 
@@ -1049,6 +1051,7 @@ proc fcQLocale_formattedDataSize2(self: pointer, bytes: clonglong, precision: ci
 proc fcQLocale_formattedDataSize3(self: pointer, bytes: clonglong, precision: cint, format: cint): struct_miqt_string {.importc: "QLocale_formattedDataSize3".}
 proc fcQLocale_languageToCode2(language: cint, codeTypes: cint): struct_miqt_string {.importc: "QLocale_languageToCode2".}
 proc fcQLocale_quoteString2(self: pointer, str: struct_miqt_string, style: cint): struct_miqt_string {.importc: "QLocale_quoteString2".}
+proc fcQLocale_staticMetaObject(): pointer {.importc: "QLocale_staticMetaObject".}
 proc fcQLocale_delete(self: pointer) {.importc: "QLocale_delete".}
 
 
@@ -1798,5 +1801,7 @@ proc quoteString*(self: gen_qlocale_types.QLocale, str: string, style: cint): st
   c_free(v_ms.data)
   vx_ret
 
+proc staticMetaObject*(_: type gen_qlocale_types.QLocale): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fcQLocale_staticMetaObject())
 proc delete*(self: gen_qlocale_types.QLocale) =
   fcQLocale_delete(self.h)

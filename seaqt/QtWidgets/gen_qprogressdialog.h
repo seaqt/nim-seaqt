@@ -101,6 +101,7 @@ QProgressDialog* QProgressDialog_new6(struct miqt_string labelText, struct miqt_
 void QProgressDialog_virtbase(QProgressDialog* src, QDialog** outptr_QDialog);
 QMetaObject* QProgressDialog_metaObject(const QProgressDialog* self);
 void* QProgressDialog_metacast(QProgressDialog* self, const char* param1);
+int QProgressDialog_metacall(QProgressDialog* self, int param1, int param2, void** param3);
 struct miqt_string QProgressDialog_tr(const char* s);
 void QProgressDialog_setLabel(QProgressDialog* self, QLabel* label);
 void QProgressDialog_setCancelButton(QProgressDialog* self, QPushButton* button);
@@ -133,6 +134,12 @@ void QProgressDialog_changeEvent(QProgressDialog* self, QEvent* event);
 void QProgressDialog_showEvent(QProgressDialog* self, QShowEvent* event);
 struct miqt_string QProgressDialog_tr2(const char* s, const char* c);
 struct miqt_string QProgressDialog_tr3(const char* s, const char* c, int n);
+bool QProgressDialog_override_virtual_metaObject(void* self, intptr_t slot);
+QMetaObject* QProgressDialog_virtualbase_metaObject(const void* self);
+bool QProgressDialog_override_virtual_metacast(void* self, intptr_t slot);
+void* QProgressDialog_virtualbase_metacast(void* self, const char* param1);
+bool QProgressDialog_override_virtual_metacall(void* self, intptr_t slot);
+int QProgressDialog_virtualbase_metacall(void* self, int param1, int param2, void** param3);
 bool QProgressDialog_override_virtual_sizeHint(void* self, intptr_t slot);
 QSize* QProgressDialog_virtualbase_sizeHint(const void* self);
 bool QProgressDialog_override_virtual_resizeEvent(void* self, intptr_t slot);
@@ -248,6 +255,7 @@ QObject* QProgressDialog_protectedbase_sender(bool* _dynamic_cast_ok, const void
 int QProgressDialog_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
 int QProgressDialog_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
 bool QProgressDialog_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+const QMetaObject* QProgressDialog_staticMetaObject();
 void QProgressDialog_delete(QProgressDialog* self);
 
 #ifdef __cplusplus

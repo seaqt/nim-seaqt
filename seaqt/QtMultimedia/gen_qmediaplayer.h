@@ -49,6 +49,7 @@ QMediaPlayer* QMediaPlayer_new2(QObject* parent);
 void QMediaPlayer_virtbase(QMediaPlayer* src, QObject** outptr_QObject);
 QMetaObject* QMediaPlayer_metaObject(const QMediaPlayer* self);
 void* QMediaPlayer_metacast(QMediaPlayer* self, const char* param1);
+int QMediaPlayer_metacall(QMediaPlayer* self, int param1, int param2, void** param3);
 struct miqt_string QMediaPlayer_tr(const char* s);
 struct miqt_array /* of QMediaMetaData* */  QMediaPlayer_audioTracks(const QMediaPlayer* self);
 struct miqt_array /* of QMediaMetaData* */  QMediaPlayer_videoTracks(const QMediaPlayer* self);
@@ -129,6 +130,12 @@ void QMediaPlayer_connect_errorOccurred(QMediaPlayer* self, intptr_t slot);
 struct miqt_string QMediaPlayer_tr2(const char* s, const char* c);
 struct miqt_string QMediaPlayer_tr3(const char* s, const char* c, int n);
 void QMediaPlayer_setSourceDevice2(QMediaPlayer* self, QIODevice* device, QUrl* sourceUrl);
+bool QMediaPlayer_override_virtual_metaObject(void* self, intptr_t slot);
+QMetaObject* QMediaPlayer_virtualbase_metaObject(const void* self);
+bool QMediaPlayer_override_virtual_metacast(void* self, intptr_t slot);
+void* QMediaPlayer_virtualbase_metacast(void* self, const char* param1);
+bool QMediaPlayer_override_virtual_metacall(void* self, intptr_t slot);
+int QMediaPlayer_virtualbase_metacall(void* self, int param1, int param2, void** param3);
 bool QMediaPlayer_override_virtual_event(void* self, intptr_t slot);
 bool QMediaPlayer_virtualbase_event(void* self, QEvent* event);
 bool QMediaPlayer_override_virtual_eventFilter(void* self, intptr_t slot);
@@ -147,6 +154,7 @@ QObject* QMediaPlayer_protectedbase_sender(bool* _dynamic_cast_ok, const void* s
 int QMediaPlayer_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
 int QMediaPlayer_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
 bool QMediaPlayer_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+const QMetaObject* QMediaPlayer_staticMetaObject();
 void QMediaPlayer_delete(QMediaPlayer* self);
 
 #ifdef __cplusplus

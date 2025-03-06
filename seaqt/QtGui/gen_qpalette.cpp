@@ -264,6 +264,7 @@ void QPalette_setResolveMask(QPalette* self, unsigned long long mask) {
 	self->setResolveMask(static_cast<QPalette::ResolveMask>(mask));
 }
 
+const QMetaObject* QPalette_staticMetaObject() { return &QPalette::staticMetaObject; }
 void QPalette_delete(QPalette* self) {
 	delete self;
 }

@@ -85,6 +85,7 @@ struct miqt_string QMediaMetaData_metaDataKeyToString(int k) {
 	return _ms;
 }
 
+const QMetaObject* QMediaMetaData_staticMetaObject() { return &QMediaMetaData::staticMetaObject; }
 void QMediaMetaData_delete(QMediaMetaData* self) {
 	delete self;
 }

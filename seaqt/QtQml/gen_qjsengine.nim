@@ -68,6 +68,7 @@ proc fcQJSEngine_new(): ptr cQJSEngine {.importc: "QJSEngine_new".}
 proc fcQJSEngine_new2(parent: pointer): ptr cQJSEngine {.importc: "QJSEngine_new2".}
 proc fcQJSEngine_metaObject(self: pointer, ): pointer {.importc: "QJSEngine_metaObject".}
 proc fcQJSEngine_metacast(self: pointer, param1: cstring): pointer {.importc: "QJSEngine_metacast".}
+proc fcQJSEngine_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QJSEngine_metacall".}
 proc fcQJSEngine_tr(s: cstring): struct_miqt_string {.importc: "QJSEngine_tr".}
 proc fcQJSEngine_globalObject(self: pointer, ): pointer {.importc: "QJSEngine_globalObject".}
 proc fcQJSEngine_evaluate(self: pointer, program: struct_miqt_string): pointer {.importc: "QJSEngine_evaluate".}
@@ -103,6 +104,12 @@ proc fcQJSEngine_newArray1(self: pointer, length: cuint): pointer {.importc: "QJ
 proc fcQJSEngine_newErrorObject2(self: pointer, errorType: cint, message: struct_miqt_string): pointer {.importc: "QJSEngine_newErrorObject2".}
 proc fcQJSEngine_installExtensions2(self: pointer, extensions: cint, objectVal: pointer): void {.importc: "QJSEngine_installExtensions2".}
 proc fcQJSEngine_throwError2(self: pointer, errorType: cint, message: struct_miqt_string): void {.importc: "QJSEngine_throwError2".}
+proc fQJSEngine_virtualbase_metaObject(self: pointer, ): pointer{.importc: "QJSEngine_virtualbase_metaObject".}
+proc fcQJSEngine_override_virtual_metaObject(self: pointer, slot: int) {.importc: "QJSEngine_override_virtual_metaObject".}
+proc fQJSEngine_virtualbase_metacast(self: pointer, param1: cstring): pointer{.importc: "QJSEngine_virtualbase_metacast".}
+proc fcQJSEngine_override_virtual_metacast(self: pointer, slot: int) {.importc: "QJSEngine_override_virtual_metacast".}
+proc fQJSEngine_virtualbase_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint{.importc: "QJSEngine_virtualbase_metacall".}
+proc fcQJSEngine_override_virtual_metacall(self: pointer, slot: int) {.importc: "QJSEngine_override_virtual_metacall".}
 proc fQJSEngine_virtualbase_event(self: pointer, event: pointer): bool{.importc: "QJSEngine_virtualbase_event".}
 proc fcQJSEngine_override_virtual_event(self: pointer, slot: int) {.importc: "QJSEngine_override_virtual_event".}
 proc fQJSEngine_virtualbase_eventFilter(self: pointer, watched: pointer, event: pointer): bool{.importc: "QJSEngine_virtualbase_eventFilter".}
@@ -117,6 +124,7 @@ proc fQJSEngine_virtualbase_connectNotify(self: pointer, signal: pointer): void{
 proc fcQJSEngine_override_virtual_connectNotify(self: pointer, slot: int) {.importc: "QJSEngine_override_virtual_connectNotify".}
 proc fQJSEngine_virtualbase_disconnectNotify(self: pointer, signal: pointer): void{.importc: "QJSEngine_virtualbase_disconnectNotify".}
 proc fcQJSEngine_override_virtual_disconnectNotify(self: pointer, slot: int) {.importc: "QJSEngine_override_virtual_disconnectNotify".}
+proc fcQJSEngine_staticMetaObject(): pointer {.importc: "QJSEngine_staticMetaObject".}
 proc fcQJSEngine_delete(self: pointer) {.importc: "QJSEngine_delete".}
 
 
@@ -133,6 +141,9 @@ proc metaObject*(self: gen_qjsengine_types.QJSEngine, ): gen_qobjectdefs_types.Q
 
 proc metacast*(self: gen_qjsengine_types.QJSEngine, param1: cstring): pointer =
   fcQJSEngine_metacast(self.h, param1)
+
+proc metacall*(self: gen_qjsengine_types.QJSEngine, param1: cint, param2: cint, param3: pointer): cint =
+  fcQJSEngine_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qjsengine_types.QJSEngine, s: cstring): string =
   let v_ms = fcQJSEngine_tr(s)
@@ -263,6 +274,65 @@ proc installExtensions*(self: gen_qjsengine_types.QJSEngine, extensions: cint, o
 proc throwError*(self: gen_qjsengine_types.QJSEngine, errorType: cint, message: string): void =
   fcQJSEngine_throwError2(self.h, cint(errorType), struct_miqt_string(data: message, len: csize_t(len(message))))
 
+proc QJSEnginemetaObject*(self: gen_qjsengine_types.QJSEngine, ): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fQJSEngine_virtualbase_metaObject(self.h))
+
+type QJSEnginemetaObjectProc* = proc(): gen_qobjectdefs_types.QMetaObject
+proc onmetaObject*(self: gen_qjsengine_types.QJSEngine, slot: QJSEnginemetaObjectProc) =
+  # TODO check subclass
+  var tmp = new QJSEnginemetaObjectProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQJSEngine_override_virtual_metaObject(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QJSEngine_metaObject(self: ptr cQJSEngine, slot: int): pointer {.exportc: "miqt_exec_callback_QJSEngine_metaObject ".} =
+  var nimfunc = cast[ptr QJSEnginemetaObjectProc](cast[pointer](slot))
+
+  let virtualReturn = nimfunc[]( )
+
+  virtualReturn.h
+proc QJSEnginemetacast*(self: gen_qjsengine_types.QJSEngine, param1: cstring): pointer =
+  fQJSEngine_virtualbase_metacast(self.h, param1)
+
+type QJSEnginemetacastProc* = proc(param1: cstring): pointer
+proc onmetacast*(self: gen_qjsengine_types.QJSEngine, slot: QJSEnginemetacastProc) =
+  # TODO check subclass
+  var tmp = new QJSEnginemetacastProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQJSEngine_override_virtual_metacast(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QJSEngine_metacast(self: ptr cQJSEngine, slot: int, param1: cstring): pointer {.exportc: "miqt_exec_callback_QJSEngine_metacast ".} =
+  var nimfunc = cast[ptr QJSEnginemetacastProc](cast[pointer](slot))
+  let slotval1 = (param1)
+
+
+  let virtualReturn = nimfunc[](slotval1 )
+
+  virtualReturn
+proc QJSEnginemetacall*(self: gen_qjsengine_types.QJSEngine, param1: cint, param2: cint, param3: pointer): cint =
+  fQJSEngine_virtualbase_metacall(self.h, cint(param1), param2, param3)
+
+type QJSEnginemetacallProc* = proc(param1: cint, param2: cint, param3: pointer): cint
+proc onmetacall*(self: gen_qjsengine_types.QJSEngine, slot: QJSEnginemetacallProc) =
+  # TODO check subclass
+  var tmp = new QJSEnginemetacallProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQJSEngine_override_virtual_metacall(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QJSEngine_metacall(self: ptr cQJSEngine, slot: int, param1: cint, param2: cint, param3: pointer): cint {.exportc: "miqt_exec_callback_QJSEngine_metacall ".} =
+  var nimfunc = cast[ptr QJSEnginemetacallProc](cast[pointer](slot))
+  let slotval1 = cint(param1)
+
+  let slotval2 = param2
+
+  let slotval3 = param3
+
+
+  let virtualReturn = nimfunc[](slotval1, slotval2, slotval3 )
+
+  virtualReturn
 proc QJSEngineevent*(self: gen_qjsengine_types.QJSEngine, event: gen_qcoreevent_types.QEvent): bool =
   fQJSEngine_virtualbase_event(self.h, event.h)
 
@@ -388,5 +458,7 @@ proc miqt_exec_callback_QJSEngine_disconnectNotify(self: ptr cQJSEngine, slot: i
 
 
   nimfunc[](slotval1)
+proc staticMetaObject*(_: type gen_qjsengine_types.QJSEngine): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fcQJSEngine_staticMetaObject())
 proc delete*(self: gen_qjsengine_types.QJSEngine) =
   fcQJSEngine_delete(self.h)

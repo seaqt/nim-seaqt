@@ -65,6 +65,7 @@ type cQWebEngineNavigationRequest*{.exportc: "QWebEngineNavigationRequest", inco
 
 proc fcQWebEngineNavigationRequest_metaObject(self: pointer, ): pointer {.importc: "QWebEngineNavigationRequest_metaObject".}
 proc fcQWebEngineNavigationRequest_metacast(self: pointer, param1: cstring): pointer {.importc: "QWebEngineNavigationRequest_metacast".}
+proc fcQWebEngineNavigationRequest_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QWebEngineNavigationRequest_metacall".}
 proc fcQWebEngineNavigationRequest_tr(s: cstring): struct_miqt_string {.importc: "QWebEngineNavigationRequest_tr".}
 proc fcQWebEngineNavigationRequest_url(self: pointer, ): pointer {.importc: "QWebEngineNavigationRequest_url".}
 proc fcQWebEngineNavigationRequest_isMainFrame(self: pointer, ): bool {.importc: "QWebEngineNavigationRequest_isMainFrame".}
@@ -75,6 +76,7 @@ proc fcQWebEngineNavigationRequest_actionChanged(self: pointer, ): void {.import
 proc fcQWebEngineNavigationRequest_connect_actionChanged(self: pointer, slot: int) {.importc: "QWebEngineNavigationRequest_connect_actionChanged".}
 proc fcQWebEngineNavigationRequest_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QWebEngineNavigationRequest_tr2".}
 proc fcQWebEngineNavigationRequest_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QWebEngineNavigationRequest_tr3".}
+proc fcQWebEngineNavigationRequest_staticMetaObject(): pointer {.importc: "QWebEngineNavigationRequest_staticMetaObject".}
 proc fcQWebEngineNavigationRequest_delete(self: pointer) {.importc: "QWebEngineNavigationRequest_delete".}
 
 
@@ -85,6 +87,9 @@ proc metaObject*(self: gen_qwebenginenavigationrequest_types.QWebEngineNavigatio
 
 proc metacast*(self: gen_qwebenginenavigationrequest_types.QWebEngineNavigationRequest, param1: cstring): pointer =
   fcQWebEngineNavigationRequest_metacast(self.h, param1)
+
+proc metacall*(self: gen_qwebenginenavigationrequest_types.QWebEngineNavigationRequest, param1: cint, param2: cint, param3: pointer): cint =
+  fcQWebEngineNavigationRequest_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qwebenginenavigationrequest_types.QWebEngineNavigationRequest, s: cstring): string =
   let v_ms = fcQWebEngineNavigationRequest_tr(s)
@@ -133,5 +138,7 @@ proc tr*(_: type gen_qwebenginenavigationrequest_types.QWebEngineNavigationReque
   c_free(v_ms.data)
   vx_ret
 
+proc staticMetaObject*(_: type gen_qwebenginenavigationrequest_types.QWebEngineNavigationRequest): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fcQWebEngineNavigationRequest_staticMetaObject())
 proc delete*(self: gen_qwebenginenavigationrequest_types.QWebEngineNavigationRequest) =
   fcQWebEngineNavigationRequest_delete(self.h)

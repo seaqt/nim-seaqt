@@ -33,6 +33,10 @@ void* QWebEngineCookieStore_metacast(QWebEngineCookieStore* self, const char* pa
 	return self->qt_metacast(param1);
 }
 
+int QWebEngineCookieStore_metacall(QWebEngineCookieStore* self, int param1, int param2, void** param3) {
+	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
+}
+
 struct miqt_string QWebEngineCookieStore_tr(const char* s) {
 	QString _ret = QWebEngineCookieStore::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
@@ -120,6 +124,7 @@ void QWebEngineCookieStore_deleteCookie2(QWebEngineCookieStore* self, QNetworkCo
 	self->deleteCookie(*cookie, *origin);
 }
 
+const QMetaObject* QWebEngineCookieStore_staticMetaObject() { return &QWebEngineCookieStore::staticMetaObject; }
 void QWebEngineCookieStore_delete(QWebEngineCookieStore* self) {
 	delete self;
 }

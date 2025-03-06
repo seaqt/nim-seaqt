@@ -59,6 +59,7 @@ int QCryptographicHash_hashLength(int method) {
 	return QCryptographicHash::hashLength(static_cast<QCryptographicHash::Algorithm>(method));
 }
 
+const QMetaObject* QCryptographicHash_staticMetaObject() { return &QCryptographicHash::staticMetaObject; }
 void QCryptographicHash_delete(QCryptographicHash* self) {
 	delete self;
 }

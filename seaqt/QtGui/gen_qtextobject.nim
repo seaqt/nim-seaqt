@@ -72,6 +72,7 @@ type cQTextBlockiterator*{.exportc: "QTextBlock__iterator", incompleteStruct.} =
 
 proc fcQTextObject_metaObject(self: pointer, ): pointer {.importc: "QTextObject_metaObject".}
 proc fcQTextObject_metacast(self: pointer, param1: cstring): pointer {.importc: "QTextObject_metacast".}
+proc fcQTextObject_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QTextObject_metacall".}
 proc fcQTextObject_tr(s: cstring): struct_miqt_string {.importc: "QTextObject_tr".}
 proc fcQTextObject_format(self: pointer, ): pointer {.importc: "QTextObject_format".}
 proc fcQTextObject_formatIndex(self: pointer, ): cint {.importc: "QTextObject_formatIndex".}
@@ -79,16 +80,20 @@ proc fcQTextObject_document(self: pointer, ): pointer {.importc: "QTextObject_do
 proc fcQTextObject_objectIndex(self: pointer, ): cint {.importc: "QTextObject_objectIndex".}
 proc fcQTextObject_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QTextObject_tr2".}
 proc fcQTextObject_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QTextObject_tr3".}
+proc fcQTextObject_staticMetaObject(): pointer {.importc: "QTextObject_staticMetaObject".}
 proc fcQTextBlockGroup_metaObject(self: pointer, ): pointer {.importc: "QTextBlockGroup_metaObject".}
 proc fcQTextBlockGroup_metacast(self: pointer, param1: cstring): pointer {.importc: "QTextBlockGroup_metacast".}
+proc fcQTextBlockGroup_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QTextBlockGroup_metacall".}
 proc fcQTextBlockGroup_tr(s: cstring): struct_miqt_string {.importc: "QTextBlockGroup_tr".}
 proc fcQTextBlockGroup_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QTextBlockGroup_tr2".}
 proc fcQTextBlockGroup_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QTextBlockGroup_tr3".}
+proc fcQTextBlockGroup_staticMetaObject(): pointer {.importc: "QTextBlockGroup_staticMetaObject".}
 proc fcQTextFrameLayoutData_operatorAssign(self: pointer, param1: pointer): void {.importc: "QTextFrameLayoutData_operatorAssign".}
 proc fcQTextFrameLayoutData_delete(self: pointer) {.importc: "QTextFrameLayoutData_delete".}
 proc fcQTextFrame_new(doc: pointer): ptr cQTextFrame {.importc: "QTextFrame_new".}
 proc fcQTextFrame_metaObject(self: pointer, ): pointer {.importc: "QTextFrame_metaObject".}
 proc fcQTextFrame_metacast(self: pointer, param1: cstring): pointer {.importc: "QTextFrame_metacast".}
+proc fcQTextFrame_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QTextFrame_metacall".}
 proc fcQTextFrame_tr(s: cstring): struct_miqt_string {.importc: "QTextFrame_tr".}
 proc fcQTextFrame_setFrameFormat(self: pointer, format: pointer): void {.importc: "QTextFrame_setFrameFormat".}
 proc fcQTextFrame_frameFormat(self: pointer, ): pointer {.importc: "QTextFrame_frameFormat".}
@@ -104,6 +109,12 @@ proc fcQTextFrame_begin(self: pointer, ): pointer {.importc: "QTextFrame_begin".
 proc fcQTextFrame_endX(self: pointer, ): pointer {.importc: "QTextFrame_end".}
 proc fcQTextFrame_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QTextFrame_tr2".}
 proc fcQTextFrame_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QTextFrame_tr3".}
+proc fQTextFrame_virtualbase_metaObject(self: pointer, ): pointer{.importc: "QTextFrame_virtualbase_metaObject".}
+proc fcQTextFrame_override_virtual_metaObject(self: pointer, slot: int) {.importc: "QTextFrame_override_virtual_metaObject".}
+proc fQTextFrame_virtualbase_metacast(self: pointer, param1: cstring): pointer{.importc: "QTextFrame_virtualbase_metacast".}
+proc fcQTextFrame_override_virtual_metacast(self: pointer, slot: int) {.importc: "QTextFrame_override_virtual_metacast".}
+proc fQTextFrame_virtualbase_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint{.importc: "QTextFrame_virtualbase_metacall".}
+proc fcQTextFrame_override_virtual_metacall(self: pointer, slot: int) {.importc: "QTextFrame_override_virtual_metacall".}
 proc fQTextFrame_virtualbase_event(self: pointer, event: pointer): bool{.importc: "QTextFrame_virtualbase_event".}
 proc fcQTextFrame_override_virtual_event(self: pointer, slot: int) {.importc: "QTextFrame_override_virtual_event".}
 proc fQTextFrame_virtualbase_eventFilter(self: pointer, watched: pointer, event: pointer): bool{.importc: "QTextFrame_virtualbase_eventFilter".}
@@ -118,6 +129,7 @@ proc fQTextFrame_virtualbase_connectNotify(self: pointer, signal: pointer): void
 proc fcQTextFrame_override_virtual_connectNotify(self: pointer, slot: int) {.importc: "QTextFrame_override_virtual_connectNotify".}
 proc fQTextFrame_virtualbase_disconnectNotify(self: pointer, signal: pointer): void{.importc: "QTextFrame_virtualbase_disconnectNotify".}
 proc fcQTextFrame_override_virtual_disconnectNotify(self: pointer, slot: int) {.importc: "QTextFrame_override_virtual_disconnectNotify".}
+proc fcQTextFrame_staticMetaObject(): pointer {.importc: "QTextFrame_staticMetaObject".}
 proc fcQTextFrame_delete(self: pointer) {.importc: "QTextFrame_delete".}
 proc fcQTextBlockUserData_operatorAssign(self: pointer, param1: pointer): void {.importc: "QTextBlockUserData_operatorAssign".}
 proc fcQTextBlockUserData_delete(self: pointer) {.importc: "QTextBlockUserData_delete".}
@@ -211,6 +223,9 @@ proc metaObject*(self: gen_qtextobject_types.QTextObject, ): gen_qobjectdefs_typ
 proc metacast*(self: gen_qtextobject_types.QTextObject, param1: cstring): pointer =
   fcQTextObject_metacast(self.h, param1)
 
+proc metacall*(self: gen_qtextobject_types.QTextObject, param1: cint, param2: cint, param3: pointer): cint =
+  fcQTextObject_metacall(self.h, cint(param1), param2, param3)
+
 proc tr*(_: type gen_qtextobject_types.QTextObject, s: cstring): string =
   let v_ms = fcQTextObject_tr(s)
   let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
@@ -241,6 +256,8 @@ proc tr*(_: type gen_qtextobject_types.QTextObject, s: cstring, c: cstring, n: c
   c_free(v_ms.data)
   vx_ret
 
+proc staticMetaObject*(_: type gen_qtextobject_types.QTextObject): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fcQTextObject_staticMetaObject())
 
 func init*(T: type gen_qtextobject_types.QTextBlockGroup, h: ptr cQTextBlockGroup): gen_qtextobject_types.QTextBlockGroup =
   T(h: h)
@@ -249,6 +266,9 @@ proc metaObject*(self: gen_qtextobject_types.QTextBlockGroup, ): gen_qobjectdefs
 
 proc metacast*(self: gen_qtextobject_types.QTextBlockGroup, param1: cstring): pointer =
   fcQTextBlockGroup_metacast(self.h, param1)
+
+proc metacall*(self: gen_qtextobject_types.QTextBlockGroup, param1: cint, param2: cint, param3: pointer): cint =
+  fcQTextBlockGroup_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qtextobject_types.QTextBlockGroup, s: cstring): string =
   let v_ms = fcQTextBlockGroup_tr(s)
@@ -268,6 +288,8 @@ proc tr*(_: type gen_qtextobject_types.QTextBlockGroup, s: cstring, c: cstring, 
   c_free(v_ms.data)
   vx_ret
 
+proc staticMetaObject*(_: type gen_qtextobject_types.QTextBlockGroup): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fcQTextBlockGroup_staticMetaObject())
 
 func init*(T: type gen_qtextobject_types.QTextFrameLayoutData, h: ptr cQTextFrameLayoutData): gen_qtextobject_types.QTextFrameLayoutData =
   T(h: h)
@@ -287,6 +309,9 @@ proc metaObject*(self: gen_qtextobject_types.QTextFrame, ): gen_qobjectdefs_type
 
 proc metacast*(self: gen_qtextobject_types.QTextFrame, param1: cstring): pointer =
   fcQTextFrame_metacast(self.h, param1)
+
+proc metacall*(self: gen_qtextobject_types.QTextFrame, param1: cint, param2: cint, param3: pointer): cint =
+  fcQTextFrame_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qtextobject_types.QTextFrame, s: cstring): string =
   let v_ms = fcQTextFrame_tr(s)
@@ -347,6 +372,65 @@ proc tr*(_: type gen_qtextobject_types.QTextFrame, s: cstring, c: cstring, n: ci
   c_free(v_ms.data)
   vx_ret
 
+proc QTextFramemetaObject*(self: gen_qtextobject_types.QTextFrame, ): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fQTextFrame_virtualbase_metaObject(self.h))
+
+type QTextFramemetaObjectProc* = proc(): gen_qobjectdefs_types.QMetaObject
+proc onmetaObject*(self: gen_qtextobject_types.QTextFrame, slot: QTextFramemetaObjectProc) =
+  # TODO check subclass
+  var tmp = new QTextFramemetaObjectProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQTextFrame_override_virtual_metaObject(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QTextFrame_metaObject(self: ptr cQTextFrame, slot: int): pointer {.exportc: "miqt_exec_callback_QTextFrame_metaObject ".} =
+  var nimfunc = cast[ptr QTextFramemetaObjectProc](cast[pointer](slot))
+
+  let virtualReturn = nimfunc[]( )
+
+  virtualReturn.h
+proc QTextFramemetacast*(self: gen_qtextobject_types.QTextFrame, param1: cstring): pointer =
+  fQTextFrame_virtualbase_metacast(self.h, param1)
+
+type QTextFramemetacastProc* = proc(param1: cstring): pointer
+proc onmetacast*(self: gen_qtextobject_types.QTextFrame, slot: QTextFramemetacastProc) =
+  # TODO check subclass
+  var tmp = new QTextFramemetacastProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQTextFrame_override_virtual_metacast(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QTextFrame_metacast(self: ptr cQTextFrame, slot: int, param1: cstring): pointer {.exportc: "miqt_exec_callback_QTextFrame_metacast ".} =
+  var nimfunc = cast[ptr QTextFramemetacastProc](cast[pointer](slot))
+  let slotval1 = (param1)
+
+
+  let virtualReturn = nimfunc[](slotval1 )
+
+  virtualReturn
+proc QTextFramemetacall*(self: gen_qtextobject_types.QTextFrame, param1: cint, param2: cint, param3: pointer): cint =
+  fQTextFrame_virtualbase_metacall(self.h, cint(param1), param2, param3)
+
+type QTextFramemetacallProc* = proc(param1: cint, param2: cint, param3: pointer): cint
+proc onmetacall*(self: gen_qtextobject_types.QTextFrame, slot: QTextFramemetacallProc) =
+  # TODO check subclass
+  var tmp = new QTextFramemetacallProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQTextFrame_override_virtual_metacall(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QTextFrame_metacall(self: ptr cQTextFrame, slot: int, param1: cint, param2: cint, param3: pointer): cint {.exportc: "miqt_exec_callback_QTextFrame_metacall ".} =
+  var nimfunc = cast[ptr QTextFramemetacallProc](cast[pointer](slot))
+  let slotval1 = cint(param1)
+
+  let slotval2 = param2
+
+  let slotval3 = param3
+
+
+  let virtualReturn = nimfunc[](slotval1, slotval2, slotval3 )
+
+  virtualReturn
 proc QTextFrameevent*(self: gen_qtextobject_types.QTextFrame, event: gen_qcoreevent_types.QEvent): bool =
   fQTextFrame_virtualbase_event(self.h, event.h)
 
@@ -472,6 +556,8 @@ proc miqt_exec_callback_QTextFrame_disconnectNotify(self: ptr cQTextFrame, slot:
 
 
   nimfunc[](slotval1)
+proc staticMetaObject*(_: type gen_qtextobject_types.QTextFrame): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fcQTextFrame_staticMetaObject())
 proc delete*(self: gen_qtextobject_types.QTextFrame) =
   fcQTextFrame_delete(self.h)
 

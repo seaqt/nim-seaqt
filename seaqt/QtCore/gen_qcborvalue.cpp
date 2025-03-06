@@ -497,6 +497,7 @@ struct miqt_string QCborValue_toDiagnosticNotation1(const QCborValue* self, int 
 	return _ms;
 }
 
+const QMetaObject* QCborValue_staticMetaObject() { return &QCborValue::staticMetaObject; }
 void QCborValue_delete(QCborValue* self) {
 	delete self;
 }

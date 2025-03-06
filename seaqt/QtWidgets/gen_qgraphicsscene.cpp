@@ -54,6 +54,9 @@ void miqt_exec_callback_QGraphicsScene_changed(intptr_t, struct miqt_array /* of
 void miqt_exec_callback_QGraphicsScene_sceneRectChanged(intptr_t, QRectF*);
 void miqt_exec_callback_QGraphicsScene_selectionChanged(intptr_t);
 void miqt_exec_callback_QGraphicsScene_focusItemChanged(intptr_t, QGraphicsItem*, QGraphicsItem*, int);
+QMetaObject* miqt_exec_callback_QGraphicsScene_metaObject(const QGraphicsScene*, intptr_t);
+void* miqt_exec_callback_QGraphicsScene_metacast(QGraphicsScene*, intptr_t, const char*);
+int miqt_exec_callback_QGraphicsScene_metacall(QGraphicsScene*, intptr_t, int, int, void**);
 QVariant* miqt_exec_callback_QGraphicsScene_inputMethodQuery(const QGraphicsScene*, intptr_t, int);
 bool miqt_exec_callback_QGraphicsScene_event(QGraphicsScene*, intptr_t, QEvent*);
 bool miqt_exec_callback_QGraphicsScene_eventFilter(QGraphicsScene*, intptr_t, QObject*, QEvent*);
@@ -96,6 +99,62 @@ public:
 	VirtualQGraphicsScene(qreal x, qreal y, qreal width, qreal height, QObject* parent): QGraphicsScene(x, y, width, height, parent) {};
 
 	virtual ~VirtualQGraphicsScene() override = default;
+
+	// cgo.Handle value for overwritten implementation
+	intptr_t handle__metaObject = 0;
+
+	// Subclass to allow providing a Go implementation
+	virtual const QMetaObject* metaObject() const override {
+		if (handle__metaObject == 0) {
+			return QGraphicsScene::metaObject();
+		}
+		
+
+		QMetaObject* callback_return_value = miqt_exec_callback_QGraphicsScene_metaObject(this, handle__metaObject);
+
+		return callback_return_value;
+	}
+
+	friend QMetaObject* QGraphicsScene_virtualbase_metaObject(const void* self);
+
+	// cgo.Handle value for overwritten implementation
+	intptr_t handle__metacast = 0;
+
+	// Subclass to allow providing a Go implementation
+	virtual void* qt_metacast(const char* param1) override {
+		if (handle__metacast == 0) {
+			return QGraphicsScene::qt_metacast(param1);
+		}
+		
+		const char* sigval1 = (const char*) param1;
+
+		void* callback_return_value = miqt_exec_callback_QGraphicsScene_metacast(this, handle__metacast, sigval1);
+
+		return callback_return_value;
+	}
+
+	friend void* QGraphicsScene_virtualbase_metacast(void* self, const char* param1);
+
+	// cgo.Handle value for overwritten implementation
+	intptr_t handle__metacall = 0;
+
+	// Subclass to allow providing a Go implementation
+	virtual int qt_metacall(QMetaObject::Call param1, int param2, void** param3) override {
+		if (handle__metacall == 0) {
+			return QGraphicsScene::qt_metacall(param1, param2, param3);
+		}
+		
+		QMetaObject::Call param1_ret = param1;
+		int sigval1 = static_cast<int>(param1_ret);
+		int sigval2 = param2;
+		void** sigval3 = param3;
+
+		int callback_return_value = miqt_exec_callback_QGraphicsScene_metacall(this, handle__metacall, sigval1, sigval2, sigval3);
+
+		return static_cast<int>(callback_return_value);
+	}
+
+	friend int QGraphicsScene_virtualbase_metacall(void* self, int param1, int param2, void** param3);
 
 	// cgo.Handle value for overwritten implementation
 	intptr_t handle__inputMethodQuery = 0;
@@ -659,6 +718,10 @@ QMetaObject* QGraphicsScene_metaObject(const QGraphicsScene* self) {
 
 void* QGraphicsScene_metacast(QGraphicsScene* self, const char* param1) {
 	return self->qt_metacast(param1);
+}
+
+int QGraphicsScene_metacall(QGraphicsScene* self, int param1, int param2, void** param3) {
+	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
 struct miqt_string QGraphicsScene_tr(const char* s) {
@@ -1407,6 +1470,54 @@ void QGraphicsScene_invalidate22(QGraphicsScene* self, QRectF* rect, int layers)
 	self->invalidate(*rect, static_cast<QGraphicsScene::SceneLayers>(layers));
 }
 
+bool QGraphicsScene_override_virtual_metaObject(void* self, intptr_t slot) {
+	VirtualQGraphicsScene* self_cast = dynamic_cast<VirtualQGraphicsScene*>( (QGraphicsScene*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+	
+	self_cast->handle__metaObject = slot;
+	return true;
+}
+
+QMetaObject* QGraphicsScene_virtualbase_metaObject(const void* self) {
+
+	return (QMetaObject*) ( (const VirtualQGraphicsScene*)(self) )->QGraphicsScene::metaObject();
+
+}
+
+bool QGraphicsScene_override_virtual_metacast(void* self, intptr_t slot) {
+	VirtualQGraphicsScene* self_cast = dynamic_cast<VirtualQGraphicsScene*>( (QGraphicsScene*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+	
+	self_cast->handle__metacast = slot;
+	return true;
+}
+
+void* QGraphicsScene_virtualbase_metacast(void* self, const char* param1) {
+
+	return ( (VirtualQGraphicsScene*)(self) )->QGraphicsScene::qt_metacast(param1);
+
+}
+
+bool QGraphicsScene_override_virtual_metacall(void* self, intptr_t slot) {
+	VirtualQGraphicsScene* self_cast = dynamic_cast<VirtualQGraphicsScene*>( (QGraphicsScene*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+	
+	self_cast->handle__metacall = slot;
+	return true;
+}
+
+int QGraphicsScene_virtualbase_metacall(void* self, int param1, int param2, void** param3) {
+
+	return ( (VirtualQGraphicsScene*)(self) )->QGraphicsScene::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
+
+}
+
 bool QGraphicsScene_override_virtual_inputMethodQuery(void* self, intptr_t slot) {
 	VirtualQGraphicsScene* self_cast = dynamic_cast<VirtualQGraphicsScene*>( (QGraphicsScene*)(self) );
 	if (self_cast == nullptr) {
@@ -1839,6 +1950,7 @@ void QGraphicsScene_virtualbase_disconnectNotify(void* self, QMetaMethod* signal
 
 }
 
+const QMetaObject* QGraphicsScene_staticMetaObject() { return &QGraphicsScene::staticMetaObject; }
 QObject* QGraphicsScene_protectedbase_sender(bool* _dynamic_cast_ok, const void* self) {
 	VirtualQGraphicsScene* self_cast = dynamic_cast<VirtualQGraphicsScene*>( (QGraphicsScene*)(self) );
 	if (self_cast == nullptr) {

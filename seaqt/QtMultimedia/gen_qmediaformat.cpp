@@ -190,6 +190,7 @@ void QMediaFormat_resolveForEncoding(QMediaFormat* self, int flags) {
 	self->resolveForEncoding(static_cast<QMediaFormat::ResolveFlags>(flags));
 }
 
+const QMetaObject* QMediaFormat_staticMetaObject() { return &QMediaFormat::staticMetaObject; }
 void QMediaFormat_delete(QMediaFormat* self) {
 	delete self;
 }

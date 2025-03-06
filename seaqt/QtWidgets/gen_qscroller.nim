@@ -74,6 +74,7 @@ type cQScroller*{.exportc: "QScroller", incompleteStruct.} = object
 
 proc fcQScroller_metaObject(self: pointer, ): pointer {.importc: "QScroller_metaObject".}
 proc fcQScroller_metacast(self: pointer, param1: cstring): pointer {.importc: "QScroller_metacast".}
+proc fcQScroller_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QScroller_metacall".}
 proc fcQScroller_tr(s: cstring): struct_miqt_string {.importc: "QScroller_tr".}
 proc fcQScroller_hasScroller(target: pointer): bool {.importc: "QScroller_hasScroller".}
 proc fcQScroller_scroller(target: pointer): pointer {.importc: "QScroller_scroller".}
@@ -108,6 +109,7 @@ proc fcQScroller_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QSc
 proc fcQScroller_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QScroller_tr3".}
 proc fcQScroller_grabGesture2(target: pointer, gestureType: cint): cint {.importc: "QScroller_grabGesture2".}
 proc fcQScroller_handleInput3(self: pointer, input: cint, position: pointer, timestamp: clonglong): bool {.importc: "QScroller_handleInput3".}
+proc fcQScroller_staticMetaObject(): pointer {.importc: "QScroller_staticMetaObject".}
 
 
 func init*(T: type gen_qscroller_types.QScroller, h: ptr cQScroller): gen_qscroller_types.QScroller =
@@ -117,6 +119,9 @@ proc metaObject*(self: gen_qscroller_types.QScroller, ): gen_qobjectdefs_types.Q
 
 proc metacast*(self: gen_qscroller_types.QScroller, param1: cstring): pointer =
   fcQScroller_metacast(self.h, param1)
+
+proc metacall*(self: gen_qscroller_types.QScroller, param1: cint, param2: cint, param3: pointer): cint =
+  fcQScroller_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qscroller_types.QScroller, s: cstring): string =
   let v_ms = fcQScroller_tr(s)
@@ -262,3 +267,5 @@ proc grabGesture*(_: type gen_qscroller_types.QScroller, target: gen_qobject_typ
 proc handleInput*(self: gen_qscroller_types.QScroller, input: cint, position: gen_qpoint_types.QPointF, timestamp: clonglong): bool =
   fcQScroller_handleInput3(self.h, cint(input), position.h, timestamp)
 
+proc staticMetaObject*(_: type gen_qscroller_types.QScroller): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fcQScroller_staticMetaObject())

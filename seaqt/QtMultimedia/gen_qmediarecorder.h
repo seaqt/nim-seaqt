@@ -47,6 +47,7 @@ QMediaRecorder* QMediaRecorder_new2(QObject* parent);
 void QMediaRecorder_virtbase(QMediaRecorder* src, QObject** outptr_QObject);
 QMetaObject* QMediaRecorder_metaObject(const QMediaRecorder* self);
 void* QMediaRecorder_metacast(QMediaRecorder* self, const char* param1);
+int QMediaRecorder_metacall(QMediaRecorder* self, int param1, int param2, void** param3);
 struct miqt_string QMediaRecorder_tr(const char* s);
 bool QMediaRecorder_isAvailable(const QMediaRecorder* self);
 QUrl* QMediaRecorder_outputLocation(const QMediaRecorder* self);
@@ -116,6 +117,12 @@ void QMediaRecorder_audioSampleRateChanged(QMediaRecorder* self);
 void QMediaRecorder_connect_audioSampleRateChanged(QMediaRecorder* self, intptr_t slot);
 struct miqt_string QMediaRecorder_tr2(const char* s, const char* c);
 struct miqt_string QMediaRecorder_tr3(const char* s, const char* c, int n);
+bool QMediaRecorder_override_virtual_metaObject(void* self, intptr_t slot);
+QMetaObject* QMediaRecorder_virtualbase_metaObject(const void* self);
+bool QMediaRecorder_override_virtual_metacast(void* self, intptr_t slot);
+void* QMediaRecorder_virtualbase_metacast(void* self, const char* param1);
+bool QMediaRecorder_override_virtual_metacall(void* self, intptr_t slot);
+int QMediaRecorder_virtualbase_metacall(void* self, int param1, int param2, void** param3);
 bool QMediaRecorder_override_virtual_event(void* self, intptr_t slot);
 bool QMediaRecorder_virtualbase_event(void* self, QEvent* event);
 bool QMediaRecorder_override_virtual_eventFilter(void* self, intptr_t slot);
@@ -134,6 +141,7 @@ QObject* QMediaRecorder_protectedbase_sender(bool* _dynamic_cast_ok, const void*
 int QMediaRecorder_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
 int QMediaRecorder_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
 bool QMediaRecorder_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+const QMetaObject* QMediaRecorder_staticMetaObject();
 void QMediaRecorder_delete(QMediaRecorder* self);
 
 #ifdef __cplusplus

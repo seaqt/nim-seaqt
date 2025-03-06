@@ -54,6 +54,7 @@ import
   ../QtCore/gen_qmetaobject_types,
   ../QtCore/gen_qmetatype_types,
   ../QtCore/gen_qobject_types,
+  ../QtCore/gen_qobjectdefs_types,
   ../QtCore/gen_qvariant_types,
   ./gen_qqmlcontext_types,
   ./gen_qqmlengine_types
@@ -61,6 +62,7 @@ export
   gen_qmetaobject_types,
   gen_qmetatype_types,
   gen_qobject_types,
+  gen_qobjectdefs_types,
   gen_qvariant_types,
   gen_qqmlcontext_types,
   gen_qqmlengine_types
@@ -108,6 +110,7 @@ proc fcQQmlProperty_objectX(self: pointer, ): pointer {.importc: "QQmlProperty_o
 proc fcQQmlProperty_index(self: pointer, ): cint {.importc: "QQmlProperty_index".}
 proc fcQQmlProperty_property(self: pointer, ): pointer {.importc: "QQmlProperty_property".}
 proc fcQQmlProperty_methodX(self: pointer, ): pointer {.importc: "QQmlProperty_method".}
+proc fcQQmlProperty_staticMetaObject(): pointer {.importc: "QQmlProperty_staticMetaObject".}
 proc fcQQmlProperty_delete(self: pointer) {.importc: "QQmlProperty_delete".}
 
 
@@ -239,5 +242,7 @@ proc property*(self: gen_qqmlproperty_types.QQmlProperty, ): gen_qmetaobject_typ
 proc methodX*(self: gen_qqmlproperty_types.QQmlProperty, ): gen_qmetaobject_types.QMetaMethod =
   gen_qmetaobject_types.QMetaMethod(h: fcQQmlProperty_methodX(self.h))
 
+proc staticMetaObject*(_: type gen_qqmlproperty_types.QQmlProperty): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fcQQmlProperty_staticMetaObject())
 proc delete*(self: gen_qqmlproperty_types.QQmlProperty) =
   fcQQmlProperty_delete(self.h)

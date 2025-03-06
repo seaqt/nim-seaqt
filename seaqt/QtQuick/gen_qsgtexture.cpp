@@ -18,6 +18,9 @@
 extern "C" {
 #endif
 
+QMetaObject* miqt_exec_callback_QSGTexture_metaObject(const QSGTexture*, intptr_t);
+void* miqt_exec_callback_QSGTexture_metacast(QSGTexture*, intptr_t, const char*);
+int miqt_exec_callback_QSGTexture_metacall(QSGTexture*, intptr_t, int, int, void**);
 long long miqt_exec_callback_QSGTexture_comparisonKey(const QSGTexture*, intptr_t);
 QSize* miqt_exec_callback_QSGTexture_textureSize(const QSGTexture*, intptr_t);
 bool miqt_exec_callback_QSGTexture_hasAlphaChannel(const QSGTexture*, intptr_t);
@@ -31,6 +34,9 @@ void miqt_exec_callback_QSGTexture_childEvent(QSGTexture*, intptr_t, QChildEvent
 void miqt_exec_callback_QSGTexture_customEvent(QSGTexture*, intptr_t, QEvent*);
 void miqt_exec_callback_QSGTexture_connectNotify(QSGTexture*, intptr_t, QMetaMethod*);
 void miqt_exec_callback_QSGTexture_disconnectNotify(QSGTexture*, intptr_t, QMetaMethod*);
+QMetaObject* miqt_exec_callback_QSGDynamicTexture_metaObject(const QSGDynamicTexture*, intptr_t);
+void* miqt_exec_callback_QSGDynamicTexture_metacast(QSGDynamicTexture*, intptr_t, const char*);
+int miqt_exec_callback_QSGDynamicTexture_metacall(QSGDynamicTexture*, intptr_t, int, int, void**);
 bool miqt_exec_callback_QSGDynamicTexture_updateTexture(QSGDynamicTexture*, intptr_t);
 long long miqt_exec_callback_QSGDynamicTexture_comparisonKey(const QSGDynamicTexture*, intptr_t);
 QSize* miqt_exec_callback_QSGDynamicTexture_textureSize(const QSGDynamicTexture*, intptr_t);
@@ -55,6 +61,62 @@ public:
 	VirtualQSGTexture(): QSGTexture() {};
 
 	virtual ~VirtualQSGTexture() override = default;
+
+	// cgo.Handle value for overwritten implementation
+	intptr_t handle__metaObject = 0;
+
+	// Subclass to allow providing a Go implementation
+	virtual const QMetaObject* metaObject() const override {
+		if (handle__metaObject == 0) {
+			return QSGTexture::metaObject();
+		}
+		
+
+		QMetaObject* callback_return_value = miqt_exec_callback_QSGTexture_metaObject(this, handle__metaObject);
+
+		return callback_return_value;
+	}
+
+	friend QMetaObject* QSGTexture_virtualbase_metaObject(const void* self);
+
+	// cgo.Handle value for overwritten implementation
+	intptr_t handle__metacast = 0;
+
+	// Subclass to allow providing a Go implementation
+	virtual void* qt_metacast(const char* param1) override {
+		if (handle__metacast == 0) {
+			return QSGTexture::qt_metacast(param1);
+		}
+		
+		const char* sigval1 = (const char*) param1;
+
+		void* callback_return_value = miqt_exec_callback_QSGTexture_metacast(this, handle__metacast, sigval1);
+
+		return callback_return_value;
+	}
+
+	friend void* QSGTexture_virtualbase_metacast(void* self, const char* param1);
+
+	// cgo.Handle value for overwritten implementation
+	intptr_t handle__metacall = 0;
+
+	// Subclass to allow providing a Go implementation
+	virtual int qt_metacall(QMetaObject::Call param1, int param2, void** param3) override {
+		if (handle__metacall == 0) {
+			return QSGTexture::qt_metacall(param1, param2, param3);
+		}
+		
+		QMetaObject::Call param1_ret = param1;
+		int sigval1 = static_cast<int>(param1_ret);
+		int sigval2 = param2;
+		void** sigval3 = param3;
+
+		int callback_return_value = miqt_exec_callback_QSGTexture_metacall(this, handle__metacall, sigval1, sigval2, sigval3);
+
+		return static_cast<int>(callback_return_value);
+	}
+
+	friend int QSGTexture_virtualbase_metacall(void* self, int param1, int param2, void** param3);
 
 	// cgo.Handle value for overwritten implementation
 	intptr_t handle__comparisonKey = 0;
@@ -310,6 +372,10 @@ void* QSGTexture_metacast(QSGTexture* self, const char* param1) {
 	return self->qt_metacast(param1);
 }
 
+int QSGTexture_metacall(QSGTexture* self, int param1, int param2, void** param3) {
+	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
+}
+
 struct miqt_string QSGTexture_tr(const char* s) {
 	QString _ret = QSGTexture::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
@@ -415,6 +481,54 @@ struct miqt_string QSGTexture_tr3(const char* s, const char* c, int n) {
 	_ms.data = static_cast<char*>(malloc(_ms.len));
 	memcpy(_ms.data, _b.data(), _ms.len);
 	return _ms;
+}
+
+bool QSGTexture_override_virtual_metaObject(void* self, intptr_t slot) {
+	VirtualQSGTexture* self_cast = dynamic_cast<VirtualQSGTexture*>( (QSGTexture*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+	
+	self_cast->handle__metaObject = slot;
+	return true;
+}
+
+QMetaObject* QSGTexture_virtualbase_metaObject(const void* self) {
+
+	return (QMetaObject*) ( (const VirtualQSGTexture*)(self) )->QSGTexture::metaObject();
+
+}
+
+bool QSGTexture_override_virtual_metacast(void* self, intptr_t slot) {
+	VirtualQSGTexture* self_cast = dynamic_cast<VirtualQSGTexture*>( (QSGTexture*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+	
+	self_cast->handle__metacast = slot;
+	return true;
+}
+
+void* QSGTexture_virtualbase_metacast(void* self, const char* param1) {
+
+	return ( (VirtualQSGTexture*)(self) )->QSGTexture::qt_metacast(param1);
+
+}
+
+bool QSGTexture_override_virtual_metacall(void* self, intptr_t slot) {
+	VirtualQSGTexture* self_cast = dynamic_cast<VirtualQSGTexture*>( (QSGTexture*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+	
+	self_cast->handle__metacall = slot;
+	return true;
+}
+
+int QSGTexture_virtualbase_metacall(void* self, int param1, int param2, void** param3) {
+
+	return ( (VirtualQSGTexture*)(self) )->QSGTexture::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
+
 }
 
 bool QSGTexture_override_virtual_comparisonKey(void* self, intptr_t slot) {
@@ -601,6 +715,7 @@ void QSGTexture_virtualbase_disconnectNotify(void* self, QMetaMethod* signal) {
 
 }
 
+const QMetaObject* QSGTexture_staticMetaObject() { return &QSGTexture::staticMetaObject; }
 void* QSGTexture_protectedbase_resolveInterface(bool* _dynamic_cast_ok, const void* self, const char* name, int revision) {
 	VirtualQSGTexture* self_cast = dynamic_cast<VirtualQSGTexture*>( (QSGTexture*)(self) );
 	if (self_cast == nullptr) {
@@ -676,6 +791,62 @@ public:
 	VirtualQSGDynamicTexture(): QSGDynamicTexture() {};
 
 	virtual ~VirtualQSGDynamicTexture() override = default;
+
+	// cgo.Handle value for overwritten implementation
+	intptr_t handle__metaObject = 0;
+
+	// Subclass to allow providing a Go implementation
+	virtual const QMetaObject* metaObject() const override {
+		if (handle__metaObject == 0) {
+			return QSGDynamicTexture::metaObject();
+		}
+		
+
+		QMetaObject* callback_return_value = miqt_exec_callback_QSGDynamicTexture_metaObject(this, handle__metaObject);
+
+		return callback_return_value;
+	}
+
+	friend QMetaObject* QSGDynamicTexture_virtualbase_metaObject(const void* self);
+
+	// cgo.Handle value for overwritten implementation
+	intptr_t handle__metacast = 0;
+
+	// Subclass to allow providing a Go implementation
+	virtual void* qt_metacast(const char* param1) override {
+		if (handle__metacast == 0) {
+			return QSGDynamicTexture::qt_metacast(param1);
+		}
+		
+		const char* sigval1 = (const char*) param1;
+
+		void* callback_return_value = miqt_exec_callback_QSGDynamicTexture_metacast(this, handle__metacast, sigval1);
+
+		return callback_return_value;
+	}
+
+	friend void* QSGDynamicTexture_virtualbase_metacast(void* self, const char* param1);
+
+	// cgo.Handle value for overwritten implementation
+	intptr_t handle__metacall = 0;
+
+	// Subclass to allow providing a Go implementation
+	virtual int qt_metacall(QMetaObject::Call param1, int param2, void** param3) override {
+		if (handle__metacall == 0) {
+			return QSGDynamicTexture::qt_metacall(param1, param2, param3);
+		}
+		
+		QMetaObject::Call param1_ret = param1;
+		int sigval1 = static_cast<int>(param1_ret);
+		int sigval2 = param2;
+		void** sigval3 = param3;
+
+		int callback_return_value = miqt_exec_callback_QSGDynamicTexture_metacall(this, handle__metacall, sigval1, sigval2, sigval3);
+
+		return static_cast<int>(callback_return_value);
+	}
+
+	friend int QSGDynamicTexture_virtualbase_metacall(void* self, int param1, int param2, void** param3);
 
 	// cgo.Handle value for overwritten implementation
 	intptr_t handle__updateTexture = 0;
@@ -946,6 +1117,10 @@ void* QSGDynamicTexture_metacast(QSGDynamicTexture* self, const char* param1) {
 	return self->qt_metacast(param1);
 }
 
+int QSGDynamicTexture_metacall(QSGDynamicTexture* self, int param1, int param2, void** param3) {
+	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
+}
+
 struct miqt_string QSGDynamicTexture_tr(const char* s) {
 	QString _ret = QSGDynamicTexture::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
@@ -981,6 +1156,54 @@ struct miqt_string QSGDynamicTexture_tr3(const char* s, const char* c, int n) {
 	_ms.data = static_cast<char*>(malloc(_ms.len));
 	memcpy(_ms.data, _b.data(), _ms.len);
 	return _ms;
+}
+
+bool QSGDynamicTexture_override_virtual_metaObject(void* self, intptr_t slot) {
+	VirtualQSGDynamicTexture* self_cast = dynamic_cast<VirtualQSGDynamicTexture*>( (QSGDynamicTexture*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+	
+	self_cast->handle__metaObject = slot;
+	return true;
+}
+
+QMetaObject* QSGDynamicTexture_virtualbase_metaObject(const void* self) {
+
+	return (QMetaObject*) ( (const VirtualQSGDynamicTexture*)(self) )->QSGDynamicTexture::metaObject();
+
+}
+
+bool QSGDynamicTexture_override_virtual_metacast(void* self, intptr_t slot) {
+	VirtualQSGDynamicTexture* self_cast = dynamic_cast<VirtualQSGDynamicTexture*>( (QSGDynamicTexture*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+	
+	self_cast->handle__metacast = slot;
+	return true;
+}
+
+void* QSGDynamicTexture_virtualbase_metacast(void* self, const char* param1) {
+
+	return ( (VirtualQSGDynamicTexture*)(self) )->QSGDynamicTexture::qt_metacast(param1);
+
+}
+
+bool QSGDynamicTexture_override_virtual_metacall(void* self, intptr_t slot) {
+	VirtualQSGDynamicTexture* self_cast = dynamic_cast<VirtualQSGDynamicTexture*>( (QSGDynamicTexture*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+	
+	self_cast->handle__metacall = slot;
+	return true;
+}
+
+int QSGDynamicTexture_virtualbase_metacall(void* self, int param1, int param2, void** param3) {
+
+	return ( (VirtualQSGDynamicTexture*)(self) )->QSGDynamicTexture::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
+
 }
 
 bool QSGDynamicTexture_override_virtual_updateTexture(void* self, intptr_t slot) {
@@ -1177,6 +1400,7 @@ void QSGDynamicTexture_virtualbase_disconnectNotify(void* self, QMetaMethod* sig
 
 }
 
+const QMetaObject* QSGDynamicTexture_staticMetaObject() { return &QSGDynamicTexture::staticMetaObject; }
 void* QSGDynamicTexture_protectedbase_resolveInterface(bool* _dynamic_cast_ok, const void* self, const char* name, int revision) {
 	VirtualQSGDynamicTexture* self_cast = dynamic_cast<VirtualQSGDynamicTexture*>( (QSGDynamicTexture*)(self) );
 	if (self_cast == nullptr) {

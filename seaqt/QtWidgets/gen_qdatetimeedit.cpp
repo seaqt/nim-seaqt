@@ -55,6 +55,9 @@ extern "C" {
 void miqt_exec_callback_QDateTimeEdit_dateTimeChanged(intptr_t, QDateTime*);
 void miqt_exec_callback_QDateTimeEdit_timeChanged(intptr_t, QTime*);
 void miqt_exec_callback_QDateTimeEdit_dateChanged(intptr_t, QDate*);
+QMetaObject* miqt_exec_callback_QDateTimeEdit_metaObject(const QDateTimeEdit*, intptr_t);
+void* miqt_exec_callback_QDateTimeEdit_metacast(QDateTimeEdit*, intptr_t, const char*);
+int miqt_exec_callback_QDateTimeEdit_metacall(QDateTimeEdit*, intptr_t, int, int, void**);
 QSize* miqt_exec_callback_QDateTimeEdit_sizeHint(const QDateTimeEdit*, intptr_t);
 void miqt_exec_callback_QDateTimeEdit_clear(QDateTimeEdit*, intptr_t);
 void miqt_exec_callback_QDateTimeEdit_stepBy(QDateTimeEdit*, intptr_t, int);
@@ -111,6 +114,9 @@ void miqt_exec_callback_QDateTimeEdit_customEvent(QDateTimeEdit*, intptr_t, QEve
 void miqt_exec_callback_QDateTimeEdit_connectNotify(QDateTimeEdit*, intptr_t, QMetaMethod*);
 void miqt_exec_callback_QDateTimeEdit_disconnectNotify(QDateTimeEdit*, intptr_t, QMetaMethod*);
 void miqt_exec_callback_QTimeEdit_userTimeChanged(intptr_t, QTime*);
+QMetaObject* miqt_exec_callback_QTimeEdit_metaObject(const QTimeEdit*, intptr_t);
+void* miqt_exec_callback_QTimeEdit_metacast(QTimeEdit*, intptr_t, const char*);
+int miqt_exec_callback_QTimeEdit_metacall(QTimeEdit*, intptr_t, int, int, void**);
 QSize* miqt_exec_callback_QTimeEdit_sizeHint(const QTimeEdit*, intptr_t);
 void miqt_exec_callback_QTimeEdit_clear(QTimeEdit*, intptr_t);
 void miqt_exec_callback_QTimeEdit_stepBy(QTimeEdit*, intptr_t, int);
@@ -167,6 +173,9 @@ void miqt_exec_callback_QTimeEdit_customEvent(QTimeEdit*, intptr_t, QEvent*);
 void miqt_exec_callback_QTimeEdit_connectNotify(QTimeEdit*, intptr_t, QMetaMethod*);
 void miqt_exec_callback_QTimeEdit_disconnectNotify(QTimeEdit*, intptr_t, QMetaMethod*);
 void miqt_exec_callback_QDateEdit_userDateChanged(intptr_t, QDate*);
+QMetaObject* miqt_exec_callback_QDateEdit_metaObject(const QDateEdit*, intptr_t);
+void* miqt_exec_callback_QDateEdit_metacast(QDateEdit*, intptr_t, const char*);
+int miqt_exec_callback_QDateEdit_metacall(QDateEdit*, intptr_t, int, int, void**);
 QSize* miqt_exec_callback_QDateEdit_sizeHint(const QDateEdit*, intptr_t);
 void miqt_exec_callback_QDateEdit_clear(QDateEdit*, intptr_t);
 void miqt_exec_callback_QDateEdit_stepBy(QDateEdit*, intptr_t, int);
@@ -239,6 +248,62 @@ public:
 	VirtualQDateTimeEdit(QTime t, QWidget* parent): QDateTimeEdit(t, parent) {};
 
 	virtual ~VirtualQDateTimeEdit() override = default;
+
+	// cgo.Handle value for overwritten implementation
+	intptr_t handle__metaObject = 0;
+
+	// Subclass to allow providing a Go implementation
+	virtual const QMetaObject* metaObject() const override {
+		if (handle__metaObject == 0) {
+			return QDateTimeEdit::metaObject();
+		}
+		
+
+		QMetaObject* callback_return_value = miqt_exec_callback_QDateTimeEdit_metaObject(this, handle__metaObject);
+
+		return callback_return_value;
+	}
+
+	friend QMetaObject* QDateTimeEdit_virtualbase_metaObject(const void* self);
+
+	// cgo.Handle value for overwritten implementation
+	intptr_t handle__metacast = 0;
+
+	// Subclass to allow providing a Go implementation
+	virtual void* qt_metacast(const char* param1) override {
+		if (handle__metacast == 0) {
+			return QDateTimeEdit::qt_metacast(param1);
+		}
+		
+		const char* sigval1 = (const char*) param1;
+
+		void* callback_return_value = miqt_exec_callback_QDateTimeEdit_metacast(this, handle__metacast, sigval1);
+
+		return callback_return_value;
+	}
+
+	friend void* QDateTimeEdit_virtualbase_metacast(void* self, const char* param1);
+
+	// cgo.Handle value for overwritten implementation
+	intptr_t handle__metacall = 0;
+
+	// Subclass to allow providing a Go implementation
+	virtual int qt_metacall(QMetaObject::Call param1, int param2, void** param3) override {
+		if (handle__metacall == 0) {
+			return QDateTimeEdit::qt_metacall(param1, param2, param3);
+		}
+		
+		QMetaObject::Call param1_ret = param1;
+		int sigval1 = static_cast<int>(param1_ret);
+		int sigval2 = param2;
+		void** sigval3 = param3;
+
+		int callback_return_value = miqt_exec_callback_QDateTimeEdit_metacall(this, handle__metacall, sigval1, sigval2, sigval3);
+
+		return static_cast<int>(callback_return_value);
+	}
+
+	friend int QDateTimeEdit_virtualbase_metacall(void* self, int param1, int param2, void** param3);
 
 	// cgo.Handle value for overwritten implementation
 	intptr_t handle__sizeHint = 0;
@@ -1357,6 +1422,10 @@ void* QDateTimeEdit_metacast(QDateTimeEdit* self, const char* param1) {
 	return self->qt_metacast(param1);
 }
 
+int QDateTimeEdit_metacall(QDateTimeEdit* self, int param1, int param2, void** param3) {
+	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
+}
+
 struct miqt_string QDateTimeEdit_tr(const char* s) {
 	QString _ret = QDateTimeEdit::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
@@ -1642,6 +1711,54 @@ struct miqt_string QDateTimeEdit_tr3(const char* s, const char* c, int n) {
 	_ms.data = static_cast<char*>(malloc(_ms.len));
 	memcpy(_ms.data, _b.data(), _ms.len);
 	return _ms;
+}
+
+bool QDateTimeEdit_override_virtual_metaObject(void* self, intptr_t slot) {
+	VirtualQDateTimeEdit* self_cast = dynamic_cast<VirtualQDateTimeEdit*>( (QDateTimeEdit*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+	
+	self_cast->handle__metaObject = slot;
+	return true;
+}
+
+QMetaObject* QDateTimeEdit_virtualbase_metaObject(const void* self) {
+
+	return (QMetaObject*) ( (const VirtualQDateTimeEdit*)(self) )->QDateTimeEdit::metaObject();
+
+}
+
+bool QDateTimeEdit_override_virtual_metacast(void* self, intptr_t slot) {
+	VirtualQDateTimeEdit* self_cast = dynamic_cast<VirtualQDateTimeEdit*>( (QDateTimeEdit*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+	
+	self_cast->handle__metacast = slot;
+	return true;
+}
+
+void* QDateTimeEdit_virtualbase_metacast(void* self, const char* param1) {
+
+	return ( (VirtualQDateTimeEdit*)(self) )->QDateTimeEdit::qt_metacast(param1);
+
+}
+
+bool QDateTimeEdit_override_virtual_metacall(void* self, intptr_t slot) {
+	VirtualQDateTimeEdit* self_cast = dynamic_cast<VirtualQDateTimeEdit*>( (QDateTimeEdit*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+	
+	self_cast->handle__metacall = slot;
+	return true;
+}
+
+int QDateTimeEdit_virtualbase_metacall(void* self, int param1, int param2, void** param3) {
+
+	return ( (VirtualQDateTimeEdit*)(self) )->QDateTimeEdit::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
+
 }
 
 bool QDateTimeEdit_override_virtual_sizeHint(void* self, intptr_t slot) {
@@ -2537,6 +2654,7 @@ void QDateTimeEdit_virtualbase_disconnectNotify(void* self, QMetaMethod* signal)
 
 }
 
+const QMetaObject* QDateTimeEdit_staticMetaObject() { return &QDateTimeEdit::staticMetaObject; }
 QLineEdit* QDateTimeEdit_protectedbase_lineEdit(bool* _dynamic_cast_ok, const void* self) {
 	VirtualQDateTimeEdit* self_cast = dynamic_cast<VirtualQDateTimeEdit*>( (QDateTimeEdit*)(self) );
 	if (self_cast == nullptr) {
@@ -2693,6 +2811,62 @@ public:
 	VirtualQTimeEdit(QTime time, QWidget* parent): QTimeEdit(time, parent) {};
 
 	virtual ~VirtualQTimeEdit() override = default;
+
+	// cgo.Handle value for overwritten implementation
+	intptr_t handle__metaObject = 0;
+
+	// Subclass to allow providing a Go implementation
+	virtual const QMetaObject* metaObject() const override {
+		if (handle__metaObject == 0) {
+			return QTimeEdit::metaObject();
+		}
+		
+
+		QMetaObject* callback_return_value = miqt_exec_callback_QTimeEdit_metaObject(this, handle__metaObject);
+
+		return callback_return_value;
+	}
+
+	friend QMetaObject* QTimeEdit_virtualbase_metaObject(const void* self);
+
+	// cgo.Handle value for overwritten implementation
+	intptr_t handle__metacast = 0;
+
+	// Subclass to allow providing a Go implementation
+	virtual void* qt_metacast(const char* param1) override {
+		if (handle__metacast == 0) {
+			return QTimeEdit::qt_metacast(param1);
+		}
+		
+		const char* sigval1 = (const char*) param1;
+
+		void* callback_return_value = miqt_exec_callback_QTimeEdit_metacast(this, handle__metacast, sigval1);
+
+		return callback_return_value;
+	}
+
+	friend void* QTimeEdit_virtualbase_metacast(void* self, const char* param1);
+
+	// cgo.Handle value for overwritten implementation
+	intptr_t handle__metacall = 0;
+
+	// Subclass to allow providing a Go implementation
+	virtual int qt_metacall(QMetaObject::Call param1, int param2, void** param3) override {
+		if (handle__metacall == 0) {
+			return QTimeEdit::qt_metacall(param1, param2, param3);
+		}
+		
+		QMetaObject::Call param1_ret = param1;
+		int sigval1 = static_cast<int>(param1_ret);
+		int sigval2 = param2;
+		void** sigval3 = param3;
+
+		int callback_return_value = miqt_exec_callback_QTimeEdit_metacall(this, handle__metacall, sigval1, sigval2, sigval3);
+
+		return static_cast<int>(callback_return_value);
+	}
+
+	friend int QTimeEdit_virtualbase_metacall(void* self, int param1, int param2, void** param3);
 
 	// cgo.Handle value for overwritten implementation
 	intptr_t handle__sizeHint = 0;
@@ -3795,6 +3969,10 @@ void* QTimeEdit_metacast(QTimeEdit* self, const char* param1) {
 	return self->qt_metacast(param1);
 }
 
+int QTimeEdit_metacall(QTimeEdit* self, int param1, int param2, void** param3) {
+	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
+}
+
 struct miqt_string QTimeEdit_tr(const char* s) {
 	QString _ret = QTimeEdit::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
@@ -3837,6 +4015,54 @@ struct miqt_string QTimeEdit_tr3(const char* s, const char* c, int n) {
 	_ms.data = static_cast<char*>(malloc(_ms.len));
 	memcpy(_ms.data, _b.data(), _ms.len);
 	return _ms;
+}
+
+bool QTimeEdit_override_virtual_metaObject(void* self, intptr_t slot) {
+	VirtualQTimeEdit* self_cast = dynamic_cast<VirtualQTimeEdit*>( (QTimeEdit*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+	
+	self_cast->handle__metaObject = slot;
+	return true;
+}
+
+QMetaObject* QTimeEdit_virtualbase_metaObject(const void* self) {
+
+	return (QMetaObject*) ( (const VirtualQTimeEdit*)(self) )->QTimeEdit::metaObject();
+
+}
+
+bool QTimeEdit_override_virtual_metacast(void* self, intptr_t slot) {
+	VirtualQTimeEdit* self_cast = dynamic_cast<VirtualQTimeEdit*>( (QTimeEdit*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+	
+	self_cast->handle__metacast = slot;
+	return true;
+}
+
+void* QTimeEdit_virtualbase_metacast(void* self, const char* param1) {
+
+	return ( (VirtualQTimeEdit*)(self) )->QTimeEdit::qt_metacast(param1);
+
+}
+
+bool QTimeEdit_override_virtual_metacall(void* self, intptr_t slot) {
+	VirtualQTimeEdit* self_cast = dynamic_cast<VirtualQTimeEdit*>( (QTimeEdit*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+	
+	self_cast->handle__metacall = slot;
+	return true;
+}
+
+int QTimeEdit_virtualbase_metacall(void* self, int param1, int param2, void** param3) {
+
+	return ( (VirtualQTimeEdit*)(self) )->QTimeEdit::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
+
 }
 
 bool QTimeEdit_override_virtual_sizeHint(void* self, intptr_t slot) {
@@ -4732,6 +4958,7 @@ void QTimeEdit_virtualbase_disconnectNotify(void* self, QMetaMethod* signal) {
 
 }
 
+const QMetaObject* QTimeEdit_staticMetaObject() { return &QTimeEdit::staticMetaObject; }
 QLineEdit* QTimeEdit_protectedbase_lineEdit(bool* _dynamic_cast_ok, const void* self) {
 	VirtualQTimeEdit* self_cast = dynamic_cast<VirtualQTimeEdit*>( (QTimeEdit*)(self) );
 	if (self_cast == nullptr) {
@@ -4888,6 +5115,62 @@ public:
 	VirtualQDateEdit(QDate date, QWidget* parent): QDateEdit(date, parent) {};
 
 	virtual ~VirtualQDateEdit() override = default;
+
+	// cgo.Handle value for overwritten implementation
+	intptr_t handle__metaObject = 0;
+
+	// Subclass to allow providing a Go implementation
+	virtual const QMetaObject* metaObject() const override {
+		if (handle__metaObject == 0) {
+			return QDateEdit::metaObject();
+		}
+		
+
+		QMetaObject* callback_return_value = miqt_exec_callback_QDateEdit_metaObject(this, handle__metaObject);
+
+		return callback_return_value;
+	}
+
+	friend QMetaObject* QDateEdit_virtualbase_metaObject(const void* self);
+
+	// cgo.Handle value for overwritten implementation
+	intptr_t handle__metacast = 0;
+
+	// Subclass to allow providing a Go implementation
+	virtual void* qt_metacast(const char* param1) override {
+		if (handle__metacast == 0) {
+			return QDateEdit::qt_metacast(param1);
+		}
+		
+		const char* sigval1 = (const char*) param1;
+
+		void* callback_return_value = miqt_exec_callback_QDateEdit_metacast(this, handle__metacast, sigval1);
+
+		return callback_return_value;
+	}
+
+	friend void* QDateEdit_virtualbase_metacast(void* self, const char* param1);
+
+	// cgo.Handle value for overwritten implementation
+	intptr_t handle__metacall = 0;
+
+	// Subclass to allow providing a Go implementation
+	virtual int qt_metacall(QMetaObject::Call param1, int param2, void** param3) override {
+		if (handle__metacall == 0) {
+			return QDateEdit::qt_metacall(param1, param2, param3);
+		}
+		
+		QMetaObject::Call param1_ret = param1;
+		int sigval1 = static_cast<int>(param1_ret);
+		int sigval2 = param2;
+		void** sigval3 = param3;
+
+		int callback_return_value = miqt_exec_callback_QDateEdit_metacall(this, handle__metacall, sigval1, sigval2, sigval3);
+
+		return static_cast<int>(callback_return_value);
+	}
+
+	friend int QDateEdit_virtualbase_metacall(void* self, int param1, int param2, void** param3);
 
 	// cgo.Handle value for overwritten implementation
 	intptr_t handle__sizeHint = 0;
@@ -5990,6 +6273,10 @@ void* QDateEdit_metacast(QDateEdit* self, const char* param1) {
 	return self->qt_metacast(param1);
 }
 
+int QDateEdit_metacall(QDateEdit* self, int param1, int param2, void** param3) {
+	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
+}
+
 struct miqt_string QDateEdit_tr(const char* s) {
 	QString _ret = QDateEdit::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
@@ -6032,6 +6319,54 @@ struct miqt_string QDateEdit_tr3(const char* s, const char* c, int n) {
 	_ms.data = static_cast<char*>(malloc(_ms.len));
 	memcpy(_ms.data, _b.data(), _ms.len);
 	return _ms;
+}
+
+bool QDateEdit_override_virtual_metaObject(void* self, intptr_t slot) {
+	VirtualQDateEdit* self_cast = dynamic_cast<VirtualQDateEdit*>( (QDateEdit*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+	
+	self_cast->handle__metaObject = slot;
+	return true;
+}
+
+QMetaObject* QDateEdit_virtualbase_metaObject(const void* self) {
+
+	return (QMetaObject*) ( (const VirtualQDateEdit*)(self) )->QDateEdit::metaObject();
+
+}
+
+bool QDateEdit_override_virtual_metacast(void* self, intptr_t slot) {
+	VirtualQDateEdit* self_cast = dynamic_cast<VirtualQDateEdit*>( (QDateEdit*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+	
+	self_cast->handle__metacast = slot;
+	return true;
+}
+
+void* QDateEdit_virtualbase_metacast(void* self, const char* param1) {
+
+	return ( (VirtualQDateEdit*)(self) )->QDateEdit::qt_metacast(param1);
+
+}
+
+bool QDateEdit_override_virtual_metacall(void* self, intptr_t slot) {
+	VirtualQDateEdit* self_cast = dynamic_cast<VirtualQDateEdit*>( (QDateEdit*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+	
+	self_cast->handle__metacall = slot;
+	return true;
+}
+
+int QDateEdit_virtualbase_metacall(void* self, int param1, int param2, void** param3) {
+
+	return ( (VirtualQDateEdit*)(self) )->QDateEdit::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
+
 }
 
 bool QDateEdit_override_virtual_sizeHint(void* self, intptr_t slot) {
@@ -6927,6 +7262,7 @@ void QDateEdit_virtualbase_disconnectNotify(void* self, QMetaMethod* signal) {
 
 }
 
+const QMetaObject* QDateEdit_staticMetaObject() { return &QDateEdit::staticMetaObject; }
 QLineEdit* QDateEdit_protectedbase_lineEdit(bool* _dynamic_cast_ok, const void* self) {
 	VirtualQDateEdit* self_cast = dynamic_cast<VirtualQDateEdit*>( (QDateEdit*)(self) );
 	if (self_cast == nullptr) {

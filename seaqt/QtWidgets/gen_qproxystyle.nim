@@ -81,6 +81,7 @@ proc fcQProxyStyle_new2(key: struct_miqt_string): ptr cQProxyStyle {.importc: "Q
 proc fcQProxyStyle_new3(style: pointer): ptr cQProxyStyle {.importc: "QProxyStyle_new3".}
 proc fcQProxyStyle_metaObject(self: pointer, ): pointer {.importc: "QProxyStyle_metaObject".}
 proc fcQProxyStyle_metacast(self: pointer, param1: cstring): pointer {.importc: "QProxyStyle_metacast".}
+proc fcQProxyStyle_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QProxyStyle_metacall".}
 proc fcQProxyStyle_tr(s: cstring): struct_miqt_string {.importc: "QProxyStyle_tr".}
 proc fcQProxyStyle_baseStyle(self: pointer, ): pointer {.importc: "QProxyStyle_baseStyle".}
 proc fcQProxyStyle_setBaseStyle(self: pointer, style: pointer): void {.importc: "QProxyStyle_setBaseStyle".}
@@ -109,6 +110,12 @@ proc fcQProxyStyle_unpolish(self: pointer, widget: pointer): void {.importc: "QP
 proc fcQProxyStyle_unpolishWithApp(self: pointer, app: pointer): void {.importc: "QProxyStyle_unpolishWithApp".}
 proc fcQProxyStyle_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QProxyStyle_tr2".}
 proc fcQProxyStyle_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QProxyStyle_tr3".}
+proc fQProxyStyle_virtualbase_metaObject(self: pointer, ): pointer{.importc: "QProxyStyle_virtualbase_metaObject".}
+proc fcQProxyStyle_override_virtual_metaObject(self: pointer, slot: int) {.importc: "QProxyStyle_override_virtual_metaObject".}
+proc fQProxyStyle_virtualbase_metacast(self: pointer, param1: cstring): pointer{.importc: "QProxyStyle_virtualbase_metacast".}
+proc fcQProxyStyle_override_virtual_metacast(self: pointer, slot: int) {.importc: "QProxyStyle_override_virtual_metacast".}
+proc fQProxyStyle_virtualbase_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint{.importc: "QProxyStyle_virtualbase_metacall".}
+proc fcQProxyStyle_override_virtual_metacall(self: pointer, slot: int) {.importc: "QProxyStyle_override_virtual_metacall".}
 proc fQProxyStyle_virtualbase_drawPrimitive(self: pointer, element: cint, option: pointer, painter: pointer, widget: pointer): void{.importc: "QProxyStyle_virtualbase_drawPrimitive".}
 proc fcQProxyStyle_override_virtual_drawPrimitive(self: pointer, slot: int) {.importc: "QProxyStyle_override_virtual_drawPrimitive".}
 proc fQProxyStyle_virtualbase_drawControl(self: pointer, element: cint, option: pointer, painter: pointer, widget: pointer): void{.importc: "QProxyStyle_virtualbase_drawControl".}
@@ -169,6 +176,7 @@ proc fQProxyStyle_virtualbase_connectNotify(self: pointer, signal: pointer): voi
 proc fcQProxyStyle_override_virtual_connectNotify(self: pointer, slot: int) {.importc: "QProxyStyle_override_virtual_connectNotify".}
 proc fQProxyStyle_virtualbase_disconnectNotify(self: pointer, signal: pointer): void{.importc: "QProxyStyle_virtualbase_disconnectNotify".}
 proc fcQProxyStyle_override_virtual_disconnectNotify(self: pointer, slot: int) {.importc: "QProxyStyle_override_virtual_disconnectNotify".}
+proc fcQProxyStyle_staticMetaObject(): pointer {.importc: "QProxyStyle_staticMetaObject".}
 proc fcQProxyStyle_delete(self: pointer) {.importc: "QProxyStyle_delete".}
 
 
@@ -188,6 +196,9 @@ proc metaObject*(self: gen_qproxystyle_types.QProxyStyle, ): gen_qobjectdefs_typ
 
 proc metacast*(self: gen_qproxystyle_types.QProxyStyle, param1: cstring): pointer =
   fcQProxyStyle_metacast(self.h, param1)
+
+proc metacall*(self: gen_qproxystyle_types.QProxyStyle, param1: cint, param2: cint, param3: pointer): cint =
+  fcQProxyStyle_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qproxystyle_types.QProxyStyle, s: cstring): string =
   let v_ms = fcQProxyStyle_tr(s)
@@ -282,6 +293,65 @@ proc tr*(_: type gen_qproxystyle_types.QProxyStyle, s: cstring, c: cstring, n: c
   c_free(v_ms.data)
   vx_ret
 
+proc QProxyStylemetaObject*(self: gen_qproxystyle_types.QProxyStyle, ): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fQProxyStyle_virtualbase_metaObject(self.h))
+
+type QProxyStylemetaObjectProc* = proc(): gen_qobjectdefs_types.QMetaObject
+proc onmetaObject*(self: gen_qproxystyle_types.QProxyStyle, slot: QProxyStylemetaObjectProc) =
+  # TODO check subclass
+  var tmp = new QProxyStylemetaObjectProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQProxyStyle_override_virtual_metaObject(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QProxyStyle_metaObject(self: ptr cQProxyStyle, slot: int): pointer {.exportc: "miqt_exec_callback_QProxyStyle_metaObject ".} =
+  var nimfunc = cast[ptr QProxyStylemetaObjectProc](cast[pointer](slot))
+
+  let virtualReturn = nimfunc[]( )
+
+  virtualReturn.h
+proc QProxyStylemetacast*(self: gen_qproxystyle_types.QProxyStyle, param1: cstring): pointer =
+  fQProxyStyle_virtualbase_metacast(self.h, param1)
+
+type QProxyStylemetacastProc* = proc(param1: cstring): pointer
+proc onmetacast*(self: gen_qproxystyle_types.QProxyStyle, slot: QProxyStylemetacastProc) =
+  # TODO check subclass
+  var tmp = new QProxyStylemetacastProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQProxyStyle_override_virtual_metacast(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QProxyStyle_metacast(self: ptr cQProxyStyle, slot: int, param1: cstring): pointer {.exportc: "miqt_exec_callback_QProxyStyle_metacast ".} =
+  var nimfunc = cast[ptr QProxyStylemetacastProc](cast[pointer](slot))
+  let slotval1 = (param1)
+
+
+  let virtualReturn = nimfunc[](slotval1 )
+
+  virtualReturn
+proc QProxyStylemetacall*(self: gen_qproxystyle_types.QProxyStyle, param1: cint, param2: cint, param3: pointer): cint =
+  fQProxyStyle_virtualbase_metacall(self.h, cint(param1), param2, param3)
+
+type QProxyStylemetacallProc* = proc(param1: cint, param2: cint, param3: pointer): cint
+proc onmetacall*(self: gen_qproxystyle_types.QProxyStyle, slot: QProxyStylemetacallProc) =
+  # TODO check subclass
+  var tmp = new QProxyStylemetacallProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQProxyStyle_override_virtual_metacall(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QProxyStyle_metacall(self: ptr cQProxyStyle, slot: int, param1: cint, param2: cint, param3: pointer): cint {.exportc: "miqt_exec_callback_QProxyStyle_metacall ".} =
+  var nimfunc = cast[ptr QProxyStylemetacallProc](cast[pointer](slot))
+  let slotval1 = cint(param1)
+
+  let slotval2 = param2
+
+  let slotval3 = param3
+
+
+  let virtualReturn = nimfunc[](slotval1, slotval2, slotval3 )
+
+  virtualReturn
 proc QProxyStyledrawPrimitive*(self: gen_qproxystyle_types.QProxyStyle, element: cint, option: gen_qstyleoption_types.QStyleOption, painter: gen_qpainter_types.QPainter, widget: gen_qwidget_types.QWidget): void =
   fQProxyStyle_virtualbase_drawPrimitive(self.h, cint(element), option.h, painter.h, widget.h)
 
@@ -928,5 +998,7 @@ proc miqt_exec_callback_QProxyStyle_disconnectNotify(self: ptr cQProxyStyle, slo
 
 
   nimfunc[](slotval1)
+proc staticMetaObject*(_: type gen_qproxystyle_types.QProxyStyle): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fcQProxyStyle_staticMetaObject())
 proc delete*(self: gen_qproxystyle_types.QProxyStyle) =
   fcQProxyStyle_delete(self.h)

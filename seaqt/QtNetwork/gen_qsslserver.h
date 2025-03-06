@@ -49,6 +49,7 @@ QSslServer* QSslServer_new2(QObject* parent);
 void QSslServer_virtbase(QSslServer* src, QTcpServer** outptr_QTcpServer);
 QMetaObject* QSslServer_metaObject(const QSslServer* self);
 void* QSslServer_metacast(QSslServer* self, const char* param1);
+int QSslServer_metacall(QSslServer* self, int param1, int param2, void** param3);
 struct miqt_string QSslServer_tr(const char* s);
 void QSslServer_setSslConfiguration(QSslServer* self, QSslConfiguration* sslConfiguration);
 QSslConfiguration* QSslServer_sslConfiguration(const QSslServer* self);
@@ -73,6 +74,12 @@ void QSslServer_connect_startedEncryptionHandshake(QSslServer* self, intptr_t sl
 void QSslServer_incomingConnection(QSslServer* self, intptr_t socket);
 struct miqt_string QSslServer_tr2(const char* s, const char* c);
 struct miqt_string QSslServer_tr3(const char* s, const char* c, int n);
+bool QSslServer_override_virtual_metaObject(void* self, intptr_t slot);
+QMetaObject* QSslServer_virtualbase_metaObject(const void* self);
+bool QSslServer_override_virtual_metacast(void* self, intptr_t slot);
+void* QSslServer_virtualbase_metacast(void* self, const char* param1);
+bool QSslServer_override_virtual_metacall(void* self, intptr_t slot);
+int QSslServer_virtualbase_metacall(void* self, int param1, int param2, void** param3);
 bool QSslServer_override_virtual_incomingConnection(void* self, intptr_t slot);
 void QSslServer_virtualbase_incomingConnection(void* self, intptr_t socket);
 bool QSslServer_override_virtual_hasPendingConnections(void* self, intptr_t slot);
@@ -98,6 +105,7 @@ QObject* QSslServer_protectedbase_sender(bool* _dynamic_cast_ok, const void* sel
 int QSslServer_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
 int QSslServer_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
 bool QSslServer_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+const QMetaObject* QSslServer_staticMetaObject();
 void QSslServer_delete(QSslServer* self);
 
 #ifdef __cplusplus

@@ -67,6 +67,9 @@ void miqt_exec_callback_QWebEngineView_renderProcessTerminated(intptr_t, int, in
 void miqt_exec_callback_QWebEngineView_pdfPrintingFinished(intptr_t, struct miqt_string, bool);
 void miqt_exec_callback_QWebEngineView_printRequested(intptr_t);
 void miqt_exec_callback_QWebEngineView_printFinished(intptr_t, bool);
+QMetaObject* miqt_exec_callback_QWebEngineView_metaObject(const QWebEngineView*, intptr_t);
+void* miqt_exec_callback_QWebEngineView_metacast(QWebEngineView*, intptr_t, const char*);
+int miqt_exec_callback_QWebEngineView_metacall(QWebEngineView*, intptr_t, int, int, void**);
 QSize* miqt_exec_callback_QWebEngineView_sizeHint(const QWebEngineView*, intptr_t);
 QWebEngineView* miqt_exec_callback_QWebEngineView_createWindow(QWebEngineView*, intptr_t, int);
 void miqt_exec_callback_QWebEngineView_contextMenuEvent(QWebEngineView*, intptr_t, QContextMenuEvent*);
@@ -130,6 +133,62 @@ public:
 	VirtualQWebEngineView(QWebEnginePage* page, QWidget* parent): QWebEngineView(page, parent) {};
 
 	virtual ~VirtualQWebEngineView() override = default;
+
+	// cgo.Handle value for overwritten implementation
+	intptr_t handle__metaObject = 0;
+
+	// Subclass to allow providing a Go implementation
+	virtual const QMetaObject* metaObject() const override {
+		if (handle__metaObject == 0) {
+			return QWebEngineView::metaObject();
+		}
+		
+
+		QMetaObject* callback_return_value = miqt_exec_callback_QWebEngineView_metaObject(this, handle__metaObject);
+
+		return callback_return_value;
+	}
+
+	friend QMetaObject* QWebEngineView_virtualbase_metaObject(const void* self);
+
+	// cgo.Handle value for overwritten implementation
+	intptr_t handle__metacast = 0;
+
+	// Subclass to allow providing a Go implementation
+	virtual void* qt_metacast(const char* param1) override {
+		if (handle__metacast == 0) {
+			return QWebEngineView::qt_metacast(param1);
+		}
+		
+		const char* sigval1 = (const char*) param1;
+
+		void* callback_return_value = miqt_exec_callback_QWebEngineView_metacast(this, handle__metacast, sigval1);
+
+		return callback_return_value;
+	}
+
+	friend void* QWebEngineView_virtualbase_metacast(void* self, const char* param1);
+
+	// cgo.Handle value for overwritten implementation
+	intptr_t handle__metacall = 0;
+
+	// Subclass to allow providing a Go implementation
+	virtual int qt_metacall(QMetaObject::Call param1, int param2, void** param3) override {
+		if (handle__metacall == 0) {
+			return QWebEngineView::qt_metacall(param1, param2, param3);
+		}
+		
+		QMetaObject::Call param1_ret = param1;
+		int sigval1 = static_cast<int>(param1_ret);
+		int sigval2 = param2;
+		void** sigval3 = param3;
+
+		int callback_return_value = miqt_exec_callback_QWebEngineView_metacall(this, handle__metacall, sigval1, sigval2, sigval3);
+
+		return static_cast<int>(callback_return_value);
+	}
+
+	friend int QWebEngineView_virtualbase_metacall(void* self, int param1, int param2, void** param3);
 
 	// cgo.Handle value for overwritten implementation
 	intptr_t handle__sizeHint = 0;
@@ -1086,6 +1145,10 @@ void* QWebEngineView_metacast(QWebEngineView* self, const char* param1) {
 	return self->qt_metacast(param1);
 }
 
+int QWebEngineView_metacall(QWebEngineView* self, int param1, int param2, void** param3) {
+	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
+}
+
 struct miqt_string QWebEngineView_tr(const char* s) {
 	QString _ret = QWebEngineView::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
@@ -1436,6 +1499,54 @@ void QWebEngineView_printToPdf2(QWebEngineView* self, struct miqt_string filePat
 void QWebEngineView_printToPdf3(QWebEngineView* self, struct miqt_string filePath, QPageLayout* layout, QPageRanges* ranges) {
 	QString filePath_QString = QString::fromUtf8(filePath.data, filePath.len);
 	self->printToPdf(filePath_QString, *layout, *ranges);
+}
+
+bool QWebEngineView_override_virtual_metaObject(void* self, intptr_t slot) {
+	VirtualQWebEngineView* self_cast = dynamic_cast<VirtualQWebEngineView*>( (QWebEngineView*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+	
+	self_cast->handle__metaObject = slot;
+	return true;
+}
+
+QMetaObject* QWebEngineView_virtualbase_metaObject(const void* self) {
+
+	return (QMetaObject*) ( (const VirtualQWebEngineView*)(self) )->QWebEngineView::metaObject();
+
+}
+
+bool QWebEngineView_override_virtual_metacast(void* self, intptr_t slot) {
+	VirtualQWebEngineView* self_cast = dynamic_cast<VirtualQWebEngineView*>( (QWebEngineView*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+	
+	self_cast->handle__metacast = slot;
+	return true;
+}
+
+void* QWebEngineView_virtualbase_metacast(void* self, const char* param1) {
+
+	return ( (VirtualQWebEngineView*)(self) )->QWebEngineView::qt_metacast(param1);
+
+}
+
+bool QWebEngineView_override_virtual_metacall(void* self, intptr_t slot) {
+	VirtualQWebEngineView* self_cast = dynamic_cast<VirtualQWebEngineView*>( (QWebEngineView*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+	
+	self_cast->handle__metacall = slot;
+	return true;
+}
+
+int QWebEngineView_virtualbase_metacall(void* self, int param1, int param2, void** param3) {
+
+	return ( (VirtualQWebEngineView*)(self) )->QWebEngineView::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
+
 }
 
 bool QWebEngineView_override_virtual_sizeHint(void* self, intptr_t slot) {
@@ -2207,6 +2318,7 @@ void QWebEngineView_virtualbase_disconnectNotify(void* self, QMetaMethod* signal
 
 }
 
+const QMetaObject* QWebEngineView_staticMetaObject() { return &QWebEngineView::staticMetaObject; }
 void QWebEngineView_protectedbase_updateMicroFocus(bool* _dynamic_cast_ok, void* self) {
 	VirtualQWebEngineView* self_cast = dynamic_cast<VirtualQWebEngineView*>( (QWebEngineView*)(self) );
 	if (self_cast == nullptr) {

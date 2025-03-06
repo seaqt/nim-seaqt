@@ -80,6 +80,7 @@ proc fcQObject_new(): ptr cQObject {.importc: "QObject_new".}
 proc fcQObject_new2(parent: pointer): ptr cQObject {.importc: "QObject_new2".}
 proc fcQObject_metaObject(self: pointer, ): pointer {.importc: "QObject_metaObject".}
 proc fcQObject_metacast(self: pointer, param1: cstring): pointer {.importc: "QObject_metacast".}
+proc fcQObject_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QObject_metacall".}
 proc fcQObject_tr(s: cstring): struct_miqt_string {.importc: "QObject_tr".}
 proc fcQObject_event(self: pointer, event: pointer): bool {.importc: "QObject_event".}
 proc fcQObject_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.importc: "QObject_eventFilter".}
@@ -121,6 +122,12 @@ proc fcQObject_connect5(sender: pointer, signal: pointer, receiver: pointer, met
 proc fcQObject_connect4(self: pointer, sender: pointer, signal: cstring, member: cstring, typeVal: cint): pointer {.importc: "QObject_connect4".}
 proc fcQObject_destroyed1(self: pointer, param1: pointer): void {.importc: "QObject_destroyed1".}
 proc fcQObject_connect_destroyed1(self: pointer, slot: int) {.importc: "QObject_connect_destroyed1".}
+proc fQObject_virtualbase_metaObject(self: pointer, ): pointer{.importc: "QObject_virtualbase_metaObject".}
+proc fcQObject_override_virtual_metaObject(self: pointer, slot: int) {.importc: "QObject_override_virtual_metaObject".}
+proc fQObject_virtualbase_metacast(self: pointer, param1: cstring): pointer{.importc: "QObject_virtualbase_metacast".}
+proc fcQObject_override_virtual_metacast(self: pointer, slot: int) {.importc: "QObject_override_virtual_metacast".}
+proc fQObject_virtualbase_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint{.importc: "QObject_virtualbase_metacall".}
+proc fcQObject_override_virtual_metacall(self: pointer, slot: int) {.importc: "QObject_override_virtual_metacall".}
 proc fQObject_virtualbase_event(self: pointer, event: pointer): bool{.importc: "QObject_virtualbase_event".}
 proc fcQObject_override_virtual_event(self: pointer, slot: int) {.importc: "QObject_override_virtual_event".}
 proc fQObject_virtualbase_eventFilter(self: pointer, watched: pointer, event: pointer): bool{.importc: "QObject_virtualbase_eventFilter".}
@@ -135,6 +142,7 @@ proc fQObject_virtualbase_connectNotify(self: pointer, signal: pointer): void{.i
 proc fcQObject_override_virtual_connectNotify(self: pointer, slot: int) {.importc: "QObject_override_virtual_connectNotify".}
 proc fQObject_virtualbase_disconnectNotify(self: pointer, signal: pointer): void{.importc: "QObject_virtualbase_disconnectNotify".}
 proc fcQObject_override_virtual_disconnectNotify(self: pointer, slot: int) {.importc: "QObject_override_virtual_disconnectNotify".}
+proc fcQObject_staticMetaObject(): pointer {.importc: "QObject_staticMetaObject".}
 proc fcQObject_delete(self: pointer) {.importc: "QObject_delete".}
 proc fcQSignalBlocker_new(o: pointer): ptr cQSignalBlocker {.importc: "QSignalBlocker_new".}
 proc fcQSignalBlocker_new2(o: pointer): ptr cQSignalBlocker {.importc: "QSignalBlocker_new2".}
@@ -164,6 +172,9 @@ proc metaObject*(self: gen_qobject_types.QObject, ): gen_qobjectdefs_types.QMeta
 
 proc metacast*(self: gen_qobject_types.QObject, param1: cstring): pointer =
   fcQObject_metacast(self.h, param1)
+
+proc metacall*(self: gen_qobject_types.QObject, param1: cint, param2: cint, param3: pointer): cint =
+  fcQObject_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qobject_types.QObject, s: cstring): string =
   let v_ms = fcQObject_tr(s)
@@ -331,6 +342,65 @@ proc ondestroyed*(self: gen_qobject_types.QObject, slot: QObjectdestroyed1Slot) 
   GC_ref(tmp)
   fcQObject_connect_destroyed1(self.h, cast[int](addr tmp[]))
 
+proc QObjectmetaObject*(self: gen_qobject_types.QObject, ): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fQObject_virtualbase_metaObject(self.h))
+
+type QObjectmetaObjectProc* = proc(): gen_qobjectdefs_types.QMetaObject
+proc onmetaObject*(self: gen_qobject_types.QObject, slot: QObjectmetaObjectProc) =
+  # TODO check subclass
+  var tmp = new QObjectmetaObjectProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQObject_override_virtual_metaObject(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QObject_metaObject(self: ptr cQObject, slot: int): pointer {.exportc: "miqt_exec_callback_QObject_metaObject ".} =
+  var nimfunc = cast[ptr QObjectmetaObjectProc](cast[pointer](slot))
+
+  let virtualReturn = nimfunc[]( )
+
+  virtualReturn.h
+proc QObjectmetacast*(self: gen_qobject_types.QObject, param1: cstring): pointer =
+  fQObject_virtualbase_metacast(self.h, param1)
+
+type QObjectmetacastProc* = proc(param1: cstring): pointer
+proc onmetacast*(self: gen_qobject_types.QObject, slot: QObjectmetacastProc) =
+  # TODO check subclass
+  var tmp = new QObjectmetacastProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQObject_override_virtual_metacast(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QObject_metacast(self: ptr cQObject, slot: int, param1: cstring): pointer {.exportc: "miqt_exec_callback_QObject_metacast ".} =
+  var nimfunc = cast[ptr QObjectmetacastProc](cast[pointer](slot))
+  let slotval1 = (param1)
+
+
+  let virtualReturn = nimfunc[](slotval1 )
+
+  virtualReturn
+proc QObjectmetacall*(self: gen_qobject_types.QObject, param1: cint, param2: cint, param3: pointer): cint =
+  fQObject_virtualbase_metacall(self.h, cint(param1), param2, param3)
+
+type QObjectmetacallProc* = proc(param1: cint, param2: cint, param3: pointer): cint
+proc onmetacall*(self: gen_qobject_types.QObject, slot: QObjectmetacallProc) =
+  # TODO check subclass
+  var tmp = new QObjectmetacallProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQObject_override_virtual_metacall(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QObject_metacall(self: ptr cQObject, slot: int, param1: cint, param2: cint, param3: pointer): cint {.exportc: "miqt_exec_callback_QObject_metacall ".} =
+  var nimfunc = cast[ptr QObjectmetacallProc](cast[pointer](slot))
+  let slotval1 = cint(param1)
+
+  let slotval2 = param2
+
+  let slotval3 = param3
+
+
+  let virtualReturn = nimfunc[](slotval1, slotval2, slotval3 )
+
+  virtualReturn
 proc QObjectevent*(self: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool =
   fQObject_virtualbase_event(self.h, event.h)
 
@@ -456,6 +526,8 @@ proc miqt_exec_callback_QObject_disconnectNotify(self: ptr cQObject, slot: int, 
 
 
   nimfunc[](slotval1)
+proc staticMetaObject*(_: type gen_qobject_types.QObject): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fcQObject_staticMetaObject())
 proc delete*(self: gen_qobject_types.QObject) =
   fcQObject_delete(self.h)
 

@@ -76,11 +76,18 @@ proc fcQRadioButton_new3(text: struct_miqt_string): ptr cQRadioButton {.importc:
 proc fcQRadioButton_new4(text: struct_miqt_string, parent: pointer): ptr cQRadioButton {.importc: "QRadioButton_new4".}
 proc fcQRadioButton_metaObject(self: pointer, ): pointer {.importc: "QRadioButton_metaObject".}
 proc fcQRadioButton_metacast(self: pointer, param1: cstring): pointer {.importc: "QRadioButton_metacast".}
+proc fcQRadioButton_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QRadioButton_metacall".}
 proc fcQRadioButton_tr(s: cstring): struct_miqt_string {.importc: "QRadioButton_tr".}
 proc fcQRadioButton_sizeHint(self: pointer, ): pointer {.importc: "QRadioButton_sizeHint".}
 proc fcQRadioButton_minimumSizeHint(self: pointer, ): pointer {.importc: "QRadioButton_minimumSizeHint".}
 proc fcQRadioButton_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QRadioButton_tr2".}
 proc fcQRadioButton_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QRadioButton_tr3".}
+proc fQRadioButton_virtualbase_metaObject(self: pointer, ): pointer{.importc: "QRadioButton_virtualbase_metaObject".}
+proc fcQRadioButton_override_virtual_metaObject(self: pointer, slot: int) {.importc: "QRadioButton_override_virtual_metaObject".}
+proc fQRadioButton_virtualbase_metacast(self: pointer, param1: cstring): pointer{.importc: "QRadioButton_virtualbase_metacast".}
+proc fcQRadioButton_override_virtual_metacast(self: pointer, slot: int) {.importc: "QRadioButton_override_virtual_metacast".}
+proc fQRadioButton_virtualbase_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint{.importc: "QRadioButton_virtualbase_metacall".}
+proc fcQRadioButton_override_virtual_metacall(self: pointer, slot: int) {.importc: "QRadioButton_override_virtual_metacall".}
 proc fQRadioButton_virtualbase_sizeHint(self: pointer, ): pointer{.importc: "QRadioButton_virtualbase_sizeHint".}
 proc fcQRadioButton_override_virtual_sizeHint(self: pointer, slot: int) {.importc: "QRadioButton_override_virtual_sizeHint".}
 proc fQRadioButton_virtualbase_minimumSizeHint(self: pointer, ): pointer{.importc: "QRadioButton_virtualbase_minimumSizeHint".}
@@ -183,6 +190,7 @@ proc fQRadioButton_virtualbase_connectNotify(self: pointer, signal: pointer): vo
 proc fcQRadioButton_override_virtual_connectNotify(self: pointer, slot: int) {.importc: "QRadioButton_override_virtual_connectNotify".}
 proc fQRadioButton_virtualbase_disconnectNotify(self: pointer, signal: pointer): void{.importc: "QRadioButton_virtualbase_disconnectNotify".}
 proc fcQRadioButton_override_virtual_disconnectNotify(self: pointer, slot: int) {.importc: "QRadioButton_override_virtual_disconnectNotify".}
+proc fcQRadioButton_staticMetaObject(): pointer {.importc: "QRadioButton_staticMetaObject".}
 proc fcQRadioButton_delete(self: pointer) {.importc: "QRadioButton_delete".}
 
 
@@ -205,6 +213,9 @@ proc metaObject*(self: gen_qradiobutton_types.QRadioButton, ): gen_qobjectdefs_t
 
 proc metacast*(self: gen_qradiobutton_types.QRadioButton, param1: cstring): pointer =
   fcQRadioButton_metacast(self.h, param1)
+
+proc metacall*(self: gen_qradiobutton_types.QRadioButton, param1: cint, param2: cint, param3: pointer): cint =
+  fcQRadioButton_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qradiobutton_types.QRadioButton, s: cstring): string =
   let v_ms = fcQRadioButton_tr(s)
@@ -230,6 +241,65 @@ proc tr*(_: type gen_qradiobutton_types.QRadioButton, s: cstring, c: cstring, n:
   c_free(v_ms.data)
   vx_ret
 
+proc QRadioButtonmetaObject*(self: gen_qradiobutton_types.QRadioButton, ): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fQRadioButton_virtualbase_metaObject(self.h))
+
+type QRadioButtonmetaObjectProc* = proc(): gen_qobjectdefs_types.QMetaObject
+proc onmetaObject*(self: gen_qradiobutton_types.QRadioButton, slot: QRadioButtonmetaObjectProc) =
+  # TODO check subclass
+  var tmp = new QRadioButtonmetaObjectProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQRadioButton_override_virtual_metaObject(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QRadioButton_metaObject(self: ptr cQRadioButton, slot: int): pointer {.exportc: "miqt_exec_callback_QRadioButton_metaObject ".} =
+  var nimfunc = cast[ptr QRadioButtonmetaObjectProc](cast[pointer](slot))
+
+  let virtualReturn = nimfunc[]( )
+
+  virtualReturn.h
+proc QRadioButtonmetacast*(self: gen_qradiobutton_types.QRadioButton, param1: cstring): pointer =
+  fQRadioButton_virtualbase_metacast(self.h, param1)
+
+type QRadioButtonmetacastProc* = proc(param1: cstring): pointer
+proc onmetacast*(self: gen_qradiobutton_types.QRadioButton, slot: QRadioButtonmetacastProc) =
+  # TODO check subclass
+  var tmp = new QRadioButtonmetacastProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQRadioButton_override_virtual_metacast(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QRadioButton_metacast(self: ptr cQRadioButton, slot: int, param1: cstring): pointer {.exportc: "miqt_exec_callback_QRadioButton_metacast ".} =
+  var nimfunc = cast[ptr QRadioButtonmetacastProc](cast[pointer](slot))
+  let slotval1 = (param1)
+
+
+  let virtualReturn = nimfunc[](slotval1 )
+
+  virtualReturn
+proc QRadioButtonmetacall*(self: gen_qradiobutton_types.QRadioButton, param1: cint, param2: cint, param3: pointer): cint =
+  fQRadioButton_virtualbase_metacall(self.h, cint(param1), param2, param3)
+
+type QRadioButtonmetacallProc* = proc(param1: cint, param2: cint, param3: pointer): cint
+proc onmetacall*(self: gen_qradiobutton_types.QRadioButton, slot: QRadioButtonmetacallProc) =
+  # TODO check subclass
+  var tmp = new QRadioButtonmetacallProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQRadioButton_override_virtual_metacall(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QRadioButton_metacall(self: ptr cQRadioButton, slot: int, param1: cint, param2: cint, param3: pointer): cint {.exportc: "miqt_exec_callback_QRadioButton_metacall ".} =
+  var nimfunc = cast[ptr QRadioButtonmetacallProc](cast[pointer](slot))
+  let slotval1 = cint(param1)
+
+  let slotval2 = param2
+
+  let slotval3 = param3
+
+
+  let virtualReturn = nimfunc[](slotval1, slotval2, slotval3 )
+
+  virtualReturn
 proc QRadioButtonsizeHint*(self: gen_qradiobutton_types.QRadioButton, ): gen_qsize_types.QSize =
   gen_qsize_types.QSize(h: fQRadioButton_virtualbase_sizeHint(self.h))
 
@@ -1120,5 +1190,7 @@ proc miqt_exec_callback_QRadioButton_disconnectNotify(self: ptr cQRadioButton, s
 
 
   nimfunc[](slotval1)
+proc staticMetaObject*(_: type gen_qradiobutton_types.QRadioButton): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fcQRadioButton_staticMetaObject())
 proc delete*(self: gen_qradiobutton_types.QRadioButton) =
   fcQRadioButton_delete(self.h)

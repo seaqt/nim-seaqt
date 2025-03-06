@@ -97,6 +97,7 @@ QToolBar* QToolBar_new4(struct miqt_string title, QWidget* parent);
 void QToolBar_virtbase(QToolBar* src, QWidget** outptr_QWidget);
 QMetaObject* QToolBar_metaObject(const QToolBar* self);
 void* QToolBar_metacast(QToolBar* self, const char* param1);
+int QToolBar_metacall(QToolBar* self, int param1, int param2, void** param3);
 struct miqt_string QToolBar_tr(const char* s);
 void QToolBar_setMovable(QToolBar* self, bool movable);
 bool QToolBar_isMovable(const QToolBar* self);
@@ -145,6 +146,12 @@ bool QToolBar_event(QToolBar* self, QEvent* event);
 void QToolBar_initStyleOption(const QToolBar* self, QStyleOptionToolBar* option);
 struct miqt_string QToolBar_tr2(const char* s, const char* c);
 struct miqt_string QToolBar_tr3(const char* s, const char* c, int n);
+bool QToolBar_override_virtual_metaObject(void* self, intptr_t slot);
+QMetaObject* QToolBar_virtualbase_metaObject(const void* self);
+bool QToolBar_override_virtual_metacast(void* self, intptr_t slot);
+void* QToolBar_virtualbase_metacast(void* self, const char* param1);
+bool QToolBar_override_virtual_metacall(void* self, intptr_t slot);
+int QToolBar_virtualbase_metacall(void* self, int param1, int param2, void** param3);
 bool QToolBar_override_virtual_actionEvent(void* self, intptr_t slot);
 void QToolBar_virtualbase_actionEvent(void* self, QActionEvent* event);
 bool QToolBar_override_virtual_changeEvent(void* self, intptr_t slot);
@@ -250,6 +257,7 @@ QObject* QToolBar_protectedbase_sender(bool* _dynamic_cast_ok, const void* self)
 int QToolBar_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
 int QToolBar_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
 bool QToolBar_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+const QMetaObject* QToolBar_staticMetaObject();
 void QToolBar_delete(QToolBar* self);
 
 #ifdef __cplusplus

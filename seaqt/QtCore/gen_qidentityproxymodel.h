@@ -55,6 +55,7 @@ QIdentityProxyModel* QIdentityProxyModel_new2(QObject* parent);
 void QIdentityProxyModel_virtbase(QIdentityProxyModel* src, QAbstractProxyModel** outptr_QAbstractProxyModel);
 QMetaObject* QIdentityProxyModel_metaObject(const QIdentityProxyModel* self);
 void* QIdentityProxyModel_metacast(QIdentityProxyModel* self, const char* param1);
+int QIdentityProxyModel_metacall(QIdentityProxyModel* self, int param1, int param2, void** param3);
 struct miqt_string QIdentityProxyModel_tr(const char* s);
 int QIdentityProxyModel_columnCount(const QIdentityProxyModel* self, QModelIndex* parent);
 QModelIndex* QIdentityProxyModel_index(const QIdentityProxyModel* self, int row, int column, QModelIndex* parent);
@@ -77,6 +78,12 @@ bool QIdentityProxyModel_moveRows(QIdentityProxyModel* self, QModelIndex* source
 bool QIdentityProxyModel_moveColumns(QIdentityProxyModel* self, QModelIndex* sourceParent, int sourceColumn, int count, QModelIndex* destinationParent, int destinationChild);
 struct miqt_string QIdentityProxyModel_tr2(const char* s, const char* c);
 struct miqt_string QIdentityProxyModel_tr3(const char* s, const char* c, int n);
+bool QIdentityProxyModel_override_virtual_metaObject(void* self, intptr_t slot);
+QMetaObject* QIdentityProxyModel_virtualbase_metaObject(const void* self);
+bool QIdentityProxyModel_override_virtual_metacast(void* self, intptr_t slot);
+void* QIdentityProxyModel_virtualbase_metacast(void* self, const char* param1);
+bool QIdentityProxyModel_override_virtual_metacall(void* self, intptr_t slot);
+int QIdentityProxyModel_virtualbase_metacall(void* self, int param1, int param2, void** param3);
 bool QIdentityProxyModel_override_virtual_columnCount(void* self, intptr_t slot);
 int QIdentityProxyModel_virtualbase_columnCount(const void* self, QModelIndex* parent);
 bool QIdentityProxyModel_override_virtual_index(void* self, intptr_t slot);
@@ -200,6 +207,7 @@ QObject* QIdentityProxyModel_protectedbase_sender(bool* _dynamic_cast_ok, const 
 int QIdentityProxyModel_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
 int QIdentityProxyModel_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
 bool QIdentityProxyModel_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+const QMetaObject* QIdentityProxyModel_staticMetaObject();
 void QIdentityProxyModel_delete(QIdentityProxyModel* self);
 
 #ifdef __cplusplus

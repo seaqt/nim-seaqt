@@ -38,6 +38,9 @@ extern "C" {
 
 void miqt_exec_callback_QQuickFramebufferObject_textureFollowsItemSizeChanged(intptr_t, bool);
 void miqt_exec_callback_QQuickFramebufferObject_mirrorVerticallyChanged(intptr_t, bool);
+QMetaObject* miqt_exec_callback_QQuickFramebufferObject_metaObject(const QQuickFramebufferObject*, intptr_t);
+void* miqt_exec_callback_QQuickFramebufferObject_metacast(QQuickFramebufferObject*, intptr_t, const char*);
+int miqt_exec_callback_QQuickFramebufferObject_metacall(QQuickFramebufferObject*, intptr_t, int, int, void**);
 QQuickFramebufferObject__Renderer* miqt_exec_callback_QQuickFramebufferObject_createRenderer(const QQuickFramebufferObject*, intptr_t);
 bool miqt_exec_callback_QQuickFramebufferObject_isTextureProvider(const QQuickFramebufferObject*, intptr_t);
 QSGTextureProvider* miqt_exec_callback_QQuickFramebufferObject_textureProvider(const QQuickFramebufferObject*, intptr_t);
@@ -91,6 +94,62 @@ public:
 	VirtualQQuickFramebufferObject(QQuickItem* parent): QQuickFramebufferObject(parent) {};
 
 	virtual ~VirtualQQuickFramebufferObject() override = default;
+
+	// cgo.Handle value for overwritten implementation
+	intptr_t handle__metaObject = 0;
+
+	// Subclass to allow providing a Go implementation
+	virtual const QMetaObject* metaObject() const override {
+		if (handle__metaObject == 0) {
+			return QQuickFramebufferObject::metaObject();
+		}
+		
+
+		QMetaObject* callback_return_value = miqt_exec_callback_QQuickFramebufferObject_metaObject(this, handle__metaObject);
+
+		return callback_return_value;
+	}
+
+	friend QMetaObject* QQuickFramebufferObject_virtualbase_metaObject(const void* self);
+
+	// cgo.Handle value for overwritten implementation
+	intptr_t handle__metacast = 0;
+
+	// Subclass to allow providing a Go implementation
+	virtual void* qt_metacast(const char* param1) override {
+		if (handle__metacast == 0) {
+			return QQuickFramebufferObject::qt_metacast(param1);
+		}
+		
+		const char* sigval1 = (const char*) param1;
+
+		void* callback_return_value = miqt_exec_callback_QQuickFramebufferObject_metacast(this, handle__metacast, sigval1);
+
+		return callback_return_value;
+	}
+
+	friend void* QQuickFramebufferObject_virtualbase_metacast(void* self, const char* param1);
+
+	// cgo.Handle value for overwritten implementation
+	intptr_t handle__metacall = 0;
+
+	// Subclass to allow providing a Go implementation
+	virtual int qt_metacall(QMetaObject::Call param1, int param2, void** param3) override {
+		if (handle__metacall == 0) {
+			return QQuickFramebufferObject::qt_metacall(param1, param2, param3);
+		}
+		
+		QMetaObject::Call param1_ret = param1;
+		int sigval1 = static_cast<int>(param1_ret);
+		int sigval2 = param2;
+		void** sigval3 = param3;
+
+		int callback_return_value = miqt_exec_callback_QQuickFramebufferObject_metacall(this, handle__metacall, sigval1, sigval2, sigval3);
+
+		return static_cast<int>(callback_return_value);
+	}
+
+	friend int QQuickFramebufferObject_virtualbase_metacall(void* self, int param1, int param2, void** param3);
 
 	// cgo.Handle value for overwritten implementation
 	intptr_t handle__createRenderer = 0;
@@ -917,6 +976,10 @@ void* QQuickFramebufferObject_metacast(QQuickFramebufferObject* self, const char
 	return self->qt_metacast(param1);
 }
 
+int QQuickFramebufferObject_metacall(QQuickFramebufferObject* self, int param1, int param2, void** param3) {
+	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
+}
+
 struct miqt_string QQuickFramebufferObject_tr(const char* s) {
 	QString _ret = QQuickFramebufferObject::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
@@ -1002,6 +1065,54 @@ struct miqt_string QQuickFramebufferObject_tr3(const char* s, const char* c, int
 	_ms.data = static_cast<char*>(malloc(_ms.len));
 	memcpy(_ms.data, _b.data(), _ms.len);
 	return _ms;
+}
+
+bool QQuickFramebufferObject_override_virtual_metaObject(void* self, intptr_t slot) {
+	VirtualQQuickFramebufferObject* self_cast = dynamic_cast<VirtualQQuickFramebufferObject*>( (QQuickFramebufferObject*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+	
+	self_cast->handle__metaObject = slot;
+	return true;
+}
+
+QMetaObject* QQuickFramebufferObject_virtualbase_metaObject(const void* self) {
+
+	return (QMetaObject*) ( (const VirtualQQuickFramebufferObject*)(self) )->QQuickFramebufferObject::metaObject();
+
+}
+
+bool QQuickFramebufferObject_override_virtual_metacast(void* self, intptr_t slot) {
+	VirtualQQuickFramebufferObject* self_cast = dynamic_cast<VirtualQQuickFramebufferObject*>( (QQuickFramebufferObject*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+	
+	self_cast->handle__metacast = slot;
+	return true;
+}
+
+void* QQuickFramebufferObject_virtualbase_metacast(void* self, const char* param1) {
+
+	return ( (VirtualQQuickFramebufferObject*)(self) )->QQuickFramebufferObject::qt_metacast(param1);
+
+}
+
+bool QQuickFramebufferObject_override_virtual_metacall(void* self, intptr_t slot) {
+	VirtualQQuickFramebufferObject* self_cast = dynamic_cast<VirtualQQuickFramebufferObject*>( (QQuickFramebufferObject*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+	
+	self_cast->handle__metacall = slot;
+	return true;
+}
+
+int QQuickFramebufferObject_virtualbase_metacall(void* self, int param1, int param2, void** param3) {
+
+	return ( (VirtualQQuickFramebufferObject*)(self) )->QQuickFramebufferObject::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
+
 }
 
 bool QQuickFramebufferObject_override_virtual_createRenderer(void* self, intptr_t slot) {
@@ -1670,6 +1781,7 @@ void QQuickFramebufferObject_virtualbase_disconnectNotify(void* self, QMetaMetho
 
 }
 
+const QMetaObject* QQuickFramebufferObject_staticMetaObject() { return &QQuickFramebufferObject::staticMetaObject; }
 bool QQuickFramebufferObject_protectedbase_isComponentComplete(bool* _dynamic_cast_ok, const void* self) {
 	VirtualQQuickFramebufferObject* self_cast = dynamic_cast<VirtualQQuickFramebufferObject*>( (QQuickFramebufferObject*)(self) );
 	if (self_cast == nullptr) {

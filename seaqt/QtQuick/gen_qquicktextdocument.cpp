@@ -17,6 +17,9 @@
 extern "C" {
 #endif
 
+QMetaObject* miqt_exec_callback_QQuickTextDocument_metaObject(const QQuickTextDocument*, intptr_t);
+void* miqt_exec_callback_QQuickTextDocument_metacast(QQuickTextDocument*, intptr_t, const char*);
+int miqt_exec_callback_QQuickTextDocument_metacall(QQuickTextDocument*, intptr_t, int, int, void**);
 bool miqt_exec_callback_QQuickTextDocument_event(QQuickTextDocument*, intptr_t, QEvent*);
 bool miqt_exec_callback_QQuickTextDocument_eventFilter(QQuickTextDocument*, intptr_t, QObject*, QEvent*);
 void miqt_exec_callback_QQuickTextDocument_timerEvent(QQuickTextDocument*, intptr_t, QTimerEvent*);
@@ -34,6 +37,62 @@ public:
 	VirtualQQuickTextDocument(QQuickItem* parent): QQuickTextDocument(parent) {};
 
 	virtual ~VirtualQQuickTextDocument() override = default;
+
+	// cgo.Handle value for overwritten implementation
+	intptr_t handle__metaObject = 0;
+
+	// Subclass to allow providing a Go implementation
+	virtual const QMetaObject* metaObject() const override {
+		if (handle__metaObject == 0) {
+			return QQuickTextDocument::metaObject();
+		}
+		
+
+		QMetaObject* callback_return_value = miqt_exec_callback_QQuickTextDocument_metaObject(this, handle__metaObject);
+
+		return callback_return_value;
+	}
+
+	friend QMetaObject* QQuickTextDocument_virtualbase_metaObject(const void* self);
+
+	// cgo.Handle value for overwritten implementation
+	intptr_t handle__metacast = 0;
+
+	// Subclass to allow providing a Go implementation
+	virtual void* qt_metacast(const char* param1) override {
+		if (handle__metacast == 0) {
+			return QQuickTextDocument::qt_metacast(param1);
+		}
+		
+		const char* sigval1 = (const char*) param1;
+
+		void* callback_return_value = miqt_exec_callback_QQuickTextDocument_metacast(this, handle__metacast, sigval1);
+
+		return callback_return_value;
+	}
+
+	friend void* QQuickTextDocument_virtualbase_metacast(void* self, const char* param1);
+
+	// cgo.Handle value for overwritten implementation
+	intptr_t handle__metacall = 0;
+
+	// Subclass to allow providing a Go implementation
+	virtual int qt_metacall(QMetaObject::Call param1, int param2, void** param3) override {
+		if (handle__metacall == 0) {
+			return QQuickTextDocument::qt_metacall(param1, param2, param3);
+		}
+		
+		QMetaObject::Call param1_ret = param1;
+		int sigval1 = static_cast<int>(param1_ret);
+		int sigval2 = param2;
+		void** sigval3 = param3;
+
+		int callback_return_value = miqt_exec_callback_QQuickTextDocument_metacall(this, handle__metacall, sigval1, sigval2, sigval3);
+
+		return static_cast<int>(callback_return_value);
+	}
+
+	friend int QQuickTextDocument_virtualbase_metacall(void* self, int param1, int param2, void** param3);
 
 	// cgo.Handle value for overwritten implementation
 	intptr_t handle__event = 0;
@@ -194,6 +253,10 @@ void* QQuickTextDocument_metacast(QQuickTextDocument* self, const char* param1) 
 	return self->qt_metacast(param1);
 }
 
+int QQuickTextDocument_metacall(QQuickTextDocument* self, int param1, int param2, void** param3) {
+	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
+}
+
 struct miqt_string QQuickTextDocument_tr(const char* s) {
 	QString _ret = QQuickTextDocument::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
@@ -229,6 +292,54 @@ struct miqt_string QQuickTextDocument_tr3(const char* s, const char* c, int n) {
 	_ms.data = static_cast<char*>(malloc(_ms.len));
 	memcpy(_ms.data, _b.data(), _ms.len);
 	return _ms;
+}
+
+bool QQuickTextDocument_override_virtual_metaObject(void* self, intptr_t slot) {
+	VirtualQQuickTextDocument* self_cast = dynamic_cast<VirtualQQuickTextDocument*>( (QQuickTextDocument*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+	
+	self_cast->handle__metaObject = slot;
+	return true;
+}
+
+QMetaObject* QQuickTextDocument_virtualbase_metaObject(const void* self) {
+
+	return (QMetaObject*) ( (const VirtualQQuickTextDocument*)(self) )->QQuickTextDocument::metaObject();
+
+}
+
+bool QQuickTextDocument_override_virtual_metacast(void* self, intptr_t slot) {
+	VirtualQQuickTextDocument* self_cast = dynamic_cast<VirtualQQuickTextDocument*>( (QQuickTextDocument*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+	
+	self_cast->handle__metacast = slot;
+	return true;
+}
+
+void* QQuickTextDocument_virtualbase_metacast(void* self, const char* param1) {
+
+	return ( (VirtualQQuickTextDocument*)(self) )->QQuickTextDocument::qt_metacast(param1);
+
+}
+
+bool QQuickTextDocument_override_virtual_metacall(void* self, intptr_t slot) {
+	VirtualQQuickTextDocument* self_cast = dynamic_cast<VirtualQQuickTextDocument*>( (QQuickTextDocument*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+	
+	self_cast->handle__metacall = slot;
+	return true;
+}
+
+int QQuickTextDocument_virtualbase_metacall(void* self, int param1, int param2, void** param3) {
+
+	return ( (VirtualQQuickTextDocument*)(self) )->QQuickTextDocument::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
+
 }
 
 bool QQuickTextDocument_override_virtual_event(void* self, intptr_t slot) {
@@ -343,6 +454,7 @@ void QQuickTextDocument_virtualbase_disconnectNotify(void* self, QMetaMethod* si
 
 }
 
+const QMetaObject* QQuickTextDocument_staticMetaObject() { return &QQuickTextDocument::staticMetaObject; }
 QObject* QQuickTextDocument_protectedbase_sender(bool* _dynamic_cast_ok, const void* self) {
 	VirtualQQuickTextDocument* self_cast = dynamic_cast<VirtualQQuickTextDocument*>( (QQuickTextDocument*)(self) );
 	if (self_cast == nullptr) {

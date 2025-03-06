@@ -254,6 +254,7 @@ import ./gen_qtextformat_types
 export gen_qtextformat_types
 
 import
+  ../QtCore/gen_qobjectdefs_types,
   ../QtCore/gen_qvariant_types,
   ./gen_qbrush_types,
   ./gen_qcolor_types,
@@ -262,6 +263,7 @@ import
   ./gen_qtextoption_types,
   std/tables
 export
+  gen_qobjectdefs_types,
   gen_qvariant_types,
   gen_qbrush_types,
   gen_qcolor_types,
@@ -343,6 +345,7 @@ proc fcQTextFormat_clearBackground(self: pointer, ): void {.importc: "QTextForma
 proc fcQTextFormat_setForeground(self: pointer, brush: pointer): void {.importc: "QTextFormat_setForeground".}
 proc fcQTextFormat_foreground(self: pointer, ): pointer {.importc: "QTextFormat_foreground".}
 proc fcQTextFormat_clearForeground(self: pointer, ): void {.importc: "QTextFormat_clearForeground".}
+proc fcQTextFormat_staticMetaObject(): pointer {.importc: "QTextFormat_staticMetaObject".}
 proc fcQTextFormat_delete(self: pointer) {.importc: "QTextFormat_delete".}
 proc fcQTextCharFormat_new(): ptr cQTextCharFormat {.importc: "QTextCharFormat_new".}
 proc fcQTextCharFormat_new2(param1: pointer): ptr cQTextCharFormat {.importc: "QTextCharFormat_new2".}
@@ -781,6 +784,8 @@ proc foreground*(self: gen_qtextformat_types.QTextFormat, ): gen_qbrush_types.QB
 proc clearForeground*(self: gen_qtextformat_types.QTextFormat, ): void =
   fcQTextFormat_clearForeground(self.h)
 
+proc staticMetaObject*(_: type gen_qtextformat_types.QTextFormat): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fcQTextFormat_staticMetaObject())
 proc delete*(self: gen_qtextformat_types.QTextFormat) =
   fcQTextFormat_delete(self.h)
 

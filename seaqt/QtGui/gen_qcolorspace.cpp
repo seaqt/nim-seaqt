@@ -248,6 +248,7 @@ QColorSpace* QColorSpace_withTransferFunction2(const QColorSpace* self, int tran
 	return new QColorSpace(self->withTransferFunction(static_cast<QColorSpace::TransferFunction>(transferFunction), static_cast<float>(gamma)));
 }
 
+const QMetaObject* QColorSpace_staticMetaObject() { return &QColorSpace::staticMetaObject; }
 void QColorSpace_delete(QColorSpace* self) {
 	delete self;
 }

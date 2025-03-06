@@ -66,9 +66,11 @@ import ./gen_qnetworkproxy_types
 export gen_qnetworkproxy_types
 
 import
+  ../QtCore/gen_qobjectdefs_types,
   ../QtCore/gen_qurl_types,
   ../QtCore/gen_qvariant_types
 export
+  gen_qobjectdefs_types,
   gen_qurl_types,
   gen_qvariant_types
 
@@ -102,6 +104,7 @@ proc fcQNetworkProxyQuery_protocolTag(self: pointer, ): struct_miqt_string {.imp
 proc fcQNetworkProxyQuery_setProtocolTag(self: pointer, protocolTag: struct_miqt_string): void {.importc: "QNetworkProxyQuery_setProtocolTag".}
 proc fcQNetworkProxyQuery_url(self: pointer, ): pointer {.importc: "QNetworkProxyQuery_url".}
 proc fcQNetworkProxyQuery_setUrl(self: pointer, url: pointer): void {.importc: "QNetworkProxyQuery_setUrl".}
+proc fcQNetworkProxyQuery_staticMetaObject(): pointer {.importc: "QNetworkProxyQuery_staticMetaObject".}
 proc fcQNetworkProxyQuery_delete(self: pointer) {.importc: "QNetworkProxyQuery_delete".}
 proc fcQNetworkProxy_new(): ptr cQNetworkProxy {.importc: "QNetworkProxy_new".}
 proc fcQNetworkProxy_new2(typeVal: cint): ptr cQNetworkProxy {.importc: "QNetworkProxy_new2".}
@@ -236,6 +239,8 @@ proc url*(self: gen_qnetworkproxy_types.QNetworkProxyQuery, ): gen_qurl_types.QU
 proc setUrl*(self: gen_qnetworkproxy_types.QNetworkProxyQuery, url: gen_qurl_types.QUrl): void =
   fcQNetworkProxyQuery_setUrl(self.h, url.h)
 
+proc staticMetaObject*(_: type gen_qnetworkproxy_types.QNetworkProxyQuery): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fcQNetworkProxyQuery_staticMetaObject())
 proc delete*(self: gen_qnetworkproxy_types.QNetworkProxyQuery) =
   fcQNetworkProxyQuery_delete(self.h)
 

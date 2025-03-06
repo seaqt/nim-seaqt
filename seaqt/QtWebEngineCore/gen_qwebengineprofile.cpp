@@ -26,6 +26,9 @@ extern "C" {
 #endif
 
 void miqt_exec_callback_QWebEngineProfile_downloadRequested(intptr_t, QWebEngineDownloadRequest*);
+QMetaObject* miqt_exec_callback_QWebEngineProfile_metaObject(const QWebEngineProfile*, intptr_t);
+void* miqt_exec_callback_QWebEngineProfile_metacast(QWebEngineProfile*, intptr_t, const char*);
+int miqt_exec_callback_QWebEngineProfile_metacall(QWebEngineProfile*, intptr_t, int, int, void**);
 bool miqt_exec_callback_QWebEngineProfile_event(QWebEngineProfile*, intptr_t, QEvent*);
 bool miqt_exec_callback_QWebEngineProfile_eventFilter(QWebEngineProfile*, intptr_t, QObject*, QEvent*);
 void miqt_exec_callback_QWebEngineProfile_timerEvent(QWebEngineProfile*, intptr_t, QTimerEvent*);
@@ -46,6 +49,62 @@ public:
 	VirtualQWebEngineProfile(const QString& name, QObject* parent): QWebEngineProfile(name, parent) {};
 
 	virtual ~VirtualQWebEngineProfile() override = default;
+
+	// cgo.Handle value for overwritten implementation
+	intptr_t handle__metaObject = 0;
+
+	// Subclass to allow providing a Go implementation
+	virtual const QMetaObject* metaObject() const override {
+		if (handle__metaObject == 0) {
+			return QWebEngineProfile::metaObject();
+		}
+		
+
+		QMetaObject* callback_return_value = miqt_exec_callback_QWebEngineProfile_metaObject(this, handle__metaObject);
+
+		return callback_return_value;
+	}
+
+	friend QMetaObject* QWebEngineProfile_virtualbase_metaObject(const void* self);
+
+	// cgo.Handle value for overwritten implementation
+	intptr_t handle__metacast = 0;
+
+	// Subclass to allow providing a Go implementation
+	virtual void* qt_metacast(const char* param1) override {
+		if (handle__metacast == 0) {
+			return QWebEngineProfile::qt_metacast(param1);
+		}
+		
+		const char* sigval1 = (const char*) param1;
+
+		void* callback_return_value = miqt_exec_callback_QWebEngineProfile_metacast(this, handle__metacast, sigval1);
+
+		return callback_return_value;
+	}
+
+	friend void* QWebEngineProfile_virtualbase_metacast(void* self, const char* param1);
+
+	// cgo.Handle value for overwritten implementation
+	intptr_t handle__metacall = 0;
+
+	// Subclass to allow providing a Go implementation
+	virtual int qt_metacall(QMetaObject::Call param1, int param2, void** param3) override {
+		if (handle__metacall == 0) {
+			return QWebEngineProfile::qt_metacall(param1, param2, param3);
+		}
+		
+		QMetaObject::Call param1_ret = param1;
+		int sigval1 = static_cast<int>(param1_ret);
+		int sigval2 = param2;
+		void** sigval3 = param3;
+
+		int callback_return_value = miqt_exec_callback_QWebEngineProfile_metacall(this, handle__metacall, sigval1, sigval2, sigval3);
+
+		return static_cast<int>(callback_return_value);
+	}
+
+	friend int QWebEngineProfile_virtualbase_metacall(void* self, int param1, int param2, void** param3);
 
 	// cgo.Handle value for overwritten implementation
 	intptr_t handle__event = 0;
@@ -218,6 +277,10 @@ QMetaObject* QWebEngineProfile_metaObject(const QWebEngineProfile* self) {
 
 void* QWebEngineProfile_metacast(QWebEngineProfile* self, const char* param1) {
 	return self->qt_metacast(param1);
+}
+
+int QWebEngineProfile_metacall(QWebEngineProfile* self, int param1, int param2, void** param3) {
+	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
 struct miqt_string QWebEngineProfile_tr(const char* s) {
@@ -493,6 +556,54 @@ struct miqt_string QWebEngineProfile_tr3(const char* s, const char* c, int n) {
 	return _ms;
 }
 
+bool QWebEngineProfile_override_virtual_metaObject(void* self, intptr_t slot) {
+	VirtualQWebEngineProfile* self_cast = dynamic_cast<VirtualQWebEngineProfile*>( (QWebEngineProfile*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+	
+	self_cast->handle__metaObject = slot;
+	return true;
+}
+
+QMetaObject* QWebEngineProfile_virtualbase_metaObject(const void* self) {
+
+	return (QMetaObject*) ( (const VirtualQWebEngineProfile*)(self) )->QWebEngineProfile::metaObject();
+
+}
+
+bool QWebEngineProfile_override_virtual_metacast(void* self, intptr_t slot) {
+	VirtualQWebEngineProfile* self_cast = dynamic_cast<VirtualQWebEngineProfile*>( (QWebEngineProfile*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+	
+	self_cast->handle__metacast = slot;
+	return true;
+}
+
+void* QWebEngineProfile_virtualbase_metacast(void* self, const char* param1) {
+
+	return ( (VirtualQWebEngineProfile*)(self) )->QWebEngineProfile::qt_metacast(param1);
+
+}
+
+bool QWebEngineProfile_override_virtual_metacall(void* self, intptr_t slot) {
+	VirtualQWebEngineProfile* self_cast = dynamic_cast<VirtualQWebEngineProfile*>( (QWebEngineProfile*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+	
+	self_cast->handle__metacall = slot;
+	return true;
+}
+
+int QWebEngineProfile_virtualbase_metacall(void* self, int param1, int param2, void** param3) {
+
+	return ( (VirtualQWebEngineProfile*)(self) )->QWebEngineProfile::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
+
+}
+
 bool QWebEngineProfile_override_virtual_event(void* self, intptr_t slot) {
 	VirtualQWebEngineProfile* self_cast = dynamic_cast<VirtualQWebEngineProfile*>( (QWebEngineProfile*)(self) );
 	if (self_cast == nullptr) {
@@ -605,6 +716,7 @@ void QWebEngineProfile_virtualbase_disconnectNotify(void* self, QMetaMethod* sig
 
 }
 
+const QMetaObject* QWebEngineProfile_staticMetaObject() { return &QWebEngineProfile::staticMetaObject; }
 QObject* QWebEngineProfile_protectedbase_sender(bool* _dynamic_cast_ok, const void* self) {
 	VirtualQWebEngineProfile* self_cast = dynamic_cast<VirtualQWebEngineProfile*>( (QWebEngineProfile*)(self) );
 	if (self_cast == nullptr) {

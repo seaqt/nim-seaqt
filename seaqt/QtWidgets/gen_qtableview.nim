@@ -86,6 +86,7 @@ proc fcQTableView_new(parent: pointer): ptr cQTableView {.importc: "QTableView_n
 proc fcQTableView_new2(): ptr cQTableView {.importc: "QTableView_new2".}
 proc fcQTableView_metaObject(self: pointer, ): pointer {.importc: "QTableView_metaObject".}
 proc fcQTableView_metacast(self: pointer, param1: cstring): pointer {.importc: "QTableView_metacast".}
+proc fcQTableView_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QTableView_metacall".}
 proc fcQTableView_tr(s: cstring): struct_miqt_string {.importc: "QTableView_tr".}
 proc fcQTableView_setModel(self: pointer, model: pointer): void {.importc: "QTableView_setModel".}
 proc fcQTableView_setRootIndex(self: pointer, index: pointer): void {.importc: "QTableView_setRootIndex".}
@@ -137,6 +138,12 @@ proc fcQTableView_sortByColumn(self: pointer, column: cint, order: cint): void {
 proc fcQTableView_setShowGrid(self: pointer, show: bool): void {.importc: "QTableView_setShowGrid".}
 proc fcQTableView_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QTableView_tr2".}
 proc fcQTableView_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QTableView_tr3".}
+proc fQTableView_virtualbase_metaObject(self: pointer, ): pointer{.importc: "QTableView_virtualbase_metaObject".}
+proc fcQTableView_override_virtual_metaObject(self: pointer, slot: int) {.importc: "QTableView_override_virtual_metaObject".}
+proc fQTableView_virtualbase_metacast(self: pointer, param1: cstring): pointer{.importc: "QTableView_virtualbase_metacast".}
+proc fcQTableView_override_virtual_metacast(self: pointer, slot: int) {.importc: "QTableView_override_virtual_metacast".}
+proc fQTableView_virtualbase_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint{.importc: "QTableView_virtualbase_metacall".}
+proc fcQTableView_override_virtual_metacall(self: pointer, slot: int) {.importc: "QTableView_override_virtual_metacall".}
 proc fQTableView_virtualbase_setModel(self: pointer, model: pointer): void{.importc: "QTableView_virtualbase_setModel".}
 proc fcQTableView_override_virtual_setModel(self: pointer, slot: int) {.importc: "QTableView_override_virtual_setModel".}
 proc fQTableView_virtualbase_setRootIndex(self: pointer, index: pointer): void{.importc: "QTableView_virtualbase_setRootIndex".}
@@ -319,6 +326,7 @@ proc fQTableView_virtualbase_connectNotify(self: pointer, signal: pointer): void
 proc fcQTableView_override_virtual_connectNotify(self: pointer, slot: int) {.importc: "QTableView_override_virtual_connectNotify".}
 proc fQTableView_virtualbase_disconnectNotify(self: pointer, signal: pointer): void{.importc: "QTableView_virtualbase_disconnectNotify".}
 proc fcQTableView_override_virtual_disconnectNotify(self: pointer, slot: int) {.importc: "QTableView_override_virtual_disconnectNotify".}
+proc fcQTableView_staticMetaObject(): pointer {.importc: "QTableView_staticMetaObject".}
 proc fcQTableView_delete(self: pointer) {.importc: "QTableView_delete".}
 
 
@@ -335,6 +343,9 @@ proc metaObject*(self: gen_qtableview_types.QTableView, ): gen_qobjectdefs_types
 
 proc metacast*(self: gen_qtableview_types.QTableView, param1: cstring): pointer =
   fcQTableView_metacast(self.h, param1)
+
+proc metacall*(self: gen_qtableview_types.QTableView, param1: cint, param2: cint, param3: pointer): cint =
+  fcQTableView_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qtableview_types.QTableView, s: cstring): string =
   let v_ms = fcQTableView_tr(s)
@@ -498,6 +509,65 @@ proc tr*(_: type gen_qtableview_types.QTableView, s: cstring, c: cstring, n: cin
   c_free(v_ms.data)
   vx_ret
 
+proc QTableViewmetaObject*(self: gen_qtableview_types.QTableView, ): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fQTableView_virtualbase_metaObject(self.h))
+
+type QTableViewmetaObjectProc* = proc(): gen_qobjectdefs_types.QMetaObject
+proc onmetaObject*(self: gen_qtableview_types.QTableView, slot: QTableViewmetaObjectProc) =
+  # TODO check subclass
+  var tmp = new QTableViewmetaObjectProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQTableView_override_virtual_metaObject(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QTableView_metaObject(self: ptr cQTableView, slot: int): pointer {.exportc: "miqt_exec_callback_QTableView_metaObject ".} =
+  var nimfunc = cast[ptr QTableViewmetaObjectProc](cast[pointer](slot))
+
+  let virtualReturn = nimfunc[]( )
+
+  virtualReturn.h
+proc QTableViewmetacast*(self: gen_qtableview_types.QTableView, param1: cstring): pointer =
+  fQTableView_virtualbase_metacast(self.h, param1)
+
+type QTableViewmetacastProc* = proc(param1: cstring): pointer
+proc onmetacast*(self: gen_qtableview_types.QTableView, slot: QTableViewmetacastProc) =
+  # TODO check subclass
+  var tmp = new QTableViewmetacastProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQTableView_override_virtual_metacast(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QTableView_metacast(self: ptr cQTableView, slot: int, param1: cstring): pointer {.exportc: "miqt_exec_callback_QTableView_metacast ".} =
+  var nimfunc = cast[ptr QTableViewmetacastProc](cast[pointer](slot))
+  let slotval1 = (param1)
+
+
+  let virtualReturn = nimfunc[](slotval1 )
+
+  virtualReturn
+proc QTableViewmetacall*(self: gen_qtableview_types.QTableView, param1: cint, param2: cint, param3: pointer): cint =
+  fQTableView_virtualbase_metacall(self.h, cint(param1), param2, param3)
+
+type QTableViewmetacallProc* = proc(param1: cint, param2: cint, param3: pointer): cint
+proc onmetacall*(self: gen_qtableview_types.QTableView, slot: QTableViewmetacallProc) =
+  # TODO check subclass
+  var tmp = new QTableViewmetacallProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQTableView_override_virtual_metacall(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QTableView_metacall(self: ptr cQTableView, slot: int, param1: cint, param2: cint, param3: pointer): cint {.exportc: "miqt_exec_callback_QTableView_metacall ".} =
+  var nimfunc = cast[ptr QTableViewmetacallProc](cast[pointer](slot))
+  let slotval1 = cint(param1)
+
+  let slotval2 = param2
+
+  let slotval3 = param3
+
+
+  let virtualReturn = nimfunc[](slotval1, slotval2, slotval3 )
+
+  virtualReturn
 proc QTableViewsetModel*(self: gen_qtableview_types.QTableView, model: gen_qabstractitemmodel_types.QAbstractItemModel): void =
   fQTableView_virtualbase_setModel(self.h, model.h)
 
@@ -2133,5 +2203,7 @@ proc miqt_exec_callback_QTableView_disconnectNotify(self: ptr cQTableView, slot:
 
 
   nimfunc[](slotval1)
+proc staticMetaObject*(_: type gen_qtableview_types.QTableView): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fcQTableView_staticMetaObject())
 proc delete*(self: gen_qtableview_types.QTableView) =
   fcQTableView_delete(self.h)

@@ -59,6 +59,7 @@ QQmlComponent* QQmlComponent_new12(QQmlEngine* param1, QUrl* url, int mode, QObj
 void QQmlComponent_virtbase(QQmlComponent* src, QObject** outptr_QObject);
 QMetaObject* QQmlComponent_metaObject(const QQmlComponent* self);
 void* QQmlComponent_metacast(QQmlComponent* self, const char* param1);
+int QQmlComponent_metacall(QQmlComponent* self, int param1, int param2, void** param3);
 struct miqt_string QQmlComponent_tr(const char* s);
 int QQmlComponent_status(const QQmlComponent* self);
 bool QQmlComponent_isNull(const QQmlComponent* self);
@@ -90,6 +91,12 @@ struct miqt_string QQmlComponent_tr3(const char* s, const char* c, int n);
 QObject* QQmlComponent_createWithInitialProperties2(QQmlComponent* self, struct miqt_map /* of struct miqt_string to QVariant* */  initialProperties, QQmlContext* context);
 void QQmlComponent_create2(QQmlComponent* self, QQmlIncubator* param1, QQmlContext* context);
 void QQmlComponent_create3(QQmlComponent* self, QQmlIncubator* param1, QQmlContext* context, QQmlContext* forContext);
+bool QQmlComponent_override_virtual_metaObject(void* self, intptr_t slot);
+QMetaObject* QQmlComponent_virtualbase_metaObject(const void* self);
+bool QQmlComponent_override_virtual_metacast(void* self, intptr_t slot);
+void* QQmlComponent_virtualbase_metacast(void* self, const char* param1);
+bool QQmlComponent_override_virtual_metacall(void* self, intptr_t slot);
+int QQmlComponent_virtualbase_metacall(void* self, int param1, int param2, void** param3);
 bool QQmlComponent_override_virtual_create(void* self, intptr_t slot);
 QObject* QQmlComponent_virtualbase_create(void* self, QQmlContext* context);
 bool QQmlComponent_override_virtual_beginCreate(void* self, intptr_t slot);
@@ -117,6 +124,7 @@ QObject* QQmlComponent_protectedbase_sender(bool* _dynamic_cast_ok, const void* 
 int QQmlComponent_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
 int QQmlComponent_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
 bool QQmlComponent_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+const QMetaObject* QQmlComponent_staticMetaObject();
 void QQmlComponent_delete(QQmlComponent* self);
 
 #ifdef __cplusplus

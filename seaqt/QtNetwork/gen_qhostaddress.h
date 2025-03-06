@@ -65,6 +65,7 @@ bool QHostAddress_isBroadcast(const QHostAddress* self);
 struct miqt_map /* tuple of QHostAddress* and int */  QHostAddress_parseSubnet(struct miqt_string subnet);
 unsigned int QHostAddress_toIPv4Address1(const QHostAddress* self, bool* ok);
 bool QHostAddress_isEqual2(const QHostAddress* self, QHostAddress* address, int mode);
+const QMetaObject* QHostAddress_staticMetaObject();
 void QHostAddress_delete(QHostAddress* self);
 
 #ifdef __cplusplus

@@ -217,6 +217,7 @@ struct miqt_string QMimeType_filterString(const QMimeType* self) {
 	return _ms;
 }
 
+const QMetaObject* QMimeType_staticMetaObject() { return &QMimeType::staticMetaObject; }
 void QMimeType_delete(QMimeType* self) {
 	delete self;
 }

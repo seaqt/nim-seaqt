@@ -30,6 +30,10 @@ void* QSGTextureProvider_metacast(QSGTextureProvider* self, const char* param1) 
 	return self->qt_metacast(param1);
 }
 
+int QSGTextureProvider_metacall(QSGTextureProvider* self, int param1, int param2, void** param3) {
+	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
+}
+
 struct miqt_string QSGTextureProvider_tr(const char* s) {
 	QString _ret = QSGTextureProvider::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
@@ -77,6 +81,7 @@ struct miqt_string QSGTextureProvider_tr3(const char* s, const char* c, int n) {
 	return _ms;
 }
 
+const QMetaObject* QSGTextureProvider_staticMetaObject() { return &QSGTextureProvider::staticMetaObject; }
 void QSGTextureProvider_delete(QSGTextureProvider* self) {
 	delete self;
 }

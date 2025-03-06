@@ -39,10 +39,17 @@ QWebEngineUrlRequestInterceptor* QWebEngineUrlRequestInterceptor_new2(QObject* p
 void QWebEngineUrlRequestInterceptor_virtbase(QWebEngineUrlRequestInterceptor* src, QObject** outptr_QObject);
 QMetaObject* QWebEngineUrlRequestInterceptor_metaObject(const QWebEngineUrlRequestInterceptor* self);
 void* QWebEngineUrlRequestInterceptor_metacast(QWebEngineUrlRequestInterceptor* self, const char* param1);
+int QWebEngineUrlRequestInterceptor_metacall(QWebEngineUrlRequestInterceptor* self, int param1, int param2, void** param3);
 struct miqt_string QWebEngineUrlRequestInterceptor_tr(const char* s);
 void QWebEngineUrlRequestInterceptor_interceptRequest(QWebEngineUrlRequestInterceptor* self, QWebEngineUrlRequestInfo* info);
 struct miqt_string QWebEngineUrlRequestInterceptor_tr2(const char* s, const char* c);
 struct miqt_string QWebEngineUrlRequestInterceptor_tr3(const char* s, const char* c, int n);
+bool QWebEngineUrlRequestInterceptor_override_virtual_metaObject(void* self, intptr_t slot);
+QMetaObject* QWebEngineUrlRequestInterceptor_virtualbase_metaObject(const void* self);
+bool QWebEngineUrlRequestInterceptor_override_virtual_metacast(void* self, intptr_t slot);
+void* QWebEngineUrlRequestInterceptor_virtualbase_metacast(void* self, const char* param1);
+bool QWebEngineUrlRequestInterceptor_override_virtual_metacall(void* self, intptr_t slot);
+int QWebEngineUrlRequestInterceptor_virtualbase_metacall(void* self, int param1, int param2, void** param3);
 bool QWebEngineUrlRequestInterceptor_override_virtual_interceptRequest(void* self, intptr_t slot);
 void QWebEngineUrlRequestInterceptor_virtualbase_interceptRequest(void* self, QWebEngineUrlRequestInfo* info);
 bool QWebEngineUrlRequestInterceptor_override_virtual_event(void* self, intptr_t slot);
@@ -63,6 +70,7 @@ QObject* QWebEngineUrlRequestInterceptor_protectedbase_sender(bool* _dynamic_cas
 int QWebEngineUrlRequestInterceptor_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
 int QWebEngineUrlRequestInterceptor_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
 bool QWebEngineUrlRequestInterceptor_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+const QMetaObject* QWebEngineUrlRequestInterceptor_staticMetaObject();
 void QWebEngineUrlRequestInterceptor_delete(QWebEngineUrlRequestInterceptor* self);
 
 #ifdef __cplusplus

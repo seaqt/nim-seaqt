@@ -87,6 +87,7 @@ proc fcQDtlsClientVerifier_new(): ptr cQDtlsClientVerifier {.importc: "QDtlsClie
 proc fcQDtlsClientVerifier_new2(parent: pointer): ptr cQDtlsClientVerifier {.importc: "QDtlsClientVerifier_new2".}
 proc fcQDtlsClientVerifier_metaObject(self: pointer, ): pointer {.importc: "QDtlsClientVerifier_metaObject".}
 proc fcQDtlsClientVerifier_metacast(self: pointer, param1: cstring): pointer {.importc: "QDtlsClientVerifier_metacast".}
+proc fcQDtlsClientVerifier_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QDtlsClientVerifier_metacall".}
 proc fcQDtlsClientVerifier_tr(s: cstring): struct_miqt_string {.importc: "QDtlsClientVerifier_tr".}
 proc fcQDtlsClientVerifier_setCookieGeneratorParameters(self: pointer, params: pointer): bool {.importc: "QDtlsClientVerifier_setCookieGeneratorParameters".}
 proc fcQDtlsClientVerifier_cookieGeneratorParameters(self: pointer, ): pointer {.importc: "QDtlsClientVerifier_cookieGeneratorParameters".}
@@ -96,6 +97,12 @@ proc fcQDtlsClientVerifier_dtlsError(self: pointer, ): cint {.importc: "QDtlsCli
 proc fcQDtlsClientVerifier_dtlsErrorString(self: pointer, ): struct_miqt_string {.importc: "QDtlsClientVerifier_dtlsErrorString".}
 proc fcQDtlsClientVerifier_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QDtlsClientVerifier_tr2".}
 proc fcQDtlsClientVerifier_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QDtlsClientVerifier_tr3".}
+proc fQDtlsClientVerifier_virtualbase_metaObject(self: pointer, ): pointer{.importc: "QDtlsClientVerifier_virtualbase_metaObject".}
+proc fcQDtlsClientVerifier_override_virtual_metaObject(self: pointer, slot: int) {.importc: "QDtlsClientVerifier_override_virtual_metaObject".}
+proc fQDtlsClientVerifier_virtualbase_metacast(self: pointer, param1: cstring): pointer{.importc: "QDtlsClientVerifier_virtualbase_metacast".}
+proc fcQDtlsClientVerifier_override_virtual_metacast(self: pointer, slot: int) {.importc: "QDtlsClientVerifier_override_virtual_metacast".}
+proc fQDtlsClientVerifier_virtualbase_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint{.importc: "QDtlsClientVerifier_virtualbase_metacall".}
+proc fcQDtlsClientVerifier_override_virtual_metacall(self: pointer, slot: int) {.importc: "QDtlsClientVerifier_override_virtual_metacall".}
 proc fQDtlsClientVerifier_virtualbase_event(self: pointer, event: pointer): bool{.importc: "QDtlsClientVerifier_virtualbase_event".}
 proc fcQDtlsClientVerifier_override_virtual_event(self: pointer, slot: int) {.importc: "QDtlsClientVerifier_override_virtual_event".}
 proc fQDtlsClientVerifier_virtualbase_eventFilter(self: pointer, watched: pointer, event: pointer): bool{.importc: "QDtlsClientVerifier_virtualbase_eventFilter".}
@@ -110,11 +117,13 @@ proc fQDtlsClientVerifier_virtualbase_connectNotify(self: pointer, signal: point
 proc fcQDtlsClientVerifier_override_virtual_connectNotify(self: pointer, slot: int) {.importc: "QDtlsClientVerifier_override_virtual_connectNotify".}
 proc fQDtlsClientVerifier_virtualbase_disconnectNotify(self: pointer, signal: pointer): void{.importc: "QDtlsClientVerifier_virtualbase_disconnectNotify".}
 proc fcQDtlsClientVerifier_override_virtual_disconnectNotify(self: pointer, slot: int) {.importc: "QDtlsClientVerifier_override_virtual_disconnectNotify".}
+proc fcQDtlsClientVerifier_staticMetaObject(): pointer {.importc: "QDtlsClientVerifier_staticMetaObject".}
 proc fcQDtlsClientVerifier_delete(self: pointer) {.importc: "QDtlsClientVerifier_delete".}
 proc fcQDtls_new(mode: cint): ptr cQDtls {.importc: "QDtls_new".}
 proc fcQDtls_new2(mode: cint, parent: pointer): ptr cQDtls {.importc: "QDtls_new2".}
 proc fcQDtls_metaObject(self: pointer, ): pointer {.importc: "QDtls_metaObject".}
 proc fcQDtls_metacast(self: pointer, param1: cstring): pointer {.importc: "QDtls_metacast".}
+proc fcQDtls_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QDtls_metacall".}
 proc fcQDtls_tr(s: cstring): struct_miqt_string {.importc: "QDtls_tr".}
 proc fcQDtls_setPeer(self: pointer, address: pointer, port: cushort): bool {.importc: "QDtls_setPeer".}
 proc fcQDtls_setPeerVerificationName(self: pointer, name: struct_miqt_string): bool {.importc: "QDtls_setPeerVerificationName".}
@@ -151,6 +160,12 @@ proc fcQDtls_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QDtls_t
 proc fcQDtls_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QDtls_tr3".}
 proc fcQDtls_setPeer3(self: pointer, address: pointer, port: cushort, verificationName: struct_miqt_string): bool {.importc: "QDtls_setPeer3".}
 proc fcQDtls_doHandshake2(self: pointer, socket: pointer, dgram: struct_miqt_string): bool {.importc: "QDtls_doHandshake2".}
+proc fQDtls_virtualbase_metaObject(self: pointer, ): pointer{.importc: "QDtls_virtualbase_metaObject".}
+proc fcQDtls_override_virtual_metaObject(self: pointer, slot: int) {.importc: "QDtls_override_virtual_metaObject".}
+proc fQDtls_virtualbase_metacast(self: pointer, param1: cstring): pointer{.importc: "QDtls_virtualbase_metacast".}
+proc fcQDtls_override_virtual_metacast(self: pointer, slot: int) {.importc: "QDtls_override_virtual_metacast".}
+proc fQDtls_virtualbase_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint{.importc: "QDtls_virtualbase_metacall".}
+proc fcQDtls_override_virtual_metacall(self: pointer, slot: int) {.importc: "QDtls_override_virtual_metacall".}
 proc fQDtls_virtualbase_event(self: pointer, event: pointer): bool{.importc: "QDtls_virtualbase_event".}
 proc fcQDtls_override_virtual_event(self: pointer, slot: int) {.importc: "QDtls_override_virtual_event".}
 proc fQDtls_virtualbase_eventFilter(self: pointer, watched: pointer, event: pointer): bool{.importc: "QDtls_virtualbase_eventFilter".}
@@ -165,6 +180,7 @@ proc fQDtls_virtualbase_connectNotify(self: pointer, signal: pointer): void{.imp
 proc fcQDtls_override_virtual_connectNotify(self: pointer, slot: int) {.importc: "QDtls_override_virtual_connectNotify".}
 proc fQDtls_virtualbase_disconnectNotify(self: pointer, signal: pointer): void{.importc: "QDtls_virtualbase_disconnectNotify".}
 proc fcQDtls_override_virtual_disconnectNotify(self: pointer, slot: int) {.importc: "QDtls_override_virtual_disconnectNotify".}
+proc fcQDtls_staticMetaObject(): pointer {.importc: "QDtls_staticMetaObject".}
 proc fcQDtls_delete(self: pointer) {.importc: "QDtls_delete".}
 proc fcQDtlsClientVerifierGeneratorParameters_new(): ptr cQDtlsClientVerifierGeneratorParameters {.importc: "QDtlsClientVerifier__GeneratorParameters_new".}
 proc fcQDtlsClientVerifierGeneratorParameters_new2(a: cint, s: struct_miqt_string): ptr cQDtlsClientVerifierGeneratorParameters {.importc: "QDtlsClientVerifier__GeneratorParameters_new2".}
@@ -186,6 +202,9 @@ proc metaObject*(self: gen_qdtls_types.QDtlsClientVerifier, ): gen_qobjectdefs_t
 
 proc metacast*(self: gen_qdtls_types.QDtlsClientVerifier, param1: cstring): pointer =
   fcQDtlsClientVerifier_metacast(self.h, param1)
+
+proc metacall*(self: gen_qdtls_types.QDtlsClientVerifier, param1: cint, param2: cint, param3: pointer): cint =
+  fcQDtlsClientVerifier_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qdtls_types.QDtlsClientVerifier, s: cstring): string =
   let v_ms = fcQDtlsClientVerifier_tr(s)
@@ -229,6 +248,65 @@ proc tr*(_: type gen_qdtls_types.QDtlsClientVerifier, s: cstring, c: cstring, n:
   c_free(v_ms.data)
   vx_ret
 
+proc QDtlsClientVerifiermetaObject*(self: gen_qdtls_types.QDtlsClientVerifier, ): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fQDtlsClientVerifier_virtualbase_metaObject(self.h))
+
+type QDtlsClientVerifiermetaObjectProc* = proc(): gen_qobjectdefs_types.QMetaObject
+proc onmetaObject*(self: gen_qdtls_types.QDtlsClientVerifier, slot: QDtlsClientVerifiermetaObjectProc) =
+  # TODO check subclass
+  var tmp = new QDtlsClientVerifiermetaObjectProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQDtlsClientVerifier_override_virtual_metaObject(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QDtlsClientVerifier_metaObject(self: ptr cQDtlsClientVerifier, slot: int): pointer {.exportc: "miqt_exec_callback_QDtlsClientVerifier_metaObject ".} =
+  var nimfunc = cast[ptr QDtlsClientVerifiermetaObjectProc](cast[pointer](slot))
+
+  let virtualReturn = nimfunc[]( )
+
+  virtualReturn.h
+proc QDtlsClientVerifiermetacast*(self: gen_qdtls_types.QDtlsClientVerifier, param1: cstring): pointer =
+  fQDtlsClientVerifier_virtualbase_metacast(self.h, param1)
+
+type QDtlsClientVerifiermetacastProc* = proc(param1: cstring): pointer
+proc onmetacast*(self: gen_qdtls_types.QDtlsClientVerifier, slot: QDtlsClientVerifiermetacastProc) =
+  # TODO check subclass
+  var tmp = new QDtlsClientVerifiermetacastProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQDtlsClientVerifier_override_virtual_metacast(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QDtlsClientVerifier_metacast(self: ptr cQDtlsClientVerifier, slot: int, param1: cstring): pointer {.exportc: "miqt_exec_callback_QDtlsClientVerifier_metacast ".} =
+  var nimfunc = cast[ptr QDtlsClientVerifiermetacastProc](cast[pointer](slot))
+  let slotval1 = (param1)
+
+
+  let virtualReturn = nimfunc[](slotval1 )
+
+  virtualReturn
+proc QDtlsClientVerifiermetacall*(self: gen_qdtls_types.QDtlsClientVerifier, param1: cint, param2: cint, param3: pointer): cint =
+  fQDtlsClientVerifier_virtualbase_metacall(self.h, cint(param1), param2, param3)
+
+type QDtlsClientVerifiermetacallProc* = proc(param1: cint, param2: cint, param3: pointer): cint
+proc onmetacall*(self: gen_qdtls_types.QDtlsClientVerifier, slot: QDtlsClientVerifiermetacallProc) =
+  # TODO check subclass
+  var tmp = new QDtlsClientVerifiermetacallProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQDtlsClientVerifier_override_virtual_metacall(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QDtlsClientVerifier_metacall(self: ptr cQDtlsClientVerifier, slot: int, param1: cint, param2: cint, param3: pointer): cint {.exportc: "miqt_exec_callback_QDtlsClientVerifier_metacall ".} =
+  var nimfunc = cast[ptr QDtlsClientVerifiermetacallProc](cast[pointer](slot))
+  let slotval1 = cint(param1)
+
+  let slotval2 = param2
+
+  let slotval3 = param3
+
+
+  let virtualReturn = nimfunc[](slotval1, slotval2, slotval3 )
+
+  virtualReturn
 proc QDtlsClientVerifierevent*(self: gen_qdtls_types.QDtlsClientVerifier, event: gen_qcoreevent_types.QEvent): bool =
   fQDtlsClientVerifier_virtualbase_event(self.h, event.h)
 
@@ -354,6 +432,8 @@ proc miqt_exec_callback_QDtlsClientVerifier_disconnectNotify(self: ptr cQDtlsCli
 
 
   nimfunc[](slotval1)
+proc staticMetaObject*(_: type gen_qdtls_types.QDtlsClientVerifier): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fcQDtlsClientVerifier_staticMetaObject())
 proc delete*(self: gen_qdtls_types.QDtlsClientVerifier) =
   fcQDtlsClientVerifier_delete(self.h)
 
@@ -370,6 +450,9 @@ proc metaObject*(self: gen_qdtls_types.QDtls, ): gen_qobjectdefs_types.QMetaObje
 
 proc metacast*(self: gen_qdtls_types.QDtls, param1: cstring): pointer =
   fcQDtls_metacast(self.h, param1)
+
+proc metacall*(self: gen_qdtls_types.QDtls, param1: cint, param2: cint, param3: pointer): cint =
+  fcQDtls_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qdtls_types.QDtls, s: cstring): string =
   let v_ms = fcQDtls_tr(s)
@@ -524,6 +607,65 @@ proc setPeer*(self: gen_qdtls_types.QDtls, address: gen_qhostaddress_types.QHost
 proc doHandshake*(self: gen_qdtls_types.QDtls, socket: gen_qudpsocket_types.QUdpSocket, dgram: seq[byte]): bool =
   fcQDtls_doHandshake2(self.h, socket.h, struct_miqt_string(data: cast[cstring](if len(dgram) == 0: nil else: unsafeAddr dgram[0]), len: csize_t(len(dgram))))
 
+proc QDtlsmetaObject*(self: gen_qdtls_types.QDtls, ): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fQDtls_virtualbase_metaObject(self.h))
+
+type QDtlsmetaObjectProc* = proc(): gen_qobjectdefs_types.QMetaObject
+proc onmetaObject*(self: gen_qdtls_types.QDtls, slot: QDtlsmetaObjectProc) =
+  # TODO check subclass
+  var tmp = new QDtlsmetaObjectProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQDtls_override_virtual_metaObject(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QDtls_metaObject(self: ptr cQDtls, slot: int): pointer {.exportc: "miqt_exec_callback_QDtls_metaObject ".} =
+  var nimfunc = cast[ptr QDtlsmetaObjectProc](cast[pointer](slot))
+
+  let virtualReturn = nimfunc[]( )
+
+  virtualReturn.h
+proc QDtlsmetacast*(self: gen_qdtls_types.QDtls, param1: cstring): pointer =
+  fQDtls_virtualbase_metacast(self.h, param1)
+
+type QDtlsmetacastProc* = proc(param1: cstring): pointer
+proc onmetacast*(self: gen_qdtls_types.QDtls, slot: QDtlsmetacastProc) =
+  # TODO check subclass
+  var tmp = new QDtlsmetacastProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQDtls_override_virtual_metacast(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QDtls_metacast(self: ptr cQDtls, slot: int, param1: cstring): pointer {.exportc: "miqt_exec_callback_QDtls_metacast ".} =
+  var nimfunc = cast[ptr QDtlsmetacastProc](cast[pointer](slot))
+  let slotval1 = (param1)
+
+
+  let virtualReturn = nimfunc[](slotval1 )
+
+  virtualReturn
+proc QDtlsmetacall*(self: gen_qdtls_types.QDtls, param1: cint, param2: cint, param3: pointer): cint =
+  fQDtls_virtualbase_metacall(self.h, cint(param1), param2, param3)
+
+type QDtlsmetacallProc* = proc(param1: cint, param2: cint, param3: pointer): cint
+proc onmetacall*(self: gen_qdtls_types.QDtls, slot: QDtlsmetacallProc) =
+  # TODO check subclass
+  var tmp = new QDtlsmetacallProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQDtls_override_virtual_metacall(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QDtls_metacall(self: ptr cQDtls, slot: int, param1: cint, param2: cint, param3: pointer): cint {.exportc: "miqt_exec_callback_QDtls_metacall ".} =
+  var nimfunc = cast[ptr QDtlsmetacallProc](cast[pointer](slot))
+  let slotval1 = cint(param1)
+
+  let slotval2 = param2
+
+  let slotval3 = param3
+
+
+  let virtualReturn = nimfunc[](slotval1, slotval2, slotval3 )
+
+  virtualReturn
 proc QDtlsevent*(self: gen_qdtls_types.QDtls, event: gen_qcoreevent_types.QEvent): bool =
   fQDtls_virtualbase_event(self.h, event.h)
 
@@ -649,6 +791,8 @@ proc miqt_exec_callback_QDtls_disconnectNotify(self: ptr cQDtls, slot: int, sign
 
 
   nimfunc[](slotval1)
+proc staticMetaObject*(_: type gen_qdtls_types.QDtls): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fcQDtls_staticMetaObject())
 proc delete*(self: gen_qdtls_types.QDtls) =
   fcQDtls_delete(self.h)
 

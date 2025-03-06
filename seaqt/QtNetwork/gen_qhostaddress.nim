@@ -56,6 +56,10 @@ template StrictConversion*(_: type QHostAddressConversionModeFlagEnum): untyped 
 import ./gen_qhostaddress_types
 export gen_qhostaddress_types
 
+import
+  ../QtCore/gen_qobjectdefs_types
+export
+  gen_qobjectdefs_types
 
 type cQIPv6Address*{.exportc: "QIPv6Address", incompleteStruct.} = object
 type cQHostAddress*{.exportc: "QHostAddress", incompleteStruct.} = object
@@ -102,6 +106,7 @@ proc fcQHostAddress_isBroadcast(self: pointer, ): bool {.importc: "QHostAddress_
 proc fcQHostAddress_parseSubnet(subnet: struct_miqt_string): struct_miqt_map {.importc: "QHostAddress_parseSubnet".}
 proc fcQHostAddress_toIPv4Address1(self: pointer, ok: ptr bool): cuint {.importc: "QHostAddress_toIPv4Address1".}
 proc fcQHostAddress_isEqual2(self: pointer, address: pointer, mode: cint): bool {.importc: "QHostAddress_isEqual2".}
+proc fcQHostAddress_staticMetaObject(): pointer {.importc: "QHostAddress_staticMetaObject".}
 proc fcQHostAddress_delete(self: pointer) {.importc: "QHostAddress_delete".}
 
 
@@ -252,5 +257,7 @@ proc toIPv4Address*(self: gen_qhostaddress_types.QHostAddress, ok: ptr bool): cu
 proc isEqual*(self: gen_qhostaddress_types.QHostAddress, address: gen_qhostaddress_types.QHostAddress, mode: cint): bool =
   fcQHostAddress_isEqual2(self.h, address.h, cint(mode))
 
+proc staticMetaObject*(_: type gen_qhostaddress_types.QHostAddress): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fcQHostAddress_staticMetaObject())
 proc delete*(self: gen_qhostaddress_types.QHostAddress) =
   fcQHostAddress_delete(self.h)

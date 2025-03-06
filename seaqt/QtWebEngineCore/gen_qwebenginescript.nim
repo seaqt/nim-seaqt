@@ -50,8 +50,10 @@ import ./gen_qwebenginescript_types
 export gen_qwebenginescript_types
 
 import
+  ../QtCore/gen_qobjectdefs_types,
   ../QtCore/gen_qurl_types
 export
+  gen_qobjectdefs_types,
   gen_qurl_types
 
 type cQWebEngineScript*{.exportc: "QWebEngineScript", incompleteStruct.} = object
@@ -74,6 +76,7 @@ proc fcQWebEngineScript_setRunsOnSubFrames(self: pointer, on: bool): void {.impo
 proc fcQWebEngineScript_operatorEqual(self: pointer, other: pointer): bool {.importc: "QWebEngineScript_operatorEqual".}
 proc fcQWebEngineScript_operatorNotEqual(self: pointer, other: pointer): bool {.importc: "QWebEngineScript_operatorNotEqual".}
 proc fcQWebEngineScript_swap(self: pointer, other: pointer): void {.importc: "QWebEngineScript_swap".}
+proc fcQWebEngineScript_staticMetaObject(): pointer {.importc: "QWebEngineScript_staticMetaObject".}
 proc fcQWebEngineScript_delete(self: pointer) {.importc: "QWebEngineScript_delete".}
 
 
@@ -139,5 +142,7 @@ proc operatorNotEqual*(self: gen_qwebenginescript_types.QWebEngineScript, other:
 proc swap*(self: gen_qwebenginescript_types.QWebEngineScript, other: gen_qwebenginescript_types.QWebEngineScript): void =
   fcQWebEngineScript_swap(self.h, other.h)
 
+proc staticMetaObject*(_: type gen_qwebenginescript_types.QWebEngineScript): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fcQWebEngineScript_staticMetaObject())
 proc delete*(self: gen_qwebenginescript_types.QWebEngineScript) =
   fcQWebEngineScript_delete(self.h)

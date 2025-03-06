@@ -21,6 +21,9 @@
 extern "C" {
 #endif
 
+QMetaObject* miqt_exec_callback_QQmlExtensionPlugin_metaObject(const QQmlExtensionPlugin*, intptr_t);
+void* miqt_exec_callback_QQmlExtensionPlugin_metacast(QQmlExtensionPlugin*, intptr_t, const char*);
+int miqt_exec_callback_QQmlExtensionPlugin_metacall(QQmlExtensionPlugin*, intptr_t, int, int, void**);
 void miqt_exec_callback_QQmlExtensionPlugin_registerTypes(QQmlExtensionPlugin*, intptr_t, const char*);
 void miqt_exec_callback_QQmlExtensionPlugin_unregisterTypes(QQmlExtensionPlugin*, intptr_t);
 void miqt_exec_callback_QQmlExtensionPlugin_initializeEngine(QQmlExtensionPlugin*, intptr_t, QQmlEngine*, const char*);
@@ -31,6 +34,9 @@ void miqt_exec_callback_QQmlExtensionPlugin_childEvent(QQmlExtensionPlugin*, int
 void miqt_exec_callback_QQmlExtensionPlugin_customEvent(QQmlExtensionPlugin*, intptr_t, QEvent*);
 void miqt_exec_callback_QQmlExtensionPlugin_connectNotify(QQmlExtensionPlugin*, intptr_t, QMetaMethod*);
 void miqt_exec_callback_QQmlExtensionPlugin_disconnectNotify(QQmlExtensionPlugin*, intptr_t, QMetaMethod*);
+QMetaObject* miqt_exec_callback_QQmlEngineExtensionPlugin_metaObject(const QQmlEngineExtensionPlugin*, intptr_t);
+void* miqt_exec_callback_QQmlEngineExtensionPlugin_metacast(QQmlEngineExtensionPlugin*, intptr_t, const char*);
+int miqt_exec_callback_QQmlEngineExtensionPlugin_metacall(QQmlEngineExtensionPlugin*, intptr_t, int, int, void**);
 void miqt_exec_callback_QQmlEngineExtensionPlugin_initializeEngine(QQmlEngineExtensionPlugin*, intptr_t, QQmlEngine*, const char*);
 bool miqt_exec_callback_QQmlEngineExtensionPlugin_event(QQmlEngineExtensionPlugin*, intptr_t, QEvent*);
 bool miqt_exec_callback_QQmlEngineExtensionPlugin_eventFilter(QQmlEngineExtensionPlugin*, intptr_t, QObject*, QEvent*);
@@ -50,6 +56,62 @@ public:
 	VirtualQQmlExtensionPlugin(QObject* parent): QQmlExtensionPlugin(parent) {};
 
 	virtual ~VirtualQQmlExtensionPlugin() override = default;
+
+	// cgo.Handle value for overwritten implementation
+	intptr_t handle__metaObject = 0;
+
+	// Subclass to allow providing a Go implementation
+	virtual const QMetaObject* metaObject() const override {
+		if (handle__metaObject == 0) {
+			return QQmlExtensionPlugin::metaObject();
+		}
+		
+
+		QMetaObject* callback_return_value = miqt_exec_callback_QQmlExtensionPlugin_metaObject(this, handle__metaObject);
+
+		return callback_return_value;
+	}
+
+	friend QMetaObject* QQmlExtensionPlugin_virtualbase_metaObject(const void* self);
+
+	// cgo.Handle value for overwritten implementation
+	intptr_t handle__metacast = 0;
+
+	// Subclass to allow providing a Go implementation
+	virtual void* qt_metacast(const char* param1) override {
+		if (handle__metacast == 0) {
+			return QQmlExtensionPlugin::qt_metacast(param1);
+		}
+		
+		const char* sigval1 = (const char*) param1;
+
+		void* callback_return_value = miqt_exec_callback_QQmlExtensionPlugin_metacast(this, handle__metacast, sigval1);
+
+		return callback_return_value;
+	}
+
+	friend void* QQmlExtensionPlugin_virtualbase_metacast(void* self, const char* param1);
+
+	// cgo.Handle value for overwritten implementation
+	intptr_t handle__metacall = 0;
+
+	// Subclass to allow providing a Go implementation
+	virtual int qt_metacall(QMetaObject::Call param1, int param2, void** param3) override {
+		if (handle__metacall == 0) {
+			return QQmlExtensionPlugin::qt_metacall(param1, param2, param3);
+		}
+		
+		QMetaObject::Call param1_ret = param1;
+		int sigval1 = static_cast<int>(param1_ret);
+		int sigval2 = param2;
+		void** sigval3 = param3;
+
+		int callback_return_value = miqt_exec_callback_QQmlExtensionPlugin_metacall(this, handle__metacall, sigval1, sigval2, sigval3);
+
+		return static_cast<int>(callback_return_value);
+	}
+
+	friend int QQmlExtensionPlugin_virtualbase_metacall(void* self, int param1, int param2, void** param3);
 
 	// cgo.Handle value for overwritten implementation
 	intptr_t handle__registerTypes = 0;
@@ -269,6 +331,10 @@ void* QQmlExtensionPlugin_metacast(QQmlExtensionPlugin* self, const char* param1
 	return self->qt_metacast(param1);
 }
 
+int QQmlExtensionPlugin_metacall(QQmlExtensionPlugin* self, int param1, int param2, void** param3) {
+	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
+}
+
 struct miqt_string QQmlExtensionPlugin_tr(const char* s) {
 	QString _ret = QQmlExtensionPlugin::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
@@ -316,6 +382,54 @@ struct miqt_string QQmlExtensionPlugin_tr3(const char* s, const char* c, int n) 
 	_ms.data = static_cast<char*>(malloc(_ms.len));
 	memcpy(_ms.data, _b.data(), _ms.len);
 	return _ms;
+}
+
+bool QQmlExtensionPlugin_override_virtual_metaObject(void* self, intptr_t slot) {
+	VirtualQQmlExtensionPlugin* self_cast = dynamic_cast<VirtualQQmlExtensionPlugin*>( (QQmlExtensionPlugin*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+	
+	self_cast->handle__metaObject = slot;
+	return true;
+}
+
+QMetaObject* QQmlExtensionPlugin_virtualbase_metaObject(const void* self) {
+
+	return (QMetaObject*) ( (const VirtualQQmlExtensionPlugin*)(self) )->QQmlExtensionPlugin::metaObject();
+
+}
+
+bool QQmlExtensionPlugin_override_virtual_metacast(void* self, intptr_t slot) {
+	VirtualQQmlExtensionPlugin* self_cast = dynamic_cast<VirtualQQmlExtensionPlugin*>( (QQmlExtensionPlugin*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+	
+	self_cast->handle__metacast = slot;
+	return true;
+}
+
+void* QQmlExtensionPlugin_virtualbase_metacast(void* self, const char* param1) {
+
+	return ( (VirtualQQmlExtensionPlugin*)(self) )->QQmlExtensionPlugin::qt_metacast(param1);
+
+}
+
+bool QQmlExtensionPlugin_override_virtual_metacall(void* self, intptr_t slot) {
+	VirtualQQmlExtensionPlugin* self_cast = dynamic_cast<VirtualQQmlExtensionPlugin*>( (QQmlExtensionPlugin*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+	
+	self_cast->handle__metacall = slot;
+	return true;
+}
+
+int QQmlExtensionPlugin_virtualbase_metacall(void* self, int param1, int param2, void** param3) {
+
+	return ( (VirtualQQmlExtensionPlugin*)(self) )->QQmlExtensionPlugin::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
+
 }
 
 bool QQmlExtensionPlugin_override_virtual_registerTypes(void* self, intptr_t slot) {
@@ -472,6 +586,7 @@ void QQmlExtensionPlugin_virtualbase_disconnectNotify(void* self, QMetaMethod* s
 
 }
 
+const QMetaObject* QQmlExtensionPlugin_staticMetaObject() { return &QQmlExtensionPlugin::staticMetaObject; }
 QObject* QQmlExtensionPlugin_protectedbase_sender(bool* _dynamic_cast_ok, const void* self) {
 	VirtualQQmlExtensionPlugin* self_cast = dynamic_cast<VirtualQQmlExtensionPlugin*>( (QQmlExtensionPlugin*)(self) );
 	if (self_cast == nullptr) {
@@ -535,6 +650,62 @@ public:
 	VirtualQQmlEngineExtensionPlugin(QObject* parent): QQmlEngineExtensionPlugin(parent) {};
 
 	virtual ~VirtualQQmlEngineExtensionPlugin() override = default;
+
+	// cgo.Handle value for overwritten implementation
+	intptr_t handle__metaObject = 0;
+
+	// Subclass to allow providing a Go implementation
+	virtual const QMetaObject* metaObject() const override {
+		if (handle__metaObject == 0) {
+			return QQmlEngineExtensionPlugin::metaObject();
+		}
+		
+
+		QMetaObject* callback_return_value = miqt_exec_callback_QQmlEngineExtensionPlugin_metaObject(this, handle__metaObject);
+
+		return callback_return_value;
+	}
+
+	friend QMetaObject* QQmlEngineExtensionPlugin_virtualbase_metaObject(const void* self);
+
+	// cgo.Handle value for overwritten implementation
+	intptr_t handle__metacast = 0;
+
+	// Subclass to allow providing a Go implementation
+	virtual void* qt_metacast(const char* param1) override {
+		if (handle__metacast == 0) {
+			return QQmlEngineExtensionPlugin::qt_metacast(param1);
+		}
+		
+		const char* sigval1 = (const char*) param1;
+
+		void* callback_return_value = miqt_exec_callback_QQmlEngineExtensionPlugin_metacast(this, handle__metacast, sigval1);
+
+		return callback_return_value;
+	}
+
+	friend void* QQmlEngineExtensionPlugin_virtualbase_metacast(void* self, const char* param1);
+
+	// cgo.Handle value for overwritten implementation
+	intptr_t handle__metacall = 0;
+
+	// Subclass to allow providing a Go implementation
+	virtual int qt_metacall(QMetaObject::Call param1, int param2, void** param3) override {
+		if (handle__metacall == 0) {
+			return QQmlEngineExtensionPlugin::qt_metacall(param1, param2, param3);
+		}
+		
+		QMetaObject::Call param1_ret = param1;
+		int sigval1 = static_cast<int>(param1_ret);
+		int sigval2 = param2;
+		void** sigval3 = param3;
+
+		int callback_return_value = miqt_exec_callback_QQmlEngineExtensionPlugin_metacall(this, handle__metacall, sigval1, sigval2, sigval3);
+
+		return static_cast<int>(callback_return_value);
+	}
+
+	friend int QQmlEngineExtensionPlugin_virtualbase_metacall(void* self, int param1, int param2, void** param3);
 
 	// cgo.Handle value for overwritten implementation
 	intptr_t handle__initializeEngine = 0;
@@ -720,6 +891,10 @@ void* QQmlEngineExtensionPlugin_metacast(QQmlEngineExtensionPlugin* self, const 
 	return self->qt_metacast(param1);
 }
 
+int QQmlEngineExtensionPlugin_metacall(QQmlEngineExtensionPlugin* self, int param1, int param2, void** param3) {
+	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
+}
+
 struct miqt_string QQmlEngineExtensionPlugin_tr(const char* s) {
 	QString _ret = QQmlEngineExtensionPlugin::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
@@ -755,6 +930,54 @@ struct miqt_string QQmlEngineExtensionPlugin_tr3(const char* s, const char* c, i
 	_ms.data = static_cast<char*>(malloc(_ms.len));
 	memcpy(_ms.data, _b.data(), _ms.len);
 	return _ms;
+}
+
+bool QQmlEngineExtensionPlugin_override_virtual_metaObject(void* self, intptr_t slot) {
+	VirtualQQmlEngineExtensionPlugin* self_cast = dynamic_cast<VirtualQQmlEngineExtensionPlugin*>( (QQmlEngineExtensionPlugin*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+	
+	self_cast->handle__metaObject = slot;
+	return true;
+}
+
+QMetaObject* QQmlEngineExtensionPlugin_virtualbase_metaObject(const void* self) {
+
+	return (QMetaObject*) ( (const VirtualQQmlEngineExtensionPlugin*)(self) )->QQmlEngineExtensionPlugin::metaObject();
+
+}
+
+bool QQmlEngineExtensionPlugin_override_virtual_metacast(void* self, intptr_t slot) {
+	VirtualQQmlEngineExtensionPlugin* self_cast = dynamic_cast<VirtualQQmlEngineExtensionPlugin*>( (QQmlEngineExtensionPlugin*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+	
+	self_cast->handle__metacast = slot;
+	return true;
+}
+
+void* QQmlEngineExtensionPlugin_virtualbase_metacast(void* self, const char* param1) {
+
+	return ( (VirtualQQmlEngineExtensionPlugin*)(self) )->QQmlEngineExtensionPlugin::qt_metacast(param1);
+
+}
+
+bool QQmlEngineExtensionPlugin_override_virtual_metacall(void* self, intptr_t slot) {
+	VirtualQQmlEngineExtensionPlugin* self_cast = dynamic_cast<VirtualQQmlEngineExtensionPlugin*>( (QQmlEngineExtensionPlugin*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+	
+	self_cast->handle__metacall = slot;
+	return true;
+}
+
+int QQmlEngineExtensionPlugin_virtualbase_metacall(void* self, int param1, int param2, void** param3) {
+
+	return ( (VirtualQQmlEngineExtensionPlugin*)(self) )->QQmlEngineExtensionPlugin::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
+
 }
 
 bool QQmlEngineExtensionPlugin_override_virtual_initializeEngine(void* self, intptr_t slot) {
@@ -885,6 +1108,7 @@ void QQmlEngineExtensionPlugin_virtualbase_disconnectNotify(void* self, QMetaMet
 
 }
 
+const QMetaObject* QQmlEngineExtensionPlugin_staticMetaObject() { return &QQmlEngineExtensionPlugin::staticMetaObject; }
 QObject* QQmlEngineExtensionPlugin_protectedbase_sender(bool* _dynamic_cast_ok, const void* self) {
 	VirtualQQmlEngineExtensionPlugin* self_cast = dynamic_cast<VirtualQQmlEngineExtensionPlugin*>( (QQmlEngineExtensionPlugin*)(self) );
 	if (self_cast == nullptr) {

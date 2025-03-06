@@ -37,6 +37,10 @@ const cflags = gorge("pkg-config --cflags Qt6Qml")  & " -fPIC"
 import ./gen_qqmlscriptstring_types
 export gen_qqmlscriptstring_types
 
+import
+  ../QtCore/gen_qobjectdefs_types
+export
+  gen_qobjectdefs_types
 
 type cQQmlScriptString*{.exportc: "QQmlScriptString", incompleteStruct.} = object
 
@@ -51,6 +55,7 @@ proc fcQQmlScriptString_isNullLiteral(self: pointer, ): bool {.importc: "QQmlScr
 proc fcQQmlScriptString_stringLiteral(self: pointer, ): struct_miqt_string {.importc: "QQmlScriptString_stringLiteral".}
 proc fcQQmlScriptString_numberLiteral(self: pointer, ok: ptr bool): float64 {.importc: "QQmlScriptString_numberLiteral".}
 proc fcQQmlScriptString_booleanLiteral(self: pointer, ok: ptr bool): bool {.importc: "QQmlScriptString_booleanLiteral".}
+proc fcQQmlScriptString_staticMetaObject(): pointer {.importc: "QQmlScriptString_staticMetaObject".}
 proc fcQQmlScriptString_delete(self: pointer) {.importc: "QQmlScriptString_delete".}
 
 
@@ -92,5 +97,7 @@ proc numberLiteral*(self: gen_qqmlscriptstring_types.QQmlScriptString, ok: ptr b
 proc booleanLiteral*(self: gen_qqmlscriptstring_types.QQmlScriptString, ok: ptr bool): bool =
   fcQQmlScriptString_booleanLiteral(self.h, ok)
 
+proc staticMetaObject*(_: type gen_qqmlscriptstring_types.QQmlScriptString): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fcQQmlScriptString_staticMetaObject())
 proc delete*(self: gen_qqmlscriptstring_types.QQmlScriptString) =
   fcQQmlScriptString_delete(self.h)

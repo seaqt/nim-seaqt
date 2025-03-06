@@ -94,6 +94,7 @@ type cQWebEngineDownloadRequest*{.exportc: "QWebEngineDownloadRequest", incomple
 
 proc fcQWebEngineDownloadRequest_metaObject(self: pointer, ): pointer {.importc: "QWebEngineDownloadRequest_metaObject".}
 proc fcQWebEngineDownloadRequest_metacast(self: pointer, param1: cstring): pointer {.importc: "QWebEngineDownloadRequest_metacast".}
+proc fcQWebEngineDownloadRequest_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QWebEngineDownloadRequest_metacall".}
 proc fcQWebEngineDownloadRequest_tr(s: cstring): struct_miqt_string {.importc: "QWebEngineDownloadRequest_tr".}
 proc fcQWebEngineDownloadRequest_id(self: pointer, ): cuint {.importc: "QWebEngineDownloadRequest_id".}
 proc fcQWebEngineDownloadRequest_state(self: pointer, ): cint {.importc: "QWebEngineDownloadRequest_state".}
@@ -138,6 +139,7 @@ proc fcQWebEngineDownloadRequest_downloadFileNameChanged(self: pointer, ): void 
 proc fcQWebEngineDownloadRequest_connect_downloadFileNameChanged(self: pointer, slot: int) {.importc: "QWebEngineDownloadRequest_connect_downloadFileNameChanged".}
 proc fcQWebEngineDownloadRequest_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QWebEngineDownloadRequest_tr2".}
 proc fcQWebEngineDownloadRequest_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QWebEngineDownloadRequest_tr3".}
+proc fcQWebEngineDownloadRequest_staticMetaObject(): pointer {.importc: "QWebEngineDownloadRequest_staticMetaObject".}
 proc fcQWebEngineDownloadRequest_delete(self: pointer) {.importc: "QWebEngineDownloadRequest_delete".}
 
 
@@ -148,6 +150,9 @@ proc metaObject*(self: gen_qwebenginedownloadrequest_types.QWebEngineDownloadReq
 
 proc metacast*(self: gen_qwebenginedownloadrequest_types.QWebEngineDownloadRequest, param1: cstring): pointer =
   fcQWebEngineDownloadRequest_metacast(self.h, param1)
+
+proc metacall*(self: gen_qwebenginedownloadrequest_types.QWebEngineDownloadRequest, param1: cint, param2: cint, param3: pointer): cint =
+  fcQWebEngineDownloadRequest_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qwebenginedownloadrequest_types.QWebEngineDownloadRequest, s: cstring): string =
   let v_ms = fcQWebEngineDownloadRequest_tr(s)
@@ -379,5 +384,7 @@ proc tr*(_: type gen_qwebenginedownloadrequest_types.QWebEngineDownloadRequest, 
   c_free(v_ms.data)
   vx_ret
 
+proc staticMetaObject*(_: type gen_qwebenginedownloadrequest_types.QWebEngineDownloadRequest): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fcQWebEngineDownloadRequest_staticMetaObject())
 proc delete*(self: gen_qwebenginedownloadrequest_types.QWebEngineDownloadRequest) =
   fcQWebEngineDownloadRequest_delete(self.h)

@@ -62,6 +62,7 @@ proc fcQSctpSocket_new(): ptr cQSctpSocket {.importc: "QSctpSocket_new".}
 proc fcQSctpSocket_new2(parent: pointer): ptr cQSctpSocket {.importc: "QSctpSocket_new2".}
 proc fcQSctpSocket_metaObject(self: pointer, ): pointer {.importc: "QSctpSocket_metaObject".}
 proc fcQSctpSocket_metacast(self: pointer, param1: cstring): pointer {.importc: "QSctpSocket_metacast".}
+proc fcQSctpSocket_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QSctpSocket_metacall".}
 proc fcQSctpSocket_tr(s: cstring): struct_miqt_string {.importc: "QSctpSocket_tr".}
 proc fcQSctpSocket_close(self: pointer, ): void {.importc: "QSctpSocket_close".}
 proc fcQSctpSocket_disconnectFromHost(self: pointer, ): void {.importc: "QSctpSocket_disconnectFromHost".}
@@ -72,6 +73,12 @@ proc fcQSctpSocket_readDatagram(self: pointer, ): pointer {.importc: "QSctpSocke
 proc fcQSctpSocket_writeDatagram(self: pointer, datagram: pointer): bool {.importc: "QSctpSocket_writeDatagram".}
 proc fcQSctpSocket_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QSctpSocket_tr2".}
 proc fcQSctpSocket_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QSctpSocket_tr3".}
+proc fQSctpSocket_virtualbase_metaObject(self: pointer, ): pointer{.importc: "QSctpSocket_virtualbase_metaObject".}
+proc fcQSctpSocket_override_virtual_metaObject(self: pointer, slot: int) {.importc: "QSctpSocket_override_virtual_metaObject".}
+proc fQSctpSocket_virtualbase_metacast(self: pointer, param1: cstring): pointer{.importc: "QSctpSocket_virtualbase_metacast".}
+proc fcQSctpSocket_override_virtual_metacast(self: pointer, slot: int) {.importc: "QSctpSocket_override_virtual_metacast".}
+proc fQSctpSocket_virtualbase_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint{.importc: "QSctpSocket_virtualbase_metacall".}
+proc fcQSctpSocket_override_virtual_metacall(self: pointer, slot: int) {.importc: "QSctpSocket_override_virtual_metacall".}
 proc fQSctpSocket_virtualbase_close(self: pointer, ): void{.importc: "QSctpSocket_virtualbase_close".}
 proc fcQSctpSocket_override_virtual_close(self: pointer, slot: int) {.importc: "QSctpSocket_override_virtual_close".}
 proc fQSctpSocket_virtualbase_disconnectFromHost(self: pointer, ): void{.importc: "QSctpSocket_virtualbase_disconnectFromHost".}
@@ -142,6 +149,7 @@ proc fQSctpSocket_virtualbase_connectNotify(self: pointer, signal: pointer): voi
 proc fcQSctpSocket_override_virtual_connectNotify(self: pointer, slot: int) {.importc: "QSctpSocket_override_virtual_connectNotify".}
 proc fQSctpSocket_virtualbase_disconnectNotify(self: pointer, signal: pointer): void{.importc: "QSctpSocket_virtualbase_disconnectNotify".}
 proc fcQSctpSocket_override_virtual_disconnectNotify(self: pointer, slot: int) {.importc: "QSctpSocket_override_virtual_disconnectNotify".}
+proc fcQSctpSocket_staticMetaObject(): pointer {.importc: "QSctpSocket_staticMetaObject".}
 proc fcQSctpSocket_delete(self: pointer) {.importc: "QSctpSocket_delete".}
 
 
@@ -158,6 +166,9 @@ proc metaObject*(self: gen_qsctpsocket_types.QSctpSocket, ): gen_qobjectdefs_typ
 
 proc metacast*(self: gen_qsctpsocket_types.QSctpSocket, param1: cstring): pointer =
   fcQSctpSocket_metacast(self.h, param1)
+
+proc metacall*(self: gen_qsctpsocket_types.QSctpSocket, param1: cint, param2: cint, param3: pointer): cint =
+  fcQSctpSocket_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qsctpsocket_types.QSctpSocket, s: cstring): string =
   let v_ms = fcQSctpSocket_tr(s)
@@ -198,6 +209,65 @@ proc tr*(_: type gen_qsctpsocket_types.QSctpSocket, s: cstring, c: cstring, n: c
   c_free(v_ms.data)
   vx_ret
 
+proc QSctpSocketmetaObject*(self: gen_qsctpsocket_types.QSctpSocket, ): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fQSctpSocket_virtualbase_metaObject(self.h))
+
+type QSctpSocketmetaObjectProc* = proc(): gen_qobjectdefs_types.QMetaObject
+proc onmetaObject*(self: gen_qsctpsocket_types.QSctpSocket, slot: QSctpSocketmetaObjectProc) =
+  # TODO check subclass
+  var tmp = new QSctpSocketmetaObjectProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQSctpSocket_override_virtual_metaObject(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QSctpSocket_metaObject(self: ptr cQSctpSocket, slot: int): pointer {.exportc: "miqt_exec_callback_QSctpSocket_metaObject ".} =
+  var nimfunc = cast[ptr QSctpSocketmetaObjectProc](cast[pointer](slot))
+
+  let virtualReturn = nimfunc[]( )
+
+  virtualReturn.h
+proc QSctpSocketmetacast*(self: gen_qsctpsocket_types.QSctpSocket, param1: cstring): pointer =
+  fQSctpSocket_virtualbase_metacast(self.h, param1)
+
+type QSctpSocketmetacastProc* = proc(param1: cstring): pointer
+proc onmetacast*(self: gen_qsctpsocket_types.QSctpSocket, slot: QSctpSocketmetacastProc) =
+  # TODO check subclass
+  var tmp = new QSctpSocketmetacastProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQSctpSocket_override_virtual_metacast(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QSctpSocket_metacast(self: ptr cQSctpSocket, slot: int, param1: cstring): pointer {.exportc: "miqt_exec_callback_QSctpSocket_metacast ".} =
+  var nimfunc = cast[ptr QSctpSocketmetacastProc](cast[pointer](slot))
+  let slotval1 = (param1)
+
+
+  let virtualReturn = nimfunc[](slotval1 )
+
+  virtualReturn
+proc QSctpSocketmetacall*(self: gen_qsctpsocket_types.QSctpSocket, param1: cint, param2: cint, param3: pointer): cint =
+  fQSctpSocket_virtualbase_metacall(self.h, cint(param1), param2, param3)
+
+type QSctpSocketmetacallProc* = proc(param1: cint, param2: cint, param3: pointer): cint
+proc onmetacall*(self: gen_qsctpsocket_types.QSctpSocket, slot: QSctpSocketmetacallProc) =
+  # TODO check subclass
+  var tmp = new QSctpSocketmetacallProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQSctpSocket_override_virtual_metacall(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QSctpSocket_metacall(self: ptr cQSctpSocket, slot: int, param1: cint, param2: cint, param3: pointer): cint {.exportc: "miqt_exec_callback_QSctpSocket_metacall ".} =
+  var nimfunc = cast[ptr QSctpSocketmetacallProc](cast[pointer](slot))
+  let slotval1 = cint(param1)
+
+  let slotval2 = param2
+
+  let slotval3 = param3
+
+
+  let virtualReturn = nimfunc[](slotval1, slotval2, slotval3 )
+
+  virtualReturn
 proc QSctpSocketclose*(self: gen_qsctpsocket_types.QSctpSocket, ): void =
   fQSctpSocket_virtualbase_close(self.h)
 
@@ -844,5 +914,7 @@ proc miqt_exec_callback_QSctpSocket_disconnectNotify(self: ptr cQSctpSocket, slo
 
 
   nimfunc[](slotval1)
+proc staticMetaObject*(_: type gen_qsctpsocket_types.QSctpSocket): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fcQSctpSocket_staticMetaObject())
 proc delete*(self: gen_qsctpsocket_types.QSctpSocket) =
   fcQSctpSocket_delete(self.h)

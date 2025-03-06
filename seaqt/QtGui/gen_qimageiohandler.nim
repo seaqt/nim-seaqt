@@ -149,11 +149,18 @@ proc fcQImageIOPlugin_new(): ptr cQImageIOPlugin {.importc: "QImageIOPlugin_new"
 proc fcQImageIOPlugin_new2(parent: pointer): ptr cQImageIOPlugin {.importc: "QImageIOPlugin_new2".}
 proc fcQImageIOPlugin_metaObject(self: pointer, ): pointer {.importc: "QImageIOPlugin_metaObject".}
 proc fcQImageIOPlugin_metacast(self: pointer, param1: cstring): pointer {.importc: "QImageIOPlugin_metacast".}
+proc fcQImageIOPlugin_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QImageIOPlugin_metacall".}
 proc fcQImageIOPlugin_tr(s: cstring): struct_miqt_string {.importc: "QImageIOPlugin_tr".}
 proc fcQImageIOPlugin_capabilities(self: pointer, device: pointer, format: struct_miqt_string): cint {.importc: "QImageIOPlugin_capabilities".}
 proc fcQImageIOPlugin_create(self: pointer, device: pointer, format: struct_miqt_string): pointer {.importc: "QImageIOPlugin_create".}
 proc fcQImageIOPlugin_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QImageIOPlugin_tr2".}
 proc fcQImageIOPlugin_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QImageIOPlugin_tr3".}
+proc fQImageIOPlugin_virtualbase_metaObject(self: pointer, ): pointer{.importc: "QImageIOPlugin_virtualbase_metaObject".}
+proc fcQImageIOPlugin_override_virtual_metaObject(self: pointer, slot: int) {.importc: "QImageIOPlugin_override_virtual_metaObject".}
+proc fQImageIOPlugin_virtualbase_metacast(self: pointer, param1: cstring): pointer{.importc: "QImageIOPlugin_virtualbase_metacast".}
+proc fcQImageIOPlugin_override_virtual_metacast(self: pointer, slot: int) {.importc: "QImageIOPlugin_override_virtual_metacast".}
+proc fQImageIOPlugin_virtualbase_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint{.importc: "QImageIOPlugin_virtualbase_metacall".}
+proc fcQImageIOPlugin_override_virtual_metacall(self: pointer, slot: int) {.importc: "QImageIOPlugin_override_virtual_metacall".}
 proc fcQImageIOPlugin_override_virtual_capabilities(self: pointer, slot: int) {.importc: "QImageIOPlugin_override_virtual_capabilities".}
 proc fcQImageIOPlugin_override_virtual_create(self: pointer, slot: int) {.importc: "QImageIOPlugin_override_virtual_create".}
 proc fQImageIOPlugin_virtualbase_event(self: pointer, event: pointer): bool{.importc: "QImageIOPlugin_virtualbase_event".}
@@ -170,6 +177,7 @@ proc fQImageIOPlugin_virtualbase_connectNotify(self: pointer, signal: pointer): 
 proc fcQImageIOPlugin_override_virtual_connectNotify(self: pointer, slot: int) {.importc: "QImageIOPlugin_override_virtual_connectNotify".}
 proc fQImageIOPlugin_virtualbase_disconnectNotify(self: pointer, signal: pointer): void{.importc: "QImageIOPlugin_virtualbase_disconnectNotify".}
 proc fcQImageIOPlugin_override_virtual_disconnectNotify(self: pointer, slot: int) {.importc: "QImageIOPlugin_override_virtual_disconnectNotify".}
+proc fcQImageIOPlugin_staticMetaObject(): pointer {.importc: "QImageIOPlugin_staticMetaObject".}
 proc fcQImageIOPlugin_delete(self: pointer) {.importc: "QImageIOPlugin_delete".}
 
 
@@ -482,6 +490,9 @@ proc metaObject*(self: gen_qimageiohandler_types.QImageIOPlugin, ): gen_qobjectd
 proc metacast*(self: gen_qimageiohandler_types.QImageIOPlugin, param1: cstring): pointer =
   fcQImageIOPlugin_metacast(self.h, param1)
 
+proc metacall*(self: gen_qimageiohandler_types.QImageIOPlugin, param1: cint, param2: cint, param3: pointer): cint =
+  fcQImageIOPlugin_metacall(self.h, cint(param1), param2, param3)
+
 proc tr*(_: type gen_qimageiohandler_types.QImageIOPlugin, s: cstring): string =
   let v_ms = fcQImageIOPlugin_tr(s)
   let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
@@ -506,6 +517,65 @@ proc tr*(_: type gen_qimageiohandler_types.QImageIOPlugin, s: cstring, c: cstrin
   c_free(v_ms.data)
   vx_ret
 
+proc QImageIOPluginmetaObject*(self: gen_qimageiohandler_types.QImageIOPlugin, ): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fQImageIOPlugin_virtualbase_metaObject(self.h))
+
+type QImageIOPluginmetaObjectProc* = proc(): gen_qobjectdefs_types.QMetaObject
+proc onmetaObject*(self: gen_qimageiohandler_types.QImageIOPlugin, slot: QImageIOPluginmetaObjectProc) =
+  # TODO check subclass
+  var tmp = new QImageIOPluginmetaObjectProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQImageIOPlugin_override_virtual_metaObject(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QImageIOPlugin_metaObject(self: ptr cQImageIOPlugin, slot: int): pointer {.exportc: "miqt_exec_callback_QImageIOPlugin_metaObject ".} =
+  var nimfunc = cast[ptr QImageIOPluginmetaObjectProc](cast[pointer](slot))
+
+  let virtualReturn = nimfunc[]( )
+
+  virtualReturn.h
+proc QImageIOPluginmetacast*(self: gen_qimageiohandler_types.QImageIOPlugin, param1: cstring): pointer =
+  fQImageIOPlugin_virtualbase_metacast(self.h, param1)
+
+type QImageIOPluginmetacastProc* = proc(param1: cstring): pointer
+proc onmetacast*(self: gen_qimageiohandler_types.QImageIOPlugin, slot: QImageIOPluginmetacastProc) =
+  # TODO check subclass
+  var tmp = new QImageIOPluginmetacastProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQImageIOPlugin_override_virtual_metacast(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QImageIOPlugin_metacast(self: ptr cQImageIOPlugin, slot: int, param1: cstring): pointer {.exportc: "miqt_exec_callback_QImageIOPlugin_metacast ".} =
+  var nimfunc = cast[ptr QImageIOPluginmetacastProc](cast[pointer](slot))
+  let slotval1 = (param1)
+
+
+  let virtualReturn = nimfunc[](slotval1 )
+
+  virtualReturn
+proc QImageIOPluginmetacall*(self: gen_qimageiohandler_types.QImageIOPlugin, param1: cint, param2: cint, param3: pointer): cint =
+  fQImageIOPlugin_virtualbase_metacall(self.h, cint(param1), param2, param3)
+
+type QImageIOPluginmetacallProc* = proc(param1: cint, param2: cint, param3: pointer): cint
+proc onmetacall*(self: gen_qimageiohandler_types.QImageIOPlugin, slot: QImageIOPluginmetacallProc) =
+  # TODO check subclass
+  var tmp = new QImageIOPluginmetacallProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQImageIOPlugin_override_virtual_metacall(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QImageIOPlugin_metacall(self: ptr cQImageIOPlugin, slot: int, param1: cint, param2: cint, param3: pointer): cint {.exportc: "miqt_exec_callback_QImageIOPlugin_metacall ".} =
+  var nimfunc = cast[ptr QImageIOPluginmetacallProc](cast[pointer](slot))
+  let slotval1 = cint(param1)
+
+  let slotval2 = param2
+
+  let slotval3 = param3
+
+
+  let virtualReturn = nimfunc[](slotval1, slotval2, slotval3 )
+
+  virtualReturn
 type QImageIOPlugincapabilitiesProc* = proc(device: gen_qiodevice_types.QIODevice, format: seq[byte]): cint
 proc oncapabilities*(self: gen_qimageiohandler_types.QImageIOPlugin, slot: QImageIOPlugincapabilitiesProc) =
   # TODO check subclass
@@ -673,5 +743,7 @@ proc miqt_exec_callback_QImageIOPlugin_disconnectNotify(self: ptr cQImageIOPlugi
 
 
   nimfunc[](slotval1)
+proc staticMetaObject*(_: type gen_qimageiohandler_types.QImageIOPlugin): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fcQImageIOPlugin_staticMetaObject())
 proc delete*(self: gen_qimageiohandler_types.QImageIOPlugin) =
   fcQImageIOPlugin_delete(self.h)

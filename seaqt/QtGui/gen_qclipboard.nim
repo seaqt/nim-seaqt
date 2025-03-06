@@ -61,6 +61,7 @@ type cQClipboard*{.exportc: "QClipboard", incompleteStruct.} = object
 
 proc fcQClipboard_metaObject(self: pointer, ): pointer {.importc: "QClipboard_metaObject".}
 proc fcQClipboard_metacast(self: pointer, param1: cstring): pointer {.importc: "QClipboard_metacast".}
+proc fcQClipboard_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QClipboard_metacall".}
 proc fcQClipboard_tr(s: cstring): struct_miqt_string {.importc: "QClipboard_tr".}
 proc fcQClipboard_clear(self: pointer, ): void {.importc: "QClipboard_clear".}
 proc fcQClipboard_supportsSelection(self: pointer, ): bool {.importc: "QClipboard_supportsSelection".}
@@ -97,6 +98,7 @@ proc fcQClipboard_image1(self: pointer, mode: cint): pointer {.importc: "QClipbo
 proc fcQClipboard_pixmap1(self: pointer, mode: cint): pointer {.importc: "QClipboard_pixmap1".}
 proc fcQClipboard_setImage2(self: pointer, param1: pointer, mode: cint): void {.importc: "QClipboard_setImage2".}
 proc fcQClipboard_setPixmap2(self: pointer, param1: pointer, mode: cint): void {.importc: "QClipboard_setPixmap2".}
+proc fcQClipboard_staticMetaObject(): pointer {.importc: "QClipboard_staticMetaObject".}
 
 
 func init*(T: type gen_qclipboard_types.QClipboard, h: ptr cQClipboard): gen_qclipboard_types.QClipboard =
@@ -106,6 +108,9 @@ proc metaObject*(self: gen_qclipboard_types.QClipboard, ): gen_qobjectdefs_types
 
 proc metacast*(self: gen_qclipboard_types.QClipboard, param1: cstring): pointer =
   fcQClipboard_metacast(self.h, param1)
+
+proc metacall*(self: gen_qclipboard_types.QClipboard, param1: cint, param2: cint, param3: pointer): cint =
+  fcQClipboard_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qclipboard_types.QClipboard, s: cstring): string =
   let v_ms = fcQClipboard_tr(s)
@@ -270,3 +275,5 @@ proc setImage*(self: gen_qclipboard_types.QClipboard, param1: gen_qimage_types.Q
 proc setPixmap*(self: gen_qclipboard_types.QClipboard, param1: gen_qpixmap_types.QPixmap, mode: cint): void =
   fcQClipboard_setPixmap2(self.h, param1.h, cint(mode))
 
+proc staticMetaObject*(_: type gen_qclipboard_types.QClipboard): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fcQClipboard_staticMetaObject())

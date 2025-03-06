@@ -51,6 +51,9 @@ void miqt_exec_callback_QMenu_aboutToShow(intptr_t);
 void miqt_exec_callback_QMenu_aboutToHide(intptr_t);
 void miqt_exec_callback_QMenu_triggered(intptr_t, QAction*);
 void miqt_exec_callback_QMenu_hovered(intptr_t, QAction*);
+QMetaObject* miqt_exec_callback_QMenu_metaObject(const QMenu*, intptr_t);
+void* miqt_exec_callback_QMenu_metacast(QMenu*, intptr_t, const char*);
+int miqt_exec_callback_QMenu_metacall(QMenu*, intptr_t, int, int, void**);
 QSize* miqt_exec_callback_QMenu_sizeHint(const QMenu*, intptr_t);
 void miqt_exec_callback_QMenu_changeEvent(QMenu*, intptr_t, QEvent*);
 void miqt_exec_callback_QMenu_keyPressEvent(QMenu*, intptr_t, QKeyEvent*);
@@ -112,6 +115,62 @@ public:
 	VirtualQMenu(const QString& title, QWidget* parent): QMenu(title, parent) {};
 
 	virtual ~VirtualQMenu() override = default;
+
+	// cgo.Handle value for overwritten implementation
+	intptr_t handle__metaObject = 0;
+
+	// Subclass to allow providing a Go implementation
+	virtual const QMetaObject* metaObject() const override {
+		if (handle__metaObject == 0) {
+			return QMenu::metaObject();
+		}
+		
+
+		QMetaObject* callback_return_value = miqt_exec_callback_QMenu_metaObject(this, handle__metaObject);
+
+		return callback_return_value;
+	}
+
+	friend QMetaObject* QMenu_virtualbase_metaObject(const void* self);
+
+	// cgo.Handle value for overwritten implementation
+	intptr_t handle__metacast = 0;
+
+	// Subclass to allow providing a Go implementation
+	virtual void* qt_metacast(const char* param1) override {
+		if (handle__metacast == 0) {
+			return QMenu::qt_metacast(param1);
+		}
+		
+		const char* sigval1 = (const char*) param1;
+
+		void* callback_return_value = miqt_exec_callback_QMenu_metacast(this, handle__metacast, sigval1);
+
+		return callback_return_value;
+	}
+
+	friend void* QMenu_virtualbase_metacast(void* self, const char* param1);
+
+	// cgo.Handle value for overwritten implementation
+	intptr_t handle__metacall = 0;
+
+	// Subclass to allow providing a Go implementation
+	virtual int qt_metacall(QMetaObject::Call param1, int param2, void** param3) override {
+		if (handle__metacall == 0) {
+			return QMenu::qt_metacall(param1, param2, param3);
+		}
+		
+		QMetaObject::Call param1_ret = param1;
+		int sigval1 = static_cast<int>(param1_ret);
+		int sigval2 = param2;
+		void** sigval3 = param3;
+
+		int callback_return_value = miqt_exec_callback_QMenu_metacall(this, handle__metacall, sigval1, sigval2, sigval3);
+
+		return static_cast<int>(callback_return_value);
+	}
+
+	friend int QMenu_virtualbase_metacall(void* self, int param1, int param2, void** param3);
 
 	// cgo.Handle value for overwritten implementation
 	intptr_t handle__sizeHint = 0;
@@ -1064,6 +1123,10 @@ void* QMenu_metacast(QMenu* self, const char* param1) {
 	return self->qt_metacast(param1);
 }
 
+int QMenu_metacall(QMenu* self, int param1, int param2, void** param3) {
+	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
+}
+
 struct miqt_string QMenu_tr(const char* s) {
 	QString _ret = QMenu::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
@@ -1345,6 +1408,54 @@ QAction* QMenu_exec4(struct miqt_array /* of QAction* */  actions, QPoint* pos, 
 		actions_QList.push_back(actions_arr[i]);
 	}
 	return QMenu::exec(actions_QList, *pos, at, parent);
+}
+
+bool QMenu_override_virtual_metaObject(void* self, intptr_t slot) {
+	VirtualQMenu* self_cast = dynamic_cast<VirtualQMenu*>( (QMenu*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+	
+	self_cast->handle__metaObject = slot;
+	return true;
+}
+
+QMetaObject* QMenu_virtualbase_metaObject(const void* self) {
+
+	return (QMetaObject*) ( (const VirtualQMenu*)(self) )->QMenu::metaObject();
+
+}
+
+bool QMenu_override_virtual_metacast(void* self, intptr_t slot) {
+	VirtualQMenu* self_cast = dynamic_cast<VirtualQMenu*>( (QMenu*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+	
+	self_cast->handle__metacast = slot;
+	return true;
+}
+
+void* QMenu_virtualbase_metacast(void* self, const char* param1) {
+
+	return ( (VirtualQMenu*)(self) )->QMenu::qt_metacast(param1);
+
+}
+
+bool QMenu_override_virtual_metacall(void* self, intptr_t slot) {
+	VirtualQMenu* self_cast = dynamic_cast<VirtualQMenu*>( (QMenu*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+	
+	self_cast->handle__metacall = slot;
+	return true;
+}
+
+int QMenu_virtualbase_metacall(void* self, int param1, int param2, void** param3) {
+
+	return ( (VirtualQMenu*)(self) )->QMenu::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
+
 }
 
 bool QMenu_override_virtual_sizeHint(void* self, intptr_t slot) {
@@ -2116,6 +2227,7 @@ void QMenu_virtualbase_disconnectNotify(void* self, QMetaMethod* signal) {
 
 }
 
+const QMetaObject* QMenu_staticMetaObject() { return &QMenu::staticMetaObject; }
 int QMenu_protectedbase_columnCount(bool* _dynamic_cast_ok, const void* self) {
 	VirtualQMenu* self_cast = dynamic_cast<VirtualQMenu*>( (QMenu*)(self) );
 	if (self_cast == nullptr) {

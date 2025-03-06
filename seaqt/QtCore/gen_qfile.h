@@ -45,6 +45,7 @@ QFile* QFile_new4(struct miqt_string name, QObject* parent);
 void QFile_virtbase(QFile* src, QFileDevice** outptr_QFileDevice);
 QMetaObject* QFile_metaObject(const QFile* self);
 void* QFile_metacast(QFile* self, const char* param1);
+int QFile_metacall(QFile* self, int param1, int param2, void** param3);
 struct miqt_string QFile_tr(const char* s);
 struct miqt_string QFile_fileName(const QFile* self);
 void QFile_setFileName(QFile* self, struct miqt_string name);
@@ -78,6 +79,12 @@ bool QFile_setPermissions2(struct miqt_string filename, int permissionSpec);
 struct miqt_string QFile_tr2(const char* s, const char* c);
 struct miqt_string QFile_tr3(const char* s, const char* c, int n);
 bool QFile_open33(QFile* self, int fd, int ioFlags, int handleFlags);
+bool QFile_override_virtual_metaObject(void* self, intptr_t slot);
+QMetaObject* QFile_virtualbase_metaObject(const void* self);
+bool QFile_override_virtual_metacast(void* self, intptr_t slot);
+void* QFile_virtualbase_metacast(void* self, const char* param1);
+bool QFile_override_virtual_metacall(void* self, intptr_t slot);
+int QFile_virtualbase_metacall(void* self, int param1, int param2, void** param3);
 bool QFile_override_virtual_fileName(void* self, intptr_t slot);
 struct miqt_string QFile_virtualbase_fileName(const void* self);
 bool QFile_override_virtual_open(void* self, intptr_t slot);
@@ -140,6 +147,7 @@ QObject* QFile_protectedbase_sender(bool* _dynamic_cast_ok, const void* self);
 int QFile_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
 int QFile_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
 bool QFile_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+const QMetaObject* QFile_staticMetaObject();
 void QFile_delete(QFile* self);
 
 #ifdef __cplusplus

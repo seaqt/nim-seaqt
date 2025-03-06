@@ -37,6 +37,7 @@ typedef struct QVariant QVariant;
 void QInputMethod_virtbase(QInputMethod* src, QObject** outptr_QObject);
 QMetaObject* QInputMethod_metaObject(const QInputMethod* self);
 void* QInputMethod_metacast(QInputMethod* self, const char* param1);
+int QInputMethod_metacall(QInputMethod* self, int param1, int param2, void** param3);
 struct miqt_string QInputMethod_tr(const char* s);
 QTransform* QInputMethod_inputItemTransform(const QInputMethod* self);
 void QInputMethod_setInputItemTransform(QInputMethod* self, QTransform* transform);
@@ -76,6 +77,7 @@ void QInputMethod_inputDirectionChanged(QInputMethod* self, int newDirection);
 void QInputMethod_connect_inputDirectionChanged(QInputMethod* self, intptr_t slot);
 struct miqt_string QInputMethod_tr2(const char* s, const char* c);
 struct miqt_string QInputMethod_tr3(const char* s, const char* c, int n);
+const QMetaObject* QInputMethod_staticMetaObject();
 
 #ifdef __cplusplus
 } /* extern C */

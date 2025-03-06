@@ -202,6 +202,7 @@ QMetaMethod* QQmlProperty_method(const QQmlProperty* self) {
 	return new QMetaMethod(self->method());
 }
 
+const QMetaObject* QQmlProperty_staticMetaObject() { return &QQmlProperty::staticMetaObject; }
 void QQmlProperty_delete(QQmlProperty* self) {
 	delete self;
 }

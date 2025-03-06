@@ -49,6 +49,9 @@ extern "C" {
 #endif
 
 void miqt_exec_callback_QMessageBox_buttonClicked(intptr_t, QAbstractButton*);
+QMetaObject* miqt_exec_callback_QMessageBox_metaObject(const QMessageBox*, intptr_t);
+void* miqt_exec_callback_QMessageBox_metacast(QMessageBox*, intptr_t, const char*);
+int miqt_exec_callback_QMessageBox_metacall(QMessageBox*, intptr_t, int, int, void**);
 bool miqt_exec_callback_QMessageBox_event(QMessageBox*, intptr_t, QEvent*);
 void miqt_exec_callback_QMessageBox_resizeEvent(QMessageBox*, intptr_t, QResizeEvent*);
 void miqt_exec_callback_QMessageBox_showEvent(QMessageBox*, intptr_t, QShowEvent*);
@@ -119,6 +122,62 @@ public:
 	VirtualQMessageBox(const QString& title, const QString& text, QMessageBox::Icon icon, int button0, int button1, int button2, QWidget* parent, Qt::WindowFlags f): QMessageBox(title, text, icon, button0, button1, button2, parent, f) {};
 
 	virtual ~VirtualQMessageBox() override = default;
+
+	// cgo.Handle value for overwritten implementation
+	intptr_t handle__metaObject = 0;
+
+	// Subclass to allow providing a Go implementation
+	virtual const QMetaObject* metaObject() const override {
+		if (handle__metaObject == 0) {
+			return QMessageBox::metaObject();
+		}
+		
+
+		QMetaObject* callback_return_value = miqt_exec_callback_QMessageBox_metaObject(this, handle__metaObject);
+
+		return callback_return_value;
+	}
+
+	friend QMetaObject* QMessageBox_virtualbase_metaObject(const void* self);
+
+	// cgo.Handle value for overwritten implementation
+	intptr_t handle__metacast = 0;
+
+	// Subclass to allow providing a Go implementation
+	virtual void* qt_metacast(const char* param1) override {
+		if (handle__metacast == 0) {
+			return QMessageBox::qt_metacast(param1);
+		}
+		
+		const char* sigval1 = (const char*) param1;
+
+		void* callback_return_value = miqt_exec_callback_QMessageBox_metacast(this, handle__metacast, sigval1);
+
+		return callback_return_value;
+	}
+
+	friend void* QMessageBox_virtualbase_metacast(void* self, const char* param1);
+
+	// cgo.Handle value for overwritten implementation
+	intptr_t handle__metacall = 0;
+
+	// Subclass to allow providing a Go implementation
+	virtual int qt_metacall(QMetaObject::Call param1, int param2, void** param3) override {
+		if (handle__metacall == 0) {
+			return QMessageBox::qt_metacall(param1, param2, param3);
+		}
+		
+		QMetaObject::Call param1_ret = param1;
+		int sigval1 = static_cast<int>(param1_ret);
+		int sigval2 = param2;
+		void** sigval3 = param3;
+
+		int callback_return_value = miqt_exec_callback_QMessageBox_metacall(this, handle__metacall, sigval1, sigval2, sigval3);
+
+		return static_cast<int>(callback_return_value);
+	}
+
+	friend int QMessageBox_virtualbase_metacall(void* self, int param1, int param2, void** param3);
 
 	// cgo.Handle value for overwritten implementation
 	intptr_t handle__event = 0;
@@ -1173,6 +1232,10 @@ void* QMessageBox_metacast(QMessageBox* self, const char* param1) {
 	return self->qt_metacast(param1);
 }
 
+int QMessageBox_metacall(QMessageBox* self, int param1, int param2, void** param3) {
+	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
+}
+
 struct miqt_string QMessageBox_tr(const char* s) {
 	QString _ret = QMessageBox::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
@@ -1775,6 +1838,54 @@ int QMessageBox_critical8(QWidget* parent, struct miqt_string title, struct miqt
 	QString button1Text_QString = QString::fromUtf8(button1Text.data, button1Text.len);
 	QString button2Text_QString = QString::fromUtf8(button2Text.data, button2Text.len);
 	return QMessageBox::critical(parent, title_QString, text_QString, button0Text_QString, button1Text_QString, button2Text_QString, static_cast<int>(defaultButtonNumber), static_cast<int>(escapeButtonNumber));
+}
+
+bool QMessageBox_override_virtual_metaObject(void* self, intptr_t slot) {
+	VirtualQMessageBox* self_cast = dynamic_cast<VirtualQMessageBox*>( (QMessageBox*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+	
+	self_cast->handle__metaObject = slot;
+	return true;
+}
+
+QMetaObject* QMessageBox_virtualbase_metaObject(const void* self) {
+
+	return (QMetaObject*) ( (const VirtualQMessageBox*)(self) )->QMessageBox::metaObject();
+
+}
+
+bool QMessageBox_override_virtual_metacast(void* self, intptr_t slot) {
+	VirtualQMessageBox* self_cast = dynamic_cast<VirtualQMessageBox*>( (QMessageBox*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+	
+	self_cast->handle__metacast = slot;
+	return true;
+}
+
+void* QMessageBox_virtualbase_metacast(void* self, const char* param1) {
+
+	return ( (VirtualQMessageBox*)(self) )->QMessageBox::qt_metacast(param1);
+
+}
+
+bool QMessageBox_override_virtual_metacall(void* self, intptr_t slot) {
+	VirtualQMessageBox* self_cast = dynamic_cast<VirtualQMessageBox*>( (QMessageBox*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+	
+	self_cast->handle__metacall = slot;
+	return true;
+}
+
+int QMessageBox_virtualbase_metacall(void* self, int param1, int param2, void** param3) {
+
+	return ( (VirtualQMessageBox*)(self) )->QMessageBox::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
+
 }
 
 bool QMessageBox_override_virtual_event(void* self, intptr_t slot) {
@@ -2610,6 +2721,7 @@ void QMessageBox_virtualbase_disconnectNotify(void* self, QMetaMethod* signal) {
 
 }
 
+const QMetaObject* QMessageBox_staticMetaObject() { return &QMessageBox::staticMetaObject; }
 void QMessageBox_protectedbase_adjustPosition(bool* _dynamic_cast_ok, void* self, QWidget* param1) {
 	VirtualQMessageBox* self_cast = dynamic_cast<VirtualQMessageBox*>( (QMessageBox*)(self) );
 	if (self_cast == nullptr) {

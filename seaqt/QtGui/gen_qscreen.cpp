@@ -44,6 +44,10 @@ void* QScreen_metacast(QScreen* self, const char* param1) {
 	return self->qt_metacast(param1);
 }
 
+int QScreen_metacall(QScreen* self, int param1, int param2, void** param3) {
+	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
+}
+
 struct miqt_string QScreen_tr(const char* s) {
 	QString _ret = QScreen::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
@@ -389,6 +393,7 @@ QPixmap* QScreen_grabWindow5(QScreen* self, uintptr_t window, int x, int y, int 
 	return new QPixmap(self->grabWindow(static_cast<WId>(window), static_cast<int>(x), static_cast<int>(y), static_cast<int>(w), static_cast<int>(h)));
 }
 
+const QMetaObject* QScreen_staticMetaObject() { return &QScreen::staticMetaObject; }
 void QScreen_delete(QScreen* self) {
 	delete self;
 }

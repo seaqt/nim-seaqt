@@ -3,6 +3,7 @@
 #include <QChildEvent>
 #include <QEvent>
 #include <QMetaMethod>
+#include <QMetaObject>
 #include <QObject>
 #include <QQuaternion>
 #include <QTimerEvent>
@@ -14,6 +15,9 @@
 extern "C" {
 #endif
 
+QMetaObject* miqt_exec_callback_QAudioListener_metaObject(const QAudioListener*, intptr_t);
+void* miqt_exec_callback_QAudioListener_metacast(QAudioListener*, intptr_t, const char*);
+int miqt_exec_callback_QAudioListener_metacall(QAudioListener*, intptr_t, int, int, void**);
 bool miqt_exec_callback_QAudioListener_event(QAudioListener*, intptr_t, QEvent*);
 bool miqt_exec_callback_QAudioListener_eventFilter(QAudioListener*, intptr_t, QObject*, QEvent*);
 void miqt_exec_callback_QAudioListener_timerEvent(QAudioListener*, intptr_t, QTimerEvent*);
@@ -31,6 +35,62 @@ public:
 	VirtualQAudioListener(QAudioEngine* engine): QAudioListener(engine) {};
 
 	virtual ~VirtualQAudioListener() override = default;
+
+	// cgo.Handle value for overwritten implementation
+	intptr_t handle__metaObject = 0;
+
+	// Subclass to allow providing a Go implementation
+	virtual const QMetaObject* metaObject() const override {
+		if (handle__metaObject == 0) {
+			return QAudioListener::metaObject();
+		}
+		
+
+		QMetaObject* callback_return_value = miqt_exec_callback_QAudioListener_metaObject(this, handle__metaObject);
+
+		return callback_return_value;
+	}
+
+	friend QMetaObject* QAudioListener_virtualbase_metaObject(const void* self);
+
+	// cgo.Handle value for overwritten implementation
+	intptr_t handle__metacast = 0;
+
+	// Subclass to allow providing a Go implementation
+	virtual void* qt_metacast(const char* param1) override {
+		if (handle__metacast == 0) {
+			return QAudioListener::qt_metacast(param1);
+		}
+		
+		const char* sigval1 = (const char*) param1;
+
+		void* callback_return_value = miqt_exec_callback_QAudioListener_metacast(this, handle__metacast, sigval1);
+
+		return callback_return_value;
+	}
+
+	friend void* QAudioListener_virtualbase_metacast(void* self, const char* param1);
+
+	// cgo.Handle value for overwritten implementation
+	intptr_t handle__metacall = 0;
+
+	// Subclass to allow providing a Go implementation
+	virtual int qt_metacall(QMetaObject::Call param1, int param2, void** param3) override {
+		if (handle__metacall == 0) {
+			return QAudioListener::qt_metacall(param1, param2, param3);
+		}
+		
+		QMetaObject::Call param1_ret = param1;
+		int sigval1 = static_cast<int>(param1_ret);
+		int sigval2 = param2;
+		void** sigval3 = param3;
+
+		int callback_return_value = miqt_exec_callback_QAudioListener_metacall(this, handle__metacall, sigval1, sigval2, sigval3);
+
+		return static_cast<int>(callback_return_value);
+	}
+
+	friend int QAudioListener_virtualbase_metacall(void* self, int param1, int param2, void** param3);
 
 	// cgo.Handle value for overwritten implementation
 	intptr_t handle__event = 0;
@@ -201,6 +261,54 @@ QQuaternion* QAudioListener_rotation(const QAudioListener* self) {
 
 QAudioEngine* QAudioListener_engine(const QAudioListener* self) {
 	return self->engine();
+}
+
+bool QAudioListener_override_virtual_metaObject(void* self, intptr_t slot) {
+	VirtualQAudioListener* self_cast = dynamic_cast<VirtualQAudioListener*>( (QAudioListener*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+	
+	self_cast->handle__metaObject = slot;
+	return true;
+}
+
+QMetaObject* QAudioListener_virtualbase_metaObject(const void* self) {
+
+	return (QMetaObject*) ( (const VirtualQAudioListener*)(self) )->QAudioListener::metaObject();
+
+}
+
+bool QAudioListener_override_virtual_metacast(void* self, intptr_t slot) {
+	VirtualQAudioListener* self_cast = dynamic_cast<VirtualQAudioListener*>( (QAudioListener*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+	
+	self_cast->handle__metacast = slot;
+	return true;
+}
+
+void* QAudioListener_virtualbase_metacast(void* self, const char* param1) {
+
+	return ( (VirtualQAudioListener*)(self) )->QAudioListener::qt_metacast(param1);
+
+}
+
+bool QAudioListener_override_virtual_metacall(void* self, intptr_t slot) {
+	VirtualQAudioListener* self_cast = dynamic_cast<VirtualQAudioListener*>( (QAudioListener*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+	
+	self_cast->handle__metacall = slot;
+	return true;
+}
+
+int QAudioListener_virtualbase_metacall(void* self, int param1, int param2, void** param3) {
+
+	return ( (VirtualQAudioListener*)(self) )->QAudioListener::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
+
 }
 
 bool QAudioListener_override_virtual_event(void* self, intptr_t slot) {

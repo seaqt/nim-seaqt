@@ -255,6 +255,18 @@ void QMetaObject_connectSlotsByName(QObject* o) {
 	QMetaObject::connectSlotsByName(o);
 }
 
+void QMetaObject_activate(QObject* sender, int signal_index, void** argv) {
+	QMetaObject::activate(sender, static_cast<int>(signal_index), argv);
+}
+
+void QMetaObject_activate2(QObject* sender, QMetaObject* param2, int local_signal_index, void** argv) {
+	QMetaObject::activate(sender, param2, static_cast<int>(local_signal_index), argv);
+}
+
+void QMetaObject_activate3(QObject* sender, int signal_offset, int local_signal_index, void** argv) {
+	QMetaObject::activate(sender, static_cast<int>(signal_offset), static_cast<int>(local_signal_index), argv);
+}
+
 bool QMetaObject_invokeMethod(QObject* obj, const char* member, int param3, QGenericReturnArgument* ret) {
 	return QMetaObject::invokeMethod(obj, member, static_cast<Qt::ConnectionType>(param3), *ret);
 }
@@ -273,6 +285,14 @@ bool QMetaObject_invokeMethod4(QObject* obj, const char* member) {
 
 QObject* QMetaObject_newInstance(const QMetaObject* self) {
 	return self->newInstance();
+}
+
+int QMetaObject_staticMetacall(const QMetaObject* self, int param1, int param2, void** param3) {
+	return self->static_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
+}
+
+int QMetaObject_metacall(QObject* param1, int param2, int param3, void** param4) {
+	return QMetaObject::metacall(param1, static_cast<QMetaObject::Call>(param2), static_cast<int>(param3), param4);
 }
 
 struct miqt_string QMetaObject_tr3(const QMetaObject* self, const char* s, const char* c, int n) {

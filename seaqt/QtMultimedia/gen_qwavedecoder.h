@@ -45,6 +45,7 @@ QWaveDecoder* QWaveDecoder_new4(QIODevice* device, QAudioFormat* format, QObject
 void QWaveDecoder_virtbase(QWaveDecoder* src, QIODevice** outptr_QIODevice);
 QMetaObject* QWaveDecoder_metaObject(const QWaveDecoder* self);
 void* QWaveDecoder_metacast(QWaveDecoder* self, const char* param1);
+int QWaveDecoder_metacall(QWaveDecoder* self, int param1, int param2, void** param3);
 struct miqt_string QWaveDecoder_tr(const char* s);
 QAudioFormat* QWaveDecoder_audioFormat(const QWaveDecoder* self);
 QIODevice* QWaveDecoder_getDevice(QWaveDecoder* self);
@@ -63,6 +64,12 @@ void QWaveDecoder_parsingError(QWaveDecoder* self);
 void QWaveDecoder_connect_parsingError(QWaveDecoder* self, intptr_t slot);
 struct miqt_string QWaveDecoder_tr2(const char* s, const char* c);
 struct miqt_string QWaveDecoder_tr3(const char* s, const char* c, int n);
+bool QWaveDecoder_override_virtual_metaObject(void* self, intptr_t slot);
+QMetaObject* QWaveDecoder_virtualbase_metaObject(const void* self);
+bool QWaveDecoder_override_virtual_metacast(void* self, intptr_t slot);
+void* QWaveDecoder_virtualbase_metacast(void* self, const char* param1);
+bool QWaveDecoder_override_virtual_metacall(void* self, intptr_t slot);
+int QWaveDecoder_virtualbase_metacall(void* self, int param1, int param2, void** param3);
 bool QWaveDecoder_override_virtual_open(void* self, intptr_t slot);
 bool QWaveDecoder_virtualbase_open(void* self, int mode);
 bool QWaveDecoder_override_virtual_close(void* self, intptr_t slot);
@@ -113,6 +120,7 @@ QObject* QWaveDecoder_protectedbase_sender(bool* _dynamic_cast_ok, const void* s
 int QWaveDecoder_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
 int QWaveDecoder_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
 bool QWaveDecoder_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+const QMetaObject* QWaveDecoder_staticMetaObject();
 void QWaveDecoder_delete(QWaveDecoder* self);
 
 #ifdef __cplusplus

@@ -95,6 +95,7 @@ QFontDialog* QFontDialog_new4(QFont* initial, QWidget* parent);
 void QFontDialog_virtbase(QFontDialog* src, QDialog** outptr_QDialog);
 QMetaObject* QFontDialog_metaObject(const QFontDialog* self);
 void* QFontDialog_metacast(QFontDialog* self, const char* param1);
+int QFontDialog_metacall(QFontDialog* self, int param1, int param2, void** param3);
 struct miqt_string QFontDialog_tr(const char* s);
 void QFontDialog_setCurrentFont(QFontDialog* self, QFont* font);
 QFont* QFontDialog_currentFont(const QFontDialog* self);
@@ -120,6 +121,12 @@ QFont* QFontDialog_getFont22(bool* ok, QWidget* parent);
 QFont* QFontDialog_getFont3(bool* ok, QFont* initial, QWidget* parent);
 QFont* QFontDialog_getFont4(bool* ok, QFont* initial, QWidget* parent, struct miqt_string title);
 QFont* QFontDialog_getFont5(bool* ok, QFont* initial, QWidget* parent, struct miqt_string title, int options);
+bool QFontDialog_override_virtual_metaObject(void* self, intptr_t slot);
+QMetaObject* QFontDialog_virtualbase_metaObject(const void* self);
+bool QFontDialog_override_virtual_metacast(void* self, intptr_t slot);
+void* QFontDialog_virtualbase_metacast(void* self, const char* param1);
+bool QFontDialog_override_virtual_metacall(void* self, intptr_t slot);
+int QFontDialog_virtualbase_metacall(void* self, int param1, int param2, void** param3);
 bool QFontDialog_override_virtual_setVisible(void* self, intptr_t slot);
 void QFontDialog_virtualbase_setVisible(void* self, bool visible);
 bool QFontDialog_override_virtual_changeEvent(void* self, intptr_t slot);
@@ -234,6 +241,7 @@ QObject* QFontDialog_protectedbase_sender(bool* _dynamic_cast_ok, const void* se
 int QFontDialog_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
 int QFontDialog_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
 bool QFontDialog_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+const QMetaObject* QFontDialog_staticMetaObject();
 void QFontDialog_delete(QFontDialog* self);
 
 #ifdef __cplusplus

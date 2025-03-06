@@ -161,3 +161,4 @@ struct miqt_string QStandardPaths_findExecutable2(struct miqt_string executableN
 	return _ms;
 }
 
+const QMetaObject* QStandardPaths_staticMetaObject() { return &QStandardPaths::staticMetaObject; }

@@ -45,6 +45,10 @@ void* QGraphicsAnchor_metacast(QGraphicsAnchor* self, const char* param1) {
 	return self->qt_metacast(param1);
 }
 
+int QGraphicsAnchor_metacall(QGraphicsAnchor* self, int param1, int param2, void** param3) {
+	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
+}
+
 struct miqt_string QGraphicsAnchor_tr(const char* s) {
 	QString _ret = QGraphicsAnchor::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
@@ -100,6 +104,7 @@ struct miqt_string QGraphicsAnchor_tr3(const char* s, const char* c, int n) {
 	return _ms;
 }
 
+const QMetaObject* QGraphicsAnchor_staticMetaObject() { return &QGraphicsAnchor::staticMetaObject; }
 void QGraphicsAnchor_delete(QGraphicsAnchor* self) {
 	delete self;
 }

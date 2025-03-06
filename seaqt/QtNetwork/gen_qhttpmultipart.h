@@ -57,6 +57,7 @@ QHttpMultiPart* QHttpMultiPart_new4(int contentType, QObject* parent);
 void QHttpMultiPart_virtbase(QHttpMultiPart* src, QObject** outptr_QObject);
 QMetaObject* QHttpMultiPart_metaObject(const QHttpMultiPart* self);
 void* QHttpMultiPart_metacast(QHttpMultiPart* self, const char* param1);
+int QHttpMultiPart_metacall(QHttpMultiPart* self, int param1, int param2, void** param3);
 struct miqt_string QHttpMultiPart_tr(const char* s);
 void QHttpMultiPart_append(QHttpMultiPart* self, QHttpPart* httpPart);
 void QHttpMultiPart_setContentType(QHttpMultiPart* self, int contentType);
@@ -64,6 +65,12 @@ struct miqt_string QHttpMultiPart_boundary(const QHttpMultiPart* self);
 void QHttpMultiPart_setBoundary(QHttpMultiPart* self, struct miqt_string boundary);
 struct miqt_string QHttpMultiPart_tr2(const char* s, const char* c);
 struct miqt_string QHttpMultiPart_tr3(const char* s, const char* c, int n);
+bool QHttpMultiPart_override_virtual_metaObject(void* self, intptr_t slot);
+QMetaObject* QHttpMultiPart_virtualbase_metaObject(const void* self);
+bool QHttpMultiPart_override_virtual_metacast(void* self, intptr_t slot);
+void* QHttpMultiPart_virtualbase_metacast(void* self, const char* param1);
+bool QHttpMultiPart_override_virtual_metacall(void* self, intptr_t slot);
+int QHttpMultiPart_virtualbase_metacall(void* self, int param1, int param2, void** param3);
 bool QHttpMultiPart_override_virtual_event(void* self, intptr_t slot);
 bool QHttpMultiPart_virtualbase_event(void* self, QEvent* event);
 bool QHttpMultiPart_override_virtual_eventFilter(void* self, intptr_t slot);
@@ -82,6 +89,7 @@ QObject* QHttpMultiPart_protectedbase_sender(bool* _dynamic_cast_ok, const void*
 int QHttpMultiPart_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
 int QHttpMultiPart_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
 bool QHttpMultiPart_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+const QMetaObject* QHttpMultiPart_staticMetaObject();
 void QHttpMultiPart_delete(QHttpMultiPart* self);
 
 #ifdef __cplusplus

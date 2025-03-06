@@ -21,6 +21,9 @@ void miqt_exec_callback_QAmbientSound_sourceChanged(intptr_t);
 void miqt_exec_callback_QAmbientSound_loopsChanged(intptr_t);
 void miqt_exec_callback_QAmbientSound_autoPlayChanged(intptr_t);
 void miqt_exec_callback_QAmbientSound_volumeChanged(intptr_t);
+QMetaObject* miqt_exec_callback_QAmbientSound_metaObject(const QAmbientSound*, intptr_t);
+void* miqt_exec_callback_QAmbientSound_metacast(QAmbientSound*, intptr_t, const char*);
+int miqt_exec_callback_QAmbientSound_metacall(QAmbientSound*, intptr_t, int, int, void**);
 bool miqt_exec_callback_QAmbientSound_event(QAmbientSound*, intptr_t, QEvent*);
 bool miqt_exec_callback_QAmbientSound_eventFilter(QAmbientSound*, intptr_t, QObject*, QEvent*);
 void miqt_exec_callback_QAmbientSound_timerEvent(QAmbientSound*, intptr_t, QTimerEvent*);
@@ -38,6 +41,62 @@ public:
 	VirtualQAmbientSound(QAudioEngine* engine): QAmbientSound(engine) {};
 
 	virtual ~VirtualQAmbientSound() override = default;
+
+	// cgo.Handle value for overwritten implementation
+	intptr_t handle__metaObject = 0;
+
+	// Subclass to allow providing a Go implementation
+	virtual const QMetaObject* metaObject() const override {
+		if (handle__metaObject == 0) {
+			return QAmbientSound::metaObject();
+		}
+		
+
+		QMetaObject* callback_return_value = miqt_exec_callback_QAmbientSound_metaObject(this, handle__metaObject);
+
+		return callback_return_value;
+	}
+
+	friend QMetaObject* QAmbientSound_virtualbase_metaObject(const void* self);
+
+	// cgo.Handle value for overwritten implementation
+	intptr_t handle__metacast = 0;
+
+	// Subclass to allow providing a Go implementation
+	virtual void* qt_metacast(const char* param1) override {
+		if (handle__metacast == 0) {
+			return QAmbientSound::qt_metacast(param1);
+		}
+		
+		const char* sigval1 = (const char*) param1;
+
+		void* callback_return_value = miqt_exec_callback_QAmbientSound_metacast(this, handle__metacast, sigval1);
+
+		return callback_return_value;
+	}
+
+	friend void* QAmbientSound_virtualbase_metacast(void* self, const char* param1);
+
+	// cgo.Handle value for overwritten implementation
+	intptr_t handle__metacall = 0;
+
+	// Subclass to allow providing a Go implementation
+	virtual int qt_metacall(QMetaObject::Call param1, int param2, void** param3) override {
+		if (handle__metacall == 0) {
+			return QAmbientSound::qt_metacall(param1, param2, param3);
+		}
+		
+		QMetaObject::Call param1_ret = param1;
+		int sigval1 = static_cast<int>(param1_ret);
+		int sigval2 = param2;
+		void** sigval3 = param3;
+
+		int callback_return_value = miqt_exec_callback_QAmbientSound_metacall(this, handle__metacall, sigval1, sigval2, sigval3);
+
+		return static_cast<int>(callback_return_value);
+	}
+
+	friend int QAmbientSound_virtualbase_metacall(void* self, int param1, int param2, void** param3);
 
 	// cgo.Handle value for overwritten implementation
 	intptr_t handle__event = 0;
@@ -198,6 +257,10 @@ void* QAmbientSound_metacast(QAmbientSound* self, const char* param1) {
 	return self->qt_metacast(param1);
 }
 
+int QAmbientSound_metacall(QAmbientSound* self, int param1, int param2, void** param3) {
+	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
+}
+
 struct miqt_string QAmbientSound_tr(const char* s) {
 	QString _ret = QAmbientSound::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
@@ -319,6 +382,54 @@ struct miqt_string QAmbientSound_tr3(const char* s, const char* c, int n) {
 	return _ms;
 }
 
+bool QAmbientSound_override_virtual_metaObject(void* self, intptr_t slot) {
+	VirtualQAmbientSound* self_cast = dynamic_cast<VirtualQAmbientSound*>( (QAmbientSound*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+	
+	self_cast->handle__metaObject = slot;
+	return true;
+}
+
+QMetaObject* QAmbientSound_virtualbase_metaObject(const void* self) {
+
+	return (QMetaObject*) ( (const VirtualQAmbientSound*)(self) )->QAmbientSound::metaObject();
+
+}
+
+bool QAmbientSound_override_virtual_metacast(void* self, intptr_t slot) {
+	VirtualQAmbientSound* self_cast = dynamic_cast<VirtualQAmbientSound*>( (QAmbientSound*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+	
+	self_cast->handle__metacast = slot;
+	return true;
+}
+
+void* QAmbientSound_virtualbase_metacast(void* self, const char* param1) {
+
+	return ( (VirtualQAmbientSound*)(self) )->QAmbientSound::qt_metacast(param1);
+
+}
+
+bool QAmbientSound_override_virtual_metacall(void* self, intptr_t slot) {
+	VirtualQAmbientSound* self_cast = dynamic_cast<VirtualQAmbientSound*>( (QAmbientSound*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+	
+	self_cast->handle__metacall = slot;
+	return true;
+}
+
+int QAmbientSound_virtualbase_metacall(void* self, int param1, int param2, void** param3) {
+
+	return ( (VirtualQAmbientSound*)(self) )->QAmbientSound::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
+
+}
+
 bool QAmbientSound_override_virtual_event(void* self, intptr_t slot) {
 	VirtualQAmbientSound* self_cast = dynamic_cast<VirtualQAmbientSound*>( (QAmbientSound*)(self) );
 	if (self_cast == nullptr) {
@@ -431,6 +542,7 @@ void QAmbientSound_virtualbase_disconnectNotify(void* self, QMetaMethod* signal)
 
 }
 
+const QMetaObject* QAmbientSound_staticMetaObject() { return &QAmbientSound::staticMetaObject; }
 QObject* QAmbientSound_protectedbase_sender(bool* _dynamic_cast_ok, const void* self) {
 	VirtualQAmbientSound* self_cast = dynamic_cast<VirtualQAmbientSound*>( (QAmbientSound*)(self) );
 	if (self_cast == nullptr) {

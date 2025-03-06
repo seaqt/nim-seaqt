@@ -84,9 +84,11 @@ import ./gen_qfontdatabase_types
 export gen_qfontdatabase_types
 
 import
+  ../QtCore/gen_qobjectdefs_types,
   ./gen_qfont_types,
   ./gen_qfontinfo_types
 export
+  gen_qobjectdefs_types,
   gen_qfont_types,
   gen_qfontinfo_types
 
@@ -126,6 +128,7 @@ proc fcQFontDatabase_isBitmapScalable2(family: struct_miqt_string, style: struct
 proc fcQFontDatabase_isSmoothlyScalable2(family: struct_miqt_string, style: struct_miqt_string): bool {.importc: "QFontDatabase_isSmoothlyScalable2".}
 proc fcQFontDatabase_isScalable2(family: struct_miqt_string, style: struct_miqt_string): bool {.importc: "QFontDatabase_isScalable2".}
 proc fcQFontDatabase_isFixedPitch2(family: struct_miqt_string, style: struct_miqt_string): bool {.importc: "QFontDatabase_isFixedPitch2".}
+proc fcQFontDatabase_staticMetaObject(): pointer {.importc: "QFontDatabase_staticMetaObject".}
 proc fcQFontDatabase_delete(self: pointer) {.importc: "QFontDatabase_delete".}
 
 
@@ -307,5 +310,7 @@ proc isScalable*(_: type gen_qfontdatabase_types.QFontDatabase, family: string, 
 proc isFixedPitch*(_: type gen_qfontdatabase_types.QFontDatabase, family: string, style: string): bool =
   fcQFontDatabase_isFixedPitch2(struct_miqt_string(data: family, len: csize_t(len(family))), struct_miqt_string(data: style, len: csize_t(len(style))))
 
+proc staticMetaObject*(_: type gen_qfontdatabase_types.QFontDatabase): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fcQFontDatabase_staticMetaObject())
 proc delete*(self: gen_qfontdatabase_types.QFontDatabase) =
   fcQFontDatabase_delete(self.h)

@@ -39,10 +39,17 @@ QStylePlugin* QStylePlugin_new2(QObject* parent);
 void QStylePlugin_virtbase(QStylePlugin* src, QObject** outptr_QObject);
 QMetaObject* QStylePlugin_metaObject(const QStylePlugin* self);
 void* QStylePlugin_metacast(QStylePlugin* self, const char* param1);
+int QStylePlugin_metacall(QStylePlugin* self, int param1, int param2, void** param3);
 struct miqt_string QStylePlugin_tr(const char* s);
 QStyle* QStylePlugin_create(QStylePlugin* self, struct miqt_string key);
 struct miqt_string QStylePlugin_tr2(const char* s, const char* c);
 struct miqt_string QStylePlugin_tr3(const char* s, const char* c, int n);
+bool QStylePlugin_override_virtual_metaObject(void* self, intptr_t slot);
+QMetaObject* QStylePlugin_virtualbase_metaObject(const void* self);
+bool QStylePlugin_override_virtual_metacast(void* self, intptr_t slot);
+void* QStylePlugin_virtualbase_metacast(void* self, const char* param1);
+bool QStylePlugin_override_virtual_metacall(void* self, intptr_t slot);
+int QStylePlugin_virtualbase_metacall(void* self, int param1, int param2, void** param3);
 bool QStylePlugin_override_virtual_create(void* self, intptr_t slot);
 QStyle* QStylePlugin_virtualbase_create(void* self, struct miqt_string key);
 bool QStylePlugin_override_virtual_event(void* self, intptr_t slot);
@@ -63,6 +70,7 @@ QObject* QStylePlugin_protectedbase_sender(bool* _dynamic_cast_ok, const void* s
 int QStylePlugin_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
 int QStylePlugin_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
 bool QStylePlugin_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+const QMetaObject* QStylePlugin_staticMetaObject();
 void QStylePlugin_delete(QStylePlugin* self);
 
 #ifdef __cplusplus

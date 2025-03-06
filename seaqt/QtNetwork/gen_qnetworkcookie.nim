@@ -51,9 +51,11 @@ export gen_qnetworkcookie_types
 
 import
   ../QtCore/gen_qdatetime_types,
+  ../QtCore/gen_qobjectdefs_types,
   ../QtCore/gen_qurl_types
 export
   gen_qdatetime_types,
+  gen_qobjectdefs_types,
   gen_qurl_types
 
 type cQNetworkCookie*{.exportc: "QNetworkCookie", incompleteStruct.} = object
@@ -88,6 +90,7 @@ proc fcQNetworkCookie_hasSameIdentifier(self: pointer, other: pointer): bool {.i
 proc fcQNetworkCookie_normalize(self: pointer, url: pointer): void {.importc: "QNetworkCookie_normalize".}
 proc fcQNetworkCookie_parseCookies(cookieString: struct_miqt_string): struct_miqt_array {.importc: "QNetworkCookie_parseCookies".}
 proc fcQNetworkCookie_toRawForm1(self: pointer, form: cint): struct_miqt_string {.importc: "QNetworkCookie_toRawForm1".}
+proc fcQNetworkCookie_staticMetaObject(): pointer {.importc: "QNetworkCookie_staticMetaObject".}
 proc fcQNetworkCookie_delete(self: pointer) {.importc: "QNetworkCookie_delete".}
 
 
@@ -206,5 +209,7 @@ proc toRawForm*(self: gen_qnetworkcookie_types.QNetworkCookie, form: cint): seq[
   c_free(v_bytearray.data)
   vx_ret
 
+proc staticMetaObject*(_: type gen_qnetworkcookie_types.QNetworkCookie): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fcQNetworkCookie_staticMetaObject())
 proc delete*(self: gen_qnetworkcookie_types.QNetworkCookie) =
   fcQNetworkCookie_delete(self.h)

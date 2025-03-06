@@ -72,12 +72,19 @@ proc fcQErrorMessage_new(parent: pointer): ptr cQErrorMessage {.importc: "QError
 proc fcQErrorMessage_new2(): ptr cQErrorMessage {.importc: "QErrorMessage_new2".}
 proc fcQErrorMessage_metaObject(self: pointer, ): pointer {.importc: "QErrorMessage_metaObject".}
 proc fcQErrorMessage_metacast(self: pointer, param1: cstring): pointer {.importc: "QErrorMessage_metacast".}
+proc fcQErrorMessage_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QErrorMessage_metacall".}
 proc fcQErrorMessage_tr(s: cstring): struct_miqt_string {.importc: "QErrorMessage_tr".}
 proc fcQErrorMessage_qtHandler(): pointer {.importc: "QErrorMessage_qtHandler".}
 proc fcQErrorMessage_showMessage(self: pointer, message: struct_miqt_string): void {.importc: "QErrorMessage_showMessage".}
 proc fcQErrorMessage_showMessage2(self: pointer, message: struct_miqt_string, typeVal: struct_miqt_string): void {.importc: "QErrorMessage_showMessage2".}
 proc fcQErrorMessage_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QErrorMessage_tr2".}
 proc fcQErrorMessage_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QErrorMessage_tr3".}
+proc fQErrorMessage_virtualbase_metaObject(self: pointer, ): pointer{.importc: "QErrorMessage_virtualbase_metaObject".}
+proc fcQErrorMessage_override_virtual_metaObject(self: pointer, slot: int) {.importc: "QErrorMessage_override_virtual_metaObject".}
+proc fQErrorMessage_virtualbase_metacast(self: pointer, param1: cstring): pointer{.importc: "QErrorMessage_virtualbase_metacast".}
+proc fcQErrorMessage_override_virtual_metacast(self: pointer, slot: int) {.importc: "QErrorMessage_override_virtual_metacast".}
+proc fQErrorMessage_virtualbase_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint{.importc: "QErrorMessage_virtualbase_metacall".}
+proc fcQErrorMessage_override_virtual_metacall(self: pointer, slot: int) {.importc: "QErrorMessage_override_virtual_metacall".}
 proc fQErrorMessage_virtualbase_done(self: pointer, param1: cint): void{.importc: "QErrorMessage_virtualbase_done".}
 proc fcQErrorMessage_override_virtual_done(self: pointer, slot: int) {.importc: "QErrorMessage_override_virtual_done".}
 proc fQErrorMessage_virtualbase_changeEvent(self: pointer, e: pointer): void{.importc: "QErrorMessage_virtualbase_changeEvent".}
@@ -182,6 +189,7 @@ proc fQErrorMessage_virtualbase_connectNotify(self: pointer, signal: pointer): v
 proc fcQErrorMessage_override_virtual_connectNotify(self: pointer, slot: int) {.importc: "QErrorMessage_override_virtual_connectNotify".}
 proc fQErrorMessage_virtualbase_disconnectNotify(self: pointer, signal: pointer): void{.importc: "QErrorMessage_virtualbase_disconnectNotify".}
 proc fcQErrorMessage_override_virtual_disconnectNotify(self: pointer, slot: int) {.importc: "QErrorMessage_override_virtual_disconnectNotify".}
+proc fcQErrorMessage_staticMetaObject(): pointer {.importc: "QErrorMessage_staticMetaObject".}
 proc fcQErrorMessage_delete(self: pointer) {.importc: "QErrorMessage_delete".}
 
 
@@ -198,6 +206,9 @@ proc metaObject*(self: gen_qerrormessage_types.QErrorMessage, ): gen_qobjectdefs
 
 proc metacast*(self: gen_qerrormessage_types.QErrorMessage, param1: cstring): pointer =
   fcQErrorMessage_metacast(self.h, param1)
+
+proc metacall*(self: gen_qerrormessage_types.QErrorMessage, param1: cint, param2: cint, param3: pointer): cint =
+  fcQErrorMessage_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qerrormessage_types.QErrorMessage, s: cstring): string =
   let v_ms = fcQErrorMessage_tr(s)
@@ -226,6 +237,65 @@ proc tr*(_: type gen_qerrormessage_types.QErrorMessage, s: cstring, c: cstring, 
   c_free(v_ms.data)
   vx_ret
 
+proc QErrorMessagemetaObject*(self: gen_qerrormessage_types.QErrorMessage, ): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fQErrorMessage_virtualbase_metaObject(self.h))
+
+type QErrorMessagemetaObjectProc* = proc(): gen_qobjectdefs_types.QMetaObject
+proc onmetaObject*(self: gen_qerrormessage_types.QErrorMessage, slot: QErrorMessagemetaObjectProc) =
+  # TODO check subclass
+  var tmp = new QErrorMessagemetaObjectProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQErrorMessage_override_virtual_metaObject(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QErrorMessage_metaObject(self: ptr cQErrorMessage, slot: int): pointer {.exportc: "miqt_exec_callback_QErrorMessage_metaObject ".} =
+  var nimfunc = cast[ptr QErrorMessagemetaObjectProc](cast[pointer](slot))
+
+  let virtualReturn = nimfunc[]( )
+
+  virtualReturn.h
+proc QErrorMessagemetacast*(self: gen_qerrormessage_types.QErrorMessage, param1: cstring): pointer =
+  fQErrorMessage_virtualbase_metacast(self.h, param1)
+
+type QErrorMessagemetacastProc* = proc(param1: cstring): pointer
+proc onmetacast*(self: gen_qerrormessage_types.QErrorMessage, slot: QErrorMessagemetacastProc) =
+  # TODO check subclass
+  var tmp = new QErrorMessagemetacastProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQErrorMessage_override_virtual_metacast(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QErrorMessage_metacast(self: ptr cQErrorMessage, slot: int, param1: cstring): pointer {.exportc: "miqt_exec_callback_QErrorMessage_metacast ".} =
+  var nimfunc = cast[ptr QErrorMessagemetacastProc](cast[pointer](slot))
+  let slotval1 = (param1)
+
+
+  let virtualReturn = nimfunc[](slotval1 )
+
+  virtualReturn
+proc QErrorMessagemetacall*(self: gen_qerrormessage_types.QErrorMessage, param1: cint, param2: cint, param3: pointer): cint =
+  fQErrorMessage_virtualbase_metacall(self.h, cint(param1), param2, param3)
+
+type QErrorMessagemetacallProc* = proc(param1: cint, param2: cint, param3: pointer): cint
+proc onmetacall*(self: gen_qerrormessage_types.QErrorMessage, slot: QErrorMessagemetacallProc) =
+  # TODO check subclass
+  var tmp = new QErrorMessagemetacallProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQErrorMessage_override_virtual_metacall(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QErrorMessage_metacall(self: ptr cQErrorMessage, slot: int, param1: cint, param2: cint, param3: pointer): cint {.exportc: "miqt_exec_callback_QErrorMessage_metacall ".} =
+  var nimfunc = cast[ptr QErrorMessagemetacallProc](cast[pointer](slot))
+  let slotval1 = cint(param1)
+
+  let slotval2 = param2
+
+  let slotval3 = param3
+
+
+  let virtualReturn = nimfunc[](slotval1, slotval2, slotval3 )
+
+  virtualReturn
 proc QErrorMessagedone*(self: gen_qerrormessage_types.QErrorMessage, param1: cint): void =
   fQErrorMessage_virtualbase_done(self.h, param1)
 
@@ -1129,5 +1199,7 @@ proc miqt_exec_callback_QErrorMessage_disconnectNotify(self: ptr cQErrorMessage,
 
 
   nimfunc[](slotval1)
+proc staticMetaObject*(_: type gen_qerrormessage_types.QErrorMessage): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fcQErrorMessage_staticMetaObject())
 proc delete*(self: gen_qerrormessage_types.QErrorMessage) =
   fcQErrorMessage_delete(self.h)

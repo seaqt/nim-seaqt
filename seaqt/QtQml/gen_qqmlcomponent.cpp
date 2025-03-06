@@ -26,6 +26,9 @@ extern "C" {
 
 void miqt_exec_callback_QQmlComponent_statusChanged(intptr_t, int);
 void miqt_exec_callback_QQmlComponent_progressChanged(intptr_t, double);
+QMetaObject* miqt_exec_callback_QQmlComponent_metaObject(const QQmlComponent*, intptr_t);
+void* miqt_exec_callback_QQmlComponent_metacast(QQmlComponent*, intptr_t, const char*);
+int miqt_exec_callback_QQmlComponent_metacall(QQmlComponent*, intptr_t, int, int, void**);
 QObject* miqt_exec_callback_QQmlComponent_create(QQmlComponent*, intptr_t, QQmlContext*);
 QObject* miqt_exec_callback_QQmlComponent_beginCreate(QQmlComponent*, intptr_t, QQmlContext*);
 void miqt_exec_callback_QQmlComponent_completeCreate(QQmlComponent*, intptr_t);
@@ -57,6 +60,62 @@ public:
 	VirtualQQmlComponent(QQmlEngine* param1, const QUrl& url, QQmlComponent::CompilationMode mode, QObject* parent): QQmlComponent(param1, url, mode, parent) {};
 
 	virtual ~VirtualQQmlComponent() override = default;
+
+	// cgo.Handle value for overwritten implementation
+	intptr_t handle__metaObject = 0;
+
+	// Subclass to allow providing a Go implementation
+	virtual const QMetaObject* metaObject() const override {
+		if (handle__metaObject == 0) {
+			return QQmlComponent::metaObject();
+		}
+		
+
+		QMetaObject* callback_return_value = miqt_exec_callback_QQmlComponent_metaObject(this, handle__metaObject);
+
+		return callback_return_value;
+	}
+
+	friend QMetaObject* QQmlComponent_virtualbase_metaObject(const void* self);
+
+	// cgo.Handle value for overwritten implementation
+	intptr_t handle__metacast = 0;
+
+	// Subclass to allow providing a Go implementation
+	virtual void* qt_metacast(const char* param1) override {
+		if (handle__metacast == 0) {
+			return QQmlComponent::qt_metacast(param1);
+		}
+		
+		const char* sigval1 = (const char*) param1;
+
+		void* callback_return_value = miqt_exec_callback_QQmlComponent_metacast(this, handle__metacast, sigval1);
+
+		return callback_return_value;
+	}
+
+	friend void* QQmlComponent_virtualbase_metacast(void* self, const char* param1);
+
+	// cgo.Handle value for overwritten implementation
+	intptr_t handle__metacall = 0;
+
+	// Subclass to allow providing a Go implementation
+	virtual int qt_metacall(QMetaObject::Call param1, int param2, void** param3) override {
+		if (handle__metacall == 0) {
+			return QQmlComponent::qt_metacall(param1, param2, param3);
+		}
+		
+		QMetaObject::Call param1_ret = param1;
+		int sigval1 = static_cast<int>(param1_ret);
+		int sigval2 = param2;
+		void** sigval3 = param3;
+
+		int callback_return_value = miqt_exec_callback_QQmlComponent_metacall(this, handle__metacall, sigval1, sigval2, sigval3);
+
+		return static_cast<int>(callback_return_value);
+	}
+
+	friend int QQmlComponent_virtualbase_metacall(void* self, int param1, int param2, void** param3);
 
 	// cgo.Handle value for overwritten implementation
 	intptr_t handle__create = 0;
@@ -322,6 +381,10 @@ void* QQmlComponent_metacast(QQmlComponent* self, const char* param1) {
 	return self->qt_metacast(param1);
 }
 
+int QQmlComponent_metacall(QQmlComponent* self, int param1, int param2, void** param3) {
+	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
+}
+
 struct miqt_string QQmlComponent_tr(const char* s) {
 	QString _ret = QQmlComponent::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
@@ -515,6 +578,54 @@ void QQmlComponent_create3(QQmlComponent* self, QQmlIncubator* param1, QQmlConte
 	self->create(*param1, context, forContext);
 }
 
+bool QQmlComponent_override_virtual_metaObject(void* self, intptr_t slot) {
+	VirtualQQmlComponent* self_cast = dynamic_cast<VirtualQQmlComponent*>( (QQmlComponent*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+	
+	self_cast->handle__metaObject = slot;
+	return true;
+}
+
+QMetaObject* QQmlComponent_virtualbase_metaObject(const void* self) {
+
+	return (QMetaObject*) ( (const VirtualQQmlComponent*)(self) )->QQmlComponent::metaObject();
+
+}
+
+bool QQmlComponent_override_virtual_metacast(void* self, intptr_t slot) {
+	VirtualQQmlComponent* self_cast = dynamic_cast<VirtualQQmlComponent*>( (QQmlComponent*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+	
+	self_cast->handle__metacast = slot;
+	return true;
+}
+
+void* QQmlComponent_virtualbase_metacast(void* self, const char* param1) {
+
+	return ( (VirtualQQmlComponent*)(self) )->QQmlComponent::qt_metacast(param1);
+
+}
+
+bool QQmlComponent_override_virtual_metacall(void* self, intptr_t slot) {
+	VirtualQQmlComponent* self_cast = dynamic_cast<VirtualQQmlComponent*>( (QQmlComponent*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+	
+	self_cast->handle__metacall = slot;
+	return true;
+}
+
+int QQmlComponent_virtualbase_metacall(void* self, int param1, int param2, void** param3) {
+
+	return ( (VirtualQQmlComponent*)(self) )->QQmlComponent::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
+
+}
+
 bool QQmlComponent_override_virtual_create(void* self, intptr_t slot) {
 	VirtualQQmlComponent* self_cast = dynamic_cast<VirtualQQmlComponent*>( (QQmlComponent*)(self) );
 	if (self_cast == nullptr) {
@@ -675,6 +786,7 @@ void QQmlComponent_virtualbase_disconnectNotify(void* self, QMetaMethod* signal)
 
 }
 
+const QMetaObject* QQmlComponent_staticMetaObject() { return &QQmlComponent::staticMetaObject; }
 QObject* QQmlComponent_protectedbase_createObject2(bool* _dynamic_cast_ok, void* self) {
 	VirtualQQmlComponent* self_cast = dynamic_cast<VirtualQQmlComponent*>( (QQmlComponent*)(self) );
 	if (self_cast == nullptr) {

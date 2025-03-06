@@ -43,6 +43,7 @@ QCoreApplication* QCoreApplication_new2(int* argc, char** argv, int param3);
 void QCoreApplication_virtbase(QCoreApplication* src, QObject** outptr_QObject);
 QMetaObject* QCoreApplication_metaObject(const QCoreApplication* self);
 void* QCoreApplication_metacast(QCoreApplication* self, const char* param1);
+int QCoreApplication_metacall(QCoreApplication* self, int param1, int param2, void** param3);
 struct miqt_string QCoreApplication_tr(const char* s);
 struct miqt_array /* of struct miqt_string */  QCoreApplication_arguments();
 void QCoreApplication_setAttribute(int attribute);
@@ -108,6 +109,12 @@ void QCoreApplication_removePostedEvents2(QObject* receiver, int eventType);
 struct miqt_string QCoreApplication_translate3(const char* context, const char* key, const char* disambiguation);
 struct miqt_string QCoreApplication_translate4(const char* context, const char* key, const char* disambiguation, int n);
 void QCoreApplication_exit1(int retcode);
+bool QCoreApplication_override_virtual_metaObject(void* self, intptr_t slot);
+QMetaObject* QCoreApplication_virtualbase_metaObject(const void* self);
+bool QCoreApplication_override_virtual_metacast(void* self, intptr_t slot);
+void* QCoreApplication_virtualbase_metacast(void* self, const char* param1);
+bool QCoreApplication_override_virtual_metacall(void* self, intptr_t slot);
+int QCoreApplication_virtualbase_metacall(void* self, int param1, int param2, void** param3);
 bool QCoreApplication_override_virtual_notify(void* self, intptr_t slot);
 bool QCoreApplication_virtualbase_notify(void* self, QObject* param1, QEvent* param2);
 bool QCoreApplication_override_virtual_event(void* self, intptr_t slot);
@@ -129,6 +136,7 @@ QObject* QCoreApplication_protectedbase_sender(bool* _dynamic_cast_ok, const voi
 int QCoreApplication_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
 int QCoreApplication_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
 bool QCoreApplication_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+const QMetaObject* QCoreApplication_staticMetaObject();
 void QCoreApplication_delete(QCoreApplication* self);
 
 #ifdef __cplusplus

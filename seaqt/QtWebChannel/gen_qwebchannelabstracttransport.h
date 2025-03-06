@@ -39,12 +39,19 @@ QWebChannelAbstractTransport* QWebChannelAbstractTransport_new2(QObject* parent)
 void QWebChannelAbstractTransport_virtbase(QWebChannelAbstractTransport* src, QObject** outptr_QObject);
 QMetaObject* QWebChannelAbstractTransport_metaObject(const QWebChannelAbstractTransport* self);
 void* QWebChannelAbstractTransport_metacast(QWebChannelAbstractTransport* self, const char* param1);
+int QWebChannelAbstractTransport_metacall(QWebChannelAbstractTransport* self, int param1, int param2, void** param3);
 struct miqt_string QWebChannelAbstractTransport_tr(const char* s);
 void QWebChannelAbstractTransport_sendMessage(QWebChannelAbstractTransport* self, QJsonObject* message);
 void QWebChannelAbstractTransport_messageReceived(QWebChannelAbstractTransport* self, QJsonObject* message, QWebChannelAbstractTransport* transport);
 void QWebChannelAbstractTransport_connect_messageReceived(QWebChannelAbstractTransport* self, intptr_t slot);
 struct miqt_string QWebChannelAbstractTransport_tr2(const char* s, const char* c);
 struct miqt_string QWebChannelAbstractTransport_tr3(const char* s, const char* c, int n);
+bool QWebChannelAbstractTransport_override_virtual_metaObject(void* self, intptr_t slot);
+QMetaObject* QWebChannelAbstractTransport_virtualbase_metaObject(const void* self);
+bool QWebChannelAbstractTransport_override_virtual_metacast(void* self, intptr_t slot);
+void* QWebChannelAbstractTransport_virtualbase_metacast(void* self, const char* param1);
+bool QWebChannelAbstractTransport_override_virtual_metacall(void* self, intptr_t slot);
+int QWebChannelAbstractTransport_virtualbase_metacall(void* self, int param1, int param2, void** param3);
 bool QWebChannelAbstractTransport_override_virtual_sendMessage(void* self, intptr_t slot);
 void QWebChannelAbstractTransport_virtualbase_sendMessage(void* self, QJsonObject* message);
 bool QWebChannelAbstractTransport_override_virtual_event(void* self, intptr_t slot);
@@ -65,6 +72,7 @@ QObject* QWebChannelAbstractTransport_protectedbase_sender(bool* _dynamic_cast_o
 int QWebChannelAbstractTransport_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
 int QWebChannelAbstractTransport_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
 bool QWebChannelAbstractTransport_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+const QMetaObject* QWebChannelAbstractTransport_staticMetaObject();
 void QWebChannelAbstractTransport_delete(QWebChannelAbstractTransport* self);
 
 #ifdef __cplusplus

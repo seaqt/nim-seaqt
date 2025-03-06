@@ -68,6 +68,7 @@ proc fcQEventLoop_new(): ptr cQEventLoop {.importc: "QEventLoop_new".}
 proc fcQEventLoop_new2(parent: pointer): ptr cQEventLoop {.importc: "QEventLoop_new2".}
 proc fcQEventLoop_metaObject(self: pointer, ): pointer {.importc: "QEventLoop_metaObject".}
 proc fcQEventLoop_metacast(self: pointer, param1: cstring): pointer {.importc: "QEventLoop_metacast".}
+proc fcQEventLoop_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QEventLoop_metacall".}
 proc fcQEventLoop_tr(s: cstring): struct_miqt_string {.importc: "QEventLoop_tr".}
 proc fcQEventLoop_processEvents(self: pointer, ): bool {.importc: "QEventLoop_processEvents".}
 proc fcQEventLoop_processEvents2(self: pointer, flags: cint, maximumTime: cint): void {.importc: "QEventLoop_processEvents2".}
@@ -82,6 +83,12 @@ proc fcQEventLoop_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.imp
 proc fcQEventLoop_processEvents1(self: pointer, flags: cint): bool {.importc: "QEventLoop_processEvents1".}
 proc fcQEventLoop_exec1(self: pointer, flags: cint): cint {.importc: "QEventLoop_exec1".}
 proc fcQEventLoop_exit1(self: pointer, returnCode: cint): void {.importc: "QEventLoop_exit1".}
+proc fQEventLoop_virtualbase_metaObject(self: pointer, ): pointer{.importc: "QEventLoop_virtualbase_metaObject".}
+proc fcQEventLoop_override_virtual_metaObject(self: pointer, slot: int) {.importc: "QEventLoop_override_virtual_metaObject".}
+proc fQEventLoop_virtualbase_metacast(self: pointer, param1: cstring): pointer{.importc: "QEventLoop_virtualbase_metacast".}
+proc fcQEventLoop_override_virtual_metacast(self: pointer, slot: int) {.importc: "QEventLoop_override_virtual_metacast".}
+proc fQEventLoop_virtualbase_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint{.importc: "QEventLoop_virtualbase_metacall".}
+proc fcQEventLoop_override_virtual_metacall(self: pointer, slot: int) {.importc: "QEventLoop_override_virtual_metacall".}
 proc fQEventLoop_virtualbase_event(self: pointer, event: pointer): bool{.importc: "QEventLoop_virtualbase_event".}
 proc fcQEventLoop_override_virtual_event(self: pointer, slot: int) {.importc: "QEventLoop_override_virtual_event".}
 proc fQEventLoop_virtualbase_eventFilter(self: pointer, watched: pointer, event: pointer): bool{.importc: "QEventLoop_virtualbase_eventFilter".}
@@ -96,6 +103,7 @@ proc fQEventLoop_virtualbase_connectNotify(self: pointer, signal: pointer): void
 proc fcQEventLoop_override_virtual_connectNotify(self: pointer, slot: int) {.importc: "QEventLoop_override_virtual_connectNotify".}
 proc fQEventLoop_virtualbase_disconnectNotify(self: pointer, signal: pointer): void{.importc: "QEventLoop_virtualbase_disconnectNotify".}
 proc fcQEventLoop_override_virtual_disconnectNotify(self: pointer, slot: int) {.importc: "QEventLoop_override_virtual_disconnectNotify".}
+proc fcQEventLoop_staticMetaObject(): pointer {.importc: "QEventLoop_staticMetaObject".}
 proc fcQEventLoop_delete(self: pointer) {.importc: "QEventLoop_delete".}
 proc fcQEventLoopLocker_new(): ptr cQEventLoopLocker {.importc: "QEventLoopLocker_new".}
 proc fcQEventLoopLocker_new2(loop: pointer): ptr cQEventLoopLocker {.importc: "QEventLoopLocker_new2".}
@@ -116,6 +124,9 @@ proc metaObject*(self: gen_qeventloop_types.QEventLoop, ): gen_qobjectdefs_types
 
 proc metacast*(self: gen_qeventloop_types.QEventLoop, param1: cstring): pointer =
   fcQEventLoop_metacast(self.h, param1)
+
+proc metacall*(self: gen_qeventloop_types.QEventLoop, param1: cint, param2: cint, param3: pointer): cint =
+  fcQEventLoop_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qeventloop_types.QEventLoop, s: cstring): string =
   let v_ms = fcQEventLoop_tr(s)
@@ -168,6 +179,65 @@ proc exec*(self: gen_qeventloop_types.QEventLoop, flags: cint): cint =
 proc exit*(self: gen_qeventloop_types.QEventLoop, returnCode: cint): void =
   fcQEventLoop_exit1(self.h, returnCode)
 
+proc QEventLoopmetaObject*(self: gen_qeventloop_types.QEventLoop, ): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fQEventLoop_virtualbase_metaObject(self.h))
+
+type QEventLoopmetaObjectProc* = proc(): gen_qobjectdefs_types.QMetaObject
+proc onmetaObject*(self: gen_qeventloop_types.QEventLoop, slot: QEventLoopmetaObjectProc) =
+  # TODO check subclass
+  var tmp = new QEventLoopmetaObjectProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQEventLoop_override_virtual_metaObject(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QEventLoop_metaObject(self: ptr cQEventLoop, slot: int): pointer {.exportc: "miqt_exec_callback_QEventLoop_metaObject ".} =
+  var nimfunc = cast[ptr QEventLoopmetaObjectProc](cast[pointer](slot))
+
+  let virtualReturn = nimfunc[]( )
+
+  virtualReturn.h
+proc QEventLoopmetacast*(self: gen_qeventloop_types.QEventLoop, param1: cstring): pointer =
+  fQEventLoop_virtualbase_metacast(self.h, param1)
+
+type QEventLoopmetacastProc* = proc(param1: cstring): pointer
+proc onmetacast*(self: gen_qeventloop_types.QEventLoop, slot: QEventLoopmetacastProc) =
+  # TODO check subclass
+  var tmp = new QEventLoopmetacastProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQEventLoop_override_virtual_metacast(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QEventLoop_metacast(self: ptr cQEventLoop, slot: int, param1: cstring): pointer {.exportc: "miqt_exec_callback_QEventLoop_metacast ".} =
+  var nimfunc = cast[ptr QEventLoopmetacastProc](cast[pointer](slot))
+  let slotval1 = (param1)
+
+
+  let virtualReturn = nimfunc[](slotval1 )
+
+  virtualReturn
+proc QEventLoopmetacall*(self: gen_qeventloop_types.QEventLoop, param1: cint, param2: cint, param3: pointer): cint =
+  fQEventLoop_virtualbase_metacall(self.h, cint(param1), param2, param3)
+
+type QEventLoopmetacallProc* = proc(param1: cint, param2: cint, param3: pointer): cint
+proc onmetacall*(self: gen_qeventloop_types.QEventLoop, slot: QEventLoopmetacallProc) =
+  # TODO check subclass
+  var tmp = new QEventLoopmetacallProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQEventLoop_override_virtual_metacall(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QEventLoop_metacall(self: ptr cQEventLoop, slot: int, param1: cint, param2: cint, param3: pointer): cint {.exportc: "miqt_exec_callback_QEventLoop_metacall ".} =
+  var nimfunc = cast[ptr QEventLoopmetacallProc](cast[pointer](slot))
+  let slotval1 = cint(param1)
+
+  let slotval2 = param2
+
+  let slotval3 = param3
+
+
+  let virtualReturn = nimfunc[](slotval1, slotval2, slotval3 )
+
+  virtualReturn
 proc QEventLoopevent*(self: gen_qeventloop_types.QEventLoop, event: gen_qcoreevent_types.QEvent): bool =
   fQEventLoop_virtualbase_event(self.h, event.h)
 
@@ -293,6 +363,8 @@ proc miqt_exec_callback_QEventLoop_disconnectNotify(self: ptr cQEventLoop, slot:
 
 
   nimfunc[](slotval1)
+proc staticMetaObject*(_: type gen_qeventloop_types.QEventLoop): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fcQEventLoop_staticMetaObject())
 proc delete*(self: gen_qeventloop_types.QEventLoop) =
   fcQEventLoop_delete(self.h)
 

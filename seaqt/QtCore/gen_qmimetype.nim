@@ -37,6 +37,10 @@ const cflags = gorge("pkg-config --cflags Qt6Core")  & " -fPIC"
 import ./gen_qmimetype_types
 export gen_qmimetype_types
 
+import
+  ./gen_qobjectdefs_types
+export
+  gen_qobjectdefs_types
 
 type cQMimeType*{.exportc: "QMimeType", incompleteStruct.} = object
 
@@ -60,6 +64,7 @@ proc fcQMimeType_suffixes(self: pointer, ): struct_miqt_array {.importc: "QMimeT
 proc fcQMimeType_preferredSuffix(self: pointer, ): struct_miqt_string {.importc: "QMimeType_preferredSuffix".}
 proc fcQMimeType_inherits(self: pointer, mimeTypeName: struct_miqt_string): bool {.importc: "QMimeType_inherits".}
 proc fcQMimeType_filterString(self: pointer, ): struct_miqt_string {.importc: "QMimeType_filterString".}
+proc fcQMimeType_staticMetaObject(): pointer {.importc: "QMimeType_staticMetaObject".}
 proc fcQMimeType_delete(self: pointer) {.importc: "QMimeType_delete".}
 
 
@@ -183,5 +188,7 @@ proc filterString*(self: gen_qmimetype_types.QMimeType, ): string =
   c_free(v_ms.data)
   vx_ret
 
+proc staticMetaObject*(_: type gen_qmimetype_types.QMimeType): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fcQMimeType_staticMetaObject())
 proc delete*(self: gen_qmimetype_types.QMimeType) =
   fcQMimeType_delete(self.h)

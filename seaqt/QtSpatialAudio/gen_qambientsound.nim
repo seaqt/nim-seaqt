@@ -62,6 +62,7 @@ type cQAmbientSound*{.exportc: "QAmbientSound", incompleteStruct.} = object
 proc fcQAmbientSound_new(engine: pointer): ptr cQAmbientSound {.importc: "QAmbientSound_new".}
 proc fcQAmbientSound_metaObject(self: pointer, ): pointer {.importc: "QAmbientSound_metaObject".}
 proc fcQAmbientSound_metacast(self: pointer, param1: cstring): pointer {.importc: "QAmbientSound_metacast".}
+proc fcQAmbientSound_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QAmbientSound_metacall".}
 proc fcQAmbientSound_tr(s: cstring): struct_miqt_string {.importc: "QAmbientSound_tr".}
 proc fcQAmbientSound_setSource(self: pointer, url: pointer): void {.importc: "QAmbientSound_setSource".}
 proc fcQAmbientSound_source(self: pointer, ): pointer {.importc: "QAmbientSound_source".}
@@ -85,6 +86,12 @@ proc fcQAmbientSound_pause(self: pointer, ): void {.importc: "QAmbientSound_paus
 proc fcQAmbientSound_stop(self: pointer, ): void {.importc: "QAmbientSound_stop".}
 proc fcQAmbientSound_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QAmbientSound_tr2".}
 proc fcQAmbientSound_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QAmbientSound_tr3".}
+proc fQAmbientSound_virtualbase_metaObject(self: pointer, ): pointer{.importc: "QAmbientSound_virtualbase_metaObject".}
+proc fcQAmbientSound_override_virtual_metaObject(self: pointer, slot: int) {.importc: "QAmbientSound_override_virtual_metaObject".}
+proc fQAmbientSound_virtualbase_metacast(self: pointer, param1: cstring): pointer{.importc: "QAmbientSound_virtualbase_metacast".}
+proc fcQAmbientSound_override_virtual_metacast(self: pointer, slot: int) {.importc: "QAmbientSound_override_virtual_metacast".}
+proc fQAmbientSound_virtualbase_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint{.importc: "QAmbientSound_virtualbase_metacall".}
+proc fcQAmbientSound_override_virtual_metacall(self: pointer, slot: int) {.importc: "QAmbientSound_override_virtual_metacall".}
 proc fQAmbientSound_virtualbase_event(self: pointer, event: pointer): bool{.importc: "QAmbientSound_virtualbase_event".}
 proc fcQAmbientSound_override_virtual_event(self: pointer, slot: int) {.importc: "QAmbientSound_override_virtual_event".}
 proc fQAmbientSound_virtualbase_eventFilter(self: pointer, watched: pointer, event: pointer): bool{.importc: "QAmbientSound_virtualbase_eventFilter".}
@@ -99,6 +106,7 @@ proc fQAmbientSound_virtualbase_connectNotify(self: pointer, signal: pointer): v
 proc fcQAmbientSound_override_virtual_connectNotify(self: pointer, slot: int) {.importc: "QAmbientSound_override_virtual_connectNotify".}
 proc fQAmbientSound_virtualbase_disconnectNotify(self: pointer, signal: pointer): void{.importc: "QAmbientSound_virtualbase_disconnectNotify".}
 proc fcQAmbientSound_override_virtual_disconnectNotify(self: pointer, slot: int) {.importc: "QAmbientSound_override_virtual_disconnectNotify".}
+proc fcQAmbientSound_staticMetaObject(): pointer {.importc: "QAmbientSound_staticMetaObject".}
 proc fcQAmbientSound_delete(self: pointer) {.importc: "QAmbientSound_delete".}
 
 
@@ -112,6 +120,9 @@ proc metaObject*(self: gen_qambientsound_types.QAmbientSound, ): gen_qobjectdefs
 
 proc metacast*(self: gen_qambientsound_types.QAmbientSound, param1: cstring): pointer =
   fcQAmbientSound_metacast(self.h, param1)
+
+proc metacall*(self: gen_qambientsound_types.QAmbientSound, param1: cint, param2: cint, param3: pointer): cint =
+  fcQAmbientSound_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qambientsound_types.QAmbientSound, s: cstring): string =
   let v_ms = fcQAmbientSound_tr(s)
@@ -223,6 +234,65 @@ proc tr*(_: type gen_qambientsound_types.QAmbientSound, s: cstring, c: cstring, 
   c_free(v_ms.data)
   vx_ret
 
+proc QAmbientSoundmetaObject*(self: gen_qambientsound_types.QAmbientSound, ): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fQAmbientSound_virtualbase_metaObject(self.h))
+
+type QAmbientSoundmetaObjectProc* = proc(): gen_qobjectdefs_types.QMetaObject
+proc onmetaObject*(self: gen_qambientsound_types.QAmbientSound, slot: QAmbientSoundmetaObjectProc) =
+  # TODO check subclass
+  var tmp = new QAmbientSoundmetaObjectProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQAmbientSound_override_virtual_metaObject(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QAmbientSound_metaObject(self: ptr cQAmbientSound, slot: int): pointer {.exportc: "miqt_exec_callback_QAmbientSound_metaObject ".} =
+  var nimfunc = cast[ptr QAmbientSoundmetaObjectProc](cast[pointer](slot))
+
+  let virtualReturn = nimfunc[]( )
+
+  virtualReturn.h
+proc QAmbientSoundmetacast*(self: gen_qambientsound_types.QAmbientSound, param1: cstring): pointer =
+  fQAmbientSound_virtualbase_metacast(self.h, param1)
+
+type QAmbientSoundmetacastProc* = proc(param1: cstring): pointer
+proc onmetacast*(self: gen_qambientsound_types.QAmbientSound, slot: QAmbientSoundmetacastProc) =
+  # TODO check subclass
+  var tmp = new QAmbientSoundmetacastProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQAmbientSound_override_virtual_metacast(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QAmbientSound_metacast(self: ptr cQAmbientSound, slot: int, param1: cstring): pointer {.exportc: "miqt_exec_callback_QAmbientSound_metacast ".} =
+  var nimfunc = cast[ptr QAmbientSoundmetacastProc](cast[pointer](slot))
+  let slotval1 = (param1)
+
+
+  let virtualReturn = nimfunc[](slotval1 )
+
+  virtualReturn
+proc QAmbientSoundmetacall*(self: gen_qambientsound_types.QAmbientSound, param1: cint, param2: cint, param3: pointer): cint =
+  fQAmbientSound_virtualbase_metacall(self.h, cint(param1), param2, param3)
+
+type QAmbientSoundmetacallProc* = proc(param1: cint, param2: cint, param3: pointer): cint
+proc onmetacall*(self: gen_qambientsound_types.QAmbientSound, slot: QAmbientSoundmetacallProc) =
+  # TODO check subclass
+  var tmp = new QAmbientSoundmetacallProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQAmbientSound_override_virtual_metacall(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QAmbientSound_metacall(self: ptr cQAmbientSound, slot: int, param1: cint, param2: cint, param3: pointer): cint {.exportc: "miqt_exec_callback_QAmbientSound_metacall ".} =
+  var nimfunc = cast[ptr QAmbientSoundmetacallProc](cast[pointer](slot))
+  let slotval1 = cint(param1)
+
+  let slotval2 = param2
+
+  let slotval3 = param3
+
+
+  let virtualReturn = nimfunc[](slotval1, slotval2, slotval3 )
+
+  virtualReturn
 proc QAmbientSoundevent*(self: gen_qambientsound_types.QAmbientSound, event: gen_qcoreevent_types.QEvent): bool =
   fQAmbientSound_virtualbase_event(self.h, event.h)
 
@@ -348,5 +418,7 @@ proc miqt_exec_callback_QAmbientSound_disconnectNotify(self: ptr cQAmbientSound,
 
 
   nimfunc[](slotval1)
+proc staticMetaObject*(_: type gen_qambientsound_types.QAmbientSound): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fcQAmbientSound_staticMetaObject())
 proc delete*(self: gen_qambientsound_types.QAmbientSound) =
   fcQAmbientSound_delete(self.h)

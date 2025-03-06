@@ -208,6 +208,7 @@ void QSurfaceFormat_setOption2(QSurfaceFormat* self, int option, bool on) {
 	self->setOption(static_cast<QSurfaceFormat::FormatOption>(option), on);
 }
 
+const QMetaObject* QSurfaceFormat_staticMetaObject() { return &QSurfaceFormat::staticMetaObject; }
 void QSurfaceFormat_delete(QSurfaceFormat* self) {
 	delete self;
 }

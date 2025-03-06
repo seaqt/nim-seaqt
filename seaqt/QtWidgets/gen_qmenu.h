@@ -99,6 +99,7 @@ QMenu* QMenu_new4(struct miqt_string title, QWidget* parent);
 void QMenu_virtbase(QMenu* src, QWidget** outptr_QWidget);
 QMetaObject* QMenu_metaObject(const QMenu* self);
 void* QMenu_metacast(QMenu* self, const char* param1);
+int QMenu_metacall(QMenu* self, int param1, int param2, void** param3);
 struct miqt_string QMenu_tr(const char* s);
 QAction* QMenu_addMenu(QMenu* self, QMenu* menu);
 QMenu* QMenu_addMenuWithTitle(QMenu* self, struct miqt_string title);
@@ -169,6 +170,12 @@ void QMenu_popup2(QMenu* self, QPoint* pos, QAction* at);
 QAction* QMenu_exec22(QMenu* self, QPoint* pos, QAction* at);
 QAction* QMenu_exec3(struct miqt_array /* of QAction* */  actions, QPoint* pos, QAction* at);
 QAction* QMenu_exec4(struct miqt_array /* of QAction* */  actions, QPoint* pos, QAction* at, QWidget* parent);
+bool QMenu_override_virtual_metaObject(void* self, intptr_t slot);
+QMetaObject* QMenu_virtualbase_metaObject(const void* self);
+bool QMenu_override_virtual_metacast(void* self, intptr_t slot);
+void* QMenu_virtualbase_metacast(void* self, const char* param1);
+bool QMenu_override_virtual_metacall(void* self, intptr_t slot);
+int QMenu_virtualbase_metacall(void* self, int param1, int param2, void** param3);
 bool QMenu_override_virtual_sizeHint(void* self, intptr_t slot);
 QSize* QMenu_virtualbase_sizeHint(const void* self);
 bool QMenu_override_virtual_changeEvent(void* self, intptr_t slot);
@@ -275,6 +282,7 @@ QObject* QMenu_protectedbase_sender(bool* _dynamic_cast_ok, const void* self);
 int QMenu_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
 int QMenu_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
 bool QMenu_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+const QMetaObject* QMenu_staticMetaObject();
 void QMenu_delete(QMenu* self);
 
 #ifdef __cplusplus

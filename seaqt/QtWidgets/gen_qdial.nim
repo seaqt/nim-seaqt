@@ -74,6 +74,7 @@ proc fcQDial_new(parent: pointer): ptr cQDial {.importc: "QDial_new".}
 proc fcQDial_new2(): ptr cQDial {.importc: "QDial_new2".}
 proc fcQDial_metaObject(self: pointer, ): pointer {.importc: "QDial_metaObject".}
 proc fcQDial_metacast(self: pointer, param1: cstring): pointer {.importc: "QDial_metacast".}
+proc fcQDial_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QDial_metacall".}
 proc fcQDial_tr(s: cstring): struct_miqt_string {.importc: "QDial_tr".}
 proc fcQDial_wrapping(self: pointer, ): bool {.importc: "QDial_wrapping".}
 proc fcQDial_notchSize(self: pointer, ): cint {.importc: "QDial_notchSize".}
@@ -86,6 +87,12 @@ proc fcQDial_setNotchesVisible(self: pointer, visible: bool): void {.importc: "Q
 proc fcQDial_setWrapping(self: pointer, on: bool): void {.importc: "QDial_setWrapping".}
 proc fcQDial_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QDial_tr2".}
 proc fcQDial_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QDial_tr3".}
+proc fQDial_virtualbase_metaObject(self: pointer, ): pointer{.importc: "QDial_virtualbase_metaObject".}
+proc fcQDial_override_virtual_metaObject(self: pointer, slot: int) {.importc: "QDial_override_virtual_metaObject".}
+proc fQDial_virtualbase_metacast(self: pointer, param1: cstring): pointer{.importc: "QDial_virtualbase_metacast".}
+proc fcQDial_override_virtual_metacast(self: pointer, slot: int) {.importc: "QDial_override_virtual_metacast".}
+proc fQDial_virtualbase_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint{.importc: "QDial_virtualbase_metacall".}
+proc fcQDial_override_virtual_metacall(self: pointer, slot: int) {.importc: "QDial_override_virtual_metacall".}
 proc fQDial_virtualbase_sizeHint(self: pointer, ): pointer{.importc: "QDial_virtualbase_sizeHint".}
 proc fcQDial_override_virtual_sizeHint(self: pointer, slot: int) {.importc: "QDial_override_virtual_sizeHint".}
 proc fQDial_virtualbase_minimumSizeHint(self: pointer, ): pointer{.importc: "QDial_virtualbase_minimumSizeHint".}
@@ -184,6 +191,7 @@ proc fQDial_virtualbase_connectNotify(self: pointer, signal: pointer): void{.imp
 proc fcQDial_override_virtual_connectNotify(self: pointer, slot: int) {.importc: "QDial_override_virtual_connectNotify".}
 proc fQDial_virtualbase_disconnectNotify(self: pointer, signal: pointer): void{.importc: "QDial_virtualbase_disconnectNotify".}
 proc fcQDial_override_virtual_disconnectNotify(self: pointer, slot: int) {.importc: "QDial_override_virtual_disconnectNotify".}
+proc fcQDial_staticMetaObject(): pointer {.importc: "QDial_staticMetaObject".}
 proc fcQDial_delete(self: pointer) {.importc: "QDial_delete".}
 
 
@@ -200,6 +208,9 @@ proc metaObject*(self: gen_qdial_types.QDial, ): gen_qobjectdefs_types.QMetaObje
 
 proc metacast*(self: gen_qdial_types.QDial, param1: cstring): pointer =
   fcQDial_metacast(self.h, param1)
+
+proc metacall*(self: gen_qdial_types.QDial, param1: cint, param2: cint, param3: pointer): cint =
+  fcQDial_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qdial_types.QDial, s: cstring): string =
   let v_ms = fcQDial_tr(s)
@@ -246,6 +257,65 @@ proc tr*(_: type gen_qdial_types.QDial, s: cstring, c: cstring, n: cint): string
   c_free(v_ms.data)
   vx_ret
 
+proc QDialmetaObject*(self: gen_qdial_types.QDial, ): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fQDial_virtualbase_metaObject(self.h))
+
+type QDialmetaObjectProc* = proc(): gen_qobjectdefs_types.QMetaObject
+proc onmetaObject*(self: gen_qdial_types.QDial, slot: QDialmetaObjectProc) =
+  # TODO check subclass
+  var tmp = new QDialmetaObjectProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQDial_override_virtual_metaObject(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QDial_metaObject(self: ptr cQDial, slot: int): pointer {.exportc: "miqt_exec_callback_QDial_metaObject ".} =
+  var nimfunc = cast[ptr QDialmetaObjectProc](cast[pointer](slot))
+
+  let virtualReturn = nimfunc[]( )
+
+  virtualReturn.h
+proc QDialmetacast*(self: gen_qdial_types.QDial, param1: cstring): pointer =
+  fQDial_virtualbase_metacast(self.h, param1)
+
+type QDialmetacastProc* = proc(param1: cstring): pointer
+proc onmetacast*(self: gen_qdial_types.QDial, slot: QDialmetacastProc) =
+  # TODO check subclass
+  var tmp = new QDialmetacastProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQDial_override_virtual_metacast(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QDial_metacast(self: ptr cQDial, slot: int, param1: cstring): pointer {.exportc: "miqt_exec_callback_QDial_metacast ".} =
+  var nimfunc = cast[ptr QDialmetacastProc](cast[pointer](slot))
+  let slotval1 = (param1)
+
+
+  let virtualReturn = nimfunc[](slotval1 )
+
+  virtualReturn
+proc QDialmetacall*(self: gen_qdial_types.QDial, param1: cint, param2: cint, param3: pointer): cint =
+  fQDial_virtualbase_metacall(self.h, cint(param1), param2, param3)
+
+type QDialmetacallProc* = proc(param1: cint, param2: cint, param3: pointer): cint
+proc onmetacall*(self: gen_qdial_types.QDial, slot: QDialmetacallProc) =
+  # TODO check subclass
+  var tmp = new QDialmetacallProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQDial_override_virtual_metacall(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QDial_metacall(self: ptr cQDial, slot: int, param1: cint, param2: cint, param3: pointer): cint {.exportc: "miqt_exec_callback_QDial_metacall ".} =
+  var nimfunc = cast[ptr QDialmetacallProc](cast[pointer](slot))
+  let slotval1 = cint(param1)
+
+  let slotval2 = param2
+
+  let slotval3 = param3
+
+
+  let virtualReturn = nimfunc[](slotval1, slotval2, slotval3 )
+
+  virtualReturn
 proc QDialsizeHint*(self: gen_qdial_types.QDial, ): gen_qsize_types.QSize =
   gen_qsize_types.QSize(h: fQDial_virtualbase_sizeHint(self.h))
 
@@ -1104,5 +1174,7 @@ proc miqt_exec_callback_QDial_disconnectNotify(self: ptr cQDial, slot: int, sign
 
 
   nimfunc[](slotval1)
+proc staticMetaObject*(_: type gen_qdial_types.QDial): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fcQDial_staticMetaObject())
 proc delete*(self: gen_qdial_types.QDial) =
   fcQDial_delete(self.h)

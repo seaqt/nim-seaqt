@@ -57,10 +57,17 @@ type cQQuickTextDocument*{.exportc: "QQuickTextDocument", incompleteStruct.} = o
 proc fcQQuickTextDocument_new(parent: pointer): ptr cQQuickTextDocument {.importc: "QQuickTextDocument_new".}
 proc fcQQuickTextDocument_metaObject(self: pointer, ): pointer {.importc: "QQuickTextDocument_metaObject".}
 proc fcQQuickTextDocument_metacast(self: pointer, param1: cstring): pointer {.importc: "QQuickTextDocument_metacast".}
+proc fcQQuickTextDocument_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QQuickTextDocument_metacall".}
 proc fcQQuickTextDocument_tr(s: cstring): struct_miqt_string {.importc: "QQuickTextDocument_tr".}
 proc fcQQuickTextDocument_textDocument(self: pointer, ): pointer {.importc: "QQuickTextDocument_textDocument".}
 proc fcQQuickTextDocument_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QQuickTextDocument_tr2".}
 proc fcQQuickTextDocument_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QQuickTextDocument_tr3".}
+proc fQQuickTextDocument_virtualbase_metaObject(self: pointer, ): pointer{.importc: "QQuickTextDocument_virtualbase_metaObject".}
+proc fcQQuickTextDocument_override_virtual_metaObject(self: pointer, slot: int) {.importc: "QQuickTextDocument_override_virtual_metaObject".}
+proc fQQuickTextDocument_virtualbase_metacast(self: pointer, param1: cstring): pointer{.importc: "QQuickTextDocument_virtualbase_metacast".}
+proc fcQQuickTextDocument_override_virtual_metacast(self: pointer, slot: int) {.importc: "QQuickTextDocument_override_virtual_metacast".}
+proc fQQuickTextDocument_virtualbase_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint{.importc: "QQuickTextDocument_virtualbase_metacall".}
+proc fcQQuickTextDocument_override_virtual_metacall(self: pointer, slot: int) {.importc: "QQuickTextDocument_override_virtual_metacall".}
 proc fQQuickTextDocument_virtualbase_event(self: pointer, event: pointer): bool{.importc: "QQuickTextDocument_virtualbase_event".}
 proc fcQQuickTextDocument_override_virtual_event(self: pointer, slot: int) {.importc: "QQuickTextDocument_override_virtual_event".}
 proc fQQuickTextDocument_virtualbase_eventFilter(self: pointer, watched: pointer, event: pointer): bool{.importc: "QQuickTextDocument_virtualbase_eventFilter".}
@@ -75,6 +82,7 @@ proc fQQuickTextDocument_virtualbase_connectNotify(self: pointer, signal: pointe
 proc fcQQuickTextDocument_override_virtual_connectNotify(self: pointer, slot: int) {.importc: "QQuickTextDocument_override_virtual_connectNotify".}
 proc fQQuickTextDocument_virtualbase_disconnectNotify(self: pointer, signal: pointer): void{.importc: "QQuickTextDocument_virtualbase_disconnectNotify".}
 proc fcQQuickTextDocument_override_virtual_disconnectNotify(self: pointer, slot: int) {.importc: "QQuickTextDocument_override_virtual_disconnectNotify".}
+proc fcQQuickTextDocument_staticMetaObject(): pointer {.importc: "QQuickTextDocument_staticMetaObject".}
 proc fcQQuickTextDocument_delete(self: pointer) {.importc: "QQuickTextDocument_delete".}
 
 
@@ -88,6 +96,9 @@ proc metaObject*(self: gen_qquicktextdocument_types.QQuickTextDocument, ): gen_q
 
 proc metacast*(self: gen_qquicktextdocument_types.QQuickTextDocument, param1: cstring): pointer =
   fcQQuickTextDocument_metacast(self.h, param1)
+
+proc metacall*(self: gen_qquicktextdocument_types.QQuickTextDocument, param1: cint, param2: cint, param3: pointer): cint =
+  fcQQuickTextDocument_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qquicktextdocument_types.QQuickTextDocument, s: cstring): string =
   let v_ms = fcQQuickTextDocument_tr(s)
@@ -110,6 +121,65 @@ proc tr*(_: type gen_qquicktextdocument_types.QQuickTextDocument, s: cstring, c:
   c_free(v_ms.data)
   vx_ret
 
+proc QQuickTextDocumentmetaObject*(self: gen_qquicktextdocument_types.QQuickTextDocument, ): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fQQuickTextDocument_virtualbase_metaObject(self.h))
+
+type QQuickTextDocumentmetaObjectProc* = proc(): gen_qobjectdefs_types.QMetaObject
+proc onmetaObject*(self: gen_qquicktextdocument_types.QQuickTextDocument, slot: QQuickTextDocumentmetaObjectProc) =
+  # TODO check subclass
+  var tmp = new QQuickTextDocumentmetaObjectProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQQuickTextDocument_override_virtual_metaObject(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QQuickTextDocument_metaObject(self: ptr cQQuickTextDocument, slot: int): pointer {.exportc: "miqt_exec_callback_QQuickTextDocument_metaObject ".} =
+  var nimfunc = cast[ptr QQuickTextDocumentmetaObjectProc](cast[pointer](slot))
+
+  let virtualReturn = nimfunc[]( )
+
+  virtualReturn.h
+proc QQuickTextDocumentmetacast*(self: gen_qquicktextdocument_types.QQuickTextDocument, param1: cstring): pointer =
+  fQQuickTextDocument_virtualbase_metacast(self.h, param1)
+
+type QQuickTextDocumentmetacastProc* = proc(param1: cstring): pointer
+proc onmetacast*(self: gen_qquicktextdocument_types.QQuickTextDocument, slot: QQuickTextDocumentmetacastProc) =
+  # TODO check subclass
+  var tmp = new QQuickTextDocumentmetacastProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQQuickTextDocument_override_virtual_metacast(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QQuickTextDocument_metacast(self: ptr cQQuickTextDocument, slot: int, param1: cstring): pointer {.exportc: "miqt_exec_callback_QQuickTextDocument_metacast ".} =
+  var nimfunc = cast[ptr QQuickTextDocumentmetacastProc](cast[pointer](slot))
+  let slotval1 = (param1)
+
+
+  let virtualReturn = nimfunc[](slotval1 )
+
+  virtualReturn
+proc QQuickTextDocumentmetacall*(self: gen_qquicktextdocument_types.QQuickTextDocument, param1: cint, param2: cint, param3: pointer): cint =
+  fQQuickTextDocument_virtualbase_metacall(self.h, cint(param1), param2, param3)
+
+type QQuickTextDocumentmetacallProc* = proc(param1: cint, param2: cint, param3: pointer): cint
+proc onmetacall*(self: gen_qquicktextdocument_types.QQuickTextDocument, slot: QQuickTextDocumentmetacallProc) =
+  # TODO check subclass
+  var tmp = new QQuickTextDocumentmetacallProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQQuickTextDocument_override_virtual_metacall(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QQuickTextDocument_metacall(self: ptr cQQuickTextDocument, slot: int, param1: cint, param2: cint, param3: pointer): cint {.exportc: "miqt_exec_callback_QQuickTextDocument_metacall ".} =
+  var nimfunc = cast[ptr QQuickTextDocumentmetacallProc](cast[pointer](slot))
+  let slotval1 = cint(param1)
+
+  let slotval2 = param2
+
+  let slotval3 = param3
+
+
+  let virtualReturn = nimfunc[](slotval1, slotval2, slotval3 )
+
+  virtualReturn
 proc QQuickTextDocumentevent*(self: gen_qquicktextdocument_types.QQuickTextDocument, event: gen_qcoreevent_types.QEvent): bool =
   fQQuickTextDocument_virtualbase_event(self.h, event.h)
 
@@ -235,5 +305,7 @@ proc miqt_exec_callback_QQuickTextDocument_disconnectNotify(self: ptr cQQuickTex
 
 
   nimfunc[](slotval1)
+proc staticMetaObject*(_: type gen_qquicktextdocument_types.QQuickTextDocument): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fcQQuickTextDocument_staticMetaObject())
 proc delete*(self: gen_qquicktextdocument_types.QQuickTextDocument) =
   fcQQuickTextDocument_delete(self.h)

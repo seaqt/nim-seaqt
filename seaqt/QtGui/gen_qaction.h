@@ -51,6 +51,7 @@ QAction* QAction_new6(QIcon* icon, struct miqt_string text, QObject* parent);
 void QAction_virtbase(QAction* src, QObject** outptr_QObject);
 QMetaObject* QAction_metaObject(const QAction* self);
 void* QAction_metacast(QAction* self, const char* param1);
+int QAction_metacall(QAction* self, int param1, int param2, void** param3);
 struct miqt_string QAction_tr(const char* s);
 struct miqt_array /* of QObject* */  QAction_associatedObjects(const QAction* self);
 void QAction_setActionGroup(QAction* self, QActionGroup* group);
@@ -125,6 +126,12 @@ struct miqt_string QAction_tr3(const char* s, const char* c, int n);
 bool QAction_showStatusText1(QAction* self, QObject* object);
 void QAction_triggered1(QAction* self, bool checked);
 void QAction_connect_triggered1(QAction* self, intptr_t slot);
+bool QAction_override_virtual_metaObject(void* self, intptr_t slot);
+QMetaObject* QAction_virtualbase_metaObject(const void* self);
+bool QAction_override_virtual_metacast(void* self, intptr_t slot);
+void* QAction_virtualbase_metacast(void* self, const char* param1);
+bool QAction_override_virtual_metacall(void* self, intptr_t slot);
+int QAction_virtualbase_metacall(void* self, int param1, int param2, void** param3);
 bool QAction_override_virtual_event(void* self, intptr_t slot);
 bool QAction_virtualbase_event(void* self, QEvent* param1);
 bool QAction_override_virtual_eventFilter(void* self, intptr_t slot);
@@ -143,6 +150,7 @@ QObject* QAction_protectedbase_sender(bool* _dynamic_cast_ok, const void* self);
 int QAction_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
 int QAction_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
 bool QAction_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+const QMetaObject* QAction_staticMetaObject();
 void QAction_delete(QAction* self);
 
 #ifdef __cplusplus

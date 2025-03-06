@@ -44,8 +44,10 @@ import ./gen_qcameradevice_types
 export gen_qcameradevice_types
 
 import
+  ../QtCore/gen_qobjectdefs_types,
   ../QtCore/gen_qsize_types
 export
+  gen_qobjectdefs_types,
   gen_qsize_types
 
 type cQCameraFormat*{.exportc: "QCameraFormat", incompleteStruct.} = object
@@ -61,6 +63,7 @@ proc fcQCameraFormat_maxFrameRate(self: pointer, ): float32 {.importc: "QCameraF
 proc fcQCameraFormat_isNull(self: pointer, ): bool {.importc: "QCameraFormat_isNull".}
 proc fcQCameraFormat_operatorEqual(self: pointer, other: pointer): bool {.importc: "QCameraFormat_operatorEqual".}
 proc fcQCameraFormat_operatorNotEqual(self: pointer, other: pointer): bool {.importc: "QCameraFormat_operatorNotEqual".}
+proc fcQCameraFormat_staticMetaObject(): pointer {.importc: "QCameraFormat_staticMetaObject".}
 proc fcQCameraFormat_delete(self: pointer) {.importc: "QCameraFormat_delete".}
 proc fcQCameraDevice_new(): ptr cQCameraDevice {.importc: "QCameraDevice_new".}
 proc fcQCameraDevice_new2(other: pointer): ptr cQCameraDevice {.importc: "QCameraDevice_new2".}
@@ -74,6 +77,7 @@ proc fcQCameraDevice_isDefault(self: pointer, ): bool {.importc: "QCameraDevice_
 proc fcQCameraDevice_position(self: pointer, ): cint {.importc: "QCameraDevice_position".}
 proc fcQCameraDevice_photoResolutions(self: pointer, ): struct_miqt_array {.importc: "QCameraDevice_photoResolutions".}
 proc fcQCameraDevice_videoFormats(self: pointer, ): struct_miqt_array {.importc: "QCameraDevice_videoFormats".}
+proc fcQCameraDevice_staticMetaObject(): pointer {.importc: "QCameraDevice_staticMetaObject".}
 proc fcQCameraDevice_delete(self: pointer) {.importc: "QCameraDevice_delete".}
 
 
@@ -109,6 +113,8 @@ proc operatorEqual*(self: gen_qcameradevice_types.QCameraFormat, other: gen_qcam
 proc operatorNotEqual*(self: gen_qcameradevice_types.QCameraFormat, other: gen_qcameradevice_types.QCameraFormat): bool =
   fcQCameraFormat_operatorNotEqual(self.h, other.h)
 
+proc staticMetaObject*(_: type gen_qcameradevice_types.QCameraFormat): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fcQCameraFormat_staticMetaObject())
 proc delete*(self: gen_qcameradevice_types.QCameraFormat) =
   fcQCameraFormat_delete(self.h)
 
@@ -166,5 +172,7 @@ proc videoFormats*(self: gen_qcameradevice_types.QCameraDevice, ): seq[gen_qcame
     vx_ret[i] = gen_qcameradevice_types.QCameraFormat(h: v_outCast[i])
   vx_ret
 
+proc staticMetaObject*(_: type gen_qcameradevice_types.QCameraDevice): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fcQCameraDevice_staticMetaObject())
 proc delete*(self: gen_qcameradevice_types.QCameraDevice) =
   fcQCameraDevice_delete(self.h)

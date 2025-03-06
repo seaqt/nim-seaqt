@@ -57,6 +57,7 @@ type cQWidgetAction*{.exportc: "QWidgetAction", incompleteStruct.} = object
 proc fcQWidgetAction_new(parent: pointer): ptr cQWidgetAction {.importc: "QWidgetAction_new".}
 proc fcQWidgetAction_metaObject(self: pointer, ): pointer {.importc: "QWidgetAction_metaObject".}
 proc fcQWidgetAction_metacast(self: pointer, param1: cstring): pointer {.importc: "QWidgetAction_metacast".}
+proc fcQWidgetAction_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QWidgetAction_metacall".}
 proc fcQWidgetAction_tr(s: cstring): struct_miqt_string {.importc: "QWidgetAction_tr".}
 proc fcQWidgetAction_setDefaultWidget(self: pointer, w: pointer): void {.importc: "QWidgetAction_setDefaultWidget".}
 proc fcQWidgetAction_defaultWidget(self: pointer, ): pointer {.importc: "QWidgetAction_defaultWidget".}
@@ -64,6 +65,12 @@ proc fcQWidgetAction_requestWidget(self: pointer, parent: pointer): pointer {.im
 proc fcQWidgetAction_releaseWidget(self: pointer, widget: pointer): void {.importc: "QWidgetAction_releaseWidget".}
 proc fcQWidgetAction_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QWidgetAction_tr2".}
 proc fcQWidgetAction_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QWidgetAction_tr3".}
+proc fQWidgetAction_virtualbase_metaObject(self: pointer, ): pointer{.importc: "QWidgetAction_virtualbase_metaObject".}
+proc fcQWidgetAction_override_virtual_metaObject(self: pointer, slot: int) {.importc: "QWidgetAction_override_virtual_metaObject".}
+proc fQWidgetAction_virtualbase_metacast(self: pointer, param1: cstring): pointer{.importc: "QWidgetAction_virtualbase_metacast".}
+proc fcQWidgetAction_override_virtual_metacast(self: pointer, slot: int) {.importc: "QWidgetAction_override_virtual_metacast".}
+proc fQWidgetAction_virtualbase_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint{.importc: "QWidgetAction_virtualbase_metacall".}
+proc fcQWidgetAction_override_virtual_metacall(self: pointer, slot: int) {.importc: "QWidgetAction_override_virtual_metacall".}
 proc fQWidgetAction_virtualbase_event(self: pointer, param1: pointer): bool{.importc: "QWidgetAction_virtualbase_event".}
 proc fcQWidgetAction_override_virtual_event(self: pointer, slot: int) {.importc: "QWidgetAction_override_virtual_event".}
 proc fQWidgetAction_virtualbase_eventFilter(self: pointer, param1: pointer, param2: pointer): bool{.importc: "QWidgetAction_virtualbase_eventFilter".}
@@ -82,6 +89,7 @@ proc fQWidgetAction_virtualbase_connectNotify(self: pointer, signal: pointer): v
 proc fcQWidgetAction_override_virtual_connectNotify(self: pointer, slot: int) {.importc: "QWidgetAction_override_virtual_connectNotify".}
 proc fQWidgetAction_virtualbase_disconnectNotify(self: pointer, signal: pointer): void{.importc: "QWidgetAction_virtualbase_disconnectNotify".}
 proc fcQWidgetAction_override_virtual_disconnectNotify(self: pointer, slot: int) {.importc: "QWidgetAction_override_virtual_disconnectNotify".}
+proc fcQWidgetAction_staticMetaObject(): pointer {.importc: "QWidgetAction_staticMetaObject".}
 proc fcQWidgetAction_delete(self: pointer) {.importc: "QWidgetAction_delete".}
 
 
@@ -95,6 +103,9 @@ proc metaObject*(self: gen_qwidgetaction_types.QWidgetAction, ): gen_qobjectdefs
 
 proc metacast*(self: gen_qwidgetaction_types.QWidgetAction, param1: cstring): pointer =
   fcQWidgetAction_metacast(self.h, param1)
+
+proc metacall*(self: gen_qwidgetaction_types.QWidgetAction, param1: cint, param2: cint, param3: pointer): cint =
+  fcQWidgetAction_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qwidgetaction_types.QWidgetAction, s: cstring): string =
   let v_ms = fcQWidgetAction_tr(s)
@@ -126,6 +137,65 @@ proc tr*(_: type gen_qwidgetaction_types.QWidgetAction, s: cstring, c: cstring, 
   c_free(v_ms.data)
   vx_ret
 
+proc QWidgetActionmetaObject*(self: gen_qwidgetaction_types.QWidgetAction, ): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fQWidgetAction_virtualbase_metaObject(self.h))
+
+type QWidgetActionmetaObjectProc* = proc(): gen_qobjectdefs_types.QMetaObject
+proc onmetaObject*(self: gen_qwidgetaction_types.QWidgetAction, slot: QWidgetActionmetaObjectProc) =
+  # TODO check subclass
+  var tmp = new QWidgetActionmetaObjectProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQWidgetAction_override_virtual_metaObject(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QWidgetAction_metaObject(self: ptr cQWidgetAction, slot: int): pointer {.exportc: "miqt_exec_callback_QWidgetAction_metaObject ".} =
+  var nimfunc = cast[ptr QWidgetActionmetaObjectProc](cast[pointer](slot))
+
+  let virtualReturn = nimfunc[]( )
+
+  virtualReturn.h
+proc QWidgetActionmetacast*(self: gen_qwidgetaction_types.QWidgetAction, param1: cstring): pointer =
+  fQWidgetAction_virtualbase_metacast(self.h, param1)
+
+type QWidgetActionmetacastProc* = proc(param1: cstring): pointer
+proc onmetacast*(self: gen_qwidgetaction_types.QWidgetAction, slot: QWidgetActionmetacastProc) =
+  # TODO check subclass
+  var tmp = new QWidgetActionmetacastProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQWidgetAction_override_virtual_metacast(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QWidgetAction_metacast(self: ptr cQWidgetAction, slot: int, param1: cstring): pointer {.exportc: "miqt_exec_callback_QWidgetAction_metacast ".} =
+  var nimfunc = cast[ptr QWidgetActionmetacastProc](cast[pointer](slot))
+  let slotval1 = (param1)
+
+
+  let virtualReturn = nimfunc[](slotval1 )
+
+  virtualReturn
+proc QWidgetActionmetacall*(self: gen_qwidgetaction_types.QWidgetAction, param1: cint, param2: cint, param3: pointer): cint =
+  fQWidgetAction_virtualbase_metacall(self.h, cint(param1), param2, param3)
+
+type QWidgetActionmetacallProc* = proc(param1: cint, param2: cint, param3: pointer): cint
+proc onmetacall*(self: gen_qwidgetaction_types.QWidgetAction, slot: QWidgetActionmetacallProc) =
+  # TODO check subclass
+  var tmp = new QWidgetActionmetacallProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQWidgetAction_override_virtual_metacall(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QWidgetAction_metacall(self: ptr cQWidgetAction, slot: int, param1: cint, param2: cint, param3: pointer): cint {.exportc: "miqt_exec_callback_QWidgetAction_metacall ".} =
+  var nimfunc = cast[ptr QWidgetActionmetacallProc](cast[pointer](slot))
+  let slotval1 = cint(param1)
+
+  let slotval2 = param2
+
+  let slotval3 = param3
+
+
+  let virtualReturn = nimfunc[](slotval1, slotval2, slotval3 )
+
+  virtualReturn
 proc QWidgetActionevent*(self: gen_qwidgetaction_types.QWidgetAction, param1: gen_qcoreevent_types.QEvent): bool =
   fQWidgetAction_virtualbase_event(self.h, param1.h)
 
@@ -287,5 +357,7 @@ proc miqt_exec_callback_QWidgetAction_disconnectNotify(self: ptr cQWidgetAction,
 
 
   nimfunc[](slotval1)
+proc staticMetaObject*(_: type gen_qwidgetaction_types.QWidgetAction): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fcQWidgetAction_staticMetaObject())
 proc delete*(self: gen_qwidgetaction_types.QWidgetAction) =
   fcQWidgetAction_delete(self.h)

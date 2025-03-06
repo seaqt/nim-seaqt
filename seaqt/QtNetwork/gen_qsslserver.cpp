@@ -30,6 +30,9 @@ void miqt_exec_callback_QSslServer_alertSent(intptr_t, QSslSocket*, int, int, st
 void miqt_exec_callback_QSslServer_alertReceived(intptr_t, QSslSocket*, int, int, struct miqt_string);
 void miqt_exec_callback_QSslServer_handshakeInterruptedOnError(intptr_t, QSslSocket*, QSslError*);
 void miqt_exec_callback_QSslServer_startedEncryptionHandshake(intptr_t, QSslSocket*);
+QMetaObject* miqt_exec_callback_QSslServer_metaObject(const QSslServer*, intptr_t);
+void* miqt_exec_callback_QSslServer_metacast(QSslServer*, intptr_t, const char*);
+int miqt_exec_callback_QSslServer_metacall(QSslServer*, intptr_t, int, int, void**);
 void miqt_exec_callback_QSslServer_incomingConnection(QSslServer*, intptr_t, intptr_t);
 bool miqt_exec_callback_QSslServer_hasPendingConnections(const QSslServer*, intptr_t);
 QTcpSocket* miqt_exec_callback_QSslServer_nextPendingConnection(QSslServer*, intptr_t);
@@ -51,6 +54,62 @@ public:
 	VirtualQSslServer(QObject* parent): QSslServer(parent) {};
 
 	virtual ~VirtualQSslServer() override = default;
+
+	// cgo.Handle value for overwritten implementation
+	intptr_t handle__metaObject = 0;
+
+	// Subclass to allow providing a Go implementation
+	virtual const QMetaObject* metaObject() const override {
+		if (handle__metaObject == 0) {
+			return QSslServer::metaObject();
+		}
+		
+
+		QMetaObject* callback_return_value = miqt_exec_callback_QSslServer_metaObject(this, handle__metaObject);
+
+		return callback_return_value;
+	}
+
+	friend QMetaObject* QSslServer_virtualbase_metaObject(const void* self);
+
+	// cgo.Handle value for overwritten implementation
+	intptr_t handle__metacast = 0;
+
+	// Subclass to allow providing a Go implementation
+	virtual void* qt_metacast(const char* param1) override {
+		if (handle__metacast == 0) {
+			return QSslServer::qt_metacast(param1);
+		}
+		
+		const char* sigval1 = (const char*) param1;
+
+		void* callback_return_value = miqt_exec_callback_QSslServer_metacast(this, handle__metacast, sigval1);
+
+		return callback_return_value;
+	}
+
+	friend void* QSslServer_virtualbase_metacast(void* self, const char* param1);
+
+	// cgo.Handle value for overwritten implementation
+	intptr_t handle__metacall = 0;
+
+	// Subclass to allow providing a Go implementation
+	virtual int qt_metacall(QMetaObject::Call param1, int param2, void** param3) override {
+		if (handle__metacall == 0) {
+			return QSslServer::qt_metacall(param1, param2, param3);
+		}
+		
+		QMetaObject::Call param1_ret = param1;
+		int sigval1 = static_cast<int>(param1_ret);
+		int sigval2 = param2;
+		void** sigval3 = param3;
+
+		int callback_return_value = miqt_exec_callback_QSslServer_metacall(this, handle__metacall, sigval1, sigval2, sigval3);
+
+		return static_cast<int>(callback_return_value);
+	}
+
+	friend int QSslServer_virtualbase_metacall(void* self, int param1, int param2, void** param3);
 
 	// cgo.Handle value for overwritten implementation
 	intptr_t handle__incomingConnection = 0;
@@ -270,6 +329,10 @@ void* QSslServer_metacast(QSslServer* self, const char* param1) {
 	return self->qt_metacast(param1);
 }
 
+int QSslServer_metacall(QSslServer* self, int param1, int param2, void** param3) {
+	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
+}
+
 struct miqt_string QSslServer_tr(const char* s) {
 	QString _ret = QSslServer::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
@@ -458,6 +521,54 @@ struct miqt_string QSslServer_tr3(const char* s, const char* c, int n) {
 	return _ms;
 }
 
+bool QSslServer_override_virtual_metaObject(void* self, intptr_t slot) {
+	VirtualQSslServer* self_cast = dynamic_cast<VirtualQSslServer*>( (QSslServer*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+	
+	self_cast->handle__metaObject = slot;
+	return true;
+}
+
+QMetaObject* QSslServer_virtualbase_metaObject(const void* self) {
+
+	return (QMetaObject*) ( (const VirtualQSslServer*)(self) )->QSslServer::metaObject();
+
+}
+
+bool QSslServer_override_virtual_metacast(void* self, intptr_t slot) {
+	VirtualQSslServer* self_cast = dynamic_cast<VirtualQSslServer*>( (QSslServer*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+	
+	self_cast->handle__metacast = slot;
+	return true;
+}
+
+void* QSslServer_virtualbase_metacast(void* self, const char* param1) {
+
+	return ( (VirtualQSslServer*)(self) )->QSslServer::qt_metacast(param1);
+
+}
+
+bool QSslServer_override_virtual_metacall(void* self, intptr_t slot) {
+	VirtualQSslServer* self_cast = dynamic_cast<VirtualQSslServer*>( (QSslServer*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+	
+	self_cast->handle__metacall = slot;
+	return true;
+}
+
+int QSslServer_virtualbase_metacall(void* self, int param1, int param2, void** param3) {
+
+	return ( (VirtualQSslServer*)(self) )->QSslServer::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
+
+}
+
 bool QSslServer_override_virtual_incomingConnection(void* self, intptr_t slot) {
 	VirtualQSslServer* self_cast = dynamic_cast<VirtualQSslServer*>( (QSslServer*)(self) );
 	if (self_cast == nullptr) {
@@ -618,6 +729,7 @@ void QSslServer_virtualbase_disconnectNotify(void* self, QMetaMethod* signal) {
 
 }
 
+const QMetaObject* QSslServer_staticMetaObject() { return &QSslServer::staticMetaObject; }
 void QSslServer_protectedbase_addPendingConnection(bool* _dynamic_cast_ok, void* self, QTcpSocket* socket) {
 	VirtualQSslServer* self_cast = dynamic_cast<VirtualQSslServer*>( (QSslServer*)(self) );
 	if (self_cast == nullptr) {

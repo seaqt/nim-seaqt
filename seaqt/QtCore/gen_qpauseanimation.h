@@ -41,6 +41,7 @@ QPauseAnimation* QPauseAnimation_new4(int msecs, QObject* parent);
 void QPauseAnimation_virtbase(QPauseAnimation* src, QAbstractAnimation** outptr_QAbstractAnimation);
 QMetaObject* QPauseAnimation_metaObject(const QPauseAnimation* self);
 void* QPauseAnimation_metacast(QPauseAnimation* self, const char* param1);
+int QPauseAnimation_metacall(QPauseAnimation* self, int param1, int param2, void** param3);
 struct miqt_string QPauseAnimation_tr(const char* s);
 int QPauseAnimation_duration(const QPauseAnimation* self);
 void QPauseAnimation_setDuration(QPauseAnimation* self, int msecs);
@@ -48,6 +49,12 @@ bool QPauseAnimation_event(QPauseAnimation* self, QEvent* e);
 void QPauseAnimation_updateCurrentTime(QPauseAnimation* self, int param1);
 struct miqt_string QPauseAnimation_tr2(const char* s, const char* c);
 struct miqt_string QPauseAnimation_tr3(const char* s, const char* c, int n);
+bool QPauseAnimation_override_virtual_metaObject(void* self, intptr_t slot);
+QMetaObject* QPauseAnimation_virtualbase_metaObject(const void* self);
+bool QPauseAnimation_override_virtual_metacast(void* self, intptr_t slot);
+void* QPauseAnimation_virtualbase_metacast(void* self, const char* param1);
+bool QPauseAnimation_override_virtual_metacall(void* self, intptr_t slot);
+int QPauseAnimation_virtualbase_metacall(void* self, int param1, int param2, void** param3);
 bool QPauseAnimation_override_virtual_duration(void* self, intptr_t slot);
 int QPauseAnimation_virtualbase_duration(const void* self);
 bool QPauseAnimation_override_virtual_event(void* self, intptr_t slot);
@@ -74,6 +81,7 @@ QObject* QPauseAnimation_protectedbase_sender(bool* _dynamic_cast_ok, const void
 int QPauseAnimation_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
 int QPauseAnimation_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
 bool QPauseAnimation_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+const QMetaObject* QPauseAnimation_staticMetaObject();
 void QPauseAnimation_delete(QPauseAnimation* self);
 
 #ifdef __cplusplus

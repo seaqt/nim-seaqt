@@ -41,6 +41,7 @@ QMediaDevices* QMediaDevices_new2(QObject* parent);
 void QMediaDevices_virtbase(QMediaDevices* src, QObject** outptr_QObject);
 QMetaObject* QMediaDevices_metaObject(const QMediaDevices* self);
 void* QMediaDevices_metacast(QMediaDevices* self, const char* param1);
+int QMediaDevices_metacall(QMediaDevices* self, int param1, int param2, void** param3);
 struct miqt_string QMediaDevices_tr(const char* s);
 struct miqt_array /* of QAudioDevice* */  QMediaDevices_audioInputs();
 struct miqt_array /* of QAudioDevice* */  QMediaDevices_audioOutputs();
@@ -56,6 +57,12 @@ void QMediaDevices_videoInputsChanged(QMediaDevices* self);
 void QMediaDevices_connect_videoInputsChanged(QMediaDevices* self, intptr_t slot);
 struct miqt_string QMediaDevices_tr2(const char* s, const char* c);
 struct miqt_string QMediaDevices_tr3(const char* s, const char* c, int n);
+bool QMediaDevices_override_virtual_metaObject(void* self, intptr_t slot);
+QMetaObject* QMediaDevices_virtualbase_metaObject(const void* self);
+bool QMediaDevices_override_virtual_metacast(void* self, intptr_t slot);
+void* QMediaDevices_virtualbase_metacast(void* self, const char* param1);
+bool QMediaDevices_override_virtual_metacall(void* self, intptr_t slot);
+int QMediaDevices_virtualbase_metacall(void* self, int param1, int param2, void** param3);
 bool QMediaDevices_override_virtual_event(void* self, intptr_t slot);
 bool QMediaDevices_virtualbase_event(void* self, QEvent* event);
 bool QMediaDevices_override_virtual_eventFilter(void* self, intptr_t slot);
@@ -74,6 +81,7 @@ QObject* QMediaDevices_protectedbase_sender(bool* _dynamic_cast_ok, const void* 
 int QMediaDevices_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
 int QMediaDevices_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
 bool QMediaDevices_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+const QMetaObject* QMediaDevices_staticMetaObject();
 void QMediaDevices_delete(QMediaDevices* self);
 
 #ifdef __cplusplus

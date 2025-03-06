@@ -41,12 +41,19 @@ QQmlWebChannel* QQmlWebChannel_new2(QObject* parent);
 void QQmlWebChannel_virtbase(QQmlWebChannel* src, QWebChannel** outptr_QWebChannel);
 QMetaObject* QQmlWebChannel_metaObject(const QQmlWebChannel* self);
 void* QQmlWebChannel_metacast(QQmlWebChannel* self, const char* param1);
+int QQmlWebChannel_metacall(QQmlWebChannel* self, int param1, int param2, void** param3);
 struct miqt_string QQmlWebChannel_tr(const char* s);
 void QQmlWebChannel_registerObjects(QQmlWebChannel* self, struct miqt_map /* of struct miqt_string to QVariant* */  objects);
 void QQmlWebChannel_connectTo(QQmlWebChannel* self, QObject* transport);
 void QQmlWebChannel_disconnectFrom(QQmlWebChannel* self, QObject* transport);
 struct miqt_string QQmlWebChannel_tr2(const char* s, const char* c);
 struct miqt_string QQmlWebChannel_tr3(const char* s, const char* c, int n);
+bool QQmlWebChannel_override_virtual_metaObject(void* self, intptr_t slot);
+QMetaObject* QQmlWebChannel_virtualbase_metaObject(const void* self);
+bool QQmlWebChannel_override_virtual_metacast(void* self, intptr_t slot);
+void* QQmlWebChannel_virtualbase_metacast(void* self, const char* param1);
+bool QQmlWebChannel_override_virtual_metacall(void* self, intptr_t slot);
+int QQmlWebChannel_virtualbase_metacall(void* self, int param1, int param2, void** param3);
 bool QQmlWebChannel_override_virtual_event(void* self, intptr_t slot);
 bool QQmlWebChannel_virtualbase_event(void* self, QEvent* event);
 bool QQmlWebChannel_override_virtual_eventFilter(void* self, intptr_t slot);
@@ -65,6 +72,7 @@ QObject* QQmlWebChannel_protectedbase_sender(bool* _dynamic_cast_ok, const void*
 int QQmlWebChannel_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
 int QQmlWebChannel_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
 bool QQmlWebChannel_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+const QMetaObject* QQmlWebChannel_staticMetaObject();
 void QQmlWebChannel_delete(QQmlWebChannel* self);
 
 #ifdef __cplusplus

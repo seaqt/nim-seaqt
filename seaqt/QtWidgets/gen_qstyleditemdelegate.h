@@ -61,6 +61,7 @@ QStyledItemDelegate* QStyledItemDelegate_new2(QObject* parent);
 void QStyledItemDelegate_virtbase(QStyledItemDelegate* src, QAbstractItemDelegate** outptr_QAbstractItemDelegate);
 QMetaObject* QStyledItemDelegate_metaObject(const QStyledItemDelegate* self);
 void* QStyledItemDelegate_metacast(QStyledItemDelegate* self, const char* param1);
+int QStyledItemDelegate_metacall(QStyledItemDelegate* self, int param1, int param2, void** param3);
 struct miqt_string QStyledItemDelegate_tr(const char* s);
 void QStyledItemDelegate_paint(const QStyledItemDelegate* self, QPainter* painter, QStyleOptionViewItem* option, QModelIndex* index);
 QSize* QStyledItemDelegate_sizeHint(const QStyledItemDelegate* self, QStyleOptionViewItem* option, QModelIndex* index);
@@ -76,6 +77,12 @@ bool QStyledItemDelegate_eventFilter(QStyledItemDelegate* self, QObject* object,
 bool QStyledItemDelegate_editorEvent(QStyledItemDelegate* self, QEvent* event, QAbstractItemModel* model, QStyleOptionViewItem* option, QModelIndex* index);
 struct miqt_string QStyledItemDelegate_tr2(const char* s, const char* c);
 struct miqt_string QStyledItemDelegate_tr3(const char* s, const char* c, int n);
+bool QStyledItemDelegate_override_virtual_metaObject(void* self, intptr_t slot);
+QMetaObject* QStyledItemDelegate_virtualbase_metaObject(const void* self);
+bool QStyledItemDelegate_override_virtual_metacast(void* self, intptr_t slot);
+void* QStyledItemDelegate_virtualbase_metacast(void* self, const char* param1);
+bool QStyledItemDelegate_override_virtual_metacall(void* self, intptr_t slot);
+int QStyledItemDelegate_virtualbase_metacall(void* self, int param1, int param2, void** param3);
 bool QStyledItemDelegate_override_virtual_paint(void* self, intptr_t slot);
 void QStyledItemDelegate_virtualbase_paint(const void* self, QPainter* painter, QStyleOptionViewItem* option, QModelIndex* index);
 bool QStyledItemDelegate_override_virtual_sizeHint(void* self, intptr_t slot);
@@ -118,6 +125,7 @@ QObject* QStyledItemDelegate_protectedbase_sender(bool* _dynamic_cast_ok, const 
 int QStyledItemDelegate_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
 int QStyledItemDelegate_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
 bool QStyledItemDelegate_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+const QMetaObject* QStyledItemDelegate_staticMetaObject();
 void QStyledItemDelegate_delete(QStyledItemDelegate* self);
 
 #ifdef __cplusplus

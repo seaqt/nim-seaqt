@@ -59,6 +59,7 @@ type cQGraphicsAnchorLayout*{.exportc: "QGraphicsAnchorLayout", incompleteStruct
 
 proc fcQGraphicsAnchor_metaObject(self: pointer, ): pointer {.importc: "QGraphicsAnchor_metaObject".}
 proc fcQGraphicsAnchor_metacast(self: pointer, param1: cstring): pointer {.importc: "QGraphicsAnchor_metacast".}
+proc fcQGraphicsAnchor_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QGraphicsAnchor_metacall".}
 proc fcQGraphicsAnchor_tr(s: cstring): struct_miqt_string {.importc: "QGraphicsAnchor_tr".}
 proc fcQGraphicsAnchor_setSpacing(self: pointer, spacing: float64): void {.importc: "QGraphicsAnchor_setSpacing".}
 proc fcQGraphicsAnchor_unsetSpacing(self: pointer, ): void {.importc: "QGraphicsAnchor_unsetSpacing".}
@@ -67,6 +68,7 @@ proc fcQGraphicsAnchor_setSizePolicy(self: pointer, policy: cint): void {.import
 proc fcQGraphicsAnchor_sizePolicy(self: pointer, ): cint {.importc: "QGraphicsAnchor_sizePolicy".}
 proc fcQGraphicsAnchor_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QGraphicsAnchor_tr2".}
 proc fcQGraphicsAnchor_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QGraphicsAnchor_tr3".}
+proc fcQGraphicsAnchor_staticMetaObject(): pointer {.importc: "QGraphicsAnchor_staticMetaObject".}
 proc fcQGraphicsAnchor_delete(self: pointer) {.importc: "QGraphicsAnchor_delete".}
 proc fcQGraphicsAnchorLayout_new(): ptr cQGraphicsAnchorLayout {.importc: "QGraphicsAnchorLayout_new".}
 proc fcQGraphicsAnchorLayout_new2(parent: pointer): ptr cQGraphicsAnchorLayout {.importc: "QGraphicsAnchorLayout_new2".}
@@ -116,6 +118,9 @@ proc metaObject*(self: gen_qgraphicsanchorlayout_types.QGraphicsAnchor, ): gen_q
 proc metacast*(self: gen_qgraphicsanchorlayout_types.QGraphicsAnchor, param1: cstring): pointer =
   fcQGraphicsAnchor_metacast(self.h, param1)
 
+proc metacall*(self: gen_qgraphicsanchorlayout_types.QGraphicsAnchor, param1: cint, param2: cint, param3: pointer): cint =
+  fcQGraphicsAnchor_metacall(self.h, cint(param1), param2, param3)
+
 proc tr*(_: type gen_qgraphicsanchorlayout_types.QGraphicsAnchor, s: cstring): string =
   let v_ms = fcQGraphicsAnchor_tr(s)
   let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
@@ -149,6 +154,8 @@ proc tr*(_: type gen_qgraphicsanchorlayout_types.QGraphicsAnchor, s: cstring, c:
   c_free(v_ms.data)
   vx_ret
 
+proc staticMetaObject*(_: type gen_qgraphicsanchorlayout_types.QGraphicsAnchor): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fcQGraphicsAnchor_staticMetaObject())
 proc delete*(self: gen_qgraphicsanchorlayout_types.QGraphicsAnchor) =
   fcQGraphicsAnchor_delete(self.h)
 

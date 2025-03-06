@@ -54,6 +54,7 @@ QSettings* QSettings_new15(int scope, QObject* parent);
 void QSettings_virtbase(QSettings* src, QObject** outptr_QObject);
 QMetaObject* QSettings_metaObject(const QSettings* self);
 void* QSettings_metacast(QSettings* self, const char* param1);
+int QSettings_metacall(QSettings* self, int param1, int param2, void** param3);
 struct miqt_string QSettings_tr(const char* s);
 void QSettings_clear(QSettings* self);
 void QSettings_sync(QSettings* self);
@@ -90,6 +91,12 @@ bool QSettings_event(QSettings* self, QEvent* event);
 struct miqt_string QSettings_tr2(const char* s, const char* c);
 struct miqt_string QSettings_tr3(const char* s, const char* c, int n);
 void QSettings_beginWriteArray2(QSettings* self, QAnyStringView* prefix, int size);
+bool QSettings_override_virtual_metaObject(void* self, intptr_t slot);
+QMetaObject* QSettings_virtualbase_metaObject(const void* self);
+bool QSettings_override_virtual_metacast(void* self, intptr_t slot);
+void* QSettings_virtualbase_metacast(void* self, const char* param1);
+bool QSettings_override_virtual_metacall(void* self, intptr_t slot);
+int QSettings_virtualbase_metacall(void* self, int param1, int param2, void** param3);
 bool QSettings_override_virtual_event(void* self, intptr_t slot);
 bool QSettings_virtualbase_event(void* self, QEvent* event);
 bool QSettings_override_virtual_eventFilter(void* self, intptr_t slot);
@@ -108,6 +115,7 @@ QObject* QSettings_protectedbase_sender(bool* _dynamic_cast_ok, const void* self
 int QSettings_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
 int QSettings_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
 bool QSettings_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+const QMetaObject* QSettings_staticMetaObject();
 void QSettings_delete(QSettings* self);
 
 #ifdef __cplusplus

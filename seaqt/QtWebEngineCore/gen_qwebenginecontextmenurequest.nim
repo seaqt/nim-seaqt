@@ -100,6 +100,7 @@ type cQWebEngineContextMenuRequest*{.exportc: "QWebEngineContextMenuRequest", in
 
 proc fcQWebEngineContextMenuRequest_metaObject(self: pointer, ): pointer {.importc: "QWebEngineContextMenuRequest_metaObject".}
 proc fcQWebEngineContextMenuRequest_metacast(self: pointer, param1: cstring): pointer {.importc: "QWebEngineContextMenuRequest_metacast".}
+proc fcQWebEngineContextMenuRequest_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QWebEngineContextMenuRequest_metacall".}
 proc fcQWebEngineContextMenuRequest_tr(s: cstring): struct_miqt_string {.importc: "QWebEngineContextMenuRequest_tr".}
 proc fcQWebEngineContextMenuRequest_position(self: pointer, ): pointer {.importc: "QWebEngineContextMenuRequest_position".}
 proc fcQWebEngineContextMenuRequest_selectedText(self: pointer, ): struct_miqt_string {.importc: "QWebEngineContextMenuRequest_selectedText".}
@@ -116,6 +117,7 @@ proc fcQWebEngineContextMenuRequest_mediaFlags(self: pointer, ): cint {.importc:
 proc fcQWebEngineContextMenuRequest_editFlags(self: pointer, ): cint {.importc: "QWebEngineContextMenuRequest_editFlags".}
 proc fcQWebEngineContextMenuRequest_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QWebEngineContextMenuRequest_tr2".}
 proc fcQWebEngineContextMenuRequest_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QWebEngineContextMenuRequest_tr3".}
+proc fcQWebEngineContextMenuRequest_staticMetaObject(): pointer {.importc: "QWebEngineContextMenuRequest_staticMetaObject".}
 proc fcQWebEngineContextMenuRequest_delete(self: pointer) {.importc: "QWebEngineContextMenuRequest_delete".}
 
 
@@ -126,6 +128,9 @@ proc metaObject*(self: gen_qwebenginecontextmenurequest_types.QWebEngineContextM
 
 proc metacast*(self: gen_qwebenginecontextmenurequest_types.QWebEngineContextMenuRequest, param1: cstring): pointer =
   fcQWebEngineContextMenuRequest_metacast(self.h, param1)
+
+proc metacall*(self: gen_qwebenginecontextmenurequest_types.QWebEngineContextMenuRequest, param1: cint, param2: cint, param3: pointer): cint =
+  fcQWebEngineContextMenuRequest_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qwebenginecontextmenurequest_types.QWebEngineContextMenuRequest, s: cstring): string =
   let v_ms = fcQWebEngineContextMenuRequest_tr(s)
@@ -201,5 +206,7 @@ proc tr*(_: type gen_qwebenginecontextmenurequest_types.QWebEngineContextMenuReq
   c_free(v_ms.data)
   vx_ret
 
+proc staticMetaObject*(_: type gen_qwebenginecontextmenurequest_types.QWebEngineContextMenuRequest): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fcQWebEngineContextMenuRequest_staticMetaObject())
 proc delete*(self: gen_qwebenginecontextmenurequest_types.QWebEngineContextMenuRequest) =
   fcQWebEngineContextMenuRequest_delete(self.h)

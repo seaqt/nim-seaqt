@@ -70,6 +70,7 @@ proc fcQStackedLayout_new2(): ptr cQStackedLayout {.importc: "QStackedLayout_new
 proc fcQStackedLayout_new3(parentLayout: pointer): ptr cQStackedLayout {.importc: "QStackedLayout_new3".}
 proc fcQStackedLayout_metaObject(self: pointer, ): pointer {.importc: "QStackedLayout_metaObject".}
 proc fcQStackedLayout_metacast(self: pointer, param1: cstring): pointer {.importc: "QStackedLayout_metacast".}
+proc fcQStackedLayout_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QStackedLayout_metacall".}
 proc fcQStackedLayout_tr(s: cstring): struct_miqt_string {.importc: "QStackedLayout_tr".}
 proc fcQStackedLayout_addWidget(self: pointer, w: pointer): cint {.importc: "QStackedLayout_addWidget".}
 proc fcQStackedLayout_insertWidget(self: pointer, index: cint, w: pointer): cint {.importc: "QStackedLayout_insertWidget".}
@@ -95,6 +96,12 @@ proc fcQStackedLayout_setCurrentIndex(self: pointer, index: cint): void {.import
 proc fcQStackedLayout_setCurrentWidget(self: pointer, w: pointer): void {.importc: "QStackedLayout_setCurrentWidget".}
 proc fcQStackedLayout_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QStackedLayout_tr2".}
 proc fcQStackedLayout_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QStackedLayout_tr3".}
+proc fQStackedLayout_virtualbase_metaObject(self: pointer, ): pointer{.importc: "QStackedLayout_virtualbase_metaObject".}
+proc fcQStackedLayout_override_virtual_metaObject(self: pointer, slot: int) {.importc: "QStackedLayout_override_virtual_metaObject".}
+proc fQStackedLayout_virtualbase_metacast(self: pointer, param1: cstring): pointer{.importc: "QStackedLayout_virtualbase_metacast".}
+proc fcQStackedLayout_override_virtual_metacast(self: pointer, slot: int) {.importc: "QStackedLayout_override_virtual_metacast".}
+proc fQStackedLayout_virtualbase_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint{.importc: "QStackedLayout_virtualbase_metacall".}
+proc fcQStackedLayout_override_virtual_metacall(self: pointer, slot: int) {.importc: "QStackedLayout_override_virtual_metacall".}
 proc fQStackedLayout_virtualbase_count(self: pointer, ): cint{.importc: "QStackedLayout_virtualbase_count".}
 proc fcQStackedLayout_override_virtual_count(self: pointer, slot: int) {.importc: "QStackedLayout_override_virtual_count".}
 proc fQStackedLayout_virtualbase_addItem(self: pointer, item: pointer): void{.importc: "QStackedLayout_virtualbase_addItem".}
@@ -155,6 +162,7 @@ proc fQStackedLayout_virtualbase_widget(self: pointer, ): pointer{.importc: "QSt
 proc fcQStackedLayout_override_virtual_widget(self: pointer, slot: int) {.importc: "QStackedLayout_override_virtual_widget".}
 proc fQStackedLayout_virtualbase_spacerItem(self: pointer, ): pointer{.importc: "QStackedLayout_virtualbase_spacerItem".}
 proc fcQStackedLayout_override_virtual_spacerItem(self: pointer, slot: int) {.importc: "QStackedLayout_override_virtual_spacerItem".}
+proc fcQStackedLayout_staticMetaObject(): pointer {.importc: "QStackedLayout_staticMetaObject".}
 proc fcQStackedLayout_delete(self: pointer) {.importc: "QStackedLayout_delete".}
 
 
@@ -174,6 +182,9 @@ proc metaObject*(self: gen_qstackedlayout_types.QStackedLayout, ): gen_qobjectde
 
 proc metacast*(self: gen_qstackedlayout_types.QStackedLayout, param1: cstring): pointer =
   fcQStackedLayout_metacast(self.h, param1)
+
+proc metacall*(self: gen_qstackedlayout_types.QStackedLayout, param1: cint, param2: cint, param3: pointer): cint =
+  fcQStackedLayout_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qstackedlayout_types.QStackedLayout, s: cstring): string =
   let v_ms = fcQStackedLayout_tr(s)
@@ -279,6 +290,65 @@ proc tr*(_: type gen_qstackedlayout_types.QStackedLayout, s: cstring, c: cstring
   c_free(v_ms.data)
   vx_ret
 
+proc QStackedLayoutmetaObject*(self: gen_qstackedlayout_types.QStackedLayout, ): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fQStackedLayout_virtualbase_metaObject(self.h))
+
+type QStackedLayoutmetaObjectProc* = proc(): gen_qobjectdefs_types.QMetaObject
+proc onmetaObject*(self: gen_qstackedlayout_types.QStackedLayout, slot: QStackedLayoutmetaObjectProc) =
+  # TODO check subclass
+  var tmp = new QStackedLayoutmetaObjectProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQStackedLayout_override_virtual_metaObject(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QStackedLayout_metaObject(self: ptr cQStackedLayout, slot: int): pointer {.exportc: "miqt_exec_callback_QStackedLayout_metaObject ".} =
+  var nimfunc = cast[ptr QStackedLayoutmetaObjectProc](cast[pointer](slot))
+
+  let virtualReturn = nimfunc[]( )
+
+  virtualReturn.h
+proc QStackedLayoutmetacast*(self: gen_qstackedlayout_types.QStackedLayout, param1: cstring): pointer =
+  fQStackedLayout_virtualbase_metacast(self.h, param1)
+
+type QStackedLayoutmetacastProc* = proc(param1: cstring): pointer
+proc onmetacast*(self: gen_qstackedlayout_types.QStackedLayout, slot: QStackedLayoutmetacastProc) =
+  # TODO check subclass
+  var tmp = new QStackedLayoutmetacastProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQStackedLayout_override_virtual_metacast(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QStackedLayout_metacast(self: ptr cQStackedLayout, slot: int, param1: cstring): pointer {.exportc: "miqt_exec_callback_QStackedLayout_metacast ".} =
+  var nimfunc = cast[ptr QStackedLayoutmetacastProc](cast[pointer](slot))
+  let slotval1 = (param1)
+
+
+  let virtualReturn = nimfunc[](slotval1 )
+
+  virtualReturn
+proc QStackedLayoutmetacall*(self: gen_qstackedlayout_types.QStackedLayout, param1: cint, param2: cint, param3: pointer): cint =
+  fQStackedLayout_virtualbase_metacall(self.h, cint(param1), param2, param3)
+
+type QStackedLayoutmetacallProc* = proc(param1: cint, param2: cint, param3: pointer): cint
+proc onmetacall*(self: gen_qstackedlayout_types.QStackedLayout, slot: QStackedLayoutmetacallProc) =
+  # TODO check subclass
+  var tmp = new QStackedLayoutmetacallProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQStackedLayout_override_virtual_metacall(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QStackedLayout_metacall(self: ptr cQStackedLayout, slot: int, param1: cint, param2: cint, param3: pointer): cint {.exportc: "miqt_exec_callback_QStackedLayout_metacall ".} =
+  var nimfunc = cast[ptr QStackedLayoutmetacallProc](cast[pointer](slot))
+  let slotval1 = cint(param1)
+
+  let slotval2 = param2
+
+  let slotval3 = param3
+
+
+  let virtualReturn = nimfunc[](slotval1, slotval2, slotval3 )
+
+  virtualReturn
 proc QStackedLayoutcount*(self: gen_qstackedlayout_types.QStackedLayout, ): cint =
   fQStackedLayout_virtualbase_count(self.h)
 
@@ -809,5 +879,7 @@ proc miqt_exec_callback_QStackedLayout_spacerItem(self: ptr cQStackedLayout, slo
   let virtualReturn = nimfunc[]( )
 
   virtualReturn.h
+proc staticMetaObject*(_: type gen_qstackedlayout_types.QStackedLayout): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fcQStackedLayout_staticMetaObject())
 proc delete*(self: gen_qstackedlayout_types.QStackedLayout) =
   fcQStackedLayout_delete(self.h)

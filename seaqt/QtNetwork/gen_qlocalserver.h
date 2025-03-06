@@ -39,6 +39,7 @@ QLocalServer* QLocalServer_new2(QObject* parent);
 void QLocalServer_virtbase(QLocalServer* src, QObject** outptr_QObject);
 QMetaObject* QLocalServer_metaObject(const QLocalServer* self);
 void* QLocalServer_metacast(QLocalServer* self, const char* param1);
+int QLocalServer_metacall(QLocalServer* self, int param1, int param2, void** param3);
 struct miqt_string QLocalServer_tr(const char* s);
 void QLocalServer_newConnection(QLocalServer* self);
 void QLocalServer_connect_newConnection(QLocalServer* self, intptr_t slot);
@@ -66,6 +67,12 @@ struct miqt_string QLocalServer_tr2(const char* s, const char* c);
 struct miqt_string QLocalServer_tr3(const char* s, const char* c, int n);
 bool QLocalServer_waitForNewConnection1(QLocalServer* self, int msec);
 bool QLocalServer_waitForNewConnection2(QLocalServer* self, int msec, bool* timedOut);
+bool QLocalServer_override_virtual_metaObject(void* self, intptr_t slot);
+QMetaObject* QLocalServer_virtualbase_metaObject(const void* self);
+bool QLocalServer_override_virtual_metacast(void* self, intptr_t slot);
+void* QLocalServer_virtualbase_metacast(void* self, const char* param1);
+bool QLocalServer_override_virtual_metacall(void* self, intptr_t slot);
+int QLocalServer_virtualbase_metacall(void* self, int param1, int param2, void** param3);
 bool QLocalServer_override_virtual_hasPendingConnections(void* self, intptr_t slot);
 bool QLocalServer_virtualbase_hasPendingConnections(const void* self);
 bool QLocalServer_override_virtual_nextPendingConnection(void* self, intptr_t slot);
@@ -90,6 +97,7 @@ QObject* QLocalServer_protectedbase_sender(bool* _dynamic_cast_ok, const void* s
 int QLocalServer_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
 int QLocalServer_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
 bool QLocalServer_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+const QMetaObject* QLocalServer_staticMetaObject();
 void QLocalServer_delete(QLocalServer* self);
 
 #ifdef __cplusplus

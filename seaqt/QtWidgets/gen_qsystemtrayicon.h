@@ -45,6 +45,7 @@ QSystemTrayIcon* QSystemTrayIcon_new4(QIcon* icon, QObject* parent);
 void QSystemTrayIcon_virtbase(QSystemTrayIcon* src, QObject** outptr_QObject);
 QMetaObject* QSystemTrayIcon_metaObject(const QSystemTrayIcon* self);
 void* QSystemTrayIcon_metacast(QSystemTrayIcon* self, const char* param1);
+int QSystemTrayIcon_metacall(QSystemTrayIcon* self, int param1, int param2, void** param3);
 struct miqt_string QSystemTrayIcon_tr(const char* s);
 void QSystemTrayIcon_setContextMenu(QSystemTrayIcon* self, QMenu* menu);
 QMenu* QSystemTrayIcon_contextMenu(const QSystemTrayIcon* self);
@@ -71,6 +72,12 @@ struct miqt_string QSystemTrayIcon_tr3(const char* s, const char* c, int n);
 void QSystemTrayIcon_showMessage4(QSystemTrayIcon* self, struct miqt_string title, struct miqt_string msg, QIcon* icon, int msecs);
 void QSystemTrayIcon_showMessage3(QSystemTrayIcon* self, struct miqt_string title, struct miqt_string msg, int icon);
 void QSystemTrayIcon_showMessage42(QSystemTrayIcon* self, struct miqt_string title, struct miqt_string msg, int icon, int msecs);
+bool QSystemTrayIcon_override_virtual_metaObject(void* self, intptr_t slot);
+QMetaObject* QSystemTrayIcon_virtualbase_metaObject(const void* self);
+bool QSystemTrayIcon_override_virtual_metacast(void* self, intptr_t slot);
+void* QSystemTrayIcon_virtualbase_metacast(void* self, const char* param1);
+bool QSystemTrayIcon_override_virtual_metacall(void* self, intptr_t slot);
+int QSystemTrayIcon_virtualbase_metacall(void* self, int param1, int param2, void** param3);
 bool QSystemTrayIcon_override_virtual_event(void* self, intptr_t slot);
 bool QSystemTrayIcon_virtualbase_event(void* self, QEvent* event);
 bool QSystemTrayIcon_override_virtual_eventFilter(void* self, intptr_t slot);
@@ -89,6 +96,7 @@ QObject* QSystemTrayIcon_protectedbase_sender(bool* _dynamic_cast_ok, const void
 int QSystemTrayIcon_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
 int QSystemTrayIcon_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
 bool QSystemTrayIcon_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+const QMetaObject* QSystemTrayIcon_staticMetaObject();
 void QSystemTrayIcon_delete(QSystemTrayIcon* self);
 
 #ifdef __cplusplus

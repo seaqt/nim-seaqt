@@ -47,6 +47,7 @@ QQuickWebEngineProfile* QQuickWebEngineProfile_new2(QObject* parent);
 void QQuickWebEngineProfile_virtbase(QQuickWebEngineProfile* src, QObject** outptr_QObject);
 QMetaObject* QQuickWebEngineProfile_metaObject(const QQuickWebEngineProfile* self);
 void* QQuickWebEngineProfile_metacast(QQuickWebEngineProfile* self, const char* param1);
+int QQuickWebEngineProfile_metacall(QQuickWebEngineProfile* self, int param1, int param2, void** param3);
 struct miqt_string QQuickWebEngineProfile_tr(const char* s);
 struct miqt_string QQuickWebEngineProfile_storageName(const QQuickWebEngineProfile* self);
 void QQuickWebEngineProfile_setStorageName(QQuickWebEngineProfile* self, struct miqt_string name);
@@ -110,6 +111,12 @@ void QQuickWebEngineProfile_presentNotification(QQuickWebEngineProfile* self, QW
 void QQuickWebEngineProfile_connect_presentNotification(QQuickWebEngineProfile* self, intptr_t slot);
 struct miqt_string QQuickWebEngineProfile_tr2(const char* s, const char* c);
 struct miqt_string QQuickWebEngineProfile_tr3(const char* s, const char* c, int n);
+bool QQuickWebEngineProfile_override_virtual_metaObject(void* self, intptr_t slot);
+QMetaObject* QQuickWebEngineProfile_virtualbase_metaObject(const void* self);
+bool QQuickWebEngineProfile_override_virtual_metacast(void* self, intptr_t slot);
+void* QQuickWebEngineProfile_virtualbase_metacast(void* self, const char* param1);
+bool QQuickWebEngineProfile_override_virtual_metacall(void* self, intptr_t slot);
+int QQuickWebEngineProfile_virtualbase_metacall(void* self, int param1, int param2, void** param3);
 bool QQuickWebEngineProfile_override_virtual_event(void* self, intptr_t slot);
 bool QQuickWebEngineProfile_virtualbase_event(void* self, QEvent* event);
 bool QQuickWebEngineProfile_override_virtual_eventFilter(void* self, intptr_t slot);
@@ -128,6 +135,7 @@ QObject* QQuickWebEngineProfile_protectedbase_sender(bool* _dynamic_cast_ok, con
 int QQuickWebEngineProfile_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
 int QQuickWebEngineProfile_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
 bool QQuickWebEngineProfile_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+const QMetaObject* QQuickWebEngineProfile_staticMetaObject();
 void QQuickWebEngineProfile_delete(QQuickWebEngineProfile* self);
 
 #ifdef __cplusplus

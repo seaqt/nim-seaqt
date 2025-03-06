@@ -73,6 +73,7 @@ proc fcQLayout_new(parent: pointer): ptr cQLayout {.importc: "QLayout_new".}
 proc fcQLayout_new2(): ptr cQLayout {.importc: "QLayout_new2".}
 proc fcQLayout_metaObject(self: pointer, ): pointer {.importc: "QLayout_metaObject".}
 proc fcQLayout_metacast(self: pointer, param1: cstring): pointer {.importc: "QLayout_metacast".}
+proc fcQLayout_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QLayout_metacall".}
 proc fcQLayout_tr(s: cstring): struct_miqt_string {.importc: "QLayout_tr".}
 proc fcQLayout_spacing(self: pointer, ): cint {.importc: "QLayout_spacing".}
 proc fcQLayout_setSpacing(self: pointer, spacing: cint): void {.importc: "QLayout_setSpacing".}
@@ -120,6 +121,12 @@ proc fcQLayout_isEnabled(self: pointer, ): bool {.importc: "QLayout_isEnabled".}
 proc fcQLayout_closestAcceptableSize(w: pointer, s: pointer): pointer {.importc: "QLayout_closestAcceptableSize".}
 proc fcQLayout_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QLayout_tr2".}
 proc fcQLayout_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QLayout_tr3".}
+proc fQLayout_virtualbase_metaObject(self: pointer, ): pointer{.importc: "QLayout_virtualbase_metaObject".}
+proc fcQLayout_override_virtual_metaObject(self: pointer, slot: int) {.importc: "QLayout_override_virtual_metaObject".}
+proc fQLayout_virtualbase_metacast(self: pointer, param1: cstring): pointer{.importc: "QLayout_virtualbase_metacast".}
+proc fcQLayout_override_virtual_metacast(self: pointer, slot: int) {.importc: "QLayout_override_virtual_metacast".}
+proc fQLayout_virtualbase_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint{.importc: "QLayout_virtualbase_metacall".}
+proc fcQLayout_override_virtual_metacall(self: pointer, slot: int) {.importc: "QLayout_override_virtual_metacall".}
 proc fQLayout_virtualbase_spacing(self: pointer, ): cint{.importc: "QLayout_virtualbase_spacing".}
 proc fcQLayout_override_virtual_spacing(self: pointer, slot: int) {.importc: "QLayout_override_virtual_spacing".}
 proc fQLayout_virtualbase_setSpacing(self: pointer, spacing: cint): void{.importc: "QLayout_virtualbase_setSpacing".}
@@ -177,6 +184,7 @@ proc fQLayout_virtualbase_widget(self: pointer, ): pointer{.importc: "QLayout_vi
 proc fcQLayout_override_virtual_widget(self: pointer, slot: int) {.importc: "QLayout_override_virtual_widget".}
 proc fQLayout_virtualbase_spacerItem(self: pointer, ): pointer{.importc: "QLayout_virtualbase_spacerItem".}
 proc fcQLayout_override_virtual_spacerItem(self: pointer, slot: int) {.importc: "QLayout_override_virtual_spacerItem".}
+proc fcQLayout_staticMetaObject(): pointer {.importc: "QLayout_staticMetaObject".}
 proc fcQLayout_delete(self: pointer) {.importc: "QLayout_delete".}
 
 
@@ -193,6 +201,9 @@ proc metaObject*(self: gen_qlayout_types.QLayout, ): gen_qobjectdefs_types.QMeta
 
 proc metacast*(self: gen_qlayout_types.QLayout, param1: cstring): pointer =
   fcQLayout_metacast(self.h, param1)
+
+proc metacall*(self: gen_qlayout_types.QLayout, param1: cint, param2: cint, param3: pointer): cint =
+  fcQLayout_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qlayout_types.QLayout, s: cstring): string =
   let v_ms = fcQLayout_tr(s)
@@ -344,6 +355,65 @@ proc tr*(_: type gen_qlayout_types.QLayout, s: cstring, c: cstring, n: cint): st
   c_free(v_ms.data)
   vx_ret
 
+proc QLayoutmetaObject*(self: gen_qlayout_types.QLayout, ): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fQLayout_virtualbase_metaObject(self.h))
+
+type QLayoutmetaObjectProc* = proc(): gen_qobjectdefs_types.QMetaObject
+proc onmetaObject*(self: gen_qlayout_types.QLayout, slot: QLayoutmetaObjectProc) =
+  # TODO check subclass
+  var tmp = new QLayoutmetaObjectProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQLayout_override_virtual_metaObject(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QLayout_metaObject(self: ptr cQLayout, slot: int): pointer {.exportc: "miqt_exec_callback_QLayout_metaObject ".} =
+  var nimfunc = cast[ptr QLayoutmetaObjectProc](cast[pointer](slot))
+
+  let virtualReturn = nimfunc[]( )
+
+  virtualReturn.h
+proc QLayoutmetacast*(self: gen_qlayout_types.QLayout, param1: cstring): pointer =
+  fQLayout_virtualbase_metacast(self.h, param1)
+
+type QLayoutmetacastProc* = proc(param1: cstring): pointer
+proc onmetacast*(self: gen_qlayout_types.QLayout, slot: QLayoutmetacastProc) =
+  # TODO check subclass
+  var tmp = new QLayoutmetacastProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQLayout_override_virtual_metacast(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QLayout_metacast(self: ptr cQLayout, slot: int, param1: cstring): pointer {.exportc: "miqt_exec_callback_QLayout_metacast ".} =
+  var nimfunc = cast[ptr QLayoutmetacastProc](cast[pointer](slot))
+  let slotval1 = (param1)
+
+
+  let virtualReturn = nimfunc[](slotval1 )
+
+  virtualReturn
+proc QLayoutmetacall*(self: gen_qlayout_types.QLayout, param1: cint, param2: cint, param3: pointer): cint =
+  fQLayout_virtualbase_metacall(self.h, cint(param1), param2, param3)
+
+type QLayoutmetacallProc* = proc(param1: cint, param2: cint, param3: pointer): cint
+proc onmetacall*(self: gen_qlayout_types.QLayout, slot: QLayoutmetacallProc) =
+  # TODO check subclass
+  var tmp = new QLayoutmetacallProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQLayout_override_virtual_metacall(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QLayout_metacall(self: ptr cQLayout, slot: int, param1: cint, param2: cint, param3: pointer): cint {.exportc: "miqt_exec_callback_QLayout_metacall ".} =
+  var nimfunc = cast[ptr QLayoutmetacallProc](cast[pointer](slot))
+  let slotval1 = cint(param1)
+
+  let slotval2 = param2
+
+  let slotval3 = param3
+
+
+  let virtualReturn = nimfunc[](slotval1, slotval2, slotval3 )
+
+  virtualReturn
 proc QLayoutspacing*(self: gen_qlayout_types.QLayout, ): cint =
   fQLayout_virtualbase_spacing(self.h)
 
@@ -878,5 +948,7 @@ proc miqt_exec_callback_QLayout_spacerItem(self: ptr cQLayout, slot: int): point
   let virtualReturn = nimfunc[]( )
 
   virtualReturn.h
+proc staticMetaObject*(_: type gen_qlayout_types.QLayout): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fcQLayout_staticMetaObject())
 proc delete*(self: gen_qlayout_types.QLayout) =
   fcQLayout_delete(self.h)

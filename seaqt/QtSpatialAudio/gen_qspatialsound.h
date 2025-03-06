@@ -44,6 +44,7 @@ QSpatialSound* QSpatialSound_new(QAudioEngine* engine);
 void QSpatialSound_virtbase(QSpatialSound* src, QObject** outptr_QObject);
 QMetaObject* QSpatialSound_metaObject(const QSpatialSound* self);
 void* QSpatialSound_metacast(QSpatialSound* self, const char* param1);
+int QSpatialSound_metacall(QSpatialSound* self, int param1, int param2, void** param3);
 struct miqt_string QSpatialSound_tr(const char* s);
 void QSpatialSound_setSource(QSpatialSound* self, QUrl* url);
 QUrl* QSpatialSound_source(const QSpatialSound* self);
@@ -107,6 +108,12 @@ void QSpatialSound_pause(QSpatialSound* self);
 void QSpatialSound_stop(QSpatialSound* self);
 struct miqt_string QSpatialSound_tr2(const char* s, const char* c);
 struct miqt_string QSpatialSound_tr3(const char* s, const char* c, int n);
+bool QSpatialSound_override_virtual_metaObject(void* self, intptr_t slot);
+QMetaObject* QSpatialSound_virtualbase_metaObject(const void* self);
+bool QSpatialSound_override_virtual_metacast(void* self, intptr_t slot);
+void* QSpatialSound_virtualbase_metacast(void* self, const char* param1);
+bool QSpatialSound_override_virtual_metacall(void* self, intptr_t slot);
+int QSpatialSound_virtualbase_metacall(void* self, int param1, int param2, void** param3);
 bool QSpatialSound_override_virtual_event(void* self, intptr_t slot);
 bool QSpatialSound_virtualbase_event(void* self, QEvent* event);
 bool QSpatialSound_override_virtual_eventFilter(void* self, intptr_t slot);
@@ -125,6 +132,7 @@ QObject* QSpatialSound_protectedbase_sender(bool* _dynamic_cast_ok, const void* 
 int QSpatialSound_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
 int QSpatialSound_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
 bool QSpatialSound_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+const QMetaObject* QSpatialSound_staticMetaObject();
 void QSpatialSound_delete(QSpatialSound* self);
 
 #ifdef __cplusplus

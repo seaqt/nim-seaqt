@@ -31,6 +31,10 @@ void* QFileDevice_metacast(QFileDevice* self, const char* param1) {
 	return self->qt_metacast(param1);
 }
 
+int QFileDevice_metacall(QFileDevice* self, int param1, int param2, void** param3) {
+	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
+}
+
 struct miqt_string QFileDevice_tr(const char* s) {
 	QString _ret = QFileDevice::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
@@ -153,6 +157,7 @@ unsigned char* QFileDevice_map3(QFileDevice* self, long long offset, long long s
 	return static_cast<unsigned char*>(_ret);
 }
 
+const QMetaObject* QFileDevice_staticMetaObject() { return &QFileDevice::staticMetaObject; }
 void QFileDevice_delete(QFileDevice* self) {
 	delete self;
 }

@@ -153,6 +153,7 @@ QEvent* QEvent_virtualbase_clone(const void* self) {
 
 }
 
+const QMetaObject* QEvent_staticMetaObject() { return &QEvent::staticMetaObject; }
 void QEvent_delete(QEvent* self) {
 	delete self;
 }

@@ -504,6 +504,7 @@ void QFont_setStyleHint2(QFont* self, int param1, int param2) {
 	self->setStyleHint(static_cast<QFont::StyleHint>(param1), static_cast<QFont::StyleStrategy>(param2));
 }
 
+const QMetaObject* QFont_staticMetaObject() { return &QFont::staticMetaObject; }
 void QFont_delete(QFont* self) {
 	delete self;
 }

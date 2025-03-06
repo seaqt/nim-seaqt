@@ -37,10 +37,17 @@ QGenericPlugin* QGenericPlugin_new2(QObject* parent);
 void QGenericPlugin_virtbase(QGenericPlugin* src, QObject** outptr_QObject);
 QMetaObject* QGenericPlugin_metaObject(const QGenericPlugin* self);
 void* QGenericPlugin_metacast(QGenericPlugin* self, const char* param1);
+int QGenericPlugin_metacall(QGenericPlugin* self, int param1, int param2, void** param3);
 struct miqt_string QGenericPlugin_tr(const char* s);
 QObject* QGenericPlugin_create(QGenericPlugin* self, struct miqt_string name, struct miqt_string spec);
 struct miqt_string QGenericPlugin_tr2(const char* s, const char* c);
 struct miqt_string QGenericPlugin_tr3(const char* s, const char* c, int n);
+bool QGenericPlugin_override_virtual_metaObject(void* self, intptr_t slot);
+QMetaObject* QGenericPlugin_virtualbase_metaObject(const void* self);
+bool QGenericPlugin_override_virtual_metacast(void* self, intptr_t slot);
+void* QGenericPlugin_virtualbase_metacast(void* self, const char* param1);
+bool QGenericPlugin_override_virtual_metacall(void* self, intptr_t slot);
+int QGenericPlugin_virtualbase_metacall(void* self, int param1, int param2, void** param3);
 bool QGenericPlugin_override_virtual_create(void* self, intptr_t slot);
 QObject* QGenericPlugin_virtualbase_create(void* self, struct miqt_string name, struct miqt_string spec);
 bool QGenericPlugin_override_virtual_event(void* self, intptr_t slot);
@@ -61,6 +68,7 @@ QObject* QGenericPlugin_protectedbase_sender(bool* _dynamic_cast_ok, const void*
 int QGenericPlugin_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
 int QGenericPlugin_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
 bool QGenericPlugin_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+const QMetaObject* QGenericPlugin_staticMetaObject();
 void QGenericPlugin_delete(QGenericPlugin* self);
 
 #ifdef __cplusplus

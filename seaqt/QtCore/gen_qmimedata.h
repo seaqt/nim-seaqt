@@ -42,6 +42,7 @@ QMimeData* QMimeData_new();
 void QMimeData_virtbase(QMimeData* src, QObject** outptr_QObject);
 QMetaObject* QMimeData_metaObject(const QMimeData* self);
 void* QMimeData_metacast(QMimeData* self, const char* param1);
+int QMimeData_metacall(QMimeData* self, int param1, int param2, void** param3);
 struct miqt_string QMimeData_tr(const char* s);
 struct miqt_array /* of QUrl* */  QMimeData_urls(const QMimeData* self);
 void QMimeData_setUrls(QMimeData* self, struct miqt_array /* of QUrl* */  urls);
@@ -67,6 +68,12 @@ void QMimeData_clear(QMimeData* self);
 QVariant* QMimeData_retrieveData(const QMimeData* self, struct miqt_string mimetype, QMetaType* preferredType);
 struct miqt_string QMimeData_tr2(const char* s, const char* c);
 struct miqt_string QMimeData_tr3(const char* s, const char* c, int n);
+bool QMimeData_override_virtual_metaObject(void* self, intptr_t slot);
+QMetaObject* QMimeData_virtualbase_metaObject(const void* self);
+bool QMimeData_override_virtual_metacast(void* self, intptr_t slot);
+void* QMimeData_virtualbase_metacast(void* self, const char* param1);
+bool QMimeData_override_virtual_metacall(void* self, intptr_t slot);
+int QMimeData_virtualbase_metacall(void* self, int param1, int param2, void** param3);
 bool QMimeData_override_virtual_hasFormat(void* self, intptr_t slot);
 bool QMimeData_virtualbase_hasFormat(const void* self, struct miqt_string mimetype);
 bool QMimeData_override_virtual_formats(void* self, intptr_t slot);
@@ -91,6 +98,7 @@ QObject* QMimeData_protectedbase_sender(bool* _dynamic_cast_ok, const void* self
 int QMimeData_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
 int QMimeData_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
 bool QMimeData_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+const QMetaObject* QMimeData_staticMetaObject();
 void QMimeData_delete(QMimeData* self);
 
 #ifdef __cplusplus

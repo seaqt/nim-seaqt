@@ -80,6 +80,7 @@ proc fcQTextBrowser_new(parent: pointer): ptr cQTextBrowser {.importc: "QTextBro
 proc fcQTextBrowser_new2(): ptr cQTextBrowser {.importc: "QTextBrowser_new2".}
 proc fcQTextBrowser_metaObject(self: pointer, ): pointer {.importc: "QTextBrowser_metaObject".}
 proc fcQTextBrowser_metacast(self: pointer, param1: cstring): pointer {.importc: "QTextBrowser_metacast".}
+proc fcQTextBrowser_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QTextBrowser_metacall".}
 proc fcQTextBrowser_tr(s: cstring): struct_miqt_string {.importc: "QTextBrowser_tr".}
 proc fcQTextBrowser_source(self: pointer, ): pointer {.importc: "QTextBrowser_source".}
 proc fcQTextBrowser_sourceType(self: pointer, ): cint {.importc: "QTextBrowser_sourceType".}
@@ -117,6 +118,12 @@ proc fcQTextBrowser_connect_anchorClicked(self: pointer, slot: int) {.importc: "
 proc fcQTextBrowser_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QTextBrowser_tr2".}
 proc fcQTextBrowser_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QTextBrowser_tr3".}
 proc fcQTextBrowser_setSource2(self: pointer, name: pointer, typeVal: cint): void {.importc: "QTextBrowser_setSource2".}
+proc fQTextBrowser_virtualbase_metaObject(self: pointer, ): pointer{.importc: "QTextBrowser_virtualbase_metaObject".}
+proc fcQTextBrowser_override_virtual_metaObject(self: pointer, slot: int) {.importc: "QTextBrowser_override_virtual_metaObject".}
+proc fQTextBrowser_virtualbase_metacast(self: pointer, param1: cstring): pointer{.importc: "QTextBrowser_virtualbase_metacast".}
+proc fcQTextBrowser_override_virtual_metacast(self: pointer, slot: int) {.importc: "QTextBrowser_override_virtual_metacast".}
+proc fQTextBrowser_virtualbase_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint{.importc: "QTextBrowser_virtualbase_metacall".}
+proc fcQTextBrowser_override_virtual_metacall(self: pointer, slot: int) {.importc: "QTextBrowser_override_virtual_metacall".}
 proc fQTextBrowser_virtualbase_loadResource(self: pointer, typeVal: cint, name: pointer): pointer{.importc: "QTextBrowser_virtualbase_loadResource".}
 proc fcQTextBrowser_override_virtual_loadResource(self: pointer, slot: int) {.importc: "QTextBrowser_override_virtual_loadResource".}
 proc fQTextBrowser_virtualbase_backward(self: pointer, ): void{.importc: "QTextBrowser_virtualbase_backward".}
@@ -241,6 +248,7 @@ proc fQTextBrowser_virtualbase_connectNotify(self: pointer, signal: pointer): vo
 proc fcQTextBrowser_override_virtual_connectNotify(self: pointer, slot: int) {.importc: "QTextBrowser_override_virtual_connectNotify".}
 proc fQTextBrowser_virtualbase_disconnectNotify(self: pointer, signal: pointer): void{.importc: "QTextBrowser_virtualbase_disconnectNotify".}
 proc fcQTextBrowser_override_virtual_disconnectNotify(self: pointer, slot: int) {.importc: "QTextBrowser_override_virtual_disconnectNotify".}
+proc fcQTextBrowser_staticMetaObject(): pointer {.importc: "QTextBrowser_staticMetaObject".}
 proc fcQTextBrowser_delete(self: pointer) {.importc: "QTextBrowser_delete".}
 
 
@@ -257,6 +265,9 @@ proc metaObject*(self: gen_qtextbrowser_types.QTextBrowser, ): gen_qobjectdefs_t
 
 proc metacast*(self: gen_qtextbrowser_types.QTextBrowser, param1: cstring): pointer =
   fcQTextBrowser_metacast(self.h, param1)
+
+proc metacall*(self: gen_qtextbrowser_types.QTextBrowser, param1: cint, param2: cint, param3: pointer): cint =
+  fcQTextBrowser_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qtextbrowser_types.QTextBrowser, s: cstring): string =
   let v_ms = fcQTextBrowser_tr(s)
@@ -451,6 +462,65 @@ proc tr*(_: type gen_qtextbrowser_types.QTextBrowser, s: cstring, c: cstring, n:
 proc setSource*(self: gen_qtextbrowser_types.QTextBrowser, name: gen_qurl_types.QUrl, typeVal: cint): void =
   fcQTextBrowser_setSource2(self.h, name.h, cint(typeVal))
 
+proc QTextBrowsermetaObject*(self: gen_qtextbrowser_types.QTextBrowser, ): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fQTextBrowser_virtualbase_metaObject(self.h))
+
+type QTextBrowsermetaObjectProc* = proc(): gen_qobjectdefs_types.QMetaObject
+proc onmetaObject*(self: gen_qtextbrowser_types.QTextBrowser, slot: QTextBrowsermetaObjectProc) =
+  # TODO check subclass
+  var tmp = new QTextBrowsermetaObjectProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQTextBrowser_override_virtual_metaObject(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QTextBrowser_metaObject(self: ptr cQTextBrowser, slot: int): pointer {.exportc: "miqt_exec_callback_QTextBrowser_metaObject ".} =
+  var nimfunc = cast[ptr QTextBrowsermetaObjectProc](cast[pointer](slot))
+
+  let virtualReturn = nimfunc[]( )
+
+  virtualReturn.h
+proc QTextBrowsermetacast*(self: gen_qtextbrowser_types.QTextBrowser, param1: cstring): pointer =
+  fQTextBrowser_virtualbase_metacast(self.h, param1)
+
+type QTextBrowsermetacastProc* = proc(param1: cstring): pointer
+proc onmetacast*(self: gen_qtextbrowser_types.QTextBrowser, slot: QTextBrowsermetacastProc) =
+  # TODO check subclass
+  var tmp = new QTextBrowsermetacastProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQTextBrowser_override_virtual_metacast(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QTextBrowser_metacast(self: ptr cQTextBrowser, slot: int, param1: cstring): pointer {.exportc: "miqt_exec_callback_QTextBrowser_metacast ".} =
+  var nimfunc = cast[ptr QTextBrowsermetacastProc](cast[pointer](slot))
+  let slotval1 = (param1)
+
+
+  let virtualReturn = nimfunc[](slotval1 )
+
+  virtualReturn
+proc QTextBrowsermetacall*(self: gen_qtextbrowser_types.QTextBrowser, param1: cint, param2: cint, param3: pointer): cint =
+  fQTextBrowser_virtualbase_metacall(self.h, cint(param1), param2, param3)
+
+type QTextBrowsermetacallProc* = proc(param1: cint, param2: cint, param3: pointer): cint
+proc onmetacall*(self: gen_qtextbrowser_types.QTextBrowser, slot: QTextBrowsermetacallProc) =
+  # TODO check subclass
+  var tmp = new QTextBrowsermetacallProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQTextBrowser_override_virtual_metacall(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QTextBrowser_metacall(self: ptr cQTextBrowser, slot: int, param1: cint, param2: cint, param3: pointer): cint {.exportc: "miqt_exec_callback_QTextBrowser_metacall ".} =
+  var nimfunc = cast[ptr QTextBrowsermetacallProc](cast[pointer](slot))
+  let slotval1 = cint(param1)
+
+  let slotval2 = param2
+
+  let slotval3 = param3
+
+
+  let virtualReturn = nimfunc[](slotval1, slotval2, slotval3 )
+
+  virtualReturn
 proc QTextBrowserloadResource*(self: gen_qtextbrowser_types.QTextBrowser, typeVal: cint, name: gen_qurl_types.QUrl): gen_qvariant_types.QVariant =
   gen_qvariant_types.QVariant(h: fQTextBrowser_virtualbase_loadResource(self.h, typeVal, name.h))
 
@@ -1534,5 +1604,7 @@ proc miqt_exec_callback_QTextBrowser_disconnectNotify(self: ptr cQTextBrowser, s
 
 
   nimfunc[](slotval1)
+proc staticMetaObject*(_: type gen_qtextbrowser_types.QTextBrowser): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fcQTextBrowser_staticMetaObject())
 proc delete*(self: gen_qtextbrowser_types.QTextBrowser) =
   fcQTextBrowser_delete(self.h)

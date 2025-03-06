@@ -45,6 +45,7 @@ QAudioDecoder* QAudioDecoder_new2(QObject* parent);
 void QAudioDecoder_virtbase(QAudioDecoder* src, QObject** outptr_QObject);
 QMetaObject* QAudioDecoder_metaObject(const QAudioDecoder* self);
 void* QAudioDecoder_metacast(QAudioDecoder* self, const char* param1);
+int QAudioDecoder_metacall(QAudioDecoder* self, int param1, int param2, void** param3);
 struct miqt_string QAudioDecoder_tr(const char* s);
 bool QAudioDecoder_isSupported(const QAudioDecoder* self);
 bool QAudioDecoder_isDecoding(const QAudioDecoder* self);
@@ -82,6 +83,12 @@ void QAudioDecoder_durationChanged(QAudioDecoder* self, long long duration);
 void QAudioDecoder_connect_durationChanged(QAudioDecoder* self, intptr_t slot);
 struct miqt_string QAudioDecoder_tr2(const char* s, const char* c);
 struct miqt_string QAudioDecoder_tr3(const char* s, const char* c, int n);
+bool QAudioDecoder_override_virtual_metaObject(void* self, intptr_t slot);
+QMetaObject* QAudioDecoder_virtualbase_metaObject(const void* self);
+bool QAudioDecoder_override_virtual_metacast(void* self, intptr_t slot);
+void* QAudioDecoder_virtualbase_metacast(void* self, const char* param1);
+bool QAudioDecoder_override_virtual_metacall(void* self, intptr_t slot);
+int QAudioDecoder_virtualbase_metacall(void* self, int param1, int param2, void** param3);
 bool QAudioDecoder_override_virtual_event(void* self, intptr_t slot);
 bool QAudioDecoder_virtualbase_event(void* self, QEvent* event);
 bool QAudioDecoder_override_virtual_eventFilter(void* self, intptr_t slot);
@@ -100,6 +107,7 @@ QObject* QAudioDecoder_protectedbase_sender(bool* _dynamic_cast_ok, const void* 
 int QAudioDecoder_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
 int QAudioDecoder_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
 bool QAudioDecoder_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+const QMetaObject* QAudioDecoder_staticMetaObject();
 void QAudioDecoder_delete(QAudioDecoder* self);
 
 #ifdef __cplusplus

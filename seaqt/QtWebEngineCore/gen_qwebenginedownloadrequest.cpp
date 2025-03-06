@@ -39,6 +39,10 @@ void* QWebEngineDownloadRequest_metacast(QWebEngineDownloadRequest* self, const 
 	return self->qt_metacast(param1);
 }
 
+int QWebEngineDownloadRequest_metacall(QWebEngineDownloadRequest* self, int param1, int param2, void** param3) {
+	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
+}
+
 struct miqt_string QWebEngineDownloadRequest_tr(const char* s) {
 	QString _ret = QWebEngineDownloadRequest::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
@@ -299,6 +303,7 @@ struct miqt_string QWebEngineDownloadRequest_tr3(const char* s, const char* c, i
 	return _ms;
 }
 
+const QMetaObject* QWebEngineDownloadRequest_staticMetaObject() { return &QWebEngineDownloadRequest::staticMetaObject; }
 void QWebEngineDownloadRequest_delete(QWebEngineDownloadRequest* self) {
 	delete self;
 }

@@ -995,6 +995,7 @@ void QPainter_setRenderHints2(QPainter* self, int hints, bool on) {
 	self->setRenderHints(static_cast<QPainter::RenderHints>(hints), on);
 }
 
+const QMetaObject* QPainter_staticMetaObject() { return &QPainter::staticMetaObject; }
 void QPainter_delete(QPainter* self) {
 	delete self;
 }

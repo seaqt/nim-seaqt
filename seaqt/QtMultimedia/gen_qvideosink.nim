@@ -58,6 +58,7 @@ proc fcQVideoSink_new(): ptr cQVideoSink {.importc: "QVideoSink_new".}
 proc fcQVideoSink_new2(parent: pointer): ptr cQVideoSink {.importc: "QVideoSink_new2".}
 proc fcQVideoSink_metaObject(self: pointer, ): pointer {.importc: "QVideoSink_metaObject".}
 proc fcQVideoSink_metacast(self: pointer, param1: cstring): pointer {.importc: "QVideoSink_metacast".}
+proc fcQVideoSink_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QVideoSink_metacall".}
 proc fcQVideoSink_tr(s: cstring): struct_miqt_string {.importc: "QVideoSink_tr".}
 proc fcQVideoSink_videoSize(self: pointer, ): pointer {.importc: "QVideoSink_videoSize".}
 proc fcQVideoSink_subtitleText(self: pointer, ): struct_miqt_string {.importc: "QVideoSink_subtitleText".}
@@ -72,6 +73,12 @@ proc fcQVideoSink_videoSizeChanged(self: pointer, ): void {.importc: "QVideoSink
 proc fcQVideoSink_connect_videoSizeChanged(self: pointer, slot: int) {.importc: "QVideoSink_connect_videoSizeChanged".}
 proc fcQVideoSink_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QVideoSink_tr2".}
 proc fcQVideoSink_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QVideoSink_tr3".}
+proc fQVideoSink_virtualbase_metaObject(self: pointer, ): pointer{.importc: "QVideoSink_virtualbase_metaObject".}
+proc fcQVideoSink_override_virtual_metaObject(self: pointer, slot: int) {.importc: "QVideoSink_override_virtual_metaObject".}
+proc fQVideoSink_virtualbase_metacast(self: pointer, param1: cstring): pointer{.importc: "QVideoSink_virtualbase_metacast".}
+proc fcQVideoSink_override_virtual_metacast(self: pointer, slot: int) {.importc: "QVideoSink_override_virtual_metacast".}
+proc fQVideoSink_virtualbase_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint{.importc: "QVideoSink_virtualbase_metacall".}
+proc fcQVideoSink_override_virtual_metacall(self: pointer, slot: int) {.importc: "QVideoSink_override_virtual_metacall".}
 proc fQVideoSink_virtualbase_event(self: pointer, event: pointer): bool{.importc: "QVideoSink_virtualbase_event".}
 proc fcQVideoSink_override_virtual_event(self: pointer, slot: int) {.importc: "QVideoSink_override_virtual_event".}
 proc fQVideoSink_virtualbase_eventFilter(self: pointer, watched: pointer, event: pointer): bool{.importc: "QVideoSink_virtualbase_eventFilter".}
@@ -86,6 +93,7 @@ proc fQVideoSink_virtualbase_connectNotify(self: pointer, signal: pointer): void
 proc fcQVideoSink_override_virtual_connectNotify(self: pointer, slot: int) {.importc: "QVideoSink_override_virtual_connectNotify".}
 proc fQVideoSink_virtualbase_disconnectNotify(self: pointer, signal: pointer): void{.importc: "QVideoSink_virtualbase_disconnectNotify".}
 proc fcQVideoSink_override_virtual_disconnectNotify(self: pointer, slot: int) {.importc: "QVideoSink_override_virtual_disconnectNotify".}
+proc fcQVideoSink_staticMetaObject(): pointer {.importc: "QVideoSink_staticMetaObject".}
 proc fcQVideoSink_delete(self: pointer) {.importc: "QVideoSink_delete".}
 
 
@@ -102,6 +110,9 @@ proc metaObject*(self: gen_qvideosink_types.QVideoSink, ): gen_qobjectdefs_types
 
 proc metacast*(self: gen_qvideosink_types.QVideoSink, param1: cstring): pointer =
   fcQVideoSink_metacast(self.h, param1)
+
+proc metacall*(self: gen_qvideosink_types.QVideoSink, param1: cint, param2: cint, param3: pointer): cint =
+  fcQVideoSink_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qvideosink_types.QVideoSink, s: cstring): string =
   let v_ms = fcQVideoSink_tr(s)
@@ -188,6 +199,65 @@ proc tr*(_: type gen_qvideosink_types.QVideoSink, s: cstring, c: cstring, n: cin
   c_free(v_ms.data)
   vx_ret
 
+proc QVideoSinkmetaObject*(self: gen_qvideosink_types.QVideoSink, ): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fQVideoSink_virtualbase_metaObject(self.h))
+
+type QVideoSinkmetaObjectProc* = proc(): gen_qobjectdefs_types.QMetaObject
+proc onmetaObject*(self: gen_qvideosink_types.QVideoSink, slot: QVideoSinkmetaObjectProc) =
+  # TODO check subclass
+  var tmp = new QVideoSinkmetaObjectProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQVideoSink_override_virtual_metaObject(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QVideoSink_metaObject(self: ptr cQVideoSink, slot: int): pointer {.exportc: "miqt_exec_callback_QVideoSink_metaObject ".} =
+  var nimfunc = cast[ptr QVideoSinkmetaObjectProc](cast[pointer](slot))
+
+  let virtualReturn = nimfunc[]( )
+
+  virtualReturn.h
+proc QVideoSinkmetacast*(self: gen_qvideosink_types.QVideoSink, param1: cstring): pointer =
+  fQVideoSink_virtualbase_metacast(self.h, param1)
+
+type QVideoSinkmetacastProc* = proc(param1: cstring): pointer
+proc onmetacast*(self: gen_qvideosink_types.QVideoSink, slot: QVideoSinkmetacastProc) =
+  # TODO check subclass
+  var tmp = new QVideoSinkmetacastProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQVideoSink_override_virtual_metacast(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QVideoSink_metacast(self: ptr cQVideoSink, slot: int, param1: cstring): pointer {.exportc: "miqt_exec_callback_QVideoSink_metacast ".} =
+  var nimfunc = cast[ptr QVideoSinkmetacastProc](cast[pointer](slot))
+  let slotval1 = (param1)
+
+
+  let virtualReturn = nimfunc[](slotval1 )
+
+  virtualReturn
+proc QVideoSinkmetacall*(self: gen_qvideosink_types.QVideoSink, param1: cint, param2: cint, param3: pointer): cint =
+  fQVideoSink_virtualbase_metacall(self.h, cint(param1), param2, param3)
+
+type QVideoSinkmetacallProc* = proc(param1: cint, param2: cint, param3: pointer): cint
+proc onmetacall*(self: gen_qvideosink_types.QVideoSink, slot: QVideoSinkmetacallProc) =
+  # TODO check subclass
+  var tmp = new QVideoSinkmetacallProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQVideoSink_override_virtual_metacall(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QVideoSink_metacall(self: ptr cQVideoSink, slot: int, param1: cint, param2: cint, param3: pointer): cint {.exportc: "miqt_exec_callback_QVideoSink_metacall ".} =
+  var nimfunc = cast[ptr QVideoSinkmetacallProc](cast[pointer](slot))
+  let slotval1 = cint(param1)
+
+  let slotval2 = param2
+
+  let slotval3 = param3
+
+
+  let virtualReturn = nimfunc[](slotval1, slotval2, slotval3 )
+
+  virtualReturn
 proc QVideoSinkevent*(self: gen_qvideosink_types.QVideoSink, event: gen_qcoreevent_types.QEvent): bool =
   fQVideoSink_virtualbase_event(self.h, event.h)
 
@@ -313,5 +383,7 @@ proc miqt_exec_callback_QVideoSink_disconnectNotify(self: ptr cQVideoSink, slot:
 
 
   nimfunc[](slotval1)
+proc staticMetaObject*(_: type gen_qvideosink_types.QVideoSink): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fcQVideoSink_staticMetaObject())
 proc delete*(self: gen_qvideosink_types.QVideoSink) =
   fcQVideoSink_delete(self.h)

@@ -43,6 +43,7 @@ QSctpServer* QSctpServer_new2(QObject* parent);
 void QSctpServer_virtbase(QSctpServer* src, QTcpServer** outptr_QTcpServer);
 QMetaObject* QSctpServer_metaObject(const QSctpServer* self);
 void* QSctpServer_metacast(QSctpServer* self, const char* param1);
+int QSctpServer_metacall(QSctpServer* self, int param1, int param2, void** param3);
 struct miqt_string QSctpServer_tr(const char* s);
 void QSctpServer_setMaximumChannelCount(QSctpServer* self, int count);
 int QSctpServer_maximumChannelCount(const QSctpServer* self);
@@ -50,6 +51,12 @@ QSctpSocket* QSctpServer_nextPendingDatagramConnection(QSctpServer* self);
 void QSctpServer_incomingConnection(QSctpServer* self, intptr_t handle);
 struct miqt_string QSctpServer_tr2(const char* s, const char* c);
 struct miqt_string QSctpServer_tr3(const char* s, const char* c, int n);
+bool QSctpServer_override_virtual_metaObject(void* self, intptr_t slot);
+QMetaObject* QSctpServer_virtualbase_metaObject(const void* self);
+bool QSctpServer_override_virtual_metacast(void* self, intptr_t slot);
+void* QSctpServer_virtualbase_metacast(void* self, const char* param1);
+bool QSctpServer_override_virtual_metacall(void* self, intptr_t slot);
+int QSctpServer_virtualbase_metacall(void* self, int param1, int param2, void** param3);
 bool QSctpServer_override_virtual_incomingConnection(void* self, intptr_t slot);
 void QSctpServer_virtualbase_incomingConnection(void* self, intptr_t handle);
 bool QSctpServer_override_virtual_hasPendingConnections(void* self, intptr_t slot);
@@ -75,6 +82,7 @@ QObject* QSctpServer_protectedbase_sender(bool* _dynamic_cast_ok, const void* se
 int QSctpServer_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
 int QSctpServer_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
 bool QSctpServer_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+const QMetaObject* QSctpServer_staticMetaObject();
 void QSctpServer_delete(QSctpServer* self);
 
 #ifdef __cplusplus

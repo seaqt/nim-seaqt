@@ -69,6 +69,7 @@ proc fcQQmlExpression_new6(param1: pointer, param2: pointer, param3: pointer): p
 proc fcQQmlExpression_new7(param1: pointer, param2: pointer, param3: pointer, param4: pointer): ptr cQQmlExpression {.importc: "QQmlExpression_new7".}
 proc fcQQmlExpression_metaObject(self: pointer, ): pointer {.importc: "QQmlExpression_metaObject".}
 proc fcQQmlExpression_metacast(self: pointer, param1: cstring): pointer {.importc: "QQmlExpression_metacast".}
+proc fcQQmlExpression_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QQmlExpression_metacall".}
 proc fcQQmlExpression_tr(s: cstring): struct_miqt_string {.importc: "QQmlExpression_tr".}
 proc fcQQmlExpression_engine(self: pointer, ): pointer {.importc: "QQmlExpression_engine".}
 proc fcQQmlExpression_context(self: pointer, ): pointer {.importc: "QQmlExpression_context".}
@@ -91,6 +92,12 @@ proc fcQQmlExpression_tr2(s: cstring, c: cstring): struct_miqt_string {.importc:
 proc fcQQmlExpression_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QQmlExpression_tr3".}
 proc fcQQmlExpression_setSourceLocation3(self: pointer, fileName: struct_miqt_string, line: cint, column: cint): void {.importc: "QQmlExpression_setSourceLocation3".}
 proc fcQQmlExpression_evaluate1(self: pointer, valueIsUndefined: ptr bool): pointer {.importc: "QQmlExpression_evaluate1".}
+proc fQQmlExpression_virtualbase_metaObject(self: pointer, ): pointer{.importc: "QQmlExpression_virtualbase_metaObject".}
+proc fcQQmlExpression_override_virtual_metaObject(self: pointer, slot: int) {.importc: "QQmlExpression_override_virtual_metaObject".}
+proc fQQmlExpression_virtualbase_metacast(self: pointer, param1: cstring): pointer{.importc: "QQmlExpression_virtualbase_metacast".}
+proc fcQQmlExpression_override_virtual_metacast(self: pointer, slot: int) {.importc: "QQmlExpression_override_virtual_metacast".}
+proc fQQmlExpression_virtualbase_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint{.importc: "QQmlExpression_virtualbase_metacall".}
+proc fcQQmlExpression_override_virtual_metacall(self: pointer, slot: int) {.importc: "QQmlExpression_override_virtual_metacall".}
 proc fQQmlExpression_virtualbase_event(self: pointer, event: pointer): bool{.importc: "QQmlExpression_virtualbase_event".}
 proc fcQQmlExpression_override_virtual_event(self: pointer, slot: int) {.importc: "QQmlExpression_override_virtual_event".}
 proc fQQmlExpression_virtualbase_eventFilter(self: pointer, watched: pointer, event: pointer): bool{.importc: "QQmlExpression_virtualbase_eventFilter".}
@@ -105,6 +112,7 @@ proc fQQmlExpression_virtualbase_connectNotify(self: pointer, signal: pointer): 
 proc fcQQmlExpression_override_virtual_connectNotify(self: pointer, slot: int) {.importc: "QQmlExpression_override_virtual_connectNotify".}
 proc fQQmlExpression_virtualbase_disconnectNotify(self: pointer, signal: pointer): void{.importc: "QQmlExpression_virtualbase_disconnectNotify".}
 proc fcQQmlExpression_override_virtual_disconnectNotify(self: pointer, slot: int) {.importc: "QQmlExpression_override_virtual_disconnectNotify".}
+proc fcQQmlExpression_staticMetaObject(): pointer {.importc: "QQmlExpression_staticMetaObject".}
 proc fcQQmlExpression_delete(self: pointer) {.importc: "QQmlExpression_delete".}
 
 
@@ -136,6 +144,9 @@ proc metaObject*(self: gen_qqmlexpression_types.QQmlExpression, ): gen_qobjectde
 
 proc metacast*(self: gen_qqmlexpression_types.QQmlExpression, param1: cstring): pointer =
   fcQQmlExpression_metacast(self.h, param1)
+
+proc metacall*(self: gen_qqmlexpression_types.QQmlExpression, param1: cint, param2: cint, param3: pointer): cint =
+  fcQQmlExpression_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qqmlexpression_types.QQmlExpression, s: cstring): string =
   let v_ms = fcQQmlExpression_tr(s)
@@ -226,6 +237,65 @@ proc setSourceLocation*(self: gen_qqmlexpression_types.QQmlExpression, fileName:
 proc evaluate*(self: gen_qqmlexpression_types.QQmlExpression, valueIsUndefined: ptr bool): gen_qvariant_types.QVariant =
   gen_qvariant_types.QVariant(h: fcQQmlExpression_evaluate1(self.h, valueIsUndefined))
 
+proc QQmlExpressionmetaObject*(self: gen_qqmlexpression_types.QQmlExpression, ): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fQQmlExpression_virtualbase_metaObject(self.h))
+
+type QQmlExpressionmetaObjectProc* = proc(): gen_qobjectdefs_types.QMetaObject
+proc onmetaObject*(self: gen_qqmlexpression_types.QQmlExpression, slot: QQmlExpressionmetaObjectProc) =
+  # TODO check subclass
+  var tmp = new QQmlExpressionmetaObjectProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQQmlExpression_override_virtual_metaObject(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QQmlExpression_metaObject(self: ptr cQQmlExpression, slot: int): pointer {.exportc: "miqt_exec_callback_QQmlExpression_metaObject ".} =
+  var nimfunc = cast[ptr QQmlExpressionmetaObjectProc](cast[pointer](slot))
+
+  let virtualReturn = nimfunc[]( )
+
+  virtualReturn.h
+proc QQmlExpressionmetacast*(self: gen_qqmlexpression_types.QQmlExpression, param1: cstring): pointer =
+  fQQmlExpression_virtualbase_metacast(self.h, param1)
+
+type QQmlExpressionmetacastProc* = proc(param1: cstring): pointer
+proc onmetacast*(self: gen_qqmlexpression_types.QQmlExpression, slot: QQmlExpressionmetacastProc) =
+  # TODO check subclass
+  var tmp = new QQmlExpressionmetacastProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQQmlExpression_override_virtual_metacast(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QQmlExpression_metacast(self: ptr cQQmlExpression, slot: int, param1: cstring): pointer {.exportc: "miqt_exec_callback_QQmlExpression_metacast ".} =
+  var nimfunc = cast[ptr QQmlExpressionmetacastProc](cast[pointer](slot))
+  let slotval1 = (param1)
+
+
+  let virtualReturn = nimfunc[](slotval1 )
+
+  virtualReturn
+proc QQmlExpressionmetacall*(self: gen_qqmlexpression_types.QQmlExpression, param1: cint, param2: cint, param3: pointer): cint =
+  fQQmlExpression_virtualbase_metacall(self.h, cint(param1), param2, param3)
+
+type QQmlExpressionmetacallProc* = proc(param1: cint, param2: cint, param3: pointer): cint
+proc onmetacall*(self: gen_qqmlexpression_types.QQmlExpression, slot: QQmlExpressionmetacallProc) =
+  # TODO check subclass
+  var tmp = new QQmlExpressionmetacallProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQQmlExpression_override_virtual_metacall(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QQmlExpression_metacall(self: ptr cQQmlExpression, slot: int, param1: cint, param2: cint, param3: pointer): cint {.exportc: "miqt_exec_callback_QQmlExpression_metacall ".} =
+  var nimfunc = cast[ptr QQmlExpressionmetacallProc](cast[pointer](slot))
+  let slotval1 = cint(param1)
+
+  let slotval2 = param2
+
+  let slotval3 = param3
+
+
+  let virtualReturn = nimfunc[](slotval1, slotval2, slotval3 )
+
+  virtualReturn
 proc QQmlExpressionevent*(self: gen_qqmlexpression_types.QQmlExpression, event: gen_qcoreevent_types.QEvent): bool =
   fQQmlExpression_virtualbase_event(self.h, event.h)
 
@@ -351,5 +421,7 @@ proc miqt_exec_callback_QQmlExpression_disconnectNotify(self: ptr cQQmlExpressio
 
 
   nimfunc[](slotval1)
+proc staticMetaObject*(_: type gen_qqmlexpression_types.QQmlExpression): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fcQQmlExpression_staticMetaObject())
 proc delete*(self: gen_qqmlexpression_types.QQmlExpression) =
   fcQQmlExpression_delete(self.h)

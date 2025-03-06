@@ -148,6 +148,7 @@ void QNetworkProxyQuery_setUrl(QNetworkProxyQuery* self, QUrl* url) {
 	self->setUrl(*url);
 }
 
+const QMetaObject* QNetworkProxyQuery_staticMetaObject() { return &QNetworkProxyQuery::staticMetaObject; }
 void QNetworkProxyQuery_delete(QNetworkProxyQuery* self) {
 	delete self;
 }

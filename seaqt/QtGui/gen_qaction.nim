@@ -89,6 +89,7 @@ proc fcQAction_new5(text: struct_miqt_string, parent: pointer): ptr cQAction {.i
 proc fcQAction_new6(icon: pointer, text: struct_miqt_string, parent: pointer): ptr cQAction {.importc: "QAction_new6".}
 proc fcQAction_metaObject(self: pointer, ): pointer {.importc: "QAction_metaObject".}
 proc fcQAction_metacast(self: pointer, param1: cstring): pointer {.importc: "QAction_metacast".}
+proc fcQAction_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QAction_metacall".}
 proc fcQAction_tr(s: cstring): struct_miqt_string {.importc: "QAction_tr".}
 proc fcQAction_associatedObjects(self: pointer, ): struct_miqt_array {.importc: "QAction_associatedObjects".}
 proc fcQAction_setActionGroup(self: pointer, group: pointer): void {.importc: "QAction_setActionGroup".}
@@ -162,6 +163,12 @@ proc fcQAction_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.import
 proc fcQAction_showStatusText1(self: pointer, objectVal: pointer): bool {.importc: "QAction_showStatusText1".}
 proc fcQAction_triggered1(self: pointer, checked: bool): void {.importc: "QAction_triggered1".}
 proc fcQAction_connect_triggered1(self: pointer, slot: int) {.importc: "QAction_connect_triggered1".}
+proc fQAction_virtualbase_metaObject(self: pointer, ): pointer{.importc: "QAction_virtualbase_metaObject".}
+proc fcQAction_override_virtual_metaObject(self: pointer, slot: int) {.importc: "QAction_override_virtual_metaObject".}
+proc fQAction_virtualbase_metacast(self: pointer, param1: cstring): pointer{.importc: "QAction_virtualbase_metacast".}
+proc fcQAction_override_virtual_metacast(self: pointer, slot: int) {.importc: "QAction_override_virtual_metacast".}
+proc fQAction_virtualbase_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint{.importc: "QAction_virtualbase_metacall".}
+proc fcQAction_override_virtual_metacall(self: pointer, slot: int) {.importc: "QAction_override_virtual_metacall".}
 proc fQAction_virtualbase_event(self: pointer, param1: pointer): bool{.importc: "QAction_virtualbase_event".}
 proc fcQAction_override_virtual_event(self: pointer, slot: int) {.importc: "QAction_override_virtual_event".}
 proc fQAction_virtualbase_eventFilter(self: pointer, watched: pointer, event: pointer): bool{.importc: "QAction_virtualbase_eventFilter".}
@@ -176,6 +183,7 @@ proc fQAction_virtualbase_connectNotify(self: pointer, signal: pointer): void{.i
 proc fcQAction_override_virtual_connectNotify(self: pointer, slot: int) {.importc: "QAction_override_virtual_connectNotify".}
 proc fQAction_virtualbase_disconnectNotify(self: pointer, signal: pointer): void{.importc: "QAction_virtualbase_disconnectNotify".}
 proc fcQAction_override_virtual_disconnectNotify(self: pointer, slot: int) {.importc: "QAction_override_virtual_disconnectNotify".}
+proc fcQAction_staticMetaObject(): pointer {.importc: "QAction_staticMetaObject".}
 proc fcQAction_delete(self: pointer) {.importc: "QAction_delete".}
 
 
@@ -204,6 +212,9 @@ proc metaObject*(self: gen_qaction_types.QAction, ): gen_qobjectdefs_types.QMeta
 
 proc metacast*(self: gen_qaction_types.QAction, param1: cstring): pointer =
   fcQAction_metacast(self.h, param1)
+
+proc metacall*(self: gen_qaction_types.QAction, param1: cint, param2: cint, param3: pointer): cint =
+  fcQAction_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qaction_types.QAction, s: cstring): string =
   let v_ms = fcQAction_tr(s)
@@ -534,6 +545,65 @@ proc ontriggered*(self: gen_qaction_types.QAction, slot: QActiontriggered1Slot) 
   GC_ref(tmp)
   fcQAction_connect_triggered1(self.h, cast[int](addr tmp[]))
 
+proc QActionmetaObject*(self: gen_qaction_types.QAction, ): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fQAction_virtualbase_metaObject(self.h))
+
+type QActionmetaObjectProc* = proc(): gen_qobjectdefs_types.QMetaObject
+proc onmetaObject*(self: gen_qaction_types.QAction, slot: QActionmetaObjectProc) =
+  # TODO check subclass
+  var tmp = new QActionmetaObjectProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQAction_override_virtual_metaObject(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QAction_metaObject(self: ptr cQAction, slot: int): pointer {.exportc: "miqt_exec_callback_QAction_metaObject ".} =
+  var nimfunc = cast[ptr QActionmetaObjectProc](cast[pointer](slot))
+
+  let virtualReturn = nimfunc[]( )
+
+  virtualReturn.h
+proc QActionmetacast*(self: gen_qaction_types.QAction, param1: cstring): pointer =
+  fQAction_virtualbase_metacast(self.h, param1)
+
+type QActionmetacastProc* = proc(param1: cstring): pointer
+proc onmetacast*(self: gen_qaction_types.QAction, slot: QActionmetacastProc) =
+  # TODO check subclass
+  var tmp = new QActionmetacastProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQAction_override_virtual_metacast(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QAction_metacast(self: ptr cQAction, slot: int, param1: cstring): pointer {.exportc: "miqt_exec_callback_QAction_metacast ".} =
+  var nimfunc = cast[ptr QActionmetacastProc](cast[pointer](slot))
+  let slotval1 = (param1)
+
+
+  let virtualReturn = nimfunc[](slotval1 )
+
+  virtualReturn
+proc QActionmetacall*(self: gen_qaction_types.QAction, param1: cint, param2: cint, param3: pointer): cint =
+  fQAction_virtualbase_metacall(self.h, cint(param1), param2, param3)
+
+type QActionmetacallProc* = proc(param1: cint, param2: cint, param3: pointer): cint
+proc onmetacall*(self: gen_qaction_types.QAction, slot: QActionmetacallProc) =
+  # TODO check subclass
+  var tmp = new QActionmetacallProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQAction_override_virtual_metacall(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QAction_metacall(self: ptr cQAction, slot: int, param1: cint, param2: cint, param3: pointer): cint {.exportc: "miqt_exec_callback_QAction_metacall ".} =
+  var nimfunc = cast[ptr QActionmetacallProc](cast[pointer](slot))
+  let slotval1 = cint(param1)
+
+  let slotval2 = param2
+
+  let slotval3 = param3
+
+
+  let virtualReturn = nimfunc[](slotval1, slotval2, slotval3 )
+
+  virtualReturn
 proc QActionevent*(self: gen_qaction_types.QAction, param1: gen_qcoreevent_types.QEvent): bool =
   fQAction_virtualbase_event(self.h, param1.h)
 
@@ -659,5 +729,7 @@ proc miqt_exec_callback_QAction_disconnectNotify(self: ptr cQAction, slot: int, 
 
 
   nimfunc[](slotval1)
+proc staticMetaObject*(_: type gen_qaction_types.QAction): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fcQAction_staticMetaObject())
 proc delete*(self: gen_qaction_types.QAction) =
   fcQAction_delete(self.h)

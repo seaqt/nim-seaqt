@@ -235,6 +235,7 @@ import ./gen_qbrush_types
 export gen_qbrush_types
 
 import
+  ../QtCore/gen_qobjectdefs_types,
   ../QtCore/gen_qpoint_types,
   ../QtCore/gen_qvariant_types,
   ./gen_qcolor_types,
@@ -242,6 +243,7 @@ import
   ./gen_qpixmap_types,
   ./gen_qtransform_types
 export
+  gen_qobjectdefs_types,
   gen_qpoint_types,
   gen_qvariant_types,
   gen_qcolor_types,
@@ -307,6 +309,7 @@ proc fcQGradient_interpolationMode(self: pointer, ): cint {.importc: "QGradient_
 proc fcQGradient_setInterpolationMode(self: pointer, mode: cint): void {.importc: "QGradient_setInterpolationMode".}
 proc fcQGradient_operatorEqual(self: pointer, gradient: pointer): bool {.importc: "QGradient_operatorEqual".}
 proc fcQGradient_operatorNotEqual(self: pointer, other: pointer): bool {.importc: "QGradient_operatorNotEqual".}
+proc fcQGradient_staticMetaObject(): pointer {.importc: "QGradient_staticMetaObject".}
 proc fcQGradient_delete(self: pointer) {.importc: "QGradient_delete".}
 proc fcQLinearGradient_new(): ptr cQLinearGradient {.importc: "QLinearGradient_new".}
 proc fcQLinearGradient_new2(start: pointer, finalStop: pointer): ptr cQLinearGradient {.importc: "QLinearGradient_new2".}
@@ -530,6 +533,8 @@ proc operatorEqual*(self: gen_qbrush_types.QGradient, gradient: gen_qbrush_types
 proc operatorNotEqual*(self: gen_qbrush_types.QGradient, other: gen_qbrush_types.QGradient): bool =
   fcQGradient_operatorNotEqual(self.h, other.h)
 
+proc staticMetaObject*(_: type gen_qbrush_types.QGradient): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fcQGradient_staticMetaObject())
 proc delete*(self: gen_qbrush_types.QGradient) =
   fcQGradient_delete(self.h)
 

@@ -16,6 +16,9 @@
 extern "C" {
 #endif
 
+QMetaObject* miqt_exec_callback_QAnimationGroup_metaObject(const QAnimationGroup*, intptr_t);
+void* miqt_exec_callback_QAnimationGroup_metacast(QAnimationGroup*, intptr_t, const char*);
+int miqt_exec_callback_QAnimationGroup_metacall(QAnimationGroup*, intptr_t, int, int, void**);
 bool miqt_exec_callback_QAnimationGroup_event(QAnimationGroup*, intptr_t, QEvent*);
 int miqt_exec_callback_QAnimationGroup_duration(const QAnimationGroup*, intptr_t);
 void miqt_exec_callback_QAnimationGroup_updateCurrentTime(QAnimationGroup*, intptr_t, int);
@@ -38,6 +41,62 @@ public:
 	VirtualQAnimationGroup(QObject* parent): QAnimationGroup(parent) {};
 
 	virtual ~VirtualQAnimationGroup() override = default;
+
+	// cgo.Handle value for overwritten implementation
+	intptr_t handle__metaObject = 0;
+
+	// Subclass to allow providing a Go implementation
+	virtual const QMetaObject* metaObject() const override {
+		if (handle__metaObject == 0) {
+			return QAnimationGroup::metaObject();
+		}
+		
+
+		QMetaObject* callback_return_value = miqt_exec_callback_QAnimationGroup_metaObject(this, handle__metaObject);
+
+		return callback_return_value;
+	}
+
+	friend QMetaObject* QAnimationGroup_virtualbase_metaObject(const void* self);
+
+	// cgo.Handle value for overwritten implementation
+	intptr_t handle__metacast = 0;
+
+	// Subclass to allow providing a Go implementation
+	virtual void* qt_metacast(const char* param1) override {
+		if (handle__metacast == 0) {
+			return QAnimationGroup::qt_metacast(param1);
+		}
+		
+		const char* sigval1 = (const char*) param1;
+
+		void* callback_return_value = miqt_exec_callback_QAnimationGroup_metacast(this, handle__metacast, sigval1);
+
+		return callback_return_value;
+	}
+
+	friend void* QAnimationGroup_virtualbase_metacast(void* self, const char* param1);
+
+	// cgo.Handle value for overwritten implementation
+	intptr_t handle__metacall = 0;
+
+	// Subclass to allow providing a Go implementation
+	virtual int qt_metacall(QMetaObject::Call param1, int param2, void** param3) override {
+		if (handle__metacall == 0) {
+			return QAnimationGroup::qt_metacall(param1, param2, param3);
+		}
+		
+		QMetaObject::Call param1_ret = param1;
+		int sigval1 = static_cast<int>(param1_ret);
+		int sigval2 = param2;
+		void** sigval3 = param3;
+
+		int callback_return_value = miqt_exec_callback_QAnimationGroup_metacall(this, handle__metacall, sigval1, sigval2, sigval3);
+
+		return static_cast<int>(callback_return_value);
+	}
+
+	friend int QAnimationGroup_virtualbase_metacall(void* self, int param1, int param2, void** param3);
 
 	// cgo.Handle value for overwritten implementation
 	intptr_t handle__event = 0;
@@ -275,6 +334,10 @@ void* QAnimationGroup_metacast(QAnimationGroup* self, const char* param1) {
 	return self->qt_metacast(param1);
 }
 
+int QAnimationGroup_metacall(QAnimationGroup* self, int param1, int param2, void** param3) {
+	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
+}
+
 struct miqt_string QAnimationGroup_tr(const char* s) {
 	QString _ret = QAnimationGroup::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
@@ -338,6 +401,54 @@ struct miqt_string QAnimationGroup_tr3(const char* s, const char* c, int n) {
 	_ms.data = static_cast<char*>(malloc(_ms.len));
 	memcpy(_ms.data, _b.data(), _ms.len);
 	return _ms;
+}
+
+bool QAnimationGroup_override_virtual_metaObject(void* self, intptr_t slot) {
+	VirtualQAnimationGroup* self_cast = dynamic_cast<VirtualQAnimationGroup*>( (QAnimationGroup*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+	
+	self_cast->handle__metaObject = slot;
+	return true;
+}
+
+QMetaObject* QAnimationGroup_virtualbase_metaObject(const void* self) {
+
+	return (QMetaObject*) ( (const VirtualQAnimationGroup*)(self) )->QAnimationGroup::metaObject();
+
+}
+
+bool QAnimationGroup_override_virtual_metacast(void* self, intptr_t slot) {
+	VirtualQAnimationGroup* self_cast = dynamic_cast<VirtualQAnimationGroup*>( (QAnimationGroup*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+	
+	self_cast->handle__metacast = slot;
+	return true;
+}
+
+void* QAnimationGroup_virtualbase_metacast(void* self, const char* param1) {
+
+	return ( (VirtualQAnimationGroup*)(self) )->QAnimationGroup::qt_metacast(param1);
+
+}
+
+bool QAnimationGroup_override_virtual_metacall(void* self, intptr_t slot) {
+	VirtualQAnimationGroup* self_cast = dynamic_cast<VirtualQAnimationGroup*>( (QAnimationGroup*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+	
+	self_cast->handle__metacall = slot;
+	return true;
+}
+
+int QAnimationGroup_virtualbase_metacall(void* self, int param1, int param2, void** param3) {
+
+	return ( (VirtualQAnimationGroup*)(self) )->QAnimationGroup::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
+
 }
 
 bool QAnimationGroup_override_virtual_event(void* self, intptr_t slot) {
@@ -504,6 +615,7 @@ void QAnimationGroup_virtualbase_disconnectNotify(void* self, QMetaMethod* signa
 
 }
 
+const QMetaObject* QAnimationGroup_staticMetaObject() { return &QAnimationGroup::staticMetaObject; }
 QObject* QAnimationGroup_protectedbase_sender(bool* _dynamic_cast_ok, const void* self) {
 	VirtualQAnimationGroup* self_cast = dynamic_cast<VirtualQAnimationGroup*>( (QAnimationGroup*)(self) );
 	if (self_cast == nullptr) {

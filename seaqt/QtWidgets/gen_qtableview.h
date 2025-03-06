@@ -117,6 +117,7 @@ QTableView* QTableView_new2();
 void QTableView_virtbase(QTableView* src, QAbstractItemView** outptr_QAbstractItemView);
 QMetaObject* QTableView_metaObject(const QTableView* self);
 void* QTableView_metacast(QTableView* self, const char* param1);
+int QTableView_metacall(QTableView* self, int param1, int param2, void** param3);
 struct miqt_string QTableView_tr(const char* s);
 void QTableView_setModel(QTableView* self, QAbstractItemModel* model);
 void QTableView_setRootIndex(QTableView* self, QModelIndex* index);
@@ -187,6 +188,12 @@ void QTableView_selectionChanged(QTableView* self, QItemSelection* selected, QIt
 void QTableView_currentChanged(QTableView* self, QModelIndex* current, QModelIndex* previous);
 struct miqt_string QTableView_tr2(const char* s, const char* c);
 struct miqt_string QTableView_tr3(const char* s, const char* c, int n);
+bool QTableView_override_virtual_metaObject(void* self, intptr_t slot);
+QMetaObject* QTableView_virtualbase_metaObject(const void* self);
+bool QTableView_override_virtual_metacast(void* self, intptr_t slot);
+void* QTableView_virtualbase_metacast(void* self, const char* param1);
+bool QTableView_override_virtual_metacall(void* self, intptr_t slot);
+int QTableView_virtualbase_metacall(void* self, int param1, int param2, void** param3);
 bool QTableView_override_virtual_setModel(void* self, intptr_t slot);
 void QTableView_virtualbase_setModel(void* self, QAbstractItemModel* model);
 bool QTableView_override_virtual_setRootIndex(void* self, intptr_t slot);
@@ -398,6 +405,7 @@ QObject* QTableView_protectedbase_sender(bool* _dynamic_cast_ok, const void* sel
 int QTableView_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
 int QTableView_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
 bool QTableView_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+const QMetaObject* QTableView_staticMetaObject();
 void QTableView_delete(QTableView* self);
 
 #ifdef __cplusplus

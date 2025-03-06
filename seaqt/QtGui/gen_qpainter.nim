@@ -93,6 +93,7 @@ export gen_qpainter_types
 
 import
   ../QtCore/gen_qline_types,
+  ../QtCore/gen_qobjectdefs_types,
   ../QtCore/gen_qpoint_types,
   ../QtCore/gen_qrect_types,
   ./gen_qbrush_types,
@@ -114,6 +115,7 @@ import
   ./gen_qtransform_types
 export
   gen_qline_types,
+  gen_qobjectdefs_types,
   gen_qpoint_types,
   gen_qrect_types,
   gen_qbrush_types,
@@ -358,6 +360,7 @@ proc fcQPainter_drawText32(self: pointer, r: pointer, text: struct_miqt_string, 
 proc fcQPainter_boundingRect32(self: pointer, rect: pointer, text: struct_miqt_string, o: pointer): pointer {.importc: "QPainter_boundingRect32".}
 proc fcQPainter_setRenderHint2(self: pointer, hint: cint, on: bool): void {.importc: "QPainter_setRenderHint2".}
 proc fcQPainter_setRenderHints2(self: pointer, hints: cint, on: bool): void {.importc: "QPainter_setRenderHints2".}
+proc fcQPainter_staticMetaObject(): pointer {.importc: "QPainter_staticMetaObject".}
 proc fcQPainter_delete(self: pointer) {.importc: "QPainter_delete".}
 proc fcQPainterPixmapFragment_create(pos: pointer, sourceRect: pointer): pointer {.importc: "QPainter__PixmapFragment_create".}
 proc fcQPainterPixmapFragment_create3(pos: pointer, sourceRect: pointer, scaleX: float64): pointer {.importc: "QPainter__PixmapFragment_create3".}
@@ -1056,6 +1059,8 @@ proc setRenderHint*(self: gen_qpainter_types.QPainter, hint: cint, on: bool): vo
 proc setRenderHints*(self: gen_qpainter_types.QPainter, hints: cint, on: bool): void =
   fcQPainter_setRenderHints2(self.h, cint(hints), on)
 
+proc staticMetaObject*(_: type gen_qpainter_types.QPainter): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fcQPainter_staticMetaObject())
 proc delete*(self: gen_qpainter_types.QPainter) =
   fcQPainter_delete(self.h)
 

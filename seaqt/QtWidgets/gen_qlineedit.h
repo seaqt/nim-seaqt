@@ -107,6 +107,7 @@ QLineEdit* QLineEdit_new4(struct miqt_string param1, QWidget* parent);
 void QLineEdit_virtbase(QLineEdit* src, QWidget** outptr_QWidget);
 QMetaObject* QLineEdit_metaObject(const QLineEdit* self);
 void* QLineEdit_metacast(QLineEdit* self, const char* param1);
+int QLineEdit_metacall(QLineEdit* self, int param1, int param2, void** param3);
 struct miqt_string QLineEdit_tr(const char* s);
 struct miqt_string QLineEdit_text(const QLineEdit* self);
 struct miqt_string QLineEdit_displayText(const QLineEdit* self);
@@ -213,6 +214,12 @@ struct miqt_string QLineEdit_tr2(const char* s, const char* c);
 struct miqt_string QLineEdit_tr3(const char* s, const char* c, int n);
 void QLineEdit_cursorForward2(QLineEdit* self, bool mark, int steps);
 void QLineEdit_cursorBackward2(QLineEdit* self, bool mark, int steps);
+bool QLineEdit_override_virtual_metaObject(void* self, intptr_t slot);
+QMetaObject* QLineEdit_virtualbase_metaObject(const void* self);
+bool QLineEdit_override_virtual_metacast(void* self, intptr_t slot);
+void* QLineEdit_virtualbase_metacast(void* self, const char* param1);
+bool QLineEdit_override_virtual_metacall(void* self, intptr_t slot);
+int QLineEdit_virtualbase_metacall(void* self, int param1, int param2, void** param3);
 bool QLineEdit_override_virtual_sizeHint(void* self, intptr_t slot);
 QSize* QLineEdit_virtualbase_sizeHint(const void* self);
 bool QLineEdit_override_virtual_minimumSizeHint(void* self, intptr_t slot);
@@ -319,6 +326,7 @@ QObject* QLineEdit_protectedbase_sender(bool* _dynamic_cast_ok, const void* self
 int QLineEdit_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
 int QLineEdit_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
 bool QLineEdit_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+const QMetaObject* QLineEdit_staticMetaObject();
 void QLineEdit_delete(QLineEdit* self);
 
 #ifdef __cplusplus

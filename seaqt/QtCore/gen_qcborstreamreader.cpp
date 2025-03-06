@@ -245,6 +245,7 @@ bool QCborStreamReader_next1(QCborStreamReader* self, int maxRecursion) {
 	return self->next(static_cast<int>(maxRecursion));
 }
 
+const QMetaObject* QCborStreamReader_staticMetaObject() { return &QCborStreamReader::staticMetaObject; }
 void QCborStreamReader_delete(QCborStreamReader* self) {
 	delete self;
 }

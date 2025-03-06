@@ -40,6 +40,7 @@ QAmbientSound* QAmbientSound_new(QAudioEngine* engine);
 void QAmbientSound_virtbase(QAmbientSound* src, QObject** outptr_QObject);
 QMetaObject* QAmbientSound_metaObject(const QAmbientSound* self);
 void* QAmbientSound_metacast(QAmbientSound* self, const char* param1);
+int QAmbientSound_metacall(QAmbientSound* self, int param1, int param2, void** param3);
 struct miqt_string QAmbientSound_tr(const char* s);
 void QAmbientSound_setSource(QAmbientSound* self, QUrl* url);
 QUrl* QAmbientSound_source(const QAmbientSound* self);
@@ -63,6 +64,12 @@ void QAmbientSound_pause(QAmbientSound* self);
 void QAmbientSound_stop(QAmbientSound* self);
 struct miqt_string QAmbientSound_tr2(const char* s, const char* c);
 struct miqt_string QAmbientSound_tr3(const char* s, const char* c, int n);
+bool QAmbientSound_override_virtual_metaObject(void* self, intptr_t slot);
+QMetaObject* QAmbientSound_virtualbase_metaObject(const void* self);
+bool QAmbientSound_override_virtual_metacast(void* self, intptr_t slot);
+void* QAmbientSound_virtualbase_metacast(void* self, const char* param1);
+bool QAmbientSound_override_virtual_metacall(void* self, intptr_t slot);
+int QAmbientSound_virtualbase_metacall(void* self, int param1, int param2, void** param3);
 bool QAmbientSound_override_virtual_event(void* self, intptr_t slot);
 bool QAmbientSound_virtualbase_event(void* self, QEvent* event);
 bool QAmbientSound_override_virtual_eventFilter(void* self, intptr_t slot);
@@ -81,6 +88,7 @@ QObject* QAmbientSound_protectedbase_sender(bool* _dynamic_cast_ok, const void* 
 int QAmbientSound_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
 int QAmbientSound_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
 bool QAmbientSound_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+const QMetaObject* QAmbientSound_staticMetaObject();
 void QAmbientSound_delete(QAmbientSound* self);
 
 #ifdef __cplusplus

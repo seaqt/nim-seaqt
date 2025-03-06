@@ -39,6 +39,7 @@ QSharedMemory* QSharedMemory_new4(struct miqt_string key, QObject* parent);
 void QSharedMemory_virtbase(QSharedMemory* src, QObject** outptr_QObject);
 QMetaObject* QSharedMemory_metaObject(const QSharedMemory* self);
 void* QSharedMemory_metacast(QSharedMemory* self, const char* param1);
+int QSharedMemory_metacall(QSharedMemory* self, int param1, int param2, void** param3);
 struct miqt_string QSharedMemory_tr(const char* s);
 void QSharedMemory_setKey(QSharedMemory* self, struct miqt_string key);
 struct miqt_string QSharedMemory_key(const QSharedMemory* self);
@@ -60,6 +61,12 @@ struct miqt_string QSharedMemory_tr2(const char* s, const char* c);
 struct miqt_string QSharedMemory_tr3(const char* s, const char* c, int n);
 bool QSharedMemory_create2(QSharedMemory* self, ptrdiff_t size, int mode);
 bool QSharedMemory_attach1(QSharedMemory* self, int mode);
+bool QSharedMemory_override_virtual_metaObject(void* self, intptr_t slot);
+QMetaObject* QSharedMemory_virtualbase_metaObject(const void* self);
+bool QSharedMemory_override_virtual_metacast(void* self, intptr_t slot);
+void* QSharedMemory_virtualbase_metacast(void* self, const char* param1);
+bool QSharedMemory_override_virtual_metacall(void* self, intptr_t slot);
+int QSharedMemory_virtualbase_metacall(void* self, int param1, int param2, void** param3);
 bool QSharedMemory_override_virtual_event(void* self, intptr_t slot);
 bool QSharedMemory_virtualbase_event(void* self, QEvent* event);
 bool QSharedMemory_override_virtual_eventFilter(void* self, intptr_t slot);
@@ -78,6 +85,7 @@ QObject* QSharedMemory_protectedbase_sender(bool* _dynamic_cast_ok, const void* 
 int QSharedMemory_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
 int QSharedMemory_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
 bool QSharedMemory_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+const QMetaObject* QSharedMemory_staticMetaObject();
 void QSharedMemory_delete(QSharedMemory* self);
 
 #ifdef __cplusplus

@@ -139,6 +139,7 @@ proc fcQMessageBox_new8(title: struct_miqt_string, text: struct_miqt_string, ico
 proc fcQMessageBox_new9(title: struct_miqt_string, text: struct_miqt_string, icon: cint, button0: cint, button1: cint, button2: cint, parent: pointer, f: cint): ptr cQMessageBox {.importc: "QMessageBox_new9".}
 proc fcQMessageBox_metaObject(self: pointer, ): pointer {.importc: "QMessageBox_metaObject".}
 proc fcQMessageBox_metacast(self: pointer, param1: cstring): pointer {.importc: "QMessageBox_metacast".}
+proc fcQMessageBox_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QMessageBox_metacall".}
 proc fcQMessageBox_tr(s: cstring): struct_miqt_string {.importc: "QMessageBox_tr".}
 proc fcQMessageBox_addButton(self: pointer, button: pointer, role: cint): void {.importc: "QMessageBox_addButton".}
 proc fcQMessageBox_addButton2(self: pointer, text: struct_miqt_string, role: cint): pointer {.importc: "QMessageBox_addButton2".}
@@ -232,6 +233,12 @@ proc fcQMessageBox_critical52(parent: pointer, title: struct_miqt_string, text: 
 proc fcQMessageBox_critical62(parent: pointer, title: struct_miqt_string, text: struct_miqt_string, button0Text: struct_miqt_string, button1Text: struct_miqt_string, button2Text: struct_miqt_string): cint {.importc: "QMessageBox_critical62".}
 proc fcQMessageBox_critical7(parent: pointer, title: struct_miqt_string, text: struct_miqt_string, button0Text: struct_miqt_string, button1Text: struct_miqt_string, button2Text: struct_miqt_string, defaultButtonNumber: cint): cint {.importc: "QMessageBox_critical7".}
 proc fcQMessageBox_critical8(parent: pointer, title: struct_miqt_string, text: struct_miqt_string, button0Text: struct_miqt_string, button1Text: struct_miqt_string, button2Text: struct_miqt_string, defaultButtonNumber: cint, escapeButtonNumber: cint): cint {.importc: "QMessageBox_critical8".}
+proc fQMessageBox_virtualbase_metaObject(self: pointer, ): pointer{.importc: "QMessageBox_virtualbase_metaObject".}
+proc fcQMessageBox_override_virtual_metaObject(self: pointer, slot: int) {.importc: "QMessageBox_override_virtual_metaObject".}
+proc fQMessageBox_virtualbase_metacast(self: pointer, param1: cstring): pointer{.importc: "QMessageBox_virtualbase_metacast".}
+proc fcQMessageBox_override_virtual_metacast(self: pointer, slot: int) {.importc: "QMessageBox_override_virtual_metacast".}
+proc fQMessageBox_virtualbase_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint{.importc: "QMessageBox_virtualbase_metacall".}
+proc fcQMessageBox_override_virtual_metacall(self: pointer, slot: int) {.importc: "QMessageBox_override_virtual_metacall".}
 proc fQMessageBox_virtualbase_event(self: pointer, e: pointer): bool{.importc: "QMessageBox_virtualbase_event".}
 proc fcQMessageBox_override_virtual_event(self: pointer, slot: int) {.importc: "QMessageBox_override_virtual_event".}
 proc fQMessageBox_virtualbase_resizeEvent(self: pointer, event: pointer): void{.importc: "QMessageBox_virtualbase_resizeEvent".}
@@ -336,6 +343,7 @@ proc fQMessageBox_virtualbase_connectNotify(self: pointer, signal: pointer): voi
 proc fcQMessageBox_override_virtual_connectNotify(self: pointer, slot: int) {.importc: "QMessageBox_override_virtual_connectNotify".}
 proc fQMessageBox_virtualbase_disconnectNotify(self: pointer, signal: pointer): void{.importc: "QMessageBox_virtualbase_disconnectNotify".}
 proc fcQMessageBox_override_virtual_disconnectNotify(self: pointer, slot: int) {.importc: "QMessageBox_override_virtual_disconnectNotify".}
+proc fcQMessageBox_staticMetaObject(): pointer {.importc: "QMessageBox_staticMetaObject".}
 proc fcQMessageBox_delete(self: pointer) {.importc: "QMessageBox_delete".}
 
 
@@ -373,6 +381,9 @@ proc metaObject*(self: gen_qmessagebox_types.QMessageBox, ): gen_qobjectdefs_typ
 
 proc metacast*(self: gen_qmessagebox_types.QMessageBox, param1: cstring): pointer =
   fcQMessageBox_metacast(self.h, param1)
+
+proc metacall*(self: gen_qmessagebox_types.QMessageBox, param1: cint, param2: cint, param3: pointer): cint =
+  fcQMessageBox_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qmessagebox_types.QMessageBox, s: cstring): string =
   let v_ms = fcQMessageBox_tr(s)
@@ -689,6 +700,65 @@ proc critical*(_: type gen_qmessagebox_types.QMessageBox, parent: gen_qwidget_ty
 proc critical*(_: type gen_qmessagebox_types.QMessageBox, parent: gen_qwidget_types.QWidget, title: string, text: string, button0Text: string, button1Text: string, button2Text: string, defaultButtonNumber: cint, escapeButtonNumber: cint): cint =
   fcQMessageBox_critical8(parent.h, struct_miqt_string(data: title, len: csize_t(len(title))), struct_miqt_string(data: text, len: csize_t(len(text))), struct_miqt_string(data: button0Text, len: csize_t(len(button0Text))), struct_miqt_string(data: button1Text, len: csize_t(len(button1Text))), struct_miqt_string(data: button2Text, len: csize_t(len(button2Text))), defaultButtonNumber, escapeButtonNumber)
 
+proc QMessageBoxmetaObject*(self: gen_qmessagebox_types.QMessageBox, ): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fQMessageBox_virtualbase_metaObject(self.h))
+
+type QMessageBoxmetaObjectProc* = proc(): gen_qobjectdefs_types.QMetaObject
+proc onmetaObject*(self: gen_qmessagebox_types.QMessageBox, slot: QMessageBoxmetaObjectProc) =
+  # TODO check subclass
+  var tmp = new QMessageBoxmetaObjectProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQMessageBox_override_virtual_metaObject(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QMessageBox_metaObject(self: ptr cQMessageBox, slot: int): pointer {.exportc: "miqt_exec_callback_QMessageBox_metaObject ".} =
+  var nimfunc = cast[ptr QMessageBoxmetaObjectProc](cast[pointer](slot))
+
+  let virtualReturn = nimfunc[]( )
+
+  virtualReturn.h
+proc QMessageBoxmetacast*(self: gen_qmessagebox_types.QMessageBox, param1: cstring): pointer =
+  fQMessageBox_virtualbase_metacast(self.h, param1)
+
+type QMessageBoxmetacastProc* = proc(param1: cstring): pointer
+proc onmetacast*(self: gen_qmessagebox_types.QMessageBox, slot: QMessageBoxmetacastProc) =
+  # TODO check subclass
+  var tmp = new QMessageBoxmetacastProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQMessageBox_override_virtual_metacast(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QMessageBox_metacast(self: ptr cQMessageBox, slot: int, param1: cstring): pointer {.exportc: "miqt_exec_callback_QMessageBox_metacast ".} =
+  var nimfunc = cast[ptr QMessageBoxmetacastProc](cast[pointer](slot))
+  let slotval1 = (param1)
+
+
+  let virtualReturn = nimfunc[](slotval1 )
+
+  virtualReturn
+proc QMessageBoxmetacall*(self: gen_qmessagebox_types.QMessageBox, param1: cint, param2: cint, param3: pointer): cint =
+  fQMessageBox_virtualbase_metacall(self.h, cint(param1), param2, param3)
+
+type QMessageBoxmetacallProc* = proc(param1: cint, param2: cint, param3: pointer): cint
+proc onmetacall*(self: gen_qmessagebox_types.QMessageBox, slot: QMessageBoxmetacallProc) =
+  # TODO check subclass
+  var tmp = new QMessageBoxmetacallProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQMessageBox_override_virtual_metacall(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QMessageBox_metacall(self: ptr cQMessageBox, slot: int, param1: cint, param2: cint, param3: pointer): cint {.exportc: "miqt_exec_callback_QMessageBox_metacall ".} =
+  var nimfunc = cast[ptr QMessageBoxmetacallProc](cast[pointer](slot))
+  let slotval1 = cint(param1)
+
+  let slotval2 = param2
+
+  let slotval3 = param3
+
+
+  let virtualReturn = nimfunc[](slotval1, slotval2, slotval3 )
+
+  virtualReturn
 proc QMessageBoxevent*(self: gen_qmessagebox_types.QMessageBox, e: gen_qcoreevent_types.QEvent): bool =
   fQMessageBox_virtualbase_event(self.h, e.h)
 
@@ -1592,5 +1662,7 @@ proc miqt_exec_callback_QMessageBox_disconnectNotify(self: ptr cQMessageBox, slo
 
 
   nimfunc[](slotval1)
+proc staticMetaObject*(_: type gen_qmessagebox_types.QMessageBox): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fcQMessageBox_staticMetaObject())
 proc delete*(self: gen_qmessagebox_types.QMessageBox) =
   fcQMessageBox_delete(self.h)
