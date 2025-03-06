@@ -139,6 +139,10 @@ proc fcQQmlComponent_virtualbase_childEvent(self: pointer, event: pointer): void
 proc fcQQmlComponent_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QQmlComponent_virtualbase_customEvent".}
 proc fcQQmlComponent_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QQmlComponent_virtualbase_connectNotify".}
 proc fcQQmlComponent_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QQmlComponent_virtualbase_disconnectNotify".}
+proc fcQQmlComponent_protectedbase_sender(self: pointer, ): pointer {.importc: "QQmlComponent_protectedbase_sender".}
+proc fcQQmlComponent_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QQmlComponent_protectedbase_senderSignalIndex".}
+proc fcQQmlComponent_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QQmlComponent_protectedbase_receivers".}
+proc fcQQmlComponent_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QQmlComponent_protectedbase_isSignalConnected".}
 proc fcQQmlComponent_new(vtbl: pointer, ): ptr cQQmlComponent {.importc: "QQmlComponent_new".}
 proc fcQQmlComponent_new2(vtbl: pointer, param1: pointer): ptr cQQmlComponent {.importc: "QQmlComponent_new2".}
 proc fcQQmlComponent_new3(vtbl: pointer, param1: pointer, fileName: struct_miqt_string): ptr cQQmlComponent {.importc: "QQmlComponent_new3".}
@@ -492,6 +496,18 @@ proc miqt_exec_callback_cQQmlComponent_disconnectNotify(vtbl: pointer, self: poi
   let self = QQmlComponent(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
   vtbl[].disconnectNotify(self, slotval1)
+
+proc sender*(self: gen_qqmlcomponent_types.QQmlComponent, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQQmlComponent_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qqmlcomponent_types.QQmlComponent, ): cint =
+  fcQQmlComponent_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qqmlcomponent_types.QQmlComponent, signal: cstring): cint =
+  fcQQmlComponent_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qqmlcomponent_types.QQmlComponent, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQQmlComponent_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc create*(T: type gen_qqmlcomponent_types.QQmlComponent,
     vtbl: ref QQmlComponentVTable = nil): gen_qqmlcomponent_types.QQmlComponent =

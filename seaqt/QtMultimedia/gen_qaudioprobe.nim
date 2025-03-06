@@ -94,6 +94,10 @@ proc fcQAudioProbe_virtualbase_childEvent(self: pointer, event: pointer): void {
 proc fcQAudioProbe_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QAudioProbe_virtualbase_customEvent".}
 proc fcQAudioProbe_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QAudioProbe_virtualbase_connectNotify".}
 proc fcQAudioProbe_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QAudioProbe_virtualbase_disconnectNotify".}
+proc fcQAudioProbe_protectedbase_sender(self: pointer, ): pointer {.importc: "QAudioProbe_protectedbase_sender".}
+proc fcQAudioProbe_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QAudioProbe_protectedbase_senderSignalIndex".}
+proc fcQAudioProbe_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QAudioProbe_protectedbase_receivers".}
+proc fcQAudioProbe_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QAudioProbe_protectedbase_isSignalConnected".}
 proc fcQAudioProbe_new(vtbl: pointer, ): ptr cQAudioProbe {.importc: "QAudioProbe_new".}
 proc fcQAudioProbe_new2(vtbl: pointer, parent: pointer): ptr cQAudioProbe {.importc: "QAudioProbe_new2".}
 proc fcQAudioProbe_staticMetaObject(): pointer {.importc: "QAudioProbe_staticMetaObject".}
@@ -309,6 +313,18 @@ proc miqt_exec_callback_cQAudioProbe_disconnectNotify(vtbl: pointer, self: point
   let self = QAudioProbe(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
   vtbl[].disconnectNotify(self, slotval1)
+
+proc sender*(self: gen_qaudioprobe_types.QAudioProbe, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQAudioProbe_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qaudioprobe_types.QAudioProbe, ): cint =
+  fcQAudioProbe_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qaudioprobe_types.QAudioProbe, signal: cstring): cint =
+  fcQAudioProbe_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qaudioprobe_types.QAudioProbe, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQAudioProbe_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc create*(T: type gen_qaudioprobe_types.QAudioProbe,
     vtbl: ref QAudioProbeVTable = nil): gen_qaudioprobe_types.QAudioProbe =

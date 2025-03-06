@@ -102,6 +102,12 @@ proc fcQNetworkCookieJar_virtualbase_childEvent(self: pointer, event: pointer): 
 proc fcQNetworkCookieJar_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QNetworkCookieJar_virtualbase_customEvent".}
 proc fcQNetworkCookieJar_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QNetworkCookieJar_virtualbase_connectNotify".}
 proc fcQNetworkCookieJar_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QNetworkCookieJar_virtualbase_disconnectNotify".}
+proc fcQNetworkCookieJar_protectedbase_allCookies(self: pointer, ): struct_miqt_array {.importc: "QNetworkCookieJar_protectedbase_allCookies".}
+proc fcQNetworkCookieJar_protectedbase_setAllCookies(self: pointer, cookieList: struct_miqt_array): void {.importc: "QNetworkCookieJar_protectedbase_setAllCookies".}
+proc fcQNetworkCookieJar_protectedbase_sender(self: pointer, ): pointer {.importc: "QNetworkCookieJar_protectedbase_sender".}
+proc fcQNetworkCookieJar_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QNetworkCookieJar_protectedbase_senderSignalIndex".}
+proc fcQNetworkCookieJar_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QNetworkCookieJar_protectedbase_receivers".}
+proc fcQNetworkCookieJar_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QNetworkCookieJar_protectedbase_isSignalConnected".}
 proc fcQNetworkCookieJar_new(vtbl: pointer, ): ptr cQNetworkCookieJar {.importc: "QNetworkCookieJar_new".}
 proc fcQNetworkCookieJar_new2(vtbl: pointer, parent: pointer): ptr cQNetworkCookieJar {.importc: "QNetworkCookieJar_new2".}
 proc fcQNetworkCookieJar_staticMetaObject(): pointer {.importc: "QNetworkCookieJar_staticMetaObject".}
@@ -386,6 +392,33 @@ proc miqt_exec_callback_cQNetworkCookieJar_disconnectNotify(vtbl: pointer, self:
   let self = QNetworkCookieJar(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
   vtbl[].disconnectNotify(self, slotval1)
+
+proc allCookies*(self: gen_qnetworkcookiejar_types.QNetworkCookieJar, ): seq[gen_qnetworkcookie_types.QNetworkCookie] =
+  var v_ma = fcQNetworkCookieJar_protectedbase_allCookies(self.h)
+  var vx_ret = newSeq[gen_qnetworkcookie_types.QNetworkCookie](int(v_ma.len))
+  let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
+  for i in 0 ..< v_ma.len:
+    vx_ret[i] = gen_qnetworkcookie_types.QNetworkCookie(h: v_outCast[i])
+  vx_ret
+
+proc setAllCookies*(self: gen_qnetworkcookiejar_types.QNetworkCookieJar, cookieList: seq[gen_qnetworkcookie_types.QNetworkCookie]): void =
+  var cookieList_CArray = newSeq[pointer](len(cookieList))
+  for i in 0..<len(cookieList):
+    cookieList_CArray[i] = cookieList[i].h
+
+  fcQNetworkCookieJar_protectedbase_setAllCookies(self.h, struct_miqt_array(len: csize_t(len(cookieList)), data: if len(cookieList) == 0: nil else: addr(cookieList_CArray[0])))
+
+proc sender*(self: gen_qnetworkcookiejar_types.QNetworkCookieJar, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQNetworkCookieJar_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qnetworkcookiejar_types.QNetworkCookieJar, ): cint =
+  fcQNetworkCookieJar_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qnetworkcookiejar_types.QNetworkCookieJar, signal: cstring): cint =
+  fcQNetworkCookieJar_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qnetworkcookiejar_types.QNetworkCookieJar, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQNetworkCookieJar_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc create*(T: type gen_qnetworkcookiejar_types.QNetworkCookieJar,
     vtbl: ref QNetworkCookieJarVTable = nil): gen_qnetworkcookiejar_types.QNetworkCookieJar =

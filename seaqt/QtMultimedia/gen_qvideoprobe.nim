@@ -94,6 +94,10 @@ proc fcQVideoProbe_virtualbase_childEvent(self: pointer, event: pointer): void {
 proc fcQVideoProbe_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QVideoProbe_virtualbase_customEvent".}
 proc fcQVideoProbe_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QVideoProbe_virtualbase_connectNotify".}
 proc fcQVideoProbe_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QVideoProbe_virtualbase_disconnectNotify".}
+proc fcQVideoProbe_protectedbase_sender(self: pointer, ): pointer {.importc: "QVideoProbe_protectedbase_sender".}
+proc fcQVideoProbe_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QVideoProbe_protectedbase_senderSignalIndex".}
+proc fcQVideoProbe_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QVideoProbe_protectedbase_receivers".}
+proc fcQVideoProbe_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QVideoProbe_protectedbase_isSignalConnected".}
 proc fcQVideoProbe_new(vtbl: pointer, ): ptr cQVideoProbe {.importc: "QVideoProbe_new".}
 proc fcQVideoProbe_new2(vtbl: pointer, parent: pointer): ptr cQVideoProbe {.importc: "QVideoProbe_new2".}
 proc fcQVideoProbe_staticMetaObject(): pointer {.importc: "QVideoProbe_staticMetaObject".}
@@ -309,6 +313,18 @@ proc miqt_exec_callback_cQVideoProbe_disconnectNotify(vtbl: pointer, self: point
   let self = QVideoProbe(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
   vtbl[].disconnectNotify(self, slotval1)
+
+proc sender*(self: gen_qvideoprobe_types.QVideoProbe, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQVideoProbe_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qvideoprobe_types.QVideoProbe, ): cint =
+  fcQVideoProbe_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qvideoprobe_types.QVideoProbe, signal: cstring): cint =
+  fcQVideoProbe_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qvideoprobe_types.QVideoProbe, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQVideoProbe_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc create*(T: type gen_qvideoprobe_types.QVideoProbe,
     vtbl: ref QVideoProbeVTable = nil): gen_qvideoprobe_types.QVideoProbe =

@@ -170,6 +170,10 @@ proc fcQRadioData_virtualbase_childEvent(self: pointer, event: pointer): void {.
 proc fcQRadioData_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QRadioData_virtualbase_customEvent".}
 proc fcQRadioData_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QRadioData_virtualbase_connectNotify".}
 proc fcQRadioData_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QRadioData_virtualbase_disconnectNotify".}
+proc fcQRadioData_protectedbase_sender(self: pointer, ): pointer {.importc: "QRadioData_protectedbase_sender".}
+proc fcQRadioData_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QRadioData_protectedbase_senderSignalIndex".}
+proc fcQRadioData_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QRadioData_protectedbase_receivers".}
+proc fcQRadioData_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QRadioData_protectedbase_isSignalConnected".}
 proc fcQRadioData_new(vtbl: pointer, mediaObject: pointer): ptr cQRadioData {.importc: "QRadioData_new".}
 proc fcQRadioData_new2(vtbl: pointer, mediaObject: pointer, parent: pointer): ptr cQRadioData {.importc: "QRadioData_new2".}
 proc fcQRadioData_staticMetaObject(): pointer {.importc: "QRadioData_staticMetaObject".}
@@ -561,6 +565,18 @@ proc miqt_exec_callback_cQRadioData_disconnectNotify(vtbl: pointer, self: pointe
   let self = QRadioData(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
   vtbl[].disconnectNotify(self, slotval1)
+
+proc sender*(self: gen_qradiodata_types.QRadioData, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQRadioData_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qradiodata_types.QRadioData, ): cint =
+  fcQRadioData_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qradiodata_types.QRadioData, signal: cstring): cint =
+  fcQRadioData_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qradiodata_types.QRadioData, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQRadioData_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc create*(T: type gen_qradiodata_types.QRadioData,
     mediaObject: gen_qmediaobject_types.QMediaObject,

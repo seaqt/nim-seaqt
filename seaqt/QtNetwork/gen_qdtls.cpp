@@ -196,10 +196,10 @@ public:
 	friend void QDtlsClientVerifier_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
 
 	// Wrappers to allow calling protected methods:
-	friend QObject* QDtlsClientVerifier_protectedbase_sender(bool* _dynamic_cast_ok, const void* self);
-	friend int QDtlsClientVerifier_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
-	friend int QDtlsClientVerifier_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
-	friend bool QDtlsClientVerifier_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+	friend QObject* QDtlsClientVerifier_protectedbase_sender(const void* self);
+	friend int QDtlsClientVerifier_protectedbase_senderSignalIndex(const void* self);
+	friend int QDtlsClientVerifier_protectedbase_receivers(const void* self, const char* signal);
+	friend bool QDtlsClientVerifier_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
 };
 
 QDtlsClientVerifier* QDtlsClientVerifier_new(struct QDtlsClientVerifier_VTable* vtbl) {
@@ -391,53 +391,29 @@ void QDtlsClientVerifier_virtualbase_disconnectNotify(void* self, QMetaMethod* s
 }
 
 const QMetaObject* QDtlsClientVerifier_staticMetaObject() { return &QDtlsClientVerifier::staticMetaObject; }
-QObject* QDtlsClientVerifier_protectedbase_sender(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQDtlsClientVerifier* self_cast = dynamic_cast<VirtualQDtlsClientVerifier*>( (QDtlsClientVerifier*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return nullptr;
-	}
-	
-	*_dynamic_cast_ok = true;
+QObject* QDtlsClientVerifier_protectedbase_sender(const void* self) {
+	VirtualQDtlsClientVerifier* self_cast = static_cast<VirtualQDtlsClientVerifier*>( (QDtlsClientVerifier*)(self) );
 	
 	return self_cast->sender();
 
 }
 
-int QDtlsClientVerifier_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQDtlsClientVerifier* self_cast = dynamic_cast<VirtualQDtlsClientVerifier*>( (QDtlsClientVerifier*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return 0;
-	}
-	
-	*_dynamic_cast_ok = true;
+int QDtlsClientVerifier_protectedbase_senderSignalIndex(const void* self) {
+	VirtualQDtlsClientVerifier* self_cast = static_cast<VirtualQDtlsClientVerifier*>( (QDtlsClientVerifier*)(self) );
 	
 	return self_cast->senderSignalIndex();
 
 }
 
-int QDtlsClientVerifier_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal) {
-	VirtualQDtlsClientVerifier* self_cast = dynamic_cast<VirtualQDtlsClientVerifier*>( (QDtlsClientVerifier*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return 0;
-	}
-	
-	*_dynamic_cast_ok = true;
+int QDtlsClientVerifier_protectedbase_receivers(const void* self, const char* signal) {
+	VirtualQDtlsClientVerifier* self_cast = static_cast<VirtualQDtlsClientVerifier*>( (QDtlsClientVerifier*)(self) );
 	
 	return self_cast->receivers(signal);
 
 }
 
-bool QDtlsClientVerifier_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal) {
-	VirtualQDtlsClientVerifier* self_cast = dynamic_cast<VirtualQDtlsClientVerifier*>( (QDtlsClientVerifier*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return false;
-	}
-	
-	*_dynamic_cast_ok = true;
+bool QDtlsClientVerifier_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal) {
+	VirtualQDtlsClientVerifier* self_cast = static_cast<VirtualQDtlsClientVerifier*>( (QDtlsClientVerifier*)(self) );
 	
 	return self_cast->isSignalConnected(*signal);
 
@@ -614,10 +590,10 @@ public:
 	friend void QDtls_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
 
 	// Wrappers to allow calling protected methods:
-	friend QObject* QDtls_protectedbase_sender(bool* _dynamic_cast_ok, const void* self);
-	friend int QDtls_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
-	friend int QDtls_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
-	friend bool QDtls_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+	friend QObject* QDtls_protectedbase_sender(const void* self);
+	friend int QDtls_protectedbase_senderSignalIndex(const void* self);
+	friend int QDtls_protectedbase_receivers(const void* self, const char* signal);
+	friend bool QDtls_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
 };
 
 QDtls* QDtls_new(struct QDtls_VTable* vtbl, int mode) {
@@ -964,53 +940,29 @@ void QDtls_virtualbase_disconnectNotify(void* self, QMetaMethod* signal) {
 }
 
 const QMetaObject* QDtls_staticMetaObject() { return &QDtls::staticMetaObject; }
-QObject* QDtls_protectedbase_sender(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQDtls* self_cast = dynamic_cast<VirtualQDtls*>( (QDtls*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return nullptr;
-	}
-	
-	*_dynamic_cast_ok = true;
+QObject* QDtls_protectedbase_sender(const void* self) {
+	VirtualQDtls* self_cast = static_cast<VirtualQDtls*>( (QDtls*)(self) );
 	
 	return self_cast->sender();
 
 }
 
-int QDtls_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQDtls* self_cast = dynamic_cast<VirtualQDtls*>( (QDtls*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return 0;
-	}
-	
-	*_dynamic_cast_ok = true;
+int QDtls_protectedbase_senderSignalIndex(const void* self) {
+	VirtualQDtls* self_cast = static_cast<VirtualQDtls*>( (QDtls*)(self) );
 	
 	return self_cast->senderSignalIndex();
 
 }
 
-int QDtls_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal) {
-	VirtualQDtls* self_cast = dynamic_cast<VirtualQDtls*>( (QDtls*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return 0;
-	}
-	
-	*_dynamic_cast_ok = true;
+int QDtls_protectedbase_receivers(const void* self, const char* signal) {
+	VirtualQDtls* self_cast = static_cast<VirtualQDtls*>( (QDtls*)(self) );
 	
 	return self_cast->receivers(signal);
 
 }
 
-bool QDtls_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal) {
-	VirtualQDtls* self_cast = dynamic_cast<VirtualQDtls*>( (QDtls*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return false;
-	}
-	
-	*_dynamic_cast_ok = true;
+bool QDtls_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal) {
+	VirtualQDtls* self_cast = static_cast<VirtualQDtls*>( (QDtls*)(self) );
 	
 	return self_cast->isSignalConnected(*signal);
 

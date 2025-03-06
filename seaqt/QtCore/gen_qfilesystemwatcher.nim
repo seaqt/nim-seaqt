@@ -87,6 +87,10 @@ proc fcQFileSystemWatcher_virtualbase_childEvent(self: pointer, event: pointer):
 proc fcQFileSystemWatcher_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QFileSystemWatcher_virtualbase_customEvent".}
 proc fcQFileSystemWatcher_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QFileSystemWatcher_virtualbase_connectNotify".}
 proc fcQFileSystemWatcher_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QFileSystemWatcher_virtualbase_disconnectNotify".}
+proc fcQFileSystemWatcher_protectedbase_sender(self: pointer, ): pointer {.importc: "QFileSystemWatcher_protectedbase_sender".}
+proc fcQFileSystemWatcher_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QFileSystemWatcher_protectedbase_senderSignalIndex".}
+proc fcQFileSystemWatcher_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QFileSystemWatcher_protectedbase_receivers".}
+proc fcQFileSystemWatcher_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QFileSystemWatcher_protectedbase_isSignalConnected".}
 proc fcQFileSystemWatcher_new(vtbl: pointer, ): ptr cQFileSystemWatcher {.importc: "QFileSystemWatcher_new".}
 proc fcQFileSystemWatcher_new2(vtbl: pointer, paths: struct_miqt_array): ptr cQFileSystemWatcher {.importc: "QFileSystemWatcher_new2".}
 proc fcQFileSystemWatcher_new3(vtbl: pointer, parent: pointer): ptr cQFileSystemWatcher {.importc: "QFileSystemWatcher_new3".}
@@ -315,6 +319,18 @@ proc miqt_exec_callback_cQFileSystemWatcher_disconnectNotify(vtbl: pointer, self
   let self = QFileSystemWatcher(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
   vtbl[].disconnectNotify(self, slotval1)
+
+proc sender*(self: gen_qfilesystemwatcher_types.QFileSystemWatcher, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQFileSystemWatcher_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qfilesystemwatcher_types.QFileSystemWatcher, ): cint =
+  fcQFileSystemWatcher_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qfilesystemwatcher_types.QFileSystemWatcher, signal: cstring): cint =
+  fcQFileSystemWatcher_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qfilesystemwatcher_types.QFileSystemWatcher, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQFileSystemWatcher_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc create*(T: type gen_qfilesystemwatcher_types.QFileSystemWatcher,
     vtbl: ref QFileSystemWatcherVTable = nil): gen_qfilesystemwatcher_types.QFileSystemWatcher =

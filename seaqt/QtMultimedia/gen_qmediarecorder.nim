@@ -192,6 +192,10 @@ proc fcQMediaRecorder_virtualbase_childEvent(self: pointer, event: pointer): voi
 proc fcQMediaRecorder_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QMediaRecorder_virtualbase_customEvent".}
 proc fcQMediaRecorder_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QMediaRecorder_virtualbase_connectNotify".}
 proc fcQMediaRecorder_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QMediaRecorder_virtualbase_disconnectNotify".}
+proc fcQMediaRecorder_protectedbase_sender(self: pointer, ): pointer {.importc: "QMediaRecorder_protectedbase_sender".}
+proc fcQMediaRecorder_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QMediaRecorder_protectedbase_senderSignalIndex".}
+proc fcQMediaRecorder_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QMediaRecorder_protectedbase_receivers".}
+proc fcQMediaRecorder_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QMediaRecorder_protectedbase_isSignalConnected".}
 proc fcQMediaRecorder_new(vtbl: pointer, mediaObject: pointer): ptr cQMediaRecorder {.importc: "QMediaRecorder_new".}
 proc fcQMediaRecorder_new2(vtbl: pointer, mediaObject: pointer, parent: pointer): ptr cQMediaRecorder {.importc: "QMediaRecorder_new2".}
 proc fcQMediaRecorder_staticMetaObject(): pointer {.importc: "QMediaRecorder_staticMetaObject".}
@@ -879,6 +883,18 @@ proc miqt_exec_callback_cQMediaRecorder_disconnectNotify(vtbl: pointer, self: po
   let self = QMediaRecorder(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
   vtbl[].disconnectNotify(self, slotval1)
+
+proc sender*(self: gen_qmediarecorder_types.QMediaRecorder, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQMediaRecorder_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qmediarecorder_types.QMediaRecorder, ): cint =
+  fcQMediaRecorder_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qmediarecorder_types.QMediaRecorder, signal: cstring): cint =
+  fcQMediaRecorder_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qmediarecorder_types.QMediaRecorder, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQMediaRecorder_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc create*(T: type gen_qmediarecorder_types.QMediaRecorder,
     mediaObject: gen_qmediaobject_types.QMediaObject,

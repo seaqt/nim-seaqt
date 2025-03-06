@@ -217,10 +217,10 @@ public:
 	friend void QRadioData_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
 
 	// Wrappers to allow calling protected methods:
-	friend QObject* QRadioData_protectedbase_sender(bool* _dynamic_cast_ok, const void* self);
-	friend int QRadioData_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
-	friend int QRadioData_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
-	friend bool QRadioData_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+	friend QObject* QRadioData_protectedbase_sender(const void* self);
+	friend int QRadioData_protectedbase_senderSignalIndex(const void* self);
+	friend int QRadioData_protectedbase_receivers(const void* self, const char* signal);
+	friend bool QRadioData_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
 };
 
 QRadioData* QRadioData_new(struct QRadioData_VTable* vtbl, QMediaObject* mediaObject) {
@@ -615,53 +615,29 @@ void QRadioData_virtualbase_disconnectNotify(void* self, QMetaMethod* signal) {
 }
 
 const QMetaObject* QRadioData_staticMetaObject() { return &QRadioData::staticMetaObject; }
-QObject* QRadioData_protectedbase_sender(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQRadioData* self_cast = dynamic_cast<VirtualQRadioData*>( (QRadioData*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return nullptr;
-	}
-	
-	*_dynamic_cast_ok = true;
+QObject* QRadioData_protectedbase_sender(const void* self) {
+	VirtualQRadioData* self_cast = static_cast<VirtualQRadioData*>( (QRadioData*)(self) );
 	
 	return self_cast->sender();
 
 }
 
-int QRadioData_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQRadioData* self_cast = dynamic_cast<VirtualQRadioData*>( (QRadioData*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return 0;
-	}
-	
-	*_dynamic_cast_ok = true;
+int QRadioData_protectedbase_senderSignalIndex(const void* self) {
+	VirtualQRadioData* self_cast = static_cast<VirtualQRadioData*>( (QRadioData*)(self) );
 	
 	return self_cast->senderSignalIndex();
 
 }
 
-int QRadioData_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal) {
-	VirtualQRadioData* self_cast = dynamic_cast<VirtualQRadioData*>( (QRadioData*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return 0;
-	}
-	
-	*_dynamic_cast_ok = true;
+int QRadioData_protectedbase_receivers(const void* self, const char* signal) {
+	VirtualQRadioData* self_cast = static_cast<VirtualQRadioData*>( (QRadioData*)(self) );
 	
 	return self_cast->receivers(signal);
 
 }
 
-bool QRadioData_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal) {
-	VirtualQRadioData* self_cast = dynamic_cast<VirtualQRadioData*>( (QRadioData*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return false;
-	}
-	
-	*_dynamic_cast_ok = true;
+bool QRadioData_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal) {
+	VirtualQRadioData* self_cast = static_cast<VirtualQRadioData*>( (QRadioData*)(self) );
 	
 	return self_cast->isSignalConnected(*signal);
 

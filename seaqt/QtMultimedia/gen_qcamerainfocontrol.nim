@@ -38,9 +38,13 @@ import ./gen_qcamerainfocontrol_types
 export gen_qcamerainfocontrol_types
 
 import
+  ../QtCore/gen_qmetaobject_types,
+  ../QtCore/gen_qobject_types,
   ../QtCore/gen_qobjectdefs_types,
   ./gen_qmediacontrol
 export
+  gen_qmetaobject_types,
+  gen_qobject_types,
   gen_qobjectdefs_types,
   gen_qmediacontrol
 
@@ -57,6 +61,10 @@ proc fcQCameraInfoControl_tr2(s: cstring, c: cstring): struct_miqt_string {.impo
 proc fcQCameraInfoControl_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QCameraInfoControl_tr3".}
 proc fcQCameraInfoControl_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QCameraInfoControl_trUtf82".}
 proc fcQCameraInfoControl_trUtf83(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QCameraInfoControl_trUtf83".}
+proc fcQCameraInfoControl_protectedbase_sender(self: pointer, ): pointer {.importc: "QCameraInfoControl_protectedbase_sender".}
+proc fcQCameraInfoControl_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QCameraInfoControl_protectedbase_senderSignalIndex".}
+proc fcQCameraInfoControl_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QCameraInfoControl_protectedbase_receivers".}
+proc fcQCameraInfoControl_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QCameraInfoControl_protectedbase_isSignalConnected".}
 proc fcQCameraInfoControl_staticMetaObject(): pointer {.importc: "QCameraInfoControl_staticMetaObject".}
 proc fcQCameraInfoControl_delete(self: pointer) {.importc: "QCameraInfoControl_delete".}
 
@@ -110,6 +118,18 @@ proc trUtf8*(_: type gen_qcamerainfocontrol_types.QCameraInfoControl, s: cstring
   let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
   c_free(v_ms.data)
   vx_ret
+
+proc sender*(self: gen_qcamerainfocontrol_types.QCameraInfoControl, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQCameraInfoControl_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qcamerainfocontrol_types.QCameraInfoControl, ): cint =
+  fcQCameraInfoControl_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qcamerainfocontrol_types.QCameraInfoControl, signal: cstring): cint =
+  fcQCameraInfoControl_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qcamerainfocontrol_types.QCameraInfoControl, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQCameraInfoControl_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc staticMetaObject*(_: type gen_qcamerainfocontrol_types.QCameraInfoControl): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQCameraInfoControl_staticMetaObject())

@@ -202,6 +202,16 @@ proc fcQPrintDialog_virtualbase_childEvent(self: pointer, event: pointer): void 
 proc fcQPrintDialog_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QPrintDialog_virtualbase_customEvent".}
 proc fcQPrintDialog_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QPrintDialog_virtualbase_connectNotify".}
 proc fcQPrintDialog_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QPrintDialog_virtualbase_disconnectNotify".}
+proc fcQPrintDialog_protectedbase_adjustPosition(self: pointer, param1: pointer): void {.importc: "QPrintDialog_protectedbase_adjustPosition".}
+proc fcQPrintDialog_protectedbase_updateMicroFocus(self: pointer, ): void {.importc: "QPrintDialog_protectedbase_updateMicroFocus".}
+proc fcQPrintDialog_protectedbase_create(self: pointer, ): void {.importc: "QPrintDialog_protectedbase_create".}
+proc fcQPrintDialog_protectedbase_destroy(self: pointer, ): void {.importc: "QPrintDialog_protectedbase_destroy".}
+proc fcQPrintDialog_protectedbase_focusNextChild(self: pointer, ): bool {.importc: "QPrintDialog_protectedbase_focusNextChild".}
+proc fcQPrintDialog_protectedbase_focusPreviousChild(self: pointer, ): bool {.importc: "QPrintDialog_protectedbase_focusPreviousChild".}
+proc fcQPrintDialog_protectedbase_sender(self: pointer, ): pointer {.importc: "QPrintDialog_protectedbase_sender".}
+proc fcQPrintDialog_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QPrintDialog_protectedbase_senderSignalIndex".}
+proc fcQPrintDialog_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QPrintDialog_protectedbase_receivers".}
+proc fcQPrintDialog_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QPrintDialog_protectedbase_isSignalConnected".}
 proc fcQPrintDialog_new(vtbl: pointer, parent: pointer): ptr cQPrintDialog {.importc: "QPrintDialog_new".}
 proc fcQPrintDialog_new2(vtbl: pointer, printer: pointer): ptr cQPrintDialog {.importc: "QPrintDialog_new2".}
 proc fcQPrintDialog_new3(vtbl: pointer, ): ptr cQPrintDialog {.importc: "QPrintDialog_new3".}
@@ -922,6 +932,36 @@ proc miqt_exec_callback_cQPrintDialog_disconnectNotify(vtbl: pointer, self: poin
   let self = QPrintDialog(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
   vtbl[].disconnectNotify(self, slotval1)
+
+proc adjustPosition*(self: gen_qprintdialog_types.QPrintDialog, param1: gen_qwidget_types.QWidget): void =
+  fcQPrintDialog_protectedbase_adjustPosition(self.h, param1.h)
+
+proc updateMicroFocus*(self: gen_qprintdialog_types.QPrintDialog, ): void =
+  fcQPrintDialog_protectedbase_updateMicroFocus(self.h)
+
+proc create*(self: gen_qprintdialog_types.QPrintDialog, ): void =
+  fcQPrintDialog_protectedbase_create(self.h)
+
+proc destroy*(self: gen_qprintdialog_types.QPrintDialog, ): void =
+  fcQPrintDialog_protectedbase_destroy(self.h)
+
+proc focusNextChild*(self: gen_qprintdialog_types.QPrintDialog, ): bool =
+  fcQPrintDialog_protectedbase_focusNextChild(self.h)
+
+proc focusPreviousChild*(self: gen_qprintdialog_types.QPrintDialog, ): bool =
+  fcQPrintDialog_protectedbase_focusPreviousChild(self.h)
+
+proc sender*(self: gen_qprintdialog_types.QPrintDialog, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQPrintDialog_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qprintdialog_types.QPrintDialog, ): cint =
+  fcQPrintDialog_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qprintdialog_types.QPrintDialog, signal: cstring): cint =
+  fcQPrintDialog_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qprintdialog_types.QPrintDialog, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQPrintDialog_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc create*(T: type gen_qprintdialog_types.QPrintDialog,
     parent: gen_qwidget_types.QWidget,

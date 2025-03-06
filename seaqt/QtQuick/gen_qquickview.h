@@ -187,10 +187,10 @@ void QQuickView_virtualbase_childEvent(void* self, QChildEvent* event);
 void QQuickView_virtualbase_customEvent(void* self, QEvent* event);
 void QQuickView_virtualbase_connectNotify(void* self, QMetaMethod* signal);
 void QQuickView_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
-QObject* QQuickView_protectedbase_sender(bool* _dynamic_cast_ok, const void* self);
-int QQuickView_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
-int QQuickView_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
-bool QQuickView_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+QObject* QQuickView_protectedbase_sender(const void* self);
+int QQuickView_protectedbase_senderSignalIndex(const void* self);
+int QQuickView_protectedbase_receivers(const void* self, const char* signal);
+bool QQuickView_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
 const QMetaObject* QQuickView_staticMetaObject();
 void QQuickView_delete(QQuickView* self);
 

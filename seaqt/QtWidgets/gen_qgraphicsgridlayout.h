@@ -103,9 +103,9 @@ QSizeF* QGraphicsGridLayout_virtualbase_sizeHint(const void* self, int which, QS
 void QGraphicsGridLayout_virtualbase_getContentsMargins(const void* self, double* left, double* top, double* right, double* bottom);
 void QGraphicsGridLayout_virtualbase_updateGeometry(void* self);
 void QGraphicsGridLayout_virtualbase_widgetEvent(void* self, QEvent* e);
-void QGraphicsGridLayout_protectedbase_addChildLayoutItem(bool* _dynamic_cast_ok, void* self, QGraphicsLayoutItem* layoutItem);
-void QGraphicsGridLayout_protectedbase_setGraphicsItem(bool* _dynamic_cast_ok, void* self, QGraphicsItem* item);
-void QGraphicsGridLayout_protectedbase_setOwnedByLayout(bool* _dynamic_cast_ok, void* self, bool ownedByLayout);
+void QGraphicsGridLayout_protectedbase_addChildLayoutItem(void* self, QGraphicsLayoutItem* layoutItem);
+void QGraphicsGridLayout_protectedbase_setGraphicsItem(void* self, QGraphicsItem* item);
+void QGraphicsGridLayout_protectedbase_setOwnedByLayout(void* self, bool ownedByLayout);
 void QGraphicsGridLayout_delete(QGraphicsGridLayout* self);
 
 #ifdef __cplusplus

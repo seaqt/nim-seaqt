@@ -211,6 +211,15 @@ proc fcQMdiSubWindow_virtualbase_focusNextPrevChild(self: pointer, next: bool): 
 proc fcQMdiSubWindow_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QMdiSubWindow_virtualbase_customEvent".}
 proc fcQMdiSubWindow_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QMdiSubWindow_virtualbase_connectNotify".}
 proc fcQMdiSubWindow_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QMdiSubWindow_virtualbase_disconnectNotify".}
+proc fcQMdiSubWindow_protectedbase_updateMicroFocus(self: pointer, ): void {.importc: "QMdiSubWindow_protectedbase_updateMicroFocus".}
+proc fcQMdiSubWindow_protectedbase_create(self: pointer, ): void {.importc: "QMdiSubWindow_protectedbase_create".}
+proc fcQMdiSubWindow_protectedbase_destroy(self: pointer, ): void {.importc: "QMdiSubWindow_protectedbase_destroy".}
+proc fcQMdiSubWindow_protectedbase_focusNextChild(self: pointer, ): bool {.importc: "QMdiSubWindow_protectedbase_focusNextChild".}
+proc fcQMdiSubWindow_protectedbase_focusPreviousChild(self: pointer, ): bool {.importc: "QMdiSubWindow_protectedbase_focusPreviousChild".}
+proc fcQMdiSubWindow_protectedbase_sender(self: pointer, ): pointer {.importc: "QMdiSubWindow_protectedbase_sender".}
+proc fcQMdiSubWindow_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QMdiSubWindow_protectedbase_senderSignalIndex".}
+proc fcQMdiSubWindow_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QMdiSubWindow_protectedbase_receivers".}
+proc fcQMdiSubWindow_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QMdiSubWindow_protectedbase_isSignalConnected".}
 proc fcQMdiSubWindow_new(vtbl: pointer, parent: pointer): ptr cQMdiSubWindow {.importc: "QMdiSubWindow_new".}
 proc fcQMdiSubWindow_new2(vtbl: pointer, ): ptr cQMdiSubWindow {.importc: "QMdiSubWindow_new2".}
 proc fcQMdiSubWindow_new3(vtbl: pointer, parent: pointer, flags: cint): ptr cQMdiSubWindow {.importc: "QMdiSubWindow_new3".}
@@ -928,6 +937,33 @@ proc miqt_exec_callback_cQMdiSubWindow_disconnectNotify(vtbl: pointer, self: poi
   let self = QMdiSubWindow(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
   vtbl[].disconnectNotify(self, slotval1)
+
+proc updateMicroFocus*(self: gen_qmdisubwindow_types.QMdiSubWindow, ): void =
+  fcQMdiSubWindow_protectedbase_updateMicroFocus(self.h)
+
+proc create*(self: gen_qmdisubwindow_types.QMdiSubWindow, ): void =
+  fcQMdiSubWindow_protectedbase_create(self.h)
+
+proc destroy*(self: gen_qmdisubwindow_types.QMdiSubWindow, ): void =
+  fcQMdiSubWindow_protectedbase_destroy(self.h)
+
+proc focusNextChild*(self: gen_qmdisubwindow_types.QMdiSubWindow, ): bool =
+  fcQMdiSubWindow_protectedbase_focusNextChild(self.h)
+
+proc focusPreviousChild*(self: gen_qmdisubwindow_types.QMdiSubWindow, ): bool =
+  fcQMdiSubWindow_protectedbase_focusPreviousChild(self.h)
+
+proc sender*(self: gen_qmdisubwindow_types.QMdiSubWindow, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQMdiSubWindow_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qmdisubwindow_types.QMdiSubWindow, ): cint =
+  fcQMdiSubWindow_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qmdisubwindow_types.QMdiSubWindow, signal: cstring): cint =
+  fcQMdiSubWindow_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qmdisubwindow_types.QMdiSubWindow, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQMdiSubWindow_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc create*(T: type gen_qmdisubwindow_types.QMdiSubWindow,
     parent: gen_qwidget_types.QWidget,

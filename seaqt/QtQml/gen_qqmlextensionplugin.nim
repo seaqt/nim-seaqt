@@ -92,6 +92,10 @@ proc fcQQmlExtensionPlugin_virtualbase_childEvent(self: pointer, event: pointer)
 proc fcQQmlExtensionPlugin_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QQmlExtensionPlugin_virtualbase_customEvent".}
 proc fcQQmlExtensionPlugin_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QQmlExtensionPlugin_virtualbase_connectNotify".}
 proc fcQQmlExtensionPlugin_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QQmlExtensionPlugin_virtualbase_disconnectNotify".}
+proc fcQQmlExtensionPlugin_protectedbase_sender(self: pointer, ): pointer {.importc: "QQmlExtensionPlugin_protectedbase_sender".}
+proc fcQQmlExtensionPlugin_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QQmlExtensionPlugin_protectedbase_senderSignalIndex".}
+proc fcQQmlExtensionPlugin_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QQmlExtensionPlugin_protectedbase_receivers".}
+proc fcQQmlExtensionPlugin_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QQmlExtensionPlugin_protectedbase_isSignalConnected".}
 proc fcQQmlExtensionPlugin_new(vtbl: pointer, ): ptr cQQmlExtensionPlugin {.importc: "QQmlExtensionPlugin_new".}
 proc fcQQmlExtensionPlugin_new2(vtbl: pointer, parent: pointer): ptr cQQmlExtensionPlugin {.importc: "QQmlExtensionPlugin_new2".}
 proc fcQQmlExtensionPlugin_staticMetaObject(): pointer {.importc: "QQmlExtensionPlugin_staticMetaObject".}
@@ -130,6 +134,10 @@ proc fcQQmlEngineExtensionPlugin_virtualbase_childEvent(self: pointer, event: po
 proc fcQQmlEngineExtensionPlugin_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QQmlEngineExtensionPlugin_virtualbase_customEvent".}
 proc fcQQmlEngineExtensionPlugin_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QQmlEngineExtensionPlugin_virtualbase_connectNotify".}
 proc fcQQmlEngineExtensionPlugin_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QQmlEngineExtensionPlugin_virtualbase_disconnectNotify".}
+proc fcQQmlEngineExtensionPlugin_protectedbase_sender(self: pointer, ): pointer {.importc: "QQmlEngineExtensionPlugin_protectedbase_sender".}
+proc fcQQmlEngineExtensionPlugin_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QQmlEngineExtensionPlugin_protectedbase_senderSignalIndex".}
+proc fcQQmlEngineExtensionPlugin_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QQmlEngineExtensionPlugin_protectedbase_receivers".}
+proc fcQQmlEngineExtensionPlugin_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QQmlEngineExtensionPlugin_protectedbase_isSignalConnected".}
 proc fcQQmlEngineExtensionPlugin_new(vtbl: pointer, ): ptr cQQmlEngineExtensionPlugin {.importc: "QQmlEngineExtensionPlugin_new".}
 proc fcQQmlEngineExtensionPlugin_new2(vtbl: pointer, parent: pointer): ptr cQQmlEngineExtensionPlugin {.importc: "QQmlEngineExtensionPlugin_new2".}
 proc fcQQmlEngineExtensionPlugin_staticMetaObject(): pointer {.importc: "QQmlEngineExtensionPlugin_staticMetaObject".}
@@ -327,6 +335,18 @@ proc miqt_exec_callback_cQQmlExtensionPlugin_disconnectNotify(vtbl: pointer, sel
   let self = QQmlExtensionPlugin(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
   vtbl[].disconnectNotify(self, slotval1)
+
+proc sender*(self: gen_qqmlextensionplugin_types.QQmlExtensionPlugin, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQQmlExtensionPlugin_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qqmlextensionplugin_types.QQmlExtensionPlugin, ): cint =
+  fcQQmlExtensionPlugin_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qqmlextensionplugin_types.QQmlExtensionPlugin, signal: cstring): cint =
+  fcQQmlExtensionPlugin_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qqmlextensionplugin_types.QQmlExtensionPlugin, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQQmlExtensionPlugin_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc create*(T: type gen_qqmlextensionplugin_types.QQmlExtensionPlugin,
     vtbl: ref QQmlExtensionPluginVTable = nil): gen_qqmlextensionplugin_types.QQmlExtensionPlugin =
@@ -577,6 +597,18 @@ proc miqt_exec_callback_cQQmlEngineExtensionPlugin_disconnectNotify(vtbl: pointe
   let self = QQmlEngineExtensionPlugin(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
   vtbl[].disconnectNotify(self, slotval1)
+
+proc sender*(self: gen_qqmlextensionplugin_types.QQmlEngineExtensionPlugin, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQQmlEngineExtensionPlugin_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qqmlextensionplugin_types.QQmlEngineExtensionPlugin, ): cint =
+  fcQQmlEngineExtensionPlugin_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qqmlextensionplugin_types.QQmlEngineExtensionPlugin, signal: cstring): cint =
+  fcQQmlEngineExtensionPlugin_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qqmlextensionplugin_types.QQmlEngineExtensionPlugin, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQQmlEngineExtensionPlugin_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc create*(T: type gen_qqmlextensionplugin_types.QQmlEngineExtensionPlugin,
     vtbl: ref QQmlEngineExtensionPluginVTable = nil): gen_qqmlextensionplugin_types.QQmlEngineExtensionPlugin =

@@ -39,10 +39,12 @@ export gen_qstylehints_types
 
 import
   ../QtCore/gen_qchar_types,
+  ../QtCore/gen_qmetaobject_types,
   ../QtCore/gen_qobject,
   ../QtCore/gen_qobjectdefs_types
 export
   gen_qchar_types,
+  gen_qmetaobject_types,
   gen_qobject,
   gen_qobjectdefs_types
 
@@ -113,6 +115,10 @@ proc fcQStyleHints_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "Q
 proc fcQStyleHints_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QStyleHints_tr3".}
 proc fcQStyleHints_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QStyleHints_trUtf82".}
 proc fcQStyleHints_trUtf83(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QStyleHints_trUtf83".}
+proc fcQStyleHints_protectedbase_sender(self: pointer, ): pointer {.importc: "QStyleHints_protectedbase_sender".}
+proc fcQStyleHints_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QStyleHints_protectedbase_senderSignalIndex".}
+proc fcQStyleHints_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QStyleHints_protectedbase_receivers".}
+proc fcQStyleHints_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QStyleHints_protectedbase_isSignalConnected".}
 proc fcQStyleHints_staticMetaObject(): pointer {.importc: "QStyleHints_staticMetaObject".}
 proc fcQStyleHints_delete(self: pointer) {.importc: "QStyleHints_delete".}
 
@@ -482,6 +488,18 @@ proc trUtf8*(_: type gen_qstylehints_types.QStyleHints, s: cstring, c: cstring, 
   let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
   c_free(v_ms.data)
   vx_ret
+
+proc sender*(self: gen_qstylehints_types.QStyleHints, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQStyleHints_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qstylehints_types.QStyleHints, ): cint =
+  fcQStyleHints_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qstylehints_types.QStyleHints, signal: cstring): cint =
+  fcQStyleHints_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qstylehints_types.QStyleHints, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQStyleHints_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc staticMetaObject*(_: type gen_qstylehints_types.QStyleHints): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQStyleHints_staticMetaObject())

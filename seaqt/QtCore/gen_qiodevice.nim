@@ -181,6 +181,12 @@ proc fcQIODevice_virtualbase_childEvent(self: pointer, event: pointer): void {.i
 proc fcQIODevice_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QIODevice_virtualbase_customEvent".}
 proc fcQIODevice_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QIODevice_virtualbase_connectNotify".}
 proc fcQIODevice_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QIODevice_virtualbase_disconnectNotify".}
+proc fcQIODevice_protectedbase_setOpenMode(self: pointer, openMode: cint): void {.importc: "QIODevice_protectedbase_setOpenMode".}
+proc fcQIODevice_protectedbase_setErrorString(self: pointer, errorString: struct_miqt_string): void {.importc: "QIODevice_protectedbase_setErrorString".}
+proc fcQIODevice_protectedbase_sender(self: pointer, ): pointer {.importc: "QIODevice_protectedbase_sender".}
+proc fcQIODevice_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QIODevice_protectedbase_senderSignalIndex".}
+proc fcQIODevice_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QIODevice_protectedbase_receivers".}
+proc fcQIODevice_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QIODevice_protectedbase_isSignalConnected".}
 proc fcQIODevice_new(vtbl: pointer, ): ptr cQIODevice {.importc: "QIODevice_new".}
 proc fcQIODevice_new2(vtbl: pointer, parent: pointer): ptr cQIODevice {.importc: "QIODevice_new2".}
 proc fcQIODevice_staticMetaObject(): pointer {.importc: "QIODevice_staticMetaObject".}
@@ -797,6 +803,24 @@ proc miqt_exec_callback_cQIODevice_disconnectNotify(vtbl: pointer, self: pointer
   let self = QIODevice(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
   vtbl[].disconnectNotify(self, slotval1)
+
+proc setOpenMode*(self: gen_qiodevice_types.QIODevice, openMode: cint): void =
+  fcQIODevice_protectedbase_setOpenMode(self.h, cint(openMode))
+
+proc setErrorString*(self: gen_qiodevice_types.QIODevice, errorString: string): void =
+  fcQIODevice_protectedbase_setErrorString(self.h, struct_miqt_string(data: errorString, len: csize_t(len(errorString))))
+
+proc sender*(self: gen_qiodevice_types.QIODevice, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQIODevice_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qiodevice_types.QIODevice, ): cint =
+  fcQIODevice_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qiodevice_types.QIODevice, signal: cstring): cint =
+  fcQIODevice_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qiodevice_types.QIODevice, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQIODevice_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc create*(T: type gen_qiodevice_types.QIODevice,
     vtbl: ref QIODeviceVTable = nil): gen_qiodevice_types.QIODevice =

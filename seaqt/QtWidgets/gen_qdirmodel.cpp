@@ -860,31 +860,31 @@ public:
 	friend void QDirModel_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
 
 	// Wrappers to allow calling protected methods:
-	friend void QDirModel_protectedbase_resetInternalData(bool* _dynamic_cast_ok, void* self);
-	friend QModelIndex* QDirModel_protectedbase_createIndex(bool* _dynamic_cast_ok, const void* self, int row, int column);
-	friend void QDirModel_protectedbase_encodeData(bool* _dynamic_cast_ok, const void* self, struct miqt_array /* of QModelIndex* */  indexes, QDataStream* stream);
-	friend bool QDirModel_protectedbase_decodeData(bool* _dynamic_cast_ok, void* self, int row, int column, QModelIndex* parent, QDataStream* stream);
-	friend void QDirModel_protectedbase_beginInsertRows(bool* _dynamic_cast_ok, void* self, QModelIndex* parent, int first, int last);
-	friend void QDirModel_protectedbase_endInsertRows(bool* _dynamic_cast_ok, void* self);
-	friend void QDirModel_protectedbase_beginRemoveRows(bool* _dynamic_cast_ok, void* self, QModelIndex* parent, int first, int last);
-	friend void QDirModel_protectedbase_endRemoveRows(bool* _dynamic_cast_ok, void* self);
-	friend bool QDirModel_protectedbase_beginMoveRows(bool* _dynamic_cast_ok, void* self, QModelIndex* sourceParent, int sourceFirst, int sourceLast, QModelIndex* destinationParent, int destinationRow);
-	friend void QDirModel_protectedbase_endMoveRows(bool* _dynamic_cast_ok, void* self);
-	friend void QDirModel_protectedbase_beginInsertColumns(bool* _dynamic_cast_ok, void* self, QModelIndex* parent, int first, int last);
-	friend void QDirModel_protectedbase_endInsertColumns(bool* _dynamic_cast_ok, void* self);
-	friend void QDirModel_protectedbase_beginRemoveColumns(bool* _dynamic_cast_ok, void* self, QModelIndex* parent, int first, int last);
-	friend void QDirModel_protectedbase_endRemoveColumns(bool* _dynamic_cast_ok, void* self);
-	friend bool QDirModel_protectedbase_beginMoveColumns(bool* _dynamic_cast_ok, void* self, QModelIndex* sourceParent, int sourceFirst, int sourceLast, QModelIndex* destinationParent, int destinationColumn);
-	friend void QDirModel_protectedbase_endMoveColumns(bool* _dynamic_cast_ok, void* self);
-	friend void QDirModel_protectedbase_beginResetModel(bool* _dynamic_cast_ok, void* self);
-	friend void QDirModel_protectedbase_endResetModel(bool* _dynamic_cast_ok, void* self);
-	friend void QDirModel_protectedbase_changePersistentIndex(bool* _dynamic_cast_ok, void* self, QModelIndex* from, QModelIndex* to);
-	friend void QDirModel_protectedbase_changePersistentIndexList(bool* _dynamic_cast_ok, void* self, struct miqt_array /* of QModelIndex* */  from, struct miqt_array /* of QModelIndex* */  to);
-	friend struct miqt_array /* of QModelIndex* */  QDirModel_protectedbase_persistentIndexList(bool* _dynamic_cast_ok, const void* self);
-	friend QObject* QDirModel_protectedbase_sender(bool* _dynamic_cast_ok, const void* self);
-	friend int QDirModel_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
-	friend int QDirModel_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
-	friend bool QDirModel_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+	friend void QDirModel_protectedbase_resetInternalData(void* self);
+	friend QModelIndex* QDirModel_protectedbase_createIndex(const void* self, int row, int column);
+	friend void QDirModel_protectedbase_encodeData(const void* self, struct miqt_array /* of QModelIndex* */  indexes, QDataStream* stream);
+	friend bool QDirModel_protectedbase_decodeData(void* self, int row, int column, QModelIndex* parent, QDataStream* stream);
+	friend void QDirModel_protectedbase_beginInsertRows(void* self, QModelIndex* parent, int first, int last);
+	friend void QDirModel_protectedbase_endInsertRows(void* self);
+	friend void QDirModel_protectedbase_beginRemoveRows(void* self, QModelIndex* parent, int first, int last);
+	friend void QDirModel_protectedbase_endRemoveRows(void* self);
+	friend bool QDirModel_protectedbase_beginMoveRows(void* self, QModelIndex* sourceParent, int sourceFirst, int sourceLast, QModelIndex* destinationParent, int destinationRow);
+	friend void QDirModel_protectedbase_endMoveRows(void* self);
+	friend void QDirModel_protectedbase_beginInsertColumns(void* self, QModelIndex* parent, int first, int last);
+	friend void QDirModel_protectedbase_endInsertColumns(void* self);
+	friend void QDirModel_protectedbase_beginRemoveColumns(void* self, QModelIndex* parent, int first, int last);
+	friend void QDirModel_protectedbase_endRemoveColumns(void* self);
+	friend bool QDirModel_protectedbase_beginMoveColumns(void* self, QModelIndex* sourceParent, int sourceFirst, int sourceLast, QModelIndex* destinationParent, int destinationColumn);
+	friend void QDirModel_protectedbase_endMoveColumns(void* self);
+	friend void QDirModel_protectedbase_beginResetModel(void* self);
+	friend void QDirModel_protectedbase_endResetModel(void* self);
+	friend void QDirModel_protectedbase_changePersistentIndex(void* self, QModelIndex* from, QModelIndex* to);
+	friend void QDirModel_protectedbase_changePersistentIndexList(void* self, struct miqt_array /* of QModelIndex* */  from, struct miqt_array /* of QModelIndex* */  to);
+	friend struct miqt_array /* of QModelIndex* */  QDirModel_protectedbase_persistentIndexList(const void* self);
+	friend QObject* QDirModel_protectedbase_sender(const void* self);
+	friend int QDirModel_protectedbase_senderSignalIndex(const void* self);
+	friend int QDirModel_protectedbase_receivers(const void* self, const char* signal);
+	friend bool QDirModel_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
 };
 
 QDirModel* QDirModel_new(struct QDirModel_VTable* vtbl, struct miqt_array /* of struct miqt_string */  nameFilters, int filters, int sort) {
@@ -1563,40 +1563,22 @@ void QDirModel_virtualbase_disconnectNotify(void* self, QMetaMethod* signal) {
 }
 
 const QMetaObject* QDirModel_staticMetaObject() { return &QDirModel::staticMetaObject; }
-void QDirModel_protectedbase_resetInternalData(bool* _dynamic_cast_ok, void* self) {
-	VirtualQDirModel* self_cast = dynamic_cast<VirtualQDirModel*>( (QDirModel*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QDirModel_protectedbase_resetInternalData(void* self) {
+	VirtualQDirModel* self_cast = static_cast<VirtualQDirModel*>( (QDirModel*)(self) );
 	
 	self_cast->resetInternalData();
 
 }
 
-QModelIndex* QDirModel_protectedbase_createIndex(bool* _dynamic_cast_ok, const void* self, int row, int column) {
-	VirtualQDirModel* self_cast = dynamic_cast<VirtualQDirModel*>( (QDirModel*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return nullptr;
-	}
-	
-	*_dynamic_cast_ok = true;
+QModelIndex* QDirModel_protectedbase_createIndex(const void* self, int row, int column) {
+	VirtualQDirModel* self_cast = static_cast<VirtualQDirModel*>( (QDirModel*)(self) );
 	
 	return new QModelIndex(self_cast->createIndex(static_cast<int>(row), static_cast<int>(column)));
 
 }
 
-void QDirModel_protectedbase_encodeData(bool* _dynamic_cast_ok, const void* self, struct miqt_array /* of QModelIndex* */  indexes, QDataStream* stream) {
-	VirtualQDirModel* self_cast = dynamic_cast<VirtualQDirModel*>( (QDirModel*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QDirModel_protectedbase_encodeData(const void* self, struct miqt_array /* of QModelIndex* */  indexes, QDataStream* stream) {
+	VirtualQDirModel* self_cast = static_cast<VirtualQDirModel*>( (QDirModel*)(self) );
 			QModelIndexList indexes_QList;
 		indexes_QList.reserve(indexes.len);
 		QModelIndex** indexes_arr = static_cast<QModelIndex**>(indexes.data);
@@ -1608,222 +1590,120 @@ void QDirModel_protectedbase_encodeData(bool* _dynamic_cast_ok, const void* self
 
 }
 
-bool QDirModel_protectedbase_decodeData(bool* _dynamic_cast_ok, void* self, int row, int column, QModelIndex* parent, QDataStream* stream) {
-	VirtualQDirModel* self_cast = dynamic_cast<VirtualQDirModel*>( (QDirModel*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return false;
-	}
-	
-	*_dynamic_cast_ok = true;
+bool QDirModel_protectedbase_decodeData(void* self, int row, int column, QModelIndex* parent, QDataStream* stream) {
+	VirtualQDirModel* self_cast = static_cast<VirtualQDirModel*>( (QDirModel*)(self) );
 	
 	return self_cast->decodeData(static_cast<int>(row), static_cast<int>(column), *parent, *stream);
 
 }
 
-void QDirModel_protectedbase_beginInsertRows(bool* _dynamic_cast_ok, void* self, QModelIndex* parent, int first, int last) {
-	VirtualQDirModel* self_cast = dynamic_cast<VirtualQDirModel*>( (QDirModel*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QDirModel_protectedbase_beginInsertRows(void* self, QModelIndex* parent, int first, int last) {
+	VirtualQDirModel* self_cast = static_cast<VirtualQDirModel*>( (QDirModel*)(self) );
 	
 	self_cast->beginInsertRows(*parent, static_cast<int>(first), static_cast<int>(last));
 
 }
 
-void QDirModel_protectedbase_endInsertRows(bool* _dynamic_cast_ok, void* self) {
-	VirtualQDirModel* self_cast = dynamic_cast<VirtualQDirModel*>( (QDirModel*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QDirModel_protectedbase_endInsertRows(void* self) {
+	VirtualQDirModel* self_cast = static_cast<VirtualQDirModel*>( (QDirModel*)(self) );
 	
 	self_cast->endInsertRows();
 
 }
 
-void QDirModel_protectedbase_beginRemoveRows(bool* _dynamic_cast_ok, void* self, QModelIndex* parent, int first, int last) {
-	VirtualQDirModel* self_cast = dynamic_cast<VirtualQDirModel*>( (QDirModel*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QDirModel_protectedbase_beginRemoveRows(void* self, QModelIndex* parent, int first, int last) {
+	VirtualQDirModel* self_cast = static_cast<VirtualQDirModel*>( (QDirModel*)(self) );
 	
 	self_cast->beginRemoveRows(*parent, static_cast<int>(first), static_cast<int>(last));
 
 }
 
-void QDirModel_protectedbase_endRemoveRows(bool* _dynamic_cast_ok, void* self) {
-	VirtualQDirModel* self_cast = dynamic_cast<VirtualQDirModel*>( (QDirModel*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QDirModel_protectedbase_endRemoveRows(void* self) {
+	VirtualQDirModel* self_cast = static_cast<VirtualQDirModel*>( (QDirModel*)(self) );
 	
 	self_cast->endRemoveRows();
 
 }
 
-bool QDirModel_protectedbase_beginMoveRows(bool* _dynamic_cast_ok, void* self, QModelIndex* sourceParent, int sourceFirst, int sourceLast, QModelIndex* destinationParent, int destinationRow) {
-	VirtualQDirModel* self_cast = dynamic_cast<VirtualQDirModel*>( (QDirModel*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return false;
-	}
-	
-	*_dynamic_cast_ok = true;
+bool QDirModel_protectedbase_beginMoveRows(void* self, QModelIndex* sourceParent, int sourceFirst, int sourceLast, QModelIndex* destinationParent, int destinationRow) {
+	VirtualQDirModel* self_cast = static_cast<VirtualQDirModel*>( (QDirModel*)(self) );
 	
 	return self_cast->beginMoveRows(*sourceParent, static_cast<int>(sourceFirst), static_cast<int>(sourceLast), *destinationParent, static_cast<int>(destinationRow));
 
 }
 
-void QDirModel_protectedbase_endMoveRows(bool* _dynamic_cast_ok, void* self) {
-	VirtualQDirModel* self_cast = dynamic_cast<VirtualQDirModel*>( (QDirModel*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QDirModel_protectedbase_endMoveRows(void* self) {
+	VirtualQDirModel* self_cast = static_cast<VirtualQDirModel*>( (QDirModel*)(self) );
 	
 	self_cast->endMoveRows();
 
 }
 
-void QDirModel_protectedbase_beginInsertColumns(bool* _dynamic_cast_ok, void* self, QModelIndex* parent, int first, int last) {
-	VirtualQDirModel* self_cast = dynamic_cast<VirtualQDirModel*>( (QDirModel*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QDirModel_protectedbase_beginInsertColumns(void* self, QModelIndex* parent, int first, int last) {
+	VirtualQDirModel* self_cast = static_cast<VirtualQDirModel*>( (QDirModel*)(self) );
 	
 	self_cast->beginInsertColumns(*parent, static_cast<int>(first), static_cast<int>(last));
 
 }
 
-void QDirModel_protectedbase_endInsertColumns(bool* _dynamic_cast_ok, void* self) {
-	VirtualQDirModel* self_cast = dynamic_cast<VirtualQDirModel*>( (QDirModel*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QDirModel_protectedbase_endInsertColumns(void* self) {
+	VirtualQDirModel* self_cast = static_cast<VirtualQDirModel*>( (QDirModel*)(self) );
 	
 	self_cast->endInsertColumns();
 
 }
 
-void QDirModel_protectedbase_beginRemoveColumns(bool* _dynamic_cast_ok, void* self, QModelIndex* parent, int first, int last) {
-	VirtualQDirModel* self_cast = dynamic_cast<VirtualQDirModel*>( (QDirModel*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QDirModel_protectedbase_beginRemoveColumns(void* self, QModelIndex* parent, int first, int last) {
+	VirtualQDirModel* self_cast = static_cast<VirtualQDirModel*>( (QDirModel*)(self) );
 	
 	self_cast->beginRemoveColumns(*parent, static_cast<int>(first), static_cast<int>(last));
 
 }
 
-void QDirModel_protectedbase_endRemoveColumns(bool* _dynamic_cast_ok, void* self) {
-	VirtualQDirModel* self_cast = dynamic_cast<VirtualQDirModel*>( (QDirModel*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QDirModel_protectedbase_endRemoveColumns(void* self) {
+	VirtualQDirModel* self_cast = static_cast<VirtualQDirModel*>( (QDirModel*)(self) );
 	
 	self_cast->endRemoveColumns();
 
 }
 
-bool QDirModel_protectedbase_beginMoveColumns(bool* _dynamic_cast_ok, void* self, QModelIndex* sourceParent, int sourceFirst, int sourceLast, QModelIndex* destinationParent, int destinationColumn) {
-	VirtualQDirModel* self_cast = dynamic_cast<VirtualQDirModel*>( (QDirModel*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return false;
-	}
-	
-	*_dynamic_cast_ok = true;
+bool QDirModel_protectedbase_beginMoveColumns(void* self, QModelIndex* sourceParent, int sourceFirst, int sourceLast, QModelIndex* destinationParent, int destinationColumn) {
+	VirtualQDirModel* self_cast = static_cast<VirtualQDirModel*>( (QDirModel*)(self) );
 	
 	return self_cast->beginMoveColumns(*sourceParent, static_cast<int>(sourceFirst), static_cast<int>(sourceLast), *destinationParent, static_cast<int>(destinationColumn));
 
 }
 
-void QDirModel_protectedbase_endMoveColumns(bool* _dynamic_cast_ok, void* self) {
-	VirtualQDirModel* self_cast = dynamic_cast<VirtualQDirModel*>( (QDirModel*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QDirModel_protectedbase_endMoveColumns(void* self) {
+	VirtualQDirModel* self_cast = static_cast<VirtualQDirModel*>( (QDirModel*)(self) );
 	
 	self_cast->endMoveColumns();
 
 }
 
-void QDirModel_protectedbase_beginResetModel(bool* _dynamic_cast_ok, void* self) {
-	VirtualQDirModel* self_cast = dynamic_cast<VirtualQDirModel*>( (QDirModel*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QDirModel_protectedbase_beginResetModel(void* self) {
+	VirtualQDirModel* self_cast = static_cast<VirtualQDirModel*>( (QDirModel*)(self) );
 	
 	self_cast->beginResetModel();
 
 }
 
-void QDirModel_protectedbase_endResetModel(bool* _dynamic_cast_ok, void* self) {
-	VirtualQDirModel* self_cast = dynamic_cast<VirtualQDirModel*>( (QDirModel*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QDirModel_protectedbase_endResetModel(void* self) {
+	VirtualQDirModel* self_cast = static_cast<VirtualQDirModel*>( (QDirModel*)(self) );
 	
 	self_cast->endResetModel();
 
 }
 
-void QDirModel_protectedbase_changePersistentIndex(bool* _dynamic_cast_ok, void* self, QModelIndex* from, QModelIndex* to) {
-	VirtualQDirModel* self_cast = dynamic_cast<VirtualQDirModel*>( (QDirModel*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QDirModel_protectedbase_changePersistentIndex(void* self, QModelIndex* from, QModelIndex* to) {
+	VirtualQDirModel* self_cast = static_cast<VirtualQDirModel*>( (QDirModel*)(self) );
 	
 	self_cast->changePersistentIndex(*from, *to);
 
 }
 
-void QDirModel_protectedbase_changePersistentIndexList(bool* _dynamic_cast_ok, void* self, struct miqt_array /* of QModelIndex* */  from, struct miqt_array /* of QModelIndex* */  to) {
-	VirtualQDirModel* self_cast = dynamic_cast<VirtualQDirModel*>( (QDirModel*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QDirModel_protectedbase_changePersistentIndexList(void* self, struct miqt_array /* of QModelIndex* */  from, struct miqt_array /* of QModelIndex* */  to) {
+	VirtualQDirModel* self_cast = static_cast<VirtualQDirModel*>( (QDirModel*)(self) );
 			QModelIndexList from_QList;
 		from_QList.reserve(from.len);
 		QModelIndex** from_arr = static_cast<QModelIndex**>(from.data);
@@ -1841,14 +1721,8 @@ void QDirModel_protectedbase_changePersistentIndexList(bool* _dynamic_cast_ok, v
 
 }
 
-struct miqt_array /* of QModelIndex* */  QDirModel_protectedbase_persistentIndexList(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQDirModel* self_cast = dynamic_cast<VirtualQDirModel*>( (QDirModel*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return (struct miqt_array){};
-	}
-	
-	*_dynamic_cast_ok = true;
+struct miqt_array /* of QModelIndex* */  QDirModel_protectedbase_persistentIndexList(const void* self) {
+	VirtualQDirModel* self_cast = static_cast<VirtualQDirModel*>( (QDirModel*)(self) );
 	
 	QModelIndexList _ret = self_cast->persistentIndexList();
 	// Convert QList<> from C++ memory to manually-managed C memory
@@ -1863,53 +1737,29 @@ struct miqt_array /* of QModelIndex* */  QDirModel_protectedbase_persistentIndex
 
 }
 
-QObject* QDirModel_protectedbase_sender(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQDirModel* self_cast = dynamic_cast<VirtualQDirModel*>( (QDirModel*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return nullptr;
-	}
-	
-	*_dynamic_cast_ok = true;
+QObject* QDirModel_protectedbase_sender(const void* self) {
+	VirtualQDirModel* self_cast = static_cast<VirtualQDirModel*>( (QDirModel*)(self) );
 	
 	return self_cast->sender();
 
 }
 
-int QDirModel_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQDirModel* self_cast = dynamic_cast<VirtualQDirModel*>( (QDirModel*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return 0;
-	}
-	
-	*_dynamic_cast_ok = true;
+int QDirModel_protectedbase_senderSignalIndex(const void* self) {
+	VirtualQDirModel* self_cast = static_cast<VirtualQDirModel*>( (QDirModel*)(self) );
 	
 	return self_cast->senderSignalIndex();
 
 }
 
-int QDirModel_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal) {
-	VirtualQDirModel* self_cast = dynamic_cast<VirtualQDirModel*>( (QDirModel*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return 0;
-	}
-	
-	*_dynamic_cast_ok = true;
+int QDirModel_protectedbase_receivers(const void* self, const char* signal) {
+	VirtualQDirModel* self_cast = static_cast<VirtualQDirModel*>( (QDirModel*)(self) );
 	
 	return self_cast->receivers(signal);
 
 }
 
-bool QDirModel_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal) {
-	VirtualQDirModel* self_cast = dynamic_cast<VirtualQDirModel*>( (QDirModel*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return false;
-	}
-	
-	*_dynamic_cast_ok = true;
+bool QDirModel_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal) {
+	VirtualQDirModel* self_cast = static_cast<VirtualQDirModel*>( (QDirModel*)(self) );
 	
 	return self_cast->isSignalConnected(*signal);
 

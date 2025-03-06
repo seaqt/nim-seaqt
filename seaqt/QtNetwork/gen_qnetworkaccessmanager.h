@@ -163,11 +163,11 @@ void QNetworkAccessManager_virtualbase_childEvent(void* self, QChildEvent* event
 void QNetworkAccessManager_virtualbase_customEvent(void* self, QEvent* event);
 void QNetworkAccessManager_virtualbase_connectNotify(void* self, QMetaMethod* signal);
 void QNetworkAccessManager_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
-struct miqt_array /* of struct miqt_string */  QNetworkAccessManager_protectedbase_supportedSchemesImplementation(bool* _dynamic_cast_ok, const void* self);
-QObject* QNetworkAccessManager_protectedbase_sender(bool* _dynamic_cast_ok, const void* self);
-int QNetworkAccessManager_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
-int QNetworkAccessManager_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
-bool QNetworkAccessManager_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+struct miqt_array /* of struct miqt_string */  QNetworkAccessManager_protectedbase_supportedSchemesImplementation(const void* self);
+QObject* QNetworkAccessManager_protectedbase_sender(const void* self);
+int QNetworkAccessManager_protectedbase_senderSignalIndex(const void* self);
+int QNetworkAccessManager_protectedbase_receivers(const void* self, const char* signal);
+bool QNetworkAccessManager_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
 const QMetaObject* QNetworkAccessManager_staticMetaObject();
 void QNetworkAccessManager_delete(QNetworkAccessManager* self);
 

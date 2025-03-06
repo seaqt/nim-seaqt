@@ -887,16 +887,16 @@ public:
 	friend void QErrorMessage_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
 
 	// Wrappers to allow calling protected methods:
-	friend void QErrorMessage_protectedbase_adjustPosition(bool* _dynamic_cast_ok, void* self, QWidget* param1);
-	friend void QErrorMessage_protectedbase_updateMicroFocus(bool* _dynamic_cast_ok, void* self);
-	friend void QErrorMessage_protectedbase_create(bool* _dynamic_cast_ok, void* self);
-	friend void QErrorMessage_protectedbase_destroy(bool* _dynamic_cast_ok, void* self);
-	friend bool QErrorMessage_protectedbase_focusNextChild(bool* _dynamic_cast_ok, void* self);
-	friend bool QErrorMessage_protectedbase_focusPreviousChild(bool* _dynamic_cast_ok, void* self);
-	friend QObject* QErrorMessage_protectedbase_sender(bool* _dynamic_cast_ok, const void* self);
-	friend int QErrorMessage_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
-	friend int QErrorMessage_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
-	friend bool QErrorMessage_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+	friend void QErrorMessage_protectedbase_adjustPosition(void* self, QWidget* param1);
+	friend void QErrorMessage_protectedbase_updateMicroFocus(void* self);
+	friend void QErrorMessage_protectedbase_create(void* self);
+	friend void QErrorMessage_protectedbase_destroy(void* self);
+	friend bool QErrorMessage_protectedbase_focusNextChild(void* self);
+	friend bool QErrorMessage_protectedbase_focusPreviousChild(void* self);
+	friend QObject* QErrorMessage_protectedbase_sender(const void* self);
+	friend int QErrorMessage_protectedbase_senderSignalIndex(const void* self);
+	friend int QErrorMessage_protectedbase_receivers(const void* self, const char* signal);
+	friend bool QErrorMessage_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
 };
 
 QErrorMessage* QErrorMessage_new(struct QErrorMessage_VTable* vtbl, QWidget* parent) {
@@ -1336,131 +1336,71 @@ void QErrorMessage_virtualbase_disconnectNotify(void* self, QMetaMethod* signal)
 }
 
 const QMetaObject* QErrorMessage_staticMetaObject() { return &QErrorMessage::staticMetaObject; }
-void QErrorMessage_protectedbase_adjustPosition(bool* _dynamic_cast_ok, void* self, QWidget* param1) {
-	VirtualQErrorMessage* self_cast = dynamic_cast<VirtualQErrorMessage*>( (QErrorMessage*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QErrorMessage_protectedbase_adjustPosition(void* self, QWidget* param1) {
+	VirtualQErrorMessage* self_cast = static_cast<VirtualQErrorMessage*>( (QErrorMessage*)(self) );
 	
 	self_cast->adjustPosition(param1);
 
 }
 
-void QErrorMessage_protectedbase_updateMicroFocus(bool* _dynamic_cast_ok, void* self) {
-	VirtualQErrorMessage* self_cast = dynamic_cast<VirtualQErrorMessage*>( (QErrorMessage*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QErrorMessage_protectedbase_updateMicroFocus(void* self) {
+	VirtualQErrorMessage* self_cast = static_cast<VirtualQErrorMessage*>( (QErrorMessage*)(self) );
 	
 	self_cast->updateMicroFocus();
 
 }
 
-void QErrorMessage_protectedbase_create(bool* _dynamic_cast_ok, void* self) {
-	VirtualQErrorMessage* self_cast = dynamic_cast<VirtualQErrorMessage*>( (QErrorMessage*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QErrorMessage_protectedbase_create(void* self) {
+	VirtualQErrorMessage* self_cast = static_cast<VirtualQErrorMessage*>( (QErrorMessage*)(self) );
 	
 	self_cast->create();
 
 }
 
-void QErrorMessage_protectedbase_destroy(bool* _dynamic_cast_ok, void* self) {
-	VirtualQErrorMessage* self_cast = dynamic_cast<VirtualQErrorMessage*>( (QErrorMessage*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QErrorMessage_protectedbase_destroy(void* self) {
+	VirtualQErrorMessage* self_cast = static_cast<VirtualQErrorMessage*>( (QErrorMessage*)(self) );
 	
 	self_cast->destroy();
 
 }
 
-bool QErrorMessage_protectedbase_focusNextChild(bool* _dynamic_cast_ok, void* self) {
-	VirtualQErrorMessage* self_cast = dynamic_cast<VirtualQErrorMessage*>( (QErrorMessage*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return false;
-	}
-	
-	*_dynamic_cast_ok = true;
+bool QErrorMessage_protectedbase_focusNextChild(void* self) {
+	VirtualQErrorMessage* self_cast = static_cast<VirtualQErrorMessage*>( (QErrorMessage*)(self) );
 	
 	return self_cast->focusNextChild();
 
 }
 
-bool QErrorMessage_protectedbase_focusPreviousChild(bool* _dynamic_cast_ok, void* self) {
-	VirtualQErrorMessage* self_cast = dynamic_cast<VirtualQErrorMessage*>( (QErrorMessage*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return false;
-	}
-	
-	*_dynamic_cast_ok = true;
+bool QErrorMessage_protectedbase_focusPreviousChild(void* self) {
+	VirtualQErrorMessage* self_cast = static_cast<VirtualQErrorMessage*>( (QErrorMessage*)(self) );
 	
 	return self_cast->focusPreviousChild();
 
 }
 
-QObject* QErrorMessage_protectedbase_sender(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQErrorMessage* self_cast = dynamic_cast<VirtualQErrorMessage*>( (QErrorMessage*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return nullptr;
-	}
-	
-	*_dynamic_cast_ok = true;
+QObject* QErrorMessage_protectedbase_sender(const void* self) {
+	VirtualQErrorMessage* self_cast = static_cast<VirtualQErrorMessage*>( (QErrorMessage*)(self) );
 	
 	return self_cast->sender();
 
 }
 
-int QErrorMessage_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQErrorMessage* self_cast = dynamic_cast<VirtualQErrorMessage*>( (QErrorMessage*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return 0;
-	}
-	
-	*_dynamic_cast_ok = true;
+int QErrorMessage_protectedbase_senderSignalIndex(const void* self) {
+	VirtualQErrorMessage* self_cast = static_cast<VirtualQErrorMessage*>( (QErrorMessage*)(self) );
 	
 	return self_cast->senderSignalIndex();
 
 }
 
-int QErrorMessage_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal) {
-	VirtualQErrorMessage* self_cast = dynamic_cast<VirtualQErrorMessage*>( (QErrorMessage*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return 0;
-	}
-	
-	*_dynamic_cast_ok = true;
+int QErrorMessage_protectedbase_receivers(const void* self, const char* signal) {
+	VirtualQErrorMessage* self_cast = static_cast<VirtualQErrorMessage*>( (QErrorMessage*)(self) );
 	
 	return self_cast->receivers(signal);
 
 }
 
-bool QErrorMessage_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal) {
-	VirtualQErrorMessage* self_cast = dynamic_cast<VirtualQErrorMessage*>( (QErrorMessage*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return false;
-	}
-	
-	*_dynamic_cast_ok = true;
+bool QErrorMessage_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal) {
+	VirtualQErrorMessage* self_cast = static_cast<VirtualQErrorMessage*>( (QErrorMessage*)(self) );
 	
 	return self_cast->isSignalConnected(*signal);
 

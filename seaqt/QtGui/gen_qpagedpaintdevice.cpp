@@ -176,8 +176,8 @@ public:
 	friend QPainter* QPagedPaintDevice_virtualbase_sharedPainter(const void* self);
 
 	// Wrappers to allow calling protected methods:
-	friend QPageLayout* QPagedPaintDevice_protectedbase_devicePageLayout(bool* _dynamic_cast_ok, const void* self);
-	friend QPageLayout* QPagedPaintDevice_protectedbase_devicePageLayout2(bool* _dynamic_cast_ok, void* self);
+	friend QPageLayout* QPagedPaintDevice_protectedbase_devicePageLayout(const void* self);
+	friend QPageLayout* QPagedPaintDevice_protectedbase_devicePageLayout2(void* self);
 };
 
 QPagedPaintDevice* QPagedPaintDevice_new(struct QPagedPaintDevice_VTable* vtbl) {
@@ -289,27 +289,15 @@ QPainter* QPagedPaintDevice_virtualbase_sharedPainter(const void* self) {
 
 }
 
-QPageLayout* QPagedPaintDevice_protectedbase_devicePageLayout(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQPagedPaintDevice* self_cast = dynamic_cast<VirtualQPagedPaintDevice*>( (QPagedPaintDevice*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return nullptr;
-	}
-	
-	*_dynamic_cast_ok = true;
+QPageLayout* QPagedPaintDevice_protectedbase_devicePageLayout(const void* self) {
+	VirtualQPagedPaintDevice* self_cast = static_cast<VirtualQPagedPaintDevice*>( (QPagedPaintDevice*)(self) );
 	
 	return new QPageLayout(self_cast->devicePageLayout());
 
 }
 
-QPageLayout* QPagedPaintDevice_protectedbase_devicePageLayout2(bool* _dynamic_cast_ok, void* self) {
-	VirtualQPagedPaintDevice* self_cast = dynamic_cast<VirtualQPagedPaintDevice*>( (QPagedPaintDevice*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return nullptr;
-	}
-	
-	*_dynamic_cast_ok = true;
+QPageLayout* QPagedPaintDevice_protectedbase_devicePageLayout2(void* self) {
+	VirtualQPagedPaintDevice* self_cast = static_cast<VirtualQPagedPaintDevice*>( (QPagedPaintDevice*)(self) );
 	
 	QPageLayout& _ret = self_cast->devicePageLayout();
 	// Cast returned reference into pointer

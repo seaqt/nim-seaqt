@@ -45,8 +45,11 @@ import
   ../QtCore/gen_qobjectdefs_types,
   ../QtCore/gen_qrect_types,
   ../QtCore/gen_qsize_types,
+  ../QtCore/gen_qvariant_types,
   ../QtGui/gen_qevent_types,
+  ../QtGui/gen_qfont_types,
   ../QtGui/gen_qpainter_types,
+  ../QtGui/gen_qpalette_types,
   ../QtGui/gen_qpixmap_types,
   ./gen_qabstractitemdelegate,
   ./gen_qabstractitemview_types,
@@ -61,8 +64,11 @@ export
   gen_qobjectdefs_types,
   gen_qrect_types,
   gen_qsize_types,
+  gen_qvariant_types,
   gen_qevent_types,
+  gen_qfont_types,
   gen_qpainter_types,
+  gen_qpalette_types,
   gen_qpixmap_types,
   gen_qabstractitemdelegate,
   gen_qabstractitemview_types,
@@ -141,6 +147,18 @@ proc fcQItemDelegate_virtualbase_childEvent(self: pointer, event: pointer): void
 proc fcQItemDelegate_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QItemDelegate_virtualbase_customEvent".}
 proc fcQItemDelegate_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QItemDelegate_virtualbase_connectNotify".}
 proc fcQItemDelegate_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QItemDelegate_virtualbase_disconnectNotify".}
+proc fcQItemDelegate_protectedbase_drawBackground(self: pointer, painter: pointer, option: pointer, index: pointer): void {.importc: "QItemDelegate_protectedbase_drawBackground".}
+proc fcQItemDelegate_protectedbase_doLayout(self: pointer, option: pointer, checkRect: pointer, iconRect: pointer, textRect: pointer, hint: bool): void {.importc: "QItemDelegate_protectedbase_doLayout".}
+proc fcQItemDelegate_protectedbase_rect(self: pointer, option: pointer, index: pointer, role: cint): pointer {.importc: "QItemDelegate_protectedbase_rect".}
+proc fcQItemDelegate_protectedbase_setOptions(self: pointer, index: pointer, option: pointer): pointer {.importc: "QItemDelegate_protectedbase_setOptions".}
+proc fcQItemDelegate_protectedbase_decoration(self: pointer, option: pointer, variant: pointer): pointer {.importc: "QItemDelegate_protectedbase_decoration".}
+proc fcQItemDelegate_protectedbase_selected(self: pointer, pixmap: pointer, palette: pointer, enabled: bool): pointer {.importc: "QItemDelegate_protectedbase_selected".}
+proc fcQItemDelegate_protectedbase_doCheck(self: pointer, option: pointer, bounding: pointer, variant: pointer): pointer {.importc: "QItemDelegate_protectedbase_doCheck".}
+proc fcQItemDelegate_protectedbase_textRectangle(self: pointer, painter: pointer, rect: pointer, font: pointer, text: struct_miqt_string): pointer {.importc: "QItemDelegate_protectedbase_textRectangle".}
+proc fcQItemDelegate_protectedbase_sender(self: pointer, ): pointer {.importc: "QItemDelegate_protectedbase_sender".}
+proc fcQItemDelegate_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QItemDelegate_protectedbase_senderSignalIndex".}
+proc fcQItemDelegate_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QItemDelegate_protectedbase_receivers".}
+proc fcQItemDelegate_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QItemDelegate_protectedbase_isSignalConnected".}
 proc fcQItemDelegate_new(vtbl: pointer, ): ptr cQItemDelegate {.importc: "QItemDelegate_new".}
 proc fcQItemDelegate_new2(vtbl: pointer, parent: pointer): ptr cQItemDelegate {.importc: "QItemDelegate_new2".}
 proc fcQItemDelegate_staticMetaObject(): pointer {.importc: "QItemDelegate_staticMetaObject".}
@@ -537,6 +555,42 @@ proc miqt_exec_callback_cQItemDelegate_disconnectNotify(vtbl: pointer, self: poi
   let self = QItemDelegate(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
   vtbl[].disconnectNotify(self, slotval1)
+
+proc drawBackground*(self: gen_qitemdelegate_types.QItemDelegate, painter: gen_qpainter_types.QPainter, option: gen_qstyleoption_types.QStyleOptionViewItem, index: gen_qabstractitemmodel_types.QModelIndex): void =
+  fcQItemDelegate_protectedbase_drawBackground(self.h, painter.h, option.h, index.h)
+
+proc doLayout*(self: gen_qitemdelegate_types.QItemDelegate, option: gen_qstyleoption_types.QStyleOptionViewItem, checkRect: gen_qrect_types.QRect, iconRect: gen_qrect_types.QRect, textRect: gen_qrect_types.QRect, hint: bool): void =
+  fcQItemDelegate_protectedbase_doLayout(self.h, option.h, checkRect.h, iconRect.h, textRect.h, hint)
+
+proc rect*(self: gen_qitemdelegate_types.QItemDelegate, option: gen_qstyleoption_types.QStyleOptionViewItem, index: gen_qabstractitemmodel_types.QModelIndex, role: cint): gen_qrect_types.QRect =
+  gen_qrect_types.QRect(h: fcQItemDelegate_protectedbase_rect(self.h, option.h, index.h, role))
+
+proc setOptions*(self: gen_qitemdelegate_types.QItemDelegate, index: gen_qabstractitemmodel_types.QModelIndex, option: gen_qstyleoption_types.QStyleOptionViewItem): gen_qstyleoption_types.QStyleOptionViewItem =
+  gen_qstyleoption_types.QStyleOptionViewItem(h: fcQItemDelegate_protectedbase_setOptions(self.h, index.h, option.h))
+
+proc decoration*(self: gen_qitemdelegate_types.QItemDelegate, option: gen_qstyleoption_types.QStyleOptionViewItem, variant: gen_qvariant_types.QVariant): gen_qpixmap_types.QPixmap =
+  gen_qpixmap_types.QPixmap(h: fcQItemDelegate_protectedbase_decoration(self.h, option.h, variant.h))
+
+proc selected*(self: gen_qitemdelegate_types.QItemDelegate, pixmap: gen_qpixmap_types.QPixmap, palette: gen_qpalette_types.QPalette, enabled: bool): gen_qpixmap_types.QPixmap =
+  gen_qpixmap_types.QPixmap(h: fcQItemDelegate_protectedbase_selected(self.h, pixmap.h, palette.h, enabled))
+
+proc doCheck*(self: gen_qitemdelegate_types.QItemDelegate, option: gen_qstyleoption_types.QStyleOptionViewItem, bounding: gen_qrect_types.QRect, variant: gen_qvariant_types.QVariant): gen_qrect_types.QRect =
+  gen_qrect_types.QRect(h: fcQItemDelegate_protectedbase_doCheck(self.h, option.h, bounding.h, variant.h))
+
+proc textRectangle*(self: gen_qitemdelegate_types.QItemDelegate, painter: gen_qpainter_types.QPainter, rect: gen_qrect_types.QRect, font: gen_qfont_types.QFont, text: string): gen_qrect_types.QRect =
+  gen_qrect_types.QRect(h: fcQItemDelegate_protectedbase_textRectangle(self.h, painter.h, rect.h, font.h, struct_miqt_string(data: text, len: csize_t(len(text)))))
+
+proc sender*(self: gen_qitemdelegate_types.QItemDelegate, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQItemDelegate_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qitemdelegate_types.QItemDelegate, ): cint =
+  fcQItemDelegate_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qitemdelegate_types.QItemDelegate, signal: cstring): cint =
+  fcQItemDelegate_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qitemdelegate_types.QItemDelegate, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQItemDelegate_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc create*(T: type gen_qitemdelegate_types.QItemDelegate,
     vtbl: ref QItemDelegateVTable = nil): gen_qitemdelegate_types.QItemDelegate =

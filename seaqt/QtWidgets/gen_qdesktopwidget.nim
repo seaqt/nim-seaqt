@@ -204,6 +204,15 @@ proc fcQDesktopWidget_virtualbase_childEvent(self: pointer, event: pointer): voi
 proc fcQDesktopWidget_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QDesktopWidget_virtualbase_customEvent".}
 proc fcQDesktopWidget_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QDesktopWidget_virtualbase_connectNotify".}
 proc fcQDesktopWidget_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QDesktopWidget_virtualbase_disconnectNotify".}
+proc fcQDesktopWidget_protectedbase_updateMicroFocus(self: pointer, ): void {.importc: "QDesktopWidget_protectedbase_updateMicroFocus".}
+proc fcQDesktopWidget_protectedbase_create(self: pointer, ): void {.importc: "QDesktopWidget_protectedbase_create".}
+proc fcQDesktopWidget_protectedbase_destroy(self: pointer, ): void {.importc: "QDesktopWidget_protectedbase_destroy".}
+proc fcQDesktopWidget_protectedbase_focusNextChild(self: pointer, ): bool {.importc: "QDesktopWidget_protectedbase_focusNextChild".}
+proc fcQDesktopWidget_protectedbase_focusPreviousChild(self: pointer, ): bool {.importc: "QDesktopWidget_protectedbase_focusPreviousChild".}
+proc fcQDesktopWidget_protectedbase_sender(self: pointer, ): pointer {.importc: "QDesktopWidget_protectedbase_sender".}
+proc fcQDesktopWidget_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QDesktopWidget_protectedbase_senderSignalIndex".}
+proc fcQDesktopWidget_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QDesktopWidget_protectedbase_receivers".}
+proc fcQDesktopWidget_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QDesktopWidget_protectedbase_isSignalConnected".}
 proc fcQDesktopWidget_new(vtbl: pointer, ): ptr cQDesktopWidget {.importc: "QDesktopWidget_new".}
 proc fcQDesktopWidget_staticMetaObject(): pointer {.importc: "QDesktopWidget_staticMetaObject".}
 proc fcQDesktopWidget_delete(self: pointer) {.importc: "QDesktopWidget_delete".}
@@ -951,6 +960,33 @@ proc miqt_exec_callback_cQDesktopWidget_disconnectNotify(vtbl: pointer, self: po
   let self = QDesktopWidget(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
   vtbl[].disconnectNotify(self, slotval1)
+
+proc updateMicroFocus*(self: gen_qdesktopwidget_types.QDesktopWidget, ): void =
+  fcQDesktopWidget_protectedbase_updateMicroFocus(self.h)
+
+proc create*(self: gen_qdesktopwidget_types.QDesktopWidget, ): void =
+  fcQDesktopWidget_protectedbase_create(self.h)
+
+proc destroy*(self: gen_qdesktopwidget_types.QDesktopWidget, ): void =
+  fcQDesktopWidget_protectedbase_destroy(self.h)
+
+proc focusNextChild*(self: gen_qdesktopwidget_types.QDesktopWidget, ): bool =
+  fcQDesktopWidget_protectedbase_focusNextChild(self.h)
+
+proc focusPreviousChild*(self: gen_qdesktopwidget_types.QDesktopWidget, ): bool =
+  fcQDesktopWidget_protectedbase_focusPreviousChild(self.h)
+
+proc sender*(self: gen_qdesktopwidget_types.QDesktopWidget, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQDesktopWidget_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qdesktopwidget_types.QDesktopWidget, ): cint =
+  fcQDesktopWidget_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qdesktopwidget_types.QDesktopWidget, signal: cstring): cint =
+  fcQDesktopWidget_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qdesktopwidget_types.QDesktopWidget, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQDesktopWidget_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc create*(T: type gen_qdesktopwidget_types.QDesktopWidget,
     vtbl: ref QDesktopWidgetVTable = nil): gen_qdesktopwidget_types.QDesktopWidget =

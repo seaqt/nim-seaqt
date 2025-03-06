@@ -818,15 +818,15 @@ public:
 	friend void QSvgWidget_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
 
 	// Wrappers to allow calling protected methods:
-	friend void QSvgWidget_protectedbase_updateMicroFocus(bool* _dynamic_cast_ok, void* self);
-	friend void QSvgWidget_protectedbase_create(bool* _dynamic_cast_ok, void* self);
-	friend void QSvgWidget_protectedbase_destroy(bool* _dynamic_cast_ok, void* self);
-	friend bool QSvgWidget_protectedbase_focusNextChild(bool* _dynamic_cast_ok, void* self);
-	friend bool QSvgWidget_protectedbase_focusPreviousChild(bool* _dynamic_cast_ok, void* self);
-	friend QObject* QSvgWidget_protectedbase_sender(bool* _dynamic_cast_ok, const void* self);
-	friend int QSvgWidget_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
-	friend int QSvgWidget_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
-	friend bool QSvgWidget_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+	friend void QSvgWidget_protectedbase_updateMicroFocus(void* self);
+	friend void QSvgWidget_protectedbase_create(void* self);
+	friend void QSvgWidget_protectedbase_destroy(void* self);
+	friend bool QSvgWidget_protectedbase_focusNextChild(void* self);
+	friend bool QSvgWidget_protectedbase_focusPreviousChild(void* self);
+	friend QObject* QSvgWidget_protectedbase_sender(const void* self);
+	friend int QSvgWidget_protectedbase_senderSignalIndex(const void* self);
+	friend int QSvgWidget_protectedbase_receivers(const void* self, const char* signal);
+	friend bool QSvgWidget_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
 };
 
 QSvgWidget* QSvgWidget_new(struct QSvgWidget_VTable* vtbl, QWidget* parent) {
@@ -1249,118 +1249,64 @@ void QSvgWidget_virtualbase_disconnectNotify(void* self, QMetaMethod* signal) {
 }
 
 const QMetaObject* QSvgWidget_staticMetaObject() { return &QSvgWidget::staticMetaObject; }
-void QSvgWidget_protectedbase_updateMicroFocus(bool* _dynamic_cast_ok, void* self) {
-	VirtualQSvgWidget* self_cast = dynamic_cast<VirtualQSvgWidget*>( (QSvgWidget*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QSvgWidget_protectedbase_updateMicroFocus(void* self) {
+	VirtualQSvgWidget* self_cast = static_cast<VirtualQSvgWidget*>( (QSvgWidget*)(self) );
 	
 	self_cast->updateMicroFocus();
 
 }
 
-void QSvgWidget_protectedbase_create(bool* _dynamic_cast_ok, void* self) {
-	VirtualQSvgWidget* self_cast = dynamic_cast<VirtualQSvgWidget*>( (QSvgWidget*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QSvgWidget_protectedbase_create(void* self) {
+	VirtualQSvgWidget* self_cast = static_cast<VirtualQSvgWidget*>( (QSvgWidget*)(self) );
 	
 	self_cast->create();
 
 }
 
-void QSvgWidget_protectedbase_destroy(bool* _dynamic_cast_ok, void* self) {
-	VirtualQSvgWidget* self_cast = dynamic_cast<VirtualQSvgWidget*>( (QSvgWidget*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QSvgWidget_protectedbase_destroy(void* self) {
+	VirtualQSvgWidget* self_cast = static_cast<VirtualQSvgWidget*>( (QSvgWidget*)(self) );
 	
 	self_cast->destroy();
 
 }
 
-bool QSvgWidget_protectedbase_focusNextChild(bool* _dynamic_cast_ok, void* self) {
-	VirtualQSvgWidget* self_cast = dynamic_cast<VirtualQSvgWidget*>( (QSvgWidget*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return false;
-	}
-	
-	*_dynamic_cast_ok = true;
+bool QSvgWidget_protectedbase_focusNextChild(void* self) {
+	VirtualQSvgWidget* self_cast = static_cast<VirtualQSvgWidget*>( (QSvgWidget*)(self) );
 	
 	return self_cast->focusNextChild();
 
 }
 
-bool QSvgWidget_protectedbase_focusPreviousChild(bool* _dynamic_cast_ok, void* self) {
-	VirtualQSvgWidget* self_cast = dynamic_cast<VirtualQSvgWidget*>( (QSvgWidget*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return false;
-	}
-	
-	*_dynamic_cast_ok = true;
+bool QSvgWidget_protectedbase_focusPreviousChild(void* self) {
+	VirtualQSvgWidget* self_cast = static_cast<VirtualQSvgWidget*>( (QSvgWidget*)(self) );
 	
 	return self_cast->focusPreviousChild();
 
 }
 
-QObject* QSvgWidget_protectedbase_sender(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQSvgWidget* self_cast = dynamic_cast<VirtualQSvgWidget*>( (QSvgWidget*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return nullptr;
-	}
-	
-	*_dynamic_cast_ok = true;
+QObject* QSvgWidget_protectedbase_sender(const void* self) {
+	VirtualQSvgWidget* self_cast = static_cast<VirtualQSvgWidget*>( (QSvgWidget*)(self) );
 	
 	return self_cast->sender();
 
 }
 
-int QSvgWidget_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQSvgWidget* self_cast = dynamic_cast<VirtualQSvgWidget*>( (QSvgWidget*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return 0;
-	}
-	
-	*_dynamic_cast_ok = true;
+int QSvgWidget_protectedbase_senderSignalIndex(const void* self) {
+	VirtualQSvgWidget* self_cast = static_cast<VirtualQSvgWidget*>( (QSvgWidget*)(self) );
 	
 	return self_cast->senderSignalIndex();
 
 }
 
-int QSvgWidget_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal) {
-	VirtualQSvgWidget* self_cast = dynamic_cast<VirtualQSvgWidget*>( (QSvgWidget*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return 0;
-	}
-	
-	*_dynamic_cast_ok = true;
+int QSvgWidget_protectedbase_receivers(const void* self, const char* signal) {
+	VirtualQSvgWidget* self_cast = static_cast<VirtualQSvgWidget*>( (QSvgWidget*)(self) );
 	
 	return self_cast->receivers(signal);
 
 }
 
-bool QSvgWidget_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal) {
-	VirtualQSvgWidget* self_cast = dynamic_cast<VirtualQSvgWidget*>( (QSvgWidget*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return false;
-	}
-	
-	*_dynamic_cast_ok = true;
+bool QSvgWidget_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal) {
+	VirtualQSvgWidget* self_cast = static_cast<VirtualQSvgWidget*>( (QSvgWidget*)(self) );
 	
 	return self_cast->isSignalConnected(*signal);
 

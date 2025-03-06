@@ -38,11 +38,13 @@ import ./gen_qmediaobject_types
 export gen_qmediaobject_types
 
 import
+  ../QtCore/gen_qmetaobject_types,
   ../QtCore/gen_qobject,
   ../QtCore/gen_qobjectdefs_types,
   ../QtCore/gen_qvariant_types,
   ./gen_qmediaservice_types
 export
+  gen_qmetaobject_types,
   gen_qobject,
   gen_qobjectdefs_types,
   gen_qvariant_types,
@@ -81,6 +83,12 @@ proc fcQMediaObject_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "
 proc fcQMediaObject_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QMediaObject_tr3".}
 proc fcQMediaObject_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QMediaObject_trUtf82".}
 proc fcQMediaObject_trUtf83(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QMediaObject_trUtf83".}
+proc fcQMediaObject_protectedbase_addPropertyWatch(self: pointer, name: struct_miqt_string): void {.importc: "QMediaObject_protectedbase_addPropertyWatch".}
+proc fcQMediaObject_protectedbase_removePropertyWatch(self: pointer, name: struct_miqt_string): void {.importc: "QMediaObject_protectedbase_removePropertyWatch".}
+proc fcQMediaObject_protectedbase_sender(self: pointer, ): pointer {.importc: "QMediaObject_protectedbase_sender".}
+proc fcQMediaObject_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QMediaObject_protectedbase_senderSignalIndex".}
+proc fcQMediaObject_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QMediaObject_protectedbase_receivers".}
+proc fcQMediaObject_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QMediaObject_protectedbase_isSignalConnected".}
 proc fcQMediaObject_staticMetaObject(): pointer {.importc: "QMediaObject_staticMetaObject".}
 proc fcQMediaObject_delete(self: pointer) {.importc: "QMediaObject_delete".}
 
@@ -289,6 +297,24 @@ proc trUtf8*(_: type gen_qmediaobject_types.QMediaObject, s: cstring, c: cstring
   let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
   c_free(v_ms.data)
   vx_ret
+
+proc addPropertyWatch*(self: gen_qmediaobject_types.QMediaObject, name: seq[byte]): void =
+  fcQMediaObject_protectedbase_addPropertyWatch(self.h, struct_miqt_string(data: cast[cstring](if len(name) == 0: nil else: unsafeAddr name[0]), len: csize_t(len(name))))
+
+proc removePropertyWatch*(self: gen_qmediaobject_types.QMediaObject, name: seq[byte]): void =
+  fcQMediaObject_protectedbase_removePropertyWatch(self.h, struct_miqt_string(data: cast[cstring](if len(name) == 0: nil else: unsafeAddr name[0]), len: csize_t(len(name))))
+
+proc sender*(self: gen_qmediaobject_types.QMediaObject, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQMediaObject_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qmediaobject_types.QMediaObject, ): cint =
+  fcQMediaObject_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qmediaobject_types.QMediaObject, signal: cstring): cint =
+  fcQMediaObject_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qmediaobject_types.QMediaObject, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQMediaObject_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc staticMetaObject*(_: type gen_qmediaobject_types.QMediaObject): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQMediaObject_staticMetaObject())

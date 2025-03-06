@@ -38,11 +38,15 @@ import ./gen_qpaintdevicewindow_types
 export gen_qpaintdevicewindow_types
 
 import
+  ../QtCore/gen_qmetaobject_types,
+  ../QtCore/gen_qobject_types,
   ../QtCore/gen_qobjectdefs_types,
   ../QtCore/gen_qrect_types,
   ./gen_qregion_types,
   ./gen_qwindow
 export
+  gen_qmetaobject_types,
+  gen_qobject_types,
   gen_qobjectdefs_types,
   gen_qrect_types,
   gen_qregion_types,
@@ -62,6 +66,10 @@ proc fcQPaintDeviceWindow_tr2(s: cstring, c: cstring): struct_miqt_string {.impo
 proc fcQPaintDeviceWindow_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QPaintDeviceWindow_tr3".}
 proc fcQPaintDeviceWindow_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QPaintDeviceWindow_trUtf82".}
 proc fcQPaintDeviceWindow_trUtf83(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QPaintDeviceWindow_trUtf83".}
+proc fcQPaintDeviceWindow_protectedbase_sender(self: pointer, ): pointer {.importc: "QPaintDeviceWindow_protectedbase_sender".}
+proc fcQPaintDeviceWindow_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QPaintDeviceWindow_protectedbase_senderSignalIndex".}
+proc fcQPaintDeviceWindow_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QPaintDeviceWindow_protectedbase_receivers".}
+proc fcQPaintDeviceWindow_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QPaintDeviceWindow_protectedbase_isSignalConnected".}
 proc fcQPaintDeviceWindow_staticMetaObject(): pointer {.importc: "QPaintDeviceWindow_staticMetaObject".}
 proc fcQPaintDeviceWindow_delete(self: pointer) {.importc: "QPaintDeviceWindow_delete".}
 
@@ -118,6 +126,18 @@ proc trUtf8*(_: type gen_qpaintdevicewindow_types.QPaintDeviceWindow, s: cstring
   let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
   c_free(v_ms.data)
   vx_ret
+
+proc sender*(self: gen_qpaintdevicewindow_types.QPaintDeviceWindow, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQPaintDeviceWindow_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qpaintdevicewindow_types.QPaintDeviceWindow, ): cint =
+  fcQPaintDeviceWindow_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qpaintdevicewindow_types.QPaintDeviceWindow, signal: cstring): cint =
+  fcQPaintDeviceWindow_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qpaintdevicewindow_types.QPaintDeviceWindow, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQPaintDeviceWindow_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc staticMetaObject*(_: type gen_qpaintdevicewindow_types.QPaintDeviceWindow): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQPaintDeviceWindow_staticMetaObject())

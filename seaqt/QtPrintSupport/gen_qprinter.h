@@ -150,8 +150,8 @@ int QPrinter_virtualbase_metric(const void* self, int param1);
 void QPrinter_virtualbase_initPainter(const void* self, QPainter* painter);
 QPaintDevice* QPrinter_virtualbase_redirected(const void* self, QPoint* offset);
 QPainter* QPrinter_virtualbase_sharedPainter(const void* self);
-void QPrinter_protectedbase_setEngines(bool* _dynamic_cast_ok, void* self, QPrintEngine* printEngine, QPaintEngine* paintEngine);
-QPageLayout* QPrinter_protectedbase_devicePageLayout(bool* _dynamic_cast_ok, const void* self);
+void QPrinter_protectedbase_setEngines(void* self, QPrintEngine* printEngine, QPaintEngine* paintEngine);
+QPageLayout* QPrinter_protectedbase_devicePageLayout(const void* self);
 void QPrinter_delete(QPrinter* self);
 
 #ifdef __cplusplus

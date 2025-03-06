@@ -860,15 +860,15 @@ public:
 	friend void QAbstractButton_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
 
 	// Wrappers to allow calling protected methods:
-	friend void QAbstractButton_protectedbase_updateMicroFocus(bool* _dynamic_cast_ok, void* self);
-	friend void QAbstractButton_protectedbase_create(bool* _dynamic_cast_ok, void* self);
-	friend void QAbstractButton_protectedbase_destroy(bool* _dynamic_cast_ok, void* self);
-	friend bool QAbstractButton_protectedbase_focusNextChild(bool* _dynamic_cast_ok, void* self);
-	friend bool QAbstractButton_protectedbase_focusPreviousChild(bool* _dynamic_cast_ok, void* self);
-	friend QObject* QAbstractButton_protectedbase_sender(bool* _dynamic_cast_ok, const void* self);
-	friend int QAbstractButton_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
-	friend int QAbstractButton_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
-	friend bool QAbstractButton_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+	friend void QAbstractButton_protectedbase_updateMicroFocus(void* self);
+	friend void QAbstractButton_protectedbase_create(void* self);
+	friend void QAbstractButton_protectedbase_destroy(void* self);
+	friend bool QAbstractButton_protectedbase_focusNextChild(void* self);
+	friend bool QAbstractButton_protectedbase_focusPreviousChild(void* self);
+	friend QObject* QAbstractButton_protectedbase_sender(const void* self);
+	friend int QAbstractButton_protectedbase_senderSignalIndex(const void* self);
+	friend int QAbstractButton_protectedbase_receivers(const void* self, const char* signal);
+	friend bool QAbstractButton_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
 };
 
 QAbstractButton* QAbstractButton_new(struct QAbstractButton_VTable* vtbl, QWidget* parent) {
@@ -1468,118 +1468,64 @@ void QAbstractButton_virtualbase_disconnectNotify(void* self, QMetaMethod* signa
 }
 
 const QMetaObject* QAbstractButton_staticMetaObject() { return &QAbstractButton::staticMetaObject; }
-void QAbstractButton_protectedbase_updateMicroFocus(bool* _dynamic_cast_ok, void* self) {
-	VirtualQAbstractButton* self_cast = dynamic_cast<VirtualQAbstractButton*>( (QAbstractButton*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QAbstractButton_protectedbase_updateMicroFocus(void* self) {
+	VirtualQAbstractButton* self_cast = static_cast<VirtualQAbstractButton*>( (QAbstractButton*)(self) );
 	
 	self_cast->updateMicroFocus();
 
 }
 
-void QAbstractButton_protectedbase_create(bool* _dynamic_cast_ok, void* self) {
-	VirtualQAbstractButton* self_cast = dynamic_cast<VirtualQAbstractButton*>( (QAbstractButton*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QAbstractButton_protectedbase_create(void* self) {
+	VirtualQAbstractButton* self_cast = static_cast<VirtualQAbstractButton*>( (QAbstractButton*)(self) );
 	
 	self_cast->create();
 
 }
 
-void QAbstractButton_protectedbase_destroy(bool* _dynamic_cast_ok, void* self) {
-	VirtualQAbstractButton* self_cast = dynamic_cast<VirtualQAbstractButton*>( (QAbstractButton*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QAbstractButton_protectedbase_destroy(void* self) {
+	VirtualQAbstractButton* self_cast = static_cast<VirtualQAbstractButton*>( (QAbstractButton*)(self) );
 	
 	self_cast->destroy();
 
 }
 
-bool QAbstractButton_protectedbase_focusNextChild(bool* _dynamic_cast_ok, void* self) {
-	VirtualQAbstractButton* self_cast = dynamic_cast<VirtualQAbstractButton*>( (QAbstractButton*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return false;
-	}
-	
-	*_dynamic_cast_ok = true;
+bool QAbstractButton_protectedbase_focusNextChild(void* self) {
+	VirtualQAbstractButton* self_cast = static_cast<VirtualQAbstractButton*>( (QAbstractButton*)(self) );
 	
 	return self_cast->focusNextChild();
 
 }
 
-bool QAbstractButton_protectedbase_focusPreviousChild(bool* _dynamic_cast_ok, void* self) {
-	VirtualQAbstractButton* self_cast = dynamic_cast<VirtualQAbstractButton*>( (QAbstractButton*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return false;
-	}
-	
-	*_dynamic_cast_ok = true;
+bool QAbstractButton_protectedbase_focusPreviousChild(void* self) {
+	VirtualQAbstractButton* self_cast = static_cast<VirtualQAbstractButton*>( (QAbstractButton*)(self) );
 	
 	return self_cast->focusPreviousChild();
 
 }
 
-QObject* QAbstractButton_protectedbase_sender(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQAbstractButton* self_cast = dynamic_cast<VirtualQAbstractButton*>( (QAbstractButton*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return nullptr;
-	}
-	
-	*_dynamic_cast_ok = true;
+QObject* QAbstractButton_protectedbase_sender(const void* self) {
+	VirtualQAbstractButton* self_cast = static_cast<VirtualQAbstractButton*>( (QAbstractButton*)(self) );
 	
 	return self_cast->sender();
 
 }
 
-int QAbstractButton_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQAbstractButton* self_cast = dynamic_cast<VirtualQAbstractButton*>( (QAbstractButton*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return 0;
-	}
-	
-	*_dynamic_cast_ok = true;
+int QAbstractButton_protectedbase_senderSignalIndex(const void* self) {
+	VirtualQAbstractButton* self_cast = static_cast<VirtualQAbstractButton*>( (QAbstractButton*)(self) );
 	
 	return self_cast->senderSignalIndex();
 
 }
 
-int QAbstractButton_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal) {
-	VirtualQAbstractButton* self_cast = dynamic_cast<VirtualQAbstractButton*>( (QAbstractButton*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return 0;
-	}
-	
-	*_dynamic_cast_ok = true;
+int QAbstractButton_protectedbase_receivers(const void* self, const char* signal) {
+	VirtualQAbstractButton* self_cast = static_cast<VirtualQAbstractButton*>( (QAbstractButton*)(self) );
 	
 	return self_cast->receivers(signal);
 
 }
 
-bool QAbstractButton_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal) {
-	VirtualQAbstractButton* self_cast = dynamic_cast<VirtualQAbstractButton*>( (QAbstractButton*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return false;
-	}
-	
-	*_dynamic_cast_ok = true;
+bool QAbstractButton_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal) {
+	VirtualQAbstractButton* self_cast = static_cast<VirtualQAbstractButton*>( (QAbstractButton*)(self) );
 	
 	return self_cast->isSignalConnected(*signal);
 

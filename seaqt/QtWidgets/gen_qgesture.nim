@@ -118,6 +118,10 @@ proc fcQGesture_virtualbase_childEvent(self: pointer, event: pointer): void {.im
 proc fcQGesture_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QGesture_virtualbase_customEvent".}
 proc fcQGesture_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QGesture_virtualbase_connectNotify".}
 proc fcQGesture_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QGesture_virtualbase_disconnectNotify".}
+proc fcQGesture_protectedbase_sender(self: pointer, ): pointer {.importc: "QGesture_protectedbase_sender".}
+proc fcQGesture_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QGesture_protectedbase_senderSignalIndex".}
+proc fcQGesture_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QGesture_protectedbase_receivers".}
+proc fcQGesture_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QGesture_protectedbase_isSignalConnected".}
 proc fcQGesture_new(vtbl: pointer, ): ptr cQGesture {.importc: "QGesture_new".}
 proc fcQGesture_new2(vtbl: pointer, parent: pointer): ptr cQGesture {.importc: "QGesture_new2".}
 proc fcQGesture_staticMetaObject(): pointer {.importc: "QGesture_staticMetaObject".}
@@ -160,6 +164,10 @@ proc fcQPanGesture_virtualbase_childEvent(self: pointer, event: pointer): void {
 proc fcQPanGesture_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QPanGesture_virtualbase_customEvent".}
 proc fcQPanGesture_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QPanGesture_virtualbase_connectNotify".}
 proc fcQPanGesture_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QPanGesture_virtualbase_disconnectNotify".}
+proc fcQPanGesture_protectedbase_sender(self: pointer, ): pointer {.importc: "QPanGesture_protectedbase_sender".}
+proc fcQPanGesture_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QPanGesture_protectedbase_senderSignalIndex".}
+proc fcQPanGesture_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QPanGesture_protectedbase_receivers".}
+proc fcQPanGesture_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QPanGesture_protectedbase_isSignalConnected".}
 proc fcQPanGesture_new(vtbl: pointer, ): ptr cQPanGesture {.importc: "QPanGesture_new".}
 proc fcQPanGesture_new2(vtbl: pointer, parent: pointer): ptr cQPanGesture {.importc: "QPanGesture_new2".}
 proc fcQPanGesture_staticMetaObject(): pointer {.importc: "QPanGesture_staticMetaObject".}
@@ -217,6 +225,10 @@ proc fcQPinchGesture_virtualbase_childEvent(self: pointer, event: pointer): void
 proc fcQPinchGesture_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QPinchGesture_virtualbase_customEvent".}
 proc fcQPinchGesture_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QPinchGesture_virtualbase_connectNotify".}
 proc fcQPinchGesture_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QPinchGesture_virtualbase_disconnectNotify".}
+proc fcQPinchGesture_protectedbase_sender(self: pointer, ): pointer {.importc: "QPinchGesture_protectedbase_sender".}
+proc fcQPinchGesture_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QPinchGesture_protectedbase_senderSignalIndex".}
+proc fcQPinchGesture_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QPinchGesture_protectedbase_receivers".}
+proc fcQPinchGesture_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QPinchGesture_protectedbase_isSignalConnected".}
 proc fcQPinchGesture_new(vtbl: pointer, ): ptr cQPinchGesture {.importc: "QPinchGesture_new".}
 proc fcQPinchGesture_new2(vtbl: pointer, parent: pointer): ptr cQPinchGesture {.importc: "QPinchGesture_new2".}
 proc fcQPinchGesture_staticMetaObject(): pointer {.importc: "QPinchGesture_staticMetaObject".}
@@ -256,6 +268,10 @@ proc fcQSwipeGesture_virtualbase_childEvent(self: pointer, event: pointer): void
 proc fcQSwipeGesture_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QSwipeGesture_virtualbase_customEvent".}
 proc fcQSwipeGesture_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QSwipeGesture_virtualbase_connectNotify".}
 proc fcQSwipeGesture_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QSwipeGesture_virtualbase_disconnectNotify".}
+proc fcQSwipeGesture_protectedbase_sender(self: pointer, ): pointer {.importc: "QSwipeGesture_protectedbase_sender".}
+proc fcQSwipeGesture_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QSwipeGesture_protectedbase_senderSignalIndex".}
+proc fcQSwipeGesture_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QSwipeGesture_protectedbase_receivers".}
+proc fcQSwipeGesture_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QSwipeGesture_protectedbase_isSignalConnected".}
 proc fcQSwipeGesture_new(vtbl: pointer, ): ptr cQSwipeGesture {.importc: "QSwipeGesture_new".}
 proc fcQSwipeGesture_new2(vtbl: pointer, parent: pointer): ptr cQSwipeGesture {.importc: "QSwipeGesture_new2".}
 proc fcQSwipeGesture_staticMetaObject(): pointer {.importc: "QSwipeGesture_staticMetaObject".}
@@ -293,6 +309,10 @@ proc fcQTapGesture_virtualbase_childEvent(self: pointer, event: pointer): void {
 proc fcQTapGesture_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QTapGesture_virtualbase_customEvent".}
 proc fcQTapGesture_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QTapGesture_virtualbase_connectNotify".}
 proc fcQTapGesture_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QTapGesture_virtualbase_disconnectNotify".}
+proc fcQTapGesture_protectedbase_sender(self: pointer, ): pointer {.importc: "QTapGesture_protectedbase_sender".}
+proc fcQTapGesture_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QTapGesture_protectedbase_senderSignalIndex".}
+proc fcQTapGesture_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QTapGesture_protectedbase_receivers".}
+proc fcQTapGesture_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QTapGesture_protectedbase_isSignalConnected".}
 proc fcQTapGesture_new(vtbl: pointer, ): ptr cQTapGesture {.importc: "QTapGesture_new".}
 proc fcQTapGesture_new2(vtbl: pointer, parent: pointer): ptr cQTapGesture {.importc: "QTapGesture_new2".}
 proc fcQTapGesture_staticMetaObject(): pointer {.importc: "QTapGesture_staticMetaObject".}
@@ -332,6 +352,10 @@ proc fcQTapAndHoldGesture_virtualbase_childEvent(self: pointer, event: pointer):
 proc fcQTapAndHoldGesture_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QTapAndHoldGesture_virtualbase_customEvent".}
 proc fcQTapAndHoldGesture_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QTapAndHoldGesture_virtualbase_connectNotify".}
 proc fcQTapAndHoldGesture_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QTapAndHoldGesture_virtualbase_disconnectNotify".}
+proc fcQTapAndHoldGesture_protectedbase_sender(self: pointer, ): pointer {.importc: "QTapAndHoldGesture_protectedbase_sender".}
+proc fcQTapAndHoldGesture_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QTapAndHoldGesture_protectedbase_senderSignalIndex".}
+proc fcQTapAndHoldGesture_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QTapAndHoldGesture_protectedbase_receivers".}
+proc fcQTapAndHoldGesture_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QTapAndHoldGesture_protectedbase_isSignalConnected".}
 proc fcQTapAndHoldGesture_new(vtbl: pointer, ): ptr cQTapAndHoldGesture {.importc: "QTapAndHoldGesture_new".}
 proc fcQTapAndHoldGesture_new2(vtbl: pointer, parent: pointer): ptr cQTapAndHoldGesture {.importc: "QTapAndHoldGesture_new2".}
 proc fcQTapAndHoldGesture_staticMetaObject(): pointer {.importc: "QTapAndHoldGesture_staticMetaObject".}
@@ -542,6 +566,18 @@ proc miqt_exec_callback_cQGesture_disconnectNotify(vtbl: pointer, self: pointer,
   let self = QGesture(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
   vtbl[].disconnectNotify(self, slotval1)
+
+proc sender*(self: gen_qgesture_types.QGesture, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQGesture_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qgesture_types.QGesture, ): cint =
+  fcQGesture_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qgesture_types.QGesture, signal: cstring): cint =
+  fcQGesture_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qgesture_types.QGesture, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQGesture_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc create*(T: type gen_qgesture_types.QGesture,
     vtbl: ref QGestureVTable = nil): gen_qgesture_types.QGesture =
@@ -790,6 +826,18 @@ proc miqt_exec_callback_cQPanGesture_disconnectNotify(vtbl: pointer, self: point
   let self = QPanGesture(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
   vtbl[].disconnectNotify(self, slotval1)
+
+proc sender*(self: gen_qgesture_types.QPanGesture, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQPanGesture_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qgesture_types.QPanGesture, ): cint =
+  fcQPanGesture_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qgesture_types.QPanGesture, signal: cstring): cint =
+  fcQPanGesture_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qgesture_types.QPanGesture, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQPanGesture_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc create*(T: type gen_qgesture_types.QPanGesture,
     vtbl: ref QPanGestureVTable = nil): gen_qgesture_types.QPanGesture =
@@ -1084,6 +1132,18 @@ proc miqt_exec_callback_cQPinchGesture_disconnectNotify(vtbl: pointer, self: poi
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
   vtbl[].disconnectNotify(self, slotval1)
 
+proc sender*(self: gen_qgesture_types.QPinchGesture, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQPinchGesture_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qgesture_types.QPinchGesture, ): cint =
+  fcQPinchGesture_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qgesture_types.QPinchGesture, signal: cstring): cint =
+  fcQPinchGesture_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qgesture_types.QPinchGesture, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQPinchGesture_protectedbase_isSignalConnected(self.h, signal.h)
+
 proc create*(T: type gen_qgesture_types.QPinchGesture,
     vtbl: ref QPinchGestureVTable = nil): gen_qgesture_types.QPinchGesture =
   let vtbl = if vtbl == nil: new QPinchGestureVTable else: vtbl
@@ -1323,6 +1383,18 @@ proc miqt_exec_callback_cQSwipeGesture_disconnectNotify(vtbl: pointer, self: poi
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
   vtbl[].disconnectNotify(self, slotval1)
 
+proc sender*(self: gen_qgesture_types.QSwipeGesture, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQSwipeGesture_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qgesture_types.QSwipeGesture, ): cint =
+  fcQSwipeGesture_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qgesture_types.QSwipeGesture, signal: cstring): cint =
+  fcQSwipeGesture_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qgesture_types.QSwipeGesture, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQSwipeGesture_protectedbase_isSignalConnected(self.h, signal.h)
+
 proc create*(T: type gen_qgesture_types.QSwipeGesture,
     vtbl: ref QSwipeGestureVTable = nil): gen_qgesture_types.QSwipeGesture =
   let vtbl = if vtbl == nil: new QSwipeGestureVTable else: vtbl
@@ -1555,6 +1627,18 @@ proc miqt_exec_callback_cQTapGesture_disconnectNotify(vtbl: pointer, self: point
   let self = QTapGesture(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
   vtbl[].disconnectNotify(self, slotval1)
+
+proc sender*(self: gen_qgesture_types.QTapGesture, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQTapGesture_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qgesture_types.QTapGesture, ): cint =
+  fcQTapGesture_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qgesture_types.QTapGesture, signal: cstring): cint =
+  fcQTapGesture_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qgesture_types.QTapGesture, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQTapGesture_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc create*(T: type gen_qgesture_types.QTapGesture,
     vtbl: ref QTapGestureVTable = nil): gen_qgesture_types.QTapGesture =
@@ -1794,6 +1878,18 @@ proc miqt_exec_callback_cQTapAndHoldGesture_disconnectNotify(vtbl: pointer, self
   let self = QTapAndHoldGesture(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
   vtbl[].disconnectNotify(self, slotval1)
+
+proc sender*(self: gen_qgesture_types.QTapAndHoldGesture, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQTapAndHoldGesture_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qgesture_types.QTapAndHoldGesture, ): cint =
+  fcQTapAndHoldGesture_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qgesture_types.QTapAndHoldGesture, signal: cstring): cint =
+  fcQTapAndHoldGesture_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qgesture_types.QTapAndHoldGesture, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQTapAndHoldGesture_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc create*(T: type gen_qgesture_types.QTapAndHoldGesture,
     vtbl: ref QTapAndHoldGestureVTable = nil): gen_qgesture_types.QTapAndHoldGesture =

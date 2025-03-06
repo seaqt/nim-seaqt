@@ -116,6 +116,10 @@ proc fcQJSEngine_virtualbase_childEvent(self: pointer, event: pointer): void {.i
 proc fcQJSEngine_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QJSEngine_virtualbase_customEvent".}
 proc fcQJSEngine_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QJSEngine_virtualbase_connectNotify".}
 proc fcQJSEngine_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QJSEngine_virtualbase_disconnectNotify".}
+proc fcQJSEngine_protectedbase_sender(self: pointer, ): pointer {.importc: "QJSEngine_protectedbase_sender".}
+proc fcQJSEngine_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QJSEngine_protectedbase_senderSignalIndex".}
+proc fcQJSEngine_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QJSEngine_protectedbase_receivers".}
+proc fcQJSEngine_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QJSEngine_protectedbase_isSignalConnected".}
 proc fcQJSEngine_new(vtbl: pointer, ): ptr cQJSEngine {.importc: "QJSEngine_new".}
 proc fcQJSEngine_new2(vtbl: pointer, parent: pointer): ptr cQJSEngine {.importc: "QJSEngine_new2".}
 proc fcQJSEngine_staticMetaObject(): pointer {.importc: "QJSEngine_staticMetaObject".}
@@ -377,6 +381,18 @@ proc miqt_exec_callback_cQJSEngine_disconnectNotify(vtbl: pointer, self: pointer
   let self = QJSEngine(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
   vtbl[].disconnectNotify(self, slotval1)
+
+proc sender*(self: gen_qjsengine_types.QJSEngine, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQJSEngine_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qjsengine_types.QJSEngine, ): cint =
+  fcQJSEngine_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qjsengine_types.QJSEngine, signal: cstring): cint =
+  fcQJSEngine_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qjsengine_types.QJSEngine, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQJSEngine_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc create*(T: type gen_qjsengine_types.QJSEngine,
     vtbl: ref QJSEngineVTable = nil): gen_qjsengine_types.QJSEngine =

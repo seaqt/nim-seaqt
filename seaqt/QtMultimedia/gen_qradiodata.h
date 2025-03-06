@@ -101,10 +101,10 @@ void QRadioData_virtualbase_childEvent(void* self, QChildEvent* event);
 void QRadioData_virtualbase_customEvent(void* self, QEvent* event);
 void QRadioData_virtualbase_connectNotify(void* self, QMetaMethod* signal);
 void QRadioData_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
-QObject* QRadioData_protectedbase_sender(bool* _dynamic_cast_ok, const void* self);
-int QRadioData_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
-int QRadioData_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
-bool QRadioData_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+QObject* QRadioData_protectedbase_sender(const void* self);
+int QRadioData_protectedbase_senderSignalIndex(const void* self);
+int QRadioData_protectedbase_receivers(const void* self, const char* signal);
+bool QRadioData_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
 const QMetaObject* QRadioData_staticMetaObject();
 void QRadioData_delete(QRadioData* self);
 

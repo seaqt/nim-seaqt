@@ -85,6 +85,10 @@ proc fcQWebEngineUrlSchemeHandler_virtualbase_childEvent(self: pointer, event: p
 proc fcQWebEngineUrlSchemeHandler_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QWebEngineUrlSchemeHandler_virtualbase_customEvent".}
 proc fcQWebEngineUrlSchemeHandler_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QWebEngineUrlSchemeHandler_virtualbase_connectNotify".}
 proc fcQWebEngineUrlSchemeHandler_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QWebEngineUrlSchemeHandler_virtualbase_disconnectNotify".}
+proc fcQWebEngineUrlSchemeHandler_protectedbase_sender(self: pointer, ): pointer {.importc: "QWebEngineUrlSchemeHandler_protectedbase_sender".}
+proc fcQWebEngineUrlSchemeHandler_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QWebEngineUrlSchemeHandler_protectedbase_senderSignalIndex".}
+proc fcQWebEngineUrlSchemeHandler_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QWebEngineUrlSchemeHandler_protectedbase_receivers".}
+proc fcQWebEngineUrlSchemeHandler_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QWebEngineUrlSchemeHandler_protectedbase_isSignalConnected".}
 proc fcQWebEngineUrlSchemeHandler_new(vtbl: pointer, ): ptr cQWebEngineUrlSchemeHandler {.importc: "QWebEngineUrlSchemeHandler_new".}
 proc fcQWebEngineUrlSchemeHandler_new2(vtbl: pointer, parent: pointer): ptr cQWebEngineUrlSchemeHandler {.importc: "QWebEngineUrlSchemeHandler_new2".}
 proc fcQWebEngineUrlSchemeHandler_staticMetaObject(): pointer {.importc: "QWebEngineUrlSchemeHandler_staticMetaObject".}
@@ -264,6 +268,18 @@ proc miqt_exec_callback_cQWebEngineUrlSchemeHandler_disconnectNotify(vtbl: point
   let self = QWebEngineUrlSchemeHandler(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
   vtbl[].disconnectNotify(self, slotval1)
+
+proc sender*(self: gen_qwebengineurlschemehandler_types.QWebEngineUrlSchemeHandler, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQWebEngineUrlSchemeHandler_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qwebengineurlschemehandler_types.QWebEngineUrlSchemeHandler, ): cint =
+  fcQWebEngineUrlSchemeHandler_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qwebengineurlschemehandler_types.QWebEngineUrlSchemeHandler, signal: cstring): cint =
+  fcQWebEngineUrlSchemeHandler_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qwebengineurlschemehandler_types.QWebEngineUrlSchemeHandler, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQWebEngineUrlSchemeHandler_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc create*(T: type gen_qwebengineurlschemehandler_types.QWebEngineUrlSchemeHandler,
     vtbl: ref QWebEngineUrlSchemeHandlerVTable = nil): gen_qwebengineurlschemehandler_types.QWebEngineUrlSchemeHandler =

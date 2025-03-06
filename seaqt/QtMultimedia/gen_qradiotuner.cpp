@@ -263,12 +263,12 @@ public:
 	friend void QRadioTuner_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
 
 	// Wrappers to allow calling protected methods:
-	friend void QRadioTuner_protectedbase_addPropertyWatch(bool* _dynamic_cast_ok, void* self, struct miqt_string name);
-	friend void QRadioTuner_protectedbase_removePropertyWatch(bool* _dynamic_cast_ok, void* self, struct miqt_string name);
-	friend QObject* QRadioTuner_protectedbase_sender(bool* _dynamic_cast_ok, const void* self);
-	friend int QRadioTuner_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
-	friend int QRadioTuner_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
-	friend bool QRadioTuner_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+	friend void QRadioTuner_protectedbase_addPropertyWatch(void* self, struct miqt_string name);
+	friend void QRadioTuner_protectedbase_removePropertyWatch(void* self, struct miqt_string name);
+	friend QObject* QRadioTuner_protectedbase_sender(const void* self);
+	friend int QRadioTuner_protectedbase_senderSignalIndex(const void* self);
+	friend int QRadioTuner_protectedbase_receivers(const void* self, const char* signal);
+	friend bool QRadioTuner_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
 };
 
 QRadioTuner* QRadioTuner_new(struct QRadioTuner_VTable* vtbl) {
@@ -779,81 +779,45 @@ void QRadioTuner_virtualbase_disconnectNotify(void* self, QMetaMethod* signal) {
 }
 
 const QMetaObject* QRadioTuner_staticMetaObject() { return &QRadioTuner::staticMetaObject; }
-void QRadioTuner_protectedbase_addPropertyWatch(bool* _dynamic_cast_ok, void* self, struct miqt_string name) {
-	VirtualQRadioTuner* self_cast = dynamic_cast<VirtualQRadioTuner*>( (QRadioTuner*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QRadioTuner_protectedbase_addPropertyWatch(void* self, struct miqt_string name) {
+	VirtualQRadioTuner* self_cast = static_cast<VirtualQRadioTuner*>( (QRadioTuner*)(self) );
 			QByteArray name_QByteArray(name.data, name.len);
 
 	self_cast->addPropertyWatch(name_QByteArray);
 
 }
 
-void QRadioTuner_protectedbase_removePropertyWatch(bool* _dynamic_cast_ok, void* self, struct miqt_string name) {
-	VirtualQRadioTuner* self_cast = dynamic_cast<VirtualQRadioTuner*>( (QRadioTuner*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QRadioTuner_protectedbase_removePropertyWatch(void* self, struct miqt_string name) {
+	VirtualQRadioTuner* self_cast = static_cast<VirtualQRadioTuner*>( (QRadioTuner*)(self) );
 			QByteArray name_QByteArray(name.data, name.len);
 
 	self_cast->removePropertyWatch(name_QByteArray);
 
 }
 
-QObject* QRadioTuner_protectedbase_sender(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQRadioTuner* self_cast = dynamic_cast<VirtualQRadioTuner*>( (QRadioTuner*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return nullptr;
-	}
-	
-	*_dynamic_cast_ok = true;
+QObject* QRadioTuner_protectedbase_sender(const void* self) {
+	VirtualQRadioTuner* self_cast = static_cast<VirtualQRadioTuner*>( (QRadioTuner*)(self) );
 	
 	return self_cast->sender();
 
 }
 
-int QRadioTuner_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQRadioTuner* self_cast = dynamic_cast<VirtualQRadioTuner*>( (QRadioTuner*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return 0;
-	}
-	
-	*_dynamic_cast_ok = true;
+int QRadioTuner_protectedbase_senderSignalIndex(const void* self) {
+	VirtualQRadioTuner* self_cast = static_cast<VirtualQRadioTuner*>( (QRadioTuner*)(self) );
 	
 	return self_cast->senderSignalIndex();
 
 }
 
-int QRadioTuner_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal) {
-	VirtualQRadioTuner* self_cast = dynamic_cast<VirtualQRadioTuner*>( (QRadioTuner*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return 0;
-	}
-	
-	*_dynamic_cast_ok = true;
+int QRadioTuner_protectedbase_receivers(const void* self, const char* signal) {
+	VirtualQRadioTuner* self_cast = static_cast<VirtualQRadioTuner*>( (QRadioTuner*)(self) );
 	
 	return self_cast->receivers(signal);
 
 }
 
-bool QRadioTuner_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal) {
-	VirtualQRadioTuner* self_cast = dynamic_cast<VirtualQRadioTuner*>( (QRadioTuner*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return false;
-	}
-	
-	*_dynamic_cast_ok = true;
+bool QRadioTuner_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal) {
+	VirtualQRadioTuner* self_cast = static_cast<VirtualQRadioTuner*>( (QRadioTuner*)(self) );
 	
 	return self_cast->isSignalConnected(*signal);
 

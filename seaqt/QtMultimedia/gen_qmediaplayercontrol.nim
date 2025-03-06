@@ -39,12 +39,16 @@ export gen_qmediaplayercontrol_types
 
 import
   ../QtCore/gen_qiodevice_types,
+  ../QtCore/gen_qmetaobject_types,
+  ../QtCore/gen_qobject_types,
   ../QtCore/gen_qobjectdefs_types,
   ./gen_qmediacontent_types,
   ./gen_qmediacontrol,
   ./gen_qmediatimerange_types
 export
   gen_qiodevice_types,
+  gen_qmetaobject_types,
+  gen_qobject_types,
   gen_qobjectdefs_types,
   gen_qmediacontent_types,
   gen_qmediacontrol,
@@ -111,6 +115,10 @@ proc fcQMediaPlayerControl_tr2(s: cstring, c: cstring): struct_miqt_string {.imp
 proc fcQMediaPlayerControl_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QMediaPlayerControl_tr3".}
 proc fcQMediaPlayerControl_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QMediaPlayerControl_trUtf82".}
 proc fcQMediaPlayerControl_trUtf83(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QMediaPlayerControl_trUtf83".}
+proc fcQMediaPlayerControl_protectedbase_sender(self: pointer, ): pointer {.importc: "QMediaPlayerControl_protectedbase_sender".}
+proc fcQMediaPlayerControl_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QMediaPlayerControl_protectedbase_senderSignalIndex".}
+proc fcQMediaPlayerControl_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QMediaPlayerControl_protectedbase_receivers".}
+proc fcQMediaPlayerControl_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QMediaPlayerControl_protectedbase_isSignalConnected".}
 proc fcQMediaPlayerControl_staticMetaObject(): pointer {.importc: "QMediaPlayerControl_staticMetaObject".}
 proc fcQMediaPlayerControl_delete(self: pointer) {.importc: "QMediaPlayerControl_delete".}
 
@@ -509,6 +517,18 @@ proc trUtf8*(_: type gen_qmediaplayercontrol_types.QMediaPlayerControl, s: cstri
   let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
   c_free(v_ms.data)
   vx_ret
+
+proc sender*(self: gen_qmediaplayercontrol_types.QMediaPlayerControl, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQMediaPlayerControl_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qmediaplayercontrol_types.QMediaPlayerControl, ): cint =
+  fcQMediaPlayerControl_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qmediaplayercontrol_types.QMediaPlayerControl, signal: cstring): cint =
+  fcQMediaPlayerControl_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qmediaplayercontrol_types.QMediaPlayerControl, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQMediaPlayerControl_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc staticMetaObject*(_: type gen_qmediaplayercontrol_types.QMediaPlayerControl): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQMediaPlayerControl_staticMetaObject())

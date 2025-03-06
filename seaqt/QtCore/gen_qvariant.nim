@@ -223,6 +223,10 @@ proc fcQVariant_toDouble1(self: pointer, ok: ptr bool): float64 {.importc: "QVar
 proc fcQVariant_toFloat1(self: pointer, ok: ptr bool): float32 {.importc: "QVariant_toFloat1".}
 proc fcQVariant_toReal1(self: pointer, ok: ptr bool): float64 {.importc: "QVariant_toReal1".}
 proc fcQVariant_fromValue(value: pointer): pointer {.importc: "QVariant_fromValue".}
+proc fcQVariant_protectedbase_create(self: pointer, typeVal: cint, copy: pointer): void {.importc: "QVariant_protectedbase_create".}
+proc fcQVariant_protectedbase_cmp(self: pointer, other: pointer): bool {.importc: "QVariant_protectedbase_cmp".}
+proc fcQVariant_protectedbase_compare(self: pointer, other: pointer): cint {.importc: "QVariant_protectedbase_compare".}
+proc fcQVariant_protectedbase_convert2(self: pointer, t: cint, ptrVal: pointer): bool {.importc: "QVariant_protectedbase_convert2".}
 proc fcQVariant_new(): ptr cQVariant {.importc: "QVariant_new".}
 proc fcQVariant_new2(typeVal: cint): ptr cQVariant {.importc: "QVariant_new2".}
 proc fcQVariant_new3(typeId: cint, copy: pointer): ptr cQVariant {.importc: "QVariant_new3".}
@@ -555,6 +559,18 @@ proc toReal*(self: gen_qvariant_types.QVariant, ok: ptr bool): float64 =
 
 proc fromValue*(_: type gen_qvariant_types.QVariant, value: gen_qobject_types.QObject): gen_qvariant_types.QVariant =
   gen_qvariant_types.QVariant(h: fcQVariant_fromValue(value.h))
+
+proc create*(self: gen_qvariant_types.QVariant, typeVal: cint, copy: pointer): void =
+  fcQVariant_protectedbase_create(self.h, typeVal, copy)
+
+proc cmp*(self: gen_qvariant_types.QVariant, other: gen_qvariant_types.QVariant): bool =
+  fcQVariant_protectedbase_cmp(self.h, other.h)
+
+proc compare*(self: gen_qvariant_types.QVariant, other: gen_qvariant_types.QVariant): cint =
+  fcQVariant_protectedbase_compare(self.h, other.h)
+
+proc convert*(self: gen_qvariant_types.QVariant, t: cint, ptrVal: pointer): bool =
+  fcQVariant_protectedbase_convert2(self.h, t, ptrVal)
 
 proc create*(T: type gen_qvariant_types.QVariant): gen_qvariant_types.QVariant =
   gen_qvariant_types.QVariant(h: fcQVariant_new())

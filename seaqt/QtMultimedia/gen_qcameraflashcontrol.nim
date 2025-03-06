@@ -38,9 +38,13 @@ import ./gen_qcameraflashcontrol_types
 export gen_qcameraflashcontrol_types
 
 import
+  ../QtCore/gen_qmetaobject_types,
+  ../QtCore/gen_qobject_types,
   ../QtCore/gen_qobjectdefs_types,
   ./gen_qmediacontrol
 export
+  gen_qmetaobject_types,
+  gen_qobject_types,
   gen_qobjectdefs_types,
   gen_qmediacontrol
 
@@ -61,6 +65,10 @@ proc fcQCameraFlashControl_tr2(s: cstring, c: cstring): struct_miqt_string {.imp
 proc fcQCameraFlashControl_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QCameraFlashControl_tr3".}
 proc fcQCameraFlashControl_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QCameraFlashControl_trUtf82".}
 proc fcQCameraFlashControl_trUtf83(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QCameraFlashControl_trUtf83".}
+proc fcQCameraFlashControl_protectedbase_sender(self: pointer, ): pointer {.importc: "QCameraFlashControl_protectedbase_sender".}
+proc fcQCameraFlashControl_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QCameraFlashControl_protectedbase_senderSignalIndex".}
+proc fcQCameraFlashControl_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QCameraFlashControl_protectedbase_receivers".}
+proc fcQCameraFlashControl_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QCameraFlashControl_protectedbase_isSignalConnected".}
 proc fcQCameraFlashControl_staticMetaObject(): pointer {.importc: "QCameraFlashControl_staticMetaObject".}
 proc fcQCameraFlashControl_delete(self: pointer) {.importc: "QCameraFlashControl_delete".}
 
@@ -140,6 +148,18 @@ proc trUtf8*(_: type gen_qcameraflashcontrol_types.QCameraFlashControl, s: cstri
   let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
   c_free(v_ms.data)
   vx_ret
+
+proc sender*(self: gen_qcameraflashcontrol_types.QCameraFlashControl, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQCameraFlashControl_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qcameraflashcontrol_types.QCameraFlashControl, ): cint =
+  fcQCameraFlashControl_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qcameraflashcontrol_types.QCameraFlashControl, signal: cstring): cint =
+  fcQCameraFlashControl_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qcameraflashcontrol_types.QCameraFlashControl, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQCameraFlashControl_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc staticMetaObject*(_: type gen_qcameraflashcontrol_types.QCameraFlashControl): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQCameraFlashControl_staticMetaObject())

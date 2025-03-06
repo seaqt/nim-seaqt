@@ -38,9 +38,13 @@ import ./gen_qmediaavailabilitycontrol_types
 export gen_qmediaavailabilitycontrol_types
 
 import
+  ../QtCore/gen_qmetaobject_types,
+  ../QtCore/gen_qobject_types,
   ../QtCore/gen_qobjectdefs_types,
   ./gen_qmediacontrol
 export
+  gen_qmetaobject_types,
+  gen_qobject_types,
   gen_qobjectdefs_types,
   gen_qmediacontrol
 
@@ -58,6 +62,10 @@ proc fcQMediaAvailabilityControl_tr2(s: cstring, c: cstring): struct_miqt_string
 proc fcQMediaAvailabilityControl_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QMediaAvailabilityControl_tr3".}
 proc fcQMediaAvailabilityControl_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QMediaAvailabilityControl_trUtf82".}
 proc fcQMediaAvailabilityControl_trUtf83(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QMediaAvailabilityControl_trUtf83".}
+proc fcQMediaAvailabilityControl_protectedbase_sender(self: pointer, ): pointer {.importc: "QMediaAvailabilityControl_protectedbase_sender".}
+proc fcQMediaAvailabilityControl_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QMediaAvailabilityControl_protectedbase_senderSignalIndex".}
+proc fcQMediaAvailabilityControl_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QMediaAvailabilityControl_protectedbase_receivers".}
+proc fcQMediaAvailabilityControl_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QMediaAvailabilityControl_protectedbase_isSignalConnected".}
 proc fcQMediaAvailabilityControl_staticMetaObject(): pointer {.importc: "QMediaAvailabilityControl_staticMetaObject".}
 proc fcQMediaAvailabilityControl_delete(self: pointer) {.importc: "QMediaAvailabilityControl_delete".}
 
@@ -128,6 +136,18 @@ proc trUtf8*(_: type gen_qmediaavailabilitycontrol_types.QMediaAvailabilityContr
   let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
   c_free(v_ms.data)
   vx_ret
+
+proc sender*(self: gen_qmediaavailabilitycontrol_types.QMediaAvailabilityControl, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQMediaAvailabilityControl_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qmediaavailabilitycontrol_types.QMediaAvailabilityControl, ): cint =
+  fcQMediaAvailabilityControl_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qmediaavailabilitycontrol_types.QMediaAvailabilityControl, signal: cstring): cint =
+  fcQMediaAvailabilityControl_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qmediaavailabilitycontrol_types.QMediaAvailabilityControl, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQMediaAvailabilityControl_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc staticMetaObject*(_: type gen_qmediaavailabilitycontrol_types.QMediaAvailabilityControl): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQMediaAvailabilityControl_staticMetaObject())

@@ -155,6 +155,10 @@ proc fcQCameraImageCapture_virtualbase_childEvent(self: pointer, event: pointer)
 proc fcQCameraImageCapture_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QCameraImageCapture_virtualbase_customEvent".}
 proc fcQCameraImageCapture_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QCameraImageCapture_virtualbase_connectNotify".}
 proc fcQCameraImageCapture_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QCameraImageCapture_virtualbase_disconnectNotify".}
+proc fcQCameraImageCapture_protectedbase_sender(self: pointer, ): pointer {.importc: "QCameraImageCapture_protectedbase_sender".}
+proc fcQCameraImageCapture_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QCameraImageCapture_protectedbase_senderSignalIndex".}
+proc fcQCameraImageCapture_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QCameraImageCapture_protectedbase_receivers".}
+proc fcQCameraImageCapture_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QCameraImageCapture_protectedbase_isSignalConnected".}
 proc fcQCameraImageCapture_new(vtbl: pointer, mediaObject: pointer): ptr cQCameraImageCapture {.importc: "QCameraImageCapture_new".}
 proc fcQCameraImageCapture_new2(vtbl: pointer, mediaObject: pointer, parent: pointer): ptr cQCameraImageCapture {.importc: "QCameraImageCapture_new2".}
 proc fcQCameraImageCapture_staticMetaObject(): pointer {.importc: "QCameraImageCapture_staticMetaObject".}
@@ -649,6 +653,18 @@ proc miqt_exec_callback_cQCameraImageCapture_disconnectNotify(vtbl: pointer, sel
   let self = QCameraImageCapture(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
   vtbl[].disconnectNotify(self, slotval1)
+
+proc sender*(self: gen_qcameraimagecapture_types.QCameraImageCapture, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQCameraImageCapture_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qcameraimagecapture_types.QCameraImageCapture, ): cint =
+  fcQCameraImageCapture_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qcameraimagecapture_types.QCameraImageCapture, signal: cstring): cint =
+  fcQCameraImageCapture_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qcameraimagecapture_types.QCameraImageCapture, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQCameraImageCapture_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc create*(T: type gen_qcameraimagecapture_types.QCameraImageCapture,
     mediaObject: gen_qmediaobject_types.QMediaObject,

@@ -46,6 +46,7 @@ import
   ../QtCore/gen_qpoint_types,
   ../QtCore/gen_qsize_types,
   ./gen_qpagedpaintdevice_types,
+  ./gen_qpagelayout_types,
   ./gen_qpaintdevice_types,
   ./gen_qpaintengine_types,
   ./gen_qpainter_types
@@ -58,6 +59,7 @@ export
   gen_qpoint_types,
   gen_qsize_types,
   gen_qpagedpaintdevice_types,
+  gen_qpagelayout_types,
   gen_qpaintdevice_types,
   gen_qpaintengine_types,
   gen_qpainter_types
@@ -131,6 +133,11 @@ proc fcQPdfWriter_virtualbase_devType(self: pointer, ): cint {.importc: "QPdfWri
 proc fcQPdfWriter_virtualbase_initPainter(self: pointer, painter: pointer): void {.importc: "QPdfWriter_virtualbase_initPainter".}
 proc fcQPdfWriter_virtualbase_redirected(self: pointer, offset: pointer): pointer {.importc: "QPdfWriter_virtualbase_redirected".}
 proc fcQPdfWriter_virtualbase_sharedPainter(self: pointer, ): pointer {.importc: "QPdfWriter_virtualbase_sharedPainter".}
+proc fcQPdfWriter_protectedbase_sender(self: pointer, ): pointer {.importc: "QPdfWriter_protectedbase_sender".}
+proc fcQPdfWriter_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QPdfWriter_protectedbase_senderSignalIndex".}
+proc fcQPdfWriter_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QPdfWriter_protectedbase_receivers".}
+proc fcQPdfWriter_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QPdfWriter_protectedbase_isSignalConnected".}
+proc fcQPdfWriter_protectedbase_devicePageLayout(self: pointer, ): pointer {.importc: "QPdfWriter_protectedbase_devicePageLayout".}
 proc fcQPdfWriter_new(vtbl: pointer, filename: struct_miqt_string): ptr cQPdfWriter {.importc: "QPdfWriter_new".}
 proc fcQPdfWriter_new2(vtbl: pointer, device: pointer): ptr cQPdfWriter {.importc: "QPdfWriter_new2".}
 proc fcQPdfWriter_staticMetaObject(): pointer {.importc: "QPdfWriter_staticMetaObject".}
@@ -468,6 +475,21 @@ proc miqt_exec_callback_cQPdfWriter_sharedPainter(vtbl: pointer, self: pointer):
   let self = QPdfWriter(h: self)
   var virtualReturn = vtbl[].sharedPainter(self)
   virtualReturn.h
+
+proc sender*(self: gen_qpdfwriter_types.QPdfWriter, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQPdfWriter_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qpdfwriter_types.QPdfWriter, ): cint =
+  fcQPdfWriter_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qpdfwriter_types.QPdfWriter, signal: cstring): cint =
+  fcQPdfWriter_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qpdfwriter_types.QPdfWriter, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQPdfWriter_protectedbase_isSignalConnected(self.h, signal.h)
+
+proc devicePageLayout*(self: gen_qpdfwriter_types.QPdfWriter, ): gen_qpagelayout_types.QPageLayout =
+  gen_qpagelayout_types.QPageLayout(h: fcQPdfWriter_protectedbase_devicePageLayout(self.h))
 
 proc create*(T: type gen_qpdfwriter_types.QPdfWriter,
     filename: string,

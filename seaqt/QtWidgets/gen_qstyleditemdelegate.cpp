@@ -440,10 +440,10 @@ public:
 	friend void QStyledItemDelegate_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
 
 	// Wrappers to allow calling protected methods:
-	friend QObject* QStyledItemDelegate_protectedbase_sender(bool* _dynamic_cast_ok, const void* self);
-	friend int QStyledItemDelegate_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
-	friend int QStyledItemDelegate_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
-	friend bool QStyledItemDelegate_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+	friend QObject* QStyledItemDelegate_protectedbase_sender(const void* self);
+	friend int QStyledItemDelegate_protectedbase_senderSignalIndex(const void* self);
+	friend int QStyledItemDelegate_protectedbase_receivers(const void* self, const char* signal);
+	friend bool QStyledItemDelegate_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
 };
 
 QStyledItemDelegate* QStyledItemDelegate_new(struct QStyledItemDelegate_VTable* vtbl) {
@@ -728,53 +728,29 @@ void QStyledItemDelegate_virtualbase_disconnectNotify(void* self, QMetaMethod* s
 }
 
 const QMetaObject* QStyledItemDelegate_staticMetaObject() { return &QStyledItemDelegate::staticMetaObject; }
-QObject* QStyledItemDelegate_protectedbase_sender(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQStyledItemDelegate* self_cast = dynamic_cast<VirtualQStyledItemDelegate*>( (QStyledItemDelegate*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return nullptr;
-	}
-	
-	*_dynamic_cast_ok = true;
+QObject* QStyledItemDelegate_protectedbase_sender(const void* self) {
+	VirtualQStyledItemDelegate* self_cast = static_cast<VirtualQStyledItemDelegate*>( (QStyledItemDelegate*)(self) );
 	
 	return self_cast->sender();
 
 }
 
-int QStyledItemDelegate_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQStyledItemDelegate* self_cast = dynamic_cast<VirtualQStyledItemDelegate*>( (QStyledItemDelegate*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return 0;
-	}
-	
-	*_dynamic_cast_ok = true;
+int QStyledItemDelegate_protectedbase_senderSignalIndex(const void* self) {
+	VirtualQStyledItemDelegate* self_cast = static_cast<VirtualQStyledItemDelegate*>( (QStyledItemDelegate*)(self) );
 	
 	return self_cast->senderSignalIndex();
 
 }
 
-int QStyledItemDelegate_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal) {
-	VirtualQStyledItemDelegate* self_cast = dynamic_cast<VirtualQStyledItemDelegate*>( (QStyledItemDelegate*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return 0;
-	}
-	
-	*_dynamic_cast_ok = true;
+int QStyledItemDelegate_protectedbase_receivers(const void* self, const char* signal) {
+	VirtualQStyledItemDelegate* self_cast = static_cast<VirtualQStyledItemDelegate*>( (QStyledItemDelegate*)(self) );
 	
 	return self_cast->receivers(signal);
 
 }
 
-bool QStyledItemDelegate_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal) {
-	VirtualQStyledItemDelegate* self_cast = dynamic_cast<VirtualQStyledItemDelegate*>( (QStyledItemDelegate*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return false;
-	}
-	
-	*_dynamic_cast_ok = true;
+bool QStyledItemDelegate_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal) {
+	VirtualQStyledItemDelegate* self_cast = static_cast<VirtualQStyledItemDelegate*>( (QStyledItemDelegate*)(self) );
 	
 	return self_cast->isSignalConnected(*signal);
 

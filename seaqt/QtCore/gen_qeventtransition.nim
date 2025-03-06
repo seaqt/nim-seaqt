@@ -93,6 +93,10 @@ proc fcQEventTransition_virtualbase_childEvent(self: pointer, event: pointer): v
 proc fcQEventTransition_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QEventTransition_virtualbase_customEvent".}
 proc fcQEventTransition_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QEventTransition_virtualbase_connectNotify".}
 proc fcQEventTransition_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QEventTransition_virtualbase_disconnectNotify".}
+proc fcQEventTransition_protectedbase_sender(self: pointer, ): pointer {.importc: "QEventTransition_protectedbase_sender".}
+proc fcQEventTransition_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QEventTransition_protectedbase_senderSignalIndex".}
+proc fcQEventTransition_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QEventTransition_protectedbase_receivers".}
+proc fcQEventTransition_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QEventTransition_protectedbase_isSignalConnected".}
 proc fcQEventTransition_new(vtbl: pointer, ): ptr cQEventTransition {.importc: "QEventTransition_new".}
 proc fcQEventTransition_new2(vtbl: pointer, objectVal: pointer, typeVal: cint): ptr cQEventTransition {.importc: "QEventTransition_new2".}
 proc fcQEventTransition_new3(vtbl: pointer, sourceState: pointer): ptr cQEventTransition {.importc: "QEventTransition_new3".}
@@ -298,6 +302,18 @@ proc miqt_exec_callback_cQEventTransition_disconnectNotify(vtbl: pointer, self: 
   let self = QEventTransition(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
   vtbl[].disconnectNotify(self, slotval1)
+
+proc sender*(self: gen_qeventtransition_types.QEventTransition, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQEventTransition_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qeventtransition_types.QEventTransition, ): cint =
+  fcQEventTransition_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qeventtransition_types.QEventTransition, signal: cstring): cint =
+  fcQEventTransition_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qeventtransition_types.QEventTransition, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQEventTransition_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc create*(T: type gen_qeventtransition_types.QEventTransition,
     vtbl: ref QEventTransitionVTable = nil): gen_qeventtransition_types.QEventTransition =

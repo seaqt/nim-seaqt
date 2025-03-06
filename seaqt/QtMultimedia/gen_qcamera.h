@@ -163,12 +163,12 @@ void QCamera_virtualbase_childEvent(void* self, QChildEvent* event);
 void QCamera_virtualbase_customEvent(void* self, QEvent* event);
 void QCamera_virtualbase_connectNotify(void* self, QMetaMethod* signal);
 void QCamera_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
-void QCamera_protectedbase_addPropertyWatch(bool* _dynamic_cast_ok, void* self, struct miqt_string name);
-void QCamera_protectedbase_removePropertyWatch(bool* _dynamic_cast_ok, void* self, struct miqt_string name);
-QObject* QCamera_protectedbase_sender(bool* _dynamic_cast_ok, const void* self);
-int QCamera_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
-int QCamera_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
-bool QCamera_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+void QCamera_protectedbase_addPropertyWatch(void* self, struct miqt_string name);
+void QCamera_protectedbase_removePropertyWatch(void* self, struct miqt_string name);
+QObject* QCamera_protectedbase_sender(const void* self);
+int QCamera_protectedbase_senderSignalIndex(const void* self);
+int QCamera_protectedbase_receivers(const void* self, const char* signal);
+bool QCamera_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
 const QMetaObject* QCamera_staticMetaObject();
 void QCamera_delete(QCamera* self);
 

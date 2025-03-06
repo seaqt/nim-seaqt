@@ -90,6 +90,10 @@ proc fcQAccessibleBridgePlugin_virtualbase_childEvent(self: pointer, event: poin
 proc fcQAccessibleBridgePlugin_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QAccessibleBridgePlugin_virtualbase_customEvent".}
 proc fcQAccessibleBridgePlugin_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QAccessibleBridgePlugin_virtualbase_connectNotify".}
 proc fcQAccessibleBridgePlugin_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QAccessibleBridgePlugin_virtualbase_disconnectNotify".}
+proc fcQAccessibleBridgePlugin_protectedbase_sender(self: pointer, ): pointer {.importc: "QAccessibleBridgePlugin_protectedbase_sender".}
+proc fcQAccessibleBridgePlugin_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QAccessibleBridgePlugin_protectedbase_senderSignalIndex".}
+proc fcQAccessibleBridgePlugin_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QAccessibleBridgePlugin_protectedbase_receivers".}
+proc fcQAccessibleBridgePlugin_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QAccessibleBridgePlugin_protectedbase_isSignalConnected".}
 proc fcQAccessibleBridgePlugin_new(vtbl: pointer, ): ptr cQAccessibleBridgePlugin {.importc: "QAccessibleBridgePlugin_new".}
 proc fcQAccessibleBridgePlugin_new2(vtbl: pointer, parent: pointer): ptr cQAccessibleBridgePlugin {.importc: "QAccessibleBridgePlugin_new2".}
 proc fcQAccessibleBridgePlugin_staticMetaObject(): pointer {.importc: "QAccessibleBridgePlugin_staticMetaObject".}
@@ -284,6 +288,18 @@ proc miqt_exec_callback_cQAccessibleBridgePlugin_disconnectNotify(vtbl: pointer,
   let self = QAccessibleBridgePlugin(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
   vtbl[].disconnectNotify(self, slotval1)
+
+proc sender*(self: gen_qaccessiblebridge_types.QAccessibleBridgePlugin, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQAccessibleBridgePlugin_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qaccessiblebridge_types.QAccessibleBridgePlugin, ): cint =
+  fcQAccessibleBridgePlugin_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qaccessiblebridge_types.QAccessibleBridgePlugin, signal: cstring): cint =
+  fcQAccessibleBridgePlugin_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qaccessiblebridge_types.QAccessibleBridgePlugin, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQAccessibleBridgePlugin_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc create*(T: type gen_qaccessiblebridge_types.QAccessibleBridgePlugin,
     vtbl: ref QAccessibleBridgePluginVTable = nil): gen_qaccessiblebridge_types.QAccessibleBridgePlugin =

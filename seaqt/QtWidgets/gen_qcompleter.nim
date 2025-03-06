@@ -147,6 +147,10 @@ proc fcQCompleter_virtualbase_childEvent(self: pointer, event: pointer): void {.
 proc fcQCompleter_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QCompleter_virtualbase_customEvent".}
 proc fcQCompleter_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QCompleter_virtualbase_connectNotify".}
 proc fcQCompleter_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QCompleter_virtualbase_disconnectNotify".}
+proc fcQCompleter_protectedbase_sender(self: pointer, ): pointer {.importc: "QCompleter_protectedbase_sender".}
+proc fcQCompleter_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QCompleter_protectedbase_senderSignalIndex".}
+proc fcQCompleter_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QCompleter_protectedbase_receivers".}
+proc fcQCompleter_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QCompleter_protectedbase_isSignalConnected".}
 proc fcQCompleter_new(vtbl: pointer, ): ptr cQCompleter {.importc: "QCompleter_new".}
 proc fcQCompleter_new2(vtbl: pointer, model: pointer): ptr cQCompleter {.importc: "QCompleter_new2".}
 proc fcQCompleter_new3(vtbl: pointer, completions: struct_miqt_array): ptr cQCompleter {.importc: "QCompleter_new3".}
@@ -566,6 +570,18 @@ proc miqt_exec_callback_cQCompleter_disconnectNotify(vtbl: pointer, self: pointe
   let self = QCompleter(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
   vtbl[].disconnectNotify(self, slotval1)
+
+proc sender*(self: gen_qcompleter_types.QCompleter, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQCompleter_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qcompleter_types.QCompleter, ): cint =
+  fcQCompleter_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qcompleter_types.QCompleter, signal: cstring): cint =
+  fcQCompleter_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qcompleter_types.QCompleter, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQCompleter_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc create*(T: type gen_qcompleter_types.QCompleter,
     vtbl: ref QCompleterVTable = nil): gen_qcompleter_types.QCompleter =

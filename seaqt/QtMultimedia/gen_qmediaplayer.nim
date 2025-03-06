@@ -218,6 +218,12 @@ proc fcQMediaPlayer_virtualbase_childEvent(self: pointer, event: pointer): void 
 proc fcQMediaPlayer_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QMediaPlayer_virtualbase_customEvent".}
 proc fcQMediaPlayer_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QMediaPlayer_virtualbase_connectNotify".}
 proc fcQMediaPlayer_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QMediaPlayer_virtualbase_disconnectNotify".}
+proc fcQMediaPlayer_protectedbase_addPropertyWatch(self: pointer, name: struct_miqt_string): void {.importc: "QMediaPlayer_protectedbase_addPropertyWatch".}
+proc fcQMediaPlayer_protectedbase_removePropertyWatch(self: pointer, name: struct_miqt_string): void {.importc: "QMediaPlayer_protectedbase_removePropertyWatch".}
+proc fcQMediaPlayer_protectedbase_sender(self: pointer, ): pointer {.importc: "QMediaPlayer_protectedbase_sender".}
+proc fcQMediaPlayer_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QMediaPlayer_protectedbase_senderSignalIndex".}
+proc fcQMediaPlayer_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QMediaPlayer_protectedbase_receivers".}
+proc fcQMediaPlayer_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QMediaPlayer_protectedbase_isSignalConnected".}
 proc fcQMediaPlayer_new(vtbl: pointer, ): ptr cQMediaPlayer {.importc: "QMediaPlayer_new".}
 proc fcQMediaPlayer_new2(vtbl: pointer, parent: pointer): ptr cQMediaPlayer {.importc: "QMediaPlayer_new2".}
 proc fcQMediaPlayer_new3(vtbl: pointer, parent: pointer, flags: cint): ptr cQMediaPlayer {.importc: "QMediaPlayer_new3".}
@@ -972,6 +978,24 @@ proc miqt_exec_callback_cQMediaPlayer_disconnectNotify(vtbl: pointer, self: poin
   let self = QMediaPlayer(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
   vtbl[].disconnectNotify(self, slotval1)
+
+proc addPropertyWatch*(self: gen_qmediaplayer_types.QMediaPlayer, name: seq[byte]): void =
+  fcQMediaPlayer_protectedbase_addPropertyWatch(self.h, struct_miqt_string(data: cast[cstring](if len(name) == 0: nil else: unsafeAddr name[0]), len: csize_t(len(name))))
+
+proc removePropertyWatch*(self: gen_qmediaplayer_types.QMediaPlayer, name: seq[byte]): void =
+  fcQMediaPlayer_protectedbase_removePropertyWatch(self.h, struct_miqt_string(data: cast[cstring](if len(name) == 0: nil else: unsafeAddr name[0]), len: csize_t(len(name))))
+
+proc sender*(self: gen_qmediaplayer_types.QMediaPlayer, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQMediaPlayer_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qmediaplayer_types.QMediaPlayer, ): cint =
+  fcQMediaPlayer_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qmediaplayer_types.QMediaPlayer, signal: cstring): cint =
+  fcQMediaPlayer_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qmediaplayer_types.QMediaPlayer, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQMediaPlayer_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc create*(T: type gen_qmediaplayer_types.QMediaPlayer,
     vtbl: ref QMediaPlayerVTable = nil): gen_qmediaplayer_types.QMediaPlayer =

@@ -209,6 +209,15 @@ proc fcQVideoWidget_virtualbase_childEvent(self: pointer, event: pointer): void 
 proc fcQVideoWidget_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QVideoWidget_virtualbase_customEvent".}
 proc fcQVideoWidget_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QVideoWidget_virtualbase_connectNotify".}
 proc fcQVideoWidget_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QVideoWidget_virtualbase_disconnectNotify".}
+proc fcQVideoWidget_protectedbase_updateMicroFocus(self: pointer, ): void {.importc: "QVideoWidget_protectedbase_updateMicroFocus".}
+proc fcQVideoWidget_protectedbase_create(self: pointer, ): void {.importc: "QVideoWidget_protectedbase_create".}
+proc fcQVideoWidget_protectedbase_destroy(self: pointer, ): void {.importc: "QVideoWidget_protectedbase_destroy".}
+proc fcQVideoWidget_protectedbase_focusNextChild(self: pointer, ): bool {.importc: "QVideoWidget_protectedbase_focusNextChild".}
+proc fcQVideoWidget_protectedbase_focusPreviousChild(self: pointer, ): bool {.importc: "QVideoWidget_protectedbase_focusPreviousChild".}
+proc fcQVideoWidget_protectedbase_sender(self: pointer, ): pointer {.importc: "QVideoWidget_protectedbase_sender".}
+proc fcQVideoWidget_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QVideoWidget_protectedbase_senderSignalIndex".}
+proc fcQVideoWidget_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QVideoWidget_protectedbase_receivers".}
+proc fcQVideoWidget_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QVideoWidget_protectedbase_isSignalConnected".}
 proc fcQVideoWidget_new(vtbl: pointer, parent: pointer): ptr cQVideoWidget {.importc: "QVideoWidget_new".}
 proc fcQVideoWidget_new2(vtbl: pointer, ): ptr cQVideoWidget {.importc: "QVideoWidget_new2".}
 proc fcQVideoWidget_staticMetaObject(): pointer {.importc: "QVideoWidget_staticMetaObject".}
@@ -993,6 +1002,33 @@ proc miqt_exec_callback_cQVideoWidget_disconnectNotify(vtbl: pointer, self: poin
   let self = QVideoWidget(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
   vtbl[].disconnectNotify(self, slotval1)
+
+proc updateMicroFocus*(self: gen_qvideowidget_types.QVideoWidget, ): void =
+  fcQVideoWidget_protectedbase_updateMicroFocus(self.h)
+
+proc create*(self: gen_qvideowidget_types.QVideoWidget, ): void =
+  fcQVideoWidget_protectedbase_create(self.h)
+
+proc destroy*(self: gen_qvideowidget_types.QVideoWidget, ): void =
+  fcQVideoWidget_protectedbase_destroy(self.h)
+
+proc focusNextChild*(self: gen_qvideowidget_types.QVideoWidget, ): bool =
+  fcQVideoWidget_protectedbase_focusNextChild(self.h)
+
+proc focusPreviousChild*(self: gen_qvideowidget_types.QVideoWidget, ): bool =
+  fcQVideoWidget_protectedbase_focusPreviousChild(self.h)
+
+proc sender*(self: gen_qvideowidget_types.QVideoWidget, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQVideoWidget_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qvideowidget_types.QVideoWidget, ): cint =
+  fcQVideoWidget_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qvideowidget_types.QVideoWidget, signal: cstring): cint =
+  fcQVideoWidget_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qvideowidget_types.QVideoWidget, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQVideoWidget_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc create*(T: type gen_qvideowidget_types.QVideoWidget,
     parent: gen_qwidget_types.QWidget,

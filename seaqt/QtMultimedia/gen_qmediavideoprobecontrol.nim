@@ -38,10 +38,14 @@ import ./gen_qmediavideoprobecontrol_types
 export gen_qmediavideoprobecontrol_types
 
 import
+  ../QtCore/gen_qmetaobject_types,
+  ../QtCore/gen_qobject_types,
   ../QtCore/gen_qobjectdefs_types,
   ./gen_qmediacontrol,
   ./gen_qvideoframe_types
 export
+  gen_qmetaobject_types,
+  gen_qobject_types,
   gen_qobjectdefs_types,
   gen_qmediacontrol,
   gen_qvideoframe_types
@@ -61,6 +65,10 @@ proc fcQMediaVideoProbeControl_tr2(s: cstring, c: cstring): struct_miqt_string {
 proc fcQMediaVideoProbeControl_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QMediaVideoProbeControl_tr3".}
 proc fcQMediaVideoProbeControl_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QMediaVideoProbeControl_trUtf82".}
 proc fcQMediaVideoProbeControl_trUtf83(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QMediaVideoProbeControl_trUtf83".}
+proc fcQMediaVideoProbeControl_protectedbase_sender(self: pointer, ): pointer {.importc: "QMediaVideoProbeControl_protectedbase_sender".}
+proc fcQMediaVideoProbeControl_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QMediaVideoProbeControl_protectedbase_senderSignalIndex".}
+proc fcQMediaVideoProbeControl_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QMediaVideoProbeControl_protectedbase_receivers".}
+proc fcQMediaVideoProbeControl_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QMediaVideoProbeControl_protectedbase_isSignalConnected".}
 proc fcQMediaVideoProbeControl_staticMetaObject(): pointer {.importc: "QMediaVideoProbeControl_staticMetaObject".}
 proc fcQMediaVideoProbeControl_delete(self: pointer) {.importc: "QMediaVideoProbeControl_delete".}
 
@@ -146,6 +154,18 @@ proc trUtf8*(_: type gen_qmediavideoprobecontrol_types.QMediaVideoProbeControl, 
   let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
   c_free(v_ms.data)
   vx_ret
+
+proc sender*(self: gen_qmediavideoprobecontrol_types.QMediaVideoProbeControl, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQMediaVideoProbeControl_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qmediavideoprobecontrol_types.QMediaVideoProbeControl, ): cint =
+  fcQMediaVideoProbeControl_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qmediavideoprobecontrol_types.QMediaVideoProbeControl, signal: cstring): cint =
+  fcQMediaVideoProbeControl_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qmediavideoprobecontrol_types.QMediaVideoProbeControl, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQMediaVideoProbeControl_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc staticMetaObject*(_: type gen_qmediavideoprobecontrol_types.QMediaVideoProbeControl): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQMediaVideoProbeControl_staticMetaObject())

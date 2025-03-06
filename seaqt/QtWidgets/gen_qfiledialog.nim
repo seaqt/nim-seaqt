@@ -354,6 +354,16 @@ proc fcQFileDialog_virtualbase_childEvent(self: pointer, event: pointer): void {
 proc fcQFileDialog_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QFileDialog_virtualbase_customEvent".}
 proc fcQFileDialog_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QFileDialog_virtualbase_connectNotify".}
 proc fcQFileDialog_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QFileDialog_virtualbase_disconnectNotify".}
+proc fcQFileDialog_protectedbase_adjustPosition(self: pointer, param1: pointer): void {.importc: "QFileDialog_protectedbase_adjustPosition".}
+proc fcQFileDialog_protectedbase_updateMicroFocus(self: pointer, ): void {.importc: "QFileDialog_protectedbase_updateMicroFocus".}
+proc fcQFileDialog_protectedbase_create(self: pointer, ): void {.importc: "QFileDialog_protectedbase_create".}
+proc fcQFileDialog_protectedbase_destroy(self: pointer, ): void {.importc: "QFileDialog_protectedbase_destroy".}
+proc fcQFileDialog_protectedbase_focusNextChild(self: pointer, ): bool {.importc: "QFileDialog_protectedbase_focusNextChild".}
+proc fcQFileDialog_protectedbase_focusPreviousChild(self: pointer, ): bool {.importc: "QFileDialog_protectedbase_focusPreviousChild".}
+proc fcQFileDialog_protectedbase_sender(self: pointer, ): pointer {.importc: "QFileDialog_protectedbase_sender".}
+proc fcQFileDialog_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QFileDialog_protectedbase_senderSignalIndex".}
+proc fcQFileDialog_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QFileDialog_protectedbase_receivers".}
+proc fcQFileDialog_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QFileDialog_protectedbase_isSignalConnected".}
 proc fcQFileDialog_new(vtbl: pointer, parent: pointer): ptr cQFileDialog {.importc: "QFileDialog_new".}
 proc fcQFileDialog_new2(vtbl: pointer, parent: pointer, f: cint): ptr cQFileDialog {.importc: "QFileDialog_new2".}
 proc fcQFileDialog_new3(vtbl: pointer, ): ptr cQFileDialog {.importc: "QFileDialog_new3".}
@@ -1741,6 +1751,36 @@ proc miqt_exec_callback_cQFileDialog_disconnectNotify(vtbl: pointer, self: point
   let self = QFileDialog(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
   vtbl[].disconnectNotify(self, slotval1)
+
+proc adjustPosition*(self: gen_qfiledialog_types.QFileDialog, param1: gen_qwidget_types.QWidget): void =
+  fcQFileDialog_protectedbase_adjustPosition(self.h, param1.h)
+
+proc updateMicroFocus*(self: gen_qfiledialog_types.QFileDialog, ): void =
+  fcQFileDialog_protectedbase_updateMicroFocus(self.h)
+
+proc create*(self: gen_qfiledialog_types.QFileDialog, ): void =
+  fcQFileDialog_protectedbase_create(self.h)
+
+proc destroy*(self: gen_qfiledialog_types.QFileDialog, ): void =
+  fcQFileDialog_protectedbase_destroy(self.h)
+
+proc focusNextChild*(self: gen_qfiledialog_types.QFileDialog, ): bool =
+  fcQFileDialog_protectedbase_focusNextChild(self.h)
+
+proc focusPreviousChild*(self: gen_qfiledialog_types.QFileDialog, ): bool =
+  fcQFileDialog_protectedbase_focusPreviousChild(self.h)
+
+proc sender*(self: gen_qfiledialog_types.QFileDialog, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQFileDialog_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qfiledialog_types.QFileDialog, ): cint =
+  fcQFileDialog_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qfiledialog_types.QFileDialog, signal: cstring): cint =
+  fcQFileDialog_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qfiledialog_types.QFileDialog, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQFileDialog_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc create*(T: type gen_qfiledialog_types.QFileDialog,
     parent: gen_qwidget_types.QWidget,

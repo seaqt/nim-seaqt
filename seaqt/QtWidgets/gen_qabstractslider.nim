@@ -233,6 +233,19 @@ proc fcQAbstractSlider_virtualbase_childEvent(self: pointer, event: pointer): vo
 proc fcQAbstractSlider_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QAbstractSlider_virtualbase_customEvent".}
 proc fcQAbstractSlider_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QAbstractSlider_virtualbase_connectNotify".}
 proc fcQAbstractSlider_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QAbstractSlider_virtualbase_disconnectNotify".}
+proc fcQAbstractSlider_protectedbase_setRepeatAction(self: pointer, action: cint): void {.importc: "QAbstractSlider_protectedbase_setRepeatAction".}
+proc fcQAbstractSlider_protectedbase_repeatAction(self: pointer, ): cint {.importc: "QAbstractSlider_protectedbase_repeatAction".}
+proc fcQAbstractSlider_protectedbase_setRepeatAction2(self: pointer, action: cint, thresholdTime: cint): void {.importc: "QAbstractSlider_protectedbase_setRepeatAction2".}
+proc fcQAbstractSlider_protectedbase_setRepeatAction3(self: pointer, action: cint, thresholdTime: cint, repeatTime: cint): void {.importc: "QAbstractSlider_protectedbase_setRepeatAction3".}
+proc fcQAbstractSlider_protectedbase_updateMicroFocus(self: pointer, ): void {.importc: "QAbstractSlider_protectedbase_updateMicroFocus".}
+proc fcQAbstractSlider_protectedbase_create(self: pointer, ): void {.importc: "QAbstractSlider_protectedbase_create".}
+proc fcQAbstractSlider_protectedbase_destroy(self: pointer, ): void {.importc: "QAbstractSlider_protectedbase_destroy".}
+proc fcQAbstractSlider_protectedbase_focusNextChild(self: pointer, ): bool {.importc: "QAbstractSlider_protectedbase_focusNextChild".}
+proc fcQAbstractSlider_protectedbase_focusPreviousChild(self: pointer, ): bool {.importc: "QAbstractSlider_protectedbase_focusPreviousChild".}
+proc fcQAbstractSlider_protectedbase_sender(self: pointer, ): pointer {.importc: "QAbstractSlider_protectedbase_sender".}
+proc fcQAbstractSlider_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QAbstractSlider_protectedbase_senderSignalIndex".}
+proc fcQAbstractSlider_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QAbstractSlider_protectedbase_receivers".}
+proc fcQAbstractSlider_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QAbstractSlider_protectedbase_isSignalConnected".}
 proc fcQAbstractSlider_new(vtbl: pointer, parent: pointer): ptr cQAbstractSlider {.importc: "QAbstractSlider_new".}
 proc fcQAbstractSlider_new2(vtbl: pointer, ): ptr cQAbstractSlider {.importc: "QAbstractSlider_new2".}
 proc fcQAbstractSlider_staticMetaObject(): pointer {.importc: "QAbstractSlider_staticMetaObject".}
@@ -1053,6 +1066,45 @@ proc miqt_exec_callback_cQAbstractSlider_disconnectNotify(vtbl: pointer, self: p
   let self = QAbstractSlider(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
   vtbl[].disconnectNotify(self, slotval1)
+
+proc setRepeatAction*(self: gen_qabstractslider_types.QAbstractSlider, action: cint): void =
+  fcQAbstractSlider_protectedbase_setRepeatAction(self.h, cint(action))
+
+proc repeatAction*(self: gen_qabstractslider_types.QAbstractSlider, ): cint =
+  cint(fcQAbstractSlider_protectedbase_repeatAction(self.h))
+
+proc setRepeatAction*(self: gen_qabstractslider_types.QAbstractSlider, action: cint, thresholdTime: cint): void =
+  fcQAbstractSlider_protectedbase_setRepeatAction2(self.h, cint(action), thresholdTime)
+
+proc setRepeatAction*(self: gen_qabstractslider_types.QAbstractSlider, action: cint, thresholdTime: cint, repeatTime: cint): void =
+  fcQAbstractSlider_protectedbase_setRepeatAction3(self.h, cint(action), thresholdTime, repeatTime)
+
+proc updateMicroFocus*(self: gen_qabstractslider_types.QAbstractSlider, ): void =
+  fcQAbstractSlider_protectedbase_updateMicroFocus(self.h)
+
+proc create*(self: gen_qabstractslider_types.QAbstractSlider, ): void =
+  fcQAbstractSlider_protectedbase_create(self.h)
+
+proc destroy*(self: gen_qabstractslider_types.QAbstractSlider, ): void =
+  fcQAbstractSlider_protectedbase_destroy(self.h)
+
+proc focusNextChild*(self: gen_qabstractslider_types.QAbstractSlider, ): bool =
+  fcQAbstractSlider_protectedbase_focusNextChild(self.h)
+
+proc focusPreviousChild*(self: gen_qabstractslider_types.QAbstractSlider, ): bool =
+  fcQAbstractSlider_protectedbase_focusPreviousChild(self.h)
+
+proc sender*(self: gen_qabstractslider_types.QAbstractSlider, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQAbstractSlider_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qabstractslider_types.QAbstractSlider, ): cint =
+  fcQAbstractSlider_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qabstractslider_types.QAbstractSlider, signal: cstring): cint =
+  fcQAbstractSlider_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qabstractslider_types.QAbstractSlider, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQAbstractSlider_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc create*(T: type gen_qabstractslider_types.QAbstractSlider,
     parent: gen_qwidget_types.QWidget,

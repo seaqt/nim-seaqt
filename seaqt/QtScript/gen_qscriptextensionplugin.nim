@@ -90,6 +90,10 @@ proc fcQScriptExtensionPlugin_virtualbase_childEvent(self: pointer, event: point
 proc fcQScriptExtensionPlugin_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QScriptExtensionPlugin_virtualbase_customEvent".}
 proc fcQScriptExtensionPlugin_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QScriptExtensionPlugin_virtualbase_connectNotify".}
 proc fcQScriptExtensionPlugin_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QScriptExtensionPlugin_virtualbase_disconnectNotify".}
+proc fcQScriptExtensionPlugin_protectedbase_sender(self: pointer, ): pointer {.importc: "QScriptExtensionPlugin_protectedbase_sender".}
+proc fcQScriptExtensionPlugin_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QScriptExtensionPlugin_protectedbase_senderSignalIndex".}
+proc fcQScriptExtensionPlugin_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QScriptExtensionPlugin_protectedbase_receivers".}
+proc fcQScriptExtensionPlugin_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QScriptExtensionPlugin_protectedbase_isSignalConnected".}
 proc fcQScriptExtensionPlugin_new(vtbl: pointer, ): ptr cQScriptExtensionPlugin {.importc: "QScriptExtensionPlugin_new".}
 proc fcQScriptExtensionPlugin_new2(vtbl: pointer, parent: pointer): ptr cQScriptExtensionPlugin {.importc: "QScriptExtensionPlugin_new2".}
 proc fcQScriptExtensionPlugin_staticMetaObject(): pointer {.importc: "QScriptExtensionPlugin_staticMetaObject".}
@@ -299,6 +303,18 @@ proc miqt_exec_callback_cQScriptExtensionPlugin_disconnectNotify(vtbl: pointer, 
   let self = QScriptExtensionPlugin(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
   vtbl[].disconnectNotify(self, slotval1)
+
+proc sender*(self: gen_qscriptextensionplugin_types.QScriptExtensionPlugin, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQScriptExtensionPlugin_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qscriptextensionplugin_types.QScriptExtensionPlugin, ): cint =
+  fcQScriptExtensionPlugin_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qscriptextensionplugin_types.QScriptExtensionPlugin, signal: cstring): cint =
+  fcQScriptExtensionPlugin_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qscriptextensionplugin_types.QScriptExtensionPlugin, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQScriptExtensionPlugin_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc create*(T: type gen_qscriptextensionplugin_types.QScriptExtensionPlugin,
     vtbl: ref QScriptExtensionPluginVTable = nil): gen_qscriptextensionplugin_types.QScriptExtensionPlugin =

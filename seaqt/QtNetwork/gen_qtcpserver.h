@@ -106,11 +106,11 @@ void QTcpServer_virtualbase_childEvent(void* self, QChildEvent* event);
 void QTcpServer_virtualbase_customEvent(void* self, QEvent* event);
 void QTcpServer_virtualbase_connectNotify(void* self, QMetaMethod* signal);
 void QTcpServer_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
-void QTcpServer_protectedbase_addPendingConnection(bool* _dynamic_cast_ok, void* self, QTcpSocket* socket);
-QObject* QTcpServer_protectedbase_sender(bool* _dynamic_cast_ok, const void* self);
-int QTcpServer_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
-int QTcpServer_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
-bool QTcpServer_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+void QTcpServer_protectedbase_addPendingConnection(void* self, QTcpSocket* socket);
+QObject* QTcpServer_protectedbase_sender(const void* self);
+int QTcpServer_protectedbase_senderSignalIndex(const void* self);
+int QTcpServer_protectedbase_receivers(const void* self, const char* signal);
+bool QTcpServer_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
 const QMetaObject* QTcpServer_staticMetaObject();
 void QTcpServer_delete(QTcpServer* self);
 

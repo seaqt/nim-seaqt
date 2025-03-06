@@ -39,11 +39,13 @@ export gen_qaudiosystem_types
 
 import
   ../QtCore/gen_qiodevice_types,
+  ../QtCore/gen_qmetaobject_types,
   ../QtCore/gen_qobject,
   ../QtCore/gen_qobjectdefs_types,
   ./gen_qaudioformat_types
 export
   gen_qiodevice_types,
+  gen_qmetaobject_types,
   gen_qobject,
   gen_qobjectdefs_types,
   gen_qaudioformat_types
@@ -70,6 +72,10 @@ proc fcQAbstractAudioDeviceInfo_tr2(s: cstring, c: cstring): struct_miqt_string 
 proc fcQAbstractAudioDeviceInfo_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QAbstractAudioDeviceInfo_tr3".}
 proc fcQAbstractAudioDeviceInfo_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QAbstractAudioDeviceInfo_trUtf82".}
 proc fcQAbstractAudioDeviceInfo_trUtf83(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QAbstractAudioDeviceInfo_trUtf83".}
+proc fcQAbstractAudioDeviceInfo_protectedbase_sender(self: pointer, ): pointer {.importc: "QAbstractAudioDeviceInfo_protectedbase_sender".}
+proc fcQAbstractAudioDeviceInfo_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QAbstractAudioDeviceInfo_protectedbase_senderSignalIndex".}
+proc fcQAbstractAudioDeviceInfo_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QAbstractAudioDeviceInfo_protectedbase_receivers".}
+proc fcQAbstractAudioDeviceInfo_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QAbstractAudioDeviceInfo_protectedbase_isSignalConnected".}
 proc fcQAbstractAudioDeviceInfo_staticMetaObject(): pointer {.importc: "QAbstractAudioDeviceInfo_staticMetaObject".}
 proc fcQAbstractAudioDeviceInfo_delete(self: pointer) {.importc: "QAbstractAudioDeviceInfo_delete".}
 proc fcQAbstractAudioOutput_metaObject(self: pointer, ): pointer {.importc: "QAbstractAudioOutput_metaObject".}
@@ -109,6 +115,10 @@ proc fcQAbstractAudioOutput_tr2(s: cstring, c: cstring): struct_miqt_string {.im
 proc fcQAbstractAudioOutput_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QAbstractAudioOutput_tr3".}
 proc fcQAbstractAudioOutput_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QAbstractAudioOutput_trUtf82".}
 proc fcQAbstractAudioOutput_trUtf83(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QAbstractAudioOutput_trUtf83".}
+proc fcQAbstractAudioOutput_protectedbase_sender(self: pointer, ): pointer {.importc: "QAbstractAudioOutput_protectedbase_sender".}
+proc fcQAbstractAudioOutput_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QAbstractAudioOutput_protectedbase_senderSignalIndex".}
+proc fcQAbstractAudioOutput_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QAbstractAudioOutput_protectedbase_receivers".}
+proc fcQAbstractAudioOutput_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QAbstractAudioOutput_protectedbase_isSignalConnected".}
 proc fcQAbstractAudioOutput_staticMetaObject(): pointer {.importc: "QAbstractAudioOutput_staticMetaObject".}
 proc fcQAbstractAudioOutput_delete(self: pointer) {.importc: "QAbstractAudioOutput_delete".}
 proc fcQAbstractAudioInput_metaObject(self: pointer, ): pointer {.importc: "QAbstractAudioInput_metaObject".}
@@ -146,6 +156,10 @@ proc fcQAbstractAudioInput_tr2(s: cstring, c: cstring): struct_miqt_string {.imp
 proc fcQAbstractAudioInput_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QAbstractAudioInput_tr3".}
 proc fcQAbstractAudioInput_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QAbstractAudioInput_trUtf82".}
 proc fcQAbstractAudioInput_trUtf83(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QAbstractAudioInput_trUtf83".}
+proc fcQAbstractAudioInput_protectedbase_sender(self: pointer, ): pointer {.importc: "QAbstractAudioInput_protectedbase_sender".}
+proc fcQAbstractAudioInput_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QAbstractAudioInput_protectedbase_senderSignalIndex".}
+proc fcQAbstractAudioInput_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QAbstractAudioInput_protectedbase_receivers".}
+proc fcQAbstractAudioInput_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QAbstractAudioInput_protectedbase_isSignalConnected".}
 proc fcQAbstractAudioInput_staticMetaObject(): pointer {.importc: "QAbstractAudioInput_staticMetaObject".}
 proc fcQAbstractAudioInput_delete(self: pointer) {.importc: "QAbstractAudioInput_delete".}
 
@@ -256,6 +270,18 @@ proc trUtf8*(_: type gen_qaudiosystem_types.QAbstractAudioDeviceInfo, s: cstring
   let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
   c_free(v_ms.data)
   vx_ret
+
+proc sender*(self: gen_qaudiosystem_types.QAbstractAudioDeviceInfo, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQAbstractAudioDeviceInfo_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qaudiosystem_types.QAbstractAudioDeviceInfo, ): cint =
+  fcQAbstractAudioDeviceInfo_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qaudiosystem_types.QAbstractAudioDeviceInfo, signal: cstring): cint =
+  fcQAbstractAudioDeviceInfo_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qaudiosystem_types.QAbstractAudioDeviceInfo, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQAbstractAudioDeviceInfo_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc staticMetaObject*(_: type gen_qaudiosystem_types.QAbstractAudioDeviceInfo): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQAbstractAudioDeviceInfo_staticMetaObject())
@@ -433,6 +459,18 @@ proc trUtf8*(_: type gen_qaudiosystem_types.QAbstractAudioOutput, s: cstring, c:
   c_free(v_ms.data)
   vx_ret
 
+proc sender*(self: gen_qaudiosystem_types.QAbstractAudioOutput, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQAbstractAudioOutput_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qaudiosystem_types.QAbstractAudioOutput, ): cint =
+  fcQAbstractAudioOutput_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qaudiosystem_types.QAbstractAudioOutput, signal: cstring): cint =
+  fcQAbstractAudioOutput_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qaudiosystem_types.QAbstractAudioOutput, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQAbstractAudioOutput_protectedbase_isSignalConnected(self.h, signal.h)
+
 proc staticMetaObject*(_: type gen_qaudiosystem_types.QAbstractAudioOutput): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQAbstractAudioOutput_staticMetaObject())
 proc delete*(self: gen_qaudiosystem_types.QAbstractAudioOutput) =
@@ -599,6 +637,18 @@ proc trUtf8*(_: type gen_qaudiosystem_types.QAbstractAudioInput, s: cstring, c: 
   let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
   c_free(v_ms.data)
   vx_ret
+
+proc sender*(self: gen_qaudiosystem_types.QAbstractAudioInput, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQAbstractAudioInput_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qaudiosystem_types.QAbstractAudioInput, ): cint =
+  fcQAbstractAudioInput_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qaudiosystem_types.QAbstractAudioInput, signal: cstring): cint =
+  fcQAbstractAudioInput_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qaudiosystem_types.QAbstractAudioInput, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQAbstractAudioInput_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc staticMetaObject*(_: type gen_qaudiosystem_types.QAbstractAudioInput): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQAbstractAudioInput_staticMetaObject())

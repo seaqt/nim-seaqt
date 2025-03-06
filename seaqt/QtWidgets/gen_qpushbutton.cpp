@@ -868,16 +868,16 @@ public:
 	friend void QPushButton_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
 
 	// Wrappers to allow calling protected methods:
-	friend void QPushButton_protectedbase_initStyleOption(bool* _dynamic_cast_ok, const void* self, QStyleOptionButton* option);
-	friend void QPushButton_protectedbase_updateMicroFocus(bool* _dynamic_cast_ok, void* self);
-	friend void QPushButton_protectedbase_create(bool* _dynamic_cast_ok, void* self);
-	friend void QPushButton_protectedbase_destroy(bool* _dynamic_cast_ok, void* self);
-	friend bool QPushButton_protectedbase_focusNextChild(bool* _dynamic_cast_ok, void* self);
-	friend bool QPushButton_protectedbase_focusPreviousChild(bool* _dynamic_cast_ok, void* self);
-	friend QObject* QPushButton_protectedbase_sender(bool* _dynamic_cast_ok, const void* self);
-	friend int QPushButton_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
-	friend int QPushButton_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
-	friend bool QPushButton_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+	friend void QPushButton_protectedbase_initStyleOption(const void* self, QStyleOptionButton* option);
+	friend void QPushButton_protectedbase_updateMicroFocus(void* self);
+	friend void QPushButton_protectedbase_create(void* self);
+	friend void QPushButton_protectedbase_destroy(void* self);
+	friend bool QPushButton_protectedbase_focusNextChild(void* self);
+	friend bool QPushButton_protectedbase_focusPreviousChild(void* self);
+	friend QObject* QPushButton_protectedbase_sender(const void* self);
+	friend int QPushButton_protectedbase_senderSignalIndex(const void* self);
+	friend int QPushButton_protectedbase_receivers(const void* self, const char* signal);
+	friend bool QPushButton_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
 };
 
 QPushButton* QPushButton_new(struct QPushButton_VTable* vtbl, QWidget* parent) {
@@ -1354,131 +1354,71 @@ void QPushButton_virtualbase_disconnectNotify(void* self, QMetaMethod* signal) {
 }
 
 const QMetaObject* QPushButton_staticMetaObject() { return &QPushButton::staticMetaObject; }
-void QPushButton_protectedbase_initStyleOption(bool* _dynamic_cast_ok, const void* self, QStyleOptionButton* option) {
-	VirtualQPushButton* self_cast = dynamic_cast<VirtualQPushButton*>( (QPushButton*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QPushButton_protectedbase_initStyleOption(const void* self, QStyleOptionButton* option) {
+	VirtualQPushButton* self_cast = static_cast<VirtualQPushButton*>( (QPushButton*)(self) );
 	
 	self_cast->initStyleOption(option);
 
 }
 
-void QPushButton_protectedbase_updateMicroFocus(bool* _dynamic_cast_ok, void* self) {
-	VirtualQPushButton* self_cast = dynamic_cast<VirtualQPushButton*>( (QPushButton*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QPushButton_protectedbase_updateMicroFocus(void* self) {
+	VirtualQPushButton* self_cast = static_cast<VirtualQPushButton*>( (QPushButton*)(self) );
 	
 	self_cast->updateMicroFocus();
 
 }
 
-void QPushButton_protectedbase_create(bool* _dynamic_cast_ok, void* self) {
-	VirtualQPushButton* self_cast = dynamic_cast<VirtualQPushButton*>( (QPushButton*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QPushButton_protectedbase_create(void* self) {
+	VirtualQPushButton* self_cast = static_cast<VirtualQPushButton*>( (QPushButton*)(self) );
 	
 	self_cast->create();
 
 }
 
-void QPushButton_protectedbase_destroy(bool* _dynamic_cast_ok, void* self) {
-	VirtualQPushButton* self_cast = dynamic_cast<VirtualQPushButton*>( (QPushButton*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QPushButton_protectedbase_destroy(void* self) {
+	VirtualQPushButton* self_cast = static_cast<VirtualQPushButton*>( (QPushButton*)(self) );
 	
 	self_cast->destroy();
 
 }
 
-bool QPushButton_protectedbase_focusNextChild(bool* _dynamic_cast_ok, void* self) {
-	VirtualQPushButton* self_cast = dynamic_cast<VirtualQPushButton*>( (QPushButton*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return false;
-	}
-	
-	*_dynamic_cast_ok = true;
+bool QPushButton_protectedbase_focusNextChild(void* self) {
+	VirtualQPushButton* self_cast = static_cast<VirtualQPushButton*>( (QPushButton*)(self) );
 	
 	return self_cast->focusNextChild();
 
 }
 
-bool QPushButton_protectedbase_focusPreviousChild(bool* _dynamic_cast_ok, void* self) {
-	VirtualQPushButton* self_cast = dynamic_cast<VirtualQPushButton*>( (QPushButton*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return false;
-	}
-	
-	*_dynamic_cast_ok = true;
+bool QPushButton_protectedbase_focusPreviousChild(void* self) {
+	VirtualQPushButton* self_cast = static_cast<VirtualQPushButton*>( (QPushButton*)(self) );
 	
 	return self_cast->focusPreviousChild();
 
 }
 
-QObject* QPushButton_protectedbase_sender(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQPushButton* self_cast = dynamic_cast<VirtualQPushButton*>( (QPushButton*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return nullptr;
-	}
-	
-	*_dynamic_cast_ok = true;
+QObject* QPushButton_protectedbase_sender(const void* self) {
+	VirtualQPushButton* self_cast = static_cast<VirtualQPushButton*>( (QPushButton*)(self) );
 	
 	return self_cast->sender();
 
 }
 
-int QPushButton_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQPushButton* self_cast = dynamic_cast<VirtualQPushButton*>( (QPushButton*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return 0;
-	}
-	
-	*_dynamic_cast_ok = true;
+int QPushButton_protectedbase_senderSignalIndex(const void* self) {
+	VirtualQPushButton* self_cast = static_cast<VirtualQPushButton*>( (QPushButton*)(self) );
 	
 	return self_cast->senderSignalIndex();
 
 }
 
-int QPushButton_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal) {
-	VirtualQPushButton* self_cast = dynamic_cast<VirtualQPushButton*>( (QPushButton*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return 0;
-	}
-	
-	*_dynamic_cast_ok = true;
+int QPushButton_protectedbase_receivers(const void* self, const char* signal) {
+	VirtualQPushButton* self_cast = static_cast<VirtualQPushButton*>( (QPushButton*)(self) );
 	
 	return self_cast->receivers(signal);
 
 }
 
-bool QPushButton_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal) {
-	VirtualQPushButton* self_cast = dynamic_cast<VirtualQPushButton*>( (QPushButton*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return false;
-	}
-	
-	*_dynamic_cast_ok = true;
+bool QPushButton_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal) {
+	VirtualQPushButton* self_cast = static_cast<VirtualQPushButton*>( (QPushButton*)(self) );
 	
 	return self_cast->isSignalConnected(*signal);
 

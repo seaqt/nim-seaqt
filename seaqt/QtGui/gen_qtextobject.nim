@@ -83,6 +83,11 @@ proc fcQTextObject_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "Q
 proc fcQTextObject_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QTextObject_tr3".}
 proc fcQTextObject_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QTextObject_trUtf82".}
 proc fcQTextObject_trUtf83(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QTextObject_trUtf83".}
+proc fcQTextObject_protectedbase_setFormat(self: pointer, format: pointer): void {.importc: "QTextObject_protectedbase_setFormat".}
+proc fcQTextObject_protectedbase_sender(self: pointer, ): pointer {.importc: "QTextObject_protectedbase_sender".}
+proc fcQTextObject_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QTextObject_protectedbase_senderSignalIndex".}
+proc fcQTextObject_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QTextObject_protectedbase_receivers".}
+proc fcQTextObject_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QTextObject_protectedbase_isSignalConnected".}
 proc fcQTextObject_staticMetaObject(): pointer {.importc: "QTextObject_staticMetaObject".}
 proc fcQTextBlockGroup_metaObject(self: pointer, ): pointer {.importc: "QTextBlockGroup_metaObject".}
 proc fcQTextBlockGroup_metacast(self: pointer, param1: cstring): pointer {.importc: "QTextBlockGroup_metacast".}
@@ -93,6 +98,12 @@ proc fcQTextBlockGroup_tr2(s: cstring, c: cstring): struct_miqt_string {.importc
 proc fcQTextBlockGroup_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QTextBlockGroup_tr3".}
 proc fcQTextBlockGroup_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QTextBlockGroup_trUtf82".}
 proc fcQTextBlockGroup_trUtf83(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QTextBlockGroup_trUtf83".}
+proc fcQTextBlockGroup_protectedbase_blockList(self: pointer, ): struct_miqt_array {.importc: "QTextBlockGroup_protectedbase_blockList".}
+proc fcQTextBlockGroup_protectedbase_setFormat(self: pointer, format: pointer): void {.importc: "QTextBlockGroup_protectedbase_setFormat".}
+proc fcQTextBlockGroup_protectedbase_sender(self: pointer, ): pointer {.importc: "QTextBlockGroup_protectedbase_sender".}
+proc fcQTextBlockGroup_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QTextBlockGroup_protectedbase_senderSignalIndex".}
+proc fcQTextBlockGroup_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QTextBlockGroup_protectedbase_receivers".}
+proc fcQTextBlockGroup_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QTextBlockGroup_protectedbase_isSignalConnected".}
 proc fcQTextBlockGroup_staticMetaObject(): pointer {.importc: "QTextBlockGroup_staticMetaObject".}
 proc fcQTextFrameLayoutData_operatorAssign(self: pointer, param1: pointer): void {.importc: "QTextFrameLayoutData_operatorAssign".}
 proc fcQTextFrameLayoutData_delete(self: pointer) {.importc: "QTextFrameLayoutData_delete".}
@@ -139,6 +150,11 @@ proc fcQTextFrame_virtualbase_childEvent(self: pointer, event: pointer): void {.
 proc fcQTextFrame_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QTextFrame_virtualbase_customEvent".}
 proc fcQTextFrame_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QTextFrame_virtualbase_connectNotify".}
 proc fcQTextFrame_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QTextFrame_virtualbase_disconnectNotify".}
+proc fcQTextFrame_protectedbase_setFormat(self: pointer, format: pointer): void {.importc: "QTextFrame_protectedbase_setFormat".}
+proc fcQTextFrame_protectedbase_sender(self: pointer, ): pointer {.importc: "QTextFrame_protectedbase_sender".}
+proc fcQTextFrame_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QTextFrame_protectedbase_senderSignalIndex".}
+proc fcQTextFrame_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QTextFrame_protectedbase_receivers".}
+proc fcQTextFrame_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QTextFrame_protectedbase_isSignalConnected".}
 proc fcQTextFrame_new(vtbl: pointer, doc: pointer): ptr cQTextFrame {.importc: "QTextFrame_new".}
 proc fcQTextFrame_staticMetaObject(): pointer {.importc: "QTextFrame_staticMetaObject".}
 proc fcQTextFrame_delete(self: pointer) {.importc: "QTextFrame_delete".}
@@ -284,6 +300,21 @@ proc trUtf8*(_: type gen_qtextobject_types.QTextObject, s: cstring, c: cstring, 
   c_free(v_ms.data)
   vx_ret
 
+proc setFormat*(self: gen_qtextobject_types.QTextObject, format: gen_qtextformat_types.QTextFormat): void =
+  fcQTextObject_protectedbase_setFormat(self.h, format.h)
+
+proc sender*(self: gen_qtextobject_types.QTextObject, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQTextObject_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qtextobject_types.QTextObject, ): cint =
+  fcQTextObject_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qtextobject_types.QTextObject, signal: cstring): cint =
+  fcQTextObject_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qtextobject_types.QTextObject, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQTextObject_protectedbase_isSignalConnected(self.h, signal.h)
+
 proc staticMetaObject*(_: type gen_qtextobject_types.QTextObject): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQTextObject_staticMetaObject())
 proc metaObject*(self: gen_qtextobject_types.QTextBlockGroup, ): gen_qobjectdefs_types.QMetaObject =
@@ -330,6 +361,29 @@ proc trUtf8*(_: type gen_qtextobject_types.QTextBlockGroup, s: cstring, c: cstri
   let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
   c_free(v_ms.data)
   vx_ret
+
+proc blockList*(self: gen_qtextobject_types.QTextBlockGroup, ): seq[gen_qtextobject_types.QTextBlock] =
+  var v_ma = fcQTextBlockGroup_protectedbase_blockList(self.h)
+  var vx_ret = newSeq[gen_qtextobject_types.QTextBlock](int(v_ma.len))
+  let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
+  for i in 0 ..< v_ma.len:
+    vx_ret[i] = gen_qtextobject_types.QTextBlock(h: v_outCast[i])
+  vx_ret
+
+proc setFormat*(self: gen_qtextobject_types.QTextBlockGroup, format: gen_qtextformat_types.QTextFormat): void =
+  fcQTextBlockGroup_protectedbase_setFormat(self.h, format.h)
+
+proc sender*(self: gen_qtextobject_types.QTextBlockGroup, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQTextBlockGroup_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qtextobject_types.QTextBlockGroup, ): cint =
+  fcQTextBlockGroup_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qtextobject_types.QTextBlockGroup, signal: cstring): cint =
+  fcQTextBlockGroup_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qtextobject_types.QTextBlockGroup, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQTextBlockGroup_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc staticMetaObject*(_: type gen_qtextobject_types.QTextBlockGroup): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQTextBlockGroup_staticMetaObject())
@@ -542,6 +596,21 @@ proc miqt_exec_callback_cQTextFrame_disconnectNotify(vtbl: pointer, self: pointe
   let self = QTextFrame(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
   vtbl[].disconnectNotify(self, slotval1)
+
+proc setFormat*(self: gen_qtextobject_types.QTextFrame, format: gen_qtextformat_types.QTextFormat): void =
+  fcQTextFrame_protectedbase_setFormat(self.h, format.h)
+
+proc sender*(self: gen_qtextobject_types.QTextFrame, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQTextFrame_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qtextobject_types.QTextFrame, ): cint =
+  fcQTextFrame_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qtextobject_types.QTextFrame, signal: cstring): cint =
+  fcQTextFrame_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qtextobject_types.QTextFrame, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQTextFrame_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc create*(T: type gen_qtextobject_types.QTextFrame,
     doc: gen_qtextdocument_types.QTextDocument,

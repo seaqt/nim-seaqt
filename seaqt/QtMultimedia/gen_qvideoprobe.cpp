@@ -189,10 +189,10 @@ public:
 	friend void QVideoProbe_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
 
 	// Wrappers to allow calling protected methods:
-	friend QObject* QVideoProbe_protectedbase_sender(bool* _dynamic_cast_ok, const void* self);
-	friend int QVideoProbe_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
-	friend int QVideoProbe_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
-	friend bool QVideoProbe_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+	friend QObject* QVideoProbe_protectedbase_sender(const void* self);
+	friend int QVideoProbe_protectedbase_senderSignalIndex(const void* self);
+	friend int QVideoProbe_protectedbase_receivers(const void* self, const char* signal);
+	friend bool QVideoProbe_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
 };
 
 QVideoProbe* QVideoProbe_new(struct QVideoProbe_VTable* vtbl) {
@@ -391,53 +391,29 @@ void QVideoProbe_virtualbase_disconnectNotify(void* self, QMetaMethod* signal) {
 }
 
 const QMetaObject* QVideoProbe_staticMetaObject() { return &QVideoProbe::staticMetaObject; }
-QObject* QVideoProbe_protectedbase_sender(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQVideoProbe* self_cast = dynamic_cast<VirtualQVideoProbe*>( (QVideoProbe*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return nullptr;
-	}
-	
-	*_dynamic_cast_ok = true;
+QObject* QVideoProbe_protectedbase_sender(const void* self) {
+	VirtualQVideoProbe* self_cast = static_cast<VirtualQVideoProbe*>( (QVideoProbe*)(self) );
 	
 	return self_cast->sender();
 
 }
 
-int QVideoProbe_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQVideoProbe* self_cast = dynamic_cast<VirtualQVideoProbe*>( (QVideoProbe*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return 0;
-	}
-	
-	*_dynamic_cast_ok = true;
+int QVideoProbe_protectedbase_senderSignalIndex(const void* self) {
+	VirtualQVideoProbe* self_cast = static_cast<VirtualQVideoProbe*>( (QVideoProbe*)(self) );
 	
 	return self_cast->senderSignalIndex();
 
 }
 
-int QVideoProbe_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal) {
-	VirtualQVideoProbe* self_cast = dynamic_cast<VirtualQVideoProbe*>( (QVideoProbe*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return 0;
-	}
-	
-	*_dynamic_cast_ok = true;
+int QVideoProbe_protectedbase_receivers(const void* self, const char* signal) {
+	VirtualQVideoProbe* self_cast = static_cast<VirtualQVideoProbe*>( (QVideoProbe*)(self) );
 	
 	return self_cast->receivers(signal);
 
 }
 
-bool QVideoProbe_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal) {
-	VirtualQVideoProbe* self_cast = dynamic_cast<VirtualQVideoProbe*>( (QVideoProbe*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return false;
-	}
-	
-	*_dynamic_cast_ok = true;
+bool QVideoProbe_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal) {
+	VirtualQVideoProbe* self_cast = static_cast<VirtualQVideoProbe*>( (QVideoProbe*)(self) );
 	
 	return self_cast->isSignalConnected(*signal);
 

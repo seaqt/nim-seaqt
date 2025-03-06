@@ -38,9 +38,13 @@ import ./gen_qaudiooutputselectorcontrol_types
 export gen_qaudiooutputselectorcontrol_types
 
 import
+  ../QtCore/gen_qmetaobject_types,
+  ../QtCore/gen_qobject_types,
   ../QtCore/gen_qobjectdefs_types,
   ./gen_qmediacontrol
 export
+  gen_qmetaobject_types,
+  gen_qobject_types,
   gen_qobjectdefs_types,
   gen_qmediacontrol
 
@@ -64,6 +68,10 @@ proc fcQAudioOutputSelectorControl_tr2(s: cstring, c: cstring): struct_miqt_stri
 proc fcQAudioOutputSelectorControl_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QAudioOutputSelectorControl_tr3".}
 proc fcQAudioOutputSelectorControl_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QAudioOutputSelectorControl_trUtf82".}
 proc fcQAudioOutputSelectorControl_trUtf83(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QAudioOutputSelectorControl_trUtf83".}
+proc fcQAudioOutputSelectorControl_protectedbase_sender(self: pointer, ): pointer {.importc: "QAudioOutputSelectorControl_protectedbase_sender".}
+proc fcQAudioOutputSelectorControl_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QAudioOutputSelectorControl_protectedbase_senderSignalIndex".}
+proc fcQAudioOutputSelectorControl_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QAudioOutputSelectorControl_protectedbase_receivers".}
+proc fcQAudioOutputSelectorControl_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QAudioOutputSelectorControl_protectedbase_isSignalConnected".}
 proc fcQAudioOutputSelectorControl_staticMetaObject(): pointer {.importc: "QAudioOutputSelectorControl_staticMetaObject".}
 proc fcQAudioOutputSelectorControl_delete(self: pointer) {.importc: "QAudioOutputSelectorControl_delete".}
 
@@ -184,6 +192,18 @@ proc trUtf8*(_: type gen_qaudiooutputselectorcontrol_types.QAudioOutputSelectorC
   let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
   c_free(v_ms.data)
   vx_ret
+
+proc sender*(self: gen_qaudiooutputselectorcontrol_types.QAudioOutputSelectorControl, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQAudioOutputSelectorControl_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qaudiooutputselectorcontrol_types.QAudioOutputSelectorControl, ): cint =
+  fcQAudioOutputSelectorControl_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qaudiooutputselectorcontrol_types.QAudioOutputSelectorControl, signal: cstring): cint =
+  fcQAudioOutputSelectorControl_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qaudiooutputselectorcontrol_types.QAudioOutputSelectorControl, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQAudioOutputSelectorControl_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc staticMetaObject*(_: type gen_qaudiooutputselectorcontrol_types.QAudioOutputSelectorControl): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQAudioOutputSelectorControl_staticMetaObject())

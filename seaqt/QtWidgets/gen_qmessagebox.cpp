@@ -899,16 +899,16 @@ public:
 	friend void QMessageBox_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
 
 	// Wrappers to allow calling protected methods:
-	friend void QMessageBox_protectedbase_adjustPosition(bool* _dynamic_cast_ok, void* self, QWidget* param1);
-	friend void QMessageBox_protectedbase_updateMicroFocus(bool* _dynamic_cast_ok, void* self);
-	friend void QMessageBox_protectedbase_create(bool* _dynamic_cast_ok, void* self);
-	friend void QMessageBox_protectedbase_destroy(bool* _dynamic_cast_ok, void* self);
-	friend bool QMessageBox_protectedbase_focusNextChild(bool* _dynamic_cast_ok, void* self);
-	friend bool QMessageBox_protectedbase_focusPreviousChild(bool* _dynamic_cast_ok, void* self);
-	friend QObject* QMessageBox_protectedbase_sender(bool* _dynamic_cast_ok, const void* self);
-	friend int QMessageBox_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
-	friend int QMessageBox_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
-	friend bool QMessageBox_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+	friend void QMessageBox_protectedbase_adjustPosition(void* self, QWidget* param1);
+	friend void QMessageBox_protectedbase_updateMicroFocus(void* self);
+	friend void QMessageBox_protectedbase_create(void* self);
+	friend void QMessageBox_protectedbase_destroy(void* self);
+	friend bool QMessageBox_protectedbase_focusNextChild(void* self);
+	friend bool QMessageBox_protectedbase_focusPreviousChild(void* self);
+	friend QObject* QMessageBox_protectedbase_sender(const void* self);
+	friend int QMessageBox_protectedbase_senderSignalIndex(const void* self);
+	friend int QMessageBox_protectedbase_receivers(const void* self, const char* signal);
+	friend bool QMessageBox_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
 };
 
 QMessageBox* QMessageBox_new(struct QMessageBox_VTable* vtbl, QWidget* parent) {
@@ -1951,131 +1951,71 @@ void QMessageBox_virtualbase_disconnectNotify(void* self, QMetaMethod* signal) {
 }
 
 const QMetaObject* QMessageBox_staticMetaObject() { return &QMessageBox::staticMetaObject; }
-void QMessageBox_protectedbase_adjustPosition(bool* _dynamic_cast_ok, void* self, QWidget* param1) {
-	VirtualQMessageBox* self_cast = dynamic_cast<VirtualQMessageBox*>( (QMessageBox*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QMessageBox_protectedbase_adjustPosition(void* self, QWidget* param1) {
+	VirtualQMessageBox* self_cast = static_cast<VirtualQMessageBox*>( (QMessageBox*)(self) );
 	
 	self_cast->adjustPosition(param1);
 
 }
 
-void QMessageBox_protectedbase_updateMicroFocus(bool* _dynamic_cast_ok, void* self) {
-	VirtualQMessageBox* self_cast = dynamic_cast<VirtualQMessageBox*>( (QMessageBox*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QMessageBox_protectedbase_updateMicroFocus(void* self) {
+	VirtualQMessageBox* self_cast = static_cast<VirtualQMessageBox*>( (QMessageBox*)(self) );
 	
 	self_cast->updateMicroFocus();
 
 }
 
-void QMessageBox_protectedbase_create(bool* _dynamic_cast_ok, void* self) {
-	VirtualQMessageBox* self_cast = dynamic_cast<VirtualQMessageBox*>( (QMessageBox*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QMessageBox_protectedbase_create(void* self) {
+	VirtualQMessageBox* self_cast = static_cast<VirtualQMessageBox*>( (QMessageBox*)(self) );
 	
 	self_cast->create();
 
 }
 
-void QMessageBox_protectedbase_destroy(bool* _dynamic_cast_ok, void* self) {
-	VirtualQMessageBox* self_cast = dynamic_cast<VirtualQMessageBox*>( (QMessageBox*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QMessageBox_protectedbase_destroy(void* self) {
+	VirtualQMessageBox* self_cast = static_cast<VirtualQMessageBox*>( (QMessageBox*)(self) );
 	
 	self_cast->destroy();
 
 }
 
-bool QMessageBox_protectedbase_focusNextChild(bool* _dynamic_cast_ok, void* self) {
-	VirtualQMessageBox* self_cast = dynamic_cast<VirtualQMessageBox*>( (QMessageBox*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return false;
-	}
-	
-	*_dynamic_cast_ok = true;
+bool QMessageBox_protectedbase_focusNextChild(void* self) {
+	VirtualQMessageBox* self_cast = static_cast<VirtualQMessageBox*>( (QMessageBox*)(self) );
 	
 	return self_cast->focusNextChild();
 
 }
 
-bool QMessageBox_protectedbase_focusPreviousChild(bool* _dynamic_cast_ok, void* self) {
-	VirtualQMessageBox* self_cast = dynamic_cast<VirtualQMessageBox*>( (QMessageBox*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return false;
-	}
-	
-	*_dynamic_cast_ok = true;
+bool QMessageBox_protectedbase_focusPreviousChild(void* self) {
+	VirtualQMessageBox* self_cast = static_cast<VirtualQMessageBox*>( (QMessageBox*)(self) );
 	
 	return self_cast->focusPreviousChild();
 
 }
 
-QObject* QMessageBox_protectedbase_sender(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQMessageBox* self_cast = dynamic_cast<VirtualQMessageBox*>( (QMessageBox*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return nullptr;
-	}
-	
-	*_dynamic_cast_ok = true;
+QObject* QMessageBox_protectedbase_sender(const void* self) {
+	VirtualQMessageBox* self_cast = static_cast<VirtualQMessageBox*>( (QMessageBox*)(self) );
 	
 	return self_cast->sender();
 
 }
 
-int QMessageBox_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQMessageBox* self_cast = dynamic_cast<VirtualQMessageBox*>( (QMessageBox*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return 0;
-	}
-	
-	*_dynamic_cast_ok = true;
+int QMessageBox_protectedbase_senderSignalIndex(const void* self) {
+	VirtualQMessageBox* self_cast = static_cast<VirtualQMessageBox*>( (QMessageBox*)(self) );
 	
 	return self_cast->senderSignalIndex();
 
 }
 
-int QMessageBox_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal) {
-	VirtualQMessageBox* self_cast = dynamic_cast<VirtualQMessageBox*>( (QMessageBox*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return 0;
-	}
-	
-	*_dynamic_cast_ok = true;
+int QMessageBox_protectedbase_receivers(const void* self, const char* signal) {
+	VirtualQMessageBox* self_cast = static_cast<VirtualQMessageBox*>( (QMessageBox*)(self) );
 	
 	return self_cast->receivers(signal);
 
 }
 
-bool QMessageBox_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal) {
-	VirtualQMessageBox* self_cast = dynamic_cast<VirtualQMessageBox*>( (QMessageBox*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return false;
-	}
-	
-	*_dynamic_cast_ok = true;
+bool QMessageBox_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal) {
+	VirtualQMessageBox* self_cast = static_cast<VirtualQMessageBox*>( (QMessageBox*)(self) );
 	
 	return self_cast->isSignalConnected(*signal);
 

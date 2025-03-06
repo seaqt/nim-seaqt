@@ -77,6 +77,8 @@ proc fcQSGMaterialShader_virtualbase_compile(self: pointer, ): void {.importc: "
 proc fcQSGMaterialShader_virtualbase_initialize(self: pointer, ): void {.importc: "QSGMaterialShader_virtualbase_initialize".}
 proc fcQSGMaterialShader_virtualbase_vertexShader(self: pointer, ): cstring {.importc: "QSGMaterialShader_virtualbase_vertexShader".}
 proc fcQSGMaterialShader_virtualbase_fragmentShader(self: pointer, ): cstring {.importc: "QSGMaterialShader_virtualbase_fragmentShader".}
+proc fcQSGMaterialShader_protectedbase_setShaderSourceFile(self: pointer, typeVal: cQOpenGLShaderShaderType, sourceFile: struct_miqt_string): void {.importc: "QSGMaterialShader_protectedbase_setShaderSourceFile".}
+proc fcQSGMaterialShader_protectedbase_setShaderSourceFiles(self: pointer, typeVal: cQOpenGLShaderShaderType, sourceFiles: struct_miqt_array): void {.importc: "QSGMaterialShader_protectedbase_setShaderSourceFiles".}
 proc fcQSGMaterialShader_new(vtbl: pointer, ): ptr cQSGMaterialShader {.importc: "QSGMaterialShader_new".}
 proc fcQSGMaterialShader_delete(self: pointer) {.importc: "QSGMaterialShader_delete".}
 proc fcQSGMaterialShaderRenderState_dirtyStates(self: pointer, ): cint {.importc: "QSGMaterialShader__RenderState_dirtyStates".}
@@ -189,6 +191,16 @@ proc miqt_exec_callback_cQSGMaterialShader_fragmentShader(vtbl: pointer, self: p
   let self = QSGMaterialShader(h: self)
   var virtualReturn = vtbl[].fragmentShader(self)
   virtualReturn
+
+proc setShaderSourceFile*(self: gen_qsgmaterialshader_types.QSGMaterialShader, typeVal: QOpenGLShaderShaderType, sourceFile: string): void =
+  fcQSGMaterialShader_protectedbase_setShaderSourceFile(self.h, typeVal, struct_miqt_string(data: sourceFile, len: csize_t(len(sourceFile))))
+
+proc setShaderSourceFiles*(self: gen_qsgmaterialshader_types.QSGMaterialShader, typeVal: QOpenGLShaderShaderType, sourceFiles: seq[string]): void =
+  var sourceFiles_CArray = newSeq[struct_miqt_string](len(sourceFiles))
+  for i in 0..<len(sourceFiles):
+    sourceFiles_CArray[i] = struct_miqt_string(data: sourceFiles[i], len: csize_t(len(sourceFiles[i])))
+
+  fcQSGMaterialShader_protectedbase_setShaderSourceFiles(self.h, typeVal, struct_miqt_array(len: csize_t(len(sourceFiles)), data: if len(sourceFiles) == 0: nil else: addr(sourceFiles_CArray[0])))
 
 proc create*(T: type gen_qsgmaterialshader_types.QSGMaterialShader,
     vtbl: ref QSGMaterialShaderVTable = nil): gen_qsgmaterialshader_types.QSGMaterialShader =

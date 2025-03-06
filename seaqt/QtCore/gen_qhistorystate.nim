@@ -102,6 +102,10 @@ proc fcQHistoryState_virtualbase_childEvent(self: pointer, event: pointer): void
 proc fcQHistoryState_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QHistoryState_virtualbase_customEvent".}
 proc fcQHistoryState_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QHistoryState_virtualbase_connectNotify".}
 proc fcQHistoryState_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QHistoryState_virtualbase_disconnectNotify".}
+proc fcQHistoryState_protectedbase_sender(self: pointer, ): pointer {.importc: "QHistoryState_protectedbase_sender".}
+proc fcQHistoryState_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QHistoryState_protectedbase_senderSignalIndex".}
+proc fcQHistoryState_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QHistoryState_protectedbase_receivers".}
+proc fcQHistoryState_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QHistoryState_protectedbase_isSignalConnected".}
 proc fcQHistoryState_new(vtbl: pointer, ): ptr cQHistoryState {.importc: "QHistoryState_new".}
 proc fcQHistoryState_new2(vtbl: pointer, typeVal: cint): ptr cQHistoryState {.importc: "QHistoryState_new2".}
 proc fcQHistoryState_new3(vtbl: pointer, parent: pointer): ptr cQHistoryState {.importc: "QHistoryState_new3".}
@@ -312,6 +316,18 @@ proc miqt_exec_callback_cQHistoryState_disconnectNotify(vtbl: pointer, self: poi
   let self = QHistoryState(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
   vtbl[].disconnectNotify(self, slotval1)
+
+proc sender*(self: gen_qhistorystate_types.QHistoryState, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQHistoryState_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qhistorystate_types.QHistoryState, ): cint =
+  fcQHistoryState_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qhistorystate_types.QHistoryState, signal: cstring): cint =
+  fcQHistoryState_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qhistorystate_types.QHistoryState, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQHistoryState_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc create*(T: type gen_qhistorystate_types.QHistoryState,
     vtbl: ref QHistoryStateVTable = nil): gen_qhistorystate_types.QHistoryState =

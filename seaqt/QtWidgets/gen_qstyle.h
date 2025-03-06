@@ -173,10 +173,10 @@ void QStyle_virtualbase_childEvent(void* self, QChildEvent* event);
 void QStyle_virtualbase_customEvent(void* self, QEvent* event);
 void QStyle_virtualbase_connectNotify(void* self, QMetaMethod* signal);
 void QStyle_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
-QObject* QStyle_protectedbase_sender(bool* _dynamic_cast_ok, const void* self);
-int QStyle_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
-int QStyle_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
-bool QStyle_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+QObject* QStyle_protectedbase_sender(const void* self);
+int QStyle_protectedbase_senderSignalIndex(const void* self);
+int QStyle_protectedbase_receivers(const void* self, const char* signal);
+bool QStyle_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
 const QMetaObject* QStyle_staticMetaObject();
 void QStyle_delete(QStyle* self);
 

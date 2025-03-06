@@ -225,10 +225,10 @@ public:
 	friend void QWebHistoryInterface_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
 
 	// Wrappers to allow calling protected methods:
-	friend QObject* QWebHistoryInterface_protectedbase_sender(bool* _dynamic_cast_ok, const void* self);
-	friend int QWebHistoryInterface_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
-	friend int QWebHistoryInterface_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
-	friend bool QWebHistoryInterface_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+	friend QObject* QWebHistoryInterface_protectedbase_sender(const void* self);
+	friend int QWebHistoryInterface_protectedbase_senderSignalIndex(const void* self);
+	friend int QWebHistoryInterface_protectedbase_receivers(const void* self, const char* signal);
+	friend bool QWebHistoryInterface_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
 };
 
 QWebHistoryInterface* QWebHistoryInterface_new(struct QWebHistoryInterface_VTable* vtbl) {
@@ -400,53 +400,29 @@ void QWebHistoryInterface_virtualbase_disconnectNotify(void* self, QMetaMethod* 
 }
 
 const QMetaObject* QWebHistoryInterface_staticMetaObject() { return &QWebHistoryInterface::staticMetaObject; }
-QObject* QWebHistoryInterface_protectedbase_sender(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQWebHistoryInterface* self_cast = dynamic_cast<VirtualQWebHistoryInterface*>( (QWebHistoryInterface*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return nullptr;
-	}
-	
-	*_dynamic_cast_ok = true;
+QObject* QWebHistoryInterface_protectedbase_sender(const void* self) {
+	VirtualQWebHistoryInterface* self_cast = static_cast<VirtualQWebHistoryInterface*>( (QWebHistoryInterface*)(self) );
 	
 	return self_cast->sender();
 
 }
 
-int QWebHistoryInterface_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQWebHistoryInterface* self_cast = dynamic_cast<VirtualQWebHistoryInterface*>( (QWebHistoryInterface*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return 0;
-	}
-	
-	*_dynamic_cast_ok = true;
+int QWebHistoryInterface_protectedbase_senderSignalIndex(const void* self) {
+	VirtualQWebHistoryInterface* self_cast = static_cast<VirtualQWebHistoryInterface*>( (QWebHistoryInterface*)(self) );
 	
 	return self_cast->senderSignalIndex();
 
 }
 
-int QWebHistoryInterface_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal) {
-	VirtualQWebHistoryInterface* self_cast = dynamic_cast<VirtualQWebHistoryInterface*>( (QWebHistoryInterface*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return 0;
-	}
-	
-	*_dynamic_cast_ok = true;
+int QWebHistoryInterface_protectedbase_receivers(const void* self, const char* signal) {
+	VirtualQWebHistoryInterface* self_cast = static_cast<VirtualQWebHistoryInterface*>( (QWebHistoryInterface*)(self) );
 	
 	return self_cast->receivers(signal);
 
 }
 
-bool QWebHistoryInterface_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal) {
-	VirtualQWebHistoryInterface* self_cast = dynamic_cast<VirtualQWebHistoryInterface*>( (QWebHistoryInterface*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return false;
-	}
-	
-	*_dynamic_cast_ok = true;
+bool QWebHistoryInterface_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal) {
+	VirtualQWebHistoryInterface* self_cast = static_cast<VirtualQWebHistoryInterface*>( (QWebHistoryInterface*)(self) );
 	
 	return self_cast->isSignalConnected(*signal);
 

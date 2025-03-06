@@ -246,10 +246,10 @@ public:
 	friend void QAbstractAnimation_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
 
 	// Wrappers to allow calling protected methods:
-	friend QObject* QAbstractAnimation_protectedbase_sender(bool* _dynamic_cast_ok, const void* self);
-	friend int QAbstractAnimation_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
-	friend int QAbstractAnimation_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
-	friend bool QAbstractAnimation_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+	friend QObject* QAbstractAnimation_protectedbase_sender(const void* self);
+	friend int QAbstractAnimation_protectedbase_senderSignalIndex(const void* self);
+	friend int QAbstractAnimation_protectedbase_receivers(const void* self, const char* signal);
+	friend bool QAbstractAnimation_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
 };
 
 QAbstractAnimation* QAbstractAnimation_new(struct QAbstractAnimation_VTable* vtbl) {
@@ -556,53 +556,29 @@ void QAbstractAnimation_virtualbase_disconnectNotify(void* self, QMetaMethod* si
 }
 
 const QMetaObject* QAbstractAnimation_staticMetaObject() { return &QAbstractAnimation::staticMetaObject; }
-QObject* QAbstractAnimation_protectedbase_sender(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQAbstractAnimation* self_cast = dynamic_cast<VirtualQAbstractAnimation*>( (QAbstractAnimation*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return nullptr;
-	}
-	
-	*_dynamic_cast_ok = true;
+QObject* QAbstractAnimation_protectedbase_sender(const void* self) {
+	VirtualQAbstractAnimation* self_cast = static_cast<VirtualQAbstractAnimation*>( (QAbstractAnimation*)(self) );
 	
 	return self_cast->sender();
 
 }
 
-int QAbstractAnimation_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQAbstractAnimation* self_cast = dynamic_cast<VirtualQAbstractAnimation*>( (QAbstractAnimation*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return 0;
-	}
-	
-	*_dynamic_cast_ok = true;
+int QAbstractAnimation_protectedbase_senderSignalIndex(const void* self) {
+	VirtualQAbstractAnimation* self_cast = static_cast<VirtualQAbstractAnimation*>( (QAbstractAnimation*)(self) );
 	
 	return self_cast->senderSignalIndex();
 
 }
 
-int QAbstractAnimation_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal) {
-	VirtualQAbstractAnimation* self_cast = dynamic_cast<VirtualQAbstractAnimation*>( (QAbstractAnimation*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return 0;
-	}
-	
-	*_dynamic_cast_ok = true;
+int QAbstractAnimation_protectedbase_receivers(const void* self, const char* signal) {
+	VirtualQAbstractAnimation* self_cast = static_cast<VirtualQAbstractAnimation*>( (QAbstractAnimation*)(self) );
 	
 	return self_cast->receivers(signal);
 
 }
 
-bool QAbstractAnimation_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal) {
-	VirtualQAbstractAnimation* self_cast = dynamic_cast<VirtualQAbstractAnimation*>( (QAbstractAnimation*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return false;
-	}
-	
-	*_dynamic_cast_ok = true;
+bool QAbstractAnimation_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal) {
+	VirtualQAbstractAnimation* self_cast = static_cast<VirtualQAbstractAnimation*>( (QAbstractAnimation*)(self) );
 	
 	return self_cast->isSignalConnected(*signal);
 
@@ -835,12 +811,12 @@ public:
 	friend void QAnimationDriver_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
 
 	// Wrappers to allow calling protected methods:
-	friend void QAnimationDriver_protectedbase_advanceAnimation(bool* _dynamic_cast_ok, void* self);
-	friend void QAnimationDriver_protectedbase_advanceAnimation1(bool* _dynamic_cast_ok, void* self, long long timeStep);
-	friend QObject* QAnimationDriver_protectedbase_sender(bool* _dynamic_cast_ok, const void* self);
-	friend int QAnimationDriver_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
-	friend int QAnimationDriver_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
-	friend bool QAnimationDriver_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+	friend void QAnimationDriver_protectedbase_advanceAnimation(void* self);
+	friend void QAnimationDriver_protectedbase_advanceAnimation1(void* self, long long timeStep);
+	friend QObject* QAnimationDriver_protectedbase_sender(const void* self);
+	friend int QAnimationDriver_protectedbase_senderSignalIndex(const void* self);
+	friend int QAnimationDriver_protectedbase_receivers(const void* self, const char* signal);
+	friend bool QAnimationDriver_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
 };
 
 QAnimationDriver* QAnimationDriver_new(struct QAnimationDriver_VTable* vtbl) {
@@ -1079,79 +1055,43 @@ void QAnimationDriver_virtualbase_disconnectNotify(void* self, QMetaMethod* sign
 }
 
 const QMetaObject* QAnimationDriver_staticMetaObject() { return &QAnimationDriver::staticMetaObject; }
-void QAnimationDriver_protectedbase_advanceAnimation(bool* _dynamic_cast_ok, void* self) {
-	VirtualQAnimationDriver* self_cast = dynamic_cast<VirtualQAnimationDriver*>( (QAnimationDriver*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QAnimationDriver_protectedbase_advanceAnimation(void* self) {
+	VirtualQAnimationDriver* self_cast = static_cast<VirtualQAnimationDriver*>( (QAnimationDriver*)(self) );
 	
 	self_cast->advanceAnimation();
 
 }
 
-void QAnimationDriver_protectedbase_advanceAnimation1(bool* _dynamic_cast_ok, void* self, long long timeStep) {
-	VirtualQAnimationDriver* self_cast = dynamic_cast<VirtualQAnimationDriver*>( (QAnimationDriver*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QAnimationDriver_protectedbase_advanceAnimation1(void* self, long long timeStep) {
+	VirtualQAnimationDriver* self_cast = static_cast<VirtualQAnimationDriver*>( (QAnimationDriver*)(self) );
 	
 	self_cast->advanceAnimation(static_cast<qint64>(timeStep));
 
 }
 
-QObject* QAnimationDriver_protectedbase_sender(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQAnimationDriver* self_cast = dynamic_cast<VirtualQAnimationDriver*>( (QAnimationDriver*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return nullptr;
-	}
-	
-	*_dynamic_cast_ok = true;
+QObject* QAnimationDriver_protectedbase_sender(const void* self) {
+	VirtualQAnimationDriver* self_cast = static_cast<VirtualQAnimationDriver*>( (QAnimationDriver*)(self) );
 	
 	return self_cast->sender();
 
 }
 
-int QAnimationDriver_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQAnimationDriver* self_cast = dynamic_cast<VirtualQAnimationDriver*>( (QAnimationDriver*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return 0;
-	}
-	
-	*_dynamic_cast_ok = true;
+int QAnimationDriver_protectedbase_senderSignalIndex(const void* self) {
+	VirtualQAnimationDriver* self_cast = static_cast<VirtualQAnimationDriver*>( (QAnimationDriver*)(self) );
 	
 	return self_cast->senderSignalIndex();
 
 }
 
-int QAnimationDriver_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal) {
-	VirtualQAnimationDriver* self_cast = dynamic_cast<VirtualQAnimationDriver*>( (QAnimationDriver*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return 0;
-	}
-	
-	*_dynamic_cast_ok = true;
+int QAnimationDriver_protectedbase_receivers(const void* self, const char* signal) {
+	VirtualQAnimationDriver* self_cast = static_cast<VirtualQAnimationDriver*>( (QAnimationDriver*)(self) );
 	
 	return self_cast->receivers(signal);
 
 }
 
-bool QAnimationDriver_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal) {
-	VirtualQAnimationDriver* self_cast = dynamic_cast<VirtualQAnimationDriver*>( (QAnimationDriver*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return false;
-	}
-	
-	*_dynamic_cast_ok = true;
+bool QAnimationDriver_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal) {
+	VirtualQAnimationDriver* self_cast = static_cast<VirtualQAnimationDriver*>( (QAnimationDriver*)(self) );
 	
 	return self_cast->isSignalConnected(*signal);
 

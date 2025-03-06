@@ -123,6 +123,12 @@ proc fcQAbstractVideoSurface_virtualbase_childEvent(self: pointer, event: pointe
 proc fcQAbstractVideoSurface_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QAbstractVideoSurface_virtualbase_customEvent".}
 proc fcQAbstractVideoSurface_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QAbstractVideoSurface_virtualbase_connectNotify".}
 proc fcQAbstractVideoSurface_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QAbstractVideoSurface_virtualbase_disconnectNotify".}
+proc fcQAbstractVideoSurface_protectedbase_setError(self: pointer, error: cint): void {.importc: "QAbstractVideoSurface_protectedbase_setError".}
+proc fcQAbstractVideoSurface_protectedbase_setNativeResolution(self: pointer, resolution: pointer): void {.importc: "QAbstractVideoSurface_protectedbase_setNativeResolution".}
+proc fcQAbstractVideoSurface_protectedbase_sender(self: pointer, ): pointer {.importc: "QAbstractVideoSurface_protectedbase_sender".}
+proc fcQAbstractVideoSurface_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QAbstractVideoSurface_protectedbase_senderSignalIndex".}
+proc fcQAbstractVideoSurface_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QAbstractVideoSurface_protectedbase_receivers".}
+proc fcQAbstractVideoSurface_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QAbstractVideoSurface_protectedbase_isSignalConnected".}
 proc fcQAbstractVideoSurface_new(vtbl: pointer, ): ptr cQAbstractVideoSurface {.importc: "QAbstractVideoSurface_new".}
 proc fcQAbstractVideoSurface_new2(vtbl: pointer, parent: pointer): ptr cQAbstractVideoSurface {.importc: "QAbstractVideoSurface_new2".}
 proc fcQAbstractVideoSurface_staticMetaObject(): pointer {.importc: "QAbstractVideoSurface_staticMetaObject".}
@@ -472,6 +478,24 @@ proc miqt_exec_callback_cQAbstractVideoSurface_disconnectNotify(vtbl: pointer, s
   let self = QAbstractVideoSurface(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
   vtbl[].disconnectNotify(self, slotval1)
+
+proc setError*(self: gen_qabstractvideosurface_types.QAbstractVideoSurface, error: cint): void =
+  fcQAbstractVideoSurface_protectedbase_setError(self.h, cint(error))
+
+proc setNativeResolution*(self: gen_qabstractvideosurface_types.QAbstractVideoSurface, resolution: gen_qsize_types.QSize): void =
+  fcQAbstractVideoSurface_protectedbase_setNativeResolution(self.h, resolution.h)
+
+proc sender*(self: gen_qabstractvideosurface_types.QAbstractVideoSurface, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQAbstractVideoSurface_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qabstractvideosurface_types.QAbstractVideoSurface, ): cint =
+  fcQAbstractVideoSurface_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qabstractvideosurface_types.QAbstractVideoSurface, signal: cstring): cint =
+  fcQAbstractVideoSurface_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qabstractvideosurface_types.QAbstractVideoSurface, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQAbstractVideoSurface_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc create*(T: type gen_qabstractvideosurface_types.QAbstractVideoSurface,
     vtbl: ref QAbstractVideoSurfaceVTable = nil): gen_qabstractvideosurface_types.QAbstractVideoSurface =

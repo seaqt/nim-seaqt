@@ -216,6 +216,16 @@ proc fcQDialog_virtualbase_childEvent(self: pointer, event: pointer): void {.imp
 proc fcQDialog_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QDialog_virtualbase_customEvent".}
 proc fcQDialog_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QDialog_virtualbase_connectNotify".}
 proc fcQDialog_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QDialog_virtualbase_disconnectNotify".}
+proc fcQDialog_protectedbase_adjustPosition(self: pointer, param1: pointer): void {.importc: "QDialog_protectedbase_adjustPosition".}
+proc fcQDialog_protectedbase_updateMicroFocus(self: pointer, ): void {.importc: "QDialog_protectedbase_updateMicroFocus".}
+proc fcQDialog_protectedbase_create(self: pointer, ): void {.importc: "QDialog_protectedbase_create".}
+proc fcQDialog_protectedbase_destroy(self: pointer, ): void {.importc: "QDialog_protectedbase_destroy".}
+proc fcQDialog_protectedbase_focusNextChild(self: pointer, ): bool {.importc: "QDialog_protectedbase_focusNextChild".}
+proc fcQDialog_protectedbase_focusPreviousChild(self: pointer, ): bool {.importc: "QDialog_protectedbase_focusPreviousChild".}
+proc fcQDialog_protectedbase_sender(self: pointer, ): pointer {.importc: "QDialog_protectedbase_sender".}
+proc fcQDialog_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QDialog_protectedbase_senderSignalIndex".}
+proc fcQDialog_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QDialog_protectedbase_receivers".}
+proc fcQDialog_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QDialog_protectedbase_isSignalConnected".}
 proc fcQDialog_new(vtbl: pointer, parent: pointer): ptr cQDialog {.importc: "QDialog_new".}
 proc fcQDialog_new2(vtbl: pointer, ): ptr cQDialog {.importc: "QDialog_new2".}
 proc fcQDialog_new3(vtbl: pointer, parent: pointer, f: cint): ptr cQDialog {.importc: "QDialog_new3".}
@@ -998,6 +1008,36 @@ proc miqt_exec_callback_cQDialog_disconnectNotify(vtbl: pointer, self: pointer, 
   let self = QDialog(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
   vtbl[].disconnectNotify(self, slotval1)
+
+proc adjustPosition*(self: gen_qdialog_types.QDialog, param1: gen_qwidget_types.QWidget): void =
+  fcQDialog_protectedbase_adjustPosition(self.h, param1.h)
+
+proc updateMicroFocus*(self: gen_qdialog_types.QDialog, ): void =
+  fcQDialog_protectedbase_updateMicroFocus(self.h)
+
+proc create*(self: gen_qdialog_types.QDialog, ): void =
+  fcQDialog_protectedbase_create(self.h)
+
+proc destroy*(self: gen_qdialog_types.QDialog, ): void =
+  fcQDialog_protectedbase_destroy(self.h)
+
+proc focusNextChild*(self: gen_qdialog_types.QDialog, ): bool =
+  fcQDialog_protectedbase_focusNextChild(self.h)
+
+proc focusPreviousChild*(self: gen_qdialog_types.QDialog, ): bool =
+  fcQDialog_protectedbase_focusPreviousChild(self.h)
+
+proc sender*(self: gen_qdialog_types.QDialog, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQDialog_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qdialog_types.QDialog, ): cint =
+  fcQDialog_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qdialog_types.QDialog, signal: cstring): cint =
+  fcQDialog_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qdialog_types.QDialog, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQDialog_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc create*(T: type gen_qdialog_types.QDialog,
     parent: gen_qwidget_types.QWidget,

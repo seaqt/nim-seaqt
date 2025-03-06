@@ -48,6 +48,7 @@ import ./gen_qsgabstractrenderer_types
 export gen_qsgabstractrenderer_types
 
 import
+  ../QtCore/gen_qmetaobject_types,
   ../QtCore/gen_qobject,
   ../QtCore/gen_qobjectdefs_types,
   ../QtCore/gen_qrect_types,
@@ -56,6 +57,7 @@ import
   ../QtGui/gen_qmatrix4x4_types,
   ./gen_qsgnode_types
 export
+  gen_qmetaobject_types,
   gen_qobject,
   gen_qobjectdefs_types,
   gen_qrect_types,
@@ -96,6 +98,10 @@ proc fcQSGAbstractRenderer_tr2(s: cstring, c: cstring): struct_miqt_string {.imp
 proc fcQSGAbstractRenderer_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QSGAbstractRenderer_tr3".}
 proc fcQSGAbstractRenderer_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QSGAbstractRenderer_trUtf82".}
 proc fcQSGAbstractRenderer_trUtf83(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QSGAbstractRenderer_trUtf83".}
+proc fcQSGAbstractRenderer_protectedbase_sender(self: pointer, ): pointer {.importc: "QSGAbstractRenderer_protectedbase_sender".}
+proc fcQSGAbstractRenderer_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QSGAbstractRenderer_protectedbase_senderSignalIndex".}
+proc fcQSGAbstractRenderer_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QSGAbstractRenderer_protectedbase_receivers".}
+proc fcQSGAbstractRenderer_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QSGAbstractRenderer_protectedbase_isSignalConnected".}
 proc fcQSGAbstractRenderer_staticMetaObject(): pointer {.importc: "QSGAbstractRenderer_staticMetaObject".}
 proc fcQSGAbstractRenderer_delete(self: pointer) {.importc: "QSGAbstractRenderer_delete".}
 
@@ -218,6 +224,18 @@ proc trUtf8*(_: type gen_qsgabstractrenderer_types.QSGAbstractRenderer, s: cstri
   let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
   c_free(v_ms.data)
   vx_ret
+
+proc sender*(self: gen_qsgabstractrenderer_types.QSGAbstractRenderer, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQSGAbstractRenderer_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qsgabstractrenderer_types.QSGAbstractRenderer, ): cint =
+  fcQSGAbstractRenderer_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qsgabstractrenderer_types.QSGAbstractRenderer, signal: cstring): cint =
+  fcQSGAbstractRenderer_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qsgabstractrenderer_types.QSGAbstractRenderer, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQSGAbstractRenderer_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc staticMetaObject*(_: type gen_qsgabstractrenderer_types.QSGAbstractRenderer): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQSGAbstractRenderer_staticMetaObject())

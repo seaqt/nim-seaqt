@@ -96,6 +96,8 @@ type cQGraphicsLayoutItemVTable = object
 proc fcQGraphicsLayoutItem_virtualbase_setGeometry(self: pointer, rect: pointer): void {.importc: "QGraphicsLayoutItem_virtualbase_setGeometry".}
 proc fcQGraphicsLayoutItem_virtualbase_getContentsMargins(self: pointer, left: ptr float64, top: ptr float64, right: ptr float64, bottom: ptr float64): void {.importc: "QGraphicsLayoutItem_virtualbase_getContentsMargins".}
 proc fcQGraphicsLayoutItem_virtualbase_updateGeometry(self: pointer, ): void {.importc: "QGraphicsLayoutItem_virtualbase_updateGeometry".}
+proc fcQGraphicsLayoutItem_protectedbase_setGraphicsItem(self: pointer, item: pointer): void {.importc: "QGraphicsLayoutItem_protectedbase_setGraphicsItem".}
+proc fcQGraphicsLayoutItem_protectedbase_setOwnedByLayout(self: pointer, ownedByLayout: bool): void {.importc: "QGraphicsLayoutItem_protectedbase_setOwnedByLayout".}
 proc fcQGraphicsLayoutItem_new(vtbl: pointer, ): ptr cQGraphicsLayoutItem {.importc: "QGraphicsLayoutItem_new".}
 proc fcQGraphicsLayoutItem_new2(vtbl: pointer, parent: pointer): ptr cQGraphicsLayoutItem {.importc: "QGraphicsLayoutItem_new2".}
 proc fcQGraphicsLayoutItem_new3(vtbl: pointer, parent: pointer, isLayout: bool): ptr cQGraphicsLayoutItem {.importc: "QGraphicsLayoutItem_new3".}
@@ -258,6 +260,12 @@ proc miqt_exec_callback_cQGraphicsLayoutItem_sizeHint(vtbl: pointer, self: point
   let slotval2 = gen_qsize_types.QSizeF(h: constraint)
   var virtualReturn = vtbl[].sizeHint(self, slotval1, slotval2)
   virtualReturn.h
+
+proc setGraphicsItem*(self: gen_qgraphicslayoutitem_types.QGraphicsLayoutItem, item: gen_qgraphicsitem_types.QGraphicsItem): void =
+  fcQGraphicsLayoutItem_protectedbase_setGraphicsItem(self.h, item.h)
+
+proc setOwnedByLayout*(self: gen_qgraphicslayoutitem_types.QGraphicsLayoutItem, ownedByLayout: bool): void =
+  fcQGraphicsLayoutItem_protectedbase_setOwnedByLayout(self.h, ownedByLayout)
 
 proc create*(T: type gen_qgraphicslayoutitem_types.QGraphicsLayoutItem,
     vtbl: ref QGraphicsLayoutItemVTable = nil): gen_qgraphicslayoutitem_types.QGraphicsLayoutItem =

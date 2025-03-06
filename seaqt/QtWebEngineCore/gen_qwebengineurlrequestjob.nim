@@ -48,11 +48,13 @@ export gen_qwebengineurlrequestjob_types
 
 import
   ../QtCore/gen_qiodevice_types,
+  ../QtCore/gen_qmetaobject_types,
   ../QtCore/gen_qobject,
   ../QtCore/gen_qobjectdefs_types,
   ../QtCore/gen_qurl_types
 export
   gen_qiodevice_types,
+  gen_qmetaobject_types,
   gen_qobject,
   gen_qobjectdefs_types,
   gen_qurl_types
@@ -74,6 +76,10 @@ proc fcQWebEngineUrlRequestJob_tr2(s: cstring, c: cstring): struct_miqt_string {
 proc fcQWebEngineUrlRequestJob_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QWebEngineUrlRequestJob_tr3".}
 proc fcQWebEngineUrlRequestJob_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QWebEngineUrlRequestJob_trUtf82".}
 proc fcQWebEngineUrlRequestJob_trUtf83(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QWebEngineUrlRequestJob_trUtf83".}
+proc fcQWebEngineUrlRequestJob_protectedbase_sender(self: pointer, ): pointer {.importc: "QWebEngineUrlRequestJob_protectedbase_sender".}
+proc fcQWebEngineUrlRequestJob_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QWebEngineUrlRequestJob_protectedbase_senderSignalIndex".}
+proc fcQWebEngineUrlRequestJob_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QWebEngineUrlRequestJob_protectedbase_receivers".}
+proc fcQWebEngineUrlRequestJob_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QWebEngineUrlRequestJob_protectedbase_isSignalConnected".}
 proc fcQWebEngineUrlRequestJob_staticMetaObject(): pointer {.importc: "QWebEngineUrlRequestJob_staticMetaObject".}
 proc fcQWebEngineUrlRequestJob_delete(self: pointer) {.importc: "QWebEngineUrlRequestJob_delete".}
 
@@ -142,6 +148,18 @@ proc trUtf8*(_: type gen_qwebengineurlrequestjob_types.QWebEngineUrlRequestJob, 
   let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
   c_free(v_ms.data)
   vx_ret
+
+proc sender*(self: gen_qwebengineurlrequestjob_types.QWebEngineUrlRequestJob, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQWebEngineUrlRequestJob_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qwebengineurlrequestjob_types.QWebEngineUrlRequestJob, ): cint =
+  fcQWebEngineUrlRequestJob_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qwebengineurlrequestjob_types.QWebEngineUrlRequestJob, signal: cstring): cint =
+  fcQWebEngineUrlRequestJob_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qwebengineurlrequestjob_types.QWebEngineUrlRequestJob, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQWebEngineUrlRequestJob_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc staticMetaObject*(_: type gen_qwebengineurlrequestjob_types.QWebEngineUrlRequestJob): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQWebEngineUrlRequestJob_staticMetaObject())

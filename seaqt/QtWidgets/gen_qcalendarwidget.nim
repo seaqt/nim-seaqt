@@ -256,6 +256,17 @@ proc fcQCalendarWidget_virtualbase_childEvent(self: pointer, event: pointer): vo
 proc fcQCalendarWidget_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QCalendarWidget_virtualbase_customEvent".}
 proc fcQCalendarWidget_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QCalendarWidget_virtualbase_connectNotify".}
 proc fcQCalendarWidget_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QCalendarWidget_virtualbase_disconnectNotify".}
+proc fcQCalendarWidget_protectedbase_updateCell(self: pointer, date: pointer): void {.importc: "QCalendarWidget_protectedbase_updateCell".}
+proc fcQCalendarWidget_protectedbase_updateCells(self: pointer, ): void {.importc: "QCalendarWidget_protectedbase_updateCells".}
+proc fcQCalendarWidget_protectedbase_updateMicroFocus(self: pointer, ): void {.importc: "QCalendarWidget_protectedbase_updateMicroFocus".}
+proc fcQCalendarWidget_protectedbase_create(self: pointer, ): void {.importc: "QCalendarWidget_protectedbase_create".}
+proc fcQCalendarWidget_protectedbase_destroy(self: pointer, ): void {.importc: "QCalendarWidget_protectedbase_destroy".}
+proc fcQCalendarWidget_protectedbase_focusNextChild(self: pointer, ): bool {.importc: "QCalendarWidget_protectedbase_focusNextChild".}
+proc fcQCalendarWidget_protectedbase_focusPreviousChild(self: pointer, ): bool {.importc: "QCalendarWidget_protectedbase_focusPreviousChild".}
+proc fcQCalendarWidget_protectedbase_sender(self: pointer, ): pointer {.importc: "QCalendarWidget_protectedbase_sender".}
+proc fcQCalendarWidget_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QCalendarWidget_protectedbase_senderSignalIndex".}
+proc fcQCalendarWidget_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QCalendarWidget_protectedbase_receivers".}
+proc fcQCalendarWidget_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QCalendarWidget_protectedbase_isSignalConnected".}
 proc fcQCalendarWidget_new(vtbl: pointer, parent: pointer): ptr cQCalendarWidget {.importc: "QCalendarWidget_new".}
 proc fcQCalendarWidget_new2(vtbl: pointer, ): ptr cQCalendarWidget {.importc: "QCalendarWidget_new2".}
 proc fcQCalendarWidget_staticMetaObject(): pointer {.importc: "QCalendarWidget_staticMetaObject".}
@@ -1107,6 +1118,39 @@ proc miqt_exec_callback_cQCalendarWidget_disconnectNotify(vtbl: pointer, self: p
   let self = QCalendarWidget(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
   vtbl[].disconnectNotify(self, slotval1)
+
+proc updateCell*(self: gen_qcalendarwidget_types.QCalendarWidget, date: gen_qdatetime_types.QDate): void =
+  fcQCalendarWidget_protectedbase_updateCell(self.h, date.h)
+
+proc updateCells*(self: gen_qcalendarwidget_types.QCalendarWidget, ): void =
+  fcQCalendarWidget_protectedbase_updateCells(self.h)
+
+proc updateMicroFocus*(self: gen_qcalendarwidget_types.QCalendarWidget, ): void =
+  fcQCalendarWidget_protectedbase_updateMicroFocus(self.h)
+
+proc create*(self: gen_qcalendarwidget_types.QCalendarWidget, ): void =
+  fcQCalendarWidget_protectedbase_create(self.h)
+
+proc destroy*(self: gen_qcalendarwidget_types.QCalendarWidget, ): void =
+  fcQCalendarWidget_protectedbase_destroy(self.h)
+
+proc focusNextChild*(self: gen_qcalendarwidget_types.QCalendarWidget, ): bool =
+  fcQCalendarWidget_protectedbase_focusNextChild(self.h)
+
+proc focusPreviousChild*(self: gen_qcalendarwidget_types.QCalendarWidget, ): bool =
+  fcQCalendarWidget_protectedbase_focusPreviousChild(self.h)
+
+proc sender*(self: gen_qcalendarwidget_types.QCalendarWidget, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQCalendarWidget_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qcalendarwidget_types.QCalendarWidget, ): cint =
+  fcQCalendarWidget_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qcalendarwidget_types.QCalendarWidget, signal: cstring): cint =
+  fcQCalendarWidget_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qcalendarwidget_types.QCalendarWidget, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQCalendarWidget_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc create*(T: type gen_qcalendarwidget_types.QCalendarWidget,
     parent: gen_qwidget_types.QWidget,

@@ -216,10 +216,10 @@ public:
 	friend void QAbstractTransition_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
 
 	// Wrappers to allow calling protected methods:
-	friend QObject* QAbstractTransition_protectedbase_sender(bool* _dynamic_cast_ok, const void* self);
-	friend int QAbstractTransition_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
-	friend int QAbstractTransition_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
-	friend bool QAbstractTransition_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+	friend QObject* QAbstractTransition_protectedbase_sender(const void* self);
+	friend int QAbstractTransition_protectedbase_senderSignalIndex(const void* self);
+	friend int QAbstractTransition_protectedbase_receivers(const void* self, const char* signal);
+	friend bool QAbstractTransition_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
 };
 
 QAbstractTransition* QAbstractTransition_new(struct QAbstractTransition_VTable* vtbl) {
@@ -442,53 +442,29 @@ void QAbstractTransition_virtualbase_disconnectNotify(void* self, QMetaMethod* s
 }
 
 const QMetaObject* QAbstractTransition_staticMetaObject() { return &QAbstractTransition::staticMetaObject; }
-QObject* QAbstractTransition_protectedbase_sender(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQAbstractTransition* self_cast = dynamic_cast<VirtualQAbstractTransition*>( (QAbstractTransition*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return nullptr;
-	}
-	
-	*_dynamic_cast_ok = true;
+QObject* QAbstractTransition_protectedbase_sender(const void* self) {
+	VirtualQAbstractTransition* self_cast = static_cast<VirtualQAbstractTransition*>( (QAbstractTransition*)(self) );
 	
 	return self_cast->sender();
 
 }
 
-int QAbstractTransition_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQAbstractTransition* self_cast = dynamic_cast<VirtualQAbstractTransition*>( (QAbstractTransition*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return 0;
-	}
-	
-	*_dynamic_cast_ok = true;
+int QAbstractTransition_protectedbase_senderSignalIndex(const void* self) {
+	VirtualQAbstractTransition* self_cast = static_cast<VirtualQAbstractTransition*>( (QAbstractTransition*)(self) );
 	
 	return self_cast->senderSignalIndex();
 
 }
 
-int QAbstractTransition_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal) {
-	VirtualQAbstractTransition* self_cast = dynamic_cast<VirtualQAbstractTransition*>( (QAbstractTransition*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return 0;
-	}
-	
-	*_dynamic_cast_ok = true;
+int QAbstractTransition_protectedbase_receivers(const void* self, const char* signal) {
+	VirtualQAbstractTransition* self_cast = static_cast<VirtualQAbstractTransition*>( (QAbstractTransition*)(self) );
 	
 	return self_cast->receivers(signal);
 
 }
 
-bool QAbstractTransition_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal) {
-	VirtualQAbstractTransition* self_cast = dynamic_cast<VirtualQAbstractTransition*>( (QAbstractTransition*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return false;
-	}
-	
-	*_dynamic_cast_ok = true;
+bool QAbstractTransition_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal) {
+	VirtualQAbstractTransition* self_cast = static_cast<VirtualQAbstractTransition*>( (QAbstractTransition*)(self) );
 	
 	return self_cast->isSignalConnected(*signal);
 

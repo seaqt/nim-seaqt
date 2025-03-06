@@ -126,6 +126,11 @@ proc fcQThread_virtualbase_childEvent(self: pointer, event: pointer): void {.imp
 proc fcQThread_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QThread_virtualbase_customEvent".}
 proc fcQThread_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QThread_virtualbase_connectNotify".}
 proc fcQThread_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QThread_virtualbase_disconnectNotify".}
+proc fcQThread_protectedbase_exec(self: pointer, ): cint {.importc: "QThread_protectedbase_exec".}
+proc fcQThread_protectedbase_sender(self: pointer, ): pointer {.importc: "QThread_protectedbase_sender".}
+proc fcQThread_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QThread_protectedbase_senderSignalIndex".}
+proc fcQThread_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QThread_protectedbase_receivers".}
+proc fcQThread_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QThread_protectedbase_isSignalConnected".}
 proc fcQThread_new(vtbl: pointer, ): ptr cQThread {.importc: "QThread_new".}
 proc fcQThread_new2(vtbl: pointer, parent: pointer): ptr cQThread {.importc: "QThread_new2".}
 proc fcQThread_staticMetaObject(): pointer {.importc: "QThread_staticMetaObject".}
@@ -388,6 +393,21 @@ proc miqt_exec_callback_cQThread_disconnectNotify(vtbl: pointer, self: pointer, 
   let self = QThread(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
   vtbl[].disconnectNotify(self, slotval1)
+
+proc exec*(self: gen_qthread_types.QThread, ): cint =
+  fcQThread_protectedbase_exec(self.h)
+
+proc sender*(self: gen_qthread_types.QThread, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQThread_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qthread_types.QThread, ): cint =
+  fcQThread_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qthread_types.QThread, signal: cstring): cint =
+  fcQThread_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qthread_types.QThread, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQThread_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc create*(T: type gen_qthread_types.QThread,
     vtbl: ref QThreadVTable = nil): gen_qthread_types.QThread =

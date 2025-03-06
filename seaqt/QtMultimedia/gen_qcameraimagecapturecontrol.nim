@@ -38,12 +38,16 @@ import ./gen_qcameraimagecapturecontrol_types
 export gen_qcameraimagecapturecontrol_types
 
 import
+  ../QtCore/gen_qmetaobject_types,
+  ../QtCore/gen_qobject_types,
   ../QtCore/gen_qobjectdefs_types,
   ../QtCore/gen_qvariant_types,
   ../QtGui/gen_qimage_types,
   ./gen_qmediacontrol,
   ./gen_qvideoframe_types
 export
+  gen_qmetaobject_types,
+  gen_qobject_types,
   gen_qobjectdefs_types,
   gen_qvariant_types,
   gen_qimage_types,
@@ -80,6 +84,10 @@ proc fcQCameraImageCaptureControl_tr2(s: cstring, c: cstring): struct_miqt_strin
 proc fcQCameraImageCaptureControl_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QCameraImageCaptureControl_tr3".}
 proc fcQCameraImageCaptureControl_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QCameraImageCaptureControl_trUtf82".}
 proc fcQCameraImageCaptureControl_trUtf83(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QCameraImageCaptureControl_trUtf83".}
+proc fcQCameraImageCaptureControl_protectedbase_sender(self: pointer, ): pointer {.importc: "QCameraImageCaptureControl_protectedbase_sender".}
+proc fcQCameraImageCaptureControl_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QCameraImageCaptureControl_protectedbase_senderSignalIndex".}
+proc fcQCameraImageCaptureControl_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QCameraImageCaptureControl_protectedbase_receivers".}
+proc fcQCameraImageCaptureControl_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QCameraImageCaptureControl_protectedbase_isSignalConnected".}
 proc fcQCameraImageCaptureControl_staticMetaObject(): pointer {.importc: "QCameraImageCaptureControl_staticMetaObject".}
 proc fcQCameraImageCaptureControl_delete(self: pointer) {.importc: "QCameraImageCaptureControl_delete".}
 
@@ -305,6 +313,18 @@ proc trUtf8*(_: type gen_qcameraimagecapturecontrol_types.QCameraImageCaptureCon
   let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
   c_free(v_ms.data)
   vx_ret
+
+proc sender*(self: gen_qcameraimagecapturecontrol_types.QCameraImageCaptureControl, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQCameraImageCaptureControl_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qcameraimagecapturecontrol_types.QCameraImageCaptureControl, ): cint =
+  fcQCameraImageCaptureControl_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qcameraimagecapturecontrol_types.QCameraImageCaptureControl, signal: cstring): cint =
+  fcQCameraImageCaptureControl_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qcameraimagecapturecontrol_types.QCameraImageCaptureControl, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQCameraImageCaptureControl_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc staticMetaObject*(_: type gen_qcameraimagecapturecontrol_types.QCameraImageCaptureControl): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQCameraImageCaptureControl_staticMetaObject())

@@ -818,15 +818,15 @@ public:
 	friend void QMdiSubWindow_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
 
 	// Wrappers to allow calling protected methods:
-	friend void QMdiSubWindow_protectedbase_updateMicroFocus(bool* _dynamic_cast_ok, void* self);
-	friend void QMdiSubWindow_protectedbase_create(bool* _dynamic_cast_ok, void* self);
-	friend void QMdiSubWindow_protectedbase_destroy(bool* _dynamic_cast_ok, void* self);
-	friend bool QMdiSubWindow_protectedbase_focusNextChild(bool* _dynamic_cast_ok, void* self);
-	friend bool QMdiSubWindow_protectedbase_focusPreviousChild(bool* _dynamic_cast_ok, void* self);
-	friend QObject* QMdiSubWindow_protectedbase_sender(bool* _dynamic_cast_ok, const void* self);
-	friend int QMdiSubWindow_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
-	friend int QMdiSubWindow_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
-	friend bool QMdiSubWindow_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+	friend void QMdiSubWindow_protectedbase_updateMicroFocus(void* self);
+	friend void QMdiSubWindow_protectedbase_create(void* self);
+	friend void QMdiSubWindow_protectedbase_destroy(void* self);
+	friend bool QMdiSubWindow_protectedbase_focusNextChild(void* self);
+	friend bool QMdiSubWindow_protectedbase_focusPreviousChild(void* self);
+	friend QObject* QMdiSubWindow_protectedbase_sender(const void* self);
+	friend int QMdiSubWindow_protectedbase_senderSignalIndex(const void* self);
+	friend int QMdiSubWindow_protectedbase_receivers(const void* self, const char* signal);
+	friend bool QMdiSubWindow_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
 };
 
 QMdiSubWindow* QMdiSubWindow_new(struct QMdiSubWindow_VTable* vtbl, QWidget* parent) {
@@ -1335,118 +1335,64 @@ void QMdiSubWindow_virtualbase_disconnectNotify(void* self, QMetaMethod* signal)
 }
 
 const QMetaObject* QMdiSubWindow_staticMetaObject() { return &QMdiSubWindow::staticMetaObject; }
-void QMdiSubWindow_protectedbase_updateMicroFocus(bool* _dynamic_cast_ok, void* self) {
-	VirtualQMdiSubWindow* self_cast = dynamic_cast<VirtualQMdiSubWindow*>( (QMdiSubWindow*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QMdiSubWindow_protectedbase_updateMicroFocus(void* self) {
+	VirtualQMdiSubWindow* self_cast = static_cast<VirtualQMdiSubWindow*>( (QMdiSubWindow*)(self) );
 	
 	self_cast->updateMicroFocus();
 
 }
 
-void QMdiSubWindow_protectedbase_create(bool* _dynamic_cast_ok, void* self) {
-	VirtualQMdiSubWindow* self_cast = dynamic_cast<VirtualQMdiSubWindow*>( (QMdiSubWindow*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QMdiSubWindow_protectedbase_create(void* self) {
+	VirtualQMdiSubWindow* self_cast = static_cast<VirtualQMdiSubWindow*>( (QMdiSubWindow*)(self) );
 	
 	self_cast->create();
 
 }
 
-void QMdiSubWindow_protectedbase_destroy(bool* _dynamic_cast_ok, void* self) {
-	VirtualQMdiSubWindow* self_cast = dynamic_cast<VirtualQMdiSubWindow*>( (QMdiSubWindow*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QMdiSubWindow_protectedbase_destroy(void* self) {
+	VirtualQMdiSubWindow* self_cast = static_cast<VirtualQMdiSubWindow*>( (QMdiSubWindow*)(self) );
 	
 	self_cast->destroy();
 
 }
 
-bool QMdiSubWindow_protectedbase_focusNextChild(bool* _dynamic_cast_ok, void* self) {
-	VirtualQMdiSubWindow* self_cast = dynamic_cast<VirtualQMdiSubWindow*>( (QMdiSubWindow*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return false;
-	}
-	
-	*_dynamic_cast_ok = true;
+bool QMdiSubWindow_protectedbase_focusNextChild(void* self) {
+	VirtualQMdiSubWindow* self_cast = static_cast<VirtualQMdiSubWindow*>( (QMdiSubWindow*)(self) );
 	
 	return self_cast->focusNextChild();
 
 }
 
-bool QMdiSubWindow_protectedbase_focusPreviousChild(bool* _dynamic_cast_ok, void* self) {
-	VirtualQMdiSubWindow* self_cast = dynamic_cast<VirtualQMdiSubWindow*>( (QMdiSubWindow*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return false;
-	}
-	
-	*_dynamic_cast_ok = true;
+bool QMdiSubWindow_protectedbase_focusPreviousChild(void* self) {
+	VirtualQMdiSubWindow* self_cast = static_cast<VirtualQMdiSubWindow*>( (QMdiSubWindow*)(self) );
 	
 	return self_cast->focusPreviousChild();
 
 }
 
-QObject* QMdiSubWindow_protectedbase_sender(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQMdiSubWindow* self_cast = dynamic_cast<VirtualQMdiSubWindow*>( (QMdiSubWindow*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return nullptr;
-	}
-	
-	*_dynamic_cast_ok = true;
+QObject* QMdiSubWindow_protectedbase_sender(const void* self) {
+	VirtualQMdiSubWindow* self_cast = static_cast<VirtualQMdiSubWindow*>( (QMdiSubWindow*)(self) );
 	
 	return self_cast->sender();
 
 }
 
-int QMdiSubWindow_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQMdiSubWindow* self_cast = dynamic_cast<VirtualQMdiSubWindow*>( (QMdiSubWindow*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return 0;
-	}
-	
-	*_dynamic_cast_ok = true;
+int QMdiSubWindow_protectedbase_senderSignalIndex(const void* self) {
+	VirtualQMdiSubWindow* self_cast = static_cast<VirtualQMdiSubWindow*>( (QMdiSubWindow*)(self) );
 	
 	return self_cast->senderSignalIndex();
 
 }
 
-int QMdiSubWindow_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal) {
-	VirtualQMdiSubWindow* self_cast = dynamic_cast<VirtualQMdiSubWindow*>( (QMdiSubWindow*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return 0;
-	}
-	
-	*_dynamic_cast_ok = true;
+int QMdiSubWindow_protectedbase_receivers(const void* self, const char* signal) {
+	VirtualQMdiSubWindow* self_cast = static_cast<VirtualQMdiSubWindow*>( (QMdiSubWindow*)(self) );
 	
 	return self_cast->receivers(signal);
 
 }
 
-bool QMdiSubWindow_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal) {
-	VirtualQMdiSubWindow* self_cast = dynamic_cast<VirtualQMdiSubWindow*>( (QMdiSubWindow*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return false;
-	}
-	
-	*_dynamic_cast_ok = true;
+bool QMdiSubWindow_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal) {
+	VirtualQMdiSubWindow* self_cast = static_cast<VirtualQMdiSubWindow*>( (QMdiSubWindow*)(self) );
 	
 	return self_cast->isSignalConnected(*signal);
 

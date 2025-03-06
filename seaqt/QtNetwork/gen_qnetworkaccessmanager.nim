@@ -190,6 +190,11 @@ proc fcQNetworkAccessManager_virtualbase_childEvent(self: pointer, event: pointe
 proc fcQNetworkAccessManager_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QNetworkAccessManager_virtualbase_customEvent".}
 proc fcQNetworkAccessManager_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QNetworkAccessManager_virtualbase_connectNotify".}
 proc fcQNetworkAccessManager_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QNetworkAccessManager_virtualbase_disconnectNotify".}
+proc fcQNetworkAccessManager_protectedbase_supportedSchemesImplementation(self: pointer, ): struct_miqt_array {.importc: "QNetworkAccessManager_protectedbase_supportedSchemesImplementation".}
+proc fcQNetworkAccessManager_protectedbase_sender(self: pointer, ): pointer {.importc: "QNetworkAccessManager_protectedbase_sender".}
+proc fcQNetworkAccessManager_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QNetworkAccessManager_protectedbase_senderSignalIndex".}
+proc fcQNetworkAccessManager_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QNetworkAccessManager_protectedbase_receivers".}
+proc fcQNetworkAccessManager_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QNetworkAccessManager_protectedbase_isSignalConnected".}
 proc fcQNetworkAccessManager_new(vtbl: pointer, ): ptr cQNetworkAccessManager {.importc: "QNetworkAccessManager_new".}
 proc fcQNetworkAccessManager_new2(vtbl: pointer, parent: pointer): ptr cQNetworkAccessManager {.importc: "QNetworkAccessManager_new2".}
 proc fcQNetworkAccessManager_staticMetaObject(): pointer {.importc: "QNetworkAccessManager_staticMetaObject".}
@@ -711,6 +716,29 @@ proc miqt_exec_callback_cQNetworkAccessManager_disconnectNotify(vtbl: pointer, s
   let self = QNetworkAccessManager(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
   vtbl[].disconnectNotify(self, slotval1)
+
+proc supportedSchemesImplementation*(self: gen_qnetworkaccessmanager_types.QNetworkAccessManager, ): seq[string] =
+  var v_ma = fcQNetworkAccessManager_protectedbase_supportedSchemesImplementation(self.h)
+  var vx_ret = newSeq[string](int(v_ma.len))
+  let v_outCast = cast[ptr UncheckedArray[struct_miqt_string]](v_ma.data)
+  for i in 0 ..< v_ma.len:
+    let vx_lv_ms = v_outCast[i]
+    let vx_lvx_ret = string.fromBytes(toOpenArrayByte(vx_lv_ms.data, 0, int(vx_lv_ms.len)-1))
+    c_free(vx_lv_ms.data)
+    vx_ret[i] = vx_lvx_ret
+  vx_ret
+
+proc sender*(self: gen_qnetworkaccessmanager_types.QNetworkAccessManager, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQNetworkAccessManager_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qnetworkaccessmanager_types.QNetworkAccessManager, ): cint =
+  fcQNetworkAccessManager_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qnetworkaccessmanager_types.QNetworkAccessManager, signal: cstring): cint =
+  fcQNetworkAccessManager_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qnetworkaccessmanager_types.QNetworkAccessManager, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQNetworkAccessManager_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc create*(T: type gen_qnetworkaccessmanager_types.QNetworkAccessManager,
     vtbl: ref QNetworkAccessManagerVTable = nil): gen_qnetworkaccessmanager_types.QNetworkAccessManager =

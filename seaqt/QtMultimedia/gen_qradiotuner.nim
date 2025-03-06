@@ -179,6 +179,12 @@ proc fcQRadioTuner_virtualbase_childEvent(self: pointer, event: pointer): void {
 proc fcQRadioTuner_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QRadioTuner_virtualbase_customEvent".}
 proc fcQRadioTuner_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QRadioTuner_virtualbase_connectNotify".}
 proc fcQRadioTuner_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QRadioTuner_virtualbase_disconnectNotify".}
+proc fcQRadioTuner_protectedbase_addPropertyWatch(self: pointer, name: struct_miqt_string): void {.importc: "QRadioTuner_protectedbase_addPropertyWatch".}
+proc fcQRadioTuner_protectedbase_removePropertyWatch(self: pointer, name: struct_miqt_string): void {.importc: "QRadioTuner_protectedbase_removePropertyWatch".}
+proc fcQRadioTuner_protectedbase_sender(self: pointer, ): pointer {.importc: "QRadioTuner_protectedbase_sender".}
+proc fcQRadioTuner_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QRadioTuner_protectedbase_senderSignalIndex".}
+proc fcQRadioTuner_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QRadioTuner_protectedbase_receivers".}
+proc fcQRadioTuner_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QRadioTuner_protectedbase_isSignalConnected".}
 proc fcQRadioTuner_new(vtbl: pointer, ): ptr cQRadioTuner {.importc: "QRadioTuner_new".}
 proc fcQRadioTuner_new2(vtbl: pointer, parent: pointer): ptr cQRadioTuner {.importc: "QRadioTuner_new2".}
 proc fcQRadioTuner_staticMetaObject(): pointer {.importc: "QRadioTuner_staticMetaObject".}
@@ -725,6 +731,24 @@ proc miqt_exec_callback_cQRadioTuner_disconnectNotify(vtbl: pointer, self: point
   let self = QRadioTuner(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
   vtbl[].disconnectNotify(self, slotval1)
+
+proc addPropertyWatch*(self: gen_qradiotuner_types.QRadioTuner, name: seq[byte]): void =
+  fcQRadioTuner_protectedbase_addPropertyWatch(self.h, struct_miqt_string(data: cast[cstring](if len(name) == 0: nil else: unsafeAddr name[0]), len: csize_t(len(name))))
+
+proc removePropertyWatch*(self: gen_qradiotuner_types.QRadioTuner, name: seq[byte]): void =
+  fcQRadioTuner_protectedbase_removePropertyWatch(self.h, struct_miqt_string(data: cast[cstring](if len(name) == 0: nil else: unsafeAddr name[0]), len: csize_t(len(name))))
+
+proc sender*(self: gen_qradiotuner_types.QRadioTuner, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQRadioTuner_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qradiotuner_types.QRadioTuner, ): cint =
+  fcQRadioTuner_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qradiotuner_types.QRadioTuner, signal: cstring): cint =
+  fcQRadioTuner_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qradiotuner_types.QRadioTuner, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQRadioTuner_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc create*(T: type gen_qradiotuner_types.QRadioTuner,
     vtbl: ref QRadioTunerVTable = nil): gen_qradiotuner_types.QRadioTuner =

@@ -287,9 +287,9 @@ public:
 	friend void QGraphicsAnchorLayout_virtualbase_widgetEvent(void* self, QEvent* e);
 
 	// Wrappers to allow calling protected methods:
-	friend void QGraphicsAnchorLayout_protectedbase_addChildLayoutItem(bool* _dynamic_cast_ok, void* self, QGraphicsLayoutItem* layoutItem);
-	friend void QGraphicsAnchorLayout_protectedbase_setGraphicsItem(bool* _dynamic_cast_ok, void* self, QGraphicsItem* item);
-	friend void QGraphicsAnchorLayout_protectedbase_setOwnedByLayout(bool* _dynamic_cast_ok, void* self, bool ownedByLayout);
+	friend void QGraphicsAnchorLayout_protectedbase_addChildLayoutItem(void* self, QGraphicsLayoutItem* layoutItem);
+	friend void QGraphicsAnchorLayout_protectedbase_setGraphicsItem(void* self, QGraphicsItem* item);
+	friend void QGraphicsAnchorLayout_protectedbase_setOwnedByLayout(void* self, bool ownedByLayout);
 };
 
 QGraphicsAnchorLayout* QGraphicsAnchorLayout_new(struct QGraphicsAnchorLayout_VTable* vtbl) {
@@ -420,40 +420,22 @@ void QGraphicsAnchorLayout_virtualbase_widgetEvent(void* self, QEvent* e) {
 
 }
 
-void QGraphicsAnchorLayout_protectedbase_addChildLayoutItem(bool* _dynamic_cast_ok, void* self, QGraphicsLayoutItem* layoutItem) {
-	VirtualQGraphicsAnchorLayout* self_cast = dynamic_cast<VirtualQGraphicsAnchorLayout*>( (QGraphicsAnchorLayout*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QGraphicsAnchorLayout_protectedbase_addChildLayoutItem(void* self, QGraphicsLayoutItem* layoutItem) {
+	VirtualQGraphicsAnchorLayout* self_cast = static_cast<VirtualQGraphicsAnchorLayout*>( (QGraphicsAnchorLayout*)(self) );
 	
 	self_cast->addChildLayoutItem(layoutItem);
 
 }
 
-void QGraphicsAnchorLayout_protectedbase_setGraphicsItem(bool* _dynamic_cast_ok, void* self, QGraphicsItem* item) {
-	VirtualQGraphicsAnchorLayout* self_cast = dynamic_cast<VirtualQGraphicsAnchorLayout*>( (QGraphicsAnchorLayout*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QGraphicsAnchorLayout_protectedbase_setGraphicsItem(void* self, QGraphicsItem* item) {
+	VirtualQGraphicsAnchorLayout* self_cast = static_cast<VirtualQGraphicsAnchorLayout*>( (QGraphicsAnchorLayout*)(self) );
 	
 	self_cast->setGraphicsItem(item);
 
 }
 
-void QGraphicsAnchorLayout_protectedbase_setOwnedByLayout(bool* _dynamic_cast_ok, void* self, bool ownedByLayout) {
-	VirtualQGraphicsAnchorLayout* self_cast = dynamic_cast<VirtualQGraphicsAnchorLayout*>( (QGraphicsAnchorLayout*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QGraphicsAnchorLayout_protectedbase_setOwnedByLayout(void* self, bool ownedByLayout) {
+	VirtualQGraphicsAnchorLayout* self_cast = static_cast<VirtualQGraphicsAnchorLayout*>( (QGraphicsAnchorLayout*)(self) );
 	
 	self_cast->setOwnedByLayout(ownedByLayout);
 

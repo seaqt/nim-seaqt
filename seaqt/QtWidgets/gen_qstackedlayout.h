@@ -142,15 +142,15 @@ void QStackedLayout_virtualbase_disconnectNotify(void* self, QMetaMethod* signal
 int QStackedLayout_virtualbase_minimumHeightForWidth(const void* self, int param1);
 QWidget* QStackedLayout_virtualbase_widget(void* self);
 QSpacerItem* QStackedLayout_virtualbase_spacerItem(void* self);
-void QStackedLayout_protectedbase_widgetEvent(bool* _dynamic_cast_ok, void* self, QEvent* param1);
-void QStackedLayout_protectedbase_addChildLayout(bool* _dynamic_cast_ok, void* self, QLayout* l);
-void QStackedLayout_protectedbase_addChildWidget(bool* _dynamic_cast_ok, void* self, QWidget* w);
-bool QStackedLayout_protectedbase_adoptLayout(bool* _dynamic_cast_ok, void* self, QLayout* layout);
-QRect* QStackedLayout_protectedbase_alignmentRect(bool* _dynamic_cast_ok, const void* self, QRect* param1);
-QObject* QStackedLayout_protectedbase_sender(bool* _dynamic_cast_ok, const void* self);
-int QStackedLayout_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
-int QStackedLayout_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
-bool QStackedLayout_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+void QStackedLayout_protectedbase_widgetEvent(void* self, QEvent* param1);
+void QStackedLayout_protectedbase_addChildLayout(void* self, QLayout* l);
+void QStackedLayout_protectedbase_addChildWidget(void* self, QWidget* w);
+bool QStackedLayout_protectedbase_adoptLayout(void* self, QLayout* layout);
+QRect* QStackedLayout_protectedbase_alignmentRect(const void* self, QRect* param1);
+QObject* QStackedLayout_protectedbase_sender(const void* self);
+int QStackedLayout_protectedbase_senderSignalIndex(const void* self);
+int QStackedLayout_protectedbase_receivers(const void* self, const char* signal);
+bool QStackedLayout_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
 const QMetaObject* QStackedLayout_staticMetaObject();
 void QStackedLayout_delete(QStackedLayout* self);
 

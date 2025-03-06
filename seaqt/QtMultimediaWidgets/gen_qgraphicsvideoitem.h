@@ -199,14 +199,14 @@ QVariant* QGraphicsVideoItem_virtualbase_inputMethodQuery(const void* self, int 
 bool QGraphicsVideoItem_virtualbase_supportsExtension(const void* self, int extension);
 void QGraphicsVideoItem_virtualbase_setExtension(void* self, int extension, QVariant* variant);
 QVariant* QGraphicsVideoItem_virtualbase_extension(const void* self, QVariant* variant);
-void QGraphicsVideoItem_protectedbase_updateMicroFocus(bool* _dynamic_cast_ok, void* self);
-QObject* QGraphicsVideoItem_protectedbase_sender(bool* _dynamic_cast_ok, const void* self);
-int QGraphicsVideoItem_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
-int QGraphicsVideoItem_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
-bool QGraphicsVideoItem_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
-void QGraphicsVideoItem_protectedbase_addToIndex(bool* _dynamic_cast_ok, void* self);
-void QGraphicsVideoItem_protectedbase_removeFromIndex(bool* _dynamic_cast_ok, void* self);
-void QGraphicsVideoItem_protectedbase_prepareGeometryChange(bool* _dynamic_cast_ok, void* self);
+void QGraphicsVideoItem_protectedbase_updateMicroFocus(void* self);
+QObject* QGraphicsVideoItem_protectedbase_sender(const void* self);
+int QGraphicsVideoItem_protectedbase_senderSignalIndex(const void* self);
+int QGraphicsVideoItem_protectedbase_receivers(const void* self, const char* signal);
+bool QGraphicsVideoItem_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
+void QGraphicsVideoItem_protectedbase_addToIndex(void* self);
+void QGraphicsVideoItem_protectedbase_removeFromIndex(void* self);
+void QGraphicsVideoItem_protectedbase_prepareGeometryChange(void* self);
 const QMetaObject* QGraphicsVideoItem_staticMetaObject();
 void QGraphicsVideoItem_delete(QGraphicsVideoItem* self);
 

@@ -164,6 +164,10 @@ proc fcQObject_virtualbase_childEvent(self: pointer, event: pointer): void {.imp
 proc fcQObject_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QObject_virtualbase_customEvent".}
 proc fcQObject_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QObject_virtualbase_connectNotify".}
 proc fcQObject_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QObject_virtualbase_disconnectNotify".}
+proc fcQObject_protectedbase_sender(self: pointer, ): pointer {.importc: "QObject_protectedbase_sender".}
+proc fcQObject_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QObject_protectedbase_senderSignalIndex".}
+proc fcQObject_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QObject_protectedbase_receivers".}
+proc fcQObject_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QObject_protectedbase_isSignalConnected".}
 proc fcQObject_new(vtbl: pointer, ): ptr cQObject {.importc: "QObject_new".}
 proc fcQObject_new2(vtbl: pointer, parent: pointer): ptr cQObject {.importc: "QObject_new2".}
 proc fcQObject_staticMetaObject(): pointer {.importc: "QObject_staticMetaObject".}
@@ -506,6 +510,18 @@ proc miqt_exec_callback_cQObject_disconnectNotify(vtbl: pointer, self: pointer, 
   let self = QObject(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
   vtbl[].disconnectNotify(self, slotval1)
+
+proc sender*(self: gen_qobject_types.QObject, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQObject_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qobject_types.QObject, ): cint =
+  fcQObject_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qobject_types.QObject, signal: cstring): cint =
+  fcQObject_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qobject_types.QObject, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQObject_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc create*(T: type gen_qobject_types.QObject,
     vtbl: ref QObjectVTable = nil): gen_qobject_types.QObject =

@@ -178,6 +178,15 @@ proc fcQGridLayout_virtualbase_connectNotify(self: pointer, signal: pointer): vo
 proc fcQGridLayout_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QGridLayout_virtualbase_disconnectNotify".}
 proc fcQGridLayout_virtualbase_widget(self: pointer, ): pointer {.importc: "QGridLayout_virtualbase_widget".}
 proc fcQGridLayout_virtualbase_spacerItem(self: pointer, ): pointer {.importc: "QGridLayout_virtualbase_spacerItem".}
+proc fcQGridLayout_protectedbase_widgetEvent(self: pointer, param1: pointer): void {.importc: "QGridLayout_protectedbase_widgetEvent".}
+proc fcQGridLayout_protectedbase_addChildLayout(self: pointer, l: pointer): void {.importc: "QGridLayout_protectedbase_addChildLayout".}
+proc fcQGridLayout_protectedbase_addChildWidget(self: pointer, w: pointer): void {.importc: "QGridLayout_protectedbase_addChildWidget".}
+proc fcQGridLayout_protectedbase_adoptLayout(self: pointer, layout: pointer): bool {.importc: "QGridLayout_protectedbase_adoptLayout".}
+proc fcQGridLayout_protectedbase_alignmentRect(self: pointer, param1: pointer): pointer {.importc: "QGridLayout_protectedbase_alignmentRect".}
+proc fcQGridLayout_protectedbase_sender(self: pointer, ): pointer {.importc: "QGridLayout_protectedbase_sender".}
+proc fcQGridLayout_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QGridLayout_protectedbase_senderSignalIndex".}
+proc fcQGridLayout_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QGridLayout_protectedbase_receivers".}
+proc fcQGridLayout_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QGridLayout_protectedbase_isSignalConnected".}
 proc fcQGridLayout_new(vtbl: pointer, parent: pointer): ptr cQGridLayout {.importc: "QGridLayout_new".}
 proc fcQGridLayout_new2(vtbl: pointer, ): ptr cQGridLayout {.importc: "QGridLayout_new2".}
 proc fcQGridLayout_staticMetaObject(): pointer {.importc: "QGridLayout_staticMetaObject".}
@@ -711,6 +720,33 @@ proc miqt_exec_callback_cQGridLayout_spacerItem(vtbl: pointer, self: pointer): p
   let self = QGridLayout(h: self)
   var virtualReturn = vtbl[].spacerItem(self)
   virtualReturn.h
+
+proc widgetEvent*(self: gen_qgridlayout_types.QGridLayout, param1: gen_qcoreevent_types.QEvent): void =
+  fcQGridLayout_protectedbase_widgetEvent(self.h, param1.h)
+
+proc addChildLayout*(self: gen_qgridlayout_types.QGridLayout, l: gen_qlayout_types.QLayout): void =
+  fcQGridLayout_protectedbase_addChildLayout(self.h, l.h)
+
+proc addChildWidget*(self: gen_qgridlayout_types.QGridLayout, w: gen_qwidget_types.QWidget): void =
+  fcQGridLayout_protectedbase_addChildWidget(self.h, w.h)
+
+proc adoptLayout*(self: gen_qgridlayout_types.QGridLayout, layout: gen_qlayout_types.QLayout): bool =
+  fcQGridLayout_protectedbase_adoptLayout(self.h, layout.h)
+
+proc alignmentRect*(self: gen_qgridlayout_types.QGridLayout, param1: gen_qrect_types.QRect): gen_qrect_types.QRect =
+  gen_qrect_types.QRect(h: fcQGridLayout_protectedbase_alignmentRect(self.h, param1.h))
+
+proc sender*(self: gen_qgridlayout_types.QGridLayout, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQGridLayout_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qgridlayout_types.QGridLayout, ): cint =
+  fcQGridLayout_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qgridlayout_types.QGridLayout, signal: cstring): cint =
+  fcQGridLayout_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qgridlayout_types.QGridLayout, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQGridLayout_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc create*(T: type gen_qgridlayout_types.QGridLayout,
     parent: gen_qwidget_types.QWidget,

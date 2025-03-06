@@ -223,10 +223,10 @@ public:
 	friend void QState_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
 
 	// Wrappers to allow calling protected methods:
-	friend QObject* QState_protectedbase_sender(bool* _dynamic_cast_ok, const void* self);
-	friend int QState_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
-	friend int QState_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
-	friend bool QState_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+	friend QObject* QState_protectedbase_sender(const void* self);
+	friend int QState_protectedbase_senderSignalIndex(const void* self);
+	friend int QState_protectedbase_receivers(const void* self, const char* signal);
+	friend bool QState_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
 };
 
 QState* QState_new(struct QState_VTable* vtbl) {
@@ -458,53 +458,29 @@ void QState_virtualbase_disconnectNotify(void* self, QMetaMethod* signal) {
 }
 
 const QMetaObject* QState_staticMetaObject() { return &QState::staticMetaObject; }
-QObject* QState_protectedbase_sender(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQState* self_cast = dynamic_cast<VirtualQState*>( (QState*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return nullptr;
-	}
-	
-	*_dynamic_cast_ok = true;
+QObject* QState_protectedbase_sender(const void* self) {
+	VirtualQState* self_cast = static_cast<VirtualQState*>( (QState*)(self) );
 	
 	return self_cast->sender();
 
 }
 
-int QState_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQState* self_cast = dynamic_cast<VirtualQState*>( (QState*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return 0;
-	}
-	
-	*_dynamic_cast_ok = true;
+int QState_protectedbase_senderSignalIndex(const void* self) {
+	VirtualQState* self_cast = static_cast<VirtualQState*>( (QState*)(self) );
 	
 	return self_cast->senderSignalIndex();
 
 }
 
-int QState_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal) {
-	VirtualQState* self_cast = dynamic_cast<VirtualQState*>( (QState*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return 0;
-	}
-	
-	*_dynamic_cast_ok = true;
+int QState_protectedbase_receivers(const void* self, const char* signal) {
+	VirtualQState* self_cast = static_cast<VirtualQState*>( (QState*)(self) );
 	
 	return self_cast->receivers(signal);
 
 }
 
-bool QState_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal) {
-	VirtualQState* self_cast = dynamic_cast<VirtualQState*>( (QState*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return false;
-	}
-	
-	*_dynamic_cast_ok = true;
+bool QState_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal) {
+	VirtualQState* self_cast = static_cast<VirtualQState*>( (QState*)(self) );
 	
 	return self_cast->isSignalConnected(*signal);
 

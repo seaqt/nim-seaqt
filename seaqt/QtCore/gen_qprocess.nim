@@ -247,6 +247,13 @@ proc fcQProcess_virtualbase_childEvent(self: pointer, event: pointer): void {.im
 proc fcQProcess_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QProcess_virtualbase_customEvent".}
 proc fcQProcess_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QProcess_virtualbase_connectNotify".}
 proc fcQProcess_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QProcess_virtualbase_disconnectNotify".}
+proc fcQProcess_protectedbase_setProcessState(self: pointer, state: cint): void {.importc: "QProcess_protectedbase_setProcessState".}
+proc fcQProcess_protectedbase_setOpenMode(self: pointer, openMode: cint): void {.importc: "QProcess_protectedbase_setOpenMode".}
+proc fcQProcess_protectedbase_setErrorString(self: pointer, errorString: struct_miqt_string): void {.importc: "QProcess_protectedbase_setErrorString".}
+proc fcQProcess_protectedbase_sender(self: pointer, ): pointer {.importc: "QProcess_protectedbase_sender".}
+proc fcQProcess_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QProcess_protectedbase_senderSignalIndex".}
+proc fcQProcess_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QProcess_protectedbase_receivers".}
+proc fcQProcess_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QProcess_protectedbase_isSignalConnected".}
 proc fcQProcess_new(vtbl: pointer, ): ptr cQProcess {.importc: "QProcess_new".}
 proc fcQProcess_new2(vtbl: pointer, parent: pointer): ptr cQProcess {.importc: "QProcess_new2".}
 proc fcQProcess_staticMetaObject(): pointer {.importc: "QProcess_staticMetaObject".}
@@ -1034,6 +1041,27 @@ proc miqt_exec_callback_cQProcess_disconnectNotify(vtbl: pointer, self: pointer,
   let self = QProcess(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
   vtbl[].disconnectNotify(self, slotval1)
+
+proc setProcessState*(self: gen_qprocess_types.QProcess, state: cint): void =
+  fcQProcess_protectedbase_setProcessState(self.h, cint(state))
+
+proc setOpenMode*(self: gen_qprocess_types.QProcess, openMode: cint): void =
+  fcQProcess_protectedbase_setOpenMode(self.h, cint(openMode))
+
+proc setErrorString*(self: gen_qprocess_types.QProcess, errorString: string): void =
+  fcQProcess_protectedbase_setErrorString(self.h, struct_miqt_string(data: errorString, len: csize_t(len(errorString))))
+
+proc sender*(self: gen_qprocess_types.QProcess, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQProcess_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qprocess_types.QProcess, ): cint =
+  fcQProcess_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qprocess_types.QProcess, signal: cstring): cint =
+  fcQProcess_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qprocess_types.QProcess, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQProcess_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc create*(T: type gen_qprocess_types.QProcess,
     vtbl: ref QProcessVTable = nil): gen_qprocess_types.QProcess =

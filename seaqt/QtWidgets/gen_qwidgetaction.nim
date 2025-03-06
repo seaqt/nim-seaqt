@@ -93,6 +93,11 @@ proc fcQWidgetAction_virtualbase_childEvent(self: pointer, event: pointer): void
 proc fcQWidgetAction_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QWidgetAction_virtualbase_customEvent".}
 proc fcQWidgetAction_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QWidgetAction_virtualbase_connectNotify".}
 proc fcQWidgetAction_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QWidgetAction_virtualbase_disconnectNotify".}
+proc fcQWidgetAction_protectedbase_createdWidgets(self: pointer, ): struct_miqt_array {.importc: "QWidgetAction_protectedbase_createdWidgets".}
+proc fcQWidgetAction_protectedbase_sender(self: pointer, ): pointer {.importc: "QWidgetAction_protectedbase_sender".}
+proc fcQWidgetAction_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QWidgetAction_protectedbase_senderSignalIndex".}
+proc fcQWidgetAction_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QWidgetAction_protectedbase_receivers".}
+proc fcQWidgetAction_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QWidgetAction_protectedbase_isSignalConnected".}
 proc fcQWidgetAction_new(vtbl: pointer, parent: pointer): ptr cQWidgetAction {.importc: "QWidgetAction_new".}
 proc fcQWidgetAction_staticMetaObject(): pointer {.importc: "QWidgetAction_staticMetaObject".}
 proc fcQWidgetAction_delete(self: pointer) {.importc: "QWidgetAction_delete".}
@@ -295,6 +300,26 @@ proc miqt_exec_callback_cQWidgetAction_disconnectNotify(vtbl: pointer, self: poi
   let self = QWidgetAction(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
   vtbl[].disconnectNotify(self, slotval1)
+
+proc createdWidgets*(self: gen_qwidgetaction_types.QWidgetAction, ): seq[gen_qwidget_types.QWidget] =
+  var v_ma = fcQWidgetAction_protectedbase_createdWidgets(self.h)
+  var vx_ret = newSeq[gen_qwidget_types.QWidget](int(v_ma.len))
+  let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
+  for i in 0 ..< v_ma.len:
+    vx_ret[i] = gen_qwidget_types.QWidget(h: v_outCast[i])
+  vx_ret
+
+proc sender*(self: gen_qwidgetaction_types.QWidgetAction, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQWidgetAction_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qwidgetaction_types.QWidgetAction, ): cint =
+  fcQWidgetAction_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qwidgetaction_types.QWidgetAction, signal: cstring): cint =
+  fcQWidgetAction_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qwidgetaction_types.QWidgetAction, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQWidgetAction_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc create*(T: type gen_qwidgetaction_types.QWidgetAction,
     parent: gen_qobject_types.QObject,

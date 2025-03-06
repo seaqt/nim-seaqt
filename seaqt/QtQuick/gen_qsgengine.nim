@@ -114,6 +114,10 @@ proc fcQSGEngine_virtualbase_childEvent(self: pointer, event: pointer): void {.i
 proc fcQSGEngine_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QSGEngine_virtualbase_customEvent".}
 proc fcQSGEngine_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QSGEngine_virtualbase_connectNotify".}
 proc fcQSGEngine_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QSGEngine_virtualbase_disconnectNotify".}
+proc fcQSGEngine_protectedbase_sender(self: pointer, ): pointer {.importc: "QSGEngine_protectedbase_sender".}
+proc fcQSGEngine_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QSGEngine_protectedbase_senderSignalIndex".}
+proc fcQSGEngine_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QSGEngine_protectedbase_receivers".}
+proc fcQSGEngine_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QSGEngine_protectedbase_isSignalConnected".}
 proc fcQSGEngine_new(vtbl: pointer, ): ptr cQSGEngine {.importc: "QSGEngine_new".}
 proc fcQSGEngine_new2(vtbl: pointer, parent: pointer): ptr cQSGEngine {.importc: "QSGEngine_new2".}
 proc fcQSGEngine_staticMetaObject(): pointer {.importc: "QSGEngine_staticMetaObject".}
@@ -312,6 +316,18 @@ proc miqt_exec_callback_cQSGEngine_disconnectNotify(vtbl: pointer, self: pointer
   let self = QSGEngine(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
   vtbl[].disconnectNotify(self, slotval1)
+
+proc sender*(self: gen_qsgengine_types.QSGEngine, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQSGEngine_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qsgengine_types.QSGEngine, ): cint =
+  fcQSGEngine_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qsgengine_types.QSGEngine, signal: cstring): cint =
+  fcQSGEngine_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qsgengine_types.QSGEngine, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQSGEngine_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc create*(T: type gen_qsgengine_types.QSGEngine,
     vtbl: ref QSGEngineVTable = nil): gen_qsgengine_types.QSGEngine =

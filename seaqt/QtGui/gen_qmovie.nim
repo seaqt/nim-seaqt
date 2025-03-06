@@ -149,6 +149,10 @@ proc fcQMovie_virtualbase_childEvent(self: pointer, event: pointer): void {.impo
 proc fcQMovie_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QMovie_virtualbase_customEvent".}
 proc fcQMovie_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QMovie_virtualbase_connectNotify".}
 proc fcQMovie_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QMovie_virtualbase_disconnectNotify".}
+proc fcQMovie_protectedbase_sender(self: pointer, ): pointer {.importc: "QMovie_protectedbase_sender".}
+proc fcQMovie_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QMovie_protectedbase_senderSignalIndex".}
+proc fcQMovie_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QMovie_protectedbase_receivers".}
+proc fcQMovie_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QMovie_protectedbase_isSignalConnected".}
 proc fcQMovie_new(vtbl: pointer, ): ptr cQMovie {.importc: "QMovie_new".}
 proc fcQMovie_new2(vtbl: pointer, device: pointer): ptr cQMovie {.importc: "QMovie_new2".}
 proc fcQMovie_new3(vtbl: pointer, fileName: struct_miqt_string): ptr cQMovie {.importc: "QMovie_new3".}
@@ -569,6 +573,18 @@ proc miqt_exec_callback_cQMovie_disconnectNotify(vtbl: pointer, self: pointer, s
   let self = QMovie(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
   vtbl[].disconnectNotify(self, slotval1)
+
+proc sender*(self: gen_qmovie_types.QMovie, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQMovie_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qmovie_types.QMovie, ): cint =
+  fcQMovie_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qmovie_types.QMovie, signal: cstring): cint =
+  fcQMovie_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qmovie_types.QMovie, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQMovie_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc create*(T: type gen_qmovie_types.QMovie,
     vtbl: ref QMovieVTable = nil): gen_qmovie_types.QMovie =

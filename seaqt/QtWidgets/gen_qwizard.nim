@@ -306,6 +306,16 @@ proc fcQWizard_virtualbase_childEvent(self: pointer, event: pointer): void {.imp
 proc fcQWizard_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QWizard_virtualbase_customEvent".}
 proc fcQWizard_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QWizard_virtualbase_connectNotify".}
 proc fcQWizard_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QWizard_virtualbase_disconnectNotify".}
+proc fcQWizard_protectedbase_adjustPosition(self: pointer, param1: pointer): void {.importc: "QWizard_protectedbase_adjustPosition".}
+proc fcQWizard_protectedbase_updateMicroFocus(self: pointer, ): void {.importc: "QWizard_protectedbase_updateMicroFocus".}
+proc fcQWizard_protectedbase_create(self: pointer, ): void {.importc: "QWizard_protectedbase_create".}
+proc fcQWizard_protectedbase_destroy(self: pointer, ): void {.importc: "QWizard_protectedbase_destroy".}
+proc fcQWizard_protectedbase_focusNextChild(self: pointer, ): bool {.importc: "QWizard_protectedbase_focusNextChild".}
+proc fcQWizard_protectedbase_focusPreviousChild(self: pointer, ): bool {.importc: "QWizard_protectedbase_focusPreviousChild".}
+proc fcQWizard_protectedbase_sender(self: pointer, ): pointer {.importc: "QWizard_protectedbase_sender".}
+proc fcQWizard_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QWizard_protectedbase_senderSignalIndex".}
+proc fcQWizard_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QWizard_protectedbase_receivers".}
+proc fcQWizard_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QWizard_protectedbase_isSignalConnected".}
 proc fcQWizard_new(vtbl: pointer, parent: pointer): ptr cQWizard {.importc: "QWizard_new".}
 proc fcQWizard_new2(vtbl: pointer, ): ptr cQWizard {.importc: "QWizard_new2".}
 proc fcQWizard_new3(vtbl: pointer, parent: pointer, flags: cint): ptr cQWizard {.importc: "QWizard_new3".}
@@ -451,6 +461,21 @@ proc fcQWizardPage_virtualbase_childEvent(self: pointer, event: pointer): void {
 proc fcQWizardPage_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QWizardPage_virtualbase_customEvent".}
 proc fcQWizardPage_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QWizardPage_virtualbase_connectNotify".}
 proc fcQWizardPage_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QWizardPage_virtualbase_disconnectNotify".}
+proc fcQWizardPage_protectedbase_setField(self: pointer, name: struct_miqt_string, value: pointer): void {.importc: "QWizardPage_protectedbase_setField".}
+proc fcQWizardPage_protectedbase_field(self: pointer, name: struct_miqt_string): pointer {.importc: "QWizardPage_protectedbase_field".}
+proc fcQWizardPage_protectedbase_registerField(self: pointer, name: struct_miqt_string, widget: pointer): void {.importc: "QWizardPage_protectedbase_registerField".}
+proc fcQWizardPage_protectedbase_wizard(self: pointer, ): pointer {.importc: "QWizardPage_protectedbase_wizard".}
+proc fcQWizardPage_protectedbase_registerField3(self: pointer, name: struct_miqt_string, widget: pointer, property: cstring): void {.importc: "QWizardPage_protectedbase_registerField3".}
+proc fcQWizardPage_protectedbase_registerField4(self: pointer, name: struct_miqt_string, widget: pointer, property: cstring, changedSignal: cstring): void {.importc: "QWizardPage_protectedbase_registerField4".}
+proc fcQWizardPage_protectedbase_updateMicroFocus(self: pointer, ): void {.importc: "QWizardPage_protectedbase_updateMicroFocus".}
+proc fcQWizardPage_protectedbase_create(self: pointer, ): void {.importc: "QWizardPage_protectedbase_create".}
+proc fcQWizardPage_protectedbase_destroy(self: pointer, ): void {.importc: "QWizardPage_protectedbase_destroy".}
+proc fcQWizardPage_protectedbase_focusNextChild(self: pointer, ): bool {.importc: "QWizardPage_protectedbase_focusNextChild".}
+proc fcQWizardPage_protectedbase_focusPreviousChild(self: pointer, ): bool {.importc: "QWizardPage_protectedbase_focusPreviousChild".}
+proc fcQWizardPage_protectedbase_sender(self: pointer, ): pointer {.importc: "QWizardPage_protectedbase_sender".}
+proc fcQWizardPage_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QWizardPage_protectedbase_senderSignalIndex".}
+proc fcQWizardPage_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QWizardPage_protectedbase_receivers".}
+proc fcQWizardPage_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QWizardPage_protectedbase_isSignalConnected".}
 proc fcQWizardPage_new(vtbl: pointer, parent: pointer): ptr cQWizardPage {.importc: "QWizardPage_new".}
 proc fcQWizardPage_new2(vtbl: pointer, ): ptr cQWizardPage {.importc: "QWizardPage_new2".}
 proc fcQWizardPage_staticMetaObject(): pointer {.importc: "QWizardPage_staticMetaObject".}
@@ -1412,6 +1437,36 @@ proc miqt_exec_callback_cQWizard_disconnectNotify(vtbl: pointer, self: pointer, 
   let self = QWizard(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
   vtbl[].disconnectNotify(self, slotval1)
+
+proc adjustPosition*(self: gen_qwizard_types.QWizard, param1: gen_qwidget_types.QWidget): void =
+  fcQWizard_protectedbase_adjustPosition(self.h, param1.h)
+
+proc updateMicroFocus*(self: gen_qwizard_types.QWizard, ): void =
+  fcQWizard_protectedbase_updateMicroFocus(self.h)
+
+proc create*(self: gen_qwizard_types.QWizard, ): void =
+  fcQWizard_protectedbase_create(self.h)
+
+proc destroy*(self: gen_qwizard_types.QWizard, ): void =
+  fcQWizard_protectedbase_destroy(self.h)
+
+proc focusNextChild*(self: gen_qwizard_types.QWizard, ): bool =
+  fcQWizard_protectedbase_focusNextChild(self.h)
+
+proc focusPreviousChild*(self: gen_qwizard_types.QWizard, ): bool =
+  fcQWizard_protectedbase_focusPreviousChild(self.h)
+
+proc sender*(self: gen_qwizard_types.QWizard, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQWizard_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qwizard_types.QWizard, ): cint =
+  fcQWizard_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qwizard_types.QWizard, signal: cstring): cint =
+  fcQWizard_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qwizard_types.QWizard, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQWizard_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc create*(T: type gen_qwizard_types.QWizard,
     parent: gen_qwidget_types.QWidget,
@@ -2545,6 +2600,51 @@ proc miqt_exec_callback_cQWizardPage_disconnectNotify(vtbl: pointer, self: point
   let self = QWizardPage(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
   vtbl[].disconnectNotify(self, slotval1)
+
+proc setField*(self: gen_qwizard_types.QWizardPage, name: string, value: gen_qvariant_types.QVariant): void =
+  fcQWizardPage_protectedbase_setField(self.h, struct_miqt_string(data: name, len: csize_t(len(name))), value.h)
+
+proc field*(self: gen_qwizard_types.QWizardPage, name: string): gen_qvariant_types.QVariant =
+  gen_qvariant_types.QVariant(h: fcQWizardPage_protectedbase_field(self.h, struct_miqt_string(data: name, len: csize_t(len(name)))))
+
+proc registerField*(self: gen_qwizard_types.QWizardPage, name: string, widget: gen_qwidget_types.QWidget): void =
+  fcQWizardPage_protectedbase_registerField(self.h, struct_miqt_string(data: name, len: csize_t(len(name))), widget.h)
+
+proc wizard*(self: gen_qwizard_types.QWizardPage, ): gen_qwizard_types.QWizard =
+  gen_qwizard_types.QWizard(h: fcQWizardPage_protectedbase_wizard(self.h))
+
+proc registerField*(self: gen_qwizard_types.QWizardPage, name: string, widget: gen_qwidget_types.QWidget, property: cstring): void =
+  fcQWizardPage_protectedbase_registerField3(self.h, struct_miqt_string(data: name, len: csize_t(len(name))), widget.h, property)
+
+proc registerField*(self: gen_qwizard_types.QWizardPage, name: string, widget: gen_qwidget_types.QWidget, property: cstring, changedSignal: cstring): void =
+  fcQWizardPage_protectedbase_registerField4(self.h, struct_miqt_string(data: name, len: csize_t(len(name))), widget.h, property, changedSignal)
+
+proc updateMicroFocus*(self: gen_qwizard_types.QWizardPage, ): void =
+  fcQWizardPage_protectedbase_updateMicroFocus(self.h)
+
+proc create*(self: gen_qwizard_types.QWizardPage, ): void =
+  fcQWizardPage_protectedbase_create(self.h)
+
+proc destroy*(self: gen_qwizard_types.QWizardPage, ): void =
+  fcQWizardPage_protectedbase_destroy(self.h)
+
+proc focusNextChild*(self: gen_qwizard_types.QWizardPage, ): bool =
+  fcQWizardPage_protectedbase_focusNextChild(self.h)
+
+proc focusPreviousChild*(self: gen_qwizard_types.QWizardPage, ): bool =
+  fcQWizardPage_protectedbase_focusPreviousChild(self.h)
+
+proc sender*(self: gen_qwizard_types.QWizardPage, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQWizardPage_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qwizard_types.QWizardPage, ): cint =
+  fcQWizardPage_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qwizard_types.QWizardPage, signal: cstring): cint =
+  fcQWizardPage_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qwizard_types.QWizardPage, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQWizardPage_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc create*(T: type gen_qwizard_types.QWizardPage,
     parent: gen_qwidget_types.QWidget,

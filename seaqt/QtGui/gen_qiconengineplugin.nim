@@ -85,6 +85,10 @@ proc fcQIconEnginePlugin_virtualbase_childEvent(self: pointer, event: pointer): 
 proc fcQIconEnginePlugin_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QIconEnginePlugin_virtualbase_customEvent".}
 proc fcQIconEnginePlugin_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QIconEnginePlugin_virtualbase_connectNotify".}
 proc fcQIconEnginePlugin_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QIconEnginePlugin_virtualbase_disconnectNotify".}
+proc fcQIconEnginePlugin_protectedbase_sender(self: pointer, ): pointer {.importc: "QIconEnginePlugin_protectedbase_sender".}
+proc fcQIconEnginePlugin_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QIconEnginePlugin_protectedbase_senderSignalIndex".}
+proc fcQIconEnginePlugin_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QIconEnginePlugin_protectedbase_receivers".}
+proc fcQIconEnginePlugin_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QIconEnginePlugin_protectedbase_isSignalConnected".}
 proc fcQIconEnginePlugin_new(vtbl: pointer, ): ptr cQIconEnginePlugin {.importc: "QIconEnginePlugin_new".}
 proc fcQIconEnginePlugin_new2(vtbl: pointer, parent: pointer): ptr cQIconEnginePlugin {.importc: "QIconEnginePlugin_new2".}
 proc fcQIconEnginePlugin_staticMetaObject(): pointer {.importc: "QIconEnginePlugin_staticMetaObject".}
@@ -268,6 +272,18 @@ proc miqt_exec_callback_cQIconEnginePlugin_disconnectNotify(vtbl: pointer, self:
   let self = QIconEnginePlugin(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
   vtbl[].disconnectNotify(self, slotval1)
+
+proc sender*(self: gen_qiconengineplugin_types.QIconEnginePlugin, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQIconEnginePlugin_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qiconengineplugin_types.QIconEnginePlugin, ): cint =
+  fcQIconEnginePlugin_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qiconengineplugin_types.QIconEnginePlugin, signal: cstring): cint =
+  fcQIconEnginePlugin_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qiconengineplugin_types.QIconEnginePlugin, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQIconEnginePlugin_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc create*(T: type gen_qiconengineplugin_types.QIconEnginePlugin,
     vtbl: ref QIconEnginePluginVTable = nil): gen_qiconengineplugin_types.QIconEnginePlugin =

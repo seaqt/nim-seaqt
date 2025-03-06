@@ -224,6 +224,16 @@ proc fcQColorDialog_virtualbase_childEvent(self: pointer, event: pointer): void 
 proc fcQColorDialog_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QColorDialog_virtualbase_customEvent".}
 proc fcQColorDialog_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QColorDialog_virtualbase_connectNotify".}
 proc fcQColorDialog_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QColorDialog_virtualbase_disconnectNotify".}
+proc fcQColorDialog_protectedbase_adjustPosition(self: pointer, param1: pointer): void {.importc: "QColorDialog_protectedbase_adjustPosition".}
+proc fcQColorDialog_protectedbase_updateMicroFocus(self: pointer, ): void {.importc: "QColorDialog_protectedbase_updateMicroFocus".}
+proc fcQColorDialog_protectedbase_create(self: pointer, ): void {.importc: "QColorDialog_protectedbase_create".}
+proc fcQColorDialog_protectedbase_destroy(self: pointer, ): void {.importc: "QColorDialog_protectedbase_destroy".}
+proc fcQColorDialog_protectedbase_focusNextChild(self: pointer, ): bool {.importc: "QColorDialog_protectedbase_focusNextChild".}
+proc fcQColorDialog_protectedbase_focusPreviousChild(self: pointer, ): bool {.importc: "QColorDialog_protectedbase_focusPreviousChild".}
+proc fcQColorDialog_protectedbase_sender(self: pointer, ): pointer {.importc: "QColorDialog_protectedbase_sender".}
+proc fcQColorDialog_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QColorDialog_protectedbase_senderSignalIndex".}
+proc fcQColorDialog_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QColorDialog_protectedbase_receivers".}
+proc fcQColorDialog_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QColorDialog_protectedbase_isSignalConnected".}
 proc fcQColorDialog_new(vtbl: pointer, parent: pointer): ptr cQColorDialog {.importc: "QColorDialog_new".}
 proc fcQColorDialog_new2(vtbl: pointer, ): ptr cQColorDialog {.importc: "QColorDialog_new2".}
 proc fcQColorDialog_new3(vtbl: pointer, initial: pointer): ptr cQColorDialog {.importc: "QColorDialog_new3".}
@@ -1006,6 +1016,36 @@ proc miqt_exec_callback_cQColorDialog_disconnectNotify(vtbl: pointer, self: poin
   let self = QColorDialog(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
   vtbl[].disconnectNotify(self, slotval1)
+
+proc adjustPosition*(self: gen_qcolordialog_types.QColorDialog, param1: gen_qwidget_types.QWidget): void =
+  fcQColorDialog_protectedbase_adjustPosition(self.h, param1.h)
+
+proc updateMicroFocus*(self: gen_qcolordialog_types.QColorDialog, ): void =
+  fcQColorDialog_protectedbase_updateMicroFocus(self.h)
+
+proc create*(self: gen_qcolordialog_types.QColorDialog, ): void =
+  fcQColorDialog_protectedbase_create(self.h)
+
+proc destroy*(self: gen_qcolordialog_types.QColorDialog, ): void =
+  fcQColorDialog_protectedbase_destroy(self.h)
+
+proc focusNextChild*(self: gen_qcolordialog_types.QColorDialog, ): bool =
+  fcQColorDialog_protectedbase_focusNextChild(self.h)
+
+proc focusPreviousChild*(self: gen_qcolordialog_types.QColorDialog, ): bool =
+  fcQColorDialog_protectedbase_focusPreviousChild(self.h)
+
+proc sender*(self: gen_qcolordialog_types.QColorDialog, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQColorDialog_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qcolordialog_types.QColorDialog, ): cint =
+  fcQColorDialog_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qcolordialog_types.QColorDialog, signal: cstring): cint =
+  fcQColorDialog_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qcolordialog_types.QColorDialog, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQColorDialog_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc create*(T: type gen_qcolordialog_types.QColorDialog,
     parent: gen_qwidget_types.QWidget,

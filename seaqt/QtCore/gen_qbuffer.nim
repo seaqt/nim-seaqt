@@ -127,6 +127,12 @@ proc fcQBuffer_virtualbase_eventFilter(self: pointer, watched: pointer, event: p
 proc fcQBuffer_virtualbase_timerEvent(self: pointer, event: pointer): void {.importc: "QBuffer_virtualbase_timerEvent".}
 proc fcQBuffer_virtualbase_childEvent(self: pointer, event: pointer): void {.importc: "QBuffer_virtualbase_childEvent".}
 proc fcQBuffer_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QBuffer_virtualbase_customEvent".}
+proc fcQBuffer_protectedbase_setOpenMode(self: pointer, openMode: cint): void {.importc: "QBuffer_protectedbase_setOpenMode".}
+proc fcQBuffer_protectedbase_setErrorString(self: pointer, errorString: struct_miqt_string): void {.importc: "QBuffer_protectedbase_setErrorString".}
+proc fcQBuffer_protectedbase_sender(self: pointer, ): pointer {.importc: "QBuffer_protectedbase_sender".}
+proc fcQBuffer_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QBuffer_protectedbase_senderSignalIndex".}
+proc fcQBuffer_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QBuffer_protectedbase_receivers".}
+proc fcQBuffer_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QBuffer_protectedbase_isSignalConnected".}
 proc fcQBuffer_new(vtbl: pointer, ): ptr cQBuffer {.importc: "QBuffer_new".}
 proc fcQBuffer_new2(vtbl: pointer, parent: pointer): ptr cQBuffer {.importc: "QBuffer_new2".}
 proc fcQBuffer_staticMetaObject(): pointer {.importc: "QBuffer_staticMetaObject".}
@@ -525,6 +531,24 @@ proc miqt_exec_callback_cQBuffer_customEvent(vtbl: pointer, self: pointer, event
   let self = QBuffer(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event)
   vtbl[].customEvent(self, slotval1)
+
+proc setOpenMode*(self: gen_qbuffer_types.QBuffer, openMode: cint): void =
+  fcQBuffer_protectedbase_setOpenMode(self.h, cint(openMode))
+
+proc setErrorString*(self: gen_qbuffer_types.QBuffer, errorString: string): void =
+  fcQBuffer_protectedbase_setErrorString(self.h, struct_miqt_string(data: errorString, len: csize_t(len(errorString))))
+
+proc sender*(self: gen_qbuffer_types.QBuffer, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQBuffer_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qbuffer_types.QBuffer, ): cint =
+  fcQBuffer_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qbuffer_types.QBuffer, signal: cstring): cint =
+  fcQBuffer_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qbuffer_types.QBuffer, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQBuffer_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc create*(T: type gen_qbuffer_types.QBuffer,
     vtbl: ref QBufferVTable = nil): gen_qbuffer_types.QBuffer =

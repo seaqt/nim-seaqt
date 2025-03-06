@@ -438,6 +438,10 @@ proc fcQWebPage_virtualbase_childEvent(self: pointer, event: pointer): void {.im
 proc fcQWebPage_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QWebPage_virtualbase_customEvent".}
 proc fcQWebPage_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QWebPage_virtualbase_connectNotify".}
 proc fcQWebPage_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QWebPage_virtualbase_disconnectNotify".}
+proc fcQWebPage_protectedbase_sender(self: pointer, ): pointer {.importc: "QWebPage_protectedbase_sender".}
+proc fcQWebPage_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QWebPage_protectedbase_senderSignalIndex".}
+proc fcQWebPage_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QWebPage_protectedbase_receivers".}
+proc fcQWebPage_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QWebPage_protectedbase_isSignalConnected".}
 proc fcQWebPage_new(vtbl: pointer, ): ptr cQWebPage {.importc: "QWebPage_new".}
 proc fcQWebPage_new2(vtbl: pointer, parent: pointer): ptr cQWebPage {.importc: "QWebPage_new2".}
 proc fcQWebPage_staticMetaObject(): pointer {.importc: "QWebPage_staticMetaObject".}
@@ -1668,6 +1672,18 @@ proc miqt_exec_callback_cQWebPage_disconnectNotify(vtbl: pointer, self: pointer,
   let self = QWebPage(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
   vtbl[].disconnectNotify(self, slotval1)
+
+proc sender*(self: gen_qwebpage_types.QWebPage, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQWebPage_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qwebpage_types.QWebPage, ): cint =
+  fcQWebPage_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qwebpage_types.QWebPage, signal: cstring): cint =
+  fcQWebPage_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qwebpage_types.QWebPage, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQWebPage_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc create*(T: type gen_qwebpage_types.QWebPage,
     vtbl: ref QWebPageVTable = nil): gen_qwebpage_types.QWebPage =

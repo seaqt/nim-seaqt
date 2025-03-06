@@ -80,10 +80,10 @@ void QVideoProbe_virtualbase_childEvent(void* self, QChildEvent* event);
 void QVideoProbe_virtualbase_customEvent(void* self, QEvent* event);
 void QVideoProbe_virtualbase_connectNotify(void* self, QMetaMethod* signal);
 void QVideoProbe_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
-QObject* QVideoProbe_protectedbase_sender(bool* _dynamic_cast_ok, const void* self);
-int QVideoProbe_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
-int QVideoProbe_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
-bool QVideoProbe_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+QObject* QVideoProbe_protectedbase_sender(const void* self);
+int QVideoProbe_protectedbase_senderSignalIndex(const void* self);
+int QVideoProbe_protectedbase_receivers(const void* self, const char* signal);
+bool QVideoProbe_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
 const QMetaObject* QVideoProbe_staticMetaObject();
 void QVideoProbe_delete(QVideoProbe* self);
 

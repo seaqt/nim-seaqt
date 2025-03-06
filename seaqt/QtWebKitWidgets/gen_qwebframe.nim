@@ -52,6 +52,7 @@ export gen_qwebframe_types
 
 import
   ../QtCore/gen_qcoreevent_types,
+  ../QtCore/gen_qmetaobject_types,
   ../QtCore/gen_qobject,
   ../QtCore/gen_qobjectdefs_types,
   ../QtCore/gen_qpoint_types,
@@ -70,6 +71,7 @@ import
   ./gen_qwebpage_types
 export
   gen_qcoreevent_types,
+  gen_qmetaobject_types,
   gen_qobject,
   gen_qobjectdefs_types,
   gen_qpoint_types,
@@ -198,6 +200,10 @@ proc fcQWebFrame_setContent3(self: pointer, data: struct_miqt_string, mimeType: 
 proc fcQWebFrame_addToJavaScriptWindowObject3(self: pointer, name: struct_miqt_string, objectVal: pointer, ownership: cint): void {.importc: "QWebFrame_addToJavaScriptWindowObject3".}
 proc fcQWebFrame_render22(self: pointer, param1: pointer, clip: pointer): void {.importc: "QWebFrame_render22".}
 proc fcQWebFrame_render3(self: pointer, param1: pointer, layer: cint, clip: pointer): void {.importc: "QWebFrame_render3".}
+proc fcQWebFrame_protectedbase_sender(self: pointer, ): pointer {.importc: "QWebFrame_protectedbase_sender".}
+proc fcQWebFrame_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QWebFrame_protectedbase_senderSignalIndex".}
+proc fcQWebFrame_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QWebFrame_protectedbase_receivers".}
+proc fcQWebFrame_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QWebFrame_protectedbase_isSignalConnected".}
 proc fcQWebFrame_staticMetaObject(): pointer {.importc: "QWebFrame_staticMetaObject".}
 
 proc operatorAssign*(self: gen_qwebframe_types.QWebHitTestResult, other: gen_qwebframe_types.QWebHitTestResult): void =
@@ -701,6 +707,18 @@ proc render*(self: gen_qwebframe_types.QWebFrame, param1: gen_qpainter_types.QPa
 
 proc render*(self: gen_qwebframe_types.QWebFrame, param1: gen_qpainter_types.QPainter, layer: cint, clip: gen_qregion_types.QRegion): void =
   fcQWebFrame_render3(self.h, param1.h, cint(layer), clip.h)
+
+proc sender*(self: gen_qwebframe_types.QWebFrame, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQWebFrame_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qwebframe_types.QWebFrame, ): cint =
+  fcQWebFrame_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qwebframe_types.QWebFrame, signal: cstring): cint =
+  fcQWebFrame_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qwebframe_types.QWebFrame, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQWebFrame_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc staticMetaObject*(_: type gen_qwebframe_types.QWebFrame): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQWebFrame_staticMetaObject())

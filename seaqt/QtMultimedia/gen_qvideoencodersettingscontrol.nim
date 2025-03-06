@@ -38,11 +38,15 @@ import ./gen_qvideoencodersettingscontrol_types
 export gen_qvideoencodersettingscontrol_types
 
 import
+  ../QtCore/gen_qmetaobject_types,
+  ../QtCore/gen_qobject_types,
   ../QtCore/gen_qobjectdefs_types,
   ../QtCore/gen_qsize_types,
   ./gen_qmediacontrol,
   ./gen_qmediaencodersettings_types
 export
+  gen_qmetaobject_types,
+  gen_qobject_types,
   gen_qobjectdefs_types,
   gen_qsize_types,
   gen_qmediacontrol,
@@ -65,6 +69,10 @@ proc fcQVideoEncoderSettingsControl_tr2(s: cstring, c: cstring): struct_miqt_str
 proc fcQVideoEncoderSettingsControl_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QVideoEncoderSettingsControl_tr3".}
 proc fcQVideoEncoderSettingsControl_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QVideoEncoderSettingsControl_trUtf82".}
 proc fcQVideoEncoderSettingsControl_trUtf83(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QVideoEncoderSettingsControl_trUtf83".}
+proc fcQVideoEncoderSettingsControl_protectedbase_sender(self: pointer, ): pointer {.importc: "QVideoEncoderSettingsControl_protectedbase_sender".}
+proc fcQVideoEncoderSettingsControl_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QVideoEncoderSettingsControl_protectedbase_senderSignalIndex".}
+proc fcQVideoEncoderSettingsControl_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QVideoEncoderSettingsControl_protectedbase_receivers".}
+proc fcQVideoEncoderSettingsControl_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QVideoEncoderSettingsControl_protectedbase_isSignalConnected".}
 proc fcQVideoEncoderSettingsControl_staticMetaObject(): pointer {.importc: "QVideoEncoderSettingsControl_staticMetaObject".}
 proc fcQVideoEncoderSettingsControl_delete(self: pointer) {.importc: "QVideoEncoderSettingsControl_delete".}
 
@@ -151,6 +159,18 @@ proc trUtf8*(_: type gen_qvideoencodersettingscontrol_types.QVideoEncoderSetting
   let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
   c_free(v_ms.data)
   vx_ret
+
+proc sender*(self: gen_qvideoencodersettingscontrol_types.QVideoEncoderSettingsControl, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQVideoEncoderSettingsControl_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qvideoencodersettingscontrol_types.QVideoEncoderSettingsControl, ): cint =
+  fcQVideoEncoderSettingsControl_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qvideoencodersettingscontrol_types.QVideoEncoderSettingsControl, signal: cstring): cint =
+  fcQVideoEncoderSettingsControl_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qvideoencodersettingscontrol_types.QVideoEncoderSettingsControl, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQVideoEncoderSettingsControl_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc staticMetaObject*(_: type gen_qvideoencodersettingscontrol_types.QVideoEncoderSettingsControl): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQVideoEncoderSettingsControl_staticMetaObject())

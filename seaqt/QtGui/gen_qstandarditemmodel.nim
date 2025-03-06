@@ -177,6 +177,7 @@ proc fcQStandardItem_virtualbase_typeX(self: pointer, ): cint {.importc: "QStand
 proc fcQStandardItem_virtualbase_read(self: pointer, inVal: pointer): void {.importc: "QStandardItem_virtualbase_read".}
 proc fcQStandardItem_virtualbase_write(self: pointer, outVal: pointer): void {.importc: "QStandardItem_virtualbase_write".}
 proc fcQStandardItem_virtualbase_operatorLesser(self: pointer, other: pointer): bool {.importc: "QStandardItem_virtualbase_operatorLesser".}
+proc fcQStandardItem_protectedbase_emitDataChanged(self: pointer, ): void {.importc: "QStandardItem_protectedbase_emitDataChanged".}
 proc fcQStandardItem_new(vtbl: pointer, ): ptr cQStandardItem {.importc: "QStandardItem_new".}
 proc fcQStandardItem_new2(vtbl: pointer, text: struct_miqt_string): ptr cQStandardItem {.importc: "QStandardItem_new2".}
 proc fcQStandardItem_new3(vtbl: pointer, icon: pointer, text: struct_miqt_string): ptr cQStandardItem {.importc: "QStandardItem_new3".}
@@ -347,6 +348,31 @@ proc fcQStandardItemModel_virtualbase_childEvent(self: pointer, event: pointer):
 proc fcQStandardItemModel_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QStandardItemModel_virtualbase_customEvent".}
 proc fcQStandardItemModel_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QStandardItemModel_virtualbase_connectNotify".}
 proc fcQStandardItemModel_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QStandardItemModel_virtualbase_disconnectNotify".}
+proc fcQStandardItemModel_protectedbase_resetInternalData(self: pointer, ): void {.importc: "QStandardItemModel_protectedbase_resetInternalData".}
+proc fcQStandardItemModel_protectedbase_createIndex(self: pointer, row: cint, column: cint): pointer {.importc: "QStandardItemModel_protectedbase_createIndex".}
+proc fcQStandardItemModel_protectedbase_encodeData(self: pointer, indexes: struct_miqt_array, stream: pointer): void {.importc: "QStandardItemModel_protectedbase_encodeData".}
+proc fcQStandardItemModel_protectedbase_decodeData(self: pointer, row: cint, column: cint, parent: pointer, stream: pointer): bool {.importc: "QStandardItemModel_protectedbase_decodeData".}
+proc fcQStandardItemModel_protectedbase_beginInsertRows(self: pointer, parent: pointer, first: cint, last: cint): void {.importc: "QStandardItemModel_protectedbase_beginInsertRows".}
+proc fcQStandardItemModel_protectedbase_endInsertRows(self: pointer, ): void {.importc: "QStandardItemModel_protectedbase_endInsertRows".}
+proc fcQStandardItemModel_protectedbase_beginRemoveRows(self: pointer, parent: pointer, first: cint, last: cint): void {.importc: "QStandardItemModel_protectedbase_beginRemoveRows".}
+proc fcQStandardItemModel_protectedbase_endRemoveRows(self: pointer, ): void {.importc: "QStandardItemModel_protectedbase_endRemoveRows".}
+proc fcQStandardItemModel_protectedbase_beginMoveRows(self: pointer, sourceParent: pointer, sourceFirst: cint, sourceLast: cint, destinationParent: pointer, destinationRow: cint): bool {.importc: "QStandardItemModel_protectedbase_beginMoveRows".}
+proc fcQStandardItemModel_protectedbase_endMoveRows(self: pointer, ): void {.importc: "QStandardItemModel_protectedbase_endMoveRows".}
+proc fcQStandardItemModel_protectedbase_beginInsertColumns(self: pointer, parent: pointer, first: cint, last: cint): void {.importc: "QStandardItemModel_protectedbase_beginInsertColumns".}
+proc fcQStandardItemModel_protectedbase_endInsertColumns(self: pointer, ): void {.importc: "QStandardItemModel_protectedbase_endInsertColumns".}
+proc fcQStandardItemModel_protectedbase_beginRemoveColumns(self: pointer, parent: pointer, first: cint, last: cint): void {.importc: "QStandardItemModel_protectedbase_beginRemoveColumns".}
+proc fcQStandardItemModel_protectedbase_endRemoveColumns(self: pointer, ): void {.importc: "QStandardItemModel_protectedbase_endRemoveColumns".}
+proc fcQStandardItemModel_protectedbase_beginMoveColumns(self: pointer, sourceParent: pointer, sourceFirst: cint, sourceLast: cint, destinationParent: pointer, destinationColumn: cint): bool {.importc: "QStandardItemModel_protectedbase_beginMoveColumns".}
+proc fcQStandardItemModel_protectedbase_endMoveColumns(self: pointer, ): void {.importc: "QStandardItemModel_protectedbase_endMoveColumns".}
+proc fcQStandardItemModel_protectedbase_beginResetModel(self: pointer, ): void {.importc: "QStandardItemModel_protectedbase_beginResetModel".}
+proc fcQStandardItemModel_protectedbase_endResetModel(self: pointer, ): void {.importc: "QStandardItemModel_protectedbase_endResetModel".}
+proc fcQStandardItemModel_protectedbase_changePersistentIndex(self: pointer, fromVal: pointer, to: pointer): void {.importc: "QStandardItemModel_protectedbase_changePersistentIndex".}
+proc fcQStandardItemModel_protectedbase_changePersistentIndexList(self: pointer, fromVal: struct_miqt_array, to: struct_miqt_array): void {.importc: "QStandardItemModel_protectedbase_changePersistentIndexList".}
+proc fcQStandardItemModel_protectedbase_persistentIndexList(self: pointer, ): struct_miqt_array {.importc: "QStandardItemModel_protectedbase_persistentIndexList".}
+proc fcQStandardItemModel_protectedbase_sender(self: pointer, ): pointer {.importc: "QStandardItemModel_protectedbase_sender".}
+proc fcQStandardItemModel_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QStandardItemModel_protectedbase_senderSignalIndex".}
+proc fcQStandardItemModel_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QStandardItemModel_protectedbase_receivers".}
+proc fcQStandardItemModel_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QStandardItemModel_protectedbase_isSignalConnected".}
 proc fcQStandardItemModel_new(vtbl: pointer, ): ptr cQStandardItemModel {.importc: "QStandardItemModel_new".}
 proc fcQStandardItemModel_new2(vtbl: pointer, rows: cint, columns: cint): ptr cQStandardItemModel {.importc: "QStandardItemModel_new2".}
 proc fcQStandardItemModel_new3(vtbl: pointer, parent: pointer): ptr cQStandardItemModel {.importc: "QStandardItemModel_new3".}
@@ -751,6 +777,9 @@ proc miqt_exec_callback_cQStandardItem_operatorLesser(vtbl: pointer, self: point
   let slotval1 = gen_qstandarditemmodel_types.QStandardItem(h: other)
   var virtualReturn = vtbl[].operatorLesser(self, slotval1)
   virtualReturn
+
+proc emitDataChanged*(self: gen_qstandarditemmodel_types.QStandardItem, ): void =
+  fcQStandardItem_protectedbase_emitDataChanged(self.h)
 
 proc create*(T: type gen_qstandarditemmodel_types.QStandardItem,
     vtbl: ref QStandardItemVTable = nil): gen_qstandarditemmodel_types.QStandardItem =
@@ -1860,6 +1889,98 @@ proc miqt_exec_callback_cQStandardItemModel_disconnectNotify(vtbl: pointer, self
   let self = QStandardItemModel(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
   vtbl[].disconnectNotify(self, slotval1)
+
+proc resetInternalData*(self: gen_qstandarditemmodel_types.QStandardItemModel, ): void =
+  fcQStandardItemModel_protectedbase_resetInternalData(self.h)
+
+proc createIndex*(self: gen_qstandarditemmodel_types.QStandardItemModel, row: cint, column: cint): gen_qabstractitemmodel_types.QModelIndex =
+  gen_qabstractitemmodel_types.QModelIndex(h: fcQStandardItemModel_protectedbase_createIndex(self.h, row, column))
+
+proc encodeData*(self: gen_qstandarditemmodel_types.QStandardItemModel, indexes: seq[gen_qabstractitemmodel_types.QModelIndex], stream: gen_qdatastream_types.QDataStream): void =
+  var indexes_CArray = newSeq[pointer](len(indexes))
+  for i in 0..<len(indexes):
+    indexes_CArray[i] = indexes[i].h
+
+  fcQStandardItemModel_protectedbase_encodeData(self.h, struct_miqt_array(len: csize_t(len(indexes)), data: if len(indexes) == 0: nil else: addr(indexes_CArray[0])), stream.h)
+
+proc decodeData*(self: gen_qstandarditemmodel_types.QStandardItemModel, row: cint, column: cint, parent: gen_qabstractitemmodel_types.QModelIndex, stream: gen_qdatastream_types.QDataStream): bool =
+  fcQStandardItemModel_protectedbase_decodeData(self.h, row, column, parent.h, stream.h)
+
+proc beginInsertRows*(self: gen_qstandarditemmodel_types.QStandardItemModel, parent: gen_qabstractitemmodel_types.QModelIndex, first: cint, last: cint): void =
+  fcQStandardItemModel_protectedbase_beginInsertRows(self.h, parent.h, first, last)
+
+proc endInsertRows*(self: gen_qstandarditemmodel_types.QStandardItemModel, ): void =
+  fcQStandardItemModel_protectedbase_endInsertRows(self.h)
+
+proc beginRemoveRows*(self: gen_qstandarditemmodel_types.QStandardItemModel, parent: gen_qabstractitemmodel_types.QModelIndex, first: cint, last: cint): void =
+  fcQStandardItemModel_protectedbase_beginRemoveRows(self.h, parent.h, first, last)
+
+proc endRemoveRows*(self: gen_qstandarditemmodel_types.QStandardItemModel, ): void =
+  fcQStandardItemModel_protectedbase_endRemoveRows(self.h)
+
+proc beginMoveRows*(self: gen_qstandarditemmodel_types.QStandardItemModel, sourceParent: gen_qabstractitemmodel_types.QModelIndex, sourceFirst: cint, sourceLast: cint, destinationParent: gen_qabstractitemmodel_types.QModelIndex, destinationRow: cint): bool =
+  fcQStandardItemModel_protectedbase_beginMoveRows(self.h, sourceParent.h, sourceFirst, sourceLast, destinationParent.h, destinationRow)
+
+proc endMoveRows*(self: gen_qstandarditemmodel_types.QStandardItemModel, ): void =
+  fcQStandardItemModel_protectedbase_endMoveRows(self.h)
+
+proc beginInsertColumns*(self: gen_qstandarditemmodel_types.QStandardItemModel, parent: gen_qabstractitemmodel_types.QModelIndex, first: cint, last: cint): void =
+  fcQStandardItemModel_protectedbase_beginInsertColumns(self.h, parent.h, first, last)
+
+proc endInsertColumns*(self: gen_qstandarditemmodel_types.QStandardItemModel, ): void =
+  fcQStandardItemModel_protectedbase_endInsertColumns(self.h)
+
+proc beginRemoveColumns*(self: gen_qstandarditemmodel_types.QStandardItemModel, parent: gen_qabstractitemmodel_types.QModelIndex, first: cint, last: cint): void =
+  fcQStandardItemModel_protectedbase_beginRemoveColumns(self.h, parent.h, first, last)
+
+proc endRemoveColumns*(self: gen_qstandarditemmodel_types.QStandardItemModel, ): void =
+  fcQStandardItemModel_protectedbase_endRemoveColumns(self.h)
+
+proc beginMoveColumns*(self: gen_qstandarditemmodel_types.QStandardItemModel, sourceParent: gen_qabstractitemmodel_types.QModelIndex, sourceFirst: cint, sourceLast: cint, destinationParent: gen_qabstractitemmodel_types.QModelIndex, destinationColumn: cint): bool =
+  fcQStandardItemModel_protectedbase_beginMoveColumns(self.h, sourceParent.h, sourceFirst, sourceLast, destinationParent.h, destinationColumn)
+
+proc endMoveColumns*(self: gen_qstandarditemmodel_types.QStandardItemModel, ): void =
+  fcQStandardItemModel_protectedbase_endMoveColumns(self.h)
+
+proc beginResetModel*(self: gen_qstandarditemmodel_types.QStandardItemModel, ): void =
+  fcQStandardItemModel_protectedbase_beginResetModel(self.h)
+
+proc endResetModel*(self: gen_qstandarditemmodel_types.QStandardItemModel, ): void =
+  fcQStandardItemModel_protectedbase_endResetModel(self.h)
+
+proc changePersistentIndex*(self: gen_qstandarditemmodel_types.QStandardItemModel, fromVal: gen_qabstractitemmodel_types.QModelIndex, to: gen_qabstractitemmodel_types.QModelIndex): void =
+  fcQStandardItemModel_protectedbase_changePersistentIndex(self.h, fromVal.h, to.h)
+
+proc changePersistentIndexList*(self: gen_qstandarditemmodel_types.QStandardItemModel, fromVal: seq[gen_qabstractitemmodel_types.QModelIndex], to: seq[gen_qabstractitemmodel_types.QModelIndex]): void =
+  var fromVal_CArray = newSeq[pointer](len(fromVal))
+  for i in 0..<len(fromVal):
+    fromVal_CArray[i] = fromVal[i].h
+
+  var to_CArray = newSeq[pointer](len(to))
+  for i in 0..<len(to):
+    to_CArray[i] = to[i].h
+
+  fcQStandardItemModel_protectedbase_changePersistentIndexList(self.h, struct_miqt_array(len: csize_t(len(fromVal)), data: if len(fromVal) == 0: nil else: addr(fromVal_CArray[0])), struct_miqt_array(len: csize_t(len(to)), data: if len(to) == 0: nil else: addr(to_CArray[0])))
+
+proc persistentIndexList*(self: gen_qstandarditemmodel_types.QStandardItemModel, ): seq[gen_qabstractitemmodel_types.QModelIndex] =
+  var v_ma = fcQStandardItemModel_protectedbase_persistentIndexList(self.h)
+  var vx_ret = newSeq[gen_qabstractitemmodel_types.QModelIndex](int(v_ma.len))
+  let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
+  for i in 0 ..< v_ma.len:
+    vx_ret[i] = gen_qabstractitemmodel_types.QModelIndex(h: v_outCast[i])
+  vx_ret
+
+proc sender*(self: gen_qstandarditemmodel_types.QStandardItemModel, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQStandardItemModel_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qstandarditemmodel_types.QStandardItemModel, ): cint =
+  fcQStandardItemModel_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qstandarditemmodel_types.QStandardItemModel, signal: cstring): cint =
+  fcQStandardItemModel_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qstandarditemmodel_types.QStandardItemModel, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQStandardItemModel_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc create*(T: type gen_qstandarditemmodel_types.QStandardItemModel,
     vtbl: ref QStandardItemModelVTable = nil): gen_qstandarditemmodel_types.QStandardItemModel =

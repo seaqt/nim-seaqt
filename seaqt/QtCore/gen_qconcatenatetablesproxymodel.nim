@@ -40,6 +40,7 @@ export gen_qconcatenatetablesproxymodel_types
 import
   ./gen_qabstractitemmodel,
   ./gen_qcoreevent_types,
+  ./gen_qdatastream_types,
   ./gen_qmetaobject_types,
   ./gen_qmimedata_types,
   ./gen_qobject_types,
@@ -50,6 +51,7 @@ import
 export
   gen_qabstractitemmodel,
   gen_qcoreevent_types,
+  gen_qdatastream_types,
   gen_qmetaobject_types,
   gen_qmimedata_types,
   gen_qobject_types,
@@ -178,6 +180,31 @@ proc fcQConcatenateTablesProxyModel_virtualbase_childEvent(self: pointer, event:
 proc fcQConcatenateTablesProxyModel_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QConcatenateTablesProxyModel_virtualbase_customEvent".}
 proc fcQConcatenateTablesProxyModel_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QConcatenateTablesProxyModel_virtualbase_connectNotify".}
 proc fcQConcatenateTablesProxyModel_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QConcatenateTablesProxyModel_virtualbase_disconnectNotify".}
+proc fcQConcatenateTablesProxyModel_protectedbase_resetInternalData(self: pointer, ): void {.importc: "QConcatenateTablesProxyModel_protectedbase_resetInternalData".}
+proc fcQConcatenateTablesProxyModel_protectedbase_createIndex(self: pointer, row: cint, column: cint): pointer {.importc: "QConcatenateTablesProxyModel_protectedbase_createIndex".}
+proc fcQConcatenateTablesProxyModel_protectedbase_encodeData(self: pointer, indexes: struct_miqt_array, stream: pointer): void {.importc: "QConcatenateTablesProxyModel_protectedbase_encodeData".}
+proc fcQConcatenateTablesProxyModel_protectedbase_decodeData(self: pointer, row: cint, column: cint, parent: pointer, stream: pointer): bool {.importc: "QConcatenateTablesProxyModel_protectedbase_decodeData".}
+proc fcQConcatenateTablesProxyModel_protectedbase_beginInsertRows(self: pointer, parent: pointer, first: cint, last: cint): void {.importc: "QConcatenateTablesProxyModel_protectedbase_beginInsertRows".}
+proc fcQConcatenateTablesProxyModel_protectedbase_endInsertRows(self: pointer, ): void {.importc: "QConcatenateTablesProxyModel_protectedbase_endInsertRows".}
+proc fcQConcatenateTablesProxyModel_protectedbase_beginRemoveRows(self: pointer, parent: pointer, first: cint, last: cint): void {.importc: "QConcatenateTablesProxyModel_protectedbase_beginRemoveRows".}
+proc fcQConcatenateTablesProxyModel_protectedbase_endRemoveRows(self: pointer, ): void {.importc: "QConcatenateTablesProxyModel_protectedbase_endRemoveRows".}
+proc fcQConcatenateTablesProxyModel_protectedbase_beginMoveRows(self: pointer, sourceParent: pointer, sourceFirst: cint, sourceLast: cint, destinationParent: pointer, destinationRow: cint): bool {.importc: "QConcatenateTablesProxyModel_protectedbase_beginMoveRows".}
+proc fcQConcatenateTablesProxyModel_protectedbase_endMoveRows(self: pointer, ): void {.importc: "QConcatenateTablesProxyModel_protectedbase_endMoveRows".}
+proc fcQConcatenateTablesProxyModel_protectedbase_beginInsertColumns(self: pointer, parent: pointer, first: cint, last: cint): void {.importc: "QConcatenateTablesProxyModel_protectedbase_beginInsertColumns".}
+proc fcQConcatenateTablesProxyModel_protectedbase_endInsertColumns(self: pointer, ): void {.importc: "QConcatenateTablesProxyModel_protectedbase_endInsertColumns".}
+proc fcQConcatenateTablesProxyModel_protectedbase_beginRemoveColumns(self: pointer, parent: pointer, first: cint, last: cint): void {.importc: "QConcatenateTablesProxyModel_protectedbase_beginRemoveColumns".}
+proc fcQConcatenateTablesProxyModel_protectedbase_endRemoveColumns(self: pointer, ): void {.importc: "QConcatenateTablesProxyModel_protectedbase_endRemoveColumns".}
+proc fcQConcatenateTablesProxyModel_protectedbase_beginMoveColumns(self: pointer, sourceParent: pointer, sourceFirst: cint, sourceLast: cint, destinationParent: pointer, destinationColumn: cint): bool {.importc: "QConcatenateTablesProxyModel_protectedbase_beginMoveColumns".}
+proc fcQConcatenateTablesProxyModel_protectedbase_endMoveColumns(self: pointer, ): void {.importc: "QConcatenateTablesProxyModel_protectedbase_endMoveColumns".}
+proc fcQConcatenateTablesProxyModel_protectedbase_beginResetModel(self: pointer, ): void {.importc: "QConcatenateTablesProxyModel_protectedbase_beginResetModel".}
+proc fcQConcatenateTablesProxyModel_protectedbase_endResetModel(self: pointer, ): void {.importc: "QConcatenateTablesProxyModel_protectedbase_endResetModel".}
+proc fcQConcatenateTablesProxyModel_protectedbase_changePersistentIndex(self: pointer, fromVal: pointer, to: pointer): void {.importc: "QConcatenateTablesProxyModel_protectedbase_changePersistentIndex".}
+proc fcQConcatenateTablesProxyModel_protectedbase_changePersistentIndexList(self: pointer, fromVal: struct_miqt_array, to: struct_miqt_array): void {.importc: "QConcatenateTablesProxyModel_protectedbase_changePersistentIndexList".}
+proc fcQConcatenateTablesProxyModel_protectedbase_persistentIndexList(self: pointer, ): struct_miqt_array {.importc: "QConcatenateTablesProxyModel_protectedbase_persistentIndexList".}
+proc fcQConcatenateTablesProxyModel_protectedbase_sender(self: pointer, ): pointer {.importc: "QConcatenateTablesProxyModel_protectedbase_sender".}
+proc fcQConcatenateTablesProxyModel_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QConcatenateTablesProxyModel_protectedbase_senderSignalIndex".}
+proc fcQConcatenateTablesProxyModel_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QConcatenateTablesProxyModel_protectedbase_receivers".}
+proc fcQConcatenateTablesProxyModel_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QConcatenateTablesProxyModel_protectedbase_isSignalConnected".}
 proc fcQConcatenateTablesProxyModel_new(vtbl: pointer, ): ptr cQConcatenateTablesProxyModel {.importc: "QConcatenateTablesProxyModel_new".}
 proc fcQConcatenateTablesProxyModel_new2(vtbl: pointer, parent: pointer): ptr cQConcatenateTablesProxyModel {.importc: "QConcatenateTablesProxyModel_new2".}
 proc fcQConcatenateTablesProxyModel_staticMetaObject(): pointer {.importc: "QConcatenateTablesProxyModel_staticMetaObject".}
@@ -969,6 +996,98 @@ proc miqt_exec_callback_cQConcatenateTablesProxyModel_disconnectNotify(vtbl: poi
   let self = QConcatenateTablesProxyModel(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
   vtbl[].disconnectNotify(self, slotval1)
+
+proc resetInternalData*(self: gen_qconcatenatetablesproxymodel_types.QConcatenateTablesProxyModel, ): void =
+  fcQConcatenateTablesProxyModel_protectedbase_resetInternalData(self.h)
+
+proc createIndex*(self: gen_qconcatenatetablesproxymodel_types.QConcatenateTablesProxyModel, row: cint, column: cint): gen_qabstractitemmodel_types.QModelIndex =
+  gen_qabstractitemmodel_types.QModelIndex(h: fcQConcatenateTablesProxyModel_protectedbase_createIndex(self.h, row, column))
+
+proc encodeData*(self: gen_qconcatenatetablesproxymodel_types.QConcatenateTablesProxyModel, indexes: seq[gen_qabstractitemmodel_types.QModelIndex], stream: gen_qdatastream_types.QDataStream): void =
+  var indexes_CArray = newSeq[pointer](len(indexes))
+  for i in 0..<len(indexes):
+    indexes_CArray[i] = indexes[i].h
+
+  fcQConcatenateTablesProxyModel_protectedbase_encodeData(self.h, struct_miqt_array(len: csize_t(len(indexes)), data: if len(indexes) == 0: nil else: addr(indexes_CArray[0])), stream.h)
+
+proc decodeData*(self: gen_qconcatenatetablesproxymodel_types.QConcatenateTablesProxyModel, row: cint, column: cint, parent: gen_qabstractitemmodel_types.QModelIndex, stream: gen_qdatastream_types.QDataStream): bool =
+  fcQConcatenateTablesProxyModel_protectedbase_decodeData(self.h, row, column, parent.h, stream.h)
+
+proc beginInsertRows*(self: gen_qconcatenatetablesproxymodel_types.QConcatenateTablesProxyModel, parent: gen_qabstractitemmodel_types.QModelIndex, first: cint, last: cint): void =
+  fcQConcatenateTablesProxyModel_protectedbase_beginInsertRows(self.h, parent.h, first, last)
+
+proc endInsertRows*(self: gen_qconcatenatetablesproxymodel_types.QConcatenateTablesProxyModel, ): void =
+  fcQConcatenateTablesProxyModel_protectedbase_endInsertRows(self.h)
+
+proc beginRemoveRows*(self: gen_qconcatenatetablesproxymodel_types.QConcatenateTablesProxyModel, parent: gen_qabstractitemmodel_types.QModelIndex, first: cint, last: cint): void =
+  fcQConcatenateTablesProxyModel_protectedbase_beginRemoveRows(self.h, parent.h, first, last)
+
+proc endRemoveRows*(self: gen_qconcatenatetablesproxymodel_types.QConcatenateTablesProxyModel, ): void =
+  fcQConcatenateTablesProxyModel_protectedbase_endRemoveRows(self.h)
+
+proc beginMoveRows*(self: gen_qconcatenatetablesproxymodel_types.QConcatenateTablesProxyModel, sourceParent: gen_qabstractitemmodel_types.QModelIndex, sourceFirst: cint, sourceLast: cint, destinationParent: gen_qabstractitemmodel_types.QModelIndex, destinationRow: cint): bool =
+  fcQConcatenateTablesProxyModel_protectedbase_beginMoveRows(self.h, sourceParent.h, sourceFirst, sourceLast, destinationParent.h, destinationRow)
+
+proc endMoveRows*(self: gen_qconcatenatetablesproxymodel_types.QConcatenateTablesProxyModel, ): void =
+  fcQConcatenateTablesProxyModel_protectedbase_endMoveRows(self.h)
+
+proc beginInsertColumns*(self: gen_qconcatenatetablesproxymodel_types.QConcatenateTablesProxyModel, parent: gen_qabstractitemmodel_types.QModelIndex, first: cint, last: cint): void =
+  fcQConcatenateTablesProxyModel_protectedbase_beginInsertColumns(self.h, parent.h, first, last)
+
+proc endInsertColumns*(self: gen_qconcatenatetablesproxymodel_types.QConcatenateTablesProxyModel, ): void =
+  fcQConcatenateTablesProxyModel_protectedbase_endInsertColumns(self.h)
+
+proc beginRemoveColumns*(self: gen_qconcatenatetablesproxymodel_types.QConcatenateTablesProxyModel, parent: gen_qabstractitemmodel_types.QModelIndex, first: cint, last: cint): void =
+  fcQConcatenateTablesProxyModel_protectedbase_beginRemoveColumns(self.h, parent.h, first, last)
+
+proc endRemoveColumns*(self: gen_qconcatenatetablesproxymodel_types.QConcatenateTablesProxyModel, ): void =
+  fcQConcatenateTablesProxyModel_protectedbase_endRemoveColumns(self.h)
+
+proc beginMoveColumns*(self: gen_qconcatenatetablesproxymodel_types.QConcatenateTablesProxyModel, sourceParent: gen_qabstractitemmodel_types.QModelIndex, sourceFirst: cint, sourceLast: cint, destinationParent: gen_qabstractitemmodel_types.QModelIndex, destinationColumn: cint): bool =
+  fcQConcatenateTablesProxyModel_protectedbase_beginMoveColumns(self.h, sourceParent.h, sourceFirst, sourceLast, destinationParent.h, destinationColumn)
+
+proc endMoveColumns*(self: gen_qconcatenatetablesproxymodel_types.QConcatenateTablesProxyModel, ): void =
+  fcQConcatenateTablesProxyModel_protectedbase_endMoveColumns(self.h)
+
+proc beginResetModel*(self: gen_qconcatenatetablesproxymodel_types.QConcatenateTablesProxyModel, ): void =
+  fcQConcatenateTablesProxyModel_protectedbase_beginResetModel(self.h)
+
+proc endResetModel*(self: gen_qconcatenatetablesproxymodel_types.QConcatenateTablesProxyModel, ): void =
+  fcQConcatenateTablesProxyModel_protectedbase_endResetModel(self.h)
+
+proc changePersistentIndex*(self: gen_qconcatenatetablesproxymodel_types.QConcatenateTablesProxyModel, fromVal: gen_qabstractitemmodel_types.QModelIndex, to: gen_qabstractitemmodel_types.QModelIndex): void =
+  fcQConcatenateTablesProxyModel_protectedbase_changePersistentIndex(self.h, fromVal.h, to.h)
+
+proc changePersistentIndexList*(self: gen_qconcatenatetablesproxymodel_types.QConcatenateTablesProxyModel, fromVal: seq[gen_qabstractitemmodel_types.QModelIndex], to: seq[gen_qabstractitemmodel_types.QModelIndex]): void =
+  var fromVal_CArray = newSeq[pointer](len(fromVal))
+  for i in 0..<len(fromVal):
+    fromVal_CArray[i] = fromVal[i].h
+
+  var to_CArray = newSeq[pointer](len(to))
+  for i in 0..<len(to):
+    to_CArray[i] = to[i].h
+
+  fcQConcatenateTablesProxyModel_protectedbase_changePersistentIndexList(self.h, struct_miqt_array(len: csize_t(len(fromVal)), data: if len(fromVal) == 0: nil else: addr(fromVal_CArray[0])), struct_miqt_array(len: csize_t(len(to)), data: if len(to) == 0: nil else: addr(to_CArray[0])))
+
+proc persistentIndexList*(self: gen_qconcatenatetablesproxymodel_types.QConcatenateTablesProxyModel, ): seq[gen_qabstractitemmodel_types.QModelIndex] =
+  var v_ma = fcQConcatenateTablesProxyModel_protectedbase_persistentIndexList(self.h)
+  var vx_ret = newSeq[gen_qabstractitemmodel_types.QModelIndex](int(v_ma.len))
+  let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
+  for i in 0 ..< v_ma.len:
+    vx_ret[i] = gen_qabstractitemmodel_types.QModelIndex(h: v_outCast[i])
+  vx_ret
+
+proc sender*(self: gen_qconcatenatetablesproxymodel_types.QConcatenateTablesProxyModel, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQConcatenateTablesProxyModel_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qconcatenatetablesproxymodel_types.QConcatenateTablesProxyModel, ): cint =
+  fcQConcatenateTablesProxyModel_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qconcatenatetablesproxymodel_types.QConcatenateTablesProxyModel, signal: cstring): cint =
+  fcQConcatenateTablesProxyModel_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qconcatenatetablesproxymodel_types.QConcatenateTablesProxyModel, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQConcatenateTablesProxyModel_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc create*(T: type gen_qconcatenatetablesproxymodel_types.QConcatenateTablesProxyModel,
     vtbl: ref QConcatenateTablesProxyModelVTable = nil): gen_qconcatenatetablesproxymodel_types.QConcatenateTablesProxyModel =

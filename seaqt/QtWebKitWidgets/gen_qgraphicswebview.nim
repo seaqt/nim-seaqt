@@ -291,6 +291,16 @@ proc fcQGraphicsWebView_virtualbase_hoverEnterEvent(self: pointer, event: pointe
 proc fcQGraphicsWebView_virtualbase_supportsExtension(self: pointer, extension: cint): bool {.importc: "QGraphicsWebView_virtualbase_supportsExtension".}
 proc fcQGraphicsWebView_virtualbase_setExtension(self: pointer, extension: cint, variant: pointer): void {.importc: "QGraphicsWebView_virtualbase_setExtension".}
 proc fcQGraphicsWebView_virtualbase_extension(self: pointer, variant: pointer): pointer {.importc: "QGraphicsWebView_virtualbase_extension".}
+proc fcQGraphicsWebView_protectedbase_updateMicroFocus(self: pointer, ): void {.importc: "QGraphicsWebView_protectedbase_updateMicroFocus".}
+proc fcQGraphicsWebView_protectedbase_sender(self: pointer, ): pointer {.importc: "QGraphicsWebView_protectedbase_sender".}
+proc fcQGraphicsWebView_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QGraphicsWebView_protectedbase_senderSignalIndex".}
+proc fcQGraphicsWebView_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QGraphicsWebView_protectedbase_receivers".}
+proc fcQGraphicsWebView_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QGraphicsWebView_protectedbase_isSignalConnected".}
+proc fcQGraphicsWebView_protectedbase_addToIndex(self: pointer, ): void {.importc: "QGraphicsWebView_protectedbase_addToIndex".}
+proc fcQGraphicsWebView_protectedbase_removeFromIndex(self: pointer, ): void {.importc: "QGraphicsWebView_protectedbase_removeFromIndex".}
+proc fcQGraphicsWebView_protectedbase_prepareGeometryChange(self: pointer, ): void {.importc: "QGraphicsWebView_protectedbase_prepareGeometryChange".}
+proc fcQGraphicsWebView_protectedbase_setGraphicsItem(self: pointer, item: pointer): void {.importc: "QGraphicsWebView_protectedbase_setGraphicsItem".}
+proc fcQGraphicsWebView_protectedbase_setOwnedByLayout(self: pointer, ownedByLayout: bool): void {.importc: "QGraphicsWebView_protectedbase_setOwnedByLayout".}
 proc fcQGraphicsWebView_new(vtbl: pointer, ): ptr cQGraphicsWebView {.importc: "QGraphicsWebView_new".}
 proc fcQGraphicsWebView_new2(vtbl: pointer, parent: pointer): ptr cQGraphicsWebView {.importc: "QGraphicsWebView_new2".}
 proc fcQGraphicsWebView_staticMetaObject(): pointer {.importc: "QGraphicsWebView_staticMetaObject".}
@@ -1402,6 +1412,36 @@ proc miqt_exec_callback_cQGraphicsWebView_extension(vtbl: pointer, self: pointer
   let slotval1 = gen_qvariant_types.QVariant(h: variant)
   var virtualReturn = vtbl[].extension(self, slotval1)
   virtualReturn.h
+
+proc updateMicroFocus*(self: gen_qgraphicswebview_types.QGraphicsWebView, ): void =
+  fcQGraphicsWebView_protectedbase_updateMicroFocus(self.h)
+
+proc sender*(self: gen_qgraphicswebview_types.QGraphicsWebView, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQGraphicsWebView_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qgraphicswebview_types.QGraphicsWebView, ): cint =
+  fcQGraphicsWebView_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qgraphicswebview_types.QGraphicsWebView, signal: cstring): cint =
+  fcQGraphicsWebView_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qgraphicswebview_types.QGraphicsWebView, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQGraphicsWebView_protectedbase_isSignalConnected(self.h, signal.h)
+
+proc addToIndex*(self: gen_qgraphicswebview_types.QGraphicsWebView, ): void =
+  fcQGraphicsWebView_protectedbase_addToIndex(self.h)
+
+proc removeFromIndex*(self: gen_qgraphicswebview_types.QGraphicsWebView, ): void =
+  fcQGraphicsWebView_protectedbase_removeFromIndex(self.h)
+
+proc prepareGeometryChange*(self: gen_qgraphicswebview_types.QGraphicsWebView, ): void =
+  fcQGraphicsWebView_protectedbase_prepareGeometryChange(self.h)
+
+proc setGraphicsItem*(self: gen_qgraphicswebview_types.QGraphicsWebView, item: gen_qgraphicsitem_types.QGraphicsItem): void =
+  fcQGraphicsWebView_protectedbase_setGraphicsItem(self.h, item.h)
+
+proc setOwnedByLayout*(self: gen_qgraphicswebview_types.QGraphicsWebView, ownedByLayout: bool): void =
+  fcQGraphicsWebView_protectedbase_setOwnedByLayout(self.h, ownedByLayout)
 
 proc create*(T: type gen_qgraphicswebview_types.QGraphicsWebView,
     vtbl: ref QGraphicsWebViewVTable = nil): gen_qgraphicswebview_types.QGraphicsWebView =

@@ -93,6 +93,10 @@ proc fcQPauseAnimation_virtualbase_childEvent(self: pointer, event: pointer): vo
 proc fcQPauseAnimation_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QPauseAnimation_virtualbase_customEvent".}
 proc fcQPauseAnimation_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QPauseAnimation_virtualbase_connectNotify".}
 proc fcQPauseAnimation_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QPauseAnimation_virtualbase_disconnectNotify".}
+proc fcQPauseAnimation_protectedbase_sender(self: pointer, ): pointer {.importc: "QPauseAnimation_protectedbase_sender".}
+proc fcQPauseAnimation_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QPauseAnimation_protectedbase_senderSignalIndex".}
+proc fcQPauseAnimation_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QPauseAnimation_protectedbase_receivers".}
+proc fcQPauseAnimation_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QPauseAnimation_protectedbase_isSignalConnected".}
 proc fcQPauseAnimation_new(vtbl: pointer, ): ptr cQPauseAnimation {.importc: "QPauseAnimation_new".}
 proc fcQPauseAnimation_new2(vtbl: pointer, msecs: cint): ptr cQPauseAnimation {.importc: "QPauseAnimation_new2".}
 proc fcQPauseAnimation_new3(vtbl: pointer, parent: pointer): ptr cQPauseAnimation {.importc: "QPauseAnimation_new3".}
@@ -314,6 +318,18 @@ proc miqt_exec_callback_cQPauseAnimation_disconnectNotify(vtbl: pointer, self: p
   let self = QPauseAnimation(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
   vtbl[].disconnectNotify(self, slotval1)
+
+proc sender*(self: gen_qpauseanimation_types.QPauseAnimation, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQPauseAnimation_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qpauseanimation_types.QPauseAnimation, ): cint =
+  fcQPauseAnimation_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qpauseanimation_types.QPauseAnimation, signal: cstring): cint =
+  fcQPauseAnimation_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qpauseanimation_types.QPauseAnimation, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQPauseAnimation_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc create*(T: type gen_qpauseanimation_types.QPauseAnimation,
     vtbl: ref QPauseAnimationVTable = nil): gen_qpauseanimation_types.QPauseAnimation =

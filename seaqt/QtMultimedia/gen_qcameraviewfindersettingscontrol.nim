@@ -47,11 +47,15 @@ import ./gen_qcameraviewfindersettingscontrol_types
 export gen_qcameraviewfindersettingscontrol_types
 
 import
+  ../QtCore/gen_qmetaobject_types,
+  ../QtCore/gen_qobject_types,
   ../QtCore/gen_qobjectdefs_types,
   ../QtCore/gen_qvariant_types,
   ./gen_qcameraviewfindersettings_types,
   ./gen_qmediacontrol
 export
+  gen_qmetaobject_types,
+  gen_qobject_types,
   gen_qobjectdefs_types,
   gen_qvariant_types,
   gen_qcameraviewfindersettings_types,
@@ -72,6 +76,10 @@ proc fcQCameraViewfinderSettingsControl_tr2(s: cstring, c: cstring): struct_miqt
 proc fcQCameraViewfinderSettingsControl_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QCameraViewfinderSettingsControl_tr3".}
 proc fcQCameraViewfinderSettingsControl_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QCameraViewfinderSettingsControl_trUtf82".}
 proc fcQCameraViewfinderSettingsControl_trUtf83(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QCameraViewfinderSettingsControl_trUtf83".}
+proc fcQCameraViewfinderSettingsControl_protectedbase_sender(self: pointer, ): pointer {.importc: "QCameraViewfinderSettingsControl_protectedbase_sender".}
+proc fcQCameraViewfinderSettingsControl_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QCameraViewfinderSettingsControl_protectedbase_senderSignalIndex".}
+proc fcQCameraViewfinderSettingsControl_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QCameraViewfinderSettingsControl_protectedbase_receivers".}
+proc fcQCameraViewfinderSettingsControl_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QCameraViewfinderSettingsControl_protectedbase_isSignalConnected".}
 proc fcQCameraViewfinderSettingsControl_staticMetaObject(): pointer {.importc: "QCameraViewfinderSettingsControl_staticMetaObject".}
 proc fcQCameraViewfinderSettingsControl_delete(self: pointer) {.importc: "QCameraViewfinderSettingsControl_delete".}
 proc fcQCameraViewfinderSettingsControl2_metaObject(self: pointer, ): pointer {.importc: "QCameraViewfinderSettingsControl2_metaObject".}
@@ -86,6 +94,10 @@ proc fcQCameraViewfinderSettingsControl2_tr2(s: cstring, c: cstring): struct_miq
 proc fcQCameraViewfinderSettingsControl2_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QCameraViewfinderSettingsControl2_tr3".}
 proc fcQCameraViewfinderSettingsControl2_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QCameraViewfinderSettingsControl2_trUtf82".}
 proc fcQCameraViewfinderSettingsControl2_trUtf83(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QCameraViewfinderSettingsControl2_trUtf83".}
+proc fcQCameraViewfinderSettingsControl2_protectedbase_sender(self: pointer, ): pointer {.importc: "QCameraViewfinderSettingsControl2_protectedbase_sender".}
+proc fcQCameraViewfinderSettingsControl2_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QCameraViewfinderSettingsControl2_protectedbase_senderSignalIndex".}
+proc fcQCameraViewfinderSettingsControl2_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QCameraViewfinderSettingsControl2_protectedbase_receivers".}
+proc fcQCameraViewfinderSettingsControl2_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QCameraViewfinderSettingsControl2_protectedbase_isSignalConnected".}
 proc fcQCameraViewfinderSettingsControl2_staticMetaObject(): pointer {.importc: "QCameraViewfinderSettingsControl2_staticMetaObject".}
 proc fcQCameraViewfinderSettingsControl2_delete(self: pointer) {.importc: "QCameraViewfinderSettingsControl2_delete".}
 
@@ -142,6 +154,18 @@ proc trUtf8*(_: type gen_qcameraviewfindersettingscontrol_types.QCameraViewfinde
   let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
   c_free(v_ms.data)
   vx_ret
+
+proc sender*(self: gen_qcameraviewfindersettingscontrol_types.QCameraViewfinderSettingsControl, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQCameraViewfinderSettingsControl_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qcameraviewfindersettingscontrol_types.QCameraViewfinderSettingsControl, ): cint =
+  fcQCameraViewfinderSettingsControl_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qcameraviewfindersettingscontrol_types.QCameraViewfinderSettingsControl, signal: cstring): cint =
+  fcQCameraViewfinderSettingsControl_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qcameraviewfindersettingscontrol_types.QCameraViewfinderSettingsControl, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQCameraViewfinderSettingsControl_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc staticMetaObject*(_: type gen_qcameraviewfindersettingscontrol_types.QCameraViewfinderSettingsControl): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQCameraViewfinderSettingsControl_staticMetaObject())
@@ -205,6 +229,18 @@ proc trUtf8*(_: type gen_qcameraviewfindersettingscontrol_types.QCameraViewfinde
   let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
   c_free(v_ms.data)
   vx_ret
+
+proc sender*(self: gen_qcameraviewfindersettingscontrol_types.QCameraViewfinderSettingsControl2, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQCameraViewfinderSettingsControl2_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qcameraviewfindersettingscontrol_types.QCameraViewfinderSettingsControl2, ): cint =
+  fcQCameraViewfinderSettingsControl2_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qcameraviewfindersettingscontrol_types.QCameraViewfinderSettingsControl2, signal: cstring): cint =
+  fcQCameraViewfinderSettingsControl2_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qcameraviewfindersettingscontrol_types.QCameraViewfinderSettingsControl2, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQCameraViewfinderSettingsControl2_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc staticMetaObject*(_: type gen_qcameraviewfindersettingscontrol_types.QCameraViewfinderSettingsControl2): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQCameraViewfinderSettingsControl2_staticMetaObject())

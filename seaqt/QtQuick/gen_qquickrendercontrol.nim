@@ -106,6 +106,10 @@ proc fcQQuickRenderControl_virtualbase_childEvent(self: pointer, event: pointer)
 proc fcQQuickRenderControl_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QQuickRenderControl_virtualbase_customEvent".}
 proc fcQQuickRenderControl_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QQuickRenderControl_virtualbase_connectNotify".}
 proc fcQQuickRenderControl_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QQuickRenderControl_virtualbase_disconnectNotify".}
+proc fcQQuickRenderControl_protectedbase_sender(self: pointer, ): pointer {.importc: "QQuickRenderControl_protectedbase_sender".}
+proc fcQQuickRenderControl_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QQuickRenderControl_protectedbase_senderSignalIndex".}
+proc fcQQuickRenderControl_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QQuickRenderControl_protectedbase_receivers".}
+proc fcQQuickRenderControl_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QQuickRenderControl_protectedbase_isSignalConnected".}
 proc fcQQuickRenderControl_new(vtbl: pointer, ): ptr cQQuickRenderControl {.importc: "QQuickRenderControl_new".}
 proc fcQQuickRenderControl_new2(vtbl: pointer, parent: pointer): ptr cQQuickRenderControl {.importc: "QQuickRenderControl_new2".}
 proc fcQQuickRenderControl_staticMetaObject(): pointer {.importc: "QQuickRenderControl_staticMetaObject".}
@@ -349,6 +353,18 @@ proc miqt_exec_callback_cQQuickRenderControl_disconnectNotify(vtbl: pointer, sel
   let self = QQuickRenderControl(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
   vtbl[].disconnectNotify(self, slotval1)
+
+proc sender*(self: gen_qquickrendercontrol_types.QQuickRenderControl, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQQuickRenderControl_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qquickrendercontrol_types.QQuickRenderControl, ): cint =
+  fcQQuickRenderControl_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qquickrendercontrol_types.QQuickRenderControl, signal: cstring): cint =
+  fcQQuickRenderControl_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qquickrendercontrol_types.QQuickRenderControl, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQQuickRenderControl_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc create*(T: type gen_qquickrendercontrol_types.QQuickRenderControl,
     vtbl: ref QQuickRenderControlVTable = nil): gen_qquickrendercontrol_types.QQuickRenderControl =

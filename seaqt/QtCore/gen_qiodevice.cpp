@@ -422,12 +422,12 @@ public:
 	friend void QIODevice_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
 
 	// Wrappers to allow calling protected methods:
-	friend void QIODevice_protectedbase_setOpenMode(bool* _dynamic_cast_ok, void* self, int openMode);
-	friend void QIODevice_protectedbase_setErrorString(bool* _dynamic_cast_ok, void* self, struct miqt_string errorString);
-	friend QObject* QIODevice_protectedbase_sender(bool* _dynamic_cast_ok, const void* self);
-	friend int QIODevice_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
-	friend int QIODevice_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
-	friend bool QIODevice_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+	friend void QIODevice_protectedbase_setOpenMode(void* self, int openMode);
+	friend void QIODevice_protectedbase_setErrorString(void* self, struct miqt_string errorString);
+	friend QObject* QIODevice_protectedbase_sender(const void* self);
+	friend int QIODevice_protectedbase_senderSignalIndex(const void* self);
+	friend int QIODevice_protectedbase_receivers(const void* self, const char* signal);
+	friend bool QIODevice_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
 };
 
 QIODevice* QIODevice_new(struct QIODevice_VTable* vtbl) {
@@ -991,80 +991,44 @@ void QIODevice_virtualbase_disconnectNotify(void* self, QMetaMethod* signal) {
 }
 
 const QMetaObject* QIODevice_staticMetaObject() { return &QIODevice::staticMetaObject; }
-void QIODevice_protectedbase_setOpenMode(bool* _dynamic_cast_ok, void* self, int openMode) {
-	VirtualQIODevice* self_cast = dynamic_cast<VirtualQIODevice*>( (QIODevice*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QIODevice_protectedbase_setOpenMode(void* self, int openMode) {
+	VirtualQIODevice* self_cast = static_cast<VirtualQIODevice*>( (QIODevice*)(self) );
 	
 	self_cast->setOpenMode(static_cast<VirtualQIODevice::OpenMode>(openMode));
 
 }
 
-void QIODevice_protectedbase_setErrorString(bool* _dynamic_cast_ok, void* self, struct miqt_string errorString) {
-	VirtualQIODevice* self_cast = dynamic_cast<VirtualQIODevice*>( (QIODevice*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QIODevice_protectedbase_setErrorString(void* self, struct miqt_string errorString) {
+	VirtualQIODevice* self_cast = static_cast<VirtualQIODevice*>( (QIODevice*)(self) );
 			QString errorString_QString = QString::fromUtf8(errorString.data, errorString.len);
 
 	self_cast->setErrorString(errorString_QString);
 
 }
 
-QObject* QIODevice_protectedbase_sender(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQIODevice* self_cast = dynamic_cast<VirtualQIODevice*>( (QIODevice*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return nullptr;
-	}
-	
-	*_dynamic_cast_ok = true;
+QObject* QIODevice_protectedbase_sender(const void* self) {
+	VirtualQIODevice* self_cast = static_cast<VirtualQIODevice*>( (QIODevice*)(self) );
 	
 	return self_cast->sender();
 
 }
 
-int QIODevice_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQIODevice* self_cast = dynamic_cast<VirtualQIODevice*>( (QIODevice*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return 0;
-	}
-	
-	*_dynamic_cast_ok = true;
+int QIODevice_protectedbase_senderSignalIndex(const void* self) {
+	VirtualQIODevice* self_cast = static_cast<VirtualQIODevice*>( (QIODevice*)(self) );
 	
 	return self_cast->senderSignalIndex();
 
 }
 
-int QIODevice_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal) {
-	VirtualQIODevice* self_cast = dynamic_cast<VirtualQIODevice*>( (QIODevice*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return 0;
-	}
-	
-	*_dynamic_cast_ok = true;
+int QIODevice_protectedbase_receivers(const void* self, const char* signal) {
+	VirtualQIODevice* self_cast = static_cast<VirtualQIODevice*>( (QIODevice*)(self) );
 	
 	return self_cast->receivers(signal);
 
 }
 
-bool QIODevice_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal) {
-	VirtualQIODevice* self_cast = dynamic_cast<VirtualQIODevice*>( (QIODevice*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return false;
-	}
-	
-	*_dynamic_cast_ok = true;
+bool QIODevice_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal) {
+	VirtualQIODevice* self_cast = static_cast<VirtualQIODevice*>( (QIODevice*)(self) );
 	
 	return self_cast->isSignalConnected(*signal);
 

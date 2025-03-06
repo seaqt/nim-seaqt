@@ -38,9 +38,13 @@ import ./gen_qcameracapturedestinationcontrol_types
 export gen_qcameracapturedestinationcontrol_types
 
 import
+  ../QtCore/gen_qmetaobject_types,
+  ../QtCore/gen_qobject_types,
   ../QtCore/gen_qobjectdefs_types,
   ./gen_qmediacontrol
 export
+  gen_qmetaobject_types,
+  gen_qobject_types,
   gen_qobjectdefs_types,
   gen_qmediacontrol
 
@@ -60,6 +64,10 @@ proc fcQCameraCaptureDestinationControl_tr2(s: cstring, c: cstring): struct_miqt
 proc fcQCameraCaptureDestinationControl_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QCameraCaptureDestinationControl_tr3".}
 proc fcQCameraCaptureDestinationControl_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QCameraCaptureDestinationControl_trUtf82".}
 proc fcQCameraCaptureDestinationControl_trUtf83(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QCameraCaptureDestinationControl_trUtf83".}
+proc fcQCameraCaptureDestinationControl_protectedbase_sender(self: pointer, ): pointer {.importc: "QCameraCaptureDestinationControl_protectedbase_sender".}
+proc fcQCameraCaptureDestinationControl_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QCameraCaptureDestinationControl_protectedbase_senderSignalIndex".}
+proc fcQCameraCaptureDestinationControl_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QCameraCaptureDestinationControl_protectedbase_receivers".}
+proc fcQCameraCaptureDestinationControl_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QCameraCaptureDestinationControl_protectedbase_isSignalConnected".}
 proc fcQCameraCaptureDestinationControl_staticMetaObject(): pointer {.importc: "QCameraCaptureDestinationControl_staticMetaObject".}
 proc fcQCameraCaptureDestinationControl_delete(self: pointer) {.importc: "QCameraCaptureDestinationControl_delete".}
 
@@ -136,6 +144,18 @@ proc trUtf8*(_: type gen_qcameracapturedestinationcontrol_types.QCameraCaptureDe
   let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
   c_free(v_ms.data)
   vx_ret
+
+proc sender*(self: gen_qcameracapturedestinationcontrol_types.QCameraCaptureDestinationControl, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQCameraCaptureDestinationControl_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qcameracapturedestinationcontrol_types.QCameraCaptureDestinationControl, ): cint =
+  fcQCameraCaptureDestinationControl_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qcameracapturedestinationcontrol_types.QCameraCaptureDestinationControl, signal: cstring): cint =
+  fcQCameraCaptureDestinationControl_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qcameracapturedestinationcontrol_types.QCameraCaptureDestinationControl, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQCameraCaptureDestinationControl_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc staticMetaObject*(_: type gen_qcameracapturedestinationcontrol_types.QCameraCaptureDestinationControl): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQCameraCaptureDestinationControl_staticMetaObject())

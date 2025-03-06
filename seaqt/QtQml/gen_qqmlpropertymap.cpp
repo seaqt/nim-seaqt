@@ -213,10 +213,10 @@ public:
 	friend void QQmlPropertyMap_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
 
 	// Wrappers to allow calling protected methods:
-	friend QObject* QQmlPropertyMap_protectedbase_sender(bool* _dynamic_cast_ok, const void* self);
-	friend int QQmlPropertyMap_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
-	friend int QQmlPropertyMap_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
-	friend bool QQmlPropertyMap_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+	friend QObject* QQmlPropertyMap_protectedbase_sender(const void* self);
+	friend int QQmlPropertyMap_protectedbase_senderSignalIndex(const void* self);
+	friend int QQmlPropertyMap_protectedbase_receivers(const void* self, const char* signal);
+	friend bool QQmlPropertyMap_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
 };
 
 QQmlPropertyMap* QQmlPropertyMap_new(struct QQmlPropertyMap_VTable* vtbl) {
@@ -468,53 +468,29 @@ void QQmlPropertyMap_virtualbase_disconnectNotify(void* self, QMetaMethod* signa
 }
 
 const QMetaObject* QQmlPropertyMap_staticMetaObject() { return &QQmlPropertyMap::staticMetaObject; }
-QObject* QQmlPropertyMap_protectedbase_sender(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQQmlPropertyMap* self_cast = dynamic_cast<VirtualQQmlPropertyMap*>( (QQmlPropertyMap*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return nullptr;
-	}
-	
-	*_dynamic_cast_ok = true;
+QObject* QQmlPropertyMap_protectedbase_sender(const void* self) {
+	VirtualQQmlPropertyMap* self_cast = static_cast<VirtualQQmlPropertyMap*>( (QQmlPropertyMap*)(self) );
 	
 	return self_cast->sender();
 
 }
 
-int QQmlPropertyMap_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQQmlPropertyMap* self_cast = dynamic_cast<VirtualQQmlPropertyMap*>( (QQmlPropertyMap*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return 0;
-	}
-	
-	*_dynamic_cast_ok = true;
+int QQmlPropertyMap_protectedbase_senderSignalIndex(const void* self) {
+	VirtualQQmlPropertyMap* self_cast = static_cast<VirtualQQmlPropertyMap*>( (QQmlPropertyMap*)(self) );
 	
 	return self_cast->senderSignalIndex();
 
 }
 
-int QQmlPropertyMap_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal) {
-	VirtualQQmlPropertyMap* self_cast = dynamic_cast<VirtualQQmlPropertyMap*>( (QQmlPropertyMap*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return 0;
-	}
-	
-	*_dynamic_cast_ok = true;
+int QQmlPropertyMap_protectedbase_receivers(const void* self, const char* signal) {
+	VirtualQQmlPropertyMap* self_cast = static_cast<VirtualQQmlPropertyMap*>( (QQmlPropertyMap*)(self) );
 	
 	return self_cast->receivers(signal);
 
 }
 
-bool QQmlPropertyMap_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal) {
-	VirtualQQmlPropertyMap* self_cast = dynamic_cast<VirtualQQmlPropertyMap*>( (QQmlPropertyMap*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return false;
-	}
-	
-	*_dynamic_cast_ok = true;
+bool QQmlPropertyMap_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal) {
+	VirtualQQmlPropertyMap* self_cast = static_cast<VirtualQQmlPropertyMap*>( (QQmlPropertyMap*)(self) );
 	
 	return self_cast->isSignalConnected(*signal);
 

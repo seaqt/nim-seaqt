@@ -61,11 +61,13 @@ import ./gen_qcamerafocus_types
 export gen_qcamerafocus_types
 
 import
+  ../QtCore/gen_qmetaobject_types,
   ../QtCore/gen_qobject,
   ../QtCore/gen_qobjectdefs_types,
   ../QtCore/gen_qpoint_types,
   ../QtCore/gen_qrect_types
 export
+  gen_qmetaobject_types,
   gen_qobject,
   gen_qobjectdefs_types,
   gen_qpoint_types,
@@ -120,6 +122,10 @@ proc fcQCameraFocus_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "
 proc fcQCameraFocus_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QCameraFocus_tr3".}
 proc fcQCameraFocus_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QCameraFocus_trUtf82".}
 proc fcQCameraFocus_trUtf83(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QCameraFocus_trUtf83".}
+proc fcQCameraFocus_protectedbase_sender(self: pointer, ): pointer {.importc: "QCameraFocus_protectedbase_sender".}
+proc fcQCameraFocus_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QCameraFocus_protectedbase_senderSignalIndex".}
+proc fcQCameraFocus_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QCameraFocus_protectedbase_receivers".}
+proc fcQCameraFocus_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QCameraFocus_protectedbase_isSignalConnected".}
 proc fcQCameraFocus_staticMetaObject(): pointer {.importc: "QCameraFocus_staticMetaObject".}
 
 proc operatorAssign*(self: gen_qcamerafocus_types.QCameraFocusZone, other: gen_qcamerafocus_types.QCameraFocusZone): void =
@@ -352,6 +358,18 @@ proc trUtf8*(_: type gen_qcamerafocus_types.QCameraFocus, s: cstring, c: cstring
   let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
   c_free(v_ms.data)
   vx_ret
+
+proc sender*(self: gen_qcamerafocus_types.QCameraFocus, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQCameraFocus_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qcamerafocus_types.QCameraFocus, ): cint =
+  fcQCameraFocus_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qcamerafocus_types.QCameraFocus, signal: cstring): cint =
+  fcQCameraFocus_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qcamerafocus_types.QCameraFocus, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQCameraFocus_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc staticMetaObject*(_: type gen_qcamerafocus_types.QCameraFocus): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQCameraFocus_staticMetaObject())

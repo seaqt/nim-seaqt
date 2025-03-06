@@ -38,11 +38,13 @@ import ./gen_qabstractstate_types
 export gen_qabstractstate_types
 
 import
+  ./gen_qmetaobject_types,
   ./gen_qobject,
   ./gen_qobjectdefs_types,
   ./gen_qstate_types,
   ./gen_qstatemachine_types
 export
+  gen_qmetaobject_types,
   gen_qobject,
   gen_qobjectdefs_types,
   gen_qstate_types,
@@ -64,6 +66,10 @@ proc fcQAbstractState_tr2(s: cstring, c: cstring): struct_miqt_string {.importc:
 proc fcQAbstractState_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QAbstractState_tr3".}
 proc fcQAbstractState_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QAbstractState_trUtf82".}
 proc fcQAbstractState_trUtf83(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QAbstractState_trUtf83".}
+proc fcQAbstractState_protectedbase_sender(self: pointer, ): pointer {.importc: "QAbstractState_protectedbase_sender".}
+proc fcQAbstractState_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QAbstractState_protectedbase_senderSignalIndex".}
+proc fcQAbstractState_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QAbstractState_protectedbase_receivers".}
+proc fcQAbstractState_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QAbstractState_protectedbase_isSignalConnected".}
 proc fcQAbstractState_staticMetaObject(): pointer {.importc: "QAbstractState_staticMetaObject".}
 proc fcQAbstractState_delete(self: pointer) {.importc: "QAbstractState_delete".}
 
@@ -140,6 +146,18 @@ proc trUtf8*(_: type gen_qabstractstate_types.QAbstractState, s: cstring, c: cst
   let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
   c_free(v_ms.data)
   vx_ret
+
+proc sender*(self: gen_qabstractstate_types.QAbstractState, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQAbstractState_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qabstractstate_types.QAbstractState, ): cint =
+  fcQAbstractState_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qabstractstate_types.QAbstractState, signal: cstring): cint =
+  fcQAbstractState_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qabstractstate_types.QAbstractState, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQAbstractState_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc staticMetaObject*(_: type gen_qabstractstate_types.QAbstractState): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQAbstractState_staticMetaObject())

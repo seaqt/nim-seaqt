@@ -45,9 +45,11 @@ import ./gen_qsessionmanager_types
 export gen_qsessionmanager_types
 
 import
+  ../QtCore/gen_qmetaobject_types,
   ../QtCore/gen_qobject,
   ../QtCore/gen_qobjectdefs_types
 export
+  gen_qmetaobject_types,
   gen_qobject,
   gen_qobjectdefs_types
 
@@ -78,6 +80,10 @@ proc fcQSessionManager_tr2(s: cstring, c: cstring): struct_miqt_string {.importc
 proc fcQSessionManager_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QSessionManager_tr3".}
 proc fcQSessionManager_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QSessionManager_trUtf82".}
 proc fcQSessionManager_trUtf83(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QSessionManager_trUtf83".}
+proc fcQSessionManager_protectedbase_sender(self: pointer, ): pointer {.importc: "QSessionManager_protectedbase_sender".}
+proc fcQSessionManager_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QSessionManager_protectedbase_senderSignalIndex".}
+proc fcQSessionManager_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QSessionManager_protectedbase_receivers".}
+proc fcQSessionManager_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QSessionManager_protectedbase_isSignalConnected".}
 proc fcQSessionManager_staticMetaObject(): pointer {.importc: "QSessionManager_staticMetaObject".}
 
 proc metaObject*(self: gen_qsessionmanager_types.QSessionManager, ): gen_qobjectdefs_types.QMetaObject =
@@ -206,6 +212,18 @@ proc trUtf8*(_: type gen_qsessionmanager_types.QSessionManager, s: cstring, c: c
   let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
   c_free(v_ms.data)
   vx_ret
+
+proc sender*(self: gen_qsessionmanager_types.QSessionManager, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQSessionManager_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qsessionmanager_types.QSessionManager, ): cint =
+  fcQSessionManager_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qsessionmanager_types.QSessionManager, signal: cstring): cint =
+  fcQSessionManager_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qsessionmanager_types.QSessionManager, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQSessionManager_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc staticMetaObject*(_: type gen_qsessionmanager_types.QSessionManager): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQSessionManager_staticMetaObject())

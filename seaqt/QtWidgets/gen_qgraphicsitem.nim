@@ -486,6 +486,10 @@ proc fcQGraphicsItem_virtualbase_itemChange(self: pointer, change: cint, value: 
 proc fcQGraphicsItem_virtualbase_supportsExtension(self: pointer, extension: cint): bool {.importc: "QGraphicsItem_virtualbase_supportsExtension".}
 proc fcQGraphicsItem_virtualbase_setExtension(self: pointer, extension: cint, variant: pointer): void {.importc: "QGraphicsItem_virtualbase_setExtension".}
 proc fcQGraphicsItem_virtualbase_extension(self: pointer, variant: pointer): pointer {.importc: "QGraphicsItem_virtualbase_extension".}
+proc fcQGraphicsItem_protectedbase_updateMicroFocus(self: pointer, ): void {.importc: "QGraphicsItem_protectedbase_updateMicroFocus".}
+proc fcQGraphicsItem_protectedbase_addToIndex(self: pointer, ): void {.importc: "QGraphicsItem_protectedbase_addToIndex".}
+proc fcQGraphicsItem_protectedbase_removeFromIndex(self: pointer, ): void {.importc: "QGraphicsItem_protectedbase_removeFromIndex".}
+proc fcQGraphicsItem_protectedbase_prepareGeometryChange(self: pointer, ): void {.importc: "QGraphicsItem_protectedbase_prepareGeometryChange".}
 proc fcQGraphicsItem_new(vtbl: pointer, ): ptr cQGraphicsItem {.importc: "QGraphicsItem_new".}
 proc fcQGraphicsItem_new2(vtbl: pointer, parent: pointer): ptr cQGraphicsItem {.importc: "QGraphicsItem_new2".}
 proc fcQGraphicsItem_delete(self: pointer) {.importc: "QGraphicsItem_delete".}
@@ -615,6 +619,14 @@ proc fcQGraphicsObject_virtualbase_itemChange(self: pointer, change: cint, value
 proc fcQGraphicsObject_virtualbase_supportsExtension(self: pointer, extension: cint): bool {.importc: "QGraphicsObject_virtualbase_supportsExtension".}
 proc fcQGraphicsObject_virtualbase_setExtension(self: pointer, extension: cint, variant: pointer): void {.importc: "QGraphicsObject_virtualbase_setExtension".}
 proc fcQGraphicsObject_virtualbase_extension(self: pointer, variant: pointer): pointer {.importc: "QGraphicsObject_virtualbase_extension".}
+proc fcQGraphicsObject_protectedbase_updateMicroFocus(self: pointer, ): void {.importc: "QGraphicsObject_protectedbase_updateMicroFocus".}
+proc fcQGraphicsObject_protectedbase_sender(self: pointer, ): pointer {.importc: "QGraphicsObject_protectedbase_sender".}
+proc fcQGraphicsObject_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QGraphicsObject_protectedbase_senderSignalIndex".}
+proc fcQGraphicsObject_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QGraphicsObject_protectedbase_receivers".}
+proc fcQGraphicsObject_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QGraphicsObject_protectedbase_isSignalConnected".}
+proc fcQGraphicsObject_protectedbase_addToIndex(self: pointer, ): void {.importc: "QGraphicsObject_protectedbase_addToIndex".}
+proc fcQGraphicsObject_protectedbase_removeFromIndex(self: pointer, ): void {.importc: "QGraphicsObject_protectedbase_removeFromIndex".}
+proc fcQGraphicsObject_protectedbase_prepareGeometryChange(self: pointer, ): void {.importc: "QGraphicsObject_protectedbase_prepareGeometryChange".}
 proc fcQGraphicsObject_new(vtbl: pointer, ): ptr cQGraphicsObject {.importc: "QGraphicsObject_new".}
 proc fcQGraphicsObject_new2(vtbl: pointer, parent: pointer): ptr cQGraphicsObject {.importc: "QGraphicsObject_new2".}
 proc fcQGraphicsObject_staticMetaObject(): pointer {.importc: "QGraphicsObject_staticMetaObject".}
@@ -695,6 +707,10 @@ proc fcQAbstractGraphicsShapeItem_virtualbase_itemChange(self: pointer, change: 
 proc fcQAbstractGraphicsShapeItem_virtualbase_supportsExtension(self: pointer, extension: cint): bool {.importc: "QAbstractGraphicsShapeItem_virtualbase_supportsExtension".}
 proc fcQAbstractGraphicsShapeItem_virtualbase_setExtension(self: pointer, extension: cint, variant: pointer): void {.importc: "QAbstractGraphicsShapeItem_virtualbase_setExtension".}
 proc fcQAbstractGraphicsShapeItem_virtualbase_extension(self: pointer, variant: pointer): pointer {.importc: "QAbstractGraphicsShapeItem_virtualbase_extension".}
+proc fcQAbstractGraphicsShapeItem_protectedbase_updateMicroFocus(self: pointer, ): void {.importc: "QAbstractGraphicsShapeItem_protectedbase_updateMicroFocus".}
+proc fcQAbstractGraphicsShapeItem_protectedbase_addToIndex(self: pointer, ): void {.importc: "QAbstractGraphicsShapeItem_protectedbase_addToIndex".}
+proc fcQAbstractGraphicsShapeItem_protectedbase_removeFromIndex(self: pointer, ): void {.importc: "QAbstractGraphicsShapeItem_protectedbase_removeFromIndex".}
+proc fcQAbstractGraphicsShapeItem_protectedbase_prepareGeometryChange(self: pointer, ): void {.importc: "QAbstractGraphicsShapeItem_protectedbase_prepareGeometryChange".}
 proc fcQAbstractGraphicsShapeItem_new(vtbl: pointer, ): ptr cQAbstractGraphicsShapeItem {.importc: "QAbstractGraphicsShapeItem_new".}
 proc fcQAbstractGraphicsShapeItem_new2(vtbl: pointer, parent: pointer): ptr cQAbstractGraphicsShapeItem {.importc: "QAbstractGraphicsShapeItem_new2".}
 proc fcQAbstractGraphicsShapeItem_delete(self: pointer) {.importc: "QAbstractGraphicsShapeItem_delete".}
@@ -779,6 +795,10 @@ proc fcQGraphicsPathItem_virtualbase_wheelEvent(self: pointer, event: pointer): 
 proc fcQGraphicsPathItem_virtualbase_inputMethodEvent(self: pointer, event: pointer): void {.importc: "QGraphicsPathItem_virtualbase_inputMethodEvent".}
 proc fcQGraphicsPathItem_virtualbase_inputMethodQuery(self: pointer, query: cint): pointer {.importc: "QGraphicsPathItem_virtualbase_inputMethodQuery".}
 proc fcQGraphicsPathItem_virtualbase_itemChange(self: pointer, change: cint, value: pointer): pointer {.importc: "QGraphicsPathItem_virtualbase_itemChange".}
+proc fcQGraphicsPathItem_protectedbase_updateMicroFocus(self: pointer, ): void {.importc: "QGraphicsPathItem_protectedbase_updateMicroFocus".}
+proc fcQGraphicsPathItem_protectedbase_addToIndex(self: pointer, ): void {.importc: "QGraphicsPathItem_protectedbase_addToIndex".}
+proc fcQGraphicsPathItem_protectedbase_removeFromIndex(self: pointer, ): void {.importc: "QGraphicsPathItem_protectedbase_removeFromIndex".}
+proc fcQGraphicsPathItem_protectedbase_prepareGeometryChange(self: pointer, ): void {.importc: "QGraphicsPathItem_protectedbase_prepareGeometryChange".}
 proc fcQGraphicsPathItem_new(vtbl: pointer, ): ptr cQGraphicsPathItem {.importc: "QGraphicsPathItem_new".}
 proc fcQGraphicsPathItem_new2(vtbl: pointer, path: pointer): ptr cQGraphicsPathItem {.importc: "QGraphicsPathItem_new2".}
 proc fcQGraphicsPathItem_new3(vtbl: pointer, parent: pointer): ptr cQGraphicsPathItem {.importc: "QGraphicsPathItem_new3".}
@@ -866,6 +886,10 @@ proc fcQGraphicsRectItem_virtualbase_wheelEvent(self: pointer, event: pointer): 
 proc fcQGraphicsRectItem_virtualbase_inputMethodEvent(self: pointer, event: pointer): void {.importc: "QGraphicsRectItem_virtualbase_inputMethodEvent".}
 proc fcQGraphicsRectItem_virtualbase_inputMethodQuery(self: pointer, query: cint): pointer {.importc: "QGraphicsRectItem_virtualbase_inputMethodQuery".}
 proc fcQGraphicsRectItem_virtualbase_itemChange(self: pointer, change: cint, value: pointer): pointer {.importc: "QGraphicsRectItem_virtualbase_itemChange".}
+proc fcQGraphicsRectItem_protectedbase_updateMicroFocus(self: pointer, ): void {.importc: "QGraphicsRectItem_protectedbase_updateMicroFocus".}
+proc fcQGraphicsRectItem_protectedbase_addToIndex(self: pointer, ): void {.importc: "QGraphicsRectItem_protectedbase_addToIndex".}
+proc fcQGraphicsRectItem_protectedbase_removeFromIndex(self: pointer, ): void {.importc: "QGraphicsRectItem_protectedbase_removeFromIndex".}
+proc fcQGraphicsRectItem_protectedbase_prepareGeometryChange(self: pointer, ): void {.importc: "QGraphicsRectItem_protectedbase_prepareGeometryChange".}
 proc fcQGraphicsRectItem_new(vtbl: pointer, ): ptr cQGraphicsRectItem {.importc: "QGraphicsRectItem_new".}
 proc fcQGraphicsRectItem_new2(vtbl: pointer, rect: pointer): ptr cQGraphicsRectItem {.importc: "QGraphicsRectItem_new2".}
 proc fcQGraphicsRectItem_new3(vtbl: pointer, x: float64, y: float64, w: float64, h: float64): ptr cQGraphicsRectItem {.importc: "QGraphicsRectItem_new3".}
@@ -959,6 +983,10 @@ proc fcQGraphicsEllipseItem_virtualbase_wheelEvent(self: pointer, event: pointer
 proc fcQGraphicsEllipseItem_virtualbase_inputMethodEvent(self: pointer, event: pointer): void {.importc: "QGraphicsEllipseItem_virtualbase_inputMethodEvent".}
 proc fcQGraphicsEllipseItem_virtualbase_inputMethodQuery(self: pointer, query: cint): pointer {.importc: "QGraphicsEllipseItem_virtualbase_inputMethodQuery".}
 proc fcQGraphicsEllipseItem_virtualbase_itemChange(self: pointer, change: cint, value: pointer): pointer {.importc: "QGraphicsEllipseItem_virtualbase_itemChange".}
+proc fcQGraphicsEllipseItem_protectedbase_updateMicroFocus(self: pointer, ): void {.importc: "QGraphicsEllipseItem_protectedbase_updateMicroFocus".}
+proc fcQGraphicsEllipseItem_protectedbase_addToIndex(self: pointer, ): void {.importc: "QGraphicsEllipseItem_protectedbase_addToIndex".}
+proc fcQGraphicsEllipseItem_protectedbase_removeFromIndex(self: pointer, ): void {.importc: "QGraphicsEllipseItem_protectedbase_removeFromIndex".}
+proc fcQGraphicsEllipseItem_protectedbase_prepareGeometryChange(self: pointer, ): void {.importc: "QGraphicsEllipseItem_protectedbase_prepareGeometryChange".}
 proc fcQGraphicsEllipseItem_new(vtbl: pointer, ): ptr cQGraphicsEllipseItem {.importc: "QGraphicsEllipseItem_new".}
 proc fcQGraphicsEllipseItem_new2(vtbl: pointer, rect: pointer): ptr cQGraphicsEllipseItem {.importc: "QGraphicsEllipseItem_new2".}
 proc fcQGraphicsEllipseItem_new3(vtbl: pointer, x: float64, y: float64, w: float64, h: float64): ptr cQGraphicsEllipseItem {.importc: "QGraphicsEllipseItem_new3".}
@@ -1047,6 +1075,10 @@ proc fcQGraphicsPolygonItem_virtualbase_wheelEvent(self: pointer, event: pointer
 proc fcQGraphicsPolygonItem_virtualbase_inputMethodEvent(self: pointer, event: pointer): void {.importc: "QGraphicsPolygonItem_virtualbase_inputMethodEvent".}
 proc fcQGraphicsPolygonItem_virtualbase_inputMethodQuery(self: pointer, query: cint): pointer {.importc: "QGraphicsPolygonItem_virtualbase_inputMethodQuery".}
 proc fcQGraphicsPolygonItem_virtualbase_itemChange(self: pointer, change: cint, value: pointer): pointer {.importc: "QGraphicsPolygonItem_virtualbase_itemChange".}
+proc fcQGraphicsPolygonItem_protectedbase_updateMicroFocus(self: pointer, ): void {.importc: "QGraphicsPolygonItem_protectedbase_updateMicroFocus".}
+proc fcQGraphicsPolygonItem_protectedbase_addToIndex(self: pointer, ): void {.importc: "QGraphicsPolygonItem_protectedbase_addToIndex".}
+proc fcQGraphicsPolygonItem_protectedbase_removeFromIndex(self: pointer, ): void {.importc: "QGraphicsPolygonItem_protectedbase_removeFromIndex".}
+proc fcQGraphicsPolygonItem_protectedbase_prepareGeometryChange(self: pointer, ): void {.importc: "QGraphicsPolygonItem_protectedbase_prepareGeometryChange".}
 proc fcQGraphicsPolygonItem_new(vtbl: pointer, ): ptr cQGraphicsPolygonItem {.importc: "QGraphicsPolygonItem_new".}
 proc fcQGraphicsPolygonItem_new2(vtbl: pointer, parent: pointer): ptr cQGraphicsPolygonItem {.importc: "QGraphicsPolygonItem_new2".}
 proc fcQGraphicsPolygonItem_delete(self: pointer) {.importc: "QGraphicsPolygonItem_delete".}
@@ -1134,6 +1166,10 @@ proc fcQGraphicsLineItem_virtualbase_wheelEvent(self: pointer, event: pointer): 
 proc fcQGraphicsLineItem_virtualbase_inputMethodEvent(self: pointer, event: pointer): void {.importc: "QGraphicsLineItem_virtualbase_inputMethodEvent".}
 proc fcQGraphicsLineItem_virtualbase_inputMethodQuery(self: pointer, query: cint): pointer {.importc: "QGraphicsLineItem_virtualbase_inputMethodQuery".}
 proc fcQGraphicsLineItem_virtualbase_itemChange(self: pointer, change: cint, value: pointer): pointer {.importc: "QGraphicsLineItem_virtualbase_itemChange".}
+proc fcQGraphicsLineItem_protectedbase_updateMicroFocus(self: pointer, ): void {.importc: "QGraphicsLineItem_protectedbase_updateMicroFocus".}
+proc fcQGraphicsLineItem_protectedbase_addToIndex(self: pointer, ): void {.importc: "QGraphicsLineItem_protectedbase_addToIndex".}
+proc fcQGraphicsLineItem_protectedbase_removeFromIndex(self: pointer, ): void {.importc: "QGraphicsLineItem_protectedbase_removeFromIndex".}
+proc fcQGraphicsLineItem_protectedbase_prepareGeometryChange(self: pointer, ): void {.importc: "QGraphicsLineItem_protectedbase_prepareGeometryChange".}
 proc fcQGraphicsLineItem_new(vtbl: pointer, ): ptr cQGraphicsLineItem {.importc: "QGraphicsLineItem_new".}
 proc fcQGraphicsLineItem_new2(vtbl: pointer, line: pointer): ptr cQGraphicsLineItem {.importc: "QGraphicsLineItem_new2".}
 proc fcQGraphicsLineItem_new3(vtbl: pointer, x1: float64, y1: float64, x2: float64, y2: float64): ptr cQGraphicsLineItem {.importc: "QGraphicsLineItem_new3".}
@@ -1229,6 +1265,10 @@ proc fcQGraphicsPixmapItem_virtualbase_wheelEvent(self: pointer, event: pointer)
 proc fcQGraphicsPixmapItem_virtualbase_inputMethodEvent(self: pointer, event: pointer): void {.importc: "QGraphicsPixmapItem_virtualbase_inputMethodEvent".}
 proc fcQGraphicsPixmapItem_virtualbase_inputMethodQuery(self: pointer, query: cint): pointer {.importc: "QGraphicsPixmapItem_virtualbase_inputMethodQuery".}
 proc fcQGraphicsPixmapItem_virtualbase_itemChange(self: pointer, change: cint, value: pointer): pointer {.importc: "QGraphicsPixmapItem_virtualbase_itemChange".}
+proc fcQGraphicsPixmapItem_protectedbase_updateMicroFocus(self: pointer, ): void {.importc: "QGraphicsPixmapItem_protectedbase_updateMicroFocus".}
+proc fcQGraphicsPixmapItem_protectedbase_addToIndex(self: pointer, ): void {.importc: "QGraphicsPixmapItem_protectedbase_addToIndex".}
+proc fcQGraphicsPixmapItem_protectedbase_removeFromIndex(self: pointer, ): void {.importc: "QGraphicsPixmapItem_protectedbase_removeFromIndex".}
+proc fcQGraphicsPixmapItem_protectedbase_prepareGeometryChange(self: pointer, ): void {.importc: "QGraphicsPixmapItem_protectedbase_prepareGeometryChange".}
 proc fcQGraphicsPixmapItem_new(vtbl: pointer, ): ptr cQGraphicsPixmapItem {.importc: "QGraphicsPixmapItem_new".}
 proc fcQGraphicsPixmapItem_new2(vtbl: pointer, pixmap: pointer): ptr cQGraphicsPixmapItem {.importc: "QGraphicsPixmapItem_new2".}
 proc fcQGraphicsPixmapItem_new3(vtbl: pointer, parent: pointer): ptr cQGraphicsPixmapItem {.importc: "QGraphicsPixmapItem_new3".}
@@ -1367,6 +1407,14 @@ proc fcQGraphicsTextItem_virtualbase_collidesWithPath(self: pointer, path: point
 proc fcQGraphicsTextItem_virtualbase_sceneEventFilter(self: pointer, watched: pointer, event: pointer): bool {.importc: "QGraphicsTextItem_virtualbase_sceneEventFilter".}
 proc fcQGraphicsTextItem_virtualbase_wheelEvent(self: pointer, event: pointer): void {.importc: "QGraphicsTextItem_virtualbase_wheelEvent".}
 proc fcQGraphicsTextItem_virtualbase_itemChange(self: pointer, change: cint, value: pointer): pointer {.importc: "QGraphicsTextItem_virtualbase_itemChange".}
+proc fcQGraphicsTextItem_protectedbase_updateMicroFocus(self: pointer, ): void {.importc: "QGraphicsTextItem_protectedbase_updateMicroFocus".}
+proc fcQGraphicsTextItem_protectedbase_sender(self: pointer, ): pointer {.importc: "QGraphicsTextItem_protectedbase_sender".}
+proc fcQGraphicsTextItem_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QGraphicsTextItem_protectedbase_senderSignalIndex".}
+proc fcQGraphicsTextItem_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QGraphicsTextItem_protectedbase_receivers".}
+proc fcQGraphicsTextItem_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QGraphicsTextItem_protectedbase_isSignalConnected".}
+proc fcQGraphicsTextItem_protectedbase_addToIndex(self: pointer, ): void {.importc: "QGraphicsTextItem_protectedbase_addToIndex".}
+proc fcQGraphicsTextItem_protectedbase_removeFromIndex(self: pointer, ): void {.importc: "QGraphicsTextItem_protectedbase_removeFromIndex".}
+proc fcQGraphicsTextItem_protectedbase_prepareGeometryChange(self: pointer, ): void {.importc: "QGraphicsTextItem_protectedbase_prepareGeometryChange".}
 proc fcQGraphicsTextItem_new(vtbl: pointer, ): ptr cQGraphicsTextItem {.importc: "QGraphicsTextItem_new".}
 proc fcQGraphicsTextItem_new2(vtbl: pointer, text: struct_miqt_string): ptr cQGraphicsTextItem {.importc: "QGraphicsTextItem_new2".}
 proc fcQGraphicsTextItem_new3(vtbl: pointer, parent: pointer): ptr cQGraphicsTextItem {.importc: "QGraphicsTextItem_new3".}
@@ -1456,6 +1504,10 @@ proc fcQGraphicsSimpleTextItem_virtualbase_wheelEvent(self: pointer, event: poin
 proc fcQGraphicsSimpleTextItem_virtualbase_inputMethodEvent(self: pointer, event: pointer): void {.importc: "QGraphicsSimpleTextItem_virtualbase_inputMethodEvent".}
 proc fcQGraphicsSimpleTextItem_virtualbase_inputMethodQuery(self: pointer, query: cint): pointer {.importc: "QGraphicsSimpleTextItem_virtualbase_inputMethodQuery".}
 proc fcQGraphicsSimpleTextItem_virtualbase_itemChange(self: pointer, change: cint, value: pointer): pointer {.importc: "QGraphicsSimpleTextItem_virtualbase_itemChange".}
+proc fcQGraphicsSimpleTextItem_protectedbase_updateMicroFocus(self: pointer, ): void {.importc: "QGraphicsSimpleTextItem_protectedbase_updateMicroFocus".}
+proc fcQGraphicsSimpleTextItem_protectedbase_addToIndex(self: pointer, ): void {.importc: "QGraphicsSimpleTextItem_protectedbase_addToIndex".}
+proc fcQGraphicsSimpleTextItem_protectedbase_removeFromIndex(self: pointer, ): void {.importc: "QGraphicsSimpleTextItem_protectedbase_removeFromIndex".}
+proc fcQGraphicsSimpleTextItem_protectedbase_prepareGeometryChange(self: pointer, ): void {.importc: "QGraphicsSimpleTextItem_protectedbase_prepareGeometryChange".}
 proc fcQGraphicsSimpleTextItem_new(vtbl: pointer, ): ptr cQGraphicsSimpleTextItem {.importc: "QGraphicsSimpleTextItem_new".}
 proc fcQGraphicsSimpleTextItem_new2(vtbl: pointer, text: struct_miqt_string): ptr cQGraphicsSimpleTextItem {.importc: "QGraphicsSimpleTextItem_new2".}
 proc fcQGraphicsSimpleTextItem_new3(vtbl: pointer, parent: pointer): ptr cQGraphicsSimpleTextItem {.importc: "QGraphicsSimpleTextItem_new3".}
@@ -1540,6 +1592,10 @@ proc fcQGraphicsItemGroup_virtualbase_itemChange(self: pointer, change: cint, va
 proc fcQGraphicsItemGroup_virtualbase_supportsExtension(self: pointer, extension: cint): bool {.importc: "QGraphicsItemGroup_virtualbase_supportsExtension".}
 proc fcQGraphicsItemGroup_virtualbase_setExtension(self: pointer, extension: cint, variant: pointer): void {.importc: "QGraphicsItemGroup_virtualbase_setExtension".}
 proc fcQGraphicsItemGroup_virtualbase_extension(self: pointer, variant: pointer): pointer {.importc: "QGraphicsItemGroup_virtualbase_extension".}
+proc fcQGraphicsItemGroup_protectedbase_updateMicroFocus(self: pointer, ): void {.importc: "QGraphicsItemGroup_protectedbase_updateMicroFocus".}
+proc fcQGraphicsItemGroup_protectedbase_addToIndex(self: pointer, ): void {.importc: "QGraphicsItemGroup_protectedbase_addToIndex".}
+proc fcQGraphicsItemGroup_protectedbase_removeFromIndex(self: pointer, ): void {.importc: "QGraphicsItemGroup_protectedbase_removeFromIndex".}
+proc fcQGraphicsItemGroup_protectedbase_prepareGeometryChange(self: pointer, ): void {.importc: "QGraphicsItemGroup_protectedbase_prepareGeometryChange".}
 proc fcQGraphicsItemGroup_new(vtbl: pointer, ): ptr cQGraphicsItemGroup {.importc: "QGraphicsItemGroup_new".}
 proc fcQGraphicsItemGroup_new2(vtbl: pointer, parent: pointer): ptr cQGraphicsItemGroup {.importc: "QGraphicsItemGroup_new2".}
 proc fcQGraphicsItemGroup_delete(self: pointer) {.importc: "QGraphicsItemGroup_delete".}
@@ -2509,6 +2565,18 @@ proc miqt_exec_callback_cQGraphicsItem_extension(vtbl: pointer, self: pointer, v
   var virtualReturn = vtbl[].extension(self, slotval1)
   virtualReturn.h
 
+proc updateMicroFocus*(self: gen_qgraphicsitem_types.QGraphicsItem, ): void =
+  fcQGraphicsItem_protectedbase_updateMicroFocus(self.h)
+
+proc addToIndex*(self: gen_qgraphicsitem_types.QGraphicsItem, ): void =
+  fcQGraphicsItem_protectedbase_addToIndex(self.h)
+
+proc removeFromIndex*(self: gen_qgraphicsitem_types.QGraphicsItem, ): void =
+  fcQGraphicsItem_protectedbase_removeFromIndex(self.h)
+
+proc prepareGeometryChange*(self: gen_qgraphicsitem_types.QGraphicsItem, ): void =
+  fcQGraphicsItem_protectedbase_prepareGeometryChange(self.h)
+
 proc create*(T: type gen_qgraphicsitem_types.QGraphicsItem,
     vtbl: ref QGraphicsItemVTable = nil): gen_qgraphicsitem_types.QGraphicsItem =
   let vtbl = if vtbl == nil: new QGraphicsItemVTable else: vtbl
@@ -3455,6 +3523,30 @@ proc miqt_exec_callback_cQGraphicsObject_extension(vtbl: pointer, self: pointer,
   var virtualReturn = vtbl[].extension(self, slotval1)
   virtualReturn.h
 
+proc updateMicroFocus*(self: gen_qgraphicsitem_types.QGraphicsObject, ): void =
+  fcQGraphicsObject_protectedbase_updateMicroFocus(self.h)
+
+proc sender*(self: gen_qgraphicsitem_types.QGraphicsObject, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQGraphicsObject_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qgraphicsitem_types.QGraphicsObject, ): cint =
+  fcQGraphicsObject_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qgraphicsitem_types.QGraphicsObject, signal: cstring): cint =
+  fcQGraphicsObject_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qgraphicsitem_types.QGraphicsObject, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQGraphicsObject_protectedbase_isSignalConnected(self.h, signal.h)
+
+proc addToIndex*(self: gen_qgraphicsitem_types.QGraphicsObject, ): void =
+  fcQGraphicsObject_protectedbase_addToIndex(self.h)
+
+proc removeFromIndex*(self: gen_qgraphicsitem_types.QGraphicsObject, ): void =
+  fcQGraphicsObject_protectedbase_removeFromIndex(self.h)
+
+proc prepareGeometryChange*(self: gen_qgraphicsitem_types.QGraphicsObject, ): void =
+  fcQGraphicsObject_protectedbase_prepareGeometryChange(self.h)
+
 proc create*(T: type gen_qgraphicsitem_types.QGraphicsObject,
     vtbl: ref QGraphicsObjectVTable = nil): gen_qgraphicsitem_types.QGraphicsObject =
   let vtbl = if vtbl == nil: new QGraphicsObjectVTable else: vtbl
@@ -4074,6 +4166,18 @@ proc miqt_exec_callback_cQAbstractGraphicsShapeItem_extension(vtbl: pointer, sel
   var virtualReturn = vtbl[].extension(self, slotval1)
   virtualReturn.h
 
+proc updateMicroFocus*(self: gen_qgraphicsitem_types.QAbstractGraphicsShapeItem, ): void =
+  fcQAbstractGraphicsShapeItem_protectedbase_updateMicroFocus(self.h)
+
+proc addToIndex*(self: gen_qgraphicsitem_types.QAbstractGraphicsShapeItem, ): void =
+  fcQAbstractGraphicsShapeItem_protectedbase_addToIndex(self.h)
+
+proc removeFromIndex*(self: gen_qgraphicsitem_types.QAbstractGraphicsShapeItem, ): void =
+  fcQAbstractGraphicsShapeItem_protectedbase_removeFromIndex(self.h)
+
+proc prepareGeometryChange*(self: gen_qgraphicsitem_types.QAbstractGraphicsShapeItem, ): void =
+  fcQAbstractGraphicsShapeItem_protectedbase_prepareGeometryChange(self.h)
+
 proc create*(T: type gen_qgraphicsitem_types.QAbstractGraphicsShapeItem,
     vtbl: ref QAbstractGraphicsShapeItemVTable = nil): gen_qgraphicsitem_types.QAbstractGraphicsShapeItem =
   let vtbl = if vtbl == nil: new QAbstractGraphicsShapeItemVTable else: vtbl
@@ -4665,6 +4769,18 @@ proc miqt_exec_callback_cQGraphicsPathItem_itemChange(vtbl: pointer, self: point
   let slotval2 = gen_qvariant_types.QVariant(h: value)
   var virtualReturn = vtbl[].itemChange(self, slotval1, slotval2)
   virtualReturn.h
+
+proc updateMicroFocus*(self: gen_qgraphicsitem_types.QGraphicsPathItem, ): void =
+  fcQGraphicsPathItem_protectedbase_updateMicroFocus(self.h)
+
+proc addToIndex*(self: gen_qgraphicsitem_types.QGraphicsPathItem, ): void =
+  fcQGraphicsPathItem_protectedbase_addToIndex(self.h)
+
+proc removeFromIndex*(self: gen_qgraphicsitem_types.QGraphicsPathItem, ): void =
+  fcQGraphicsPathItem_protectedbase_removeFromIndex(self.h)
+
+proc prepareGeometryChange*(self: gen_qgraphicsitem_types.QGraphicsPathItem, ): void =
+  fcQGraphicsPathItem_protectedbase_prepareGeometryChange(self.h)
 
 proc create*(T: type gen_qgraphicsitem_types.QGraphicsPathItem,
     vtbl: ref QGraphicsPathItemVTable = nil): gen_qgraphicsitem_types.QGraphicsPathItem =
@@ -5420,6 +5536,18 @@ proc miqt_exec_callback_cQGraphicsRectItem_itemChange(vtbl: pointer, self: point
   let slotval2 = gen_qvariant_types.QVariant(h: value)
   var virtualReturn = vtbl[].itemChange(self, slotval1, slotval2)
   virtualReturn.h
+
+proc updateMicroFocus*(self: gen_qgraphicsitem_types.QGraphicsRectItem, ): void =
+  fcQGraphicsRectItem_protectedbase_updateMicroFocus(self.h)
+
+proc addToIndex*(self: gen_qgraphicsitem_types.QGraphicsRectItem, ): void =
+  fcQGraphicsRectItem_protectedbase_addToIndex(self.h)
+
+proc removeFromIndex*(self: gen_qgraphicsitem_types.QGraphicsRectItem, ): void =
+  fcQGraphicsRectItem_protectedbase_removeFromIndex(self.h)
+
+proc prepareGeometryChange*(self: gen_qgraphicsitem_types.QGraphicsRectItem, ): void =
+  fcQGraphicsRectItem_protectedbase_prepareGeometryChange(self.h)
 
 proc create*(T: type gen_qgraphicsitem_types.QGraphicsRectItem,
     vtbl: ref QGraphicsRectItemVTable = nil): gen_qgraphicsitem_types.QGraphicsRectItem =
@@ -6348,6 +6476,18 @@ proc miqt_exec_callback_cQGraphicsEllipseItem_itemChange(vtbl: pointer, self: po
   var virtualReturn = vtbl[].itemChange(self, slotval1, slotval2)
   virtualReturn.h
 
+proc updateMicroFocus*(self: gen_qgraphicsitem_types.QGraphicsEllipseItem, ): void =
+  fcQGraphicsEllipseItem_protectedbase_updateMicroFocus(self.h)
+
+proc addToIndex*(self: gen_qgraphicsitem_types.QGraphicsEllipseItem, ): void =
+  fcQGraphicsEllipseItem_protectedbase_addToIndex(self.h)
+
+proc removeFromIndex*(self: gen_qgraphicsitem_types.QGraphicsEllipseItem, ): void =
+  fcQGraphicsEllipseItem_protectedbase_removeFromIndex(self.h)
+
+proc prepareGeometryChange*(self: gen_qgraphicsitem_types.QGraphicsEllipseItem, ): void =
+  fcQGraphicsEllipseItem_protectedbase_prepareGeometryChange(self.h)
+
 proc create*(T: type gen_qgraphicsitem_types.QGraphicsEllipseItem,
     vtbl: ref QGraphicsEllipseItemVTable = nil): gen_qgraphicsitem_types.QGraphicsEllipseItem =
   let vtbl = if vtbl == nil: new QGraphicsEllipseItemVTable else: vtbl
@@ -7260,6 +7400,18 @@ proc miqt_exec_callback_cQGraphicsPolygonItem_itemChange(vtbl: pointer, self: po
   var virtualReturn = vtbl[].itemChange(self, slotval1, slotval2)
   virtualReturn.h
 
+proc updateMicroFocus*(self: gen_qgraphicsitem_types.QGraphicsPolygonItem, ): void =
+  fcQGraphicsPolygonItem_protectedbase_updateMicroFocus(self.h)
+
+proc addToIndex*(self: gen_qgraphicsitem_types.QGraphicsPolygonItem, ): void =
+  fcQGraphicsPolygonItem_protectedbase_addToIndex(self.h)
+
+proc removeFromIndex*(self: gen_qgraphicsitem_types.QGraphicsPolygonItem, ): void =
+  fcQGraphicsPolygonItem_protectedbase_removeFromIndex(self.h)
+
+proc prepareGeometryChange*(self: gen_qgraphicsitem_types.QGraphicsPolygonItem, ): void =
+  fcQGraphicsPolygonItem_protectedbase_prepareGeometryChange(self.h)
+
 proc create*(T: type gen_qgraphicsitem_types.QGraphicsPolygonItem,
     vtbl: ref QGraphicsPolygonItemVTable = nil): gen_qgraphicsitem_types.QGraphicsPolygonItem =
   let vtbl = if vtbl == nil: new QGraphicsPolygonItemVTable else: vtbl
@@ -7860,6 +8012,18 @@ proc miqt_exec_callback_cQGraphicsLineItem_itemChange(vtbl: pointer, self: point
   let slotval2 = gen_qvariant_types.QVariant(h: value)
   var virtualReturn = vtbl[].itemChange(self, slotval1, slotval2)
   virtualReturn.h
+
+proc updateMicroFocus*(self: gen_qgraphicsitem_types.QGraphicsLineItem, ): void =
+  fcQGraphicsLineItem_protectedbase_updateMicroFocus(self.h)
+
+proc addToIndex*(self: gen_qgraphicsitem_types.QGraphicsLineItem, ): void =
+  fcQGraphicsLineItem_protectedbase_addToIndex(self.h)
+
+proc removeFromIndex*(self: gen_qgraphicsitem_types.QGraphicsLineItem, ): void =
+  fcQGraphicsLineItem_protectedbase_removeFromIndex(self.h)
+
+proc prepareGeometryChange*(self: gen_qgraphicsitem_types.QGraphicsLineItem, ): void =
+  fcQGraphicsLineItem_protectedbase_prepareGeometryChange(self.h)
 
 proc create*(T: type gen_qgraphicsitem_types.QGraphicsLineItem,
     vtbl: ref QGraphicsLineItemVTable = nil): gen_qgraphicsitem_types.QGraphicsLineItem =
@@ -8793,6 +8957,18 @@ proc miqt_exec_callback_cQGraphicsPixmapItem_itemChange(vtbl: pointer, self: poi
   let slotval2 = gen_qvariant_types.QVariant(h: value)
   var virtualReturn = vtbl[].itemChange(self, slotval1, slotval2)
   virtualReturn.h
+
+proc updateMicroFocus*(self: gen_qgraphicsitem_types.QGraphicsPixmapItem, ): void =
+  fcQGraphicsPixmapItem_protectedbase_updateMicroFocus(self.h)
+
+proc addToIndex*(self: gen_qgraphicsitem_types.QGraphicsPixmapItem, ): void =
+  fcQGraphicsPixmapItem_protectedbase_addToIndex(self.h)
+
+proc removeFromIndex*(self: gen_qgraphicsitem_types.QGraphicsPixmapItem, ): void =
+  fcQGraphicsPixmapItem_protectedbase_removeFromIndex(self.h)
+
+proc prepareGeometryChange*(self: gen_qgraphicsitem_types.QGraphicsPixmapItem, ): void =
+  fcQGraphicsPixmapItem_protectedbase_prepareGeometryChange(self.h)
 
 proc create*(T: type gen_qgraphicsitem_types.QGraphicsPixmapItem,
     vtbl: ref QGraphicsPixmapItemVTable = nil): gen_qgraphicsitem_types.QGraphicsPixmapItem =
@@ -9817,6 +9993,30 @@ proc miqt_exec_callback_cQGraphicsTextItem_itemChange(vtbl: pointer, self: point
   var virtualReturn = vtbl[].itemChange(self, slotval1, slotval2)
   virtualReturn.h
 
+proc updateMicroFocus*(self: gen_qgraphicsitem_types.QGraphicsTextItem, ): void =
+  fcQGraphicsTextItem_protectedbase_updateMicroFocus(self.h)
+
+proc sender*(self: gen_qgraphicsitem_types.QGraphicsTextItem, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQGraphicsTextItem_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qgraphicsitem_types.QGraphicsTextItem, ): cint =
+  fcQGraphicsTextItem_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qgraphicsitem_types.QGraphicsTextItem, signal: cstring): cint =
+  fcQGraphicsTextItem_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qgraphicsitem_types.QGraphicsTextItem, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQGraphicsTextItem_protectedbase_isSignalConnected(self.h, signal.h)
+
+proc addToIndex*(self: gen_qgraphicsitem_types.QGraphicsTextItem, ): void =
+  fcQGraphicsTextItem_protectedbase_addToIndex(self.h)
+
+proc removeFromIndex*(self: gen_qgraphicsitem_types.QGraphicsTextItem, ): void =
+  fcQGraphicsTextItem_protectedbase_removeFromIndex(self.h)
+
+proc prepareGeometryChange*(self: gen_qgraphicsitem_types.QGraphicsTextItem, ): void =
+  fcQGraphicsTextItem_protectedbase_prepareGeometryChange(self.h)
+
 proc create*(T: type gen_qgraphicsitem_types.QGraphicsTextItem,
     vtbl: ref QGraphicsTextItemVTable = nil): gen_qgraphicsitem_types.QGraphicsTextItem =
   let vtbl = if vtbl == nil: new QGraphicsTextItemVTable else: vtbl
@@ -10660,6 +10860,18 @@ proc miqt_exec_callback_cQGraphicsSimpleTextItem_itemChange(vtbl: pointer, self:
   var virtualReturn = vtbl[].itemChange(self, slotval1, slotval2)
   virtualReturn.h
 
+proc updateMicroFocus*(self: gen_qgraphicsitem_types.QGraphicsSimpleTextItem, ): void =
+  fcQGraphicsSimpleTextItem_protectedbase_updateMicroFocus(self.h)
+
+proc addToIndex*(self: gen_qgraphicsitem_types.QGraphicsSimpleTextItem, ): void =
+  fcQGraphicsSimpleTextItem_protectedbase_addToIndex(self.h)
+
+proc removeFromIndex*(self: gen_qgraphicsitem_types.QGraphicsSimpleTextItem, ): void =
+  fcQGraphicsSimpleTextItem_protectedbase_removeFromIndex(self.h)
+
+proc prepareGeometryChange*(self: gen_qgraphicsitem_types.QGraphicsSimpleTextItem, ): void =
+  fcQGraphicsSimpleTextItem_protectedbase_prepareGeometryChange(self.h)
+
 proc create*(T: type gen_qgraphicsitem_types.QGraphicsSimpleTextItem,
     vtbl: ref QGraphicsSimpleTextItemVTable = nil): gen_qgraphicsitem_types.QGraphicsSimpleTextItem =
   let vtbl = if vtbl == nil: new QGraphicsSimpleTextItemVTable else: vtbl
@@ -11405,6 +11617,18 @@ proc miqt_exec_callback_cQGraphicsItemGroup_extension(vtbl: pointer, self: point
   let slotval1 = gen_qvariant_types.QVariant(h: variant)
   var virtualReturn = vtbl[].extension(self, slotval1)
   virtualReturn.h
+
+proc updateMicroFocus*(self: gen_qgraphicsitem_types.QGraphicsItemGroup, ): void =
+  fcQGraphicsItemGroup_protectedbase_updateMicroFocus(self.h)
+
+proc addToIndex*(self: gen_qgraphicsitem_types.QGraphicsItemGroup, ): void =
+  fcQGraphicsItemGroup_protectedbase_addToIndex(self.h)
+
+proc removeFromIndex*(self: gen_qgraphicsitem_types.QGraphicsItemGroup, ): void =
+  fcQGraphicsItemGroup_protectedbase_removeFromIndex(self.h)
+
+proc prepareGeometryChange*(self: gen_qgraphicsitem_types.QGraphicsItemGroup, ): void =
+  fcQGraphicsItemGroup_protectedbase_prepareGeometryChange(self.h)
 
 proc create*(T: type gen_qgraphicsitem_types.QGraphicsItemGroup,
     vtbl: ref QGraphicsItemGroupVTable = nil): gen_qgraphicsitem_types.QGraphicsItemGroup =

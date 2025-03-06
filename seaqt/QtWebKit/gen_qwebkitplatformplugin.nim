@@ -72,6 +72,7 @@ import ./gen_qwebkitplatformplugin_types
 export gen_qwebkitplatformplugin_types
 
 import
+  ../QtCore/gen_qmetaobject_types,
   ../QtCore/gen_qobject,
   ../QtCore/gen_qobjectdefs_types,
   ../QtCore/gen_qrect_types,
@@ -79,6 +80,7 @@ import
   ../QtGui/gen_qcolor_types,
   ../QtGui/gen_qfont_types
 export
+  gen_qmetaobject_types,
   gen_qobject,
   gen_qobjectdefs_types,
   gen_qrect_types,
@@ -126,6 +128,10 @@ proc fcQWebSelectMethod_tr2(s: cstring, c: cstring): struct_miqt_string {.import
 proc fcQWebSelectMethod_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QWebSelectMethod_tr3".}
 proc fcQWebSelectMethod_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QWebSelectMethod_trUtf82".}
 proc fcQWebSelectMethod_trUtf83(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QWebSelectMethod_trUtf83".}
+proc fcQWebSelectMethod_protectedbase_sender(self: pointer, ): pointer {.importc: "QWebSelectMethod_protectedbase_sender".}
+proc fcQWebSelectMethod_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QWebSelectMethod_protectedbase_senderSignalIndex".}
+proc fcQWebSelectMethod_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QWebSelectMethod_protectedbase_receivers".}
+proc fcQWebSelectMethod_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QWebSelectMethod_protectedbase_isSignalConnected".}
 proc fcQWebSelectMethod_staticMetaObject(): pointer {.importc: "QWebSelectMethod_staticMetaObject".}
 proc fcQWebSelectMethod_delete(self: pointer) {.importc: "QWebSelectMethod_delete".}
 proc fcQWebNotificationData_title(self: pointer, ): struct_miqt_string {.importc: "QWebNotificationData_title".}
@@ -148,6 +154,10 @@ proc fcQWebNotificationPresenter_tr2(s: cstring, c: cstring): struct_miqt_string
 proc fcQWebNotificationPresenter_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QWebNotificationPresenter_tr3".}
 proc fcQWebNotificationPresenter_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QWebNotificationPresenter_trUtf82".}
 proc fcQWebNotificationPresenter_trUtf83(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QWebNotificationPresenter_trUtf83".}
+proc fcQWebNotificationPresenter_protectedbase_sender(self: pointer, ): pointer {.importc: "QWebNotificationPresenter_protectedbase_sender".}
+proc fcQWebNotificationPresenter_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QWebNotificationPresenter_protectedbase_senderSignalIndex".}
+proc fcQWebNotificationPresenter_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QWebNotificationPresenter_protectedbase_receivers".}
+proc fcQWebNotificationPresenter_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QWebNotificationPresenter_protectedbase_isSignalConnected".}
 proc fcQWebNotificationPresenter_staticMetaObject(): pointer {.importc: "QWebNotificationPresenter_staticMetaObject".}
 proc fcQWebNotificationPresenter_delete(self: pointer) {.importc: "QWebNotificationPresenter_delete".}
 proc fcQWebHapticFeedbackPlayer_metaObject(self: pointer, ): pointer {.importc: "QWebHapticFeedbackPlayer_metaObject".}
@@ -160,6 +170,10 @@ proc fcQWebHapticFeedbackPlayer_tr2(s: cstring, c: cstring): struct_miqt_string 
 proc fcQWebHapticFeedbackPlayer_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QWebHapticFeedbackPlayer_tr3".}
 proc fcQWebHapticFeedbackPlayer_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QWebHapticFeedbackPlayer_trUtf82".}
 proc fcQWebHapticFeedbackPlayer_trUtf83(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QWebHapticFeedbackPlayer_trUtf83".}
+proc fcQWebHapticFeedbackPlayer_protectedbase_sender(self: pointer, ): pointer {.importc: "QWebHapticFeedbackPlayer_protectedbase_sender".}
+proc fcQWebHapticFeedbackPlayer_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QWebHapticFeedbackPlayer_protectedbase_senderSignalIndex".}
+proc fcQWebHapticFeedbackPlayer_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QWebHapticFeedbackPlayer_protectedbase_receivers".}
+proc fcQWebHapticFeedbackPlayer_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QWebHapticFeedbackPlayer_protectedbase_isSignalConnected".}
 proc fcQWebHapticFeedbackPlayer_staticMetaObject(): pointer {.importc: "QWebHapticFeedbackPlayer_staticMetaObject".}
 proc fcQWebHapticFeedbackPlayer_delete(self: pointer) {.importc: "QWebHapticFeedbackPlayer_delete".}
 proc fcQWebTouchModifier_metaObject(self: pointer, ): pointer {.importc: "QWebTouchModifier_metaObject".}
@@ -172,6 +186,10 @@ proc fcQWebTouchModifier_tr2(s: cstring, c: cstring): struct_miqt_string {.impor
 proc fcQWebTouchModifier_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QWebTouchModifier_tr3".}
 proc fcQWebTouchModifier_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QWebTouchModifier_trUtf82".}
 proc fcQWebTouchModifier_trUtf83(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QWebTouchModifier_trUtf83".}
+proc fcQWebTouchModifier_protectedbase_sender(self: pointer, ): pointer {.importc: "QWebTouchModifier_protectedbase_sender".}
+proc fcQWebTouchModifier_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QWebTouchModifier_protectedbase_senderSignalIndex".}
+proc fcQWebTouchModifier_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QWebTouchModifier_protectedbase_receivers".}
+proc fcQWebTouchModifier_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QWebTouchModifier_protectedbase_isSignalConnected".}
 proc fcQWebTouchModifier_staticMetaObject(): pointer {.importc: "QWebTouchModifier_staticMetaObject".}
 proc fcQWebTouchModifier_delete(self: pointer) {.importc: "QWebTouchModifier_delete".}
 proc fcQWebSpellChecker_metaObject(self: pointer, ): pointer {.importc: "QWebSpellChecker_metaObject".}
@@ -193,6 +211,10 @@ proc fcQWebSpellChecker_tr2(s: cstring, c: cstring): struct_miqt_string {.import
 proc fcQWebSpellChecker_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QWebSpellChecker_tr3".}
 proc fcQWebSpellChecker_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QWebSpellChecker_trUtf82".}
 proc fcQWebSpellChecker_trUtf83(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QWebSpellChecker_trUtf83".}
+proc fcQWebSpellChecker_protectedbase_sender(self: pointer, ): pointer {.importc: "QWebSpellChecker_protectedbase_sender".}
+proc fcQWebSpellChecker_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QWebSpellChecker_protectedbase_senderSignalIndex".}
+proc fcQWebSpellChecker_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QWebSpellChecker_protectedbase_receivers".}
+proc fcQWebSpellChecker_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QWebSpellChecker_protectedbase_isSignalConnected".}
 proc fcQWebSpellChecker_staticMetaObject(): pointer {.importc: "QWebSpellChecker_staticMetaObject".}
 proc fcQWebSpellChecker_delete(self: pointer) {.importc: "QWebSpellChecker_delete".}
 proc fcQWebKitPlatformPlugin_supportsExtension(self: pointer, param1: cint): bool {.importc: "QWebKitPlatformPlugin_supportsExtension".}
@@ -346,6 +368,18 @@ proc trUtf8*(_: type gen_qwebkitplatformplugin_types.QWebSelectMethod, s: cstrin
   c_free(v_ms.data)
   vx_ret
 
+proc sender*(self: gen_qwebkitplatformplugin_types.QWebSelectMethod, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQWebSelectMethod_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qwebkitplatformplugin_types.QWebSelectMethod, ): cint =
+  fcQWebSelectMethod_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qwebkitplatformplugin_types.QWebSelectMethod, signal: cstring): cint =
+  fcQWebSelectMethod_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qwebkitplatformplugin_types.QWebSelectMethod, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQWebSelectMethod_protectedbase_isSignalConnected(self.h, signal.h)
+
 proc staticMetaObject*(_: type gen_qwebkitplatformplugin_types.QWebSelectMethod): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQWebSelectMethod_staticMetaObject())
 proc delete*(self: gen_qwebkitplatformplugin_types.QWebSelectMethod) =
@@ -457,6 +491,18 @@ proc trUtf8*(_: type gen_qwebkitplatformplugin_types.QWebNotificationPresenter, 
   c_free(v_ms.data)
   vx_ret
 
+proc sender*(self: gen_qwebkitplatformplugin_types.QWebNotificationPresenter, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQWebNotificationPresenter_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qwebkitplatformplugin_types.QWebNotificationPresenter, ): cint =
+  fcQWebNotificationPresenter_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qwebkitplatformplugin_types.QWebNotificationPresenter, signal: cstring): cint =
+  fcQWebNotificationPresenter_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qwebkitplatformplugin_types.QWebNotificationPresenter, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQWebNotificationPresenter_protectedbase_isSignalConnected(self.h, signal.h)
+
 proc staticMetaObject*(_: type gen_qwebkitplatformplugin_types.QWebNotificationPresenter): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQWebNotificationPresenter_staticMetaObject())
 proc delete*(self: gen_qwebkitplatformplugin_types.QWebNotificationPresenter) =
@@ -509,6 +555,18 @@ proc trUtf8*(_: type gen_qwebkitplatformplugin_types.QWebHapticFeedbackPlayer, s
   c_free(v_ms.data)
   vx_ret
 
+proc sender*(self: gen_qwebkitplatformplugin_types.QWebHapticFeedbackPlayer, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQWebHapticFeedbackPlayer_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qwebkitplatformplugin_types.QWebHapticFeedbackPlayer, ): cint =
+  fcQWebHapticFeedbackPlayer_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qwebkitplatformplugin_types.QWebHapticFeedbackPlayer, signal: cstring): cint =
+  fcQWebHapticFeedbackPlayer_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qwebkitplatformplugin_types.QWebHapticFeedbackPlayer, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQWebHapticFeedbackPlayer_protectedbase_isSignalConnected(self.h, signal.h)
+
 proc staticMetaObject*(_: type gen_qwebkitplatformplugin_types.QWebHapticFeedbackPlayer): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQWebHapticFeedbackPlayer_staticMetaObject())
 proc delete*(self: gen_qwebkitplatformplugin_types.QWebHapticFeedbackPlayer) =
@@ -560,6 +618,18 @@ proc trUtf8*(_: type gen_qwebkitplatformplugin_types.QWebTouchModifier, s: cstri
   let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
   c_free(v_ms.data)
   vx_ret
+
+proc sender*(self: gen_qwebkitplatformplugin_types.QWebTouchModifier, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQWebTouchModifier_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qwebkitplatformplugin_types.QWebTouchModifier, ): cint =
+  fcQWebTouchModifier_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qwebkitplatformplugin_types.QWebTouchModifier, signal: cstring): cint =
+  fcQWebTouchModifier_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qwebkitplatformplugin_types.QWebTouchModifier, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQWebTouchModifier_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc staticMetaObject*(_: type gen_qwebkitplatformplugin_types.QWebTouchModifier): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQWebTouchModifier_staticMetaObject())
@@ -650,6 +720,18 @@ proc trUtf8*(_: type gen_qwebkitplatformplugin_types.QWebSpellChecker, s: cstrin
   let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
   c_free(v_ms.data)
   vx_ret
+
+proc sender*(self: gen_qwebkitplatformplugin_types.QWebSpellChecker, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQWebSpellChecker_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qwebkitplatformplugin_types.QWebSpellChecker, ): cint =
+  fcQWebSpellChecker_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qwebkitplatformplugin_types.QWebSpellChecker, signal: cstring): cint =
+  fcQWebSpellChecker_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qwebkitplatformplugin_types.QWebSpellChecker, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQWebSpellChecker_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc staticMetaObject*(_: type gen_qwebkitplatformplugin_types.QWebSpellChecker): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQWebSpellChecker_staticMetaObject())

@@ -151,6 +151,12 @@ proc fcQAudioDecoder_virtualbase_childEvent(self: pointer, event: pointer): void
 proc fcQAudioDecoder_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QAudioDecoder_virtualbase_customEvent".}
 proc fcQAudioDecoder_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QAudioDecoder_virtualbase_connectNotify".}
 proc fcQAudioDecoder_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QAudioDecoder_virtualbase_disconnectNotify".}
+proc fcQAudioDecoder_protectedbase_addPropertyWatch(self: pointer, name: struct_miqt_string): void {.importc: "QAudioDecoder_protectedbase_addPropertyWatch".}
+proc fcQAudioDecoder_protectedbase_removePropertyWatch(self: pointer, name: struct_miqt_string): void {.importc: "QAudioDecoder_protectedbase_removePropertyWatch".}
+proc fcQAudioDecoder_protectedbase_sender(self: pointer, ): pointer {.importc: "QAudioDecoder_protectedbase_sender".}
+proc fcQAudioDecoder_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QAudioDecoder_protectedbase_senderSignalIndex".}
+proc fcQAudioDecoder_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QAudioDecoder_protectedbase_receivers".}
+proc fcQAudioDecoder_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QAudioDecoder_protectedbase_isSignalConnected".}
 proc fcQAudioDecoder_new(vtbl: pointer, ): ptr cQAudioDecoder {.importc: "QAudioDecoder_new".}
 proc fcQAudioDecoder_new2(vtbl: pointer, parent: pointer): ptr cQAudioDecoder {.importc: "QAudioDecoder_new2".}
 proc fcQAudioDecoder_staticMetaObject(): pointer {.importc: "QAudioDecoder_staticMetaObject".}
@@ -616,6 +622,24 @@ proc miqt_exec_callback_cQAudioDecoder_disconnectNotify(vtbl: pointer, self: poi
   let self = QAudioDecoder(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
   vtbl[].disconnectNotify(self, slotval1)
+
+proc addPropertyWatch*(self: gen_qaudiodecoder_types.QAudioDecoder, name: seq[byte]): void =
+  fcQAudioDecoder_protectedbase_addPropertyWatch(self.h, struct_miqt_string(data: cast[cstring](if len(name) == 0: nil else: unsafeAddr name[0]), len: csize_t(len(name))))
+
+proc removePropertyWatch*(self: gen_qaudiodecoder_types.QAudioDecoder, name: seq[byte]): void =
+  fcQAudioDecoder_protectedbase_removePropertyWatch(self.h, struct_miqt_string(data: cast[cstring](if len(name) == 0: nil else: unsafeAddr name[0]), len: csize_t(len(name))))
+
+proc sender*(self: gen_qaudiodecoder_types.QAudioDecoder, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQAudioDecoder_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qaudiodecoder_types.QAudioDecoder, ): cint =
+  fcQAudioDecoder_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qaudiodecoder_types.QAudioDecoder, signal: cstring): cint =
+  fcQAudioDecoder_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qaudiodecoder_types.QAudioDecoder, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQAudioDecoder_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc create*(T: type gen_qaudiodecoder_types.QAudioDecoder,
     vtbl: ref QAudioDecoderVTable = nil): gen_qaudiodecoder_types.QAudioDecoder =

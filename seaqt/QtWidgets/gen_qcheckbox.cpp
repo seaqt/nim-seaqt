@@ -864,16 +864,16 @@ public:
 	friend void QCheckBox_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
 
 	// Wrappers to allow calling protected methods:
-	friend void QCheckBox_protectedbase_initStyleOption(bool* _dynamic_cast_ok, const void* self, QStyleOptionButton* option);
-	friend void QCheckBox_protectedbase_updateMicroFocus(bool* _dynamic_cast_ok, void* self);
-	friend void QCheckBox_protectedbase_create(bool* _dynamic_cast_ok, void* self);
-	friend void QCheckBox_protectedbase_destroy(bool* _dynamic_cast_ok, void* self);
-	friend bool QCheckBox_protectedbase_focusNextChild(bool* _dynamic_cast_ok, void* self);
-	friend bool QCheckBox_protectedbase_focusPreviousChild(bool* _dynamic_cast_ok, void* self);
-	friend QObject* QCheckBox_protectedbase_sender(bool* _dynamic_cast_ok, const void* self);
-	friend int QCheckBox_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
-	friend int QCheckBox_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
-	friend bool QCheckBox_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+	friend void QCheckBox_protectedbase_initStyleOption(const void* self, QStyleOptionButton* option);
+	friend void QCheckBox_protectedbase_updateMicroFocus(void* self);
+	friend void QCheckBox_protectedbase_create(void* self);
+	friend void QCheckBox_protectedbase_destroy(void* self);
+	friend bool QCheckBox_protectedbase_focusNextChild(void* self);
+	friend bool QCheckBox_protectedbase_focusPreviousChild(void* self);
+	friend QObject* QCheckBox_protectedbase_sender(const void* self);
+	friend int QCheckBox_protectedbase_senderSignalIndex(const void* self);
+	friend int QCheckBox_protectedbase_receivers(const void* self, const char* signal);
+	friend bool QCheckBox_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
 };
 
 QCheckBox* QCheckBox_new(struct QCheckBox_VTable* vtbl, QWidget* parent) {
@@ -1341,131 +1341,71 @@ void QCheckBox_virtualbase_disconnectNotify(void* self, QMetaMethod* signal) {
 }
 
 const QMetaObject* QCheckBox_staticMetaObject() { return &QCheckBox::staticMetaObject; }
-void QCheckBox_protectedbase_initStyleOption(bool* _dynamic_cast_ok, const void* self, QStyleOptionButton* option) {
-	VirtualQCheckBox* self_cast = dynamic_cast<VirtualQCheckBox*>( (QCheckBox*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QCheckBox_protectedbase_initStyleOption(const void* self, QStyleOptionButton* option) {
+	VirtualQCheckBox* self_cast = static_cast<VirtualQCheckBox*>( (QCheckBox*)(self) );
 	
 	self_cast->initStyleOption(option);
 
 }
 
-void QCheckBox_protectedbase_updateMicroFocus(bool* _dynamic_cast_ok, void* self) {
-	VirtualQCheckBox* self_cast = dynamic_cast<VirtualQCheckBox*>( (QCheckBox*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QCheckBox_protectedbase_updateMicroFocus(void* self) {
+	VirtualQCheckBox* self_cast = static_cast<VirtualQCheckBox*>( (QCheckBox*)(self) );
 	
 	self_cast->updateMicroFocus();
 
 }
 
-void QCheckBox_protectedbase_create(bool* _dynamic_cast_ok, void* self) {
-	VirtualQCheckBox* self_cast = dynamic_cast<VirtualQCheckBox*>( (QCheckBox*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QCheckBox_protectedbase_create(void* self) {
+	VirtualQCheckBox* self_cast = static_cast<VirtualQCheckBox*>( (QCheckBox*)(self) );
 	
 	self_cast->create();
 
 }
 
-void QCheckBox_protectedbase_destroy(bool* _dynamic_cast_ok, void* self) {
-	VirtualQCheckBox* self_cast = dynamic_cast<VirtualQCheckBox*>( (QCheckBox*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QCheckBox_protectedbase_destroy(void* self) {
+	VirtualQCheckBox* self_cast = static_cast<VirtualQCheckBox*>( (QCheckBox*)(self) );
 	
 	self_cast->destroy();
 
 }
 
-bool QCheckBox_protectedbase_focusNextChild(bool* _dynamic_cast_ok, void* self) {
-	VirtualQCheckBox* self_cast = dynamic_cast<VirtualQCheckBox*>( (QCheckBox*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return false;
-	}
-	
-	*_dynamic_cast_ok = true;
+bool QCheckBox_protectedbase_focusNextChild(void* self) {
+	VirtualQCheckBox* self_cast = static_cast<VirtualQCheckBox*>( (QCheckBox*)(self) );
 	
 	return self_cast->focusNextChild();
 
 }
 
-bool QCheckBox_protectedbase_focusPreviousChild(bool* _dynamic_cast_ok, void* self) {
-	VirtualQCheckBox* self_cast = dynamic_cast<VirtualQCheckBox*>( (QCheckBox*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return false;
-	}
-	
-	*_dynamic_cast_ok = true;
+bool QCheckBox_protectedbase_focusPreviousChild(void* self) {
+	VirtualQCheckBox* self_cast = static_cast<VirtualQCheckBox*>( (QCheckBox*)(self) );
 	
 	return self_cast->focusPreviousChild();
 
 }
 
-QObject* QCheckBox_protectedbase_sender(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQCheckBox* self_cast = dynamic_cast<VirtualQCheckBox*>( (QCheckBox*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return nullptr;
-	}
-	
-	*_dynamic_cast_ok = true;
+QObject* QCheckBox_protectedbase_sender(const void* self) {
+	VirtualQCheckBox* self_cast = static_cast<VirtualQCheckBox*>( (QCheckBox*)(self) );
 	
 	return self_cast->sender();
 
 }
 
-int QCheckBox_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQCheckBox* self_cast = dynamic_cast<VirtualQCheckBox*>( (QCheckBox*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return 0;
-	}
-	
-	*_dynamic_cast_ok = true;
+int QCheckBox_protectedbase_senderSignalIndex(const void* self) {
+	VirtualQCheckBox* self_cast = static_cast<VirtualQCheckBox*>( (QCheckBox*)(self) );
 	
 	return self_cast->senderSignalIndex();
 
 }
 
-int QCheckBox_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal) {
-	VirtualQCheckBox* self_cast = dynamic_cast<VirtualQCheckBox*>( (QCheckBox*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return 0;
-	}
-	
-	*_dynamic_cast_ok = true;
+int QCheckBox_protectedbase_receivers(const void* self, const char* signal) {
+	VirtualQCheckBox* self_cast = static_cast<VirtualQCheckBox*>( (QCheckBox*)(self) );
 	
 	return self_cast->receivers(signal);
 
 }
 
-bool QCheckBox_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal) {
-	VirtualQCheckBox* self_cast = dynamic_cast<VirtualQCheckBox*>( (QCheckBox*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return false;
-	}
-	
-	*_dynamic_cast_ok = true;
+bool QCheckBox_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal) {
+	VirtualQCheckBox* self_cast = static_cast<VirtualQCheckBox*>( (QCheckBox*)(self) );
 	
 	return self_cast->isSignalConnected(*signal);
 

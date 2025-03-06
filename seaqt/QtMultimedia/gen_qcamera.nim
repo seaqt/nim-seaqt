@@ -225,6 +225,12 @@ proc fcQCamera_virtualbase_childEvent(self: pointer, event: pointer): void {.imp
 proc fcQCamera_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QCamera_virtualbase_customEvent".}
 proc fcQCamera_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QCamera_virtualbase_connectNotify".}
 proc fcQCamera_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QCamera_virtualbase_disconnectNotify".}
+proc fcQCamera_protectedbase_addPropertyWatch(self: pointer, name: struct_miqt_string): void {.importc: "QCamera_protectedbase_addPropertyWatch".}
+proc fcQCamera_protectedbase_removePropertyWatch(self: pointer, name: struct_miqt_string): void {.importc: "QCamera_protectedbase_removePropertyWatch".}
+proc fcQCamera_protectedbase_sender(self: pointer, ): pointer {.importc: "QCamera_protectedbase_sender".}
+proc fcQCamera_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QCamera_protectedbase_senderSignalIndex".}
+proc fcQCamera_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QCamera_protectedbase_receivers".}
+proc fcQCamera_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QCamera_protectedbase_isSignalConnected".}
 proc fcQCamera_new(vtbl: pointer, ): ptr cQCamera {.importc: "QCamera_new".}
 proc fcQCamera_new2(vtbl: pointer, deviceName: struct_miqt_string): ptr cQCamera {.importc: "QCamera_new2".}
 proc fcQCamera_new3(vtbl: pointer, cameraInfo: pointer): ptr cQCamera {.importc: "QCamera_new3".}
@@ -809,6 +815,24 @@ proc miqt_exec_callback_cQCamera_disconnectNotify(vtbl: pointer, self: pointer, 
   let self = QCamera(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
   vtbl[].disconnectNotify(self, slotval1)
+
+proc addPropertyWatch*(self: gen_qcamera_types.QCamera, name: seq[byte]): void =
+  fcQCamera_protectedbase_addPropertyWatch(self.h, struct_miqt_string(data: cast[cstring](if len(name) == 0: nil else: unsafeAddr name[0]), len: csize_t(len(name))))
+
+proc removePropertyWatch*(self: gen_qcamera_types.QCamera, name: seq[byte]): void =
+  fcQCamera_protectedbase_removePropertyWatch(self.h, struct_miqt_string(data: cast[cstring](if len(name) == 0: nil else: unsafeAddr name[0]), len: csize_t(len(name))))
+
+proc sender*(self: gen_qcamera_types.QCamera, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQCamera_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qcamera_types.QCamera, ): cint =
+  fcQCamera_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qcamera_types.QCamera, signal: cstring): cint =
+  fcQCamera_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qcamera_types.QCamera, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQCamera_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc create*(T: type gen_qcamera_types.QCamera,
     vtbl: ref QCameraVTable = nil): gen_qcamera_types.QCamera =

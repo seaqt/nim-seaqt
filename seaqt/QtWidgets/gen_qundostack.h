@@ -139,10 +139,10 @@ void QUndoStack_virtualbase_childEvent(void* self, QChildEvent* event);
 void QUndoStack_virtualbase_customEvent(void* self, QEvent* event);
 void QUndoStack_virtualbase_connectNotify(void* self, QMetaMethod* signal);
 void QUndoStack_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
-QObject* QUndoStack_protectedbase_sender(bool* _dynamic_cast_ok, const void* self);
-int QUndoStack_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
-int QUndoStack_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
-bool QUndoStack_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+QObject* QUndoStack_protectedbase_sender(const void* self);
+int QUndoStack_protectedbase_senderSignalIndex(const void* self);
+int QUndoStack_protectedbase_receivers(const void* self, const char* signal);
+bool QUndoStack_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
 const QMetaObject* QUndoStack_staticMetaObject();
 void QUndoStack_delete(QUndoStack* self);
 

@@ -38,10 +38,14 @@ import ./gen_qvideowidgetcontrol_types
 export gen_qvideowidgetcontrol_types
 
 import
+  ../QtCore/gen_qmetaobject_types,
+  ../QtCore/gen_qobject_types,
   ../QtCore/gen_qobjectdefs_types,
   ../QtMultimedia/gen_qmediacontrol,
   ../QtWidgets/gen_qwidget_types
 export
+  gen_qmetaobject_types,
+  gen_qobject_types,
   gen_qobjectdefs_types,
   gen_qmediacontrol,
   gen_qwidget_types
@@ -80,6 +84,10 @@ proc fcQVideoWidgetControl_tr2(s: cstring, c: cstring): struct_miqt_string {.imp
 proc fcQVideoWidgetControl_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QVideoWidgetControl_tr3".}
 proc fcQVideoWidgetControl_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QVideoWidgetControl_trUtf82".}
 proc fcQVideoWidgetControl_trUtf83(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QVideoWidgetControl_trUtf83".}
+proc fcQVideoWidgetControl_protectedbase_sender(self: pointer, ): pointer {.importc: "QVideoWidgetControl_protectedbase_sender".}
+proc fcQVideoWidgetControl_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QVideoWidgetControl_protectedbase_senderSignalIndex".}
+proc fcQVideoWidgetControl_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QVideoWidgetControl_protectedbase_receivers".}
+proc fcQVideoWidgetControl_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QVideoWidgetControl_protectedbase_isSignalConnected".}
 proc fcQVideoWidgetControl_staticMetaObject(): pointer {.importc: "QVideoWidgetControl_staticMetaObject".}
 proc fcQVideoWidgetControl_delete(self: pointer) {.importc: "QVideoWidgetControl_delete".}
 
@@ -266,6 +274,18 @@ proc trUtf8*(_: type gen_qvideowidgetcontrol_types.QVideoWidgetControl, s: cstri
   let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
   c_free(v_ms.data)
   vx_ret
+
+proc sender*(self: gen_qvideowidgetcontrol_types.QVideoWidgetControl, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQVideoWidgetControl_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qvideowidgetcontrol_types.QVideoWidgetControl, ): cint =
+  fcQVideoWidgetControl_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qvideowidgetcontrol_types.QVideoWidgetControl, signal: cstring): cint =
+  fcQVideoWidgetControl_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qvideowidgetcontrol_types.QVideoWidgetControl, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQVideoWidgetControl_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc staticMetaObject*(_: type gen_qvideowidgetcontrol_types.QVideoWidgetControl): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQVideoWidgetControl_staticMetaObject())

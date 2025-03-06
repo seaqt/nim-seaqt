@@ -38,10 +38,14 @@ import ./gen_qmedianetworkaccesscontrol_types
 export gen_qmedianetworkaccesscontrol_types
 
 import
+  ../QtCore/gen_qmetaobject_types,
+  ../QtCore/gen_qobject_types,
   ../QtCore/gen_qobjectdefs_types,
   ../QtNetwork/gen_qnetworkconfiguration_types,
   ./gen_qmediacontrol
 export
+  gen_qmetaobject_types,
+  gen_qobject_types,
   gen_qobjectdefs_types,
   gen_qnetworkconfiguration_types,
   gen_qmediacontrol
@@ -61,6 +65,10 @@ proc fcQMediaNetworkAccessControl_tr2(s: cstring, c: cstring): struct_miqt_strin
 proc fcQMediaNetworkAccessControl_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QMediaNetworkAccessControl_tr3".}
 proc fcQMediaNetworkAccessControl_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QMediaNetworkAccessControl_trUtf82".}
 proc fcQMediaNetworkAccessControl_trUtf83(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QMediaNetworkAccessControl_trUtf83".}
+proc fcQMediaNetworkAccessControl_protectedbase_sender(self: pointer, ): pointer {.importc: "QMediaNetworkAccessControl_protectedbase_sender".}
+proc fcQMediaNetworkAccessControl_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QMediaNetworkAccessControl_protectedbase_senderSignalIndex".}
+proc fcQMediaNetworkAccessControl_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QMediaNetworkAccessControl_protectedbase_receivers".}
+proc fcQMediaNetworkAccessControl_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QMediaNetworkAccessControl_protectedbase_isSignalConnected".}
 proc fcQMediaNetworkAccessControl_staticMetaObject(): pointer {.importc: "QMediaNetworkAccessControl_staticMetaObject".}
 proc fcQMediaNetworkAccessControl_delete(self: pointer) {.importc: "QMediaNetworkAccessControl_delete".}
 
@@ -138,6 +146,18 @@ proc trUtf8*(_: type gen_qmedianetworkaccesscontrol_types.QMediaNetworkAccessCon
   let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
   c_free(v_ms.data)
   vx_ret
+
+proc sender*(self: gen_qmedianetworkaccesscontrol_types.QMediaNetworkAccessControl, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQMediaNetworkAccessControl_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qmedianetworkaccesscontrol_types.QMediaNetworkAccessControl, ): cint =
+  fcQMediaNetworkAccessControl_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qmedianetworkaccesscontrol_types.QMediaNetworkAccessControl, signal: cstring): cint =
+  fcQMediaNetworkAccessControl_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qmedianetworkaccesscontrol_types.QMediaNetworkAccessControl, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQMediaNetworkAccessControl_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc staticMetaObject*(_: type gen_qmedianetworkaccesscontrol_types.QMediaNetworkAccessControl): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQMediaNetworkAccessControl_staticMetaObject())

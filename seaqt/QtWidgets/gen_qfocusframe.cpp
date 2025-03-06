@@ -816,16 +816,16 @@ public:
 	friend void QFocusFrame_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
 
 	// Wrappers to allow calling protected methods:
-	friend void QFocusFrame_protectedbase_initStyleOption(bool* _dynamic_cast_ok, const void* self, QStyleOption* option);
-	friend void QFocusFrame_protectedbase_updateMicroFocus(bool* _dynamic_cast_ok, void* self);
-	friend void QFocusFrame_protectedbase_create(bool* _dynamic_cast_ok, void* self);
-	friend void QFocusFrame_protectedbase_destroy(bool* _dynamic_cast_ok, void* self);
-	friend bool QFocusFrame_protectedbase_focusNextChild(bool* _dynamic_cast_ok, void* self);
-	friend bool QFocusFrame_protectedbase_focusPreviousChild(bool* _dynamic_cast_ok, void* self);
-	friend QObject* QFocusFrame_protectedbase_sender(bool* _dynamic_cast_ok, const void* self);
-	friend int QFocusFrame_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
-	friend int QFocusFrame_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
-	friend bool QFocusFrame_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+	friend void QFocusFrame_protectedbase_initStyleOption(const void* self, QStyleOption* option);
+	friend void QFocusFrame_protectedbase_updateMicroFocus(void* self);
+	friend void QFocusFrame_protectedbase_create(void* self);
+	friend void QFocusFrame_protectedbase_destroy(void* self);
+	friend bool QFocusFrame_protectedbase_focusNextChild(void* self);
+	friend bool QFocusFrame_protectedbase_focusPreviousChild(void* self);
+	friend QObject* QFocusFrame_protectedbase_sender(const void* self);
+	friend int QFocusFrame_protectedbase_senderSignalIndex(const void* self);
+	friend int QFocusFrame_protectedbase_receivers(const void* self, const char* signal);
+	friend bool QFocusFrame_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
 };
 
 QFocusFrame* QFocusFrame_new(struct QFocusFrame_VTable* vtbl, QWidget* parent) {
@@ -1228,131 +1228,71 @@ void QFocusFrame_virtualbase_disconnectNotify(void* self, QMetaMethod* signal) {
 }
 
 const QMetaObject* QFocusFrame_staticMetaObject() { return &QFocusFrame::staticMetaObject; }
-void QFocusFrame_protectedbase_initStyleOption(bool* _dynamic_cast_ok, const void* self, QStyleOption* option) {
-	VirtualQFocusFrame* self_cast = dynamic_cast<VirtualQFocusFrame*>( (QFocusFrame*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QFocusFrame_protectedbase_initStyleOption(const void* self, QStyleOption* option) {
+	VirtualQFocusFrame* self_cast = static_cast<VirtualQFocusFrame*>( (QFocusFrame*)(self) );
 	
 	self_cast->initStyleOption(option);
 
 }
 
-void QFocusFrame_protectedbase_updateMicroFocus(bool* _dynamic_cast_ok, void* self) {
-	VirtualQFocusFrame* self_cast = dynamic_cast<VirtualQFocusFrame*>( (QFocusFrame*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QFocusFrame_protectedbase_updateMicroFocus(void* self) {
+	VirtualQFocusFrame* self_cast = static_cast<VirtualQFocusFrame*>( (QFocusFrame*)(self) );
 	
 	self_cast->updateMicroFocus();
 
 }
 
-void QFocusFrame_protectedbase_create(bool* _dynamic_cast_ok, void* self) {
-	VirtualQFocusFrame* self_cast = dynamic_cast<VirtualQFocusFrame*>( (QFocusFrame*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QFocusFrame_protectedbase_create(void* self) {
+	VirtualQFocusFrame* self_cast = static_cast<VirtualQFocusFrame*>( (QFocusFrame*)(self) );
 	
 	self_cast->create();
 
 }
 
-void QFocusFrame_protectedbase_destroy(bool* _dynamic_cast_ok, void* self) {
-	VirtualQFocusFrame* self_cast = dynamic_cast<VirtualQFocusFrame*>( (QFocusFrame*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QFocusFrame_protectedbase_destroy(void* self) {
+	VirtualQFocusFrame* self_cast = static_cast<VirtualQFocusFrame*>( (QFocusFrame*)(self) );
 	
 	self_cast->destroy();
 
 }
 
-bool QFocusFrame_protectedbase_focusNextChild(bool* _dynamic_cast_ok, void* self) {
-	VirtualQFocusFrame* self_cast = dynamic_cast<VirtualQFocusFrame*>( (QFocusFrame*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return false;
-	}
-	
-	*_dynamic_cast_ok = true;
+bool QFocusFrame_protectedbase_focusNextChild(void* self) {
+	VirtualQFocusFrame* self_cast = static_cast<VirtualQFocusFrame*>( (QFocusFrame*)(self) );
 	
 	return self_cast->focusNextChild();
 
 }
 
-bool QFocusFrame_protectedbase_focusPreviousChild(bool* _dynamic_cast_ok, void* self) {
-	VirtualQFocusFrame* self_cast = dynamic_cast<VirtualQFocusFrame*>( (QFocusFrame*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return false;
-	}
-	
-	*_dynamic_cast_ok = true;
+bool QFocusFrame_protectedbase_focusPreviousChild(void* self) {
+	VirtualQFocusFrame* self_cast = static_cast<VirtualQFocusFrame*>( (QFocusFrame*)(self) );
 	
 	return self_cast->focusPreviousChild();
 
 }
 
-QObject* QFocusFrame_protectedbase_sender(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQFocusFrame* self_cast = dynamic_cast<VirtualQFocusFrame*>( (QFocusFrame*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return nullptr;
-	}
-	
-	*_dynamic_cast_ok = true;
+QObject* QFocusFrame_protectedbase_sender(const void* self) {
+	VirtualQFocusFrame* self_cast = static_cast<VirtualQFocusFrame*>( (QFocusFrame*)(self) );
 	
 	return self_cast->sender();
 
 }
 
-int QFocusFrame_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQFocusFrame* self_cast = dynamic_cast<VirtualQFocusFrame*>( (QFocusFrame*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return 0;
-	}
-	
-	*_dynamic_cast_ok = true;
+int QFocusFrame_protectedbase_senderSignalIndex(const void* self) {
+	VirtualQFocusFrame* self_cast = static_cast<VirtualQFocusFrame*>( (QFocusFrame*)(self) );
 	
 	return self_cast->senderSignalIndex();
 
 }
 
-int QFocusFrame_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal) {
-	VirtualQFocusFrame* self_cast = dynamic_cast<VirtualQFocusFrame*>( (QFocusFrame*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return 0;
-	}
-	
-	*_dynamic_cast_ok = true;
+int QFocusFrame_protectedbase_receivers(const void* self, const char* signal) {
+	VirtualQFocusFrame* self_cast = static_cast<VirtualQFocusFrame*>( (QFocusFrame*)(self) );
 	
 	return self_cast->receivers(signal);
 
 }
 
-bool QFocusFrame_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal) {
-	VirtualQFocusFrame* self_cast = dynamic_cast<VirtualQFocusFrame*>( (QFocusFrame*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return false;
-	}
-	
-	*_dynamic_cast_ok = true;
+bool QFocusFrame_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal) {
+	VirtualQFocusFrame* self_cast = static_cast<VirtualQFocusFrame*>( (QFocusFrame*)(self) );
 	
 	return self_cast->isSignalConnected(*signal);
 

@@ -155,6 +155,10 @@ proc fcQSettings_virtualbase_childEvent(self: pointer, event: pointer): void {.i
 proc fcQSettings_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QSettings_virtualbase_customEvent".}
 proc fcQSettings_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QSettings_virtualbase_connectNotify".}
 proc fcQSettings_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QSettings_virtualbase_disconnectNotify".}
+proc fcQSettings_protectedbase_sender(self: pointer, ): pointer {.importc: "QSettings_protectedbase_sender".}
+proc fcQSettings_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QSettings_protectedbase_senderSignalIndex".}
+proc fcQSettings_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QSettings_protectedbase_receivers".}
+proc fcQSettings_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QSettings_protectedbase_isSignalConnected".}
 proc fcQSettings_new(vtbl: pointer, organization: struct_miqt_string): ptr cQSettings {.importc: "QSettings_new".}
 proc fcQSettings_new2(vtbl: pointer, scope: cint, organization: struct_miqt_string): ptr cQSettings {.importc: "QSettings_new2".}
 proc fcQSettings_new3(vtbl: pointer, format: cint, scope: cint, organization: struct_miqt_string): ptr cQSettings {.importc: "QSettings_new3".}
@@ -483,6 +487,18 @@ proc miqt_exec_callback_cQSettings_disconnectNotify(vtbl: pointer, self: pointer
   let self = QSettings(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
   vtbl[].disconnectNotify(self, slotval1)
+
+proc sender*(self: gen_qsettings_types.QSettings, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQSettings_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qsettings_types.QSettings, ): cint =
+  fcQSettings_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qsettings_types.QSettings, signal: cstring): cint =
+  fcQSettings_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qsettings_types.QSettings, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQSettings_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc create*(T: type gen_qsettings_types.QSettings,
     organization: string,

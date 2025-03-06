@@ -119,6 +119,7 @@ import
   ../QtCore/gen_qrect_types,
   ../QtCore/gen_qsize_types,
   ../QtGui/gen_qpagedpaintdevice,
+  ../QtGui/gen_qpagelayout_types,
   ../QtGui/gen_qpaintdevice_types,
   ../QtGui/gen_qpaintengine_types,
   ../QtGui/gen_qpainter_types,
@@ -129,6 +130,7 @@ export
   gen_qrect_types,
   gen_qsize_types,
   gen_qpagedpaintdevice,
+  gen_qpagelayout_types,
   gen_qpaintdevice_types,
   gen_qpaintengine_types,
   gen_qpainter_types,
@@ -232,6 +234,8 @@ proc fcQPrinter_virtualbase_metric(self: pointer, param1: cint): cint {.importc:
 proc fcQPrinter_virtualbase_initPainter(self: pointer, painter: pointer): void {.importc: "QPrinter_virtualbase_initPainter".}
 proc fcQPrinter_virtualbase_redirected(self: pointer, offset: pointer): pointer {.importc: "QPrinter_virtualbase_redirected".}
 proc fcQPrinter_virtualbase_sharedPainter(self: pointer, ): pointer {.importc: "QPrinter_virtualbase_sharedPainter".}
+proc fcQPrinter_protectedbase_setEngines(self: pointer, printEngine: pointer, paintEngine: pointer): void {.importc: "QPrinter_protectedbase_setEngines".}
+proc fcQPrinter_protectedbase_devicePageLayout(self: pointer, ): pointer {.importc: "QPrinter_protectedbase_devicePageLayout".}
 proc fcQPrinter_new(vtbl: pointer, ): ptr cQPrinter {.importc: "QPrinter_new".}
 proc fcQPrinter_new2(vtbl: pointer, printer: pointer): ptr cQPrinter {.importc: "QPrinter_new2".}
 proc fcQPrinter_new3(vtbl: pointer, mode: cint): ptr cQPrinter {.importc: "QPrinter_new3".}
@@ -596,6 +600,12 @@ proc miqt_exec_callback_cQPrinter_sharedPainter(vtbl: pointer, self: pointer): p
   let self = QPrinter(h: self)
   var virtualReturn = vtbl[].sharedPainter(self)
   virtualReturn.h
+
+proc setEngines*(self: gen_qprinter_types.QPrinter, printEngine: gen_qprintengine_types.QPrintEngine, paintEngine: gen_qpaintengine_types.QPaintEngine): void =
+  fcQPrinter_protectedbase_setEngines(self.h, printEngine.h, paintEngine.h)
+
+proc devicePageLayout*(self: gen_qprinter_types.QPrinter, ): gen_qpagelayout_types.QPageLayout =
+  gen_qpagelayout_types.QPageLayout(h: fcQPrinter_protectedbase_devicePageLayout(self.h))
 
 proc create*(T: type gen_qprinter_types.QPrinter,
     vtbl: ref QPrinterVTable = nil): gen_qprinter_types.QPrinter =

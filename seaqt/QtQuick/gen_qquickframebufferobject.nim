@@ -179,10 +179,21 @@ proc fcQQuickFramebufferObject_virtualbase_childEvent(self: pointer, event: poin
 proc fcQQuickFramebufferObject_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QQuickFramebufferObject_virtualbase_customEvent".}
 proc fcQQuickFramebufferObject_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QQuickFramebufferObject_virtualbase_connectNotify".}
 proc fcQQuickFramebufferObject_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QQuickFramebufferObject_virtualbase_disconnectNotify".}
+proc fcQQuickFramebufferObject_protectedbase_isComponentComplete(self: pointer, ): bool {.importc: "QQuickFramebufferObject_protectedbase_isComponentComplete".}
+proc fcQQuickFramebufferObject_protectedbase_updateInputMethod(self: pointer, ): void {.importc: "QQuickFramebufferObject_protectedbase_updateInputMethod".}
+proc fcQQuickFramebufferObject_protectedbase_widthValid(self: pointer, ): bool {.importc: "QQuickFramebufferObject_protectedbase_widthValid".}
+proc fcQQuickFramebufferObject_protectedbase_heightValid(self: pointer, ): bool {.importc: "QQuickFramebufferObject_protectedbase_heightValid".}
+proc fcQQuickFramebufferObject_protectedbase_setImplicitSize(self: pointer, param1: float64, param2: float64): void {.importc: "QQuickFramebufferObject_protectedbase_setImplicitSize".}
+proc fcQQuickFramebufferObject_protectedbase_sender(self: pointer, ): pointer {.importc: "QQuickFramebufferObject_protectedbase_sender".}
+proc fcQQuickFramebufferObject_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QQuickFramebufferObject_protectedbase_senderSignalIndex".}
+proc fcQQuickFramebufferObject_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QQuickFramebufferObject_protectedbase_receivers".}
+proc fcQQuickFramebufferObject_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QQuickFramebufferObject_protectedbase_isSignalConnected".}
 proc fcQQuickFramebufferObject_new(vtbl: pointer, ): ptr cQQuickFramebufferObject {.importc: "QQuickFramebufferObject_new".}
 proc fcQQuickFramebufferObject_new2(vtbl: pointer, parent: pointer): ptr cQQuickFramebufferObject {.importc: "QQuickFramebufferObject_new2".}
 proc fcQQuickFramebufferObject_staticMetaObject(): pointer {.importc: "QQuickFramebufferObject_staticMetaObject".}
 proc fcQQuickFramebufferObject_delete(self: pointer) {.importc: "QQuickFramebufferObject_delete".}
+proc fcQQuickFramebufferObjectRenderer_protectedbase_update(self: pointer, ): void {.importc: "QQuickFramebufferObject__Renderer_protectedbase_update".}
+proc fcQQuickFramebufferObjectRenderer_protectedbase_invalidateFramebufferObject(self: pointer, ): void {.importc: "QQuickFramebufferObject__Renderer_protectedbase_invalidateFramebufferObject".}
 
 proc metaObject*(self: gen_qquickframebufferobject_types.QQuickFramebufferObject, ): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQQuickFramebufferObject_metaObject(self.h))
@@ -806,6 +817,33 @@ proc miqt_exec_callback_cQQuickFramebufferObject_disconnectNotify(vtbl: pointer,
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
   vtbl[].disconnectNotify(self, slotval1)
 
+proc isComponentComplete*(self: gen_qquickframebufferobject_types.QQuickFramebufferObject, ): bool =
+  fcQQuickFramebufferObject_protectedbase_isComponentComplete(self.h)
+
+proc updateInputMethod*(self: gen_qquickframebufferobject_types.QQuickFramebufferObject, ): void =
+  fcQQuickFramebufferObject_protectedbase_updateInputMethod(self.h)
+
+proc widthValid*(self: gen_qquickframebufferobject_types.QQuickFramebufferObject, ): bool =
+  fcQQuickFramebufferObject_protectedbase_widthValid(self.h)
+
+proc heightValid*(self: gen_qquickframebufferobject_types.QQuickFramebufferObject, ): bool =
+  fcQQuickFramebufferObject_protectedbase_heightValid(self.h)
+
+proc setImplicitSize*(self: gen_qquickframebufferobject_types.QQuickFramebufferObject, param1: float64, param2: float64): void =
+  fcQQuickFramebufferObject_protectedbase_setImplicitSize(self.h, param1, param2)
+
+proc sender*(self: gen_qquickframebufferobject_types.QQuickFramebufferObject, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQQuickFramebufferObject_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qquickframebufferobject_types.QQuickFramebufferObject, ): cint =
+  fcQQuickFramebufferObject_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qquickframebufferobject_types.QQuickFramebufferObject, signal: cstring): cint =
+  fcQQuickFramebufferObject_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qquickframebufferobject_types.QQuickFramebufferObject, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQQuickFramebufferObject_protectedbase_isSignalConnected(self.h, signal.h)
+
 proc create*(T: type gen_qquickframebufferobject_types.QQuickFramebufferObject,
     vtbl: ref QQuickFramebufferObjectVTable = nil): gen_qquickframebufferobject_types.QQuickFramebufferObject =
   let vtbl = if vtbl == nil: new QQuickFramebufferObjectVTable else: vtbl
@@ -1013,3 +1051,9 @@ proc staticMetaObject*(_: type gen_qquickframebufferobject_types.QQuickFramebuff
   gen_qobjectdefs_types.QMetaObject(h: fcQQuickFramebufferObject_staticMetaObject())
 proc delete*(self: gen_qquickframebufferobject_types.QQuickFramebufferObject) =
   fcQQuickFramebufferObject_delete(self.h)
+proc update*(self: gen_qquickframebufferobject_types.QQuickFramebufferObjectRenderer, ): void =
+  fcQQuickFramebufferObjectRenderer_protectedbase_update(self.h)
+
+proc invalidateFramebufferObject*(self: gen_qquickframebufferobject_types.QQuickFramebufferObjectRenderer, ): void =
+  fcQQuickFramebufferObjectRenderer_protectedbase_invalidateFramebufferObject(self.h)
+

@@ -38,10 +38,14 @@ import ./gen_qmediagaplessplaybackcontrol_types
 export gen_qmediagaplessplaybackcontrol_types
 
 import
+  ../QtCore/gen_qmetaobject_types,
+  ../QtCore/gen_qobject_types,
   ../QtCore/gen_qobjectdefs_types,
   ./gen_qmediacontent_types,
   ./gen_qmediacontrol
 export
+  gen_qmetaobject_types,
+  gen_qobject_types,
   gen_qobjectdefs_types,
   gen_qmediacontent_types,
   gen_qmediacontrol
@@ -68,6 +72,10 @@ proc fcQMediaGaplessPlaybackControl_tr2(s: cstring, c: cstring): struct_miqt_str
 proc fcQMediaGaplessPlaybackControl_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QMediaGaplessPlaybackControl_tr3".}
 proc fcQMediaGaplessPlaybackControl_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QMediaGaplessPlaybackControl_trUtf82".}
 proc fcQMediaGaplessPlaybackControl_trUtf83(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QMediaGaplessPlaybackControl_trUtf83".}
+proc fcQMediaGaplessPlaybackControl_protectedbase_sender(self: pointer, ): pointer {.importc: "QMediaGaplessPlaybackControl_protectedbase_sender".}
+proc fcQMediaGaplessPlaybackControl_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QMediaGaplessPlaybackControl_protectedbase_senderSignalIndex".}
+proc fcQMediaGaplessPlaybackControl_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QMediaGaplessPlaybackControl_protectedbase_receivers".}
+proc fcQMediaGaplessPlaybackControl_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QMediaGaplessPlaybackControl_protectedbase_isSignalConnected".}
 proc fcQMediaGaplessPlaybackControl_staticMetaObject(): pointer {.importc: "QMediaGaplessPlaybackControl_staticMetaObject".}
 proc fcQMediaGaplessPlaybackControl_delete(self: pointer) {.importc: "QMediaGaplessPlaybackControl_delete".}
 
@@ -188,6 +196,18 @@ proc trUtf8*(_: type gen_qmediagaplessplaybackcontrol_types.QMediaGaplessPlaybac
   let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
   c_free(v_ms.data)
   vx_ret
+
+proc sender*(self: gen_qmediagaplessplaybackcontrol_types.QMediaGaplessPlaybackControl, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQMediaGaplessPlaybackControl_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qmediagaplessplaybackcontrol_types.QMediaGaplessPlaybackControl, ): cint =
+  fcQMediaGaplessPlaybackControl_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qmediagaplessplaybackcontrol_types.QMediaGaplessPlaybackControl, signal: cstring): cint =
+  fcQMediaGaplessPlaybackControl_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qmediagaplessplaybackcontrol_types.QMediaGaplessPlaybackControl, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQMediaGaplessPlaybackControl_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc staticMetaObject*(_: type gen_qmediagaplessplaybackcontrol_types.QMediaGaplessPlaybackControl): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQMediaGaplessPlaybackControl_staticMetaObject())

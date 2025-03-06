@@ -115,6 +115,10 @@ proc fcQUndoGroup_virtualbase_childEvent(self: pointer, event: pointer): void {.
 proc fcQUndoGroup_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QUndoGroup_virtualbase_customEvent".}
 proc fcQUndoGroup_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QUndoGroup_virtualbase_connectNotify".}
 proc fcQUndoGroup_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QUndoGroup_virtualbase_disconnectNotify".}
+proc fcQUndoGroup_protectedbase_sender(self: pointer, ): pointer {.importc: "QUndoGroup_protectedbase_sender".}
+proc fcQUndoGroup_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QUndoGroup_protectedbase_senderSignalIndex".}
+proc fcQUndoGroup_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QUndoGroup_protectedbase_receivers".}
+proc fcQUndoGroup_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QUndoGroup_protectedbase_isSignalConnected".}
 proc fcQUndoGroup_new(vtbl: pointer, ): ptr cQUndoGroup {.importc: "QUndoGroup_new".}
 proc fcQUndoGroup_new2(vtbl: pointer, parent: pointer): ptr cQUndoGroup {.importc: "QUndoGroup_new2".}
 proc fcQUndoGroup_staticMetaObject(): pointer {.importc: "QUndoGroup_staticMetaObject".}
@@ -488,6 +492,18 @@ proc miqt_exec_callback_cQUndoGroup_disconnectNotify(vtbl: pointer, self: pointe
   let self = QUndoGroup(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
   vtbl[].disconnectNotify(self, slotval1)
+
+proc sender*(self: gen_qundogroup_types.QUndoGroup, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQUndoGroup_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qundogroup_types.QUndoGroup, ): cint =
+  fcQUndoGroup_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qundogroup_types.QUndoGroup, signal: cstring): cint =
+  fcQUndoGroup_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qundogroup_types.QUndoGroup, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQUndoGroup_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc create*(T: type gen_qundogroup_types.QUndoGroup,
     vtbl: ref QUndoGroupVTable = nil): gen_qundogroup_types.QUndoGroup =

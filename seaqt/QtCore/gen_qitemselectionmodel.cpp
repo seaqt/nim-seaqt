@@ -413,11 +413,11 @@ public:
 	friend void QItemSelectionModel_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
 
 	// Wrappers to allow calling protected methods:
-	friend void QItemSelectionModel_protectedbase_emitSelectionChanged(bool* _dynamic_cast_ok, void* self, QItemSelection* newSelection, QItemSelection* oldSelection);
-	friend QObject* QItemSelectionModel_protectedbase_sender(bool* _dynamic_cast_ok, const void* self);
-	friend int QItemSelectionModel_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
-	friend int QItemSelectionModel_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
-	friend bool QItemSelectionModel_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+	friend void QItemSelectionModel_protectedbase_emitSelectionChanged(void* self, QItemSelection* newSelection, QItemSelection* oldSelection);
+	friend QObject* QItemSelectionModel_protectedbase_sender(const void* self);
+	friend int QItemSelectionModel_protectedbase_senderSignalIndex(const void* self);
+	friend int QItemSelectionModel_protectedbase_receivers(const void* self, const char* signal);
+	friend bool QItemSelectionModel_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
 };
 
 QItemSelectionModel* QItemSelectionModel_new(struct QItemSelectionModel_VTable* vtbl) {
@@ -864,66 +864,36 @@ void QItemSelectionModel_virtualbase_disconnectNotify(void* self, QMetaMethod* s
 }
 
 const QMetaObject* QItemSelectionModel_staticMetaObject() { return &QItemSelectionModel::staticMetaObject; }
-void QItemSelectionModel_protectedbase_emitSelectionChanged(bool* _dynamic_cast_ok, void* self, QItemSelection* newSelection, QItemSelection* oldSelection) {
-	VirtualQItemSelectionModel* self_cast = dynamic_cast<VirtualQItemSelectionModel*>( (QItemSelectionModel*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QItemSelectionModel_protectedbase_emitSelectionChanged(void* self, QItemSelection* newSelection, QItemSelection* oldSelection) {
+	VirtualQItemSelectionModel* self_cast = static_cast<VirtualQItemSelectionModel*>( (QItemSelectionModel*)(self) );
 	
 	self_cast->emitSelectionChanged(*newSelection, *oldSelection);
 
 }
 
-QObject* QItemSelectionModel_protectedbase_sender(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQItemSelectionModel* self_cast = dynamic_cast<VirtualQItemSelectionModel*>( (QItemSelectionModel*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return nullptr;
-	}
-	
-	*_dynamic_cast_ok = true;
+QObject* QItemSelectionModel_protectedbase_sender(const void* self) {
+	VirtualQItemSelectionModel* self_cast = static_cast<VirtualQItemSelectionModel*>( (QItemSelectionModel*)(self) );
 	
 	return self_cast->sender();
 
 }
 
-int QItemSelectionModel_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQItemSelectionModel* self_cast = dynamic_cast<VirtualQItemSelectionModel*>( (QItemSelectionModel*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return 0;
-	}
-	
-	*_dynamic_cast_ok = true;
+int QItemSelectionModel_protectedbase_senderSignalIndex(const void* self) {
+	VirtualQItemSelectionModel* self_cast = static_cast<VirtualQItemSelectionModel*>( (QItemSelectionModel*)(self) );
 	
 	return self_cast->senderSignalIndex();
 
 }
 
-int QItemSelectionModel_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal) {
-	VirtualQItemSelectionModel* self_cast = dynamic_cast<VirtualQItemSelectionModel*>( (QItemSelectionModel*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return 0;
-	}
-	
-	*_dynamic_cast_ok = true;
+int QItemSelectionModel_protectedbase_receivers(const void* self, const char* signal) {
+	VirtualQItemSelectionModel* self_cast = static_cast<VirtualQItemSelectionModel*>( (QItemSelectionModel*)(self) );
 	
 	return self_cast->receivers(signal);
 
 }
 
-bool QItemSelectionModel_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal) {
-	VirtualQItemSelectionModel* self_cast = dynamic_cast<VirtualQItemSelectionModel*>( (QItemSelectionModel*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return false;
-	}
-	
-	*_dynamic_cast_ok = true;
+bool QItemSelectionModel_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal) {
+	VirtualQItemSelectionModel* self_cast = static_cast<VirtualQItemSelectionModel*>( (QItemSelectionModel*)(self) );
 	
 	return self_cast->isSignalConnected(*signal);
 

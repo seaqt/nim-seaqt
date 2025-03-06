@@ -38,10 +38,12 @@ import ./gen_qmediaservice_types
 export gen_qmediaservice_types
 
 import
+  ../QtCore/gen_qmetaobject_types,
   ../QtCore/gen_qobject,
   ../QtCore/gen_qobjectdefs_types,
   ./gen_qmediacontrol_types
 export
+  gen_qmetaobject_types,
   gen_qobject,
   gen_qobjectdefs_types,
   gen_qmediacontrol_types
@@ -59,6 +61,10 @@ proc fcQMediaService_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: 
 proc fcQMediaService_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QMediaService_tr3".}
 proc fcQMediaService_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QMediaService_trUtf82".}
 proc fcQMediaService_trUtf83(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QMediaService_trUtf83".}
+proc fcQMediaService_protectedbase_sender(self: pointer, ): pointer {.importc: "QMediaService_protectedbase_sender".}
+proc fcQMediaService_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QMediaService_protectedbase_senderSignalIndex".}
+proc fcQMediaService_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QMediaService_protectedbase_receivers".}
+proc fcQMediaService_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QMediaService_protectedbase_isSignalConnected".}
 proc fcQMediaService_staticMetaObject(): pointer {.importc: "QMediaService_staticMetaObject".}
 proc fcQMediaService_delete(self: pointer) {.importc: "QMediaService_delete".}
 
@@ -112,6 +118,18 @@ proc trUtf8*(_: type gen_qmediaservice_types.QMediaService, s: cstring, c: cstri
   let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
   c_free(v_ms.data)
   vx_ret
+
+proc sender*(self: gen_qmediaservice_types.QMediaService, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQMediaService_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qmediaservice_types.QMediaService, ): cint =
+  fcQMediaService_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qmediaservice_types.QMediaService, signal: cstring): cint =
+  fcQMediaService_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qmediaservice_types.QMediaService, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQMediaService_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc staticMetaObject*(_: type gen_qmediaservice_types.QMediaService): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQMediaService_staticMetaObject())

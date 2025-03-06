@@ -202,10 +202,10 @@ public:
 	friend void QSettings_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
 
 	// Wrappers to allow calling protected methods:
-	friend QObject* QSettings_protectedbase_sender(bool* _dynamic_cast_ok, const void* self);
-	friend int QSettings_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
-	friend int QSettings_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
-	friend bool QSettings_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+	friend QObject* QSettings_protectedbase_sender(const void* self);
+	friend int QSettings_protectedbase_senderSignalIndex(const void* self);
+	friend int QSettings_protectedbase_receivers(const void* self, const char* signal);
+	friend bool QSettings_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
 };
 
 QSettings* QSettings_new(struct QSettings_VTable* vtbl, struct miqt_string organization) {
@@ -668,53 +668,29 @@ void QSettings_virtualbase_disconnectNotify(void* self, QMetaMethod* signal) {
 }
 
 const QMetaObject* QSettings_staticMetaObject() { return &QSettings::staticMetaObject; }
-QObject* QSettings_protectedbase_sender(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQSettings* self_cast = dynamic_cast<VirtualQSettings*>( (QSettings*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return nullptr;
-	}
-	
-	*_dynamic_cast_ok = true;
+QObject* QSettings_protectedbase_sender(const void* self) {
+	VirtualQSettings* self_cast = static_cast<VirtualQSettings*>( (QSettings*)(self) );
 	
 	return self_cast->sender();
 
 }
 
-int QSettings_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQSettings* self_cast = dynamic_cast<VirtualQSettings*>( (QSettings*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return 0;
-	}
-	
-	*_dynamic_cast_ok = true;
+int QSettings_protectedbase_senderSignalIndex(const void* self) {
+	VirtualQSettings* self_cast = static_cast<VirtualQSettings*>( (QSettings*)(self) );
 	
 	return self_cast->senderSignalIndex();
 
 }
 
-int QSettings_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal) {
-	VirtualQSettings* self_cast = dynamic_cast<VirtualQSettings*>( (QSettings*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return 0;
-	}
-	
-	*_dynamic_cast_ok = true;
+int QSettings_protectedbase_receivers(const void* self, const char* signal) {
+	VirtualQSettings* self_cast = static_cast<VirtualQSettings*>( (QSettings*)(self) );
 	
 	return self_cast->receivers(signal);
 
 }
 
-bool QSettings_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal) {
-	VirtualQSettings* self_cast = dynamic_cast<VirtualQSettings*>( (QSettings*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return false;
-	}
-	
-	*_dynamic_cast_ok = true;
+bool QSettings_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal) {
+	VirtualQSettings* self_cast = static_cast<VirtualQSettings*>( (QSettings*)(self) );
 	
 	return self_cast->isSignalConnected(*signal);
 

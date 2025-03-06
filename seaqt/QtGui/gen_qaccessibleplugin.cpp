@@ -208,10 +208,10 @@ public:
 	friend void QAccessiblePlugin_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
 
 	// Wrappers to allow calling protected methods:
-	friend QObject* QAccessiblePlugin_protectedbase_sender(bool* _dynamic_cast_ok, const void* self);
-	friend int QAccessiblePlugin_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
-	friend int QAccessiblePlugin_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
-	friend bool QAccessiblePlugin_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+	friend QObject* QAccessiblePlugin_protectedbase_sender(const void* self);
+	friend int QAccessiblePlugin_protectedbase_senderSignalIndex(const void* self);
+	friend int QAccessiblePlugin_protectedbase_receivers(const void* self, const char* signal);
+	friend bool QAccessiblePlugin_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
 };
 
 QAccessiblePlugin* QAccessiblePlugin_new(struct QAccessiblePlugin_VTable* vtbl) {
@@ -370,53 +370,29 @@ void QAccessiblePlugin_virtualbase_disconnectNotify(void* self, QMetaMethod* sig
 }
 
 const QMetaObject* QAccessiblePlugin_staticMetaObject() { return &QAccessiblePlugin::staticMetaObject; }
-QObject* QAccessiblePlugin_protectedbase_sender(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQAccessiblePlugin* self_cast = dynamic_cast<VirtualQAccessiblePlugin*>( (QAccessiblePlugin*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return nullptr;
-	}
-	
-	*_dynamic_cast_ok = true;
+QObject* QAccessiblePlugin_protectedbase_sender(const void* self) {
+	VirtualQAccessiblePlugin* self_cast = static_cast<VirtualQAccessiblePlugin*>( (QAccessiblePlugin*)(self) );
 	
 	return self_cast->sender();
 
 }
 
-int QAccessiblePlugin_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQAccessiblePlugin* self_cast = dynamic_cast<VirtualQAccessiblePlugin*>( (QAccessiblePlugin*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return 0;
-	}
-	
-	*_dynamic_cast_ok = true;
+int QAccessiblePlugin_protectedbase_senderSignalIndex(const void* self) {
+	VirtualQAccessiblePlugin* self_cast = static_cast<VirtualQAccessiblePlugin*>( (QAccessiblePlugin*)(self) );
 	
 	return self_cast->senderSignalIndex();
 
 }
 
-int QAccessiblePlugin_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal) {
-	VirtualQAccessiblePlugin* self_cast = dynamic_cast<VirtualQAccessiblePlugin*>( (QAccessiblePlugin*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return 0;
-	}
-	
-	*_dynamic_cast_ok = true;
+int QAccessiblePlugin_protectedbase_receivers(const void* self, const char* signal) {
+	VirtualQAccessiblePlugin* self_cast = static_cast<VirtualQAccessiblePlugin*>( (QAccessiblePlugin*)(self) );
 	
 	return self_cast->receivers(signal);
 
 }
 
-bool QAccessiblePlugin_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal) {
-	VirtualQAccessiblePlugin* self_cast = dynamic_cast<VirtualQAccessiblePlugin*>( (QAccessiblePlugin*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return false;
-	}
-	
-	*_dynamic_cast_ok = true;
+bool QAccessiblePlugin_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal) {
+	VirtualQAccessiblePlugin* self_cast = static_cast<VirtualQAccessiblePlugin*>( (QAccessiblePlugin*)(self) );
 	
 	return self_cast->isSignalConnected(*signal);
 

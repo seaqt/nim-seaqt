@@ -67,6 +67,8 @@ import
   ../QtGui/gen_qpainter_types,
   ./gen_qabstractspinbox,
   ./gen_qcalendarwidget_types,
+  ./gen_qlineedit_types,
+  ./gen_qstyleoption_types,
   ./gen_qwidget_types
 export
   gen_qcalendar_types,
@@ -84,6 +86,8 @@ export
   gen_qpainter_types,
   gen_qabstractspinbox,
   gen_qcalendarwidget_types,
+  gen_qlineedit_types,
+  gen_qstyleoption_types,
   gen_qwidget_types
 
 type cQDateTimeEdit*{.exportc: "QDateTimeEdit", incompleteStruct.} = object
@@ -271,6 +275,18 @@ proc fcQDateTimeEdit_virtualbase_childEvent(self: pointer, event: pointer): void
 proc fcQDateTimeEdit_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QDateTimeEdit_virtualbase_customEvent".}
 proc fcQDateTimeEdit_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QDateTimeEdit_virtualbase_connectNotify".}
 proc fcQDateTimeEdit_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QDateTimeEdit_virtualbase_disconnectNotify".}
+proc fcQDateTimeEdit_protectedbase_initStyleOption(self: pointer, option: pointer): void {.importc: "QDateTimeEdit_protectedbase_initStyleOption".}
+proc fcQDateTimeEdit_protectedbase_lineEdit(self: pointer, ): pointer {.importc: "QDateTimeEdit_protectedbase_lineEdit".}
+proc fcQDateTimeEdit_protectedbase_setLineEdit(self: pointer, edit: pointer): void {.importc: "QDateTimeEdit_protectedbase_setLineEdit".}
+proc fcQDateTimeEdit_protectedbase_updateMicroFocus(self: pointer, ): void {.importc: "QDateTimeEdit_protectedbase_updateMicroFocus".}
+proc fcQDateTimeEdit_protectedbase_create(self: pointer, ): void {.importc: "QDateTimeEdit_protectedbase_create".}
+proc fcQDateTimeEdit_protectedbase_destroy(self: pointer, ): void {.importc: "QDateTimeEdit_protectedbase_destroy".}
+proc fcQDateTimeEdit_protectedbase_focusNextChild(self: pointer, ): bool {.importc: "QDateTimeEdit_protectedbase_focusNextChild".}
+proc fcQDateTimeEdit_protectedbase_focusPreviousChild(self: pointer, ): bool {.importc: "QDateTimeEdit_protectedbase_focusPreviousChild".}
+proc fcQDateTimeEdit_protectedbase_sender(self: pointer, ): pointer {.importc: "QDateTimeEdit_protectedbase_sender".}
+proc fcQDateTimeEdit_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QDateTimeEdit_protectedbase_senderSignalIndex".}
+proc fcQDateTimeEdit_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QDateTimeEdit_protectedbase_receivers".}
+proc fcQDateTimeEdit_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QDateTimeEdit_protectedbase_isSignalConnected".}
 proc fcQDateTimeEdit_new(vtbl: pointer, parent: pointer): ptr cQDateTimeEdit {.importc: "QDateTimeEdit_new".}
 proc fcQDateTimeEdit_new2(vtbl: pointer, ): ptr cQDateTimeEdit {.importc: "QDateTimeEdit_new2".}
 proc fcQDateTimeEdit_new3(vtbl: pointer, dt: pointer): ptr cQDateTimeEdit {.importc: "QDateTimeEdit_new3".}
@@ -408,6 +424,18 @@ proc fcQTimeEdit_virtualbase_childEvent(self: pointer, event: pointer): void {.i
 proc fcQTimeEdit_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QTimeEdit_virtualbase_customEvent".}
 proc fcQTimeEdit_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QTimeEdit_virtualbase_connectNotify".}
 proc fcQTimeEdit_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QTimeEdit_virtualbase_disconnectNotify".}
+proc fcQTimeEdit_protectedbase_initStyleOption(self: pointer, option: pointer): void {.importc: "QTimeEdit_protectedbase_initStyleOption".}
+proc fcQTimeEdit_protectedbase_lineEdit(self: pointer, ): pointer {.importc: "QTimeEdit_protectedbase_lineEdit".}
+proc fcQTimeEdit_protectedbase_setLineEdit(self: pointer, edit: pointer): void {.importc: "QTimeEdit_protectedbase_setLineEdit".}
+proc fcQTimeEdit_protectedbase_updateMicroFocus(self: pointer, ): void {.importc: "QTimeEdit_protectedbase_updateMicroFocus".}
+proc fcQTimeEdit_protectedbase_create(self: pointer, ): void {.importc: "QTimeEdit_protectedbase_create".}
+proc fcQTimeEdit_protectedbase_destroy(self: pointer, ): void {.importc: "QTimeEdit_protectedbase_destroy".}
+proc fcQTimeEdit_protectedbase_focusNextChild(self: pointer, ): bool {.importc: "QTimeEdit_protectedbase_focusNextChild".}
+proc fcQTimeEdit_protectedbase_focusPreviousChild(self: pointer, ): bool {.importc: "QTimeEdit_protectedbase_focusPreviousChild".}
+proc fcQTimeEdit_protectedbase_sender(self: pointer, ): pointer {.importc: "QTimeEdit_protectedbase_sender".}
+proc fcQTimeEdit_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QTimeEdit_protectedbase_senderSignalIndex".}
+proc fcQTimeEdit_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QTimeEdit_protectedbase_receivers".}
+proc fcQTimeEdit_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QTimeEdit_protectedbase_isSignalConnected".}
 proc fcQTimeEdit_new(vtbl: pointer, parent: pointer): ptr cQTimeEdit {.importc: "QTimeEdit_new".}
 proc fcQTimeEdit_new2(vtbl: pointer, ): ptr cQTimeEdit {.importc: "QTimeEdit_new2".}
 proc fcQTimeEdit_new3(vtbl: pointer, time: pointer): ptr cQTimeEdit {.importc: "QTimeEdit_new3".}
@@ -541,6 +569,18 @@ proc fcQDateEdit_virtualbase_childEvent(self: pointer, event: pointer): void {.i
 proc fcQDateEdit_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QDateEdit_virtualbase_customEvent".}
 proc fcQDateEdit_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QDateEdit_virtualbase_connectNotify".}
 proc fcQDateEdit_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QDateEdit_virtualbase_disconnectNotify".}
+proc fcQDateEdit_protectedbase_initStyleOption(self: pointer, option: pointer): void {.importc: "QDateEdit_protectedbase_initStyleOption".}
+proc fcQDateEdit_protectedbase_lineEdit(self: pointer, ): pointer {.importc: "QDateEdit_protectedbase_lineEdit".}
+proc fcQDateEdit_protectedbase_setLineEdit(self: pointer, edit: pointer): void {.importc: "QDateEdit_protectedbase_setLineEdit".}
+proc fcQDateEdit_protectedbase_updateMicroFocus(self: pointer, ): void {.importc: "QDateEdit_protectedbase_updateMicroFocus".}
+proc fcQDateEdit_protectedbase_create(self: pointer, ): void {.importc: "QDateEdit_protectedbase_create".}
+proc fcQDateEdit_protectedbase_destroy(self: pointer, ): void {.importc: "QDateEdit_protectedbase_destroy".}
+proc fcQDateEdit_protectedbase_focusNextChild(self: pointer, ): bool {.importc: "QDateEdit_protectedbase_focusNextChild".}
+proc fcQDateEdit_protectedbase_focusPreviousChild(self: pointer, ): bool {.importc: "QDateEdit_protectedbase_focusPreviousChild".}
+proc fcQDateEdit_protectedbase_sender(self: pointer, ): pointer {.importc: "QDateEdit_protectedbase_sender".}
+proc fcQDateEdit_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QDateEdit_protectedbase_senderSignalIndex".}
+proc fcQDateEdit_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QDateEdit_protectedbase_receivers".}
+proc fcQDateEdit_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QDateEdit_protectedbase_isSignalConnected".}
 proc fcQDateEdit_new(vtbl: pointer, parent: pointer): ptr cQDateEdit {.importc: "QDateEdit_new".}
 proc fcQDateEdit_new2(vtbl: pointer, ): ptr cQDateEdit {.importc: "QDateEdit_new2".}
 proc fcQDateEdit_new3(vtbl: pointer, date: pointer): ptr cQDateEdit {.importc: "QDateEdit_new3".}
@@ -1470,6 +1510,42 @@ proc miqt_exec_callback_cQDateTimeEdit_disconnectNotify(vtbl: pointer, self: poi
   let self = QDateTimeEdit(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
   vtbl[].disconnectNotify(self, slotval1)
+
+proc initStyleOption*(self: gen_qdatetimeedit_types.QDateTimeEdit, option: gen_qstyleoption_types.QStyleOptionSpinBox): void =
+  fcQDateTimeEdit_protectedbase_initStyleOption(self.h, option.h)
+
+proc lineEdit*(self: gen_qdatetimeedit_types.QDateTimeEdit, ): gen_qlineedit_types.QLineEdit =
+  gen_qlineedit_types.QLineEdit(h: fcQDateTimeEdit_protectedbase_lineEdit(self.h))
+
+proc setLineEdit*(self: gen_qdatetimeedit_types.QDateTimeEdit, edit: gen_qlineedit_types.QLineEdit): void =
+  fcQDateTimeEdit_protectedbase_setLineEdit(self.h, edit.h)
+
+proc updateMicroFocus*(self: gen_qdatetimeedit_types.QDateTimeEdit, ): void =
+  fcQDateTimeEdit_protectedbase_updateMicroFocus(self.h)
+
+proc create*(self: gen_qdatetimeedit_types.QDateTimeEdit, ): void =
+  fcQDateTimeEdit_protectedbase_create(self.h)
+
+proc destroy*(self: gen_qdatetimeedit_types.QDateTimeEdit, ): void =
+  fcQDateTimeEdit_protectedbase_destroy(self.h)
+
+proc focusNextChild*(self: gen_qdatetimeedit_types.QDateTimeEdit, ): bool =
+  fcQDateTimeEdit_protectedbase_focusNextChild(self.h)
+
+proc focusPreviousChild*(self: gen_qdatetimeedit_types.QDateTimeEdit, ): bool =
+  fcQDateTimeEdit_protectedbase_focusPreviousChild(self.h)
+
+proc sender*(self: gen_qdatetimeedit_types.QDateTimeEdit, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQDateTimeEdit_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qdatetimeedit_types.QDateTimeEdit, ): cint =
+  fcQDateTimeEdit_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qdatetimeedit_types.QDateTimeEdit, signal: cstring): cint =
+  fcQDateTimeEdit_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qdatetimeedit_types.QDateTimeEdit, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQDateTimeEdit_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc create*(T: type gen_qdatetimeedit_types.QDateTimeEdit,
     parent: gen_qwidget_types.QWidget,
@@ -3193,6 +3269,42 @@ proc miqt_exec_callback_cQTimeEdit_disconnectNotify(vtbl: pointer, self: pointer
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
   vtbl[].disconnectNotify(self, slotval1)
 
+proc initStyleOption*(self: gen_qdatetimeedit_types.QTimeEdit, option: gen_qstyleoption_types.QStyleOptionSpinBox): void =
+  fcQTimeEdit_protectedbase_initStyleOption(self.h, option.h)
+
+proc lineEdit*(self: gen_qdatetimeedit_types.QTimeEdit, ): gen_qlineedit_types.QLineEdit =
+  gen_qlineedit_types.QLineEdit(h: fcQTimeEdit_protectedbase_lineEdit(self.h))
+
+proc setLineEdit*(self: gen_qdatetimeedit_types.QTimeEdit, edit: gen_qlineedit_types.QLineEdit): void =
+  fcQTimeEdit_protectedbase_setLineEdit(self.h, edit.h)
+
+proc updateMicroFocus*(self: gen_qdatetimeedit_types.QTimeEdit, ): void =
+  fcQTimeEdit_protectedbase_updateMicroFocus(self.h)
+
+proc create*(self: gen_qdatetimeedit_types.QTimeEdit, ): void =
+  fcQTimeEdit_protectedbase_create(self.h)
+
+proc destroy*(self: gen_qdatetimeedit_types.QTimeEdit, ): void =
+  fcQTimeEdit_protectedbase_destroy(self.h)
+
+proc focusNextChild*(self: gen_qdatetimeedit_types.QTimeEdit, ): bool =
+  fcQTimeEdit_protectedbase_focusNextChild(self.h)
+
+proc focusPreviousChild*(self: gen_qdatetimeedit_types.QTimeEdit, ): bool =
+  fcQTimeEdit_protectedbase_focusPreviousChild(self.h)
+
+proc sender*(self: gen_qdatetimeedit_types.QTimeEdit, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQTimeEdit_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qdatetimeedit_types.QTimeEdit, ): cint =
+  fcQTimeEdit_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qdatetimeedit_types.QTimeEdit, signal: cstring): cint =
+  fcQTimeEdit_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qdatetimeedit_types.QTimeEdit, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQTimeEdit_protectedbase_isSignalConnected(self.h, signal.h)
+
 proc create*(T: type gen_qdatetimeedit_types.QTimeEdit,
     parent: gen_qwidget_types.QWidget,
     vtbl: ref QTimeEditVTable = nil): gen_qdatetimeedit_types.QTimeEdit =
@@ -4418,6 +4530,42 @@ proc miqt_exec_callback_cQDateEdit_disconnectNotify(vtbl: pointer, self: pointer
   let self = QDateEdit(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
   vtbl[].disconnectNotify(self, slotval1)
+
+proc initStyleOption*(self: gen_qdatetimeedit_types.QDateEdit, option: gen_qstyleoption_types.QStyleOptionSpinBox): void =
+  fcQDateEdit_protectedbase_initStyleOption(self.h, option.h)
+
+proc lineEdit*(self: gen_qdatetimeedit_types.QDateEdit, ): gen_qlineedit_types.QLineEdit =
+  gen_qlineedit_types.QLineEdit(h: fcQDateEdit_protectedbase_lineEdit(self.h))
+
+proc setLineEdit*(self: gen_qdatetimeedit_types.QDateEdit, edit: gen_qlineedit_types.QLineEdit): void =
+  fcQDateEdit_protectedbase_setLineEdit(self.h, edit.h)
+
+proc updateMicroFocus*(self: gen_qdatetimeedit_types.QDateEdit, ): void =
+  fcQDateEdit_protectedbase_updateMicroFocus(self.h)
+
+proc create*(self: gen_qdatetimeedit_types.QDateEdit, ): void =
+  fcQDateEdit_protectedbase_create(self.h)
+
+proc destroy*(self: gen_qdatetimeedit_types.QDateEdit, ): void =
+  fcQDateEdit_protectedbase_destroy(self.h)
+
+proc focusNextChild*(self: gen_qdatetimeedit_types.QDateEdit, ): bool =
+  fcQDateEdit_protectedbase_focusNextChild(self.h)
+
+proc focusPreviousChild*(self: gen_qdatetimeedit_types.QDateEdit, ): bool =
+  fcQDateEdit_protectedbase_focusPreviousChild(self.h)
+
+proc sender*(self: gen_qdatetimeedit_types.QDateEdit, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQDateEdit_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qdatetimeedit_types.QDateEdit, ): cint =
+  fcQDateEdit_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qdatetimeedit_types.QDateEdit, signal: cstring): cint =
+  fcQDateEdit_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qdatetimeedit_types.QDateEdit, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQDateEdit_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc create*(T: type gen_qdatetimeedit_types.QDateEdit,
     parent: gen_qwidget_types.QWidget,

@@ -221,10 +221,10 @@ public:
 	friend void QHistoryState_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
 
 	// Wrappers to allow calling protected methods:
-	friend QObject* QHistoryState_protectedbase_sender(bool* _dynamic_cast_ok, const void* self);
-	friend int QHistoryState_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
-	friend int QHistoryState_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
-	friend bool QHistoryState_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+	friend QObject* QHistoryState_protectedbase_sender(const void* self);
+	friend int QHistoryState_protectedbase_senderSignalIndex(const void* self);
+	friend int QHistoryState_protectedbase_receivers(const void* self, const char* signal);
+	friend bool QHistoryState_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
 };
 
 QHistoryState* QHistoryState_new(struct QHistoryState_VTable* vtbl) {
@@ -423,53 +423,29 @@ void QHistoryState_virtualbase_disconnectNotify(void* self, QMetaMethod* signal)
 }
 
 const QMetaObject* QHistoryState_staticMetaObject() { return &QHistoryState::staticMetaObject; }
-QObject* QHistoryState_protectedbase_sender(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQHistoryState* self_cast = dynamic_cast<VirtualQHistoryState*>( (QHistoryState*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return nullptr;
-	}
-	
-	*_dynamic_cast_ok = true;
+QObject* QHistoryState_protectedbase_sender(const void* self) {
+	VirtualQHistoryState* self_cast = static_cast<VirtualQHistoryState*>( (QHistoryState*)(self) );
 	
 	return self_cast->sender();
 
 }
 
-int QHistoryState_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQHistoryState* self_cast = dynamic_cast<VirtualQHistoryState*>( (QHistoryState*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return 0;
-	}
-	
-	*_dynamic_cast_ok = true;
+int QHistoryState_protectedbase_senderSignalIndex(const void* self) {
+	VirtualQHistoryState* self_cast = static_cast<VirtualQHistoryState*>( (QHistoryState*)(self) );
 	
 	return self_cast->senderSignalIndex();
 
 }
 
-int QHistoryState_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal) {
-	VirtualQHistoryState* self_cast = dynamic_cast<VirtualQHistoryState*>( (QHistoryState*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return 0;
-	}
-	
-	*_dynamic_cast_ok = true;
+int QHistoryState_protectedbase_receivers(const void* self, const char* signal) {
+	VirtualQHistoryState* self_cast = static_cast<VirtualQHistoryState*>( (QHistoryState*)(self) );
 	
 	return self_cast->receivers(signal);
 
 }
 
-bool QHistoryState_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal) {
-	VirtualQHistoryState* self_cast = dynamic_cast<VirtualQHistoryState*>( (QHistoryState*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return false;
-	}
-	
-	*_dynamic_cast_ok = true;
+bool QHistoryState_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal) {
+	VirtualQHistoryState* self_cast = static_cast<VirtualQHistoryState*>( (QHistoryState*)(self) );
 	
 	return self_cast->isSignalConnected(*signal);
 

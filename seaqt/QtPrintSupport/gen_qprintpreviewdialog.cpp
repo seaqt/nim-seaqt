@@ -892,16 +892,16 @@ public:
 	friend void QPrintPreviewDialog_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
 
 	// Wrappers to allow calling protected methods:
-	friend void QPrintPreviewDialog_protectedbase_adjustPosition(bool* _dynamic_cast_ok, void* self, QWidget* param1);
-	friend void QPrintPreviewDialog_protectedbase_updateMicroFocus(bool* _dynamic_cast_ok, void* self);
-	friend void QPrintPreviewDialog_protectedbase_create(bool* _dynamic_cast_ok, void* self);
-	friend void QPrintPreviewDialog_protectedbase_destroy(bool* _dynamic_cast_ok, void* self);
-	friend bool QPrintPreviewDialog_protectedbase_focusNextChild(bool* _dynamic_cast_ok, void* self);
-	friend bool QPrintPreviewDialog_protectedbase_focusPreviousChild(bool* _dynamic_cast_ok, void* self);
-	friend QObject* QPrintPreviewDialog_protectedbase_sender(bool* _dynamic_cast_ok, const void* self);
-	friend int QPrintPreviewDialog_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
-	friend int QPrintPreviewDialog_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
-	friend bool QPrintPreviewDialog_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+	friend void QPrintPreviewDialog_protectedbase_adjustPosition(void* self, QWidget* param1);
+	friend void QPrintPreviewDialog_protectedbase_updateMicroFocus(void* self);
+	friend void QPrintPreviewDialog_protectedbase_create(void* self);
+	friend void QPrintPreviewDialog_protectedbase_destroy(void* self);
+	friend bool QPrintPreviewDialog_protectedbase_focusNextChild(void* self);
+	friend bool QPrintPreviewDialog_protectedbase_focusPreviousChild(void* self);
+	friend QObject* QPrintPreviewDialog_protectedbase_sender(const void* self);
+	friend int QPrintPreviewDialog_protectedbase_senderSignalIndex(const void* self);
+	friend int QPrintPreviewDialog_protectedbase_receivers(const void* self, const char* signal);
+	friend bool QPrintPreviewDialog_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
 };
 
 QPrintPreviewDialog* QPrintPreviewDialog_new(struct QPrintPreviewDialog_VTable* vtbl, QWidget* parent) {
@@ -1370,131 +1370,71 @@ void QPrintPreviewDialog_virtualbase_disconnectNotify(void* self, QMetaMethod* s
 }
 
 const QMetaObject* QPrintPreviewDialog_staticMetaObject() { return &QPrintPreviewDialog::staticMetaObject; }
-void QPrintPreviewDialog_protectedbase_adjustPosition(bool* _dynamic_cast_ok, void* self, QWidget* param1) {
-	VirtualQPrintPreviewDialog* self_cast = dynamic_cast<VirtualQPrintPreviewDialog*>( (QPrintPreviewDialog*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QPrintPreviewDialog_protectedbase_adjustPosition(void* self, QWidget* param1) {
+	VirtualQPrintPreviewDialog* self_cast = static_cast<VirtualQPrintPreviewDialog*>( (QPrintPreviewDialog*)(self) );
 	
 	self_cast->adjustPosition(param1);
 
 }
 
-void QPrintPreviewDialog_protectedbase_updateMicroFocus(bool* _dynamic_cast_ok, void* self) {
-	VirtualQPrintPreviewDialog* self_cast = dynamic_cast<VirtualQPrintPreviewDialog*>( (QPrintPreviewDialog*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QPrintPreviewDialog_protectedbase_updateMicroFocus(void* self) {
+	VirtualQPrintPreviewDialog* self_cast = static_cast<VirtualQPrintPreviewDialog*>( (QPrintPreviewDialog*)(self) );
 	
 	self_cast->updateMicroFocus();
 
 }
 
-void QPrintPreviewDialog_protectedbase_create(bool* _dynamic_cast_ok, void* self) {
-	VirtualQPrintPreviewDialog* self_cast = dynamic_cast<VirtualQPrintPreviewDialog*>( (QPrintPreviewDialog*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QPrintPreviewDialog_protectedbase_create(void* self) {
+	VirtualQPrintPreviewDialog* self_cast = static_cast<VirtualQPrintPreviewDialog*>( (QPrintPreviewDialog*)(self) );
 	
 	self_cast->create();
 
 }
 
-void QPrintPreviewDialog_protectedbase_destroy(bool* _dynamic_cast_ok, void* self) {
-	VirtualQPrintPreviewDialog* self_cast = dynamic_cast<VirtualQPrintPreviewDialog*>( (QPrintPreviewDialog*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QPrintPreviewDialog_protectedbase_destroy(void* self) {
+	VirtualQPrintPreviewDialog* self_cast = static_cast<VirtualQPrintPreviewDialog*>( (QPrintPreviewDialog*)(self) );
 	
 	self_cast->destroy();
 
 }
 
-bool QPrintPreviewDialog_protectedbase_focusNextChild(bool* _dynamic_cast_ok, void* self) {
-	VirtualQPrintPreviewDialog* self_cast = dynamic_cast<VirtualQPrintPreviewDialog*>( (QPrintPreviewDialog*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return false;
-	}
-	
-	*_dynamic_cast_ok = true;
+bool QPrintPreviewDialog_protectedbase_focusNextChild(void* self) {
+	VirtualQPrintPreviewDialog* self_cast = static_cast<VirtualQPrintPreviewDialog*>( (QPrintPreviewDialog*)(self) );
 	
 	return self_cast->focusNextChild();
 
 }
 
-bool QPrintPreviewDialog_protectedbase_focusPreviousChild(bool* _dynamic_cast_ok, void* self) {
-	VirtualQPrintPreviewDialog* self_cast = dynamic_cast<VirtualQPrintPreviewDialog*>( (QPrintPreviewDialog*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return false;
-	}
-	
-	*_dynamic_cast_ok = true;
+bool QPrintPreviewDialog_protectedbase_focusPreviousChild(void* self) {
+	VirtualQPrintPreviewDialog* self_cast = static_cast<VirtualQPrintPreviewDialog*>( (QPrintPreviewDialog*)(self) );
 	
 	return self_cast->focusPreviousChild();
 
 }
 
-QObject* QPrintPreviewDialog_protectedbase_sender(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQPrintPreviewDialog* self_cast = dynamic_cast<VirtualQPrintPreviewDialog*>( (QPrintPreviewDialog*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return nullptr;
-	}
-	
-	*_dynamic_cast_ok = true;
+QObject* QPrintPreviewDialog_protectedbase_sender(const void* self) {
+	VirtualQPrintPreviewDialog* self_cast = static_cast<VirtualQPrintPreviewDialog*>( (QPrintPreviewDialog*)(self) );
 	
 	return self_cast->sender();
 
 }
 
-int QPrintPreviewDialog_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQPrintPreviewDialog* self_cast = dynamic_cast<VirtualQPrintPreviewDialog*>( (QPrintPreviewDialog*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return 0;
-	}
-	
-	*_dynamic_cast_ok = true;
+int QPrintPreviewDialog_protectedbase_senderSignalIndex(const void* self) {
+	VirtualQPrintPreviewDialog* self_cast = static_cast<VirtualQPrintPreviewDialog*>( (QPrintPreviewDialog*)(self) );
 	
 	return self_cast->senderSignalIndex();
 
 }
 
-int QPrintPreviewDialog_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal) {
-	VirtualQPrintPreviewDialog* self_cast = dynamic_cast<VirtualQPrintPreviewDialog*>( (QPrintPreviewDialog*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return 0;
-	}
-	
-	*_dynamic_cast_ok = true;
+int QPrintPreviewDialog_protectedbase_receivers(const void* self, const char* signal) {
+	VirtualQPrintPreviewDialog* self_cast = static_cast<VirtualQPrintPreviewDialog*>( (QPrintPreviewDialog*)(self) );
 	
 	return self_cast->receivers(signal);
 
 }
 
-bool QPrintPreviewDialog_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal) {
-	VirtualQPrintPreviewDialog* self_cast = dynamic_cast<VirtualQPrintPreviewDialog*>( (QPrintPreviewDialog*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return false;
-	}
-	
-	*_dynamic_cast_ok = true;
+bool QPrintPreviewDialog_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal) {
+	VirtualQPrintPreviewDialog* self_cast = static_cast<VirtualQPrintPreviewDialog*>( (QPrintPreviewDialog*)(self) );
 	
 	return self_cast->isSignalConnected(*signal);
 

@@ -822,17 +822,17 @@ public:
 	friend void QMenu_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
 
 	// Wrappers to allow calling protected methods:
-	friend int QMenu_protectedbase_columnCount(bool* _dynamic_cast_ok, const void* self);
-	friend void QMenu_protectedbase_initStyleOption(bool* _dynamic_cast_ok, const void* self, QStyleOptionMenuItem* option, QAction* action);
-	friend void QMenu_protectedbase_updateMicroFocus(bool* _dynamic_cast_ok, void* self);
-	friend void QMenu_protectedbase_create(bool* _dynamic_cast_ok, void* self);
-	friend void QMenu_protectedbase_destroy(bool* _dynamic_cast_ok, void* self);
-	friend bool QMenu_protectedbase_focusNextChild(bool* _dynamic_cast_ok, void* self);
-	friend bool QMenu_protectedbase_focusPreviousChild(bool* _dynamic_cast_ok, void* self);
-	friend QObject* QMenu_protectedbase_sender(bool* _dynamic_cast_ok, const void* self);
-	friend int QMenu_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
-	friend int QMenu_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
-	friend bool QMenu_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+	friend int QMenu_protectedbase_columnCount(const void* self);
+	friend void QMenu_protectedbase_initStyleOption(const void* self, QStyleOptionMenuItem* option, QAction* action);
+	friend void QMenu_protectedbase_updateMicroFocus(void* self);
+	friend void QMenu_protectedbase_create(void* self);
+	friend void QMenu_protectedbase_destroy(void* self);
+	friend bool QMenu_protectedbase_focusNextChild(void* self);
+	friend bool QMenu_protectedbase_focusPreviousChild(void* self);
+	friend QObject* QMenu_protectedbase_sender(const void* self);
+	friend int QMenu_protectedbase_senderSignalIndex(const void* self);
+	friend int QMenu_protectedbase_receivers(const void* self, const char* signal);
+	friend bool QMenu_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
 };
 
 QMenu* QMenu_new(struct QMenu_VTable* vtbl, QWidget* parent) {
@@ -1513,144 +1513,78 @@ void QMenu_virtualbase_disconnectNotify(void* self, QMetaMethod* signal) {
 }
 
 const QMetaObject* QMenu_staticMetaObject() { return &QMenu::staticMetaObject; }
-int QMenu_protectedbase_columnCount(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQMenu* self_cast = dynamic_cast<VirtualQMenu*>( (QMenu*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return 0;
-	}
-	
-	*_dynamic_cast_ok = true;
+int QMenu_protectedbase_columnCount(const void* self) {
+	VirtualQMenu* self_cast = static_cast<VirtualQMenu*>( (QMenu*)(self) );
 	
 	return self_cast->columnCount();
 
 }
 
-void QMenu_protectedbase_initStyleOption(bool* _dynamic_cast_ok, const void* self, QStyleOptionMenuItem* option, QAction* action) {
-	VirtualQMenu* self_cast = dynamic_cast<VirtualQMenu*>( (QMenu*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QMenu_protectedbase_initStyleOption(const void* self, QStyleOptionMenuItem* option, QAction* action) {
+	VirtualQMenu* self_cast = static_cast<VirtualQMenu*>( (QMenu*)(self) );
 	
 	self_cast->initStyleOption(option, action);
 
 }
 
-void QMenu_protectedbase_updateMicroFocus(bool* _dynamic_cast_ok, void* self) {
-	VirtualQMenu* self_cast = dynamic_cast<VirtualQMenu*>( (QMenu*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QMenu_protectedbase_updateMicroFocus(void* self) {
+	VirtualQMenu* self_cast = static_cast<VirtualQMenu*>( (QMenu*)(self) );
 	
 	self_cast->updateMicroFocus();
 
 }
 
-void QMenu_protectedbase_create(bool* _dynamic_cast_ok, void* self) {
-	VirtualQMenu* self_cast = dynamic_cast<VirtualQMenu*>( (QMenu*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QMenu_protectedbase_create(void* self) {
+	VirtualQMenu* self_cast = static_cast<VirtualQMenu*>( (QMenu*)(self) );
 	
 	self_cast->create();
 
 }
 
-void QMenu_protectedbase_destroy(bool* _dynamic_cast_ok, void* self) {
-	VirtualQMenu* self_cast = dynamic_cast<VirtualQMenu*>( (QMenu*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QMenu_protectedbase_destroy(void* self) {
+	VirtualQMenu* self_cast = static_cast<VirtualQMenu*>( (QMenu*)(self) );
 	
 	self_cast->destroy();
 
 }
 
-bool QMenu_protectedbase_focusNextChild(bool* _dynamic_cast_ok, void* self) {
-	VirtualQMenu* self_cast = dynamic_cast<VirtualQMenu*>( (QMenu*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return false;
-	}
-	
-	*_dynamic_cast_ok = true;
+bool QMenu_protectedbase_focusNextChild(void* self) {
+	VirtualQMenu* self_cast = static_cast<VirtualQMenu*>( (QMenu*)(self) );
 	
 	return self_cast->focusNextChild();
 
 }
 
-bool QMenu_protectedbase_focusPreviousChild(bool* _dynamic_cast_ok, void* self) {
-	VirtualQMenu* self_cast = dynamic_cast<VirtualQMenu*>( (QMenu*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return false;
-	}
-	
-	*_dynamic_cast_ok = true;
+bool QMenu_protectedbase_focusPreviousChild(void* self) {
+	VirtualQMenu* self_cast = static_cast<VirtualQMenu*>( (QMenu*)(self) );
 	
 	return self_cast->focusPreviousChild();
 
 }
 
-QObject* QMenu_protectedbase_sender(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQMenu* self_cast = dynamic_cast<VirtualQMenu*>( (QMenu*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return nullptr;
-	}
-	
-	*_dynamic_cast_ok = true;
+QObject* QMenu_protectedbase_sender(const void* self) {
+	VirtualQMenu* self_cast = static_cast<VirtualQMenu*>( (QMenu*)(self) );
 	
 	return self_cast->sender();
 
 }
 
-int QMenu_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQMenu* self_cast = dynamic_cast<VirtualQMenu*>( (QMenu*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return 0;
-	}
-	
-	*_dynamic_cast_ok = true;
+int QMenu_protectedbase_senderSignalIndex(const void* self) {
+	VirtualQMenu* self_cast = static_cast<VirtualQMenu*>( (QMenu*)(self) );
 	
 	return self_cast->senderSignalIndex();
 
 }
 
-int QMenu_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal) {
-	VirtualQMenu* self_cast = dynamic_cast<VirtualQMenu*>( (QMenu*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return 0;
-	}
-	
-	*_dynamic_cast_ok = true;
+int QMenu_protectedbase_receivers(const void* self, const char* signal) {
+	VirtualQMenu* self_cast = static_cast<VirtualQMenu*>( (QMenu*)(self) );
 	
 	return self_cast->receivers(signal);
 
 }
 
-bool QMenu_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal) {
-	VirtualQMenu* self_cast = dynamic_cast<VirtualQMenu*>( (QMenu*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return false;
-	}
-	
-	*_dynamic_cast_ok = true;
+bool QMenu_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal) {
+	VirtualQMenu* self_cast = static_cast<VirtualQMenu*>( (QMenu*)(self) );
 	
 	return self_cast->isSignalConnected(*signal);
 

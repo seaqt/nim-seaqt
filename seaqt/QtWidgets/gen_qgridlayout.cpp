@@ -481,15 +481,15 @@ public:
 	friend QSpacerItem* QGridLayout_virtualbase_spacerItem(void* self);
 
 	// Wrappers to allow calling protected methods:
-	friend void QGridLayout_protectedbase_widgetEvent(bool* _dynamic_cast_ok, void* self, QEvent* param1);
-	friend void QGridLayout_protectedbase_addChildLayout(bool* _dynamic_cast_ok, void* self, QLayout* l);
-	friend void QGridLayout_protectedbase_addChildWidget(bool* _dynamic_cast_ok, void* self, QWidget* w);
-	friend bool QGridLayout_protectedbase_adoptLayout(bool* _dynamic_cast_ok, void* self, QLayout* layout);
-	friend QRect* QGridLayout_protectedbase_alignmentRect(bool* _dynamic_cast_ok, const void* self, QRect* param1);
-	friend QObject* QGridLayout_protectedbase_sender(bool* _dynamic_cast_ok, const void* self);
-	friend int QGridLayout_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
-	friend int QGridLayout_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
-	friend bool QGridLayout_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+	friend void QGridLayout_protectedbase_widgetEvent(void* self, QEvent* param1);
+	friend void QGridLayout_protectedbase_addChildLayout(void* self, QLayout* l);
+	friend void QGridLayout_protectedbase_addChildWidget(void* self, QWidget* w);
+	friend bool QGridLayout_protectedbase_adoptLayout(void* self, QLayout* layout);
+	friend QRect* QGridLayout_protectedbase_alignmentRect(const void* self, QRect* param1);
+	friend QObject* QGridLayout_protectedbase_sender(const void* self);
+	friend int QGridLayout_protectedbase_senderSignalIndex(const void* self);
+	friend int QGridLayout_protectedbase_receivers(const void* self, const char* signal);
+	friend bool QGridLayout_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
 };
 
 QGridLayout* QGridLayout_new(struct QGridLayout_VTable* vtbl, QWidget* parent) {
@@ -955,118 +955,64 @@ QSpacerItem* QGridLayout_virtualbase_spacerItem(void* self) {
 }
 
 const QMetaObject* QGridLayout_staticMetaObject() { return &QGridLayout::staticMetaObject; }
-void QGridLayout_protectedbase_widgetEvent(bool* _dynamic_cast_ok, void* self, QEvent* param1) {
-	VirtualQGridLayout* self_cast = dynamic_cast<VirtualQGridLayout*>( (QGridLayout*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QGridLayout_protectedbase_widgetEvent(void* self, QEvent* param1) {
+	VirtualQGridLayout* self_cast = static_cast<VirtualQGridLayout*>( (QGridLayout*)(self) );
 	
 	self_cast->widgetEvent(param1);
 
 }
 
-void QGridLayout_protectedbase_addChildLayout(bool* _dynamic_cast_ok, void* self, QLayout* l) {
-	VirtualQGridLayout* self_cast = dynamic_cast<VirtualQGridLayout*>( (QGridLayout*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QGridLayout_protectedbase_addChildLayout(void* self, QLayout* l) {
+	VirtualQGridLayout* self_cast = static_cast<VirtualQGridLayout*>( (QGridLayout*)(self) );
 	
 	self_cast->addChildLayout(l);
 
 }
 
-void QGridLayout_protectedbase_addChildWidget(bool* _dynamic_cast_ok, void* self, QWidget* w) {
-	VirtualQGridLayout* self_cast = dynamic_cast<VirtualQGridLayout*>( (QGridLayout*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QGridLayout_protectedbase_addChildWidget(void* self, QWidget* w) {
+	VirtualQGridLayout* self_cast = static_cast<VirtualQGridLayout*>( (QGridLayout*)(self) );
 	
 	self_cast->addChildWidget(w);
 
 }
 
-bool QGridLayout_protectedbase_adoptLayout(bool* _dynamic_cast_ok, void* self, QLayout* layout) {
-	VirtualQGridLayout* self_cast = dynamic_cast<VirtualQGridLayout*>( (QGridLayout*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return false;
-	}
-	
-	*_dynamic_cast_ok = true;
+bool QGridLayout_protectedbase_adoptLayout(void* self, QLayout* layout) {
+	VirtualQGridLayout* self_cast = static_cast<VirtualQGridLayout*>( (QGridLayout*)(self) );
 	
 	return self_cast->adoptLayout(layout);
 
 }
 
-QRect* QGridLayout_protectedbase_alignmentRect(bool* _dynamic_cast_ok, const void* self, QRect* param1) {
-	VirtualQGridLayout* self_cast = dynamic_cast<VirtualQGridLayout*>( (QGridLayout*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return nullptr;
-	}
-	
-	*_dynamic_cast_ok = true;
+QRect* QGridLayout_protectedbase_alignmentRect(const void* self, QRect* param1) {
+	VirtualQGridLayout* self_cast = static_cast<VirtualQGridLayout*>( (QGridLayout*)(self) );
 	
 	return new QRect(self_cast->alignmentRect(*param1));
 
 }
 
-QObject* QGridLayout_protectedbase_sender(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQGridLayout* self_cast = dynamic_cast<VirtualQGridLayout*>( (QGridLayout*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return nullptr;
-	}
-	
-	*_dynamic_cast_ok = true;
+QObject* QGridLayout_protectedbase_sender(const void* self) {
+	VirtualQGridLayout* self_cast = static_cast<VirtualQGridLayout*>( (QGridLayout*)(self) );
 	
 	return self_cast->sender();
 
 }
 
-int QGridLayout_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQGridLayout* self_cast = dynamic_cast<VirtualQGridLayout*>( (QGridLayout*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return 0;
-	}
-	
-	*_dynamic_cast_ok = true;
+int QGridLayout_protectedbase_senderSignalIndex(const void* self) {
+	VirtualQGridLayout* self_cast = static_cast<VirtualQGridLayout*>( (QGridLayout*)(self) );
 	
 	return self_cast->senderSignalIndex();
 
 }
 
-int QGridLayout_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal) {
-	VirtualQGridLayout* self_cast = dynamic_cast<VirtualQGridLayout*>( (QGridLayout*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return 0;
-	}
-	
-	*_dynamic_cast_ok = true;
+int QGridLayout_protectedbase_receivers(const void* self, const char* signal) {
+	VirtualQGridLayout* self_cast = static_cast<VirtualQGridLayout*>( (QGridLayout*)(self) );
 	
 	return self_cast->receivers(signal);
 
 }
 
-bool QGridLayout_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal) {
-	VirtualQGridLayout* self_cast = dynamic_cast<VirtualQGridLayout*>( (QGridLayout*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return false;
-	}
-	
-	*_dynamic_cast_ok = true;
+bool QGridLayout_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal) {
+	VirtualQGridLayout* self_cast = static_cast<VirtualQGridLayout*>( (QGridLayout*)(self) );
 	
 	return self_cast->isSignalConnected(*signal);
 

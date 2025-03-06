@@ -54,6 +54,7 @@ export gen_qmdiarea_types
 
 import
   ../QtCore/gen_qcoreevent_types,
+  ../QtCore/gen_qmargins_types,
   ../QtCore/gen_qmetaobject_types,
   ../QtCore/gen_qobject_types,
   ../QtCore/gen_qobjectdefs_types,
@@ -67,9 +68,11 @@ import
   ../QtGui/gen_qpainter_types,
   ./gen_qabstractscrollarea,
   ./gen_qmdisubwindow_types,
+  ./gen_qstyleoption_types,
   ./gen_qwidget_types
 export
   gen_qcoreevent_types,
+  gen_qmargins_types,
   gen_qmetaobject_types,
   gen_qobject_types,
   gen_qobjectdefs_types,
@@ -83,6 +86,7 @@ export
   gen_qpainter_types,
   gen_qabstractscrollarea,
   gen_qmdisubwindow_types,
+  gen_qstyleoption_types,
   gen_qwidget_types
 
 type cQMdiArea*{.exportc: "QMdiArea", incompleteStruct.} = object
@@ -243,6 +247,19 @@ proc fcQMdiArea_virtualbase_focusNextPrevChild(self: pointer, next: bool): bool 
 proc fcQMdiArea_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QMdiArea_virtualbase_customEvent".}
 proc fcQMdiArea_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QMdiArea_virtualbase_connectNotify".}
 proc fcQMdiArea_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QMdiArea_virtualbase_disconnectNotify".}
+proc fcQMdiArea_protectedbase_setViewportMargins(self: pointer, left: cint, top: cint, right: cint, bottom: cint): void {.importc: "QMdiArea_protectedbase_setViewportMargins".}
+proc fcQMdiArea_protectedbase_viewportMargins(self: pointer, ): pointer {.importc: "QMdiArea_protectedbase_viewportMargins".}
+proc fcQMdiArea_protectedbase_drawFrame(self: pointer, param1: pointer): void {.importc: "QMdiArea_protectedbase_drawFrame".}
+proc fcQMdiArea_protectedbase_initStyleOption(self: pointer, option: pointer): void {.importc: "QMdiArea_protectedbase_initStyleOption".}
+proc fcQMdiArea_protectedbase_updateMicroFocus(self: pointer, ): void {.importc: "QMdiArea_protectedbase_updateMicroFocus".}
+proc fcQMdiArea_protectedbase_create(self: pointer, ): void {.importc: "QMdiArea_protectedbase_create".}
+proc fcQMdiArea_protectedbase_destroy(self: pointer, ): void {.importc: "QMdiArea_protectedbase_destroy".}
+proc fcQMdiArea_protectedbase_focusNextChild(self: pointer, ): bool {.importc: "QMdiArea_protectedbase_focusNextChild".}
+proc fcQMdiArea_protectedbase_focusPreviousChild(self: pointer, ): bool {.importc: "QMdiArea_protectedbase_focusPreviousChild".}
+proc fcQMdiArea_protectedbase_sender(self: pointer, ): pointer {.importc: "QMdiArea_protectedbase_sender".}
+proc fcQMdiArea_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QMdiArea_protectedbase_senderSignalIndex".}
+proc fcQMdiArea_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QMdiArea_protectedbase_receivers".}
+proc fcQMdiArea_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QMdiArea_protectedbase_isSignalConnected".}
 proc fcQMdiArea_new(vtbl: pointer, parent: pointer): ptr cQMdiArea {.importc: "QMdiArea_new".}
 proc fcQMdiArea_new2(vtbl: pointer, ): ptr cQMdiArea {.importc: "QMdiArea_new2".}
 proc fcQMdiArea_staticMetaObject(): pointer {.importc: "QMdiArea_staticMetaObject".}
@@ -1043,6 +1060,45 @@ proc miqt_exec_callback_cQMdiArea_disconnectNotify(vtbl: pointer, self: pointer,
   let self = QMdiArea(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
   vtbl[].disconnectNotify(self, slotval1)
+
+proc setViewportMargins*(self: gen_qmdiarea_types.QMdiArea, left: cint, top: cint, right: cint, bottom: cint): void =
+  fcQMdiArea_protectedbase_setViewportMargins(self.h, left, top, right, bottom)
+
+proc viewportMargins*(self: gen_qmdiarea_types.QMdiArea, ): gen_qmargins_types.QMargins =
+  gen_qmargins_types.QMargins(h: fcQMdiArea_protectedbase_viewportMargins(self.h))
+
+proc drawFrame*(self: gen_qmdiarea_types.QMdiArea, param1: gen_qpainter_types.QPainter): void =
+  fcQMdiArea_protectedbase_drawFrame(self.h, param1.h)
+
+proc initStyleOption*(self: gen_qmdiarea_types.QMdiArea, option: gen_qstyleoption_types.QStyleOptionFrame): void =
+  fcQMdiArea_protectedbase_initStyleOption(self.h, option.h)
+
+proc updateMicroFocus*(self: gen_qmdiarea_types.QMdiArea, ): void =
+  fcQMdiArea_protectedbase_updateMicroFocus(self.h)
+
+proc create*(self: gen_qmdiarea_types.QMdiArea, ): void =
+  fcQMdiArea_protectedbase_create(self.h)
+
+proc destroy*(self: gen_qmdiarea_types.QMdiArea, ): void =
+  fcQMdiArea_protectedbase_destroy(self.h)
+
+proc focusNextChild*(self: gen_qmdiarea_types.QMdiArea, ): bool =
+  fcQMdiArea_protectedbase_focusNextChild(self.h)
+
+proc focusPreviousChild*(self: gen_qmdiarea_types.QMdiArea, ): bool =
+  fcQMdiArea_protectedbase_focusPreviousChild(self.h)
+
+proc sender*(self: gen_qmdiarea_types.QMdiArea, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQMdiArea_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qmdiarea_types.QMdiArea, ): cint =
+  fcQMdiArea_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qmdiarea_types.QMdiArea, signal: cstring): cint =
+  fcQMdiArea_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qmdiarea_types.QMdiArea, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQMdiArea_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc create*(T: type gen_qmdiarea_types.QMdiArea,
     parent: gen_qwidget_types.QWidget,

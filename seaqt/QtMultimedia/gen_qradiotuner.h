@@ -134,12 +134,12 @@ void QRadioTuner_virtualbase_childEvent(void* self, QChildEvent* event);
 void QRadioTuner_virtualbase_customEvent(void* self, QEvent* event);
 void QRadioTuner_virtualbase_connectNotify(void* self, QMetaMethod* signal);
 void QRadioTuner_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
-void QRadioTuner_protectedbase_addPropertyWatch(bool* _dynamic_cast_ok, void* self, struct miqt_string name);
-void QRadioTuner_protectedbase_removePropertyWatch(bool* _dynamic_cast_ok, void* self, struct miqt_string name);
-QObject* QRadioTuner_protectedbase_sender(bool* _dynamic_cast_ok, const void* self);
-int QRadioTuner_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
-int QRadioTuner_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
-bool QRadioTuner_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+void QRadioTuner_protectedbase_addPropertyWatch(void* self, struct miqt_string name);
+void QRadioTuner_protectedbase_removePropertyWatch(void* self, struct miqt_string name);
+QObject* QRadioTuner_protectedbase_sender(const void* self);
+int QRadioTuner_protectedbase_senderSignalIndex(const void* self);
+int QRadioTuner_protectedbase_receivers(const void* self, const char* signal);
+bool QRadioTuner_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
 const QMetaObject* QRadioTuner_staticMetaObject();
 void QRadioTuner_delete(QRadioTuner* self);
 

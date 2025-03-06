@@ -177,6 +177,12 @@ proc fcQLocalSocket_virtualbase_childEvent(self: pointer, event: pointer): void 
 proc fcQLocalSocket_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QLocalSocket_virtualbase_customEvent".}
 proc fcQLocalSocket_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QLocalSocket_virtualbase_connectNotify".}
 proc fcQLocalSocket_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QLocalSocket_virtualbase_disconnectNotify".}
+proc fcQLocalSocket_protectedbase_setOpenMode(self: pointer, openMode: cint): void {.importc: "QLocalSocket_protectedbase_setOpenMode".}
+proc fcQLocalSocket_protectedbase_setErrorString(self: pointer, errorString: struct_miqt_string): void {.importc: "QLocalSocket_protectedbase_setErrorString".}
+proc fcQLocalSocket_protectedbase_sender(self: pointer, ): pointer {.importc: "QLocalSocket_protectedbase_sender".}
+proc fcQLocalSocket_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QLocalSocket_protectedbase_senderSignalIndex".}
+proc fcQLocalSocket_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QLocalSocket_protectedbase_receivers".}
+proc fcQLocalSocket_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QLocalSocket_protectedbase_isSignalConnected".}
 proc fcQLocalSocket_new(vtbl: pointer, ): ptr cQLocalSocket {.importc: "QLocalSocket_new".}
 proc fcQLocalSocket_new2(vtbl: pointer, parent: pointer): ptr cQLocalSocket {.importc: "QLocalSocket_new2".}
 proc fcQLocalSocket_staticMetaObject(): pointer {.importc: "QLocalSocket_staticMetaObject".}
@@ -725,6 +731,24 @@ proc miqt_exec_callback_cQLocalSocket_disconnectNotify(vtbl: pointer, self: poin
   let self = QLocalSocket(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
   vtbl[].disconnectNotify(self, slotval1)
+
+proc setOpenMode*(self: gen_qlocalsocket_types.QLocalSocket, openMode: cint): void =
+  fcQLocalSocket_protectedbase_setOpenMode(self.h, cint(openMode))
+
+proc setErrorString*(self: gen_qlocalsocket_types.QLocalSocket, errorString: string): void =
+  fcQLocalSocket_protectedbase_setErrorString(self.h, struct_miqt_string(data: errorString, len: csize_t(len(errorString))))
+
+proc sender*(self: gen_qlocalsocket_types.QLocalSocket, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQLocalSocket_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qlocalsocket_types.QLocalSocket, ): cint =
+  fcQLocalSocket_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qlocalsocket_types.QLocalSocket, signal: cstring): cint =
+  fcQLocalSocket_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qlocalsocket_types.QLocalSocket, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQLocalSocket_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc create*(T: type gen_qlocalsocket_types.QLocalSocket,
     vtbl: ref QLocalSocketVTable = nil): gen_qlocalsocket_types.QLocalSocket =

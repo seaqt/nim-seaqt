@@ -41,12 +41,14 @@ import
   ../QtCore/gen_qcoreevent_types,
   ../QtCore/gen_qrect_types,
   ../QtCore/gen_qsize_types,
+  ./gen_qgraphicsitem_types,
   ./gen_qgraphicslayout,
   ./gen_qgraphicslayoutitem_types
 export
   gen_qcoreevent_types,
   gen_qrect_types,
   gen_qsize_types,
+  gen_qgraphicsitem_types,
   gen_qgraphicslayout,
   gen_qgraphicslayoutitem_types
 
@@ -97,6 +99,9 @@ proc fcQGraphicsLinearLayout_virtualbase_sizeHint(self: pointer, which: cint, co
 proc fcQGraphicsLinearLayout_virtualbase_getContentsMargins(self: pointer, left: ptr float64, top: ptr float64, right: ptr float64, bottom: ptr float64): void {.importc: "QGraphicsLinearLayout_virtualbase_getContentsMargins".}
 proc fcQGraphicsLinearLayout_virtualbase_updateGeometry(self: pointer, ): void {.importc: "QGraphicsLinearLayout_virtualbase_updateGeometry".}
 proc fcQGraphicsLinearLayout_virtualbase_widgetEvent(self: pointer, e: pointer): void {.importc: "QGraphicsLinearLayout_virtualbase_widgetEvent".}
+proc fcQGraphicsLinearLayout_protectedbase_addChildLayoutItem(self: pointer, layoutItem: pointer): void {.importc: "QGraphicsLinearLayout_protectedbase_addChildLayoutItem".}
+proc fcQGraphicsLinearLayout_protectedbase_setGraphicsItem(self: pointer, item: pointer): void {.importc: "QGraphicsLinearLayout_protectedbase_setGraphicsItem".}
+proc fcQGraphicsLinearLayout_protectedbase_setOwnedByLayout(self: pointer, ownedByLayout: bool): void {.importc: "QGraphicsLinearLayout_protectedbase_setOwnedByLayout".}
 proc fcQGraphicsLinearLayout_new(vtbl: pointer, ): ptr cQGraphicsLinearLayout {.importc: "QGraphicsLinearLayout_new".}
 proc fcQGraphicsLinearLayout_new2(vtbl: pointer, orientation: cint): ptr cQGraphicsLinearLayout {.importc: "QGraphicsLinearLayout_new2".}
 proc fcQGraphicsLinearLayout_new3(vtbl: pointer, parent: pointer): ptr cQGraphicsLinearLayout {.importc: "QGraphicsLinearLayout_new3".}
@@ -282,6 +287,15 @@ proc miqt_exec_callback_cQGraphicsLinearLayout_widgetEvent(vtbl: pointer, self: 
   let self = QGraphicsLinearLayout(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: e)
   vtbl[].widgetEvent(self, slotval1)
+
+proc addChildLayoutItem*(self: gen_qgraphicslinearlayout_types.QGraphicsLinearLayout, layoutItem: gen_qgraphicslayoutitem_types.QGraphicsLayoutItem): void =
+  fcQGraphicsLinearLayout_protectedbase_addChildLayoutItem(self.h, layoutItem.h)
+
+proc setGraphicsItem*(self: gen_qgraphicslinearlayout_types.QGraphicsLinearLayout, item: gen_qgraphicsitem_types.QGraphicsItem): void =
+  fcQGraphicsLinearLayout_protectedbase_setGraphicsItem(self.h, item.h)
+
+proc setOwnedByLayout*(self: gen_qgraphicslinearlayout_types.QGraphicsLinearLayout, ownedByLayout: bool): void =
+  fcQGraphicsLinearLayout_protectedbase_setOwnedByLayout(self.h, ownedByLayout)
 
 proc create*(T: type gen_qgraphicslinearlayout_types.QGraphicsLinearLayout,
     vtbl: ref QGraphicsLinearLayoutVTable = nil): gen_qgraphicslinearlayout_types.QGraphicsLinearLayout =

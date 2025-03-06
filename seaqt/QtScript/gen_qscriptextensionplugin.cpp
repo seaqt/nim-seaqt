@@ -230,10 +230,10 @@ public:
 	friend void QScriptExtensionPlugin_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
 
 	// Wrappers to allow calling protected methods:
-	friend QObject* QScriptExtensionPlugin_protectedbase_sender(bool* _dynamic_cast_ok, const void* self);
-	friend int QScriptExtensionPlugin_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
-	friend int QScriptExtensionPlugin_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
-	friend bool QScriptExtensionPlugin_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+	friend QObject* QScriptExtensionPlugin_protectedbase_sender(const void* self);
+	friend int QScriptExtensionPlugin_protectedbase_senderSignalIndex(const void* self);
+	friend int QScriptExtensionPlugin_protectedbase_receivers(const void* self, const char* signal);
+	friend bool QScriptExtensionPlugin_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
 };
 
 QScriptExtensionPlugin* QScriptExtensionPlugin_new(struct QScriptExtensionPlugin_VTable* vtbl) {
@@ -418,53 +418,29 @@ void QScriptExtensionPlugin_virtualbase_disconnectNotify(void* self, QMetaMethod
 }
 
 const QMetaObject* QScriptExtensionPlugin_staticMetaObject() { return &QScriptExtensionPlugin::staticMetaObject; }
-QObject* QScriptExtensionPlugin_protectedbase_sender(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQScriptExtensionPlugin* self_cast = dynamic_cast<VirtualQScriptExtensionPlugin*>( (QScriptExtensionPlugin*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return nullptr;
-	}
-	
-	*_dynamic_cast_ok = true;
+QObject* QScriptExtensionPlugin_protectedbase_sender(const void* self) {
+	VirtualQScriptExtensionPlugin* self_cast = static_cast<VirtualQScriptExtensionPlugin*>( (QScriptExtensionPlugin*)(self) );
 	
 	return self_cast->sender();
 
 }
 
-int QScriptExtensionPlugin_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQScriptExtensionPlugin* self_cast = dynamic_cast<VirtualQScriptExtensionPlugin*>( (QScriptExtensionPlugin*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return 0;
-	}
-	
-	*_dynamic_cast_ok = true;
+int QScriptExtensionPlugin_protectedbase_senderSignalIndex(const void* self) {
+	VirtualQScriptExtensionPlugin* self_cast = static_cast<VirtualQScriptExtensionPlugin*>( (QScriptExtensionPlugin*)(self) );
 	
 	return self_cast->senderSignalIndex();
 
 }
 
-int QScriptExtensionPlugin_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal) {
-	VirtualQScriptExtensionPlugin* self_cast = dynamic_cast<VirtualQScriptExtensionPlugin*>( (QScriptExtensionPlugin*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return 0;
-	}
-	
-	*_dynamic_cast_ok = true;
+int QScriptExtensionPlugin_protectedbase_receivers(const void* self, const char* signal) {
+	VirtualQScriptExtensionPlugin* self_cast = static_cast<VirtualQScriptExtensionPlugin*>( (QScriptExtensionPlugin*)(self) );
 	
 	return self_cast->receivers(signal);
 
 }
 
-bool QScriptExtensionPlugin_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal) {
-	VirtualQScriptExtensionPlugin* self_cast = dynamic_cast<VirtualQScriptExtensionPlugin*>( (QScriptExtensionPlugin*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return false;
-	}
-	
-	*_dynamic_cast_ok = true;
+bool QScriptExtensionPlugin_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal) {
+	VirtualQScriptExtensionPlugin* self_cast = static_cast<VirtualQScriptExtensionPlugin*>( (QScriptExtensionPlugin*)(self) );
 	
 	return self_cast->isSignalConnected(*signal);
 

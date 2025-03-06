@@ -821,16 +821,16 @@ public:
 	friend void QDockWidget_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
 
 	// Wrappers to allow calling protected methods:
-	friend void QDockWidget_protectedbase_initStyleOption(bool* _dynamic_cast_ok, const void* self, QStyleOptionDockWidget* option);
-	friend void QDockWidget_protectedbase_updateMicroFocus(bool* _dynamic_cast_ok, void* self);
-	friend void QDockWidget_protectedbase_create(bool* _dynamic_cast_ok, void* self);
-	friend void QDockWidget_protectedbase_destroy(bool* _dynamic_cast_ok, void* self);
-	friend bool QDockWidget_protectedbase_focusNextChild(bool* _dynamic_cast_ok, void* self);
-	friend bool QDockWidget_protectedbase_focusPreviousChild(bool* _dynamic_cast_ok, void* self);
-	friend QObject* QDockWidget_protectedbase_sender(bool* _dynamic_cast_ok, const void* self);
-	friend int QDockWidget_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
-	friend int QDockWidget_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
-	friend bool QDockWidget_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+	friend void QDockWidget_protectedbase_initStyleOption(const void* self, QStyleOptionDockWidget* option);
+	friend void QDockWidget_protectedbase_updateMicroFocus(void* self);
+	friend void QDockWidget_protectedbase_create(void* self);
+	friend void QDockWidget_protectedbase_destroy(void* self);
+	friend bool QDockWidget_protectedbase_focusNextChild(void* self);
+	friend bool QDockWidget_protectedbase_focusPreviousChild(void* self);
+	friend QObject* QDockWidget_protectedbase_sender(const void* self);
+	friend int QDockWidget_protectedbase_senderSignalIndex(const void* self);
+	friend int QDockWidget_protectedbase_receivers(const void* self, const char* signal);
+	friend bool QDockWidget_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
 };
 
 QDockWidget* QDockWidget_new(struct QDockWidget_VTable* vtbl, QWidget* parent) {
@@ -1377,131 +1377,71 @@ void QDockWidget_virtualbase_disconnectNotify(void* self, QMetaMethod* signal) {
 }
 
 const QMetaObject* QDockWidget_staticMetaObject() { return &QDockWidget::staticMetaObject; }
-void QDockWidget_protectedbase_initStyleOption(bool* _dynamic_cast_ok, const void* self, QStyleOptionDockWidget* option) {
-	VirtualQDockWidget* self_cast = dynamic_cast<VirtualQDockWidget*>( (QDockWidget*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QDockWidget_protectedbase_initStyleOption(const void* self, QStyleOptionDockWidget* option) {
+	VirtualQDockWidget* self_cast = static_cast<VirtualQDockWidget*>( (QDockWidget*)(self) );
 	
 	self_cast->initStyleOption(option);
 
 }
 
-void QDockWidget_protectedbase_updateMicroFocus(bool* _dynamic_cast_ok, void* self) {
-	VirtualQDockWidget* self_cast = dynamic_cast<VirtualQDockWidget*>( (QDockWidget*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QDockWidget_protectedbase_updateMicroFocus(void* self) {
+	VirtualQDockWidget* self_cast = static_cast<VirtualQDockWidget*>( (QDockWidget*)(self) );
 	
 	self_cast->updateMicroFocus();
 
 }
 
-void QDockWidget_protectedbase_create(bool* _dynamic_cast_ok, void* self) {
-	VirtualQDockWidget* self_cast = dynamic_cast<VirtualQDockWidget*>( (QDockWidget*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QDockWidget_protectedbase_create(void* self) {
+	VirtualQDockWidget* self_cast = static_cast<VirtualQDockWidget*>( (QDockWidget*)(self) );
 	
 	self_cast->create();
 
 }
 
-void QDockWidget_protectedbase_destroy(bool* _dynamic_cast_ok, void* self) {
-	VirtualQDockWidget* self_cast = dynamic_cast<VirtualQDockWidget*>( (QDockWidget*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QDockWidget_protectedbase_destroy(void* self) {
+	VirtualQDockWidget* self_cast = static_cast<VirtualQDockWidget*>( (QDockWidget*)(self) );
 	
 	self_cast->destroy();
 
 }
 
-bool QDockWidget_protectedbase_focusNextChild(bool* _dynamic_cast_ok, void* self) {
-	VirtualQDockWidget* self_cast = dynamic_cast<VirtualQDockWidget*>( (QDockWidget*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return false;
-	}
-	
-	*_dynamic_cast_ok = true;
+bool QDockWidget_protectedbase_focusNextChild(void* self) {
+	VirtualQDockWidget* self_cast = static_cast<VirtualQDockWidget*>( (QDockWidget*)(self) );
 	
 	return self_cast->focusNextChild();
 
 }
 
-bool QDockWidget_protectedbase_focusPreviousChild(bool* _dynamic_cast_ok, void* self) {
-	VirtualQDockWidget* self_cast = dynamic_cast<VirtualQDockWidget*>( (QDockWidget*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return false;
-	}
-	
-	*_dynamic_cast_ok = true;
+bool QDockWidget_protectedbase_focusPreviousChild(void* self) {
+	VirtualQDockWidget* self_cast = static_cast<VirtualQDockWidget*>( (QDockWidget*)(self) );
 	
 	return self_cast->focusPreviousChild();
 
 }
 
-QObject* QDockWidget_protectedbase_sender(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQDockWidget* self_cast = dynamic_cast<VirtualQDockWidget*>( (QDockWidget*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return nullptr;
-	}
-	
-	*_dynamic_cast_ok = true;
+QObject* QDockWidget_protectedbase_sender(const void* self) {
+	VirtualQDockWidget* self_cast = static_cast<VirtualQDockWidget*>( (QDockWidget*)(self) );
 	
 	return self_cast->sender();
 
 }
 
-int QDockWidget_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQDockWidget* self_cast = dynamic_cast<VirtualQDockWidget*>( (QDockWidget*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return 0;
-	}
-	
-	*_dynamic_cast_ok = true;
+int QDockWidget_protectedbase_senderSignalIndex(const void* self) {
+	VirtualQDockWidget* self_cast = static_cast<VirtualQDockWidget*>( (QDockWidget*)(self) );
 	
 	return self_cast->senderSignalIndex();
 
 }
 
-int QDockWidget_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal) {
-	VirtualQDockWidget* self_cast = dynamic_cast<VirtualQDockWidget*>( (QDockWidget*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return 0;
-	}
-	
-	*_dynamic_cast_ok = true;
+int QDockWidget_protectedbase_receivers(const void* self, const char* signal) {
+	VirtualQDockWidget* self_cast = static_cast<VirtualQDockWidget*>( (QDockWidget*)(self) );
 	
 	return self_cast->receivers(signal);
 
 }
 
-bool QDockWidget_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal) {
-	VirtualQDockWidget* self_cast = dynamic_cast<VirtualQDockWidget*>( (QDockWidget*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return false;
-	}
-	
-	*_dynamic_cast_ok = true;
+bool QDockWidget_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal) {
+	VirtualQDockWidget* self_cast = static_cast<VirtualQDockWidget*>( (QDockWidget*)(self) );
 	
 	return self_cast->isSignalConnected(*signal);
 

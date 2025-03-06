@@ -41,6 +41,7 @@ import
   ../QtCore/gen_qabstractitemmodel_types,
   ../QtCore/gen_qcoreevent_types,
   ../QtCore/gen_qitemselectionmodel_types,
+  ../QtCore/gen_qmargins_types,
   ../QtCore/gen_qmetaobject_types,
   ../QtCore/gen_qobject_types,
   ../QtCore/gen_qobjectdefs_types,
@@ -60,6 +61,7 @@ export
   gen_qabstractitemmodel_types,
   gen_qcoreevent_types,
   gen_qitemselectionmodel_types,
+  gen_qmargins_types,
   gen_qmetaobject_types,
   gen_qobject_types,
   gen_qobjectdefs_types,
@@ -291,6 +293,35 @@ proc fcQColumnView_virtualbase_childEvent(self: pointer, event: pointer): void {
 proc fcQColumnView_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QColumnView_virtualbase_customEvent".}
 proc fcQColumnView_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QColumnView_virtualbase_connectNotify".}
 proc fcQColumnView_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QColumnView_virtualbase_disconnectNotify".}
+proc fcQColumnView_protectedbase_initializeColumn(self: pointer, column: pointer): void {.importc: "QColumnView_protectedbase_initializeColumn".}
+proc fcQColumnView_protectedbase_setHorizontalStepsPerItem(self: pointer, steps: cint): void {.importc: "QColumnView_protectedbase_setHorizontalStepsPerItem".}
+proc fcQColumnView_protectedbase_horizontalStepsPerItem(self: pointer, ): cint {.importc: "QColumnView_protectedbase_horizontalStepsPerItem".}
+proc fcQColumnView_protectedbase_setVerticalStepsPerItem(self: pointer, steps: cint): void {.importc: "QColumnView_protectedbase_setVerticalStepsPerItem".}
+proc fcQColumnView_protectedbase_verticalStepsPerItem(self: pointer, ): cint {.importc: "QColumnView_protectedbase_verticalStepsPerItem".}
+proc fcQColumnView_protectedbase_state(self: pointer, ): cint {.importc: "QColumnView_protectedbase_state".}
+proc fcQColumnView_protectedbase_setState(self: pointer, state: cint): void {.importc: "QColumnView_protectedbase_setState".}
+proc fcQColumnView_protectedbase_scheduleDelayedItemsLayout(self: pointer, ): void {.importc: "QColumnView_protectedbase_scheduleDelayedItemsLayout".}
+proc fcQColumnView_protectedbase_executeDelayedItemsLayout(self: pointer, ): void {.importc: "QColumnView_protectedbase_executeDelayedItemsLayout".}
+proc fcQColumnView_protectedbase_setDirtyRegion(self: pointer, region: pointer): void {.importc: "QColumnView_protectedbase_setDirtyRegion".}
+proc fcQColumnView_protectedbase_scrollDirtyRegion(self: pointer, dx: cint, dy: cint): void {.importc: "QColumnView_protectedbase_scrollDirtyRegion".}
+proc fcQColumnView_protectedbase_dirtyRegionOffset(self: pointer, ): pointer {.importc: "QColumnView_protectedbase_dirtyRegionOffset".}
+proc fcQColumnView_protectedbase_startAutoScroll(self: pointer, ): void {.importc: "QColumnView_protectedbase_startAutoScroll".}
+proc fcQColumnView_protectedbase_stopAutoScroll(self: pointer, ): void {.importc: "QColumnView_protectedbase_stopAutoScroll".}
+proc fcQColumnView_protectedbase_doAutoScroll(self: pointer, ): void {.importc: "QColumnView_protectedbase_doAutoScroll".}
+proc fcQColumnView_protectedbase_dropIndicatorPosition(self: pointer, ): cint {.importc: "QColumnView_protectedbase_dropIndicatorPosition".}
+proc fcQColumnView_protectedbase_setViewportMargins(self: pointer, left: cint, top: cint, right: cint, bottom: cint): void {.importc: "QColumnView_protectedbase_setViewportMargins".}
+proc fcQColumnView_protectedbase_viewportMargins(self: pointer, ): pointer {.importc: "QColumnView_protectedbase_viewportMargins".}
+proc fcQColumnView_protectedbase_drawFrame(self: pointer, param1: pointer): void {.importc: "QColumnView_protectedbase_drawFrame".}
+proc fcQColumnView_protectedbase_initStyleOption(self: pointer, option: pointer): void {.importc: "QColumnView_protectedbase_initStyleOption".}
+proc fcQColumnView_protectedbase_updateMicroFocus(self: pointer, ): void {.importc: "QColumnView_protectedbase_updateMicroFocus".}
+proc fcQColumnView_protectedbase_create(self: pointer, ): void {.importc: "QColumnView_protectedbase_create".}
+proc fcQColumnView_protectedbase_destroy(self: pointer, ): void {.importc: "QColumnView_protectedbase_destroy".}
+proc fcQColumnView_protectedbase_focusNextChild(self: pointer, ): bool {.importc: "QColumnView_protectedbase_focusNextChild".}
+proc fcQColumnView_protectedbase_focusPreviousChild(self: pointer, ): bool {.importc: "QColumnView_protectedbase_focusPreviousChild".}
+proc fcQColumnView_protectedbase_sender(self: pointer, ): pointer {.importc: "QColumnView_protectedbase_sender".}
+proc fcQColumnView_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QColumnView_protectedbase_senderSignalIndex".}
+proc fcQColumnView_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QColumnView_protectedbase_receivers".}
+proc fcQColumnView_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QColumnView_protectedbase_isSignalConnected".}
 proc fcQColumnView_new(vtbl: pointer, parent: pointer): ptr cQColumnView {.importc: "QColumnView_new".}
 proc fcQColumnView_new2(vtbl: pointer, ): ptr cQColumnView {.importc: "QColumnView_new2".}
 proc fcQColumnView_staticMetaObject(): pointer {.importc: "QColumnView_staticMetaObject".}
@@ -1496,6 +1527,93 @@ proc miqt_exec_callback_cQColumnView_disconnectNotify(vtbl: pointer, self: point
   let self = QColumnView(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
   vtbl[].disconnectNotify(self, slotval1)
+
+proc initializeColumn*(self: gen_qcolumnview_types.QColumnView, column: gen_qabstractitemview_types.QAbstractItemView): void =
+  fcQColumnView_protectedbase_initializeColumn(self.h, column.h)
+
+proc setHorizontalStepsPerItem*(self: gen_qcolumnview_types.QColumnView, steps: cint): void =
+  fcQColumnView_protectedbase_setHorizontalStepsPerItem(self.h, steps)
+
+proc horizontalStepsPerItem*(self: gen_qcolumnview_types.QColumnView, ): cint =
+  fcQColumnView_protectedbase_horizontalStepsPerItem(self.h)
+
+proc setVerticalStepsPerItem*(self: gen_qcolumnview_types.QColumnView, steps: cint): void =
+  fcQColumnView_protectedbase_setVerticalStepsPerItem(self.h, steps)
+
+proc verticalStepsPerItem*(self: gen_qcolumnview_types.QColumnView, ): cint =
+  fcQColumnView_protectedbase_verticalStepsPerItem(self.h)
+
+proc state*(self: gen_qcolumnview_types.QColumnView, ): cint =
+  cint(fcQColumnView_protectedbase_state(self.h))
+
+proc setState*(self: gen_qcolumnview_types.QColumnView, state: cint): void =
+  fcQColumnView_protectedbase_setState(self.h, cint(state))
+
+proc scheduleDelayedItemsLayout*(self: gen_qcolumnview_types.QColumnView, ): void =
+  fcQColumnView_protectedbase_scheduleDelayedItemsLayout(self.h)
+
+proc executeDelayedItemsLayout*(self: gen_qcolumnview_types.QColumnView, ): void =
+  fcQColumnView_protectedbase_executeDelayedItemsLayout(self.h)
+
+proc setDirtyRegion*(self: gen_qcolumnview_types.QColumnView, region: gen_qregion_types.QRegion): void =
+  fcQColumnView_protectedbase_setDirtyRegion(self.h, region.h)
+
+proc scrollDirtyRegion*(self: gen_qcolumnview_types.QColumnView, dx: cint, dy: cint): void =
+  fcQColumnView_protectedbase_scrollDirtyRegion(self.h, dx, dy)
+
+proc dirtyRegionOffset*(self: gen_qcolumnview_types.QColumnView, ): gen_qpoint_types.QPoint =
+  gen_qpoint_types.QPoint(h: fcQColumnView_protectedbase_dirtyRegionOffset(self.h))
+
+proc startAutoScroll*(self: gen_qcolumnview_types.QColumnView, ): void =
+  fcQColumnView_protectedbase_startAutoScroll(self.h)
+
+proc stopAutoScroll*(self: gen_qcolumnview_types.QColumnView, ): void =
+  fcQColumnView_protectedbase_stopAutoScroll(self.h)
+
+proc doAutoScroll*(self: gen_qcolumnview_types.QColumnView, ): void =
+  fcQColumnView_protectedbase_doAutoScroll(self.h)
+
+proc dropIndicatorPosition*(self: gen_qcolumnview_types.QColumnView, ): cint =
+  cint(fcQColumnView_protectedbase_dropIndicatorPosition(self.h))
+
+proc setViewportMargins*(self: gen_qcolumnview_types.QColumnView, left: cint, top: cint, right: cint, bottom: cint): void =
+  fcQColumnView_protectedbase_setViewportMargins(self.h, left, top, right, bottom)
+
+proc viewportMargins*(self: gen_qcolumnview_types.QColumnView, ): gen_qmargins_types.QMargins =
+  gen_qmargins_types.QMargins(h: fcQColumnView_protectedbase_viewportMargins(self.h))
+
+proc drawFrame*(self: gen_qcolumnview_types.QColumnView, param1: gen_qpainter_types.QPainter): void =
+  fcQColumnView_protectedbase_drawFrame(self.h, param1.h)
+
+proc initStyleOption*(self: gen_qcolumnview_types.QColumnView, option: gen_qstyleoption_types.QStyleOptionFrame): void =
+  fcQColumnView_protectedbase_initStyleOption(self.h, option.h)
+
+proc updateMicroFocus*(self: gen_qcolumnview_types.QColumnView, ): void =
+  fcQColumnView_protectedbase_updateMicroFocus(self.h)
+
+proc create*(self: gen_qcolumnview_types.QColumnView, ): void =
+  fcQColumnView_protectedbase_create(self.h)
+
+proc destroy*(self: gen_qcolumnview_types.QColumnView, ): void =
+  fcQColumnView_protectedbase_destroy(self.h)
+
+proc focusNextChild*(self: gen_qcolumnview_types.QColumnView, ): bool =
+  fcQColumnView_protectedbase_focusNextChild(self.h)
+
+proc focusPreviousChild*(self: gen_qcolumnview_types.QColumnView, ): bool =
+  fcQColumnView_protectedbase_focusPreviousChild(self.h)
+
+proc sender*(self: gen_qcolumnview_types.QColumnView, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQColumnView_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qcolumnview_types.QColumnView, ): cint =
+  fcQColumnView_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qcolumnview_types.QColumnView, signal: cstring): cint =
+  fcQColumnView_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qcolumnview_types.QColumnView, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQColumnView_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc create*(T: type gen_qcolumnview_types.QColumnView,
     parent: gen_qwidget_types.QWidget,

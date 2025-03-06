@@ -38,11 +38,15 @@ import ./gen_qimageencodercontrol_types
 export gen_qimageencodercontrol_types
 
 import
+  ../QtCore/gen_qmetaobject_types,
+  ../QtCore/gen_qobject_types,
   ../QtCore/gen_qobjectdefs_types,
   ../QtCore/gen_qsize_types,
   ./gen_qmediacontrol,
   ./gen_qmediaencodersettings_types
 export
+  gen_qmetaobject_types,
+  gen_qobject_types,
   gen_qobjectdefs_types,
   gen_qsize_types,
   gen_qmediacontrol,
@@ -64,6 +68,10 @@ proc fcQImageEncoderControl_tr2(s: cstring, c: cstring): struct_miqt_string {.im
 proc fcQImageEncoderControl_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QImageEncoderControl_tr3".}
 proc fcQImageEncoderControl_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QImageEncoderControl_trUtf82".}
 proc fcQImageEncoderControl_trUtf83(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QImageEncoderControl_trUtf83".}
+proc fcQImageEncoderControl_protectedbase_sender(self: pointer, ): pointer {.importc: "QImageEncoderControl_protectedbase_sender".}
+proc fcQImageEncoderControl_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QImageEncoderControl_protectedbase_senderSignalIndex".}
+proc fcQImageEncoderControl_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QImageEncoderControl_protectedbase_receivers".}
+proc fcQImageEncoderControl_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QImageEncoderControl_protectedbase_isSignalConnected".}
 proc fcQImageEncoderControl_staticMetaObject(): pointer {.importc: "QImageEncoderControl_staticMetaObject".}
 proc fcQImageEncoderControl_delete(self: pointer) {.importc: "QImageEncoderControl_delete".}
 
@@ -142,6 +150,18 @@ proc trUtf8*(_: type gen_qimageencodercontrol_types.QImageEncoderControl, s: cst
   let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
   c_free(v_ms.data)
   vx_ret
+
+proc sender*(self: gen_qimageencodercontrol_types.QImageEncoderControl, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQImageEncoderControl_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qimageencodercontrol_types.QImageEncoderControl, ): cint =
+  fcQImageEncoderControl_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qimageencodercontrol_types.QImageEncoderControl, signal: cstring): cint =
+  fcQImageEncoderControl_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qimageencodercontrol_types.QImageEncoderControl, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQImageEncoderControl_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc staticMetaObject*(_: type gen_qimageencodercontrol_types.QImageEncoderControl): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQImageEncoderControl_staticMetaObject())

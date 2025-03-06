@@ -49,6 +49,7 @@ import
   ../QtCore/gen_qabstractitemmodel_types,
   ../QtCore/gen_qcoreevent_types,
   ../QtCore/gen_qitemselectionmodel_types,
+  ../QtCore/gen_qmargins_types,
   ../QtCore/gen_qmetaobject_types,
   ../QtCore/gen_qobject_types,
   ../QtCore/gen_qobjectdefs_types,
@@ -68,6 +69,7 @@ export
   gen_qabstractitemmodel_types,
   gen_qcoreevent_types,
   gen_qitemselectionmodel_types,
+  gen_qmargins_types,
   gen_qmetaobject_types,
   gen_qobject_types,
   gen_qobjectdefs_types,
@@ -373,6 +375,41 @@ proc fcQHeaderView_virtualbase_childEvent(self: pointer, event: pointer): void {
 proc fcQHeaderView_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QHeaderView_virtualbase_customEvent".}
 proc fcQHeaderView_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QHeaderView_virtualbase_connectNotify".}
 proc fcQHeaderView_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QHeaderView_virtualbase_disconnectNotify".}
+proc fcQHeaderView_protectedbase_updateSection(self: pointer, logicalIndex: cint): void {.importc: "QHeaderView_protectedbase_updateSection".}
+proc fcQHeaderView_protectedbase_resizeSections2(self: pointer, ): void {.importc: "QHeaderView_protectedbase_resizeSections2".}
+proc fcQHeaderView_protectedbase_sectionsInserted(self: pointer, parent: pointer, logicalFirst: cint, logicalLast: cint): void {.importc: "QHeaderView_protectedbase_sectionsInserted".}
+proc fcQHeaderView_protectedbase_sectionsAboutToBeRemoved(self: pointer, parent: pointer, logicalFirst: cint, logicalLast: cint): void {.importc: "QHeaderView_protectedbase_sectionsAboutToBeRemoved".}
+proc fcQHeaderView_protectedbase_initialize(self: pointer, ): void {.importc: "QHeaderView_protectedbase_initialize".}
+proc fcQHeaderView_protectedbase_initializeSections(self: pointer, ): void {.importc: "QHeaderView_protectedbase_initializeSections".}
+proc fcQHeaderView_protectedbase_initializeSections2(self: pointer, start: cint, endVal: cint): void {.importc: "QHeaderView_protectedbase_initializeSections2".}
+proc fcQHeaderView_protectedbase_initStyleOption(self: pointer, option: pointer): void {.importc: "QHeaderView_protectedbase_initStyleOption".}
+proc fcQHeaderView_protectedbase_setHorizontalStepsPerItem(self: pointer, steps: cint): void {.importc: "QHeaderView_protectedbase_setHorizontalStepsPerItem".}
+proc fcQHeaderView_protectedbase_horizontalStepsPerItem(self: pointer, ): cint {.importc: "QHeaderView_protectedbase_horizontalStepsPerItem".}
+proc fcQHeaderView_protectedbase_setVerticalStepsPerItem(self: pointer, steps: cint): void {.importc: "QHeaderView_protectedbase_setVerticalStepsPerItem".}
+proc fcQHeaderView_protectedbase_verticalStepsPerItem(self: pointer, ): cint {.importc: "QHeaderView_protectedbase_verticalStepsPerItem".}
+proc fcQHeaderView_protectedbase_state(self: pointer, ): cint {.importc: "QHeaderView_protectedbase_state".}
+proc fcQHeaderView_protectedbase_setState(self: pointer, state: cint): void {.importc: "QHeaderView_protectedbase_setState".}
+proc fcQHeaderView_protectedbase_scheduleDelayedItemsLayout(self: pointer, ): void {.importc: "QHeaderView_protectedbase_scheduleDelayedItemsLayout".}
+proc fcQHeaderView_protectedbase_executeDelayedItemsLayout(self: pointer, ): void {.importc: "QHeaderView_protectedbase_executeDelayedItemsLayout".}
+proc fcQHeaderView_protectedbase_setDirtyRegion(self: pointer, region: pointer): void {.importc: "QHeaderView_protectedbase_setDirtyRegion".}
+proc fcQHeaderView_protectedbase_scrollDirtyRegion(self: pointer, dx: cint, dy: cint): void {.importc: "QHeaderView_protectedbase_scrollDirtyRegion".}
+proc fcQHeaderView_protectedbase_dirtyRegionOffset(self: pointer, ): pointer {.importc: "QHeaderView_protectedbase_dirtyRegionOffset".}
+proc fcQHeaderView_protectedbase_startAutoScroll(self: pointer, ): void {.importc: "QHeaderView_protectedbase_startAutoScroll".}
+proc fcQHeaderView_protectedbase_stopAutoScroll(self: pointer, ): void {.importc: "QHeaderView_protectedbase_stopAutoScroll".}
+proc fcQHeaderView_protectedbase_doAutoScroll(self: pointer, ): void {.importc: "QHeaderView_protectedbase_doAutoScroll".}
+proc fcQHeaderView_protectedbase_dropIndicatorPosition(self: pointer, ): cint {.importc: "QHeaderView_protectedbase_dropIndicatorPosition".}
+proc fcQHeaderView_protectedbase_setViewportMargins(self: pointer, left: cint, top: cint, right: cint, bottom: cint): void {.importc: "QHeaderView_protectedbase_setViewportMargins".}
+proc fcQHeaderView_protectedbase_viewportMargins(self: pointer, ): pointer {.importc: "QHeaderView_protectedbase_viewportMargins".}
+proc fcQHeaderView_protectedbase_drawFrame(self: pointer, param1: pointer): void {.importc: "QHeaderView_protectedbase_drawFrame".}
+proc fcQHeaderView_protectedbase_updateMicroFocus(self: pointer, ): void {.importc: "QHeaderView_protectedbase_updateMicroFocus".}
+proc fcQHeaderView_protectedbase_create(self: pointer, ): void {.importc: "QHeaderView_protectedbase_create".}
+proc fcQHeaderView_protectedbase_destroy(self: pointer, ): void {.importc: "QHeaderView_protectedbase_destroy".}
+proc fcQHeaderView_protectedbase_focusNextChild(self: pointer, ): bool {.importc: "QHeaderView_protectedbase_focusNextChild".}
+proc fcQHeaderView_protectedbase_focusPreviousChild(self: pointer, ): bool {.importc: "QHeaderView_protectedbase_focusPreviousChild".}
+proc fcQHeaderView_protectedbase_sender(self: pointer, ): pointer {.importc: "QHeaderView_protectedbase_sender".}
+proc fcQHeaderView_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QHeaderView_protectedbase_senderSignalIndex".}
+proc fcQHeaderView_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QHeaderView_protectedbase_receivers".}
+proc fcQHeaderView_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QHeaderView_protectedbase_isSignalConnected".}
 proc fcQHeaderView_new(vtbl: pointer, orientation: cint): ptr cQHeaderView {.importc: "QHeaderView_new".}
 proc fcQHeaderView_new2(vtbl: pointer, orientation: cint, parent: pointer): ptr cQHeaderView {.importc: "QHeaderView_new2".}
 proc fcQHeaderView_staticMetaObject(): pointer {.importc: "QHeaderView_staticMetaObject".}
@@ -1937,6 +1974,111 @@ proc miqt_exec_callback_cQHeaderView_disconnectNotify(vtbl: pointer, self: point
   let self = QHeaderView(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
   vtbl[].disconnectNotify(self, slotval1)
+
+proc updateSection*(self: gen_qheaderview_types.QHeaderView, logicalIndex: cint): void =
+  fcQHeaderView_protectedbase_updateSection(self.h, logicalIndex)
+
+proc resizeSections*(self: gen_qheaderview_types.QHeaderView, ): void =
+  fcQHeaderView_protectedbase_resizeSections2(self.h)
+
+proc sectionsInserted*(self: gen_qheaderview_types.QHeaderView, parent: gen_qabstractitemmodel_types.QModelIndex, logicalFirst: cint, logicalLast: cint): void =
+  fcQHeaderView_protectedbase_sectionsInserted(self.h, parent.h, logicalFirst, logicalLast)
+
+proc sectionsAboutToBeRemoved*(self: gen_qheaderview_types.QHeaderView, parent: gen_qabstractitemmodel_types.QModelIndex, logicalFirst: cint, logicalLast: cint): void =
+  fcQHeaderView_protectedbase_sectionsAboutToBeRemoved(self.h, parent.h, logicalFirst, logicalLast)
+
+proc initialize*(self: gen_qheaderview_types.QHeaderView, ): void =
+  fcQHeaderView_protectedbase_initialize(self.h)
+
+proc initializeSections*(self: gen_qheaderview_types.QHeaderView, ): void =
+  fcQHeaderView_protectedbase_initializeSections(self.h)
+
+proc initializeSections*(self: gen_qheaderview_types.QHeaderView, start: cint, endVal: cint): void =
+  fcQHeaderView_protectedbase_initializeSections2(self.h, start, endVal)
+
+proc initStyleOption*(self: gen_qheaderview_types.QHeaderView, option: gen_qstyleoption_types.QStyleOptionHeader): void =
+  fcQHeaderView_protectedbase_initStyleOption(self.h, option.h)
+
+proc setHorizontalStepsPerItem*(self: gen_qheaderview_types.QHeaderView, steps: cint): void =
+  fcQHeaderView_protectedbase_setHorizontalStepsPerItem(self.h, steps)
+
+proc horizontalStepsPerItem*(self: gen_qheaderview_types.QHeaderView, ): cint =
+  fcQHeaderView_protectedbase_horizontalStepsPerItem(self.h)
+
+proc setVerticalStepsPerItem*(self: gen_qheaderview_types.QHeaderView, steps: cint): void =
+  fcQHeaderView_protectedbase_setVerticalStepsPerItem(self.h, steps)
+
+proc verticalStepsPerItem*(self: gen_qheaderview_types.QHeaderView, ): cint =
+  fcQHeaderView_protectedbase_verticalStepsPerItem(self.h)
+
+proc state*(self: gen_qheaderview_types.QHeaderView, ): cint =
+  cint(fcQHeaderView_protectedbase_state(self.h))
+
+proc setState*(self: gen_qheaderview_types.QHeaderView, state: cint): void =
+  fcQHeaderView_protectedbase_setState(self.h, cint(state))
+
+proc scheduleDelayedItemsLayout*(self: gen_qheaderview_types.QHeaderView, ): void =
+  fcQHeaderView_protectedbase_scheduleDelayedItemsLayout(self.h)
+
+proc executeDelayedItemsLayout*(self: gen_qheaderview_types.QHeaderView, ): void =
+  fcQHeaderView_protectedbase_executeDelayedItemsLayout(self.h)
+
+proc setDirtyRegion*(self: gen_qheaderview_types.QHeaderView, region: gen_qregion_types.QRegion): void =
+  fcQHeaderView_protectedbase_setDirtyRegion(self.h, region.h)
+
+proc scrollDirtyRegion*(self: gen_qheaderview_types.QHeaderView, dx: cint, dy: cint): void =
+  fcQHeaderView_protectedbase_scrollDirtyRegion(self.h, dx, dy)
+
+proc dirtyRegionOffset*(self: gen_qheaderview_types.QHeaderView, ): gen_qpoint_types.QPoint =
+  gen_qpoint_types.QPoint(h: fcQHeaderView_protectedbase_dirtyRegionOffset(self.h))
+
+proc startAutoScroll*(self: gen_qheaderview_types.QHeaderView, ): void =
+  fcQHeaderView_protectedbase_startAutoScroll(self.h)
+
+proc stopAutoScroll*(self: gen_qheaderview_types.QHeaderView, ): void =
+  fcQHeaderView_protectedbase_stopAutoScroll(self.h)
+
+proc doAutoScroll*(self: gen_qheaderview_types.QHeaderView, ): void =
+  fcQHeaderView_protectedbase_doAutoScroll(self.h)
+
+proc dropIndicatorPosition*(self: gen_qheaderview_types.QHeaderView, ): cint =
+  cint(fcQHeaderView_protectedbase_dropIndicatorPosition(self.h))
+
+proc setViewportMargins*(self: gen_qheaderview_types.QHeaderView, left: cint, top: cint, right: cint, bottom: cint): void =
+  fcQHeaderView_protectedbase_setViewportMargins(self.h, left, top, right, bottom)
+
+proc viewportMargins*(self: gen_qheaderview_types.QHeaderView, ): gen_qmargins_types.QMargins =
+  gen_qmargins_types.QMargins(h: fcQHeaderView_protectedbase_viewportMargins(self.h))
+
+proc drawFrame*(self: gen_qheaderview_types.QHeaderView, param1: gen_qpainter_types.QPainter): void =
+  fcQHeaderView_protectedbase_drawFrame(self.h, param1.h)
+
+proc updateMicroFocus*(self: gen_qheaderview_types.QHeaderView, ): void =
+  fcQHeaderView_protectedbase_updateMicroFocus(self.h)
+
+proc create*(self: gen_qheaderview_types.QHeaderView, ): void =
+  fcQHeaderView_protectedbase_create(self.h)
+
+proc destroy*(self: gen_qheaderview_types.QHeaderView, ): void =
+  fcQHeaderView_protectedbase_destroy(self.h)
+
+proc focusNextChild*(self: gen_qheaderview_types.QHeaderView, ): bool =
+  fcQHeaderView_protectedbase_focusNextChild(self.h)
+
+proc focusPreviousChild*(self: gen_qheaderview_types.QHeaderView, ): bool =
+  fcQHeaderView_protectedbase_focusPreviousChild(self.h)
+
+proc sender*(self: gen_qheaderview_types.QHeaderView, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQHeaderView_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qheaderview_types.QHeaderView, ): cint =
+  fcQHeaderView_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qheaderview_types.QHeaderView, signal: cstring): cint =
+  fcQHeaderView_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qheaderview_types.QHeaderView, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQHeaderView_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc create*(T: type gen_qheaderview_types.QHeaderView,
     orientation: cint,

@@ -188,10 +188,10 @@ public:
 	friend void QWebChannel_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
 
 	// Wrappers to allow calling protected methods:
-	friend QObject* QWebChannel_protectedbase_sender(bool* _dynamic_cast_ok, const void* self);
-	friend int QWebChannel_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
-	friend int QWebChannel_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
-	friend bool QWebChannel_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+	friend QObject* QWebChannel_protectedbase_sender(const void* self);
+	friend int QWebChannel_protectedbase_senderSignalIndex(const void* self);
+	friend int QWebChannel_protectedbase_receivers(const void* self, const char* signal);
+	friend bool QWebChannel_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
 };
 
 QWebChannel* QWebChannel_new(struct QWebChannel_VTable* vtbl) {
@@ -423,53 +423,29 @@ void QWebChannel_virtualbase_disconnectNotify(void* self, QMetaMethod* signal) {
 }
 
 const QMetaObject* QWebChannel_staticMetaObject() { return &QWebChannel::staticMetaObject; }
-QObject* QWebChannel_protectedbase_sender(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQWebChannel* self_cast = dynamic_cast<VirtualQWebChannel*>( (QWebChannel*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return nullptr;
-	}
-	
-	*_dynamic_cast_ok = true;
+QObject* QWebChannel_protectedbase_sender(const void* self) {
+	VirtualQWebChannel* self_cast = static_cast<VirtualQWebChannel*>( (QWebChannel*)(self) );
 	
 	return self_cast->sender();
 
 }
 
-int QWebChannel_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQWebChannel* self_cast = dynamic_cast<VirtualQWebChannel*>( (QWebChannel*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return 0;
-	}
-	
-	*_dynamic_cast_ok = true;
+int QWebChannel_protectedbase_senderSignalIndex(const void* self) {
+	VirtualQWebChannel* self_cast = static_cast<VirtualQWebChannel*>( (QWebChannel*)(self) );
 	
 	return self_cast->senderSignalIndex();
 
 }
 
-int QWebChannel_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal) {
-	VirtualQWebChannel* self_cast = dynamic_cast<VirtualQWebChannel*>( (QWebChannel*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return 0;
-	}
-	
-	*_dynamic_cast_ok = true;
+int QWebChannel_protectedbase_receivers(const void* self, const char* signal) {
+	VirtualQWebChannel* self_cast = static_cast<VirtualQWebChannel*>( (QWebChannel*)(self) );
 	
 	return self_cast->receivers(signal);
 
 }
 
-bool QWebChannel_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal) {
-	VirtualQWebChannel* self_cast = dynamic_cast<VirtualQWebChannel*>( (QWebChannel*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return false;
-	}
-	
-	*_dynamic_cast_ok = true;
+bool QWebChannel_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal) {
+	VirtualQWebChannel* self_cast = static_cast<VirtualQWebChannel*>( (QWebChannel*)(self) );
 	
 	return self_cast->isSignalConnected(*signal);
 

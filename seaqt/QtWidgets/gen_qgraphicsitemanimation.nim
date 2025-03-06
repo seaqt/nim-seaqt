@@ -122,6 +122,10 @@ proc fcQGraphicsItemAnimation_virtualbase_childEvent(self: pointer, event: point
 proc fcQGraphicsItemAnimation_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QGraphicsItemAnimation_virtualbase_customEvent".}
 proc fcQGraphicsItemAnimation_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QGraphicsItemAnimation_virtualbase_connectNotify".}
 proc fcQGraphicsItemAnimation_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QGraphicsItemAnimation_virtualbase_disconnectNotify".}
+proc fcQGraphicsItemAnimation_protectedbase_sender(self: pointer, ): pointer {.importc: "QGraphicsItemAnimation_protectedbase_sender".}
+proc fcQGraphicsItemAnimation_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QGraphicsItemAnimation_protectedbase_senderSignalIndex".}
+proc fcQGraphicsItemAnimation_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QGraphicsItemAnimation_protectedbase_receivers".}
+proc fcQGraphicsItemAnimation_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QGraphicsItemAnimation_protectedbase_isSignalConnected".}
 proc fcQGraphicsItemAnimation_new(vtbl: pointer, ): ptr cQGraphicsItemAnimation {.importc: "QGraphicsItemAnimation_new".}
 proc fcQGraphicsItemAnimation_new2(vtbl: pointer, parent: pointer): ptr cQGraphicsItemAnimation {.importc: "QGraphicsItemAnimation_new2".}
 proc fcQGraphicsItemAnimation_staticMetaObject(): pointer {.importc: "QGraphicsItemAnimation_staticMetaObject".}
@@ -453,6 +457,18 @@ proc miqt_exec_callback_cQGraphicsItemAnimation_disconnectNotify(vtbl: pointer, 
   let self = QGraphicsItemAnimation(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
   vtbl[].disconnectNotify(self, slotval1)
+
+proc sender*(self: gen_qgraphicsitemanimation_types.QGraphicsItemAnimation, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQGraphicsItemAnimation_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qgraphicsitemanimation_types.QGraphicsItemAnimation, ): cint =
+  fcQGraphicsItemAnimation_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qgraphicsitemanimation_types.QGraphicsItemAnimation, signal: cstring): cint =
+  fcQGraphicsItemAnimation_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qgraphicsitemanimation_types.QGraphicsItemAnimation, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQGraphicsItemAnimation_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc create*(T: type gen_qgraphicsitemanimation_types.QGraphicsItemAnimation,
     vtbl: ref QGraphicsItemAnimationVTable = nil): gen_qgraphicsitemanimation_types.QGraphicsItemAnimation =

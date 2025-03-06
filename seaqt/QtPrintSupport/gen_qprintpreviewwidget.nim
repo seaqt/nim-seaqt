@@ -220,6 +220,15 @@ proc fcQPrintPreviewWidget_virtualbase_childEvent(self: pointer, event: pointer)
 proc fcQPrintPreviewWidget_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QPrintPreviewWidget_virtualbase_customEvent".}
 proc fcQPrintPreviewWidget_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QPrintPreviewWidget_virtualbase_connectNotify".}
 proc fcQPrintPreviewWidget_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QPrintPreviewWidget_virtualbase_disconnectNotify".}
+proc fcQPrintPreviewWidget_protectedbase_updateMicroFocus(self: pointer, ): void {.importc: "QPrintPreviewWidget_protectedbase_updateMicroFocus".}
+proc fcQPrintPreviewWidget_protectedbase_create(self: pointer, ): void {.importc: "QPrintPreviewWidget_protectedbase_create".}
+proc fcQPrintPreviewWidget_protectedbase_destroy(self: pointer, ): void {.importc: "QPrintPreviewWidget_protectedbase_destroy".}
+proc fcQPrintPreviewWidget_protectedbase_focusNextChild(self: pointer, ): bool {.importc: "QPrintPreviewWidget_protectedbase_focusNextChild".}
+proc fcQPrintPreviewWidget_protectedbase_focusPreviousChild(self: pointer, ): bool {.importc: "QPrintPreviewWidget_protectedbase_focusPreviousChild".}
+proc fcQPrintPreviewWidget_protectedbase_sender(self: pointer, ): pointer {.importc: "QPrintPreviewWidget_protectedbase_sender".}
+proc fcQPrintPreviewWidget_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QPrintPreviewWidget_protectedbase_senderSignalIndex".}
+proc fcQPrintPreviewWidget_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QPrintPreviewWidget_protectedbase_receivers".}
+proc fcQPrintPreviewWidget_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QPrintPreviewWidget_protectedbase_isSignalConnected".}
 proc fcQPrintPreviewWidget_new(vtbl: pointer, parent: pointer): ptr cQPrintPreviewWidget {.importc: "QPrintPreviewWidget_new".}
 proc fcQPrintPreviewWidget_new2(vtbl: pointer, printer: pointer): ptr cQPrintPreviewWidget {.importc: "QPrintPreviewWidget_new2".}
 proc fcQPrintPreviewWidget_new3(vtbl: pointer, ): ptr cQPrintPreviewWidget {.importc: "QPrintPreviewWidget_new3".}
@@ -956,6 +965,33 @@ proc miqt_exec_callback_cQPrintPreviewWidget_disconnectNotify(vtbl: pointer, sel
   let self = QPrintPreviewWidget(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
   vtbl[].disconnectNotify(self, slotval1)
+
+proc updateMicroFocus*(self: gen_qprintpreviewwidget_types.QPrintPreviewWidget, ): void =
+  fcQPrintPreviewWidget_protectedbase_updateMicroFocus(self.h)
+
+proc create*(self: gen_qprintpreviewwidget_types.QPrintPreviewWidget, ): void =
+  fcQPrintPreviewWidget_protectedbase_create(self.h)
+
+proc destroy*(self: gen_qprintpreviewwidget_types.QPrintPreviewWidget, ): void =
+  fcQPrintPreviewWidget_protectedbase_destroy(self.h)
+
+proc focusNextChild*(self: gen_qprintpreviewwidget_types.QPrintPreviewWidget, ): bool =
+  fcQPrintPreviewWidget_protectedbase_focusNextChild(self.h)
+
+proc focusPreviousChild*(self: gen_qprintpreviewwidget_types.QPrintPreviewWidget, ): bool =
+  fcQPrintPreviewWidget_protectedbase_focusPreviousChild(self.h)
+
+proc sender*(self: gen_qprintpreviewwidget_types.QPrintPreviewWidget, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQPrintPreviewWidget_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qprintpreviewwidget_types.QPrintPreviewWidget, ): cint =
+  fcQPrintPreviewWidget_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qprintpreviewwidget_types.QPrintPreviewWidget, signal: cstring): cint =
+  fcQPrintPreviewWidget_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qprintpreviewwidget_types.QPrintPreviewWidget, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQPrintPreviewWidget_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc create*(T: type gen_qprintpreviewwidget_types.QPrintPreviewWidget,
     parent: gen_qwidget_types.QWidget,

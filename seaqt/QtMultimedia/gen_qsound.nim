@@ -93,6 +93,10 @@ proc fcQSound_virtualbase_childEvent(self: pointer, event: pointer): void {.impo
 proc fcQSound_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QSound_virtualbase_customEvent".}
 proc fcQSound_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QSound_virtualbase_connectNotify".}
 proc fcQSound_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QSound_virtualbase_disconnectNotify".}
+proc fcQSound_protectedbase_sender(self: pointer, ): pointer {.importc: "QSound_protectedbase_sender".}
+proc fcQSound_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QSound_protectedbase_senderSignalIndex".}
+proc fcQSound_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QSound_protectedbase_receivers".}
+proc fcQSound_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QSound_protectedbase_isSignalConnected".}
 proc fcQSound_new(vtbl: pointer, filename: struct_miqt_string): ptr cQSound {.importc: "QSound_new".}
 proc fcQSound_new2(vtbl: pointer, filename: struct_miqt_string, parent: pointer): ptr cQSound {.importc: "QSound_new2".}
 proc fcQSound_staticMetaObject(): pointer {.importc: "QSound_staticMetaObject".}
@@ -288,6 +292,18 @@ proc miqt_exec_callback_cQSound_disconnectNotify(vtbl: pointer, self: pointer, s
   let self = QSound(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
   vtbl[].disconnectNotify(self, slotval1)
+
+proc sender*(self: gen_qsound_types.QSound, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQSound_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qsound_types.QSound, ): cint =
+  fcQSound_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qsound_types.QSound, signal: cstring): cint =
+  fcQSound_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qsound_types.QSound, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQSound_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc create*(T: type gen_qsound_types.QSound,
     filename: string,

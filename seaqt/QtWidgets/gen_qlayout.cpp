@@ -470,15 +470,15 @@ public:
 	friend QSpacerItem* QLayout_virtualbase_spacerItem(void* self);
 
 	// Wrappers to allow calling protected methods:
-	friend void QLayout_protectedbase_widgetEvent(bool* _dynamic_cast_ok, void* self, QEvent* param1);
-	friend void QLayout_protectedbase_addChildLayout(bool* _dynamic_cast_ok, void* self, QLayout* l);
-	friend void QLayout_protectedbase_addChildWidget(bool* _dynamic_cast_ok, void* self, QWidget* w);
-	friend bool QLayout_protectedbase_adoptLayout(bool* _dynamic_cast_ok, void* self, QLayout* layout);
-	friend QRect* QLayout_protectedbase_alignmentRect(bool* _dynamic_cast_ok, const void* self, QRect* param1);
-	friend QObject* QLayout_protectedbase_sender(bool* _dynamic_cast_ok, const void* self);
-	friend int QLayout_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
-	friend int QLayout_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
-	friend bool QLayout_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+	friend void QLayout_protectedbase_widgetEvent(void* self, QEvent* param1);
+	friend void QLayout_protectedbase_addChildLayout(void* self, QLayout* l);
+	friend void QLayout_protectedbase_addChildWidget(void* self, QWidget* w);
+	friend bool QLayout_protectedbase_adoptLayout(void* self, QLayout* layout);
+	friend QRect* QLayout_protectedbase_alignmentRect(const void* self, QRect* param1);
+	friend QObject* QLayout_protectedbase_sender(const void* self);
+	friend int QLayout_protectedbase_senderSignalIndex(const void* self);
+	friend int QLayout_protectedbase_receivers(const void* self, const char* signal);
+	friend bool QLayout_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
 };
 
 QLayout* QLayout_new(struct QLayout_VTable* vtbl, QWidget* parent) {
@@ -908,118 +908,64 @@ QSpacerItem* QLayout_virtualbase_spacerItem(void* self) {
 }
 
 const QMetaObject* QLayout_staticMetaObject() { return &QLayout::staticMetaObject; }
-void QLayout_protectedbase_widgetEvent(bool* _dynamic_cast_ok, void* self, QEvent* param1) {
-	VirtualQLayout* self_cast = dynamic_cast<VirtualQLayout*>( (QLayout*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QLayout_protectedbase_widgetEvent(void* self, QEvent* param1) {
+	VirtualQLayout* self_cast = static_cast<VirtualQLayout*>( (QLayout*)(self) );
 	
 	self_cast->widgetEvent(param1);
 
 }
 
-void QLayout_protectedbase_addChildLayout(bool* _dynamic_cast_ok, void* self, QLayout* l) {
-	VirtualQLayout* self_cast = dynamic_cast<VirtualQLayout*>( (QLayout*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QLayout_protectedbase_addChildLayout(void* self, QLayout* l) {
+	VirtualQLayout* self_cast = static_cast<VirtualQLayout*>( (QLayout*)(self) );
 	
 	self_cast->addChildLayout(l);
 
 }
 
-void QLayout_protectedbase_addChildWidget(bool* _dynamic_cast_ok, void* self, QWidget* w) {
-	VirtualQLayout* self_cast = dynamic_cast<VirtualQLayout*>( (QLayout*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QLayout_protectedbase_addChildWidget(void* self, QWidget* w) {
+	VirtualQLayout* self_cast = static_cast<VirtualQLayout*>( (QLayout*)(self) );
 	
 	self_cast->addChildWidget(w);
 
 }
 
-bool QLayout_protectedbase_adoptLayout(bool* _dynamic_cast_ok, void* self, QLayout* layout) {
-	VirtualQLayout* self_cast = dynamic_cast<VirtualQLayout*>( (QLayout*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return false;
-	}
-	
-	*_dynamic_cast_ok = true;
+bool QLayout_protectedbase_adoptLayout(void* self, QLayout* layout) {
+	VirtualQLayout* self_cast = static_cast<VirtualQLayout*>( (QLayout*)(self) );
 	
 	return self_cast->adoptLayout(layout);
 
 }
 
-QRect* QLayout_protectedbase_alignmentRect(bool* _dynamic_cast_ok, const void* self, QRect* param1) {
-	VirtualQLayout* self_cast = dynamic_cast<VirtualQLayout*>( (QLayout*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return nullptr;
-	}
-	
-	*_dynamic_cast_ok = true;
+QRect* QLayout_protectedbase_alignmentRect(const void* self, QRect* param1) {
+	VirtualQLayout* self_cast = static_cast<VirtualQLayout*>( (QLayout*)(self) );
 	
 	return new QRect(self_cast->alignmentRect(*param1));
 
 }
 
-QObject* QLayout_protectedbase_sender(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQLayout* self_cast = dynamic_cast<VirtualQLayout*>( (QLayout*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return nullptr;
-	}
-	
-	*_dynamic_cast_ok = true;
+QObject* QLayout_protectedbase_sender(const void* self) {
+	VirtualQLayout* self_cast = static_cast<VirtualQLayout*>( (QLayout*)(self) );
 	
 	return self_cast->sender();
 
 }
 
-int QLayout_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQLayout* self_cast = dynamic_cast<VirtualQLayout*>( (QLayout*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return 0;
-	}
-	
-	*_dynamic_cast_ok = true;
+int QLayout_protectedbase_senderSignalIndex(const void* self) {
+	VirtualQLayout* self_cast = static_cast<VirtualQLayout*>( (QLayout*)(self) );
 	
 	return self_cast->senderSignalIndex();
 
 }
 
-int QLayout_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal) {
-	VirtualQLayout* self_cast = dynamic_cast<VirtualQLayout*>( (QLayout*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return 0;
-	}
-	
-	*_dynamic_cast_ok = true;
+int QLayout_protectedbase_receivers(const void* self, const char* signal) {
+	VirtualQLayout* self_cast = static_cast<VirtualQLayout*>( (QLayout*)(self) );
 	
 	return self_cast->receivers(signal);
 
 }
 
-bool QLayout_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal) {
-	VirtualQLayout* self_cast = dynamic_cast<VirtualQLayout*>( (QLayout*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return false;
-	}
-	
-	*_dynamic_cast_ok = true;
+bool QLayout_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal) {
+	VirtualQLayout* self_cast = static_cast<VirtualQLayout*>( (QLayout*)(self) );
 	
 	return self_cast->isSignalConnected(*signal);
 

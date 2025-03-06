@@ -222,10 +222,10 @@ public:
 	friend void QMediaPlaylist_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
 
 	// Wrappers to allow calling protected methods:
-	friend QObject* QMediaPlaylist_protectedbase_sender(bool* _dynamic_cast_ok, const void* self);
-	friend int QMediaPlaylist_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
-	friend int QMediaPlaylist_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
-	friend bool QMediaPlaylist_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+	friend QObject* QMediaPlaylist_protectedbase_sender(const void* self);
+	friend int QMediaPlaylist_protectedbase_senderSignalIndex(const void* self);
+	friend int QMediaPlaylist_protectedbase_receivers(const void* self, const char* signal);
+	friend bool QMediaPlaylist_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
 };
 
 QMediaPlaylist* QMediaPlaylist_new(struct QMediaPlaylist_VTable* vtbl) {
@@ -723,53 +723,29 @@ void QMediaPlaylist_virtualbase_disconnectNotify(void* self, QMetaMethod* signal
 }
 
 const QMetaObject* QMediaPlaylist_staticMetaObject() { return &QMediaPlaylist::staticMetaObject; }
-QObject* QMediaPlaylist_protectedbase_sender(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQMediaPlaylist* self_cast = dynamic_cast<VirtualQMediaPlaylist*>( (QMediaPlaylist*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return nullptr;
-	}
-	
-	*_dynamic_cast_ok = true;
+QObject* QMediaPlaylist_protectedbase_sender(const void* self) {
+	VirtualQMediaPlaylist* self_cast = static_cast<VirtualQMediaPlaylist*>( (QMediaPlaylist*)(self) );
 	
 	return self_cast->sender();
 
 }
 
-int QMediaPlaylist_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQMediaPlaylist* self_cast = dynamic_cast<VirtualQMediaPlaylist*>( (QMediaPlaylist*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return 0;
-	}
-	
-	*_dynamic_cast_ok = true;
+int QMediaPlaylist_protectedbase_senderSignalIndex(const void* self) {
+	VirtualQMediaPlaylist* self_cast = static_cast<VirtualQMediaPlaylist*>( (QMediaPlaylist*)(self) );
 	
 	return self_cast->senderSignalIndex();
 
 }
 
-int QMediaPlaylist_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal) {
-	VirtualQMediaPlaylist* self_cast = dynamic_cast<VirtualQMediaPlaylist*>( (QMediaPlaylist*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return 0;
-	}
-	
-	*_dynamic_cast_ok = true;
+int QMediaPlaylist_protectedbase_receivers(const void* self, const char* signal) {
+	VirtualQMediaPlaylist* self_cast = static_cast<VirtualQMediaPlaylist*>( (QMediaPlaylist*)(self) );
 	
 	return self_cast->receivers(signal);
 
 }
 
-bool QMediaPlaylist_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal) {
-	VirtualQMediaPlaylist* self_cast = dynamic_cast<VirtualQMediaPlaylist*>( (QMediaPlaylist*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return false;
-	}
-	
-	*_dynamic_cast_ok = true;
+bool QMediaPlaylist_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal) {
+	VirtualQMediaPlaylist* self_cast = static_cast<VirtualQMediaPlaylist*>( (QMediaPlaylist*)(self) );
 	
 	return self_cast->isSignalConnected(*signal);
 

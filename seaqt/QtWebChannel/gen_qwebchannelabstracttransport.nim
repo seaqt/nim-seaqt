@@ -87,6 +87,10 @@ proc fcQWebChannelAbstractTransport_virtualbase_childEvent(self: pointer, event:
 proc fcQWebChannelAbstractTransport_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QWebChannelAbstractTransport_virtualbase_customEvent".}
 proc fcQWebChannelAbstractTransport_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QWebChannelAbstractTransport_virtualbase_connectNotify".}
 proc fcQWebChannelAbstractTransport_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QWebChannelAbstractTransport_virtualbase_disconnectNotify".}
+proc fcQWebChannelAbstractTransport_protectedbase_sender(self: pointer, ): pointer {.importc: "QWebChannelAbstractTransport_protectedbase_sender".}
+proc fcQWebChannelAbstractTransport_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QWebChannelAbstractTransport_protectedbase_senderSignalIndex".}
+proc fcQWebChannelAbstractTransport_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QWebChannelAbstractTransport_protectedbase_receivers".}
+proc fcQWebChannelAbstractTransport_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QWebChannelAbstractTransport_protectedbase_isSignalConnected".}
 proc fcQWebChannelAbstractTransport_new(vtbl: pointer, ): ptr cQWebChannelAbstractTransport {.importc: "QWebChannelAbstractTransport_new".}
 proc fcQWebChannelAbstractTransport_new2(vtbl: pointer, parent: pointer): ptr cQWebChannelAbstractTransport {.importc: "QWebChannelAbstractTransport_new2".}
 proc fcQWebChannelAbstractTransport_staticMetaObject(): pointer {.importc: "QWebChannelAbstractTransport_staticMetaObject".}
@@ -288,6 +292,18 @@ proc miqt_exec_callback_cQWebChannelAbstractTransport_disconnectNotify(vtbl: poi
   let self = QWebChannelAbstractTransport(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
   vtbl[].disconnectNotify(self, slotval1)
+
+proc sender*(self: gen_qwebchannelabstracttransport_types.QWebChannelAbstractTransport, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQWebChannelAbstractTransport_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qwebchannelabstracttransport_types.QWebChannelAbstractTransport, ): cint =
+  fcQWebChannelAbstractTransport_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qwebchannelabstracttransport_types.QWebChannelAbstractTransport, signal: cstring): cint =
+  fcQWebChannelAbstractTransport_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qwebchannelabstracttransport_types.QWebChannelAbstractTransport, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQWebChannelAbstractTransport_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc create*(T: type gen_qwebchannelabstracttransport_types.QWebChannelAbstractTransport,
     vtbl: ref QWebChannelAbstractTransportVTable = nil): gen_qwebchannelabstracttransport_types.QWebChannelAbstractTransport =

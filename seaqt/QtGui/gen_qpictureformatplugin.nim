@@ -91,6 +91,10 @@ proc fcQPictureFormatPlugin_virtualbase_childEvent(self: pointer, event: pointer
 proc fcQPictureFormatPlugin_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QPictureFormatPlugin_virtualbase_customEvent".}
 proc fcQPictureFormatPlugin_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QPictureFormatPlugin_virtualbase_connectNotify".}
 proc fcQPictureFormatPlugin_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QPictureFormatPlugin_virtualbase_disconnectNotify".}
+proc fcQPictureFormatPlugin_protectedbase_sender(self: pointer, ): pointer {.importc: "QPictureFormatPlugin_protectedbase_sender".}
+proc fcQPictureFormatPlugin_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QPictureFormatPlugin_protectedbase_senderSignalIndex".}
+proc fcQPictureFormatPlugin_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QPictureFormatPlugin_protectedbase_receivers".}
+proc fcQPictureFormatPlugin_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QPictureFormatPlugin_protectedbase_isSignalConnected".}
 proc fcQPictureFormatPlugin_new(vtbl: pointer, ): ptr cQPictureFormatPlugin {.importc: "QPictureFormatPlugin_new".}
 proc fcQPictureFormatPlugin_new2(vtbl: pointer, parent: pointer): ptr cQPictureFormatPlugin {.importc: "QPictureFormatPlugin_new2".}
 proc fcQPictureFormatPlugin_staticMetaObject(): pointer {.importc: "QPictureFormatPlugin_staticMetaObject".}
@@ -320,6 +324,18 @@ proc miqt_exec_callback_cQPictureFormatPlugin_disconnectNotify(vtbl: pointer, se
   let self = QPictureFormatPlugin(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
   vtbl[].disconnectNotify(self, slotval1)
+
+proc sender*(self: gen_qpictureformatplugin_types.QPictureFormatPlugin, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQPictureFormatPlugin_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qpictureformatplugin_types.QPictureFormatPlugin, ): cint =
+  fcQPictureFormatPlugin_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qpictureformatplugin_types.QPictureFormatPlugin, signal: cstring): cint =
+  fcQPictureFormatPlugin_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qpictureformatplugin_types.QPictureFormatPlugin, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQPictureFormatPlugin_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc create*(T: type gen_qpictureformatplugin_types.QPictureFormatPlugin,
     vtbl: ref QPictureFormatPluginVTable = nil): gen_qpictureformatplugin_types.QPictureFormatPlugin =

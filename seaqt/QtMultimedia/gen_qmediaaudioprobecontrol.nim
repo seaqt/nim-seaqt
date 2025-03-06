@@ -38,10 +38,14 @@ import ./gen_qmediaaudioprobecontrol_types
 export gen_qmediaaudioprobecontrol_types
 
 import
+  ../QtCore/gen_qmetaobject_types,
+  ../QtCore/gen_qobject_types,
   ../QtCore/gen_qobjectdefs_types,
   ./gen_qaudiobuffer_types,
   ./gen_qmediacontrol
 export
+  gen_qmetaobject_types,
+  gen_qobject_types,
   gen_qobjectdefs_types,
   gen_qaudiobuffer_types,
   gen_qmediacontrol
@@ -61,6 +65,10 @@ proc fcQMediaAudioProbeControl_tr2(s: cstring, c: cstring): struct_miqt_string {
 proc fcQMediaAudioProbeControl_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QMediaAudioProbeControl_tr3".}
 proc fcQMediaAudioProbeControl_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QMediaAudioProbeControl_trUtf82".}
 proc fcQMediaAudioProbeControl_trUtf83(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QMediaAudioProbeControl_trUtf83".}
+proc fcQMediaAudioProbeControl_protectedbase_sender(self: pointer, ): pointer {.importc: "QMediaAudioProbeControl_protectedbase_sender".}
+proc fcQMediaAudioProbeControl_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QMediaAudioProbeControl_protectedbase_senderSignalIndex".}
+proc fcQMediaAudioProbeControl_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QMediaAudioProbeControl_protectedbase_receivers".}
+proc fcQMediaAudioProbeControl_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QMediaAudioProbeControl_protectedbase_isSignalConnected".}
 proc fcQMediaAudioProbeControl_staticMetaObject(): pointer {.importc: "QMediaAudioProbeControl_staticMetaObject".}
 proc fcQMediaAudioProbeControl_delete(self: pointer) {.importc: "QMediaAudioProbeControl_delete".}
 
@@ -146,6 +154,18 @@ proc trUtf8*(_: type gen_qmediaaudioprobecontrol_types.QMediaAudioProbeControl, 
   let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
   c_free(v_ms.data)
   vx_ret
+
+proc sender*(self: gen_qmediaaudioprobecontrol_types.QMediaAudioProbeControl, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQMediaAudioProbeControl_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qmediaaudioprobecontrol_types.QMediaAudioProbeControl, ): cint =
+  fcQMediaAudioProbeControl_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qmediaaudioprobecontrol_types.QMediaAudioProbeControl, signal: cstring): cint =
+  fcQMediaAudioProbeControl_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qmediaaudioprobecontrol_types.QMediaAudioProbeControl, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQMediaAudioProbeControl_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc staticMetaObject*(_: type gen_qmediaaudioprobecontrol_types.QMediaAudioProbeControl): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQMediaAudioProbeControl_staticMetaObject())

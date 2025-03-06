@@ -255,6 +255,15 @@ proc fcQWebView_virtualbase_childEvent(self: pointer, event: pointer): void {.im
 proc fcQWebView_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QWebView_virtualbase_customEvent".}
 proc fcQWebView_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QWebView_virtualbase_connectNotify".}
 proc fcQWebView_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QWebView_virtualbase_disconnectNotify".}
+proc fcQWebView_protectedbase_updateMicroFocus(self: pointer, ): void {.importc: "QWebView_protectedbase_updateMicroFocus".}
+proc fcQWebView_protectedbase_create(self: pointer, ): void {.importc: "QWebView_protectedbase_create".}
+proc fcQWebView_protectedbase_destroy(self: pointer, ): void {.importc: "QWebView_protectedbase_destroy".}
+proc fcQWebView_protectedbase_focusNextChild(self: pointer, ): bool {.importc: "QWebView_protectedbase_focusNextChild".}
+proc fcQWebView_protectedbase_focusPreviousChild(self: pointer, ): bool {.importc: "QWebView_protectedbase_focusPreviousChild".}
+proc fcQWebView_protectedbase_sender(self: pointer, ): pointer {.importc: "QWebView_protectedbase_sender".}
+proc fcQWebView_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QWebView_protectedbase_senderSignalIndex".}
+proc fcQWebView_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QWebView_protectedbase_receivers".}
+proc fcQWebView_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QWebView_protectedbase_isSignalConnected".}
 proc fcQWebView_new(vtbl: pointer, parent: pointer): ptr cQWebView {.importc: "QWebView_new".}
 proc fcQWebView_new2(vtbl: pointer, ): ptr cQWebView {.importc: "QWebView_new2".}
 proc fcQWebView_staticMetaObject(): pointer {.importc: "QWebView_staticMetaObject".}
@@ -1201,6 +1210,33 @@ proc miqt_exec_callback_cQWebView_disconnectNotify(vtbl: pointer, self: pointer,
   let self = QWebView(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
   vtbl[].disconnectNotify(self, slotval1)
+
+proc updateMicroFocus*(self: gen_qwebview_types.QWebView, ): void =
+  fcQWebView_protectedbase_updateMicroFocus(self.h)
+
+proc create*(self: gen_qwebview_types.QWebView, ): void =
+  fcQWebView_protectedbase_create(self.h)
+
+proc destroy*(self: gen_qwebview_types.QWebView, ): void =
+  fcQWebView_protectedbase_destroy(self.h)
+
+proc focusNextChild*(self: gen_qwebview_types.QWebView, ): bool =
+  fcQWebView_protectedbase_focusNextChild(self.h)
+
+proc focusPreviousChild*(self: gen_qwebview_types.QWebView, ): bool =
+  fcQWebView_protectedbase_focusPreviousChild(self.h)
+
+proc sender*(self: gen_qwebview_types.QWebView, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQWebView_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qwebview_types.QWebView, ): cint =
+  fcQWebView_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qwebview_types.QWebView, signal: cstring): cint =
+  fcQWebView_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qwebview_types.QWebView, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQWebView_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc create*(T: type gen_qwebview_types.QWebView,
     parent: gen_qwidget_types.QWidget,

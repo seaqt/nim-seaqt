@@ -93,6 +93,10 @@ proc fcQKeyEventTransition_virtualbase_childEvent(self: pointer, event: pointer)
 proc fcQKeyEventTransition_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QKeyEventTransition_virtualbase_customEvent".}
 proc fcQKeyEventTransition_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QKeyEventTransition_virtualbase_connectNotify".}
 proc fcQKeyEventTransition_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QKeyEventTransition_virtualbase_disconnectNotify".}
+proc fcQKeyEventTransition_protectedbase_sender(self: pointer, ): pointer {.importc: "QKeyEventTransition_protectedbase_sender".}
+proc fcQKeyEventTransition_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QKeyEventTransition_protectedbase_senderSignalIndex".}
+proc fcQKeyEventTransition_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QKeyEventTransition_protectedbase_receivers".}
+proc fcQKeyEventTransition_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QKeyEventTransition_protectedbase_isSignalConnected".}
 proc fcQKeyEventTransition_new(vtbl: pointer, ): ptr cQKeyEventTransition {.importc: "QKeyEventTransition_new".}
 proc fcQKeyEventTransition_new2(vtbl: pointer, objectVal: pointer, typeVal: cint, key: cint): ptr cQKeyEventTransition {.importc: "QKeyEventTransition_new2".}
 proc fcQKeyEventTransition_new3(vtbl: pointer, sourceState: pointer): ptr cQKeyEventTransition {.importc: "QKeyEventTransition_new3".}
@@ -298,6 +302,18 @@ proc miqt_exec_callback_cQKeyEventTransition_disconnectNotify(vtbl: pointer, sel
   let self = QKeyEventTransition(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
   vtbl[].disconnectNotify(self, slotval1)
+
+proc sender*(self: gen_qkeyeventtransition_types.QKeyEventTransition, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQKeyEventTransition_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qkeyeventtransition_types.QKeyEventTransition, ): cint =
+  fcQKeyEventTransition_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qkeyeventtransition_types.QKeyEventTransition, signal: cstring): cint =
+  fcQKeyEventTransition_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qkeyeventtransition_types.QKeyEventTransition, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQKeyEventTransition_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc create*(T: type gen_qkeyeventtransition_types.QKeyEventTransition,
     vtbl: ref QKeyEventTransitionVTable = nil): gen_qkeyeventtransition_types.QKeyEventTransition =

@@ -139,6 +139,10 @@ proc fcQStateMachine_virtualbase_childEvent(self: pointer, event: pointer): void
 proc fcQStateMachine_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QStateMachine_virtualbase_customEvent".}
 proc fcQStateMachine_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QStateMachine_virtualbase_connectNotify".}
 proc fcQStateMachine_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QStateMachine_virtualbase_disconnectNotify".}
+proc fcQStateMachine_protectedbase_sender(self: pointer, ): pointer {.importc: "QStateMachine_protectedbase_sender".}
+proc fcQStateMachine_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QStateMachine_protectedbase_senderSignalIndex".}
+proc fcQStateMachine_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QStateMachine_protectedbase_receivers".}
+proc fcQStateMachine_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QStateMachine_protectedbase_isSignalConnected".}
 proc fcQStateMachine_new(vtbl: pointer, ): ptr cQStateMachine {.importc: "QStateMachine_new".}
 proc fcQStateMachine_new2(vtbl: pointer, childMode: cint): ptr cQStateMachine {.importc: "QStateMachine_new2".}
 proc fcQStateMachine_new3(vtbl: pointer, parent: pointer): ptr cQStateMachine {.importc: "QStateMachine_new3".}
@@ -483,6 +487,18 @@ proc miqt_exec_callback_cQStateMachine_disconnectNotify(vtbl: pointer, self: poi
   let self = QStateMachine(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
   vtbl[].disconnectNotify(self, slotval1)
+
+proc sender*(self: gen_qstatemachine_types.QStateMachine, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQStateMachine_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qstatemachine_types.QStateMachine, ): cint =
+  fcQStateMachine_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qstatemachine_types.QStateMachine, signal: cstring): cint =
+  fcQStateMachine_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qstatemachine_types.QStateMachine, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQStateMachine_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc create*(T: type gen_qstatemachine_types.QStateMachine,
     vtbl: ref QStateMachineVTable = nil): gen_qstatemachine_types.QStateMachine =

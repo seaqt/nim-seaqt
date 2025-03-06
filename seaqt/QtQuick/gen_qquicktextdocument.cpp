@@ -187,10 +187,10 @@ public:
 	friend void QQuickTextDocument_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
 
 	// Wrappers to allow calling protected methods:
-	friend QObject* QQuickTextDocument_protectedbase_sender(bool* _dynamic_cast_ok, const void* self);
-	friend int QQuickTextDocument_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
-	friend int QQuickTextDocument_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
-	friend bool QQuickTextDocument_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+	friend QObject* QQuickTextDocument_protectedbase_sender(const void* self);
+	friend int QQuickTextDocument_protectedbase_senderSignalIndex(const void* self);
+	friend int QQuickTextDocument_protectedbase_receivers(const void* self, const char* signal);
+	friend bool QQuickTextDocument_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
 };
 
 QQuickTextDocument* QQuickTextDocument_new(struct QQuickTextDocument_VTable* vtbl, QQuickItem* parent) {
@@ -344,53 +344,29 @@ void QQuickTextDocument_virtualbase_disconnectNotify(void* self, QMetaMethod* si
 }
 
 const QMetaObject* QQuickTextDocument_staticMetaObject() { return &QQuickTextDocument::staticMetaObject; }
-QObject* QQuickTextDocument_protectedbase_sender(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQQuickTextDocument* self_cast = dynamic_cast<VirtualQQuickTextDocument*>( (QQuickTextDocument*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return nullptr;
-	}
-	
-	*_dynamic_cast_ok = true;
+QObject* QQuickTextDocument_protectedbase_sender(const void* self) {
+	VirtualQQuickTextDocument* self_cast = static_cast<VirtualQQuickTextDocument*>( (QQuickTextDocument*)(self) );
 	
 	return self_cast->sender();
 
 }
 
-int QQuickTextDocument_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQQuickTextDocument* self_cast = dynamic_cast<VirtualQQuickTextDocument*>( (QQuickTextDocument*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return 0;
-	}
-	
-	*_dynamic_cast_ok = true;
+int QQuickTextDocument_protectedbase_senderSignalIndex(const void* self) {
+	VirtualQQuickTextDocument* self_cast = static_cast<VirtualQQuickTextDocument*>( (QQuickTextDocument*)(self) );
 	
 	return self_cast->senderSignalIndex();
 
 }
 
-int QQuickTextDocument_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal) {
-	VirtualQQuickTextDocument* self_cast = dynamic_cast<VirtualQQuickTextDocument*>( (QQuickTextDocument*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return 0;
-	}
-	
-	*_dynamic_cast_ok = true;
+int QQuickTextDocument_protectedbase_receivers(const void* self, const char* signal) {
+	VirtualQQuickTextDocument* self_cast = static_cast<VirtualQQuickTextDocument*>( (QQuickTextDocument*)(self) );
 	
 	return self_cast->receivers(signal);
 
 }
 
-bool QQuickTextDocument_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal) {
-	VirtualQQuickTextDocument* self_cast = dynamic_cast<VirtualQQuickTextDocument*>( (QQuickTextDocument*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return false;
-	}
-	
-	*_dynamic_cast_ok = true;
+bool QQuickTextDocument_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal) {
+	VirtualQQuickTextDocument* self_cast = static_cast<VirtualQQuickTextDocument*>( (QQuickTextDocument*)(self) );
 	
 	return self_cast->isSignalConnected(*signal);
 

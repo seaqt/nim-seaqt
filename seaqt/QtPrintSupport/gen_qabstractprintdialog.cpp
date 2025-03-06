@@ -889,16 +889,16 @@ public:
 	friend void QAbstractPrintDialog_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
 
 	// Wrappers to allow calling protected methods:
-	friend void QAbstractPrintDialog_protectedbase_adjustPosition(bool* _dynamic_cast_ok, void* self, QWidget* param1);
-	friend void QAbstractPrintDialog_protectedbase_updateMicroFocus(bool* _dynamic_cast_ok, void* self);
-	friend void QAbstractPrintDialog_protectedbase_create(bool* _dynamic_cast_ok, void* self);
-	friend void QAbstractPrintDialog_protectedbase_destroy(bool* _dynamic_cast_ok, void* self);
-	friend bool QAbstractPrintDialog_protectedbase_focusNextChild(bool* _dynamic_cast_ok, void* self);
-	friend bool QAbstractPrintDialog_protectedbase_focusPreviousChild(bool* _dynamic_cast_ok, void* self);
-	friend QObject* QAbstractPrintDialog_protectedbase_sender(bool* _dynamic_cast_ok, const void* self);
-	friend int QAbstractPrintDialog_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
-	friend int QAbstractPrintDialog_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
-	friend bool QAbstractPrintDialog_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+	friend void QAbstractPrintDialog_protectedbase_adjustPosition(void* self, QWidget* param1);
+	friend void QAbstractPrintDialog_protectedbase_updateMicroFocus(void* self);
+	friend void QAbstractPrintDialog_protectedbase_create(void* self);
+	friend void QAbstractPrintDialog_protectedbase_destroy(void* self);
+	friend bool QAbstractPrintDialog_protectedbase_focusNextChild(void* self);
+	friend bool QAbstractPrintDialog_protectedbase_focusPreviousChild(void* self);
+	friend QObject* QAbstractPrintDialog_protectedbase_sender(const void* self);
+	friend int QAbstractPrintDialog_protectedbase_senderSignalIndex(const void* self);
+	friend int QAbstractPrintDialog_protectedbase_receivers(const void* self, const char* signal);
+	friend bool QAbstractPrintDialog_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
 };
 
 QAbstractPrintDialog* QAbstractPrintDialog_new(struct QAbstractPrintDialog_VTable* vtbl, QPrinter* printer) {
@@ -1387,131 +1387,71 @@ void QAbstractPrintDialog_virtualbase_disconnectNotify(void* self, QMetaMethod* 
 }
 
 const QMetaObject* QAbstractPrintDialog_staticMetaObject() { return &QAbstractPrintDialog::staticMetaObject; }
-void QAbstractPrintDialog_protectedbase_adjustPosition(bool* _dynamic_cast_ok, void* self, QWidget* param1) {
-	VirtualQAbstractPrintDialog* self_cast = dynamic_cast<VirtualQAbstractPrintDialog*>( (QAbstractPrintDialog*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QAbstractPrintDialog_protectedbase_adjustPosition(void* self, QWidget* param1) {
+	VirtualQAbstractPrintDialog* self_cast = static_cast<VirtualQAbstractPrintDialog*>( (QAbstractPrintDialog*)(self) );
 	
 	self_cast->adjustPosition(param1);
 
 }
 
-void QAbstractPrintDialog_protectedbase_updateMicroFocus(bool* _dynamic_cast_ok, void* self) {
-	VirtualQAbstractPrintDialog* self_cast = dynamic_cast<VirtualQAbstractPrintDialog*>( (QAbstractPrintDialog*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QAbstractPrintDialog_protectedbase_updateMicroFocus(void* self) {
+	VirtualQAbstractPrintDialog* self_cast = static_cast<VirtualQAbstractPrintDialog*>( (QAbstractPrintDialog*)(self) );
 	
 	self_cast->updateMicroFocus();
 
 }
 
-void QAbstractPrintDialog_protectedbase_create(bool* _dynamic_cast_ok, void* self) {
-	VirtualQAbstractPrintDialog* self_cast = dynamic_cast<VirtualQAbstractPrintDialog*>( (QAbstractPrintDialog*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QAbstractPrintDialog_protectedbase_create(void* self) {
+	VirtualQAbstractPrintDialog* self_cast = static_cast<VirtualQAbstractPrintDialog*>( (QAbstractPrintDialog*)(self) );
 	
 	self_cast->create();
 
 }
 
-void QAbstractPrintDialog_protectedbase_destroy(bool* _dynamic_cast_ok, void* self) {
-	VirtualQAbstractPrintDialog* self_cast = dynamic_cast<VirtualQAbstractPrintDialog*>( (QAbstractPrintDialog*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QAbstractPrintDialog_protectedbase_destroy(void* self) {
+	VirtualQAbstractPrintDialog* self_cast = static_cast<VirtualQAbstractPrintDialog*>( (QAbstractPrintDialog*)(self) );
 	
 	self_cast->destroy();
 
 }
 
-bool QAbstractPrintDialog_protectedbase_focusNextChild(bool* _dynamic_cast_ok, void* self) {
-	VirtualQAbstractPrintDialog* self_cast = dynamic_cast<VirtualQAbstractPrintDialog*>( (QAbstractPrintDialog*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return false;
-	}
-	
-	*_dynamic_cast_ok = true;
+bool QAbstractPrintDialog_protectedbase_focusNextChild(void* self) {
+	VirtualQAbstractPrintDialog* self_cast = static_cast<VirtualQAbstractPrintDialog*>( (QAbstractPrintDialog*)(self) );
 	
 	return self_cast->focusNextChild();
 
 }
 
-bool QAbstractPrintDialog_protectedbase_focusPreviousChild(bool* _dynamic_cast_ok, void* self) {
-	VirtualQAbstractPrintDialog* self_cast = dynamic_cast<VirtualQAbstractPrintDialog*>( (QAbstractPrintDialog*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return false;
-	}
-	
-	*_dynamic_cast_ok = true;
+bool QAbstractPrintDialog_protectedbase_focusPreviousChild(void* self) {
+	VirtualQAbstractPrintDialog* self_cast = static_cast<VirtualQAbstractPrintDialog*>( (QAbstractPrintDialog*)(self) );
 	
 	return self_cast->focusPreviousChild();
 
 }
 
-QObject* QAbstractPrintDialog_protectedbase_sender(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQAbstractPrintDialog* self_cast = dynamic_cast<VirtualQAbstractPrintDialog*>( (QAbstractPrintDialog*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return nullptr;
-	}
-	
-	*_dynamic_cast_ok = true;
+QObject* QAbstractPrintDialog_protectedbase_sender(const void* self) {
+	VirtualQAbstractPrintDialog* self_cast = static_cast<VirtualQAbstractPrintDialog*>( (QAbstractPrintDialog*)(self) );
 	
 	return self_cast->sender();
 
 }
 
-int QAbstractPrintDialog_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQAbstractPrintDialog* self_cast = dynamic_cast<VirtualQAbstractPrintDialog*>( (QAbstractPrintDialog*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return 0;
-	}
-	
-	*_dynamic_cast_ok = true;
+int QAbstractPrintDialog_protectedbase_senderSignalIndex(const void* self) {
+	VirtualQAbstractPrintDialog* self_cast = static_cast<VirtualQAbstractPrintDialog*>( (QAbstractPrintDialog*)(self) );
 	
 	return self_cast->senderSignalIndex();
 
 }
 
-int QAbstractPrintDialog_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal) {
-	VirtualQAbstractPrintDialog* self_cast = dynamic_cast<VirtualQAbstractPrintDialog*>( (QAbstractPrintDialog*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return 0;
-	}
-	
-	*_dynamic_cast_ok = true;
+int QAbstractPrintDialog_protectedbase_receivers(const void* self, const char* signal) {
+	VirtualQAbstractPrintDialog* self_cast = static_cast<VirtualQAbstractPrintDialog*>( (QAbstractPrintDialog*)(self) );
 	
 	return self_cast->receivers(signal);
 
 }
 
-bool QAbstractPrintDialog_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal) {
-	VirtualQAbstractPrintDialog* self_cast = dynamic_cast<VirtualQAbstractPrintDialog*>( (QAbstractPrintDialog*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return false;
-	}
-	
-	*_dynamic_cast_ok = true;
+bool QAbstractPrintDialog_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal) {
+	VirtualQAbstractPrintDialog* self_cast = static_cast<VirtualQAbstractPrintDialog*>( (QAbstractPrintDialog*)(self) );
 	
 	return self_cast->isSignalConnected(*signal);
 

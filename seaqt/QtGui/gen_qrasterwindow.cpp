@@ -629,10 +629,10 @@ public:
 	friend QPainter* QRasterWindow_virtualbase_sharedPainter(const void* self);
 
 	// Wrappers to allow calling protected methods:
-	friend QObject* QRasterWindow_protectedbase_sender(bool* _dynamic_cast_ok, const void* self);
-	friend int QRasterWindow_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
-	friend int QRasterWindow_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
-	friend bool QRasterWindow_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+	friend QObject* QRasterWindow_protectedbase_sender(const void* self);
+	friend int QRasterWindow_protectedbase_senderSignalIndex(const void* self);
+	friend int QRasterWindow_protectedbase_receivers(const void* self, const char* signal);
+	friend bool QRasterWindow_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
 };
 
 QRasterWindow* QRasterWindow_new(struct QRasterWindow_VTable* vtbl) {
@@ -956,53 +956,29 @@ QPainter* QRasterWindow_virtualbase_sharedPainter(const void* self) {
 }
 
 const QMetaObject* QRasterWindow_staticMetaObject() { return &QRasterWindow::staticMetaObject; }
-QObject* QRasterWindow_protectedbase_sender(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQRasterWindow* self_cast = dynamic_cast<VirtualQRasterWindow*>( (QRasterWindow*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return nullptr;
-	}
-	
-	*_dynamic_cast_ok = true;
+QObject* QRasterWindow_protectedbase_sender(const void* self) {
+	VirtualQRasterWindow* self_cast = static_cast<VirtualQRasterWindow*>( (QRasterWindow*)(self) );
 	
 	return self_cast->sender();
 
 }
 
-int QRasterWindow_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQRasterWindow* self_cast = dynamic_cast<VirtualQRasterWindow*>( (QRasterWindow*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return 0;
-	}
-	
-	*_dynamic_cast_ok = true;
+int QRasterWindow_protectedbase_senderSignalIndex(const void* self) {
+	VirtualQRasterWindow* self_cast = static_cast<VirtualQRasterWindow*>( (QRasterWindow*)(self) );
 	
 	return self_cast->senderSignalIndex();
 
 }
 
-int QRasterWindow_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal) {
-	VirtualQRasterWindow* self_cast = dynamic_cast<VirtualQRasterWindow*>( (QRasterWindow*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return 0;
-	}
-	
-	*_dynamic_cast_ok = true;
+int QRasterWindow_protectedbase_receivers(const void* self, const char* signal) {
+	VirtualQRasterWindow* self_cast = static_cast<VirtualQRasterWindow*>( (QRasterWindow*)(self) );
 	
 	return self_cast->receivers(signal);
 
 }
 
-bool QRasterWindow_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal) {
-	VirtualQRasterWindow* self_cast = dynamic_cast<VirtualQRasterWindow*>( (QRasterWindow*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return false;
-	}
-	
-	*_dynamic_cast_ok = true;
+bool QRasterWindow_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal) {
+	VirtualQRasterWindow* self_cast = static_cast<VirtualQRasterWindow*>( (QRasterWindow*)(self) );
 	
 	return self_cast->isSignalConnected(*signal);
 

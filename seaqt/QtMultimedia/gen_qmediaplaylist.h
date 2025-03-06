@@ -140,10 +140,10 @@ void QMediaPlaylist_virtualbase_childEvent(void* self, QChildEvent* event);
 void QMediaPlaylist_virtualbase_customEvent(void* self, QEvent* event);
 void QMediaPlaylist_virtualbase_connectNotify(void* self, QMetaMethod* signal);
 void QMediaPlaylist_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
-QObject* QMediaPlaylist_protectedbase_sender(bool* _dynamic_cast_ok, const void* self);
-int QMediaPlaylist_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
-int QMediaPlaylist_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
-bool QMediaPlaylist_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+QObject* QMediaPlaylist_protectedbase_sender(const void* self);
+int QMediaPlaylist_protectedbase_senderSignalIndex(const void* self);
+int QMediaPlaylist_protectedbase_receivers(const void* self, const char* signal);
+bool QMediaPlaylist_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
 const QMetaObject* QMediaPlaylist_staticMetaObject();
 void QMediaPlaylist_delete(QMediaPlaylist* self);
 

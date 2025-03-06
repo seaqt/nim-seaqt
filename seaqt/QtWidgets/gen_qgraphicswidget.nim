@@ -298,6 +298,16 @@ proc fcQGraphicsWidget_virtualbase_inputMethodQuery(self: pointer, query: cint):
 proc fcQGraphicsWidget_virtualbase_supportsExtension(self: pointer, extension: cint): bool {.importc: "QGraphicsWidget_virtualbase_supportsExtension".}
 proc fcQGraphicsWidget_virtualbase_setExtension(self: pointer, extension: cint, variant: pointer): void {.importc: "QGraphicsWidget_virtualbase_setExtension".}
 proc fcQGraphicsWidget_virtualbase_extension(self: pointer, variant: pointer): pointer {.importc: "QGraphicsWidget_virtualbase_extension".}
+proc fcQGraphicsWidget_protectedbase_updateMicroFocus(self: pointer, ): void {.importc: "QGraphicsWidget_protectedbase_updateMicroFocus".}
+proc fcQGraphicsWidget_protectedbase_sender(self: pointer, ): pointer {.importc: "QGraphicsWidget_protectedbase_sender".}
+proc fcQGraphicsWidget_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QGraphicsWidget_protectedbase_senderSignalIndex".}
+proc fcQGraphicsWidget_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QGraphicsWidget_protectedbase_receivers".}
+proc fcQGraphicsWidget_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QGraphicsWidget_protectedbase_isSignalConnected".}
+proc fcQGraphicsWidget_protectedbase_addToIndex(self: pointer, ): void {.importc: "QGraphicsWidget_protectedbase_addToIndex".}
+proc fcQGraphicsWidget_protectedbase_removeFromIndex(self: pointer, ): void {.importc: "QGraphicsWidget_protectedbase_removeFromIndex".}
+proc fcQGraphicsWidget_protectedbase_prepareGeometryChange(self: pointer, ): void {.importc: "QGraphicsWidget_protectedbase_prepareGeometryChange".}
+proc fcQGraphicsWidget_protectedbase_setGraphicsItem(self: pointer, item: pointer): void {.importc: "QGraphicsWidget_protectedbase_setGraphicsItem".}
+proc fcQGraphicsWidget_protectedbase_setOwnedByLayout(self: pointer, ownedByLayout: bool): void {.importc: "QGraphicsWidget_protectedbase_setOwnedByLayout".}
 proc fcQGraphicsWidget_new(vtbl: pointer, ): ptr cQGraphicsWidget {.importc: "QGraphicsWidget_new".}
 proc fcQGraphicsWidget_new2(vtbl: pointer, parent: pointer): ptr cQGraphicsWidget {.importc: "QGraphicsWidget_new2".}
 proc fcQGraphicsWidget_new3(vtbl: pointer, parent: pointer, wFlags: cint): ptr cQGraphicsWidget {.importc: "QGraphicsWidget_new3".}
@@ -1348,6 +1358,36 @@ proc miqt_exec_callback_cQGraphicsWidget_extension(vtbl: pointer, self: pointer,
   let slotval1 = gen_qvariant_types.QVariant(h: variant)
   var virtualReturn = vtbl[].extension(self, slotval1)
   virtualReturn.h
+
+proc updateMicroFocus*(self: gen_qgraphicswidget_types.QGraphicsWidget, ): void =
+  fcQGraphicsWidget_protectedbase_updateMicroFocus(self.h)
+
+proc sender*(self: gen_qgraphicswidget_types.QGraphicsWidget, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQGraphicsWidget_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qgraphicswidget_types.QGraphicsWidget, ): cint =
+  fcQGraphicsWidget_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qgraphicswidget_types.QGraphicsWidget, signal: cstring): cint =
+  fcQGraphicsWidget_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qgraphicswidget_types.QGraphicsWidget, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQGraphicsWidget_protectedbase_isSignalConnected(self.h, signal.h)
+
+proc addToIndex*(self: gen_qgraphicswidget_types.QGraphicsWidget, ): void =
+  fcQGraphicsWidget_protectedbase_addToIndex(self.h)
+
+proc removeFromIndex*(self: gen_qgraphicswidget_types.QGraphicsWidget, ): void =
+  fcQGraphicsWidget_protectedbase_removeFromIndex(self.h)
+
+proc prepareGeometryChange*(self: gen_qgraphicswidget_types.QGraphicsWidget, ): void =
+  fcQGraphicsWidget_protectedbase_prepareGeometryChange(self.h)
+
+proc setGraphicsItem*(self: gen_qgraphicswidget_types.QGraphicsWidget, item: gen_qgraphicsitem_types.QGraphicsItem): void =
+  fcQGraphicsWidget_protectedbase_setGraphicsItem(self.h, item.h)
+
+proc setOwnedByLayout*(self: gen_qgraphicswidget_types.QGraphicsWidget, ownedByLayout: bool): void =
+  fcQGraphicsWidget_protectedbase_setOwnedByLayout(self.h, ownedByLayout)
 
 proc create*(T: type gen_qgraphicswidget_types.QGraphicsWidget,
     vtbl: ref QGraphicsWidgetVTable = nil): gen_qgraphicswidget_types.QGraphicsWidget =

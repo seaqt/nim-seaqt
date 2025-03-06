@@ -751,14 +751,14 @@ public:
 	friend QVariant* QGraphicsSvgItem_virtualbase_extension(const void* self, QVariant* variant);
 
 	// Wrappers to allow calling protected methods:
-	friend void QGraphicsSvgItem_protectedbase_updateMicroFocus(bool* _dynamic_cast_ok, void* self);
-	friend QObject* QGraphicsSvgItem_protectedbase_sender(bool* _dynamic_cast_ok, const void* self);
-	friend int QGraphicsSvgItem_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
-	friend int QGraphicsSvgItem_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
-	friend bool QGraphicsSvgItem_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
-	friend void QGraphicsSvgItem_protectedbase_addToIndex(bool* _dynamic_cast_ok, void* self);
-	friend void QGraphicsSvgItem_protectedbase_removeFromIndex(bool* _dynamic_cast_ok, void* self);
-	friend void QGraphicsSvgItem_protectedbase_prepareGeometryChange(bool* _dynamic_cast_ok, void* self);
+	friend void QGraphicsSvgItem_protectedbase_updateMicroFocus(void* self);
+	friend QObject* QGraphicsSvgItem_protectedbase_sender(const void* self);
+	friend int QGraphicsSvgItem_protectedbase_senderSignalIndex(const void* self);
+	friend int QGraphicsSvgItem_protectedbase_receivers(const void* self, const char* signal);
+	friend bool QGraphicsSvgItem_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
+	friend void QGraphicsSvgItem_protectedbase_addToIndex(void* self);
+	friend void QGraphicsSvgItem_protectedbase_removeFromIndex(void* self);
+	friend void QGraphicsSvgItem_protectedbase_prepareGeometryChange(void* self);
 };
 
 QGraphicsSvgItem* QGraphicsSvgItem_new(struct QGraphicsSvgItem_VTable* vtbl) {
@@ -1184,105 +1184,57 @@ QVariant* QGraphicsSvgItem_virtualbase_extension(const void* self, QVariant* var
 }
 
 const QMetaObject* QGraphicsSvgItem_staticMetaObject() { return &QGraphicsSvgItem::staticMetaObject; }
-void QGraphicsSvgItem_protectedbase_updateMicroFocus(bool* _dynamic_cast_ok, void* self) {
-	VirtualQGraphicsSvgItem* self_cast = dynamic_cast<VirtualQGraphicsSvgItem*>( (QGraphicsSvgItem*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QGraphicsSvgItem_protectedbase_updateMicroFocus(void* self) {
+	VirtualQGraphicsSvgItem* self_cast = static_cast<VirtualQGraphicsSvgItem*>( (QGraphicsSvgItem*)(self) );
 	
 	self_cast->updateMicroFocus();
 
 }
 
-QObject* QGraphicsSvgItem_protectedbase_sender(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQGraphicsSvgItem* self_cast = dynamic_cast<VirtualQGraphicsSvgItem*>( (QGraphicsSvgItem*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return nullptr;
-	}
-	
-	*_dynamic_cast_ok = true;
+QObject* QGraphicsSvgItem_protectedbase_sender(const void* self) {
+	VirtualQGraphicsSvgItem* self_cast = static_cast<VirtualQGraphicsSvgItem*>( (QGraphicsSvgItem*)(self) );
 	
 	return self_cast->sender();
 
 }
 
-int QGraphicsSvgItem_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQGraphicsSvgItem* self_cast = dynamic_cast<VirtualQGraphicsSvgItem*>( (QGraphicsSvgItem*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return 0;
-	}
-	
-	*_dynamic_cast_ok = true;
+int QGraphicsSvgItem_protectedbase_senderSignalIndex(const void* self) {
+	VirtualQGraphicsSvgItem* self_cast = static_cast<VirtualQGraphicsSvgItem*>( (QGraphicsSvgItem*)(self) );
 	
 	return self_cast->senderSignalIndex();
 
 }
 
-int QGraphicsSvgItem_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal) {
-	VirtualQGraphicsSvgItem* self_cast = dynamic_cast<VirtualQGraphicsSvgItem*>( (QGraphicsSvgItem*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return 0;
-	}
-	
-	*_dynamic_cast_ok = true;
+int QGraphicsSvgItem_protectedbase_receivers(const void* self, const char* signal) {
+	VirtualQGraphicsSvgItem* self_cast = static_cast<VirtualQGraphicsSvgItem*>( (QGraphicsSvgItem*)(self) );
 	
 	return self_cast->receivers(signal);
 
 }
 
-bool QGraphicsSvgItem_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal) {
-	VirtualQGraphicsSvgItem* self_cast = dynamic_cast<VirtualQGraphicsSvgItem*>( (QGraphicsSvgItem*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return false;
-	}
-	
-	*_dynamic_cast_ok = true;
+bool QGraphicsSvgItem_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal) {
+	VirtualQGraphicsSvgItem* self_cast = static_cast<VirtualQGraphicsSvgItem*>( (QGraphicsSvgItem*)(self) );
 	
 	return self_cast->isSignalConnected(*signal);
 
 }
 
-void QGraphicsSvgItem_protectedbase_addToIndex(bool* _dynamic_cast_ok, void* self) {
-	VirtualQGraphicsSvgItem* self_cast = dynamic_cast<VirtualQGraphicsSvgItem*>( (QGraphicsSvgItem*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QGraphicsSvgItem_protectedbase_addToIndex(void* self) {
+	VirtualQGraphicsSvgItem* self_cast = static_cast<VirtualQGraphicsSvgItem*>( (QGraphicsSvgItem*)(self) );
 	
 	self_cast->addToIndex();
 
 }
 
-void QGraphicsSvgItem_protectedbase_removeFromIndex(bool* _dynamic_cast_ok, void* self) {
-	VirtualQGraphicsSvgItem* self_cast = dynamic_cast<VirtualQGraphicsSvgItem*>( (QGraphicsSvgItem*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QGraphicsSvgItem_protectedbase_removeFromIndex(void* self) {
+	VirtualQGraphicsSvgItem* self_cast = static_cast<VirtualQGraphicsSvgItem*>( (QGraphicsSvgItem*)(self) );
 	
 	self_cast->removeFromIndex();
 
 }
 
-void QGraphicsSvgItem_protectedbase_prepareGeometryChange(bool* _dynamic_cast_ok, void* self) {
-	VirtualQGraphicsSvgItem* self_cast = dynamic_cast<VirtualQGraphicsSvgItem*>( (QGraphicsSvgItem*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QGraphicsSvgItem_protectedbase_prepareGeometryChange(void* self) {
+	VirtualQGraphicsSvgItem* self_cast = static_cast<VirtualQGraphicsSvgItem*>( (QGraphicsSvgItem*)(self) );
 	
 	self_cast->prepareGeometryChange();
 

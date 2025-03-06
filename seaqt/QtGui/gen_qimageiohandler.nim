@@ -183,6 +183,10 @@ proc fcQImageIOPlugin_virtualbase_childEvent(self: pointer, event: pointer): voi
 proc fcQImageIOPlugin_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QImageIOPlugin_virtualbase_customEvent".}
 proc fcQImageIOPlugin_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QImageIOPlugin_virtualbase_connectNotify".}
 proc fcQImageIOPlugin_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QImageIOPlugin_virtualbase_disconnectNotify".}
+proc fcQImageIOPlugin_protectedbase_sender(self: pointer, ): pointer {.importc: "QImageIOPlugin_protectedbase_sender".}
+proc fcQImageIOPlugin_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QImageIOPlugin_protectedbase_senderSignalIndex".}
+proc fcQImageIOPlugin_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QImageIOPlugin_protectedbase_receivers".}
+proc fcQImageIOPlugin_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QImageIOPlugin_protectedbase_isSignalConnected".}
 proc fcQImageIOPlugin_new(vtbl: pointer, ): ptr cQImageIOPlugin {.importc: "QImageIOPlugin_new".}
 proc fcQImageIOPlugin_new2(vtbl: pointer, parent: pointer): ptr cQImageIOPlugin {.importc: "QImageIOPlugin_new2".}
 proc fcQImageIOPlugin_staticMetaObject(): pointer {.importc: "QImageIOPlugin_staticMetaObject".}
@@ -644,6 +648,18 @@ proc miqt_exec_callback_cQImageIOPlugin_disconnectNotify(vtbl: pointer, self: po
   let self = QImageIOPlugin(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
   vtbl[].disconnectNotify(self, slotval1)
+
+proc sender*(self: gen_qimageiohandler_types.QImageIOPlugin, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQImageIOPlugin_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qimageiohandler_types.QImageIOPlugin, ): cint =
+  fcQImageIOPlugin_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qimageiohandler_types.QImageIOPlugin, signal: cstring): cint =
+  fcQImageIOPlugin_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qimageiohandler_types.QImageIOPlugin, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQImageIOPlugin_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc create*(T: type gen_qimageiohandler_types.QImageIOPlugin,
     vtbl: ref QImageIOPluginVTable = nil): gen_qimageiohandler_types.QImageIOPlugin =

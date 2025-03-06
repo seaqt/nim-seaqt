@@ -170,6 +170,10 @@ proc fcQApplication_virtualbase_childEvent(self: pointer, event: pointer): void 
 proc fcQApplication_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QApplication_virtualbase_customEvent".}
 proc fcQApplication_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QApplication_virtualbase_connectNotify".}
 proc fcQApplication_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QApplication_virtualbase_disconnectNotify".}
+proc fcQApplication_protectedbase_sender(self: pointer, ): pointer {.importc: "QApplication_protectedbase_sender".}
+proc fcQApplication_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QApplication_protectedbase_senderSignalIndex".}
+proc fcQApplication_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QApplication_protectedbase_receivers".}
+proc fcQApplication_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QApplication_protectedbase_isSignalConnected".}
 proc fcQApplication_new(vtbl: pointer, argc: ptr cint, argv: cstringArray): ptr cQApplication {.importc: "QApplication_new".}
 proc fcQApplication_new2(vtbl: pointer, argc: ptr cint, argv: cstringArray, param3: cint): ptr cQApplication {.importc: "QApplication_new2".}
 proc fcQApplication_staticMetaObject(): pointer {.importc: "QApplication_staticMetaObject".}
@@ -557,6 +561,18 @@ proc miqt_exec_callback_cQApplication_disconnectNotify(vtbl: pointer, self: poin
   let self = QApplication(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
   vtbl[].disconnectNotify(self, slotval1)
+
+proc sender*(self: gen_qapplication_types.QApplication, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQApplication_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qapplication_types.QApplication, ): cint =
+  fcQApplication_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qapplication_types.QApplication, signal: cstring): cint =
+  fcQApplication_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qapplication_types.QApplication, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQApplication_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc create*(T: type gen_qapplication_types.QApplication,
     vtbl: ref QApplicationVTable = nil): gen_qapplication_types.QApplication =

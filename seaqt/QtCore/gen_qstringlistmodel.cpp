@@ -807,31 +807,31 @@ public:
 	friend void QStringListModel_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
 
 	// Wrappers to allow calling protected methods:
-	friend void QStringListModel_protectedbase_resetInternalData(bool* _dynamic_cast_ok, void* self);
-	friend QModelIndex* QStringListModel_protectedbase_createIndex(bool* _dynamic_cast_ok, const void* self, int row, int column);
-	friend void QStringListModel_protectedbase_encodeData(bool* _dynamic_cast_ok, const void* self, struct miqt_array /* of QModelIndex* */  indexes, QDataStream* stream);
-	friend bool QStringListModel_protectedbase_decodeData(bool* _dynamic_cast_ok, void* self, int row, int column, QModelIndex* parent, QDataStream* stream);
-	friend void QStringListModel_protectedbase_beginInsertRows(bool* _dynamic_cast_ok, void* self, QModelIndex* parent, int first, int last);
-	friend void QStringListModel_protectedbase_endInsertRows(bool* _dynamic_cast_ok, void* self);
-	friend void QStringListModel_protectedbase_beginRemoveRows(bool* _dynamic_cast_ok, void* self, QModelIndex* parent, int first, int last);
-	friend void QStringListModel_protectedbase_endRemoveRows(bool* _dynamic_cast_ok, void* self);
-	friend bool QStringListModel_protectedbase_beginMoveRows(bool* _dynamic_cast_ok, void* self, QModelIndex* sourceParent, int sourceFirst, int sourceLast, QModelIndex* destinationParent, int destinationRow);
-	friend void QStringListModel_protectedbase_endMoveRows(bool* _dynamic_cast_ok, void* self);
-	friend void QStringListModel_protectedbase_beginInsertColumns(bool* _dynamic_cast_ok, void* self, QModelIndex* parent, int first, int last);
-	friend void QStringListModel_protectedbase_endInsertColumns(bool* _dynamic_cast_ok, void* self);
-	friend void QStringListModel_protectedbase_beginRemoveColumns(bool* _dynamic_cast_ok, void* self, QModelIndex* parent, int first, int last);
-	friend void QStringListModel_protectedbase_endRemoveColumns(bool* _dynamic_cast_ok, void* self);
-	friend bool QStringListModel_protectedbase_beginMoveColumns(bool* _dynamic_cast_ok, void* self, QModelIndex* sourceParent, int sourceFirst, int sourceLast, QModelIndex* destinationParent, int destinationColumn);
-	friend void QStringListModel_protectedbase_endMoveColumns(bool* _dynamic_cast_ok, void* self);
-	friend void QStringListModel_protectedbase_beginResetModel(bool* _dynamic_cast_ok, void* self);
-	friend void QStringListModel_protectedbase_endResetModel(bool* _dynamic_cast_ok, void* self);
-	friend void QStringListModel_protectedbase_changePersistentIndex(bool* _dynamic_cast_ok, void* self, QModelIndex* from, QModelIndex* to);
-	friend void QStringListModel_protectedbase_changePersistentIndexList(bool* _dynamic_cast_ok, void* self, struct miqt_array /* of QModelIndex* */  from, struct miqt_array /* of QModelIndex* */  to);
-	friend struct miqt_array /* of QModelIndex* */  QStringListModel_protectedbase_persistentIndexList(bool* _dynamic_cast_ok, const void* self);
-	friend QObject* QStringListModel_protectedbase_sender(bool* _dynamic_cast_ok, const void* self);
-	friend int QStringListModel_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
-	friend int QStringListModel_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
-	friend bool QStringListModel_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+	friend void QStringListModel_protectedbase_resetInternalData(void* self);
+	friend QModelIndex* QStringListModel_protectedbase_createIndex(const void* self, int row, int column);
+	friend void QStringListModel_protectedbase_encodeData(const void* self, struct miqt_array /* of QModelIndex* */  indexes, QDataStream* stream);
+	friend bool QStringListModel_protectedbase_decodeData(void* self, int row, int column, QModelIndex* parent, QDataStream* stream);
+	friend void QStringListModel_protectedbase_beginInsertRows(void* self, QModelIndex* parent, int first, int last);
+	friend void QStringListModel_protectedbase_endInsertRows(void* self);
+	friend void QStringListModel_protectedbase_beginRemoveRows(void* self, QModelIndex* parent, int first, int last);
+	friend void QStringListModel_protectedbase_endRemoveRows(void* self);
+	friend bool QStringListModel_protectedbase_beginMoveRows(void* self, QModelIndex* sourceParent, int sourceFirst, int sourceLast, QModelIndex* destinationParent, int destinationRow);
+	friend void QStringListModel_protectedbase_endMoveRows(void* self);
+	friend void QStringListModel_protectedbase_beginInsertColumns(void* self, QModelIndex* parent, int first, int last);
+	friend void QStringListModel_protectedbase_endInsertColumns(void* self);
+	friend void QStringListModel_protectedbase_beginRemoveColumns(void* self, QModelIndex* parent, int first, int last);
+	friend void QStringListModel_protectedbase_endRemoveColumns(void* self);
+	friend bool QStringListModel_protectedbase_beginMoveColumns(void* self, QModelIndex* sourceParent, int sourceFirst, int sourceLast, QModelIndex* destinationParent, int destinationColumn);
+	friend void QStringListModel_protectedbase_endMoveColumns(void* self);
+	friend void QStringListModel_protectedbase_beginResetModel(void* self);
+	friend void QStringListModel_protectedbase_endResetModel(void* self);
+	friend void QStringListModel_protectedbase_changePersistentIndex(void* self, QModelIndex* from, QModelIndex* to);
+	friend void QStringListModel_protectedbase_changePersistentIndexList(void* self, struct miqt_array /* of QModelIndex* */  from, struct miqt_array /* of QModelIndex* */  to);
+	friend struct miqt_array /* of QModelIndex* */  QStringListModel_protectedbase_persistentIndexList(const void* self);
+	friend QObject* QStringListModel_protectedbase_sender(const void* self);
+	friend int QStringListModel_protectedbase_senderSignalIndex(const void* self);
+	friend int QStringListModel_protectedbase_receivers(const void* self, const char* signal);
+	friend bool QStringListModel_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
 };
 
 QStringListModel* QStringListModel_new(struct QStringListModel_VTable* vtbl) {
@@ -1367,40 +1367,22 @@ void QStringListModel_virtualbase_disconnectNotify(void* self, QMetaMethod* sign
 }
 
 const QMetaObject* QStringListModel_staticMetaObject() { return &QStringListModel::staticMetaObject; }
-void QStringListModel_protectedbase_resetInternalData(bool* _dynamic_cast_ok, void* self) {
-	VirtualQStringListModel* self_cast = dynamic_cast<VirtualQStringListModel*>( (QStringListModel*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QStringListModel_protectedbase_resetInternalData(void* self) {
+	VirtualQStringListModel* self_cast = static_cast<VirtualQStringListModel*>( (QStringListModel*)(self) );
 	
 	self_cast->resetInternalData();
 
 }
 
-QModelIndex* QStringListModel_protectedbase_createIndex(bool* _dynamic_cast_ok, const void* self, int row, int column) {
-	VirtualQStringListModel* self_cast = dynamic_cast<VirtualQStringListModel*>( (QStringListModel*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return nullptr;
-	}
-	
-	*_dynamic_cast_ok = true;
+QModelIndex* QStringListModel_protectedbase_createIndex(const void* self, int row, int column) {
+	VirtualQStringListModel* self_cast = static_cast<VirtualQStringListModel*>( (QStringListModel*)(self) );
 	
 	return new QModelIndex(self_cast->createIndex(static_cast<int>(row), static_cast<int>(column)));
 
 }
 
-void QStringListModel_protectedbase_encodeData(bool* _dynamic_cast_ok, const void* self, struct miqt_array /* of QModelIndex* */  indexes, QDataStream* stream) {
-	VirtualQStringListModel* self_cast = dynamic_cast<VirtualQStringListModel*>( (QStringListModel*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QStringListModel_protectedbase_encodeData(const void* self, struct miqt_array /* of QModelIndex* */  indexes, QDataStream* stream) {
+	VirtualQStringListModel* self_cast = static_cast<VirtualQStringListModel*>( (QStringListModel*)(self) );
 			QModelIndexList indexes_QList;
 		indexes_QList.reserve(indexes.len);
 		QModelIndex** indexes_arr = static_cast<QModelIndex**>(indexes.data);
@@ -1412,222 +1394,120 @@ void QStringListModel_protectedbase_encodeData(bool* _dynamic_cast_ok, const voi
 
 }
 
-bool QStringListModel_protectedbase_decodeData(bool* _dynamic_cast_ok, void* self, int row, int column, QModelIndex* parent, QDataStream* stream) {
-	VirtualQStringListModel* self_cast = dynamic_cast<VirtualQStringListModel*>( (QStringListModel*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return false;
-	}
-	
-	*_dynamic_cast_ok = true;
+bool QStringListModel_protectedbase_decodeData(void* self, int row, int column, QModelIndex* parent, QDataStream* stream) {
+	VirtualQStringListModel* self_cast = static_cast<VirtualQStringListModel*>( (QStringListModel*)(self) );
 	
 	return self_cast->decodeData(static_cast<int>(row), static_cast<int>(column), *parent, *stream);
 
 }
 
-void QStringListModel_protectedbase_beginInsertRows(bool* _dynamic_cast_ok, void* self, QModelIndex* parent, int first, int last) {
-	VirtualQStringListModel* self_cast = dynamic_cast<VirtualQStringListModel*>( (QStringListModel*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QStringListModel_protectedbase_beginInsertRows(void* self, QModelIndex* parent, int first, int last) {
+	VirtualQStringListModel* self_cast = static_cast<VirtualQStringListModel*>( (QStringListModel*)(self) );
 	
 	self_cast->beginInsertRows(*parent, static_cast<int>(first), static_cast<int>(last));
 
 }
 
-void QStringListModel_protectedbase_endInsertRows(bool* _dynamic_cast_ok, void* self) {
-	VirtualQStringListModel* self_cast = dynamic_cast<VirtualQStringListModel*>( (QStringListModel*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QStringListModel_protectedbase_endInsertRows(void* self) {
+	VirtualQStringListModel* self_cast = static_cast<VirtualQStringListModel*>( (QStringListModel*)(self) );
 	
 	self_cast->endInsertRows();
 
 }
 
-void QStringListModel_protectedbase_beginRemoveRows(bool* _dynamic_cast_ok, void* self, QModelIndex* parent, int first, int last) {
-	VirtualQStringListModel* self_cast = dynamic_cast<VirtualQStringListModel*>( (QStringListModel*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QStringListModel_protectedbase_beginRemoveRows(void* self, QModelIndex* parent, int first, int last) {
+	VirtualQStringListModel* self_cast = static_cast<VirtualQStringListModel*>( (QStringListModel*)(self) );
 	
 	self_cast->beginRemoveRows(*parent, static_cast<int>(first), static_cast<int>(last));
 
 }
 
-void QStringListModel_protectedbase_endRemoveRows(bool* _dynamic_cast_ok, void* self) {
-	VirtualQStringListModel* self_cast = dynamic_cast<VirtualQStringListModel*>( (QStringListModel*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QStringListModel_protectedbase_endRemoveRows(void* self) {
+	VirtualQStringListModel* self_cast = static_cast<VirtualQStringListModel*>( (QStringListModel*)(self) );
 	
 	self_cast->endRemoveRows();
 
 }
 
-bool QStringListModel_protectedbase_beginMoveRows(bool* _dynamic_cast_ok, void* self, QModelIndex* sourceParent, int sourceFirst, int sourceLast, QModelIndex* destinationParent, int destinationRow) {
-	VirtualQStringListModel* self_cast = dynamic_cast<VirtualQStringListModel*>( (QStringListModel*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return false;
-	}
-	
-	*_dynamic_cast_ok = true;
+bool QStringListModel_protectedbase_beginMoveRows(void* self, QModelIndex* sourceParent, int sourceFirst, int sourceLast, QModelIndex* destinationParent, int destinationRow) {
+	VirtualQStringListModel* self_cast = static_cast<VirtualQStringListModel*>( (QStringListModel*)(self) );
 	
 	return self_cast->beginMoveRows(*sourceParent, static_cast<int>(sourceFirst), static_cast<int>(sourceLast), *destinationParent, static_cast<int>(destinationRow));
 
 }
 
-void QStringListModel_protectedbase_endMoveRows(bool* _dynamic_cast_ok, void* self) {
-	VirtualQStringListModel* self_cast = dynamic_cast<VirtualQStringListModel*>( (QStringListModel*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QStringListModel_protectedbase_endMoveRows(void* self) {
+	VirtualQStringListModel* self_cast = static_cast<VirtualQStringListModel*>( (QStringListModel*)(self) );
 	
 	self_cast->endMoveRows();
 
 }
 
-void QStringListModel_protectedbase_beginInsertColumns(bool* _dynamic_cast_ok, void* self, QModelIndex* parent, int first, int last) {
-	VirtualQStringListModel* self_cast = dynamic_cast<VirtualQStringListModel*>( (QStringListModel*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QStringListModel_protectedbase_beginInsertColumns(void* self, QModelIndex* parent, int first, int last) {
+	VirtualQStringListModel* self_cast = static_cast<VirtualQStringListModel*>( (QStringListModel*)(self) );
 	
 	self_cast->beginInsertColumns(*parent, static_cast<int>(first), static_cast<int>(last));
 
 }
 
-void QStringListModel_protectedbase_endInsertColumns(bool* _dynamic_cast_ok, void* self) {
-	VirtualQStringListModel* self_cast = dynamic_cast<VirtualQStringListModel*>( (QStringListModel*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QStringListModel_protectedbase_endInsertColumns(void* self) {
+	VirtualQStringListModel* self_cast = static_cast<VirtualQStringListModel*>( (QStringListModel*)(self) );
 	
 	self_cast->endInsertColumns();
 
 }
 
-void QStringListModel_protectedbase_beginRemoveColumns(bool* _dynamic_cast_ok, void* self, QModelIndex* parent, int first, int last) {
-	VirtualQStringListModel* self_cast = dynamic_cast<VirtualQStringListModel*>( (QStringListModel*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QStringListModel_protectedbase_beginRemoveColumns(void* self, QModelIndex* parent, int first, int last) {
+	VirtualQStringListModel* self_cast = static_cast<VirtualQStringListModel*>( (QStringListModel*)(self) );
 	
 	self_cast->beginRemoveColumns(*parent, static_cast<int>(first), static_cast<int>(last));
 
 }
 
-void QStringListModel_protectedbase_endRemoveColumns(bool* _dynamic_cast_ok, void* self) {
-	VirtualQStringListModel* self_cast = dynamic_cast<VirtualQStringListModel*>( (QStringListModel*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QStringListModel_protectedbase_endRemoveColumns(void* self) {
+	VirtualQStringListModel* self_cast = static_cast<VirtualQStringListModel*>( (QStringListModel*)(self) );
 	
 	self_cast->endRemoveColumns();
 
 }
 
-bool QStringListModel_protectedbase_beginMoveColumns(bool* _dynamic_cast_ok, void* self, QModelIndex* sourceParent, int sourceFirst, int sourceLast, QModelIndex* destinationParent, int destinationColumn) {
-	VirtualQStringListModel* self_cast = dynamic_cast<VirtualQStringListModel*>( (QStringListModel*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return false;
-	}
-	
-	*_dynamic_cast_ok = true;
+bool QStringListModel_protectedbase_beginMoveColumns(void* self, QModelIndex* sourceParent, int sourceFirst, int sourceLast, QModelIndex* destinationParent, int destinationColumn) {
+	VirtualQStringListModel* self_cast = static_cast<VirtualQStringListModel*>( (QStringListModel*)(self) );
 	
 	return self_cast->beginMoveColumns(*sourceParent, static_cast<int>(sourceFirst), static_cast<int>(sourceLast), *destinationParent, static_cast<int>(destinationColumn));
 
 }
 
-void QStringListModel_protectedbase_endMoveColumns(bool* _dynamic_cast_ok, void* self) {
-	VirtualQStringListModel* self_cast = dynamic_cast<VirtualQStringListModel*>( (QStringListModel*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QStringListModel_protectedbase_endMoveColumns(void* self) {
+	VirtualQStringListModel* self_cast = static_cast<VirtualQStringListModel*>( (QStringListModel*)(self) );
 	
 	self_cast->endMoveColumns();
 
 }
 
-void QStringListModel_protectedbase_beginResetModel(bool* _dynamic_cast_ok, void* self) {
-	VirtualQStringListModel* self_cast = dynamic_cast<VirtualQStringListModel*>( (QStringListModel*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QStringListModel_protectedbase_beginResetModel(void* self) {
+	VirtualQStringListModel* self_cast = static_cast<VirtualQStringListModel*>( (QStringListModel*)(self) );
 	
 	self_cast->beginResetModel();
 
 }
 
-void QStringListModel_protectedbase_endResetModel(bool* _dynamic_cast_ok, void* self) {
-	VirtualQStringListModel* self_cast = dynamic_cast<VirtualQStringListModel*>( (QStringListModel*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QStringListModel_protectedbase_endResetModel(void* self) {
+	VirtualQStringListModel* self_cast = static_cast<VirtualQStringListModel*>( (QStringListModel*)(self) );
 	
 	self_cast->endResetModel();
 
 }
 
-void QStringListModel_protectedbase_changePersistentIndex(bool* _dynamic_cast_ok, void* self, QModelIndex* from, QModelIndex* to) {
-	VirtualQStringListModel* self_cast = dynamic_cast<VirtualQStringListModel*>( (QStringListModel*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QStringListModel_protectedbase_changePersistentIndex(void* self, QModelIndex* from, QModelIndex* to) {
+	VirtualQStringListModel* self_cast = static_cast<VirtualQStringListModel*>( (QStringListModel*)(self) );
 	
 	self_cast->changePersistentIndex(*from, *to);
 
 }
 
-void QStringListModel_protectedbase_changePersistentIndexList(bool* _dynamic_cast_ok, void* self, struct miqt_array /* of QModelIndex* */  from, struct miqt_array /* of QModelIndex* */  to) {
-	VirtualQStringListModel* self_cast = dynamic_cast<VirtualQStringListModel*>( (QStringListModel*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QStringListModel_protectedbase_changePersistentIndexList(void* self, struct miqt_array /* of QModelIndex* */  from, struct miqt_array /* of QModelIndex* */  to) {
+	VirtualQStringListModel* self_cast = static_cast<VirtualQStringListModel*>( (QStringListModel*)(self) );
 			QModelIndexList from_QList;
 		from_QList.reserve(from.len);
 		QModelIndex** from_arr = static_cast<QModelIndex**>(from.data);
@@ -1645,14 +1525,8 @@ void QStringListModel_protectedbase_changePersistentIndexList(bool* _dynamic_cas
 
 }
 
-struct miqt_array /* of QModelIndex* */  QStringListModel_protectedbase_persistentIndexList(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQStringListModel* self_cast = dynamic_cast<VirtualQStringListModel*>( (QStringListModel*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return (struct miqt_array){};
-	}
-	
-	*_dynamic_cast_ok = true;
+struct miqt_array /* of QModelIndex* */  QStringListModel_protectedbase_persistentIndexList(const void* self) {
+	VirtualQStringListModel* self_cast = static_cast<VirtualQStringListModel*>( (QStringListModel*)(self) );
 	
 	QModelIndexList _ret = self_cast->persistentIndexList();
 	// Convert QList<> from C++ memory to manually-managed C memory
@@ -1667,53 +1541,29 @@ struct miqt_array /* of QModelIndex* */  QStringListModel_protectedbase_persiste
 
 }
 
-QObject* QStringListModel_protectedbase_sender(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQStringListModel* self_cast = dynamic_cast<VirtualQStringListModel*>( (QStringListModel*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return nullptr;
-	}
-	
-	*_dynamic_cast_ok = true;
+QObject* QStringListModel_protectedbase_sender(const void* self) {
+	VirtualQStringListModel* self_cast = static_cast<VirtualQStringListModel*>( (QStringListModel*)(self) );
 	
 	return self_cast->sender();
 
 }
 
-int QStringListModel_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQStringListModel* self_cast = dynamic_cast<VirtualQStringListModel*>( (QStringListModel*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return 0;
-	}
-	
-	*_dynamic_cast_ok = true;
+int QStringListModel_protectedbase_senderSignalIndex(const void* self) {
+	VirtualQStringListModel* self_cast = static_cast<VirtualQStringListModel*>( (QStringListModel*)(self) );
 	
 	return self_cast->senderSignalIndex();
 
 }
 
-int QStringListModel_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal) {
-	VirtualQStringListModel* self_cast = dynamic_cast<VirtualQStringListModel*>( (QStringListModel*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return 0;
-	}
-	
-	*_dynamic_cast_ok = true;
+int QStringListModel_protectedbase_receivers(const void* self, const char* signal) {
+	VirtualQStringListModel* self_cast = static_cast<VirtualQStringListModel*>( (QStringListModel*)(self) );
 	
 	return self_cast->receivers(signal);
 
 }
 
-bool QStringListModel_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal) {
-	VirtualQStringListModel* self_cast = dynamic_cast<VirtualQStringListModel*>( (QStringListModel*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return false;
-	}
-	
-	*_dynamic_cast_ok = true;
+bool QStringListModel_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal) {
+	VirtualQStringListModel* self_cast = static_cast<VirtualQStringListModel*>( (QStringListModel*)(self) );
 	
 	return self_cast->isSignalConnected(*signal);
 

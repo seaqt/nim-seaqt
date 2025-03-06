@@ -190,6 +190,10 @@ proc fcQScriptEngine_virtualbase_childEvent(self: pointer, event: pointer): void
 proc fcQScriptEngine_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QScriptEngine_virtualbase_customEvent".}
 proc fcQScriptEngine_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QScriptEngine_virtualbase_connectNotify".}
 proc fcQScriptEngine_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QScriptEngine_virtualbase_disconnectNotify".}
+proc fcQScriptEngine_protectedbase_sender(self: pointer, ): pointer {.importc: "QScriptEngine_protectedbase_sender".}
+proc fcQScriptEngine_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QScriptEngine_protectedbase_senderSignalIndex".}
+proc fcQScriptEngine_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QScriptEngine_protectedbase_receivers".}
+proc fcQScriptEngine_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QScriptEngine_protectedbase_isSignalConnected".}
 proc fcQScriptEngine_new(vtbl: pointer, ): ptr cQScriptEngine {.importc: "QScriptEngine_new".}
 proc fcQScriptEngine_new2(vtbl: pointer, parent: pointer): ptr cQScriptEngine {.importc: "QScriptEngine_new2".}
 proc fcQScriptEngine_staticMetaObject(): pointer {.importc: "QScriptEngine_staticMetaObject".}
@@ -597,6 +601,18 @@ proc miqt_exec_callback_cQScriptEngine_disconnectNotify(vtbl: pointer, self: poi
   let self = QScriptEngine(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
   vtbl[].disconnectNotify(self, slotval1)
+
+proc sender*(self: gen_qscriptengine_types.QScriptEngine, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQScriptEngine_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qscriptengine_types.QScriptEngine, ): cint =
+  fcQScriptEngine_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qscriptengine_types.QScriptEngine, signal: cstring): cint =
+  fcQScriptEngine_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qscriptengine_types.QScriptEngine, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQScriptEngine_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc create*(T: type gen_qscriptengine_types.QScriptEngine,
     vtbl: ref QScriptEngineVTable = nil): gen_qscriptengine_types.QScriptEngine =

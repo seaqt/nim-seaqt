@@ -82,10 +82,12 @@ import ./gen_qcameraexposure_types
 export gen_qcameraexposure_types
 
 import
+  ../QtCore/gen_qmetaobject_types,
   ../QtCore/gen_qobject,
   ../QtCore/gen_qobjectdefs_types,
   ../QtCore/gen_qpoint_types
 export
+  gen_qmetaobject_types,
   gen_qobject,
   gen_qobjectdefs_types,
   gen_qpoint_types
@@ -148,6 +150,10 @@ proc fcQCameraExposure_trUtf83(s: cstring, c: cstring, n: cint): struct_miqt_str
 proc fcQCameraExposure_supportedIsoSensitivities1(self: pointer, continuous: ptr bool): struct_miqt_array {.importc: "QCameraExposure_supportedIsoSensitivities1".}
 proc fcQCameraExposure_supportedApertures1(self: pointer, continuous: ptr bool): struct_miqt_array {.importc: "QCameraExposure_supportedApertures1".}
 proc fcQCameraExposure_supportedShutterSpeeds1(self: pointer, continuous: ptr bool): struct_miqt_array {.importc: "QCameraExposure_supportedShutterSpeeds1".}
+proc fcQCameraExposure_protectedbase_sender(self: pointer, ): pointer {.importc: "QCameraExposure_protectedbase_sender".}
+proc fcQCameraExposure_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QCameraExposure_protectedbase_senderSignalIndex".}
+proc fcQCameraExposure_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QCameraExposure_protectedbase_receivers".}
+proc fcQCameraExposure_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QCameraExposure_protectedbase_isSignalConnected".}
 proc fcQCameraExposure_staticMetaObject(): pointer {.importc: "QCameraExposure_staticMetaObject".}
 
 proc metaObject*(self: gen_qcameraexposure_types.QCameraExposure, ): gen_qobjectdefs_types.QMetaObject =
@@ -459,6 +465,18 @@ proc supportedShutterSpeeds*(self: gen_qcameraexposure_types.QCameraExposure, co
   for i in 0 ..< v_ma.len:
     vx_ret[i] = v_outCast[i]
   vx_ret
+
+proc sender*(self: gen_qcameraexposure_types.QCameraExposure, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQCameraExposure_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qcameraexposure_types.QCameraExposure, ): cint =
+  fcQCameraExposure_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qcameraexposure_types.QCameraExposure, signal: cstring): cint =
+  fcQCameraExposure_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qcameraexposure_types.QCameraExposure, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQCameraExposure_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc staticMetaObject*(_: type gen_qcameraexposure_types.QCameraExposure): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQCameraExposure_staticMetaObject())

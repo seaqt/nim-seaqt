@@ -127,10 +127,10 @@ void QStyledItemDelegate_virtualbase_childEvent(void* self, QChildEvent* event);
 void QStyledItemDelegate_virtualbase_customEvent(void* self, QEvent* event);
 void QStyledItemDelegate_virtualbase_connectNotify(void* self, QMetaMethod* signal);
 void QStyledItemDelegate_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
-QObject* QStyledItemDelegate_protectedbase_sender(bool* _dynamic_cast_ok, const void* self);
-int QStyledItemDelegate_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
-int QStyledItemDelegate_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
-bool QStyledItemDelegate_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+QObject* QStyledItemDelegate_protectedbase_sender(const void* self);
+int QStyledItemDelegate_protectedbase_senderSignalIndex(const void* self);
+int QStyledItemDelegate_protectedbase_receivers(const void* self, const char* signal);
+bool QStyledItemDelegate_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
 const QMetaObject* QStyledItemDelegate_staticMetaObject();
 void QStyledItemDelegate_delete(QStyledItemDelegate* self);
 

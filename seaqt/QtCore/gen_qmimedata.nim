@@ -112,6 +112,10 @@ proc fcQMimeData_virtualbase_childEvent(self: pointer, event: pointer): void {.i
 proc fcQMimeData_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QMimeData_virtualbase_customEvent".}
 proc fcQMimeData_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QMimeData_virtualbase_connectNotify".}
 proc fcQMimeData_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QMimeData_virtualbase_disconnectNotify".}
+proc fcQMimeData_protectedbase_sender(self: pointer, ): pointer {.importc: "QMimeData_protectedbase_sender".}
+proc fcQMimeData_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QMimeData_protectedbase_senderSignalIndex".}
+proc fcQMimeData_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QMimeData_protectedbase_receivers".}
+proc fcQMimeData_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QMimeData_protectedbase_isSignalConnected".}
 proc fcQMimeData_new(vtbl: pointer, ): ptr cQMimeData {.importc: "QMimeData_new".}
 proc fcQMimeData_staticMetaObject(): pointer {.importc: "QMimeData_staticMetaObject".}
 proc fcQMimeData_delete(self: pointer) {.importc: "QMimeData_delete".}
@@ -422,6 +426,18 @@ proc miqt_exec_callback_cQMimeData_disconnectNotify(vtbl: pointer, self: pointer
   let self = QMimeData(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
   vtbl[].disconnectNotify(self, slotval1)
+
+proc sender*(self: gen_qmimedata_types.QMimeData, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQMimeData_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qmimedata_types.QMimeData, ): cint =
+  fcQMimeData_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qmimedata_types.QMimeData, signal: cstring): cint =
+  fcQMimeData_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qmimedata_types.QMimeData, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQMimeData_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc create*(T: type gen_qmimedata_types.QMimeData,
     vtbl: ref QMimeDataVTable = nil): gen_qmimedata_types.QMimeData =

@@ -304,10 +304,10 @@ void QWebPage_virtualbase_childEvent(void* self, QChildEvent* event);
 void QWebPage_virtualbase_customEvent(void* self, QEvent* event);
 void QWebPage_virtualbase_connectNotify(void* self, QMetaMethod* signal);
 void QWebPage_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
-QObject* QWebPage_protectedbase_sender(bool* _dynamic_cast_ok, const void* self);
-int QWebPage_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
-int QWebPage_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
-bool QWebPage_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+QObject* QWebPage_protectedbase_sender(const void* self);
+int QWebPage_protectedbase_senderSignalIndex(const void* self);
+int QWebPage_protectedbase_receivers(const void* self, const char* signal);
+bool QWebPage_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
 const QMetaObject* QWebPage_staticMetaObject();
 void QWebPage_delete(QWebPage* self);
 

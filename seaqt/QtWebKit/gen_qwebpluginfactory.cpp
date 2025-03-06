@@ -315,10 +315,10 @@ public:
 	friend void QWebPluginFactory_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
 
 	// Wrappers to allow calling protected methods:
-	friend QObject* QWebPluginFactory_protectedbase_sender(bool* _dynamic_cast_ok, const void* self);
-	friend int QWebPluginFactory_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
-	friend int QWebPluginFactory_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
-	friend bool QWebPluginFactory_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+	friend QObject* QWebPluginFactory_protectedbase_sender(const void* self);
+	friend int QWebPluginFactory_protectedbase_senderSignalIndex(const void* self);
+	friend int QWebPluginFactory_protectedbase_receivers(const void* self, const char* signal);
+	friend bool QWebPluginFactory_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
 };
 
 QWebPluginFactory* QWebPluginFactory_new(struct QWebPluginFactory_VTable* vtbl) {
@@ -534,53 +534,29 @@ void QWebPluginFactory_virtualbase_disconnectNotify(void* self, QMetaMethod* sig
 }
 
 const QMetaObject* QWebPluginFactory_staticMetaObject() { return &QWebPluginFactory::staticMetaObject; }
-QObject* QWebPluginFactory_protectedbase_sender(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQWebPluginFactory* self_cast = dynamic_cast<VirtualQWebPluginFactory*>( (QWebPluginFactory*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return nullptr;
-	}
-	
-	*_dynamic_cast_ok = true;
+QObject* QWebPluginFactory_protectedbase_sender(const void* self) {
+	VirtualQWebPluginFactory* self_cast = static_cast<VirtualQWebPluginFactory*>( (QWebPluginFactory*)(self) );
 	
 	return self_cast->sender();
 
 }
 
-int QWebPluginFactory_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQWebPluginFactory* self_cast = dynamic_cast<VirtualQWebPluginFactory*>( (QWebPluginFactory*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return 0;
-	}
-	
-	*_dynamic_cast_ok = true;
+int QWebPluginFactory_protectedbase_senderSignalIndex(const void* self) {
+	VirtualQWebPluginFactory* self_cast = static_cast<VirtualQWebPluginFactory*>( (QWebPluginFactory*)(self) );
 	
 	return self_cast->senderSignalIndex();
 
 }
 
-int QWebPluginFactory_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal) {
-	VirtualQWebPluginFactory* self_cast = dynamic_cast<VirtualQWebPluginFactory*>( (QWebPluginFactory*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return 0;
-	}
-	
-	*_dynamic_cast_ok = true;
+int QWebPluginFactory_protectedbase_receivers(const void* self, const char* signal) {
+	VirtualQWebPluginFactory* self_cast = static_cast<VirtualQWebPluginFactory*>( (QWebPluginFactory*)(self) );
 	
 	return self_cast->receivers(signal);
 
 }
 
-bool QWebPluginFactory_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal) {
-	VirtualQWebPluginFactory* self_cast = dynamic_cast<VirtualQWebPluginFactory*>( (QWebPluginFactory*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return false;
-	}
-	
-	*_dynamic_cast_ok = true;
+bool QWebPluginFactory_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal) {
+	VirtualQWebPluginFactory* self_cast = static_cast<VirtualQWebPluginFactory*>( (QWebPluginFactory*)(self) );
 	
 	return self_cast->isSignalConnected(*signal);
 

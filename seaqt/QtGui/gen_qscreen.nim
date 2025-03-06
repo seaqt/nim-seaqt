@@ -38,6 +38,7 @@ import ./gen_qscreen_types
 export gen_qscreen_types
 
 import
+  ../QtCore/gen_qmetaobject_types,
   ../QtCore/gen_qobject,
   ../QtCore/gen_qobjectdefs_types,
   ../QtCore/gen_qpoint_types,
@@ -46,6 +47,7 @@ import
   ./gen_qpixmap_types,
   ./gen_qtransform_types
 export
+  gen_qmetaobject_types,
   gen_qobject,
   gen_qobjectdefs_types,
   gen_qpoint_types,
@@ -122,6 +124,10 @@ proc fcQScreen_grabWindow2(self: pointer, window: uint, x: cint): pointer {.impo
 proc fcQScreen_grabWindow3(self: pointer, window: uint, x: cint, y: cint): pointer {.importc: "QScreen_grabWindow3".}
 proc fcQScreen_grabWindow4(self: pointer, window: uint, x: cint, y: cint, w: cint): pointer {.importc: "QScreen_grabWindow4".}
 proc fcQScreen_grabWindow5(self: pointer, window: uint, x: cint, y: cint, w: cint, h: cint): pointer {.importc: "QScreen_grabWindow5".}
+proc fcQScreen_protectedbase_sender(self: pointer, ): pointer {.importc: "QScreen_protectedbase_sender".}
+proc fcQScreen_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QScreen_protectedbase_senderSignalIndex".}
+proc fcQScreen_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QScreen_protectedbase_receivers".}
+proc fcQScreen_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QScreen_protectedbase_isSignalConnected".}
 proc fcQScreen_staticMetaObject(): pointer {.importc: "QScreen_staticMetaObject".}
 proc fcQScreen_delete(self: pointer) {.importc: "QScreen_delete".}
 
@@ -483,6 +489,18 @@ proc grabWindow*(self: gen_qscreen_types.QScreen, window: uint, x: cint, y: cint
 
 proc grabWindow*(self: gen_qscreen_types.QScreen, window: uint, x: cint, y: cint, w: cint, h: cint): gen_qpixmap_types.QPixmap =
   gen_qpixmap_types.QPixmap(h: fcQScreen_grabWindow5(self.h, window, x, y, w, h))
+
+proc sender*(self: gen_qscreen_types.QScreen, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQScreen_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qscreen_types.QScreen, ): cint =
+  fcQScreen_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qscreen_types.QScreen, signal: cstring): cint =
+  fcQScreen_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qscreen_types.QScreen, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQScreen_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc staticMetaObject*(_: type gen_qscreen_types.QScreen): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQScreen_staticMetaObject())

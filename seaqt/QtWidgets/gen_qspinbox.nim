@@ -50,6 +50,8 @@ import
   ../QtGui/gen_qpaintengine_types,
   ../QtGui/gen_qpainter_types,
   ./gen_qabstractspinbox,
+  ./gen_qlineedit_types,
+  ./gen_qstyleoption_types,
   ./gen_qwidget_types
 export
   gen_qcoreevent_types,
@@ -64,6 +66,8 @@ export
   gen_qpaintengine_types,
   gen_qpainter_types,
   gen_qabstractspinbox,
+  gen_qlineedit_types,
+  gen_qstyleoption_types,
   gen_qwidget_types
 
 type cQSpinBox*{.exportc: "QSpinBox", incompleteStruct.} = object
@@ -218,6 +222,18 @@ proc fcQSpinBox_virtualbase_childEvent(self: pointer, event: pointer): void {.im
 proc fcQSpinBox_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QSpinBox_virtualbase_customEvent".}
 proc fcQSpinBox_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QSpinBox_virtualbase_connectNotify".}
 proc fcQSpinBox_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QSpinBox_virtualbase_disconnectNotify".}
+proc fcQSpinBox_protectedbase_initStyleOption(self: pointer, option: pointer): void {.importc: "QSpinBox_protectedbase_initStyleOption".}
+proc fcQSpinBox_protectedbase_lineEdit(self: pointer, ): pointer {.importc: "QSpinBox_protectedbase_lineEdit".}
+proc fcQSpinBox_protectedbase_setLineEdit(self: pointer, edit: pointer): void {.importc: "QSpinBox_protectedbase_setLineEdit".}
+proc fcQSpinBox_protectedbase_updateMicroFocus(self: pointer, ): void {.importc: "QSpinBox_protectedbase_updateMicroFocus".}
+proc fcQSpinBox_protectedbase_create(self: pointer, ): void {.importc: "QSpinBox_protectedbase_create".}
+proc fcQSpinBox_protectedbase_destroy(self: pointer, ): void {.importc: "QSpinBox_protectedbase_destroy".}
+proc fcQSpinBox_protectedbase_focusNextChild(self: pointer, ): bool {.importc: "QSpinBox_protectedbase_focusNextChild".}
+proc fcQSpinBox_protectedbase_focusPreviousChild(self: pointer, ): bool {.importc: "QSpinBox_protectedbase_focusPreviousChild".}
+proc fcQSpinBox_protectedbase_sender(self: pointer, ): pointer {.importc: "QSpinBox_protectedbase_sender".}
+proc fcQSpinBox_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QSpinBox_protectedbase_senderSignalIndex".}
+proc fcQSpinBox_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QSpinBox_protectedbase_receivers".}
+proc fcQSpinBox_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QSpinBox_protectedbase_isSignalConnected".}
 proc fcQSpinBox_new(vtbl: pointer, parent: pointer): ptr cQSpinBox {.importc: "QSpinBox_new".}
 proc fcQSpinBox_new2(vtbl: pointer, ): ptr cQSpinBox {.importc: "QSpinBox_new2".}
 proc fcQSpinBox_staticMetaObject(): pointer {.importc: "QSpinBox_staticMetaObject".}
@@ -375,6 +391,18 @@ proc fcQDoubleSpinBox_virtualbase_childEvent(self: pointer, event: pointer): voi
 proc fcQDoubleSpinBox_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QDoubleSpinBox_virtualbase_customEvent".}
 proc fcQDoubleSpinBox_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QDoubleSpinBox_virtualbase_connectNotify".}
 proc fcQDoubleSpinBox_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QDoubleSpinBox_virtualbase_disconnectNotify".}
+proc fcQDoubleSpinBox_protectedbase_initStyleOption(self: pointer, option: pointer): void {.importc: "QDoubleSpinBox_protectedbase_initStyleOption".}
+proc fcQDoubleSpinBox_protectedbase_lineEdit(self: pointer, ): pointer {.importc: "QDoubleSpinBox_protectedbase_lineEdit".}
+proc fcQDoubleSpinBox_protectedbase_setLineEdit(self: pointer, edit: pointer): void {.importc: "QDoubleSpinBox_protectedbase_setLineEdit".}
+proc fcQDoubleSpinBox_protectedbase_updateMicroFocus(self: pointer, ): void {.importc: "QDoubleSpinBox_protectedbase_updateMicroFocus".}
+proc fcQDoubleSpinBox_protectedbase_create(self: pointer, ): void {.importc: "QDoubleSpinBox_protectedbase_create".}
+proc fcQDoubleSpinBox_protectedbase_destroy(self: pointer, ): void {.importc: "QDoubleSpinBox_protectedbase_destroy".}
+proc fcQDoubleSpinBox_protectedbase_focusNextChild(self: pointer, ): bool {.importc: "QDoubleSpinBox_protectedbase_focusNextChild".}
+proc fcQDoubleSpinBox_protectedbase_focusPreviousChild(self: pointer, ): bool {.importc: "QDoubleSpinBox_protectedbase_focusPreviousChild".}
+proc fcQDoubleSpinBox_protectedbase_sender(self: pointer, ): pointer {.importc: "QDoubleSpinBox_protectedbase_sender".}
+proc fcQDoubleSpinBox_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QDoubleSpinBox_protectedbase_senderSignalIndex".}
+proc fcQDoubleSpinBox_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QDoubleSpinBox_protectedbase_receivers".}
+proc fcQDoubleSpinBox_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QDoubleSpinBox_protectedbase_isSignalConnected".}
 proc fcQDoubleSpinBox_new(vtbl: pointer, parent: pointer): ptr cQDoubleSpinBox {.importc: "QDoubleSpinBox_new".}
 proc fcQDoubleSpinBox_new2(vtbl: pointer, ): ptr cQDoubleSpinBox {.importc: "QDoubleSpinBox_new2".}
 proc fcQDoubleSpinBox_staticMetaObject(): pointer {.importc: "QDoubleSpinBox_staticMetaObject".}
@@ -1215,6 +1243,42 @@ proc miqt_exec_callback_cQSpinBox_disconnectNotify(vtbl: pointer, self: pointer,
   let self = QSpinBox(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
   vtbl[].disconnectNotify(self, slotval1)
+
+proc initStyleOption*(self: gen_qspinbox_types.QSpinBox, option: gen_qstyleoption_types.QStyleOptionSpinBox): void =
+  fcQSpinBox_protectedbase_initStyleOption(self.h, option.h)
+
+proc lineEdit*(self: gen_qspinbox_types.QSpinBox, ): gen_qlineedit_types.QLineEdit =
+  gen_qlineedit_types.QLineEdit(h: fcQSpinBox_protectedbase_lineEdit(self.h))
+
+proc setLineEdit*(self: gen_qspinbox_types.QSpinBox, edit: gen_qlineedit_types.QLineEdit): void =
+  fcQSpinBox_protectedbase_setLineEdit(self.h, edit.h)
+
+proc updateMicroFocus*(self: gen_qspinbox_types.QSpinBox, ): void =
+  fcQSpinBox_protectedbase_updateMicroFocus(self.h)
+
+proc create*(self: gen_qspinbox_types.QSpinBox, ): void =
+  fcQSpinBox_protectedbase_create(self.h)
+
+proc destroy*(self: gen_qspinbox_types.QSpinBox, ): void =
+  fcQSpinBox_protectedbase_destroy(self.h)
+
+proc focusNextChild*(self: gen_qspinbox_types.QSpinBox, ): bool =
+  fcQSpinBox_protectedbase_focusNextChild(self.h)
+
+proc focusPreviousChild*(self: gen_qspinbox_types.QSpinBox, ): bool =
+  fcQSpinBox_protectedbase_focusPreviousChild(self.h)
+
+proc sender*(self: gen_qspinbox_types.QSpinBox, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQSpinBox_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qspinbox_types.QSpinBox, ): cint =
+  fcQSpinBox_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qspinbox_types.QSpinBox, signal: cstring): cint =
+  fcQSpinBox_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qspinbox_types.QSpinBox, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQSpinBox_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc create*(T: type gen_qspinbox_types.QSpinBox,
     parent: gen_qwidget_types.QWidget,
@@ -2317,6 +2381,42 @@ proc miqt_exec_callback_cQDoubleSpinBox_disconnectNotify(vtbl: pointer, self: po
   let self = QDoubleSpinBox(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
   vtbl[].disconnectNotify(self, slotval1)
+
+proc initStyleOption*(self: gen_qspinbox_types.QDoubleSpinBox, option: gen_qstyleoption_types.QStyleOptionSpinBox): void =
+  fcQDoubleSpinBox_protectedbase_initStyleOption(self.h, option.h)
+
+proc lineEdit*(self: gen_qspinbox_types.QDoubleSpinBox, ): gen_qlineedit_types.QLineEdit =
+  gen_qlineedit_types.QLineEdit(h: fcQDoubleSpinBox_protectedbase_lineEdit(self.h))
+
+proc setLineEdit*(self: gen_qspinbox_types.QDoubleSpinBox, edit: gen_qlineedit_types.QLineEdit): void =
+  fcQDoubleSpinBox_protectedbase_setLineEdit(self.h, edit.h)
+
+proc updateMicroFocus*(self: gen_qspinbox_types.QDoubleSpinBox, ): void =
+  fcQDoubleSpinBox_protectedbase_updateMicroFocus(self.h)
+
+proc create*(self: gen_qspinbox_types.QDoubleSpinBox, ): void =
+  fcQDoubleSpinBox_protectedbase_create(self.h)
+
+proc destroy*(self: gen_qspinbox_types.QDoubleSpinBox, ): void =
+  fcQDoubleSpinBox_protectedbase_destroy(self.h)
+
+proc focusNextChild*(self: gen_qspinbox_types.QDoubleSpinBox, ): bool =
+  fcQDoubleSpinBox_protectedbase_focusNextChild(self.h)
+
+proc focusPreviousChild*(self: gen_qspinbox_types.QDoubleSpinBox, ): bool =
+  fcQDoubleSpinBox_protectedbase_focusPreviousChild(self.h)
+
+proc sender*(self: gen_qspinbox_types.QDoubleSpinBox, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQDoubleSpinBox_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qspinbox_types.QDoubleSpinBox, ): cint =
+  fcQDoubleSpinBox_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qspinbox_types.QDoubleSpinBox, signal: cstring): cint =
+  fcQDoubleSpinBox_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qspinbox_types.QDoubleSpinBox, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQDoubleSpinBox_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc create*(T: type gen_qspinbox_types.QDoubleSpinBox,
     parent: gen_qwidget_types.QWidget,

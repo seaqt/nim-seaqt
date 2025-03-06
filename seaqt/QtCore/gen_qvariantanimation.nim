@@ -114,6 +114,10 @@ proc fcQVariantAnimation_virtualbase_childEvent(self: pointer, event: pointer): 
 proc fcQVariantAnimation_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QVariantAnimation_virtualbase_customEvent".}
 proc fcQVariantAnimation_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QVariantAnimation_virtualbase_connectNotify".}
 proc fcQVariantAnimation_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QVariantAnimation_virtualbase_disconnectNotify".}
+proc fcQVariantAnimation_protectedbase_sender(self: pointer, ): pointer {.importc: "QVariantAnimation_protectedbase_sender".}
+proc fcQVariantAnimation_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QVariantAnimation_protectedbase_senderSignalIndex".}
+proc fcQVariantAnimation_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QVariantAnimation_protectedbase_receivers".}
+proc fcQVariantAnimation_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QVariantAnimation_protectedbase_isSignalConnected".}
 proc fcQVariantAnimation_new(vtbl: pointer, ): ptr cQVariantAnimation {.importc: "QVariantAnimation_new".}
 proc fcQVariantAnimation_new2(vtbl: pointer, parent: pointer): ptr cQVariantAnimation {.importc: "QVariantAnimation_new2".}
 proc fcQVariantAnimation_staticMetaObject(): pointer {.importc: "QVariantAnimation_staticMetaObject".}
@@ -431,6 +435,18 @@ proc miqt_exec_callback_cQVariantAnimation_disconnectNotify(vtbl: pointer, self:
   let self = QVariantAnimation(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
   vtbl[].disconnectNotify(self, slotval1)
+
+proc sender*(self: gen_qvariantanimation_types.QVariantAnimation, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQVariantAnimation_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qvariantanimation_types.QVariantAnimation, ): cint =
+  fcQVariantAnimation_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qvariantanimation_types.QVariantAnimation, signal: cstring): cint =
+  fcQVariantAnimation_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qvariantanimation_types.QVariantAnimation, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQVariantAnimation_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc create*(T: type gen_qvariantanimation_types.QVariantAnimation,
     vtbl: ref QVariantAnimationVTable = nil): gen_qvariantanimation_types.QVariantAnimation =

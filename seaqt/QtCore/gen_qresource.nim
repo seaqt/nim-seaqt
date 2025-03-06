@@ -75,6 +75,9 @@ proc fcQResource_registerResource2(rccFilename: struct_miqt_string, resourceRoot
 proc fcQResource_unregisterResource2(rccFilename: struct_miqt_string, resourceRoot: struct_miqt_string): bool {.importc: "QResource_unregisterResource2".}
 proc fcQResource_registerResource22(rccData: ptr uint8, resourceRoot: struct_miqt_string): bool {.importc: "QResource_registerResource22".}
 proc fcQResource_unregisterResource22(rccData: ptr uint8, resourceRoot: struct_miqt_string): bool {.importc: "QResource_unregisterResource22".}
+proc fcQResource_protectedbase_isDir(self: pointer, ): bool {.importc: "QResource_protectedbase_isDir".}
+proc fcQResource_protectedbase_isFile(self: pointer, ): bool {.importc: "QResource_protectedbase_isFile".}
+proc fcQResource_protectedbase_children(self: pointer, ): struct_miqt_array {.importc: "QResource_protectedbase_children".}
 proc fcQResource_new(): ptr cQResource {.importc: "QResource_new".}
 proc fcQResource_new2(file: struct_miqt_string): ptr cQResource {.importc: "QResource_new2".}
 proc fcQResource_new3(file: struct_miqt_string, locale: pointer): ptr cQResource {.importc: "QResource_new3".}
@@ -165,6 +168,23 @@ proc registerResource*(_: type gen_qresource_types.QResource, rccData: ptr uint8
 
 proc unregisterResource*(_: type gen_qresource_types.QResource, rccData: ptr uint8, resourceRoot: string): bool =
   fcQResource_unregisterResource22(rccData, struct_miqt_string(data: resourceRoot, len: csize_t(len(resourceRoot))))
+
+proc isDir*(self: gen_qresource_types.QResource, ): bool =
+  fcQResource_protectedbase_isDir(self.h)
+
+proc isFile*(self: gen_qresource_types.QResource, ): bool =
+  fcQResource_protectedbase_isFile(self.h)
+
+proc children*(self: gen_qresource_types.QResource, ): seq[string] =
+  var v_ma = fcQResource_protectedbase_children(self.h)
+  var vx_ret = newSeq[string](int(v_ma.len))
+  let v_outCast = cast[ptr UncheckedArray[struct_miqt_string]](v_ma.data)
+  for i in 0 ..< v_ma.len:
+    let vx_lv_ms = v_outCast[i]
+    let vx_lvx_ret = string.fromBytes(toOpenArrayByte(vx_lv_ms.data, 0, int(vx_lv_ms.len)-1))
+    c_free(vx_lv_ms.data)
+    vx_ret[i] = vx_lvx_ret
+  vx_ret
 
 proc create*(T: type gen_qresource_types.QResource): gen_qresource_types.QResource =
   gen_qresource_types.QResource(h: fcQResource_new())

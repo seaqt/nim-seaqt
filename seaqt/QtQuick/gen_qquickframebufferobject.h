@@ -207,15 +207,15 @@ void QQuickFramebufferObject_virtualbase_childEvent(void* self, QChildEvent* eve
 void QQuickFramebufferObject_virtualbase_customEvent(void* self, QEvent* event);
 void QQuickFramebufferObject_virtualbase_connectNotify(void* self, QMetaMethod* signal);
 void QQuickFramebufferObject_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
-bool QQuickFramebufferObject_protectedbase_isComponentComplete(bool* _dynamic_cast_ok, const void* self);
-void QQuickFramebufferObject_protectedbase_updateInputMethod(bool* _dynamic_cast_ok, void* self);
-bool QQuickFramebufferObject_protectedbase_widthValid(bool* _dynamic_cast_ok, const void* self);
-bool QQuickFramebufferObject_protectedbase_heightValid(bool* _dynamic_cast_ok, const void* self);
-void QQuickFramebufferObject_protectedbase_setImplicitSize(bool* _dynamic_cast_ok, void* self, double param1, double param2);
-QObject* QQuickFramebufferObject_protectedbase_sender(bool* _dynamic_cast_ok, const void* self);
-int QQuickFramebufferObject_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
-int QQuickFramebufferObject_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
-bool QQuickFramebufferObject_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+bool QQuickFramebufferObject_protectedbase_isComponentComplete(const void* self);
+void QQuickFramebufferObject_protectedbase_updateInputMethod(void* self);
+bool QQuickFramebufferObject_protectedbase_widthValid(const void* self);
+bool QQuickFramebufferObject_protectedbase_heightValid(const void* self);
+void QQuickFramebufferObject_protectedbase_setImplicitSize(void* self, double param1, double param2);
+QObject* QQuickFramebufferObject_protectedbase_sender(const void* self);
+int QQuickFramebufferObject_protectedbase_senderSignalIndex(const void* self);
+int QQuickFramebufferObject_protectedbase_receivers(const void* self, const char* signal);
+bool QQuickFramebufferObject_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
 const QMetaObject* QQuickFramebufferObject_staticMetaObject();
 void QQuickFramebufferObject_delete(QQuickFramebufferObject* self);
 

@@ -38,10 +38,14 @@ import ./gen_qmetadatareadercontrol_types
 export gen_qmetadatareadercontrol_types
 
 import
+  ../QtCore/gen_qmetaobject_types,
+  ../QtCore/gen_qobject_types,
   ../QtCore/gen_qobjectdefs_types,
   ../QtCore/gen_qvariant_types,
   ./gen_qmediacontrol
 export
+  gen_qmetaobject_types,
+  gen_qobject_types,
   gen_qobjectdefs_types,
   gen_qvariant_types,
   gen_qmediacontrol
@@ -66,6 +70,10 @@ proc fcQMetaDataReaderControl_tr2(s: cstring, c: cstring): struct_miqt_string {.
 proc fcQMetaDataReaderControl_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QMetaDataReaderControl_tr3".}
 proc fcQMetaDataReaderControl_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QMetaDataReaderControl_trUtf82".}
 proc fcQMetaDataReaderControl_trUtf83(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QMetaDataReaderControl_trUtf83".}
+proc fcQMetaDataReaderControl_protectedbase_sender(self: pointer, ): pointer {.importc: "QMetaDataReaderControl_protectedbase_sender".}
+proc fcQMetaDataReaderControl_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QMetaDataReaderControl_protectedbase_senderSignalIndex".}
+proc fcQMetaDataReaderControl_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QMetaDataReaderControl_protectedbase_receivers".}
+proc fcQMetaDataReaderControl_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QMetaDataReaderControl_protectedbase_isSignalConnected".}
 proc fcQMetaDataReaderControl_staticMetaObject(): pointer {.importc: "QMetaDataReaderControl_staticMetaObject".}
 proc fcQMetaDataReaderControl_delete(self: pointer) {.importc: "QMetaDataReaderControl_delete".}
 
@@ -193,6 +201,18 @@ proc trUtf8*(_: type gen_qmetadatareadercontrol_types.QMetaDataReaderControl, s:
   let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
   c_free(v_ms.data)
   vx_ret
+
+proc sender*(self: gen_qmetadatareadercontrol_types.QMetaDataReaderControl, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQMetaDataReaderControl_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qmetadatareadercontrol_types.QMetaDataReaderControl, ): cint =
+  fcQMetaDataReaderControl_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qmetadatareadercontrol_types.QMetaDataReaderControl, signal: cstring): cint =
+  fcQMetaDataReaderControl_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qmetadatareadercontrol_types.QMetaDataReaderControl, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQMetaDataReaderControl_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc staticMetaObject*(_: type gen_qmetadatareadercontrol_types.QMetaDataReaderControl): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQMetaDataReaderControl_staticMetaObject())

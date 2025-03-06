@@ -101,6 +101,10 @@ proc fcQPropertyAnimation_virtualbase_childEvent(self: pointer, event: pointer):
 proc fcQPropertyAnimation_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QPropertyAnimation_virtualbase_customEvent".}
 proc fcQPropertyAnimation_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QPropertyAnimation_virtualbase_connectNotify".}
 proc fcQPropertyAnimation_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QPropertyAnimation_virtualbase_disconnectNotify".}
+proc fcQPropertyAnimation_protectedbase_sender(self: pointer, ): pointer {.importc: "QPropertyAnimation_protectedbase_sender".}
+proc fcQPropertyAnimation_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QPropertyAnimation_protectedbase_senderSignalIndex".}
+proc fcQPropertyAnimation_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QPropertyAnimation_protectedbase_receivers".}
+proc fcQPropertyAnimation_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QPropertyAnimation_protectedbase_isSignalConnected".}
 proc fcQPropertyAnimation_new(vtbl: pointer, ): ptr cQPropertyAnimation {.importc: "QPropertyAnimation_new".}
 proc fcQPropertyAnimation_new2(vtbl: pointer, target: pointer, propertyName: struct_miqt_string): ptr cQPropertyAnimation {.importc: "QPropertyAnimation_new2".}
 proc fcQPropertyAnimation_new3(vtbl: pointer, parent: pointer): ptr cQPropertyAnimation {.importc: "QPropertyAnimation_new3".}
@@ -356,6 +360,18 @@ proc miqt_exec_callback_cQPropertyAnimation_disconnectNotify(vtbl: pointer, self
   let self = QPropertyAnimation(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
   vtbl[].disconnectNotify(self, slotval1)
+
+proc sender*(self: gen_qpropertyanimation_types.QPropertyAnimation, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQPropertyAnimation_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qpropertyanimation_types.QPropertyAnimation, ): cint =
+  fcQPropertyAnimation_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qpropertyanimation_types.QPropertyAnimation, signal: cstring): cint =
+  fcQPropertyAnimation_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qpropertyanimation_types.QPropertyAnimation, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQPropertyAnimation_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc create*(T: type gen_qpropertyanimation_types.QPropertyAnimation,
     vtbl: ref QPropertyAnimationVTable = nil): gen_qpropertyanimation_types.QPropertyAnimation =

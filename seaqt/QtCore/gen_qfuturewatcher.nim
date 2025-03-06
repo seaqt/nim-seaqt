@@ -39,10 +39,12 @@ export gen_qfuturewatcher_types
 
 import
   ./gen_qcoreevent_types,
+  ./gen_qmetaobject_types,
   ./gen_qobject,
   ./gen_qobjectdefs_types
 export
   gen_qcoreevent_types,
+  gen_qmetaobject_types,
   gen_qobject,
   gen_qobjectdefs_types
 
@@ -94,6 +96,13 @@ proc fcQFutureWatcherBase_tr2(s: cstring, c: cstring): struct_miqt_string {.impo
 proc fcQFutureWatcherBase_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QFutureWatcherBase_tr3".}
 proc fcQFutureWatcherBase_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QFutureWatcherBase_trUtf82".}
 proc fcQFutureWatcherBase_trUtf83(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QFutureWatcherBase_trUtf83".}
+proc fcQFutureWatcherBase_protectedbase_connectOutputInterface(self: pointer, ): void {.importc: "QFutureWatcherBase_protectedbase_connectOutputInterface".}
+proc fcQFutureWatcherBase_protectedbase_disconnectOutputInterface(self: pointer, ): void {.importc: "QFutureWatcherBase_protectedbase_disconnectOutputInterface".}
+proc fcQFutureWatcherBase_protectedbase_disconnectOutputInterface1(self: pointer, pendingAssignment: bool): void {.importc: "QFutureWatcherBase_protectedbase_disconnectOutputInterface1".}
+proc fcQFutureWatcherBase_protectedbase_sender(self: pointer, ): pointer {.importc: "QFutureWatcherBase_protectedbase_sender".}
+proc fcQFutureWatcherBase_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QFutureWatcherBase_protectedbase_senderSignalIndex".}
+proc fcQFutureWatcherBase_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QFutureWatcherBase_protectedbase_receivers".}
+proc fcQFutureWatcherBase_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QFutureWatcherBase_protectedbase_isSignalConnected".}
 proc fcQFutureWatcherBase_staticMetaObject(): pointer {.importc: "QFutureWatcherBase_staticMetaObject".}
 proc fcQFutureWatcherBase_delete(self: pointer) {.importc: "QFutureWatcherBase_delete".}
 
@@ -392,6 +401,27 @@ proc trUtf8*(_: type gen_qfuturewatcher_types.QFutureWatcherBase, s: cstring, c:
   let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
   c_free(v_ms.data)
   vx_ret
+
+proc connectOutputInterface*(self: gen_qfuturewatcher_types.QFutureWatcherBase, ): void =
+  fcQFutureWatcherBase_protectedbase_connectOutputInterface(self.h)
+
+proc disconnectOutputInterface*(self: gen_qfuturewatcher_types.QFutureWatcherBase, ): void =
+  fcQFutureWatcherBase_protectedbase_disconnectOutputInterface(self.h)
+
+proc disconnectOutputInterface*(self: gen_qfuturewatcher_types.QFutureWatcherBase, pendingAssignment: bool): void =
+  fcQFutureWatcherBase_protectedbase_disconnectOutputInterface1(self.h, pendingAssignment)
+
+proc sender*(self: gen_qfuturewatcher_types.QFutureWatcherBase, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQFutureWatcherBase_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qfuturewatcher_types.QFutureWatcherBase, ): cint =
+  fcQFutureWatcherBase_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qfuturewatcher_types.QFutureWatcherBase, signal: cstring): cint =
+  fcQFutureWatcherBase_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qfuturewatcher_types.QFutureWatcherBase, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQFutureWatcherBase_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc staticMetaObject*(_: type gen_qfuturewatcher_types.QFutureWatcherBase): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQFutureWatcherBase_staticMetaObject())

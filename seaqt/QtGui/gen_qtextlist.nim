@@ -103,6 +103,11 @@ proc fcQTextList_virtualbase_childEvent(self: pointer, event: pointer): void {.i
 proc fcQTextList_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QTextList_virtualbase_customEvent".}
 proc fcQTextList_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QTextList_virtualbase_connectNotify".}
 proc fcQTextList_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QTextList_virtualbase_disconnectNotify".}
+proc fcQTextList_protectedbase_blockList(self: pointer, ): struct_miqt_array {.importc: "QTextList_protectedbase_blockList".}
+proc fcQTextList_protectedbase_sender(self: pointer, ): pointer {.importc: "QTextList_protectedbase_sender".}
+proc fcQTextList_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QTextList_protectedbase_senderSignalIndex".}
+proc fcQTextList_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QTextList_protectedbase_receivers".}
+proc fcQTextList_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QTextList_protectedbase_isSignalConnected".}
 proc fcQTextList_new(vtbl: pointer, doc: pointer): ptr cQTextList {.importc: "QTextList_new".}
 proc fcQTextList_staticMetaObject(): pointer {.importc: "QTextList_staticMetaObject".}
 proc fcQTextList_delete(self: pointer) {.importc: "QTextList_delete".}
@@ -336,6 +341,26 @@ proc miqt_exec_callback_cQTextList_disconnectNotify(vtbl: pointer, self: pointer
   let self = QTextList(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
   vtbl[].disconnectNotify(self, slotval1)
+
+proc blockList*(self: gen_qtextlist_types.QTextList, ): seq[gen_qtextobject_types.QTextBlock] =
+  var v_ma = fcQTextList_protectedbase_blockList(self.h)
+  var vx_ret = newSeq[gen_qtextobject_types.QTextBlock](int(v_ma.len))
+  let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
+  for i in 0 ..< v_ma.len:
+    vx_ret[i] = gen_qtextobject_types.QTextBlock(h: v_outCast[i])
+  vx_ret
+
+proc sender*(self: gen_qtextlist_types.QTextList, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQTextList_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qtextlist_types.QTextList, ): cint =
+  fcQTextList_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qtextlist_types.QTextList, signal: cstring): cint =
+  fcQTextList_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qtextlist_types.QTextList, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQTextList_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc create*(T: type gen_qtextlist_types.QTextList,
     doc: gen_qtextdocument_types.QTextDocument,

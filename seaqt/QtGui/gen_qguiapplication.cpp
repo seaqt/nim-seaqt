@@ -215,10 +215,10 @@ public:
 	friend void QGuiApplication_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
 
 	// Wrappers to allow calling protected methods:
-	friend QObject* QGuiApplication_protectedbase_sender(bool* _dynamic_cast_ok, const void* self);
-	friend int QGuiApplication_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
-	friend int QGuiApplication_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
-	friend bool QGuiApplication_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+	friend QObject* QGuiApplication_protectedbase_sender(const void* self);
+	friend int QGuiApplication_protectedbase_senderSignalIndex(const void* self);
+	friend int QGuiApplication_protectedbase_receivers(const void* self, const char* signal);
+	friend bool QGuiApplication_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
 };
 
 QGuiApplication* QGuiApplication_new(struct QGuiApplication_VTable* vtbl, int* argc, char** argv) {
@@ -884,53 +884,29 @@ void QGuiApplication_virtualbase_disconnectNotify(void* self, QMetaMethod* signa
 }
 
 const QMetaObject* QGuiApplication_staticMetaObject() { return &QGuiApplication::staticMetaObject; }
-QObject* QGuiApplication_protectedbase_sender(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQGuiApplication* self_cast = dynamic_cast<VirtualQGuiApplication*>( (QGuiApplication*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return nullptr;
-	}
-	
-	*_dynamic_cast_ok = true;
+QObject* QGuiApplication_protectedbase_sender(const void* self) {
+	VirtualQGuiApplication* self_cast = static_cast<VirtualQGuiApplication*>( (QGuiApplication*)(self) );
 	
 	return self_cast->sender();
 
 }
 
-int QGuiApplication_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQGuiApplication* self_cast = dynamic_cast<VirtualQGuiApplication*>( (QGuiApplication*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return 0;
-	}
-	
-	*_dynamic_cast_ok = true;
+int QGuiApplication_protectedbase_senderSignalIndex(const void* self) {
+	VirtualQGuiApplication* self_cast = static_cast<VirtualQGuiApplication*>( (QGuiApplication*)(self) );
 	
 	return self_cast->senderSignalIndex();
 
 }
 
-int QGuiApplication_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal) {
-	VirtualQGuiApplication* self_cast = dynamic_cast<VirtualQGuiApplication*>( (QGuiApplication*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return 0;
-	}
-	
-	*_dynamic_cast_ok = true;
+int QGuiApplication_protectedbase_receivers(const void* self, const char* signal) {
+	VirtualQGuiApplication* self_cast = static_cast<VirtualQGuiApplication*>( (QGuiApplication*)(self) );
 	
 	return self_cast->receivers(signal);
 
 }
 
-bool QGuiApplication_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal) {
-	VirtualQGuiApplication* self_cast = dynamic_cast<VirtualQGuiApplication*>( (QGuiApplication*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return false;
-	}
-	
-	*_dynamic_cast_ok = true;
+bool QGuiApplication_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal) {
+	VirtualQGuiApplication* self_cast = static_cast<VirtualQGuiApplication*>( (QGuiApplication*)(self) );
 	
 	return self_cast->isSignalConnected(*signal);
 

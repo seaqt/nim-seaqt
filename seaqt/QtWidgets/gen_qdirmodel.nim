@@ -46,6 +46,7 @@ export gen_qdirmodel_types
 import
   ../QtCore/gen_qabstractitemmodel,
   ../QtCore/gen_qcoreevent_types,
+  ../QtCore/gen_qdatastream_types,
   ../QtCore/gen_qfileinfo_types,
   ../QtCore/gen_qmetaobject_types,
   ../QtCore/gen_qmimedata_types,
@@ -59,6 +60,7 @@ import
 export
   gen_qabstractitemmodel,
   gen_qcoreevent_types,
+  gen_qdatastream_types,
   gen_qfileinfo_types,
   gen_qmetaobject_types,
   gen_qmimedata_types,
@@ -210,6 +212,31 @@ proc fcQDirModel_virtualbase_childEvent(self: pointer, event: pointer): void {.i
 proc fcQDirModel_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QDirModel_virtualbase_customEvent".}
 proc fcQDirModel_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QDirModel_virtualbase_connectNotify".}
 proc fcQDirModel_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QDirModel_virtualbase_disconnectNotify".}
+proc fcQDirModel_protectedbase_resetInternalData(self: pointer, ): void {.importc: "QDirModel_protectedbase_resetInternalData".}
+proc fcQDirModel_protectedbase_createIndex(self: pointer, row: cint, column: cint): pointer {.importc: "QDirModel_protectedbase_createIndex".}
+proc fcQDirModel_protectedbase_encodeData(self: pointer, indexes: struct_miqt_array, stream: pointer): void {.importc: "QDirModel_protectedbase_encodeData".}
+proc fcQDirModel_protectedbase_decodeData(self: pointer, row: cint, column: cint, parent: pointer, stream: pointer): bool {.importc: "QDirModel_protectedbase_decodeData".}
+proc fcQDirModel_protectedbase_beginInsertRows(self: pointer, parent: pointer, first: cint, last: cint): void {.importc: "QDirModel_protectedbase_beginInsertRows".}
+proc fcQDirModel_protectedbase_endInsertRows(self: pointer, ): void {.importc: "QDirModel_protectedbase_endInsertRows".}
+proc fcQDirModel_protectedbase_beginRemoveRows(self: pointer, parent: pointer, first: cint, last: cint): void {.importc: "QDirModel_protectedbase_beginRemoveRows".}
+proc fcQDirModel_protectedbase_endRemoveRows(self: pointer, ): void {.importc: "QDirModel_protectedbase_endRemoveRows".}
+proc fcQDirModel_protectedbase_beginMoveRows(self: pointer, sourceParent: pointer, sourceFirst: cint, sourceLast: cint, destinationParent: pointer, destinationRow: cint): bool {.importc: "QDirModel_protectedbase_beginMoveRows".}
+proc fcQDirModel_protectedbase_endMoveRows(self: pointer, ): void {.importc: "QDirModel_protectedbase_endMoveRows".}
+proc fcQDirModel_protectedbase_beginInsertColumns(self: pointer, parent: pointer, first: cint, last: cint): void {.importc: "QDirModel_protectedbase_beginInsertColumns".}
+proc fcQDirModel_protectedbase_endInsertColumns(self: pointer, ): void {.importc: "QDirModel_protectedbase_endInsertColumns".}
+proc fcQDirModel_protectedbase_beginRemoveColumns(self: pointer, parent: pointer, first: cint, last: cint): void {.importc: "QDirModel_protectedbase_beginRemoveColumns".}
+proc fcQDirModel_protectedbase_endRemoveColumns(self: pointer, ): void {.importc: "QDirModel_protectedbase_endRemoveColumns".}
+proc fcQDirModel_protectedbase_beginMoveColumns(self: pointer, sourceParent: pointer, sourceFirst: cint, sourceLast: cint, destinationParent: pointer, destinationColumn: cint): bool {.importc: "QDirModel_protectedbase_beginMoveColumns".}
+proc fcQDirModel_protectedbase_endMoveColumns(self: pointer, ): void {.importc: "QDirModel_protectedbase_endMoveColumns".}
+proc fcQDirModel_protectedbase_beginResetModel(self: pointer, ): void {.importc: "QDirModel_protectedbase_beginResetModel".}
+proc fcQDirModel_protectedbase_endResetModel(self: pointer, ): void {.importc: "QDirModel_protectedbase_endResetModel".}
+proc fcQDirModel_protectedbase_changePersistentIndex(self: pointer, fromVal: pointer, to: pointer): void {.importc: "QDirModel_protectedbase_changePersistentIndex".}
+proc fcQDirModel_protectedbase_changePersistentIndexList(self: pointer, fromVal: struct_miqt_array, to: struct_miqt_array): void {.importc: "QDirModel_protectedbase_changePersistentIndexList".}
+proc fcQDirModel_protectedbase_persistentIndexList(self: pointer, ): struct_miqt_array {.importc: "QDirModel_protectedbase_persistentIndexList".}
+proc fcQDirModel_protectedbase_sender(self: pointer, ): pointer {.importc: "QDirModel_protectedbase_sender".}
+proc fcQDirModel_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QDirModel_protectedbase_senderSignalIndex".}
+proc fcQDirModel_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QDirModel_protectedbase_receivers".}
+proc fcQDirModel_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QDirModel_protectedbase_isSignalConnected".}
 proc fcQDirModel_new(vtbl: pointer, nameFilters: struct_miqt_array, filters: cint, sort: cint): ptr cQDirModel {.importc: "QDirModel_new".}
 proc fcQDirModel_new2(vtbl: pointer, ): ptr cQDirModel {.importc: "QDirModel_new2".}
 proc fcQDirModel_new3(vtbl: pointer, nameFilters: struct_miqt_array, filters: cint, sort: cint, parent: pointer): ptr cQDirModel {.importc: "QDirModel_new3".}
@@ -1058,6 +1085,98 @@ proc miqt_exec_callback_cQDirModel_disconnectNotify(vtbl: pointer, self: pointer
   let self = QDirModel(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
   vtbl[].disconnectNotify(self, slotval1)
+
+proc resetInternalData*(self: gen_qdirmodel_types.QDirModel, ): void =
+  fcQDirModel_protectedbase_resetInternalData(self.h)
+
+proc createIndex*(self: gen_qdirmodel_types.QDirModel, row: cint, column: cint): gen_qabstractitemmodel_types.QModelIndex =
+  gen_qabstractitemmodel_types.QModelIndex(h: fcQDirModel_protectedbase_createIndex(self.h, row, column))
+
+proc encodeData*(self: gen_qdirmodel_types.QDirModel, indexes: seq[gen_qabstractitemmodel_types.QModelIndex], stream: gen_qdatastream_types.QDataStream): void =
+  var indexes_CArray = newSeq[pointer](len(indexes))
+  for i in 0..<len(indexes):
+    indexes_CArray[i] = indexes[i].h
+
+  fcQDirModel_protectedbase_encodeData(self.h, struct_miqt_array(len: csize_t(len(indexes)), data: if len(indexes) == 0: nil else: addr(indexes_CArray[0])), stream.h)
+
+proc decodeData*(self: gen_qdirmodel_types.QDirModel, row: cint, column: cint, parent: gen_qabstractitemmodel_types.QModelIndex, stream: gen_qdatastream_types.QDataStream): bool =
+  fcQDirModel_protectedbase_decodeData(self.h, row, column, parent.h, stream.h)
+
+proc beginInsertRows*(self: gen_qdirmodel_types.QDirModel, parent: gen_qabstractitemmodel_types.QModelIndex, first: cint, last: cint): void =
+  fcQDirModel_protectedbase_beginInsertRows(self.h, parent.h, first, last)
+
+proc endInsertRows*(self: gen_qdirmodel_types.QDirModel, ): void =
+  fcQDirModel_protectedbase_endInsertRows(self.h)
+
+proc beginRemoveRows*(self: gen_qdirmodel_types.QDirModel, parent: gen_qabstractitemmodel_types.QModelIndex, first: cint, last: cint): void =
+  fcQDirModel_protectedbase_beginRemoveRows(self.h, parent.h, first, last)
+
+proc endRemoveRows*(self: gen_qdirmodel_types.QDirModel, ): void =
+  fcQDirModel_protectedbase_endRemoveRows(self.h)
+
+proc beginMoveRows*(self: gen_qdirmodel_types.QDirModel, sourceParent: gen_qabstractitemmodel_types.QModelIndex, sourceFirst: cint, sourceLast: cint, destinationParent: gen_qabstractitemmodel_types.QModelIndex, destinationRow: cint): bool =
+  fcQDirModel_protectedbase_beginMoveRows(self.h, sourceParent.h, sourceFirst, sourceLast, destinationParent.h, destinationRow)
+
+proc endMoveRows*(self: gen_qdirmodel_types.QDirModel, ): void =
+  fcQDirModel_protectedbase_endMoveRows(self.h)
+
+proc beginInsertColumns*(self: gen_qdirmodel_types.QDirModel, parent: gen_qabstractitemmodel_types.QModelIndex, first: cint, last: cint): void =
+  fcQDirModel_protectedbase_beginInsertColumns(self.h, parent.h, first, last)
+
+proc endInsertColumns*(self: gen_qdirmodel_types.QDirModel, ): void =
+  fcQDirModel_protectedbase_endInsertColumns(self.h)
+
+proc beginRemoveColumns*(self: gen_qdirmodel_types.QDirModel, parent: gen_qabstractitemmodel_types.QModelIndex, first: cint, last: cint): void =
+  fcQDirModel_protectedbase_beginRemoveColumns(self.h, parent.h, first, last)
+
+proc endRemoveColumns*(self: gen_qdirmodel_types.QDirModel, ): void =
+  fcQDirModel_protectedbase_endRemoveColumns(self.h)
+
+proc beginMoveColumns*(self: gen_qdirmodel_types.QDirModel, sourceParent: gen_qabstractitemmodel_types.QModelIndex, sourceFirst: cint, sourceLast: cint, destinationParent: gen_qabstractitemmodel_types.QModelIndex, destinationColumn: cint): bool =
+  fcQDirModel_protectedbase_beginMoveColumns(self.h, sourceParent.h, sourceFirst, sourceLast, destinationParent.h, destinationColumn)
+
+proc endMoveColumns*(self: gen_qdirmodel_types.QDirModel, ): void =
+  fcQDirModel_protectedbase_endMoveColumns(self.h)
+
+proc beginResetModel*(self: gen_qdirmodel_types.QDirModel, ): void =
+  fcQDirModel_protectedbase_beginResetModel(self.h)
+
+proc endResetModel*(self: gen_qdirmodel_types.QDirModel, ): void =
+  fcQDirModel_protectedbase_endResetModel(self.h)
+
+proc changePersistentIndex*(self: gen_qdirmodel_types.QDirModel, fromVal: gen_qabstractitemmodel_types.QModelIndex, to: gen_qabstractitemmodel_types.QModelIndex): void =
+  fcQDirModel_protectedbase_changePersistentIndex(self.h, fromVal.h, to.h)
+
+proc changePersistentIndexList*(self: gen_qdirmodel_types.QDirModel, fromVal: seq[gen_qabstractitemmodel_types.QModelIndex], to: seq[gen_qabstractitemmodel_types.QModelIndex]): void =
+  var fromVal_CArray = newSeq[pointer](len(fromVal))
+  for i in 0..<len(fromVal):
+    fromVal_CArray[i] = fromVal[i].h
+
+  var to_CArray = newSeq[pointer](len(to))
+  for i in 0..<len(to):
+    to_CArray[i] = to[i].h
+
+  fcQDirModel_protectedbase_changePersistentIndexList(self.h, struct_miqt_array(len: csize_t(len(fromVal)), data: if len(fromVal) == 0: nil else: addr(fromVal_CArray[0])), struct_miqt_array(len: csize_t(len(to)), data: if len(to) == 0: nil else: addr(to_CArray[0])))
+
+proc persistentIndexList*(self: gen_qdirmodel_types.QDirModel, ): seq[gen_qabstractitemmodel_types.QModelIndex] =
+  var v_ma = fcQDirModel_protectedbase_persistentIndexList(self.h)
+  var vx_ret = newSeq[gen_qabstractitemmodel_types.QModelIndex](int(v_ma.len))
+  let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
+  for i in 0 ..< v_ma.len:
+    vx_ret[i] = gen_qabstractitemmodel_types.QModelIndex(h: v_outCast[i])
+  vx_ret
+
+proc sender*(self: gen_qdirmodel_types.QDirModel, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQDirModel_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qdirmodel_types.QDirModel, ): cint =
+  fcQDirModel_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qdirmodel_types.QDirModel, signal: cstring): cint =
+  fcQDirModel_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qdirmodel_types.QDirModel, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQDirModel_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc create*(T: type gen_qdirmodel_types.QDirModel,
     nameFilters: seq[string], filters: cint, sort: cint,

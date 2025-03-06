@@ -118,6 +118,10 @@ proc fcQButtonGroup_virtualbase_childEvent(self: pointer, event: pointer): void 
 proc fcQButtonGroup_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QButtonGroup_virtualbase_customEvent".}
 proc fcQButtonGroup_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QButtonGroup_virtualbase_connectNotify".}
 proc fcQButtonGroup_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QButtonGroup_virtualbase_disconnectNotify".}
+proc fcQButtonGroup_protectedbase_sender(self: pointer, ): pointer {.importc: "QButtonGroup_protectedbase_sender".}
+proc fcQButtonGroup_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QButtonGroup_protectedbase_senderSignalIndex".}
+proc fcQButtonGroup_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QButtonGroup_protectedbase_receivers".}
+proc fcQButtonGroup_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QButtonGroup_protectedbase_isSignalConnected".}
 proc fcQButtonGroup_new(vtbl: pointer, ): ptr cQButtonGroup {.importc: "QButtonGroup_new".}
 proc fcQButtonGroup_new2(vtbl: pointer, parent: pointer): ptr cQButtonGroup {.importc: "QButtonGroup_new2".}
 proc fcQButtonGroup_staticMetaObject(): pointer {.importc: "QButtonGroup_staticMetaObject".}
@@ -570,6 +574,18 @@ proc miqt_exec_callback_cQButtonGroup_disconnectNotify(vtbl: pointer, self: poin
   let self = QButtonGroup(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
   vtbl[].disconnectNotify(self, slotval1)
+
+proc sender*(self: gen_qbuttongroup_types.QButtonGroup, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQButtonGroup_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qbuttongroup_types.QButtonGroup, ): cint =
+  fcQButtonGroup_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qbuttongroup_types.QButtonGroup, signal: cstring): cint =
+  fcQButtonGroup_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qbuttongroup_types.QButtonGroup, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQButtonGroup_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc create*(T: type gen_qbuttongroup_types.QButtonGroup,
     vtbl: ref QButtonGroupVTable = nil): gen_qbuttongroup_types.QButtonGroup =

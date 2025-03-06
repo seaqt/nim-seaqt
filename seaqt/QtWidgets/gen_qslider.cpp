@@ -835,18 +835,18 @@ public:
 	friend void QSlider_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
 
 	// Wrappers to allow calling protected methods:
-	friend void QSlider_protectedbase_initStyleOption(bool* _dynamic_cast_ok, const void* self, QStyleOptionSlider* option);
-	friend void QSlider_protectedbase_setRepeatAction(bool* _dynamic_cast_ok, void* self, int action);
-	friend int QSlider_protectedbase_repeatAction(bool* _dynamic_cast_ok, const void* self);
-	friend void QSlider_protectedbase_updateMicroFocus(bool* _dynamic_cast_ok, void* self);
-	friend void QSlider_protectedbase_create(bool* _dynamic_cast_ok, void* self);
-	friend void QSlider_protectedbase_destroy(bool* _dynamic_cast_ok, void* self);
-	friend bool QSlider_protectedbase_focusNextChild(bool* _dynamic_cast_ok, void* self);
-	friend bool QSlider_protectedbase_focusPreviousChild(bool* _dynamic_cast_ok, void* self);
-	friend QObject* QSlider_protectedbase_sender(bool* _dynamic_cast_ok, const void* self);
-	friend int QSlider_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
-	friend int QSlider_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
-	friend bool QSlider_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+	friend void QSlider_protectedbase_initStyleOption(const void* self, QStyleOptionSlider* option);
+	friend void QSlider_protectedbase_setRepeatAction(void* self, int action);
+	friend int QSlider_protectedbase_repeatAction(const void* self);
+	friend void QSlider_protectedbase_updateMicroFocus(void* self);
+	friend void QSlider_protectedbase_create(void* self);
+	friend void QSlider_protectedbase_destroy(void* self);
+	friend bool QSlider_protectedbase_focusNextChild(void* self);
+	friend bool QSlider_protectedbase_focusPreviousChild(void* self);
+	friend QObject* QSlider_protectedbase_sender(const void* self);
+	friend int QSlider_protectedbase_senderSignalIndex(const void* self);
+	friend int QSlider_protectedbase_receivers(const void* self, const char* signal);
+	friend bool QSlider_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
 };
 
 QSlider* QSlider_new(struct QSlider_VTable* vtbl, QWidget* parent) {
@@ -1284,158 +1284,86 @@ void QSlider_virtualbase_disconnectNotify(void* self, QMetaMethod* signal) {
 }
 
 const QMetaObject* QSlider_staticMetaObject() { return &QSlider::staticMetaObject; }
-void QSlider_protectedbase_initStyleOption(bool* _dynamic_cast_ok, const void* self, QStyleOptionSlider* option) {
-	VirtualQSlider* self_cast = dynamic_cast<VirtualQSlider*>( (QSlider*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QSlider_protectedbase_initStyleOption(const void* self, QStyleOptionSlider* option) {
+	VirtualQSlider* self_cast = static_cast<VirtualQSlider*>( (QSlider*)(self) );
 	
 	self_cast->initStyleOption(option);
 
 }
 
-void QSlider_protectedbase_setRepeatAction(bool* _dynamic_cast_ok, void* self, int action) {
-	VirtualQSlider* self_cast = dynamic_cast<VirtualQSlider*>( (QSlider*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QSlider_protectedbase_setRepeatAction(void* self, int action) {
+	VirtualQSlider* self_cast = static_cast<VirtualQSlider*>( (QSlider*)(self) );
 	
 	self_cast->setRepeatAction(static_cast<VirtualQSlider::SliderAction>(action));
 
 }
 
-int QSlider_protectedbase_repeatAction(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQSlider* self_cast = dynamic_cast<VirtualQSlider*>( (QSlider*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return (int)(0);
-	}
-	
-	*_dynamic_cast_ok = true;
+int QSlider_protectedbase_repeatAction(const void* self) {
+	VirtualQSlider* self_cast = static_cast<VirtualQSlider*>( (QSlider*)(self) );
 	
 	VirtualQSlider::SliderAction _ret = self_cast->repeatAction();
 	return static_cast<int>(_ret);
 
 }
 
-void QSlider_protectedbase_updateMicroFocus(bool* _dynamic_cast_ok, void* self) {
-	VirtualQSlider* self_cast = dynamic_cast<VirtualQSlider*>( (QSlider*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QSlider_protectedbase_updateMicroFocus(void* self) {
+	VirtualQSlider* self_cast = static_cast<VirtualQSlider*>( (QSlider*)(self) );
 	
 	self_cast->updateMicroFocus();
 
 }
 
-void QSlider_protectedbase_create(bool* _dynamic_cast_ok, void* self) {
-	VirtualQSlider* self_cast = dynamic_cast<VirtualQSlider*>( (QSlider*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QSlider_protectedbase_create(void* self) {
+	VirtualQSlider* self_cast = static_cast<VirtualQSlider*>( (QSlider*)(self) );
 	
 	self_cast->create();
 
 }
 
-void QSlider_protectedbase_destroy(bool* _dynamic_cast_ok, void* self) {
-	VirtualQSlider* self_cast = dynamic_cast<VirtualQSlider*>( (QSlider*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QSlider_protectedbase_destroy(void* self) {
+	VirtualQSlider* self_cast = static_cast<VirtualQSlider*>( (QSlider*)(self) );
 	
 	self_cast->destroy();
 
 }
 
-bool QSlider_protectedbase_focusNextChild(bool* _dynamic_cast_ok, void* self) {
-	VirtualQSlider* self_cast = dynamic_cast<VirtualQSlider*>( (QSlider*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return false;
-	}
-	
-	*_dynamic_cast_ok = true;
+bool QSlider_protectedbase_focusNextChild(void* self) {
+	VirtualQSlider* self_cast = static_cast<VirtualQSlider*>( (QSlider*)(self) );
 	
 	return self_cast->focusNextChild();
 
 }
 
-bool QSlider_protectedbase_focusPreviousChild(bool* _dynamic_cast_ok, void* self) {
-	VirtualQSlider* self_cast = dynamic_cast<VirtualQSlider*>( (QSlider*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return false;
-	}
-	
-	*_dynamic_cast_ok = true;
+bool QSlider_protectedbase_focusPreviousChild(void* self) {
+	VirtualQSlider* self_cast = static_cast<VirtualQSlider*>( (QSlider*)(self) );
 	
 	return self_cast->focusPreviousChild();
 
 }
 
-QObject* QSlider_protectedbase_sender(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQSlider* self_cast = dynamic_cast<VirtualQSlider*>( (QSlider*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return nullptr;
-	}
-	
-	*_dynamic_cast_ok = true;
+QObject* QSlider_protectedbase_sender(const void* self) {
+	VirtualQSlider* self_cast = static_cast<VirtualQSlider*>( (QSlider*)(self) );
 	
 	return self_cast->sender();
 
 }
 
-int QSlider_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQSlider* self_cast = dynamic_cast<VirtualQSlider*>( (QSlider*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return 0;
-	}
-	
-	*_dynamic_cast_ok = true;
+int QSlider_protectedbase_senderSignalIndex(const void* self) {
+	VirtualQSlider* self_cast = static_cast<VirtualQSlider*>( (QSlider*)(self) );
 	
 	return self_cast->senderSignalIndex();
 
 }
 
-int QSlider_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal) {
-	VirtualQSlider* self_cast = dynamic_cast<VirtualQSlider*>( (QSlider*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return 0;
-	}
-	
-	*_dynamic_cast_ok = true;
+int QSlider_protectedbase_receivers(const void* self, const char* signal) {
+	VirtualQSlider* self_cast = static_cast<VirtualQSlider*>( (QSlider*)(self) );
 	
 	return self_cast->receivers(signal);
 
 }
 
-bool QSlider_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal) {
-	VirtualQSlider* self_cast = dynamic_cast<VirtualQSlider*>( (QSlider*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return false;
-	}
-	
-	*_dynamic_cast_ok = true;
+bool QSlider_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal) {
+	VirtualQSlider* self_cast = static_cast<VirtualQSlider*>( (QSlider*)(self) );
 	
 	return self_cast->isSignalConnected(*signal);
 

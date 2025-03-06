@@ -840,15 +840,15 @@ public:
 	friend void QSplashScreen_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
 
 	// Wrappers to allow calling protected methods:
-	friend void QSplashScreen_protectedbase_updateMicroFocus(bool* _dynamic_cast_ok, void* self);
-	friend void QSplashScreen_protectedbase_create(bool* _dynamic_cast_ok, void* self);
-	friend void QSplashScreen_protectedbase_destroy(bool* _dynamic_cast_ok, void* self);
-	friend bool QSplashScreen_protectedbase_focusNextChild(bool* _dynamic_cast_ok, void* self);
-	friend bool QSplashScreen_protectedbase_focusPreviousChild(bool* _dynamic_cast_ok, void* self);
-	friend QObject* QSplashScreen_protectedbase_sender(bool* _dynamic_cast_ok, const void* self);
-	friend int QSplashScreen_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
-	friend int QSplashScreen_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
-	friend bool QSplashScreen_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+	friend void QSplashScreen_protectedbase_updateMicroFocus(void* self);
+	friend void QSplashScreen_protectedbase_create(void* self);
+	friend void QSplashScreen_protectedbase_destroy(void* self);
+	friend bool QSplashScreen_protectedbase_focusNextChild(void* self);
+	friend bool QSplashScreen_protectedbase_focusPreviousChild(void* self);
+	friend QObject* QSplashScreen_protectedbase_sender(const void* self);
+	friend int QSplashScreen_protectedbase_senderSignalIndex(const void* self);
+	friend int QSplashScreen_protectedbase_receivers(const void* self, const char* signal);
+	friend bool QSplashScreen_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
 };
 
 QSplashScreen* QSplashScreen_new(struct QSplashScreen_VTable* vtbl, QWidget* parent) {
@@ -1347,118 +1347,64 @@ void QSplashScreen_virtualbase_disconnectNotify(void* self, QMetaMethod* signal)
 }
 
 const QMetaObject* QSplashScreen_staticMetaObject() { return &QSplashScreen::staticMetaObject; }
-void QSplashScreen_protectedbase_updateMicroFocus(bool* _dynamic_cast_ok, void* self) {
-	VirtualQSplashScreen* self_cast = dynamic_cast<VirtualQSplashScreen*>( (QSplashScreen*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QSplashScreen_protectedbase_updateMicroFocus(void* self) {
+	VirtualQSplashScreen* self_cast = static_cast<VirtualQSplashScreen*>( (QSplashScreen*)(self) );
 	
 	self_cast->updateMicroFocus();
 
 }
 
-void QSplashScreen_protectedbase_create(bool* _dynamic_cast_ok, void* self) {
-	VirtualQSplashScreen* self_cast = dynamic_cast<VirtualQSplashScreen*>( (QSplashScreen*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QSplashScreen_protectedbase_create(void* self) {
+	VirtualQSplashScreen* self_cast = static_cast<VirtualQSplashScreen*>( (QSplashScreen*)(self) );
 	
 	self_cast->create();
 
 }
 
-void QSplashScreen_protectedbase_destroy(bool* _dynamic_cast_ok, void* self) {
-	VirtualQSplashScreen* self_cast = dynamic_cast<VirtualQSplashScreen*>( (QSplashScreen*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QSplashScreen_protectedbase_destroy(void* self) {
+	VirtualQSplashScreen* self_cast = static_cast<VirtualQSplashScreen*>( (QSplashScreen*)(self) );
 	
 	self_cast->destroy();
 
 }
 
-bool QSplashScreen_protectedbase_focusNextChild(bool* _dynamic_cast_ok, void* self) {
-	VirtualQSplashScreen* self_cast = dynamic_cast<VirtualQSplashScreen*>( (QSplashScreen*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return false;
-	}
-	
-	*_dynamic_cast_ok = true;
+bool QSplashScreen_protectedbase_focusNextChild(void* self) {
+	VirtualQSplashScreen* self_cast = static_cast<VirtualQSplashScreen*>( (QSplashScreen*)(self) );
 	
 	return self_cast->focusNextChild();
 
 }
 
-bool QSplashScreen_protectedbase_focusPreviousChild(bool* _dynamic_cast_ok, void* self) {
-	VirtualQSplashScreen* self_cast = dynamic_cast<VirtualQSplashScreen*>( (QSplashScreen*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return false;
-	}
-	
-	*_dynamic_cast_ok = true;
+bool QSplashScreen_protectedbase_focusPreviousChild(void* self) {
+	VirtualQSplashScreen* self_cast = static_cast<VirtualQSplashScreen*>( (QSplashScreen*)(self) );
 	
 	return self_cast->focusPreviousChild();
 
 }
 
-QObject* QSplashScreen_protectedbase_sender(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQSplashScreen* self_cast = dynamic_cast<VirtualQSplashScreen*>( (QSplashScreen*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return nullptr;
-	}
-	
-	*_dynamic_cast_ok = true;
+QObject* QSplashScreen_protectedbase_sender(const void* self) {
+	VirtualQSplashScreen* self_cast = static_cast<VirtualQSplashScreen*>( (QSplashScreen*)(self) );
 	
 	return self_cast->sender();
 
 }
 
-int QSplashScreen_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQSplashScreen* self_cast = dynamic_cast<VirtualQSplashScreen*>( (QSplashScreen*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return 0;
-	}
-	
-	*_dynamic_cast_ok = true;
+int QSplashScreen_protectedbase_senderSignalIndex(const void* self) {
+	VirtualQSplashScreen* self_cast = static_cast<VirtualQSplashScreen*>( (QSplashScreen*)(self) );
 	
 	return self_cast->senderSignalIndex();
 
 }
 
-int QSplashScreen_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal) {
-	VirtualQSplashScreen* self_cast = dynamic_cast<VirtualQSplashScreen*>( (QSplashScreen*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return 0;
-	}
-	
-	*_dynamic_cast_ok = true;
+int QSplashScreen_protectedbase_receivers(const void* self, const char* signal) {
+	VirtualQSplashScreen* self_cast = static_cast<VirtualQSplashScreen*>( (QSplashScreen*)(self) );
 	
 	return self_cast->receivers(signal);
 
 }
 
-bool QSplashScreen_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal) {
-	VirtualQSplashScreen* self_cast = dynamic_cast<VirtualQSplashScreen*>( (QSplashScreen*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return false;
-	}
-	
-	*_dynamic_cast_ok = true;
+bool QSplashScreen_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal) {
+	VirtualQSplashScreen* self_cast = static_cast<VirtualQSplashScreen*>( (QSplashScreen*)(self) );
 	
 	return self_cast->isSignalConnected(*signal);
 

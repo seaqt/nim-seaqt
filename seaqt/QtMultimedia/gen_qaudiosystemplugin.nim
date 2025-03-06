@@ -98,6 +98,10 @@ proc fcQAudioSystemPlugin_virtualbase_childEvent(self: pointer, event: pointer):
 proc fcQAudioSystemPlugin_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QAudioSystemPlugin_virtualbase_customEvent".}
 proc fcQAudioSystemPlugin_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QAudioSystemPlugin_virtualbase_connectNotify".}
 proc fcQAudioSystemPlugin_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QAudioSystemPlugin_virtualbase_disconnectNotify".}
+proc fcQAudioSystemPlugin_protectedbase_sender(self: pointer, ): pointer {.importc: "QAudioSystemPlugin_protectedbase_sender".}
+proc fcQAudioSystemPlugin_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QAudioSystemPlugin_protectedbase_senderSignalIndex".}
+proc fcQAudioSystemPlugin_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QAudioSystemPlugin_protectedbase_receivers".}
+proc fcQAudioSystemPlugin_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QAudioSystemPlugin_protectedbase_isSignalConnected".}
 proc fcQAudioSystemPlugin_new(vtbl: pointer, ): ptr cQAudioSystemPlugin {.importc: "QAudioSystemPlugin_new".}
 proc fcQAudioSystemPlugin_new2(vtbl: pointer, parent: pointer): ptr cQAudioSystemPlugin {.importc: "QAudioSystemPlugin_new2".}
 proc fcQAudioSystemPlugin_staticMetaObject(): pointer {.importc: "QAudioSystemPlugin_staticMetaObject".}
@@ -361,6 +365,18 @@ proc miqt_exec_callback_cQAudioSystemPlugin_disconnectNotify(vtbl: pointer, self
   let self = QAudioSystemPlugin(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
   vtbl[].disconnectNotify(self, slotval1)
+
+proc sender*(self: gen_qaudiosystemplugin_types.QAudioSystemPlugin, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQAudioSystemPlugin_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qaudiosystemplugin_types.QAudioSystemPlugin, ): cint =
+  fcQAudioSystemPlugin_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qaudiosystemplugin_types.QAudioSystemPlugin, signal: cstring): cint =
+  fcQAudioSystemPlugin_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qaudiosystemplugin_types.QAudioSystemPlugin, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQAudioSystemPlugin_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc create*(T: type gen_qaudiosystemplugin_types.QAudioSystemPlugin,
     vtbl: ref QAudioSystemPluginVTable = nil): gen_qaudiosystemplugin_types.QAudioSystemPlugin =

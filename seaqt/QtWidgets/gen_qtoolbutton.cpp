@@ -864,16 +864,16 @@ public:
 	friend void QToolButton_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
 
 	// Wrappers to allow calling protected methods:
-	friend void QToolButton_protectedbase_initStyleOption(bool* _dynamic_cast_ok, const void* self, QStyleOptionToolButton* option);
-	friend void QToolButton_protectedbase_updateMicroFocus(bool* _dynamic_cast_ok, void* self);
-	friend void QToolButton_protectedbase_create(bool* _dynamic_cast_ok, void* self);
-	friend void QToolButton_protectedbase_destroy(bool* _dynamic_cast_ok, void* self);
-	friend bool QToolButton_protectedbase_focusNextChild(bool* _dynamic_cast_ok, void* self);
-	friend bool QToolButton_protectedbase_focusPreviousChild(bool* _dynamic_cast_ok, void* self);
-	friend QObject* QToolButton_protectedbase_sender(bool* _dynamic_cast_ok, const void* self);
-	friend int QToolButton_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
-	friend int QToolButton_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
-	friend bool QToolButton_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+	friend void QToolButton_protectedbase_initStyleOption(const void* self, QStyleOptionToolButton* option);
+	friend void QToolButton_protectedbase_updateMicroFocus(void* self);
+	friend void QToolButton_protectedbase_create(void* self);
+	friend void QToolButton_protectedbase_destroy(void* self);
+	friend bool QToolButton_protectedbase_focusNextChild(void* self);
+	friend bool QToolButton_protectedbase_focusPreviousChild(void* self);
+	friend QObject* QToolButton_protectedbase_sender(const void* self);
+	friend int QToolButton_protectedbase_senderSignalIndex(const void* self);
+	friend int QToolButton_protectedbase_receivers(const void* self, const char* signal);
+	friend bool QToolButton_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
 };
 
 QToolButton* QToolButton_new(struct QToolButton_VTable* vtbl, QWidget* parent) {
@@ -1365,131 +1365,71 @@ void QToolButton_virtualbase_disconnectNotify(void* self, QMetaMethod* signal) {
 }
 
 const QMetaObject* QToolButton_staticMetaObject() { return &QToolButton::staticMetaObject; }
-void QToolButton_protectedbase_initStyleOption(bool* _dynamic_cast_ok, const void* self, QStyleOptionToolButton* option) {
-	VirtualQToolButton* self_cast = dynamic_cast<VirtualQToolButton*>( (QToolButton*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QToolButton_protectedbase_initStyleOption(const void* self, QStyleOptionToolButton* option) {
+	VirtualQToolButton* self_cast = static_cast<VirtualQToolButton*>( (QToolButton*)(self) );
 	
 	self_cast->initStyleOption(option);
 
 }
 
-void QToolButton_protectedbase_updateMicroFocus(bool* _dynamic_cast_ok, void* self) {
-	VirtualQToolButton* self_cast = dynamic_cast<VirtualQToolButton*>( (QToolButton*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QToolButton_protectedbase_updateMicroFocus(void* self) {
+	VirtualQToolButton* self_cast = static_cast<VirtualQToolButton*>( (QToolButton*)(self) );
 	
 	self_cast->updateMicroFocus();
 
 }
 
-void QToolButton_protectedbase_create(bool* _dynamic_cast_ok, void* self) {
-	VirtualQToolButton* self_cast = dynamic_cast<VirtualQToolButton*>( (QToolButton*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QToolButton_protectedbase_create(void* self) {
+	VirtualQToolButton* self_cast = static_cast<VirtualQToolButton*>( (QToolButton*)(self) );
 	
 	self_cast->create();
 
 }
 
-void QToolButton_protectedbase_destroy(bool* _dynamic_cast_ok, void* self) {
-	VirtualQToolButton* self_cast = dynamic_cast<VirtualQToolButton*>( (QToolButton*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QToolButton_protectedbase_destroy(void* self) {
+	VirtualQToolButton* self_cast = static_cast<VirtualQToolButton*>( (QToolButton*)(self) );
 	
 	self_cast->destroy();
 
 }
 
-bool QToolButton_protectedbase_focusNextChild(bool* _dynamic_cast_ok, void* self) {
-	VirtualQToolButton* self_cast = dynamic_cast<VirtualQToolButton*>( (QToolButton*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return false;
-	}
-	
-	*_dynamic_cast_ok = true;
+bool QToolButton_protectedbase_focusNextChild(void* self) {
+	VirtualQToolButton* self_cast = static_cast<VirtualQToolButton*>( (QToolButton*)(self) );
 	
 	return self_cast->focusNextChild();
 
 }
 
-bool QToolButton_protectedbase_focusPreviousChild(bool* _dynamic_cast_ok, void* self) {
-	VirtualQToolButton* self_cast = dynamic_cast<VirtualQToolButton*>( (QToolButton*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return false;
-	}
-	
-	*_dynamic_cast_ok = true;
+bool QToolButton_protectedbase_focusPreviousChild(void* self) {
+	VirtualQToolButton* self_cast = static_cast<VirtualQToolButton*>( (QToolButton*)(self) );
 	
 	return self_cast->focusPreviousChild();
 
 }
 
-QObject* QToolButton_protectedbase_sender(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQToolButton* self_cast = dynamic_cast<VirtualQToolButton*>( (QToolButton*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return nullptr;
-	}
-	
-	*_dynamic_cast_ok = true;
+QObject* QToolButton_protectedbase_sender(const void* self) {
+	VirtualQToolButton* self_cast = static_cast<VirtualQToolButton*>( (QToolButton*)(self) );
 	
 	return self_cast->sender();
 
 }
 
-int QToolButton_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQToolButton* self_cast = dynamic_cast<VirtualQToolButton*>( (QToolButton*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return 0;
-	}
-	
-	*_dynamic_cast_ok = true;
+int QToolButton_protectedbase_senderSignalIndex(const void* self) {
+	VirtualQToolButton* self_cast = static_cast<VirtualQToolButton*>( (QToolButton*)(self) );
 	
 	return self_cast->senderSignalIndex();
 
 }
 
-int QToolButton_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal) {
-	VirtualQToolButton* self_cast = dynamic_cast<VirtualQToolButton*>( (QToolButton*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return 0;
-	}
-	
-	*_dynamic_cast_ok = true;
+int QToolButton_protectedbase_receivers(const void* self, const char* signal) {
+	VirtualQToolButton* self_cast = static_cast<VirtualQToolButton*>( (QToolButton*)(self) );
 	
 	return self_cast->receivers(signal);
 
 }
 
-bool QToolButton_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal) {
-	VirtualQToolButton* self_cast = dynamic_cast<VirtualQToolButton*>( (QToolButton*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return false;
-	}
-	
-	*_dynamic_cast_ok = true;
+bool QToolButton_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal) {
+	VirtualQToolButton* self_cast = static_cast<VirtualQToolButton*>( (QToolButton*)(self) );
 	
 	return self_cast->isSignalConnected(*signal);
 

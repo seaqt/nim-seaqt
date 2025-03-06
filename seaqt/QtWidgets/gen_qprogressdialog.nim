@@ -220,6 +220,17 @@ proc fcQProgressDialog_virtualbase_childEvent(self: pointer, event: pointer): vo
 proc fcQProgressDialog_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QProgressDialog_virtualbase_customEvent".}
 proc fcQProgressDialog_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QProgressDialog_virtualbase_connectNotify".}
 proc fcQProgressDialog_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QProgressDialog_virtualbase_disconnectNotify".}
+proc fcQProgressDialog_protectedbase_forceShow(self: pointer, ): void {.importc: "QProgressDialog_protectedbase_forceShow".}
+proc fcQProgressDialog_protectedbase_adjustPosition(self: pointer, param1: pointer): void {.importc: "QProgressDialog_protectedbase_adjustPosition".}
+proc fcQProgressDialog_protectedbase_updateMicroFocus(self: pointer, ): void {.importc: "QProgressDialog_protectedbase_updateMicroFocus".}
+proc fcQProgressDialog_protectedbase_create(self: pointer, ): void {.importc: "QProgressDialog_protectedbase_create".}
+proc fcQProgressDialog_protectedbase_destroy(self: pointer, ): void {.importc: "QProgressDialog_protectedbase_destroy".}
+proc fcQProgressDialog_protectedbase_focusNextChild(self: pointer, ): bool {.importc: "QProgressDialog_protectedbase_focusNextChild".}
+proc fcQProgressDialog_protectedbase_focusPreviousChild(self: pointer, ): bool {.importc: "QProgressDialog_protectedbase_focusPreviousChild".}
+proc fcQProgressDialog_protectedbase_sender(self: pointer, ): pointer {.importc: "QProgressDialog_protectedbase_sender".}
+proc fcQProgressDialog_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QProgressDialog_protectedbase_senderSignalIndex".}
+proc fcQProgressDialog_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QProgressDialog_protectedbase_receivers".}
+proc fcQProgressDialog_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QProgressDialog_protectedbase_isSignalConnected".}
 proc fcQProgressDialog_new(vtbl: pointer, parent: pointer): ptr cQProgressDialog {.importc: "QProgressDialog_new".}
 proc fcQProgressDialog_new2(vtbl: pointer, ): ptr cQProgressDialog {.importc: "QProgressDialog_new2".}
 proc fcQProgressDialog_new3(vtbl: pointer, labelText: struct_miqt_string, cancelButtonText: struct_miqt_string, minimum: cint, maximum: cint): ptr cQProgressDialog {.importc: "QProgressDialog_new3".}
@@ -985,6 +996,39 @@ proc miqt_exec_callback_cQProgressDialog_disconnectNotify(vtbl: pointer, self: p
   let self = QProgressDialog(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
   vtbl[].disconnectNotify(self, slotval1)
+
+proc forceShow*(self: gen_qprogressdialog_types.QProgressDialog, ): void =
+  fcQProgressDialog_protectedbase_forceShow(self.h)
+
+proc adjustPosition*(self: gen_qprogressdialog_types.QProgressDialog, param1: gen_qwidget_types.QWidget): void =
+  fcQProgressDialog_protectedbase_adjustPosition(self.h, param1.h)
+
+proc updateMicroFocus*(self: gen_qprogressdialog_types.QProgressDialog, ): void =
+  fcQProgressDialog_protectedbase_updateMicroFocus(self.h)
+
+proc create*(self: gen_qprogressdialog_types.QProgressDialog, ): void =
+  fcQProgressDialog_protectedbase_create(self.h)
+
+proc destroy*(self: gen_qprogressdialog_types.QProgressDialog, ): void =
+  fcQProgressDialog_protectedbase_destroy(self.h)
+
+proc focusNextChild*(self: gen_qprogressdialog_types.QProgressDialog, ): bool =
+  fcQProgressDialog_protectedbase_focusNextChild(self.h)
+
+proc focusPreviousChild*(self: gen_qprogressdialog_types.QProgressDialog, ): bool =
+  fcQProgressDialog_protectedbase_focusPreviousChild(self.h)
+
+proc sender*(self: gen_qprogressdialog_types.QProgressDialog, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQProgressDialog_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qprogressdialog_types.QProgressDialog, ): cint =
+  fcQProgressDialog_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qprogressdialog_types.QProgressDialog, signal: cstring): cint =
+  fcQProgressDialog_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qprogressdialog_types.QProgressDialog, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQProgressDialog_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc create*(T: type gen_qprogressdialog_types.QProgressDialog,
     parent: gen_qwidget_types.QWidget,

@@ -97,6 +97,10 @@ proc fcQAnimationGroup_virtualbase_childEvent(self: pointer, event: pointer): vo
 proc fcQAnimationGroup_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QAnimationGroup_virtualbase_customEvent".}
 proc fcQAnimationGroup_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QAnimationGroup_virtualbase_connectNotify".}
 proc fcQAnimationGroup_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QAnimationGroup_virtualbase_disconnectNotify".}
+proc fcQAnimationGroup_protectedbase_sender(self: pointer, ): pointer {.importc: "QAnimationGroup_protectedbase_sender".}
+proc fcQAnimationGroup_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QAnimationGroup_protectedbase_senderSignalIndex".}
+proc fcQAnimationGroup_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QAnimationGroup_protectedbase_receivers".}
+proc fcQAnimationGroup_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QAnimationGroup_protectedbase_isSignalConnected".}
 proc fcQAnimationGroup_new(vtbl: pointer, ): ptr cQAnimationGroup {.importc: "QAnimationGroup_new".}
 proc fcQAnimationGroup_new2(vtbl: pointer, parent: pointer): ptr cQAnimationGroup {.importc: "QAnimationGroup_new2".}
 proc fcQAnimationGroup_staticMetaObject(): pointer {.importc: "QAnimationGroup_staticMetaObject".}
@@ -328,6 +332,18 @@ proc miqt_exec_callback_cQAnimationGroup_disconnectNotify(vtbl: pointer, self: p
   let self = QAnimationGroup(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
   vtbl[].disconnectNotify(self, slotval1)
+
+proc sender*(self: gen_qanimationgroup_types.QAnimationGroup, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQAnimationGroup_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qanimationgroup_types.QAnimationGroup, ): cint =
+  fcQAnimationGroup_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qanimationgroup_types.QAnimationGroup, signal: cstring): cint =
+  fcQAnimationGroup_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qanimationgroup_types.QAnimationGroup, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQAnimationGroup_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc create*(T: type gen_qanimationgroup_types.QAnimationGroup,
     vtbl: ref QAnimationGroupVTable = nil): gen_qanimationgroup_types.QAnimationGroup =

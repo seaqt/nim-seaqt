@@ -1036,22 +1036,22 @@ public:
 	friend void QTextBrowser_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
 
 	// Wrappers to allow calling protected methods:
-	friend void QTextBrowser_protectedbase_doSetSource(bool* _dynamic_cast_ok, void* self, QUrl* name);
-	friend void QTextBrowser_protectedbase_doSetSource2(bool* _dynamic_cast_ok, void* self, QUrl* name, int type);
-	friend void QTextBrowser_protectedbase_zoomInF(bool* _dynamic_cast_ok, void* self, float range);
-	friend void QTextBrowser_protectedbase_setViewportMargins(bool* _dynamic_cast_ok, void* self, int left, int top, int right, int bottom);
-	friend QMargins* QTextBrowser_protectedbase_viewportMargins(bool* _dynamic_cast_ok, const void* self);
-	friend void QTextBrowser_protectedbase_drawFrame(bool* _dynamic_cast_ok, void* self, QPainter* param1);
-	friend void QTextBrowser_protectedbase_initStyleOption(bool* _dynamic_cast_ok, const void* self, QStyleOptionFrame* option);
-	friend void QTextBrowser_protectedbase_updateMicroFocus(bool* _dynamic_cast_ok, void* self);
-	friend void QTextBrowser_protectedbase_create(bool* _dynamic_cast_ok, void* self);
-	friend void QTextBrowser_protectedbase_destroy(bool* _dynamic_cast_ok, void* self);
-	friend bool QTextBrowser_protectedbase_focusNextChild(bool* _dynamic_cast_ok, void* self);
-	friend bool QTextBrowser_protectedbase_focusPreviousChild(bool* _dynamic_cast_ok, void* self);
-	friend QObject* QTextBrowser_protectedbase_sender(bool* _dynamic_cast_ok, const void* self);
-	friend int QTextBrowser_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
-	friend int QTextBrowser_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
-	friend bool QTextBrowser_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+	friend void QTextBrowser_protectedbase_doSetSource(void* self, QUrl* name);
+	friend void QTextBrowser_protectedbase_doSetSource2(void* self, QUrl* name, int type);
+	friend void QTextBrowser_protectedbase_zoomInF(void* self, float range);
+	friend void QTextBrowser_protectedbase_setViewportMargins(void* self, int left, int top, int right, int bottom);
+	friend QMargins* QTextBrowser_protectedbase_viewportMargins(const void* self);
+	friend void QTextBrowser_protectedbase_drawFrame(void* self, QPainter* param1);
+	friend void QTextBrowser_protectedbase_initStyleOption(const void* self, QStyleOptionFrame* option);
+	friend void QTextBrowser_protectedbase_updateMicroFocus(void* self);
+	friend void QTextBrowser_protectedbase_create(void* self);
+	friend void QTextBrowser_protectedbase_destroy(void* self);
+	friend bool QTextBrowser_protectedbase_focusNextChild(void* self);
+	friend bool QTextBrowser_protectedbase_focusPreviousChild(void* self);
+	friend QObject* QTextBrowser_protectedbase_sender(const void* self);
+	friend int QTextBrowser_protectedbase_senderSignalIndex(const void* self);
+	friend int QTextBrowser_protectedbase_receivers(const void* self, const char* signal);
+	friend bool QTextBrowser_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
 };
 
 QTextBrowser* QTextBrowser_new(struct QTextBrowser_VTable* vtbl, QWidget* parent) {
@@ -1774,209 +1774,113 @@ void QTextBrowser_virtualbase_disconnectNotify(void* self, QMetaMethod* signal) 
 }
 
 const QMetaObject* QTextBrowser_staticMetaObject() { return &QTextBrowser::staticMetaObject; }
-void QTextBrowser_protectedbase_doSetSource(bool* _dynamic_cast_ok, void* self, QUrl* name) {
-	VirtualQTextBrowser* self_cast = dynamic_cast<VirtualQTextBrowser*>( (QTextBrowser*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QTextBrowser_protectedbase_doSetSource(void* self, QUrl* name) {
+	VirtualQTextBrowser* self_cast = static_cast<VirtualQTextBrowser*>( (QTextBrowser*)(self) );
 	
 	self_cast->doSetSource(*name);
 
 }
 
-void QTextBrowser_protectedbase_doSetSource2(bool* _dynamic_cast_ok, void* self, QUrl* name, int type) {
-	VirtualQTextBrowser* self_cast = dynamic_cast<VirtualQTextBrowser*>( (QTextBrowser*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QTextBrowser_protectedbase_doSetSource2(void* self, QUrl* name, int type) {
+	VirtualQTextBrowser* self_cast = static_cast<VirtualQTextBrowser*>( (QTextBrowser*)(self) );
 	
 	self_cast->doSetSource(*name, static_cast<QTextDocument::ResourceType>(type));
 
 }
 
-void QTextBrowser_protectedbase_zoomInF(bool* _dynamic_cast_ok, void* self, float range) {
-	VirtualQTextBrowser* self_cast = dynamic_cast<VirtualQTextBrowser*>( (QTextBrowser*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QTextBrowser_protectedbase_zoomInF(void* self, float range) {
+	VirtualQTextBrowser* self_cast = static_cast<VirtualQTextBrowser*>( (QTextBrowser*)(self) );
 	
 	self_cast->zoomInF(static_cast<float>(range));
 
 }
 
-void QTextBrowser_protectedbase_setViewportMargins(bool* _dynamic_cast_ok, void* self, int left, int top, int right, int bottom) {
-	VirtualQTextBrowser* self_cast = dynamic_cast<VirtualQTextBrowser*>( (QTextBrowser*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QTextBrowser_protectedbase_setViewportMargins(void* self, int left, int top, int right, int bottom) {
+	VirtualQTextBrowser* self_cast = static_cast<VirtualQTextBrowser*>( (QTextBrowser*)(self) );
 	
 	self_cast->setViewportMargins(static_cast<int>(left), static_cast<int>(top), static_cast<int>(right), static_cast<int>(bottom));
 
 }
 
-QMargins* QTextBrowser_protectedbase_viewportMargins(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQTextBrowser* self_cast = dynamic_cast<VirtualQTextBrowser*>( (QTextBrowser*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return nullptr;
-	}
-	
-	*_dynamic_cast_ok = true;
+QMargins* QTextBrowser_protectedbase_viewportMargins(const void* self) {
+	VirtualQTextBrowser* self_cast = static_cast<VirtualQTextBrowser*>( (QTextBrowser*)(self) );
 	
 	return new QMargins(self_cast->viewportMargins());
 
 }
 
-void QTextBrowser_protectedbase_drawFrame(bool* _dynamic_cast_ok, void* self, QPainter* param1) {
-	VirtualQTextBrowser* self_cast = dynamic_cast<VirtualQTextBrowser*>( (QTextBrowser*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QTextBrowser_protectedbase_drawFrame(void* self, QPainter* param1) {
+	VirtualQTextBrowser* self_cast = static_cast<VirtualQTextBrowser*>( (QTextBrowser*)(self) );
 	
 	self_cast->drawFrame(param1);
 
 }
 
-void QTextBrowser_protectedbase_initStyleOption(bool* _dynamic_cast_ok, const void* self, QStyleOptionFrame* option) {
-	VirtualQTextBrowser* self_cast = dynamic_cast<VirtualQTextBrowser*>( (QTextBrowser*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QTextBrowser_protectedbase_initStyleOption(const void* self, QStyleOptionFrame* option) {
+	VirtualQTextBrowser* self_cast = static_cast<VirtualQTextBrowser*>( (QTextBrowser*)(self) );
 	
 	self_cast->initStyleOption(option);
 
 }
 
-void QTextBrowser_protectedbase_updateMicroFocus(bool* _dynamic_cast_ok, void* self) {
-	VirtualQTextBrowser* self_cast = dynamic_cast<VirtualQTextBrowser*>( (QTextBrowser*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QTextBrowser_protectedbase_updateMicroFocus(void* self) {
+	VirtualQTextBrowser* self_cast = static_cast<VirtualQTextBrowser*>( (QTextBrowser*)(self) );
 	
 	self_cast->updateMicroFocus();
 
 }
 
-void QTextBrowser_protectedbase_create(bool* _dynamic_cast_ok, void* self) {
-	VirtualQTextBrowser* self_cast = dynamic_cast<VirtualQTextBrowser*>( (QTextBrowser*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QTextBrowser_protectedbase_create(void* self) {
+	VirtualQTextBrowser* self_cast = static_cast<VirtualQTextBrowser*>( (QTextBrowser*)(self) );
 	
 	self_cast->create();
 
 }
 
-void QTextBrowser_protectedbase_destroy(bool* _dynamic_cast_ok, void* self) {
-	VirtualQTextBrowser* self_cast = dynamic_cast<VirtualQTextBrowser*>( (QTextBrowser*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QTextBrowser_protectedbase_destroy(void* self) {
+	VirtualQTextBrowser* self_cast = static_cast<VirtualQTextBrowser*>( (QTextBrowser*)(self) );
 	
 	self_cast->destroy();
 
 }
 
-bool QTextBrowser_protectedbase_focusNextChild(bool* _dynamic_cast_ok, void* self) {
-	VirtualQTextBrowser* self_cast = dynamic_cast<VirtualQTextBrowser*>( (QTextBrowser*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return false;
-	}
-	
-	*_dynamic_cast_ok = true;
+bool QTextBrowser_protectedbase_focusNextChild(void* self) {
+	VirtualQTextBrowser* self_cast = static_cast<VirtualQTextBrowser*>( (QTextBrowser*)(self) );
 	
 	return self_cast->focusNextChild();
 
 }
 
-bool QTextBrowser_protectedbase_focusPreviousChild(bool* _dynamic_cast_ok, void* self) {
-	VirtualQTextBrowser* self_cast = dynamic_cast<VirtualQTextBrowser*>( (QTextBrowser*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return false;
-	}
-	
-	*_dynamic_cast_ok = true;
+bool QTextBrowser_protectedbase_focusPreviousChild(void* self) {
+	VirtualQTextBrowser* self_cast = static_cast<VirtualQTextBrowser*>( (QTextBrowser*)(self) );
 	
 	return self_cast->focusPreviousChild();
 
 }
 
-QObject* QTextBrowser_protectedbase_sender(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQTextBrowser* self_cast = dynamic_cast<VirtualQTextBrowser*>( (QTextBrowser*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return nullptr;
-	}
-	
-	*_dynamic_cast_ok = true;
+QObject* QTextBrowser_protectedbase_sender(const void* self) {
+	VirtualQTextBrowser* self_cast = static_cast<VirtualQTextBrowser*>( (QTextBrowser*)(self) );
 	
 	return self_cast->sender();
 
 }
 
-int QTextBrowser_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQTextBrowser* self_cast = dynamic_cast<VirtualQTextBrowser*>( (QTextBrowser*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return 0;
-	}
-	
-	*_dynamic_cast_ok = true;
+int QTextBrowser_protectedbase_senderSignalIndex(const void* self) {
+	VirtualQTextBrowser* self_cast = static_cast<VirtualQTextBrowser*>( (QTextBrowser*)(self) );
 	
 	return self_cast->senderSignalIndex();
 
 }
 
-int QTextBrowser_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal) {
-	VirtualQTextBrowser* self_cast = dynamic_cast<VirtualQTextBrowser*>( (QTextBrowser*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return 0;
-	}
-	
-	*_dynamic_cast_ok = true;
+int QTextBrowser_protectedbase_receivers(const void* self, const char* signal) {
+	VirtualQTextBrowser* self_cast = static_cast<VirtualQTextBrowser*>( (QTextBrowser*)(self) );
 	
 	return self_cast->receivers(signal);
 
 }
 
-bool QTextBrowser_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal) {
-	VirtualQTextBrowser* self_cast = dynamic_cast<VirtualQTextBrowser*>( (QTextBrowser*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return false;
-	}
-	
-	*_dynamic_cast_ok = true;
+bool QTextBrowser_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal) {
+	VirtualQTextBrowser* self_cast = static_cast<VirtualQTextBrowser*>( (QTextBrowser*)(self) );
 	
 	return self_cast->isSignalConnected(*signal);
 

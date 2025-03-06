@@ -136,6 +136,10 @@ proc fcQStyledItemDelegate_virtualbase_childEvent(self: pointer, event: pointer)
 proc fcQStyledItemDelegate_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QStyledItemDelegate_virtualbase_customEvent".}
 proc fcQStyledItemDelegate_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QStyledItemDelegate_virtualbase_connectNotify".}
 proc fcQStyledItemDelegate_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QStyledItemDelegate_virtualbase_disconnectNotify".}
+proc fcQStyledItemDelegate_protectedbase_sender(self: pointer, ): pointer {.importc: "QStyledItemDelegate_protectedbase_sender".}
+proc fcQStyledItemDelegate_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QStyledItemDelegate_protectedbase_senderSignalIndex".}
+proc fcQStyledItemDelegate_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QStyledItemDelegate_protectedbase_receivers".}
+proc fcQStyledItemDelegate_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QStyledItemDelegate_protectedbase_isSignalConnected".}
 proc fcQStyledItemDelegate_new(vtbl: pointer, ): ptr cQStyledItemDelegate {.importc: "QStyledItemDelegate_new".}
 proc fcQStyledItemDelegate_new2(vtbl: pointer, parent: pointer): ptr cQStyledItemDelegate {.importc: "QStyledItemDelegate_new2".}
 proc fcQStyledItemDelegate_staticMetaObject(): pointer {.importc: "QStyledItemDelegate_staticMetaObject".}
@@ -502,6 +506,18 @@ proc miqt_exec_callback_cQStyledItemDelegate_disconnectNotify(vtbl: pointer, sel
   let self = QStyledItemDelegate(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
   vtbl[].disconnectNotify(self, slotval1)
+
+proc sender*(self: gen_qstyleditemdelegate_types.QStyledItemDelegate, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQStyledItemDelegate_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qstyleditemdelegate_types.QStyledItemDelegate, ): cint =
+  fcQStyledItemDelegate_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qstyleditemdelegate_types.QStyledItemDelegate, signal: cstring): cint =
+  fcQStyledItemDelegate_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qstyleditemdelegate_types.QStyledItemDelegate, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQStyledItemDelegate_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc create*(T: type gen_qstyleditemdelegate_types.QStyledItemDelegate,
     vtbl: ref QStyledItemDelegateVTable = nil): gen_qstyleditemdelegate_types.QStyledItemDelegate =

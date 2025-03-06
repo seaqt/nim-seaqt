@@ -52,6 +52,7 @@ export gen_qabstractitemmodel_types
 
 import
   ./gen_qcoreevent_types,
+  ./gen_qdatastream_types,
   ./gen_qmetaobject_types,
   ./gen_qmimedata_types,
   ./gen_qobject,
@@ -61,6 +62,7 @@ import
   std/tables
 export
   gen_qcoreevent_types,
+  gen_qdatastream_types,
   gen_qmetaobject_types,
   gen_qmimedata_types,
   gen_qobject,
@@ -279,6 +281,33 @@ proc fcQAbstractItemModel_virtualbase_childEvent(self: pointer, event: pointer):
 proc fcQAbstractItemModel_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QAbstractItemModel_virtualbase_customEvent".}
 proc fcQAbstractItemModel_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QAbstractItemModel_virtualbase_connectNotify".}
 proc fcQAbstractItemModel_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QAbstractItemModel_virtualbase_disconnectNotify".}
+proc fcQAbstractItemModel_protectedbase_resetInternalData(self: pointer, ): void {.importc: "QAbstractItemModel_protectedbase_resetInternalData".}
+proc fcQAbstractItemModel_protectedbase_createIndex(self: pointer, row: cint, column: cint): pointer {.importc: "QAbstractItemModel_protectedbase_createIndex".}
+proc fcQAbstractItemModel_protectedbase_createIndex2(self: pointer, row: cint, column: cint, id: uint): pointer {.importc: "QAbstractItemModel_protectedbase_createIndex2".}
+proc fcQAbstractItemModel_protectedbase_encodeData(self: pointer, indexes: struct_miqt_array, stream: pointer): void {.importc: "QAbstractItemModel_protectedbase_encodeData".}
+proc fcQAbstractItemModel_protectedbase_decodeData(self: pointer, row: cint, column: cint, parent: pointer, stream: pointer): bool {.importc: "QAbstractItemModel_protectedbase_decodeData".}
+proc fcQAbstractItemModel_protectedbase_beginInsertRows(self: pointer, parent: pointer, first: cint, last: cint): void {.importc: "QAbstractItemModel_protectedbase_beginInsertRows".}
+proc fcQAbstractItemModel_protectedbase_endInsertRows(self: pointer, ): void {.importc: "QAbstractItemModel_protectedbase_endInsertRows".}
+proc fcQAbstractItemModel_protectedbase_beginRemoveRows(self: pointer, parent: pointer, first: cint, last: cint): void {.importc: "QAbstractItemModel_protectedbase_beginRemoveRows".}
+proc fcQAbstractItemModel_protectedbase_endRemoveRows(self: pointer, ): void {.importc: "QAbstractItemModel_protectedbase_endRemoveRows".}
+proc fcQAbstractItemModel_protectedbase_beginMoveRows(self: pointer, sourceParent: pointer, sourceFirst: cint, sourceLast: cint, destinationParent: pointer, destinationRow: cint): bool {.importc: "QAbstractItemModel_protectedbase_beginMoveRows".}
+proc fcQAbstractItemModel_protectedbase_endMoveRows(self: pointer, ): void {.importc: "QAbstractItemModel_protectedbase_endMoveRows".}
+proc fcQAbstractItemModel_protectedbase_beginInsertColumns(self: pointer, parent: pointer, first: cint, last: cint): void {.importc: "QAbstractItemModel_protectedbase_beginInsertColumns".}
+proc fcQAbstractItemModel_protectedbase_endInsertColumns(self: pointer, ): void {.importc: "QAbstractItemModel_protectedbase_endInsertColumns".}
+proc fcQAbstractItemModel_protectedbase_beginRemoveColumns(self: pointer, parent: pointer, first: cint, last: cint): void {.importc: "QAbstractItemModel_protectedbase_beginRemoveColumns".}
+proc fcQAbstractItemModel_protectedbase_endRemoveColumns(self: pointer, ): void {.importc: "QAbstractItemModel_protectedbase_endRemoveColumns".}
+proc fcQAbstractItemModel_protectedbase_beginMoveColumns(self: pointer, sourceParent: pointer, sourceFirst: cint, sourceLast: cint, destinationParent: pointer, destinationColumn: cint): bool {.importc: "QAbstractItemModel_protectedbase_beginMoveColumns".}
+proc fcQAbstractItemModel_protectedbase_endMoveColumns(self: pointer, ): void {.importc: "QAbstractItemModel_protectedbase_endMoveColumns".}
+proc fcQAbstractItemModel_protectedbase_beginResetModel(self: pointer, ): void {.importc: "QAbstractItemModel_protectedbase_beginResetModel".}
+proc fcQAbstractItemModel_protectedbase_endResetModel(self: pointer, ): void {.importc: "QAbstractItemModel_protectedbase_endResetModel".}
+proc fcQAbstractItemModel_protectedbase_changePersistentIndex(self: pointer, fromVal: pointer, to: pointer): void {.importc: "QAbstractItemModel_protectedbase_changePersistentIndex".}
+proc fcQAbstractItemModel_protectedbase_changePersistentIndexList(self: pointer, fromVal: struct_miqt_array, to: struct_miqt_array): void {.importc: "QAbstractItemModel_protectedbase_changePersistentIndexList".}
+proc fcQAbstractItemModel_protectedbase_persistentIndexList(self: pointer, ): struct_miqt_array {.importc: "QAbstractItemModel_protectedbase_persistentIndexList".}
+proc fcQAbstractItemModel_protectedbase_createIndex3(self: pointer, row: cint, column: cint, data: pointer): pointer {.importc: "QAbstractItemModel_protectedbase_createIndex3".}
+proc fcQAbstractItemModel_protectedbase_sender(self: pointer, ): pointer {.importc: "QAbstractItemModel_protectedbase_sender".}
+proc fcQAbstractItemModel_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QAbstractItemModel_protectedbase_senderSignalIndex".}
+proc fcQAbstractItemModel_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QAbstractItemModel_protectedbase_receivers".}
+proc fcQAbstractItemModel_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QAbstractItemModel_protectedbase_isSignalConnected".}
 proc fcQAbstractItemModel_new(vtbl: pointer, ): ptr cQAbstractItemModel {.importc: "QAbstractItemModel_new".}
 proc fcQAbstractItemModel_new2(vtbl: pointer, parent: pointer): ptr cQAbstractItemModel {.importc: "QAbstractItemModel_new2".}
 proc fcQAbstractItemModel_staticMetaObject(): pointer {.importc: "QAbstractItemModel_staticMetaObject".}
@@ -379,6 +408,31 @@ proc fcQAbstractTableModel_virtualbase_childEvent(self: pointer, event: pointer)
 proc fcQAbstractTableModel_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QAbstractTableModel_virtualbase_customEvent".}
 proc fcQAbstractTableModel_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QAbstractTableModel_virtualbase_connectNotify".}
 proc fcQAbstractTableModel_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QAbstractTableModel_virtualbase_disconnectNotify".}
+proc fcQAbstractTableModel_protectedbase_resetInternalData(self: pointer, ): void {.importc: "QAbstractTableModel_protectedbase_resetInternalData".}
+proc fcQAbstractTableModel_protectedbase_createIndex(self: pointer, row: cint, column: cint): pointer {.importc: "QAbstractTableModel_protectedbase_createIndex".}
+proc fcQAbstractTableModel_protectedbase_encodeData(self: pointer, indexes: struct_miqt_array, stream: pointer): void {.importc: "QAbstractTableModel_protectedbase_encodeData".}
+proc fcQAbstractTableModel_protectedbase_decodeData(self: pointer, row: cint, column: cint, parent: pointer, stream: pointer): bool {.importc: "QAbstractTableModel_protectedbase_decodeData".}
+proc fcQAbstractTableModel_protectedbase_beginInsertRows(self: pointer, parent: pointer, first: cint, last: cint): void {.importc: "QAbstractTableModel_protectedbase_beginInsertRows".}
+proc fcQAbstractTableModel_protectedbase_endInsertRows(self: pointer, ): void {.importc: "QAbstractTableModel_protectedbase_endInsertRows".}
+proc fcQAbstractTableModel_protectedbase_beginRemoveRows(self: pointer, parent: pointer, first: cint, last: cint): void {.importc: "QAbstractTableModel_protectedbase_beginRemoveRows".}
+proc fcQAbstractTableModel_protectedbase_endRemoveRows(self: pointer, ): void {.importc: "QAbstractTableModel_protectedbase_endRemoveRows".}
+proc fcQAbstractTableModel_protectedbase_beginMoveRows(self: pointer, sourceParent: pointer, sourceFirst: cint, sourceLast: cint, destinationParent: pointer, destinationRow: cint): bool {.importc: "QAbstractTableModel_protectedbase_beginMoveRows".}
+proc fcQAbstractTableModel_protectedbase_endMoveRows(self: pointer, ): void {.importc: "QAbstractTableModel_protectedbase_endMoveRows".}
+proc fcQAbstractTableModel_protectedbase_beginInsertColumns(self: pointer, parent: pointer, first: cint, last: cint): void {.importc: "QAbstractTableModel_protectedbase_beginInsertColumns".}
+proc fcQAbstractTableModel_protectedbase_endInsertColumns(self: pointer, ): void {.importc: "QAbstractTableModel_protectedbase_endInsertColumns".}
+proc fcQAbstractTableModel_protectedbase_beginRemoveColumns(self: pointer, parent: pointer, first: cint, last: cint): void {.importc: "QAbstractTableModel_protectedbase_beginRemoveColumns".}
+proc fcQAbstractTableModel_protectedbase_endRemoveColumns(self: pointer, ): void {.importc: "QAbstractTableModel_protectedbase_endRemoveColumns".}
+proc fcQAbstractTableModel_protectedbase_beginMoveColumns(self: pointer, sourceParent: pointer, sourceFirst: cint, sourceLast: cint, destinationParent: pointer, destinationColumn: cint): bool {.importc: "QAbstractTableModel_protectedbase_beginMoveColumns".}
+proc fcQAbstractTableModel_protectedbase_endMoveColumns(self: pointer, ): void {.importc: "QAbstractTableModel_protectedbase_endMoveColumns".}
+proc fcQAbstractTableModel_protectedbase_beginResetModel(self: pointer, ): void {.importc: "QAbstractTableModel_protectedbase_beginResetModel".}
+proc fcQAbstractTableModel_protectedbase_endResetModel(self: pointer, ): void {.importc: "QAbstractTableModel_protectedbase_endResetModel".}
+proc fcQAbstractTableModel_protectedbase_changePersistentIndex(self: pointer, fromVal: pointer, to: pointer): void {.importc: "QAbstractTableModel_protectedbase_changePersistentIndex".}
+proc fcQAbstractTableModel_protectedbase_changePersistentIndexList(self: pointer, fromVal: struct_miqt_array, to: struct_miqt_array): void {.importc: "QAbstractTableModel_protectedbase_changePersistentIndexList".}
+proc fcQAbstractTableModel_protectedbase_persistentIndexList(self: pointer, ): struct_miqt_array {.importc: "QAbstractTableModel_protectedbase_persistentIndexList".}
+proc fcQAbstractTableModel_protectedbase_sender(self: pointer, ): pointer {.importc: "QAbstractTableModel_protectedbase_sender".}
+proc fcQAbstractTableModel_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QAbstractTableModel_protectedbase_senderSignalIndex".}
+proc fcQAbstractTableModel_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QAbstractTableModel_protectedbase_receivers".}
+proc fcQAbstractTableModel_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QAbstractTableModel_protectedbase_isSignalConnected".}
 proc fcQAbstractTableModel_new(vtbl: pointer, ): ptr cQAbstractTableModel {.importc: "QAbstractTableModel_new".}
 proc fcQAbstractTableModel_new2(vtbl: pointer, parent: pointer): ptr cQAbstractTableModel {.importc: "QAbstractTableModel_new2".}
 proc fcQAbstractTableModel_staticMetaObject(): pointer {.importc: "QAbstractTableModel_staticMetaObject".}
@@ -478,6 +532,31 @@ proc fcQAbstractListModel_virtualbase_childEvent(self: pointer, event: pointer):
 proc fcQAbstractListModel_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QAbstractListModel_virtualbase_customEvent".}
 proc fcQAbstractListModel_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QAbstractListModel_virtualbase_connectNotify".}
 proc fcQAbstractListModel_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QAbstractListModel_virtualbase_disconnectNotify".}
+proc fcQAbstractListModel_protectedbase_resetInternalData(self: pointer, ): void {.importc: "QAbstractListModel_protectedbase_resetInternalData".}
+proc fcQAbstractListModel_protectedbase_createIndex(self: pointer, row: cint, column: cint): pointer {.importc: "QAbstractListModel_protectedbase_createIndex".}
+proc fcQAbstractListModel_protectedbase_encodeData(self: pointer, indexes: struct_miqt_array, stream: pointer): void {.importc: "QAbstractListModel_protectedbase_encodeData".}
+proc fcQAbstractListModel_protectedbase_decodeData(self: pointer, row: cint, column: cint, parent: pointer, stream: pointer): bool {.importc: "QAbstractListModel_protectedbase_decodeData".}
+proc fcQAbstractListModel_protectedbase_beginInsertRows(self: pointer, parent: pointer, first: cint, last: cint): void {.importc: "QAbstractListModel_protectedbase_beginInsertRows".}
+proc fcQAbstractListModel_protectedbase_endInsertRows(self: pointer, ): void {.importc: "QAbstractListModel_protectedbase_endInsertRows".}
+proc fcQAbstractListModel_protectedbase_beginRemoveRows(self: pointer, parent: pointer, first: cint, last: cint): void {.importc: "QAbstractListModel_protectedbase_beginRemoveRows".}
+proc fcQAbstractListModel_protectedbase_endRemoveRows(self: pointer, ): void {.importc: "QAbstractListModel_protectedbase_endRemoveRows".}
+proc fcQAbstractListModel_protectedbase_beginMoveRows(self: pointer, sourceParent: pointer, sourceFirst: cint, sourceLast: cint, destinationParent: pointer, destinationRow: cint): bool {.importc: "QAbstractListModel_protectedbase_beginMoveRows".}
+proc fcQAbstractListModel_protectedbase_endMoveRows(self: pointer, ): void {.importc: "QAbstractListModel_protectedbase_endMoveRows".}
+proc fcQAbstractListModel_protectedbase_beginInsertColumns(self: pointer, parent: pointer, first: cint, last: cint): void {.importc: "QAbstractListModel_protectedbase_beginInsertColumns".}
+proc fcQAbstractListModel_protectedbase_endInsertColumns(self: pointer, ): void {.importc: "QAbstractListModel_protectedbase_endInsertColumns".}
+proc fcQAbstractListModel_protectedbase_beginRemoveColumns(self: pointer, parent: pointer, first: cint, last: cint): void {.importc: "QAbstractListModel_protectedbase_beginRemoveColumns".}
+proc fcQAbstractListModel_protectedbase_endRemoveColumns(self: pointer, ): void {.importc: "QAbstractListModel_protectedbase_endRemoveColumns".}
+proc fcQAbstractListModel_protectedbase_beginMoveColumns(self: pointer, sourceParent: pointer, sourceFirst: cint, sourceLast: cint, destinationParent: pointer, destinationColumn: cint): bool {.importc: "QAbstractListModel_protectedbase_beginMoveColumns".}
+proc fcQAbstractListModel_protectedbase_endMoveColumns(self: pointer, ): void {.importc: "QAbstractListModel_protectedbase_endMoveColumns".}
+proc fcQAbstractListModel_protectedbase_beginResetModel(self: pointer, ): void {.importc: "QAbstractListModel_protectedbase_beginResetModel".}
+proc fcQAbstractListModel_protectedbase_endResetModel(self: pointer, ): void {.importc: "QAbstractListModel_protectedbase_endResetModel".}
+proc fcQAbstractListModel_protectedbase_changePersistentIndex(self: pointer, fromVal: pointer, to: pointer): void {.importc: "QAbstractListModel_protectedbase_changePersistentIndex".}
+proc fcQAbstractListModel_protectedbase_changePersistentIndexList(self: pointer, fromVal: struct_miqt_array, to: struct_miqt_array): void {.importc: "QAbstractListModel_protectedbase_changePersistentIndexList".}
+proc fcQAbstractListModel_protectedbase_persistentIndexList(self: pointer, ): struct_miqt_array {.importc: "QAbstractListModel_protectedbase_persistentIndexList".}
+proc fcQAbstractListModel_protectedbase_sender(self: pointer, ): pointer {.importc: "QAbstractListModel_protectedbase_sender".}
+proc fcQAbstractListModel_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QAbstractListModel_protectedbase_senderSignalIndex".}
+proc fcQAbstractListModel_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QAbstractListModel_protectedbase_receivers".}
+proc fcQAbstractListModel_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QAbstractListModel_protectedbase_isSignalConnected".}
 proc fcQAbstractListModel_new(vtbl: pointer, ): ptr cQAbstractListModel {.importc: "QAbstractListModel_new".}
 proc fcQAbstractListModel_new2(vtbl: pointer, parent: pointer): ptr cQAbstractListModel {.importc: "QAbstractListModel_new2".}
 proc fcQAbstractListModel_staticMetaObject(): pointer {.importc: "QAbstractListModel_staticMetaObject".}
@@ -1723,6 +1802,104 @@ proc miqt_exec_callback_cQAbstractItemModel_disconnectNotify(vtbl: pointer, self
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
   vtbl[].disconnectNotify(self, slotval1)
 
+proc resetInternalData*(self: gen_qabstractitemmodel_types.QAbstractItemModel, ): void =
+  fcQAbstractItemModel_protectedbase_resetInternalData(self.h)
+
+proc createIndex*(self: gen_qabstractitemmodel_types.QAbstractItemModel, row: cint, column: cint): gen_qabstractitemmodel_types.QModelIndex =
+  gen_qabstractitemmodel_types.QModelIndex(h: fcQAbstractItemModel_protectedbase_createIndex(self.h, row, column))
+
+proc createIndex*(self: gen_qabstractitemmodel_types.QAbstractItemModel, row: cint, column: cint, id: uint): gen_qabstractitemmodel_types.QModelIndex =
+  gen_qabstractitemmodel_types.QModelIndex(h: fcQAbstractItemModel_protectedbase_createIndex2(self.h, row, column, id))
+
+proc encodeData*(self: gen_qabstractitemmodel_types.QAbstractItemModel, indexes: seq[gen_qabstractitemmodel_types.QModelIndex], stream: gen_qdatastream_types.QDataStream): void =
+  var indexes_CArray = newSeq[pointer](len(indexes))
+  for i in 0..<len(indexes):
+    indexes_CArray[i] = indexes[i].h
+
+  fcQAbstractItemModel_protectedbase_encodeData(self.h, struct_miqt_array(len: csize_t(len(indexes)), data: if len(indexes) == 0: nil else: addr(indexes_CArray[0])), stream.h)
+
+proc decodeData*(self: gen_qabstractitemmodel_types.QAbstractItemModel, row: cint, column: cint, parent: gen_qabstractitemmodel_types.QModelIndex, stream: gen_qdatastream_types.QDataStream): bool =
+  fcQAbstractItemModel_protectedbase_decodeData(self.h, row, column, parent.h, stream.h)
+
+proc beginInsertRows*(self: gen_qabstractitemmodel_types.QAbstractItemModel, parent: gen_qabstractitemmodel_types.QModelIndex, first: cint, last: cint): void =
+  fcQAbstractItemModel_protectedbase_beginInsertRows(self.h, parent.h, first, last)
+
+proc endInsertRows*(self: gen_qabstractitemmodel_types.QAbstractItemModel, ): void =
+  fcQAbstractItemModel_protectedbase_endInsertRows(self.h)
+
+proc beginRemoveRows*(self: gen_qabstractitemmodel_types.QAbstractItemModel, parent: gen_qabstractitemmodel_types.QModelIndex, first: cint, last: cint): void =
+  fcQAbstractItemModel_protectedbase_beginRemoveRows(self.h, parent.h, first, last)
+
+proc endRemoveRows*(self: gen_qabstractitemmodel_types.QAbstractItemModel, ): void =
+  fcQAbstractItemModel_protectedbase_endRemoveRows(self.h)
+
+proc beginMoveRows*(self: gen_qabstractitemmodel_types.QAbstractItemModel, sourceParent: gen_qabstractitemmodel_types.QModelIndex, sourceFirst: cint, sourceLast: cint, destinationParent: gen_qabstractitemmodel_types.QModelIndex, destinationRow: cint): bool =
+  fcQAbstractItemModel_protectedbase_beginMoveRows(self.h, sourceParent.h, sourceFirst, sourceLast, destinationParent.h, destinationRow)
+
+proc endMoveRows*(self: gen_qabstractitemmodel_types.QAbstractItemModel, ): void =
+  fcQAbstractItemModel_protectedbase_endMoveRows(self.h)
+
+proc beginInsertColumns*(self: gen_qabstractitemmodel_types.QAbstractItemModel, parent: gen_qabstractitemmodel_types.QModelIndex, first: cint, last: cint): void =
+  fcQAbstractItemModel_protectedbase_beginInsertColumns(self.h, parent.h, first, last)
+
+proc endInsertColumns*(self: gen_qabstractitemmodel_types.QAbstractItemModel, ): void =
+  fcQAbstractItemModel_protectedbase_endInsertColumns(self.h)
+
+proc beginRemoveColumns*(self: gen_qabstractitemmodel_types.QAbstractItemModel, parent: gen_qabstractitemmodel_types.QModelIndex, first: cint, last: cint): void =
+  fcQAbstractItemModel_protectedbase_beginRemoveColumns(self.h, parent.h, first, last)
+
+proc endRemoveColumns*(self: gen_qabstractitemmodel_types.QAbstractItemModel, ): void =
+  fcQAbstractItemModel_protectedbase_endRemoveColumns(self.h)
+
+proc beginMoveColumns*(self: gen_qabstractitemmodel_types.QAbstractItemModel, sourceParent: gen_qabstractitemmodel_types.QModelIndex, sourceFirst: cint, sourceLast: cint, destinationParent: gen_qabstractitemmodel_types.QModelIndex, destinationColumn: cint): bool =
+  fcQAbstractItemModel_protectedbase_beginMoveColumns(self.h, sourceParent.h, sourceFirst, sourceLast, destinationParent.h, destinationColumn)
+
+proc endMoveColumns*(self: gen_qabstractitemmodel_types.QAbstractItemModel, ): void =
+  fcQAbstractItemModel_protectedbase_endMoveColumns(self.h)
+
+proc beginResetModel*(self: gen_qabstractitemmodel_types.QAbstractItemModel, ): void =
+  fcQAbstractItemModel_protectedbase_beginResetModel(self.h)
+
+proc endResetModel*(self: gen_qabstractitemmodel_types.QAbstractItemModel, ): void =
+  fcQAbstractItemModel_protectedbase_endResetModel(self.h)
+
+proc changePersistentIndex*(self: gen_qabstractitemmodel_types.QAbstractItemModel, fromVal: gen_qabstractitemmodel_types.QModelIndex, to: gen_qabstractitemmodel_types.QModelIndex): void =
+  fcQAbstractItemModel_protectedbase_changePersistentIndex(self.h, fromVal.h, to.h)
+
+proc changePersistentIndexList*(self: gen_qabstractitemmodel_types.QAbstractItemModel, fromVal: seq[gen_qabstractitemmodel_types.QModelIndex], to: seq[gen_qabstractitemmodel_types.QModelIndex]): void =
+  var fromVal_CArray = newSeq[pointer](len(fromVal))
+  for i in 0..<len(fromVal):
+    fromVal_CArray[i] = fromVal[i].h
+
+  var to_CArray = newSeq[pointer](len(to))
+  for i in 0..<len(to):
+    to_CArray[i] = to[i].h
+
+  fcQAbstractItemModel_protectedbase_changePersistentIndexList(self.h, struct_miqt_array(len: csize_t(len(fromVal)), data: if len(fromVal) == 0: nil else: addr(fromVal_CArray[0])), struct_miqt_array(len: csize_t(len(to)), data: if len(to) == 0: nil else: addr(to_CArray[0])))
+
+proc persistentIndexList*(self: gen_qabstractitemmodel_types.QAbstractItemModel, ): seq[gen_qabstractitemmodel_types.QModelIndex] =
+  var v_ma = fcQAbstractItemModel_protectedbase_persistentIndexList(self.h)
+  var vx_ret = newSeq[gen_qabstractitemmodel_types.QModelIndex](int(v_ma.len))
+  let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
+  for i in 0 ..< v_ma.len:
+    vx_ret[i] = gen_qabstractitemmodel_types.QModelIndex(h: v_outCast[i])
+  vx_ret
+
+proc createIndex*(self: gen_qabstractitemmodel_types.QAbstractItemModel, row: cint, column: cint, data: pointer): gen_qabstractitemmodel_types.QModelIndex =
+  gen_qabstractitemmodel_types.QModelIndex(h: fcQAbstractItemModel_protectedbase_createIndex3(self.h, row, column, data))
+
+proc sender*(self: gen_qabstractitemmodel_types.QAbstractItemModel, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQAbstractItemModel_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qabstractitemmodel_types.QAbstractItemModel, ): cint =
+  fcQAbstractItemModel_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qabstractitemmodel_types.QAbstractItemModel, signal: cstring): cint =
+  fcQAbstractItemModel_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qabstractitemmodel_types.QAbstractItemModel, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQAbstractItemModel_protectedbase_isSignalConnected(self.h, signal.h)
+
 proc create*(T: type gen_qabstractitemmodel_types.QAbstractItemModel,
     vtbl: ref QAbstractItemModelVTable = nil): gen_qabstractitemmodel_types.QAbstractItemModel =
   let vtbl = if vtbl == nil: new QAbstractItemModelVTable else: vtbl
@@ -2593,6 +2770,98 @@ proc miqt_exec_callback_cQAbstractTableModel_disconnectNotify(vtbl: pointer, sel
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
   vtbl[].disconnectNotify(self, slotval1)
 
+proc resetInternalData*(self: gen_qabstractitemmodel_types.QAbstractTableModel, ): void =
+  fcQAbstractTableModel_protectedbase_resetInternalData(self.h)
+
+proc createIndex*(self: gen_qabstractitemmodel_types.QAbstractTableModel, row: cint, column: cint): gen_qabstractitemmodel_types.QModelIndex =
+  gen_qabstractitemmodel_types.QModelIndex(h: fcQAbstractTableModel_protectedbase_createIndex(self.h, row, column))
+
+proc encodeData*(self: gen_qabstractitemmodel_types.QAbstractTableModel, indexes: seq[gen_qabstractitemmodel_types.QModelIndex], stream: gen_qdatastream_types.QDataStream): void =
+  var indexes_CArray = newSeq[pointer](len(indexes))
+  for i in 0..<len(indexes):
+    indexes_CArray[i] = indexes[i].h
+
+  fcQAbstractTableModel_protectedbase_encodeData(self.h, struct_miqt_array(len: csize_t(len(indexes)), data: if len(indexes) == 0: nil else: addr(indexes_CArray[0])), stream.h)
+
+proc decodeData*(self: gen_qabstractitemmodel_types.QAbstractTableModel, row: cint, column: cint, parent: gen_qabstractitemmodel_types.QModelIndex, stream: gen_qdatastream_types.QDataStream): bool =
+  fcQAbstractTableModel_protectedbase_decodeData(self.h, row, column, parent.h, stream.h)
+
+proc beginInsertRows*(self: gen_qabstractitemmodel_types.QAbstractTableModel, parent: gen_qabstractitemmodel_types.QModelIndex, first: cint, last: cint): void =
+  fcQAbstractTableModel_protectedbase_beginInsertRows(self.h, parent.h, first, last)
+
+proc endInsertRows*(self: gen_qabstractitemmodel_types.QAbstractTableModel, ): void =
+  fcQAbstractTableModel_protectedbase_endInsertRows(self.h)
+
+proc beginRemoveRows*(self: gen_qabstractitemmodel_types.QAbstractTableModel, parent: gen_qabstractitemmodel_types.QModelIndex, first: cint, last: cint): void =
+  fcQAbstractTableModel_protectedbase_beginRemoveRows(self.h, parent.h, first, last)
+
+proc endRemoveRows*(self: gen_qabstractitemmodel_types.QAbstractTableModel, ): void =
+  fcQAbstractTableModel_protectedbase_endRemoveRows(self.h)
+
+proc beginMoveRows*(self: gen_qabstractitemmodel_types.QAbstractTableModel, sourceParent: gen_qabstractitemmodel_types.QModelIndex, sourceFirst: cint, sourceLast: cint, destinationParent: gen_qabstractitemmodel_types.QModelIndex, destinationRow: cint): bool =
+  fcQAbstractTableModel_protectedbase_beginMoveRows(self.h, sourceParent.h, sourceFirst, sourceLast, destinationParent.h, destinationRow)
+
+proc endMoveRows*(self: gen_qabstractitemmodel_types.QAbstractTableModel, ): void =
+  fcQAbstractTableModel_protectedbase_endMoveRows(self.h)
+
+proc beginInsertColumns*(self: gen_qabstractitemmodel_types.QAbstractTableModel, parent: gen_qabstractitemmodel_types.QModelIndex, first: cint, last: cint): void =
+  fcQAbstractTableModel_protectedbase_beginInsertColumns(self.h, parent.h, first, last)
+
+proc endInsertColumns*(self: gen_qabstractitemmodel_types.QAbstractTableModel, ): void =
+  fcQAbstractTableModel_protectedbase_endInsertColumns(self.h)
+
+proc beginRemoveColumns*(self: gen_qabstractitemmodel_types.QAbstractTableModel, parent: gen_qabstractitemmodel_types.QModelIndex, first: cint, last: cint): void =
+  fcQAbstractTableModel_protectedbase_beginRemoveColumns(self.h, parent.h, first, last)
+
+proc endRemoveColumns*(self: gen_qabstractitemmodel_types.QAbstractTableModel, ): void =
+  fcQAbstractTableModel_protectedbase_endRemoveColumns(self.h)
+
+proc beginMoveColumns*(self: gen_qabstractitemmodel_types.QAbstractTableModel, sourceParent: gen_qabstractitemmodel_types.QModelIndex, sourceFirst: cint, sourceLast: cint, destinationParent: gen_qabstractitemmodel_types.QModelIndex, destinationColumn: cint): bool =
+  fcQAbstractTableModel_protectedbase_beginMoveColumns(self.h, sourceParent.h, sourceFirst, sourceLast, destinationParent.h, destinationColumn)
+
+proc endMoveColumns*(self: gen_qabstractitemmodel_types.QAbstractTableModel, ): void =
+  fcQAbstractTableModel_protectedbase_endMoveColumns(self.h)
+
+proc beginResetModel*(self: gen_qabstractitemmodel_types.QAbstractTableModel, ): void =
+  fcQAbstractTableModel_protectedbase_beginResetModel(self.h)
+
+proc endResetModel*(self: gen_qabstractitemmodel_types.QAbstractTableModel, ): void =
+  fcQAbstractTableModel_protectedbase_endResetModel(self.h)
+
+proc changePersistentIndex*(self: gen_qabstractitemmodel_types.QAbstractTableModel, fromVal: gen_qabstractitemmodel_types.QModelIndex, to: gen_qabstractitemmodel_types.QModelIndex): void =
+  fcQAbstractTableModel_protectedbase_changePersistentIndex(self.h, fromVal.h, to.h)
+
+proc changePersistentIndexList*(self: gen_qabstractitemmodel_types.QAbstractTableModel, fromVal: seq[gen_qabstractitemmodel_types.QModelIndex], to: seq[gen_qabstractitemmodel_types.QModelIndex]): void =
+  var fromVal_CArray = newSeq[pointer](len(fromVal))
+  for i in 0..<len(fromVal):
+    fromVal_CArray[i] = fromVal[i].h
+
+  var to_CArray = newSeq[pointer](len(to))
+  for i in 0..<len(to):
+    to_CArray[i] = to[i].h
+
+  fcQAbstractTableModel_protectedbase_changePersistentIndexList(self.h, struct_miqt_array(len: csize_t(len(fromVal)), data: if len(fromVal) == 0: nil else: addr(fromVal_CArray[0])), struct_miqt_array(len: csize_t(len(to)), data: if len(to) == 0: nil else: addr(to_CArray[0])))
+
+proc persistentIndexList*(self: gen_qabstractitemmodel_types.QAbstractTableModel, ): seq[gen_qabstractitemmodel_types.QModelIndex] =
+  var v_ma = fcQAbstractTableModel_protectedbase_persistentIndexList(self.h)
+  var vx_ret = newSeq[gen_qabstractitemmodel_types.QModelIndex](int(v_ma.len))
+  let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
+  for i in 0 ..< v_ma.len:
+    vx_ret[i] = gen_qabstractitemmodel_types.QModelIndex(h: v_outCast[i])
+  vx_ret
+
+proc sender*(self: gen_qabstractitemmodel_types.QAbstractTableModel, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQAbstractTableModel_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qabstractitemmodel_types.QAbstractTableModel, ): cint =
+  fcQAbstractTableModel_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qabstractitemmodel_types.QAbstractTableModel, signal: cstring): cint =
+  fcQAbstractTableModel_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qabstractitemmodel_types.QAbstractTableModel, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQAbstractTableModel_protectedbase_isSignalConnected(self.h, signal.h)
+
 proc create*(T: type gen_qabstractitemmodel_types.QAbstractTableModel,
     vtbl: ref QAbstractTableModelVTable = nil): gen_qabstractitemmodel_types.QAbstractTableModel =
   let vtbl = if vtbl == nil: new QAbstractTableModelVTable else: vtbl
@@ -3445,6 +3714,98 @@ proc miqt_exec_callback_cQAbstractListModel_disconnectNotify(vtbl: pointer, self
   let self = QAbstractListModel(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
   vtbl[].disconnectNotify(self, slotval1)
+
+proc resetInternalData*(self: gen_qabstractitemmodel_types.QAbstractListModel, ): void =
+  fcQAbstractListModel_protectedbase_resetInternalData(self.h)
+
+proc createIndex*(self: gen_qabstractitemmodel_types.QAbstractListModel, row: cint, column: cint): gen_qabstractitemmodel_types.QModelIndex =
+  gen_qabstractitemmodel_types.QModelIndex(h: fcQAbstractListModel_protectedbase_createIndex(self.h, row, column))
+
+proc encodeData*(self: gen_qabstractitemmodel_types.QAbstractListModel, indexes: seq[gen_qabstractitemmodel_types.QModelIndex], stream: gen_qdatastream_types.QDataStream): void =
+  var indexes_CArray = newSeq[pointer](len(indexes))
+  for i in 0..<len(indexes):
+    indexes_CArray[i] = indexes[i].h
+
+  fcQAbstractListModel_protectedbase_encodeData(self.h, struct_miqt_array(len: csize_t(len(indexes)), data: if len(indexes) == 0: nil else: addr(indexes_CArray[0])), stream.h)
+
+proc decodeData*(self: gen_qabstractitemmodel_types.QAbstractListModel, row: cint, column: cint, parent: gen_qabstractitemmodel_types.QModelIndex, stream: gen_qdatastream_types.QDataStream): bool =
+  fcQAbstractListModel_protectedbase_decodeData(self.h, row, column, parent.h, stream.h)
+
+proc beginInsertRows*(self: gen_qabstractitemmodel_types.QAbstractListModel, parent: gen_qabstractitemmodel_types.QModelIndex, first: cint, last: cint): void =
+  fcQAbstractListModel_protectedbase_beginInsertRows(self.h, parent.h, first, last)
+
+proc endInsertRows*(self: gen_qabstractitemmodel_types.QAbstractListModel, ): void =
+  fcQAbstractListModel_protectedbase_endInsertRows(self.h)
+
+proc beginRemoveRows*(self: gen_qabstractitemmodel_types.QAbstractListModel, parent: gen_qabstractitemmodel_types.QModelIndex, first: cint, last: cint): void =
+  fcQAbstractListModel_protectedbase_beginRemoveRows(self.h, parent.h, first, last)
+
+proc endRemoveRows*(self: gen_qabstractitemmodel_types.QAbstractListModel, ): void =
+  fcQAbstractListModel_protectedbase_endRemoveRows(self.h)
+
+proc beginMoveRows*(self: gen_qabstractitemmodel_types.QAbstractListModel, sourceParent: gen_qabstractitemmodel_types.QModelIndex, sourceFirst: cint, sourceLast: cint, destinationParent: gen_qabstractitemmodel_types.QModelIndex, destinationRow: cint): bool =
+  fcQAbstractListModel_protectedbase_beginMoveRows(self.h, sourceParent.h, sourceFirst, sourceLast, destinationParent.h, destinationRow)
+
+proc endMoveRows*(self: gen_qabstractitemmodel_types.QAbstractListModel, ): void =
+  fcQAbstractListModel_protectedbase_endMoveRows(self.h)
+
+proc beginInsertColumns*(self: gen_qabstractitemmodel_types.QAbstractListModel, parent: gen_qabstractitemmodel_types.QModelIndex, first: cint, last: cint): void =
+  fcQAbstractListModel_protectedbase_beginInsertColumns(self.h, parent.h, first, last)
+
+proc endInsertColumns*(self: gen_qabstractitemmodel_types.QAbstractListModel, ): void =
+  fcQAbstractListModel_protectedbase_endInsertColumns(self.h)
+
+proc beginRemoveColumns*(self: gen_qabstractitemmodel_types.QAbstractListModel, parent: gen_qabstractitemmodel_types.QModelIndex, first: cint, last: cint): void =
+  fcQAbstractListModel_protectedbase_beginRemoveColumns(self.h, parent.h, first, last)
+
+proc endRemoveColumns*(self: gen_qabstractitemmodel_types.QAbstractListModel, ): void =
+  fcQAbstractListModel_protectedbase_endRemoveColumns(self.h)
+
+proc beginMoveColumns*(self: gen_qabstractitemmodel_types.QAbstractListModel, sourceParent: gen_qabstractitemmodel_types.QModelIndex, sourceFirst: cint, sourceLast: cint, destinationParent: gen_qabstractitemmodel_types.QModelIndex, destinationColumn: cint): bool =
+  fcQAbstractListModel_protectedbase_beginMoveColumns(self.h, sourceParent.h, sourceFirst, sourceLast, destinationParent.h, destinationColumn)
+
+proc endMoveColumns*(self: gen_qabstractitemmodel_types.QAbstractListModel, ): void =
+  fcQAbstractListModel_protectedbase_endMoveColumns(self.h)
+
+proc beginResetModel*(self: gen_qabstractitemmodel_types.QAbstractListModel, ): void =
+  fcQAbstractListModel_protectedbase_beginResetModel(self.h)
+
+proc endResetModel*(self: gen_qabstractitemmodel_types.QAbstractListModel, ): void =
+  fcQAbstractListModel_protectedbase_endResetModel(self.h)
+
+proc changePersistentIndex*(self: gen_qabstractitemmodel_types.QAbstractListModel, fromVal: gen_qabstractitemmodel_types.QModelIndex, to: gen_qabstractitemmodel_types.QModelIndex): void =
+  fcQAbstractListModel_protectedbase_changePersistentIndex(self.h, fromVal.h, to.h)
+
+proc changePersistentIndexList*(self: gen_qabstractitemmodel_types.QAbstractListModel, fromVal: seq[gen_qabstractitemmodel_types.QModelIndex], to: seq[gen_qabstractitemmodel_types.QModelIndex]): void =
+  var fromVal_CArray = newSeq[pointer](len(fromVal))
+  for i in 0..<len(fromVal):
+    fromVal_CArray[i] = fromVal[i].h
+
+  var to_CArray = newSeq[pointer](len(to))
+  for i in 0..<len(to):
+    to_CArray[i] = to[i].h
+
+  fcQAbstractListModel_protectedbase_changePersistentIndexList(self.h, struct_miqt_array(len: csize_t(len(fromVal)), data: if len(fromVal) == 0: nil else: addr(fromVal_CArray[0])), struct_miqt_array(len: csize_t(len(to)), data: if len(to) == 0: nil else: addr(to_CArray[0])))
+
+proc persistentIndexList*(self: gen_qabstractitemmodel_types.QAbstractListModel, ): seq[gen_qabstractitemmodel_types.QModelIndex] =
+  var v_ma = fcQAbstractListModel_protectedbase_persistentIndexList(self.h)
+  var vx_ret = newSeq[gen_qabstractitemmodel_types.QModelIndex](int(v_ma.len))
+  let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
+  for i in 0 ..< v_ma.len:
+    vx_ret[i] = gen_qabstractitemmodel_types.QModelIndex(h: v_outCast[i])
+  vx_ret
+
+proc sender*(self: gen_qabstractitemmodel_types.QAbstractListModel, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQAbstractListModel_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qabstractitemmodel_types.QAbstractListModel, ): cint =
+  fcQAbstractListModel_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qabstractitemmodel_types.QAbstractListModel, signal: cstring): cint =
+  fcQAbstractListModel_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qabstractitemmodel_types.QAbstractListModel, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQAbstractListModel_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc create*(T: type gen_qabstractitemmodel_types.QAbstractListModel,
     vtbl: ref QAbstractListModelVTable = nil): gen_qabstractitemmodel_types.QAbstractListModel =

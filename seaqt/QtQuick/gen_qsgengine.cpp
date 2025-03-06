@@ -194,10 +194,10 @@ public:
 	friend void QSGEngine_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
 
 	// Wrappers to allow calling protected methods:
-	friend QObject* QSGEngine_protectedbase_sender(bool* _dynamic_cast_ok, const void* self);
-	friend int QSGEngine_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
-	friend int QSGEngine_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
-	friend bool QSGEngine_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+	friend QObject* QSGEngine_protectedbase_sender(const void* self);
+	friend int QSGEngine_protectedbase_senderSignalIndex(const void* self);
+	friend int QSGEngine_protectedbase_receivers(const void* self, const char* signal);
+	friend bool QSGEngine_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
 };
 
 QSGEngine* QSGEngine_new(struct QSGEngine_VTable* vtbl) {
@@ -391,53 +391,29 @@ void QSGEngine_virtualbase_disconnectNotify(void* self, QMetaMethod* signal) {
 }
 
 const QMetaObject* QSGEngine_staticMetaObject() { return &QSGEngine::staticMetaObject; }
-QObject* QSGEngine_protectedbase_sender(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQSGEngine* self_cast = dynamic_cast<VirtualQSGEngine*>( (QSGEngine*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return nullptr;
-	}
-	
-	*_dynamic_cast_ok = true;
+QObject* QSGEngine_protectedbase_sender(const void* self) {
+	VirtualQSGEngine* self_cast = static_cast<VirtualQSGEngine*>( (QSGEngine*)(self) );
 	
 	return self_cast->sender();
 
 }
 
-int QSGEngine_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQSGEngine* self_cast = dynamic_cast<VirtualQSGEngine*>( (QSGEngine*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return 0;
-	}
-	
-	*_dynamic_cast_ok = true;
+int QSGEngine_protectedbase_senderSignalIndex(const void* self) {
+	VirtualQSGEngine* self_cast = static_cast<VirtualQSGEngine*>( (QSGEngine*)(self) );
 	
 	return self_cast->senderSignalIndex();
 
 }
 
-int QSGEngine_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal) {
-	VirtualQSGEngine* self_cast = dynamic_cast<VirtualQSGEngine*>( (QSGEngine*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return 0;
-	}
-	
-	*_dynamic_cast_ok = true;
+int QSGEngine_protectedbase_receivers(const void* self, const char* signal) {
+	VirtualQSGEngine* self_cast = static_cast<VirtualQSGEngine*>( (QSGEngine*)(self) );
 	
 	return self_cast->receivers(signal);
 
 }
 
-bool QSGEngine_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal) {
-	VirtualQSGEngine* self_cast = dynamic_cast<VirtualQSGEngine*>( (QSGEngine*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return false;
-	}
-	
-	*_dynamic_cast_ok = true;
+bool QSGEngine_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal) {
+	VirtualQSGEngine* self_cast = static_cast<VirtualQSGEngine*>( (QSGEngine*)(self) );
 	
 	return self_cast->isSignalConnected(*signal);
 

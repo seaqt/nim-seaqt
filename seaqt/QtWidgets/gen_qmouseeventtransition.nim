@@ -97,6 +97,10 @@ proc fcQMouseEventTransition_virtualbase_childEvent(self: pointer, event: pointe
 proc fcQMouseEventTransition_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QMouseEventTransition_virtualbase_customEvent".}
 proc fcQMouseEventTransition_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QMouseEventTransition_virtualbase_connectNotify".}
 proc fcQMouseEventTransition_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QMouseEventTransition_virtualbase_disconnectNotify".}
+proc fcQMouseEventTransition_protectedbase_sender(self: pointer, ): pointer {.importc: "QMouseEventTransition_protectedbase_sender".}
+proc fcQMouseEventTransition_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QMouseEventTransition_protectedbase_senderSignalIndex".}
+proc fcQMouseEventTransition_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QMouseEventTransition_protectedbase_receivers".}
+proc fcQMouseEventTransition_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QMouseEventTransition_protectedbase_isSignalConnected".}
 proc fcQMouseEventTransition_new(vtbl: pointer, ): ptr cQMouseEventTransition {.importc: "QMouseEventTransition_new".}
 proc fcQMouseEventTransition_new2(vtbl: pointer, objectVal: pointer, typeVal: cint, button: cint): ptr cQMouseEventTransition {.importc: "QMouseEventTransition_new2".}
 proc fcQMouseEventTransition_new3(vtbl: pointer, sourceState: pointer): ptr cQMouseEventTransition {.importc: "QMouseEventTransition_new3".}
@@ -308,6 +312,18 @@ proc miqt_exec_callback_cQMouseEventTransition_disconnectNotify(vtbl: pointer, s
   let self = QMouseEventTransition(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
   vtbl[].disconnectNotify(self, slotval1)
+
+proc sender*(self: gen_qmouseeventtransition_types.QMouseEventTransition, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQMouseEventTransition_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qmouseeventtransition_types.QMouseEventTransition, ): cint =
+  fcQMouseEventTransition_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qmouseeventtransition_types.QMouseEventTransition, signal: cstring): cint =
+  fcQMouseEventTransition_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qmouseeventtransition_types.QMouseEventTransition, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQMouseEventTransition_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc create*(T: type gen_qmouseeventtransition_types.QMouseEventTransition,
     vtbl: ref QMouseEventTransitionVTable = nil): gen_qmouseeventtransition_types.QMouseEventTransition =

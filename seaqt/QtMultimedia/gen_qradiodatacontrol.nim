@@ -38,9 +38,13 @@ import ./gen_qradiodatacontrol_types
 export gen_qradiodatacontrol_types
 
 import
+  ../QtCore/gen_qmetaobject_types,
+  ../QtCore/gen_qobject_types,
   ../QtCore/gen_qobjectdefs_types,
   ./gen_qmediacontrol
 export
+  gen_qmetaobject_types,
+  gen_qobject_types,
   gen_qobjectdefs_types,
   gen_qmediacontrol
 
@@ -78,6 +82,10 @@ proc fcQRadioDataControl_tr2(s: cstring, c: cstring): struct_miqt_string {.impor
 proc fcQRadioDataControl_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QRadioDataControl_tr3".}
 proc fcQRadioDataControl_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QRadioDataControl_trUtf82".}
 proc fcQRadioDataControl_trUtf83(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QRadioDataControl_trUtf83".}
+proc fcQRadioDataControl_protectedbase_sender(self: pointer, ): pointer {.importc: "QRadioDataControl_protectedbase_sender".}
+proc fcQRadioDataControl_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QRadioDataControl_protectedbase_senderSignalIndex".}
+proc fcQRadioDataControl_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QRadioDataControl_protectedbase_receivers".}
+proc fcQRadioDataControl_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QRadioDataControl_protectedbase_isSignalConnected".}
 proc fcQRadioDataControl_staticMetaObject(): pointer {.importc: "QRadioDataControl_staticMetaObject".}
 proc fcQRadioDataControl_delete(self: pointer) {.importc: "QRadioDataControl_delete".}
 
@@ -319,6 +327,18 @@ proc trUtf8*(_: type gen_qradiodatacontrol_types.QRadioDataControl, s: cstring, 
   let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
   c_free(v_ms.data)
   vx_ret
+
+proc sender*(self: gen_qradiodatacontrol_types.QRadioDataControl, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQRadioDataControl_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qradiodatacontrol_types.QRadioDataControl, ): cint =
+  fcQRadioDataControl_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qradiodatacontrol_types.QRadioDataControl, signal: cstring): cint =
+  fcQRadioDataControl_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qradiodatacontrol_types.QRadioDataControl, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQRadioDataControl_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc staticMetaObject*(_: type gen_qradiodatacontrol_types.QRadioDataControl): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQRadioDataControl_staticMetaObject())

@@ -228,6 +228,17 @@ proc fcQGraphicsProxyWidget_virtualbase_sceneEventFilter(self: pointer, watched:
 proc fcQGraphicsProxyWidget_virtualbase_supportsExtension(self: pointer, extension: cint): bool {.importc: "QGraphicsProxyWidget_virtualbase_supportsExtension".}
 proc fcQGraphicsProxyWidget_virtualbase_setExtension(self: pointer, extension: cint, variant: pointer): void {.importc: "QGraphicsProxyWidget_virtualbase_setExtension".}
 proc fcQGraphicsProxyWidget_virtualbase_extension(self: pointer, variant: pointer): pointer {.importc: "QGraphicsProxyWidget_virtualbase_extension".}
+proc fcQGraphicsProxyWidget_protectedbase_newProxyWidget(self: pointer, param1: pointer): pointer {.importc: "QGraphicsProxyWidget_protectedbase_newProxyWidget".}
+proc fcQGraphicsProxyWidget_protectedbase_updateMicroFocus(self: pointer, ): void {.importc: "QGraphicsProxyWidget_protectedbase_updateMicroFocus".}
+proc fcQGraphicsProxyWidget_protectedbase_sender(self: pointer, ): pointer {.importc: "QGraphicsProxyWidget_protectedbase_sender".}
+proc fcQGraphicsProxyWidget_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QGraphicsProxyWidget_protectedbase_senderSignalIndex".}
+proc fcQGraphicsProxyWidget_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QGraphicsProxyWidget_protectedbase_receivers".}
+proc fcQGraphicsProxyWidget_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QGraphicsProxyWidget_protectedbase_isSignalConnected".}
+proc fcQGraphicsProxyWidget_protectedbase_addToIndex(self: pointer, ): void {.importc: "QGraphicsProxyWidget_protectedbase_addToIndex".}
+proc fcQGraphicsProxyWidget_protectedbase_removeFromIndex(self: pointer, ): void {.importc: "QGraphicsProxyWidget_protectedbase_removeFromIndex".}
+proc fcQGraphicsProxyWidget_protectedbase_prepareGeometryChange(self: pointer, ): void {.importc: "QGraphicsProxyWidget_protectedbase_prepareGeometryChange".}
+proc fcQGraphicsProxyWidget_protectedbase_setGraphicsItem(self: pointer, item: pointer): void {.importc: "QGraphicsProxyWidget_protectedbase_setGraphicsItem".}
+proc fcQGraphicsProxyWidget_protectedbase_setOwnedByLayout(self: pointer, ownedByLayout: bool): void {.importc: "QGraphicsProxyWidget_protectedbase_setOwnedByLayout".}
 proc fcQGraphicsProxyWidget_new(vtbl: pointer, ): ptr cQGraphicsProxyWidget {.importc: "QGraphicsProxyWidget_new".}
 proc fcQGraphicsProxyWidget_new2(vtbl: pointer, parent: pointer): ptr cQGraphicsProxyWidget {.importc: "QGraphicsProxyWidget_new2".}
 proc fcQGraphicsProxyWidget_new3(vtbl: pointer, parent: pointer, wFlags: cint): ptr cQGraphicsProxyWidget {.importc: "QGraphicsProxyWidget_new3".}
@@ -1064,6 +1075,39 @@ proc miqt_exec_callback_cQGraphicsProxyWidget_extension(vtbl: pointer, self: poi
   let slotval1 = gen_qvariant_types.QVariant(h: variant)
   var virtualReturn = vtbl[].extension(self, slotval1)
   virtualReturn.h
+
+proc newProxyWidget*(self: gen_qgraphicsproxywidget_types.QGraphicsProxyWidget, param1: gen_qwidget_types.QWidget): gen_qgraphicsproxywidget_types.QGraphicsProxyWidget =
+  gen_qgraphicsproxywidget_types.QGraphicsProxyWidget(h: fcQGraphicsProxyWidget_protectedbase_newProxyWidget(self.h, param1.h))
+
+proc updateMicroFocus*(self: gen_qgraphicsproxywidget_types.QGraphicsProxyWidget, ): void =
+  fcQGraphicsProxyWidget_protectedbase_updateMicroFocus(self.h)
+
+proc sender*(self: gen_qgraphicsproxywidget_types.QGraphicsProxyWidget, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQGraphicsProxyWidget_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qgraphicsproxywidget_types.QGraphicsProxyWidget, ): cint =
+  fcQGraphicsProxyWidget_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qgraphicsproxywidget_types.QGraphicsProxyWidget, signal: cstring): cint =
+  fcQGraphicsProxyWidget_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qgraphicsproxywidget_types.QGraphicsProxyWidget, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQGraphicsProxyWidget_protectedbase_isSignalConnected(self.h, signal.h)
+
+proc addToIndex*(self: gen_qgraphicsproxywidget_types.QGraphicsProxyWidget, ): void =
+  fcQGraphicsProxyWidget_protectedbase_addToIndex(self.h)
+
+proc removeFromIndex*(self: gen_qgraphicsproxywidget_types.QGraphicsProxyWidget, ): void =
+  fcQGraphicsProxyWidget_protectedbase_removeFromIndex(self.h)
+
+proc prepareGeometryChange*(self: gen_qgraphicsproxywidget_types.QGraphicsProxyWidget, ): void =
+  fcQGraphicsProxyWidget_protectedbase_prepareGeometryChange(self.h)
+
+proc setGraphicsItem*(self: gen_qgraphicsproxywidget_types.QGraphicsProxyWidget, item: gen_qgraphicsitem_types.QGraphicsItem): void =
+  fcQGraphicsProxyWidget_protectedbase_setGraphicsItem(self.h, item.h)
+
+proc setOwnedByLayout*(self: gen_qgraphicsproxywidget_types.QGraphicsProxyWidget, ownedByLayout: bool): void =
+  fcQGraphicsProxyWidget_protectedbase_setOwnedByLayout(self.h, ownedByLayout)
 
 proc create*(T: type gen_qgraphicsproxywidget_types.QGraphicsProxyWidget,
     vtbl: ref QGraphicsProxyWidgetVTable = nil): gen_qgraphicsproxywidget_types.QGraphicsProxyWidget =

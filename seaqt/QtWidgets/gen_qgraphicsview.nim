@@ -71,6 +71,7 @@ export gen_qgraphicsview_types
 
 import
   ../QtCore/gen_qcoreevent_types,
+  ../QtCore/gen_qmargins_types,
   ../QtCore/gen_qmetaobject_types,
   ../QtCore/gen_qobject_types,
   ../QtCore/gen_qobjectdefs_types,
@@ -89,9 +90,11 @@ import
   ./gen_qabstractscrollarea,
   ./gen_qgraphicsitem_types,
   ./gen_qgraphicsscene_types,
+  ./gen_qstyleoption_types,
   ./gen_qwidget_types
 export
   gen_qcoreevent_types,
+  gen_qmargins_types,
   gen_qmetaobject_types,
   gen_qobject_types,
   gen_qobjectdefs_types,
@@ -110,6 +113,7 @@ export
   gen_qabstractscrollarea,
   gen_qgraphicsitem_types,
   gen_qgraphicsscene_types,
+  gen_qstyleoption_types,
   gen_qwidget_types
 
 type cQGraphicsView*{.exportc: "QGraphicsView", incompleteStruct.} = object
@@ -334,6 +338,19 @@ proc fcQGraphicsView_virtualbase_childEvent(self: pointer, event: pointer): void
 proc fcQGraphicsView_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QGraphicsView_virtualbase_customEvent".}
 proc fcQGraphicsView_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QGraphicsView_virtualbase_connectNotify".}
 proc fcQGraphicsView_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QGraphicsView_virtualbase_disconnectNotify".}
+proc fcQGraphicsView_protectedbase_setViewportMargins(self: pointer, left: cint, top: cint, right: cint, bottom: cint): void {.importc: "QGraphicsView_protectedbase_setViewportMargins".}
+proc fcQGraphicsView_protectedbase_viewportMargins(self: pointer, ): pointer {.importc: "QGraphicsView_protectedbase_viewportMargins".}
+proc fcQGraphicsView_protectedbase_drawFrame(self: pointer, param1: pointer): void {.importc: "QGraphicsView_protectedbase_drawFrame".}
+proc fcQGraphicsView_protectedbase_initStyleOption(self: pointer, option: pointer): void {.importc: "QGraphicsView_protectedbase_initStyleOption".}
+proc fcQGraphicsView_protectedbase_updateMicroFocus(self: pointer, ): void {.importc: "QGraphicsView_protectedbase_updateMicroFocus".}
+proc fcQGraphicsView_protectedbase_create(self: pointer, ): void {.importc: "QGraphicsView_protectedbase_create".}
+proc fcQGraphicsView_protectedbase_destroy(self: pointer, ): void {.importc: "QGraphicsView_protectedbase_destroy".}
+proc fcQGraphicsView_protectedbase_focusNextChild(self: pointer, ): bool {.importc: "QGraphicsView_protectedbase_focusNextChild".}
+proc fcQGraphicsView_protectedbase_focusPreviousChild(self: pointer, ): bool {.importc: "QGraphicsView_protectedbase_focusPreviousChild".}
+proc fcQGraphicsView_protectedbase_sender(self: pointer, ): pointer {.importc: "QGraphicsView_protectedbase_sender".}
+proc fcQGraphicsView_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QGraphicsView_protectedbase_senderSignalIndex".}
+proc fcQGraphicsView_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QGraphicsView_protectedbase_receivers".}
+proc fcQGraphicsView_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QGraphicsView_protectedbase_isSignalConnected".}
 proc fcQGraphicsView_new(vtbl: pointer, parent: pointer): ptr cQGraphicsView {.importc: "QGraphicsView_new".}
 proc fcQGraphicsView_new2(vtbl: pointer, ): ptr cQGraphicsView {.importc: "QGraphicsView_new2".}
 proc fcQGraphicsView_new3(vtbl: pointer, scene: pointer): ptr cQGraphicsView {.importc: "QGraphicsView_new3".}
@@ -1383,6 +1400,45 @@ proc miqt_exec_callback_cQGraphicsView_disconnectNotify(vtbl: pointer, self: poi
   let self = QGraphicsView(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
   vtbl[].disconnectNotify(self, slotval1)
+
+proc setViewportMargins*(self: gen_qgraphicsview_types.QGraphicsView, left: cint, top: cint, right: cint, bottom: cint): void =
+  fcQGraphicsView_protectedbase_setViewportMargins(self.h, left, top, right, bottom)
+
+proc viewportMargins*(self: gen_qgraphicsview_types.QGraphicsView, ): gen_qmargins_types.QMargins =
+  gen_qmargins_types.QMargins(h: fcQGraphicsView_protectedbase_viewportMargins(self.h))
+
+proc drawFrame*(self: gen_qgraphicsview_types.QGraphicsView, param1: gen_qpainter_types.QPainter): void =
+  fcQGraphicsView_protectedbase_drawFrame(self.h, param1.h)
+
+proc initStyleOption*(self: gen_qgraphicsview_types.QGraphicsView, option: gen_qstyleoption_types.QStyleOptionFrame): void =
+  fcQGraphicsView_protectedbase_initStyleOption(self.h, option.h)
+
+proc updateMicroFocus*(self: gen_qgraphicsview_types.QGraphicsView, ): void =
+  fcQGraphicsView_protectedbase_updateMicroFocus(self.h)
+
+proc create*(self: gen_qgraphicsview_types.QGraphicsView, ): void =
+  fcQGraphicsView_protectedbase_create(self.h)
+
+proc destroy*(self: gen_qgraphicsview_types.QGraphicsView, ): void =
+  fcQGraphicsView_protectedbase_destroy(self.h)
+
+proc focusNextChild*(self: gen_qgraphicsview_types.QGraphicsView, ): bool =
+  fcQGraphicsView_protectedbase_focusNextChild(self.h)
+
+proc focusPreviousChild*(self: gen_qgraphicsview_types.QGraphicsView, ): bool =
+  fcQGraphicsView_protectedbase_focusPreviousChild(self.h)
+
+proc sender*(self: gen_qgraphicsview_types.QGraphicsView, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQGraphicsView_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qgraphicsview_types.QGraphicsView, ): cint =
+  fcQGraphicsView_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qgraphicsview_types.QGraphicsView, signal: cstring): cint =
+  fcQGraphicsView_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qgraphicsview_types.QGraphicsView, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQGraphicsView_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc create*(T: type gen_qgraphicsview_types.QGraphicsView,
     parent: gen_qwidget_types.QWidget,

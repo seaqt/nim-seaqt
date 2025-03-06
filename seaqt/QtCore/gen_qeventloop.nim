@@ -105,6 +105,10 @@ proc fcQEventLoop_virtualbase_childEvent(self: pointer, event: pointer): void {.
 proc fcQEventLoop_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QEventLoop_virtualbase_customEvent".}
 proc fcQEventLoop_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QEventLoop_virtualbase_connectNotify".}
 proc fcQEventLoop_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QEventLoop_virtualbase_disconnectNotify".}
+proc fcQEventLoop_protectedbase_sender(self: pointer, ): pointer {.importc: "QEventLoop_protectedbase_sender".}
+proc fcQEventLoop_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QEventLoop_protectedbase_senderSignalIndex".}
+proc fcQEventLoop_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QEventLoop_protectedbase_receivers".}
+proc fcQEventLoop_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QEventLoop_protectedbase_isSignalConnected".}
 proc fcQEventLoop_new(vtbl: pointer, ): ptr cQEventLoop {.importc: "QEventLoop_new".}
 proc fcQEventLoop_new2(vtbl: pointer, parent: pointer): ptr cQEventLoop {.importc: "QEventLoop_new2".}
 proc fcQEventLoop_staticMetaObject(): pointer {.importc: "QEventLoop_staticMetaObject".}
@@ -310,6 +314,18 @@ proc miqt_exec_callback_cQEventLoop_disconnectNotify(vtbl: pointer, self: pointe
   let self = QEventLoop(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
   vtbl[].disconnectNotify(self, slotval1)
+
+proc sender*(self: gen_qeventloop_types.QEventLoop, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQEventLoop_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qeventloop_types.QEventLoop, ): cint =
+  fcQEventLoop_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qeventloop_types.QEventLoop, signal: cstring): cint =
+  fcQEventLoop_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qeventloop_types.QEventLoop, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQEventLoop_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc create*(T: type gen_qeventloop_types.QEventLoop,
     vtbl: ref QEventLoopVTable = nil): gen_qeventloop_types.QEventLoop =

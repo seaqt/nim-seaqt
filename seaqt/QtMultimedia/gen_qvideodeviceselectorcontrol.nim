@@ -38,9 +38,13 @@ import ./gen_qvideodeviceselectorcontrol_types
 export gen_qvideodeviceselectorcontrol_types
 
 import
+  ../QtCore/gen_qmetaobject_types,
+  ../QtCore/gen_qobject_types,
   ../QtCore/gen_qobjectdefs_types,
   ./gen_qmediacontrol
 export
+  gen_qmetaobject_types,
+  gen_qobject_types,
   gen_qobjectdefs_types,
   gen_qmediacontrol
 
@@ -67,6 +71,10 @@ proc fcQVideoDeviceSelectorControl_tr2(s: cstring, c: cstring): struct_miqt_stri
 proc fcQVideoDeviceSelectorControl_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QVideoDeviceSelectorControl_tr3".}
 proc fcQVideoDeviceSelectorControl_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QVideoDeviceSelectorControl_trUtf82".}
 proc fcQVideoDeviceSelectorControl_trUtf83(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QVideoDeviceSelectorControl_trUtf83".}
+proc fcQVideoDeviceSelectorControl_protectedbase_sender(self: pointer, ): pointer {.importc: "QVideoDeviceSelectorControl_protectedbase_sender".}
+proc fcQVideoDeviceSelectorControl_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QVideoDeviceSelectorControl_protectedbase_senderSignalIndex".}
+proc fcQVideoDeviceSelectorControl_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QVideoDeviceSelectorControl_protectedbase_receivers".}
+proc fcQVideoDeviceSelectorControl_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QVideoDeviceSelectorControl_protectedbase_isSignalConnected".}
 proc fcQVideoDeviceSelectorControl_staticMetaObject(): pointer {.importc: "QVideoDeviceSelectorControl_staticMetaObject".}
 proc fcQVideoDeviceSelectorControl_delete(self: pointer) {.importc: "QVideoDeviceSelectorControl_delete".}
 
@@ -199,6 +207,18 @@ proc trUtf8*(_: type gen_qvideodeviceselectorcontrol_types.QVideoDeviceSelectorC
   let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
   c_free(v_ms.data)
   vx_ret
+
+proc sender*(self: gen_qvideodeviceselectorcontrol_types.QVideoDeviceSelectorControl, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQVideoDeviceSelectorControl_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qvideodeviceselectorcontrol_types.QVideoDeviceSelectorControl, ): cint =
+  fcQVideoDeviceSelectorControl_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qvideodeviceselectorcontrol_types.QVideoDeviceSelectorControl, signal: cstring): cint =
+  fcQVideoDeviceSelectorControl_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qvideodeviceselectorcontrol_types.QVideoDeviceSelectorControl, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQVideoDeviceSelectorControl_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc staticMetaObject*(_: type gen_qvideodeviceselectorcontrol_types.QVideoDeviceSelectorControl): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQVideoDeviceSelectorControl_staticMetaObject())

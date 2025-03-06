@@ -145,6 +145,10 @@ proc fcQNetworkSession_virtualbase_eventFilter(self: pointer, watched: pointer, 
 proc fcQNetworkSession_virtualbase_timerEvent(self: pointer, event: pointer): void {.importc: "QNetworkSession_virtualbase_timerEvent".}
 proc fcQNetworkSession_virtualbase_childEvent(self: pointer, event: pointer): void {.importc: "QNetworkSession_virtualbase_childEvent".}
 proc fcQNetworkSession_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QNetworkSession_virtualbase_customEvent".}
+proc fcQNetworkSession_protectedbase_sender(self: pointer, ): pointer {.importc: "QNetworkSession_protectedbase_sender".}
+proc fcQNetworkSession_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QNetworkSession_protectedbase_senderSignalIndex".}
+proc fcQNetworkSession_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QNetworkSession_protectedbase_receivers".}
+proc fcQNetworkSession_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QNetworkSession_protectedbase_isSignalConnected".}
 proc fcQNetworkSession_new(vtbl: pointer, connConfig: pointer): ptr cQNetworkSession {.importc: "QNetworkSession_new".}
 proc fcQNetworkSession_new2(vtbl: pointer, connConfig: pointer, parent: pointer): ptr cQNetworkSession {.importc: "QNetworkSession_new2".}
 proc fcQNetworkSession_staticMetaObject(): pointer {.importc: "QNetworkSession_staticMetaObject".}
@@ -515,6 +519,18 @@ proc miqt_exec_callback_cQNetworkSession_customEvent(vtbl: pointer, self: pointe
   let self = QNetworkSession(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event)
   vtbl[].customEvent(self, slotval1)
+
+proc sender*(self: gen_qnetworksession_types.QNetworkSession, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQNetworkSession_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qnetworksession_types.QNetworkSession, ): cint =
+  fcQNetworkSession_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qnetworksession_types.QNetworkSession, signal: cstring): cint =
+  fcQNetworkSession_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qnetworksession_types.QNetworkSession, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQNetworkSession_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc create*(T: type gen_qnetworksession_types.QNetworkSession,
     connConfig: gen_qnetworkconfiguration_types.QNetworkConfiguration,

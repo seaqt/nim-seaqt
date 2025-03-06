@@ -183,6 +183,15 @@ proc fcQWebInspector_virtualbase_childEvent(self: pointer, event: pointer): void
 proc fcQWebInspector_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QWebInspector_virtualbase_customEvent".}
 proc fcQWebInspector_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QWebInspector_virtualbase_connectNotify".}
 proc fcQWebInspector_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QWebInspector_virtualbase_disconnectNotify".}
+proc fcQWebInspector_protectedbase_updateMicroFocus(self: pointer, ): void {.importc: "QWebInspector_protectedbase_updateMicroFocus".}
+proc fcQWebInspector_protectedbase_create(self: pointer, ): void {.importc: "QWebInspector_protectedbase_create".}
+proc fcQWebInspector_protectedbase_destroy(self: pointer, ): void {.importc: "QWebInspector_protectedbase_destroy".}
+proc fcQWebInspector_protectedbase_focusNextChild(self: pointer, ): bool {.importc: "QWebInspector_protectedbase_focusNextChild".}
+proc fcQWebInspector_protectedbase_focusPreviousChild(self: pointer, ): bool {.importc: "QWebInspector_protectedbase_focusPreviousChild".}
+proc fcQWebInspector_protectedbase_sender(self: pointer, ): pointer {.importc: "QWebInspector_protectedbase_sender".}
+proc fcQWebInspector_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QWebInspector_protectedbase_senderSignalIndex".}
+proc fcQWebInspector_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QWebInspector_protectedbase_receivers".}
+proc fcQWebInspector_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QWebInspector_protectedbase_isSignalConnected".}
 proc fcQWebInspector_new(vtbl: pointer, parent: pointer): ptr cQWebInspector {.importc: "QWebInspector_new".}
 proc fcQWebInspector_new2(vtbl: pointer, ): ptr cQWebInspector {.importc: "QWebInspector_new2".}
 proc fcQWebInspector_staticMetaObject(): pointer {.importc: "QWebInspector_staticMetaObject".}
@@ -814,6 +823,33 @@ proc miqt_exec_callback_cQWebInspector_disconnectNotify(vtbl: pointer, self: poi
   let self = QWebInspector(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
   vtbl[].disconnectNotify(self, slotval1)
+
+proc updateMicroFocus*(self: gen_qwebinspector_types.QWebInspector, ): void =
+  fcQWebInspector_protectedbase_updateMicroFocus(self.h)
+
+proc create*(self: gen_qwebinspector_types.QWebInspector, ): void =
+  fcQWebInspector_protectedbase_create(self.h)
+
+proc destroy*(self: gen_qwebinspector_types.QWebInspector, ): void =
+  fcQWebInspector_protectedbase_destroy(self.h)
+
+proc focusNextChild*(self: gen_qwebinspector_types.QWebInspector, ): bool =
+  fcQWebInspector_protectedbase_focusNextChild(self.h)
+
+proc focusPreviousChild*(self: gen_qwebinspector_types.QWebInspector, ): bool =
+  fcQWebInspector_protectedbase_focusPreviousChild(self.h)
+
+proc sender*(self: gen_qwebinspector_types.QWebInspector, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQWebInspector_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qwebinspector_types.QWebInspector, ): cint =
+  fcQWebInspector_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qwebinspector_types.QWebInspector, signal: cstring): cint =
+  fcQWebInspector_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qwebinspector_types.QWebInspector, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQWebInspector_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc create*(T: type gen_qwebinspector_types.QWebInspector,
     parent: gen_qwidget_types.QWidget,

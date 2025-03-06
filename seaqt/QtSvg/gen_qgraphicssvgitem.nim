@@ -190,6 +190,14 @@ proc fcQGraphicsSvgItem_virtualbase_itemChange(self: pointer, change: cint, valu
 proc fcQGraphicsSvgItem_virtualbase_supportsExtension(self: pointer, extension: cint): bool {.importc: "QGraphicsSvgItem_virtualbase_supportsExtension".}
 proc fcQGraphicsSvgItem_virtualbase_setExtension(self: pointer, extension: cint, variant: pointer): void {.importc: "QGraphicsSvgItem_virtualbase_setExtension".}
 proc fcQGraphicsSvgItem_virtualbase_extension(self: pointer, variant: pointer): pointer {.importc: "QGraphicsSvgItem_virtualbase_extension".}
+proc fcQGraphicsSvgItem_protectedbase_updateMicroFocus(self: pointer, ): void {.importc: "QGraphicsSvgItem_protectedbase_updateMicroFocus".}
+proc fcQGraphicsSvgItem_protectedbase_sender(self: pointer, ): pointer {.importc: "QGraphicsSvgItem_protectedbase_sender".}
+proc fcQGraphicsSvgItem_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QGraphicsSvgItem_protectedbase_senderSignalIndex".}
+proc fcQGraphicsSvgItem_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QGraphicsSvgItem_protectedbase_receivers".}
+proc fcQGraphicsSvgItem_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QGraphicsSvgItem_protectedbase_isSignalConnected".}
+proc fcQGraphicsSvgItem_protectedbase_addToIndex(self: pointer, ): void {.importc: "QGraphicsSvgItem_protectedbase_addToIndex".}
+proc fcQGraphicsSvgItem_protectedbase_removeFromIndex(self: pointer, ): void {.importc: "QGraphicsSvgItem_protectedbase_removeFromIndex".}
+proc fcQGraphicsSvgItem_protectedbase_prepareGeometryChange(self: pointer, ): void {.importc: "QGraphicsSvgItem_protectedbase_prepareGeometryChange".}
 proc fcQGraphicsSvgItem_new(vtbl: pointer, ): ptr cQGraphicsSvgItem {.importc: "QGraphicsSvgItem_new".}
 proc fcQGraphicsSvgItem_new2(vtbl: pointer, fileName: struct_miqt_string): ptr cQGraphicsSvgItem {.importc: "QGraphicsSvgItem_new2".}
 proc fcQGraphicsSvgItem_new3(vtbl: pointer, parentItem: pointer): ptr cQGraphicsSvgItem {.importc: "QGraphicsSvgItem_new3".}
@@ -798,6 +806,30 @@ proc miqt_exec_callback_cQGraphicsSvgItem_extension(vtbl: pointer, self: pointer
   let slotval1 = gen_qvariant_types.QVariant(h: variant)
   var virtualReturn = vtbl[].extension(self, slotval1)
   virtualReturn.h
+
+proc updateMicroFocus*(self: gen_qgraphicssvgitem_types.QGraphicsSvgItem, ): void =
+  fcQGraphicsSvgItem_protectedbase_updateMicroFocus(self.h)
+
+proc sender*(self: gen_qgraphicssvgitem_types.QGraphicsSvgItem, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQGraphicsSvgItem_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qgraphicssvgitem_types.QGraphicsSvgItem, ): cint =
+  fcQGraphicsSvgItem_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qgraphicssvgitem_types.QGraphicsSvgItem, signal: cstring): cint =
+  fcQGraphicsSvgItem_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qgraphicssvgitem_types.QGraphicsSvgItem, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQGraphicsSvgItem_protectedbase_isSignalConnected(self.h, signal.h)
+
+proc addToIndex*(self: gen_qgraphicssvgitem_types.QGraphicsSvgItem, ): void =
+  fcQGraphicsSvgItem_protectedbase_addToIndex(self.h)
+
+proc removeFromIndex*(self: gen_qgraphicssvgitem_types.QGraphicsSvgItem, ): void =
+  fcQGraphicsSvgItem_protectedbase_removeFromIndex(self.h)
+
+proc prepareGeometryChange*(self: gen_qgraphicssvgitem_types.QGraphicsSvgItem, ): void =
+  fcQGraphicsSvgItem_protectedbase_prepareGeometryChange(self.h)
 
 proc create*(T: type gen_qgraphicssvgitem_types.QGraphicsSvgItem,
     vtbl: ref QGraphicsSvgItemVTable = nil): gen_qgraphicssvgitem_types.QGraphicsSvgItem =

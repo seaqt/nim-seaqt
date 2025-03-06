@@ -818,16 +818,16 @@ public:
 	friend void QGroupBox_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
 
 	// Wrappers to allow calling protected methods:
-	friend void QGroupBox_protectedbase_initStyleOption(bool* _dynamic_cast_ok, const void* self, QStyleOptionGroupBox* option);
-	friend void QGroupBox_protectedbase_updateMicroFocus(bool* _dynamic_cast_ok, void* self);
-	friend void QGroupBox_protectedbase_create(bool* _dynamic_cast_ok, void* self);
-	friend void QGroupBox_protectedbase_destroy(bool* _dynamic_cast_ok, void* self);
-	friend bool QGroupBox_protectedbase_focusNextChild(bool* _dynamic_cast_ok, void* self);
-	friend bool QGroupBox_protectedbase_focusPreviousChild(bool* _dynamic_cast_ok, void* self);
-	friend QObject* QGroupBox_protectedbase_sender(bool* _dynamic_cast_ok, const void* self);
-	friend int QGroupBox_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
-	friend int QGroupBox_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
-	friend bool QGroupBox_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+	friend void QGroupBox_protectedbase_initStyleOption(const void* self, QStyleOptionGroupBox* option);
+	friend void QGroupBox_protectedbase_updateMicroFocus(void* self);
+	friend void QGroupBox_protectedbase_create(void* self);
+	friend void QGroupBox_protectedbase_destroy(void* self);
+	friend bool QGroupBox_protectedbase_focusNextChild(void* self);
+	friend bool QGroupBox_protectedbase_focusPreviousChild(void* self);
+	friend QObject* QGroupBox_protectedbase_sender(const void* self);
+	friend int QGroupBox_protectedbase_senderSignalIndex(const void* self);
+	friend int QGroupBox_protectedbase_receivers(const void* self, const char* signal);
+	friend bool QGroupBox_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
 };
 
 QGroupBox* QGroupBox_new(struct QGroupBox_VTable* vtbl, QWidget* parent) {
@@ -1332,131 +1332,71 @@ void QGroupBox_virtualbase_disconnectNotify(void* self, QMetaMethod* signal) {
 }
 
 const QMetaObject* QGroupBox_staticMetaObject() { return &QGroupBox::staticMetaObject; }
-void QGroupBox_protectedbase_initStyleOption(bool* _dynamic_cast_ok, const void* self, QStyleOptionGroupBox* option) {
-	VirtualQGroupBox* self_cast = dynamic_cast<VirtualQGroupBox*>( (QGroupBox*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QGroupBox_protectedbase_initStyleOption(const void* self, QStyleOptionGroupBox* option) {
+	VirtualQGroupBox* self_cast = static_cast<VirtualQGroupBox*>( (QGroupBox*)(self) );
 	
 	self_cast->initStyleOption(option);
 
 }
 
-void QGroupBox_protectedbase_updateMicroFocus(bool* _dynamic_cast_ok, void* self) {
-	VirtualQGroupBox* self_cast = dynamic_cast<VirtualQGroupBox*>( (QGroupBox*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QGroupBox_protectedbase_updateMicroFocus(void* self) {
+	VirtualQGroupBox* self_cast = static_cast<VirtualQGroupBox*>( (QGroupBox*)(self) );
 	
 	self_cast->updateMicroFocus();
 
 }
 
-void QGroupBox_protectedbase_create(bool* _dynamic_cast_ok, void* self) {
-	VirtualQGroupBox* self_cast = dynamic_cast<VirtualQGroupBox*>( (QGroupBox*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QGroupBox_protectedbase_create(void* self) {
+	VirtualQGroupBox* self_cast = static_cast<VirtualQGroupBox*>( (QGroupBox*)(self) );
 	
 	self_cast->create();
 
 }
 
-void QGroupBox_protectedbase_destroy(bool* _dynamic_cast_ok, void* self) {
-	VirtualQGroupBox* self_cast = dynamic_cast<VirtualQGroupBox*>( (QGroupBox*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QGroupBox_protectedbase_destroy(void* self) {
+	VirtualQGroupBox* self_cast = static_cast<VirtualQGroupBox*>( (QGroupBox*)(self) );
 	
 	self_cast->destroy();
 
 }
 
-bool QGroupBox_protectedbase_focusNextChild(bool* _dynamic_cast_ok, void* self) {
-	VirtualQGroupBox* self_cast = dynamic_cast<VirtualQGroupBox*>( (QGroupBox*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return false;
-	}
-	
-	*_dynamic_cast_ok = true;
+bool QGroupBox_protectedbase_focusNextChild(void* self) {
+	VirtualQGroupBox* self_cast = static_cast<VirtualQGroupBox*>( (QGroupBox*)(self) );
 	
 	return self_cast->focusNextChild();
 
 }
 
-bool QGroupBox_protectedbase_focusPreviousChild(bool* _dynamic_cast_ok, void* self) {
-	VirtualQGroupBox* self_cast = dynamic_cast<VirtualQGroupBox*>( (QGroupBox*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return false;
-	}
-	
-	*_dynamic_cast_ok = true;
+bool QGroupBox_protectedbase_focusPreviousChild(void* self) {
+	VirtualQGroupBox* self_cast = static_cast<VirtualQGroupBox*>( (QGroupBox*)(self) );
 	
 	return self_cast->focusPreviousChild();
 
 }
 
-QObject* QGroupBox_protectedbase_sender(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQGroupBox* self_cast = dynamic_cast<VirtualQGroupBox*>( (QGroupBox*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return nullptr;
-	}
-	
-	*_dynamic_cast_ok = true;
+QObject* QGroupBox_protectedbase_sender(const void* self) {
+	VirtualQGroupBox* self_cast = static_cast<VirtualQGroupBox*>( (QGroupBox*)(self) );
 	
 	return self_cast->sender();
 
 }
 
-int QGroupBox_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQGroupBox* self_cast = dynamic_cast<VirtualQGroupBox*>( (QGroupBox*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return 0;
-	}
-	
-	*_dynamic_cast_ok = true;
+int QGroupBox_protectedbase_senderSignalIndex(const void* self) {
+	VirtualQGroupBox* self_cast = static_cast<VirtualQGroupBox*>( (QGroupBox*)(self) );
 	
 	return self_cast->senderSignalIndex();
 
 }
 
-int QGroupBox_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal) {
-	VirtualQGroupBox* self_cast = dynamic_cast<VirtualQGroupBox*>( (QGroupBox*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return 0;
-	}
-	
-	*_dynamic_cast_ok = true;
+int QGroupBox_protectedbase_receivers(const void* self, const char* signal) {
+	VirtualQGroupBox* self_cast = static_cast<VirtualQGroupBox*>( (QGroupBox*)(self) );
 	
 	return self_cast->receivers(signal);
 
 }
 
-bool QGroupBox_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal) {
-	VirtualQGroupBox* self_cast = dynamic_cast<VirtualQGroupBox*>( (QGroupBox*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return false;
-	}
-	
-	*_dynamic_cast_ok = true;
+bool QGroupBox_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal) {
+	VirtualQGroupBox* self_cast = static_cast<VirtualQGroupBox*>( (QGroupBox*)(self) );
 	
 	return self_cast->isSignalConnected(*signal);
 

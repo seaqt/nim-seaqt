@@ -324,16 +324,16 @@ void QGraphicsWebView_virtualbase_hoverEnterEvent(void* self, QGraphicsSceneHove
 bool QGraphicsWebView_virtualbase_supportsExtension(const void* self, int extension);
 void QGraphicsWebView_virtualbase_setExtension(void* self, int extension, QVariant* variant);
 QVariant* QGraphicsWebView_virtualbase_extension(const void* self, QVariant* variant);
-void QGraphicsWebView_protectedbase_updateMicroFocus(bool* _dynamic_cast_ok, void* self);
-QObject* QGraphicsWebView_protectedbase_sender(bool* _dynamic_cast_ok, const void* self);
-int QGraphicsWebView_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
-int QGraphicsWebView_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
-bool QGraphicsWebView_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
-void QGraphicsWebView_protectedbase_addToIndex(bool* _dynamic_cast_ok, void* self);
-void QGraphicsWebView_protectedbase_removeFromIndex(bool* _dynamic_cast_ok, void* self);
-void QGraphicsWebView_protectedbase_prepareGeometryChange(bool* _dynamic_cast_ok, void* self);
-void QGraphicsWebView_protectedbase_setGraphicsItem(bool* _dynamic_cast_ok, void* self, QGraphicsItem* item);
-void QGraphicsWebView_protectedbase_setOwnedByLayout(bool* _dynamic_cast_ok, void* self, bool ownedByLayout);
+void QGraphicsWebView_protectedbase_updateMicroFocus(void* self);
+QObject* QGraphicsWebView_protectedbase_sender(const void* self);
+int QGraphicsWebView_protectedbase_senderSignalIndex(const void* self);
+int QGraphicsWebView_protectedbase_receivers(const void* self, const char* signal);
+bool QGraphicsWebView_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
+void QGraphicsWebView_protectedbase_addToIndex(void* self);
+void QGraphicsWebView_protectedbase_removeFromIndex(void* self);
+void QGraphicsWebView_protectedbase_prepareGeometryChange(void* self);
+void QGraphicsWebView_protectedbase_setGraphicsItem(void* self, QGraphicsItem* item);
+void QGraphicsWebView_protectedbase_setOwnedByLayout(void* self, bool ownedByLayout);
 const QMetaObject* QGraphicsWebView_staticMetaObject();
 void QGraphicsWebView_delete(QGraphicsWebView* self);
 

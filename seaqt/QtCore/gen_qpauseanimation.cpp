@@ -252,10 +252,10 @@ public:
 	friend void QPauseAnimation_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
 
 	// Wrappers to allow calling protected methods:
-	friend QObject* QPauseAnimation_protectedbase_sender(bool* _dynamic_cast_ok, const void* self);
-	friend int QPauseAnimation_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
-	friend int QPauseAnimation_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
-	friend bool QPauseAnimation_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+	friend QObject* QPauseAnimation_protectedbase_sender(const void* self);
+	friend int QPauseAnimation_protectedbase_senderSignalIndex(const void* self);
+	friend int QPauseAnimation_protectedbase_receivers(const void* self, const char* signal);
+	friend bool QPauseAnimation_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
 };
 
 QPauseAnimation* QPauseAnimation_new(struct QPauseAnimation_VTable* vtbl) {
@@ -449,53 +449,29 @@ void QPauseAnimation_virtualbase_disconnectNotify(void* self, QMetaMethod* signa
 }
 
 const QMetaObject* QPauseAnimation_staticMetaObject() { return &QPauseAnimation::staticMetaObject; }
-QObject* QPauseAnimation_protectedbase_sender(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQPauseAnimation* self_cast = dynamic_cast<VirtualQPauseAnimation*>( (QPauseAnimation*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return nullptr;
-	}
-	
-	*_dynamic_cast_ok = true;
+QObject* QPauseAnimation_protectedbase_sender(const void* self) {
+	VirtualQPauseAnimation* self_cast = static_cast<VirtualQPauseAnimation*>( (QPauseAnimation*)(self) );
 	
 	return self_cast->sender();
 
 }
 
-int QPauseAnimation_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQPauseAnimation* self_cast = dynamic_cast<VirtualQPauseAnimation*>( (QPauseAnimation*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return 0;
-	}
-	
-	*_dynamic_cast_ok = true;
+int QPauseAnimation_protectedbase_senderSignalIndex(const void* self) {
+	VirtualQPauseAnimation* self_cast = static_cast<VirtualQPauseAnimation*>( (QPauseAnimation*)(self) );
 	
 	return self_cast->senderSignalIndex();
 
 }
 
-int QPauseAnimation_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal) {
-	VirtualQPauseAnimation* self_cast = dynamic_cast<VirtualQPauseAnimation*>( (QPauseAnimation*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return 0;
-	}
-	
-	*_dynamic_cast_ok = true;
+int QPauseAnimation_protectedbase_receivers(const void* self, const char* signal) {
+	VirtualQPauseAnimation* self_cast = static_cast<VirtualQPauseAnimation*>( (QPauseAnimation*)(self) );
 	
 	return self_cast->receivers(signal);
 
 }
 
-bool QPauseAnimation_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal) {
-	VirtualQPauseAnimation* self_cast = dynamic_cast<VirtualQPauseAnimation*>( (QPauseAnimation*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return false;
-	}
-	
-	*_dynamic_cast_ok = true;
+bool QPauseAnimation_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal) {
+	VirtualQPauseAnimation* self_cast = static_cast<VirtualQPauseAnimation*>( (QPauseAnimation*)(self) );
 	
 	return self_cast->isSignalConnected(*signal);
 

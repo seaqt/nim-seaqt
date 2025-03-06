@@ -200,10 +200,10 @@ public:
 	friend void QSvgRenderer_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
 
 	// Wrappers to allow calling protected methods:
-	friend QObject* QSvgRenderer_protectedbase_sender(bool* _dynamic_cast_ok, const void* self);
-	friend int QSvgRenderer_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
-	friend int QSvgRenderer_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
-	friend bool QSvgRenderer_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+	friend QObject* QSvgRenderer_protectedbase_sender(const void* self);
+	friend int QSvgRenderer_protectedbase_senderSignalIndex(const void* self);
+	friend int QSvgRenderer_protectedbase_receivers(const void* self, const char* signal);
+	friend bool QSvgRenderer_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
 };
 
 QSvgRenderer* QSvgRenderer_new(struct QSvgRenderer_VTable* vtbl) {
@@ -509,53 +509,29 @@ void QSvgRenderer_virtualbase_disconnectNotify(void* self, QMetaMethod* signal) 
 }
 
 const QMetaObject* QSvgRenderer_staticMetaObject() { return &QSvgRenderer::staticMetaObject; }
-QObject* QSvgRenderer_protectedbase_sender(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQSvgRenderer* self_cast = dynamic_cast<VirtualQSvgRenderer*>( (QSvgRenderer*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return nullptr;
-	}
-	
-	*_dynamic_cast_ok = true;
+QObject* QSvgRenderer_protectedbase_sender(const void* self) {
+	VirtualQSvgRenderer* self_cast = static_cast<VirtualQSvgRenderer*>( (QSvgRenderer*)(self) );
 	
 	return self_cast->sender();
 
 }
 
-int QSvgRenderer_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQSvgRenderer* self_cast = dynamic_cast<VirtualQSvgRenderer*>( (QSvgRenderer*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return 0;
-	}
-	
-	*_dynamic_cast_ok = true;
+int QSvgRenderer_protectedbase_senderSignalIndex(const void* self) {
+	VirtualQSvgRenderer* self_cast = static_cast<VirtualQSvgRenderer*>( (QSvgRenderer*)(self) );
 	
 	return self_cast->senderSignalIndex();
 
 }
 
-int QSvgRenderer_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal) {
-	VirtualQSvgRenderer* self_cast = dynamic_cast<VirtualQSvgRenderer*>( (QSvgRenderer*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return 0;
-	}
-	
-	*_dynamic_cast_ok = true;
+int QSvgRenderer_protectedbase_receivers(const void* self, const char* signal) {
+	VirtualQSvgRenderer* self_cast = static_cast<VirtualQSvgRenderer*>( (QSvgRenderer*)(self) );
 	
 	return self_cast->receivers(signal);
 
 }
 
-bool QSvgRenderer_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal) {
-	VirtualQSvgRenderer* self_cast = dynamic_cast<VirtualQSvgRenderer*>( (QSvgRenderer*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return false;
-	}
-	
-	*_dynamic_cast_ok = true;
+bool QSvgRenderer_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal) {
+	VirtualQSvgRenderer* self_cast = static_cast<VirtualQSvgRenderer*>( (QSvgRenderer*)(self) );
 	
 	return self_cast->isSignalConnected(*signal);
 

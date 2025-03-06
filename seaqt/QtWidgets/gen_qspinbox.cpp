@@ -945,18 +945,18 @@ public:
 	friend void QSpinBox_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
 
 	// Wrappers to allow calling protected methods:
-	friend void QSpinBox_protectedbase_initStyleOption(bool* _dynamic_cast_ok, const void* self, QStyleOptionSpinBox* option);
-	friend QLineEdit* QSpinBox_protectedbase_lineEdit(bool* _dynamic_cast_ok, const void* self);
-	friend void QSpinBox_protectedbase_setLineEdit(bool* _dynamic_cast_ok, void* self, QLineEdit* edit);
-	friend void QSpinBox_protectedbase_updateMicroFocus(bool* _dynamic_cast_ok, void* self);
-	friend void QSpinBox_protectedbase_create(bool* _dynamic_cast_ok, void* self);
-	friend void QSpinBox_protectedbase_destroy(bool* _dynamic_cast_ok, void* self);
-	friend bool QSpinBox_protectedbase_focusNextChild(bool* _dynamic_cast_ok, void* self);
-	friend bool QSpinBox_protectedbase_focusPreviousChild(bool* _dynamic_cast_ok, void* self);
-	friend QObject* QSpinBox_protectedbase_sender(bool* _dynamic_cast_ok, const void* self);
-	friend int QSpinBox_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
-	friend int QSpinBox_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
-	friend bool QSpinBox_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+	friend void QSpinBox_protectedbase_initStyleOption(const void* self, QStyleOptionSpinBox* option);
+	friend QLineEdit* QSpinBox_protectedbase_lineEdit(const void* self);
+	friend void QSpinBox_protectedbase_setLineEdit(void* self, QLineEdit* edit);
+	friend void QSpinBox_protectedbase_updateMicroFocus(void* self);
+	friend void QSpinBox_protectedbase_create(void* self);
+	friend void QSpinBox_protectedbase_destroy(void* self);
+	friend bool QSpinBox_protectedbase_focusNextChild(void* self);
+	friend bool QSpinBox_protectedbase_focusPreviousChild(void* self);
+	friend QObject* QSpinBox_protectedbase_sender(const void* self);
+	friend int QSpinBox_protectedbase_senderSignalIndex(const void* self);
+	friend int QSpinBox_protectedbase_receivers(const void* self, const char* signal);
+	friend bool QSpinBox_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
 };
 
 QSpinBox* QSpinBox_new(struct QSpinBox_VTable* vtbl, QWidget* parent) {
@@ -1565,157 +1565,85 @@ void QSpinBox_virtualbase_disconnectNotify(void* self, QMetaMethod* signal) {
 }
 
 const QMetaObject* QSpinBox_staticMetaObject() { return &QSpinBox::staticMetaObject; }
-void QSpinBox_protectedbase_initStyleOption(bool* _dynamic_cast_ok, const void* self, QStyleOptionSpinBox* option) {
-	VirtualQSpinBox* self_cast = dynamic_cast<VirtualQSpinBox*>( (QSpinBox*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QSpinBox_protectedbase_initStyleOption(const void* self, QStyleOptionSpinBox* option) {
+	VirtualQSpinBox* self_cast = static_cast<VirtualQSpinBox*>( (QSpinBox*)(self) );
 	
 	self_cast->initStyleOption(option);
 
 }
 
-QLineEdit* QSpinBox_protectedbase_lineEdit(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQSpinBox* self_cast = dynamic_cast<VirtualQSpinBox*>( (QSpinBox*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return nullptr;
-	}
-	
-	*_dynamic_cast_ok = true;
+QLineEdit* QSpinBox_protectedbase_lineEdit(const void* self) {
+	VirtualQSpinBox* self_cast = static_cast<VirtualQSpinBox*>( (QSpinBox*)(self) );
 	
 	return self_cast->lineEdit();
 
 }
 
-void QSpinBox_protectedbase_setLineEdit(bool* _dynamic_cast_ok, void* self, QLineEdit* edit) {
-	VirtualQSpinBox* self_cast = dynamic_cast<VirtualQSpinBox*>( (QSpinBox*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QSpinBox_protectedbase_setLineEdit(void* self, QLineEdit* edit) {
+	VirtualQSpinBox* self_cast = static_cast<VirtualQSpinBox*>( (QSpinBox*)(self) );
 	
 	self_cast->setLineEdit(edit);
 
 }
 
-void QSpinBox_protectedbase_updateMicroFocus(bool* _dynamic_cast_ok, void* self) {
-	VirtualQSpinBox* self_cast = dynamic_cast<VirtualQSpinBox*>( (QSpinBox*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QSpinBox_protectedbase_updateMicroFocus(void* self) {
+	VirtualQSpinBox* self_cast = static_cast<VirtualQSpinBox*>( (QSpinBox*)(self) );
 	
 	self_cast->updateMicroFocus();
 
 }
 
-void QSpinBox_protectedbase_create(bool* _dynamic_cast_ok, void* self) {
-	VirtualQSpinBox* self_cast = dynamic_cast<VirtualQSpinBox*>( (QSpinBox*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QSpinBox_protectedbase_create(void* self) {
+	VirtualQSpinBox* self_cast = static_cast<VirtualQSpinBox*>( (QSpinBox*)(self) );
 	
 	self_cast->create();
 
 }
 
-void QSpinBox_protectedbase_destroy(bool* _dynamic_cast_ok, void* self) {
-	VirtualQSpinBox* self_cast = dynamic_cast<VirtualQSpinBox*>( (QSpinBox*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QSpinBox_protectedbase_destroy(void* self) {
+	VirtualQSpinBox* self_cast = static_cast<VirtualQSpinBox*>( (QSpinBox*)(self) );
 	
 	self_cast->destroy();
 
 }
 
-bool QSpinBox_protectedbase_focusNextChild(bool* _dynamic_cast_ok, void* self) {
-	VirtualQSpinBox* self_cast = dynamic_cast<VirtualQSpinBox*>( (QSpinBox*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return false;
-	}
-	
-	*_dynamic_cast_ok = true;
+bool QSpinBox_protectedbase_focusNextChild(void* self) {
+	VirtualQSpinBox* self_cast = static_cast<VirtualQSpinBox*>( (QSpinBox*)(self) );
 	
 	return self_cast->focusNextChild();
 
 }
 
-bool QSpinBox_protectedbase_focusPreviousChild(bool* _dynamic_cast_ok, void* self) {
-	VirtualQSpinBox* self_cast = dynamic_cast<VirtualQSpinBox*>( (QSpinBox*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return false;
-	}
-	
-	*_dynamic_cast_ok = true;
+bool QSpinBox_protectedbase_focusPreviousChild(void* self) {
+	VirtualQSpinBox* self_cast = static_cast<VirtualQSpinBox*>( (QSpinBox*)(self) );
 	
 	return self_cast->focusPreviousChild();
 
 }
 
-QObject* QSpinBox_protectedbase_sender(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQSpinBox* self_cast = dynamic_cast<VirtualQSpinBox*>( (QSpinBox*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return nullptr;
-	}
-	
-	*_dynamic_cast_ok = true;
+QObject* QSpinBox_protectedbase_sender(const void* self) {
+	VirtualQSpinBox* self_cast = static_cast<VirtualQSpinBox*>( (QSpinBox*)(self) );
 	
 	return self_cast->sender();
 
 }
 
-int QSpinBox_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQSpinBox* self_cast = dynamic_cast<VirtualQSpinBox*>( (QSpinBox*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return 0;
-	}
-	
-	*_dynamic_cast_ok = true;
+int QSpinBox_protectedbase_senderSignalIndex(const void* self) {
+	VirtualQSpinBox* self_cast = static_cast<VirtualQSpinBox*>( (QSpinBox*)(self) );
 	
 	return self_cast->senderSignalIndex();
 
 }
 
-int QSpinBox_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal) {
-	VirtualQSpinBox* self_cast = dynamic_cast<VirtualQSpinBox*>( (QSpinBox*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return 0;
-	}
-	
-	*_dynamic_cast_ok = true;
+int QSpinBox_protectedbase_receivers(const void* self, const char* signal) {
+	VirtualQSpinBox* self_cast = static_cast<VirtualQSpinBox*>( (QSpinBox*)(self) );
 	
 	return self_cast->receivers(signal);
 
 }
 
-bool QSpinBox_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal) {
-	VirtualQSpinBox* self_cast = dynamic_cast<VirtualQSpinBox*>( (QSpinBox*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return false;
-	}
-	
-	*_dynamic_cast_ok = true;
+bool QSpinBox_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal) {
+	VirtualQSpinBox* self_cast = static_cast<VirtualQSpinBox*>( (QSpinBox*)(self) );
 	
 	return self_cast->isSignalConnected(*signal);
 
@@ -2621,18 +2549,18 @@ public:
 	friend void QDoubleSpinBox_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
 
 	// Wrappers to allow calling protected methods:
-	friend void QDoubleSpinBox_protectedbase_initStyleOption(bool* _dynamic_cast_ok, const void* self, QStyleOptionSpinBox* option);
-	friend QLineEdit* QDoubleSpinBox_protectedbase_lineEdit(bool* _dynamic_cast_ok, const void* self);
-	friend void QDoubleSpinBox_protectedbase_setLineEdit(bool* _dynamic_cast_ok, void* self, QLineEdit* edit);
-	friend void QDoubleSpinBox_protectedbase_updateMicroFocus(bool* _dynamic_cast_ok, void* self);
-	friend void QDoubleSpinBox_protectedbase_create(bool* _dynamic_cast_ok, void* self);
-	friend void QDoubleSpinBox_protectedbase_destroy(bool* _dynamic_cast_ok, void* self);
-	friend bool QDoubleSpinBox_protectedbase_focusNextChild(bool* _dynamic_cast_ok, void* self);
-	friend bool QDoubleSpinBox_protectedbase_focusPreviousChild(bool* _dynamic_cast_ok, void* self);
-	friend QObject* QDoubleSpinBox_protectedbase_sender(bool* _dynamic_cast_ok, const void* self);
-	friend int QDoubleSpinBox_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
-	friend int QDoubleSpinBox_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
-	friend bool QDoubleSpinBox_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+	friend void QDoubleSpinBox_protectedbase_initStyleOption(const void* self, QStyleOptionSpinBox* option);
+	friend QLineEdit* QDoubleSpinBox_protectedbase_lineEdit(const void* self);
+	friend void QDoubleSpinBox_protectedbase_setLineEdit(void* self, QLineEdit* edit);
+	friend void QDoubleSpinBox_protectedbase_updateMicroFocus(void* self);
+	friend void QDoubleSpinBox_protectedbase_create(void* self);
+	friend void QDoubleSpinBox_protectedbase_destroy(void* self);
+	friend bool QDoubleSpinBox_protectedbase_focusNextChild(void* self);
+	friend bool QDoubleSpinBox_protectedbase_focusPreviousChild(void* self);
+	friend QObject* QDoubleSpinBox_protectedbase_sender(const void* self);
+	friend int QDoubleSpinBox_protectedbase_senderSignalIndex(const void* self);
+	friend int QDoubleSpinBox_protectedbase_receivers(const void* self, const char* signal);
+	friend bool QDoubleSpinBox_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
 };
 
 QDoubleSpinBox* QDoubleSpinBox_new(struct QDoubleSpinBox_VTable* vtbl, QWidget* parent) {
@@ -3268,157 +3196,85 @@ void QDoubleSpinBox_virtualbase_disconnectNotify(void* self, QMetaMethod* signal
 }
 
 const QMetaObject* QDoubleSpinBox_staticMetaObject() { return &QDoubleSpinBox::staticMetaObject; }
-void QDoubleSpinBox_protectedbase_initStyleOption(bool* _dynamic_cast_ok, const void* self, QStyleOptionSpinBox* option) {
-	VirtualQDoubleSpinBox* self_cast = dynamic_cast<VirtualQDoubleSpinBox*>( (QDoubleSpinBox*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QDoubleSpinBox_protectedbase_initStyleOption(const void* self, QStyleOptionSpinBox* option) {
+	VirtualQDoubleSpinBox* self_cast = static_cast<VirtualQDoubleSpinBox*>( (QDoubleSpinBox*)(self) );
 	
 	self_cast->initStyleOption(option);
 
 }
 
-QLineEdit* QDoubleSpinBox_protectedbase_lineEdit(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQDoubleSpinBox* self_cast = dynamic_cast<VirtualQDoubleSpinBox*>( (QDoubleSpinBox*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return nullptr;
-	}
-	
-	*_dynamic_cast_ok = true;
+QLineEdit* QDoubleSpinBox_protectedbase_lineEdit(const void* self) {
+	VirtualQDoubleSpinBox* self_cast = static_cast<VirtualQDoubleSpinBox*>( (QDoubleSpinBox*)(self) );
 	
 	return self_cast->lineEdit();
 
 }
 
-void QDoubleSpinBox_protectedbase_setLineEdit(bool* _dynamic_cast_ok, void* self, QLineEdit* edit) {
-	VirtualQDoubleSpinBox* self_cast = dynamic_cast<VirtualQDoubleSpinBox*>( (QDoubleSpinBox*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QDoubleSpinBox_protectedbase_setLineEdit(void* self, QLineEdit* edit) {
+	VirtualQDoubleSpinBox* self_cast = static_cast<VirtualQDoubleSpinBox*>( (QDoubleSpinBox*)(self) );
 	
 	self_cast->setLineEdit(edit);
 
 }
 
-void QDoubleSpinBox_protectedbase_updateMicroFocus(bool* _dynamic_cast_ok, void* self) {
-	VirtualQDoubleSpinBox* self_cast = dynamic_cast<VirtualQDoubleSpinBox*>( (QDoubleSpinBox*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QDoubleSpinBox_protectedbase_updateMicroFocus(void* self) {
+	VirtualQDoubleSpinBox* self_cast = static_cast<VirtualQDoubleSpinBox*>( (QDoubleSpinBox*)(self) );
 	
 	self_cast->updateMicroFocus();
 
 }
 
-void QDoubleSpinBox_protectedbase_create(bool* _dynamic_cast_ok, void* self) {
-	VirtualQDoubleSpinBox* self_cast = dynamic_cast<VirtualQDoubleSpinBox*>( (QDoubleSpinBox*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QDoubleSpinBox_protectedbase_create(void* self) {
+	VirtualQDoubleSpinBox* self_cast = static_cast<VirtualQDoubleSpinBox*>( (QDoubleSpinBox*)(self) );
 	
 	self_cast->create();
 
 }
 
-void QDoubleSpinBox_protectedbase_destroy(bool* _dynamic_cast_ok, void* self) {
-	VirtualQDoubleSpinBox* self_cast = dynamic_cast<VirtualQDoubleSpinBox*>( (QDoubleSpinBox*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QDoubleSpinBox_protectedbase_destroy(void* self) {
+	VirtualQDoubleSpinBox* self_cast = static_cast<VirtualQDoubleSpinBox*>( (QDoubleSpinBox*)(self) );
 	
 	self_cast->destroy();
 
 }
 
-bool QDoubleSpinBox_protectedbase_focusNextChild(bool* _dynamic_cast_ok, void* self) {
-	VirtualQDoubleSpinBox* self_cast = dynamic_cast<VirtualQDoubleSpinBox*>( (QDoubleSpinBox*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return false;
-	}
-	
-	*_dynamic_cast_ok = true;
+bool QDoubleSpinBox_protectedbase_focusNextChild(void* self) {
+	VirtualQDoubleSpinBox* self_cast = static_cast<VirtualQDoubleSpinBox*>( (QDoubleSpinBox*)(self) );
 	
 	return self_cast->focusNextChild();
 
 }
 
-bool QDoubleSpinBox_protectedbase_focusPreviousChild(bool* _dynamic_cast_ok, void* self) {
-	VirtualQDoubleSpinBox* self_cast = dynamic_cast<VirtualQDoubleSpinBox*>( (QDoubleSpinBox*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return false;
-	}
-	
-	*_dynamic_cast_ok = true;
+bool QDoubleSpinBox_protectedbase_focusPreviousChild(void* self) {
+	VirtualQDoubleSpinBox* self_cast = static_cast<VirtualQDoubleSpinBox*>( (QDoubleSpinBox*)(self) );
 	
 	return self_cast->focusPreviousChild();
 
 }
 
-QObject* QDoubleSpinBox_protectedbase_sender(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQDoubleSpinBox* self_cast = dynamic_cast<VirtualQDoubleSpinBox*>( (QDoubleSpinBox*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return nullptr;
-	}
-	
-	*_dynamic_cast_ok = true;
+QObject* QDoubleSpinBox_protectedbase_sender(const void* self) {
+	VirtualQDoubleSpinBox* self_cast = static_cast<VirtualQDoubleSpinBox*>( (QDoubleSpinBox*)(self) );
 	
 	return self_cast->sender();
 
 }
 
-int QDoubleSpinBox_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQDoubleSpinBox* self_cast = dynamic_cast<VirtualQDoubleSpinBox*>( (QDoubleSpinBox*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return 0;
-	}
-	
-	*_dynamic_cast_ok = true;
+int QDoubleSpinBox_protectedbase_senderSignalIndex(const void* self) {
+	VirtualQDoubleSpinBox* self_cast = static_cast<VirtualQDoubleSpinBox*>( (QDoubleSpinBox*)(self) );
 	
 	return self_cast->senderSignalIndex();
 
 }
 
-int QDoubleSpinBox_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal) {
-	VirtualQDoubleSpinBox* self_cast = dynamic_cast<VirtualQDoubleSpinBox*>( (QDoubleSpinBox*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return 0;
-	}
-	
-	*_dynamic_cast_ok = true;
+int QDoubleSpinBox_protectedbase_receivers(const void* self, const char* signal) {
+	VirtualQDoubleSpinBox* self_cast = static_cast<VirtualQDoubleSpinBox*>( (QDoubleSpinBox*)(self) );
 	
 	return self_cast->receivers(signal);
 
 }
 
-bool QDoubleSpinBox_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal) {
-	VirtualQDoubleSpinBox* self_cast = dynamic_cast<VirtualQDoubleSpinBox*>( (QDoubleSpinBox*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return false;
-	}
-	
-	*_dynamic_cast_ok = true;
+bool QDoubleSpinBox_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal) {
+	VirtualQDoubleSpinBox* self_cast = static_cast<VirtualQDoubleSpinBox*>( (QDoubleSpinBox*)(self) );
 	
 	return self_cast->isSignalConnected(*signal);
 

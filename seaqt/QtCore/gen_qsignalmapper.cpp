@@ -186,10 +186,10 @@ public:
 	friend void QSignalMapper_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
 
 	// Wrappers to allow calling protected methods:
-	friend QObject* QSignalMapper_protectedbase_sender(bool* _dynamic_cast_ok, const void* self);
-	friend int QSignalMapper_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
-	friend int QSignalMapper_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
-	friend bool QSignalMapper_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+	friend QObject* QSignalMapper_protectedbase_sender(const void* self);
+	friend int QSignalMapper_protectedbase_senderSignalIndex(const void* self);
+	friend int QSignalMapper_protectedbase_receivers(const void* self, const char* signal);
+	friend bool QSignalMapper_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
 };
 
 QSignalMapper* QSignalMapper_new(struct QSignalMapper_VTable* vtbl) {
@@ -493,53 +493,29 @@ void QSignalMapper_virtualbase_disconnectNotify(void* self, QMetaMethod* signal)
 }
 
 const QMetaObject* QSignalMapper_staticMetaObject() { return &QSignalMapper::staticMetaObject; }
-QObject* QSignalMapper_protectedbase_sender(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQSignalMapper* self_cast = dynamic_cast<VirtualQSignalMapper*>( (QSignalMapper*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return nullptr;
-	}
-	
-	*_dynamic_cast_ok = true;
+QObject* QSignalMapper_protectedbase_sender(const void* self) {
+	VirtualQSignalMapper* self_cast = static_cast<VirtualQSignalMapper*>( (QSignalMapper*)(self) );
 	
 	return self_cast->sender();
 
 }
 
-int QSignalMapper_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQSignalMapper* self_cast = dynamic_cast<VirtualQSignalMapper*>( (QSignalMapper*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return 0;
-	}
-	
-	*_dynamic_cast_ok = true;
+int QSignalMapper_protectedbase_senderSignalIndex(const void* self) {
+	VirtualQSignalMapper* self_cast = static_cast<VirtualQSignalMapper*>( (QSignalMapper*)(self) );
 	
 	return self_cast->senderSignalIndex();
 
 }
 
-int QSignalMapper_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal) {
-	VirtualQSignalMapper* self_cast = dynamic_cast<VirtualQSignalMapper*>( (QSignalMapper*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return 0;
-	}
-	
-	*_dynamic_cast_ok = true;
+int QSignalMapper_protectedbase_receivers(const void* self, const char* signal) {
+	VirtualQSignalMapper* self_cast = static_cast<VirtualQSignalMapper*>( (QSignalMapper*)(self) );
 	
 	return self_cast->receivers(signal);
 
 }
 
-bool QSignalMapper_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal) {
-	VirtualQSignalMapper* self_cast = dynamic_cast<VirtualQSignalMapper*>( (QSignalMapper*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return false;
-	}
-	
-	*_dynamic_cast_ok = true;
+bool QSignalMapper_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal) {
+	VirtualQSignalMapper* self_cast = static_cast<VirtualQSignalMapper*>( (QSignalMapper*)(self) );
 	
 	return self_cast->isSignalConnected(*signal);
 

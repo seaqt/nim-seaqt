@@ -620,10 +620,10 @@ public:
 	friend void QImageIOPlugin_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
 
 	// Wrappers to allow calling protected methods:
-	friend QObject* QImageIOPlugin_protectedbase_sender(bool* _dynamic_cast_ok, const void* self);
-	friend int QImageIOPlugin_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
-	friend int QImageIOPlugin_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
-	friend bool QImageIOPlugin_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+	friend QObject* QImageIOPlugin_protectedbase_sender(const void* self);
+	friend int QImageIOPlugin_protectedbase_senderSignalIndex(const void* self);
+	friend int QImageIOPlugin_protectedbase_receivers(const void* self, const char* signal);
+	friend bool QImageIOPlugin_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
 };
 
 QImageIOPlugin* QImageIOPlugin_new(struct QImageIOPlugin_VTable* vtbl) {
@@ -788,53 +788,29 @@ void QImageIOPlugin_virtualbase_disconnectNotify(void* self, QMetaMethod* signal
 }
 
 const QMetaObject* QImageIOPlugin_staticMetaObject() { return &QImageIOPlugin::staticMetaObject; }
-QObject* QImageIOPlugin_protectedbase_sender(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQImageIOPlugin* self_cast = dynamic_cast<VirtualQImageIOPlugin*>( (QImageIOPlugin*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return nullptr;
-	}
-	
-	*_dynamic_cast_ok = true;
+QObject* QImageIOPlugin_protectedbase_sender(const void* self) {
+	VirtualQImageIOPlugin* self_cast = static_cast<VirtualQImageIOPlugin*>( (QImageIOPlugin*)(self) );
 	
 	return self_cast->sender();
 
 }
 
-int QImageIOPlugin_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQImageIOPlugin* self_cast = dynamic_cast<VirtualQImageIOPlugin*>( (QImageIOPlugin*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return 0;
-	}
-	
-	*_dynamic_cast_ok = true;
+int QImageIOPlugin_protectedbase_senderSignalIndex(const void* self) {
+	VirtualQImageIOPlugin* self_cast = static_cast<VirtualQImageIOPlugin*>( (QImageIOPlugin*)(self) );
 	
 	return self_cast->senderSignalIndex();
 
 }
 
-int QImageIOPlugin_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal) {
-	VirtualQImageIOPlugin* self_cast = dynamic_cast<VirtualQImageIOPlugin*>( (QImageIOPlugin*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return 0;
-	}
-	
-	*_dynamic_cast_ok = true;
+int QImageIOPlugin_protectedbase_receivers(const void* self, const char* signal) {
+	VirtualQImageIOPlugin* self_cast = static_cast<VirtualQImageIOPlugin*>( (QImageIOPlugin*)(self) );
 	
 	return self_cast->receivers(signal);
 
 }
 
-bool QImageIOPlugin_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal) {
-	VirtualQImageIOPlugin* self_cast = dynamic_cast<VirtualQImageIOPlugin*>( (QImageIOPlugin*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return false;
-	}
-	
-	*_dynamic_cast_ok = true;
+bool QImageIOPlugin_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal) {
+	VirtualQImageIOPlugin* self_cast = static_cast<VirtualQImageIOPlugin*>( (QImageIOPlugin*)(self) );
 	
 	return self_cast->isSignalConnected(*signal);
 

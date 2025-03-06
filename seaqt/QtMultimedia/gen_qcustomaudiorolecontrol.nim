@@ -38,9 +38,13 @@ import ./gen_qcustomaudiorolecontrol_types
 export gen_qcustomaudiorolecontrol_types
 
 import
+  ../QtCore/gen_qmetaobject_types,
+  ../QtCore/gen_qobject_types,
   ../QtCore/gen_qobjectdefs_types,
   ./gen_qmediacontrol
 export
+  gen_qmetaobject_types,
+  gen_qobject_types,
   gen_qobjectdefs_types,
   gen_qmediacontrol
 
@@ -60,6 +64,10 @@ proc fcQCustomAudioRoleControl_tr2(s: cstring, c: cstring): struct_miqt_string {
 proc fcQCustomAudioRoleControl_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QCustomAudioRoleControl_tr3".}
 proc fcQCustomAudioRoleControl_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QCustomAudioRoleControl_trUtf82".}
 proc fcQCustomAudioRoleControl_trUtf83(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QCustomAudioRoleControl_trUtf83".}
+proc fcQCustomAudioRoleControl_protectedbase_sender(self: pointer, ): pointer {.importc: "QCustomAudioRoleControl_protectedbase_sender".}
+proc fcQCustomAudioRoleControl_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QCustomAudioRoleControl_protectedbase_senderSignalIndex".}
+proc fcQCustomAudioRoleControl_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QCustomAudioRoleControl_protectedbase_receivers".}
+proc fcQCustomAudioRoleControl_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QCustomAudioRoleControl_protectedbase_isSignalConnected".}
 proc fcQCustomAudioRoleControl_staticMetaObject(): pointer {.importc: "QCustomAudioRoleControl_staticMetaObject".}
 proc fcQCustomAudioRoleControl_delete(self: pointer) {.importc: "QCustomAudioRoleControl_delete".}
 
@@ -150,6 +158,18 @@ proc trUtf8*(_: type gen_qcustomaudiorolecontrol_types.QCustomAudioRoleControl, 
   let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
   c_free(v_ms.data)
   vx_ret
+
+proc sender*(self: gen_qcustomaudiorolecontrol_types.QCustomAudioRoleControl, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQCustomAudioRoleControl_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qcustomaudiorolecontrol_types.QCustomAudioRoleControl, ): cint =
+  fcQCustomAudioRoleControl_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qcustomaudiorolecontrol_types.QCustomAudioRoleControl, signal: cstring): cint =
+  fcQCustomAudioRoleControl_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qcustomaudiorolecontrol_types.QCustomAudioRoleControl, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQCustomAudioRoleControl_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc staticMetaObject*(_: type gen_qcustomaudiorolecontrol_types.QCustomAudioRoleControl): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQCustomAudioRoleControl_staticMetaObject())

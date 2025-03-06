@@ -98,6 +98,10 @@ proc fcQAudioRecorder_virtualbase_childEvent(self: pointer, event: pointer): voi
 proc fcQAudioRecorder_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QAudioRecorder_virtualbase_customEvent".}
 proc fcQAudioRecorder_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QAudioRecorder_virtualbase_connectNotify".}
 proc fcQAudioRecorder_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QAudioRecorder_virtualbase_disconnectNotify".}
+proc fcQAudioRecorder_protectedbase_sender(self: pointer, ): pointer {.importc: "QAudioRecorder_protectedbase_sender".}
+proc fcQAudioRecorder_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QAudioRecorder_protectedbase_senderSignalIndex".}
+proc fcQAudioRecorder_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QAudioRecorder_protectedbase_receivers".}
+proc fcQAudioRecorder_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QAudioRecorder_protectedbase_isSignalConnected".}
 proc fcQAudioRecorder_new(vtbl: pointer, ): ptr cQAudioRecorder {.importc: "QAudioRecorder_new".}
 proc fcQAudioRecorder_new2(vtbl: pointer, parent: pointer): ptr cQAudioRecorder {.importc: "QAudioRecorder_new2".}
 proc fcQAudioRecorder_staticMetaObject(): pointer {.importc: "QAudioRecorder_staticMetaObject".}
@@ -362,6 +366,18 @@ proc miqt_exec_callback_cQAudioRecorder_disconnectNotify(vtbl: pointer, self: po
   let self = QAudioRecorder(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
   vtbl[].disconnectNotify(self, slotval1)
+
+proc sender*(self: gen_qaudiorecorder_types.QAudioRecorder, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQAudioRecorder_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qaudiorecorder_types.QAudioRecorder, ): cint =
+  fcQAudioRecorder_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qaudiorecorder_types.QAudioRecorder, signal: cstring): cint =
+  fcQAudioRecorder_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qaudiorecorder_types.QAudioRecorder, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQAudioRecorder_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc create*(T: type gen_qaudiorecorder_types.QAudioRecorder,
     vtbl: ref QAudioRecorderVTable = nil): gen_qaudiorecorder_types.QAudioRecorder =

@@ -1506,34 +1506,34 @@ public:
 	friend void QAbstractItemView_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
 
 	// Wrappers to allow calling protected methods:
-	friend void QAbstractItemView_protectedbase_setHorizontalStepsPerItem(bool* _dynamic_cast_ok, void* self, int steps);
-	friend int QAbstractItemView_protectedbase_horizontalStepsPerItem(bool* _dynamic_cast_ok, const void* self);
-	friend void QAbstractItemView_protectedbase_setVerticalStepsPerItem(bool* _dynamic_cast_ok, void* self, int steps);
-	friend int QAbstractItemView_protectedbase_verticalStepsPerItem(bool* _dynamic_cast_ok, const void* self);
-	friend int QAbstractItemView_protectedbase_state(bool* _dynamic_cast_ok, const void* self);
-	friend void QAbstractItemView_protectedbase_setState(bool* _dynamic_cast_ok, void* self, int state);
-	friend void QAbstractItemView_protectedbase_scheduleDelayedItemsLayout(bool* _dynamic_cast_ok, void* self);
-	friend void QAbstractItemView_protectedbase_executeDelayedItemsLayout(bool* _dynamic_cast_ok, void* self);
-	friend void QAbstractItemView_protectedbase_setDirtyRegion(bool* _dynamic_cast_ok, void* self, QRegion* region);
-	friend void QAbstractItemView_protectedbase_scrollDirtyRegion(bool* _dynamic_cast_ok, void* self, int dx, int dy);
-	friend QPoint* QAbstractItemView_protectedbase_dirtyRegionOffset(bool* _dynamic_cast_ok, const void* self);
-	friend void QAbstractItemView_protectedbase_startAutoScroll(bool* _dynamic_cast_ok, void* self);
-	friend void QAbstractItemView_protectedbase_stopAutoScroll(bool* _dynamic_cast_ok, void* self);
-	friend void QAbstractItemView_protectedbase_doAutoScroll(bool* _dynamic_cast_ok, void* self);
-	friend int QAbstractItemView_protectedbase_dropIndicatorPosition(bool* _dynamic_cast_ok, const void* self);
-	friend void QAbstractItemView_protectedbase_setViewportMargins(bool* _dynamic_cast_ok, void* self, int left, int top, int right, int bottom);
-	friend QMargins* QAbstractItemView_protectedbase_viewportMargins(bool* _dynamic_cast_ok, const void* self);
-	friend void QAbstractItemView_protectedbase_drawFrame(bool* _dynamic_cast_ok, void* self, QPainter* param1);
-	friend void QAbstractItemView_protectedbase_initStyleOption(bool* _dynamic_cast_ok, const void* self, QStyleOptionFrame* option);
-	friend void QAbstractItemView_protectedbase_updateMicroFocus(bool* _dynamic_cast_ok, void* self);
-	friend void QAbstractItemView_protectedbase_create(bool* _dynamic_cast_ok, void* self);
-	friend void QAbstractItemView_protectedbase_destroy(bool* _dynamic_cast_ok, void* self);
-	friend bool QAbstractItemView_protectedbase_focusNextChild(bool* _dynamic_cast_ok, void* self);
-	friend bool QAbstractItemView_protectedbase_focusPreviousChild(bool* _dynamic_cast_ok, void* self);
-	friend QObject* QAbstractItemView_protectedbase_sender(bool* _dynamic_cast_ok, const void* self);
-	friend int QAbstractItemView_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
-	friend int QAbstractItemView_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
-	friend bool QAbstractItemView_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+	friend void QAbstractItemView_protectedbase_setHorizontalStepsPerItem(void* self, int steps);
+	friend int QAbstractItemView_protectedbase_horizontalStepsPerItem(const void* self);
+	friend void QAbstractItemView_protectedbase_setVerticalStepsPerItem(void* self, int steps);
+	friend int QAbstractItemView_protectedbase_verticalStepsPerItem(const void* self);
+	friend int QAbstractItemView_protectedbase_state(const void* self);
+	friend void QAbstractItemView_protectedbase_setState(void* self, int state);
+	friend void QAbstractItemView_protectedbase_scheduleDelayedItemsLayout(void* self);
+	friend void QAbstractItemView_protectedbase_executeDelayedItemsLayout(void* self);
+	friend void QAbstractItemView_protectedbase_setDirtyRegion(void* self, QRegion* region);
+	friend void QAbstractItemView_protectedbase_scrollDirtyRegion(void* self, int dx, int dy);
+	friend QPoint* QAbstractItemView_protectedbase_dirtyRegionOffset(const void* self);
+	friend void QAbstractItemView_protectedbase_startAutoScroll(void* self);
+	friend void QAbstractItemView_protectedbase_stopAutoScroll(void* self);
+	friend void QAbstractItemView_protectedbase_doAutoScroll(void* self);
+	friend int QAbstractItemView_protectedbase_dropIndicatorPosition(const void* self);
+	friend void QAbstractItemView_protectedbase_setViewportMargins(void* self, int left, int top, int right, int bottom);
+	friend QMargins* QAbstractItemView_protectedbase_viewportMargins(const void* self);
+	friend void QAbstractItemView_protectedbase_drawFrame(void* self, QPainter* param1);
+	friend void QAbstractItemView_protectedbase_initStyleOption(const void* self, QStyleOptionFrame* option);
+	friend void QAbstractItemView_protectedbase_updateMicroFocus(void* self);
+	friend void QAbstractItemView_protectedbase_create(void* self);
+	friend void QAbstractItemView_protectedbase_destroy(void* self);
+	friend bool QAbstractItemView_protectedbase_focusNextChild(void* self);
+	friend bool QAbstractItemView_protectedbase_focusPreviousChild(void* self);
+	friend QObject* QAbstractItemView_protectedbase_sender(const void* self);
+	friend int QAbstractItemView_protectedbase_senderSignalIndex(const void* self);
+	friend int QAbstractItemView_protectedbase_receivers(const void* self, const char* signal);
+	friend bool QAbstractItemView_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
 };
 
 QAbstractItemView* QAbstractItemView_new(struct QAbstractItemView_VTable* vtbl, QWidget* parent) {
@@ -2555,367 +2555,199 @@ void QAbstractItemView_virtualbase_disconnectNotify(void* self, QMetaMethod* sig
 }
 
 const QMetaObject* QAbstractItemView_staticMetaObject() { return &QAbstractItemView::staticMetaObject; }
-void QAbstractItemView_protectedbase_setHorizontalStepsPerItem(bool* _dynamic_cast_ok, void* self, int steps) {
-	VirtualQAbstractItemView* self_cast = dynamic_cast<VirtualQAbstractItemView*>( (QAbstractItemView*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QAbstractItemView_protectedbase_setHorizontalStepsPerItem(void* self, int steps) {
+	VirtualQAbstractItemView* self_cast = static_cast<VirtualQAbstractItemView*>( (QAbstractItemView*)(self) );
 	
 	self_cast->setHorizontalStepsPerItem(static_cast<int>(steps));
 
 }
 
-int QAbstractItemView_protectedbase_horizontalStepsPerItem(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQAbstractItemView* self_cast = dynamic_cast<VirtualQAbstractItemView*>( (QAbstractItemView*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return 0;
-	}
-	
-	*_dynamic_cast_ok = true;
+int QAbstractItemView_protectedbase_horizontalStepsPerItem(const void* self) {
+	VirtualQAbstractItemView* self_cast = static_cast<VirtualQAbstractItemView*>( (QAbstractItemView*)(self) );
 	
 	return self_cast->horizontalStepsPerItem();
 
 }
 
-void QAbstractItemView_protectedbase_setVerticalStepsPerItem(bool* _dynamic_cast_ok, void* self, int steps) {
-	VirtualQAbstractItemView* self_cast = dynamic_cast<VirtualQAbstractItemView*>( (QAbstractItemView*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QAbstractItemView_protectedbase_setVerticalStepsPerItem(void* self, int steps) {
+	VirtualQAbstractItemView* self_cast = static_cast<VirtualQAbstractItemView*>( (QAbstractItemView*)(self) );
 	
 	self_cast->setVerticalStepsPerItem(static_cast<int>(steps));
 
 }
 
-int QAbstractItemView_protectedbase_verticalStepsPerItem(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQAbstractItemView* self_cast = dynamic_cast<VirtualQAbstractItemView*>( (QAbstractItemView*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return 0;
-	}
-	
-	*_dynamic_cast_ok = true;
+int QAbstractItemView_protectedbase_verticalStepsPerItem(const void* self) {
+	VirtualQAbstractItemView* self_cast = static_cast<VirtualQAbstractItemView*>( (QAbstractItemView*)(self) );
 	
 	return self_cast->verticalStepsPerItem();
 
 }
 
-int QAbstractItemView_protectedbase_state(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQAbstractItemView* self_cast = dynamic_cast<VirtualQAbstractItemView*>( (QAbstractItemView*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return (int)(0);
-	}
-	
-	*_dynamic_cast_ok = true;
+int QAbstractItemView_protectedbase_state(const void* self) {
+	VirtualQAbstractItemView* self_cast = static_cast<VirtualQAbstractItemView*>( (QAbstractItemView*)(self) );
 	
 	VirtualQAbstractItemView::State _ret = self_cast->state();
 	return static_cast<int>(_ret);
 
 }
 
-void QAbstractItemView_protectedbase_setState(bool* _dynamic_cast_ok, void* self, int state) {
-	VirtualQAbstractItemView* self_cast = dynamic_cast<VirtualQAbstractItemView*>( (QAbstractItemView*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QAbstractItemView_protectedbase_setState(void* self, int state) {
+	VirtualQAbstractItemView* self_cast = static_cast<VirtualQAbstractItemView*>( (QAbstractItemView*)(self) );
 	
 	self_cast->setState(static_cast<VirtualQAbstractItemView::State>(state));
 
 }
 
-void QAbstractItemView_protectedbase_scheduleDelayedItemsLayout(bool* _dynamic_cast_ok, void* self) {
-	VirtualQAbstractItemView* self_cast = dynamic_cast<VirtualQAbstractItemView*>( (QAbstractItemView*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QAbstractItemView_protectedbase_scheduleDelayedItemsLayout(void* self) {
+	VirtualQAbstractItemView* self_cast = static_cast<VirtualQAbstractItemView*>( (QAbstractItemView*)(self) );
 	
 	self_cast->scheduleDelayedItemsLayout();
 
 }
 
-void QAbstractItemView_protectedbase_executeDelayedItemsLayout(bool* _dynamic_cast_ok, void* self) {
-	VirtualQAbstractItemView* self_cast = dynamic_cast<VirtualQAbstractItemView*>( (QAbstractItemView*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QAbstractItemView_protectedbase_executeDelayedItemsLayout(void* self) {
+	VirtualQAbstractItemView* self_cast = static_cast<VirtualQAbstractItemView*>( (QAbstractItemView*)(self) );
 	
 	self_cast->executeDelayedItemsLayout();
 
 }
 
-void QAbstractItemView_protectedbase_setDirtyRegion(bool* _dynamic_cast_ok, void* self, QRegion* region) {
-	VirtualQAbstractItemView* self_cast = dynamic_cast<VirtualQAbstractItemView*>( (QAbstractItemView*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QAbstractItemView_protectedbase_setDirtyRegion(void* self, QRegion* region) {
+	VirtualQAbstractItemView* self_cast = static_cast<VirtualQAbstractItemView*>( (QAbstractItemView*)(self) );
 	
 	self_cast->setDirtyRegion(*region);
 
 }
 
-void QAbstractItemView_protectedbase_scrollDirtyRegion(bool* _dynamic_cast_ok, void* self, int dx, int dy) {
-	VirtualQAbstractItemView* self_cast = dynamic_cast<VirtualQAbstractItemView*>( (QAbstractItemView*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QAbstractItemView_protectedbase_scrollDirtyRegion(void* self, int dx, int dy) {
+	VirtualQAbstractItemView* self_cast = static_cast<VirtualQAbstractItemView*>( (QAbstractItemView*)(self) );
 	
 	self_cast->scrollDirtyRegion(static_cast<int>(dx), static_cast<int>(dy));
 
 }
 
-QPoint* QAbstractItemView_protectedbase_dirtyRegionOffset(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQAbstractItemView* self_cast = dynamic_cast<VirtualQAbstractItemView*>( (QAbstractItemView*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return nullptr;
-	}
-	
-	*_dynamic_cast_ok = true;
+QPoint* QAbstractItemView_protectedbase_dirtyRegionOffset(const void* self) {
+	VirtualQAbstractItemView* self_cast = static_cast<VirtualQAbstractItemView*>( (QAbstractItemView*)(self) );
 	
 	return new QPoint(self_cast->dirtyRegionOffset());
 
 }
 
-void QAbstractItemView_protectedbase_startAutoScroll(bool* _dynamic_cast_ok, void* self) {
-	VirtualQAbstractItemView* self_cast = dynamic_cast<VirtualQAbstractItemView*>( (QAbstractItemView*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QAbstractItemView_protectedbase_startAutoScroll(void* self) {
+	VirtualQAbstractItemView* self_cast = static_cast<VirtualQAbstractItemView*>( (QAbstractItemView*)(self) );
 	
 	self_cast->startAutoScroll();
 
 }
 
-void QAbstractItemView_protectedbase_stopAutoScroll(bool* _dynamic_cast_ok, void* self) {
-	VirtualQAbstractItemView* self_cast = dynamic_cast<VirtualQAbstractItemView*>( (QAbstractItemView*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QAbstractItemView_protectedbase_stopAutoScroll(void* self) {
+	VirtualQAbstractItemView* self_cast = static_cast<VirtualQAbstractItemView*>( (QAbstractItemView*)(self) );
 	
 	self_cast->stopAutoScroll();
 
 }
 
-void QAbstractItemView_protectedbase_doAutoScroll(bool* _dynamic_cast_ok, void* self) {
-	VirtualQAbstractItemView* self_cast = dynamic_cast<VirtualQAbstractItemView*>( (QAbstractItemView*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QAbstractItemView_protectedbase_doAutoScroll(void* self) {
+	VirtualQAbstractItemView* self_cast = static_cast<VirtualQAbstractItemView*>( (QAbstractItemView*)(self) );
 	
 	self_cast->doAutoScroll();
 
 }
 
-int QAbstractItemView_protectedbase_dropIndicatorPosition(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQAbstractItemView* self_cast = dynamic_cast<VirtualQAbstractItemView*>( (QAbstractItemView*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return (int)(0);
-	}
-	
-	*_dynamic_cast_ok = true;
+int QAbstractItemView_protectedbase_dropIndicatorPosition(const void* self) {
+	VirtualQAbstractItemView* self_cast = static_cast<VirtualQAbstractItemView*>( (QAbstractItemView*)(self) );
 	
 	VirtualQAbstractItemView::DropIndicatorPosition _ret = self_cast->dropIndicatorPosition();
 	return static_cast<int>(_ret);
 
 }
 
-void QAbstractItemView_protectedbase_setViewportMargins(bool* _dynamic_cast_ok, void* self, int left, int top, int right, int bottom) {
-	VirtualQAbstractItemView* self_cast = dynamic_cast<VirtualQAbstractItemView*>( (QAbstractItemView*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QAbstractItemView_protectedbase_setViewportMargins(void* self, int left, int top, int right, int bottom) {
+	VirtualQAbstractItemView* self_cast = static_cast<VirtualQAbstractItemView*>( (QAbstractItemView*)(self) );
 	
 	self_cast->setViewportMargins(static_cast<int>(left), static_cast<int>(top), static_cast<int>(right), static_cast<int>(bottom));
 
 }
 
-QMargins* QAbstractItemView_protectedbase_viewportMargins(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQAbstractItemView* self_cast = dynamic_cast<VirtualQAbstractItemView*>( (QAbstractItemView*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return nullptr;
-	}
-	
-	*_dynamic_cast_ok = true;
+QMargins* QAbstractItemView_protectedbase_viewportMargins(const void* self) {
+	VirtualQAbstractItemView* self_cast = static_cast<VirtualQAbstractItemView*>( (QAbstractItemView*)(self) );
 	
 	return new QMargins(self_cast->viewportMargins());
 
 }
 
-void QAbstractItemView_protectedbase_drawFrame(bool* _dynamic_cast_ok, void* self, QPainter* param1) {
-	VirtualQAbstractItemView* self_cast = dynamic_cast<VirtualQAbstractItemView*>( (QAbstractItemView*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QAbstractItemView_protectedbase_drawFrame(void* self, QPainter* param1) {
+	VirtualQAbstractItemView* self_cast = static_cast<VirtualQAbstractItemView*>( (QAbstractItemView*)(self) );
 	
 	self_cast->drawFrame(param1);
 
 }
 
-void QAbstractItemView_protectedbase_initStyleOption(bool* _dynamic_cast_ok, const void* self, QStyleOptionFrame* option) {
-	VirtualQAbstractItemView* self_cast = dynamic_cast<VirtualQAbstractItemView*>( (QAbstractItemView*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QAbstractItemView_protectedbase_initStyleOption(const void* self, QStyleOptionFrame* option) {
+	VirtualQAbstractItemView* self_cast = static_cast<VirtualQAbstractItemView*>( (QAbstractItemView*)(self) );
 	
 	self_cast->initStyleOption(option);
 
 }
 
-void QAbstractItemView_protectedbase_updateMicroFocus(bool* _dynamic_cast_ok, void* self) {
-	VirtualQAbstractItemView* self_cast = dynamic_cast<VirtualQAbstractItemView*>( (QAbstractItemView*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QAbstractItemView_protectedbase_updateMicroFocus(void* self) {
+	VirtualQAbstractItemView* self_cast = static_cast<VirtualQAbstractItemView*>( (QAbstractItemView*)(self) );
 	
 	self_cast->updateMicroFocus();
 
 }
 
-void QAbstractItemView_protectedbase_create(bool* _dynamic_cast_ok, void* self) {
-	VirtualQAbstractItemView* self_cast = dynamic_cast<VirtualQAbstractItemView*>( (QAbstractItemView*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QAbstractItemView_protectedbase_create(void* self) {
+	VirtualQAbstractItemView* self_cast = static_cast<VirtualQAbstractItemView*>( (QAbstractItemView*)(self) );
 	
 	self_cast->create();
 
 }
 
-void QAbstractItemView_protectedbase_destroy(bool* _dynamic_cast_ok, void* self) {
-	VirtualQAbstractItemView* self_cast = dynamic_cast<VirtualQAbstractItemView*>( (QAbstractItemView*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QAbstractItemView_protectedbase_destroy(void* self) {
+	VirtualQAbstractItemView* self_cast = static_cast<VirtualQAbstractItemView*>( (QAbstractItemView*)(self) );
 	
 	self_cast->destroy();
 
 }
 
-bool QAbstractItemView_protectedbase_focusNextChild(bool* _dynamic_cast_ok, void* self) {
-	VirtualQAbstractItemView* self_cast = dynamic_cast<VirtualQAbstractItemView*>( (QAbstractItemView*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return false;
-	}
-	
-	*_dynamic_cast_ok = true;
+bool QAbstractItemView_protectedbase_focusNextChild(void* self) {
+	VirtualQAbstractItemView* self_cast = static_cast<VirtualQAbstractItemView*>( (QAbstractItemView*)(self) );
 	
 	return self_cast->focusNextChild();
 
 }
 
-bool QAbstractItemView_protectedbase_focusPreviousChild(bool* _dynamic_cast_ok, void* self) {
-	VirtualQAbstractItemView* self_cast = dynamic_cast<VirtualQAbstractItemView*>( (QAbstractItemView*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return false;
-	}
-	
-	*_dynamic_cast_ok = true;
+bool QAbstractItemView_protectedbase_focusPreviousChild(void* self) {
+	VirtualQAbstractItemView* self_cast = static_cast<VirtualQAbstractItemView*>( (QAbstractItemView*)(self) );
 	
 	return self_cast->focusPreviousChild();
 
 }
 
-QObject* QAbstractItemView_protectedbase_sender(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQAbstractItemView* self_cast = dynamic_cast<VirtualQAbstractItemView*>( (QAbstractItemView*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return nullptr;
-	}
-	
-	*_dynamic_cast_ok = true;
+QObject* QAbstractItemView_protectedbase_sender(const void* self) {
+	VirtualQAbstractItemView* self_cast = static_cast<VirtualQAbstractItemView*>( (QAbstractItemView*)(self) );
 	
 	return self_cast->sender();
 
 }
 
-int QAbstractItemView_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQAbstractItemView* self_cast = dynamic_cast<VirtualQAbstractItemView*>( (QAbstractItemView*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return 0;
-	}
-	
-	*_dynamic_cast_ok = true;
+int QAbstractItemView_protectedbase_senderSignalIndex(const void* self) {
+	VirtualQAbstractItemView* self_cast = static_cast<VirtualQAbstractItemView*>( (QAbstractItemView*)(self) );
 	
 	return self_cast->senderSignalIndex();
 
 }
 
-int QAbstractItemView_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal) {
-	VirtualQAbstractItemView* self_cast = dynamic_cast<VirtualQAbstractItemView*>( (QAbstractItemView*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return 0;
-	}
-	
-	*_dynamic_cast_ok = true;
+int QAbstractItemView_protectedbase_receivers(const void* self, const char* signal) {
+	VirtualQAbstractItemView* self_cast = static_cast<VirtualQAbstractItemView*>( (QAbstractItemView*)(self) );
 	
 	return self_cast->receivers(signal);
 
 }
 
-bool QAbstractItemView_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal) {
-	VirtualQAbstractItemView* self_cast = dynamic_cast<VirtualQAbstractItemView*>( (QAbstractItemView*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return false;
-	}
-	
-	*_dynamic_cast_ok = true;
+bool QAbstractItemView_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal) {
+	VirtualQAbstractItemView* self_cast = static_cast<VirtualQAbstractItemView*>( (QAbstractItemView*)(self) );
 	
 	return self_cast->isSignalConnected(*signal);
 

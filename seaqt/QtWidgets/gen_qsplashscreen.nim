@@ -196,6 +196,15 @@ proc fcQSplashScreen_virtualbase_childEvent(self: pointer, event: pointer): void
 proc fcQSplashScreen_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QSplashScreen_virtualbase_customEvent".}
 proc fcQSplashScreen_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QSplashScreen_virtualbase_connectNotify".}
 proc fcQSplashScreen_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QSplashScreen_virtualbase_disconnectNotify".}
+proc fcQSplashScreen_protectedbase_updateMicroFocus(self: pointer, ): void {.importc: "QSplashScreen_protectedbase_updateMicroFocus".}
+proc fcQSplashScreen_protectedbase_create(self: pointer, ): void {.importc: "QSplashScreen_protectedbase_create".}
+proc fcQSplashScreen_protectedbase_destroy(self: pointer, ): void {.importc: "QSplashScreen_protectedbase_destroy".}
+proc fcQSplashScreen_protectedbase_focusNextChild(self: pointer, ): bool {.importc: "QSplashScreen_protectedbase_focusNextChild".}
+proc fcQSplashScreen_protectedbase_focusPreviousChild(self: pointer, ): bool {.importc: "QSplashScreen_protectedbase_focusPreviousChild".}
+proc fcQSplashScreen_protectedbase_sender(self: pointer, ): pointer {.importc: "QSplashScreen_protectedbase_sender".}
+proc fcQSplashScreen_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QSplashScreen_protectedbase_senderSignalIndex".}
+proc fcQSplashScreen_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QSplashScreen_protectedbase_receivers".}
+proc fcQSplashScreen_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QSplashScreen_protectedbase_isSignalConnected".}
 proc fcQSplashScreen_new(vtbl: pointer, parent: pointer): ptr cQSplashScreen {.importc: "QSplashScreen_new".}
 proc fcQSplashScreen_new2(vtbl: pointer, ): ptr cQSplashScreen {.importc: "QSplashScreen_new2".}
 proc fcQSplashScreen_new3(vtbl: pointer, screen: pointer): ptr cQSplashScreen {.importc: "QSplashScreen_new3".}
@@ -886,6 +895,33 @@ proc miqt_exec_callback_cQSplashScreen_disconnectNotify(vtbl: pointer, self: poi
   let self = QSplashScreen(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
   vtbl[].disconnectNotify(self, slotval1)
+
+proc updateMicroFocus*(self: gen_qsplashscreen_types.QSplashScreen, ): void =
+  fcQSplashScreen_protectedbase_updateMicroFocus(self.h)
+
+proc create*(self: gen_qsplashscreen_types.QSplashScreen, ): void =
+  fcQSplashScreen_protectedbase_create(self.h)
+
+proc destroy*(self: gen_qsplashscreen_types.QSplashScreen, ): void =
+  fcQSplashScreen_protectedbase_destroy(self.h)
+
+proc focusNextChild*(self: gen_qsplashscreen_types.QSplashScreen, ): bool =
+  fcQSplashScreen_protectedbase_focusNextChild(self.h)
+
+proc focusPreviousChild*(self: gen_qsplashscreen_types.QSplashScreen, ): bool =
+  fcQSplashScreen_protectedbase_focusPreviousChild(self.h)
+
+proc sender*(self: gen_qsplashscreen_types.QSplashScreen, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQSplashScreen_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qsplashscreen_types.QSplashScreen, ): cint =
+  fcQSplashScreen_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qsplashscreen_types.QSplashScreen, signal: cstring): cint =
+  fcQSplashScreen_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qsplashscreen_types.QSplashScreen, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQSplashScreen_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc create*(T: type gen_qsplashscreen_types.QSplashScreen,
     parent: gen_qwidget_types.QWidget,

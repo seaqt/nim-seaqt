@@ -894,17 +894,17 @@ public:
 	friend void QProgressDialog_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
 
 	// Wrappers to allow calling protected methods:
-	friend void QProgressDialog_protectedbase_forceShow(bool* _dynamic_cast_ok, void* self);
-	friend void QProgressDialog_protectedbase_adjustPosition(bool* _dynamic_cast_ok, void* self, QWidget* param1);
-	friend void QProgressDialog_protectedbase_updateMicroFocus(bool* _dynamic_cast_ok, void* self);
-	friend void QProgressDialog_protectedbase_create(bool* _dynamic_cast_ok, void* self);
-	friend void QProgressDialog_protectedbase_destroy(bool* _dynamic_cast_ok, void* self);
-	friend bool QProgressDialog_protectedbase_focusNextChild(bool* _dynamic_cast_ok, void* self);
-	friend bool QProgressDialog_protectedbase_focusPreviousChild(bool* _dynamic_cast_ok, void* self);
-	friend QObject* QProgressDialog_protectedbase_sender(bool* _dynamic_cast_ok, const void* self);
-	friend int QProgressDialog_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
-	friend int QProgressDialog_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
-	friend bool QProgressDialog_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+	friend void QProgressDialog_protectedbase_forceShow(void* self);
+	friend void QProgressDialog_protectedbase_adjustPosition(void* self, QWidget* param1);
+	friend void QProgressDialog_protectedbase_updateMicroFocus(void* self);
+	friend void QProgressDialog_protectedbase_create(void* self);
+	friend void QProgressDialog_protectedbase_destroy(void* self);
+	friend bool QProgressDialog_protectedbase_focusNextChild(void* self);
+	friend bool QProgressDialog_protectedbase_focusPreviousChild(void* self);
+	friend QObject* QProgressDialog_protectedbase_sender(const void* self);
+	friend int QProgressDialog_protectedbase_senderSignalIndex(const void* self);
+	friend int QProgressDialog_protectedbase_receivers(const void* self, const char* signal);
+	friend bool QProgressDialog_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
 };
 
 QProgressDialog* QProgressDialog_new(struct QProgressDialog_VTable* vtbl, QWidget* parent) {
@@ -1467,144 +1467,78 @@ void QProgressDialog_virtualbase_disconnectNotify(void* self, QMetaMethod* signa
 }
 
 const QMetaObject* QProgressDialog_staticMetaObject() { return &QProgressDialog::staticMetaObject; }
-void QProgressDialog_protectedbase_forceShow(bool* _dynamic_cast_ok, void* self) {
-	VirtualQProgressDialog* self_cast = dynamic_cast<VirtualQProgressDialog*>( (QProgressDialog*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QProgressDialog_protectedbase_forceShow(void* self) {
+	VirtualQProgressDialog* self_cast = static_cast<VirtualQProgressDialog*>( (QProgressDialog*)(self) );
 	
 	self_cast->forceShow();
 
 }
 
-void QProgressDialog_protectedbase_adjustPosition(bool* _dynamic_cast_ok, void* self, QWidget* param1) {
-	VirtualQProgressDialog* self_cast = dynamic_cast<VirtualQProgressDialog*>( (QProgressDialog*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QProgressDialog_protectedbase_adjustPosition(void* self, QWidget* param1) {
+	VirtualQProgressDialog* self_cast = static_cast<VirtualQProgressDialog*>( (QProgressDialog*)(self) );
 	
 	self_cast->adjustPosition(param1);
 
 }
 
-void QProgressDialog_protectedbase_updateMicroFocus(bool* _dynamic_cast_ok, void* self) {
-	VirtualQProgressDialog* self_cast = dynamic_cast<VirtualQProgressDialog*>( (QProgressDialog*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QProgressDialog_protectedbase_updateMicroFocus(void* self) {
+	VirtualQProgressDialog* self_cast = static_cast<VirtualQProgressDialog*>( (QProgressDialog*)(self) );
 	
 	self_cast->updateMicroFocus();
 
 }
 
-void QProgressDialog_protectedbase_create(bool* _dynamic_cast_ok, void* self) {
-	VirtualQProgressDialog* self_cast = dynamic_cast<VirtualQProgressDialog*>( (QProgressDialog*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QProgressDialog_protectedbase_create(void* self) {
+	VirtualQProgressDialog* self_cast = static_cast<VirtualQProgressDialog*>( (QProgressDialog*)(self) );
 	
 	self_cast->create();
 
 }
 
-void QProgressDialog_protectedbase_destroy(bool* _dynamic_cast_ok, void* self) {
-	VirtualQProgressDialog* self_cast = dynamic_cast<VirtualQProgressDialog*>( (QProgressDialog*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QProgressDialog_protectedbase_destroy(void* self) {
+	VirtualQProgressDialog* self_cast = static_cast<VirtualQProgressDialog*>( (QProgressDialog*)(self) );
 	
 	self_cast->destroy();
 
 }
 
-bool QProgressDialog_protectedbase_focusNextChild(bool* _dynamic_cast_ok, void* self) {
-	VirtualQProgressDialog* self_cast = dynamic_cast<VirtualQProgressDialog*>( (QProgressDialog*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return false;
-	}
-	
-	*_dynamic_cast_ok = true;
+bool QProgressDialog_protectedbase_focusNextChild(void* self) {
+	VirtualQProgressDialog* self_cast = static_cast<VirtualQProgressDialog*>( (QProgressDialog*)(self) );
 	
 	return self_cast->focusNextChild();
 
 }
 
-bool QProgressDialog_protectedbase_focusPreviousChild(bool* _dynamic_cast_ok, void* self) {
-	VirtualQProgressDialog* self_cast = dynamic_cast<VirtualQProgressDialog*>( (QProgressDialog*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return false;
-	}
-	
-	*_dynamic_cast_ok = true;
+bool QProgressDialog_protectedbase_focusPreviousChild(void* self) {
+	VirtualQProgressDialog* self_cast = static_cast<VirtualQProgressDialog*>( (QProgressDialog*)(self) );
 	
 	return self_cast->focusPreviousChild();
 
 }
 
-QObject* QProgressDialog_protectedbase_sender(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQProgressDialog* self_cast = dynamic_cast<VirtualQProgressDialog*>( (QProgressDialog*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return nullptr;
-	}
-	
-	*_dynamic_cast_ok = true;
+QObject* QProgressDialog_protectedbase_sender(const void* self) {
+	VirtualQProgressDialog* self_cast = static_cast<VirtualQProgressDialog*>( (QProgressDialog*)(self) );
 	
 	return self_cast->sender();
 
 }
 
-int QProgressDialog_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQProgressDialog* self_cast = dynamic_cast<VirtualQProgressDialog*>( (QProgressDialog*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return 0;
-	}
-	
-	*_dynamic_cast_ok = true;
+int QProgressDialog_protectedbase_senderSignalIndex(const void* self) {
+	VirtualQProgressDialog* self_cast = static_cast<VirtualQProgressDialog*>( (QProgressDialog*)(self) );
 	
 	return self_cast->senderSignalIndex();
 
 }
 
-int QProgressDialog_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal) {
-	VirtualQProgressDialog* self_cast = dynamic_cast<VirtualQProgressDialog*>( (QProgressDialog*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return 0;
-	}
-	
-	*_dynamic_cast_ok = true;
+int QProgressDialog_protectedbase_receivers(const void* self, const char* signal) {
+	VirtualQProgressDialog* self_cast = static_cast<VirtualQProgressDialog*>( (QProgressDialog*)(self) );
 	
 	return self_cast->receivers(signal);
 
 }
 
-bool QProgressDialog_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal) {
-	VirtualQProgressDialog* self_cast = dynamic_cast<VirtualQProgressDialog*>( (QProgressDialog*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return false;
-	}
-	
-	*_dynamic_cast_ok = true;
+bool QProgressDialog_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal) {
+	VirtualQProgressDialog* self_cast = static_cast<VirtualQProgressDialog*>( (QProgressDialog*)(self) );
 	
 	return self_cast->isSignalConnected(*signal);
 

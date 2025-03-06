@@ -228,6 +228,8 @@ proc fcQPagedPaintDevice_virtualbase_metric(self: pointer, metric: cint): cint {
 proc fcQPagedPaintDevice_virtualbase_initPainter(self: pointer, painter: pointer): void {.importc: "QPagedPaintDevice_virtualbase_initPainter".}
 proc fcQPagedPaintDevice_virtualbase_redirected(self: pointer, offset: pointer): pointer {.importc: "QPagedPaintDevice_virtualbase_redirected".}
 proc fcQPagedPaintDevice_virtualbase_sharedPainter(self: pointer, ): pointer {.importc: "QPagedPaintDevice_virtualbase_sharedPainter".}
+proc fcQPagedPaintDevice_protectedbase_devicePageLayout(self: pointer, ): pointer {.importc: "QPagedPaintDevice_protectedbase_devicePageLayout".}
+proc fcQPagedPaintDevice_protectedbase_devicePageLayout2(self: pointer, ): pointer {.importc: "QPagedPaintDevice_protectedbase_devicePageLayout2".}
 proc fcQPagedPaintDevice_new(vtbl: pointer, ): ptr cQPagedPaintDevice {.importc: "QPagedPaintDevice_new".}
 proc fcQPagedPaintDevice_delete(self: pointer) {.importc: "QPagedPaintDevice_delete".}
 proc fcQPagedPaintDeviceMargins_delete(self: pointer) {.importc: "QPagedPaintDevice__Margins_delete".}
@@ -378,6 +380,12 @@ proc miqt_exec_callback_cQPagedPaintDevice_sharedPainter(vtbl: pointer, self: po
   let self = QPagedPaintDevice(h: self)
   var virtualReturn = vtbl[].sharedPainter(self)
   virtualReturn.h
+
+proc devicePageLayout*(self: gen_qpagedpaintdevice_types.QPagedPaintDevice, ): gen_qpagelayout_types.QPageLayout =
+  gen_qpagelayout_types.QPageLayout(h: fcQPagedPaintDevice_protectedbase_devicePageLayout(self.h))
+
+proc devicePageLayout*(self: gen_qpagedpaintdevice_types.QPagedPaintDevice, ): gen_qpagelayout_types.QPageLayout =
+  gen_qpagelayout_types.QPageLayout(h: fcQPagedPaintDevice_protectedbase_devicePageLayout2(self.h))
 
 proc create*(T: type gen_qpagedpaintdevice_types.QPagedPaintDevice,
     vtbl: ref QPagedPaintDeviceVTable = nil): gen_qpagedpaintdevice_types.QPagedPaintDevice =

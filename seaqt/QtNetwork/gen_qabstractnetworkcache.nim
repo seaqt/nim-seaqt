@@ -40,6 +40,7 @@ export gen_qabstractnetworkcache_types
 import
   ../QtCore/gen_qdatetime_types,
   ../QtCore/gen_qiodevice_types,
+  ../QtCore/gen_qmetaobject_types,
   ../QtCore/gen_qobject,
   ../QtCore/gen_qobjectdefs_types,
   ../QtCore/gen_qurl_types,
@@ -48,6 +49,7 @@ import
 export
   gen_qdatetime_types,
   gen_qiodevice_types,
+  gen_qmetaobject_types,
   gen_qobject,
   gen_qobjectdefs_types,
   gen_qurl_types,
@@ -93,6 +95,10 @@ proc fcQAbstractNetworkCache_tr2(s: cstring, c: cstring): struct_miqt_string {.i
 proc fcQAbstractNetworkCache_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QAbstractNetworkCache_tr3".}
 proc fcQAbstractNetworkCache_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QAbstractNetworkCache_trUtf82".}
 proc fcQAbstractNetworkCache_trUtf83(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QAbstractNetworkCache_trUtf83".}
+proc fcQAbstractNetworkCache_protectedbase_sender(self: pointer, ): pointer {.importc: "QAbstractNetworkCache_protectedbase_sender".}
+proc fcQAbstractNetworkCache_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QAbstractNetworkCache_protectedbase_senderSignalIndex".}
+proc fcQAbstractNetworkCache_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QAbstractNetworkCache_protectedbase_receivers".}
+proc fcQAbstractNetworkCache_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QAbstractNetworkCache_protectedbase_isSignalConnected".}
 proc fcQAbstractNetworkCache_staticMetaObject(): pointer {.importc: "QAbstractNetworkCache_staticMetaObject".}
 proc fcQAbstractNetworkCache_delete(self: pointer) {.importc: "QAbstractNetworkCache_delete".}
 
@@ -268,6 +274,18 @@ proc trUtf8*(_: type gen_qabstractnetworkcache_types.QAbstractNetworkCache, s: c
   let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
   c_free(v_ms.data)
   vx_ret
+
+proc sender*(self: gen_qabstractnetworkcache_types.QAbstractNetworkCache, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQAbstractNetworkCache_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qabstractnetworkcache_types.QAbstractNetworkCache, ): cint =
+  fcQAbstractNetworkCache_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qabstractnetworkcache_types.QAbstractNetworkCache, signal: cstring): cint =
+  fcQAbstractNetworkCache_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qabstractnetworkcache_types.QAbstractNetworkCache, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQAbstractNetworkCache_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc staticMetaObject*(_: type gen_qabstractnetworkcache_types.QAbstractNetworkCache): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQAbstractNetworkCache_staticMetaObject())

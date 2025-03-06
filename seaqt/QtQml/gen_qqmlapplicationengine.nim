@@ -97,6 +97,10 @@ proc fcQQmlApplicationEngine_virtualbase_childEvent(self: pointer, event: pointe
 proc fcQQmlApplicationEngine_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QQmlApplicationEngine_virtualbase_customEvent".}
 proc fcQQmlApplicationEngine_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QQmlApplicationEngine_virtualbase_connectNotify".}
 proc fcQQmlApplicationEngine_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QQmlApplicationEngine_virtualbase_disconnectNotify".}
+proc fcQQmlApplicationEngine_protectedbase_sender(self: pointer, ): pointer {.importc: "QQmlApplicationEngine_protectedbase_sender".}
+proc fcQQmlApplicationEngine_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QQmlApplicationEngine_protectedbase_senderSignalIndex".}
+proc fcQQmlApplicationEngine_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QQmlApplicationEngine_protectedbase_receivers".}
+proc fcQQmlApplicationEngine_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QQmlApplicationEngine_protectedbase_isSignalConnected".}
 proc fcQQmlApplicationEngine_new(vtbl: pointer, ): ptr cQQmlApplicationEngine {.importc: "QQmlApplicationEngine_new".}
 proc fcQQmlApplicationEngine_new2(vtbl: pointer, url: pointer): ptr cQQmlApplicationEngine {.importc: "QQmlApplicationEngine_new2".}
 proc fcQQmlApplicationEngine_new3(vtbl: pointer, filePath: struct_miqt_string): ptr cQQmlApplicationEngine {.importc: "QQmlApplicationEngine_new3".}
@@ -330,6 +334,18 @@ proc miqt_exec_callback_cQQmlApplicationEngine_disconnectNotify(vtbl: pointer, s
   let self = QQmlApplicationEngine(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
   vtbl[].disconnectNotify(self, slotval1)
+
+proc sender*(self: gen_qqmlapplicationengine_types.QQmlApplicationEngine, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQQmlApplicationEngine_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qqmlapplicationengine_types.QQmlApplicationEngine, ): cint =
+  fcQQmlApplicationEngine_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qqmlapplicationengine_types.QQmlApplicationEngine, signal: cstring): cint =
+  fcQQmlApplicationEngine_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qqmlapplicationengine_types.QQmlApplicationEngine, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQQmlApplicationEngine_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc create*(T: type gen_qqmlapplicationengine_types.QQmlApplicationEngine,
     vtbl: ref QQmlApplicationEngineVTable = nil): gen_qqmlapplicationengine_types.QQmlApplicationEngine =

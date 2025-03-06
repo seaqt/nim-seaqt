@@ -339,6 +339,16 @@ proc fcQMessageBox_virtualbase_childEvent(self: pointer, event: pointer): void {
 proc fcQMessageBox_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QMessageBox_virtualbase_customEvent".}
 proc fcQMessageBox_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QMessageBox_virtualbase_connectNotify".}
 proc fcQMessageBox_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QMessageBox_virtualbase_disconnectNotify".}
+proc fcQMessageBox_protectedbase_adjustPosition(self: pointer, param1: pointer): void {.importc: "QMessageBox_protectedbase_adjustPosition".}
+proc fcQMessageBox_protectedbase_updateMicroFocus(self: pointer, ): void {.importc: "QMessageBox_protectedbase_updateMicroFocus".}
+proc fcQMessageBox_protectedbase_create(self: pointer, ): void {.importc: "QMessageBox_protectedbase_create".}
+proc fcQMessageBox_protectedbase_destroy(self: pointer, ): void {.importc: "QMessageBox_protectedbase_destroy".}
+proc fcQMessageBox_protectedbase_focusNextChild(self: pointer, ): bool {.importc: "QMessageBox_protectedbase_focusNextChild".}
+proc fcQMessageBox_protectedbase_focusPreviousChild(self: pointer, ): bool {.importc: "QMessageBox_protectedbase_focusPreviousChild".}
+proc fcQMessageBox_protectedbase_sender(self: pointer, ): pointer {.importc: "QMessageBox_protectedbase_sender".}
+proc fcQMessageBox_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QMessageBox_protectedbase_senderSignalIndex".}
+proc fcQMessageBox_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QMessageBox_protectedbase_receivers".}
+proc fcQMessageBox_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QMessageBox_protectedbase_isSignalConnected".}
 proc fcQMessageBox_new(vtbl: pointer, parent: pointer): ptr cQMessageBox {.importc: "QMessageBox_new".}
 proc fcQMessageBox_new2(vtbl: pointer, ): ptr cQMessageBox {.importc: "QMessageBox_new2".}
 proc fcQMessageBox_new3(vtbl: pointer, icon: cint, title: struct_miqt_string, text: struct_miqt_string): ptr cQMessageBox {.importc: "QMessageBox_new3".}
@@ -1318,6 +1328,36 @@ proc miqt_exec_callback_cQMessageBox_disconnectNotify(vtbl: pointer, self: point
   let self = QMessageBox(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
   vtbl[].disconnectNotify(self, slotval1)
+
+proc adjustPosition*(self: gen_qmessagebox_types.QMessageBox, param1: gen_qwidget_types.QWidget): void =
+  fcQMessageBox_protectedbase_adjustPosition(self.h, param1.h)
+
+proc updateMicroFocus*(self: gen_qmessagebox_types.QMessageBox, ): void =
+  fcQMessageBox_protectedbase_updateMicroFocus(self.h)
+
+proc create*(self: gen_qmessagebox_types.QMessageBox, ): void =
+  fcQMessageBox_protectedbase_create(self.h)
+
+proc destroy*(self: gen_qmessagebox_types.QMessageBox, ): void =
+  fcQMessageBox_protectedbase_destroy(self.h)
+
+proc focusNextChild*(self: gen_qmessagebox_types.QMessageBox, ): bool =
+  fcQMessageBox_protectedbase_focusNextChild(self.h)
+
+proc focusPreviousChild*(self: gen_qmessagebox_types.QMessageBox, ): bool =
+  fcQMessageBox_protectedbase_focusPreviousChild(self.h)
+
+proc sender*(self: gen_qmessagebox_types.QMessageBox, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQMessageBox_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qmessagebox_types.QMessageBox, ): cint =
+  fcQMessageBox_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qmessagebox_types.QMessageBox, signal: cstring): cint =
+  fcQMessageBox_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qmessagebox_types.QMessageBox, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQMessageBox_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc create*(T: type gen_qmessagebox_types.QMessageBox,
     parent: gen_qwidget_types.QWidget,

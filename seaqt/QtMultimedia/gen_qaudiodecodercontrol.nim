@@ -39,12 +39,16 @@ export gen_qaudiodecodercontrol_types
 
 import
   ../QtCore/gen_qiodevice_types,
+  ../QtCore/gen_qmetaobject_types,
+  ../QtCore/gen_qobject_types,
   ../QtCore/gen_qobjectdefs_types,
   ./gen_qaudiobuffer_types,
   ./gen_qaudioformat_types,
   ./gen_qmediacontrol
 export
   gen_qiodevice_types,
+  gen_qmetaobject_types,
+  gen_qobject_types,
   gen_qobjectdefs_types,
   gen_qaudiobuffer_types,
   gen_qaudioformat_types,
@@ -92,6 +96,10 @@ proc fcQAudioDecoderControl_tr2(s: cstring, c: cstring): struct_miqt_string {.im
 proc fcQAudioDecoderControl_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QAudioDecoderControl_tr3".}
 proc fcQAudioDecoderControl_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QAudioDecoderControl_trUtf82".}
 proc fcQAudioDecoderControl_trUtf83(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QAudioDecoderControl_trUtf83".}
+proc fcQAudioDecoderControl_protectedbase_sender(self: pointer, ): pointer {.importc: "QAudioDecoderControl_protectedbase_sender".}
+proc fcQAudioDecoderControl_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QAudioDecoderControl_protectedbase_senderSignalIndex".}
+proc fcQAudioDecoderControl_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QAudioDecoderControl_protectedbase_receivers".}
+proc fcQAudioDecoderControl_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QAudioDecoderControl_protectedbase_isSignalConnected".}
 proc fcQAudioDecoderControl_staticMetaObject(): pointer {.importc: "QAudioDecoderControl_staticMetaObject".}
 proc fcQAudioDecoderControl_delete(self: pointer) {.importc: "QAudioDecoderControl_delete".}
 
@@ -360,6 +368,18 @@ proc trUtf8*(_: type gen_qaudiodecodercontrol_types.QAudioDecoderControl, s: cst
   let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
   c_free(v_ms.data)
   vx_ret
+
+proc sender*(self: gen_qaudiodecodercontrol_types.QAudioDecoderControl, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQAudioDecoderControl_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qaudiodecodercontrol_types.QAudioDecoderControl, ): cint =
+  fcQAudioDecoderControl_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qaudiodecodercontrol_types.QAudioDecoderControl, signal: cstring): cint =
+  fcQAudioDecoderControl_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qaudiodecodercontrol_types.QAudioDecoderControl, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQAudioDecoderControl_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc staticMetaObject*(_: type gen_qaudiodecodercontrol_types.QAudioDecoderControl): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQAudioDecoderControl_staticMetaObject())

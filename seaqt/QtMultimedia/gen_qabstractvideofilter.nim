@@ -99,6 +99,10 @@ proc fcQAbstractVideoFilter_virtualbase_childEvent(self: pointer, event: pointer
 proc fcQAbstractVideoFilter_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QAbstractVideoFilter_virtualbase_customEvent".}
 proc fcQAbstractVideoFilter_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QAbstractVideoFilter_virtualbase_connectNotify".}
 proc fcQAbstractVideoFilter_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QAbstractVideoFilter_virtualbase_disconnectNotify".}
+proc fcQAbstractVideoFilter_protectedbase_sender(self: pointer, ): pointer {.importc: "QAbstractVideoFilter_protectedbase_sender".}
+proc fcQAbstractVideoFilter_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QAbstractVideoFilter_protectedbase_senderSignalIndex".}
+proc fcQAbstractVideoFilter_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QAbstractVideoFilter_protectedbase_receivers".}
+proc fcQAbstractVideoFilter_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QAbstractVideoFilter_protectedbase_isSignalConnected".}
 proc fcQAbstractVideoFilter_new(vtbl: pointer, ): ptr cQAbstractVideoFilter {.importc: "QAbstractVideoFilter_new".}
 proc fcQAbstractVideoFilter_new2(vtbl: pointer, parent: pointer): ptr cQAbstractVideoFilter {.importc: "QAbstractVideoFilter_new2".}
 proc fcQAbstractVideoFilter_staticMetaObject(): pointer {.importc: "QAbstractVideoFilter_staticMetaObject".}
@@ -310,6 +314,18 @@ proc miqt_exec_callback_cQAbstractVideoFilter_disconnectNotify(vtbl: pointer, se
   let self = QAbstractVideoFilter(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
   vtbl[].disconnectNotify(self, slotval1)
+
+proc sender*(self: gen_qabstractvideofilter_types.QAbstractVideoFilter, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQAbstractVideoFilter_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qabstractvideofilter_types.QAbstractVideoFilter, ): cint =
+  fcQAbstractVideoFilter_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qabstractvideofilter_types.QAbstractVideoFilter, signal: cstring): cint =
+  fcQAbstractVideoFilter_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qabstractvideofilter_types.QAbstractVideoFilter, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQAbstractVideoFilter_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc create*(T: type gen_qabstractvideofilter_types.QAbstractVideoFilter,
     vtbl: ref QAbstractVideoFilterVTable = nil): gen_qabstractvideofilter_types.QAbstractVideoFilter =

@@ -127,11 +127,11 @@ int QPdfWriter_virtualbase_devType(const void* self);
 void QPdfWriter_virtualbase_initPainter(const void* self, QPainter* painter);
 QPaintDevice* QPdfWriter_virtualbase_redirected(const void* self, QPoint* offset);
 QPainter* QPdfWriter_virtualbase_sharedPainter(const void* self);
-QObject* QPdfWriter_protectedbase_sender(bool* _dynamic_cast_ok, const void* self);
-int QPdfWriter_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
-int QPdfWriter_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
-bool QPdfWriter_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
-QPageLayout* QPdfWriter_protectedbase_devicePageLayout(bool* _dynamic_cast_ok, const void* self);
+QObject* QPdfWriter_protectedbase_sender(const void* self);
+int QPdfWriter_protectedbase_senderSignalIndex(const void* self);
+int QPdfWriter_protectedbase_receivers(const void* self, const char* signal);
+bool QPdfWriter_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
+QPageLayout* QPdfWriter_protectedbase_devicePageLayout(const void* self);
 const QMetaObject* QPdfWriter_staticMetaObject();
 void QPdfWriter_delete(QPdfWriter* self);
 

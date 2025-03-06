@@ -155,6 +155,10 @@ proc fcQRasterWindow_virtualbase_disconnectNotify(self: pointer, signal: pointer
 proc fcQRasterWindow_virtualbase_devType(self: pointer, ): cint {.importc: "QRasterWindow_virtualbase_devType".}
 proc fcQRasterWindow_virtualbase_initPainter(self: pointer, painter: pointer): void {.importc: "QRasterWindow_virtualbase_initPainter".}
 proc fcQRasterWindow_virtualbase_sharedPainter(self: pointer, ): pointer {.importc: "QRasterWindow_virtualbase_sharedPainter".}
+proc fcQRasterWindow_protectedbase_sender(self: pointer, ): pointer {.importc: "QRasterWindow_protectedbase_sender".}
+proc fcQRasterWindow_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QRasterWindow_protectedbase_senderSignalIndex".}
+proc fcQRasterWindow_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QRasterWindow_protectedbase_receivers".}
+proc fcQRasterWindow_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QRasterWindow_protectedbase_isSignalConnected".}
 proc fcQRasterWindow_new(vtbl: pointer, ): ptr cQRasterWindow {.importc: "QRasterWindow_new".}
 proc fcQRasterWindow_new2(vtbl: pointer, parent: pointer): ptr cQRasterWindow {.importc: "QRasterWindow_new2".}
 proc fcQRasterWindow_staticMetaObject(): pointer {.importc: "QRasterWindow_staticMetaObject".}
@@ -639,6 +643,18 @@ proc miqt_exec_callback_cQRasterWindow_sharedPainter(vtbl: pointer, self: pointe
   let self = QRasterWindow(h: self)
   var virtualReturn = vtbl[].sharedPainter(self)
   virtualReturn.h
+
+proc sender*(self: gen_qrasterwindow_types.QRasterWindow, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQRasterWindow_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qrasterwindow_types.QRasterWindow, ): cint =
+  fcQRasterWindow_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qrasterwindow_types.QRasterWindow, signal: cstring): cint =
+  fcQRasterWindow_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qrasterwindow_types.QRasterWindow, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQRasterWindow_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc create*(T: type gen_qrasterwindow_types.QRasterWindow,
     vtbl: ref QRasterWindowVTable = nil): gen_qrasterwindow_types.QRasterWindow =

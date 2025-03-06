@@ -109,6 +109,10 @@ proc fcQDrag_virtualbase_childEvent(self: pointer, event: pointer): void {.impor
 proc fcQDrag_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QDrag_virtualbase_customEvent".}
 proc fcQDrag_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QDrag_virtualbase_connectNotify".}
 proc fcQDrag_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QDrag_virtualbase_disconnectNotify".}
+proc fcQDrag_protectedbase_sender(self: pointer, ): pointer {.importc: "QDrag_protectedbase_sender".}
+proc fcQDrag_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QDrag_protectedbase_senderSignalIndex".}
+proc fcQDrag_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QDrag_protectedbase_receivers".}
+proc fcQDrag_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QDrag_protectedbase_isSignalConnected".}
 proc fcQDrag_new(vtbl: pointer, dragSource: pointer): ptr cQDrag {.importc: "QDrag_new".}
 proc fcQDrag_staticMetaObject(): pointer {.importc: "QDrag_staticMetaObject".}
 proc fcQDrag_delete(self: pointer) {.importc: "QDrag_delete".}
@@ -370,6 +374,18 @@ proc miqt_exec_callback_cQDrag_disconnectNotify(vtbl: pointer, self: pointer, si
   let self = QDrag(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
   vtbl[].disconnectNotify(self, slotval1)
+
+proc sender*(self: gen_qdrag_types.QDrag, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQDrag_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qdrag_types.QDrag, ): cint =
+  fcQDrag_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qdrag_types.QDrag, signal: cstring): cint =
+  fcQDrag_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qdrag_types.QDrag, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQDrag_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc create*(T: type gen_qdrag_types.QDrag,
     dragSource: gen_qobject_types.QObject,

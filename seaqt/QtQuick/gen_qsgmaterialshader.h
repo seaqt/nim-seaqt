@@ -60,8 +60,8 @@ void QSGMaterialShader_virtualbase_compile(void* self);
 void QSGMaterialShader_virtualbase_initialize(void* self);
 const char* QSGMaterialShader_virtualbase_vertexShader(const void* self);
 const char* QSGMaterialShader_virtualbase_fragmentShader(const void* self);
-void QSGMaterialShader_protectedbase_setShaderSourceFile(bool* _dynamic_cast_ok, void* self, QOpenGLShader::ShaderType type, struct miqt_string sourceFile);
-void QSGMaterialShader_protectedbase_setShaderSourceFiles(bool* _dynamic_cast_ok, void* self, QOpenGLShader::ShaderType type, struct miqt_array /* of struct miqt_string */  sourceFiles);
+void QSGMaterialShader_protectedbase_setShaderSourceFile(void* self, QOpenGLShader::ShaderType type, struct miqt_string sourceFile);
+void QSGMaterialShader_protectedbase_setShaderSourceFiles(void* self, QOpenGLShader::ShaderType type, struct miqt_array /* of struct miqt_string */  sourceFiles);
 void QSGMaterialShader_delete(QSGMaterialShader* self);
 
 int QSGMaterialShader__RenderState_dirtyStates(const QSGMaterialShader__RenderState* self);

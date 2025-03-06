@@ -181,6 +181,10 @@ proc fcQQuickView_virtualbase_childEvent(self: pointer, event: pointer): void {.
 proc fcQQuickView_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QQuickView_virtualbase_customEvent".}
 proc fcQQuickView_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QQuickView_virtualbase_connectNotify".}
 proc fcQQuickView_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QQuickView_virtualbase_disconnectNotify".}
+proc fcQQuickView_protectedbase_sender(self: pointer, ): pointer {.importc: "QQuickView_protectedbase_sender".}
+proc fcQQuickView_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QQuickView_protectedbase_senderSignalIndex".}
+proc fcQQuickView_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QQuickView_protectedbase_receivers".}
+proc fcQQuickView_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QQuickView_protectedbase_isSignalConnected".}
 proc fcQQuickView_new(vtbl: pointer, ): ptr cQQuickView {.importc: "QQuickView_new".}
 proc fcQQuickView_new2(vtbl: pointer, engine: pointer, parent: pointer): ptr cQQuickView {.importc: "QQuickView_new2".}
 proc fcQQuickView_new3(vtbl: pointer, source: pointer): ptr cQQuickView {.importc: "QQuickView_new3".}
@@ -673,6 +677,18 @@ proc miqt_exec_callback_cQQuickView_disconnectNotify(vtbl: pointer, self: pointe
   let self = QQuickView(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
   vtbl[].disconnectNotify(self, slotval1)
+
+proc sender*(self: gen_qquickview_types.QQuickView, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQQuickView_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qquickview_types.QQuickView, ): cint =
+  fcQQuickView_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qquickview_types.QQuickView, signal: cstring): cint =
+  fcQQuickView_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qquickview_types.QQuickView, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQQuickView_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc create*(T: type gen_qquickview_types.QQuickView,
     vtbl: ref QQuickViewVTable = nil): gen_qquickview_types.QQuickView =

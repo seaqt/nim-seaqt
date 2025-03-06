@@ -186,6 +186,15 @@ proc fcQKeySequenceEdit_virtualbase_childEvent(self: pointer, event: pointer): v
 proc fcQKeySequenceEdit_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QKeySequenceEdit_virtualbase_customEvent".}
 proc fcQKeySequenceEdit_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QKeySequenceEdit_virtualbase_connectNotify".}
 proc fcQKeySequenceEdit_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QKeySequenceEdit_virtualbase_disconnectNotify".}
+proc fcQKeySequenceEdit_protectedbase_updateMicroFocus(self: pointer, ): void {.importc: "QKeySequenceEdit_protectedbase_updateMicroFocus".}
+proc fcQKeySequenceEdit_protectedbase_create(self: pointer, ): void {.importc: "QKeySequenceEdit_protectedbase_create".}
+proc fcQKeySequenceEdit_protectedbase_destroy(self: pointer, ): void {.importc: "QKeySequenceEdit_protectedbase_destroy".}
+proc fcQKeySequenceEdit_protectedbase_focusNextChild(self: pointer, ): bool {.importc: "QKeySequenceEdit_protectedbase_focusNextChild".}
+proc fcQKeySequenceEdit_protectedbase_focusPreviousChild(self: pointer, ): bool {.importc: "QKeySequenceEdit_protectedbase_focusPreviousChild".}
+proc fcQKeySequenceEdit_protectedbase_sender(self: pointer, ): pointer {.importc: "QKeySequenceEdit_protectedbase_sender".}
+proc fcQKeySequenceEdit_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QKeySequenceEdit_protectedbase_senderSignalIndex".}
+proc fcQKeySequenceEdit_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QKeySequenceEdit_protectedbase_receivers".}
+proc fcQKeySequenceEdit_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QKeySequenceEdit_protectedbase_isSignalConnected".}
 proc fcQKeySequenceEdit_new(vtbl: pointer, parent: pointer): ptr cQKeySequenceEdit {.importc: "QKeySequenceEdit_new".}
 proc fcQKeySequenceEdit_new2(vtbl: pointer, ): ptr cQKeySequenceEdit {.importc: "QKeySequenceEdit_new2".}
 proc fcQKeySequenceEdit_new3(vtbl: pointer, keySequence: pointer): ptr cQKeySequenceEdit {.importc: "QKeySequenceEdit_new3".}
@@ -854,6 +863,33 @@ proc miqt_exec_callback_cQKeySequenceEdit_disconnectNotify(vtbl: pointer, self: 
   let self = QKeySequenceEdit(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
   vtbl[].disconnectNotify(self, slotval1)
+
+proc updateMicroFocus*(self: gen_qkeysequenceedit_types.QKeySequenceEdit, ): void =
+  fcQKeySequenceEdit_protectedbase_updateMicroFocus(self.h)
+
+proc create*(self: gen_qkeysequenceedit_types.QKeySequenceEdit, ): void =
+  fcQKeySequenceEdit_protectedbase_create(self.h)
+
+proc destroy*(self: gen_qkeysequenceedit_types.QKeySequenceEdit, ): void =
+  fcQKeySequenceEdit_protectedbase_destroy(self.h)
+
+proc focusNextChild*(self: gen_qkeysequenceedit_types.QKeySequenceEdit, ): bool =
+  fcQKeySequenceEdit_protectedbase_focusNextChild(self.h)
+
+proc focusPreviousChild*(self: gen_qkeysequenceedit_types.QKeySequenceEdit, ): bool =
+  fcQKeySequenceEdit_protectedbase_focusPreviousChild(self.h)
+
+proc sender*(self: gen_qkeysequenceedit_types.QKeySequenceEdit, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQKeySequenceEdit_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qkeysequenceedit_types.QKeySequenceEdit, ): cint =
+  fcQKeySequenceEdit_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qkeysequenceedit_types.QKeySequenceEdit, signal: cstring): cint =
+  fcQKeySequenceEdit_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qkeysequenceedit_types.QKeySequenceEdit, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQKeySequenceEdit_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc create*(T: type gen_qkeysequenceedit_types.QKeySequenceEdit,
     parent: gen_qwidget_types.QWidget,

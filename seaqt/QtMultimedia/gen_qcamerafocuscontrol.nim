@@ -38,11 +38,15 @@ import ./gen_qcamerafocuscontrol_types
 export gen_qcamerafocuscontrol_types
 
 import
+  ../QtCore/gen_qmetaobject_types,
+  ../QtCore/gen_qobject_types,
   ../QtCore/gen_qobjectdefs_types,
   ../QtCore/gen_qpoint_types,
   ./gen_qcamerafocus_types,
   ./gen_qmediacontrol
 export
+  gen_qmetaobject_types,
+  gen_qobject_types,
   gen_qobjectdefs_types,
   gen_qpoint_types,
   gen_qcamerafocus_types,
@@ -76,6 +80,10 @@ proc fcQCameraFocusControl_tr2(s: cstring, c: cstring): struct_miqt_string {.imp
 proc fcQCameraFocusControl_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QCameraFocusControl_tr3".}
 proc fcQCameraFocusControl_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QCameraFocusControl_trUtf82".}
 proc fcQCameraFocusControl_trUtf83(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QCameraFocusControl_trUtf83".}
+proc fcQCameraFocusControl_protectedbase_sender(self: pointer, ): pointer {.importc: "QCameraFocusControl_protectedbase_sender".}
+proc fcQCameraFocusControl_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QCameraFocusControl_protectedbase_senderSignalIndex".}
+proc fcQCameraFocusControl_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QCameraFocusControl_protectedbase_receivers".}
+proc fcQCameraFocusControl_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QCameraFocusControl_protectedbase_isSignalConnected".}
 proc fcQCameraFocusControl_staticMetaObject(): pointer {.importc: "QCameraFocusControl_staticMetaObject".}
 proc fcQCameraFocusControl_delete(self: pointer) {.importc: "QCameraFocusControl_delete".}
 
@@ -233,6 +241,18 @@ proc trUtf8*(_: type gen_qcamerafocuscontrol_types.QCameraFocusControl, s: cstri
   let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
   c_free(v_ms.data)
   vx_ret
+
+proc sender*(self: gen_qcamerafocuscontrol_types.QCameraFocusControl, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQCameraFocusControl_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qcamerafocuscontrol_types.QCameraFocusControl, ): cint =
+  fcQCameraFocusControl_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qcamerafocuscontrol_types.QCameraFocusControl, signal: cstring): cint =
+  fcQCameraFocusControl_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qcamerafocuscontrol_types.QCameraFocusControl, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQCameraFocusControl_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc staticMetaObject*(_: type gen_qcamerafocuscontrol_types.QCameraFocusControl): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQCameraFocusControl_staticMetaObject())

@@ -115,6 +115,10 @@ proc fcQState_virtualbase_childEvent(self: pointer, event: pointer): void {.impo
 proc fcQState_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QState_virtualbase_customEvent".}
 proc fcQState_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QState_virtualbase_connectNotify".}
 proc fcQState_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QState_virtualbase_disconnectNotify".}
+proc fcQState_protectedbase_sender(self: pointer, ): pointer {.importc: "QState_protectedbase_sender".}
+proc fcQState_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QState_protectedbase_senderSignalIndex".}
+proc fcQState_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QState_protectedbase_receivers".}
+proc fcQState_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QState_protectedbase_isSignalConnected".}
 proc fcQState_new(vtbl: pointer, ): ptr cQState {.importc: "QState_new".}
 proc fcQState_new2(vtbl: pointer, childMode: cint): ptr cQState {.importc: "QState_new2".}
 proc fcQState_new3(vtbl: pointer, parent: pointer): ptr cQState {.importc: "QState_new3".}
@@ -348,6 +352,18 @@ proc miqt_exec_callback_cQState_disconnectNotify(vtbl: pointer, self: pointer, s
   let self = QState(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
   vtbl[].disconnectNotify(self, slotval1)
+
+proc sender*(self: gen_qstate_types.QState, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQState_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qstate_types.QState, ): cint =
+  fcQState_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qstate_types.QState, signal: cstring): cint =
+  fcQState_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qstate_types.QState, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQState_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc create*(T: type gen_qstate_types.QState,
     vtbl: ref QStateVTable = nil): gen_qstate_types.QState =

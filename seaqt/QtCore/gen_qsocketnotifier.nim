@@ -92,6 +92,10 @@ proc fcQSocketNotifier_virtualbase_childEvent(self: pointer, event: pointer): vo
 proc fcQSocketNotifier_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QSocketNotifier_virtualbase_customEvent".}
 proc fcQSocketNotifier_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QSocketNotifier_virtualbase_connectNotify".}
 proc fcQSocketNotifier_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QSocketNotifier_virtualbase_disconnectNotify".}
+proc fcQSocketNotifier_protectedbase_sender(self: pointer, ): pointer {.importc: "QSocketNotifier_protectedbase_sender".}
+proc fcQSocketNotifier_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QSocketNotifier_protectedbase_senderSignalIndex".}
+proc fcQSocketNotifier_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QSocketNotifier_protectedbase_receivers".}
+proc fcQSocketNotifier_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QSocketNotifier_protectedbase_isSignalConnected".}
 proc fcQSocketNotifier_new(vtbl: pointer, socket: uint, param2: cint): ptr cQSocketNotifier {.importc: "QSocketNotifier_new".}
 proc fcQSocketNotifier_new2(vtbl: pointer, socket: uint, param2: cint, parent: pointer): ptr cQSocketNotifier {.importc: "QSocketNotifier_new2".}
 proc fcQSocketNotifier_staticMetaObject(): pointer {.importc: "QSocketNotifier_staticMetaObject".}
@@ -278,6 +282,18 @@ proc miqt_exec_callback_cQSocketNotifier_disconnectNotify(vtbl: pointer, self: p
   let self = QSocketNotifier(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
   vtbl[].disconnectNotify(self, slotval1)
+
+proc sender*(self: gen_qsocketnotifier_types.QSocketNotifier, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQSocketNotifier_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qsocketnotifier_types.QSocketNotifier, ): cint =
+  fcQSocketNotifier_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qsocketnotifier_types.QSocketNotifier, signal: cstring): cint =
+  fcQSocketNotifier_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qsocketnotifier_types.QSocketNotifier, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQSocketNotifier_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc create*(T: type gen_qsocketnotifier_types.QSocketNotifier,
     socket: uint, param2: cint,

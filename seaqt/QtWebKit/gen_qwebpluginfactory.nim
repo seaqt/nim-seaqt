@@ -100,6 +100,10 @@ proc fcQWebPluginFactory_virtualbase_childEvent(self: pointer, event: pointer): 
 proc fcQWebPluginFactory_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QWebPluginFactory_virtualbase_customEvent".}
 proc fcQWebPluginFactory_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QWebPluginFactory_virtualbase_connectNotify".}
 proc fcQWebPluginFactory_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QWebPluginFactory_virtualbase_disconnectNotify".}
+proc fcQWebPluginFactory_protectedbase_sender(self: pointer, ): pointer {.importc: "QWebPluginFactory_protectedbase_sender".}
+proc fcQWebPluginFactory_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QWebPluginFactory_protectedbase_senderSignalIndex".}
+proc fcQWebPluginFactory_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QWebPluginFactory_protectedbase_receivers".}
+proc fcQWebPluginFactory_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QWebPluginFactory_protectedbase_isSignalConnected".}
 proc fcQWebPluginFactory_new(vtbl: pointer, ): ptr cQWebPluginFactory {.importc: "QWebPluginFactory_new".}
 proc fcQWebPluginFactory_new2(vtbl: pointer, parent: pointer): ptr cQWebPluginFactory {.importc: "QWebPluginFactory_new2".}
 proc fcQWebPluginFactory_staticMetaObject(): pointer {.importc: "QWebPluginFactory_staticMetaObject".}
@@ -385,6 +389,18 @@ proc miqt_exec_callback_cQWebPluginFactory_disconnectNotify(vtbl: pointer, self:
   let self = QWebPluginFactory(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
   vtbl[].disconnectNotify(self, slotval1)
+
+proc sender*(self: gen_qwebpluginfactory_types.QWebPluginFactory, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQWebPluginFactory_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qwebpluginfactory_types.QWebPluginFactory, ): cint =
+  fcQWebPluginFactory_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qwebpluginfactory_types.QWebPluginFactory, signal: cstring): cint =
+  fcQWebPluginFactory_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qwebpluginfactory_types.QWebPluginFactory, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQWebPluginFactory_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc create*(T: type gen_qwebpluginfactory_types.QWebPluginFactory,
     vtbl: ref QWebPluginFactoryVTable = nil): gen_qwebpluginfactory_types.QWebPluginFactory =

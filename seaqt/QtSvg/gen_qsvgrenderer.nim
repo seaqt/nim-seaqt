@@ -120,6 +120,10 @@ proc fcQSvgRenderer_virtualbase_childEvent(self: pointer, event: pointer): void 
 proc fcQSvgRenderer_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QSvgRenderer_virtualbase_customEvent".}
 proc fcQSvgRenderer_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QSvgRenderer_virtualbase_connectNotify".}
 proc fcQSvgRenderer_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QSvgRenderer_virtualbase_disconnectNotify".}
+proc fcQSvgRenderer_protectedbase_sender(self: pointer, ): pointer {.importc: "QSvgRenderer_protectedbase_sender".}
+proc fcQSvgRenderer_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QSvgRenderer_protectedbase_senderSignalIndex".}
+proc fcQSvgRenderer_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QSvgRenderer_protectedbase_receivers".}
+proc fcQSvgRenderer_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QSvgRenderer_protectedbase_isSignalConnected".}
 proc fcQSvgRenderer_new(vtbl: pointer, ): ptr cQSvgRenderer {.importc: "QSvgRenderer_new".}
 proc fcQSvgRenderer_new2(vtbl: pointer, filename: struct_miqt_string): ptr cQSvgRenderer {.importc: "QSvgRenderer_new2".}
 proc fcQSvgRenderer_new3(vtbl: pointer, contents: struct_miqt_string): ptr cQSvgRenderer {.importc: "QSvgRenderer_new3".}
@@ -387,6 +391,18 @@ proc miqt_exec_callback_cQSvgRenderer_disconnectNotify(vtbl: pointer, self: poin
   let self = QSvgRenderer(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
   vtbl[].disconnectNotify(self, slotval1)
+
+proc sender*(self: gen_qsvgrenderer_types.QSvgRenderer, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQSvgRenderer_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qsvgrenderer_types.QSvgRenderer, ): cint =
+  fcQSvgRenderer_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qsvgrenderer_types.QSvgRenderer, signal: cstring): cint =
+  fcQSvgRenderer_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qsvgrenderer_types.QSvgRenderer, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQSvgRenderer_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc create*(T: type gen_qsvgrenderer_types.QSvgRenderer,
     vtbl: ref QSvgRendererVTable = nil): gen_qsvgrenderer_types.QSvgRenderer =

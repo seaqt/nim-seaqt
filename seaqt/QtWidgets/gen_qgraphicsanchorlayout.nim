@@ -39,18 +39,22 @@ export gen_qgraphicsanchorlayout_types
 
 import
   ../QtCore/gen_qcoreevent_types,
+  ../QtCore/gen_qmetaobject_types,
   ../QtCore/gen_qobject,
   ../QtCore/gen_qobjectdefs_types,
   ../QtCore/gen_qrect_types,
   ../QtCore/gen_qsize_types,
+  ./gen_qgraphicsitem_types,
   ./gen_qgraphicslayout,
   ./gen_qgraphicslayoutitem_types
 export
   gen_qcoreevent_types,
+  gen_qmetaobject_types,
   gen_qobject,
   gen_qobjectdefs_types,
   gen_qrect_types,
   gen_qsize_types,
+  gen_qgraphicsitem_types,
   gen_qgraphicslayout,
   gen_qgraphicslayoutitem_types
 
@@ -71,6 +75,10 @@ proc fcQGraphicsAnchor_tr2(s: cstring, c: cstring): struct_miqt_string {.importc
 proc fcQGraphicsAnchor_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QGraphicsAnchor_tr3".}
 proc fcQGraphicsAnchor_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QGraphicsAnchor_trUtf82".}
 proc fcQGraphicsAnchor_trUtf83(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QGraphicsAnchor_trUtf83".}
+proc fcQGraphicsAnchor_protectedbase_sender(self: pointer, ): pointer {.importc: "QGraphicsAnchor_protectedbase_sender".}
+proc fcQGraphicsAnchor_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QGraphicsAnchor_protectedbase_senderSignalIndex".}
+proc fcQGraphicsAnchor_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QGraphicsAnchor_protectedbase_receivers".}
+proc fcQGraphicsAnchor_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QGraphicsAnchor_protectedbase_isSignalConnected".}
 proc fcQGraphicsAnchor_staticMetaObject(): pointer {.importc: "QGraphicsAnchor_staticMetaObject".}
 proc fcQGraphicsAnchor_delete(self: pointer) {.importc: "QGraphicsAnchor_delete".}
 proc fcQGraphicsAnchorLayout_addAnchor(self: pointer, firstItem: pointer, firstEdge: cint, secondItem: pointer, secondEdge: cint): pointer {.importc: "QGraphicsAnchorLayout_addAnchor".}
@@ -108,6 +116,9 @@ proc fcQGraphicsAnchorLayout_virtualbase_sizeHint(self: pointer, which: cint, co
 proc fcQGraphicsAnchorLayout_virtualbase_getContentsMargins(self: pointer, left: ptr float64, top: ptr float64, right: ptr float64, bottom: ptr float64): void {.importc: "QGraphicsAnchorLayout_virtualbase_getContentsMargins".}
 proc fcQGraphicsAnchorLayout_virtualbase_updateGeometry(self: pointer, ): void {.importc: "QGraphicsAnchorLayout_virtualbase_updateGeometry".}
 proc fcQGraphicsAnchorLayout_virtualbase_widgetEvent(self: pointer, e: pointer): void {.importc: "QGraphicsAnchorLayout_virtualbase_widgetEvent".}
+proc fcQGraphicsAnchorLayout_protectedbase_addChildLayoutItem(self: pointer, layoutItem: pointer): void {.importc: "QGraphicsAnchorLayout_protectedbase_addChildLayoutItem".}
+proc fcQGraphicsAnchorLayout_protectedbase_setGraphicsItem(self: pointer, item: pointer): void {.importc: "QGraphicsAnchorLayout_protectedbase_setGraphicsItem".}
+proc fcQGraphicsAnchorLayout_protectedbase_setOwnedByLayout(self: pointer, ownedByLayout: bool): void {.importc: "QGraphicsAnchorLayout_protectedbase_setOwnedByLayout".}
 proc fcQGraphicsAnchorLayout_new(vtbl: pointer, ): ptr cQGraphicsAnchorLayout {.importc: "QGraphicsAnchorLayout_new".}
 proc fcQGraphicsAnchorLayout_new2(vtbl: pointer, parent: pointer): ptr cQGraphicsAnchorLayout {.importc: "QGraphicsAnchorLayout_new2".}
 proc fcQGraphicsAnchorLayout_delete(self: pointer) {.importc: "QGraphicsAnchorLayout_delete".}
@@ -171,6 +182,18 @@ proc trUtf8*(_: type gen_qgraphicsanchorlayout_types.QGraphicsAnchor, s: cstring
   let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
   c_free(v_ms.data)
   vx_ret
+
+proc sender*(self: gen_qgraphicsanchorlayout_types.QGraphicsAnchor, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQGraphicsAnchor_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qgraphicsanchorlayout_types.QGraphicsAnchor, ): cint =
+  fcQGraphicsAnchor_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qgraphicsanchorlayout_types.QGraphicsAnchor, signal: cstring): cint =
+  fcQGraphicsAnchor_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qgraphicsanchorlayout_types.QGraphicsAnchor, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQGraphicsAnchor_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc staticMetaObject*(_: type gen_qgraphicsanchorlayout_types.QGraphicsAnchor): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQGraphicsAnchor_staticMetaObject())
@@ -325,6 +348,15 @@ proc miqt_exec_callback_cQGraphicsAnchorLayout_widgetEvent(vtbl: pointer, self: 
   let self = QGraphicsAnchorLayout(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: e)
   vtbl[].widgetEvent(self, slotval1)
+
+proc addChildLayoutItem*(self: gen_qgraphicsanchorlayout_types.QGraphicsAnchorLayout, layoutItem: gen_qgraphicslayoutitem_types.QGraphicsLayoutItem): void =
+  fcQGraphicsAnchorLayout_protectedbase_addChildLayoutItem(self.h, layoutItem.h)
+
+proc setGraphicsItem*(self: gen_qgraphicsanchorlayout_types.QGraphicsAnchorLayout, item: gen_qgraphicsitem_types.QGraphicsItem): void =
+  fcQGraphicsAnchorLayout_protectedbase_setGraphicsItem(self.h, item.h)
+
+proc setOwnedByLayout*(self: gen_qgraphicsanchorlayout_types.QGraphicsAnchorLayout, ownedByLayout: bool): void =
+  fcQGraphicsAnchorLayout_protectedbase_setOwnedByLayout(self.h, ownedByLayout)
 
 proc create*(T: type gen_qgraphicsanchorlayout_types.QGraphicsAnchorLayout,
     vtbl: ref QGraphicsAnchorLayoutVTable = nil): gen_qgraphicsanchorlayout_types.QGraphicsAnchorLayout =

@@ -97,6 +97,10 @@ proc fcQQmlPropertyMap_virtualbase_childEvent(self: pointer, event: pointer): vo
 proc fcQQmlPropertyMap_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QQmlPropertyMap_virtualbase_customEvent".}
 proc fcQQmlPropertyMap_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QQmlPropertyMap_virtualbase_connectNotify".}
 proc fcQQmlPropertyMap_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QQmlPropertyMap_virtualbase_disconnectNotify".}
+proc fcQQmlPropertyMap_protectedbase_sender(self: pointer, ): pointer {.importc: "QQmlPropertyMap_protectedbase_sender".}
+proc fcQQmlPropertyMap_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QQmlPropertyMap_protectedbase_senderSignalIndex".}
+proc fcQQmlPropertyMap_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QQmlPropertyMap_protectedbase_receivers".}
+proc fcQQmlPropertyMap_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QQmlPropertyMap_protectedbase_isSignalConnected".}
 proc fcQQmlPropertyMap_new(vtbl: pointer, ): ptr cQQmlPropertyMap {.importc: "QQmlPropertyMap_new".}
 proc fcQQmlPropertyMap_new2(vtbl: pointer, parent: pointer): ptr cQQmlPropertyMap {.importc: "QQmlPropertyMap_new2".}
 proc fcQQmlPropertyMap_staticMetaObject(): pointer {.importc: "QQmlPropertyMap_staticMetaObject".}
@@ -344,6 +348,18 @@ proc miqt_exec_callback_cQQmlPropertyMap_disconnectNotify(vtbl: pointer, self: p
   let self = QQmlPropertyMap(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
   vtbl[].disconnectNotify(self, slotval1)
+
+proc sender*(self: gen_qqmlpropertymap_types.QQmlPropertyMap, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQQmlPropertyMap_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qqmlpropertymap_types.QQmlPropertyMap, ): cint =
+  fcQQmlPropertyMap_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qqmlpropertymap_types.QQmlPropertyMap, signal: cstring): cint =
+  fcQQmlPropertyMap_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qqmlpropertymap_types.QQmlPropertyMap, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQQmlPropertyMap_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc create*(T: type gen_qqmlpropertymap_types.QQmlPropertyMap,
     vtbl: ref QQmlPropertyMapVTable = nil): gen_qqmlpropertymap_types.QQmlPropertyMap =

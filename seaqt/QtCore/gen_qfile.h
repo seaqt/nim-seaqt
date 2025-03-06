@@ -144,12 +144,12 @@ void QFile_virtualbase_childEvent(void* self, QChildEvent* event);
 void QFile_virtualbase_customEvent(void* self, QEvent* event);
 void QFile_virtualbase_connectNotify(void* self, QMetaMethod* signal);
 void QFile_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
-void QFile_protectedbase_setOpenMode(bool* _dynamic_cast_ok, void* self, int openMode);
-void QFile_protectedbase_setErrorString(bool* _dynamic_cast_ok, void* self, struct miqt_string errorString);
-QObject* QFile_protectedbase_sender(bool* _dynamic_cast_ok, const void* self);
-int QFile_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
-int QFile_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
-bool QFile_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+void QFile_protectedbase_setOpenMode(void* self, int openMode);
+void QFile_protectedbase_setErrorString(void* self, struct miqt_string errorString);
+QObject* QFile_protectedbase_sender(const void* self);
+int QFile_protectedbase_senderSignalIndex(const void* self);
+int QFile_protectedbase_receivers(const void* self, const char* signal);
+bool QFile_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
 const QMetaObject* QFile_staticMetaObject();
 void QFile_delete(QFile* self);
 

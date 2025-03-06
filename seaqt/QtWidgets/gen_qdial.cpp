@@ -833,18 +833,18 @@ public:
 	friend void QDial_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
 
 	// Wrappers to allow calling protected methods:
-	friend void QDial_protectedbase_initStyleOption(bool* _dynamic_cast_ok, const void* self, QStyleOptionSlider* option);
-	friend void QDial_protectedbase_setRepeatAction(bool* _dynamic_cast_ok, void* self, int action);
-	friend int QDial_protectedbase_repeatAction(bool* _dynamic_cast_ok, const void* self);
-	friend void QDial_protectedbase_updateMicroFocus(bool* _dynamic_cast_ok, void* self);
-	friend void QDial_protectedbase_create(bool* _dynamic_cast_ok, void* self);
-	friend void QDial_protectedbase_destroy(bool* _dynamic_cast_ok, void* self);
-	friend bool QDial_protectedbase_focusNextChild(bool* _dynamic_cast_ok, void* self);
-	friend bool QDial_protectedbase_focusPreviousChild(bool* _dynamic_cast_ok, void* self);
-	friend QObject* QDial_protectedbase_sender(bool* _dynamic_cast_ok, const void* self);
-	friend int QDial_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
-	friend int QDial_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
-	friend bool QDial_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+	friend void QDial_protectedbase_initStyleOption(const void* self, QStyleOptionSlider* option);
+	friend void QDial_protectedbase_setRepeatAction(void* self, int action);
+	friend int QDial_protectedbase_repeatAction(const void* self);
+	friend void QDial_protectedbase_updateMicroFocus(void* self);
+	friend void QDial_protectedbase_create(void* self);
+	friend void QDial_protectedbase_destroy(void* self);
+	friend bool QDial_protectedbase_focusNextChild(void* self);
+	friend bool QDial_protectedbase_focusPreviousChild(void* self);
+	friend QObject* QDial_protectedbase_sender(const void* self);
+	friend int QDial_protectedbase_senderSignalIndex(const void* self);
+	friend int QDial_protectedbase_receivers(const void* self, const char* signal);
+	friend bool QDial_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
 };
 
 QDial* QDial_new(struct QDial_VTable* vtbl, QWidget* parent) {
@@ -1282,158 +1282,86 @@ void QDial_virtualbase_disconnectNotify(void* self, QMetaMethod* signal) {
 }
 
 const QMetaObject* QDial_staticMetaObject() { return &QDial::staticMetaObject; }
-void QDial_protectedbase_initStyleOption(bool* _dynamic_cast_ok, const void* self, QStyleOptionSlider* option) {
-	VirtualQDial* self_cast = dynamic_cast<VirtualQDial*>( (QDial*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QDial_protectedbase_initStyleOption(const void* self, QStyleOptionSlider* option) {
+	VirtualQDial* self_cast = static_cast<VirtualQDial*>( (QDial*)(self) );
 	
 	self_cast->initStyleOption(option);
 
 }
 
-void QDial_protectedbase_setRepeatAction(bool* _dynamic_cast_ok, void* self, int action) {
-	VirtualQDial* self_cast = dynamic_cast<VirtualQDial*>( (QDial*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QDial_protectedbase_setRepeatAction(void* self, int action) {
+	VirtualQDial* self_cast = static_cast<VirtualQDial*>( (QDial*)(self) );
 	
 	self_cast->setRepeatAction(static_cast<VirtualQDial::SliderAction>(action));
 
 }
 
-int QDial_protectedbase_repeatAction(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQDial* self_cast = dynamic_cast<VirtualQDial*>( (QDial*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return (int)(0);
-	}
-	
-	*_dynamic_cast_ok = true;
+int QDial_protectedbase_repeatAction(const void* self) {
+	VirtualQDial* self_cast = static_cast<VirtualQDial*>( (QDial*)(self) );
 	
 	VirtualQDial::SliderAction _ret = self_cast->repeatAction();
 	return static_cast<int>(_ret);
 
 }
 
-void QDial_protectedbase_updateMicroFocus(bool* _dynamic_cast_ok, void* self) {
-	VirtualQDial* self_cast = dynamic_cast<VirtualQDial*>( (QDial*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QDial_protectedbase_updateMicroFocus(void* self) {
+	VirtualQDial* self_cast = static_cast<VirtualQDial*>( (QDial*)(self) );
 	
 	self_cast->updateMicroFocus();
 
 }
 
-void QDial_protectedbase_create(bool* _dynamic_cast_ok, void* self) {
-	VirtualQDial* self_cast = dynamic_cast<VirtualQDial*>( (QDial*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QDial_protectedbase_create(void* self) {
+	VirtualQDial* self_cast = static_cast<VirtualQDial*>( (QDial*)(self) );
 	
 	self_cast->create();
 
 }
 
-void QDial_protectedbase_destroy(bool* _dynamic_cast_ok, void* self) {
-	VirtualQDial* self_cast = dynamic_cast<VirtualQDial*>( (QDial*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QDial_protectedbase_destroy(void* self) {
+	VirtualQDial* self_cast = static_cast<VirtualQDial*>( (QDial*)(self) );
 	
 	self_cast->destroy();
 
 }
 
-bool QDial_protectedbase_focusNextChild(bool* _dynamic_cast_ok, void* self) {
-	VirtualQDial* self_cast = dynamic_cast<VirtualQDial*>( (QDial*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return false;
-	}
-	
-	*_dynamic_cast_ok = true;
+bool QDial_protectedbase_focusNextChild(void* self) {
+	VirtualQDial* self_cast = static_cast<VirtualQDial*>( (QDial*)(self) );
 	
 	return self_cast->focusNextChild();
 
 }
 
-bool QDial_protectedbase_focusPreviousChild(bool* _dynamic_cast_ok, void* self) {
-	VirtualQDial* self_cast = dynamic_cast<VirtualQDial*>( (QDial*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return false;
-	}
-	
-	*_dynamic_cast_ok = true;
+bool QDial_protectedbase_focusPreviousChild(void* self) {
+	VirtualQDial* self_cast = static_cast<VirtualQDial*>( (QDial*)(self) );
 	
 	return self_cast->focusPreviousChild();
 
 }
 
-QObject* QDial_protectedbase_sender(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQDial* self_cast = dynamic_cast<VirtualQDial*>( (QDial*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return nullptr;
-	}
-	
-	*_dynamic_cast_ok = true;
+QObject* QDial_protectedbase_sender(const void* self) {
+	VirtualQDial* self_cast = static_cast<VirtualQDial*>( (QDial*)(self) );
 	
 	return self_cast->sender();
 
 }
 
-int QDial_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQDial* self_cast = dynamic_cast<VirtualQDial*>( (QDial*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return 0;
-	}
-	
-	*_dynamic_cast_ok = true;
+int QDial_protectedbase_senderSignalIndex(const void* self) {
+	VirtualQDial* self_cast = static_cast<VirtualQDial*>( (QDial*)(self) );
 	
 	return self_cast->senderSignalIndex();
 
 }
 
-int QDial_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal) {
-	VirtualQDial* self_cast = dynamic_cast<VirtualQDial*>( (QDial*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return 0;
-	}
-	
-	*_dynamic_cast_ok = true;
+int QDial_protectedbase_receivers(const void* self, const char* signal) {
+	VirtualQDial* self_cast = static_cast<VirtualQDial*>( (QDial*)(self) );
 	
 	return self_cast->receivers(signal);
 
 }
 
-bool QDial_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal) {
-	VirtualQDial* self_cast = dynamic_cast<VirtualQDial*>( (QDial*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return false;
-	}
-	
-	*_dynamic_cast_ok = true;
+bool QDial_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal) {
+	VirtualQDial* self_cast = static_cast<VirtualQDial*>( (QDial*)(self) );
 	
 	return self_cast->isSignalConnected(*signal);
 

@@ -110,6 +110,10 @@ proc fcQAudioInput_virtualbase_childEvent(self: pointer, event: pointer): void {
 proc fcQAudioInput_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QAudioInput_virtualbase_customEvent".}
 proc fcQAudioInput_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QAudioInput_virtualbase_connectNotify".}
 proc fcQAudioInput_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QAudioInput_virtualbase_disconnectNotify".}
+proc fcQAudioInput_protectedbase_sender(self: pointer, ): pointer {.importc: "QAudioInput_protectedbase_sender".}
+proc fcQAudioInput_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QAudioInput_protectedbase_senderSignalIndex".}
+proc fcQAudioInput_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QAudioInput_protectedbase_receivers".}
+proc fcQAudioInput_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QAudioInput_protectedbase_isSignalConnected".}
 proc fcQAudioInput_new(vtbl: pointer, ): ptr cQAudioInput {.importc: "QAudioInput_new".}
 proc fcQAudioInput_new2(vtbl: pointer, audioDeviceInfo: pointer): ptr cQAudioInput {.importc: "QAudioInput_new2".}
 proc fcQAudioInput_new3(vtbl: pointer, format: pointer): ptr cQAudioInput {.importc: "QAudioInput_new3".}
@@ -377,6 +381,18 @@ proc miqt_exec_callback_cQAudioInput_disconnectNotify(vtbl: pointer, self: point
   let self = QAudioInput(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
   vtbl[].disconnectNotify(self, slotval1)
+
+proc sender*(self: gen_qaudioinput_types.QAudioInput, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQAudioInput_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qaudioinput_types.QAudioInput, ): cint =
+  fcQAudioInput_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qaudioinput_types.QAudioInput, signal: cstring): cint =
+  fcQAudioInput_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qaudioinput_types.QAudioInput, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQAudioInput_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc create*(T: type gen_qaudioinput_types.QAudioInput,
     vtbl: ref QAudioInputVTable = nil): gen_qaudioinput_types.QAudioInput =

@@ -126,10 +126,10 @@ void QCameraImageCapture_virtualbase_childEvent(void* self, QChildEvent* event);
 void QCameraImageCapture_virtualbase_customEvent(void* self, QEvent* event);
 void QCameraImageCapture_virtualbase_connectNotify(void* self, QMetaMethod* signal);
 void QCameraImageCapture_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
-QObject* QCameraImageCapture_protectedbase_sender(bool* _dynamic_cast_ok, const void* self);
-int QCameraImageCapture_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
-int QCameraImageCapture_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
-bool QCameraImageCapture_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+QObject* QCameraImageCapture_protectedbase_sender(const void* self);
+int QCameraImageCapture_protectedbase_senderSignalIndex(const void* self);
+int QCameraImageCapture_protectedbase_receivers(const void* self, const char* signal);
+bool QCameraImageCapture_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
 const QMetaObject* QCameraImageCapture_staticMetaObject();
 void QCameraImageCapture_delete(QCameraImageCapture* self);
 

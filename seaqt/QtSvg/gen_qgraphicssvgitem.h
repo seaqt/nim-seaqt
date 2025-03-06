@@ -188,14 +188,14 @@ QVariant* QGraphicsSvgItem_virtualbase_itemChange(void* self, int change, QVaria
 bool QGraphicsSvgItem_virtualbase_supportsExtension(const void* self, int extension);
 void QGraphicsSvgItem_virtualbase_setExtension(void* self, int extension, QVariant* variant);
 QVariant* QGraphicsSvgItem_virtualbase_extension(const void* self, QVariant* variant);
-void QGraphicsSvgItem_protectedbase_updateMicroFocus(bool* _dynamic_cast_ok, void* self);
-QObject* QGraphicsSvgItem_protectedbase_sender(bool* _dynamic_cast_ok, const void* self);
-int QGraphicsSvgItem_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
-int QGraphicsSvgItem_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
-bool QGraphicsSvgItem_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
-void QGraphicsSvgItem_protectedbase_addToIndex(bool* _dynamic_cast_ok, void* self);
-void QGraphicsSvgItem_protectedbase_removeFromIndex(bool* _dynamic_cast_ok, void* self);
-void QGraphicsSvgItem_protectedbase_prepareGeometryChange(bool* _dynamic_cast_ok, void* self);
+void QGraphicsSvgItem_protectedbase_updateMicroFocus(void* self);
+QObject* QGraphicsSvgItem_protectedbase_sender(const void* self);
+int QGraphicsSvgItem_protectedbase_senderSignalIndex(const void* self);
+int QGraphicsSvgItem_protectedbase_receivers(const void* self, const char* signal);
+bool QGraphicsSvgItem_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
+void QGraphicsSvgItem_protectedbase_addToIndex(void* self);
+void QGraphicsSvgItem_protectedbase_removeFromIndex(void* self);
+void QGraphicsSvgItem_protectedbase_prepareGeometryChange(void* self);
 const QMetaObject* QGraphicsSvgItem_staticMetaObject();
 void QGraphicsSvgItem_delete(QGraphicsSvgItem* self);
 

@@ -219,6 +219,15 @@ proc fcQQuickPaintedItem_virtualbase_childEvent(self: pointer, event: pointer): 
 proc fcQQuickPaintedItem_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QQuickPaintedItem_virtualbase_customEvent".}
 proc fcQQuickPaintedItem_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QQuickPaintedItem_virtualbase_connectNotify".}
 proc fcQQuickPaintedItem_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QQuickPaintedItem_virtualbase_disconnectNotify".}
+proc fcQQuickPaintedItem_protectedbase_isComponentComplete(self: pointer, ): bool {.importc: "QQuickPaintedItem_protectedbase_isComponentComplete".}
+proc fcQQuickPaintedItem_protectedbase_updateInputMethod(self: pointer, ): void {.importc: "QQuickPaintedItem_protectedbase_updateInputMethod".}
+proc fcQQuickPaintedItem_protectedbase_widthValid(self: pointer, ): bool {.importc: "QQuickPaintedItem_protectedbase_widthValid".}
+proc fcQQuickPaintedItem_protectedbase_heightValid(self: pointer, ): bool {.importc: "QQuickPaintedItem_protectedbase_heightValid".}
+proc fcQQuickPaintedItem_protectedbase_setImplicitSize(self: pointer, param1: float64, param2: float64): void {.importc: "QQuickPaintedItem_protectedbase_setImplicitSize".}
+proc fcQQuickPaintedItem_protectedbase_sender(self: pointer, ): pointer {.importc: "QQuickPaintedItem_protectedbase_sender".}
+proc fcQQuickPaintedItem_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QQuickPaintedItem_protectedbase_senderSignalIndex".}
+proc fcQQuickPaintedItem_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QQuickPaintedItem_protectedbase_receivers".}
+proc fcQQuickPaintedItem_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QQuickPaintedItem_protectedbase_isSignalConnected".}
 proc fcQQuickPaintedItem_new(vtbl: pointer, ): ptr cQQuickPaintedItem {.importc: "QQuickPaintedItem_new".}
 proc fcQQuickPaintedItem_new2(vtbl: pointer, parent: pointer): ptr cQQuickPaintedItem {.importc: "QQuickPaintedItem_new2".}
 proc fcQQuickPaintedItem_staticMetaObject(): pointer {.importc: "QQuickPaintedItem_staticMetaObject".}
@@ -952,6 +961,33 @@ proc miqt_exec_callback_cQQuickPaintedItem_disconnectNotify(vtbl: pointer, self:
   let self = QQuickPaintedItem(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
   vtbl[].disconnectNotify(self, slotval1)
+
+proc isComponentComplete*(self: gen_qquickpainteditem_types.QQuickPaintedItem, ): bool =
+  fcQQuickPaintedItem_protectedbase_isComponentComplete(self.h)
+
+proc updateInputMethod*(self: gen_qquickpainteditem_types.QQuickPaintedItem, ): void =
+  fcQQuickPaintedItem_protectedbase_updateInputMethod(self.h)
+
+proc widthValid*(self: gen_qquickpainteditem_types.QQuickPaintedItem, ): bool =
+  fcQQuickPaintedItem_protectedbase_widthValid(self.h)
+
+proc heightValid*(self: gen_qquickpainteditem_types.QQuickPaintedItem, ): bool =
+  fcQQuickPaintedItem_protectedbase_heightValid(self.h)
+
+proc setImplicitSize*(self: gen_qquickpainteditem_types.QQuickPaintedItem, param1: float64, param2: float64): void =
+  fcQQuickPaintedItem_protectedbase_setImplicitSize(self.h, param1, param2)
+
+proc sender*(self: gen_qquickpainteditem_types.QQuickPaintedItem, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQQuickPaintedItem_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qquickpainteditem_types.QQuickPaintedItem, ): cint =
+  fcQQuickPaintedItem_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qquickpainteditem_types.QQuickPaintedItem, signal: cstring): cint =
+  fcQQuickPaintedItem_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qquickpainteditem_types.QQuickPaintedItem, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQQuickPaintedItem_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc create*(T: type gen_qquickpainteditem_types.QQuickPaintedItem,
     vtbl: ref QQuickPaintedItemVTable = nil): gen_qquickpainteditem_types.QQuickPaintedItem =

@@ -95,8 +95,8 @@ public:
 	}
 
 	// Wrappers to allow calling protected methods:
-	friend void QGraphicsLayoutItem_protectedbase_setGraphicsItem(bool* _dynamic_cast_ok, void* self, QGraphicsItem* item);
-	friend void QGraphicsLayoutItem_protectedbase_setOwnedByLayout(bool* _dynamic_cast_ok, void* self, bool ownedByLayout);
+	friend void QGraphicsLayoutItem_protectedbase_setGraphicsItem(void* self, QGraphicsItem* item);
+	friend void QGraphicsLayoutItem_protectedbase_setOwnedByLayout(void* self, bool ownedByLayout);
 };
 
 QGraphicsLayoutItem* QGraphicsLayoutItem_new(struct QGraphicsLayoutItem_VTable* vtbl) {
@@ -283,27 +283,15 @@ void QGraphicsLayoutItem_virtualbase_updateGeometry(void* self) {
 
 }
 
-void QGraphicsLayoutItem_protectedbase_setGraphicsItem(bool* _dynamic_cast_ok, void* self, QGraphicsItem* item) {
-	VirtualQGraphicsLayoutItem* self_cast = dynamic_cast<VirtualQGraphicsLayoutItem*>( (QGraphicsLayoutItem*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QGraphicsLayoutItem_protectedbase_setGraphicsItem(void* self, QGraphicsItem* item) {
+	VirtualQGraphicsLayoutItem* self_cast = static_cast<VirtualQGraphicsLayoutItem*>( (QGraphicsLayoutItem*)(self) );
 	
 	self_cast->setGraphicsItem(item);
 
 }
 
-void QGraphicsLayoutItem_protectedbase_setOwnedByLayout(bool* _dynamic_cast_ok, void* self, bool ownedByLayout) {
-	VirtualQGraphicsLayoutItem* self_cast = dynamic_cast<VirtualQGraphicsLayoutItem*>( (QGraphicsLayoutItem*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QGraphicsLayoutItem_protectedbase_setOwnedByLayout(void* self, bool ownedByLayout) {
+	VirtualQGraphicsLayoutItem* self_cast = static_cast<VirtualQGraphicsLayoutItem*>( (QGraphicsLayoutItem*)(self) );
 	
 	self_cast->setOwnedByLayout(ownedByLayout);
 

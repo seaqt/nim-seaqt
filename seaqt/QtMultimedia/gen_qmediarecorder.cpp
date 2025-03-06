@@ -223,10 +223,10 @@ public:
 	friend void QMediaRecorder_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
 
 	// Wrappers to allow calling protected methods:
-	friend QObject* QMediaRecorder_protectedbase_sender(bool* _dynamic_cast_ok, const void* self);
-	friend int QMediaRecorder_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
-	friend int QMediaRecorder_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
-	friend bool QMediaRecorder_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+	friend QObject* QMediaRecorder_protectedbase_sender(const void* self);
+	friend int QMediaRecorder_protectedbase_senderSignalIndex(const void* self);
+	friend int QMediaRecorder_protectedbase_receivers(const void* self, const char* signal);
+	friend bool QMediaRecorder_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
 };
 
 QMediaRecorder* QMediaRecorder_new(struct QMediaRecorder_VTable* vtbl, QMediaObject* mediaObject) {
@@ -1000,53 +1000,29 @@ void QMediaRecorder_virtualbase_disconnectNotify(void* self, QMetaMethod* signal
 }
 
 const QMetaObject* QMediaRecorder_staticMetaObject() { return &QMediaRecorder::staticMetaObject; }
-QObject* QMediaRecorder_protectedbase_sender(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQMediaRecorder* self_cast = dynamic_cast<VirtualQMediaRecorder*>( (QMediaRecorder*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return nullptr;
-	}
-	
-	*_dynamic_cast_ok = true;
+QObject* QMediaRecorder_protectedbase_sender(const void* self) {
+	VirtualQMediaRecorder* self_cast = static_cast<VirtualQMediaRecorder*>( (QMediaRecorder*)(self) );
 	
 	return self_cast->sender();
 
 }
 
-int QMediaRecorder_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQMediaRecorder* self_cast = dynamic_cast<VirtualQMediaRecorder*>( (QMediaRecorder*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return 0;
-	}
-	
-	*_dynamic_cast_ok = true;
+int QMediaRecorder_protectedbase_senderSignalIndex(const void* self) {
+	VirtualQMediaRecorder* self_cast = static_cast<VirtualQMediaRecorder*>( (QMediaRecorder*)(self) );
 	
 	return self_cast->senderSignalIndex();
 
 }
 
-int QMediaRecorder_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal) {
-	VirtualQMediaRecorder* self_cast = dynamic_cast<VirtualQMediaRecorder*>( (QMediaRecorder*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return 0;
-	}
-	
-	*_dynamic_cast_ok = true;
+int QMediaRecorder_protectedbase_receivers(const void* self, const char* signal) {
+	VirtualQMediaRecorder* self_cast = static_cast<VirtualQMediaRecorder*>( (QMediaRecorder*)(self) );
 	
 	return self_cast->receivers(signal);
 
 }
 
-bool QMediaRecorder_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal) {
-	VirtualQMediaRecorder* self_cast = dynamic_cast<VirtualQMediaRecorder*>( (QMediaRecorder*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return false;
-	}
-	
-	*_dynamic_cast_ok = true;
+bool QMediaRecorder_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal) {
+	VirtualQMediaRecorder* self_cast = static_cast<VirtualQMediaRecorder*>( (QMediaRecorder*)(self) );
 	
 	return self_cast->isSignalConnected(*signal);
 

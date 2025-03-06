@@ -134,6 +134,12 @@ proc fcQTemporaryFile_virtualbase_childEvent(self: pointer, event: pointer): voi
 proc fcQTemporaryFile_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QTemporaryFile_virtualbase_customEvent".}
 proc fcQTemporaryFile_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QTemporaryFile_virtualbase_connectNotify".}
 proc fcQTemporaryFile_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QTemporaryFile_virtualbase_disconnectNotify".}
+proc fcQTemporaryFile_protectedbase_setOpenMode(self: pointer, openMode: cint): void {.importc: "QTemporaryFile_protectedbase_setOpenMode".}
+proc fcQTemporaryFile_protectedbase_setErrorString(self: pointer, errorString: struct_miqt_string): void {.importc: "QTemporaryFile_protectedbase_setErrorString".}
+proc fcQTemporaryFile_protectedbase_sender(self: pointer, ): pointer {.importc: "QTemporaryFile_protectedbase_sender".}
+proc fcQTemporaryFile_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QTemporaryFile_protectedbase_senderSignalIndex".}
+proc fcQTemporaryFile_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QTemporaryFile_protectedbase_receivers".}
+proc fcQTemporaryFile_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QTemporaryFile_protectedbase_isSignalConnected".}
 proc fcQTemporaryFile_new(vtbl: pointer, ): ptr cQTemporaryFile {.importc: "QTemporaryFile_new".}
 proc fcQTemporaryFile_new2(vtbl: pointer, templateName: struct_miqt_string): ptr cQTemporaryFile {.importc: "QTemporaryFile_new2".}
 proc fcQTemporaryFile_new3(vtbl: pointer, parent: pointer): ptr cQTemporaryFile {.importc: "QTemporaryFile_new3".}
@@ -577,6 +583,24 @@ proc miqt_exec_callback_cQTemporaryFile_disconnectNotify(vtbl: pointer, self: po
   let self = QTemporaryFile(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
   vtbl[].disconnectNotify(self, slotval1)
+
+proc setOpenMode*(self: gen_qtemporaryfile_types.QTemporaryFile, openMode: cint): void =
+  fcQTemporaryFile_protectedbase_setOpenMode(self.h, cint(openMode))
+
+proc setErrorString*(self: gen_qtemporaryfile_types.QTemporaryFile, errorString: string): void =
+  fcQTemporaryFile_protectedbase_setErrorString(self.h, struct_miqt_string(data: errorString, len: csize_t(len(errorString))))
+
+proc sender*(self: gen_qtemporaryfile_types.QTemporaryFile, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQTemporaryFile_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qtemporaryfile_types.QTemporaryFile, ): cint =
+  fcQTemporaryFile_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qtemporaryfile_types.QTemporaryFile, signal: cstring): cint =
+  fcQTemporaryFile_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qtemporaryfile_types.QTemporaryFile, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQTemporaryFile_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc create*(T: type gen_qtemporaryfile_types.QTemporaryFile,
     vtbl: ref QTemporaryFileVTable = nil): gen_qtemporaryfile_types.QTemporaryFile =

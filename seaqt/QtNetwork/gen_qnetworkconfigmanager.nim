@@ -110,6 +110,10 @@ proc fcQNetworkConfigurationManager_virtualbase_childEvent(self: pointer, event:
 proc fcQNetworkConfigurationManager_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QNetworkConfigurationManager_virtualbase_customEvent".}
 proc fcQNetworkConfigurationManager_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QNetworkConfigurationManager_virtualbase_connectNotify".}
 proc fcQNetworkConfigurationManager_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QNetworkConfigurationManager_virtualbase_disconnectNotify".}
+proc fcQNetworkConfigurationManager_protectedbase_sender(self: pointer, ): pointer {.importc: "QNetworkConfigurationManager_protectedbase_sender".}
+proc fcQNetworkConfigurationManager_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QNetworkConfigurationManager_protectedbase_senderSignalIndex".}
+proc fcQNetworkConfigurationManager_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QNetworkConfigurationManager_protectedbase_receivers".}
+proc fcQNetworkConfigurationManager_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QNetworkConfigurationManager_protectedbase_isSignalConnected".}
 proc fcQNetworkConfigurationManager_new(vtbl: pointer, ): ptr cQNetworkConfigurationManager {.importc: "QNetworkConfigurationManager_new".}
 proc fcQNetworkConfigurationManager_new2(vtbl: pointer, parent: pointer): ptr cQNetworkConfigurationManager {.importc: "QNetworkConfigurationManager_new2".}
 proc fcQNetworkConfigurationManager_staticMetaObject(): pointer {.importc: "QNetworkConfigurationManager_staticMetaObject".}
@@ -407,6 +411,18 @@ proc miqt_exec_callback_cQNetworkConfigurationManager_disconnectNotify(vtbl: poi
   let self = QNetworkConfigurationManager(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
   vtbl[].disconnectNotify(self, slotval1)
+
+proc sender*(self: gen_qnetworkconfigmanager_types.QNetworkConfigurationManager, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQNetworkConfigurationManager_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qnetworkconfigmanager_types.QNetworkConfigurationManager, ): cint =
+  fcQNetworkConfigurationManager_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qnetworkconfigmanager_types.QNetworkConfigurationManager, signal: cstring): cint =
+  fcQNetworkConfigurationManager_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qnetworkconfigmanager_types.QNetworkConfigurationManager, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQNetworkConfigurationManager_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc create*(T: type gen_qnetworkconfigmanager_types.QNetworkConfigurationManager,
     vtbl: ref QNetworkConfigurationManagerVTable = nil): gen_qnetworkconfigmanager_types.QNetworkConfigurationManager =

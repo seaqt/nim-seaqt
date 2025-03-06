@@ -83,9 +83,9 @@ QSizeF* QGraphicsLinearLayout_virtualbase_sizeHint(const void* self, int which, 
 void QGraphicsLinearLayout_virtualbase_getContentsMargins(const void* self, double* left, double* top, double* right, double* bottom);
 void QGraphicsLinearLayout_virtualbase_updateGeometry(void* self);
 void QGraphicsLinearLayout_virtualbase_widgetEvent(void* self, QEvent* e);
-void QGraphicsLinearLayout_protectedbase_addChildLayoutItem(bool* _dynamic_cast_ok, void* self, QGraphicsLayoutItem* layoutItem);
-void QGraphicsLinearLayout_protectedbase_setGraphicsItem(bool* _dynamic_cast_ok, void* self, QGraphicsItem* item);
-void QGraphicsLinearLayout_protectedbase_setOwnedByLayout(bool* _dynamic_cast_ok, void* self, bool ownedByLayout);
+void QGraphicsLinearLayout_protectedbase_addChildLayoutItem(void* self, QGraphicsLayoutItem* layoutItem);
+void QGraphicsLinearLayout_protectedbase_setGraphicsItem(void* self, QGraphicsItem* item);
+void QGraphicsLinearLayout_protectedbase_setOwnedByLayout(void* self, bool ownedByLayout);
 void QGraphicsLinearLayout_delete(QGraphicsLinearLayout* self);
 
 #ifdef __cplusplus

@@ -89,6 +89,10 @@ proc fcQFinalState_virtualbase_childEvent(self: pointer, event: pointer): void {
 proc fcQFinalState_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QFinalState_virtualbase_customEvent".}
 proc fcQFinalState_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QFinalState_virtualbase_connectNotify".}
 proc fcQFinalState_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QFinalState_virtualbase_disconnectNotify".}
+proc fcQFinalState_protectedbase_sender(self: pointer, ): pointer {.importc: "QFinalState_protectedbase_sender".}
+proc fcQFinalState_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QFinalState_protectedbase_senderSignalIndex".}
+proc fcQFinalState_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QFinalState_protectedbase_receivers".}
+proc fcQFinalState_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QFinalState_protectedbase_isSignalConnected".}
 proc fcQFinalState_new(vtbl: pointer, ): ptr cQFinalState {.importc: "QFinalState_new".}
 proc fcQFinalState_new2(vtbl: pointer, parent: pointer): ptr cQFinalState {.importc: "QFinalState_new2".}
 proc fcQFinalState_staticMetaObject(): pointer {.importc: "QFinalState_staticMetaObject".}
@@ -279,6 +283,18 @@ proc miqt_exec_callback_cQFinalState_disconnectNotify(vtbl: pointer, self: point
   let self = QFinalState(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
   vtbl[].disconnectNotify(self, slotval1)
+
+proc sender*(self: gen_qfinalstate_types.QFinalState, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQFinalState_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qfinalstate_types.QFinalState, ): cint =
+  fcQFinalState_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qfinalstate_types.QFinalState, signal: cstring): cint =
+  fcQFinalState_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qfinalstate_types.QFinalState, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQFinalState_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc create*(T: type gen_qfinalstate_types.QFinalState,
     vtbl: ref QFinalStateVTable = nil): gen_qfinalstate_types.QFinalState =

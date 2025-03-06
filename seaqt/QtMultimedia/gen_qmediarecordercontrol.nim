@@ -38,10 +38,14 @@ import ./gen_qmediarecordercontrol_types
 export gen_qmediarecordercontrol_types
 
 import
+  ../QtCore/gen_qmetaobject_types,
+  ../QtCore/gen_qobject_types,
   ../QtCore/gen_qobjectdefs_types,
   ../QtCore/gen_qurl_types,
   ./gen_qmediacontrol
 export
+  gen_qmetaobject_types,
+  gen_qobject_types,
   gen_qobjectdefs_types,
   gen_qurl_types,
   gen_qmediacontrol
@@ -82,6 +86,10 @@ proc fcQMediaRecorderControl_tr2(s: cstring, c: cstring): struct_miqt_string {.i
 proc fcQMediaRecorderControl_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QMediaRecorderControl_tr3".}
 proc fcQMediaRecorderControl_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QMediaRecorderControl_trUtf82".}
 proc fcQMediaRecorderControl_trUtf83(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QMediaRecorderControl_trUtf83".}
+proc fcQMediaRecorderControl_protectedbase_sender(self: pointer, ): pointer {.importc: "QMediaRecorderControl_protectedbase_sender".}
+proc fcQMediaRecorderControl_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QMediaRecorderControl_protectedbase_senderSignalIndex".}
+proc fcQMediaRecorderControl_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QMediaRecorderControl_protectedbase_receivers".}
+proc fcQMediaRecorderControl_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QMediaRecorderControl_protectedbase_isSignalConnected".}
 proc fcQMediaRecorderControl_staticMetaObject(): pointer {.importc: "QMediaRecorderControl_staticMetaObject".}
 proc fcQMediaRecorderControl_delete(self: pointer) {.importc: "QMediaRecorderControl_delete".}
 
@@ -307,6 +315,18 @@ proc trUtf8*(_: type gen_qmediarecordercontrol_types.QMediaRecorderControl, s: c
   let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
   c_free(v_ms.data)
   vx_ret
+
+proc sender*(self: gen_qmediarecordercontrol_types.QMediaRecorderControl, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQMediaRecorderControl_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qmediarecordercontrol_types.QMediaRecorderControl, ): cint =
+  fcQMediaRecorderControl_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qmediarecordercontrol_types.QMediaRecorderControl, signal: cstring): cint =
+  fcQMediaRecorderControl_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qmediarecordercontrol_types.QMediaRecorderControl, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQMediaRecorderControl_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc staticMetaObject*(_: type gen_qmediarecordercontrol_types.QMediaRecorderControl): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQMediaRecorderControl_staticMetaObject())

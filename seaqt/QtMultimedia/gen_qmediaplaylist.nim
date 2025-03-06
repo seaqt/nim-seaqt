@@ -167,6 +167,10 @@ proc fcQMediaPlaylist_virtualbase_childEvent(self: pointer, event: pointer): voi
 proc fcQMediaPlaylist_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QMediaPlaylist_virtualbase_customEvent".}
 proc fcQMediaPlaylist_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QMediaPlaylist_virtualbase_connectNotify".}
 proc fcQMediaPlaylist_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QMediaPlaylist_virtualbase_disconnectNotify".}
+proc fcQMediaPlaylist_protectedbase_sender(self: pointer, ): pointer {.importc: "QMediaPlaylist_protectedbase_sender".}
+proc fcQMediaPlaylist_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QMediaPlaylist_protectedbase_senderSignalIndex".}
+proc fcQMediaPlaylist_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QMediaPlaylist_protectedbase_receivers".}
+proc fcQMediaPlaylist_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QMediaPlaylist_protectedbase_isSignalConnected".}
 proc fcQMediaPlaylist_new(vtbl: pointer, ): ptr cQMediaPlaylist {.importc: "QMediaPlaylist_new".}
 proc fcQMediaPlaylist_new2(vtbl: pointer, parent: pointer): ptr cQMediaPlaylist {.importc: "QMediaPlaylist_new2".}
 proc fcQMediaPlaylist_staticMetaObject(): pointer {.importc: "QMediaPlaylist_staticMetaObject".}
@@ -683,6 +687,18 @@ proc miqt_exec_callback_cQMediaPlaylist_disconnectNotify(vtbl: pointer, self: po
   let self = QMediaPlaylist(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
   vtbl[].disconnectNotify(self, slotval1)
+
+proc sender*(self: gen_qmediaplaylist_types.QMediaPlaylist, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQMediaPlaylist_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qmediaplaylist_types.QMediaPlaylist, ): cint =
+  fcQMediaPlaylist_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qmediaplaylist_types.QMediaPlaylist, signal: cstring): cint =
+  fcQMediaPlaylist_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qmediaplaylist_types.QMediaPlaylist, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQMediaPlaylist_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc create*(T: type gen_qmediaplaylist_types.QMediaPlaylist,
     vtbl: ref QMediaPlaylistVTable = nil): gen_qmediaplaylist_types.QMediaPlaylist =

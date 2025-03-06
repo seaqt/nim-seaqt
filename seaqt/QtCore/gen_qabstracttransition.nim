@@ -107,6 +107,10 @@ proc fcQAbstractTransition_virtualbase_childEvent(self: pointer, event: pointer)
 proc fcQAbstractTransition_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QAbstractTransition_virtualbase_customEvent".}
 proc fcQAbstractTransition_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QAbstractTransition_virtualbase_connectNotify".}
 proc fcQAbstractTransition_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QAbstractTransition_virtualbase_disconnectNotify".}
+proc fcQAbstractTransition_protectedbase_sender(self: pointer, ): pointer {.importc: "QAbstractTransition_protectedbase_sender".}
+proc fcQAbstractTransition_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QAbstractTransition_protectedbase_senderSignalIndex".}
+proc fcQAbstractTransition_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QAbstractTransition_protectedbase_receivers".}
+proc fcQAbstractTransition_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QAbstractTransition_protectedbase_isSignalConnected".}
 proc fcQAbstractTransition_new(vtbl: pointer, ): ptr cQAbstractTransition {.importc: "QAbstractTransition_new".}
 proc fcQAbstractTransition_new2(vtbl: pointer, sourceState: pointer): ptr cQAbstractTransition {.importc: "QAbstractTransition_new2".}
 proc fcQAbstractTransition_staticMetaObject(): pointer {.importc: "QAbstractTransition_staticMetaObject".}
@@ -339,6 +343,18 @@ proc miqt_exec_callback_cQAbstractTransition_disconnectNotify(vtbl: pointer, sel
   let self = QAbstractTransition(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
   vtbl[].disconnectNotify(self, slotval1)
+
+proc sender*(self: gen_qabstracttransition_types.QAbstractTransition, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQAbstractTransition_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qabstracttransition_types.QAbstractTransition, ): cint =
+  fcQAbstractTransition_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qabstracttransition_types.QAbstractTransition, signal: cstring): cint =
+  fcQAbstractTransition_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qabstracttransition_types.QAbstractTransition, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQAbstractTransition_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc create*(T: type gen_qabstracttransition_types.QAbstractTransition,
     vtbl: ref QAbstractTransitionVTable = nil): gen_qabstracttransition_types.QAbstractTransition =

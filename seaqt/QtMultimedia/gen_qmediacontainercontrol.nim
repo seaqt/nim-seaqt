@@ -38,9 +38,13 @@ import ./gen_qmediacontainercontrol_types
 export gen_qmediacontainercontrol_types
 
 import
+  ../QtCore/gen_qmetaobject_types,
+  ../QtCore/gen_qobject_types,
   ../QtCore/gen_qobjectdefs_types,
   ./gen_qmediacontrol
 export
+  gen_qmetaobject_types,
+  gen_qobject_types,
   gen_qobjectdefs_types,
   gen_qmediacontrol
 
@@ -59,6 +63,10 @@ proc fcQMediaContainerControl_tr2(s: cstring, c: cstring): struct_miqt_string {.
 proc fcQMediaContainerControl_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QMediaContainerControl_tr3".}
 proc fcQMediaContainerControl_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QMediaContainerControl_trUtf82".}
 proc fcQMediaContainerControl_trUtf83(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QMediaContainerControl_trUtf83".}
+proc fcQMediaContainerControl_protectedbase_sender(self: pointer, ): pointer {.importc: "QMediaContainerControl_protectedbase_sender".}
+proc fcQMediaContainerControl_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QMediaContainerControl_protectedbase_senderSignalIndex".}
+proc fcQMediaContainerControl_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QMediaContainerControl_protectedbase_receivers".}
+proc fcQMediaContainerControl_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QMediaContainerControl_protectedbase_isSignalConnected".}
 proc fcQMediaContainerControl_staticMetaObject(): pointer {.importc: "QMediaContainerControl_staticMetaObject".}
 proc fcQMediaContainerControl_delete(self: pointer) {.importc: "QMediaContainerControl_delete".}
 
@@ -132,6 +140,18 @@ proc trUtf8*(_: type gen_qmediacontainercontrol_types.QMediaContainerControl, s:
   let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
   c_free(v_ms.data)
   vx_ret
+
+proc sender*(self: gen_qmediacontainercontrol_types.QMediaContainerControl, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQMediaContainerControl_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qmediacontainercontrol_types.QMediaContainerControl, ): cint =
+  fcQMediaContainerControl_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qmediacontainercontrol_types.QMediaContainerControl, signal: cstring): cint =
+  fcQMediaContainerControl_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qmediacontainercontrol_types.QMediaContainerControl, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQMediaContainerControl_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc staticMetaObject*(_: type gen_qmediacontainercontrol_types.QMediaContainerControl): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQMediaContainerControl_staticMetaObject())

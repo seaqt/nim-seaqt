@@ -158,6 +158,15 @@ proc fcQStackedLayout_virtualbase_disconnectNotify(self: pointer, signal: pointe
 proc fcQStackedLayout_virtualbase_minimumHeightForWidth(self: pointer, param1: cint): cint {.importc: "QStackedLayout_virtualbase_minimumHeightForWidth".}
 proc fcQStackedLayout_virtualbase_widget(self: pointer, ): pointer {.importc: "QStackedLayout_virtualbase_widget".}
 proc fcQStackedLayout_virtualbase_spacerItem(self: pointer, ): pointer {.importc: "QStackedLayout_virtualbase_spacerItem".}
+proc fcQStackedLayout_protectedbase_widgetEvent(self: pointer, param1: pointer): void {.importc: "QStackedLayout_protectedbase_widgetEvent".}
+proc fcQStackedLayout_protectedbase_addChildLayout(self: pointer, l: pointer): void {.importc: "QStackedLayout_protectedbase_addChildLayout".}
+proc fcQStackedLayout_protectedbase_addChildWidget(self: pointer, w: pointer): void {.importc: "QStackedLayout_protectedbase_addChildWidget".}
+proc fcQStackedLayout_protectedbase_adoptLayout(self: pointer, layout: pointer): bool {.importc: "QStackedLayout_protectedbase_adoptLayout".}
+proc fcQStackedLayout_protectedbase_alignmentRect(self: pointer, param1: pointer): pointer {.importc: "QStackedLayout_protectedbase_alignmentRect".}
+proc fcQStackedLayout_protectedbase_sender(self: pointer, ): pointer {.importc: "QStackedLayout_protectedbase_sender".}
+proc fcQStackedLayout_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QStackedLayout_protectedbase_senderSignalIndex".}
+proc fcQStackedLayout_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QStackedLayout_protectedbase_receivers".}
+proc fcQStackedLayout_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QStackedLayout_protectedbase_isSignalConnected".}
 proc fcQStackedLayout_new(vtbl: pointer, parent: pointer): ptr cQStackedLayout {.importc: "QStackedLayout_new".}
 proc fcQStackedLayout_new2(vtbl: pointer, ): ptr cQStackedLayout {.importc: "QStackedLayout_new2".}
 proc fcQStackedLayout_new3(vtbl: pointer, parentLayout: pointer): ptr cQStackedLayout {.importc: "QStackedLayout_new3".}
@@ -645,6 +654,33 @@ proc miqt_exec_callback_cQStackedLayout_spacerItem(vtbl: pointer, self: pointer)
   let self = QStackedLayout(h: self)
   var virtualReturn = vtbl[].spacerItem(self)
   virtualReturn.h
+
+proc widgetEvent*(self: gen_qstackedlayout_types.QStackedLayout, param1: gen_qcoreevent_types.QEvent): void =
+  fcQStackedLayout_protectedbase_widgetEvent(self.h, param1.h)
+
+proc addChildLayout*(self: gen_qstackedlayout_types.QStackedLayout, l: gen_qlayout_types.QLayout): void =
+  fcQStackedLayout_protectedbase_addChildLayout(self.h, l.h)
+
+proc addChildWidget*(self: gen_qstackedlayout_types.QStackedLayout, w: gen_qwidget_types.QWidget): void =
+  fcQStackedLayout_protectedbase_addChildWidget(self.h, w.h)
+
+proc adoptLayout*(self: gen_qstackedlayout_types.QStackedLayout, layout: gen_qlayout_types.QLayout): bool =
+  fcQStackedLayout_protectedbase_adoptLayout(self.h, layout.h)
+
+proc alignmentRect*(self: gen_qstackedlayout_types.QStackedLayout, param1: gen_qrect_types.QRect): gen_qrect_types.QRect =
+  gen_qrect_types.QRect(h: fcQStackedLayout_protectedbase_alignmentRect(self.h, param1.h))
+
+proc sender*(self: gen_qstackedlayout_types.QStackedLayout, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQStackedLayout_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qstackedlayout_types.QStackedLayout, ): cint =
+  fcQStackedLayout_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qstackedlayout_types.QStackedLayout, signal: cstring): cint =
+  fcQStackedLayout_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qstackedlayout_types.QStackedLayout, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQStackedLayout_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc create*(T: type gen_qstackedlayout_types.QStackedLayout,
     parent: gen_qwidget_types.QWidget,

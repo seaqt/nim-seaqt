@@ -206,10 +206,10 @@ public:
 	friend void QQuickRenderControl_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
 
 	// Wrappers to allow calling protected methods:
-	friend QObject* QQuickRenderControl_protectedbase_sender(bool* _dynamic_cast_ok, const void* self);
-	friend int QQuickRenderControl_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
-	friend int QQuickRenderControl_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
-	friend bool QQuickRenderControl_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+	friend QObject* QQuickRenderControl_protectedbase_sender(const void* self);
+	friend int QQuickRenderControl_protectedbase_senderSignalIndex(const void* self);
+	friend int QQuickRenderControl_protectedbase_receivers(const void* self, const char* signal);
+	friend bool QQuickRenderControl_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
 };
 
 QQuickRenderControl* QQuickRenderControl_new(struct QQuickRenderControl_VTable* vtbl) {
@@ -435,53 +435,29 @@ void QQuickRenderControl_virtualbase_disconnectNotify(void* self, QMetaMethod* s
 }
 
 const QMetaObject* QQuickRenderControl_staticMetaObject() { return &QQuickRenderControl::staticMetaObject; }
-QObject* QQuickRenderControl_protectedbase_sender(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQQuickRenderControl* self_cast = dynamic_cast<VirtualQQuickRenderControl*>( (QQuickRenderControl*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return nullptr;
-	}
-	
-	*_dynamic_cast_ok = true;
+QObject* QQuickRenderControl_protectedbase_sender(const void* self) {
+	VirtualQQuickRenderControl* self_cast = static_cast<VirtualQQuickRenderControl*>( (QQuickRenderControl*)(self) );
 	
 	return self_cast->sender();
 
 }
 
-int QQuickRenderControl_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQQuickRenderControl* self_cast = dynamic_cast<VirtualQQuickRenderControl*>( (QQuickRenderControl*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return 0;
-	}
-	
-	*_dynamic_cast_ok = true;
+int QQuickRenderControl_protectedbase_senderSignalIndex(const void* self) {
+	VirtualQQuickRenderControl* self_cast = static_cast<VirtualQQuickRenderControl*>( (QQuickRenderControl*)(self) );
 	
 	return self_cast->senderSignalIndex();
 
 }
 
-int QQuickRenderControl_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal) {
-	VirtualQQuickRenderControl* self_cast = dynamic_cast<VirtualQQuickRenderControl*>( (QQuickRenderControl*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return 0;
-	}
-	
-	*_dynamic_cast_ok = true;
+int QQuickRenderControl_protectedbase_receivers(const void* self, const char* signal) {
+	VirtualQQuickRenderControl* self_cast = static_cast<VirtualQQuickRenderControl*>( (QQuickRenderControl*)(self) );
 	
 	return self_cast->receivers(signal);
 
 }
 
-bool QQuickRenderControl_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal) {
-	VirtualQQuickRenderControl* self_cast = dynamic_cast<VirtualQQuickRenderControl*>( (QQuickRenderControl*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return false;
-	}
-	
-	*_dynamic_cast_ok = true;
+bool QQuickRenderControl_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal) {
+	VirtualQQuickRenderControl* self_cast = static_cast<VirtualQQuickRenderControl*>( (QQuickRenderControl*)(self) );
 	
 	return self_cast->isSignalConnected(*signal);
 

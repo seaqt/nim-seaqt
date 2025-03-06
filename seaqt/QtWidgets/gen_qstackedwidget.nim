@@ -50,6 +50,7 @@ import
   ../QtGui/gen_qpaintengine_types,
   ../QtGui/gen_qpainter_types,
   ./gen_qframe,
+  ./gen_qstyleoption_types,
   ./gen_qwidget_types
 export
   gen_qcoreevent_types,
@@ -64,6 +65,7 @@ export
   gen_qpaintengine_types,
   gen_qpainter_types,
   gen_qframe,
+  gen_qstyleoption_types,
   gen_qwidget_types
 
 type cQStackedWidget*{.exportc: "QStackedWidget", incompleteStruct.} = object
@@ -193,6 +195,17 @@ proc fcQStackedWidget_virtualbase_childEvent(self: pointer, event: pointer): voi
 proc fcQStackedWidget_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QStackedWidget_virtualbase_customEvent".}
 proc fcQStackedWidget_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QStackedWidget_virtualbase_connectNotify".}
 proc fcQStackedWidget_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QStackedWidget_virtualbase_disconnectNotify".}
+proc fcQStackedWidget_protectedbase_drawFrame(self: pointer, param1: pointer): void {.importc: "QStackedWidget_protectedbase_drawFrame".}
+proc fcQStackedWidget_protectedbase_initStyleOption(self: pointer, option: pointer): void {.importc: "QStackedWidget_protectedbase_initStyleOption".}
+proc fcQStackedWidget_protectedbase_updateMicroFocus(self: pointer, ): void {.importc: "QStackedWidget_protectedbase_updateMicroFocus".}
+proc fcQStackedWidget_protectedbase_create(self: pointer, ): void {.importc: "QStackedWidget_protectedbase_create".}
+proc fcQStackedWidget_protectedbase_destroy(self: pointer, ): void {.importc: "QStackedWidget_protectedbase_destroy".}
+proc fcQStackedWidget_protectedbase_focusNextChild(self: pointer, ): bool {.importc: "QStackedWidget_protectedbase_focusNextChild".}
+proc fcQStackedWidget_protectedbase_focusPreviousChild(self: pointer, ): bool {.importc: "QStackedWidget_protectedbase_focusPreviousChild".}
+proc fcQStackedWidget_protectedbase_sender(self: pointer, ): pointer {.importc: "QStackedWidget_protectedbase_sender".}
+proc fcQStackedWidget_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QStackedWidget_protectedbase_senderSignalIndex".}
+proc fcQStackedWidget_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QStackedWidget_protectedbase_receivers".}
+proc fcQStackedWidget_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QStackedWidget_protectedbase_isSignalConnected".}
 proc fcQStackedWidget_new(vtbl: pointer, parent: pointer): ptr cQStackedWidget {.importc: "QStackedWidget_new".}
 proc fcQStackedWidget_new2(vtbl: pointer, ): ptr cQStackedWidget {.importc: "QStackedWidget_new2".}
 proc fcQStackedWidget_staticMetaObject(): pointer {.importc: "QStackedWidget_staticMetaObject".}
@@ -882,6 +895,39 @@ proc miqt_exec_callback_cQStackedWidget_disconnectNotify(vtbl: pointer, self: po
   let self = QStackedWidget(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
   vtbl[].disconnectNotify(self, slotval1)
+
+proc drawFrame*(self: gen_qstackedwidget_types.QStackedWidget, param1: gen_qpainter_types.QPainter): void =
+  fcQStackedWidget_protectedbase_drawFrame(self.h, param1.h)
+
+proc initStyleOption*(self: gen_qstackedwidget_types.QStackedWidget, option: gen_qstyleoption_types.QStyleOptionFrame): void =
+  fcQStackedWidget_protectedbase_initStyleOption(self.h, option.h)
+
+proc updateMicroFocus*(self: gen_qstackedwidget_types.QStackedWidget, ): void =
+  fcQStackedWidget_protectedbase_updateMicroFocus(self.h)
+
+proc create*(self: gen_qstackedwidget_types.QStackedWidget, ): void =
+  fcQStackedWidget_protectedbase_create(self.h)
+
+proc destroy*(self: gen_qstackedwidget_types.QStackedWidget, ): void =
+  fcQStackedWidget_protectedbase_destroy(self.h)
+
+proc focusNextChild*(self: gen_qstackedwidget_types.QStackedWidget, ): bool =
+  fcQStackedWidget_protectedbase_focusNextChild(self.h)
+
+proc focusPreviousChild*(self: gen_qstackedwidget_types.QStackedWidget, ): bool =
+  fcQStackedWidget_protectedbase_focusPreviousChild(self.h)
+
+proc sender*(self: gen_qstackedwidget_types.QStackedWidget, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQStackedWidget_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qstackedwidget_types.QStackedWidget, ): cint =
+  fcQStackedWidget_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qstackedwidget_types.QStackedWidget, signal: cstring): cint =
+  fcQStackedWidget_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qstackedwidget_types.QStackedWidget, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQStackedWidget_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc create*(T: type gen_qstackedwidget_types.QStackedWidget,
     parent: gen_qwidget_types.QWidget,

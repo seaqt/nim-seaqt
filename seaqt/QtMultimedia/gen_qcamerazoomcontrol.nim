@@ -38,9 +38,13 @@ import ./gen_qcamerazoomcontrol_types
 export gen_qcamerazoomcontrol_types
 
 import
+  ../QtCore/gen_qmetaobject_types,
+  ../QtCore/gen_qobject_types,
   ../QtCore/gen_qobjectdefs_types,
   ./gen_qmediacontrol
 export
+  gen_qmetaobject_types,
+  gen_qobject_types,
   gen_qobjectdefs_types,
   gen_qmediacontrol
 
@@ -74,6 +78,10 @@ proc fcQCameraZoomControl_tr2(s: cstring, c: cstring): struct_miqt_string {.impo
 proc fcQCameraZoomControl_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QCameraZoomControl_tr3".}
 proc fcQCameraZoomControl_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QCameraZoomControl_trUtf82".}
 proc fcQCameraZoomControl_trUtf83(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QCameraZoomControl_trUtf83".}
+proc fcQCameraZoomControl_protectedbase_sender(self: pointer, ): pointer {.importc: "QCameraZoomControl_protectedbase_sender".}
+proc fcQCameraZoomControl_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QCameraZoomControl_protectedbase_senderSignalIndex".}
+proc fcQCameraZoomControl_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QCameraZoomControl_protectedbase_receivers".}
+proc fcQCameraZoomControl_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QCameraZoomControl_protectedbase_isSignalConnected".}
 proc fcQCameraZoomControl_staticMetaObject(): pointer {.importc: "QCameraZoomControl_staticMetaObject".}
 proc fcQCameraZoomControl_delete(self: pointer) {.importc: "QCameraZoomControl_delete".}
 
@@ -262,6 +270,18 @@ proc trUtf8*(_: type gen_qcamerazoomcontrol_types.QCameraZoomControl, s: cstring
   let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
   c_free(v_ms.data)
   vx_ret
+
+proc sender*(self: gen_qcamerazoomcontrol_types.QCameraZoomControl, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQCameraZoomControl_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qcamerazoomcontrol_types.QCameraZoomControl, ): cint =
+  fcQCameraZoomControl_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qcamerazoomcontrol_types.QCameraZoomControl, signal: cstring): cint =
+  fcQCameraZoomControl_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qcamerazoomcontrol_types.QCameraZoomControl, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQCameraZoomControl_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc staticMetaObject*(_: type gen_qcamerazoomcontrol_types.QCameraZoomControl): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQCameraZoomControl_staticMetaObject())

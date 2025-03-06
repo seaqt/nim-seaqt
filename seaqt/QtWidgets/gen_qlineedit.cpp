@@ -825,17 +825,17 @@ public:
 	friend void QLineEdit_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
 
 	// Wrappers to allow calling protected methods:
-	friend void QLineEdit_protectedbase_initStyleOption(bool* _dynamic_cast_ok, const void* self, QStyleOptionFrame* option);
-	friend QRect* QLineEdit_protectedbase_cursorRect(bool* _dynamic_cast_ok, const void* self);
-	friend void QLineEdit_protectedbase_updateMicroFocus(bool* _dynamic_cast_ok, void* self);
-	friend void QLineEdit_protectedbase_create(bool* _dynamic_cast_ok, void* self);
-	friend void QLineEdit_protectedbase_destroy(bool* _dynamic_cast_ok, void* self);
-	friend bool QLineEdit_protectedbase_focusNextChild(bool* _dynamic_cast_ok, void* self);
-	friend bool QLineEdit_protectedbase_focusPreviousChild(bool* _dynamic_cast_ok, void* self);
-	friend QObject* QLineEdit_protectedbase_sender(bool* _dynamic_cast_ok, const void* self);
-	friend int QLineEdit_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
-	friend int QLineEdit_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
-	friend bool QLineEdit_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+	friend void QLineEdit_protectedbase_initStyleOption(const void* self, QStyleOptionFrame* option);
+	friend QRect* QLineEdit_protectedbase_cursorRect(const void* self);
+	friend void QLineEdit_protectedbase_updateMicroFocus(void* self);
+	friend void QLineEdit_protectedbase_create(void* self);
+	friend void QLineEdit_protectedbase_destroy(void* self);
+	friend bool QLineEdit_protectedbase_focusNextChild(void* self);
+	friend bool QLineEdit_protectedbase_focusPreviousChild(void* self);
+	friend QObject* QLineEdit_protectedbase_sender(const void* self);
+	friend int QLineEdit_protectedbase_senderSignalIndex(const void* self);
+	friend int QLineEdit_protectedbase_receivers(const void* self, const char* signal);
+	friend bool QLineEdit_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
 };
 
 QLineEdit* QLineEdit_new(struct QLineEdit_VTable* vtbl, QWidget* parent) {
@@ -1695,144 +1695,78 @@ void QLineEdit_virtualbase_disconnectNotify(void* self, QMetaMethod* signal) {
 }
 
 const QMetaObject* QLineEdit_staticMetaObject() { return &QLineEdit::staticMetaObject; }
-void QLineEdit_protectedbase_initStyleOption(bool* _dynamic_cast_ok, const void* self, QStyleOptionFrame* option) {
-	VirtualQLineEdit* self_cast = dynamic_cast<VirtualQLineEdit*>( (QLineEdit*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QLineEdit_protectedbase_initStyleOption(const void* self, QStyleOptionFrame* option) {
+	VirtualQLineEdit* self_cast = static_cast<VirtualQLineEdit*>( (QLineEdit*)(self) );
 	
 	self_cast->initStyleOption(option);
 
 }
 
-QRect* QLineEdit_protectedbase_cursorRect(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQLineEdit* self_cast = dynamic_cast<VirtualQLineEdit*>( (QLineEdit*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return nullptr;
-	}
-	
-	*_dynamic_cast_ok = true;
+QRect* QLineEdit_protectedbase_cursorRect(const void* self) {
+	VirtualQLineEdit* self_cast = static_cast<VirtualQLineEdit*>( (QLineEdit*)(self) );
 	
 	return new QRect(self_cast->cursorRect());
 
 }
 
-void QLineEdit_protectedbase_updateMicroFocus(bool* _dynamic_cast_ok, void* self) {
-	VirtualQLineEdit* self_cast = dynamic_cast<VirtualQLineEdit*>( (QLineEdit*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QLineEdit_protectedbase_updateMicroFocus(void* self) {
+	VirtualQLineEdit* self_cast = static_cast<VirtualQLineEdit*>( (QLineEdit*)(self) );
 	
 	self_cast->updateMicroFocus();
 
 }
 
-void QLineEdit_protectedbase_create(bool* _dynamic_cast_ok, void* self) {
-	VirtualQLineEdit* self_cast = dynamic_cast<VirtualQLineEdit*>( (QLineEdit*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QLineEdit_protectedbase_create(void* self) {
+	VirtualQLineEdit* self_cast = static_cast<VirtualQLineEdit*>( (QLineEdit*)(self) );
 	
 	self_cast->create();
 
 }
 
-void QLineEdit_protectedbase_destroy(bool* _dynamic_cast_ok, void* self) {
-	VirtualQLineEdit* self_cast = dynamic_cast<VirtualQLineEdit*>( (QLineEdit*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QLineEdit_protectedbase_destroy(void* self) {
+	VirtualQLineEdit* self_cast = static_cast<VirtualQLineEdit*>( (QLineEdit*)(self) );
 	
 	self_cast->destroy();
 
 }
 
-bool QLineEdit_protectedbase_focusNextChild(bool* _dynamic_cast_ok, void* self) {
-	VirtualQLineEdit* self_cast = dynamic_cast<VirtualQLineEdit*>( (QLineEdit*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return false;
-	}
-	
-	*_dynamic_cast_ok = true;
+bool QLineEdit_protectedbase_focusNextChild(void* self) {
+	VirtualQLineEdit* self_cast = static_cast<VirtualQLineEdit*>( (QLineEdit*)(self) );
 	
 	return self_cast->focusNextChild();
 
 }
 
-bool QLineEdit_protectedbase_focusPreviousChild(bool* _dynamic_cast_ok, void* self) {
-	VirtualQLineEdit* self_cast = dynamic_cast<VirtualQLineEdit*>( (QLineEdit*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return false;
-	}
-	
-	*_dynamic_cast_ok = true;
+bool QLineEdit_protectedbase_focusPreviousChild(void* self) {
+	VirtualQLineEdit* self_cast = static_cast<VirtualQLineEdit*>( (QLineEdit*)(self) );
 	
 	return self_cast->focusPreviousChild();
 
 }
 
-QObject* QLineEdit_protectedbase_sender(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQLineEdit* self_cast = dynamic_cast<VirtualQLineEdit*>( (QLineEdit*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return nullptr;
-	}
-	
-	*_dynamic_cast_ok = true;
+QObject* QLineEdit_protectedbase_sender(const void* self) {
+	VirtualQLineEdit* self_cast = static_cast<VirtualQLineEdit*>( (QLineEdit*)(self) );
 	
 	return self_cast->sender();
 
 }
 
-int QLineEdit_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQLineEdit* self_cast = dynamic_cast<VirtualQLineEdit*>( (QLineEdit*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return 0;
-	}
-	
-	*_dynamic_cast_ok = true;
+int QLineEdit_protectedbase_senderSignalIndex(const void* self) {
+	VirtualQLineEdit* self_cast = static_cast<VirtualQLineEdit*>( (QLineEdit*)(self) );
 	
 	return self_cast->senderSignalIndex();
 
 }
 
-int QLineEdit_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal) {
-	VirtualQLineEdit* self_cast = dynamic_cast<VirtualQLineEdit*>( (QLineEdit*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return 0;
-	}
-	
-	*_dynamic_cast_ok = true;
+int QLineEdit_protectedbase_receivers(const void* self, const char* signal) {
+	VirtualQLineEdit* self_cast = static_cast<VirtualQLineEdit*>( (QLineEdit*)(self) );
 	
 	return self_cast->receivers(signal);
 
 }
 
-bool QLineEdit_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal) {
-	VirtualQLineEdit* self_cast = dynamic_cast<VirtualQLineEdit*>( (QLineEdit*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return false;
-	}
-	
-	*_dynamic_cast_ok = true;
+bool QLineEdit_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal) {
+	VirtualQLineEdit* self_cast = static_cast<VirtualQLineEdit*>( (QLineEdit*)(self) );
 	
 	return self_cast->isSignalConnected(*signal);
 
