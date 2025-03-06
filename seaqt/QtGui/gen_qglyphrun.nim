@@ -2,7 +2,7 @@ import ./Qt5Gui_libs
 
 {.push raises: [].}
 
-from system/ansi_c import c_free
+from system/ansi_c import c_free, c_malloc
 
 type
   struct_miqt_string {.used.} = object
@@ -108,6 +108,7 @@ proc glyphIndexes*(self: gen_qglyphrun_types.QGlyphRun, ): seq[cuint] =
   let v_outCast = cast[ptr UncheckedArray[cuint]](v_ma.data)
   for i in 0 ..< v_ma.len:
     vx_ret[i] = v_outCast[i]
+  c_free(v_ma.data)
   vx_ret
 
 proc setGlyphIndexes*(self: gen_qglyphrun_types.QGlyphRun, glyphIndexes: seq[cuint]): void =
@@ -123,6 +124,7 @@ proc positions*(self: gen_qglyphrun_types.QGlyphRun, ): seq[gen_qpoint_types.QPo
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
     vx_ret[i] = gen_qpoint_types.QPointF(h: v_outCast[i])
+  c_free(v_ma.data)
   vx_ret
 
 proc setPositions*(self: gen_qglyphrun_types.QGlyphRun, positions: seq[gen_qpoint_types.QPointF]): void =

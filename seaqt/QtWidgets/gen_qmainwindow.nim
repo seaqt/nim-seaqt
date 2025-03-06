@@ -2,7 +2,7 @@ import ./Qt5Widgets_libs
 
 {.push raises: [].}
 
-from system/ansi_c import c_free
+from system/ansi_c import c_free, c_malloc
 
 type
   struct_miqt_string {.used.} = object
@@ -424,6 +424,7 @@ proc tabifiedDockWidgets*(self: gen_qmainwindow_types.QMainWindow, dockwidget: g
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
     vx_ret[i] = gen_qdockwidget_types.QDockWidget(h: v_outCast[i])
+  c_free(v_ma.data)
   vx_ret
 
 proc removeDockWidget*(self: gen_qmainwindow_types.QMainWindow, dockwidget: gen_qdockwidget_types.QDockWidget): void =

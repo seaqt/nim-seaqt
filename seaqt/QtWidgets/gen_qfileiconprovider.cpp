@@ -33,8 +33,10 @@ public:
 		int sigval1 = static_cast<int>(type_ret);
 
 		QIcon* callback_return_value = vtbl->icon(vtbl, this, sigval1);
+		auto callback_return_value_Value = std::move(*callback_return_value);
+		delete callback_return_value;
 
-		return *callback_return_value;
+		return callback_return_value_Value;
 	}
 
 	friend QIcon* QFileIconProvider_virtualbase_icon(const void* self, int type);
@@ -50,8 +52,10 @@ public:
 		QFileInfo* sigval1 = const_cast<QFileInfo*>(&info_ret);
 
 		QIcon* callback_return_value = vtbl->iconWithInfo(vtbl, this, sigval1);
+		auto callback_return_value_Value = std::move(*callback_return_value);
+		delete callback_return_value;
 
-		return *callback_return_value;
+		return callback_return_value_Value;
 	}
 
 	friend QIcon* QFileIconProvider_virtualbase_iconWithInfo(const void* self, QFileInfo* info);
@@ -68,6 +72,7 @@ public:
 
 		struct miqt_string callback_return_value = vtbl->type(vtbl, this, sigval1);
 		QString callback_return_value_QString = QString::fromUtf8(callback_return_value.data, callback_return_value.len);
+		free(callback_return_value.data);
 
 		return callback_return_value_QString;
 	}

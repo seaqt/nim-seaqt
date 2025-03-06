@@ -2,7 +2,7 @@ import ./Qt5Multimedia_libs
 
 {.push raises: [].}
 
-from system/ansi_c import c_free
+from system/ansi_c import c_free, c_malloc
 
 type
   struct_miqt_string {.used.} = object
@@ -183,6 +183,8 @@ proc encodingOptions*(self: gen_qmediaencodersettings_types.QAudioEncoderSetting
     var v_entry_Value = gen_qvariant_types.QVariant(h: v_Values[i])
 
     vx_ret[v_entry_Key] = v_entry_Value
+  c_free(v_mm.keys)
+  c_free(v_mm.values)
   vx_ret
 
 proc setEncodingOption*(self: gen_qmediaencodersettings_types.QAudioEncoderSettings, option: string, value: gen_qvariant_types.QVariant): void =
@@ -192,7 +194,7 @@ proc setEncodingOptions*(self: gen_qmediaencodersettings_types.QAudioEncoderSett
   var options_Keys_CArray = newSeq[struct_miqt_string](len(options))
   var options_Values_CArray = newSeq[pointer](len(options))
   var options_ctr = 0
-  for optionsk, optionsv in options:
+  for options_k, options_v in options:
     options_Keys_CArray[options_ctr] = struct_miqt_string(data: options_k, len: csize_t(len(options_k)))
     options_Values_CArray[options_ctr] = options_v.h
     options_ctr += 1
@@ -279,6 +281,8 @@ proc encodingOptions*(self: gen_qmediaencodersettings_types.QVideoEncoderSetting
     var v_entry_Value = gen_qvariant_types.QVariant(h: v_Values[i])
 
     vx_ret[v_entry_Key] = v_entry_Value
+  c_free(v_mm.keys)
+  c_free(v_mm.values)
   vx_ret
 
 proc setEncodingOption*(self: gen_qmediaencodersettings_types.QVideoEncoderSettings, option: string, value: gen_qvariant_types.QVariant): void =
@@ -288,7 +292,7 @@ proc setEncodingOptions*(self: gen_qmediaencodersettings_types.QVideoEncoderSett
   var options_Keys_CArray = newSeq[struct_miqt_string](len(options))
   var options_Values_CArray = newSeq[pointer](len(options))
   var options_ctr = 0
-  for optionsk, optionsv in options:
+  for options_k, options_v in options:
     options_Keys_CArray[options_ctr] = struct_miqt_string(data: options_k, len: csize_t(len(options_k)))
     options_Values_CArray[options_ctr] = options_v.h
     options_ctr += 1
@@ -357,6 +361,8 @@ proc encodingOptions*(self: gen_qmediaencodersettings_types.QImageEncoderSetting
     var v_entry_Value = gen_qvariant_types.QVariant(h: v_Values[i])
 
     vx_ret[v_entry_Key] = v_entry_Value
+  c_free(v_mm.keys)
+  c_free(v_mm.values)
   vx_ret
 
 proc setEncodingOption*(self: gen_qmediaencodersettings_types.QImageEncoderSettings, option: string, value: gen_qvariant_types.QVariant): void =
@@ -366,7 +372,7 @@ proc setEncodingOptions*(self: gen_qmediaencodersettings_types.QImageEncoderSett
   var options_Keys_CArray = newSeq[struct_miqt_string](len(options))
   var options_Values_CArray = newSeq[pointer](len(options))
   var options_ctr = 0
-  for optionsk, optionsv in options:
+  for options_k, options_v in options:
     options_Keys_CArray[options_ctr] = struct_miqt_string(data: options_k, len: csize_t(len(options_k)))
     options_Values_CArray[options_ctr] = options_v.h
     options_ctr += 1

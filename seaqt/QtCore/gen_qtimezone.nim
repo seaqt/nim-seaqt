@@ -2,7 +2,7 @@ import ./Qt5Core_libs
 
 {.push raises: [].}
 
-from system/ansi_c import c_free
+from system/ansi_c import c_free, c_malloc
 
 type
   struct_miqt_string {.used.} = object
@@ -187,6 +187,7 @@ proc transitions*(self: gen_qtimezone_types.QTimeZone, fromDateTime: gen_qdateti
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
     vx_ret[i] = gen_qtimezone_types.QTimeZoneOffsetData(h: v_outCast[i])
+  c_free(v_ma.data)
   vx_ret
 
 proc systemTimeZoneId*(_: type gen_qtimezone_types.QTimeZone, ): seq[byte] =
@@ -213,6 +214,7 @@ proc availableTimeZoneIds*(_: type gen_qtimezone_types.QTimeZone, ): seq[seq[byt
     var vx_lvx_ret = @(toOpenArrayByte(vx_lv_bytearray.data, 0, int(vx_lv_bytearray.len)-1))
     c_free(vx_lv_bytearray.data)
     vx_ret[i] = vx_lvx_ret
+  c_free(v_ma.data)
   vx_ret
 
 proc availableTimeZoneIds*(_: type gen_qtimezone_types.QTimeZone, country: cint): seq[seq[byte]] =
@@ -224,6 +226,7 @@ proc availableTimeZoneIds*(_: type gen_qtimezone_types.QTimeZone, country: cint)
     var vx_lvx_ret = @(toOpenArrayByte(vx_lv_bytearray.data, 0, int(vx_lv_bytearray.len)-1))
     c_free(vx_lv_bytearray.data)
     vx_ret[i] = vx_lvx_ret
+  c_free(v_ma.data)
   vx_ret
 
 proc availableTimeZoneIds2*(_: type gen_qtimezone_types.QTimeZone, offsetSeconds: cint): seq[seq[byte]] =
@@ -235,6 +238,7 @@ proc availableTimeZoneIds2*(_: type gen_qtimezone_types.QTimeZone, offsetSeconds
     var vx_lvx_ret = @(toOpenArrayByte(vx_lv_bytearray.data, 0, int(vx_lv_bytearray.len)-1))
     c_free(vx_lv_bytearray.data)
     vx_ret[i] = vx_lvx_ret
+  c_free(v_ma.data)
   vx_ret
 
 proc ianaIdToWindowsId*(_: type gen_qtimezone_types.QTimeZone, ianaId: seq[byte]): seq[byte] =
@@ -264,6 +268,7 @@ proc windowsIdToIanaIds*(_: type gen_qtimezone_types.QTimeZone, windowsId: seq[b
     var vx_lvx_ret = @(toOpenArrayByte(vx_lv_bytearray.data, 0, int(vx_lv_bytearray.len)-1))
     c_free(vx_lv_bytearray.data)
     vx_ret[i] = vx_lvx_ret
+  c_free(v_ma.data)
   vx_ret
 
 proc windowsIdToIanaIds*(_: type gen_qtimezone_types.QTimeZone, windowsId: seq[byte], country: cint): seq[seq[byte]] =
@@ -275,6 +280,7 @@ proc windowsIdToIanaIds*(_: type gen_qtimezone_types.QTimeZone, windowsId: seq[b
     var vx_lvx_ret = @(toOpenArrayByte(vx_lv_bytearray.data, 0, int(vx_lv_bytearray.len)-1))
     c_free(vx_lv_bytearray.data)
     vx_ret[i] = vx_lvx_ret
+  c_free(v_ma.data)
   vx_ret
 
 proc displayName*(self: gen_qtimezone_types.QTimeZone, atDateTime: gen_qdatetime_types.QDateTime, nameType: cint): string =

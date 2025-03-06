@@ -2,7 +2,7 @@ import ./Qt5WebEngineCore_libs
 
 {.push raises: [].}
 
-from system/ansi_c import c_free
+from system/ansi_c import c_free, c_malloc
 
 type
   struct_miqt_string {.used.} = object
@@ -79,7 +79,7 @@ proc postRequest*(_: type gen_qwebenginehttprequest_types.QWebEngineHttpRequest,
   var postData_Keys_CArray = newSeq[struct_miqt_string](len(postData))
   var postData_Values_CArray = newSeq[struct_miqt_string](len(postData))
   var postData_ctr = 0
-  for postDatak, postDatav in postData:
+  for postData_k, postData_v in postData:
     postData_Keys_CArray[postData_ctr] = struct_miqt_string(data: postData_k, len: csize_t(len(postData_k)))
     postData_Values_CArray[postData_ctr] = struct_miqt_string(data: postData_v, len: csize_t(len(postData_v)))
     postData_ctr += 1
@@ -128,6 +128,7 @@ proc headers*(self: gen_qwebenginehttprequest_types.QWebEngineHttpRequest, ): se
     var vx_vvx_ret = @(toOpenArrayByte(vx_vv_bytearray.data, 0, int(vx_vv_bytearray.len)-1))
     c_free(vx_vv_bytearray.data)
     vx_ret[i] = vx_vvx_ret
+  c_free(v_ma.data)
   vx_ret
 
 proc header*(self: gen_qwebenginehttprequest_types.QWebEngineHttpRequest, headerName: seq[byte]): seq[byte] =

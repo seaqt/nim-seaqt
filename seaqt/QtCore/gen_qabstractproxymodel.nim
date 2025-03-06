@@ -2,7 +2,7 @@ import ./Qt5Core_libs
 
 {.push raises: [].}
 
-from system/ansi_c import c_free
+from system/ansi_c import c_free, c_malloc
 
 type
   struct_miqt_string {.used.} = object
@@ -286,6 +286,8 @@ proc itemData*(self: gen_qabstractproxymodel_types.QAbstractProxyModel, index: g
     var v_entry_Value = gen_qvariant_types.QVariant(h: v_Values[i])
 
     vx_ret[v_entry_Key] = v_entry_Value
+  c_free(v_mm.keys)
+  c_free(v_mm.values)
   vx_ret
 
 proc flags*(self: gen_qabstractproxymodel_types.QAbstractProxyModel, index: gen_qabstractitemmodel_types.QModelIndex): cint =
@@ -298,7 +300,7 @@ proc setItemData*(self: gen_qabstractproxymodel_types.QAbstractProxyModel, index
   var roles_Keys_CArray = newSeq[cint](len(roles))
   var roles_Values_CArray = newSeq[pointer](len(roles))
   var roles_ctr = 0
-  for rolesk, rolesv in roles:
+  for roles_k, roles_v in roles:
     roles_Keys_CArray[roles_ctr] = roles_k
     roles_Values_CArray[roles_ctr] = roles_v.h
     roles_ctr += 1
@@ -351,6 +353,7 @@ proc mimeTypes*(self: gen_qabstractproxymodel_types.QAbstractProxyModel, ): seq[
     let vx_lvx_ret = string.fromBytes(toOpenArrayByte(vx_lv_ms.data, 0, int(vx_lv_ms.len)-1))
     c_free(vx_lv_ms.data)
     vx_ret[i] = vx_lvx_ret
+  c_free(v_ma.data)
   vx_ret
 
 proc supportedDragActions*(self: gen_qabstractproxymodel_types.QAbstractProxyModel, ): cint =
@@ -608,6 +611,8 @@ proc QAbstractProxyModelitemData*(self: gen_qabstractproxymodel_types.QAbstractP
     var v_entry_Value = gen_qvariant_types.QVariant(h: v_Values[i])
 
     vx_ret[v_entry_Key] = v_entry_Value
+  c_free(v_mm.keys)
+  c_free(v_mm.values)
   vx_ret
 
 proc miqt_exec_callback_cQAbstractProxyModel_itemData(vtbl: pointer, self: pointer, index: pointer): struct_miqt_map {.cdecl.} =
@@ -615,10 +620,10 @@ proc miqt_exec_callback_cQAbstractProxyModel_itemData(vtbl: pointer, self: point
   let self = QAbstractProxyModel(h: self)
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index)
   var virtualReturn = vtbl[].itemData(self, slotval1)
-  var virtualReturn_Keys_CArray = newSeq[cint](len(virtualReturn))
-  var virtualReturn_Values_CArray = newSeq[pointer](len(virtualReturn))
+  var virtualReturn_Keys_CArray = cast[ptr UncheckedArray[cint]](if len(virtualReturn) > 0: c_malloc(csize_t(sizeof(cint) * len(virtualReturn))) else: nil)
+  var virtualReturn_Values_CArray = cast[ptr UncheckedArray[pointer]](if len(virtualReturn) > 0: c_malloc(csize_t(sizeof(pointer) * len(virtualReturn))) else: nil)
   var virtualReturn_ctr = 0
-  for virtualReturnk, virtualReturnv in virtualReturn:
+  for virtualReturn_k, virtualReturn_v in virtualReturn:
     virtualReturn_Keys_CArray[virtualReturn_ctr] = virtualReturn_k
     virtualReturn_Values_CArray[virtualReturn_ctr] = virtualReturn_v.h
     virtualReturn_ctr += 1
@@ -651,7 +656,7 @@ proc QAbstractProxyModelsetItemData*(self: gen_qabstractproxymodel_types.QAbstra
   var roles_Keys_CArray = newSeq[cint](len(roles))
   var roles_Values_CArray = newSeq[pointer](len(roles))
   var roles_ctr = 0
-  for rolesk, rolesv in roles:
+  for roles_k, roles_v in roles:
     roles_Keys_CArray[roles_ctr] = roles_k
     roles_Values_CArray[roles_ctr] = roles_v.h
     roles_ctr += 1
@@ -672,6 +677,8 @@ proc miqt_exec_callback_cQAbstractProxyModel_setItemData(vtbl: pointer, self: po
     var vroles_entry_Value = gen_qvariant_types.QVariant(h: vroles_Values[i])
 
     vrolesx_ret[vroles_entry_Key] = vroles_entry_Value
+  c_free(vroles_mm.keys)
+  c_free(vroles_mm.values)
   let slotval2 = vrolesx_ret
   var virtualReturn = vtbl[].setItemData(self, slotval1, slotval2)
   virtualReturn
@@ -775,6 +782,7 @@ proc miqt_exec_callback_cQAbstractProxyModel_mimeData(vtbl: pointer, self: point
   let vindexes_outCast = cast[ptr UncheckedArray[pointer]](vindexes_ma.data)
   for i in 0 ..< vindexes_ma.len:
     vindexesx_ret[i] = gen_qabstractitemmodel_types.QModelIndex(h: vindexes_outCast[i])
+  c_free(vindexes_ma.data)
   let slotval1 = vindexesx_ret
   var virtualReturn = vtbl[].mimeData(self, slotval1)
   virtualReturn.h
@@ -816,15 +824,18 @@ proc QAbstractProxyModelmimeTypes*(self: gen_qabstractproxymodel_types.QAbstract
     let vx_lvx_ret = string.fromBytes(toOpenArrayByte(vx_lv_ms.data, 0, int(vx_lv_ms.len)-1))
     c_free(vx_lv_ms.data)
     vx_ret[i] = vx_lvx_ret
+  c_free(v_ma.data)
   vx_ret
 
 proc miqt_exec_callback_cQAbstractProxyModel_mimeTypes(vtbl: pointer, self: pointer): struct_miqt_array {.cdecl.} =
   let vtbl = cast[ptr QAbstractProxyModelVTable](vtbl)
   let self = QAbstractProxyModel(h: self)
   var virtualReturn = vtbl[].mimeTypes(self)
-  var virtualReturn_CArray = newSeq[struct_miqt_string](len(virtualReturn))
+  var virtualReturn_CArray = cast[ptr UncheckedArray[struct_miqt_string]](if len(virtualReturn) > 0: c_malloc(c_sizet(sizeof(struct_miqt_string) * len(virtualReturn))) else: nil)
   for i in 0..<len(virtualReturn):
-    virtualReturn_CArray[i] = struct_miqt_string(data: virtualReturn[i], len: csize_t(len(virtualReturn[i])))
+    var virtualReturn_i_copy = cast[cstring](if len(virtualReturn[i]) > 0: c_malloc(csize_t(len(virtualReturn[i]))) else: nil)
+    if len(virtualReturn[i]) > 0: copyMem(cast[pointer](virtualReturn_i_copy), addr virtualReturn[i][0], csize_t(len(virtualReturn[i])))
+    virtualReturn_CArray[i] = struct_miqt_string(data: virtualReturn_i_copy, len: csize_t(len(virtualReturn[i])))
 
   struct_miqt_array(len: csize_t(len(virtualReturn)), data: if len(virtualReturn) == 0: nil else: addr(virtualReturn_CArray[0]))
 
@@ -958,6 +969,7 @@ proc QAbstractProxyModelmatch*(self: gen_qabstractproxymodel_types.QAbstractProx
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
     vx_ret[i] = gen_qabstractitemmodel_types.QModelIndex(h: v_outCast[i])
+  c_free(v_ma.data)
   vx_ret
 
 proc miqt_exec_callback_cQAbstractProxyModel_match(vtbl: pointer, self: pointer, start: pointer, role: cint, value: pointer, hits: cint, flags: cint): struct_miqt_array {.cdecl.} =
@@ -969,7 +981,7 @@ proc miqt_exec_callback_cQAbstractProxyModel_match(vtbl: pointer, self: pointer,
   let slotval4 = hits
   let slotval5 = cint(flags)
   var virtualReturn = vtbl[].match(self, slotval1, slotval2, slotval3, slotval4, slotval5)
-  var virtualReturn_CArray = newSeq[pointer](len(virtualReturn))
+  var virtualReturn_CArray = cast[ptr UncheckedArray[pointer]](if len(virtualReturn) > 0: c_malloc(c_sizet(sizeof(pointer) * len(virtualReturn))) else: nil)
   for i in 0..<len(virtualReturn):
     virtualReturn_CArray[i] = virtualReturn[i].h
 
@@ -989,18 +1001,22 @@ proc QAbstractProxyModelroleNames*(self: gen_qabstractproxymodel_types.QAbstract
     var v_entry_Value = vx_hashvalx_ret
 
     vx_ret[v_entry_Key] = v_entry_Value
+  c_free(v_mm.keys)
+  c_free(v_mm.values)
   vx_ret
 
 proc miqt_exec_callback_cQAbstractProxyModel_roleNames(vtbl: pointer, self: pointer): struct_miqt_map {.cdecl.} =
   let vtbl = cast[ptr QAbstractProxyModelVTable](vtbl)
   let self = QAbstractProxyModel(h: self)
   var virtualReturn = vtbl[].roleNames(self)
-  var virtualReturn_Keys_CArray = newSeq[cint](len(virtualReturn))
-  var virtualReturn_Values_CArray = newSeq[struct_miqt_string](len(virtualReturn))
+  var virtualReturn_Keys_CArray = cast[ptr UncheckedArray[cint]](if len(virtualReturn) > 0: c_malloc(csize_t(sizeof(cint) * len(virtualReturn))) else: nil)
+  var virtualReturn_Values_CArray = cast[ptr UncheckedArray[struct_miqt_string]](if len(virtualReturn) > 0: c_malloc(csize_t(sizeof(struct_miqt_string) * len(virtualReturn))) else: nil)
   var virtualReturn_ctr = 0
-  for virtualReturnk, virtualReturnv in virtualReturn:
+  for virtualReturn_k, virtualReturn_v in virtualReturn:
     virtualReturn_Keys_CArray[virtualReturn_ctr] = virtualReturn_k
-    virtualReturn_Values_CArray[virtualReturn_ctr] = struct_miqt_string(data: cast[cstring](if len(virtualReturn_v) == 0: nil else: unsafeAddr virtualReturn_v[0]), len: csize_t(len(virtualReturn_v)))
+    var virtualReturn_v_copy = cast[cstring](if len(virtualReturn_v) > 0: c_malloc(csize_t(len(virtualReturn_v))) else: nil)
+    if len(virtualReturn_v) > 0: copyMem(cast[pointer](virtualReturn_v_copy), addr virtualReturn_v[0], csize_t(len(virtualReturn_v)))
+    virtualReturn_Values_CArray[virtualReturn_ctr] = struct_miqt_string(data: virtualReturn_v_copy, len: csize_t(len(virtualReturn_v)))
     virtualReturn_ctr += 1
 
   struct_miqt_map(len: csize_t(len(virtualReturn)),keys: if len(virtualReturn) == 0: nil else: addr(virtualReturn_Keys_CArray[0]), values: if len(virtualReturn) == 0: nil else: addr(virtualReturn_Values_CArray[0]),)
@@ -1149,6 +1165,7 @@ proc persistentIndexList*(self: gen_qabstractproxymodel_types.QAbstractProxyMode
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
     vx_ret[i] = gen_qabstractitemmodel_types.QModelIndex(h: v_outCast[i])
+  c_free(v_ma.data)
   vx_ret
 
 proc sender*(self: gen_qabstractproxymodel_types.QAbstractProxyModel, ): gen_qobject_types.QObject =

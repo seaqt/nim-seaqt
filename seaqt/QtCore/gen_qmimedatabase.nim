@@ -2,7 +2,7 @@ import ./Qt5Core_libs
 
 {.push raises: [].}
 
-from system/ansi_c import c_free
+from system/ansi_c import c_free, c_malloc
 
 type
   struct_miqt_string {.used.} = object
@@ -87,6 +87,7 @@ proc mimeTypesForFileName*(self: gen_qmimedatabase_types.QMimeDatabase, fileName
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
     vx_ret[i] = gen_qmimetype_types.QMimeType(h: v_outCast[i])
+  c_free(v_ma.data)
   vx_ret
 
 proc mimeTypeForData*(self: gen_qmimedatabase_types.QMimeDatabase, data: seq[byte]): gen_qmimetype_types.QMimeType =
@@ -116,6 +117,7 @@ proc allMimeTypes*(self: gen_qmimedatabase_types.QMimeDatabase, ): seq[gen_qmime
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
     vx_ret[i] = gen_qmimetype_types.QMimeType(h: v_outCast[i])
+  c_free(v_ma.data)
   vx_ret
 
 proc mimeTypeForFile*(self: gen_qmimedatabase_types.QMimeDatabase, fileName: string, mode: cint): gen_qmimetype_types.QMimeType =

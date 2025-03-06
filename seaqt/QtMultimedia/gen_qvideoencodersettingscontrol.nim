@@ -2,7 +2,7 @@ import ./Qt5Multimedia_libs
 
 {.push raises: [].}
 
-from system/ansi_c import c_free
+from system/ansi_c import c_free, c_malloc
 
 type
   struct_miqt_string {.used.} = object
@@ -103,6 +103,7 @@ proc supportedResolutions*(self: gen_qvideoencodersettingscontrol_types.QVideoEn
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
     vx_ret[i] = gen_qsize_types.QSize(h: v_outCast[i])
+  c_free(v_ma.data)
   vx_ret
 
 proc supportedFrameRates*(self: gen_qvideoencodersettingscontrol_types.QVideoEncoderSettingsControl, settings: gen_qmediaencodersettings_types.QVideoEncoderSettings, continuous: ptr bool): seq[float64] =
@@ -111,6 +112,7 @@ proc supportedFrameRates*(self: gen_qvideoencodersettingscontrol_types.QVideoEnc
   let v_outCast = cast[ptr UncheckedArray[float64]](v_ma.data)
   for i in 0 ..< v_ma.len:
     vx_ret[i] = v_outCast[i]
+  c_free(v_ma.data)
   vx_ret
 
 proc supportedVideoCodecs*(self: gen_qvideoencodersettingscontrol_types.QVideoEncoderSettingsControl, ): seq[string] =
@@ -122,6 +124,7 @@ proc supportedVideoCodecs*(self: gen_qvideoencodersettingscontrol_types.QVideoEn
     let vx_lvx_ret = string.fromBytes(toOpenArrayByte(vx_lv_ms.data, 0, int(vx_lv_ms.len)-1))
     c_free(vx_lv_ms.data)
     vx_ret[i] = vx_lvx_ret
+  c_free(v_ma.data)
   vx_ret
 
 proc videoCodecDescription*(self: gen_qvideoencodersettingscontrol_types.QVideoEncoderSettingsControl, codec: string): string =

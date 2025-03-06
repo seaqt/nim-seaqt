@@ -42,6 +42,7 @@ public:
 
 		struct miqt_string callback_return_value = vtbl->name(vtbl, this);
 		QByteArray callback_return_value_QByteArray(callback_return_value.data, callback_return_value.len);
+		free(callback_return_value.data);
 
 		return callback_return_value_QByteArray;
 	}
@@ -100,8 +101,10 @@ public:
 		int sigval1 = static_cast<int>(option_ret);
 
 		QVariant* callback_return_value = vtbl->option(vtbl, this, sigval1);
+		auto callback_return_value_Value = std::move(*callback_return_value);
+		delete callback_return_value;
 
-		return *callback_return_value;
+		return callback_return_value_Value;
 	}
 
 	friend QVariant* QImageIOHandler_virtualbase_option(const void* self, int option);
@@ -234,8 +237,10 @@ public:
 
 
 		QRect* callback_return_value = vtbl->currentImageRect(vtbl, this);
+		auto callback_return_value_Value = std::move(*callback_return_value);
+		delete callback_return_value;
 
-		return *callback_return_value;
+		return callback_return_value_Value;
 	}
 
 	friend QRect* QImageIOHandler_virtualbase_currentImageRect(const void* self);

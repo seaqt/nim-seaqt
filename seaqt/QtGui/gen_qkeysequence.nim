@@ -2,7 +2,7 @@ import ./Qt5Gui_libs
 
 {.push raises: [].}
 
-from system/ansi_c import c_free
+from system/ansi_c import c_free, c_malloc
 
 type
   struct_miqt_string {.used.} = object
@@ -188,6 +188,7 @@ proc listFromString*(_: type gen_qkeysequence_types.QKeySequence, str: string): 
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
     vx_ret[i] = gen_qkeysequence_types.QKeySequence(h: v_outCast[i])
+  c_free(v_ma.data)
   vx_ret
 
 proc listToString*(_: type gen_qkeysequence_types.QKeySequence, list: seq[gen_qkeysequence_types.QKeySequence]): string =
@@ -212,6 +213,7 @@ proc keyBindings*(_: type gen_qkeysequence_types.QKeySequence, key: cint): seq[g
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
     vx_ret[i] = gen_qkeysequence_types.QKeySequence(h: v_outCast[i])
+  c_free(v_ma.data)
   vx_ret
 
 proc ToQVariant*(self: gen_qkeysequence_types.QKeySequence, ): gen_qvariant_types.QVariant =
@@ -262,6 +264,7 @@ proc listFromString*(_: type gen_qkeysequence_types.QKeySequence, str: string, f
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
     vx_ret[i] = gen_qkeysequence_types.QKeySequence(h: v_outCast[i])
+  c_free(v_ma.data)
   vx_ret
 
 proc listToString*(_: type gen_qkeysequence_types.QKeySequence, list: seq[gen_qkeysequence_types.QKeySequence], format: cint): string =

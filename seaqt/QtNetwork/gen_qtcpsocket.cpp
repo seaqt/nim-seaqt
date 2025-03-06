@@ -256,8 +256,10 @@ public:
 		int sigval1 = static_cast<int>(option_ret);
 
 		QVariant* callback_return_value = vtbl->socketOption(vtbl, this, sigval1);
+		auto callback_return_value_Value = std::move(*callback_return_value);
+		delete callback_return_value;
 
-		return *callback_return_value;
+		return callback_return_value_Value;
 	}
 
 	friend QVariant* QTcpSocket_virtualbase_socketOption(void* self, int option);

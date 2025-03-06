@@ -2,7 +2,7 @@ import ./Qt5Widgets_libs
 
 {.push raises: [].}
 
-from system/ansi_c import c_free
+from system/ansi_c import c_free, c_malloc
 
 type
   struct_miqt_string {.used.} = object
@@ -1046,6 +1046,7 @@ proc selectedRanges*(self: gen_qtablewidget_types.QTableWidget, ): seq[gen_qtabl
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
     vx_ret[i] = gen_qtablewidget_types.QTableWidgetSelectionRange(h: v_outCast[i])
+  c_free(v_ma.data)
   vx_ret
 
 proc selectedItems*(self: gen_qtablewidget_types.QTableWidget, ): seq[gen_qtablewidget_types.QTableWidgetItem] =
@@ -1054,6 +1055,7 @@ proc selectedItems*(self: gen_qtablewidget_types.QTableWidget, ): seq[gen_qtable
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
     vx_ret[i] = gen_qtablewidget_types.QTableWidgetItem(h: v_outCast[i])
+  c_free(v_ma.data)
   vx_ret
 
 proc findItems*(self: gen_qtablewidget_types.QTableWidget, text: string, flags: cint): seq[gen_qtablewidget_types.QTableWidgetItem] =
@@ -1062,6 +1064,7 @@ proc findItems*(self: gen_qtablewidget_types.QTableWidget, text: string, flags: 
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
     vx_ret[i] = gen_qtablewidget_types.QTableWidgetItem(h: v_outCast[i])
+  c_free(v_ma.data)
   vx_ret
 
 proc visualRow*(self: gen_qtablewidget_types.QTableWidget, logicalRow: cint): cint =
@@ -1696,15 +1699,18 @@ proc QTableWidgetmimeTypes*(self: gen_qtablewidget_types.QTableWidget, ): seq[st
     let vx_lvx_ret = string.fromBytes(toOpenArrayByte(vx_lv_ms.data, 0, int(vx_lv_ms.len)-1))
     c_free(vx_lv_ms.data)
     vx_ret[i] = vx_lvx_ret
+  c_free(v_ma.data)
   vx_ret
 
 proc miqt_exec_callback_cQTableWidget_mimeTypes(vtbl: pointer, self: pointer): struct_miqt_array {.cdecl.} =
   let vtbl = cast[ptr QTableWidgetVTable](vtbl)
   let self = QTableWidget(h: self)
   var virtualReturn = vtbl[].mimeTypes(self)
-  var virtualReturn_CArray = newSeq[struct_miqt_string](len(virtualReturn))
+  var virtualReturn_CArray = cast[ptr UncheckedArray[struct_miqt_string]](if len(virtualReturn) > 0: c_malloc(c_sizet(sizeof(struct_miqt_string) * len(virtualReturn))) else: nil)
   for i in 0..<len(virtualReturn):
-    virtualReturn_CArray[i] = struct_miqt_string(data: virtualReturn[i], len: csize_t(len(virtualReturn[i])))
+    var virtualReturn_i_copy = cast[cstring](if len(virtualReturn[i]) > 0: c_malloc(csize_t(len(virtualReturn[i]))) else: nil)
+    if len(virtualReturn[i]) > 0: copyMem(cast[pointer](virtualReturn_i_copy), addr virtualReturn[i][0], csize_t(len(virtualReturn[i])))
+    virtualReturn_CArray[i] = struct_miqt_string(data: virtualReturn_i_copy, len: csize_t(len(virtualReturn[i])))
 
   struct_miqt_array(len: csize_t(len(virtualReturn)), data: if len(virtualReturn) == 0: nil else: addr(virtualReturn_CArray[0]))
 
@@ -1723,6 +1729,7 @@ proc miqt_exec_callback_cQTableWidget_mimeData(vtbl: pointer, self: pointer, ite
   let vitems_outCast = cast[ptr UncheckedArray[pointer]](vitems_ma.data)
   for i in 0 ..< vitems_ma.len:
     vitemsx_ret[i] = gen_qtablewidget_types.QTableWidgetItem(h: vitems_outCast[i])
+  c_free(vitems_ma.data)
   let slotval1 = vitemsx_ret
   var virtualReturn = vtbl[].mimeData(self, slotval1)
   virtualReturn.h
@@ -1906,13 +1913,14 @@ proc QTableWidgetselectedIndexes*(self: gen_qtablewidget_types.QTableWidget, ): 
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
     vx_ret[i] = gen_qabstractitemmodel_types.QModelIndex(h: v_outCast[i])
+  c_free(v_ma.data)
   vx_ret
 
 proc miqt_exec_callback_cQTableWidget_selectedIndexes(vtbl: pointer, self: pointer): struct_miqt_array {.cdecl.} =
   let vtbl = cast[ptr QTableWidgetVTable](vtbl)
   let self = QTableWidget(h: self)
   var virtualReturn = vtbl[].selectedIndexes(self)
-  var virtualReturn_CArray = newSeq[pointer](len(virtualReturn))
+  var virtualReturn_CArray = cast[ptr UncheckedArray[pointer]](if len(virtualReturn) > 0: c_malloc(c_sizet(sizeof(pointer) * len(virtualReturn))) else: nil)
   for i in 0..<len(virtualReturn):
     virtualReturn_CArray[i] = virtualReturn[i].h
 
@@ -2058,6 +2066,7 @@ proc miqt_exec_callback_cQTableWidget_dataChanged(vtbl: pointer, self: pointer, 
   let vroles_outCast = cast[ptr UncheckedArray[cint]](vroles_ma.data)
   for i in 0 ..< vroles_ma.len:
     vrolesx_ret[i] = vroles_outCast[i]
+  c_free(vroles_ma.data)
   let slotval3 = vrolesx_ret
   vtbl[].dataChanged(self, slotval1, slotval2, slotval3)
 
@@ -2592,6 +2601,7 @@ proc items*(self: gen_qtablewidget_types.QTableWidget, data: gen_qmimedata_types
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
     vx_ret[i] = gen_qtablewidget_types.QTableWidgetItem(h: v_outCast[i])
+  c_free(v_ma.data)
   vx_ret
 
 proc indexFromItem*(self: gen_qtablewidget_types.QTableWidget, item: gen_qtablewidget_types.QTableWidgetItem): gen_qabstractitemmodel_types.QModelIndex =

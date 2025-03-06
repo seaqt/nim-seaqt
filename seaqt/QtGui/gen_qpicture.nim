@@ -2,7 +2,7 @@ import ./Qt5Gui_libs
 
 {.push raises: [].}
 
-from system/ansi_c import c_free
+from system/ansi_c import c_free, c_malloc
 
 type
   struct_miqt_string {.used.} = object
@@ -190,6 +190,7 @@ proc inputFormats*(_: type gen_qpicture_types.QPicture, ): seq[seq[byte]] =
     var vx_lvx_ret = @(toOpenArrayByte(vx_lv_bytearray.data, 0, int(vx_lv_bytearray.len)-1))
     c_free(vx_lv_bytearray.data)
     vx_ret[i] = vx_lvx_ret
+  c_free(v_ma.data)
   vx_ret
 
 proc outputFormats*(_: type gen_qpicture_types.QPicture, ): seq[seq[byte]] =
@@ -201,6 +202,7 @@ proc outputFormats*(_: type gen_qpicture_types.QPicture, ): seq[seq[byte]] =
     var vx_lvx_ret = @(toOpenArrayByte(vx_lv_bytearray.data, 0, int(vx_lv_bytearray.len)-1))
     c_free(vx_lv_bytearray.data)
     vx_ret[i] = vx_lvx_ret
+  c_free(v_ma.data)
   vx_ret
 
 proc inputFormatList*(_: type gen_qpicture_types.QPicture, ): seq[string] =
@@ -212,6 +214,7 @@ proc inputFormatList*(_: type gen_qpicture_types.QPicture, ): seq[string] =
     let vx_lvx_ret = string.fromBytes(toOpenArrayByte(vx_lv_ms.data, 0, int(vx_lv_ms.len)-1))
     c_free(vx_lv_ms.data)
     vx_ret[i] = vx_lvx_ret
+  c_free(v_ma.data)
   vx_ret
 
 proc outputFormatList*(_: type gen_qpicture_types.QPicture, ): seq[string] =
@@ -223,6 +226,7 @@ proc outputFormatList*(_: type gen_qpicture_types.QPicture, ): seq[string] =
     let vx_lvx_ret = string.fromBytes(toOpenArrayByte(vx_lv_ms.data, 0, int(vx_lv_ms.len)-1))
     c_free(vx_lv_ms.data)
     vx_ret[i] = vx_lvx_ret
+  c_free(v_ma.data)
   vx_ret
 
 proc paintEngine*(self: gen_qpicture_types.QPicture, ): gen_qpaintengine_types.QPaintEngine =
@@ -482,6 +486,7 @@ proc inputFormats*(_: type gen_qpicture_types.QPictureIO, ): seq[seq[byte]] =
     var vx_lvx_ret = @(toOpenArrayByte(vx_lv_bytearray.data, 0, int(vx_lv_bytearray.len)-1))
     c_free(vx_lv_bytearray.data)
     vx_ret[i] = vx_lvx_ret
+  c_free(v_ma.data)
   vx_ret
 
 proc outputFormats*(_: type gen_qpicture_types.QPictureIO, ): seq[seq[byte]] =
@@ -493,6 +498,7 @@ proc outputFormats*(_: type gen_qpicture_types.QPictureIO, ): seq[seq[byte]] =
     var vx_lvx_ret = @(toOpenArrayByte(vx_lv_bytearray.data, 0, int(vx_lv_bytearray.len)-1))
     c_free(vx_lv_bytearray.data)
     vx_ret[i] = vx_lvx_ret
+  c_free(v_ma.data)
   vx_ret
 
 proc create*(T: type gen_qpicture_types.QPictureIO): gen_qpicture_types.QPictureIO =

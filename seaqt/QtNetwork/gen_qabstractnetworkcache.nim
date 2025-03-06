@@ -2,7 +2,7 @@ import ./Qt5Network_libs
 
 {.push raises: [].}
 
-from system/ansi_c import c_free
+from system/ansi_c import c_free, c_malloc
 
 type
   struct_miqt_string {.used.} = object
@@ -141,7 +141,10 @@ proc rawHeaders*(self: gen_qabstractnetworkcache_types.QNetworkCacheMetaData, ):
     c_free(vx_lv_second_bytearray.data)
     var vx_lv_entry_Second = vx_lv_secondx_ret
 
+    c_free(vx_lv_mm.keys)
+    c_free(vx_lv_mm.values)
     vx_ret[i] = (first: vx_lv_entry_First , second: vx_lv_entry_Second )
+  c_free(v_ma.data)
   vx_ret
 
 proc setRawHeaders*(self: gen_qabstractnetworkcache_types.QNetworkCacheMetaData, headers: seq[tuple[first: seq[byte], second: seq[byte]]]): void =
@@ -184,13 +187,15 @@ proc attributes*(self: gen_qabstractnetworkcache_types.QNetworkCacheMetaData, ):
     var v_entry_Value = gen_qvariant_types.QVariant(h: v_Values[i])
 
     vx_ret[v_entry_Key] = v_entry_Value
+  c_free(v_mm.keys)
+  c_free(v_mm.values)
   vx_ret
 
 proc setAttributes*(self: gen_qabstractnetworkcache_types.QNetworkCacheMetaData, attributes: Table[cint,gen_qvariant_types.QVariant]): void =
   var attributes_Keys_CArray = newSeq[cint](len(attributes))
   var attributes_Values_CArray = newSeq[pointer](len(attributes))
   var attributes_ctr = 0
-  for attributesk, attributesv in attributes:
+  for attributes_k, attributes_v in attributes:
     attributes_Keys_CArray[attributes_ctr] = cint(attributes_k)
     attributes_Values_CArray[attributes_ctr] = attributes_v.h
     attributes_ctr += 1

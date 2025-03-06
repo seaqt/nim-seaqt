@@ -2,7 +2,7 @@ import ./Qt5Multimedia_libs
 
 {.push raises: [].}
 
-from system/ansi_c import c_free
+from system/ansi_c import c_free, c_malloc
 
 type
   struct_miqt_string {.used.} = object
@@ -102,6 +102,7 @@ proc supportedCodecs*(self: gen_qaudiodeviceinfo_types.QAudioDeviceInfo, ): seq[
     let vx_lvx_ret = string.fromBytes(toOpenArrayByte(vx_lv_ms.data, 0, int(vx_lv_ms.len)-1))
     c_free(vx_lv_ms.data)
     vx_ret[i] = vx_lvx_ret
+  c_free(v_ma.data)
   vx_ret
 
 proc supportedSampleRates*(self: gen_qaudiodeviceinfo_types.QAudioDeviceInfo, ): seq[cint] =
@@ -110,6 +111,7 @@ proc supportedSampleRates*(self: gen_qaudiodeviceinfo_types.QAudioDeviceInfo, ):
   let v_outCast = cast[ptr UncheckedArray[cint]](v_ma.data)
   for i in 0 ..< v_ma.len:
     vx_ret[i] = v_outCast[i]
+  c_free(v_ma.data)
   vx_ret
 
 proc supportedChannelCounts*(self: gen_qaudiodeviceinfo_types.QAudioDeviceInfo, ): seq[cint] =
@@ -118,6 +120,7 @@ proc supportedChannelCounts*(self: gen_qaudiodeviceinfo_types.QAudioDeviceInfo, 
   let v_outCast = cast[ptr UncheckedArray[cint]](v_ma.data)
   for i in 0 ..< v_ma.len:
     vx_ret[i] = v_outCast[i]
+  c_free(v_ma.data)
   vx_ret
 
 proc supportedSampleSizes*(self: gen_qaudiodeviceinfo_types.QAudioDeviceInfo, ): seq[cint] =
@@ -126,6 +129,7 @@ proc supportedSampleSizes*(self: gen_qaudiodeviceinfo_types.QAudioDeviceInfo, ):
   let v_outCast = cast[ptr UncheckedArray[cint]](v_ma.data)
   for i in 0 ..< v_ma.len:
     vx_ret[i] = v_outCast[i]
+  c_free(v_ma.data)
   vx_ret
 
 proc supportedByteOrders*(self: gen_qaudiodeviceinfo_types.QAudioDeviceInfo, ): seq[cint] =
@@ -134,6 +138,7 @@ proc supportedByteOrders*(self: gen_qaudiodeviceinfo_types.QAudioDeviceInfo, ): 
   let v_outCast = cast[ptr UncheckedArray[cint]](v_ma.data)
   for i in 0 ..< v_ma.len:
     vx_ret[i] = cint(v_outCast[i])
+  c_free(v_ma.data)
   vx_ret
 
 proc supportedSampleTypes*(self: gen_qaudiodeviceinfo_types.QAudioDeviceInfo, ): seq[cint] =
@@ -142,6 +147,7 @@ proc supportedSampleTypes*(self: gen_qaudiodeviceinfo_types.QAudioDeviceInfo, ):
   let v_outCast = cast[ptr UncheckedArray[cint]](v_ma.data)
   for i in 0 ..< v_ma.len:
     vx_ret[i] = cint(v_outCast[i])
+  c_free(v_ma.data)
   vx_ret
 
 proc realm*(self: gen_qaudiodeviceinfo_types.QAudioDeviceInfo, ): string =
@@ -162,6 +168,7 @@ proc availableDevices*(_: type gen_qaudiodeviceinfo_types.QAudioDeviceInfo, mode
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
     vx_ret[i] = gen_qaudiodeviceinfo_types.QAudioDeviceInfo(h: v_outCast[i])
+  c_free(v_ma.data)
   vx_ret
 
 proc create*(T: type gen_qaudiodeviceinfo_types.QAudioDeviceInfo): gen_qaudiodeviceinfo_types.QAudioDeviceInfo =

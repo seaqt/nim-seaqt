@@ -2,7 +2,7 @@ import ./Qt5Core_libs
 
 {.push raises: [].}
 
-from system/ansi_c import c_free
+from system/ansi_c import c_free, c_malloc
 
 type
   struct_miqt_string {.used.} = object
@@ -251,6 +251,7 @@ proc children*(self: gen_qobject_types.QObject, ): seq[gen_qobject_types.QObject
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
     vx_ret[i] = gen_qobject_types.QObject(h: v_outCast[i])
+  c_free(v_ma.data)
   vx_ret
 
 proc setParent*(self: gen_qobject_types.QObject, parent: gen_qobject_types.QObject): void =
@@ -301,6 +302,7 @@ proc dynamicPropertyNames*(self: gen_qobject_types.QObject, ): seq[seq[byte]] =
     var vx_lvx_ret = @(toOpenArrayByte(vx_lv_bytearray.data, 0, int(vx_lv_bytearray.len)-1))
     c_free(vx_lv_bytearray.data)
     vx_ret[i] = vx_lvx_ret
+  c_free(v_ma.data)
   vx_ret
 
 proc registerUserData*(_: type gen_qobject_types.QObject, ): cuint =

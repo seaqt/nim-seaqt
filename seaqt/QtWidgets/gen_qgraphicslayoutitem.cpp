@@ -90,8 +90,10 @@ public:
 		QSizeF* sigval2 = const_cast<QSizeF*>(&constraint_ret);
 
 		QSizeF* callback_return_value = vtbl->sizeHint(vtbl, this, sigval1, sigval2);
+		auto callback_return_value_Value = std::move(*callback_return_value);
+		delete callback_return_value;
 
-		return *callback_return_value;
+		return callback_return_value_Value;
 	}
 
 	// Wrappers to allow calling protected methods:

@@ -2,7 +2,7 @@ import ./Qt5Gui_libs
 
 {.push raises: [].}
 
-from system/ansi_c import c_free
+from system/ansi_c import c_free, c_malloc
 
 type
   struct_miqt_string {.used.} = object
@@ -295,7 +295,9 @@ proc miqt_exec_callback_cQImageIOHandler_name(vtbl: pointer, self: pointer): str
   let vtbl = cast[ptr QImageIOHandlerVTable](vtbl)
   let self = QImageIOHandler(h: self)
   var virtualReturn = vtbl[].name(self)
-  struct_miqt_string(data: cast[cstring](if len(virtualReturn) == 0: nil else: unsafeAddr virtualReturn[0]), len: csize_t(len(virtualReturn)))
+  var virtualReturn_copy = cast[cstring](if len(virtualReturn) > 0: c_malloc(csize_t(len(virtualReturn))) else: nil)
+  if len(virtualReturn) > 0: copyMem(cast[pointer](virtualReturn_copy), addr virtualReturn[0], csize_t(len(virtualReturn)))
+  struct_miqt_string(data: virtualReturn_copy, len: csize_t(len(virtualReturn)))
 
 proc miqt_exec_callback_cQImageIOHandler_canRead(vtbl: pointer, self: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QImageIOHandlerVTable](vtbl)

@@ -398,8 +398,10 @@ public:
 
 
 		QPoint* callback_return_value = vtbl->coordinateOffset(vtbl, this);
+		auto callback_return_value_Value = std::move(*callback_return_value);
+		delete callback_return_value;
 
-		return *callback_return_value;
+		return callback_return_value_Value;
 	}
 
 	friend QPoint* QPaintEngine_virtualbase_coordinateOffset(const void* self);

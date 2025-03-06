@@ -2,7 +2,7 @@ import ./Qt5Gui_libs
 
 {.push raises: [].}
 
-from system/ansi_c import c_free
+from system/ansi_c import c_free, c_malloc
 
 type
   struct_miqt_string {.used.} = object
@@ -138,6 +138,7 @@ proc standardSizes*(_: type gen_qfontdatabase_types.QFontDatabase, ): seq[cint] 
   let v_outCast = cast[ptr UncheckedArray[cint]](v_ma.data)
   for i in 0 ..< v_ma.len:
     vx_ret[i] = v_outCast[i]
+  c_free(v_ma.data)
   vx_ret
 
 proc writingSystems*(self: gen_qfontdatabase_types.QFontDatabase, ): seq[cint] =
@@ -146,6 +147,7 @@ proc writingSystems*(self: gen_qfontdatabase_types.QFontDatabase, ): seq[cint] =
   let v_outCast = cast[ptr UncheckedArray[cint]](v_ma.data)
   for i in 0 ..< v_ma.len:
     vx_ret[i] = cint(v_outCast[i])
+  c_free(v_ma.data)
   vx_ret
 
 proc writingSystems*(self: gen_qfontdatabase_types.QFontDatabase, family: string): seq[cint] =
@@ -154,6 +156,7 @@ proc writingSystems*(self: gen_qfontdatabase_types.QFontDatabase, family: string
   let v_outCast = cast[ptr UncheckedArray[cint]](v_ma.data)
   for i in 0 ..< v_ma.len:
     vx_ret[i] = cint(v_outCast[i])
+  c_free(v_ma.data)
   vx_ret
 
 proc families*(self: gen_qfontdatabase_types.QFontDatabase, ): seq[string] =
@@ -165,6 +168,7 @@ proc families*(self: gen_qfontdatabase_types.QFontDatabase, ): seq[string] =
     let vx_lvx_ret = string.fromBytes(toOpenArrayByte(vx_lv_ms.data, 0, int(vx_lv_ms.len)-1))
     c_free(vx_lv_ms.data)
     vx_ret[i] = vx_lvx_ret
+  c_free(v_ma.data)
   vx_ret
 
 proc styles*(self: gen_qfontdatabase_types.QFontDatabase, family: string): seq[string] =
@@ -176,6 +180,7 @@ proc styles*(self: gen_qfontdatabase_types.QFontDatabase, family: string): seq[s
     let vx_lvx_ret = string.fromBytes(toOpenArrayByte(vx_lv_ms.data, 0, int(vx_lv_ms.len)-1))
     c_free(vx_lv_ms.data)
     vx_ret[i] = vx_lvx_ret
+  c_free(v_ma.data)
   vx_ret
 
 proc pointSizes*(self: gen_qfontdatabase_types.QFontDatabase, family: string): seq[cint] =
@@ -184,6 +189,7 @@ proc pointSizes*(self: gen_qfontdatabase_types.QFontDatabase, family: string): s
   let v_outCast = cast[ptr UncheckedArray[cint]](v_ma.data)
   for i in 0 ..< v_ma.len:
     vx_ret[i] = v_outCast[i]
+  c_free(v_ma.data)
   vx_ret
 
 proc smoothSizes*(self: gen_qfontdatabase_types.QFontDatabase, family: string, style: string): seq[cint] =
@@ -192,6 +198,7 @@ proc smoothSizes*(self: gen_qfontdatabase_types.QFontDatabase, family: string, s
   let v_outCast = cast[ptr UncheckedArray[cint]](v_ma.data)
   for i in 0 ..< v_ma.len:
     vx_ret[i] = v_outCast[i]
+  c_free(v_ma.data)
   vx_ret
 
 proc styleString*(self: gen_qfontdatabase_types.QFontDatabase, font: gen_qfont_types.QFont): string =
@@ -263,6 +270,7 @@ proc applicationFontFamilies*(_: type gen_qfontdatabase_types.QFontDatabase, id:
     let vx_lvx_ret = string.fromBytes(toOpenArrayByte(vx_lv_ms.data, 0, int(vx_lv_ms.len)-1))
     c_free(vx_lv_ms.data)
     vx_ret[i] = vx_lvx_ret
+  c_free(v_ma.data)
   vx_ret
 
 proc removeApplicationFont*(_: type gen_qfontdatabase_types.QFontDatabase, id: cint): bool =
@@ -286,6 +294,7 @@ proc families*(self: gen_qfontdatabase_types.QFontDatabase, writingSystem: cint)
     let vx_lvx_ret = string.fromBytes(toOpenArrayByte(vx_lv_ms.data, 0, int(vx_lv_ms.len)-1))
     c_free(vx_lv_ms.data)
     vx_ret[i] = vx_lvx_ret
+  c_free(v_ma.data)
   vx_ret
 
 proc pointSizes*(self: gen_qfontdatabase_types.QFontDatabase, family: string, style: string): seq[cint] =
@@ -294,6 +303,7 @@ proc pointSizes*(self: gen_qfontdatabase_types.QFontDatabase, family: string, st
   let v_outCast = cast[ptr UncheckedArray[cint]](v_ma.data)
   for i in 0 ..< v_ma.len:
     vx_ret[i] = v_outCast[i]
+  c_free(v_ma.data)
   vx_ret
 
 proc isBitmapScalable*(self: gen_qfontdatabase_types.QFontDatabase, family: string, style: string): bool =

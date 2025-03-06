@@ -2,7 +2,7 @@ import ./Qt5Gui_libs
 
 {.push raises: [].}
 
-from system/ansi_c import c_free
+from system/ansi_c import c_free, c_malloc
 
 type
   struct_miqt_string {.used.} = object
@@ -242,6 +242,7 @@ proc allWindows*(_: type gen_qguiapplication_types.QGuiApplication, ): seq[gen_q
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
     vx_ret[i] = gen_qwindow_types.QWindow(h: v_outCast[i])
+  c_free(v_ma.data)
   vx_ret
 
 proc topLevelWindows*(_: type gen_qguiapplication_types.QGuiApplication, ): seq[gen_qwindow_types.QWindow] =
@@ -250,6 +251,7 @@ proc topLevelWindows*(_: type gen_qguiapplication_types.QGuiApplication, ): seq[
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
     vx_ret[i] = gen_qwindow_types.QWindow(h: v_outCast[i])
+  c_free(v_ma.data)
   vx_ret
 
 proc topLevelAt*(_: type gen_qguiapplication_types.QGuiApplication, pos: gen_qpoint_types.QPoint): gen_qwindow_types.QWindow =
@@ -285,6 +287,7 @@ proc screens*(_: type gen_qguiapplication_types.QGuiApplication, ): seq[gen_qscr
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
     vx_ret[i] = gen_qscreen_types.QScreen(h: v_outCast[i])
+  c_free(v_ma.data)
   vx_ret
 
 proc screenAt*(_: type gen_qguiapplication_types.QGuiApplication, point: gen_qpoint_types.QPoint): gen_qscreen_types.QScreen =

@@ -2,7 +2,7 @@ import ./Qt5Widgets_libs
 
 {.push raises: [].}
 
-from system/ansi_c import c_free
+from system/ansi_c import c_free, c_malloc
 
 type
   struct_miqt_string {.used.} = object
@@ -179,7 +179,10 @@ proc posList*(self: gen_qgraphicsitemanimation_types.QGraphicsItemAnimation, ): 
 
     var vx_lv_entry_Second = gen_qpoint_types.QPointF(h: vx_lv_Second_CArray[0])
 
+    c_free(vx_lv_mm.keys)
+    c_free(vx_lv_mm.values)
     vx_ret[i] = (first: vx_lv_entry_First , second: vx_lv_entry_Second )
+  c_free(v_ma.data)
   vx_ret
 
 proc setPosAt*(self: gen_qgraphicsitemanimation_types.QGraphicsItemAnimation, step: float64, pos: gen_qpoint_types.QPointF): void =
@@ -206,7 +209,10 @@ proc rotationList*(self: gen_qgraphicsitemanimation_types.QGraphicsItemAnimation
 
     var vx_lv_entry_Second = vx_lv_Second_CArray[0]
 
+    c_free(vx_lv_mm.keys)
+    c_free(vx_lv_mm.values)
     vx_ret[i] = (first: vx_lv_entry_First , second: vx_lv_entry_Second )
+  c_free(v_ma.data)
   vx_ret
 
 proc setRotationAt*(self: gen_qgraphicsitemanimation_types.QGraphicsItemAnimation, step: float64, angle: float64): void =
@@ -230,7 +236,10 @@ proc translationList*(self: gen_qgraphicsitemanimation_types.QGraphicsItemAnimat
 
     var vx_lv_entry_Second = gen_qpoint_types.QPointF(h: vx_lv_Second_CArray[0])
 
+    c_free(vx_lv_mm.keys)
+    c_free(vx_lv_mm.values)
     vx_ret[i] = (first: vx_lv_entry_First , second: vx_lv_entry_Second )
+  c_free(v_ma.data)
   vx_ret
 
 proc setTranslationAt*(self: gen_qgraphicsitemanimation_types.QGraphicsItemAnimation, step: float64, dx: float64, dy: float64): void =
@@ -254,7 +263,10 @@ proc scaleList*(self: gen_qgraphicsitemanimation_types.QGraphicsItemAnimation, )
 
     var vx_lv_entry_Second = gen_qpoint_types.QPointF(h: vx_lv_Second_CArray[0])
 
+    c_free(vx_lv_mm.keys)
+    c_free(vx_lv_mm.values)
     vx_ret[i] = (first: vx_lv_entry_First , second: vx_lv_entry_Second )
+  c_free(v_ma.data)
   vx_ret
 
 proc setScaleAt*(self: gen_qgraphicsitemanimation_types.QGraphicsItemAnimation, step: float64, sx: float64, sy: float64): void =
@@ -278,7 +290,10 @@ proc shearList*(self: gen_qgraphicsitemanimation_types.QGraphicsItemAnimation, )
 
     var vx_lv_entry_Second = gen_qpoint_types.QPointF(h: vx_lv_Second_CArray[0])
 
+    c_free(vx_lv_mm.keys)
+    c_free(vx_lv_mm.values)
     vx_ret[i] = (first: vx_lv_entry_First , second: vx_lv_entry_Second )
+  c_free(v_ma.data)
   vx_ret
 
 proc setShearAt*(self: gen_qgraphicsitemanimation_types.QGraphicsItemAnimation, step: float64, sh: float64, sv: float64): void =

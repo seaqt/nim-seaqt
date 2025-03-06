@@ -2,7 +2,7 @@ import ./Qt5Qml_libs
 
 {.push raises: [].}
 
-from system/ansi_c import c_free
+from system/ansi_c import c_free, c_malloc
 
 type
   struct_miqt_string {.used.} = object
@@ -213,6 +213,7 @@ proc importPathList*(self: gen_qqmlengine_types.QQmlEngine, ): seq[string] =
     let vx_lvx_ret = string.fromBytes(toOpenArrayByte(vx_lv_ms.data, 0, int(vx_lv_ms.len)-1))
     c_free(vx_lv_ms.data)
     vx_ret[i] = vx_lvx_ret
+  c_free(v_ma.data)
   vx_ret
 
 proc setImportPathList*(self: gen_qqmlengine_types.QQmlEngine, paths: seq[string]): void =
@@ -234,6 +235,7 @@ proc pluginPathList*(self: gen_qqmlengine_types.QQmlEngine, ): seq[string] =
     let vx_lvx_ret = string.fromBytes(toOpenArrayByte(vx_lv_ms.data, 0, int(vx_lv_ms.len)-1))
     c_free(vx_lv_ms.data)
     vx_ret[i] = vx_lvx_ret
+  c_free(v_ma.data)
   vx_ret
 
 proc setPluginPathList*(self: gen_qqmlengine_types.QQmlEngine, paths: seq[string]): void =
@@ -381,6 +383,7 @@ proc miqt_exec_callback_cQQmlEngine_warnings(slot: int, warnings: struct_miqt_ar
   let vwarnings_outCast = cast[ptr UncheckedArray[pointer]](vwarnings_ma.data)
   for i in 0 ..< vwarnings_ma.len:
     vwarningsx_ret[i] = gen_qqmlerror_types.QQmlError(h: vwarnings_outCast[i])
+  c_free(vwarnings_ma.data)
   let slotval1 = vwarningsx_ret
 
   nimfunc[](slotval1)

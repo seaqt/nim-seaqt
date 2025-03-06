@@ -2,7 +2,7 @@ import ./Qt5WebChannel_libs
 
 {.push raises: [].}
 
-from system/ansi_c import c_free
+from system/ansi_c import c_free, c_malloc
 
 type
   struct_miqt_string {.used.} = object
@@ -123,7 +123,7 @@ proc registerObjects*(self: gen_qqmlwebchannel_types.QQmlWebChannel, objects: Ta
   var objects_Keys_CArray = newSeq[struct_miqt_string](len(objects))
   var objects_Values_CArray = newSeq[pointer](len(objects))
   var objects_ctr = 0
-  for objectsk, objectsv in objects:
+  for objects_k, objects_v in objects:
     objects_Keys_CArray[objects_ctr] = struct_miqt_string(data: objects_k, len: csize_t(len(objects_k)))
     objects_Values_CArray[objects_ctr] = objects_v.h
     objects_ctr += 1

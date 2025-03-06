@@ -2,7 +2,7 @@ import ./Qt5Network_libs
 
 {.push raises: [].}
 
-from system/ansi_c import c_free
+from system/ansi_c import c_free, c_malloc
 
 type
   struct_miqt_string {.used.} = object
@@ -162,6 +162,7 @@ proc localCertificateChain*(self: gen_qsslconfiguration_types.QSslConfiguration,
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
     vx_ret[i] = gen_qsslcertificate_types.QSslCertificate(h: v_outCast[i])
+  c_free(v_ma.data)
   vx_ret
 
 proc setLocalCertificateChain*(self: gen_qsslconfiguration_types.QSslConfiguration, localChain: seq[gen_qsslcertificate_types.QSslCertificate]): void =
@@ -186,6 +187,7 @@ proc peerCertificateChain*(self: gen_qsslconfiguration_types.QSslConfiguration, 
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
     vx_ret[i] = gen_qsslcertificate_types.QSslCertificate(h: v_outCast[i])
+  c_free(v_ma.data)
   vx_ret
 
 proc sessionCipher*(self: gen_qsslconfiguration_types.QSslConfiguration, ): gen_qsslcipher_types.QSslCipher =
@@ -206,6 +208,7 @@ proc ciphers*(self: gen_qsslconfiguration_types.QSslConfiguration, ): seq[gen_qs
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
     vx_ret[i] = gen_qsslcipher_types.QSslCipher(h: v_outCast[i])
+  c_free(v_ma.data)
   vx_ret
 
 proc setCiphers*(self: gen_qsslconfiguration_types.QSslConfiguration, ciphers: seq[gen_qsslcipher_types.QSslCipher]): void =
@@ -221,6 +224,7 @@ proc supportedCiphers*(_: type gen_qsslconfiguration_types.QSslConfiguration, ):
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
     vx_ret[i] = gen_qsslcipher_types.QSslCipher(h: v_outCast[i])
+  c_free(v_ma.data)
   vx_ret
 
 proc caCertificates*(self: gen_qsslconfiguration_types.QSslConfiguration, ): seq[gen_qsslcertificate_types.QSslCertificate] =
@@ -229,6 +233,7 @@ proc caCertificates*(self: gen_qsslconfiguration_types.QSslConfiguration, ): seq
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
     vx_ret[i] = gen_qsslcertificate_types.QSslCertificate(h: v_outCast[i])
+  c_free(v_ma.data)
   vx_ret
 
 proc setCaCertificates*(self: gen_qsslconfiguration_types.QSslConfiguration, certificates: seq[gen_qsslcertificate_types.QSslCertificate]): void =
@@ -257,6 +262,7 @@ proc systemCaCertificates*(_: type gen_qsslconfiguration_types.QSslConfiguration
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
     vx_ret[i] = gen_qsslcertificate_types.QSslCertificate(h: v_outCast[i])
+  c_free(v_ma.data)
   vx_ret
 
 proc setSslOption*(self: gen_qsslconfiguration_types.QSslConfiguration, option: cint, on: bool): void =
@@ -286,6 +292,7 @@ proc ellipticCurves*(self: gen_qsslconfiguration_types.QSslConfiguration, ): seq
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
     vx_ret[i] = gen_qsslellipticcurve_types.QSslEllipticCurve(h: v_outCast[i])
+  c_free(v_ma.data)
   vx_ret
 
 proc setEllipticCurves*(self: gen_qsslconfiguration_types.QSslConfiguration, curves: seq[gen_qsslellipticcurve_types.QSslEllipticCurve]): void =
@@ -301,6 +308,7 @@ proc supportedEllipticCurves*(_: type gen_qsslconfiguration_types.QSslConfigurat
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
     vx_ret[i] = gen_qsslellipticcurve_types.QSslEllipticCurve(h: v_outCast[i])
+  c_free(v_ma.data)
   vx_ret
 
 proc preSharedKeyIdentityHint*(self: gen_qsslconfiguration_types.QSslConfiguration, ): seq[byte] =
@@ -364,6 +372,7 @@ proc allowedNextProtocols*(self: gen_qsslconfiguration_types.QSslConfiguration, 
     var vx_lvx_ret = @(toOpenArrayByte(vx_lv_bytearray.data, 0, int(vx_lv_bytearray.len)-1))
     c_free(vx_lv_bytearray.data)
     vx_ret[i] = vx_lvx_ret
+  c_free(v_ma.data)
   vx_ret
 
 proc nextNegotiatedProtocol*(self: gen_qsslconfiguration_types.QSslConfiguration, ): seq[byte] =

@@ -2,7 +2,7 @@ import ./Qt5Widgets_libs
 
 {.push raises: [].}
 
-from system/ansi_c import c_free
+from system/ansi_c import c_free, c_malloc
 
 type
   struct_miqt_string {.used.} = object
@@ -105,7 +105,10 @@ proc relations*(self: gen_qaccessiblewidget_types.QAccessibleWidget, match: cint
 
     var vx_vv_entry_Second = cint(vx_vv_Second_CArray[0])
 
+    c_free(vx_vv_mm.keys)
+    c_free(vx_vv_mm.values)
     vx_ret[i] = (first: vx_vv_entry_First , second: vx_vv_entry_Second )
+  c_free(v_ma.data)
   vx_ret
 
 proc focusChild*(self: gen_qaccessiblewidget_types.QAccessibleWidget, ): gen_qaccessible_types.QAccessibleInterface =
@@ -150,6 +153,7 @@ proc actionNames*(self: gen_qaccessiblewidget_types.QAccessibleWidget, ): seq[st
     let vx_lvx_ret = string.fromBytes(toOpenArrayByte(vx_lv_ms.data, 0, int(vx_lv_ms.len)-1))
     c_free(vx_lv_ms.data)
     vx_ret[i] = vx_lvx_ret
+  c_free(v_ma.data)
   vx_ret
 
 proc doAction*(self: gen_qaccessiblewidget_types.QAccessibleWidget, actionName: string): void =
@@ -164,6 +168,7 @@ proc keyBindingsForAction*(self: gen_qaccessiblewidget_types.QAccessibleWidget, 
     let vx_lvx_ret = string.fromBytes(toOpenArrayByte(vx_lv_ms.data, 0, int(vx_lv_ms.len)-1))
     c_free(vx_lv_ms.data)
     vx_ret[i] = vx_lvx_ret
+  c_free(v_ma.data)
   vx_ret
 
 proc widget*(self: gen_qaccessiblewidget_types.QAccessibleWidget, ): gen_qwidget_types.QWidget =

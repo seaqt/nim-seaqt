@@ -118,8 +118,10 @@ public:
 
 
 		QRectF* callback_return_value = vtbl->boundingRect(vtbl, this);
+		auto callback_return_value_Value = std::move(*callback_return_value);
+		delete callback_return_value;
 
-		return *callback_return_value;
+		return callback_return_value_Value;
 	}
 
 	friend QRectF* QGraphicsVideoItem_virtualbase_boundingRect(const void* self);
@@ -169,8 +171,10 @@ public:
 		QVariant* sigval2 = const_cast<QVariant*>(&value_ret);
 
 		QVariant* callback_return_value = vtbl->itemChange(vtbl, this, sigval1, sigval2);
+		auto callback_return_value_Value = std::move(*callback_return_value);
+		delete callback_return_value;
 
-		return *callback_return_value;
+		return callback_return_value_Value;
 	}
 
 	friend QVariant* QGraphicsVideoItem_virtualbase_itemChange(void* self, int change, QVariant* value);
@@ -308,8 +312,10 @@ public:
 
 
 		QPainterPath* callback_return_value = vtbl->shape(vtbl, this);
+		auto callback_return_value_Value = std::move(*callback_return_value);
+		delete callback_return_value;
 
-		return *callback_return_value;
+		return callback_return_value_Value;
 	}
 
 	friend QPainterPath* QGraphicsVideoItem_virtualbase_shape(const void* self);
@@ -390,8 +396,10 @@ public:
 
 
 		QPainterPath* callback_return_value = vtbl->opaqueArea(vtbl, this);
+		auto callback_return_value_Value = std::move(*callback_return_value);
+		delete callback_return_value;
 
-		return *callback_return_value;
+		return callback_return_value_Value;
 	}
 
 	friend QPainterPath* QGraphicsVideoItem_virtualbase_opaqueArea(const void* self);
@@ -721,8 +729,10 @@ public:
 		int sigval1 = static_cast<int>(query_ret);
 
 		QVariant* callback_return_value = vtbl->inputMethodQuery(vtbl, this, sigval1);
+		auto callback_return_value_Value = std::move(*callback_return_value);
+		delete callback_return_value;
 
-		return *callback_return_value;
+		return callback_return_value_Value;
 	}
 
 	friend QVariant* QGraphicsVideoItem_virtualbase_inputMethodQuery(const void* self, int query);
@@ -773,8 +783,10 @@ public:
 		QVariant* sigval1 = const_cast<QVariant*>(&variant_ret);
 
 		QVariant* callback_return_value = vtbl->extension(vtbl, this, sigval1);
+		auto callback_return_value_Value = std::move(*callback_return_value);
+		delete callback_return_value;
 
-		return *callback_return_value;
+		return callback_return_value_Value;
 	}
 
 	friend QVariant* QGraphicsVideoItem_virtualbase_extension(const void* self, QVariant* variant);

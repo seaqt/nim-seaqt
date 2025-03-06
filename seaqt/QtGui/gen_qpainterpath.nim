@@ -2,7 +2,7 @@ import ./Qt5Gui_libs
 
 {.push raises: [].}
 
-from system/ansi_c import c_free
+from system/ansi_c import c_free, c_malloc
 
 type
   struct_miqt_string {.used.} = object
@@ -451,6 +451,7 @@ proc dashPattern*(self: gen_qpainterpath_types.QPainterPathStroker, ): seq[float
   let v_outCast = cast[ptr UncheckedArray[float64]](v_ma.data)
   for i in 0 ..< v_ma.len:
     vx_ret[i] = v_outCast[i]
+  c_free(v_ma.data)
   vx_ret
 
 proc setDashOffset*(self: gen_qpainterpath_types.QPainterPathStroker, offset: float64): void =

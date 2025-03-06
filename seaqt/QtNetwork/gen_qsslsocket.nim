@@ -2,7 +2,7 @@ import ./Qt5Network_libs
 
 {.push raises: [].}
 
-from system/ansi_c import c_free
+from system/ansi_c import c_free, c_malloc
 
 type
   struct_miqt_string {.used.} = object
@@ -414,6 +414,7 @@ proc localCertificateChain*(self: gen_qsslsocket_types.QSslSocket, ): seq[gen_qs
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
     vx_ret[i] = gen_qsslcertificate_types.QSslCertificate(h: v_outCast[i])
+  c_free(v_ma.data)
   vx_ret
 
 proc setLocalCertificate*(self: gen_qsslsocket_types.QSslSocket, certificate: gen_qsslcertificate_types.QSslCertificate): void =
@@ -434,6 +435,7 @@ proc peerCertificateChain*(self: gen_qsslsocket_types.QSslSocket, ): seq[gen_qss
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
     vx_ret[i] = gen_qsslcertificate_types.QSslCertificate(h: v_outCast[i])
+  c_free(v_ma.data)
   vx_ret
 
 proc sessionCipher*(self: gen_qsslsocket_types.QSslSocket, ): gen_qsslcipher_types.QSslCipher =
@@ -448,6 +450,7 @@ proc ocspResponses*(self: gen_qsslsocket_types.QSslSocket, ): seq[gen_qocsprespo
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
     vx_ret[i] = gen_qocspresponse_types.QOcspResponse(h: v_outCast[i])
+  c_free(v_ma.data)
   vx_ret
 
 proc setPrivateKey*(self: gen_qsslsocket_types.QSslSocket, key: gen_qsslkey_types.QSslKey): void =
@@ -465,6 +468,7 @@ proc ciphers*(self: gen_qsslsocket_types.QSslSocket, ): seq[gen_qsslcipher_types
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
     vx_ret[i] = gen_qsslcipher_types.QSslCipher(h: v_outCast[i])
+  c_free(v_ma.data)
   vx_ret
 
 proc setCiphers*(self: gen_qsslsocket_types.QSslSocket, ciphers: seq[gen_qsslcipher_types.QSslCipher]): void =
@@ -490,6 +494,7 @@ proc defaultCiphers*(_: type gen_qsslsocket_types.QSslSocket, ): seq[gen_qsslcip
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
     vx_ret[i] = gen_qsslcipher_types.QSslCipher(h: v_outCast[i])
+  c_free(v_ma.data)
   vx_ret
 
 proc supportedCiphers*(_: type gen_qsslsocket_types.QSslSocket, ): seq[gen_qsslcipher_types.QSslCipher] =
@@ -498,6 +503,7 @@ proc supportedCiphers*(_: type gen_qsslsocket_types.QSslSocket, ): seq[gen_qsslc
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
     vx_ret[i] = gen_qsslcipher_types.QSslCipher(h: v_outCast[i])
+  c_free(v_ma.data)
   vx_ret
 
 proc addCaCertificates*(self: gen_qsslsocket_types.QSslSocket, path: string): bool =
@@ -526,6 +532,7 @@ proc caCertificates*(self: gen_qsslsocket_types.QSslSocket, ): seq[gen_qsslcerti
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
     vx_ret[i] = gen_qsslcertificate_types.QSslCertificate(h: v_outCast[i])
+  c_free(v_ma.data)
   vx_ret
 
 proc addDefaultCaCertificates*(_: type gen_qsslsocket_types.QSslSocket, path: string): bool =
@@ -554,6 +561,7 @@ proc defaultCaCertificates*(_: type gen_qsslsocket_types.QSslSocket, ): seq[gen_
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
     vx_ret[i] = gen_qsslcertificate_types.QSslCertificate(h: v_outCast[i])
+  c_free(v_ma.data)
   vx_ret
 
 proc systemCaCertificates*(_: type gen_qsslsocket_types.QSslSocket, ): seq[gen_qsslcertificate_types.QSslCertificate] =
@@ -562,6 +570,7 @@ proc systemCaCertificates*(_: type gen_qsslsocket_types.QSslSocket, ): seq[gen_q
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
     vx_ret[i] = gen_qsslcertificate_types.QSslCertificate(h: v_outCast[i])
+  c_free(v_ma.data)
   vx_ret
 
 proc waitForConnected*(self: gen_qsslsocket_types.QSslSocket, msecs: cint): bool =
@@ -585,6 +594,7 @@ proc sslErrors*(self: gen_qsslsocket_types.QSslSocket, ): seq[gen_qsslerror_type
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
     vx_ret[i] = gen_qsslerror_types.QSslError(h: v_outCast[i])
+  c_free(v_ma.data)
   vx_ret
 
 proc sslHandshakeErrors*(self: gen_qsslsocket_types.QSslSocket, ): seq[gen_qsslerror_types.QSslError] =
@@ -593,6 +603,7 @@ proc sslHandshakeErrors*(self: gen_qsslsocket_types.QSslSocket, ): seq[gen_qssle
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
     vx_ret[i] = gen_qsslerror_types.QSslError(h: v_outCast[i])
+  c_free(v_ma.data)
   vx_ret
 
 proc supportsSsl*(_: type gen_qsslsocket_types.QSslSocket, ): bool =
@@ -685,6 +696,7 @@ proc miqt_exec_callback_cQSslSocket_sslErrorsWithErrors(slot: int, errors: struc
   let verrors_outCast = cast[ptr UncheckedArray[pointer]](verrors_ma.data)
   for i in 0 ..< verrors_ma.len:
     verrorsx_ret[i] = gen_qsslerror_types.QSslError(h: verrors_outCast[i])
+  c_free(verrors_ma.data)
   let slotval1 = verrorsx_ret
 
   nimfunc[](slotval1)

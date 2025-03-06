@@ -2,7 +2,7 @@ import ./Qt5Widgets_libs
 
 {.push raises: [].}
 
-from system/ansi_c import c_free
+from system/ansi_c import c_free, c_malloc
 
 type
   struct_miqt_string {.used.} = object
@@ -316,6 +316,7 @@ proc shortcuts*(self: gen_qaction_types.QAction, ): seq[gen_qkeysequence_types.Q
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
     vx_ret[i] = gen_qkeysequence_types.QKeySequence(h: v_outCast[i])
+  c_free(v_ma.data)
   vx_ret
 
 proc setShortcutContext*(self: gen_qaction_types.QAction, context: cint): void =
@@ -390,6 +391,7 @@ proc associatedWidgets*(self: gen_qaction_types.QAction, ): seq[gen_qwidget_type
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
     vx_ret[i] = gen_qwidget_types.QWidget(h: v_outCast[i])
+  c_free(v_ma.data)
   vx_ret
 
 proc associatedGraphicsWidgets*(self: gen_qaction_types.QAction, ): seq[gen_qgraphicswidget_types.QGraphicsWidget] =
@@ -398,6 +400,7 @@ proc associatedGraphicsWidgets*(self: gen_qaction_types.QAction, ): seq[gen_qgra
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
     vx_ret[i] = gen_qgraphicswidget_types.QGraphicsWidget(h: v_outCast[i])
+  c_free(v_ma.data)
   vx_ret
 
 proc trigger*(self: gen_qaction_types.QAction, ): void =

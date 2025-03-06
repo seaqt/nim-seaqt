@@ -2,7 +2,7 @@ import ./Qt5Gui_libs
 
 {.push raises: [].}
 
-from system/ansi_c import c_free
+from system/ansi_c import c_free, c_malloc
 
 type
   struct_miqt_string {.used.} = object
@@ -182,6 +182,7 @@ proc rects*(self: gen_qregion_types.QRegion, ): seq[gen_qrect_types.QRect] =
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
     vx_ret[i] = gen_qrect_types.QRect(h: v_outCast[i])
+  c_free(v_ma.data)
   vx_ret
 
 proc setRects*(self: gen_qregion_types.QRegion, rect: gen_qrect_types.QRect, num: cint): void =

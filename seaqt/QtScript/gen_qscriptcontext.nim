@@ -2,7 +2,7 @@ import ./Qt5Script_libs
 
 {.push raises: [].}
 
-from system/ansi_c import c_free
+from system/ansi_c import c_free, c_malloc
 
 type
   struct_miqt_string {.used.} = object
@@ -111,6 +111,7 @@ proc scopeChain*(self: gen_qscriptcontext_types.QScriptContext, ): seq[gen_qscri
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
     vx_ret[i] = gen_qscriptvalue_types.QScriptValue(h: v_outCast[i])
+  c_free(v_ma.data)
   vx_ret
 
 proc pushScope*(self: gen_qscriptcontext_types.QScriptContext, objectVal: gen_qscriptvalue_types.QScriptValue): void =
@@ -158,6 +159,7 @@ proc backtrace*(self: gen_qscriptcontext_types.QScriptContext, ): seq[string] =
     let vx_lvx_ret = string.fromBytes(toOpenArrayByte(vx_lv_ms.data, 0, int(vx_lv_ms.len)-1))
     c_free(vx_lv_ms.data)
     vx_ret[i] = vx_lvx_ret
+  c_free(v_ma.data)
   vx_ret
 
 proc toString*(self: gen_qscriptcontext_types.QScriptContext, ): string =

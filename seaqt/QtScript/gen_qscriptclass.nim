@@ -2,7 +2,7 @@ import ./Qt5Script_libs
 
 {.push raises: [].}
 
-from system/ansi_c import c_free
+from system/ansi_c import c_free, c_malloc
 
 type
   struct_miqt_string {.used.} = object
@@ -226,7 +226,9 @@ proc miqt_exec_callback_cQScriptClass_name(vtbl: pointer, self: pointer): struct
   let vtbl = cast[ptr QScriptClassVTable](vtbl)
   let self = QScriptClass(h: self)
   var virtualReturn = vtbl[].name(self)
-  struct_miqt_string(data: virtualReturn, len: csize_t(len(virtualReturn)))
+  var virtualReturn_copy = cast[cstring](if len(virtualReturn) > 0: c_malloc(csize_t(len(virtualReturn))) else: nil)
+  if len(virtualReturn) > 0: copyMem(cast[pointer](virtualReturn_copy), addr virtualReturn[0], csize_t(len(virtualReturn)))
+  struct_miqt_string(data: virtualReturn_copy, len: csize_t(len(virtualReturn)))
 
 proc QScriptClasssupportsExtension*(self: gen_qscriptclass_types.QScriptClass, extension: cint): bool =
   fcQScriptClass_virtualbase_supportsExtension(self.h, cint(extension))

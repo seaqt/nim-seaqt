@@ -2,7 +2,7 @@ import ./Qt5Multimedia_libs
 
 {.push raises: [].}
 
-from system/ansi_c import c_free
+from system/ansi_c import c_free, c_malloc
 
 type
   struct_miqt_string {.used.} = object
@@ -234,6 +234,7 @@ proc supportedIsoSensitivities*(self: gen_qcameraexposure_types.QCameraExposure,
   let v_outCast = cast[ptr UncheckedArray[cint]](v_ma.data)
   for i in 0 ..< v_ma.len:
     vx_ret[i] = v_outCast[i]
+  c_free(v_ma.data)
   vx_ret
 
 proc supportedApertures*(self: gen_qcameraexposure_types.QCameraExposure, ): seq[float64] =
@@ -242,6 +243,7 @@ proc supportedApertures*(self: gen_qcameraexposure_types.QCameraExposure, ): seq
   let v_outCast = cast[ptr UncheckedArray[float64]](v_ma.data)
   for i in 0 ..< v_ma.len:
     vx_ret[i] = v_outCast[i]
+  c_free(v_ma.data)
   vx_ret
 
 proc supportedShutterSpeeds*(self: gen_qcameraexposure_types.QCameraExposure, ): seq[float64] =
@@ -250,6 +252,7 @@ proc supportedShutterSpeeds*(self: gen_qcameraexposure_types.QCameraExposure, ):
   let v_outCast = cast[ptr UncheckedArray[float64]](v_ma.data)
   for i in 0 ..< v_ma.len:
     vx_ret[i] = v_outCast[i]
+  c_free(v_ma.data)
   vx_ret
 
 proc setFlashMode*(self: gen_qcameraexposure_types.QCameraExposure, mode: cint): void =
@@ -448,6 +451,7 @@ proc supportedIsoSensitivities*(self: gen_qcameraexposure_types.QCameraExposure,
   let v_outCast = cast[ptr UncheckedArray[cint]](v_ma.data)
   for i in 0 ..< v_ma.len:
     vx_ret[i] = v_outCast[i]
+  c_free(v_ma.data)
   vx_ret
 
 proc supportedApertures*(self: gen_qcameraexposure_types.QCameraExposure, continuous: ptr bool): seq[float64] =
@@ -456,6 +460,7 @@ proc supportedApertures*(self: gen_qcameraexposure_types.QCameraExposure, contin
   let v_outCast = cast[ptr UncheckedArray[float64]](v_ma.data)
   for i in 0 ..< v_ma.len:
     vx_ret[i] = v_outCast[i]
+  c_free(v_ma.data)
   vx_ret
 
 proc supportedShutterSpeeds*(self: gen_qcameraexposure_types.QCameraExposure, continuous: ptr bool): seq[float64] =
@@ -464,6 +469,7 @@ proc supportedShutterSpeeds*(self: gen_qcameraexposure_types.QCameraExposure, co
   let v_outCast = cast[ptr UncheckedArray[float64]](v_ma.data)
   for i in 0 ..< v_ma.len:
     vx_ret[i] = v_outCast[i]
+  c_free(v_ma.data)
   vx_ret
 
 proc sender*(self: gen_qcameraexposure_types.QCameraExposure, ): gen_qobject_types.QObject =

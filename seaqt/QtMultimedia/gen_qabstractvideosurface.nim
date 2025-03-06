@@ -2,7 +2,7 @@ import ./Qt5Multimedia_libs
 
 {.push raises: [].}
 
-from system/ansi_c import c_free
+from system/ansi_c import c_free, c_malloc
 
 type
   struct_miqt_string {.used.} = object
@@ -161,6 +161,7 @@ proc supportedPixelFormats*(self: gen_qabstractvideosurface_types.QAbstractVideo
   let v_outCast = cast[ptr UncheckedArray[cint]](v_ma.data)
   for i in 0 ..< v_ma.len:
     vx_ret[i] = cint(v_outCast[i])
+  c_free(v_ma.data)
   vx_ret
 
 proc isFormatSupported*(self: gen_qabstractvideosurface_types.QAbstractVideoSurface, format: gen_qvideosurfaceformat_types.QVideoSurfaceFormat): bool =
@@ -362,7 +363,7 @@ proc miqt_exec_callback_cQAbstractVideoSurface_supportedPixelFormats(vtbl: point
   let self = QAbstractVideoSurface(h: self)
   let slotval1 = cint(typeVal)
   var virtualReturn = vtbl[].supportedPixelFormats(self, slotval1)
-  var virtualReturn_CArray = newSeq[cint](len(virtualReturn))
+  var virtualReturn_CArray = cast[ptr UncheckedArray[cint]](if len(virtualReturn) > 0: c_malloc(c_sizet(sizeof(cint) * len(virtualReturn))) else: nil)
   for i in 0..<len(virtualReturn):
     virtualReturn_CArray[i] = cint(virtualReturn[i])
 

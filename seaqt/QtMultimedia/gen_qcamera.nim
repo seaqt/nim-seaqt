@@ -2,7 +2,7 @@ import ./Qt5Multimedia_libs
 
 {.push raises: [].}
 
-from system/ansi_c import c_free
+from system/ansi_c import c_free, c_malloc
 
 type
   struct_miqt_string {.used.} = object
@@ -276,6 +276,7 @@ proc availableDevices*(_: type gen_qcamera_types.QCamera, ): seq[seq[byte]] =
     var vx_lvx_ret = @(toOpenArrayByte(vx_lv_bytearray.data, 0, int(vx_lv_bytearray.len)-1))
     c_free(vx_lv_bytearray.data)
     vx_ret[i] = vx_lvx_ret
+  c_free(v_ma.data)
   vx_ret
 
 proc deviceDescription*(_: type gen_qcamera_types.QCamera, device: seq[byte]): string =
@@ -329,6 +330,7 @@ proc supportedViewfinderSettings*(self: gen_qcamera_types.QCamera, ): seq[gen_qc
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
     vx_ret[i] = gen_qcameraviewfindersettings_types.QCameraViewfinderSettings(h: v_outCast[i])
+  c_free(v_ma.data)
   vx_ret
 
 proc supportedViewfinderResolutions*(self: gen_qcamera_types.QCamera, ): seq[gen_qsize_types.QSize] =
@@ -337,6 +339,7 @@ proc supportedViewfinderResolutions*(self: gen_qcamera_types.QCamera, ): seq[gen
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
     vx_ret[i] = gen_qsize_types.QSize(h: v_outCast[i])
+  c_free(v_ma.data)
   vx_ret
 
 proc supportedViewfinderFrameRateRanges*(self: gen_qcamera_types.QCamera, ): seq[gen_qcamera_types.QCameraFrameRateRange] =
@@ -345,6 +348,7 @@ proc supportedViewfinderFrameRateRanges*(self: gen_qcamera_types.QCamera, ): seq
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
     vx_ret[i] = gen_qcamera_types.QCameraFrameRateRange(h: v_outCast[i])
+  c_free(v_ma.data)
   vx_ret
 
 proc supportedViewfinderPixelFormats*(self: gen_qcamera_types.QCamera, ): seq[cint] =
@@ -353,6 +357,7 @@ proc supportedViewfinderPixelFormats*(self: gen_qcamera_types.QCamera, ): seq[ci
   let v_outCast = cast[ptr UncheckedArray[cint]](v_ma.data)
   for i in 0 ..< v_ma.len:
     vx_ret[i] = cint(v_outCast[i])
+  c_free(v_ma.data)
   vx_ret
 
 proc error*(self: gen_qcamera_types.QCamera, ): cint =
@@ -615,6 +620,7 @@ proc supportedViewfinderSettings*(self: gen_qcamera_types.QCamera, settings: gen
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
     vx_ret[i] = gen_qcameraviewfindersettings_types.QCameraViewfinderSettings(h: v_outCast[i])
+  c_free(v_ma.data)
   vx_ret
 
 proc supportedViewfinderResolutions*(self: gen_qcamera_types.QCamera, settings: gen_qcameraviewfindersettings_types.QCameraViewfinderSettings): seq[gen_qsize_types.QSize] =
@@ -623,6 +629,7 @@ proc supportedViewfinderResolutions*(self: gen_qcamera_types.QCamera, settings: 
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
     vx_ret[i] = gen_qsize_types.QSize(h: v_outCast[i])
+  c_free(v_ma.data)
   vx_ret
 
 proc supportedViewfinderFrameRateRanges*(self: gen_qcamera_types.QCamera, settings: gen_qcameraviewfindersettings_types.QCameraViewfinderSettings): seq[gen_qcamera_types.QCameraFrameRateRange] =
@@ -631,6 +638,7 @@ proc supportedViewfinderFrameRateRanges*(self: gen_qcamera_types.QCamera, settin
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
     vx_ret[i] = gen_qcamera_types.QCameraFrameRateRange(h: v_outCast[i])
+  c_free(v_ma.data)
   vx_ret
 
 proc supportedViewfinderPixelFormats*(self: gen_qcamera_types.QCamera, settings: gen_qcameraviewfindersettings_types.QCameraViewfinderSettings): seq[cint] =
@@ -639,6 +647,7 @@ proc supportedViewfinderPixelFormats*(self: gen_qcamera_types.QCamera, settings:
   let v_outCast = cast[ptr UncheckedArray[cint]](v_ma.data)
   for i in 0 ..< v_ma.len:
     vx_ret[i] = cint(v_outCast[i])
+  c_free(v_ma.data)
   vx_ret
 
 type QCamerametaObjectProc* = proc(self: QCamera): gen_qobjectdefs_types.QMetaObject {.raises: [], gcsafe.}

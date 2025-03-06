@@ -2,7 +2,7 @@ import ./Qt5Multimedia_libs
 
 {.push raises: [].}
 
-from system/ansi_c import c_free
+from system/ansi_c import c_free, c_malloc
 
 type
   struct_miqt_string {.used.} = object
@@ -181,6 +181,7 @@ proc propertyNames*(self: gen_qvideosurfaceformat_types.QVideoSurfaceFormat, ): 
     var vx_lvx_ret = @(toOpenArrayByte(vx_lv_bytearray.data, 0, int(vx_lv_bytearray.len)-1))
     c_free(vx_lv_bytearray.data)
     vx_ret[i] = vx_lvx_ret
+  c_free(v_ma.data)
   vx_ret
 
 proc property*(self: gen_qvideosurfaceformat_types.QVideoSurfaceFormat, name: cstring): gen_qvariant_types.QVariant =

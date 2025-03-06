@@ -69,6 +69,7 @@ public:
 
 		struct miqt_string callback_return_value = vtbl->valuePropertyName(vtbl, this, sigval1);
 		QByteArray callback_return_value_QByteArray(callback_return_value.data, callback_return_value.len);
+		free(callback_return_value.data);
 
 		return callback_return_value_QByteArray;
 	}

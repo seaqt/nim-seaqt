@@ -2,7 +2,7 @@ import ./Qt5PrintSupport_libs
 
 {.push raises: [].}
 
-from system/ansi_c import c_free
+from system/ansi_c import c_free, c_malloc
 
 type
   struct_miqt_string {.used.} = object
@@ -124,6 +124,7 @@ proc supportedPageSizes*(self: gen_qprinterinfo_types.QPrinterInfo, ): seq[gen_q
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
     vx_ret[i] = gen_qpagesize_types.QPageSize(h: v_outCast[i])
+  c_free(v_ma.data)
   vx_ret
 
 proc defaultPageSize*(self: gen_qprinterinfo_types.QPrinterInfo, ): gen_qpagesize_types.QPageSize =
@@ -144,6 +145,7 @@ proc supportedPaperSizes*(self: gen_qprinterinfo_types.QPrinterInfo, ): seq[cint
   let v_outCast = cast[ptr UncheckedArray[cint]](v_ma.data)
   for i in 0 ..< v_ma.len:
     vx_ret[i] = cint(v_outCast[i])
+  c_free(v_ma.data)
   vx_ret
 
 proc supportedSizesWithNames*(self: gen_qprinterinfo_types.QPrinterInfo, ): seq[tuple[first: string, second: gen_qsize_types.QSizeF]] =
@@ -161,7 +163,10 @@ proc supportedSizesWithNames*(self: gen_qprinterinfo_types.QPrinterInfo, ): seq[
 
     var vx_lv_entry_Second = gen_qsize_types.QSizeF(h: vx_lv_Second_CArray[0])
 
+    c_free(vx_lv_mm.keys)
+    c_free(vx_lv_mm.values)
     vx_ret[i] = (first: vx_lv_entry_First , second: vx_lv_entry_Second )
+  c_free(v_ma.data)
   vx_ret
 
 proc supportedResolutions*(self: gen_qprinterinfo_types.QPrinterInfo, ): seq[cint] =
@@ -170,6 +175,7 @@ proc supportedResolutions*(self: gen_qprinterinfo_types.QPrinterInfo, ): seq[cin
   let v_outCast = cast[ptr UncheckedArray[cint]](v_ma.data)
   for i in 0 ..< v_ma.len:
     vx_ret[i] = v_outCast[i]
+  c_free(v_ma.data)
   vx_ret
 
 proc defaultDuplexMode*(self: gen_qprinterinfo_types.QPrinterInfo, ): cint =
@@ -181,6 +187,7 @@ proc supportedDuplexModes*(self: gen_qprinterinfo_types.QPrinterInfo, ): seq[cin
   let v_outCast = cast[ptr UncheckedArray[cint]](v_ma.data)
   for i in 0 ..< v_ma.len:
     vx_ret[i] = cint(v_outCast[i])
+  c_free(v_ma.data)
   vx_ret
 
 proc defaultColorMode*(self: gen_qprinterinfo_types.QPrinterInfo, ): cint =
@@ -192,6 +199,7 @@ proc supportedColorModes*(self: gen_qprinterinfo_types.QPrinterInfo, ): seq[cint
   let v_outCast = cast[ptr UncheckedArray[cint]](v_ma.data)
   for i in 0 ..< v_ma.len:
     vx_ret[i] = cint(v_outCast[i])
+  c_free(v_ma.data)
   vx_ret
 
 proc availablePrinterNames*(_: type gen_qprinterinfo_types.QPrinterInfo, ): seq[string] =
@@ -203,6 +211,7 @@ proc availablePrinterNames*(_: type gen_qprinterinfo_types.QPrinterInfo, ): seq[
     let vx_lvx_ret = string.fromBytes(toOpenArrayByte(vx_lv_ms.data, 0, int(vx_lv_ms.len)-1))
     c_free(vx_lv_ms.data)
     vx_ret[i] = vx_lvx_ret
+  c_free(v_ma.data)
   vx_ret
 
 proc availablePrinters*(_: type gen_qprinterinfo_types.QPrinterInfo, ): seq[gen_qprinterinfo_types.QPrinterInfo] =
@@ -211,6 +220,7 @@ proc availablePrinters*(_: type gen_qprinterinfo_types.QPrinterInfo, ): seq[gen_
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
     vx_ret[i] = gen_qprinterinfo_types.QPrinterInfo(h: v_outCast[i])
+  c_free(v_ma.data)
   vx_ret
 
 proc defaultPrinterName*(_: type gen_qprinterinfo_types.QPrinterInfo, ): string =

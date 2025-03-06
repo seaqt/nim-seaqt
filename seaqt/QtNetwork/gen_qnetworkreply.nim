@@ -2,7 +2,7 @@ import ./Qt5Network_libs
 
 {.push raises: [].}
 
-from system/ansi_c import c_free
+from system/ansi_c import c_free, c_malloc
 
 type
   struct_miqt_string {.used.} = object
@@ -240,6 +240,7 @@ proc rawHeaderList*(self: gen_qnetworkreply_types.QNetworkReply, ): seq[seq[byte
     var vx_lvx_ret = @(toOpenArrayByte(vx_lv_bytearray.data, 0, int(vx_lv_bytearray.len)-1))
     c_free(vx_lv_bytearray.data)
     vx_ret[i] = vx_lvx_ret
+  c_free(v_ma.data)
   vx_ret
 
 proc rawHeader*(self: gen_qnetworkreply_types.QNetworkReply, headerName: seq[byte]): seq[byte] =
@@ -266,7 +267,10 @@ proc rawHeaderPairs*(self: gen_qnetworkreply_types.QNetworkReply, ): seq[tuple[f
     c_free(vx_lv_second_bytearray.data)
     var vx_lv_entry_Second = vx_lv_secondx_ret
 
+    c_free(vx_lv_mm.keys)
+    c_free(vx_lv_mm.values)
     vx_ret[i] = (first: vx_lv_entry_First , second: vx_lv_entry_Second )
+  c_free(v_ma.data)
   vx_ret
 
 proc attribute*(self: gen_qnetworkreply_types.QNetworkReply, code: cint): gen_qvariant_types.QVariant =
@@ -400,6 +404,7 @@ proc miqt_exec_callback_cQNetworkReply_sslErrors(slot: int, errors: struct_miqt_
   let verrors_outCast = cast[ptr UncheckedArray[pointer]](verrors_ma.data)
   for i in 0 ..< verrors_ma.len:
     verrorsx_ret[i] = gen_qsslerror_types.QSslError(h: verrors_outCast[i])
+  c_free(verrors_ma.data)
   let slotval1 = verrorsx_ret
 
   nimfunc[](slotval1)

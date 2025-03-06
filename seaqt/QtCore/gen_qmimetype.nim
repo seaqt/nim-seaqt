@@ -2,7 +2,7 @@ import ./Qt5Core_libs
 
 {.push raises: [].}
 
-from system/ansi_c import c_free
+from system/ansi_c import c_free, c_malloc
 
 type
   struct_miqt_string {.used.} = object
@@ -118,6 +118,7 @@ proc globPatterns*(self: gen_qmimetype_types.QMimeType, ): seq[string] =
     let vx_lvx_ret = string.fromBytes(toOpenArrayByte(vx_lv_ms.data, 0, int(vx_lv_ms.len)-1))
     c_free(vx_lv_ms.data)
     vx_ret[i] = vx_lvx_ret
+  c_free(v_ma.data)
   vx_ret
 
 proc parentMimeTypes*(self: gen_qmimetype_types.QMimeType, ): seq[string] =
@@ -129,6 +130,7 @@ proc parentMimeTypes*(self: gen_qmimetype_types.QMimeType, ): seq[string] =
     let vx_lvx_ret = string.fromBytes(toOpenArrayByte(vx_lv_ms.data, 0, int(vx_lv_ms.len)-1))
     c_free(vx_lv_ms.data)
     vx_ret[i] = vx_lvx_ret
+  c_free(v_ma.data)
   vx_ret
 
 proc allAncestors*(self: gen_qmimetype_types.QMimeType, ): seq[string] =
@@ -140,6 +142,7 @@ proc allAncestors*(self: gen_qmimetype_types.QMimeType, ): seq[string] =
     let vx_lvx_ret = string.fromBytes(toOpenArrayByte(vx_lv_ms.data, 0, int(vx_lv_ms.len)-1))
     c_free(vx_lv_ms.data)
     vx_ret[i] = vx_lvx_ret
+  c_free(v_ma.data)
   vx_ret
 
 proc aliases*(self: gen_qmimetype_types.QMimeType, ): seq[string] =
@@ -151,6 +154,7 @@ proc aliases*(self: gen_qmimetype_types.QMimeType, ): seq[string] =
     let vx_lvx_ret = string.fromBytes(toOpenArrayByte(vx_lv_ms.data, 0, int(vx_lv_ms.len)-1))
     c_free(vx_lv_ms.data)
     vx_ret[i] = vx_lvx_ret
+  c_free(v_ma.data)
   vx_ret
 
 proc suffixes*(self: gen_qmimetype_types.QMimeType, ): seq[string] =
@@ -162,6 +166,7 @@ proc suffixes*(self: gen_qmimetype_types.QMimeType, ): seq[string] =
     let vx_lvx_ret = string.fromBytes(toOpenArrayByte(vx_lv_ms.data, 0, int(vx_lv_ms.len)-1))
     c_free(vx_lv_ms.data)
     vx_ret[i] = vx_lvx_ret
+  c_free(v_ma.data)
   vx_ret
 
 proc preferredSuffix*(self: gen_qmimetype_types.QMimeType, ): string =

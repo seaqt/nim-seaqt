@@ -2,7 +2,7 @@ import ./Qt5Gui_libs
 
 {.push raises: [].}
 
-from system/ansi_c import c_free
+from system/ansi_c import c_free, c_malloc
 
 type
   struct_miqt_string {.used.} = object
@@ -186,6 +186,7 @@ proc textKeys*(self: gen_qimagereader_types.QImageReader, ): seq[string] =
     let vx_lvx_ret = string.fromBytes(toOpenArrayByte(vx_lv_ms.data, 0, int(vx_lv_ms.len)-1))
     c_free(vx_lv_ms.data)
     vx_ret[i] = vx_lvx_ret
+  c_free(v_ma.data)
   vx_ret
 
 proc text*(self: gen_qimagereader_types.QImageReader, key: string): string =
@@ -257,6 +258,7 @@ proc supportedSubTypes*(self: gen_qimagereader_types.QImageReader, ): seq[seq[by
     var vx_lvx_ret = @(toOpenArrayByte(vx_lv_bytearray.data, 0, int(vx_lv_bytearray.len)-1))
     c_free(vx_lv_bytearray.data)
     vx_ret[i] = vx_lvx_ret
+  c_free(v_ma.data)
   vx_ret
 
 proc canRead*(self: gen_qimagereader_types.QImageReader, ): bool =
@@ -322,6 +324,7 @@ proc supportedImageFormats*(_: type gen_qimagereader_types.QImageReader, ): seq[
     var vx_lvx_ret = @(toOpenArrayByte(vx_lv_bytearray.data, 0, int(vx_lv_bytearray.len)-1))
     c_free(vx_lv_bytearray.data)
     vx_ret[i] = vx_lvx_ret
+  c_free(v_ma.data)
   vx_ret
 
 proc supportedMimeTypes*(_: type gen_qimagereader_types.QImageReader, ): seq[seq[byte]] =
@@ -333,6 +336,7 @@ proc supportedMimeTypes*(_: type gen_qimagereader_types.QImageReader, ): seq[seq
     var vx_lvx_ret = @(toOpenArrayByte(vx_lv_bytearray.data, 0, int(vx_lv_bytearray.len)-1))
     c_free(vx_lv_bytearray.data)
     vx_ret[i] = vx_lvx_ret
+  c_free(v_ma.data)
   vx_ret
 
 proc imageFormatsForMimeType*(_: type gen_qimagereader_types.QImageReader, mimeType: seq[byte]): seq[seq[byte]] =
@@ -344,6 +348,7 @@ proc imageFormatsForMimeType*(_: type gen_qimagereader_types.QImageReader, mimeT
     var vx_lvx_ret = @(toOpenArrayByte(vx_lv_bytearray.data, 0, int(vx_lv_bytearray.len)-1))
     c_free(vx_lv_bytearray.data)
     vx_ret[i] = vx_lvx_ret
+  c_free(v_ma.data)
   vx_ret
 
 proc tr*(_: type gen_qimagereader_types.QImageReader, sourceText: cstring, disambiguation: cstring): string =

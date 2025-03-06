@@ -125,8 +125,10 @@ public:
 
 
 		QSize* callback_return_value = vtbl->sizeHint(vtbl, this);
+		auto callback_return_value_Value = std::move(*callback_return_value);
+		delete callback_return_value;
 
-		return *callback_return_value;
+		return callback_return_value_Value;
 	}
 
 	friend QSize* QDateTimeEdit_virtualbase_sizeHint(const void* self);
@@ -296,8 +298,10 @@ public:
 		struct miqt_string sigval1 = text_ms;
 
 		QDateTime* callback_return_value = vtbl->dateTimeFromText(vtbl, this, sigval1);
+		auto callback_return_value_Value = std::move(*callback_return_value);
+		delete callback_return_value;
 
-		return *callback_return_value;
+		return callback_return_value_Value;
 	}
 
 	friend QDateTime* QDateTimeEdit_virtualbase_dateTimeFromText(const void* self, struct miqt_string text);
@@ -314,6 +318,7 @@ public:
 
 		struct miqt_string callback_return_value = vtbl->textFromDateTime(vtbl, this, sigval1);
 		QString callback_return_value_QString = QString::fromUtf8(callback_return_value.data, callback_return_value.len);
+		free(callback_return_value.data);
 
 		return callback_return_value_QString;
 	}
@@ -372,8 +377,10 @@ public:
 
 
 		QSize* callback_return_value = vtbl->minimumSizeHint(vtbl, this);
+		auto callback_return_value_Value = std::move(*callback_return_value);
+		delete callback_return_value;
 
-		return *callback_return_value;
+		return callback_return_value_Value;
 	}
 
 	friend QSize* QDateTimeEdit_virtualbase_minimumSizeHint(const void* self);
@@ -388,8 +395,10 @@ public:
 		int sigval1 = static_cast<int>(param1_ret);
 
 		QVariant* callback_return_value = vtbl->inputMethodQuery(vtbl, this, sigval1);
+		auto callback_return_value_Value = std::move(*callback_return_value);
+		delete callback_return_value;
 
-		return *callback_return_value;
+		return callback_return_value_Value;
 	}
 
 	friend QVariant* QDateTimeEdit_virtualbase_inputMethodQuery(const void* self, int param1);
@@ -1870,8 +1879,10 @@ public:
 
 
 		QSize* callback_return_value = vtbl->sizeHint(vtbl, this);
+		auto callback_return_value_Value = std::move(*callback_return_value);
+		delete callback_return_value;
 
-		return *callback_return_value;
+		return callback_return_value_Value;
 	}
 
 	friend QSize* QTimeEdit_virtualbase_sizeHint(const void* self);
@@ -2041,8 +2052,10 @@ public:
 		struct miqt_string sigval1 = text_ms;
 
 		QDateTime* callback_return_value = vtbl->dateTimeFromText(vtbl, this, sigval1);
+		auto callback_return_value_Value = std::move(*callback_return_value);
+		delete callback_return_value;
 
-		return *callback_return_value;
+		return callback_return_value_Value;
 	}
 
 	friend QDateTime* QTimeEdit_virtualbase_dateTimeFromText(const void* self, struct miqt_string text);
@@ -2059,6 +2072,7 @@ public:
 
 		struct miqt_string callback_return_value = vtbl->textFromDateTime(vtbl, this, sigval1);
 		QString callback_return_value_QString = QString::fromUtf8(callback_return_value.data, callback_return_value.len);
+		free(callback_return_value.data);
 
 		return callback_return_value_QString;
 	}
@@ -2117,8 +2131,10 @@ public:
 
 
 		QSize* callback_return_value = vtbl->minimumSizeHint(vtbl, this);
+		auto callback_return_value_Value = std::move(*callback_return_value);
+		delete callback_return_value;
 
-		return *callback_return_value;
+		return callback_return_value_Value;
 	}
 
 	friend QSize* QTimeEdit_virtualbase_minimumSizeHint(const void* self);
@@ -2133,8 +2149,10 @@ public:
 		int sigval1 = static_cast<int>(param1_ret);
 
 		QVariant* callback_return_value = vtbl->inputMethodQuery(vtbl, this, sigval1);
+		auto callback_return_value_Value = std::move(*callback_return_value);
+		delete callback_return_value;
 
-		return *callback_return_value;
+		return callback_return_value_Value;
 	}
 
 	friend QVariant* QTimeEdit_virtualbase_inputMethodQuery(const void* self, int param1);
@@ -3344,8 +3362,10 @@ public:
 
 
 		QSize* callback_return_value = vtbl->sizeHint(vtbl, this);
+		auto callback_return_value_Value = std::move(*callback_return_value);
+		delete callback_return_value;
 
-		return *callback_return_value;
+		return callback_return_value_Value;
 	}
 
 	friend QSize* QDateEdit_virtualbase_sizeHint(const void* self);
@@ -3515,8 +3535,10 @@ public:
 		struct miqt_string sigval1 = text_ms;
 
 		QDateTime* callback_return_value = vtbl->dateTimeFromText(vtbl, this, sigval1);
+		auto callback_return_value_Value = std::move(*callback_return_value);
+		delete callback_return_value;
 
-		return *callback_return_value;
+		return callback_return_value_Value;
 	}
 
 	friend QDateTime* QDateEdit_virtualbase_dateTimeFromText(const void* self, struct miqt_string text);
@@ -3533,6 +3555,7 @@ public:
 
 		struct miqt_string callback_return_value = vtbl->textFromDateTime(vtbl, this, sigval1);
 		QString callback_return_value_QString = QString::fromUtf8(callback_return_value.data, callback_return_value.len);
+		free(callback_return_value.data);
 
 		return callback_return_value_QString;
 	}
@@ -3591,8 +3614,10 @@ public:
 
 
 		QSize* callback_return_value = vtbl->minimumSizeHint(vtbl, this);
+		auto callback_return_value_Value = std::move(*callback_return_value);
+		delete callback_return_value;
 
-		return *callback_return_value;
+		return callback_return_value_Value;
 	}
 
 	friend QSize* QDateEdit_virtualbase_minimumSizeHint(const void* self);
@@ -3607,8 +3632,10 @@ public:
 		int sigval1 = static_cast<int>(param1_ret);
 
 		QVariant* callback_return_value = vtbl->inputMethodQuery(vtbl, this, sigval1);
+		auto callback_return_value_Value = std::move(*callback_return_value);
+		delete callback_return_value;
 
-		return *callback_return_value;
+		return callback_return_value_Value;
 	}
 
 	friend QVariant* QDateEdit_virtualbase_inputMethodQuery(const void* self, int param1);

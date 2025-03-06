@@ -163,8 +163,10 @@ public:
 		QVariant* sigval2 = const_cast<QVariant*>(&value_ret);
 
 		QVariant* callback_return_value = vtbl->itemChange(vtbl, this, sigval1, sigval2);
+		auto callback_return_value_Value = std::move(*callback_return_value);
+		delete callback_return_value;
 
-		return *callback_return_value;
+		return callback_return_value_Value;
 	}
 
 	friend QVariant* QGraphicsProxyWidget_virtualbase_itemChange(void* self, int change, QVariant* value);
@@ -540,8 +542,10 @@ public:
 		int sigval1 = static_cast<int>(query_ret);
 
 		QVariant* callback_return_value = vtbl->inputMethodQuery(vtbl, this, sigval1);
+		auto callback_return_value_Value = std::move(*callback_return_value);
+		delete callback_return_value;
 
-		return *callback_return_value;
+		return callback_return_value_Value;
 	}
 
 	friend QVariant* QGraphicsProxyWidget_virtualbase_inputMethodQuery(const void* self, int query);
@@ -574,8 +578,10 @@ public:
 		QSizeF* sigval2 = const_cast<QSizeF*>(&constraint_ret);
 
 		QSizeF* callback_return_value = vtbl->sizeHint(vtbl, this, sigval1, sigval2);
+		auto callback_return_value_Value = std::move(*callback_return_value);
+		delete callback_return_value;
 
-		return *callback_return_value;
+		return callback_return_value_Value;
 	}
 
 	friend QSizeF* QGraphicsProxyWidget_virtualbase_sizeHint(const void* self, int which, QSizeF* constraint);
@@ -642,8 +648,10 @@ public:
 
 
 		QRectF* callback_return_value = vtbl->boundingRect(vtbl, this);
+		auto callback_return_value_Value = std::move(*callback_return_value);
+		delete callback_return_value;
 
-		return *callback_return_value;
+		return callback_return_value_Value;
 	}
 
 	friend QRectF* QGraphicsProxyWidget_virtualbase_boundingRect(const void* self);
@@ -656,8 +664,10 @@ public:
 
 
 		QPainterPath* callback_return_value = vtbl->shape(vtbl, this);
+		auto callback_return_value_Value = std::move(*callback_return_value);
+		delete callback_return_value;
 
-		return *callback_return_value;
+		return callback_return_value_Value;
 	}
 
 	friend QPainterPath* QGraphicsProxyWidget_virtualbase_shape(const void* self);
@@ -710,8 +720,10 @@ public:
 		QVariant* sigval2 = const_cast<QVariant*>(&value_ret);
 
 		QVariant* callback_return_value = vtbl->propertyChange(vtbl, this, sigval1, sigval2);
+		auto callback_return_value_Value = std::move(*callback_return_value);
+		delete callback_return_value;
 
-		return *callback_return_value;
+		return callback_return_value_Value;
 	}
 
 	friend QVariant* QGraphicsProxyWidget_virtualbase_propertyChange(void* self, struct miqt_string propertyName, QVariant* value);
@@ -1022,8 +1034,10 @@ public:
 
 
 		QPainterPath* callback_return_value = vtbl->opaqueArea(vtbl, this);
+		auto callback_return_value_Value = std::move(*callback_return_value);
+		delete callback_return_value;
 
-		return *callback_return_value;
+		return callback_return_value_Value;
 	}
 
 	friend QPainterPath* QGraphicsProxyWidget_virtualbase_opaqueArea(const void* self);
@@ -1090,8 +1104,10 @@ public:
 		QVariant* sigval1 = const_cast<QVariant*>(&variant_ret);
 
 		QVariant* callback_return_value = vtbl->extension(vtbl, this, sigval1);
+		auto callback_return_value_Value = std::move(*callback_return_value);
+		delete callback_return_value;
 
-		return *callback_return_value;
+		return callback_return_value_Value;
 	}
 
 	friend QVariant* QGraphicsProxyWidget_virtualbase_extension(const void* self, QVariant* variant);

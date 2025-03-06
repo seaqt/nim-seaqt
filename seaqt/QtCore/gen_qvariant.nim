@@ -2,7 +2,7 @@ import ./Qt5Core_libs
 
 {.push raises: [].}
 
-from system/ansi_c import c_free
+from system/ansi_c import c_free, c_malloc
 
 type
   struct_miqt_string {.used.} = object
@@ -391,6 +391,7 @@ proc toStringList*(self: gen_qvariant_types.QVariant, ): seq[string] =
     let vx_lvx_ret = string.fromBytes(toOpenArrayByte(vx_lv_ms.data, 0, int(vx_lv_ms.len)-1))
     c_free(vx_lv_ms.data)
     vx_ret[i] = vx_lvx_ret
+  c_free(v_ma.data)
   vx_ret
 
 proc toChar*(self: gen_qvariant_types.QVariant, ): gen_qchar_types.QChar =
@@ -419,6 +420,8 @@ proc toMap*(self: gen_qvariant_types.QVariant, ): Table[string,gen_qvariant_type
     var v_entry_Value = gen_qvariant_types.QVariant(h: v_Values[i])
 
     vx_ret[v_entry_Key] = v_entry_Value
+  c_free(v_mm.keys)
+  c_free(v_mm.values)
   vx_ret
 
 proc toHash*(self: gen_qvariant_types.QVariant, ): Table[string,gen_qvariant_types.QVariant] =
@@ -435,6 +438,8 @@ proc toHash*(self: gen_qvariant_types.QVariant, ): Table[string,gen_qvariant_typ
     var v_entry_Value = gen_qvariant_types.QVariant(h: v_Values[i])
 
     vx_ret[v_entry_Key] = v_entry_Value
+  c_free(v_mm.keys)
+  c_free(v_mm.values)
   vx_ret
 
 proc toPoint*(self: gen_qvariant_types.QVariant, ): gen_qpoint_types.QPoint =
@@ -668,7 +673,7 @@ proc create*(T: type gen_qvariant_types.QVariant,
   var map_Keys_CArray = newSeq[struct_miqt_string](len(map))
   var map_Values_CArray = newSeq[pointer](len(map))
   var map_ctr = 0
-  for mapk, mapv in map:
+  for map_k, map_v in map:
     map_Keys_CArray[map_ctr] = struct_miqt_string(data: map_k, len: csize_t(len(map_k)))
     map_Values_CArray[map_ctr] = map_v.h
     map_ctr += 1
@@ -680,7 +685,7 @@ proc create2*(T: type gen_qvariant_types.QVariant,
   var hash_Keys_CArray = newSeq[struct_miqt_string](len(hash))
   var hash_Values_CArray = newSeq[pointer](len(hash))
   var hash_ctr = 0
-  for hashk, hashv in hash:
+  for hash_k, hash_v in hash:
     hash_Keys_CArray[hash_ctr] = struct_miqt_string(data: hash_k, len: csize_t(len(hash_k)))
     hash_Values_CArray[hash_ctr] = hash_v.h
     hash_ctr += 1

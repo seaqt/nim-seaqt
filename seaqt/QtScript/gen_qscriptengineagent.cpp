@@ -222,8 +222,10 @@ public:
 		QVariant* sigval2 = const_cast<QVariant*>(&argument_ret);
 
 		QVariant* callback_return_value = vtbl->extension(vtbl, this, sigval1, sigval2);
+		auto callback_return_value_Value = std::move(*callback_return_value);
+		delete callback_return_value;
 
-		return *callback_return_value;
+		return callback_return_value_Value;
 	}
 
 	friend QVariant* QScriptEngineAgent_virtualbase_extension(void* self, int extension, QVariant* argument);

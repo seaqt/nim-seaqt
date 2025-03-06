@@ -2,7 +2,7 @@ import ./Qt5Core_libs
 
 {.push raises: [].}
 
-from system/ansi_c import c_free
+from system/ansi_c import c_free, c_malloc
 
 type
   struct_miqt_string {.used.} = object
@@ -154,7 +154,10 @@ proc queryItems*(self: gen_qurlquery_types.QUrlQuery, ): seq[tuple[first: string
     c_free(vx_lv_second_ms.data)
     var vx_lv_entry_Second = vx_lv_secondx_ret
 
+    c_free(vx_lv_mm.keys)
+    c_free(vx_lv_mm.values)
     vx_ret[i] = (first: vx_lv_entry_First , second: vx_lv_entry_Second )
+  c_free(v_ma.data)
   vx_ret
 
 proc hasQueryItem*(self: gen_qurlquery_types.QUrlQuery, key: string): bool =
@@ -181,6 +184,7 @@ proc allQueryItemValues*(self: gen_qurlquery_types.QUrlQuery, key: string): seq[
     let vx_lvx_ret = string.fromBytes(toOpenArrayByte(vx_lv_ms.data, 0, int(vx_lv_ms.len)-1))
     c_free(vx_lv_ms.data)
     vx_ret[i] = vx_lvx_ret
+  c_free(v_ma.data)
   vx_ret
 
 proc removeAllQueryItems*(self: gen_qurlquery_types.QUrlQuery, key: string): void =
@@ -222,7 +226,10 @@ proc queryItems*(self: gen_qurlquery_types.QUrlQuery, encoding: cint): seq[tuple
     c_free(vx_lv_second_ms.data)
     var vx_lv_entry_Second = vx_lv_secondx_ret
 
+    c_free(vx_lv_mm.keys)
+    c_free(vx_lv_mm.values)
     vx_ret[i] = (first: vx_lv_entry_First , second: vx_lv_entry_Second )
+  c_free(v_ma.data)
   vx_ret
 
 proc queryItemValue*(self: gen_qurlquery_types.QUrlQuery, key: string, encoding: cint): string =
@@ -240,6 +247,7 @@ proc allQueryItemValues*(self: gen_qurlquery_types.QUrlQuery, key: string, encod
     let vx_lvx_ret = string.fromBytes(toOpenArrayByte(vx_lv_ms.data, 0, int(vx_lv_ms.len)-1))
     c_free(vx_lv_ms.data)
     vx_ret[i] = vx_lvx_ret
+  c_free(v_ma.data)
   vx_ret
 
 proc create*(T: type gen_qurlquery_types.QUrlQuery): gen_qurlquery_types.QUrlQuery =

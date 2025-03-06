@@ -103,8 +103,10 @@ public:
 
 
 		QRect* callback_return_value = vtbl->geometry(vtbl, this);
+		auto callback_return_value_Value = std::move(*callback_return_value);
+		delete callback_return_value;
 
-		return *callback_return_value;
+		return callback_return_value_Value;
 	}
 
 	friend QRect* QLayout_virtualbase_geometry(const void* self);
@@ -143,8 +145,10 @@ public:
 
 
 		QSize* callback_return_value = vtbl->minimumSize(vtbl, this);
+		auto callback_return_value_Value = std::move(*callback_return_value);
+		delete callback_return_value;
 
-		return *callback_return_value;
+		return callback_return_value_Value;
 	}
 
 	friend QSize* QLayout_virtualbase_minimumSize(const void* self);
@@ -157,8 +161,10 @@ public:
 
 
 		QSize* callback_return_value = vtbl->maximumSize(vtbl, this);
+		auto callback_return_value_Value = std::move(*callback_return_value);
+		delete callback_return_value;
 
-		return *callback_return_value;
+		return callback_return_value_Value;
 	}
 
 	friend QSize* QLayout_virtualbase_maximumSize(const void* self);
@@ -393,8 +399,10 @@ public:
 
 
 		QSize* callback_return_value = vtbl->sizeHint(vtbl, this);
+		auto callback_return_value_Value = std::move(*callback_return_value);
+		delete callback_return_value;
 
-		return *callback_return_value;
+		return callback_return_value_Value;
 	}
 
 	// Subclass to allow providing a Go implementation

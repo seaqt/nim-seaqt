@@ -2,7 +2,7 @@ import ./Qt5Network_libs
 
 {.push raises: [].}
 
-from system/ansi_c import c_free
+from system/ansi_c import c_free, c_malloc
 
 type
   struct_miqt_string {.used.} = object
@@ -347,6 +347,7 @@ proc values*(self: gen_qdnslookup_types.QDnsTextRecord, ): seq[seq[byte]] =
     var vx_lvx_ret = @(toOpenArrayByte(vx_lv_bytearray.data, 0, int(vx_lv_bytearray.len)-1))
     c_free(vx_lv_bytearray.data)
     vx_ret[i] = vx_lvx_ret
+  c_free(v_ma.data)
   vx_ret
 
 proc create*(T: type gen_qdnslookup_types.QDnsTextRecord): gen_qdnslookup_types.QDnsTextRecord =
@@ -418,6 +419,7 @@ proc canonicalNameRecords*(self: gen_qdnslookup_types.QDnsLookup, ): seq[gen_qdn
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
     vx_ret[i] = gen_qdnslookup_types.QDnsDomainNameRecord(h: v_outCast[i])
+  c_free(v_ma.data)
   vx_ret
 
 proc hostAddressRecords*(self: gen_qdnslookup_types.QDnsLookup, ): seq[gen_qdnslookup_types.QDnsHostAddressRecord] =
@@ -426,6 +428,7 @@ proc hostAddressRecords*(self: gen_qdnslookup_types.QDnsLookup, ): seq[gen_qdnsl
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
     vx_ret[i] = gen_qdnslookup_types.QDnsHostAddressRecord(h: v_outCast[i])
+  c_free(v_ma.data)
   vx_ret
 
 proc mailExchangeRecords*(self: gen_qdnslookup_types.QDnsLookup, ): seq[gen_qdnslookup_types.QDnsMailExchangeRecord] =
@@ -434,6 +437,7 @@ proc mailExchangeRecords*(self: gen_qdnslookup_types.QDnsLookup, ): seq[gen_qdns
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
     vx_ret[i] = gen_qdnslookup_types.QDnsMailExchangeRecord(h: v_outCast[i])
+  c_free(v_ma.data)
   vx_ret
 
 proc nameServerRecords*(self: gen_qdnslookup_types.QDnsLookup, ): seq[gen_qdnslookup_types.QDnsDomainNameRecord] =
@@ -442,6 +446,7 @@ proc nameServerRecords*(self: gen_qdnslookup_types.QDnsLookup, ): seq[gen_qdnslo
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
     vx_ret[i] = gen_qdnslookup_types.QDnsDomainNameRecord(h: v_outCast[i])
+  c_free(v_ma.data)
   vx_ret
 
 proc pointerRecords*(self: gen_qdnslookup_types.QDnsLookup, ): seq[gen_qdnslookup_types.QDnsDomainNameRecord] =
@@ -450,6 +455,7 @@ proc pointerRecords*(self: gen_qdnslookup_types.QDnsLookup, ): seq[gen_qdnslooku
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
     vx_ret[i] = gen_qdnslookup_types.QDnsDomainNameRecord(h: v_outCast[i])
+  c_free(v_ma.data)
   vx_ret
 
 proc serviceRecords*(self: gen_qdnslookup_types.QDnsLookup, ): seq[gen_qdnslookup_types.QDnsServiceRecord] =
@@ -458,6 +464,7 @@ proc serviceRecords*(self: gen_qdnslookup_types.QDnsLookup, ): seq[gen_qdnslooku
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
     vx_ret[i] = gen_qdnslookup_types.QDnsServiceRecord(h: v_outCast[i])
+  c_free(v_ma.data)
   vx_ret
 
 proc textRecords*(self: gen_qdnslookup_types.QDnsLookup, ): seq[gen_qdnslookup_types.QDnsTextRecord] =
@@ -466,6 +473,7 @@ proc textRecords*(self: gen_qdnslookup_types.QDnsLookup, ): seq[gen_qdnslookup_t
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
     vx_ret[i] = gen_qdnslookup_types.QDnsTextRecord(h: v_outCast[i])
+  c_free(v_ma.data)
   vx_ret
 
 proc abort*(self: gen_qdnslookup_types.QDnsLookup, ): void =

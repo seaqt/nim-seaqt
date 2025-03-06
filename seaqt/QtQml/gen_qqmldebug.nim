@@ -2,7 +2,7 @@ import ./Qt5Qml_libs
 
 {.push raises: [].}
 
-from system/ansi_c import c_free
+from system/ansi_c import c_free, c_malloc
 
 type
   struct_miqt_string {.used.} = object
@@ -75,6 +75,7 @@ proc debuggerServices*(_: type gen_qqmldebug_types.QQmlDebuggingEnabler, ): seq[
     let vx_lvx_ret = string.fromBytes(toOpenArrayByte(vx_lv_ms.data, 0, int(vx_lv_ms.len)-1))
     c_free(vx_lv_ms.data)
     vx_ret[i] = vx_lvx_ret
+  c_free(v_ma.data)
   vx_ret
 
 proc inspectorServices*(_: type gen_qqmldebug_types.QQmlDebuggingEnabler, ): seq[string] =
@@ -86,6 +87,7 @@ proc inspectorServices*(_: type gen_qqmldebug_types.QQmlDebuggingEnabler, ): seq
     let vx_lvx_ret = string.fromBytes(toOpenArrayByte(vx_lv_ms.data, 0, int(vx_lv_ms.len)-1))
     c_free(vx_lv_ms.data)
     vx_ret[i] = vx_lvx_ret
+  c_free(v_ma.data)
   vx_ret
 
 proc profilerServices*(_: type gen_qqmldebug_types.QQmlDebuggingEnabler, ): seq[string] =
@@ -97,6 +99,7 @@ proc profilerServices*(_: type gen_qqmldebug_types.QQmlDebuggingEnabler, ): seq[
     let vx_lvx_ret = string.fromBytes(toOpenArrayByte(vx_lv_ms.data, 0, int(vx_lv_ms.len)-1))
     c_free(vx_lv_ms.data)
     vx_ret[i] = vx_lvx_ret
+  c_free(v_ma.data)
   vx_ret
 
 proc nativeDebuggerServices*(_: type gen_qqmldebug_types.QQmlDebuggingEnabler, ): seq[string] =
@@ -108,6 +111,7 @@ proc nativeDebuggerServices*(_: type gen_qqmldebug_types.QQmlDebuggingEnabler, )
     let vx_lvx_ret = string.fromBytes(toOpenArrayByte(vx_lv_ms.data, 0, int(vx_lv_ms.len)-1))
     c_free(vx_lv_ms.data)
     vx_ret[i] = vx_lvx_ret
+  c_free(v_ma.data)
   vx_ret
 
 proc setServices*(_: type gen_qqmldebug_types.QQmlDebuggingEnabler, services: seq[string]): void =
@@ -139,7 +143,7 @@ proc startDebugConnector*(_: type gen_qqmldebug_types.QQmlDebuggingEnabler, plug
   var configuration_Keys_CArray = newSeq[struct_miqt_string](len(configuration))
   var configuration_Values_CArray = newSeq[pointer](len(configuration))
   var configuration_ctr = 0
-  for configurationk, configurationv in configuration:
+  for configuration_k, configuration_v in configuration:
     configuration_Keys_CArray[configuration_ctr] = struct_miqt_string(data: configuration_k, len: csize_t(len(configuration_k)))
     configuration_Values_CArray[configuration_ctr] = configuration_v.h
     configuration_ctr += 1
