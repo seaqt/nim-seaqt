@@ -86,11 +86,13 @@ import ./gen_qwebenginecontextmenurequest_types
 export gen_qwebenginecontextmenurequest_types
 
 import
+  ../QtCore/gen_qmetaobject_types,
   ../QtCore/gen_qobject,
   ../QtCore/gen_qobjectdefs_types,
   ../QtCore/gen_qpoint_types,
   ../QtCore/gen_qurl_types
 export
+  gen_qmetaobject_types,
   gen_qobject,
   gen_qobjectdefs_types,
   gen_qpoint_types,
@@ -117,6 +119,10 @@ proc fcQWebEngineContextMenuRequest_mediaFlags(self: pointer, ): cint {.importc:
 proc fcQWebEngineContextMenuRequest_editFlags(self: pointer, ): cint {.importc: "QWebEngineContextMenuRequest_editFlags".}
 proc fcQWebEngineContextMenuRequest_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QWebEngineContextMenuRequest_tr2".}
 proc fcQWebEngineContextMenuRequest_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QWebEngineContextMenuRequest_tr3".}
+proc fcQWebEngineContextMenuRequest_protectedbase_sender(self: pointer, ): pointer {.importc: "QWebEngineContextMenuRequest_protectedbase_sender".}
+proc fcQWebEngineContextMenuRequest_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QWebEngineContextMenuRequest_protectedbase_senderSignalIndex".}
+proc fcQWebEngineContextMenuRequest_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QWebEngineContextMenuRequest_protectedbase_receivers".}
+proc fcQWebEngineContextMenuRequest_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QWebEngineContextMenuRequest_protectedbase_isSignalConnected".}
 proc fcQWebEngineContextMenuRequest_staticMetaObject(): pointer {.importc: "QWebEngineContextMenuRequest_staticMetaObject".}
 proc fcQWebEngineContextMenuRequest_delete(self: pointer) {.importc: "QWebEngineContextMenuRequest_delete".}
 
@@ -202,6 +208,18 @@ proc tr*(_: type gen_qwebenginecontextmenurequest_types.QWebEngineContextMenuReq
   let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
   c_free(v_ms.data)
   vx_ret
+
+proc sender*(self: gen_qwebenginecontextmenurequest_types.QWebEngineContextMenuRequest, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQWebEngineContextMenuRequest_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qwebenginecontextmenurequest_types.QWebEngineContextMenuRequest, ): cint =
+  fcQWebEngineContextMenuRequest_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qwebenginecontextmenurequest_types.QWebEngineContextMenuRequest, signal: cstring): cint =
+  fcQWebEngineContextMenuRequest_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qwebenginecontextmenurequest_types.QWebEngineContextMenuRequest, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQWebEngineContextMenuRequest_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc staticMetaObject*(_: type gen_qwebenginecontextmenurequest_types.QWebEngineContextMenuRequest): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQWebEngineContextMenuRequest_staticMetaObject())

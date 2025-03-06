@@ -192,10 +192,10 @@ public:
 	friend void QImageCapture_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
 
 	// Wrappers to allow calling protected methods:
-	friend QObject* QImageCapture_protectedbase_sender(bool* _dynamic_cast_ok, const void* self);
-	friend int QImageCapture_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
-	friend int QImageCapture_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
-	friend bool QImageCapture_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+	friend QObject* QImageCapture_protectedbase_sender(const void* self);
+	friend int QImageCapture_protectedbase_senderSignalIndex(const void* self);
+	friend int QImageCapture_protectedbase_receivers(const void* self, const char* signal);
+	friend bool QImageCapture_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
 };
 
 QImageCapture* QImageCapture_new(struct QImageCapture_VTable* vtbl) {
@@ -651,53 +651,29 @@ void QImageCapture_virtualbase_disconnectNotify(void* self, QMetaMethod* signal)
 }
 
 const QMetaObject* QImageCapture_staticMetaObject() { return &QImageCapture::staticMetaObject; }
-QObject* QImageCapture_protectedbase_sender(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQImageCapture* self_cast = dynamic_cast<VirtualQImageCapture*>( (QImageCapture*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return nullptr;
-	}
-	
-	*_dynamic_cast_ok = true;
+QObject* QImageCapture_protectedbase_sender(const void* self) {
+	VirtualQImageCapture* self_cast = static_cast<VirtualQImageCapture*>( (QImageCapture*)(self) );
 	
 	return self_cast->sender();
 
 }
 
-int QImageCapture_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQImageCapture* self_cast = dynamic_cast<VirtualQImageCapture*>( (QImageCapture*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return 0;
-	}
-	
-	*_dynamic_cast_ok = true;
+int QImageCapture_protectedbase_senderSignalIndex(const void* self) {
+	VirtualQImageCapture* self_cast = static_cast<VirtualQImageCapture*>( (QImageCapture*)(self) );
 	
 	return self_cast->senderSignalIndex();
 
 }
 
-int QImageCapture_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal) {
-	VirtualQImageCapture* self_cast = dynamic_cast<VirtualQImageCapture*>( (QImageCapture*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return 0;
-	}
-	
-	*_dynamic_cast_ok = true;
+int QImageCapture_protectedbase_receivers(const void* self, const char* signal) {
+	VirtualQImageCapture* self_cast = static_cast<VirtualQImageCapture*>( (QImageCapture*)(self) );
 	
 	return self_cast->receivers(signal);
 
 }
 
-bool QImageCapture_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal) {
-	VirtualQImageCapture* self_cast = dynamic_cast<VirtualQImageCapture*>( (QImageCapture*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return false;
-	}
-	
-	*_dynamic_cast_ok = true;
+bool QImageCapture_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal) {
+	VirtualQImageCapture* self_cast = static_cast<VirtualQImageCapture*>( (QImageCapture*)(self) );
 	
 	return self_cast->isSignalConnected(*signal);
 

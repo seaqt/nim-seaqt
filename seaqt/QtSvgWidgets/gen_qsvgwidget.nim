@@ -180,6 +180,15 @@ proc fcQSvgWidget_virtualbase_childEvent(self: pointer, event: pointer): void {.
 proc fcQSvgWidget_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QSvgWidget_virtualbase_customEvent".}
 proc fcQSvgWidget_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QSvgWidget_virtualbase_connectNotify".}
 proc fcQSvgWidget_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QSvgWidget_virtualbase_disconnectNotify".}
+proc fcQSvgWidget_protectedbase_updateMicroFocus(self: pointer, ): void {.importc: "QSvgWidget_protectedbase_updateMicroFocus".}
+proc fcQSvgWidget_protectedbase_create(self: pointer, ): void {.importc: "QSvgWidget_protectedbase_create".}
+proc fcQSvgWidget_protectedbase_destroy(self: pointer, ): void {.importc: "QSvgWidget_protectedbase_destroy".}
+proc fcQSvgWidget_protectedbase_focusNextChild(self: pointer, ): bool {.importc: "QSvgWidget_protectedbase_focusNextChild".}
+proc fcQSvgWidget_protectedbase_focusPreviousChild(self: pointer, ): bool {.importc: "QSvgWidget_protectedbase_focusPreviousChild".}
+proc fcQSvgWidget_protectedbase_sender(self: pointer, ): pointer {.importc: "QSvgWidget_protectedbase_sender".}
+proc fcQSvgWidget_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QSvgWidget_protectedbase_senderSignalIndex".}
+proc fcQSvgWidget_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QSvgWidget_protectedbase_receivers".}
+proc fcQSvgWidget_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QSvgWidget_protectedbase_isSignalConnected".}
 proc fcQSvgWidget_new(vtbl: pointer, parent: pointer): ptr cQSvgWidget {.importc: "QSvgWidget_new".}
 proc fcQSvgWidget_new2(vtbl: pointer, ): ptr cQSvgWidget {.importc: "QSvgWidget_new2".}
 proc fcQSvgWidget_new3(vtbl: pointer, file: struct_miqt_string): ptr cQSvgWidget {.importc: "QSvgWidget_new3".}
@@ -795,6 +804,33 @@ proc miqt_exec_callback_cQSvgWidget_disconnectNotify(vtbl: pointer, self: pointe
   let self = QSvgWidget(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
   vtbl[].disconnectNotify(self, slotval1)
+
+proc updateMicroFocus*(self: gen_qsvgwidget_types.QSvgWidget, ): void =
+  fcQSvgWidget_protectedbase_updateMicroFocus(self.h)
+
+proc create*(self: gen_qsvgwidget_types.QSvgWidget, ): void =
+  fcQSvgWidget_protectedbase_create(self.h)
+
+proc destroy*(self: gen_qsvgwidget_types.QSvgWidget, ): void =
+  fcQSvgWidget_protectedbase_destroy(self.h)
+
+proc focusNextChild*(self: gen_qsvgwidget_types.QSvgWidget, ): bool =
+  fcQSvgWidget_protectedbase_focusNextChild(self.h)
+
+proc focusPreviousChild*(self: gen_qsvgwidget_types.QSvgWidget, ): bool =
+  fcQSvgWidget_protectedbase_focusPreviousChild(self.h)
+
+proc sender*(self: gen_qsvgwidget_types.QSvgWidget, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQSvgWidget_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qsvgwidget_types.QSvgWidget, ): cint =
+  fcQSvgWidget_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qsvgwidget_types.QSvgWidget, signal: cstring): cint =
+  fcQSvgWidget_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qsvgwidget_types.QSvgWidget, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQSvgWidget_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc create*(T: type gen_qsvgwidget_types.QSvgWidget,
     parent: gen_qwidget_types.QWidget,

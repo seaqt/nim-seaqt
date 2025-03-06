@@ -38,10 +38,12 @@ import ./gen_qsgtextureprovider_types
 export gen_qsgtextureprovider_types
 
 import
+  ../QtCore/gen_qmetaobject_types,
   ../QtCore/gen_qobject,
   ../QtCore/gen_qobjectdefs_types,
   ./gen_qsgtexture_types
 export
+  gen_qmetaobject_types,
   gen_qobject,
   gen_qobjectdefs_types,
   gen_qsgtexture_types
@@ -57,6 +59,10 @@ proc fcQSGTextureProvider_textureChanged(self: pointer, ): void {.importc: "QSGT
 proc fcQSGTextureProvider_connect_textureChanged(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QSGTextureProvider_connect_textureChanged".}
 proc fcQSGTextureProvider_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QSGTextureProvider_tr2".}
 proc fcQSGTextureProvider_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QSGTextureProvider_tr3".}
+proc fcQSGTextureProvider_protectedbase_sender(self: pointer, ): pointer {.importc: "QSGTextureProvider_protectedbase_sender".}
+proc fcQSGTextureProvider_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QSGTextureProvider_protectedbase_senderSignalIndex".}
+proc fcQSGTextureProvider_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QSGTextureProvider_protectedbase_receivers".}
+proc fcQSGTextureProvider_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QSGTextureProvider_protectedbase_isSignalConnected".}
 proc fcQSGTextureProvider_staticMetaObject(): pointer {.importc: "QSGTextureProvider_staticMetaObject".}
 proc fcQSGTextureProvider_delete(self: pointer) {.importc: "QSGTextureProvider_delete".}
 
@@ -107,6 +113,18 @@ proc tr*(_: type gen_qsgtextureprovider_types.QSGTextureProvider, s: cstring, c:
   let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
   c_free(v_ms.data)
   vx_ret
+
+proc sender*(self: gen_qsgtextureprovider_types.QSGTextureProvider, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQSGTextureProvider_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qsgtextureprovider_types.QSGTextureProvider, ): cint =
+  fcQSGTextureProvider_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qsgtextureprovider_types.QSGTextureProvider, signal: cstring): cint =
+  fcQSGTextureProvider_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qsgtextureprovider_types.QSGTextureProvider, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQSGTextureProvider_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc staticMetaObject*(_: type gen_qsgtextureprovider_types.QSGTextureProvider): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQSGTextureProvider_staticMetaObject())

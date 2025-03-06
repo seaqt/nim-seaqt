@@ -83,6 +83,10 @@ proc fcQAudioListener_virtualbase_childEvent(self: pointer, event: pointer): voi
 proc fcQAudioListener_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QAudioListener_virtualbase_customEvent".}
 proc fcQAudioListener_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QAudioListener_virtualbase_connectNotify".}
 proc fcQAudioListener_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QAudioListener_virtualbase_disconnectNotify".}
+proc fcQAudioListener_protectedbase_sender(self: pointer, ): pointer {.importc: "QAudioListener_protectedbase_sender".}
+proc fcQAudioListener_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QAudioListener_protectedbase_senderSignalIndex".}
+proc fcQAudioListener_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QAudioListener_protectedbase_receivers".}
+proc fcQAudioListener_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QAudioListener_protectedbase_isSignalConnected".}
 proc fcQAudioListener_new(vtbl: pointer, engine: pointer): ptr cQAudioListener {.importc: "QAudioListener_new".}
 proc fcQAudioListener_delete(self: pointer) {.importc: "QAudioListener_delete".}
 
@@ -219,6 +223,18 @@ proc miqt_exec_callback_cQAudioListener_disconnectNotify(vtbl: pointer, self: po
   let self = QAudioListener(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
   vtbl[].disconnectNotify(self, slotval1)
+
+proc sender*(self: gen_qaudiolistener_types.QAudioListener, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQAudioListener_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qaudiolistener_types.QAudioListener, ): cint =
+  fcQAudioListener_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qaudiolistener_types.QAudioListener, signal: cstring): cint =
+  fcQAudioListener_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qaudiolistener_types.QAudioListener, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQAudioListener_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc create*(T: type gen_qaudiolistener_types.QAudioListener,
     engine: gen_qaudioengine_types.QAudioEngine,

@@ -113,6 +113,10 @@ proc fcQAudioEngine_virtualbase_childEvent(self: pointer, event: pointer): void 
 proc fcQAudioEngine_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QAudioEngine_virtualbase_customEvent".}
 proc fcQAudioEngine_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QAudioEngine_virtualbase_connectNotify".}
 proc fcQAudioEngine_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QAudioEngine_virtualbase_disconnectNotify".}
+proc fcQAudioEngine_protectedbase_sender(self: pointer, ): pointer {.importc: "QAudioEngine_protectedbase_sender".}
+proc fcQAudioEngine_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QAudioEngine_protectedbase_senderSignalIndex".}
+proc fcQAudioEngine_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QAudioEngine_protectedbase_receivers".}
+proc fcQAudioEngine_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QAudioEngine_protectedbase_isSignalConnected".}
 proc fcQAudioEngine_new(vtbl: pointer, ): ptr cQAudioEngine {.importc: "QAudioEngine_new".}
 proc fcQAudioEngine_new2(vtbl: pointer, parent: pointer): ptr cQAudioEngine {.importc: "QAudioEngine_new2".}
 proc fcQAudioEngine_new3(vtbl: pointer, sampleRate: cint): ptr cQAudioEngine {.importc: "QAudioEngine_new3".}
@@ -406,6 +410,18 @@ proc miqt_exec_callback_cQAudioEngine_disconnectNotify(vtbl: pointer, self: poin
   let self = QAudioEngine(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
   vtbl[].disconnectNotify(self, slotval1)
+
+proc sender*(self: gen_qaudioengine_types.QAudioEngine, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQAudioEngine_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qaudioengine_types.QAudioEngine, ): cint =
+  fcQAudioEngine_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qaudioengine_types.QAudioEngine, signal: cstring): cint =
+  fcQAudioEngine_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qaudioengine_types.QAudioEngine, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQAudioEngine_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc create*(T: type gen_qaudioengine_types.QAudioEngine,
     vtbl: ref QAudioEngineVTable = nil): gen_qaudioengine_types.QAudioEngine =

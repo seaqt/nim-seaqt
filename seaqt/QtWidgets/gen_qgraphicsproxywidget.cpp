@@ -1111,17 +1111,17 @@ public:
 	friend bool QGraphicsProxyWidget_virtualbase_isEmpty(const void* self);
 
 	// Wrappers to allow calling protected methods:
-	friend QGraphicsProxyWidget* QGraphicsProxyWidget_protectedbase_newProxyWidget(bool* _dynamic_cast_ok, void* self, QWidget* param1);
-	friend void QGraphicsProxyWidget_protectedbase_updateMicroFocus(bool* _dynamic_cast_ok, void* self);
-	friend QObject* QGraphicsProxyWidget_protectedbase_sender(bool* _dynamic_cast_ok, const void* self);
-	friend int QGraphicsProxyWidget_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
-	friend int QGraphicsProxyWidget_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
-	friend bool QGraphicsProxyWidget_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
-	friend void QGraphicsProxyWidget_protectedbase_addToIndex(bool* _dynamic_cast_ok, void* self);
-	friend void QGraphicsProxyWidget_protectedbase_removeFromIndex(bool* _dynamic_cast_ok, void* self);
-	friend void QGraphicsProxyWidget_protectedbase_prepareGeometryChange(bool* _dynamic_cast_ok, void* self);
-	friend void QGraphicsProxyWidget_protectedbase_setGraphicsItem(bool* _dynamic_cast_ok, void* self, QGraphicsItem* item);
-	friend void QGraphicsProxyWidget_protectedbase_setOwnedByLayout(bool* _dynamic_cast_ok, void* self, bool ownedByLayout);
+	friend QGraphicsProxyWidget* QGraphicsProxyWidget_protectedbase_newProxyWidget(void* self, QWidget* param1);
+	friend void QGraphicsProxyWidget_protectedbase_updateMicroFocus(void* self);
+	friend QObject* QGraphicsProxyWidget_protectedbase_sender(const void* self);
+	friend int QGraphicsProxyWidget_protectedbase_senderSignalIndex(const void* self);
+	friend int QGraphicsProxyWidget_protectedbase_receivers(const void* self, const char* signal);
+	friend bool QGraphicsProxyWidget_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
+	friend void QGraphicsProxyWidget_protectedbase_addToIndex(void* self);
+	friend void QGraphicsProxyWidget_protectedbase_removeFromIndex(void* self);
+	friend void QGraphicsProxyWidget_protectedbase_prepareGeometryChange(void* self);
+	friend void QGraphicsProxyWidget_protectedbase_setGraphicsItem(void* self, QGraphicsItem* item);
+	friend void QGraphicsProxyWidget_protectedbase_setOwnedByLayout(void* self, bool ownedByLayout);
 };
 
 QGraphicsProxyWidget* QGraphicsProxyWidget_new(struct QGraphicsProxyWidget_VTable* vtbl) {
@@ -1618,144 +1618,78 @@ bool QGraphicsProxyWidget_virtualbase_isEmpty(const void* self) {
 }
 
 const QMetaObject* QGraphicsProxyWidget_staticMetaObject() { return &QGraphicsProxyWidget::staticMetaObject; }
-QGraphicsProxyWidget* QGraphicsProxyWidget_protectedbase_newProxyWidget(bool* _dynamic_cast_ok, void* self, QWidget* param1) {
-	VirtualQGraphicsProxyWidget* self_cast = dynamic_cast<VirtualQGraphicsProxyWidget*>( (QGraphicsProxyWidget*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return nullptr;
-	}
-	
-	*_dynamic_cast_ok = true;
+QGraphicsProxyWidget* QGraphicsProxyWidget_protectedbase_newProxyWidget(void* self, QWidget* param1) {
+	VirtualQGraphicsProxyWidget* self_cast = static_cast<VirtualQGraphicsProxyWidget*>( (QGraphicsProxyWidget*)(self) );
 	
 	return self_cast->newProxyWidget(param1);
 
 }
 
-void QGraphicsProxyWidget_protectedbase_updateMicroFocus(bool* _dynamic_cast_ok, void* self) {
-	VirtualQGraphicsProxyWidget* self_cast = dynamic_cast<VirtualQGraphicsProxyWidget*>( (QGraphicsProxyWidget*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QGraphicsProxyWidget_protectedbase_updateMicroFocus(void* self) {
+	VirtualQGraphicsProxyWidget* self_cast = static_cast<VirtualQGraphicsProxyWidget*>( (QGraphicsProxyWidget*)(self) );
 	
 	self_cast->updateMicroFocus();
 
 }
 
-QObject* QGraphicsProxyWidget_protectedbase_sender(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQGraphicsProxyWidget* self_cast = dynamic_cast<VirtualQGraphicsProxyWidget*>( (QGraphicsProxyWidget*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return nullptr;
-	}
-	
-	*_dynamic_cast_ok = true;
+QObject* QGraphicsProxyWidget_protectedbase_sender(const void* self) {
+	VirtualQGraphicsProxyWidget* self_cast = static_cast<VirtualQGraphicsProxyWidget*>( (QGraphicsProxyWidget*)(self) );
 	
 	return self_cast->sender();
 
 }
 
-int QGraphicsProxyWidget_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQGraphicsProxyWidget* self_cast = dynamic_cast<VirtualQGraphicsProxyWidget*>( (QGraphicsProxyWidget*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return 0;
-	}
-	
-	*_dynamic_cast_ok = true;
+int QGraphicsProxyWidget_protectedbase_senderSignalIndex(const void* self) {
+	VirtualQGraphicsProxyWidget* self_cast = static_cast<VirtualQGraphicsProxyWidget*>( (QGraphicsProxyWidget*)(self) );
 	
 	return self_cast->senderSignalIndex();
 
 }
 
-int QGraphicsProxyWidget_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal) {
-	VirtualQGraphicsProxyWidget* self_cast = dynamic_cast<VirtualQGraphicsProxyWidget*>( (QGraphicsProxyWidget*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return 0;
-	}
-	
-	*_dynamic_cast_ok = true;
+int QGraphicsProxyWidget_protectedbase_receivers(const void* self, const char* signal) {
+	VirtualQGraphicsProxyWidget* self_cast = static_cast<VirtualQGraphicsProxyWidget*>( (QGraphicsProxyWidget*)(self) );
 	
 	return self_cast->receivers(signal);
 
 }
 
-bool QGraphicsProxyWidget_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal) {
-	VirtualQGraphicsProxyWidget* self_cast = dynamic_cast<VirtualQGraphicsProxyWidget*>( (QGraphicsProxyWidget*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return false;
-	}
-	
-	*_dynamic_cast_ok = true;
+bool QGraphicsProxyWidget_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal) {
+	VirtualQGraphicsProxyWidget* self_cast = static_cast<VirtualQGraphicsProxyWidget*>( (QGraphicsProxyWidget*)(self) );
 	
 	return self_cast->isSignalConnected(*signal);
 
 }
 
-void QGraphicsProxyWidget_protectedbase_addToIndex(bool* _dynamic_cast_ok, void* self) {
-	VirtualQGraphicsProxyWidget* self_cast = dynamic_cast<VirtualQGraphicsProxyWidget*>( (QGraphicsProxyWidget*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QGraphicsProxyWidget_protectedbase_addToIndex(void* self) {
+	VirtualQGraphicsProxyWidget* self_cast = static_cast<VirtualQGraphicsProxyWidget*>( (QGraphicsProxyWidget*)(self) );
 	
 	self_cast->addToIndex();
 
 }
 
-void QGraphicsProxyWidget_protectedbase_removeFromIndex(bool* _dynamic_cast_ok, void* self) {
-	VirtualQGraphicsProxyWidget* self_cast = dynamic_cast<VirtualQGraphicsProxyWidget*>( (QGraphicsProxyWidget*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QGraphicsProxyWidget_protectedbase_removeFromIndex(void* self) {
+	VirtualQGraphicsProxyWidget* self_cast = static_cast<VirtualQGraphicsProxyWidget*>( (QGraphicsProxyWidget*)(self) );
 	
 	self_cast->removeFromIndex();
 
 }
 
-void QGraphicsProxyWidget_protectedbase_prepareGeometryChange(bool* _dynamic_cast_ok, void* self) {
-	VirtualQGraphicsProxyWidget* self_cast = dynamic_cast<VirtualQGraphicsProxyWidget*>( (QGraphicsProxyWidget*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QGraphicsProxyWidget_protectedbase_prepareGeometryChange(void* self) {
+	VirtualQGraphicsProxyWidget* self_cast = static_cast<VirtualQGraphicsProxyWidget*>( (QGraphicsProxyWidget*)(self) );
 	
 	self_cast->prepareGeometryChange();
 
 }
 
-void QGraphicsProxyWidget_protectedbase_setGraphicsItem(bool* _dynamic_cast_ok, void* self, QGraphicsItem* item) {
-	VirtualQGraphicsProxyWidget* self_cast = dynamic_cast<VirtualQGraphicsProxyWidget*>( (QGraphicsProxyWidget*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QGraphicsProxyWidget_protectedbase_setGraphicsItem(void* self, QGraphicsItem* item) {
+	VirtualQGraphicsProxyWidget* self_cast = static_cast<VirtualQGraphicsProxyWidget*>( (QGraphicsProxyWidget*)(self) );
 	
 	self_cast->setGraphicsItem(item);
 
 }
 
-void QGraphicsProxyWidget_protectedbase_setOwnedByLayout(bool* _dynamic_cast_ok, void* self, bool ownedByLayout) {
-	VirtualQGraphicsProxyWidget* self_cast = dynamic_cast<VirtualQGraphicsProxyWidget*>( (QGraphicsProxyWidget*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QGraphicsProxyWidget_protectedbase_setOwnedByLayout(void* self, bool ownedByLayout) {
+	VirtualQGraphicsProxyWidget* self_cast = static_cast<VirtualQGraphicsProxyWidget*>( (QGraphicsProxyWidget*)(self) );
 	
 	self_cast->setOwnedByLayout(ownedByLayout);
 

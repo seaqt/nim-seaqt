@@ -195,6 +195,15 @@ proc fcQGroupBox_virtualbase_timerEvent(self: pointer, event: pointer): void {.i
 proc fcQGroupBox_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QGroupBox_virtualbase_customEvent".}
 proc fcQGroupBox_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QGroupBox_virtualbase_connectNotify".}
 proc fcQGroupBox_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QGroupBox_virtualbase_disconnectNotify".}
+proc fcQGroupBox_protectedbase_updateMicroFocus(self: pointer, ): void {.importc: "QGroupBox_protectedbase_updateMicroFocus".}
+proc fcQGroupBox_protectedbase_create(self: pointer, ): void {.importc: "QGroupBox_protectedbase_create".}
+proc fcQGroupBox_protectedbase_destroy(self: pointer, ): void {.importc: "QGroupBox_protectedbase_destroy".}
+proc fcQGroupBox_protectedbase_focusNextChild(self: pointer, ): bool {.importc: "QGroupBox_protectedbase_focusNextChild".}
+proc fcQGroupBox_protectedbase_focusPreviousChild(self: pointer, ): bool {.importc: "QGroupBox_protectedbase_focusPreviousChild".}
+proc fcQGroupBox_protectedbase_sender(self: pointer, ): pointer {.importc: "QGroupBox_protectedbase_sender".}
+proc fcQGroupBox_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QGroupBox_protectedbase_senderSignalIndex".}
+proc fcQGroupBox_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QGroupBox_protectedbase_receivers".}
+proc fcQGroupBox_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QGroupBox_protectedbase_isSignalConnected".}
 proc fcQGroupBox_new(vtbl: pointer, parent: pointer): ptr cQGroupBox {.importc: "QGroupBox_new".}
 proc fcQGroupBox_new2(vtbl: pointer, ): ptr cQGroupBox {.importc: "QGroupBox_new2".}
 proc fcQGroupBox_new3(vtbl: pointer, title: struct_miqt_string): ptr cQGroupBox {.importc: "QGroupBox_new3".}
@@ -903,6 +912,33 @@ proc miqt_exec_callback_cQGroupBox_disconnectNotify(vtbl: pointer, self: pointer
   let self = QGroupBox(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
   vtbl[].disconnectNotify(self, slotval1)
+
+proc updateMicroFocus*(self: gen_qgroupbox_types.QGroupBox, ): void =
+  fcQGroupBox_protectedbase_updateMicroFocus(self.h)
+
+proc create*(self: gen_qgroupbox_types.QGroupBox, ): void =
+  fcQGroupBox_protectedbase_create(self.h)
+
+proc destroy*(self: gen_qgroupbox_types.QGroupBox, ): void =
+  fcQGroupBox_protectedbase_destroy(self.h)
+
+proc focusNextChild*(self: gen_qgroupbox_types.QGroupBox, ): bool =
+  fcQGroupBox_protectedbase_focusNextChild(self.h)
+
+proc focusPreviousChild*(self: gen_qgroupbox_types.QGroupBox, ): bool =
+  fcQGroupBox_protectedbase_focusPreviousChild(self.h)
+
+proc sender*(self: gen_qgroupbox_types.QGroupBox, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQGroupBox_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qgroupbox_types.QGroupBox, ): cint =
+  fcQGroupBox_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qgroupbox_types.QGroupBox, signal: cstring): cint =
+  fcQGroupBox_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qgroupbox_types.QGroupBox, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQGroupBox_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc create*(T: type gen_qgroupbox_types.QGroupBox,
     parent: gen_qwidget_types.QWidget,

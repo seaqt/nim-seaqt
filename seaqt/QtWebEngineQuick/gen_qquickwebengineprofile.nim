@@ -160,6 +160,10 @@ proc fcQQuickWebEngineProfile_virtualbase_childEvent(self: pointer, event: point
 proc fcQQuickWebEngineProfile_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QQuickWebEngineProfile_virtualbase_customEvent".}
 proc fcQQuickWebEngineProfile_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QQuickWebEngineProfile_virtualbase_connectNotify".}
 proc fcQQuickWebEngineProfile_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QQuickWebEngineProfile_virtualbase_disconnectNotify".}
+proc fcQQuickWebEngineProfile_protectedbase_sender(self: pointer, ): pointer {.importc: "QQuickWebEngineProfile_protectedbase_sender".}
+proc fcQQuickWebEngineProfile_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QQuickWebEngineProfile_protectedbase_senderSignalIndex".}
+proc fcQQuickWebEngineProfile_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QQuickWebEngineProfile_protectedbase_receivers".}
+proc fcQQuickWebEngineProfile_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QQuickWebEngineProfile_protectedbase_isSignalConnected".}
 proc fcQQuickWebEngineProfile_new(vtbl: pointer, ): ptr cQQuickWebEngineProfile {.importc: "QQuickWebEngineProfile_new".}
 proc fcQQuickWebEngineProfile_new2(vtbl: pointer, parent: pointer): ptr cQQuickWebEngineProfile {.importc: "QQuickWebEngineProfile_new2".}
 proc fcQQuickWebEngineProfile_staticMetaObject(): pointer {.importc: "QQuickWebEngineProfile_staticMetaObject".}
@@ -678,6 +682,18 @@ proc miqt_exec_callback_cQQuickWebEngineProfile_disconnectNotify(vtbl: pointer, 
   let self = QQuickWebEngineProfile(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
   vtbl[].disconnectNotify(self, slotval1)
+
+proc sender*(self: gen_qquickwebengineprofile_types.QQuickWebEngineProfile, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQQuickWebEngineProfile_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qquickwebengineprofile_types.QQuickWebEngineProfile, ): cint =
+  fcQQuickWebEngineProfile_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qquickwebengineprofile_types.QQuickWebEngineProfile, signal: cstring): cint =
+  fcQQuickWebEngineProfile_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qquickwebengineprofile_types.QQuickWebEngineProfile, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQQuickWebEngineProfile_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc create*(T: type gen_qquickwebengineprofile_types.QQuickWebEngineProfile,
     vtbl: ref QQuickWebEngineProfileVTable = nil): gen_qquickwebengineprofile_types.QQuickWebEngineProfile =

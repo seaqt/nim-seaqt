@@ -152,6 +152,10 @@ proc fcQAudioRoom_virtualbase_childEvent(self: pointer, event: pointer): void {.
 proc fcQAudioRoom_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QAudioRoom_virtualbase_customEvent".}
 proc fcQAudioRoom_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QAudioRoom_virtualbase_connectNotify".}
 proc fcQAudioRoom_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QAudioRoom_virtualbase_disconnectNotify".}
+proc fcQAudioRoom_protectedbase_sender(self: pointer, ): pointer {.importc: "QAudioRoom_protectedbase_sender".}
+proc fcQAudioRoom_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QAudioRoom_protectedbase_senderSignalIndex".}
+proc fcQAudioRoom_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QAudioRoom_protectedbase_receivers".}
+proc fcQAudioRoom_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QAudioRoom_protectedbase_isSignalConnected".}
 proc fcQAudioRoom_new(vtbl: pointer, engine: pointer): ptr cQAudioRoom {.importc: "QAudioRoom_new".}
 proc fcQAudioRoom_staticMetaObject(): pointer {.importc: "QAudioRoom_staticMetaObject".}
 proc fcQAudioRoom_delete(self: pointer) {.importc: "QAudioRoom_delete".}
@@ -493,6 +497,18 @@ proc miqt_exec_callback_cQAudioRoom_disconnectNotify(vtbl: pointer, self: pointe
   let self = QAudioRoom(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
   vtbl[].disconnectNotify(self, slotval1)
+
+proc sender*(self: gen_qaudioroom_types.QAudioRoom, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQAudioRoom_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qaudioroom_types.QAudioRoom, ): cint =
+  fcQAudioRoom_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qaudioroom_types.QAudioRoom, signal: cstring): cint =
+  fcQAudioRoom_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qaudioroom_types.QAudioRoom, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQAudioRoom_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc create*(T: type gen_qaudioroom_types.QAudioRoom,
     engine: gen_qaudioengine_types.QAudioEngine,

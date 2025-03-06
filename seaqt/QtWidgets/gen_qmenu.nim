@@ -236,6 +236,16 @@ proc fcQMenu_virtualbase_childEvent(self: pointer, event: pointer): void {.impor
 proc fcQMenu_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QMenu_virtualbase_customEvent".}
 proc fcQMenu_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QMenu_virtualbase_connectNotify".}
 proc fcQMenu_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QMenu_virtualbase_disconnectNotify".}
+proc fcQMenu_protectedbase_columnCount(self: pointer, ): cint {.importc: "QMenu_protectedbase_columnCount".}
+proc fcQMenu_protectedbase_updateMicroFocus(self: pointer, ): void {.importc: "QMenu_protectedbase_updateMicroFocus".}
+proc fcQMenu_protectedbase_create(self: pointer, ): void {.importc: "QMenu_protectedbase_create".}
+proc fcQMenu_protectedbase_destroy(self: pointer, ): void {.importc: "QMenu_protectedbase_destroy".}
+proc fcQMenu_protectedbase_focusNextChild(self: pointer, ): bool {.importc: "QMenu_protectedbase_focusNextChild".}
+proc fcQMenu_protectedbase_focusPreviousChild(self: pointer, ): bool {.importc: "QMenu_protectedbase_focusPreviousChild".}
+proc fcQMenu_protectedbase_sender(self: pointer, ): pointer {.importc: "QMenu_protectedbase_sender".}
+proc fcQMenu_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QMenu_protectedbase_senderSignalIndex".}
+proc fcQMenu_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QMenu_protectedbase_receivers".}
+proc fcQMenu_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QMenu_protectedbase_isSignalConnected".}
 proc fcQMenu_new(vtbl: pointer, parent: pointer): ptr cQMenu {.importc: "QMenu_new".}
 proc fcQMenu_new2(vtbl: pointer, ): ptr cQMenu {.importc: "QMenu_new2".}
 proc fcQMenu_new3(vtbl: pointer, title: struct_miqt_string): ptr cQMenu {.importc: "QMenu_new3".}
@@ -1074,6 +1084,36 @@ proc miqt_exec_callback_cQMenu_disconnectNotify(vtbl: pointer, self: pointer, si
   let self = QMenu(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
   vtbl[].disconnectNotify(self, slotval1)
+
+proc columnCount*(self: gen_qmenu_types.QMenu, ): cint =
+  fcQMenu_protectedbase_columnCount(self.h)
+
+proc updateMicroFocus*(self: gen_qmenu_types.QMenu, ): void =
+  fcQMenu_protectedbase_updateMicroFocus(self.h)
+
+proc create*(self: gen_qmenu_types.QMenu, ): void =
+  fcQMenu_protectedbase_create(self.h)
+
+proc destroy*(self: gen_qmenu_types.QMenu, ): void =
+  fcQMenu_protectedbase_destroy(self.h)
+
+proc focusNextChild*(self: gen_qmenu_types.QMenu, ): bool =
+  fcQMenu_protectedbase_focusNextChild(self.h)
+
+proc focusPreviousChild*(self: gen_qmenu_types.QMenu, ): bool =
+  fcQMenu_protectedbase_focusPreviousChild(self.h)
+
+proc sender*(self: gen_qmenu_types.QMenu, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQMenu_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qmenu_types.QMenu, ): cint =
+  fcQMenu_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qmenu_types.QMenu, signal: cstring): cint =
+  fcQMenu_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qmenu_types.QMenu, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQMenu_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc create*(T: type gen_qmenu_types.QMenu,
     parent: gen_qwidget_types.QWidget,

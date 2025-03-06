@@ -44,6 +44,7 @@ export gen_qinputmethod_types
 
 import
   ../QtCore/gen_qlocale_types,
+  ../QtCore/gen_qmetaobject_types,
   ../QtCore/gen_qobject,
   ../QtCore/gen_qobjectdefs_types,
   ../QtCore/gen_qrect_types,
@@ -51,6 +52,7 @@ import
   ./gen_qtransform_types
 export
   gen_qlocale_types,
+  gen_qmetaobject_types,
   gen_qobject,
   gen_qobjectdefs_types,
   gen_qrect_types,
@@ -101,6 +103,10 @@ proc fcQInputMethod_inputDirectionChanged(self: pointer, newDirection: cint): vo
 proc fcQInputMethod_connect_inputDirectionChanged(self: pointer, slot: int, callback: proc (slot: int, newDirection: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QInputMethod_connect_inputDirectionChanged".}
 proc fcQInputMethod_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QInputMethod_tr2".}
 proc fcQInputMethod_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QInputMethod_tr3".}
+proc fcQInputMethod_protectedbase_sender(self: pointer, ): pointer {.importc: "QInputMethod_protectedbase_sender".}
+proc fcQInputMethod_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QInputMethod_protectedbase_senderSignalIndex".}
+proc fcQInputMethod_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QInputMethod_protectedbase_receivers".}
+proc fcQInputMethod_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QInputMethod_protectedbase_isSignalConnected".}
 proc fcQInputMethod_staticMetaObject(): pointer {.importc: "QInputMethod_staticMetaObject".}
 
 proc metaObject*(self: gen_qinputmethod_types.QInputMethod, ): gen_qobjectdefs_types.QMetaObject =
@@ -335,6 +341,18 @@ proc tr*(_: type gen_qinputmethod_types.QInputMethod, s: cstring, c: cstring, n:
   let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
   c_free(v_ms.data)
   vx_ret
+
+proc sender*(self: gen_qinputmethod_types.QInputMethod, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQInputMethod_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qinputmethod_types.QInputMethod, ): cint =
+  fcQInputMethod_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qinputmethod_types.QInputMethod, signal: cstring): cint =
+  fcQInputMethod_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qinputmethod_types.QInputMethod, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQInputMethod_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc staticMetaObject*(_: type gen_qinputmethod_types.QInputMethod): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQInputMethod_staticMetaObject())

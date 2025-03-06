@@ -135,11 +135,11 @@ void QApplication_virtualbase_childEvent(void* self, QChildEvent* event);
 void QApplication_virtualbase_customEvent(void* self, QEvent* event);
 void QApplication_virtualbase_connectNotify(void* self, QMetaMethod* signal);
 void QApplication_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
-void* QApplication_protectedbase_resolveInterface(bool* _dynamic_cast_ok, const void* self, const char* name, int revision);
-QObject* QApplication_protectedbase_sender(bool* _dynamic_cast_ok, const void* self);
-int QApplication_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
-int QApplication_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
-bool QApplication_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+void* QApplication_protectedbase_resolveInterface(const void* self, const char* name, int revision);
+QObject* QApplication_protectedbase_sender(const void* self);
+int QApplication_protectedbase_senderSignalIndex(const void* self);
+int QApplication_protectedbase_receivers(const void* self, const char* signal);
+bool QApplication_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
 const QMetaObject* QApplication_staticMetaObject();
 void QApplication_delete(QApplication* self);
 

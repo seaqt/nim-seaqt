@@ -237,11 +237,11 @@ public:
 	friend void QSslServer_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
 
 	// Wrappers to allow calling protected methods:
-	friend void QSslServer_protectedbase_addPendingConnection(bool* _dynamic_cast_ok, void* self, QTcpSocket* socket);
-	friend QObject* QSslServer_protectedbase_sender(bool* _dynamic_cast_ok, const void* self);
-	friend int QSslServer_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
-	friend int QSslServer_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
-	friend bool QSslServer_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+	friend void QSslServer_protectedbase_addPendingConnection(void* self, QTcpSocket* socket);
+	friend QObject* QSslServer_protectedbase_sender(const void* self);
+	friend int QSslServer_protectedbase_senderSignalIndex(const void* self);
+	friend int QSslServer_protectedbase_receivers(const void* self, const char* signal);
+	friend bool QSslServer_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
 };
 
 QSslServer* QSslServer_new(struct QSslServer_VTable* vtbl) {
@@ -575,66 +575,36 @@ void QSslServer_virtualbase_disconnectNotify(void* self, QMetaMethod* signal) {
 }
 
 const QMetaObject* QSslServer_staticMetaObject() { return &QSslServer::staticMetaObject; }
-void QSslServer_protectedbase_addPendingConnection(bool* _dynamic_cast_ok, void* self, QTcpSocket* socket) {
-	VirtualQSslServer* self_cast = dynamic_cast<VirtualQSslServer*>( (QSslServer*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QSslServer_protectedbase_addPendingConnection(void* self, QTcpSocket* socket) {
+	VirtualQSslServer* self_cast = static_cast<VirtualQSslServer*>( (QSslServer*)(self) );
 	
 	self_cast->addPendingConnection(socket);
 
 }
 
-QObject* QSslServer_protectedbase_sender(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQSslServer* self_cast = dynamic_cast<VirtualQSslServer*>( (QSslServer*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return nullptr;
-	}
-	
-	*_dynamic_cast_ok = true;
+QObject* QSslServer_protectedbase_sender(const void* self) {
+	VirtualQSslServer* self_cast = static_cast<VirtualQSslServer*>( (QSslServer*)(self) );
 	
 	return self_cast->sender();
 
 }
 
-int QSslServer_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQSslServer* self_cast = dynamic_cast<VirtualQSslServer*>( (QSslServer*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return 0;
-	}
-	
-	*_dynamic_cast_ok = true;
+int QSslServer_protectedbase_senderSignalIndex(const void* self) {
+	VirtualQSslServer* self_cast = static_cast<VirtualQSslServer*>( (QSslServer*)(self) );
 	
 	return self_cast->senderSignalIndex();
 
 }
 
-int QSslServer_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal) {
-	VirtualQSslServer* self_cast = dynamic_cast<VirtualQSslServer*>( (QSslServer*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return 0;
-	}
-	
-	*_dynamic_cast_ok = true;
+int QSslServer_protectedbase_receivers(const void* self, const char* signal) {
+	VirtualQSslServer* self_cast = static_cast<VirtualQSslServer*>( (QSslServer*)(self) );
 	
 	return self_cast->receivers(signal);
 
 }
 
-bool QSslServer_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal) {
-	VirtualQSslServer* self_cast = dynamic_cast<VirtualQSslServer*>( (QSslServer*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return false;
-	}
-	
-	*_dynamic_cast_ok = true;
+bool QSslServer_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal) {
+	VirtualQSslServer* self_cast = static_cast<VirtualQSslServer*>( (QSslServer*)(self) );
 	
 	return self_cast->isSignalConnected(*signal);
 

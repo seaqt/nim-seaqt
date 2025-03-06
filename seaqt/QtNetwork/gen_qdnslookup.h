@@ -155,10 +155,10 @@ void QDnsLookup_virtualbase_childEvent(void* self, QChildEvent* event);
 void QDnsLookup_virtualbase_customEvent(void* self, QEvent* event);
 void QDnsLookup_virtualbase_connectNotify(void* self, QMetaMethod* signal);
 void QDnsLookup_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
-QObject* QDnsLookup_protectedbase_sender(bool* _dynamic_cast_ok, const void* self);
-int QDnsLookup_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
-int QDnsLookup_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
-bool QDnsLookup_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+QObject* QDnsLookup_protectedbase_sender(const void* self);
+int QDnsLookup_protectedbase_senderSignalIndex(const void* self);
+int QDnsLookup_protectedbase_receivers(const void* self, const char* signal);
+bool QDnsLookup_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
 const QMetaObject* QDnsLookup_staticMetaObject();
 void QDnsLookup_delete(QDnsLookup* self);
 

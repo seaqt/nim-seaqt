@@ -97,6 +97,10 @@ proc fcQLibrary_virtualbase_childEvent(self: pointer, event: pointer): void {.im
 proc fcQLibrary_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QLibrary_virtualbase_customEvent".}
 proc fcQLibrary_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QLibrary_virtualbase_connectNotify".}
 proc fcQLibrary_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QLibrary_virtualbase_disconnectNotify".}
+proc fcQLibrary_protectedbase_sender(self: pointer, ): pointer {.importc: "QLibrary_protectedbase_sender".}
+proc fcQLibrary_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QLibrary_protectedbase_senderSignalIndex".}
+proc fcQLibrary_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QLibrary_protectedbase_receivers".}
+proc fcQLibrary_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QLibrary_protectedbase_isSignalConnected".}
 proc fcQLibrary_new(vtbl: pointer, ): ptr cQLibrary {.importc: "QLibrary_new".}
 proc fcQLibrary_new2(vtbl: pointer, fileName: struct_miqt_string): ptr cQLibrary {.importc: "QLibrary_new2".}
 proc fcQLibrary_new3(vtbl: pointer, fileName: struct_miqt_string, verNum: cint): ptr cQLibrary {.importc: "QLibrary_new3".}
@@ -292,6 +296,18 @@ proc miqt_exec_callback_cQLibrary_disconnectNotify(vtbl: pointer, self: pointer,
   let self = QLibrary(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
   vtbl[].disconnectNotify(self, slotval1)
+
+proc sender*(self: gen_qlibrary_types.QLibrary, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQLibrary_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qlibrary_types.QLibrary, ): cint =
+  fcQLibrary_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qlibrary_types.QLibrary, signal: cstring): cint =
+  fcQLibrary_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qlibrary_types.QLibrary, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQLibrary_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc create*(T: type gen_qlibrary_types.QLibrary,
     vtbl: ref QLibraryVTable = nil): gen_qlibrary_types.QLibrary =

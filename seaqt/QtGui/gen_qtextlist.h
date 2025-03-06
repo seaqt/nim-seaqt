@@ -88,11 +88,11 @@ void QTextList_virtualbase_childEvent(void* self, QChildEvent* event);
 void QTextList_virtualbase_customEvent(void* self, QEvent* event);
 void QTextList_virtualbase_connectNotify(void* self, QMetaMethod* signal);
 void QTextList_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
-struct miqt_array /* of QTextBlock* */  QTextList_protectedbase_blockList(bool* _dynamic_cast_ok, const void* self);
-QObject* QTextList_protectedbase_sender(bool* _dynamic_cast_ok, const void* self);
-int QTextList_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
-int QTextList_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
-bool QTextList_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+struct miqt_array /* of QTextBlock* */  QTextList_protectedbase_blockList(const void* self);
+QObject* QTextList_protectedbase_sender(const void* self);
+int QTextList_protectedbase_senderSignalIndex(const void* self);
+int QTextList_protectedbase_receivers(const void* self, const char* signal);
+bool QTextList_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
 const QMetaObject* QTextList_staticMetaObject();
 void QTextList_delete(QTextList* self);
 

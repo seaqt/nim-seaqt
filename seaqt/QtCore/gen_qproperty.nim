@@ -58,9 +58,11 @@ import ./gen_qproperty_types
 export gen_qproperty_types
 
 import
-  ./gen_qmetatype_types
+  ./gen_qmetatype_types,
+  ./gen_qpropertyprivate_types
 export
-  gen_qmetatype_types
+  gen_qmetatype_types,
+  gen_qpropertyprivate_types
 
 type cQPropertyBindingSourceLocation*{.exportc: "QPropertyBindingSourceLocation", incompleteStruct.} = object
 type cQPropertyBindingError*{.exportc: "QPropertyBindingError", incompleteStruct.} = object
@@ -92,8 +94,10 @@ proc fcQUntypedPropertyBinding_delete(self: pointer) {.importc: "QUntypedPropert
 proc fcQPropertyObserverBase_new(): ptr cQPropertyObserverBase {.importc: "QPropertyObserverBase_new".}
 proc fcQPropertyObserverBase_new2(param1: pointer): ptr cQPropertyObserverBase {.importc: "QPropertyObserverBase_new2".}
 proc fcQPropertyObserverBase_delete(self: pointer) {.importc: "QPropertyObserverBase_delete".}
+proc fcQPropertyObserver_protectedbase_aliasedProperty(self: pointer, ): pointer {.importc: "QPropertyObserver_protectedbase_aliasedProperty".}
 proc fcQPropertyObserver_new(): ptr cQPropertyObserver {.importc: "QPropertyObserver_new".}
 proc fcQPropertyObserver_delete(self: pointer) {.importc: "QPropertyObserver_delete".}
+proc fcQPropertyNotifier_protectedbase_aliasedProperty(self: pointer, ): pointer {.importc: "QPropertyNotifier_protectedbase_aliasedProperty".}
 proc fcQPropertyNotifier_new(): ptr cQPropertyNotifier {.importc: "QPropertyNotifier_new".}
 proc fcQPropertyNotifier_delete(self: pointer) {.importc: "QPropertyNotifier_delete".}
 proc fcQUntypedBindable_isValid(self: pointer, ): bool {.importc: "QUntypedBindable_isValid".}
@@ -182,11 +186,17 @@ proc create*(T: type gen_qproperty_types.QPropertyObserverBase,
 
 proc delete*(self: gen_qproperty_types.QPropertyObserverBase) =
   fcQPropertyObserverBase_delete(self.h)
+proc aliasedProperty*(self: gen_qproperty_types.QPropertyObserver, ): gen_qpropertyprivate_types.QUntypedPropertyData =
+  gen_qpropertyprivate_types.QUntypedPropertyData(h: fcQPropertyObserver_protectedbase_aliasedProperty(self.h))
+
 proc create*(T: type gen_qproperty_types.QPropertyObserver): gen_qproperty_types.QPropertyObserver =
   gen_qproperty_types.QPropertyObserver(h: fcQPropertyObserver_new())
 
 proc delete*(self: gen_qproperty_types.QPropertyObserver) =
   fcQPropertyObserver_delete(self.h)
+proc aliasedProperty*(self: gen_qproperty_types.QPropertyNotifier, ): gen_qpropertyprivate_types.QUntypedPropertyData =
+  gen_qpropertyprivate_types.QUntypedPropertyData(h: fcQPropertyNotifier_protectedbase_aliasedProperty(self.h))
+
 proc create*(T: type gen_qproperty_types.QPropertyNotifier): gen_qproperty_types.QPropertyNotifier =
   gen_qproperty_types.QPropertyNotifier(h: fcQPropertyNotifier_new())
 

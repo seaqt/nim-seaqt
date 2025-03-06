@@ -53,8 +53,8 @@ QTest__QTouchEventWidgetSequence* QTest__QTouchEventWidgetSequence_move3(QTest__
 QTest__QTouchEventWidgetSequence* QTest__QTouchEventWidgetSequence_release3(QTest__QTouchEventWidgetSequence* self, int touchId, QPoint* pt, QWidget* widget);
 QTest__QTouchEventWidgetSequence* QTest__QTouchEventWidgetSequence_virtualbase_stationary(void* self, int touchId);
 bool QTest__QTouchEventWidgetSequence_virtualbase_commit(void* self, bool processEvents);
-QEventPoint* QTest__QTouchEventWidgetSequence_protectedbase_point(bool* _dynamic_cast_ok, void* self, int touchId);
-QEventPoint* QTest__QTouchEventWidgetSequence_protectedbase_pointOrPreviousPoint(bool* _dynamic_cast_ok, void* self, int touchId);
+QEventPoint* QTest__QTouchEventWidgetSequence_protectedbase_point(void* self, int touchId);
+QEventPoint* QTest__QTouchEventWidgetSequence_protectedbase_pointOrPreviousPoint(void* self, int touchId);
 void QTest__QTouchEventWidgetSequence_delete(QTest__QTouchEventWidgetSequence* self);
 
 #ifdef __cplusplus

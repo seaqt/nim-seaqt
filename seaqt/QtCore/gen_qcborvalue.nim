@@ -267,6 +267,7 @@ proc fcQCborValueConstRef_toUuid1(self: pointer, defaultValue: pointer): pointer
 proc fcQCborValueConstRef_toCbor1(self: pointer, opt: cint): struct_miqt_string {.importc: "QCborValueConstRef_toCbor1".}
 proc fcQCborValueConstRef_toCbor2(self: pointer, writer: pointer, opt: cint): void {.importc: "QCborValueConstRef_toCbor2".}
 proc fcQCborValueConstRef_toDiagnosticNotation1(self: pointer, opt: cint): struct_miqt_string {.importc: "QCborValueConstRef_toDiagnosticNotation1".}
+proc fcQCborValueConstRef_protectedbase_concrete(self: pointer, ): pointer {.importc: "QCborValueConstRef_protectedbase_concrete".}
 proc fcQCborValueConstRef_new(param1: pointer): ptr cQCborValueConstRef {.importc: "QCborValueConstRef_new".}
 proc fcQCborValueConstRef_delete(self: pointer) {.importc: "QCborValueConstRef_delete".}
 proc fcQCborValueRef_operatorAssign(self: pointer, other: pointer): void {.importc: "QCborValueRef_operatorAssign".}
@@ -906,6 +907,9 @@ proc toDiagnosticNotation*(self: gen_qcborvalue_types.QCborValueConstRef, opt: c
   let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
   c_free(v_ms.data)
   vx_ret
+
+proc concrete*(self: gen_qcborvalue_types.QCborValueConstRef, ): gen_qcborvalue_types.QCborValue =
+  gen_qcborvalue_types.QCborValue(h: fcQCborValueConstRef_protectedbase_concrete(self.h))
 
 proc create*(T: type gen_qcborvalue_types.QCborValueConstRef,
     param1: gen_qcborvalue_types.QCborValueConstRef): gen_qcborvalue_types.QCborValueConstRef =

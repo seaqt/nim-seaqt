@@ -152,6 +152,12 @@ proc fcQFile_virtualbase_childEvent(self: pointer, event: pointer): void {.impor
 proc fcQFile_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QFile_virtualbase_customEvent".}
 proc fcQFile_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QFile_virtualbase_connectNotify".}
 proc fcQFile_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QFile_virtualbase_disconnectNotify".}
+proc fcQFile_protectedbase_setOpenMode(self: pointer, openMode: cint): void {.importc: "QFile_protectedbase_setOpenMode".}
+proc fcQFile_protectedbase_setErrorString(self: pointer, errorString: struct_miqt_string): void {.importc: "QFile_protectedbase_setErrorString".}
+proc fcQFile_protectedbase_sender(self: pointer, ): pointer {.importc: "QFile_protectedbase_sender".}
+proc fcQFile_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QFile_protectedbase_senderSignalIndex".}
+proc fcQFile_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QFile_protectedbase_receivers".}
+proc fcQFile_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QFile_protectedbase_isSignalConnected".}
 proc fcQFile_new(vtbl: pointer, ): ptr cQFile {.importc: "QFile_new".}
 proc fcQFile_new2(vtbl: pointer, name: struct_miqt_string): ptr cQFile {.importc: "QFile_new2".}
 proc fcQFile_new3(vtbl: pointer, parent: pointer): ptr cQFile {.importc: "QFile_new3".}
@@ -658,6 +664,24 @@ proc miqt_exec_callback_cQFile_disconnectNotify(vtbl: pointer, self: pointer, si
   let self = QFile(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
   vtbl[].disconnectNotify(self, slotval1)
+
+proc setOpenMode*(self: gen_qfile_types.QFile, openMode: cint): void =
+  fcQFile_protectedbase_setOpenMode(self.h, cint(openMode))
+
+proc setErrorString*(self: gen_qfile_types.QFile, errorString: string): void =
+  fcQFile_protectedbase_setErrorString(self.h, struct_miqt_string(data: errorString, len: csize_t(len(errorString))))
+
+proc sender*(self: gen_qfile_types.QFile, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQFile_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qfile_types.QFile, ): cint =
+  fcQFile_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qfile_types.QFile, signal: cstring): cint =
+  fcQFile_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qfile_types.QFile, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQFile_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc create*(T: type gen_qfile_types.QFile,
     vtbl: ref QFileVTable = nil): gen_qfile_types.QFile =

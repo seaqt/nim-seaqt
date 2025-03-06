@@ -116,6 +116,16 @@ proc fcQFutureInterfaceBase_operatorEqual(self: pointer, other: pointer): bool {
 proc fcQFutureInterfaceBase_operatorNotEqual(self: pointer, other: pointer): bool {.importc: "QFutureInterfaceBase_operatorNotEqual".}
 proc fcQFutureInterfaceBase_swap(self: pointer, other: pointer): void {.importc: "QFutureInterfaceBase_swap".}
 proc fcQFutureInterfaceBase_isChainCanceled(self: pointer, ): bool {.importc: "QFutureInterfaceBase_isChainCanceled".}
+proc fcQFutureInterfaceBase_protectedbase_refT(self: pointer, ): bool {.importc: "QFutureInterfaceBase_protectedbase_refT".}
+proc fcQFutureInterfaceBase_protectedbase_derefT(self: pointer, ): bool {.importc: "QFutureInterfaceBase_protectedbase_derefT".}
+proc fcQFutureInterfaceBase_protectedbase_reset(self: pointer, ): void {.importc: "QFutureInterfaceBase_protectedbase_reset".}
+proc fcQFutureInterfaceBase_protectedbase_rethrowPossibleException(self: pointer, ): void {.importc: "QFutureInterfaceBase_protectedbase_rethrowPossibleException".}
+proc fcQFutureInterfaceBase_protectedbase_cleanContinuation(self: pointer, ): void {.importc: "QFutureInterfaceBase_protectedbase_cleanContinuation".}
+proc fcQFutureInterfaceBase_protectedbase_runContinuation(self: pointer, ): void {.importc: "QFutureInterfaceBase_protectedbase_runContinuation".}
+proc fcQFutureInterfaceBase_protectedbase_setLaunchAsync(self: pointer, value: bool): void {.importc: "QFutureInterfaceBase_protectedbase_setLaunchAsync".}
+proc fcQFutureInterfaceBase_protectedbase_launchAsync(self: pointer, ): bool {.importc: "QFutureInterfaceBase_protectedbase_launchAsync".}
+proc fcQFutureInterfaceBase_protectedbase_isRunningOrPending(self: pointer, ): bool {.importc: "QFutureInterfaceBase_protectedbase_isRunningOrPending".}
+proc fcQFutureInterfaceBase_protectedbase_cancelWithMode(self: pointer, mode: cint): void {.importc: "QFutureInterfaceBase_protectedbase_cancelWithMode".}
 proc fcQFutureInterfaceBase_new(): ptr cQFutureInterfaceBase {.importc: "QFutureInterfaceBase_new".}
 proc fcQFutureInterfaceBase_new2(other: pointer): ptr cQFutureInterfaceBase {.importc: "QFutureInterfaceBase_new2".}
 proc fcQFutureInterfaceBase_new3(initialState: cint): ptr cQFutureInterfaceBase {.importc: "QFutureInterfaceBase_new3".}
@@ -276,6 +286,36 @@ proc swap*(self: gen_qfutureinterface_types.QFutureInterfaceBase, other: gen_qfu
 
 proc isChainCanceled*(self: gen_qfutureinterface_types.QFutureInterfaceBase, ): bool =
   fcQFutureInterfaceBase_isChainCanceled(self.h)
+
+proc refT*(self: gen_qfutureinterface_types.QFutureInterfaceBase, ): bool =
+  fcQFutureInterfaceBase_protectedbase_refT(self.h)
+
+proc derefT*(self: gen_qfutureinterface_types.QFutureInterfaceBase, ): bool =
+  fcQFutureInterfaceBase_protectedbase_derefT(self.h)
+
+proc reset*(self: gen_qfutureinterface_types.QFutureInterfaceBase, ): void =
+  fcQFutureInterfaceBase_protectedbase_reset(self.h)
+
+proc rethrowPossibleException*(self: gen_qfutureinterface_types.QFutureInterfaceBase, ): void =
+  fcQFutureInterfaceBase_protectedbase_rethrowPossibleException(self.h)
+
+proc cleanContinuation*(self: gen_qfutureinterface_types.QFutureInterfaceBase, ): void =
+  fcQFutureInterfaceBase_protectedbase_cleanContinuation(self.h)
+
+proc runContinuation*(self: gen_qfutureinterface_types.QFutureInterfaceBase, ): void =
+  fcQFutureInterfaceBase_protectedbase_runContinuation(self.h)
+
+proc setLaunchAsync*(self: gen_qfutureinterface_types.QFutureInterfaceBase, value: bool): void =
+  fcQFutureInterfaceBase_protectedbase_setLaunchAsync(self.h, value)
+
+proc launchAsync*(self: gen_qfutureinterface_types.QFutureInterfaceBase, ): bool =
+  fcQFutureInterfaceBase_protectedbase_launchAsync(self.h)
+
+proc isRunningOrPending*(self: gen_qfutureinterface_types.QFutureInterfaceBase, ): bool =
+  fcQFutureInterfaceBase_protectedbase_isRunningOrPending(self.h)
+
+proc cancel*(self: gen_qfutureinterface_types.QFutureInterfaceBase, mode: cint): void =
+  fcQFutureInterfaceBase_protectedbase_cancelWithMode(self.h, cint(mode))
 
 proc create*(T: type gen_qfutureinterface_types.QFutureInterfaceBase): gen_qfutureinterface_types.QFutureInterfaceBase =
   gen_qfutureinterface_types.QFutureInterfaceBase(h: fcQFutureInterfaceBase_new())

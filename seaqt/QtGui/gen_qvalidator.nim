@@ -105,6 +105,10 @@ proc fcQValidator_virtualbase_childEvent(self: pointer, event: pointer): void {.
 proc fcQValidator_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QValidator_virtualbase_customEvent".}
 proc fcQValidator_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QValidator_virtualbase_connectNotify".}
 proc fcQValidator_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QValidator_virtualbase_disconnectNotify".}
+proc fcQValidator_protectedbase_sender(self: pointer, ): pointer {.importc: "QValidator_protectedbase_sender".}
+proc fcQValidator_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QValidator_protectedbase_senderSignalIndex".}
+proc fcQValidator_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QValidator_protectedbase_receivers".}
+proc fcQValidator_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QValidator_protectedbase_isSignalConnected".}
 proc fcQValidator_new(vtbl: pointer, ): ptr cQValidator {.importc: "QValidator_new".}
 proc fcQValidator_new2(vtbl: pointer, parent: pointer): ptr cQValidator {.importc: "QValidator_new2".}
 proc fcQValidator_staticMetaObject(): pointer {.importc: "QValidator_staticMetaObject".}
@@ -152,6 +156,10 @@ proc fcQIntValidator_virtualbase_childEvent(self: pointer, event: pointer): void
 proc fcQIntValidator_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QIntValidator_virtualbase_customEvent".}
 proc fcQIntValidator_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QIntValidator_virtualbase_connectNotify".}
 proc fcQIntValidator_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QIntValidator_virtualbase_disconnectNotify".}
+proc fcQIntValidator_protectedbase_sender(self: pointer, ): pointer {.importc: "QIntValidator_protectedbase_sender".}
+proc fcQIntValidator_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QIntValidator_protectedbase_senderSignalIndex".}
+proc fcQIntValidator_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QIntValidator_protectedbase_receivers".}
+proc fcQIntValidator_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QIntValidator_protectedbase_isSignalConnected".}
 proc fcQIntValidator_new(vtbl: pointer, ): ptr cQIntValidator {.importc: "QIntValidator_new".}
 proc fcQIntValidator_new2(vtbl: pointer, bottom: cint, top: cint): ptr cQIntValidator {.importc: "QIntValidator_new2".}
 proc fcQIntValidator_new3(vtbl: pointer, parent: pointer): ptr cQIntValidator {.importc: "QIntValidator_new3".}
@@ -210,6 +218,10 @@ proc fcQDoubleValidator_virtualbase_childEvent(self: pointer, event: pointer): v
 proc fcQDoubleValidator_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QDoubleValidator_virtualbase_customEvent".}
 proc fcQDoubleValidator_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QDoubleValidator_virtualbase_connectNotify".}
 proc fcQDoubleValidator_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QDoubleValidator_virtualbase_disconnectNotify".}
+proc fcQDoubleValidator_protectedbase_sender(self: pointer, ): pointer {.importc: "QDoubleValidator_protectedbase_sender".}
+proc fcQDoubleValidator_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QDoubleValidator_protectedbase_senderSignalIndex".}
+proc fcQDoubleValidator_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QDoubleValidator_protectedbase_receivers".}
+proc fcQDoubleValidator_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QDoubleValidator_protectedbase_isSignalConnected".}
 proc fcQDoubleValidator_new(vtbl: pointer, ): ptr cQDoubleValidator {.importc: "QDoubleValidator_new".}
 proc fcQDoubleValidator_new2(vtbl: pointer, bottom: float64, top: float64, decimals: cint): ptr cQDoubleValidator {.importc: "QDoubleValidator_new2".}
 proc fcQDoubleValidator_new3(vtbl: pointer, parent: pointer): ptr cQDoubleValidator {.importc: "QDoubleValidator_new3".}
@@ -253,6 +265,10 @@ proc fcQRegularExpressionValidator_virtualbase_childEvent(self: pointer, event: 
 proc fcQRegularExpressionValidator_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QRegularExpressionValidator_virtualbase_customEvent".}
 proc fcQRegularExpressionValidator_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QRegularExpressionValidator_virtualbase_connectNotify".}
 proc fcQRegularExpressionValidator_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QRegularExpressionValidator_virtualbase_disconnectNotify".}
+proc fcQRegularExpressionValidator_protectedbase_sender(self: pointer, ): pointer {.importc: "QRegularExpressionValidator_protectedbase_sender".}
+proc fcQRegularExpressionValidator_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QRegularExpressionValidator_protectedbase_senderSignalIndex".}
+proc fcQRegularExpressionValidator_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QRegularExpressionValidator_protectedbase_receivers".}
+proc fcQRegularExpressionValidator_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QRegularExpressionValidator_protectedbase_isSignalConnected".}
 proc fcQRegularExpressionValidator_new(vtbl: pointer, ): ptr cQRegularExpressionValidator {.importc: "QRegularExpressionValidator_new".}
 proc fcQRegularExpressionValidator_new2(vtbl: pointer, re: pointer): ptr cQRegularExpressionValidator {.importc: "QRegularExpressionValidator_new2".}
 proc fcQRegularExpressionValidator_new3(vtbl: pointer, parent: pointer): ptr cQRegularExpressionValidator {.importc: "QRegularExpressionValidator_new3".}
@@ -462,6 +478,18 @@ proc miqt_exec_callback_cQValidator_disconnectNotify(vtbl: pointer, self: pointe
   let self = QValidator(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
   vtbl[].disconnectNotify(self, slotval1)
+
+proc sender*(self: gen_qvalidator_types.QValidator, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQValidator_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qvalidator_types.QValidator, ): cint =
+  fcQValidator_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qvalidator_types.QValidator, signal: cstring): cint =
+  fcQValidator_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qvalidator_types.QValidator, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQValidator_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc create*(T: type gen_qvalidator_types.QValidator,
     vtbl: ref QValidatorVTable = nil): gen_qvalidator_types.QValidator =
@@ -770,6 +798,18 @@ proc miqt_exec_callback_cQIntValidator_disconnectNotify(vtbl: pointer, self: poi
   let self = QIntValidator(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
   vtbl[].disconnectNotify(self, slotval1)
+
+proc sender*(self: gen_qvalidator_types.QIntValidator, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQIntValidator_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qvalidator_types.QIntValidator, ): cint =
+  fcQIntValidator_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qvalidator_types.QIntValidator, signal: cstring): cint =
+  fcQIntValidator_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qvalidator_types.QIntValidator, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQIntValidator_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc create*(T: type gen_qvalidator_types.QIntValidator,
     vtbl: ref QIntValidatorVTable = nil): gen_qvalidator_types.QIntValidator =
@@ -1202,6 +1242,18 @@ proc miqt_exec_callback_cQDoubleValidator_disconnectNotify(vtbl: pointer, self: 
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
   vtbl[].disconnectNotify(self, slotval1)
 
+proc sender*(self: gen_qvalidator_types.QDoubleValidator, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQDoubleValidator_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qvalidator_types.QDoubleValidator, ): cint =
+  fcQDoubleValidator_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qvalidator_types.QDoubleValidator, signal: cstring): cint =
+  fcQDoubleValidator_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qvalidator_types.QDoubleValidator, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQDoubleValidator_protectedbase_isSignalConnected(self.h, signal.h)
+
 proc create*(T: type gen_qvalidator_types.QDoubleValidator,
     vtbl: ref QDoubleValidatorVTable = nil): gen_qvalidator_types.QDoubleValidator =
   let vtbl = if vtbl == nil: new QDoubleValidatorVTable else: vtbl
@@ -1545,6 +1597,18 @@ proc miqt_exec_callback_cQRegularExpressionValidator_disconnectNotify(vtbl: poin
   let self = QRegularExpressionValidator(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
   vtbl[].disconnectNotify(self, slotval1)
+
+proc sender*(self: gen_qvalidator_types.QRegularExpressionValidator, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQRegularExpressionValidator_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qvalidator_types.QRegularExpressionValidator, ): cint =
+  fcQRegularExpressionValidator_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qvalidator_types.QRegularExpressionValidator, signal: cstring): cint =
+  fcQRegularExpressionValidator_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qvalidator_types.QRegularExpressionValidator, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQRegularExpressionValidator_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc create*(T: type gen_qvalidator_types.QRegularExpressionValidator,
     vtbl: ref QRegularExpressionValidatorVTable = nil): gen_qvalidator_types.QRegularExpressionValidator =

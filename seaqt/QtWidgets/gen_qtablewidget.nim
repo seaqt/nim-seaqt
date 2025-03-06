@@ -47,6 +47,7 @@ import
   ../QtCore/gen_qcoreevent_types,
   ../QtCore/gen_qdatastream_types,
   ../QtCore/gen_qitemselectionmodel_types,
+  ../QtCore/gen_qmargins_types,
   ../QtCore/gen_qmetaobject_types,
   ../QtCore/gen_qmimedata_types,
   ../QtCore/gen_qobject_types,
@@ -72,6 +73,7 @@ export
   gen_qcoreevent_types,
   gen_qdatastream_types,
   gen_qitemselectionmodel_types,
+  gen_qmargins_types,
   gen_qmetaobject_types,
   gen_qmimedata_types,
   gen_qobject_types,
@@ -456,6 +458,35 @@ proc fcQTableWidget_virtualbase_childEvent(self: pointer, event: pointer): void 
 proc fcQTableWidget_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QTableWidget_virtualbase_customEvent".}
 proc fcQTableWidget_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QTableWidget_virtualbase_connectNotify".}
 proc fcQTableWidget_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QTableWidget_virtualbase_disconnectNotify".}
+proc fcQTableWidget_protectedbase_rowMoved(self: pointer, row: cint, oldIndex: cint, newIndex: cint): void {.importc: "QTableWidget_protectedbase_rowMoved".}
+proc fcQTableWidget_protectedbase_columnMoved(self: pointer, column: cint, oldIndex: cint, newIndex: cint): void {.importc: "QTableWidget_protectedbase_columnMoved".}
+proc fcQTableWidget_protectedbase_rowResized(self: pointer, row: cint, oldHeight: cint, newHeight: cint): void {.importc: "QTableWidget_protectedbase_rowResized".}
+proc fcQTableWidget_protectedbase_columnResized(self: pointer, column: cint, oldWidth: cint, newWidth: cint): void {.importc: "QTableWidget_protectedbase_columnResized".}
+proc fcQTableWidget_protectedbase_rowCountChanged(self: pointer, oldCount: cint, newCount: cint): void {.importc: "QTableWidget_protectedbase_rowCountChanged".}
+proc fcQTableWidget_protectedbase_columnCountChanged(self: pointer, oldCount: cint, newCount: cint): void {.importc: "QTableWidget_protectedbase_columnCountChanged".}
+proc fcQTableWidget_protectedbase_state(self: pointer, ): cint {.importc: "QTableWidget_protectedbase_state".}
+proc fcQTableWidget_protectedbase_setState(self: pointer, state: cint): void {.importc: "QTableWidget_protectedbase_setState".}
+proc fcQTableWidget_protectedbase_scheduleDelayedItemsLayout(self: pointer, ): void {.importc: "QTableWidget_protectedbase_scheduleDelayedItemsLayout".}
+proc fcQTableWidget_protectedbase_executeDelayedItemsLayout(self: pointer, ): void {.importc: "QTableWidget_protectedbase_executeDelayedItemsLayout".}
+proc fcQTableWidget_protectedbase_setDirtyRegion(self: pointer, region: pointer): void {.importc: "QTableWidget_protectedbase_setDirtyRegion".}
+proc fcQTableWidget_protectedbase_scrollDirtyRegion(self: pointer, dx: cint, dy: cint): void {.importc: "QTableWidget_protectedbase_scrollDirtyRegion".}
+proc fcQTableWidget_protectedbase_dirtyRegionOffset(self: pointer, ): pointer {.importc: "QTableWidget_protectedbase_dirtyRegionOffset".}
+proc fcQTableWidget_protectedbase_startAutoScroll(self: pointer, ): void {.importc: "QTableWidget_protectedbase_startAutoScroll".}
+proc fcQTableWidget_protectedbase_stopAutoScroll(self: pointer, ): void {.importc: "QTableWidget_protectedbase_stopAutoScroll".}
+proc fcQTableWidget_protectedbase_doAutoScroll(self: pointer, ): void {.importc: "QTableWidget_protectedbase_doAutoScroll".}
+proc fcQTableWidget_protectedbase_dropIndicatorPosition(self: pointer, ): cint {.importc: "QTableWidget_protectedbase_dropIndicatorPosition".}
+proc fcQTableWidget_protectedbase_setViewportMargins(self: pointer, left: cint, top: cint, right: cint, bottom: cint): void {.importc: "QTableWidget_protectedbase_setViewportMargins".}
+proc fcQTableWidget_protectedbase_viewportMargins(self: pointer, ): pointer {.importc: "QTableWidget_protectedbase_viewportMargins".}
+proc fcQTableWidget_protectedbase_drawFrame(self: pointer, param1: pointer): void {.importc: "QTableWidget_protectedbase_drawFrame".}
+proc fcQTableWidget_protectedbase_updateMicroFocus(self: pointer, ): void {.importc: "QTableWidget_protectedbase_updateMicroFocus".}
+proc fcQTableWidget_protectedbase_create(self: pointer, ): void {.importc: "QTableWidget_protectedbase_create".}
+proc fcQTableWidget_protectedbase_destroy(self: pointer, ): void {.importc: "QTableWidget_protectedbase_destroy".}
+proc fcQTableWidget_protectedbase_focusNextChild(self: pointer, ): bool {.importc: "QTableWidget_protectedbase_focusNextChild".}
+proc fcQTableWidget_protectedbase_focusPreviousChild(self: pointer, ): bool {.importc: "QTableWidget_protectedbase_focusPreviousChild".}
+proc fcQTableWidget_protectedbase_sender(self: pointer, ): pointer {.importc: "QTableWidget_protectedbase_sender".}
+proc fcQTableWidget_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QTableWidget_protectedbase_senderSignalIndex".}
+proc fcQTableWidget_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QTableWidget_protectedbase_receivers".}
+proc fcQTableWidget_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QTableWidget_protectedbase_isSignalConnected".}
 proc fcQTableWidget_new(vtbl: pointer, parent: pointer): ptr cQTableWidget {.importc: "QTableWidget_new".}
 proc fcQTableWidget_new2(vtbl: pointer, ): ptr cQTableWidget {.importc: "QTableWidget_new2".}
 proc fcQTableWidget_new3(vtbl: pointer, rows: cint, columns: cint): ptr cQTableWidget {.importc: "QTableWidget_new3".}
@@ -2543,6 +2574,93 @@ proc miqt_exec_callback_cQTableWidget_disconnectNotify(vtbl: pointer, self: poin
   let self = QTableWidget(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
   vtbl[].disconnectNotify(self, slotval1)
+
+proc rowMoved*(self: gen_qtablewidget_types.QTableWidget, row: cint, oldIndex: cint, newIndex: cint): void =
+  fcQTableWidget_protectedbase_rowMoved(self.h, row, oldIndex, newIndex)
+
+proc columnMoved*(self: gen_qtablewidget_types.QTableWidget, column: cint, oldIndex: cint, newIndex: cint): void =
+  fcQTableWidget_protectedbase_columnMoved(self.h, column, oldIndex, newIndex)
+
+proc rowResized*(self: gen_qtablewidget_types.QTableWidget, row: cint, oldHeight: cint, newHeight: cint): void =
+  fcQTableWidget_protectedbase_rowResized(self.h, row, oldHeight, newHeight)
+
+proc columnResized*(self: gen_qtablewidget_types.QTableWidget, column: cint, oldWidth: cint, newWidth: cint): void =
+  fcQTableWidget_protectedbase_columnResized(self.h, column, oldWidth, newWidth)
+
+proc rowCountChanged*(self: gen_qtablewidget_types.QTableWidget, oldCount: cint, newCount: cint): void =
+  fcQTableWidget_protectedbase_rowCountChanged(self.h, oldCount, newCount)
+
+proc columnCountChanged*(self: gen_qtablewidget_types.QTableWidget, oldCount: cint, newCount: cint): void =
+  fcQTableWidget_protectedbase_columnCountChanged(self.h, oldCount, newCount)
+
+proc state*(self: gen_qtablewidget_types.QTableWidget, ): cint =
+  cint(fcQTableWidget_protectedbase_state(self.h))
+
+proc setState*(self: gen_qtablewidget_types.QTableWidget, state: cint): void =
+  fcQTableWidget_protectedbase_setState(self.h, cint(state))
+
+proc scheduleDelayedItemsLayout*(self: gen_qtablewidget_types.QTableWidget, ): void =
+  fcQTableWidget_protectedbase_scheduleDelayedItemsLayout(self.h)
+
+proc executeDelayedItemsLayout*(self: gen_qtablewidget_types.QTableWidget, ): void =
+  fcQTableWidget_protectedbase_executeDelayedItemsLayout(self.h)
+
+proc setDirtyRegion*(self: gen_qtablewidget_types.QTableWidget, region: gen_qregion_types.QRegion): void =
+  fcQTableWidget_protectedbase_setDirtyRegion(self.h, region.h)
+
+proc scrollDirtyRegion*(self: gen_qtablewidget_types.QTableWidget, dx: cint, dy: cint): void =
+  fcQTableWidget_protectedbase_scrollDirtyRegion(self.h, dx, dy)
+
+proc dirtyRegionOffset*(self: gen_qtablewidget_types.QTableWidget, ): gen_qpoint_types.QPoint =
+  gen_qpoint_types.QPoint(h: fcQTableWidget_protectedbase_dirtyRegionOffset(self.h))
+
+proc startAutoScroll*(self: gen_qtablewidget_types.QTableWidget, ): void =
+  fcQTableWidget_protectedbase_startAutoScroll(self.h)
+
+proc stopAutoScroll*(self: gen_qtablewidget_types.QTableWidget, ): void =
+  fcQTableWidget_protectedbase_stopAutoScroll(self.h)
+
+proc doAutoScroll*(self: gen_qtablewidget_types.QTableWidget, ): void =
+  fcQTableWidget_protectedbase_doAutoScroll(self.h)
+
+proc dropIndicatorPosition*(self: gen_qtablewidget_types.QTableWidget, ): cint =
+  cint(fcQTableWidget_protectedbase_dropIndicatorPosition(self.h))
+
+proc setViewportMargins*(self: gen_qtablewidget_types.QTableWidget, left: cint, top: cint, right: cint, bottom: cint): void =
+  fcQTableWidget_protectedbase_setViewportMargins(self.h, left, top, right, bottom)
+
+proc viewportMargins*(self: gen_qtablewidget_types.QTableWidget, ): gen_qmargins_types.QMargins =
+  gen_qmargins_types.QMargins(h: fcQTableWidget_protectedbase_viewportMargins(self.h))
+
+proc drawFrame*(self: gen_qtablewidget_types.QTableWidget, param1: gen_qpainter_types.QPainter): void =
+  fcQTableWidget_protectedbase_drawFrame(self.h, param1.h)
+
+proc updateMicroFocus*(self: gen_qtablewidget_types.QTableWidget, ): void =
+  fcQTableWidget_protectedbase_updateMicroFocus(self.h)
+
+proc create*(self: gen_qtablewidget_types.QTableWidget, ): void =
+  fcQTableWidget_protectedbase_create(self.h)
+
+proc destroy*(self: gen_qtablewidget_types.QTableWidget, ): void =
+  fcQTableWidget_protectedbase_destroy(self.h)
+
+proc focusNextChild*(self: gen_qtablewidget_types.QTableWidget, ): bool =
+  fcQTableWidget_protectedbase_focusNextChild(self.h)
+
+proc focusPreviousChild*(self: gen_qtablewidget_types.QTableWidget, ): bool =
+  fcQTableWidget_protectedbase_focusPreviousChild(self.h)
+
+proc sender*(self: gen_qtablewidget_types.QTableWidget, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQTableWidget_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qtablewidget_types.QTableWidget, ): cint =
+  fcQTableWidget_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qtablewidget_types.QTableWidget, signal: cstring): cint =
+  fcQTableWidget_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qtablewidget_types.QTableWidget, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQTableWidget_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc create*(T: type gen_qtablewidget_types.QTableWidget,
     parent: gen_qwidget_types.QWidget,

@@ -231,10 +231,10 @@ public:
 	friend void QLocalServer_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
 
 	// Wrappers to allow calling protected methods:
-	friend QObject* QLocalServer_protectedbase_sender(bool* _dynamic_cast_ok, const void* self);
-	friend int QLocalServer_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
-	friend int QLocalServer_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
-	friend bool QLocalServer_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+	friend QObject* QLocalServer_protectedbase_sender(const void* self);
+	friend int QLocalServer_protectedbase_senderSignalIndex(const void* self);
+	friend int QLocalServer_protectedbase_receivers(const void* self, const char* signal);
+	friend bool QLocalServer_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
 };
 
 QLocalServer* QLocalServer_new(struct QLocalServer_VTable* vtbl) {
@@ -498,53 +498,29 @@ void QLocalServer_virtualbase_disconnectNotify(void* self, QMetaMethod* signal) 
 }
 
 const QMetaObject* QLocalServer_staticMetaObject() { return &QLocalServer::staticMetaObject; }
-QObject* QLocalServer_protectedbase_sender(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQLocalServer* self_cast = dynamic_cast<VirtualQLocalServer*>( (QLocalServer*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return nullptr;
-	}
-	
-	*_dynamic_cast_ok = true;
+QObject* QLocalServer_protectedbase_sender(const void* self) {
+	VirtualQLocalServer* self_cast = static_cast<VirtualQLocalServer*>( (QLocalServer*)(self) );
 	
 	return self_cast->sender();
 
 }
 
-int QLocalServer_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQLocalServer* self_cast = dynamic_cast<VirtualQLocalServer*>( (QLocalServer*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return 0;
-	}
-	
-	*_dynamic_cast_ok = true;
+int QLocalServer_protectedbase_senderSignalIndex(const void* self) {
+	VirtualQLocalServer* self_cast = static_cast<VirtualQLocalServer*>( (QLocalServer*)(self) );
 	
 	return self_cast->senderSignalIndex();
 
 }
 
-int QLocalServer_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal) {
-	VirtualQLocalServer* self_cast = dynamic_cast<VirtualQLocalServer*>( (QLocalServer*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return 0;
-	}
-	
-	*_dynamic_cast_ok = true;
+int QLocalServer_protectedbase_receivers(const void* self, const char* signal) {
+	VirtualQLocalServer* self_cast = static_cast<VirtualQLocalServer*>( (QLocalServer*)(self) );
 	
 	return self_cast->receivers(signal);
 
 }
 
-bool QLocalServer_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal) {
-	VirtualQLocalServer* self_cast = dynamic_cast<VirtualQLocalServer*>( (QLocalServer*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return false;
-	}
-	
-	*_dynamic_cast_ok = true;
+bool QLocalServer_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal) {
+	VirtualQLocalServer* self_cast = static_cast<VirtualQLocalServer*>( (QLocalServer*)(self) );
 	
 	return self_cast->isSignalConnected(*signal);
 

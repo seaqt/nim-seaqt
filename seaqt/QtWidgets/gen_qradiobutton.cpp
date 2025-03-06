@@ -881,15 +881,15 @@ public:
 	friend void QRadioButton_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
 
 	// Wrappers to allow calling protected methods:
-	friend void QRadioButton_protectedbase_updateMicroFocus(bool* _dynamic_cast_ok, void* self);
-	friend void QRadioButton_protectedbase_create(bool* _dynamic_cast_ok, void* self);
-	friend void QRadioButton_protectedbase_destroy(bool* _dynamic_cast_ok, void* self);
-	friend bool QRadioButton_protectedbase_focusNextChild(bool* _dynamic_cast_ok, void* self);
-	friend bool QRadioButton_protectedbase_focusPreviousChild(bool* _dynamic_cast_ok, void* self);
-	friend QObject* QRadioButton_protectedbase_sender(bool* _dynamic_cast_ok, const void* self);
-	friend int QRadioButton_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
-	friend int QRadioButton_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
-	friend bool QRadioButton_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+	friend void QRadioButton_protectedbase_updateMicroFocus(void* self);
+	friend void QRadioButton_protectedbase_create(void* self);
+	friend void QRadioButton_protectedbase_destroy(void* self);
+	friend bool QRadioButton_protectedbase_focusNextChild(void* self);
+	friend bool QRadioButton_protectedbase_focusPreviousChild(void* self);
+	friend QObject* QRadioButton_protectedbase_sender(const void* self);
+	friend int QRadioButton_protectedbase_senderSignalIndex(const void* self);
+	friend int QRadioButton_protectedbase_receivers(const void* self, const char* signal);
+	friend bool QRadioButton_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
 };
 
 QRadioButton* QRadioButton_new(struct QRadioButton_VTable* vtbl, QWidget* parent) {
@@ -1293,118 +1293,64 @@ void QRadioButton_virtualbase_disconnectNotify(void* self, QMetaMethod* signal) 
 }
 
 const QMetaObject* QRadioButton_staticMetaObject() { return &QRadioButton::staticMetaObject; }
-void QRadioButton_protectedbase_updateMicroFocus(bool* _dynamic_cast_ok, void* self) {
-	VirtualQRadioButton* self_cast = dynamic_cast<VirtualQRadioButton*>( (QRadioButton*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QRadioButton_protectedbase_updateMicroFocus(void* self) {
+	VirtualQRadioButton* self_cast = static_cast<VirtualQRadioButton*>( (QRadioButton*)(self) );
 	
 	self_cast->updateMicroFocus();
 
 }
 
-void QRadioButton_protectedbase_create(bool* _dynamic_cast_ok, void* self) {
-	VirtualQRadioButton* self_cast = dynamic_cast<VirtualQRadioButton*>( (QRadioButton*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QRadioButton_protectedbase_create(void* self) {
+	VirtualQRadioButton* self_cast = static_cast<VirtualQRadioButton*>( (QRadioButton*)(self) );
 	
 	self_cast->create();
 
 }
 
-void QRadioButton_protectedbase_destroy(bool* _dynamic_cast_ok, void* self) {
-	VirtualQRadioButton* self_cast = dynamic_cast<VirtualQRadioButton*>( (QRadioButton*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QRadioButton_protectedbase_destroy(void* self) {
+	VirtualQRadioButton* self_cast = static_cast<VirtualQRadioButton*>( (QRadioButton*)(self) );
 	
 	self_cast->destroy();
 
 }
 
-bool QRadioButton_protectedbase_focusNextChild(bool* _dynamic_cast_ok, void* self) {
-	VirtualQRadioButton* self_cast = dynamic_cast<VirtualQRadioButton*>( (QRadioButton*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return false;
-	}
-	
-	*_dynamic_cast_ok = true;
+bool QRadioButton_protectedbase_focusNextChild(void* self) {
+	VirtualQRadioButton* self_cast = static_cast<VirtualQRadioButton*>( (QRadioButton*)(self) );
 	
 	return self_cast->focusNextChild();
 
 }
 
-bool QRadioButton_protectedbase_focusPreviousChild(bool* _dynamic_cast_ok, void* self) {
-	VirtualQRadioButton* self_cast = dynamic_cast<VirtualQRadioButton*>( (QRadioButton*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return false;
-	}
-	
-	*_dynamic_cast_ok = true;
+bool QRadioButton_protectedbase_focusPreviousChild(void* self) {
+	VirtualQRadioButton* self_cast = static_cast<VirtualQRadioButton*>( (QRadioButton*)(self) );
 	
 	return self_cast->focusPreviousChild();
 
 }
 
-QObject* QRadioButton_protectedbase_sender(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQRadioButton* self_cast = dynamic_cast<VirtualQRadioButton*>( (QRadioButton*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return nullptr;
-	}
-	
-	*_dynamic_cast_ok = true;
+QObject* QRadioButton_protectedbase_sender(const void* self) {
+	VirtualQRadioButton* self_cast = static_cast<VirtualQRadioButton*>( (QRadioButton*)(self) );
 	
 	return self_cast->sender();
 
 }
 
-int QRadioButton_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQRadioButton* self_cast = dynamic_cast<VirtualQRadioButton*>( (QRadioButton*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return 0;
-	}
-	
-	*_dynamic_cast_ok = true;
+int QRadioButton_protectedbase_senderSignalIndex(const void* self) {
+	VirtualQRadioButton* self_cast = static_cast<VirtualQRadioButton*>( (QRadioButton*)(self) );
 	
 	return self_cast->senderSignalIndex();
 
 }
 
-int QRadioButton_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal) {
-	VirtualQRadioButton* self_cast = dynamic_cast<VirtualQRadioButton*>( (QRadioButton*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return 0;
-	}
-	
-	*_dynamic_cast_ok = true;
+int QRadioButton_protectedbase_receivers(const void* self, const char* signal) {
+	VirtualQRadioButton* self_cast = static_cast<VirtualQRadioButton*>( (QRadioButton*)(self) );
 	
 	return self_cast->receivers(signal);
 
 }
 
-bool QRadioButton_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal) {
-	VirtualQRadioButton* self_cast = dynamic_cast<VirtualQRadioButton*>( (QRadioButton*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return false;
-	}
-	
-	*_dynamic_cast_ok = true;
+bool QRadioButton_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal) {
+	VirtualQRadioButton* self_cast = static_cast<VirtualQRadioButton*>( (QRadioButton*)(self) );
 	
 	return self_cast->isSignalConnected(*signal);
 

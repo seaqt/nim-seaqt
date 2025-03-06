@@ -46,7 +46,9 @@ export gen_qwebenginehistory_types
 
 import
   ../QtCore/gen_qabstractitemmodel,
+  ../QtCore/gen_qdatastream_types,
   ../QtCore/gen_qdatetime_types,
+  ../QtCore/gen_qmetaobject_types,
   ../QtCore/gen_qobject,
   ../QtCore/gen_qobjectdefs_types,
   ../QtCore/gen_qurl_types,
@@ -54,7 +56,9 @@ import
   std/tables
 export
   gen_qabstractitemmodel,
+  gen_qdatastream_types,
   gen_qdatetime_types,
+  gen_qmetaobject_types,
   gen_qobject,
   gen_qobjectdefs_types,
   gen_qurl_types,
@@ -84,6 +88,30 @@ proc fcQWebEngineHistoryModel_roleNames(self: pointer, ): struct_miqt_map {.impo
 proc fcQWebEngineHistoryModel_reset(self: pointer, ): void {.importc: "QWebEngineHistoryModel_reset".}
 proc fcQWebEngineHistoryModel_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QWebEngineHistoryModel_tr2".}
 proc fcQWebEngineHistoryModel_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QWebEngineHistoryModel_tr3".}
+proc fcQWebEngineHistoryModel_protectedbase_createIndex(self: pointer, row: cint, column: cint): pointer {.importc: "QWebEngineHistoryModel_protectedbase_createIndex".}
+proc fcQWebEngineHistoryModel_protectedbase_encodeData(self: pointer, indexes: struct_miqt_array, stream: pointer): void {.importc: "QWebEngineHistoryModel_protectedbase_encodeData".}
+proc fcQWebEngineHistoryModel_protectedbase_decodeData(self: pointer, row: cint, column: cint, parent: pointer, stream: pointer): bool {.importc: "QWebEngineHistoryModel_protectedbase_decodeData".}
+proc fcQWebEngineHistoryModel_protectedbase_beginInsertRows(self: pointer, parent: pointer, first: cint, last: cint): void {.importc: "QWebEngineHistoryModel_protectedbase_beginInsertRows".}
+proc fcQWebEngineHistoryModel_protectedbase_endInsertRows(self: pointer, ): void {.importc: "QWebEngineHistoryModel_protectedbase_endInsertRows".}
+proc fcQWebEngineHistoryModel_protectedbase_beginRemoveRows(self: pointer, parent: pointer, first: cint, last: cint): void {.importc: "QWebEngineHistoryModel_protectedbase_beginRemoveRows".}
+proc fcQWebEngineHistoryModel_protectedbase_endRemoveRows(self: pointer, ): void {.importc: "QWebEngineHistoryModel_protectedbase_endRemoveRows".}
+proc fcQWebEngineHistoryModel_protectedbase_beginMoveRows(self: pointer, sourceParent: pointer, sourceFirst: cint, sourceLast: cint, destinationParent: pointer, destinationRow: cint): bool {.importc: "QWebEngineHistoryModel_protectedbase_beginMoveRows".}
+proc fcQWebEngineHistoryModel_protectedbase_endMoveRows(self: pointer, ): void {.importc: "QWebEngineHistoryModel_protectedbase_endMoveRows".}
+proc fcQWebEngineHistoryModel_protectedbase_beginInsertColumns(self: pointer, parent: pointer, first: cint, last: cint): void {.importc: "QWebEngineHistoryModel_protectedbase_beginInsertColumns".}
+proc fcQWebEngineHistoryModel_protectedbase_endInsertColumns(self: pointer, ): void {.importc: "QWebEngineHistoryModel_protectedbase_endInsertColumns".}
+proc fcQWebEngineHistoryModel_protectedbase_beginRemoveColumns(self: pointer, parent: pointer, first: cint, last: cint): void {.importc: "QWebEngineHistoryModel_protectedbase_beginRemoveColumns".}
+proc fcQWebEngineHistoryModel_protectedbase_endRemoveColumns(self: pointer, ): void {.importc: "QWebEngineHistoryModel_protectedbase_endRemoveColumns".}
+proc fcQWebEngineHistoryModel_protectedbase_beginMoveColumns(self: pointer, sourceParent: pointer, sourceFirst: cint, sourceLast: cint, destinationParent: pointer, destinationColumn: cint): bool {.importc: "QWebEngineHistoryModel_protectedbase_beginMoveColumns".}
+proc fcQWebEngineHistoryModel_protectedbase_endMoveColumns(self: pointer, ): void {.importc: "QWebEngineHistoryModel_protectedbase_endMoveColumns".}
+proc fcQWebEngineHistoryModel_protectedbase_beginResetModel(self: pointer, ): void {.importc: "QWebEngineHistoryModel_protectedbase_beginResetModel".}
+proc fcQWebEngineHistoryModel_protectedbase_endResetModel(self: pointer, ): void {.importc: "QWebEngineHistoryModel_protectedbase_endResetModel".}
+proc fcQWebEngineHistoryModel_protectedbase_changePersistentIndex(self: pointer, fromVal: pointer, to: pointer): void {.importc: "QWebEngineHistoryModel_protectedbase_changePersistentIndex".}
+proc fcQWebEngineHistoryModel_protectedbase_changePersistentIndexList(self: pointer, fromVal: struct_miqt_array, to: struct_miqt_array): void {.importc: "QWebEngineHistoryModel_protectedbase_changePersistentIndexList".}
+proc fcQWebEngineHistoryModel_protectedbase_persistentIndexList(self: pointer, ): struct_miqt_array {.importc: "QWebEngineHistoryModel_protectedbase_persistentIndexList".}
+proc fcQWebEngineHistoryModel_protectedbase_sender(self: pointer, ): pointer {.importc: "QWebEngineHistoryModel_protectedbase_sender".}
+proc fcQWebEngineHistoryModel_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QWebEngineHistoryModel_protectedbase_senderSignalIndex".}
+proc fcQWebEngineHistoryModel_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QWebEngineHistoryModel_protectedbase_receivers".}
+proc fcQWebEngineHistoryModel_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QWebEngineHistoryModel_protectedbase_isSignalConnected".}
 proc fcQWebEngineHistoryModel_staticMetaObject(): pointer {.importc: "QWebEngineHistoryModel_staticMetaObject".}
 proc fcQWebEngineHistory_metaObject(self: pointer, ): pointer {.importc: "QWebEngineHistory_metaObject".}
 proc fcQWebEngineHistory_metacast(self: pointer, param1: cstring): pointer {.importc: "QWebEngineHistory_metacast".}
@@ -109,6 +137,10 @@ proc fcQWebEngineHistory_backItemsModel(self: pointer, ): pointer {.importc: "QW
 proc fcQWebEngineHistory_forwardItemsModel(self: pointer, ): pointer {.importc: "QWebEngineHistory_forwardItemsModel".}
 proc fcQWebEngineHistory_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QWebEngineHistory_tr2".}
 proc fcQWebEngineHistory_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QWebEngineHistory_tr3".}
+proc fcQWebEngineHistory_protectedbase_sender(self: pointer, ): pointer {.importc: "QWebEngineHistory_protectedbase_sender".}
+proc fcQWebEngineHistory_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QWebEngineHistory_protectedbase_senderSignalIndex".}
+proc fcQWebEngineHistory_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QWebEngineHistory_protectedbase_receivers".}
+proc fcQWebEngineHistory_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QWebEngineHistory_protectedbase_isSignalConnected".}
 proc fcQWebEngineHistory_staticMetaObject(): pointer {.importc: "QWebEngineHistory_staticMetaObject".}
 
 proc operatorAssign*(self: gen_qwebenginehistory_types.QWebEngineHistoryItem, other: gen_qwebenginehistory_types.QWebEngineHistoryItem): void =
@@ -195,6 +227,95 @@ proc tr*(_: type gen_qwebenginehistory_types.QWebEngineHistoryModel, s: cstring,
   let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
   c_free(v_ms.data)
   vx_ret
+
+proc createIndex*(self: gen_qwebenginehistory_types.QWebEngineHistoryModel, row: cint, column: cint): gen_qabstractitemmodel_types.QModelIndex =
+  gen_qabstractitemmodel_types.QModelIndex(h: fcQWebEngineHistoryModel_protectedbase_createIndex(self.h, row, column))
+
+proc encodeData*(self: gen_qwebenginehistory_types.QWebEngineHistoryModel, indexes: seq[gen_qabstractitemmodel_types.QModelIndex], stream: gen_qdatastream_types.QDataStream): void =
+  var indexes_CArray = newSeq[pointer](len(indexes))
+  for i in 0..<len(indexes):
+    indexes_CArray[i] = indexes[i].h
+
+  fcQWebEngineHistoryModel_protectedbase_encodeData(self.h, struct_miqt_array(len: csize_t(len(indexes)), data: if len(indexes) == 0: nil else: addr(indexes_CArray[0])), stream.h)
+
+proc decodeData*(self: gen_qwebenginehistory_types.QWebEngineHistoryModel, row: cint, column: cint, parent: gen_qabstractitemmodel_types.QModelIndex, stream: gen_qdatastream_types.QDataStream): bool =
+  fcQWebEngineHistoryModel_protectedbase_decodeData(self.h, row, column, parent.h, stream.h)
+
+proc beginInsertRows*(self: gen_qwebenginehistory_types.QWebEngineHistoryModel, parent: gen_qabstractitemmodel_types.QModelIndex, first: cint, last: cint): void =
+  fcQWebEngineHistoryModel_protectedbase_beginInsertRows(self.h, parent.h, first, last)
+
+proc endInsertRows*(self: gen_qwebenginehistory_types.QWebEngineHistoryModel, ): void =
+  fcQWebEngineHistoryModel_protectedbase_endInsertRows(self.h)
+
+proc beginRemoveRows*(self: gen_qwebenginehistory_types.QWebEngineHistoryModel, parent: gen_qabstractitemmodel_types.QModelIndex, first: cint, last: cint): void =
+  fcQWebEngineHistoryModel_protectedbase_beginRemoveRows(self.h, parent.h, first, last)
+
+proc endRemoveRows*(self: gen_qwebenginehistory_types.QWebEngineHistoryModel, ): void =
+  fcQWebEngineHistoryModel_protectedbase_endRemoveRows(self.h)
+
+proc beginMoveRows*(self: gen_qwebenginehistory_types.QWebEngineHistoryModel, sourceParent: gen_qabstractitemmodel_types.QModelIndex, sourceFirst: cint, sourceLast: cint, destinationParent: gen_qabstractitemmodel_types.QModelIndex, destinationRow: cint): bool =
+  fcQWebEngineHistoryModel_protectedbase_beginMoveRows(self.h, sourceParent.h, sourceFirst, sourceLast, destinationParent.h, destinationRow)
+
+proc endMoveRows*(self: gen_qwebenginehistory_types.QWebEngineHistoryModel, ): void =
+  fcQWebEngineHistoryModel_protectedbase_endMoveRows(self.h)
+
+proc beginInsertColumns*(self: gen_qwebenginehistory_types.QWebEngineHistoryModel, parent: gen_qabstractitemmodel_types.QModelIndex, first: cint, last: cint): void =
+  fcQWebEngineHistoryModel_protectedbase_beginInsertColumns(self.h, parent.h, first, last)
+
+proc endInsertColumns*(self: gen_qwebenginehistory_types.QWebEngineHistoryModel, ): void =
+  fcQWebEngineHistoryModel_protectedbase_endInsertColumns(self.h)
+
+proc beginRemoveColumns*(self: gen_qwebenginehistory_types.QWebEngineHistoryModel, parent: gen_qabstractitemmodel_types.QModelIndex, first: cint, last: cint): void =
+  fcQWebEngineHistoryModel_protectedbase_beginRemoveColumns(self.h, parent.h, first, last)
+
+proc endRemoveColumns*(self: gen_qwebenginehistory_types.QWebEngineHistoryModel, ): void =
+  fcQWebEngineHistoryModel_protectedbase_endRemoveColumns(self.h)
+
+proc beginMoveColumns*(self: gen_qwebenginehistory_types.QWebEngineHistoryModel, sourceParent: gen_qabstractitemmodel_types.QModelIndex, sourceFirst: cint, sourceLast: cint, destinationParent: gen_qabstractitemmodel_types.QModelIndex, destinationColumn: cint): bool =
+  fcQWebEngineHistoryModel_protectedbase_beginMoveColumns(self.h, sourceParent.h, sourceFirst, sourceLast, destinationParent.h, destinationColumn)
+
+proc endMoveColumns*(self: gen_qwebenginehistory_types.QWebEngineHistoryModel, ): void =
+  fcQWebEngineHistoryModel_protectedbase_endMoveColumns(self.h)
+
+proc beginResetModel*(self: gen_qwebenginehistory_types.QWebEngineHistoryModel, ): void =
+  fcQWebEngineHistoryModel_protectedbase_beginResetModel(self.h)
+
+proc endResetModel*(self: gen_qwebenginehistory_types.QWebEngineHistoryModel, ): void =
+  fcQWebEngineHistoryModel_protectedbase_endResetModel(self.h)
+
+proc changePersistentIndex*(self: gen_qwebenginehistory_types.QWebEngineHistoryModel, fromVal: gen_qabstractitemmodel_types.QModelIndex, to: gen_qabstractitemmodel_types.QModelIndex): void =
+  fcQWebEngineHistoryModel_protectedbase_changePersistentIndex(self.h, fromVal.h, to.h)
+
+proc changePersistentIndexList*(self: gen_qwebenginehistory_types.QWebEngineHistoryModel, fromVal: seq[gen_qabstractitemmodel_types.QModelIndex], to: seq[gen_qabstractitemmodel_types.QModelIndex]): void =
+  var fromVal_CArray = newSeq[pointer](len(fromVal))
+  for i in 0..<len(fromVal):
+    fromVal_CArray[i] = fromVal[i].h
+
+  var to_CArray = newSeq[pointer](len(to))
+  for i in 0..<len(to):
+    to_CArray[i] = to[i].h
+
+  fcQWebEngineHistoryModel_protectedbase_changePersistentIndexList(self.h, struct_miqt_array(len: csize_t(len(fromVal)), data: if len(fromVal) == 0: nil else: addr(fromVal_CArray[0])), struct_miqt_array(len: csize_t(len(to)), data: if len(to) == 0: nil else: addr(to_CArray[0])))
+
+proc persistentIndexList*(self: gen_qwebenginehistory_types.QWebEngineHistoryModel, ): seq[gen_qabstractitemmodel_types.QModelIndex] =
+  var v_ma = fcQWebEngineHistoryModel_protectedbase_persistentIndexList(self.h)
+  var vx_ret = newSeq[gen_qabstractitemmodel_types.QModelIndex](int(v_ma.len))
+  let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
+  for i in 0 ..< v_ma.len:
+    vx_ret[i] = gen_qabstractitemmodel_types.QModelIndex(h: v_outCast[i])
+  vx_ret
+
+proc sender*(self: gen_qwebenginehistory_types.QWebEngineHistoryModel, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQWebEngineHistoryModel_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qwebenginehistory_types.QWebEngineHistoryModel, ): cint =
+  fcQWebEngineHistoryModel_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qwebenginehistory_types.QWebEngineHistoryModel, signal: cstring): cint =
+  fcQWebEngineHistoryModel_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qwebenginehistory_types.QWebEngineHistoryModel, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQWebEngineHistoryModel_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc staticMetaObject*(_: type gen_qwebenginehistory_types.QWebEngineHistoryModel): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQWebEngineHistoryModel_staticMetaObject())
@@ -293,6 +414,18 @@ proc tr*(_: type gen_qwebenginehistory_types.QWebEngineHistory, s: cstring, c: c
   let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
   c_free(v_ms.data)
   vx_ret
+
+proc sender*(self: gen_qwebenginehistory_types.QWebEngineHistory, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQWebEngineHistory_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qwebenginehistory_types.QWebEngineHistory, ): cint =
+  fcQWebEngineHistory_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qwebenginehistory_types.QWebEngineHistory, signal: cstring): cint =
+  fcQWebEngineHistory_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qwebenginehistory_types.QWebEngineHistory, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQWebEngineHistory_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc staticMetaObject*(_: type gen_qwebenginehistory_types.QWebEngineHistory): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQWebEngineHistory_staticMetaObject())

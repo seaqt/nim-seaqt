@@ -107,6 +107,10 @@ proc fcQAmbientSound_virtualbase_childEvent(self: pointer, event: pointer): void
 proc fcQAmbientSound_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QAmbientSound_virtualbase_customEvent".}
 proc fcQAmbientSound_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QAmbientSound_virtualbase_connectNotify".}
 proc fcQAmbientSound_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QAmbientSound_virtualbase_disconnectNotify".}
+proc fcQAmbientSound_protectedbase_sender(self: pointer, ): pointer {.importc: "QAmbientSound_protectedbase_sender".}
+proc fcQAmbientSound_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QAmbientSound_protectedbase_senderSignalIndex".}
+proc fcQAmbientSound_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QAmbientSound_protectedbase_receivers".}
+proc fcQAmbientSound_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QAmbientSound_protectedbase_isSignalConnected".}
 proc fcQAmbientSound_new(vtbl: pointer, engine: pointer): ptr cQAmbientSound {.importc: "QAmbientSound_new".}
 proc fcQAmbientSound_staticMetaObject(): pointer {.importc: "QAmbientSound_staticMetaObject".}
 proc fcQAmbientSound_delete(self: pointer) {.importc: "QAmbientSound_delete".}
@@ -364,6 +368,18 @@ proc miqt_exec_callback_cQAmbientSound_disconnectNotify(vtbl: pointer, self: poi
   let self = QAmbientSound(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
   vtbl[].disconnectNotify(self, slotval1)
+
+proc sender*(self: gen_qambientsound_types.QAmbientSound, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQAmbientSound_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qambientsound_types.QAmbientSound, ): cint =
+  fcQAmbientSound_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qambientsound_types.QAmbientSound, signal: cstring): cint =
+  fcQAmbientSound_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qambientsound_types.QAmbientSound, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQAmbientSound_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc create*(T: type gen_qambientsound_types.QAmbientSound,
     engine: gen_qaudioengine_types.QAudioEngine,

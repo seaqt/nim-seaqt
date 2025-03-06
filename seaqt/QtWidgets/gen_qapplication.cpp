@@ -211,11 +211,11 @@ public:
 	friend void QApplication_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
 
 	// Wrappers to allow calling protected methods:
-	friend void* QApplication_protectedbase_resolveInterface(bool* _dynamic_cast_ok, const void* self, const char* name, int revision);
-	friend QObject* QApplication_protectedbase_sender(bool* _dynamic_cast_ok, const void* self);
-	friend int QApplication_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
-	friend int QApplication_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
-	friend bool QApplication_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+	friend void* QApplication_protectedbase_resolveInterface(const void* self, const char* name, int revision);
+	friend QObject* QApplication_protectedbase_sender(const void* self);
+	friend int QApplication_protectedbase_senderSignalIndex(const void* self);
+	friend int QApplication_protectedbase_receivers(const void* self, const char* signal);
+	friend bool QApplication_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
 };
 
 QApplication* QApplication_new(struct QApplication_VTable* vtbl, int* argc, char** argv) {
@@ -586,66 +586,36 @@ void QApplication_virtualbase_disconnectNotify(void* self, QMetaMethod* signal) 
 }
 
 const QMetaObject* QApplication_staticMetaObject() { return &QApplication::staticMetaObject; }
-void* QApplication_protectedbase_resolveInterface(bool* _dynamic_cast_ok, const void* self, const char* name, int revision) {
-	VirtualQApplication* self_cast = dynamic_cast<VirtualQApplication*>( (QApplication*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return nullptr;
-	}
-	
-	*_dynamic_cast_ok = true;
+void* QApplication_protectedbase_resolveInterface(const void* self, const char* name, int revision) {
+	VirtualQApplication* self_cast = static_cast<VirtualQApplication*>( (QApplication*)(self) );
 	
 	return self_cast->resolveInterface(name, static_cast<int>(revision));
 
 }
 
-QObject* QApplication_protectedbase_sender(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQApplication* self_cast = dynamic_cast<VirtualQApplication*>( (QApplication*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return nullptr;
-	}
-	
-	*_dynamic_cast_ok = true;
+QObject* QApplication_protectedbase_sender(const void* self) {
+	VirtualQApplication* self_cast = static_cast<VirtualQApplication*>( (QApplication*)(self) );
 	
 	return self_cast->sender();
 
 }
 
-int QApplication_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQApplication* self_cast = dynamic_cast<VirtualQApplication*>( (QApplication*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return 0;
-	}
-	
-	*_dynamic_cast_ok = true;
+int QApplication_protectedbase_senderSignalIndex(const void* self) {
+	VirtualQApplication* self_cast = static_cast<VirtualQApplication*>( (QApplication*)(self) );
 	
 	return self_cast->senderSignalIndex();
 
 }
 
-int QApplication_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal) {
-	VirtualQApplication* self_cast = dynamic_cast<VirtualQApplication*>( (QApplication*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return 0;
-	}
-	
-	*_dynamic_cast_ok = true;
+int QApplication_protectedbase_receivers(const void* self, const char* signal) {
+	VirtualQApplication* self_cast = static_cast<VirtualQApplication*>( (QApplication*)(self) );
 	
 	return self_cast->receivers(signal);
 
 }
 
-bool QApplication_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal) {
-	VirtualQApplication* self_cast = dynamic_cast<VirtualQApplication*>( (QApplication*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return false;
-	}
-	
-	*_dynamic_cast_ok = true;
+bool QApplication_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal) {
+	VirtualQApplication* self_cast = static_cast<VirtualQApplication*>( (QApplication*)(self) );
 	
 	return self_cast->isSignalConnected(*signal);
 

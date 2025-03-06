@@ -80,6 +80,10 @@ proc fcQGenericPlugin_virtualbase_childEvent(self: pointer, event: pointer): voi
 proc fcQGenericPlugin_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QGenericPlugin_virtualbase_customEvent".}
 proc fcQGenericPlugin_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QGenericPlugin_virtualbase_connectNotify".}
 proc fcQGenericPlugin_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QGenericPlugin_virtualbase_disconnectNotify".}
+proc fcQGenericPlugin_protectedbase_sender(self: pointer, ): pointer {.importc: "QGenericPlugin_protectedbase_sender".}
+proc fcQGenericPlugin_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QGenericPlugin_protectedbase_senderSignalIndex".}
+proc fcQGenericPlugin_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QGenericPlugin_protectedbase_receivers".}
+proc fcQGenericPlugin_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QGenericPlugin_protectedbase_isSignalConnected".}
 proc fcQGenericPlugin_new(vtbl: pointer, ): ptr cQGenericPlugin {.importc: "QGenericPlugin_new".}
 proc fcQGenericPlugin_new2(vtbl: pointer, parent: pointer): ptr cQGenericPlugin {.importc: "QGenericPlugin_new2".}
 proc fcQGenericPlugin_staticMetaObject(): pointer {.importc: "QGenericPlugin_staticMetaObject".}
@@ -249,6 +253,18 @@ proc miqt_exec_callback_cQGenericPlugin_disconnectNotify(vtbl: pointer, self: po
   let self = QGenericPlugin(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
   vtbl[].disconnectNotify(self, slotval1)
+
+proc sender*(self: gen_qgenericplugin_types.QGenericPlugin, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQGenericPlugin_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qgenericplugin_types.QGenericPlugin, ): cint =
+  fcQGenericPlugin_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qgenericplugin_types.QGenericPlugin, signal: cstring): cint =
+  fcQGenericPlugin_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qgenericplugin_types.QGenericPlugin, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQGenericPlugin_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc create*(T: type gen_qgenericplugin_types.QGenericPlugin,
     vtbl: ref QGenericPluginVTable = nil): gen_qgenericplugin_types.QGenericPlugin =

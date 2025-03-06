@@ -82,6 +82,10 @@ proc fcQAccessiblePlugin_virtualbase_childEvent(self: pointer, event: pointer): 
 proc fcQAccessiblePlugin_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QAccessiblePlugin_virtualbase_customEvent".}
 proc fcQAccessiblePlugin_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QAccessiblePlugin_virtualbase_connectNotify".}
 proc fcQAccessiblePlugin_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QAccessiblePlugin_virtualbase_disconnectNotify".}
+proc fcQAccessiblePlugin_protectedbase_sender(self: pointer, ): pointer {.importc: "QAccessiblePlugin_protectedbase_sender".}
+proc fcQAccessiblePlugin_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QAccessiblePlugin_protectedbase_senderSignalIndex".}
+proc fcQAccessiblePlugin_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QAccessiblePlugin_protectedbase_receivers".}
+proc fcQAccessiblePlugin_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QAccessiblePlugin_protectedbase_isSignalConnected".}
 proc fcQAccessiblePlugin_new(vtbl: pointer, ): ptr cQAccessiblePlugin {.importc: "QAccessiblePlugin_new".}
 proc fcQAccessiblePlugin_new2(vtbl: pointer, parent: pointer): ptr cQAccessiblePlugin {.importc: "QAccessiblePlugin_new2".}
 proc fcQAccessiblePlugin_staticMetaObject(): pointer {.importc: "QAccessiblePlugin_staticMetaObject".}
@@ -248,6 +252,18 @@ proc miqt_exec_callback_cQAccessiblePlugin_disconnectNotify(vtbl: pointer, self:
   let self = QAccessiblePlugin(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
   vtbl[].disconnectNotify(self, slotval1)
+
+proc sender*(self: gen_qaccessibleplugin_types.QAccessiblePlugin, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQAccessiblePlugin_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qaccessibleplugin_types.QAccessiblePlugin, ): cint =
+  fcQAccessiblePlugin_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qaccessibleplugin_types.QAccessiblePlugin, signal: cstring): cint =
+  fcQAccessiblePlugin_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qaccessibleplugin_types.QAccessiblePlugin, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQAccessiblePlugin_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc create*(T: type gen_qaccessibleplugin_types.QAccessiblePlugin,
     vtbl: ref QAccessiblePluginVTable = nil): gen_qaccessibleplugin_types.QAccessiblePlugin =

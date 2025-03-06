@@ -221,6 +221,15 @@ proc fcQAbstractButton_virtualbase_childEvent(self: pointer, event: pointer): vo
 proc fcQAbstractButton_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QAbstractButton_virtualbase_customEvent".}
 proc fcQAbstractButton_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QAbstractButton_virtualbase_connectNotify".}
 proc fcQAbstractButton_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QAbstractButton_virtualbase_disconnectNotify".}
+proc fcQAbstractButton_protectedbase_updateMicroFocus(self: pointer, ): void {.importc: "QAbstractButton_protectedbase_updateMicroFocus".}
+proc fcQAbstractButton_protectedbase_create(self: pointer, ): void {.importc: "QAbstractButton_protectedbase_create".}
+proc fcQAbstractButton_protectedbase_destroy(self: pointer, ): void {.importc: "QAbstractButton_protectedbase_destroy".}
+proc fcQAbstractButton_protectedbase_focusNextChild(self: pointer, ): bool {.importc: "QAbstractButton_protectedbase_focusNextChild".}
+proc fcQAbstractButton_protectedbase_focusPreviousChild(self: pointer, ): bool {.importc: "QAbstractButton_protectedbase_focusPreviousChild".}
+proc fcQAbstractButton_protectedbase_sender(self: pointer, ): pointer {.importc: "QAbstractButton_protectedbase_sender".}
+proc fcQAbstractButton_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QAbstractButton_protectedbase_senderSignalIndex".}
+proc fcQAbstractButton_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QAbstractButton_protectedbase_receivers".}
+proc fcQAbstractButton_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QAbstractButton_protectedbase_isSignalConnected".}
 proc fcQAbstractButton_new(vtbl: pointer, parent: pointer): ptr cQAbstractButton {.importc: "QAbstractButton_new".}
 proc fcQAbstractButton_new2(vtbl: pointer, ): ptr cQAbstractButton {.importc: "QAbstractButton_new2".}
 proc fcQAbstractButton_staticMetaObject(): pointer {.importc: "QAbstractButton_staticMetaObject".}
@@ -1026,6 +1035,33 @@ proc miqt_exec_callback_cQAbstractButton_disconnectNotify(vtbl: pointer, self: p
   let self = QAbstractButton(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
   vtbl[].disconnectNotify(self, slotval1)
+
+proc updateMicroFocus*(self: gen_qabstractbutton_types.QAbstractButton, ): void =
+  fcQAbstractButton_protectedbase_updateMicroFocus(self.h)
+
+proc create*(self: gen_qabstractbutton_types.QAbstractButton, ): void =
+  fcQAbstractButton_protectedbase_create(self.h)
+
+proc destroy*(self: gen_qabstractbutton_types.QAbstractButton, ): void =
+  fcQAbstractButton_protectedbase_destroy(self.h)
+
+proc focusNextChild*(self: gen_qabstractbutton_types.QAbstractButton, ): bool =
+  fcQAbstractButton_protectedbase_focusNextChild(self.h)
+
+proc focusPreviousChild*(self: gen_qabstractbutton_types.QAbstractButton, ): bool =
+  fcQAbstractButton_protectedbase_focusPreviousChild(self.h)
+
+proc sender*(self: gen_qabstractbutton_types.QAbstractButton, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQAbstractButton_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qabstractbutton_types.QAbstractButton, ): cint =
+  fcQAbstractButton_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qabstractbutton_types.QAbstractButton, signal: cstring): cint =
+  fcQAbstractButton_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qabstractbutton_types.QAbstractButton, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQAbstractButton_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc create*(T: type gen_qabstractbutton_types.QAbstractButton,
     parent: gen_qwidget_types.QWidget,

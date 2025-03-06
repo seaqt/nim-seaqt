@@ -191,6 +191,17 @@ proc fcQStatusBar_virtualbase_childEvent(self: pointer, event: pointer): void {.
 proc fcQStatusBar_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QStatusBar_virtualbase_customEvent".}
 proc fcQStatusBar_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QStatusBar_virtualbase_connectNotify".}
 proc fcQStatusBar_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QStatusBar_virtualbase_disconnectNotify".}
+proc fcQStatusBar_protectedbase_reformat(self: pointer, ): void {.importc: "QStatusBar_protectedbase_reformat".}
+proc fcQStatusBar_protectedbase_hideOrShow(self: pointer, ): void {.importc: "QStatusBar_protectedbase_hideOrShow".}
+proc fcQStatusBar_protectedbase_updateMicroFocus(self: pointer, ): void {.importc: "QStatusBar_protectedbase_updateMicroFocus".}
+proc fcQStatusBar_protectedbase_create(self: pointer, ): void {.importc: "QStatusBar_protectedbase_create".}
+proc fcQStatusBar_protectedbase_destroy(self: pointer, ): void {.importc: "QStatusBar_protectedbase_destroy".}
+proc fcQStatusBar_protectedbase_focusNextChild(self: pointer, ): bool {.importc: "QStatusBar_protectedbase_focusNextChild".}
+proc fcQStatusBar_protectedbase_focusPreviousChild(self: pointer, ): bool {.importc: "QStatusBar_protectedbase_focusPreviousChild".}
+proc fcQStatusBar_protectedbase_sender(self: pointer, ): pointer {.importc: "QStatusBar_protectedbase_sender".}
+proc fcQStatusBar_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QStatusBar_protectedbase_senderSignalIndex".}
+proc fcQStatusBar_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QStatusBar_protectedbase_receivers".}
+proc fcQStatusBar_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QStatusBar_protectedbase_isSignalConnected".}
 proc fcQStatusBar_new(vtbl: pointer, parent: pointer): ptr cQStatusBar {.importc: "QStatusBar_new".}
 proc fcQStatusBar_new2(vtbl: pointer, ): ptr cQStatusBar {.importc: "QStatusBar_new2".}
 proc fcQStatusBar_staticMetaObject(): pointer {.importc: "QStatusBar_staticMetaObject".}
@@ -863,6 +874,39 @@ proc miqt_exec_callback_cQStatusBar_disconnectNotify(vtbl: pointer, self: pointe
   let self = QStatusBar(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
   vtbl[].disconnectNotify(self, slotval1)
+
+proc reformat*(self: gen_qstatusbar_types.QStatusBar, ): void =
+  fcQStatusBar_protectedbase_reformat(self.h)
+
+proc hideOrShow*(self: gen_qstatusbar_types.QStatusBar, ): void =
+  fcQStatusBar_protectedbase_hideOrShow(self.h)
+
+proc updateMicroFocus*(self: gen_qstatusbar_types.QStatusBar, ): void =
+  fcQStatusBar_protectedbase_updateMicroFocus(self.h)
+
+proc create*(self: gen_qstatusbar_types.QStatusBar, ): void =
+  fcQStatusBar_protectedbase_create(self.h)
+
+proc destroy*(self: gen_qstatusbar_types.QStatusBar, ): void =
+  fcQStatusBar_protectedbase_destroy(self.h)
+
+proc focusNextChild*(self: gen_qstatusbar_types.QStatusBar, ): bool =
+  fcQStatusBar_protectedbase_focusNextChild(self.h)
+
+proc focusPreviousChild*(self: gen_qstatusbar_types.QStatusBar, ): bool =
+  fcQStatusBar_protectedbase_focusPreviousChild(self.h)
+
+proc sender*(self: gen_qstatusbar_types.QStatusBar, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQStatusBar_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qstatusbar_types.QStatusBar, ): cint =
+  fcQStatusBar_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qstatusbar_types.QStatusBar, signal: cstring): cint =
+  fcQStatusBar_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qstatusbar_types.QStatusBar, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQStatusBar_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc create*(T: type gen_qstatusbar_types.QStatusBar,
     parent: gen_qwidget_types.QWidget,

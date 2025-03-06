@@ -44,6 +44,7 @@ export gen_qplaintextedit_types
 
 import
   ../QtCore/gen_qcoreevent_types,
+  ../QtCore/gen_qmargins_types,
   ../QtCore/gen_qmetaobject_types,
   ../QtCore/gen_qmimedata_types,
   ../QtCore/gen_qobject_types,
@@ -72,6 +73,7 @@ import
   ./gen_qwidget_types
 export
   gen_qcoreevent_types,
+  gen_qmargins_types,
   gen_qmetaobject_types,
   gen_qmimedata_types,
   gen_qobject_types,
@@ -321,6 +323,24 @@ proc fcQPlainTextEdit_virtualbase_childEvent(self: pointer, event: pointer): voi
 proc fcQPlainTextEdit_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QPlainTextEdit_virtualbase_customEvent".}
 proc fcQPlainTextEdit_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QPlainTextEdit_virtualbase_connectNotify".}
 proc fcQPlainTextEdit_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QPlainTextEdit_virtualbase_disconnectNotify".}
+proc fcQPlainTextEdit_protectedbase_firstVisibleBlock(self: pointer, ): pointer {.importc: "QPlainTextEdit_protectedbase_firstVisibleBlock".}
+proc fcQPlainTextEdit_protectedbase_contentOffset(self: pointer, ): pointer {.importc: "QPlainTextEdit_protectedbase_contentOffset".}
+proc fcQPlainTextEdit_protectedbase_blockBoundingRect(self: pointer, blockVal: pointer): pointer {.importc: "QPlainTextEdit_protectedbase_blockBoundingRect".}
+proc fcQPlainTextEdit_protectedbase_blockBoundingGeometry(self: pointer, blockVal: pointer): pointer {.importc: "QPlainTextEdit_protectedbase_blockBoundingGeometry".}
+proc fcQPlainTextEdit_protectedbase_getPaintContext(self: pointer, ): pointer {.importc: "QPlainTextEdit_protectedbase_getPaintContext".}
+proc fcQPlainTextEdit_protectedbase_zoomInF(self: pointer, range: float32): void {.importc: "QPlainTextEdit_protectedbase_zoomInF".}
+proc fcQPlainTextEdit_protectedbase_setViewportMargins(self: pointer, left: cint, top: cint, right: cint, bottom: cint): void {.importc: "QPlainTextEdit_protectedbase_setViewportMargins".}
+proc fcQPlainTextEdit_protectedbase_viewportMargins(self: pointer, ): pointer {.importc: "QPlainTextEdit_protectedbase_viewportMargins".}
+proc fcQPlainTextEdit_protectedbase_drawFrame(self: pointer, param1: pointer): void {.importc: "QPlainTextEdit_protectedbase_drawFrame".}
+proc fcQPlainTextEdit_protectedbase_updateMicroFocus(self: pointer, ): void {.importc: "QPlainTextEdit_protectedbase_updateMicroFocus".}
+proc fcQPlainTextEdit_protectedbase_create(self: pointer, ): void {.importc: "QPlainTextEdit_protectedbase_create".}
+proc fcQPlainTextEdit_protectedbase_destroy(self: pointer, ): void {.importc: "QPlainTextEdit_protectedbase_destroy".}
+proc fcQPlainTextEdit_protectedbase_focusNextChild(self: pointer, ): bool {.importc: "QPlainTextEdit_protectedbase_focusNextChild".}
+proc fcQPlainTextEdit_protectedbase_focusPreviousChild(self: pointer, ): bool {.importc: "QPlainTextEdit_protectedbase_focusPreviousChild".}
+proc fcQPlainTextEdit_protectedbase_sender(self: pointer, ): pointer {.importc: "QPlainTextEdit_protectedbase_sender".}
+proc fcQPlainTextEdit_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QPlainTextEdit_protectedbase_senderSignalIndex".}
+proc fcQPlainTextEdit_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QPlainTextEdit_protectedbase_receivers".}
+proc fcQPlainTextEdit_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QPlainTextEdit_protectedbase_isSignalConnected".}
 proc fcQPlainTextEdit_new(vtbl: pointer, parent: pointer): ptr cQPlainTextEdit {.importc: "QPlainTextEdit_new".}
 proc fcQPlainTextEdit_new2(vtbl: pointer, ): ptr cQPlainTextEdit {.importc: "QPlainTextEdit_new2".}
 proc fcQPlainTextEdit_new3(vtbl: pointer, text: struct_miqt_string): ptr cQPlainTextEdit {.importc: "QPlainTextEdit_new3".}
@@ -385,6 +405,12 @@ proc fcQPlainTextDocumentLayout_virtualbase_childEvent(self: pointer, event: poi
 proc fcQPlainTextDocumentLayout_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QPlainTextDocumentLayout_virtualbase_customEvent".}
 proc fcQPlainTextDocumentLayout_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QPlainTextDocumentLayout_virtualbase_connectNotify".}
 proc fcQPlainTextDocumentLayout_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QPlainTextDocumentLayout_virtualbase_disconnectNotify".}
+proc fcQPlainTextDocumentLayout_protectedbase_formatIndex(self: pointer, pos: cint): cint {.importc: "QPlainTextDocumentLayout_protectedbase_formatIndex".}
+proc fcQPlainTextDocumentLayout_protectedbase_format(self: pointer, pos: cint): pointer {.importc: "QPlainTextDocumentLayout_protectedbase_format".}
+proc fcQPlainTextDocumentLayout_protectedbase_sender(self: pointer, ): pointer {.importc: "QPlainTextDocumentLayout_protectedbase_sender".}
+proc fcQPlainTextDocumentLayout_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QPlainTextDocumentLayout_protectedbase_senderSignalIndex".}
+proc fcQPlainTextDocumentLayout_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QPlainTextDocumentLayout_protectedbase_receivers".}
+proc fcQPlainTextDocumentLayout_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QPlainTextDocumentLayout_protectedbase_isSignalConnected".}
 proc fcQPlainTextDocumentLayout_new(vtbl: pointer, document: pointer): ptr cQPlainTextDocumentLayout {.importc: "QPlainTextDocumentLayout_new".}
 proc fcQPlainTextDocumentLayout_staticMetaObject(): pointer {.importc: "QPlainTextDocumentLayout_staticMetaObject".}
 proc fcQPlainTextDocumentLayout_delete(self: pointer) {.importc: "QPlainTextDocumentLayout_delete".}
@@ -1517,6 +1543,60 @@ proc miqt_exec_callback_cQPlainTextEdit_disconnectNotify(vtbl: pointer, self: po
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
   vtbl[].disconnectNotify(self, slotval1)
 
+proc firstVisibleBlock*(self: gen_qplaintextedit_types.QPlainTextEdit, ): gen_qtextobject_types.QTextBlock =
+  gen_qtextobject_types.QTextBlock(h: fcQPlainTextEdit_protectedbase_firstVisibleBlock(self.h))
+
+proc contentOffset*(self: gen_qplaintextedit_types.QPlainTextEdit, ): gen_qpoint_types.QPointF =
+  gen_qpoint_types.QPointF(h: fcQPlainTextEdit_protectedbase_contentOffset(self.h))
+
+proc blockBoundingRect*(self: gen_qplaintextedit_types.QPlainTextEdit, blockVal: gen_qtextobject_types.QTextBlock): gen_qrect_types.QRectF =
+  gen_qrect_types.QRectF(h: fcQPlainTextEdit_protectedbase_blockBoundingRect(self.h, blockVal.h))
+
+proc blockBoundingGeometry*(self: gen_qplaintextedit_types.QPlainTextEdit, blockVal: gen_qtextobject_types.QTextBlock): gen_qrect_types.QRectF =
+  gen_qrect_types.QRectF(h: fcQPlainTextEdit_protectedbase_blockBoundingGeometry(self.h, blockVal.h))
+
+proc getPaintContext*(self: gen_qplaintextedit_types.QPlainTextEdit, ): gen_qabstracttextdocumentlayout_types.QAbstractTextDocumentLayoutPaintContext =
+  gen_qabstracttextdocumentlayout_types.QAbstractTextDocumentLayoutPaintContext(h: fcQPlainTextEdit_protectedbase_getPaintContext(self.h))
+
+proc zoomInF*(self: gen_qplaintextedit_types.QPlainTextEdit, range: float32): void =
+  fcQPlainTextEdit_protectedbase_zoomInF(self.h, range)
+
+proc setViewportMargins*(self: gen_qplaintextedit_types.QPlainTextEdit, left: cint, top: cint, right: cint, bottom: cint): void =
+  fcQPlainTextEdit_protectedbase_setViewportMargins(self.h, left, top, right, bottom)
+
+proc viewportMargins*(self: gen_qplaintextedit_types.QPlainTextEdit, ): gen_qmargins_types.QMargins =
+  gen_qmargins_types.QMargins(h: fcQPlainTextEdit_protectedbase_viewportMargins(self.h))
+
+proc drawFrame*(self: gen_qplaintextedit_types.QPlainTextEdit, param1: gen_qpainter_types.QPainter): void =
+  fcQPlainTextEdit_protectedbase_drawFrame(self.h, param1.h)
+
+proc updateMicroFocus*(self: gen_qplaintextedit_types.QPlainTextEdit, ): void =
+  fcQPlainTextEdit_protectedbase_updateMicroFocus(self.h)
+
+proc create*(self: gen_qplaintextedit_types.QPlainTextEdit, ): void =
+  fcQPlainTextEdit_protectedbase_create(self.h)
+
+proc destroy*(self: gen_qplaintextedit_types.QPlainTextEdit, ): void =
+  fcQPlainTextEdit_protectedbase_destroy(self.h)
+
+proc focusNextChild*(self: gen_qplaintextedit_types.QPlainTextEdit, ): bool =
+  fcQPlainTextEdit_protectedbase_focusNextChild(self.h)
+
+proc focusPreviousChild*(self: gen_qplaintextedit_types.QPlainTextEdit, ): bool =
+  fcQPlainTextEdit_protectedbase_focusPreviousChild(self.h)
+
+proc sender*(self: gen_qplaintextedit_types.QPlainTextEdit, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQPlainTextEdit_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qplaintextedit_types.QPlainTextEdit, ): cint =
+  fcQPlainTextEdit_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qplaintextedit_types.QPlainTextEdit, signal: cstring): cint =
+  fcQPlainTextEdit_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qplaintextedit_types.QPlainTextEdit, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQPlainTextEdit_protectedbase_isSignalConnected(self.h, signal.h)
+
 proc create*(T: type gen_qplaintextedit_types.QPlainTextEdit,
     parent: gen_qwidget_types.QWidget,
     vtbl: ref QPlainTextEditVTable = nil): gen_qplaintextedit_types.QPlainTextEdit =
@@ -2340,6 +2420,24 @@ proc miqt_exec_callback_cQPlainTextDocumentLayout_disconnectNotify(vtbl: pointer
   let self = QPlainTextDocumentLayout(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
   vtbl[].disconnectNotify(self, slotval1)
+
+proc formatIndex*(self: gen_qplaintextedit_types.QPlainTextDocumentLayout, pos: cint): cint =
+  fcQPlainTextDocumentLayout_protectedbase_formatIndex(self.h, pos)
+
+proc format*(self: gen_qplaintextedit_types.QPlainTextDocumentLayout, pos: cint): gen_qtextformat_types.QTextCharFormat =
+  gen_qtextformat_types.QTextCharFormat(h: fcQPlainTextDocumentLayout_protectedbase_format(self.h, pos))
+
+proc sender*(self: gen_qplaintextedit_types.QPlainTextDocumentLayout, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQPlainTextDocumentLayout_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qplaintextedit_types.QPlainTextDocumentLayout, ): cint =
+  fcQPlainTextDocumentLayout_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qplaintextedit_types.QPlainTextDocumentLayout, signal: cstring): cint =
+  fcQPlainTextDocumentLayout_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qplaintextedit_types.QPlainTextDocumentLayout, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQPlainTextDocumentLayout_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc create*(T: type gen_qplaintextedit_types.QPlainTextDocumentLayout,
     document: gen_qtextdocument_types.QTextDocument,

@@ -292,6 +292,10 @@ proc fcQGraphicsScene_virtualbase_childEvent(self: pointer, event: pointer): voi
 proc fcQGraphicsScene_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QGraphicsScene_virtualbase_customEvent".}
 proc fcQGraphicsScene_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QGraphicsScene_virtualbase_connectNotify".}
 proc fcQGraphicsScene_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QGraphicsScene_virtualbase_disconnectNotify".}
+proc fcQGraphicsScene_protectedbase_sender(self: pointer, ): pointer {.importc: "QGraphicsScene_protectedbase_sender".}
+proc fcQGraphicsScene_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QGraphicsScene_protectedbase_senderSignalIndex".}
+proc fcQGraphicsScene_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QGraphicsScene_protectedbase_receivers".}
+proc fcQGraphicsScene_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QGraphicsScene_protectedbase_isSignalConnected".}
 proc fcQGraphicsScene_new(vtbl: pointer, ): ptr cQGraphicsScene {.importc: "QGraphicsScene_new".}
 proc fcQGraphicsScene_new2(vtbl: pointer, sceneRect: pointer): ptr cQGraphicsScene {.importc: "QGraphicsScene_new2".}
 proc fcQGraphicsScene_new3(vtbl: pointer, x: float64, y: float64, width: float64, height: float64): ptr cQGraphicsScene {.importc: "QGraphicsScene_new3".}
@@ -1207,6 +1211,18 @@ proc miqt_exec_callback_cQGraphicsScene_disconnectNotify(vtbl: pointer, self: po
   let self = QGraphicsScene(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
   vtbl[].disconnectNotify(self, slotval1)
+
+proc sender*(self: gen_qgraphicsscene_types.QGraphicsScene, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQGraphicsScene_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qgraphicsscene_types.QGraphicsScene, ): cint =
+  fcQGraphicsScene_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qgraphicsscene_types.QGraphicsScene, signal: cstring): cint =
+  fcQGraphicsScene_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qgraphicsscene_types.QGraphicsScene, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQGraphicsScene_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc create*(T: type gen_qgraphicsscene_types.QGraphicsScene,
     vtbl: ref QGraphicsSceneVTable = nil): gen_qgraphicsscene_types.QGraphicsScene =

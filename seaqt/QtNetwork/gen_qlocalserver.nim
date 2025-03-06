@@ -118,6 +118,10 @@ proc fcQLocalServer_virtualbase_childEvent(self: pointer, event: pointer): void 
 proc fcQLocalServer_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QLocalServer_virtualbase_customEvent".}
 proc fcQLocalServer_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QLocalServer_virtualbase_connectNotify".}
 proc fcQLocalServer_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QLocalServer_virtualbase_disconnectNotify".}
+proc fcQLocalServer_protectedbase_sender(self: pointer, ): pointer {.importc: "QLocalServer_protectedbase_sender".}
+proc fcQLocalServer_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QLocalServer_protectedbase_senderSignalIndex".}
+proc fcQLocalServer_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QLocalServer_protectedbase_receivers".}
+proc fcQLocalServer_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QLocalServer_protectedbase_isSignalConnected".}
 proc fcQLocalServer_new(vtbl: pointer, ): ptr cQLocalServer {.importc: "QLocalServer_new".}
 proc fcQLocalServer_new2(vtbl: pointer, parent: pointer): ptr cQLocalServer {.importc: "QLocalServer_new2".}
 proc fcQLocalServer_staticMetaObject(): pointer {.importc: "QLocalServer_staticMetaObject".}
@@ -391,6 +395,18 @@ proc miqt_exec_callback_cQLocalServer_disconnectNotify(vtbl: pointer, self: poin
   let self = QLocalServer(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
   vtbl[].disconnectNotify(self, slotval1)
+
+proc sender*(self: gen_qlocalserver_types.QLocalServer, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQLocalServer_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qlocalserver_types.QLocalServer, ): cint =
+  fcQLocalServer_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qlocalserver_types.QLocalServer, signal: cstring): cint =
+  fcQLocalServer_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qlocalserver_types.QLocalServer, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQLocalServer_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc create*(T: type gen_qlocalserver_types.QLocalServer,
     vtbl: ref QLocalServerVTable = nil): gen_qlocalserver_types.QLocalServer =

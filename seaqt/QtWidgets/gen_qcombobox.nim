@@ -306,6 +306,15 @@ proc fcQComboBox_virtualbase_childEvent(self: pointer, event: pointer): void {.i
 proc fcQComboBox_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QComboBox_virtualbase_customEvent".}
 proc fcQComboBox_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QComboBox_virtualbase_connectNotify".}
 proc fcQComboBox_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QComboBox_virtualbase_disconnectNotify".}
+proc fcQComboBox_protectedbase_updateMicroFocus(self: pointer, ): void {.importc: "QComboBox_protectedbase_updateMicroFocus".}
+proc fcQComboBox_protectedbase_create(self: pointer, ): void {.importc: "QComboBox_protectedbase_create".}
+proc fcQComboBox_protectedbase_destroy(self: pointer, ): void {.importc: "QComboBox_protectedbase_destroy".}
+proc fcQComboBox_protectedbase_focusNextChild(self: pointer, ): bool {.importc: "QComboBox_protectedbase_focusNextChild".}
+proc fcQComboBox_protectedbase_focusPreviousChild(self: pointer, ): bool {.importc: "QComboBox_protectedbase_focusPreviousChild".}
+proc fcQComboBox_protectedbase_sender(self: pointer, ): pointer {.importc: "QComboBox_protectedbase_sender".}
+proc fcQComboBox_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QComboBox_protectedbase_senderSignalIndex".}
+proc fcQComboBox_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QComboBox_protectedbase_receivers".}
+proc fcQComboBox_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QComboBox_protectedbase_isSignalConnected".}
 proc fcQComboBox_new(vtbl: pointer, parent: pointer): ptr cQComboBox {.importc: "QComboBox_new".}
 proc fcQComboBox_new2(vtbl: pointer, ): ptr cQComboBox {.importc: "QComboBox_new2".}
 proc fcQComboBox_staticMetaObject(): pointer {.importc: "QComboBox_staticMetaObject".}
@@ -1352,6 +1361,33 @@ proc miqt_exec_callback_cQComboBox_disconnectNotify(vtbl: pointer, self: pointer
   let self = QComboBox(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
   vtbl[].disconnectNotify(self, slotval1)
+
+proc updateMicroFocus*(self: gen_qcombobox_types.QComboBox, ): void =
+  fcQComboBox_protectedbase_updateMicroFocus(self.h)
+
+proc create*(self: gen_qcombobox_types.QComboBox, ): void =
+  fcQComboBox_protectedbase_create(self.h)
+
+proc destroy*(self: gen_qcombobox_types.QComboBox, ): void =
+  fcQComboBox_protectedbase_destroy(self.h)
+
+proc focusNextChild*(self: gen_qcombobox_types.QComboBox, ): bool =
+  fcQComboBox_protectedbase_focusNextChild(self.h)
+
+proc focusPreviousChild*(self: gen_qcombobox_types.QComboBox, ): bool =
+  fcQComboBox_protectedbase_focusPreviousChild(self.h)
+
+proc sender*(self: gen_qcombobox_types.QComboBox, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQComboBox_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qcombobox_types.QComboBox, ): cint =
+  fcQComboBox_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qcombobox_types.QComboBox, signal: cstring): cint =
+  fcQComboBox_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qcombobox_types.QComboBox, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQComboBox_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc create*(T: type gen_qcombobox_types.QComboBox,
     parent: gen_qwidget_types.QWidget,

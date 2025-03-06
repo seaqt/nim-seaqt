@@ -127,6 +127,12 @@ proc fcQSaveFile_virtualbase_childEvent(self: pointer, event: pointer): void {.i
 proc fcQSaveFile_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QSaveFile_virtualbase_customEvent".}
 proc fcQSaveFile_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QSaveFile_virtualbase_connectNotify".}
 proc fcQSaveFile_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QSaveFile_virtualbase_disconnectNotify".}
+proc fcQSaveFile_protectedbase_setOpenMode(self: pointer, openMode: cint): void {.importc: "QSaveFile_protectedbase_setOpenMode".}
+proc fcQSaveFile_protectedbase_setErrorString(self: pointer, errorString: struct_miqt_string): void {.importc: "QSaveFile_protectedbase_setErrorString".}
+proc fcQSaveFile_protectedbase_sender(self: pointer, ): pointer {.importc: "QSaveFile_protectedbase_sender".}
+proc fcQSaveFile_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QSaveFile_protectedbase_senderSignalIndex".}
+proc fcQSaveFile_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QSaveFile_protectedbase_receivers".}
+proc fcQSaveFile_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QSaveFile_protectedbase_isSignalConnected".}
 proc fcQSaveFile_new(vtbl: pointer, name: struct_miqt_string): ptr cQSaveFile {.importc: "QSaveFile_new".}
 proc fcQSaveFile_new2(vtbl: pointer, ): ptr cQSaveFile {.importc: "QSaveFile_new2".}
 proc fcQSaveFile_new3(vtbl: pointer, name: struct_miqt_string, parent: pointer): ptr cQSaveFile {.importc: "QSaveFile_new3".}
@@ -539,6 +545,24 @@ proc miqt_exec_callback_cQSaveFile_disconnectNotify(vtbl: pointer, self: pointer
   let self = QSaveFile(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
   vtbl[].disconnectNotify(self, slotval1)
+
+proc setOpenMode*(self: gen_qsavefile_types.QSaveFile, openMode: cint): void =
+  fcQSaveFile_protectedbase_setOpenMode(self.h, cint(openMode))
+
+proc setErrorString*(self: gen_qsavefile_types.QSaveFile, errorString: string): void =
+  fcQSaveFile_protectedbase_setErrorString(self.h, struct_miqt_string(data: errorString, len: csize_t(len(errorString))))
+
+proc sender*(self: gen_qsavefile_types.QSaveFile, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQSaveFile_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qsavefile_types.QSaveFile, ): cint =
+  fcQSaveFile_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qsavefile_types.QSaveFile, signal: cstring): cint =
+  fcQSaveFile_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qsavefile_types.QSaveFile, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQSaveFile_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc create*(T: type gen_qsavefile_types.QSaveFile,
     name: string,

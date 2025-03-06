@@ -187,10 +187,10 @@ public:
 	friend void QAmbientSound_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
 
 	// Wrappers to allow calling protected methods:
-	friend QObject* QAmbientSound_protectedbase_sender(bool* _dynamic_cast_ok, const void* self);
-	friend int QAmbientSound_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
-	friend int QAmbientSound_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
-	friend bool QAmbientSound_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+	friend QObject* QAmbientSound_protectedbase_sender(const void* self);
+	friend int QAmbientSound_protectedbase_senderSignalIndex(const void* self);
+	friend int QAmbientSound_protectedbase_receivers(const void* self, const char* signal);
+	friend bool QAmbientSound_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
 };
 
 QAmbientSound* QAmbientSound_new(struct QAmbientSound_VTable* vtbl, QAudioEngine* engine) {
@@ -415,53 +415,29 @@ void QAmbientSound_virtualbase_disconnectNotify(void* self, QMetaMethod* signal)
 }
 
 const QMetaObject* QAmbientSound_staticMetaObject() { return &QAmbientSound::staticMetaObject; }
-QObject* QAmbientSound_protectedbase_sender(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQAmbientSound* self_cast = dynamic_cast<VirtualQAmbientSound*>( (QAmbientSound*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return nullptr;
-	}
-	
-	*_dynamic_cast_ok = true;
+QObject* QAmbientSound_protectedbase_sender(const void* self) {
+	VirtualQAmbientSound* self_cast = static_cast<VirtualQAmbientSound*>( (QAmbientSound*)(self) );
 	
 	return self_cast->sender();
 
 }
 
-int QAmbientSound_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQAmbientSound* self_cast = dynamic_cast<VirtualQAmbientSound*>( (QAmbientSound*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return 0;
-	}
-	
-	*_dynamic_cast_ok = true;
+int QAmbientSound_protectedbase_senderSignalIndex(const void* self) {
+	VirtualQAmbientSound* self_cast = static_cast<VirtualQAmbientSound*>( (QAmbientSound*)(self) );
 	
 	return self_cast->senderSignalIndex();
 
 }
 
-int QAmbientSound_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal) {
-	VirtualQAmbientSound* self_cast = dynamic_cast<VirtualQAmbientSound*>( (QAmbientSound*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return 0;
-	}
-	
-	*_dynamic_cast_ok = true;
+int QAmbientSound_protectedbase_receivers(const void* self, const char* signal) {
+	VirtualQAmbientSound* self_cast = static_cast<VirtualQAmbientSound*>( (QAmbientSound*)(self) );
 	
 	return self_cast->receivers(signal);
 
 }
 
-bool QAmbientSound_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal) {
-	VirtualQAmbientSound* self_cast = dynamic_cast<VirtualQAmbientSound*>( (QAmbientSound*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return false;
-	}
-	
-	*_dynamic_cast_ok = true;
+bool QAmbientSound_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal) {
+	VirtualQAmbientSound* self_cast = static_cast<VirtualQAmbientSound*>( (QAmbientSound*)(self) );
 	
 	return self_cast->isSignalConnected(*signal);
 

@@ -95,10 +95,10 @@ void QQmlContext_virtualbase_childEvent(void* self, QChildEvent* event);
 void QQmlContext_virtualbase_customEvent(void* self, QEvent* event);
 void QQmlContext_virtualbase_connectNotify(void* self, QMetaMethod* signal);
 void QQmlContext_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
-QObject* QQmlContext_protectedbase_sender(bool* _dynamic_cast_ok, const void* self);
-int QQmlContext_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
-int QQmlContext_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
-bool QQmlContext_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+QObject* QQmlContext_protectedbase_sender(const void* self);
+int QQmlContext_protectedbase_senderSignalIndex(const void* self);
+int QQmlContext_protectedbase_receivers(const void* self, const char* signal);
+bool QQmlContext_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
 const QMetaObject* QQmlContext_staticMetaObject();
 void QQmlContext_delete(QQmlContext* self);
 

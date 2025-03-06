@@ -201,10 +201,10 @@ public:
 	friend void QWebEngineUrlRequestInterceptor_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
 
 	// Wrappers to allow calling protected methods:
-	friend QObject* QWebEngineUrlRequestInterceptor_protectedbase_sender(bool* _dynamic_cast_ok, const void* self);
-	friend int QWebEngineUrlRequestInterceptor_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
-	friend int QWebEngineUrlRequestInterceptor_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
-	friend bool QWebEngineUrlRequestInterceptor_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+	friend QObject* QWebEngineUrlRequestInterceptor_protectedbase_sender(const void* self);
+	friend int QWebEngineUrlRequestInterceptor_protectedbase_senderSignalIndex(const void* self);
+	friend int QWebEngineUrlRequestInterceptor_protectedbase_receivers(const void* self, const char* signal);
+	friend bool QWebEngineUrlRequestInterceptor_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
 };
 
 QWebEngineUrlRequestInterceptor* QWebEngineUrlRequestInterceptor_new(struct QWebEngineUrlRequestInterceptor_VTable* vtbl) {
@@ -329,53 +329,29 @@ void QWebEngineUrlRequestInterceptor_virtualbase_disconnectNotify(void* self, QM
 }
 
 const QMetaObject* QWebEngineUrlRequestInterceptor_staticMetaObject() { return &QWebEngineUrlRequestInterceptor::staticMetaObject; }
-QObject* QWebEngineUrlRequestInterceptor_protectedbase_sender(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQWebEngineUrlRequestInterceptor* self_cast = dynamic_cast<VirtualQWebEngineUrlRequestInterceptor*>( (QWebEngineUrlRequestInterceptor*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return nullptr;
-	}
-	
-	*_dynamic_cast_ok = true;
+QObject* QWebEngineUrlRequestInterceptor_protectedbase_sender(const void* self) {
+	VirtualQWebEngineUrlRequestInterceptor* self_cast = static_cast<VirtualQWebEngineUrlRequestInterceptor*>( (QWebEngineUrlRequestInterceptor*)(self) );
 	
 	return self_cast->sender();
 
 }
 
-int QWebEngineUrlRequestInterceptor_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQWebEngineUrlRequestInterceptor* self_cast = dynamic_cast<VirtualQWebEngineUrlRequestInterceptor*>( (QWebEngineUrlRequestInterceptor*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return 0;
-	}
-	
-	*_dynamic_cast_ok = true;
+int QWebEngineUrlRequestInterceptor_protectedbase_senderSignalIndex(const void* self) {
+	VirtualQWebEngineUrlRequestInterceptor* self_cast = static_cast<VirtualQWebEngineUrlRequestInterceptor*>( (QWebEngineUrlRequestInterceptor*)(self) );
 	
 	return self_cast->senderSignalIndex();
 
 }
 
-int QWebEngineUrlRequestInterceptor_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal) {
-	VirtualQWebEngineUrlRequestInterceptor* self_cast = dynamic_cast<VirtualQWebEngineUrlRequestInterceptor*>( (QWebEngineUrlRequestInterceptor*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return 0;
-	}
-	
-	*_dynamic_cast_ok = true;
+int QWebEngineUrlRequestInterceptor_protectedbase_receivers(const void* self, const char* signal) {
+	VirtualQWebEngineUrlRequestInterceptor* self_cast = static_cast<VirtualQWebEngineUrlRequestInterceptor*>( (QWebEngineUrlRequestInterceptor*)(self) );
 	
 	return self_cast->receivers(signal);
 
 }
 
-bool QWebEngineUrlRequestInterceptor_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal) {
-	VirtualQWebEngineUrlRequestInterceptor* self_cast = dynamic_cast<VirtualQWebEngineUrlRequestInterceptor*>( (QWebEngineUrlRequestInterceptor*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return false;
-	}
-	
-	*_dynamic_cast_ok = true;
+bool QWebEngineUrlRequestInterceptor_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal) {
+	VirtualQWebEngineUrlRequestInterceptor* self_cast = static_cast<VirtualQWebEngineUrlRequestInterceptor*>( (QWebEngineUrlRequestInterceptor*)(self) );
 	
 	return self_cast->isSignalConnected(*signal);
 

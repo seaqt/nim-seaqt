@@ -943,18 +943,18 @@ public:
 	friend void QGraphicsView_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
 
 	// Wrappers to allow calling protected methods:
-	friend void QGraphicsView_protectedbase_setViewportMargins(bool* _dynamic_cast_ok, void* self, int left, int top, int right, int bottom);
-	friend QMargins* QGraphicsView_protectedbase_viewportMargins(bool* _dynamic_cast_ok, const void* self);
-	friend void QGraphicsView_protectedbase_drawFrame(bool* _dynamic_cast_ok, void* self, QPainter* param1);
-	friend void QGraphicsView_protectedbase_updateMicroFocus(bool* _dynamic_cast_ok, void* self);
-	friend void QGraphicsView_protectedbase_create(bool* _dynamic_cast_ok, void* self);
-	friend void QGraphicsView_protectedbase_destroy(bool* _dynamic_cast_ok, void* self);
-	friend bool QGraphicsView_protectedbase_focusNextChild(bool* _dynamic_cast_ok, void* self);
-	friend bool QGraphicsView_protectedbase_focusPreviousChild(bool* _dynamic_cast_ok, void* self);
-	friend QObject* QGraphicsView_protectedbase_sender(bool* _dynamic_cast_ok, const void* self);
-	friend int QGraphicsView_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
-	friend int QGraphicsView_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
-	friend bool QGraphicsView_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+	friend void QGraphicsView_protectedbase_setViewportMargins(void* self, int left, int top, int right, int bottom);
+	friend QMargins* QGraphicsView_protectedbase_viewportMargins(const void* self);
+	friend void QGraphicsView_protectedbase_drawFrame(void* self, QPainter* param1);
+	friend void QGraphicsView_protectedbase_updateMicroFocus(void* self);
+	friend void QGraphicsView_protectedbase_create(void* self);
+	friend void QGraphicsView_protectedbase_destroy(void* self);
+	friend bool QGraphicsView_protectedbase_focusNextChild(void* self);
+	friend bool QGraphicsView_protectedbase_focusPreviousChild(void* self);
+	friend QObject* QGraphicsView_protectedbase_sender(const void* self);
+	friend int QGraphicsView_protectedbase_senderSignalIndex(const void* self);
+	friend int QGraphicsView_protectedbase_receivers(const void* self, const char* signal);
+	friend bool QGraphicsView_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
 };
 
 QGraphicsView* QGraphicsView_new(struct QGraphicsView_VTable* vtbl, QWidget* parent) {
@@ -1844,157 +1844,85 @@ void QGraphicsView_virtualbase_disconnectNotify(void* self, QMetaMethod* signal)
 }
 
 const QMetaObject* QGraphicsView_staticMetaObject() { return &QGraphicsView::staticMetaObject; }
-void QGraphicsView_protectedbase_setViewportMargins(bool* _dynamic_cast_ok, void* self, int left, int top, int right, int bottom) {
-	VirtualQGraphicsView* self_cast = dynamic_cast<VirtualQGraphicsView*>( (QGraphicsView*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QGraphicsView_protectedbase_setViewportMargins(void* self, int left, int top, int right, int bottom) {
+	VirtualQGraphicsView* self_cast = static_cast<VirtualQGraphicsView*>( (QGraphicsView*)(self) );
 	
 	self_cast->setViewportMargins(static_cast<int>(left), static_cast<int>(top), static_cast<int>(right), static_cast<int>(bottom));
 
 }
 
-QMargins* QGraphicsView_protectedbase_viewportMargins(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQGraphicsView* self_cast = dynamic_cast<VirtualQGraphicsView*>( (QGraphicsView*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return nullptr;
-	}
-	
-	*_dynamic_cast_ok = true;
+QMargins* QGraphicsView_protectedbase_viewportMargins(const void* self) {
+	VirtualQGraphicsView* self_cast = static_cast<VirtualQGraphicsView*>( (QGraphicsView*)(self) );
 	
 	return new QMargins(self_cast->viewportMargins());
 
 }
 
-void QGraphicsView_protectedbase_drawFrame(bool* _dynamic_cast_ok, void* self, QPainter* param1) {
-	VirtualQGraphicsView* self_cast = dynamic_cast<VirtualQGraphicsView*>( (QGraphicsView*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QGraphicsView_protectedbase_drawFrame(void* self, QPainter* param1) {
+	VirtualQGraphicsView* self_cast = static_cast<VirtualQGraphicsView*>( (QGraphicsView*)(self) );
 	
 	self_cast->drawFrame(param1);
 
 }
 
-void QGraphicsView_protectedbase_updateMicroFocus(bool* _dynamic_cast_ok, void* self) {
-	VirtualQGraphicsView* self_cast = dynamic_cast<VirtualQGraphicsView*>( (QGraphicsView*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QGraphicsView_protectedbase_updateMicroFocus(void* self) {
+	VirtualQGraphicsView* self_cast = static_cast<VirtualQGraphicsView*>( (QGraphicsView*)(self) );
 	
 	self_cast->updateMicroFocus();
 
 }
 
-void QGraphicsView_protectedbase_create(bool* _dynamic_cast_ok, void* self) {
-	VirtualQGraphicsView* self_cast = dynamic_cast<VirtualQGraphicsView*>( (QGraphicsView*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QGraphicsView_protectedbase_create(void* self) {
+	VirtualQGraphicsView* self_cast = static_cast<VirtualQGraphicsView*>( (QGraphicsView*)(self) );
 	
 	self_cast->create();
 
 }
 
-void QGraphicsView_protectedbase_destroy(bool* _dynamic_cast_ok, void* self) {
-	VirtualQGraphicsView* self_cast = dynamic_cast<VirtualQGraphicsView*>( (QGraphicsView*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QGraphicsView_protectedbase_destroy(void* self) {
+	VirtualQGraphicsView* self_cast = static_cast<VirtualQGraphicsView*>( (QGraphicsView*)(self) );
 	
 	self_cast->destroy();
 
 }
 
-bool QGraphicsView_protectedbase_focusNextChild(bool* _dynamic_cast_ok, void* self) {
-	VirtualQGraphicsView* self_cast = dynamic_cast<VirtualQGraphicsView*>( (QGraphicsView*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return false;
-	}
-	
-	*_dynamic_cast_ok = true;
+bool QGraphicsView_protectedbase_focusNextChild(void* self) {
+	VirtualQGraphicsView* self_cast = static_cast<VirtualQGraphicsView*>( (QGraphicsView*)(self) );
 	
 	return self_cast->focusNextChild();
 
 }
 
-bool QGraphicsView_protectedbase_focusPreviousChild(bool* _dynamic_cast_ok, void* self) {
-	VirtualQGraphicsView* self_cast = dynamic_cast<VirtualQGraphicsView*>( (QGraphicsView*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return false;
-	}
-	
-	*_dynamic_cast_ok = true;
+bool QGraphicsView_protectedbase_focusPreviousChild(void* self) {
+	VirtualQGraphicsView* self_cast = static_cast<VirtualQGraphicsView*>( (QGraphicsView*)(self) );
 	
 	return self_cast->focusPreviousChild();
 
 }
 
-QObject* QGraphicsView_protectedbase_sender(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQGraphicsView* self_cast = dynamic_cast<VirtualQGraphicsView*>( (QGraphicsView*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return nullptr;
-	}
-	
-	*_dynamic_cast_ok = true;
+QObject* QGraphicsView_protectedbase_sender(const void* self) {
+	VirtualQGraphicsView* self_cast = static_cast<VirtualQGraphicsView*>( (QGraphicsView*)(self) );
 	
 	return self_cast->sender();
 
 }
 
-int QGraphicsView_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQGraphicsView* self_cast = dynamic_cast<VirtualQGraphicsView*>( (QGraphicsView*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return 0;
-	}
-	
-	*_dynamic_cast_ok = true;
+int QGraphicsView_protectedbase_senderSignalIndex(const void* self) {
+	VirtualQGraphicsView* self_cast = static_cast<VirtualQGraphicsView*>( (QGraphicsView*)(self) );
 	
 	return self_cast->senderSignalIndex();
 
 }
 
-int QGraphicsView_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal) {
-	VirtualQGraphicsView* self_cast = dynamic_cast<VirtualQGraphicsView*>( (QGraphicsView*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return 0;
-	}
-	
-	*_dynamic_cast_ok = true;
+int QGraphicsView_protectedbase_receivers(const void* self, const char* signal) {
+	VirtualQGraphicsView* self_cast = static_cast<VirtualQGraphicsView*>( (QGraphicsView*)(self) );
 	
 	return self_cast->receivers(signal);
 
 }
 
-bool QGraphicsView_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal) {
-	VirtualQGraphicsView* self_cast = dynamic_cast<VirtualQGraphicsView*>( (QGraphicsView*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return false;
-	}
-	
-	*_dynamic_cast_ok = true;
+bool QGraphicsView_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal) {
+	VirtualQGraphicsView* self_cast = static_cast<VirtualQGraphicsView*>( (QGraphicsView*)(self) );
 	
 	return self_cast->isSignalConnected(*signal);
 

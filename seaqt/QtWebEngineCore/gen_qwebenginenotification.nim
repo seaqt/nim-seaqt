@@ -38,11 +38,13 @@ import ./gen_qwebenginenotification_types
 export gen_qwebenginenotification_types
 
 import
+  ../QtCore/gen_qmetaobject_types,
   ../QtCore/gen_qobject,
   ../QtCore/gen_qobjectdefs_types,
   ../QtCore/gen_qurl_types,
   ../QtGui/gen_qimage_types
 export
+  gen_qmetaobject_types,
   gen_qobject,
   gen_qobjectdefs_types,
   gen_qurl_types,
@@ -69,6 +71,10 @@ proc fcQWebEngineNotification_closed(self: pointer, ): void {.importc: "QWebEngi
 proc fcQWebEngineNotification_connect_closed(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QWebEngineNotification_connect_closed".}
 proc fcQWebEngineNotification_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QWebEngineNotification_tr2".}
 proc fcQWebEngineNotification_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QWebEngineNotification_tr3".}
+proc fcQWebEngineNotification_protectedbase_sender(self: pointer, ): pointer {.importc: "QWebEngineNotification_protectedbase_sender".}
+proc fcQWebEngineNotification_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QWebEngineNotification_protectedbase_senderSignalIndex".}
+proc fcQWebEngineNotification_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QWebEngineNotification_protectedbase_receivers".}
+proc fcQWebEngineNotification_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QWebEngineNotification_protectedbase_isSignalConnected".}
 proc fcQWebEngineNotification_staticMetaObject(): pointer {.importc: "QWebEngineNotification_staticMetaObject".}
 proc fcQWebEngineNotification_delete(self: pointer) {.importc: "QWebEngineNotification_delete".}
 
@@ -161,6 +167,18 @@ proc tr*(_: type gen_qwebenginenotification_types.QWebEngineNotification, s: cst
   let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
   c_free(v_ms.data)
   vx_ret
+
+proc sender*(self: gen_qwebenginenotification_types.QWebEngineNotification, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQWebEngineNotification_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qwebenginenotification_types.QWebEngineNotification, ): cint =
+  fcQWebEngineNotification_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qwebenginenotification_types.QWebEngineNotification, signal: cstring): cint =
+  fcQWebEngineNotification_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qwebenginenotification_types.QWebEngineNotification, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQWebEngineNotification_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc staticMetaObject*(_: type gen_qwebenginenotification_types.QWebEngineNotification): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQWebEngineNotification_staticMetaObject())

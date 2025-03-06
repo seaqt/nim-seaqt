@@ -215,6 +215,16 @@ proc fcQLCDNumber_virtualbase_childEvent(self: pointer, event: pointer): void {.
 proc fcQLCDNumber_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QLCDNumber_virtualbase_customEvent".}
 proc fcQLCDNumber_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QLCDNumber_virtualbase_connectNotify".}
 proc fcQLCDNumber_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QLCDNumber_virtualbase_disconnectNotify".}
+proc fcQLCDNumber_protectedbase_drawFrame(self: pointer, param1: pointer): void {.importc: "QLCDNumber_protectedbase_drawFrame".}
+proc fcQLCDNumber_protectedbase_updateMicroFocus(self: pointer, ): void {.importc: "QLCDNumber_protectedbase_updateMicroFocus".}
+proc fcQLCDNumber_protectedbase_create(self: pointer, ): void {.importc: "QLCDNumber_protectedbase_create".}
+proc fcQLCDNumber_protectedbase_destroy(self: pointer, ): void {.importc: "QLCDNumber_protectedbase_destroy".}
+proc fcQLCDNumber_protectedbase_focusNextChild(self: pointer, ): bool {.importc: "QLCDNumber_protectedbase_focusNextChild".}
+proc fcQLCDNumber_protectedbase_focusPreviousChild(self: pointer, ): bool {.importc: "QLCDNumber_protectedbase_focusPreviousChild".}
+proc fcQLCDNumber_protectedbase_sender(self: pointer, ): pointer {.importc: "QLCDNumber_protectedbase_sender".}
+proc fcQLCDNumber_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QLCDNumber_protectedbase_senderSignalIndex".}
+proc fcQLCDNumber_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QLCDNumber_protectedbase_receivers".}
+proc fcQLCDNumber_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QLCDNumber_protectedbase_isSignalConnected".}
 proc fcQLCDNumber_new(vtbl: pointer, parent: pointer): ptr cQLCDNumber {.importc: "QLCDNumber_new".}
 proc fcQLCDNumber_new2(vtbl: pointer, ): ptr cQLCDNumber {.importc: "QLCDNumber_new2".}
 proc fcQLCDNumber_new3(vtbl: pointer, numDigits: cuint): ptr cQLCDNumber {.importc: "QLCDNumber_new3".}
@@ -907,6 +917,36 @@ proc miqt_exec_callback_cQLCDNumber_disconnectNotify(vtbl: pointer, self: pointe
   let self = QLCDNumber(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
   vtbl[].disconnectNotify(self, slotval1)
+
+proc drawFrame*(self: gen_qlcdnumber_types.QLCDNumber, param1: gen_qpainter_types.QPainter): void =
+  fcQLCDNumber_protectedbase_drawFrame(self.h, param1.h)
+
+proc updateMicroFocus*(self: gen_qlcdnumber_types.QLCDNumber, ): void =
+  fcQLCDNumber_protectedbase_updateMicroFocus(self.h)
+
+proc create*(self: gen_qlcdnumber_types.QLCDNumber, ): void =
+  fcQLCDNumber_protectedbase_create(self.h)
+
+proc destroy*(self: gen_qlcdnumber_types.QLCDNumber, ): void =
+  fcQLCDNumber_protectedbase_destroy(self.h)
+
+proc focusNextChild*(self: gen_qlcdnumber_types.QLCDNumber, ): bool =
+  fcQLCDNumber_protectedbase_focusNextChild(self.h)
+
+proc focusPreviousChild*(self: gen_qlcdnumber_types.QLCDNumber, ): bool =
+  fcQLCDNumber_protectedbase_focusPreviousChild(self.h)
+
+proc sender*(self: gen_qlcdnumber_types.QLCDNumber, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQLCDNumber_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qlcdnumber_types.QLCDNumber, ): cint =
+  fcQLCDNumber_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qlcdnumber_types.QLCDNumber, signal: cstring): cint =
+  fcQLCDNumber_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qlcdnumber_types.QLCDNumber, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQLCDNumber_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc create*(T: type gen_qlcdnumber_types.QLCDNumber,
     parent: gen_qwidget_types.QWidget,

@@ -192,6 +192,15 @@ proc fcQRubberBand_virtualbase_childEvent(self: pointer, event: pointer): void {
 proc fcQRubberBand_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QRubberBand_virtualbase_customEvent".}
 proc fcQRubberBand_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QRubberBand_virtualbase_connectNotify".}
 proc fcQRubberBand_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QRubberBand_virtualbase_disconnectNotify".}
+proc fcQRubberBand_protectedbase_updateMicroFocus(self: pointer, ): void {.importc: "QRubberBand_protectedbase_updateMicroFocus".}
+proc fcQRubberBand_protectedbase_create(self: pointer, ): void {.importc: "QRubberBand_protectedbase_create".}
+proc fcQRubberBand_protectedbase_destroy(self: pointer, ): void {.importc: "QRubberBand_protectedbase_destroy".}
+proc fcQRubberBand_protectedbase_focusNextChild(self: pointer, ): bool {.importc: "QRubberBand_protectedbase_focusNextChild".}
+proc fcQRubberBand_protectedbase_focusPreviousChild(self: pointer, ): bool {.importc: "QRubberBand_protectedbase_focusPreviousChild".}
+proc fcQRubberBand_protectedbase_sender(self: pointer, ): pointer {.importc: "QRubberBand_protectedbase_sender".}
+proc fcQRubberBand_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QRubberBand_protectedbase_senderSignalIndex".}
+proc fcQRubberBand_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QRubberBand_protectedbase_receivers".}
+proc fcQRubberBand_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QRubberBand_protectedbase_isSignalConnected".}
 proc fcQRubberBand_new(vtbl: pointer, param1: cint): ptr cQRubberBand {.importc: "QRubberBand_new".}
 proc fcQRubberBand_new2(vtbl: pointer, param1: cint, param2: pointer): ptr cQRubberBand {.importc: "QRubberBand_new2".}
 proc fcQRubberBand_staticMetaObject(): pointer {.importc: "QRubberBand_staticMetaObject".}
@@ -825,6 +834,33 @@ proc miqt_exec_callback_cQRubberBand_disconnectNotify(vtbl: pointer, self: point
   let self = QRubberBand(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
   vtbl[].disconnectNotify(self, slotval1)
+
+proc updateMicroFocus*(self: gen_qrubberband_types.QRubberBand, ): void =
+  fcQRubberBand_protectedbase_updateMicroFocus(self.h)
+
+proc create*(self: gen_qrubberband_types.QRubberBand, ): void =
+  fcQRubberBand_protectedbase_create(self.h)
+
+proc destroy*(self: gen_qrubberband_types.QRubberBand, ): void =
+  fcQRubberBand_protectedbase_destroy(self.h)
+
+proc focusNextChild*(self: gen_qrubberband_types.QRubberBand, ): bool =
+  fcQRubberBand_protectedbase_focusNextChild(self.h)
+
+proc focusPreviousChild*(self: gen_qrubberband_types.QRubberBand, ): bool =
+  fcQRubberBand_protectedbase_focusPreviousChild(self.h)
+
+proc sender*(self: gen_qrubberband_types.QRubberBand, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQRubberBand_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qrubberband_types.QRubberBand, ): cint =
+  fcQRubberBand_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qrubberband_types.QRubberBand, signal: cstring): cint =
+  fcQRubberBand_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qrubberband_types.QRubberBand, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQRubberBand_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc create*(T: type gen_qrubberband_types.QRubberBand,
     param1: cint,

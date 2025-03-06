@@ -99,11 +99,11 @@ void QThread_virtualbase_childEvent(void* self, QChildEvent* event);
 void QThread_virtualbase_customEvent(void* self, QEvent* event);
 void QThread_virtualbase_connectNotify(void* self, QMetaMethod* signal);
 void QThread_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
-int QThread_protectedbase_exec(bool* _dynamic_cast_ok, void* self);
-QObject* QThread_protectedbase_sender(bool* _dynamic_cast_ok, const void* self);
-int QThread_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
-int QThread_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
-bool QThread_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+int QThread_protectedbase_exec(void* self);
+QObject* QThread_protectedbase_sender(const void* self);
+int QThread_protectedbase_senderSignalIndex(const void* self);
+int QThread_protectedbase_receivers(const void* self, const char* signal);
+bool QThread_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
 const QMetaObject* QThread_staticMetaObject();
 void QThread_delete(QThread* self);
 

@@ -818,15 +818,15 @@ public:
 	friend void QVideoWidget_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
 
 	// Wrappers to allow calling protected methods:
-	friend void QVideoWidget_protectedbase_updateMicroFocus(bool* _dynamic_cast_ok, void* self);
-	friend void QVideoWidget_protectedbase_create(bool* _dynamic_cast_ok, void* self);
-	friend void QVideoWidget_protectedbase_destroy(bool* _dynamic_cast_ok, void* self);
-	friend bool QVideoWidget_protectedbase_focusNextChild(bool* _dynamic_cast_ok, void* self);
-	friend bool QVideoWidget_protectedbase_focusPreviousChild(bool* _dynamic_cast_ok, void* self);
-	friend QObject* QVideoWidget_protectedbase_sender(bool* _dynamic_cast_ok, const void* self);
-	friend int QVideoWidget_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
-	friend int QVideoWidget_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
-	friend bool QVideoWidget_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+	friend void QVideoWidget_protectedbase_updateMicroFocus(void* self);
+	friend void QVideoWidget_protectedbase_create(void* self);
+	friend void QVideoWidget_protectedbase_destroy(void* self);
+	friend bool QVideoWidget_protectedbase_focusNextChild(void* self);
+	friend bool QVideoWidget_protectedbase_focusPreviousChild(void* self);
+	friend QObject* QVideoWidget_protectedbase_sender(const void* self);
+	friend int QVideoWidget_protectedbase_senderSignalIndex(const void* self);
+	friend int QVideoWidget_protectedbase_receivers(const void* self, const char* signal);
+	friend bool QVideoWidget_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
 };
 
 QVideoWidget* QVideoWidget_new(struct QVideoWidget_VTable* vtbl, QWidget* parent) {
@@ -1242,118 +1242,64 @@ void QVideoWidget_virtualbase_disconnectNotify(void* self, QMetaMethod* signal) 
 }
 
 const QMetaObject* QVideoWidget_staticMetaObject() { return &QVideoWidget::staticMetaObject; }
-void QVideoWidget_protectedbase_updateMicroFocus(bool* _dynamic_cast_ok, void* self) {
-	VirtualQVideoWidget* self_cast = dynamic_cast<VirtualQVideoWidget*>( (QVideoWidget*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QVideoWidget_protectedbase_updateMicroFocus(void* self) {
+	VirtualQVideoWidget* self_cast = static_cast<VirtualQVideoWidget*>( (QVideoWidget*)(self) );
 	
 	self_cast->updateMicroFocus();
 
 }
 
-void QVideoWidget_protectedbase_create(bool* _dynamic_cast_ok, void* self) {
-	VirtualQVideoWidget* self_cast = dynamic_cast<VirtualQVideoWidget*>( (QVideoWidget*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QVideoWidget_protectedbase_create(void* self) {
+	VirtualQVideoWidget* self_cast = static_cast<VirtualQVideoWidget*>( (QVideoWidget*)(self) );
 	
 	self_cast->create();
 
 }
 
-void QVideoWidget_protectedbase_destroy(bool* _dynamic_cast_ok, void* self) {
-	VirtualQVideoWidget* self_cast = dynamic_cast<VirtualQVideoWidget*>( (QVideoWidget*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QVideoWidget_protectedbase_destroy(void* self) {
+	VirtualQVideoWidget* self_cast = static_cast<VirtualQVideoWidget*>( (QVideoWidget*)(self) );
 	
 	self_cast->destroy();
 
 }
 
-bool QVideoWidget_protectedbase_focusNextChild(bool* _dynamic_cast_ok, void* self) {
-	VirtualQVideoWidget* self_cast = dynamic_cast<VirtualQVideoWidget*>( (QVideoWidget*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return false;
-	}
-	
-	*_dynamic_cast_ok = true;
+bool QVideoWidget_protectedbase_focusNextChild(void* self) {
+	VirtualQVideoWidget* self_cast = static_cast<VirtualQVideoWidget*>( (QVideoWidget*)(self) );
 	
 	return self_cast->focusNextChild();
 
 }
 
-bool QVideoWidget_protectedbase_focusPreviousChild(bool* _dynamic_cast_ok, void* self) {
-	VirtualQVideoWidget* self_cast = dynamic_cast<VirtualQVideoWidget*>( (QVideoWidget*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return false;
-	}
-	
-	*_dynamic_cast_ok = true;
+bool QVideoWidget_protectedbase_focusPreviousChild(void* self) {
+	VirtualQVideoWidget* self_cast = static_cast<VirtualQVideoWidget*>( (QVideoWidget*)(self) );
 	
 	return self_cast->focusPreviousChild();
 
 }
 
-QObject* QVideoWidget_protectedbase_sender(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQVideoWidget* self_cast = dynamic_cast<VirtualQVideoWidget*>( (QVideoWidget*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return nullptr;
-	}
-	
-	*_dynamic_cast_ok = true;
+QObject* QVideoWidget_protectedbase_sender(const void* self) {
+	VirtualQVideoWidget* self_cast = static_cast<VirtualQVideoWidget*>( (QVideoWidget*)(self) );
 	
 	return self_cast->sender();
 
 }
 
-int QVideoWidget_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQVideoWidget* self_cast = dynamic_cast<VirtualQVideoWidget*>( (QVideoWidget*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return 0;
-	}
-	
-	*_dynamic_cast_ok = true;
+int QVideoWidget_protectedbase_senderSignalIndex(const void* self) {
+	VirtualQVideoWidget* self_cast = static_cast<VirtualQVideoWidget*>( (QVideoWidget*)(self) );
 	
 	return self_cast->senderSignalIndex();
 
 }
 
-int QVideoWidget_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal) {
-	VirtualQVideoWidget* self_cast = dynamic_cast<VirtualQVideoWidget*>( (QVideoWidget*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return 0;
-	}
-	
-	*_dynamic_cast_ok = true;
+int QVideoWidget_protectedbase_receivers(const void* self, const char* signal) {
+	VirtualQVideoWidget* self_cast = static_cast<VirtualQVideoWidget*>( (QVideoWidget*)(self) );
 	
 	return self_cast->receivers(signal);
 
 }
 
-bool QVideoWidget_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal) {
-	VirtualQVideoWidget* self_cast = dynamic_cast<VirtualQVideoWidget*>( (QVideoWidget*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return false;
-	}
-	
-	*_dynamic_cast_ok = true;
+bool QVideoWidget_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal) {
+	VirtualQVideoWidget* self_cast = static_cast<VirtualQVideoWidget*>( (QVideoWidget*)(self) );
 	
 	return self_cast->isSignalConnected(*signal);
 

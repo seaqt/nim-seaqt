@@ -107,6 +107,10 @@ proc fcQQmlExpression_virtualbase_childEvent(self: pointer, event: pointer): voi
 proc fcQQmlExpression_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QQmlExpression_virtualbase_customEvent".}
 proc fcQQmlExpression_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QQmlExpression_virtualbase_connectNotify".}
 proc fcQQmlExpression_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QQmlExpression_virtualbase_disconnectNotify".}
+proc fcQQmlExpression_protectedbase_sender(self: pointer, ): pointer {.importc: "QQmlExpression_protectedbase_sender".}
+proc fcQQmlExpression_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QQmlExpression_protectedbase_senderSignalIndex".}
+proc fcQQmlExpression_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QQmlExpression_protectedbase_receivers".}
+proc fcQQmlExpression_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QQmlExpression_protectedbase_isSignalConnected".}
 proc fcQQmlExpression_new(vtbl: pointer, ): ptr cQQmlExpression {.importc: "QQmlExpression_new".}
 proc fcQQmlExpression_new2(vtbl: pointer, param1: pointer, param2: pointer, param3: struct_miqt_string): ptr cQQmlExpression {.importc: "QQmlExpression_new2".}
 proc fcQQmlExpression_new3(vtbl: pointer, param1: pointer): ptr cQQmlExpression {.importc: "QQmlExpression_new3".}
@@ -337,6 +341,18 @@ proc miqt_exec_callback_cQQmlExpression_disconnectNotify(vtbl: pointer, self: po
   let self = QQmlExpression(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
   vtbl[].disconnectNotify(self, slotval1)
+
+proc sender*(self: gen_qqmlexpression_types.QQmlExpression, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQQmlExpression_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qqmlexpression_types.QQmlExpression, ): cint =
+  fcQQmlExpression_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qqmlexpression_types.QQmlExpression, signal: cstring): cint =
+  fcQQmlExpression_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qqmlexpression_types.QQmlExpression, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQQmlExpression_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc create*(T: type gen_qqmlexpression_types.QQmlExpression,
     vtbl: ref QQmlExpressionVTable = nil): gen_qqmlexpression_types.QQmlExpression =

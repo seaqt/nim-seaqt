@@ -113,6 +113,10 @@ proc fcQSharedMemory_virtualbase_childEvent(self: pointer, event: pointer): void
 proc fcQSharedMemory_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QSharedMemory_virtualbase_customEvent".}
 proc fcQSharedMemory_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QSharedMemory_virtualbase_connectNotify".}
 proc fcQSharedMemory_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QSharedMemory_virtualbase_disconnectNotify".}
+proc fcQSharedMemory_protectedbase_sender(self: pointer, ): pointer {.importc: "QSharedMemory_protectedbase_sender".}
+proc fcQSharedMemory_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QSharedMemory_protectedbase_senderSignalIndex".}
+proc fcQSharedMemory_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QSharedMemory_protectedbase_receivers".}
+proc fcQSharedMemory_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QSharedMemory_protectedbase_isSignalConnected".}
 proc fcQSharedMemory_new(vtbl: pointer, ): ptr cQSharedMemory {.importc: "QSharedMemory_new".}
 proc fcQSharedMemory_new2(vtbl: pointer, key: struct_miqt_string): ptr cQSharedMemory {.importc: "QSharedMemory_new2".}
 proc fcQSharedMemory_new3(vtbl: pointer, parent: pointer): ptr cQSharedMemory {.importc: "QSharedMemory_new3".}
@@ -328,6 +332,18 @@ proc miqt_exec_callback_cQSharedMemory_disconnectNotify(vtbl: pointer, self: poi
   let self = QSharedMemory(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
   vtbl[].disconnectNotify(self, slotval1)
+
+proc sender*(self: gen_qsharedmemory_types.QSharedMemory, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQSharedMemory_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qsharedmemory_types.QSharedMemory, ): cint =
+  fcQSharedMemory_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qsharedmemory_types.QSharedMemory, signal: cstring): cint =
+  fcQSharedMemory_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qsharedmemory_types.QSharedMemory, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQSharedMemory_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc create*(T: type gen_qsharedmemory_types.QSharedMemory,
     vtbl: ref QSharedMemoryVTable = nil): gen_qsharedmemory_types.QSharedMemory =

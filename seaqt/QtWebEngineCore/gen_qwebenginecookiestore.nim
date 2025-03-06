@@ -38,11 +38,13 @@ import ./gen_qwebenginecookiestore_types
 export gen_qwebenginecookiestore_types
 
 import
+  ../QtCore/gen_qmetaobject_types,
   ../QtCore/gen_qobject,
   ../QtCore/gen_qobjectdefs_types,
   ../QtCore/gen_qurl_types,
   ../QtNetwork/gen_qnetworkcookie_types
 export
+  gen_qmetaobject_types,
   gen_qobject,
   gen_qobjectdefs_types,
   gen_qurl_types,
@@ -68,6 +70,10 @@ proc fcQWebEngineCookieStore_tr2(s: cstring, c: cstring): struct_miqt_string {.i
 proc fcQWebEngineCookieStore_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QWebEngineCookieStore_tr3".}
 proc fcQWebEngineCookieStore_setCookie2(self: pointer, cookie: pointer, origin: pointer): void {.importc: "QWebEngineCookieStore_setCookie2".}
 proc fcQWebEngineCookieStore_deleteCookie2(self: pointer, cookie: pointer, origin: pointer): void {.importc: "QWebEngineCookieStore_deleteCookie2".}
+proc fcQWebEngineCookieStore_protectedbase_sender(self: pointer, ): pointer {.importc: "QWebEngineCookieStore_protectedbase_sender".}
+proc fcQWebEngineCookieStore_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QWebEngineCookieStore_protectedbase_senderSignalIndex".}
+proc fcQWebEngineCookieStore_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QWebEngineCookieStore_protectedbase_receivers".}
+proc fcQWebEngineCookieStore_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QWebEngineCookieStore_protectedbase_isSignalConnected".}
 proc fcQWebEngineCookieStore_staticMetaObject(): pointer {.importc: "QWebEngineCookieStore_staticMetaObject".}
 proc fcQWebEngineCookieStore_delete(self: pointer) {.importc: "QWebEngineCookieStore_delete".}
 proc fcQWebEngineCookieStoreFilterRequest_operatorAssign(self: pointer, param1: pointer): void {.importc: "QWebEngineCookieStore__FilterRequest_operatorAssign".}
@@ -161,6 +167,18 @@ proc setCookie*(self: gen_qwebenginecookiestore_types.QWebEngineCookieStore, coo
 
 proc deleteCookie*(self: gen_qwebenginecookiestore_types.QWebEngineCookieStore, cookie: gen_qnetworkcookie_types.QNetworkCookie, origin: gen_qurl_types.QUrl): void =
   fcQWebEngineCookieStore_deleteCookie2(self.h, cookie.h, origin.h)
+
+proc sender*(self: gen_qwebenginecookiestore_types.QWebEngineCookieStore, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQWebEngineCookieStore_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qwebenginecookiestore_types.QWebEngineCookieStore, ): cint =
+  fcQWebEngineCookieStore_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qwebenginecookiestore_types.QWebEngineCookieStore, signal: cstring): cint =
+  fcQWebEngineCookieStore_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qwebenginecookiestore_types.QWebEngineCookieStore, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQWebEngineCookieStore_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc staticMetaObject*(_: type gen_qwebenginecookiestore_types.QWebEngineCookieStore): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQWebEngineCookieStore_staticMetaObject())

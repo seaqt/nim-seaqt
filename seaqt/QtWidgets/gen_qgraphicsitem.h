@@ -391,10 +391,10 @@ QVariant* QGraphicsItem_virtualbase_itemChange(void* self, int change, QVariant*
 bool QGraphicsItem_virtualbase_supportsExtension(const void* self, int extension);
 void QGraphicsItem_virtualbase_setExtension(void* self, int extension, QVariant* variant);
 QVariant* QGraphicsItem_virtualbase_extension(const void* self, QVariant* variant);
-void QGraphicsItem_protectedbase_updateMicroFocus(bool* _dynamic_cast_ok, void* self);
-void QGraphicsItem_protectedbase_addToIndex(bool* _dynamic_cast_ok, void* self);
-void QGraphicsItem_protectedbase_removeFromIndex(bool* _dynamic_cast_ok, void* self);
-void QGraphicsItem_protectedbase_prepareGeometryChange(bool* _dynamic_cast_ok, void* self);
+void QGraphicsItem_protectedbase_updateMicroFocus(void* self);
+void QGraphicsItem_protectedbase_addToIndex(void* self);
+void QGraphicsItem_protectedbase_removeFromIndex(void* self);
+void QGraphicsItem_protectedbase_prepareGeometryChange(void* self);
 void QGraphicsItem_delete(QGraphicsItem* self);
 
 struct QGraphicsObject_VTable {
@@ -527,14 +527,14 @@ QVariant* QGraphicsObject_virtualbase_itemChange(void* self, int change, QVarian
 bool QGraphicsObject_virtualbase_supportsExtension(const void* self, int extension);
 void QGraphicsObject_virtualbase_setExtension(void* self, int extension, QVariant* variant);
 QVariant* QGraphicsObject_virtualbase_extension(const void* self, QVariant* variant);
-void QGraphicsObject_protectedbase_updateMicroFocus(bool* _dynamic_cast_ok, void* self);
-QObject* QGraphicsObject_protectedbase_sender(bool* _dynamic_cast_ok, const void* self);
-int QGraphicsObject_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
-int QGraphicsObject_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
-bool QGraphicsObject_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
-void QGraphicsObject_protectedbase_addToIndex(bool* _dynamic_cast_ok, void* self);
-void QGraphicsObject_protectedbase_removeFromIndex(bool* _dynamic_cast_ok, void* self);
-void QGraphicsObject_protectedbase_prepareGeometryChange(bool* _dynamic_cast_ok, void* self);
+void QGraphicsObject_protectedbase_updateMicroFocus(void* self);
+QObject* QGraphicsObject_protectedbase_sender(const void* self);
+int QGraphicsObject_protectedbase_senderSignalIndex(const void* self);
+int QGraphicsObject_protectedbase_receivers(const void* self, const char* signal);
+bool QGraphicsObject_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
+void QGraphicsObject_protectedbase_addToIndex(void* self);
+void QGraphicsObject_protectedbase_removeFromIndex(void* self);
+void QGraphicsObject_protectedbase_prepareGeometryChange(void* self);
 const QMetaObject* QGraphicsObject_staticMetaObject();
 void QGraphicsObject_delete(QGraphicsObject* self);
 
@@ -620,10 +620,10 @@ QVariant* QAbstractGraphicsShapeItem_virtualbase_itemChange(void* self, int chan
 bool QAbstractGraphicsShapeItem_virtualbase_supportsExtension(const void* self, int extension);
 void QAbstractGraphicsShapeItem_virtualbase_setExtension(void* self, int extension, QVariant* variant);
 QVariant* QAbstractGraphicsShapeItem_virtualbase_extension(const void* self, QVariant* variant);
-void QAbstractGraphicsShapeItem_protectedbase_updateMicroFocus(bool* _dynamic_cast_ok, void* self);
-void QAbstractGraphicsShapeItem_protectedbase_addToIndex(bool* _dynamic_cast_ok, void* self);
-void QAbstractGraphicsShapeItem_protectedbase_removeFromIndex(bool* _dynamic_cast_ok, void* self);
-void QAbstractGraphicsShapeItem_protectedbase_prepareGeometryChange(bool* _dynamic_cast_ok, void* self);
+void QAbstractGraphicsShapeItem_protectedbase_updateMicroFocus(void* self);
+void QAbstractGraphicsShapeItem_protectedbase_addToIndex(void* self);
+void QAbstractGraphicsShapeItem_protectedbase_removeFromIndex(void* self);
+void QAbstractGraphicsShapeItem_protectedbase_prepareGeometryChange(void* self);
 void QAbstractGraphicsShapeItem_delete(QAbstractGraphicsShapeItem* self);
 
 struct QGraphicsPathItem_VTable {
@@ -716,10 +716,10 @@ void QGraphicsPathItem_virtualbase_wheelEvent(void* self, QGraphicsSceneWheelEve
 void QGraphicsPathItem_virtualbase_inputMethodEvent(void* self, QInputMethodEvent* event);
 QVariant* QGraphicsPathItem_virtualbase_inputMethodQuery(const void* self, int query);
 QVariant* QGraphicsPathItem_virtualbase_itemChange(void* self, int change, QVariant* value);
-void QGraphicsPathItem_protectedbase_updateMicroFocus(bool* _dynamic_cast_ok, void* self);
-void QGraphicsPathItem_protectedbase_addToIndex(bool* _dynamic_cast_ok, void* self);
-void QGraphicsPathItem_protectedbase_removeFromIndex(bool* _dynamic_cast_ok, void* self);
-void QGraphicsPathItem_protectedbase_prepareGeometryChange(bool* _dynamic_cast_ok, void* self);
+void QGraphicsPathItem_protectedbase_updateMicroFocus(void* self);
+void QGraphicsPathItem_protectedbase_addToIndex(void* self);
+void QGraphicsPathItem_protectedbase_removeFromIndex(void* self);
+void QGraphicsPathItem_protectedbase_prepareGeometryChange(void* self);
 void QGraphicsPathItem_delete(QGraphicsPathItem* self);
 
 struct QGraphicsRectItem_VTable {
@@ -815,10 +815,10 @@ void QGraphicsRectItem_virtualbase_wheelEvent(void* self, QGraphicsSceneWheelEve
 void QGraphicsRectItem_virtualbase_inputMethodEvent(void* self, QInputMethodEvent* event);
 QVariant* QGraphicsRectItem_virtualbase_inputMethodQuery(const void* self, int query);
 QVariant* QGraphicsRectItem_virtualbase_itemChange(void* self, int change, QVariant* value);
-void QGraphicsRectItem_protectedbase_updateMicroFocus(bool* _dynamic_cast_ok, void* self);
-void QGraphicsRectItem_protectedbase_addToIndex(bool* _dynamic_cast_ok, void* self);
-void QGraphicsRectItem_protectedbase_removeFromIndex(bool* _dynamic_cast_ok, void* self);
-void QGraphicsRectItem_protectedbase_prepareGeometryChange(bool* _dynamic_cast_ok, void* self);
+void QGraphicsRectItem_protectedbase_updateMicroFocus(void* self);
+void QGraphicsRectItem_protectedbase_addToIndex(void* self);
+void QGraphicsRectItem_protectedbase_removeFromIndex(void* self);
+void QGraphicsRectItem_protectedbase_prepareGeometryChange(void* self);
 void QGraphicsRectItem_delete(QGraphicsRectItem* self);
 
 struct QGraphicsEllipseItem_VTable {
@@ -918,10 +918,10 @@ void QGraphicsEllipseItem_virtualbase_wheelEvent(void* self, QGraphicsSceneWheel
 void QGraphicsEllipseItem_virtualbase_inputMethodEvent(void* self, QInputMethodEvent* event);
 QVariant* QGraphicsEllipseItem_virtualbase_inputMethodQuery(const void* self, int query);
 QVariant* QGraphicsEllipseItem_virtualbase_itemChange(void* self, int change, QVariant* value);
-void QGraphicsEllipseItem_protectedbase_updateMicroFocus(bool* _dynamic_cast_ok, void* self);
-void QGraphicsEllipseItem_protectedbase_addToIndex(bool* _dynamic_cast_ok, void* self);
-void QGraphicsEllipseItem_protectedbase_removeFromIndex(bool* _dynamic_cast_ok, void* self);
-void QGraphicsEllipseItem_protectedbase_prepareGeometryChange(bool* _dynamic_cast_ok, void* self);
+void QGraphicsEllipseItem_protectedbase_updateMicroFocus(void* self);
+void QGraphicsEllipseItem_protectedbase_addToIndex(void* self);
+void QGraphicsEllipseItem_protectedbase_removeFromIndex(void* self);
+void QGraphicsEllipseItem_protectedbase_prepareGeometryChange(void* self);
 void QGraphicsEllipseItem_delete(QGraphicsEllipseItem* self);
 
 struct QGraphicsPolygonItem_VTable {
@@ -1012,10 +1012,10 @@ void QGraphicsPolygonItem_virtualbase_wheelEvent(void* self, QGraphicsSceneWheel
 void QGraphicsPolygonItem_virtualbase_inputMethodEvent(void* self, QInputMethodEvent* event);
 QVariant* QGraphicsPolygonItem_virtualbase_inputMethodQuery(const void* self, int query);
 QVariant* QGraphicsPolygonItem_virtualbase_itemChange(void* self, int change, QVariant* value);
-void QGraphicsPolygonItem_protectedbase_updateMicroFocus(bool* _dynamic_cast_ok, void* self);
-void QGraphicsPolygonItem_protectedbase_addToIndex(bool* _dynamic_cast_ok, void* self);
-void QGraphicsPolygonItem_protectedbase_removeFromIndex(bool* _dynamic_cast_ok, void* self);
-void QGraphicsPolygonItem_protectedbase_prepareGeometryChange(bool* _dynamic_cast_ok, void* self);
+void QGraphicsPolygonItem_protectedbase_updateMicroFocus(void* self);
+void QGraphicsPolygonItem_protectedbase_addToIndex(void* self);
+void QGraphicsPolygonItem_protectedbase_removeFromIndex(void* self);
+void QGraphicsPolygonItem_protectedbase_prepareGeometryChange(void* self);
 void QGraphicsPolygonItem_delete(QGraphicsPolygonItem* self);
 
 struct QGraphicsLineItem_VTable {
@@ -1113,10 +1113,10 @@ void QGraphicsLineItem_virtualbase_wheelEvent(void* self, QGraphicsSceneWheelEve
 void QGraphicsLineItem_virtualbase_inputMethodEvent(void* self, QInputMethodEvent* event);
 QVariant* QGraphicsLineItem_virtualbase_inputMethodQuery(const void* self, int query);
 QVariant* QGraphicsLineItem_virtualbase_itemChange(void* self, int change, QVariant* value);
-void QGraphicsLineItem_protectedbase_updateMicroFocus(bool* _dynamic_cast_ok, void* self);
-void QGraphicsLineItem_protectedbase_addToIndex(bool* _dynamic_cast_ok, void* self);
-void QGraphicsLineItem_protectedbase_removeFromIndex(bool* _dynamic_cast_ok, void* self);
-void QGraphicsLineItem_protectedbase_prepareGeometryChange(bool* _dynamic_cast_ok, void* self);
+void QGraphicsLineItem_protectedbase_updateMicroFocus(void* self);
+void QGraphicsLineItem_protectedbase_addToIndex(void* self);
+void QGraphicsLineItem_protectedbase_removeFromIndex(void* self);
+void QGraphicsLineItem_protectedbase_prepareGeometryChange(void* self);
 void QGraphicsLineItem_delete(QGraphicsLineItem* self);
 
 struct QGraphicsPixmapItem_VTable {
@@ -1216,10 +1216,10 @@ void QGraphicsPixmapItem_virtualbase_wheelEvent(void* self, QGraphicsSceneWheelE
 void QGraphicsPixmapItem_virtualbase_inputMethodEvent(void* self, QInputMethodEvent* event);
 QVariant* QGraphicsPixmapItem_virtualbase_inputMethodQuery(const void* self, int query);
 QVariant* QGraphicsPixmapItem_virtualbase_itemChange(void* self, int change, QVariant* value);
-void QGraphicsPixmapItem_protectedbase_updateMicroFocus(bool* _dynamic_cast_ok, void* self);
-void QGraphicsPixmapItem_protectedbase_addToIndex(bool* _dynamic_cast_ok, void* self);
-void QGraphicsPixmapItem_protectedbase_removeFromIndex(bool* _dynamic_cast_ok, void* self);
-void QGraphicsPixmapItem_protectedbase_prepareGeometryChange(bool* _dynamic_cast_ok, void* self);
+void QGraphicsPixmapItem_protectedbase_updateMicroFocus(void* self);
+void QGraphicsPixmapItem_protectedbase_addToIndex(void* self);
+void QGraphicsPixmapItem_protectedbase_removeFromIndex(void* self);
+void QGraphicsPixmapItem_protectedbase_prepareGeometryChange(void* self);
 void QGraphicsPixmapItem_delete(QGraphicsPixmapItem* self);
 
 struct QGraphicsTextItem_VTable {
@@ -1380,14 +1380,14 @@ bool QGraphicsTextItem_virtualbase_collidesWithPath(const void* self, QPainterPa
 bool QGraphicsTextItem_virtualbase_sceneEventFilter(void* self, QGraphicsItem* watched, QEvent* event);
 void QGraphicsTextItem_virtualbase_wheelEvent(void* self, QGraphicsSceneWheelEvent* event);
 QVariant* QGraphicsTextItem_virtualbase_itemChange(void* self, int change, QVariant* value);
-void QGraphicsTextItem_protectedbase_updateMicroFocus(bool* _dynamic_cast_ok, void* self);
-QObject* QGraphicsTextItem_protectedbase_sender(bool* _dynamic_cast_ok, const void* self);
-int QGraphicsTextItem_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
-int QGraphicsTextItem_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
-bool QGraphicsTextItem_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
-void QGraphicsTextItem_protectedbase_addToIndex(bool* _dynamic_cast_ok, void* self);
-void QGraphicsTextItem_protectedbase_removeFromIndex(bool* _dynamic_cast_ok, void* self);
-void QGraphicsTextItem_protectedbase_prepareGeometryChange(bool* _dynamic_cast_ok, void* self);
+void QGraphicsTextItem_protectedbase_updateMicroFocus(void* self);
+QObject* QGraphicsTextItem_protectedbase_sender(const void* self);
+int QGraphicsTextItem_protectedbase_senderSignalIndex(const void* self);
+int QGraphicsTextItem_protectedbase_receivers(const void* self, const char* signal);
+bool QGraphicsTextItem_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
+void QGraphicsTextItem_protectedbase_addToIndex(void* self);
+void QGraphicsTextItem_protectedbase_removeFromIndex(void* self);
+void QGraphicsTextItem_protectedbase_prepareGeometryChange(void* self);
 const QMetaObject* QGraphicsTextItem_staticMetaObject();
 void QGraphicsTextItem_delete(QGraphicsTextItem* self);
 
@@ -1483,10 +1483,10 @@ void QGraphicsSimpleTextItem_virtualbase_wheelEvent(void* self, QGraphicsSceneWh
 void QGraphicsSimpleTextItem_virtualbase_inputMethodEvent(void* self, QInputMethodEvent* event);
 QVariant* QGraphicsSimpleTextItem_virtualbase_inputMethodQuery(const void* self, int query);
 QVariant* QGraphicsSimpleTextItem_virtualbase_itemChange(void* self, int change, QVariant* value);
-void QGraphicsSimpleTextItem_protectedbase_updateMicroFocus(bool* _dynamic_cast_ok, void* self);
-void QGraphicsSimpleTextItem_protectedbase_addToIndex(bool* _dynamic_cast_ok, void* self);
-void QGraphicsSimpleTextItem_protectedbase_removeFromIndex(bool* _dynamic_cast_ok, void* self);
-void QGraphicsSimpleTextItem_protectedbase_prepareGeometryChange(bool* _dynamic_cast_ok, void* self);
+void QGraphicsSimpleTextItem_protectedbase_updateMicroFocus(void* self);
+void QGraphicsSimpleTextItem_protectedbase_addToIndex(void* self);
+void QGraphicsSimpleTextItem_protectedbase_removeFromIndex(void* self);
+void QGraphicsSimpleTextItem_protectedbase_prepareGeometryChange(void* self);
 void QGraphicsSimpleTextItem_delete(QGraphicsSimpleTextItem* self);
 
 struct QGraphicsItemGroup_VTable {
@@ -1572,10 +1572,10 @@ QVariant* QGraphicsItemGroup_virtualbase_itemChange(void* self, int change, QVar
 bool QGraphicsItemGroup_virtualbase_supportsExtension(const void* self, int extension);
 void QGraphicsItemGroup_virtualbase_setExtension(void* self, int extension, QVariant* variant);
 QVariant* QGraphicsItemGroup_virtualbase_extension(const void* self, QVariant* variant);
-void QGraphicsItemGroup_protectedbase_updateMicroFocus(bool* _dynamic_cast_ok, void* self);
-void QGraphicsItemGroup_protectedbase_addToIndex(bool* _dynamic_cast_ok, void* self);
-void QGraphicsItemGroup_protectedbase_removeFromIndex(bool* _dynamic_cast_ok, void* self);
-void QGraphicsItemGroup_protectedbase_prepareGeometryChange(bool* _dynamic_cast_ok, void* self);
+void QGraphicsItemGroup_protectedbase_updateMicroFocus(void* self);
+void QGraphicsItemGroup_protectedbase_addToIndex(void* self);
+void QGraphicsItemGroup_protectedbase_removeFromIndex(void* self);
+void QGraphicsItemGroup_protectedbase_prepareGeometryChange(void* self);
 void QGraphicsItemGroup_delete(QGraphicsItemGroup* self);
 
 #ifdef __cplusplus

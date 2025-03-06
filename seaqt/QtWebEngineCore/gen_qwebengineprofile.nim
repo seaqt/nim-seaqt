@@ -145,6 +145,10 @@ proc fcQWebEngineProfile_virtualbase_childEvent(self: pointer, event: pointer): 
 proc fcQWebEngineProfile_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QWebEngineProfile_virtualbase_customEvent".}
 proc fcQWebEngineProfile_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QWebEngineProfile_virtualbase_connectNotify".}
 proc fcQWebEngineProfile_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QWebEngineProfile_virtualbase_disconnectNotify".}
+proc fcQWebEngineProfile_protectedbase_sender(self: pointer, ): pointer {.importc: "QWebEngineProfile_protectedbase_sender".}
+proc fcQWebEngineProfile_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QWebEngineProfile_protectedbase_senderSignalIndex".}
+proc fcQWebEngineProfile_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QWebEngineProfile_protectedbase_receivers".}
+proc fcQWebEngineProfile_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QWebEngineProfile_protectedbase_isSignalConnected".}
 proc fcQWebEngineProfile_new(vtbl: pointer, ): ptr cQWebEngineProfile {.importc: "QWebEngineProfile_new".}
 proc fcQWebEngineProfile_new2(vtbl: pointer, name: struct_miqt_string): ptr cQWebEngineProfile {.importc: "QWebEngineProfile_new2".}
 proc fcQWebEngineProfile_new3(vtbl: pointer, parent: pointer): ptr cQWebEngineProfile {.importc: "QWebEngineProfile_new3".}
@@ -462,6 +466,18 @@ proc miqt_exec_callback_cQWebEngineProfile_disconnectNotify(vtbl: pointer, self:
   let self = QWebEngineProfile(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
   vtbl[].disconnectNotify(self, slotval1)
+
+proc sender*(self: gen_qwebengineprofile_types.QWebEngineProfile, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQWebEngineProfile_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qwebengineprofile_types.QWebEngineProfile, ): cint =
+  fcQWebEngineProfile_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qwebengineprofile_types.QWebEngineProfile, signal: cstring): cint =
+  fcQWebEngineProfile_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qwebengineprofile_types.QWebEngineProfile, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQWebEngineProfile_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc create*(T: type gen_qwebengineprofile_types.QWebEngineProfile,
     vtbl: ref QWebEngineProfileVTable = nil): gen_qwebengineprofile_types.QWebEngineProfile =

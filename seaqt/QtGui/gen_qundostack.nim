@@ -147,6 +147,10 @@ proc fcQUndoStack_virtualbase_childEvent(self: pointer, event: pointer): void {.
 proc fcQUndoStack_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QUndoStack_virtualbase_customEvent".}
 proc fcQUndoStack_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QUndoStack_virtualbase_connectNotify".}
 proc fcQUndoStack_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QUndoStack_virtualbase_disconnectNotify".}
+proc fcQUndoStack_protectedbase_sender(self: pointer, ): pointer {.importc: "QUndoStack_protectedbase_sender".}
+proc fcQUndoStack_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QUndoStack_protectedbase_senderSignalIndex".}
+proc fcQUndoStack_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QUndoStack_protectedbase_receivers".}
+proc fcQUndoStack_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QUndoStack_protectedbase_isSignalConnected".}
 proc fcQUndoStack_new(vtbl: pointer, ): ptr cQUndoStack {.importc: "QUndoStack_new".}
 proc fcQUndoStack_new2(vtbl: pointer, parent: pointer): ptr cQUndoStack {.importc: "QUndoStack_new2".}
 proc fcQUndoStack_staticMetaObject(): pointer {.importc: "QUndoStack_staticMetaObject".}
@@ -673,6 +677,18 @@ proc miqt_exec_callback_cQUndoStack_disconnectNotify(vtbl: pointer, self: pointe
   let self = QUndoStack(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
   vtbl[].disconnectNotify(self, slotval1)
+
+proc sender*(self: gen_qundostack_types.QUndoStack, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQUndoStack_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qundostack_types.QUndoStack, ): cint =
+  fcQUndoStack_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qundostack_types.QUndoStack, signal: cstring): cint =
+  fcQUndoStack_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qundostack_types.QUndoStack, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQUndoStack_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc create*(T: type gen_qundostack_types.QUndoStack,
     vtbl: ref QUndoStackVTable = nil): gen_qundostack_types.QUndoStack =

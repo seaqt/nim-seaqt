@@ -749,14 +749,14 @@ public:
 	friend QVariant* QGraphicsVideoItem_virtualbase_extension(const void* self, QVariant* variant);
 
 	// Wrappers to allow calling protected methods:
-	friend void QGraphicsVideoItem_protectedbase_updateMicroFocus(bool* _dynamic_cast_ok, void* self);
-	friend QObject* QGraphicsVideoItem_protectedbase_sender(bool* _dynamic_cast_ok, const void* self);
-	friend int QGraphicsVideoItem_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
-	friend int QGraphicsVideoItem_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
-	friend bool QGraphicsVideoItem_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
-	friend void QGraphicsVideoItem_protectedbase_addToIndex(bool* _dynamic_cast_ok, void* self);
-	friend void QGraphicsVideoItem_protectedbase_removeFromIndex(bool* _dynamic_cast_ok, void* self);
-	friend void QGraphicsVideoItem_protectedbase_prepareGeometryChange(bool* _dynamic_cast_ok, void* self);
+	friend void QGraphicsVideoItem_protectedbase_updateMicroFocus(void* self);
+	friend QObject* QGraphicsVideoItem_protectedbase_sender(const void* self);
+	friend int QGraphicsVideoItem_protectedbase_senderSignalIndex(const void* self);
+	friend int QGraphicsVideoItem_protectedbase_receivers(const void* self, const char* signal);
+	friend bool QGraphicsVideoItem_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
+	friend void QGraphicsVideoItem_protectedbase_addToIndex(void* self);
+	friend void QGraphicsVideoItem_protectedbase_removeFromIndex(void* self);
+	friend void QGraphicsVideoItem_protectedbase_prepareGeometryChange(void* self);
 };
 
 QGraphicsVideoItem* QGraphicsVideoItem_new(struct QGraphicsVideoItem_VTable* vtbl) {
@@ -1150,105 +1150,57 @@ QVariant* QGraphicsVideoItem_virtualbase_extension(const void* self, QVariant* v
 }
 
 const QMetaObject* QGraphicsVideoItem_staticMetaObject() { return &QGraphicsVideoItem::staticMetaObject; }
-void QGraphicsVideoItem_protectedbase_updateMicroFocus(bool* _dynamic_cast_ok, void* self) {
-	VirtualQGraphicsVideoItem* self_cast = dynamic_cast<VirtualQGraphicsVideoItem*>( (QGraphicsVideoItem*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QGraphicsVideoItem_protectedbase_updateMicroFocus(void* self) {
+	VirtualQGraphicsVideoItem* self_cast = static_cast<VirtualQGraphicsVideoItem*>( (QGraphicsVideoItem*)(self) );
 	
 	self_cast->updateMicroFocus();
 
 }
 
-QObject* QGraphicsVideoItem_protectedbase_sender(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQGraphicsVideoItem* self_cast = dynamic_cast<VirtualQGraphicsVideoItem*>( (QGraphicsVideoItem*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return nullptr;
-	}
-	
-	*_dynamic_cast_ok = true;
+QObject* QGraphicsVideoItem_protectedbase_sender(const void* self) {
+	VirtualQGraphicsVideoItem* self_cast = static_cast<VirtualQGraphicsVideoItem*>( (QGraphicsVideoItem*)(self) );
 	
 	return self_cast->sender();
 
 }
 
-int QGraphicsVideoItem_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQGraphicsVideoItem* self_cast = dynamic_cast<VirtualQGraphicsVideoItem*>( (QGraphicsVideoItem*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return 0;
-	}
-	
-	*_dynamic_cast_ok = true;
+int QGraphicsVideoItem_protectedbase_senderSignalIndex(const void* self) {
+	VirtualQGraphicsVideoItem* self_cast = static_cast<VirtualQGraphicsVideoItem*>( (QGraphicsVideoItem*)(self) );
 	
 	return self_cast->senderSignalIndex();
 
 }
 
-int QGraphicsVideoItem_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal) {
-	VirtualQGraphicsVideoItem* self_cast = dynamic_cast<VirtualQGraphicsVideoItem*>( (QGraphicsVideoItem*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return 0;
-	}
-	
-	*_dynamic_cast_ok = true;
+int QGraphicsVideoItem_protectedbase_receivers(const void* self, const char* signal) {
+	VirtualQGraphicsVideoItem* self_cast = static_cast<VirtualQGraphicsVideoItem*>( (QGraphicsVideoItem*)(self) );
 	
 	return self_cast->receivers(signal);
 
 }
 
-bool QGraphicsVideoItem_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal) {
-	VirtualQGraphicsVideoItem* self_cast = dynamic_cast<VirtualQGraphicsVideoItem*>( (QGraphicsVideoItem*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return false;
-	}
-	
-	*_dynamic_cast_ok = true;
+bool QGraphicsVideoItem_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal) {
+	VirtualQGraphicsVideoItem* self_cast = static_cast<VirtualQGraphicsVideoItem*>( (QGraphicsVideoItem*)(self) );
 	
 	return self_cast->isSignalConnected(*signal);
 
 }
 
-void QGraphicsVideoItem_protectedbase_addToIndex(bool* _dynamic_cast_ok, void* self) {
-	VirtualQGraphicsVideoItem* self_cast = dynamic_cast<VirtualQGraphicsVideoItem*>( (QGraphicsVideoItem*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QGraphicsVideoItem_protectedbase_addToIndex(void* self) {
+	VirtualQGraphicsVideoItem* self_cast = static_cast<VirtualQGraphicsVideoItem*>( (QGraphicsVideoItem*)(self) );
 	
 	self_cast->addToIndex();
 
 }
 
-void QGraphicsVideoItem_protectedbase_removeFromIndex(bool* _dynamic_cast_ok, void* self) {
-	VirtualQGraphicsVideoItem* self_cast = dynamic_cast<VirtualQGraphicsVideoItem*>( (QGraphicsVideoItem*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QGraphicsVideoItem_protectedbase_removeFromIndex(void* self) {
+	VirtualQGraphicsVideoItem* self_cast = static_cast<VirtualQGraphicsVideoItem*>( (QGraphicsVideoItem*)(self) );
 	
 	self_cast->removeFromIndex();
 
 }
 
-void QGraphicsVideoItem_protectedbase_prepareGeometryChange(bool* _dynamic_cast_ok, void* self) {
-	VirtualQGraphicsVideoItem* self_cast = dynamic_cast<VirtualQGraphicsVideoItem*>( (QGraphicsVideoItem*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QGraphicsVideoItem_protectedbase_prepareGeometryChange(void* self) {
+	VirtualQGraphicsVideoItem* self_cast = static_cast<VirtualQGraphicsVideoItem*>( (QGraphicsVideoItem*)(self) );
 	
 	self_cast->prepareGeometryChange();
 

@@ -56,6 +56,7 @@ import
   ../QtCore/gen_qobject_types,
   ../QtCore/gen_qobjectdefs_types,
   ../QtCore/gen_qpoint_types,
+  ../QtCore/gen_qrect_types,
   ../QtCore/gen_qsize_types,
   ../QtCore/gen_qvariant_types,
   ../QtGui/gen_qaction_types,
@@ -76,6 +77,7 @@ export
   gen_qobject_types,
   gen_qobjectdefs_types,
   gen_qpoint_types,
+  gen_qrect_types,
   gen_qsize_types,
   gen_qvariant_types,
   gen_qaction_types,
@@ -288,6 +290,16 @@ proc fcQLineEdit_virtualbase_childEvent(self: pointer, event: pointer): void {.i
 proc fcQLineEdit_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QLineEdit_virtualbase_customEvent".}
 proc fcQLineEdit_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QLineEdit_virtualbase_connectNotify".}
 proc fcQLineEdit_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QLineEdit_virtualbase_disconnectNotify".}
+proc fcQLineEdit_protectedbase_cursorRect(self: pointer, ): pointer {.importc: "QLineEdit_protectedbase_cursorRect".}
+proc fcQLineEdit_protectedbase_updateMicroFocus(self: pointer, ): void {.importc: "QLineEdit_protectedbase_updateMicroFocus".}
+proc fcQLineEdit_protectedbase_create(self: pointer, ): void {.importc: "QLineEdit_protectedbase_create".}
+proc fcQLineEdit_protectedbase_destroy(self: pointer, ): void {.importc: "QLineEdit_protectedbase_destroy".}
+proc fcQLineEdit_protectedbase_focusNextChild(self: pointer, ): bool {.importc: "QLineEdit_protectedbase_focusNextChild".}
+proc fcQLineEdit_protectedbase_focusPreviousChild(self: pointer, ): bool {.importc: "QLineEdit_protectedbase_focusPreviousChild".}
+proc fcQLineEdit_protectedbase_sender(self: pointer, ): pointer {.importc: "QLineEdit_protectedbase_sender".}
+proc fcQLineEdit_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QLineEdit_protectedbase_senderSignalIndex".}
+proc fcQLineEdit_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QLineEdit_protectedbase_receivers".}
+proc fcQLineEdit_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QLineEdit_protectedbase_isSignalConnected".}
 proc fcQLineEdit_new(vtbl: pointer, parent: pointer): ptr cQLineEdit {.importc: "QLineEdit_new".}
 proc fcQLineEdit_new2(vtbl: pointer, ): ptr cQLineEdit {.importc: "QLineEdit_new2".}
 proc fcQLineEdit_new3(vtbl: pointer, param1: struct_miqt_string): ptr cQLineEdit {.importc: "QLineEdit_new3".}
@@ -1273,6 +1285,36 @@ proc miqt_exec_callback_cQLineEdit_disconnectNotify(vtbl: pointer, self: pointer
   let self = QLineEdit(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
   vtbl[].disconnectNotify(self, slotval1)
+
+proc cursorRect*(self: gen_qlineedit_types.QLineEdit, ): gen_qrect_types.QRect =
+  gen_qrect_types.QRect(h: fcQLineEdit_protectedbase_cursorRect(self.h))
+
+proc updateMicroFocus*(self: gen_qlineedit_types.QLineEdit, ): void =
+  fcQLineEdit_protectedbase_updateMicroFocus(self.h)
+
+proc create*(self: gen_qlineedit_types.QLineEdit, ): void =
+  fcQLineEdit_protectedbase_create(self.h)
+
+proc destroy*(self: gen_qlineedit_types.QLineEdit, ): void =
+  fcQLineEdit_protectedbase_destroy(self.h)
+
+proc focusNextChild*(self: gen_qlineedit_types.QLineEdit, ): bool =
+  fcQLineEdit_protectedbase_focusNextChild(self.h)
+
+proc focusPreviousChild*(self: gen_qlineedit_types.QLineEdit, ): bool =
+  fcQLineEdit_protectedbase_focusPreviousChild(self.h)
+
+proc sender*(self: gen_qlineedit_types.QLineEdit, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQLineEdit_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qlineedit_types.QLineEdit, ): cint =
+  fcQLineEdit_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qlineedit_types.QLineEdit, signal: cstring): cint =
+  fcQLineEdit_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qlineedit_types.QLineEdit, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQLineEdit_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc create*(T: type gen_qlineedit_types.QLineEdit,
     parent: gen_qwidget_types.QWidget,

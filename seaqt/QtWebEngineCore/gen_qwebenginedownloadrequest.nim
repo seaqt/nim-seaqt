@@ -80,11 +80,13 @@ import ./gen_qwebenginedownloadrequest_types
 export gen_qwebenginedownloadrequest_types
 
 import
+  ../QtCore/gen_qmetaobject_types,
   ../QtCore/gen_qobject,
   ../QtCore/gen_qobjectdefs_types,
   ../QtCore/gen_qurl_types,
   ./gen_qwebenginepage_types
 export
+  gen_qmetaobject_types,
   gen_qobject,
   gen_qobjectdefs_types,
   gen_qurl_types,
@@ -139,6 +141,10 @@ proc fcQWebEngineDownloadRequest_downloadFileNameChanged(self: pointer, ): void 
 proc fcQWebEngineDownloadRequest_connect_downloadFileNameChanged(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QWebEngineDownloadRequest_connect_downloadFileNameChanged".}
 proc fcQWebEngineDownloadRequest_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QWebEngineDownloadRequest_tr2".}
 proc fcQWebEngineDownloadRequest_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QWebEngineDownloadRequest_tr3".}
+proc fcQWebEngineDownloadRequest_protectedbase_sender(self: pointer, ): pointer {.importc: "QWebEngineDownloadRequest_protectedbase_sender".}
+proc fcQWebEngineDownloadRequest_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QWebEngineDownloadRequest_protectedbase_senderSignalIndex".}
+proc fcQWebEngineDownloadRequest_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QWebEngineDownloadRequest_protectedbase_receivers".}
+proc fcQWebEngineDownloadRequest_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QWebEngineDownloadRequest_protectedbase_isSignalConnected".}
 proc fcQWebEngineDownloadRequest_staticMetaObject(): pointer {.importc: "QWebEngineDownloadRequest_staticMetaObject".}
 proc fcQWebEngineDownloadRequest_delete(self: pointer) {.importc: "QWebEngineDownloadRequest_delete".}
 
@@ -416,6 +422,18 @@ proc tr*(_: type gen_qwebenginedownloadrequest_types.QWebEngineDownloadRequest, 
   let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
   c_free(v_ms.data)
   vx_ret
+
+proc sender*(self: gen_qwebenginedownloadrequest_types.QWebEngineDownloadRequest, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQWebEngineDownloadRequest_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qwebenginedownloadrequest_types.QWebEngineDownloadRequest, ): cint =
+  fcQWebEngineDownloadRequest_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qwebenginedownloadrequest_types.QWebEngineDownloadRequest, signal: cstring): cint =
+  fcQWebEngineDownloadRequest_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qwebenginedownloadrequest_types.QWebEngineDownloadRequest, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQWebEngineDownloadRequest_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc staticMetaObject*(_: type gen_qwebenginedownloadrequest_types.QWebEngineDownloadRequest): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQWebEngineDownloadRequest_staticMetaObject())

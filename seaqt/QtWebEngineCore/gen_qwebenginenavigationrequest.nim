@@ -53,10 +53,12 @@ import ./gen_qwebenginenavigationrequest_types
 export gen_qwebenginenavigationrequest_types
 
 import
+  ../QtCore/gen_qmetaobject_types,
   ../QtCore/gen_qobject,
   ../QtCore/gen_qobjectdefs_types,
   ../QtCore/gen_qurl_types
 export
+  gen_qmetaobject_types,
   gen_qobject,
   gen_qobjectdefs_types,
   gen_qurl_types
@@ -76,6 +78,10 @@ proc fcQWebEngineNavigationRequest_actionChanged(self: pointer, ): void {.import
 proc fcQWebEngineNavigationRequest_connect_actionChanged(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QWebEngineNavigationRequest_connect_actionChanged".}
 proc fcQWebEngineNavigationRequest_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QWebEngineNavigationRequest_tr2".}
 proc fcQWebEngineNavigationRequest_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QWebEngineNavigationRequest_tr3".}
+proc fcQWebEngineNavigationRequest_protectedbase_sender(self: pointer, ): pointer {.importc: "QWebEngineNavigationRequest_protectedbase_sender".}
+proc fcQWebEngineNavigationRequest_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QWebEngineNavigationRequest_protectedbase_senderSignalIndex".}
+proc fcQWebEngineNavigationRequest_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QWebEngineNavigationRequest_protectedbase_receivers".}
+proc fcQWebEngineNavigationRequest_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QWebEngineNavigationRequest_protectedbase_isSignalConnected".}
 proc fcQWebEngineNavigationRequest_staticMetaObject(): pointer {.importc: "QWebEngineNavigationRequest_staticMetaObject".}
 proc fcQWebEngineNavigationRequest_delete(self: pointer) {.importc: "QWebEngineNavigationRequest_delete".}
 
@@ -138,6 +144,18 @@ proc tr*(_: type gen_qwebenginenavigationrequest_types.QWebEngineNavigationReque
   let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
   c_free(v_ms.data)
   vx_ret
+
+proc sender*(self: gen_qwebenginenavigationrequest_types.QWebEngineNavigationRequest, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQWebEngineNavigationRequest_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qwebenginenavigationrequest_types.QWebEngineNavigationRequest, ): cint =
+  fcQWebEngineNavigationRequest_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qwebenginenavigationrequest_types.QWebEngineNavigationRequest, signal: cstring): cint =
+  fcQWebEngineNavigationRequest_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qwebenginenavigationrequest_types.QWebEngineNavigationRequest, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQWebEngineNavigationRequest_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc staticMetaObject*(_: type gen_qwebenginenavigationrequest_types.QWebEngineNavigationRequest): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQWebEngineNavigationRequest_staticMetaObject())

@@ -191,6 +191,17 @@ proc fcQDial_virtualbase_childEvent(self: pointer, event: pointer): void {.impor
 proc fcQDial_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QDial_virtualbase_customEvent".}
 proc fcQDial_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QDial_virtualbase_connectNotify".}
 proc fcQDial_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QDial_virtualbase_disconnectNotify".}
+proc fcQDial_protectedbase_setRepeatAction(self: pointer, action: cint): void {.importc: "QDial_protectedbase_setRepeatAction".}
+proc fcQDial_protectedbase_repeatAction(self: pointer, ): cint {.importc: "QDial_protectedbase_repeatAction".}
+proc fcQDial_protectedbase_updateMicroFocus(self: pointer, ): void {.importc: "QDial_protectedbase_updateMicroFocus".}
+proc fcQDial_protectedbase_create(self: pointer, ): void {.importc: "QDial_protectedbase_create".}
+proc fcQDial_protectedbase_destroy(self: pointer, ): void {.importc: "QDial_protectedbase_destroy".}
+proc fcQDial_protectedbase_focusNextChild(self: pointer, ): bool {.importc: "QDial_protectedbase_focusNextChild".}
+proc fcQDial_protectedbase_focusPreviousChild(self: pointer, ): bool {.importc: "QDial_protectedbase_focusPreviousChild".}
+proc fcQDial_protectedbase_sender(self: pointer, ): pointer {.importc: "QDial_protectedbase_sender".}
+proc fcQDial_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QDial_protectedbase_senderSignalIndex".}
+proc fcQDial_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QDial_protectedbase_receivers".}
+proc fcQDial_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QDial_protectedbase_isSignalConnected".}
 proc fcQDial_new(vtbl: pointer, parent: pointer): ptr cQDial {.importc: "QDial_new".}
 proc fcQDial_new2(vtbl: pointer, ): ptr cQDial {.importc: "QDial_new2".}
 proc fcQDial_staticMetaObject(): pointer {.importc: "QDial_staticMetaObject".}
@@ -841,6 +852,39 @@ proc miqt_exec_callback_cQDial_disconnectNotify(vtbl: pointer, self: pointer, si
   let self = QDial(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
   vtbl[].disconnectNotify(self, slotval1)
+
+proc setRepeatAction*(self: gen_qdial_types.QDial, action: cint): void =
+  fcQDial_protectedbase_setRepeatAction(self.h, cint(action))
+
+proc repeatAction*(self: gen_qdial_types.QDial, ): cint =
+  cint(fcQDial_protectedbase_repeatAction(self.h))
+
+proc updateMicroFocus*(self: gen_qdial_types.QDial, ): void =
+  fcQDial_protectedbase_updateMicroFocus(self.h)
+
+proc create*(self: gen_qdial_types.QDial, ): void =
+  fcQDial_protectedbase_create(self.h)
+
+proc destroy*(self: gen_qdial_types.QDial, ): void =
+  fcQDial_protectedbase_destroy(self.h)
+
+proc focusNextChild*(self: gen_qdial_types.QDial, ): bool =
+  fcQDial_protectedbase_focusNextChild(self.h)
+
+proc focusPreviousChild*(self: gen_qdial_types.QDial, ): bool =
+  fcQDial_protectedbase_focusPreviousChild(self.h)
+
+proc sender*(self: gen_qdial_types.QDial, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQDial_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qdial_types.QDial, ): cint =
+  fcQDial_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qdial_types.QDial, signal: cstring): cint =
+  fcQDial_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qdial_types.QDial, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQDial_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc create*(T: type gen_qdial_types.QDial,
     parent: gen_qwidget_types.QWidget,

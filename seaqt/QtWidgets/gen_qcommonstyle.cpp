@@ -648,10 +648,10 @@ public:
 	friend void QCommonStyle_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
 
 	// Wrappers to allow calling protected methods:
-	friend QObject* QCommonStyle_protectedbase_sender(bool* _dynamic_cast_ok, const void* self);
-	friend int QCommonStyle_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
-	friend int QCommonStyle_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
-	friend bool QCommonStyle_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+	friend QObject* QCommonStyle_protectedbase_sender(const void* self);
+	friend int QCommonStyle_protectedbase_senderSignalIndex(const void* self);
+	friend int QCommonStyle_protectedbase_receivers(const void* self, const char* signal);
+	friend bool QCommonStyle_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
 };
 
 QCommonStyle* QCommonStyle_new(struct QCommonStyle_VTable* vtbl) {
@@ -982,53 +982,29 @@ void QCommonStyle_virtualbase_disconnectNotify(void* self, QMetaMethod* signal) 
 }
 
 const QMetaObject* QCommonStyle_staticMetaObject() { return &QCommonStyle::staticMetaObject; }
-QObject* QCommonStyle_protectedbase_sender(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQCommonStyle* self_cast = dynamic_cast<VirtualQCommonStyle*>( (QCommonStyle*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return nullptr;
-	}
-	
-	*_dynamic_cast_ok = true;
+QObject* QCommonStyle_protectedbase_sender(const void* self) {
+	VirtualQCommonStyle* self_cast = static_cast<VirtualQCommonStyle*>( (QCommonStyle*)(self) );
 	
 	return self_cast->sender();
 
 }
 
-int QCommonStyle_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQCommonStyle* self_cast = dynamic_cast<VirtualQCommonStyle*>( (QCommonStyle*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return 0;
-	}
-	
-	*_dynamic_cast_ok = true;
+int QCommonStyle_protectedbase_senderSignalIndex(const void* self) {
+	VirtualQCommonStyle* self_cast = static_cast<VirtualQCommonStyle*>( (QCommonStyle*)(self) );
 	
 	return self_cast->senderSignalIndex();
 
 }
 
-int QCommonStyle_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal) {
-	VirtualQCommonStyle* self_cast = dynamic_cast<VirtualQCommonStyle*>( (QCommonStyle*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return 0;
-	}
-	
-	*_dynamic_cast_ok = true;
+int QCommonStyle_protectedbase_receivers(const void* self, const char* signal) {
+	VirtualQCommonStyle* self_cast = static_cast<VirtualQCommonStyle*>( (QCommonStyle*)(self) );
 	
 	return self_cast->receivers(signal);
 
 }
 
-bool QCommonStyle_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal) {
-	VirtualQCommonStyle* self_cast = dynamic_cast<VirtualQCommonStyle*>( (QCommonStyle*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return false;
-	}
-	
-	*_dynamic_cast_ok = true;
+bool QCommonStyle_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal) {
+	VirtualQCommonStyle* self_cast = static_cast<VirtualQCommonStyle*>( (QCommonStyle*)(self) );
 	
 	return self_cast->isSignalConnected(*signal);
 

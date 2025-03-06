@@ -103,6 +103,10 @@ proc fcQThreadPool_virtualbase_childEvent(self: pointer, event: pointer): void {
 proc fcQThreadPool_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QThreadPool_virtualbase_customEvent".}
 proc fcQThreadPool_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QThreadPool_virtualbase_connectNotify".}
 proc fcQThreadPool_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QThreadPool_virtualbase_disconnectNotify".}
+proc fcQThreadPool_protectedbase_sender(self: pointer, ): pointer {.importc: "QThreadPool_protectedbase_sender".}
+proc fcQThreadPool_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QThreadPool_protectedbase_senderSignalIndex".}
+proc fcQThreadPool_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QThreadPool_protectedbase_receivers".}
+proc fcQThreadPool_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QThreadPool_protectedbase_isSignalConnected".}
 proc fcQThreadPool_new(vtbl: pointer, ): ptr cQThreadPool {.importc: "QThreadPool_new".}
 proc fcQThreadPool_new2(vtbl: pointer, parent: pointer): ptr cQThreadPool {.importc: "QThreadPool_new2".}
 proc fcQThreadPool_staticMetaObject(): pointer {.importc: "QThreadPool_staticMetaObject".}
@@ -316,6 +320,18 @@ proc miqt_exec_callback_cQThreadPool_disconnectNotify(vtbl: pointer, self: point
   let self = QThreadPool(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
   vtbl[].disconnectNotify(self, slotval1)
+
+proc sender*(self: gen_qthreadpool_types.QThreadPool, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQThreadPool_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qthreadpool_types.QThreadPool, ): cint =
+  fcQThreadPool_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qthreadpool_types.QThreadPool, signal: cstring): cint =
+  fcQThreadPool_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qthreadpool_types.QThreadPool, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQThreadPool_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc create*(T: type gen_qthreadpool_types.QThreadPool,
     vtbl: ref QThreadPoolVTable = nil): gen_qthreadpool_types.QThreadPool =

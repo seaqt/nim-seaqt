@@ -176,6 +176,15 @@ proc fcQSizeGrip_virtualbase_childEvent(self: pointer, event: pointer): void {.i
 proc fcQSizeGrip_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QSizeGrip_virtualbase_customEvent".}
 proc fcQSizeGrip_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QSizeGrip_virtualbase_connectNotify".}
 proc fcQSizeGrip_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QSizeGrip_virtualbase_disconnectNotify".}
+proc fcQSizeGrip_protectedbase_updateMicroFocus(self: pointer, ): void {.importc: "QSizeGrip_protectedbase_updateMicroFocus".}
+proc fcQSizeGrip_protectedbase_create(self: pointer, ): void {.importc: "QSizeGrip_protectedbase_create".}
+proc fcQSizeGrip_protectedbase_destroy(self: pointer, ): void {.importc: "QSizeGrip_protectedbase_destroy".}
+proc fcQSizeGrip_protectedbase_focusNextChild(self: pointer, ): bool {.importc: "QSizeGrip_protectedbase_focusNextChild".}
+proc fcQSizeGrip_protectedbase_focusPreviousChild(self: pointer, ): bool {.importc: "QSizeGrip_protectedbase_focusPreviousChild".}
+proc fcQSizeGrip_protectedbase_sender(self: pointer, ): pointer {.importc: "QSizeGrip_protectedbase_sender".}
+proc fcQSizeGrip_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QSizeGrip_protectedbase_senderSignalIndex".}
+proc fcQSizeGrip_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QSizeGrip_protectedbase_receivers".}
+proc fcQSizeGrip_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QSizeGrip_protectedbase_isSignalConnected".}
 proc fcQSizeGrip_new(vtbl: pointer, parent: pointer): ptr cQSizeGrip {.importc: "QSizeGrip_new".}
 proc fcQSizeGrip_staticMetaObject(): pointer {.importc: "QSizeGrip_staticMetaObject".}
 proc fcQSizeGrip_delete(self: pointer) {.importc: "QSizeGrip_delete".}
@@ -782,6 +791,33 @@ proc miqt_exec_callback_cQSizeGrip_disconnectNotify(vtbl: pointer, self: pointer
   let self = QSizeGrip(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
   vtbl[].disconnectNotify(self, slotval1)
+
+proc updateMicroFocus*(self: gen_qsizegrip_types.QSizeGrip, ): void =
+  fcQSizeGrip_protectedbase_updateMicroFocus(self.h)
+
+proc create*(self: gen_qsizegrip_types.QSizeGrip, ): void =
+  fcQSizeGrip_protectedbase_create(self.h)
+
+proc destroy*(self: gen_qsizegrip_types.QSizeGrip, ): void =
+  fcQSizeGrip_protectedbase_destroy(self.h)
+
+proc focusNextChild*(self: gen_qsizegrip_types.QSizeGrip, ): bool =
+  fcQSizeGrip_protectedbase_focusNextChild(self.h)
+
+proc focusPreviousChild*(self: gen_qsizegrip_types.QSizeGrip, ): bool =
+  fcQSizeGrip_protectedbase_focusPreviousChild(self.h)
+
+proc sender*(self: gen_qsizegrip_types.QSizeGrip, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQSizeGrip_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qsizegrip_types.QSizeGrip, ): cint =
+  fcQSizeGrip_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qsizegrip_types.QSizeGrip, signal: cstring): cint =
+  fcQSizeGrip_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qsizegrip_types.QSizeGrip, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQSizeGrip_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc create*(T: type gen_qsizegrip_types.QSizeGrip,
     parent: gen_qwidget_types.QWidget,

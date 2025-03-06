@@ -836,16 +836,16 @@ public:
 	friend void QLCDNumber_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
 
 	// Wrappers to allow calling protected methods:
-	friend void QLCDNumber_protectedbase_drawFrame(bool* _dynamic_cast_ok, void* self, QPainter* param1);
-	friend void QLCDNumber_protectedbase_updateMicroFocus(bool* _dynamic_cast_ok, void* self);
-	friend void QLCDNumber_protectedbase_create(bool* _dynamic_cast_ok, void* self);
-	friend void QLCDNumber_protectedbase_destroy(bool* _dynamic_cast_ok, void* self);
-	friend bool QLCDNumber_protectedbase_focusNextChild(bool* _dynamic_cast_ok, void* self);
-	friend bool QLCDNumber_protectedbase_focusPreviousChild(bool* _dynamic_cast_ok, void* self);
-	friend QObject* QLCDNumber_protectedbase_sender(bool* _dynamic_cast_ok, const void* self);
-	friend int QLCDNumber_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
-	friend int QLCDNumber_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
-	friend bool QLCDNumber_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+	friend void QLCDNumber_protectedbase_drawFrame(void* self, QPainter* param1);
+	friend void QLCDNumber_protectedbase_updateMicroFocus(void* self);
+	friend void QLCDNumber_protectedbase_create(void* self);
+	friend void QLCDNumber_protectedbase_destroy(void* self);
+	friend bool QLCDNumber_protectedbase_focusNextChild(void* self);
+	friend bool QLCDNumber_protectedbase_focusPreviousChild(void* self);
+	friend QObject* QLCDNumber_protectedbase_sender(const void* self);
+	friend int QLCDNumber_protectedbase_senderSignalIndex(const void* self);
+	friend int QLCDNumber_protectedbase_receivers(const void* self, const char* signal);
+	friend bool QLCDNumber_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
 };
 
 QLCDNumber* QLCDNumber_new(struct QLCDNumber_VTable* vtbl, QWidget* parent) {
@@ -1319,131 +1319,71 @@ void QLCDNumber_virtualbase_disconnectNotify(void* self, QMetaMethod* signal) {
 }
 
 const QMetaObject* QLCDNumber_staticMetaObject() { return &QLCDNumber::staticMetaObject; }
-void QLCDNumber_protectedbase_drawFrame(bool* _dynamic_cast_ok, void* self, QPainter* param1) {
-	VirtualQLCDNumber* self_cast = dynamic_cast<VirtualQLCDNumber*>( (QLCDNumber*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QLCDNumber_protectedbase_drawFrame(void* self, QPainter* param1) {
+	VirtualQLCDNumber* self_cast = static_cast<VirtualQLCDNumber*>( (QLCDNumber*)(self) );
 	
 	self_cast->drawFrame(param1);
 
 }
 
-void QLCDNumber_protectedbase_updateMicroFocus(bool* _dynamic_cast_ok, void* self) {
-	VirtualQLCDNumber* self_cast = dynamic_cast<VirtualQLCDNumber*>( (QLCDNumber*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QLCDNumber_protectedbase_updateMicroFocus(void* self) {
+	VirtualQLCDNumber* self_cast = static_cast<VirtualQLCDNumber*>( (QLCDNumber*)(self) );
 	
 	self_cast->updateMicroFocus();
 
 }
 
-void QLCDNumber_protectedbase_create(bool* _dynamic_cast_ok, void* self) {
-	VirtualQLCDNumber* self_cast = dynamic_cast<VirtualQLCDNumber*>( (QLCDNumber*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QLCDNumber_protectedbase_create(void* self) {
+	VirtualQLCDNumber* self_cast = static_cast<VirtualQLCDNumber*>( (QLCDNumber*)(self) );
 	
 	self_cast->create();
 
 }
 
-void QLCDNumber_protectedbase_destroy(bool* _dynamic_cast_ok, void* self) {
-	VirtualQLCDNumber* self_cast = dynamic_cast<VirtualQLCDNumber*>( (QLCDNumber*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QLCDNumber_protectedbase_destroy(void* self) {
+	VirtualQLCDNumber* self_cast = static_cast<VirtualQLCDNumber*>( (QLCDNumber*)(self) );
 	
 	self_cast->destroy();
 
 }
 
-bool QLCDNumber_protectedbase_focusNextChild(bool* _dynamic_cast_ok, void* self) {
-	VirtualQLCDNumber* self_cast = dynamic_cast<VirtualQLCDNumber*>( (QLCDNumber*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return false;
-	}
-	
-	*_dynamic_cast_ok = true;
+bool QLCDNumber_protectedbase_focusNextChild(void* self) {
+	VirtualQLCDNumber* self_cast = static_cast<VirtualQLCDNumber*>( (QLCDNumber*)(self) );
 	
 	return self_cast->focusNextChild();
 
 }
 
-bool QLCDNumber_protectedbase_focusPreviousChild(bool* _dynamic_cast_ok, void* self) {
-	VirtualQLCDNumber* self_cast = dynamic_cast<VirtualQLCDNumber*>( (QLCDNumber*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return false;
-	}
-	
-	*_dynamic_cast_ok = true;
+bool QLCDNumber_protectedbase_focusPreviousChild(void* self) {
+	VirtualQLCDNumber* self_cast = static_cast<VirtualQLCDNumber*>( (QLCDNumber*)(self) );
 	
 	return self_cast->focusPreviousChild();
 
 }
 
-QObject* QLCDNumber_protectedbase_sender(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQLCDNumber* self_cast = dynamic_cast<VirtualQLCDNumber*>( (QLCDNumber*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return nullptr;
-	}
-	
-	*_dynamic_cast_ok = true;
+QObject* QLCDNumber_protectedbase_sender(const void* self) {
+	VirtualQLCDNumber* self_cast = static_cast<VirtualQLCDNumber*>( (QLCDNumber*)(self) );
 	
 	return self_cast->sender();
 
 }
 
-int QLCDNumber_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQLCDNumber* self_cast = dynamic_cast<VirtualQLCDNumber*>( (QLCDNumber*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return 0;
-	}
-	
-	*_dynamic_cast_ok = true;
+int QLCDNumber_protectedbase_senderSignalIndex(const void* self) {
+	VirtualQLCDNumber* self_cast = static_cast<VirtualQLCDNumber*>( (QLCDNumber*)(self) );
 	
 	return self_cast->senderSignalIndex();
 
 }
 
-int QLCDNumber_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal) {
-	VirtualQLCDNumber* self_cast = dynamic_cast<VirtualQLCDNumber*>( (QLCDNumber*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return 0;
-	}
-	
-	*_dynamic_cast_ok = true;
+int QLCDNumber_protectedbase_receivers(const void* self, const char* signal) {
+	VirtualQLCDNumber* self_cast = static_cast<VirtualQLCDNumber*>( (QLCDNumber*)(self) );
 	
 	return self_cast->receivers(signal);
 
 }
 
-bool QLCDNumber_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal) {
-	VirtualQLCDNumber* self_cast = dynamic_cast<VirtualQLCDNumber*>( (QLCDNumber*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return false;
-	}
-	
-	*_dynamic_cast_ok = true;
+bool QLCDNumber_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal) {
+	VirtualQLCDNumber* self_cast = static_cast<VirtualQLCDNumber*>( (QLCDNumber*)(self) );
 	
 	return self_cast->isSignalConnected(*signal);
 

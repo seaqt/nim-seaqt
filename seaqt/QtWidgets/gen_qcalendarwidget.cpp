@@ -841,17 +841,17 @@ public:
 	friend void QCalendarWidget_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
 
 	// Wrappers to allow calling protected methods:
-	friend void QCalendarWidget_protectedbase_updateCell(bool* _dynamic_cast_ok, void* self, QDate* date);
-	friend void QCalendarWidget_protectedbase_updateCells(bool* _dynamic_cast_ok, void* self);
-	friend void QCalendarWidget_protectedbase_updateMicroFocus(bool* _dynamic_cast_ok, void* self);
-	friend void QCalendarWidget_protectedbase_create(bool* _dynamic_cast_ok, void* self);
-	friend void QCalendarWidget_protectedbase_destroy(bool* _dynamic_cast_ok, void* self);
-	friend bool QCalendarWidget_protectedbase_focusNextChild(bool* _dynamic_cast_ok, void* self);
-	friend bool QCalendarWidget_protectedbase_focusPreviousChild(bool* _dynamic_cast_ok, void* self);
-	friend QObject* QCalendarWidget_protectedbase_sender(bool* _dynamic_cast_ok, const void* self);
-	friend int QCalendarWidget_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
-	friend int QCalendarWidget_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
-	friend bool QCalendarWidget_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+	friend void QCalendarWidget_protectedbase_updateCell(void* self, QDate* date);
+	friend void QCalendarWidget_protectedbase_updateCells(void* self);
+	friend void QCalendarWidget_protectedbase_updateMicroFocus(void* self);
+	friend void QCalendarWidget_protectedbase_create(void* self);
+	friend void QCalendarWidget_protectedbase_destroy(void* self);
+	friend bool QCalendarWidget_protectedbase_focusNextChild(void* self);
+	friend bool QCalendarWidget_protectedbase_focusPreviousChild(void* self);
+	friend QObject* QCalendarWidget_protectedbase_sender(const void* self);
+	friend int QCalendarWidget_protectedbase_senderSignalIndex(const void* self);
+	friend int QCalendarWidget_protectedbase_receivers(const void* self, const char* signal);
+	friend bool QCalendarWidget_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
 };
 
 QCalendarWidget* QCalendarWidget_new(struct QCalendarWidget_VTable* vtbl, QWidget* parent) {
@@ -1473,144 +1473,78 @@ void QCalendarWidget_virtualbase_disconnectNotify(void* self, QMetaMethod* signa
 }
 
 const QMetaObject* QCalendarWidget_staticMetaObject() { return &QCalendarWidget::staticMetaObject; }
-void QCalendarWidget_protectedbase_updateCell(bool* _dynamic_cast_ok, void* self, QDate* date) {
-	VirtualQCalendarWidget* self_cast = dynamic_cast<VirtualQCalendarWidget*>( (QCalendarWidget*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QCalendarWidget_protectedbase_updateCell(void* self, QDate* date) {
+	VirtualQCalendarWidget* self_cast = static_cast<VirtualQCalendarWidget*>( (QCalendarWidget*)(self) );
 	
 	self_cast->updateCell(*date);
 
 }
 
-void QCalendarWidget_protectedbase_updateCells(bool* _dynamic_cast_ok, void* self) {
-	VirtualQCalendarWidget* self_cast = dynamic_cast<VirtualQCalendarWidget*>( (QCalendarWidget*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QCalendarWidget_protectedbase_updateCells(void* self) {
+	VirtualQCalendarWidget* self_cast = static_cast<VirtualQCalendarWidget*>( (QCalendarWidget*)(self) );
 	
 	self_cast->updateCells();
 
 }
 
-void QCalendarWidget_protectedbase_updateMicroFocus(bool* _dynamic_cast_ok, void* self) {
-	VirtualQCalendarWidget* self_cast = dynamic_cast<VirtualQCalendarWidget*>( (QCalendarWidget*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QCalendarWidget_protectedbase_updateMicroFocus(void* self) {
+	VirtualQCalendarWidget* self_cast = static_cast<VirtualQCalendarWidget*>( (QCalendarWidget*)(self) );
 	
 	self_cast->updateMicroFocus();
 
 }
 
-void QCalendarWidget_protectedbase_create(bool* _dynamic_cast_ok, void* self) {
-	VirtualQCalendarWidget* self_cast = dynamic_cast<VirtualQCalendarWidget*>( (QCalendarWidget*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QCalendarWidget_protectedbase_create(void* self) {
+	VirtualQCalendarWidget* self_cast = static_cast<VirtualQCalendarWidget*>( (QCalendarWidget*)(self) );
 	
 	self_cast->create();
 
 }
 
-void QCalendarWidget_protectedbase_destroy(bool* _dynamic_cast_ok, void* self) {
-	VirtualQCalendarWidget* self_cast = dynamic_cast<VirtualQCalendarWidget*>( (QCalendarWidget*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QCalendarWidget_protectedbase_destroy(void* self) {
+	VirtualQCalendarWidget* self_cast = static_cast<VirtualQCalendarWidget*>( (QCalendarWidget*)(self) );
 	
 	self_cast->destroy();
 
 }
 
-bool QCalendarWidget_protectedbase_focusNextChild(bool* _dynamic_cast_ok, void* self) {
-	VirtualQCalendarWidget* self_cast = dynamic_cast<VirtualQCalendarWidget*>( (QCalendarWidget*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return false;
-	}
-	
-	*_dynamic_cast_ok = true;
+bool QCalendarWidget_protectedbase_focusNextChild(void* self) {
+	VirtualQCalendarWidget* self_cast = static_cast<VirtualQCalendarWidget*>( (QCalendarWidget*)(self) );
 	
 	return self_cast->focusNextChild();
 
 }
 
-bool QCalendarWidget_protectedbase_focusPreviousChild(bool* _dynamic_cast_ok, void* self) {
-	VirtualQCalendarWidget* self_cast = dynamic_cast<VirtualQCalendarWidget*>( (QCalendarWidget*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return false;
-	}
-	
-	*_dynamic_cast_ok = true;
+bool QCalendarWidget_protectedbase_focusPreviousChild(void* self) {
+	VirtualQCalendarWidget* self_cast = static_cast<VirtualQCalendarWidget*>( (QCalendarWidget*)(self) );
 	
 	return self_cast->focusPreviousChild();
 
 }
 
-QObject* QCalendarWidget_protectedbase_sender(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQCalendarWidget* self_cast = dynamic_cast<VirtualQCalendarWidget*>( (QCalendarWidget*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return nullptr;
-	}
-	
-	*_dynamic_cast_ok = true;
+QObject* QCalendarWidget_protectedbase_sender(const void* self) {
+	VirtualQCalendarWidget* self_cast = static_cast<VirtualQCalendarWidget*>( (QCalendarWidget*)(self) );
 	
 	return self_cast->sender();
 
 }
 
-int QCalendarWidget_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQCalendarWidget* self_cast = dynamic_cast<VirtualQCalendarWidget*>( (QCalendarWidget*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return 0;
-	}
-	
-	*_dynamic_cast_ok = true;
+int QCalendarWidget_protectedbase_senderSignalIndex(const void* self) {
+	VirtualQCalendarWidget* self_cast = static_cast<VirtualQCalendarWidget*>( (QCalendarWidget*)(self) );
 	
 	return self_cast->senderSignalIndex();
 
 }
 
-int QCalendarWidget_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal) {
-	VirtualQCalendarWidget* self_cast = dynamic_cast<VirtualQCalendarWidget*>( (QCalendarWidget*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return 0;
-	}
-	
-	*_dynamic_cast_ok = true;
+int QCalendarWidget_protectedbase_receivers(const void* self, const char* signal) {
+	VirtualQCalendarWidget* self_cast = static_cast<VirtualQCalendarWidget*>( (QCalendarWidget*)(self) );
 	
 	return self_cast->receivers(signal);
 
 }
 
-bool QCalendarWidget_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal) {
-	VirtualQCalendarWidget* self_cast = dynamic_cast<VirtualQCalendarWidget*>( (QCalendarWidget*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return false;
-	}
-	
-	*_dynamic_cast_ok = true;
+bool QCalendarWidget_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal) {
+	VirtualQCalendarWidget* self_cast = static_cast<VirtualQCalendarWidget*>( (QCalendarWidget*)(self) );
 	
 	return self_cast->isSignalConnected(*signal);
 

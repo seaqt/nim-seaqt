@@ -39,10 +39,12 @@ export gen_qtestsupport_widgets_types
 
 import
   ../QtCore/gen_qpoint_types,
+  ../QtGui/gen_qeventpoint_types,
   ../QtGui/gen_qtestsupport_gui,
   ./gen_qwidget_types
 export
   gen_qpoint_types,
+  gen_qeventpoint_types,
   gen_qtestsupport_gui,
   gen_qwidget_types
 
@@ -62,6 +64,8 @@ type cQTestQTouchEventWidgetSequenceVTable = object
   commit*: proc(vtbl, self: pointer, processEvents: bool): bool {.cdecl, raises: [], gcsafe.}
 proc fcQTestQTouchEventWidgetSequence_virtualbase_stationary(self: pointer, touchId: cint): pointer {.importc: "QTest__QTouchEventWidgetSequence_virtualbase_stationary".}
 proc fcQTestQTouchEventWidgetSequence_virtualbase_commit(self: pointer, processEvents: bool): bool {.importc: "QTest__QTouchEventWidgetSequence_virtualbase_commit".}
+proc fcQTestQTouchEventWidgetSequence_protectedbase_point(self: pointer, touchId: cint): pointer {.importc: "QTest__QTouchEventWidgetSequence_protectedbase_point".}
+proc fcQTestQTouchEventWidgetSequence_protectedbase_pointOrPreviousPoint(self: pointer, touchId: cint): pointer {.importc: "QTest__QTouchEventWidgetSequence_protectedbase_pointOrPreviousPoint".}
 proc fcQTestQTouchEventWidgetSequence_new(vtbl: pointer, param1: pointer): ptr cQTestQTouchEventWidgetSequence {.importc: "QTest__QTouchEventWidgetSequence_new".}
 proc fcQTestQTouchEventWidgetSequence_delete(self: pointer) {.importc: "QTest__QTouchEventWidgetSequence_delete".}
 
@@ -114,6 +118,12 @@ proc miqt_exec_callback_cQTestQTouchEventWidgetSequence_commit(vtbl: pointer, se
   let slotval1 = processEvents
   var virtualReturn = vtbl[].commit(self, slotval1)
   virtualReturn
+
+proc point*(self: gen_qtestsupport_widgets_types.QTestQTouchEventWidgetSequence, touchId: cint): gen_qeventpoint_types.QEventPoint =
+  gen_qeventpoint_types.QEventPoint(h: fcQTestQTouchEventWidgetSequence_protectedbase_point(self.h, touchId))
+
+proc pointOrPreviousPoint*(self: gen_qtestsupport_widgets_types.QTestQTouchEventWidgetSequence, touchId: cint): gen_qeventpoint_types.QEventPoint =
+  gen_qeventpoint_types.QEventPoint(h: fcQTestQTouchEventWidgetSequence_protectedbase_pointOrPreviousPoint(self.h, touchId))
 
 proc create*(T: type gen_qtestsupport_widgets_types.QTestQTouchEventWidgetSequence,
     param1: gen_qtestsupport_widgets_types.QTestQTouchEventWidgetSequence,

@@ -136,6 +136,10 @@ proc fcQAbstractItemDelegate_virtualbase_childEvent(self: pointer, event: pointe
 proc fcQAbstractItemDelegate_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QAbstractItemDelegate_virtualbase_customEvent".}
 proc fcQAbstractItemDelegate_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QAbstractItemDelegate_virtualbase_connectNotify".}
 proc fcQAbstractItemDelegate_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QAbstractItemDelegate_virtualbase_disconnectNotify".}
+proc fcQAbstractItemDelegate_protectedbase_sender(self: pointer, ): pointer {.importc: "QAbstractItemDelegate_protectedbase_sender".}
+proc fcQAbstractItemDelegate_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QAbstractItemDelegate_protectedbase_senderSignalIndex".}
+proc fcQAbstractItemDelegate_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QAbstractItemDelegate_protectedbase_receivers".}
+proc fcQAbstractItemDelegate_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QAbstractItemDelegate_protectedbase_isSignalConnected".}
 proc fcQAbstractItemDelegate_new(vtbl: pointer, ): ptr cQAbstractItemDelegate {.importc: "QAbstractItemDelegate_new".}
 proc fcQAbstractItemDelegate_new2(vtbl: pointer, parent: pointer): ptr cQAbstractItemDelegate {.importc: "QAbstractItemDelegate_new2".}
 proc fcQAbstractItemDelegate_staticMetaObject(): pointer {.importc: "QAbstractItemDelegate_staticMetaObject".}
@@ -537,6 +541,18 @@ proc miqt_exec_callback_cQAbstractItemDelegate_disconnectNotify(vtbl: pointer, s
   let self = QAbstractItemDelegate(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
   vtbl[].disconnectNotify(self, slotval1)
+
+proc sender*(self: gen_qabstractitemdelegate_types.QAbstractItemDelegate, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQAbstractItemDelegate_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qabstractitemdelegate_types.QAbstractItemDelegate, ): cint =
+  fcQAbstractItemDelegate_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qabstractitemdelegate_types.QAbstractItemDelegate, signal: cstring): cint =
+  fcQAbstractItemDelegate_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qabstractitemdelegate_types.QAbstractItemDelegate, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQAbstractItemDelegate_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc create*(T: type gen_qabstractitemdelegate_types.QAbstractItemDelegate,
     vtbl: ref QAbstractItemDelegateVTable = nil): gen_qabstractitemdelegate_types.QAbstractItemDelegate =

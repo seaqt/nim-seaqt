@@ -124,6 +124,10 @@ proc fcQPointingDevice_virtualbase_childEvent(self: pointer, event: pointer): vo
 proc fcQPointingDevice_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QPointingDevice_virtualbase_customEvent".}
 proc fcQPointingDevice_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QPointingDevice_virtualbase_connectNotify".}
 proc fcQPointingDevice_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QPointingDevice_virtualbase_disconnectNotify".}
+proc fcQPointingDevice_protectedbase_sender(self: pointer, ): pointer {.importc: "QPointingDevice_protectedbase_sender".}
+proc fcQPointingDevice_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QPointingDevice_protectedbase_senderSignalIndex".}
+proc fcQPointingDevice_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QPointingDevice_protectedbase_receivers".}
+proc fcQPointingDevice_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QPointingDevice_protectedbase_isSignalConnected".}
 proc fcQPointingDevice_new(vtbl: pointer, ): ptr cQPointingDevice {.importc: "QPointingDevice_new".}
 proc fcQPointingDevice_new2(vtbl: pointer, name: struct_miqt_string, systemId: clonglong, devType: cint, pType: cint, caps: cint, maxPoints: cint, buttonCount: cint): ptr cQPointingDevice {.importc: "QPointingDevice_new2".}
 proc fcQPointingDevice_new3(vtbl: pointer, parent: pointer): ptr cQPointingDevice {.importc: "QPointingDevice_new3".}
@@ -354,6 +358,18 @@ proc miqt_exec_callback_cQPointingDevice_disconnectNotify(vtbl: pointer, self: p
   let self = QPointingDevice(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
   vtbl[].disconnectNotify(self, slotval1)
+
+proc sender*(self: gen_qpointingdevice_types.QPointingDevice, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQPointingDevice_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qpointingdevice_types.QPointingDevice, ): cint =
+  fcQPointingDevice_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qpointingdevice_types.QPointingDevice, signal: cstring): cint =
+  fcQPointingDevice_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qpointingdevice_types.QPointingDevice, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQPointingDevice_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc create*(T: type gen_qpointingdevice_types.QPointingDevice,
     vtbl: ref QPointingDeviceVTable = nil): gen_qpointingdevice_types.QPointingDevice =

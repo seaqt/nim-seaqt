@@ -93,6 +93,10 @@ proc fcQSignalMapper_virtualbase_childEvent(self: pointer, event: pointer): void
 proc fcQSignalMapper_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QSignalMapper_virtualbase_customEvent".}
 proc fcQSignalMapper_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QSignalMapper_virtualbase_connectNotify".}
 proc fcQSignalMapper_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QSignalMapper_virtualbase_disconnectNotify".}
+proc fcQSignalMapper_protectedbase_sender(self: pointer, ): pointer {.importc: "QSignalMapper_protectedbase_sender".}
+proc fcQSignalMapper_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QSignalMapper_protectedbase_senderSignalIndex".}
+proc fcQSignalMapper_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QSignalMapper_protectedbase_receivers".}
+proc fcQSignalMapper_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QSignalMapper_protectedbase_isSignalConnected".}
 proc fcQSignalMapper_new(vtbl: pointer, ): ptr cQSignalMapper {.importc: "QSignalMapper_new".}
 proc fcQSignalMapper_new2(vtbl: pointer, parent: pointer): ptr cQSignalMapper {.importc: "QSignalMapper_new2".}
 proc fcQSignalMapper_staticMetaObject(): pointer {.importc: "QSignalMapper_staticMetaObject".}
@@ -333,6 +337,18 @@ proc miqt_exec_callback_cQSignalMapper_disconnectNotify(vtbl: pointer, self: poi
   let self = QSignalMapper(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
   vtbl[].disconnectNotify(self, slotval1)
+
+proc sender*(self: gen_qsignalmapper_types.QSignalMapper, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQSignalMapper_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qsignalmapper_types.QSignalMapper, ): cint =
+  fcQSignalMapper_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qsignalmapper_types.QSignalMapper, signal: cstring): cint =
+  fcQSignalMapper_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qsignalmapper_types.QSignalMapper, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQSignalMapper_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc create*(T: type gen_qsignalmapper_types.QSignalMapper,
     vtbl: ref QSignalMapperVTable = nil): gen_qsignalmapper_types.QSignalMapper =

@@ -145,6 +145,11 @@ proc fcQQuickTransform_virtualbase_childEvent(self: pointer, event: pointer): vo
 proc fcQQuickTransform_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QQuickTransform_virtualbase_customEvent".}
 proc fcQQuickTransform_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QQuickTransform_virtualbase_connectNotify".}
 proc fcQQuickTransform_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QQuickTransform_virtualbase_disconnectNotify".}
+proc fcQQuickTransform_protectedbase_update(self: pointer, ): void {.importc: "QQuickTransform_protectedbase_update".}
+proc fcQQuickTransform_protectedbase_sender(self: pointer, ): pointer {.importc: "QQuickTransform_protectedbase_sender".}
+proc fcQQuickTransform_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QQuickTransform_protectedbase_senderSignalIndex".}
+proc fcQQuickTransform_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QQuickTransform_protectedbase_receivers".}
+proc fcQQuickTransform_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QQuickTransform_protectedbase_isSignalConnected".}
 proc fcQQuickTransform_new(vtbl: pointer, ): ptr cQQuickTransform {.importc: "QQuickTransform_new".}
 proc fcQQuickTransform_new2(vtbl: pointer, parent: pointer): ptr cQQuickTransform {.importc: "QQuickTransform_new2".}
 proc fcQQuickTransform_staticMetaObject(): pointer {.importc: "QQuickTransform_staticMetaObject".}
@@ -419,6 +424,16 @@ proc fcQQuickItem_virtualbase_childEvent(self: pointer, event: pointer): void {.
 proc fcQQuickItem_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QQuickItem_virtualbase_customEvent".}
 proc fcQQuickItem_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QQuickItem_virtualbase_connectNotify".}
 proc fcQQuickItem_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QQuickItem_virtualbase_disconnectNotify".}
+proc fcQQuickItem_protectedbase_isComponentComplete(self: pointer, ): bool {.importc: "QQuickItem_protectedbase_isComponentComplete".}
+proc fcQQuickItem_protectedbase_updateInputMethod(self: pointer, ): void {.importc: "QQuickItem_protectedbase_updateInputMethod".}
+proc fcQQuickItem_protectedbase_widthValid(self: pointer, ): bool {.importc: "QQuickItem_protectedbase_widthValid".}
+proc fcQQuickItem_protectedbase_heightValid(self: pointer, ): bool {.importc: "QQuickItem_protectedbase_heightValid".}
+proc fcQQuickItem_protectedbase_setImplicitSize(self: pointer, param1: float64, param2: float64): void {.importc: "QQuickItem_protectedbase_setImplicitSize".}
+proc fcQQuickItem_protectedbase_updateInputMethod1(self: pointer, queries: cint): void {.importc: "QQuickItem_protectedbase_updateInputMethod1".}
+proc fcQQuickItem_protectedbase_sender(self: pointer, ): pointer {.importc: "QQuickItem_protectedbase_sender".}
+proc fcQQuickItem_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QQuickItem_protectedbase_senderSignalIndex".}
+proc fcQQuickItem_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QQuickItem_protectedbase_receivers".}
+proc fcQQuickItem_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QQuickItem_protectedbase_isSignalConnected".}
 proc fcQQuickItem_new(vtbl: pointer, ): ptr cQQuickItem {.importc: "QQuickItem_new".}
 proc fcQQuickItem_new2(vtbl: pointer, parent: pointer): ptr cQQuickItem {.importc: "QQuickItem_new2".}
 proc fcQQuickItem_staticMetaObject(): pointer {.importc: "QQuickItem_staticMetaObject".}
@@ -592,6 +607,21 @@ proc miqt_exec_callback_cQQuickTransform_disconnectNotify(vtbl: pointer, self: p
   let self = QQuickTransform(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
   vtbl[].disconnectNotify(self, slotval1)
+
+proc update*(self: gen_qquickitem_types.QQuickTransform, ): void =
+  fcQQuickTransform_protectedbase_update(self.h)
+
+proc sender*(self: gen_qquickitem_types.QQuickTransform, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQQuickTransform_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qquickitem_types.QQuickTransform, ): cint =
+  fcQQuickTransform_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qquickitem_types.QQuickTransform, signal: cstring): cint =
+  fcQQuickTransform_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qquickitem_types.QQuickTransform, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQQuickTransform_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc create*(T: type gen_qquickitem_types.QQuickTransform,
     vtbl: ref QQuickTransformVTable = nil): gen_qquickitem_types.QQuickTransform =
@@ -2090,6 +2120,36 @@ proc miqt_exec_callback_cQQuickItem_disconnectNotify(vtbl: pointer, self: pointe
   let self = QQuickItem(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
   vtbl[].disconnectNotify(self, slotval1)
+
+proc isComponentComplete*(self: gen_qquickitem_types.QQuickItem, ): bool =
+  fcQQuickItem_protectedbase_isComponentComplete(self.h)
+
+proc updateInputMethod*(self: gen_qquickitem_types.QQuickItem, ): void =
+  fcQQuickItem_protectedbase_updateInputMethod(self.h)
+
+proc widthValid*(self: gen_qquickitem_types.QQuickItem, ): bool =
+  fcQQuickItem_protectedbase_widthValid(self.h)
+
+proc heightValid*(self: gen_qquickitem_types.QQuickItem, ): bool =
+  fcQQuickItem_protectedbase_heightValid(self.h)
+
+proc setImplicitSize*(self: gen_qquickitem_types.QQuickItem, param1: float64, param2: float64): void =
+  fcQQuickItem_protectedbase_setImplicitSize(self.h, param1, param2)
+
+proc updateInputMethod*(self: gen_qquickitem_types.QQuickItem, queries: cint): void =
+  fcQQuickItem_protectedbase_updateInputMethod1(self.h, cint(queries))
+
+proc sender*(self: gen_qquickitem_types.QQuickItem, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQQuickItem_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qquickitem_types.QQuickItem, ): cint =
+  fcQQuickItem_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qquickitem_types.QQuickItem, signal: cstring): cint =
+  fcQQuickItem_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qquickitem_types.QQuickItem, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQQuickItem_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc create*(T: type gen_qquickitem_types.QQuickItem,
     vtbl: ref QQuickItemVTable = nil): gen_qquickitem_types.QQuickItem =

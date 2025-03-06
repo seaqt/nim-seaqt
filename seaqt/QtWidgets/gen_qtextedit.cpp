@@ -990,19 +990,19 @@ public:
 	friend void QTextEdit_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
 
 	// Wrappers to allow calling protected methods:
-	friend void QTextEdit_protectedbase_zoomInF(bool* _dynamic_cast_ok, void* self, float range);
-	friend void QTextEdit_protectedbase_setViewportMargins(bool* _dynamic_cast_ok, void* self, int left, int top, int right, int bottom);
-	friend QMargins* QTextEdit_protectedbase_viewportMargins(bool* _dynamic_cast_ok, const void* self);
-	friend void QTextEdit_protectedbase_drawFrame(bool* _dynamic_cast_ok, void* self, QPainter* param1);
-	friend void QTextEdit_protectedbase_updateMicroFocus(bool* _dynamic_cast_ok, void* self);
-	friend void QTextEdit_protectedbase_create(bool* _dynamic_cast_ok, void* self);
-	friend void QTextEdit_protectedbase_destroy(bool* _dynamic_cast_ok, void* self);
-	friend bool QTextEdit_protectedbase_focusNextChild(bool* _dynamic_cast_ok, void* self);
-	friend bool QTextEdit_protectedbase_focusPreviousChild(bool* _dynamic_cast_ok, void* self);
-	friend QObject* QTextEdit_protectedbase_sender(bool* _dynamic_cast_ok, const void* self);
-	friend int QTextEdit_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
-	friend int QTextEdit_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
-	friend bool QTextEdit_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+	friend void QTextEdit_protectedbase_zoomInF(void* self, float range);
+	friend void QTextEdit_protectedbase_setViewportMargins(void* self, int left, int top, int right, int bottom);
+	friend QMargins* QTextEdit_protectedbase_viewportMargins(const void* self);
+	friend void QTextEdit_protectedbase_drawFrame(void* self, QPainter* param1);
+	friend void QTextEdit_protectedbase_updateMicroFocus(void* self);
+	friend void QTextEdit_protectedbase_create(void* self);
+	friend void QTextEdit_protectedbase_destroy(void* self);
+	friend bool QTextEdit_protectedbase_focusNextChild(void* self);
+	friend bool QTextEdit_protectedbase_focusPreviousChild(void* self);
+	friend QObject* QTextEdit_protectedbase_sender(const void* self);
+	friend int QTextEdit_protectedbase_senderSignalIndex(const void* self);
+	friend int QTextEdit_protectedbase_receivers(const void* self, const char* signal);
+	friend bool QTextEdit_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
 };
 
 QTextEdit* QTextEdit_new(struct QTextEdit_VTable* vtbl, QWidget* parent) {
@@ -2020,170 +2020,92 @@ void QTextEdit_virtualbase_disconnectNotify(void* self, QMetaMethod* signal) {
 }
 
 const QMetaObject* QTextEdit_staticMetaObject() { return &QTextEdit::staticMetaObject; }
-void QTextEdit_protectedbase_zoomInF(bool* _dynamic_cast_ok, void* self, float range) {
-	VirtualQTextEdit* self_cast = dynamic_cast<VirtualQTextEdit*>( (QTextEdit*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QTextEdit_protectedbase_zoomInF(void* self, float range) {
+	VirtualQTextEdit* self_cast = static_cast<VirtualQTextEdit*>( (QTextEdit*)(self) );
 	
 	self_cast->zoomInF(static_cast<float>(range));
 
 }
 
-void QTextEdit_protectedbase_setViewportMargins(bool* _dynamic_cast_ok, void* self, int left, int top, int right, int bottom) {
-	VirtualQTextEdit* self_cast = dynamic_cast<VirtualQTextEdit*>( (QTextEdit*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QTextEdit_protectedbase_setViewportMargins(void* self, int left, int top, int right, int bottom) {
+	VirtualQTextEdit* self_cast = static_cast<VirtualQTextEdit*>( (QTextEdit*)(self) );
 	
 	self_cast->setViewportMargins(static_cast<int>(left), static_cast<int>(top), static_cast<int>(right), static_cast<int>(bottom));
 
 }
 
-QMargins* QTextEdit_protectedbase_viewportMargins(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQTextEdit* self_cast = dynamic_cast<VirtualQTextEdit*>( (QTextEdit*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return nullptr;
-	}
-	
-	*_dynamic_cast_ok = true;
+QMargins* QTextEdit_protectedbase_viewportMargins(const void* self) {
+	VirtualQTextEdit* self_cast = static_cast<VirtualQTextEdit*>( (QTextEdit*)(self) );
 	
 	return new QMargins(self_cast->viewportMargins());
 
 }
 
-void QTextEdit_protectedbase_drawFrame(bool* _dynamic_cast_ok, void* self, QPainter* param1) {
-	VirtualQTextEdit* self_cast = dynamic_cast<VirtualQTextEdit*>( (QTextEdit*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QTextEdit_protectedbase_drawFrame(void* self, QPainter* param1) {
+	VirtualQTextEdit* self_cast = static_cast<VirtualQTextEdit*>( (QTextEdit*)(self) );
 	
 	self_cast->drawFrame(param1);
 
 }
 
-void QTextEdit_protectedbase_updateMicroFocus(bool* _dynamic_cast_ok, void* self) {
-	VirtualQTextEdit* self_cast = dynamic_cast<VirtualQTextEdit*>( (QTextEdit*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QTextEdit_protectedbase_updateMicroFocus(void* self) {
+	VirtualQTextEdit* self_cast = static_cast<VirtualQTextEdit*>( (QTextEdit*)(self) );
 	
 	self_cast->updateMicroFocus();
 
 }
 
-void QTextEdit_protectedbase_create(bool* _dynamic_cast_ok, void* self) {
-	VirtualQTextEdit* self_cast = dynamic_cast<VirtualQTextEdit*>( (QTextEdit*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QTextEdit_protectedbase_create(void* self) {
+	VirtualQTextEdit* self_cast = static_cast<VirtualQTextEdit*>( (QTextEdit*)(self) );
 	
 	self_cast->create();
 
 }
 
-void QTextEdit_protectedbase_destroy(bool* _dynamic_cast_ok, void* self) {
-	VirtualQTextEdit* self_cast = dynamic_cast<VirtualQTextEdit*>( (QTextEdit*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QTextEdit_protectedbase_destroy(void* self) {
+	VirtualQTextEdit* self_cast = static_cast<VirtualQTextEdit*>( (QTextEdit*)(self) );
 	
 	self_cast->destroy();
 
 }
 
-bool QTextEdit_protectedbase_focusNextChild(bool* _dynamic_cast_ok, void* self) {
-	VirtualQTextEdit* self_cast = dynamic_cast<VirtualQTextEdit*>( (QTextEdit*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return false;
-	}
-	
-	*_dynamic_cast_ok = true;
+bool QTextEdit_protectedbase_focusNextChild(void* self) {
+	VirtualQTextEdit* self_cast = static_cast<VirtualQTextEdit*>( (QTextEdit*)(self) );
 	
 	return self_cast->focusNextChild();
 
 }
 
-bool QTextEdit_protectedbase_focusPreviousChild(bool* _dynamic_cast_ok, void* self) {
-	VirtualQTextEdit* self_cast = dynamic_cast<VirtualQTextEdit*>( (QTextEdit*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return false;
-	}
-	
-	*_dynamic_cast_ok = true;
+bool QTextEdit_protectedbase_focusPreviousChild(void* self) {
+	VirtualQTextEdit* self_cast = static_cast<VirtualQTextEdit*>( (QTextEdit*)(self) );
 	
 	return self_cast->focusPreviousChild();
 
 }
 
-QObject* QTextEdit_protectedbase_sender(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQTextEdit* self_cast = dynamic_cast<VirtualQTextEdit*>( (QTextEdit*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return nullptr;
-	}
-	
-	*_dynamic_cast_ok = true;
+QObject* QTextEdit_protectedbase_sender(const void* self) {
+	VirtualQTextEdit* self_cast = static_cast<VirtualQTextEdit*>( (QTextEdit*)(self) );
 	
 	return self_cast->sender();
 
 }
 
-int QTextEdit_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQTextEdit* self_cast = dynamic_cast<VirtualQTextEdit*>( (QTextEdit*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return 0;
-	}
-	
-	*_dynamic_cast_ok = true;
+int QTextEdit_protectedbase_senderSignalIndex(const void* self) {
+	VirtualQTextEdit* self_cast = static_cast<VirtualQTextEdit*>( (QTextEdit*)(self) );
 	
 	return self_cast->senderSignalIndex();
 
 }
 
-int QTextEdit_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal) {
-	VirtualQTextEdit* self_cast = dynamic_cast<VirtualQTextEdit*>( (QTextEdit*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return 0;
-	}
-	
-	*_dynamic_cast_ok = true;
+int QTextEdit_protectedbase_receivers(const void* self, const char* signal) {
+	VirtualQTextEdit* self_cast = static_cast<VirtualQTextEdit*>( (QTextEdit*)(self) );
 	
 	return self_cast->receivers(signal);
 
 }
 
-bool QTextEdit_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal) {
-	VirtualQTextEdit* self_cast = dynamic_cast<VirtualQTextEdit*>( (QTextEdit*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return false;
-	}
-	
-	*_dynamic_cast_ok = true;
+bool QTextEdit_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal) {
+	VirtualQTextEdit* self_cast = static_cast<VirtualQTextEdit*>( (QTextEdit*)(self) );
 	
 	return self_cast->isSignalConnected(*signal);
 

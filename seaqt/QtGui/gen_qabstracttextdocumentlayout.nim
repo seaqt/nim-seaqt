@@ -139,6 +139,12 @@ proc fcQAbstractTextDocumentLayout_virtualbase_childEvent(self: pointer, event: 
 proc fcQAbstractTextDocumentLayout_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QAbstractTextDocumentLayout_virtualbase_customEvent".}
 proc fcQAbstractTextDocumentLayout_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QAbstractTextDocumentLayout_virtualbase_connectNotify".}
 proc fcQAbstractTextDocumentLayout_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QAbstractTextDocumentLayout_virtualbase_disconnectNotify".}
+proc fcQAbstractTextDocumentLayout_protectedbase_formatIndex(self: pointer, pos: cint): cint {.importc: "QAbstractTextDocumentLayout_protectedbase_formatIndex".}
+proc fcQAbstractTextDocumentLayout_protectedbase_format(self: pointer, pos: cint): pointer {.importc: "QAbstractTextDocumentLayout_protectedbase_format".}
+proc fcQAbstractTextDocumentLayout_protectedbase_sender(self: pointer, ): pointer {.importc: "QAbstractTextDocumentLayout_protectedbase_sender".}
+proc fcQAbstractTextDocumentLayout_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QAbstractTextDocumentLayout_protectedbase_senderSignalIndex".}
+proc fcQAbstractTextDocumentLayout_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QAbstractTextDocumentLayout_protectedbase_receivers".}
+proc fcQAbstractTextDocumentLayout_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QAbstractTextDocumentLayout_protectedbase_isSignalConnected".}
 proc fcQAbstractTextDocumentLayout_new(vtbl: pointer, doc: pointer): ptr cQAbstractTextDocumentLayout {.importc: "QAbstractTextDocumentLayout_new".}
 proc fcQAbstractTextDocumentLayout_staticMetaObject(): pointer {.importc: "QAbstractTextDocumentLayout_staticMetaObject".}
 proc fcQAbstractTextDocumentLayout_delete(self: pointer) {.importc: "QAbstractTextDocumentLayout_delete".}
@@ -558,6 +564,24 @@ proc miqt_exec_callback_cQAbstractTextDocumentLayout_disconnectNotify(vtbl: poin
   let self = QAbstractTextDocumentLayout(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
   vtbl[].disconnectNotify(self, slotval1)
+
+proc formatIndex*(self: gen_qabstracttextdocumentlayout_types.QAbstractTextDocumentLayout, pos: cint): cint =
+  fcQAbstractTextDocumentLayout_protectedbase_formatIndex(self.h, pos)
+
+proc format*(self: gen_qabstracttextdocumentlayout_types.QAbstractTextDocumentLayout, pos: cint): gen_qtextformat_types.QTextCharFormat =
+  gen_qtextformat_types.QTextCharFormat(h: fcQAbstractTextDocumentLayout_protectedbase_format(self.h, pos))
+
+proc sender*(self: gen_qabstracttextdocumentlayout_types.QAbstractTextDocumentLayout, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQAbstractTextDocumentLayout_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qabstracttextdocumentlayout_types.QAbstractTextDocumentLayout, ): cint =
+  fcQAbstractTextDocumentLayout_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qabstracttextdocumentlayout_types.QAbstractTextDocumentLayout, signal: cstring): cint =
+  fcQAbstractTextDocumentLayout_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qabstracttextdocumentlayout_types.QAbstractTextDocumentLayout, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQAbstractTextDocumentLayout_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc create*(T: type gen_qabstracttextdocumentlayout_types.QAbstractTextDocumentLayout,
     doc: gen_qtextdocument_types.QTextDocument,

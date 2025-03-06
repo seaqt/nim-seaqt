@@ -168,11 +168,11 @@ void QRasterWindow_virtualbase_disconnectNotify(void* self, QMetaMethod* signal)
 int QRasterWindow_virtualbase_devType(const void* self);
 void QRasterWindow_virtualbase_initPainter(const void* self, QPainter* painter);
 QPainter* QRasterWindow_virtualbase_sharedPainter(const void* self);
-void* QRasterWindow_protectedbase_resolveInterface(bool* _dynamic_cast_ok, const void* self, const char* name, int revision);
-QObject* QRasterWindow_protectedbase_sender(bool* _dynamic_cast_ok, const void* self);
-int QRasterWindow_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
-int QRasterWindow_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
-bool QRasterWindow_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+void* QRasterWindow_protectedbase_resolveInterface(const void* self, const char* name, int revision);
+QObject* QRasterWindow_protectedbase_sender(const void* self);
+int QRasterWindow_protectedbase_senderSignalIndex(const void* self);
+int QRasterWindow_protectedbase_receivers(const void* self, const char* signal);
+bool QRasterWindow_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
 const QMetaObject* QRasterWindow_staticMetaObject();
 void QRasterWindow_delete(QRasterWindow* self);
 

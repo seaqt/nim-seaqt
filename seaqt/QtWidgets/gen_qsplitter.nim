@@ -212,6 +212,19 @@ proc fcQSplitter_virtualbase_timerEvent(self: pointer, event: pointer): void {.i
 proc fcQSplitter_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QSplitter_virtualbase_customEvent".}
 proc fcQSplitter_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QSplitter_virtualbase_connectNotify".}
 proc fcQSplitter_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QSplitter_virtualbase_disconnectNotify".}
+proc fcQSplitter_protectedbase_moveSplitter(self: pointer, pos: cint, index: cint): void {.importc: "QSplitter_protectedbase_moveSplitter".}
+proc fcQSplitter_protectedbase_setRubberBand(self: pointer, position: cint): void {.importc: "QSplitter_protectedbase_setRubberBand".}
+proc fcQSplitter_protectedbase_closestLegalPosition(self: pointer, param1: cint, param2: cint): cint {.importc: "QSplitter_protectedbase_closestLegalPosition".}
+proc fcQSplitter_protectedbase_drawFrame(self: pointer, param1: pointer): void {.importc: "QSplitter_protectedbase_drawFrame".}
+proc fcQSplitter_protectedbase_updateMicroFocus(self: pointer, ): void {.importc: "QSplitter_protectedbase_updateMicroFocus".}
+proc fcQSplitter_protectedbase_create(self: pointer, ): void {.importc: "QSplitter_protectedbase_create".}
+proc fcQSplitter_protectedbase_destroy(self: pointer, ): void {.importc: "QSplitter_protectedbase_destroy".}
+proc fcQSplitter_protectedbase_focusNextChild(self: pointer, ): bool {.importc: "QSplitter_protectedbase_focusNextChild".}
+proc fcQSplitter_protectedbase_focusPreviousChild(self: pointer, ): bool {.importc: "QSplitter_protectedbase_focusPreviousChild".}
+proc fcQSplitter_protectedbase_sender(self: pointer, ): pointer {.importc: "QSplitter_protectedbase_sender".}
+proc fcQSplitter_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QSplitter_protectedbase_senderSignalIndex".}
+proc fcQSplitter_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QSplitter_protectedbase_receivers".}
+proc fcQSplitter_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QSplitter_protectedbase_isSignalConnected".}
 proc fcQSplitter_new(vtbl: pointer, parent: pointer): ptr cQSplitter {.importc: "QSplitter_new".}
 proc fcQSplitter_new2(vtbl: pointer, ): ptr cQSplitter {.importc: "QSplitter_new2".}
 proc fcQSplitter_new3(vtbl: pointer, param1: cint): ptr cQSplitter {.importc: "QSplitter_new3".}
@@ -331,6 +344,17 @@ proc fcQSplitterHandle_virtualbase_childEvent(self: pointer, event: pointer): vo
 proc fcQSplitterHandle_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QSplitterHandle_virtualbase_customEvent".}
 proc fcQSplitterHandle_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QSplitterHandle_virtualbase_connectNotify".}
 proc fcQSplitterHandle_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QSplitterHandle_virtualbase_disconnectNotify".}
+proc fcQSplitterHandle_protectedbase_moveSplitter(self: pointer, p: cint): void {.importc: "QSplitterHandle_protectedbase_moveSplitter".}
+proc fcQSplitterHandle_protectedbase_closestLegalPosition(self: pointer, p: cint): cint {.importc: "QSplitterHandle_protectedbase_closestLegalPosition".}
+proc fcQSplitterHandle_protectedbase_updateMicroFocus(self: pointer, ): void {.importc: "QSplitterHandle_protectedbase_updateMicroFocus".}
+proc fcQSplitterHandle_protectedbase_create(self: pointer, ): void {.importc: "QSplitterHandle_protectedbase_create".}
+proc fcQSplitterHandle_protectedbase_destroy(self: pointer, ): void {.importc: "QSplitterHandle_protectedbase_destroy".}
+proc fcQSplitterHandle_protectedbase_focusNextChild(self: pointer, ): bool {.importc: "QSplitterHandle_protectedbase_focusNextChild".}
+proc fcQSplitterHandle_protectedbase_focusPreviousChild(self: pointer, ): bool {.importc: "QSplitterHandle_protectedbase_focusPreviousChild".}
+proc fcQSplitterHandle_protectedbase_sender(self: pointer, ): pointer {.importc: "QSplitterHandle_protectedbase_sender".}
+proc fcQSplitterHandle_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QSplitterHandle_protectedbase_senderSignalIndex".}
+proc fcQSplitterHandle_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QSplitterHandle_protectedbase_receivers".}
+proc fcQSplitterHandle_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QSplitterHandle_protectedbase_isSignalConnected".}
 proc fcQSplitterHandle_new(vtbl: pointer, o: cint, parent: pointer): ptr cQSplitterHandle {.importc: "QSplitterHandle_new".}
 proc fcQSplitterHandle_staticMetaObject(): pointer {.importc: "QSplitterHandle_staticMetaObject".}
 proc fcQSplitterHandle_delete(self: pointer) {.importc: "QSplitterHandle_delete".}
@@ -1068,6 +1092,45 @@ proc miqt_exec_callback_cQSplitter_disconnectNotify(vtbl: pointer, self: pointer
   let self = QSplitter(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
   vtbl[].disconnectNotify(self, slotval1)
+
+proc moveSplitter*(self: gen_qsplitter_types.QSplitter, pos: cint, index: cint): void =
+  fcQSplitter_protectedbase_moveSplitter(self.h, pos, index)
+
+proc setRubberBand*(self: gen_qsplitter_types.QSplitter, position: cint): void =
+  fcQSplitter_protectedbase_setRubberBand(self.h, position)
+
+proc closestLegalPosition*(self: gen_qsplitter_types.QSplitter, param1: cint, param2: cint): cint =
+  fcQSplitter_protectedbase_closestLegalPosition(self.h, param1, param2)
+
+proc drawFrame*(self: gen_qsplitter_types.QSplitter, param1: gen_qpainter_types.QPainter): void =
+  fcQSplitter_protectedbase_drawFrame(self.h, param1.h)
+
+proc updateMicroFocus*(self: gen_qsplitter_types.QSplitter, ): void =
+  fcQSplitter_protectedbase_updateMicroFocus(self.h)
+
+proc create*(self: gen_qsplitter_types.QSplitter, ): void =
+  fcQSplitter_protectedbase_create(self.h)
+
+proc destroy*(self: gen_qsplitter_types.QSplitter, ): void =
+  fcQSplitter_protectedbase_destroy(self.h)
+
+proc focusNextChild*(self: gen_qsplitter_types.QSplitter, ): bool =
+  fcQSplitter_protectedbase_focusNextChild(self.h)
+
+proc focusPreviousChild*(self: gen_qsplitter_types.QSplitter, ): bool =
+  fcQSplitter_protectedbase_focusPreviousChild(self.h)
+
+proc sender*(self: gen_qsplitter_types.QSplitter, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQSplitter_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qsplitter_types.QSplitter, ): cint =
+  fcQSplitter_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qsplitter_types.QSplitter, signal: cstring): cint =
+  fcQSplitter_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qsplitter_types.QSplitter, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQSplitter_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc create*(T: type gen_qsplitter_types.QSplitter,
     parent: gen_qwidget_types.QWidget,
@@ -2139,6 +2202,39 @@ proc miqt_exec_callback_cQSplitterHandle_disconnectNotify(vtbl: pointer, self: p
   let self = QSplitterHandle(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
   vtbl[].disconnectNotify(self, slotval1)
+
+proc moveSplitter*(self: gen_qsplitter_types.QSplitterHandle, p: cint): void =
+  fcQSplitterHandle_protectedbase_moveSplitter(self.h, p)
+
+proc closestLegalPosition*(self: gen_qsplitter_types.QSplitterHandle, p: cint): cint =
+  fcQSplitterHandle_protectedbase_closestLegalPosition(self.h, p)
+
+proc updateMicroFocus*(self: gen_qsplitter_types.QSplitterHandle, ): void =
+  fcQSplitterHandle_protectedbase_updateMicroFocus(self.h)
+
+proc create*(self: gen_qsplitter_types.QSplitterHandle, ): void =
+  fcQSplitterHandle_protectedbase_create(self.h)
+
+proc destroy*(self: gen_qsplitter_types.QSplitterHandle, ): void =
+  fcQSplitterHandle_protectedbase_destroy(self.h)
+
+proc focusNextChild*(self: gen_qsplitter_types.QSplitterHandle, ): bool =
+  fcQSplitterHandle_protectedbase_focusNextChild(self.h)
+
+proc focusPreviousChild*(self: gen_qsplitter_types.QSplitterHandle, ): bool =
+  fcQSplitterHandle_protectedbase_focusPreviousChild(self.h)
+
+proc sender*(self: gen_qsplitter_types.QSplitterHandle, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQSplitterHandle_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qsplitter_types.QSplitterHandle, ): cint =
+  fcQSplitterHandle_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qsplitter_types.QSplitterHandle, signal: cstring): cint =
+  fcQSplitterHandle_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qsplitter_types.QSplitterHandle, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQSplitterHandle_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc create*(T: type gen_qsplitter_types.QSplitterHandle,
     o: cint, parent: gen_qsplitter_types.QSplitter,

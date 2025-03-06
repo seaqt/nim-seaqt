@@ -363,10 +363,10 @@ public:
 	friend void QUndoStack_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
 
 	// Wrappers to allow calling protected methods:
-	friend QObject* QUndoStack_protectedbase_sender(bool* _dynamic_cast_ok, const void* self);
-	friend int QUndoStack_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
-	friend int QUndoStack_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
-	friend bool QUndoStack_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+	friend QObject* QUndoStack_protectedbase_sender(const void* self);
+	friend int QUndoStack_protectedbase_senderSignalIndex(const void* self);
+	friend int QUndoStack_protectedbase_receivers(const void* self, const char* signal);
+	friend bool QUndoStack_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
 };
 
 QUndoStack* QUndoStack_new(struct QUndoStack_VTable* vtbl) {
@@ -735,53 +735,29 @@ void QUndoStack_virtualbase_disconnectNotify(void* self, QMetaMethod* signal) {
 }
 
 const QMetaObject* QUndoStack_staticMetaObject() { return &QUndoStack::staticMetaObject; }
-QObject* QUndoStack_protectedbase_sender(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQUndoStack* self_cast = dynamic_cast<VirtualQUndoStack*>( (QUndoStack*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return nullptr;
-	}
-	
-	*_dynamic_cast_ok = true;
+QObject* QUndoStack_protectedbase_sender(const void* self) {
+	VirtualQUndoStack* self_cast = static_cast<VirtualQUndoStack*>( (QUndoStack*)(self) );
 	
 	return self_cast->sender();
 
 }
 
-int QUndoStack_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQUndoStack* self_cast = dynamic_cast<VirtualQUndoStack*>( (QUndoStack*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return 0;
-	}
-	
-	*_dynamic_cast_ok = true;
+int QUndoStack_protectedbase_senderSignalIndex(const void* self) {
+	VirtualQUndoStack* self_cast = static_cast<VirtualQUndoStack*>( (QUndoStack*)(self) );
 	
 	return self_cast->senderSignalIndex();
 
 }
 
-int QUndoStack_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal) {
-	VirtualQUndoStack* self_cast = dynamic_cast<VirtualQUndoStack*>( (QUndoStack*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return 0;
-	}
-	
-	*_dynamic_cast_ok = true;
+int QUndoStack_protectedbase_receivers(const void* self, const char* signal) {
+	VirtualQUndoStack* self_cast = static_cast<VirtualQUndoStack*>( (QUndoStack*)(self) );
 	
 	return self_cast->receivers(signal);
 
 }
 
-bool QUndoStack_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal) {
-	VirtualQUndoStack* self_cast = dynamic_cast<VirtualQUndoStack*>( (QUndoStack*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return false;
-	}
-	
-	*_dynamic_cast_ok = true;
+bool QUndoStack_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal) {
+	VirtualQUndoStack* self_cast = static_cast<VirtualQUndoStack*>( (QUndoStack*)(self) );
 	
 	return self_cast->isSignalConnected(*signal);
 

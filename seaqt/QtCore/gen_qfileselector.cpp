@@ -188,10 +188,10 @@ public:
 	friend void QFileSelector_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
 
 	// Wrappers to allow calling protected methods:
-	friend QObject* QFileSelector_protectedbase_sender(bool* _dynamic_cast_ok, const void* self);
-	friend int QFileSelector_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
-	friend int QFileSelector_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
-	friend bool QFileSelector_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+	friend QObject* QFileSelector_protectedbase_sender(const void* self);
+	friend int QFileSelector_protectedbase_senderSignalIndex(const void* self);
+	friend int QFileSelector_protectedbase_receivers(const void* self, const char* signal);
+	friend bool QFileSelector_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
 };
 
 QFileSelector* QFileSelector_new(struct QFileSelector_VTable* vtbl) {
@@ -379,53 +379,29 @@ void QFileSelector_virtualbase_disconnectNotify(void* self, QMetaMethod* signal)
 }
 
 const QMetaObject* QFileSelector_staticMetaObject() { return &QFileSelector::staticMetaObject; }
-QObject* QFileSelector_protectedbase_sender(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQFileSelector* self_cast = dynamic_cast<VirtualQFileSelector*>( (QFileSelector*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return nullptr;
-	}
-	
-	*_dynamic_cast_ok = true;
+QObject* QFileSelector_protectedbase_sender(const void* self) {
+	VirtualQFileSelector* self_cast = static_cast<VirtualQFileSelector*>( (QFileSelector*)(self) );
 	
 	return self_cast->sender();
 
 }
 
-int QFileSelector_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQFileSelector* self_cast = dynamic_cast<VirtualQFileSelector*>( (QFileSelector*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return 0;
-	}
-	
-	*_dynamic_cast_ok = true;
+int QFileSelector_protectedbase_senderSignalIndex(const void* self) {
+	VirtualQFileSelector* self_cast = static_cast<VirtualQFileSelector*>( (QFileSelector*)(self) );
 	
 	return self_cast->senderSignalIndex();
 
 }
 
-int QFileSelector_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal) {
-	VirtualQFileSelector* self_cast = dynamic_cast<VirtualQFileSelector*>( (QFileSelector*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return 0;
-	}
-	
-	*_dynamic_cast_ok = true;
+int QFileSelector_protectedbase_receivers(const void* self, const char* signal) {
+	VirtualQFileSelector* self_cast = static_cast<VirtualQFileSelector*>( (QFileSelector*)(self) );
 	
 	return self_cast->receivers(signal);
 
 }
 
-bool QFileSelector_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal) {
-	VirtualQFileSelector* self_cast = dynamic_cast<VirtualQFileSelector*>( (QFileSelector*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return false;
-	}
-	
-	*_dynamic_cast_ok = true;
+bool QFileSelector_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal) {
+	VirtualQFileSelector* self_cast = static_cast<VirtualQFileSelector*>( (QFileSelector*)(self) );
 	
 	return self_cast->isSignalConnected(*signal);
 

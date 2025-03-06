@@ -116,6 +116,11 @@ proc fcQSslServer_virtualbase_childEvent(self: pointer, event: pointer): void {.
 proc fcQSslServer_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QSslServer_virtualbase_customEvent".}
 proc fcQSslServer_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QSslServer_virtualbase_connectNotify".}
 proc fcQSslServer_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QSslServer_virtualbase_disconnectNotify".}
+proc fcQSslServer_protectedbase_addPendingConnection(self: pointer, socket: pointer): void {.importc: "QSslServer_protectedbase_addPendingConnection".}
+proc fcQSslServer_protectedbase_sender(self: pointer, ): pointer {.importc: "QSslServer_protectedbase_sender".}
+proc fcQSslServer_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QSslServer_protectedbase_senderSignalIndex".}
+proc fcQSslServer_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QSslServer_protectedbase_receivers".}
+proc fcQSslServer_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QSslServer_protectedbase_isSignalConnected".}
 proc fcQSslServer_new(vtbl: pointer, ): ptr cQSslServer {.importc: "QSslServer_new".}
 proc fcQSslServer_new2(vtbl: pointer, parent: pointer): ptr cQSslServer {.importc: "QSslServer_new2".}
 proc fcQSslServer_staticMetaObject(): pointer {.importc: "QSslServer_staticMetaObject".}
@@ -508,6 +513,21 @@ proc miqt_exec_callback_cQSslServer_disconnectNotify(vtbl: pointer, self: pointe
   let self = QSslServer(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
   vtbl[].disconnectNotify(self, slotval1)
+
+proc addPendingConnection*(self: gen_qsslserver_types.QSslServer, socket: gen_qtcpsocket_types.QTcpSocket): void =
+  fcQSslServer_protectedbase_addPendingConnection(self.h, socket.h)
+
+proc sender*(self: gen_qsslserver_types.QSslServer, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQSslServer_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qsslserver_types.QSslServer, ): cint =
+  fcQSslServer_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qsslserver_types.QSslServer, signal: cstring): cint =
+  fcQSslServer_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qsslserver_types.QSslServer, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQSslServer_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc create*(T: type gen_qsslserver_types.QSslServer,
     vtbl: ref QSslServerVTable = nil): gen_qsslserver_types.QSslServer =

@@ -167,10 +167,10 @@ void QProxyStyle_virtualbase_childEvent(void* self, QChildEvent* event);
 void QProxyStyle_virtualbase_customEvent(void* self, QEvent* event);
 void QProxyStyle_virtualbase_connectNotify(void* self, QMetaMethod* signal);
 void QProxyStyle_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
-QObject* QProxyStyle_protectedbase_sender(bool* _dynamic_cast_ok, const void* self);
-int QProxyStyle_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
-int QProxyStyle_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
-bool QProxyStyle_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+QObject* QProxyStyle_protectedbase_sender(const void* self);
+int QProxyStyle_protectedbase_senderSignalIndex(const void* self);
+int QProxyStyle_protectedbase_receivers(const void* self, const char* signal);
+bool QProxyStyle_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
 const QMetaObject* QProxyStyle_staticMetaObject();
 void QProxyStyle_delete(QProxyStyle* self);
 

@@ -198,10 +198,10 @@ public:
 	friend void QWebEngineProfile_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
 
 	// Wrappers to allow calling protected methods:
-	friend QObject* QWebEngineProfile_protectedbase_sender(bool* _dynamic_cast_ok, const void* self);
-	friend int QWebEngineProfile_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
-	friend int QWebEngineProfile_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
-	friend bool QWebEngineProfile_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+	friend QObject* QWebEngineProfile_protectedbase_sender(const void* self);
+	friend int QWebEngineProfile_protectedbase_senderSignalIndex(const void* self);
+	friend int QWebEngineProfile_protectedbase_receivers(const void* self, const char* signal);
+	friend bool QWebEngineProfile_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
 };
 
 QWebEngineProfile* QWebEngineProfile_new(struct QWebEngineProfile_VTable* vtbl) {
@@ -577,53 +577,29 @@ void QWebEngineProfile_virtualbase_disconnectNotify(void* self, QMetaMethod* sig
 }
 
 const QMetaObject* QWebEngineProfile_staticMetaObject() { return &QWebEngineProfile::staticMetaObject; }
-QObject* QWebEngineProfile_protectedbase_sender(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQWebEngineProfile* self_cast = dynamic_cast<VirtualQWebEngineProfile*>( (QWebEngineProfile*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return nullptr;
-	}
-	
-	*_dynamic_cast_ok = true;
+QObject* QWebEngineProfile_protectedbase_sender(const void* self) {
+	VirtualQWebEngineProfile* self_cast = static_cast<VirtualQWebEngineProfile*>( (QWebEngineProfile*)(self) );
 	
 	return self_cast->sender();
 
 }
 
-int QWebEngineProfile_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQWebEngineProfile* self_cast = dynamic_cast<VirtualQWebEngineProfile*>( (QWebEngineProfile*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return 0;
-	}
-	
-	*_dynamic_cast_ok = true;
+int QWebEngineProfile_protectedbase_senderSignalIndex(const void* self) {
+	VirtualQWebEngineProfile* self_cast = static_cast<VirtualQWebEngineProfile*>( (QWebEngineProfile*)(self) );
 	
 	return self_cast->senderSignalIndex();
 
 }
 
-int QWebEngineProfile_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal) {
-	VirtualQWebEngineProfile* self_cast = dynamic_cast<VirtualQWebEngineProfile*>( (QWebEngineProfile*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return 0;
-	}
-	
-	*_dynamic_cast_ok = true;
+int QWebEngineProfile_protectedbase_receivers(const void* self, const char* signal) {
+	VirtualQWebEngineProfile* self_cast = static_cast<VirtualQWebEngineProfile*>( (QWebEngineProfile*)(self) );
 	
 	return self_cast->receivers(signal);
 
 }
 
-bool QWebEngineProfile_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal) {
-	VirtualQWebEngineProfile* self_cast = dynamic_cast<VirtualQWebEngineProfile*>( (QWebEngineProfile*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return false;
-	}
-	
-	*_dynamic_cast_ok = true;
+bool QWebEngineProfile_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal) {
+	VirtualQWebEngineProfile* self_cast = static_cast<VirtualQWebEngineProfile*>( (QWebEngineProfile*)(self) );
 	
 	return self_cast->isSignalConnected(*signal);
 

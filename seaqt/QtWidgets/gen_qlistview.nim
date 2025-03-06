@@ -67,6 +67,7 @@ import
   ../QtCore/gen_qabstractitemmodel_types,
   ../QtCore/gen_qcoreevent_types,
   ../QtCore/gen_qitemselectionmodel_types,
+  ../QtCore/gen_qmargins_types,
   ../QtCore/gen_qmetaobject_types,
   ../QtCore/gen_qobject_types,
   ../QtCore/gen_qobjectdefs_types,
@@ -87,6 +88,7 @@ export
   gen_qabstractitemmodel_types,
   gen_qcoreevent_types,
   gen_qitemselectionmodel_types,
+  gen_qmargins_types,
   gen_qmetaobject_types,
   gen_qobject_types,
   gen_qobjectdefs_types,
@@ -341,6 +343,33 @@ proc fcQListView_virtualbase_childEvent(self: pointer, event: pointer): void {.i
 proc fcQListView_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QListView_virtualbase_customEvent".}
 proc fcQListView_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QListView_virtualbase_connectNotify".}
 proc fcQListView_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QListView_virtualbase_disconnectNotify".}
+proc fcQListView_protectedbase_resizeContents(self: pointer, width: cint, height: cint): void {.importc: "QListView_protectedbase_resizeContents".}
+proc fcQListView_protectedbase_contentsSize(self: pointer, ): pointer {.importc: "QListView_protectedbase_contentsSize".}
+proc fcQListView_protectedbase_rectForIndex(self: pointer, index: pointer): pointer {.importc: "QListView_protectedbase_rectForIndex".}
+proc fcQListView_protectedbase_setPositionForIndex(self: pointer, position: pointer, index: pointer): void {.importc: "QListView_protectedbase_setPositionForIndex".}
+proc fcQListView_protectedbase_state(self: pointer, ): cint {.importc: "QListView_protectedbase_state".}
+proc fcQListView_protectedbase_setState(self: pointer, state: cint): void {.importc: "QListView_protectedbase_setState".}
+proc fcQListView_protectedbase_scheduleDelayedItemsLayout(self: pointer, ): void {.importc: "QListView_protectedbase_scheduleDelayedItemsLayout".}
+proc fcQListView_protectedbase_executeDelayedItemsLayout(self: pointer, ): void {.importc: "QListView_protectedbase_executeDelayedItemsLayout".}
+proc fcQListView_protectedbase_setDirtyRegion(self: pointer, region: pointer): void {.importc: "QListView_protectedbase_setDirtyRegion".}
+proc fcQListView_protectedbase_scrollDirtyRegion(self: pointer, dx: cint, dy: cint): void {.importc: "QListView_protectedbase_scrollDirtyRegion".}
+proc fcQListView_protectedbase_dirtyRegionOffset(self: pointer, ): pointer {.importc: "QListView_protectedbase_dirtyRegionOffset".}
+proc fcQListView_protectedbase_startAutoScroll(self: pointer, ): void {.importc: "QListView_protectedbase_startAutoScroll".}
+proc fcQListView_protectedbase_stopAutoScroll(self: pointer, ): void {.importc: "QListView_protectedbase_stopAutoScroll".}
+proc fcQListView_protectedbase_doAutoScroll(self: pointer, ): void {.importc: "QListView_protectedbase_doAutoScroll".}
+proc fcQListView_protectedbase_dropIndicatorPosition(self: pointer, ): cint {.importc: "QListView_protectedbase_dropIndicatorPosition".}
+proc fcQListView_protectedbase_setViewportMargins(self: pointer, left: cint, top: cint, right: cint, bottom: cint): void {.importc: "QListView_protectedbase_setViewportMargins".}
+proc fcQListView_protectedbase_viewportMargins(self: pointer, ): pointer {.importc: "QListView_protectedbase_viewportMargins".}
+proc fcQListView_protectedbase_drawFrame(self: pointer, param1: pointer): void {.importc: "QListView_protectedbase_drawFrame".}
+proc fcQListView_protectedbase_updateMicroFocus(self: pointer, ): void {.importc: "QListView_protectedbase_updateMicroFocus".}
+proc fcQListView_protectedbase_create(self: pointer, ): void {.importc: "QListView_protectedbase_create".}
+proc fcQListView_protectedbase_destroy(self: pointer, ): void {.importc: "QListView_protectedbase_destroy".}
+proc fcQListView_protectedbase_focusNextChild(self: pointer, ): bool {.importc: "QListView_protectedbase_focusNextChild".}
+proc fcQListView_protectedbase_focusPreviousChild(self: pointer, ): bool {.importc: "QListView_protectedbase_focusPreviousChild".}
+proc fcQListView_protectedbase_sender(self: pointer, ): pointer {.importc: "QListView_protectedbase_sender".}
+proc fcQListView_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QListView_protectedbase_senderSignalIndex".}
+proc fcQListView_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QListView_protectedbase_receivers".}
+proc fcQListView_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QListView_protectedbase_isSignalConnected".}
 proc fcQListView_new(vtbl: pointer, parent: pointer): ptr cQListView {.importc: "QListView_new".}
 proc fcQListView_new2(vtbl: pointer, ): ptr cQListView {.importc: "QListView_new2".}
 proc fcQListView_staticMetaObject(): pointer {.importc: "QListView_staticMetaObject".}
@@ -1608,6 +1637,87 @@ proc miqt_exec_callback_cQListView_disconnectNotify(vtbl: pointer, self: pointer
   let self = QListView(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
   vtbl[].disconnectNotify(self, slotval1)
+
+proc resizeContents*(self: gen_qlistview_types.QListView, width: cint, height: cint): void =
+  fcQListView_protectedbase_resizeContents(self.h, width, height)
+
+proc contentsSize*(self: gen_qlistview_types.QListView, ): gen_qsize_types.QSize =
+  gen_qsize_types.QSize(h: fcQListView_protectedbase_contentsSize(self.h))
+
+proc rectForIndex*(self: gen_qlistview_types.QListView, index: gen_qabstractitemmodel_types.QModelIndex): gen_qrect_types.QRect =
+  gen_qrect_types.QRect(h: fcQListView_protectedbase_rectForIndex(self.h, index.h))
+
+proc setPositionForIndex*(self: gen_qlistview_types.QListView, position: gen_qpoint_types.QPoint, index: gen_qabstractitemmodel_types.QModelIndex): void =
+  fcQListView_protectedbase_setPositionForIndex(self.h, position.h, index.h)
+
+proc state*(self: gen_qlistview_types.QListView, ): cint =
+  cint(fcQListView_protectedbase_state(self.h))
+
+proc setState*(self: gen_qlistview_types.QListView, state: cint): void =
+  fcQListView_protectedbase_setState(self.h, cint(state))
+
+proc scheduleDelayedItemsLayout*(self: gen_qlistview_types.QListView, ): void =
+  fcQListView_protectedbase_scheduleDelayedItemsLayout(self.h)
+
+proc executeDelayedItemsLayout*(self: gen_qlistview_types.QListView, ): void =
+  fcQListView_protectedbase_executeDelayedItemsLayout(self.h)
+
+proc setDirtyRegion*(self: gen_qlistview_types.QListView, region: gen_qregion_types.QRegion): void =
+  fcQListView_protectedbase_setDirtyRegion(self.h, region.h)
+
+proc scrollDirtyRegion*(self: gen_qlistview_types.QListView, dx: cint, dy: cint): void =
+  fcQListView_protectedbase_scrollDirtyRegion(self.h, dx, dy)
+
+proc dirtyRegionOffset*(self: gen_qlistview_types.QListView, ): gen_qpoint_types.QPoint =
+  gen_qpoint_types.QPoint(h: fcQListView_protectedbase_dirtyRegionOffset(self.h))
+
+proc startAutoScroll*(self: gen_qlistview_types.QListView, ): void =
+  fcQListView_protectedbase_startAutoScroll(self.h)
+
+proc stopAutoScroll*(self: gen_qlistview_types.QListView, ): void =
+  fcQListView_protectedbase_stopAutoScroll(self.h)
+
+proc doAutoScroll*(self: gen_qlistview_types.QListView, ): void =
+  fcQListView_protectedbase_doAutoScroll(self.h)
+
+proc dropIndicatorPosition*(self: gen_qlistview_types.QListView, ): cint =
+  cint(fcQListView_protectedbase_dropIndicatorPosition(self.h))
+
+proc setViewportMargins*(self: gen_qlistview_types.QListView, left: cint, top: cint, right: cint, bottom: cint): void =
+  fcQListView_protectedbase_setViewportMargins(self.h, left, top, right, bottom)
+
+proc viewportMargins*(self: gen_qlistview_types.QListView, ): gen_qmargins_types.QMargins =
+  gen_qmargins_types.QMargins(h: fcQListView_protectedbase_viewportMargins(self.h))
+
+proc drawFrame*(self: gen_qlistview_types.QListView, param1: gen_qpainter_types.QPainter): void =
+  fcQListView_protectedbase_drawFrame(self.h, param1.h)
+
+proc updateMicroFocus*(self: gen_qlistview_types.QListView, ): void =
+  fcQListView_protectedbase_updateMicroFocus(self.h)
+
+proc create*(self: gen_qlistview_types.QListView, ): void =
+  fcQListView_protectedbase_create(self.h)
+
+proc destroy*(self: gen_qlistview_types.QListView, ): void =
+  fcQListView_protectedbase_destroy(self.h)
+
+proc focusNextChild*(self: gen_qlistview_types.QListView, ): bool =
+  fcQListView_protectedbase_focusNextChild(self.h)
+
+proc focusPreviousChild*(self: gen_qlistview_types.QListView, ): bool =
+  fcQListView_protectedbase_focusPreviousChild(self.h)
+
+proc sender*(self: gen_qlistview_types.QListView, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQListView_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qlistview_types.QListView, ): cint =
+  fcQListView_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qlistview_types.QListView, signal: cstring): cint =
+  fcQListView_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qlistview_types.QListView, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQListView_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc create*(T: type gen_qlistview_types.QListView,
     parent: gen_qwidget_types.QWidget,

@@ -910,30 +910,30 @@ public:
 	friend void QFileSystemModel_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
 
 	// Wrappers to allow calling protected methods:
-	friend QModelIndex* QFileSystemModel_protectedbase_createIndex(bool* _dynamic_cast_ok, const void* self, int row, int column);
-	friend void QFileSystemModel_protectedbase_encodeData(bool* _dynamic_cast_ok, const void* self, struct miqt_array /* of QModelIndex* */  indexes, QDataStream* stream);
-	friend bool QFileSystemModel_protectedbase_decodeData(bool* _dynamic_cast_ok, void* self, int row, int column, QModelIndex* parent, QDataStream* stream);
-	friend void QFileSystemModel_protectedbase_beginInsertRows(bool* _dynamic_cast_ok, void* self, QModelIndex* parent, int first, int last);
-	friend void QFileSystemModel_protectedbase_endInsertRows(bool* _dynamic_cast_ok, void* self);
-	friend void QFileSystemModel_protectedbase_beginRemoveRows(bool* _dynamic_cast_ok, void* self, QModelIndex* parent, int first, int last);
-	friend void QFileSystemModel_protectedbase_endRemoveRows(bool* _dynamic_cast_ok, void* self);
-	friend bool QFileSystemModel_protectedbase_beginMoveRows(bool* _dynamic_cast_ok, void* self, QModelIndex* sourceParent, int sourceFirst, int sourceLast, QModelIndex* destinationParent, int destinationRow);
-	friend void QFileSystemModel_protectedbase_endMoveRows(bool* _dynamic_cast_ok, void* self);
-	friend void QFileSystemModel_protectedbase_beginInsertColumns(bool* _dynamic_cast_ok, void* self, QModelIndex* parent, int first, int last);
-	friend void QFileSystemModel_protectedbase_endInsertColumns(bool* _dynamic_cast_ok, void* self);
-	friend void QFileSystemModel_protectedbase_beginRemoveColumns(bool* _dynamic_cast_ok, void* self, QModelIndex* parent, int first, int last);
-	friend void QFileSystemModel_protectedbase_endRemoveColumns(bool* _dynamic_cast_ok, void* self);
-	friend bool QFileSystemModel_protectedbase_beginMoveColumns(bool* _dynamic_cast_ok, void* self, QModelIndex* sourceParent, int sourceFirst, int sourceLast, QModelIndex* destinationParent, int destinationColumn);
-	friend void QFileSystemModel_protectedbase_endMoveColumns(bool* _dynamic_cast_ok, void* self);
-	friend void QFileSystemModel_protectedbase_beginResetModel(bool* _dynamic_cast_ok, void* self);
-	friend void QFileSystemModel_protectedbase_endResetModel(bool* _dynamic_cast_ok, void* self);
-	friend void QFileSystemModel_protectedbase_changePersistentIndex(bool* _dynamic_cast_ok, void* self, QModelIndex* from, QModelIndex* to);
-	friend void QFileSystemModel_protectedbase_changePersistentIndexList(bool* _dynamic_cast_ok, void* self, struct miqt_array /* of QModelIndex* */  from, struct miqt_array /* of QModelIndex* */  to);
-	friend struct miqt_array /* of QModelIndex* */  QFileSystemModel_protectedbase_persistentIndexList(bool* _dynamic_cast_ok, const void* self);
-	friend QObject* QFileSystemModel_protectedbase_sender(bool* _dynamic_cast_ok, const void* self);
-	friend int QFileSystemModel_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
-	friend int QFileSystemModel_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
-	friend bool QFileSystemModel_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+	friend QModelIndex* QFileSystemModel_protectedbase_createIndex(const void* self, int row, int column);
+	friend void QFileSystemModel_protectedbase_encodeData(const void* self, struct miqt_array /* of QModelIndex* */  indexes, QDataStream* stream);
+	friend bool QFileSystemModel_protectedbase_decodeData(void* self, int row, int column, QModelIndex* parent, QDataStream* stream);
+	friend void QFileSystemModel_protectedbase_beginInsertRows(void* self, QModelIndex* parent, int first, int last);
+	friend void QFileSystemModel_protectedbase_endInsertRows(void* self);
+	friend void QFileSystemModel_protectedbase_beginRemoveRows(void* self, QModelIndex* parent, int first, int last);
+	friend void QFileSystemModel_protectedbase_endRemoveRows(void* self);
+	friend bool QFileSystemModel_protectedbase_beginMoveRows(void* self, QModelIndex* sourceParent, int sourceFirst, int sourceLast, QModelIndex* destinationParent, int destinationRow);
+	friend void QFileSystemModel_protectedbase_endMoveRows(void* self);
+	friend void QFileSystemModel_protectedbase_beginInsertColumns(void* self, QModelIndex* parent, int first, int last);
+	friend void QFileSystemModel_protectedbase_endInsertColumns(void* self);
+	friend void QFileSystemModel_protectedbase_beginRemoveColumns(void* self, QModelIndex* parent, int first, int last);
+	friend void QFileSystemModel_protectedbase_endRemoveColumns(void* self);
+	friend bool QFileSystemModel_protectedbase_beginMoveColumns(void* self, QModelIndex* sourceParent, int sourceFirst, int sourceLast, QModelIndex* destinationParent, int destinationColumn);
+	friend void QFileSystemModel_protectedbase_endMoveColumns(void* self);
+	friend void QFileSystemModel_protectedbase_beginResetModel(void* self);
+	friend void QFileSystemModel_protectedbase_endResetModel(void* self);
+	friend void QFileSystemModel_protectedbase_changePersistentIndex(void* self, QModelIndex* from, QModelIndex* to);
+	friend void QFileSystemModel_protectedbase_changePersistentIndexList(void* self, struct miqt_array /* of QModelIndex* */  from, struct miqt_array /* of QModelIndex* */  to);
+	friend struct miqt_array /* of QModelIndex* */  QFileSystemModel_protectedbase_persistentIndexList(const void* self);
+	friend QObject* QFileSystemModel_protectedbase_sender(const void* self);
+	friend int QFileSystemModel_protectedbase_senderSignalIndex(const void* self);
+	friend int QFileSystemModel_protectedbase_receivers(const void* self, const char* signal);
+	friend bool QFileSystemModel_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
 };
 
 QFileSystemModel* QFileSystemModel_new(struct QFileSystemModel_VTable* vtbl) {
@@ -1757,27 +1757,15 @@ void QFileSystemModel_virtualbase_disconnectNotify(void* self, QMetaMethod* sign
 }
 
 const QMetaObject* QFileSystemModel_staticMetaObject() { return &QFileSystemModel::staticMetaObject; }
-QModelIndex* QFileSystemModel_protectedbase_createIndex(bool* _dynamic_cast_ok, const void* self, int row, int column) {
-	VirtualQFileSystemModel* self_cast = dynamic_cast<VirtualQFileSystemModel*>( (QFileSystemModel*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return nullptr;
-	}
-	
-	*_dynamic_cast_ok = true;
+QModelIndex* QFileSystemModel_protectedbase_createIndex(const void* self, int row, int column) {
+	VirtualQFileSystemModel* self_cast = static_cast<VirtualQFileSystemModel*>( (QFileSystemModel*)(self) );
 	
 	return new QModelIndex(self_cast->createIndex(static_cast<int>(row), static_cast<int>(column)));
 
 }
 
-void QFileSystemModel_protectedbase_encodeData(bool* _dynamic_cast_ok, const void* self, struct miqt_array /* of QModelIndex* */  indexes, QDataStream* stream) {
-	VirtualQFileSystemModel* self_cast = dynamic_cast<VirtualQFileSystemModel*>( (QFileSystemModel*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QFileSystemModel_protectedbase_encodeData(const void* self, struct miqt_array /* of QModelIndex* */  indexes, QDataStream* stream) {
+	VirtualQFileSystemModel* self_cast = static_cast<VirtualQFileSystemModel*>( (QFileSystemModel*)(self) );
 			QModelIndexList indexes_QList;
 		indexes_QList.reserve(indexes.len);
 		QModelIndex** indexes_arr = static_cast<QModelIndex**>(indexes.data);
@@ -1789,222 +1777,120 @@ void QFileSystemModel_protectedbase_encodeData(bool* _dynamic_cast_ok, const voi
 
 }
 
-bool QFileSystemModel_protectedbase_decodeData(bool* _dynamic_cast_ok, void* self, int row, int column, QModelIndex* parent, QDataStream* stream) {
-	VirtualQFileSystemModel* self_cast = dynamic_cast<VirtualQFileSystemModel*>( (QFileSystemModel*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return false;
-	}
-	
-	*_dynamic_cast_ok = true;
+bool QFileSystemModel_protectedbase_decodeData(void* self, int row, int column, QModelIndex* parent, QDataStream* stream) {
+	VirtualQFileSystemModel* self_cast = static_cast<VirtualQFileSystemModel*>( (QFileSystemModel*)(self) );
 	
 	return self_cast->decodeData(static_cast<int>(row), static_cast<int>(column), *parent, *stream);
 
 }
 
-void QFileSystemModel_protectedbase_beginInsertRows(bool* _dynamic_cast_ok, void* self, QModelIndex* parent, int first, int last) {
-	VirtualQFileSystemModel* self_cast = dynamic_cast<VirtualQFileSystemModel*>( (QFileSystemModel*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QFileSystemModel_protectedbase_beginInsertRows(void* self, QModelIndex* parent, int first, int last) {
+	VirtualQFileSystemModel* self_cast = static_cast<VirtualQFileSystemModel*>( (QFileSystemModel*)(self) );
 	
 	self_cast->beginInsertRows(*parent, static_cast<int>(first), static_cast<int>(last));
 
 }
 
-void QFileSystemModel_protectedbase_endInsertRows(bool* _dynamic_cast_ok, void* self) {
-	VirtualQFileSystemModel* self_cast = dynamic_cast<VirtualQFileSystemModel*>( (QFileSystemModel*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QFileSystemModel_protectedbase_endInsertRows(void* self) {
+	VirtualQFileSystemModel* self_cast = static_cast<VirtualQFileSystemModel*>( (QFileSystemModel*)(self) );
 	
 	self_cast->endInsertRows();
 
 }
 
-void QFileSystemModel_protectedbase_beginRemoveRows(bool* _dynamic_cast_ok, void* self, QModelIndex* parent, int first, int last) {
-	VirtualQFileSystemModel* self_cast = dynamic_cast<VirtualQFileSystemModel*>( (QFileSystemModel*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QFileSystemModel_protectedbase_beginRemoveRows(void* self, QModelIndex* parent, int first, int last) {
+	VirtualQFileSystemModel* self_cast = static_cast<VirtualQFileSystemModel*>( (QFileSystemModel*)(self) );
 	
 	self_cast->beginRemoveRows(*parent, static_cast<int>(first), static_cast<int>(last));
 
 }
 
-void QFileSystemModel_protectedbase_endRemoveRows(bool* _dynamic_cast_ok, void* self) {
-	VirtualQFileSystemModel* self_cast = dynamic_cast<VirtualQFileSystemModel*>( (QFileSystemModel*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QFileSystemModel_protectedbase_endRemoveRows(void* self) {
+	VirtualQFileSystemModel* self_cast = static_cast<VirtualQFileSystemModel*>( (QFileSystemModel*)(self) );
 	
 	self_cast->endRemoveRows();
 
 }
 
-bool QFileSystemModel_protectedbase_beginMoveRows(bool* _dynamic_cast_ok, void* self, QModelIndex* sourceParent, int sourceFirst, int sourceLast, QModelIndex* destinationParent, int destinationRow) {
-	VirtualQFileSystemModel* self_cast = dynamic_cast<VirtualQFileSystemModel*>( (QFileSystemModel*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return false;
-	}
-	
-	*_dynamic_cast_ok = true;
+bool QFileSystemModel_protectedbase_beginMoveRows(void* self, QModelIndex* sourceParent, int sourceFirst, int sourceLast, QModelIndex* destinationParent, int destinationRow) {
+	VirtualQFileSystemModel* self_cast = static_cast<VirtualQFileSystemModel*>( (QFileSystemModel*)(self) );
 	
 	return self_cast->beginMoveRows(*sourceParent, static_cast<int>(sourceFirst), static_cast<int>(sourceLast), *destinationParent, static_cast<int>(destinationRow));
 
 }
 
-void QFileSystemModel_protectedbase_endMoveRows(bool* _dynamic_cast_ok, void* self) {
-	VirtualQFileSystemModel* self_cast = dynamic_cast<VirtualQFileSystemModel*>( (QFileSystemModel*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QFileSystemModel_protectedbase_endMoveRows(void* self) {
+	VirtualQFileSystemModel* self_cast = static_cast<VirtualQFileSystemModel*>( (QFileSystemModel*)(self) );
 	
 	self_cast->endMoveRows();
 
 }
 
-void QFileSystemModel_protectedbase_beginInsertColumns(bool* _dynamic_cast_ok, void* self, QModelIndex* parent, int first, int last) {
-	VirtualQFileSystemModel* self_cast = dynamic_cast<VirtualQFileSystemModel*>( (QFileSystemModel*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QFileSystemModel_protectedbase_beginInsertColumns(void* self, QModelIndex* parent, int first, int last) {
+	VirtualQFileSystemModel* self_cast = static_cast<VirtualQFileSystemModel*>( (QFileSystemModel*)(self) );
 	
 	self_cast->beginInsertColumns(*parent, static_cast<int>(first), static_cast<int>(last));
 
 }
 
-void QFileSystemModel_protectedbase_endInsertColumns(bool* _dynamic_cast_ok, void* self) {
-	VirtualQFileSystemModel* self_cast = dynamic_cast<VirtualQFileSystemModel*>( (QFileSystemModel*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QFileSystemModel_protectedbase_endInsertColumns(void* self) {
+	VirtualQFileSystemModel* self_cast = static_cast<VirtualQFileSystemModel*>( (QFileSystemModel*)(self) );
 	
 	self_cast->endInsertColumns();
 
 }
 
-void QFileSystemModel_protectedbase_beginRemoveColumns(bool* _dynamic_cast_ok, void* self, QModelIndex* parent, int first, int last) {
-	VirtualQFileSystemModel* self_cast = dynamic_cast<VirtualQFileSystemModel*>( (QFileSystemModel*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QFileSystemModel_protectedbase_beginRemoveColumns(void* self, QModelIndex* parent, int first, int last) {
+	VirtualQFileSystemModel* self_cast = static_cast<VirtualQFileSystemModel*>( (QFileSystemModel*)(self) );
 	
 	self_cast->beginRemoveColumns(*parent, static_cast<int>(first), static_cast<int>(last));
 
 }
 
-void QFileSystemModel_protectedbase_endRemoveColumns(bool* _dynamic_cast_ok, void* self) {
-	VirtualQFileSystemModel* self_cast = dynamic_cast<VirtualQFileSystemModel*>( (QFileSystemModel*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QFileSystemModel_protectedbase_endRemoveColumns(void* self) {
+	VirtualQFileSystemModel* self_cast = static_cast<VirtualQFileSystemModel*>( (QFileSystemModel*)(self) );
 	
 	self_cast->endRemoveColumns();
 
 }
 
-bool QFileSystemModel_protectedbase_beginMoveColumns(bool* _dynamic_cast_ok, void* self, QModelIndex* sourceParent, int sourceFirst, int sourceLast, QModelIndex* destinationParent, int destinationColumn) {
-	VirtualQFileSystemModel* self_cast = dynamic_cast<VirtualQFileSystemModel*>( (QFileSystemModel*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return false;
-	}
-	
-	*_dynamic_cast_ok = true;
+bool QFileSystemModel_protectedbase_beginMoveColumns(void* self, QModelIndex* sourceParent, int sourceFirst, int sourceLast, QModelIndex* destinationParent, int destinationColumn) {
+	VirtualQFileSystemModel* self_cast = static_cast<VirtualQFileSystemModel*>( (QFileSystemModel*)(self) );
 	
 	return self_cast->beginMoveColumns(*sourceParent, static_cast<int>(sourceFirst), static_cast<int>(sourceLast), *destinationParent, static_cast<int>(destinationColumn));
 
 }
 
-void QFileSystemModel_protectedbase_endMoveColumns(bool* _dynamic_cast_ok, void* self) {
-	VirtualQFileSystemModel* self_cast = dynamic_cast<VirtualQFileSystemModel*>( (QFileSystemModel*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QFileSystemModel_protectedbase_endMoveColumns(void* self) {
+	VirtualQFileSystemModel* self_cast = static_cast<VirtualQFileSystemModel*>( (QFileSystemModel*)(self) );
 	
 	self_cast->endMoveColumns();
 
 }
 
-void QFileSystemModel_protectedbase_beginResetModel(bool* _dynamic_cast_ok, void* self) {
-	VirtualQFileSystemModel* self_cast = dynamic_cast<VirtualQFileSystemModel*>( (QFileSystemModel*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QFileSystemModel_protectedbase_beginResetModel(void* self) {
+	VirtualQFileSystemModel* self_cast = static_cast<VirtualQFileSystemModel*>( (QFileSystemModel*)(self) );
 	
 	self_cast->beginResetModel();
 
 }
 
-void QFileSystemModel_protectedbase_endResetModel(bool* _dynamic_cast_ok, void* self) {
-	VirtualQFileSystemModel* self_cast = dynamic_cast<VirtualQFileSystemModel*>( (QFileSystemModel*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QFileSystemModel_protectedbase_endResetModel(void* self) {
+	VirtualQFileSystemModel* self_cast = static_cast<VirtualQFileSystemModel*>( (QFileSystemModel*)(self) );
 	
 	self_cast->endResetModel();
 
 }
 
-void QFileSystemModel_protectedbase_changePersistentIndex(bool* _dynamic_cast_ok, void* self, QModelIndex* from, QModelIndex* to) {
-	VirtualQFileSystemModel* self_cast = dynamic_cast<VirtualQFileSystemModel*>( (QFileSystemModel*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QFileSystemModel_protectedbase_changePersistentIndex(void* self, QModelIndex* from, QModelIndex* to) {
+	VirtualQFileSystemModel* self_cast = static_cast<VirtualQFileSystemModel*>( (QFileSystemModel*)(self) );
 	
 	self_cast->changePersistentIndex(*from, *to);
 
 }
 
-void QFileSystemModel_protectedbase_changePersistentIndexList(bool* _dynamic_cast_ok, void* self, struct miqt_array /* of QModelIndex* */  from, struct miqt_array /* of QModelIndex* */  to) {
-	VirtualQFileSystemModel* self_cast = dynamic_cast<VirtualQFileSystemModel*>( (QFileSystemModel*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QFileSystemModel_protectedbase_changePersistentIndexList(void* self, struct miqt_array /* of QModelIndex* */  from, struct miqt_array /* of QModelIndex* */  to) {
+	VirtualQFileSystemModel* self_cast = static_cast<VirtualQFileSystemModel*>( (QFileSystemModel*)(self) );
 			QModelIndexList from_QList;
 		from_QList.reserve(from.len);
 		QModelIndex** from_arr = static_cast<QModelIndex**>(from.data);
@@ -2022,14 +1908,8 @@ void QFileSystemModel_protectedbase_changePersistentIndexList(bool* _dynamic_cas
 
 }
 
-struct miqt_array /* of QModelIndex* */  QFileSystemModel_protectedbase_persistentIndexList(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQFileSystemModel* self_cast = dynamic_cast<VirtualQFileSystemModel*>( (QFileSystemModel*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return (struct miqt_array){};
-	}
-	
-	*_dynamic_cast_ok = true;
+struct miqt_array /* of QModelIndex* */  QFileSystemModel_protectedbase_persistentIndexList(const void* self) {
+	VirtualQFileSystemModel* self_cast = static_cast<VirtualQFileSystemModel*>( (QFileSystemModel*)(self) );
 	
 	QModelIndexList _ret = self_cast->persistentIndexList();
 	// Convert QList<> from C++ memory to manually-managed C memory
@@ -2044,53 +1924,29 @@ struct miqt_array /* of QModelIndex* */  QFileSystemModel_protectedbase_persiste
 
 }
 
-QObject* QFileSystemModel_protectedbase_sender(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQFileSystemModel* self_cast = dynamic_cast<VirtualQFileSystemModel*>( (QFileSystemModel*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return nullptr;
-	}
-	
-	*_dynamic_cast_ok = true;
+QObject* QFileSystemModel_protectedbase_sender(const void* self) {
+	VirtualQFileSystemModel* self_cast = static_cast<VirtualQFileSystemModel*>( (QFileSystemModel*)(self) );
 	
 	return self_cast->sender();
 
 }
 
-int QFileSystemModel_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQFileSystemModel* self_cast = dynamic_cast<VirtualQFileSystemModel*>( (QFileSystemModel*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return 0;
-	}
-	
-	*_dynamic_cast_ok = true;
+int QFileSystemModel_protectedbase_senderSignalIndex(const void* self) {
+	VirtualQFileSystemModel* self_cast = static_cast<VirtualQFileSystemModel*>( (QFileSystemModel*)(self) );
 	
 	return self_cast->senderSignalIndex();
 
 }
 
-int QFileSystemModel_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal) {
-	VirtualQFileSystemModel* self_cast = dynamic_cast<VirtualQFileSystemModel*>( (QFileSystemModel*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return 0;
-	}
-	
-	*_dynamic_cast_ok = true;
+int QFileSystemModel_protectedbase_receivers(const void* self, const char* signal) {
+	VirtualQFileSystemModel* self_cast = static_cast<VirtualQFileSystemModel*>( (QFileSystemModel*)(self) );
 	
 	return self_cast->receivers(signal);
 
 }
 
-bool QFileSystemModel_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal) {
-	VirtualQFileSystemModel* self_cast = dynamic_cast<VirtualQFileSystemModel*>( (QFileSystemModel*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return false;
-	}
-	
-	*_dynamic_cast_ok = true;
+bool QFileSystemModel_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal) {
+	VirtualQFileSystemModel* self_cast = static_cast<VirtualQFileSystemModel*>( (QFileSystemModel*)(self) );
 	
 	return self_cast->isSignalConnected(*signal);
 

@@ -53,8 +53,8 @@ int QSGMaterialShader_combinedImageSamplerCount(const QSGMaterialShader* self, i
 void QSGMaterialShader_setFlag2(QSGMaterialShader* self, int flags, bool on);
 bool QSGMaterialShader_virtualbase_updateUniformData(void* self, QSGMaterialShader__RenderState* state, QSGMaterial* newMaterial, QSGMaterial* oldMaterial);
 bool QSGMaterialShader_virtualbase_updateGraphicsPipelineState(void* self, QSGMaterialShader__RenderState* state, QSGMaterialShader__GraphicsPipelineState* ps, QSGMaterial* newMaterial, QSGMaterial* oldMaterial);
-void QSGMaterialShader_protectedbase_setShaderFileName(bool* _dynamic_cast_ok, void* self, int stage, struct miqt_string filename);
-void QSGMaterialShader_protectedbase_setShader(bool* _dynamic_cast_ok, void* self, int stage, const QShader* shader);
+void QSGMaterialShader_protectedbase_setShaderFileName(void* self, int stage, struct miqt_string filename);
+void QSGMaterialShader_protectedbase_setShader(void* self, int stage, const QShader* shader);
 void QSGMaterialShader_delete(QSGMaterialShader* self);
 
 int QSGMaterialShader__RenderState_dirtyStates(const QSGMaterialShader__RenderState* self);

@@ -283,6 +283,15 @@ proc fcQTabBar_virtualbase_childEvent(self: pointer, event: pointer): void {.imp
 proc fcQTabBar_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QTabBar_virtualbase_customEvent".}
 proc fcQTabBar_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QTabBar_virtualbase_connectNotify".}
 proc fcQTabBar_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QTabBar_virtualbase_disconnectNotify".}
+proc fcQTabBar_protectedbase_updateMicroFocus(self: pointer, ): void {.importc: "QTabBar_protectedbase_updateMicroFocus".}
+proc fcQTabBar_protectedbase_create(self: pointer, ): void {.importc: "QTabBar_protectedbase_create".}
+proc fcQTabBar_protectedbase_destroy(self: pointer, ): void {.importc: "QTabBar_protectedbase_destroy".}
+proc fcQTabBar_protectedbase_focusNextChild(self: pointer, ): bool {.importc: "QTabBar_protectedbase_focusNextChild".}
+proc fcQTabBar_protectedbase_focusPreviousChild(self: pointer, ): bool {.importc: "QTabBar_protectedbase_focusPreviousChild".}
+proc fcQTabBar_protectedbase_sender(self: pointer, ): pointer {.importc: "QTabBar_protectedbase_sender".}
+proc fcQTabBar_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QTabBar_protectedbase_senderSignalIndex".}
+proc fcQTabBar_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QTabBar_protectedbase_receivers".}
+proc fcQTabBar_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QTabBar_protectedbase_isSignalConnected".}
 proc fcQTabBar_new(vtbl: pointer, parent: pointer): ptr cQTabBar {.importc: "QTabBar_new".}
 proc fcQTabBar_new2(vtbl: pointer, ): ptr cQTabBar {.importc: "QTabBar_new2".}
 proc fcQTabBar_staticMetaObject(): pointer {.importc: "QTabBar_staticMetaObject".}
@@ -1237,6 +1246,33 @@ proc miqt_exec_callback_cQTabBar_disconnectNotify(vtbl: pointer, self: pointer, 
   let self = QTabBar(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
   vtbl[].disconnectNotify(self, slotval1)
+
+proc updateMicroFocus*(self: gen_qtabbar_types.QTabBar, ): void =
+  fcQTabBar_protectedbase_updateMicroFocus(self.h)
+
+proc create*(self: gen_qtabbar_types.QTabBar, ): void =
+  fcQTabBar_protectedbase_create(self.h)
+
+proc destroy*(self: gen_qtabbar_types.QTabBar, ): void =
+  fcQTabBar_protectedbase_destroy(self.h)
+
+proc focusNextChild*(self: gen_qtabbar_types.QTabBar, ): bool =
+  fcQTabBar_protectedbase_focusNextChild(self.h)
+
+proc focusPreviousChild*(self: gen_qtabbar_types.QTabBar, ): bool =
+  fcQTabBar_protectedbase_focusPreviousChild(self.h)
+
+proc sender*(self: gen_qtabbar_types.QTabBar, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQTabBar_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qtabbar_types.QTabBar, ): cint =
+  fcQTabBar_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qtabbar_types.QTabBar, signal: cstring): cint =
+  fcQTabBar_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qtabbar_types.QTabBar, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQTabBar_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc create*(T: type gen_qtabbar_types.QTabBar,
     parent: gen_qwidget_types.QWidget,

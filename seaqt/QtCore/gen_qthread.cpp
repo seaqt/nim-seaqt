@@ -202,11 +202,11 @@ public:
 	friend void QThread_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
 
 	// Wrappers to allow calling protected methods:
-	friend int QThread_protectedbase_exec(bool* _dynamic_cast_ok, void* self);
-	friend QObject* QThread_protectedbase_sender(bool* _dynamic_cast_ok, const void* self);
-	friend int QThread_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
-	friend int QThread_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
-	friend bool QThread_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+	friend int QThread_protectedbase_exec(void* self);
+	friend QObject* QThread_protectedbase_sender(const void* self);
+	friend int QThread_protectedbase_senderSignalIndex(const void* self);
+	friend int QThread_protectedbase_receivers(const void* self, const char* signal);
+	friend bool QThread_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
 };
 
 QThread* QThread_new(struct QThread_VTable* vtbl) {
@@ -448,66 +448,36 @@ void QThread_virtualbase_disconnectNotify(void* self, QMetaMethod* signal) {
 }
 
 const QMetaObject* QThread_staticMetaObject() { return &QThread::staticMetaObject; }
-int QThread_protectedbase_exec(bool* _dynamic_cast_ok, void* self) {
-	VirtualQThread* self_cast = dynamic_cast<VirtualQThread*>( (QThread*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return 0;
-	}
-	
-	*_dynamic_cast_ok = true;
+int QThread_protectedbase_exec(void* self) {
+	VirtualQThread* self_cast = static_cast<VirtualQThread*>( (QThread*)(self) );
 	
 	return self_cast->exec();
 
 }
 
-QObject* QThread_protectedbase_sender(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQThread* self_cast = dynamic_cast<VirtualQThread*>( (QThread*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return nullptr;
-	}
-	
-	*_dynamic_cast_ok = true;
+QObject* QThread_protectedbase_sender(const void* self) {
+	VirtualQThread* self_cast = static_cast<VirtualQThread*>( (QThread*)(self) );
 	
 	return self_cast->sender();
 
 }
 
-int QThread_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQThread* self_cast = dynamic_cast<VirtualQThread*>( (QThread*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return 0;
-	}
-	
-	*_dynamic_cast_ok = true;
+int QThread_protectedbase_senderSignalIndex(const void* self) {
+	VirtualQThread* self_cast = static_cast<VirtualQThread*>( (QThread*)(self) );
 	
 	return self_cast->senderSignalIndex();
 
 }
 
-int QThread_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal) {
-	VirtualQThread* self_cast = dynamic_cast<VirtualQThread*>( (QThread*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return 0;
-	}
-	
-	*_dynamic_cast_ok = true;
+int QThread_protectedbase_receivers(const void* self, const char* signal) {
+	VirtualQThread* self_cast = static_cast<VirtualQThread*>( (QThread*)(self) );
 	
 	return self_cast->receivers(signal);
 
 }
 
-bool QThread_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal) {
-	VirtualQThread* self_cast = dynamic_cast<VirtualQThread*>( (QThread*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return false;
-	}
-	
-	*_dynamic_cast_ok = true;
+bool QThread_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal) {
+	VirtualQThread* self_cast = static_cast<VirtualQThread*>( (QThread*)(self) );
 	
 	return self_cast->isSignalConnected(*signal);
 

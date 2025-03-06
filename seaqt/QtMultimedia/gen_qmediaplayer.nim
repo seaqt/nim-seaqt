@@ -197,6 +197,10 @@ proc fcQMediaPlayer_virtualbase_childEvent(self: pointer, event: pointer): void 
 proc fcQMediaPlayer_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QMediaPlayer_virtualbase_customEvent".}
 proc fcQMediaPlayer_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QMediaPlayer_virtualbase_connectNotify".}
 proc fcQMediaPlayer_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QMediaPlayer_virtualbase_disconnectNotify".}
+proc fcQMediaPlayer_protectedbase_sender(self: pointer, ): pointer {.importc: "QMediaPlayer_protectedbase_sender".}
+proc fcQMediaPlayer_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QMediaPlayer_protectedbase_senderSignalIndex".}
+proc fcQMediaPlayer_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QMediaPlayer_protectedbase_receivers".}
+proc fcQMediaPlayer_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QMediaPlayer_protectedbase_isSignalConnected".}
 proc fcQMediaPlayer_new(vtbl: pointer, ): ptr cQMediaPlayer {.importc: "QMediaPlayer_new".}
 proc fcQMediaPlayer_new2(vtbl: pointer, parent: pointer): ptr cQMediaPlayer {.importc: "QMediaPlayer_new2".}
 proc fcQMediaPlayer_staticMetaObject(): pointer {.importc: "QMediaPlayer_staticMetaObject".}
@@ -839,6 +843,18 @@ proc miqt_exec_callback_cQMediaPlayer_disconnectNotify(vtbl: pointer, self: poin
   let self = QMediaPlayer(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
   vtbl[].disconnectNotify(self, slotval1)
+
+proc sender*(self: gen_qmediaplayer_types.QMediaPlayer, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQMediaPlayer_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qmediaplayer_types.QMediaPlayer, ): cint =
+  fcQMediaPlayer_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qmediaplayer_types.QMediaPlayer, signal: cstring): cint =
+  fcQMediaPlayer_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qmediaplayer_types.QMediaPlayer, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQMediaPlayer_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc create*(T: type gen_qmediaplayer_types.QMediaPlayer,
     vtbl: ref QMediaPlayerVTable = nil): gen_qmediaplayer_types.QMediaPlayer =

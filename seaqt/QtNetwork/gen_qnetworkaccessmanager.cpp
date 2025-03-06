@@ -242,11 +242,11 @@ public:
 	friend void QNetworkAccessManager_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
 
 	// Wrappers to allow calling protected methods:
-	friend struct miqt_array /* of struct miqt_string */  QNetworkAccessManager_protectedbase_supportedSchemesImplementation(bool* _dynamic_cast_ok, const void* self);
-	friend QObject* QNetworkAccessManager_protectedbase_sender(bool* _dynamic_cast_ok, const void* self);
-	friend int QNetworkAccessManager_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
-	friend int QNetworkAccessManager_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
-	friend bool QNetworkAccessManager_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+	friend struct miqt_array /* of struct miqt_string */  QNetworkAccessManager_protectedbase_supportedSchemesImplementation(const void* self);
+	friend QObject* QNetworkAccessManager_protectedbase_sender(const void* self);
+	friend int QNetworkAccessManager_protectedbase_senderSignalIndex(const void* self);
+	friend int QNetworkAccessManager_protectedbase_receivers(const void* self, const char* signal);
+	friend bool QNetworkAccessManager_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
 };
 
 QNetworkAccessManager* QNetworkAccessManager_new(struct QNetworkAccessManager_VTable* vtbl) {
@@ -735,14 +735,8 @@ void QNetworkAccessManager_virtualbase_disconnectNotify(void* self, QMetaMethod*
 }
 
 const QMetaObject* QNetworkAccessManager_staticMetaObject() { return &QNetworkAccessManager::staticMetaObject; }
-struct miqt_array /* of struct miqt_string */  QNetworkAccessManager_protectedbase_supportedSchemesImplementation(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQNetworkAccessManager* self_cast = dynamic_cast<VirtualQNetworkAccessManager*>( (QNetworkAccessManager*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return (struct miqt_array){};
-	}
-	
-	*_dynamic_cast_ok = true;
+struct miqt_array /* of struct miqt_string */  QNetworkAccessManager_protectedbase_supportedSchemesImplementation(const void* self) {
+	VirtualQNetworkAccessManager* self_cast = static_cast<VirtualQNetworkAccessManager*>( (QNetworkAccessManager*)(self) );
 	
 	QStringList _ret = self_cast->supportedSchemesImplementation();
 	// Convert QList<> from C++ memory to manually-managed C memory
@@ -764,53 +758,29 @@ struct miqt_array /* of struct miqt_string */  QNetworkAccessManager_protectedba
 
 }
 
-QObject* QNetworkAccessManager_protectedbase_sender(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQNetworkAccessManager* self_cast = dynamic_cast<VirtualQNetworkAccessManager*>( (QNetworkAccessManager*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return nullptr;
-	}
-	
-	*_dynamic_cast_ok = true;
+QObject* QNetworkAccessManager_protectedbase_sender(const void* self) {
+	VirtualQNetworkAccessManager* self_cast = static_cast<VirtualQNetworkAccessManager*>( (QNetworkAccessManager*)(self) );
 	
 	return self_cast->sender();
 
 }
 
-int QNetworkAccessManager_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQNetworkAccessManager* self_cast = dynamic_cast<VirtualQNetworkAccessManager*>( (QNetworkAccessManager*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return 0;
-	}
-	
-	*_dynamic_cast_ok = true;
+int QNetworkAccessManager_protectedbase_senderSignalIndex(const void* self) {
+	VirtualQNetworkAccessManager* self_cast = static_cast<VirtualQNetworkAccessManager*>( (QNetworkAccessManager*)(self) );
 	
 	return self_cast->senderSignalIndex();
 
 }
 
-int QNetworkAccessManager_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal) {
-	VirtualQNetworkAccessManager* self_cast = dynamic_cast<VirtualQNetworkAccessManager*>( (QNetworkAccessManager*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return 0;
-	}
-	
-	*_dynamic_cast_ok = true;
+int QNetworkAccessManager_protectedbase_receivers(const void* self, const char* signal) {
+	VirtualQNetworkAccessManager* self_cast = static_cast<VirtualQNetworkAccessManager*>( (QNetworkAccessManager*)(self) );
 	
 	return self_cast->receivers(signal);
 
 }
 
-bool QNetworkAccessManager_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal) {
-	VirtualQNetworkAccessManager* self_cast = dynamic_cast<VirtualQNetworkAccessManager*>( (QNetworkAccessManager*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return false;
-	}
-	
-	*_dynamic_cast_ok = true;
+bool QNetworkAccessManager_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal) {
+	VirtualQNetworkAccessManager* self_cast = static_cast<VirtualQNetworkAccessManager*>( (QNetworkAccessManager*)(self) );
 	
 	return self_cast->isSignalConnected(*signal);
 

@@ -53,6 +53,7 @@ import
   ../QtCore/gen_qcoreevent_types,
   ../QtCore/gen_qdatastream_types,
   ../QtCore/gen_qitemselectionmodel_types,
+  ../QtCore/gen_qmargins_types,
   ../QtCore/gen_qmetaobject_types,
   ../QtCore/gen_qmimedata_types,
   ../QtCore/gen_qobject_types,
@@ -78,6 +79,7 @@ export
   gen_qcoreevent_types,
   gen_qdatastream_types,
   gen_qitemselectionmodel_types,
+  gen_qmargins_types,
   gen_qmetaobject_types,
   gen_qmimedata_types,
   gen_qobject_types,
@@ -176,6 +178,7 @@ proc fcQTreeWidgetItem_virtualbase_setData(self: pointer, column: cint, role: ci
 proc fcQTreeWidgetItem_virtualbase_operatorLesser(self: pointer, other: pointer): bool {.importc: "QTreeWidgetItem_virtualbase_operatorLesser".}
 proc fcQTreeWidgetItem_virtualbase_read(self: pointer, inVal: pointer): void {.importc: "QTreeWidgetItem_virtualbase_read".}
 proc fcQTreeWidgetItem_virtualbase_write(self: pointer, outVal: pointer): void {.importc: "QTreeWidgetItem_virtualbase_write".}
+proc fcQTreeWidgetItem_protectedbase_emitDataChanged(self: pointer, ): void {.importc: "QTreeWidgetItem_protectedbase_emitDataChanged".}
 proc fcQTreeWidgetItem_new(vtbl: pointer, ): ptr cQTreeWidgetItem {.importc: "QTreeWidgetItem_new".}
 proc fcQTreeWidgetItem_new2(vtbl: pointer, strings: struct_miqt_array): ptr cQTreeWidgetItem {.importc: "QTreeWidgetItem_new2".}
 proc fcQTreeWidgetItem_new3(vtbl: pointer, treeview: pointer): ptr cQTreeWidgetItem {.importc: "QTreeWidgetItem_new3".}
@@ -470,6 +473,37 @@ proc fcQTreeWidget_virtualbase_childEvent(self: pointer, event: pointer): void {
 proc fcQTreeWidget_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QTreeWidget_virtualbase_customEvent".}
 proc fcQTreeWidget_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QTreeWidget_virtualbase_connectNotify".}
 proc fcQTreeWidget_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QTreeWidget_virtualbase_disconnectNotify".}
+proc fcQTreeWidget_protectedbase_columnResized(self: pointer, column: cint, oldSize: cint, newSize: cint): void {.importc: "QTreeWidget_protectedbase_columnResized".}
+proc fcQTreeWidget_protectedbase_columnCountChanged(self: pointer, oldCount: cint, newCount: cint): void {.importc: "QTreeWidget_protectedbase_columnCountChanged".}
+proc fcQTreeWidget_protectedbase_columnMoved(self: pointer, ): void {.importc: "QTreeWidget_protectedbase_columnMoved".}
+proc fcQTreeWidget_protectedbase_reexpand(self: pointer, ): void {.importc: "QTreeWidget_protectedbase_reexpand".}
+proc fcQTreeWidget_protectedbase_rowsRemoved(self: pointer, parent: pointer, first: cint, last: cint): void {.importc: "QTreeWidget_protectedbase_rowsRemoved".}
+proc fcQTreeWidget_protectedbase_drawTree(self: pointer, painter: pointer, region: pointer): void {.importc: "QTreeWidget_protectedbase_drawTree".}
+proc fcQTreeWidget_protectedbase_indexRowSizeHint(self: pointer, index: pointer): cint {.importc: "QTreeWidget_protectedbase_indexRowSizeHint".}
+proc fcQTreeWidget_protectedbase_rowHeight(self: pointer, index: pointer): cint {.importc: "QTreeWidget_protectedbase_rowHeight".}
+proc fcQTreeWidget_protectedbase_state(self: pointer, ): cint {.importc: "QTreeWidget_protectedbase_state".}
+proc fcQTreeWidget_protectedbase_setState(self: pointer, state: cint): void {.importc: "QTreeWidget_protectedbase_setState".}
+proc fcQTreeWidget_protectedbase_scheduleDelayedItemsLayout(self: pointer, ): void {.importc: "QTreeWidget_protectedbase_scheduleDelayedItemsLayout".}
+proc fcQTreeWidget_protectedbase_executeDelayedItemsLayout(self: pointer, ): void {.importc: "QTreeWidget_protectedbase_executeDelayedItemsLayout".}
+proc fcQTreeWidget_protectedbase_setDirtyRegion(self: pointer, region: pointer): void {.importc: "QTreeWidget_protectedbase_setDirtyRegion".}
+proc fcQTreeWidget_protectedbase_scrollDirtyRegion(self: pointer, dx: cint, dy: cint): void {.importc: "QTreeWidget_protectedbase_scrollDirtyRegion".}
+proc fcQTreeWidget_protectedbase_dirtyRegionOffset(self: pointer, ): pointer {.importc: "QTreeWidget_protectedbase_dirtyRegionOffset".}
+proc fcQTreeWidget_protectedbase_startAutoScroll(self: pointer, ): void {.importc: "QTreeWidget_protectedbase_startAutoScroll".}
+proc fcQTreeWidget_protectedbase_stopAutoScroll(self: pointer, ): void {.importc: "QTreeWidget_protectedbase_stopAutoScroll".}
+proc fcQTreeWidget_protectedbase_doAutoScroll(self: pointer, ): void {.importc: "QTreeWidget_protectedbase_doAutoScroll".}
+proc fcQTreeWidget_protectedbase_dropIndicatorPosition(self: pointer, ): cint {.importc: "QTreeWidget_protectedbase_dropIndicatorPosition".}
+proc fcQTreeWidget_protectedbase_setViewportMargins(self: pointer, left: cint, top: cint, right: cint, bottom: cint): void {.importc: "QTreeWidget_protectedbase_setViewportMargins".}
+proc fcQTreeWidget_protectedbase_viewportMargins(self: pointer, ): pointer {.importc: "QTreeWidget_protectedbase_viewportMargins".}
+proc fcQTreeWidget_protectedbase_drawFrame(self: pointer, param1: pointer): void {.importc: "QTreeWidget_protectedbase_drawFrame".}
+proc fcQTreeWidget_protectedbase_updateMicroFocus(self: pointer, ): void {.importc: "QTreeWidget_protectedbase_updateMicroFocus".}
+proc fcQTreeWidget_protectedbase_create(self: pointer, ): void {.importc: "QTreeWidget_protectedbase_create".}
+proc fcQTreeWidget_protectedbase_destroy(self: pointer, ): void {.importc: "QTreeWidget_protectedbase_destroy".}
+proc fcQTreeWidget_protectedbase_focusNextChild(self: pointer, ): bool {.importc: "QTreeWidget_protectedbase_focusNextChild".}
+proc fcQTreeWidget_protectedbase_focusPreviousChild(self: pointer, ): bool {.importc: "QTreeWidget_protectedbase_focusPreviousChild".}
+proc fcQTreeWidget_protectedbase_sender(self: pointer, ): pointer {.importc: "QTreeWidget_protectedbase_sender".}
+proc fcQTreeWidget_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QTreeWidget_protectedbase_senderSignalIndex".}
+proc fcQTreeWidget_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QTreeWidget_protectedbase_receivers".}
+proc fcQTreeWidget_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QTreeWidget_protectedbase_isSignalConnected".}
 proc fcQTreeWidget_new(vtbl: pointer, parent: pointer): ptr cQTreeWidget {.importc: "QTreeWidget_new".}
 proc fcQTreeWidget_new2(vtbl: pointer, ): ptr cQTreeWidget {.importc: "QTreeWidget_new2".}
 proc fcQTreeWidget_staticMetaObject(): pointer {.importc: "QTreeWidget_staticMetaObject".}
@@ -752,6 +786,9 @@ proc miqt_exec_callback_cQTreeWidgetItem_write(vtbl: pointer, self: pointer, out
   let self = QTreeWidgetItem(h: self)
   let slotval1 = gen_qdatastream_types.QDataStream(h: outVal)
   vtbl[].write(self, slotval1)
+
+proc emitDataChanged*(self: gen_qtreewidget_types.QTreeWidgetItem, ): void =
+  fcQTreeWidgetItem_protectedbase_emitDataChanged(self.h)
 
 proc create*(T: type gen_qtreewidget_types.QTreeWidgetItem,
     vtbl: ref QTreeWidgetItemVTable = nil): gen_qtreewidget_types.QTreeWidgetItem =
@@ -2748,6 +2785,99 @@ proc miqt_exec_callback_cQTreeWidget_disconnectNotify(vtbl: pointer, self: point
   let self = QTreeWidget(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
   vtbl[].disconnectNotify(self, slotval1)
+
+proc columnResized*(self: gen_qtreewidget_types.QTreeWidget, column: cint, oldSize: cint, newSize: cint): void =
+  fcQTreeWidget_protectedbase_columnResized(self.h, column, oldSize, newSize)
+
+proc columnCountChanged*(self: gen_qtreewidget_types.QTreeWidget, oldCount: cint, newCount: cint): void =
+  fcQTreeWidget_protectedbase_columnCountChanged(self.h, oldCount, newCount)
+
+proc columnMoved*(self: gen_qtreewidget_types.QTreeWidget, ): void =
+  fcQTreeWidget_protectedbase_columnMoved(self.h)
+
+proc reexpand*(self: gen_qtreewidget_types.QTreeWidget, ): void =
+  fcQTreeWidget_protectedbase_reexpand(self.h)
+
+proc rowsRemoved*(self: gen_qtreewidget_types.QTreeWidget, parent: gen_qabstractitemmodel_types.QModelIndex, first: cint, last: cint): void =
+  fcQTreeWidget_protectedbase_rowsRemoved(self.h, parent.h, first, last)
+
+proc drawTree*(self: gen_qtreewidget_types.QTreeWidget, painter: gen_qpainter_types.QPainter, region: gen_qregion_types.QRegion): void =
+  fcQTreeWidget_protectedbase_drawTree(self.h, painter.h, region.h)
+
+proc indexRowSizeHint*(self: gen_qtreewidget_types.QTreeWidget, index: gen_qabstractitemmodel_types.QModelIndex): cint =
+  fcQTreeWidget_protectedbase_indexRowSizeHint(self.h, index.h)
+
+proc rowHeight*(self: gen_qtreewidget_types.QTreeWidget, index: gen_qabstractitemmodel_types.QModelIndex): cint =
+  fcQTreeWidget_protectedbase_rowHeight(self.h, index.h)
+
+proc state*(self: gen_qtreewidget_types.QTreeWidget, ): cint =
+  cint(fcQTreeWidget_protectedbase_state(self.h))
+
+proc setState*(self: gen_qtreewidget_types.QTreeWidget, state: cint): void =
+  fcQTreeWidget_protectedbase_setState(self.h, cint(state))
+
+proc scheduleDelayedItemsLayout*(self: gen_qtreewidget_types.QTreeWidget, ): void =
+  fcQTreeWidget_protectedbase_scheduleDelayedItemsLayout(self.h)
+
+proc executeDelayedItemsLayout*(self: gen_qtreewidget_types.QTreeWidget, ): void =
+  fcQTreeWidget_protectedbase_executeDelayedItemsLayout(self.h)
+
+proc setDirtyRegion*(self: gen_qtreewidget_types.QTreeWidget, region: gen_qregion_types.QRegion): void =
+  fcQTreeWidget_protectedbase_setDirtyRegion(self.h, region.h)
+
+proc scrollDirtyRegion*(self: gen_qtreewidget_types.QTreeWidget, dx: cint, dy: cint): void =
+  fcQTreeWidget_protectedbase_scrollDirtyRegion(self.h, dx, dy)
+
+proc dirtyRegionOffset*(self: gen_qtreewidget_types.QTreeWidget, ): gen_qpoint_types.QPoint =
+  gen_qpoint_types.QPoint(h: fcQTreeWidget_protectedbase_dirtyRegionOffset(self.h))
+
+proc startAutoScroll*(self: gen_qtreewidget_types.QTreeWidget, ): void =
+  fcQTreeWidget_protectedbase_startAutoScroll(self.h)
+
+proc stopAutoScroll*(self: gen_qtreewidget_types.QTreeWidget, ): void =
+  fcQTreeWidget_protectedbase_stopAutoScroll(self.h)
+
+proc doAutoScroll*(self: gen_qtreewidget_types.QTreeWidget, ): void =
+  fcQTreeWidget_protectedbase_doAutoScroll(self.h)
+
+proc dropIndicatorPosition*(self: gen_qtreewidget_types.QTreeWidget, ): cint =
+  cint(fcQTreeWidget_protectedbase_dropIndicatorPosition(self.h))
+
+proc setViewportMargins*(self: gen_qtreewidget_types.QTreeWidget, left: cint, top: cint, right: cint, bottom: cint): void =
+  fcQTreeWidget_protectedbase_setViewportMargins(self.h, left, top, right, bottom)
+
+proc viewportMargins*(self: gen_qtreewidget_types.QTreeWidget, ): gen_qmargins_types.QMargins =
+  gen_qmargins_types.QMargins(h: fcQTreeWidget_protectedbase_viewportMargins(self.h))
+
+proc drawFrame*(self: gen_qtreewidget_types.QTreeWidget, param1: gen_qpainter_types.QPainter): void =
+  fcQTreeWidget_protectedbase_drawFrame(self.h, param1.h)
+
+proc updateMicroFocus*(self: gen_qtreewidget_types.QTreeWidget, ): void =
+  fcQTreeWidget_protectedbase_updateMicroFocus(self.h)
+
+proc create*(self: gen_qtreewidget_types.QTreeWidget, ): void =
+  fcQTreeWidget_protectedbase_create(self.h)
+
+proc destroy*(self: gen_qtreewidget_types.QTreeWidget, ): void =
+  fcQTreeWidget_protectedbase_destroy(self.h)
+
+proc focusNextChild*(self: gen_qtreewidget_types.QTreeWidget, ): bool =
+  fcQTreeWidget_protectedbase_focusNextChild(self.h)
+
+proc focusPreviousChild*(self: gen_qtreewidget_types.QTreeWidget, ): bool =
+  fcQTreeWidget_protectedbase_focusPreviousChild(self.h)
+
+proc sender*(self: gen_qtreewidget_types.QTreeWidget, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQTreeWidget_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qtreewidget_types.QTreeWidget, ): cint =
+  fcQTreeWidget_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qtreewidget_types.QTreeWidget, signal: cstring): cint =
+  fcQTreeWidget_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qtreewidget_types.QTreeWidget, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQTreeWidget_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc create*(T: type gen_qtreewidget_types.QTreeWidget,
     parent: gen_qwidget_types.QWidget,

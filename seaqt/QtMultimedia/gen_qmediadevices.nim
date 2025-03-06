@@ -94,6 +94,10 @@ proc fcQMediaDevices_virtualbase_childEvent(self: pointer, event: pointer): void
 proc fcQMediaDevices_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QMediaDevices_virtualbase_customEvent".}
 proc fcQMediaDevices_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QMediaDevices_virtualbase_connectNotify".}
 proc fcQMediaDevices_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QMediaDevices_virtualbase_disconnectNotify".}
+proc fcQMediaDevices_protectedbase_sender(self: pointer, ): pointer {.importc: "QMediaDevices_protectedbase_sender".}
+proc fcQMediaDevices_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QMediaDevices_protectedbase_senderSignalIndex".}
+proc fcQMediaDevices_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QMediaDevices_protectedbase_receivers".}
+proc fcQMediaDevices_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QMediaDevices_protectedbase_isSignalConnected".}
 proc fcQMediaDevices_new(vtbl: pointer, ): ptr cQMediaDevices {.importc: "QMediaDevices_new".}
 proc fcQMediaDevices_new2(vtbl: pointer, parent: pointer): ptr cQMediaDevices {.importc: "QMediaDevices_new2".}
 proc fcQMediaDevices_staticMetaObject(): pointer {.importc: "QMediaDevices_staticMetaObject".}
@@ -331,6 +335,18 @@ proc miqt_exec_callback_cQMediaDevices_disconnectNotify(vtbl: pointer, self: poi
   let self = QMediaDevices(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
   vtbl[].disconnectNotify(self, slotval1)
+
+proc sender*(self: gen_qmediadevices_types.QMediaDevices, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQMediaDevices_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qmediadevices_types.QMediaDevices, ): cint =
+  fcQMediaDevices_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qmediadevices_types.QMediaDevices, signal: cstring): cint =
+  fcQMediaDevices_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qmediadevices_types.QMediaDevices, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQMediaDevices_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc create*(T: type gen_qmediadevices_types.QMediaDevices,
     vtbl: ref QMediaDevicesVTable = nil): gen_qmediadevices_types.QMediaDevices =

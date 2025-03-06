@@ -175,6 +175,10 @@ proc fcQProxyStyle_virtualbase_childEvent(self: pointer, event: pointer): void {
 proc fcQProxyStyle_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QProxyStyle_virtualbase_customEvent".}
 proc fcQProxyStyle_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QProxyStyle_virtualbase_connectNotify".}
 proc fcQProxyStyle_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QProxyStyle_virtualbase_disconnectNotify".}
+proc fcQProxyStyle_protectedbase_sender(self: pointer, ): pointer {.importc: "QProxyStyle_protectedbase_sender".}
+proc fcQProxyStyle_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QProxyStyle_protectedbase_senderSignalIndex".}
+proc fcQProxyStyle_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QProxyStyle_protectedbase_receivers".}
+proc fcQProxyStyle_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QProxyStyle_protectedbase_isSignalConnected".}
 proc fcQProxyStyle_new(vtbl: pointer, ): ptr cQProxyStyle {.importc: "QProxyStyle_new".}
 proc fcQProxyStyle_new2(vtbl: pointer, key: struct_miqt_string): ptr cQProxyStyle {.importc: "QProxyStyle_new2".}
 proc fcQProxyStyle_new3(vtbl: pointer, style: pointer): ptr cQProxyStyle {.importc: "QProxyStyle_new3".}
@@ -722,6 +726,18 @@ proc miqt_exec_callback_cQProxyStyle_disconnectNotify(vtbl: pointer, self: point
   let self = QProxyStyle(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
   vtbl[].disconnectNotify(self, slotval1)
+
+proc sender*(self: gen_qproxystyle_types.QProxyStyle, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQProxyStyle_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qproxystyle_types.QProxyStyle, ): cint =
+  fcQProxyStyle_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qproxystyle_types.QProxyStyle, signal: cstring): cint =
+  fcQProxyStyle_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qproxystyle_types.QProxyStyle, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQProxyStyle_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc create*(T: type gen_qproxystyle_types.QProxyStyle,
     vtbl: ref QProxyStyleVTable = nil): gen_qproxystyle_types.QProxyStyle =

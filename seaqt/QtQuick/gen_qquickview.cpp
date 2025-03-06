@@ -583,11 +583,11 @@ public:
 	friend void QQuickView_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
 
 	// Wrappers to allow calling protected methods:
-	friend void* QQuickView_protectedbase_resolveInterface(bool* _dynamic_cast_ok, const void* self, const char* name, int revision);
-	friend QObject* QQuickView_protectedbase_sender(bool* _dynamic_cast_ok, const void* self);
-	friend int QQuickView_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
-	friend int QQuickView_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
-	friend bool QQuickView_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+	friend void* QQuickView_protectedbase_resolveInterface(const void* self, const char* name, int revision);
+	friend QObject* QQuickView_protectedbase_sender(const void* self);
+	friend int QQuickView_protectedbase_senderSignalIndex(const void* self);
+	friend int QQuickView_protectedbase_receivers(const void* self, const char* signal);
+	friend bool QQuickView_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
 };
 
 QQuickView* QQuickView_new(struct QQuickView_VTable* vtbl) {
@@ -957,66 +957,36 @@ void QQuickView_virtualbase_disconnectNotify(void* self, QMetaMethod* signal) {
 }
 
 const QMetaObject* QQuickView_staticMetaObject() { return &QQuickView::staticMetaObject; }
-void* QQuickView_protectedbase_resolveInterface(bool* _dynamic_cast_ok, const void* self, const char* name, int revision) {
-	VirtualQQuickView* self_cast = dynamic_cast<VirtualQQuickView*>( (QQuickView*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return nullptr;
-	}
-	
-	*_dynamic_cast_ok = true;
+void* QQuickView_protectedbase_resolveInterface(const void* self, const char* name, int revision) {
+	VirtualQQuickView* self_cast = static_cast<VirtualQQuickView*>( (QQuickView*)(self) );
 	
 	return self_cast->resolveInterface(name, static_cast<int>(revision));
 
 }
 
-QObject* QQuickView_protectedbase_sender(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQQuickView* self_cast = dynamic_cast<VirtualQQuickView*>( (QQuickView*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return nullptr;
-	}
-	
-	*_dynamic_cast_ok = true;
+QObject* QQuickView_protectedbase_sender(const void* self) {
+	VirtualQQuickView* self_cast = static_cast<VirtualQQuickView*>( (QQuickView*)(self) );
 	
 	return self_cast->sender();
 
 }
 
-int QQuickView_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQQuickView* self_cast = dynamic_cast<VirtualQQuickView*>( (QQuickView*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return 0;
-	}
-	
-	*_dynamic_cast_ok = true;
+int QQuickView_protectedbase_senderSignalIndex(const void* self) {
+	VirtualQQuickView* self_cast = static_cast<VirtualQQuickView*>( (QQuickView*)(self) );
 	
 	return self_cast->senderSignalIndex();
 
 }
 
-int QQuickView_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal) {
-	VirtualQQuickView* self_cast = dynamic_cast<VirtualQQuickView*>( (QQuickView*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return 0;
-	}
-	
-	*_dynamic_cast_ok = true;
+int QQuickView_protectedbase_receivers(const void* self, const char* signal) {
+	VirtualQQuickView* self_cast = static_cast<VirtualQQuickView*>( (QQuickView*)(self) );
 	
 	return self_cast->receivers(signal);
 
 }
 
-bool QQuickView_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal) {
-	VirtualQQuickView* self_cast = dynamic_cast<VirtualQQuickView*>( (QQuickView*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return false;
-	}
-	
-	*_dynamic_cast_ok = true;
+bool QQuickView_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal) {
+	VirtualQQuickView* self_cast = static_cast<VirtualQQuickView*>( (QQuickView*)(self) );
 	
 	return self_cast->isSignalConnected(*signal);
 

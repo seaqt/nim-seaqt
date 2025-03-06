@@ -65,7 +65,8 @@ import
   ../QtCore/gen_qrect_types,
   ../QtGui/gen_qbrush_types,
   ../QtGui/gen_qcolor_types,
-  ../QtGui/gen_qpainter_types
+  ../QtGui/gen_qpainter_types,
+  ../QtGui/gen_qpixmap_types
 export
   gen_qcoreevent_types,
   gen_qmetaobject_types,
@@ -75,7 +76,8 @@ export
   gen_qrect_types,
   gen_qbrush_types,
   gen_qcolor_types,
-  gen_qpainter_types
+  gen_qpainter_types,
+  gen_qpixmap_types
 
 type cQGraphicsEffect*{.exportc: "QGraphicsEffect", incompleteStruct.} = object
 type cQGraphicsColorizeEffect*{.exportc: "QGraphicsColorizeEffect", incompleteStruct.} = object
@@ -123,6 +125,19 @@ proc fcQGraphicsEffect_virtualbase_childEvent(self: pointer, event: pointer): vo
 proc fcQGraphicsEffect_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QGraphicsEffect_virtualbase_customEvent".}
 proc fcQGraphicsEffect_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QGraphicsEffect_virtualbase_connectNotify".}
 proc fcQGraphicsEffect_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QGraphicsEffect_virtualbase_disconnectNotify".}
+proc fcQGraphicsEffect_protectedbase_updateBoundingRect(self: pointer, ): void {.importc: "QGraphicsEffect_protectedbase_updateBoundingRect".}
+proc fcQGraphicsEffect_protectedbase_sourceIsPixmap(self: pointer, ): bool {.importc: "QGraphicsEffect_protectedbase_sourceIsPixmap".}
+proc fcQGraphicsEffect_protectedbase_sourceBoundingRect(self: pointer, ): pointer {.importc: "QGraphicsEffect_protectedbase_sourceBoundingRect".}
+proc fcQGraphicsEffect_protectedbase_drawSource(self: pointer, painter: pointer): void {.importc: "QGraphicsEffect_protectedbase_drawSource".}
+proc fcQGraphicsEffect_protectedbase_sourcePixmap(self: pointer, ): pointer {.importc: "QGraphicsEffect_protectedbase_sourcePixmap".}
+proc fcQGraphicsEffect_protectedbase_sourceBoundingRect1(self: pointer, system: cint): pointer {.importc: "QGraphicsEffect_protectedbase_sourceBoundingRect1".}
+proc fcQGraphicsEffect_protectedbase_sourcePixmap1(self: pointer, system: cint): pointer {.importc: "QGraphicsEffect_protectedbase_sourcePixmap1".}
+proc fcQGraphicsEffect_protectedbase_sourcePixmap2(self: pointer, system: cint, offset: pointer): pointer {.importc: "QGraphicsEffect_protectedbase_sourcePixmap2".}
+proc fcQGraphicsEffect_protectedbase_sourcePixmap3(self: pointer, system: cint, offset: pointer, mode: cint): pointer {.importc: "QGraphicsEffect_protectedbase_sourcePixmap3".}
+proc fcQGraphicsEffect_protectedbase_sender(self: pointer, ): pointer {.importc: "QGraphicsEffect_protectedbase_sender".}
+proc fcQGraphicsEffect_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QGraphicsEffect_protectedbase_senderSignalIndex".}
+proc fcQGraphicsEffect_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QGraphicsEffect_protectedbase_receivers".}
+proc fcQGraphicsEffect_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QGraphicsEffect_protectedbase_isSignalConnected".}
 proc fcQGraphicsEffect_new(vtbl: pointer, ): ptr cQGraphicsEffect {.importc: "QGraphicsEffect_new".}
 proc fcQGraphicsEffect_new2(vtbl: pointer, parent: pointer): ptr cQGraphicsEffect {.importc: "QGraphicsEffect_new2".}
 proc fcQGraphicsEffect_staticMetaObject(): pointer {.importc: "QGraphicsEffect_staticMetaObject".}
@@ -169,6 +184,15 @@ proc fcQGraphicsColorizeEffect_virtualbase_childEvent(self: pointer, event: poin
 proc fcQGraphicsColorizeEffect_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QGraphicsColorizeEffect_virtualbase_customEvent".}
 proc fcQGraphicsColorizeEffect_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QGraphicsColorizeEffect_virtualbase_connectNotify".}
 proc fcQGraphicsColorizeEffect_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QGraphicsColorizeEffect_virtualbase_disconnectNotify".}
+proc fcQGraphicsColorizeEffect_protectedbase_updateBoundingRect(self: pointer, ): void {.importc: "QGraphicsColorizeEffect_protectedbase_updateBoundingRect".}
+proc fcQGraphicsColorizeEffect_protectedbase_sourceIsPixmap(self: pointer, ): bool {.importc: "QGraphicsColorizeEffect_protectedbase_sourceIsPixmap".}
+proc fcQGraphicsColorizeEffect_protectedbase_sourceBoundingRect(self: pointer, ): pointer {.importc: "QGraphicsColorizeEffect_protectedbase_sourceBoundingRect".}
+proc fcQGraphicsColorizeEffect_protectedbase_drawSource(self: pointer, painter: pointer): void {.importc: "QGraphicsColorizeEffect_protectedbase_drawSource".}
+proc fcQGraphicsColorizeEffect_protectedbase_sourcePixmap(self: pointer, ): pointer {.importc: "QGraphicsColorizeEffect_protectedbase_sourcePixmap".}
+proc fcQGraphicsColorizeEffect_protectedbase_sender(self: pointer, ): pointer {.importc: "QGraphicsColorizeEffect_protectedbase_sender".}
+proc fcQGraphicsColorizeEffect_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QGraphicsColorizeEffect_protectedbase_senderSignalIndex".}
+proc fcQGraphicsColorizeEffect_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QGraphicsColorizeEffect_protectedbase_receivers".}
+proc fcQGraphicsColorizeEffect_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QGraphicsColorizeEffect_protectedbase_isSignalConnected".}
 proc fcQGraphicsColorizeEffect_new(vtbl: pointer, ): ptr cQGraphicsColorizeEffect {.importc: "QGraphicsColorizeEffect_new".}
 proc fcQGraphicsColorizeEffect_new2(vtbl: pointer, parent: pointer): ptr cQGraphicsColorizeEffect {.importc: "QGraphicsColorizeEffect_new2".}
 proc fcQGraphicsColorizeEffect_staticMetaObject(): pointer {.importc: "QGraphicsColorizeEffect_staticMetaObject".}
@@ -216,6 +240,15 @@ proc fcQGraphicsBlurEffect_virtualbase_childEvent(self: pointer, event: pointer)
 proc fcQGraphicsBlurEffect_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QGraphicsBlurEffect_virtualbase_customEvent".}
 proc fcQGraphicsBlurEffect_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QGraphicsBlurEffect_virtualbase_connectNotify".}
 proc fcQGraphicsBlurEffect_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QGraphicsBlurEffect_virtualbase_disconnectNotify".}
+proc fcQGraphicsBlurEffect_protectedbase_updateBoundingRect(self: pointer, ): void {.importc: "QGraphicsBlurEffect_protectedbase_updateBoundingRect".}
+proc fcQGraphicsBlurEffect_protectedbase_sourceIsPixmap(self: pointer, ): bool {.importc: "QGraphicsBlurEffect_protectedbase_sourceIsPixmap".}
+proc fcQGraphicsBlurEffect_protectedbase_sourceBoundingRect(self: pointer, ): pointer {.importc: "QGraphicsBlurEffect_protectedbase_sourceBoundingRect".}
+proc fcQGraphicsBlurEffect_protectedbase_drawSource(self: pointer, painter: pointer): void {.importc: "QGraphicsBlurEffect_protectedbase_drawSource".}
+proc fcQGraphicsBlurEffect_protectedbase_sourcePixmap(self: pointer, ): pointer {.importc: "QGraphicsBlurEffect_protectedbase_sourcePixmap".}
+proc fcQGraphicsBlurEffect_protectedbase_sender(self: pointer, ): pointer {.importc: "QGraphicsBlurEffect_protectedbase_sender".}
+proc fcQGraphicsBlurEffect_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QGraphicsBlurEffect_protectedbase_senderSignalIndex".}
+proc fcQGraphicsBlurEffect_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QGraphicsBlurEffect_protectedbase_receivers".}
+proc fcQGraphicsBlurEffect_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QGraphicsBlurEffect_protectedbase_isSignalConnected".}
 proc fcQGraphicsBlurEffect_new(vtbl: pointer, ): ptr cQGraphicsBlurEffect {.importc: "QGraphicsBlurEffect_new".}
 proc fcQGraphicsBlurEffect_new2(vtbl: pointer, parent: pointer): ptr cQGraphicsBlurEffect {.importc: "QGraphicsBlurEffect_new2".}
 proc fcQGraphicsBlurEffect_staticMetaObject(): pointer {.importc: "QGraphicsBlurEffect_staticMetaObject".}
@@ -273,6 +306,15 @@ proc fcQGraphicsDropShadowEffect_virtualbase_childEvent(self: pointer, event: po
 proc fcQGraphicsDropShadowEffect_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QGraphicsDropShadowEffect_virtualbase_customEvent".}
 proc fcQGraphicsDropShadowEffect_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QGraphicsDropShadowEffect_virtualbase_connectNotify".}
 proc fcQGraphicsDropShadowEffect_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QGraphicsDropShadowEffect_virtualbase_disconnectNotify".}
+proc fcQGraphicsDropShadowEffect_protectedbase_updateBoundingRect(self: pointer, ): void {.importc: "QGraphicsDropShadowEffect_protectedbase_updateBoundingRect".}
+proc fcQGraphicsDropShadowEffect_protectedbase_sourceIsPixmap(self: pointer, ): bool {.importc: "QGraphicsDropShadowEffect_protectedbase_sourceIsPixmap".}
+proc fcQGraphicsDropShadowEffect_protectedbase_sourceBoundingRect(self: pointer, ): pointer {.importc: "QGraphicsDropShadowEffect_protectedbase_sourceBoundingRect".}
+proc fcQGraphicsDropShadowEffect_protectedbase_drawSource(self: pointer, painter: pointer): void {.importc: "QGraphicsDropShadowEffect_protectedbase_drawSource".}
+proc fcQGraphicsDropShadowEffect_protectedbase_sourcePixmap(self: pointer, ): pointer {.importc: "QGraphicsDropShadowEffect_protectedbase_sourcePixmap".}
+proc fcQGraphicsDropShadowEffect_protectedbase_sender(self: pointer, ): pointer {.importc: "QGraphicsDropShadowEffect_protectedbase_sender".}
+proc fcQGraphicsDropShadowEffect_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QGraphicsDropShadowEffect_protectedbase_senderSignalIndex".}
+proc fcQGraphicsDropShadowEffect_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QGraphicsDropShadowEffect_protectedbase_receivers".}
+proc fcQGraphicsDropShadowEffect_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QGraphicsDropShadowEffect_protectedbase_isSignalConnected".}
 proc fcQGraphicsDropShadowEffect_new(vtbl: pointer, ): ptr cQGraphicsDropShadowEffect {.importc: "QGraphicsDropShadowEffect_new".}
 proc fcQGraphicsDropShadowEffect_new2(vtbl: pointer, parent: pointer): ptr cQGraphicsDropShadowEffect {.importc: "QGraphicsDropShadowEffect_new2".}
 proc fcQGraphicsDropShadowEffect_staticMetaObject(): pointer {.importc: "QGraphicsDropShadowEffect_staticMetaObject".}
@@ -319,6 +361,15 @@ proc fcQGraphicsOpacityEffect_virtualbase_childEvent(self: pointer, event: point
 proc fcQGraphicsOpacityEffect_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QGraphicsOpacityEffect_virtualbase_customEvent".}
 proc fcQGraphicsOpacityEffect_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QGraphicsOpacityEffect_virtualbase_connectNotify".}
 proc fcQGraphicsOpacityEffect_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QGraphicsOpacityEffect_virtualbase_disconnectNotify".}
+proc fcQGraphicsOpacityEffect_protectedbase_updateBoundingRect(self: pointer, ): void {.importc: "QGraphicsOpacityEffect_protectedbase_updateBoundingRect".}
+proc fcQGraphicsOpacityEffect_protectedbase_sourceIsPixmap(self: pointer, ): bool {.importc: "QGraphicsOpacityEffect_protectedbase_sourceIsPixmap".}
+proc fcQGraphicsOpacityEffect_protectedbase_sourceBoundingRect(self: pointer, ): pointer {.importc: "QGraphicsOpacityEffect_protectedbase_sourceBoundingRect".}
+proc fcQGraphicsOpacityEffect_protectedbase_drawSource(self: pointer, painter: pointer): void {.importc: "QGraphicsOpacityEffect_protectedbase_drawSource".}
+proc fcQGraphicsOpacityEffect_protectedbase_sourcePixmap(self: pointer, ): pointer {.importc: "QGraphicsOpacityEffect_protectedbase_sourcePixmap".}
+proc fcQGraphicsOpacityEffect_protectedbase_sender(self: pointer, ): pointer {.importc: "QGraphicsOpacityEffect_protectedbase_sender".}
+proc fcQGraphicsOpacityEffect_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QGraphicsOpacityEffect_protectedbase_senderSignalIndex".}
+proc fcQGraphicsOpacityEffect_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QGraphicsOpacityEffect_protectedbase_receivers".}
+proc fcQGraphicsOpacityEffect_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QGraphicsOpacityEffect_protectedbase_isSignalConnected".}
 proc fcQGraphicsOpacityEffect_new(vtbl: pointer, ): ptr cQGraphicsOpacityEffect {.importc: "QGraphicsOpacityEffect_new".}
 proc fcQGraphicsOpacityEffect_new2(vtbl: pointer, parent: pointer): ptr cQGraphicsOpacityEffect {.importc: "QGraphicsOpacityEffect_new2".}
 proc fcQGraphicsOpacityEffect_staticMetaObject(): pointer {.importc: "QGraphicsOpacityEffect_staticMetaObject".}
@@ -535,6 +586,45 @@ proc miqt_exec_callback_cQGraphicsEffect_disconnectNotify(vtbl: pointer, self: p
   let self = QGraphicsEffect(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
   vtbl[].disconnectNotify(self, slotval1)
+
+proc updateBoundingRect*(self: gen_qgraphicseffect_types.QGraphicsEffect, ): void =
+  fcQGraphicsEffect_protectedbase_updateBoundingRect(self.h)
+
+proc sourceIsPixmap*(self: gen_qgraphicseffect_types.QGraphicsEffect, ): bool =
+  fcQGraphicsEffect_protectedbase_sourceIsPixmap(self.h)
+
+proc sourceBoundingRect*(self: gen_qgraphicseffect_types.QGraphicsEffect, ): gen_qrect_types.QRectF =
+  gen_qrect_types.QRectF(h: fcQGraphicsEffect_protectedbase_sourceBoundingRect(self.h))
+
+proc drawSource*(self: gen_qgraphicseffect_types.QGraphicsEffect, painter: gen_qpainter_types.QPainter): void =
+  fcQGraphicsEffect_protectedbase_drawSource(self.h, painter.h)
+
+proc sourcePixmap*(self: gen_qgraphicseffect_types.QGraphicsEffect, ): gen_qpixmap_types.QPixmap =
+  gen_qpixmap_types.QPixmap(h: fcQGraphicsEffect_protectedbase_sourcePixmap(self.h))
+
+proc sourceBoundingRect*(self: gen_qgraphicseffect_types.QGraphicsEffect, system: cint): gen_qrect_types.QRectF =
+  gen_qrect_types.QRectF(h: fcQGraphicsEffect_protectedbase_sourceBoundingRect1(self.h, cint(system)))
+
+proc sourcePixmap*(self: gen_qgraphicseffect_types.QGraphicsEffect, system: cint): gen_qpixmap_types.QPixmap =
+  gen_qpixmap_types.QPixmap(h: fcQGraphicsEffect_protectedbase_sourcePixmap1(self.h, cint(system)))
+
+proc sourcePixmap*(self: gen_qgraphicseffect_types.QGraphicsEffect, system: cint, offset: gen_qpoint_types.QPoint): gen_qpixmap_types.QPixmap =
+  gen_qpixmap_types.QPixmap(h: fcQGraphicsEffect_protectedbase_sourcePixmap2(self.h, cint(system), offset.h))
+
+proc sourcePixmap*(self: gen_qgraphicseffect_types.QGraphicsEffect, system: cint, offset: gen_qpoint_types.QPoint, mode: cint): gen_qpixmap_types.QPixmap =
+  gen_qpixmap_types.QPixmap(h: fcQGraphicsEffect_protectedbase_sourcePixmap3(self.h, cint(system), offset.h, cint(mode)))
+
+proc sender*(self: gen_qgraphicseffect_types.QGraphicsEffect, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQGraphicsEffect_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qgraphicseffect_types.QGraphicsEffect, ): cint =
+  fcQGraphicsEffect_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qgraphicseffect_types.QGraphicsEffect, signal: cstring): cint =
+  fcQGraphicsEffect_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qgraphicseffect_types.QGraphicsEffect, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQGraphicsEffect_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc create*(T: type gen_qgraphicseffect_types.QGraphicsEffect,
     vtbl: ref QGraphicsEffectVTable = nil): gen_qgraphicseffect_types.QGraphicsEffect =
@@ -842,6 +932,33 @@ proc miqt_exec_callback_cQGraphicsColorizeEffect_disconnectNotify(vtbl: pointer,
   let self = QGraphicsColorizeEffect(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
   vtbl[].disconnectNotify(self, slotval1)
+
+proc updateBoundingRect*(self: gen_qgraphicseffect_types.QGraphicsColorizeEffect, ): void =
+  fcQGraphicsColorizeEffect_protectedbase_updateBoundingRect(self.h)
+
+proc sourceIsPixmap*(self: gen_qgraphicseffect_types.QGraphicsColorizeEffect, ): bool =
+  fcQGraphicsColorizeEffect_protectedbase_sourceIsPixmap(self.h)
+
+proc sourceBoundingRect*(self: gen_qgraphicseffect_types.QGraphicsColorizeEffect, ): gen_qrect_types.QRectF =
+  gen_qrect_types.QRectF(h: fcQGraphicsColorizeEffect_protectedbase_sourceBoundingRect(self.h))
+
+proc drawSource*(self: gen_qgraphicseffect_types.QGraphicsColorizeEffect, painter: gen_qpainter_types.QPainter): void =
+  fcQGraphicsColorizeEffect_protectedbase_drawSource(self.h, painter.h)
+
+proc sourcePixmap*(self: gen_qgraphicseffect_types.QGraphicsColorizeEffect, ): gen_qpixmap_types.QPixmap =
+  gen_qpixmap_types.QPixmap(h: fcQGraphicsColorizeEffect_protectedbase_sourcePixmap(self.h))
+
+proc sender*(self: gen_qgraphicseffect_types.QGraphicsColorizeEffect, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQGraphicsColorizeEffect_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qgraphicseffect_types.QGraphicsColorizeEffect, ): cint =
+  fcQGraphicsColorizeEffect_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qgraphicseffect_types.QGraphicsColorizeEffect, signal: cstring): cint =
+  fcQGraphicsColorizeEffect_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qgraphicseffect_types.QGraphicsColorizeEffect, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQGraphicsColorizeEffect_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc create*(T: type gen_qgraphicseffect_types.QGraphicsColorizeEffect,
     vtbl: ref QGraphicsColorizeEffectVTable = nil): gen_qgraphicseffect_types.QGraphicsColorizeEffect =
@@ -1152,6 +1269,33 @@ proc miqt_exec_callback_cQGraphicsBlurEffect_disconnectNotify(vtbl: pointer, sel
   let self = QGraphicsBlurEffect(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
   vtbl[].disconnectNotify(self, slotval1)
+
+proc updateBoundingRect*(self: gen_qgraphicseffect_types.QGraphicsBlurEffect, ): void =
+  fcQGraphicsBlurEffect_protectedbase_updateBoundingRect(self.h)
+
+proc sourceIsPixmap*(self: gen_qgraphicseffect_types.QGraphicsBlurEffect, ): bool =
+  fcQGraphicsBlurEffect_protectedbase_sourceIsPixmap(self.h)
+
+proc sourceBoundingRect*(self: gen_qgraphicseffect_types.QGraphicsBlurEffect, ): gen_qrect_types.QRectF =
+  gen_qrect_types.QRectF(h: fcQGraphicsBlurEffect_protectedbase_sourceBoundingRect(self.h))
+
+proc drawSource*(self: gen_qgraphicseffect_types.QGraphicsBlurEffect, painter: gen_qpainter_types.QPainter): void =
+  fcQGraphicsBlurEffect_protectedbase_drawSource(self.h, painter.h)
+
+proc sourcePixmap*(self: gen_qgraphicseffect_types.QGraphicsBlurEffect, ): gen_qpixmap_types.QPixmap =
+  gen_qpixmap_types.QPixmap(h: fcQGraphicsBlurEffect_protectedbase_sourcePixmap(self.h))
+
+proc sender*(self: gen_qgraphicseffect_types.QGraphicsBlurEffect, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQGraphicsBlurEffect_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qgraphicseffect_types.QGraphicsBlurEffect, ): cint =
+  fcQGraphicsBlurEffect_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qgraphicseffect_types.QGraphicsBlurEffect, signal: cstring): cint =
+  fcQGraphicsBlurEffect_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qgraphicseffect_types.QGraphicsBlurEffect, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQGraphicsBlurEffect_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc create*(T: type gen_qgraphicseffect_types.QGraphicsBlurEffect,
     vtbl: ref QGraphicsBlurEffectVTable = nil): gen_qgraphicseffect_types.QGraphicsBlurEffect =
@@ -1507,6 +1651,33 @@ proc miqt_exec_callback_cQGraphicsDropShadowEffect_disconnectNotify(vtbl: pointe
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
   vtbl[].disconnectNotify(self, slotval1)
 
+proc updateBoundingRect*(self: gen_qgraphicseffect_types.QGraphicsDropShadowEffect, ): void =
+  fcQGraphicsDropShadowEffect_protectedbase_updateBoundingRect(self.h)
+
+proc sourceIsPixmap*(self: gen_qgraphicseffect_types.QGraphicsDropShadowEffect, ): bool =
+  fcQGraphicsDropShadowEffect_protectedbase_sourceIsPixmap(self.h)
+
+proc sourceBoundingRect*(self: gen_qgraphicseffect_types.QGraphicsDropShadowEffect, ): gen_qrect_types.QRectF =
+  gen_qrect_types.QRectF(h: fcQGraphicsDropShadowEffect_protectedbase_sourceBoundingRect(self.h))
+
+proc drawSource*(self: gen_qgraphicseffect_types.QGraphicsDropShadowEffect, painter: gen_qpainter_types.QPainter): void =
+  fcQGraphicsDropShadowEffect_protectedbase_drawSource(self.h, painter.h)
+
+proc sourcePixmap*(self: gen_qgraphicseffect_types.QGraphicsDropShadowEffect, ): gen_qpixmap_types.QPixmap =
+  gen_qpixmap_types.QPixmap(h: fcQGraphicsDropShadowEffect_protectedbase_sourcePixmap(self.h))
+
+proc sender*(self: gen_qgraphicseffect_types.QGraphicsDropShadowEffect, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQGraphicsDropShadowEffect_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qgraphicseffect_types.QGraphicsDropShadowEffect, ): cint =
+  fcQGraphicsDropShadowEffect_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qgraphicseffect_types.QGraphicsDropShadowEffect, signal: cstring): cint =
+  fcQGraphicsDropShadowEffect_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qgraphicseffect_types.QGraphicsDropShadowEffect, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQGraphicsDropShadowEffect_protectedbase_isSignalConnected(self.h, signal.h)
+
 proc create*(T: type gen_qgraphicseffect_types.QGraphicsDropShadowEffect,
     vtbl: ref QGraphicsDropShadowEffectVTable = nil): gen_qgraphicseffect_types.QGraphicsDropShadowEffect =
   let vtbl = if vtbl == nil: new QGraphicsDropShadowEffectVTable else: vtbl
@@ -1813,6 +1984,33 @@ proc miqt_exec_callback_cQGraphicsOpacityEffect_disconnectNotify(vtbl: pointer, 
   let self = QGraphicsOpacityEffect(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
   vtbl[].disconnectNotify(self, slotval1)
+
+proc updateBoundingRect*(self: gen_qgraphicseffect_types.QGraphicsOpacityEffect, ): void =
+  fcQGraphicsOpacityEffect_protectedbase_updateBoundingRect(self.h)
+
+proc sourceIsPixmap*(self: gen_qgraphicseffect_types.QGraphicsOpacityEffect, ): bool =
+  fcQGraphicsOpacityEffect_protectedbase_sourceIsPixmap(self.h)
+
+proc sourceBoundingRect*(self: gen_qgraphicseffect_types.QGraphicsOpacityEffect, ): gen_qrect_types.QRectF =
+  gen_qrect_types.QRectF(h: fcQGraphicsOpacityEffect_protectedbase_sourceBoundingRect(self.h))
+
+proc drawSource*(self: gen_qgraphicseffect_types.QGraphicsOpacityEffect, painter: gen_qpainter_types.QPainter): void =
+  fcQGraphicsOpacityEffect_protectedbase_drawSource(self.h, painter.h)
+
+proc sourcePixmap*(self: gen_qgraphicseffect_types.QGraphicsOpacityEffect, ): gen_qpixmap_types.QPixmap =
+  gen_qpixmap_types.QPixmap(h: fcQGraphicsOpacityEffect_protectedbase_sourcePixmap(self.h))
+
+proc sender*(self: gen_qgraphicseffect_types.QGraphicsOpacityEffect, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQGraphicsOpacityEffect_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qgraphicseffect_types.QGraphicsOpacityEffect, ): cint =
+  fcQGraphicsOpacityEffect_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qgraphicseffect_types.QGraphicsOpacityEffect, signal: cstring): cint =
+  fcQGraphicsOpacityEffect_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qgraphicseffect_types.QGraphicsOpacityEffect, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQGraphicsOpacityEffect_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc create*(T: type gen_qgraphicseffect_types.QGraphicsOpacityEffect,
     vtbl: ref QGraphicsOpacityEffectVTable = nil): gen_qgraphicseffect_types.QGraphicsOpacityEffect =

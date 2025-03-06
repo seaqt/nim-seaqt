@@ -119,6 +119,10 @@ proc fcQDataWidgetMapper_virtualbase_childEvent(self: pointer, event: pointer): 
 proc fcQDataWidgetMapper_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QDataWidgetMapper_virtualbase_customEvent".}
 proc fcQDataWidgetMapper_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QDataWidgetMapper_virtualbase_connectNotify".}
 proc fcQDataWidgetMapper_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QDataWidgetMapper_virtualbase_disconnectNotify".}
+proc fcQDataWidgetMapper_protectedbase_sender(self: pointer, ): pointer {.importc: "QDataWidgetMapper_protectedbase_sender".}
+proc fcQDataWidgetMapper_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QDataWidgetMapper_protectedbase_senderSignalIndex".}
+proc fcQDataWidgetMapper_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QDataWidgetMapper_protectedbase_receivers".}
+proc fcQDataWidgetMapper_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QDataWidgetMapper_protectedbase_isSignalConnected".}
 proc fcQDataWidgetMapper_new(vtbl: pointer, ): ptr cQDataWidgetMapper {.importc: "QDataWidgetMapper_new".}
 proc fcQDataWidgetMapper_new2(vtbl: pointer, parent: pointer): ptr cQDataWidgetMapper {.importc: "QDataWidgetMapper_new2".}
 proc fcQDataWidgetMapper_staticMetaObject(): pointer {.importc: "QDataWidgetMapper_staticMetaObject".}
@@ -381,6 +385,18 @@ proc miqt_exec_callback_cQDataWidgetMapper_disconnectNotify(vtbl: pointer, self:
   let self = QDataWidgetMapper(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
   vtbl[].disconnectNotify(self, slotval1)
+
+proc sender*(self: gen_qdatawidgetmapper_types.QDataWidgetMapper, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQDataWidgetMapper_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qdatawidgetmapper_types.QDataWidgetMapper, ): cint =
+  fcQDataWidgetMapper_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qdatawidgetmapper_types.QDataWidgetMapper, signal: cstring): cint =
+  fcQDataWidgetMapper_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qdatawidgetmapper_types.QDataWidgetMapper, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQDataWidgetMapper_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc create*(T: type gen_qdatawidgetmapper_types.QDataWidgetMapper,
     vtbl: ref QDataWidgetMapperVTable = nil): gen_qdatawidgetmapper_types.QDataWidgetMapper =

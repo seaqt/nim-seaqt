@@ -143,6 +143,19 @@ proc fcQTcpSocket_virtualbase_childEvent(self: pointer, event: pointer): void {.
 proc fcQTcpSocket_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QTcpSocket_virtualbase_customEvent".}
 proc fcQTcpSocket_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QTcpSocket_virtualbase_connectNotify".}
 proc fcQTcpSocket_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QTcpSocket_virtualbase_disconnectNotify".}
+proc fcQTcpSocket_protectedbase_setSocketState(self: pointer, state: cint): void {.importc: "QTcpSocket_protectedbase_setSocketState".}
+proc fcQTcpSocket_protectedbase_setSocketError(self: pointer, socketError: cint): void {.importc: "QTcpSocket_protectedbase_setSocketError".}
+proc fcQTcpSocket_protectedbase_setLocalPort(self: pointer, port: cushort): void {.importc: "QTcpSocket_protectedbase_setLocalPort".}
+proc fcQTcpSocket_protectedbase_setLocalAddress(self: pointer, address: pointer): void {.importc: "QTcpSocket_protectedbase_setLocalAddress".}
+proc fcQTcpSocket_protectedbase_setPeerPort(self: pointer, port: cushort): void {.importc: "QTcpSocket_protectedbase_setPeerPort".}
+proc fcQTcpSocket_protectedbase_setPeerAddress(self: pointer, address: pointer): void {.importc: "QTcpSocket_protectedbase_setPeerAddress".}
+proc fcQTcpSocket_protectedbase_setPeerName(self: pointer, name: struct_miqt_string): void {.importc: "QTcpSocket_protectedbase_setPeerName".}
+proc fcQTcpSocket_protectedbase_setOpenMode(self: pointer, openMode: cint): void {.importc: "QTcpSocket_protectedbase_setOpenMode".}
+proc fcQTcpSocket_protectedbase_setErrorString(self: pointer, errorString: struct_miqt_string): void {.importc: "QTcpSocket_protectedbase_setErrorString".}
+proc fcQTcpSocket_protectedbase_sender(self: pointer, ): pointer {.importc: "QTcpSocket_protectedbase_sender".}
+proc fcQTcpSocket_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QTcpSocket_protectedbase_senderSignalIndex".}
+proc fcQTcpSocket_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QTcpSocket_protectedbase_receivers".}
+proc fcQTcpSocket_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QTcpSocket_protectedbase_isSignalConnected".}
 proc fcQTcpSocket_new(vtbl: pointer, ): ptr cQTcpSocket {.importc: "QTcpSocket_new".}
 proc fcQTcpSocket_new2(vtbl: pointer, parent: pointer): ptr cQTcpSocket {.importc: "QTcpSocket_new2".}
 proc fcQTcpSocket_staticMetaObject(): pointer {.importc: "QTcpSocket_staticMetaObject".}
@@ -634,6 +647,45 @@ proc miqt_exec_callback_cQTcpSocket_disconnectNotify(vtbl: pointer, self: pointe
   let self = QTcpSocket(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
   vtbl[].disconnectNotify(self, slotval1)
+
+proc setSocketState*(self: gen_qtcpsocket_types.QTcpSocket, state: cint): void =
+  fcQTcpSocket_protectedbase_setSocketState(self.h, cint(state))
+
+proc setSocketError*(self: gen_qtcpsocket_types.QTcpSocket, socketError: cint): void =
+  fcQTcpSocket_protectedbase_setSocketError(self.h, cint(socketError))
+
+proc setLocalPort*(self: gen_qtcpsocket_types.QTcpSocket, port: cushort): void =
+  fcQTcpSocket_protectedbase_setLocalPort(self.h, port)
+
+proc setLocalAddress*(self: gen_qtcpsocket_types.QTcpSocket, address: gen_qhostaddress_types.QHostAddress): void =
+  fcQTcpSocket_protectedbase_setLocalAddress(self.h, address.h)
+
+proc setPeerPort*(self: gen_qtcpsocket_types.QTcpSocket, port: cushort): void =
+  fcQTcpSocket_protectedbase_setPeerPort(self.h, port)
+
+proc setPeerAddress*(self: gen_qtcpsocket_types.QTcpSocket, address: gen_qhostaddress_types.QHostAddress): void =
+  fcQTcpSocket_protectedbase_setPeerAddress(self.h, address.h)
+
+proc setPeerName*(self: gen_qtcpsocket_types.QTcpSocket, name: string): void =
+  fcQTcpSocket_protectedbase_setPeerName(self.h, struct_miqt_string(data: name, len: csize_t(len(name))))
+
+proc setOpenMode*(self: gen_qtcpsocket_types.QTcpSocket, openMode: cint): void =
+  fcQTcpSocket_protectedbase_setOpenMode(self.h, cint(openMode))
+
+proc setErrorString*(self: gen_qtcpsocket_types.QTcpSocket, errorString: string): void =
+  fcQTcpSocket_protectedbase_setErrorString(self.h, struct_miqt_string(data: errorString, len: csize_t(len(errorString))))
+
+proc sender*(self: gen_qtcpsocket_types.QTcpSocket, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQTcpSocket_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qtcpsocket_types.QTcpSocket, ): cint =
+  fcQTcpSocket_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qtcpsocket_types.QTcpSocket, signal: cstring): cint =
+  fcQTcpSocket_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qtcpsocket_types.QTcpSocket, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQTcpSocket_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc create*(T: type gen_qtcpsocket_types.QTcpSocket,
     vtbl: ref QTcpSocketVTable = nil): gen_qtcpsocket_types.QTcpSocket =

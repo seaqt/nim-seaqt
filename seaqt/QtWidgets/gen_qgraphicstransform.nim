@@ -86,6 +86,11 @@ proc fcQGraphicsTransform_virtualbase_childEvent(self: pointer, event: pointer):
 proc fcQGraphicsTransform_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QGraphicsTransform_virtualbase_customEvent".}
 proc fcQGraphicsTransform_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QGraphicsTransform_virtualbase_connectNotify".}
 proc fcQGraphicsTransform_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QGraphicsTransform_virtualbase_disconnectNotify".}
+proc fcQGraphicsTransform_protectedbase_update(self: pointer, ): void {.importc: "QGraphicsTransform_protectedbase_update".}
+proc fcQGraphicsTransform_protectedbase_sender(self: pointer, ): pointer {.importc: "QGraphicsTransform_protectedbase_sender".}
+proc fcQGraphicsTransform_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QGraphicsTransform_protectedbase_senderSignalIndex".}
+proc fcQGraphicsTransform_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QGraphicsTransform_protectedbase_receivers".}
+proc fcQGraphicsTransform_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QGraphicsTransform_protectedbase_isSignalConnected".}
 proc fcQGraphicsTransform_new(vtbl: pointer, ): ptr cQGraphicsTransform {.importc: "QGraphicsTransform_new".}
 proc fcQGraphicsTransform_new2(vtbl: pointer, parent: pointer): ptr cQGraphicsTransform {.importc: "QGraphicsTransform_new2".}
 proc fcQGraphicsTransform_staticMetaObject(): pointer {.importc: "QGraphicsTransform_staticMetaObject".}
@@ -139,6 +144,11 @@ proc fcQGraphicsScale_virtualbase_childEvent(self: pointer, event: pointer): voi
 proc fcQGraphicsScale_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QGraphicsScale_virtualbase_customEvent".}
 proc fcQGraphicsScale_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QGraphicsScale_virtualbase_connectNotify".}
 proc fcQGraphicsScale_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QGraphicsScale_virtualbase_disconnectNotify".}
+proc fcQGraphicsScale_protectedbase_update(self: pointer, ): void {.importc: "QGraphicsScale_protectedbase_update".}
+proc fcQGraphicsScale_protectedbase_sender(self: pointer, ): pointer {.importc: "QGraphicsScale_protectedbase_sender".}
+proc fcQGraphicsScale_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QGraphicsScale_protectedbase_senderSignalIndex".}
+proc fcQGraphicsScale_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QGraphicsScale_protectedbase_receivers".}
+proc fcQGraphicsScale_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QGraphicsScale_protectedbase_isSignalConnected".}
 proc fcQGraphicsScale_new(vtbl: pointer, ): ptr cQGraphicsScale {.importc: "QGraphicsScale_new".}
 proc fcQGraphicsScale_new2(vtbl: pointer, parent: pointer): ptr cQGraphicsScale {.importc: "QGraphicsScale_new2".}
 proc fcQGraphicsScale_staticMetaObject(): pointer {.importc: "QGraphicsScale_staticMetaObject".}
@@ -187,6 +197,11 @@ proc fcQGraphicsRotation_virtualbase_childEvent(self: pointer, event: pointer): 
 proc fcQGraphicsRotation_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QGraphicsRotation_virtualbase_customEvent".}
 proc fcQGraphicsRotation_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QGraphicsRotation_virtualbase_connectNotify".}
 proc fcQGraphicsRotation_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QGraphicsRotation_virtualbase_disconnectNotify".}
+proc fcQGraphicsRotation_protectedbase_update(self: pointer, ): void {.importc: "QGraphicsRotation_protectedbase_update".}
+proc fcQGraphicsRotation_protectedbase_sender(self: pointer, ): pointer {.importc: "QGraphicsRotation_protectedbase_sender".}
+proc fcQGraphicsRotation_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QGraphicsRotation_protectedbase_senderSignalIndex".}
+proc fcQGraphicsRotation_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QGraphicsRotation_protectedbase_receivers".}
+proc fcQGraphicsRotation_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QGraphicsRotation_protectedbase_isSignalConnected".}
 proc fcQGraphicsRotation_new(vtbl: pointer, ): ptr cQGraphicsRotation {.importc: "QGraphicsRotation_new".}
 proc fcQGraphicsRotation_new2(vtbl: pointer, parent: pointer): ptr cQGraphicsRotation {.importc: "QGraphicsRotation_new2".}
 proc fcQGraphicsRotation_staticMetaObject(): pointer {.importc: "QGraphicsRotation_staticMetaObject".}
@@ -348,6 +363,21 @@ proc miqt_exec_callback_cQGraphicsTransform_disconnectNotify(vtbl: pointer, self
   let self = QGraphicsTransform(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
   vtbl[].disconnectNotify(self, slotval1)
+
+proc update*(self: gen_qgraphicstransform_types.QGraphicsTransform, ): void =
+  fcQGraphicsTransform_protectedbase_update(self.h)
+
+proc sender*(self: gen_qgraphicstransform_types.QGraphicsTransform, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQGraphicsTransform_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qgraphicstransform_types.QGraphicsTransform, ): cint =
+  fcQGraphicsTransform_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qgraphicstransform_types.QGraphicsTransform, signal: cstring): cint =
+  fcQGraphicsTransform_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qgraphicstransform_types.QGraphicsTransform, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQGraphicsTransform_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc create*(T: type gen_qgraphicstransform_types.QGraphicsTransform,
     vtbl: ref QGraphicsTransformVTable = nil): gen_qgraphicstransform_types.QGraphicsTransform =
@@ -690,6 +720,21 @@ proc miqt_exec_callback_cQGraphicsScale_disconnectNotify(vtbl: pointer, self: po
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
   vtbl[].disconnectNotify(self, slotval1)
 
+proc update*(self: gen_qgraphicstransform_types.QGraphicsScale, ): void =
+  fcQGraphicsScale_protectedbase_update(self.h)
+
+proc sender*(self: gen_qgraphicstransform_types.QGraphicsScale, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQGraphicsScale_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qgraphicstransform_types.QGraphicsScale, ): cint =
+  fcQGraphicsScale_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qgraphicstransform_types.QGraphicsScale, signal: cstring): cint =
+  fcQGraphicsScale_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qgraphicstransform_types.QGraphicsScale, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQGraphicsScale_protectedbase_isSignalConnected(self.h, signal.h)
+
 proc create*(T: type gen_qgraphicstransform_types.QGraphicsScale,
     vtbl: ref QGraphicsScaleVTable = nil): gen_qgraphicstransform_types.QGraphicsScale =
   let vtbl = if vtbl == nil: new QGraphicsScaleVTable else: vtbl
@@ -991,6 +1036,21 @@ proc miqt_exec_callback_cQGraphicsRotation_disconnectNotify(vtbl: pointer, self:
   let self = QGraphicsRotation(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
   vtbl[].disconnectNotify(self, slotval1)
+
+proc update*(self: gen_qgraphicstransform_types.QGraphicsRotation, ): void =
+  fcQGraphicsRotation_protectedbase_update(self.h)
+
+proc sender*(self: gen_qgraphicstransform_types.QGraphicsRotation, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQGraphicsRotation_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qgraphicstransform_types.QGraphicsRotation, ): cint =
+  fcQGraphicsRotation_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qgraphicstransform_types.QGraphicsRotation, signal: cstring): cint =
+  fcQGraphicsRotation_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qgraphicstransform_types.QGraphicsRotation, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQGraphicsRotation_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc create*(T: type gen_qgraphicstransform_types.QGraphicsRotation,
     vtbl: ref QGraphicsRotationVTable = nil): gen_qgraphicstransform_types.QGraphicsRotation =

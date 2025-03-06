@@ -41,6 +41,7 @@ import
   ./gen_qabstractitemmodel_types,
   ./gen_qabstractproxymodel,
   ./gen_qcoreevent_types,
+  ./gen_qdatastream_types,
   ./gen_qitemselectionmodel_types,
   ./gen_qmetaobject_types,
   ./gen_qmimedata_types,
@@ -53,6 +54,7 @@ export
   gen_qabstractitemmodel_types,
   gen_qabstractproxymodel,
   gen_qcoreevent_types,
+  gen_qdatastream_types,
   gen_qitemselectionmodel_types,
   gen_qmetaobject_types,
   gen_qmimedata_types,
@@ -194,6 +196,31 @@ proc fcQIdentityProxyModel_virtualbase_childEvent(self: pointer, event: pointer)
 proc fcQIdentityProxyModel_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QIdentityProxyModel_virtualbase_customEvent".}
 proc fcQIdentityProxyModel_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QIdentityProxyModel_virtualbase_connectNotify".}
 proc fcQIdentityProxyModel_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QIdentityProxyModel_virtualbase_disconnectNotify".}
+proc fcQIdentityProxyModel_protectedbase_createSourceIndex(self: pointer, row: cint, col: cint, internalPtr: pointer): pointer {.importc: "QIdentityProxyModel_protectedbase_createSourceIndex".}
+proc fcQIdentityProxyModel_protectedbase_createIndex(self: pointer, row: cint, column: cint): pointer {.importc: "QIdentityProxyModel_protectedbase_createIndex".}
+proc fcQIdentityProxyModel_protectedbase_encodeData(self: pointer, indexes: struct_miqt_array, stream: pointer): void {.importc: "QIdentityProxyModel_protectedbase_encodeData".}
+proc fcQIdentityProxyModel_protectedbase_decodeData(self: pointer, row: cint, column: cint, parent: pointer, stream: pointer): bool {.importc: "QIdentityProxyModel_protectedbase_decodeData".}
+proc fcQIdentityProxyModel_protectedbase_beginInsertRows(self: pointer, parent: pointer, first: cint, last: cint): void {.importc: "QIdentityProxyModel_protectedbase_beginInsertRows".}
+proc fcQIdentityProxyModel_protectedbase_endInsertRows(self: pointer, ): void {.importc: "QIdentityProxyModel_protectedbase_endInsertRows".}
+proc fcQIdentityProxyModel_protectedbase_beginRemoveRows(self: pointer, parent: pointer, first: cint, last: cint): void {.importc: "QIdentityProxyModel_protectedbase_beginRemoveRows".}
+proc fcQIdentityProxyModel_protectedbase_endRemoveRows(self: pointer, ): void {.importc: "QIdentityProxyModel_protectedbase_endRemoveRows".}
+proc fcQIdentityProxyModel_protectedbase_beginMoveRows(self: pointer, sourceParent: pointer, sourceFirst: cint, sourceLast: cint, destinationParent: pointer, destinationRow: cint): bool {.importc: "QIdentityProxyModel_protectedbase_beginMoveRows".}
+proc fcQIdentityProxyModel_protectedbase_endMoveRows(self: pointer, ): void {.importc: "QIdentityProxyModel_protectedbase_endMoveRows".}
+proc fcQIdentityProxyModel_protectedbase_beginInsertColumns(self: pointer, parent: pointer, first: cint, last: cint): void {.importc: "QIdentityProxyModel_protectedbase_beginInsertColumns".}
+proc fcQIdentityProxyModel_protectedbase_endInsertColumns(self: pointer, ): void {.importc: "QIdentityProxyModel_protectedbase_endInsertColumns".}
+proc fcQIdentityProxyModel_protectedbase_beginRemoveColumns(self: pointer, parent: pointer, first: cint, last: cint): void {.importc: "QIdentityProxyModel_protectedbase_beginRemoveColumns".}
+proc fcQIdentityProxyModel_protectedbase_endRemoveColumns(self: pointer, ): void {.importc: "QIdentityProxyModel_protectedbase_endRemoveColumns".}
+proc fcQIdentityProxyModel_protectedbase_beginMoveColumns(self: pointer, sourceParent: pointer, sourceFirst: cint, sourceLast: cint, destinationParent: pointer, destinationColumn: cint): bool {.importc: "QIdentityProxyModel_protectedbase_beginMoveColumns".}
+proc fcQIdentityProxyModel_protectedbase_endMoveColumns(self: pointer, ): void {.importc: "QIdentityProxyModel_protectedbase_endMoveColumns".}
+proc fcQIdentityProxyModel_protectedbase_beginResetModel(self: pointer, ): void {.importc: "QIdentityProxyModel_protectedbase_beginResetModel".}
+proc fcQIdentityProxyModel_protectedbase_endResetModel(self: pointer, ): void {.importc: "QIdentityProxyModel_protectedbase_endResetModel".}
+proc fcQIdentityProxyModel_protectedbase_changePersistentIndex(self: pointer, fromVal: pointer, to: pointer): void {.importc: "QIdentityProxyModel_protectedbase_changePersistentIndex".}
+proc fcQIdentityProxyModel_protectedbase_changePersistentIndexList(self: pointer, fromVal: struct_miqt_array, to: struct_miqt_array): void {.importc: "QIdentityProxyModel_protectedbase_changePersistentIndexList".}
+proc fcQIdentityProxyModel_protectedbase_persistentIndexList(self: pointer, ): struct_miqt_array {.importc: "QIdentityProxyModel_protectedbase_persistentIndexList".}
+proc fcQIdentityProxyModel_protectedbase_sender(self: pointer, ): pointer {.importc: "QIdentityProxyModel_protectedbase_sender".}
+proc fcQIdentityProxyModel_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QIdentityProxyModel_protectedbase_senderSignalIndex".}
+proc fcQIdentityProxyModel_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QIdentityProxyModel_protectedbase_receivers".}
+proc fcQIdentityProxyModel_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QIdentityProxyModel_protectedbase_isSignalConnected".}
 proc fcQIdentityProxyModel_new(vtbl: pointer, ): ptr cQIdentityProxyModel {.importc: "QIdentityProxyModel_new".}
 proc fcQIdentityProxyModel_new2(vtbl: pointer, parent: pointer): ptr cQIdentityProxyModel {.importc: "QIdentityProxyModel_new2".}
 proc fcQIdentityProxyModel_staticMetaObject(): pointer {.importc: "QIdentityProxyModel_staticMetaObject".}
@@ -1027,6 +1054,98 @@ proc miqt_exec_callback_cQIdentityProxyModel_disconnectNotify(vtbl: pointer, sel
   let self = QIdentityProxyModel(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
   vtbl[].disconnectNotify(self, slotval1)
+
+proc createSourceIndex*(self: gen_qidentityproxymodel_types.QIdentityProxyModel, row: cint, col: cint, internalPtr: pointer): gen_qabstractitemmodel_types.QModelIndex =
+  gen_qabstractitemmodel_types.QModelIndex(h: fcQIdentityProxyModel_protectedbase_createSourceIndex(self.h, row, col, internalPtr))
+
+proc createIndex*(self: gen_qidentityproxymodel_types.QIdentityProxyModel, row: cint, column: cint): gen_qabstractitemmodel_types.QModelIndex =
+  gen_qabstractitemmodel_types.QModelIndex(h: fcQIdentityProxyModel_protectedbase_createIndex(self.h, row, column))
+
+proc encodeData*(self: gen_qidentityproxymodel_types.QIdentityProxyModel, indexes: seq[gen_qabstractitemmodel_types.QModelIndex], stream: gen_qdatastream_types.QDataStream): void =
+  var indexes_CArray = newSeq[pointer](len(indexes))
+  for i in 0..<len(indexes):
+    indexes_CArray[i] = indexes[i].h
+
+  fcQIdentityProxyModel_protectedbase_encodeData(self.h, struct_miqt_array(len: csize_t(len(indexes)), data: if len(indexes) == 0: nil else: addr(indexes_CArray[0])), stream.h)
+
+proc decodeData*(self: gen_qidentityproxymodel_types.QIdentityProxyModel, row: cint, column: cint, parent: gen_qabstractitemmodel_types.QModelIndex, stream: gen_qdatastream_types.QDataStream): bool =
+  fcQIdentityProxyModel_protectedbase_decodeData(self.h, row, column, parent.h, stream.h)
+
+proc beginInsertRows*(self: gen_qidentityproxymodel_types.QIdentityProxyModel, parent: gen_qabstractitemmodel_types.QModelIndex, first: cint, last: cint): void =
+  fcQIdentityProxyModel_protectedbase_beginInsertRows(self.h, parent.h, first, last)
+
+proc endInsertRows*(self: gen_qidentityproxymodel_types.QIdentityProxyModel, ): void =
+  fcQIdentityProxyModel_protectedbase_endInsertRows(self.h)
+
+proc beginRemoveRows*(self: gen_qidentityproxymodel_types.QIdentityProxyModel, parent: gen_qabstractitemmodel_types.QModelIndex, first: cint, last: cint): void =
+  fcQIdentityProxyModel_protectedbase_beginRemoveRows(self.h, parent.h, first, last)
+
+proc endRemoveRows*(self: gen_qidentityproxymodel_types.QIdentityProxyModel, ): void =
+  fcQIdentityProxyModel_protectedbase_endRemoveRows(self.h)
+
+proc beginMoveRows*(self: gen_qidentityproxymodel_types.QIdentityProxyModel, sourceParent: gen_qabstractitemmodel_types.QModelIndex, sourceFirst: cint, sourceLast: cint, destinationParent: gen_qabstractitemmodel_types.QModelIndex, destinationRow: cint): bool =
+  fcQIdentityProxyModel_protectedbase_beginMoveRows(self.h, sourceParent.h, sourceFirst, sourceLast, destinationParent.h, destinationRow)
+
+proc endMoveRows*(self: gen_qidentityproxymodel_types.QIdentityProxyModel, ): void =
+  fcQIdentityProxyModel_protectedbase_endMoveRows(self.h)
+
+proc beginInsertColumns*(self: gen_qidentityproxymodel_types.QIdentityProxyModel, parent: gen_qabstractitemmodel_types.QModelIndex, first: cint, last: cint): void =
+  fcQIdentityProxyModel_protectedbase_beginInsertColumns(self.h, parent.h, first, last)
+
+proc endInsertColumns*(self: gen_qidentityproxymodel_types.QIdentityProxyModel, ): void =
+  fcQIdentityProxyModel_protectedbase_endInsertColumns(self.h)
+
+proc beginRemoveColumns*(self: gen_qidentityproxymodel_types.QIdentityProxyModel, parent: gen_qabstractitemmodel_types.QModelIndex, first: cint, last: cint): void =
+  fcQIdentityProxyModel_protectedbase_beginRemoveColumns(self.h, parent.h, first, last)
+
+proc endRemoveColumns*(self: gen_qidentityproxymodel_types.QIdentityProxyModel, ): void =
+  fcQIdentityProxyModel_protectedbase_endRemoveColumns(self.h)
+
+proc beginMoveColumns*(self: gen_qidentityproxymodel_types.QIdentityProxyModel, sourceParent: gen_qabstractitemmodel_types.QModelIndex, sourceFirst: cint, sourceLast: cint, destinationParent: gen_qabstractitemmodel_types.QModelIndex, destinationColumn: cint): bool =
+  fcQIdentityProxyModel_protectedbase_beginMoveColumns(self.h, sourceParent.h, sourceFirst, sourceLast, destinationParent.h, destinationColumn)
+
+proc endMoveColumns*(self: gen_qidentityproxymodel_types.QIdentityProxyModel, ): void =
+  fcQIdentityProxyModel_protectedbase_endMoveColumns(self.h)
+
+proc beginResetModel*(self: gen_qidentityproxymodel_types.QIdentityProxyModel, ): void =
+  fcQIdentityProxyModel_protectedbase_beginResetModel(self.h)
+
+proc endResetModel*(self: gen_qidentityproxymodel_types.QIdentityProxyModel, ): void =
+  fcQIdentityProxyModel_protectedbase_endResetModel(self.h)
+
+proc changePersistentIndex*(self: gen_qidentityproxymodel_types.QIdentityProxyModel, fromVal: gen_qabstractitemmodel_types.QModelIndex, to: gen_qabstractitemmodel_types.QModelIndex): void =
+  fcQIdentityProxyModel_protectedbase_changePersistentIndex(self.h, fromVal.h, to.h)
+
+proc changePersistentIndexList*(self: gen_qidentityproxymodel_types.QIdentityProxyModel, fromVal: seq[gen_qabstractitemmodel_types.QModelIndex], to: seq[gen_qabstractitemmodel_types.QModelIndex]): void =
+  var fromVal_CArray = newSeq[pointer](len(fromVal))
+  for i in 0..<len(fromVal):
+    fromVal_CArray[i] = fromVal[i].h
+
+  var to_CArray = newSeq[pointer](len(to))
+  for i in 0..<len(to):
+    to_CArray[i] = to[i].h
+
+  fcQIdentityProxyModel_protectedbase_changePersistentIndexList(self.h, struct_miqt_array(len: csize_t(len(fromVal)), data: if len(fromVal) == 0: nil else: addr(fromVal_CArray[0])), struct_miqt_array(len: csize_t(len(to)), data: if len(to) == 0: nil else: addr(to_CArray[0])))
+
+proc persistentIndexList*(self: gen_qidentityproxymodel_types.QIdentityProxyModel, ): seq[gen_qabstractitemmodel_types.QModelIndex] =
+  var v_ma = fcQIdentityProxyModel_protectedbase_persistentIndexList(self.h)
+  var vx_ret = newSeq[gen_qabstractitemmodel_types.QModelIndex](int(v_ma.len))
+  let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
+  for i in 0 ..< v_ma.len:
+    vx_ret[i] = gen_qabstractitemmodel_types.QModelIndex(h: v_outCast[i])
+  vx_ret
+
+proc sender*(self: gen_qidentityproxymodel_types.QIdentityProxyModel, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQIdentityProxyModel_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qidentityproxymodel_types.QIdentityProxyModel, ): cint =
+  fcQIdentityProxyModel_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qidentityproxymodel_types.QIdentityProxyModel, signal: cstring): cint =
+  fcQIdentityProxyModel_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qidentityproxymodel_types.QIdentityProxyModel, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQIdentityProxyModel_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc create*(T: type gen_qidentityproxymodel_types.QIdentityProxyModel,
     vtbl: ref QIdentityProxyModelVTable = nil): gen_qidentityproxymodel_types.QIdentityProxyModel =

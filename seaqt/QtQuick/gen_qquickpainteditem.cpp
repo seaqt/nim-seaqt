@@ -736,15 +736,15 @@ public:
 	friend void QQuickPaintedItem_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
 
 	// Wrappers to allow calling protected methods:
-	friend bool QQuickPaintedItem_protectedbase_isComponentComplete(bool* _dynamic_cast_ok, const void* self);
-	friend void QQuickPaintedItem_protectedbase_updateInputMethod(bool* _dynamic_cast_ok, void* self);
-	friend bool QQuickPaintedItem_protectedbase_widthValid(bool* _dynamic_cast_ok, const void* self);
-	friend bool QQuickPaintedItem_protectedbase_heightValid(bool* _dynamic_cast_ok, const void* self);
-	friend void QQuickPaintedItem_protectedbase_setImplicitSize(bool* _dynamic_cast_ok, void* self, double param1, double param2);
-	friend QObject* QQuickPaintedItem_protectedbase_sender(bool* _dynamic_cast_ok, const void* self);
-	friend int QQuickPaintedItem_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
-	friend int QQuickPaintedItem_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
-	friend bool QQuickPaintedItem_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+	friend bool QQuickPaintedItem_protectedbase_isComponentComplete(const void* self);
+	friend void QQuickPaintedItem_protectedbase_updateInputMethod(void* self);
+	friend bool QQuickPaintedItem_protectedbase_widthValid(const void* self);
+	friend bool QQuickPaintedItem_protectedbase_heightValid(const void* self);
+	friend void QQuickPaintedItem_protectedbase_setImplicitSize(void* self, double param1, double param2);
+	friend QObject* QQuickPaintedItem_protectedbase_sender(const void* self);
+	friend int QQuickPaintedItem_protectedbase_senderSignalIndex(const void* self);
+	friend int QQuickPaintedItem_protectedbase_receivers(const void* self, const char* signal);
+	friend bool QQuickPaintedItem_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
 };
 
 QQuickPaintedItem* QQuickPaintedItem_new(struct QQuickPaintedItem_VTable* vtbl) {
@@ -1255,118 +1255,64 @@ void QQuickPaintedItem_virtualbase_disconnectNotify(void* self, QMetaMethod* sig
 }
 
 const QMetaObject* QQuickPaintedItem_staticMetaObject() { return &QQuickPaintedItem::staticMetaObject; }
-bool QQuickPaintedItem_protectedbase_isComponentComplete(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQQuickPaintedItem* self_cast = dynamic_cast<VirtualQQuickPaintedItem*>( (QQuickPaintedItem*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return false;
-	}
-	
-	*_dynamic_cast_ok = true;
+bool QQuickPaintedItem_protectedbase_isComponentComplete(const void* self) {
+	VirtualQQuickPaintedItem* self_cast = static_cast<VirtualQQuickPaintedItem*>( (QQuickPaintedItem*)(self) );
 	
 	return self_cast->isComponentComplete();
 
 }
 
-void QQuickPaintedItem_protectedbase_updateInputMethod(bool* _dynamic_cast_ok, void* self) {
-	VirtualQQuickPaintedItem* self_cast = dynamic_cast<VirtualQQuickPaintedItem*>( (QQuickPaintedItem*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QQuickPaintedItem_protectedbase_updateInputMethod(void* self) {
+	VirtualQQuickPaintedItem* self_cast = static_cast<VirtualQQuickPaintedItem*>( (QQuickPaintedItem*)(self) );
 	
 	self_cast->updateInputMethod();
 
 }
 
-bool QQuickPaintedItem_protectedbase_widthValid(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQQuickPaintedItem* self_cast = dynamic_cast<VirtualQQuickPaintedItem*>( (QQuickPaintedItem*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return false;
-	}
-	
-	*_dynamic_cast_ok = true;
+bool QQuickPaintedItem_protectedbase_widthValid(const void* self) {
+	VirtualQQuickPaintedItem* self_cast = static_cast<VirtualQQuickPaintedItem*>( (QQuickPaintedItem*)(self) );
 	
 	return self_cast->widthValid();
 
 }
 
-bool QQuickPaintedItem_protectedbase_heightValid(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQQuickPaintedItem* self_cast = dynamic_cast<VirtualQQuickPaintedItem*>( (QQuickPaintedItem*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return false;
-	}
-	
-	*_dynamic_cast_ok = true;
+bool QQuickPaintedItem_protectedbase_heightValid(const void* self) {
+	VirtualQQuickPaintedItem* self_cast = static_cast<VirtualQQuickPaintedItem*>( (QQuickPaintedItem*)(self) );
 	
 	return self_cast->heightValid();
 
 }
 
-void QQuickPaintedItem_protectedbase_setImplicitSize(bool* _dynamic_cast_ok, void* self, double param1, double param2) {
-	VirtualQQuickPaintedItem* self_cast = dynamic_cast<VirtualQQuickPaintedItem*>( (QQuickPaintedItem*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QQuickPaintedItem_protectedbase_setImplicitSize(void* self, double param1, double param2) {
+	VirtualQQuickPaintedItem* self_cast = static_cast<VirtualQQuickPaintedItem*>( (QQuickPaintedItem*)(self) );
 	
 	self_cast->setImplicitSize(static_cast<qreal>(param1), static_cast<qreal>(param2));
 
 }
 
-QObject* QQuickPaintedItem_protectedbase_sender(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQQuickPaintedItem* self_cast = dynamic_cast<VirtualQQuickPaintedItem*>( (QQuickPaintedItem*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return nullptr;
-	}
-	
-	*_dynamic_cast_ok = true;
+QObject* QQuickPaintedItem_protectedbase_sender(const void* self) {
+	VirtualQQuickPaintedItem* self_cast = static_cast<VirtualQQuickPaintedItem*>( (QQuickPaintedItem*)(self) );
 	
 	return self_cast->sender();
 
 }
 
-int QQuickPaintedItem_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQQuickPaintedItem* self_cast = dynamic_cast<VirtualQQuickPaintedItem*>( (QQuickPaintedItem*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return 0;
-	}
-	
-	*_dynamic_cast_ok = true;
+int QQuickPaintedItem_protectedbase_senderSignalIndex(const void* self) {
+	VirtualQQuickPaintedItem* self_cast = static_cast<VirtualQQuickPaintedItem*>( (QQuickPaintedItem*)(self) );
 	
 	return self_cast->senderSignalIndex();
 
 }
 
-int QQuickPaintedItem_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal) {
-	VirtualQQuickPaintedItem* self_cast = dynamic_cast<VirtualQQuickPaintedItem*>( (QQuickPaintedItem*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return 0;
-	}
-	
-	*_dynamic_cast_ok = true;
+int QQuickPaintedItem_protectedbase_receivers(const void* self, const char* signal) {
+	VirtualQQuickPaintedItem* self_cast = static_cast<VirtualQQuickPaintedItem*>( (QQuickPaintedItem*)(self) );
 	
 	return self_cast->receivers(signal);
 
 }
 
-bool QQuickPaintedItem_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal) {
-	VirtualQQuickPaintedItem* self_cast = dynamic_cast<VirtualQQuickPaintedItem*>( (QQuickPaintedItem*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return false;
-	}
-	
-	*_dynamic_cast_ok = true;
+bool QQuickPaintedItem_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal) {
+	VirtualQQuickPaintedItem* self_cast = static_cast<VirtualQQuickPaintedItem*>( (QQuickPaintedItem*)(self) );
 	
 	return self_cast->isSignalConnected(*signal);
 

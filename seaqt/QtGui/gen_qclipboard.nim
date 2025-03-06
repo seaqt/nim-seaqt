@@ -45,12 +45,14 @@ import ./gen_qclipboard_types
 export gen_qclipboard_types
 
 import
+  ../QtCore/gen_qmetaobject_types,
   ../QtCore/gen_qmimedata_types,
   ../QtCore/gen_qobject,
   ../QtCore/gen_qobjectdefs_types,
   ./gen_qimage_types,
   ./gen_qpixmap_types
 export
+  gen_qmetaobject_types,
   gen_qmimedata_types,
   gen_qobject,
   gen_qobjectdefs_types,
@@ -98,6 +100,10 @@ proc fcQClipboard_image1(self: pointer, mode: cint): pointer {.importc: "QClipbo
 proc fcQClipboard_pixmap1(self: pointer, mode: cint): pointer {.importc: "QClipboard_pixmap1".}
 proc fcQClipboard_setImage2(self: pointer, param1: pointer, mode: cint): void {.importc: "QClipboard_setImage2".}
 proc fcQClipboard_setPixmap2(self: pointer, param1: pointer, mode: cint): void {.importc: "QClipboard_setPixmap2".}
+proc fcQClipboard_protectedbase_sender(self: pointer, ): pointer {.importc: "QClipboard_protectedbase_sender".}
+proc fcQClipboard_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QClipboard_protectedbase_senderSignalIndex".}
+proc fcQClipboard_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QClipboard_protectedbase_receivers".}
+proc fcQClipboard_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QClipboard_protectedbase_isSignalConnected".}
 proc fcQClipboard_staticMetaObject(): pointer {.importc: "QClipboard_staticMetaObject".}
 
 proc metaObject*(self: gen_qclipboard_types.QClipboard, ): gen_qobjectdefs_types.QMetaObject =
@@ -287,6 +293,18 @@ proc setImage*(self: gen_qclipboard_types.QClipboard, param1: gen_qimage_types.Q
 
 proc setPixmap*(self: gen_qclipboard_types.QClipboard, param1: gen_qpixmap_types.QPixmap, mode: cint): void =
   fcQClipboard_setPixmap2(self.h, param1.h, cint(mode))
+
+proc sender*(self: gen_qclipboard_types.QClipboard, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQClipboard_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qclipboard_types.QClipboard, ): cint =
+  fcQClipboard_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qclipboard_types.QClipboard, signal: cstring): cint =
+  fcQClipboard_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qclipboard_types.QClipboard, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQClipboard_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc staticMetaObject*(_: type gen_qclipboard_types.QClipboard): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQClipboard_staticMetaObject())

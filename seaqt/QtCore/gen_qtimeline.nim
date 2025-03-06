@@ -120,6 +120,10 @@ proc fcQTimeLine_virtualbase_childEvent(self: pointer, event: pointer): void {.i
 proc fcQTimeLine_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QTimeLine_virtualbase_customEvent".}
 proc fcQTimeLine_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QTimeLine_virtualbase_connectNotify".}
 proc fcQTimeLine_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QTimeLine_virtualbase_disconnectNotify".}
+proc fcQTimeLine_protectedbase_sender(self: pointer, ): pointer {.importc: "QTimeLine_protectedbase_sender".}
+proc fcQTimeLine_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QTimeLine_protectedbase_senderSignalIndex".}
+proc fcQTimeLine_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QTimeLine_protectedbase_receivers".}
+proc fcQTimeLine_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QTimeLine_protectedbase_isSignalConnected".}
 proc fcQTimeLine_new(vtbl: pointer, ): ptr cQTimeLine {.importc: "QTimeLine_new".}
 proc fcQTimeLine_new2(vtbl: pointer, duration: cint): ptr cQTimeLine {.importc: "QTimeLine_new2".}
 proc fcQTimeLine_new3(vtbl: pointer, duration: cint, parent: pointer): ptr cQTimeLine {.importc: "QTimeLine_new3".}
@@ -364,6 +368,18 @@ proc miqt_exec_callback_cQTimeLine_disconnectNotify(vtbl: pointer, self: pointer
   let self = QTimeLine(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
   vtbl[].disconnectNotify(self, slotval1)
+
+proc sender*(self: gen_qtimeline_types.QTimeLine, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQTimeLine_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qtimeline_types.QTimeLine, ): cint =
+  fcQTimeLine_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qtimeline_types.QTimeLine, signal: cstring): cint =
+  fcQTimeLine_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qtimeline_types.QTimeLine, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQTimeLine_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc create*(T: type gen_qtimeline_types.QTimeLine,
     vtbl: ref QTimeLineVTable = nil): gen_qtimeline_types.QTimeLine =

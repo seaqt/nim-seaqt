@@ -41,6 +41,7 @@ import
   ./gen_qabstractitemmodel_types,
   ./gen_qabstractproxymodel,
   ./gen_qcoreevent_types,
+  ./gen_qdatastream_types,
   ./gen_qitemselectionmodel_types,
   ./gen_qmetaobject_types,
   ./gen_qmimedata_types,
@@ -54,6 +55,7 @@ export
   gen_qabstractitemmodel_types,
   gen_qabstractproxymodel,
   gen_qcoreevent_types,
+  gen_qdatastream_types,
   gen_qitemselectionmodel_types,
   gen_qmetaobject_types,
   gen_qmimedata_types,
@@ -255,6 +257,34 @@ proc fcQSortFilterProxyModel_virtualbase_childEvent(self: pointer, event: pointe
 proc fcQSortFilterProxyModel_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QSortFilterProxyModel_virtualbase_customEvent".}
 proc fcQSortFilterProxyModel_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QSortFilterProxyModel_virtualbase_connectNotify".}
 proc fcQSortFilterProxyModel_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QSortFilterProxyModel_virtualbase_disconnectNotify".}
+proc fcQSortFilterProxyModel_protectedbase_invalidateFilter(self: pointer, ): void {.importc: "QSortFilterProxyModel_protectedbase_invalidateFilter".}
+proc fcQSortFilterProxyModel_protectedbase_invalidateRowsFilter(self: pointer, ): void {.importc: "QSortFilterProxyModel_protectedbase_invalidateRowsFilter".}
+proc fcQSortFilterProxyModel_protectedbase_invalidateColumnsFilter(self: pointer, ): void {.importc: "QSortFilterProxyModel_protectedbase_invalidateColumnsFilter".}
+proc fcQSortFilterProxyModel_protectedbase_createSourceIndex(self: pointer, row: cint, col: cint, internalPtr: pointer): pointer {.importc: "QSortFilterProxyModel_protectedbase_createSourceIndex".}
+proc fcQSortFilterProxyModel_protectedbase_createIndex(self: pointer, row: cint, column: cint): pointer {.importc: "QSortFilterProxyModel_protectedbase_createIndex".}
+proc fcQSortFilterProxyModel_protectedbase_encodeData(self: pointer, indexes: struct_miqt_array, stream: pointer): void {.importc: "QSortFilterProxyModel_protectedbase_encodeData".}
+proc fcQSortFilterProxyModel_protectedbase_decodeData(self: pointer, row: cint, column: cint, parent: pointer, stream: pointer): bool {.importc: "QSortFilterProxyModel_protectedbase_decodeData".}
+proc fcQSortFilterProxyModel_protectedbase_beginInsertRows(self: pointer, parent: pointer, first: cint, last: cint): void {.importc: "QSortFilterProxyModel_protectedbase_beginInsertRows".}
+proc fcQSortFilterProxyModel_protectedbase_endInsertRows(self: pointer, ): void {.importc: "QSortFilterProxyModel_protectedbase_endInsertRows".}
+proc fcQSortFilterProxyModel_protectedbase_beginRemoveRows(self: pointer, parent: pointer, first: cint, last: cint): void {.importc: "QSortFilterProxyModel_protectedbase_beginRemoveRows".}
+proc fcQSortFilterProxyModel_protectedbase_endRemoveRows(self: pointer, ): void {.importc: "QSortFilterProxyModel_protectedbase_endRemoveRows".}
+proc fcQSortFilterProxyModel_protectedbase_beginMoveRows(self: pointer, sourceParent: pointer, sourceFirst: cint, sourceLast: cint, destinationParent: pointer, destinationRow: cint): bool {.importc: "QSortFilterProxyModel_protectedbase_beginMoveRows".}
+proc fcQSortFilterProxyModel_protectedbase_endMoveRows(self: pointer, ): void {.importc: "QSortFilterProxyModel_protectedbase_endMoveRows".}
+proc fcQSortFilterProxyModel_protectedbase_beginInsertColumns(self: pointer, parent: pointer, first: cint, last: cint): void {.importc: "QSortFilterProxyModel_protectedbase_beginInsertColumns".}
+proc fcQSortFilterProxyModel_protectedbase_endInsertColumns(self: pointer, ): void {.importc: "QSortFilterProxyModel_protectedbase_endInsertColumns".}
+proc fcQSortFilterProxyModel_protectedbase_beginRemoveColumns(self: pointer, parent: pointer, first: cint, last: cint): void {.importc: "QSortFilterProxyModel_protectedbase_beginRemoveColumns".}
+proc fcQSortFilterProxyModel_protectedbase_endRemoveColumns(self: pointer, ): void {.importc: "QSortFilterProxyModel_protectedbase_endRemoveColumns".}
+proc fcQSortFilterProxyModel_protectedbase_beginMoveColumns(self: pointer, sourceParent: pointer, sourceFirst: cint, sourceLast: cint, destinationParent: pointer, destinationColumn: cint): bool {.importc: "QSortFilterProxyModel_protectedbase_beginMoveColumns".}
+proc fcQSortFilterProxyModel_protectedbase_endMoveColumns(self: pointer, ): void {.importc: "QSortFilterProxyModel_protectedbase_endMoveColumns".}
+proc fcQSortFilterProxyModel_protectedbase_beginResetModel(self: pointer, ): void {.importc: "QSortFilterProxyModel_protectedbase_beginResetModel".}
+proc fcQSortFilterProxyModel_protectedbase_endResetModel(self: pointer, ): void {.importc: "QSortFilterProxyModel_protectedbase_endResetModel".}
+proc fcQSortFilterProxyModel_protectedbase_changePersistentIndex(self: pointer, fromVal: pointer, to: pointer): void {.importc: "QSortFilterProxyModel_protectedbase_changePersistentIndex".}
+proc fcQSortFilterProxyModel_protectedbase_changePersistentIndexList(self: pointer, fromVal: struct_miqt_array, to: struct_miqt_array): void {.importc: "QSortFilterProxyModel_protectedbase_changePersistentIndexList".}
+proc fcQSortFilterProxyModel_protectedbase_persistentIndexList(self: pointer, ): struct_miqt_array {.importc: "QSortFilterProxyModel_protectedbase_persistentIndexList".}
+proc fcQSortFilterProxyModel_protectedbase_sender(self: pointer, ): pointer {.importc: "QSortFilterProxyModel_protectedbase_sender".}
+proc fcQSortFilterProxyModel_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QSortFilterProxyModel_protectedbase_senderSignalIndex".}
+proc fcQSortFilterProxyModel_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QSortFilterProxyModel_protectedbase_receivers".}
+proc fcQSortFilterProxyModel_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QSortFilterProxyModel_protectedbase_isSignalConnected".}
 proc fcQSortFilterProxyModel_new(vtbl: pointer, ): ptr cQSortFilterProxyModel {.importc: "QSortFilterProxyModel_new".}
 proc fcQSortFilterProxyModel_new2(vtbl: pointer, parent: pointer): ptr cQSortFilterProxyModel {.importc: "QSortFilterProxyModel_new2".}
 proc fcQSortFilterProxyModel_staticMetaObject(): pointer {.importc: "QSortFilterProxyModel_staticMetaObject".}
@@ -1410,6 +1440,107 @@ proc miqt_exec_callback_cQSortFilterProxyModel_disconnectNotify(vtbl: pointer, s
   let self = QSortFilterProxyModel(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
   vtbl[].disconnectNotify(self, slotval1)
+
+proc invalidateFilter*(self: gen_qsortfilterproxymodel_types.QSortFilterProxyModel, ): void =
+  fcQSortFilterProxyModel_protectedbase_invalidateFilter(self.h)
+
+proc invalidateRowsFilter*(self: gen_qsortfilterproxymodel_types.QSortFilterProxyModel, ): void =
+  fcQSortFilterProxyModel_protectedbase_invalidateRowsFilter(self.h)
+
+proc invalidateColumnsFilter*(self: gen_qsortfilterproxymodel_types.QSortFilterProxyModel, ): void =
+  fcQSortFilterProxyModel_protectedbase_invalidateColumnsFilter(self.h)
+
+proc createSourceIndex*(self: gen_qsortfilterproxymodel_types.QSortFilterProxyModel, row: cint, col: cint, internalPtr: pointer): gen_qabstractitemmodel_types.QModelIndex =
+  gen_qabstractitemmodel_types.QModelIndex(h: fcQSortFilterProxyModel_protectedbase_createSourceIndex(self.h, row, col, internalPtr))
+
+proc createIndex*(self: gen_qsortfilterproxymodel_types.QSortFilterProxyModel, row: cint, column: cint): gen_qabstractitemmodel_types.QModelIndex =
+  gen_qabstractitemmodel_types.QModelIndex(h: fcQSortFilterProxyModel_protectedbase_createIndex(self.h, row, column))
+
+proc encodeData*(self: gen_qsortfilterproxymodel_types.QSortFilterProxyModel, indexes: seq[gen_qabstractitemmodel_types.QModelIndex], stream: gen_qdatastream_types.QDataStream): void =
+  var indexes_CArray = newSeq[pointer](len(indexes))
+  for i in 0..<len(indexes):
+    indexes_CArray[i] = indexes[i].h
+
+  fcQSortFilterProxyModel_protectedbase_encodeData(self.h, struct_miqt_array(len: csize_t(len(indexes)), data: if len(indexes) == 0: nil else: addr(indexes_CArray[0])), stream.h)
+
+proc decodeData*(self: gen_qsortfilterproxymodel_types.QSortFilterProxyModel, row: cint, column: cint, parent: gen_qabstractitemmodel_types.QModelIndex, stream: gen_qdatastream_types.QDataStream): bool =
+  fcQSortFilterProxyModel_protectedbase_decodeData(self.h, row, column, parent.h, stream.h)
+
+proc beginInsertRows*(self: gen_qsortfilterproxymodel_types.QSortFilterProxyModel, parent: gen_qabstractitemmodel_types.QModelIndex, first: cint, last: cint): void =
+  fcQSortFilterProxyModel_protectedbase_beginInsertRows(self.h, parent.h, first, last)
+
+proc endInsertRows*(self: gen_qsortfilterproxymodel_types.QSortFilterProxyModel, ): void =
+  fcQSortFilterProxyModel_protectedbase_endInsertRows(self.h)
+
+proc beginRemoveRows*(self: gen_qsortfilterproxymodel_types.QSortFilterProxyModel, parent: gen_qabstractitemmodel_types.QModelIndex, first: cint, last: cint): void =
+  fcQSortFilterProxyModel_protectedbase_beginRemoveRows(self.h, parent.h, first, last)
+
+proc endRemoveRows*(self: gen_qsortfilterproxymodel_types.QSortFilterProxyModel, ): void =
+  fcQSortFilterProxyModel_protectedbase_endRemoveRows(self.h)
+
+proc beginMoveRows*(self: gen_qsortfilterproxymodel_types.QSortFilterProxyModel, sourceParent: gen_qabstractitemmodel_types.QModelIndex, sourceFirst: cint, sourceLast: cint, destinationParent: gen_qabstractitemmodel_types.QModelIndex, destinationRow: cint): bool =
+  fcQSortFilterProxyModel_protectedbase_beginMoveRows(self.h, sourceParent.h, sourceFirst, sourceLast, destinationParent.h, destinationRow)
+
+proc endMoveRows*(self: gen_qsortfilterproxymodel_types.QSortFilterProxyModel, ): void =
+  fcQSortFilterProxyModel_protectedbase_endMoveRows(self.h)
+
+proc beginInsertColumns*(self: gen_qsortfilterproxymodel_types.QSortFilterProxyModel, parent: gen_qabstractitemmodel_types.QModelIndex, first: cint, last: cint): void =
+  fcQSortFilterProxyModel_protectedbase_beginInsertColumns(self.h, parent.h, first, last)
+
+proc endInsertColumns*(self: gen_qsortfilterproxymodel_types.QSortFilterProxyModel, ): void =
+  fcQSortFilterProxyModel_protectedbase_endInsertColumns(self.h)
+
+proc beginRemoveColumns*(self: gen_qsortfilterproxymodel_types.QSortFilterProxyModel, parent: gen_qabstractitemmodel_types.QModelIndex, first: cint, last: cint): void =
+  fcQSortFilterProxyModel_protectedbase_beginRemoveColumns(self.h, parent.h, first, last)
+
+proc endRemoveColumns*(self: gen_qsortfilterproxymodel_types.QSortFilterProxyModel, ): void =
+  fcQSortFilterProxyModel_protectedbase_endRemoveColumns(self.h)
+
+proc beginMoveColumns*(self: gen_qsortfilterproxymodel_types.QSortFilterProxyModel, sourceParent: gen_qabstractitemmodel_types.QModelIndex, sourceFirst: cint, sourceLast: cint, destinationParent: gen_qabstractitemmodel_types.QModelIndex, destinationColumn: cint): bool =
+  fcQSortFilterProxyModel_protectedbase_beginMoveColumns(self.h, sourceParent.h, sourceFirst, sourceLast, destinationParent.h, destinationColumn)
+
+proc endMoveColumns*(self: gen_qsortfilterproxymodel_types.QSortFilterProxyModel, ): void =
+  fcQSortFilterProxyModel_protectedbase_endMoveColumns(self.h)
+
+proc beginResetModel*(self: gen_qsortfilterproxymodel_types.QSortFilterProxyModel, ): void =
+  fcQSortFilterProxyModel_protectedbase_beginResetModel(self.h)
+
+proc endResetModel*(self: gen_qsortfilterproxymodel_types.QSortFilterProxyModel, ): void =
+  fcQSortFilterProxyModel_protectedbase_endResetModel(self.h)
+
+proc changePersistentIndex*(self: gen_qsortfilterproxymodel_types.QSortFilterProxyModel, fromVal: gen_qabstractitemmodel_types.QModelIndex, to: gen_qabstractitemmodel_types.QModelIndex): void =
+  fcQSortFilterProxyModel_protectedbase_changePersistentIndex(self.h, fromVal.h, to.h)
+
+proc changePersistentIndexList*(self: gen_qsortfilterproxymodel_types.QSortFilterProxyModel, fromVal: seq[gen_qabstractitemmodel_types.QModelIndex], to: seq[gen_qabstractitemmodel_types.QModelIndex]): void =
+  var fromVal_CArray = newSeq[pointer](len(fromVal))
+  for i in 0..<len(fromVal):
+    fromVal_CArray[i] = fromVal[i].h
+
+  var to_CArray = newSeq[pointer](len(to))
+  for i in 0..<len(to):
+    to_CArray[i] = to[i].h
+
+  fcQSortFilterProxyModel_protectedbase_changePersistentIndexList(self.h, struct_miqt_array(len: csize_t(len(fromVal)), data: if len(fromVal) == 0: nil else: addr(fromVal_CArray[0])), struct_miqt_array(len: csize_t(len(to)), data: if len(to) == 0: nil else: addr(to_CArray[0])))
+
+proc persistentIndexList*(self: gen_qsortfilterproxymodel_types.QSortFilterProxyModel, ): seq[gen_qabstractitemmodel_types.QModelIndex] =
+  var v_ma = fcQSortFilterProxyModel_protectedbase_persistentIndexList(self.h)
+  var vx_ret = newSeq[gen_qabstractitemmodel_types.QModelIndex](int(v_ma.len))
+  let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
+  for i in 0 ..< v_ma.len:
+    vx_ret[i] = gen_qabstractitemmodel_types.QModelIndex(h: v_outCast[i])
+  vx_ret
+
+proc sender*(self: gen_qsortfilterproxymodel_types.QSortFilterProxyModel, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQSortFilterProxyModel_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qsortfilterproxymodel_types.QSortFilterProxyModel, ): cint =
+  fcQSortFilterProxyModel_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qsortfilterproxymodel_types.QSortFilterProxyModel, signal: cstring): cint =
+  fcQSortFilterProxyModel_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qsortfilterproxymodel_types.QSortFilterProxyModel, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQSortFilterProxyModel_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc create*(T: type gen_qsortfilterproxymodel_types.QSortFilterProxyModel,
     vtbl: ref QSortFilterProxyModelVTable = nil): gen_qsortfilterproxymodel_types.QSortFilterProxyModel =

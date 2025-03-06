@@ -159,6 +159,10 @@ proc fcQImageCapture_virtualbase_childEvent(self: pointer, event: pointer): void
 proc fcQImageCapture_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QImageCapture_virtualbase_customEvent".}
 proc fcQImageCapture_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QImageCapture_virtualbase_connectNotify".}
 proc fcQImageCapture_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QImageCapture_virtualbase_disconnectNotify".}
+proc fcQImageCapture_protectedbase_sender(self: pointer, ): pointer {.importc: "QImageCapture_protectedbase_sender".}
+proc fcQImageCapture_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QImageCapture_protectedbase_senderSignalIndex".}
+proc fcQImageCapture_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QImageCapture_protectedbase_receivers".}
+proc fcQImageCapture_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QImageCapture_protectedbase_isSignalConnected".}
 proc fcQImageCapture_new(vtbl: pointer, ): ptr cQImageCapture {.importc: "QImageCapture_new".}
 proc fcQImageCapture_new2(vtbl: pointer, parent: pointer): ptr cQImageCapture {.importc: "QImageCapture_new2".}
 proc fcQImageCapture_staticMetaObject(): pointer {.importc: "QImageCapture_staticMetaObject".}
@@ -634,6 +638,18 @@ proc miqt_exec_callback_cQImageCapture_disconnectNotify(vtbl: pointer, self: poi
   let self = QImageCapture(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
   vtbl[].disconnectNotify(self, slotval1)
+
+proc sender*(self: gen_qimagecapture_types.QImageCapture, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQImageCapture_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qimagecapture_types.QImageCapture, ): cint =
+  fcQImageCapture_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qimagecapture_types.QImageCapture, signal: cstring): cint =
+  fcQImageCapture_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qimagecapture_types.QImageCapture, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQImageCapture_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc create*(T: type gen_qimagecapture_types.QImageCapture,
     vtbl: ref QImageCaptureVTable = nil): gen_qimagecapture_types.QImageCapture =

@@ -220,10 +220,10 @@ public:
 	friend void QPointingDevice_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
 
 	// Wrappers to allow calling protected methods:
-	friend QObject* QPointingDevice_protectedbase_sender(bool* _dynamic_cast_ok, const void* self);
-	friend int QPointingDevice_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
-	friend int QPointingDevice_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
-	friend bool QPointingDevice_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+	friend QObject* QPointingDevice_protectedbase_sender(const void* self);
+	friend int QPointingDevice_protectedbase_senderSignalIndex(const void* self);
+	friend int QPointingDevice_protectedbase_receivers(const void* self, const char* signal);
+	friend bool QPointingDevice_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
 };
 
 QPointingDevice* QPointingDevice_new(struct QPointingDevice_VTable* vtbl) {
@@ -431,53 +431,29 @@ void QPointingDevice_virtualbase_disconnectNotify(void* self, QMetaMethod* signa
 }
 
 const QMetaObject* QPointingDevice_staticMetaObject() { return &QPointingDevice::staticMetaObject; }
-QObject* QPointingDevice_protectedbase_sender(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQPointingDevice* self_cast = dynamic_cast<VirtualQPointingDevice*>( (QPointingDevice*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return nullptr;
-	}
-	
-	*_dynamic_cast_ok = true;
+QObject* QPointingDevice_protectedbase_sender(const void* self) {
+	VirtualQPointingDevice* self_cast = static_cast<VirtualQPointingDevice*>( (QPointingDevice*)(self) );
 	
 	return self_cast->sender();
 
 }
 
-int QPointingDevice_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQPointingDevice* self_cast = dynamic_cast<VirtualQPointingDevice*>( (QPointingDevice*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return 0;
-	}
-	
-	*_dynamic_cast_ok = true;
+int QPointingDevice_protectedbase_senderSignalIndex(const void* self) {
+	VirtualQPointingDevice* self_cast = static_cast<VirtualQPointingDevice*>( (QPointingDevice*)(self) );
 	
 	return self_cast->senderSignalIndex();
 
 }
 
-int QPointingDevice_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal) {
-	VirtualQPointingDevice* self_cast = dynamic_cast<VirtualQPointingDevice*>( (QPointingDevice*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return 0;
-	}
-	
-	*_dynamic_cast_ok = true;
+int QPointingDevice_protectedbase_receivers(const void* self, const char* signal) {
+	VirtualQPointingDevice* self_cast = static_cast<VirtualQPointingDevice*>( (QPointingDevice*)(self) );
 	
 	return self_cast->receivers(signal);
 
 }
 
-bool QPointingDevice_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal) {
-	VirtualQPointingDevice* self_cast = dynamic_cast<VirtualQPointingDevice*>( (QPointingDevice*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return false;
-	}
-	
-	*_dynamic_cast_ok = true;
+bool QPointingDevice_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal) {
+	VirtualQPointingDevice* self_cast = static_cast<VirtualQPointingDevice*>( (QPointingDevice*)(self) );
 	
 	return self_cast->isSignalConnected(*signal);
 

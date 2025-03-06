@@ -157,6 +157,10 @@ proc fcQSpatialSound_virtualbase_childEvent(self: pointer, event: pointer): void
 proc fcQSpatialSound_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QSpatialSound_virtualbase_customEvent".}
 proc fcQSpatialSound_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QSpatialSound_virtualbase_connectNotify".}
 proc fcQSpatialSound_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QSpatialSound_virtualbase_disconnectNotify".}
+proc fcQSpatialSound_protectedbase_sender(self: pointer, ): pointer {.importc: "QSpatialSound_protectedbase_sender".}
+proc fcQSpatialSound_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QSpatialSound_protectedbase_senderSignalIndex".}
+proc fcQSpatialSound_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QSpatialSound_protectedbase_receivers".}
+proc fcQSpatialSound_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QSpatialSound_protectedbase_isSignalConnected".}
 proc fcQSpatialSound_new(vtbl: pointer, engine: pointer): ptr cQSpatialSound {.importc: "QSpatialSound_new".}
 proc fcQSpatialSound_staticMetaObject(): pointer {.importc: "QSpatialSound_staticMetaObject".}
 proc fcQSpatialSound_delete(self: pointer) {.importc: "QSpatialSound_delete".}
@@ -654,6 +658,18 @@ proc miqt_exec_callback_cQSpatialSound_disconnectNotify(vtbl: pointer, self: poi
   let self = QSpatialSound(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
   vtbl[].disconnectNotify(self, slotval1)
+
+proc sender*(self: gen_qspatialsound_types.QSpatialSound, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQSpatialSound_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qspatialsound_types.QSpatialSound, ): cint =
+  fcQSpatialSound_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qspatialsound_types.QSpatialSound, signal: cstring): cint =
+  fcQSpatialSound_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qspatialsound_types.QSpatialSound, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQSpatialSound_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc create*(T: type gen_qspatialsound_types.QSpatialSound,
     engine: gen_qaudioengine_types.QAudioEngine,

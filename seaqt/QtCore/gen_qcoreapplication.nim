@@ -153,6 +153,11 @@ proc fcQCoreApplication_virtualbase_childEvent(self: pointer, event: pointer): v
 proc fcQCoreApplication_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QCoreApplication_virtualbase_customEvent".}
 proc fcQCoreApplication_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QCoreApplication_virtualbase_connectNotify".}
 proc fcQCoreApplication_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QCoreApplication_virtualbase_disconnectNotify".}
+proc fcQCoreApplication_protectedbase_resolveInterface(self: pointer, name: cstring, revision: cint): pointer {.importc: "QCoreApplication_protectedbase_resolveInterface".}
+proc fcQCoreApplication_protectedbase_sender(self: pointer, ): pointer {.importc: "QCoreApplication_protectedbase_sender".}
+proc fcQCoreApplication_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QCoreApplication_protectedbase_senderSignalIndex".}
+proc fcQCoreApplication_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QCoreApplication_protectedbase_receivers".}
+proc fcQCoreApplication_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QCoreApplication_protectedbase_isSignalConnected".}
 proc fcQCoreApplication_new(vtbl: pointer, argc: ptr cint, argv: cstringArray): ptr cQCoreApplication {.importc: "QCoreApplication_new".}
 proc fcQCoreApplication_new2(vtbl: pointer, argc: ptr cint, argv: cstringArray, param3: cint): ptr cQCoreApplication {.importc: "QCoreApplication_new2".}
 proc fcQCoreApplication_staticMetaObject(): pointer {.importc: "QCoreApplication_staticMetaObject".}
@@ -622,6 +627,21 @@ proc miqt_exec_callback_cQCoreApplication_disconnectNotify(vtbl: pointer, self: 
   let self = QCoreApplication(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
   vtbl[].disconnectNotify(self, slotval1)
+
+proc resolveInterface*(self: gen_qcoreapplication_types.QCoreApplication, name: cstring, revision: cint): pointer =
+  fcQCoreApplication_protectedbase_resolveInterface(self.h, name, revision)
+
+proc sender*(self: gen_qcoreapplication_types.QCoreApplication, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQCoreApplication_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qcoreapplication_types.QCoreApplication, ): cint =
+  fcQCoreApplication_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qcoreapplication_types.QCoreApplication, signal: cstring): cint =
+  fcQCoreApplication_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qcoreapplication_types.QCoreApplication, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQCoreApplication_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc create*(T: type gen_qcoreapplication_types.QCoreApplication,
     vtbl: ref QCoreApplicationVTable = nil): gen_qcoreapplication_types.QCoreApplication =

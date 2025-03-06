@@ -195,6 +195,15 @@ proc fcQCheckBox_virtualbase_childEvent(self: pointer, event: pointer): void {.i
 proc fcQCheckBox_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QCheckBox_virtualbase_customEvent".}
 proc fcQCheckBox_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QCheckBox_virtualbase_connectNotify".}
 proc fcQCheckBox_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QCheckBox_virtualbase_disconnectNotify".}
+proc fcQCheckBox_protectedbase_updateMicroFocus(self: pointer, ): void {.importc: "QCheckBox_protectedbase_updateMicroFocus".}
+proc fcQCheckBox_protectedbase_create(self: pointer, ): void {.importc: "QCheckBox_protectedbase_create".}
+proc fcQCheckBox_protectedbase_destroy(self: pointer, ): void {.importc: "QCheckBox_protectedbase_destroy".}
+proc fcQCheckBox_protectedbase_focusNextChild(self: pointer, ): bool {.importc: "QCheckBox_protectedbase_focusNextChild".}
+proc fcQCheckBox_protectedbase_focusPreviousChild(self: pointer, ): bool {.importc: "QCheckBox_protectedbase_focusPreviousChild".}
+proc fcQCheckBox_protectedbase_sender(self: pointer, ): pointer {.importc: "QCheckBox_protectedbase_sender".}
+proc fcQCheckBox_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QCheckBox_protectedbase_senderSignalIndex".}
+proc fcQCheckBox_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QCheckBox_protectedbase_receivers".}
+proc fcQCheckBox_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QCheckBox_protectedbase_isSignalConnected".}
 proc fcQCheckBox_new(vtbl: pointer, parent: pointer): ptr cQCheckBox {.importc: "QCheckBox_new".}
 proc fcQCheckBox_new2(vtbl: pointer, ): ptr cQCheckBox {.importc: "QCheckBox_new2".}
 proc fcQCheckBox_new3(vtbl: pointer, text: struct_miqt_string): ptr cQCheckBox {.importc: "QCheckBox_new3".}
@@ -882,6 +891,33 @@ proc miqt_exec_callback_cQCheckBox_disconnectNotify(vtbl: pointer, self: pointer
   let self = QCheckBox(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
   vtbl[].disconnectNotify(self, slotval1)
+
+proc updateMicroFocus*(self: gen_qcheckbox_types.QCheckBox, ): void =
+  fcQCheckBox_protectedbase_updateMicroFocus(self.h)
+
+proc create*(self: gen_qcheckbox_types.QCheckBox, ): void =
+  fcQCheckBox_protectedbase_create(self.h)
+
+proc destroy*(self: gen_qcheckbox_types.QCheckBox, ): void =
+  fcQCheckBox_protectedbase_destroy(self.h)
+
+proc focusNextChild*(self: gen_qcheckbox_types.QCheckBox, ): bool =
+  fcQCheckBox_protectedbase_focusNextChild(self.h)
+
+proc focusPreviousChild*(self: gen_qcheckbox_types.QCheckBox, ): bool =
+  fcQCheckBox_protectedbase_focusPreviousChild(self.h)
+
+proc sender*(self: gen_qcheckbox_types.QCheckBox, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQCheckBox_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qcheckbox_types.QCheckBox, ): cint =
+  fcQCheckBox_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qcheckbox_types.QCheckBox, signal: cstring): cint =
+  fcQCheckBox_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qcheckbox_types.QCheckBox, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQCheckBox_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc create*(T: type gen_qcheckbox_types.QCheckBox,
     parent: gen_qwidget_types.QWidget,

@@ -45,6 +45,7 @@ export gen_qabstractscrollarea_types
 
 import
   ../QtCore/gen_qcoreevent_types,
+  ../QtCore/gen_qmargins_types,
   ../QtCore/gen_qmetaobject_types,
   ../QtCore/gen_qobject_types,
   ../QtCore/gen_qobjectdefs_types,
@@ -61,6 +62,7 @@ import
   ./gen_qwidget_types
 export
   gen_qcoreevent_types,
+  gen_qmargins_types,
   gen_qmetaobject_types,
   gen_qobject_types,
   gen_qobjectdefs_types,
@@ -216,6 +218,19 @@ proc fcQAbstractScrollArea_virtualbase_childEvent(self: pointer, event: pointer)
 proc fcQAbstractScrollArea_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QAbstractScrollArea_virtualbase_customEvent".}
 proc fcQAbstractScrollArea_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QAbstractScrollArea_virtualbase_connectNotify".}
 proc fcQAbstractScrollArea_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QAbstractScrollArea_virtualbase_disconnectNotify".}
+proc fcQAbstractScrollArea_protectedbase_setViewportMargins(self: pointer, left: cint, top: cint, right: cint, bottom: cint): void {.importc: "QAbstractScrollArea_protectedbase_setViewportMargins".}
+proc fcQAbstractScrollArea_protectedbase_setViewportMarginsWithMargins(self: pointer, margins: pointer): void {.importc: "QAbstractScrollArea_protectedbase_setViewportMarginsWithMargins".}
+proc fcQAbstractScrollArea_protectedbase_viewportMargins(self: pointer, ): pointer {.importc: "QAbstractScrollArea_protectedbase_viewportMargins".}
+proc fcQAbstractScrollArea_protectedbase_drawFrame(self: pointer, param1: pointer): void {.importc: "QAbstractScrollArea_protectedbase_drawFrame".}
+proc fcQAbstractScrollArea_protectedbase_updateMicroFocus(self: pointer, ): void {.importc: "QAbstractScrollArea_protectedbase_updateMicroFocus".}
+proc fcQAbstractScrollArea_protectedbase_create(self: pointer, ): void {.importc: "QAbstractScrollArea_protectedbase_create".}
+proc fcQAbstractScrollArea_protectedbase_destroy(self: pointer, ): void {.importc: "QAbstractScrollArea_protectedbase_destroy".}
+proc fcQAbstractScrollArea_protectedbase_focusNextChild(self: pointer, ): bool {.importc: "QAbstractScrollArea_protectedbase_focusNextChild".}
+proc fcQAbstractScrollArea_protectedbase_focusPreviousChild(self: pointer, ): bool {.importc: "QAbstractScrollArea_protectedbase_focusPreviousChild".}
+proc fcQAbstractScrollArea_protectedbase_sender(self: pointer, ): pointer {.importc: "QAbstractScrollArea_protectedbase_sender".}
+proc fcQAbstractScrollArea_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QAbstractScrollArea_protectedbase_senderSignalIndex".}
+proc fcQAbstractScrollArea_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QAbstractScrollArea_protectedbase_receivers".}
+proc fcQAbstractScrollArea_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QAbstractScrollArea_protectedbase_isSignalConnected".}
 proc fcQAbstractScrollArea_new(vtbl: pointer, parent: pointer): ptr cQAbstractScrollArea {.importc: "QAbstractScrollArea_new".}
 proc fcQAbstractScrollArea_new2(vtbl: pointer, ): ptr cQAbstractScrollArea {.importc: "QAbstractScrollArea_new2".}
 proc fcQAbstractScrollArea_staticMetaObject(): pointer {.importc: "QAbstractScrollArea_staticMetaObject".}
@@ -939,6 +954,45 @@ proc miqt_exec_callback_cQAbstractScrollArea_disconnectNotify(vtbl: pointer, sel
   let self = QAbstractScrollArea(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
   vtbl[].disconnectNotify(self, slotval1)
+
+proc setViewportMargins*(self: gen_qabstractscrollarea_types.QAbstractScrollArea, left: cint, top: cint, right: cint, bottom: cint): void =
+  fcQAbstractScrollArea_protectedbase_setViewportMargins(self.h, left, top, right, bottom)
+
+proc setViewportMargins*(self: gen_qabstractscrollarea_types.QAbstractScrollArea, margins: gen_qmargins_types.QMargins): void =
+  fcQAbstractScrollArea_protectedbase_setViewportMarginsWithMargins(self.h, margins.h)
+
+proc viewportMargins*(self: gen_qabstractscrollarea_types.QAbstractScrollArea, ): gen_qmargins_types.QMargins =
+  gen_qmargins_types.QMargins(h: fcQAbstractScrollArea_protectedbase_viewportMargins(self.h))
+
+proc drawFrame*(self: gen_qabstractscrollarea_types.QAbstractScrollArea, param1: gen_qpainter_types.QPainter): void =
+  fcQAbstractScrollArea_protectedbase_drawFrame(self.h, param1.h)
+
+proc updateMicroFocus*(self: gen_qabstractscrollarea_types.QAbstractScrollArea, ): void =
+  fcQAbstractScrollArea_protectedbase_updateMicroFocus(self.h)
+
+proc create*(self: gen_qabstractscrollarea_types.QAbstractScrollArea, ): void =
+  fcQAbstractScrollArea_protectedbase_create(self.h)
+
+proc destroy*(self: gen_qabstractscrollarea_types.QAbstractScrollArea, ): void =
+  fcQAbstractScrollArea_protectedbase_destroy(self.h)
+
+proc focusNextChild*(self: gen_qabstractscrollarea_types.QAbstractScrollArea, ): bool =
+  fcQAbstractScrollArea_protectedbase_focusNextChild(self.h)
+
+proc focusPreviousChild*(self: gen_qabstractscrollarea_types.QAbstractScrollArea, ): bool =
+  fcQAbstractScrollArea_protectedbase_focusPreviousChild(self.h)
+
+proc sender*(self: gen_qabstractscrollarea_types.QAbstractScrollArea, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQAbstractScrollArea_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qabstractscrollarea_types.QAbstractScrollArea, ): cint =
+  fcQAbstractScrollArea_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qabstractscrollarea_types.QAbstractScrollArea, signal: cstring): cint =
+  fcQAbstractScrollArea_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qabstractscrollarea_types.QAbstractScrollArea, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQAbstractScrollArea_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc create*(T: type gen_qabstractscrollarea_types.QAbstractScrollArea,
     parent: gen_qwidget_types.QWidget,

@@ -268,6 +268,11 @@ proc fcQQuickWindow_virtualbase_childEvent(self: pointer, event: pointer): void 
 proc fcQQuickWindow_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QQuickWindow_virtualbase_customEvent".}
 proc fcQQuickWindow_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QQuickWindow_virtualbase_connectNotify".}
 proc fcQQuickWindow_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QQuickWindow_virtualbase_disconnectNotify".}
+proc fcQQuickWindow_protectedbase_resolveInterface(self: pointer, name: cstring, revision: cint): pointer {.importc: "QQuickWindow_protectedbase_resolveInterface".}
+proc fcQQuickWindow_protectedbase_sender(self: pointer, ): pointer {.importc: "QQuickWindow_protectedbase_sender".}
+proc fcQQuickWindow_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QQuickWindow_protectedbase_senderSignalIndex".}
+proc fcQQuickWindow_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QQuickWindow_protectedbase_receivers".}
+proc fcQQuickWindow_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QQuickWindow_protectedbase_isSignalConnected".}
 proc fcQQuickWindow_new(vtbl: pointer, ): ptr cQQuickWindow {.importc: "QQuickWindow_new".}
 proc fcQQuickWindow_new2(vtbl: pointer, renderControl: pointer): ptr cQQuickWindow {.importc: "QQuickWindow_new2".}
 proc fcQQuickWindow_new3(vtbl: pointer, parent: pointer): ptr cQQuickWindow {.importc: "QQuickWindow_new3".}
@@ -1149,6 +1154,21 @@ proc miqt_exec_callback_cQQuickWindow_disconnectNotify(vtbl: pointer, self: poin
   let self = QQuickWindow(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
   vtbl[].disconnectNotify(self, slotval1)
+
+proc resolveInterface*(self: gen_qquickwindow_types.QQuickWindow, name: cstring, revision: cint): pointer =
+  fcQQuickWindow_protectedbase_resolveInterface(self.h, name, revision)
+
+proc sender*(self: gen_qquickwindow_types.QQuickWindow, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQQuickWindow_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qquickwindow_types.QQuickWindow, ): cint =
+  fcQQuickWindow_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qquickwindow_types.QQuickWindow, signal: cstring): cint =
+  fcQQuickWindow_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qquickwindow_types.QQuickWindow, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQQuickWindow_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc create*(T: type gen_qquickwindow_types.QQuickWindow,
     vtbl: ref QQuickWindowVTable = nil): gen_qquickwindow_types.QQuickWindow =

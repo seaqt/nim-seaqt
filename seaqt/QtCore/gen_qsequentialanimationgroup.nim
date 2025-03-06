@@ -98,6 +98,10 @@ proc fcQSequentialAnimationGroup_virtualbase_childEvent(self: pointer, event: po
 proc fcQSequentialAnimationGroup_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QSequentialAnimationGroup_virtualbase_customEvent".}
 proc fcQSequentialAnimationGroup_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QSequentialAnimationGroup_virtualbase_connectNotify".}
 proc fcQSequentialAnimationGroup_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QSequentialAnimationGroup_virtualbase_disconnectNotify".}
+proc fcQSequentialAnimationGroup_protectedbase_sender(self: pointer, ): pointer {.importc: "QSequentialAnimationGroup_protectedbase_sender".}
+proc fcQSequentialAnimationGroup_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QSequentialAnimationGroup_protectedbase_senderSignalIndex".}
+proc fcQSequentialAnimationGroup_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QSequentialAnimationGroup_protectedbase_receivers".}
+proc fcQSequentialAnimationGroup_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QSequentialAnimationGroup_protectedbase_isSignalConnected".}
 proc fcQSequentialAnimationGroup_new(vtbl: pointer, ): ptr cQSequentialAnimationGroup {.importc: "QSequentialAnimationGroup_new".}
 proc fcQSequentialAnimationGroup_new2(vtbl: pointer, parent: pointer): ptr cQSequentialAnimationGroup {.importc: "QSequentialAnimationGroup_new2".}
 proc fcQSequentialAnimationGroup_staticMetaObject(): pointer {.importc: "QSequentialAnimationGroup_staticMetaObject".}
@@ -325,6 +329,18 @@ proc miqt_exec_callback_cQSequentialAnimationGroup_disconnectNotify(vtbl: pointe
   let self = QSequentialAnimationGroup(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
   vtbl[].disconnectNotify(self, slotval1)
+
+proc sender*(self: gen_qsequentialanimationgroup_types.QSequentialAnimationGroup, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQSequentialAnimationGroup_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qsequentialanimationgroup_types.QSequentialAnimationGroup, ): cint =
+  fcQSequentialAnimationGroup_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qsequentialanimationgroup_types.QSequentialAnimationGroup, signal: cstring): cint =
+  fcQSequentialAnimationGroup_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qsequentialanimationgroup_types.QSequentialAnimationGroup, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQSequentialAnimationGroup_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc create*(T: type gen_qsequentialanimationgroup_types.QSequentialAnimationGroup,
     vtbl: ref QSequentialAnimationGroupVTable = nil): gen_qsequentialanimationgroup_types.QSequentialAnimationGroup =

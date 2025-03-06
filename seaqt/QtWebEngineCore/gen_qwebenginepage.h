@@ -270,10 +270,10 @@ void QWebEnginePage_virtualbase_childEvent(void* self, QChildEvent* event);
 void QWebEnginePage_virtualbase_customEvent(void* self, QEvent* event);
 void QWebEnginePage_virtualbase_connectNotify(void* self, QMetaMethod* signal);
 void QWebEnginePage_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
-QObject* QWebEnginePage_protectedbase_sender(bool* _dynamic_cast_ok, const void* self);
-int QWebEnginePage_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
-int QWebEnginePage_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
-bool QWebEnginePage_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+QObject* QWebEnginePage_protectedbase_sender(const void* self);
+int QWebEnginePage_protectedbase_senderSignalIndex(const void* self);
+int QWebEnginePage_protectedbase_receivers(const void* self, const char* signal);
+bool QWebEnginePage_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
 const QMetaObject* QWebEnginePage_staticMetaObject();
 void QWebEnginePage_delete(QWebEnginePage* self);
 

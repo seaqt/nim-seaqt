@@ -194,10 +194,10 @@ public:
 	friend void QCamera_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
 
 	// Wrappers to allow calling protected methods:
-	friend QObject* QCamera_protectedbase_sender(bool* _dynamic_cast_ok, const void* self);
-	friend int QCamera_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
-	friend int QCamera_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
-	friend bool QCamera_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+	friend QObject* QCamera_protectedbase_sender(const void* self);
+	friend int QCamera_protectedbase_senderSignalIndex(const void* self);
+	friend int QCamera_protectedbase_receivers(const void* self, const char* signal);
+	friend bool QCamera_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
 };
 
 QCamera* QCamera_new(struct QCamera_VTable* vtbl) {
@@ -1010,53 +1010,29 @@ void QCamera_virtualbase_disconnectNotify(void* self, QMetaMethod* signal) {
 }
 
 const QMetaObject* QCamera_staticMetaObject() { return &QCamera::staticMetaObject; }
-QObject* QCamera_protectedbase_sender(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQCamera* self_cast = dynamic_cast<VirtualQCamera*>( (QCamera*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return nullptr;
-	}
-	
-	*_dynamic_cast_ok = true;
+QObject* QCamera_protectedbase_sender(const void* self) {
+	VirtualQCamera* self_cast = static_cast<VirtualQCamera*>( (QCamera*)(self) );
 	
 	return self_cast->sender();
 
 }
 
-int QCamera_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQCamera* self_cast = dynamic_cast<VirtualQCamera*>( (QCamera*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return 0;
-	}
-	
-	*_dynamic_cast_ok = true;
+int QCamera_protectedbase_senderSignalIndex(const void* self) {
+	VirtualQCamera* self_cast = static_cast<VirtualQCamera*>( (QCamera*)(self) );
 	
 	return self_cast->senderSignalIndex();
 
 }
 
-int QCamera_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal) {
-	VirtualQCamera* self_cast = dynamic_cast<VirtualQCamera*>( (QCamera*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return 0;
-	}
-	
-	*_dynamic_cast_ok = true;
+int QCamera_protectedbase_receivers(const void* self, const char* signal) {
+	VirtualQCamera* self_cast = static_cast<VirtualQCamera*>( (QCamera*)(self) );
 	
 	return self_cast->receivers(signal);
 
 }
 
-bool QCamera_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal) {
-	VirtualQCamera* self_cast = dynamic_cast<VirtualQCamera*>( (QCamera*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return false;
-	}
-	
-	*_dynamic_cast_ok = true;
+bool QCamera_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal) {
+	VirtualQCamera* self_cast = static_cast<VirtualQCamera*>( (QCamera*)(self) );
 	
 	return self_cast->isSignalConnected(*signal);
 

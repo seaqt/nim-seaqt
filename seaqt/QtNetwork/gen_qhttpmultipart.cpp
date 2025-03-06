@@ -239,10 +239,10 @@ public:
 	friend void QHttpMultiPart_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
 
 	// Wrappers to allow calling protected methods:
-	friend QObject* QHttpMultiPart_protectedbase_sender(bool* _dynamic_cast_ok, const void* self);
-	friend int QHttpMultiPart_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
-	friend int QHttpMultiPart_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
-	friend bool QHttpMultiPart_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+	friend QObject* QHttpMultiPart_protectedbase_sender(const void* self);
+	friend int QHttpMultiPart_protectedbase_senderSignalIndex(const void* self);
+	friend int QHttpMultiPart_protectedbase_receivers(const void* self, const char* signal);
+	friend bool QHttpMultiPart_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
 };
 
 QHttpMultiPart* QHttpMultiPart_new(struct QHttpMultiPart_VTable* vtbl) {
@@ -393,53 +393,29 @@ void QHttpMultiPart_virtualbase_disconnectNotify(void* self, QMetaMethod* signal
 }
 
 const QMetaObject* QHttpMultiPart_staticMetaObject() { return &QHttpMultiPart::staticMetaObject; }
-QObject* QHttpMultiPart_protectedbase_sender(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQHttpMultiPart* self_cast = dynamic_cast<VirtualQHttpMultiPart*>( (QHttpMultiPart*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return nullptr;
-	}
-	
-	*_dynamic_cast_ok = true;
+QObject* QHttpMultiPart_protectedbase_sender(const void* self) {
+	VirtualQHttpMultiPart* self_cast = static_cast<VirtualQHttpMultiPart*>( (QHttpMultiPart*)(self) );
 	
 	return self_cast->sender();
 
 }
 
-int QHttpMultiPart_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQHttpMultiPart* self_cast = dynamic_cast<VirtualQHttpMultiPart*>( (QHttpMultiPart*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return 0;
-	}
-	
-	*_dynamic_cast_ok = true;
+int QHttpMultiPart_protectedbase_senderSignalIndex(const void* self) {
+	VirtualQHttpMultiPart* self_cast = static_cast<VirtualQHttpMultiPart*>( (QHttpMultiPart*)(self) );
 	
 	return self_cast->senderSignalIndex();
 
 }
 
-int QHttpMultiPart_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal) {
-	VirtualQHttpMultiPart* self_cast = dynamic_cast<VirtualQHttpMultiPart*>( (QHttpMultiPart*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return 0;
-	}
-	
-	*_dynamic_cast_ok = true;
+int QHttpMultiPart_protectedbase_receivers(const void* self, const char* signal) {
+	VirtualQHttpMultiPart* self_cast = static_cast<VirtualQHttpMultiPart*>( (QHttpMultiPart*)(self) );
 	
 	return self_cast->receivers(signal);
 
 }
 
-bool QHttpMultiPart_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal) {
-	VirtualQHttpMultiPart* self_cast = dynamic_cast<VirtualQHttpMultiPart*>( (QHttpMultiPart*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return false;
-	}
-	
-	*_dynamic_cast_ok = true;
+bool QHttpMultiPart_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal) {
+	VirtualQHttpMultiPart* self_cast = static_cast<VirtualQHttpMultiPart*>( (QHttpMultiPart*)(self) );
 	
 	return self_cast->isSignalConnected(*signal);
 

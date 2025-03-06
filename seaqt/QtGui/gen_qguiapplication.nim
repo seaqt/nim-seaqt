@@ -183,6 +183,11 @@ proc fcQGuiApplication_virtualbase_childEvent(self: pointer, event: pointer): vo
 proc fcQGuiApplication_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QGuiApplication_virtualbase_customEvent".}
 proc fcQGuiApplication_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QGuiApplication_virtualbase_connectNotify".}
 proc fcQGuiApplication_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QGuiApplication_virtualbase_disconnectNotify".}
+proc fcQGuiApplication_protectedbase_resolveInterface(self: pointer, name: cstring, revision: cint): pointer {.importc: "QGuiApplication_protectedbase_resolveInterface".}
+proc fcQGuiApplication_protectedbase_sender(self: pointer, ): pointer {.importc: "QGuiApplication_protectedbase_sender".}
+proc fcQGuiApplication_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QGuiApplication_protectedbase_senderSignalIndex".}
+proc fcQGuiApplication_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QGuiApplication_protectedbase_receivers".}
+proc fcQGuiApplication_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QGuiApplication_protectedbase_isSignalConnected".}
 proc fcQGuiApplication_new(vtbl: pointer, argc: ptr cint, argv: cstringArray): ptr cQGuiApplication {.importc: "QGuiApplication_new".}
 proc fcQGuiApplication_new2(vtbl: pointer, argc: ptr cint, argv: cstringArray, param3: cint): ptr cQGuiApplication {.importc: "QGuiApplication_new2".}
 proc fcQGuiApplication_staticMetaObject(): pointer {.importc: "QGuiApplication_staticMetaObject".}
@@ -797,6 +802,21 @@ proc miqt_exec_callback_cQGuiApplication_disconnectNotify(vtbl: pointer, self: p
   let self = QGuiApplication(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
   vtbl[].disconnectNotify(self, slotval1)
+
+proc resolveInterface*(self: gen_qguiapplication_types.QGuiApplication, name: cstring, revision: cint): pointer =
+  fcQGuiApplication_protectedbase_resolveInterface(self.h, name, revision)
+
+proc sender*(self: gen_qguiapplication_types.QGuiApplication, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQGuiApplication_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qguiapplication_types.QGuiApplication, ): cint =
+  fcQGuiApplication_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qguiapplication_types.QGuiApplication, signal: cstring): cint =
+  fcQGuiApplication_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qguiapplication_types.QGuiApplication, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQGuiApplication_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc create*(T: type gen_qguiapplication_types.QGuiApplication,
     vtbl: ref QGuiApplicationVTable = nil): gen_qguiapplication_types.QGuiApplication =

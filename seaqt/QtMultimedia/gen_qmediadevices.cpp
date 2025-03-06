@@ -189,10 +189,10 @@ public:
 	friend void QMediaDevices_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
 
 	// Wrappers to allow calling protected methods:
-	friend QObject* QMediaDevices_protectedbase_sender(bool* _dynamic_cast_ok, const void* self);
-	friend int QMediaDevices_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
-	friend int QMediaDevices_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
-	friend bool QMediaDevices_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+	friend QObject* QMediaDevices_protectedbase_sender(const void* self);
+	friend int QMediaDevices_protectedbase_senderSignalIndex(const void* self);
+	friend int QMediaDevices_protectedbase_receivers(const void* self, const char* signal);
+	friend bool QMediaDevices_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
 };
 
 QMediaDevices* QMediaDevices_new(struct QMediaDevices_VTable* vtbl) {
@@ -409,53 +409,29 @@ void QMediaDevices_virtualbase_disconnectNotify(void* self, QMetaMethod* signal)
 }
 
 const QMetaObject* QMediaDevices_staticMetaObject() { return &QMediaDevices::staticMetaObject; }
-QObject* QMediaDevices_protectedbase_sender(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQMediaDevices* self_cast = dynamic_cast<VirtualQMediaDevices*>( (QMediaDevices*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return nullptr;
-	}
-	
-	*_dynamic_cast_ok = true;
+QObject* QMediaDevices_protectedbase_sender(const void* self) {
+	VirtualQMediaDevices* self_cast = static_cast<VirtualQMediaDevices*>( (QMediaDevices*)(self) );
 	
 	return self_cast->sender();
 
 }
 
-int QMediaDevices_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQMediaDevices* self_cast = dynamic_cast<VirtualQMediaDevices*>( (QMediaDevices*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return 0;
-	}
-	
-	*_dynamic_cast_ok = true;
+int QMediaDevices_protectedbase_senderSignalIndex(const void* self) {
+	VirtualQMediaDevices* self_cast = static_cast<VirtualQMediaDevices*>( (QMediaDevices*)(self) );
 	
 	return self_cast->senderSignalIndex();
 
 }
 
-int QMediaDevices_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal) {
-	VirtualQMediaDevices* self_cast = dynamic_cast<VirtualQMediaDevices*>( (QMediaDevices*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return 0;
-	}
-	
-	*_dynamic_cast_ok = true;
+int QMediaDevices_protectedbase_receivers(const void* self, const char* signal) {
+	VirtualQMediaDevices* self_cast = static_cast<VirtualQMediaDevices*>( (QMediaDevices*)(self) );
 	
 	return self_cast->receivers(signal);
 
 }
 
-bool QMediaDevices_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal) {
-	VirtualQMediaDevices* self_cast = dynamic_cast<VirtualQMediaDevices*>( (QMediaDevices*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return false;
-	}
-	
-	*_dynamic_cast_ok = true;
+bool QMediaDevices_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal) {
+	VirtualQMediaDevices* self_cast = static_cast<VirtualQMediaDevices*>( (QMediaDevices*)(self) );
 	
 	return self_cast->isSignalConnected(*signal);
 

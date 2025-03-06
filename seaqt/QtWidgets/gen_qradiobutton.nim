@@ -188,6 +188,15 @@ proc fcQRadioButton_virtualbase_childEvent(self: pointer, event: pointer): void 
 proc fcQRadioButton_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QRadioButton_virtualbase_customEvent".}
 proc fcQRadioButton_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QRadioButton_virtualbase_connectNotify".}
 proc fcQRadioButton_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QRadioButton_virtualbase_disconnectNotify".}
+proc fcQRadioButton_protectedbase_updateMicroFocus(self: pointer, ): void {.importc: "QRadioButton_protectedbase_updateMicroFocus".}
+proc fcQRadioButton_protectedbase_create(self: pointer, ): void {.importc: "QRadioButton_protectedbase_create".}
+proc fcQRadioButton_protectedbase_destroy(self: pointer, ): void {.importc: "QRadioButton_protectedbase_destroy".}
+proc fcQRadioButton_protectedbase_focusNextChild(self: pointer, ): bool {.importc: "QRadioButton_protectedbase_focusNextChild".}
+proc fcQRadioButton_protectedbase_focusPreviousChild(self: pointer, ): bool {.importc: "QRadioButton_protectedbase_focusPreviousChild".}
+proc fcQRadioButton_protectedbase_sender(self: pointer, ): pointer {.importc: "QRadioButton_protectedbase_sender".}
+proc fcQRadioButton_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QRadioButton_protectedbase_senderSignalIndex".}
+proc fcQRadioButton_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QRadioButton_protectedbase_receivers".}
+proc fcQRadioButton_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QRadioButton_protectedbase_isSignalConnected".}
 proc fcQRadioButton_new(vtbl: pointer, parent: pointer): ptr cQRadioButton {.importc: "QRadioButton_new".}
 proc fcQRadioButton_new2(vtbl: pointer, ): ptr cQRadioButton {.importc: "QRadioButton_new2".}
 proc fcQRadioButton_new3(vtbl: pointer, text: struct_miqt_string): ptr cQRadioButton {.importc: "QRadioButton_new3".}
@@ -840,6 +849,33 @@ proc miqt_exec_callback_cQRadioButton_disconnectNotify(vtbl: pointer, self: poin
   let self = QRadioButton(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
   vtbl[].disconnectNotify(self, slotval1)
+
+proc updateMicroFocus*(self: gen_qradiobutton_types.QRadioButton, ): void =
+  fcQRadioButton_protectedbase_updateMicroFocus(self.h)
+
+proc create*(self: gen_qradiobutton_types.QRadioButton, ): void =
+  fcQRadioButton_protectedbase_create(self.h)
+
+proc destroy*(self: gen_qradiobutton_types.QRadioButton, ): void =
+  fcQRadioButton_protectedbase_destroy(self.h)
+
+proc focusNextChild*(self: gen_qradiobutton_types.QRadioButton, ): bool =
+  fcQRadioButton_protectedbase_focusNextChild(self.h)
+
+proc focusPreviousChild*(self: gen_qradiobutton_types.QRadioButton, ): bool =
+  fcQRadioButton_protectedbase_focusPreviousChild(self.h)
+
+proc sender*(self: gen_qradiobutton_types.QRadioButton, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQRadioButton_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qradiobutton_types.QRadioButton, ): cint =
+  fcQRadioButton_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qradiobutton_types.QRadioButton, signal: cstring): cint =
+  fcQRadioButton_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qradiobutton_types.QRadioButton, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQRadioButton_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc create*(T: type gen_qradiobutton_types.QRadioButton,
     parent: gen_qwidget_types.QWidget,

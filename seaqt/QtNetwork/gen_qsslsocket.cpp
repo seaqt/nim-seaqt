@@ -648,19 +648,19 @@ public:
 	friend void QSslSocket_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
 
 	// Wrappers to allow calling protected methods:
-	friend void QSslSocket_protectedbase_setSocketState(bool* _dynamic_cast_ok, void* self, int state);
-	friend void QSslSocket_protectedbase_setSocketError(bool* _dynamic_cast_ok, void* self, int socketError);
-	friend void QSslSocket_protectedbase_setLocalPort(bool* _dynamic_cast_ok, void* self, uint16_t port);
-	friend void QSslSocket_protectedbase_setLocalAddress(bool* _dynamic_cast_ok, void* self, QHostAddress* address);
-	friend void QSslSocket_protectedbase_setPeerPort(bool* _dynamic_cast_ok, void* self, uint16_t port);
-	friend void QSslSocket_protectedbase_setPeerAddress(bool* _dynamic_cast_ok, void* self, QHostAddress* address);
-	friend void QSslSocket_protectedbase_setPeerName(bool* _dynamic_cast_ok, void* self, struct miqt_string name);
-	friend void QSslSocket_protectedbase_setOpenMode(bool* _dynamic_cast_ok, void* self, int openMode);
-	friend void QSslSocket_protectedbase_setErrorString(bool* _dynamic_cast_ok, void* self, struct miqt_string errorString);
-	friend QObject* QSslSocket_protectedbase_sender(bool* _dynamic_cast_ok, const void* self);
-	friend int QSslSocket_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
-	friend int QSslSocket_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
-	friend bool QSslSocket_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+	friend void QSslSocket_protectedbase_setSocketState(void* self, int state);
+	friend void QSslSocket_protectedbase_setSocketError(void* self, int socketError);
+	friend void QSslSocket_protectedbase_setLocalPort(void* self, uint16_t port);
+	friend void QSslSocket_protectedbase_setLocalAddress(void* self, QHostAddress* address);
+	friend void QSslSocket_protectedbase_setPeerPort(void* self, uint16_t port);
+	friend void QSslSocket_protectedbase_setPeerAddress(void* self, QHostAddress* address);
+	friend void QSslSocket_protectedbase_setPeerName(void* self, struct miqt_string name);
+	friend void QSslSocket_protectedbase_setOpenMode(void* self, int openMode);
+	friend void QSslSocket_protectedbase_setErrorString(void* self, struct miqt_string errorString);
+	friend QObject* QSslSocket_protectedbase_sender(const void* self);
+	friend int QSslSocket_protectedbase_senderSignalIndex(const void* self);
+	friend int QSslSocket_protectedbase_receivers(const void* self, const char* signal);
+	friend bool QSslSocket_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
 };
 
 QSslSocket* QSslSocket_new(struct QSslSocket_VTable* vtbl) {
@@ -1671,172 +1671,94 @@ void QSslSocket_virtualbase_disconnectNotify(void* self, QMetaMethod* signal) {
 }
 
 const QMetaObject* QSslSocket_staticMetaObject() { return &QSslSocket::staticMetaObject; }
-void QSslSocket_protectedbase_setSocketState(bool* _dynamic_cast_ok, void* self, int state) {
-	VirtualQSslSocket* self_cast = dynamic_cast<VirtualQSslSocket*>( (QSslSocket*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QSslSocket_protectedbase_setSocketState(void* self, int state) {
+	VirtualQSslSocket* self_cast = static_cast<VirtualQSslSocket*>( (QSslSocket*)(self) );
 	
 	self_cast->setSocketState(static_cast<VirtualQSslSocket::SocketState>(state));
 
 }
 
-void QSslSocket_protectedbase_setSocketError(bool* _dynamic_cast_ok, void* self, int socketError) {
-	VirtualQSslSocket* self_cast = dynamic_cast<VirtualQSslSocket*>( (QSslSocket*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QSslSocket_protectedbase_setSocketError(void* self, int socketError) {
+	VirtualQSslSocket* self_cast = static_cast<VirtualQSslSocket*>( (QSslSocket*)(self) );
 	
 	self_cast->setSocketError(static_cast<VirtualQSslSocket::SocketError>(socketError));
 
 }
 
-void QSslSocket_protectedbase_setLocalPort(bool* _dynamic_cast_ok, void* self, uint16_t port) {
-	VirtualQSslSocket* self_cast = dynamic_cast<VirtualQSslSocket*>( (QSslSocket*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QSslSocket_protectedbase_setLocalPort(void* self, uint16_t port) {
+	VirtualQSslSocket* self_cast = static_cast<VirtualQSslSocket*>( (QSslSocket*)(self) );
 	
 	self_cast->setLocalPort(static_cast<quint16>(port));
 
 }
 
-void QSslSocket_protectedbase_setLocalAddress(bool* _dynamic_cast_ok, void* self, QHostAddress* address) {
-	VirtualQSslSocket* self_cast = dynamic_cast<VirtualQSslSocket*>( (QSslSocket*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QSslSocket_protectedbase_setLocalAddress(void* self, QHostAddress* address) {
+	VirtualQSslSocket* self_cast = static_cast<VirtualQSslSocket*>( (QSslSocket*)(self) );
 	
 	self_cast->setLocalAddress(*address);
 
 }
 
-void QSslSocket_protectedbase_setPeerPort(bool* _dynamic_cast_ok, void* self, uint16_t port) {
-	VirtualQSslSocket* self_cast = dynamic_cast<VirtualQSslSocket*>( (QSslSocket*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QSslSocket_protectedbase_setPeerPort(void* self, uint16_t port) {
+	VirtualQSslSocket* self_cast = static_cast<VirtualQSslSocket*>( (QSslSocket*)(self) );
 	
 	self_cast->setPeerPort(static_cast<quint16>(port));
 
 }
 
-void QSslSocket_protectedbase_setPeerAddress(bool* _dynamic_cast_ok, void* self, QHostAddress* address) {
-	VirtualQSslSocket* self_cast = dynamic_cast<VirtualQSslSocket*>( (QSslSocket*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QSslSocket_protectedbase_setPeerAddress(void* self, QHostAddress* address) {
+	VirtualQSslSocket* self_cast = static_cast<VirtualQSslSocket*>( (QSslSocket*)(self) );
 	
 	self_cast->setPeerAddress(*address);
 
 }
 
-void QSslSocket_protectedbase_setPeerName(bool* _dynamic_cast_ok, void* self, struct miqt_string name) {
-	VirtualQSslSocket* self_cast = dynamic_cast<VirtualQSslSocket*>( (QSslSocket*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QSslSocket_protectedbase_setPeerName(void* self, struct miqt_string name) {
+	VirtualQSslSocket* self_cast = static_cast<VirtualQSslSocket*>( (QSslSocket*)(self) );
 			QString name_QString = QString::fromUtf8(name.data, name.len);
 
 	self_cast->setPeerName(name_QString);
 
 }
 
-void QSslSocket_protectedbase_setOpenMode(bool* _dynamic_cast_ok, void* self, int openMode) {
-	VirtualQSslSocket* self_cast = dynamic_cast<VirtualQSslSocket*>( (QSslSocket*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QSslSocket_protectedbase_setOpenMode(void* self, int openMode) {
+	VirtualQSslSocket* self_cast = static_cast<VirtualQSslSocket*>( (QSslSocket*)(self) );
 	
 	self_cast->setOpenMode(static_cast<VirtualQSslSocket::OpenMode>(openMode));
 
 }
 
-void QSslSocket_protectedbase_setErrorString(bool* _dynamic_cast_ok, void* self, struct miqt_string errorString) {
-	VirtualQSslSocket* self_cast = dynamic_cast<VirtualQSslSocket*>( (QSslSocket*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QSslSocket_protectedbase_setErrorString(void* self, struct miqt_string errorString) {
+	VirtualQSslSocket* self_cast = static_cast<VirtualQSslSocket*>( (QSslSocket*)(self) );
 			QString errorString_QString = QString::fromUtf8(errorString.data, errorString.len);
 
 	self_cast->setErrorString(errorString_QString);
 
 }
 
-QObject* QSslSocket_protectedbase_sender(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQSslSocket* self_cast = dynamic_cast<VirtualQSslSocket*>( (QSslSocket*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return nullptr;
-	}
-	
-	*_dynamic_cast_ok = true;
+QObject* QSslSocket_protectedbase_sender(const void* self) {
+	VirtualQSslSocket* self_cast = static_cast<VirtualQSslSocket*>( (QSslSocket*)(self) );
 	
 	return self_cast->sender();
 
 }
 
-int QSslSocket_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQSslSocket* self_cast = dynamic_cast<VirtualQSslSocket*>( (QSslSocket*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return 0;
-	}
-	
-	*_dynamic_cast_ok = true;
+int QSslSocket_protectedbase_senderSignalIndex(const void* self) {
+	VirtualQSslSocket* self_cast = static_cast<VirtualQSslSocket*>( (QSslSocket*)(self) );
 	
 	return self_cast->senderSignalIndex();
 
 }
 
-int QSslSocket_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal) {
-	VirtualQSslSocket* self_cast = dynamic_cast<VirtualQSslSocket*>( (QSslSocket*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return 0;
-	}
-	
-	*_dynamic_cast_ok = true;
+int QSslSocket_protectedbase_receivers(const void* self, const char* signal) {
+	VirtualQSslSocket* self_cast = static_cast<VirtualQSslSocket*>( (QSslSocket*)(self) );
 	
 	return self_cast->receivers(signal);
 
 }
 
-bool QSslSocket_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal) {
-	VirtualQSslSocket* self_cast = dynamic_cast<VirtualQSslSocket*>( (QSslSocket*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return false;
-	}
-	
-	*_dynamic_cast_ok = true;
+bool QSslSocket_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal) {
+	VirtualQSslSocket* self_cast = static_cast<VirtualQSslSocket*>( (QSslSocket*)(self) );
 	
 	return self_cast->isSignalConnected(*signal);
 

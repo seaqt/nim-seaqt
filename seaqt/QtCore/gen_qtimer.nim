@@ -90,6 +90,10 @@ proc fcQTimer_virtualbase_childEvent(self: pointer, event: pointer): void {.impo
 proc fcQTimer_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QTimer_virtualbase_customEvent".}
 proc fcQTimer_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QTimer_virtualbase_connectNotify".}
 proc fcQTimer_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QTimer_virtualbase_disconnectNotify".}
+proc fcQTimer_protectedbase_sender(self: pointer, ): pointer {.importc: "QTimer_protectedbase_sender".}
+proc fcQTimer_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QTimer_protectedbase_senderSignalIndex".}
+proc fcQTimer_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QTimer_protectedbase_receivers".}
+proc fcQTimer_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QTimer_protectedbase_isSignalConnected".}
 proc fcQTimer_new(vtbl: pointer, ): ptr cQTimer {.importc: "QTimer_new".}
 proc fcQTimer_new2(vtbl: pointer, parent: pointer): ptr cQTimer {.importc: "QTimer_new2".}
 proc fcQTimer_staticMetaObject(): pointer {.importc: "QTimer_staticMetaObject".}
@@ -276,6 +280,18 @@ proc miqt_exec_callback_cQTimer_disconnectNotify(vtbl: pointer, self: pointer, s
   let self = QTimer(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
   vtbl[].disconnectNotify(self, slotval1)
+
+proc sender*(self: gen_qtimer_types.QTimer, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQTimer_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qtimer_types.QTimer, ): cint =
+  fcQTimer_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qtimer_types.QTimer, signal: cstring): cint =
+  fcQTimer_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qtimer_types.QTimer, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQTimer_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc create*(T: type gen_qtimer_types.QTimer,
     vtbl: ref QTimerVTable = nil): gen_qtimer_types.QTimer =

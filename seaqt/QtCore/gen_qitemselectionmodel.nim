@@ -170,6 +170,11 @@ proc fcQItemSelectionModel_virtualbase_childEvent(self: pointer, event: pointer)
 proc fcQItemSelectionModel_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QItemSelectionModel_virtualbase_customEvent".}
 proc fcQItemSelectionModel_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QItemSelectionModel_virtualbase_connectNotify".}
 proc fcQItemSelectionModel_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QItemSelectionModel_virtualbase_disconnectNotify".}
+proc fcQItemSelectionModel_protectedbase_emitSelectionChanged(self: pointer, newSelection: pointer, oldSelection: pointer): void {.importc: "QItemSelectionModel_protectedbase_emitSelectionChanged".}
+proc fcQItemSelectionModel_protectedbase_sender(self: pointer, ): pointer {.importc: "QItemSelectionModel_protectedbase_sender".}
+proc fcQItemSelectionModel_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QItemSelectionModel_protectedbase_senderSignalIndex".}
+proc fcQItemSelectionModel_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QItemSelectionModel_protectedbase_receivers".}
+proc fcQItemSelectionModel_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QItemSelectionModel_protectedbase_isSignalConnected".}
 proc fcQItemSelectionModel_new(vtbl: pointer, ): ptr cQItemSelectionModel {.importc: "QItemSelectionModel_new".}
 proc fcQItemSelectionModel_new2(vtbl: pointer, model: pointer, parent: pointer): ptr cQItemSelectionModel {.importc: "QItemSelectionModel_new2".}
 proc fcQItemSelectionModel_new3(vtbl: pointer, model: pointer): ptr cQItemSelectionModel {.importc: "QItemSelectionModel_new3".}
@@ -692,6 +697,21 @@ proc miqt_exec_callback_cQItemSelectionModel_disconnectNotify(vtbl: pointer, sel
   let self = QItemSelectionModel(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
   vtbl[].disconnectNotify(self, slotval1)
+
+proc emitSelectionChanged*(self: gen_qitemselectionmodel_types.QItemSelectionModel, newSelection: gen_qitemselectionmodel_types.QItemSelection, oldSelection: gen_qitemselectionmodel_types.QItemSelection): void =
+  fcQItemSelectionModel_protectedbase_emitSelectionChanged(self.h, newSelection.h, oldSelection.h)
+
+proc sender*(self: gen_qitemselectionmodel_types.QItemSelectionModel, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQItemSelectionModel_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qitemselectionmodel_types.QItemSelectionModel, ): cint =
+  fcQItemSelectionModel_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qitemselectionmodel_types.QItemSelectionModel, signal: cstring): cint =
+  fcQItemSelectionModel_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qitemselectionmodel_types.QItemSelectionModel, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQItemSelectionModel_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc create*(T: type gen_qitemselectionmodel_types.QItemSelectionModel,
     vtbl: ref QItemSelectionModelVTable = nil): gen_qitemselectionmodel_types.QItemSelectionModel =

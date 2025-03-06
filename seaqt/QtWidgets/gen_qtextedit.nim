@@ -52,6 +52,7 @@ export gen_qtextedit_types
 
 import
   ../QtCore/gen_qcoreevent_types,
+  ../QtCore/gen_qmargins_types,
   ../QtCore/gen_qmetaobject_types,
   ../QtCore/gen_qmimedata_types,
   ../QtCore/gen_qobject_types,
@@ -78,6 +79,7 @@ import
   ./gen_qwidget_types
 export
   gen_qcoreevent_types,
+  gen_qmargins_types,
   gen_qmetaobject_types,
   gen_qmimedata_types,
   gen_qobject_types,
@@ -344,6 +346,19 @@ proc fcQTextEdit_virtualbase_childEvent(self: pointer, event: pointer): void {.i
 proc fcQTextEdit_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QTextEdit_virtualbase_customEvent".}
 proc fcQTextEdit_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QTextEdit_virtualbase_connectNotify".}
 proc fcQTextEdit_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QTextEdit_virtualbase_disconnectNotify".}
+proc fcQTextEdit_protectedbase_zoomInF(self: pointer, range: float32): void {.importc: "QTextEdit_protectedbase_zoomInF".}
+proc fcQTextEdit_protectedbase_setViewportMargins(self: pointer, left: cint, top: cint, right: cint, bottom: cint): void {.importc: "QTextEdit_protectedbase_setViewportMargins".}
+proc fcQTextEdit_protectedbase_viewportMargins(self: pointer, ): pointer {.importc: "QTextEdit_protectedbase_viewportMargins".}
+proc fcQTextEdit_protectedbase_drawFrame(self: pointer, param1: pointer): void {.importc: "QTextEdit_protectedbase_drawFrame".}
+proc fcQTextEdit_protectedbase_updateMicroFocus(self: pointer, ): void {.importc: "QTextEdit_protectedbase_updateMicroFocus".}
+proc fcQTextEdit_protectedbase_create(self: pointer, ): void {.importc: "QTextEdit_protectedbase_create".}
+proc fcQTextEdit_protectedbase_destroy(self: pointer, ): void {.importc: "QTextEdit_protectedbase_destroy".}
+proc fcQTextEdit_protectedbase_focusNextChild(self: pointer, ): bool {.importc: "QTextEdit_protectedbase_focusNextChild".}
+proc fcQTextEdit_protectedbase_focusPreviousChild(self: pointer, ): bool {.importc: "QTextEdit_protectedbase_focusPreviousChild".}
+proc fcQTextEdit_protectedbase_sender(self: pointer, ): pointer {.importc: "QTextEdit_protectedbase_sender".}
+proc fcQTextEdit_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QTextEdit_protectedbase_senderSignalIndex".}
+proc fcQTextEdit_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QTextEdit_protectedbase_receivers".}
+proc fcQTextEdit_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QTextEdit_protectedbase_isSignalConnected".}
 proc fcQTextEdit_new(vtbl: pointer, parent: pointer): ptr cQTextEdit {.importc: "QTextEdit_new".}
 proc fcQTextEdit_new2(vtbl: pointer, ): ptr cQTextEdit {.importc: "QTextEdit_new2".}
 proc fcQTextEdit_new3(vtbl: pointer, text: struct_miqt_string): ptr cQTextEdit {.importc: "QTextEdit_new3".}
@@ -1520,6 +1535,45 @@ proc miqt_exec_callback_cQTextEdit_disconnectNotify(vtbl: pointer, self: pointer
   let self = QTextEdit(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
   vtbl[].disconnectNotify(self, slotval1)
+
+proc zoomInF*(self: gen_qtextedit_types.QTextEdit, range: float32): void =
+  fcQTextEdit_protectedbase_zoomInF(self.h, range)
+
+proc setViewportMargins*(self: gen_qtextedit_types.QTextEdit, left: cint, top: cint, right: cint, bottom: cint): void =
+  fcQTextEdit_protectedbase_setViewportMargins(self.h, left, top, right, bottom)
+
+proc viewportMargins*(self: gen_qtextedit_types.QTextEdit, ): gen_qmargins_types.QMargins =
+  gen_qmargins_types.QMargins(h: fcQTextEdit_protectedbase_viewportMargins(self.h))
+
+proc drawFrame*(self: gen_qtextedit_types.QTextEdit, param1: gen_qpainter_types.QPainter): void =
+  fcQTextEdit_protectedbase_drawFrame(self.h, param1.h)
+
+proc updateMicroFocus*(self: gen_qtextedit_types.QTextEdit, ): void =
+  fcQTextEdit_protectedbase_updateMicroFocus(self.h)
+
+proc create*(self: gen_qtextedit_types.QTextEdit, ): void =
+  fcQTextEdit_protectedbase_create(self.h)
+
+proc destroy*(self: gen_qtextedit_types.QTextEdit, ): void =
+  fcQTextEdit_protectedbase_destroy(self.h)
+
+proc focusNextChild*(self: gen_qtextedit_types.QTextEdit, ): bool =
+  fcQTextEdit_protectedbase_focusNextChild(self.h)
+
+proc focusPreviousChild*(self: gen_qtextedit_types.QTextEdit, ): bool =
+  fcQTextEdit_protectedbase_focusPreviousChild(self.h)
+
+proc sender*(self: gen_qtextedit_types.QTextEdit, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQTextEdit_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qtextedit_types.QTextEdit, ): cint =
+  fcQTextEdit_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qtextedit_types.QTextEdit, signal: cstring): cint =
+  fcQTextEdit_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qtextedit_types.QTextEdit, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQTextEdit_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc create*(T: type gen_qtextedit_types.QTextEdit,
     parent: gen_qwidget_types.QWidget,

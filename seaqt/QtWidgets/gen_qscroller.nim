@@ -58,12 +58,14 @@ import ./gen_qscroller_types
 export gen_qscroller_types
 
 import
+  ../QtCore/gen_qmetaobject_types,
   ../QtCore/gen_qobject,
   ../QtCore/gen_qobjectdefs_types,
   ../QtCore/gen_qpoint_types,
   ../QtCore/gen_qrect_types,
   ./gen_qscrollerproperties_types
 export
+  gen_qmetaobject_types,
   gen_qobject,
   gen_qobjectdefs_types,
   gen_qpoint_types,
@@ -109,6 +111,10 @@ proc fcQScroller_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QSc
 proc fcQScroller_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QScroller_tr3".}
 proc fcQScroller_grabGesture2(target: pointer, gestureType: cint): cint {.importc: "QScroller_grabGesture2".}
 proc fcQScroller_handleInput3(self: pointer, input: cint, position: pointer, timestamp: clonglong): bool {.importc: "QScroller_handleInput3".}
+proc fcQScroller_protectedbase_sender(self: pointer, ): pointer {.importc: "QScroller_protectedbase_sender".}
+proc fcQScroller_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QScroller_protectedbase_senderSignalIndex".}
+proc fcQScroller_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QScroller_protectedbase_receivers".}
+proc fcQScroller_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QScroller_protectedbase_isSignalConnected".}
 proc fcQScroller_staticMetaObject(): pointer {.importc: "QScroller_staticMetaObject".}
 
 proc metaObject*(self: gen_qscroller_types.QScroller, ): gen_qobjectdefs_types.QMetaObject =
@@ -271,6 +277,18 @@ proc grabGesture*(_: type gen_qscroller_types.QScroller, target: gen_qobject_typ
 
 proc handleInput*(self: gen_qscroller_types.QScroller, input: cint, position: gen_qpoint_types.QPointF, timestamp: clonglong): bool =
   fcQScroller_handleInput3(self.h, cint(input), position.h, timestamp)
+
+proc sender*(self: gen_qscroller_types.QScroller, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQScroller_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qscroller_types.QScroller, ): cint =
+  fcQScroller_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qscroller_types.QScroller, signal: cstring): cint =
+  fcQScroller_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qscroller_types.QScroller, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQScroller_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc staticMetaObject*(_: type gen_qscroller_types.QScroller): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQScroller_staticMetaObject())

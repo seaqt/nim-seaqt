@@ -892,16 +892,16 @@ public:
 	friend void QColorDialog_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
 
 	// Wrappers to allow calling protected methods:
-	friend void QColorDialog_protectedbase_adjustPosition(bool* _dynamic_cast_ok, void* self, QWidget* param1);
-	friend void QColorDialog_protectedbase_updateMicroFocus(bool* _dynamic_cast_ok, void* self);
-	friend void QColorDialog_protectedbase_create(bool* _dynamic_cast_ok, void* self);
-	friend void QColorDialog_protectedbase_destroy(bool* _dynamic_cast_ok, void* self);
-	friend bool QColorDialog_protectedbase_focusNextChild(bool* _dynamic_cast_ok, void* self);
-	friend bool QColorDialog_protectedbase_focusPreviousChild(bool* _dynamic_cast_ok, void* self);
-	friend QObject* QColorDialog_protectedbase_sender(bool* _dynamic_cast_ok, const void* self);
-	friend int QColorDialog_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
-	friend int QColorDialog_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
-	friend bool QColorDialog_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+	friend void QColorDialog_protectedbase_adjustPosition(void* self, QWidget* param1);
+	friend void QColorDialog_protectedbase_updateMicroFocus(void* self);
+	friend void QColorDialog_protectedbase_create(void* self);
+	friend void QColorDialog_protectedbase_destroy(void* self);
+	friend bool QColorDialog_protectedbase_focusNextChild(void* self);
+	friend bool QColorDialog_protectedbase_focusPreviousChild(void* self);
+	friend QObject* QColorDialog_protectedbase_sender(const void* self);
+	friend int QColorDialog_protectedbase_senderSignalIndex(const void* self);
+	friend int QColorDialog_protectedbase_receivers(const void* self, const char* signal);
+	friend bool QColorDialog_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
 };
 
 QColorDialog* QColorDialog_new(struct QColorDialog_VTable* vtbl, QWidget* parent) {
@@ -1416,131 +1416,71 @@ void QColorDialog_virtualbase_disconnectNotify(void* self, QMetaMethod* signal) 
 }
 
 const QMetaObject* QColorDialog_staticMetaObject() { return &QColorDialog::staticMetaObject; }
-void QColorDialog_protectedbase_adjustPosition(bool* _dynamic_cast_ok, void* self, QWidget* param1) {
-	VirtualQColorDialog* self_cast = dynamic_cast<VirtualQColorDialog*>( (QColorDialog*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QColorDialog_protectedbase_adjustPosition(void* self, QWidget* param1) {
+	VirtualQColorDialog* self_cast = static_cast<VirtualQColorDialog*>( (QColorDialog*)(self) );
 	
 	self_cast->adjustPosition(param1);
 
 }
 
-void QColorDialog_protectedbase_updateMicroFocus(bool* _dynamic_cast_ok, void* self) {
-	VirtualQColorDialog* self_cast = dynamic_cast<VirtualQColorDialog*>( (QColorDialog*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QColorDialog_protectedbase_updateMicroFocus(void* self) {
+	VirtualQColorDialog* self_cast = static_cast<VirtualQColorDialog*>( (QColorDialog*)(self) );
 	
 	self_cast->updateMicroFocus();
 
 }
 
-void QColorDialog_protectedbase_create(bool* _dynamic_cast_ok, void* self) {
-	VirtualQColorDialog* self_cast = dynamic_cast<VirtualQColorDialog*>( (QColorDialog*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QColorDialog_protectedbase_create(void* self) {
+	VirtualQColorDialog* self_cast = static_cast<VirtualQColorDialog*>( (QColorDialog*)(self) );
 	
 	self_cast->create();
 
 }
 
-void QColorDialog_protectedbase_destroy(bool* _dynamic_cast_ok, void* self) {
-	VirtualQColorDialog* self_cast = dynamic_cast<VirtualQColorDialog*>( (QColorDialog*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QColorDialog_protectedbase_destroy(void* self) {
+	VirtualQColorDialog* self_cast = static_cast<VirtualQColorDialog*>( (QColorDialog*)(self) );
 	
 	self_cast->destroy();
 
 }
 
-bool QColorDialog_protectedbase_focusNextChild(bool* _dynamic_cast_ok, void* self) {
-	VirtualQColorDialog* self_cast = dynamic_cast<VirtualQColorDialog*>( (QColorDialog*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return false;
-	}
-	
-	*_dynamic_cast_ok = true;
+bool QColorDialog_protectedbase_focusNextChild(void* self) {
+	VirtualQColorDialog* self_cast = static_cast<VirtualQColorDialog*>( (QColorDialog*)(self) );
 	
 	return self_cast->focusNextChild();
 
 }
 
-bool QColorDialog_protectedbase_focusPreviousChild(bool* _dynamic_cast_ok, void* self) {
-	VirtualQColorDialog* self_cast = dynamic_cast<VirtualQColorDialog*>( (QColorDialog*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return false;
-	}
-	
-	*_dynamic_cast_ok = true;
+bool QColorDialog_protectedbase_focusPreviousChild(void* self) {
+	VirtualQColorDialog* self_cast = static_cast<VirtualQColorDialog*>( (QColorDialog*)(self) );
 	
 	return self_cast->focusPreviousChild();
 
 }
 
-QObject* QColorDialog_protectedbase_sender(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQColorDialog* self_cast = dynamic_cast<VirtualQColorDialog*>( (QColorDialog*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return nullptr;
-	}
-	
-	*_dynamic_cast_ok = true;
+QObject* QColorDialog_protectedbase_sender(const void* self) {
+	VirtualQColorDialog* self_cast = static_cast<VirtualQColorDialog*>( (QColorDialog*)(self) );
 	
 	return self_cast->sender();
 
 }
 
-int QColorDialog_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQColorDialog* self_cast = dynamic_cast<VirtualQColorDialog*>( (QColorDialog*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return 0;
-	}
-	
-	*_dynamic_cast_ok = true;
+int QColorDialog_protectedbase_senderSignalIndex(const void* self) {
+	VirtualQColorDialog* self_cast = static_cast<VirtualQColorDialog*>( (QColorDialog*)(self) );
 	
 	return self_cast->senderSignalIndex();
 
 }
 
-int QColorDialog_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal) {
-	VirtualQColorDialog* self_cast = dynamic_cast<VirtualQColorDialog*>( (QColorDialog*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return 0;
-	}
-	
-	*_dynamic_cast_ok = true;
+int QColorDialog_protectedbase_receivers(const void* self, const char* signal) {
+	VirtualQColorDialog* self_cast = static_cast<VirtualQColorDialog*>( (QColorDialog*)(self) );
 	
 	return self_cast->receivers(signal);
 
 }
 
-bool QColorDialog_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal) {
-	VirtualQColorDialog* self_cast = dynamic_cast<VirtualQColorDialog*>( (QColorDialog*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return false;
-	}
-	
-	*_dynamic_cast_ok = true;
+bool QColorDialog_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal) {
+	VirtualQColorDialog* self_cast = static_cast<VirtualQColorDialog*>( (QColorDialog*)(self) );
 	
 	return self_cast->isSignalConnected(*signal);
 

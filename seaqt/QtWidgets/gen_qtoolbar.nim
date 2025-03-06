@@ -222,6 +222,15 @@ proc fcQToolBar_virtualbase_childEvent(self: pointer, event: pointer): void {.im
 proc fcQToolBar_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QToolBar_virtualbase_customEvent".}
 proc fcQToolBar_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QToolBar_virtualbase_connectNotify".}
 proc fcQToolBar_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QToolBar_virtualbase_disconnectNotify".}
+proc fcQToolBar_protectedbase_updateMicroFocus(self: pointer, ): void {.importc: "QToolBar_protectedbase_updateMicroFocus".}
+proc fcQToolBar_protectedbase_create(self: pointer, ): void {.importc: "QToolBar_protectedbase_create".}
+proc fcQToolBar_protectedbase_destroy(self: pointer, ): void {.importc: "QToolBar_protectedbase_destroy".}
+proc fcQToolBar_protectedbase_focusNextChild(self: pointer, ): bool {.importc: "QToolBar_protectedbase_focusNextChild".}
+proc fcQToolBar_protectedbase_focusPreviousChild(self: pointer, ): bool {.importc: "QToolBar_protectedbase_focusPreviousChild".}
+proc fcQToolBar_protectedbase_sender(self: pointer, ): pointer {.importc: "QToolBar_protectedbase_sender".}
+proc fcQToolBar_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QToolBar_protectedbase_senderSignalIndex".}
+proc fcQToolBar_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QToolBar_protectedbase_receivers".}
+proc fcQToolBar_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QToolBar_protectedbase_isSignalConnected".}
 proc fcQToolBar_new(vtbl: pointer, parent: pointer): ptr cQToolBar {.importc: "QToolBar_new".}
 proc fcQToolBar_new2(vtbl: pointer, title: struct_miqt_string): ptr cQToolBar {.importc: "QToolBar_new2".}
 proc fcQToolBar_new3(vtbl: pointer, ): ptr cQToolBar {.importc: "QToolBar_new3".}
@@ -1068,6 +1077,33 @@ proc miqt_exec_callback_cQToolBar_disconnectNotify(vtbl: pointer, self: pointer,
   let self = QToolBar(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
   vtbl[].disconnectNotify(self, slotval1)
+
+proc updateMicroFocus*(self: gen_qtoolbar_types.QToolBar, ): void =
+  fcQToolBar_protectedbase_updateMicroFocus(self.h)
+
+proc create*(self: gen_qtoolbar_types.QToolBar, ): void =
+  fcQToolBar_protectedbase_create(self.h)
+
+proc destroy*(self: gen_qtoolbar_types.QToolBar, ): void =
+  fcQToolBar_protectedbase_destroy(self.h)
+
+proc focusNextChild*(self: gen_qtoolbar_types.QToolBar, ): bool =
+  fcQToolBar_protectedbase_focusNextChild(self.h)
+
+proc focusPreviousChild*(self: gen_qtoolbar_types.QToolBar, ): bool =
+  fcQToolBar_protectedbase_focusPreviousChild(self.h)
+
+proc sender*(self: gen_qtoolbar_types.QToolBar, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQToolBar_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qtoolbar_types.QToolBar, ): cint =
+  fcQToolBar_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qtoolbar_types.QToolBar, signal: cstring): cint =
+  fcQToolBar_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qtoolbar_types.QToolBar, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQToolBar_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc create*(T: type gen_qtoolbar_types.QToolBar,
     parent: gen_qwidget_types.QWidget,

@@ -897,19 +897,19 @@ public:
 	friend void QAbstractScrollArea_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
 
 	// Wrappers to allow calling protected methods:
-	friend void QAbstractScrollArea_protectedbase_setViewportMargins(bool* _dynamic_cast_ok, void* self, int left, int top, int right, int bottom);
-	friend void QAbstractScrollArea_protectedbase_setViewportMarginsWithMargins(bool* _dynamic_cast_ok, void* self, QMargins* margins);
-	friend QMargins* QAbstractScrollArea_protectedbase_viewportMargins(bool* _dynamic_cast_ok, const void* self);
-	friend void QAbstractScrollArea_protectedbase_drawFrame(bool* _dynamic_cast_ok, void* self, QPainter* param1);
-	friend void QAbstractScrollArea_protectedbase_updateMicroFocus(bool* _dynamic_cast_ok, void* self);
-	friend void QAbstractScrollArea_protectedbase_create(bool* _dynamic_cast_ok, void* self);
-	friend void QAbstractScrollArea_protectedbase_destroy(bool* _dynamic_cast_ok, void* self);
-	friend bool QAbstractScrollArea_protectedbase_focusNextChild(bool* _dynamic_cast_ok, void* self);
-	friend bool QAbstractScrollArea_protectedbase_focusPreviousChild(bool* _dynamic_cast_ok, void* self);
-	friend QObject* QAbstractScrollArea_protectedbase_sender(bool* _dynamic_cast_ok, const void* self);
-	friend int QAbstractScrollArea_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
-	friend int QAbstractScrollArea_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
-	friend bool QAbstractScrollArea_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+	friend void QAbstractScrollArea_protectedbase_setViewportMargins(void* self, int left, int top, int right, int bottom);
+	friend void QAbstractScrollArea_protectedbase_setViewportMarginsWithMargins(void* self, QMargins* margins);
+	friend QMargins* QAbstractScrollArea_protectedbase_viewportMargins(const void* self);
+	friend void QAbstractScrollArea_protectedbase_drawFrame(void* self, QPainter* param1);
+	friend void QAbstractScrollArea_protectedbase_updateMicroFocus(void* self);
+	friend void QAbstractScrollArea_protectedbase_create(void* self);
+	friend void QAbstractScrollArea_protectedbase_destroy(void* self);
+	friend bool QAbstractScrollArea_protectedbase_focusNextChild(void* self);
+	friend bool QAbstractScrollArea_protectedbase_focusPreviousChild(void* self);
+	friend QObject* QAbstractScrollArea_protectedbase_sender(const void* self);
+	friend int QAbstractScrollArea_protectedbase_senderSignalIndex(const void* self);
+	friend int QAbstractScrollArea_protectedbase_receivers(const void* self, const char* signal);
+	friend bool QAbstractScrollArea_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
 };
 
 QAbstractScrollArea* QAbstractScrollArea_new(struct QAbstractScrollArea_VTable* vtbl, QWidget* parent) {
@@ -1393,170 +1393,92 @@ void QAbstractScrollArea_virtualbase_disconnectNotify(void* self, QMetaMethod* s
 }
 
 const QMetaObject* QAbstractScrollArea_staticMetaObject() { return &QAbstractScrollArea::staticMetaObject; }
-void QAbstractScrollArea_protectedbase_setViewportMargins(bool* _dynamic_cast_ok, void* self, int left, int top, int right, int bottom) {
-	VirtualQAbstractScrollArea* self_cast = dynamic_cast<VirtualQAbstractScrollArea*>( (QAbstractScrollArea*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QAbstractScrollArea_protectedbase_setViewportMargins(void* self, int left, int top, int right, int bottom) {
+	VirtualQAbstractScrollArea* self_cast = static_cast<VirtualQAbstractScrollArea*>( (QAbstractScrollArea*)(self) );
 	
 	self_cast->setViewportMargins(static_cast<int>(left), static_cast<int>(top), static_cast<int>(right), static_cast<int>(bottom));
 
 }
 
-void QAbstractScrollArea_protectedbase_setViewportMarginsWithMargins(bool* _dynamic_cast_ok, void* self, QMargins* margins) {
-	VirtualQAbstractScrollArea* self_cast = dynamic_cast<VirtualQAbstractScrollArea*>( (QAbstractScrollArea*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QAbstractScrollArea_protectedbase_setViewportMarginsWithMargins(void* self, QMargins* margins) {
+	VirtualQAbstractScrollArea* self_cast = static_cast<VirtualQAbstractScrollArea*>( (QAbstractScrollArea*)(self) );
 	
 	self_cast->setViewportMargins(*margins);
 
 }
 
-QMargins* QAbstractScrollArea_protectedbase_viewportMargins(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQAbstractScrollArea* self_cast = dynamic_cast<VirtualQAbstractScrollArea*>( (QAbstractScrollArea*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return nullptr;
-	}
-	
-	*_dynamic_cast_ok = true;
+QMargins* QAbstractScrollArea_protectedbase_viewportMargins(const void* self) {
+	VirtualQAbstractScrollArea* self_cast = static_cast<VirtualQAbstractScrollArea*>( (QAbstractScrollArea*)(self) );
 	
 	return new QMargins(self_cast->viewportMargins());
 
 }
 
-void QAbstractScrollArea_protectedbase_drawFrame(bool* _dynamic_cast_ok, void* self, QPainter* param1) {
-	VirtualQAbstractScrollArea* self_cast = dynamic_cast<VirtualQAbstractScrollArea*>( (QAbstractScrollArea*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QAbstractScrollArea_protectedbase_drawFrame(void* self, QPainter* param1) {
+	VirtualQAbstractScrollArea* self_cast = static_cast<VirtualQAbstractScrollArea*>( (QAbstractScrollArea*)(self) );
 	
 	self_cast->drawFrame(param1);
 
 }
 
-void QAbstractScrollArea_protectedbase_updateMicroFocus(bool* _dynamic_cast_ok, void* self) {
-	VirtualQAbstractScrollArea* self_cast = dynamic_cast<VirtualQAbstractScrollArea*>( (QAbstractScrollArea*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QAbstractScrollArea_protectedbase_updateMicroFocus(void* self) {
+	VirtualQAbstractScrollArea* self_cast = static_cast<VirtualQAbstractScrollArea*>( (QAbstractScrollArea*)(self) );
 	
 	self_cast->updateMicroFocus();
 
 }
 
-void QAbstractScrollArea_protectedbase_create(bool* _dynamic_cast_ok, void* self) {
-	VirtualQAbstractScrollArea* self_cast = dynamic_cast<VirtualQAbstractScrollArea*>( (QAbstractScrollArea*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QAbstractScrollArea_protectedbase_create(void* self) {
+	VirtualQAbstractScrollArea* self_cast = static_cast<VirtualQAbstractScrollArea*>( (QAbstractScrollArea*)(self) );
 	
 	self_cast->create();
 
 }
 
-void QAbstractScrollArea_protectedbase_destroy(bool* _dynamic_cast_ok, void* self) {
-	VirtualQAbstractScrollArea* self_cast = dynamic_cast<VirtualQAbstractScrollArea*>( (QAbstractScrollArea*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QAbstractScrollArea_protectedbase_destroy(void* self) {
+	VirtualQAbstractScrollArea* self_cast = static_cast<VirtualQAbstractScrollArea*>( (QAbstractScrollArea*)(self) );
 	
 	self_cast->destroy();
 
 }
 
-bool QAbstractScrollArea_protectedbase_focusNextChild(bool* _dynamic_cast_ok, void* self) {
-	VirtualQAbstractScrollArea* self_cast = dynamic_cast<VirtualQAbstractScrollArea*>( (QAbstractScrollArea*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return false;
-	}
-	
-	*_dynamic_cast_ok = true;
+bool QAbstractScrollArea_protectedbase_focusNextChild(void* self) {
+	VirtualQAbstractScrollArea* self_cast = static_cast<VirtualQAbstractScrollArea*>( (QAbstractScrollArea*)(self) );
 	
 	return self_cast->focusNextChild();
 
 }
 
-bool QAbstractScrollArea_protectedbase_focusPreviousChild(bool* _dynamic_cast_ok, void* self) {
-	VirtualQAbstractScrollArea* self_cast = dynamic_cast<VirtualQAbstractScrollArea*>( (QAbstractScrollArea*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return false;
-	}
-	
-	*_dynamic_cast_ok = true;
+bool QAbstractScrollArea_protectedbase_focusPreviousChild(void* self) {
+	VirtualQAbstractScrollArea* self_cast = static_cast<VirtualQAbstractScrollArea*>( (QAbstractScrollArea*)(self) );
 	
 	return self_cast->focusPreviousChild();
 
 }
 
-QObject* QAbstractScrollArea_protectedbase_sender(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQAbstractScrollArea* self_cast = dynamic_cast<VirtualQAbstractScrollArea*>( (QAbstractScrollArea*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return nullptr;
-	}
-	
-	*_dynamic_cast_ok = true;
+QObject* QAbstractScrollArea_protectedbase_sender(const void* self) {
+	VirtualQAbstractScrollArea* self_cast = static_cast<VirtualQAbstractScrollArea*>( (QAbstractScrollArea*)(self) );
 	
 	return self_cast->sender();
 
 }
 
-int QAbstractScrollArea_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQAbstractScrollArea* self_cast = dynamic_cast<VirtualQAbstractScrollArea*>( (QAbstractScrollArea*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return 0;
-	}
-	
-	*_dynamic_cast_ok = true;
+int QAbstractScrollArea_protectedbase_senderSignalIndex(const void* self) {
+	VirtualQAbstractScrollArea* self_cast = static_cast<VirtualQAbstractScrollArea*>( (QAbstractScrollArea*)(self) );
 	
 	return self_cast->senderSignalIndex();
 
 }
 
-int QAbstractScrollArea_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal) {
-	VirtualQAbstractScrollArea* self_cast = dynamic_cast<VirtualQAbstractScrollArea*>( (QAbstractScrollArea*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return 0;
-	}
-	
-	*_dynamic_cast_ok = true;
+int QAbstractScrollArea_protectedbase_receivers(const void* self, const char* signal) {
+	VirtualQAbstractScrollArea* self_cast = static_cast<VirtualQAbstractScrollArea*>( (QAbstractScrollArea*)(self) );
 	
 	return self_cast->receivers(signal);
 
 }
 
-bool QAbstractScrollArea_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal) {
-	VirtualQAbstractScrollArea* self_cast = dynamic_cast<VirtualQAbstractScrollArea*>( (QAbstractScrollArea*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return false;
-	}
-	
-	*_dynamic_cast_ok = true;
+bool QAbstractScrollArea_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal) {
+	VirtualQAbstractScrollArea* self_cast = static_cast<VirtualQAbstractScrollArea*>( (QAbstractScrollArea*)(self) );
 	
 	return self_cast->isSignalConnected(*signal);
 

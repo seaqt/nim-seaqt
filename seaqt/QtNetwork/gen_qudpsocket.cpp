@@ -641,19 +641,19 @@ public:
 	friend void QUdpSocket_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
 
 	// Wrappers to allow calling protected methods:
-	friend void QUdpSocket_protectedbase_setSocketState(bool* _dynamic_cast_ok, void* self, int state);
-	friend void QUdpSocket_protectedbase_setSocketError(bool* _dynamic_cast_ok, void* self, int socketError);
-	friend void QUdpSocket_protectedbase_setLocalPort(bool* _dynamic_cast_ok, void* self, uint16_t port);
-	friend void QUdpSocket_protectedbase_setLocalAddress(bool* _dynamic_cast_ok, void* self, QHostAddress* address);
-	friend void QUdpSocket_protectedbase_setPeerPort(bool* _dynamic_cast_ok, void* self, uint16_t port);
-	friend void QUdpSocket_protectedbase_setPeerAddress(bool* _dynamic_cast_ok, void* self, QHostAddress* address);
-	friend void QUdpSocket_protectedbase_setPeerName(bool* _dynamic_cast_ok, void* self, struct miqt_string name);
-	friend void QUdpSocket_protectedbase_setOpenMode(bool* _dynamic_cast_ok, void* self, int openMode);
-	friend void QUdpSocket_protectedbase_setErrorString(bool* _dynamic_cast_ok, void* self, struct miqt_string errorString);
-	friend QObject* QUdpSocket_protectedbase_sender(bool* _dynamic_cast_ok, const void* self);
-	friend int QUdpSocket_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
-	friend int QUdpSocket_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
-	friend bool QUdpSocket_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+	friend void QUdpSocket_protectedbase_setSocketState(void* self, int state);
+	friend void QUdpSocket_protectedbase_setSocketError(void* self, int socketError);
+	friend void QUdpSocket_protectedbase_setLocalPort(void* self, uint16_t port);
+	friend void QUdpSocket_protectedbase_setLocalAddress(void* self, QHostAddress* address);
+	friend void QUdpSocket_protectedbase_setPeerPort(void* self, uint16_t port);
+	friend void QUdpSocket_protectedbase_setPeerAddress(void* self, QHostAddress* address);
+	friend void QUdpSocket_protectedbase_setPeerName(void* self, struct miqt_string name);
+	friend void QUdpSocket_protectedbase_setOpenMode(void* self, int openMode);
+	friend void QUdpSocket_protectedbase_setErrorString(void* self, struct miqt_string errorString);
+	friend QObject* QUdpSocket_protectedbase_sender(const void* self);
+	friend int QUdpSocket_protectedbase_senderSignalIndex(const void* self);
+	friend int QUdpSocket_protectedbase_receivers(const void* self, const char* signal);
+	friend bool QUdpSocket_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
 };
 
 QUdpSocket* QUdpSocket_new(struct QUdpSocket_VTable* vtbl) {
@@ -1036,172 +1036,94 @@ void QUdpSocket_virtualbase_disconnectNotify(void* self, QMetaMethod* signal) {
 }
 
 const QMetaObject* QUdpSocket_staticMetaObject() { return &QUdpSocket::staticMetaObject; }
-void QUdpSocket_protectedbase_setSocketState(bool* _dynamic_cast_ok, void* self, int state) {
-	VirtualQUdpSocket* self_cast = dynamic_cast<VirtualQUdpSocket*>( (QUdpSocket*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QUdpSocket_protectedbase_setSocketState(void* self, int state) {
+	VirtualQUdpSocket* self_cast = static_cast<VirtualQUdpSocket*>( (QUdpSocket*)(self) );
 	
 	self_cast->setSocketState(static_cast<VirtualQUdpSocket::SocketState>(state));
 
 }
 
-void QUdpSocket_protectedbase_setSocketError(bool* _dynamic_cast_ok, void* self, int socketError) {
-	VirtualQUdpSocket* self_cast = dynamic_cast<VirtualQUdpSocket*>( (QUdpSocket*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QUdpSocket_protectedbase_setSocketError(void* self, int socketError) {
+	VirtualQUdpSocket* self_cast = static_cast<VirtualQUdpSocket*>( (QUdpSocket*)(self) );
 	
 	self_cast->setSocketError(static_cast<VirtualQUdpSocket::SocketError>(socketError));
 
 }
 
-void QUdpSocket_protectedbase_setLocalPort(bool* _dynamic_cast_ok, void* self, uint16_t port) {
-	VirtualQUdpSocket* self_cast = dynamic_cast<VirtualQUdpSocket*>( (QUdpSocket*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QUdpSocket_protectedbase_setLocalPort(void* self, uint16_t port) {
+	VirtualQUdpSocket* self_cast = static_cast<VirtualQUdpSocket*>( (QUdpSocket*)(self) );
 	
 	self_cast->setLocalPort(static_cast<quint16>(port));
 
 }
 
-void QUdpSocket_protectedbase_setLocalAddress(bool* _dynamic_cast_ok, void* self, QHostAddress* address) {
-	VirtualQUdpSocket* self_cast = dynamic_cast<VirtualQUdpSocket*>( (QUdpSocket*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QUdpSocket_protectedbase_setLocalAddress(void* self, QHostAddress* address) {
+	VirtualQUdpSocket* self_cast = static_cast<VirtualQUdpSocket*>( (QUdpSocket*)(self) );
 	
 	self_cast->setLocalAddress(*address);
 
 }
 
-void QUdpSocket_protectedbase_setPeerPort(bool* _dynamic_cast_ok, void* self, uint16_t port) {
-	VirtualQUdpSocket* self_cast = dynamic_cast<VirtualQUdpSocket*>( (QUdpSocket*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QUdpSocket_protectedbase_setPeerPort(void* self, uint16_t port) {
+	VirtualQUdpSocket* self_cast = static_cast<VirtualQUdpSocket*>( (QUdpSocket*)(self) );
 	
 	self_cast->setPeerPort(static_cast<quint16>(port));
 
 }
 
-void QUdpSocket_protectedbase_setPeerAddress(bool* _dynamic_cast_ok, void* self, QHostAddress* address) {
-	VirtualQUdpSocket* self_cast = dynamic_cast<VirtualQUdpSocket*>( (QUdpSocket*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QUdpSocket_protectedbase_setPeerAddress(void* self, QHostAddress* address) {
+	VirtualQUdpSocket* self_cast = static_cast<VirtualQUdpSocket*>( (QUdpSocket*)(self) );
 	
 	self_cast->setPeerAddress(*address);
 
 }
 
-void QUdpSocket_protectedbase_setPeerName(bool* _dynamic_cast_ok, void* self, struct miqt_string name) {
-	VirtualQUdpSocket* self_cast = dynamic_cast<VirtualQUdpSocket*>( (QUdpSocket*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QUdpSocket_protectedbase_setPeerName(void* self, struct miqt_string name) {
+	VirtualQUdpSocket* self_cast = static_cast<VirtualQUdpSocket*>( (QUdpSocket*)(self) );
 			QString name_QString = QString::fromUtf8(name.data, name.len);
 
 	self_cast->setPeerName(name_QString);
 
 }
 
-void QUdpSocket_protectedbase_setOpenMode(bool* _dynamic_cast_ok, void* self, int openMode) {
-	VirtualQUdpSocket* self_cast = dynamic_cast<VirtualQUdpSocket*>( (QUdpSocket*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QUdpSocket_protectedbase_setOpenMode(void* self, int openMode) {
+	VirtualQUdpSocket* self_cast = static_cast<VirtualQUdpSocket*>( (QUdpSocket*)(self) );
 	
 	self_cast->setOpenMode(static_cast<VirtualQUdpSocket::OpenMode>(openMode));
 
 }
 
-void QUdpSocket_protectedbase_setErrorString(bool* _dynamic_cast_ok, void* self, struct miqt_string errorString) {
-	VirtualQUdpSocket* self_cast = dynamic_cast<VirtualQUdpSocket*>( (QUdpSocket*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QUdpSocket_protectedbase_setErrorString(void* self, struct miqt_string errorString) {
+	VirtualQUdpSocket* self_cast = static_cast<VirtualQUdpSocket*>( (QUdpSocket*)(self) );
 			QString errorString_QString = QString::fromUtf8(errorString.data, errorString.len);
 
 	self_cast->setErrorString(errorString_QString);
 
 }
 
-QObject* QUdpSocket_protectedbase_sender(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQUdpSocket* self_cast = dynamic_cast<VirtualQUdpSocket*>( (QUdpSocket*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return nullptr;
-	}
-	
-	*_dynamic_cast_ok = true;
+QObject* QUdpSocket_protectedbase_sender(const void* self) {
+	VirtualQUdpSocket* self_cast = static_cast<VirtualQUdpSocket*>( (QUdpSocket*)(self) );
 	
 	return self_cast->sender();
 
 }
 
-int QUdpSocket_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQUdpSocket* self_cast = dynamic_cast<VirtualQUdpSocket*>( (QUdpSocket*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return 0;
-	}
-	
-	*_dynamic_cast_ok = true;
+int QUdpSocket_protectedbase_senderSignalIndex(const void* self) {
+	VirtualQUdpSocket* self_cast = static_cast<VirtualQUdpSocket*>( (QUdpSocket*)(self) );
 	
 	return self_cast->senderSignalIndex();
 
 }
 
-int QUdpSocket_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal) {
-	VirtualQUdpSocket* self_cast = dynamic_cast<VirtualQUdpSocket*>( (QUdpSocket*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return 0;
-	}
-	
-	*_dynamic_cast_ok = true;
+int QUdpSocket_protectedbase_receivers(const void* self, const char* signal) {
+	VirtualQUdpSocket* self_cast = static_cast<VirtualQUdpSocket*>( (QUdpSocket*)(self) );
 	
 	return self_cast->receivers(signal);
 
 }
 
-bool QUdpSocket_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal) {
-	VirtualQUdpSocket* self_cast = dynamic_cast<VirtualQUdpSocket*>( (QUdpSocket*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return false;
-	}
-	
-	*_dynamic_cast_ok = true;
+bool QUdpSocket_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal) {
+	VirtualQUdpSocket* self_cast = static_cast<VirtualQUdpSocket*>( (QUdpSocket*)(self) );
 	
 	return self_cast->isSignalConnected(*signal);
 

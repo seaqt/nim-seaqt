@@ -206,11 +206,11 @@ public:
 	friend void QCoreApplication_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
 
 	// Wrappers to allow calling protected methods:
-	friend void* QCoreApplication_protectedbase_resolveInterface(bool* _dynamic_cast_ok, const void* self, const char* name, int revision);
-	friend QObject* QCoreApplication_protectedbase_sender(bool* _dynamic_cast_ok, const void* self);
-	friend int QCoreApplication_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
-	friend int QCoreApplication_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
-	friend bool QCoreApplication_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+	friend void* QCoreApplication_protectedbase_resolveInterface(const void* self, const char* name, int revision);
+	friend QObject* QCoreApplication_protectedbase_sender(const void* self);
+	friend int QCoreApplication_protectedbase_senderSignalIndex(const void* self);
+	friend int QCoreApplication_protectedbase_receivers(const void* self, const char* signal);
+	friend bool QCoreApplication_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
 };
 
 QCoreApplication* QCoreApplication_new(struct QCoreApplication_VTable* vtbl, int* argc, char** argv) {
@@ -734,66 +734,36 @@ void QCoreApplication_virtualbase_disconnectNotify(void* self, QMetaMethod* sign
 }
 
 const QMetaObject* QCoreApplication_staticMetaObject() { return &QCoreApplication::staticMetaObject; }
-void* QCoreApplication_protectedbase_resolveInterface(bool* _dynamic_cast_ok, const void* self, const char* name, int revision) {
-	VirtualQCoreApplication* self_cast = dynamic_cast<VirtualQCoreApplication*>( (QCoreApplication*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return nullptr;
-	}
-	
-	*_dynamic_cast_ok = true;
+void* QCoreApplication_protectedbase_resolveInterface(const void* self, const char* name, int revision) {
+	VirtualQCoreApplication* self_cast = static_cast<VirtualQCoreApplication*>( (QCoreApplication*)(self) );
 	
 	return self_cast->resolveInterface(name, static_cast<int>(revision));
 
 }
 
-QObject* QCoreApplication_protectedbase_sender(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQCoreApplication* self_cast = dynamic_cast<VirtualQCoreApplication*>( (QCoreApplication*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return nullptr;
-	}
-	
-	*_dynamic_cast_ok = true;
+QObject* QCoreApplication_protectedbase_sender(const void* self) {
+	VirtualQCoreApplication* self_cast = static_cast<VirtualQCoreApplication*>( (QCoreApplication*)(self) );
 	
 	return self_cast->sender();
 
 }
 
-int QCoreApplication_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQCoreApplication* self_cast = dynamic_cast<VirtualQCoreApplication*>( (QCoreApplication*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return 0;
-	}
-	
-	*_dynamic_cast_ok = true;
+int QCoreApplication_protectedbase_senderSignalIndex(const void* self) {
+	VirtualQCoreApplication* self_cast = static_cast<VirtualQCoreApplication*>( (QCoreApplication*)(self) );
 	
 	return self_cast->senderSignalIndex();
 
 }
 
-int QCoreApplication_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal) {
-	VirtualQCoreApplication* self_cast = dynamic_cast<VirtualQCoreApplication*>( (QCoreApplication*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return 0;
-	}
-	
-	*_dynamic_cast_ok = true;
+int QCoreApplication_protectedbase_receivers(const void* self, const char* signal) {
+	VirtualQCoreApplication* self_cast = static_cast<VirtualQCoreApplication*>( (QCoreApplication*)(self) );
 	
 	return self_cast->receivers(signal);
 
 }
 
-bool QCoreApplication_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal) {
-	VirtualQCoreApplication* self_cast = dynamic_cast<VirtualQCoreApplication*>( (QCoreApplication*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return false;
-	}
-	
-	*_dynamic_cast_ok = true;
+bool QCoreApplication_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal) {
+	VirtualQCoreApplication* self_cast = static_cast<VirtualQCoreApplication*>( (QCoreApplication*)(self) );
 	
 	return self_cast->isSignalConnected(*signal);
 

@@ -500,17 +500,17 @@ public:
 	friend void QItemDelegate_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
 
 	// Wrappers to allow calling protected methods:
-	friend void QItemDelegate_protectedbase_drawBackground(bool* _dynamic_cast_ok, const void* self, QPainter* painter, QStyleOptionViewItem* option, QModelIndex* index);
-	friend void QItemDelegate_protectedbase_doLayout(bool* _dynamic_cast_ok, const void* self, QStyleOptionViewItem* option, QRect* checkRect, QRect* iconRect, QRect* textRect, bool hint);
-	friend QRect* QItemDelegate_protectedbase_rect(bool* _dynamic_cast_ok, const void* self, QStyleOptionViewItem* option, QModelIndex* index, int role);
-	friend QStyleOptionViewItem* QItemDelegate_protectedbase_setOptions(bool* _dynamic_cast_ok, const void* self, QModelIndex* index, QStyleOptionViewItem* option);
-	friend QPixmap* QItemDelegate_protectedbase_decoration(bool* _dynamic_cast_ok, const void* self, QStyleOptionViewItem* option, QVariant* variant);
-	friend QRect* QItemDelegate_protectedbase_doCheck(bool* _dynamic_cast_ok, const void* self, QStyleOptionViewItem* option, QRect* bounding, QVariant* variant);
-	friend QRect* QItemDelegate_protectedbase_textRectangle(bool* _dynamic_cast_ok, const void* self, QPainter* painter, QRect* rect, QFont* font, struct miqt_string text);
-	friend QObject* QItemDelegate_protectedbase_sender(bool* _dynamic_cast_ok, const void* self);
-	friend int QItemDelegate_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
-	friend int QItemDelegate_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
-	friend bool QItemDelegate_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+	friend void QItemDelegate_protectedbase_drawBackground(const void* self, QPainter* painter, QStyleOptionViewItem* option, QModelIndex* index);
+	friend void QItemDelegate_protectedbase_doLayout(const void* self, QStyleOptionViewItem* option, QRect* checkRect, QRect* iconRect, QRect* textRect, bool hint);
+	friend QRect* QItemDelegate_protectedbase_rect(const void* self, QStyleOptionViewItem* option, QModelIndex* index, int role);
+	friend QStyleOptionViewItem* QItemDelegate_protectedbase_setOptions(const void* self, QModelIndex* index, QStyleOptionViewItem* option);
+	friend QPixmap* QItemDelegate_protectedbase_decoration(const void* self, QStyleOptionViewItem* option, QVariant* variant);
+	friend QRect* QItemDelegate_protectedbase_doCheck(const void* self, QStyleOptionViewItem* option, QRect* bounding, QVariant* variant);
+	friend QRect* QItemDelegate_protectedbase_textRectangle(const void* self, QPainter* painter, QRect* rect, QFont* font, struct miqt_string text);
+	friend QObject* QItemDelegate_protectedbase_sender(const void* self);
+	friend int QItemDelegate_protectedbase_senderSignalIndex(const void* self);
+	friend int QItemDelegate_protectedbase_receivers(const void* self, const char* signal);
+	friend bool QItemDelegate_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
 };
 
 QItemDelegate* QItemDelegate_new(struct QItemDelegate_VTable* vtbl) {
@@ -765,145 +765,79 @@ void QItemDelegate_virtualbase_disconnectNotify(void* self, QMetaMethod* signal)
 }
 
 const QMetaObject* QItemDelegate_staticMetaObject() { return &QItemDelegate::staticMetaObject; }
-void QItemDelegate_protectedbase_drawBackground(bool* _dynamic_cast_ok, const void* self, QPainter* painter, QStyleOptionViewItem* option, QModelIndex* index) {
-	VirtualQItemDelegate* self_cast = dynamic_cast<VirtualQItemDelegate*>( (QItemDelegate*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QItemDelegate_protectedbase_drawBackground(const void* self, QPainter* painter, QStyleOptionViewItem* option, QModelIndex* index) {
+	VirtualQItemDelegate* self_cast = static_cast<VirtualQItemDelegate*>( (QItemDelegate*)(self) );
 	
 	self_cast->drawBackground(painter, *option, *index);
 
 }
 
-void QItemDelegate_protectedbase_doLayout(bool* _dynamic_cast_ok, const void* self, QStyleOptionViewItem* option, QRect* checkRect, QRect* iconRect, QRect* textRect, bool hint) {
-	VirtualQItemDelegate* self_cast = dynamic_cast<VirtualQItemDelegate*>( (QItemDelegate*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QItemDelegate_protectedbase_doLayout(const void* self, QStyleOptionViewItem* option, QRect* checkRect, QRect* iconRect, QRect* textRect, bool hint) {
+	VirtualQItemDelegate* self_cast = static_cast<VirtualQItemDelegate*>( (QItemDelegate*)(self) );
 	
 	self_cast->doLayout(*option, checkRect, iconRect, textRect, hint);
 
 }
 
-QRect* QItemDelegate_protectedbase_rect(bool* _dynamic_cast_ok, const void* self, QStyleOptionViewItem* option, QModelIndex* index, int role) {
-	VirtualQItemDelegate* self_cast = dynamic_cast<VirtualQItemDelegate*>( (QItemDelegate*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return nullptr;
-	}
-	
-	*_dynamic_cast_ok = true;
+QRect* QItemDelegate_protectedbase_rect(const void* self, QStyleOptionViewItem* option, QModelIndex* index, int role) {
+	VirtualQItemDelegate* self_cast = static_cast<VirtualQItemDelegate*>( (QItemDelegate*)(self) );
 	
 	return new QRect(self_cast->rect(*option, *index, static_cast<int>(role)));
 
 }
 
-QStyleOptionViewItem* QItemDelegate_protectedbase_setOptions(bool* _dynamic_cast_ok, const void* self, QModelIndex* index, QStyleOptionViewItem* option) {
-	VirtualQItemDelegate* self_cast = dynamic_cast<VirtualQItemDelegate*>( (QItemDelegate*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return nullptr;
-	}
-	
-	*_dynamic_cast_ok = true;
+QStyleOptionViewItem* QItemDelegate_protectedbase_setOptions(const void* self, QModelIndex* index, QStyleOptionViewItem* option) {
+	VirtualQItemDelegate* self_cast = static_cast<VirtualQItemDelegate*>( (QItemDelegate*)(self) );
 	
 	return new QStyleOptionViewItem(self_cast->setOptions(*index, *option));
 
 }
 
-QPixmap* QItemDelegate_protectedbase_decoration(bool* _dynamic_cast_ok, const void* self, QStyleOptionViewItem* option, QVariant* variant) {
-	VirtualQItemDelegate* self_cast = dynamic_cast<VirtualQItemDelegate*>( (QItemDelegate*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return nullptr;
-	}
-	
-	*_dynamic_cast_ok = true;
+QPixmap* QItemDelegate_protectedbase_decoration(const void* self, QStyleOptionViewItem* option, QVariant* variant) {
+	VirtualQItemDelegate* self_cast = static_cast<VirtualQItemDelegate*>( (QItemDelegate*)(self) );
 	
 	return new QPixmap(self_cast->decoration(*option, *variant));
 
 }
 
-QRect* QItemDelegate_protectedbase_doCheck(bool* _dynamic_cast_ok, const void* self, QStyleOptionViewItem* option, QRect* bounding, QVariant* variant) {
-	VirtualQItemDelegate* self_cast = dynamic_cast<VirtualQItemDelegate*>( (QItemDelegate*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return nullptr;
-	}
-	
-	*_dynamic_cast_ok = true;
+QRect* QItemDelegate_protectedbase_doCheck(const void* self, QStyleOptionViewItem* option, QRect* bounding, QVariant* variant) {
+	VirtualQItemDelegate* self_cast = static_cast<VirtualQItemDelegate*>( (QItemDelegate*)(self) );
 	
 	return new QRect(self_cast->doCheck(*option, *bounding, *variant));
 
 }
 
-QRect* QItemDelegate_protectedbase_textRectangle(bool* _dynamic_cast_ok, const void* self, QPainter* painter, QRect* rect, QFont* font, struct miqt_string text) {
-	VirtualQItemDelegate* self_cast = dynamic_cast<VirtualQItemDelegate*>( (QItemDelegate*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return nullptr;
-	}
-	
-	*_dynamic_cast_ok = true;
+QRect* QItemDelegate_protectedbase_textRectangle(const void* self, QPainter* painter, QRect* rect, QFont* font, struct miqt_string text) {
+	VirtualQItemDelegate* self_cast = static_cast<VirtualQItemDelegate*>( (QItemDelegate*)(self) );
 			QString text_QString = QString::fromUtf8(text.data, text.len);
 
 	return new QRect(self_cast->textRectangle(painter, *rect, *font, text_QString));
 
 }
 
-QObject* QItemDelegate_protectedbase_sender(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQItemDelegate* self_cast = dynamic_cast<VirtualQItemDelegate*>( (QItemDelegate*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return nullptr;
-	}
-	
-	*_dynamic_cast_ok = true;
+QObject* QItemDelegate_protectedbase_sender(const void* self) {
+	VirtualQItemDelegate* self_cast = static_cast<VirtualQItemDelegate*>( (QItemDelegate*)(self) );
 	
 	return self_cast->sender();
 
 }
 
-int QItemDelegate_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQItemDelegate* self_cast = dynamic_cast<VirtualQItemDelegate*>( (QItemDelegate*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return 0;
-	}
-	
-	*_dynamic_cast_ok = true;
+int QItemDelegate_protectedbase_senderSignalIndex(const void* self) {
+	VirtualQItemDelegate* self_cast = static_cast<VirtualQItemDelegate*>( (QItemDelegate*)(self) );
 	
 	return self_cast->senderSignalIndex();
 
 }
 
-int QItemDelegate_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal) {
-	VirtualQItemDelegate* self_cast = dynamic_cast<VirtualQItemDelegate*>( (QItemDelegate*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return 0;
-	}
-	
-	*_dynamic_cast_ok = true;
+int QItemDelegate_protectedbase_receivers(const void* self, const char* signal) {
+	VirtualQItemDelegate* self_cast = static_cast<VirtualQItemDelegate*>( (QItemDelegate*)(self) );
 	
 	return self_cast->receivers(signal);
 
 }
 
-bool QItemDelegate_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal) {
-	VirtualQItemDelegate* self_cast = dynamic_cast<VirtualQItemDelegate*>( (QItemDelegate*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return false;
-	}
-	
-	*_dynamic_cast_ok = true;
+bool QItemDelegate_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal) {
+	VirtualQItemDelegate* self_cast = static_cast<VirtualQItemDelegate*>( (QItemDelegate*)(self) );
 	
 	return self_cast->isSignalConnected(*signal);
 

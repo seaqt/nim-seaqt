@@ -220,6 +220,11 @@ proc fcQVariant_toDouble1(self: pointer, ok: ptr bool): float64 {.importc: "QVar
 proc fcQVariant_toFloat1(self: pointer, ok: ptr bool): float32 {.importc: "QVariant_toFloat1".}
 proc fcQVariant_toReal1(self: pointer, ok: ptr bool): float64 {.importc: "QVariant_toReal1".}
 proc fcQVariant_fromValue(value: pointer): pointer {.importc: "QVariant_fromValue".}
+proc fcQVariant_protectedbase_create(self: pointer, typeVal: cint, copy: pointer): void {.importc: "QVariant_protectedbase_create".}
+proc fcQVariant_protectedbase_create2(self: pointer, typeVal: pointer, copy: pointer): void {.importc: "QVariant_protectedbase_create2".}
+proc fcQVariant_protectedbase_equals(self: pointer, other: pointer): bool {.importc: "QVariant_protectedbase_equals".}
+proc fcQVariant_protectedbase_convert2(self: pointer, typeVal: cint, ptrVal: pointer): bool {.importc: "QVariant_protectedbase_convert2".}
+proc fcQVariant_protectedbase_view(self: pointer, typeVal: cint, ptrVal: pointer): bool {.importc: "QVariant_protectedbase_view".}
 proc fcQVariant_new(): ptr cQVariant {.importc: "QVariant_new".}
 proc fcQVariant_new2(typeVal: pointer): ptr cQVariant {.importc: "QVariant_new2".}
 proc fcQVariant_new3(other: pointer): ptr cQVariant {.importc: "QVariant_new3".}
@@ -522,6 +527,21 @@ proc toReal*(self: gen_qvariant_types.QVariant, ok: ptr bool): float64 =
 
 proc fromValue*(_: type gen_qvariant_types.QVariant, value: gen_qobject_types.QObject): gen_qvariant_types.QVariant =
   gen_qvariant_types.QVariant(h: fcQVariant_fromValue(value.h))
+
+proc create*(self: gen_qvariant_types.QVariant, typeVal: cint, copy: pointer): void =
+  fcQVariant_protectedbase_create(self.h, typeVal, copy)
+
+proc create*(self: gen_qvariant_types.QVariant, typeVal: gen_qmetatype_types.QMetaType, copy: pointer): void =
+  fcQVariant_protectedbase_create2(self.h, typeVal.h, copy)
+
+proc equals*(self: gen_qvariant_types.QVariant, other: gen_qvariant_types.QVariant): bool =
+  fcQVariant_protectedbase_equals(self.h, other.h)
+
+proc convert*(self: gen_qvariant_types.QVariant, typeVal: cint, ptrVal: pointer): bool =
+  fcQVariant_protectedbase_convert2(self.h, typeVal, ptrVal)
+
+proc view*(self: gen_qvariant_types.QVariant, typeVal: cint, ptrVal: pointer): bool =
+  fcQVariant_protectedbase_view(self.h, typeVal, ptrVal)
 
 proc create*(T: type gen_qvariant_types.QVariant): gen_qvariant_types.QVariant =
   gen_qvariant_types.QVariant(h: fcQVariant_new())

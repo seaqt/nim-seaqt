@@ -266,6 +266,15 @@ proc fcQImage_virtualbase_metric(self: pointer, metric: cint): cint {.importc: "
 proc fcQImage_virtualbase_initPainter(self: pointer, painter: pointer): void {.importc: "QImage_virtualbase_initPainter".}
 proc fcQImage_virtualbase_redirected(self: pointer, offset: pointer): pointer {.importc: "QImage_virtualbase_redirected".}
 proc fcQImage_virtualbase_sharedPainter(self: pointer, ): pointer {.importc: "QImage_virtualbase_sharedPainter".}
+proc fcQImage_protectedbase_mirroredHelper(self: pointer, horizontal: bool, vertical: bool): pointer {.importc: "QImage_protectedbase_mirroredHelper".}
+proc fcQImage_protectedbase_rgbSwappedHelper(self: pointer, ): pointer {.importc: "QImage_protectedbase_rgbSwappedHelper".}
+proc fcQImage_protectedbase_mirroredInplace(self: pointer, horizontal: bool, vertical: bool): void {.importc: "QImage_protectedbase_mirroredInplace".}
+proc fcQImage_protectedbase_rgbSwappedInplace(self: pointer, ): void {.importc: "QImage_protectedbase_rgbSwappedInplace".}
+proc fcQImage_protectedbase_convertToFormatHelper(self: pointer, format: cint, flags: cint): pointer {.importc: "QImage_protectedbase_convertToFormatHelper".}
+proc fcQImage_protectedbase_convertToFormatInplace(self: pointer, format: cint, flags: cint): bool {.importc: "QImage_protectedbase_convertToFormatInplace".}
+proc fcQImage_protectedbase_smoothScaled(self: pointer, w: cint, h: cint): pointer {.importc: "QImage_protectedbase_smoothScaled".}
+proc fcQImage_protectedbase_detachMetadata(self: pointer, ): void {.importc: "QImage_protectedbase_detachMetadata".}
+proc fcQImage_protectedbase_detachMetadata1(self: pointer, invalidateCache: bool): void {.importc: "QImage_protectedbase_detachMetadata1".}
 proc fcQImage_new(vtbl: pointer, ): ptr cQImage {.importc: "QImage_new".}
 proc fcQImage_new2(vtbl: pointer, size: pointer, format: cint): ptr cQImage {.importc: "QImage_new2".}
 proc fcQImage_new3(vtbl: pointer, width: cint, height: cint, format: cint): ptr cQImage {.importc: "QImage_new3".}
@@ -784,6 +793,33 @@ proc miqt_exec_callback_cQImage_sharedPainter(vtbl: pointer, self: pointer): poi
   let self = QImage(h: self)
   var virtualReturn = vtbl[].sharedPainter(self)
   virtualReturn.h
+
+proc mirroredHelper*(self: gen_qimage_types.QImage, horizontal: bool, vertical: bool): gen_qimage_types.QImage =
+  gen_qimage_types.QImage(h: fcQImage_protectedbase_mirroredHelper(self.h, horizontal, vertical))
+
+proc rgbSwappedHelper*(self: gen_qimage_types.QImage, ): gen_qimage_types.QImage =
+  gen_qimage_types.QImage(h: fcQImage_protectedbase_rgbSwappedHelper(self.h))
+
+proc mirroredInplace*(self: gen_qimage_types.QImage, horizontal: bool, vertical: bool): void =
+  fcQImage_protectedbase_mirroredInplace(self.h, horizontal, vertical)
+
+proc rgbSwappedInplace*(self: gen_qimage_types.QImage, ): void =
+  fcQImage_protectedbase_rgbSwappedInplace(self.h)
+
+proc convertToFormatHelper*(self: gen_qimage_types.QImage, format: cint, flags: cint): gen_qimage_types.QImage =
+  gen_qimage_types.QImage(h: fcQImage_protectedbase_convertToFormatHelper(self.h, cint(format), cint(flags)))
+
+proc convertToFormatInplace*(self: gen_qimage_types.QImage, format: cint, flags: cint): bool =
+  fcQImage_protectedbase_convertToFormatInplace(self.h, cint(format), cint(flags))
+
+proc smoothScaled*(self: gen_qimage_types.QImage, w: cint, h: cint): gen_qimage_types.QImage =
+  gen_qimage_types.QImage(h: fcQImage_protectedbase_smoothScaled(self.h, w, h))
+
+proc detachMetadata*(self: gen_qimage_types.QImage, ): void =
+  fcQImage_protectedbase_detachMetadata(self.h)
+
+proc detachMetadata*(self: gen_qimage_types.QImage, invalidateCache: bool): void =
+  fcQImage_protectedbase_detachMetadata1(self.h, invalidateCache)
 
 proc create*(T: type gen_qimage_types.QImage,
     vtbl: ref QImageVTable = nil): gen_qimage_types.QImage =

@@ -127,6 +127,12 @@ proc fcQWaveDecoder_virtualbase_childEvent(self: pointer, event: pointer): void 
 proc fcQWaveDecoder_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QWaveDecoder_virtualbase_customEvent".}
 proc fcQWaveDecoder_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QWaveDecoder_virtualbase_connectNotify".}
 proc fcQWaveDecoder_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QWaveDecoder_virtualbase_disconnectNotify".}
+proc fcQWaveDecoder_protectedbase_setOpenMode(self: pointer, openMode: cint): void {.importc: "QWaveDecoder_protectedbase_setOpenMode".}
+proc fcQWaveDecoder_protectedbase_setErrorString(self: pointer, errorString: struct_miqt_string): void {.importc: "QWaveDecoder_protectedbase_setErrorString".}
+proc fcQWaveDecoder_protectedbase_sender(self: pointer, ): pointer {.importc: "QWaveDecoder_protectedbase_sender".}
+proc fcQWaveDecoder_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QWaveDecoder_protectedbase_senderSignalIndex".}
+proc fcQWaveDecoder_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QWaveDecoder_protectedbase_receivers".}
+proc fcQWaveDecoder_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QWaveDecoder_protectedbase_isSignalConnected".}
 proc fcQWaveDecoder_new(vtbl: pointer, device: pointer): ptr cQWaveDecoder {.importc: "QWaveDecoder_new".}
 proc fcQWaveDecoder_new2(vtbl: pointer, device: pointer, format: pointer): ptr cQWaveDecoder {.importc: "QWaveDecoder_new2".}
 proc fcQWaveDecoder_new3(vtbl: pointer, device: pointer, parent: pointer): ptr cQWaveDecoder {.importc: "QWaveDecoder_new3".}
@@ -519,6 +525,24 @@ proc miqt_exec_callback_cQWaveDecoder_disconnectNotify(vtbl: pointer, self: poin
   let self = QWaveDecoder(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
   vtbl[].disconnectNotify(self, slotval1)
+
+proc setOpenMode*(self: gen_qwavedecoder_types.QWaveDecoder, openMode: cint): void =
+  fcQWaveDecoder_protectedbase_setOpenMode(self.h, cint(openMode))
+
+proc setErrorString*(self: gen_qwavedecoder_types.QWaveDecoder, errorString: string): void =
+  fcQWaveDecoder_protectedbase_setErrorString(self.h, struct_miqt_string(data: errorString, len: csize_t(len(errorString))))
+
+proc sender*(self: gen_qwavedecoder_types.QWaveDecoder, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQWaveDecoder_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qwavedecoder_types.QWaveDecoder, ): cint =
+  fcQWaveDecoder_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qwavedecoder_types.QWaveDecoder, signal: cstring): cint =
+  fcQWaveDecoder_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qwavedecoder_types.QWaveDecoder, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQWaveDecoder_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc create*(T: type gen_qwavedecoder_types.QWaveDecoder,
     device: gen_qiodevice_types.QIODevice,

@@ -41,11 +41,13 @@ import
   ../QtCore/gen_qcoreevent_types,
   ../QtCore/gen_qrect_types,
   ../QtCore/gen_qsize_types,
+  ./gen_qgraphicsitem_types,
   ./gen_qgraphicslayoutitem
 export
   gen_qcoreevent_types,
   gen_qrect_types,
   gen_qsize_types,
+  gen_qgraphicsitem_types,
   gen_qgraphicslayoutitem
 
 type cQGraphicsLayout*{.exportc: "QGraphicsLayout", incompleteStruct.} = object
@@ -80,6 +82,9 @@ proc fcQGraphicsLayout_virtualbase_updateGeometry(self: pointer, ): void {.impor
 proc fcQGraphicsLayout_virtualbase_widgetEvent(self: pointer, e: pointer): void {.importc: "QGraphicsLayout_virtualbase_widgetEvent".}
 proc fcQGraphicsLayout_virtualbase_setGeometry(self: pointer, rect: pointer): void {.importc: "QGraphicsLayout_virtualbase_setGeometry".}
 proc fcQGraphicsLayout_virtualbase_isEmpty(self: pointer, ): bool {.importc: "QGraphicsLayout_virtualbase_isEmpty".}
+proc fcQGraphicsLayout_protectedbase_addChildLayoutItem(self: pointer, layoutItem: pointer): void {.importc: "QGraphicsLayout_protectedbase_addChildLayoutItem".}
+proc fcQGraphicsLayout_protectedbase_setGraphicsItem(self: pointer, item: pointer): void {.importc: "QGraphicsLayout_protectedbase_setGraphicsItem".}
+proc fcQGraphicsLayout_protectedbase_setOwnedByLayout(self: pointer, ownedByLayout: bool): void {.importc: "QGraphicsLayout_protectedbase_setOwnedByLayout".}
 proc fcQGraphicsLayout_new(vtbl: pointer, ): ptr cQGraphicsLayout {.importc: "QGraphicsLayout_new".}
 proc fcQGraphicsLayout_new2(vtbl: pointer, parent: pointer): ptr cQGraphicsLayout {.importc: "QGraphicsLayout_new2".}
 proc fcQGraphicsLayout_delete(self: pointer) {.importc: "QGraphicsLayout_delete".}
@@ -223,6 +228,15 @@ proc miqt_exec_callback_cQGraphicsLayout_sizeHint(vtbl: pointer, self: pointer, 
   let slotval2 = gen_qsize_types.QSizeF(h: constraint)
   var virtualReturn = vtbl[].sizeHint(self, slotval1, slotval2)
   virtualReturn.h
+
+proc addChildLayoutItem*(self: gen_qgraphicslayout_types.QGraphicsLayout, layoutItem: gen_qgraphicslayoutitem_types.QGraphicsLayoutItem): void =
+  fcQGraphicsLayout_protectedbase_addChildLayoutItem(self.h, layoutItem.h)
+
+proc setGraphicsItem*(self: gen_qgraphicslayout_types.QGraphicsLayout, item: gen_qgraphicsitem_types.QGraphicsItem): void =
+  fcQGraphicsLayout_protectedbase_setGraphicsItem(self.h, item.h)
+
+proc setOwnedByLayout*(self: gen_qgraphicslayout_types.QGraphicsLayout, ownedByLayout: bool): void =
+  fcQGraphicsLayout_protectedbase_setOwnedByLayout(self.h, ownedByLayout)
 
 proc create*(T: type gen_qgraphicslayout_types.QGraphicsLayout,
     vtbl: ref QGraphicsLayoutVTable = nil): gen_qgraphicslayout_types.QGraphicsLayout =

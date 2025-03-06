@@ -89,6 +89,10 @@ proc fcQParallelAnimationGroup_virtualbase_childEvent(self: pointer, event: poin
 proc fcQParallelAnimationGroup_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QParallelAnimationGroup_virtualbase_customEvent".}
 proc fcQParallelAnimationGroup_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QParallelAnimationGroup_virtualbase_connectNotify".}
 proc fcQParallelAnimationGroup_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QParallelAnimationGroup_virtualbase_disconnectNotify".}
+proc fcQParallelAnimationGroup_protectedbase_sender(self: pointer, ): pointer {.importc: "QParallelAnimationGroup_protectedbase_sender".}
+proc fcQParallelAnimationGroup_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QParallelAnimationGroup_protectedbase_senderSignalIndex".}
+proc fcQParallelAnimationGroup_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QParallelAnimationGroup_protectedbase_receivers".}
+proc fcQParallelAnimationGroup_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QParallelAnimationGroup_protectedbase_isSignalConnected".}
 proc fcQParallelAnimationGroup_new(vtbl: pointer, ): ptr cQParallelAnimationGroup {.importc: "QParallelAnimationGroup_new".}
 proc fcQParallelAnimationGroup_new2(vtbl: pointer, parent: pointer): ptr cQParallelAnimationGroup {.importc: "QParallelAnimationGroup_new2".}
 proc fcQParallelAnimationGroup_staticMetaObject(): pointer {.importc: "QParallelAnimationGroup_staticMetaObject".}
@@ -287,6 +291,18 @@ proc miqt_exec_callback_cQParallelAnimationGroup_disconnectNotify(vtbl: pointer,
   let self = QParallelAnimationGroup(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
   vtbl[].disconnectNotify(self, slotval1)
+
+proc sender*(self: gen_qparallelanimationgroup_types.QParallelAnimationGroup, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQParallelAnimationGroup_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qparallelanimationgroup_types.QParallelAnimationGroup, ): cint =
+  fcQParallelAnimationGroup_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qparallelanimationgroup_types.QParallelAnimationGroup, signal: cstring): cint =
+  fcQParallelAnimationGroup_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qparallelanimationgroup_types.QParallelAnimationGroup, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQParallelAnimationGroup_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc create*(T: type gen_qparallelanimationgroup_types.QParallelAnimationGroup,
     vtbl: ref QParallelAnimationGroupVTable = nil): gen_qparallelanimationgroup_types.QParallelAnimationGroup =

@@ -211,20 +211,20 @@ public:
 	friend void QSyntaxHighlighter_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
 
 	// Wrappers to allow calling protected methods:
-	friend void QSyntaxHighlighter_protectedbase_setFormat(bool* _dynamic_cast_ok, void* self, int start, int count, QTextCharFormat* format);
-	friend void QSyntaxHighlighter_protectedbase_setFormat2(bool* _dynamic_cast_ok, void* self, int start, int count, QColor* color);
-	friend void QSyntaxHighlighter_protectedbase_setFormat3(bool* _dynamic_cast_ok, void* self, int start, int count, QFont* font);
-	friend QTextCharFormat* QSyntaxHighlighter_protectedbase_format(bool* _dynamic_cast_ok, const void* self, int pos);
-	friend int QSyntaxHighlighter_protectedbase_previousBlockState(bool* _dynamic_cast_ok, const void* self);
-	friend int QSyntaxHighlighter_protectedbase_currentBlockState(bool* _dynamic_cast_ok, const void* self);
-	friend void QSyntaxHighlighter_protectedbase_setCurrentBlockState(bool* _dynamic_cast_ok, void* self, int newState);
-	friend void QSyntaxHighlighter_protectedbase_setCurrentBlockUserData(bool* _dynamic_cast_ok, void* self, QTextBlockUserData* data);
-	friend QTextBlockUserData* QSyntaxHighlighter_protectedbase_currentBlockUserData(bool* _dynamic_cast_ok, const void* self);
-	friend QTextBlock* QSyntaxHighlighter_protectedbase_currentBlock(bool* _dynamic_cast_ok, const void* self);
-	friend QObject* QSyntaxHighlighter_protectedbase_sender(bool* _dynamic_cast_ok, const void* self);
-	friend int QSyntaxHighlighter_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
-	friend int QSyntaxHighlighter_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
-	friend bool QSyntaxHighlighter_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+	friend void QSyntaxHighlighter_protectedbase_setFormat(void* self, int start, int count, QTextCharFormat* format);
+	friend void QSyntaxHighlighter_protectedbase_setFormat2(void* self, int start, int count, QColor* color);
+	friend void QSyntaxHighlighter_protectedbase_setFormat3(void* self, int start, int count, QFont* font);
+	friend QTextCharFormat* QSyntaxHighlighter_protectedbase_format(const void* self, int pos);
+	friend int QSyntaxHighlighter_protectedbase_previousBlockState(const void* self);
+	friend int QSyntaxHighlighter_protectedbase_currentBlockState(const void* self);
+	friend void QSyntaxHighlighter_protectedbase_setCurrentBlockState(void* self, int newState);
+	friend void QSyntaxHighlighter_protectedbase_setCurrentBlockUserData(void* self, QTextBlockUserData* data);
+	friend QTextBlockUserData* QSyntaxHighlighter_protectedbase_currentBlockUserData(const void* self);
+	friend QTextBlock* QSyntaxHighlighter_protectedbase_currentBlock(const void* self);
+	friend QObject* QSyntaxHighlighter_protectedbase_sender(const void* self);
+	friend int QSyntaxHighlighter_protectedbase_senderSignalIndex(const void* self);
+	friend int QSyntaxHighlighter_protectedbase_receivers(const void* self, const char* signal);
+	friend bool QSyntaxHighlighter_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
 };
 
 QSyntaxHighlighter* QSyntaxHighlighter_new(struct QSyntaxHighlighter_VTable* vtbl, QObject* parent) {
@@ -361,183 +361,99 @@ void QSyntaxHighlighter_virtualbase_disconnectNotify(void* self, QMetaMethod* si
 }
 
 const QMetaObject* QSyntaxHighlighter_staticMetaObject() { return &QSyntaxHighlighter::staticMetaObject; }
-void QSyntaxHighlighter_protectedbase_setFormat(bool* _dynamic_cast_ok, void* self, int start, int count, QTextCharFormat* format) {
-	VirtualQSyntaxHighlighter* self_cast = dynamic_cast<VirtualQSyntaxHighlighter*>( (QSyntaxHighlighter*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QSyntaxHighlighter_protectedbase_setFormat(void* self, int start, int count, QTextCharFormat* format) {
+	VirtualQSyntaxHighlighter* self_cast = static_cast<VirtualQSyntaxHighlighter*>( (QSyntaxHighlighter*)(self) );
 	
 	self_cast->setFormat(static_cast<int>(start), static_cast<int>(count), *format);
 
 }
 
-void QSyntaxHighlighter_protectedbase_setFormat2(bool* _dynamic_cast_ok, void* self, int start, int count, QColor* color) {
-	VirtualQSyntaxHighlighter* self_cast = dynamic_cast<VirtualQSyntaxHighlighter*>( (QSyntaxHighlighter*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QSyntaxHighlighter_protectedbase_setFormat2(void* self, int start, int count, QColor* color) {
+	VirtualQSyntaxHighlighter* self_cast = static_cast<VirtualQSyntaxHighlighter*>( (QSyntaxHighlighter*)(self) );
 	
 	self_cast->setFormat(static_cast<int>(start), static_cast<int>(count), *color);
 
 }
 
-void QSyntaxHighlighter_protectedbase_setFormat3(bool* _dynamic_cast_ok, void* self, int start, int count, QFont* font) {
-	VirtualQSyntaxHighlighter* self_cast = dynamic_cast<VirtualQSyntaxHighlighter*>( (QSyntaxHighlighter*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QSyntaxHighlighter_protectedbase_setFormat3(void* self, int start, int count, QFont* font) {
+	VirtualQSyntaxHighlighter* self_cast = static_cast<VirtualQSyntaxHighlighter*>( (QSyntaxHighlighter*)(self) );
 	
 	self_cast->setFormat(static_cast<int>(start), static_cast<int>(count), *font);
 
 }
 
-QTextCharFormat* QSyntaxHighlighter_protectedbase_format(bool* _dynamic_cast_ok, const void* self, int pos) {
-	VirtualQSyntaxHighlighter* self_cast = dynamic_cast<VirtualQSyntaxHighlighter*>( (QSyntaxHighlighter*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return nullptr;
-	}
-	
-	*_dynamic_cast_ok = true;
+QTextCharFormat* QSyntaxHighlighter_protectedbase_format(const void* self, int pos) {
+	VirtualQSyntaxHighlighter* self_cast = static_cast<VirtualQSyntaxHighlighter*>( (QSyntaxHighlighter*)(self) );
 	
 	return new QTextCharFormat(self_cast->format(static_cast<int>(pos)));
 
 }
 
-int QSyntaxHighlighter_protectedbase_previousBlockState(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQSyntaxHighlighter* self_cast = dynamic_cast<VirtualQSyntaxHighlighter*>( (QSyntaxHighlighter*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return 0;
-	}
-	
-	*_dynamic_cast_ok = true;
+int QSyntaxHighlighter_protectedbase_previousBlockState(const void* self) {
+	VirtualQSyntaxHighlighter* self_cast = static_cast<VirtualQSyntaxHighlighter*>( (QSyntaxHighlighter*)(self) );
 	
 	return self_cast->previousBlockState();
 
 }
 
-int QSyntaxHighlighter_protectedbase_currentBlockState(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQSyntaxHighlighter* self_cast = dynamic_cast<VirtualQSyntaxHighlighter*>( (QSyntaxHighlighter*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return 0;
-	}
-	
-	*_dynamic_cast_ok = true;
+int QSyntaxHighlighter_protectedbase_currentBlockState(const void* self) {
+	VirtualQSyntaxHighlighter* self_cast = static_cast<VirtualQSyntaxHighlighter*>( (QSyntaxHighlighter*)(self) );
 	
 	return self_cast->currentBlockState();
 
 }
 
-void QSyntaxHighlighter_protectedbase_setCurrentBlockState(bool* _dynamic_cast_ok, void* self, int newState) {
-	VirtualQSyntaxHighlighter* self_cast = dynamic_cast<VirtualQSyntaxHighlighter*>( (QSyntaxHighlighter*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QSyntaxHighlighter_protectedbase_setCurrentBlockState(void* self, int newState) {
+	VirtualQSyntaxHighlighter* self_cast = static_cast<VirtualQSyntaxHighlighter*>( (QSyntaxHighlighter*)(self) );
 	
 	self_cast->setCurrentBlockState(static_cast<int>(newState));
 
 }
 
-void QSyntaxHighlighter_protectedbase_setCurrentBlockUserData(bool* _dynamic_cast_ok, void* self, QTextBlockUserData* data) {
-	VirtualQSyntaxHighlighter* self_cast = dynamic_cast<VirtualQSyntaxHighlighter*>( (QSyntaxHighlighter*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QSyntaxHighlighter_protectedbase_setCurrentBlockUserData(void* self, QTextBlockUserData* data) {
+	VirtualQSyntaxHighlighter* self_cast = static_cast<VirtualQSyntaxHighlighter*>( (QSyntaxHighlighter*)(self) );
 	
 	self_cast->setCurrentBlockUserData(data);
 
 }
 
-QTextBlockUserData* QSyntaxHighlighter_protectedbase_currentBlockUserData(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQSyntaxHighlighter* self_cast = dynamic_cast<VirtualQSyntaxHighlighter*>( (QSyntaxHighlighter*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return nullptr;
-	}
-	
-	*_dynamic_cast_ok = true;
+QTextBlockUserData* QSyntaxHighlighter_protectedbase_currentBlockUserData(const void* self) {
+	VirtualQSyntaxHighlighter* self_cast = static_cast<VirtualQSyntaxHighlighter*>( (QSyntaxHighlighter*)(self) );
 	
 	return self_cast->currentBlockUserData();
 
 }
 
-QTextBlock* QSyntaxHighlighter_protectedbase_currentBlock(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQSyntaxHighlighter* self_cast = dynamic_cast<VirtualQSyntaxHighlighter*>( (QSyntaxHighlighter*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return nullptr;
-	}
-	
-	*_dynamic_cast_ok = true;
+QTextBlock* QSyntaxHighlighter_protectedbase_currentBlock(const void* self) {
+	VirtualQSyntaxHighlighter* self_cast = static_cast<VirtualQSyntaxHighlighter*>( (QSyntaxHighlighter*)(self) );
 	
 	return new QTextBlock(self_cast->currentBlock());
 
 }
 
-QObject* QSyntaxHighlighter_protectedbase_sender(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQSyntaxHighlighter* self_cast = dynamic_cast<VirtualQSyntaxHighlighter*>( (QSyntaxHighlighter*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return nullptr;
-	}
-	
-	*_dynamic_cast_ok = true;
+QObject* QSyntaxHighlighter_protectedbase_sender(const void* self) {
+	VirtualQSyntaxHighlighter* self_cast = static_cast<VirtualQSyntaxHighlighter*>( (QSyntaxHighlighter*)(self) );
 	
 	return self_cast->sender();
 
 }
 
-int QSyntaxHighlighter_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQSyntaxHighlighter* self_cast = dynamic_cast<VirtualQSyntaxHighlighter*>( (QSyntaxHighlighter*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return 0;
-	}
-	
-	*_dynamic_cast_ok = true;
+int QSyntaxHighlighter_protectedbase_senderSignalIndex(const void* self) {
+	VirtualQSyntaxHighlighter* self_cast = static_cast<VirtualQSyntaxHighlighter*>( (QSyntaxHighlighter*)(self) );
 	
 	return self_cast->senderSignalIndex();
 
 }
 
-int QSyntaxHighlighter_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal) {
-	VirtualQSyntaxHighlighter* self_cast = dynamic_cast<VirtualQSyntaxHighlighter*>( (QSyntaxHighlighter*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return 0;
-	}
-	
-	*_dynamic_cast_ok = true;
+int QSyntaxHighlighter_protectedbase_receivers(const void* self, const char* signal) {
+	VirtualQSyntaxHighlighter* self_cast = static_cast<VirtualQSyntaxHighlighter*>( (QSyntaxHighlighter*)(self) );
 	
 	return self_cast->receivers(signal);
 
 }
 
-bool QSyntaxHighlighter_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal) {
-	VirtualQSyntaxHighlighter* self_cast = dynamic_cast<VirtualQSyntaxHighlighter*>( (QSyntaxHighlighter*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return false;
-	}
-	
-	*_dynamic_cast_ok = true;
+bool QSyntaxHighlighter_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal) {
+	VirtualQSyntaxHighlighter* self_cast = static_cast<VirtualQSyntaxHighlighter*>( (QSyntaxHighlighter*)(self) );
 	
 	return self_cast->isSignalConnected(*signal);
 

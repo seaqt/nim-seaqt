@@ -94,6 +94,10 @@ proc fcQPluginLoader_virtualbase_childEvent(self: pointer, event: pointer): void
 proc fcQPluginLoader_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QPluginLoader_virtualbase_customEvent".}
 proc fcQPluginLoader_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QPluginLoader_virtualbase_connectNotify".}
 proc fcQPluginLoader_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QPluginLoader_virtualbase_disconnectNotify".}
+proc fcQPluginLoader_protectedbase_sender(self: pointer, ): pointer {.importc: "QPluginLoader_protectedbase_sender".}
+proc fcQPluginLoader_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QPluginLoader_protectedbase_senderSignalIndex".}
+proc fcQPluginLoader_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QPluginLoader_protectedbase_receivers".}
+proc fcQPluginLoader_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QPluginLoader_protectedbase_isSignalConnected".}
 proc fcQPluginLoader_new(vtbl: pointer, ): ptr cQPluginLoader {.importc: "QPluginLoader_new".}
 proc fcQPluginLoader_new2(vtbl: pointer, fileName: struct_miqt_string): ptr cQPluginLoader {.importc: "QPluginLoader_new2".}
 proc fcQPluginLoader_new3(vtbl: pointer, parent: pointer): ptr cQPluginLoader {.importc: "QPluginLoader_new3".}
@@ -298,6 +302,18 @@ proc miqt_exec_callback_cQPluginLoader_disconnectNotify(vtbl: pointer, self: poi
   let self = QPluginLoader(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
   vtbl[].disconnectNotify(self, slotval1)
+
+proc sender*(self: gen_qpluginloader_types.QPluginLoader, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQPluginLoader_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qpluginloader_types.QPluginLoader, ): cint =
+  fcQPluginLoader_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qpluginloader_types.QPluginLoader, signal: cstring): cint =
+  fcQPluginLoader_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qpluginloader_types.QPluginLoader, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQPluginLoader_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc create*(T: type gen_qpluginloader_types.QPluginLoader,
     vtbl: ref QPluginLoaderVTable = nil): gen_qpluginloader_types.QPluginLoader =

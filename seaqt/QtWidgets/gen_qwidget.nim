@@ -505,6 +505,21 @@ proc fcQWidget_virtualbase_childEvent(self: pointer, event: pointer): void {.imp
 proc fcQWidget_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QWidget_virtualbase_customEvent".}
 proc fcQWidget_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QWidget_virtualbase_connectNotify".}
 proc fcQWidget_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QWidget_virtualbase_disconnectNotify".}
+proc fcQWidget_protectedbase_updateMicroFocus(self: pointer, ): void {.importc: "QWidget_protectedbase_updateMicroFocus".}
+proc fcQWidget_protectedbase_create(self: pointer, ): void {.importc: "QWidget_protectedbase_create".}
+proc fcQWidget_protectedbase_destroy(self: pointer, ): void {.importc: "QWidget_protectedbase_destroy".}
+proc fcQWidget_protectedbase_focusNextChild(self: pointer, ): bool {.importc: "QWidget_protectedbase_focusNextChild".}
+proc fcQWidget_protectedbase_focusPreviousChild(self: pointer, ): bool {.importc: "QWidget_protectedbase_focusPreviousChild".}
+proc fcQWidget_protectedbase_updateMicroFocus1(self: pointer, query: cint): void {.importc: "QWidget_protectedbase_updateMicroFocus1".}
+proc fcQWidget_protectedbase_create1(self: pointer, param1: uint): void {.importc: "QWidget_protectedbase_create1".}
+proc fcQWidget_protectedbase_create2(self: pointer, param1: uint, initializeWindow: bool): void {.importc: "QWidget_protectedbase_create2".}
+proc fcQWidget_protectedbase_create3(self: pointer, param1: uint, initializeWindow: bool, destroyOldWindow: bool): void {.importc: "QWidget_protectedbase_create3".}
+proc fcQWidget_protectedbase_destroy1(self: pointer, destroyWindow: bool): void {.importc: "QWidget_protectedbase_destroy1".}
+proc fcQWidget_protectedbase_destroy2(self: pointer, destroyWindow: bool, destroySubWindows: bool): void {.importc: "QWidget_protectedbase_destroy2".}
+proc fcQWidget_protectedbase_sender(self: pointer, ): pointer {.importc: "QWidget_protectedbase_sender".}
+proc fcQWidget_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QWidget_protectedbase_senderSignalIndex".}
+proc fcQWidget_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QWidget_protectedbase_receivers".}
+proc fcQWidget_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QWidget_protectedbase_isSignalConnected".}
 proc fcQWidget_new(vtbl: pointer, parent: pointer): ptr cQWidget {.importc: "QWidget_new".}
 proc fcQWidget_new2(vtbl: pointer, ): ptr cQWidget {.importc: "QWidget_new2".}
 proc fcQWidget_new3(vtbl: pointer, parent: pointer, f: cint): ptr cQWidget {.importc: "QWidget_new3".}
@@ -2061,6 +2076,51 @@ proc miqt_exec_callback_cQWidget_disconnectNotify(vtbl: pointer, self: pointer, 
   let self = QWidget(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
   vtbl[].disconnectNotify(self, slotval1)
+
+proc updateMicroFocus*(self: gen_qwidget_types.QWidget, ): void =
+  fcQWidget_protectedbase_updateMicroFocus(self.h)
+
+proc create*(self: gen_qwidget_types.QWidget, ): void =
+  fcQWidget_protectedbase_create(self.h)
+
+proc destroy*(self: gen_qwidget_types.QWidget, ): void =
+  fcQWidget_protectedbase_destroy(self.h)
+
+proc focusNextChild*(self: gen_qwidget_types.QWidget, ): bool =
+  fcQWidget_protectedbase_focusNextChild(self.h)
+
+proc focusPreviousChild*(self: gen_qwidget_types.QWidget, ): bool =
+  fcQWidget_protectedbase_focusPreviousChild(self.h)
+
+proc updateMicroFocus*(self: gen_qwidget_types.QWidget, query: cint): void =
+  fcQWidget_protectedbase_updateMicroFocus1(self.h, cint(query))
+
+proc create*(self: gen_qwidget_types.QWidget, param1: uint): void =
+  fcQWidget_protectedbase_create1(self.h, param1)
+
+proc create*(self: gen_qwidget_types.QWidget, param1: uint, initializeWindow: bool): void =
+  fcQWidget_protectedbase_create2(self.h, param1, initializeWindow)
+
+proc create*(self: gen_qwidget_types.QWidget, param1: uint, initializeWindow: bool, destroyOldWindow: bool): void =
+  fcQWidget_protectedbase_create3(self.h, param1, initializeWindow, destroyOldWindow)
+
+proc destroy*(self: gen_qwidget_types.QWidget, destroyWindow: bool): void =
+  fcQWidget_protectedbase_destroy1(self.h, destroyWindow)
+
+proc destroy*(self: gen_qwidget_types.QWidget, destroyWindow: bool, destroySubWindows: bool): void =
+  fcQWidget_protectedbase_destroy2(self.h, destroyWindow, destroySubWindows)
+
+proc sender*(self: gen_qwidget_types.QWidget, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQWidget_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qwidget_types.QWidget, ): cint =
+  fcQWidget_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qwidget_types.QWidget, signal: cstring): cint =
+  fcQWidget_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qwidget_types.QWidget, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQWidget_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc create*(T: type gen_qwidget_types.QWidget,
     parent: gen_qwidget_types.QWidget,

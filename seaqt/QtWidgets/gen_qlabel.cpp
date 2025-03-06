@@ -841,16 +841,16 @@ public:
 	friend void QLabel_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
 
 	// Wrappers to allow calling protected methods:
-	friend void QLabel_protectedbase_drawFrame(bool* _dynamic_cast_ok, void* self, QPainter* param1);
-	friend void QLabel_protectedbase_updateMicroFocus(bool* _dynamic_cast_ok, void* self);
-	friend void QLabel_protectedbase_create(bool* _dynamic_cast_ok, void* self);
-	friend void QLabel_protectedbase_destroy(bool* _dynamic_cast_ok, void* self);
-	friend bool QLabel_protectedbase_focusNextChild(bool* _dynamic_cast_ok, void* self);
-	friend bool QLabel_protectedbase_focusPreviousChild(bool* _dynamic_cast_ok, void* self);
-	friend QObject* QLabel_protectedbase_sender(bool* _dynamic_cast_ok, const void* self);
-	friend int QLabel_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
-	friend int QLabel_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
-	friend bool QLabel_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+	friend void QLabel_protectedbase_drawFrame(void* self, QPainter* param1);
+	friend void QLabel_protectedbase_updateMicroFocus(void* self);
+	friend void QLabel_protectedbase_create(void* self);
+	friend void QLabel_protectedbase_destroy(void* self);
+	friend bool QLabel_protectedbase_focusNextChild(void* self);
+	friend bool QLabel_protectedbase_focusPreviousChild(void* self);
+	friend QObject* QLabel_protectedbase_sender(const void* self);
+	friend int QLabel_protectedbase_senderSignalIndex(const void* self);
+	friend int QLabel_protectedbase_receivers(const void* self, const char* signal);
+	friend bool QLabel_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
 };
 
 QLabel* QLabel_new(struct QLabel_VTable* vtbl, QWidget* parent) {
@@ -1455,131 +1455,71 @@ void QLabel_virtualbase_disconnectNotify(void* self, QMetaMethod* signal) {
 }
 
 const QMetaObject* QLabel_staticMetaObject() { return &QLabel::staticMetaObject; }
-void QLabel_protectedbase_drawFrame(bool* _dynamic_cast_ok, void* self, QPainter* param1) {
-	VirtualQLabel* self_cast = dynamic_cast<VirtualQLabel*>( (QLabel*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QLabel_protectedbase_drawFrame(void* self, QPainter* param1) {
+	VirtualQLabel* self_cast = static_cast<VirtualQLabel*>( (QLabel*)(self) );
 	
 	self_cast->drawFrame(param1);
 
 }
 
-void QLabel_protectedbase_updateMicroFocus(bool* _dynamic_cast_ok, void* self) {
-	VirtualQLabel* self_cast = dynamic_cast<VirtualQLabel*>( (QLabel*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QLabel_protectedbase_updateMicroFocus(void* self) {
+	VirtualQLabel* self_cast = static_cast<VirtualQLabel*>( (QLabel*)(self) );
 	
 	self_cast->updateMicroFocus();
 
 }
 
-void QLabel_protectedbase_create(bool* _dynamic_cast_ok, void* self) {
-	VirtualQLabel* self_cast = dynamic_cast<VirtualQLabel*>( (QLabel*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QLabel_protectedbase_create(void* self) {
+	VirtualQLabel* self_cast = static_cast<VirtualQLabel*>( (QLabel*)(self) );
 	
 	self_cast->create();
 
 }
 
-void QLabel_protectedbase_destroy(bool* _dynamic_cast_ok, void* self) {
-	VirtualQLabel* self_cast = dynamic_cast<VirtualQLabel*>( (QLabel*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QLabel_protectedbase_destroy(void* self) {
+	VirtualQLabel* self_cast = static_cast<VirtualQLabel*>( (QLabel*)(self) );
 	
 	self_cast->destroy();
 
 }
 
-bool QLabel_protectedbase_focusNextChild(bool* _dynamic_cast_ok, void* self) {
-	VirtualQLabel* self_cast = dynamic_cast<VirtualQLabel*>( (QLabel*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return false;
-	}
-	
-	*_dynamic_cast_ok = true;
+bool QLabel_protectedbase_focusNextChild(void* self) {
+	VirtualQLabel* self_cast = static_cast<VirtualQLabel*>( (QLabel*)(self) );
 	
 	return self_cast->focusNextChild();
 
 }
 
-bool QLabel_protectedbase_focusPreviousChild(bool* _dynamic_cast_ok, void* self) {
-	VirtualQLabel* self_cast = dynamic_cast<VirtualQLabel*>( (QLabel*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return false;
-	}
-	
-	*_dynamic_cast_ok = true;
+bool QLabel_protectedbase_focusPreviousChild(void* self) {
+	VirtualQLabel* self_cast = static_cast<VirtualQLabel*>( (QLabel*)(self) );
 	
 	return self_cast->focusPreviousChild();
 
 }
 
-QObject* QLabel_protectedbase_sender(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQLabel* self_cast = dynamic_cast<VirtualQLabel*>( (QLabel*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return nullptr;
-	}
-	
-	*_dynamic_cast_ok = true;
+QObject* QLabel_protectedbase_sender(const void* self) {
+	VirtualQLabel* self_cast = static_cast<VirtualQLabel*>( (QLabel*)(self) );
 	
 	return self_cast->sender();
 
 }
 
-int QLabel_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQLabel* self_cast = dynamic_cast<VirtualQLabel*>( (QLabel*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return 0;
-	}
-	
-	*_dynamic_cast_ok = true;
+int QLabel_protectedbase_senderSignalIndex(const void* self) {
+	VirtualQLabel* self_cast = static_cast<VirtualQLabel*>( (QLabel*)(self) );
 	
 	return self_cast->senderSignalIndex();
 
 }
 
-int QLabel_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal) {
-	VirtualQLabel* self_cast = dynamic_cast<VirtualQLabel*>( (QLabel*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return 0;
-	}
-	
-	*_dynamic_cast_ok = true;
+int QLabel_protectedbase_receivers(const void* self, const char* signal) {
+	VirtualQLabel* self_cast = static_cast<VirtualQLabel*>( (QLabel*)(self) );
 	
 	return self_cast->receivers(signal);
 
 }
 
-bool QLabel_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal) {
-	VirtualQLabel* self_cast = dynamic_cast<VirtualQLabel*>( (QLabel*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return false;
-	}
-	
-	*_dynamic_cast_ok = true;
+bool QLabel_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal) {
+	VirtualQLabel* self_cast = static_cast<VirtualQLabel*>( (QLabel*)(self) );
 	
 	return self_cast->isSignalConnected(*signal);
 

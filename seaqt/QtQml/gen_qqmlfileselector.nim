@@ -86,6 +86,10 @@ proc fcQQmlFileSelector_virtualbase_childEvent(self: pointer, event: pointer): v
 proc fcQQmlFileSelector_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QQmlFileSelector_virtualbase_customEvent".}
 proc fcQQmlFileSelector_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QQmlFileSelector_virtualbase_connectNotify".}
 proc fcQQmlFileSelector_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QQmlFileSelector_virtualbase_disconnectNotify".}
+proc fcQQmlFileSelector_protectedbase_sender(self: pointer, ): pointer {.importc: "QQmlFileSelector_protectedbase_sender".}
+proc fcQQmlFileSelector_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QQmlFileSelector_protectedbase_senderSignalIndex".}
+proc fcQQmlFileSelector_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QQmlFileSelector_protectedbase_receivers".}
+proc fcQQmlFileSelector_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QQmlFileSelector_protectedbase_isSignalConnected".}
 proc fcQQmlFileSelector_new(vtbl: pointer, engine: pointer): ptr cQQmlFileSelector {.importc: "QQmlFileSelector_new".}
 proc fcQQmlFileSelector_new2(vtbl: pointer, engine: pointer, parent: pointer): ptr cQQmlFileSelector {.importc: "QQmlFileSelector_new2".}
 proc fcQQmlFileSelector_staticMetaObject(): pointer {.importc: "QQmlFileSelector_staticMetaObject".}
@@ -252,6 +256,18 @@ proc miqt_exec_callback_cQQmlFileSelector_disconnectNotify(vtbl: pointer, self: 
   let self = QQmlFileSelector(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
   vtbl[].disconnectNotify(self, slotval1)
+
+proc sender*(self: gen_qqmlfileselector_types.QQmlFileSelector, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQQmlFileSelector_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qqmlfileselector_types.QQmlFileSelector, ): cint =
+  fcQQmlFileSelector_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qqmlfileselector_types.QQmlFileSelector, signal: cstring): cint =
+  fcQQmlFileSelector_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qqmlfileselector_types.QQmlFileSelector, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQQmlFileSelector_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc create*(T: type gen_qqmlfileselector_types.QQmlFileSelector,
     engine: gen_qqmlengine_types.QQmlEngine,

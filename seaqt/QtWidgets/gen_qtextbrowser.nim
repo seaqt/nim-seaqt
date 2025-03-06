@@ -39,6 +39,7 @@ export gen_qtextbrowser_types
 
 import
   ../QtCore/gen_qcoreevent_types,
+  ../QtCore/gen_qmargins_types,
   ../QtCore/gen_qmetaobject_types,
   ../QtCore/gen_qmimedata_types,
   ../QtCore/gen_qobject_types,
@@ -57,6 +58,7 @@ import
   ./gen_qwidget_types
 export
   gen_qcoreevent_types,
+  gen_qmargins_types,
   gen_qmetaobject_types,
   gen_qmimedata_types,
   gen_qobject_types,
@@ -248,6 +250,19 @@ proc fcQTextBrowser_virtualbase_childEvent(self: pointer, event: pointer): void 
 proc fcQTextBrowser_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QTextBrowser_virtualbase_customEvent".}
 proc fcQTextBrowser_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QTextBrowser_virtualbase_connectNotify".}
 proc fcQTextBrowser_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QTextBrowser_virtualbase_disconnectNotify".}
+proc fcQTextBrowser_protectedbase_zoomInF(self: pointer, range: float32): void {.importc: "QTextBrowser_protectedbase_zoomInF".}
+proc fcQTextBrowser_protectedbase_setViewportMargins(self: pointer, left: cint, top: cint, right: cint, bottom: cint): void {.importc: "QTextBrowser_protectedbase_setViewportMargins".}
+proc fcQTextBrowser_protectedbase_viewportMargins(self: pointer, ): pointer {.importc: "QTextBrowser_protectedbase_viewportMargins".}
+proc fcQTextBrowser_protectedbase_drawFrame(self: pointer, param1: pointer): void {.importc: "QTextBrowser_protectedbase_drawFrame".}
+proc fcQTextBrowser_protectedbase_updateMicroFocus(self: pointer, ): void {.importc: "QTextBrowser_protectedbase_updateMicroFocus".}
+proc fcQTextBrowser_protectedbase_create(self: pointer, ): void {.importc: "QTextBrowser_protectedbase_create".}
+proc fcQTextBrowser_protectedbase_destroy(self: pointer, ): void {.importc: "QTextBrowser_protectedbase_destroy".}
+proc fcQTextBrowser_protectedbase_focusNextChild(self: pointer, ): bool {.importc: "QTextBrowser_protectedbase_focusNextChild".}
+proc fcQTextBrowser_protectedbase_focusPreviousChild(self: pointer, ): bool {.importc: "QTextBrowser_protectedbase_focusPreviousChild".}
+proc fcQTextBrowser_protectedbase_sender(self: pointer, ): pointer {.importc: "QTextBrowser_protectedbase_sender".}
+proc fcQTextBrowser_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QTextBrowser_protectedbase_senderSignalIndex".}
+proc fcQTextBrowser_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QTextBrowser_protectedbase_receivers".}
+proc fcQTextBrowser_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QTextBrowser_protectedbase_isSignalConnected".}
 proc fcQTextBrowser_new(vtbl: pointer, parent: pointer): ptr cQTextBrowser {.importc: "QTextBrowser_new".}
 proc fcQTextBrowser_new2(vtbl: pointer, ): ptr cQTextBrowser {.importc: "QTextBrowser_new2".}
 proc fcQTextBrowser_staticMetaObject(): pointer {.importc: "QTextBrowser_staticMetaObject".}
@@ -1215,6 +1230,45 @@ proc miqt_exec_callback_cQTextBrowser_disconnectNotify(vtbl: pointer, self: poin
   let self = QTextBrowser(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
   vtbl[].disconnectNotify(self, slotval1)
+
+proc zoomInF*(self: gen_qtextbrowser_types.QTextBrowser, range: float32): void =
+  fcQTextBrowser_protectedbase_zoomInF(self.h, range)
+
+proc setViewportMargins*(self: gen_qtextbrowser_types.QTextBrowser, left: cint, top: cint, right: cint, bottom: cint): void =
+  fcQTextBrowser_protectedbase_setViewportMargins(self.h, left, top, right, bottom)
+
+proc viewportMargins*(self: gen_qtextbrowser_types.QTextBrowser, ): gen_qmargins_types.QMargins =
+  gen_qmargins_types.QMargins(h: fcQTextBrowser_protectedbase_viewportMargins(self.h))
+
+proc drawFrame*(self: gen_qtextbrowser_types.QTextBrowser, param1: gen_qpainter_types.QPainter): void =
+  fcQTextBrowser_protectedbase_drawFrame(self.h, param1.h)
+
+proc updateMicroFocus*(self: gen_qtextbrowser_types.QTextBrowser, ): void =
+  fcQTextBrowser_protectedbase_updateMicroFocus(self.h)
+
+proc create*(self: gen_qtextbrowser_types.QTextBrowser, ): void =
+  fcQTextBrowser_protectedbase_create(self.h)
+
+proc destroy*(self: gen_qtextbrowser_types.QTextBrowser, ): void =
+  fcQTextBrowser_protectedbase_destroy(self.h)
+
+proc focusNextChild*(self: gen_qtextbrowser_types.QTextBrowser, ): bool =
+  fcQTextBrowser_protectedbase_focusNextChild(self.h)
+
+proc focusPreviousChild*(self: gen_qtextbrowser_types.QTextBrowser, ): bool =
+  fcQTextBrowser_protectedbase_focusPreviousChild(self.h)
+
+proc sender*(self: gen_qtextbrowser_types.QTextBrowser, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQTextBrowser_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qtextbrowser_types.QTextBrowser, ): cint =
+  fcQTextBrowser_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qtextbrowser_types.QTextBrowser, signal: cstring): cint =
+  fcQTextBrowser_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qtextbrowser_types.QTextBrowser, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQTextBrowser_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc create*(T: type gen_qtextbrowser_types.QTextBrowser,
     parent: gen_qwidget_types.QWidget,

@@ -94,10 +94,10 @@ void QQuickTextureFactory_virtualbase_childEvent(void* self, QChildEvent* event)
 void QQuickTextureFactory_virtualbase_customEvent(void* self, QEvent* event);
 void QQuickTextureFactory_virtualbase_connectNotify(void* self, QMetaMethod* signal);
 void QQuickTextureFactory_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
-QObject* QQuickTextureFactory_protectedbase_sender(bool* _dynamic_cast_ok, const void* self);
-int QQuickTextureFactory_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
-int QQuickTextureFactory_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
-bool QQuickTextureFactory_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+QObject* QQuickTextureFactory_protectedbase_sender(const void* self);
+int QQuickTextureFactory_protectedbase_senderSignalIndex(const void* self);
+int QQuickTextureFactory_protectedbase_receivers(const void* self, const char* signal);
+bool QQuickTextureFactory_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
 const QMetaObject* QQuickTextureFactory_staticMetaObject();
 void QQuickTextureFactory_delete(QQuickTextureFactory* self);
 
@@ -143,10 +143,10 @@ void QQuickImageResponse_virtualbase_childEvent(void* self, QChildEvent* event);
 void QQuickImageResponse_virtualbase_customEvent(void* self, QEvent* event);
 void QQuickImageResponse_virtualbase_connectNotify(void* self, QMetaMethod* signal);
 void QQuickImageResponse_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
-QObject* QQuickImageResponse_protectedbase_sender(bool* _dynamic_cast_ok, const void* self);
-int QQuickImageResponse_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
-int QQuickImageResponse_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
-bool QQuickImageResponse_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+QObject* QQuickImageResponse_protectedbase_sender(const void* self);
+int QQuickImageResponse_protectedbase_senderSignalIndex(const void* self);
+int QQuickImageResponse_protectedbase_receivers(const void* self, const char* signal);
+bool QQuickImageResponse_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
 const QMetaObject* QQuickImageResponse_staticMetaObject();
 void QQuickImageResponse_delete(QQuickImageResponse* self);
 
@@ -197,10 +197,10 @@ void QQuickImageProvider_virtualbase_childEvent(void* self, QChildEvent* event);
 void QQuickImageProvider_virtualbase_customEvent(void* self, QEvent* event);
 void QQuickImageProvider_virtualbase_connectNotify(void* self, QMetaMethod* signal);
 void QQuickImageProvider_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
-QObject* QQuickImageProvider_protectedbase_sender(bool* _dynamic_cast_ok, const void* self);
-int QQuickImageProvider_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
-int QQuickImageProvider_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
-bool QQuickImageProvider_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+QObject* QQuickImageProvider_protectedbase_sender(const void* self);
+int QQuickImageProvider_protectedbase_senderSignalIndex(const void* self);
+int QQuickImageProvider_protectedbase_receivers(const void* self, const char* signal);
+bool QQuickImageProvider_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
 const QMetaObject* QQuickImageProvider_staticMetaObject();
 void QQuickImageProvider_delete(QQuickImageProvider* self);
 
@@ -242,10 +242,10 @@ void QQuickAsyncImageProvider_virtualbase_childEvent(void* self, QChildEvent* ev
 void QQuickAsyncImageProvider_virtualbase_customEvent(void* self, QEvent* event);
 void QQuickAsyncImageProvider_virtualbase_connectNotify(void* self, QMetaMethod* signal);
 void QQuickAsyncImageProvider_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
-QObject* QQuickAsyncImageProvider_protectedbase_sender(bool* _dynamic_cast_ok, const void* self);
-int QQuickAsyncImageProvider_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
-int QQuickAsyncImageProvider_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
-bool QQuickAsyncImageProvider_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+QObject* QQuickAsyncImageProvider_protectedbase_sender(const void* self);
+int QQuickAsyncImageProvider_protectedbase_senderSignalIndex(const void* self);
+int QQuickAsyncImageProvider_protectedbase_receivers(const void* self, const char* signal);
+bool QQuickAsyncImageProvider_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
 void QQuickAsyncImageProvider_delete(QQuickAsyncImageProvider* self);
 
 #ifdef __cplusplus

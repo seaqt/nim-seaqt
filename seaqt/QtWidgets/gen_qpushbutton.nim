@@ -201,6 +201,15 @@ proc fcQPushButton_virtualbase_childEvent(self: pointer, event: pointer): void {
 proc fcQPushButton_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QPushButton_virtualbase_customEvent".}
 proc fcQPushButton_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QPushButton_virtualbase_connectNotify".}
 proc fcQPushButton_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QPushButton_virtualbase_disconnectNotify".}
+proc fcQPushButton_protectedbase_updateMicroFocus(self: pointer, ): void {.importc: "QPushButton_protectedbase_updateMicroFocus".}
+proc fcQPushButton_protectedbase_create(self: pointer, ): void {.importc: "QPushButton_protectedbase_create".}
+proc fcQPushButton_protectedbase_destroy(self: pointer, ): void {.importc: "QPushButton_protectedbase_destroy".}
+proc fcQPushButton_protectedbase_focusNextChild(self: pointer, ): bool {.importc: "QPushButton_protectedbase_focusNextChild".}
+proc fcQPushButton_protectedbase_focusPreviousChild(self: pointer, ): bool {.importc: "QPushButton_protectedbase_focusPreviousChild".}
+proc fcQPushButton_protectedbase_sender(self: pointer, ): pointer {.importc: "QPushButton_protectedbase_sender".}
+proc fcQPushButton_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QPushButton_protectedbase_senderSignalIndex".}
+proc fcQPushButton_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QPushButton_protectedbase_receivers".}
+proc fcQPushButton_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QPushButton_protectedbase_isSignalConnected".}
 proc fcQPushButton_new(vtbl: pointer, parent: pointer): ptr cQPushButton {.importc: "QPushButton_new".}
 proc fcQPushButton_new2(vtbl: pointer, ): ptr cQPushButton {.importc: "QPushButton_new2".}
 proc fcQPushButton_new3(vtbl: pointer, text: struct_miqt_string): ptr cQPushButton {.importc: "QPushButton_new3".}
@@ -882,6 +891,33 @@ proc miqt_exec_callback_cQPushButton_disconnectNotify(vtbl: pointer, self: point
   let self = QPushButton(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
   vtbl[].disconnectNotify(self, slotval1)
+
+proc updateMicroFocus*(self: gen_qpushbutton_types.QPushButton, ): void =
+  fcQPushButton_protectedbase_updateMicroFocus(self.h)
+
+proc create*(self: gen_qpushbutton_types.QPushButton, ): void =
+  fcQPushButton_protectedbase_create(self.h)
+
+proc destroy*(self: gen_qpushbutton_types.QPushButton, ): void =
+  fcQPushButton_protectedbase_destroy(self.h)
+
+proc focusNextChild*(self: gen_qpushbutton_types.QPushButton, ): bool =
+  fcQPushButton_protectedbase_focusNextChild(self.h)
+
+proc focusPreviousChild*(self: gen_qpushbutton_types.QPushButton, ): bool =
+  fcQPushButton_protectedbase_focusPreviousChild(self.h)
+
+proc sender*(self: gen_qpushbutton_types.QPushButton, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQPushButton_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qpushbutton_types.QPushButton, ): cint =
+  fcQPushButton_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qpushbutton_types.QPushButton, signal: cstring): cint =
+  fcQPushButton_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qpushbutton_types.QPushButton, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQPushButton_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc create*(T: type gen_qpushbutton_types.QPushButton,
     parent: gen_qwidget_types.QWidget,

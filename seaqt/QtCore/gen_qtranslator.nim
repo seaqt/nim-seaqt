@@ -98,6 +98,10 @@ proc fcQTranslator_virtualbase_childEvent(self: pointer, event: pointer): void {
 proc fcQTranslator_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QTranslator_virtualbase_customEvent".}
 proc fcQTranslator_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QTranslator_virtualbase_connectNotify".}
 proc fcQTranslator_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QTranslator_virtualbase_disconnectNotify".}
+proc fcQTranslator_protectedbase_sender(self: pointer, ): pointer {.importc: "QTranslator_protectedbase_sender".}
+proc fcQTranslator_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QTranslator_protectedbase_senderSignalIndex".}
+proc fcQTranslator_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QTranslator_protectedbase_receivers".}
+proc fcQTranslator_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QTranslator_protectedbase_isSignalConnected".}
 proc fcQTranslator_new(vtbl: pointer, ): ptr cQTranslator {.importc: "QTranslator_new".}
 proc fcQTranslator_new2(vtbl: pointer, parent: pointer): ptr cQTranslator {.importc: "QTranslator_new2".}
 proc fcQTranslator_staticMetaObject(): pointer {.importc: "QTranslator_staticMetaObject".}
@@ -328,6 +332,18 @@ proc miqt_exec_callback_cQTranslator_disconnectNotify(vtbl: pointer, self: point
   let self = QTranslator(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
   vtbl[].disconnectNotify(self, slotval1)
+
+proc sender*(self: gen_qtranslator_types.QTranslator, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQTranslator_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qtranslator_types.QTranslator, ): cint =
+  fcQTranslator_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qtranslator_types.QTranslator, signal: cstring): cint =
+  fcQTranslator_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qtranslator_types.QTranslator, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQTranslator_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc create*(T: type gen_qtranslator_types.QTranslator,
     vtbl: ref QTranslatorVTable = nil): gen_qtranslator_types.QTranslator =

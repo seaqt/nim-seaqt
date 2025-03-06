@@ -83,8 +83,8 @@ void QGraphicsLayoutItem_virtualbase_getContentsMargins(const void* self, double
 void QGraphicsLayoutItem_virtualbase_updateGeometry(void* self);
 bool QGraphicsLayoutItem_virtualbase_isEmpty(const void* self);
 QSizeF* QGraphicsLayoutItem_virtualbase_sizeHint(const void* self, int which, QSizeF* constraint);
-void QGraphicsLayoutItem_protectedbase_setGraphicsItem(bool* _dynamic_cast_ok, void* self, QGraphicsItem* item);
-void QGraphicsLayoutItem_protectedbase_setOwnedByLayout(bool* _dynamic_cast_ok, void* self, bool ownedByLayout);
+void QGraphicsLayoutItem_protectedbase_setGraphicsItem(void* self, QGraphicsItem* item);
+void QGraphicsLayoutItem_protectedbase_setOwnedByLayout(void* self, bool ownedByLayout);
 void QGraphicsLayoutItem_delete(QGraphicsLayoutItem* self);
 
 #ifdef __cplusplus

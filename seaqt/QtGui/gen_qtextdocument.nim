@@ -270,6 +270,10 @@ proc fcQTextDocument_virtualbase_childEvent(self: pointer, event: pointer): void
 proc fcQTextDocument_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QTextDocument_virtualbase_customEvent".}
 proc fcQTextDocument_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QTextDocument_virtualbase_connectNotify".}
 proc fcQTextDocument_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QTextDocument_virtualbase_disconnectNotify".}
+proc fcQTextDocument_protectedbase_sender(self: pointer, ): pointer {.importc: "QTextDocument_protectedbase_sender".}
+proc fcQTextDocument_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QTextDocument_protectedbase_senderSignalIndex".}
+proc fcQTextDocument_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QTextDocument_protectedbase_receivers".}
+proc fcQTextDocument_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QTextDocument_protectedbase_isSignalConnected".}
 proc fcQTextDocument_new(vtbl: pointer, ): ptr cQTextDocument {.importc: "QTextDocument_new".}
 proc fcQTextDocument_new2(vtbl: pointer, text: struct_miqt_string): ptr cQTextDocument {.importc: "QTextDocument_new2".}
 proc fcQTextDocument_new3(vtbl: pointer, parent: pointer): ptr cQTextDocument {.importc: "QTextDocument_new3".}
@@ -992,6 +996,18 @@ proc miqt_exec_callback_cQTextDocument_disconnectNotify(vtbl: pointer, self: poi
   let self = QTextDocument(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
   vtbl[].disconnectNotify(self, slotval1)
+
+proc sender*(self: gen_qtextdocument_types.QTextDocument, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQTextDocument_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qtextdocument_types.QTextDocument, ): cint =
+  fcQTextDocument_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qtextdocument_types.QTextDocument, signal: cstring): cint =
+  fcQTextDocument_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qtextdocument_types.QTextDocument, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQTextDocument_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc create*(T: type gen_qtextdocument_types.QTextDocument,
     vtbl: ref QTextDocumentVTable = nil): gen_qtextdocument_types.QTextDocument =

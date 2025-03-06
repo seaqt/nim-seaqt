@@ -82,6 +82,10 @@ proc fcQStylePlugin_virtualbase_childEvent(self: pointer, event: pointer): void 
 proc fcQStylePlugin_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QStylePlugin_virtualbase_customEvent".}
 proc fcQStylePlugin_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QStylePlugin_virtualbase_connectNotify".}
 proc fcQStylePlugin_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QStylePlugin_virtualbase_disconnectNotify".}
+proc fcQStylePlugin_protectedbase_sender(self: pointer, ): pointer {.importc: "QStylePlugin_protectedbase_sender".}
+proc fcQStylePlugin_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QStylePlugin_protectedbase_senderSignalIndex".}
+proc fcQStylePlugin_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QStylePlugin_protectedbase_receivers".}
+proc fcQStylePlugin_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QStylePlugin_protectedbase_isSignalConnected".}
 proc fcQStylePlugin_new(vtbl: pointer, ): ptr cQStylePlugin {.importc: "QStylePlugin_new".}
 proc fcQStylePlugin_new2(vtbl: pointer, parent: pointer): ptr cQStylePlugin {.importc: "QStylePlugin_new2".}
 proc fcQStylePlugin_staticMetaObject(): pointer {.importc: "QStylePlugin_staticMetaObject".}
@@ -247,6 +251,18 @@ proc miqt_exec_callback_cQStylePlugin_disconnectNotify(vtbl: pointer, self: poin
   let self = QStylePlugin(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
   vtbl[].disconnectNotify(self, slotval1)
+
+proc sender*(self: gen_qstyleplugin_types.QStylePlugin, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQStylePlugin_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qstyleplugin_types.QStylePlugin, ): cint =
+  fcQStylePlugin_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qstyleplugin_types.QStylePlugin, signal: cstring): cint =
+  fcQStylePlugin_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qstyleplugin_types.QStylePlugin, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQStylePlugin_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc create*(T: type gen_qstyleplugin_types.QStylePlugin,
     vtbl: ref QStylePluginVTable = nil): gen_qstyleplugin_types.QStylePlugin =

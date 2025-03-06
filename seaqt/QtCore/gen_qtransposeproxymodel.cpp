@@ -990,31 +990,31 @@ public:
 	friend void QTransposeProxyModel_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
 
 	// Wrappers to allow calling protected methods:
-	friend QModelIndex* QTransposeProxyModel_protectedbase_createSourceIndex(bool* _dynamic_cast_ok, const void* self, int row, int col, void* internalPtr);
-	friend QModelIndex* QTransposeProxyModel_protectedbase_createIndex(bool* _dynamic_cast_ok, const void* self, int row, int column);
-	friend void QTransposeProxyModel_protectedbase_encodeData(bool* _dynamic_cast_ok, const void* self, struct miqt_array /* of QModelIndex* */  indexes, QDataStream* stream);
-	friend bool QTransposeProxyModel_protectedbase_decodeData(bool* _dynamic_cast_ok, void* self, int row, int column, QModelIndex* parent, QDataStream* stream);
-	friend void QTransposeProxyModel_protectedbase_beginInsertRows(bool* _dynamic_cast_ok, void* self, QModelIndex* parent, int first, int last);
-	friend void QTransposeProxyModel_protectedbase_endInsertRows(bool* _dynamic_cast_ok, void* self);
-	friend void QTransposeProxyModel_protectedbase_beginRemoveRows(bool* _dynamic_cast_ok, void* self, QModelIndex* parent, int first, int last);
-	friend void QTransposeProxyModel_protectedbase_endRemoveRows(bool* _dynamic_cast_ok, void* self);
-	friend bool QTransposeProxyModel_protectedbase_beginMoveRows(bool* _dynamic_cast_ok, void* self, QModelIndex* sourceParent, int sourceFirst, int sourceLast, QModelIndex* destinationParent, int destinationRow);
-	friend void QTransposeProxyModel_protectedbase_endMoveRows(bool* _dynamic_cast_ok, void* self);
-	friend void QTransposeProxyModel_protectedbase_beginInsertColumns(bool* _dynamic_cast_ok, void* self, QModelIndex* parent, int first, int last);
-	friend void QTransposeProxyModel_protectedbase_endInsertColumns(bool* _dynamic_cast_ok, void* self);
-	friend void QTransposeProxyModel_protectedbase_beginRemoveColumns(bool* _dynamic_cast_ok, void* self, QModelIndex* parent, int first, int last);
-	friend void QTransposeProxyModel_protectedbase_endRemoveColumns(bool* _dynamic_cast_ok, void* self);
-	friend bool QTransposeProxyModel_protectedbase_beginMoveColumns(bool* _dynamic_cast_ok, void* self, QModelIndex* sourceParent, int sourceFirst, int sourceLast, QModelIndex* destinationParent, int destinationColumn);
-	friend void QTransposeProxyModel_protectedbase_endMoveColumns(bool* _dynamic_cast_ok, void* self);
-	friend void QTransposeProxyModel_protectedbase_beginResetModel(bool* _dynamic_cast_ok, void* self);
-	friend void QTransposeProxyModel_protectedbase_endResetModel(bool* _dynamic_cast_ok, void* self);
-	friend void QTransposeProxyModel_protectedbase_changePersistentIndex(bool* _dynamic_cast_ok, void* self, QModelIndex* from, QModelIndex* to);
-	friend void QTransposeProxyModel_protectedbase_changePersistentIndexList(bool* _dynamic_cast_ok, void* self, struct miqt_array /* of QModelIndex* */  from, struct miqt_array /* of QModelIndex* */  to);
-	friend struct miqt_array /* of QModelIndex* */  QTransposeProxyModel_protectedbase_persistentIndexList(bool* _dynamic_cast_ok, const void* self);
-	friend QObject* QTransposeProxyModel_protectedbase_sender(bool* _dynamic_cast_ok, const void* self);
-	friend int QTransposeProxyModel_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
-	friend int QTransposeProxyModel_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
-	friend bool QTransposeProxyModel_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+	friend QModelIndex* QTransposeProxyModel_protectedbase_createSourceIndex(const void* self, int row, int col, void* internalPtr);
+	friend QModelIndex* QTransposeProxyModel_protectedbase_createIndex(const void* self, int row, int column);
+	friend void QTransposeProxyModel_protectedbase_encodeData(const void* self, struct miqt_array /* of QModelIndex* */  indexes, QDataStream* stream);
+	friend bool QTransposeProxyModel_protectedbase_decodeData(void* self, int row, int column, QModelIndex* parent, QDataStream* stream);
+	friend void QTransposeProxyModel_protectedbase_beginInsertRows(void* self, QModelIndex* parent, int first, int last);
+	friend void QTransposeProxyModel_protectedbase_endInsertRows(void* self);
+	friend void QTransposeProxyModel_protectedbase_beginRemoveRows(void* self, QModelIndex* parent, int first, int last);
+	friend void QTransposeProxyModel_protectedbase_endRemoveRows(void* self);
+	friend bool QTransposeProxyModel_protectedbase_beginMoveRows(void* self, QModelIndex* sourceParent, int sourceFirst, int sourceLast, QModelIndex* destinationParent, int destinationRow);
+	friend void QTransposeProxyModel_protectedbase_endMoveRows(void* self);
+	friend void QTransposeProxyModel_protectedbase_beginInsertColumns(void* self, QModelIndex* parent, int first, int last);
+	friend void QTransposeProxyModel_protectedbase_endInsertColumns(void* self);
+	friend void QTransposeProxyModel_protectedbase_beginRemoveColumns(void* self, QModelIndex* parent, int first, int last);
+	friend void QTransposeProxyModel_protectedbase_endRemoveColumns(void* self);
+	friend bool QTransposeProxyModel_protectedbase_beginMoveColumns(void* self, QModelIndex* sourceParent, int sourceFirst, int sourceLast, QModelIndex* destinationParent, int destinationColumn);
+	friend void QTransposeProxyModel_protectedbase_endMoveColumns(void* self);
+	friend void QTransposeProxyModel_protectedbase_beginResetModel(void* self);
+	friend void QTransposeProxyModel_protectedbase_endResetModel(void* self);
+	friend void QTransposeProxyModel_protectedbase_changePersistentIndex(void* self, QModelIndex* from, QModelIndex* to);
+	friend void QTransposeProxyModel_protectedbase_changePersistentIndexList(void* self, struct miqt_array /* of QModelIndex* */  from, struct miqt_array /* of QModelIndex* */  to);
+	friend struct miqt_array /* of QModelIndex* */  QTransposeProxyModel_protectedbase_persistentIndexList(const void* self);
+	friend QObject* QTransposeProxyModel_protectedbase_sender(const void* self);
+	friend int QTransposeProxyModel_protectedbase_senderSignalIndex(const void* self);
+	friend int QTransposeProxyModel_protectedbase_receivers(const void* self, const char* signal);
+	friend bool QTransposeProxyModel_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
 };
 
 QTransposeProxyModel* QTransposeProxyModel_new(struct QTransposeProxyModel_VTable* vtbl) {
@@ -1556,40 +1556,22 @@ void QTransposeProxyModel_virtualbase_disconnectNotify(void* self, QMetaMethod* 
 }
 
 const QMetaObject* QTransposeProxyModel_staticMetaObject() { return &QTransposeProxyModel::staticMetaObject; }
-QModelIndex* QTransposeProxyModel_protectedbase_createSourceIndex(bool* _dynamic_cast_ok, const void* self, int row, int col, void* internalPtr) {
-	VirtualQTransposeProxyModel* self_cast = dynamic_cast<VirtualQTransposeProxyModel*>( (QTransposeProxyModel*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return nullptr;
-	}
-	
-	*_dynamic_cast_ok = true;
+QModelIndex* QTransposeProxyModel_protectedbase_createSourceIndex(const void* self, int row, int col, void* internalPtr) {
+	VirtualQTransposeProxyModel* self_cast = static_cast<VirtualQTransposeProxyModel*>( (QTransposeProxyModel*)(self) );
 	
 	return new QModelIndex(self_cast->createSourceIndex(static_cast<int>(row), static_cast<int>(col), internalPtr));
 
 }
 
-QModelIndex* QTransposeProxyModel_protectedbase_createIndex(bool* _dynamic_cast_ok, const void* self, int row, int column) {
-	VirtualQTransposeProxyModel* self_cast = dynamic_cast<VirtualQTransposeProxyModel*>( (QTransposeProxyModel*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return nullptr;
-	}
-	
-	*_dynamic_cast_ok = true;
+QModelIndex* QTransposeProxyModel_protectedbase_createIndex(const void* self, int row, int column) {
+	VirtualQTransposeProxyModel* self_cast = static_cast<VirtualQTransposeProxyModel*>( (QTransposeProxyModel*)(self) );
 	
 	return new QModelIndex(self_cast->createIndex(static_cast<int>(row), static_cast<int>(column)));
 
 }
 
-void QTransposeProxyModel_protectedbase_encodeData(bool* _dynamic_cast_ok, const void* self, struct miqt_array /* of QModelIndex* */  indexes, QDataStream* stream) {
-	VirtualQTransposeProxyModel* self_cast = dynamic_cast<VirtualQTransposeProxyModel*>( (QTransposeProxyModel*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QTransposeProxyModel_protectedbase_encodeData(const void* self, struct miqt_array /* of QModelIndex* */  indexes, QDataStream* stream) {
+	VirtualQTransposeProxyModel* self_cast = static_cast<VirtualQTransposeProxyModel*>( (QTransposeProxyModel*)(self) );
 			QModelIndexList indexes_QList;
 		indexes_QList.reserve(indexes.len);
 		QModelIndex** indexes_arr = static_cast<QModelIndex**>(indexes.data);
@@ -1601,222 +1583,120 @@ void QTransposeProxyModel_protectedbase_encodeData(bool* _dynamic_cast_ok, const
 
 }
 
-bool QTransposeProxyModel_protectedbase_decodeData(bool* _dynamic_cast_ok, void* self, int row, int column, QModelIndex* parent, QDataStream* stream) {
-	VirtualQTransposeProxyModel* self_cast = dynamic_cast<VirtualQTransposeProxyModel*>( (QTransposeProxyModel*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return false;
-	}
-	
-	*_dynamic_cast_ok = true;
+bool QTransposeProxyModel_protectedbase_decodeData(void* self, int row, int column, QModelIndex* parent, QDataStream* stream) {
+	VirtualQTransposeProxyModel* self_cast = static_cast<VirtualQTransposeProxyModel*>( (QTransposeProxyModel*)(self) );
 	
 	return self_cast->decodeData(static_cast<int>(row), static_cast<int>(column), *parent, *stream);
 
 }
 
-void QTransposeProxyModel_protectedbase_beginInsertRows(bool* _dynamic_cast_ok, void* self, QModelIndex* parent, int first, int last) {
-	VirtualQTransposeProxyModel* self_cast = dynamic_cast<VirtualQTransposeProxyModel*>( (QTransposeProxyModel*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QTransposeProxyModel_protectedbase_beginInsertRows(void* self, QModelIndex* parent, int first, int last) {
+	VirtualQTransposeProxyModel* self_cast = static_cast<VirtualQTransposeProxyModel*>( (QTransposeProxyModel*)(self) );
 	
 	self_cast->beginInsertRows(*parent, static_cast<int>(first), static_cast<int>(last));
 
 }
 
-void QTransposeProxyModel_protectedbase_endInsertRows(bool* _dynamic_cast_ok, void* self) {
-	VirtualQTransposeProxyModel* self_cast = dynamic_cast<VirtualQTransposeProxyModel*>( (QTransposeProxyModel*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QTransposeProxyModel_protectedbase_endInsertRows(void* self) {
+	VirtualQTransposeProxyModel* self_cast = static_cast<VirtualQTransposeProxyModel*>( (QTransposeProxyModel*)(self) );
 	
 	self_cast->endInsertRows();
 
 }
 
-void QTransposeProxyModel_protectedbase_beginRemoveRows(bool* _dynamic_cast_ok, void* self, QModelIndex* parent, int first, int last) {
-	VirtualQTransposeProxyModel* self_cast = dynamic_cast<VirtualQTransposeProxyModel*>( (QTransposeProxyModel*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QTransposeProxyModel_protectedbase_beginRemoveRows(void* self, QModelIndex* parent, int first, int last) {
+	VirtualQTransposeProxyModel* self_cast = static_cast<VirtualQTransposeProxyModel*>( (QTransposeProxyModel*)(self) );
 	
 	self_cast->beginRemoveRows(*parent, static_cast<int>(first), static_cast<int>(last));
 
 }
 
-void QTransposeProxyModel_protectedbase_endRemoveRows(bool* _dynamic_cast_ok, void* self) {
-	VirtualQTransposeProxyModel* self_cast = dynamic_cast<VirtualQTransposeProxyModel*>( (QTransposeProxyModel*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QTransposeProxyModel_protectedbase_endRemoveRows(void* self) {
+	VirtualQTransposeProxyModel* self_cast = static_cast<VirtualQTransposeProxyModel*>( (QTransposeProxyModel*)(self) );
 	
 	self_cast->endRemoveRows();
 
 }
 
-bool QTransposeProxyModel_protectedbase_beginMoveRows(bool* _dynamic_cast_ok, void* self, QModelIndex* sourceParent, int sourceFirst, int sourceLast, QModelIndex* destinationParent, int destinationRow) {
-	VirtualQTransposeProxyModel* self_cast = dynamic_cast<VirtualQTransposeProxyModel*>( (QTransposeProxyModel*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return false;
-	}
-	
-	*_dynamic_cast_ok = true;
+bool QTransposeProxyModel_protectedbase_beginMoveRows(void* self, QModelIndex* sourceParent, int sourceFirst, int sourceLast, QModelIndex* destinationParent, int destinationRow) {
+	VirtualQTransposeProxyModel* self_cast = static_cast<VirtualQTransposeProxyModel*>( (QTransposeProxyModel*)(self) );
 	
 	return self_cast->beginMoveRows(*sourceParent, static_cast<int>(sourceFirst), static_cast<int>(sourceLast), *destinationParent, static_cast<int>(destinationRow));
 
 }
 
-void QTransposeProxyModel_protectedbase_endMoveRows(bool* _dynamic_cast_ok, void* self) {
-	VirtualQTransposeProxyModel* self_cast = dynamic_cast<VirtualQTransposeProxyModel*>( (QTransposeProxyModel*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QTransposeProxyModel_protectedbase_endMoveRows(void* self) {
+	VirtualQTransposeProxyModel* self_cast = static_cast<VirtualQTransposeProxyModel*>( (QTransposeProxyModel*)(self) );
 	
 	self_cast->endMoveRows();
 
 }
 
-void QTransposeProxyModel_protectedbase_beginInsertColumns(bool* _dynamic_cast_ok, void* self, QModelIndex* parent, int first, int last) {
-	VirtualQTransposeProxyModel* self_cast = dynamic_cast<VirtualQTransposeProxyModel*>( (QTransposeProxyModel*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QTransposeProxyModel_protectedbase_beginInsertColumns(void* self, QModelIndex* parent, int first, int last) {
+	VirtualQTransposeProxyModel* self_cast = static_cast<VirtualQTransposeProxyModel*>( (QTransposeProxyModel*)(self) );
 	
 	self_cast->beginInsertColumns(*parent, static_cast<int>(first), static_cast<int>(last));
 
 }
 
-void QTransposeProxyModel_protectedbase_endInsertColumns(bool* _dynamic_cast_ok, void* self) {
-	VirtualQTransposeProxyModel* self_cast = dynamic_cast<VirtualQTransposeProxyModel*>( (QTransposeProxyModel*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QTransposeProxyModel_protectedbase_endInsertColumns(void* self) {
+	VirtualQTransposeProxyModel* self_cast = static_cast<VirtualQTransposeProxyModel*>( (QTransposeProxyModel*)(self) );
 	
 	self_cast->endInsertColumns();
 
 }
 
-void QTransposeProxyModel_protectedbase_beginRemoveColumns(bool* _dynamic_cast_ok, void* self, QModelIndex* parent, int first, int last) {
-	VirtualQTransposeProxyModel* self_cast = dynamic_cast<VirtualQTransposeProxyModel*>( (QTransposeProxyModel*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QTransposeProxyModel_protectedbase_beginRemoveColumns(void* self, QModelIndex* parent, int first, int last) {
+	VirtualQTransposeProxyModel* self_cast = static_cast<VirtualQTransposeProxyModel*>( (QTransposeProxyModel*)(self) );
 	
 	self_cast->beginRemoveColumns(*parent, static_cast<int>(first), static_cast<int>(last));
 
 }
 
-void QTransposeProxyModel_protectedbase_endRemoveColumns(bool* _dynamic_cast_ok, void* self) {
-	VirtualQTransposeProxyModel* self_cast = dynamic_cast<VirtualQTransposeProxyModel*>( (QTransposeProxyModel*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QTransposeProxyModel_protectedbase_endRemoveColumns(void* self) {
+	VirtualQTransposeProxyModel* self_cast = static_cast<VirtualQTransposeProxyModel*>( (QTransposeProxyModel*)(self) );
 	
 	self_cast->endRemoveColumns();
 
 }
 
-bool QTransposeProxyModel_protectedbase_beginMoveColumns(bool* _dynamic_cast_ok, void* self, QModelIndex* sourceParent, int sourceFirst, int sourceLast, QModelIndex* destinationParent, int destinationColumn) {
-	VirtualQTransposeProxyModel* self_cast = dynamic_cast<VirtualQTransposeProxyModel*>( (QTransposeProxyModel*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return false;
-	}
-	
-	*_dynamic_cast_ok = true;
+bool QTransposeProxyModel_protectedbase_beginMoveColumns(void* self, QModelIndex* sourceParent, int sourceFirst, int sourceLast, QModelIndex* destinationParent, int destinationColumn) {
+	VirtualQTransposeProxyModel* self_cast = static_cast<VirtualQTransposeProxyModel*>( (QTransposeProxyModel*)(self) );
 	
 	return self_cast->beginMoveColumns(*sourceParent, static_cast<int>(sourceFirst), static_cast<int>(sourceLast), *destinationParent, static_cast<int>(destinationColumn));
 
 }
 
-void QTransposeProxyModel_protectedbase_endMoveColumns(bool* _dynamic_cast_ok, void* self) {
-	VirtualQTransposeProxyModel* self_cast = dynamic_cast<VirtualQTransposeProxyModel*>( (QTransposeProxyModel*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QTransposeProxyModel_protectedbase_endMoveColumns(void* self) {
+	VirtualQTransposeProxyModel* self_cast = static_cast<VirtualQTransposeProxyModel*>( (QTransposeProxyModel*)(self) );
 	
 	self_cast->endMoveColumns();
 
 }
 
-void QTransposeProxyModel_protectedbase_beginResetModel(bool* _dynamic_cast_ok, void* self) {
-	VirtualQTransposeProxyModel* self_cast = dynamic_cast<VirtualQTransposeProxyModel*>( (QTransposeProxyModel*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QTransposeProxyModel_protectedbase_beginResetModel(void* self) {
+	VirtualQTransposeProxyModel* self_cast = static_cast<VirtualQTransposeProxyModel*>( (QTransposeProxyModel*)(self) );
 	
 	self_cast->beginResetModel();
 
 }
 
-void QTransposeProxyModel_protectedbase_endResetModel(bool* _dynamic_cast_ok, void* self) {
-	VirtualQTransposeProxyModel* self_cast = dynamic_cast<VirtualQTransposeProxyModel*>( (QTransposeProxyModel*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QTransposeProxyModel_protectedbase_endResetModel(void* self) {
+	VirtualQTransposeProxyModel* self_cast = static_cast<VirtualQTransposeProxyModel*>( (QTransposeProxyModel*)(self) );
 	
 	self_cast->endResetModel();
 
 }
 
-void QTransposeProxyModel_protectedbase_changePersistentIndex(bool* _dynamic_cast_ok, void* self, QModelIndex* from, QModelIndex* to) {
-	VirtualQTransposeProxyModel* self_cast = dynamic_cast<VirtualQTransposeProxyModel*>( (QTransposeProxyModel*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QTransposeProxyModel_protectedbase_changePersistentIndex(void* self, QModelIndex* from, QModelIndex* to) {
+	VirtualQTransposeProxyModel* self_cast = static_cast<VirtualQTransposeProxyModel*>( (QTransposeProxyModel*)(self) );
 	
 	self_cast->changePersistentIndex(*from, *to);
 
 }
 
-void QTransposeProxyModel_protectedbase_changePersistentIndexList(bool* _dynamic_cast_ok, void* self, struct miqt_array /* of QModelIndex* */  from, struct miqt_array /* of QModelIndex* */  to) {
-	VirtualQTransposeProxyModel* self_cast = dynamic_cast<VirtualQTransposeProxyModel*>( (QTransposeProxyModel*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QTransposeProxyModel_protectedbase_changePersistentIndexList(void* self, struct miqt_array /* of QModelIndex* */  from, struct miqt_array /* of QModelIndex* */  to) {
+	VirtualQTransposeProxyModel* self_cast = static_cast<VirtualQTransposeProxyModel*>( (QTransposeProxyModel*)(self) );
 			QModelIndexList from_QList;
 		from_QList.reserve(from.len);
 		QModelIndex** from_arr = static_cast<QModelIndex**>(from.data);
@@ -1834,14 +1714,8 @@ void QTransposeProxyModel_protectedbase_changePersistentIndexList(bool* _dynamic
 
 }
 
-struct miqt_array /* of QModelIndex* */  QTransposeProxyModel_protectedbase_persistentIndexList(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQTransposeProxyModel* self_cast = dynamic_cast<VirtualQTransposeProxyModel*>( (QTransposeProxyModel*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return (struct miqt_array){};
-	}
-	
-	*_dynamic_cast_ok = true;
+struct miqt_array /* of QModelIndex* */  QTransposeProxyModel_protectedbase_persistentIndexList(const void* self) {
+	VirtualQTransposeProxyModel* self_cast = static_cast<VirtualQTransposeProxyModel*>( (QTransposeProxyModel*)(self) );
 	
 	QModelIndexList _ret = self_cast->persistentIndexList();
 	// Convert QList<> from C++ memory to manually-managed C memory
@@ -1856,53 +1730,29 @@ struct miqt_array /* of QModelIndex* */  QTransposeProxyModel_protectedbase_pers
 
 }
 
-QObject* QTransposeProxyModel_protectedbase_sender(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQTransposeProxyModel* self_cast = dynamic_cast<VirtualQTransposeProxyModel*>( (QTransposeProxyModel*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return nullptr;
-	}
-	
-	*_dynamic_cast_ok = true;
+QObject* QTransposeProxyModel_protectedbase_sender(const void* self) {
+	VirtualQTransposeProxyModel* self_cast = static_cast<VirtualQTransposeProxyModel*>( (QTransposeProxyModel*)(self) );
 	
 	return self_cast->sender();
 
 }
 
-int QTransposeProxyModel_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQTransposeProxyModel* self_cast = dynamic_cast<VirtualQTransposeProxyModel*>( (QTransposeProxyModel*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return 0;
-	}
-	
-	*_dynamic_cast_ok = true;
+int QTransposeProxyModel_protectedbase_senderSignalIndex(const void* self) {
+	VirtualQTransposeProxyModel* self_cast = static_cast<VirtualQTransposeProxyModel*>( (QTransposeProxyModel*)(self) );
 	
 	return self_cast->senderSignalIndex();
 
 }
 
-int QTransposeProxyModel_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal) {
-	VirtualQTransposeProxyModel* self_cast = dynamic_cast<VirtualQTransposeProxyModel*>( (QTransposeProxyModel*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return 0;
-	}
-	
-	*_dynamic_cast_ok = true;
+int QTransposeProxyModel_protectedbase_receivers(const void* self, const char* signal) {
+	VirtualQTransposeProxyModel* self_cast = static_cast<VirtualQTransposeProxyModel*>( (QTransposeProxyModel*)(self) );
 	
 	return self_cast->receivers(signal);
 
 }
 
-bool QTransposeProxyModel_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal) {
-	VirtualQTransposeProxyModel* self_cast = dynamic_cast<VirtualQTransposeProxyModel*>( (QTransposeProxyModel*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return false;
-	}
-	
-	*_dynamic_cast_ok = true;
+bool QTransposeProxyModel_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal) {
+	VirtualQTransposeProxyModel* self_cast = static_cast<VirtualQTransposeProxyModel*>( (QTransposeProxyModel*)(self) );
 	
 	return self_cast->isSignalConnected(*signal);
 

@@ -310,12 +310,12 @@ public:
 	friend void QNetworkCookieJar_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
 
 	// Wrappers to allow calling protected methods:
-	friend struct miqt_array /* of QNetworkCookie* */  QNetworkCookieJar_protectedbase_allCookies(bool* _dynamic_cast_ok, const void* self);
-	friend void QNetworkCookieJar_protectedbase_setAllCookies(bool* _dynamic_cast_ok, void* self, struct miqt_array /* of QNetworkCookie* */  cookieList);
-	friend QObject* QNetworkCookieJar_protectedbase_sender(bool* _dynamic_cast_ok, const void* self);
-	friend int QNetworkCookieJar_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
-	friend int QNetworkCookieJar_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
-	friend bool QNetworkCookieJar_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+	friend struct miqt_array /* of QNetworkCookie* */  QNetworkCookieJar_protectedbase_allCookies(const void* self);
+	friend void QNetworkCookieJar_protectedbase_setAllCookies(void* self, struct miqt_array /* of QNetworkCookie* */  cookieList);
+	friend QObject* QNetworkCookieJar_protectedbase_sender(const void* self);
+	friend int QNetworkCookieJar_protectedbase_senderSignalIndex(const void* self);
+	friend int QNetworkCookieJar_protectedbase_receivers(const void* self, const char* signal);
+	friend bool QNetworkCookieJar_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
 };
 
 QNetworkCookieJar* QNetworkCookieJar_new(struct QNetworkCookieJar_VTable* vtbl) {
@@ -522,14 +522,8 @@ void QNetworkCookieJar_virtualbase_disconnectNotify(void* self, QMetaMethod* sig
 }
 
 const QMetaObject* QNetworkCookieJar_staticMetaObject() { return &QNetworkCookieJar::staticMetaObject; }
-struct miqt_array /* of QNetworkCookie* */  QNetworkCookieJar_protectedbase_allCookies(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQNetworkCookieJar* self_cast = dynamic_cast<VirtualQNetworkCookieJar*>( (QNetworkCookieJar*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return (struct miqt_array){};
-	}
-	
-	*_dynamic_cast_ok = true;
+struct miqt_array /* of QNetworkCookie* */  QNetworkCookieJar_protectedbase_allCookies(const void* self) {
+	VirtualQNetworkCookieJar* self_cast = static_cast<VirtualQNetworkCookieJar*>( (QNetworkCookieJar*)(self) );
 	
 	QList<QNetworkCookie> _ret = self_cast->allCookies();
 	// Convert QList<> from C++ memory to manually-managed C memory
@@ -544,14 +538,8 @@ struct miqt_array /* of QNetworkCookie* */  QNetworkCookieJar_protectedbase_allC
 
 }
 
-void QNetworkCookieJar_protectedbase_setAllCookies(bool* _dynamic_cast_ok, void* self, struct miqt_array /* of QNetworkCookie* */  cookieList) {
-	VirtualQNetworkCookieJar* self_cast = dynamic_cast<VirtualQNetworkCookieJar*>( (QNetworkCookieJar*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QNetworkCookieJar_protectedbase_setAllCookies(void* self, struct miqt_array /* of QNetworkCookie* */  cookieList) {
+	VirtualQNetworkCookieJar* self_cast = static_cast<VirtualQNetworkCookieJar*>( (QNetworkCookieJar*)(self) );
 			QList<QNetworkCookie> cookieList_QList;
 		cookieList_QList.reserve(cookieList.len);
 		QNetworkCookie** cookieList_arr = static_cast<QNetworkCookie**>(cookieList.data);
@@ -563,53 +551,29 @@ void QNetworkCookieJar_protectedbase_setAllCookies(bool* _dynamic_cast_ok, void*
 
 }
 
-QObject* QNetworkCookieJar_protectedbase_sender(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQNetworkCookieJar* self_cast = dynamic_cast<VirtualQNetworkCookieJar*>( (QNetworkCookieJar*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return nullptr;
-	}
-	
-	*_dynamic_cast_ok = true;
+QObject* QNetworkCookieJar_protectedbase_sender(const void* self) {
+	VirtualQNetworkCookieJar* self_cast = static_cast<VirtualQNetworkCookieJar*>( (QNetworkCookieJar*)(self) );
 	
 	return self_cast->sender();
 
 }
 
-int QNetworkCookieJar_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQNetworkCookieJar* self_cast = dynamic_cast<VirtualQNetworkCookieJar*>( (QNetworkCookieJar*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return 0;
-	}
-	
-	*_dynamic_cast_ok = true;
+int QNetworkCookieJar_protectedbase_senderSignalIndex(const void* self) {
+	VirtualQNetworkCookieJar* self_cast = static_cast<VirtualQNetworkCookieJar*>( (QNetworkCookieJar*)(self) );
 	
 	return self_cast->senderSignalIndex();
 
 }
 
-int QNetworkCookieJar_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal) {
-	VirtualQNetworkCookieJar* self_cast = dynamic_cast<VirtualQNetworkCookieJar*>( (QNetworkCookieJar*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return 0;
-	}
-	
-	*_dynamic_cast_ok = true;
+int QNetworkCookieJar_protectedbase_receivers(const void* self, const char* signal) {
+	VirtualQNetworkCookieJar* self_cast = static_cast<VirtualQNetworkCookieJar*>( (QNetworkCookieJar*)(self) );
 	
 	return self_cast->receivers(signal);
 
 }
 
-bool QNetworkCookieJar_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal) {
-	VirtualQNetworkCookieJar* self_cast = dynamic_cast<VirtualQNetworkCookieJar*>( (QNetworkCookieJar*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return false;
-	}
-	
-	*_dynamic_cast_ok = true;
+bool QNetworkCookieJar_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal) {
+	VirtualQNetworkCookieJar* self_cast = static_cast<VirtualQNetworkCookieJar*>( (QNetworkCookieJar*)(self) );
 	
 	return self_cast->isSignalConnected(*signal);
 

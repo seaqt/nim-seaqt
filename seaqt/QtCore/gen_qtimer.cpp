@@ -186,10 +186,10 @@ public:
 	friend void QTimer_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
 
 	// Wrappers to allow calling protected methods:
-	friend QObject* QTimer_protectedbase_sender(bool* _dynamic_cast_ok, const void* self);
-	friend int QTimer_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
-	friend int QTimer_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
-	friend bool QTimer_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+	friend QObject* QTimer_protectedbase_sender(const void* self);
+	friend int QTimer_protectedbase_senderSignalIndex(const void* self);
+	friend int QTimer_protectedbase_receivers(const void* self, const char* signal);
+	friend bool QTimer_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
 };
 
 QTimer* QTimer_new(struct QTimer_VTable* vtbl) {
@@ -359,53 +359,29 @@ void QTimer_virtualbase_disconnectNotify(void* self, QMetaMethod* signal) {
 }
 
 const QMetaObject* QTimer_staticMetaObject() { return &QTimer::staticMetaObject; }
-QObject* QTimer_protectedbase_sender(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQTimer* self_cast = dynamic_cast<VirtualQTimer*>( (QTimer*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return nullptr;
-	}
-	
-	*_dynamic_cast_ok = true;
+QObject* QTimer_protectedbase_sender(const void* self) {
+	VirtualQTimer* self_cast = static_cast<VirtualQTimer*>( (QTimer*)(self) );
 	
 	return self_cast->sender();
 
 }
 
-int QTimer_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQTimer* self_cast = dynamic_cast<VirtualQTimer*>( (QTimer*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return 0;
-	}
-	
-	*_dynamic_cast_ok = true;
+int QTimer_protectedbase_senderSignalIndex(const void* self) {
+	VirtualQTimer* self_cast = static_cast<VirtualQTimer*>( (QTimer*)(self) );
 	
 	return self_cast->senderSignalIndex();
 
 }
 
-int QTimer_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal) {
-	VirtualQTimer* self_cast = dynamic_cast<VirtualQTimer*>( (QTimer*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return 0;
-	}
-	
-	*_dynamic_cast_ok = true;
+int QTimer_protectedbase_receivers(const void* self, const char* signal) {
+	VirtualQTimer* self_cast = static_cast<VirtualQTimer*>( (QTimer*)(self) );
 	
 	return self_cast->receivers(signal);
 
 }
 
-bool QTimer_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal) {
-	VirtualQTimer* self_cast = dynamic_cast<VirtualQTimer*>( (QTimer*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return false;
-	}
-	
-	*_dynamic_cast_ok = true;
+bool QTimer_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal) {
+	VirtualQTimer* self_cast = static_cast<VirtualQTimer*>( (QTimer*)(self) );
 	
 	return self_cast->isSignalConnected(*signal);
 

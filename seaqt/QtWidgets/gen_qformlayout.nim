@@ -209,6 +209,15 @@ proc fcQFormLayout_virtualbase_disconnectNotify(self: pointer, signal: pointer):
 proc fcQFormLayout_virtualbase_minimumHeightForWidth(self: pointer, param1: cint): cint {.importc: "QFormLayout_virtualbase_minimumHeightForWidth".}
 proc fcQFormLayout_virtualbase_widget(self: pointer, ): pointer {.importc: "QFormLayout_virtualbase_widget".}
 proc fcQFormLayout_virtualbase_spacerItem(self: pointer, ): pointer {.importc: "QFormLayout_virtualbase_spacerItem".}
+proc fcQFormLayout_protectedbase_widgetEvent(self: pointer, param1: pointer): void {.importc: "QFormLayout_protectedbase_widgetEvent".}
+proc fcQFormLayout_protectedbase_addChildLayout(self: pointer, l: pointer): void {.importc: "QFormLayout_protectedbase_addChildLayout".}
+proc fcQFormLayout_protectedbase_addChildWidget(self: pointer, w: pointer): void {.importc: "QFormLayout_protectedbase_addChildWidget".}
+proc fcQFormLayout_protectedbase_adoptLayout(self: pointer, layout: pointer): bool {.importc: "QFormLayout_protectedbase_adoptLayout".}
+proc fcQFormLayout_protectedbase_alignmentRect(self: pointer, param1: pointer): pointer {.importc: "QFormLayout_protectedbase_alignmentRect".}
+proc fcQFormLayout_protectedbase_sender(self: pointer, ): pointer {.importc: "QFormLayout_protectedbase_sender".}
+proc fcQFormLayout_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QFormLayout_protectedbase_senderSignalIndex".}
+proc fcQFormLayout_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QFormLayout_protectedbase_receivers".}
+proc fcQFormLayout_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QFormLayout_protectedbase_isSignalConnected".}
 proc fcQFormLayout_new(vtbl: pointer, parent: pointer): ptr cQFormLayout {.importc: "QFormLayout_new".}
 proc fcQFormLayout_new2(vtbl: pointer, ): ptr cQFormLayout {.importc: "QFormLayout_new2".}
 proc fcQFormLayout_staticMetaObject(): pointer {.importc: "QFormLayout_staticMetaObject".}
@@ -788,6 +797,33 @@ proc miqt_exec_callback_cQFormLayout_spacerItem(vtbl: pointer, self: pointer): p
   let self = QFormLayout(h: self)
   var virtualReturn = vtbl[].spacerItem(self)
   virtualReturn.h
+
+proc widgetEvent*(self: gen_qformlayout_types.QFormLayout, param1: gen_qcoreevent_types.QEvent): void =
+  fcQFormLayout_protectedbase_widgetEvent(self.h, param1.h)
+
+proc addChildLayout*(self: gen_qformlayout_types.QFormLayout, l: gen_qlayout_types.QLayout): void =
+  fcQFormLayout_protectedbase_addChildLayout(self.h, l.h)
+
+proc addChildWidget*(self: gen_qformlayout_types.QFormLayout, w: gen_qwidget_types.QWidget): void =
+  fcQFormLayout_protectedbase_addChildWidget(self.h, w.h)
+
+proc adoptLayout*(self: gen_qformlayout_types.QFormLayout, layout: gen_qlayout_types.QLayout): bool =
+  fcQFormLayout_protectedbase_adoptLayout(self.h, layout.h)
+
+proc alignmentRect*(self: gen_qformlayout_types.QFormLayout, param1: gen_qrect_types.QRect): gen_qrect_types.QRect =
+  gen_qrect_types.QRect(h: fcQFormLayout_protectedbase_alignmentRect(self.h, param1.h))
+
+proc sender*(self: gen_qformlayout_types.QFormLayout, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQFormLayout_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qformlayout_types.QFormLayout, ): cint =
+  fcQFormLayout_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qformlayout_types.QFormLayout, signal: cstring): cint =
+  fcQFormLayout_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qformlayout_types.QFormLayout, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQFormLayout_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc create*(T: type gen_qformlayout_types.QFormLayout,
     parent: gen_qwidget_types.QWidget,

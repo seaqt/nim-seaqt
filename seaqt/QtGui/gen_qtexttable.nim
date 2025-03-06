@@ -126,6 +126,10 @@ proc fcQTextTable_virtualbase_childEvent(self: pointer, event: pointer): void {.
 proc fcQTextTable_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QTextTable_virtualbase_customEvent".}
 proc fcQTextTable_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QTextTable_virtualbase_connectNotify".}
 proc fcQTextTable_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QTextTable_virtualbase_disconnectNotify".}
+proc fcQTextTable_protectedbase_sender(self: pointer, ): pointer {.importc: "QTextTable_protectedbase_sender".}
+proc fcQTextTable_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QTextTable_protectedbase_senderSignalIndex".}
+proc fcQTextTable_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QTextTable_protectedbase_receivers".}
+proc fcQTextTable_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QTextTable_protectedbase_isSignalConnected".}
 proc fcQTextTable_new(vtbl: pointer, doc: pointer): ptr cQTextTable {.importc: "QTextTable_new".}
 proc fcQTextTable_staticMetaObject(): pointer {.importc: "QTextTable_staticMetaObject".}
 proc fcQTextTable_delete(self: pointer) {.importc: "QTextTable_delete".}
@@ -392,6 +396,18 @@ proc miqt_exec_callback_cQTextTable_disconnectNotify(vtbl: pointer, self: pointe
   let self = QTextTable(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
   vtbl[].disconnectNotify(self, slotval1)
+
+proc sender*(self: gen_qtexttable_types.QTextTable, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQTextTable_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qtexttable_types.QTextTable, ): cint =
+  fcQTextTable_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qtexttable_types.QTextTable, signal: cstring): cint =
+  fcQTextTable_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qtexttable_types.QTextTable, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQTextTable_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc create*(T: type gen_qtexttable_types.QTextTable,
     doc: gen_qtextdocument_types.QTextDocument,

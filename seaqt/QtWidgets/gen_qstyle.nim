@@ -766,6 +766,10 @@ proc fcQStyle_virtualbase_childEvent(self: pointer, event: pointer): void {.impo
 proc fcQStyle_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QStyle_virtualbase_customEvent".}
 proc fcQStyle_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QStyle_virtualbase_connectNotify".}
 proc fcQStyle_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QStyle_virtualbase_disconnectNotify".}
+proc fcQStyle_protectedbase_sender(self: pointer, ): pointer {.importc: "QStyle_protectedbase_sender".}
+proc fcQStyle_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QStyle_protectedbase_senderSignalIndex".}
+proc fcQStyle_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QStyle_protectedbase_receivers".}
+proc fcQStyle_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QStyle_protectedbase_isSignalConnected".}
 proc fcQStyle_new(vtbl: pointer, ): ptr cQStyle {.importc: "QStyle_new".}
 proc fcQStyle_staticMetaObject(): pointer {.importc: "QStyle_staticMetaObject".}
 proc fcQStyle_delete(self: pointer) {.importc: "QStyle_delete".}
@@ -1308,6 +1312,18 @@ proc miqt_exec_callback_cQStyle_disconnectNotify(vtbl: pointer, self: pointer, s
   let self = QStyle(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
   vtbl[].disconnectNotify(self, slotval1)
+
+proc sender*(self: gen_qstyle_types.QStyle, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQStyle_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qstyle_types.QStyle, ): cint =
+  fcQStyle_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qstyle_types.QStyle, signal: cstring): cint =
+  fcQStyle_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qstyle_types.QStyle, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQStyle_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc create*(T: type gen_qstyle_types.QStyle,
     vtbl: ref QStyleVTable = nil): gen_qstyle_types.QStyle =

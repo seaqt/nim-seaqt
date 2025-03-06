@@ -332,10 +332,10 @@ public:
 	friend void QNetworkDiskCache_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
 
 	// Wrappers to allow calling protected methods:
-	friend QObject* QNetworkDiskCache_protectedbase_sender(bool* _dynamic_cast_ok, const void* self);
-	friend int QNetworkDiskCache_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
-	friend int QNetworkDiskCache_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
-	friend bool QNetworkDiskCache_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+	friend QObject* QNetworkDiskCache_protectedbase_sender(const void* self);
+	friend int QNetworkDiskCache_protectedbase_senderSignalIndex(const void* self);
+	friend int QNetworkDiskCache_protectedbase_receivers(const void* self, const char* signal);
+	friend bool QNetworkDiskCache_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
 };
 
 QNetworkDiskCache* QNetworkDiskCache_new(struct QNetworkDiskCache_VTable* vtbl) {
@@ -575,53 +575,29 @@ void QNetworkDiskCache_virtualbase_disconnectNotify(void* self, QMetaMethod* sig
 }
 
 const QMetaObject* QNetworkDiskCache_staticMetaObject() { return &QNetworkDiskCache::staticMetaObject; }
-QObject* QNetworkDiskCache_protectedbase_sender(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQNetworkDiskCache* self_cast = dynamic_cast<VirtualQNetworkDiskCache*>( (QNetworkDiskCache*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return nullptr;
-	}
-	
-	*_dynamic_cast_ok = true;
+QObject* QNetworkDiskCache_protectedbase_sender(const void* self) {
+	VirtualQNetworkDiskCache* self_cast = static_cast<VirtualQNetworkDiskCache*>( (QNetworkDiskCache*)(self) );
 	
 	return self_cast->sender();
 
 }
 
-int QNetworkDiskCache_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQNetworkDiskCache* self_cast = dynamic_cast<VirtualQNetworkDiskCache*>( (QNetworkDiskCache*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return 0;
-	}
-	
-	*_dynamic_cast_ok = true;
+int QNetworkDiskCache_protectedbase_senderSignalIndex(const void* self) {
+	VirtualQNetworkDiskCache* self_cast = static_cast<VirtualQNetworkDiskCache*>( (QNetworkDiskCache*)(self) );
 	
 	return self_cast->senderSignalIndex();
 
 }
 
-int QNetworkDiskCache_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal) {
-	VirtualQNetworkDiskCache* self_cast = dynamic_cast<VirtualQNetworkDiskCache*>( (QNetworkDiskCache*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return 0;
-	}
-	
-	*_dynamic_cast_ok = true;
+int QNetworkDiskCache_protectedbase_receivers(const void* self, const char* signal) {
+	VirtualQNetworkDiskCache* self_cast = static_cast<VirtualQNetworkDiskCache*>( (QNetworkDiskCache*)(self) );
 	
 	return self_cast->receivers(signal);
 
 }
 
-bool QNetworkDiskCache_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal) {
-	VirtualQNetworkDiskCache* self_cast = dynamic_cast<VirtualQNetworkDiskCache*>( (QNetworkDiskCache*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return false;
-	}
-	
-	*_dynamic_cast_ok = true;
+bool QNetworkDiskCache_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal) {
+	VirtualQNetworkDiskCache* self_cast = static_cast<VirtualQNetworkDiskCache*>( (QNetworkDiskCache*)(self) );
 	
 	return self_cast->isSignalConnected(*signal);
 

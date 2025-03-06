@@ -892,16 +892,16 @@ public:
 	friend void QPageSetupDialog_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
 
 	// Wrappers to allow calling protected methods:
-	friend void QPageSetupDialog_protectedbase_adjustPosition(bool* _dynamic_cast_ok, void* self, QWidget* param1);
-	friend void QPageSetupDialog_protectedbase_updateMicroFocus(bool* _dynamic_cast_ok, void* self);
-	friend void QPageSetupDialog_protectedbase_create(bool* _dynamic_cast_ok, void* self);
-	friend void QPageSetupDialog_protectedbase_destroy(bool* _dynamic_cast_ok, void* self);
-	friend bool QPageSetupDialog_protectedbase_focusNextChild(bool* _dynamic_cast_ok, void* self);
-	friend bool QPageSetupDialog_protectedbase_focusPreviousChild(bool* _dynamic_cast_ok, void* self);
-	friend QObject* QPageSetupDialog_protectedbase_sender(bool* _dynamic_cast_ok, const void* self);
-	friend int QPageSetupDialog_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
-	friend int QPageSetupDialog_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
-	friend bool QPageSetupDialog_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+	friend void QPageSetupDialog_protectedbase_adjustPosition(void* self, QWidget* param1);
+	friend void QPageSetupDialog_protectedbase_updateMicroFocus(void* self);
+	friend void QPageSetupDialog_protectedbase_create(void* self);
+	friend void QPageSetupDialog_protectedbase_destroy(void* self);
+	friend bool QPageSetupDialog_protectedbase_focusNextChild(void* self);
+	friend bool QPageSetupDialog_protectedbase_focusPreviousChild(void* self);
+	friend QObject* QPageSetupDialog_protectedbase_sender(const void* self);
+	friend int QPageSetupDialog_protectedbase_senderSignalIndex(const void* self);
+	friend int QPageSetupDialog_protectedbase_receivers(const void* self, const char* signal);
+	friend bool QPageSetupDialog_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
 };
 
 QPageSetupDialog* QPageSetupDialog_new(struct QPageSetupDialog_VTable* vtbl, QWidget* parent) {
@@ -1313,131 +1313,71 @@ void QPageSetupDialog_virtualbase_disconnectNotify(void* self, QMetaMethod* sign
 }
 
 const QMetaObject* QPageSetupDialog_staticMetaObject() { return &QPageSetupDialog::staticMetaObject; }
-void QPageSetupDialog_protectedbase_adjustPosition(bool* _dynamic_cast_ok, void* self, QWidget* param1) {
-	VirtualQPageSetupDialog* self_cast = dynamic_cast<VirtualQPageSetupDialog*>( (QPageSetupDialog*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QPageSetupDialog_protectedbase_adjustPosition(void* self, QWidget* param1) {
+	VirtualQPageSetupDialog* self_cast = static_cast<VirtualQPageSetupDialog*>( (QPageSetupDialog*)(self) );
 	
 	self_cast->adjustPosition(param1);
 
 }
 
-void QPageSetupDialog_protectedbase_updateMicroFocus(bool* _dynamic_cast_ok, void* self) {
-	VirtualQPageSetupDialog* self_cast = dynamic_cast<VirtualQPageSetupDialog*>( (QPageSetupDialog*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QPageSetupDialog_protectedbase_updateMicroFocus(void* self) {
+	VirtualQPageSetupDialog* self_cast = static_cast<VirtualQPageSetupDialog*>( (QPageSetupDialog*)(self) );
 	
 	self_cast->updateMicroFocus();
 
 }
 
-void QPageSetupDialog_protectedbase_create(bool* _dynamic_cast_ok, void* self) {
-	VirtualQPageSetupDialog* self_cast = dynamic_cast<VirtualQPageSetupDialog*>( (QPageSetupDialog*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QPageSetupDialog_protectedbase_create(void* self) {
+	VirtualQPageSetupDialog* self_cast = static_cast<VirtualQPageSetupDialog*>( (QPageSetupDialog*)(self) );
 	
 	self_cast->create();
 
 }
 
-void QPageSetupDialog_protectedbase_destroy(bool* _dynamic_cast_ok, void* self) {
-	VirtualQPageSetupDialog* self_cast = dynamic_cast<VirtualQPageSetupDialog*>( (QPageSetupDialog*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QPageSetupDialog_protectedbase_destroy(void* self) {
+	VirtualQPageSetupDialog* self_cast = static_cast<VirtualQPageSetupDialog*>( (QPageSetupDialog*)(self) );
 	
 	self_cast->destroy();
 
 }
 
-bool QPageSetupDialog_protectedbase_focusNextChild(bool* _dynamic_cast_ok, void* self) {
-	VirtualQPageSetupDialog* self_cast = dynamic_cast<VirtualQPageSetupDialog*>( (QPageSetupDialog*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return false;
-	}
-	
-	*_dynamic_cast_ok = true;
+bool QPageSetupDialog_protectedbase_focusNextChild(void* self) {
+	VirtualQPageSetupDialog* self_cast = static_cast<VirtualQPageSetupDialog*>( (QPageSetupDialog*)(self) );
 	
 	return self_cast->focusNextChild();
 
 }
 
-bool QPageSetupDialog_protectedbase_focusPreviousChild(bool* _dynamic_cast_ok, void* self) {
-	VirtualQPageSetupDialog* self_cast = dynamic_cast<VirtualQPageSetupDialog*>( (QPageSetupDialog*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return false;
-	}
-	
-	*_dynamic_cast_ok = true;
+bool QPageSetupDialog_protectedbase_focusPreviousChild(void* self) {
+	VirtualQPageSetupDialog* self_cast = static_cast<VirtualQPageSetupDialog*>( (QPageSetupDialog*)(self) );
 	
 	return self_cast->focusPreviousChild();
 
 }
 
-QObject* QPageSetupDialog_protectedbase_sender(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQPageSetupDialog* self_cast = dynamic_cast<VirtualQPageSetupDialog*>( (QPageSetupDialog*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return nullptr;
-	}
-	
-	*_dynamic_cast_ok = true;
+QObject* QPageSetupDialog_protectedbase_sender(const void* self) {
+	VirtualQPageSetupDialog* self_cast = static_cast<VirtualQPageSetupDialog*>( (QPageSetupDialog*)(self) );
 	
 	return self_cast->sender();
 
 }
 
-int QPageSetupDialog_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQPageSetupDialog* self_cast = dynamic_cast<VirtualQPageSetupDialog*>( (QPageSetupDialog*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return 0;
-	}
-	
-	*_dynamic_cast_ok = true;
+int QPageSetupDialog_protectedbase_senderSignalIndex(const void* self) {
+	VirtualQPageSetupDialog* self_cast = static_cast<VirtualQPageSetupDialog*>( (QPageSetupDialog*)(self) );
 	
 	return self_cast->senderSignalIndex();
 
 }
 
-int QPageSetupDialog_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal) {
-	VirtualQPageSetupDialog* self_cast = dynamic_cast<VirtualQPageSetupDialog*>( (QPageSetupDialog*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return 0;
-	}
-	
-	*_dynamic_cast_ok = true;
+int QPageSetupDialog_protectedbase_receivers(const void* self, const char* signal) {
+	VirtualQPageSetupDialog* self_cast = static_cast<VirtualQPageSetupDialog*>( (QPageSetupDialog*)(self) );
 	
 	return self_cast->receivers(signal);
 
 }
 
-bool QPageSetupDialog_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal) {
-	VirtualQPageSetupDialog* self_cast = dynamic_cast<VirtualQPageSetupDialog*>( (QPageSetupDialog*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return false;
-	}
-	
-	*_dynamic_cast_ok = true;
+bool QPageSetupDialog_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal) {
+	VirtualQPageSetupDialog* self_cast = static_cast<VirtualQPageSetupDialog*>( (QPageSetupDialog*)(self) );
 	
 	return self_cast->isSignalConnected(*signal);
 

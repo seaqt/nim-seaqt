@@ -611,10 +611,10 @@ public:
 	friend QVariant* QGraphicsItem_virtualbase_extension(const void* self, QVariant* variant);
 
 	// Wrappers to allow calling protected methods:
-	friend void QGraphicsItem_protectedbase_updateMicroFocus(bool* _dynamic_cast_ok, void* self);
-	friend void QGraphicsItem_protectedbase_addToIndex(bool* _dynamic_cast_ok, void* self);
-	friend void QGraphicsItem_protectedbase_removeFromIndex(bool* _dynamic_cast_ok, void* self);
-	friend void QGraphicsItem_protectedbase_prepareGeometryChange(bool* _dynamic_cast_ok, void* self);
+	friend void QGraphicsItem_protectedbase_updateMicroFocus(void* self);
+	friend void QGraphicsItem_protectedbase_addToIndex(void* self);
+	friend void QGraphicsItem_protectedbase_removeFromIndex(void* self);
+	friend void QGraphicsItem_protectedbase_prepareGeometryChange(void* self);
 };
 
 QGraphicsItem* QGraphicsItem_new(struct QGraphicsItem_VTable* vtbl) {
@@ -1586,53 +1586,29 @@ QVariant* QGraphicsItem_virtualbase_extension(const void* self, QVariant* varian
 
 }
 
-void QGraphicsItem_protectedbase_updateMicroFocus(bool* _dynamic_cast_ok, void* self) {
-	VirtualQGraphicsItem* self_cast = dynamic_cast<VirtualQGraphicsItem*>( (QGraphicsItem*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QGraphicsItem_protectedbase_updateMicroFocus(void* self) {
+	VirtualQGraphicsItem* self_cast = static_cast<VirtualQGraphicsItem*>( (QGraphicsItem*)(self) );
 	
 	self_cast->updateMicroFocus();
 
 }
 
-void QGraphicsItem_protectedbase_addToIndex(bool* _dynamic_cast_ok, void* self) {
-	VirtualQGraphicsItem* self_cast = dynamic_cast<VirtualQGraphicsItem*>( (QGraphicsItem*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QGraphicsItem_protectedbase_addToIndex(void* self) {
+	VirtualQGraphicsItem* self_cast = static_cast<VirtualQGraphicsItem*>( (QGraphicsItem*)(self) );
 	
 	self_cast->addToIndex();
 
 }
 
-void QGraphicsItem_protectedbase_removeFromIndex(bool* _dynamic_cast_ok, void* self) {
-	VirtualQGraphicsItem* self_cast = dynamic_cast<VirtualQGraphicsItem*>( (QGraphicsItem*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QGraphicsItem_protectedbase_removeFromIndex(void* self) {
+	VirtualQGraphicsItem* self_cast = static_cast<VirtualQGraphicsItem*>( (QGraphicsItem*)(self) );
 	
 	self_cast->removeFromIndex();
 
 }
 
-void QGraphicsItem_protectedbase_prepareGeometryChange(bool* _dynamic_cast_ok, void* self) {
-	VirtualQGraphicsItem* self_cast = dynamic_cast<VirtualQGraphicsItem*>( (QGraphicsItem*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QGraphicsItem_protectedbase_prepareGeometryChange(void* self) {
+	VirtualQGraphicsItem* self_cast = static_cast<VirtualQGraphicsItem*>( (QGraphicsItem*)(self) );
 	
 	self_cast->prepareGeometryChange();
 
@@ -2348,14 +2324,14 @@ public:
 	friend QVariant* QGraphicsObject_virtualbase_extension(const void* self, QVariant* variant);
 
 	// Wrappers to allow calling protected methods:
-	friend void QGraphicsObject_protectedbase_updateMicroFocus(bool* _dynamic_cast_ok, void* self);
-	friend QObject* QGraphicsObject_protectedbase_sender(bool* _dynamic_cast_ok, const void* self);
-	friend int QGraphicsObject_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
-	friend int QGraphicsObject_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
-	friend bool QGraphicsObject_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
-	friend void QGraphicsObject_protectedbase_addToIndex(bool* _dynamic_cast_ok, void* self);
-	friend void QGraphicsObject_protectedbase_removeFromIndex(bool* _dynamic_cast_ok, void* self);
-	friend void QGraphicsObject_protectedbase_prepareGeometryChange(bool* _dynamic_cast_ok, void* self);
+	friend void QGraphicsObject_protectedbase_updateMicroFocus(void* self);
+	friend QObject* QGraphicsObject_protectedbase_sender(const void* self);
+	friend int QGraphicsObject_protectedbase_senderSignalIndex(const void* self);
+	friend int QGraphicsObject_protectedbase_receivers(const void* self, const char* signal);
+	friend bool QGraphicsObject_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
+	friend void QGraphicsObject_protectedbase_addToIndex(void* self);
+	friend void QGraphicsObject_protectedbase_removeFromIndex(void* self);
+	friend void QGraphicsObject_protectedbase_prepareGeometryChange(void* self);
 };
 
 QGraphicsObject* QGraphicsObject_new(struct QGraphicsObject_VTable* vtbl) {
@@ -2867,105 +2843,57 @@ QVariant* QGraphicsObject_virtualbase_extension(const void* self, QVariant* vari
 }
 
 const QMetaObject* QGraphicsObject_staticMetaObject() { return &QGraphicsObject::staticMetaObject; }
-void QGraphicsObject_protectedbase_updateMicroFocus(bool* _dynamic_cast_ok, void* self) {
-	VirtualQGraphicsObject* self_cast = dynamic_cast<VirtualQGraphicsObject*>( (QGraphicsObject*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QGraphicsObject_protectedbase_updateMicroFocus(void* self) {
+	VirtualQGraphicsObject* self_cast = static_cast<VirtualQGraphicsObject*>( (QGraphicsObject*)(self) );
 	
 	self_cast->updateMicroFocus();
 
 }
 
-QObject* QGraphicsObject_protectedbase_sender(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQGraphicsObject* self_cast = dynamic_cast<VirtualQGraphicsObject*>( (QGraphicsObject*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return nullptr;
-	}
-	
-	*_dynamic_cast_ok = true;
+QObject* QGraphicsObject_protectedbase_sender(const void* self) {
+	VirtualQGraphicsObject* self_cast = static_cast<VirtualQGraphicsObject*>( (QGraphicsObject*)(self) );
 	
 	return self_cast->sender();
 
 }
 
-int QGraphicsObject_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQGraphicsObject* self_cast = dynamic_cast<VirtualQGraphicsObject*>( (QGraphicsObject*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return 0;
-	}
-	
-	*_dynamic_cast_ok = true;
+int QGraphicsObject_protectedbase_senderSignalIndex(const void* self) {
+	VirtualQGraphicsObject* self_cast = static_cast<VirtualQGraphicsObject*>( (QGraphicsObject*)(self) );
 	
 	return self_cast->senderSignalIndex();
 
 }
 
-int QGraphicsObject_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal) {
-	VirtualQGraphicsObject* self_cast = dynamic_cast<VirtualQGraphicsObject*>( (QGraphicsObject*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return 0;
-	}
-	
-	*_dynamic_cast_ok = true;
+int QGraphicsObject_protectedbase_receivers(const void* self, const char* signal) {
+	VirtualQGraphicsObject* self_cast = static_cast<VirtualQGraphicsObject*>( (QGraphicsObject*)(self) );
 	
 	return self_cast->receivers(signal);
 
 }
 
-bool QGraphicsObject_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal) {
-	VirtualQGraphicsObject* self_cast = dynamic_cast<VirtualQGraphicsObject*>( (QGraphicsObject*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return false;
-	}
-	
-	*_dynamic_cast_ok = true;
+bool QGraphicsObject_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal) {
+	VirtualQGraphicsObject* self_cast = static_cast<VirtualQGraphicsObject*>( (QGraphicsObject*)(self) );
 	
 	return self_cast->isSignalConnected(*signal);
 
 }
 
-void QGraphicsObject_protectedbase_addToIndex(bool* _dynamic_cast_ok, void* self) {
-	VirtualQGraphicsObject* self_cast = dynamic_cast<VirtualQGraphicsObject*>( (QGraphicsObject*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QGraphicsObject_protectedbase_addToIndex(void* self) {
+	VirtualQGraphicsObject* self_cast = static_cast<VirtualQGraphicsObject*>( (QGraphicsObject*)(self) );
 	
 	self_cast->addToIndex();
 
 }
 
-void QGraphicsObject_protectedbase_removeFromIndex(bool* _dynamic_cast_ok, void* self) {
-	VirtualQGraphicsObject* self_cast = dynamic_cast<VirtualQGraphicsObject*>( (QGraphicsObject*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QGraphicsObject_protectedbase_removeFromIndex(void* self) {
+	VirtualQGraphicsObject* self_cast = static_cast<VirtualQGraphicsObject*>( (QGraphicsObject*)(self) );
 	
 	self_cast->removeFromIndex();
 
 }
 
-void QGraphicsObject_protectedbase_prepareGeometryChange(bool* _dynamic_cast_ok, void* self) {
-	VirtualQGraphicsObject* self_cast = dynamic_cast<VirtualQGraphicsObject*>( (QGraphicsObject*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QGraphicsObject_protectedbase_prepareGeometryChange(void* self) {
+	VirtualQGraphicsObject* self_cast = static_cast<VirtualQGraphicsObject*>( (QGraphicsObject*)(self) );
 	
 	self_cast->prepareGeometryChange();
 
@@ -3524,10 +3452,10 @@ public:
 	friend QVariant* QAbstractGraphicsShapeItem_virtualbase_extension(const void* self, QVariant* variant);
 
 	// Wrappers to allow calling protected methods:
-	friend void QAbstractGraphicsShapeItem_protectedbase_updateMicroFocus(bool* _dynamic_cast_ok, void* self);
-	friend void QAbstractGraphicsShapeItem_protectedbase_addToIndex(bool* _dynamic_cast_ok, void* self);
-	friend void QAbstractGraphicsShapeItem_protectedbase_removeFromIndex(bool* _dynamic_cast_ok, void* self);
-	friend void QAbstractGraphicsShapeItem_protectedbase_prepareGeometryChange(bool* _dynamic_cast_ok, void* self);
+	friend void QAbstractGraphicsShapeItem_protectedbase_updateMicroFocus(void* self);
+	friend void QAbstractGraphicsShapeItem_protectedbase_addToIndex(void* self);
+	friend void QAbstractGraphicsShapeItem_protectedbase_removeFromIndex(void* self);
+	friend void QAbstractGraphicsShapeItem_protectedbase_prepareGeometryChange(void* self);
 };
 
 QAbstractGraphicsShapeItem* QAbstractGraphicsShapeItem_new(struct QAbstractGraphicsShapeItem_VTable* vtbl) {
@@ -3764,53 +3692,29 @@ QVariant* QAbstractGraphicsShapeItem_virtualbase_extension(const void* self, QVa
 
 }
 
-void QAbstractGraphicsShapeItem_protectedbase_updateMicroFocus(bool* _dynamic_cast_ok, void* self) {
-	VirtualQAbstractGraphicsShapeItem* self_cast = dynamic_cast<VirtualQAbstractGraphicsShapeItem*>( (QAbstractGraphicsShapeItem*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QAbstractGraphicsShapeItem_protectedbase_updateMicroFocus(void* self) {
+	VirtualQAbstractGraphicsShapeItem* self_cast = static_cast<VirtualQAbstractGraphicsShapeItem*>( (QAbstractGraphicsShapeItem*)(self) );
 	
 	self_cast->updateMicroFocus();
 
 }
 
-void QAbstractGraphicsShapeItem_protectedbase_addToIndex(bool* _dynamic_cast_ok, void* self) {
-	VirtualQAbstractGraphicsShapeItem* self_cast = dynamic_cast<VirtualQAbstractGraphicsShapeItem*>( (QAbstractGraphicsShapeItem*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QAbstractGraphicsShapeItem_protectedbase_addToIndex(void* self) {
+	VirtualQAbstractGraphicsShapeItem* self_cast = static_cast<VirtualQAbstractGraphicsShapeItem*>( (QAbstractGraphicsShapeItem*)(self) );
 	
 	self_cast->addToIndex();
 
 }
 
-void QAbstractGraphicsShapeItem_protectedbase_removeFromIndex(bool* _dynamic_cast_ok, void* self) {
-	VirtualQAbstractGraphicsShapeItem* self_cast = dynamic_cast<VirtualQAbstractGraphicsShapeItem*>( (QAbstractGraphicsShapeItem*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QAbstractGraphicsShapeItem_protectedbase_removeFromIndex(void* self) {
+	VirtualQAbstractGraphicsShapeItem* self_cast = static_cast<VirtualQAbstractGraphicsShapeItem*>( (QAbstractGraphicsShapeItem*)(self) );
 	
 	self_cast->removeFromIndex();
 
 }
 
-void QAbstractGraphicsShapeItem_protectedbase_prepareGeometryChange(bool* _dynamic_cast_ok, void* self) {
-	VirtualQAbstractGraphicsShapeItem* self_cast = dynamic_cast<VirtualQAbstractGraphicsShapeItem*>( (QAbstractGraphicsShapeItem*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QAbstractGraphicsShapeItem_protectedbase_prepareGeometryChange(void* self) {
+	VirtualQAbstractGraphicsShapeItem* self_cast = static_cast<VirtualQAbstractGraphicsShapeItem*>( (QAbstractGraphicsShapeItem*)(self) );
 	
 	self_cast->prepareGeometryChange();
 
@@ -4376,10 +4280,10 @@ public:
 	friend QVariant* QGraphicsPathItem_virtualbase_itemChange(void* self, int change, QVariant* value);
 
 	// Wrappers to allow calling protected methods:
-	friend void QGraphicsPathItem_protectedbase_updateMicroFocus(bool* _dynamic_cast_ok, void* self);
-	friend void QGraphicsPathItem_protectedbase_addToIndex(bool* _dynamic_cast_ok, void* self);
-	friend void QGraphicsPathItem_protectedbase_removeFromIndex(bool* _dynamic_cast_ok, void* self);
-	friend void QGraphicsPathItem_protectedbase_prepareGeometryChange(bool* _dynamic_cast_ok, void* self);
+	friend void QGraphicsPathItem_protectedbase_updateMicroFocus(void* self);
+	friend void QGraphicsPathItem_protectedbase_addToIndex(void* self);
+	friend void QGraphicsPathItem_protectedbase_removeFromIndex(void* self);
+	friend void QGraphicsPathItem_protectedbase_prepareGeometryChange(void* self);
 };
 
 QGraphicsPathItem* QGraphicsPathItem_new(struct QGraphicsPathItem_VTable* vtbl) {
@@ -4648,53 +4552,29 @@ QVariant* QGraphicsPathItem_virtualbase_itemChange(void* self, int change, QVari
 
 }
 
-void QGraphicsPathItem_protectedbase_updateMicroFocus(bool* _dynamic_cast_ok, void* self) {
-	VirtualQGraphicsPathItem* self_cast = dynamic_cast<VirtualQGraphicsPathItem*>( (QGraphicsPathItem*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QGraphicsPathItem_protectedbase_updateMicroFocus(void* self) {
+	VirtualQGraphicsPathItem* self_cast = static_cast<VirtualQGraphicsPathItem*>( (QGraphicsPathItem*)(self) );
 	
 	self_cast->updateMicroFocus();
 
 }
 
-void QGraphicsPathItem_protectedbase_addToIndex(bool* _dynamic_cast_ok, void* self) {
-	VirtualQGraphicsPathItem* self_cast = dynamic_cast<VirtualQGraphicsPathItem*>( (QGraphicsPathItem*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QGraphicsPathItem_protectedbase_addToIndex(void* self) {
+	VirtualQGraphicsPathItem* self_cast = static_cast<VirtualQGraphicsPathItem*>( (QGraphicsPathItem*)(self) );
 	
 	self_cast->addToIndex();
 
 }
 
-void QGraphicsPathItem_protectedbase_removeFromIndex(bool* _dynamic_cast_ok, void* self) {
-	VirtualQGraphicsPathItem* self_cast = dynamic_cast<VirtualQGraphicsPathItem*>( (QGraphicsPathItem*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QGraphicsPathItem_protectedbase_removeFromIndex(void* self) {
+	VirtualQGraphicsPathItem* self_cast = static_cast<VirtualQGraphicsPathItem*>( (QGraphicsPathItem*)(self) );
 	
 	self_cast->removeFromIndex();
 
 }
 
-void QGraphicsPathItem_protectedbase_prepareGeometryChange(bool* _dynamic_cast_ok, void* self) {
-	VirtualQGraphicsPathItem* self_cast = dynamic_cast<VirtualQGraphicsPathItem*>( (QGraphicsPathItem*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QGraphicsPathItem_protectedbase_prepareGeometryChange(void* self) {
+	VirtualQGraphicsPathItem* self_cast = static_cast<VirtualQGraphicsPathItem*>( (QGraphicsPathItem*)(self) );
 	
 	self_cast->prepareGeometryChange();
 
@@ -5262,10 +5142,10 @@ public:
 	friend QVariant* QGraphicsRectItem_virtualbase_itemChange(void* self, int change, QVariant* value);
 
 	// Wrappers to allow calling protected methods:
-	friend void QGraphicsRectItem_protectedbase_updateMicroFocus(bool* _dynamic_cast_ok, void* self);
-	friend void QGraphicsRectItem_protectedbase_addToIndex(bool* _dynamic_cast_ok, void* self);
-	friend void QGraphicsRectItem_protectedbase_removeFromIndex(bool* _dynamic_cast_ok, void* self);
-	friend void QGraphicsRectItem_protectedbase_prepareGeometryChange(bool* _dynamic_cast_ok, void* self);
+	friend void QGraphicsRectItem_protectedbase_updateMicroFocus(void* self);
+	friend void QGraphicsRectItem_protectedbase_addToIndex(void* self);
+	friend void QGraphicsRectItem_protectedbase_removeFromIndex(void* self);
+	friend void QGraphicsRectItem_protectedbase_prepareGeometryChange(void* self);
 };
 
 QGraphicsRectItem* QGraphicsRectItem_new(struct QGraphicsRectItem_VTable* vtbl) {
@@ -5546,53 +5426,29 @@ QVariant* QGraphicsRectItem_virtualbase_itemChange(void* self, int change, QVari
 
 }
 
-void QGraphicsRectItem_protectedbase_updateMicroFocus(bool* _dynamic_cast_ok, void* self) {
-	VirtualQGraphicsRectItem* self_cast = dynamic_cast<VirtualQGraphicsRectItem*>( (QGraphicsRectItem*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QGraphicsRectItem_protectedbase_updateMicroFocus(void* self) {
+	VirtualQGraphicsRectItem* self_cast = static_cast<VirtualQGraphicsRectItem*>( (QGraphicsRectItem*)(self) );
 	
 	self_cast->updateMicroFocus();
 
 }
 
-void QGraphicsRectItem_protectedbase_addToIndex(bool* _dynamic_cast_ok, void* self) {
-	VirtualQGraphicsRectItem* self_cast = dynamic_cast<VirtualQGraphicsRectItem*>( (QGraphicsRectItem*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QGraphicsRectItem_protectedbase_addToIndex(void* self) {
+	VirtualQGraphicsRectItem* self_cast = static_cast<VirtualQGraphicsRectItem*>( (QGraphicsRectItem*)(self) );
 	
 	self_cast->addToIndex();
 
 }
 
-void QGraphicsRectItem_protectedbase_removeFromIndex(bool* _dynamic_cast_ok, void* self) {
-	VirtualQGraphicsRectItem* self_cast = dynamic_cast<VirtualQGraphicsRectItem*>( (QGraphicsRectItem*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QGraphicsRectItem_protectedbase_removeFromIndex(void* self) {
+	VirtualQGraphicsRectItem* self_cast = static_cast<VirtualQGraphicsRectItem*>( (QGraphicsRectItem*)(self) );
 	
 	self_cast->removeFromIndex();
 
 }
 
-void QGraphicsRectItem_protectedbase_prepareGeometryChange(bool* _dynamic_cast_ok, void* self) {
-	VirtualQGraphicsRectItem* self_cast = dynamic_cast<VirtualQGraphicsRectItem*>( (QGraphicsRectItem*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QGraphicsRectItem_protectedbase_prepareGeometryChange(void* self) {
+	VirtualQGraphicsRectItem* self_cast = static_cast<VirtualQGraphicsRectItem*>( (QGraphicsRectItem*)(self) );
 	
 	self_cast->prepareGeometryChange();
 
@@ -6160,10 +6016,10 @@ public:
 	friend QVariant* QGraphicsEllipseItem_virtualbase_itemChange(void* self, int change, QVariant* value);
 
 	// Wrappers to allow calling protected methods:
-	friend void QGraphicsEllipseItem_protectedbase_updateMicroFocus(bool* _dynamic_cast_ok, void* self);
-	friend void QGraphicsEllipseItem_protectedbase_addToIndex(bool* _dynamic_cast_ok, void* self);
-	friend void QGraphicsEllipseItem_protectedbase_removeFromIndex(bool* _dynamic_cast_ok, void* self);
-	friend void QGraphicsEllipseItem_protectedbase_prepareGeometryChange(bool* _dynamic_cast_ok, void* self);
+	friend void QGraphicsEllipseItem_protectedbase_updateMicroFocus(void* self);
+	friend void QGraphicsEllipseItem_protectedbase_addToIndex(void* self);
+	friend void QGraphicsEllipseItem_protectedbase_removeFromIndex(void* self);
+	friend void QGraphicsEllipseItem_protectedbase_prepareGeometryChange(void* self);
 };
 
 QGraphicsEllipseItem* QGraphicsEllipseItem_new(struct QGraphicsEllipseItem_VTable* vtbl) {
@@ -6460,53 +6316,29 @@ QVariant* QGraphicsEllipseItem_virtualbase_itemChange(void* self, int change, QV
 
 }
 
-void QGraphicsEllipseItem_protectedbase_updateMicroFocus(bool* _dynamic_cast_ok, void* self) {
-	VirtualQGraphicsEllipseItem* self_cast = dynamic_cast<VirtualQGraphicsEllipseItem*>( (QGraphicsEllipseItem*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QGraphicsEllipseItem_protectedbase_updateMicroFocus(void* self) {
+	VirtualQGraphicsEllipseItem* self_cast = static_cast<VirtualQGraphicsEllipseItem*>( (QGraphicsEllipseItem*)(self) );
 	
 	self_cast->updateMicroFocus();
 
 }
 
-void QGraphicsEllipseItem_protectedbase_addToIndex(bool* _dynamic_cast_ok, void* self) {
-	VirtualQGraphicsEllipseItem* self_cast = dynamic_cast<VirtualQGraphicsEllipseItem*>( (QGraphicsEllipseItem*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QGraphicsEllipseItem_protectedbase_addToIndex(void* self) {
+	VirtualQGraphicsEllipseItem* self_cast = static_cast<VirtualQGraphicsEllipseItem*>( (QGraphicsEllipseItem*)(self) );
 	
 	self_cast->addToIndex();
 
 }
 
-void QGraphicsEllipseItem_protectedbase_removeFromIndex(bool* _dynamic_cast_ok, void* self) {
-	VirtualQGraphicsEllipseItem* self_cast = dynamic_cast<VirtualQGraphicsEllipseItem*>( (QGraphicsEllipseItem*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QGraphicsEllipseItem_protectedbase_removeFromIndex(void* self) {
+	VirtualQGraphicsEllipseItem* self_cast = static_cast<VirtualQGraphicsEllipseItem*>( (QGraphicsEllipseItem*)(self) );
 	
 	self_cast->removeFromIndex();
 
 }
 
-void QGraphicsEllipseItem_protectedbase_prepareGeometryChange(bool* _dynamic_cast_ok, void* self) {
-	VirtualQGraphicsEllipseItem* self_cast = dynamic_cast<VirtualQGraphicsEllipseItem*>( (QGraphicsEllipseItem*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QGraphicsEllipseItem_protectedbase_prepareGeometryChange(void* self) {
+	VirtualQGraphicsEllipseItem* self_cast = static_cast<VirtualQGraphicsEllipseItem*>( (QGraphicsEllipseItem*)(self) );
 	
 	self_cast->prepareGeometryChange();
 
@@ -7070,10 +6902,10 @@ public:
 	friend QVariant* QGraphicsPolygonItem_virtualbase_itemChange(void* self, int change, QVariant* value);
 
 	// Wrappers to allow calling protected methods:
-	friend void QGraphicsPolygonItem_protectedbase_updateMicroFocus(bool* _dynamic_cast_ok, void* self);
-	friend void QGraphicsPolygonItem_protectedbase_addToIndex(bool* _dynamic_cast_ok, void* self);
-	friend void QGraphicsPolygonItem_protectedbase_removeFromIndex(bool* _dynamic_cast_ok, void* self);
-	friend void QGraphicsPolygonItem_protectedbase_prepareGeometryChange(bool* _dynamic_cast_ok, void* self);
+	friend void QGraphicsPolygonItem_protectedbase_updateMicroFocus(void* self);
+	friend void QGraphicsPolygonItem_protectedbase_addToIndex(void* self);
+	friend void QGraphicsPolygonItem_protectedbase_removeFromIndex(void* self);
+	friend void QGraphicsPolygonItem_protectedbase_prepareGeometryChange(void* self);
 };
 
 QGraphicsPolygonItem* QGraphicsPolygonItem_new(struct QGraphicsPolygonItem_VTable* vtbl) {
@@ -7335,53 +7167,29 @@ QVariant* QGraphicsPolygonItem_virtualbase_itemChange(void* self, int change, QV
 
 }
 
-void QGraphicsPolygonItem_protectedbase_updateMicroFocus(bool* _dynamic_cast_ok, void* self) {
-	VirtualQGraphicsPolygonItem* self_cast = dynamic_cast<VirtualQGraphicsPolygonItem*>( (QGraphicsPolygonItem*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QGraphicsPolygonItem_protectedbase_updateMicroFocus(void* self) {
+	VirtualQGraphicsPolygonItem* self_cast = static_cast<VirtualQGraphicsPolygonItem*>( (QGraphicsPolygonItem*)(self) );
 	
 	self_cast->updateMicroFocus();
 
 }
 
-void QGraphicsPolygonItem_protectedbase_addToIndex(bool* _dynamic_cast_ok, void* self) {
-	VirtualQGraphicsPolygonItem* self_cast = dynamic_cast<VirtualQGraphicsPolygonItem*>( (QGraphicsPolygonItem*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QGraphicsPolygonItem_protectedbase_addToIndex(void* self) {
+	VirtualQGraphicsPolygonItem* self_cast = static_cast<VirtualQGraphicsPolygonItem*>( (QGraphicsPolygonItem*)(self) );
 	
 	self_cast->addToIndex();
 
 }
 
-void QGraphicsPolygonItem_protectedbase_removeFromIndex(bool* _dynamic_cast_ok, void* self) {
-	VirtualQGraphicsPolygonItem* self_cast = dynamic_cast<VirtualQGraphicsPolygonItem*>( (QGraphicsPolygonItem*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QGraphicsPolygonItem_protectedbase_removeFromIndex(void* self) {
+	VirtualQGraphicsPolygonItem* self_cast = static_cast<VirtualQGraphicsPolygonItem*>( (QGraphicsPolygonItem*)(self) );
 	
 	self_cast->removeFromIndex();
 
 }
 
-void QGraphicsPolygonItem_protectedbase_prepareGeometryChange(bool* _dynamic_cast_ok, void* self) {
-	VirtualQGraphicsPolygonItem* self_cast = dynamic_cast<VirtualQGraphicsPolygonItem*>( (QGraphicsPolygonItem*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QGraphicsPolygonItem_protectedbase_prepareGeometryChange(void* self) {
+	VirtualQGraphicsPolygonItem* self_cast = static_cast<VirtualQGraphicsPolygonItem*>( (QGraphicsPolygonItem*)(self) );
 	
 	self_cast->prepareGeometryChange();
 
@@ -7949,10 +7757,10 @@ public:
 	friend QVariant* QGraphicsLineItem_virtualbase_itemChange(void* self, int change, QVariant* value);
 
 	// Wrappers to allow calling protected methods:
-	friend void QGraphicsLineItem_protectedbase_updateMicroFocus(bool* _dynamic_cast_ok, void* self);
-	friend void QGraphicsLineItem_protectedbase_addToIndex(bool* _dynamic_cast_ok, void* self);
-	friend void QGraphicsLineItem_protectedbase_removeFromIndex(bool* _dynamic_cast_ok, void* self);
-	friend void QGraphicsLineItem_protectedbase_prepareGeometryChange(bool* _dynamic_cast_ok, void* self);
+	friend void QGraphicsLineItem_protectedbase_updateMicroFocus(void* self);
+	friend void QGraphicsLineItem_protectedbase_addToIndex(void* self);
+	friend void QGraphicsLineItem_protectedbase_removeFromIndex(void* self);
+	friend void QGraphicsLineItem_protectedbase_prepareGeometryChange(void* self);
 };
 
 QGraphicsLineItem* QGraphicsLineItem_new(struct QGraphicsLineItem_VTable* vtbl) {
@@ -8241,53 +8049,29 @@ QVariant* QGraphicsLineItem_virtualbase_itemChange(void* self, int change, QVari
 
 }
 
-void QGraphicsLineItem_protectedbase_updateMicroFocus(bool* _dynamic_cast_ok, void* self) {
-	VirtualQGraphicsLineItem* self_cast = dynamic_cast<VirtualQGraphicsLineItem*>( (QGraphicsLineItem*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QGraphicsLineItem_protectedbase_updateMicroFocus(void* self) {
+	VirtualQGraphicsLineItem* self_cast = static_cast<VirtualQGraphicsLineItem*>( (QGraphicsLineItem*)(self) );
 	
 	self_cast->updateMicroFocus();
 
 }
 
-void QGraphicsLineItem_protectedbase_addToIndex(bool* _dynamic_cast_ok, void* self) {
-	VirtualQGraphicsLineItem* self_cast = dynamic_cast<VirtualQGraphicsLineItem*>( (QGraphicsLineItem*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QGraphicsLineItem_protectedbase_addToIndex(void* self) {
+	VirtualQGraphicsLineItem* self_cast = static_cast<VirtualQGraphicsLineItem*>( (QGraphicsLineItem*)(self) );
 	
 	self_cast->addToIndex();
 
 }
 
-void QGraphicsLineItem_protectedbase_removeFromIndex(bool* _dynamic_cast_ok, void* self) {
-	VirtualQGraphicsLineItem* self_cast = dynamic_cast<VirtualQGraphicsLineItem*>( (QGraphicsLineItem*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QGraphicsLineItem_protectedbase_removeFromIndex(void* self) {
+	VirtualQGraphicsLineItem* self_cast = static_cast<VirtualQGraphicsLineItem*>( (QGraphicsLineItem*)(self) );
 	
 	self_cast->removeFromIndex();
 
 }
 
-void QGraphicsLineItem_protectedbase_prepareGeometryChange(bool* _dynamic_cast_ok, void* self) {
-	VirtualQGraphicsLineItem* self_cast = dynamic_cast<VirtualQGraphicsLineItem*>( (QGraphicsLineItem*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QGraphicsLineItem_protectedbase_prepareGeometryChange(void* self) {
+	VirtualQGraphicsLineItem* self_cast = static_cast<VirtualQGraphicsLineItem*>( (QGraphicsLineItem*)(self) );
 	
 	self_cast->prepareGeometryChange();
 
@@ -8853,10 +8637,10 @@ public:
 	friend QVariant* QGraphicsPixmapItem_virtualbase_itemChange(void* self, int change, QVariant* value);
 
 	// Wrappers to allow calling protected methods:
-	friend void QGraphicsPixmapItem_protectedbase_updateMicroFocus(bool* _dynamic_cast_ok, void* self);
-	friend void QGraphicsPixmapItem_protectedbase_addToIndex(bool* _dynamic_cast_ok, void* self);
-	friend void QGraphicsPixmapItem_protectedbase_removeFromIndex(bool* _dynamic_cast_ok, void* self);
-	friend void QGraphicsPixmapItem_protectedbase_prepareGeometryChange(bool* _dynamic_cast_ok, void* self);
+	friend void QGraphicsPixmapItem_protectedbase_updateMicroFocus(void* self);
+	friend void QGraphicsPixmapItem_protectedbase_addToIndex(void* self);
+	friend void QGraphicsPixmapItem_protectedbase_removeFromIndex(void* self);
+	friend void QGraphicsPixmapItem_protectedbase_prepareGeometryChange(void* self);
 };
 
 QGraphicsPixmapItem* QGraphicsPixmapItem_new(struct QGraphicsPixmapItem_VTable* vtbl) {
@@ -9155,53 +8939,29 @@ QVariant* QGraphicsPixmapItem_virtualbase_itemChange(void* self, int change, QVa
 
 }
 
-void QGraphicsPixmapItem_protectedbase_updateMicroFocus(bool* _dynamic_cast_ok, void* self) {
-	VirtualQGraphicsPixmapItem* self_cast = dynamic_cast<VirtualQGraphicsPixmapItem*>( (QGraphicsPixmapItem*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QGraphicsPixmapItem_protectedbase_updateMicroFocus(void* self) {
+	VirtualQGraphicsPixmapItem* self_cast = static_cast<VirtualQGraphicsPixmapItem*>( (QGraphicsPixmapItem*)(self) );
 	
 	self_cast->updateMicroFocus();
 
 }
 
-void QGraphicsPixmapItem_protectedbase_addToIndex(bool* _dynamic_cast_ok, void* self) {
-	VirtualQGraphicsPixmapItem* self_cast = dynamic_cast<VirtualQGraphicsPixmapItem*>( (QGraphicsPixmapItem*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QGraphicsPixmapItem_protectedbase_addToIndex(void* self) {
+	VirtualQGraphicsPixmapItem* self_cast = static_cast<VirtualQGraphicsPixmapItem*>( (QGraphicsPixmapItem*)(self) );
 	
 	self_cast->addToIndex();
 
 }
 
-void QGraphicsPixmapItem_protectedbase_removeFromIndex(bool* _dynamic_cast_ok, void* self) {
-	VirtualQGraphicsPixmapItem* self_cast = dynamic_cast<VirtualQGraphicsPixmapItem*>( (QGraphicsPixmapItem*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QGraphicsPixmapItem_protectedbase_removeFromIndex(void* self) {
+	VirtualQGraphicsPixmapItem* self_cast = static_cast<VirtualQGraphicsPixmapItem*>( (QGraphicsPixmapItem*)(self) );
 	
 	self_cast->removeFromIndex();
 
 }
 
-void QGraphicsPixmapItem_protectedbase_prepareGeometryChange(bool* _dynamic_cast_ok, void* self) {
-	VirtualQGraphicsPixmapItem* self_cast = dynamic_cast<VirtualQGraphicsPixmapItem*>( (QGraphicsPixmapItem*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QGraphicsPixmapItem_protectedbase_prepareGeometryChange(void* self) {
+	VirtualQGraphicsPixmapItem* self_cast = static_cast<VirtualQGraphicsPixmapItem*>( (QGraphicsPixmapItem*)(self) );
 	
 	self_cast->prepareGeometryChange();
 
@@ -9924,14 +9684,14 @@ public:
 	friend QVariant* QGraphicsTextItem_virtualbase_itemChange(void* self, int change, QVariant* value);
 
 	// Wrappers to allow calling protected methods:
-	friend void QGraphicsTextItem_protectedbase_updateMicroFocus(bool* _dynamic_cast_ok, void* self);
-	friend QObject* QGraphicsTextItem_protectedbase_sender(bool* _dynamic_cast_ok, const void* self);
-	friend int QGraphicsTextItem_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
-	friend int QGraphicsTextItem_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
-	friend bool QGraphicsTextItem_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
-	friend void QGraphicsTextItem_protectedbase_addToIndex(bool* _dynamic_cast_ok, void* self);
-	friend void QGraphicsTextItem_protectedbase_removeFromIndex(bool* _dynamic_cast_ok, void* self);
-	friend void QGraphicsTextItem_protectedbase_prepareGeometryChange(bool* _dynamic_cast_ok, void* self);
+	friend void QGraphicsTextItem_protectedbase_updateMicroFocus(void* self);
+	friend QObject* QGraphicsTextItem_protectedbase_sender(const void* self);
+	friend int QGraphicsTextItem_protectedbase_senderSignalIndex(const void* self);
+	friend int QGraphicsTextItem_protectedbase_receivers(const void* self, const char* signal);
+	friend bool QGraphicsTextItem_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
+	friend void QGraphicsTextItem_protectedbase_addToIndex(void* self);
+	friend void QGraphicsTextItem_protectedbase_removeFromIndex(void* self);
+	friend void QGraphicsTextItem_protectedbase_prepareGeometryChange(void* self);
 };
 
 QGraphicsTextItem* QGraphicsTextItem_new(struct QGraphicsTextItem_VTable* vtbl) {
@@ -10450,105 +10210,57 @@ QVariant* QGraphicsTextItem_virtualbase_itemChange(void* self, int change, QVari
 }
 
 const QMetaObject* QGraphicsTextItem_staticMetaObject() { return &QGraphicsTextItem::staticMetaObject; }
-void QGraphicsTextItem_protectedbase_updateMicroFocus(bool* _dynamic_cast_ok, void* self) {
-	VirtualQGraphicsTextItem* self_cast = dynamic_cast<VirtualQGraphicsTextItem*>( (QGraphicsTextItem*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QGraphicsTextItem_protectedbase_updateMicroFocus(void* self) {
+	VirtualQGraphicsTextItem* self_cast = static_cast<VirtualQGraphicsTextItem*>( (QGraphicsTextItem*)(self) );
 	
 	self_cast->updateMicroFocus();
 
 }
 
-QObject* QGraphicsTextItem_protectedbase_sender(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQGraphicsTextItem* self_cast = dynamic_cast<VirtualQGraphicsTextItem*>( (QGraphicsTextItem*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return nullptr;
-	}
-	
-	*_dynamic_cast_ok = true;
+QObject* QGraphicsTextItem_protectedbase_sender(const void* self) {
+	VirtualQGraphicsTextItem* self_cast = static_cast<VirtualQGraphicsTextItem*>( (QGraphicsTextItem*)(self) );
 	
 	return self_cast->sender();
 
 }
 
-int QGraphicsTextItem_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQGraphicsTextItem* self_cast = dynamic_cast<VirtualQGraphicsTextItem*>( (QGraphicsTextItem*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return 0;
-	}
-	
-	*_dynamic_cast_ok = true;
+int QGraphicsTextItem_protectedbase_senderSignalIndex(const void* self) {
+	VirtualQGraphicsTextItem* self_cast = static_cast<VirtualQGraphicsTextItem*>( (QGraphicsTextItem*)(self) );
 	
 	return self_cast->senderSignalIndex();
 
 }
 
-int QGraphicsTextItem_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal) {
-	VirtualQGraphicsTextItem* self_cast = dynamic_cast<VirtualQGraphicsTextItem*>( (QGraphicsTextItem*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return 0;
-	}
-	
-	*_dynamic_cast_ok = true;
+int QGraphicsTextItem_protectedbase_receivers(const void* self, const char* signal) {
+	VirtualQGraphicsTextItem* self_cast = static_cast<VirtualQGraphicsTextItem*>( (QGraphicsTextItem*)(self) );
 	
 	return self_cast->receivers(signal);
 
 }
 
-bool QGraphicsTextItem_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal) {
-	VirtualQGraphicsTextItem* self_cast = dynamic_cast<VirtualQGraphicsTextItem*>( (QGraphicsTextItem*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return false;
-	}
-	
-	*_dynamic_cast_ok = true;
+bool QGraphicsTextItem_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal) {
+	VirtualQGraphicsTextItem* self_cast = static_cast<VirtualQGraphicsTextItem*>( (QGraphicsTextItem*)(self) );
 	
 	return self_cast->isSignalConnected(*signal);
 
 }
 
-void QGraphicsTextItem_protectedbase_addToIndex(bool* _dynamic_cast_ok, void* self) {
-	VirtualQGraphicsTextItem* self_cast = dynamic_cast<VirtualQGraphicsTextItem*>( (QGraphicsTextItem*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QGraphicsTextItem_protectedbase_addToIndex(void* self) {
+	VirtualQGraphicsTextItem* self_cast = static_cast<VirtualQGraphicsTextItem*>( (QGraphicsTextItem*)(self) );
 	
 	self_cast->addToIndex();
 
 }
 
-void QGraphicsTextItem_protectedbase_removeFromIndex(bool* _dynamic_cast_ok, void* self) {
-	VirtualQGraphicsTextItem* self_cast = dynamic_cast<VirtualQGraphicsTextItem*>( (QGraphicsTextItem*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QGraphicsTextItem_protectedbase_removeFromIndex(void* self) {
+	VirtualQGraphicsTextItem* self_cast = static_cast<VirtualQGraphicsTextItem*>( (QGraphicsTextItem*)(self) );
 	
 	self_cast->removeFromIndex();
 
 }
 
-void QGraphicsTextItem_protectedbase_prepareGeometryChange(bool* _dynamic_cast_ok, void* self) {
-	VirtualQGraphicsTextItem* self_cast = dynamic_cast<VirtualQGraphicsTextItem*>( (QGraphicsTextItem*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QGraphicsTextItem_protectedbase_prepareGeometryChange(void* self) {
+	VirtualQGraphicsTextItem* self_cast = static_cast<VirtualQGraphicsTextItem*>( (QGraphicsTextItem*)(self) );
 	
 	self_cast->prepareGeometryChange();
 
@@ -11114,10 +10826,10 @@ public:
 	friend QVariant* QGraphicsSimpleTextItem_virtualbase_itemChange(void* self, int change, QVariant* value);
 
 	// Wrappers to allow calling protected methods:
-	friend void QGraphicsSimpleTextItem_protectedbase_updateMicroFocus(bool* _dynamic_cast_ok, void* self);
-	friend void QGraphicsSimpleTextItem_protectedbase_addToIndex(bool* _dynamic_cast_ok, void* self);
-	friend void QGraphicsSimpleTextItem_protectedbase_removeFromIndex(bool* _dynamic_cast_ok, void* self);
-	friend void QGraphicsSimpleTextItem_protectedbase_prepareGeometryChange(bool* _dynamic_cast_ok, void* self);
+	friend void QGraphicsSimpleTextItem_protectedbase_updateMicroFocus(void* self);
+	friend void QGraphicsSimpleTextItem_protectedbase_addToIndex(void* self);
+	friend void QGraphicsSimpleTextItem_protectedbase_removeFromIndex(void* self);
+	friend void QGraphicsSimpleTextItem_protectedbase_prepareGeometryChange(void* self);
 };
 
 QGraphicsSimpleTextItem* QGraphicsSimpleTextItem_new(struct QGraphicsSimpleTextItem_VTable* vtbl) {
@@ -11404,53 +11116,29 @@ QVariant* QGraphicsSimpleTextItem_virtualbase_itemChange(void* self, int change,
 
 }
 
-void QGraphicsSimpleTextItem_protectedbase_updateMicroFocus(bool* _dynamic_cast_ok, void* self) {
-	VirtualQGraphicsSimpleTextItem* self_cast = dynamic_cast<VirtualQGraphicsSimpleTextItem*>( (QGraphicsSimpleTextItem*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QGraphicsSimpleTextItem_protectedbase_updateMicroFocus(void* self) {
+	VirtualQGraphicsSimpleTextItem* self_cast = static_cast<VirtualQGraphicsSimpleTextItem*>( (QGraphicsSimpleTextItem*)(self) );
 	
 	self_cast->updateMicroFocus();
 
 }
 
-void QGraphicsSimpleTextItem_protectedbase_addToIndex(bool* _dynamic_cast_ok, void* self) {
-	VirtualQGraphicsSimpleTextItem* self_cast = dynamic_cast<VirtualQGraphicsSimpleTextItem*>( (QGraphicsSimpleTextItem*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QGraphicsSimpleTextItem_protectedbase_addToIndex(void* self) {
+	VirtualQGraphicsSimpleTextItem* self_cast = static_cast<VirtualQGraphicsSimpleTextItem*>( (QGraphicsSimpleTextItem*)(self) );
 	
 	self_cast->addToIndex();
 
 }
 
-void QGraphicsSimpleTextItem_protectedbase_removeFromIndex(bool* _dynamic_cast_ok, void* self) {
-	VirtualQGraphicsSimpleTextItem* self_cast = dynamic_cast<VirtualQGraphicsSimpleTextItem*>( (QGraphicsSimpleTextItem*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QGraphicsSimpleTextItem_protectedbase_removeFromIndex(void* self) {
+	VirtualQGraphicsSimpleTextItem* self_cast = static_cast<VirtualQGraphicsSimpleTextItem*>( (QGraphicsSimpleTextItem*)(self) );
 	
 	self_cast->removeFromIndex();
 
 }
 
-void QGraphicsSimpleTextItem_protectedbase_prepareGeometryChange(bool* _dynamic_cast_ok, void* self) {
-	VirtualQGraphicsSimpleTextItem* self_cast = dynamic_cast<VirtualQGraphicsSimpleTextItem*>( (QGraphicsSimpleTextItem*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QGraphicsSimpleTextItem_protectedbase_prepareGeometryChange(void* self) {
+	VirtualQGraphicsSimpleTextItem* self_cast = static_cast<VirtualQGraphicsSimpleTextItem*>( (QGraphicsSimpleTextItem*)(self) );
 	
 	self_cast->prepareGeometryChange();
 
@@ -12014,10 +11702,10 @@ public:
 	friend QVariant* QGraphicsItemGroup_virtualbase_extension(const void* self, QVariant* variant);
 
 	// Wrappers to allow calling protected methods:
-	friend void QGraphicsItemGroup_protectedbase_updateMicroFocus(bool* _dynamic_cast_ok, void* self);
-	friend void QGraphicsItemGroup_protectedbase_addToIndex(bool* _dynamic_cast_ok, void* self);
-	friend void QGraphicsItemGroup_protectedbase_removeFromIndex(bool* _dynamic_cast_ok, void* self);
-	friend void QGraphicsItemGroup_protectedbase_prepareGeometryChange(bool* _dynamic_cast_ok, void* self);
+	friend void QGraphicsItemGroup_protectedbase_updateMicroFocus(void* self);
+	friend void QGraphicsItemGroup_protectedbase_addToIndex(void* self);
+	friend void QGraphicsItemGroup_protectedbase_removeFromIndex(void* self);
+	friend void QGraphicsItemGroup_protectedbase_prepareGeometryChange(void* self);
 };
 
 QGraphicsItemGroup* QGraphicsItemGroup_new(struct QGraphicsItemGroup_VTable* vtbl) {
@@ -12270,53 +11958,29 @@ QVariant* QGraphicsItemGroup_virtualbase_extension(const void* self, QVariant* v
 
 }
 
-void QGraphicsItemGroup_protectedbase_updateMicroFocus(bool* _dynamic_cast_ok, void* self) {
-	VirtualQGraphicsItemGroup* self_cast = dynamic_cast<VirtualQGraphicsItemGroup*>( (QGraphicsItemGroup*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QGraphicsItemGroup_protectedbase_updateMicroFocus(void* self) {
+	VirtualQGraphicsItemGroup* self_cast = static_cast<VirtualQGraphicsItemGroup*>( (QGraphicsItemGroup*)(self) );
 	
 	self_cast->updateMicroFocus();
 
 }
 
-void QGraphicsItemGroup_protectedbase_addToIndex(bool* _dynamic_cast_ok, void* self) {
-	VirtualQGraphicsItemGroup* self_cast = dynamic_cast<VirtualQGraphicsItemGroup*>( (QGraphicsItemGroup*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QGraphicsItemGroup_protectedbase_addToIndex(void* self) {
+	VirtualQGraphicsItemGroup* self_cast = static_cast<VirtualQGraphicsItemGroup*>( (QGraphicsItemGroup*)(self) );
 	
 	self_cast->addToIndex();
 
 }
 
-void QGraphicsItemGroup_protectedbase_removeFromIndex(bool* _dynamic_cast_ok, void* self) {
-	VirtualQGraphicsItemGroup* self_cast = dynamic_cast<VirtualQGraphicsItemGroup*>( (QGraphicsItemGroup*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QGraphicsItemGroup_protectedbase_removeFromIndex(void* self) {
+	VirtualQGraphicsItemGroup* self_cast = static_cast<VirtualQGraphicsItemGroup*>( (QGraphicsItemGroup*)(self) );
 	
 	self_cast->removeFromIndex();
 
 }
 
-void QGraphicsItemGroup_protectedbase_prepareGeometryChange(bool* _dynamic_cast_ok, void* self) {
-	VirtualQGraphicsItemGroup* self_cast = dynamic_cast<VirtualQGraphicsItemGroup*>( (QGraphicsItemGroup*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QGraphicsItemGroup_protectedbase_prepareGeometryChange(void* self) {
+	VirtualQGraphicsItemGroup* self_cast = static_cast<VirtualQGraphicsItemGroup*>( (QGraphicsItemGroup*)(self) );
 	
 	self_cast->prepareGeometryChange();
 

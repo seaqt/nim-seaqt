@@ -120,12 +120,12 @@ void QSaveFile_virtualbase_childEvent(void* self, QChildEvent* event);
 void QSaveFile_virtualbase_customEvent(void* self, QEvent* event);
 void QSaveFile_virtualbase_connectNotify(void* self, QMetaMethod* signal);
 void QSaveFile_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
-void QSaveFile_protectedbase_setOpenMode(bool* _dynamic_cast_ok, void* self, int openMode);
-void QSaveFile_protectedbase_setErrorString(bool* _dynamic_cast_ok, void* self, struct miqt_string errorString);
-QObject* QSaveFile_protectedbase_sender(bool* _dynamic_cast_ok, const void* self);
-int QSaveFile_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
-int QSaveFile_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
-bool QSaveFile_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+void QSaveFile_protectedbase_setOpenMode(void* self, int openMode);
+void QSaveFile_protectedbase_setErrorString(void* self, struct miqt_string errorString);
+QObject* QSaveFile_protectedbase_sender(const void* self);
+int QSaveFile_protectedbase_senderSignalIndex(const void* self);
+int QSaveFile_protectedbase_receivers(const void* self, const char* signal);
+bool QSaveFile_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
 const QMetaObject* QSaveFile_staticMetaObject();
 void QSaveFile_delete(QSaveFile* self);
 

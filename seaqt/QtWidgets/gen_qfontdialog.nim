@@ -216,6 +216,16 @@ proc fcQFontDialog_virtualbase_childEvent(self: pointer, event: pointer): void {
 proc fcQFontDialog_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QFontDialog_virtualbase_customEvent".}
 proc fcQFontDialog_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QFontDialog_virtualbase_connectNotify".}
 proc fcQFontDialog_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QFontDialog_virtualbase_disconnectNotify".}
+proc fcQFontDialog_protectedbase_adjustPosition(self: pointer, param1: pointer): void {.importc: "QFontDialog_protectedbase_adjustPosition".}
+proc fcQFontDialog_protectedbase_updateMicroFocus(self: pointer, ): void {.importc: "QFontDialog_protectedbase_updateMicroFocus".}
+proc fcQFontDialog_protectedbase_create(self: pointer, ): void {.importc: "QFontDialog_protectedbase_create".}
+proc fcQFontDialog_protectedbase_destroy(self: pointer, ): void {.importc: "QFontDialog_protectedbase_destroy".}
+proc fcQFontDialog_protectedbase_focusNextChild(self: pointer, ): bool {.importc: "QFontDialog_protectedbase_focusNextChild".}
+proc fcQFontDialog_protectedbase_focusPreviousChild(self: pointer, ): bool {.importc: "QFontDialog_protectedbase_focusPreviousChild".}
+proc fcQFontDialog_protectedbase_sender(self: pointer, ): pointer {.importc: "QFontDialog_protectedbase_sender".}
+proc fcQFontDialog_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QFontDialog_protectedbase_senderSignalIndex".}
+proc fcQFontDialog_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QFontDialog_protectedbase_receivers".}
+proc fcQFontDialog_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QFontDialog_protectedbase_isSignalConnected".}
 proc fcQFontDialog_new(vtbl: pointer, parent: pointer): ptr cQFontDialog {.importc: "QFontDialog_new".}
 proc fcQFontDialog_new2(vtbl: pointer, ): ptr cQFontDialog {.importc: "QFontDialog_new2".}
 proc fcQFontDialog_new3(vtbl: pointer, initial: pointer): ptr cQFontDialog {.importc: "QFontDialog_new3".}
@@ -956,6 +966,36 @@ proc miqt_exec_callback_cQFontDialog_disconnectNotify(vtbl: pointer, self: point
   let self = QFontDialog(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
   vtbl[].disconnectNotify(self, slotval1)
+
+proc adjustPosition*(self: gen_qfontdialog_types.QFontDialog, param1: gen_qwidget_types.QWidget): void =
+  fcQFontDialog_protectedbase_adjustPosition(self.h, param1.h)
+
+proc updateMicroFocus*(self: gen_qfontdialog_types.QFontDialog, ): void =
+  fcQFontDialog_protectedbase_updateMicroFocus(self.h)
+
+proc create*(self: gen_qfontdialog_types.QFontDialog, ): void =
+  fcQFontDialog_protectedbase_create(self.h)
+
+proc destroy*(self: gen_qfontdialog_types.QFontDialog, ): void =
+  fcQFontDialog_protectedbase_destroy(self.h)
+
+proc focusNextChild*(self: gen_qfontdialog_types.QFontDialog, ): bool =
+  fcQFontDialog_protectedbase_focusNextChild(self.h)
+
+proc focusPreviousChild*(self: gen_qfontdialog_types.QFontDialog, ): bool =
+  fcQFontDialog_protectedbase_focusPreviousChild(self.h)
+
+proc sender*(self: gen_qfontdialog_types.QFontDialog, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQFontDialog_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qfontdialog_types.QFontDialog, ): cint =
+  fcQFontDialog_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qfontdialog_types.QFontDialog, signal: cstring): cint =
+  fcQFontDialog_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qfontdialog_types.QFontDialog, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQFontDialog_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc create*(T: type gen_qfontdialog_types.QFontDialog,
     parent: gen_qwidget_types.QWidget,

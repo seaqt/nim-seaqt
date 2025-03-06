@@ -117,6 +117,10 @@ proc fcQDtlsClientVerifier_virtualbase_childEvent(self: pointer, event: pointer)
 proc fcQDtlsClientVerifier_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QDtlsClientVerifier_virtualbase_customEvent".}
 proc fcQDtlsClientVerifier_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QDtlsClientVerifier_virtualbase_connectNotify".}
 proc fcQDtlsClientVerifier_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QDtlsClientVerifier_virtualbase_disconnectNotify".}
+proc fcQDtlsClientVerifier_protectedbase_sender(self: pointer, ): pointer {.importc: "QDtlsClientVerifier_protectedbase_sender".}
+proc fcQDtlsClientVerifier_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QDtlsClientVerifier_protectedbase_senderSignalIndex".}
+proc fcQDtlsClientVerifier_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QDtlsClientVerifier_protectedbase_receivers".}
+proc fcQDtlsClientVerifier_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QDtlsClientVerifier_protectedbase_isSignalConnected".}
 proc fcQDtlsClientVerifier_new(vtbl: pointer, ): ptr cQDtlsClientVerifier {.importc: "QDtlsClientVerifier_new".}
 proc fcQDtlsClientVerifier_new2(vtbl: pointer, parent: pointer): ptr cQDtlsClientVerifier {.importc: "QDtlsClientVerifier_new2".}
 proc fcQDtlsClientVerifier_staticMetaObject(): pointer {.importc: "QDtlsClientVerifier_staticMetaObject".}
@@ -182,6 +186,10 @@ proc fcQDtls_virtualbase_childEvent(self: pointer, event: pointer): void {.impor
 proc fcQDtls_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QDtls_virtualbase_customEvent".}
 proc fcQDtls_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QDtls_virtualbase_connectNotify".}
 proc fcQDtls_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QDtls_virtualbase_disconnectNotify".}
+proc fcQDtls_protectedbase_sender(self: pointer, ): pointer {.importc: "QDtls_protectedbase_sender".}
+proc fcQDtls_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QDtls_protectedbase_senderSignalIndex".}
+proc fcQDtls_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QDtls_protectedbase_receivers".}
+proc fcQDtls_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QDtls_protectedbase_isSignalConnected".}
 proc fcQDtls_new(vtbl: pointer, mode: cint): ptr cQDtls {.importc: "QDtls_new".}
 proc fcQDtls_new2(vtbl: pointer, mode: cint, parent: pointer): ptr cQDtls {.importc: "QDtls_new2".}
 proc fcQDtls_staticMetaObject(): pointer {.importc: "QDtls_staticMetaObject".}
@@ -361,6 +369,18 @@ proc miqt_exec_callback_cQDtlsClientVerifier_disconnectNotify(vtbl: pointer, sel
   let self = QDtlsClientVerifier(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
   vtbl[].disconnectNotify(self, slotval1)
+
+proc sender*(self: gen_qdtls_types.QDtlsClientVerifier, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQDtlsClientVerifier_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qdtls_types.QDtlsClientVerifier, ): cint =
+  fcQDtlsClientVerifier_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qdtls_types.QDtlsClientVerifier, signal: cstring): cint =
+  fcQDtlsClientVerifier_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qdtls_types.QDtlsClientVerifier, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQDtlsClientVerifier_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc create*(T: type gen_qdtls_types.QDtlsClientVerifier,
     vtbl: ref QDtlsClientVerifierVTable = nil): gen_qdtls_types.QDtlsClientVerifier =
@@ -713,6 +733,18 @@ proc miqt_exec_callback_cQDtls_disconnectNotify(vtbl: pointer, self: pointer, si
   let self = QDtls(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
   vtbl[].disconnectNotify(self, slotval1)
+
+proc sender*(self: gen_qdtls_types.QDtls, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQDtls_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qdtls_types.QDtls, ): cint =
+  fcQDtls_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qdtls_types.QDtls, signal: cstring): cint =
+  fcQDtls_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qdtls_types.QDtls, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQDtls_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc create*(T: type gen_qdtls_types.QDtls,
     mode: cint,

@@ -83,6 +83,10 @@ proc fcQQuickTextDocument_virtualbase_childEvent(self: pointer, event: pointer):
 proc fcQQuickTextDocument_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QQuickTextDocument_virtualbase_customEvent".}
 proc fcQQuickTextDocument_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QQuickTextDocument_virtualbase_connectNotify".}
 proc fcQQuickTextDocument_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QQuickTextDocument_virtualbase_disconnectNotify".}
+proc fcQQuickTextDocument_protectedbase_sender(self: pointer, ): pointer {.importc: "QQuickTextDocument_protectedbase_sender".}
+proc fcQQuickTextDocument_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QQuickTextDocument_protectedbase_senderSignalIndex".}
+proc fcQQuickTextDocument_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QQuickTextDocument_protectedbase_receivers".}
+proc fcQQuickTextDocument_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QQuickTextDocument_protectedbase_isSignalConnected".}
 proc fcQQuickTextDocument_new(vtbl: pointer, parent: pointer): ptr cQQuickTextDocument {.importc: "QQuickTextDocument_new".}
 proc fcQQuickTextDocument_staticMetaObject(): pointer {.importc: "QQuickTextDocument_staticMetaObject".}
 proc fcQQuickTextDocument_delete(self: pointer) {.importc: "QQuickTextDocument_delete".}
@@ -235,6 +239,18 @@ proc miqt_exec_callback_cQQuickTextDocument_disconnectNotify(vtbl: pointer, self
   let self = QQuickTextDocument(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
   vtbl[].disconnectNotify(self, slotval1)
+
+proc sender*(self: gen_qquicktextdocument_types.QQuickTextDocument, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQQuickTextDocument_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qquicktextdocument_types.QQuickTextDocument, ): cint =
+  fcQQuickTextDocument_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qquicktextdocument_types.QQuickTextDocument, signal: cstring): cint =
+  fcQQuickTextDocument_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qquicktextdocument_types.QQuickTextDocument, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQQuickTextDocument_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc create*(T: type gen_qquicktextdocument_types.QQuickTextDocument,
     parent: gen_qquickitem_types.QQuickItem,

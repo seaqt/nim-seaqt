@@ -82,6 +82,10 @@ proc fcQObjectCleanupHandler_virtualbase_childEvent(self: pointer, event: pointe
 proc fcQObjectCleanupHandler_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QObjectCleanupHandler_virtualbase_customEvent".}
 proc fcQObjectCleanupHandler_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QObjectCleanupHandler_virtualbase_connectNotify".}
 proc fcQObjectCleanupHandler_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QObjectCleanupHandler_virtualbase_disconnectNotify".}
+proc fcQObjectCleanupHandler_protectedbase_sender(self: pointer, ): pointer {.importc: "QObjectCleanupHandler_protectedbase_sender".}
+proc fcQObjectCleanupHandler_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QObjectCleanupHandler_protectedbase_senderSignalIndex".}
+proc fcQObjectCleanupHandler_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QObjectCleanupHandler_protectedbase_receivers".}
+proc fcQObjectCleanupHandler_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QObjectCleanupHandler_protectedbase_isSignalConnected".}
 proc fcQObjectCleanupHandler_new(vtbl: pointer, ): ptr cQObjectCleanupHandler {.importc: "QObjectCleanupHandler_new".}
 proc fcQObjectCleanupHandler_staticMetaObject(): pointer {.importc: "QObjectCleanupHandler_staticMetaObject".}
 proc fcQObjectCleanupHandler_delete(self: pointer) {.importc: "QObjectCleanupHandler_delete".}
@@ -243,6 +247,18 @@ proc miqt_exec_callback_cQObjectCleanupHandler_disconnectNotify(vtbl: pointer, s
   let self = QObjectCleanupHandler(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
   vtbl[].disconnectNotify(self, slotval1)
+
+proc sender*(self: gen_qobjectcleanuphandler_types.QObjectCleanupHandler, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQObjectCleanupHandler_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qobjectcleanuphandler_types.QObjectCleanupHandler, ): cint =
+  fcQObjectCleanupHandler_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qobjectcleanuphandler_types.QObjectCleanupHandler, signal: cstring): cint =
+  fcQObjectCleanupHandler_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qobjectcleanuphandler_types.QObjectCleanupHandler, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQObjectCleanupHandler_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc create*(T: type gen_qobjectcleanuphandler_types.QObjectCleanupHandler,
     vtbl: ref QObjectCleanupHandlerVTable = nil): gen_qobjectcleanuphandler_types.QObjectCleanupHandler =

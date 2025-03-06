@@ -252,10 +252,10 @@ public:
 	friend void QSequentialAnimationGroup_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
 
 	// Wrappers to allow calling protected methods:
-	friend QObject* QSequentialAnimationGroup_protectedbase_sender(bool* _dynamic_cast_ok, const void* self);
-	friend int QSequentialAnimationGroup_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
-	friend int QSequentialAnimationGroup_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
-	friend bool QSequentialAnimationGroup_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+	friend QObject* QSequentialAnimationGroup_protectedbase_sender(const void* self);
+	friend int QSequentialAnimationGroup_protectedbase_senderSignalIndex(const void* self);
+	friend int QSequentialAnimationGroup_protectedbase_receivers(const void* self, const char* signal);
+	friend bool QSequentialAnimationGroup_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
 };
 
 QSequentialAnimationGroup* QSequentialAnimationGroup_new(struct QSequentialAnimationGroup_VTable* vtbl) {
@@ -432,53 +432,29 @@ void QSequentialAnimationGroup_virtualbase_disconnectNotify(void* self, QMetaMet
 }
 
 const QMetaObject* QSequentialAnimationGroup_staticMetaObject() { return &QSequentialAnimationGroup::staticMetaObject; }
-QObject* QSequentialAnimationGroup_protectedbase_sender(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQSequentialAnimationGroup* self_cast = dynamic_cast<VirtualQSequentialAnimationGroup*>( (QSequentialAnimationGroup*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return nullptr;
-	}
-	
-	*_dynamic_cast_ok = true;
+QObject* QSequentialAnimationGroup_protectedbase_sender(const void* self) {
+	VirtualQSequentialAnimationGroup* self_cast = static_cast<VirtualQSequentialAnimationGroup*>( (QSequentialAnimationGroup*)(self) );
 	
 	return self_cast->sender();
 
 }
 
-int QSequentialAnimationGroup_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQSequentialAnimationGroup* self_cast = dynamic_cast<VirtualQSequentialAnimationGroup*>( (QSequentialAnimationGroup*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return 0;
-	}
-	
-	*_dynamic_cast_ok = true;
+int QSequentialAnimationGroup_protectedbase_senderSignalIndex(const void* self) {
+	VirtualQSequentialAnimationGroup* self_cast = static_cast<VirtualQSequentialAnimationGroup*>( (QSequentialAnimationGroup*)(self) );
 	
 	return self_cast->senderSignalIndex();
 
 }
 
-int QSequentialAnimationGroup_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal) {
-	VirtualQSequentialAnimationGroup* self_cast = dynamic_cast<VirtualQSequentialAnimationGroup*>( (QSequentialAnimationGroup*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return 0;
-	}
-	
-	*_dynamic_cast_ok = true;
+int QSequentialAnimationGroup_protectedbase_receivers(const void* self, const char* signal) {
+	VirtualQSequentialAnimationGroup* self_cast = static_cast<VirtualQSequentialAnimationGroup*>( (QSequentialAnimationGroup*)(self) );
 	
 	return self_cast->receivers(signal);
 
 }
 
-bool QSequentialAnimationGroup_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal) {
-	VirtualQSequentialAnimationGroup* self_cast = dynamic_cast<VirtualQSequentialAnimationGroup*>( (QSequentialAnimationGroup*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return false;
-	}
-	
-	*_dynamic_cast_ok = true;
+bool QSequentialAnimationGroup_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal) {
+	VirtualQSequentialAnimationGroup* self_cast = static_cast<VirtualQSequentialAnimationGroup*>( (QSequentialAnimationGroup*)(self) );
 	
 	return self_cast->isSignalConnected(*signal);
 

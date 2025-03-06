@@ -224,10 +224,10 @@ public:
 	friend void QGraphicsItemAnimation_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
 
 	// Wrappers to allow calling protected methods:
-	friend QObject* QGraphicsItemAnimation_protectedbase_sender(bool* _dynamic_cast_ok, const void* self);
-	friend int QGraphicsItemAnimation_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
-	friend int QGraphicsItemAnimation_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
-	friend bool QGraphicsItemAnimation_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+	friend QObject* QGraphicsItemAnimation_protectedbase_sender(const void* self);
+	friend int QGraphicsItemAnimation_protectedbase_senderSignalIndex(const void* self);
+	friend int QGraphicsItemAnimation_protectedbase_receivers(const void* self, const char* signal);
+	friend bool QGraphicsItemAnimation_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
 };
 
 QGraphicsItemAnimation* QGraphicsItemAnimation_new(struct QGraphicsItemAnimation_VTable* vtbl) {
@@ -562,53 +562,29 @@ void QGraphicsItemAnimation_virtualbase_disconnectNotify(void* self, QMetaMethod
 }
 
 const QMetaObject* QGraphicsItemAnimation_staticMetaObject() { return &QGraphicsItemAnimation::staticMetaObject; }
-QObject* QGraphicsItemAnimation_protectedbase_sender(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQGraphicsItemAnimation* self_cast = dynamic_cast<VirtualQGraphicsItemAnimation*>( (QGraphicsItemAnimation*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return nullptr;
-	}
-	
-	*_dynamic_cast_ok = true;
+QObject* QGraphicsItemAnimation_protectedbase_sender(const void* self) {
+	VirtualQGraphicsItemAnimation* self_cast = static_cast<VirtualQGraphicsItemAnimation*>( (QGraphicsItemAnimation*)(self) );
 	
 	return self_cast->sender();
 
 }
 
-int QGraphicsItemAnimation_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQGraphicsItemAnimation* self_cast = dynamic_cast<VirtualQGraphicsItemAnimation*>( (QGraphicsItemAnimation*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return 0;
-	}
-	
-	*_dynamic_cast_ok = true;
+int QGraphicsItemAnimation_protectedbase_senderSignalIndex(const void* self) {
+	VirtualQGraphicsItemAnimation* self_cast = static_cast<VirtualQGraphicsItemAnimation*>( (QGraphicsItemAnimation*)(self) );
 	
 	return self_cast->senderSignalIndex();
 
 }
 
-int QGraphicsItemAnimation_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal) {
-	VirtualQGraphicsItemAnimation* self_cast = dynamic_cast<VirtualQGraphicsItemAnimation*>( (QGraphicsItemAnimation*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return 0;
-	}
-	
-	*_dynamic_cast_ok = true;
+int QGraphicsItemAnimation_protectedbase_receivers(const void* self, const char* signal) {
+	VirtualQGraphicsItemAnimation* self_cast = static_cast<VirtualQGraphicsItemAnimation*>( (QGraphicsItemAnimation*)(self) );
 	
 	return self_cast->receivers(signal);
 
 }
 
-bool QGraphicsItemAnimation_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal) {
-	VirtualQGraphicsItemAnimation* self_cast = dynamic_cast<VirtualQGraphicsItemAnimation*>( (QGraphicsItemAnimation*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return false;
-	}
-	
-	*_dynamic_cast_ok = true;
+bool QGraphicsItemAnimation_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal) {
+	VirtualQGraphicsItemAnimation* self_cast = static_cast<VirtualQGraphicsItemAnimation*>( (QGraphicsItemAnimation*)(self) );
 	
 	return self_cast->isSignalConnected(*signal);
 

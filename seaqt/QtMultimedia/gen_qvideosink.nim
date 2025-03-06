@@ -93,6 +93,10 @@ proc fcQVideoSink_virtualbase_childEvent(self: pointer, event: pointer): void {.
 proc fcQVideoSink_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QVideoSink_virtualbase_customEvent".}
 proc fcQVideoSink_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QVideoSink_virtualbase_connectNotify".}
 proc fcQVideoSink_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QVideoSink_virtualbase_disconnectNotify".}
+proc fcQVideoSink_protectedbase_sender(self: pointer, ): pointer {.importc: "QVideoSink_protectedbase_sender".}
+proc fcQVideoSink_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QVideoSink_protectedbase_senderSignalIndex".}
+proc fcQVideoSink_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QVideoSink_protectedbase_receivers".}
+proc fcQVideoSink_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QVideoSink_protectedbase_isSignalConnected".}
 proc fcQVideoSink_new(vtbl: pointer, ): ptr cQVideoSink {.importc: "QVideoSink_new".}
 proc fcQVideoSink_new2(vtbl: pointer, parent: pointer): ptr cQVideoSink {.importc: "QVideoSink_new2".}
 proc fcQVideoSink_staticMetaObject(): pointer {.importc: "QVideoSink_staticMetaObject".}
@@ -322,6 +326,18 @@ proc miqt_exec_callback_cQVideoSink_disconnectNotify(vtbl: pointer, self: pointe
   let self = QVideoSink(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
   vtbl[].disconnectNotify(self, slotval1)
+
+proc sender*(self: gen_qvideosink_types.QVideoSink, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQVideoSink_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qvideosink_types.QVideoSink, ): cint =
+  fcQVideoSink_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qvideosink_types.QVideoSink, signal: cstring): cint =
+  fcQVideoSink_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qvideosink_types.QVideoSink, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQVideoSink_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc create*(T: type gen_qvideosink_types.QVideoSink,
     vtbl: ref QVideoSinkVTable = nil): gen_qvideosink_types.QVideoSink =

@@ -187,9 +187,9 @@ public:
 	friend bool QGraphicsLinearLayout_virtualbase_isEmpty(const void* self);
 
 	// Wrappers to allow calling protected methods:
-	friend void QGraphicsLinearLayout_protectedbase_addChildLayoutItem(bool* _dynamic_cast_ok, void* self, QGraphicsLayoutItem* layoutItem);
-	friend void QGraphicsLinearLayout_protectedbase_setGraphicsItem(bool* _dynamic_cast_ok, void* self, QGraphicsItem* item);
-	friend void QGraphicsLinearLayout_protectedbase_setOwnedByLayout(bool* _dynamic_cast_ok, void* self, bool ownedByLayout);
+	friend void QGraphicsLinearLayout_protectedbase_addChildLayoutItem(void* self, QGraphicsLayoutItem* layoutItem);
+	friend void QGraphicsLinearLayout_protectedbase_setGraphicsItem(void* self, QGraphicsItem* item);
+	friend void QGraphicsLinearLayout_protectedbase_setOwnedByLayout(void* self, bool ownedByLayout);
 };
 
 QGraphicsLinearLayout* QGraphicsLinearLayout_new(struct QGraphicsLinearLayout_VTable* vtbl) {
@@ -376,40 +376,22 @@ bool QGraphicsLinearLayout_virtualbase_isEmpty(const void* self) {
 
 }
 
-void QGraphicsLinearLayout_protectedbase_addChildLayoutItem(bool* _dynamic_cast_ok, void* self, QGraphicsLayoutItem* layoutItem) {
-	VirtualQGraphicsLinearLayout* self_cast = dynamic_cast<VirtualQGraphicsLinearLayout*>( (QGraphicsLinearLayout*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QGraphicsLinearLayout_protectedbase_addChildLayoutItem(void* self, QGraphicsLayoutItem* layoutItem) {
+	VirtualQGraphicsLinearLayout* self_cast = static_cast<VirtualQGraphicsLinearLayout*>( (QGraphicsLinearLayout*)(self) );
 	
 	self_cast->addChildLayoutItem(layoutItem);
 
 }
 
-void QGraphicsLinearLayout_protectedbase_setGraphicsItem(bool* _dynamic_cast_ok, void* self, QGraphicsItem* item) {
-	VirtualQGraphicsLinearLayout* self_cast = dynamic_cast<VirtualQGraphicsLinearLayout*>( (QGraphicsLinearLayout*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QGraphicsLinearLayout_protectedbase_setGraphicsItem(void* self, QGraphicsItem* item) {
+	VirtualQGraphicsLinearLayout* self_cast = static_cast<VirtualQGraphicsLinearLayout*>( (QGraphicsLinearLayout*)(self) );
 	
 	self_cast->setGraphicsItem(item);
 
 }
 
-void QGraphicsLinearLayout_protectedbase_setOwnedByLayout(bool* _dynamic_cast_ok, void* self, bool ownedByLayout) {
-	VirtualQGraphicsLinearLayout* self_cast = dynamic_cast<VirtualQGraphicsLinearLayout*>( (QGraphicsLinearLayout*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QGraphicsLinearLayout_protectedbase_setOwnedByLayout(void* self, bool ownedByLayout) {
+	VirtualQGraphicsLinearLayout* self_cast = static_cast<VirtualQGraphicsLinearLayout*>( (QGraphicsLinearLayout*)(self) );
 	
 	self_cast->setOwnedByLayout(ownedByLayout);
 

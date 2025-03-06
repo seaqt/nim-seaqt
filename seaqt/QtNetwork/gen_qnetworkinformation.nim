@@ -61,9 +61,11 @@ import ./gen_qnetworkinformation_types
 export gen_qnetworkinformation_types
 
 import
+  ../QtCore/gen_qmetaobject_types,
   ../QtCore/gen_qobject,
   ../QtCore/gen_qobjectdefs_types
 export
+  gen_qmetaobject_types,
   gen_qobject,
   gen_qobjectdefs_types
 
@@ -95,6 +97,10 @@ proc fcQNetworkInformation_isMeteredChanged(self: pointer, isMetered: bool): voi
 proc fcQNetworkInformation_connect_isMeteredChanged(self: pointer, slot: int, callback: proc (slot: int, isMetered: bool) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QNetworkInformation_connect_isMeteredChanged".}
 proc fcQNetworkInformation_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QNetworkInformation_tr2".}
 proc fcQNetworkInformation_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QNetworkInformation_tr3".}
+proc fcQNetworkInformation_protectedbase_sender(self: pointer, ): pointer {.importc: "QNetworkInformation_protectedbase_sender".}
+proc fcQNetworkInformation_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QNetworkInformation_protectedbase_senderSignalIndex".}
+proc fcQNetworkInformation_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QNetworkInformation_protectedbase_receivers".}
+proc fcQNetworkInformation_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QNetworkInformation_protectedbase_isSignalConnected".}
 proc fcQNetworkInformation_staticMetaObject(): pointer {.importc: "QNetworkInformation_staticMetaObject".}
 
 proc metaObject*(self: gen_qnetworkinformation_types.QNetworkInformation, ): gen_qobjectdefs_types.QMetaObject =
@@ -250,6 +256,18 @@ proc tr*(_: type gen_qnetworkinformation_types.QNetworkInformation, s: cstring, 
   let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
   c_free(v_ms.data)
   vx_ret
+
+proc sender*(self: gen_qnetworkinformation_types.QNetworkInformation, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQNetworkInformation_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qnetworkinformation_types.QNetworkInformation, ): cint =
+  fcQNetworkInformation_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qnetworkinformation_types.QNetworkInformation, signal: cstring): cint =
+  fcQNetworkInformation_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qnetworkinformation_types.QNetworkInformation, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQNetworkInformation_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc staticMetaObject*(_: type gen_qnetworkinformation_types.QNetworkInformation): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQNetworkInformation_staticMetaObject())

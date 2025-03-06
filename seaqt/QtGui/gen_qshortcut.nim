@@ -98,6 +98,10 @@ proc fcQShortcut_virtualbase_childEvent(self: pointer, event: pointer): void {.i
 proc fcQShortcut_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QShortcut_virtualbase_customEvent".}
 proc fcQShortcut_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QShortcut_virtualbase_connectNotify".}
 proc fcQShortcut_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QShortcut_virtualbase_disconnectNotify".}
+proc fcQShortcut_protectedbase_sender(self: pointer, ): pointer {.importc: "QShortcut_protectedbase_sender".}
+proc fcQShortcut_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QShortcut_protectedbase_senderSignalIndex".}
+proc fcQShortcut_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QShortcut_protectedbase_receivers".}
+proc fcQShortcut_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QShortcut_protectedbase_isSignalConnected".}
 proc fcQShortcut_new(vtbl: pointer, parent: pointer): ptr cQShortcut {.importc: "QShortcut_new".}
 proc fcQShortcut_new2(vtbl: pointer, key: pointer, parent: pointer): ptr cQShortcut {.importc: "QShortcut_new2".}
 proc fcQShortcut_new3(vtbl: pointer, key: cint, parent: pointer): ptr cQShortcut {.importc: "QShortcut_new3".}
@@ -345,6 +349,18 @@ proc miqt_exec_callback_cQShortcut_disconnectNotify(vtbl: pointer, self: pointer
   let self = QShortcut(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
   vtbl[].disconnectNotify(self, slotval1)
+
+proc sender*(self: gen_qshortcut_types.QShortcut, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQShortcut_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qshortcut_types.QShortcut, ): cint =
+  fcQShortcut_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qshortcut_types.QShortcut, signal: cstring): cint =
+  fcQShortcut_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qshortcut_types.QShortcut, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQShortcut_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc create*(T: type gen_qshortcut_types.QShortcut,
     parent: gen_qobject_types.QObject,

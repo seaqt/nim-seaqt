@@ -45,12 +45,14 @@ import ./gen_qwebenginenewwindowrequest_types
 export gen_qwebenginenewwindowrequest_types
 
 import
+  ../QtCore/gen_qmetaobject_types,
   ../QtCore/gen_qobject,
   ../QtCore/gen_qobjectdefs_types,
   ../QtCore/gen_qrect_types,
   ../QtCore/gen_qurl_types,
   ./gen_qwebenginepage_types
 export
+  gen_qmetaobject_types,
   gen_qobject,
   gen_qobjectdefs_types,
   gen_qrect_types,
@@ -70,6 +72,10 @@ proc fcQWebEngineNewWindowRequest_isUserInitiated(self: pointer, ): bool {.impor
 proc fcQWebEngineNewWindowRequest_openIn(self: pointer, param1: pointer): void {.importc: "QWebEngineNewWindowRequest_openIn".}
 proc fcQWebEngineNewWindowRequest_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QWebEngineNewWindowRequest_tr2".}
 proc fcQWebEngineNewWindowRequest_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QWebEngineNewWindowRequest_tr3".}
+proc fcQWebEngineNewWindowRequest_protectedbase_sender(self: pointer, ): pointer {.importc: "QWebEngineNewWindowRequest_protectedbase_sender".}
+proc fcQWebEngineNewWindowRequest_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QWebEngineNewWindowRequest_protectedbase_senderSignalIndex".}
+proc fcQWebEngineNewWindowRequest_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QWebEngineNewWindowRequest_protectedbase_receivers".}
+proc fcQWebEngineNewWindowRequest_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QWebEngineNewWindowRequest_protectedbase_isSignalConnected".}
 proc fcQWebEngineNewWindowRequest_staticMetaObject(): pointer {.importc: "QWebEngineNewWindowRequest_staticMetaObject".}
 proc fcQWebEngineNewWindowRequest_delete(self: pointer) {.importc: "QWebEngineNewWindowRequest_delete".}
 
@@ -114,6 +120,18 @@ proc tr*(_: type gen_qwebenginenewwindowrequest_types.QWebEngineNewWindowRequest
   let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
   c_free(v_ms.data)
   vx_ret
+
+proc sender*(self: gen_qwebenginenewwindowrequest_types.QWebEngineNewWindowRequest, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQWebEngineNewWindowRequest_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qwebenginenewwindowrequest_types.QWebEngineNewWindowRequest, ): cint =
+  fcQWebEngineNewWindowRequest_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qwebenginenewwindowrequest_types.QWebEngineNewWindowRequest, signal: cstring): cint =
+  fcQWebEngineNewWindowRequest_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qwebenginenewwindowrequest_types.QWebEngineNewWindowRequest, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQWebEngineNewWindowRequest_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc staticMetaObject*(_: type gen_qwebenginenewwindowrequest_types.QWebEngineNewWindowRequest): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQWebEngineNewWindowRequest_staticMetaObject())

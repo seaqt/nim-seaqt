@@ -166,6 +166,10 @@ proc fcQCommonStyle_virtualbase_childEvent(self: pointer, event: pointer): void 
 proc fcQCommonStyle_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QCommonStyle_virtualbase_customEvent".}
 proc fcQCommonStyle_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QCommonStyle_virtualbase_connectNotify".}
 proc fcQCommonStyle_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QCommonStyle_virtualbase_disconnectNotify".}
+proc fcQCommonStyle_protectedbase_sender(self: pointer, ): pointer {.importc: "QCommonStyle_protectedbase_sender".}
+proc fcQCommonStyle_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QCommonStyle_protectedbase_senderSignalIndex".}
+proc fcQCommonStyle_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QCommonStyle_protectedbase_receivers".}
+proc fcQCommonStyle_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QCommonStyle_protectedbase_isSignalConnected".}
 proc fcQCommonStyle_new(vtbl: pointer, ): ptr cQCommonStyle {.importc: "QCommonStyle_new".}
 proc fcQCommonStyle_staticMetaObject(): pointer {.importc: "QCommonStyle_staticMetaObject".}
 proc fcQCommonStyle_delete(self: pointer) {.importc: "QCommonStyle_delete".}
@@ -690,6 +694,18 @@ proc miqt_exec_callback_cQCommonStyle_disconnectNotify(vtbl: pointer, self: poin
   let self = QCommonStyle(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
   vtbl[].disconnectNotify(self, slotval1)
+
+proc sender*(self: gen_qcommonstyle_types.QCommonStyle, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQCommonStyle_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qcommonstyle_types.QCommonStyle, ): cint =
+  fcQCommonStyle_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qcommonstyle_types.QCommonStyle, signal: cstring): cint =
+  fcQCommonStyle_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qcommonstyle_types.QCommonStyle, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQCommonStyle_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc create*(T: type gen_qcommonstyle_types.QCommonStyle,
     vtbl: ref QCommonStyleVTable = nil): gen_qcommonstyle_types.QCommonStyle =

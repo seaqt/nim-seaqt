@@ -2023,33 +2023,33 @@ public:
 	friend void QListWidget_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
 
 	// Wrappers to allow calling protected methods:
-	friend void QListWidget_protectedbase_resizeContents(bool* _dynamic_cast_ok, void* self, int width, int height);
-	friend QSize* QListWidget_protectedbase_contentsSize(bool* _dynamic_cast_ok, const void* self);
-	friend QRect* QListWidget_protectedbase_rectForIndex(bool* _dynamic_cast_ok, const void* self, QModelIndex* index);
-	friend void QListWidget_protectedbase_setPositionForIndex(bool* _dynamic_cast_ok, void* self, QPoint* position, QModelIndex* index);
-	friend int QListWidget_protectedbase_state(bool* _dynamic_cast_ok, const void* self);
-	friend void QListWidget_protectedbase_setState(bool* _dynamic_cast_ok, void* self, int state);
-	friend void QListWidget_protectedbase_scheduleDelayedItemsLayout(bool* _dynamic_cast_ok, void* self);
-	friend void QListWidget_protectedbase_executeDelayedItemsLayout(bool* _dynamic_cast_ok, void* self);
-	friend void QListWidget_protectedbase_setDirtyRegion(bool* _dynamic_cast_ok, void* self, QRegion* region);
-	friend void QListWidget_protectedbase_scrollDirtyRegion(bool* _dynamic_cast_ok, void* self, int dx, int dy);
-	friend QPoint* QListWidget_protectedbase_dirtyRegionOffset(bool* _dynamic_cast_ok, const void* self);
-	friend void QListWidget_protectedbase_startAutoScroll(bool* _dynamic_cast_ok, void* self);
-	friend void QListWidget_protectedbase_stopAutoScroll(bool* _dynamic_cast_ok, void* self);
-	friend void QListWidget_protectedbase_doAutoScroll(bool* _dynamic_cast_ok, void* self);
-	friend int QListWidget_protectedbase_dropIndicatorPosition(bool* _dynamic_cast_ok, const void* self);
-	friend void QListWidget_protectedbase_setViewportMargins(bool* _dynamic_cast_ok, void* self, int left, int top, int right, int bottom);
-	friend QMargins* QListWidget_protectedbase_viewportMargins(bool* _dynamic_cast_ok, const void* self);
-	friend void QListWidget_protectedbase_drawFrame(bool* _dynamic_cast_ok, void* self, QPainter* param1);
-	friend void QListWidget_protectedbase_updateMicroFocus(bool* _dynamic_cast_ok, void* self);
-	friend void QListWidget_protectedbase_create(bool* _dynamic_cast_ok, void* self);
-	friend void QListWidget_protectedbase_destroy(bool* _dynamic_cast_ok, void* self);
-	friend bool QListWidget_protectedbase_focusNextChild(bool* _dynamic_cast_ok, void* self);
-	friend bool QListWidget_protectedbase_focusPreviousChild(bool* _dynamic_cast_ok, void* self);
-	friend QObject* QListWidget_protectedbase_sender(bool* _dynamic_cast_ok, const void* self);
-	friend int QListWidget_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
-	friend int QListWidget_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
-	friend bool QListWidget_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+	friend void QListWidget_protectedbase_resizeContents(void* self, int width, int height);
+	friend QSize* QListWidget_protectedbase_contentsSize(const void* self);
+	friend QRect* QListWidget_protectedbase_rectForIndex(const void* self, QModelIndex* index);
+	friend void QListWidget_protectedbase_setPositionForIndex(void* self, QPoint* position, QModelIndex* index);
+	friend int QListWidget_protectedbase_state(const void* self);
+	friend void QListWidget_protectedbase_setState(void* self, int state);
+	friend void QListWidget_protectedbase_scheduleDelayedItemsLayout(void* self);
+	friend void QListWidget_protectedbase_executeDelayedItemsLayout(void* self);
+	friend void QListWidget_protectedbase_setDirtyRegion(void* self, QRegion* region);
+	friend void QListWidget_protectedbase_scrollDirtyRegion(void* self, int dx, int dy);
+	friend QPoint* QListWidget_protectedbase_dirtyRegionOffset(const void* self);
+	friend void QListWidget_protectedbase_startAutoScroll(void* self);
+	friend void QListWidget_protectedbase_stopAutoScroll(void* self);
+	friend void QListWidget_protectedbase_doAutoScroll(void* self);
+	friend int QListWidget_protectedbase_dropIndicatorPosition(const void* self);
+	friend void QListWidget_protectedbase_setViewportMargins(void* self, int left, int top, int right, int bottom);
+	friend QMargins* QListWidget_protectedbase_viewportMargins(const void* self);
+	friend void QListWidget_protectedbase_drawFrame(void* self, QPainter* param1);
+	friend void QListWidget_protectedbase_updateMicroFocus(void* self);
+	friend void QListWidget_protectedbase_create(void* self);
+	friend void QListWidget_protectedbase_destroy(void* self);
+	friend bool QListWidget_protectedbase_focusNextChild(void* self);
+	friend bool QListWidget_protectedbase_focusPreviousChild(void* self);
+	friend QObject* QListWidget_protectedbase_sender(const void* self);
+	friend int QListWidget_protectedbase_senderSignalIndex(const void* self);
+	friend int QListWidget_protectedbase_receivers(const void* self, const char* signal);
+	friend bool QListWidget_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
 };
 
 QListWidget* QListWidget_new(struct QListWidget_VTable* vtbl, QWidget* parent) {
@@ -3101,354 +3101,192 @@ void QListWidget_virtualbase_disconnectNotify(void* self, QMetaMethod* signal) {
 }
 
 const QMetaObject* QListWidget_staticMetaObject() { return &QListWidget::staticMetaObject; }
-void QListWidget_protectedbase_resizeContents(bool* _dynamic_cast_ok, void* self, int width, int height) {
-	VirtualQListWidget* self_cast = dynamic_cast<VirtualQListWidget*>( (QListWidget*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QListWidget_protectedbase_resizeContents(void* self, int width, int height) {
+	VirtualQListWidget* self_cast = static_cast<VirtualQListWidget*>( (QListWidget*)(self) );
 	
 	self_cast->resizeContents(static_cast<int>(width), static_cast<int>(height));
 
 }
 
-QSize* QListWidget_protectedbase_contentsSize(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQListWidget* self_cast = dynamic_cast<VirtualQListWidget*>( (QListWidget*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return nullptr;
-	}
-	
-	*_dynamic_cast_ok = true;
+QSize* QListWidget_protectedbase_contentsSize(const void* self) {
+	VirtualQListWidget* self_cast = static_cast<VirtualQListWidget*>( (QListWidget*)(self) );
 	
 	return new QSize(self_cast->contentsSize());
 
 }
 
-QRect* QListWidget_protectedbase_rectForIndex(bool* _dynamic_cast_ok, const void* self, QModelIndex* index) {
-	VirtualQListWidget* self_cast = dynamic_cast<VirtualQListWidget*>( (QListWidget*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return nullptr;
-	}
-	
-	*_dynamic_cast_ok = true;
+QRect* QListWidget_protectedbase_rectForIndex(const void* self, QModelIndex* index) {
+	VirtualQListWidget* self_cast = static_cast<VirtualQListWidget*>( (QListWidget*)(self) );
 	
 	return new QRect(self_cast->rectForIndex(*index));
 
 }
 
-void QListWidget_protectedbase_setPositionForIndex(bool* _dynamic_cast_ok, void* self, QPoint* position, QModelIndex* index) {
-	VirtualQListWidget* self_cast = dynamic_cast<VirtualQListWidget*>( (QListWidget*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QListWidget_protectedbase_setPositionForIndex(void* self, QPoint* position, QModelIndex* index) {
+	VirtualQListWidget* self_cast = static_cast<VirtualQListWidget*>( (QListWidget*)(self) );
 	
 	self_cast->setPositionForIndex(*position, *index);
 
 }
 
-int QListWidget_protectedbase_state(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQListWidget* self_cast = dynamic_cast<VirtualQListWidget*>( (QListWidget*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return (int)(0);
-	}
-	
-	*_dynamic_cast_ok = true;
+int QListWidget_protectedbase_state(const void* self) {
+	VirtualQListWidget* self_cast = static_cast<VirtualQListWidget*>( (QListWidget*)(self) );
 	
 	VirtualQListWidget::State _ret = self_cast->state();
 	return static_cast<int>(_ret);
 
 }
 
-void QListWidget_protectedbase_setState(bool* _dynamic_cast_ok, void* self, int state) {
-	VirtualQListWidget* self_cast = dynamic_cast<VirtualQListWidget*>( (QListWidget*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QListWidget_protectedbase_setState(void* self, int state) {
+	VirtualQListWidget* self_cast = static_cast<VirtualQListWidget*>( (QListWidget*)(self) );
 	
 	self_cast->setState(static_cast<VirtualQListWidget::State>(state));
 
 }
 
-void QListWidget_protectedbase_scheduleDelayedItemsLayout(bool* _dynamic_cast_ok, void* self) {
-	VirtualQListWidget* self_cast = dynamic_cast<VirtualQListWidget*>( (QListWidget*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QListWidget_protectedbase_scheduleDelayedItemsLayout(void* self) {
+	VirtualQListWidget* self_cast = static_cast<VirtualQListWidget*>( (QListWidget*)(self) );
 	
 	self_cast->scheduleDelayedItemsLayout();
 
 }
 
-void QListWidget_protectedbase_executeDelayedItemsLayout(bool* _dynamic_cast_ok, void* self) {
-	VirtualQListWidget* self_cast = dynamic_cast<VirtualQListWidget*>( (QListWidget*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QListWidget_protectedbase_executeDelayedItemsLayout(void* self) {
+	VirtualQListWidget* self_cast = static_cast<VirtualQListWidget*>( (QListWidget*)(self) );
 	
 	self_cast->executeDelayedItemsLayout();
 
 }
 
-void QListWidget_protectedbase_setDirtyRegion(bool* _dynamic_cast_ok, void* self, QRegion* region) {
-	VirtualQListWidget* self_cast = dynamic_cast<VirtualQListWidget*>( (QListWidget*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QListWidget_protectedbase_setDirtyRegion(void* self, QRegion* region) {
+	VirtualQListWidget* self_cast = static_cast<VirtualQListWidget*>( (QListWidget*)(self) );
 	
 	self_cast->setDirtyRegion(*region);
 
 }
 
-void QListWidget_protectedbase_scrollDirtyRegion(bool* _dynamic_cast_ok, void* self, int dx, int dy) {
-	VirtualQListWidget* self_cast = dynamic_cast<VirtualQListWidget*>( (QListWidget*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QListWidget_protectedbase_scrollDirtyRegion(void* self, int dx, int dy) {
+	VirtualQListWidget* self_cast = static_cast<VirtualQListWidget*>( (QListWidget*)(self) );
 	
 	self_cast->scrollDirtyRegion(static_cast<int>(dx), static_cast<int>(dy));
 
 }
 
-QPoint* QListWidget_protectedbase_dirtyRegionOffset(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQListWidget* self_cast = dynamic_cast<VirtualQListWidget*>( (QListWidget*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return nullptr;
-	}
-	
-	*_dynamic_cast_ok = true;
+QPoint* QListWidget_protectedbase_dirtyRegionOffset(const void* self) {
+	VirtualQListWidget* self_cast = static_cast<VirtualQListWidget*>( (QListWidget*)(self) );
 	
 	return new QPoint(self_cast->dirtyRegionOffset());
 
 }
 
-void QListWidget_protectedbase_startAutoScroll(bool* _dynamic_cast_ok, void* self) {
-	VirtualQListWidget* self_cast = dynamic_cast<VirtualQListWidget*>( (QListWidget*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QListWidget_protectedbase_startAutoScroll(void* self) {
+	VirtualQListWidget* self_cast = static_cast<VirtualQListWidget*>( (QListWidget*)(self) );
 	
 	self_cast->startAutoScroll();
 
 }
 
-void QListWidget_protectedbase_stopAutoScroll(bool* _dynamic_cast_ok, void* self) {
-	VirtualQListWidget* self_cast = dynamic_cast<VirtualQListWidget*>( (QListWidget*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QListWidget_protectedbase_stopAutoScroll(void* self) {
+	VirtualQListWidget* self_cast = static_cast<VirtualQListWidget*>( (QListWidget*)(self) );
 	
 	self_cast->stopAutoScroll();
 
 }
 
-void QListWidget_protectedbase_doAutoScroll(bool* _dynamic_cast_ok, void* self) {
-	VirtualQListWidget* self_cast = dynamic_cast<VirtualQListWidget*>( (QListWidget*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QListWidget_protectedbase_doAutoScroll(void* self) {
+	VirtualQListWidget* self_cast = static_cast<VirtualQListWidget*>( (QListWidget*)(self) );
 	
 	self_cast->doAutoScroll();
 
 }
 
-int QListWidget_protectedbase_dropIndicatorPosition(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQListWidget* self_cast = dynamic_cast<VirtualQListWidget*>( (QListWidget*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return (int)(0);
-	}
-	
-	*_dynamic_cast_ok = true;
+int QListWidget_protectedbase_dropIndicatorPosition(const void* self) {
+	VirtualQListWidget* self_cast = static_cast<VirtualQListWidget*>( (QListWidget*)(self) );
 	
 	VirtualQListWidget::DropIndicatorPosition _ret = self_cast->dropIndicatorPosition();
 	return static_cast<int>(_ret);
 
 }
 
-void QListWidget_protectedbase_setViewportMargins(bool* _dynamic_cast_ok, void* self, int left, int top, int right, int bottom) {
-	VirtualQListWidget* self_cast = dynamic_cast<VirtualQListWidget*>( (QListWidget*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QListWidget_protectedbase_setViewportMargins(void* self, int left, int top, int right, int bottom) {
+	VirtualQListWidget* self_cast = static_cast<VirtualQListWidget*>( (QListWidget*)(self) );
 	
 	self_cast->setViewportMargins(static_cast<int>(left), static_cast<int>(top), static_cast<int>(right), static_cast<int>(bottom));
 
 }
 
-QMargins* QListWidget_protectedbase_viewportMargins(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQListWidget* self_cast = dynamic_cast<VirtualQListWidget*>( (QListWidget*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return nullptr;
-	}
-	
-	*_dynamic_cast_ok = true;
+QMargins* QListWidget_protectedbase_viewportMargins(const void* self) {
+	VirtualQListWidget* self_cast = static_cast<VirtualQListWidget*>( (QListWidget*)(self) );
 	
 	return new QMargins(self_cast->viewportMargins());
 
 }
 
-void QListWidget_protectedbase_drawFrame(bool* _dynamic_cast_ok, void* self, QPainter* param1) {
-	VirtualQListWidget* self_cast = dynamic_cast<VirtualQListWidget*>( (QListWidget*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QListWidget_protectedbase_drawFrame(void* self, QPainter* param1) {
+	VirtualQListWidget* self_cast = static_cast<VirtualQListWidget*>( (QListWidget*)(self) );
 	
 	self_cast->drawFrame(param1);
 
 }
 
-void QListWidget_protectedbase_updateMicroFocus(bool* _dynamic_cast_ok, void* self) {
-	VirtualQListWidget* self_cast = dynamic_cast<VirtualQListWidget*>( (QListWidget*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QListWidget_protectedbase_updateMicroFocus(void* self) {
+	VirtualQListWidget* self_cast = static_cast<VirtualQListWidget*>( (QListWidget*)(self) );
 	
 	self_cast->updateMicroFocus();
 
 }
 
-void QListWidget_protectedbase_create(bool* _dynamic_cast_ok, void* self) {
-	VirtualQListWidget* self_cast = dynamic_cast<VirtualQListWidget*>( (QListWidget*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QListWidget_protectedbase_create(void* self) {
+	VirtualQListWidget* self_cast = static_cast<VirtualQListWidget*>( (QListWidget*)(self) );
 	
 	self_cast->create();
 
 }
 
-void QListWidget_protectedbase_destroy(bool* _dynamic_cast_ok, void* self) {
-	VirtualQListWidget* self_cast = dynamic_cast<VirtualQListWidget*>( (QListWidget*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QListWidget_protectedbase_destroy(void* self) {
+	VirtualQListWidget* self_cast = static_cast<VirtualQListWidget*>( (QListWidget*)(self) );
 	
 	self_cast->destroy();
 
 }
 
-bool QListWidget_protectedbase_focusNextChild(bool* _dynamic_cast_ok, void* self) {
-	VirtualQListWidget* self_cast = dynamic_cast<VirtualQListWidget*>( (QListWidget*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return false;
-	}
-	
-	*_dynamic_cast_ok = true;
+bool QListWidget_protectedbase_focusNextChild(void* self) {
+	VirtualQListWidget* self_cast = static_cast<VirtualQListWidget*>( (QListWidget*)(self) );
 	
 	return self_cast->focusNextChild();
 
 }
 
-bool QListWidget_protectedbase_focusPreviousChild(bool* _dynamic_cast_ok, void* self) {
-	VirtualQListWidget* self_cast = dynamic_cast<VirtualQListWidget*>( (QListWidget*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return false;
-	}
-	
-	*_dynamic_cast_ok = true;
+bool QListWidget_protectedbase_focusPreviousChild(void* self) {
+	VirtualQListWidget* self_cast = static_cast<VirtualQListWidget*>( (QListWidget*)(self) );
 	
 	return self_cast->focusPreviousChild();
 
 }
 
-QObject* QListWidget_protectedbase_sender(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQListWidget* self_cast = dynamic_cast<VirtualQListWidget*>( (QListWidget*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return nullptr;
-	}
-	
-	*_dynamic_cast_ok = true;
+QObject* QListWidget_protectedbase_sender(const void* self) {
+	VirtualQListWidget* self_cast = static_cast<VirtualQListWidget*>( (QListWidget*)(self) );
 	
 	return self_cast->sender();
 
 }
 
-int QListWidget_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQListWidget* self_cast = dynamic_cast<VirtualQListWidget*>( (QListWidget*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return 0;
-	}
-	
-	*_dynamic_cast_ok = true;
+int QListWidget_protectedbase_senderSignalIndex(const void* self) {
+	VirtualQListWidget* self_cast = static_cast<VirtualQListWidget*>( (QListWidget*)(self) );
 	
 	return self_cast->senderSignalIndex();
 
 }
 
-int QListWidget_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal) {
-	VirtualQListWidget* self_cast = dynamic_cast<VirtualQListWidget*>( (QListWidget*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return 0;
-	}
-	
-	*_dynamic_cast_ok = true;
+int QListWidget_protectedbase_receivers(const void* self, const char* signal) {
+	VirtualQListWidget* self_cast = static_cast<VirtualQListWidget*>( (QListWidget*)(self) );
 	
 	return self_cast->receivers(signal);
 
 }
 
-bool QListWidget_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal) {
-	VirtualQListWidget* self_cast = dynamic_cast<VirtualQListWidget*>( (QListWidget*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return false;
-	}
-	
-	*_dynamic_cast_ok = true;
+bool QListWidget_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal) {
+	VirtualQListWidget* self_cast = static_cast<VirtualQListWidget*>( (QListWidget*)(self) );
 	
 	return self_cast->isSignalConnected(*signal);
 

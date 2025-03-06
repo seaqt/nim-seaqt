@@ -41,12 +41,14 @@ import
   ../QtCore/gen_qcoreevent_types,
   ../QtCore/gen_qrect_types,
   ../QtCore/gen_qsize_types,
+  ./gen_qgraphicsitem_types,
   ./gen_qgraphicslayout,
   ./gen_qgraphicslayoutitem_types
 export
   gen_qcoreevent_types,
   gen_qrect_types,
   gen_qsize_types,
+  gen_qgraphicsitem_types,
   gen_qgraphicslayout,
   gen_qgraphicslayoutitem_types
 
@@ -121,6 +123,9 @@ proc fcQGraphicsGridLayout_virtualbase_getContentsMargins(self: pointer, left: p
 proc fcQGraphicsGridLayout_virtualbase_updateGeometry(self: pointer, ): void {.importc: "QGraphicsGridLayout_virtualbase_updateGeometry".}
 proc fcQGraphicsGridLayout_virtualbase_widgetEvent(self: pointer, e: pointer): void {.importc: "QGraphicsGridLayout_virtualbase_widgetEvent".}
 proc fcQGraphicsGridLayout_virtualbase_isEmpty(self: pointer, ): bool {.importc: "QGraphicsGridLayout_virtualbase_isEmpty".}
+proc fcQGraphicsGridLayout_protectedbase_addChildLayoutItem(self: pointer, layoutItem: pointer): void {.importc: "QGraphicsGridLayout_protectedbase_addChildLayoutItem".}
+proc fcQGraphicsGridLayout_protectedbase_setGraphicsItem(self: pointer, item: pointer): void {.importc: "QGraphicsGridLayout_protectedbase_setGraphicsItem".}
+proc fcQGraphicsGridLayout_protectedbase_setOwnedByLayout(self: pointer, ownedByLayout: bool): void {.importc: "QGraphicsGridLayout_protectedbase_setOwnedByLayout".}
 proc fcQGraphicsGridLayout_new(vtbl: pointer, ): ptr cQGraphicsGridLayout {.importc: "QGraphicsGridLayout_new".}
 proc fcQGraphicsGridLayout_new2(vtbl: pointer, parent: pointer): ptr cQGraphicsGridLayout {.importc: "QGraphicsGridLayout_new2".}
 proc fcQGraphicsGridLayout_delete(self: pointer) {.importc: "QGraphicsGridLayout_delete".}
@@ -381,6 +386,15 @@ proc miqt_exec_callback_cQGraphicsGridLayout_isEmpty(vtbl: pointer, self: pointe
   let self = QGraphicsGridLayout(h: self)
   var virtualReturn = vtbl[].isEmpty(self)
   virtualReturn
+
+proc addChildLayoutItem*(self: gen_qgraphicsgridlayout_types.QGraphicsGridLayout, layoutItem: gen_qgraphicslayoutitem_types.QGraphicsLayoutItem): void =
+  fcQGraphicsGridLayout_protectedbase_addChildLayoutItem(self.h, layoutItem.h)
+
+proc setGraphicsItem*(self: gen_qgraphicsgridlayout_types.QGraphicsGridLayout, item: gen_qgraphicsitem_types.QGraphicsItem): void =
+  fcQGraphicsGridLayout_protectedbase_setGraphicsItem(self.h, item.h)
+
+proc setOwnedByLayout*(self: gen_qgraphicsgridlayout_types.QGraphicsGridLayout, ownedByLayout: bool): void =
+  fcQGraphicsGridLayout_protectedbase_setOwnedByLayout(self.h, ownedByLayout)
 
 proc create*(T: type gen_qgraphicsgridlayout_types.QGraphicsGridLayout,
     vtbl: ref QGraphicsGridLayoutVTable = nil): gen_qgraphicsgridlayout_types.QGraphicsGridLayout =

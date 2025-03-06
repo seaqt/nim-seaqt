@@ -184,6 +184,15 @@ proc fcQLayout_virtualbase_heightForWidth(self: pointer, param1: cint): cint {.i
 proc fcQLayout_virtualbase_minimumHeightForWidth(self: pointer, param1: cint): cint {.importc: "QLayout_virtualbase_minimumHeightForWidth".}
 proc fcQLayout_virtualbase_widget(self: pointer, ): pointer {.importc: "QLayout_virtualbase_widget".}
 proc fcQLayout_virtualbase_spacerItem(self: pointer, ): pointer {.importc: "QLayout_virtualbase_spacerItem".}
+proc fcQLayout_protectedbase_widgetEvent(self: pointer, param1: pointer): void {.importc: "QLayout_protectedbase_widgetEvent".}
+proc fcQLayout_protectedbase_addChildLayout(self: pointer, l: pointer): void {.importc: "QLayout_protectedbase_addChildLayout".}
+proc fcQLayout_protectedbase_addChildWidget(self: pointer, w: pointer): void {.importc: "QLayout_protectedbase_addChildWidget".}
+proc fcQLayout_protectedbase_adoptLayout(self: pointer, layout: pointer): bool {.importc: "QLayout_protectedbase_adoptLayout".}
+proc fcQLayout_protectedbase_alignmentRect(self: pointer, param1: pointer): pointer {.importc: "QLayout_protectedbase_alignmentRect".}
+proc fcQLayout_protectedbase_sender(self: pointer, ): pointer {.importc: "QLayout_protectedbase_sender".}
+proc fcQLayout_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QLayout_protectedbase_senderSignalIndex".}
+proc fcQLayout_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QLayout_protectedbase_receivers".}
+proc fcQLayout_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QLayout_protectedbase_isSignalConnected".}
 proc fcQLayout_new(vtbl: pointer, parent: pointer): ptr cQLayout {.importc: "QLayout_new".}
 proc fcQLayout_new2(vtbl: pointer, ): ptr cQLayout {.importc: "QLayout_new2".}
 proc fcQLayout_staticMetaObject(): pointer {.importc: "QLayout_staticMetaObject".}
@@ -723,6 +732,33 @@ proc miqt_exec_callback_cQLayout_spacerItem(vtbl: pointer, self: pointer): point
   let self = QLayout(h: self)
   var virtualReturn = vtbl[].spacerItem(self)
   virtualReturn.h
+
+proc widgetEvent*(self: gen_qlayout_types.QLayout, param1: gen_qcoreevent_types.QEvent): void =
+  fcQLayout_protectedbase_widgetEvent(self.h, param1.h)
+
+proc addChildLayout*(self: gen_qlayout_types.QLayout, l: gen_qlayout_types.QLayout): void =
+  fcQLayout_protectedbase_addChildLayout(self.h, l.h)
+
+proc addChildWidget*(self: gen_qlayout_types.QLayout, w: gen_qwidget_types.QWidget): void =
+  fcQLayout_protectedbase_addChildWidget(self.h, w.h)
+
+proc adoptLayout*(self: gen_qlayout_types.QLayout, layout: gen_qlayout_types.QLayout): bool =
+  fcQLayout_protectedbase_adoptLayout(self.h, layout.h)
+
+proc alignmentRect*(self: gen_qlayout_types.QLayout, param1: gen_qrect_types.QRect): gen_qrect_types.QRect =
+  gen_qrect_types.QRect(h: fcQLayout_protectedbase_alignmentRect(self.h, param1.h))
+
+proc sender*(self: gen_qlayout_types.QLayout, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQLayout_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qlayout_types.QLayout, ): cint =
+  fcQLayout_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qlayout_types.QLayout, signal: cstring): cint =
+  fcQLayout_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qlayout_types.QLayout, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQLayout_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc create*(T: type gen_qlayout_types.QLayout,
     parent: gen_qwidget_types.QWidget,

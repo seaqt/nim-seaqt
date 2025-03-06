@@ -102,6 +102,11 @@ proc fcQOffscreenSurface_virtualbase_childEvent(self: pointer, event: pointer): 
 proc fcQOffscreenSurface_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QOffscreenSurface_virtualbase_customEvent".}
 proc fcQOffscreenSurface_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QOffscreenSurface_virtualbase_connectNotify".}
 proc fcQOffscreenSurface_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QOffscreenSurface_virtualbase_disconnectNotify".}
+proc fcQOffscreenSurface_protectedbase_resolveInterface(self: pointer, name: cstring, revision: cint): pointer {.importc: "QOffscreenSurface_protectedbase_resolveInterface".}
+proc fcQOffscreenSurface_protectedbase_sender(self: pointer, ): pointer {.importc: "QOffscreenSurface_protectedbase_sender".}
+proc fcQOffscreenSurface_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QOffscreenSurface_protectedbase_senderSignalIndex".}
+proc fcQOffscreenSurface_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QOffscreenSurface_protectedbase_receivers".}
+proc fcQOffscreenSurface_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QOffscreenSurface_protectedbase_isSignalConnected".}
 proc fcQOffscreenSurface_new(vtbl: pointer, ): ptr cQOffscreenSurface {.importc: "QOffscreenSurface_new".}
 proc fcQOffscreenSurface_new2(vtbl: pointer, screen: pointer): ptr cQOffscreenSurface {.importc: "QOffscreenSurface_new2".}
 proc fcQOffscreenSurface_new3(vtbl: pointer, screen: pointer, parent: pointer): ptr cQOffscreenSurface {.importc: "QOffscreenSurface_new3".}
@@ -336,6 +341,21 @@ proc miqt_exec_callback_cQOffscreenSurface_disconnectNotify(vtbl: pointer, self:
   let self = QOffscreenSurface(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
   vtbl[].disconnectNotify(self, slotval1)
+
+proc resolveInterface*(self: gen_qoffscreensurface_types.QOffscreenSurface, name: cstring, revision: cint): pointer =
+  fcQOffscreenSurface_protectedbase_resolveInterface(self.h, name, revision)
+
+proc sender*(self: gen_qoffscreensurface_types.QOffscreenSurface, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQOffscreenSurface_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qoffscreensurface_types.QOffscreenSurface, ): cint =
+  fcQOffscreenSurface_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qoffscreensurface_types.QOffscreenSurface, signal: cstring): cint =
+  fcQOffscreenSurface_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qoffscreensurface_types.QOffscreenSurface, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQOffscreenSurface_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc create*(T: type gen_qoffscreensurface_types.QOffscreenSurface,
     vtbl: ref QOffscreenSurfaceVTable = nil): gen_qoffscreensurface_types.QOffscreenSurface =

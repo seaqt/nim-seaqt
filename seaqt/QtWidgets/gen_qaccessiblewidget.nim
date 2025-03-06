@@ -38,6 +38,7 @@ import ./gen_qaccessiblewidget_types
 export gen_qaccessiblewidget_types
 
 import
+  ../QtCore/gen_qobject_types,
   ../QtCore/gen_qrect_types,
   ../QtGui/gen_qaccessible_base_types,
   ../QtGui/gen_qaccessible_types,
@@ -46,6 +47,7 @@ import
   ../QtGui/gen_qwindow_types,
   ./gen_qwidget_types
 export
+  gen_qobject_types,
   gen_qrect_types,
   gen_qaccessible_base_types,
   gen_qaccessible_types,
@@ -74,6 +76,9 @@ proc fcQAccessibleWidget_interfaceCast(self: pointer, t: cint): pointer {.import
 proc fcQAccessibleWidget_actionNames(self: pointer, ): struct_miqt_array {.importc: "QAccessibleWidget_actionNames".}
 proc fcQAccessibleWidget_doAction(self: pointer, actionName: struct_miqt_string): void {.importc: "QAccessibleWidget_doAction".}
 proc fcQAccessibleWidget_keyBindingsForAction(self: pointer, actionName: struct_miqt_string): struct_miqt_array {.importc: "QAccessibleWidget_keyBindingsForAction".}
+proc fcQAccessibleWidget_protectedbase_widget(self: pointer, ): pointer {.importc: "QAccessibleWidget_protectedbase_widget".}
+proc fcQAccessibleWidget_protectedbase_parentObject(self: pointer, ): pointer {.importc: "QAccessibleWidget_protectedbase_parentObject".}
+proc fcQAccessibleWidget_protectedbase_addControllingSignal(self: pointer, signal: struct_miqt_string): void {.importc: "QAccessibleWidget_protectedbase_addControllingSignal".}
 proc fcQAccessibleWidget_new(o: pointer): ptr cQAccessibleWidget {.importc: "QAccessibleWidget_new".}
 proc fcQAccessibleWidget_new2(o: pointer, r: cint): ptr cQAccessibleWidget {.importc: "QAccessibleWidget_new2".}
 proc fcQAccessibleWidget_new3(o: pointer, r: cint, name: struct_miqt_string): ptr cQAccessibleWidget {.importc: "QAccessibleWidget_new3".}
@@ -162,6 +167,15 @@ proc keyBindingsForAction*(self: gen_qaccessiblewidget_types.QAccessibleWidget, 
     c_free(vx_lv_ms.data)
     vx_ret[i] = vx_lvx_ret
   vx_ret
+
+proc widget*(self: gen_qaccessiblewidget_types.QAccessibleWidget, ): gen_qwidget_types.QWidget =
+  gen_qwidget_types.QWidget(h: fcQAccessibleWidget_protectedbase_widget(self.h))
+
+proc parentObject*(self: gen_qaccessiblewidget_types.QAccessibleWidget, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQAccessibleWidget_protectedbase_parentObject(self.h))
+
+proc addControllingSignal*(self: gen_qaccessiblewidget_types.QAccessibleWidget, signal: string): void =
+  fcQAccessibleWidget_protectedbase_addControllingSignal(self.h, struct_miqt_string(data: signal, len: csize_t(len(signal))))
 
 proc create*(T: type gen_qaccessiblewidget_types.QAccessibleWidget,
     o: gen_qwidget_types.QWidget): gen_qaccessiblewidget_types.QAccessibleWidget =

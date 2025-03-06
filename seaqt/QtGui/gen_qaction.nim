@@ -179,6 +179,10 @@ proc fcQAction_virtualbase_childEvent(self: pointer, event: pointer): void {.imp
 proc fcQAction_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QAction_virtualbase_customEvent".}
 proc fcQAction_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QAction_virtualbase_connectNotify".}
 proc fcQAction_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QAction_virtualbase_disconnectNotify".}
+proc fcQAction_protectedbase_sender(self: pointer, ): pointer {.importc: "QAction_protectedbase_sender".}
+proc fcQAction_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QAction_protectedbase_senderSignalIndex".}
+proc fcQAction_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QAction_protectedbase_receivers".}
+proc fcQAction_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QAction_protectedbase_isSignalConnected".}
 proc fcQAction_new(vtbl: pointer, ): ptr cQAction {.importc: "QAction_new".}
 proc fcQAction_new2(vtbl: pointer, text: struct_miqt_string): ptr cQAction {.importc: "QAction_new2".}
 proc fcQAction_new3(vtbl: pointer, icon: pointer, text: struct_miqt_string): ptr cQAction {.importc: "QAction_new3".}
@@ -676,6 +680,18 @@ proc miqt_exec_callback_cQAction_disconnectNotify(vtbl: pointer, self: pointer, 
   let self = QAction(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
   vtbl[].disconnectNotify(self, slotval1)
+
+proc sender*(self: gen_qaction_types.QAction, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQAction_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qaction_types.QAction, ): cint =
+  fcQAction_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qaction_types.QAction, signal: cstring): cint =
+  fcQAction_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qaction_types.QAction, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQAction_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc create*(T: type gen_qaction_types.QAction,
     vtbl: ref QActionVTable = nil): gen_qaction_types.QAction =

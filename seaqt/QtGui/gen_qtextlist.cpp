@@ -242,11 +242,11 @@ public:
 	friend void QTextList_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
 
 	// Wrappers to allow calling protected methods:
-	friend struct miqt_array /* of QTextBlock* */  QTextList_protectedbase_blockList(bool* _dynamic_cast_ok, const void* self);
-	friend QObject* QTextList_protectedbase_sender(bool* _dynamic_cast_ok, const void* self);
-	friend int QTextList_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
-	friend int QTextList_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
-	friend bool QTextList_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+	friend struct miqt_array /* of QTextBlock* */  QTextList_protectedbase_blockList(const void* self);
+	friend QObject* QTextList_protectedbase_sender(const void* self);
+	friend int QTextList_protectedbase_senderSignalIndex(const void* self);
+	friend int QTextList_protectedbase_receivers(const void* self, const char* signal);
+	friend bool QTextList_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
 };
 
 QTextList* QTextList_new(struct QTextList_VTable* vtbl, QTextDocument* doc) {
@@ -424,14 +424,8 @@ void QTextList_virtualbase_disconnectNotify(void* self, QMetaMethod* signal) {
 }
 
 const QMetaObject* QTextList_staticMetaObject() { return &QTextList::staticMetaObject; }
-struct miqt_array /* of QTextBlock* */  QTextList_protectedbase_blockList(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQTextList* self_cast = dynamic_cast<VirtualQTextList*>( (QTextList*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return (struct miqt_array){};
-	}
-	
-	*_dynamic_cast_ok = true;
+struct miqt_array /* of QTextBlock* */  QTextList_protectedbase_blockList(const void* self) {
+	VirtualQTextList* self_cast = static_cast<VirtualQTextList*>( (QTextList*)(self) );
 	
 	QList<QTextBlock> _ret = self_cast->blockList();
 	// Convert QList<> from C++ memory to manually-managed C memory
@@ -446,53 +440,29 @@ struct miqt_array /* of QTextBlock* */  QTextList_protectedbase_blockList(bool* 
 
 }
 
-QObject* QTextList_protectedbase_sender(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQTextList* self_cast = dynamic_cast<VirtualQTextList*>( (QTextList*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return nullptr;
-	}
-	
-	*_dynamic_cast_ok = true;
+QObject* QTextList_protectedbase_sender(const void* self) {
+	VirtualQTextList* self_cast = static_cast<VirtualQTextList*>( (QTextList*)(self) );
 	
 	return self_cast->sender();
 
 }
 
-int QTextList_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQTextList* self_cast = dynamic_cast<VirtualQTextList*>( (QTextList*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return 0;
-	}
-	
-	*_dynamic_cast_ok = true;
+int QTextList_protectedbase_senderSignalIndex(const void* self) {
+	VirtualQTextList* self_cast = static_cast<VirtualQTextList*>( (QTextList*)(self) );
 	
 	return self_cast->senderSignalIndex();
 
 }
 
-int QTextList_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal) {
-	VirtualQTextList* self_cast = dynamic_cast<VirtualQTextList*>( (QTextList*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return 0;
-	}
-	
-	*_dynamic_cast_ok = true;
+int QTextList_protectedbase_receivers(const void* self, const char* signal) {
+	VirtualQTextList* self_cast = static_cast<VirtualQTextList*>( (QTextList*)(self) );
 	
 	return self_cast->receivers(signal);
 
 }
 
-bool QTextList_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal) {
-	VirtualQTextList* self_cast = dynamic_cast<VirtualQTextList*>( (QTextList*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return false;
-	}
-	
-	*_dynamic_cast_ok = true;
+bool QTextList_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal) {
+	VirtualQTextList* self_cast = static_cast<VirtualQTextList*>( (QTextList*)(self) );
 	
 	return self_cast->isSignalConnected(*signal);
 

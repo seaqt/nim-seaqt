@@ -115,6 +115,7 @@ import
   ../QtCore/gen_qabstractitemmodel_types,
   ../QtCore/gen_qcoreevent_types,
   ../QtCore/gen_qitemselectionmodel_types,
+  ../QtCore/gen_qmargins_types,
   ../QtCore/gen_qmetaobject_types,
   ../QtCore/gen_qobject_types,
   ../QtCore/gen_qobjectdefs_types,
@@ -135,6 +136,7 @@ export
   gen_qabstractitemmodel_types,
   gen_qcoreevent_types,
   gen_qitemselectionmodel_types,
+  gen_qmargins_types,
   gen_qmetaobject_types,
   gen_qobject_types,
   gen_qobjectdefs_types,
@@ -426,6 +428,29 @@ proc fcQAbstractItemView_virtualbase_childEvent(self: pointer, event: pointer): 
 proc fcQAbstractItemView_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QAbstractItemView_virtualbase_customEvent".}
 proc fcQAbstractItemView_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QAbstractItemView_virtualbase_connectNotify".}
 proc fcQAbstractItemView_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QAbstractItemView_virtualbase_disconnectNotify".}
+proc fcQAbstractItemView_protectedbase_state(self: pointer, ): cint {.importc: "QAbstractItemView_protectedbase_state".}
+proc fcQAbstractItemView_protectedbase_setState(self: pointer, state: cint): void {.importc: "QAbstractItemView_protectedbase_setState".}
+proc fcQAbstractItemView_protectedbase_scheduleDelayedItemsLayout(self: pointer, ): void {.importc: "QAbstractItemView_protectedbase_scheduleDelayedItemsLayout".}
+proc fcQAbstractItemView_protectedbase_executeDelayedItemsLayout(self: pointer, ): void {.importc: "QAbstractItemView_protectedbase_executeDelayedItemsLayout".}
+proc fcQAbstractItemView_protectedbase_setDirtyRegion(self: pointer, region: pointer): void {.importc: "QAbstractItemView_protectedbase_setDirtyRegion".}
+proc fcQAbstractItemView_protectedbase_scrollDirtyRegion(self: pointer, dx: cint, dy: cint): void {.importc: "QAbstractItemView_protectedbase_scrollDirtyRegion".}
+proc fcQAbstractItemView_protectedbase_dirtyRegionOffset(self: pointer, ): pointer {.importc: "QAbstractItemView_protectedbase_dirtyRegionOffset".}
+proc fcQAbstractItemView_protectedbase_startAutoScroll(self: pointer, ): void {.importc: "QAbstractItemView_protectedbase_startAutoScroll".}
+proc fcQAbstractItemView_protectedbase_stopAutoScroll(self: pointer, ): void {.importc: "QAbstractItemView_protectedbase_stopAutoScroll".}
+proc fcQAbstractItemView_protectedbase_doAutoScroll(self: pointer, ): void {.importc: "QAbstractItemView_protectedbase_doAutoScroll".}
+proc fcQAbstractItemView_protectedbase_dropIndicatorPosition(self: pointer, ): cint {.importc: "QAbstractItemView_protectedbase_dropIndicatorPosition".}
+proc fcQAbstractItemView_protectedbase_setViewportMargins(self: pointer, left: cint, top: cint, right: cint, bottom: cint): void {.importc: "QAbstractItemView_protectedbase_setViewportMargins".}
+proc fcQAbstractItemView_protectedbase_viewportMargins(self: pointer, ): pointer {.importc: "QAbstractItemView_protectedbase_viewportMargins".}
+proc fcQAbstractItemView_protectedbase_drawFrame(self: pointer, param1: pointer): void {.importc: "QAbstractItemView_protectedbase_drawFrame".}
+proc fcQAbstractItemView_protectedbase_updateMicroFocus(self: pointer, ): void {.importc: "QAbstractItemView_protectedbase_updateMicroFocus".}
+proc fcQAbstractItemView_protectedbase_create(self: pointer, ): void {.importc: "QAbstractItemView_protectedbase_create".}
+proc fcQAbstractItemView_protectedbase_destroy(self: pointer, ): void {.importc: "QAbstractItemView_protectedbase_destroy".}
+proc fcQAbstractItemView_protectedbase_focusNextChild(self: pointer, ): bool {.importc: "QAbstractItemView_protectedbase_focusNextChild".}
+proc fcQAbstractItemView_protectedbase_focusPreviousChild(self: pointer, ): bool {.importc: "QAbstractItemView_protectedbase_focusPreviousChild".}
+proc fcQAbstractItemView_protectedbase_sender(self: pointer, ): pointer {.importc: "QAbstractItemView_protectedbase_sender".}
+proc fcQAbstractItemView_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QAbstractItemView_protectedbase_senderSignalIndex".}
+proc fcQAbstractItemView_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QAbstractItemView_protectedbase_receivers".}
+proc fcQAbstractItemView_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QAbstractItemView_protectedbase_isSignalConnected".}
 proc fcQAbstractItemView_new(vtbl: pointer, parent: pointer): ptr cQAbstractItemView {.importc: "QAbstractItemView_new".}
 proc fcQAbstractItemView_new2(vtbl: pointer, ): ptr cQAbstractItemView {.importc: "QAbstractItemView_new2".}
 proc fcQAbstractItemView_staticMetaObject(): pointer {.importc: "QAbstractItemView_staticMetaObject".}
@@ -1877,6 +1902,75 @@ proc miqt_exec_callback_cQAbstractItemView_disconnectNotify(vtbl: pointer, self:
   let self = QAbstractItemView(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
   vtbl[].disconnectNotify(self, slotval1)
+
+proc state*(self: gen_qabstractitemview_types.QAbstractItemView, ): cint =
+  cint(fcQAbstractItemView_protectedbase_state(self.h))
+
+proc setState*(self: gen_qabstractitemview_types.QAbstractItemView, state: cint): void =
+  fcQAbstractItemView_protectedbase_setState(self.h, cint(state))
+
+proc scheduleDelayedItemsLayout*(self: gen_qabstractitemview_types.QAbstractItemView, ): void =
+  fcQAbstractItemView_protectedbase_scheduleDelayedItemsLayout(self.h)
+
+proc executeDelayedItemsLayout*(self: gen_qabstractitemview_types.QAbstractItemView, ): void =
+  fcQAbstractItemView_protectedbase_executeDelayedItemsLayout(self.h)
+
+proc setDirtyRegion*(self: gen_qabstractitemview_types.QAbstractItemView, region: gen_qregion_types.QRegion): void =
+  fcQAbstractItemView_protectedbase_setDirtyRegion(self.h, region.h)
+
+proc scrollDirtyRegion*(self: gen_qabstractitemview_types.QAbstractItemView, dx: cint, dy: cint): void =
+  fcQAbstractItemView_protectedbase_scrollDirtyRegion(self.h, dx, dy)
+
+proc dirtyRegionOffset*(self: gen_qabstractitemview_types.QAbstractItemView, ): gen_qpoint_types.QPoint =
+  gen_qpoint_types.QPoint(h: fcQAbstractItemView_protectedbase_dirtyRegionOffset(self.h))
+
+proc startAutoScroll*(self: gen_qabstractitemview_types.QAbstractItemView, ): void =
+  fcQAbstractItemView_protectedbase_startAutoScroll(self.h)
+
+proc stopAutoScroll*(self: gen_qabstractitemview_types.QAbstractItemView, ): void =
+  fcQAbstractItemView_protectedbase_stopAutoScroll(self.h)
+
+proc doAutoScroll*(self: gen_qabstractitemview_types.QAbstractItemView, ): void =
+  fcQAbstractItemView_protectedbase_doAutoScroll(self.h)
+
+proc dropIndicatorPosition*(self: gen_qabstractitemview_types.QAbstractItemView, ): cint =
+  cint(fcQAbstractItemView_protectedbase_dropIndicatorPosition(self.h))
+
+proc setViewportMargins*(self: gen_qabstractitemview_types.QAbstractItemView, left: cint, top: cint, right: cint, bottom: cint): void =
+  fcQAbstractItemView_protectedbase_setViewportMargins(self.h, left, top, right, bottom)
+
+proc viewportMargins*(self: gen_qabstractitemview_types.QAbstractItemView, ): gen_qmargins_types.QMargins =
+  gen_qmargins_types.QMargins(h: fcQAbstractItemView_protectedbase_viewportMargins(self.h))
+
+proc drawFrame*(self: gen_qabstractitemview_types.QAbstractItemView, param1: gen_qpainter_types.QPainter): void =
+  fcQAbstractItemView_protectedbase_drawFrame(self.h, param1.h)
+
+proc updateMicroFocus*(self: gen_qabstractitemview_types.QAbstractItemView, ): void =
+  fcQAbstractItemView_protectedbase_updateMicroFocus(self.h)
+
+proc create*(self: gen_qabstractitemview_types.QAbstractItemView, ): void =
+  fcQAbstractItemView_protectedbase_create(self.h)
+
+proc destroy*(self: gen_qabstractitemview_types.QAbstractItemView, ): void =
+  fcQAbstractItemView_protectedbase_destroy(self.h)
+
+proc focusNextChild*(self: gen_qabstractitemview_types.QAbstractItemView, ): bool =
+  fcQAbstractItemView_protectedbase_focusNextChild(self.h)
+
+proc focusPreviousChild*(self: gen_qabstractitemview_types.QAbstractItemView, ): bool =
+  fcQAbstractItemView_protectedbase_focusPreviousChild(self.h)
+
+proc sender*(self: gen_qabstractitemview_types.QAbstractItemView, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQAbstractItemView_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qabstractitemview_types.QAbstractItemView, ): cint =
+  fcQAbstractItemView_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qabstractitemview_types.QAbstractItemView, signal: cstring): cint =
+  fcQAbstractItemView_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qabstractitemview_types.QAbstractItemView, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQAbstractItemView_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc create*(T: type gen_qabstractitemview_types.QAbstractItemView,
     parent: gen_qwidget_types.QWidget,

@@ -188,10 +188,10 @@ public:
 	friend void QActionGroup_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
 
 	// Wrappers to allow calling protected methods:
-	friend QObject* QActionGroup_protectedbase_sender(bool* _dynamic_cast_ok, const void* self);
-	friend int QActionGroup_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
-	friend int QActionGroup_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
-	friend bool QActionGroup_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+	friend QObject* QActionGroup_protectedbase_sender(const void* self);
+	friend int QActionGroup_protectedbase_senderSignalIndex(const void* self);
+	friend int QActionGroup_protectedbase_receivers(const void* self, const char* signal);
+	friend bool QActionGroup_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
 };
 
 QActionGroup* QActionGroup_new(struct QActionGroup_VTable* vtbl, QObject* parent) {
@@ -412,53 +412,29 @@ void QActionGroup_virtualbase_disconnectNotify(void* self, QMetaMethod* signal) 
 }
 
 const QMetaObject* QActionGroup_staticMetaObject() { return &QActionGroup::staticMetaObject; }
-QObject* QActionGroup_protectedbase_sender(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQActionGroup* self_cast = dynamic_cast<VirtualQActionGroup*>( (QActionGroup*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return nullptr;
-	}
-	
-	*_dynamic_cast_ok = true;
+QObject* QActionGroup_protectedbase_sender(const void* self) {
+	VirtualQActionGroup* self_cast = static_cast<VirtualQActionGroup*>( (QActionGroup*)(self) );
 	
 	return self_cast->sender();
 
 }
 
-int QActionGroup_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQActionGroup* self_cast = dynamic_cast<VirtualQActionGroup*>( (QActionGroup*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return 0;
-	}
-	
-	*_dynamic_cast_ok = true;
+int QActionGroup_protectedbase_senderSignalIndex(const void* self) {
+	VirtualQActionGroup* self_cast = static_cast<VirtualQActionGroup*>( (QActionGroup*)(self) );
 	
 	return self_cast->senderSignalIndex();
 
 }
 
-int QActionGroup_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal) {
-	VirtualQActionGroup* self_cast = dynamic_cast<VirtualQActionGroup*>( (QActionGroup*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return 0;
-	}
-	
-	*_dynamic_cast_ok = true;
+int QActionGroup_protectedbase_receivers(const void* self, const char* signal) {
+	VirtualQActionGroup* self_cast = static_cast<VirtualQActionGroup*>( (QActionGroup*)(self) );
 	
 	return self_cast->receivers(signal);
 
 }
 
-bool QActionGroup_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal) {
-	VirtualQActionGroup* self_cast = dynamic_cast<VirtualQActionGroup*>( (QActionGroup*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return false;
-	}
-	
-	*_dynamic_cast_ok = true;
+bool QActionGroup_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal) {
+	VirtualQActionGroup* self_cast = static_cast<VirtualQActionGroup*>( (QActionGroup*)(self) );
 	
 	return self_cast->isSignalConnected(*signal);
 

@@ -189,6 +189,14 @@ proc fcQGraphicsVideoItem_virtualbase_inputMethodQuery(self: pointer, query: cin
 proc fcQGraphicsVideoItem_virtualbase_supportsExtension(self: pointer, extension: cint): bool {.importc: "QGraphicsVideoItem_virtualbase_supportsExtension".}
 proc fcQGraphicsVideoItem_virtualbase_setExtension(self: pointer, extension: cint, variant: pointer): void {.importc: "QGraphicsVideoItem_virtualbase_setExtension".}
 proc fcQGraphicsVideoItem_virtualbase_extension(self: pointer, variant: pointer): pointer {.importc: "QGraphicsVideoItem_virtualbase_extension".}
+proc fcQGraphicsVideoItem_protectedbase_updateMicroFocus(self: pointer, ): void {.importc: "QGraphicsVideoItem_protectedbase_updateMicroFocus".}
+proc fcQGraphicsVideoItem_protectedbase_sender(self: pointer, ): pointer {.importc: "QGraphicsVideoItem_protectedbase_sender".}
+proc fcQGraphicsVideoItem_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QGraphicsVideoItem_protectedbase_senderSignalIndex".}
+proc fcQGraphicsVideoItem_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QGraphicsVideoItem_protectedbase_receivers".}
+proc fcQGraphicsVideoItem_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QGraphicsVideoItem_protectedbase_isSignalConnected".}
+proc fcQGraphicsVideoItem_protectedbase_addToIndex(self: pointer, ): void {.importc: "QGraphicsVideoItem_protectedbase_addToIndex".}
+proc fcQGraphicsVideoItem_protectedbase_removeFromIndex(self: pointer, ): void {.importc: "QGraphicsVideoItem_protectedbase_removeFromIndex".}
+proc fcQGraphicsVideoItem_protectedbase_prepareGeometryChange(self: pointer, ): void {.importc: "QGraphicsVideoItem_protectedbase_prepareGeometryChange".}
 proc fcQGraphicsVideoItem_new(vtbl: pointer, ): ptr cQGraphicsVideoItem {.importc: "QGraphicsVideoItem_new".}
 proc fcQGraphicsVideoItem_new2(vtbl: pointer, parent: pointer): ptr cQGraphicsVideoItem {.importc: "QGraphicsVideoItem_new2".}
 proc fcQGraphicsVideoItem_staticMetaObject(): pointer {.importc: "QGraphicsVideoItem_staticMetaObject".}
@@ -794,6 +802,30 @@ proc miqt_exec_callback_cQGraphicsVideoItem_extension(vtbl: pointer, self: point
   let slotval1 = gen_qvariant_types.QVariant(h: variant)
   var virtualReturn = vtbl[].extension(self, slotval1)
   virtualReturn.h
+
+proc updateMicroFocus*(self: gen_qgraphicsvideoitem_types.QGraphicsVideoItem, ): void =
+  fcQGraphicsVideoItem_protectedbase_updateMicroFocus(self.h)
+
+proc sender*(self: gen_qgraphicsvideoitem_types.QGraphicsVideoItem, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQGraphicsVideoItem_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qgraphicsvideoitem_types.QGraphicsVideoItem, ): cint =
+  fcQGraphicsVideoItem_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qgraphicsvideoitem_types.QGraphicsVideoItem, signal: cstring): cint =
+  fcQGraphicsVideoItem_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qgraphicsvideoitem_types.QGraphicsVideoItem, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQGraphicsVideoItem_protectedbase_isSignalConnected(self.h, signal.h)
+
+proc addToIndex*(self: gen_qgraphicsvideoitem_types.QGraphicsVideoItem, ): void =
+  fcQGraphicsVideoItem_protectedbase_addToIndex(self.h)
+
+proc removeFromIndex*(self: gen_qgraphicsvideoitem_types.QGraphicsVideoItem, ): void =
+  fcQGraphicsVideoItem_protectedbase_removeFromIndex(self.h)
+
+proc prepareGeometryChange*(self: gen_qgraphicsvideoitem_types.QGraphicsVideoItem, ): void =
+  fcQGraphicsVideoItem_protectedbase_prepareGeometryChange(self.h)
 
 proc create*(T: type gen_qgraphicsvideoitem_types.QGraphicsVideoItem,
     vtbl: ref QGraphicsVideoItemVTable = nil): gen_qgraphicsvideoitem_types.QGraphicsVideoItem =

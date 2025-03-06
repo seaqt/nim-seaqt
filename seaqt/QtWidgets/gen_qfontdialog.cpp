@@ -892,16 +892,16 @@ public:
 	friend void QFontDialog_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
 
 	// Wrappers to allow calling protected methods:
-	friend void QFontDialog_protectedbase_adjustPosition(bool* _dynamic_cast_ok, void* self, QWidget* param1);
-	friend void QFontDialog_protectedbase_updateMicroFocus(bool* _dynamic_cast_ok, void* self);
-	friend void QFontDialog_protectedbase_create(bool* _dynamic_cast_ok, void* self);
-	friend void QFontDialog_protectedbase_destroy(bool* _dynamic_cast_ok, void* self);
-	friend bool QFontDialog_protectedbase_focusNextChild(bool* _dynamic_cast_ok, void* self);
-	friend bool QFontDialog_protectedbase_focusPreviousChild(bool* _dynamic_cast_ok, void* self);
-	friend QObject* QFontDialog_protectedbase_sender(bool* _dynamic_cast_ok, const void* self);
-	friend int QFontDialog_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
-	friend int QFontDialog_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
-	friend bool QFontDialog_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+	friend void QFontDialog_protectedbase_adjustPosition(void* self, QWidget* param1);
+	friend void QFontDialog_protectedbase_updateMicroFocus(void* self);
+	friend void QFontDialog_protectedbase_create(void* self);
+	friend void QFontDialog_protectedbase_destroy(void* self);
+	friend bool QFontDialog_protectedbase_focusNextChild(void* self);
+	friend bool QFontDialog_protectedbase_focusPreviousChild(void* self);
+	friend QObject* QFontDialog_protectedbase_sender(const void* self);
+	friend int QFontDialog_protectedbase_senderSignalIndex(const void* self);
+	friend int QFontDialog_protectedbase_receivers(const void* self, const char* signal);
+	friend bool QFontDialog_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
 };
 
 QFontDialog* QFontDialog_new(struct QFontDialog_VTable* vtbl, QWidget* parent) {
@@ -1400,131 +1400,71 @@ void QFontDialog_virtualbase_disconnectNotify(void* self, QMetaMethod* signal) {
 }
 
 const QMetaObject* QFontDialog_staticMetaObject() { return &QFontDialog::staticMetaObject; }
-void QFontDialog_protectedbase_adjustPosition(bool* _dynamic_cast_ok, void* self, QWidget* param1) {
-	VirtualQFontDialog* self_cast = dynamic_cast<VirtualQFontDialog*>( (QFontDialog*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QFontDialog_protectedbase_adjustPosition(void* self, QWidget* param1) {
+	VirtualQFontDialog* self_cast = static_cast<VirtualQFontDialog*>( (QFontDialog*)(self) );
 	
 	self_cast->adjustPosition(param1);
 
 }
 
-void QFontDialog_protectedbase_updateMicroFocus(bool* _dynamic_cast_ok, void* self) {
-	VirtualQFontDialog* self_cast = dynamic_cast<VirtualQFontDialog*>( (QFontDialog*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QFontDialog_protectedbase_updateMicroFocus(void* self) {
+	VirtualQFontDialog* self_cast = static_cast<VirtualQFontDialog*>( (QFontDialog*)(self) );
 	
 	self_cast->updateMicroFocus();
 
 }
 
-void QFontDialog_protectedbase_create(bool* _dynamic_cast_ok, void* self) {
-	VirtualQFontDialog* self_cast = dynamic_cast<VirtualQFontDialog*>( (QFontDialog*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QFontDialog_protectedbase_create(void* self) {
+	VirtualQFontDialog* self_cast = static_cast<VirtualQFontDialog*>( (QFontDialog*)(self) );
 	
 	self_cast->create();
 
 }
 
-void QFontDialog_protectedbase_destroy(bool* _dynamic_cast_ok, void* self) {
-	VirtualQFontDialog* self_cast = dynamic_cast<VirtualQFontDialog*>( (QFontDialog*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QFontDialog_protectedbase_destroy(void* self) {
+	VirtualQFontDialog* self_cast = static_cast<VirtualQFontDialog*>( (QFontDialog*)(self) );
 	
 	self_cast->destroy();
 
 }
 
-bool QFontDialog_protectedbase_focusNextChild(bool* _dynamic_cast_ok, void* self) {
-	VirtualQFontDialog* self_cast = dynamic_cast<VirtualQFontDialog*>( (QFontDialog*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return false;
-	}
-	
-	*_dynamic_cast_ok = true;
+bool QFontDialog_protectedbase_focusNextChild(void* self) {
+	VirtualQFontDialog* self_cast = static_cast<VirtualQFontDialog*>( (QFontDialog*)(self) );
 	
 	return self_cast->focusNextChild();
 
 }
 
-bool QFontDialog_protectedbase_focusPreviousChild(bool* _dynamic_cast_ok, void* self) {
-	VirtualQFontDialog* self_cast = dynamic_cast<VirtualQFontDialog*>( (QFontDialog*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return false;
-	}
-	
-	*_dynamic_cast_ok = true;
+bool QFontDialog_protectedbase_focusPreviousChild(void* self) {
+	VirtualQFontDialog* self_cast = static_cast<VirtualQFontDialog*>( (QFontDialog*)(self) );
 	
 	return self_cast->focusPreviousChild();
 
 }
 
-QObject* QFontDialog_protectedbase_sender(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQFontDialog* self_cast = dynamic_cast<VirtualQFontDialog*>( (QFontDialog*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return nullptr;
-	}
-	
-	*_dynamic_cast_ok = true;
+QObject* QFontDialog_protectedbase_sender(const void* self) {
+	VirtualQFontDialog* self_cast = static_cast<VirtualQFontDialog*>( (QFontDialog*)(self) );
 	
 	return self_cast->sender();
 
 }
 
-int QFontDialog_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQFontDialog* self_cast = dynamic_cast<VirtualQFontDialog*>( (QFontDialog*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return 0;
-	}
-	
-	*_dynamic_cast_ok = true;
+int QFontDialog_protectedbase_senderSignalIndex(const void* self) {
+	VirtualQFontDialog* self_cast = static_cast<VirtualQFontDialog*>( (QFontDialog*)(self) );
 	
 	return self_cast->senderSignalIndex();
 
 }
 
-int QFontDialog_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal) {
-	VirtualQFontDialog* self_cast = dynamic_cast<VirtualQFontDialog*>( (QFontDialog*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return 0;
-	}
-	
-	*_dynamic_cast_ok = true;
+int QFontDialog_protectedbase_receivers(const void* self, const char* signal) {
+	VirtualQFontDialog* self_cast = static_cast<VirtualQFontDialog*>( (QFontDialog*)(self) );
 	
 	return self_cast->receivers(signal);
 
 }
 
-bool QFontDialog_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal) {
-	VirtualQFontDialog* self_cast = dynamic_cast<VirtualQFontDialog*>( (QFontDialog*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return false;
-	}
-	
-	*_dynamic_cast_ok = true;
+bool QFontDialog_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal) {
+	VirtualQFontDialog* self_cast = static_cast<VirtualQFontDialog*>( (QFontDialog*)(self) );
 	
 	return self_cast->isSignalConnected(*signal);
 

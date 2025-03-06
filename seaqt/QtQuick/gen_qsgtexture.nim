@@ -128,6 +128,11 @@ proc fcQSGTexture_virtualbase_childEvent(self: pointer, event: pointer): void {.
 proc fcQSGTexture_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QSGTexture_virtualbase_customEvent".}
 proc fcQSGTexture_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QSGTexture_virtualbase_connectNotify".}
 proc fcQSGTexture_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QSGTexture_virtualbase_disconnectNotify".}
+proc fcQSGTexture_protectedbase_resolveInterface(self: pointer, name: cstring, revision: cint): pointer {.importc: "QSGTexture_protectedbase_resolveInterface".}
+proc fcQSGTexture_protectedbase_sender(self: pointer, ): pointer {.importc: "QSGTexture_protectedbase_sender".}
+proc fcQSGTexture_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QSGTexture_protectedbase_senderSignalIndex".}
+proc fcQSGTexture_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QSGTexture_protectedbase_receivers".}
+proc fcQSGTexture_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QSGTexture_protectedbase_isSignalConnected".}
 proc fcQSGTexture_new(vtbl: pointer, ): ptr cQSGTexture {.importc: "QSGTexture_new".}
 proc fcQSGTexture_staticMetaObject(): pointer {.importc: "QSGTexture_staticMetaObject".}
 proc fcQSGTexture_delete(self: pointer) {.importc: "QSGTexture_delete".}
@@ -169,6 +174,11 @@ proc fcQSGDynamicTexture_virtualbase_childEvent(self: pointer, event: pointer): 
 proc fcQSGDynamicTexture_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QSGDynamicTexture_virtualbase_customEvent".}
 proc fcQSGDynamicTexture_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QSGDynamicTexture_virtualbase_connectNotify".}
 proc fcQSGDynamicTexture_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QSGDynamicTexture_virtualbase_disconnectNotify".}
+proc fcQSGDynamicTexture_protectedbase_resolveInterface(self: pointer, name: cstring, revision: cint): pointer {.importc: "QSGDynamicTexture_protectedbase_resolveInterface".}
+proc fcQSGDynamicTexture_protectedbase_sender(self: pointer, ): pointer {.importc: "QSGDynamicTexture_protectedbase_sender".}
+proc fcQSGDynamicTexture_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QSGDynamicTexture_protectedbase_senderSignalIndex".}
+proc fcQSGDynamicTexture_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QSGDynamicTexture_protectedbase_receivers".}
+proc fcQSGDynamicTexture_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QSGDynamicTexture_protectedbase_isSignalConnected".}
 proc fcQSGDynamicTexture_new(vtbl: pointer, ): ptr cQSGDynamicTexture {.importc: "QSGDynamicTexture_new".}
 proc fcQSGDynamicTexture_staticMetaObject(): pointer {.importc: "QSGDynamicTexture_staticMetaObject".}
 proc fcQSGDynamicTexture_delete(self: pointer) {.importc: "QSGDynamicTexture_delete".}
@@ -423,6 +433,21 @@ proc miqt_exec_callback_cQSGTexture_disconnectNotify(vtbl: pointer, self: pointe
   let self = QSGTexture(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
   vtbl[].disconnectNotify(self, slotval1)
+
+proc resolveInterface*(self: gen_qsgtexture_types.QSGTexture, name: cstring, revision: cint): pointer =
+  fcQSGTexture_protectedbase_resolveInterface(self.h, name, revision)
+
+proc sender*(self: gen_qsgtexture_types.QSGTexture, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQSGTexture_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qsgtexture_types.QSGTexture, ): cint =
+  fcQSGTexture_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qsgtexture_types.QSGTexture, signal: cstring): cint =
+  fcQSGTexture_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qsgtexture_types.QSGTexture, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQSGTexture_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc create*(T: type gen_qsgtexture_types.QSGTexture,
     vtbl: ref QSGTextureVTable = nil): gen_qsgtexture_types.QSGTexture =
@@ -679,6 +704,21 @@ proc miqt_exec_callback_cQSGDynamicTexture_disconnectNotify(vtbl: pointer, self:
   let self = QSGDynamicTexture(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
   vtbl[].disconnectNotify(self, slotval1)
+
+proc resolveInterface*(self: gen_qsgtexture_types.QSGDynamicTexture, name: cstring, revision: cint): pointer =
+  fcQSGDynamicTexture_protectedbase_resolveInterface(self.h, name, revision)
+
+proc sender*(self: gen_qsgtexture_types.QSGDynamicTexture, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQSGDynamicTexture_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qsgtexture_types.QSGDynamicTexture, ): cint =
+  fcQSGDynamicTexture_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qsgtexture_types.QSGDynamicTexture, signal: cstring): cint =
+  fcQSGDynamicTexture_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qsgtexture_types.QSGDynamicTexture, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQSGDynamicTexture_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc create*(T: type gen_qsgtexture_types.QSGDynamicTexture,
     vtbl: ref QSGDynamicTextureVTable = nil): gen_qsgtexture_types.QSGDynamicTexture =

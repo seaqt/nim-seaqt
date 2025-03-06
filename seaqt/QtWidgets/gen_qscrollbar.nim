@@ -184,6 +184,17 @@ proc fcQScrollBar_virtualbase_childEvent(self: pointer, event: pointer): void {.
 proc fcQScrollBar_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QScrollBar_virtualbase_customEvent".}
 proc fcQScrollBar_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QScrollBar_virtualbase_connectNotify".}
 proc fcQScrollBar_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QScrollBar_virtualbase_disconnectNotify".}
+proc fcQScrollBar_protectedbase_setRepeatAction(self: pointer, action: cint): void {.importc: "QScrollBar_protectedbase_setRepeatAction".}
+proc fcQScrollBar_protectedbase_repeatAction(self: pointer, ): cint {.importc: "QScrollBar_protectedbase_repeatAction".}
+proc fcQScrollBar_protectedbase_updateMicroFocus(self: pointer, ): void {.importc: "QScrollBar_protectedbase_updateMicroFocus".}
+proc fcQScrollBar_protectedbase_create(self: pointer, ): void {.importc: "QScrollBar_protectedbase_create".}
+proc fcQScrollBar_protectedbase_destroy(self: pointer, ): void {.importc: "QScrollBar_protectedbase_destroy".}
+proc fcQScrollBar_protectedbase_focusNextChild(self: pointer, ): bool {.importc: "QScrollBar_protectedbase_focusNextChild".}
+proc fcQScrollBar_protectedbase_focusPreviousChild(self: pointer, ): bool {.importc: "QScrollBar_protectedbase_focusPreviousChild".}
+proc fcQScrollBar_protectedbase_sender(self: pointer, ): pointer {.importc: "QScrollBar_protectedbase_sender".}
+proc fcQScrollBar_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QScrollBar_protectedbase_senderSignalIndex".}
+proc fcQScrollBar_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QScrollBar_protectedbase_receivers".}
+proc fcQScrollBar_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QScrollBar_protectedbase_isSignalConnected".}
 proc fcQScrollBar_new(vtbl: pointer, parent: pointer): ptr cQScrollBar {.importc: "QScrollBar_new".}
 proc fcQScrollBar_new2(vtbl: pointer, ): ptr cQScrollBar {.importc: "QScrollBar_new2".}
 proc fcQScrollBar_new3(vtbl: pointer, param1: cint): ptr cQScrollBar {.importc: "QScrollBar_new3".}
@@ -815,6 +826,39 @@ proc miqt_exec_callback_cQScrollBar_disconnectNotify(vtbl: pointer, self: pointe
   let self = QScrollBar(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
   vtbl[].disconnectNotify(self, slotval1)
+
+proc setRepeatAction*(self: gen_qscrollbar_types.QScrollBar, action: cint): void =
+  fcQScrollBar_protectedbase_setRepeatAction(self.h, cint(action))
+
+proc repeatAction*(self: gen_qscrollbar_types.QScrollBar, ): cint =
+  cint(fcQScrollBar_protectedbase_repeatAction(self.h))
+
+proc updateMicroFocus*(self: gen_qscrollbar_types.QScrollBar, ): void =
+  fcQScrollBar_protectedbase_updateMicroFocus(self.h)
+
+proc create*(self: gen_qscrollbar_types.QScrollBar, ): void =
+  fcQScrollBar_protectedbase_create(self.h)
+
+proc destroy*(self: gen_qscrollbar_types.QScrollBar, ): void =
+  fcQScrollBar_protectedbase_destroy(self.h)
+
+proc focusNextChild*(self: gen_qscrollbar_types.QScrollBar, ): bool =
+  fcQScrollBar_protectedbase_focusNextChild(self.h)
+
+proc focusPreviousChild*(self: gen_qscrollbar_types.QScrollBar, ): bool =
+  fcQScrollBar_protectedbase_focusPreviousChild(self.h)
+
+proc sender*(self: gen_qscrollbar_types.QScrollBar, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQScrollBar_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qscrollbar_types.QScrollBar, ): cint =
+  fcQScrollBar_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qscrollbar_types.QScrollBar, signal: cstring): cint =
+  fcQScrollBar_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qscrollbar_types.QScrollBar, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQScrollBar_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc create*(T: type gen_qscrollbar_types.QScrollBar,
     parent: gen_qwidget_types.QWidget,

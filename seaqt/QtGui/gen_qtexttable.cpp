@@ -273,10 +273,10 @@ public:
 	friend void QTextTable_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
 
 	// Wrappers to allow calling protected methods:
-	friend QObject* QTextTable_protectedbase_sender(bool* _dynamic_cast_ok, const void* self);
-	friend int QTextTable_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
-	friend int QTextTable_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
-	friend bool QTextTable_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+	friend QObject* QTextTable_protectedbase_sender(const void* self);
+	friend int QTextTable_protectedbase_senderSignalIndex(const void* self);
+	friend int QTextTable_protectedbase_receivers(const void* self, const char* signal);
+	friend bool QTextTable_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
 };
 
 QTextTable* QTextTable_new(struct QTextTable_VTable* vtbl, QTextDocument* doc) {
@@ -469,53 +469,29 @@ void QTextTable_virtualbase_disconnectNotify(void* self, QMetaMethod* signal) {
 }
 
 const QMetaObject* QTextTable_staticMetaObject() { return &QTextTable::staticMetaObject; }
-QObject* QTextTable_protectedbase_sender(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQTextTable* self_cast = dynamic_cast<VirtualQTextTable*>( (QTextTable*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return nullptr;
-	}
-	
-	*_dynamic_cast_ok = true;
+QObject* QTextTable_protectedbase_sender(const void* self) {
+	VirtualQTextTable* self_cast = static_cast<VirtualQTextTable*>( (QTextTable*)(self) );
 	
 	return self_cast->sender();
 
 }
 
-int QTextTable_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQTextTable* self_cast = dynamic_cast<VirtualQTextTable*>( (QTextTable*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return 0;
-	}
-	
-	*_dynamic_cast_ok = true;
+int QTextTable_protectedbase_senderSignalIndex(const void* self) {
+	VirtualQTextTable* self_cast = static_cast<VirtualQTextTable*>( (QTextTable*)(self) );
 	
 	return self_cast->senderSignalIndex();
 
 }
 
-int QTextTable_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal) {
-	VirtualQTextTable* self_cast = dynamic_cast<VirtualQTextTable*>( (QTextTable*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return 0;
-	}
-	
-	*_dynamic_cast_ok = true;
+int QTextTable_protectedbase_receivers(const void* self, const char* signal) {
+	VirtualQTextTable* self_cast = static_cast<VirtualQTextTable*>( (QTextTable*)(self) );
 	
 	return self_cast->receivers(signal);
 
 }
 
-bool QTextTable_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal) {
-	VirtualQTextTable* self_cast = dynamic_cast<VirtualQTextTable*>( (QTextTable*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return false;
-	}
-	
-	*_dynamic_cast_ok = true;
+bool QTextTable_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal) {
+	VirtualQTextTable* self_cast = static_cast<VirtualQTextTable*>( (QTextTable*)(self) );
 	
 	return self_cast->isSignalConnected(*signal);
 

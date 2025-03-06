@@ -103,6 +103,10 @@ proc fcQQuickTextureFactory_virtualbase_childEvent(self: pointer, event: pointer
 proc fcQQuickTextureFactory_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QQuickTextureFactory_virtualbase_customEvent".}
 proc fcQQuickTextureFactory_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QQuickTextureFactory_virtualbase_connectNotify".}
 proc fcQQuickTextureFactory_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QQuickTextureFactory_virtualbase_disconnectNotify".}
+proc fcQQuickTextureFactory_protectedbase_sender(self: pointer, ): pointer {.importc: "QQuickTextureFactory_protectedbase_sender".}
+proc fcQQuickTextureFactory_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QQuickTextureFactory_protectedbase_senderSignalIndex".}
+proc fcQQuickTextureFactory_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QQuickTextureFactory_protectedbase_receivers".}
+proc fcQQuickTextureFactory_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QQuickTextureFactory_protectedbase_isSignalConnected".}
 proc fcQQuickTextureFactory_new(vtbl: pointer, ): ptr cQQuickTextureFactory {.importc: "QQuickTextureFactory_new".}
 proc fcQQuickTextureFactory_staticMetaObject(): pointer {.importc: "QQuickTextureFactory_staticMetaObject".}
 proc fcQQuickTextureFactory_delete(self: pointer) {.importc: "QQuickTextureFactory_delete".}
@@ -144,6 +148,10 @@ proc fcQQuickImageResponse_virtualbase_childEvent(self: pointer, event: pointer)
 proc fcQQuickImageResponse_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QQuickImageResponse_virtualbase_customEvent".}
 proc fcQQuickImageResponse_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QQuickImageResponse_virtualbase_connectNotify".}
 proc fcQQuickImageResponse_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QQuickImageResponse_virtualbase_disconnectNotify".}
+proc fcQQuickImageResponse_protectedbase_sender(self: pointer, ): pointer {.importc: "QQuickImageResponse_protectedbase_sender".}
+proc fcQQuickImageResponse_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QQuickImageResponse_protectedbase_senderSignalIndex".}
+proc fcQQuickImageResponse_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QQuickImageResponse_protectedbase_receivers".}
+proc fcQQuickImageResponse_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QQuickImageResponse_protectedbase_isSignalConnected".}
 proc fcQQuickImageResponse_new(vtbl: pointer, ): ptr cQQuickImageResponse {.importc: "QQuickImageResponse_new".}
 proc fcQQuickImageResponse_staticMetaObject(): pointer {.importc: "QQuickImageResponse_staticMetaObject".}
 proc fcQQuickImageResponse_delete(self: pointer) {.importc: "QQuickImageResponse_delete".}
@@ -190,6 +198,10 @@ proc fcQQuickImageProvider_virtualbase_childEvent(self: pointer, event: pointer)
 proc fcQQuickImageProvider_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QQuickImageProvider_virtualbase_customEvent".}
 proc fcQQuickImageProvider_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QQuickImageProvider_virtualbase_connectNotify".}
 proc fcQQuickImageProvider_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QQuickImageProvider_virtualbase_disconnectNotify".}
+proc fcQQuickImageProvider_protectedbase_sender(self: pointer, ): pointer {.importc: "QQuickImageProvider_protectedbase_sender".}
+proc fcQQuickImageProvider_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QQuickImageProvider_protectedbase_senderSignalIndex".}
+proc fcQQuickImageProvider_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QQuickImageProvider_protectedbase_receivers".}
+proc fcQQuickImageProvider_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QQuickImageProvider_protectedbase_isSignalConnected".}
 proc fcQQuickImageProvider_new(vtbl: pointer, typeVal: cint): ptr cQQuickImageProvider {.importc: "QQuickImageProvider_new".}
 proc fcQQuickImageProvider_new2(vtbl: pointer, typeVal: cint, flags: cint): ptr cQQuickImageProvider {.importc: "QQuickImageProvider_new2".}
 proc fcQQuickImageProvider_staticMetaObject(): pointer {.importc: "QQuickImageProvider_staticMetaObject".}
@@ -228,6 +240,10 @@ proc fcQQuickAsyncImageProvider_virtualbase_childEvent(self: pointer, event: poi
 proc fcQQuickAsyncImageProvider_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QQuickAsyncImageProvider_virtualbase_customEvent".}
 proc fcQQuickAsyncImageProvider_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QQuickAsyncImageProvider_virtualbase_connectNotify".}
 proc fcQQuickAsyncImageProvider_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QQuickAsyncImageProvider_virtualbase_disconnectNotify".}
+proc fcQQuickAsyncImageProvider_protectedbase_sender(self: pointer, ): pointer {.importc: "QQuickAsyncImageProvider_protectedbase_sender".}
+proc fcQQuickAsyncImageProvider_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QQuickAsyncImageProvider_protectedbase_senderSignalIndex".}
+proc fcQQuickAsyncImageProvider_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QQuickAsyncImageProvider_protectedbase_receivers".}
+proc fcQQuickAsyncImageProvider_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QQuickAsyncImageProvider_protectedbase_isSignalConnected".}
 proc fcQQuickAsyncImageProvider_new(vtbl: pointer, ): ptr cQQuickAsyncImageProvider {.importc: "QQuickAsyncImageProvider_new".}
 proc fcQQuickAsyncImageProvider_delete(self: pointer) {.importc: "QQuickAsyncImageProvider_delete".}
 
@@ -427,6 +443,18 @@ proc miqt_exec_callback_cQQuickTextureFactory_disconnectNotify(vtbl: pointer, se
   let self = QQuickTextureFactory(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
   vtbl[].disconnectNotify(self, slotval1)
+
+proc sender*(self: gen_qquickimageprovider_types.QQuickTextureFactory, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQQuickTextureFactory_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qquickimageprovider_types.QQuickTextureFactory, ): cint =
+  fcQQuickTextureFactory_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qquickimageprovider_types.QQuickTextureFactory, signal: cstring): cint =
+  fcQQuickTextureFactory_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qquickimageprovider_types.QQuickTextureFactory, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQQuickTextureFactory_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc create*(T: type gen_qquickimageprovider_types.QQuickTextureFactory,
     vtbl: ref QQuickTextureFactoryVTable = nil): gen_qquickimageprovider_types.QQuickTextureFactory =
@@ -676,6 +704,18 @@ proc miqt_exec_callback_cQQuickImageResponse_disconnectNotify(vtbl: pointer, sel
   let self = QQuickImageResponse(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
   vtbl[].disconnectNotify(self, slotval1)
+
+proc sender*(self: gen_qquickimageprovider_types.QQuickImageResponse, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQQuickImageResponse_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qquickimageprovider_types.QQuickImageResponse, ): cint =
+  fcQQuickImageResponse_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qquickimageprovider_types.QQuickImageResponse, signal: cstring): cint =
+  fcQQuickImageResponse_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qquickimageprovider_types.QQuickImageResponse, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQQuickImageResponse_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc create*(T: type gen_qquickimageprovider_types.QQuickImageResponse,
     vtbl: ref QQuickImageResponseVTable = nil): gen_qquickimageprovider_types.QQuickImageResponse =
@@ -949,6 +989,18 @@ proc miqt_exec_callback_cQQuickImageProvider_disconnectNotify(vtbl: pointer, sel
   let self = QQuickImageProvider(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
   vtbl[].disconnectNotify(self, slotval1)
+
+proc sender*(self: gen_qquickimageprovider_types.QQuickImageProvider, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQQuickImageProvider_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qquickimageprovider_types.QQuickImageProvider, ): cint =
+  fcQQuickImageProvider_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qquickimageprovider_types.QQuickImageProvider, signal: cstring): cint =
+  fcQQuickImageProvider_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qquickimageprovider_types.QQuickImageProvider, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQQuickImageProvider_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc create*(T: type gen_qquickimageprovider_types.QQuickImageProvider,
     typeVal: cint,
@@ -1241,6 +1293,18 @@ proc miqt_exec_callback_cQQuickAsyncImageProvider_disconnectNotify(vtbl: pointer
   let self = QQuickAsyncImageProvider(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
   vtbl[].disconnectNotify(self, slotval1)
+
+proc sender*(self: gen_qquickimageprovider_types.QQuickAsyncImageProvider, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQQuickAsyncImageProvider_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qquickimageprovider_types.QQuickAsyncImageProvider, ): cint =
+  fcQQuickAsyncImageProvider_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qquickimageprovider_types.QQuickAsyncImageProvider, signal: cstring): cint =
+  fcQQuickAsyncImageProvider_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qquickimageprovider_types.QQuickAsyncImageProvider, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQQuickAsyncImageProvider_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc create*(T: type gen_qquickimageprovider_types.QQuickAsyncImageProvider,
     vtbl: ref QQuickAsyncImageProviderVTable = nil): gen_qquickimageprovider_types.QQuickAsyncImageProvider =

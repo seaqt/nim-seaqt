@@ -294,10 +294,10 @@ public:
 	friend void QPropertyAnimation_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
 
 	// Wrappers to allow calling protected methods:
-	friend QObject* QPropertyAnimation_protectedbase_sender(bool* _dynamic_cast_ok, const void* self);
-	friend int QPropertyAnimation_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
-	friend int QPropertyAnimation_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
-	friend bool QPropertyAnimation_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+	friend QObject* QPropertyAnimation_protectedbase_sender(const void* self);
+	friend int QPropertyAnimation_protectedbase_senderSignalIndex(const void* self);
+	friend int QPropertyAnimation_protectedbase_receivers(const void* self, const char* signal);
+	friend bool QPropertyAnimation_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
 };
 
 QPropertyAnimation* QPropertyAnimation_new(struct QPropertyAnimation_VTable* vtbl) {
@@ -486,53 +486,29 @@ void QPropertyAnimation_virtualbase_disconnectNotify(void* self, QMetaMethod* si
 }
 
 const QMetaObject* QPropertyAnimation_staticMetaObject() { return &QPropertyAnimation::staticMetaObject; }
-QObject* QPropertyAnimation_protectedbase_sender(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQPropertyAnimation* self_cast = dynamic_cast<VirtualQPropertyAnimation*>( (QPropertyAnimation*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return nullptr;
-	}
-	
-	*_dynamic_cast_ok = true;
+QObject* QPropertyAnimation_protectedbase_sender(const void* self) {
+	VirtualQPropertyAnimation* self_cast = static_cast<VirtualQPropertyAnimation*>( (QPropertyAnimation*)(self) );
 	
 	return self_cast->sender();
 
 }
 
-int QPropertyAnimation_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQPropertyAnimation* self_cast = dynamic_cast<VirtualQPropertyAnimation*>( (QPropertyAnimation*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return 0;
-	}
-	
-	*_dynamic_cast_ok = true;
+int QPropertyAnimation_protectedbase_senderSignalIndex(const void* self) {
+	VirtualQPropertyAnimation* self_cast = static_cast<VirtualQPropertyAnimation*>( (QPropertyAnimation*)(self) );
 	
 	return self_cast->senderSignalIndex();
 
 }
 
-int QPropertyAnimation_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal) {
-	VirtualQPropertyAnimation* self_cast = dynamic_cast<VirtualQPropertyAnimation*>( (QPropertyAnimation*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return 0;
-	}
-	
-	*_dynamic_cast_ok = true;
+int QPropertyAnimation_protectedbase_receivers(const void* self, const char* signal) {
+	VirtualQPropertyAnimation* self_cast = static_cast<VirtualQPropertyAnimation*>( (QPropertyAnimation*)(self) );
 	
 	return self_cast->receivers(signal);
 
 }
 
-bool QPropertyAnimation_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal) {
-	VirtualQPropertyAnimation* self_cast = dynamic_cast<VirtualQPropertyAnimation*>( (QPropertyAnimation*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return false;
-	}
-	
-	*_dynamic_cast_ok = true;
+bool QPropertyAnimation_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal) {
+	VirtualQPropertyAnimation* self_cast = static_cast<VirtualQPropertyAnimation*>( (QPropertyAnimation*)(self) );
 	
 	return self_cast->isSignalConnected(*signal);
 

@@ -189,10 +189,10 @@ public:
 	friend void QSocketNotifier_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
 
 	// Wrappers to allow calling protected methods:
-	friend QObject* QSocketNotifier_protectedbase_sender(bool* _dynamic_cast_ok, const void* self);
-	friend int QSocketNotifier_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
-	friend int QSocketNotifier_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
-	friend bool QSocketNotifier_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+	friend QObject* QSocketNotifier_protectedbase_sender(const void* self);
+	friend int QSocketNotifier_protectedbase_senderSignalIndex(const void* self);
+	friend int QSocketNotifier_protectedbase_receivers(const void* self, const char* signal);
+	friend bool QSocketNotifier_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
 };
 
 QSocketNotifier* QSocketNotifier_new(struct QSocketNotifier_VTable* vtbl, int param1) {
@@ -347,53 +347,29 @@ void QSocketNotifier_virtualbase_disconnectNotify(void* self, QMetaMethod* signa
 }
 
 const QMetaObject* QSocketNotifier_staticMetaObject() { return &QSocketNotifier::staticMetaObject; }
-QObject* QSocketNotifier_protectedbase_sender(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQSocketNotifier* self_cast = dynamic_cast<VirtualQSocketNotifier*>( (QSocketNotifier*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return nullptr;
-	}
-	
-	*_dynamic_cast_ok = true;
+QObject* QSocketNotifier_protectedbase_sender(const void* self) {
+	VirtualQSocketNotifier* self_cast = static_cast<VirtualQSocketNotifier*>( (QSocketNotifier*)(self) );
 	
 	return self_cast->sender();
 
 }
 
-int QSocketNotifier_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQSocketNotifier* self_cast = dynamic_cast<VirtualQSocketNotifier*>( (QSocketNotifier*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return 0;
-	}
-	
-	*_dynamic_cast_ok = true;
+int QSocketNotifier_protectedbase_senderSignalIndex(const void* self) {
+	VirtualQSocketNotifier* self_cast = static_cast<VirtualQSocketNotifier*>( (QSocketNotifier*)(self) );
 	
 	return self_cast->senderSignalIndex();
 
 }
 
-int QSocketNotifier_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal) {
-	VirtualQSocketNotifier* self_cast = dynamic_cast<VirtualQSocketNotifier*>( (QSocketNotifier*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return 0;
-	}
-	
-	*_dynamic_cast_ok = true;
+int QSocketNotifier_protectedbase_receivers(const void* self, const char* signal) {
+	VirtualQSocketNotifier* self_cast = static_cast<VirtualQSocketNotifier*>( (QSocketNotifier*)(self) );
 	
 	return self_cast->receivers(signal);
 
 }
 
-bool QSocketNotifier_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal) {
-	VirtualQSocketNotifier* self_cast = dynamic_cast<VirtualQSocketNotifier*>( (QSocketNotifier*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return false;
-	}
-	
-	*_dynamic_cast_ok = true;
+bool QSocketNotifier_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal) {
+	VirtualQSocketNotifier* self_cast = static_cast<VirtualQSocketNotifier*>( (QSocketNotifier*)(self) );
 	
 	return self_cast->isSignalConnected(*signal);
 

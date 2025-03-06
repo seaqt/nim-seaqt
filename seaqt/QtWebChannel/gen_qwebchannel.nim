@@ -93,6 +93,10 @@ proc fcQWebChannel_virtualbase_childEvent(self: pointer, event: pointer): void {
 proc fcQWebChannel_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QWebChannel_virtualbase_customEvent".}
 proc fcQWebChannel_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QWebChannel_virtualbase_connectNotify".}
 proc fcQWebChannel_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QWebChannel_virtualbase_disconnectNotify".}
+proc fcQWebChannel_protectedbase_sender(self: pointer, ): pointer {.importc: "QWebChannel_protectedbase_sender".}
+proc fcQWebChannel_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QWebChannel_protectedbase_senderSignalIndex".}
+proc fcQWebChannel_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QWebChannel_protectedbase_receivers".}
+proc fcQWebChannel_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QWebChannel_protectedbase_isSignalConnected".}
 proc fcQWebChannel_new(vtbl: pointer, ): ptr cQWebChannel {.importc: "QWebChannel_new".}
 proc fcQWebChannel_new2(vtbl: pointer, parent: pointer): ptr cQWebChannel {.importc: "QWebChannel_new2".}
 proc fcQWebChannel_staticMetaObject(): pointer {.importc: "QWebChannel_staticMetaObject".}
@@ -314,6 +318,18 @@ proc miqt_exec_callback_cQWebChannel_disconnectNotify(vtbl: pointer, self: point
   let self = QWebChannel(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
   vtbl[].disconnectNotify(self, slotval1)
+
+proc sender*(self: gen_qwebchannel_types.QWebChannel, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQWebChannel_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qwebchannel_types.QWebChannel, ): cint =
+  fcQWebChannel_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qwebchannel_types.QWebChannel, signal: cstring): cint =
+  fcQWebChannel_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qwebchannel_types.QWebChannel, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQWebChannel_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc create*(T: type gen_qwebchannel_types.QWebChannel,
     vtbl: ref QWebChannelVTable = nil): gen_qwebchannel_types.QWebChannel =

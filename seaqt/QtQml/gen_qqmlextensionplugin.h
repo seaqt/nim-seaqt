@@ -86,10 +86,10 @@ void QQmlExtensionPlugin_virtualbase_childEvent(void* self, QChildEvent* event);
 void QQmlExtensionPlugin_virtualbase_customEvent(void* self, QEvent* event);
 void QQmlExtensionPlugin_virtualbase_connectNotify(void* self, QMetaMethod* signal);
 void QQmlExtensionPlugin_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
-QObject* QQmlExtensionPlugin_protectedbase_sender(bool* _dynamic_cast_ok, const void* self);
-int QQmlExtensionPlugin_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
-int QQmlExtensionPlugin_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
-bool QQmlExtensionPlugin_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+QObject* QQmlExtensionPlugin_protectedbase_sender(const void* self);
+int QQmlExtensionPlugin_protectedbase_senderSignalIndex(const void* self);
+int QQmlExtensionPlugin_protectedbase_receivers(const void* self, const char* signal);
+bool QQmlExtensionPlugin_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
 const QMetaObject* QQmlExtensionPlugin_staticMetaObject();
 void QQmlExtensionPlugin_delete(QQmlExtensionPlugin* self);
 
@@ -128,10 +128,10 @@ void QQmlEngineExtensionPlugin_virtualbase_childEvent(void* self, QChildEvent* e
 void QQmlEngineExtensionPlugin_virtualbase_customEvent(void* self, QEvent* event);
 void QQmlEngineExtensionPlugin_virtualbase_connectNotify(void* self, QMetaMethod* signal);
 void QQmlEngineExtensionPlugin_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
-QObject* QQmlEngineExtensionPlugin_protectedbase_sender(bool* _dynamic_cast_ok, const void* self);
-int QQmlEngineExtensionPlugin_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
-int QQmlEngineExtensionPlugin_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
-bool QQmlEngineExtensionPlugin_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+QObject* QQmlEngineExtensionPlugin_protectedbase_sender(const void* self);
+int QQmlEngineExtensionPlugin_protectedbase_senderSignalIndex(const void* self);
+int QQmlEngineExtensionPlugin_protectedbase_receivers(const void* self, const char* signal);
+bool QQmlEngineExtensionPlugin_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
 const QMetaObject* QQmlEngineExtensionPlugin_staticMetaObject();
 void QQmlEngineExtensionPlugin_delete(QQmlEngineExtensionPlugin* self);
 

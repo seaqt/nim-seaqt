@@ -128,6 +128,10 @@ proc fcQSoundEffect_virtualbase_childEvent(self: pointer, event: pointer): void 
 proc fcQSoundEffect_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QSoundEffect_virtualbase_customEvent".}
 proc fcQSoundEffect_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QSoundEffect_virtualbase_connectNotify".}
 proc fcQSoundEffect_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QSoundEffect_virtualbase_disconnectNotify".}
+proc fcQSoundEffect_protectedbase_sender(self: pointer, ): pointer {.importc: "QSoundEffect_protectedbase_sender".}
+proc fcQSoundEffect_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QSoundEffect_protectedbase_senderSignalIndex".}
+proc fcQSoundEffect_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QSoundEffect_protectedbase_receivers".}
+proc fcQSoundEffect_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QSoundEffect_protectedbase_isSignalConnected".}
 proc fcQSoundEffect_new(vtbl: pointer, ): ptr cQSoundEffect {.importc: "QSoundEffect_new".}
 proc fcQSoundEffect_new2(vtbl: pointer, audioDevice: pointer): ptr cQSoundEffect {.importc: "QSoundEffect_new2".}
 proc fcQSoundEffect_new3(vtbl: pointer, parent: pointer): ptr cQSoundEffect {.importc: "QSoundEffect_new3".}
@@ -501,6 +505,18 @@ proc miqt_exec_callback_cQSoundEffect_disconnectNotify(vtbl: pointer, self: poin
   let self = QSoundEffect(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
   vtbl[].disconnectNotify(self, slotval1)
+
+proc sender*(self: gen_qsoundeffect_types.QSoundEffect, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQSoundEffect_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qsoundeffect_types.QSoundEffect, ): cint =
+  fcQSoundEffect_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qsoundeffect_types.QSoundEffect, signal: cstring): cint =
+  fcQSoundEffect_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qsoundeffect_types.QSoundEffect, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQSoundEffect_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc create*(T: type gen_qsoundeffect_types.QSoundEffect,
     vtbl: ref QSoundEffectVTable = nil): gen_qsoundeffect_types.QSoundEffect =

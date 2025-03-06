@@ -189,10 +189,10 @@ public:
 	friend void QAudioEngine_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
 
 	// Wrappers to allow calling protected methods:
-	friend QObject* QAudioEngine_protectedbase_sender(bool* _dynamic_cast_ok, const void* self);
-	friend int QAudioEngine_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
-	friend int QAudioEngine_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
-	friend bool QAudioEngine_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+	friend QObject* QAudioEngine_protectedbase_sender(const void* self);
+	friend int QAudioEngine_protectedbase_senderSignalIndex(const void* self);
+	friend int QAudioEngine_protectedbase_receivers(const void* self, const char* signal);
+	friend bool QAudioEngine_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
 };
 
 QAudioEngine* QAudioEngine_new(struct QAudioEngine_VTable* vtbl) {
@@ -465,53 +465,29 @@ void QAudioEngine_virtualbase_disconnectNotify(void* self, QMetaMethod* signal) 
 }
 
 const QMetaObject* QAudioEngine_staticMetaObject() { return &QAudioEngine::staticMetaObject; }
-QObject* QAudioEngine_protectedbase_sender(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQAudioEngine* self_cast = dynamic_cast<VirtualQAudioEngine*>( (QAudioEngine*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return nullptr;
-	}
-	
-	*_dynamic_cast_ok = true;
+QObject* QAudioEngine_protectedbase_sender(const void* self) {
+	VirtualQAudioEngine* self_cast = static_cast<VirtualQAudioEngine*>( (QAudioEngine*)(self) );
 	
 	return self_cast->sender();
 
 }
 
-int QAudioEngine_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQAudioEngine* self_cast = dynamic_cast<VirtualQAudioEngine*>( (QAudioEngine*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return 0;
-	}
-	
-	*_dynamic_cast_ok = true;
+int QAudioEngine_protectedbase_senderSignalIndex(const void* self) {
+	VirtualQAudioEngine* self_cast = static_cast<VirtualQAudioEngine*>( (QAudioEngine*)(self) );
 	
 	return self_cast->senderSignalIndex();
 
 }
 
-int QAudioEngine_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal) {
-	VirtualQAudioEngine* self_cast = dynamic_cast<VirtualQAudioEngine*>( (QAudioEngine*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return 0;
-	}
-	
-	*_dynamic_cast_ok = true;
+int QAudioEngine_protectedbase_receivers(const void* self, const char* signal) {
+	VirtualQAudioEngine* self_cast = static_cast<VirtualQAudioEngine*>( (QAudioEngine*)(self) );
 	
 	return self_cast->receivers(signal);
 
 }
 
-bool QAudioEngine_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal) {
-	VirtualQAudioEngine* self_cast = dynamic_cast<VirtualQAudioEngine*>( (QAudioEngine*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return false;
-	}
-	
-	*_dynamic_cast_ok = true;
+bool QAudioEngine_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal) {
+	VirtualQAudioEngine* self_cast = static_cast<VirtualQAudioEngine*>( (QAudioEngine*)(self) );
 	
 	return self_cast->isSignalConnected(*signal);
 

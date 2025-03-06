@@ -103,6 +103,10 @@ proc fcQAudioSource_virtualbase_childEvent(self: pointer, event: pointer): void 
 proc fcQAudioSource_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QAudioSource_virtualbase_customEvent".}
 proc fcQAudioSource_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QAudioSource_virtualbase_connectNotify".}
 proc fcQAudioSource_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QAudioSource_virtualbase_disconnectNotify".}
+proc fcQAudioSource_protectedbase_sender(self: pointer, ): pointer {.importc: "QAudioSource_protectedbase_sender".}
+proc fcQAudioSource_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QAudioSource_protectedbase_senderSignalIndex".}
+proc fcQAudioSource_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QAudioSource_protectedbase_receivers".}
+proc fcQAudioSource_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QAudioSource_protectedbase_isSignalConnected".}
 proc fcQAudioSource_new(vtbl: pointer, ): ptr cQAudioSource {.importc: "QAudioSource_new".}
 proc fcQAudioSource_new2(vtbl: pointer, audioDeviceInfo: pointer): ptr cQAudioSource {.importc: "QAudioSource_new2".}
 proc fcQAudioSource_new3(vtbl: pointer, format: pointer): ptr cQAudioSource {.importc: "QAudioSource_new3".}
@@ -328,6 +332,18 @@ proc miqt_exec_callback_cQAudioSource_disconnectNotify(vtbl: pointer, self: poin
   let self = QAudioSource(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
   vtbl[].disconnectNotify(self, slotval1)
+
+proc sender*(self: gen_qaudiosource_types.QAudioSource, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQAudioSource_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qaudiosource_types.QAudioSource, ): cint =
+  fcQAudioSource_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qaudiosource_types.QAudioSource, signal: cstring): cint =
+  fcQAudioSource_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qaudiosource_types.QAudioSource, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQAudioSource_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc create*(T: type gen_qaudiosource_types.QAudioSource,
     vtbl: ref QAudioSourceVTable = nil): gen_qaudiosource_types.QAudioSource =

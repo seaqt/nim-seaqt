@@ -245,10 +245,10 @@ public:
 	friend void QAnimationGroup_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
 
 	// Wrappers to allow calling protected methods:
-	friend QObject* QAnimationGroup_protectedbase_sender(bool* _dynamic_cast_ok, const void* self);
-	friend int QAnimationGroup_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
-	friend int QAnimationGroup_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
-	friend bool QAnimationGroup_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+	friend QObject* QAnimationGroup_protectedbase_sender(const void* self);
+	friend int QAnimationGroup_protectedbase_senderSignalIndex(const void* self);
+	friend int QAnimationGroup_protectedbase_receivers(const void* self, const char* signal);
+	friend bool QAnimationGroup_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
 };
 
 QAnimationGroup* QAnimationGroup_new(struct QAnimationGroup_VTable* vtbl) {
@@ -413,53 +413,29 @@ void QAnimationGroup_virtualbase_disconnectNotify(void* self, QMetaMethod* signa
 }
 
 const QMetaObject* QAnimationGroup_staticMetaObject() { return &QAnimationGroup::staticMetaObject; }
-QObject* QAnimationGroup_protectedbase_sender(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQAnimationGroup* self_cast = dynamic_cast<VirtualQAnimationGroup*>( (QAnimationGroup*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return nullptr;
-	}
-	
-	*_dynamic_cast_ok = true;
+QObject* QAnimationGroup_protectedbase_sender(const void* self) {
+	VirtualQAnimationGroup* self_cast = static_cast<VirtualQAnimationGroup*>( (QAnimationGroup*)(self) );
 	
 	return self_cast->sender();
 
 }
 
-int QAnimationGroup_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQAnimationGroup* self_cast = dynamic_cast<VirtualQAnimationGroup*>( (QAnimationGroup*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return 0;
-	}
-	
-	*_dynamic_cast_ok = true;
+int QAnimationGroup_protectedbase_senderSignalIndex(const void* self) {
+	VirtualQAnimationGroup* self_cast = static_cast<VirtualQAnimationGroup*>( (QAnimationGroup*)(self) );
 	
 	return self_cast->senderSignalIndex();
 
 }
 
-int QAnimationGroup_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal) {
-	VirtualQAnimationGroup* self_cast = dynamic_cast<VirtualQAnimationGroup*>( (QAnimationGroup*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return 0;
-	}
-	
-	*_dynamic_cast_ok = true;
+int QAnimationGroup_protectedbase_receivers(const void* self, const char* signal) {
+	VirtualQAnimationGroup* self_cast = static_cast<VirtualQAnimationGroup*>( (QAnimationGroup*)(self) );
 	
 	return self_cast->receivers(signal);
 
 }
 
-bool QAnimationGroup_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal) {
-	VirtualQAnimationGroup* self_cast = dynamic_cast<VirtualQAnimationGroup*>( (QAnimationGroup*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return false;
-	}
-	
-	*_dynamic_cast_ok = true;
+bool QAnimationGroup_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal) {
+	VirtualQAnimationGroup* self_cast = static_cast<VirtualQAnimationGroup*>( (QAnimationGroup*)(self) );
 	
 	return self_cast->isSignalConnected(*signal);
 

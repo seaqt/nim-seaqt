@@ -127,6 +127,8 @@ proc fcQJsonValueConstRef_toInt1(self: pointer, defaultValue: cint): cint {.impo
 proc fcQJsonValueConstRef_toInteger1(self: pointer, defaultValue: clonglong): clonglong {.importc: "QJsonValueConstRef_toInteger1".}
 proc fcQJsonValueConstRef_toDouble1(self: pointer, defaultValue: float64): float64 {.importc: "QJsonValueConstRef_toDouble1".}
 proc fcQJsonValueConstRef_toString1(self: pointer, defaultValue: struct_miqt_string): struct_miqt_string {.importc: "QJsonValueConstRef_toString1".}
+proc fcQJsonValueConstRef_protectedbase_objectKey(self: pointer, ): struct_miqt_string {.importc: "QJsonValueConstRef_protectedbase_objectKey".}
+proc fcQJsonValueConstRef_protectedbase_rebind(self: pointer, other: pointer): void {.importc: "QJsonValueConstRef_protectedbase_rebind".}
 proc fcQJsonValueConstRef_new(param1: pointer): ptr cQJsonValueConstRef {.importc: "QJsonValueConstRef_new".}
 proc fcQJsonValueConstRef_delete(self: pointer) {.importc: "QJsonValueConstRef_delete".}
 proc fcQJsonValueRef_operatorAssign(self: pointer, val: pointer): void {.importc: "QJsonValueRef_operatorAssign".}
@@ -156,6 +158,8 @@ proc fcQJsonValueRef_toInt1(self: pointer, defaultValue: cint): cint {.importc: 
 proc fcQJsonValueRef_toInteger1(self: pointer, defaultValue: clonglong): clonglong {.importc: "QJsonValueRef_toInteger1".}
 proc fcQJsonValueRef_toDouble1(self: pointer, defaultValue: float64): float64 {.importc: "QJsonValueRef_toDouble1".}
 proc fcQJsonValueRef_toString1(self: pointer, defaultValue: struct_miqt_string): struct_miqt_string {.importc: "QJsonValueRef_toString1".}
+proc fcQJsonValueRef_protectedbase_objectKey(self: pointer, ): struct_miqt_string {.importc: "QJsonValueRef_protectedbase_objectKey".}
+proc fcQJsonValueRef_protectedbase_rebind(self: pointer, other: pointer): void {.importc: "QJsonValueRef_protectedbase_rebind".}
 proc fcQJsonValueRef_new(param1: pointer): ptr cQJsonValueRef {.importc: "QJsonValueRef_new".}
 proc fcQJsonValueRef_new2(array: pointer, idx: int64): ptr cQJsonValueRef {.importc: "QJsonValueRef_new2".}
 proc fcQJsonValueRef_new3(objectVal: pointer, idx: int64): ptr cQJsonValueRef {.importc: "QJsonValueRef_new3".}
@@ -383,6 +387,15 @@ proc toString*(self: gen_qjsonvalue_types.QJsonValueConstRef, defaultValue: stri
   c_free(v_ms.data)
   vx_ret
 
+proc objectKey*(self: gen_qjsonvalue_types.QJsonValueConstRef, ): string =
+  let v_ms = fcQJsonValueConstRef_protectedbase_objectKey(self.h)
+  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  c_free(v_ms.data)
+  vx_ret
+
+proc rebind*(self: gen_qjsonvalue_types.QJsonValueConstRef, other: gen_qjsonvalue_types.QJsonValueConstRef): void =
+  fcQJsonValueConstRef_protectedbase_rebind(self.h, other.h)
+
 proc create*(T: type gen_qjsonvalue_types.QJsonValueConstRef,
     param1: gen_qjsonvalue_types.QJsonValueConstRef): gen_qjsonvalue_types.QJsonValueConstRef =
   gen_qjsonvalue_types.QJsonValueConstRef(h: fcQJsonValueConstRef_new(param1.h))
@@ -475,6 +488,15 @@ proc toString*(self: gen_qjsonvalue_types.QJsonValueRef, defaultValue: string): 
   let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
   c_free(v_ms.data)
   vx_ret
+
+proc objectKey*(self: gen_qjsonvalue_types.QJsonValueRef, ): string =
+  let v_ms = fcQJsonValueRef_protectedbase_objectKey(self.h)
+  let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
+  c_free(v_ms.data)
+  vx_ret
+
+proc rebind*(self: gen_qjsonvalue_types.QJsonValueRef, other: gen_qjsonvalue_types.QJsonValueConstRef): void =
+  fcQJsonValueRef_protectedbase_rebind(self.h, other.h)
 
 proc create*(T: type gen_qjsonvalue_types.QJsonValueRef,
     param1: gen_qjsonvalue_types.QJsonValueRef): gen_qjsonvalue_types.QJsonValueRef =

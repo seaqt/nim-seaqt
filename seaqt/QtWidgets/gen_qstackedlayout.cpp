@@ -529,15 +529,15 @@ public:
 	friend QSpacerItem* QStackedLayout_virtualbase_spacerItem(void* self);
 
 	// Wrappers to allow calling protected methods:
-	friend void QStackedLayout_protectedbase_widgetEvent(bool* _dynamic_cast_ok, void* self, QEvent* param1);
-	friend void QStackedLayout_protectedbase_addChildLayout(bool* _dynamic_cast_ok, void* self, QLayout* l);
-	friend void QStackedLayout_protectedbase_addChildWidget(bool* _dynamic_cast_ok, void* self, QWidget* w);
-	friend bool QStackedLayout_protectedbase_adoptLayout(bool* _dynamic_cast_ok, void* self, QLayout* layout);
-	friend QRect* QStackedLayout_protectedbase_alignmentRect(bool* _dynamic_cast_ok, const void* self, QRect* param1);
-	friend QObject* QStackedLayout_protectedbase_sender(bool* _dynamic_cast_ok, const void* self);
-	friend int QStackedLayout_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
-	friend int QStackedLayout_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
-	friend bool QStackedLayout_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+	friend void QStackedLayout_protectedbase_widgetEvent(void* self, QEvent* param1);
+	friend void QStackedLayout_protectedbase_addChildLayout(void* self, QLayout* l);
+	friend void QStackedLayout_protectedbase_addChildWidget(void* self, QWidget* w);
+	friend bool QStackedLayout_protectedbase_adoptLayout(void* self, QLayout* layout);
+	friend QRect* QStackedLayout_protectedbase_alignmentRect(const void* self, QRect* param1);
+	friend QObject* QStackedLayout_protectedbase_sender(const void* self);
+	friend int QStackedLayout_protectedbase_senderSignalIndex(const void* self);
+	friend int QStackedLayout_protectedbase_receivers(const void* self, const char* signal);
+	friend bool QStackedLayout_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
 };
 
 QStackedLayout* QStackedLayout_new(struct QStackedLayout_VTable* vtbl, QWidget* parent) {
@@ -907,118 +907,64 @@ QSpacerItem* QStackedLayout_virtualbase_spacerItem(void* self) {
 }
 
 const QMetaObject* QStackedLayout_staticMetaObject() { return &QStackedLayout::staticMetaObject; }
-void QStackedLayout_protectedbase_widgetEvent(bool* _dynamic_cast_ok, void* self, QEvent* param1) {
-	VirtualQStackedLayout* self_cast = dynamic_cast<VirtualQStackedLayout*>( (QStackedLayout*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QStackedLayout_protectedbase_widgetEvent(void* self, QEvent* param1) {
+	VirtualQStackedLayout* self_cast = static_cast<VirtualQStackedLayout*>( (QStackedLayout*)(self) );
 	
 	self_cast->widgetEvent(param1);
 
 }
 
-void QStackedLayout_protectedbase_addChildLayout(bool* _dynamic_cast_ok, void* self, QLayout* l) {
-	VirtualQStackedLayout* self_cast = dynamic_cast<VirtualQStackedLayout*>( (QStackedLayout*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QStackedLayout_protectedbase_addChildLayout(void* self, QLayout* l) {
+	VirtualQStackedLayout* self_cast = static_cast<VirtualQStackedLayout*>( (QStackedLayout*)(self) );
 	
 	self_cast->addChildLayout(l);
 
 }
 
-void QStackedLayout_protectedbase_addChildWidget(bool* _dynamic_cast_ok, void* self, QWidget* w) {
-	VirtualQStackedLayout* self_cast = dynamic_cast<VirtualQStackedLayout*>( (QStackedLayout*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QStackedLayout_protectedbase_addChildWidget(void* self, QWidget* w) {
+	VirtualQStackedLayout* self_cast = static_cast<VirtualQStackedLayout*>( (QStackedLayout*)(self) );
 	
 	self_cast->addChildWidget(w);
 
 }
 
-bool QStackedLayout_protectedbase_adoptLayout(bool* _dynamic_cast_ok, void* self, QLayout* layout) {
-	VirtualQStackedLayout* self_cast = dynamic_cast<VirtualQStackedLayout*>( (QStackedLayout*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return false;
-	}
-	
-	*_dynamic_cast_ok = true;
+bool QStackedLayout_protectedbase_adoptLayout(void* self, QLayout* layout) {
+	VirtualQStackedLayout* self_cast = static_cast<VirtualQStackedLayout*>( (QStackedLayout*)(self) );
 	
 	return self_cast->adoptLayout(layout);
 
 }
 
-QRect* QStackedLayout_protectedbase_alignmentRect(bool* _dynamic_cast_ok, const void* self, QRect* param1) {
-	VirtualQStackedLayout* self_cast = dynamic_cast<VirtualQStackedLayout*>( (QStackedLayout*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return nullptr;
-	}
-	
-	*_dynamic_cast_ok = true;
+QRect* QStackedLayout_protectedbase_alignmentRect(const void* self, QRect* param1) {
+	VirtualQStackedLayout* self_cast = static_cast<VirtualQStackedLayout*>( (QStackedLayout*)(self) );
 	
 	return new QRect(self_cast->alignmentRect(*param1));
 
 }
 
-QObject* QStackedLayout_protectedbase_sender(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQStackedLayout* self_cast = dynamic_cast<VirtualQStackedLayout*>( (QStackedLayout*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return nullptr;
-	}
-	
-	*_dynamic_cast_ok = true;
+QObject* QStackedLayout_protectedbase_sender(const void* self) {
+	VirtualQStackedLayout* self_cast = static_cast<VirtualQStackedLayout*>( (QStackedLayout*)(self) );
 	
 	return self_cast->sender();
 
 }
 
-int QStackedLayout_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQStackedLayout* self_cast = dynamic_cast<VirtualQStackedLayout*>( (QStackedLayout*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return 0;
-	}
-	
-	*_dynamic_cast_ok = true;
+int QStackedLayout_protectedbase_senderSignalIndex(const void* self) {
+	VirtualQStackedLayout* self_cast = static_cast<VirtualQStackedLayout*>( (QStackedLayout*)(self) );
 	
 	return self_cast->senderSignalIndex();
 
 }
 
-int QStackedLayout_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal) {
-	VirtualQStackedLayout* self_cast = dynamic_cast<VirtualQStackedLayout*>( (QStackedLayout*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return 0;
-	}
-	
-	*_dynamic_cast_ok = true;
+int QStackedLayout_protectedbase_receivers(const void* self, const char* signal) {
+	VirtualQStackedLayout* self_cast = static_cast<VirtualQStackedLayout*>( (QStackedLayout*)(self) );
 	
 	return self_cast->receivers(signal);
 
 }
 
-bool QStackedLayout_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal) {
-	VirtualQStackedLayout* self_cast = dynamic_cast<VirtualQStackedLayout*>( (QStackedLayout*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return false;
-	}
-	
-	*_dynamic_cast_ok = true;
+bool QStackedLayout_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal) {
+	VirtualQStackedLayout* self_cast = static_cast<VirtualQStackedLayout*>( (QStackedLayout*)(self) );
 	
 	return self_cast->isSignalConnected(*signal);
 

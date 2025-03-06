@@ -391,6 +391,10 @@ proc fcQWebEnginePage_virtualbase_childEvent(self: pointer, event: pointer): voi
 proc fcQWebEnginePage_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QWebEnginePage_virtualbase_customEvent".}
 proc fcQWebEnginePage_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QWebEnginePage_virtualbase_connectNotify".}
 proc fcQWebEnginePage_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QWebEnginePage_virtualbase_disconnectNotify".}
+proc fcQWebEnginePage_protectedbase_sender(self: pointer, ): pointer {.importc: "QWebEnginePage_protectedbase_sender".}
+proc fcQWebEnginePage_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QWebEnginePage_protectedbase_senderSignalIndex".}
+proc fcQWebEnginePage_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QWebEnginePage_protectedbase_receivers".}
+proc fcQWebEnginePage_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QWebEnginePage_protectedbase_isSignalConnected".}
 proc fcQWebEnginePage_new(vtbl: pointer, ): ptr cQWebEnginePage {.importc: "QWebEnginePage_new".}
 proc fcQWebEnginePage_new2(vtbl: pointer, profile: pointer): ptr cQWebEnginePage {.importc: "QWebEnginePage_new2".}
 proc fcQWebEnginePage_new3(vtbl: pointer, parent: pointer): ptr cQWebEnginePage {.importc: "QWebEnginePage_new3".}
@@ -1612,6 +1616,18 @@ proc miqt_exec_callback_cQWebEnginePage_disconnectNotify(vtbl: pointer, self: po
   let self = QWebEnginePage(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
   vtbl[].disconnectNotify(self, slotval1)
+
+proc sender*(self: gen_qwebenginepage_types.QWebEnginePage, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQWebEnginePage_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qwebenginepage_types.QWebEnginePage, ): cint =
+  fcQWebEnginePage_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qwebenginepage_types.QWebEnginePage, signal: cstring): cint =
+  fcQWebEnginePage_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qwebenginepage_types.QWebEnginePage, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQWebEnginePage_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc create*(T: type gen_qwebenginepage_types.QWebEnginePage,
     vtbl: ref QWebEnginePageVTable = nil): gen_qwebenginepage_types.QWebEnginePage =

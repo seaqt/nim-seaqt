@@ -198,6 +198,17 @@ proc fcQSlider_virtualbase_childEvent(self: pointer, event: pointer): void {.imp
 proc fcQSlider_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QSlider_virtualbase_customEvent".}
 proc fcQSlider_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QSlider_virtualbase_connectNotify".}
 proc fcQSlider_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QSlider_virtualbase_disconnectNotify".}
+proc fcQSlider_protectedbase_setRepeatAction(self: pointer, action: cint): void {.importc: "QSlider_protectedbase_setRepeatAction".}
+proc fcQSlider_protectedbase_repeatAction(self: pointer, ): cint {.importc: "QSlider_protectedbase_repeatAction".}
+proc fcQSlider_protectedbase_updateMicroFocus(self: pointer, ): void {.importc: "QSlider_protectedbase_updateMicroFocus".}
+proc fcQSlider_protectedbase_create(self: pointer, ): void {.importc: "QSlider_protectedbase_create".}
+proc fcQSlider_protectedbase_destroy(self: pointer, ): void {.importc: "QSlider_protectedbase_destroy".}
+proc fcQSlider_protectedbase_focusNextChild(self: pointer, ): bool {.importc: "QSlider_protectedbase_focusNextChild".}
+proc fcQSlider_protectedbase_focusPreviousChild(self: pointer, ): bool {.importc: "QSlider_protectedbase_focusPreviousChild".}
+proc fcQSlider_protectedbase_sender(self: pointer, ): pointer {.importc: "QSlider_protectedbase_sender".}
+proc fcQSlider_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QSlider_protectedbase_senderSignalIndex".}
+proc fcQSlider_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QSlider_protectedbase_receivers".}
+proc fcQSlider_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QSlider_protectedbase_isSignalConnected".}
 proc fcQSlider_new(vtbl: pointer, parent: pointer): ptr cQSlider {.importc: "QSlider_new".}
 proc fcQSlider_new2(vtbl: pointer, ): ptr cQSlider {.importc: "QSlider_new2".}
 proc fcQSlider_new3(vtbl: pointer, orientation: cint): ptr cQSlider {.importc: "QSlider_new3".}
@@ -844,6 +855,39 @@ proc miqt_exec_callback_cQSlider_disconnectNotify(vtbl: pointer, self: pointer, 
   let self = QSlider(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
   vtbl[].disconnectNotify(self, slotval1)
+
+proc setRepeatAction*(self: gen_qslider_types.QSlider, action: cint): void =
+  fcQSlider_protectedbase_setRepeatAction(self.h, cint(action))
+
+proc repeatAction*(self: gen_qslider_types.QSlider, ): cint =
+  cint(fcQSlider_protectedbase_repeatAction(self.h))
+
+proc updateMicroFocus*(self: gen_qslider_types.QSlider, ): void =
+  fcQSlider_protectedbase_updateMicroFocus(self.h)
+
+proc create*(self: gen_qslider_types.QSlider, ): void =
+  fcQSlider_protectedbase_create(self.h)
+
+proc destroy*(self: gen_qslider_types.QSlider, ): void =
+  fcQSlider_protectedbase_destroy(self.h)
+
+proc focusNextChild*(self: gen_qslider_types.QSlider, ): bool =
+  fcQSlider_protectedbase_focusNextChild(self.h)
+
+proc focusPreviousChild*(self: gen_qslider_types.QSlider, ): bool =
+  fcQSlider_protectedbase_focusPreviousChild(self.h)
+
+proc sender*(self: gen_qslider_types.QSlider, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQSlider_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qslider_types.QSlider, ): cint =
+  fcQSlider_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qslider_types.QSlider, signal: cstring): cint =
+  fcQSlider_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qslider_types.QSlider, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQSlider_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc create*(T: type gen_qslider_types.QSlider,
     parent: gen_qwidget_types.QWidget,

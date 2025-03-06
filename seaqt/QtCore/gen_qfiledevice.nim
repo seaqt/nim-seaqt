@@ -90,10 +90,14 @@ export gen_qfiledevice_types
 import
   ./gen_qdatetime_types,
   ./gen_qiodevice,
+  ./gen_qmetaobject_types,
+  ./gen_qobject_types,
   ./gen_qobjectdefs_types
 export
   gen_qdatetime_types,
   gen_qiodevice,
+  gen_qmetaobject_types,
+  gen_qobject_types,
   gen_qobjectdefs_types
 
 type cQFileDevice*{.exportc: "QFileDevice", incompleteStruct.} = object
@@ -123,6 +127,12 @@ proc fcQFileDevice_setFileTime(self: pointer, newDate: pointer, fileTime: cint):
 proc fcQFileDevice_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QFileDevice_tr2".}
 proc fcQFileDevice_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QFileDevice_tr3".}
 proc fcQFileDevice_map3(self: pointer, offset: clonglong, size: clonglong, flags: cint): ptr uint8 {.importc: "QFileDevice_map3".}
+proc fcQFileDevice_protectedbase_setOpenMode(self: pointer, openMode: cint): void {.importc: "QFileDevice_protectedbase_setOpenMode".}
+proc fcQFileDevice_protectedbase_setErrorString(self: pointer, errorString: struct_miqt_string): void {.importc: "QFileDevice_protectedbase_setErrorString".}
+proc fcQFileDevice_protectedbase_sender(self: pointer, ): pointer {.importc: "QFileDevice_protectedbase_sender".}
+proc fcQFileDevice_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QFileDevice_protectedbase_senderSignalIndex".}
+proc fcQFileDevice_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QFileDevice_protectedbase_receivers".}
+proc fcQFileDevice_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QFileDevice_protectedbase_isSignalConnected".}
 proc fcQFileDevice_staticMetaObject(): pointer {.importc: "QFileDevice_staticMetaObject".}
 proc fcQFileDevice_delete(self: pointer) {.importc: "QFileDevice_delete".}
 
@@ -212,6 +222,24 @@ proc tr*(_: type gen_qfiledevice_types.QFileDevice, s: cstring, c: cstring, n: c
 
 proc map*(self: gen_qfiledevice_types.QFileDevice, offset: clonglong, size: clonglong, flags: cint): ptr uint8 =
   fcQFileDevice_map3(self.h, offset, size, cint(flags))
+
+proc setOpenMode*(self: gen_qfiledevice_types.QFileDevice, openMode: cint): void =
+  fcQFileDevice_protectedbase_setOpenMode(self.h, cint(openMode))
+
+proc setErrorString*(self: gen_qfiledevice_types.QFileDevice, errorString: string): void =
+  fcQFileDevice_protectedbase_setErrorString(self.h, struct_miqt_string(data: errorString, len: csize_t(len(errorString))))
+
+proc sender*(self: gen_qfiledevice_types.QFileDevice, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQFileDevice_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qfiledevice_types.QFileDevice, ): cint =
+  fcQFileDevice_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qfiledevice_types.QFileDevice, signal: cstring): cint =
+  fcQFileDevice_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qfiledevice_types.QFileDevice, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQFileDevice_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc staticMetaObject*(_: type gen_qfiledevice_types.QFileDevice): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQFileDevice_staticMetaObject())

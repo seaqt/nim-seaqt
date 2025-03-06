@@ -102,10 +102,10 @@ void QMediaCaptureSession_virtualbase_childEvent(void* self, QChildEvent* event)
 void QMediaCaptureSession_virtualbase_customEvent(void* self, QEvent* event);
 void QMediaCaptureSession_virtualbase_connectNotify(void* self, QMetaMethod* signal);
 void QMediaCaptureSession_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
-QObject* QMediaCaptureSession_protectedbase_sender(bool* _dynamic_cast_ok, const void* self);
-int QMediaCaptureSession_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
-int QMediaCaptureSession_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
-bool QMediaCaptureSession_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+QObject* QMediaCaptureSession_protectedbase_sender(const void* self);
+int QMediaCaptureSession_protectedbase_senderSignalIndex(const void* self);
+int QMediaCaptureSession_protectedbase_receivers(const void* self, const char* signal);
+bool QMediaCaptureSession_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
 const QMetaObject* QMediaCaptureSession_staticMetaObject();
 void QMediaCaptureSession_delete(QMediaCaptureSession* self);
 

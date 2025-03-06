@@ -218,11 +218,11 @@ public:
 	friend void QWidgetAction_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
 
 	// Wrappers to allow calling protected methods:
-	friend struct miqt_array /* of QWidget* */  QWidgetAction_protectedbase_createdWidgets(bool* _dynamic_cast_ok, const void* self);
-	friend QObject* QWidgetAction_protectedbase_sender(bool* _dynamic_cast_ok, const void* self);
-	friend int QWidgetAction_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
-	friend int QWidgetAction_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
-	friend bool QWidgetAction_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+	friend struct miqt_array /* of QWidget* */  QWidgetAction_protectedbase_createdWidgets(const void* self);
+	friend QObject* QWidgetAction_protectedbase_sender(const void* self);
+	friend int QWidgetAction_protectedbase_senderSignalIndex(const void* self);
+	friend int QWidgetAction_protectedbase_receivers(const void* self, const char* signal);
+	friend bool QWidgetAction_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
 };
 
 QWidgetAction* QWidgetAction_new(struct QWidgetAction_VTable* vtbl, QObject* parent) {
@@ -367,14 +367,8 @@ void QWidgetAction_virtualbase_disconnectNotify(void* self, QMetaMethod* signal)
 }
 
 const QMetaObject* QWidgetAction_staticMetaObject() { return &QWidgetAction::staticMetaObject; }
-struct miqt_array /* of QWidget* */  QWidgetAction_protectedbase_createdWidgets(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQWidgetAction* self_cast = dynamic_cast<VirtualQWidgetAction*>( (QWidgetAction*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return (struct miqt_array){};
-	}
-	
-	*_dynamic_cast_ok = true;
+struct miqt_array /* of QWidget* */  QWidgetAction_protectedbase_createdWidgets(const void* self) {
+	VirtualQWidgetAction* self_cast = static_cast<VirtualQWidgetAction*>( (QWidgetAction*)(self) );
 	
 	QList<QWidget *> _ret = self_cast->createdWidgets();
 	// Convert QList<> from C++ memory to manually-managed C memory
@@ -389,53 +383,29 @@ struct miqt_array /* of QWidget* */  QWidgetAction_protectedbase_createdWidgets(
 
 }
 
-QObject* QWidgetAction_protectedbase_sender(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQWidgetAction* self_cast = dynamic_cast<VirtualQWidgetAction*>( (QWidgetAction*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return nullptr;
-	}
-	
-	*_dynamic_cast_ok = true;
+QObject* QWidgetAction_protectedbase_sender(const void* self) {
+	VirtualQWidgetAction* self_cast = static_cast<VirtualQWidgetAction*>( (QWidgetAction*)(self) );
 	
 	return self_cast->sender();
 
 }
 
-int QWidgetAction_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQWidgetAction* self_cast = dynamic_cast<VirtualQWidgetAction*>( (QWidgetAction*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return 0;
-	}
-	
-	*_dynamic_cast_ok = true;
+int QWidgetAction_protectedbase_senderSignalIndex(const void* self) {
+	VirtualQWidgetAction* self_cast = static_cast<VirtualQWidgetAction*>( (QWidgetAction*)(self) );
 	
 	return self_cast->senderSignalIndex();
 
 }
 
-int QWidgetAction_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal) {
-	VirtualQWidgetAction* self_cast = dynamic_cast<VirtualQWidgetAction*>( (QWidgetAction*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return 0;
-	}
-	
-	*_dynamic_cast_ok = true;
+int QWidgetAction_protectedbase_receivers(const void* self, const char* signal) {
+	VirtualQWidgetAction* self_cast = static_cast<VirtualQWidgetAction*>( (QWidgetAction*)(self) );
 	
 	return self_cast->receivers(signal);
 
 }
 
-bool QWidgetAction_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal) {
-	VirtualQWidgetAction* self_cast = dynamic_cast<VirtualQWidgetAction*>( (QWidgetAction*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return false;
-	}
-	
-	*_dynamic_cast_ok = true;
+bool QWidgetAction_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal) {
+	VirtualQWidgetAction* self_cast = static_cast<VirtualQWidgetAction*>( (QWidgetAction*)(self) );
 	
 	return self_cast->isSignalConnected(*signal);
 

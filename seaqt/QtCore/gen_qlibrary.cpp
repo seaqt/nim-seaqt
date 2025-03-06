@@ -192,10 +192,10 @@ public:
 	friend void QLibrary_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
 
 	// Wrappers to allow calling protected methods:
-	friend QObject* QLibrary_protectedbase_sender(bool* _dynamic_cast_ok, const void* self);
-	friend int QLibrary_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
-	friend int QLibrary_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
-	friend bool QLibrary_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+	friend QObject* QLibrary_protectedbase_sender(const void* self);
+	friend int QLibrary_protectedbase_senderSignalIndex(const void* self);
+	friend int QLibrary_protectedbase_receivers(const void* self, const char* signal);
+	friend bool QLibrary_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
 };
 
 QLibrary* QLibrary_new(struct QLibrary_VTable* vtbl) {
@@ -412,53 +412,29 @@ void QLibrary_virtualbase_disconnectNotify(void* self, QMetaMethod* signal) {
 }
 
 const QMetaObject* QLibrary_staticMetaObject() { return &QLibrary::staticMetaObject; }
-QObject* QLibrary_protectedbase_sender(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQLibrary* self_cast = dynamic_cast<VirtualQLibrary*>( (QLibrary*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return nullptr;
-	}
-	
-	*_dynamic_cast_ok = true;
+QObject* QLibrary_protectedbase_sender(const void* self) {
+	VirtualQLibrary* self_cast = static_cast<VirtualQLibrary*>( (QLibrary*)(self) );
 	
 	return self_cast->sender();
 
 }
 
-int QLibrary_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQLibrary* self_cast = dynamic_cast<VirtualQLibrary*>( (QLibrary*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return 0;
-	}
-	
-	*_dynamic_cast_ok = true;
+int QLibrary_protectedbase_senderSignalIndex(const void* self) {
+	VirtualQLibrary* self_cast = static_cast<VirtualQLibrary*>( (QLibrary*)(self) );
 	
 	return self_cast->senderSignalIndex();
 
 }
 
-int QLibrary_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal) {
-	VirtualQLibrary* self_cast = dynamic_cast<VirtualQLibrary*>( (QLibrary*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return 0;
-	}
-	
-	*_dynamic_cast_ok = true;
+int QLibrary_protectedbase_receivers(const void* self, const char* signal) {
+	VirtualQLibrary* self_cast = static_cast<VirtualQLibrary*>( (QLibrary*)(self) );
 	
 	return self_cast->receivers(signal);
 
 }
 
-bool QLibrary_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal) {
-	VirtualQLibrary* self_cast = dynamic_cast<VirtualQLibrary*>( (QLibrary*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return false;
-	}
-	
-	*_dynamic_cast_ok = true;
+bool QLibrary_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal) {
+	VirtualQLibrary* self_cast = static_cast<VirtualQLibrary*>( (QLibrary*)(self) );
 	
 	return self_cast->isSignalConnected(*signal);
 

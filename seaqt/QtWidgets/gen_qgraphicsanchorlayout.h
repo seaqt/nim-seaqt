@@ -97,9 +97,9 @@ void QGraphicsAnchorLayout_virtualbase_getContentsMargins(const void* self, doub
 void QGraphicsAnchorLayout_virtualbase_updateGeometry(void* self);
 void QGraphicsAnchorLayout_virtualbase_widgetEvent(void* self, QEvent* e);
 bool QGraphicsAnchorLayout_virtualbase_isEmpty(const void* self);
-void QGraphicsAnchorLayout_protectedbase_addChildLayoutItem(bool* _dynamic_cast_ok, void* self, QGraphicsLayoutItem* layoutItem);
-void QGraphicsAnchorLayout_protectedbase_setGraphicsItem(bool* _dynamic_cast_ok, void* self, QGraphicsItem* item);
-void QGraphicsAnchorLayout_protectedbase_setOwnedByLayout(bool* _dynamic_cast_ok, void* self, bool ownedByLayout);
+void QGraphicsAnchorLayout_protectedbase_addChildLayoutItem(void* self, QGraphicsLayoutItem* layoutItem);
+void QGraphicsAnchorLayout_protectedbase_setGraphicsItem(void* self, QGraphicsItem* item);
+void QGraphicsAnchorLayout_protectedbase_setOwnedByLayout(void* self, bool ownedByLayout);
 void QGraphicsAnchorLayout_delete(QGraphicsAnchorLayout* self);
 
 #ifdef __cplusplus

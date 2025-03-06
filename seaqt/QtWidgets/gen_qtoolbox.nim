@@ -208,6 +208,16 @@ proc fcQToolBox_virtualbase_childEvent(self: pointer, event: pointer): void {.im
 proc fcQToolBox_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QToolBox_virtualbase_customEvent".}
 proc fcQToolBox_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QToolBox_virtualbase_connectNotify".}
 proc fcQToolBox_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QToolBox_virtualbase_disconnectNotify".}
+proc fcQToolBox_protectedbase_drawFrame(self: pointer, param1: pointer): void {.importc: "QToolBox_protectedbase_drawFrame".}
+proc fcQToolBox_protectedbase_updateMicroFocus(self: pointer, ): void {.importc: "QToolBox_protectedbase_updateMicroFocus".}
+proc fcQToolBox_protectedbase_create(self: pointer, ): void {.importc: "QToolBox_protectedbase_create".}
+proc fcQToolBox_protectedbase_destroy(self: pointer, ): void {.importc: "QToolBox_protectedbase_destroy".}
+proc fcQToolBox_protectedbase_focusNextChild(self: pointer, ): bool {.importc: "QToolBox_protectedbase_focusNextChild".}
+proc fcQToolBox_protectedbase_focusPreviousChild(self: pointer, ): bool {.importc: "QToolBox_protectedbase_focusPreviousChild".}
+proc fcQToolBox_protectedbase_sender(self: pointer, ): pointer {.importc: "QToolBox_protectedbase_sender".}
+proc fcQToolBox_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QToolBox_protectedbase_senderSignalIndex".}
+proc fcQToolBox_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QToolBox_protectedbase_receivers".}
+proc fcQToolBox_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QToolBox_protectedbase_isSignalConnected".}
 proc fcQToolBox_new(vtbl: pointer, parent: pointer): ptr cQToolBox {.importc: "QToolBox_new".}
 proc fcQToolBox_new2(vtbl: pointer, ): ptr cQToolBox {.importc: "QToolBox_new2".}
 proc fcQToolBox_new3(vtbl: pointer, parent: pointer, f: cint): ptr cQToolBox {.importc: "QToolBox_new3".}
@@ -929,6 +939,36 @@ proc miqt_exec_callback_cQToolBox_disconnectNotify(vtbl: pointer, self: pointer,
   let self = QToolBox(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
   vtbl[].disconnectNotify(self, slotval1)
+
+proc drawFrame*(self: gen_qtoolbox_types.QToolBox, param1: gen_qpainter_types.QPainter): void =
+  fcQToolBox_protectedbase_drawFrame(self.h, param1.h)
+
+proc updateMicroFocus*(self: gen_qtoolbox_types.QToolBox, ): void =
+  fcQToolBox_protectedbase_updateMicroFocus(self.h)
+
+proc create*(self: gen_qtoolbox_types.QToolBox, ): void =
+  fcQToolBox_protectedbase_create(self.h)
+
+proc destroy*(self: gen_qtoolbox_types.QToolBox, ): void =
+  fcQToolBox_protectedbase_destroy(self.h)
+
+proc focusNextChild*(self: gen_qtoolbox_types.QToolBox, ): bool =
+  fcQToolBox_protectedbase_focusNextChild(self.h)
+
+proc focusPreviousChild*(self: gen_qtoolbox_types.QToolBox, ): bool =
+  fcQToolBox_protectedbase_focusPreviousChild(self.h)
+
+proc sender*(self: gen_qtoolbox_types.QToolBox, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQToolBox_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qtoolbox_types.QToolBox, ): cint =
+  fcQToolBox_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qtoolbox_types.QToolBox, signal: cstring): cint =
+  fcQToolBox_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qtoolbox_types.QToolBox, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQToolBox_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc create*(T: type gen_qtoolbox_types.QToolBox,
     parent: gen_qwidget_types.QWidget,

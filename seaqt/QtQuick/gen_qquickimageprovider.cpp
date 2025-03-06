@@ -245,10 +245,10 @@ public:
 	friend void QQuickTextureFactory_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
 
 	// Wrappers to allow calling protected methods:
-	friend QObject* QQuickTextureFactory_protectedbase_sender(bool* _dynamic_cast_ok, const void* self);
-	friend int QQuickTextureFactory_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
-	friend int QQuickTextureFactory_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
-	friend bool QQuickTextureFactory_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+	friend QObject* QQuickTextureFactory_protectedbase_sender(const void* self);
+	friend int QQuickTextureFactory_protectedbase_senderSignalIndex(const void* self);
+	friend int QQuickTextureFactory_protectedbase_receivers(const void* self, const char* signal);
+	friend bool QQuickTextureFactory_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
 };
 
 QQuickTextureFactory* QQuickTextureFactory_new(struct QQuickTextureFactory_VTable* vtbl) {
@@ -391,53 +391,29 @@ void QQuickTextureFactory_virtualbase_disconnectNotify(void* self, QMetaMethod* 
 }
 
 const QMetaObject* QQuickTextureFactory_staticMetaObject() { return &QQuickTextureFactory::staticMetaObject; }
-QObject* QQuickTextureFactory_protectedbase_sender(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQQuickTextureFactory* self_cast = dynamic_cast<VirtualQQuickTextureFactory*>( (QQuickTextureFactory*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return nullptr;
-	}
-	
-	*_dynamic_cast_ok = true;
+QObject* QQuickTextureFactory_protectedbase_sender(const void* self) {
+	VirtualQQuickTextureFactory* self_cast = static_cast<VirtualQQuickTextureFactory*>( (QQuickTextureFactory*)(self) );
 	
 	return self_cast->sender();
 
 }
 
-int QQuickTextureFactory_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQQuickTextureFactory* self_cast = dynamic_cast<VirtualQQuickTextureFactory*>( (QQuickTextureFactory*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return 0;
-	}
-	
-	*_dynamic_cast_ok = true;
+int QQuickTextureFactory_protectedbase_senderSignalIndex(const void* self) {
+	VirtualQQuickTextureFactory* self_cast = static_cast<VirtualQQuickTextureFactory*>( (QQuickTextureFactory*)(self) );
 	
 	return self_cast->senderSignalIndex();
 
 }
 
-int QQuickTextureFactory_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal) {
-	VirtualQQuickTextureFactory* self_cast = dynamic_cast<VirtualQQuickTextureFactory*>( (QQuickTextureFactory*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return 0;
-	}
-	
-	*_dynamic_cast_ok = true;
+int QQuickTextureFactory_protectedbase_receivers(const void* self, const char* signal) {
+	VirtualQQuickTextureFactory* self_cast = static_cast<VirtualQQuickTextureFactory*>( (QQuickTextureFactory*)(self) );
 	
 	return self_cast->receivers(signal);
 
 }
 
-bool QQuickTextureFactory_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal) {
-	VirtualQQuickTextureFactory* self_cast = dynamic_cast<VirtualQQuickTextureFactory*>( (QQuickTextureFactory*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return false;
-	}
-	
-	*_dynamic_cast_ok = true;
+bool QQuickTextureFactory_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal) {
+	VirtualQQuickTextureFactory* self_cast = static_cast<VirtualQQuickTextureFactory*>( (QQuickTextureFactory*)(self) );
 	
 	return self_cast->isSignalConnected(*signal);
 
@@ -654,10 +630,10 @@ public:
 	friend void QQuickImageResponse_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
 
 	// Wrappers to allow calling protected methods:
-	friend QObject* QQuickImageResponse_protectedbase_sender(bool* _dynamic_cast_ok, const void* self);
-	friend int QQuickImageResponse_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
-	friend int QQuickImageResponse_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
-	friend bool QQuickImageResponse_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+	friend QObject* QQuickImageResponse_protectedbase_sender(const void* self);
+	friend int QQuickImageResponse_protectedbase_senderSignalIndex(const void* self);
+	friend int QQuickImageResponse_protectedbase_receivers(const void* self, const char* signal);
+	friend bool QQuickImageResponse_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
 };
 
 QQuickImageResponse* QQuickImageResponse_new(struct QQuickImageResponse_VTable* vtbl) {
@@ -827,53 +803,29 @@ void QQuickImageResponse_virtualbase_disconnectNotify(void* self, QMetaMethod* s
 }
 
 const QMetaObject* QQuickImageResponse_staticMetaObject() { return &QQuickImageResponse::staticMetaObject; }
-QObject* QQuickImageResponse_protectedbase_sender(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQQuickImageResponse* self_cast = dynamic_cast<VirtualQQuickImageResponse*>( (QQuickImageResponse*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return nullptr;
-	}
-	
-	*_dynamic_cast_ok = true;
+QObject* QQuickImageResponse_protectedbase_sender(const void* self) {
+	VirtualQQuickImageResponse* self_cast = static_cast<VirtualQQuickImageResponse*>( (QQuickImageResponse*)(self) );
 	
 	return self_cast->sender();
 
 }
 
-int QQuickImageResponse_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQQuickImageResponse* self_cast = dynamic_cast<VirtualQQuickImageResponse*>( (QQuickImageResponse*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return 0;
-	}
-	
-	*_dynamic_cast_ok = true;
+int QQuickImageResponse_protectedbase_senderSignalIndex(const void* self) {
+	VirtualQQuickImageResponse* self_cast = static_cast<VirtualQQuickImageResponse*>( (QQuickImageResponse*)(self) );
 	
 	return self_cast->senderSignalIndex();
 
 }
 
-int QQuickImageResponse_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal) {
-	VirtualQQuickImageResponse* self_cast = dynamic_cast<VirtualQQuickImageResponse*>( (QQuickImageResponse*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return 0;
-	}
-	
-	*_dynamic_cast_ok = true;
+int QQuickImageResponse_protectedbase_receivers(const void* self, const char* signal) {
+	VirtualQQuickImageResponse* self_cast = static_cast<VirtualQQuickImageResponse*>( (QQuickImageResponse*)(self) );
 	
 	return self_cast->receivers(signal);
 
 }
 
-bool QQuickImageResponse_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal) {
-	VirtualQQuickImageResponse* self_cast = dynamic_cast<VirtualQQuickImageResponse*>( (QQuickImageResponse*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return false;
-	}
-	
-	*_dynamic_cast_ok = true;
+bool QQuickImageResponse_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal) {
+	VirtualQQuickImageResponse* self_cast = static_cast<VirtualQQuickImageResponse*>( (QQuickImageResponse*)(self) );
 	
 	return self_cast->isSignalConnected(*signal);
 
@@ -1156,10 +1108,10 @@ public:
 	friend void QQuickImageProvider_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
 
 	// Wrappers to allow calling protected methods:
-	friend QObject* QQuickImageProvider_protectedbase_sender(bool* _dynamic_cast_ok, const void* self);
-	friend int QQuickImageProvider_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
-	friend int QQuickImageProvider_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
-	friend bool QQuickImageProvider_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+	friend QObject* QQuickImageProvider_protectedbase_sender(const void* self);
+	friend int QQuickImageProvider_protectedbase_senderSignalIndex(const void* self);
+	friend int QQuickImageProvider_protectedbase_receivers(const void* self, const char* signal);
+	friend bool QQuickImageProvider_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
 };
 
 QQuickImageProvider* QQuickImageProvider_new(struct QQuickImageProvider_VTable* vtbl, int type) {
@@ -1340,53 +1292,29 @@ void QQuickImageProvider_virtualbase_disconnectNotify(void* self, QMetaMethod* s
 }
 
 const QMetaObject* QQuickImageProvider_staticMetaObject() { return &QQuickImageProvider::staticMetaObject; }
-QObject* QQuickImageProvider_protectedbase_sender(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQQuickImageProvider* self_cast = dynamic_cast<VirtualQQuickImageProvider*>( (QQuickImageProvider*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return nullptr;
-	}
-	
-	*_dynamic_cast_ok = true;
+QObject* QQuickImageProvider_protectedbase_sender(const void* self) {
+	VirtualQQuickImageProvider* self_cast = static_cast<VirtualQQuickImageProvider*>( (QQuickImageProvider*)(self) );
 	
 	return self_cast->sender();
 
 }
 
-int QQuickImageProvider_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQQuickImageProvider* self_cast = dynamic_cast<VirtualQQuickImageProvider*>( (QQuickImageProvider*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return 0;
-	}
-	
-	*_dynamic_cast_ok = true;
+int QQuickImageProvider_protectedbase_senderSignalIndex(const void* self) {
+	VirtualQQuickImageProvider* self_cast = static_cast<VirtualQQuickImageProvider*>( (QQuickImageProvider*)(self) );
 	
 	return self_cast->senderSignalIndex();
 
 }
 
-int QQuickImageProvider_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal) {
-	VirtualQQuickImageProvider* self_cast = dynamic_cast<VirtualQQuickImageProvider*>( (QQuickImageProvider*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return 0;
-	}
-	
-	*_dynamic_cast_ok = true;
+int QQuickImageProvider_protectedbase_receivers(const void* self, const char* signal) {
+	VirtualQQuickImageProvider* self_cast = static_cast<VirtualQQuickImageProvider*>( (QQuickImageProvider*)(self) );
 	
 	return self_cast->receivers(signal);
 
 }
 
-bool QQuickImageProvider_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal) {
-	VirtualQQuickImageProvider* self_cast = dynamic_cast<VirtualQQuickImageProvider*>( (QQuickImageProvider*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return false;
-	}
-	
-	*_dynamic_cast_ok = true;
+bool QQuickImageProvider_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal) {
+	VirtualQQuickImageProvider* self_cast = static_cast<VirtualQQuickImageProvider*>( (QQuickImageProvider*)(self) );
 	
 	return self_cast->isSignalConnected(*signal);
 
@@ -1691,10 +1619,10 @@ public:
 	friend void QQuickAsyncImageProvider_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
 
 	// Wrappers to allow calling protected methods:
-	friend QObject* QQuickAsyncImageProvider_protectedbase_sender(bool* _dynamic_cast_ok, const void* self);
-	friend int QQuickAsyncImageProvider_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
-	friend int QQuickAsyncImageProvider_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
-	friend bool QQuickAsyncImageProvider_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+	friend QObject* QQuickAsyncImageProvider_protectedbase_sender(const void* self);
+	friend int QQuickAsyncImageProvider_protectedbase_senderSignalIndex(const void* self);
+	friend int QQuickAsyncImageProvider_protectedbase_receivers(const void* self, const char* signal);
+	friend bool QQuickAsyncImageProvider_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
 };
 
 QQuickAsyncImageProvider* QQuickAsyncImageProvider_new(struct QQuickAsyncImageProvider_VTable* vtbl) {
@@ -1805,53 +1733,29 @@ void QQuickAsyncImageProvider_virtualbase_disconnectNotify(void* self, QMetaMeth
 
 }
 
-QObject* QQuickAsyncImageProvider_protectedbase_sender(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQQuickAsyncImageProvider* self_cast = dynamic_cast<VirtualQQuickAsyncImageProvider*>( (QQuickAsyncImageProvider*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return nullptr;
-	}
-	
-	*_dynamic_cast_ok = true;
+QObject* QQuickAsyncImageProvider_protectedbase_sender(const void* self) {
+	VirtualQQuickAsyncImageProvider* self_cast = static_cast<VirtualQQuickAsyncImageProvider*>( (QQuickAsyncImageProvider*)(self) );
 	
 	return self_cast->sender();
 
 }
 
-int QQuickAsyncImageProvider_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQQuickAsyncImageProvider* self_cast = dynamic_cast<VirtualQQuickAsyncImageProvider*>( (QQuickAsyncImageProvider*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return 0;
-	}
-	
-	*_dynamic_cast_ok = true;
+int QQuickAsyncImageProvider_protectedbase_senderSignalIndex(const void* self) {
+	VirtualQQuickAsyncImageProvider* self_cast = static_cast<VirtualQQuickAsyncImageProvider*>( (QQuickAsyncImageProvider*)(self) );
 	
 	return self_cast->senderSignalIndex();
 
 }
 
-int QQuickAsyncImageProvider_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal) {
-	VirtualQQuickAsyncImageProvider* self_cast = dynamic_cast<VirtualQQuickAsyncImageProvider*>( (QQuickAsyncImageProvider*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return 0;
-	}
-	
-	*_dynamic_cast_ok = true;
+int QQuickAsyncImageProvider_protectedbase_receivers(const void* self, const char* signal) {
+	VirtualQQuickAsyncImageProvider* self_cast = static_cast<VirtualQQuickAsyncImageProvider*>( (QQuickAsyncImageProvider*)(self) );
 	
 	return self_cast->receivers(signal);
 
 }
 
-bool QQuickAsyncImageProvider_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal) {
-	VirtualQQuickAsyncImageProvider* self_cast = dynamic_cast<VirtualQQuickAsyncImageProvider*>( (QQuickAsyncImageProvider*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return false;
-	}
-	
-	*_dynamic_cast_ok = true;
+bool QQuickAsyncImageProvider_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal) {
+	VirtualQQuickAsyncImageProvider* self_cast = static_cast<VirtualQQuickAsyncImageProvider*>( (QQuickAsyncImageProvider*)(self) );
 	
 	return self_cast->isSignalConnected(*signal);
 

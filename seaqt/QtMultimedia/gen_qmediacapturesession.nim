@@ -116,6 +116,10 @@ proc fcQMediaCaptureSession_virtualbase_childEvent(self: pointer, event: pointer
 proc fcQMediaCaptureSession_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QMediaCaptureSession_virtualbase_customEvent".}
 proc fcQMediaCaptureSession_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QMediaCaptureSession_virtualbase_connectNotify".}
 proc fcQMediaCaptureSession_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QMediaCaptureSession_virtualbase_disconnectNotify".}
+proc fcQMediaCaptureSession_protectedbase_sender(self: pointer, ): pointer {.importc: "QMediaCaptureSession_protectedbase_sender".}
+proc fcQMediaCaptureSession_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QMediaCaptureSession_protectedbase_senderSignalIndex".}
+proc fcQMediaCaptureSession_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QMediaCaptureSession_protectedbase_receivers".}
+proc fcQMediaCaptureSession_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QMediaCaptureSession_protectedbase_isSignalConnected".}
 proc fcQMediaCaptureSession_new(vtbl: pointer, ): ptr cQMediaCaptureSession {.importc: "QMediaCaptureSession_new".}
 proc fcQMediaCaptureSession_new2(vtbl: pointer, parent: pointer): ptr cQMediaCaptureSession {.importc: "QMediaCaptureSession_new2".}
 proc fcQMediaCaptureSession_staticMetaObject(): pointer {.importc: "QMediaCaptureSession_staticMetaObject".}
@@ -416,6 +420,18 @@ proc miqt_exec_callback_cQMediaCaptureSession_disconnectNotify(vtbl: pointer, se
   let self = QMediaCaptureSession(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
   vtbl[].disconnectNotify(self, slotval1)
+
+proc sender*(self: gen_qmediacapturesession_types.QMediaCaptureSession, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQMediaCaptureSession_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qmediacapturesession_types.QMediaCaptureSession, ): cint =
+  fcQMediaCaptureSession_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qmediacapturesession_types.QMediaCaptureSession, signal: cstring): cint =
+  fcQMediaCaptureSession_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qmediacapturesession_types.QMediaCaptureSession, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQMediaCaptureSession_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc create*(T: type gen_qmediacapturesession_types.QMediaCaptureSession,
     vtbl: ref QMediaCaptureSessionVTable = nil): gen_qmediacapturesession_types.QMediaCaptureSession =

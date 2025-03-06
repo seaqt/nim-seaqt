@@ -998,24 +998,24 @@ public:
 	friend void QPlainTextEdit_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
 
 	// Wrappers to allow calling protected methods:
-	friend QTextBlock* QPlainTextEdit_protectedbase_firstVisibleBlock(bool* _dynamic_cast_ok, const void* self);
-	friend QPointF* QPlainTextEdit_protectedbase_contentOffset(bool* _dynamic_cast_ok, const void* self);
-	friend QRectF* QPlainTextEdit_protectedbase_blockBoundingRect(bool* _dynamic_cast_ok, const void* self, QTextBlock* block);
-	friend QRectF* QPlainTextEdit_protectedbase_blockBoundingGeometry(bool* _dynamic_cast_ok, const void* self, QTextBlock* block);
-	friend QAbstractTextDocumentLayout__PaintContext* QPlainTextEdit_protectedbase_getPaintContext(bool* _dynamic_cast_ok, const void* self);
-	friend void QPlainTextEdit_protectedbase_zoomInF(bool* _dynamic_cast_ok, void* self, float range);
-	friend void QPlainTextEdit_protectedbase_setViewportMargins(bool* _dynamic_cast_ok, void* self, int left, int top, int right, int bottom);
-	friend QMargins* QPlainTextEdit_protectedbase_viewportMargins(bool* _dynamic_cast_ok, const void* self);
-	friend void QPlainTextEdit_protectedbase_drawFrame(bool* _dynamic_cast_ok, void* self, QPainter* param1);
-	friend void QPlainTextEdit_protectedbase_updateMicroFocus(bool* _dynamic_cast_ok, void* self);
-	friend void QPlainTextEdit_protectedbase_create(bool* _dynamic_cast_ok, void* self);
-	friend void QPlainTextEdit_protectedbase_destroy(bool* _dynamic_cast_ok, void* self);
-	friend bool QPlainTextEdit_protectedbase_focusNextChild(bool* _dynamic_cast_ok, void* self);
-	friend bool QPlainTextEdit_protectedbase_focusPreviousChild(bool* _dynamic_cast_ok, void* self);
-	friend QObject* QPlainTextEdit_protectedbase_sender(bool* _dynamic_cast_ok, const void* self);
-	friend int QPlainTextEdit_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
-	friend int QPlainTextEdit_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
-	friend bool QPlainTextEdit_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+	friend QTextBlock* QPlainTextEdit_protectedbase_firstVisibleBlock(const void* self);
+	friend QPointF* QPlainTextEdit_protectedbase_contentOffset(const void* self);
+	friend QRectF* QPlainTextEdit_protectedbase_blockBoundingRect(const void* self, QTextBlock* block);
+	friend QRectF* QPlainTextEdit_protectedbase_blockBoundingGeometry(const void* self, QTextBlock* block);
+	friend QAbstractTextDocumentLayout__PaintContext* QPlainTextEdit_protectedbase_getPaintContext(const void* self);
+	friend void QPlainTextEdit_protectedbase_zoomInF(void* self, float range);
+	friend void QPlainTextEdit_protectedbase_setViewportMargins(void* self, int left, int top, int right, int bottom);
+	friend QMargins* QPlainTextEdit_protectedbase_viewportMargins(const void* self);
+	friend void QPlainTextEdit_protectedbase_drawFrame(void* self, QPainter* param1);
+	friend void QPlainTextEdit_protectedbase_updateMicroFocus(void* self);
+	friend void QPlainTextEdit_protectedbase_create(void* self);
+	friend void QPlainTextEdit_protectedbase_destroy(void* self);
+	friend bool QPlainTextEdit_protectedbase_focusNextChild(void* self);
+	friend bool QPlainTextEdit_protectedbase_focusPreviousChild(void* self);
+	friend QObject* QPlainTextEdit_protectedbase_sender(const void* self);
+	friend int QPlainTextEdit_protectedbase_senderSignalIndex(const void* self);
+	friend int QPlainTextEdit_protectedbase_receivers(const void* self, const char* signal);
+	friend bool QPlainTextEdit_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
 };
 
 QPlainTextEdit* QPlainTextEdit_new(struct QPlainTextEdit_VTable* vtbl, QWidget* parent) {
@@ -1938,235 +1938,127 @@ void QPlainTextEdit_virtualbase_disconnectNotify(void* self, QMetaMethod* signal
 }
 
 const QMetaObject* QPlainTextEdit_staticMetaObject() { return &QPlainTextEdit::staticMetaObject; }
-QTextBlock* QPlainTextEdit_protectedbase_firstVisibleBlock(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQPlainTextEdit* self_cast = dynamic_cast<VirtualQPlainTextEdit*>( (QPlainTextEdit*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return nullptr;
-	}
-	
-	*_dynamic_cast_ok = true;
+QTextBlock* QPlainTextEdit_protectedbase_firstVisibleBlock(const void* self) {
+	VirtualQPlainTextEdit* self_cast = static_cast<VirtualQPlainTextEdit*>( (QPlainTextEdit*)(self) );
 	
 	return new QTextBlock(self_cast->firstVisibleBlock());
 
 }
 
-QPointF* QPlainTextEdit_protectedbase_contentOffset(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQPlainTextEdit* self_cast = dynamic_cast<VirtualQPlainTextEdit*>( (QPlainTextEdit*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return nullptr;
-	}
-	
-	*_dynamic_cast_ok = true;
+QPointF* QPlainTextEdit_protectedbase_contentOffset(const void* self) {
+	VirtualQPlainTextEdit* self_cast = static_cast<VirtualQPlainTextEdit*>( (QPlainTextEdit*)(self) );
 	
 	return new QPointF(self_cast->contentOffset());
 
 }
 
-QRectF* QPlainTextEdit_protectedbase_blockBoundingRect(bool* _dynamic_cast_ok, const void* self, QTextBlock* block) {
-	VirtualQPlainTextEdit* self_cast = dynamic_cast<VirtualQPlainTextEdit*>( (QPlainTextEdit*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return nullptr;
-	}
-	
-	*_dynamic_cast_ok = true;
+QRectF* QPlainTextEdit_protectedbase_blockBoundingRect(const void* self, QTextBlock* block) {
+	VirtualQPlainTextEdit* self_cast = static_cast<VirtualQPlainTextEdit*>( (QPlainTextEdit*)(self) );
 	
 	return new QRectF(self_cast->blockBoundingRect(*block));
 
 }
 
-QRectF* QPlainTextEdit_protectedbase_blockBoundingGeometry(bool* _dynamic_cast_ok, const void* self, QTextBlock* block) {
-	VirtualQPlainTextEdit* self_cast = dynamic_cast<VirtualQPlainTextEdit*>( (QPlainTextEdit*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return nullptr;
-	}
-	
-	*_dynamic_cast_ok = true;
+QRectF* QPlainTextEdit_protectedbase_blockBoundingGeometry(const void* self, QTextBlock* block) {
+	VirtualQPlainTextEdit* self_cast = static_cast<VirtualQPlainTextEdit*>( (QPlainTextEdit*)(self) );
 	
 	return new QRectF(self_cast->blockBoundingGeometry(*block));
 
 }
 
-QAbstractTextDocumentLayout__PaintContext* QPlainTextEdit_protectedbase_getPaintContext(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQPlainTextEdit* self_cast = dynamic_cast<VirtualQPlainTextEdit*>( (QPlainTextEdit*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return nullptr;
-	}
-	
-	*_dynamic_cast_ok = true;
+QAbstractTextDocumentLayout__PaintContext* QPlainTextEdit_protectedbase_getPaintContext(const void* self) {
+	VirtualQPlainTextEdit* self_cast = static_cast<VirtualQPlainTextEdit*>( (QPlainTextEdit*)(self) );
 	
 	return new QAbstractTextDocumentLayout::PaintContext(self_cast->getPaintContext());
 
 }
 
-void QPlainTextEdit_protectedbase_zoomInF(bool* _dynamic_cast_ok, void* self, float range) {
-	VirtualQPlainTextEdit* self_cast = dynamic_cast<VirtualQPlainTextEdit*>( (QPlainTextEdit*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QPlainTextEdit_protectedbase_zoomInF(void* self, float range) {
+	VirtualQPlainTextEdit* self_cast = static_cast<VirtualQPlainTextEdit*>( (QPlainTextEdit*)(self) );
 	
 	self_cast->zoomInF(static_cast<float>(range));
 
 }
 
-void QPlainTextEdit_protectedbase_setViewportMargins(bool* _dynamic_cast_ok, void* self, int left, int top, int right, int bottom) {
-	VirtualQPlainTextEdit* self_cast = dynamic_cast<VirtualQPlainTextEdit*>( (QPlainTextEdit*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QPlainTextEdit_protectedbase_setViewportMargins(void* self, int left, int top, int right, int bottom) {
+	VirtualQPlainTextEdit* self_cast = static_cast<VirtualQPlainTextEdit*>( (QPlainTextEdit*)(self) );
 	
 	self_cast->setViewportMargins(static_cast<int>(left), static_cast<int>(top), static_cast<int>(right), static_cast<int>(bottom));
 
 }
 
-QMargins* QPlainTextEdit_protectedbase_viewportMargins(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQPlainTextEdit* self_cast = dynamic_cast<VirtualQPlainTextEdit*>( (QPlainTextEdit*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return nullptr;
-	}
-	
-	*_dynamic_cast_ok = true;
+QMargins* QPlainTextEdit_protectedbase_viewportMargins(const void* self) {
+	VirtualQPlainTextEdit* self_cast = static_cast<VirtualQPlainTextEdit*>( (QPlainTextEdit*)(self) );
 	
 	return new QMargins(self_cast->viewportMargins());
 
 }
 
-void QPlainTextEdit_protectedbase_drawFrame(bool* _dynamic_cast_ok, void* self, QPainter* param1) {
-	VirtualQPlainTextEdit* self_cast = dynamic_cast<VirtualQPlainTextEdit*>( (QPlainTextEdit*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QPlainTextEdit_protectedbase_drawFrame(void* self, QPainter* param1) {
+	VirtualQPlainTextEdit* self_cast = static_cast<VirtualQPlainTextEdit*>( (QPlainTextEdit*)(self) );
 	
 	self_cast->drawFrame(param1);
 
 }
 
-void QPlainTextEdit_protectedbase_updateMicroFocus(bool* _dynamic_cast_ok, void* self) {
-	VirtualQPlainTextEdit* self_cast = dynamic_cast<VirtualQPlainTextEdit*>( (QPlainTextEdit*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QPlainTextEdit_protectedbase_updateMicroFocus(void* self) {
+	VirtualQPlainTextEdit* self_cast = static_cast<VirtualQPlainTextEdit*>( (QPlainTextEdit*)(self) );
 	
 	self_cast->updateMicroFocus();
 
 }
 
-void QPlainTextEdit_protectedbase_create(bool* _dynamic_cast_ok, void* self) {
-	VirtualQPlainTextEdit* self_cast = dynamic_cast<VirtualQPlainTextEdit*>( (QPlainTextEdit*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QPlainTextEdit_protectedbase_create(void* self) {
+	VirtualQPlainTextEdit* self_cast = static_cast<VirtualQPlainTextEdit*>( (QPlainTextEdit*)(self) );
 	
 	self_cast->create();
 
 }
 
-void QPlainTextEdit_protectedbase_destroy(bool* _dynamic_cast_ok, void* self) {
-	VirtualQPlainTextEdit* self_cast = dynamic_cast<VirtualQPlainTextEdit*>( (QPlainTextEdit*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return ;
-	}
-	
-	*_dynamic_cast_ok = true;
+void QPlainTextEdit_protectedbase_destroy(void* self) {
+	VirtualQPlainTextEdit* self_cast = static_cast<VirtualQPlainTextEdit*>( (QPlainTextEdit*)(self) );
 	
 	self_cast->destroy();
 
 }
 
-bool QPlainTextEdit_protectedbase_focusNextChild(bool* _dynamic_cast_ok, void* self) {
-	VirtualQPlainTextEdit* self_cast = dynamic_cast<VirtualQPlainTextEdit*>( (QPlainTextEdit*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return false;
-	}
-	
-	*_dynamic_cast_ok = true;
+bool QPlainTextEdit_protectedbase_focusNextChild(void* self) {
+	VirtualQPlainTextEdit* self_cast = static_cast<VirtualQPlainTextEdit*>( (QPlainTextEdit*)(self) );
 	
 	return self_cast->focusNextChild();
 
 }
 
-bool QPlainTextEdit_protectedbase_focusPreviousChild(bool* _dynamic_cast_ok, void* self) {
-	VirtualQPlainTextEdit* self_cast = dynamic_cast<VirtualQPlainTextEdit*>( (QPlainTextEdit*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return false;
-	}
-	
-	*_dynamic_cast_ok = true;
+bool QPlainTextEdit_protectedbase_focusPreviousChild(void* self) {
+	VirtualQPlainTextEdit* self_cast = static_cast<VirtualQPlainTextEdit*>( (QPlainTextEdit*)(self) );
 	
 	return self_cast->focusPreviousChild();
 
 }
 
-QObject* QPlainTextEdit_protectedbase_sender(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQPlainTextEdit* self_cast = dynamic_cast<VirtualQPlainTextEdit*>( (QPlainTextEdit*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return nullptr;
-	}
-	
-	*_dynamic_cast_ok = true;
+QObject* QPlainTextEdit_protectedbase_sender(const void* self) {
+	VirtualQPlainTextEdit* self_cast = static_cast<VirtualQPlainTextEdit*>( (QPlainTextEdit*)(self) );
 	
 	return self_cast->sender();
 
 }
 
-int QPlainTextEdit_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQPlainTextEdit* self_cast = dynamic_cast<VirtualQPlainTextEdit*>( (QPlainTextEdit*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return 0;
-	}
-	
-	*_dynamic_cast_ok = true;
+int QPlainTextEdit_protectedbase_senderSignalIndex(const void* self) {
+	VirtualQPlainTextEdit* self_cast = static_cast<VirtualQPlainTextEdit*>( (QPlainTextEdit*)(self) );
 	
 	return self_cast->senderSignalIndex();
 
 }
 
-int QPlainTextEdit_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal) {
-	VirtualQPlainTextEdit* self_cast = dynamic_cast<VirtualQPlainTextEdit*>( (QPlainTextEdit*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return 0;
-	}
-	
-	*_dynamic_cast_ok = true;
+int QPlainTextEdit_protectedbase_receivers(const void* self, const char* signal) {
+	VirtualQPlainTextEdit* self_cast = static_cast<VirtualQPlainTextEdit*>( (QPlainTextEdit*)(self) );
 	
 	return self_cast->receivers(signal);
 
 }
 
-bool QPlainTextEdit_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal) {
-	VirtualQPlainTextEdit* self_cast = dynamic_cast<VirtualQPlainTextEdit*>( (QPlainTextEdit*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return false;
-	}
-	
-	*_dynamic_cast_ok = true;
+bool QPlainTextEdit_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal) {
+	VirtualQPlainTextEdit* self_cast = static_cast<VirtualQPlainTextEdit*>( (QPlainTextEdit*)(self) );
 	
 	return self_cast->isSignalConnected(*signal);
 
@@ -2517,12 +2409,12 @@ public:
 	friend void QPlainTextDocumentLayout_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
 
 	// Wrappers to allow calling protected methods:
-	friend int QPlainTextDocumentLayout_protectedbase_formatIndex(bool* _dynamic_cast_ok, void* self, int pos);
-	friend QTextCharFormat* QPlainTextDocumentLayout_protectedbase_format(bool* _dynamic_cast_ok, void* self, int pos);
-	friend QObject* QPlainTextDocumentLayout_protectedbase_sender(bool* _dynamic_cast_ok, const void* self);
-	friend int QPlainTextDocumentLayout_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
-	friend int QPlainTextDocumentLayout_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
-	friend bool QPlainTextDocumentLayout_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+	friend int QPlainTextDocumentLayout_protectedbase_formatIndex(void* self, int pos);
+	friend QTextCharFormat* QPlainTextDocumentLayout_protectedbase_format(void* self, int pos);
+	friend QObject* QPlainTextDocumentLayout_protectedbase_sender(const void* self);
+	friend int QPlainTextDocumentLayout_protectedbase_senderSignalIndex(const void* self);
+	friend int QPlainTextDocumentLayout_protectedbase_receivers(const void* self, const char* signal);
+	friend bool QPlainTextDocumentLayout_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
 };
 
 QPlainTextDocumentLayout* QPlainTextDocumentLayout_new(struct QPlainTextDocumentLayout_VTable* vtbl, QTextDocument* document) {
@@ -2739,79 +2631,43 @@ void QPlainTextDocumentLayout_virtualbase_disconnectNotify(void* self, QMetaMeth
 }
 
 const QMetaObject* QPlainTextDocumentLayout_staticMetaObject() { return &QPlainTextDocumentLayout::staticMetaObject; }
-int QPlainTextDocumentLayout_protectedbase_formatIndex(bool* _dynamic_cast_ok, void* self, int pos) {
-	VirtualQPlainTextDocumentLayout* self_cast = dynamic_cast<VirtualQPlainTextDocumentLayout*>( (QPlainTextDocumentLayout*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return 0;
-	}
-	
-	*_dynamic_cast_ok = true;
+int QPlainTextDocumentLayout_protectedbase_formatIndex(void* self, int pos) {
+	VirtualQPlainTextDocumentLayout* self_cast = static_cast<VirtualQPlainTextDocumentLayout*>( (QPlainTextDocumentLayout*)(self) );
 	
 	return self_cast->formatIndex(static_cast<int>(pos));
 
 }
 
-QTextCharFormat* QPlainTextDocumentLayout_protectedbase_format(bool* _dynamic_cast_ok, void* self, int pos) {
-	VirtualQPlainTextDocumentLayout* self_cast = dynamic_cast<VirtualQPlainTextDocumentLayout*>( (QPlainTextDocumentLayout*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return nullptr;
-	}
-	
-	*_dynamic_cast_ok = true;
+QTextCharFormat* QPlainTextDocumentLayout_protectedbase_format(void* self, int pos) {
+	VirtualQPlainTextDocumentLayout* self_cast = static_cast<VirtualQPlainTextDocumentLayout*>( (QPlainTextDocumentLayout*)(self) );
 	
 	return new QTextCharFormat(self_cast->format(static_cast<int>(pos)));
 
 }
 
-QObject* QPlainTextDocumentLayout_protectedbase_sender(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQPlainTextDocumentLayout* self_cast = dynamic_cast<VirtualQPlainTextDocumentLayout*>( (QPlainTextDocumentLayout*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return nullptr;
-	}
-	
-	*_dynamic_cast_ok = true;
+QObject* QPlainTextDocumentLayout_protectedbase_sender(const void* self) {
+	VirtualQPlainTextDocumentLayout* self_cast = static_cast<VirtualQPlainTextDocumentLayout*>( (QPlainTextDocumentLayout*)(self) );
 	
 	return self_cast->sender();
 
 }
 
-int QPlainTextDocumentLayout_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQPlainTextDocumentLayout* self_cast = dynamic_cast<VirtualQPlainTextDocumentLayout*>( (QPlainTextDocumentLayout*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return 0;
-	}
-	
-	*_dynamic_cast_ok = true;
+int QPlainTextDocumentLayout_protectedbase_senderSignalIndex(const void* self) {
+	VirtualQPlainTextDocumentLayout* self_cast = static_cast<VirtualQPlainTextDocumentLayout*>( (QPlainTextDocumentLayout*)(self) );
 	
 	return self_cast->senderSignalIndex();
 
 }
 
-int QPlainTextDocumentLayout_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal) {
-	VirtualQPlainTextDocumentLayout* self_cast = dynamic_cast<VirtualQPlainTextDocumentLayout*>( (QPlainTextDocumentLayout*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return 0;
-	}
-	
-	*_dynamic_cast_ok = true;
+int QPlainTextDocumentLayout_protectedbase_receivers(const void* self, const char* signal) {
+	VirtualQPlainTextDocumentLayout* self_cast = static_cast<VirtualQPlainTextDocumentLayout*>( (QPlainTextDocumentLayout*)(self) );
 	
 	return self_cast->receivers(signal);
 
 }
 
-bool QPlainTextDocumentLayout_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal) {
-	VirtualQPlainTextDocumentLayout* self_cast = dynamic_cast<VirtualQPlainTextDocumentLayout*>( (QPlainTextDocumentLayout*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return false;
-	}
-	
-	*_dynamic_cast_ok = true;
+bool QPlainTextDocumentLayout_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal) {
+	VirtualQPlainTextDocumentLayout* self_cast = static_cast<VirtualQPlainTextDocumentLayout*>( (QPlainTextDocumentLayout*)(self) );
 	
 	return self_cast->isSignalConnected(*signal);
 

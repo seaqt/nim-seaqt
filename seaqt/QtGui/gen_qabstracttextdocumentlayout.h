@@ -150,12 +150,12 @@ void QAbstractTextDocumentLayout_virtualbase_childEvent(void* self, QChildEvent*
 void QAbstractTextDocumentLayout_virtualbase_customEvent(void* self, QEvent* event);
 void QAbstractTextDocumentLayout_virtualbase_connectNotify(void* self, QMetaMethod* signal);
 void QAbstractTextDocumentLayout_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
-int QAbstractTextDocumentLayout_protectedbase_formatIndex(bool* _dynamic_cast_ok, void* self, int pos);
-QTextCharFormat* QAbstractTextDocumentLayout_protectedbase_format(bool* _dynamic_cast_ok, void* self, int pos);
-QObject* QAbstractTextDocumentLayout_protectedbase_sender(bool* _dynamic_cast_ok, const void* self);
-int QAbstractTextDocumentLayout_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
-int QAbstractTextDocumentLayout_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
-bool QAbstractTextDocumentLayout_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+int QAbstractTextDocumentLayout_protectedbase_formatIndex(void* self, int pos);
+QTextCharFormat* QAbstractTextDocumentLayout_protectedbase_format(void* self, int pos);
+QObject* QAbstractTextDocumentLayout_protectedbase_sender(const void* self);
+int QAbstractTextDocumentLayout_protectedbase_senderSignalIndex(const void* self);
+int QAbstractTextDocumentLayout_protectedbase_receivers(const void* self, const char* signal);
+bool QAbstractTextDocumentLayout_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
 const QMetaObject* QAbstractTextDocumentLayout_staticMetaObject();
 void QAbstractTextDocumentLayout_delete(QAbstractTextDocumentLayout* self);
 

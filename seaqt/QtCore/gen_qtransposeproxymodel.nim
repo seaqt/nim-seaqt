@@ -41,6 +41,7 @@ import
   ./gen_qabstractitemmodel_types,
   ./gen_qabstractproxymodel,
   ./gen_qcoreevent_types,
+  ./gen_qdatastream_types,
   ./gen_qitemselectionmodel_types,
   ./gen_qmetaobject_types,
   ./gen_qmimedata_types,
@@ -53,6 +54,7 @@ export
   gen_qabstractitemmodel_types,
   gen_qabstractproxymodel,
   gen_qcoreevent_types,
+  gen_qdatastream_types,
   gen_qitemselectionmodel_types,
   gen_qmetaobject_types,
   gen_qmimedata_types,
@@ -194,6 +196,31 @@ proc fcQTransposeProxyModel_virtualbase_childEvent(self: pointer, event: pointer
 proc fcQTransposeProxyModel_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QTransposeProxyModel_virtualbase_customEvent".}
 proc fcQTransposeProxyModel_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QTransposeProxyModel_virtualbase_connectNotify".}
 proc fcQTransposeProxyModel_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QTransposeProxyModel_virtualbase_disconnectNotify".}
+proc fcQTransposeProxyModel_protectedbase_createSourceIndex(self: pointer, row: cint, col: cint, internalPtr: pointer): pointer {.importc: "QTransposeProxyModel_protectedbase_createSourceIndex".}
+proc fcQTransposeProxyModel_protectedbase_createIndex(self: pointer, row: cint, column: cint): pointer {.importc: "QTransposeProxyModel_protectedbase_createIndex".}
+proc fcQTransposeProxyModel_protectedbase_encodeData(self: pointer, indexes: struct_miqt_array, stream: pointer): void {.importc: "QTransposeProxyModel_protectedbase_encodeData".}
+proc fcQTransposeProxyModel_protectedbase_decodeData(self: pointer, row: cint, column: cint, parent: pointer, stream: pointer): bool {.importc: "QTransposeProxyModel_protectedbase_decodeData".}
+proc fcQTransposeProxyModel_protectedbase_beginInsertRows(self: pointer, parent: pointer, first: cint, last: cint): void {.importc: "QTransposeProxyModel_protectedbase_beginInsertRows".}
+proc fcQTransposeProxyModel_protectedbase_endInsertRows(self: pointer, ): void {.importc: "QTransposeProxyModel_protectedbase_endInsertRows".}
+proc fcQTransposeProxyModel_protectedbase_beginRemoveRows(self: pointer, parent: pointer, first: cint, last: cint): void {.importc: "QTransposeProxyModel_protectedbase_beginRemoveRows".}
+proc fcQTransposeProxyModel_protectedbase_endRemoveRows(self: pointer, ): void {.importc: "QTransposeProxyModel_protectedbase_endRemoveRows".}
+proc fcQTransposeProxyModel_protectedbase_beginMoveRows(self: pointer, sourceParent: pointer, sourceFirst: cint, sourceLast: cint, destinationParent: pointer, destinationRow: cint): bool {.importc: "QTransposeProxyModel_protectedbase_beginMoveRows".}
+proc fcQTransposeProxyModel_protectedbase_endMoveRows(self: pointer, ): void {.importc: "QTransposeProxyModel_protectedbase_endMoveRows".}
+proc fcQTransposeProxyModel_protectedbase_beginInsertColumns(self: pointer, parent: pointer, first: cint, last: cint): void {.importc: "QTransposeProxyModel_protectedbase_beginInsertColumns".}
+proc fcQTransposeProxyModel_protectedbase_endInsertColumns(self: pointer, ): void {.importc: "QTransposeProxyModel_protectedbase_endInsertColumns".}
+proc fcQTransposeProxyModel_protectedbase_beginRemoveColumns(self: pointer, parent: pointer, first: cint, last: cint): void {.importc: "QTransposeProxyModel_protectedbase_beginRemoveColumns".}
+proc fcQTransposeProxyModel_protectedbase_endRemoveColumns(self: pointer, ): void {.importc: "QTransposeProxyModel_protectedbase_endRemoveColumns".}
+proc fcQTransposeProxyModel_protectedbase_beginMoveColumns(self: pointer, sourceParent: pointer, sourceFirst: cint, sourceLast: cint, destinationParent: pointer, destinationColumn: cint): bool {.importc: "QTransposeProxyModel_protectedbase_beginMoveColumns".}
+proc fcQTransposeProxyModel_protectedbase_endMoveColumns(self: pointer, ): void {.importc: "QTransposeProxyModel_protectedbase_endMoveColumns".}
+proc fcQTransposeProxyModel_protectedbase_beginResetModel(self: pointer, ): void {.importc: "QTransposeProxyModel_protectedbase_beginResetModel".}
+proc fcQTransposeProxyModel_protectedbase_endResetModel(self: pointer, ): void {.importc: "QTransposeProxyModel_protectedbase_endResetModel".}
+proc fcQTransposeProxyModel_protectedbase_changePersistentIndex(self: pointer, fromVal: pointer, to: pointer): void {.importc: "QTransposeProxyModel_protectedbase_changePersistentIndex".}
+proc fcQTransposeProxyModel_protectedbase_changePersistentIndexList(self: pointer, fromVal: struct_miqt_array, to: struct_miqt_array): void {.importc: "QTransposeProxyModel_protectedbase_changePersistentIndexList".}
+proc fcQTransposeProxyModel_protectedbase_persistentIndexList(self: pointer, ): struct_miqt_array {.importc: "QTransposeProxyModel_protectedbase_persistentIndexList".}
+proc fcQTransposeProxyModel_protectedbase_sender(self: pointer, ): pointer {.importc: "QTransposeProxyModel_protectedbase_sender".}
+proc fcQTransposeProxyModel_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QTransposeProxyModel_protectedbase_senderSignalIndex".}
+proc fcQTransposeProxyModel_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QTransposeProxyModel_protectedbase_receivers".}
+proc fcQTransposeProxyModel_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QTransposeProxyModel_protectedbase_isSignalConnected".}
 proc fcQTransposeProxyModel_new(vtbl: pointer, ): ptr cQTransposeProxyModel {.importc: "QTransposeProxyModel_new".}
 proc fcQTransposeProxyModel_new2(vtbl: pointer, parent: pointer): ptr cQTransposeProxyModel {.importc: "QTransposeProxyModel_new2".}
 proc fcQTransposeProxyModel_staticMetaObject(): pointer {.importc: "QTransposeProxyModel_staticMetaObject".}
@@ -1040,6 +1067,98 @@ proc miqt_exec_callback_cQTransposeProxyModel_disconnectNotify(vtbl: pointer, se
   let self = QTransposeProxyModel(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
   vtbl[].disconnectNotify(self, slotval1)
+
+proc createSourceIndex*(self: gen_qtransposeproxymodel_types.QTransposeProxyModel, row: cint, col: cint, internalPtr: pointer): gen_qabstractitemmodel_types.QModelIndex =
+  gen_qabstractitemmodel_types.QModelIndex(h: fcQTransposeProxyModel_protectedbase_createSourceIndex(self.h, row, col, internalPtr))
+
+proc createIndex*(self: gen_qtransposeproxymodel_types.QTransposeProxyModel, row: cint, column: cint): gen_qabstractitemmodel_types.QModelIndex =
+  gen_qabstractitemmodel_types.QModelIndex(h: fcQTransposeProxyModel_protectedbase_createIndex(self.h, row, column))
+
+proc encodeData*(self: gen_qtransposeproxymodel_types.QTransposeProxyModel, indexes: seq[gen_qabstractitemmodel_types.QModelIndex], stream: gen_qdatastream_types.QDataStream): void =
+  var indexes_CArray = newSeq[pointer](len(indexes))
+  for i in 0..<len(indexes):
+    indexes_CArray[i] = indexes[i].h
+
+  fcQTransposeProxyModel_protectedbase_encodeData(self.h, struct_miqt_array(len: csize_t(len(indexes)), data: if len(indexes) == 0: nil else: addr(indexes_CArray[0])), stream.h)
+
+proc decodeData*(self: gen_qtransposeproxymodel_types.QTransposeProxyModel, row: cint, column: cint, parent: gen_qabstractitemmodel_types.QModelIndex, stream: gen_qdatastream_types.QDataStream): bool =
+  fcQTransposeProxyModel_protectedbase_decodeData(self.h, row, column, parent.h, stream.h)
+
+proc beginInsertRows*(self: gen_qtransposeproxymodel_types.QTransposeProxyModel, parent: gen_qabstractitemmodel_types.QModelIndex, first: cint, last: cint): void =
+  fcQTransposeProxyModel_protectedbase_beginInsertRows(self.h, parent.h, first, last)
+
+proc endInsertRows*(self: gen_qtransposeproxymodel_types.QTransposeProxyModel, ): void =
+  fcQTransposeProxyModel_protectedbase_endInsertRows(self.h)
+
+proc beginRemoveRows*(self: gen_qtransposeproxymodel_types.QTransposeProxyModel, parent: gen_qabstractitemmodel_types.QModelIndex, first: cint, last: cint): void =
+  fcQTransposeProxyModel_protectedbase_beginRemoveRows(self.h, parent.h, first, last)
+
+proc endRemoveRows*(self: gen_qtransposeproxymodel_types.QTransposeProxyModel, ): void =
+  fcQTransposeProxyModel_protectedbase_endRemoveRows(self.h)
+
+proc beginMoveRows*(self: gen_qtransposeproxymodel_types.QTransposeProxyModel, sourceParent: gen_qabstractitemmodel_types.QModelIndex, sourceFirst: cint, sourceLast: cint, destinationParent: gen_qabstractitemmodel_types.QModelIndex, destinationRow: cint): bool =
+  fcQTransposeProxyModel_protectedbase_beginMoveRows(self.h, sourceParent.h, sourceFirst, sourceLast, destinationParent.h, destinationRow)
+
+proc endMoveRows*(self: gen_qtransposeproxymodel_types.QTransposeProxyModel, ): void =
+  fcQTransposeProxyModel_protectedbase_endMoveRows(self.h)
+
+proc beginInsertColumns*(self: gen_qtransposeproxymodel_types.QTransposeProxyModel, parent: gen_qabstractitemmodel_types.QModelIndex, first: cint, last: cint): void =
+  fcQTransposeProxyModel_protectedbase_beginInsertColumns(self.h, parent.h, first, last)
+
+proc endInsertColumns*(self: gen_qtransposeproxymodel_types.QTransposeProxyModel, ): void =
+  fcQTransposeProxyModel_protectedbase_endInsertColumns(self.h)
+
+proc beginRemoveColumns*(self: gen_qtransposeproxymodel_types.QTransposeProxyModel, parent: gen_qabstractitemmodel_types.QModelIndex, first: cint, last: cint): void =
+  fcQTransposeProxyModel_protectedbase_beginRemoveColumns(self.h, parent.h, first, last)
+
+proc endRemoveColumns*(self: gen_qtransposeproxymodel_types.QTransposeProxyModel, ): void =
+  fcQTransposeProxyModel_protectedbase_endRemoveColumns(self.h)
+
+proc beginMoveColumns*(self: gen_qtransposeproxymodel_types.QTransposeProxyModel, sourceParent: gen_qabstractitemmodel_types.QModelIndex, sourceFirst: cint, sourceLast: cint, destinationParent: gen_qabstractitemmodel_types.QModelIndex, destinationColumn: cint): bool =
+  fcQTransposeProxyModel_protectedbase_beginMoveColumns(self.h, sourceParent.h, sourceFirst, sourceLast, destinationParent.h, destinationColumn)
+
+proc endMoveColumns*(self: gen_qtransposeproxymodel_types.QTransposeProxyModel, ): void =
+  fcQTransposeProxyModel_protectedbase_endMoveColumns(self.h)
+
+proc beginResetModel*(self: gen_qtransposeproxymodel_types.QTransposeProxyModel, ): void =
+  fcQTransposeProxyModel_protectedbase_beginResetModel(self.h)
+
+proc endResetModel*(self: gen_qtransposeproxymodel_types.QTransposeProxyModel, ): void =
+  fcQTransposeProxyModel_protectedbase_endResetModel(self.h)
+
+proc changePersistentIndex*(self: gen_qtransposeproxymodel_types.QTransposeProxyModel, fromVal: gen_qabstractitemmodel_types.QModelIndex, to: gen_qabstractitemmodel_types.QModelIndex): void =
+  fcQTransposeProxyModel_protectedbase_changePersistentIndex(self.h, fromVal.h, to.h)
+
+proc changePersistentIndexList*(self: gen_qtransposeproxymodel_types.QTransposeProxyModel, fromVal: seq[gen_qabstractitemmodel_types.QModelIndex], to: seq[gen_qabstractitemmodel_types.QModelIndex]): void =
+  var fromVal_CArray = newSeq[pointer](len(fromVal))
+  for i in 0..<len(fromVal):
+    fromVal_CArray[i] = fromVal[i].h
+
+  var to_CArray = newSeq[pointer](len(to))
+  for i in 0..<len(to):
+    to_CArray[i] = to[i].h
+
+  fcQTransposeProxyModel_protectedbase_changePersistentIndexList(self.h, struct_miqt_array(len: csize_t(len(fromVal)), data: if len(fromVal) == 0: nil else: addr(fromVal_CArray[0])), struct_miqt_array(len: csize_t(len(to)), data: if len(to) == 0: nil else: addr(to_CArray[0])))
+
+proc persistentIndexList*(self: gen_qtransposeproxymodel_types.QTransposeProxyModel, ): seq[gen_qabstractitemmodel_types.QModelIndex] =
+  var v_ma = fcQTransposeProxyModel_protectedbase_persistentIndexList(self.h)
+  var vx_ret = newSeq[gen_qabstractitemmodel_types.QModelIndex](int(v_ma.len))
+  let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
+  for i in 0 ..< v_ma.len:
+    vx_ret[i] = gen_qabstractitemmodel_types.QModelIndex(h: v_outCast[i])
+  vx_ret
+
+proc sender*(self: gen_qtransposeproxymodel_types.QTransposeProxyModel, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQTransposeProxyModel_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qtransposeproxymodel_types.QTransposeProxyModel, ): cint =
+  fcQTransposeProxyModel_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qtransposeproxymodel_types.QTransposeProxyModel, signal: cstring): cint =
+  fcQTransposeProxyModel_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qtransposeproxymodel_types.QTransposeProxyModel, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQTransposeProxyModel_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc create*(T: type gen_qtransposeproxymodel_types.QTransposeProxyModel,
     vtbl: ref QTransposeProxyModelVTable = nil): gen_qtransposeproxymodel_types.QTransposeProxyModel =

@@ -270,6 +270,19 @@ proc fcQAbstractSocket_virtualbase_childEvent(self: pointer, event: pointer): vo
 proc fcQAbstractSocket_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QAbstractSocket_virtualbase_customEvent".}
 proc fcQAbstractSocket_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QAbstractSocket_virtualbase_connectNotify".}
 proc fcQAbstractSocket_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QAbstractSocket_virtualbase_disconnectNotify".}
+proc fcQAbstractSocket_protectedbase_setSocketState(self: pointer, state: cint): void {.importc: "QAbstractSocket_protectedbase_setSocketState".}
+proc fcQAbstractSocket_protectedbase_setSocketError(self: pointer, socketError: cint): void {.importc: "QAbstractSocket_protectedbase_setSocketError".}
+proc fcQAbstractSocket_protectedbase_setLocalPort(self: pointer, port: cushort): void {.importc: "QAbstractSocket_protectedbase_setLocalPort".}
+proc fcQAbstractSocket_protectedbase_setLocalAddress(self: pointer, address: pointer): void {.importc: "QAbstractSocket_protectedbase_setLocalAddress".}
+proc fcQAbstractSocket_protectedbase_setPeerPort(self: pointer, port: cushort): void {.importc: "QAbstractSocket_protectedbase_setPeerPort".}
+proc fcQAbstractSocket_protectedbase_setPeerAddress(self: pointer, address: pointer): void {.importc: "QAbstractSocket_protectedbase_setPeerAddress".}
+proc fcQAbstractSocket_protectedbase_setPeerName(self: pointer, name: struct_miqt_string): void {.importc: "QAbstractSocket_protectedbase_setPeerName".}
+proc fcQAbstractSocket_protectedbase_setOpenMode(self: pointer, openMode: cint): void {.importc: "QAbstractSocket_protectedbase_setOpenMode".}
+proc fcQAbstractSocket_protectedbase_setErrorString(self: pointer, errorString: struct_miqt_string): void {.importc: "QAbstractSocket_protectedbase_setErrorString".}
+proc fcQAbstractSocket_protectedbase_sender(self: pointer, ): pointer {.importc: "QAbstractSocket_protectedbase_sender".}
+proc fcQAbstractSocket_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QAbstractSocket_protectedbase_senderSignalIndex".}
+proc fcQAbstractSocket_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QAbstractSocket_protectedbase_receivers".}
+proc fcQAbstractSocket_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QAbstractSocket_protectedbase_isSignalConnected".}
 proc fcQAbstractSocket_new(vtbl: pointer, socketType: cint, parent: pointer): ptr cQAbstractSocket {.importc: "QAbstractSocket_new".}
 proc fcQAbstractSocket_staticMetaObject(): pointer {.importc: "QAbstractSocket_staticMetaObject".}
 proc fcQAbstractSocket_delete(self: pointer) {.importc: "QAbstractSocket_delete".}
@@ -993,6 +1006,45 @@ proc miqt_exec_callback_cQAbstractSocket_disconnectNotify(vtbl: pointer, self: p
   let self = QAbstractSocket(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
   vtbl[].disconnectNotify(self, slotval1)
+
+proc setSocketState*(self: gen_qabstractsocket_types.QAbstractSocket, state: cint): void =
+  fcQAbstractSocket_protectedbase_setSocketState(self.h, cint(state))
+
+proc setSocketError*(self: gen_qabstractsocket_types.QAbstractSocket, socketError: cint): void =
+  fcQAbstractSocket_protectedbase_setSocketError(self.h, cint(socketError))
+
+proc setLocalPort*(self: gen_qabstractsocket_types.QAbstractSocket, port: cushort): void =
+  fcQAbstractSocket_protectedbase_setLocalPort(self.h, port)
+
+proc setLocalAddress*(self: gen_qabstractsocket_types.QAbstractSocket, address: gen_qhostaddress_types.QHostAddress): void =
+  fcQAbstractSocket_protectedbase_setLocalAddress(self.h, address.h)
+
+proc setPeerPort*(self: gen_qabstractsocket_types.QAbstractSocket, port: cushort): void =
+  fcQAbstractSocket_protectedbase_setPeerPort(self.h, port)
+
+proc setPeerAddress*(self: gen_qabstractsocket_types.QAbstractSocket, address: gen_qhostaddress_types.QHostAddress): void =
+  fcQAbstractSocket_protectedbase_setPeerAddress(self.h, address.h)
+
+proc setPeerName*(self: gen_qabstractsocket_types.QAbstractSocket, name: string): void =
+  fcQAbstractSocket_protectedbase_setPeerName(self.h, struct_miqt_string(data: name, len: csize_t(len(name))))
+
+proc setOpenMode*(self: gen_qabstractsocket_types.QAbstractSocket, openMode: cint): void =
+  fcQAbstractSocket_protectedbase_setOpenMode(self.h, cint(openMode))
+
+proc setErrorString*(self: gen_qabstractsocket_types.QAbstractSocket, errorString: string): void =
+  fcQAbstractSocket_protectedbase_setErrorString(self.h, struct_miqt_string(data: errorString, len: csize_t(len(errorString))))
+
+proc sender*(self: gen_qabstractsocket_types.QAbstractSocket, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQAbstractSocket_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qabstractsocket_types.QAbstractSocket, ): cint =
+  fcQAbstractSocket_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qabstractsocket_types.QAbstractSocket, signal: cstring): cint =
+  fcQAbstractSocket_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qabstractsocket_types.QAbstractSocket, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQAbstractSocket_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc create*(T: type gen_qabstractsocket_types.QAbstractSocket,
     socketType: cint, parent: gen_qobject_types.QObject,

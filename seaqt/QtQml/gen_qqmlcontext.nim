@@ -102,6 +102,10 @@ proc fcQQmlContext_virtualbase_childEvent(self: pointer, event: pointer): void {
 proc fcQQmlContext_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QQmlContext_virtualbase_customEvent".}
 proc fcQQmlContext_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QQmlContext_virtualbase_connectNotify".}
 proc fcQQmlContext_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QQmlContext_virtualbase_disconnectNotify".}
+proc fcQQmlContext_protectedbase_sender(self: pointer, ): pointer {.importc: "QQmlContext_protectedbase_sender".}
+proc fcQQmlContext_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QQmlContext_protectedbase_senderSignalIndex".}
+proc fcQQmlContext_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QQmlContext_protectedbase_receivers".}
+proc fcQQmlContext_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QQmlContext_protectedbase_isSignalConnected".}
 proc fcQQmlContext_new(vtbl: pointer, parent: pointer): ptr cQQmlContext {.importc: "QQmlContext_new".}
 proc fcQQmlContext_new2(vtbl: pointer, parent: pointer): ptr cQQmlContext {.importc: "QQmlContext_new2".}
 proc fcQQmlContext_new3(vtbl: pointer, parent: pointer, objParent: pointer): ptr cQQmlContext {.importc: "QQmlContext_new3".}
@@ -309,6 +313,18 @@ proc miqt_exec_callback_cQQmlContext_disconnectNotify(vtbl: pointer, self: point
   let self = QQmlContext(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
   vtbl[].disconnectNotify(self, slotval1)
+
+proc sender*(self: gen_qqmlcontext_types.QQmlContext, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQQmlContext_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qqmlcontext_types.QQmlContext, ): cint =
+  fcQQmlContext_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qqmlcontext_types.QQmlContext, signal: cstring): cint =
+  fcQQmlContext_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qqmlcontext_types.QQmlContext, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQQmlContext_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc create*(T: type gen_qqmlcontext_types.QQmlContext,
     parent: gen_qqmlengine_types.QQmlEngine,

@@ -129,6 +129,10 @@ proc fcQAbstractAnimation_virtualbase_childEvent(self: pointer, event: pointer):
 proc fcQAbstractAnimation_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QAbstractAnimation_virtualbase_customEvent".}
 proc fcQAbstractAnimation_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QAbstractAnimation_virtualbase_connectNotify".}
 proc fcQAbstractAnimation_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QAbstractAnimation_virtualbase_disconnectNotify".}
+proc fcQAbstractAnimation_protectedbase_sender(self: pointer, ): pointer {.importc: "QAbstractAnimation_protectedbase_sender".}
+proc fcQAbstractAnimation_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QAbstractAnimation_protectedbase_senderSignalIndex".}
+proc fcQAbstractAnimation_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QAbstractAnimation_protectedbase_receivers".}
+proc fcQAbstractAnimation_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QAbstractAnimation_protectedbase_isSignalConnected".}
 proc fcQAbstractAnimation_new(vtbl: pointer, ): ptr cQAbstractAnimation {.importc: "QAbstractAnimation_new".}
 proc fcQAbstractAnimation_new2(vtbl: pointer, parent: pointer): ptr cQAbstractAnimation {.importc: "QAbstractAnimation_new2".}
 proc fcQAbstractAnimation_staticMetaObject(): pointer {.importc: "QAbstractAnimation_staticMetaObject".}
@@ -178,6 +182,11 @@ proc fcQAnimationDriver_virtualbase_childEvent(self: pointer, event: pointer): v
 proc fcQAnimationDriver_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QAnimationDriver_virtualbase_customEvent".}
 proc fcQAnimationDriver_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QAnimationDriver_virtualbase_connectNotify".}
 proc fcQAnimationDriver_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QAnimationDriver_virtualbase_disconnectNotify".}
+proc fcQAnimationDriver_protectedbase_advanceAnimation(self: pointer, ): void {.importc: "QAnimationDriver_protectedbase_advanceAnimation".}
+proc fcQAnimationDriver_protectedbase_sender(self: pointer, ): pointer {.importc: "QAnimationDriver_protectedbase_sender".}
+proc fcQAnimationDriver_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QAnimationDriver_protectedbase_senderSignalIndex".}
+proc fcQAnimationDriver_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QAnimationDriver_protectedbase_receivers".}
+proc fcQAnimationDriver_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QAnimationDriver_protectedbase_isSignalConnected".}
 proc fcQAnimationDriver_new(vtbl: pointer, ): ptr cQAnimationDriver {.importc: "QAnimationDriver_new".}
 proc fcQAnimationDriver_new2(vtbl: pointer, parent: pointer): ptr cQAnimationDriver {.importc: "QAnimationDriver_new2".}
 proc fcQAnimationDriver_staticMetaObject(): pointer {.importc: "QAnimationDriver_staticMetaObject".}
@@ -502,6 +511,18 @@ proc miqt_exec_callback_cQAbstractAnimation_disconnectNotify(vtbl: pointer, self
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
   vtbl[].disconnectNotify(self, slotval1)
 
+proc sender*(self: gen_qabstractanimation_types.QAbstractAnimation, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQAbstractAnimation_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qabstractanimation_types.QAbstractAnimation, ): cint =
+  fcQAbstractAnimation_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qabstractanimation_types.QAbstractAnimation, signal: cstring): cint =
+  fcQAbstractAnimation_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qabstractanimation_types.QAbstractAnimation, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQAbstractAnimation_protectedbase_isSignalConnected(self.h, signal.h)
+
 proc create*(T: type gen_qabstractanimation_types.QAbstractAnimation,
     vtbl: ref QAbstractAnimationVTable = nil): gen_qabstractanimation_types.QAbstractAnimation =
   let vtbl = if vtbl == nil: new QAbstractAnimationVTable else: vtbl
@@ -818,6 +839,21 @@ proc miqt_exec_callback_cQAnimationDriver_disconnectNotify(vtbl: pointer, self: 
   let self = QAnimationDriver(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
   vtbl[].disconnectNotify(self, slotval1)
+
+proc advanceAnimation*(self: gen_qabstractanimation_types.QAnimationDriver, ): void =
+  fcQAnimationDriver_protectedbase_advanceAnimation(self.h)
+
+proc sender*(self: gen_qabstractanimation_types.QAnimationDriver, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQAnimationDriver_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qabstractanimation_types.QAnimationDriver, ): cint =
+  fcQAnimationDriver_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qabstractanimation_types.QAnimationDriver, signal: cstring): cint =
+  fcQAnimationDriver_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qabstractanimation_types.QAnimationDriver, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQAnimationDriver_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc create*(T: type gen_qabstractanimation_types.QAnimationDriver,
     vtbl: ref QAnimationDriverVTable = nil): gen_qabstractanimation_types.QAnimationDriver =

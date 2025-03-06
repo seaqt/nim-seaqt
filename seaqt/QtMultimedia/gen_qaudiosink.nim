@@ -103,6 +103,10 @@ proc fcQAudioSink_virtualbase_childEvent(self: pointer, event: pointer): void {.
 proc fcQAudioSink_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QAudioSink_virtualbase_customEvent".}
 proc fcQAudioSink_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QAudioSink_virtualbase_connectNotify".}
 proc fcQAudioSink_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QAudioSink_virtualbase_disconnectNotify".}
+proc fcQAudioSink_protectedbase_sender(self: pointer, ): pointer {.importc: "QAudioSink_protectedbase_sender".}
+proc fcQAudioSink_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QAudioSink_protectedbase_senderSignalIndex".}
+proc fcQAudioSink_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QAudioSink_protectedbase_receivers".}
+proc fcQAudioSink_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QAudioSink_protectedbase_isSignalConnected".}
 proc fcQAudioSink_new(vtbl: pointer, ): ptr cQAudioSink {.importc: "QAudioSink_new".}
 proc fcQAudioSink_new2(vtbl: pointer, audioDeviceInfo: pointer): ptr cQAudioSink {.importc: "QAudioSink_new2".}
 proc fcQAudioSink_new3(vtbl: pointer, format: pointer): ptr cQAudioSink {.importc: "QAudioSink_new3".}
@@ -328,6 +332,18 @@ proc miqt_exec_callback_cQAudioSink_disconnectNotify(vtbl: pointer, self: pointe
   let self = QAudioSink(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
   vtbl[].disconnectNotify(self, slotval1)
+
+proc sender*(self: gen_qaudiosink_types.QAudioSink, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQAudioSink_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qaudiosink_types.QAudioSink, ): cint =
+  fcQAudioSink_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qaudiosink_types.QAudioSink, signal: cstring): cint =
+  fcQAudioSink_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qaudiosink_types.QAudioSink, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQAudioSink_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc create*(T: type gen_qaudiosink_types.QAudioSink,
     vtbl: ref QAudioSinkVTable = nil): gen_qaudiosink_types.QAudioSink =

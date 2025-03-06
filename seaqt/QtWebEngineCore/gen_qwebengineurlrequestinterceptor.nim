@@ -82,6 +82,10 @@ proc fcQWebEngineUrlRequestInterceptor_virtualbase_childEvent(self: pointer, eve
 proc fcQWebEngineUrlRequestInterceptor_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QWebEngineUrlRequestInterceptor_virtualbase_customEvent".}
 proc fcQWebEngineUrlRequestInterceptor_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QWebEngineUrlRequestInterceptor_virtualbase_connectNotify".}
 proc fcQWebEngineUrlRequestInterceptor_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QWebEngineUrlRequestInterceptor_virtualbase_disconnectNotify".}
+proc fcQWebEngineUrlRequestInterceptor_protectedbase_sender(self: pointer, ): pointer {.importc: "QWebEngineUrlRequestInterceptor_protectedbase_sender".}
+proc fcQWebEngineUrlRequestInterceptor_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QWebEngineUrlRequestInterceptor_protectedbase_senderSignalIndex".}
+proc fcQWebEngineUrlRequestInterceptor_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QWebEngineUrlRequestInterceptor_protectedbase_receivers".}
+proc fcQWebEngineUrlRequestInterceptor_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QWebEngineUrlRequestInterceptor_protectedbase_isSignalConnected".}
 proc fcQWebEngineUrlRequestInterceptor_new(vtbl: pointer, ): ptr cQWebEngineUrlRequestInterceptor {.importc: "QWebEngineUrlRequestInterceptor_new".}
 proc fcQWebEngineUrlRequestInterceptor_new2(vtbl: pointer, p: pointer): ptr cQWebEngineUrlRequestInterceptor {.importc: "QWebEngineUrlRequestInterceptor_new2".}
 proc fcQWebEngineUrlRequestInterceptor_staticMetaObject(): pointer {.importc: "QWebEngineUrlRequestInterceptor_staticMetaObject".}
@@ -243,6 +247,18 @@ proc miqt_exec_callback_cQWebEngineUrlRequestInterceptor_disconnectNotify(vtbl: 
   let self = QWebEngineUrlRequestInterceptor(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
   vtbl[].disconnectNotify(self, slotval1)
+
+proc sender*(self: gen_qwebengineurlrequestinterceptor_types.QWebEngineUrlRequestInterceptor, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQWebEngineUrlRequestInterceptor_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qwebengineurlrequestinterceptor_types.QWebEngineUrlRequestInterceptor, ): cint =
+  fcQWebEngineUrlRequestInterceptor_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qwebengineurlrequestinterceptor_types.QWebEngineUrlRequestInterceptor, signal: cstring): cint =
+  fcQWebEngineUrlRequestInterceptor_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qwebengineurlrequestinterceptor_types.QWebEngineUrlRequestInterceptor, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQWebEngineUrlRequestInterceptor_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc create*(T: type gen_qwebengineurlrequestinterceptor_types.QWebEngineUrlRequestInterceptor,
     vtbl: ref QWebEngineUrlRequestInterceptorVTable = nil): gen_qwebengineurlrequestinterceptor_types.QWebEngineUrlRequestInterceptor =

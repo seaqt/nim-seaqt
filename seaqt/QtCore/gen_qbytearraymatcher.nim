@@ -59,6 +59,7 @@ proc fcQByteArrayMatcher_new4(pattern: cstring): ptr cQByteArrayMatcher {.import
 proc fcQByteArrayMatcher_new5(other: pointer): ptr cQByteArrayMatcher {.importc: "QByteArrayMatcher_new5".}
 proc fcQByteArrayMatcher_new6(pattern: cstring, length: int64): ptr cQByteArrayMatcher {.importc: "QByteArrayMatcher_new6".}
 proc fcQByteArrayMatcher_delete(self: pointer) {.importc: "QByteArrayMatcher_delete".}
+proc fcQStaticByteArrayMatcherBase_protectedbase_indexOfIn(self: pointer, needle: cstring, nlen: csize_t, haystack: cstring, hlen: int64, fromVal: int64): int64 {.importc: "QStaticByteArrayMatcherBase_protectedbase_indexOfIn".}
 
 proc operatorAssign*(self: gen_qbytearraymatcher_types.QByteArrayMatcher, other: gen_qbytearraymatcher_types.QByteArrayMatcher): void =
   fcQByteArrayMatcher_operatorAssign(self.h, other.h)
@@ -109,3 +110,6 @@ proc create*(T: type gen_qbytearraymatcher_types.QByteArrayMatcher,
 
 proc delete*(self: gen_qbytearraymatcher_types.QByteArrayMatcher) =
   fcQByteArrayMatcher_delete(self.h)
+proc indexOfIn*(self: gen_qbytearraymatcher_types.QStaticByteArrayMatcherBase, needle: cstring, nlen: csize_t, haystack: cstring, hlen: int64, fromVal: int64): int64 =
+  fcQStaticByteArrayMatcherBase_protectedbase_indexOfIn(self.h, needle, nlen, haystack, hlen, fromVal)
+

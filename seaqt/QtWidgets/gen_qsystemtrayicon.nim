@@ -121,6 +121,10 @@ proc fcQSystemTrayIcon_virtualbase_childEvent(self: pointer, event: pointer): vo
 proc fcQSystemTrayIcon_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QSystemTrayIcon_virtualbase_customEvent".}
 proc fcQSystemTrayIcon_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QSystemTrayIcon_virtualbase_connectNotify".}
 proc fcQSystemTrayIcon_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QSystemTrayIcon_virtualbase_disconnectNotify".}
+proc fcQSystemTrayIcon_protectedbase_sender(self: pointer, ): pointer {.importc: "QSystemTrayIcon_protectedbase_sender".}
+proc fcQSystemTrayIcon_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QSystemTrayIcon_protectedbase_senderSignalIndex".}
+proc fcQSystemTrayIcon_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QSystemTrayIcon_protectedbase_receivers".}
+proc fcQSystemTrayIcon_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QSystemTrayIcon_protectedbase_isSignalConnected".}
 proc fcQSystemTrayIcon_new(vtbl: pointer, ): ptr cQSystemTrayIcon {.importc: "QSystemTrayIcon_new".}
 proc fcQSystemTrayIcon_new2(vtbl: pointer, icon: pointer): ptr cQSystemTrayIcon {.importc: "QSystemTrayIcon_new2".}
 proc fcQSystemTrayIcon_new3(vtbl: pointer, parent: pointer): ptr cQSystemTrayIcon {.importc: "QSystemTrayIcon_new3".}
@@ -368,6 +372,18 @@ proc miqt_exec_callback_cQSystemTrayIcon_disconnectNotify(vtbl: pointer, self: p
   let self = QSystemTrayIcon(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
   vtbl[].disconnectNotify(self, slotval1)
+
+proc sender*(self: gen_qsystemtrayicon_types.QSystemTrayIcon, ): gen_qobject_types.QObject =
+  gen_qobject_types.QObject(h: fcQSystemTrayIcon_protectedbase_sender(self.h))
+
+proc senderSignalIndex*(self: gen_qsystemtrayicon_types.QSystemTrayIcon, ): cint =
+  fcQSystemTrayIcon_protectedbase_senderSignalIndex(self.h)
+
+proc receivers*(self: gen_qsystemtrayicon_types.QSystemTrayIcon, signal: cstring): cint =
+  fcQSystemTrayIcon_protectedbase_receivers(self.h, signal)
+
+proc isSignalConnected*(self: gen_qsystemtrayicon_types.QSystemTrayIcon, signal: gen_qmetaobject_types.QMetaMethod): bool =
+  fcQSystemTrayIcon_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc create*(T: type gen_qsystemtrayicon_types.QSystemTrayIcon,
     vtbl: ref QSystemTrayIconVTable = nil): gen_qsystemtrayicon_types.QSystemTrayIcon =

@@ -197,10 +197,10 @@ public:
 	friend void QQmlApplicationEngine_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
 
 	// Wrappers to allow calling protected methods:
-	friend QObject* QQmlApplicationEngine_protectedbase_sender(bool* _dynamic_cast_ok, const void* self);
-	friend int QQmlApplicationEngine_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
-	friend int QQmlApplicationEngine_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
-	friend bool QQmlApplicationEngine_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+	friend QObject* QQmlApplicationEngine_protectedbase_sender(const void* self);
+	friend int QQmlApplicationEngine_protectedbase_senderSignalIndex(const void* self);
+	friend int QQmlApplicationEngine_protectedbase_receivers(const void* self, const char* signal);
+	friend bool QQmlApplicationEngine_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
 };
 
 QQmlApplicationEngine* QQmlApplicationEngine_new(struct QQmlApplicationEngine_VTable* vtbl) {
@@ -430,53 +430,29 @@ void QQmlApplicationEngine_virtualbase_disconnectNotify(void* self, QMetaMethod*
 }
 
 const QMetaObject* QQmlApplicationEngine_staticMetaObject() { return &QQmlApplicationEngine::staticMetaObject; }
-QObject* QQmlApplicationEngine_protectedbase_sender(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQQmlApplicationEngine* self_cast = dynamic_cast<VirtualQQmlApplicationEngine*>( (QQmlApplicationEngine*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return nullptr;
-	}
-	
-	*_dynamic_cast_ok = true;
+QObject* QQmlApplicationEngine_protectedbase_sender(const void* self) {
+	VirtualQQmlApplicationEngine* self_cast = static_cast<VirtualQQmlApplicationEngine*>( (QQmlApplicationEngine*)(self) );
 	
 	return self_cast->sender();
 
 }
 
-int QQmlApplicationEngine_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQQmlApplicationEngine* self_cast = dynamic_cast<VirtualQQmlApplicationEngine*>( (QQmlApplicationEngine*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return 0;
-	}
-	
-	*_dynamic_cast_ok = true;
+int QQmlApplicationEngine_protectedbase_senderSignalIndex(const void* self) {
+	VirtualQQmlApplicationEngine* self_cast = static_cast<VirtualQQmlApplicationEngine*>( (QQmlApplicationEngine*)(self) );
 	
 	return self_cast->senderSignalIndex();
 
 }
 
-int QQmlApplicationEngine_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal) {
-	VirtualQQmlApplicationEngine* self_cast = dynamic_cast<VirtualQQmlApplicationEngine*>( (QQmlApplicationEngine*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return 0;
-	}
-	
-	*_dynamic_cast_ok = true;
+int QQmlApplicationEngine_protectedbase_receivers(const void* self, const char* signal) {
+	VirtualQQmlApplicationEngine* self_cast = static_cast<VirtualQQmlApplicationEngine*>( (QQmlApplicationEngine*)(self) );
 	
 	return self_cast->receivers(signal);
 
 }
 
-bool QQmlApplicationEngine_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal) {
-	VirtualQQmlApplicationEngine* self_cast = dynamic_cast<VirtualQQmlApplicationEngine*>( (QQmlApplicationEngine*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return false;
-	}
-	
-	*_dynamic_cast_ok = true;
+bool QQmlApplicationEngine_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal) {
+	VirtualQQmlApplicationEngine* self_cast = static_cast<VirtualQQmlApplicationEngine*>( (QQmlApplicationEngine*)(self) );
 	
 	return self_cast->isSignalConnected(*signal);
 

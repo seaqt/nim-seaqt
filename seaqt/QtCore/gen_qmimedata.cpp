@@ -256,10 +256,10 @@ public:
 	friend void QMimeData_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
 
 	// Wrappers to allow calling protected methods:
-	friend QObject* QMimeData_protectedbase_sender(bool* _dynamic_cast_ok, const void* self);
-	friend int QMimeData_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
-	friend int QMimeData_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
-	friend bool QMimeData_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+	friend QObject* QMimeData_protectedbase_sender(const void* self);
+	friend int QMimeData_protectedbase_senderSignalIndex(const void* self);
+	friend int QMimeData_protectedbase_receivers(const void* self, const char* signal);
+	friend bool QMimeData_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
 };
 
 QMimeData* QMimeData_new(struct QMimeData_VTable* vtbl) {
@@ -553,53 +553,29 @@ void QMimeData_virtualbase_disconnectNotify(void* self, QMetaMethod* signal) {
 }
 
 const QMetaObject* QMimeData_staticMetaObject() { return &QMimeData::staticMetaObject; }
-QObject* QMimeData_protectedbase_sender(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQMimeData* self_cast = dynamic_cast<VirtualQMimeData*>( (QMimeData*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return nullptr;
-	}
-	
-	*_dynamic_cast_ok = true;
+QObject* QMimeData_protectedbase_sender(const void* self) {
+	VirtualQMimeData* self_cast = static_cast<VirtualQMimeData*>( (QMimeData*)(self) );
 	
 	return self_cast->sender();
 
 }
 
-int QMimeData_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self) {
-	VirtualQMimeData* self_cast = dynamic_cast<VirtualQMimeData*>( (QMimeData*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return 0;
-	}
-	
-	*_dynamic_cast_ok = true;
+int QMimeData_protectedbase_senderSignalIndex(const void* self) {
+	VirtualQMimeData* self_cast = static_cast<VirtualQMimeData*>( (QMimeData*)(self) );
 	
 	return self_cast->senderSignalIndex();
 
 }
 
-int QMimeData_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal) {
-	VirtualQMimeData* self_cast = dynamic_cast<VirtualQMimeData*>( (QMimeData*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return 0;
-	}
-	
-	*_dynamic_cast_ok = true;
+int QMimeData_protectedbase_receivers(const void* self, const char* signal) {
+	VirtualQMimeData* self_cast = static_cast<VirtualQMimeData*>( (QMimeData*)(self) );
 	
 	return self_cast->receivers(signal);
 
 }
 
-bool QMimeData_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal) {
-	VirtualQMimeData* self_cast = dynamic_cast<VirtualQMimeData*>( (QMimeData*)(self) );
-	if (self_cast == nullptr) {
-		*_dynamic_cast_ok = false;
-		return false;
-	}
-	
-	*_dynamic_cast_ok = true;
+bool QMimeData_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal) {
+	VirtualQMimeData* self_cast = static_cast<VirtualQMimeData*>( (QMimeData*)(self) );
 	
 	return self_cast->isSignalConnected(*signal);
 
