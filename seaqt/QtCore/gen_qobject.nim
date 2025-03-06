@@ -45,6 +45,26 @@ const privateDir = block:
 
 {.compile("../libseaqt/libseaqt.cpp", cflags & privateDir).}
 
+type QObject_connectSlot* = proc(args: pointer) {.gcsafe, raises: [].}
+
+proc miqt_exec_callback_QObject(slot: int, args: pointer) {.exportc.} =
+  let slot = cast[ptr QObject_connectSlot](slot)
+  slot[](args)
+
+proc miqt_exec_callback_QObject_release(slot: int) {.exportc.} =
+  let slot = cast[ref QObject_connectSlot](slot)
+  GC_unref(slot)
+
+proc QObject_connectRawSlot*(
+  sender: pointer,
+  signal: cstring,
+  receiver: pointer,
+  slot: int,
+  release: pointer,
+  typeX: cint,
+  senderMetaObject: pointer,
+): pointer {.importc.}
+
 
 type QObjectDataEnumEnum* = distinct cint
 template CheckForParentChildLoopsWarnDepth*(_: type QObjectDataEnumEnum): untyped = 4096
