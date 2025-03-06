@@ -50,6 +50,7 @@ type cQMediaAudioProbeControl*{.exportc: "QMediaAudioProbeControl", incompleteSt
 
 proc fcQMediaAudioProbeControl_metaObject(self: pointer, ): pointer {.importc: "QMediaAudioProbeControl_metaObject".}
 proc fcQMediaAudioProbeControl_metacast(self: pointer, param1: cstring): pointer {.importc: "QMediaAudioProbeControl_metacast".}
+proc fcQMediaAudioProbeControl_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QMediaAudioProbeControl_metacall".}
 proc fcQMediaAudioProbeControl_tr(s: cstring): struct_miqt_string {.importc: "QMediaAudioProbeControl_tr".}
 proc fcQMediaAudioProbeControl_trUtf8(s: cstring): struct_miqt_string {.importc: "QMediaAudioProbeControl_trUtf8".}
 proc fcQMediaAudioProbeControl_audioBufferProbed(self: pointer, buffer: pointer): void {.importc: "QMediaAudioProbeControl_audioBufferProbed".}
@@ -60,6 +61,7 @@ proc fcQMediaAudioProbeControl_tr2(s: cstring, c: cstring): struct_miqt_string {
 proc fcQMediaAudioProbeControl_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QMediaAudioProbeControl_tr3".}
 proc fcQMediaAudioProbeControl_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QMediaAudioProbeControl_trUtf82".}
 proc fcQMediaAudioProbeControl_trUtf83(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QMediaAudioProbeControl_trUtf83".}
+proc fcQMediaAudioProbeControl_staticMetaObject(): pointer {.importc: "QMediaAudioProbeControl_staticMetaObject".}
 proc fcQMediaAudioProbeControl_delete(self: pointer) {.importc: "QMediaAudioProbeControl_delete".}
 
 
@@ -70,6 +72,9 @@ proc metaObject*(self: gen_qmediaaudioprobecontrol_types.QMediaAudioProbeControl
 
 proc metacast*(self: gen_qmediaaudioprobecontrol_types.QMediaAudioProbeControl, param1: cstring): pointer =
   fcQMediaAudioProbeControl_metacast(self.h, param1)
+
+proc metacall*(self: gen_qmediaaudioprobecontrol_types.QMediaAudioProbeControl, param1: cint, param2: cint, param3: pointer): cint =
+  fcQMediaAudioProbeControl_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qmediaaudioprobecontrol_types.QMediaAudioProbeControl, s: cstring): string =
   let v_ms = fcQMediaAudioProbeControl_tr(s)
@@ -137,5 +142,7 @@ proc trUtf8*(_: type gen_qmediaaudioprobecontrol_types.QMediaAudioProbeControl, 
   c_free(v_ms.data)
   vx_ret
 
+proc staticMetaObject*(_: type gen_qmediaaudioprobecontrol_types.QMediaAudioProbeControl): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fcQMediaAudioProbeControl_staticMetaObject())
 proc delete*(self: gen_qmediaaudioprobecontrol_types.QMediaAudioProbeControl) =
   fcQMediaAudioProbeControl_delete(self.h)

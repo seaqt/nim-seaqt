@@ -111,6 +111,7 @@ proc fcQMediaServiceFeaturesInterface_operatorAssign(self: pointer, param1: poin
 proc fcQMediaServiceFeaturesInterface_delete(self: pointer) {.importc: "QMediaServiceFeaturesInterface_delete".}
 proc fcQMediaServiceProviderPlugin_metaObject(self: pointer, ): pointer {.importc: "QMediaServiceProviderPlugin_metaObject".}
 proc fcQMediaServiceProviderPlugin_metacast(self: pointer, param1: cstring): pointer {.importc: "QMediaServiceProviderPlugin_metacast".}
+proc fcQMediaServiceProviderPlugin_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QMediaServiceProviderPlugin_metacall".}
 proc fcQMediaServiceProviderPlugin_tr(s: cstring): struct_miqt_string {.importc: "QMediaServiceProviderPlugin_tr".}
 proc fcQMediaServiceProviderPlugin_trUtf8(s: cstring): struct_miqt_string {.importc: "QMediaServiceProviderPlugin_trUtf8".}
 proc fcQMediaServiceProviderPlugin_create(self: pointer, key: struct_miqt_string): pointer {.importc: "QMediaServiceProviderPlugin_create".}
@@ -119,6 +120,7 @@ proc fcQMediaServiceProviderPlugin_tr2(s: cstring, c: cstring): struct_miqt_stri
 proc fcQMediaServiceProviderPlugin_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QMediaServiceProviderPlugin_tr3".}
 proc fcQMediaServiceProviderPlugin_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QMediaServiceProviderPlugin_trUtf82".}
 proc fcQMediaServiceProviderPlugin_trUtf83(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QMediaServiceProviderPlugin_trUtf83".}
+proc fcQMediaServiceProviderPlugin_staticMetaObject(): pointer {.importc: "QMediaServiceProviderPlugin_staticMetaObject".}
 proc fcQMediaServiceProviderPlugin_delete(self: pointer) {.importc: "QMediaServiceProviderPlugin_delete".}
 
 
@@ -305,6 +307,9 @@ proc metaObject*(self: gen_qmediaserviceproviderplugin_types.QMediaServiceProvid
 proc metacast*(self: gen_qmediaserviceproviderplugin_types.QMediaServiceProviderPlugin, param1: cstring): pointer =
   fcQMediaServiceProviderPlugin_metacast(self.h, param1)
 
+proc metacall*(self: gen_qmediaserviceproviderplugin_types.QMediaServiceProviderPlugin, param1: cint, param2: cint, param3: pointer): cint =
+  fcQMediaServiceProviderPlugin_metacall(self.h, cint(param1), param2, param3)
+
 proc tr*(_: type gen_qmediaserviceproviderplugin_types.QMediaServiceProviderPlugin, s: cstring): string =
   let v_ms = fcQMediaServiceProviderPlugin_tr(s)
   let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
@@ -347,5 +352,7 @@ proc trUtf8*(_: type gen_qmediaserviceproviderplugin_types.QMediaServiceProvider
   c_free(v_ms.data)
   vx_ret
 
+proc staticMetaObject*(_: type gen_qmediaserviceproviderplugin_types.QMediaServiceProviderPlugin): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fcQMediaServiceProviderPlugin_staticMetaObject())
 proc delete*(self: gen_qmediaserviceproviderplugin_types.QMediaServiceProviderPlugin) =
   fcQMediaServiceProviderPlugin_delete(self.h)

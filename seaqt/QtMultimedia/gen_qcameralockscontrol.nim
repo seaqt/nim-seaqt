@@ -48,6 +48,7 @@ type cQCameraLocksControl*{.exportc: "QCameraLocksControl", incompleteStruct.} =
 
 proc fcQCameraLocksControl_metaObject(self: pointer, ): pointer {.importc: "QCameraLocksControl_metaObject".}
 proc fcQCameraLocksControl_metacast(self: pointer, param1: cstring): pointer {.importc: "QCameraLocksControl_metacast".}
+proc fcQCameraLocksControl_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QCameraLocksControl_metacall".}
 proc fcQCameraLocksControl_tr(s: cstring): struct_miqt_string {.importc: "QCameraLocksControl_tr".}
 proc fcQCameraLocksControl_trUtf8(s: cstring): struct_miqt_string {.importc: "QCameraLocksControl_trUtf8".}
 proc fcQCameraLocksControl_supportedLocks(self: pointer, ): cint {.importc: "QCameraLocksControl_supportedLocks".}
@@ -60,6 +61,7 @@ proc fcQCameraLocksControl_tr2(s: cstring, c: cstring): struct_miqt_string {.imp
 proc fcQCameraLocksControl_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QCameraLocksControl_tr3".}
 proc fcQCameraLocksControl_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QCameraLocksControl_trUtf82".}
 proc fcQCameraLocksControl_trUtf83(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QCameraLocksControl_trUtf83".}
+proc fcQCameraLocksControl_staticMetaObject(): pointer {.importc: "QCameraLocksControl_staticMetaObject".}
 proc fcQCameraLocksControl_delete(self: pointer) {.importc: "QCameraLocksControl_delete".}
 
 
@@ -70,6 +72,9 @@ proc metaObject*(self: gen_qcameralockscontrol_types.QCameraLocksControl, ): gen
 
 proc metacast*(self: gen_qcameralockscontrol_types.QCameraLocksControl, param1: cstring): pointer =
   fcQCameraLocksControl_metacast(self.h, param1)
+
+proc metacall*(self: gen_qcameralockscontrol_types.QCameraLocksControl, param1: cint, param2: cint, param3: pointer): cint =
+  fcQCameraLocksControl_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qcameralockscontrol_types.QCameraLocksControl, s: cstring): string =
   let v_ms = fcQCameraLocksControl_tr(s)
@@ -139,5 +144,7 @@ proc trUtf8*(_: type gen_qcameralockscontrol_types.QCameraLocksControl, s: cstri
   c_free(v_ms.data)
   vx_ret
 
+proc staticMetaObject*(_: type gen_qcameralockscontrol_types.QCameraLocksControl): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fcQCameraLocksControl_staticMetaObject())
 proc delete*(self: gen_qcameralockscontrol_types.QCameraLocksControl) =
   fcQCameraLocksControl_delete(self.h)

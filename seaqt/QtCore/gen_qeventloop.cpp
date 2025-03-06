@@ -17,6 +17,9 @@
 extern "C" {
 #endif
 
+QMetaObject* miqt_exec_callback_QEventLoop_metaObject(const QEventLoop*, intptr_t);
+void* miqt_exec_callback_QEventLoop_metacast(QEventLoop*, intptr_t, const char*);
+int miqt_exec_callback_QEventLoop_metacall(QEventLoop*, intptr_t, int, int, void**);
 bool miqt_exec_callback_QEventLoop_event(QEventLoop*, intptr_t, QEvent*);
 bool miqt_exec_callback_QEventLoop_eventFilter(QEventLoop*, intptr_t, QObject*, QEvent*);
 void miqt_exec_callback_QEventLoop_timerEvent(QEventLoop*, intptr_t, QTimerEvent*);
@@ -35,6 +38,62 @@ public:
 	VirtualQEventLoop(QObject* parent): QEventLoop(parent) {};
 
 	virtual ~VirtualQEventLoop() override = default;
+
+	// cgo.Handle value for overwritten implementation
+	intptr_t handle__metaObject = 0;
+
+	// Subclass to allow providing a Go implementation
+	virtual const QMetaObject* metaObject() const override {
+		if (handle__metaObject == 0) {
+			return QEventLoop::metaObject();
+		}
+		
+
+		QMetaObject* callback_return_value = miqt_exec_callback_QEventLoop_metaObject(this, handle__metaObject);
+
+		return callback_return_value;
+	}
+
+	friend QMetaObject* QEventLoop_virtualbase_metaObject(const void* self);
+
+	// cgo.Handle value for overwritten implementation
+	intptr_t handle__metacast = 0;
+
+	// Subclass to allow providing a Go implementation
+	virtual void* qt_metacast(const char* param1) override {
+		if (handle__metacast == 0) {
+			return QEventLoop::qt_metacast(param1);
+		}
+		
+		const char* sigval1 = (const char*) param1;
+
+		void* callback_return_value = miqt_exec_callback_QEventLoop_metacast(this, handle__metacast, sigval1);
+
+		return callback_return_value;
+	}
+
+	friend void* QEventLoop_virtualbase_metacast(void* self, const char* param1);
+
+	// cgo.Handle value for overwritten implementation
+	intptr_t handle__metacall = 0;
+
+	// Subclass to allow providing a Go implementation
+	virtual int qt_metacall(QMetaObject::Call param1, int param2, void** param3) override {
+		if (handle__metacall == 0) {
+			return QEventLoop::qt_metacall(param1, param2, param3);
+		}
+		
+		QMetaObject::Call param1_ret = param1;
+		int sigval1 = static_cast<int>(param1_ret);
+		int sigval2 = param2;
+		void** sigval3 = param3;
+
+		int callback_return_value = miqt_exec_callback_QEventLoop_metacall(this, handle__metacall, sigval1, sigval2, sigval3);
+
+		return static_cast<int>(callback_return_value);
+	}
+
+	friend int QEventLoop_virtualbase_metacall(void* self, int param1, int param2, void** param3);
 
 	// cgo.Handle value for overwritten implementation
 	intptr_t handle__event = 0;
@@ -199,6 +258,10 @@ void* QEventLoop_metacast(QEventLoop* self, const char* param1) {
 	return self->qt_metacast(param1);
 }
 
+int QEventLoop_metacall(QEventLoop* self, int param1, int param2, void** param3) {
+	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
+}
+
 struct miqt_string QEventLoop_tr(const char* s) {
 	QString _ret = QEventLoop::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
@@ -307,6 +370,54 @@ int QEventLoop_exec1(QEventLoop* self, int flags) {
 
 void QEventLoop_exit1(QEventLoop* self, int returnCode) {
 	self->exit(static_cast<int>(returnCode));
+}
+
+bool QEventLoop_override_virtual_metaObject(void* self, intptr_t slot) {
+	VirtualQEventLoop* self_cast = dynamic_cast<VirtualQEventLoop*>( (QEventLoop*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+	
+	self_cast->handle__metaObject = slot;
+	return true;
+}
+
+QMetaObject* QEventLoop_virtualbase_metaObject(const void* self) {
+
+	return (QMetaObject*) ( (const VirtualQEventLoop*)(self) )->QEventLoop::metaObject();
+
+}
+
+bool QEventLoop_override_virtual_metacast(void* self, intptr_t slot) {
+	VirtualQEventLoop* self_cast = dynamic_cast<VirtualQEventLoop*>( (QEventLoop*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+	
+	self_cast->handle__metacast = slot;
+	return true;
+}
+
+void* QEventLoop_virtualbase_metacast(void* self, const char* param1) {
+
+	return ( (VirtualQEventLoop*)(self) )->QEventLoop::qt_metacast(param1);
+
+}
+
+bool QEventLoop_override_virtual_metacall(void* self, intptr_t slot) {
+	VirtualQEventLoop* self_cast = dynamic_cast<VirtualQEventLoop*>( (QEventLoop*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+	
+	self_cast->handle__metacall = slot;
+	return true;
+}
+
+int QEventLoop_virtualbase_metacall(void* self, int param1, int param2, void** param3) {
+
+	return ( (VirtualQEventLoop*)(self) )->QEventLoop::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
+
 }
 
 bool QEventLoop_override_virtual_event(void* self, intptr_t slot) {
@@ -421,6 +532,7 @@ void QEventLoop_virtualbase_disconnectNotify(void* self, QMetaMethod* signal) {
 
 }
 
+const QMetaObject* QEventLoop_staticMetaObject() { return &QEventLoop::staticMetaObject; }
 QObject* QEventLoop_protectedbase_sender(bool* _dynamic_cast_ok, const void* self) {
 	VirtualQEventLoop* self_cast = dynamic_cast<VirtualQEventLoop*>( (QEventLoop*)(self) );
 	if (self_cast == nullptr) {

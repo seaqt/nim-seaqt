@@ -91,6 +91,7 @@ QQuickFramebufferObject* QQuickFramebufferObject_new2(QQuickItem* parent);
 void QQuickFramebufferObject_virtbase(QQuickFramebufferObject* src, QQuickItem** outptr_QQuickItem);
 QMetaObject* QQuickFramebufferObject_metaObject(const QQuickFramebufferObject* self);
 void* QQuickFramebufferObject_metacast(QQuickFramebufferObject* self, const char* param1);
+int QQuickFramebufferObject_metacall(QQuickFramebufferObject* self, int param1, int param2, void** param3);
 struct miqt_string QQuickFramebufferObject_tr(const char* s);
 struct miqt_string QQuickFramebufferObject_trUtf8(const char* s);
 bool QQuickFramebufferObject_textureFollowsItemSize(const QQuickFramebufferObject* self);
@@ -111,6 +112,12 @@ struct miqt_string QQuickFramebufferObject_tr2(const char* s, const char* c);
 struct miqt_string QQuickFramebufferObject_tr3(const char* s, const char* c, int n);
 struct miqt_string QQuickFramebufferObject_trUtf82(const char* s, const char* c);
 struct miqt_string QQuickFramebufferObject_trUtf83(const char* s, const char* c, int n);
+bool QQuickFramebufferObject_override_virtual_metaObject(void* self, intptr_t slot);
+QMetaObject* QQuickFramebufferObject_virtualbase_metaObject(const void* self);
+bool QQuickFramebufferObject_override_virtual_metacast(void* self, intptr_t slot);
+void* QQuickFramebufferObject_virtualbase_metacast(void* self, const char* param1);
+bool QQuickFramebufferObject_override_virtual_metacall(void* self, intptr_t slot);
+int QQuickFramebufferObject_virtualbase_metacall(void* self, int param1, int param2, void** param3);
 bool QQuickFramebufferObject_override_virtual_createRenderer(void* self, intptr_t slot);
 QQuickFramebufferObject__Renderer* QQuickFramebufferObject_virtualbase_createRenderer(const void* self);
 bool QQuickFramebufferObject_override_virtual_isTextureProvider(void* self, intptr_t slot);
@@ -206,6 +213,7 @@ QObject* QQuickFramebufferObject_protectedbase_sender(bool* _dynamic_cast_ok, co
 int QQuickFramebufferObject_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
 int QQuickFramebufferObject_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
 bool QQuickFramebufferObject_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+const QMetaObject* QQuickFramebufferObject_staticMetaObject();
 void QQuickFramebufferObject_delete(QQuickFramebufferObject* self);
 
 void QQuickFramebufferObject__Renderer_render(QQuickFramebufferObject__Renderer* self);

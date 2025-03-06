@@ -95,6 +95,7 @@ QScrollArea* QScrollArea_new2();
 void QScrollArea_virtbase(QScrollArea* src, QAbstractScrollArea** outptr_QAbstractScrollArea);
 QMetaObject* QScrollArea_metaObject(const QScrollArea* self);
 void* QScrollArea_metacast(QScrollArea* self, const char* param1);
+int QScrollArea_metacall(QScrollArea* self, int param1, int param2, void** param3);
 struct miqt_string QScrollArea_tr(const char* s);
 struct miqt_string QScrollArea_trUtf8(const char* s);
 QWidget* QScrollArea_widget(const QScrollArea* self);
@@ -121,6 +122,12 @@ void QScrollArea_ensureVisible3(QScrollArea* self, int x, int y, int xmargin);
 void QScrollArea_ensureVisible4(QScrollArea* self, int x, int y, int xmargin, int ymargin);
 void QScrollArea_ensureWidgetVisible2(QScrollArea* self, QWidget* childWidget, int xmargin);
 void QScrollArea_ensureWidgetVisible3(QScrollArea* self, QWidget* childWidget, int xmargin, int ymargin);
+bool QScrollArea_override_virtual_metaObject(void* self, intptr_t slot);
+QMetaObject* QScrollArea_virtualbase_metaObject(const void* self);
+bool QScrollArea_override_virtual_metacast(void* self, intptr_t slot);
+void* QScrollArea_virtualbase_metacast(void* self, const char* param1);
+bool QScrollArea_override_virtual_metacall(void* self, intptr_t slot);
+int QScrollArea_virtualbase_metacall(void* self, int param1, int param2, void** param3);
 bool QScrollArea_override_virtual_sizeHint(void* self, intptr_t slot);
 QSize* QScrollArea_virtualbase_sizeHint(const void* self);
 bool QScrollArea_override_virtual_focusNextPrevChild(void* self, intptr_t slot);
@@ -236,6 +243,7 @@ QObject* QScrollArea_protectedbase_sender(bool* _dynamic_cast_ok, const void* se
 int QScrollArea_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
 int QScrollArea_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
 bool QScrollArea_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+const QMetaObject* QScrollArea_staticMetaObject();
 void QScrollArea_delete(QScrollArea* self);
 
 #ifdef __cplusplus

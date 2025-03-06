@@ -58,6 +58,7 @@ proc fcQSound_new(filename: struct_miqt_string): ptr cQSound {.importc: "QSound_
 proc fcQSound_new2(filename: struct_miqt_string, parent: pointer): ptr cQSound {.importc: "QSound_new2".}
 proc fcQSound_metaObject(self: pointer, ): pointer {.importc: "QSound_metaObject".}
 proc fcQSound_metacast(self: pointer, param1: cstring): pointer {.importc: "QSound_metacast".}
+proc fcQSound_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QSound_metacall".}
 proc fcQSound_tr(s: cstring): struct_miqt_string {.importc: "QSound_tr".}
 proc fcQSound_trUtf8(s: cstring): struct_miqt_string {.importc: "QSound_trUtf8".}
 proc fcQSound_play(filename: struct_miqt_string): void {.importc: "QSound_play".}
@@ -72,6 +73,12 @@ proc fcQSound_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QSound
 proc fcQSound_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QSound_tr3".}
 proc fcQSound_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QSound_trUtf82".}
 proc fcQSound_trUtf83(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QSound_trUtf83".}
+proc fQSound_virtualbase_metaObject(self: pointer, ): pointer{.importc: "QSound_virtualbase_metaObject".}
+proc fcQSound_override_virtual_metaObject(self: pointer, slot: int) {.importc: "QSound_override_virtual_metaObject".}
+proc fQSound_virtualbase_metacast(self: pointer, param1: cstring): pointer{.importc: "QSound_virtualbase_metacast".}
+proc fcQSound_override_virtual_metacast(self: pointer, slot: int) {.importc: "QSound_override_virtual_metacast".}
+proc fQSound_virtualbase_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint{.importc: "QSound_virtualbase_metacall".}
+proc fcQSound_override_virtual_metacall(self: pointer, slot: int) {.importc: "QSound_override_virtual_metacall".}
 proc fQSound_virtualbase_event(self: pointer, event: pointer): bool{.importc: "QSound_virtualbase_event".}
 proc fcQSound_override_virtual_event(self: pointer, slot: int) {.importc: "QSound_override_virtual_event".}
 proc fQSound_virtualbase_eventFilter(self: pointer, watched: pointer, event: pointer): bool{.importc: "QSound_virtualbase_eventFilter".}
@@ -86,6 +93,7 @@ proc fQSound_virtualbase_connectNotify(self: pointer, signal: pointer): void{.im
 proc fcQSound_override_virtual_connectNotify(self: pointer, slot: int) {.importc: "QSound_override_virtual_connectNotify".}
 proc fQSound_virtualbase_disconnectNotify(self: pointer, signal: pointer): void{.importc: "QSound_virtualbase_disconnectNotify".}
 proc fcQSound_override_virtual_disconnectNotify(self: pointer, slot: int) {.importc: "QSound_override_virtual_disconnectNotify".}
+proc fcQSound_staticMetaObject(): pointer {.importc: "QSound_staticMetaObject".}
 proc fcQSound_delete(self: pointer) {.importc: "QSound_delete".}
 
 
@@ -102,6 +110,9 @@ proc metaObject*(self: gen_qsound_types.QSound, ): gen_qobjectdefs_types.QMetaOb
 
 proc metacast*(self: gen_qsound_types.QSound, param1: cstring): pointer =
   fcQSound_metacast(self.h, param1)
+
+proc metacall*(self: gen_qsound_types.QSound, param1: cint, param2: cint, param3: pointer): cint =
+  fcQSound_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qsound_types.QSound, s: cstring): string =
   let v_ms = fcQSound_tr(s)
@@ -166,6 +177,65 @@ proc trUtf8*(_: type gen_qsound_types.QSound, s: cstring, c: cstring, n: cint): 
   c_free(v_ms.data)
   vx_ret
 
+proc QSoundmetaObject*(self: gen_qsound_types.QSound, ): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fQSound_virtualbase_metaObject(self.h))
+
+type QSoundmetaObjectProc* = proc(): gen_qobjectdefs_types.QMetaObject
+proc onmetaObject*(self: gen_qsound_types.QSound, slot: QSoundmetaObjectProc) =
+  # TODO check subclass
+  var tmp = new QSoundmetaObjectProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQSound_override_virtual_metaObject(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QSound_metaObject(self: ptr cQSound, slot: int): pointer {.exportc: "miqt_exec_callback_QSound_metaObject ".} =
+  var nimfunc = cast[ptr QSoundmetaObjectProc](cast[pointer](slot))
+
+  let virtualReturn = nimfunc[]( )
+
+  virtualReturn.h
+proc QSoundmetacast*(self: gen_qsound_types.QSound, param1: cstring): pointer =
+  fQSound_virtualbase_metacast(self.h, param1)
+
+type QSoundmetacastProc* = proc(param1: cstring): pointer
+proc onmetacast*(self: gen_qsound_types.QSound, slot: QSoundmetacastProc) =
+  # TODO check subclass
+  var tmp = new QSoundmetacastProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQSound_override_virtual_metacast(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QSound_metacast(self: ptr cQSound, slot: int, param1: cstring): pointer {.exportc: "miqt_exec_callback_QSound_metacast ".} =
+  var nimfunc = cast[ptr QSoundmetacastProc](cast[pointer](slot))
+  let slotval1 = (param1)
+
+
+  let virtualReturn = nimfunc[](slotval1 )
+
+  virtualReturn
+proc QSoundmetacall*(self: gen_qsound_types.QSound, param1: cint, param2: cint, param3: pointer): cint =
+  fQSound_virtualbase_metacall(self.h, cint(param1), param2, param3)
+
+type QSoundmetacallProc* = proc(param1: cint, param2: cint, param3: pointer): cint
+proc onmetacall*(self: gen_qsound_types.QSound, slot: QSoundmetacallProc) =
+  # TODO check subclass
+  var tmp = new QSoundmetacallProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQSound_override_virtual_metacall(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QSound_metacall(self: ptr cQSound, slot: int, param1: cint, param2: cint, param3: pointer): cint {.exportc: "miqt_exec_callback_QSound_metacall ".} =
+  var nimfunc = cast[ptr QSoundmetacallProc](cast[pointer](slot))
+  let slotval1 = cint(param1)
+
+  let slotval2 = param2
+
+  let slotval3 = param3
+
+
+  let virtualReturn = nimfunc[](slotval1, slotval2, slotval3 )
+
+  virtualReturn
 proc QSoundevent*(self: gen_qsound_types.QSound, event: gen_qcoreevent_types.QEvent): bool =
   fQSound_virtualbase_event(self.h, event.h)
 
@@ -291,5 +361,7 @@ proc miqt_exec_callback_QSound_disconnectNotify(self: ptr cQSound, slot: int, si
 
 
   nimfunc[](slotval1)
+proc staticMetaObject*(_: type gen_qsound_types.QSound): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fcQSound_staticMetaObject())
 proc delete*(self: gen_qsound_types.QSound) =
   fcQSound_delete(self.h)

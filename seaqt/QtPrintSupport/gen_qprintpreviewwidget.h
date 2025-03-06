@@ -93,6 +93,7 @@ QPrintPreviewWidget* QPrintPreviewWidget_new6(QWidget* parent, int flags);
 void QPrintPreviewWidget_virtbase(QPrintPreviewWidget* src, QWidget** outptr_QWidget);
 QMetaObject* QPrintPreviewWidget_metaObject(const QPrintPreviewWidget* self);
 void* QPrintPreviewWidget_metacast(QPrintPreviewWidget* self, const char* param1);
+int QPrintPreviewWidget_metacall(QPrintPreviewWidget* self, int param1, int param2, void** param3);
 struct miqt_string QPrintPreviewWidget_tr(const char* s);
 struct miqt_string QPrintPreviewWidget_trUtf8(const char* s);
 double QPrintPreviewWidget_zoomFactor(const QPrintPreviewWidget* self);
@@ -128,6 +129,12 @@ struct miqt_string QPrintPreviewWidget_trUtf82(const char* s, const char* c);
 struct miqt_string QPrintPreviewWidget_trUtf83(const char* s, const char* c, int n);
 void QPrintPreviewWidget_zoomIn1(QPrintPreviewWidget* self, double zoom);
 void QPrintPreviewWidget_zoomOut1(QPrintPreviewWidget* self, double zoom);
+bool QPrintPreviewWidget_override_virtual_metaObject(void* self, intptr_t slot);
+QMetaObject* QPrintPreviewWidget_virtualbase_metaObject(const void* self);
+bool QPrintPreviewWidget_override_virtual_metacast(void* self, intptr_t slot);
+void* QPrintPreviewWidget_virtualbase_metacast(void* self, const char* param1);
+bool QPrintPreviewWidget_override_virtual_metacall(void* self, intptr_t slot);
+int QPrintPreviewWidget_virtualbase_metacall(void* self, int param1, int param2, void** param3);
 bool QPrintPreviewWidget_override_virtual_setVisible(void* self, intptr_t slot);
 void QPrintPreviewWidget_virtualbase_setVisible(void* self, bool visible);
 bool QPrintPreviewWidget_override_virtual_devType(void* self, intptr_t slot);
@@ -231,6 +238,7 @@ QObject* QPrintPreviewWidget_protectedbase_sender(bool* _dynamic_cast_ok, const 
 int QPrintPreviewWidget_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
 int QPrintPreviewWidget_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
 bool QPrintPreviewWidget_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+const QMetaObject* QPrintPreviewWidget_staticMetaObject();
 void QPrintPreviewWidget_delete(QPrintPreviewWidget* self);
 
 #ifdef __cplusplus

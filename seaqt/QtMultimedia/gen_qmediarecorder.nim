@@ -88,6 +88,7 @@ proc fcQMediaRecorder_new(mediaObject: pointer): ptr cQMediaRecorder {.importc: 
 proc fcQMediaRecorder_new2(mediaObject: pointer, parent: pointer): ptr cQMediaRecorder {.importc: "QMediaRecorder_new2".}
 proc fcQMediaRecorder_metaObject(self: pointer, ): pointer {.importc: "QMediaRecorder_metaObject".}
 proc fcQMediaRecorder_metacast(self: pointer, param1: cstring): pointer {.importc: "QMediaRecorder_metacast".}
+proc fcQMediaRecorder_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QMediaRecorder_metacall".}
 proc fcQMediaRecorder_tr(s: cstring): struct_miqt_string {.importc: "QMediaRecorder_tr".}
 proc fcQMediaRecorder_trUtf8(s: cstring): struct_miqt_string {.importc: "QMediaRecorder_trUtf8".}
 proc fcQMediaRecorder_mediaObject(self: pointer, ): pointer {.importc: "QMediaRecorder_mediaObject".}
@@ -167,6 +168,12 @@ proc fcQMediaRecorder_supportedFrameRates1(self: pointer, settings: pointer): st
 proc fcQMediaRecorder_supportedFrameRates2(self: pointer, settings: pointer, continuous: ptr bool): struct_miqt_array {.importc: "QMediaRecorder_supportedFrameRates2".}
 proc fcQMediaRecorder_setEncodingSettings2(self: pointer, audioSettings: pointer, videoSettings: pointer): void {.importc: "QMediaRecorder_setEncodingSettings2".}
 proc fcQMediaRecorder_setEncodingSettings3(self: pointer, audioSettings: pointer, videoSettings: pointer, containerMimeType: struct_miqt_string): void {.importc: "QMediaRecorder_setEncodingSettings3".}
+proc fQMediaRecorder_virtualbase_metaObject(self: pointer, ): pointer{.importc: "QMediaRecorder_virtualbase_metaObject".}
+proc fcQMediaRecorder_override_virtual_metaObject(self: pointer, slot: int) {.importc: "QMediaRecorder_override_virtual_metaObject".}
+proc fQMediaRecorder_virtualbase_metacast(self: pointer, param1: cstring): pointer{.importc: "QMediaRecorder_virtualbase_metacast".}
+proc fcQMediaRecorder_override_virtual_metacast(self: pointer, slot: int) {.importc: "QMediaRecorder_override_virtual_metacast".}
+proc fQMediaRecorder_virtualbase_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint{.importc: "QMediaRecorder_virtualbase_metacall".}
+proc fcQMediaRecorder_override_virtual_metacall(self: pointer, slot: int) {.importc: "QMediaRecorder_override_virtual_metacall".}
 proc fQMediaRecorder_virtualbase_mediaObject(self: pointer, ): pointer{.importc: "QMediaRecorder_virtualbase_mediaObject".}
 proc fcQMediaRecorder_override_virtual_mediaObject(self: pointer, slot: int) {.importc: "QMediaRecorder_override_virtual_mediaObject".}
 proc fQMediaRecorder_virtualbase_setMediaObject(self: pointer, objectVal: pointer): bool{.importc: "QMediaRecorder_virtualbase_setMediaObject".}
@@ -185,6 +192,7 @@ proc fQMediaRecorder_virtualbase_connectNotify(self: pointer, signal: pointer): 
 proc fcQMediaRecorder_override_virtual_connectNotify(self: pointer, slot: int) {.importc: "QMediaRecorder_override_virtual_connectNotify".}
 proc fQMediaRecorder_virtualbase_disconnectNotify(self: pointer, signal: pointer): void{.importc: "QMediaRecorder_virtualbase_disconnectNotify".}
 proc fcQMediaRecorder_override_virtual_disconnectNotify(self: pointer, slot: int) {.importc: "QMediaRecorder_override_virtual_disconnectNotify".}
+proc fcQMediaRecorder_staticMetaObject(): pointer {.importc: "QMediaRecorder_staticMetaObject".}
 proc fcQMediaRecorder_delete(self: pointer) {.importc: "QMediaRecorder_delete".}
 
 
@@ -201,6 +209,9 @@ proc metaObject*(self: gen_qmediarecorder_types.QMediaRecorder, ): gen_qobjectde
 
 proc metacast*(self: gen_qmediarecorder_types.QMediaRecorder, param1: cstring): pointer =
   fcQMediaRecorder_metacast(self.h, param1)
+
+proc metacall*(self: gen_qmediarecorder_types.QMediaRecorder, param1: cint, param2: cint, param3: pointer): cint =
+  fcQMediaRecorder_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qmediarecorder_types.QMediaRecorder, s: cstring): string =
   let v_ms = fcQMediaRecorder_tr(s)
@@ -682,6 +693,65 @@ proc setEncodingSettings*(self: gen_qmediarecorder_types.QMediaRecorder, audioSe
 proc setEncodingSettings*(self: gen_qmediarecorder_types.QMediaRecorder, audioSettings: gen_qmediaencodersettings_types.QAudioEncoderSettings, videoSettings: gen_qmediaencodersettings_types.QVideoEncoderSettings, containerMimeType: string): void =
   fcQMediaRecorder_setEncodingSettings3(self.h, audioSettings.h, videoSettings.h, struct_miqt_string(data: containerMimeType, len: csize_t(len(containerMimeType))))
 
+proc QMediaRecordermetaObject*(self: gen_qmediarecorder_types.QMediaRecorder, ): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fQMediaRecorder_virtualbase_metaObject(self.h))
+
+type QMediaRecordermetaObjectProc* = proc(): gen_qobjectdefs_types.QMetaObject
+proc onmetaObject*(self: gen_qmediarecorder_types.QMediaRecorder, slot: QMediaRecordermetaObjectProc) =
+  # TODO check subclass
+  var tmp = new QMediaRecordermetaObjectProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQMediaRecorder_override_virtual_metaObject(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QMediaRecorder_metaObject(self: ptr cQMediaRecorder, slot: int): pointer {.exportc: "miqt_exec_callback_QMediaRecorder_metaObject ".} =
+  var nimfunc = cast[ptr QMediaRecordermetaObjectProc](cast[pointer](slot))
+
+  let virtualReturn = nimfunc[]( )
+
+  virtualReturn.h
+proc QMediaRecordermetacast*(self: gen_qmediarecorder_types.QMediaRecorder, param1: cstring): pointer =
+  fQMediaRecorder_virtualbase_metacast(self.h, param1)
+
+type QMediaRecordermetacastProc* = proc(param1: cstring): pointer
+proc onmetacast*(self: gen_qmediarecorder_types.QMediaRecorder, slot: QMediaRecordermetacastProc) =
+  # TODO check subclass
+  var tmp = new QMediaRecordermetacastProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQMediaRecorder_override_virtual_metacast(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QMediaRecorder_metacast(self: ptr cQMediaRecorder, slot: int, param1: cstring): pointer {.exportc: "miqt_exec_callback_QMediaRecorder_metacast ".} =
+  var nimfunc = cast[ptr QMediaRecordermetacastProc](cast[pointer](slot))
+  let slotval1 = (param1)
+
+
+  let virtualReturn = nimfunc[](slotval1 )
+
+  virtualReturn
+proc QMediaRecordermetacall*(self: gen_qmediarecorder_types.QMediaRecorder, param1: cint, param2: cint, param3: pointer): cint =
+  fQMediaRecorder_virtualbase_metacall(self.h, cint(param1), param2, param3)
+
+type QMediaRecordermetacallProc* = proc(param1: cint, param2: cint, param3: pointer): cint
+proc onmetacall*(self: gen_qmediarecorder_types.QMediaRecorder, slot: QMediaRecordermetacallProc) =
+  # TODO check subclass
+  var tmp = new QMediaRecordermetacallProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQMediaRecorder_override_virtual_metacall(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QMediaRecorder_metacall(self: ptr cQMediaRecorder, slot: int, param1: cint, param2: cint, param3: pointer): cint {.exportc: "miqt_exec_callback_QMediaRecorder_metacall ".} =
+  var nimfunc = cast[ptr QMediaRecordermetacallProc](cast[pointer](slot))
+  let slotval1 = cint(param1)
+
+  let slotval2 = param2
+
+  let slotval3 = param3
+
+
+  let virtualReturn = nimfunc[](slotval1, slotval2, slotval3 )
+
+  virtualReturn
 proc QMediaRecordermediaObject*(self: gen_qmediarecorder_types.QMediaRecorder, ): gen_qmediaobject_types.QMediaObject =
   gen_qmediaobject_types.QMediaObject(h: fQMediaRecorder_virtualbase_mediaObject(self.h))
 
@@ -843,5 +913,7 @@ proc miqt_exec_callback_QMediaRecorder_disconnectNotify(self: ptr cQMediaRecorde
 
 
   nimfunc[](slotval1)
+proc staticMetaObject*(_: type gen_qmediarecorder_types.QMediaRecorder): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fcQMediaRecorder_staticMetaObject())
 proc delete*(self: gen_qmediarecorder_types.QMediaRecorder) =
   fcQMediaRecorder_delete(self.h)

@@ -48,6 +48,7 @@ type cQAudioRoleControl*{.exportc: "QAudioRoleControl", incompleteStruct.} = obj
 
 proc fcQAudioRoleControl_metaObject(self: pointer, ): pointer {.importc: "QAudioRoleControl_metaObject".}
 proc fcQAudioRoleControl_metacast(self: pointer, param1: cstring): pointer {.importc: "QAudioRoleControl_metacast".}
+proc fcQAudioRoleControl_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QAudioRoleControl_metacall".}
 proc fcQAudioRoleControl_tr(s: cstring): struct_miqt_string {.importc: "QAudioRoleControl_tr".}
 proc fcQAudioRoleControl_trUtf8(s: cstring): struct_miqt_string {.importc: "QAudioRoleControl_trUtf8".}
 proc fcQAudioRoleControl_audioRole(self: pointer, ): cint {.importc: "QAudioRoleControl_audioRole".}
@@ -59,6 +60,7 @@ proc fcQAudioRoleControl_tr2(s: cstring, c: cstring): struct_miqt_string {.impor
 proc fcQAudioRoleControl_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QAudioRoleControl_tr3".}
 proc fcQAudioRoleControl_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QAudioRoleControl_trUtf82".}
 proc fcQAudioRoleControl_trUtf83(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QAudioRoleControl_trUtf83".}
+proc fcQAudioRoleControl_staticMetaObject(): pointer {.importc: "QAudioRoleControl_staticMetaObject".}
 proc fcQAudioRoleControl_delete(self: pointer) {.importc: "QAudioRoleControl_delete".}
 
 
@@ -69,6 +71,9 @@ proc metaObject*(self: gen_qaudiorolecontrol_types.QAudioRoleControl, ): gen_qob
 
 proc metacast*(self: gen_qaudiorolecontrol_types.QAudioRoleControl, param1: cstring): pointer =
   fcQAudioRoleControl_metacast(self.h, param1)
+
+proc metacall*(self: gen_qaudiorolecontrol_types.QAudioRoleControl, param1: cint, param2: cint, param3: pointer): cint =
+  fcQAudioRoleControl_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qaudiorolecontrol_types.QAudioRoleControl, s: cstring): string =
   let v_ms = fcQAudioRoleControl_tr(s)
@@ -136,5 +141,7 @@ proc trUtf8*(_: type gen_qaudiorolecontrol_types.QAudioRoleControl, s: cstring, 
   c_free(v_ms.data)
   vx_ret
 
+proc staticMetaObject*(_: type gen_qaudiorolecontrol_types.QAudioRoleControl): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fcQAudioRoleControl_staticMetaObject())
 proc delete*(self: gen_qaudiorolecontrol_types.QAudioRoleControl) =
   fcQAudioRoleControl_delete(self.h)

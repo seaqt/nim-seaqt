@@ -196,6 +196,7 @@ void QNetworkProxyQuery_setNetworkConfiguration(QNetworkProxyQuery* self, QNetwo
 	self->setNetworkConfiguration(*networkConfiguration);
 }
 
+const QMetaObject* QNetworkProxyQuery_staticMetaObject() { return &QNetworkProxyQuery::staticMetaObject; }
 void QNetworkProxyQuery_delete(QNetworkProxyQuery* self) {
 	delete self;
 }

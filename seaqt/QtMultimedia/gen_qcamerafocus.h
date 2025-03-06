@@ -48,6 +48,7 @@ void QCameraFocusZone_delete(QCameraFocusZone* self);
 void QCameraFocus_virtbase(QCameraFocus* src, QObject** outptr_QObject);
 QMetaObject* QCameraFocus_metaObject(const QCameraFocus* self);
 void* QCameraFocus_metacast(QCameraFocus* self, const char* param1);
+int QCameraFocus_metacall(QCameraFocus* self, int param1, int param2, void** param3);
 struct miqt_string QCameraFocus_tr(const char* s);
 struct miqt_string QCameraFocus_trUtf8(const char* s);
 bool QCameraFocus_isAvailable(const QCameraFocus* self);
@@ -79,6 +80,7 @@ struct miqt_string QCameraFocus_tr2(const char* s, const char* c);
 struct miqt_string QCameraFocus_tr3(const char* s, const char* c, int n);
 struct miqt_string QCameraFocus_trUtf82(const char* s, const char* c);
 struct miqt_string QCameraFocus_trUtf83(const char* s, const char* c, int n);
+const QMetaObject* QCameraFocus_staticMetaObject();
 
 #ifdef __cplusplus
 } /* extern C */

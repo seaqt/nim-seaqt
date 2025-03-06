@@ -50,6 +50,7 @@ type cQMediaNetworkAccessControl*{.exportc: "QMediaNetworkAccessControl", incomp
 
 proc fcQMediaNetworkAccessControl_metaObject(self: pointer, ): pointer {.importc: "QMediaNetworkAccessControl_metaObject".}
 proc fcQMediaNetworkAccessControl_metacast(self: pointer, param1: cstring): pointer {.importc: "QMediaNetworkAccessControl_metacast".}
+proc fcQMediaNetworkAccessControl_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QMediaNetworkAccessControl_metacall".}
 proc fcQMediaNetworkAccessControl_tr(s: cstring): struct_miqt_string {.importc: "QMediaNetworkAccessControl_tr".}
 proc fcQMediaNetworkAccessControl_trUtf8(s: cstring): struct_miqt_string {.importc: "QMediaNetworkAccessControl_trUtf8".}
 proc fcQMediaNetworkAccessControl_setConfigurations(self: pointer, configuration: struct_miqt_array): void {.importc: "QMediaNetworkAccessControl_setConfigurations".}
@@ -60,6 +61,7 @@ proc fcQMediaNetworkAccessControl_tr2(s: cstring, c: cstring): struct_miqt_strin
 proc fcQMediaNetworkAccessControl_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QMediaNetworkAccessControl_tr3".}
 proc fcQMediaNetworkAccessControl_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QMediaNetworkAccessControl_trUtf82".}
 proc fcQMediaNetworkAccessControl_trUtf83(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QMediaNetworkAccessControl_trUtf83".}
+proc fcQMediaNetworkAccessControl_staticMetaObject(): pointer {.importc: "QMediaNetworkAccessControl_staticMetaObject".}
 proc fcQMediaNetworkAccessControl_delete(self: pointer) {.importc: "QMediaNetworkAccessControl_delete".}
 
 
@@ -70,6 +72,9 @@ proc metaObject*(self: gen_qmedianetworkaccesscontrol_types.QMediaNetworkAccessC
 
 proc metacast*(self: gen_qmedianetworkaccesscontrol_types.QMediaNetworkAccessControl, param1: cstring): pointer =
   fcQMediaNetworkAccessControl_metacast(self.h, param1)
+
+proc metacall*(self: gen_qmedianetworkaccesscontrol_types.QMediaNetworkAccessControl, param1: cint, param2: cint, param3: pointer): cint =
+  fcQMediaNetworkAccessControl_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qmedianetworkaccesscontrol_types.QMediaNetworkAccessControl, s: cstring): string =
   let v_ms = fcQMediaNetworkAccessControl_tr(s)
@@ -133,5 +138,7 @@ proc trUtf8*(_: type gen_qmedianetworkaccesscontrol_types.QMediaNetworkAccessCon
   c_free(v_ms.data)
   vx_ret
 
+proc staticMetaObject*(_: type gen_qmedianetworkaccesscontrol_types.QMediaNetworkAccessControl): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fcQMediaNetworkAccessControl_staticMetaObject())
 proc delete*(self: gen_qmedianetworkaccesscontrol_types.QMediaNetworkAccessControl) =
   fcQMediaNetworkAccessControl_delete(self.h)

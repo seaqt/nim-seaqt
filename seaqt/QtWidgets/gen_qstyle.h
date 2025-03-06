@@ -62,6 +62,7 @@ QStyle* QStyle_new();
 void QStyle_virtbase(QStyle* src, QObject** outptr_QObject);
 QMetaObject* QStyle_metaObject(const QStyle* self);
 void* QStyle_metacast(QStyle* self, const char* param1);
+int QStyle_metacall(QStyle* self, int param1, int param2, void** param3);
 struct miqt_string QStyle_tr(const char* s);
 struct miqt_string QStyle_trUtf8(const char* s);
 void QStyle_polish(QStyle* self, QWidget* widget);
@@ -103,6 +104,12 @@ int QStyle_sliderPositionFromValue5(int min, int max, int val, int space, bool u
 int QStyle_sliderValueFromPosition5(int min, int max, int pos, int space, bool upsideDown);
 int QStyle_combinedLayoutSpacing4(const QStyle* self, int controls1, int controls2, int orientation, QStyleOption* option);
 int QStyle_combinedLayoutSpacing5(const QStyle* self, int controls1, int controls2, int orientation, QStyleOption* option, QWidget* widget);
+bool QStyle_override_virtual_metaObject(void* self, intptr_t slot);
+QMetaObject* QStyle_virtualbase_metaObject(const void* self);
+bool QStyle_override_virtual_metacast(void* self, intptr_t slot);
+void* QStyle_virtualbase_metacast(void* self, const char* param1);
+bool QStyle_override_virtual_metacall(void* self, intptr_t slot);
+int QStyle_virtualbase_metacall(void* self, int param1, int param2, void** param3);
 bool QStyle_override_virtual_polish(void* self, intptr_t slot);
 void QStyle_virtualbase_polish(void* self, QWidget* widget);
 bool QStyle_override_virtual_unpolish(void* self, intptr_t slot);
@@ -167,6 +174,7 @@ QObject* QStyle_protectedbase_sender(bool* _dynamic_cast_ok, const void* self);
 int QStyle_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
 int QStyle_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
 bool QStyle_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+const QMetaObject* QStyle_staticMetaObject();
 void QStyle_delete(QStyle* self);
 
 #ifdef __cplusplus

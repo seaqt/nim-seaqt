@@ -74,6 +74,7 @@ proc fcQCheckBox_new3(text: struct_miqt_string): ptr cQCheckBox {.importc: "QChe
 proc fcQCheckBox_new4(text: struct_miqt_string, parent: pointer): ptr cQCheckBox {.importc: "QCheckBox_new4".}
 proc fcQCheckBox_metaObject(self: pointer, ): pointer {.importc: "QCheckBox_metaObject".}
 proc fcQCheckBox_metacast(self: pointer, param1: cstring): pointer {.importc: "QCheckBox_metacast".}
+proc fcQCheckBox_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QCheckBox_metacall".}
 proc fcQCheckBox_tr(s: cstring): struct_miqt_string {.importc: "QCheckBox_tr".}
 proc fcQCheckBox_trUtf8(s: cstring): struct_miqt_string {.importc: "QCheckBox_trUtf8".}
 proc fcQCheckBox_sizeHint(self: pointer, ): pointer {.importc: "QCheckBox_sizeHint".}
@@ -89,6 +90,12 @@ proc fcQCheckBox_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.impo
 proc fcQCheckBox_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QCheckBox_trUtf82".}
 proc fcQCheckBox_trUtf83(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QCheckBox_trUtf83".}
 proc fcQCheckBox_setTristate1(self: pointer, y: bool): void {.importc: "QCheckBox_setTristate1".}
+proc fQCheckBox_virtualbase_metaObject(self: pointer, ): pointer{.importc: "QCheckBox_virtualbase_metaObject".}
+proc fcQCheckBox_override_virtual_metaObject(self: pointer, slot: int) {.importc: "QCheckBox_override_virtual_metaObject".}
+proc fQCheckBox_virtualbase_metacast(self: pointer, param1: cstring): pointer{.importc: "QCheckBox_virtualbase_metacast".}
+proc fcQCheckBox_override_virtual_metacast(self: pointer, slot: int) {.importc: "QCheckBox_override_virtual_metacast".}
+proc fQCheckBox_virtualbase_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint{.importc: "QCheckBox_virtualbase_metacall".}
+proc fcQCheckBox_override_virtual_metacall(self: pointer, slot: int) {.importc: "QCheckBox_override_virtual_metacall".}
 proc fQCheckBox_virtualbase_sizeHint(self: pointer, ): pointer{.importc: "QCheckBox_virtualbase_sizeHint".}
 proc fcQCheckBox_override_virtual_sizeHint(self: pointer, slot: int) {.importc: "QCheckBox_override_virtual_sizeHint".}
 proc fQCheckBox_virtualbase_minimumSizeHint(self: pointer, ): pointer{.importc: "QCheckBox_virtualbase_minimumSizeHint".}
@@ -189,6 +196,7 @@ proc fQCheckBox_virtualbase_connectNotify(self: pointer, signal: pointer): void{
 proc fcQCheckBox_override_virtual_connectNotify(self: pointer, slot: int) {.importc: "QCheckBox_override_virtual_connectNotify".}
 proc fQCheckBox_virtualbase_disconnectNotify(self: pointer, signal: pointer): void{.importc: "QCheckBox_virtualbase_disconnectNotify".}
 proc fcQCheckBox_override_virtual_disconnectNotify(self: pointer, slot: int) {.importc: "QCheckBox_override_virtual_disconnectNotify".}
+proc fcQCheckBox_staticMetaObject(): pointer {.importc: "QCheckBox_staticMetaObject".}
 proc fcQCheckBox_delete(self: pointer) {.importc: "QCheckBox_delete".}
 
 
@@ -211,6 +219,9 @@ proc metaObject*(self: gen_qcheckbox_types.QCheckBox, ): gen_qobjectdefs_types.Q
 
 proc metacast*(self: gen_qcheckbox_types.QCheckBox, param1: cstring): pointer =
   fcQCheckBox_metacast(self.h, param1)
+
+proc metacall*(self: gen_qcheckbox_types.QCheckBox, param1: cint, param2: cint, param3: pointer): cint =
+  fcQCheckBox_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qcheckbox_types.QCheckBox, s: cstring): string =
   let v_ms = fcQCheckBox_tr(s)
@@ -285,6 +296,65 @@ proc trUtf8*(_: type gen_qcheckbox_types.QCheckBox, s: cstring, c: cstring, n: c
 proc setTristate*(self: gen_qcheckbox_types.QCheckBox, y: bool): void =
   fcQCheckBox_setTristate1(self.h, y)
 
+proc QCheckBoxmetaObject*(self: gen_qcheckbox_types.QCheckBox, ): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fQCheckBox_virtualbase_metaObject(self.h))
+
+type QCheckBoxmetaObjectProc* = proc(): gen_qobjectdefs_types.QMetaObject
+proc onmetaObject*(self: gen_qcheckbox_types.QCheckBox, slot: QCheckBoxmetaObjectProc) =
+  # TODO check subclass
+  var tmp = new QCheckBoxmetaObjectProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQCheckBox_override_virtual_metaObject(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QCheckBox_metaObject(self: ptr cQCheckBox, slot: int): pointer {.exportc: "miqt_exec_callback_QCheckBox_metaObject ".} =
+  var nimfunc = cast[ptr QCheckBoxmetaObjectProc](cast[pointer](slot))
+
+  let virtualReturn = nimfunc[]( )
+
+  virtualReturn.h
+proc QCheckBoxmetacast*(self: gen_qcheckbox_types.QCheckBox, param1: cstring): pointer =
+  fQCheckBox_virtualbase_metacast(self.h, param1)
+
+type QCheckBoxmetacastProc* = proc(param1: cstring): pointer
+proc onmetacast*(self: gen_qcheckbox_types.QCheckBox, slot: QCheckBoxmetacastProc) =
+  # TODO check subclass
+  var tmp = new QCheckBoxmetacastProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQCheckBox_override_virtual_metacast(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QCheckBox_metacast(self: ptr cQCheckBox, slot: int, param1: cstring): pointer {.exportc: "miqt_exec_callback_QCheckBox_metacast ".} =
+  var nimfunc = cast[ptr QCheckBoxmetacastProc](cast[pointer](slot))
+  let slotval1 = (param1)
+
+
+  let virtualReturn = nimfunc[](slotval1 )
+
+  virtualReturn
+proc QCheckBoxmetacall*(self: gen_qcheckbox_types.QCheckBox, param1: cint, param2: cint, param3: pointer): cint =
+  fQCheckBox_virtualbase_metacall(self.h, cint(param1), param2, param3)
+
+type QCheckBoxmetacallProc* = proc(param1: cint, param2: cint, param3: pointer): cint
+proc onmetacall*(self: gen_qcheckbox_types.QCheckBox, slot: QCheckBoxmetacallProc) =
+  # TODO check subclass
+  var tmp = new QCheckBoxmetacallProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQCheckBox_override_virtual_metacall(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QCheckBox_metacall(self: ptr cQCheckBox, slot: int, param1: cint, param2: cint, param3: pointer): cint {.exportc: "miqt_exec_callback_QCheckBox_metacall ".} =
+  var nimfunc = cast[ptr QCheckBoxmetacallProc](cast[pointer](slot))
+  let slotval1 = cint(param1)
+
+  let slotval2 = param2
+
+  let slotval3 = param3
+
+
+  let virtualReturn = nimfunc[](slotval1, slotval2, slotval3 )
+
+  virtualReturn
 proc QCheckBoxsizeHint*(self: gen_qcheckbox_types.QCheckBox, ): gen_qsize_types.QSize =
   gen_qsize_types.QSize(h: fQCheckBox_virtualbase_sizeHint(self.h))
 
@@ -1158,5 +1228,7 @@ proc miqt_exec_callback_QCheckBox_disconnectNotify(self: ptr cQCheckBox, slot: i
 
 
   nimfunc[](slotval1)
+proc staticMetaObject*(_: type gen_qcheckbox_types.QCheckBox): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fcQCheckBox_staticMetaObject())
 proc delete*(self: gen_qcheckbox_types.QCheckBox) =
   fcQCheckBox_delete(self.h)

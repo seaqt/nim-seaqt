@@ -58,6 +58,7 @@ proc fcQSaveFile_new3(name: struct_miqt_string, parent: pointer): ptr cQSaveFile
 proc fcQSaveFile_new4(parent: pointer): ptr cQSaveFile {.importc: "QSaveFile_new4".}
 proc fcQSaveFile_metaObject(self: pointer, ): pointer {.importc: "QSaveFile_metaObject".}
 proc fcQSaveFile_metacast(self: pointer, param1: cstring): pointer {.importc: "QSaveFile_metacast".}
+proc fcQSaveFile_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QSaveFile_metacall".}
 proc fcQSaveFile_tr(s: cstring): struct_miqt_string {.importc: "QSaveFile_tr".}
 proc fcQSaveFile_trUtf8(s: cstring): struct_miqt_string {.importc: "QSaveFile_trUtf8".}
 proc fcQSaveFile_fileName(self: pointer, ): struct_miqt_string {.importc: "QSaveFile_fileName".}
@@ -71,6 +72,12 @@ proc fcQSaveFile_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QSa
 proc fcQSaveFile_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QSaveFile_tr3".}
 proc fcQSaveFile_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QSaveFile_trUtf82".}
 proc fcQSaveFile_trUtf83(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QSaveFile_trUtf83".}
+proc fQSaveFile_virtualbase_metaObject(self: pointer, ): pointer{.importc: "QSaveFile_virtualbase_metaObject".}
+proc fcQSaveFile_override_virtual_metaObject(self: pointer, slot: int) {.importc: "QSaveFile_override_virtual_metaObject".}
+proc fQSaveFile_virtualbase_metacast(self: pointer, param1: cstring): pointer{.importc: "QSaveFile_virtualbase_metacast".}
+proc fcQSaveFile_override_virtual_metacast(self: pointer, slot: int) {.importc: "QSaveFile_override_virtual_metacast".}
+proc fQSaveFile_virtualbase_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint{.importc: "QSaveFile_virtualbase_metacall".}
+proc fcQSaveFile_override_virtual_metacall(self: pointer, slot: int) {.importc: "QSaveFile_override_virtual_metacall".}
 proc fQSaveFile_virtualbase_fileName(self: pointer, ): struct_miqt_string{.importc: "QSaveFile_virtualbase_fileName".}
 proc fcQSaveFile_override_virtual_fileName(self: pointer, slot: int) {.importc: "QSaveFile_override_virtual_fileName".}
 proc fQSaveFile_virtualbase_open(self: pointer, flags: cint): bool{.importc: "QSaveFile_virtualbase_open".}
@@ -123,6 +130,7 @@ proc fQSaveFile_virtualbase_connectNotify(self: pointer, signal: pointer): void{
 proc fcQSaveFile_override_virtual_connectNotify(self: pointer, slot: int) {.importc: "QSaveFile_override_virtual_connectNotify".}
 proc fQSaveFile_virtualbase_disconnectNotify(self: pointer, signal: pointer): void{.importc: "QSaveFile_virtualbase_disconnectNotify".}
 proc fcQSaveFile_override_virtual_disconnectNotify(self: pointer, slot: int) {.importc: "QSaveFile_override_virtual_disconnectNotify".}
+proc fcQSaveFile_staticMetaObject(): pointer {.importc: "QSaveFile_staticMetaObject".}
 proc fcQSaveFile_delete(self: pointer) {.importc: "QSaveFile_delete".}
 
 
@@ -145,6 +153,9 @@ proc metaObject*(self: gen_qsavefile_types.QSaveFile, ): gen_qobjectdefs_types.Q
 
 proc metacast*(self: gen_qsavefile_types.QSaveFile, param1: cstring): pointer =
   fcQSaveFile_metacast(self.h, param1)
+
+proc metacall*(self: gen_qsavefile_types.QSaveFile, param1: cint, param2: cint, param3: pointer): cint =
+  fcQSaveFile_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qsavefile_types.QSaveFile, s: cstring): string =
   let v_ms = fcQSaveFile_tr(s)
@@ -206,6 +217,65 @@ proc trUtf8*(_: type gen_qsavefile_types.QSaveFile, s: cstring, c: cstring, n: c
   c_free(v_ms.data)
   vx_ret
 
+proc QSaveFilemetaObject*(self: gen_qsavefile_types.QSaveFile, ): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fQSaveFile_virtualbase_metaObject(self.h))
+
+type QSaveFilemetaObjectProc* = proc(): gen_qobjectdefs_types.QMetaObject
+proc onmetaObject*(self: gen_qsavefile_types.QSaveFile, slot: QSaveFilemetaObjectProc) =
+  # TODO check subclass
+  var tmp = new QSaveFilemetaObjectProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQSaveFile_override_virtual_metaObject(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QSaveFile_metaObject(self: ptr cQSaveFile, slot: int): pointer {.exportc: "miqt_exec_callback_QSaveFile_metaObject ".} =
+  var nimfunc = cast[ptr QSaveFilemetaObjectProc](cast[pointer](slot))
+
+  let virtualReturn = nimfunc[]( )
+
+  virtualReturn.h
+proc QSaveFilemetacast*(self: gen_qsavefile_types.QSaveFile, param1: cstring): pointer =
+  fQSaveFile_virtualbase_metacast(self.h, param1)
+
+type QSaveFilemetacastProc* = proc(param1: cstring): pointer
+proc onmetacast*(self: gen_qsavefile_types.QSaveFile, slot: QSaveFilemetacastProc) =
+  # TODO check subclass
+  var tmp = new QSaveFilemetacastProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQSaveFile_override_virtual_metacast(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QSaveFile_metacast(self: ptr cQSaveFile, slot: int, param1: cstring): pointer {.exportc: "miqt_exec_callback_QSaveFile_metacast ".} =
+  var nimfunc = cast[ptr QSaveFilemetacastProc](cast[pointer](slot))
+  let slotval1 = (param1)
+
+
+  let virtualReturn = nimfunc[](slotval1 )
+
+  virtualReturn
+proc QSaveFilemetacall*(self: gen_qsavefile_types.QSaveFile, param1: cint, param2: cint, param3: pointer): cint =
+  fQSaveFile_virtualbase_metacall(self.h, cint(param1), param2, param3)
+
+type QSaveFilemetacallProc* = proc(param1: cint, param2: cint, param3: pointer): cint
+proc onmetacall*(self: gen_qsavefile_types.QSaveFile, slot: QSaveFilemetacallProc) =
+  # TODO check subclass
+  var tmp = new QSaveFilemetacallProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQSaveFile_override_virtual_metacall(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QSaveFile_metacall(self: ptr cQSaveFile, slot: int, param1: cint, param2: cint, param3: pointer): cint {.exportc: "miqt_exec_callback_QSaveFile_metacall ".} =
+  var nimfunc = cast[ptr QSaveFilemetacallProc](cast[pointer](slot))
+  let slotval1 = cint(param1)
+
+  let slotval2 = param2
+
+  let slotval3 = param3
+
+
+  let virtualReturn = nimfunc[](slotval1, slotval2, slotval3 )
+
+  virtualReturn
 proc QSaveFilefileName*(self: gen_qsavefile_types.QSaveFile, ): string =
   let v_ms = fQSaveFile_virtualbase_fileName(self.h)
   let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
@@ -681,5 +751,7 @@ proc miqt_exec_callback_QSaveFile_disconnectNotify(self: ptr cQSaveFile, slot: i
 
 
   nimfunc[](slotval1)
+proc staticMetaObject*(_: type gen_qsavefile_types.QSaveFile): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fcQSaveFile_staticMetaObject())
 proc delete*(self: gen_qsavefile_types.QSaveFile) =
   fcQSaveFile_delete(self.h)

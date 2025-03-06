@@ -31,6 +31,7 @@ typedef struct QPointF QPointF;
 void QCameraExposure_virtbase(QCameraExposure* src, QObject** outptr_QObject);
 QMetaObject* QCameraExposure_metaObject(const QCameraExposure* self);
 void* QCameraExposure_metacast(QCameraExposure* self, const char* param1);
+int QCameraExposure_metacall(QCameraExposure* self, int param1, int param2, void** param3);
 struct miqt_string QCameraExposure_tr(const char* s);
 struct miqt_string QCameraExposure_trUtf8(const char* s);
 bool QCameraExposure_isAvailable(const QCameraExposure* self);
@@ -84,6 +85,7 @@ struct miqt_string QCameraExposure_trUtf83(const char* s, const char* c, int n);
 struct miqt_array /* of int */  QCameraExposure_supportedIsoSensitivities1(const QCameraExposure* self, bool* continuous);
 struct miqt_array /* of double */  QCameraExposure_supportedApertures1(const QCameraExposure* self, bool* continuous);
 struct miqt_array /* of double */  QCameraExposure_supportedShutterSpeeds1(const QCameraExposure* self, bool* continuous);
+const QMetaObject* QCameraExposure_staticMetaObject();
 
 #ifdef __cplusplus
 } /* extern C */

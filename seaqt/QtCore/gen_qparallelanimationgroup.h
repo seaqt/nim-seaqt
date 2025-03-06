@@ -41,6 +41,7 @@ QParallelAnimationGroup* QParallelAnimationGroup_new2(QObject* parent);
 void QParallelAnimationGroup_virtbase(QParallelAnimationGroup* src, QAnimationGroup** outptr_QAnimationGroup);
 QMetaObject* QParallelAnimationGroup_metaObject(const QParallelAnimationGroup* self);
 void* QParallelAnimationGroup_metacast(QParallelAnimationGroup* self, const char* param1);
+int QParallelAnimationGroup_metacall(QParallelAnimationGroup* self, int param1, int param2, void** param3);
 struct miqt_string QParallelAnimationGroup_tr(const char* s);
 struct miqt_string QParallelAnimationGroup_trUtf8(const char* s);
 int QParallelAnimationGroup_duration(const QParallelAnimationGroup* self);
@@ -52,6 +53,12 @@ struct miqt_string QParallelAnimationGroup_tr2(const char* s, const char* c);
 struct miqt_string QParallelAnimationGroup_tr3(const char* s, const char* c, int n);
 struct miqt_string QParallelAnimationGroup_trUtf82(const char* s, const char* c);
 struct miqt_string QParallelAnimationGroup_trUtf83(const char* s, const char* c, int n);
+bool QParallelAnimationGroup_override_virtual_metaObject(void* self, intptr_t slot);
+QMetaObject* QParallelAnimationGroup_virtualbase_metaObject(const void* self);
+bool QParallelAnimationGroup_override_virtual_metacast(void* self, intptr_t slot);
+void* QParallelAnimationGroup_virtualbase_metacast(void* self, const char* param1);
+bool QParallelAnimationGroup_override_virtual_metacall(void* self, intptr_t slot);
+int QParallelAnimationGroup_virtualbase_metacall(void* self, int param1, int param2, void** param3);
 bool QParallelAnimationGroup_override_virtual_duration(void* self, intptr_t slot);
 int QParallelAnimationGroup_virtualbase_duration(const void* self);
 bool QParallelAnimationGroup_override_virtual_event(void* self, intptr_t slot);
@@ -78,6 +85,7 @@ QObject* QParallelAnimationGroup_protectedbase_sender(bool* _dynamic_cast_ok, co
 int QParallelAnimationGroup_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
 int QParallelAnimationGroup_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
 bool QParallelAnimationGroup_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+const QMetaObject* QParallelAnimationGroup_staticMetaObject();
 void QParallelAnimationGroup_delete(QParallelAnimationGroup* self);
 
 #ifdef __cplusplus

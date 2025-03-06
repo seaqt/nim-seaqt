@@ -52,6 +52,7 @@ type cQAbstractState*{.exportc: "QAbstractState", incompleteStruct.} = object
 
 proc fcQAbstractState_metaObject(self: pointer, ): pointer {.importc: "QAbstractState_metaObject".}
 proc fcQAbstractState_metacast(self: pointer, param1: cstring): pointer {.importc: "QAbstractState_metacast".}
+proc fcQAbstractState_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QAbstractState_metacall".}
 proc fcQAbstractState_tr(s: cstring): struct_miqt_string {.importc: "QAbstractState_tr".}
 proc fcQAbstractState_trUtf8(s: cstring): struct_miqt_string {.importc: "QAbstractState_trUtf8".}
 proc fcQAbstractState_parentState(self: pointer, ): pointer {.importc: "QAbstractState_parentState".}
@@ -63,6 +64,7 @@ proc fcQAbstractState_tr2(s: cstring, c: cstring): struct_miqt_string {.importc:
 proc fcQAbstractState_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QAbstractState_tr3".}
 proc fcQAbstractState_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QAbstractState_trUtf82".}
 proc fcQAbstractState_trUtf83(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QAbstractState_trUtf83".}
+proc fcQAbstractState_staticMetaObject(): pointer {.importc: "QAbstractState_staticMetaObject".}
 proc fcQAbstractState_delete(self: pointer) {.importc: "QAbstractState_delete".}
 
 
@@ -73,6 +75,9 @@ proc metaObject*(self: gen_qabstractstate_types.QAbstractState, ): gen_qobjectde
 
 proc metacast*(self: gen_qabstractstate_types.QAbstractState, param1: cstring): pointer =
   fcQAbstractState_metacast(self.h, param1)
+
+proc metacall*(self: gen_qabstractstate_types.QAbstractState, param1: cint, param2: cint, param3: pointer): cint =
+  fcQAbstractState_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qabstractstate_types.QAbstractState, s: cstring): string =
   let v_ms = fcQAbstractState_tr(s)
@@ -135,5 +140,7 @@ proc trUtf8*(_: type gen_qabstractstate_types.QAbstractState, s: cstring, c: cst
   c_free(v_ms.data)
   vx_ret
 
+proc staticMetaObject*(_: type gen_qabstractstate_types.QAbstractState): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fcQAbstractState_staticMetaObject())
 proc delete*(self: gen_qabstractstate_types.QAbstractState) =
   fcQAbstractState_delete(self.h)

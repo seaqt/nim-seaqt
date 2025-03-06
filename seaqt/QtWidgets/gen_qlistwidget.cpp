@@ -78,6 +78,9 @@ void miqt_exec_callback_QListWidget_currentItemChanged(intptr_t, QListWidgetItem
 void miqt_exec_callback_QListWidget_currentTextChanged(intptr_t, struct miqt_string);
 void miqt_exec_callback_QListWidget_currentRowChanged(intptr_t, int);
 void miqt_exec_callback_QListWidget_itemSelectionChanged(intptr_t);
+QMetaObject* miqt_exec_callback_QListWidget_metaObject(const QListWidget*, intptr_t);
+void* miqt_exec_callback_QListWidget_metacast(QListWidget*, intptr_t, const char*);
+int miqt_exec_callback_QListWidget_metacall(QListWidget*, intptr_t, int, int, void**);
 void miqt_exec_callback_QListWidget_setSelectionModel(QListWidget*, intptr_t, QItemSelectionModel*);
 void miqt_exec_callback_QListWidget_dropEvent(QListWidget*, intptr_t, QDropEvent*);
 bool miqt_exec_callback_QListWidget_event(QListWidget*, intptr_t, QEvent*);
@@ -699,6 +702,62 @@ public:
 	VirtualQListWidget(): QListWidget() {};
 
 	virtual ~VirtualQListWidget() override = default;
+
+	// cgo.Handle value for overwritten implementation
+	intptr_t handle__metaObject = 0;
+
+	// Subclass to allow providing a Go implementation
+	virtual const QMetaObject* metaObject() const override {
+		if (handle__metaObject == 0) {
+			return QListWidget::metaObject();
+		}
+		
+
+		QMetaObject* callback_return_value = miqt_exec_callback_QListWidget_metaObject(this, handle__metaObject);
+
+		return callback_return_value;
+	}
+
+	friend QMetaObject* QListWidget_virtualbase_metaObject(const void* self);
+
+	// cgo.Handle value for overwritten implementation
+	intptr_t handle__metacast = 0;
+
+	// Subclass to allow providing a Go implementation
+	virtual void* qt_metacast(const char* param1) override {
+		if (handle__metacast == 0) {
+			return QListWidget::qt_metacast(param1);
+		}
+		
+		const char* sigval1 = (const char*) param1;
+
+		void* callback_return_value = miqt_exec_callback_QListWidget_metacast(this, handle__metacast, sigval1);
+
+		return callback_return_value;
+	}
+
+	friend void* QListWidget_virtualbase_metacast(void* self, const char* param1);
+
+	// cgo.Handle value for overwritten implementation
+	intptr_t handle__metacall = 0;
+
+	// Subclass to allow providing a Go implementation
+	virtual int qt_metacall(QMetaObject::Call param1, int param2, void** param3) override {
+		if (handle__metacall == 0) {
+			return QListWidget::qt_metacall(param1, param2, param3);
+		}
+		
+		QMetaObject::Call param1_ret = param1;
+		int sigval1 = static_cast<int>(param1_ret);
+		int sigval2 = param2;
+		void** sigval3 = param3;
+
+		int callback_return_value = miqt_exec_callback_QListWidget_metacall(this, handle__metacall, sigval1, sigval2, sigval3);
+
+		return static_cast<int>(callback_return_value);
+	}
+
+	friend int QListWidget_virtualbase_metacall(void* self, int param1, int param2, void** param3);
 
 	// cgo.Handle value for overwritten implementation
 	intptr_t handle__setSelectionModel = 0;
@@ -2567,6 +2626,10 @@ void* QListWidget_metacast(QListWidget* self, const char* param1) {
 	return self->qt_metacast(param1);
 }
 
+int QListWidget_metacall(QListWidget* self, int param1, int param2, void** param3) {
+	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
+}
+
 struct miqt_string QListWidget_tr(const char* s) {
 	QString _ret = QListWidget::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
@@ -2948,6 +3011,54 @@ void QListWidget_sortItems1(QListWidget* self, int order) {
 
 void QListWidget_scrollToItem2(QListWidget* self, QListWidgetItem* item, int hint) {
 	self->scrollToItem(item, static_cast<QAbstractItemView::ScrollHint>(hint));
+}
+
+bool QListWidget_override_virtual_metaObject(void* self, intptr_t slot) {
+	VirtualQListWidget* self_cast = dynamic_cast<VirtualQListWidget*>( (QListWidget*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+	
+	self_cast->handle__metaObject = slot;
+	return true;
+}
+
+QMetaObject* QListWidget_virtualbase_metaObject(const void* self) {
+
+	return (QMetaObject*) ( (const VirtualQListWidget*)(self) )->QListWidget::metaObject();
+
+}
+
+bool QListWidget_override_virtual_metacast(void* self, intptr_t slot) {
+	VirtualQListWidget* self_cast = dynamic_cast<VirtualQListWidget*>( (QListWidget*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+	
+	self_cast->handle__metacast = slot;
+	return true;
+}
+
+void* QListWidget_virtualbase_metacast(void* self, const char* param1) {
+
+	return ( (VirtualQListWidget*)(self) )->QListWidget::qt_metacast(param1);
+
+}
+
+bool QListWidget_override_virtual_metacall(void* self, intptr_t slot) {
+	VirtualQListWidget* self_cast = dynamic_cast<VirtualQListWidget*>( (QListWidget*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+	
+	self_cast->handle__metacall = slot;
+	return true;
+}
+
+int QListWidget_virtualbase_metacall(void* self, int param1, int param2, void** param3) {
+
+	return ( (VirtualQListWidget*)(self) )->QListWidget::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
+
 }
 
 bool QListWidget_override_virtual_setSelectionModel(void* self, intptr_t slot) {
@@ -4463,6 +4574,7 @@ void QListWidget_virtualbase_disconnectNotify(void* self, QMetaMethod* signal) {
 
 }
 
+const QMetaObject* QListWidget_staticMetaObject() { return &QListWidget::staticMetaObject; }
 struct miqt_array /* of QListWidgetItem* */  QListWidget_protectedbase_items(bool* _dynamic_cast_ok, const void* self, QMimeData* data) {
 	VirtualQListWidget* self_cast = dynamic_cast<VirtualQListWidget*>( (QListWidget*)(self) );
 	if (self_cast == nullptr) {

@@ -95,6 +95,7 @@ QSpinBox* QSpinBox_new2();
 void QSpinBox_virtbase(QSpinBox* src, QAbstractSpinBox** outptr_QAbstractSpinBox);
 QMetaObject* QSpinBox_metaObject(const QSpinBox* self);
 void* QSpinBox_metacast(QSpinBox* self, const char* param1);
+int QSpinBox_metacall(QSpinBox* self, int param1, int param2, void** param3);
 struct miqt_string QSpinBox_tr(const char* s);
 struct miqt_string QSpinBox_trUtf8(const char* s);
 int QSpinBox_value(const QSpinBox* self);
@@ -130,6 +131,12 @@ struct miqt_string QSpinBox_tr2(const char* s, const char* c);
 struct miqt_string QSpinBox_tr3(const char* s, const char* c, int n);
 struct miqt_string QSpinBox_trUtf82(const char* s, const char* c);
 struct miqt_string QSpinBox_trUtf83(const char* s, const char* c, int n);
+bool QSpinBox_override_virtual_metaObject(void* self, intptr_t slot);
+QMetaObject* QSpinBox_virtualbase_metaObject(const void* self);
+bool QSpinBox_override_virtual_metacast(void* self, intptr_t slot);
+void* QSpinBox_virtualbase_metacast(void* self, const char* param1);
+bool QSpinBox_override_virtual_metacall(void* self, intptr_t slot);
+int QSpinBox_virtualbase_metacall(void* self, int param1, int param2, void** param3);
 bool QSpinBox_override_virtual_event(void* self, intptr_t slot);
 bool QSpinBox_virtualbase_event(void* self, QEvent* event);
 bool QSpinBox_override_virtual_validate(void* self, intptr_t slot);
@@ -250,6 +257,7 @@ QObject* QSpinBox_protectedbase_sender(bool* _dynamic_cast_ok, const void* self)
 int QSpinBox_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
 int QSpinBox_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
 bool QSpinBox_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+const QMetaObject* QSpinBox_staticMetaObject();
 void QSpinBox_delete(QSpinBox* self);
 
 QDoubleSpinBox* QDoubleSpinBox_new(QWidget* parent);
@@ -257,6 +265,7 @@ QDoubleSpinBox* QDoubleSpinBox_new2();
 void QDoubleSpinBox_virtbase(QDoubleSpinBox* src, QAbstractSpinBox** outptr_QAbstractSpinBox);
 QMetaObject* QDoubleSpinBox_metaObject(const QDoubleSpinBox* self);
 void* QDoubleSpinBox_metacast(QDoubleSpinBox* self, const char* param1);
+int QDoubleSpinBox_metacall(QDoubleSpinBox* self, int param1, int param2, void** param3);
 struct miqt_string QDoubleSpinBox_tr(const char* s);
 struct miqt_string QDoubleSpinBox_trUtf8(const char* s);
 double QDoubleSpinBox_value(const QDoubleSpinBox* self);
@@ -291,6 +300,12 @@ struct miqt_string QDoubleSpinBox_tr2(const char* s, const char* c);
 struct miqt_string QDoubleSpinBox_tr3(const char* s, const char* c, int n);
 struct miqt_string QDoubleSpinBox_trUtf82(const char* s, const char* c);
 struct miqt_string QDoubleSpinBox_trUtf83(const char* s, const char* c, int n);
+bool QDoubleSpinBox_override_virtual_metaObject(void* self, intptr_t slot);
+QMetaObject* QDoubleSpinBox_virtualbase_metaObject(const void* self);
+bool QDoubleSpinBox_override_virtual_metacast(void* self, intptr_t slot);
+void* QDoubleSpinBox_virtualbase_metacast(void* self, const char* param1);
+bool QDoubleSpinBox_override_virtual_metacall(void* self, intptr_t slot);
+int QDoubleSpinBox_virtualbase_metacall(void* self, int param1, int param2, void** param3);
 bool QDoubleSpinBox_override_virtual_validate(void* self, intptr_t slot);
 int QDoubleSpinBox_virtualbase_validate(const void* self, struct miqt_string input, int* pos);
 bool QDoubleSpinBox_override_virtual_valueFromText(void* self, intptr_t slot);
@@ -411,6 +426,7 @@ QObject* QDoubleSpinBox_protectedbase_sender(bool* _dynamic_cast_ok, const void*
 int QDoubleSpinBox_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
 int QDoubleSpinBox_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
 bool QDoubleSpinBox_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+const QMetaObject* QDoubleSpinBox_staticMetaObject();
 void QDoubleSpinBox_delete(QDoubleSpinBox* self);
 
 #ifdef __cplusplus

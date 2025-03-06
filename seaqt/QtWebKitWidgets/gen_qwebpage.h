@@ -125,6 +125,7 @@ QWebPage* QWebPage_new2(QObject* parent);
 void QWebPage_virtbase(QWebPage* src, QObject** outptr_QObject);
 QMetaObject* QWebPage_metaObject(const QWebPage* self);
 void* QWebPage_metacast(QWebPage* self, const char* param1);
+int QWebPage_metacall(QWebPage* self, int param1, int param2, void** param3);
 struct miqt_string QWebPage_tr(const char* s);
 struct miqt_string QWebPage_trUtf8(const char* s);
 QWebFrame* QWebPage_mainFrame(const QWebPage* self);
@@ -256,6 +257,12 @@ struct miqt_string QWebPage_tr3(const char* s, const char* c, int n);
 struct miqt_string QWebPage_trUtf82(const char* s, const char* c);
 struct miqt_string QWebPage_trUtf83(const char* s, const char* c, int n);
 bool QWebPage_findText2(QWebPage* self, struct miqt_string subString, int options);
+bool QWebPage_override_virtual_metaObject(void* self, intptr_t slot);
+QMetaObject* QWebPage_virtualbase_metaObject(const void* self);
+bool QWebPage_override_virtual_metacast(void* self, intptr_t slot);
+void* QWebPage_virtualbase_metacast(void* self, const char* param1);
+bool QWebPage_override_virtual_metacall(void* self, intptr_t slot);
+int QWebPage_virtualbase_metacall(void* self, int param1, int param2, void** param3);
 bool QWebPage_override_virtual_triggerAction(void* self, intptr_t slot);
 void QWebPage_virtualbase_triggerAction(void* self, int action, bool checked);
 bool QWebPage_override_virtual_event(void* self, intptr_t slot);
@@ -298,6 +305,7 @@ QObject* QWebPage_protectedbase_sender(bool* _dynamic_cast_ok, const void* self)
 int QWebPage_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
 int QWebPage_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
 bool QWebPage_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+const QMetaObject* QWebPage_staticMetaObject();
 void QWebPage_delete(QWebPage* self);
 
 QWebPage__ViewportAttributes* QWebPage__ViewportAttributes_new();

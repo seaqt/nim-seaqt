@@ -54,6 +54,7 @@ type cQCameraImageCaptureControl*{.exportc: "QCameraImageCaptureControl", incomp
 
 proc fcQCameraImageCaptureControl_metaObject(self: pointer, ): pointer {.importc: "QCameraImageCaptureControl_metaObject".}
 proc fcQCameraImageCaptureControl_metacast(self: pointer, param1: cstring): pointer {.importc: "QCameraImageCaptureControl_metacast".}
+proc fcQCameraImageCaptureControl_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QCameraImageCaptureControl_metacall".}
 proc fcQCameraImageCaptureControl_tr(s: cstring): struct_miqt_string {.importc: "QCameraImageCaptureControl_tr".}
 proc fcQCameraImageCaptureControl_trUtf8(s: cstring): struct_miqt_string {.importc: "QCameraImageCaptureControl_trUtf8".}
 proc fcQCameraImageCaptureControl_isReadyForCapture(self: pointer, ): bool {.importc: "QCameraImageCaptureControl_isReadyForCapture".}
@@ -79,6 +80,7 @@ proc fcQCameraImageCaptureControl_tr2(s: cstring, c: cstring): struct_miqt_strin
 proc fcQCameraImageCaptureControl_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QCameraImageCaptureControl_tr3".}
 proc fcQCameraImageCaptureControl_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QCameraImageCaptureControl_trUtf82".}
 proc fcQCameraImageCaptureControl_trUtf83(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QCameraImageCaptureControl_trUtf83".}
+proc fcQCameraImageCaptureControl_staticMetaObject(): pointer {.importc: "QCameraImageCaptureControl_staticMetaObject".}
 proc fcQCameraImageCaptureControl_delete(self: pointer) {.importc: "QCameraImageCaptureControl_delete".}
 
 
@@ -89,6 +91,9 @@ proc metaObject*(self: gen_qcameraimagecapturecontrol_types.QCameraImageCaptureC
 
 proc metacast*(self: gen_qcameraimagecapturecontrol_types.QCameraImageCaptureControl, param1: cstring): pointer =
   fcQCameraImageCaptureControl_metacast(self.h, param1)
+
+proc metacall*(self: gen_qcameraimagecapturecontrol_types.QCameraImageCaptureControl, param1: cint, param2: cint, param3: pointer): cint =
+  fcQCameraImageCaptureControl_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qcameraimagecapturecontrol_types.QCameraImageCaptureControl, s: cstring): string =
   let v_ms = fcQCameraImageCaptureControl_tr(s)
@@ -276,5 +281,7 @@ proc trUtf8*(_: type gen_qcameraimagecapturecontrol_types.QCameraImageCaptureCon
   c_free(v_ms.data)
   vx_ret
 
+proc staticMetaObject*(_: type gen_qcameraimagecapturecontrol_types.QCameraImageCaptureControl): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fcQCameraImageCaptureControl_staticMetaObject())
 proc delete*(self: gen_qcameraimagecapturecontrol_types.QCameraImageCaptureControl) =
   fcQCameraImageCaptureControl_delete(self.h)

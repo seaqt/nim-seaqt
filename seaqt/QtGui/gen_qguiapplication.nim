@@ -80,6 +80,7 @@ proc fcQGuiApplication_new(argc: ptr cint, argv: cstringArray): ptr cQGuiApplica
 proc fcQGuiApplication_new2(argc: ptr cint, argv: cstringArray, param3: cint): ptr cQGuiApplication {.importc: "QGuiApplication_new2".}
 proc fcQGuiApplication_metaObject(self: pointer, ): pointer {.importc: "QGuiApplication_metaObject".}
 proc fcQGuiApplication_metacast(self: pointer, param1: cstring): pointer {.importc: "QGuiApplication_metacast".}
+proc fcQGuiApplication_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QGuiApplication_metacall".}
 proc fcQGuiApplication_tr(s: cstring): struct_miqt_string {.importc: "QGuiApplication_tr".}
 proc fcQGuiApplication_trUtf8(s: cstring): struct_miqt_string {.importc: "QGuiApplication_trUtf8".}
 proc fcQGuiApplication_setApplicationDisplayName(name: struct_miqt_string): void {.importc: "QGuiApplication_setApplicationDisplayName".}
@@ -165,6 +166,12 @@ proc fcQGuiApplication_tr2(s: cstring, c: cstring): struct_miqt_string {.importc
 proc fcQGuiApplication_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QGuiApplication_tr3".}
 proc fcQGuiApplication_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QGuiApplication_trUtf82".}
 proc fcQGuiApplication_trUtf83(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QGuiApplication_trUtf83".}
+proc fQGuiApplication_virtualbase_metaObject(self: pointer, ): pointer{.importc: "QGuiApplication_virtualbase_metaObject".}
+proc fcQGuiApplication_override_virtual_metaObject(self: pointer, slot: int) {.importc: "QGuiApplication_override_virtual_metaObject".}
+proc fQGuiApplication_virtualbase_metacast(self: pointer, param1: cstring): pointer{.importc: "QGuiApplication_virtualbase_metacast".}
+proc fcQGuiApplication_override_virtual_metacast(self: pointer, slot: int) {.importc: "QGuiApplication_override_virtual_metacast".}
+proc fQGuiApplication_virtualbase_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint{.importc: "QGuiApplication_virtualbase_metacall".}
+proc fcQGuiApplication_override_virtual_metacall(self: pointer, slot: int) {.importc: "QGuiApplication_override_virtual_metacall".}
 proc fQGuiApplication_virtualbase_notify(self: pointer, param1: pointer, param2: pointer): bool{.importc: "QGuiApplication_virtualbase_notify".}
 proc fcQGuiApplication_override_virtual_notify(self: pointer, slot: int) {.importc: "QGuiApplication_override_virtual_notify".}
 proc fQGuiApplication_virtualbase_event(self: pointer, param1: pointer): bool{.importc: "QGuiApplication_virtualbase_event".}
@@ -181,6 +188,7 @@ proc fQGuiApplication_virtualbase_connectNotify(self: pointer, signal: pointer):
 proc fcQGuiApplication_override_virtual_connectNotify(self: pointer, slot: int) {.importc: "QGuiApplication_override_virtual_connectNotify".}
 proc fQGuiApplication_virtualbase_disconnectNotify(self: pointer, signal: pointer): void{.importc: "QGuiApplication_virtualbase_disconnectNotify".}
 proc fcQGuiApplication_override_virtual_disconnectNotify(self: pointer, slot: int) {.importc: "QGuiApplication_override_virtual_disconnectNotify".}
+proc fcQGuiApplication_staticMetaObject(): pointer {.importc: "QGuiApplication_staticMetaObject".}
 proc fcQGuiApplication_delete(self: pointer) {.importc: "QGuiApplication_delete".}
 
 
@@ -209,6 +217,9 @@ proc metaObject*(self: gen_qguiapplication_types.QGuiApplication, ): gen_qobject
 
 proc metacast*(self: gen_qguiapplication_types.QGuiApplication, param1: cstring): pointer =
   fcQGuiApplication_metacast(self.h, param1)
+
+proc metacall*(self: gen_qguiapplication_types.QGuiApplication, param1: cint, param2: cint, param3: pointer): cint =
+  fcQGuiApplication_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qguiapplication_types.QGuiApplication, s: cstring): string =
   let v_ms = fcQGuiApplication_tr(s)
@@ -647,6 +658,65 @@ proc trUtf8*(_: type gen_qguiapplication_types.QGuiApplication, s: cstring, c: c
   c_free(v_ms.data)
   vx_ret
 
+proc QGuiApplicationmetaObject*(self: gen_qguiapplication_types.QGuiApplication, ): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fQGuiApplication_virtualbase_metaObject(self.h))
+
+type QGuiApplicationmetaObjectProc* = proc(): gen_qobjectdefs_types.QMetaObject
+proc onmetaObject*(self: gen_qguiapplication_types.QGuiApplication, slot: QGuiApplicationmetaObjectProc) =
+  # TODO check subclass
+  var tmp = new QGuiApplicationmetaObjectProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQGuiApplication_override_virtual_metaObject(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QGuiApplication_metaObject(self: ptr cQGuiApplication, slot: int): pointer {.exportc: "miqt_exec_callback_QGuiApplication_metaObject ".} =
+  var nimfunc = cast[ptr QGuiApplicationmetaObjectProc](cast[pointer](slot))
+
+  let virtualReturn = nimfunc[]( )
+
+  virtualReturn.h
+proc QGuiApplicationmetacast*(self: gen_qguiapplication_types.QGuiApplication, param1: cstring): pointer =
+  fQGuiApplication_virtualbase_metacast(self.h, param1)
+
+type QGuiApplicationmetacastProc* = proc(param1: cstring): pointer
+proc onmetacast*(self: gen_qguiapplication_types.QGuiApplication, slot: QGuiApplicationmetacastProc) =
+  # TODO check subclass
+  var tmp = new QGuiApplicationmetacastProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQGuiApplication_override_virtual_metacast(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QGuiApplication_metacast(self: ptr cQGuiApplication, slot: int, param1: cstring): pointer {.exportc: "miqt_exec_callback_QGuiApplication_metacast ".} =
+  var nimfunc = cast[ptr QGuiApplicationmetacastProc](cast[pointer](slot))
+  let slotval1 = (param1)
+
+
+  let virtualReturn = nimfunc[](slotval1 )
+
+  virtualReturn
+proc QGuiApplicationmetacall*(self: gen_qguiapplication_types.QGuiApplication, param1: cint, param2: cint, param3: pointer): cint =
+  fQGuiApplication_virtualbase_metacall(self.h, cint(param1), param2, param3)
+
+type QGuiApplicationmetacallProc* = proc(param1: cint, param2: cint, param3: pointer): cint
+proc onmetacall*(self: gen_qguiapplication_types.QGuiApplication, slot: QGuiApplicationmetacallProc) =
+  # TODO check subclass
+  var tmp = new QGuiApplicationmetacallProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQGuiApplication_override_virtual_metacall(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QGuiApplication_metacall(self: ptr cQGuiApplication, slot: int, param1: cint, param2: cint, param3: pointer): cint {.exportc: "miqt_exec_callback_QGuiApplication_metacall ".} =
+  var nimfunc = cast[ptr QGuiApplicationmetacallProc](cast[pointer](slot))
+  let slotval1 = cint(param1)
+
+  let slotval2 = param2
+
+  let slotval3 = param3
+
+
+  let virtualReturn = nimfunc[](slotval1, slotval2, slotval3 )
+
+  virtualReturn
 proc QGuiApplicationnotify*(self: gen_qguiapplication_types.QGuiApplication, param1: gen_qobject_types.QObject, param2: gen_qcoreevent_types.QEvent): bool =
   fQGuiApplication_virtualbase_notify(self.h, param1.h, param2.h)
 
@@ -793,5 +863,7 @@ proc miqt_exec_callback_QGuiApplication_disconnectNotify(self: ptr cQGuiApplicat
 
 
   nimfunc[](slotval1)
+proc staticMetaObject*(_: type gen_qguiapplication_types.QGuiApplication): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fcQGuiApplication_staticMetaObject())
 proc delete*(self: gen_qguiapplication_types.QGuiApplication) =
   fcQGuiApplication_delete(self.h)

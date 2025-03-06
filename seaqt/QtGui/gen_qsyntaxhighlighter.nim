@@ -58,6 +58,7 @@ proc fcQSyntaxHighlighter_new(parent: pointer): ptr cQSyntaxHighlighter {.import
 proc fcQSyntaxHighlighter_new2(parent: pointer): ptr cQSyntaxHighlighter {.importc: "QSyntaxHighlighter_new2".}
 proc fcQSyntaxHighlighter_metaObject(self: pointer, ): pointer {.importc: "QSyntaxHighlighter_metaObject".}
 proc fcQSyntaxHighlighter_metacast(self: pointer, param1: cstring): pointer {.importc: "QSyntaxHighlighter_metacast".}
+proc fcQSyntaxHighlighter_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QSyntaxHighlighter_metacall".}
 proc fcQSyntaxHighlighter_tr(s: cstring): struct_miqt_string {.importc: "QSyntaxHighlighter_tr".}
 proc fcQSyntaxHighlighter_trUtf8(s: cstring): struct_miqt_string {.importc: "QSyntaxHighlighter_trUtf8".}
 proc fcQSyntaxHighlighter_setDocument(self: pointer, doc: pointer): void {.importc: "QSyntaxHighlighter_setDocument".}
@@ -68,6 +69,12 @@ proc fcQSyntaxHighlighter_tr2(s: cstring, c: cstring): struct_miqt_string {.impo
 proc fcQSyntaxHighlighter_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QSyntaxHighlighter_tr3".}
 proc fcQSyntaxHighlighter_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QSyntaxHighlighter_trUtf82".}
 proc fcQSyntaxHighlighter_trUtf83(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QSyntaxHighlighter_trUtf83".}
+proc fQSyntaxHighlighter_virtualbase_metaObject(self: pointer, ): pointer{.importc: "QSyntaxHighlighter_virtualbase_metaObject".}
+proc fcQSyntaxHighlighter_override_virtual_metaObject(self: pointer, slot: int) {.importc: "QSyntaxHighlighter_override_virtual_metaObject".}
+proc fQSyntaxHighlighter_virtualbase_metacast(self: pointer, param1: cstring): pointer{.importc: "QSyntaxHighlighter_virtualbase_metacast".}
+proc fcQSyntaxHighlighter_override_virtual_metacast(self: pointer, slot: int) {.importc: "QSyntaxHighlighter_override_virtual_metacast".}
+proc fQSyntaxHighlighter_virtualbase_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint{.importc: "QSyntaxHighlighter_virtualbase_metacall".}
+proc fcQSyntaxHighlighter_override_virtual_metacall(self: pointer, slot: int) {.importc: "QSyntaxHighlighter_override_virtual_metacall".}
 proc fcQSyntaxHighlighter_override_virtual_highlightBlock(self: pointer, slot: int) {.importc: "QSyntaxHighlighter_override_virtual_highlightBlock".}
 proc fQSyntaxHighlighter_virtualbase_event(self: pointer, event: pointer): bool{.importc: "QSyntaxHighlighter_virtualbase_event".}
 proc fcQSyntaxHighlighter_override_virtual_event(self: pointer, slot: int) {.importc: "QSyntaxHighlighter_override_virtual_event".}
@@ -83,6 +90,7 @@ proc fQSyntaxHighlighter_virtualbase_connectNotify(self: pointer, signal: pointe
 proc fcQSyntaxHighlighter_override_virtual_connectNotify(self: pointer, slot: int) {.importc: "QSyntaxHighlighter_override_virtual_connectNotify".}
 proc fQSyntaxHighlighter_virtualbase_disconnectNotify(self: pointer, signal: pointer): void{.importc: "QSyntaxHighlighter_virtualbase_disconnectNotify".}
 proc fcQSyntaxHighlighter_override_virtual_disconnectNotify(self: pointer, slot: int) {.importc: "QSyntaxHighlighter_override_virtual_disconnectNotify".}
+proc fcQSyntaxHighlighter_staticMetaObject(): pointer {.importc: "QSyntaxHighlighter_staticMetaObject".}
 proc fcQSyntaxHighlighter_delete(self: pointer) {.importc: "QSyntaxHighlighter_delete".}
 
 
@@ -99,6 +107,9 @@ proc metaObject*(self: gen_qsyntaxhighlighter_types.QSyntaxHighlighter, ): gen_q
 
 proc metacast*(self: gen_qsyntaxhighlighter_types.QSyntaxHighlighter, param1: cstring): pointer =
   fcQSyntaxHighlighter_metacast(self.h, param1)
+
+proc metacall*(self: gen_qsyntaxhighlighter_types.QSyntaxHighlighter, param1: cint, param2: cint, param3: pointer): cint =
+  fcQSyntaxHighlighter_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qsyntaxhighlighter_types.QSyntaxHighlighter, s: cstring): string =
   let v_ms = fcQSyntaxHighlighter_tr(s)
@@ -148,6 +159,65 @@ proc trUtf8*(_: type gen_qsyntaxhighlighter_types.QSyntaxHighlighter, s: cstring
   c_free(v_ms.data)
   vx_ret
 
+proc QSyntaxHighlightermetaObject*(self: gen_qsyntaxhighlighter_types.QSyntaxHighlighter, ): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fQSyntaxHighlighter_virtualbase_metaObject(self.h))
+
+type QSyntaxHighlightermetaObjectProc* = proc(): gen_qobjectdefs_types.QMetaObject
+proc onmetaObject*(self: gen_qsyntaxhighlighter_types.QSyntaxHighlighter, slot: QSyntaxHighlightermetaObjectProc) =
+  # TODO check subclass
+  var tmp = new QSyntaxHighlightermetaObjectProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQSyntaxHighlighter_override_virtual_metaObject(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QSyntaxHighlighter_metaObject(self: ptr cQSyntaxHighlighter, slot: int): pointer {.exportc: "miqt_exec_callback_QSyntaxHighlighter_metaObject ".} =
+  var nimfunc = cast[ptr QSyntaxHighlightermetaObjectProc](cast[pointer](slot))
+
+  let virtualReturn = nimfunc[]( )
+
+  virtualReturn.h
+proc QSyntaxHighlightermetacast*(self: gen_qsyntaxhighlighter_types.QSyntaxHighlighter, param1: cstring): pointer =
+  fQSyntaxHighlighter_virtualbase_metacast(self.h, param1)
+
+type QSyntaxHighlightermetacastProc* = proc(param1: cstring): pointer
+proc onmetacast*(self: gen_qsyntaxhighlighter_types.QSyntaxHighlighter, slot: QSyntaxHighlightermetacastProc) =
+  # TODO check subclass
+  var tmp = new QSyntaxHighlightermetacastProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQSyntaxHighlighter_override_virtual_metacast(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QSyntaxHighlighter_metacast(self: ptr cQSyntaxHighlighter, slot: int, param1: cstring): pointer {.exportc: "miqt_exec_callback_QSyntaxHighlighter_metacast ".} =
+  var nimfunc = cast[ptr QSyntaxHighlightermetacastProc](cast[pointer](slot))
+  let slotval1 = (param1)
+
+
+  let virtualReturn = nimfunc[](slotval1 )
+
+  virtualReturn
+proc QSyntaxHighlightermetacall*(self: gen_qsyntaxhighlighter_types.QSyntaxHighlighter, param1: cint, param2: cint, param3: pointer): cint =
+  fQSyntaxHighlighter_virtualbase_metacall(self.h, cint(param1), param2, param3)
+
+type QSyntaxHighlightermetacallProc* = proc(param1: cint, param2: cint, param3: pointer): cint
+proc onmetacall*(self: gen_qsyntaxhighlighter_types.QSyntaxHighlighter, slot: QSyntaxHighlightermetacallProc) =
+  # TODO check subclass
+  var tmp = new QSyntaxHighlightermetacallProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQSyntaxHighlighter_override_virtual_metacall(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QSyntaxHighlighter_metacall(self: ptr cQSyntaxHighlighter, slot: int, param1: cint, param2: cint, param3: pointer): cint {.exportc: "miqt_exec_callback_QSyntaxHighlighter_metacall ".} =
+  var nimfunc = cast[ptr QSyntaxHighlightermetacallProc](cast[pointer](slot))
+  let slotval1 = cint(param1)
+
+  let slotval2 = param2
+
+  let slotval3 = param3
+
+
+  let virtualReturn = nimfunc[](slotval1, slotval2, slotval3 )
+
+  virtualReturn
 type QSyntaxHighlighterhighlightBlockProc* = proc(text: string): void
 proc onhighlightBlock*(self: gen_qsyntaxhighlighter_types.QSyntaxHighlighter, slot: QSyntaxHighlighterhighlightBlockProc) =
   # TODO check subclass
@@ -290,5 +360,7 @@ proc miqt_exec_callback_QSyntaxHighlighter_disconnectNotify(self: ptr cQSyntaxHi
 
 
   nimfunc[](slotval1)
+proc staticMetaObject*(_: type gen_qsyntaxhighlighter_types.QSyntaxHighlighter): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fcQSyntaxHighlighter_staticMetaObject())
 proc delete*(self: gen_qsyntaxhighlighter_types.QSyntaxHighlighter) =
   fcQSyntaxHighlighter_delete(self.h)

@@ -31,6 +31,10 @@ void* QCustomAudioRoleControl_metacast(QCustomAudioRoleControl* self, const char
 	return self->qt_metacast(param1);
 }
 
+int QCustomAudioRoleControl_metacall(QCustomAudioRoleControl* self, int param1, int param2, void** param3) {
+	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
+}
+
 struct miqt_string QCustomAudioRoleControl_tr(const char* s) {
 	QString _ret = QCustomAudioRoleControl::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
@@ -152,6 +156,7 @@ struct miqt_string QCustomAudioRoleControl_trUtf83(const char* s, const char* c,
 	return _ms;
 }
 
+const QMetaObject* QCustomAudioRoleControl_staticMetaObject() { return &QCustomAudioRoleControl::staticMetaObject; }
 void QCustomAudioRoleControl_delete(QCustomAudioRoleControl* self) {
 	delete self;
 }

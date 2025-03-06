@@ -34,6 +34,9 @@
 extern "C" {
 #endif
 
+QMetaObject* miqt_exec_callback_QTextFrame_metaObject(const QTextFrame*, intptr_t);
+void* miqt_exec_callback_QTextFrame_metacast(QTextFrame*, intptr_t, const char*);
+int miqt_exec_callback_QTextFrame_metacall(QTextFrame*, intptr_t, int, int, void**);
 bool miqt_exec_callback_QTextFrame_event(QTextFrame*, intptr_t, QEvent*);
 bool miqt_exec_callback_QTextFrame_eventFilter(QTextFrame*, intptr_t, QObject*, QEvent*);
 void miqt_exec_callback_QTextFrame_timerEvent(QTextFrame*, intptr_t, QTimerEvent*);
@@ -55,6 +58,10 @@ QMetaObject* QTextObject_metaObject(const QTextObject* self) {
 
 void* QTextObject_metacast(QTextObject* self, const char* param1) {
 	return self->qt_metacast(param1);
+}
+
+int QTextObject_metacall(QTextObject* self, int param1, int param2, void** param3) {
+	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
 struct miqt_string QTextObject_tr(const char* s) {
@@ -139,6 +146,7 @@ struct miqt_string QTextObject_trUtf83(const char* s, const char* c, int n) {
 	return _ms;
 }
 
+const QMetaObject* QTextObject_staticMetaObject() { return &QTextObject::staticMetaObject; }
 void QTextBlockGroup_virtbase(QTextBlockGroup* src, QTextObject** outptr_QTextObject) {
 	*outptr_QTextObject = static_cast<QTextObject*>(src);
 }
@@ -149,6 +157,10 @@ QMetaObject* QTextBlockGroup_metaObject(const QTextBlockGroup* self) {
 
 void* QTextBlockGroup_metacast(QTextBlockGroup* self, const char* param1) {
 	return self->qt_metacast(param1);
+}
+
+int QTextBlockGroup_metacall(QTextBlockGroup* self, int param1, int param2, void** param3) {
+	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
 struct miqt_string QTextBlockGroup_tr(const char* s) {
@@ -217,6 +229,7 @@ struct miqt_string QTextBlockGroup_trUtf83(const char* s, const char* c, int n) 
 	return _ms;
 }
 
+const QMetaObject* QTextBlockGroup_staticMetaObject() { return &QTextBlockGroup::staticMetaObject; }
 void QTextFrameLayoutData_operatorAssign(QTextFrameLayoutData* self, QTextFrameLayoutData* param1) {
 	self->operator=(*param1);
 }
@@ -231,6 +244,62 @@ public:
 	VirtualQTextFrame(QTextDocument* doc): QTextFrame(doc) {};
 
 	virtual ~VirtualQTextFrame() override = default;
+
+	// cgo.Handle value for overwritten implementation
+	intptr_t handle__metaObject = 0;
+
+	// Subclass to allow providing a Go implementation
+	virtual const QMetaObject* metaObject() const override {
+		if (handle__metaObject == 0) {
+			return QTextFrame::metaObject();
+		}
+		
+
+		QMetaObject* callback_return_value = miqt_exec_callback_QTextFrame_metaObject(this, handle__metaObject);
+
+		return callback_return_value;
+	}
+
+	friend QMetaObject* QTextFrame_virtualbase_metaObject(const void* self);
+
+	// cgo.Handle value for overwritten implementation
+	intptr_t handle__metacast = 0;
+
+	// Subclass to allow providing a Go implementation
+	virtual void* qt_metacast(const char* param1) override {
+		if (handle__metacast == 0) {
+			return QTextFrame::qt_metacast(param1);
+		}
+		
+		const char* sigval1 = (const char*) param1;
+
+		void* callback_return_value = miqt_exec_callback_QTextFrame_metacast(this, handle__metacast, sigval1);
+
+		return callback_return_value;
+	}
+
+	friend void* QTextFrame_virtualbase_metacast(void* self, const char* param1);
+
+	// cgo.Handle value for overwritten implementation
+	intptr_t handle__metacall = 0;
+
+	// Subclass to allow providing a Go implementation
+	virtual int qt_metacall(QMetaObject::Call param1, int param2, void** param3) override {
+		if (handle__metacall == 0) {
+			return QTextFrame::qt_metacall(param1, param2, param3);
+		}
+		
+		QMetaObject::Call param1_ret = param1;
+		int sigval1 = static_cast<int>(param1_ret);
+		int sigval2 = param2;
+		void** sigval3 = param3;
+
+		int callback_return_value = miqt_exec_callback_QTextFrame_metacall(this, handle__metacall, sigval1, sigval2, sigval3);
+
+		return static_cast<int>(callback_return_value);
+	}
+
+	friend int QTextFrame_virtualbase_metacall(void* self, int param1, int param2, void** param3);
 
 	// cgo.Handle value for overwritten implementation
 	intptr_t handle__event = 0;
@@ -392,6 +461,10 @@ void* QTextFrame_metacast(QTextFrame* self, const char* param1) {
 	return self->qt_metacast(param1);
 }
 
+int QTextFrame_metacall(QTextFrame* self, int param1, int param2, void** param3) {
+	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
+}
+
 struct miqt_string QTextFrame_tr(const char* s) {
 	QString _ret = QTextFrame::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
@@ -515,6 +588,54 @@ struct miqt_string QTextFrame_trUtf83(const char* s, const char* c, int n) {
 	return _ms;
 }
 
+bool QTextFrame_override_virtual_metaObject(void* self, intptr_t slot) {
+	VirtualQTextFrame* self_cast = dynamic_cast<VirtualQTextFrame*>( (QTextFrame*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+	
+	self_cast->handle__metaObject = slot;
+	return true;
+}
+
+QMetaObject* QTextFrame_virtualbase_metaObject(const void* self) {
+
+	return (QMetaObject*) ( (const VirtualQTextFrame*)(self) )->QTextFrame::metaObject();
+
+}
+
+bool QTextFrame_override_virtual_metacast(void* self, intptr_t slot) {
+	VirtualQTextFrame* self_cast = dynamic_cast<VirtualQTextFrame*>( (QTextFrame*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+	
+	self_cast->handle__metacast = slot;
+	return true;
+}
+
+void* QTextFrame_virtualbase_metacast(void* self, const char* param1) {
+
+	return ( (VirtualQTextFrame*)(self) )->QTextFrame::qt_metacast(param1);
+
+}
+
+bool QTextFrame_override_virtual_metacall(void* self, intptr_t slot) {
+	VirtualQTextFrame* self_cast = dynamic_cast<VirtualQTextFrame*>( (QTextFrame*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+	
+	self_cast->handle__metacall = slot;
+	return true;
+}
+
+int QTextFrame_virtualbase_metacall(void* self, int param1, int param2, void** param3) {
+
+	return ( (VirtualQTextFrame*)(self) )->QTextFrame::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
+
+}
+
 bool QTextFrame_override_virtual_event(void* self, intptr_t slot) {
 	VirtualQTextFrame* self_cast = dynamic_cast<VirtualQTextFrame*>( (QTextFrame*)(self) );
 	if (self_cast == nullptr) {
@@ -627,6 +748,7 @@ void QTextFrame_virtualbase_disconnectNotify(void* self, QMetaMethod* signal) {
 
 }
 
+const QMetaObject* QTextFrame_staticMetaObject() { return &QTextFrame::staticMetaObject; }
 void QTextFrame_protectedbase_setFormat(bool* _dynamic_cast_ok, void* self, QTextFormat* format) {
 	VirtualQTextFrame* self_cast = dynamic_cast<VirtualQTextFrame*>( (QTextFrame*)(self) );
 	if (self_cast == nullptr) {

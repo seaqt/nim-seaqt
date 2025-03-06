@@ -40,6 +40,7 @@ QTimeLine* QTimeLine_new3(int duration, QObject* parent);
 void QTimeLine_virtbase(QTimeLine* src, QObject** outptr_QObject);
 QMetaObject* QTimeLine_metaObject(const QTimeLine* self);
 void* QTimeLine_metacast(QTimeLine* self, const char* param1);
+int QTimeLine_metacall(QTimeLine* self, int param1, int param2, void** param3);
 struct miqt_string QTimeLine_tr(const char* s);
 struct miqt_string QTimeLine_trUtf8(const char* s);
 int QTimeLine_state(const QTimeLine* self);
@@ -76,6 +77,12 @@ struct miqt_string QTimeLine_tr2(const char* s, const char* c);
 struct miqt_string QTimeLine_tr3(const char* s, const char* c, int n);
 struct miqt_string QTimeLine_trUtf82(const char* s, const char* c);
 struct miqt_string QTimeLine_trUtf83(const char* s, const char* c, int n);
+bool QTimeLine_override_virtual_metaObject(void* self, intptr_t slot);
+QMetaObject* QTimeLine_virtualbase_metaObject(const void* self);
+bool QTimeLine_override_virtual_metacast(void* self, intptr_t slot);
+void* QTimeLine_virtualbase_metacast(void* self, const char* param1);
+bool QTimeLine_override_virtual_metacall(void* self, intptr_t slot);
+int QTimeLine_virtualbase_metacall(void* self, int param1, int param2, void** param3);
 bool QTimeLine_override_virtual_valueForTime(void* self, intptr_t slot);
 double QTimeLine_virtualbase_valueForTime(const void* self, int msec);
 bool QTimeLine_override_virtual_timerEvent(void* self, intptr_t slot);
@@ -96,6 +103,7 @@ QObject* QTimeLine_protectedbase_sender(bool* _dynamic_cast_ok, const void* self
 int QTimeLine_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
 int QTimeLine_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
 bool QTimeLine_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+const QMetaObject* QTimeLine_staticMetaObject();
 void QTimeLine_delete(QTimeLine* self);
 
 #ifdef __cplusplus

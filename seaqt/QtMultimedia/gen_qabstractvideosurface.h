@@ -43,6 +43,7 @@ QAbstractVideoSurface* QAbstractVideoSurface_new2(QObject* parent);
 void QAbstractVideoSurface_virtbase(QAbstractVideoSurface* src, QObject** outptr_QObject);
 QMetaObject* QAbstractVideoSurface_metaObject(const QAbstractVideoSurface* self);
 void* QAbstractVideoSurface_metacast(QAbstractVideoSurface* self, const char* param1);
+int QAbstractVideoSurface_metacall(QAbstractVideoSurface* self, int param1, int param2, void** param3);
 struct miqt_string QAbstractVideoSurface_tr(const char* s);
 struct miqt_string QAbstractVideoSurface_trUtf8(const char* s);
 struct miqt_array /* of int */  QAbstractVideoSurface_supportedPixelFormats(const QAbstractVideoSurface* self, int type);
@@ -67,6 +68,12 @@ struct miqt_string QAbstractVideoSurface_tr2(const char* s, const char* c);
 struct miqt_string QAbstractVideoSurface_tr3(const char* s, const char* c, int n);
 struct miqt_string QAbstractVideoSurface_trUtf82(const char* s, const char* c);
 struct miqt_string QAbstractVideoSurface_trUtf83(const char* s, const char* c, int n);
+bool QAbstractVideoSurface_override_virtual_metaObject(void* self, intptr_t slot);
+QMetaObject* QAbstractVideoSurface_virtualbase_metaObject(const void* self);
+bool QAbstractVideoSurface_override_virtual_metacast(void* self, intptr_t slot);
+void* QAbstractVideoSurface_virtualbase_metacast(void* self, const char* param1);
+bool QAbstractVideoSurface_override_virtual_metacall(void* self, intptr_t slot);
+int QAbstractVideoSurface_virtualbase_metacall(void* self, int param1, int param2, void** param3);
 bool QAbstractVideoSurface_override_virtual_supportedPixelFormats(void* self, intptr_t slot);
 struct miqt_array /* of int */  QAbstractVideoSurface_virtualbase_supportedPixelFormats(const void* self, int type);
 bool QAbstractVideoSurface_override_virtual_isFormatSupported(void* self, intptr_t slot);
@@ -99,6 +106,7 @@ QObject* QAbstractVideoSurface_protectedbase_sender(bool* _dynamic_cast_ok, cons
 int QAbstractVideoSurface_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
 int QAbstractVideoSurface_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
 bool QAbstractVideoSurface_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+const QMetaObject* QAbstractVideoSurface_staticMetaObject();
 void QAbstractVideoSurface_delete(QAbstractVideoSurface* self);
 
 #ifdef __cplusplus

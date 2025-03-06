@@ -145,9 +145,11 @@ import ./gen_qfont_types
 export gen_qfont_types
 
 import
+  ../QtCore/gen_qobjectdefs_types,
   ../QtCore/gen_qvariant_types,
   ./gen_qpaintdevice_types
 export
+  gen_qobjectdefs_types,
   gen_qvariant_types,
   gen_qpaintdevice_types
 
@@ -237,6 +239,7 @@ proc fcQFont_resolve(self: pointer, param1: pointer): pointer {.importc: "QFont_
 proc fcQFont_resolve2(self: pointer, ): cuint {.importc: "QFont_resolve2".}
 proc fcQFont_resolveWithMask(self: pointer, mask: cuint): void {.importc: "QFont_resolveWithMask".}
 proc fcQFont_setStyleHint2(self: pointer, param1: cint, param2: cint): void {.importc: "QFont_setStyleHint2".}
+proc fcQFont_staticMetaObject(): pointer {.importc: "QFont_staticMetaObject".}
 proc fcQFont_delete(self: pointer) {.importc: "QFont_delete".}
 
 
@@ -553,5 +556,7 @@ proc resolve*(self: gen_qfont_types.QFont, mask: cuint): void =
 proc setStyleHint*(self: gen_qfont_types.QFont, param1: cint, param2: cint): void =
   fcQFont_setStyleHint2(self.h, cint(param1), cint(param2))
 
+proc staticMetaObject*(_: type gen_qfont_types.QFont): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fcQFont_staticMetaObject())
 proc delete*(self: gen_qfont_types.QFont) =
   fcQFont_delete(self.h)

@@ -111,6 +111,7 @@ QListView* QListView_new2();
 void QListView_virtbase(QListView* src, QAbstractItemView** outptr_QAbstractItemView);
 QMetaObject* QListView_metaObject(const QListView* self);
 void* QListView_metacast(QListView* self, const char* param1);
+int QListView_metacall(QListView* self, int param1, int param2, void** param3);
 struct miqt_string QListView_tr(const char* s);
 struct miqt_string QListView_trUtf8(const char* s);
 void QListView_setMovement(QListView* self, int movement);
@@ -183,6 +184,12 @@ struct miqt_string QListView_tr2(const char* s, const char* c);
 struct miqt_string QListView_tr3(const char* s, const char* c, int n);
 struct miqt_string QListView_trUtf82(const char* s, const char* c);
 struct miqt_string QListView_trUtf83(const char* s, const char* c, int n);
+bool QListView_override_virtual_metaObject(void* self, intptr_t slot);
+QMetaObject* QListView_virtualbase_metaObject(const void* self);
+bool QListView_override_virtual_metacast(void* self, intptr_t slot);
+void* QListView_virtualbase_metacast(void* self, const char* param1);
+bool QListView_override_virtual_metacall(void* self, intptr_t slot);
+int QListView_virtualbase_metacall(void* self, int param1, int param2, void** param3);
 bool QListView_override_virtual_visualRect(void* self, intptr_t slot);
 QRect* QListView_virtualbase_visualRect(const void* self, QModelIndex* index);
 bool QListView_override_virtual_scrollTo(void* self, intptr_t slot);
@@ -393,6 +400,7 @@ QObject* QListView_protectedbase_sender(bool* _dynamic_cast_ok, const void* self
 int QListView_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
 int QListView_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
 bool QListView_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+const QMetaObject* QListView_staticMetaObject();
 void QListView_delete(QListView* self);
 
 #ifdef __cplusplus

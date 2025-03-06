@@ -48,6 +48,7 @@ type cQRadioDataControl*{.exportc: "QRadioDataControl", incompleteStruct.} = obj
 
 proc fcQRadioDataControl_metaObject(self: pointer, ): pointer {.importc: "QRadioDataControl_metaObject".}
 proc fcQRadioDataControl_metacast(self: pointer, param1: cstring): pointer {.importc: "QRadioDataControl_metacast".}
+proc fcQRadioDataControl_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QRadioDataControl_metacall".}
 proc fcQRadioDataControl_tr(s: cstring): struct_miqt_string {.importc: "QRadioDataControl_tr".}
 proc fcQRadioDataControl_trUtf8(s: cstring): struct_miqt_string {.importc: "QRadioDataControl_trUtf8".}
 proc fcQRadioDataControl_stationId(self: pointer, ): struct_miqt_string {.importc: "QRadioDataControl_stationId".}
@@ -77,6 +78,7 @@ proc fcQRadioDataControl_tr2(s: cstring, c: cstring): struct_miqt_string {.impor
 proc fcQRadioDataControl_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QRadioDataControl_tr3".}
 proc fcQRadioDataControl_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QRadioDataControl_trUtf82".}
 proc fcQRadioDataControl_trUtf83(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QRadioDataControl_trUtf83".}
+proc fcQRadioDataControl_staticMetaObject(): pointer {.importc: "QRadioDataControl_staticMetaObject".}
 proc fcQRadioDataControl_delete(self: pointer) {.importc: "QRadioDataControl_delete".}
 
 
@@ -87,6 +89,9 @@ proc metaObject*(self: gen_qradiodatacontrol_types.QRadioDataControl, ): gen_qob
 
 proc metacast*(self: gen_qradiodatacontrol_types.QRadioDataControl, param1: cstring): pointer =
   fcQRadioDataControl_metacast(self.h, param1)
+
+proc metacall*(self: gen_qradiodatacontrol_types.QRadioDataControl, param1: cint, param2: cint, param3: pointer): cint =
+  fcQRadioDataControl_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qradiodatacontrol_types.QRadioDataControl, s: cstring): string =
   let v_ms = fcQRadioDataControl_tr(s)
@@ -290,5 +295,7 @@ proc trUtf8*(_: type gen_qradiodatacontrol_types.QRadioDataControl, s: cstring, 
   c_free(v_ms.data)
   vx_ret
 
+proc staticMetaObject*(_: type gen_qradiodatacontrol_types.QRadioDataControl): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fcQRadioDataControl_staticMetaObject())
 proc delete*(self: gen_qradiodatacontrol_types.QRadioDataControl) =
   fcQRadioDataControl_delete(self.h)

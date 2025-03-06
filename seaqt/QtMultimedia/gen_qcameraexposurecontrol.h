@@ -33,6 +33,7 @@ typedef struct QVariant QVariant;
 void QCameraExposureControl_virtbase(QCameraExposureControl* src, QMediaControl** outptr_QMediaControl);
 QMetaObject* QCameraExposureControl_metaObject(const QCameraExposureControl* self);
 void* QCameraExposureControl_metacast(QCameraExposureControl* self, const char* param1);
+int QCameraExposureControl_metacall(QCameraExposureControl* self, int param1, int param2, void** param3);
 struct miqt_string QCameraExposureControl_tr(const char* s);
 struct miqt_string QCameraExposureControl_trUtf8(const char* s);
 bool QCameraExposureControl_isParameterSupported(const QCameraExposureControl* self, int parameter);
@@ -49,6 +50,7 @@ struct miqt_string QCameraExposureControl_tr2(const char* s, const char* c);
 struct miqt_string QCameraExposureControl_tr3(const char* s, const char* c, int n);
 struct miqt_string QCameraExposureControl_trUtf82(const char* s, const char* c);
 struct miqt_string QCameraExposureControl_trUtf83(const char* s, const char* c, int n);
+const QMetaObject* QCameraExposureControl_staticMetaObject();
 void QCameraExposureControl_delete(QCameraExposureControl* self);
 
 #ifdef __cplusplus

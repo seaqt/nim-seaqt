@@ -69,6 +69,7 @@ proc fcQQuickFramebufferObject_new(): ptr cQQuickFramebufferObject {.importc: "Q
 proc fcQQuickFramebufferObject_new2(parent: pointer): ptr cQQuickFramebufferObject {.importc: "QQuickFramebufferObject_new2".}
 proc fcQQuickFramebufferObject_metaObject(self: pointer, ): pointer {.importc: "QQuickFramebufferObject_metaObject".}
 proc fcQQuickFramebufferObject_metacast(self: pointer, param1: cstring): pointer {.importc: "QQuickFramebufferObject_metacast".}
+proc fcQQuickFramebufferObject_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QQuickFramebufferObject_metacall".}
 proc fcQQuickFramebufferObject_tr(s: cstring): struct_miqt_string {.importc: "QQuickFramebufferObject_tr".}
 proc fcQQuickFramebufferObject_trUtf8(s: cstring): struct_miqt_string {.importc: "QQuickFramebufferObject_trUtf8".}
 proc fcQQuickFramebufferObject_textureFollowsItemSize(self: pointer, ): bool {.importc: "QQuickFramebufferObject_textureFollowsItemSize".}
@@ -87,6 +88,12 @@ proc fcQQuickFramebufferObject_tr2(s: cstring, c: cstring): struct_miqt_string {
 proc fcQQuickFramebufferObject_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QQuickFramebufferObject_tr3".}
 proc fcQQuickFramebufferObject_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QQuickFramebufferObject_trUtf82".}
 proc fcQQuickFramebufferObject_trUtf83(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QQuickFramebufferObject_trUtf83".}
+proc fQQuickFramebufferObject_virtualbase_metaObject(self: pointer, ): pointer{.importc: "QQuickFramebufferObject_virtualbase_metaObject".}
+proc fcQQuickFramebufferObject_override_virtual_metaObject(self: pointer, slot: int) {.importc: "QQuickFramebufferObject_override_virtual_metaObject".}
+proc fQQuickFramebufferObject_virtualbase_metacast(self: pointer, param1: cstring): pointer{.importc: "QQuickFramebufferObject_virtualbase_metacast".}
+proc fcQQuickFramebufferObject_override_virtual_metacast(self: pointer, slot: int) {.importc: "QQuickFramebufferObject_override_virtual_metacast".}
+proc fQQuickFramebufferObject_virtualbase_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint{.importc: "QQuickFramebufferObject_virtualbase_metacall".}
+proc fcQQuickFramebufferObject_override_virtual_metacall(self: pointer, slot: int) {.importc: "QQuickFramebufferObject_override_virtual_metacall".}
 proc fcQQuickFramebufferObject_override_virtual_createRenderer(self: pointer, slot: int) {.importc: "QQuickFramebufferObject_override_virtual_createRenderer".}
 proc fQQuickFramebufferObject_virtualbase_isTextureProvider(self: pointer, ): bool{.importc: "QQuickFramebufferObject_virtualbase_isTextureProvider".}
 proc fcQQuickFramebufferObject_override_virtual_isTextureProvider(self: pointer, slot: int) {.importc: "QQuickFramebufferObject_override_virtual_isTextureProvider".}
@@ -172,6 +179,7 @@ proc fQQuickFramebufferObject_virtualbase_connectNotify(self: pointer, signal: p
 proc fcQQuickFramebufferObject_override_virtual_connectNotify(self: pointer, slot: int) {.importc: "QQuickFramebufferObject_override_virtual_connectNotify".}
 proc fQQuickFramebufferObject_virtualbase_disconnectNotify(self: pointer, signal: pointer): void{.importc: "QQuickFramebufferObject_virtualbase_disconnectNotify".}
 proc fcQQuickFramebufferObject_override_virtual_disconnectNotify(self: pointer, slot: int) {.importc: "QQuickFramebufferObject_override_virtual_disconnectNotify".}
+proc fcQQuickFramebufferObject_staticMetaObject(): pointer {.importc: "QQuickFramebufferObject_staticMetaObject".}
 proc fcQQuickFramebufferObject_delete(self: pointer) {.importc: "QQuickFramebufferObject_delete".}
 
 
@@ -188,6 +196,9 @@ proc metaObject*(self: gen_qquickframebufferobject_types.QQuickFramebufferObject
 
 proc metacast*(self: gen_qquickframebufferobject_types.QQuickFramebufferObject, param1: cstring): pointer =
   fcQQuickFramebufferObject_metacast(self.h, param1)
+
+proc metacall*(self: gen_qquickframebufferobject_types.QQuickFramebufferObject, param1: cint, param2: cint, param3: pointer): cint =
+  fcQQuickFramebufferObject_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qquickframebufferobject_types.QQuickFramebufferObject, s: cstring): string =
   let v_ms = fcQQuickFramebufferObject_tr(s)
@@ -281,6 +292,65 @@ proc trUtf8*(_: type gen_qquickframebufferobject_types.QQuickFramebufferObject, 
   c_free(v_ms.data)
   vx_ret
 
+proc QQuickFramebufferObjectmetaObject*(self: gen_qquickframebufferobject_types.QQuickFramebufferObject, ): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fQQuickFramebufferObject_virtualbase_metaObject(self.h))
+
+type QQuickFramebufferObjectmetaObjectProc* = proc(): gen_qobjectdefs_types.QMetaObject
+proc onmetaObject*(self: gen_qquickframebufferobject_types.QQuickFramebufferObject, slot: QQuickFramebufferObjectmetaObjectProc) =
+  # TODO check subclass
+  var tmp = new QQuickFramebufferObjectmetaObjectProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQQuickFramebufferObject_override_virtual_metaObject(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QQuickFramebufferObject_metaObject(self: ptr cQQuickFramebufferObject, slot: int): pointer {.exportc: "miqt_exec_callback_QQuickFramebufferObject_metaObject ".} =
+  var nimfunc = cast[ptr QQuickFramebufferObjectmetaObjectProc](cast[pointer](slot))
+
+  let virtualReturn = nimfunc[]( )
+
+  virtualReturn.h
+proc QQuickFramebufferObjectmetacast*(self: gen_qquickframebufferobject_types.QQuickFramebufferObject, param1: cstring): pointer =
+  fQQuickFramebufferObject_virtualbase_metacast(self.h, param1)
+
+type QQuickFramebufferObjectmetacastProc* = proc(param1: cstring): pointer
+proc onmetacast*(self: gen_qquickframebufferobject_types.QQuickFramebufferObject, slot: QQuickFramebufferObjectmetacastProc) =
+  # TODO check subclass
+  var tmp = new QQuickFramebufferObjectmetacastProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQQuickFramebufferObject_override_virtual_metacast(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QQuickFramebufferObject_metacast(self: ptr cQQuickFramebufferObject, slot: int, param1: cstring): pointer {.exportc: "miqt_exec_callback_QQuickFramebufferObject_metacast ".} =
+  var nimfunc = cast[ptr QQuickFramebufferObjectmetacastProc](cast[pointer](slot))
+  let slotval1 = (param1)
+
+
+  let virtualReturn = nimfunc[](slotval1 )
+
+  virtualReturn
+proc QQuickFramebufferObjectmetacall*(self: gen_qquickframebufferobject_types.QQuickFramebufferObject, param1: cint, param2: cint, param3: pointer): cint =
+  fQQuickFramebufferObject_virtualbase_metacall(self.h, cint(param1), param2, param3)
+
+type QQuickFramebufferObjectmetacallProc* = proc(param1: cint, param2: cint, param3: pointer): cint
+proc onmetacall*(self: gen_qquickframebufferobject_types.QQuickFramebufferObject, slot: QQuickFramebufferObjectmetacallProc) =
+  # TODO check subclass
+  var tmp = new QQuickFramebufferObjectmetacallProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQQuickFramebufferObject_override_virtual_metacall(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QQuickFramebufferObject_metacall(self: ptr cQQuickFramebufferObject, slot: int, param1: cint, param2: cint, param3: pointer): cint {.exportc: "miqt_exec_callback_QQuickFramebufferObject_metacall ".} =
+  var nimfunc = cast[ptr QQuickFramebufferObjectmetacallProc](cast[pointer](slot))
+  let slotval1 = cint(param1)
+
+  let slotval2 = param2
+
+  let slotval3 = param3
+
+
+  let virtualReturn = nimfunc[](slotval1, slotval2, slotval3 )
+
+  virtualReturn
 type QQuickFramebufferObjectcreateRendererProc* = proc(): gen_qquickframebufferobject_types.QQuickFramebufferObjectRenderer
 proc oncreateRenderer*(self: gen_qquickframebufferobject_types.QQuickFramebufferObject, slot: QQuickFramebufferObjectcreateRendererProc) =
   # TODO check subclass
@@ -1017,6 +1087,8 @@ proc miqt_exec_callback_QQuickFramebufferObject_disconnectNotify(self: ptr cQQui
 
 
   nimfunc[](slotval1)
+proc staticMetaObject*(_: type gen_qquickframebufferobject_types.QQuickFramebufferObject): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fcQQuickFramebufferObject_staticMetaObject())
 proc delete*(self: gen_qquickframebufferobject_types.QQuickFramebufferObject) =
   fcQQuickFramebufferObject_delete(self.h)
 

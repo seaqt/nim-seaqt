@@ -111,6 +111,7 @@ QHeaderView* QHeaderView_new2(int orientation, QWidget* parent);
 void QHeaderView_virtbase(QHeaderView* src, QAbstractItemView** outptr_QAbstractItemView);
 QMetaObject* QHeaderView_metaObject(const QHeaderView* self);
 void* QHeaderView_metacast(QHeaderView* self, const char* param1);
+int QHeaderView_metacall(QHeaderView* self, int param1, int param2, void** param3);
 struct miqt_string QHeaderView_tr(const char* s);
 struct miqt_string QHeaderView_trUtf8(const char* s);
 void QHeaderView_setModel(QHeaderView* self, QAbstractItemModel* model);
@@ -228,6 +229,12 @@ struct miqt_string QHeaderView_tr2(const char* s, const char* c);
 struct miqt_string QHeaderView_tr3(const char* s, const char* c, int n);
 struct miqt_string QHeaderView_trUtf82(const char* s, const char* c);
 struct miqt_string QHeaderView_trUtf83(const char* s, const char* c, int n);
+bool QHeaderView_override_virtual_metaObject(void* self, intptr_t slot);
+QMetaObject* QHeaderView_virtualbase_metaObject(const void* self);
+bool QHeaderView_override_virtual_metacast(void* self, intptr_t slot);
+void* QHeaderView_virtualbase_metacast(void* self, const char* param1);
+bool QHeaderView_override_virtual_metacall(void* self, intptr_t slot);
+int QHeaderView_virtualbase_metacall(void* self, int param1, int param2, void** param3);
 bool QHeaderView_override_virtual_setModel(void* self, intptr_t slot);
 void QHeaderView_virtualbase_setModel(void* self, QAbstractItemModel* model);
 bool QHeaderView_override_virtual_sizeHint(void* self, intptr_t slot);
@@ -445,6 +452,7 @@ QObject* QHeaderView_protectedbase_sender(bool* _dynamic_cast_ok, const void* se
 int QHeaderView_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
 int QHeaderView_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
 bool QHeaderView_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+const QMetaObject* QHeaderView_staticMetaObject();
 void QHeaderView_delete(QHeaderView* self);
 
 #ifdef __cplusplus

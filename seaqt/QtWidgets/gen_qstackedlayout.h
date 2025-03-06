@@ -50,6 +50,7 @@ QStackedLayout* QStackedLayout_new3(QLayout* parentLayout);
 void QStackedLayout_virtbase(QStackedLayout* src, QLayout** outptr_QLayout);
 QMetaObject* QStackedLayout_metaObject(const QStackedLayout* self);
 void* QStackedLayout_metacast(QStackedLayout* self, const char* param1);
+int QStackedLayout_metacall(QStackedLayout* self, int param1, int param2, void** param3);
 struct miqt_string QStackedLayout_tr(const char* s);
 struct miqt_string QStackedLayout_trUtf8(const char* s);
 int QStackedLayout_addWidget(QStackedLayout* self, QWidget* w);
@@ -78,6 +79,12 @@ struct miqt_string QStackedLayout_tr2(const char* s, const char* c);
 struct miqt_string QStackedLayout_tr3(const char* s, const char* c, int n);
 struct miqt_string QStackedLayout_trUtf82(const char* s, const char* c);
 struct miqt_string QStackedLayout_trUtf83(const char* s, const char* c, int n);
+bool QStackedLayout_override_virtual_metaObject(void* self, intptr_t slot);
+QMetaObject* QStackedLayout_virtualbase_metaObject(const void* self);
+bool QStackedLayout_override_virtual_metacast(void* self, intptr_t slot);
+void* QStackedLayout_virtualbase_metacast(void* self, const char* param1);
+bool QStackedLayout_override_virtual_metacall(void* self, intptr_t slot);
+int QStackedLayout_virtualbase_metacall(void* self, int param1, int param2, void** param3);
 bool QStackedLayout_override_virtual_count(void* self, intptr_t slot);
 int QStackedLayout_virtualbase_count(const void* self);
 bool QStackedLayout_override_virtual_addItem(void* self, intptr_t slot);
@@ -141,6 +148,7 @@ QObject* QStackedLayout_protectedbase_sender(bool* _dynamic_cast_ok, const void*
 int QStackedLayout_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
 int QStackedLayout_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
 bool QStackedLayout_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+const QMetaObject* QStackedLayout_staticMetaObject();
 void QStackedLayout_delete(QStackedLayout* self);
 
 #ifdef __cplusplus

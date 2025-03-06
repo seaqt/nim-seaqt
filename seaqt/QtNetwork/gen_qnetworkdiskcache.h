@@ -45,6 +45,7 @@ QNetworkDiskCache* QNetworkDiskCache_new2(QObject* parent);
 void QNetworkDiskCache_virtbase(QNetworkDiskCache* src, QAbstractNetworkCache** outptr_QAbstractNetworkCache);
 QMetaObject* QNetworkDiskCache_metaObject(const QNetworkDiskCache* self);
 void* QNetworkDiskCache_metacast(QNetworkDiskCache* self, const char* param1);
+int QNetworkDiskCache_metacall(QNetworkDiskCache* self, int param1, int param2, void** param3);
 struct miqt_string QNetworkDiskCache_tr(const char* s);
 struct miqt_string QNetworkDiskCache_trUtf8(const char* s);
 struct miqt_string QNetworkDiskCache_cacheDirectory(const QNetworkDiskCache* self);
@@ -65,6 +66,12 @@ struct miqt_string QNetworkDiskCache_tr2(const char* s, const char* c);
 struct miqt_string QNetworkDiskCache_tr3(const char* s, const char* c, int n);
 struct miqt_string QNetworkDiskCache_trUtf82(const char* s, const char* c);
 struct miqt_string QNetworkDiskCache_trUtf83(const char* s, const char* c, int n);
+bool QNetworkDiskCache_override_virtual_metaObject(void* self, intptr_t slot);
+QMetaObject* QNetworkDiskCache_virtualbase_metaObject(const void* self);
+bool QNetworkDiskCache_override_virtual_metacast(void* self, intptr_t slot);
+void* QNetworkDiskCache_virtualbase_metacast(void* self, const char* param1);
+bool QNetworkDiskCache_override_virtual_metacall(void* self, intptr_t slot);
+int QNetworkDiskCache_virtualbase_metacall(void* self, int param1, int param2, void** param3);
 bool QNetworkDiskCache_override_virtual_cacheSize(void* self, intptr_t slot);
 long long QNetworkDiskCache_virtualbase_cacheSize(const void* self);
 bool QNetworkDiskCache_override_virtual_metaData(void* self, intptr_t slot);
@@ -101,6 +108,7 @@ QObject* QNetworkDiskCache_protectedbase_sender(bool* _dynamic_cast_ok, const vo
 int QNetworkDiskCache_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
 int QNetworkDiskCache_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
 bool QNetworkDiskCache_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+const QMetaObject* QNetworkDiskCache_staticMetaObject();
 void QNetworkDiskCache_delete(QNetworkDiskCache* self);
 
 #ifdef __cplusplus

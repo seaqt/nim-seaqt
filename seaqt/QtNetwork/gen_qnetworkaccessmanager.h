@@ -65,6 +65,7 @@ QNetworkAccessManager* QNetworkAccessManager_new2(QObject* parent);
 void QNetworkAccessManager_virtbase(QNetworkAccessManager* src, QObject** outptr_QObject);
 QMetaObject* QNetworkAccessManager_metaObject(const QNetworkAccessManager* self);
 void* QNetworkAccessManager_metacast(QNetworkAccessManager* self, const char* param1);
+int QNetworkAccessManager_metacall(QNetworkAccessManager* self, int param1, int param2, void** param3);
 struct miqt_string QNetworkAccessManager_tr(const char* s);
 struct miqt_string QNetworkAccessManager_trUtf8(const char* s);
 struct miqt_array /* of struct miqt_string */  QNetworkAccessManager_supportedSchemes(const QNetworkAccessManager* self);
@@ -137,6 +138,12 @@ void QNetworkAccessManager_connectToHostEncrypted22(QNetworkAccessManager* self,
 void QNetworkAccessManager_connectToHostEncrypted3(QNetworkAccessManager* self, struct miqt_string hostName, uint16_t port, QSslConfiguration* sslConfiguration);
 void QNetworkAccessManager_connectToHost2(QNetworkAccessManager* self, struct miqt_string hostName, uint16_t port);
 void QNetworkAccessManager_setTransferTimeout1(QNetworkAccessManager* self, int timeout);
+bool QNetworkAccessManager_override_virtual_metaObject(void* self, intptr_t slot);
+QMetaObject* QNetworkAccessManager_virtualbase_metaObject(const void* self);
+bool QNetworkAccessManager_override_virtual_metacast(void* self, intptr_t slot);
+void* QNetworkAccessManager_virtualbase_metacast(void* self, const char* param1);
+bool QNetworkAccessManager_override_virtual_metacall(void* self, intptr_t slot);
+int QNetworkAccessManager_virtualbase_metacall(void* self, int param1, int param2, void** param3);
 bool QNetworkAccessManager_override_virtual_createRequest(void* self, intptr_t slot);
 QNetworkReply* QNetworkAccessManager_virtualbase_createRequest(void* self, int op, QNetworkRequest* request, QIODevice* outgoingData);
 bool QNetworkAccessManager_override_virtual_event(void* self, intptr_t slot);
@@ -158,6 +165,7 @@ QObject* QNetworkAccessManager_protectedbase_sender(bool* _dynamic_cast_ok, cons
 int QNetworkAccessManager_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
 int QNetworkAccessManager_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
 bool QNetworkAccessManager_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+const QMetaObject* QNetworkAccessManager_staticMetaObject();
 void QNetworkAccessManager_delete(QNetworkAccessManager* self);
 
 #ifdef __cplusplus

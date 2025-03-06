@@ -54,6 +54,7 @@ type cQAudioDecoderControl*{.exportc: "QAudioDecoderControl", incompleteStruct.}
 
 proc fcQAudioDecoderControl_metaObject(self: pointer, ): pointer {.importc: "QAudioDecoderControl_metaObject".}
 proc fcQAudioDecoderControl_metacast(self: pointer, param1: cstring): pointer {.importc: "QAudioDecoderControl_metacast".}
+proc fcQAudioDecoderControl_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QAudioDecoderControl_metacall".}
 proc fcQAudioDecoderControl_tr(s: cstring): struct_miqt_string {.importc: "QAudioDecoderControl_tr".}
 proc fcQAudioDecoderControl_trUtf8(s: cstring): struct_miqt_string {.importc: "QAudioDecoderControl_trUtf8".}
 proc fcQAudioDecoderControl_state(self: pointer, ): cint {.importc: "QAudioDecoderControl_state".}
@@ -91,6 +92,7 @@ proc fcQAudioDecoderControl_tr2(s: cstring, c: cstring): struct_miqt_string {.im
 proc fcQAudioDecoderControl_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QAudioDecoderControl_tr3".}
 proc fcQAudioDecoderControl_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QAudioDecoderControl_trUtf82".}
 proc fcQAudioDecoderControl_trUtf83(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QAudioDecoderControl_trUtf83".}
+proc fcQAudioDecoderControl_staticMetaObject(): pointer {.importc: "QAudioDecoderControl_staticMetaObject".}
 proc fcQAudioDecoderControl_delete(self: pointer) {.importc: "QAudioDecoderControl_delete".}
 
 
@@ -101,6 +103,9 @@ proc metaObject*(self: gen_qaudiodecodercontrol_types.QAudioDecoderControl, ): g
 
 proc metacast*(self: gen_qaudiodecodercontrol_types.QAudioDecoderControl, param1: cstring): pointer =
   fcQAudioDecoderControl_metacast(self.h, param1)
+
+proc metacall*(self: gen_qaudiodecodercontrol_types.QAudioDecoderControl, param1: cint, param2: cint, param3: pointer): cint =
+  fcQAudioDecoderControl_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qaudiodecodercontrol_types.QAudioDecoderControl, s: cstring): string =
   let v_ms = fcQAudioDecoderControl_tr(s)
@@ -323,5 +328,7 @@ proc trUtf8*(_: type gen_qaudiodecodercontrol_types.QAudioDecoderControl, s: cst
   c_free(v_ms.data)
   vx_ret
 
+proc staticMetaObject*(_: type gen_qaudiodecodercontrol_types.QAudioDecoderControl): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fcQAudioDecoderControl_staticMetaObject())
 proc delete*(self: gen_qaudiodecodercontrol_types.QAudioDecoderControl) =
   fcQAudioDecoderControl_delete(self.h)

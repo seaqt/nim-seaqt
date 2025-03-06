@@ -64,6 +64,7 @@ proc fcQQuickRenderControl_new(): ptr cQQuickRenderControl {.importc: "QQuickRen
 proc fcQQuickRenderControl_new2(parent: pointer): ptr cQQuickRenderControl {.importc: "QQuickRenderControl_new2".}
 proc fcQQuickRenderControl_metaObject(self: pointer, ): pointer {.importc: "QQuickRenderControl_metaObject".}
 proc fcQQuickRenderControl_metacast(self: pointer, param1: cstring): pointer {.importc: "QQuickRenderControl_metacast".}
+proc fcQQuickRenderControl_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QQuickRenderControl_metacall".}
 proc fcQQuickRenderControl_tr(s: cstring): struct_miqt_string {.importc: "QQuickRenderControl_tr".}
 proc fcQQuickRenderControl_trUtf8(s: cstring): struct_miqt_string {.importc: "QQuickRenderControl_trUtf8".}
 proc fcQQuickRenderControl_prepareThread(self: pointer, targetThread: pointer): void {.importc: "QQuickRenderControl_prepareThread".}
@@ -83,6 +84,12 @@ proc fcQQuickRenderControl_tr3(s: cstring, c: cstring, n: cint): struct_miqt_str
 proc fcQQuickRenderControl_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QQuickRenderControl_trUtf82".}
 proc fcQQuickRenderControl_trUtf83(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QQuickRenderControl_trUtf83".}
 proc fcQQuickRenderControl_renderWindowFor2(win: pointer, offset: pointer): pointer {.importc: "QQuickRenderControl_renderWindowFor2".}
+proc fQQuickRenderControl_virtualbase_metaObject(self: pointer, ): pointer{.importc: "QQuickRenderControl_virtualbase_metaObject".}
+proc fcQQuickRenderControl_override_virtual_metaObject(self: pointer, slot: int) {.importc: "QQuickRenderControl_override_virtual_metaObject".}
+proc fQQuickRenderControl_virtualbase_metacast(self: pointer, param1: cstring): pointer{.importc: "QQuickRenderControl_virtualbase_metacast".}
+proc fcQQuickRenderControl_override_virtual_metacast(self: pointer, slot: int) {.importc: "QQuickRenderControl_override_virtual_metacast".}
+proc fQQuickRenderControl_virtualbase_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint{.importc: "QQuickRenderControl_virtualbase_metacall".}
+proc fcQQuickRenderControl_override_virtual_metacall(self: pointer, slot: int) {.importc: "QQuickRenderControl_override_virtual_metacall".}
 proc fQQuickRenderControl_virtualbase_renderWindow(self: pointer, offset: pointer): pointer{.importc: "QQuickRenderControl_virtualbase_renderWindow".}
 proc fcQQuickRenderControl_override_virtual_renderWindow(self: pointer, slot: int) {.importc: "QQuickRenderControl_override_virtual_renderWindow".}
 proc fQQuickRenderControl_virtualbase_event(self: pointer, event: pointer): bool{.importc: "QQuickRenderControl_virtualbase_event".}
@@ -99,6 +106,7 @@ proc fQQuickRenderControl_virtualbase_connectNotify(self: pointer, signal: point
 proc fcQQuickRenderControl_override_virtual_connectNotify(self: pointer, slot: int) {.importc: "QQuickRenderControl_override_virtual_connectNotify".}
 proc fQQuickRenderControl_virtualbase_disconnectNotify(self: pointer, signal: pointer): void{.importc: "QQuickRenderControl_virtualbase_disconnectNotify".}
 proc fcQQuickRenderControl_override_virtual_disconnectNotify(self: pointer, slot: int) {.importc: "QQuickRenderControl_override_virtual_disconnectNotify".}
+proc fcQQuickRenderControl_staticMetaObject(): pointer {.importc: "QQuickRenderControl_staticMetaObject".}
 proc fcQQuickRenderControl_delete(self: pointer) {.importc: "QQuickRenderControl_delete".}
 
 
@@ -115,6 +123,9 @@ proc metaObject*(self: gen_qquickrendercontrol_types.QQuickRenderControl, ): gen
 
 proc metacast*(self: gen_qquickrendercontrol_types.QQuickRenderControl, param1: cstring): pointer =
   fcQQuickRenderControl_metacast(self.h, param1)
+
+proc metacall*(self: gen_qquickrendercontrol_types.QQuickRenderControl, param1: cint, param2: cint, param3: pointer): cint =
+  fcQQuickRenderControl_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qquickrendercontrol_types.QQuickRenderControl, s: cstring): string =
   let v_ms = fcQQuickRenderControl_tr(s)
@@ -207,6 +218,65 @@ proc trUtf8*(_: type gen_qquickrendercontrol_types.QQuickRenderControl, s: cstri
 proc renderWindowFor*(_: type gen_qquickrendercontrol_types.QQuickRenderControl, win: gen_qquickwindow_types.QQuickWindow, offset: gen_qpoint_types.QPoint): gen_qwindow_types.QWindow =
   gen_qwindow_types.QWindow(h: fcQQuickRenderControl_renderWindowFor2(win.h, offset.h))
 
+proc QQuickRenderControlmetaObject*(self: gen_qquickrendercontrol_types.QQuickRenderControl, ): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fQQuickRenderControl_virtualbase_metaObject(self.h))
+
+type QQuickRenderControlmetaObjectProc* = proc(): gen_qobjectdefs_types.QMetaObject
+proc onmetaObject*(self: gen_qquickrendercontrol_types.QQuickRenderControl, slot: QQuickRenderControlmetaObjectProc) =
+  # TODO check subclass
+  var tmp = new QQuickRenderControlmetaObjectProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQQuickRenderControl_override_virtual_metaObject(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QQuickRenderControl_metaObject(self: ptr cQQuickRenderControl, slot: int): pointer {.exportc: "miqt_exec_callback_QQuickRenderControl_metaObject ".} =
+  var nimfunc = cast[ptr QQuickRenderControlmetaObjectProc](cast[pointer](slot))
+
+  let virtualReturn = nimfunc[]( )
+
+  virtualReturn.h
+proc QQuickRenderControlmetacast*(self: gen_qquickrendercontrol_types.QQuickRenderControl, param1: cstring): pointer =
+  fQQuickRenderControl_virtualbase_metacast(self.h, param1)
+
+type QQuickRenderControlmetacastProc* = proc(param1: cstring): pointer
+proc onmetacast*(self: gen_qquickrendercontrol_types.QQuickRenderControl, slot: QQuickRenderControlmetacastProc) =
+  # TODO check subclass
+  var tmp = new QQuickRenderControlmetacastProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQQuickRenderControl_override_virtual_metacast(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QQuickRenderControl_metacast(self: ptr cQQuickRenderControl, slot: int, param1: cstring): pointer {.exportc: "miqt_exec_callback_QQuickRenderControl_metacast ".} =
+  var nimfunc = cast[ptr QQuickRenderControlmetacastProc](cast[pointer](slot))
+  let slotval1 = (param1)
+
+
+  let virtualReturn = nimfunc[](slotval1 )
+
+  virtualReturn
+proc QQuickRenderControlmetacall*(self: gen_qquickrendercontrol_types.QQuickRenderControl, param1: cint, param2: cint, param3: pointer): cint =
+  fQQuickRenderControl_virtualbase_metacall(self.h, cint(param1), param2, param3)
+
+type QQuickRenderControlmetacallProc* = proc(param1: cint, param2: cint, param3: pointer): cint
+proc onmetacall*(self: gen_qquickrendercontrol_types.QQuickRenderControl, slot: QQuickRenderControlmetacallProc) =
+  # TODO check subclass
+  var tmp = new QQuickRenderControlmetacallProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQQuickRenderControl_override_virtual_metacall(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QQuickRenderControl_metacall(self: ptr cQQuickRenderControl, slot: int, param1: cint, param2: cint, param3: pointer): cint {.exportc: "miqt_exec_callback_QQuickRenderControl_metacall ".} =
+  var nimfunc = cast[ptr QQuickRenderControlmetacallProc](cast[pointer](slot))
+  let slotval1 = cint(param1)
+
+  let slotval2 = param2
+
+  let slotval3 = param3
+
+
+  let virtualReturn = nimfunc[](slotval1, slotval2, slotval3 )
+
+  virtualReturn
 proc QQuickRenderControlrenderWindow*(self: gen_qquickrendercontrol_types.QQuickRenderControl, offset: gen_qpoint_types.QPoint): gen_qwindow_types.QWindow =
   gen_qwindow_types.QWindow(h: fQQuickRenderControl_virtualbase_renderWindow(self.h, offset.h))
 
@@ -351,5 +421,7 @@ proc miqt_exec_callback_QQuickRenderControl_disconnectNotify(self: ptr cQQuickRe
 
 
   nimfunc[](slotval1)
+proc staticMetaObject*(_: type gen_qquickrendercontrol_types.QQuickRenderControl): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fcQQuickRenderControl_staticMetaObject())
 proc delete*(self: gen_qquickrendercontrol_types.QQuickRenderControl) =
   fcQQuickRenderControl_delete(self.h)

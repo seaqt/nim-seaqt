@@ -79,6 +79,7 @@ QRasterWindow* QRasterWindow_new2(QWindow* parent);
 void QRasterWindow_virtbase(QRasterWindow* src, QPaintDeviceWindow** outptr_QPaintDeviceWindow);
 QMetaObject* QRasterWindow_metaObject(const QRasterWindow* self);
 void* QRasterWindow_metacast(QRasterWindow* self, const char* param1);
+int QRasterWindow_metacall(QRasterWindow* self, int param1, int param2, void** param3);
 struct miqt_string QRasterWindow_tr(const char* s);
 struct miqt_string QRasterWindow_trUtf8(const char* s);
 int QRasterWindow_metric(const QRasterWindow* self, int metric);
@@ -87,6 +88,12 @@ struct miqt_string QRasterWindow_tr2(const char* s, const char* c);
 struct miqt_string QRasterWindow_tr3(const char* s, const char* c, int n);
 struct miqt_string QRasterWindow_trUtf82(const char* s, const char* c);
 struct miqt_string QRasterWindow_trUtf83(const char* s, const char* c, int n);
+bool QRasterWindow_override_virtual_metaObject(void* self, intptr_t slot);
+QMetaObject* QRasterWindow_virtualbase_metaObject(const void* self);
+bool QRasterWindow_override_virtual_metacast(void* self, intptr_t slot);
+void* QRasterWindow_virtualbase_metacast(void* self, const char* param1);
+bool QRasterWindow_override_virtual_metacall(void* self, intptr_t slot);
+int QRasterWindow_virtualbase_metacall(void* self, int param1, int param2, void** param3);
 bool QRasterWindow_override_virtual_metric(void* self, intptr_t slot);
 int QRasterWindow_virtualbase_metric(const void* self, int metric);
 bool QRasterWindow_override_virtual_redirected(void* self, intptr_t slot);
@@ -161,6 +168,7 @@ QObject* QRasterWindow_protectedbase_sender(bool* _dynamic_cast_ok, const void* 
 int QRasterWindow_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
 int QRasterWindow_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
 bool QRasterWindow_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+const QMetaObject* QRasterWindow_staticMetaObject();
 void QRasterWindow_delete(QRasterWindow* self);
 
 #ifdef __cplusplus

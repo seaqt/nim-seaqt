@@ -89,6 +89,7 @@ QWebInspector* QWebInspector_new2();
 void QWebInspector_virtbase(QWebInspector* src, QWidget** outptr_QWidget);
 QMetaObject* QWebInspector_metaObject(const QWebInspector* self);
 void* QWebInspector_metacast(QWebInspector* self, const char* param1);
+int QWebInspector_metacall(QWebInspector* self, int param1, int param2, void** param3);
 struct miqt_string QWebInspector_tr(const char* s);
 struct miqt_string QWebInspector_trUtf8(const char* s);
 void QWebInspector_setPage(QWebInspector* self, QWebPage* page);
@@ -103,6 +104,12 @@ struct miqt_string QWebInspector_tr2(const char* s, const char* c);
 struct miqt_string QWebInspector_tr3(const char* s, const char* c, int n);
 struct miqt_string QWebInspector_trUtf82(const char* s, const char* c);
 struct miqt_string QWebInspector_trUtf83(const char* s, const char* c, int n);
+bool QWebInspector_override_virtual_metaObject(void* self, intptr_t slot);
+QMetaObject* QWebInspector_virtualbase_metaObject(const void* self);
+bool QWebInspector_override_virtual_metacast(void* self, intptr_t slot);
+void* QWebInspector_virtualbase_metacast(void* self, const char* param1);
+bool QWebInspector_override_virtual_metacall(void* self, intptr_t slot);
+int QWebInspector_virtualbase_metacall(void* self, int param1, int param2, void** param3);
 bool QWebInspector_override_virtual_sizeHint(void* self, intptr_t slot);
 QSize* QWebInspector_virtualbase_sizeHint(const void* self);
 bool QWebInspector_override_virtual_event(void* self, intptr_t slot);
@@ -206,6 +213,7 @@ QObject* QWebInspector_protectedbase_sender(bool* _dynamic_cast_ok, const void* 
 int QWebInspector_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
 int QWebInspector_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
 bool QWebInspector_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+const QMetaObject* QWebInspector_staticMetaObject();
 void QWebInspector_delete(QWebInspector* self);
 
 #ifdef __cplusplus

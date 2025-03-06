@@ -50,6 +50,7 @@ type cQMediaRecorderControl*{.exportc: "QMediaRecorderControl", incompleteStruct
 
 proc fcQMediaRecorderControl_metaObject(self: pointer, ): pointer {.importc: "QMediaRecorderControl_metaObject".}
 proc fcQMediaRecorderControl_metacast(self: pointer, param1: cstring): pointer {.importc: "QMediaRecorderControl_metacast".}
+proc fcQMediaRecorderControl_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QMediaRecorderControl_metacall".}
 proc fcQMediaRecorderControl_tr(s: cstring): struct_miqt_string {.importc: "QMediaRecorderControl_tr".}
 proc fcQMediaRecorderControl_trUtf8(s: cstring): struct_miqt_string {.importc: "QMediaRecorderControl_trUtf8".}
 proc fcQMediaRecorderControl_outputLocation(self: pointer, ): pointer {.importc: "QMediaRecorderControl_outputLocation".}
@@ -81,6 +82,7 @@ proc fcQMediaRecorderControl_tr2(s: cstring, c: cstring): struct_miqt_string {.i
 proc fcQMediaRecorderControl_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QMediaRecorderControl_tr3".}
 proc fcQMediaRecorderControl_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QMediaRecorderControl_trUtf82".}
 proc fcQMediaRecorderControl_trUtf83(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QMediaRecorderControl_trUtf83".}
+proc fcQMediaRecorderControl_staticMetaObject(): pointer {.importc: "QMediaRecorderControl_staticMetaObject".}
 proc fcQMediaRecorderControl_delete(self: pointer) {.importc: "QMediaRecorderControl_delete".}
 
 
@@ -91,6 +93,9 @@ proc metaObject*(self: gen_qmediarecordercontrol_types.QMediaRecorderControl, ):
 
 proc metacast*(self: gen_qmediarecordercontrol_types.QMediaRecorderControl, param1: cstring): pointer =
   fcQMediaRecorderControl_metacast(self.h, param1)
+
+proc metacall*(self: gen_qmediarecordercontrol_types.QMediaRecorderControl, param1: cint, param2: cint, param3: pointer): cint =
+  fcQMediaRecorderControl_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qmediarecordercontrol_types.QMediaRecorderControl, s: cstring): string =
   let v_ms = fcQMediaRecorderControl_tr(s)
@@ -278,5 +283,7 @@ proc trUtf8*(_: type gen_qmediarecordercontrol_types.QMediaRecorderControl, s: c
   c_free(v_ms.data)
   vx_ret
 
+proc staticMetaObject*(_: type gen_qmediarecordercontrol_types.QMediaRecorderControl): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fcQMediaRecorderControl_staticMetaObject())
 proc delete*(self: gen_qmediarecordercontrol_types.QMediaRecorderControl) =
   fcQMediaRecorderControl_delete(self.h)

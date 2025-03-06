@@ -57,6 +57,7 @@ QDirModel* QDirModel_new4(QObject* parent);
 void QDirModel_virtbase(QDirModel* src, QAbstractItemModel** outptr_QAbstractItemModel);
 QMetaObject* QDirModel_metaObject(const QDirModel* self);
 void* QDirModel_metacast(QDirModel* self, const char* param1);
+int QDirModel_metacall(QDirModel* self, int param1, int param2, void** param3);
 struct miqt_string QDirModel_tr(const char* s);
 struct miqt_string QDirModel_trUtf8(const char* s);
 QModelIndex* QDirModel_index(const QDirModel* self, int row, int column, QModelIndex* parent);
@@ -103,6 +104,12 @@ struct miqt_string QDirModel_trUtf82(const char* s, const char* c);
 struct miqt_string QDirModel_trUtf83(const char* s, const char* c, int n);
 QModelIndex* QDirModel_index2(const QDirModel* self, struct miqt_string path, int column);
 void QDirModel_refresh1(QDirModel* self, QModelIndex* parent);
+bool QDirModel_override_virtual_metaObject(void* self, intptr_t slot);
+QMetaObject* QDirModel_virtualbase_metaObject(const void* self);
+bool QDirModel_override_virtual_metacast(void* self, intptr_t slot);
+void* QDirModel_virtualbase_metacast(void* self, const char* param1);
+bool QDirModel_override_virtual_metacall(void* self, intptr_t slot);
+int QDirModel_virtualbase_metacall(void* self, int param1, int param2, void** param3);
 bool QDirModel_override_virtual_index(void* self, intptr_t slot);
 QModelIndex* QDirModel_virtualbase_index(const void* self, int row, int column, QModelIndex* parent);
 bool QDirModel_override_virtual_parent(void* self, intptr_t slot);
@@ -210,6 +217,7 @@ QObject* QDirModel_protectedbase_sender(bool* _dynamic_cast_ok, const void* self
 int QDirModel_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
 int QDirModel_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
 bool QDirModel_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+const QMetaObject* QDirModel_staticMetaObject();
 void QDirModel_delete(QDirModel* self);
 
 #ifdef __cplusplus

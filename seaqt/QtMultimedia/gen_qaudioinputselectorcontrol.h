@@ -31,6 +31,7 @@ typedef struct QObject QObject;
 void QAudioInputSelectorControl_virtbase(QAudioInputSelectorControl* src, QMediaControl** outptr_QMediaControl);
 QMetaObject* QAudioInputSelectorControl_metaObject(const QAudioInputSelectorControl* self);
 void* QAudioInputSelectorControl_metacast(QAudioInputSelectorControl* self, const char* param1);
+int QAudioInputSelectorControl_metacall(QAudioInputSelectorControl* self, int param1, int param2, void** param3);
 struct miqt_string QAudioInputSelectorControl_tr(const char* s);
 struct miqt_string QAudioInputSelectorControl_trUtf8(const char* s);
 struct miqt_array /* of struct miqt_string */  QAudioInputSelectorControl_availableInputs(const QAudioInputSelectorControl* self);
@@ -46,6 +47,7 @@ struct miqt_string QAudioInputSelectorControl_tr2(const char* s, const char* c);
 struct miqt_string QAudioInputSelectorControl_tr3(const char* s, const char* c, int n);
 struct miqt_string QAudioInputSelectorControl_trUtf82(const char* s, const char* c);
 struct miqt_string QAudioInputSelectorControl_trUtf83(const char* s, const char* c, int n);
+const QMetaObject* QAudioInputSelectorControl_staticMetaObject();
 void QAudioInputSelectorControl_delete(QAudioInputSelectorControl* self);
 
 #ifdef __cplusplus

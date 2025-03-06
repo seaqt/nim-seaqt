@@ -33,6 +33,10 @@ void* QCameraViewfinderSettingsControl_metacast(QCameraViewfinderSettingsControl
 	return self->qt_metacast(param1);
 }
 
+int QCameraViewfinderSettingsControl_metacall(QCameraViewfinderSettingsControl* self, int param1, int param2, void** param3) {
+	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
+}
+
 struct miqt_string QCameraViewfinderSettingsControl_tr(const char* s) {
 	QString _ret = QCameraViewfinderSettingsControl::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
@@ -111,6 +115,7 @@ struct miqt_string QCameraViewfinderSettingsControl_trUtf83(const char* s, const
 	return _ms;
 }
 
+const QMetaObject* QCameraViewfinderSettingsControl_staticMetaObject() { return &QCameraViewfinderSettingsControl::staticMetaObject; }
 void QCameraViewfinderSettingsControl_delete(QCameraViewfinderSettingsControl* self) {
 	delete self;
 }
@@ -125,6 +130,10 @@ QMetaObject* QCameraViewfinderSettingsControl2_metaObject(const QCameraViewfinde
 
 void* QCameraViewfinderSettingsControl2_metacast(QCameraViewfinderSettingsControl2* self, const char* param1) {
 	return self->qt_metacast(param1);
+}
+
+int QCameraViewfinderSettingsControl2_metacall(QCameraViewfinderSettingsControl2* self, int param1, int param2, void** param3) {
+	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
 struct miqt_string QCameraViewfinderSettingsControl2_tr(const char* s) {
@@ -214,6 +223,7 @@ struct miqt_string QCameraViewfinderSettingsControl2_trUtf83(const char* s, cons
 	return _ms;
 }
 
+const QMetaObject* QCameraViewfinderSettingsControl2_staticMetaObject() { return &QCameraViewfinderSettingsControl2::staticMetaObject; }
 void QCameraViewfinderSettingsControl2_delete(QCameraViewfinderSettingsControl2* self) {
 	delete self;
 }

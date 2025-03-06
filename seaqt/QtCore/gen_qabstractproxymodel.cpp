@@ -25,6 +25,9 @@
 extern "C" {
 #endif
 
+QMetaObject* miqt_exec_callback_QAbstractProxyModel_metaObject(const QAbstractProxyModel*, intptr_t);
+void* miqt_exec_callback_QAbstractProxyModel_metacast(QAbstractProxyModel*, intptr_t, const char*);
+int miqt_exec_callback_QAbstractProxyModel_metacall(QAbstractProxyModel*, intptr_t, int, int, void**);
 void miqt_exec_callback_QAbstractProxyModel_setSourceModel(QAbstractProxyModel*, intptr_t, QAbstractItemModel*);
 QModelIndex* miqt_exec_callback_QAbstractProxyModel_mapToSource(const QAbstractProxyModel*, intptr_t, QModelIndex*);
 QModelIndex* miqt_exec_callback_QAbstractProxyModel_mapFromSource(const QAbstractProxyModel*, intptr_t, QModelIndex*);
@@ -82,6 +85,62 @@ public:
 	VirtualQAbstractProxyModel(QObject* parent): QAbstractProxyModel(parent) {};
 
 	virtual ~VirtualQAbstractProxyModel() override = default;
+
+	// cgo.Handle value for overwritten implementation
+	intptr_t handle__metaObject = 0;
+
+	// Subclass to allow providing a Go implementation
+	virtual const QMetaObject* metaObject() const override {
+		if (handle__metaObject == 0) {
+			return QAbstractProxyModel::metaObject();
+		}
+		
+
+		QMetaObject* callback_return_value = miqt_exec_callback_QAbstractProxyModel_metaObject(this, handle__metaObject);
+
+		return callback_return_value;
+	}
+
+	friend QMetaObject* QAbstractProxyModel_virtualbase_metaObject(const void* self);
+
+	// cgo.Handle value for overwritten implementation
+	intptr_t handle__metacast = 0;
+
+	// Subclass to allow providing a Go implementation
+	virtual void* qt_metacast(const char* param1) override {
+		if (handle__metacast == 0) {
+			return QAbstractProxyModel::qt_metacast(param1);
+		}
+		
+		const char* sigval1 = (const char*) param1;
+
+		void* callback_return_value = miqt_exec_callback_QAbstractProxyModel_metacast(this, handle__metacast, sigval1);
+
+		return callback_return_value;
+	}
+
+	friend void* QAbstractProxyModel_virtualbase_metacast(void* self, const char* param1);
+
+	// cgo.Handle value for overwritten implementation
+	intptr_t handle__metacall = 0;
+
+	// Subclass to allow providing a Go implementation
+	virtual int qt_metacall(QMetaObject::Call param1, int param2, void** param3) override {
+		if (handle__metacall == 0) {
+			return QAbstractProxyModel::qt_metacall(param1, param2, param3);
+		}
+		
+		QMetaObject::Call param1_ret = param1;
+		int sigval1 = static_cast<int>(param1_ret);
+		int sigval2 = param2;
+		void** sigval3 = param3;
+
+		int callback_return_value = miqt_exec_callback_QAbstractProxyModel_metacall(this, handle__metacall, sigval1, sigval2, sigval3);
+
+		return static_cast<int>(callback_return_value);
+	}
+
+	friend int QAbstractProxyModel_virtualbase_metacall(void* self, int param1, int param2, void** param3);
 
 	// cgo.Handle value for overwritten implementation
 	intptr_t handle__setSourceModel = 0;
@@ -1119,6 +1178,10 @@ void* QAbstractProxyModel_metacast(QAbstractProxyModel* self, const char* param1
 	return self->qt_metacast(param1);
 }
 
+int QAbstractProxyModel_metacall(QAbstractProxyModel* self, int param1, int param2, void** param3) {
+	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
+}
+
 struct miqt_string QAbstractProxyModel_tr(const char* s) {
 	QString _ret = QAbstractProxyModel::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
@@ -1340,6 +1403,54 @@ struct miqt_string QAbstractProxyModel_trUtf83(const char* s, const char* c, int
 	_ms.data = static_cast<char*>(malloc(_ms.len));
 	memcpy(_ms.data, _b.data(), _ms.len);
 	return _ms;
+}
+
+bool QAbstractProxyModel_override_virtual_metaObject(void* self, intptr_t slot) {
+	VirtualQAbstractProxyModel* self_cast = dynamic_cast<VirtualQAbstractProxyModel*>( (QAbstractProxyModel*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+	
+	self_cast->handle__metaObject = slot;
+	return true;
+}
+
+QMetaObject* QAbstractProxyModel_virtualbase_metaObject(const void* self) {
+
+	return (QMetaObject*) ( (const VirtualQAbstractProxyModel*)(self) )->QAbstractProxyModel::metaObject();
+
+}
+
+bool QAbstractProxyModel_override_virtual_metacast(void* self, intptr_t slot) {
+	VirtualQAbstractProxyModel* self_cast = dynamic_cast<VirtualQAbstractProxyModel*>( (QAbstractProxyModel*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+	
+	self_cast->handle__metacast = slot;
+	return true;
+}
+
+void* QAbstractProxyModel_virtualbase_metacast(void* self, const char* param1) {
+
+	return ( (VirtualQAbstractProxyModel*)(self) )->QAbstractProxyModel::qt_metacast(param1);
+
+}
+
+bool QAbstractProxyModel_override_virtual_metacall(void* self, intptr_t slot) {
+	VirtualQAbstractProxyModel* self_cast = dynamic_cast<VirtualQAbstractProxyModel*>( (QAbstractProxyModel*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+	
+	self_cast->handle__metacall = slot;
+	return true;
+}
+
+int QAbstractProxyModel_virtualbase_metacall(void* self, int param1, int param2, void** param3) {
+
+	return ( (VirtualQAbstractProxyModel*)(self) )->QAbstractProxyModel::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
+
 }
 
 bool QAbstractProxyModel_override_virtual_setSourceModel(void* self, intptr_t slot) {
@@ -2115,6 +2226,7 @@ void QAbstractProxyModel_virtualbase_disconnectNotify(void* self, QMetaMethod* s
 
 }
 
+const QMetaObject* QAbstractProxyModel_staticMetaObject() { return &QAbstractProxyModel::staticMetaObject; }
 void QAbstractProxyModel_protectedbase_resetInternalData(bool* _dynamic_cast_ok, void* self) {
 	VirtualQAbstractProxyModel* self_cast = dynamic_cast<VirtualQAbstractProxyModel*>( (QAbstractProxyModel*)(self) );
 	if (self_cast == nullptr) {

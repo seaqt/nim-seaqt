@@ -74,6 +74,7 @@ type cQCameraImageProcessing*{.exportc: "QCameraImageProcessing", incompleteStru
 
 proc fcQCameraImageProcessing_metaObject(self: pointer, ): pointer {.importc: "QCameraImageProcessing_metaObject".}
 proc fcQCameraImageProcessing_metacast(self: pointer, param1: cstring): pointer {.importc: "QCameraImageProcessing_metacast".}
+proc fcQCameraImageProcessing_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QCameraImageProcessing_metacall".}
 proc fcQCameraImageProcessing_tr(s: cstring): struct_miqt_string {.importc: "QCameraImageProcessing_tr".}
 proc fcQCameraImageProcessing_trUtf8(s: cstring): struct_miqt_string {.importc: "QCameraImageProcessing_trUtf8".}
 proc fcQCameraImageProcessing_isAvailable(self: pointer, ): bool {.importc: "QCameraImageProcessing_isAvailable".}
@@ -99,6 +100,7 @@ proc fcQCameraImageProcessing_tr2(s: cstring, c: cstring): struct_miqt_string {.
 proc fcQCameraImageProcessing_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QCameraImageProcessing_tr3".}
 proc fcQCameraImageProcessing_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QCameraImageProcessing_trUtf82".}
 proc fcQCameraImageProcessing_trUtf83(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QCameraImageProcessing_trUtf83".}
+proc fcQCameraImageProcessing_staticMetaObject(): pointer {.importc: "QCameraImageProcessing_staticMetaObject".}
 
 
 func init*(T: type gen_qcameraimageprocessing_types.QCameraImageProcessing, h: ptr cQCameraImageProcessing): gen_qcameraimageprocessing_types.QCameraImageProcessing =
@@ -108,6 +110,9 @@ proc metaObject*(self: gen_qcameraimageprocessing_types.QCameraImageProcessing, 
 
 proc metacast*(self: gen_qcameraimageprocessing_types.QCameraImageProcessing, param1: cstring): pointer =
   fcQCameraImageProcessing_metacast(self.h, param1)
+
+proc metacall*(self: gen_qcameraimageprocessing_types.QCameraImageProcessing, param1: cint, param2: cint, param3: pointer): cint =
+  fcQCameraImageProcessing_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qcameraimageprocessing_types.QCameraImageProcessing, s: cstring): string =
   let v_ms = fcQCameraImageProcessing_tr(s)
@@ -202,3 +207,5 @@ proc trUtf8*(_: type gen_qcameraimageprocessing_types.QCameraImageProcessing, s:
   c_free(v_ms.data)
   vx_ret
 
+proc staticMetaObject*(_: type gen_qcameraimageprocessing_types.QCameraImageProcessing): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fcQCameraImageProcessing_staticMetaObject())

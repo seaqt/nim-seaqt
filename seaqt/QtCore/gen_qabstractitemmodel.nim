@@ -123,6 +123,7 @@ proc fcQAbstractItemModel_new(): ptr cQAbstractItemModel {.importc: "QAbstractIt
 proc fcQAbstractItemModel_new2(parent: pointer): ptr cQAbstractItemModel {.importc: "QAbstractItemModel_new2".}
 proc fcQAbstractItemModel_metaObject(self: pointer, ): pointer {.importc: "QAbstractItemModel_metaObject".}
 proc fcQAbstractItemModel_metacast(self: pointer, param1: cstring): pointer {.importc: "QAbstractItemModel_metacast".}
+proc fcQAbstractItemModel_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QAbstractItemModel_metacall".}
 proc fcQAbstractItemModel_tr(s: cstring): struct_miqt_string {.importc: "QAbstractItemModel_tr".}
 proc fcQAbstractItemModel_trUtf8(s: cstring): struct_miqt_string {.importc: "QAbstractItemModel_trUtf8".}
 proc fcQAbstractItemModel_hasIndex(self: pointer, row: cint, column: cint): bool {.importc: "QAbstractItemModel_hasIndex".}
@@ -195,6 +196,12 @@ proc fcQAbstractItemModel_layoutAboutToBeChanged1(self: pointer, parents: struct
 proc fcQAbstractItemModel_connect_layoutAboutToBeChanged1(self: pointer, slot: int) {.importc: "QAbstractItemModel_connect_layoutAboutToBeChanged1".}
 proc fcQAbstractItemModel_layoutAboutToBeChanged2(self: pointer, parents: struct_miqt_array, hint: cint): void {.importc: "QAbstractItemModel_layoutAboutToBeChanged2".}
 proc fcQAbstractItemModel_connect_layoutAboutToBeChanged2(self: pointer, slot: int) {.importc: "QAbstractItemModel_connect_layoutAboutToBeChanged2".}
+proc fQAbstractItemModel_virtualbase_metaObject(self: pointer, ): pointer{.importc: "QAbstractItemModel_virtualbase_metaObject".}
+proc fcQAbstractItemModel_override_virtual_metaObject(self: pointer, slot: int) {.importc: "QAbstractItemModel_override_virtual_metaObject".}
+proc fQAbstractItemModel_virtualbase_metacast(self: pointer, param1: cstring): pointer{.importc: "QAbstractItemModel_virtualbase_metacast".}
+proc fcQAbstractItemModel_override_virtual_metacast(self: pointer, slot: int) {.importc: "QAbstractItemModel_override_virtual_metacast".}
+proc fQAbstractItemModel_virtualbase_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint{.importc: "QAbstractItemModel_virtualbase_metacall".}
+proc fcQAbstractItemModel_override_virtual_metacall(self: pointer, slot: int) {.importc: "QAbstractItemModel_override_virtual_metacall".}
 proc fcQAbstractItemModel_override_virtual_index(self: pointer, slot: int) {.importc: "QAbstractItemModel_override_virtual_index".}
 proc fcQAbstractItemModel_override_virtual_parent(self: pointer, slot: int) {.importc: "QAbstractItemModel_override_virtual_parent".}
 proc fQAbstractItemModel_virtualbase_sibling(self: pointer, row: cint, column: cint, idx: pointer): pointer{.importc: "QAbstractItemModel_virtualbase_sibling".}
@@ -272,11 +279,13 @@ proc fQAbstractItemModel_virtualbase_connectNotify(self: pointer, signal: pointe
 proc fcQAbstractItemModel_override_virtual_connectNotify(self: pointer, slot: int) {.importc: "QAbstractItemModel_override_virtual_connectNotify".}
 proc fQAbstractItemModel_virtualbase_disconnectNotify(self: pointer, signal: pointer): void{.importc: "QAbstractItemModel_virtualbase_disconnectNotify".}
 proc fcQAbstractItemModel_override_virtual_disconnectNotify(self: pointer, slot: int) {.importc: "QAbstractItemModel_override_virtual_disconnectNotify".}
+proc fcQAbstractItemModel_staticMetaObject(): pointer {.importc: "QAbstractItemModel_staticMetaObject".}
 proc fcQAbstractItemModel_delete(self: pointer) {.importc: "QAbstractItemModel_delete".}
 proc fcQAbstractTableModel_new(): ptr cQAbstractTableModel {.importc: "QAbstractTableModel_new".}
 proc fcQAbstractTableModel_new2(parent: pointer): ptr cQAbstractTableModel {.importc: "QAbstractTableModel_new2".}
 proc fcQAbstractTableModel_metaObject(self: pointer, ): pointer {.importc: "QAbstractTableModel_metaObject".}
 proc fcQAbstractTableModel_metacast(self: pointer, param1: cstring): pointer {.importc: "QAbstractTableModel_metacast".}
+proc fcQAbstractTableModel_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QAbstractTableModel_metacall".}
 proc fcQAbstractTableModel_tr(s: cstring): struct_miqt_string {.importc: "QAbstractTableModel_tr".}
 proc fcQAbstractTableModel_trUtf8(s: cstring): struct_miqt_string {.importc: "QAbstractTableModel_trUtf8".}
 proc fcQAbstractTableModel_index(self: pointer, row: cint, column: cint, parent: pointer): pointer {.importc: "QAbstractTableModel_index".}
@@ -287,6 +296,12 @@ proc fcQAbstractTableModel_tr2(s: cstring, c: cstring): struct_miqt_string {.imp
 proc fcQAbstractTableModel_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QAbstractTableModel_tr3".}
 proc fcQAbstractTableModel_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QAbstractTableModel_trUtf82".}
 proc fcQAbstractTableModel_trUtf83(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QAbstractTableModel_trUtf83".}
+proc fQAbstractTableModel_virtualbase_metaObject(self: pointer, ): pointer{.importc: "QAbstractTableModel_virtualbase_metaObject".}
+proc fcQAbstractTableModel_override_virtual_metaObject(self: pointer, slot: int) {.importc: "QAbstractTableModel_override_virtual_metaObject".}
+proc fQAbstractTableModel_virtualbase_metacast(self: pointer, param1: cstring): pointer{.importc: "QAbstractTableModel_virtualbase_metacast".}
+proc fcQAbstractTableModel_override_virtual_metacast(self: pointer, slot: int) {.importc: "QAbstractTableModel_override_virtual_metacast".}
+proc fQAbstractTableModel_virtualbase_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint{.importc: "QAbstractTableModel_virtualbase_metacall".}
+proc fcQAbstractTableModel_override_virtual_metacall(self: pointer, slot: int) {.importc: "QAbstractTableModel_override_virtual_metacall".}
 proc fQAbstractTableModel_virtualbase_index(self: pointer, row: cint, column: cint, parent: pointer): pointer{.importc: "QAbstractTableModel_virtualbase_index".}
 proc fcQAbstractTableModel_override_virtual_index(self: pointer, slot: int) {.importc: "QAbstractTableModel_override_virtual_index".}
 proc fQAbstractTableModel_virtualbase_sibling(self: pointer, row: cint, column: cint, idx: pointer): pointer{.importc: "QAbstractTableModel_virtualbase_sibling".}
@@ -362,11 +377,13 @@ proc fQAbstractTableModel_virtualbase_connectNotify(self: pointer, signal: point
 proc fcQAbstractTableModel_override_virtual_connectNotify(self: pointer, slot: int) {.importc: "QAbstractTableModel_override_virtual_connectNotify".}
 proc fQAbstractTableModel_virtualbase_disconnectNotify(self: pointer, signal: pointer): void{.importc: "QAbstractTableModel_virtualbase_disconnectNotify".}
 proc fcQAbstractTableModel_override_virtual_disconnectNotify(self: pointer, slot: int) {.importc: "QAbstractTableModel_override_virtual_disconnectNotify".}
+proc fcQAbstractTableModel_staticMetaObject(): pointer {.importc: "QAbstractTableModel_staticMetaObject".}
 proc fcQAbstractTableModel_delete(self: pointer) {.importc: "QAbstractTableModel_delete".}
 proc fcQAbstractListModel_new(): ptr cQAbstractListModel {.importc: "QAbstractListModel_new".}
 proc fcQAbstractListModel_new2(parent: pointer): ptr cQAbstractListModel {.importc: "QAbstractListModel_new2".}
 proc fcQAbstractListModel_metaObject(self: pointer, ): pointer {.importc: "QAbstractListModel_metaObject".}
 proc fcQAbstractListModel_metacast(self: pointer, param1: cstring): pointer {.importc: "QAbstractListModel_metacast".}
+proc fcQAbstractListModel_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QAbstractListModel_metacall".}
 proc fcQAbstractListModel_tr(s: cstring): struct_miqt_string {.importc: "QAbstractListModel_tr".}
 proc fcQAbstractListModel_trUtf8(s: cstring): struct_miqt_string {.importc: "QAbstractListModel_trUtf8".}
 proc fcQAbstractListModel_index(self: pointer, row: cint, column: cint, parent: pointer): pointer {.importc: "QAbstractListModel_index".}
@@ -377,6 +394,12 @@ proc fcQAbstractListModel_tr2(s: cstring, c: cstring): struct_miqt_string {.impo
 proc fcQAbstractListModel_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QAbstractListModel_tr3".}
 proc fcQAbstractListModel_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QAbstractListModel_trUtf82".}
 proc fcQAbstractListModel_trUtf83(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QAbstractListModel_trUtf83".}
+proc fQAbstractListModel_virtualbase_metaObject(self: pointer, ): pointer{.importc: "QAbstractListModel_virtualbase_metaObject".}
+proc fcQAbstractListModel_override_virtual_metaObject(self: pointer, slot: int) {.importc: "QAbstractListModel_override_virtual_metaObject".}
+proc fQAbstractListModel_virtualbase_metacast(self: pointer, param1: cstring): pointer{.importc: "QAbstractListModel_virtualbase_metacast".}
+proc fcQAbstractListModel_override_virtual_metacast(self: pointer, slot: int) {.importc: "QAbstractListModel_override_virtual_metacast".}
+proc fQAbstractListModel_virtualbase_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint{.importc: "QAbstractListModel_virtualbase_metacall".}
+proc fcQAbstractListModel_override_virtual_metacall(self: pointer, slot: int) {.importc: "QAbstractListModel_override_virtual_metacall".}
 proc fQAbstractListModel_virtualbase_index(self: pointer, row: cint, column: cint, parent: pointer): pointer{.importc: "QAbstractListModel_virtualbase_index".}
 proc fcQAbstractListModel_override_virtual_index(self: pointer, slot: int) {.importc: "QAbstractListModel_override_virtual_index".}
 proc fQAbstractListModel_virtualbase_sibling(self: pointer, row: cint, column: cint, idx: pointer): pointer{.importc: "QAbstractListModel_virtualbase_sibling".}
@@ -451,6 +474,7 @@ proc fQAbstractListModel_virtualbase_connectNotify(self: pointer, signal: pointe
 proc fcQAbstractListModel_override_virtual_connectNotify(self: pointer, slot: int) {.importc: "QAbstractListModel_override_virtual_connectNotify".}
 proc fQAbstractListModel_virtualbase_disconnectNotify(self: pointer, signal: pointer): void{.importc: "QAbstractListModel_virtualbase_disconnectNotify".}
 proc fcQAbstractListModel_override_virtual_disconnectNotify(self: pointer, slot: int) {.importc: "QAbstractListModel_override_virtual_disconnectNotify".}
+proc fcQAbstractListModel_staticMetaObject(): pointer {.importc: "QAbstractListModel_staticMetaObject".}
 proc fcQAbstractListModel_delete(self: pointer) {.importc: "QAbstractListModel_delete".}
 
 
@@ -606,6 +630,9 @@ proc metaObject*(self: gen_qabstractitemmodel_types.QAbstractItemModel, ): gen_q
 
 proc metacast*(self: gen_qabstractitemmodel_types.QAbstractItemModel, param1: cstring): pointer =
   fcQAbstractItemModel_metacast(self.h, param1)
+
+proc metacall*(self: gen_qabstractitemmodel_types.QAbstractItemModel, param1: cint, param2: cint, param3: pointer): cint =
+  fcQAbstractItemModel_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qabstractitemmodel_types.QAbstractItemModel, s: cstring): string =
   let v_ms = fcQAbstractItemModel_tr(s)
@@ -1034,6 +1061,65 @@ proc onlayoutAboutToBeChanged*(self: gen_qabstractitemmodel_types.QAbstractItemM
   GC_ref(tmp)
   fcQAbstractItemModel_connect_layoutAboutToBeChanged2(self.h, cast[int](addr tmp[]))
 
+proc QAbstractItemModelmetaObject*(self: gen_qabstractitemmodel_types.QAbstractItemModel, ): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fQAbstractItemModel_virtualbase_metaObject(self.h))
+
+type QAbstractItemModelmetaObjectProc* = proc(): gen_qobjectdefs_types.QMetaObject
+proc onmetaObject*(self: gen_qabstractitemmodel_types.QAbstractItemModel, slot: QAbstractItemModelmetaObjectProc) =
+  # TODO check subclass
+  var tmp = new QAbstractItemModelmetaObjectProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQAbstractItemModel_override_virtual_metaObject(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QAbstractItemModel_metaObject(self: ptr cQAbstractItemModel, slot: int): pointer {.exportc: "miqt_exec_callback_QAbstractItemModel_metaObject ".} =
+  var nimfunc = cast[ptr QAbstractItemModelmetaObjectProc](cast[pointer](slot))
+
+  let virtualReturn = nimfunc[]( )
+
+  virtualReturn.h
+proc QAbstractItemModelmetacast*(self: gen_qabstractitemmodel_types.QAbstractItemModel, param1: cstring): pointer =
+  fQAbstractItemModel_virtualbase_metacast(self.h, param1)
+
+type QAbstractItemModelmetacastProc* = proc(param1: cstring): pointer
+proc onmetacast*(self: gen_qabstractitemmodel_types.QAbstractItemModel, slot: QAbstractItemModelmetacastProc) =
+  # TODO check subclass
+  var tmp = new QAbstractItemModelmetacastProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQAbstractItemModel_override_virtual_metacast(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QAbstractItemModel_metacast(self: ptr cQAbstractItemModel, slot: int, param1: cstring): pointer {.exportc: "miqt_exec_callback_QAbstractItemModel_metacast ".} =
+  var nimfunc = cast[ptr QAbstractItemModelmetacastProc](cast[pointer](slot))
+  let slotval1 = (param1)
+
+
+  let virtualReturn = nimfunc[](slotval1 )
+
+  virtualReturn
+proc QAbstractItemModelmetacall*(self: gen_qabstractitemmodel_types.QAbstractItemModel, param1: cint, param2: cint, param3: pointer): cint =
+  fQAbstractItemModel_virtualbase_metacall(self.h, cint(param1), param2, param3)
+
+type QAbstractItemModelmetacallProc* = proc(param1: cint, param2: cint, param3: pointer): cint
+proc onmetacall*(self: gen_qabstractitemmodel_types.QAbstractItemModel, slot: QAbstractItemModelmetacallProc) =
+  # TODO check subclass
+  var tmp = new QAbstractItemModelmetacallProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQAbstractItemModel_override_virtual_metacall(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QAbstractItemModel_metacall(self: ptr cQAbstractItemModel, slot: int, param1: cint, param2: cint, param3: pointer): cint {.exportc: "miqt_exec_callback_QAbstractItemModel_metacall ".} =
+  var nimfunc = cast[ptr QAbstractItemModelmetacallProc](cast[pointer](slot))
+  let slotval1 = cint(param1)
+
+  let slotval2 = param2
+
+  let slotval3 = param3
+
+
+  let virtualReturn = nimfunc[](slotval1, slotval2, slotval3 )
+
+  virtualReturn
 type QAbstractItemModelindexProc* = proc(row: cint, column: cint, parent: gen_qabstractitemmodel_types.QModelIndex): gen_qabstractitemmodel_types.QModelIndex
 proc onindex*(self: gen_qabstractitemmodel_types.QAbstractItemModel, slot: QAbstractItemModelindexProc) =
   # TODO check subclass
@@ -1943,6 +2029,8 @@ proc miqt_exec_callback_QAbstractItemModel_disconnectNotify(self: ptr cQAbstract
 
 
   nimfunc[](slotval1)
+proc staticMetaObject*(_: type gen_qabstractitemmodel_types.QAbstractItemModel): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fcQAbstractItemModel_staticMetaObject())
 proc delete*(self: gen_qabstractitemmodel_types.QAbstractItemModel) =
   fcQAbstractItemModel_delete(self.h)
 
@@ -1959,6 +2047,9 @@ proc metaObject*(self: gen_qabstractitemmodel_types.QAbstractTableModel, ): gen_
 
 proc metacast*(self: gen_qabstractitemmodel_types.QAbstractTableModel, param1: cstring): pointer =
   fcQAbstractTableModel_metacast(self.h, param1)
+
+proc metacall*(self: gen_qabstractitemmodel_types.QAbstractTableModel, param1: cint, param2: cint, param3: pointer): cint =
+  fcQAbstractTableModel_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qabstractitemmodel_types.QAbstractTableModel, s: cstring): string =
   let v_ms = fcQAbstractTableModel_tr(s)
@@ -2008,6 +2099,65 @@ proc trUtf8*(_: type gen_qabstractitemmodel_types.QAbstractTableModel, s: cstrin
   c_free(v_ms.data)
   vx_ret
 
+proc QAbstractTableModelmetaObject*(self: gen_qabstractitemmodel_types.QAbstractTableModel, ): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fQAbstractTableModel_virtualbase_metaObject(self.h))
+
+type QAbstractTableModelmetaObjectProc* = proc(): gen_qobjectdefs_types.QMetaObject
+proc onmetaObject*(self: gen_qabstractitemmodel_types.QAbstractTableModel, slot: QAbstractTableModelmetaObjectProc) =
+  # TODO check subclass
+  var tmp = new QAbstractTableModelmetaObjectProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQAbstractTableModel_override_virtual_metaObject(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QAbstractTableModel_metaObject(self: ptr cQAbstractTableModel, slot: int): pointer {.exportc: "miqt_exec_callback_QAbstractTableModel_metaObject ".} =
+  var nimfunc = cast[ptr QAbstractTableModelmetaObjectProc](cast[pointer](slot))
+
+  let virtualReturn = nimfunc[]( )
+
+  virtualReturn.h
+proc QAbstractTableModelmetacast*(self: gen_qabstractitemmodel_types.QAbstractTableModel, param1: cstring): pointer =
+  fQAbstractTableModel_virtualbase_metacast(self.h, param1)
+
+type QAbstractTableModelmetacastProc* = proc(param1: cstring): pointer
+proc onmetacast*(self: gen_qabstractitemmodel_types.QAbstractTableModel, slot: QAbstractTableModelmetacastProc) =
+  # TODO check subclass
+  var tmp = new QAbstractTableModelmetacastProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQAbstractTableModel_override_virtual_metacast(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QAbstractTableModel_metacast(self: ptr cQAbstractTableModel, slot: int, param1: cstring): pointer {.exportc: "miqt_exec_callback_QAbstractTableModel_metacast ".} =
+  var nimfunc = cast[ptr QAbstractTableModelmetacastProc](cast[pointer](slot))
+  let slotval1 = (param1)
+
+
+  let virtualReturn = nimfunc[](slotval1 )
+
+  virtualReturn
+proc QAbstractTableModelmetacall*(self: gen_qabstractitemmodel_types.QAbstractTableModel, param1: cint, param2: cint, param3: pointer): cint =
+  fQAbstractTableModel_virtualbase_metacall(self.h, cint(param1), param2, param3)
+
+type QAbstractTableModelmetacallProc* = proc(param1: cint, param2: cint, param3: pointer): cint
+proc onmetacall*(self: gen_qabstractitemmodel_types.QAbstractTableModel, slot: QAbstractTableModelmetacallProc) =
+  # TODO check subclass
+  var tmp = new QAbstractTableModelmetacallProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQAbstractTableModel_override_virtual_metacall(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QAbstractTableModel_metacall(self: ptr cQAbstractTableModel, slot: int, param1: cint, param2: cint, param3: pointer): cint {.exportc: "miqt_exec_callback_QAbstractTableModel_metacall ".} =
+  var nimfunc = cast[ptr QAbstractTableModelmetacallProc](cast[pointer](slot))
+  let slotval1 = cint(param1)
+
+  let slotval2 = param2
+
+  let slotval3 = param3
+
+
+  let virtualReturn = nimfunc[](slotval1, slotval2, slotval3 )
+
+  virtualReturn
 proc QAbstractTableModelindex*(self: gen_qabstractitemmodel_types.QAbstractTableModel, row: cint, column: cint, parent: gen_qabstractitemmodel_types.QModelIndex): gen_qabstractitemmodel_types.QModelIndex =
   gen_qabstractitemmodel_types.QModelIndex(h: fQAbstractTableModel_virtualbase_index(self.h, row, column, parent.h))
 
@@ -2885,6 +3035,8 @@ proc miqt_exec_callback_QAbstractTableModel_disconnectNotify(self: ptr cQAbstrac
 
 
   nimfunc[](slotval1)
+proc staticMetaObject*(_: type gen_qabstractitemmodel_types.QAbstractTableModel): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fcQAbstractTableModel_staticMetaObject())
 proc delete*(self: gen_qabstractitemmodel_types.QAbstractTableModel) =
   fcQAbstractTableModel_delete(self.h)
 
@@ -2901,6 +3053,9 @@ proc metaObject*(self: gen_qabstractitemmodel_types.QAbstractListModel, ): gen_q
 
 proc metacast*(self: gen_qabstractitemmodel_types.QAbstractListModel, param1: cstring): pointer =
   fcQAbstractListModel_metacast(self.h, param1)
+
+proc metacall*(self: gen_qabstractitemmodel_types.QAbstractListModel, param1: cint, param2: cint, param3: pointer): cint =
+  fcQAbstractListModel_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qabstractitemmodel_types.QAbstractListModel, s: cstring): string =
   let v_ms = fcQAbstractListModel_tr(s)
@@ -2950,6 +3105,65 @@ proc trUtf8*(_: type gen_qabstractitemmodel_types.QAbstractListModel, s: cstring
   c_free(v_ms.data)
   vx_ret
 
+proc QAbstractListModelmetaObject*(self: gen_qabstractitemmodel_types.QAbstractListModel, ): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fQAbstractListModel_virtualbase_metaObject(self.h))
+
+type QAbstractListModelmetaObjectProc* = proc(): gen_qobjectdefs_types.QMetaObject
+proc onmetaObject*(self: gen_qabstractitemmodel_types.QAbstractListModel, slot: QAbstractListModelmetaObjectProc) =
+  # TODO check subclass
+  var tmp = new QAbstractListModelmetaObjectProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQAbstractListModel_override_virtual_metaObject(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QAbstractListModel_metaObject(self: ptr cQAbstractListModel, slot: int): pointer {.exportc: "miqt_exec_callback_QAbstractListModel_metaObject ".} =
+  var nimfunc = cast[ptr QAbstractListModelmetaObjectProc](cast[pointer](slot))
+
+  let virtualReturn = nimfunc[]( )
+
+  virtualReturn.h
+proc QAbstractListModelmetacast*(self: gen_qabstractitemmodel_types.QAbstractListModel, param1: cstring): pointer =
+  fQAbstractListModel_virtualbase_metacast(self.h, param1)
+
+type QAbstractListModelmetacastProc* = proc(param1: cstring): pointer
+proc onmetacast*(self: gen_qabstractitemmodel_types.QAbstractListModel, slot: QAbstractListModelmetacastProc) =
+  # TODO check subclass
+  var tmp = new QAbstractListModelmetacastProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQAbstractListModel_override_virtual_metacast(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QAbstractListModel_metacast(self: ptr cQAbstractListModel, slot: int, param1: cstring): pointer {.exportc: "miqt_exec_callback_QAbstractListModel_metacast ".} =
+  var nimfunc = cast[ptr QAbstractListModelmetacastProc](cast[pointer](slot))
+  let slotval1 = (param1)
+
+
+  let virtualReturn = nimfunc[](slotval1 )
+
+  virtualReturn
+proc QAbstractListModelmetacall*(self: gen_qabstractitemmodel_types.QAbstractListModel, param1: cint, param2: cint, param3: pointer): cint =
+  fQAbstractListModel_virtualbase_metacall(self.h, cint(param1), param2, param3)
+
+type QAbstractListModelmetacallProc* = proc(param1: cint, param2: cint, param3: pointer): cint
+proc onmetacall*(self: gen_qabstractitemmodel_types.QAbstractListModel, slot: QAbstractListModelmetacallProc) =
+  # TODO check subclass
+  var tmp = new QAbstractListModelmetacallProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQAbstractListModel_override_virtual_metacall(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QAbstractListModel_metacall(self: ptr cQAbstractListModel, slot: int, param1: cint, param2: cint, param3: pointer): cint {.exportc: "miqt_exec_callback_QAbstractListModel_metacall ".} =
+  var nimfunc = cast[ptr QAbstractListModelmetacallProc](cast[pointer](slot))
+  let slotval1 = cint(param1)
+
+  let slotval2 = param2
+
+  let slotval3 = param3
+
+
+  let virtualReturn = nimfunc[](slotval1, slotval2, slotval3 )
+
+  virtualReturn
 proc QAbstractListModelindex*(self: gen_qabstractitemmodel_types.QAbstractListModel, row: cint, column: cint, parent: gen_qabstractitemmodel_types.QModelIndex): gen_qabstractitemmodel_types.QModelIndex =
   gen_qabstractitemmodel_types.QModelIndex(h: fQAbstractListModel_virtualbase_index(self.h, row, column, parent.h))
 
@@ -3811,5 +4025,7 @@ proc miqt_exec_callback_QAbstractListModel_disconnectNotify(self: ptr cQAbstract
 
 
   nimfunc[](slotval1)
+proc staticMetaObject*(_: type gen_qabstractitemmodel_types.QAbstractListModel): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fcQAbstractListModel_staticMetaObject())
 proc delete*(self: gen_qabstractitemmodel_types.QAbstractListModel) =
   fcQAbstractListModel_delete(self.h)

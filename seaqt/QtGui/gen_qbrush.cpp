@@ -272,6 +272,7 @@ bool QGradient_operatorNotEqual(const QGradient* self, QGradient* other) {
 	return (*self != *other);
 }
 
+const QMetaObject* QGradient_staticMetaObject() { return &QGradient::staticMetaObject; }
 void QGradient_delete(QGradient* self) {
 	delete self;
 }

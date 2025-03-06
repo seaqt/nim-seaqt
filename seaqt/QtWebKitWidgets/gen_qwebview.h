@@ -103,6 +103,7 @@ QWebView* QWebView_new2();
 void QWebView_virtbase(QWebView* src, QWidget** outptr_QWidget);
 QMetaObject* QWebView_metaObject(const QWebView* self);
 void* QWebView_metacast(QWebView* self, const char* param1);
+int QWebView_metacall(QWebView* self, int param1, int param2, void** param3);
 struct miqt_string QWebView_tr(const char* s);
 struct miqt_string QWebView_trUtf8(const char* s);
 QWebPage* QWebView_page(const QWebView* self);
@@ -189,6 +190,12 @@ void QWebView_setContent3(QWebView* self, struct miqt_string data, struct miqt_s
 void QWebView_triggerPageAction2(QWebView* self, int action, bool checked);
 void QWebView_setRenderHint2(QWebView* self, int hint, bool enabled);
 bool QWebView_findText2(QWebView* self, struct miqt_string subString, int options);
+bool QWebView_override_virtual_metaObject(void* self, intptr_t slot);
+QMetaObject* QWebView_virtualbase_metaObject(const void* self);
+bool QWebView_override_virtual_metacast(void* self, intptr_t slot);
+void* QWebView_virtualbase_metacast(void* self, const char* param1);
+bool QWebView_override_virtual_metacall(void* self, intptr_t slot);
+int QWebView_virtualbase_metacall(void* self, int param1, int param2, void** param3);
 bool QWebView_override_virtual_inputMethodQuery(void* self, intptr_t slot);
 QVariant* QWebView_virtualbase_inputMethodQuery(const void* self, int property);
 bool QWebView_override_virtual_sizeHint(void* self, intptr_t slot);
@@ -294,6 +301,7 @@ QObject* QWebView_protectedbase_sender(bool* _dynamic_cast_ok, const void* self)
 int QWebView_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
 int QWebView_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
 bool QWebView_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+const QMetaObject* QWebView_staticMetaObject();
 void QWebView_delete(QWebView* self);
 
 #ifdef __cplusplus

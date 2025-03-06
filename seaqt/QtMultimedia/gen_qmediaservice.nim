@@ -50,6 +50,7 @@ type cQMediaService*{.exportc: "QMediaService", incompleteStruct.} = object
 
 proc fcQMediaService_metaObject(self: pointer, ): pointer {.importc: "QMediaService_metaObject".}
 proc fcQMediaService_metacast(self: pointer, param1: cstring): pointer {.importc: "QMediaService_metacast".}
+proc fcQMediaService_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QMediaService_metacall".}
 proc fcQMediaService_tr(s: cstring): struct_miqt_string {.importc: "QMediaService_tr".}
 proc fcQMediaService_trUtf8(s: cstring): struct_miqt_string {.importc: "QMediaService_trUtf8".}
 proc fcQMediaService_requestControl(self: pointer, name: cstring): pointer {.importc: "QMediaService_requestControl".}
@@ -58,6 +59,7 @@ proc fcQMediaService_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: 
 proc fcQMediaService_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QMediaService_tr3".}
 proc fcQMediaService_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QMediaService_trUtf82".}
 proc fcQMediaService_trUtf83(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QMediaService_trUtf83".}
+proc fcQMediaService_staticMetaObject(): pointer {.importc: "QMediaService_staticMetaObject".}
 proc fcQMediaService_delete(self: pointer) {.importc: "QMediaService_delete".}
 
 
@@ -68,6 +70,9 @@ proc metaObject*(self: gen_qmediaservice_types.QMediaService, ): gen_qobjectdefs
 
 proc metacast*(self: gen_qmediaservice_types.QMediaService, param1: cstring): pointer =
   fcQMediaService_metacast(self.h, param1)
+
+proc metacall*(self: gen_qmediaservice_types.QMediaService, param1: cint, param2: cint, param3: pointer): cint =
+  fcQMediaService_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qmediaservice_types.QMediaService, s: cstring): string =
   let v_ms = fcQMediaService_tr(s)
@@ -111,5 +116,7 @@ proc trUtf8*(_: type gen_qmediaservice_types.QMediaService, s: cstring, c: cstri
   c_free(v_ms.data)
   vx_ret
 
+proc staticMetaObject*(_: type gen_qmediaservice_types.QMediaService): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fcQMediaService_staticMetaObject())
 proc delete*(self: gen_qmediaservice_types.QMediaService) =
   fcQMediaService_delete(self.h)

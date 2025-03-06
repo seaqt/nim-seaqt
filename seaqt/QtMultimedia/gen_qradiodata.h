@@ -41,6 +41,7 @@ QRadioData* QRadioData_new2(QMediaObject* mediaObject, QObject* parent);
 void QRadioData_virtbase(QRadioData* src, QObject** outptr_QObject, QMediaBindableInterface** outptr_QMediaBindableInterface);
 QMetaObject* QRadioData_metaObject(const QRadioData* self);
 void* QRadioData_metacast(QRadioData* self, const char* param1);
+int QRadioData_metacall(QRadioData* self, int param1, int param2, void** param3);
 struct miqt_string QRadioData_tr(const char* s);
 struct miqt_string QRadioData_trUtf8(const char* s);
 int QRadioData_availability(const QRadioData* self);
@@ -73,6 +74,12 @@ struct miqt_string QRadioData_tr2(const char* s, const char* c);
 struct miqt_string QRadioData_tr3(const char* s, const char* c, int n);
 struct miqt_string QRadioData_trUtf82(const char* s, const char* c);
 struct miqt_string QRadioData_trUtf83(const char* s, const char* c, int n);
+bool QRadioData_override_virtual_metaObject(void* self, intptr_t slot);
+QMetaObject* QRadioData_virtualbase_metaObject(const void* self);
+bool QRadioData_override_virtual_metacast(void* self, intptr_t slot);
+void* QRadioData_virtualbase_metacast(void* self, const char* param1);
+bool QRadioData_override_virtual_metacall(void* self, intptr_t slot);
+int QRadioData_virtualbase_metacall(void* self, int param1, int param2, void** param3);
 bool QRadioData_override_virtual_mediaObject(void* self, intptr_t slot);
 QMediaObject* QRadioData_virtualbase_mediaObject(const void* self);
 bool QRadioData_override_virtual_setMediaObject(void* self, intptr_t slot);
@@ -95,6 +102,7 @@ QObject* QRadioData_protectedbase_sender(bool* _dynamic_cast_ok, const void* sel
 int QRadioData_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
 int QRadioData_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
 bool QRadioData_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+const QMetaObject* QRadioData_staticMetaObject();
 void QRadioData_delete(QRadioData* self);
 
 #ifdef __cplusplus

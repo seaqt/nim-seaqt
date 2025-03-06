@@ -37,6 +37,7 @@ typedef struct QVideoFrame QVideoFrame;
 void QCameraImageCaptureControl_virtbase(QCameraImageCaptureControl* src, QMediaControl** outptr_QMediaControl);
 QMetaObject* QCameraImageCaptureControl_metaObject(const QCameraImageCaptureControl* self);
 void* QCameraImageCaptureControl_metacast(QCameraImageCaptureControl* self, const char* param1);
+int QCameraImageCaptureControl_metacall(QCameraImageCaptureControl* self, int param1, int param2, void** param3);
 struct miqt_string QCameraImageCaptureControl_tr(const char* s);
 struct miqt_string QCameraImageCaptureControl_trUtf8(const char* s);
 bool QCameraImageCaptureControl_isReadyForCapture(const QCameraImageCaptureControl* self);
@@ -62,6 +63,7 @@ struct miqt_string QCameraImageCaptureControl_tr2(const char* s, const char* c);
 struct miqt_string QCameraImageCaptureControl_tr3(const char* s, const char* c, int n);
 struct miqt_string QCameraImageCaptureControl_trUtf82(const char* s, const char* c);
 struct miqt_string QCameraImageCaptureControl_trUtf83(const char* s, const char* c, int n);
+const QMetaObject* QCameraImageCaptureControl_staticMetaObject();
 void QCameraImageCaptureControl_delete(QCameraImageCaptureControl* self);
 
 #ifdef __cplusplus

@@ -99,11 +99,16 @@ QMetaObject__Connection* QMetaObject_connect(QObject* sender, int signal_index, 
 bool QMetaObject_disconnect(QObject* sender, int signal_index, QObject* receiver, int method_index);
 bool QMetaObject_disconnectOne(QObject* sender, int signal_index, QObject* receiver, int method_index);
 void QMetaObject_connectSlotsByName(QObject* o);
+void QMetaObject_activate(QObject* sender, int signal_index, void** argv);
+void QMetaObject_activate2(QObject* sender, QMetaObject* param2, int local_signal_index, void** argv);
+void QMetaObject_activate3(QObject* sender, int signal_offset, int local_signal_index, void** argv);
 bool QMetaObject_invokeMethod(QObject* obj, const char* member, int param3, QGenericReturnArgument* ret);
 bool QMetaObject_invokeMethod2(QObject* obj, const char* member, QGenericReturnArgument* ret);
 bool QMetaObject_invokeMethod3(QObject* obj, const char* member, int type);
 bool QMetaObject_invokeMethod4(QObject* obj, const char* member);
 QObject* QMetaObject_newInstance(const QMetaObject* self);
+int QMetaObject_staticMetacall(const QMetaObject* self, int param1, int param2, void** param3);
+int QMetaObject_metacall(QObject* param1, int param2, int param3, void** param4);
 struct miqt_string QMetaObject_tr3(const QMetaObject* self, const char* s, const char* c, int n);
 QMetaObject__Connection* QMetaObject_connect5(QObject* sender, int signal_index, QObject* receiver, int method_index, int type);
 QMetaObject__Connection* QMetaObject_connect6(QObject* sender, int signal_index, QObject* receiver, int method_index, int type, int* types);

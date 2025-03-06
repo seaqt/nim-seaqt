@@ -50,6 +50,7 @@ type cQMediaGaplessPlaybackControl*{.exportc: "QMediaGaplessPlaybackControl", in
 
 proc fcQMediaGaplessPlaybackControl_metaObject(self: pointer, ): pointer {.importc: "QMediaGaplessPlaybackControl_metaObject".}
 proc fcQMediaGaplessPlaybackControl_metacast(self: pointer, param1: cstring): pointer {.importc: "QMediaGaplessPlaybackControl_metacast".}
+proc fcQMediaGaplessPlaybackControl_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QMediaGaplessPlaybackControl_metacall".}
 proc fcQMediaGaplessPlaybackControl_tr(s: cstring): struct_miqt_string {.importc: "QMediaGaplessPlaybackControl_tr".}
 proc fcQMediaGaplessPlaybackControl_trUtf8(s: cstring): struct_miqt_string {.importc: "QMediaGaplessPlaybackControl_trUtf8".}
 proc fcQMediaGaplessPlaybackControl_nextMedia(self: pointer, ): pointer {.importc: "QMediaGaplessPlaybackControl_nextMedia".}
@@ -67,6 +68,7 @@ proc fcQMediaGaplessPlaybackControl_tr2(s: cstring, c: cstring): struct_miqt_str
 proc fcQMediaGaplessPlaybackControl_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QMediaGaplessPlaybackControl_tr3".}
 proc fcQMediaGaplessPlaybackControl_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QMediaGaplessPlaybackControl_trUtf82".}
 proc fcQMediaGaplessPlaybackControl_trUtf83(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QMediaGaplessPlaybackControl_trUtf83".}
+proc fcQMediaGaplessPlaybackControl_staticMetaObject(): pointer {.importc: "QMediaGaplessPlaybackControl_staticMetaObject".}
 proc fcQMediaGaplessPlaybackControl_delete(self: pointer) {.importc: "QMediaGaplessPlaybackControl_delete".}
 
 
@@ -77,6 +79,9 @@ proc metaObject*(self: gen_qmediagaplessplaybackcontrol_types.QMediaGaplessPlayb
 
 proc metacast*(self: gen_qmediagaplessplaybackcontrol_types.QMediaGaplessPlaybackControl, param1: cstring): pointer =
   fcQMediaGaplessPlaybackControl_metacast(self.h, param1)
+
+proc metacall*(self: gen_qmediagaplessplaybackcontrol_types.QMediaGaplessPlaybackControl, param1: cint, param2: cint, param3: pointer): cint =
+  fcQMediaGaplessPlaybackControl_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qmediagaplessplaybackcontrol_types.QMediaGaplessPlaybackControl, s: cstring): string =
   let v_ms = fcQMediaGaplessPlaybackControl_tr(s)
@@ -175,5 +180,7 @@ proc trUtf8*(_: type gen_qmediagaplessplaybackcontrol_types.QMediaGaplessPlaybac
   c_free(v_ms.data)
   vx_ret
 
+proc staticMetaObject*(_: type gen_qmediagaplessplaybackcontrol_types.QMediaGaplessPlaybackControl): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fcQMediaGaplessPlaybackControl_staticMetaObject())
 proc delete*(self: gen_qmediagaplessplaybackcontrol_types.QMediaGaplessPlaybackControl) =
   fcQMediaGaplessPlaybackControl_delete(self.h)

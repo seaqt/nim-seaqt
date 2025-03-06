@@ -53,6 +53,7 @@ QSGEngine* QSGEngine_new2(QObject* parent);
 void QSGEngine_virtbase(QSGEngine* src, QObject** outptr_QObject);
 QMetaObject* QSGEngine_metaObject(const QSGEngine* self);
 void* QSGEngine_metacast(QSGEngine* self, const char* param1);
+int QSGEngine_metacall(QSGEngine* self, int param1, int param2, void** param3);
 struct miqt_string QSGEngine_tr(const char* s);
 struct miqt_string QSGEngine_trUtf8(const char* s);
 void QSGEngine_invalidate(QSGEngine* self);
@@ -69,6 +70,12 @@ struct miqt_string QSGEngine_trUtf82(const char* s, const char* c);
 struct miqt_string QSGEngine_trUtf83(const char* s, const char* c, int n);
 QSGTexture* QSGEngine_createTextureFromImage2(const QSGEngine* self, QImage* image, int options);
 QSGTexture* QSGEngine_createTextureFromId3(const QSGEngine* self, unsigned int id, QSize* size, int options);
+bool QSGEngine_override_virtual_metaObject(void* self, intptr_t slot);
+QMetaObject* QSGEngine_virtualbase_metaObject(const void* self);
+bool QSGEngine_override_virtual_metacast(void* self, intptr_t slot);
+void* QSGEngine_virtualbase_metacast(void* self, const char* param1);
+bool QSGEngine_override_virtual_metacall(void* self, intptr_t slot);
+int QSGEngine_virtualbase_metacall(void* self, int param1, int param2, void** param3);
 bool QSGEngine_override_virtual_event(void* self, intptr_t slot);
 bool QSGEngine_virtualbase_event(void* self, QEvent* event);
 bool QSGEngine_override_virtual_eventFilter(void* self, intptr_t slot);
@@ -87,6 +94,7 @@ QObject* QSGEngine_protectedbase_sender(bool* _dynamic_cast_ok, const void* self
 int QSGEngine_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
 int QSGEngine_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
 bool QSGEngine_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+const QMetaObject* QSGEngine_staticMetaObject();
 void QSGEngine_delete(QSGEngine* self);
 
 #ifdef __cplusplus

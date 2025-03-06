@@ -36,6 +36,7 @@ QObjectCleanupHandler* QObjectCleanupHandler_new();
 void QObjectCleanupHandler_virtbase(QObjectCleanupHandler* src, QObject** outptr_QObject);
 QMetaObject* QObjectCleanupHandler_metaObject(const QObjectCleanupHandler* self);
 void* QObjectCleanupHandler_metacast(QObjectCleanupHandler* self, const char* param1);
+int QObjectCleanupHandler_metacall(QObjectCleanupHandler* self, int param1, int param2, void** param3);
 struct miqt_string QObjectCleanupHandler_tr(const char* s);
 struct miqt_string QObjectCleanupHandler_trUtf8(const char* s);
 QObject* QObjectCleanupHandler_add(QObjectCleanupHandler* self, QObject* object);
@@ -46,6 +47,12 @@ struct miqt_string QObjectCleanupHandler_tr2(const char* s, const char* c);
 struct miqt_string QObjectCleanupHandler_tr3(const char* s, const char* c, int n);
 struct miqt_string QObjectCleanupHandler_trUtf82(const char* s, const char* c);
 struct miqt_string QObjectCleanupHandler_trUtf83(const char* s, const char* c, int n);
+bool QObjectCleanupHandler_override_virtual_metaObject(void* self, intptr_t slot);
+QMetaObject* QObjectCleanupHandler_virtualbase_metaObject(const void* self);
+bool QObjectCleanupHandler_override_virtual_metacast(void* self, intptr_t slot);
+void* QObjectCleanupHandler_virtualbase_metacast(void* self, const char* param1);
+bool QObjectCleanupHandler_override_virtual_metacall(void* self, intptr_t slot);
+int QObjectCleanupHandler_virtualbase_metacall(void* self, int param1, int param2, void** param3);
 bool QObjectCleanupHandler_override_virtual_event(void* self, intptr_t slot);
 bool QObjectCleanupHandler_virtualbase_event(void* self, QEvent* event);
 bool QObjectCleanupHandler_override_virtual_eventFilter(void* self, intptr_t slot);
@@ -64,6 +71,7 @@ QObject* QObjectCleanupHandler_protectedbase_sender(bool* _dynamic_cast_ok, cons
 int QObjectCleanupHandler_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
 int QObjectCleanupHandler_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
 bool QObjectCleanupHandler_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+const QMetaObject* QObjectCleanupHandler_staticMetaObject();
 void QObjectCleanupHandler_delete(QObjectCleanupHandler* self);
 
 #ifdef __cplusplus

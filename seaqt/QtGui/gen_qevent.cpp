@@ -552,6 +552,7 @@ int QTabletEvent_buttons(const QTabletEvent* self) {
 	return static_cast<int>(_ret);
 }
 
+const QMetaObject* QTabletEvent_staticMetaObject() { return &QTabletEvent::staticMetaObject; }
 void QTabletEvent_delete(QTabletEvent* self) {
 	delete self;
 }
@@ -1547,6 +1548,7 @@ long long QPointingDeviceUniqueId_numericId(const QPointingDeviceUniqueId* self)
 	return static_cast<long long>(_ret);
 }
 
+const QMetaObject* QPointingDeviceUniqueId_staticMetaObject() { return &QPointingDeviceUniqueId::staticMetaObject; }
 void QPointingDeviceUniqueId_delete(QPointingDeviceUniqueId* self) {
 	delete self;
 }

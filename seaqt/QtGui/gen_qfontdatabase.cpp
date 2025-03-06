@@ -336,6 +336,7 @@ bool QFontDatabase_isFixedPitch2(const QFontDatabase* self, struct miqt_string f
 	return self->isFixedPitch(family_QString, style_QString);
 }
 
+const QMetaObject* QFontDatabase_staticMetaObject() { return &QFontDatabase::staticMetaObject; }
 void QFontDatabase_delete(QFontDatabase* self) {
 	delete self;
 }

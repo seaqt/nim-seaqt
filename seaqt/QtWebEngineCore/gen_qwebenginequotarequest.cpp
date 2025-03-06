@@ -44,6 +44,7 @@ bool QWebEngineQuotaRequest_operatorNotEqual(const QWebEngineQuotaRequest* self,
 	return (*self != *that);
 }
 
+const QMetaObject* QWebEngineQuotaRequest_staticMetaObject() { return &QWebEngineQuotaRequest::staticMetaObject; }
 void QWebEngineQuotaRequest_delete(QWebEngineQuotaRequest* self) {
 	delete self;
 }

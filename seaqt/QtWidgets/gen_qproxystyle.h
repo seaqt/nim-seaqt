@@ -68,6 +68,7 @@ QProxyStyle* QProxyStyle_new3(QStyle* style);
 void QProxyStyle_virtbase(QProxyStyle* src, QCommonStyle** outptr_QCommonStyle);
 QMetaObject* QProxyStyle_metaObject(const QProxyStyle* self);
 void* QProxyStyle_metacast(QProxyStyle* self, const char* param1);
+int QProxyStyle_metacall(QProxyStyle* self, int param1, int param2, void** param3);
 struct miqt_string QProxyStyle_tr(const char* s);
 struct miqt_string QProxyStyle_trUtf8(const char* s);
 QStyle* QProxyStyle_baseStyle(const QProxyStyle* self);
@@ -100,6 +101,12 @@ struct miqt_string QProxyStyle_tr2(const char* s, const char* c);
 struct miqt_string QProxyStyle_tr3(const char* s, const char* c, int n);
 struct miqt_string QProxyStyle_trUtf82(const char* s, const char* c);
 struct miqt_string QProxyStyle_trUtf83(const char* s, const char* c, int n);
+bool QProxyStyle_override_virtual_metaObject(void* self, intptr_t slot);
+QMetaObject* QProxyStyle_virtualbase_metaObject(const void* self);
+bool QProxyStyle_override_virtual_metacast(void* self, intptr_t slot);
+void* QProxyStyle_virtualbase_metacast(void* self, const char* param1);
+bool QProxyStyle_override_virtual_metacall(void* self, intptr_t slot);
+int QProxyStyle_virtualbase_metacall(void* self, int param1, int param2, void** param3);
 bool QProxyStyle_override_virtual_drawPrimitive(void* self, intptr_t slot);
 void QProxyStyle_virtualbase_drawPrimitive(const void* self, int element, QStyleOption* option, QPainter* painter, QWidget* widget);
 bool QProxyStyle_override_virtual_drawControl(void* self, intptr_t slot);
@@ -164,6 +171,7 @@ QObject* QProxyStyle_protectedbase_sender(bool* _dynamic_cast_ok, const void* se
 int QProxyStyle_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
 int QProxyStyle_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
 bool QProxyStyle_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+const QMetaObject* QProxyStyle_staticMetaObject();
 void QProxyStyle_delete(QProxyStyle* self);
 
 #ifdef __cplusplus

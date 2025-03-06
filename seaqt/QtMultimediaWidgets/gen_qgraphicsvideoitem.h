@@ -79,6 +79,7 @@ QGraphicsVideoItem* QGraphicsVideoItem_new2(QGraphicsItem* parent);
 void QGraphicsVideoItem_virtbase(QGraphicsVideoItem* src, QGraphicsObject** outptr_QGraphicsObject, QMediaBindableInterface** outptr_QMediaBindableInterface);
 QMetaObject* QGraphicsVideoItem_metaObject(const QGraphicsVideoItem* self);
 void* QGraphicsVideoItem_metacast(QGraphicsVideoItem* self, const char* param1);
+int QGraphicsVideoItem_metacall(QGraphicsVideoItem* self, int param1, int param2, void** param3);
 struct miqt_string QGraphicsVideoItem_tr(const char* s);
 struct miqt_string QGraphicsVideoItem_trUtf8(const char* s);
 QMediaObject* QGraphicsVideoItem_mediaObject(const QGraphicsVideoItem* self);
@@ -101,6 +102,12 @@ struct miqt_string QGraphicsVideoItem_tr2(const char* s, const char* c);
 struct miqt_string QGraphicsVideoItem_tr3(const char* s, const char* c, int n);
 struct miqt_string QGraphicsVideoItem_trUtf82(const char* s, const char* c);
 struct miqt_string QGraphicsVideoItem_trUtf83(const char* s, const char* c, int n);
+bool QGraphicsVideoItem_override_virtual_metaObject(void* self, intptr_t slot);
+QMetaObject* QGraphicsVideoItem_virtualbase_metaObject(const void* self);
+bool QGraphicsVideoItem_override_virtual_metacast(void* self, intptr_t slot);
+void* QGraphicsVideoItem_virtualbase_metacast(void* self, const char* param1);
+bool QGraphicsVideoItem_override_virtual_metacall(void* self, intptr_t slot);
+int QGraphicsVideoItem_virtualbase_metacall(void* self, int param1, int param2, void** param3);
 bool QGraphicsVideoItem_override_virtual_mediaObject(void* self, intptr_t slot);
 QMediaObject* QGraphicsVideoItem_virtualbase_mediaObject(const void* self);
 bool QGraphicsVideoItem_override_virtual_boundingRect(void* self, intptr_t slot);
@@ -197,6 +204,7 @@ bool QGraphicsVideoItem_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, 
 void QGraphicsVideoItem_protectedbase_addToIndex(bool* _dynamic_cast_ok, void* self);
 void QGraphicsVideoItem_protectedbase_removeFromIndex(bool* _dynamic_cast_ok, void* self);
 void QGraphicsVideoItem_protectedbase_prepareGeometryChange(bool* _dynamic_cast_ok, void* self);
+const QMetaObject* QGraphicsVideoItem_staticMetaObject();
 void QGraphicsVideoItem_delete(QGraphicsVideoItem* self);
 
 #ifdef __cplusplus

@@ -30,6 +30,10 @@ void* QVideoRendererControl_metacast(QVideoRendererControl* self, const char* pa
 	return self->qt_metacast(param1);
 }
 
+int QVideoRendererControl_metacall(QVideoRendererControl* self, int param1, int param2, void** param3) {
+	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
+}
+
 struct miqt_string QVideoRendererControl_tr(const char* s) {
 	QString _ret = QVideoRendererControl::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
@@ -104,6 +108,7 @@ struct miqt_string QVideoRendererControl_trUtf83(const char* s, const char* c, i
 	return _ms;
 }
 
+const QMetaObject* QVideoRendererControl_staticMetaObject() { return &QVideoRendererControl::staticMetaObject; }
 void QVideoRendererControl_delete(QVideoRendererControl* self) {
 	delete self;
 }

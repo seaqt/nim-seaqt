@@ -93,6 +93,7 @@ QSlider* QSlider_new4(int orientation, QWidget* parent);
 void QSlider_virtbase(QSlider* src, QAbstractSlider** outptr_QAbstractSlider);
 QMetaObject* QSlider_metaObject(const QSlider* self);
 void* QSlider_metacast(QSlider* self, const char* param1);
+int QSlider_metacall(QSlider* self, int param1, int param2, void** param3);
 struct miqt_string QSlider_tr(const char* s);
 struct miqt_string QSlider_trUtf8(const char* s);
 QSize* QSlider_sizeHint(const QSlider* self);
@@ -110,6 +111,12 @@ struct miqt_string QSlider_tr2(const char* s, const char* c);
 struct miqt_string QSlider_tr3(const char* s, const char* c, int n);
 struct miqt_string QSlider_trUtf82(const char* s, const char* c);
 struct miqt_string QSlider_trUtf83(const char* s, const char* c, int n);
+bool QSlider_override_virtual_metaObject(void* self, intptr_t slot);
+QMetaObject* QSlider_virtualbase_metaObject(const void* self);
+bool QSlider_override_virtual_metacast(void* self, intptr_t slot);
+void* QSlider_virtualbase_metacast(void* self, const char* param1);
+bool QSlider_override_virtual_metacall(void* self, intptr_t slot);
+int QSlider_virtualbase_metacall(void* self, int param1, int param2, void** param3);
 bool QSlider_override_virtual_sizeHint(void* self, intptr_t slot);
 QSize* QSlider_virtualbase_sizeHint(const void* self);
 bool QSlider_override_virtual_minimumSizeHint(void* self, intptr_t slot);
@@ -218,6 +225,7 @@ QObject* QSlider_protectedbase_sender(bool* _dynamic_cast_ok, const void* self);
 int QSlider_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
 int QSlider_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
 bool QSlider_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+const QMetaObject* QSlider_staticMetaObject();
 void QSlider_delete(QSlider* self);
 
 #ifdef __cplusplus

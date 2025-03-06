@@ -59,6 +59,7 @@ QApplication* QApplication_new2(int* argc, char** argv, int param3);
 void QApplication_virtbase(QApplication* src, QGuiApplication** outptr_QGuiApplication);
 QMetaObject* QApplication_metaObject(const QApplication* self);
 void* QApplication_metacast(QApplication* self, const char* param1);
+int QApplication_metacall(QApplication* self, int param1, int param2, void** param3);
 struct miqt_string QApplication_tr(const char* s);
 struct miqt_string QApplication_trUtf8(const char* s);
 QStyle* QApplication_style();
@@ -125,6 +126,12 @@ void QApplication_setPalette2(QPalette* param1, const char* className);
 void QApplication_setFont2(QFont* param1, const char* className);
 void QApplication_alert2(QWidget* widget, int duration);
 void QApplication_setEffectEnabled2(int param1, bool enable);
+bool QApplication_override_virtual_metaObject(void* self, intptr_t slot);
+QMetaObject* QApplication_virtualbase_metaObject(const void* self);
+bool QApplication_override_virtual_metacast(void* self, intptr_t slot);
+void* QApplication_virtualbase_metacast(void* self, const char* param1);
+bool QApplication_override_virtual_metacall(void* self, intptr_t slot);
+int QApplication_virtualbase_metacall(void* self, int param1, int param2, void** param3);
 bool QApplication_override_virtual_notify(void* self, intptr_t slot);
 bool QApplication_virtualbase_notify(void* self, QObject* param1, QEvent* param2);
 bool QApplication_override_virtual_event(void* self, intptr_t slot);
@@ -145,6 +152,7 @@ QObject* QApplication_protectedbase_sender(bool* _dynamic_cast_ok, const void* s
 int QApplication_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
 int QApplication_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
 bool QApplication_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+const QMetaObject* QApplication_staticMetaObject();
 void QApplication_delete(QApplication* self);
 
 #ifdef __cplusplus

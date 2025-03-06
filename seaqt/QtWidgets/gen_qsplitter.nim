@@ -75,6 +75,7 @@ proc fcQSplitter_new3(param1: cint): ptr cQSplitter {.importc: "QSplitter_new3".
 proc fcQSplitter_new4(param1: cint, parent: pointer): ptr cQSplitter {.importc: "QSplitter_new4".}
 proc fcQSplitter_metaObject(self: pointer, ): pointer {.importc: "QSplitter_metaObject".}
 proc fcQSplitter_metacast(self: pointer, param1: cstring): pointer {.importc: "QSplitter_metacast".}
+proc fcQSplitter_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QSplitter_metacall".}
 proc fcQSplitter_tr(s: cstring): struct_miqt_string {.importc: "QSplitter_tr".}
 proc fcQSplitter_trUtf8(s: cstring): struct_miqt_string {.importc: "QSplitter_trUtf8".}
 proc fcQSplitter_addWidget(self: pointer, widget: pointer): void {.importc: "QSplitter_addWidget".}
@@ -110,6 +111,12 @@ proc fcQSplitter_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.impo
 proc fcQSplitter_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QSplitter_trUtf82".}
 proc fcQSplitter_trUtf83(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QSplitter_trUtf83".}
 proc fcQSplitter_setOpaqueResize1(self: pointer, opaque: bool): void {.importc: "QSplitter_setOpaqueResize1".}
+proc fQSplitter_virtualbase_metaObject(self: pointer, ): pointer{.importc: "QSplitter_virtualbase_metaObject".}
+proc fcQSplitter_override_virtual_metaObject(self: pointer, slot: int) {.importc: "QSplitter_override_virtual_metaObject".}
+proc fQSplitter_virtualbase_metacast(self: pointer, param1: cstring): pointer{.importc: "QSplitter_virtualbase_metacast".}
+proc fcQSplitter_override_virtual_metacast(self: pointer, slot: int) {.importc: "QSplitter_override_virtual_metacast".}
+proc fQSplitter_virtualbase_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint{.importc: "QSplitter_virtualbase_metacall".}
+proc fcQSplitter_override_virtual_metacall(self: pointer, slot: int) {.importc: "QSplitter_override_virtual_metacall".}
 proc fQSplitter_virtualbase_sizeHint(self: pointer, ): pointer{.importc: "QSplitter_virtualbase_sizeHint".}
 proc fcQSplitter_override_virtual_sizeHint(self: pointer, slot: int) {.importc: "QSplitter_override_virtual_sizeHint".}
 proc fQSplitter_virtualbase_minimumSizeHint(self: pointer, ): pointer{.importc: "QSplitter_virtualbase_minimumSizeHint".}
@@ -206,10 +213,12 @@ proc fQSplitter_virtualbase_connectNotify(self: pointer, signal: pointer): void{
 proc fcQSplitter_override_virtual_connectNotify(self: pointer, slot: int) {.importc: "QSplitter_override_virtual_connectNotify".}
 proc fQSplitter_virtualbase_disconnectNotify(self: pointer, signal: pointer): void{.importc: "QSplitter_virtualbase_disconnectNotify".}
 proc fcQSplitter_override_virtual_disconnectNotify(self: pointer, slot: int) {.importc: "QSplitter_override_virtual_disconnectNotify".}
+proc fcQSplitter_staticMetaObject(): pointer {.importc: "QSplitter_staticMetaObject".}
 proc fcQSplitter_delete(self: pointer) {.importc: "QSplitter_delete".}
 proc fcQSplitterHandle_new(o: cint, parent: pointer): ptr cQSplitterHandle {.importc: "QSplitterHandle_new".}
 proc fcQSplitterHandle_metaObject(self: pointer, ): pointer {.importc: "QSplitterHandle_metaObject".}
 proc fcQSplitterHandle_metacast(self: pointer, param1: cstring): pointer {.importc: "QSplitterHandle_metacast".}
+proc fcQSplitterHandle_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QSplitterHandle_metacall".}
 proc fcQSplitterHandle_tr(s: cstring): struct_miqt_string {.importc: "QSplitterHandle_tr".}
 proc fcQSplitterHandle_trUtf8(s: cstring): struct_miqt_string {.importc: "QSplitterHandle_trUtf8".}
 proc fcQSplitterHandle_setOrientation(self: pointer, o: cint): void {.importc: "QSplitterHandle_setOrientation".}
@@ -221,6 +230,12 @@ proc fcQSplitterHandle_tr2(s: cstring, c: cstring): struct_miqt_string {.importc
 proc fcQSplitterHandle_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QSplitterHandle_tr3".}
 proc fcQSplitterHandle_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QSplitterHandle_trUtf82".}
 proc fcQSplitterHandle_trUtf83(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QSplitterHandle_trUtf83".}
+proc fQSplitterHandle_virtualbase_metaObject(self: pointer, ): pointer{.importc: "QSplitterHandle_virtualbase_metaObject".}
+proc fcQSplitterHandle_override_virtual_metaObject(self: pointer, slot: int) {.importc: "QSplitterHandle_override_virtual_metaObject".}
+proc fQSplitterHandle_virtualbase_metacast(self: pointer, param1: cstring): pointer{.importc: "QSplitterHandle_virtualbase_metacast".}
+proc fcQSplitterHandle_override_virtual_metacast(self: pointer, slot: int) {.importc: "QSplitterHandle_override_virtual_metacast".}
+proc fQSplitterHandle_virtualbase_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint{.importc: "QSplitterHandle_virtualbase_metacall".}
+proc fcQSplitterHandle_override_virtual_metacall(self: pointer, slot: int) {.importc: "QSplitterHandle_override_virtual_metacall".}
 proc fQSplitterHandle_virtualbase_sizeHint(self: pointer, ): pointer{.importc: "QSplitterHandle_virtualbase_sizeHint".}
 proc fcQSplitterHandle_override_virtual_sizeHint(self: pointer, slot: int) {.importc: "QSplitterHandle_override_virtual_sizeHint".}
 proc fQSplitterHandle_virtualbase_paintEvent(self: pointer, param1: pointer): void{.importc: "QSplitterHandle_virtualbase_paintEvent".}
@@ -315,6 +330,7 @@ proc fQSplitterHandle_virtualbase_connectNotify(self: pointer, signal: pointer):
 proc fcQSplitterHandle_override_virtual_connectNotify(self: pointer, slot: int) {.importc: "QSplitterHandle_override_virtual_connectNotify".}
 proc fQSplitterHandle_virtualbase_disconnectNotify(self: pointer, signal: pointer): void{.importc: "QSplitterHandle_virtualbase_disconnectNotify".}
 proc fcQSplitterHandle_override_virtual_disconnectNotify(self: pointer, slot: int) {.importc: "QSplitterHandle_override_virtual_disconnectNotify".}
+proc fcQSplitterHandle_staticMetaObject(): pointer {.importc: "QSplitterHandle_staticMetaObject".}
 proc fcQSplitterHandle_delete(self: pointer) {.importc: "QSplitterHandle_delete".}
 
 
@@ -337,6 +353,9 @@ proc metaObject*(self: gen_qsplitter_types.QSplitter, ): gen_qobjectdefs_types.Q
 
 proc metacast*(self: gen_qsplitter_types.QSplitter, param1: cstring): pointer =
   fcQSplitter_metacast(self.h, param1)
+
+proc metacall*(self: gen_qsplitter_types.QSplitter, param1: cint, param2: cint, param3: pointer): cint =
+  fcQSplitter_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qsplitter_types.QSplitter, s: cstring): string =
   let v_ms = fcQSplitter_tr(s)
@@ -485,6 +504,65 @@ proc trUtf8*(_: type gen_qsplitter_types.QSplitter, s: cstring, c: cstring, n: c
 proc setOpaqueResize*(self: gen_qsplitter_types.QSplitter, opaque: bool): void =
   fcQSplitter_setOpaqueResize1(self.h, opaque)
 
+proc QSplittermetaObject*(self: gen_qsplitter_types.QSplitter, ): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fQSplitter_virtualbase_metaObject(self.h))
+
+type QSplittermetaObjectProc* = proc(): gen_qobjectdefs_types.QMetaObject
+proc onmetaObject*(self: gen_qsplitter_types.QSplitter, slot: QSplittermetaObjectProc) =
+  # TODO check subclass
+  var tmp = new QSplittermetaObjectProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQSplitter_override_virtual_metaObject(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QSplitter_metaObject(self: ptr cQSplitter, slot: int): pointer {.exportc: "miqt_exec_callback_QSplitter_metaObject ".} =
+  var nimfunc = cast[ptr QSplittermetaObjectProc](cast[pointer](slot))
+
+  let virtualReturn = nimfunc[]( )
+
+  virtualReturn.h
+proc QSplittermetacast*(self: gen_qsplitter_types.QSplitter, param1: cstring): pointer =
+  fQSplitter_virtualbase_metacast(self.h, param1)
+
+type QSplittermetacastProc* = proc(param1: cstring): pointer
+proc onmetacast*(self: gen_qsplitter_types.QSplitter, slot: QSplittermetacastProc) =
+  # TODO check subclass
+  var tmp = new QSplittermetacastProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQSplitter_override_virtual_metacast(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QSplitter_metacast(self: ptr cQSplitter, slot: int, param1: cstring): pointer {.exportc: "miqt_exec_callback_QSplitter_metacast ".} =
+  var nimfunc = cast[ptr QSplittermetacastProc](cast[pointer](slot))
+  let slotval1 = (param1)
+
+
+  let virtualReturn = nimfunc[](slotval1 )
+
+  virtualReturn
+proc QSplittermetacall*(self: gen_qsplitter_types.QSplitter, param1: cint, param2: cint, param3: pointer): cint =
+  fQSplitter_virtualbase_metacall(self.h, cint(param1), param2, param3)
+
+type QSplittermetacallProc* = proc(param1: cint, param2: cint, param3: pointer): cint
+proc onmetacall*(self: gen_qsplitter_types.QSplitter, slot: QSplittermetacallProc) =
+  # TODO check subclass
+  var tmp = new QSplittermetacallProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQSplitter_override_virtual_metacall(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QSplitter_metacall(self: ptr cQSplitter, slot: int, param1: cint, param2: cint, param3: pointer): cint {.exportc: "miqt_exec_callback_QSplitter_metacall ".} =
+  var nimfunc = cast[ptr QSplittermetacallProc](cast[pointer](slot))
+  let slotval1 = cint(param1)
+
+  let slotval2 = param2
+
+  let slotval3 = param3
+
+
+  let virtualReturn = nimfunc[](slotval1, slotval2, slotval3 )
+
+  virtualReturn
 proc QSplittersizeHint*(self: gen_qsplitter_types.QSplitter, ): gen_qsize_types.QSize =
   gen_qsize_types.QSize(h: fQSplitter_virtualbase_sizeHint(self.h))
 
@@ -1326,6 +1404,8 @@ proc miqt_exec_callback_QSplitter_disconnectNotify(self: ptr cQSplitter, slot: i
 
 
   nimfunc[](slotval1)
+proc staticMetaObject*(_: type gen_qsplitter_types.QSplitter): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fcQSplitter_staticMetaObject())
 proc delete*(self: gen_qsplitter_types.QSplitter) =
   fcQSplitter_delete(self.h)
 
@@ -1339,6 +1419,9 @@ proc metaObject*(self: gen_qsplitter_types.QSplitterHandle, ): gen_qobjectdefs_t
 
 proc metacast*(self: gen_qsplitter_types.QSplitterHandle, param1: cstring): pointer =
   fcQSplitterHandle_metacast(self.h, param1)
+
+proc metacall*(self: gen_qsplitter_types.QSplitterHandle, param1: cint, param2: cint, param3: pointer): cint =
+  fcQSplitterHandle_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qsplitter_types.QSplitterHandle, s: cstring): string =
   let v_ms = fcQSplitterHandle_tr(s)
@@ -1391,6 +1474,65 @@ proc trUtf8*(_: type gen_qsplitter_types.QSplitterHandle, s: cstring, c: cstring
   c_free(v_ms.data)
   vx_ret
 
+proc QSplitterHandlemetaObject*(self: gen_qsplitter_types.QSplitterHandle, ): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fQSplitterHandle_virtualbase_metaObject(self.h))
+
+type QSplitterHandlemetaObjectProc* = proc(): gen_qobjectdefs_types.QMetaObject
+proc onmetaObject*(self: gen_qsplitter_types.QSplitterHandle, slot: QSplitterHandlemetaObjectProc) =
+  # TODO check subclass
+  var tmp = new QSplitterHandlemetaObjectProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQSplitterHandle_override_virtual_metaObject(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QSplitterHandle_metaObject(self: ptr cQSplitterHandle, slot: int): pointer {.exportc: "miqt_exec_callback_QSplitterHandle_metaObject ".} =
+  var nimfunc = cast[ptr QSplitterHandlemetaObjectProc](cast[pointer](slot))
+
+  let virtualReturn = nimfunc[]( )
+
+  virtualReturn.h
+proc QSplitterHandlemetacast*(self: gen_qsplitter_types.QSplitterHandle, param1: cstring): pointer =
+  fQSplitterHandle_virtualbase_metacast(self.h, param1)
+
+type QSplitterHandlemetacastProc* = proc(param1: cstring): pointer
+proc onmetacast*(self: gen_qsplitter_types.QSplitterHandle, slot: QSplitterHandlemetacastProc) =
+  # TODO check subclass
+  var tmp = new QSplitterHandlemetacastProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQSplitterHandle_override_virtual_metacast(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QSplitterHandle_metacast(self: ptr cQSplitterHandle, slot: int, param1: cstring): pointer {.exportc: "miqt_exec_callback_QSplitterHandle_metacast ".} =
+  var nimfunc = cast[ptr QSplitterHandlemetacastProc](cast[pointer](slot))
+  let slotval1 = (param1)
+
+
+  let virtualReturn = nimfunc[](slotval1 )
+
+  virtualReturn
+proc QSplitterHandlemetacall*(self: gen_qsplitter_types.QSplitterHandle, param1: cint, param2: cint, param3: pointer): cint =
+  fQSplitterHandle_virtualbase_metacall(self.h, cint(param1), param2, param3)
+
+type QSplitterHandlemetacallProc* = proc(param1: cint, param2: cint, param3: pointer): cint
+proc onmetacall*(self: gen_qsplitter_types.QSplitterHandle, slot: QSplitterHandlemetacallProc) =
+  # TODO check subclass
+  var tmp = new QSplitterHandlemetacallProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQSplitterHandle_override_virtual_metacall(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QSplitterHandle_metacall(self: ptr cQSplitterHandle, slot: int, param1: cint, param2: cint, param3: pointer): cint {.exportc: "miqt_exec_callback_QSplitterHandle_metacall ".} =
+  var nimfunc = cast[ptr QSplitterHandlemetacallProc](cast[pointer](slot))
+  let slotval1 = cint(param1)
+
+  let slotval2 = param2
+
+  let slotval3 = param3
+
+
+  let virtualReturn = nimfunc[](slotval1, slotval2, slotval3 )
+
+  virtualReturn
 proc QSplitterHandlesizeHint*(self: gen_qsplitter_types.QSplitterHandle, ): gen_qsize_types.QSize =
   gen_qsize_types.QSize(h: fQSplitterHandle_virtualbase_sizeHint(self.h))
 
@@ -2215,5 +2357,7 @@ proc miqt_exec_callback_QSplitterHandle_disconnectNotify(self: ptr cQSplitterHan
 
 
   nimfunc[](slotval1)
+proc staticMetaObject*(_: type gen_qsplitter_types.QSplitterHandle): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fcQSplitterHandle_staticMetaObject())
 proc delete*(self: gen_qsplitter_types.QSplitterHandle) =
   fcQSplitterHandle_delete(self.h)

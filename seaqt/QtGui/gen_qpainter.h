@@ -323,6 +323,7 @@ void QPainter_setRenderHint2(QPainter* self, int hint, bool on);
 void QPainter_setRenderHints2(QPainter* self, int hints, bool on);
 void QPainter_setRedirected3(QPaintDevice* device, QPaintDevice* replacement, QPoint* offset);
 QPaintDevice* QPainter_redirected2(QPaintDevice* device, QPoint* offset);
+const QMetaObject* QPainter_staticMetaObject();
 void QPainter_delete(QPainter* self);
 
 QPainter__PixmapFragment* QPainter__PixmapFragment_create(QPointF* pos, QRectF* sourceRect);

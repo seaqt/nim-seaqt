@@ -41,6 +41,7 @@ QThreadPool* QThreadPool_new2(QObject* parent);
 void QThreadPool_virtbase(QThreadPool* src, QObject** outptr_QObject);
 QMetaObject* QThreadPool_metaObject(const QThreadPool* self);
 void* QThreadPool_metacast(QThreadPool* self, const char* param1);
+int QThreadPool_metacall(QThreadPool* self, int param1, int param2, void** param3);
 struct miqt_string QThreadPool_tr(const char* s);
 struct miqt_string QThreadPool_trUtf8(const char* s);
 QThreadPool* QThreadPool_globalInstance();
@@ -66,6 +67,12 @@ struct miqt_string QThreadPool_trUtf82(const char* s, const char* c);
 struct miqt_string QThreadPool_trUtf83(const char* s, const char* c, int n);
 void QThreadPool_start2(QThreadPool* self, QRunnable* runnable, int priority);
 bool QThreadPool_waitForDone1(QThreadPool* self, int msecs);
+bool QThreadPool_override_virtual_metaObject(void* self, intptr_t slot);
+QMetaObject* QThreadPool_virtualbase_metaObject(const void* self);
+bool QThreadPool_override_virtual_metacast(void* self, intptr_t slot);
+void* QThreadPool_virtualbase_metacast(void* self, const char* param1);
+bool QThreadPool_override_virtual_metacall(void* self, intptr_t slot);
+int QThreadPool_virtualbase_metacall(void* self, int param1, int param2, void** param3);
 bool QThreadPool_override_virtual_event(void* self, intptr_t slot);
 bool QThreadPool_virtualbase_event(void* self, QEvent* event);
 bool QThreadPool_override_virtual_eventFilter(void* self, intptr_t slot);
@@ -84,6 +91,7 @@ QObject* QThreadPool_protectedbase_sender(bool* _dynamic_cast_ok, const void* se
 int QThreadPool_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
 int QThreadPool_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
 bool QThreadPool_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+const QMetaObject* QThreadPool_staticMetaObject();
 void QThreadPool_delete(QThreadPool* self);
 
 #ifdef __cplusplus

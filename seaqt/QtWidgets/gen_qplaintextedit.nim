@@ -108,6 +108,7 @@ proc fcQPlainTextEdit_new3(text: struct_miqt_string): ptr cQPlainTextEdit {.impo
 proc fcQPlainTextEdit_new4(text: struct_miqt_string, parent: pointer): ptr cQPlainTextEdit {.importc: "QPlainTextEdit_new4".}
 proc fcQPlainTextEdit_metaObject(self: pointer, ): pointer {.importc: "QPlainTextEdit_metaObject".}
 proc fcQPlainTextEdit_metacast(self: pointer, param1: cstring): pointer {.importc: "QPlainTextEdit_metacast".}
+proc fcQPlainTextEdit_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QPlainTextEdit_metacall".}
 proc fcQPlainTextEdit_tr(s: cstring): struct_miqt_string {.importc: "QPlainTextEdit_tr".}
 proc fcQPlainTextEdit_trUtf8(s: cstring): struct_miqt_string {.importc: "QPlainTextEdit_trUtf8".}
 proc fcQPlainTextEdit_setDocument(self: pointer, document: pointer): void {.importc: "QPlainTextEdit_setDocument".}
@@ -209,6 +210,12 @@ proc fcQPlainTextEdit_find24(self: pointer, exp: pointer, options: cint): bool {
 proc fcQPlainTextEdit_moveCursor2(self: pointer, operation: cint, mode: cint): void {.importc: "QPlainTextEdit_moveCursor2".}
 proc fcQPlainTextEdit_zoomIn1(self: pointer, range: cint): void {.importc: "QPlainTextEdit_zoomIn1".}
 proc fcQPlainTextEdit_zoomOut1(self: pointer, range: cint): void {.importc: "QPlainTextEdit_zoomOut1".}
+proc fQPlainTextEdit_virtualbase_metaObject(self: pointer, ): pointer{.importc: "QPlainTextEdit_virtualbase_metaObject".}
+proc fcQPlainTextEdit_override_virtual_metaObject(self: pointer, slot: int) {.importc: "QPlainTextEdit_override_virtual_metaObject".}
+proc fQPlainTextEdit_virtualbase_metacast(self: pointer, param1: cstring): pointer{.importc: "QPlainTextEdit_virtualbase_metacast".}
+proc fcQPlainTextEdit_override_virtual_metacast(self: pointer, slot: int) {.importc: "QPlainTextEdit_override_virtual_metacast".}
+proc fQPlainTextEdit_virtualbase_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint{.importc: "QPlainTextEdit_virtualbase_metacall".}
+proc fcQPlainTextEdit_override_virtual_metacall(self: pointer, slot: int) {.importc: "QPlainTextEdit_override_virtual_metacall".}
 proc fQPlainTextEdit_virtualbase_loadResource(self: pointer, typeVal: cint, name: pointer): pointer{.importc: "QPlainTextEdit_virtualbase_loadResource".}
 proc fcQPlainTextEdit_override_virtual_loadResource(self: pointer, slot: int) {.importc: "QPlainTextEdit_override_virtual_loadResource".}
 proc fQPlainTextEdit_virtualbase_inputMethodQuery(self: pointer, property: cint): pointer{.importc: "QPlainTextEdit_virtualbase_inputMethodQuery".}
@@ -321,10 +328,12 @@ proc fQPlainTextEdit_virtualbase_connectNotify(self: pointer, signal: pointer): 
 proc fcQPlainTextEdit_override_virtual_connectNotify(self: pointer, slot: int) {.importc: "QPlainTextEdit_override_virtual_connectNotify".}
 proc fQPlainTextEdit_virtualbase_disconnectNotify(self: pointer, signal: pointer): void{.importc: "QPlainTextEdit_virtualbase_disconnectNotify".}
 proc fcQPlainTextEdit_override_virtual_disconnectNotify(self: pointer, slot: int) {.importc: "QPlainTextEdit_override_virtual_disconnectNotify".}
+proc fcQPlainTextEdit_staticMetaObject(): pointer {.importc: "QPlainTextEdit_staticMetaObject".}
 proc fcQPlainTextEdit_delete(self: pointer) {.importc: "QPlainTextEdit_delete".}
 proc fcQPlainTextDocumentLayout_new(document: pointer): ptr cQPlainTextDocumentLayout {.importc: "QPlainTextDocumentLayout_new".}
 proc fcQPlainTextDocumentLayout_metaObject(self: pointer, ): pointer {.importc: "QPlainTextDocumentLayout_metaObject".}
 proc fcQPlainTextDocumentLayout_metacast(self: pointer, param1: cstring): pointer {.importc: "QPlainTextDocumentLayout_metacast".}
+proc fcQPlainTextDocumentLayout_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QPlainTextDocumentLayout_metacall".}
 proc fcQPlainTextDocumentLayout_tr(s: cstring): struct_miqt_string {.importc: "QPlainTextDocumentLayout_tr".}
 proc fcQPlainTextDocumentLayout_trUtf8(s: cstring): struct_miqt_string {.importc: "QPlainTextDocumentLayout_trUtf8".}
 proc fcQPlainTextDocumentLayout_draw(self: pointer, param1: pointer, param2: pointer): void {.importc: "QPlainTextDocumentLayout_draw".}
@@ -341,6 +350,12 @@ proc fcQPlainTextDocumentLayout_tr2(s: cstring, c: cstring): struct_miqt_string 
 proc fcQPlainTextDocumentLayout_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QPlainTextDocumentLayout_tr3".}
 proc fcQPlainTextDocumentLayout_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QPlainTextDocumentLayout_trUtf82".}
 proc fcQPlainTextDocumentLayout_trUtf83(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QPlainTextDocumentLayout_trUtf83".}
+proc fQPlainTextDocumentLayout_virtualbase_metaObject(self: pointer, ): pointer{.importc: "QPlainTextDocumentLayout_virtualbase_metaObject".}
+proc fcQPlainTextDocumentLayout_override_virtual_metaObject(self: pointer, slot: int) {.importc: "QPlainTextDocumentLayout_override_virtual_metaObject".}
+proc fQPlainTextDocumentLayout_virtualbase_metacast(self: pointer, param1: cstring): pointer{.importc: "QPlainTextDocumentLayout_virtualbase_metacast".}
+proc fcQPlainTextDocumentLayout_override_virtual_metacast(self: pointer, slot: int) {.importc: "QPlainTextDocumentLayout_override_virtual_metacast".}
+proc fQPlainTextDocumentLayout_virtualbase_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint{.importc: "QPlainTextDocumentLayout_virtualbase_metacall".}
+proc fcQPlainTextDocumentLayout_override_virtual_metacall(self: pointer, slot: int) {.importc: "QPlainTextDocumentLayout_override_virtual_metacall".}
 proc fQPlainTextDocumentLayout_virtualbase_draw(self: pointer, param1: pointer, param2: pointer): void{.importc: "QPlainTextDocumentLayout_virtualbase_draw".}
 proc fcQPlainTextDocumentLayout_override_virtual_draw(self: pointer, slot: int) {.importc: "QPlainTextDocumentLayout_override_virtual_draw".}
 proc fQPlainTextDocumentLayout_virtualbase_hitTest(self: pointer, param1: pointer, param2: cint): cint{.importc: "QPlainTextDocumentLayout_virtualbase_hitTest".}
@@ -375,6 +390,7 @@ proc fQPlainTextDocumentLayout_virtualbase_connectNotify(self: pointer, signal: 
 proc fcQPlainTextDocumentLayout_override_virtual_connectNotify(self: pointer, slot: int) {.importc: "QPlainTextDocumentLayout_override_virtual_connectNotify".}
 proc fQPlainTextDocumentLayout_virtualbase_disconnectNotify(self: pointer, signal: pointer): void{.importc: "QPlainTextDocumentLayout_virtualbase_disconnectNotify".}
 proc fcQPlainTextDocumentLayout_override_virtual_disconnectNotify(self: pointer, slot: int) {.importc: "QPlainTextDocumentLayout_override_virtual_disconnectNotify".}
+proc fcQPlainTextDocumentLayout_staticMetaObject(): pointer {.importc: "QPlainTextDocumentLayout_staticMetaObject".}
 proc fcQPlainTextDocumentLayout_delete(self: pointer) {.importc: "QPlainTextDocumentLayout_delete".}
 
 
@@ -397,6 +413,9 @@ proc metaObject*(self: gen_qplaintextedit_types.QPlainTextEdit, ): gen_qobjectde
 
 proc metacast*(self: gen_qplaintextedit_types.QPlainTextEdit, param1: cstring): pointer =
   fcQPlainTextEdit_metacast(self.h, param1)
+
+proc metacall*(self: gen_qplaintextedit_types.QPlainTextEdit, param1: cint, param2: cint, param3: pointer): cint =
+  fcQPlainTextEdit_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qplaintextedit_types.QPlainTextEdit, s: cstring): string =
   let v_ms = fcQPlainTextEdit_tr(s)
@@ -826,6 +845,65 @@ proc zoomIn*(self: gen_qplaintextedit_types.QPlainTextEdit, range: cint): void =
 proc zoomOut*(self: gen_qplaintextedit_types.QPlainTextEdit, range: cint): void =
   fcQPlainTextEdit_zoomOut1(self.h, range)
 
+proc QPlainTextEditmetaObject*(self: gen_qplaintextedit_types.QPlainTextEdit, ): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fQPlainTextEdit_virtualbase_metaObject(self.h))
+
+type QPlainTextEditmetaObjectProc* = proc(): gen_qobjectdefs_types.QMetaObject
+proc onmetaObject*(self: gen_qplaintextedit_types.QPlainTextEdit, slot: QPlainTextEditmetaObjectProc) =
+  # TODO check subclass
+  var tmp = new QPlainTextEditmetaObjectProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQPlainTextEdit_override_virtual_metaObject(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QPlainTextEdit_metaObject(self: ptr cQPlainTextEdit, slot: int): pointer {.exportc: "miqt_exec_callback_QPlainTextEdit_metaObject ".} =
+  var nimfunc = cast[ptr QPlainTextEditmetaObjectProc](cast[pointer](slot))
+
+  let virtualReturn = nimfunc[]( )
+
+  virtualReturn.h
+proc QPlainTextEditmetacast*(self: gen_qplaintextedit_types.QPlainTextEdit, param1: cstring): pointer =
+  fQPlainTextEdit_virtualbase_metacast(self.h, param1)
+
+type QPlainTextEditmetacastProc* = proc(param1: cstring): pointer
+proc onmetacast*(self: gen_qplaintextedit_types.QPlainTextEdit, slot: QPlainTextEditmetacastProc) =
+  # TODO check subclass
+  var tmp = new QPlainTextEditmetacastProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQPlainTextEdit_override_virtual_metacast(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QPlainTextEdit_metacast(self: ptr cQPlainTextEdit, slot: int, param1: cstring): pointer {.exportc: "miqt_exec_callback_QPlainTextEdit_metacast ".} =
+  var nimfunc = cast[ptr QPlainTextEditmetacastProc](cast[pointer](slot))
+  let slotval1 = (param1)
+
+
+  let virtualReturn = nimfunc[](slotval1 )
+
+  virtualReturn
+proc QPlainTextEditmetacall*(self: gen_qplaintextedit_types.QPlainTextEdit, param1: cint, param2: cint, param3: pointer): cint =
+  fQPlainTextEdit_virtualbase_metacall(self.h, cint(param1), param2, param3)
+
+type QPlainTextEditmetacallProc* = proc(param1: cint, param2: cint, param3: pointer): cint
+proc onmetacall*(self: gen_qplaintextedit_types.QPlainTextEdit, slot: QPlainTextEditmetacallProc) =
+  # TODO check subclass
+  var tmp = new QPlainTextEditmetacallProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQPlainTextEdit_override_virtual_metacall(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QPlainTextEdit_metacall(self: ptr cQPlainTextEdit, slot: int, param1: cint, param2: cint, param3: pointer): cint {.exportc: "miqt_exec_callback_QPlainTextEdit_metacall ".} =
+  var nimfunc = cast[ptr QPlainTextEditmetacallProc](cast[pointer](slot))
+  let slotval1 = cint(param1)
+
+  let slotval2 = param2
+
+  let slotval3 = param3
+
+
+  let virtualReturn = nimfunc[](slotval1, slotval2, slotval3 )
+
+  virtualReturn
 proc QPlainTextEditloadResource*(self: gen_qplaintextedit_types.QPlainTextEdit, typeVal: cint, name: gen_qurl_types.QUrl): gen_qvariant_types.QVariant =
   gen_qvariant_types.QVariant(h: fQPlainTextEdit_virtualbase_loadResource(self.h, typeVal, name.h))
 
@@ -1813,6 +1891,8 @@ proc miqt_exec_callback_QPlainTextEdit_disconnectNotify(self: ptr cQPlainTextEdi
 
 
   nimfunc[](slotval1)
+proc staticMetaObject*(_: type gen_qplaintextedit_types.QPlainTextEdit): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fcQPlainTextEdit_staticMetaObject())
 proc delete*(self: gen_qplaintextedit_types.QPlainTextEdit) =
   fcQPlainTextEdit_delete(self.h)
 
@@ -1826,6 +1906,9 @@ proc metaObject*(self: gen_qplaintextedit_types.QPlainTextDocumentLayout, ): gen
 
 proc metacast*(self: gen_qplaintextedit_types.QPlainTextDocumentLayout, param1: cstring): pointer =
   fcQPlainTextDocumentLayout_metacast(self.h, param1)
+
+proc metacall*(self: gen_qplaintextedit_types.QPlainTextDocumentLayout, param1: cint, param2: cint, param3: pointer): cint =
+  fcQPlainTextDocumentLayout_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qplaintextedit_types.QPlainTextDocumentLayout, s: cstring): string =
   let v_ms = fcQPlainTextDocumentLayout_tr(s)
@@ -1893,6 +1976,65 @@ proc trUtf8*(_: type gen_qplaintextedit_types.QPlainTextDocumentLayout, s: cstri
   c_free(v_ms.data)
   vx_ret
 
+proc QPlainTextDocumentLayoutmetaObject*(self: gen_qplaintextedit_types.QPlainTextDocumentLayout, ): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fQPlainTextDocumentLayout_virtualbase_metaObject(self.h))
+
+type QPlainTextDocumentLayoutmetaObjectProc* = proc(): gen_qobjectdefs_types.QMetaObject
+proc onmetaObject*(self: gen_qplaintextedit_types.QPlainTextDocumentLayout, slot: QPlainTextDocumentLayoutmetaObjectProc) =
+  # TODO check subclass
+  var tmp = new QPlainTextDocumentLayoutmetaObjectProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQPlainTextDocumentLayout_override_virtual_metaObject(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QPlainTextDocumentLayout_metaObject(self: ptr cQPlainTextDocumentLayout, slot: int): pointer {.exportc: "miqt_exec_callback_QPlainTextDocumentLayout_metaObject ".} =
+  var nimfunc = cast[ptr QPlainTextDocumentLayoutmetaObjectProc](cast[pointer](slot))
+
+  let virtualReturn = nimfunc[]( )
+
+  virtualReturn.h
+proc QPlainTextDocumentLayoutmetacast*(self: gen_qplaintextedit_types.QPlainTextDocumentLayout, param1: cstring): pointer =
+  fQPlainTextDocumentLayout_virtualbase_metacast(self.h, param1)
+
+type QPlainTextDocumentLayoutmetacastProc* = proc(param1: cstring): pointer
+proc onmetacast*(self: gen_qplaintextedit_types.QPlainTextDocumentLayout, slot: QPlainTextDocumentLayoutmetacastProc) =
+  # TODO check subclass
+  var tmp = new QPlainTextDocumentLayoutmetacastProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQPlainTextDocumentLayout_override_virtual_metacast(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QPlainTextDocumentLayout_metacast(self: ptr cQPlainTextDocumentLayout, slot: int, param1: cstring): pointer {.exportc: "miqt_exec_callback_QPlainTextDocumentLayout_metacast ".} =
+  var nimfunc = cast[ptr QPlainTextDocumentLayoutmetacastProc](cast[pointer](slot))
+  let slotval1 = (param1)
+
+
+  let virtualReturn = nimfunc[](slotval1 )
+
+  virtualReturn
+proc QPlainTextDocumentLayoutmetacall*(self: gen_qplaintextedit_types.QPlainTextDocumentLayout, param1: cint, param2: cint, param3: pointer): cint =
+  fQPlainTextDocumentLayout_virtualbase_metacall(self.h, cint(param1), param2, param3)
+
+type QPlainTextDocumentLayoutmetacallProc* = proc(param1: cint, param2: cint, param3: pointer): cint
+proc onmetacall*(self: gen_qplaintextedit_types.QPlainTextDocumentLayout, slot: QPlainTextDocumentLayoutmetacallProc) =
+  # TODO check subclass
+  var tmp = new QPlainTextDocumentLayoutmetacallProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQPlainTextDocumentLayout_override_virtual_metacall(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QPlainTextDocumentLayout_metacall(self: ptr cQPlainTextDocumentLayout, slot: int, param1: cint, param2: cint, param3: pointer): cint {.exportc: "miqt_exec_callback_QPlainTextDocumentLayout_metacall ".} =
+  var nimfunc = cast[ptr QPlainTextDocumentLayoutmetacallProc](cast[pointer](slot))
+  let slotval1 = cint(param1)
+
+  let slotval2 = param2
+
+  let slotval3 = param3
+
+
+  let virtualReturn = nimfunc[](slotval1, slotval2, slotval3 )
+
+  virtualReturn
 proc QPlainTextDocumentLayoutdraw*(self: gen_qplaintextedit_types.QPlainTextDocumentLayout, param1: gen_qpainter_types.QPainter, param2: gen_qabstracttextdocumentlayout_types.QAbstractTextDocumentLayoutPaintContext): void =
   fQPlainTextDocumentLayout_virtualbase_draw(self.h, param1.h, param2.h)
 
@@ -2218,5 +2360,7 @@ proc miqt_exec_callback_QPlainTextDocumentLayout_disconnectNotify(self: ptr cQPl
 
 
   nimfunc[](slotval1)
+proc staticMetaObject*(_: type gen_qplaintextedit_types.QPlainTextDocumentLayout): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fcQPlainTextDocumentLayout_staticMetaObject())
 proc delete*(self: gen_qplaintextedit_types.QPlainTextDocumentLayout) =
   fcQPlainTextDocumentLayout_delete(self.h)

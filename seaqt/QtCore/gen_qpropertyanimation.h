@@ -45,6 +45,7 @@ QPropertyAnimation* QPropertyAnimation_new4(QObject* target, struct miqt_string 
 void QPropertyAnimation_virtbase(QPropertyAnimation* src, QVariantAnimation** outptr_QVariantAnimation);
 QMetaObject* QPropertyAnimation_metaObject(const QPropertyAnimation* self);
 void* QPropertyAnimation_metacast(QPropertyAnimation* self, const char* param1);
+int QPropertyAnimation_metacall(QPropertyAnimation* self, int param1, int param2, void** param3);
 struct miqt_string QPropertyAnimation_tr(const char* s);
 struct miqt_string QPropertyAnimation_trUtf8(const char* s);
 QObject* QPropertyAnimation_targetObject(const QPropertyAnimation* self);
@@ -58,6 +59,12 @@ struct miqt_string QPropertyAnimation_tr2(const char* s, const char* c);
 struct miqt_string QPropertyAnimation_tr3(const char* s, const char* c, int n);
 struct miqt_string QPropertyAnimation_trUtf82(const char* s, const char* c);
 struct miqt_string QPropertyAnimation_trUtf83(const char* s, const char* c, int n);
+bool QPropertyAnimation_override_virtual_metaObject(void* self, intptr_t slot);
+QMetaObject* QPropertyAnimation_virtualbase_metaObject(const void* self);
+bool QPropertyAnimation_override_virtual_metacast(void* self, intptr_t slot);
+void* QPropertyAnimation_virtualbase_metacast(void* self, const char* param1);
+bool QPropertyAnimation_override_virtual_metacall(void* self, intptr_t slot);
+int QPropertyAnimation_virtualbase_metacall(void* self, int param1, int param2, void** param3);
 bool QPropertyAnimation_override_virtual_event(void* self, intptr_t slot);
 bool QPropertyAnimation_virtualbase_event(void* self, QEvent* event);
 bool QPropertyAnimation_override_virtual_updateCurrentValue(void* self, intptr_t slot);
@@ -88,6 +95,7 @@ QObject* QPropertyAnimation_protectedbase_sender(bool* _dynamic_cast_ok, const v
 int QPropertyAnimation_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
 int QPropertyAnimation_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
 bool QPropertyAnimation_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+const QMetaObject* QPropertyAnimation_staticMetaObject();
 void QPropertyAnimation_delete(QPropertyAnimation* self);
 
 #ifdef __cplusplus

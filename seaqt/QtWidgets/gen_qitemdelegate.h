@@ -67,6 +67,7 @@ QItemDelegate* QItemDelegate_new2(QObject* parent);
 void QItemDelegate_virtbase(QItemDelegate* src, QAbstractItemDelegate** outptr_QAbstractItemDelegate);
 QMetaObject* QItemDelegate_metaObject(const QItemDelegate* self);
 void* QItemDelegate_metacast(QItemDelegate* self, const char* param1);
+int QItemDelegate_metacall(QItemDelegate* self, int param1, int param2, void** param3);
 struct miqt_string QItemDelegate_tr(const char* s);
 struct miqt_string QItemDelegate_trUtf8(const char* s);
 bool QItemDelegate_hasClipping(const QItemDelegate* self);
@@ -89,6 +90,12 @@ struct miqt_string QItemDelegate_tr2(const char* s, const char* c);
 struct miqt_string QItemDelegate_tr3(const char* s, const char* c, int n);
 struct miqt_string QItemDelegate_trUtf82(const char* s, const char* c);
 struct miqt_string QItemDelegate_trUtf83(const char* s, const char* c, int n);
+bool QItemDelegate_override_virtual_metaObject(void* self, intptr_t slot);
+QMetaObject* QItemDelegate_virtualbase_metaObject(const void* self);
+bool QItemDelegate_override_virtual_metacast(void* self, intptr_t slot);
+void* QItemDelegate_virtualbase_metacast(void* self, const char* param1);
+bool QItemDelegate_override_virtual_metacall(void* self, intptr_t slot);
+int QItemDelegate_virtualbase_metacall(void* self, int param1, int param2, void** param3);
 bool QItemDelegate_override_virtual_paint(void* self, intptr_t slot);
 void QItemDelegate_virtualbase_paint(const void* self, QPainter* painter, QStyleOptionViewItem* option, QModelIndex* index);
 bool QItemDelegate_override_virtual_sizeHint(void* self, intptr_t slot);
@@ -143,6 +150,7 @@ QObject* QItemDelegate_protectedbase_sender(bool* _dynamic_cast_ok, const void* 
 int QItemDelegate_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
 int QItemDelegate_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
 bool QItemDelegate_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+const QMetaObject* QItemDelegate_staticMetaObject();
 void QItemDelegate_delete(QItemDelegate* self);
 
 #ifdef __cplusplus

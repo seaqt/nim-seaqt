@@ -20,6 +20,9 @@ extern "C" {
 
 void miqt_exec_callback_QAudioOutput_stateChanged(intptr_t, int);
 void miqt_exec_callback_QAudioOutput_notify(intptr_t);
+QMetaObject* miqt_exec_callback_QAudioOutput_metaObject(const QAudioOutput*, intptr_t);
+void* miqt_exec_callback_QAudioOutput_metacast(QAudioOutput*, intptr_t, const char*);
+int miqt_exec_callback_QAudioOutput_metacall(QAudioOutput*, intptr_t, int, int, void**);
 bool miqt_exec_callback_QAudioOutput_event(QAudioOutput*, intptr_t, QEvent*);
 bool miqt_exec_callback_QAudioOutput_eventFilter(QAudioOutput*, intptr_t, QObject*, QEvent*);
 void miqt_exec_callback_QAudioOutput_timerEvent(QAudioOutput*, intptr_t, QTimerEvent*);
@@ -42,6 +45,62 @@ public:
 	VirtualQAudioOutput(const QAudioDeviceInfo& audioDeviceInfo, const QAudioFormat& format, QObject* parent): QAudioOutput(audioDeviceInfo, format, parent) {};
 
 	virtual ~VirtualQAudioOutput() override = default;
+
+	// cgo.Handle value for overwritten implementation
+	intptr_t handle__metaObject = 0;
+
+	// Subclass to allow providing a Go implementation
+	virtual const QMetaObject* metaObject() const override {
+		if (handle__metaObject == 0) {
+			return QAudioOutput::metaObject();
+		}
+		
+
+		QMetaObject* callback_return_value = miqt_exec_callback_QAudioOutput_metaObject(this, handle__metaObject);
+
+		return callback_return_value;
+	}
+
+	friend QMetaObject* QAudioOutput_virtualbase_metaObject(const void* self);
+
+	// cgo.Handle value for overwritten implementation
+	intptr_t handle__metacast = 0;
+
+	// Subclass to allow providing a Go implementation
+	virtual void* qt_metacast(const char* param1) override {
+		if (handle__metacast == 0) {
+			return QAudioOutput::qt_metacast(param1);
+		}
+		
+		const char* sigval1 = (const char*) param1;
+
+		void* callback_return_value = miqt_exec_callback_QAudioOutput_metacast(this, handle__metacast, sigval1);
+
+		return callback_return_value;
+	}
+
+	friend void* QAudioOutput_virtualbase_metacast(void* self, const char* param1);
+
+	// cgo.Handle value for overwritten implementation
+	intptr_t handle__metacall = 0;
+
+	// Subclass to allow providing a Go implementation
+	virtual int qt_metacall(QMetaObject::Call param1, int param2, void** param3) override {
+		if (handle__metacall == 0) {
+			return QAudioOutput::qt_metacall(param1, param2, param3);
+		}
+		
+		QMetaObject::Call param1_ret = param1;
+		int sigval1 = static_cast<int>(param1_ret);
+		int sigval2 = param2;
+		void** sigval3 = param3;
+
+		int callback_return_value = miqt_exec_callback_QAudioOutput_metacall(this, handle__metacall, sigval1, sigval2, sigval3);
+
+		return static_cast<int>(callback_return_value);
+	}
+
+	friend int QAudioOutput_virtualbase_metacall(void* self, int param1, int param2, void** param3);
 
 	// cgo.Handle value for overwritten implementation
 	intptr_t handle__event = 0;
@@ -220,6 +279,10 @@ QMetaObject* QAudioOutput_metaObject(const QAudioOutput* self) {
 
 void* QAudioOutput_metacast(QAudioOutput* self, const char* param1) {
 	return self->qt_metacast(param1);
+}
+
+int QAudioOutput_metacall(QAudioOutput* self, int param1, int param2, void** param3) {
+	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
 struct miqt_string QAudioOutput_tr(const char* s) {
@@ -407,6 +470,54 @@ struct miqt_string QAudioOutput_trUtf83(const char* s, const char* c, int n) {
 	return _ms;
 }
 
+bool QAudioOutput_override_virtual_metaObject(void* self, intptr_t slot) {
+	VirtualQAudioOutput* self_cast = dynamic_cast<VirtualQAudioOutput*>( (QAudioOutput*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+	
+	self_cast->handle__metaObject = slot;
+	return true;
+}
+
+QMetaObject* QAudioOutput_virtualbase_metaObject(const void* self) {
+
+	return (QMetaObject*) ( (const VirtualQAudioOutput*)(self) )->QAudioOutput::metaObject();
+
+}
+
+bool QAudioOutput_override_virtual_metacast(void* self, intptr_t slot) {
+	VirtualQAudioOutput* self_cast = dynamic_cast<VirtualQAudioOutput*>( (QAudioOutput*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+	
+	self_cast->handle__metacast = slot;
+	return true;
+}
+
+void* QAudioOutput_virtualbase_metacast(void* self, const char* param1) {
+
+	return ( (VirtualQAudioOutput*)(self) )->QAudioOutput::qt_metacast(param1);
+
+}
+
+bool QAudioOutput_override_virtual_metacall(void* self, intptr_t slot) {
+	VirtualQAudioOutput* self_cast = dynamic_cast<VirtualQAudioOutput*>( (QAudioOutput*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+	
+	self_cast->handle__metacall = slot;
+	return true;
+}
+
+int QAudioOutput_virtualbase_metacall(void* self, int param1, int param2, void** param3) {
+
+	return ( (VirtualQAudioOutput*)(self) )->QAudioOutput::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
+
+}
+
 bool QAudioOutput_override_virtual_event(void* self, intptr_t slot) {
 	VirtualQAudioOutput* self_cast = dynamic_cast<VirtualQAudioOutput*>( (QAudioOutput*)(self) );
 	if (self_cast == nullptr) {
@@ -519,6 +630,7 @@ void QAudioOutput_virtualbase_disconnectNotify(void* self, QMetaMethod* signal) 
 
 }
 
+const QMetaObject* QAudioOutput_staticMetaObject() { return &QAudioOutput::staticMetaObject; }
 QObject* QAudioOutput_protectedbase_sender(bool* _dynamic_cast_ok, const void* self) {
 	VirtualQAudioOutput* self_cast = dynamic_cast<VirtualQAudioOutput*>( (QAudioOutput*)(self) );
 	if (self_cast == nullptr) {

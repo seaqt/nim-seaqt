@@ -17,6 +17,9 @@
 extern "C" {
 #endif
 
+QMetaObject* miqt_exec_callback_QFinalState_metaObject(const QFinalState*, intptr_t);
+void* miqt_exec_callback_QFinalState_metacast(QFinalState*, intptr_t, const char*);
+int miqt_exec_callback_QFinalState_metacall(QFinalState*, intptr_t, int, int, void**);
 void miqt_exec_callback_QFinalState_onEntry(QFinalState*, intptr_t, QEvent*);
 void miqt_exec_callback_QFinalState_onExit(QFinalState*, intptr_t, QEvent*);
 bool miqt_exec_callback_QFinalState_event(QFinalState*, intptr_t, QEvent*);
@@ -37,6 +40,62 @@ public:
 	VirtualQFinalState(QState* parent): QFinalState(parent) {};
 
 	virtual ~VirtualQFinalState() override = default;
+
+	// cgo.Handle value for overwritten implementation
+	intptr_t handle__metaObject = 0;
+
+	// Subclass to allow providing a Go implementation
+	virtual const QMetaObject* metaObject() const override {
+		if (handle__metaObject == 0) {
+			return QFinalState::metaObject();
+		}
+		
+
+		QMetaObject* callback_return_value = miqt_exec_callback_QFinalState_metaObject(this, handle__metaObject);
+
+		return callback_return_value;
+	}
+
+	friend QMetaObject* QFinalState_virtualbase_metaObject(const void* self);
+
+	// cgo.Handle value for overwritten implementation
+	intptr_t handle__metacast = 0;
+
+	// Subclass to allow providing a Go implementation
+	virtual void* qt_metacast(const char* param1) override {
+		if (handle__metacast == 0) {
+			return QFinalState::qt_metacast(param1);
+		}
+		
+		const char* sigval1 = (const char*) param1;
+
+		void* callback_return_value = miqt_exec_callback_QFinalState_metacast(this, handle__metacast, sigval1);
+
+		return callback_return_value;
+	}
+
+	friend void* QFinalState_virtualbase_metacast(void* self, const char* param1);
+
+	// cgo.Handle value for overwritten implementation
+	intptr_t handle__metacall = 0;
+
+	// Subclass to allow providing a Go implementation
+	virtual int qt_metacall(QMetaObject::Call param1, int param2, void** param3) override {
+		if (handle__metacall == 0) {
+			return QFinalState::qt_metacall(param1, param2, param3);
+		}
+		
+		QMetaObject::Call param1_ret = param1;
+		int sigval1 = static_cast<int>(param1_ret);
+		int sigval2 = param2;
+		void** sigval3 = param3;
+
+		int callback_return_value = miqt_exec_callback_QFinalState_metacall(this, handle__metacall, sigval1, sigval2, sigval3);
+
+		return static_cast<int>(callback_return_value);
+	}
+
+	friend int QFinalState_virtualbase_metacall(void* self, int param1, int param2, void** param3);
 
 	// cgo.Handle value for overwritten implementation
 	intptr_t handle__onEntry = 0;
@@ -239,6 +298,10 @@ void* QFinalState_metacast(QFinalState* self, const char* param1) {
 	return self->qt_metacast(param1);
 }
 
+int QFinalState_metacall(QFinalState* self, int param1, int param2, void** param3) {
+	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
+}
+
 struct miqt_string QFinalState_tr(const char* s) {
 	QString _ret = QFinalState::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
@@ -303,6 +366,54 @@ struct miqt_string QFinalState_trUtf83(const char* s, const char* c, int n) {
 	_ms.data = static_cast<char*>(malloc(_ms.len));
 	memcpy(_ms.data, _b.data(), _ms.len);
 	return _ms;
+}
+
+bool QFinalState_override_virtual_metaObject(void* self, intptr_t slot) {
+	VirtualQFinalState* self_cast = dynamic_cast<VirtualQFinalState*>( (QFinalState*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+	
+	self_cast->handle__metaObject = slot;
+	return true;
+}
+
+QMetaObject* QFinalState_virtualbase_metaObject(const void* self) {
+
+	return (QMetaObject*) ( (const VirtualQFinalState*)(self) )->QFinalState::metaObject();
+
+}
+
+bool QFinalState_override_virtual_metacast(void* self, intptr_t slot) {
+	VirtualQFinalState* self_cast = dynamic_cast<VirtualQFinalState*>( (QFinalState*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+	
+	self_cast->handle__metacast = slot;
+	return true;
+}
+
+void* QFinalState_virtualbase_metacast(void* self, const char* param1) {
+
+	return ( (VirtualQFinalState*)(self) )->QFinalState::qt_metacast(param1);
+
+}
+
+bool QFinalState_override_virtual_metacall(void* self, intptr_t slot) {
+	VirtualQFinalState* self_cast = dynamic_cast<VirtualQFinalState*>( (QFinalState*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+	
+	self_cast->handle__metacall = slot;
+	return true;
+}
+
+int QFinalState_virtualbase_metacall(void* self, int param1, int param2, void** param3) {
+
+	return ( (VirtualQFinalState*)(self) )->QFinalState::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
+
 }
 
 bool QFinalState_override_virtual_onEntry(void* self, intptr_t slot) {
@@ -449,6 +560,7 @@ void QFinalState_virtualbase_disconnectNotify(void* self, QMetaMethod* signal) {
 
 }
 
+const QMetaObject* QFinalState_staticMetaObject() { return &QFinalState::staticMetaObject; }
 QObject* QFinalState_protectedbase_sender(bool* _dynamic_cast_ok, const void* self) {
 	VirtualQFinalState* self_cast = dynamic_cast<VirtualQFinalState*>( (QFinalState*)(self) );
 	if (self_cast == nullptr) {

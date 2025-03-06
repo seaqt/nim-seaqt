@@ -93,6 +93,7 @@ QCameraViewfinder* QCameraViewfinder_new2();
 void QCameraViewfinder_virtbase(QCameraViewfinder* src, QVideoWidget** outptr_QVideoWidget);
 QMetaObject* QCameraViewfinder_metaObject(const QCameraViewfinder* self);
 void* QCameraViewfinder_metacast(QCameraViewfinder* self, const char* param1);
+int QCameraViewfinder_metacall(QCameraViewfinder* self, int param1, int param2, void** param3);
 struct miqt_string QCameraViewfinder_tr(const char* s);
 struct miqt_string QCameraViewfinder_trUtf8(const char* s);
 QMediaObject* QCameraViewfinder_mediaObject(const QCameraViewfinder* self);
@@ -101,6 +102,12 @@ struct miqt_string QCameraViewfinder_tr2(const char* s, const char* c);
 struct miqt_string QCameraViewfinder_tr3(const char* s, const char* c, int n);
 struct miqt_string QCameraViewfinder_trUtf82(const char* s, const char* c);
 struct miqt_string QCameraViewfinder_trUtf83(const char* s, const char* c, int n);
+bool QCameraViewfinder_override_virtual_metaObject(void* self, intptr_t slot);
+QMetaObject* QCameraViewfinder_virtualbase_metaObject(const void* self);
+bool QCameraViewfinder_override_virtual_metacast(void* self, intptr_t slot);
+void* QCameraViewfinder_virtualbase_metacast(void* self, const char* param1);
+bool QCameraViewfinder_override_virtual_metacall(void* self, intptr_t slot);
+int QCameraViewfinder_virtualbase_metacall(void* self, int param1, int param2, void** param3);
 bool QCameraViewfinder_override_virtual_mediaObject(void* self, intptr_t slot);
 QMediaObject* QCameraViewfinder_virtualbase_mediaObject(const void* self);
 bool QCameraViewfinder_override_virtual_setMediaObject(void* self, intptr_t slot);
@@ -208,6 +215,7 @@ QObject* QCameraViewfinder_protectedbase_sender(bool* _dynamic_cast_ok, const vo
 int QCameraViewfinder_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
 int QCameraViewfinder_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
 bool QCameraViewfinder_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+const QMetaObject* QCameraViewfinder_staticMetaObject();
 void QCameraViewfinder_delete(QCameraViewfinder* self);
 
 #ifdef __cplusplus

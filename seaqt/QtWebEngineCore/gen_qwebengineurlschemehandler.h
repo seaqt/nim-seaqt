@@ -39,6 +39,7 @@ QWebEngineUrlSchemeHandler* QWebEngineUrlSchemeHandler_new2(QObject* parent);
 void QWebEngineUrlSchemeHandler_virtbase(QWebEngineUrlSchemeHandler* src, QObject** outptr_QObject);
 QMetaObject* QWebEngineUrlSchemeHandler_metaObject(const QWebEngineUrlSchemeHandler* self);
 void* QWebEngineUrlSchemeHandler_metacast(QWebEngineUrlSchemeHandler* self, const char* param1);
+int QWebEngineUrlSchemeHandler_metacall(QWebEngineUrlSchemeHandler* self, int param1, int param2, void** param3);
 struct miqt_string QWebEngineUrlSchemeHandler_tr(const char* s);
 struct miqt_string QWebEngineUrlSchemeHandler_trUtf8(const char* s);
 void QWebEngineUrlSchemeHandler_requestStarted(QWebEngineUrlSchemeHandler* self, QWebEngineUrlRequestJob* param1);
@@ -46,6 +47,12 @@ struct miqt_string QWebEngineUrlSchemeHandler_tr2(const char* s, const char* c);
 struct miqt_string QWebEngineUrlSchemeHandler_tr3(const char* s, const char* c, int n);
 struct miqt_string QWebEngineUrlSchemeHandler_trUtf82(const char* s, const char* c);
 struct miqt_string QWebEngineUrlSchemeHandler_trUtf83(const char* s, const char* c, int n);
+bool QWebEngineUrlSchemeHandler_override_virtual_metaObject(void* self, intptr_t slot);
+QMetaObject* QWebEngineUrlSchemeHandler_virtualbase_metaObject(const void* self);
+bool QWebEngineUrlSchemeHandler_override_virtual_metacast(void* self, intptr_t slot);
+void* QWebEngineUrlSchemeHandler_virtualbase_metacast(void* self, const char* param1);
+bool QWebEngineUrlSchemeHandler_override_virtual_metacall(void* self, intptr_t slot);
+int QWebEngineUrlSchemeHandler_virtualbase_metacall(void* self, int param1, int param2, void** param3);
 bool QWebEngineUrlSchemeHandler_override_virtual_requestStarted(void* self, intptr_t slot);
 void QWebEngineUrlSchemeHandler_virtualbase_requestStarted(void* self, QWebEngineUrlRequestJob* param1);
 bool QWebEngineUrlSchemeHandler_override_virtual_event(void* self, intptr_t slot);
@@ -66,6 +73,7 @@ QObject* QWebEngineUrlSchemeHandler_protectedbase_sender(bool* _dynamic_cast_ok,
 int QWebEngineUrlSchemeHandler_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
 int QWebEngineUrlSchemeHandler_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
 bool QWebEngineUrlSchemeHandler_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+const QMetaObject* QWebEngineUrlSchemeHandler_staticMetaObject();
 void QWebEngineUrlSchemeHandler_delete(QWebEngineUrlSchemeHandler* self);
 
 #ifdef __cplusplus

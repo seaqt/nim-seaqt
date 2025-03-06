@@ -39,6 +39,7 @@ QAccessiblePlugin* QAccessiblePlugin_new2(QObject* parent);
 void QAccessiblePlugin_virtbase(QAccessiblePlugin* src, QObject** outptr_QObject);
 QMetaObject* QAccessiblePlugin_metaObject(const QAccessiblePlugin* self);
 void* QAccessiblePlugin_metacast(QAccessiblePlugin* self, const char* param1);
+int QAccessiblePlugin_metacall(QAccessiblePlugin* self, int param1, int param2, void** param3);
 struct miqt_string QAccessiblePlugin_tr(const char* s);
 struct miqt_string QAccessiblePlugin_trUtf8(const char* s);
 QAccessibleInterface* QAccessiblePlugin_create(QAccessiblePlugin* self, struct miqt_string key, QObject* object);
@@ -46,6 +47,12 @@ struct miqt_string QAccessiblePlugin_tr2(const char* s, const char* c);
 struct miqt_string QAccessiblePlugin_tr3(const char* s, const char* c, int n);
 struct miqt_string QAccessiblePlugin_trUtf82(const char* s, const char* c);
 struct miqt_string QAccessiblePlugin_trUtf83(const char* s, const char* c, int n);
+bool QAccessiblePlugin_override_virtual_metaObject(void* self, intptr_t slot);
+QMetaObject* QAccessiblePlugin_virtualbase_metaObject(const void* self);
+bool QAccessiblePlugin_override_virtual_metacast(void* self, intptr_t slot);
+void* QAccessiblePlugin_virtualbase_metacast(void* self, const char* param1);
+bool QAccessiblePlugin_override_virtual_metacall(void* self, intptr_t slot);
+int QAccessiblePlugin_virtualbase_metacall(void* self, int param1, int param2, void** param3);
 bool QAccessiblePlugin_override_virtual_create(void* self, intptr_t slot);
 QAccessibleInterface* QAccessiblePlugin_virtualbase_create(void* self, struct miqt_string key, QObject* object);
 bool QAccessiblePlugin_override_virtual_event(void* self, intptr_t slot);
@@ -66,6 +73,7 @@ QObject* QAccessiblePlugin_protectedbase_sender(bool* _dynamic_cast_ok, const vo
 int QAccessiblePlugin_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
 int QAccessiblePlugin_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
 bool QAccessiblePlugin_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+const QMetaObject* QAccessiblePlugin_staticMetaObject();
 void QAccessiblePlugin_delete(QAccessiblePlugin* self);
 
 #ifdef __cplusplus

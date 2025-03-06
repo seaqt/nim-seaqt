@@ -77,6 +77,7 @@ type cQCommonStyle*{.exportc: "QCommonStyle", incompleteStruct.} = object
 proc fcQCommonStyle_new(): ptr cQCommonStyle {.importc: "QCommonStyle_new".}
 proc fcQCommonStyle_metaObject(self: pointer, ): pointer {.importc: "QCommonStyle_metaObject".}
 proc fcQCommonStyle_metacast(self: pointer, param1: cstring): pointer {.importc: "QCommonStyle_metacast".}
+proc fcQCommonStyle_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QCommonStyle_metacall".}
 proc fcQCommonStyle_tr(s: cstring): struct_miqt_string {.importc: "QCommonStyle_tr".}
 proc fcQCommonStyle_trUtf8(s: cstring): struct_miqt_string {.importc: "QCommonStyle_trUtf8".}
 proc fcQCommonStyle_drawPrimitive(self: pointer, pe: cint, opt: pointer, p: pointer, w: pointer): void {.importc: "QCommonStyle_drawPrimitive".}
@@ -101,6 +102,12 @@ proc fcQCommonStyle_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "
 proc fcQCommonStyle_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QCommonStyle_tr3".}
 proc fcQCommonStyle_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QCommonStyle_trUtf82".}
 proc fcQCommonStyle_trUtf83(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QCommonStyle_trUtf83".}
+proc fQCommonStyle_virtualbase_metaObject(self: pointer, ): pointer{.importc: "QCommonStyle_virtualbase_metaObject".}
+proc fcQCommonStyle_override_virtual_metaObject(self: pointer, slot: int) {.importc: "QCommonStyle_override_virtual_metaObject".}
+proc fQCommonStyle_virtualbase_metacast(self: pointer, param1: cstring): pointer{.importc: "QCommonStyle_virtualbase_metacast".}
+proc fcQCommonStyle_override_virtual_metacast(self: pointer, slot: int) {.importc: "QCommonStyle_override_virtual_metacast".}
+proc fQCommonStyle_virtualbase_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint{.importc: "QCommonStyle_virtualbase_metacall".}
+proc fcQCommonStyle_override_virtual_metacall(self: pointer, slot: int) {.importc: "QCommonStyle_override_virtual_metacall".}
 proc fQCommonStyle_virtualbase_drawPrimitive(self: pointer, pe: cint, opt: pointer, p: pointer, w: pointer): void{.importc: "QCommonStyle_virtualbase_drawPrimitive".}
 proc fcQCommonStyle_override_virtual_drawPrimitive(self: pointer, slot: int) {.importc: "QCommonStyle_override_virtual_drawPrimitive".}
 proc fQCommonStyle_virtualbase_drawControl(self: pointer, element: cint, opt: pointer, p: pointer, w: pointer): void{.importc: "QCommonStyle_virtualbase_drawControl".}
@@ -161,6 +168,7 @@ proc fQCommonStyle_virtualbase_connectNotify(self: pointer, signal: pointer): vo
 proc fcQCommonStyle_override_virtual_connectNotify(self: pointer, slot: int) {.importc: "QCommonStyle_override_virtual_connectNotify".}
 proc fQCommonStyle_virtualbase_disconnectNotify(self: pointer, signal: pointer): void{.importc: "QCommonStyle_virtualbase_disconnectNotify".}
 proc fcQCommonStyle_override_virtual_disconnectNotify(self: pointer, slot: int) {.importc: "QCommonStyle_override_virtual_disconnectNotify".}
+proc fcQCommonStyle_staticMetaObject(): pointer {.importc: "QCommonStyle_staticMetaObject".}
 proc fcQCommonStyle_delete(self: pointer) {.importc: "QCommonStyle_delete".}
 
 
@@ -174,6 +182,9 @@ proc metaObject*(self: gen_qcommonstyle_types.QCommonStyle, ): gen_qobjectdefs_t
 
 proc metacast*(self: gen_qcommonstyle_types.QCommonStyle, param1: cstring): pointer =
   fcQCommonStyle_metacast(self.h, param1)
+
+proc metacall*(self: gen_qcommonstyle_types.QCommonStyle, param1: cint, param2: cint, param3: pointer): cint =
+  fcQCommonStyle_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qcommonstyle_types.QCommonStyle, s: cstring): string =
   let v_ms = fcQCommonStyle_tr(s)
@@ -265,6 +276,65 @@ proc trUtf8*(_: type gen_qcommonstyle_types.QCommonStyle, s: cstring, c: cstring
   c_free(v_ms.data)
   vx_ret
 
+proc QCommonStylemetaObject*(self: gen_qcommonstyle_types.QCommonStyle, ): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fQCommonStyle_virtualbase_metaObject(self.h))
+
+type QCommonStylemetaObjectProc* = proc(): gen_qobjectdefs_types.QMetaObject
+proc onmetaObject*(self: gen_qcommonstyle_types.QCommonStyle, slot: QCommonStylemetaObjectProc) =
+  # TODO check subclass
+  var tmp = new QCommonStylemetaObjectProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQCommonStyle_override_virtual_metaObject(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QCommonStyle_metaObject(self: ptr cQCommonStyle, slot: int): pointer {.exportc: "miqt_exec_callback_QCommonStyle_metaObject ".} =
+  var nimfunc = cast[ptr QCommonStylemetaObjectProc](cast[pointer](slot))
+
+  let virtualReturn = nimfunc[]( )
+
+  virtualReturn.h
+proc QCommonStylemetacast*(self: gen_qcommonstyle_types.QCommonStyle, param1: cstring): pointer =
+  fQCommonStyle_virtualbase_metacast(self.h, param1)
+
+type QCommonStylemetacastProc* = proc(param1: cstring): pointer
+proc onmetacast*(self: gen_qcommonstyle_types.QCommonStyle, slot: QCommonStylemetacastProc) =
+  # TODO check subclass
+  var tmp = new QCommonStylemetacastProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQCommonStyle_override_virtual_metacast(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QCommonStyle_metacast(self: ptr cQCommonStyle, slot: int, param1: cstring): pointer {.exportc: "miqt_exec_callback_QCommonStyle_metacast ".} =
+  var nimfunc = cast[ptr QCommonStylemetacastProc](cast[pointer](slot))
+  let slotval1 = (param1)
+
+
+  let virtualReturn = nimfunc[](slotval1 )
+
+  virtualReturn
+proc QCommonStylemetacall*(self: gen_qcommonstyle_types.QCommonStyle, param1: cint, param2: cint, param3: pointer): cint =
+  fQCommonStyle_virtualbase_metacall(self.h, cint(param1), param2, param3)
+
+type QCommonStylemetacallProc* = proc(param1: cint, param2: cint, param3: pointer): cint
+proc onmetacall*(self: gen_qcommonstyle_types.QCommonStyle, slot: QCommonStylemetacallProc) =
+  # TODO check subclass
+  var tmp = new QCommonStylemetacallProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQCommonStyle_override_virtual_metacall(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QCommonStyle_metacall(self: ptr cQCommonStyle, slot: int, param1: cint, param2: cint, param3: pointer): cint {.exportc: "miqt_exec_callback_QCommonStyle_metacall ".} =
+  var nimfunc = cast[ptr QCommonStylemetacallProc](cast[pointer](slot))
+  let slotval1 = cint(param1)
+
+  let slotval2 = param2
+
+  let slotval3 = param3
+
+
+  let virtualReturn = nimfunc[](slotval1, slotval2, slotval3 )
+
+  virtualReturn
 proc QCommonStyledrawPrimitive*(self: gen_qcommonstyle_types.QCommonStyle, pe: cint, opt: gen_qstyleoption_types.QStyleOption, p: gen_qpainter_types.QPainter, w: gen_qwidget_types.QWidget): void =
   fQCommonStyle_virtualbase_drawPrimitive(self.h, cint(pe), opt.h, p.h, w.h)
 
@@ -911,5 +981,7 @@ proc miqt_exec_callback_QCommonStyle_disconnectNotify(self: ptr cQCommonStyle, s
 
 
   nimfunc[](slotval1)
+proc staticMetaObject*(_: type gen_qcommonstyle_types.QCommonStyle): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fcQCommonStyle_staticMetaObject())
 proc delete*(self: gen_qcommonstyle_types.QCommonStyle) =
   fcQCommonStyle_delete(self.h)

@@ -49,6 +49,7 @@ QUdpSocket* QUdpSocket_new2(QObject* parent);
 void QUdpSocket_virtbase(QUdpSocket* src, QAbstractSocket** outptr_QAbstractSocket);
 QMetaObject* QUdpSocket_metaObject(const QUdpSocket* self);
 void* QUdpSocket_metacast(QUdpSocket* self, const char* param1);
+int QUdpSocket_metacall(QUdpSocket* self, int param1, int param2, void** param3);
 struct miqt_string QUdpSocket_tr(const char* s);
 struct miqt_string QUdpSocket_trUtf8(const char* s);
 bool QUdpSocket_joinMulticastGroup(QUdpSocket* self, QHostAddress* groupAddress);
@@ -71,6 +72,12 @@ struct miqt_string QUdpSocket_trUtf83(const char* s, const char* c, int n);
 QNetworkDatagram* QUdpSocket_receiveDatagram1(QUdpSocket* self, long long maxSize);
 long long QUdpSocket_readDatagram3(QUdpSocket* self, char* data, long long maxlen, QHostAddress* host);
 long long QUdpSocket_readDatagram4(QUdpSocket* self, char* data, long long maxlen, QHostAddress* host, uint16_t* port);
+bool QUdpSocket_override_virtual_metaObject(void* self, intptr_t slot);
+QMetaObject* QUdpSocket_virtualbase_metaObject(const void* self);
+bool QUdpSocket_override_virtual_metacast(void* self, intptr_t slot);
+void* QUdpSocket_virtualbase_metacast(void* self, const char* param1);
+bool QUdpSocket_override_virtual_metacall(void* self, intptr_t slot);
+int QUdpSocket_virtualbase_metacall(void* self, int param1, int param2, void** param3);
 bool QUdpSocket_override_virtual_resume(void* self, intptr_t slot);
 void QUdpSocket_virtualbase_resume(void* self);
 bool QUdpSocket_override_virtual_connectToHost(void* self, intptr_t slot);
@@ -150,6 +157,7 @@ QObject* QUdpSocket_protectedbase_sender(bool* _dynamic_cast_ok, const void* sel
 int QUdpSocket_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
 int QUdpSocket_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
 bool QUdpSocket_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+const QMetaObject* QUdpSocket_staticMetaObject();
 void QUdpSocket_delete(QUdpSocket* self);
 
 #ifdef __cplusplus

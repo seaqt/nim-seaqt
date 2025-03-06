@@ -60,6 +60,7 @@ int QEvent_registerEventType1(int hint) {
 	return QEvent::registerEventType(static_cast<int>(hint));
 }
 
+const QMetaObject* QEvent_staticMetaObject() { return &QEvent::staticMetaObject; }
 void QEvent_delete(QEvent* self) {
 	delete self;
 }

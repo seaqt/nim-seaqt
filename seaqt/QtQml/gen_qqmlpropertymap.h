@@ -39,6 +39,7 @@ QQmlPropertyMap* QQmlPropertyMap_new2(QObject* parent);
 void QQmlPropertyMap_virtbase(QQmlPropertyMap* src, QObject** outptr_QObject);
 QMetaObject* QQmlPropertyMap_metaObject(const QQmlPropertyMap* self);
 void* QQmlPropertyMap_metacast(QQmlPropertyMap* self, const char* param1);
+int QQmlPropertyMap_metacall(QQmlPropertyMap* self, int param1, int param2, void** param3);
 struct miqt_string QQmlPropertyMap_tr(const char* s);
 struct miqt_string QQmlPropertyMap_trUtf8(const char* s);
 QVariant* QQmlPropertyMap_value(const QQmlPropertyMap* self, struct miqt_string key);
@@ -58,6 +59,12 @@ struct miqt_string QQmlPropertyMap_tr2(const char* s, const char* c);
 struct miqt_string QQmlPropertyMap_tr3(const char* s, const char* c, int n);
 struct miqt_string QQmlPropertyMap_trUtf82(const char* s, const char* c);
 struct miqt_string QQmlPropertyMap_trUtf83(const char* s, const char* c, int n);
+bool QQmlPropertyMap_override_virtual_metaObject(void* self, intptr_t slot);
+QMetaObject* QQmlPropertyMap_virtualbase_metaObject(const void* self);
+bool QQmlPropertyMap_override_virtual_metacast(void* self, intptr_t slot);
+void* QQmlPropertyMap_virtualbase_metacast(void* self, const char* param1);
+bool QQmlPropertyMap_override_virtual_metacall(void* self, intptr_t slot);
+int QQmlPropertyMap_virtualbase_metacall(void* self, int param1, int param2, void** param3);
 bool QQmlPropertyMap_override_virtual_updateValue(void* self, intptr_t slot);
 QVariant* QQmlPropertyMap_virtualbase_updateValue(void* self, struct miqt_string key, QVariant* input);
 bool QQmlPropertyMap_override_virtual_event(void* self, intptr_t slot);
@@ -78,6 +85,7 @@ QObject* QQmlPropertyMap_protectedbase_sender(bool* _dynamic_cast_ok, const void
 int QQmlPropertyMap_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
 int QQmlPropertyMap_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
 bool QQmlPropertyMap_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+const QMetaObject* QQmlPropertyMap_staticMetaObject();
 void QQmlPropertyMap_delete(QQmlPropertyMap* self);
 
 #ifdef __cplusplus

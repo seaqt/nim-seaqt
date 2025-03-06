@@ -49,6 +49,9 @@ extern "C" {
 #endif
 
 void miqt_exec_callback_QMdiArea_subWindowActivated(intptr_t, QMdiSubWindow*);
+QMetaObject* miqt_exec_callback_QMdiArea_metaObject(const QMdiArea*, intptr_t);
+void* miqt_exec_callback_QMdiArea_metacast(QMdiArea*, intptr_t, const char*);
+int miqt_exec_callback_QMdiArea_metacall(QMdiArea*, intptr_t, int, int, void**);
 QSize* miqt_exec_callback_QMdiArea_sizeHint(const QMdiArea*, intptr_t);
 QSize* miqt_exec_callback_QMdiArea_minimumSizeHint(const QMdiArea*, intptr_t);
 void miqt_exec_callback_QMdiArea_setupViewport(QMdiArea*, intptr_t, QWidget*);
@@ -111,6 +114,62 @@ public:
 	VirtualQMdiArea(): QMdiArea() {};
 
 	virtual ~VirtualQMdiArea() override = default;
+
+	// cgo.Handle value for overwritten implementation
+	intptr_t handle__metaObject = 0;
+
+	// Subclass to allow providing a Go implementation
+	virtual const QMetaObject* metaObject() const override {
+		if (handle__metaObject == 0) {
+			return QMdiArea::metaObject();
+		}
+		
+
+		QMetaObject* callback_return_value = miqt_exec_callback_QMdiArea_metaObject(this, handle__metaObject);
+
+		return callback_return_value;
+	}
+
+	friend QMetaObject* QMdiArea_virtualbase_metaObject(const void* self);
+
+	// cgo.Handle value for overwritten implementation
+	intptr_t handle__metacast = 0;
+
+	// Subclass to allow providing a Go implementation
+	virtual void* qt_metacast(const char* param1) override {
+		if (handle__metacast == 0) {
+			return QMdiArea::qt_metacast(param1);
+		}
+		
+		const char* sigval1 = (const char*) param1;
+
+		void* callback_return_value = miqt_exec_callback_QMdiArea_metacast(this, handle__metacast, sigval1);
+
+		return callback_return_value;
+	}
+
+	friend void* QMdiArea_virtualbase_metacast(void* self, const char* param1);
+
+	// cgo.Handle value for overwritten implementation
+	intptr_t handle__metacall = 0;
+
+	// Subclass to allow providing a Go implementation
+	virtual int qt_metacall(QMetaObject::Call param1, int param2, void** param3) override {
+		if (handle__metacall == 0) {
+			return QMdiArea::qt_metacall(param1, param2, param3);
+		}
+		
+		QMetaObject::Call param1_ret = param1;
+		int sigval1 = static_cast<int>(param1_ret);
+		int sigval2 = param2;
+		void** sigval3 = param3;
+
+		int callback_return_value = miqt_exec_callback_QMdiArea_metacall(this, handle__metacall, sigval1, sigval2, sigval3);
+
+		return static_cast<int>(callback_return_value);
+	}
+
+	friend int QMdiArea_virtualbase_metacall(void* self, int param1, int param2, void** param3);
 
 	// cgo.Handle value for overwritten implementation
 	intptr_t handle__sizeHint = 0;
@@ -1109,6 +1168,10 @@ void* QMdiArea_metacast(QMdiArea* self, const char* param1) {
 	return self->qt_metacast(param1);
 }
 
+int QMdiArea_metacall(QMdiArea* self, int param1, int param2, void** param3) {
+	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
+}
+
 struct miqt_string QMdiArea_tr(const char* s) {
 	QString _ret = QMdiArea::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
@@ -1346,6 +1409,54 @@ QMdiSubWindow* QMdiArea_addSubWindow2(QMdiArea* self, QWidget* widget, int flags
 
 void QMdiArea_setOption2(QMdiArea* self, int option, bool on) {
 	self->setOption(static_cast<QMdiArea::AreaOption>(option), on);
+}
+
+bool QMdiArea_override_virtual_metaObject(void* self, intptr_t slot) {
+	VirtualQMdiArea* self_cast = dynamic_cast<VirtualQMdiArea*>( (QMdiArea*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+	
+	self_cast->handle__metaObject = slot;
+	return true;
+}
+
+QMetaObject* QMdiArea_virtualbase_metaObject(const void* self) {
+
+	return (QMetaObject*) ( (const VirtualQMdiArea*)(self) )->QMdiArea::metaObject();
+
+}
+
+bool QMdiArea_override_virtual_metacast(void* self, intptr_t slot) {
+	VirtualQMdiArea* self_cast = dynamic_cast<VirtualQMdiArea*>( (QMdiArea*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+	
+	self_cast->handle__metacast = slot;
+	return true;
+}
+
+void* QMdiArea_virtualbase_metacast(void* self, const char* param1) {
+
+	return ( (VirtualQMdiArea*)(self) )->QMdiArea::qt_metacast(param1);
+
+}
+
+bool QMdiArea_override_virtual_metacall(void* self, intptr_t slot) {
+	VirtualQMdiArea* self_cast = dynamic_cast<VirtualQMdiArea*>( (QMdiArea*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+	
+	self_cast->handle__metacall = slot;
+	return true;
+}
+
+int QMdiArea_virtualbase_metacall(void* self, int param1, int param2, void** param3) {
+
+	return ( (VirtualQMdiArea*)(self) )->QMdiArea::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
+
 }
 
 bool QMdiArea_override_virtual_sizeHint(void* self, intptr_t slot) {
@@ -2165,6 +2276,7 @@ void QMdiArea_virtualbase_disconnectNotify(void* self, QMetaMethod* signal) {
 
 }
 
+const QMetaObject* QMdiArea_staticMetaObject() { return &QMdiArea::staticMetaObject; }
 void QMdiArea_protectedbase_setViewportMargins(bool* _dynamic_cast_ok, void* self, int left, int top, int right, int bottom) {
 	VirtualQMdiArea* self_cast = dynamic_cast<VirtualQMdiArea*>( (QMdiArea*)(self) );
 	if (self_cast == nullptr) {

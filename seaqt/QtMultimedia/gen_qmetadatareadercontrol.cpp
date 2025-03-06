@@ -34,6 +34,10 @@ void* QMetaDataReaderControl_metacast(QMetaDataReaderControl* self, const char* 
 	return self->qt_metacast(param1);
 }
 
+int QMetaDataReaderControl_metacall(QMetaDataReaderControl* self, int param1, int param2, void** param3) {
+	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
+}
+
 struct miqt_string QMetaDataReaderControl_tr(const char* s) {
 	QString _ret = QMetaDataReaderControl::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
@@ -172,6 +176,7 @@ struct miqt_string QMetaDataReaderControl_trUtf83(const char* s, const char* c, 
 	return _ms;
 }
 
+const QMetaObject* QMetaDataReaderControl_staticMetaObject() { return &QMetaDataReaderControl::staticMetaObject; }
 void QMetaDataReaderControl_delete(QMetaDataReaderControl* self) {
 	delete self;
 }

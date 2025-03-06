@@ -130,6 +130,7 @@ proc fcQWizard_new2(): ptr cQWizard {.importc: "QWizard_new2".}
 proc fcQWizard_new3(parent: pointer, flags: cint): ptr cQWizard {.importc: "QWizard_new3".}
 proc fcQWizard_metaObject(self: pointer, ): pointer {.importc: "QWizard_metaObject".}
 proc fcQWizard_metacast(self: pointer, param1: cstring): pointer {.importc: "QWizard_metacast".}
+proc fcQWizard_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QWizard_metacall".}
 proc fcQWizard_tr(s: cstring): struct_miqt_string {.importc: "QWizard_tr".}
 proc fcQWizard_trUtf8(s: cstring): struct_miqt_string {.importc: "QWizard_trUtf8".}
 proc fcQWizard_addPage(self: pointer, page: pointer): cint {.importc: "QWizard_addPage".}
@@ -188,6 +189,12 @@ proc fcQWizard_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.import
 proc fcQWizard_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QWizard_trUtf82".}
 proc fcQWizard_trUtf83(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QWizard_trUtf83".}
 proc fcQWizard_setOption2(self: pointer, option: cint, on: bool): void {.importc: "QWizard_setOption2".}
+proc fQWizard_virtualbase_metaObject(self: pointer, ): pointer{.importc: "QWizard_virtualbase_metaObject".}
+proc fcQWizard_override_virtual_metaObject(self: pointer, slot: int) {.importc: "QWizard_override_virtual_metaObject".}
+proc fQWizard_virtualbase_metacast(self: pointer, param1: cstring): pointer{.importc: "QWizard_virtualbase_metacast".}
+proc fcQWizard_override_virtual_metacast(self: pointer, slot: int) {.importc: "QWizard_override_virtual_metacast".}
+proc fQWizard_virtualbase_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint{.importc: "QWizard_virtualbase_metacall".}
+proc fcQWizard_override_virtual_metacall(self: pointer, slot: int) {.importc: "QWizard_override_virtual_metacall".}
 proc fQWizard_virtualbase_validateCurrentPage(self: pointer, ): bool{.importc: "QWizard_virtualbase_validateCurrentPage".}
 proc fcQWizard_override_virtual_validateCurrentPage(self: pointer, slot: int) {.importc: "QWizard_override_virtual_validateCurrentPage".}
 proc fQWizard_virtualbase_nextId(self: pointer, ): cint{.importc: "QWizard_virtualbase_nextId".}
@@ -300,11 +307,13 @@ proc fQWizard_virtualbase_connectNotify(self: pointer, signal: pointer): void{.i
 proc fcQWizard_override_virtual_connectNotify(self: pointer, slot: int) {.importc: "QWizard_override_virtual_connectNotify".}
 proc fQWizard_virtualbase_disconnectNotify(self: pointer, signal: pointer): void{.importc: "QWizard_virtualbase_disconnectNotify".}
 proc fcQWizard_override_virtual_disconnectNotify(self: pointer, slot: int) {.importc: "QWizard_override_virtual_disconnectNotify".}
+proc fcQWizard_staticMetaObject(): pointer {.importc: "QWizard_staticMetaObject".}
 proc fcQWizard_delete(self: pointer) {.importc: "QWizard_delete".}
 proc fcQWizardPage_new(parent: pointer): ptr cQWizardPage {.importc: "QWizardPage_new".}
 proc fcQWizardPage_new2(): ptr cQWizardPage {.importc: "QWizardPage_new2".}
 proc fcQWizardPage_metaObject(self: pointer, ): pointer {.importc: "QWizardPage_metaObject".}
 proc fcQWizardPage_metacast(self: pointer, param1: cstring): pointer {.importc: "QWizardPage_metacast".}
+proc fcQWizardPage_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QWizardPage_metacall".}
 proc fcQWizardPage_tr(s: cstring): struct_miqt_string {.importc: "QWizardPage_tr".}
 proc fcQWizardPage_trUtf8(s: cstring): struct_miqt_string {.importc: "QWizardPage_trUtf8".}
 proc fcQWizardPage_setTitle(self: pointer, title: struct_miqt_string): void {.importc: "QWizardPage_setTitle".}
@@ -330,6 +339,12 @@ proc fcQWizardPage_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "Q
 proc fcQWizardPage_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QWizardPage_tr3".}
 proc fcQWizardPage_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QWizardPage_trUtf82".}
 proc fcQWizardPage_trUtf83(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QWizardPage_trUtf83".}
+proc fQWizardPage_virtualbase_metaObject(self: pointer, ): pointer{.importc: "QWizardPage_virtualbase_metaObject".}
+proc fcQWizardPage_override_virtual_metaObject(self: pointer, slot: int) {.importc: "QWizardPage_override_virtual_metaObject".}
+proc fQWizardPage_virtualbase_metacast(self: pointer, param1: cstring): pointer{.importc: "QWizardPage_virtualbase_metacast".}
+proc fcQWizardPage_override_virtual_metacast(self: pointer, slot: int) {.importc: "QWizardPage_override_virtual_metacast".}
+proc fQWizardPage_virtualbase_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint{.importc: "QWizardPage_virtualbase_metacall".}
+proc fcQWizardPage_override_virtual_metacall(self: pointer, slot: int) {.importc: "QWizardPage_override_virtual_metacall".}
 proc fQWizardPage_virtualbase_initializePage(self: pointer, ): void{.importc: "QWizardPage_virtualbase_initializePage".}
 proc fcQWizardPage_override_virtual_initializePage(self: pointer, slot: int) {.importc: "QWizardPage_override_virtual_initializePage".}
 proc fQWizardPage_virtualbase_cleanupPage(self: pointer, ): void{.importc: "QWizardPage_virtualbase_cleanupPage".}
@@ -434,6 +449,7 @@ proc fQWizardPage_virtualbase_connectNotify(self: pointer, signal: pointer): voi
 proc fcQWizardPage_override_virtual_connectNotify(self: pointer, slot: int) {.importc: "QWizardPage_override_virtual_connectNotify".}
 proc fQWizardPage_virtualbase_disconnectNotify(self: pointer, signal: pointer): void{.importc: "QWizardPage_virtualbase_disconnectNotify".}
 proc fcQWizardPage_override_virtual_disconnectNotify(self: pointer, slot: int) {.importc: "QWizardPage_override_virtual_disconnectNotify".}
+proc fcQWizardPage_staticMetaObject(): pointer {.importc: "QWizardPage_staticMetaObject".}
 proc fcQWizardPage_delete(self: pointer) {.importc: "QWizardPage_delete".}
 
 
@@ -453,6 +469,9 @@ proc metaObject*(self: gen_qwizard_types.QWizard, ): gen_qobjectdefs_types.QMeta
 
 proc metacast*(self: gen_qwizard_types.QWizard, param1: cstring): pointer =
   fcQWizard_metacast(self.h, param1)
+
+proc metacall*(self: gen_qwizard_types.QWizard, param1: cint, param2: cint, param3: pointer): cint =
+  fcQWizard_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qwizard_types.QWizard, s: cstring): string =
   let v_ms = fcQWizard_tr(s)
@@ -716,6 +735,65 @@ proc trUtf8*(_: type gen_qwizard_types.QWizard, s: cstring, c: cstring, n: cint)
 proc setOption*(self: gen_qwizard_types.QWizard, option: cint, on: bool): void =
   fcQWizard_setOption2(self.h, cint(option), on)
 
+proc QWizardmetaObject*(self: gen_qwizard_types.QWizard, ): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fQWizard_virtualbase_metaObject(self.h))
+
+type QWizardmetaObjectProc* = proc(): gen_qobjectdefs_types.QMetaObject
+proc onmetaObject*(self: gen_qwizard_types.QWizard, slot: QWizardmetaObjectProc) =
+  # TODO check subclass
+  var tmp = new QWizardmetaObjectProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQWizard_override_virtual_metaObject(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QWizard_metaObject(self: ptr cQWizard, slot: int): pointer {.exportc: "miqt_exec_callback_QWizard_metaObject ".} =
+  var nimfunc = cast[ptr QWizardmetaObjectProc](cast[pointer](slot))
+
+  let virtualReturn = nimfunc[]( )
+
+  virtualReturn.h
+proc QWizardmetacast*(self: gen_qwizard_types.QWizard, param1: cstring): pointer =
+  fQWizard_virtualbase_metacast(self.h, param1)
+
+type QWizardmetacastProc* = proc(param1: cstring): pointer
+proc onmetacast*(self: gen_qwizard_types.QWizard, slot: QWizardmetacastProc) =
+  # TODO check subclass
+  var tmp = new QWizardmetacastProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQWizard_override_virtual_metacast(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QWizard_metacast(self: ptr cQWizard, slot: int, param1: cstring): pointer {.exportc: "miqt_exec_callback_QWizard_metacast ".} =
+  var nimfunc = cast[ptr QWizardmetacastProc](cast[pointer](slot))
+  let slotval1 = (param1)
+
+
+  let virtualReturn = nimfunc[](slotval1 )
+
+  virtualReturn
+proc QWizardmetacall*(self: gen_qwizard_types.QWizard, param1: cint, param2: cint, param3: pointer): cint =
+  fQWizard_virtualbase_metacall(self.h, cint(param1), param2, param3)
+
+type QWizardmetacallProc* = proc(param1: cint, param2: cint, param3: pointer): cint
+proc onmetacall*(self: gen_qwizard_types.QWizard, slot: QWizardmetacallProc) =
+  # TODO check subclass
+  var tmp = new QWizardmetacallProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQWizard_override_virtual_metacall(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QWizard_metacall(self: ptr cQWizard, slot: int, param1: cint, param2: cint, param3: pointer): cint {.exportc: "miqt_exec_callback_QWizard_metacall ".} =
+  var nimfunc = cast[ptr QWizardmetacallProc](cast[pointer](slot))
+  let slotval1 = cint(param1)
+
+  let slotval2 = param2
+
+  let slotval3 = param3
+
+
+  let virtualReturn = nimfunc[](slotval1, slotval2, slotval3 )
+
+  virtualReturn
 proc QWizardvalidateCurrentPage*(self: gen_qwizard_types.QWizard, ): bool =
   fQWizard_virtualbase_validateCurrentPage(self.h)
 
@@ -1687,6 +1765,8 @@ proc miqt_exec_callback_QWizard_disconnectNotify(self: ptr cQWizard, slot: int, 
 
 
   nimfunc[](slotval1)
+proc staticMetaObject*(_: type gen_qwizard_types.QWizard): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fcQWizard_staticMetaObject())
 proc delete*(self: gen_qwizard_types.QWizard) =
   fcQWizard_delete(self.h)
 
@@ -1703,6 +1783,9 @@ proc metaObject*(self: gen_qwizard_types.QWizardPage, ): gen_qobjectdefs_types.Q
 
 proc metacast*(self: gen_qwizard_types.QWizardPage, param1: cstring): pointer =
   fcQWizardPage_metacast(self.h, param1)
+
+proc metacall*(self: gen_qwizard_types.QWizardPage, param1: cint, param2: cint, param3: pointer): cint =
+  fcQWizardPage_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qwizard_types.QWizardPage, s: cstring): string =
   let v_ms = fcQWizardPage_tr(s)
@@ -1814,6 +1897,65 @@ proc trUtf8*(_: type gen_qwizard_types.QWizardPage, s: cstring, c: cstring, n: c
   c_free(v_ms.data)
   vx_ret
 
+proc QWizardPagemetaObject*(self: gen_qwizard_types.QWizardPage, ): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fQWizardPage_virtualbase_metaObject(self.h))
+
+type QWizardPagemetaObjectProc* = proc(): gen_qobjectdefs_types.QMetaObject
+proc onmetaObject*(self: gen_qwizard_types.QWizardPage, slot: QWizardPagemetaObjectProc) =
+  # TODO check subclass
+  var tmp = new QWizardPagemetaObjectProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQWizardPage_override_virtual_metaObject(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QWizardPage_metaObject(self: ptr cQWizardPage, slot: int): pointer {.exportc: "miqt_exec_callback_QWizardPage_metaObject ".} =
+  var nimfunc = cast[ptr QWizardPagemetaObjectProc](cast[pointer](slot))
+
+  let virtualReturn = nimfunc[]( )
+
+  virtualReturn.h
+proc QWizardPagemetacast*(self: gen_qwizard_types.QWizardPage, param1: cstring): pointer =
+  fQWizardPage_virtualbase_metacast(self.h, param1)
+
+type QWizardPagemetacastProc* = proc(param1: cstring): pointer
+proc onmetacast*(self: gen_qwizard_types.QWizardPage, slot: QWizardPagemetacastProc) =
+  # TODO check subclass
+  var tmp = new QWizardPagemetacastProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQWizardPage_override_virtual_metacast(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QWizardPage_metacast(self: ptr cQWizardPage, slot: int, param1: cstring): pointer {.exportc: "miqt_exec_callback_QWizardPage_metacast ".} =
+  var nimfunc = cast[ptr QWizardPagemetacastProc](cast[pointer](slot))
+  let slotval1 = (param1)
+
+
+  let virtualReturn = nimfunc[](slotval1 )
+
+  virtualReturn
+proc QWizardPagemetacall*(self: gen_qwizard_types.QWizardPage, param1: cint, param2: cint, param3: pointer): cint =
+  fQWizardPage_virtualbase_metacall(self.h, cint(param1), param2, param3)
+
+type QWizardPagemetacallProc* = proc(param1: cint, param2: cint, param3: pointer): cint
+proc onmetacall*(self: gen_qwizard_types.QWizardPage, slot: QWizardPagemetacallProc) =
+  # TODO check subclass
+  var tmp = new QWizardPagemetacallProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQWizardPage_override_virtual_metacall(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QWizardPage_metacall(self: ptr cQWizardPage, slot: int, param1: cint, param2: cint, param3: pointer): cint {.exportc: "miqt_exec_callback_QWizardPage_metacall ".} =
+  var nimfunc = cast[ptr QWizardPagemetacallProc](cast[pointer](slot))
+  let slotval1 = cint(param1)
+
+  let slotval2 = param2
+
+  let slotval3 = param3
+
+
+  let virtualReturn = nimfunc[](slotval1, slotval2, slotval3 )
+
+  virtualReturn
 proc QWizardPageinitializePage*(self: gen_qwizard_types.QWizardPage, ): void =
   fQWizardPage_virtualbase_initializePage(self.h)
 
@@ -2719,5 +2861,7 @@ proc miqt_exec_callback_QWizardPage_disconnectNotify(self: ptr cQWizardPage, slo
 
 
   nimfunc[](slotval1)
+proc staticMetaObject*(_: type gen_qwizard_types.QWizardPage): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fcQWizardPage_staticMetaObject())
 proc delete*(self: gen_qwizard_types.QWizardPage) =
   fcQWizardPage_delete(self.h)

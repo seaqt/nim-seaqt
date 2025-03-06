@@ -48,6 +48,7 @@ type cQCustomAudioRoleControl*{.exportc: "QCustomAudioRoleControl", incompleteSt
 
 proc fcQCustomAudioRoleControl_metaObject(self: pointer, ): pointer {.importc: "QCustomAudioRoleControl_metaObject".}
 proc fcQCustomAudioRoleControl_metacast(self: pointer, param1: cstring): pointer {.importc: "QCustomAudioRoleControl_metacast".}
+proc fcQCustomAudioRoleControl_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QCustomAudioRoleControl_metacall".}
 proc fcQCustomAudioRoleControl_tr(s: cstring): struct_miqt_string {.importc: "QCustomAudioRoleControl_tr".}
 proc fcQCustomAudioRoleControl_trUtf8(s: cstring): struct_miqt_string {.importc: "QCustomAudioRoleControl_trUtf8".}
 proc fcQCustomAudioRoleControl_customAudioRole(self: pointer, ): struct_miqt_string {.importc: "QCustomAudioRoleControl_customAudioRole".}
@@ -59,6 +60,7 @@ proc fcQCustomAudioRoleControl_tr2(s: cstring, c: cstring): struct_miqt_string {
 proc fcQCustomAudioRoleControl_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QCustomAudioRoleControl_tr3".}
 proc fcQCustomAudioRoleControl_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QCustomAudioRoleControl_trUtf82".}
 proc fcQCustomAudioRoleControl_trUtf83(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QCustomAudioRoleControl_trUtf83".}
+proc fcQCustomAudioRoleControl_staticMetaObject(): pointer {.importc: "QCustomAudioRoleControl_staticMetaObject".}
 proc fcQCustomAudioRoleControl_delete(self: pointer) {.importc: "QCustomAudioRoleControl_delete".}
 
 
@@ -69,6 +71,9 @@ proc metaObject*(self: gen_qcustomaudiorolecontrol_types.QCustomAudioRoleControl
 
 proc metacast*(self: gen_qcustomaudiorolecontrol_types.QCustomAudioRoleControl, param1: cstring): pointer =
   fcQCustomAudioRoleControl_metacast(self.h, param1)
+
+proc metacall*(self: gen_qcustomaudiorolecontrol_types.QCustomAudioRoleControl, param1: cint, param2: cint, param3: pointer): cint =
+  fcQCustomAudioRoleControl_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qcustomaudiorolecontrol_types.QCustomAudioRoleControl, s: cstring): string =
   let v_ms = fcQCustomAudioRoleControl_tr(s)
@@ -145,5 +150,7 @@ proc trUtf8*(_: type gen_qcustomaudiorolecontrol_types.QCustomAudioRoleControl, 
   c_free(v_ms.data)
   vx_ret
 
+proc staticMetaObject*(_: type gen_qcustomaudiorolecontrol_types.QCustomAudioRoleControl): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fcQCustomAudioRoleControl_staticMetaObject())
 proc delete*(self: gen_qcustomaudiorolecontrol_types.QCustomAudioRoleControl) =
   fcQCustomAudioRoleControl_delete(self.h)

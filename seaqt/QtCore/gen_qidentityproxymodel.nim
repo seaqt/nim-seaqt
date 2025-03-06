@@ -67,6 +67,7 @@ proc fcQIdentityProxyModel_new(): ptr cQIdentityProxyModel {.importc: "QIdentity
 proc fcQIdentityProxyModel_new2(parent: pointer): ptr cQIdentityProxyModel {.importc: "QIdentityProxyModel_new2".}
 proc fcQIdentityProxyModel_metaObject(self: pointer, ): pointer {.importc: "QIdentityProxyModel_metaObject".}
 proc fcQIdentityProxyModel_metacast(self: pointer, param1: cstring): pointer {.importc: "QIdentityProxyModel_metacast".}
+proc fcQIdentityProxyModel_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QIdentityProxyModel_metacall".}
 proc fcQIdentityProxyModel_tr(s: cstring): struct_miqt_string {.importc: "QIdentityProxyModel_tr".}
 proc fcQIdentityProxyModel_trUtf8(s: cstring): struct_miqt_string {.importc: "QIdentityProxyModel_trUtf8".}
 proc fcQIdentityProxyModel_columnCount(self: pointer, parent: pointer): cint {.importc: "QIdentityProxyModel_columnCount".}
@@ -92,6 +93,12 @@ proc fcQIdentityProxyModel_tr2(s: cstring, c: cstring): struct_miqt_string {.imp
 proc fcQIdentityProxyModel_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QIdentityProxyModel_tr3".}
 proc fcQIdentityProxyModel_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QIdentityProxyModel_trUtf82".}
 proc fcQIdentityProxyModel_trUtf83(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QIdentityProxyModel_trUtf83".}
+proc fQIdentityProxyModel_virtualbase_metaObject(self: pointer, ): pointer{.importc: "QIdentityProxyModel_virtualbase_metaObject".}
+proc fcQIdentityProxyModel_override_virtual_metaObject(self: pointer, slot: int) {.importc: "QIdentityProxyModel_override_virtual_metaObject".}
+proc fQIdentityProxyModel_virtualbase_metacast(self: pointer, param1: cstring): pointer{.importc: "QIdentityProxyModel_virtualbase_metacast".}
+proc fcQIdentityProxyModel_override_virtual_metacast(self: pointer, slot: int) {.importc: "QIdentityProxyModel_override_virtual_metacast".}
+proc fQIdentityProxyModel_virtualbase_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint{.importc: "QIdentityProxyModel_virtualbase_metacall".}
+proc fcQIdentityProxyModel_override_virtual_metacall(self: pointer, slot: int) {.importc: "QIdentityProxyModel_override_virtual_metacall".}
 proc fQIdentityProxyModel_virtualbase_columnCount(self: pointer, parent: pointer): cint{.importc: "QIdentityProxyModel_virtualbase_columnCount".}
 proc fcQIdentityProxyModel_override_virtual_columnCount(self: pointer, slot: int) {.importc: "QIdentityProxyModel_override_virtual_columnCount".}
 proc fQIdentityProxyModel_virtualbase_index(self: pointer, row: cint, column: cint, parent: pointer): pointer{.importc: "QIdentityProxyModel_virtualbase_index".}
@@ -184,6 +191,7 @@ proc fQIdentityProxyModel_virtualbase_connectNotify(self: pointer, signal: point
 proc fcQIdentityProxyModel_override_virtual_connectNotify(self: pointer, slot: int) {.importc: "QIdentityProxyModel_override_virtual_connectNotify".}
 proc fQIdentityProxyModel_virtualbase_disconnectNotify(self: pointer, signal: pointer): void{.importc: "QIdentityProxyModel_virtualbase_disconnectNotify".}
 proc fcQIdentityProxyModel_override_virtual_disconnectNotify(self: pointer, slot: int) {.importc: "QIdentityProxyModel_override_virtual_disconnectNotify".}
+proc fcQIdentityProxyModel_staticMetaObject(): pointer {.importc: "QIdentityProxyModel_staticMetaObject".}
 proc fcQIdentityProxyModel_delete(self: pointer) {.importc: "QIdentityProxyModel_delete".}
 
 
@@ -200,6 +208,9 @@ proc metaObject*(self: gen_qidentityproxymodel_types.QIdentityProxyModel, ): gen
 
 proc metacast*(self: gen_qidentityproxymodel_types.QIdentityProxyModel, param1: cstring): pointer =
   fcQIdentityProxyModel_metacast(self.h, param1)
+
+proc metacall*(self: gen_qidentityproxymodel_types.QIdentityProxyModel, param1: cint, param2: cint, param3: pointer): cint =
+  fcQIdentityProxyModel_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qidentityproxymodel_types.QIdentityProxyModel, s: cstring): string =
   let v_ms = fcQIdentityProxyModel_tr(s)
@@ -299,6 +310,65 @@ proc trUtf8*(_: type gen_qidentityproxymodel_types.QIdentityProxyModel, s: cstri
   c_free(v_ms.data)
   vx_ret
 
+proc QIdentityProxyModelmetaObject*(self: gen_qidentityproxymodel_types.QIdentityProxyModel, ): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fQIdentityProxyModel_virtualbase_metaObject(self.h))
+
+type QIdentityProxyModelmetaObjectProc* = proc(): gen_qobjectdefs_types.QMetaObject
+proc onmetaObject*(self: gen_qidentityproxymodel_types.QIdentityProxyModel, slot: QIdentityProxyModelmetaObjectProc) =
+  # TODO check subclass
+  var tmp = new QIdentityProxyModelmetaObjectProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQIdentityProxyModel_override_virtual_metaObject(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QIdentityProxyModel_metaObject(self: ptr cQIdentityProxyModel, slot: int): pointer {.exportc: "miqt_exec_callback_QIdentityProxyModel_metaObject ".} =
+  var nimfunc = cast[ptr QIdentityProxyModelmetaObjectProc](cast[pointer](slot))
+
+  let virtualReturn = nimfunc[]( )
+
+  virtualReturn.h
+proc QIdentityProxyModelmetacast*(self: gen_qidentityproxymodel_types.QIdentityProxyModel, param1: cstring): pointer =
+  fQIdentityProxyModel_virtualbase_metacast(self.h, param1)
+
+type QIdentityProxyModelmetacastProc* = proc(param1: cstring): pointer
+proc onmetacast*(self: gen_qidentityproxymodel_types.QIdentityProxyModel, slot: QIdentityProxyModelmetacastProc) =
+  # TODO check subclass
+  var tmp = new QIdentityProxyModelmetacastProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQIdentityProxyModel_override_virtual_metacast(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QIdentityProxyModel_metacast(self: ptr cQIdentityProxyModel, slot: int, param1: cstring): pointer {.exportc: "miqt_exec_callback_QIdentityProxyModel_metacast ".} =
+  var nimfunc = cast[ptr QIdentityProxyModelmetacastProc](cast[pointer](slot))
+  let slotval1 = (param1)
+
+
+  let virtualReturn = nimfunc[](slotval1 )
+
+  virtualReturn
+proc QIdentityProxyModelmetacall*(self: gen_qidentityproxymodel_types.QIdentityProxyModel, param1: cint, param2: cint, param3: pointer): cint =
+  fQIdentityProxyModel_virtualbase_metacall(self.h, cint(param1), param2, param3)
+
+type QIdentityProxyModelmetacallProc* = proc(param1: cint, param2: cint, param3: pointer): cint
+proc onmetacall*(self: gen_qidentityproxymodel_types.QIdentityProxyModel, slot: QIdentityProxyModelmetacallProc) =
+  # TODO check subclass
+  var tmp = new QIdentityProxyModelmetacallProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQIdentityProxyModel_override_virtual_metacall(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QIdentityProxyModel_metacall(self: ptr cQIdentityProxyModel, slot: int, param1: cint, param2: cint, param3: pointer): cint {.exportc: "miqt_exec_callback_QIdentityProxyModel_metacall ".} =
+  var nimfunc = cast[ptr QIdentityProxyModelmetacallProc](cast[pointer](slot))
+  let slotval1 = cint(param1)
+
+  let slotval2 = param2
+
+  let slotval3 = param3
+
+
+  let virtualReturn = nimfunc[](slotval1, slotval2, slotval3 )
+
+  virtualReturn
 proc QIdentityProxyModelcolumnCount*(self: gen_qidentityproxymodel_types.QIdentityProxyModel, parent: gen_qabstractitemmodel_types.QModelIndex): cint =
   fQIdentityProxyModel_virtualbase_columnCount(self.h, parent.h)
 
@@ -1316,5 +1386,7 @@ proc miqt_exec_callback_QIdentityProxyModel_disconnectNotify(self: ptr cQIdentit
 
 
   nimfunc[](slotval1)
+proc staticMetaObject*(_: type gen_qidentityproxymodel_types.QIdentityProxyModel): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fcQIdentityProxyModel_staticMetaObject())
 proc delete*(self: gen_qidentityproxymodel_types.QIdentityProxyModel) =
   fcQIdentityProxyModel_delete(self.h)

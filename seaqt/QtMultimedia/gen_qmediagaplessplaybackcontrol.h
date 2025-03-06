@@ -33,6 +33,7 @@ typedef struct QObject QObject;
 void QMediaGaplessPlaybackControl_virtbase(QMediaGaplessPlaybackControl* src, QMediaControl** outptr_QMediaControl);
 QMetaObject* QMediaGaplessPlaybackControl_metaObject(const QMediaGaplessPlaybackControl* self);
 void* QMediaGaplessPlaybackControl_metacast(QMediaGaplessPlaybackControl* self, const char* param1);
+int QMediaGaplessPlaybackControl_metacall(QMediaGaplessPlaybackControl* self, int param1, int param2, void** param3);
 struct miqt_string QMediaGaplessPlaybackControl_tr(const char* s);
 struct miqt_string QMediaGaplessPlaybackControl_trUtf8(const char* s);
 QMediaContent* QMediaGaplessPlaybackControl_nextMedia(const QMediaGaplessPlaybackControl* self);
@@ -50,6 +51,7 @@ struct miqt_string QMediaGaplessPlaybackControl_tr2(const char* s, const char* c
 struct miqt_string QMediaGaplessPlaybackControl_tr3(const char* s, const char* c, int n);
 struct miqt_string QMediaGaplessPlaybackControl_trUtf82(const char* s, const char* c);
 struct miqt_string QMediaGaplessPlaybackControl_trUtf83(const char* s, const char* c, int n);
+const QMetaObject* QMediaGaplessPlaybackControl_staticMetaObject();
 void QMediaGaplessPlaybackControl_delete(QMediaGaplessPlaybackControl* self);
 
 #ifdef __cplusplus

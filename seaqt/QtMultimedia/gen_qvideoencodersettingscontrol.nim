@@ -52,6 +52,7 @@ type cQVideoEncoderSettingsControl*{.exportc: "QVideoEncoderSettingsControl", in
 
 proc fcQVideoEncoderSettingsControl_metaObject(self: pointer, ): pointer {.importc: "QVideoEncoderSettingsControl_metaObject".}
 proc fcQVideoEncoderSettingsControl_metacast(self: pointer, param1: cstring): pointer {.importc: "QVideoEncoderSettingsControl_metacast".}
+proc fcQVideoEncoderSettingsControl_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QVideoEncoderSettingsControl_metacall".}
 proc fcQVideoEncoderSettingsControl_tr(s: cstring): struct_miqt_string {.importc: "QVideoEncoderSettingsControl_tr".}
 proc fcQVideoEncoderSettingsControl_trUtf8(s: cstring): struct_miqt_string {.importc: "QVideoEncoderSettingsControl_trUtf8".}
 proc fcQVideoEncoderSettingsControl_supportedResolutions(self: pointer, settings: pointer, continuous: ptr bool): struct_miqt_array {.importc: "QVideoEncoderSettingsControl_supportedResolutions".}
@@ -64,6 +65,7 @@ proc fcQVideoEncoderSettingsControl_tr2(s: cstring, c: cstring): struct_miqt_str
 proc fcQVideoEncoderSettingsControl_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QVideoEncoderSettingsControl_tr3".}
 proc fcQVideoEncoderSettingsControl_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QVideoEncoderSettingsControl_trUtf82".}
 proc fcQVideoEncoderSettingsControl_trUtf83(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QVideoEncoderSettingsControl_trUtf83".}
+proc fcQVideoEncoderSettingsControl_staticMetaObject(): pointer {.importc: "QVideoEncoderSettingsControl_staticMetaObject".}
 proc fcQVideoEncoderSettingsControl_delete(self: pointer) {.importc: "QVideoEncoderSettingsControl_delete".}
 
 
@@ -74,6 +76,9 @@ proc metaObject*(self: gen_qvideoencodersettingscontrol_types.QVideoEncoderSetti
 
 proc metacast*(self: gen_qvideoencodersettingscontrol_types.QVideoEncoderSettingsControl, param1: cstring): pointer =
   fcQVideoEncoderSettingsControl_metacast(self.h, param1)
+
+proc metacall*(self: gen_qvideoencodersettingscontrol_types.QVideoEncoderSettingsControl, param1: cint, param2: cint, param3: pointer): cint =
+  fcQVideoEncoderSettingsControl_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qvideoencodersettingscontrol_types.QVideoEncoderSettingsControl, s: cstring): string =
   let v_ms = fcQVideoEncoderSettingsControl_tr(s)
@@ -150,5 +155,7 @@ proc trUtf8*(_: type gen_qvideoencodersettingscontrol_types.QVideoEncoderSetting
   c_free(v_ms.data)
   vx_ret
 
+proc staticMetaObject*(_: type gen_qvideoencodersettingscontrol_types.QVideoEncoderSettingsControl): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fcQVideoEncoderSettingsControl_staticMetaObject())
 proc delete*(self: gen_qvideoencodersettingscontrol_types.QVideoEncoderSettingsControl) =
   fcQVideoEncoderSettingsControl_delete(self.h)

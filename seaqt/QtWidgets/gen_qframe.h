@@ -92,6 +92,7 @@ QFrame* QFrame_new3(QWidget* parent, int f);
 void QFrame_virtbase(QFrame* src, QWidget** outptr_QWidget);
 QMetaObject* QFrame_metaObject(const QFrame* self);
 void* QFrame_metacast(QFrame* self, const char* param1);
+int QFrame_metacall(QFrame* self, int param1, int param2, void** param3);
 struct miqt_string QFrame_tr(const char* s);
 struct miqt_string QFrame_trUtf8(const char* s);
 int QFrame_frameStyle(const QFrame* self);
@@ -115,6 +116,12 @@ struct miqt_string QFrame_tr2(const char* s, const char* c);
 struct miqt_string QFrame_tr3(const char* s, const char* c, int n);
 struct miqt_string QFrame_trUtf82(const char* s, const char* c);
 struct miqt_string QFrame_trUtf83(const char* s, const char* c, int n);
+bool QFrame_override_virtual_metaObject(void* self, intptr_t slot);
+QMetaObject* QFrame_virtualbase_metaObject(const void* self);
+bool QFrame_override_virtual_metacast(void* self, intptr_t slot);
+void* QFrame_virtualbase_metacast(void* self, const char* param1);
+bool QFrame_override_virtual_metacall(void* self, intptr_t slot);
+int QFrame_virtualbase_metacall(void* self, int param1, int param2, void** param3);
 bool QFrame_override_virtual_sizeHint(void* self, intptr_t slot);
 QSize* QFrame_virtualbase_sizeHint(const void* self);
 bool QFrame_override_virtual_event(void* self, intptr_t slot);
@@ -220,6 +227,7 @@ QObject* QFrame_protectedbase_sender(bool* _dynamic_cast_ok, const void* self);
 int QFrame_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
 int QFrame_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
 bool QFrame_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+const QMetaObject* QFrame_staticMetaObject();
 void QFrame_delete(QFrame* self);
 
 #ifdef __cplusplus

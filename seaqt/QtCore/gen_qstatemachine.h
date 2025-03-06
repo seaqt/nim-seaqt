@@ -57,6 +57,7 @@ QStateMachine* QStateMachine_new4(int childMode, QObject* parent);
 void QStateMachine_virtbase(QStateMachine* src, QState** outptr_QState);
 QMetaObject* QStateMachine_metaObject(const QStateMachine* self);
 void* QStateMachine_metacast(QStateMachine* self, const char* param1);
+int QStateMachine_metacall(QStateMachine* self, int param1, int param2, void** param3);
 struct miqt_string QStateMachine_tr(const char* s);
 struct miqt_string QStateMachine_trUtf8(const char* s);
 void QStateMachine_addState(QStateMachine* self, QAbstractState* state);
@@ -94,6 +95,12 @@ struct miqt_string QStateMachine_tr3(const char* s, const char* c, int n);
 struct miqt_string QStateMachine_trUtf82(const char* s, const char* c);
 struct miqt_string QStateMachine_trUtf83(const char* s, const char* c, int n);
 void QStateMachine_postEvent2(QStateMachine* self, QEvent* event, int priority);
+bool QStateMachine_override_virtual_metaObject(void* self, intptr_t slot);
+QMetaObject* QStateMachine_virtualbase_metaObject(const void* self);
+bool QStateMachine_override_virtual_metacast(void* self, intptr_t slot);
+void* QStateMachine_virtualbase_metacast(void* self, const char* param1);
+bool QStateMachine_override_virtual_metacall(void* self, intptr_t slot);
+int QStateMachine_virtualbase_metacall(void* self, int param1, int param2, void** param3);
 bool QStateMachine_override_virtual_eventFilter(void* self, intptr_t slot);
 bool QStateMachine_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event);
 bool QStateMachine_override_virtual_onEntry(void* self, intptr_t slot);
@@ -124,6 +131,7 @@ QObject* QStateMachine_protectedbase_sender(bool* _dynamic_cast_ok, const void* 
 int QStateMachine_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
 int QStateMachine_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
 bool QStateMachine_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+const QMetaObject* QStateMachine_staticMetaObject();
 void QStateMachine_delete(QStateMachine* self);
 
 QStateMachine__SignalEvent* QStateMachine__SignalEvent_new(QStateMachine__SignalEvent* param1);

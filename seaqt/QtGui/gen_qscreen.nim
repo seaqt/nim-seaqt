@@ -58,6 +58,7 @@ type cQScreen*{.exportc: "QScreen", incompleteStruct.} = object
 
 proc fcQScreen_metaObject(self: pointer, ): pointer {.importc: "QScreen_metaObject".}
 proc fcQScreen_metacast(self: pointer, param1: cstring): pointer {.importc: "QScreen_metacast".}
+proc fcQScreen_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QScreen_metacall".}
 proc fcQScreen_tr(s: cstring): struct_miqt_string {.importc: "QScreen_tr".}
 proc fcQScreen_trUtf8(s: cstring): struct_miqt_string {.importc: "QScreen_trUtf8".}
 proc fcQScreen_name(self: pointer, ): struct_miqt_string {.importc: "QScreen_name".}
@@ -121,6 +122,7 @@ proc fcQScreen_grabWindow2(self: pointer, window: uint, x: cint): pointer {.impo
 proc fcQScreen_grabWindow3(self: pointer, window: uint, x: cint, y: cint): pointer {.importc: "QScreen_grabWindow3".}
 proc fcQScreen_grabWindow4(self: pointer, window: uint, x: cint, y: cint, w: cint): pointer {.importc: "QScreen_grabWindow4".}
 proc fcQScreen_grabWindow5(self: pointer, window: uint, x: cint, y: cint, w: cint, h: cint): pointer {.importc: "QScreen_grabWindow5".}
+proc fcQScreen_staticMetaObject(): pointer {.importc: "QScreen_staticMetaObject".}
 proc fcQScreen_delete(self: pointer) {.importc: "QScreen_delete".}
 
 
@@ -131,6 +133,9 @@ proc metaObject*(self: gen_qscreen_types.QScreen, ): gen_qobjectdefs_types.QMeta
 
 proc metacast*(self: gen_qscreen_types.QScreen, param1: cstring): pointer =
   fcQScreen_metacast(self.h, param1)
+
+proc metacall*(self: gen_qscreen_types.QScreen, param1: cint, param2: cint, param3: pointer): cint =
+  fcQScreen_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qscreen_types.QScreen, s: cstring): string =
   let v_ms = fcQScreen_tr(s)
@@ -446,5 +451,7 @@ proc grabWindow*(self: gen_qscreen_types.QScreen, window: uint, x: cint, y: cint
 proc grabWindow*(self: gen_qscreen_types.QScreen, window: uint, x: cint, y: cint, w: cint, h: cint): gen_qpixmap_types.QPixmap =
   gen_qpixmap_types.QPixmap(h: fcQScreen_grabWindow5(self.h, window, x, y, w, h))
 
+proc staticMetaObject*(_: type gen_qscreen_types.QScreen): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fcQScreen_staticMetaObject())
 proc delete*(self: gen_qscreen_types.QScreen) =
   fcQScreen_delete(self.h)

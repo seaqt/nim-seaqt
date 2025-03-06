@@ -39,6 +39,9 @@ void miqt_exec_callback_QNetworkAccessManager_sslErrors(intptr_t, QNetworkReply*
 void miqt_exec_callback_QNetworkAccessManager_preSharedKeyAuthenticationRequired(intptr_t, QNetworkReply*, QSslPreSharedKeyAuthenticator*);
 void miqt_exec_callback_QNetworkAccessManager_networkSessionConnected(intptr_t);
 void miqt_exec_callback_QNetworkAccessManager_networkAccessibleChanged(intptr_t, int);
+QMetaObject* miqt_exec_callback_QNetworkAccessManager_metaObject(const QNetworkAccessManager*, intptr_t);
+void* miqt_exec_callback_QNetworkAccessManager_metacast(QNetworkAccessManager*, intptr_t, const char*);
+int miqt_exec_callback_QNetworkAccessManager_metacall(QNetworkAccessManager*, intptr_t, int, int, void**);
 QNetworkReply* miqt_exec_callback_QNetworkAccessManager_createRequest(QNetworkAccessManager*, intptr_t, int, QNetworkRequest*, QIODevice*);
 bool miqt_exec_callback_QNetworkAccessManager_event(QNetworkAccessManager*, intptr_t, QEvent*);
 bool miqt_exec_callback_QNetworkAccessManager_eventFilter(QNetworkAccessManager*, intptr_t, QObject*, QEvent*);
@@ -58,6 +61,62 @@ public:
 	VirtualQNetworkAccessManager(QObject* parent): QNetworkAccessManager(parent) {};
 
 	virtual ~VirtualQNetworkAccessManager() override = default;
+
+	// cgo.Handle value for overwritten implementation
+	intptr_t handle__metaObject = 0;
+
+	// Subclass to allow providing a Go implementation
+	virtual const QMetaObject* metaObject() const override {
+		if (handle__metaObject == 0) {
+			return QNetworkAccessManager::metaObject();
+		}
+		
+
+		QMetaObject* callback_return_value = miqt_exec_callback_QNetworkAccessManager_metaObject(this, handle__metaObject);
+
+		return callback_return_value;
+	}
+
+	friend QMetaObject* QNetworkAccessManager_virtualbase_metaObject(const void* self);
+
+	// cgo.Handle value for overwritten implementation
+	intptr_t handle__metacast = 0;
+
+	// Subclass to allow providing a Go implementation
+	virtual void* qt_metacast(const char* param1) override {
+		if (handle__metacast == 0) {
+			return QNetworkAccessManager::qt_metacast(param1);
+		}
+		
+		const char* sigval1 = (const char*) param1;
+
+		void* callback_return_value = miqt_exec_callback_QNetworkAccessManager_metacast(this, handle__metacast, sigval1);
+
+		return callback_return_value;
+	}
+
+	friend void* QNetworkAccessManager_virtualbase_metacast(void* self, const char* param1);
+
+	// cgo.Handle value for overwritten implementation
+	intptr_t handle__metacall = 0;
+
+	// Subclass to allow providing a Go implementation
+	virtual int qt_metacall(QMetaObject::Call param1, int param2, void** param3) override {
+		if (handle__metacall == 0) {
+			return QNetworkAccessManager::qt_metacall(param1, param2, param3);
+		}
+		
+		QMetaObject::Call param1_ret = param1;
+		int sigval1 = static_cast<int>(param1_ret);
+		int sigval2 = param2;
+		void** sigval3 = param3;
+
+		int callback_return_value = miqt_exec_callback_QNetworkAccessManager_metacall(this, handle__metacall, sigval1, sigval2, sigval3);
+
+		return static_cast<int>(callback_return_value);
+	}
+
+	friend int QNetworkAccessManager_virtualbase_metacall(void* self, int param1, int param2, void** param3);
 
 	// cgo.Handle value for overwritten implementation
 	intptr_t handle__createRequest = 0;
@@ -244,6 +303,10 @@ QMetaObject* QNetworkAccessManager_metaObject(const QNetworkAccessManager* self)
 
 void* QNetworkAccessManager_metacast(QNetworkAccessManager* self, const char* param1) {
 	return self->qt_metacast(param1);
+}
+
+int QNetworkAccessManager_metacall(QNetworkAccessManager* self, int param1, int param2, void** param3) {
+	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
 struct miqt_string QNetworkAccessManager_tr(const char* s) {
@@ -665,6 +728,54 @@ void QNetworkAccessManager_setTransferTimeout1(QNetworkAccessManager* self, int 
 	self->setTransferTimeout(static_cast<int>(timeout));
 }
 
+bool QNetworkAccessManager_override_virtual_metaObject(void* self, intptr_t slot) {
+	VirtualQNetworkAccessManager* self_cast = dynamic_cast<VirtualQNetworkAccessManager*>( (QNetworkAccessManager*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+	
+	self_cast->handle__metaObject = slot;
+	return true;
+}
+
+QMetaObject* QNetworkAccessManager_virtualbase_metaObject(const void* self) {
+
+	return (QMetaObject*) ( (const VirtualQNetworkAccessManager*)(self) )->QNetworkAccessManager::metaObject();
+
+}
+
+bool QNetworkAccessManager_override_virtual_metacast(void* self, intptr_t slot) {
+	VirtualQNetworkAccessManager* self_cast = dynamic_cast<VirtualQNetworkAccessManager*>( (QNetworkAccessManager*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+	
+	self_cast->handle__metacast = slot;
+	return true;
+}
+
+void* QNetworkAccessManager_virtualbase_metacast(void* self, const char* param1) {
+
+	return ( (VirtualQNetworkAccessManager*)(self) )->QNetworkAccessManager::qt_metacast(param1);
+
+}
+
+bool QNetworkAccessManager_override_virtual_metacall(void* self, intptr_t slot) {
+	VirtualQNetworkAccessManager* self_cast = dynamic_cast<VirtualQNetworkAccessManager*>( (QNetworkAccessManager*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+	
+	self_cast->handle__metacall = slot;
+	return true;
+}
+
+int QNetworkAccessManager_virtualbase_metacall(void* self, int param1, int param2, void** param3) {
+
+	return ( (VirtualQNetworkAccessManager*)(self) )->QNetworkAccessManager::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
+
+}
+
 bool QNetworkAccessManager_override_virtual_createRequest(void* self, intptr_t slot) {
 	VirtualQNetworkAccessManager* self_cast = dynamic_cast<VirtualQNetworkAccessManager*>( (QNetworkAccessManager*)(self) );
 	if (self_cast == nullptr) {
@@ -793,6 +904,7 @@ void QNetworkAccessManager_virtualbase_disconnectNotify(void* self, QMetaMethod*
 
 }
 
+const QMetaObject* QNetworkAccessManager_staticMetaObject() { return &QNetworkAccessManager::staticMetaObject; }
 struct miqt_array /* of struct miqt_string */  QNetworkAccessManager_protectedbase_supportedSchemesImplementation(bool* _dynamic_cast_ok, const void* self) {
 	VirtualQNetworkAccessManager* self_cast = dynamic_cast<VirtualQNetworkAccessManager*>( (QNetworkAccessManager*)(self) );
 	if (self_cast == nullptr) {

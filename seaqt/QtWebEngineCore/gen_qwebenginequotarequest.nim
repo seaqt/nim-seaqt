@@ -38,8 +38,10 @@ import ./gen_qwebenginequotarequest_types
 export gen_qwebenginequotarequest_types
 
 import
+  ../QtCore/gen_qobjectdefs_types,
   ../QtCore/gen_qurl_types
 export
+  gen_qobjectdefs_types,
   gen_qurl_types
 
 type cQWebEngineQuotaRequest*{.exportc: "QWebEngineQuotaRequest", incompleteStruct.} = object
@@ -52,6 +54,7 @@ proc fcQWebEngineQuotaRequest_origin(self: pointer, ): pointer {.importc: "QWebE
 proc fcQWebEngineQuotaRequest_requestedSize(self: pointer, ): clonglong {.importc: "QWebEngineQuotaRequest_requestedSize".}
 proc fcQWebEngineQuotaRequest_operatorEqual(self: pointer, that: pointer): bool {.importc: "QWebEngineQuotaRequest_operatorEqual".}
 proc fcQWebEngineQuotaRequest_operatorNotEqual(self: pointer, that: pointer): bool {.importc: "QWebEngineQuotaRequest_operatorNotEqual".}
+proc fcQWebEngineQuotaRequest_staticMetaObject(): pointer {.importc: "QWebEngineQuotaRequest_staticMetaObject".}
 proc fcQWebEngineQuotaRequest_delete(self: pointer) {.importc: "QWebEngineQuotaRequest_delete".}
 
 
@@ -81,5 +84,7 @@ proc operatorEqual*(self: gen_qwebenginequotarequest_types.QWebEngineQuotaReques
 proc operatorNotEqual*(self: gen_qwebenginequotarequest_types.QWebEngineQuotaRequest, that: gen_qwebenginequotarequest_types.QWebEngineQuotaRequest): bool =
   fcQWebEngineQuotaRequest_operatorNotEqual(self.h, that.h)
 
+proc staticMetaObject*(_: type gen_qwebenginequotarequest_types.QWebEngineQuotaRequest): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fcQWebEngineQuotaRequest_staticMetaObject())
 proc delete*(self: gen_qwebenginequotarequest_types.QWebEngineQuotaRequest) =
   fcQWebEngineQuotaRequest_delete(self.h)

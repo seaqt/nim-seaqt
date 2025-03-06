@@ -74,6 +74,7 @@ proc fcQState_new3(parent: pointer): ptr cQState {.importc: "QState_new3".}
 proc fcQState_new4(childMode: cint, parent: pointer): ptr cQState {.importc: "QState_new4".}
 proc fcQState_metaObject(self: pointer, ): pointer {.importc: "QState_metaObject".}
 proc fcQState_metacast(self: pointer, param1: cstring): pointer {.importc: "QState_metacast".}
+proc fcQState_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QState_metacall".}
 proc fcQState_tr(s: cstring): struct_miqt_string {.importc: "QState_tr".}
 proc fcQState_trUtf8(s: cstring): struct_miqt_string {.importc: "QState_trUtf8".}
 proc fcQState_errorState(self: pointer, ): pointer {.importc: "QState_errorState".}
@@ -92,6 +93,12 @@ proc fcQState_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QState
 proc fcQState_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QState_tr3".}
 proc fcQState_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QState_trUtf82".}
 proc fcQState_trUtf83(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QState_trUtf83".}
+proc fQState_virtualbase_metaObject(self: pointer, ): pointer{.importc: "QState_virtualbase_metaObject".}
+proc fcQState_override_virtual_metaObject(self: pointer, slot: int) {.importc: "QState_override_virtual_metaObject".}
+proc fQState_virtualbase_metacast(self: pointer, param1: cstring): pointer{.importc: "QState_virtualbase_metacast".}
+proc fcQState_override_virtual_metacast(self: pointer, slot: int) {.importc: "QState_override_virtual_metacast".}
+proc fQState_virtualbase_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint{.importc: "QState_virtualbase_metacall".}
+proc fcQState_override_virtual_metacall(self: pointer, slot: int) {.importc: "QState_override_virtual_metacall".}
 proc fQState_virtualbase_onEntry(self: pointer, event: pointer): void{.importc: "QState_virtualbase_onEntry".}
 proc fcQState_override_virtual_onEntry(self: pointer, slot: int) {.importc: "QState_override_virtual_onEntry".}
 proc fQState_virtualbase_onExit(self: pointer, event: pointer): void{.importc: "QState_virtualbase_onExit".}
@@ -110,6 +117,7 @@ proc fQState_virtualbase_connectNotify(self: pointer, signal: pointer): void{.im
 proc fcQState_override_virtual_connectNotify(self: pointer, slot: int) {.importc: "QState_override_virtual_connectNotify".}
 proc fQState_virtualbase_disconnectNotify(self: pointer, signal: pointer): void{.importc: "QState_virtualbase_disconnectNotify".}
 proc fcQState_override_virtual_disconnectNotify(self: pointer, slot: int) {.importc: "QState_override_virtual_disconnectNotify".}
+proc fcQState_staticMetaObject(): pointer {.importc: "QState_staticMetaObject".}
 proc fcQState_delete(self: pointer) {.importc: "QState_delete".}
 
 
@@ -132,6 +140,9 @@ proc metaObject*(self: gen_qstate_types.QState, ): gen_qobjectdefs_types.QMetaOb
 
 proc metacast*(self: gen_qstate_types.QState, param1: cstring): pointer =
   fcQState_metacast(self.h, param1)
+
+proc metacall*(self: gen_qstate_types.QState, param1: cint, param2: cint, param3: pointer): cint =
+  fcQState_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qstate_types.QState, s: cstring): string =
   let v_ms = fcQState_tr(s)
@@ -210,6 +221,65 @@ proc trUtf8*(_: type gen_qstate_types.QState, s: cstring, c: cstring, n: cint): 
   c_free(v_ms.data)
   vx_ret
 
+proc QStatemetaObject*(self: gen_qstate_types.QState, ): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fQState_virtualbase_metaObject(self.h))
+
+type QStatemetaObjectProc* = proc(): gen_qobjectdefs_types.QMetaObject
+proc onmetaObject*(self: gen_qstate_types.QState, slot: QStatemetaObjectProc) =
+  # TODO check subclass
+  var tmp = new QStatemetaObjectProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQState_override_virtual_metaObject(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QState_metaObject(self: ptr cQState, slot: int): pointer {.exportc: "miqt_exec_callback_QState_metaObject ".} =
+  var nimfunc = cast[ptr QStatemetaObjectProc](cast[pointer](slot))
+
+  let virtualReturn = nimfunc[]( )
+
+  virtualReturn.h
+proc QStatemetacast*(self: gen_qstate_types.QState, param1: cstring): pointer =
+  fQState_virtualbase_metacast(self.h, param1)
+
+type QStatemetacastProc* = proc(param1: cstring): pointer
+proc onmetacast*(self: gen_qstate_types.QState, slot: QStatemetacastProc) =
+  # TODO check subclass
+  var tmp = new QStatemetacastProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQState_override_virtual_metacast(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QState_metacast(self: ptr cQState, slot: int, param1: cstring): pointer {.exportc: "miqt_exec_callback_QState_metacast ".} =
+  var nimfunc = cast[ptr QStatemetacastProc](cast[pointer](slot))
+  let slotval1 = (param1)
+
+
+  let virtualReturn = nimfunc[](slotval1 )
+
+  virtualReturn
+proc QStatemetacall*(self: gen_qstate_types.QState, param1: cint, param2: cint, param3: pointer): cint =
+  fQState_virtualbase_metacall(self.h, cint(param1), param2, param3)
+
+type QStatemetacallProc* = proc(param1: cint, param2: cint, param3: pointer): cint
+proc onmetacall*(self: gen_qstate_types.QState, slot: QStatemetacallProc) =
+  # TODO check subclass
+  var tmp = new QStatemetacallProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQState_override_virtual_metacall(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QState_metacall(self: ptr cQState, slot: int, param1: cint, param2: cint, param3: pointer): cint {.exportc: "miqt_exec_callback_QState_metacall ".} =
+  var nimfunc = cast[ptr QStatemetacallProc](cast[pointer](slot))
+  let slotval1 = cint(param1)
+
+  let slotval2 = param2
+
+  let slotval3 = param3
+
+
+  let virtualReturn = nimfunc[](slotval1, slotval2, slotval3 )
+
+  virtualReturn
 proc QStateonEntry*(self: gen_qstate_types.QState, event: gen_qcoreevent_types.QEvent): void =
   fQState_virtualbase_onEntry(self.h, event.h)
 
@@ -369,5 +439,7 @@ proc miqt_exec_callback_QState_disconnectNotify(self: ptr cQState, slot: int, si
 
 
   nimfunc[](slotval1)
+proc staticMetaObject*(_: type gen_qstate_types.QState): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fcQState_staticMetaObject())
 proc delete*(self: gen_qstate_types.QState) =
   fcQState_delete(self.h)

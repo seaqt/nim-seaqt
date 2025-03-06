@@ -78,6 +78,7 @@ proc fcQNetworkCacheMetaData_setAttributes(self: pointer, attributes: struct_miq
 proc fcQNetworkCacheMetaData_delete(self: pointer) {.importc: "QNetworkCacheMetaData_delete".}
 proc fcQAbstractNetworkCache_metaObject(self: pointer, ): pointer {.importc: "QAbstractNetworkCache_metaObject".}
 proc fcQAbstractNetworkCache_metacast(self: pointer, param1: cstring): pointer {.importc: "QAbstractNetworkCache_metacast".}
+proc fcQAbstractNetworkCache_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QAbstractNetworkCache_metacall".}
 proc fcQAbstractNetworkCache_tr(s: cstring): struct_miqt_string {.importc: "QAbstractNetworkCache_tr".}
 proc fcQAbstractNetworkCache_trUtf8(s: cstring): struct_miqt_string {.importc: "QAbstractNetworkCache_trUtf8".}
 proc fcQAbstractNetworkCache_metaData(self: pointer, url: pointer): pointer {.importc: "QAbstractNetworkCache_metaData".}
@@ -92,6 +93,7 @@ proc fcQAbstractNetworkCache_tr2(s: cstring, c: cstring): struct_miqt_string {.i
 proc fcQAbstractNetworkCache_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QAbstractNetworkCache_tr3".}
 proc fcQAbstractNetworkCache_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QAbstractNetworkCache_trUtf82".}
 proc fcQAbstractNetworkCache_trUtf83(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QAbstractNetworkCache_trUtf83".}
+proc fcQAbstractNetworkCache_staticMetaObject(): pointer {.importc: "QAbstractNetworkCache_staticMetaObject".}
 proc fcQAbstractNetworkCache_delete(self: pointer) {.importc: "QAbstractNetworkCache_delete".}
 
 
@@ -209,6 +211,9 @@ proc metaObject*(self: gen_qabstractnetworkcache_types.QAbstractNetworkCache, ):
 proc metacast*(self: gen_qabstractnetworkcache_types.QAbstractNetworkCache, param1: cstring): pointer =
   fcQAbstractNetworkCache_metacast(self.h, param1)
 
+proc metacall*(self: gen_qabstractnetworkcache_types.QAbstractNetworkCache, param1: cint, param2: cint, param3: pointer): cint =
+  fcQAbstractNetworkCache_metacall(self.h, cint(param1), param2, param3)
+
 proc tr*(_: type gen_qabstractnetworkcache_types.QAbstractNetworkCache, s: cstring): string =
   let v_ms = fcQAbstractNetworkCache_tr(s)
   let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
@@ -269,5 +274,7 @@ proc trUtf8*(_: type gen_qabstractnetworkcache_types.QAbstractNetworkCache, s: c
   c_free(v_ms.data)
   vx_ret
 
+proc staticMetaObject*(_: type gen_qabstractnetworkcache_types.QAbstractNetworkCache): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fcQAbstractNetworkCache_staticMetaObject())
 proc delete*(self: gen_qabstractnetworkcache_types.QAbstractNetworkCache) =
   fcQAbstractNetworkCache_delete(self.h)

@@ -77,6 +77,7 @@ proc fcQTimeLine_new2(duration: cint): ptr cQTimeLine {.importc: "QTimeLine_new2
 proc fcQTimeLine_new3(duration: cint, parent: pointer): ptr cQTimeLine {.importc: "QTimeLine_new3".}
 proc fcQTimeLine_metaObject(self: pointer, ): pointer {.importc: "QTimeLine_metaObject".}
 proc fcQTimeLine_metacast(self: pointer, param1: cstring): pointer {.importc: "QTimeLine_metacast".}
+proc fcQTimeLine_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QTimeLine_metacall".}
 proc fcQTimeLine_tr(s: cstring): struct_miqt_string {.importc: "QTimeLine_tr".}
 proc fcQTimeLine_trUtf8(s: cstring): struct_miqt_string {.importc: "QTimeLine_trUtf8".}
 proc fcQTimeLine_state(self: pointer, ): cint {.importc: "QTimeLine_state".}
@@ -112,6 +113,12 @@ proc fcQTimeLine_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QTi
 proc fcQTimeLine_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QTimeLine_tr3".}
 proc fcQTimeLine_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QTimeLine_trUtf82".}
 proc fcQTimeLine_trUtf83(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QTimeLine_trUtf83".}
+proc fQTimeLine_virtualbase_metaObject(self: pointer, ): pointer{.importc: "QTimeLine_virtualbase_metaObject".}
+proc fcQTimeLine_override_virtual_metaObject(self: pointer, slot: int) {.importc: "QTimeLine_override_virtual_metaObject".}
+proc fQTimeLine_virtualbase_metacast(self: pointer, param1: cstring): pointer{.importc: "QTimeLine_virtualbase_metacast".}
+proc fcQTimeLine_override_virtual_metacast(self: pointer, slot: int) {.importc: "QTimeLine_override_virtual_metacast".}
+proc fQTimeLine_virtualbase_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint{.importc: "QTimeLine_virtualbase_metacall".}
+proc fcQTimeLine_override_virtual_metacall(self: pointer, slot: int) {.importc: "QTimeLine_override_virtual_metacall".}
 proc fQTimeLine_virtualbase_valueForTime(self: pointer, msec: cint): float64{.importc: "QTimeLine_virtualbase_valueForTime".}
 proc fcQTimeLine_override_virtual_valueForTime(self: pointer, slot: int) {.importc: "QTimeLine_override_virtual_valueForTime".}
 proc fQTimeLine_virtualbase_timerEvent(self: pointer, event: pointer): void{.importc: "QTimeLine_virtualbase_timerEvent".}
@@ -128,6 +135,7 @@ proc fQTimeLine_virtualbase_connectNotify(self: pointer, signal: pointer): void{
 proc fcQTimeLine_override_virtual_connectNotify(self: pointer, slot: int) {.importc: "QTimeLine_override_virtual_connectNotify".}
 proc fQTimeLine_virtualbase_disconnectNotify(self: pointer, signal: pointer): void{.importc: "QTimeLine_virtualbase_disconnectNotify".}
 proc fcQTimeLine_override_virtual_disconnectNotify(self: pointer, slot: int) {.importc: "QTimeLine_override_virtual_disconnectNotify".}
+proc fcQTimeLine_staticMetaObject(): pointer {.importc: "QTimeLine_staticMetaObject".}
 proc fcQTimeLine_delete(self: pointer) {.importc: "QTimeLine_delete".}
 
 
@@ -147,6 +155,9 @@ proc metaObject*(self: gen_qtimeline_types.QTimeLine, ): gen_qobjectdefs_types.Q
 
 proc metacast*(self: gen_qtimeline_types.QTimeLine, param1: cstring): pointer =
   fcQTimeLine_metacast(self.h, param1)
+
+proc metacall*(self: gen_qtimeline_types.QTimeLine, param1: cint, param2: cint, param3: pointer): cint =
+  fcQTimeLine_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qtimeline_types.QTimeLine, s: cstring): string =
   let v_ms = fcQTimeLine_tr(s)
@@ -271,6 +282,65 @@ proc trUtf8*(_: type gen_qtimeline_types.QTimeLine, s: cstring, c: cstring, n: c
   c_free(v_ms.data)
   vx_ret
 
+proc QTimeLinemetaObject*(self: gen_qtimeline_types.QTimeLine, ): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fQTimeLine_virtualbase_metaObject(self.h))
+
+type QTimeLinemetaObjectProc* = proc(): gen_qobjectdefs_types.QMetaObject
+proc onmetaObject*(self: gen_qtimeline_types.QTimeLine, slot: QTimeLinemetaObjectProc) =
+  # TODO check subclass
+  var tmp = new QTimeLinemetaObjectProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQTimeLine_override_virtual_metaObject(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QTimeLine_metaObject(self: ptr cQTimeLine, slot: int): pointer {.exportc: "miqt_exec_callback_QTimeLine_metaObject ".} =
+  var nimfunc = cast[ptr QTimeLinemetaObjectProc](cast[pointer](slot))
+
+  let virtualReturn = nimfunc[]( )
+
+  virtualReturn.h
+proc QTimeLinemetacast*(self: gen_qtimeline_types.QTimeLine, param1: cstring): pointer =
+  fQTimeLine_virtualbase_metacast(self.h, param1)
+
+type QTimeLinemetacastProc* = proc(param1: cstring): pointer
+proc onmetacast*(self: gen_qtimeline_types.QTimeLine, slot: QTimeLinemetacastProc) =
+  # TODO check subclass
+  var tmp = new QTimeLinemetacastProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQTimeLine_override_virtual_metacast(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QTimeLine_metacast(self: ptr cQTimeLine, slot: int, param1: cstring): pointer {.exportc: "miqt_exec_callback_QTimeLine_metacast ".} =
+  var nimfunc = cast[ptr QTimeLinemetacastProc](cast[pointer](slot))
+  let slotval1 = (param1)
+
+
+  let virtualReturn = nimfunc[](slotval1 )
+
+  virtualReturn
+proc QTimeLinemetacall*(self: gen_qtimeline_types.QTimeLine, param1: cint, param2: cint, param3: pointer): cint =
+  fQTimeLine_virtualbase_metacall(self.h, cint(param1), param2, param3)
+
+type QTimeLinemetacallProc* = proc(param1: cint, param2: cint, param3: pointer): cint
+proc onmetacall*(self: gen_qtimeline_types.QTimeLine, slot: QTimeLinemetacallProc) =
+  # TODO check subclass
+  var tmp = new QTimeLinemetacallProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQTimeLine_override_virtual_metacall(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QTimeLine_metacall(self: ptr cQTimeLine, slot: int, param1: cint, param2: cint, param3: pointer): cint {.exportc: "miqt_exec_callback_QTimeLine_metacall ".} =
+  var nimfunc = cast[ptr QTimeLinemetacallProc](cast[pointer](slot))
+  let slotval1 = cint(param1)
+
+  let slotval2 = param2
+
+  let slotval3 = param3
+
+
+  let virtualReturn = nimfunc[](slotval1, slotval2, slotval3 )
+
+  virtualReturn
 proc QTimeLinevalueForTime*(self: gen_qtimeline_types.QTimeLine, msec: cint): float64 =
   fQTimeLine_virtualbase_valueForTime(self.h, msec)
 
@@ -415,5 +485,7 @@ proc miqt_exec_callback_QTimeLine_disconnectNotify(self: ptr cQTimeLine, slot: i
 
 
   nimfunc[](slotval1)
+proc staticMetaObject*(_: type gen_qtimeline_types.QTimeLine): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fcQTimeLine_staticMetaObject())
 proc delete*(self: gen_qtimeline_types.QTimeLine) =
   fcQTimeLine_delete(self.h)

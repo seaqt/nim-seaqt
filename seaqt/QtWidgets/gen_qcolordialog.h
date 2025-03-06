@@ -93,6 +93,7 @@ QColorDialog* QColorDialog_new4(QColor* initial, QWidget* parent);
 void QColorDialog_virtbase(QColorDialog* src, QDialog** outptr_QDialog);
 QMetaObject* QColorDialog_metaObject(const QColorDialog* self);
 void* QColorDialog_metacast(QColorDialog* self, const char* param1);
+int QColorDialog_metacall(QColorDialog* self, int param1, int param2, void** param3);
 struct miqt_string QColorDialog_tr(const char* s);
 struct miqt_string QColorDialog_trUtf8(const char* s);
 void QColorDialog_setCurrentColor(QColorDialog* self, QColor* color);
@@ -128,6 +129,12 @@ QColor* QColorDialog_getColor4(QColor* initial, QWidget* parent, struct miqt_str
 unsigned int QColorDialog_getRgba1(unsigned int rgba);
 unsigned int QColorDialog_getRgba2(unsigned int rgba, bool* ok);
 unsigned int QColorDialog_getRgba3(unsigned int rgba, bool* ok, QWidget* parent);
+bool QColorDialog_override_virtual_metaObject(void* self, intptr_t slot);
+QMetaObject* QColorDialog_virtualbase_metaObject(const void* self);
+bool QColorDialog_override_virtual_metacast(void* self, intptr_t slot);
+void* QColorDialog_virtualbase_metacast(void* self, const char* param1);
+bool QColorDialog_override_virtual_metacall(void* self, intptr_t slot);
+int QColorDialog_virtualbase_metacall(void* self, int param1, int param2, void** param3);
 bool QColorDialog_override_virtual_setVisible(void* self, intptr_t slot);
 void QColorDialog_virtualbase_setVisible(void* self, bool visible);
 bool QColorDialog_override_virtual_changeEvent(void* self, intptr_t slot);
@@ -242,6 +249,7 @@ QObject* QColorDialog_protectedbase_sender(bool* _dynamic_cast_ok, const void* s
 int QColorDialog_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
 int QColorDialog_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
 bool QColorDialog_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+const QMetaObject* QColorDialog_staticMetaObject();
 void QColorDialog_delete(QColorDialog* self);
 
 #ifdef __cplusplus

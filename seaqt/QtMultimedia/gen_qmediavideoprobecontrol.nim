@@ -50,6 +50,7 @@ type cQMediaVideoProbeControl*{.exportc: "QMediaVideoProbeControl", incompleteSt
 
 proc fcQMediaVideoProbeControl_metaObject(self: pointer, ): pointer {.importc: "QMediaVideoProbeControl_metaObject".}
 proc fcQMediaVideoProbeControl_metacast(self: pointer, param1: cstring): pointer {.importc: "QMediaVideoProbeControl_metacast".}
+proc fcQMediaVideoProbeControl_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QMediaVideoProbeControl_metacall".}
 proc fcQMediaVideoProbeControl_tr(s: cstring): struct_miqt_string {.importc: "QMediaVideoProbeControl_tr".}
 proc fcQMediaVideoProbeControl_trUtf8(s: cstring): struct_miqt_string {.importc: "QMediaVideoProbeControl_trUtf8".}
 proc fcQMediaVideoProbeControl_videoFrameProbed(self: pointer, frame: pointer): void {.importc: "QMediaVideoProbeControl_videoFrameProbed".}
@@ -60,6 +61,7 @@ proc fcQMediaVideoProbeControl_tr2(s: cstring, c: cstring): struct_miqt_string {
 proc fcQMediaVideoProbeControl_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QMediaVideoProbeControl_tr3".}
 proc fcQMediaVideoProbeControl_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QMediaVideoProbeControl_trUtf82".}
 proc fcQMediaVideoProbeControl_trUtf83(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QMediaVideoProbeControl_trUtf83".}
+proc fcQMediaVideoProbeControl_staticMetaObject(): pointer {.importc: "QMediaVideoProbeControl_staticMetaObject".}
 proc fcQMediaVideoProbeControl_delete(self: pointer) {.importc: "QMediaVideoProbeControl_delete".}
 
 
@@ -70,6 +72,9 @@ proc metaObject*(self: gen_qmediavideoprobecontrol_types.QMediaVideoProbeControl
 
 proc metacast*(self: gen_qmediavideoprobecontrol_types.QMediaVideoProbeControl, param1: cstring): pointer =
   fcQMediaVideoProbeControl_metacast(self.h, param1)
+
+proc metacall*(self: gen_qmediavideoprobecontrol_types.QMediaVideoProbeControl, param1: cint, param2: cint, param3: pointer): cint =
+  fcQMediaVideoProbeControl_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qmediavideoprobecontrol_types.QMediaVideoProbeControl, s: cstring): string =
   let v_ms = fcQMediaVideoProbeControl_tr(s)
@@ -137,5 +142,7 @@ proc trUtf8*(_: type gen_qmediavideoprobecontrol_types.QMediaVideoProbeControl, 
   c_free(v_ms.data)
   vx_ret
 
+proc staticMetaObject*(_: type gen_qmediavideoprobecontrol_types.QMediaVideoProbeControl): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fcQMediaVideoProbeControl_staticMetaObject())
 proc delete*(self: gen_qmediavideoprobecontrol_types.QMediaVideoProbeControl) =
   fcQMediaVideoProbeControl_delete(self.h)

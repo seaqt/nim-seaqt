@@ -207,6 +207,7 @@ void QImage_protectedbase_rgbSwappedInplace(bool* _dynamic_cast_ok, void* self);
 QImage* QImage_protectedbase_convertToFormatHelper(bool* _dynamic_cast_ok, const void* self, int format, int flags);
 bool QImage_protectedbase_convertToFormatInplace(bool* _dynamic_cast_ok, void* self, int format, int flags);
 QImage* QImage_protectedbase_smoothScaled(bool* _dynamic_cast_ok, const void* self, int w, int h);
+const QMetaObject* QImage_staticMetaObject();
 void QImage_delete(QImage* self);
 
 #ifdef __cplusplus

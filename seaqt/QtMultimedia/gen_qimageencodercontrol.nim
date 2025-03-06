@@ -52,6 +52,7 @@ type cQImageEncoderControl*{.exportc: "QImageEncoderControl", incompleteStruct.}
 
 proc fcQImageEncoderControl_metaObject(self: pointer, ): pointer {.importc: "QImageEncoderControl_metaObject".}
 proc fcQImageEncoderControl_metacast(self: pointer, param1: cstring): pointer {.importc: "QImageEncoderControl_metacast".}
+proc fcQImageEncoderControl_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QImageEncoderControl_metacall".}
 proc fcQImageEncoderControl_tr(s: cstring): struct_miqt_string {.importc: "QImageEncoderControl_tr".}
 proc fcQImageEncoderControl_trUtf8(s: cstring): struct_miqt_string {.importc: "QImageEncoderControl_trUtf8".}
 proc fcQImageEncoderControl_supportedImageCodecs(self: pointer, ): struct_miqt_array {.importc: "QImageEncoderControl_supportedImageCodecs".}
@@ -63,6 +64,7 @@ proc fcQImageEncoderControl_tr2(s: cstring, c: cstring): struct_miqt_string {.im
 proc fcQImageEncoderControl_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QImageEncoderControl_tr3".}
 proc fcQImageEncoderControl_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QImageEncoderControl_trUtf82".}
 proc fcQImageEncoderControl_trUtf83(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QImageEncoderControl_trUtf83".}
+proc fcQImageEncoderControl_staticMetaObject(): pointer {.importc: "QImageEncoderControl_staticMetaObject".}
 proc fcQImageEncoderControl_delete(self: pointer) {.importc: "QImageEncoderControl_delete".}
 
 
@@ -73,6 +75,9 @@ proc metaObject*(self: gen_qimageencodercontrol_types.QImageEncoderControl, ): g
 
 proc metacast*(self: gen_qimageencodercontrol_types.QImageEncoderControl, param1: cstring): pointer =
   fcQImageEncoderControl_metacast(self.h, param1)
+
+proc metacall*(self: gen_qimageencodercontrol_types.QImageEncoderControl, param1: cint, param2: cint, param3: pointer): cint =
+  fcQImageEncoderControl_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qimageencodercontrol_types.QImageEncoderControl, s: cstring): string =
   let v_ms = fcQImageEncoderControl_tr(s)
@@ -141,5 +146,7 @@ proc trUtf8*(_: type gen_qimageencodercontrol_types.QImageEncoderControl, s: cst
   c_free(v_ms.data)
   vx_ret
 
+proc staticMetaObject*(_: type gen_qimageencodercontrol_types.QImageEncoderControl): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fcQImageEncoderControl_staticMetaObject())
 proc delete*(self: gen_qimageencodercontrol_types.QImageEncoderControl) =
   fcQImageEncoderControl_delete(self.h)

@@ -31,6 +31,7 @@ typedef struct QObject QObject;
 void QMediaAvailabilityControl_virtbase(QMediaAvailabilityControl* src, QMediaControl** outptr_QMediaControl);
 QMetaObject* QMediaAvailabilityControl_metaObject(const QMediaAvailabilityControl* self);
 void* QMediaAvailabilityControl_metacast(QMediaAvailabilityControl* self, const char* param1);
+int QMediaAvailabilityControl_metacall(QMediaAvailabilityControl* self, int param1, int param2, void** param3);
 struct miqt_string QMediaAvailabilityControl_tr(const char* s);
 struct miqt_string QMediaAvailabilityControl_trUtf8(const char* s);
 int QMediaAvailabilityControl_availability(const QMediaAvailabilityControl* self);
@@ -40,6 +41,7 @@ struct miqt_string QMediaAvailabilityControl_tr2(const char* s, const char* c);
 struct miqt_string QMediaAvailabilityControl_tr3(const char* s, const char* c, int n);
 struct miqt_string QMediaAvailabilityControl_trUtf82(const char* s, const char* c);
 struct miqt_string QMediaAvailabilityControl_trUtf83(const char* s, const char* c, int n);
+const QMetaObject* QMediaAvailabilityControl_staticMetaObject();
 void QMediaAvailabilityControl_delete(QMediaAvailabilityControl* self);
 
 #ifdef __cplusplus

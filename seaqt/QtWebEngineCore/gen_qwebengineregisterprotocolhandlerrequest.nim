@@ -38,8 +38,10 @@ import ./gen_qwebengineregisterprotocolhandlerrequest_types
 export gen_qwebengineregisterprotocolhandlerrequest_types
 
 import
+  ../QtCore/gen_qobjectdefs_types,
   ../QtCore/gen_qurl_types
 export
+  gen_qobjectdefs_types,
   gen_qurl_types
 
 type cQWebEngineRegisterProtocolHandlerRequest*{.exportc: "QWebEngineRegisterProtocolHandlerRequest", incompleteStruct.} = object
@@ -52,6 +54,7 @@ proc fcQWebEngineRegisterProtocolHandlerRequest_origin(self: pointer, ): pointer
 proc fcQWebEngineRegisterProtocolHandlerRequest_scheme(self: pointer, ): struct_miqt_string {.importc: "QWebEngineRegisterProtocolHandlerRequest_scheme".}
 proc fcQWebEngineRegisterProtocolHandlerRequest_operatorEqual(self: pointer, that: pointer): bool {.importc: "QWebEngineRegisterProtocolHandlerRequest_operatorEqual".}
 proc fcQWebEngineRegisterProtocolHandlerRequest_operatorNotEqual(self: pointer, that: pointer): bool {.importc: "QWebEngineRegisterProtocolHandlerRequest_operatorNotEqual".}
+proc fcQWebEngineRegisterProtocolHandlerRequest_staticMetaObject(): pointer {.importc: "QWebEngineRegisterProtocolHandlerRequest_staticMetaObject".}
 proc fcQWebEngineRegisterProtocolHandlerRequest_delete(self: pointer) {.importc: "QWebEngineRegisterProtocolHandlerRequest_delete".}
 
 
@@ -84,5 +87,7 @@ proc operatorEqual*(self: gen_qwebengineregisterprotocolhandlerrequest_types.QWe
 proc operatorNotEqual*(self: gen_qwebengineregisterprotocolhandlerrequest_types.QWebEngineRegisterProtocolHandlerRequest, that: gen_qwebengineregisterprotocolhandlerrequest_types.QWebEngineRegisterProtocolHandlerRequest): bool =
   fcQWebEngineRegisterProtocolHandlerRequest_operatorNotEqual(self.h, that.h)
 
+proc staticMetaObject*(_: type gen_qwebengineregisterprotocolhandlerrequest_types.QWebEngineRegisterProtocolHandlerRequest): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fcQWebEngineRegisterProtocolHandlerRequest_staticMetaObject())
 proc delete*(self: gen_qwebengineregisterprotocolhandlerrequest_types.QWebEngineRegisterProtocolHandlerRequest) =
   fcQWebEngineRegisterProtocolHandlerRequest_delete(self.h)

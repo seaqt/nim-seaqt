@@ -17,6 +17,9 @@
 extern "C" {
 #endif
 
+QMetaObject* miqt_exec_callback_QThread_metaObject(const QThread*, intptr_t);
+void* miqt_exec_callback_QThread_metacast(QThread*, intptr_t, const char*);
+int miqt_exec_callback_QThread_metacall(QThread*, intptr_t, int, int, void**);
 bool miqt_exec_callback_QThread_event(QThread*, intptr_t, QEvent*);
 void miqt_exec_callback_QThread_run(QThread*, intptr_t);
 bool miqt_exec_callback_QThread_eventFilter(QThread*, intptr_t, QObject*, QEvent*);
@@ -36,6 +39,62 @@ public:
 	VirtualQThread(QObject* parent): QThread(parent) {};
 
 	virtual ~VirtualQThread() override = default;
+
+	// cgo.Handle value for overwritten implementation
+	intptr_t handle__metaObject = 0;
+
+	// Subclass to allow providing a Go implementation
+	virtual const QMetaObject* metaObject() const override {
+		if (handle__metaObject == 0) {
+			return QThread::metaObject();
+		}
+		
+
+		QMetaObject* callback_return_value = miqt_exec_callback_QThread_metaObject(this, handle__metaObject);
+
+		return callback_return_value;
+	}
+
+	friend QMetaObject* QThread_virtualbase_metaObject(const void* self);
+
+	// cgo.Handle value for overwritten implementation
+	intptr_t handle__metacast = 0;
+
+	// Subclass to allow providing a Go implementation
+	virtual void* qt_metacast(const char* param1) override {
+		if (handle__metacast == 0) {
+			return QThread::qt_metacast(param1);
+		}
+		
+		const char* sigval1 = (const char*) param1;
+
+		void* callback_return_value = miqt_exec_callback_QThread_metacast(this, handle__metacast, sigval1);
+
+		return callback_return_value;
+	}
+
+	friend void* QThread_virtualbase_metacast(void* self, const char* param1);
+
+	// cgo.Handle value for overwritten implementation
+	intptr_t handle__metacall = 0;
+
+	// Subclass to allow providing a Go implementation
+	virtual int qt_metacall(QMetaObject::Call param1, int param2, void** param3) override {
+		if (handle__metacall == 0) {
+			return QThread::qt_metacall(param1, param2, param3);
+		}
+		
+		QMetaObject::Call param1_ret = param1;
+		int sigval1 = static_cast<int>(param1_ret);
+		int sigval2 = param2;
+		void** sigval3 = param3;
+
+		int callback_return_value = miqt_exec_callback_QThread_metacall(this, handle__metacall, sigval1, sigval2, sigval3);
+
+		return static_cast<int>(callback_return_value);
+	}
+
+	friend int QThread_virtualbase_metacall(void* self, int param1, int param2, void** param3);
 
 	// cgo.Handle value for overwritten implementation
 	intptr_t handle__event = 0;
@@ -219,6 +278,10 @@ void* QThread_metacast(QThread* self, const char* param1) {
 	return self->qt_metacast(param1);
 }
 
+int QThread_metacall(QThread* self, int param1, int param2, void** param3) {
+	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
+}
+
 struct miqt_string QThread_tr(const char* s) {
 	QString _ret = QThread::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
@@ -400,6 +463,54 @@ bool QThread_wait1(QThread* self, QDeadlineTimer* deadline) {
 	return self->wait(*deadline);
 }
 
+bool QThread_override_virtual_metaObject(void* self, intptr_t slot) {
+	VirtualQThread* self_cast = dynamic_cast<VirtualQThread*>( (QThread*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+	
+	self_cast->handle__metaObject = slot;
+	return true;
+}
+
+QMetaObject* QThread_virtualbase_metaObject(const void* self) {
+
+	return (QMetaObject*) ( (const VirtualQThread*)(self) )->QThread::metaObject();
+
+}
+
+bool QThread_override_virtual_metacast(void* self, intptr_t slot) {
+	VirtualQThread* self_cast = dynamic_cast<VirtualQThread*>( (QThread*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+	
+	self_cast->handle__metacast = slot;
+	return true;
+}
+
+void* QThread_virtualbase_metacast(void* self, const char* param1) {
+
+	return ( (VirtualQThread*)(self) )->QThread::qt_metacast(param1);
+
+}
+
+bool QThread_override_virtual_metacall(void* self, intptr_t slot) {
+	VirtualQThread* self_cast = dynamic_cast<VirtualQThread*>( (QThread*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+	
+	self_cast->handle__metacall = slot;
+	return true;
+}
+
+int QThread_virtualbase_metacall(void* self, int param1, int param2, void** param3) {
+
+	return ( (VirtualQThread*)(self) )->QThread::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
+
+}
+
 bool QThread_override_virtual_event(void* self, intptr_t slot) {
 	VirtualQThread* self_cast = dynamic_cast<VirtualQThread*>( (QThread*)(self) );
 	if (self_cast == nullptr) {
@@ -528,6 +639,7 @@ void QThread_virtualbase_disconnectNotify(void* self, QMetaMethod* signal) {
 
 }
 
+const QMetaObject* QThread_staticMetaObject() { return &QThread::staticMetaObject; }
 int QThread_protectedbase_exec(bool* _dynamic_cast_ok, void* self) {
 	VirtualQThread* self_cast = dynamic_cast<VirtualQThread*>( (QThread*)(self) );
 	if (self_cast == nullptr) {

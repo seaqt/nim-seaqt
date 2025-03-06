@@ -82,6 +82,7 @@ proc fcQColumnView_new(parent: pointer): ptr cQColumnView {.importc: "QColumnVie
 proc fcQColumnView_new2(): ptr cQColumnView {.importc: "QColumnView_new2".}
 proc fcQColumnView_metaObject(self: pointer, ): pointer {.importc: "QColumnView_metaObject".}
 proc fcQColumnView_metacast(self: pointer, param1: cstring): pointer {.importc: "QColumnView_metacast".}
+proc fcQColumnView_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QColumnView_metacall".}
 proc fcQColumnView_tr(s: cstring): struct_miqt_string {.importc: "QColumnView_tr".}
 proc fcQColumnView_trUtf8(s: cstring): struct_miqt_string {.importc: "QColumnView_trUtf8".}
 proc fcQColumnView_updatePreviewWidget(self: pointer, index: pointer): void {.importc: "QColumnView_updatePreviewWidget".}
@@ -104,6 +105,12 @@ proc fcQColumnView_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "Q
 proc fcQColumnView_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QColumnView_tr3".}
 proc fcQColumnView_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QColumnView_trUtf82".}
 proc fcQColumnView_trUtf83(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QColumnView_trUtf83".}
+proc fQColumnView_virtualbase_metaObject(self: pointer, ): pointer{.importc: "QColumnView_virtualbase_metaObject".}
+proc fcQColumnView_override_virtual_metaObject(self: pointer, slot: int) {.importc: "QColumnView_override_virtual_metaObject".}
+proc fQColumnView_virtualbase_metacast(self: pointer, param1: cstring): pointer{.importc: "QColumnView_virtualbase_metacast".}
+proc fcQColumnView_override_virtual_metacast(self: pointer, slot: int) {.importc: "QColumnView_override_virtual_metacast".}
+proc fQColumnView_virtualbase_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint{.importc: "QColumnView_virtualbase_metacall".}
+proc fcQColumnView_override_virtual_metacall(self: pointer, slot: int) {.importc: "QColumnView_override_virtual_metacall".}
 proc fQColumnView_virtualbase_indexAt(self: pointer, point: pointer): pointer{.importc: "QColumnView_virtualbase_indexAt".}
 proc fcQColumnView_override_virtual_indexAt(self: pointer, slot: int) {.importc: "QColumnView_override_virtual_indexAt".}
 proc fQColumnView_virtualbase_scrollTo(self: pointer, index: pointer, hint: cint): void{.importc: "QColumnView_virtualbase_scrollTo".}
@@ -284,6 +291,7 @@ proc fQColumnView_virtualbase_connectNotify(self: pointer, signal: pointer): voi
 proc fcQColumnView_override_virtual_connectNotify(self: pointer, slot: int) {.importc: "QColumnView_override_virtual_connectNotify".}
 proc fQColumnView_virtualbase_disconnectNotify(self: pointer, signal: pointer): void{.importc: "QColumnView_virtualbase_disconnectNotify".}
 proc fcQColumnView_override_virtual_disconnectNotify(self: pointer, slot: int) {.importc: "QColumnView_override_virtual_disconnectNotify".}
+proc fcQColumnView_staticMetaObject(): pointer {.importc: "QColumnView_staticMetaObject".}
 proc fcQColumnView_delete(self: pointer) {.importc: "QColumnView_delete".}
 
 
@@ -300,6 +308,9 @@ proc metaObject*(self: gen_qcolumnview_types.QColumnView, ): gen_qobjectdefs_typ
 
 proc metacast*(self: gen_qcolumnview_types.QColumnView, param1: cstring): pointer =
   fcQColumnView_metacast(self.h, param1)
+
+proc metacall*(self: gen_qcolumnview_types.QColumnView, param1: cint, param2: cint, param3: pointer): cint =
+  fcQColumnView_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qcolumnview_types.QColumnView, s: cstring): string =
   let v_ms = fcQColumnView_tr(s)
@@ -404,6 +415,65 @@ proc trUtf8*(_: type gen_qcolumnview_types.QColumnView, s: cstring, c: cstring, 
   c_free(v_ms.data)
   vx_ret
 
+proc QColumnViewmetaObject*(self: gen_qcolumnview_types.QColumnView, ): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fQColumnView_virtualbase_metaObject(self.h))
+
+type QColumnViewmetaObjectProc* = proc(): gen_qobjectdefs_types.QMetaObject
+proc onmetaObject*(self: gen_qcolumnview_types.QColumnView, slot: QColumnViewmetaObjectProc) =
+  # TODO check subclass
+  var tmp = new QColumnViewmetaObjectProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQColumnView_override_virtual_metaObject(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QColumnView_metaObject(self: ptr cQColumnView, slot: int): pointer {.exportc: "miqt_exec_callback_QColumnView_metaObject ".} =
+  var nimfunc = cast[ptr QColumnViewmetaObjectProc](cast[pointer](slot))
+
+  let virtualReturn = nimfunc[]( )
+
+  virtualReturn.h
+proc QColumnViewmetacast*(self: gen_qcolumnview_types.QColumnView, param1: cstring): pointer =
+  fQColumnView_virtualbase_metacast(self.h, param1)
+
+type QColumnViewmetacastProc* = proc(param1: cstring): pointer
+proc onmetacast*(self: gen_qcolumnview_types.QColumnView, slot: QColumnViewmetacastProc) =
+  # TODO check subclass
+  var tmp = new QColumnViewmetacastProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQColumnView_override_virtual_metacast(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QColumnView_metacast(self: ptr cQColumnView, slot: int, param1: cstring): pointer {.exportc: "miqt_exec_callback_QColumnView_metacast ".} =
+  var nimfunc = cast[ptr QColumnViewmetacastProc](cast[pointer](slot))
+  let slotval1 = (param1)
+
+
+  let virtualReturn = nimfunc[](slotval1 )
+
+  virtualReturn
+proc QColumnViewmetacall*(self: gen_qcolumnview_types.QColumnView, param1: cint, param2: cint, param3: pointer): cint =
+  fQColumnView_virtualbase_metacall(self.h, cint(param1), param2, param3)
+
+type QColumnViewmetacallProc* = proc(param1: cint, param2: cint, param3: pointer): cint
+proc onmetacall*(self: gen_qcolumnview_types.QColumnView, slot: QColumnViewmetacallProc) =
+  # TODO check subclass
+  var tmp = new QColumnViewmetacallProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQColumnView_override_virtual_metacall(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QColumnView_metacall(self: ptr cQColumnView, slot: int, param1: cint, param2: cint, param3: pointer): cint {.exportc: "miqt_exec_callback_QColumnView_metacall ".} =
+  var nimfunc = cast[ptr QColumnViewmetacallProc](cast[pointer](slot))
+  let slotval1 = cint(param1)
+
+  let slotval2 = param2
+
+  let slotval3 = param3
+
+
+  let virtualReturn = nimfunc[](slotval1, slotval2, slotval3 )
+
+  virtualReturn
 proc QColumnViewindexAt*(self: gen_qcolumnview_types.QColumnView, point: gen_qpoint_types.QPoint): gen_qabstractitemmodel_types.QModelIndex =
   gen_qabstractitemmodel_types.QModelIndex(h: fQColumnView_virtualbase_indexAt(self.h, point.h))
 
@@ -2022,5 +2092,7 @@ proc miqt_exec_callback_QColumnView_disconnectNotify(self: ptr cQColumnView, slo
 
 
   nimfunc[](slotval1)
+proc staticMetaObject*(_: type gen_qcolumnview_types.QColumnView): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fcQColumnView_staticMetaObject())
 proc delete*(self: gen_qcolumnview_types.QColumnView) =
   fcQColumnView_delete(self.h)

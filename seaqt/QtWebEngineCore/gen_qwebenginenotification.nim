@@ -52,6 +52,7 @@ type cQWebEngineNotification*{.exportc: "QWebEngineNotification", incompleteStru
 
 proc fcQWebEngineNotification_metaObject(self: pointer, ): pointer {.importc: "QWebEngineNotification_metaObject".}
 proc fcQWebEngineNotification_metacast(self: pointer, param1: cstring): pointer {.importc: "QWebEngineNotification_metacast".}
+proc fcQWebEngineNotification_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QWebEngineNotification_metacall".}
 proc fcQWebEngineNotification_tr(s: cstring): struct_miqt_string {.importc: "QWebEngineNotification_tr".}
 proc fcQWebEngineNotification_trUtf8(s: cstring): struct_miqt_string {.importc: "QWebEngineNotification_trUtf8".}
 proc fcQWebEngineNotification_matches(self: pointer, other: pointer): bool {.importc: "QWebEngineNotification_matches".}
@@ -71,6 +72,7 @@ proc fcQWebEngineNotification_tr2(s: cstring, c: cstring): struct_miqt_string {.
 proc fcQWebEngineNotification_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QWebEngineNotification_tr3".}
 proc fcQWebEngineNotification_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QWebEngineNotification_trUtf82".}
 proc fcQWebEngineNotification_trUtf83(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QWebEngineNotification_trUtf83".}
+proc fcQWebEngineNotification_staticMetaObject(): pointer {.importc: "QWebEngineNotification_staticMetaObject".}
 proc fcQWebEngineNotification_delete(self: pointer) {.importc: "QWebEngineNotification_delete".}
 
 
@@ -81,6 +83,9 @@ proc metaObject*(self: gen_qwebenginenotification_types.QWebEngineNotification, 
 
 proc metacast*(self: gen_qwebenginenotification_types.QWebEngineNotification, param1: cstring): pointer =
   fcQWebEngineNotification_metacast(self.h, param1)
+
+proc metacall*(self: gen_qwebenginenotification_types.QWebEngineNotification, param1: cint, param2: cint, param3: pointer): cint =
+  fcQWebEngineNotification_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qwebenginenotification_types.QWebEngineNotification, s: cstring): string =
   let v_ms = fcQWebEngineNotification_tr(s)
@@ -177,5 +182,7 @@ proc trUtf8*(_: type gen_qwebenginenotification_types.QWebEngineNotification, s:
   c_free(v_ms.data)
   vx_ret
 
+proc staticMetaObject*(_: type gen_qwebenginenotification_types.QWebEngineNotification): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fcQWebEngineNotification_staticMetaObject())
 proc delete*(self: gen_qwebenginenotification_types.QWebEngineNotification) =
   fcQWebEngineNotification_delete(self.h)

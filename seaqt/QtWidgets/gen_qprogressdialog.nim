@@ -82,6 +82,7 @@ proc fcQProgressDialog_new5(labelText: struct_miqt_string, cancelButtonText: str
 proc fcQProgressDialog_new6(labelText: struct_miqt_string, cancelButtonText: struct_miqt_string, minimum: cint, maximum: cint, parent: pointer, flags: cint): ptr cQProgressDialog {.importc: "QProgressDialog_new6".}
 proc fcQProgressDialog_metaObject(self: pointer, ): pointer {.importc: "QProgressDialog_metaObject".}
 proc fcQProgressDialog_metacast(self: pointer, param1: cstring): pointer {.importc: "QProgressDialog_metacast".}
+proc fcQProgressDialog_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QProgressDialog_metacall".}
 proc fcQProgressDialog_tr(s: cstring): struct_miqt_string {.importc: "QProgressDialog_tr".}
 proc fcQProgressDialog_trUtf8(s: cstring): struct_miqt_string {.importc: "QProgressDialog_trUtf8".}
 proc fcQProgressDialog_setLabel(self: pointer, label: pointer): void {.importc: "QProgressDialog_setLabel".}
@@ -113,6 +114,12 @@ proc fcQProgressDialog_tr2(s: cstring, c: cstring): struct_miqt_string {.importc
 proc fcQProgressDialog_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QProgressDialog_tr3".}
 proc fcQProgressDialog_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QProgressDialog_trUtf82".}
 proc fcQProgressDialog_trUtf83(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QProgressDialog_trUtf83".}
+proc fQProgressDialog_virtualbase_metaObject(self: pointer, ): pointer{.importc: "QProgressDialog_virtualbase_metaObject".}
+proc fcQProgressDialog_override_virtual_metaObject(self: pointer, slot: int) {.importc: "QProgressDialog_override_virtual_metaObject".}
+proc fQProgressDialog_virtualbase_metacast(self: pointer, param1: cstring): pointer{.importc: "QProgressDialog_virtualbase_metacast".}
+proc fcQProgressDialog_override_virtual_metacast(self: pointer, slot: int) {.importc: "QProgressDialog_override_virtual_metacast".}
+proc fQProgressDialog_virtualbase_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint{.importc: "QProgressDialog_virtualbase_metacall".}
+proc fcQProgressDialog_override_virtual_metacall(self: pointer, slot: int) {.importc: "QProgressDialog_override_virtual_metacall".}
 proc fQProgressDialog_virtualbase_sizeHint(self: pointer, ): pointer{.importc: "QProgressDialog_virtualbase_sizeHint".}
 proc fcQProgressDialog_override_virtual_sizeHint(self: pointer, slot: int) {.importc: "QProgressDialog_override_virtual_sizeHint".}
 proc fQProgressDialog_virtualbase_resizeEvent(self: pointer, event: pointer): void{.importc: "QProgressDialog_virtualbase_resizeEvent".}
@@ -217,6 +224,7 @@ proc fQProgressDialog_virtualbase_connectNotify(self: pointer, signal: pointer):
 proc fcQProgressDialog_override_virtual_connectNotify(self: pointer, slot: int) {.importc: "QProgressDialog_override_virtual_connectNotify".}
 proc fQProgressDialog_virtualbase_disconnectNotify(self: pointer, signal: pointer): void{.importc: "QProgressDialog_virtualbase_disconnectNotify".}
 proc fcQProgressDialog_override_virtual_disconnectNotify(self: pointer, slot: int) {.importc: "QProgressDialog_override_virtual_disconnectNotify".}
+proc fcQProgressDialog_staticMetaObject(): pointer {.importc: "QProgressDialog_staticMetaObject".}
 proc fcQProgressDialog_delete(self: pointer) {.importc: "QProgressDialog_delete".}
 
 
@@ -245,6 +253,9 @@ proc metaObject*(self: gen_qprogressdialog_types.QProgressDialog, ): gen_qobject
 
 proc metacast*(self: gen_qprogressdialog_types.QProgressDialog, param1: cstring): pointer =
   fcQProgressDialog_metacast(self.h, param1)
+
+proc metacall*(self: gen_qprogressdialog_types.QProgressDialog, param1: cint, param2: cint, param3: pointer): cint =
+  fcQProgressDialog_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qprogressdialog_types.QProgressDialog, s: cstring): string =
   let v_ms = fcQProgressDialog_tr(s)
@@ -368,6 +379,65 @@ proc trUtf8*(_: type gen_qprogressdialog_types.QProgressDialog, s: cstring, c: c
   c_free(v_ms.data)
   vx_ret
 
+proc QProgressDialogmetaObject*(self: gen_qprogressdialog_types.QProgressDialog, ): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fQProgressDialog_virtualbase_metaObject(self.h))
+
+type QProgressDialogmetaObjectProc* = proc(): gen_qobjectdefs_types.QMetaObject
+proc onmetaObject*(self: gen_qprogressdialog_types.QProgressDialog, slot: QProgressDialogmetaObjectProc) =
+  # TODO check subclass
+  var tmp = new QProgressDialogmetaObjectProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQProgressDialog_override_virtual_metaObject(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QProgressDialog_metaObject(self: ptr cQProgressDialog, slot: int): pointer {.exportc: "miqt_exec_callback_QProgressDialog_metaObject ".} =
+  var nimfunc = cast[ptr QProgressDialogmetaObjectProc](cast[pointer](slot))
+
+  let virtualReturn = nimfunc[]( )
+
+  virtualReturn.h
+proc QProgressDialogmetacast*(self: gen_qprogressdialog_types.QProgressDialog, param1: cstring): pointer =
+  fQProgressDialog_virtualbase_metacast(self.h, param1)
+
+type QProgressDialogmetacastProc* = proc(param1: cstring): pointer
+proc onmetacast*(self: gen_qprogressdialog_types.QProgressDialog, slot: QProgressDialogmetacastProc) =
+  # TODO check subclass
+  var tmp = new QProgressDialogmetacastProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQProgressDialog_override_virtual_metacast(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QProgressDialog_metacast(self: ptr cQProgressDialog, slot: int, param1: cstring): pointer {.exportc: "miqt_exec_callback_QProgressDialog_metacast ".} =
+  var nimfunc = cast[ptr QProgressDialogmetacastProc](cast[pointer](slot))
+  let slotval1 = (param1)
+
+
+  let virtualReturn = nimfunc[](slotval1 )
+
+  virtualReturn
+proc QProgressDialogmetacall*(self: gen_qprogressdialog_types.QProgressDialog, param1: cint, param2: cint, param3: pointer): cint =
+  fQProgressDialog_virtualbase_metacall(self.h, cint(param1), param2, param3)
+
+type QProgressDialogmetacallProc* = proc(param1: cint, param2: cint, param3: pointer): cint
+proc onmetacall*(self: gen_qprogressdialog_types.QProgressDialog, slot: QProgressDialogmetacallProc) =
+  # TODO check subclass
+  var tmp = new QProgressDialogmetacallProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQProgressDialog_override_virtual_metacall(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QProgressDialog_metacall(self: ptr cQProgressDialog, slot: int, param1: cint, param2: cint, param3: pointer): cint {.exportc: "miqt_exec_callback_QProgressDialog_metacall ".} =
+  var nimfunc = cast[ptr QProgressDialogmetacallProc](cast[pointer](slot))
+  let slotval1 = cint(param1)
+
+  let slotval2 = param2
+
+  let slotval3 = param3
+
+
+  let virtualReturn = nimfunc[](slotval1, slotval2, slotval3 )
+
+  virtualReturn
 proc QProgressDialogsizeHint*(self: gen_qprogressdialog_types.QProgressDialog, ): gen_qsize_types.QSize =
   gen_qsize_types.QSize(h: fQProgressDialog_virtualbase_sizeHint(self.h))
 
@@ -1271,5 +1341,7 @@ proc miqt_exec_callback_QProgressDialog_disconnectNotify(self: ptr cQProgressDia
 
 
   nimfunc[](slotval1)
+proc staticMetaObject*(_: type gen_qprogressdialog_types.QProgressDialog): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fcQProgressDialog_staticMetaObject())
 proc delete*(self: gen_qprogressdialog_types.QProgressDialog) =
   fcQProgressDialog_delete(self.h)

@@ -58,6 +58,7 @@ proc fcQScriptExtensionPlugin_new(): ptr cQScriptExtensionPlugin {.importc: "QSc
 proc fcQScriptExtensionPlugin_new2(parent: pointer): ptr cQScriptExtensionPlugin {.importc: "QScriptExtensionPlugin_new2".}
 proc fcQScriptExtensionPlugin_metaObject(self: pointer, ): pointer {.importc: "QScriptExtensionPlugin_metaObject".}
 proc fcQScriptExtensionPlugin_metacast(self: pointer, param1: cstring): pointer {.importc: "QScriptExtensionPlugin_metacast".}
+proc fcQScriptExtensionPlugin_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QScriptExtensionPlugin_metacall".}
 proc fcQScriptExtensionPlugin_tr(s: cstring): struct_miqt_string {.importc: "QScriptExtensionPlugin_tr".}
 proc fcQScriptExtensionPlugin_trUtf8(s: cstring): struct_miqt_string {.importc: "QScriptExtensionPlugin_trUtf8".}
 proc fcQScriptExtensionPlugin_keys(self: pointer, ): struct_miqt_array {.importc: "QScriptExtensionPlugin_keys".}
@@ -67,6 +68,12 @@ proc fcQScriptExtensionPlugin_tr2(s: cstring, c: cstring): struct_miqt_string {.
 proc fcQScriptExtensionPlugin_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QScriptExtensionPlugin_tr3".}
 proc fcQScriptExtensionPlugin_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QScriptExtensionPlugin_trUtf82".}
 proc fcQScriptExtensionPlugin_trUtf83(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QScriptExtensionPlugin_trUtf83".}
+proc fQScriptExtensionPlugin_virtualbase_metaObject(self: pointer, ): pointer{.importc: "QScriptExtensionPlugin_virtualbase_metaObject".}
+proc fcQScriptExtensionPlugin_override_virtual_metaObject(self: pointer, slot: int) {.importc: "QScriptExtensionPlugin_override_virtual_metaObject".}
+proc fQScriptExtensionPlugin_virtualbase_metacast(self: pointer, param1: cstring): pointer{.importc: "QScriptExtensionPlugin_virtualbase_metacast".}
+proc fcQScriptExtensionPlugin_override_virtual_metacast(self: pointer, slot: int) {.importc: "QScriptExtensionPlugin_override_virtual_metacast".}
+proc fQScriptExtensionPlugin_virtualbase_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint{.importc: "QScriptExtensionPlugin_virtualbase_metacall".}
+proc fcQScriptExtensionPlugin_override_virtual_metacall(self: pointer, slot: int) {.importc: "QScriptExtensionPlugin_override_virtual_metacall".}
 proc fcQScriptExtensionPlugin_override_virtual_keys(self: pointer, slot: int) {.importc: "QScriptExtensionPlugin_override_virtual_keys".}
 proc fcQScriptExtensionPlugin_override_virtual_initialize(self: pointer, slot: int) {.importc: "QScriptExtensionPlugin_override_virtual_initialize".}
 proc fQScriptExtensionPlugin_virtualbase_event(self: pointer, event: pointer): bool{.importc: "QScriptExtensionPlugin_virtualbase_event".}
@@ -83,6 +90,7 @@ proc fQScriptExtensionPlugin_virtualbase_connectNotify(self: pointer, signal: po
 proc fcQScriptExtensionPlugin_override_virtual_connectNotify(self: pointer, slot: int) {.importc: "QScriptExtensionPlugin_override_virtual_connectNotify".}
 proc fQScriptExtensionPlugin_virtualbase_disconnectNotify(self: pointer, signal: pointer): void{.importc: "QScriptExtensionPlugin_virtualbase_disconnectNotify".}
 proc fcQScriptExtensionPlugin_override_virtual_disconnectNotify(self: pointer, slot: int) {.importc: "QScriptExtensionPlugin_override_virtual_disconnectNotify".}
+proc fcQScriptExtensionPlugin_staticMetaObject(): pointer {.importc: "QScriptExtensionPlugin_staticMetaObject".}
 proc fcQScriptExtensionPlugin_delete(self: pointer) {.importc: "QScriptExtensionPlugin_delete".}
 
 
@@ -99,6 +107,9 @@ proc metaObject*(self: gen_qscriptextensionplugin_types.QScriptExtensionPlugin, 
 
 proc metacast*(self: gen_qscriptextensionplugin_types.QScriptExtensionPlugin, param1: cstring): pointer =
   fcQScriptExtensionPlugin_metacast(self.h, param1)
+
+proc metacall*(self: gen_qscriptextensionplugin_types.QScriptExtensionPlugin, param1: cint, param2: cint, param3: pointer): cint =
+  fcQScriptExtensionPlugin_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qscriptextensionplugin_types.QScriptExtensionPlugin, s: cstring): string =
   let v_ms = fcQScriptExtensionPlugin_tr(s)
@@ -153,6 +164,65 @@ proc trUtf8*(_: type gen_qscriptextensionplugin_types.QScriptExtensionPlugin, s:
   c_free(v_ms.data)
   vx_ret
 
+proc QScriptExtensionPluginmetaObject*(self: gen_qscriptextensionplugin_types.QScriptExtensionPlugin, ): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fQScriptExtensionPlugin_virtualbase_metaObject(self.h))
+
+type QScriptExtensionPluginmetaObjectProc* = proc(): gen_qobjectdefs_types.QMetaObject
+proc onmetaObject*(self: gen_qscriptextensionplugin_types.QScriptExtensionPlugin, slot: QScriptExtensionPluginmetaObjectProc) =
+  # TODO check subclass
+  var tmp = new QScriptExtensionPluginmetaObjectProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQScriptExtensionPlugin_override_virtual_metaObject(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QScriptExtensionPlugin_metaObject(self: ptr cQScriptExtensionPlugin, slot: int): pointer {.exportc: "miqt_exec_callback_QScriptExtensionPlugin_metaObject ".} =
+  var nimfunc = cast[ptr QScriptExtensionPluginmetaObjectProc](cast[pointer](slot))
+
+  let virtualReturn = nimfunc[]( )
+
+  virtualReturn.h
+proc QScriptExtensionPluginmetacast*(self: gen_qscriptextensionplugin_types.QScriptExtensionPlugin, param1: cstring): pointer =
+  fQScriptExtensionPlugin_virtualbase_metacast(self.h, param1)
+
+type QScriptExtensionPluginmetacastProc* = proc(param1: cstring): pointer
+proc onmetacast*(self: gen_qscriptextensionplugin_types.QScriptExtensionPlugin, slot: QScriptExtensionPluginmetacastProc) =
+  # TODO check subclass
+  var tmp = new QScriptExtensionPluginmetacastProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQScriptExtensionPlugin_override_virtual_metacast(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QScriptExtensionPlugin_metacast(self: ptr cQScriptExtensionPlugin, slot: int, param1: cstring): pointer {.exportc: "miqt_exec_callback_QScriptExtensionPlugin_metacast ".} =
+  var nimfunc = cast[ptr QScriptExtensionPluginmetacastProc](cast[pointer](slot))
+  let slotval1 = (param1)
+
+
+  let virtualReturn = nimfunc[](slotval1 )
+
+  virtualReturn
+proc QScriptExtensionPluginmetacall*(self: gen_qscriptextensionplugin_types.QScriptExtensionPlugin, param1: cint, param2: cint, param3: pointer): cint =
+  fQScriptExtensionPlugin_virtualbase_metacall(self.h, cint(param1), param2, param3)
+
+type QScriptExtensionPluginmetacallProc* = proc(param1: cint, param2: cint, param3: pointer): cint
+proc onmetacall*(self: gen_qscriptextensionplugin_types.QScriptExtensionPlugin, slot: QScriptExtensionPluginmetacallProc) =
+  # TODO check subclass
+  var tmp = new QScriptExtensionPluginmetacallProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQScriptExtensionPlugin_override_virtual_metacall(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QScriptExtensionPlugin_metacall(self: ptr cQScriptExtensionPlugin, slot: int, param1: cint, param2: cint, param3: pointer): cint {.exportc: "miqt_exec_callback_QScriptExtensionPlugin_metacall ".} =
+  var nimfunc = cast[ptr QScriptExtensionPluginmetacallProc](cast[pointer](slot))
+  let slotval1 = cint(param1)
+
+  let slotval2 = param2
+
+  let slotval3 = param3
+
+
+  let virtualReturn = nimfunc[](slotval1, slotval2, slotval3 )
+
+  virtualReturn
 type QScriptExtensionPluginkeysProc* = proc(): seq[string]
 proc onkeys*(self: gen_qscriptextensionplugin_types.QScriptExtensionPlugin, slot: QScriptExtensionPluginkeysProc) =
   # TODO check subclass
@@ -315,5 +385,7 @@ proc miqt_exec_callback_QScriptExtensionPlugin_disconnectNotify(self: ptr cQScri
 
 
   nimfunc[](slotval1)
+proc staticMetaObject*(_: type gen_qscriptextensionplugin_types.QScriptExtensionPlugin): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fcQScriptExtensionPlugin_staticMetaObject())
 proc delete*(self: gen_qscriptextensionplugin_types.QScriptExtensionPlugin) =
   fcQScriptExtensionPlugin_delete(self.h)

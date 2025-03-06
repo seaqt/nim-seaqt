@@ -41,6 +41,7 @@ QThread* QThread_new2(QObject* parent);
 void QThread_virtbase(QThread* src, QObject** outptr_QObject);
 QMetaObject* QThread_metaObject(const QThread* self);
 void* QThread_metacast(QThread* self, const char* param1);
+int QThread_metacall(QThread* self, int param1, int param2, void** param3);
 struct miqt_string QThread_tr(const char* s);
 struct miqt_string QThread_trUtf8(const char* s);
 void* QThread_currentThreadId();
@@ -76,6 +77,12 @@ struct miqt_string QThread_trUtf83(const char* s, const char* c, int n);
 void QThread_exit1(QThread* self, int retcode);
 void QThread_start1(QThread* self, int param1);
 bool QThread_wait1(QThread* self, QDeadlineTimer* deadline);
+bool QThread_override_virtual_metaObject(void* self, intptr_t slot);
+QMetaObject* QThread_virtualbase_metaObject(const void* self);
+bool QThread_override_virtual_metacast(void* self, intptr_t slot);
+void* QThread_virtualbase_metacast(void* self, const char* param1);
+bool QThread_override_virtual_metacall(void* self, intptr_t slot);
+int QThread_virtualbase_metacall(void* self, int param1, int param2, void** param3);
 bool QThread_override_virtual_event(void* self, intptr_t slot);
 bool QThread_virtualbase_event(void* self, QEvent* event);
 bool QThread_override_virtual_run(void* self, intptr_t slot);
@@ -97,6 +104,7 @@ QObject* QThread_protectedbase_sender(bool* _dynamic_cast_ok, const void* self);
 int QThread_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
 int QThread_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
 bool QThread_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+const QMetaObject* QThread_staticMetaObject();
 void QThread_delete(QThread* self);
 
 #ifdef __cplusplus

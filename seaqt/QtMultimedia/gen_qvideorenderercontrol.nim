@@ -50,6 +50,7 @@ type cQVideoRendererControl*{.exportc: "QVideoRendererControl", incompleteStruct
 
 proc fcQVideoRendererControl_metaObject(self: pointer, ): pointer {.importc: "QVideoRendererControl_metaObject".}
 proc fcQVideoRendererControl_metacast(self: pointer, param1: cstring): pointer {.importc: "QVideoRendererControl_metacast".}
+proc fcQVideoRendererControl_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QVideoRendererControl_metacall".}
 proc fcQVideoRendererControl_tr(s: cstring): struct_miqt_string {.importc: "QVideoRendererControl_tr".}
 proc fcQVideoRendererControl_trUtf8(s: cstring): struct_miqt_string {.importc: "QVideoRendererControl_trUtf8".}
 proc fcQVideoRendererControl_surface(self: pointer, ): pointer {.importc: "QVideoRendererControl_surface".}
@@ -58,6 +59,7 @@ proc fcQVideoRendererControl_tr2(s: cstring, c: cstring): struct_miqt_string {.i
 proc fcQVideoRendererControl_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QVideoRendererControl_tr3".}
 proc fcQVideoRendererControl_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QVideoRendererControl_trUtf82".}
 proc fcQVideoRendererControl_trUtf83(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QVideoRendererControl_trUtf83".}
+proc fcQVideoRendererControl_staticMetaObject(): pointer {.importc: "QVideoRendererControl_staticMetaObject".}
 proc fcQVideoRendererControl_delete(self: pointer) {.importc: "QVideoRendererControl_delete".}
 
 
@@ -68,6 +70,9 @@ proc metaObject*(self: gen_qvideorenderercontrol_types.QVideoRendererControl, ):
 
 proc metacast*(self: gen_qvideorenderercontrol_types.QVideoRendererControl, param1: cstring): pointer =
   fcQVideoRendererControl_metacast(self.h, param1)
+
+proc metacall*(self: gen_qvideorenderercontrol_types.QVideoRendererControl, param1: cint, param2: cint, param3: pointer): cint =
+  fcQVideoRendererControl_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qvideorenderercontrol_types.QVideoRendererControl, s: cstring): string =
   let v_ms = fcQVideoRendererControl_tr(s)
@@ -111,5 +116,7 @@ proc trUtf8*(_: type gen_qvideorenderercontrol_types.QVideoRendererControl, s: c
   c_free(v_ms.data)
   vx_ret
 
+proc staticMetaObject*(_: type gen_qvideorenderercontrol_types.QVideoRendererControl): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fcQVideoRendererControl_staticMetaObject())
 proc delete*(self: gen_qvideorenderercontrol_types.QVideoRendererControl) =
   fcQVideoRendererControl_delete(self.h)

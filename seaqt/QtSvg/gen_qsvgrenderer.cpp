@@ -24,6 +24,9 @@ extern "C" {
 #endif
 
 void miqt_exec_callback_QSvgRenderer_repaintNeeded(intptr_t);
+QMetaObject* miqt_exec_callback_QSvgRenderer_metaObject(const QSvgRenderer*, intptr_t);
+void* miqt_exec_callback_QSvgRenderer_metacast(QSvgRenderer*, intptr_t, const char*);
+int miqt_exec_callback_QSvgRenderer_metacall(QSvgRenderer*, intptr_t, int, int, void**);
 bool miqt_exec_callback_QSvgRenderer_event(QSvgRenderer*, intptr_t, QEvent*);
 bool miqt_exec_callback_QSvgRenderer_eventFilter(QSvgRenderer*, intptr_t, QObject*, QEvent*);
 void miqt_exec_callback_QSvgRenderer_timerEvent(QSvgRenderer*, intptr_t, QTimerEvent*);
@@ -48,6 +51,62 @@ public:
 	VirtualQSvgRenderer(QXmlStreamReader* contents, QObject* parent): QSvgRenderer(contents, parent) {};
 
 	virtual ~VirtualQSvgRenderer() override = default;
+
+	// cgo.Handle value for overwritten implementation
+	intptr_t handle__metaObject = 0;
+
+	// Subclass to allow providing a Go implementation
+	virtual const QMetaObject* metaObject() const override {
+		if (handle__metaObject == 0) {
+			return QSvgRenderer::metaObject();
+		}
+		
+
+		QMetaObject* callback_return_value = miqt_exec_callback_QSvgRenderer_metaObject(this, handle__metaObject);
+
+		return callback_return_value;
+	}
+
+	friend QMetaObject* QSvgRenderer_virtualbase_metaObject(const void* self);
+
+	// cgo.Handle value for overwritten implementation
+	intptr_t handle__metacast = 0;
+
+	// Subclass to allow providing a Go implementation
+	virtual void* qt_metacast(const char* param1) override {
+		if (handle__metacast == 0) {
+			return QSvgRenderer::qt_metacast(param1);
+		}
+		
+		const char* sigval1 = (const char*) param1;
+
+		void* callback_return_value = miqt_exec_callback_QSvgRenderer_metacast(this, handle__metacast, sigval1);
+
+		return callback_return_value;
+	}
+
+	friend void* QSvgRenderer_virtualbase_metacast(void* self, const char* param1);
+
+	// cgo.Handle value for overwritten implementation
+	intptr_t handle__metacall = 0;
+
+	// Subclass to allow providing a Go implementation
+	virtual int qt_metacall(QMetaObject::Call param1, int param2, void** param3) override {
+		if (handle__metacall == 0) {
+			return QSvgRenderer::qt_metacall(param1, param2, param3);
+		}
+		
+		QMetaObject::Call param1_ret = param1;
+		int sigval1 = static_cast<int>(param1_ret);
+		int sigval2 = param2;
+		void** sigval3 = param3;
+
+		int callback_return_value = miqt_exec_callback_QSvgRenderer_metacall(this, handle__metacall, sigval1, sigval2, sigval3);
+
+		return static_cast<int>(callback_return_value);
+	}
+
+	friend int QSvgRenderer_virtualbase_metacall(void* self, int param1, int param2, void** param3);
 
 	// cgo.Handle value for overwritten implementation
 	intptr_t handle__event = 0;
@@ -240,6 +299,10 @@ void* QSvgRenderer_metacast(QSvgRenderer* self, const char* param1) {
 	return self->qt_metacast(param1);
 }
 
+int QSvgRenderer_metacall(QSvgRenderer* self, int param1, int param2, void** param3) {
+	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
+}
+
 struct miqt_string QSvgRenderer_tr(const char* s) {
 	QString _ret = QSvgRenderer::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
@@ -425,6 +488,54 @@ void QSvgRenderer_render32(QSvgRenderer* self, QPainter* p, struct miqt_string e
 	self->render(p, elementId_QString, *bounds);
 }
 
+bool QSvgRenderer_override_virtual_metaObject(void* self, intptr_t slot) {
+	VirtualQSvgRenderer* self_cast = dynamic_cast<VirtualQSvgRenderer*>( (QSvgRenderer*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+	
+	self_cast->handle__metaObject = slot;
+	return true;
+}
+
+QMetaObject* QSvgRenderer_virtualbase_metaObject(const void* self) {
+
+	return (QMetaObject*) ( (const VirtualQSvgRenderer*)(self) )->QSvgRenderer::metaObject();
+
+}
+
+bool QSvgRenderer_override_virtual_metacast(void* self, intptr_t slot) {
+	VirtualQSvgRenderer* self_cast = dynamic_cast<VirtualQSvgRenderer*>( (QSvgRenderer*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+	
+	self_cast->handle__metacast = slot;
+	return true;
+}
+
+void* QSvgRenderer_virtualbase_metacast(void* self, const char* param1) {
+
+	return ( (VirtualQSvgRenderer*)(self) )->QSvgRenderer::qt_metacast(param1);
+
+}
+
+bool QSvgRenderer_override_virtual_metacall(void* self, intptr_t slot) {
+	VirtualQSvgRenderer* self_cast = dynamic_cast<VirtualQSvgRenderer*>( (QSvgRenderer*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+	
+	self_cast->handle__metacall = slot;
+	return true;
+}
+
+int QSvgRenderer_virtualbase_metacall(void* self, int param1, int param2, void** param3) {
+
+	return ( (VirtualQSvgRenderer*)(self) )->QSvgRenderer::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
+
+}
+
 bool QSvgRenderer_override_virtual_event(void* self, intptr_t slot) {
 	VirtualQSvgRenderer* self_cast = dynamic_cast<VirtualQSvgRenderer*>( (QSvgRenderer*)(self) );
 	if (self_cast == nullptr) {
@@ -537,6 +648,7 @@ void QSvgRenderer_virtualbase_disconnectNotify(void* self, QMetaMethod* signal) 
 
 }
 
+const QMetaObject* QSvgRenderer_staticMetaObject() { return &QSvgRenderer::staticMetaObject; }
 QObject* QSvgRenderer_protectedbase_sender(bool* _dynamic_cast_ok, const void* self) {
 	VirtualQSvgRenderer* self_cast = dynamic_cast<VirtualQSvgRenderer*>( (QSvgRenderer*)(self) );
 	if (self_cast == nullptr) {

@@ -43,6 +43,7 @@ QNetworkSession* QNetworkSession_new2(QNetworkConfiguration* connConfig, QObject
 void QNetworkSession_virtbase(QNetworkSession* src, QObject** outptr_QObject);
 QMetaObject* QNetworkSession_metaObject(const QNetworkSession* self);
 void* QNetworkSession_metacast(QNetworkSession* self, const char* param1);
+int QNetworkSession_metacall(QNetworkSession* self, int param1, int param2, void** param3);
 struct miqt_string QNetworkSession_tr(const char* s);
 struct miqt_string QNetworkSession_trUtf8(const char* s);
 bool QNetworkSession_isOpen(const QNetworkSession* self);
@@ -86,6 +87,12 @@ struct miqt_string QNetworkSession_tr3(const char* s, const char* c, int n);
 struct miqt_string QNetworkSession_trUtf82(const char* s, const char* c);
 struct miqt_string QNetworkSession_trUtf83(const char* s, const char* c, int n);
 bool QNetworkSession_waitForOpened1(QNetworkSession* self, int msecs);
+bool QNetworkSession_override_virtual_metaObject(void* self, intptr_t slot);
+QMetaObject* QNetworkSession_virtualbase_metaObject(const void* self);
+bool QNetworkSession_override_virtual_metacast(void* self, intptr_t slot);
+void* QNetworkSession_virtualbase_metacast(void* self, const char* param1);
+bool QNetworkSession_override_virtual_metacall(void* self, intptr_t slot);
+int QNetworkSession_virtualbase_metacall(void* self, int param1, int param2, void** param3);
 bool QNetworkSession_override_virtual_connectNotify(void* self, intptr_t slot);
 void QNetworkSession_virtualbase_connectNotify(void* self, QMetaMethod* signal);
 bool QNetworkSession_override_virtual_disconnectNotify(void* self, intptr_t slot);
@@ -104,6 +111,7 @@ QObject* QNetworkSession_protectedbase_sender(bool* _dynamic_cast_ok, const void
 int QNetworkSession_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
 int QNetworkSession_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
 bool QNetworkSession_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+const QMetaObject* QNetworkSession_staticMetaObject();
 void QNetworkSession_delete(QNetworkSession* self);
 
 #ifdef __cplusplus

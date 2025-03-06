@@ -32,6 +32,7 @@ bool QStandardPaths_isTestModeEnabled();
 struct miqt_string QStandardPaths_locate3(int type, struct miqt_string fileName, int options);
 struct miqt_array /* of struct miqt_string */  QStandardPaths_locateAll3(int type, struct miqt_string fileName, int options);
 struct miqt_string QStandardPaths_findExecutable2(struct miqt_string executableName, struct miqt_array /* of struct miqt_string */  paths);
+const QMetaObject* QStandardPaths_staticMetaObject();
 
 #ifdef __cplusplus
 } /* extern C */

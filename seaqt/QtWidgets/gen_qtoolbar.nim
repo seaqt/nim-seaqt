@@ -78,6 +78,7 @@ proc fcQToolBar_new3(): ptr cQToolBar {.importc: "QToolBar_new3".}
 proc fcQToolBar_new4(title: struct_miqt_string, parent: pointer): ptr cQToolBar {.importc: "QToolBar_new4".}
 proc fcQToolBar_metaObject(self: pointer, ): pointer {.importc: "QToolBar_metaObject".}
 proc fcQToolBar_metacast(self: pointer, param1: cstring): pointer {.importc: "QToolBar_metacast".}
+proc fcQToolBar_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QToolBar_metacall".}
 proc fcQToolBar_tr(s: cstring): struct_miqt_string {.importc: "QToolBar_tr".}
 proc fcQToolBar_trUtf8(s: cstring): struct_miqt_string {.importc: "QToolBar_trUtf8".}
 proc fcQToolBar_setMovable(self: pointer, movable: bool): void {.importc: "QToolBar_setMovable".}
@@ -126,6 +127,12 @@ proc fcQToolBar_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QToo
 proc fcQToolBar_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QToolBar_tr3".}
 proc fcQToolBar_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QToolBar_trUtf82".}
 proc fcQToolBar_trUtf83(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QToolBar_trUtf83".}
+proc fQToolBar_virtualbase_metaObject(self: pointer, ): pointer{.importc: "QToolBar_virtualbase_metaObject".}
+proc fcQToolBar_override_virtual_metaObject(self: pointer, slot: int) {.importc: "QToolBar_override_virtual_metaObject".}
+proc fQToolBar_virtualbase_metacast(self: pointer, param1: cstring): pointer{.importc: "QToolBar_virtualbase_metacast".}
+proc fcQToolBar_override_virtual_metacast(self: pointer, slot: int) {.importc: "QToolBar_override_virtual_metacast".}
+proc fQToolBar_virtualbase_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint{.importc: "QToolBar_virtualbase_metacall".}
+proc fcQToolBar_override_virtual_metacall(self: pointer, slot: int) {.importc: "QToolBar_override_virtual_metacall".}
 proc fQToolBar_virtualbase_actionEvent(self: pointer, event: pointer): void{.importc: "QToolBar_virtualbase_actionEvent".}
 proc fcQToolBar_override_virtual_actionEvent(self: pointer, slot: int) {.importc: "QToolBar_override_virtual_actionEvent".}
 proc fQToolBar_virtualbase_changeEvent(self: pointer, event: pointer): void{.importc: "QToolBar_virtualbase_changeEvent".}
@@ -220,6 +227,7 @@ proc fQToolBar_virtualbase_connectNotify(self: pointer, signal: pointer): void{.
 proc fcQToolBar_override_virtual_connectNotify(self: pointer, slot: int) {.importc: "QToolBar_override_virtual_connectNotify".}
 proc fQToolBar_virtualbase_disconnectNotify(self: pointer, signal: pointer): void{.importc: "QToolBar_virtualbase_disconnectNotify".}
 proc fcQToolBar_override_virtual_disconnectNotify(self: pointer, slot: int) {.importc: "QToolBar_override_virtual_disconnectNotify".}
+proc fcQToolBar_staticMetaObject(): pointer {.importc: "QToolBar_staticMetaObject".}
 proc fcQToolBar_delete(self: pointer) {.importc: "QToolBar_delete".}
 
 
@@ -242,6 +250,9 @@ proc metaObject*(self: gen_qtoolbar_types.QToolBar, ): gen_qobjectdefs_types.QMe
 
 proc metacast*(self: gen_qtoolbar_types.QToolBar, param1: cstring): pointer =
   fcQToolBar_metacast(self.h, param1)
+
+proc metacall*(self: gen_qtoolbar_types.QToolBar, param1: cint, param2: cint, param3: pointer): cint =
+  fcQToolBar_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qtoolbar_types.QToolBar, s: cstring): string =
   let v_ms = fcQToolBar_tr(s)
@@ -485,6 +496,65 @@ proc trUtf8*(_: type gen_qtoolbar_types.QToolBar, s: cstring, c: cstring, n: cin
   c_free(v_ms.data)
   vx_ret
 
+proc QToolBarmetaObject*(self: gen_qtoolbar_types.QToolBar, ): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fQToolBar_virtualbase_metaObject(self.h))
+
+type QToolBarmetaObjectProc* = proc(): gen_qobjectdefs_types.QMetaObject
+proc onmetaObject*(self: gen_qtoolbar_types.QToolBar, slot: QToolBarmetaObjectProc) =
+  # TODO check subclass
+  var tmp = new QToolBarmetaObjectProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQToolBar_override_virtual_metaObject(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QToolBar_metaObject(self: ptr cQToolBar, slot: int): pointer {.exportc: "miqt_exec_callback_QToolBar_metaObject ".} =
+  var nimfunc = cast[ptr QToolBarmetaObjectProc](cast[pointer](slot))
+
+  let virtualReturn = nimfunc[]( )
+
+  virtualReturn.h
+proc QToolBarmetacast*(self: gen_qtoolbar_types.QToolBar, param1: cstring): pointer =
+  fQToolBar_virtualbase_metacast(self.h, param1)
+
+type QToolBarmetacastProc* = proc(param1: cstring): pointer
+proc onmetacast*(self: gen_qtoolbar_types.QToolBar, slot: QToolBarmetacastProc) =
+  # TODO check subclass
+  var tmp = new QToolBarmetacastProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQToolBar_override_virtual_metacast(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QToolBar_metacast(self: ptr cQToolBar, slot: int, param1: cstring): pointer {.exportc: "miqt_exec_callback_QToolBar_metacast ".} =
+  var nimfunc = cast[ptr QToolBarmetacastProc](cast[pointer](slot))
+  let slotval1 = (param1)
+
+
+  let virtualReturn = nimfunc[](slotval1 )
+
+  virtualReturn
+proc QToolBarmetacall*(self: gen_qtoolbar_types.QToolBar, param1: cint, param2: cint, param3: pointer): cint =
+  fQToolBar_virtualbase_metacall(self.h, cint(param1), param2, param3)
+
+type QToolBarmetacallProc* = proc(param1: cint, param2: cint, param3: pointer): cint
+proc onmetacall*(self: gen_qtoolbar_types.QToolBar, slot: QToolBarmetacallProc) =
+  # TODO check subclass
+  var tmp = new QToolBarmetacallProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQToolBar_override_virtual_metacall(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QToolBar_metacall(self: ptr cQToolBar, slot: int, param1: cint, param2: cint, param3: pointer): cint {.exportc: "miqt_exec_callback_QToolBar_metacall ".} =
+  var nimfunc = cast[ptr QToolBarmetacallProc](cast[pointer](slot))
+  let slotval1 = cint(param1)
+
+  let slotval2 = param2
+
+  let slotval3 = param3
+
+
+  let virtualReturn = nimfunc[](slotval1, slotval2, slotval3 )
+
+  virtualReturn
 proc QToolBaractionEvent*(self: gen_qtoolbar_types.QToolBar, event: gen_qevent_types.QActionEvent): void =
   fQToolBar_virtualbase_actionEvent(self.h, event.h)
 
@@ -1309,5 +1379,7 @@ proc miqt_exec_callback_QToolBar_disconnectNotify(self: ptr cQToolBar, slot: int
 
 
   nimfunc[](slotval1)
+proc staticMetaObject*(_: type gen_qtoolbar_types.QToolBar): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fcQToolBar_staticMetaObject())
 proc delete*(self: gen_qtoolbar_types.QToolBar) =
   fcQToolBar_delete(self.h)

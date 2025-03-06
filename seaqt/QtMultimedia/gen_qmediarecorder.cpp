@@ -36,6 +36,9 @@ void miqt_exec_callback_QMediaRecorder_metaDataChanged(intptr_t);
 void miqt_exec_callback_QMediaRecorder_metaDataChanged2(intptr_t, struct miqt_string, QVariant*);
 void miqt_exec_callback_QMediaRecorder_availabilityChanged(intptr_t, bool);
 void miqt_exec_callback_QMediaRecorder_availabilityChangedWithAvailability(intptr_t, int);
+QMetaObject* miqt_exec_callback_QMediaRecorder_metaObject(const QMediaRecorder*, intptr_t);
+void* miqt_exec_callback_QMediaRecorder_metacast(QMediaRecorder*, intptr_t, const char*);
+int miqt_exec_callback_QMediaRecorder_metacall(QMediaRecorder*, intptr_t, int, int, void**);
 QMediaObject* miqt_exec_callback_QMediaRecorder_mediaObject(const QMediaRecorder*, intptr_t);
 bool miqt_exec_callback_QMediaRecorder_setMediaObject(QMediaRecorder*, intptr_t, QMediaObject*);
 bool miqt_exec_callback_QMediaRecorder_event(QMediaRecorder*, intptr_t, QEvent*);
@@ -56,6 +59,62 @@ public:
 	VirtualQMediaRecorder(QMediaObject* mediaObject, QObject* parent): QMediaRecorder(mediaObject, parent) {};
 
 	virtual ~VirtualQMediaRecorder() override = default;
+
+	// cgo.Handle value for overwritten implementation
+	intptr_t handle__metaObject = 0;
+
+	// Subclass to allow providing a Go implementation
+	virtual const QMetaObject* metaObject() const override {
+		if (handle__metaObject == 0) {
+			return QMediaRecorder::metaObject();
+		}
+		
+
+		QMetaObject* callback_return_value = miqt_exec_callback_QMediaRecorder_metaObject(this, handle__metaObject);
+
+		return callback_return_value;
+	}
+
+	friend QMetaObject* QMediaRecorder_virtualbase_metaObject(const void* self);
+
+	// cgo.Handle value for overwritten implementation
+	intptr_t handle__metacast = 0;
+
+	// Subclass to allow providing a Go implementation
+	virtual void* qt_metacast(const char* param1) override {
+		if (handle__metacast == 0) {
+			return QMediaRecorder::qt_metacast(param1);
+		}
+		
+		const char* sigval1 = (const char*) param1;
+
+		void* callback_return_value = miqt_exec_callback_QMediaRecorder_metacast(this, handle__metacast, sigval1);
+
+		return callback_return_value;
+	}
+
+	friend void* QMediaRecorder_virtualbase_metacast(void* self, const char* param1);
+
+	// cgo.Handle value for overwritten implementation
+	intptr_t handle__metacall = 0;
+
+	// Subclass to allow providing a Go implementation
+	virtual int qt_metacall(QMetaObject::Call param1, int param2, void** param3) override {
+		if (handle__metacall == 0) {
+			return QMediaRecorder::qt_metacall(param1, param2, param3);
+		}
+		
+		QMetaObject::Call param1_ret = param1;
+		int sigval1 = static_cast<int>(param1_ret);
+		int sigval2 = param2;
+		void** sigval3 = param3;
+
+		int callback_return_value = miqt_exec_callback_QMediaRecorder_metacall(this, handle__metacall, sigval1, sigval2, sigval3);
+
+		return static_cast<int>(callback_return_value);
+	}
+
+	friend int QMediaRecorder_virtualbase_metacall(void* self, int param1, int param2, void** param3);
 
 	// cgo.Handle value for overwritten implementation
 	intptr_t handle__mediaObject = 0;
@@ -254,6 +313,10 @@ QMetaObject* QMediaRecorder_metaObject(const QMediaRecorder* self) {
 
 void* QMediaRecorder_metacast(QMediaRecorder* self, const char* param1) {
 	return self->qt_metacast(param1);
+}
+
+int QMediaRecorder_metacall(QMediaRecorder* self, int param1, int param2, void** param3) {
+	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
 struct miqt_string QMediaRecorder_tr(const char* s) {
@@ -864,6 +927,54 @@ void QMediaRecorder_setEncodingSettings3(QMediaRecorder* self, QAudioEncoderSett
 	self->setEncodingSettings(*audioSettings, *videoSettings, containerMimeType_QString);
 }
 
+bool QMediaRecorder_override_virtual_metaObject(void* self, intptr_t slot) {
+	VirtualQMediaRecorder* self_cast = dynamic_cast<VirtualQMediaRecorder*>( (QMediaRecorder*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+	
+	self_cast->handle__metaObject = slot;
+	return true;
+}
+
+QMetaObject* QMediaRecorder_virtualbase_metaObject(const void* self) {
+
+	return (QMetaObject*) ( (const VirtualQMediaRecorder*)(self) )->QMediaRecorder::metaObject();
+
+}
+
+bool QMediaRecorder_override_virtual_metacast(void* self, intptr_t slot) {
+	VirtualQMediaRecorder* self_cast = dynamic_cast<VirtualQMediaRecorder*>( (QMediaRecorder*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+	
+	self_cast->handle__metacast = slot;
+	return true;
+}
+
+void* QMediaRecorder_virtualbase_metacast(void* self, const char* param1) {
+
+	return ( (VirtualQMediaRecorder*)(self) )->QMediaRecorder::qt_metacast(param1);
+
+}
+
+bool QMediaRecorder_override_virtual_metacall(void* self, intptr_t slot) {
+	VirtualQMediaRecorder* self_cast = dynamic_cast<VirtualQMediaRecorder*>( (QMediaRecorder*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+	
+	self_cast->handle__metacall = slot;
+	return true;
+}
+
+int QMediaRecorder_virtualbase_metacall(void* self, int param1, int param2, void** param3) {
+
+	return ( (VirtualQMediaRecorder*)(self) )->QMediaRecorder::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
+
+}
+
 bool QMediaRecorder_override_virtual_mediaObject(void* self, intptr_t slot) {
 	VirtualQMediaRecorder* self_cast = dynamic_cast<VirtualQMediaRecorder*>( (QMediaRecorder*)(self) );
 	if (self_cast == nullptr) {
@@ -1008,6 +1119,7 @@ void QMediaRecorder_virtualbase_disconnectNotify(void* self, QMetaMethod* signal
 
 }
 
+const QMetaObject* QMediaRecorder_staticMetaObject() { return &QMediaRecorder::staticMetaObject; }
 QObject* QMediaRecorder_protectedbase_sender(bool* _dynamic_cast_ok, const void* self) {
 	VirtualQMediaRecorder* self_cast = dynamic_cast<VirtualQMediaRecorder*>( (QMediaRecorder*)(self) );
 	if (self_cast == nullptr) {

@@ -76,6 +76,7 @@ proc fcQDialog_new2(): ptr cQDialog {.importc: "QDialog_new2".}
 proc fcQDialog_new3(parent: pointer, f: cint): ptr cQDialog {.importc: "QDialog_new3".}
 proc fcQDialog_metaObject(self: pointer, ): pointer {.importc: "QDialog_metaObject".}
 proc fcQDialog_metacast(self: pointer, param1: cstring): pointer {.importc: "QDialog_metacast".}
+proc fcQDialog_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QDialog_metacall".}
 proc fcQDialog_tr(s: cstring): struct_miqt_string {.importc: "QDialog_tr".}
 proc fcQDialog_trUtf8(s: cstring): struct_miqt_string {.importc: "QDialog_trUtf8".}
 proc fcQDialog_resultX(self: pointer, ): cint {.importc: "QDialog_result".}
@@ -106,6 +107,12 @@ proc fcQDialog_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QDial
 proc fcQDialog_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QDialog_tr3".}
 proc fcQDialog_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QDialog_trUtf82".}
 proc fcQDialog_trUtf83(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QDialog_trUtf83".}
+proc fQDialog_virtualbase_metaObject(self: pointer, ): pointer{.importc: "QDialog_virtualbase_metaObject".}
+proc fcQDialog_override_virtual_metaObject(self: pointer, slot: int) {.importc: "QDialog_override_virtual_metaObject".}
+proc fQDialog_virtualbase_metacast(self: pointer, param1: cstring): pointer{.importc: "QDialog_virtualbase_metacast".}
+proc fcQDialog_override_virtual_metacast(self: pointer, slot: int) {.importc: "QDialog_override_virtual_metacast".}
+proc fQDialog_virtualbase_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint{.importc: "QDialog_virtualbase_metacall".}
+proc fcQDialog_override_virtual_metacall(self: pointer, slot: int) {.importc: "QDialog_override_virtual_metacall".}
 proc fQDialog_virtualbase_setVisible(self: pointer, visible: bool): void{.importc: "QDialog_virtualbase_setVisible".}
 proc fcQDialog_override_virtual_setVisible(self: pointer, slot: int) {.importc: "QDialog_override_virtual_setVisible".}
 proc fQDialog_virtualbase_sizeHint(self: pointer, ): pointer{.importc: "QDialog_virtualbase_sizeHint".}
@@ -210,6 +217,7 @@ proc fQDialog_virtualbase_connectNotify(self: pointer, signal: pointer): void{.i
 proc fcQDialog_override_virtual_connectNotify(self: pointer, slot: int) {.importc: "QDialog_override_virtual_connectNotify".}
 proc fQDialog_virtualbase_disconnectNotify(self: pointer, signal: pointer): void{.importc: "QDialog_virtualbase_disconnectNotify".}
 proc fcQDialog_override_virtual_disconnectNotify(self: pointer, slot: int) {.importc: "QDialog_override_virtual_disconnectNotify".}
+proc fcQDialog_staticMetaObject(): pointer {.importc: "QDialog_staticMetaObject".}
 proc fcQDialog_delete(self: pointer) {.importc: "QDialog_delete".}
 
 
@@ -229,6 +237,9 @@ proc metaObject*(self: gen_qdialog_types.QDialog, ): gen_qobjectdefs_types.QMeta
 
 proc metacast*(self: gen_qdialog_types.QDialog, param1: cstring): pointer =
   fcQDialog_metacast(self.h, param1)
+
+proc metacall*(self: gen_qdialog_types.QDialog, param1: cint, param2: cint, param3: pointer): cint =
+  fcQDialog_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qdialog_types.QDialog, s: cstring): string =
   let v_ms = fcQDialog_tr(s)
@@ -364,6 +375,65 @@ proc trUtf8*(_: type gen_qdialog_types.QDialog, s: cstring, c: cstring, n: cint)
   c_free(v_ms.data)
   vx_ret
 
+proc QDialogmetaObject*(self: gen_qdialog_types.QDialog, ): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fQDialog_virtualbase_metaObject(self.h))
+
+type QDialogmetaObjectProc* = proc(): gen_qobjectdefs_types.QMetaObject
+proc onmetaObject*(self: gen_qdialog_types.QDialog, slot: QDialogmetaObjectProc) =
+  # TODO check subclass
+  var tmp = new QDialogmetaObjectProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQDialog_override_virtual_metaObject(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QDialog_metaObject(self: ptr cQDialog, slot: int): pointer {.exportc: "miqt_exec_callback_QDialog_metaObject ".} =
+  var nimfunc = cast[ptr QDialogmetaObjectProc](cast[pointer](slot))
+
+  let virtualReturn = nimfunc[]( )
+
+  virtualReturn.h
+proc QDialogmetacast*(self: gen_qdialog_types.QDialog, param1: cstring): pointer =
+  fQDialog_virtualbase_metacast(self.h, param1)
+
+type QDialogmetacastProc* = proc(param1: cstring): pointer
+proc onmetacast*(self: gen_qdialog_types.QDialog, slot: QDialogmetacastProc) =
+  # TODO check subclass
+  var tmp = new QDialogmetacastProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQDialog_override_virtual_metacast(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QDialog_metacast(self: ptr cQDialog, slot: int, param1: cstring): pointer {.exportc: "miqt_exec_callback_QDialog_metacast ".} =
+  var nimfunc = cast[ptr QDialogmetacastProc](cast[pointer](slot))
+  let slotval1 = (param1)
+
+
+  let virtualReturn = nimfunc[](slotval1 )
+
+  virtualReturn
+proc QDialogmetacall*(self: gen_qdialog_types.QDialog, param1: cint, param2: cint, param3: pointer): cint =
+  fQDialog_virtualbase_metacall(self.h, cint(param1), param2, param3)
+
+type QDialogmetacallProc* = proc(param1: cint, param2: cint, param3: pointer): cint
+proc onmetacall*(self: gen_qdialog_types.QDialog, slot: QDialogmetacallProc) =
+  # TODO check subclass
+  var tmp = new QDialogmetacallProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQDialog_override_virtual_metacall(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QDialog_metacall(self: ptr cQDialog, slot: int, param1: cint, param2: cint, param3: pointer): cint {.exportc: "miqt_exec_callback_QDialog_metacall ".} =
+  var nimfunc = cast[ptr QDialogmetacallProc](cast[pointer](slot))
+  let slotval1 = cint(param1)
+
+  let slotval2 = param2
+
+  let slotval3 = param3
+
+
+  let virtualReturn = nimfunc[](slotval1, slotval2, slotval3 )
+
+  virtualReturn
 proc QDialogsetVisible*(self: gen_qdialog_types.QDialog, visible: bool): void =
   fQDialog_virtualbase_setVisible(self.h, visible)
 
@@ -1267,5 +1337,7 @@ proc miqt_exec_callback_QDialog_disconnectNotify(self: ptr cQDialog, slot: int, 
 
 
   nimfunc[](slotval1)
+proc staticMetaObject*(_: type gen_qdialog_types.QDialog): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fcQDialog_staticMetaObject())
 proc delete*(self: gen_qdialog_types.QDialog) =
   fcQDialog_delete(self.h)

@@ -48,6 +48,7 @@ type cQRadioTunerControl*{.exportc: "QRadioTunerControl", incompleteStruct.} = o
 
 proc fcQRadioTunerControl_metaObject(self: pointer, ): pointer {.importc: "QRadioTunerControl_metaObject".}
 proc fcQRadioTunerControl_metacast(self: pointer, param1: cstring): pointer {.importc: "QRadioTunerControl_metacast".}
+proc fcQRadioTunerControl_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QRadioTunerControl_metacall".}
 proc fcQRadioTunerControl_tr(s: cstring): struct_miqt_string {.importc: "QRadioTunerControl_tr".}
 proc fcQRadioTunerControl_trUtf8(s: cstring): struct_miqt_string {.importc: "QRadioTunerControl_trUtf8".}
 proc fcQRadioTunerControl_state(self: pointer, ): cint {.importc: "QRadioTunerControl_state".}
@@ -102,6 +103,7 @@ proc fcQRadioTunerControl_tr2(s: cstring, c: cstring): struct_miqt_string {.impo
 proc fcQRadioTunerControl_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QRadioTunerControl_tr3".}
 proc fcQRadioTunerControl_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QRadioTunerControl_trUtf82".}
 proc fcQRadioTunerControl_trUtf83(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QRadioTunerControl_trUtf83".}
+proc fcQRadioTunerControl_staticMetaObject(): pointer {.importc: "QRadioTunerControl_staticMetaObject".}
 proc fcQRadioTunerControl_delete(self: pointer) {.importc: "QRadioTunerControl_delete".}
 
 
@@ -112,6 +114,9 @@ proc metaObject*(self: gen_qradiotunercontrol_types.QRadioTunerControl, ): gen_q
 
 proc metacast*(self: gen_qradiotunercontrol_types.QRadioTunerControl, param1: cstring): pointer =
   fcQRadioTunerControl_metacast(self.h, param1)
+
+proc metacall*(self: gen_qradiotunercontrol_types.QRadioTunerControl, param1: cint, param2: cint, param3: pointer): cint =
+  fcQRadioTunerControl_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qradiotunercontrol_types.QRadioTunerControl, s: cstring): string =
   let v_ms = fcQRadioTunerControl_tr(s)
@@ -418,5 +423,7 @@ proc trUtf8*(_: type gen_qradiotunercontrol_types.QRadioTunerControl, s: cstring
   c_free(v_ms.data)
   vx_ret
 
+proc staticMetaObject*(_: type gen_qradiotunercontrol_types.QRadioTunerControl): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fcQRadioTunerControl_staticMetaObject())
 proc delete*(self: gen_qradiotunercontrol_types.QRadioTunerControl) =
   fcQRadioTunerControl_delete(self.h)

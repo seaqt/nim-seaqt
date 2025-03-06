@@ -32,6 +32,10 @@ void* QAudioOutputSelectorControl_metacast(QAudioOutputSelectorControl* self, co
 	return self->qt_metacast(param1);
 }
 
+int QAudioOutputSelectorControl_metacall(QAudioOutputSelectorControl* self, int param1, int param2, void** param3) {
+	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
+}
+
 struct miqt_string QAudioOutputSelectorControl_tr(const char* s) {
 	QString _ret = QAudioOutputSelectorControl::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
@@ -186,6 +190,7 @@ struct miqt_string QAudioOutputSelectorControl_trUtf83(const char* s, const char
 	return _ms;
 }
 
+const QMetaObject* QAudioOutputSelectorControl_staticMetaObject() { return &QAudioOutputSelectorControl::staticMetaObject; }
 void QAudioOutputSelectorControl_delete(QAudioOutputSelectorControl* self) {
 	delete self;
 }

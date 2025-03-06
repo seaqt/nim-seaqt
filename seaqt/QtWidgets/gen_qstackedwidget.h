@@ -91,6 +91,7 @@ QStackedWidget* QStackedWidget_new2();
 void QStackedWidget_virtbase(QStackedWidget* src, QFrame** outptr_QFrame);
 QMetaObject* QStackedWidget_metaObject(const QStackedWidget* self);
 void* QStackedWidget_metacast(QStackedWidget* self, const char* param1);
+int QStackedWidget_metacall(QStackedWidget* self, int param1, int param2, void** param3);
 struct miqt_string QStackedWidget_tr(const char* s);
 struct miqt_string QStackedWidget_trUtf8(const char* s);
 int QStackedWidget_addWidget(QStackedWidget* self, QWidget* w);
@@ -112,6 +113,12 @@ struct miqt_string QStackedWidget_tr2(const char* s, const char* c);
 struct miqt_string QStackedWidget_tr3(const char* s, const char* c, int n);
 struct miqt_string QStackedWidget_trUtf82(const char* s, const char* c);
 struct miqt_string QStackedWidget_trUtf83(const char* s, const char* c, int n);
+bool QStackedWidget_override_virtual_metaObject(void* self, intptr_t slot);
+QMetaObject* QStackedWidget_virtualbase_metaObject(const void* self);
+bool QStackedWidget_override_virtual_metacast(void* self, intptr_t slot);
+void* QStackedWidget_virtualbase_metacast(void* self, const char* param1);
+bool QStackedWidget_override_virtual_metacall(void* self, intptr_t slot);
+int QStackedWidget_virtualbase_metacall(void* self, int param1, int param2, void** param3);
 bool QStackedWidget_override_virtual_event(void* self, intptr_t slot);
 bool QStackedWidget_virtualbase_event(void* self, QEvent* e);
 bool QStackedWidget_override_virtual_sizeHint(void* self, intptr_t slot);
@@ -217,6 +224,7 @@ QObject* QStackedWidget_protectedbase_sender(bool* _dynamic_cast_ok, const void*
 int QStackedWidget_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
 int QStackedWidget_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
 bool QStackedWidget_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+const QMetaObject* QStackedWidget_staticMetaObject();
 void QStackedWidget_delete(QStackedWidget* self);
 
 #ifdef __cplusplus

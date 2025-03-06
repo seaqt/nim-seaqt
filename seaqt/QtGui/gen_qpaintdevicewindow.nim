@@ -52,6 +52,7 @@ type cQPaintDeviceWindow*{.exportc: "QPaintDeviceWindow", incompleteStruct.} = o
 
 proc fcQPaintDeviceWindow_metaObject(self: pointer, ): pointer {.importc: "QPaintDeviceWindow_metaObject".}
 proc fcQPaintDeviceWindow_metacast(self: pointer, param1: cstring): pointer {.importc: "QPaintDeviceWindow_metacast".}
+proc fcQPaintDeviceWindow_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QPaintDeviceWindow_metacall".}
 proc fcQPaintDeviceWindow_tr(s: cstring): struct_miqt_string {.importc: "QPaintDeviceWindow_tr".}
 proc fcQPaintDeviceWindow_trUtf8(s: cstring): struct_miqt_string {.importc: "QPaintDeviceWindow_trUtf8".}
 proc fcQPaintDeviceWindow_update(self: pointer, rect: pointer): void {.importc: "QPaintDeviceWindow_update".}
@@ -61,6 +62,7 @@ proc fcQPaintDeviceWindow_tr2(s: cstring, c: cstring): struct_miqt_string {.impo
 proc fcQPaintDeviceWindow_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QPaintDeviceWindow_tr3".}
 proc fcQPaintDeviceWindow_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QPaintDeviceWindow_trUtf82".}
 proc fcQPaintDeviceWindow_trUtf83(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QPaintDeviceWindow_trUtf83".}
+proc fcQPaintDeviceWindow_staticMetaObject(): pointer {.importc: "QPaintDeviceWindow_staticMetaObject".}
 proc fcQPaintDeviceWindow_delete(self: pointer) {.importc: "QPaintDeviceWindow_delete".}
 
 
@@ -71,6 +73,9 @@ proc metaObject*(self: gen_qpaintdevicewindow_types.QPaintDeviceWindow, ): gen_q
 
 proc metacast*(self: gen_qpaintdevicewindow_types.QPaintDeviceWindow, param1: cstring): pointer =
   fcQPaintDeviceWindow_metacast(self.h, param1)
+
+proc metacall*(self: gen_qpaintdevicewindow_types.QPaintDeviceWindow, param1: cint, param2: cint, param3: pointer): cint =
+  fcQPaintDeviceWindow_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qpaintdevicewindow_types.QPaintDeviceWindow, s: cstring): string =
   let v_ms = fcQPaintDeviceWindow_tr(s)
@@ -117,5 +122,7 @@ proc trUtf8*(_: type gen_qpaintdevicewindow_types.QPaintDeviceWindow, s: cstring
   c_free(v_ms.data)
   vx_ret
 
+proc staticMetaObject*(_: type gen_qpaintdevicewindow_types.QPaintDeviceWindow): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fcQPaintDeviceWindow_staticMetaObject())
 proc delete*(self: gen_qpaintdevicewindow_types.QPaintDeviceWindow) =
   fcQPaintDeviceWindow_delete(self.h)

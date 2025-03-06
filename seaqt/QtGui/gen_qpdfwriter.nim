@@ -68,6 +68,7 @@ proc fcQPdfWriter_new(filename: struct_miqt_string): ptr cQPdfWriter {.importc: 
 proc fcQPdfWriter_new2(device: pointer): ptr cQPdfWriter {.importc: "QPdfWriter_new2".}
 proc fcQPdfWriter_metaObject(self: pointer, ): pointer {.importc: "QPdfWriter_metaObject".}
 proc fcQPdfWriter_metacast(self: pointer, param1: cstring): pointer {.importc: "QPdfWriter_metacast".}
+proc fcQPdfWriter_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QPdfWriter_metacall".}
 proc fcQPdfWriter_tr(s: cstring): struct_miqt_string {.importc: "QPdfWriter_tr".}
 proc fcQPdfWriter_trUtf8(s: cstring): struct_miqt_string {.importc: "QPdfWriter_trUtf8".}
 proc fcQPdfWriter_setPdfVersion(self: pointer, version: cint): void {.importc: "QPdfWriter_setPdfVersion".}
@@ -90,6 +91,12 @@ proc fcQPdfWriter_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.imp
 proc fcQPdfWriter_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QPdfWriter_trUtf82".}
 proc fcQPdfWriter_trUtf83(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QPdfWriter_trUtf83".}
 proc fcQPdfWriter_addFileAttachment3(self: pointer, fileName: struct_miqt_string, data: struct_miqt_string, mimeType: struct_miqt_string): void {.importc: "QPdfWriter_addFileAttachment3".}
+proc fQPdfWriter_virtualbase_metaObject(self: pointer, ): pointer{.importc: "QPdfWriter_virtualbase_metaObject".}
+proc fcQPdfWriter_override_virtual_metaObject(self: pointer, slot: int) {.importc: "QPdfWriter_override_virtual_metaObject".}
+proc fQPdfWriter_virtualbase_metacast(self: pointer, param1: cstring): pointer{.importc: "QPdfWriter_virtualbase_metacast".}
+proc fcQPdfWriter_override_virtual_metacast(self: pointer, slot: int) {.importc: "QPdfWriter_override_virtual_metacast".}
+proc fQPdfWriter_virtualbase_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint{.importc: "QPdfWriter_virtualbase_metacall".}
+proc fcQPdfWriter_override_virtual_metacall(self: pointer, slot: int) {.importc: "QPdfWriter_override_virtual_metacall".}
 proc fQPdfWriter_virtualbase_newPage(self: pointer, ): bool{.importc: "QPdfWriter_virtualbase_newPage".}
 proc fcQPdfWriter_override_virtual_newPage(self: pointer, slot: int) {.importc: "QPdfWriter_override_virtual_newPage".}
 proc fQPdfWriter_virtualbase_setPageSize(self: pointer, size: cint): void{.importc: "QPdfWriter_virtualbase_setPageSize".}
@@ -124,6 +131,7 @@ proc fQPdfWriter_virtualbase_redirected(self: pointer, offset: pointer): pointer
 proc fcQPdfWriter_override_virtual_redirected(self: pointer, slot: int) {.importc: "QPdfWriter_override_virtual_redirected".}
 proc fQPdfWriter_virtualbase_sharedPainter(self: pointer, ): pointer{.importc: "QPdfWriter_virtualbase_sharedPainter".}
 proc fcQPdfWriter_override_virtual_sharedPainter(self: pointer, slot: int) {.importc: "QPdfWriter_override_virtual_sharedPainter".}
+proc fcQPdfWriter_staticMetaObject(): pointer {.importc: "QPdfWriter_staticMetaObject".}
 proc fcQPdfWriter_delete(self: pointer) {.importc: "QPdfWriter_delete".}
 
 
@@ -140,6 +148,9 @@ proc metaObject*(self: gen_qpdfwriter_types.QPdfWriter, ): gen_qobjectdefs_types
 
 proc metacast*(self: gen_qpdfwriter_types.QPdfWriter, param1: cstring): pointer =
   fcQPdfWriter_metacast(self.h, param1)
+
+proc metacall*(self: gen_qpdfwriter_types.QPdfWriter, param1: cint, param2: cint, param3: pointer): cint =
+  fcQPdfWriter_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qpdfwriter_types.QPdfWriter, s: cstring): string =
   let v_ms = fcQPdfWriter_tr(s)
@@ -234,6 +245,65 @@ proc trUtf8*(_: type gen_qpdfwriter_types.QPdfWriter, s: cstring, c: cstring, n:
 proc addFileAttachment*(self: gen_qpdfwriter_types.QPdfWriter, fileName: string, data: seq[byte], mimeType: string): void =
   fcQPdfWriter_addFileAttachment3(self.h, struct_miqt_string(data: fileName, len: csize_t(len(fileName))), struct_miqt_string(data: cast[cstring](if len(data) == 0: nil else: unsafeAddr data[0]), len: csize_t(len(data))), struct_miqt_string(data: mimeType, len: csize_t(len(mimeType))))
 
+proc QPdfWritermetaObject*(self: gen_qpdfwriter_types.QPdfWriter, ): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fQPdfWriter_virtualbase_metaObject(self.h))
+
+type QPdfWritermetaObjectProc* = proc(): gen_qobjectdefs_types.QMetaObject
+proc onmetaObject*(self: gen_qpdfwriter_types.QPdfWriter, slot: QPdfWritermetaObjectProc) =
+  # TODO check subclass
+  var tmp = new QPdfWritermetaObjectProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQPdfWriter_override_virtual_metaObject(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QPdfWriter_metaObject(self: ptr cQPdfWriter, slot: int): pointer {.exportc: "miqt_exec_callback_QPdfWriter_metaObject ".} =
+  var nimfunc = cast[ptr QPdfWritermetaObjectProc](cast[pointer](slot))
+
+  let virtualReturn = nimfunc[]( )
+
+  virtualReturn.h
+proc QPdfWritermetacast*(self: gen_qpdfwriter_types.QPdfWriter, param1: cstring): pointer =
+  fQPdfWriter_virtualbase_metacast(self.h, param1)
+
+type QPdfWritermetacastProc* = proc(param1: cstring): pointer
+proc onmetacast*(self: gen_qpdfwriter_types.QPdfWriter, slot: QPdfWritermetacastProc) =
+  # TODO check subclass
+  var tmp = new QPdfWritermetacastProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQPdfWriter_override_virtual_metacast(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QPdfWriter_metacast(self: ptr cQPdfWriter, slot: int, param1: cstring): pointer {.exportc: "miqt_exec_callback_QPdfWriter_metacast ".} =
+  var nimfunc = cast[ptr QPdfWritermetacastProc](cast[pointer](slot))
+  let slotval1 = (param1)
+
+
+  let virtualReturn = nimfunc[](slotval1 )
+
+  virtualReturn
+proc QPdfWritermetacall*(self: gen_qpdfwriter_types.QPdfWriter, param1: cint, param2: cint, param3: pointer): cint =
+  fQPdfWriter_virtualbase_metacall(self.h, cint(param1), param2, param3)
+
+type QPdfWritermetacallProc* = proc(param1: cint, param2: cint, param3: pointer): cint
+proc onmetacall*(self: gen_qpdfwriter_types.QPdfWriter, slot: QPdfWritermetacallProc) =
+  # TODO check subclass
+  var tmp = new QPdfWritermetacallProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQPdfWriter_override_virtual_metacall(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QPdfWriter_metacall(self: ptr cQPdfWriter, slot: int, param1: cint, param2: cint, param3: pointer): cint {.exportc: "miqt_exec_callback_QPdfWriter_metacall ".} =
+  var nimfunc = cast[ptr QPdfWritermetacallProc](cast[pointer](slot))
+  let slotval1 = cint(param1)
+
+  let slotval2 = param2
+
+  let slotval3 = param3
+
+
+  let virtualReturn = nimfunc[](slotval1, slotval2, slotval3 )
+
+  virtualReturn
 proc QPdfWriternewPage*(self: gen_qpdfwriter_types.QPdfWriter, ): bool =
   fQPdfWriter_virtualbase_newPage(self.h)
 
@@ -533,5 +603,7 @@ proc miqt_exec_callback_QPdfWriter_sharedPainter(self: ptr cQPdfWriter, slot: in
   let virtualReturn = nimfunc[]( )
 
   virtualReturn.h
+proc staticMetaObject*(_: type gen_qpdfwriter_types.QPdfWriter): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fcQPdfWriter_staticMetaObject())
 proc delete*(self: gen_qpdfwriter_types.QPdfWriter) =
   fcQPdfWriter_delete(self.h)

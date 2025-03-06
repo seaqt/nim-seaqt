@@ -37,6 +37,10 @@ void* QVideoWindowControl_metacast(QVideoWindowControl* self, const char* param1
 	return self->qt_metacast(param1);
 }
 
+int QVideoWindowControl_metacall(QVideoWindowControl* self, int param1, int param2, void** param3) {
+	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
+}
+
 struct miqt_string QVideoWindowControl_tr(const char* s) {
 	QString _ret = QVideoWindowControl::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
@@ -242,6 +246,7 @@ struct miqt_string QVideoWindowControl_trUtf83(const char* s, const char* c, int
 	return _ms;
 }
 
+const QMetaObject* QVideoWindowControl_staticMetaObject() { return &QVideoWindowControl::staticMetaObject; }
 void QVideoWindowControl_delete(QVideoWindowControl* self) {
 	delete self;
 }

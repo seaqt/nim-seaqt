@@ -48,6 +48,7 @@ type cQVideoDeviceSelectorControl*{.exportc: "QVideoDeviceSelectorControl", inco
 
 proc fcQVideoDeviceSelectorControl_metaObject(self: pointer, ): pointer {.importc: "QVideoDeviceSelectorControl_metaObject".}
 proc fcQVideoDeviceSelectorControl_metacast(self: pointer, param1: cstring): pointer {.importc: "QVideoDeviceSelectorControl_metacast".}
+proc fcQVideoDeviceSelectorControl_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QVideoDeviceSelectorControl_metacall".}
 proc fcQVideoDeviceSelectorControl_tr(s: cstring): struct_miqt_string {.importc: "QVideoDeviceSelectorControl_tr".}
 proc fcQVideoDeviceSelectorControl_trUtf8(s: cstring): struct_miqt_string {.importc: "QVideoDeviceSelectorControl_trUtf8".}
 proc fcQVideoDeviceSelectorControl_deviceCount(self: pointer, ): cint {.importc: "QVideoDeviceSelectorControl_deviceCount".}
@@ -66,6 +67,7 @@ proc fcQVideoDeviceSelectorControl_tr2(s: cstring, c: cstring): struct_miqt_stri
 proc fcQVideoDeviceSelectorControl_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QVideoDeviceSelectorControl_tr3".}
 proc fcQVideoDeviceSelectorControl_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QVideoDeviceSelectorControl_trUtf82".}
 proc fcQVideoDeviceSelectorControl_trUtf83(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QVideoDeviceSelectorControl_trUtf83".}
+proc fcQVideoDeviceSelectorControl_staticMetaObject(): pointer {.importc: "QVideoDeviceSelectorControl_staticMetaObject".}
 proc fcQVideoDeviceSelectorControl_delete(self: pointer) {.importc: "QVideoDeviceSelectorControl_delete".}
 
 
@@ -76,6 +78,9 @@ proc metaObject*(self: gen_qvideodeviceselectorcontrol_types.QVideoDeviceSelecto
 
 proc metacast*(self: gen_qvideodeviceselectorcontrol_types.QVideoDeviceSelectorControl, param1: cstring): pointer =
   fcQVideoDeviceSelectorControl_metacast(self.h, param1)
+
+proc metacall*(self: gen_qvideodeviceselectorcontrol_types.QVideoDeviceSelectorControl, param1: cint, param2: cint, param3: pointer): cint =
+  fcQVideoDeviceSelectorControl_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qvideodeviceselectorcontrol_types.QVideoDeviceSelectorControl, s: cstring): string =
   let v_ms = fcQVideoDeviceSelectorControl_tr(s)
@@ -186,5 +191,7 @@ proc trUtf8*(_: type gen_qvideodeviceselectorcontrol_types.QVideoDeviceSelectorC
   c_free(v_ms.data)
   vx_ret
 
+proc staticMetaObject*(_: type gen_qvideodeviceselectorcontrol_types.QVideoDeviceSelectorControl): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fcQVideoDeviceSelectorControl_staticMetaObject())
 proc delete*(self: gen_qvideodeviceselectorcontrol_types.QVideoDeviceSelectorControl) =
   fcQVideoDeviceSelectorControl_delete(self.h)

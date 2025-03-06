@@ -57,6 +57,9 @@ void miqt_exec_callback_QWindow_contentOrientationChanged(intptr_t, int);
 void miqt_exec_callback_QWindow_focusObjectChanged(intptr_t, QObject*);
 void miqt_exec_callback_QWindow_opacityChanged(intptr_t, double);
 void miqt_exec_callback_QWindow_transientParentChanged(intptr_t, QWindow*);
+QMetaObject* miqt_exec_callback_QWindow_metaObject(const QWindow*, intptr_t);
+void* miqt_exec_callback_QWindow_metacast(QWindow*, intptr_t, const char*);
+int miqt_exec_callback_QWindow_metacall(QWindow*, intptr_t, int, int, void**);
 int miqt_exec_callback_QWindow_surfaceType(const QWindow*, intptr_t);
 QSurfaceFormat* miqt_exec_callback_QWindow_format(const QWindow*, intptr_t);
 QSize* miqt_exec_callback_QWindow_size(const QWindow*, intptr_t);
@@ -98,6 +101,62 @@ public:
 	VirtualQWindow(QScreen* screen): QWindow(screen) {};
 
 	virtual ~VirtualQWindow() override = default;
+
+	// cgo.Handle value for overwritten implementation
+	intptr_t handle__metaObject = 0;
+
+	// Subclass to allow providing a Go implementation
+	virtual const QMetaObject* metaObject() const override {
+		if (handle__metaObject == 0) {
+			return QWindow::metaObject();
+		}
+		
+
+		QMetaObject* callback_return_value = miqt_exec_callback_QWindow_metaObject(this, handle__metaObject);
+
+		return callback_return_value;
+	}
+
+	friend QMetaObject* QWindow_virtualbase_metaObject(const void* self);
+
+	// cgo.Handle value for overwritten implementation
+	intptr_t handle__metacast = 0;
+
+	// Subclass to allow providing a Go implementation
+	virtual void* qt_metacast(const char* param1) override {
+		if (handle__metacast == 0) {
+			return QWindow::qt_metacast(param1);
+		}
+		
+		const char* sigval1 = (const char*) param1;
+
+		void* callback_return_value = miqt_exec_callback_QWindow_metacast(this, handle__metacast, sigval1);
+
+		return callback_return_value;
+	}
+
+	friend void* QWindow_virtualbase_metacast(void* self, const char* param1);
+
+	// cgo.Handle value for overwritten implementation
+	intptr_t handle__metacall = 0;
+
+	// Subclass to allow providing a Go implementation
+	virtual int qt_metacall(QMetaObject::Call param1, int param2, void** param3) override {
+		if (handle__metacall == 0) {
+			return QWindow::qt_metacall(param1, param2, param3);
+		}
+		
+		QMetaObject::Call param1_ret = param1;
+		int sigval1 = static_cast<int>(param1_ret);
+		int sigval2 = param2;
+		void** sigval3 = param3;
+
+		int callback_return_value = miqt_exec_callback_QWindow_metacall(this, handle__metacall, sigval1, sigval2, sigval3);
+
+		return static_cast<int>(callback_return_value);
+	}
+
+	friend int QWindow_virtualbase_metacall(void* self, int param1, int param2, void** param3);
 
 	// cgo.Handle value for overwritten implementation
 	intptr_t handle__surfaceType = 0;
@@ -679,6 +738,10 @@ QMetaObject* QWindow_metaObject(const QWindow* self) {
 
 void* QWindow_metacast(QWindow* self, const char* param1) {
 	return self->qt_metacast(param1);
+}
+
+int QWindow_metacall(QWindow* self, int param1, int param2, void** param3) {
+	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
 struct miqt_string QWindow_tr(const char* s) {
@@ -1435,6 +1498,54 @@ bool QWindow_isAncestorOf2(const QWindow* self, QWindow* child, int mode) {
 	return self->isAncestorOf(child, static_cast<QWindow::AncestorMode>(mode));
 }
 
+bool QWindow_override_virtual_metaObject(void* self, intptr_t slot) {
+	VirtualQWindow* self_cast = dynamic_cast<VirtualQWindow*>( (QWindow*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+	
+	self_cast->handle__metaObject = slot;
+	return true;
+}
+
+QMetaObject* QWindow_virtualbase_metaObject(const void* self) {
+
+	return (QMetaObject*) ( (const VirtualQWindow*)(self) )->QWindow::metaObject();
+
+}
+
+bool QWindow_override_virtual_metacast(void* self, intptr_t slot) {
+	VirtualQWindow* self_cast = dynamic_cast<VirtualQWindow*>( (QWindow*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+	
+	self_cast->handle__metacast = slot;
+	return true;
+}
+
+void* QWindow_virtualbase_metacast(void* self, const char* param1) {
+
+	return ( (VirtualQWindow*)(self) )->QWindow::qt_metacast(param1);
+
+}
+
+bool QWindow_override_virtual_metacall(void* self, intptr_t slot) {
+	VirtualQWindow* self_cast = dynamic_cast<VirtualQWindow*>( (QWindow*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+	
+	self_cast->handle__metacall = slot;
+	return true;
+}
+
+int QWindow_virtualbase_metacall(void* self, int param1, int param2, void** param3) {
+
+	return ( (VirtualQWindow*)(self) )->QWindow::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
+
+}
+
 bool QWindow_override_virtual_surfaceType(void* self, intptr_t slot) {
 	VirtualQWindow* self_cast = dynamic_cast<VirtualQWindow*>( (QWindow*)(self) );
 	if (self_cast == nullptr) {
@@ -1901,6 +2012,7 @@ void QWindow_virtualbase_disconnectNotify(void* self, QMetaMethod* signal) {
 
 }
 
+const QMetaObject* QWindow_staticMetaObject() { return &QWindow::staticMetaObject; }
 QObject* QWindow_protectedbase_sender(bool* _dynamic_cast_ok, const void* self) {
 	VirtualQWindow* self_cast = dynamic_cast<VirtualQWindow*>( (QWindow*)(self) );
 	if (self_cast == nullptr) {

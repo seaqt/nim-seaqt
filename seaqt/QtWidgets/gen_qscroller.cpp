@@ -34,6 +34,10 @@ void* QScroller_metacast(QScroller* self, const char* param1) {
 	return self->qt_metacast(param1);
 }
 
+int QScroller_metacall(QScroller* self, int param1, int param2, void** param3) {
+	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
+}
+
 struct miqt_string QScroller_tr(const char* s) {
 	QString _ret = QScroller::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
@@ -258,3 +262,4 @@ bool QScroller_handleInput3(QScroller* self, int input, QPointF* position, long 
 	return self->handleInput(static_cast<QScroller::Input>(input), *position, static_cast<qint64>(timestamp));
 }
 
+const QMetaObject* QScroller_staticMetaObject() { return &QScroller::staticMetaObject; }

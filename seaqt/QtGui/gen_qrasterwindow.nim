@@ -72,12 +72,19 @@ proc fcQRasterWindow_new(): ptr cQRasterWindow {.importc: "QRasterWindow_new".}
 proc fcQRasterWindow_new2(parent: pointer): ptr cQRasterWindow {.importc: "QRasterWindow_new2".}
 proc fcQRasterWindow_metaObject(self: pointer, ): pointer {.importc: "QRasterWindow_metaObject".}
 proc fcQRasterWindow_metacast(self: pointer, param1: cstring): pointer {.importc: "QRasterWindow_metacast".}
+proc fcQRasterWindow_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QRasterWindow_metacall".}
 proc fcQRasterWindow_tr(s: cstring): struct_miqt_string {.importc: "QRasterWindow_tr".}
 proc fcQRasterWindow_trUtf8(s: cstring): struct_miqt_string {.importc: "QRasterWindow_trUtf8".}
 proc fcQRasterWindow_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QRasterWindow_tr2".}
 proc fcQRasterWindow_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QRasterWindow_tr3".}
 proc fcQRasterWindow_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QRasterWindow_trUtf82".}
 proc fcQRasterWindow_trUtf83(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QRasterWindow_trUtf83".}
+proc fQRasterWindow_virtualbase_metaObject(self: pointer, ): pointer{.importc: "QRasterWindow_virtualbase_metaObject".}
+proc fcQRasterWindow_override_virtual_metaObject(self: pointer, slot: int) {.importc: "QRasterWindow_override_virtual_metaObject".}
+proc fQRasterWindow_virtualbase_metacast(self: pointer, param1: cstring): pointer{.importc: "QRasterWindow_virtualbase_metacast".}
+proc fcQRasterWindow_override_virtual_metacast(self: pointer, slot: int) {.importc: "QRasterWindow_override_virtual_metacast".}
+proc fQRasterWindow_virtualbase_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint{.importc: "QRasterWindow_virtualbase_metacall".}
+proc fcQRasterWindow_override_virtual_metacall(self: pointer, slot: int) {.importc: "QRasterWindow_override_virtual_metacall".}
 proc fQRasterWindow_virtualbase_metric(self: pointer, metric: cint): cint{.importc: "QRasterWindow_virtualbase_metric".}
 proc fcQRasterWindow_override_virtual_metric(self: pointer, slot: int) {.importc: "QRasterWindow_override_virtual_metric".}
 proc fQRasterWindow_virtualbase_redirected(self: pointer, param1: pointer): pointer{.importc: "QRasterWindow_virtualbase_redirected".}
@@ -148,6 +155,7 @@ proc fQRasterWindow_virtualbase_initPainter(self: pointer, painter: pointer): vo
 proc fcQRasterWindow_override_virtual_initPainter(self: pointer, slot: int) {.importc: "QRasterWindow_override_virtual_initPainter".}
 proc fQRasterWindow_virtualbase_sharedPainter(self: pointer, ): pointer{.importc: "QRasterWindow_virtualbase_sharedPainter".}
 proc fcQRasterWindow_override_virtual_sharedPainter(self: pointer, slot: int) {.importc: "QRasterWindow_override_virtual_sharedPainter".}
+proc fcQRasterWindow_staticMetaObject(): pointer {.importc: "QRasterWindow_staticMetaObject".}
 proc fcQRasterWindow_delete(self: pointer) {.importc: "QRasterWindow_delete".}
 
 
@@ -164,6 +172,9 @@ proc metaObject*(self: gen_qrasterwindow_types.QRasterWindow, ): gen_qobjectdefs
 
 proc metacast*(self: gen_qrasterwindow_types.QRasterWindow, param1: cstring): pointer =
   fcQRasterWindow_metacast(self.h, param1)
+
+proc metacall*(self: gen_qrasterwindow_types.QRasterWindow, param1: cint, param2: cint, param3: pointer): cint =
+  fcQRasterWindow_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qrasterwindow_types.QRasterWindow, s: cstring): string =
   let v_ms = fcQRasterWindow_tr(s)
@@ -201,6 +212,65 @@ proc trUtf8*(_: type gen_qrasterwindow_types.QRasterWindow, s: cstring, c: cstri
   c_free(v_ms.data)
   vx_ret
 
+proc QRasterWindowmetaObject*(self: gen_qrasterwindow_types.QRasterWindow, ): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fQRasterWindow_virtualbase_metaObject(self.h))
+
+type QRasterWindowmetaObjectProc* = proc(): gen_qobjectdefs_types.QMetaObject
+proc onmetaObject*(self: gen_qrasterwindow_types.QRasterWindow, slot: QRasterWindowmetaObjectProc) =
+  # TODO check subclass
+  var tmp = new QRasterWindowmetaObjectProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQRasterWindow_override_virtual_metaObject(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QRasterWindow_metaObject(self: ptr cQRasterWindow, slot: int): pointer {.exportc: "miqt_exec_callback_QRasterWindow_metaObject ".} =
+  var nimfunc = cast[ptr QRasterWindowmetaObjectProc](cast[pointer](slot))
+
+  let virtualReturn = nimfunc[]( )
+
+  virtualReturn.h
+proc QRasterWindowmetacast*(self: gen_qrasterwindow_types.QRasterWindow, param1: cstring): pointer =
+  fQRasterWindow_virtualbase_metacast(self.h, param1)
+
+type QRasterWindowmetacastProc* = proc(param1: cstring): pointer
+proc onmetacast*(self: gen_qrasterwindow_types.QRasterWindow, slot: QRasterWindowmetacastProc) =
+  # TODO check subclass
+  var tmp = new QRasterWindowmetacastProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQRasterWindow_override_virtual_metacast(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QRasterWindow_metacast(self: ptr cQRasterWindow, slot: int, param1: cstring): pointer {.exportc: "miqt_exec_callback_QRasterWindow_metacast ".} =
+  var nimfunc = cast[ptr QRasterWindowmetacastProc](cast[pointer](slot))
+  let slotval1 = (param1)
+
+
+  let virtualReturn = nimfunc[](slotval1 )
+
+  virtualReturn
+proc QRasterWindowmetacall*(self: gen_qrasterwindow_types.QRasterWindow, param1: cint, param2: cint, param3: pointer): cint =
+  fQRasterWindow_virtualbase_metacall(self.h, cint(param1), param2, param3)
+
+type QRasterWindowmetacallProc* = proc(param1: cint, param2: cint, param3: pointer): cint
+proc onmetacall*(self: gen_qrasterwindow_types.QRasterWindow, slot: QRasterWindowmetacallProc) =
+  # TODO check subclass
+  var tmp = new QRasterWindowmetacallProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQRasterWindow_override_virtual_metacall(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QRasterWindow_metacall(self: ptr cQRasterWindow, slot: int, param1: cint, param2: cint, param3: pointer): cint {.exportc: "miqt_exec_callback_QRasterWindow_metacall ".} =
+  var nimfunc = cast[ptr QRasterWindowmetacallProc](cast[pointer](slot))
+  let slotval1 = cint(param1)
+
+  let slotval2 = param2
+
+  let slotval3 = param3
+
+
+  let virtualReturn = nimfunc[](slotval1, slotval2, slotval3 )
+
+  virtualReturn
 proc QRasterWindowmetric*(self: gen_qrasterwindow_types.QRasterWindow, metric: cint): cint =
   fQRasterWindow_virtualbase_metric(self.h, cint(metric))
 
@@ -815,5 +885,7 @@ proc miqt_exec_callback_QRasterWindow_sharedPainter(self: ptr cQRasterWindow, sl
   let virtualReturn = nimfunc[]( )
 
   virtualReturn.h
+proc staticMetaObject*(_: type gen_qrasterwindow_types.QRasterWindow): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fcQRasterWindow_staticMetaObject())
 proc delete*(self: gen_qrasterwindow_types.QRasterWindow) =
   fcQRasterWindow_delete(self.h)

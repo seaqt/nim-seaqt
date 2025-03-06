@@ -88,6 +88,7 @@ proc fcQCameraFocusZone_setStatus(self: pointer, status: cint): void {.importc: 
 proc fcQCameraFocusZone_delete(self: pointer) {.importc: "QCameraFocusZone_delete".}
 proc fcQCameraFocus_metaObject(self: pointer, ): pointer {.importc: "QCameraFocus_metaObject".}
 proc fcQCameraFocus_metacast(self: pointer, param1: cstring): pointer {.importc: "QCameraFocus_metacast".}
+proc fcQCameraFocus_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QCameraFocus_metacall".}
 proc fcQCameraFocus_tr(s: cstring): struct_miqt_string {.importc: "QCameraFocus_tr".}
 proc fcQCameraFocus_trUtf8(s: cstring): struct_miqt_string {.importc: "QCameraFocus_trUtf8".}
 proc fcQCameraFocus_isAvailable(self: pointer, ): bool {.importc: "QCameraFocus_isAvailable".}
@@ -119,6 +120,7 @@ proc fcQCameraFocus_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "
 proc fcQCameraFocus_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QCameraFocus_tr3".}
 proc fcQCameraFocus_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QCameraFocus_trUtf82".}
 proc fcQCameraFocus_trUtf83(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QCameraFocus_trUtf83".}
+proc fcQCameraFocus_staticMetaObject(): pointer {.importc: "QCameraFocus_staticMetaObject".}
 
 
 func init*(T: type gen_qcamerafocus_types.QCameraFocusZone, h: ptr cQCameraFocusZone): gen_qcamerafocus_types.QCameraFocusZone =
@@ -166,6 +168,9 @@ proc metaObject*(self: gen_qcamerafocus_types.QCameraFocus, ): gen_qobjectdefs_t
 
 proc metacast*(self: gen_qcamerafocus_types.QCameraFocus, param1: cstring): pointer =
   fcQCameraFocus_metacast(self.h, param1)
+
+proc metacall*(self: gen_qcamerafocus_types.QCameraFocus, param1: cint, param2: cint, param3: pointer): cint =
+  fcQCameraFocus_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qcamerafocus_types.QCameraFocus, s: cstring): string =
   let v_ms = fcQCameraFocus_tr(s)
@@ -331,3 +336,5 @@ proc trUtf8*(_: type gen_qcamerafocus_types.QCameraFocus, s: cstring, c: cstring
   c_free(v_ms.data)
   vx_ret
 
+proc staticMetaObject*(_: type gen_qcamerafocus_types.QCameraFocus): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fcQCameraFocus_staticMetaObject())

@@ -63,6 +63,7 @@ QWebPluginFactory* QWebPluginFactory_new2(QObject* parent);
 void QWebPluginFactory_virtbase(QWebPluginFactory* src, QObject** outptr_QObject);
 QMetaObject* QWebPluginFactory_metaObject(const QWebPluginFactory* self);
 void* QWebPluginFactory_metacast(QWebPluginFactory* self, const char* param1);
+int QWebPluginFactory_metacall(QWebPluginFactory* self, int param1, int param2, void** param3);
 struct miqt_string QWebPluginFactory_tr(const char* s);
 struct miqt_string QWebPluginFactory_trUtf8(const char* s);
 struct miqt_array /* of QWebPluginFactory__Plugin* */  QWebPluginFactory_plugins(const QWebPluginFactory* self);
@@ -74,6 +75,12 @@ struct miqt_string QWebPluginFactory_tr2(const char* s, const char* c);
 struct miqt_string QWebPluginFactory_tr3(const char* s, const char* c, int n);
 struct miqt_string QWebPluginFactory_trUtf82(const char* s, const char* c);
 struct miqt_string QWebPluginFactory_trUtf83(const char* s, const char* c, int n);
+bool QWebPluginFactory_override_virtual_metaObject(void* self, intptr_t slot);
+QMetaObject* QWebPluginFactory_virtualbase_metaObject(const void* self);
+bool QWebPluginFactory_override_virtual_metacast(void* self, intptr_t slot);
+void* QWebPluginFactory_virtualbase_metacast(void* self, const char* param1);
+bool QWebPluginFactory_override_virtual_metacall(void* self, intptr_t slot);
+int QWebPluginFactory_virtualbase_metacall(void* self, int param1, int param2, void** param3);
 bool QWebPluginFactory_override_virtual_plugins(void* self, intptr_t slot);
 struct miqt_array /* of QWebPluginFactory__Plugin* */  QWebPluginFactory_virtualbase_plugins(const void* self);
 bool QWebPluginFactory_override_virtual_refreshPlugins(void* self, intptr_t slot);
@@ -102,6 +109,7 @@ QObject* QWebPluginFactory_protectedbase_sender(bool* _dynamic_cast_ok, const vo
 int QWebPluginFactory_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
 int QWebPluginFactory_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
 bool QWebPluginFactory_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+const QMetaObject* QWebPluginFactory_staticMetaObject();
 void QWebPluginFactory_delete(QWebPluginFactory* self);
 
 QWebPluginFactory__MimeType* QWebPluginFactory__MimeType_new(QWebPluginFactory__MimeType* param1);

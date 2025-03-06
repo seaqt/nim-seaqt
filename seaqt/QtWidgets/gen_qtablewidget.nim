@@ -175,6 +175,7 @@ proc fcQTableWidget_new3(rows: cint, columns: cint): ptr cQTableWidget {.importc
 proc fcQTableWidget_new4(rows: cint, columns: cint, parent: pointer): ptr cQTableWidget {.importc: "QTableWidget_new4".}
 proc fcQTableWidget_metaObject(self: pointer, ): pointer {.importc: "QTableWidget_metaObject".}
 proc fcQTableWidget_metacast(self: pointer, param1: cstring): pointer {.importc: "QTableWidget_metacast".}
+proc fcQTableWidget_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QTableWidget_metacall".}
 proc fcQTableWidget_tr(s: cstring): struct_miqt_string {.importc: "QTableWidget_tr".}
 proc fcQTableWidget_trUtf8(s: cstring): struct_miqt_string {.importc: "QTableWidget_trUtf8".}
 proc fcQTableWidget_setRowCount(self: pointer, rows: cint): void {.importc: "QTableWidget_setRowCount".}
@@ -267,6 +268,12 @@ proc fcQTableWidget_trUtf82(s: cstring, c: cstring): struct_miqt_string {.import
 proc fcQTableWidget_trUtf83(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QTableWidget_trUtf83".}
 proc fcQTableWidget_sortItems2(self: pointer, column: cint, order: cint): void {.importc: "QTableWidget_sortItems2".}
 proc fcQTableWidget_scrollToItem2(self: pointer, item: pointer, hint: cint): void {.importc: "QTableWidget_scrollToItem2".}
+proc fQTableWidget_virtualbase_metaObject(self: pointer, ): pointer{.importc: "QTableWidget_virtualbase_metaObject".}
+proc fcQTableWidget_override_virtual_metaObject(self: pointer, slot: int) {.importc: "QTableWidget_override_virtual_metaObject".}
+proc fQTableWidget_virtualbase_metacast(self: pointer, param1: cstring): pointer{.importc: "QTableWidget_virtualbase_metacast".}
+proc fcQTableWidget_override_virtual_metacast(self: pointer, slot: int) {.importc: "QTableWidget_override_virtual_metacast".}
+proc fQTableWidget_virtualbase_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint{.importc: "QTableWidget_virtualbase_metacall".}
+proc fcQTableWidget_override_virtual_metacall(self: pointer, slot: int) {.importc: "QTableWidget_override_virtual_metacall".}
 proc fQTableWidget_virtualbase_event(self: pointer, e: pointer): bool{.importc: "QTableWidget_virtualbase_event".}
 proc fcQTableWidget_override_virtual_event(self: pointer, slot: int) {.importc: "QTableWidget_override_virtual_event".}
 proc fQTableWidget_virtualbase_mimeTypes(self: pointer, ): struct_miqt_array{.importc: "QTableWidget_virtualbase_mimeTypes".}
@@ -451,6 +458,7 @@ proc fQTableWidget_virtualbase_connectNotify(self: pointer, signal: pointer): vo
 proc fcQTableWidget_override_virtual_connectNotify(self: pointer, slot: int) {.importc: "QTableWidget_override_virtual_connectNotify".}
 proc fQTableWidget_virtualbase_disconnectNotify(self: pointer, signal: pointer): void{.importc: "QTableWidget_virtualbase_disconnectNotify".}
 proc fcQTableWidget_override_virtual_disconnectNotify(self: pointer, slot: int) {.importc: "QTableWidget_override_virtual_disconnectNotify".}
+proc fcQTableWidget_staticMetaObject(): pointer {.importc: "QTableWidget_staticMetaObject".}
 proc fcQTableWidget_delete(self: pointer) {.importc: "QTableWidget_delete".}
 
 
@@ -777,6 +785,9 @@ proc metaObject*(self: gen_qtablewidget_types.QTableWidget, ): gen_qobjectdefs_t
 
 proc metacast*(self: gen_qtablewidget_types.QTableWidget, param1: cstring): pointer =
   fcQTableWidget_metacast(self.h, param1)
+
+proc metacall*(self: gen_qtablewidget_types.QTableWidget, param1: cint, param2: cint, param3: pointer): cint =
+  fcQTableWidget_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qtablewidget_types.QTableWidget, s: cstring): string =
   let v_ms = fcQTableWidget_tr(s)
@@ -1263,6 +1274,65 @@ proc sortItems*(self: gen_qtablewidget_types.QTableWidget, column: cint, order: 
 proc scrollToItem*(self: gen_qtablewidget_types.QTableWidget, item: gen_qtablewidget_types.QTableWidgetItem, hint: cint): void =
   fcQTableWidget_scrollToItem2(self.h, item.h, cint(hint))
 
+proc QTableWidgetmetaObject*(self: gen_qtablewidget_types.QTableWidget, ): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fQTableWidget_virtualbase_metaObject(self.h))
+
+type QTableWidgetmetaObjectProc* = proc(): gen_qobjectdefs_types.QMetaObject
+proc onmetaObject*(self: gen_qtablewidget_types.QTableWidget, slot: QTableWidgetmetaObjectProc) =
+  # TODO check subclass
+  var tmp = new QTableWidgetmetaObjectProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQTableWidget_override_virtual_metaObject(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QTableWidget_metaObject(self: ptr cQTableWidget, slot: int): pointer {.exportc: "miqt_exec_callback_QTableWidget_metaObject ".} =
+  var nimfunc = cast[ptr QTableWidgetmetaObjectProc](cast[pointer](slot))
+
+  let virtualReturn = nimfunc[]( )
+
+  virtualReturn.h
+proc QTableWidgetmetacast*(self: gen_qtablewidget_types.QTableWidget, param1: cstring): pointer =
+  fQTableWidget_virtualbase_metacast(self.h, param1)
+
+type QTableWidgetmetacastProc* = proc(param1: cstring): pointer
+proc onmetacast*(self: gen_qtablewidget_types.QTableWidget, slot: QTableWidgetmetacastProc) =
+  # TODO check subclass
+  var tmp = new QTableWidgetmetacastProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQTableWidget_override_virtual_metacast(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QTableWidget_metacast(self: ptr cQTableWidget, slot: int, param1: cstring): pointer {.exportc: "miqt_exec_callback_QTableWidget_metacast ".} =
+  var nimfunc = cast[ptr QTableWidgetmetacastProc](cast[pointer](slot))
+  let slotval1 = (param1)
+
+
+  let virtualReturn = nimfunc[](slotval1 )
+
+  virtualReturn
+proc QTableWidgetmetacall*(self: gen_qtablewidget_types.QTableWidget, param1: cint, param2: cint, param3: pointer): cint =
+  fQTableWidget_virtualbase_metacall(self.h, cint(param1), param2, param3)
+
+type QTableWidgetmetacallProc* = proc(param1: cint, param2: cint, param3: pointer): cint
+proc onmetacall*(self: gen_qtablewidget_types.QTableWidget, slot: QTableWidgetmetacallProc) =
+  # TODO check subclass
+  var tmp = new QTableWidgetmetacallProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQTableWidget_override_virtual_metacall(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QTableWidget_metacall(self: ptr cQTableWidget, slot: int, param1: cint, param2: cint, param3: pointer): cint {.exportc: "miqt_exec_callback_QTableWidget_metacall ".} =
+  var nimfunc = cast[ptr QTableWidgetmetacallProc](cast[pointer](slot))
+  let slotval1 = cint(param1)
+
+  let slotval2 = param2
+
+  let slotval3 = param3
+
+
+  let virtualReturn = nimfunc[](slotval1, slotval2, slotval3 )
+
+  virtualReturn
 proc QTableWidgetevent*(self: gen_qtablewidget_types.QTableWidget, e: gen_qcoreevent_types.QEvent): bool =
   fQTableWidget_virtualbase_event(self.h, e.h)
 
@@ -2944,5 +3014,7 @@ proc miqt_exec_callback_QTableWidget_disconnectNotify(self: ptr cQTableWidget, s
 
 
   nimfunc[](slotval1)
+proc staticMetaObject*(_: type gen_qtablewidget_types.QTableWidget): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fcQTableWidget_staticMetaObject())
 proc delete*(self: gen_qtablewidget_types.QTableWidget) =
   fcQTableWidget_delete(self.h)

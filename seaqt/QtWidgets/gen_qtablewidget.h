@@ -203,6 +203,7 @@ QTableWidget* QTableWidget_new4(int rows, int columns, QWidget* parent);
 void QTableWidget_virtbase(QTableWidget* src, QTableView** outptr_QTableView);
 QMetaObject* QTableWidget_metaObject(const QTableWidget* self);
 void* QTableWidget_metacast(QTableWidget* self, const char* param1);
+int QTableWidget_metacall(QTableWidget* self, int param1, int param2, void** param3);
 struct miqt_string QTableWidget_tr(const char* s);
 struct miqt_string QTableWidget_trUtf8(const char* s);
 void QTableWidget_setRowCount(QTableWidget* self, int rows);
@@ -301,6 +302,12 @@ struct miqt_string QTableWidget_trUtf82(const char* s, const char* c);
 struct miqt_string QTableWidget_trUtf83(const char* s, const char* c, int n);
 void QTableWidget_sortItems2(QTableWidget* self, int column, int order);
 void QTableWidget_scrollToItem2(QTableWidget* self, QTableWidgetItem* item, int hint);
+bool QTableWidget_override_virtual_metaObject(void* self, intptr_t slot);
+QMetaObject* QTableWidget_virtualbase_metaObject(const void* self);
+bool QTableWidget_override_virtual_metacast(void* self, intptr_t slot);
+void* QTableWidget_virtualbase_metacast(void* self, const char* param1);
+bool QTableWidget_override_virtual_metacall(void* self, intptr_t slot);
+int QTableWidget_virtualbase_metacall(void* self, int param1, int param2, void** param3);
 bool QTableWidget_override_virtual_event(void* self, intptr_t slot);
 bool QTableWidget_virtualbase_event(void* self, QEvent* e);
 bool QTableWidget_override_virtual_mimeTypes(void* self, intptr_t slot);
@@ -523,6 +530,7 @@ QObject* QTableWidget_protectedbase_sender(bool* _dynamic_cast_ok, const void* s
 int QTableWidget_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
 int QTableWidget_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
 bool QTableWidget_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+const QMetaObject* QTableWidget_staticMetaObject();
 void QTableWidget_delete(QTableWidget* self);
 
 #ifdef __cplusplus

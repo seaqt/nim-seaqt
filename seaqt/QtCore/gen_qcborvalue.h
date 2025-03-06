@@ -145,6 +145,7 @@ QCborValue* QCborValue_fromCbor33(const unsigned char* data, ptrdiff_t len, QCbo
 struct miqt_string QCborValue_toCbor1(QCborValue* self, int opt);
 void QCborValue_toCbor2(QCborValue* self, QCborStreamWriter* writer, int opt);
 struct miqt_string QCborValue_toDiagnosticNotation1(const QCborValue* self, int opts);
+const QMetaObject* QCborValue_staticMetaObject();
 void QCborValue_delete(QCborValue* self);
 
 QCborValueRef* QCborValueRef_new(QCborValueRef* param1);

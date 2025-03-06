@@ -66,6 +66,7 @@ proc fcQAbstractVideoFilter_new(): ptr cQAbstractVideoFilter {.importc: "QAbstra
 proc fcQAbstractVideoFilter_new2(parent: pointer): ptr cQAbstractVideoFilter {.importc: "QAbstractVideoFilter_new2".}
 proc fcQAbstractVideoFilter_metaObject(self: pointer, ): pointer {.importc: "QAbstractVideoFilter_metaObject".}
 proc fcQAbstractVideoFilter_metacast(self: pointer, param1: cstring): pointer {.importc: "QAbstractVideoFilter_metacast".}
+proc fcQAbstractVideoFilter_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QAbstractVideoFilter_metacall".}
 proc fcQAbstractVideoFilter_tr(s: cstring): struct_miqt_string {.importc: "QAbstractVideoFilter_tr".}
 proc fcQAbstractVideoFilter_trUtf8(s: cstring): struct_miqt_string {.importc: "QAbstractVideoFilter_trUtf8".}
 proc fcQAbstractVideoFilter_isActive(self: pointer, ): bool {.importc: "QAbstractVideoFilter_isActive".}
@@ -77,6 +78,12 @@ proc fcQAbstractVideoFilter_tr2(s: cstring, c: cstring): struct_miqt_string {.im
 proc fcQAbstractVideoFilter_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QAbstractVideoFilter_tr3".}
 proc fcQAbstractVideoFilter_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QAbstractVideoFilter_trUtf82".}
 proc fcQAbstractVideoFilter_trUtf83(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QAbstractVideoFilter_trUtf83".}
+proc fQAbstractVideoFilter_virtualbase_metaObject(self: pointer, ): pointer{.importc: "QAbstractVideoFilter_virtualbase_metaObject".}
+proc fcQAbstractVideoFilter_override_virtual_metaObject(self: pointer, slot: int) {.importc: "QAbstractVideoFilter_override_virtual_metaObject".}
+proc fQAbstractVideoFilter_virtualbase_metacast(self: pointer, param1: cstring): pointer{.importc: "QAbstractVideoFilter_virtualbase_metacast".}
+proc fcQAbstractVideoFilter_override_virtual_metacast(self: pointer, slot: int) {.importc: "QAbstractVideoFilter_override_virtual_metacast".}
+proc fQAbstractVideoFilter_virtualbase_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint{.importc: "QAbstractVideoFilter_virtualbase_metacall".}
+proc fcQAbstractVideoFilter_override_virtual_metacall(self: pointer, slot: int) {.importc: "QAbstractVideoFilter_override_virtual_metacall".}
 proc fcQAbstractVideoFilter_override_virtual_createFilterRunnable(self: pointer, slot: int) {.importc: "QAbstractVideoFilter_override_virtual_createFilterRunnable".}
 proc fQAbstractVideoFilter_virtualbase_event(self: pointer, event: pointer): bool{.importc: "QAbstractVideoFilter_virtualbase_event".}
 proc fcQAbstractVideoFilter_override_virtual_event(self: pointer, slot: int) {.importc: "QAbstractVideoFilter_override_virtual_event".}
@@ -92,6 +99,7 @@ proc fQAbstractVideoFilter_virtualbase_connectNotify(self: pointer, signal: poin
 proc fcQAbstractVideoFilter_override_virtual_connectNotify(self: pointer, slot: int) {.importc: "QAbstractVideoFilter_override_virtual_connectNotify".}
 proc fQAbstractVideoFilter_virtualbase_disconnectNotify(self: pointer, signal: pointer): void{.importc: "QAbstractVideoFilter_virtualbase_disconnectNotify".}
 proc fcQAbstractVideoFilter_override_virtual_disconnectNotify(self: pointer, slot: int) {.importc: "QAbstractVideoFilter_override_virtual_disconnectNotify".}
+proc fcQAbstractVideoFilter_staticMetaObject(): pointer {.importc: "QAbstractVideoFilter_staticMetaObject".}
 proc fcQAbstractVideoFilter_delete(self: pointer) {.importc: "QAbstractVideoFilter_delete".}
 
 
@@ -119,6 +127,9 @@ proc metaObject*(self: gen_qabstractvideofilter_types.QAbstractVideoFilter, ): g
 
 proc metacast*(self: gen_qabstractvideofilter_types.QAbstractVideoFilter, param1: cstring): pointer =
   fcQAbstractVideoFilter_metacast(self.h, param1)
+
+proc metacall*(self: gen_qabstractvideofilter_types.QAbstractVideoFilter, param1: cint, param2: cint, param3: pointer): cint =
+  fcQAbstractVideoFilter_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qabstractvideofilter_types.QAbstractVideoFilter, s: cstring): string =
   let v_ms = fcQAbstractVideoFilter_tr(s)
@@ -179,6 +190,65 @@ proc trUtf8*(_: type gen_qabstractvideofilter_types.QAbstractVideoFilter, s: cst
   c_free(v_ms.data)
   vx_ret
 
+proc QAbstractVideoFiltermetaObject*(self: gen_qabstractvideofilter_types.QAbstractVideoFilter, ): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fQAbstractVideoFilter_virtualbase_metaObject(self.h))
+
+type QAbstractVideoFiltermetaObjectProc* = proc(): gen_qobjectdefs_types.QMetaObject
+proc onmetaObject*(self: gen_qabstractvideofilter_types.QAbstractVideoFilter, slot: QAbstractVideoFiltermetaObjectProc) =
+  # TODO check subclass
+  var tmp = new QAbstractVideoFiltermetaObjectProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQAbstractVideoFilter_override_virtual_metaObject(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QAbstractVideoFilter_metaObject(self: ptr cQAbstractVideoFilter, slot: int): pointer {.exportc: "miqt_exec_callback_QAbstractVideoFilter_metaObject ".} =
+  var nimfunc = cast[ptr QAbstractVideoFiltermetaObjectProc](cast[pointer](slot))
+
+  let virtualReturn = nimfunc[]( )
+
+  virtualReturn.h
+proc QAbstractVideoFiltermetacast*(self: gen_qabstractvideofilter_types.QAbstractVideoFilter, param1: cstring): pointer =
+  fQAbstractVideoFilter_virtualbase_metacast(self.h, param1)
+
+type QAbstractVideoFiltermetacastProc* = proc(param1: cstring): pointer
+proc onmetacast*(self: gen_qabstractvideofilter_types.QAbstractVideoFilter, slot: QAbstractVideoFiltermetacastProc) =
+  # TODO check subclass
+  var tmp = new QAbstractVideoFiltermetacastProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQAbstractVideoFilter_override_virtual_metacast(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QAbstractVideoFilter_metacast(self: ptr cQAbstractVideoFilter, slot: int, param1: cstring): pointer {.exportc: "miqt_exec_callback_QAbstractVideoFilter_metacast ".} =
+  var nimfunc = cast[ptr QAbstractVideoFiltermetacastProc](cast[pointer](slot))
+  let slotval1 = (param1)
+
+
+  let virtualReturn = nimfunc[](slotval1 )
+
+  virtualReturn
+proc QAbstractVideoFiltermetacall*(self: gen_qabstractvideofilter_types.QAbstractVideoFilter, param1: cint, param2: cint, param3: pointer): cint =
+  fQAbstractVideoFilter_virtualbase_metacall(self.h, cint(param1), param2, param3)
+
+type QAbstractVideoFiltermetacallProc* = proc(param1: cint, param2: cint, param3: pointer): cint
+proc onmetacall*(self: gen_qabstractvideofilter_types.QAbstractVideoFilter, slot: QAbstractVideoFiltermetacallProc) =
+  # TODO check subclass
+  var tmp = new QAbstractVideoFiltermetacallProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQAbstractVideoFilter_override_virtual_metacall(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QAbstractVideoFilter_metacall(self: ptr cQAbstractVideoFilter, slot: int, param1: cint, param2: cint, param3: pointer): cint {.exportc: "miqt_exec_callback_QAbstractVideoFilter_metacall ".} =
+  var nimfunc = cast[ptr QAbstractVideoFiltermetacallProc](cast[pointer](slot))
+  let slotval1 = cint(param1)
+
+  let slotval2 = param2
+
+  let slotval3 = param3
+
+
+  let virtualReturn = nimfunc[](slotval1, slotval2, slotval3 )
+
+  virtualReturn
 type QAbstractVideoFiltercreateFilterRunnableProc* = proc(): gen_qabstractvideofilter_types.QVideoFilterRunnable
 proc oncreateFilterRunnable*(self: gen_qabstractvideofilter_types.QAbstractVideoFilter, slot: QAbstractVideoFiltercreateFilterRunnableProc) =
   # TODO check subclass
@@ -318,5 +388,7 @@ proc miqt_exec_callback_QAbstractVideoFilter_disconnectNotify(self: ptr cQAbstra
 
 
   nimfunc[](slotval1)
+proc staticMetaObject*(_: type gen_qabstractvideofilter_types.QAbstractVideoFilter): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fcQAbstractVideoFilter_staticMetaObject())
 proc delete*(self: gen_qabstractvideofilter_types.QAbstractVideoFilter) =
   fcQAbstractVideoFilter_delete(self.h)

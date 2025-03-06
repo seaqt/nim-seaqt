@@ -22,6 +22,9 @@ void miqt_exec_callback_QNetworkConfigurationManager_configurationRemoved(intptr
 void miqt_exec_callback_QNetworkConfigurationManager_configurationChanged(intptr_t, QNetworkConfiguration*);
 void miqt_exec_callback_QNetworkConfigurationManager_onlineStateChanged(intptr_t, bool);
 void miqt_exec_callback_QNetworkConfigurationManager_updateCompleted(intptr_t);
+QMetaObject* miqt_exec_callback_QNetworkConfigurationManager_metaObject(const QNetworkConfigurationManager*, intptr_t);
+void* miqt_exec_callback_QNetworkConfigurationManager_metacast(QNetworkConfigurationManager*, intptr_t, const char*);
+int miqt_exec_callback_QNetworkConfigurationManager_metacall(QNetworkConfigurationManager*, intptr_t, int, int, void**);
 bool miqt_exec_callback_QNetworkConfigurationManager_event(QNetworkConfigurationManager*, intptr_t, QEvent*);
 bool miqt_exec_callback_QNetworkConfigurationManager_eventFilter(QNetworkConfigurationManager*, intptr_t, QObject*, QEvent*);
 void miqt_exec_callback_QNetworkConfigurationManager_timerEvent(QNetworkConfigurationManager*, intptr_t, QTimerEvent*);
@@ -40,6 +43,62 @@ public:
 	VirtualQNetworkConfigurationManager(QObject* parent): QNetworkConfigurationManager(parent) {};
 
 	virtual ~VirtualQNetworkConfigurationManager() override = default;
+
+	// cgo.Handle value for overwritten implementation
+	intptr_t handle__metaObject = 0;
+
+	// Subclass to allow providing a Go implementation
+	virtual const QMetaObject* metaObject() const override {
+		if (handle__metaObject == 0) {
+			return QNetworkConfigurationManager::metaObject();
+		}
+		
+
+		QMetaObject* callback_return_value = miqt_exec_callback_QNetworkConfigurationManager_metaObject(this, handle__metaObject);
+
+		return callback_return_value;
+	}
+
+	friend QMetaObject* QNetworkConfigurationManager_virtualbase_metaObject(const void* self);
+
+	// cgo.Handle value for overwritten implementation
+	intptr_t handle__metacast = 0;
+
+	// Subclass to allow providing a Go implementation
+	virtual void* qt_metacast(const char* param1) override {
+		if (handle__metacast == 0) {
+			return QNetworkConfigurationManager::qt_metacast(param1);
+		}
+		
+		const char* sigval1 = (const char*) param1;
+
+		void* callback_return_value = miqt_exec_callback_QNetworkConfigurationManager_metacast(this, handle__metacast, sigval1);
+
+		return callback_return_value;
+	}
+
+	friend void* QNetworkConfigurationManager_virtualbase_metacast(void* self, const char* param1);
+
+	// cgo.Handle value for overwritten implementation
+	intptr_t handle__metacall = 0;
+
+	// Subclass to allow providing a Go implementation
+	virtual int qt_metacall(QMetaObject::Call param1, int param2, void** param3) override {
+		if (handle__metacall == 0) {
+			return QNetworkConfigurationManager::qt_metacall(param1, param2, param3);
+		}
+		
+		QMetaObject::Call param1_ret = param1;
+		int sigval1 = static_cast<int>(param1_ret);
+		int sigval2 = param2;
+		void** sigval3 = param3;
+
+		int callback_return_value = miqt_exec_callback_QNetworkConfigurationManager_metacall(this, handle__metacall, sigval1, sigval2, sigval3);
+
+		return static_cast<int>(callback_return_value);
+	}
+
+	friend int QNetworkConfigurationManager_virtualbase_metacall(void* self, int param1, int param2, void** param3);
 
 	// cgo.Handle value for overwritten implementation
 	intptr_t handle__event = 0;
@@ -202,6 +261,10 @@ QMetaObject* QNetworkConfigurationManager_metaObject(const QNetworkConfiguration
 
 void* QNetworkConfigurationManager_metacast(QNetworkConfigurationManager* self, const char* param1) {
 	return self->qt_metacast(param1);
+}
+
+int QNetworkConfigurationManager_metacall(QNetworkConfigurationManager* self, int param1, int param2, void** param3) {
+	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
 struct miqt_string QNetworkConfigurationManager_tr(const char* s) {
@@ -378,6 +441,54 @@ struct miqt_array /* of QNetworkConfiguration* */  QNetworkConfigurationManager_
 	return _out;
 }
 
+bool QNetworkConfigurationManager_override_virtual_metaObject(void* self, intptr_t slot) {
+	VirtualQNetworkConfigurationManager* self_cast = dynamic_cast<VirtualQNetworkConfigurationManager*>( (QNetworkConfigurationManager*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+	
+	self_cast->handle__metaObject = slot;
+	return true;
+}
+
+QMetaObject* QNetworkConfigurationManager_virtualbase_metaObject(const void* self) {
+
+	return (QMetaObject*) ( (const VirtualQNetworkConfigurationManager*)(self) )->QNetworkConfigurationManager::metaObject();
+
+}
+
+bool QNetworkConfigurationManager_override_virtual_metacast(void* self, intptr_t slot) {
+	VirtualQNetworkConfigurationManager* self_cast = dynamic_cast<VirtualQNetworkConfigurationManager*>( (QNetworkConfigurationManager*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+	
+	self_cast->handle__metacast = slot;
+	return true;
+}
+
+void* QNetworkConfigurationManager_virtualbase_metacast(void* self, const char* param1) {
+
+	return ( (VirtualQNetworkConfigurationManager*)(self) )->QNetworkConfigurationManager::qt_metacast(param1);
+
+}
+
+bool QNetworkConfigurationManager_override_virtual_metacall(void* self, intptr_t slot) {
+	VirtualQNetworkConfigurationManager* self_cast = dynamic_cast<VirtualQNetworkConfigurationManager*>( (QNetworkConfigurationManager*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+	
+	self_cast->handle__metacall = slot;
+	return true;
+}
+
+int QNetworkConfigurationManager_virtualbase_metacall(void* self, int param1, int param2, void** param3) {
+
+	return ( (VirtualQNetworkConfigurationManager*)(self) )->QNetworkConfigurationManager::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
+
+}
+
 bool QNetworkConfigurationManager_override_virtual_event(void* self, intptr_t slot) {
 	VirtualQNetworkConfigurationManager* self_cast = dynamic_cast<VirtualQNetworkConfigurationManager*>( (QNetworkConfigurationManager*)(self) );
 	if (self_cast == nullptr) {
@@ -490,6 +601,7 @@ void QNetworkConfigurationManager_virtualbase_disconnectNotify(void* self, QMeta
 
 }
 
+const QMetaObject* QNetworkConfigurationManager_staticMetaObject() { return &QNetworkConfigurationManager::staticMetaObject; }
 QObject* QNetworkConfigurationManager_protectedbase_sender(bool* _dynamic_cast_ok, const void* self) {
 	VirtualQNetworkConfigurationManager* self_cast = dynamic_cast<VirtualQNetworkConfigurationManager*>( (QNetworkConfigurationManager*)(self) );
 	if (self_cast == nullptr) {

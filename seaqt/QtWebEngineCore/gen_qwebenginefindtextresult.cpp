@@ -30,6 +30,7 @@ void QWebEngineFindTextResult_operatorAssign(QWebEngineFindTextResult* self, QWe
 	self->operator=(*other);
 }
 
+const QMetaObject* QWebEngineFindTextResult_staticMetaObject() { return &QWebEngineFindTextResult::staticMetaObject; }
 void QWebEngineFindTextResult_delete(QWebEngineFindTextResult* self) {
 	delete self;
 }

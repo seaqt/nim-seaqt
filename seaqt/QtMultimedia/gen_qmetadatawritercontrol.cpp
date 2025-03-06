@@ -35,6 +35,10 @@ void* QMetaDataWriterControl_metacast(QMetaDataWriterControl* self, const char* 
 	return self->qt_metacast(param1);
 }
 
+int QMetaDataWriterControl_metacall(QMetaDataWriterControl* self, int param1, int param2, void** param3) {
+	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
+}
+
 struct miqt_string QMetaDataWriterControl_tr(const char* s) {
 	QString _ret = QMetaDataWriterControl::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
@@ -193,6 +197,7 @@ struct miqt_string QMetaDataWriterControl_trUtf83(const char* s, const char* c, 
 	return _ms;
 }
 
+const QMetaObject* QMetaDataWriterControl_staticMetaObject() { return &QMetaDataWriterControl::staticMetaObject; }
 void QMetaDataWriterControl_delete(QMetaDataWriterControl* self) {
 	delete self;
 }

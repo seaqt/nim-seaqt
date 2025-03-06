@@ -87,6 +87,7 @@ void QWebHitTestResult_delete(QWebHitTestResult* self);
 void QWebFrame_virtbase(QWebFrame* src, QObject** outptr_QObject);
 QMetaObject* QWebFrame_metaObject(const QWebFrame* self);
 void* QWebFrame_metacast(QWebFrame* self, const char* param1);
+int QWebFrame_metacall(QWebFrame* self, int param1, int param2, void** param3);
 struct miqt_string QWebFrame_tr(const char* s);
 struct miqt_string QWebFrame_trUtf8(const char* s);
 QWebPage* QWebFrame_page(const QWebFrame* self);
@@ -169,6 +170,7 @@ void QWebFrame_setContent3(QWebFrame* self, struct miqt_string data, struct miqt
 void QWebFrame_addToJavaScriptWindowObject3(QWebFrame* self, struct miqt_string name, QObject* object, int ownership);
 void QWebFrame_render22(QWebFrame* self, QPainter* param1, QRegion* clip);
 void QWebFrame_render3(QWebFrame* self, QPainter* param1, int layer, QRegion* clip);
+const QMetaObject* QWebFrame_staticMetaObject();
 
 #ifdef __cplusplus
 } /* extern C */

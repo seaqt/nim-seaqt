@@ -181,6 +181,10 @@ void* QAbstractNetworkCache_metacast(QAbstractNetworkCache* self, const char* pa
 	return self->qt_metacast(param1);
 }
 
+int QAbstractNetworkCache_metacall(QAbstractNetworkCache* self, int param1, int param2, void** param3) {
+	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
+}
+
 struct miqt_string QAbstractNetworkCache_tr(const char* s) {
 	QString _ret = QAbstractNetworkCache::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
@@ -280,6 +284,7 @@ struct miqt_string QAbstractNetworkCache_trUtf83(const char* s, const char* c, i
 	return _ms;
 }
 
+const QMetaObject* QAbstractNetworkCache_staticMetaObject() { return &QAbstractNetworkCache::staticMetaObject; }
 void QAbstractNetworkCache_delete(QAbstractNetworkCache* self) {
 	delete self;
 }

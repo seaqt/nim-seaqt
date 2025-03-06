@@ -105,6 +105,7 @@ QComboBox* QComboBox_new2();
 void QComboBox_virtbase(QComboBox* src, QWidget** outptr_QWidget);
 QMetaObject* QComboBox_metaObject(const QComboBox* self);
 void* QComboBox_metacast(QComboBox* self, const char* param1);
+int QComboBox_metacall(QComboBox* self, int param1, int param2, void** param3);
 struct miqt_string QComboBox_tr(const char* s);
 struct miqt_string QComboBox_trUtf8(const char* s);
 int QComboBox_maxVisibleItems(const QComboBox* self);
@@ -227,6 +228,12 @@ void QComboBox_addItem3(QComboBox* self, QIcon* icon, struct miqt_string text, Q
 void QComboBox_insertItem3(QComboBox* self, int index, struct miqt_string text, QVariant* userData);
 void QComboBox_insertItem4(QComboBox* self, int index, QIcon* icon, struct miqt_string text, QVariant* userData);
 void QComboBox_setItemData3(QComboBox* self, int index, QVariant* value, int role);
+bool QComboBox_override_virtual_metaObject(void* self, intptr_t slot);
+QMetaObject* QComboBox_virtualbase_metaObject(const void* self);
+bool QComboBox_override_virtual_metacast(void* self, intptr_t slot);
+void* QComboBox_virtualbase_metacast(void* self, const char* param1);
+bool QComboBox_override_virtual_metacall(void* self, intptr_t slot);
+int QComboBox_virtualbase_metacall(void* self, int param1, int param2, void** param3);
 bool QComboBox_override_virtual_sizeHint(void* self, intptr_t slot);
 QSize* QComboBox_virtualbase_sizeHint(const void* self);
 bool QComboBox_override_virtual_minimumSizeHint(void* self, intptr_t slot);
@@ -335,6 +342,7 @@ QObject* QComboBox_protectedbase_sender(bool* _dynamic_cast_ok, const void* self
 int QComboBox_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
 int QComboBox_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
 bool QComboBox_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+const QMetaObject* QComboBox_staticMetaObject();
 void QComboBox_delete(QComboBox* self);
 
 #ifdef __cplusplus

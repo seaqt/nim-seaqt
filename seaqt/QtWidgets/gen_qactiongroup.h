@@ -40,6 +40,7 @@ QActionGroup* QActionGroup_new(QObject* parent);
 void QActionGroup_virtbase(QActionGroup* src, QObject** outptr_QObject);
 QMetaObject* QActionGroup_metaObject(const QActionGroup* self);
 void* QActionGroup_metacast(QActionGroup* self, const char* param1);
+int QActionGroup_metacall(QActionGroup* self, int param1, int param2, void** param3);
 struct miqt_string QActionGroup_tr(const char* s);
 struct miqt_string QActionGroup_trUtf8(const char* s);
 QAction* QActionGroup_addAction(QActionGroup* self, QAction* a);
@@ -65,6 +66,12 @@ struct miqt_string QActionGroup_tr2(const char* s, const char* c);
 struct miqt_string QActionGroup_tr3(const char* s, const char* c, int n);
 struct miqt_string QActionGroup_trUtf82(const char* s, const char* c);
 struct miqt_string QActionGroup_trUtf83(const char* s, const char* c, int n);
+bool QActionGroup_override_virtual_metaObject(void* self, intptr_t slot);
+QMetaObject* QActionGroup_virtualbase_metaObject(const void* self);
+bool QActionGroup_override_virtual_metacast(void* self, intptr_t slot);
+void* QActionGroup_virtualbase_metacast(void* self, const char* param1);
+bool QActionGroup_override_virtual_metacall(void* self, intptr_t slot);
+int QActionGroup_virtualbase_metacall(void* self, int param1, int param2, void** param3);
 bool QActionGroup_override_virtual_event(void* self, intptr_t slot);
 bool QActionGroup_virtualbase_event(void* self, QEvent* event);
 bool QActionGroup_override_virtual_eventFilter(void* self, intptr_t slot);
@@ -83,6 +90,7 @@ QObject* QActionGroup_protectedbase_sender(bool* _dynamic_cast_ok, const void* s
 int QActionGroup_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
 int QActionGroup_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
 bool QActionGroup_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+const QMetaObject* QActionGroup_staticMetaObject();
 void QActionGroup_delete(QActionGroup* self);
 
 #ifdef __cplusplus

@@ -60,6 +60,7 @@ proc fcQAudioProbe_new(): ptr cQAudioProbe {.importc: "QAudioProbe_new".}
 proc fcQAudioProbe_new2(parent: pointer): ptr cQAudioProbe {.importc: "QAudioProbe_new2".}
 proc fcQAudioProbe_metaObject(self: pointer, ): pointer {.importc: "QAudioProbe_metaObject".}
 proc fcQAudioProbe_metacast(self: pointer, param1: cstring): pointer {.importc: "QAudioProbe_metacast".}
+proc fcQAudioProbe_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QAudioProbe_metacall".}
 proc fcQAudioProbe_tr(s: cstring): struct_miqt_string {.importc: "QAudioProbe_tr".}
 proc fcQAudioProbe_trUtf8(s: cstring): struct_miqt_string {.importc: "QAudioProbe_trUtf8".}
 proc fcQAudioProbe_setSource(self: pointer, source: pointer): bool {.importc: "QAudioProbe_setSource".}
@@ -73,6 +74,12 @@ proc fcQAudioProbe_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "Q
 proc fcQAudioProbe_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QAudioProbe_tr3".}
 proc fcQAudioProbe_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QAudioProbe_trUtf82".}
 proc fcQAudioProbe_trUtf83(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QAudioProbe_trUtf83".}
+proc fQAudioProbe_virtualbase_metaObject(self: pointer, ): pointer{.importc: "QAudioProbe_virtualbase_metaObject".}
+proc fcQAudioProbe_override_virtual_metaObject(self: pointer, slot: int) {.importc: "QAudioProbe_override_virtual_metaObject".}
+proc fQAudioProbe_virtualbase_metacast(self: pointer, param1: cstring): pointer{.importc: "QAudioProbe_virtualbase_metacast".}
+proc fcQAudioProbe_override_virtual_metacast(self: pointer, slot: int) {.importc: "QAudioProbe_override_virtual_metacast".}
+proc fQAudioProbe_virtualbase_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint{.importc: "QAudioProbe_virtualbase_metacall".}
+proc fcQAudioProbe_override_virtual_metacall(self: pointer, slot: int) {.importc: "QAudioProbe_override_virtual_metacall".}
 proc fQAudioProbe_virtualbase_event(self: pointer, event: pointer): bool{.importc: "QAudioProbe_virtualbase_event".}
 proc fcQAudioProbe_override_virtual_event(self: pointer, slot: int) {.importc: "QAudioProbe_override_virtual_event".}
 proc fQAudioProbe_virtualbase_eventFilter(self: pointer, watched: pointer, event: pointer): bool{.importc: "QAudioProbe_virtualbase_eventFilter".}
@@ -87,6 +94,7 @@ proc fQAudioProbe_virtualbase_connectNotify(self: pointer, signal: pointer): voi
 proc fcQAudioProbe_override_virtual_connectNotify(self: pointer, slot: int) {.importc: "QAudioProbe_override_virtual_connectNotify".}
 proc fQAudioProbe_virtualbase_disconnectNotify(self: pointer, signal: pointer): void{.importc: "QAudioProbe_virtualbase_disconnectNotify".}
 proc fcQAudioProbe_override_virtual_disconnectNotify(self: pointer, slot: int) {.importc: "QAudioProbe_override_virtual_disconnectNotify".}
+proc fcQAudioProbe_staticMetaObject(): pointer {.importc: "QAudioProbe_staticMetaObject".}
 proc fcQAudioProbe_delete(self: pointer) {.importc: "QAudioProbe_delete".}
 
 
@@ -103,6 +111,9 @@ proc metaObject*(self: gen_qaudioprobe_types.QAudioProbe, ): gen_qobjectdefs_typ
 
 proc metacast*(self: gen_qaudioprobe_types.QAudioProbe, param1: cstring): pointer =
   fcQAudioProbe_metacast(self.h, param1)
+
+proc metacall*(self: gen_qaudioprobe_types.QAudioProbe, param1: cint, param2: cint, param3: pointer): cint =
+  fcQAudioProbe_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qaudioprobe_types.QAudioProbe, s: cstring): string =
   let v_ms = fcQAudioProbe_tr(s)
@@ -179,6 +190,65 @@ proc trUtf8*(_: type gen_qaudioprobe_types.QAudioProbe, s: cstring, c: cstring, 
   c_free(v_ms.data)
   vx_ret
 
+proc QAudioProbemetaObject*(self: gen_qaudioprobe_types.QAudioProbe, ): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fQAudioProbe_virtualbase_metaObject(self.h))
+
+type QAudioProbemetaObjectProc* = proc(): gen_qobjectdefs_types.QMetaObject
+proc onmetaObject*(self: gen_qaudioprobe_types.QAudioProbe, slot: QAudioProbemetaObjectProc) =
+  # TODO check subclass
+  var tmp = new QAudioProbemetaObjectProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQAudioProbe_override_virtual_metaObject(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QAudioProbe_metaObject(self: ptr cQAudioProbe, slot: int): pointer {.exportc: "miqt_exec_callback_QAudioProbe_metaObject ".} =
+  var nimfunc = cast[ptr QAudioProbemetaObjectProc](cast[pointer](slot))
+
+  let virtualReturn = nimfunc[]( )
+
+  virtualReturn.h
+proc QAudioProbemetacast*(self: gen_qaudioprobe_types.QAudioProbe, param1: cstring): pointer =
+  fQAudioProbe_virtualbase_metacast(self.h, param1)
+
+type QAudioProbemetacastProc* = proc(param1: cstring): pointer
+proc onmetacast*(self: gen_qaudioprobe_types.QAudioProbe, slot: QAudioProbemetacastProc) =
+  # TODO check subclass
+  var tmp = new QAudioProbemetacastProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQAudioProbe_override_virtual_metacast(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QAudioProbe_metacast(self: ptr cQAudioProbe, slot: int, param1: cstring): pointer {.exportc: "miqt_exec_callback_QAudioProbe_metacast ".} =
+  var nimfunc = cast[ptr QAudioProbemetacastProc](cast[pointer](slot))
+  let slotval1 = (param1)
+
+
+  let virtualReturn = nimfunc[](slotval1 )
+
+  virtualReturn
+proc QAudioProbemetacall*(self: gen_qaudioprobe_types.QAudioProbe, param1: cint, param2: cint, param3: pointer): cint =
+  fQAudioProbe_virtualbase_metacall(self.h, cint(param1), param2, param3)
+
+type QAudioProbemetacallProc* = proc(param1: cint, param2: cint, param3: pointer): cint
+proc onmetacall*(self: gen_qaudioprobe_types.QAudioProbe, slot: QAudioProbemetacallProc) =
+  # TODO check subclass
+  var tmp = new QAudioProbemetacallProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQAudioProbe_override_virtual_metacall(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QAudioProbe_metacall(self: ptr cQAudioProbe, slot: int, param1: cint, param2: cint, param3: pointer): cint {.exportc: "miqt_exec_callback_QAudioProbe_metacall ".} =
+  var nimfunc = cast[ptr QAudioProbemetacallProc](cast[pointer](slot))
+  let slotval1 = cint(param1)
+
+  let slotval2 = param2
+
+  let slotval3 = param3
+
+
+  let virtualReturn = nimfunc[](slotval1, slotval2, slotval3 )
+
+  virtualReturn
 proc QAudioProbeevent*(self: gen_qaudioprobe_types.QAudioProbe, event: gen_qcoreevent_types.QEvent): bool =
   fQAudioProbe_virtualbase_event(self.h, event.h)
 
@@ -304,5 +374,7 @@ proc miqt_exec_callback_QAudioProbe_disconnectNotify(self: ptr cQAudioProbe, slo
 
 
   nimfunc[](slotval1)
+proc staticMetaObject*(_: type gen_qaudioprobe_types.QAudioProbe): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fcQAudioProbe_staticMetaObject())
 proc delete*(self: gen_qaudioprobe_types.QAudioProbe) =
   fcQAudioProbe_delete(self.h)

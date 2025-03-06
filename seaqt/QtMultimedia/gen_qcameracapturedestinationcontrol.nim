@@ -48,6 +48,7 @@ type cQCameraCaptureDestinationControl*{.exportc: "QCameraCaptureDestinationCont
 
 proc fcQCameraCaptureDestinationControl_metaObject(self: pointer, ): pointer {.importc: "QCameraCaptureDestinationControl_metaObject".}
 proc fcQCameraCaptureDestinationControl_metacast(self: pointer, param1: cstring): pointer {.importc: "QCameraCaptureDestinationControl_metacast".}
+proc fcQCameraCaptureDestinationControl_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QCameraCaptureDestinationControl_metacall".}
 proc fcQCameraCaptureDestinationControl_tr(s: cstring): struct_miqt_string {.importc: "QCameraCaptureDestinationControl_tr".}
 proc fcQCameraCaptureDestinationControl_trUtf8(s: cstring): struct_miqt_string {.importc: "QCameraCaptureDestinationControl_trUtf8".}
 proc fcQCameraCaptureDestinationControl_isCaptureDestinationSupported(self: pointer, destination: cint): bool {.importc: "QCameraCaptureDestinationControl_isCaptureDestinationSupported".}
@@ -59,6 +60,7 @@ proc fcQCameraCaptureDestinationControl_tr2(s: cstring, c: cstring): struct_miqt
 proc fcQCameraCaptureDestinationControl_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QCameraCaptureDestinationControl_tr3".}
 proc fcQCameraCaptureDestinationControl_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QCameraCaptureDestinationControl_trUtf82".}
 proc fcQCameraCaptureDestinationControl_trUtf83(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QCameraCaptureDestinationControl_trUtf83".}
+proc fcQCameraCaptureDestinationControl_staticMetaObject(): pointer {.importc: "QCameraCaptureDestinationControl_staticMetaObject".}
 proc fcQCameraCaptureDestinationControl_delete(self: pointer) {.importc: "QCameraCaptureDestinationControl_delete".}
 
 
@@ -69,6 +71,9 @@ proc metaObject*(self: gen_qcameracapturedestinationcontrol_types.QCameraCapture
 
 proc metacast*(self: gen_qcameracapturedestinationcontrol_types.QCameraCaptureDestinationControl, param1: cstring): pointer =
   fcQCameraCaptureDestinationControl_metacast(self.h, param1)
+
+proc metacall*(self: gen_qcameracapturedestinationcontrol_types.QCameraCaptureDestinationControl, param1: cint, param2: cint, param3: pointer): cint =
+  fcQCameraCaptureDestinationControl_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qcameracapturedestinationcontrol_types.QCameraCaptureDestinationControl, s: cstring): string =
   let v_ms = fcQCameraCaptureDestinationControl_tr(s)
@@ -131,5 +136,7 @@ proc trUtf8*(_: type gen_qcameracapturedestinationcontrol_types.QCameraCaptureDe
   c_free(v_ms.data)
   vx_ret
 
+proc staticMetaObject*(_: type gen_qcameracapturedestinationcontrol_types.QCameraCaptureDestinationControl): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fcQCameraCaptureDestinationControl_staticMetaObject())
 proc delete*(self: gen_qcameracapturedestinationcontrol_types.QCameraCaptureDestinationControl) =
   fcQCameraCaptureDestinationControl_delete(self.h)

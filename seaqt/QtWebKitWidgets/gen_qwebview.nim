@@ -86,6 +86,7 @@ proc fcQWebView_new(parent: pointer): ptr cQWebView {.importc: "QWebView_new".}
 proc fcQWebView_new2(): ptr cQWebView {.importc: "QWebView_new2".}
 proc fcQWebView_metaObject(self: pointer, ): pointer {.importc: "QWebView_metaObject".}
 proc fcQWebView_metacast(self: pointer, param1: cstring): pointer {.importc: "QWebView_metacast".}
+proc fcQWebView_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QWebView_metacall".}
 proc fcQWebView_tr(s: cstring): struct_miqt_string {.importc: "QWebView_tr".}
 proc fcQWebView_trUtf8(s: cstring): struct_miqt_string {.importc: "QWebView_trUtf8".}
 proc fcQWebView_page(self: pointer, ): pointer {.importc: "QWebView_page".}
@@ -152,6 +153,12 @@ proc fcQWebView_setContent3(self: pointer, data: struct_miqt_string, mimeType: s
 proc fcQWebView_triggerPageAction2(self: pointer, action: cint, checked: bool): void {.importc: "QWebView_triggerPageAction2".}
 proc fcQWebView_setRenderHint2(self: pointer, hint: cint, enabled: bool): void {.importc: "QWebView_setRenderHint2".}
 proc fcQWebView_findText2(self: pointer, subString: struct_miqt_string, options: cint): bool {.importc: "QWebView_findText2".}
+proc fQWebView_virtualbase_metaObject(self: pointer, ): pointer{.importc: "QWebView_virtualbase_metaObject".}
+proc fcQWebView_override_virtual_metaObject(self: pointer, slot: int) {.importc: "QWebView_override_virtual_metaObject".}
+proc fQWebView_virtualbase_metacast(self: pointer, param1: cstring): pointer{.importc: "QWebView_virtualbase_metacast".}
+proc fcQWebView_override_virtual_metacast(self: pointer, slot: int) {.importc: "QWebView_override_virtual_metacast".}
+proc fQWebView_virtualbase_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint{.importc: "QWebView_virtualbase_metacall".}
+proc fcQWebView_override_virtual_metacall(self: pointer, slot: int) {.importc: "QWebView_override_virtual_metacall".}
 proc fQWebView_virtualbase_inputMethodQuery(self: pointer, property: cint): pointer{.importc: "QWebView_virtualbase_inputMethodQuery".}
 proc fcQWebView_override_virtual_inputMethodQuery(self: pointer, slot: int) {.importc: "QWebView_override_virtual_inputMethodQuery".}
 proc fQWebView_virtualbase_sizeHint(self: pointer, ): pointer{.importc: "QWebView_virtualbase_sizeHint".}
@@ -248,6 +255,7 @@ proc fQWebView_virtualbase_connectNotify(self: pointer, signal: pointer): void{.
 proc fcQWebView_override_virtual_connectNotify(self: pointer, slot: int) {.importc: "QWebView_override_virtual_connectNotify".}
 proc fQWebView_virtualbase_disconnectNotify(self: pointer, signal: pointer): void{.importc: "QWebView_virtualbase_disconnectNotify".}
 proc fcQWebView_override_virtual_disconnectNotify(self: pointer, slot: int) {.importc: "QWebView_override_virtual_disconnectNotify".}
+proc fcQWebView_staticMetaObject(): pointer {.importc: "QWebView_staticMetaObject".}
 proc fcQWebView_delete(self: pointer) {.importc: "QWebView_delete".}
 
 
@@ -264,6 +272,9 @@ proc metaObject*(self: gen_qwebview_types.QWebView, ): gen_qobjectdefs_types.QMe
 
 proc metacast*(self: gen_qwebview_types.QWebView, param1: cstring): pointer =
   fcQWebView_metacast(self.h, param1)
+
+proc metacall*(self: gen_qwebview_types.QWebView, param1: cint, param2: cint, param3: pointer): cint =
+  fcQWebView_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qwebview_types.QWebView, s: cstring): string =
   let v_ms = fcQWebView_tr(s)
@@ -580,6 +591,65 @@ proc setRenderHint*(self: gen_qwebview_types.QWebView, hint: cint, enabled: bool
 proc findText*(self: gen_qwebview_types.QWebView, subString: string, options: cint): bool =
   fcQWebView_findText2(self.h, struct_miqt_string(data: subString, len: csize_t(len(subString))), cint(options))
 
+proc QWebViewmetaObject*(self: gen_qwebview_types.QWebView, ): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fQWebView_virtualbase_metaObject(self.h))
+
+type QWebViewmetaObjectProc* = proc(): gen_qobjectdefs_types.QMetaObject
+proc onmetaObject*(self: gen_qwebview_types.QWebView, slot: QWebViewmetaObjectProc) =
+  # TODO check subclass
+  var tmp = new QWebViewmetaObjectProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQWebView_override_virtual_metaObject(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QWebView_metaObject(self: ptr cQWebView, slot: int): pointer {.exportc: "miqt_exec_callback_QWebView_metaObject ".} =
+  var nimfunc = cast[ptr QWebViewmetaObjectProc](cast[pointer](slot))
+
+  let virtualReturn = nimfunc[]( )
+
+  virtualReturn.h
+proc QWebViewmetacast*(self: gen_qwebview_types.QWebView, param1: cstring): pointer =
+  fQWebView_virtualbase_metacast(self.h, param1)
+
+type QWebViewmetacastProc* = proc(param1: cstring): pointer
+proc onmetacast*(self: gen_qwebview_types.QWebView, slot: QWebViewmetacastProc) =
+  # TODO check subclass
+  var tmp = new QWebViewmetacastProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQWebView_override_virtual_metacast(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QWebView_metacast(self: ptr cQWebView, slot: int, param1: cstring): pointer {.exportc: "miqt_exec_callback_QWebView_metacast ".} =
+  var nimfunc = cast[ptr QWebViewmetacastProc](cast[pointer](slot))
+  let slotval1 = (param1)
+
+
+  let virtualReturn = nimfunc[](slotval1 )
+
+  virtualReturn
+proc QWebViewmetacall*(self: gen_qwebview_types.QWebView, param1: cint, param2: cint, param3: pointer): cint =
+  fQWebView_virtualbase_metacall(self.h, cint(param1), param2, param3)
+
+type QWebViewmetacallProc* = proc(param1: cint, param2: cint, param3: pointer): cint
+proc onmetacall*(self: gen_qwebview_types.QWebView, slot: QWebViewmetacallProc) =
+  # TODO check subclass
+  var tmp = new QWebViewmetacallProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQWebView_override_virtual_metacall(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QWebView_metacall(self: ptr cQWebView, slot: int, param1: cint, param2: cint, param3: pointer): cint {.exportc: "miqt_exec_callback_QWebView_metacall ".} =
+  var nimfunc = cast[ptr QWebViewmetacallProc](cast[pointer](slot))
+  let slotval1 = cint(param1)
+
+  let slotval2 = param2
+
+  let slotval3 = param3
+
+
+  let virtualReturn = nimfunc[](slotval1, slotval2, slotval3 )
+
+  virtualReturn
 proc QWebViewinputMethodQuery*(self: gen_qwebview_types.QWebView, property: cint): gen_qvariant_types.QVariant =
   gen_qvariant_types.QVariant(h: fQWebView_virtualbase_inputMethodQuery(self.h, cint(property)))
 
@@ -1423,5 +1493,7 @@ proc miqt_exec_callback_QWebView_disconnectNotify(self: ptr cQWebView, slot: int
 
 
   nimfunc[](slotval1)
+proc staticMetaObject*(_: type gen_qwebview_types.QWebView): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fcQWebView_staticMetaObject())
 proc delete*(self: gen_qwebview_types.QWebView) =
   fcQWebView_delete(self.h)

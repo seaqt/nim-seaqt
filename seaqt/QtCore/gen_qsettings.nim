@@ -104,6 +104,7 @@ proc fcQSettings_new14(parent: pointer): ptr cQSettings {.importc: "QSettings_ne
 proc fcQSettings_new15(scope: cint, parent: pointer): ptr cQSettings {.importc: "QSettings_new15".}
 proc fcQSettings_metaObject(self: pointer, ): pointer {.importc: "QSettings_metaObject".}
 proc fcQSettings_metacast(self: pointer, param1: cstring): pointer {.importc: "QSettings_metacast".}
+proc fcQSettings_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QSettings_metacall".}
 proc fcQSettings_tr(s: cstring): struct_miqt_string {.importc: "QSettings_tr".}
 proc fcQSettings_trUtf8(s: cstring): struct_miqt_string {.importc: "QSettings_trUtf8".}
 proc fcQSettings_clear(self: pointer, ): void {.importc: "QSettings_clear".}
@@ -147,6 +148,12 @@ proc fcQSettings_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: 
 proc fcQSettings_trUtf83(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QSettings_trUtf83".}
 proc fcQSettings_beginWriteArray2(self: pointer, prefix: struct_miqt_string, size: cint): void {.importc: "QSettings_beginWriteArray2".}
 proc fcQSettings_value2(self: pointer, key: struct_miqt_string, defaultValue: pointer): pointer {.importc: "QSettings_value2".}
+proc fQSettings_virtualbase_metaObject(self: pointer, ): pointer{.importc: "QSettings_virtualbase_metaObject".}
+proc fcQSettings_override_virtual_metaObject(self: pointer, slot: int) {.importc: "QSettings_override_virtual_metaObject".}
+proc fQSettings_virtualbase_metacast(self: pointer, param1: cstring): pointer{.importc: "QSettings_virtualbase_metacast".}
+proc fcQSettings_override_virtual_metacast(self: pointer, slot: int) {.importc: "QSettings_override_virtual_metacast".}
+proc fQSettings_virtualbase_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint{.importc: "QSettings_virtualbase_metacall".}
+proc fcQSettings_override_virtual_metacall(self: pointer, slot: int) {.importc: "QSettings_override_virtual_metacall".}
 proc fQSettings_virtualbase_event(self: pointer, event: pointer): bool{.importc: "QSettings_virtualbase_event".}
 proc fcQSettings_override_virtual_event(self: pointer, slot: int) {.importc: "QSettings_override_virtual_event".}
 proc fQSettings_virtualbase_eventFilter(self: pointer, watched: pointer, event: pointer): bool{.importc: "QSettings_virtualbase_eventFilter".}
@@ -161,6 +168,7 @@ proc fQSettings_virtualbase_connectNotify(self: pointer, signal: pointer): void{
 proc fcQSettings_override_virtual_connectNotify(self: pointer, slot: int) {.importc: "QSettings_override_virtual_connectNotify".}
 proc fQSettings_virtualbase_disconnectNotify(self: pointer, signal: pointer): void{.importc: "QSettings_virtualbase_disconnectNotify".}
 proc fcQSettings_override_virtual_disconnectNotify(self: pointer, slot: int) {.importc: "QSettings_override_virtual_disconnectNotify".}
+proc fcQSettings_staticMetaObject(): pointer {.importc: "QSettings_staticMetaObject".}
 proc fcQSettings_delete(self: pointer) {.importc: "QSettings_delete".}
 
 
@@ -216,6 +224,9 @@ proc metaObject*(self: gen_qsettings_types.QSettings, ): gen_qobjectdefs_types.Q
 
 proc metacast*(self: gen_qsettings_types.QSettings, param1: cstring): pointer =
   fcQSettings_metacast(self.h, param1)
+
+proc metacall*(self: gen_qsettings_types.QSettings, param1: cint, param2: cint, param3: pointer): cint =
+  fcQSettings_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qsettings_types.QSettings, s: cstring): string =
   let v_ms = fcQSettings_tr(s)
@@ -400,6 +411,65 @@ proc beginWriteArray*(self: gen_qsettings_types.QSettings, prefix: string, size:
 proc value*(self: gen_qsettings_types.QSettings, key: string, defaultValue: gen_qvariant_types.QVariant): gen_qvariant_types.QVariant =
   gen_qvariant_types.QVariant(h: fcQSettings_value2(self.h, struct_miqt_string(data: key, len: csize_t(len(key))), defaultValue.h))
 
+proc QSettingsmetaObject*(self: gen_qsettings_types.QSettings, ): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fQSettings_virtualbase_metaObject(self.h))
+
+type QSettingsmetaObjectProc* = proc(): gen_qobjectdefs_types.QMetaObject
+proc onmetaObject*(self: gen_qsettings_types.QSettings, slot: QSettingsmetaObjectProc) =
+  # TODO check subclass
+  var tmp = new QSettingsmetaObjectProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQSettings_override_virtual_metaObject(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QSettings_metaObject(self: ptr cQSettings, slot: int): pointer {.exportc: "miqt_exec_callback_QSettings_metaObject ".} =
+  var nimfunc = cast[ptr QSettingsmetaObjectProc](cast[pointer](slot))
+
+  let virtualReturn = nimfunc[]( )
+
+  virtualReturn.h
+proc QSettingsmetacast*(self: gen_qsettings_types.QSettings, param1: cstring): pointer =
+  fQSettings_virtualbase_metacast(self.h, param1)
+
+type QSettingsmetacastProc* = proc(param1: cstring): pointer
+proc onmetacast*(self: gen_qsettings_types.QSettings, slot: QSettingsmetacastProc) =
+  # TODO check subclass
+  var tmp = new QSettingsmetacastProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQSettings_override_virtual_metacast(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QSettings_metacast(self: ptr cQSettings, slot: int, param1: cstring): pointer {.exportc: "miqt_exec_callback_QSettings_metacast ".} =
+  var nimfunc = cast[ptr QSettingsmetacastProc](cast[pointer](slot))
+  let slotval1 = (param1)
+
+
+  let virtualReturn = nimfunc[](slotval1 )
+
+  virtualReturn
+proc QSettingsmetacall*(self: gen_qsettings_types.QSettings, param1: cint, param2: cint, param3: pointer): cint =
+  fQSettings_virtualbase_metacall(self.h, cint(param1), param2, param3)
+
+type QSettingsmetacallProc* = proc(param1: cint, param2: cint, param3: pointer): cint
+proc onmetacall*(self: gen_qsettings_types.QSettings, slot: QSettingsmetacallProc) =
+  # TODO check subclass
+  var tmp = new QSettingsmetacallProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQSettings_override_virtual_metacall(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QSettings_metacall(self: ptr cQSettings, slot: int, param1: cint, param2: cint, param3: pointer): cint {.exportc: "miqt_exec_callback_QSettings_metacall ".} =
+  var nimfunc = cast[ptr QSettingsmetacallProc](cast[pointer](slot))
+  let slotval1 = cint(param1)
+
+  let slotval2 = param2
+
+  let slotval3 = param3
+
+
+  let virtualReturn = nimfunc[](slotval1, slotval2, slotval3 )
+
+  virtualReturn
 proc QSettingsevent*(self: gen_qsettings_types.QSettings, event: gen_qcoreevent_types.QEvent): bool =
   fQSettings_virtualbase_event(self.h, event.h)
 
@@ -525,5 +595,7 @@ proc miqt_exec_callback_QSettings_disconnectNotify(self: ptr cQSettings, slot: i
 
 
   nimfunc[](slotval1)
+proc staticMetaObject*(_: type gen_qsettings_types.QSettings): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fcQSettings_staticMetaObject())
 proc delete*(self: gen_qsettings_types.QSettings) =
   fcQSettings_delete(self.h)

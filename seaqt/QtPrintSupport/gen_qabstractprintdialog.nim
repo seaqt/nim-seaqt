@@ -92,6 +92,7 @@ proc fcQAbstractPrintDialog_new(printer: pointer): ptr cQAbstractPrintDialog {.i
 proc fcQAbstractPrintDialog_new2(printer: pointer, parent: pointer): ptr cQAbstractPrintDialog {.importc: "QAbstractPrintDialog_new2".}
 proc fcQAbstractPrintDialog_metaObject(self: pointer, ): pointer {.importc: "QAbstractPrintDialog_metaObject".}
 proc fcQAbstractPrintDialog_metacast(self: pointer, param1: cstring): pointer {.importc: "QAbstractPrintDialog_metacast".}
+proc fcQAbstractPrintDialog_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QAbstractPrintDialog_metacall".}
 proc fcQAbstractPrintDialog_tr(s: cstring): struct_miqt_string {.importc: "QAbstractPrintDialog_tr".}
 proc fcQAbstractPrintDialog_trUtf8(s: cstring): struct_miqt_string {.importc: "QAbstractPrintDialog_trUtf8".}
 proc fcQAbstractPrintDialog_addEnabledOption(self: pointer, option: cint): void {.importc: "QAbstractPrintDialog_addEnabledOption".}
@@ -112,6 +113,12 @@ proc fcQAbstractPrintDialog_tr2(s: cstring, c: cstring): struct_miqt_string {.im
 proc fcQAbstractPrintDialog_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QAbstractPrintDialog_tr3".}
 proc fcQAbstractPrintDialog_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QAbstractPrintDialog_trUtf82".}
 proc fcQAbstractPrintDialog_trUtf83(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QAbstractPrintDialog_trUtf83".}
+proc fQAbstractPrintDialog_virtualbase_metaObject(self: pointer, ): pointer{.importc: "QAbstractPrintDialog_virtualbase_metaObject".}
+proc fcQAbstractPrintDialog_override_virtual_metaObject(self: pointer, slot: int) {.importc: "QAbstractPrintDialog_override_virtual_metaObject".}
+proc fQAbstractPrintDialog_virtualbase_metacast(self: pointer, param1: cstring): pointer{.importc: "QAbstractPrintDialog_virtualbase_metacast".}
+proc fcQAbstractPrintDialog_override_virtual_metacast(self: pointer, slot: int) {.importc: "QAbstractPrintDialog_override_virtual_metacast".}
+proc fQAbstractPrintDialog_virtualbase_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint{.importc: "QAbstractPrintDialog_virtualbase_metacall".}
+proc fcQAbstractPrintDialog_override_virtual_metacall(self: pointer, slot: int) {.importc: "QAbstractPrintDialog_override_virtual_metacall".}
 proc fQAbstractPrintDialog_virtualbase_setVisible(self: pointer, visible: bool): void{.importc: "QAbstractPrintDialog_virtualbase_setVisible".}
 proc fcQAbstractPrintDialog_override_virtual_setVisible(self: pointer, slot: int) {.importc: "QAbstractPrintDialog_override_virtual_setVisible".}
 proc fQAbstractPrintDialog_virtualbase_sizeHint(self: pointer, ): pointer{.importc: "QAbstractPrintDialog_virtualbase_sizeHint".}
@@ -216,6 +223,7 @@ proc fQAbstractPrintDialog_virtualbase_connectNotify(self: pointer, signal: poin
 proc fcQAbstractPrintDialog_override_virtual_connectNotify(self: pointer, slot: int) {.importc: "QAbstractPrintDialog_override_virtual_connectNotify".}
 proc fQAbstractPrintDialog_virtualbase_disconnectNotify(self: pointer, signal: pointer): void{.importc: "QAbstractPrintDialog_virtualbase_disconnectNotify".}
 proc fcQAbstractPrintDialog_override_virtual_disconnectNotify(self: pointer, slot: int) {.importc: "QAbstractPrintDialog_override_virtual_disconnectNotify".}
+proc fcQAbstractPrintDialog_staticMetaObject(): pointer {.importc: "QAbstractPrintDialog_staticMetaObject".}
 proc fcQAbstractPrintDialog_delete(self: pointer) {.importc: "QAbstractPrintDialog_delete".}
 
 
@@ -232,6 +240,9 @@ proc metaObject*(self: gen_qabstractprintdialog_types.QAbstractPrintDialog, ): g
 
 proc metacast*(self: gen_qabstractprintdialog_types.QAbstractPrintDialog, param1: cstring): pointer =
   fcQAbstractPrintDialog_metacast(self.h, param1)
+
+proc metacall*(self: gen_qabstractprintdialog_types.QAbstractPrintDialog, param1: cint, param2: cint, param3: pointer): cint =
+  fcQAbstractPrintDialog_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qabstractprintdialog_types.QAbstractPrintDialog, s: cstring): string =
   let v_ms = fcQAbstractPrintDialog_tr(s)
@@ -315,6 +326,65 @@ proc trUtf8*(_: type gen_qabstractprintdialog_types.QAbstractPrintDialog, s: cst
   c_free(v_ms.data)
   vx_ret
 
+proc QAbstractPrintDialogmetaObject*(self: gen_qabstractprintdialog_types.QAbstractPrintDialog, ): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fQAbstractPrintDialog_virtualbase_metaObject(self.h))
+
+type QAbstractPrintDialogmetaObjectProc* = proc(): gen_qobjectdefs_types.QMetaObject
+proc onmetaObject*(self: gen_qabstractprintdialog_types.QAbstractPrintDialog, slot: QAbstractPrintDialogmetaObjectProc) =
+  # TODO check subclass
+  var tmp = new QAbstractPrintDialogmetaObjectProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQAbstractPrintDialog_override_virtual_metaObject(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QAbstractPrintDialog_metaObject(self: ptr cQAbstractPrintDialog, slot: int): pointer {.exportc: "miqt_exec_callback_QAbstractPrintDialog_metaObject ".} =
+  var nimfunc = cast[ptr QAbstractPrintDialogmetaObjectProc](cast[pointer](slot))
+
+  let virtualReturn = nimfunc[]( )
+
+  virtualReturn.h
+proc QAbstractPrintDialogmetacast*(self: gen_qabstractprintdialog_types.QAbstractPrintDialog, param1: cstring): pointer =
+  fQAbstractPrintDialog_virtualbase_metacast(self.h, param1)
+
+type QAbstractPrintDialogmetacastProc* = proc(param1: cstring): pointer
+proc onmetacast*(self: gen_qabstractprintdialog_types.QAbstractPrintDialog, slot: QAbstractPrintDialogmetacastProc) =
+  # TODO check subclass
+  var tmp = new QAbstractPrintDialogmetacastProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQAbstractPrintDialog_override_virtual_metacast(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QAbstractPrintDialog_metacast(self: ptr cQAbstractPrintDialog, slot: int, param1: cstring): pointer {.exportc: "miqt_exec_callback_QAbstractPrintDialog_metacast ".} =
+  var nimfunc = cast[ptr QAbstractPrintDialogmetacastProc](cast[pointer](slot))
+  let slotval1 = (param1)
+
+
+  let virtualReturn = nimfunc[](slotval1 )
+
+  virtualReturn
+proc QAbstractPrintDialogmetacall*(self: gen_qabstractprintdialog_types.QAbstractPrintDialog, param1: cint, param2: cint, param3: pointer): cint =
+  fQAbstractPrintDialog_virtualbase_metacall(self.h, cint(param1), param2, param3)
+
+type QAbstractPrintDialogmetacallProc* = proc(param1: cint, param2: cint, param3: pointer): cint
+proc onmetacall*(self: gen_qabstractprintdialog_types.QAbstractPrintDialog, slot: QAbstractPrintDialogmetacallProc) =
+  # TODO check subclass
+  var tmp = new QAbstractPrintDialogmetacallProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQAbstractPrintDialog_override_virtual_metacall(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QAbstractPrintDialog_metacall(self: ptr cQAbstractPrintDialog, slot: int, param1: cint, param2: cint, param3: pointer): cint {.exportc: "miqt_exec_callback_QAbstractPrintDialog_metacall ".} =
+  var nimfunc = cast[ptr QAbstractPrintDialogmetacallProc](cast[pointer](slot))
+  let slotval1 = cint(param1)
+
+  let slotval2 = param2
+
+  let slotval3 = param3
+
+
+  let virtualReturn = nimfunc[](slotval1, slotval2, slotval3 )
+
+  virtualReturn
 proc QAbstractPrintDialogsetVisible*(self: gen_qabstractprintdialog_types.QAbstractPrintDialog, visible: bool): void =
   fQAbstractPrintDialog_virtualbase_setVisible(self.h, visible)
 
@@ -1218,5 +1288,7 @@ proc miqt_exec_callback_QAbstractPrintDialog_disconnectNotify(self: ptr cQAbstra
 
 
   nimfunc[](slotval1)
+proc staticMetaObject*(_: type gen_qabstractprintdialog_types.QAbstractPrintDialog): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fcQAbstractPrintDialog_staticMetaObject())
 proc delete*(self: gen_qabstractprintdialog_types.QAbstractPrintDialog) =
   fcQAbstractPrintDialog_delete(self.h)

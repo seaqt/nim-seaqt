@@ -45,6 +45,7 @@ QAbstractTransition* QAbstractTransition_new2(QState* sourceState);
 void QAbstractTransition_virtbase(QAbstractTransition* src, QObject** outptr_QObject);
 QMetaObject* QAbstractTransition_metaObject(const QAbstractTransition* self);
 void* QAbstractTransition_metacast(QAbstractTransition* self, const char* param1);
+int QAbstractTransition_metacall(QAbstractTransition* self, int param1, int param2, void** param3);
 struct miqt_string QAbstractTransition_tr(const char* s);
 struct miqt_string QAbstractTransition_trUtf8(const char* s);
 QState* QAbstractTransition_sourceState(const QAbstractTransition* self);
@@ -65,6 +66,12 @@ struct miqt_string QAbstractTransition_tr2(const char* s, const char* c);
 struct miqt_string QAbstractTransition_tr3(const char* s, const char* c, int n);
 struct miqt_string QAbstractTransition_trUtf82(const char* s, const char* c);
 struct miqt_string QAbstractTransition_trUtf83(const char* s, const char* c, int n);
+bool QAbstractTransition_override_virtual_metaObject(void* self, intptr_t slot);
+QMetaObject* QAbstractTransition_virtualbase_metaObject(const void* self);
+bool QAbstractTransition_override_virtual_metacast(void* self, intptr_t slot);
+void* QAbstractTransition_virtualbase_metacast(void* self, const char* param1);
+bool QAbstractTransition_override_virtual_metacall(void* self, intptr_t slot);
+int QAbstractTransition_virtualbase_metacall(void* self, int param1, int param2, void** param3);
 bool QAbstractTransition_override_virtual_eventTest(void* self, intptr_t slot);
 bool QAbstractTransition_virtualbase_eventTest(void* self, QEvent* event);
 bool QAbstractTransition_override_virtual_onTransition(void* self, intptr_t slot);
@@ -87,6 +94,7 @@ QObject* QAbstractTransition_protectedbase_sender(bool* _dynamic_cast_ok, const 
 int QAbstractTransition_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
 int QAbstractTransition_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
 bool QAbstractTransition_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+const QMetaObject* QAbstractTransition_staticMetaObject();
 void QAbstractTransition_delete(QAbstractTransition* self);
 
 #ifdef __cplusplus

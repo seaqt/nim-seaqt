@@ -93,6 +93,7 @@ import
   ../QtCore/gen_qfile_types,
   ../QtCore/gen_qmimedata_types,
   ../QtCore/gen_qobject_types,
+  ../QtCore/gen_qobjectdefs_types,
   ../QtCore/gen_qpoint_types,
   ../QtCore/gen_qrect_types,
   ../QtCore/gen_qsize_types,
@@ -109,6 +110,7 @@ export
   gen_qfile_types,
   gen_qmimedata_types,
   gen_qobject_types,
+  gen_qobjectdefs_types,
   gen_qpoint_types,
   gen_qrect_types,
   gen_qsize_types,
@@ -266,6 +268,7 @@ proc fcQTabletEvent_xTilt(self: pointer, ): cint {.importc: "QTabletEvent_xTilt"
 proc fcQTabletEvent_yTilt(self: pointer, ): cint {.importc: "QTabletEvent_yTilt".}
 proc fcQTabletEvent_button(self: pointer, ): cint {.importc: "QTabletEvent_button".}
 proc fcQTabletEvent_buttons(self: pointer, ): cint {.importc: "QTabletEvent_buttons".}
+proc fcQTabletEvent_staticMetaObject(): pointer {.importc: "QTabletEvent_staticMetaObject".}
 proc fcQTabletEvent_delete(self: pointer) {.importc: "QTabletEvent_delete".}
 proc fcQNativeGestureEvent_new(typeVal: cint, localPos: pointer, windowPos: pointer, screenPos: pointer, value: float64, sequenceId: culong, intArgument: culonglong): ptr cQNativeGestureEvent {.importc: "QNativeGestureEvent_new".}
 proc fcQNativeGestureEvent_new2(typeVal: cint, dev: pointer, localPos: pointer, windowPos: pointer, screenPos: pointer, value: float64, sequenceId: culong, intArgument: culonglong): ptr cQNativeGestureEvent {.importc: "QNativeGestureEvent_new2".}
@@ -458,6 +461,7 @@ proc fcQPointingDeviceUniqueId_new2(param1: pointer): ptr cQPointingDeviceUnique
 proc fcQPointingDeviceUniqueId_fromNumericId(id: clonglong): pointer {.importc: "QPointingDeviceUniqueId_fromNumericId".}
 proc fcQPointingDeviceUniqueId_isValid(self: pointer, ): bool {.importc: "QPointingDeviceUniqueId_isValid".}
 proc fcQPointingDeviceUniqueId_numericId(self: pointer, ): clonglong {.importc: "QPointingDeviceUniqueId_numericId".}
+proc fcQPointingDeviceUniqueId_staticMetaObject(): pointer {.importc: "QPointingDeviceUniqueId_staticMetaObject".}
 proc fcQPointingDeviceUniqueId_delete(self: pointer) {.importc: "QPointingDeviceUniqueId_delete".}
 proc fcQTouchEvent_new(eventType: cint): ptr cQTouchEvent {.importc: "QTouchEvent_new".}
 proc fcQTouchEvent_new2(param1: pointer): ptr cQTouchEvent {.importc: "QTouchEvent_new2".}
@@ -883,6 +887,8 @@ proc button*(self: gen_qevent_types.QTabletEvent, ): cint =
 proc buttons*(self: gen_qevent_types.QTabletEvent, ): cint =
   cint(fcQTabletEvent_buttons(self.h))
 
+proc staticMetaObject*(_: type gen_qevent_types.QTabletEvent): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fcQTabletEvent_staticMetaObject())
 proc delete*(self: gen_qevent_types.QTabletEvent) =
   fcQTabletEvent_delete(self.h)
 
@@ -1542,6 +1548,8 @@ proc isValid*(self: gen_qevent_types.QPointingDeviceUniqueId, ): bool =
 proc numericId*(self: gen_qevent_types.QPointingDeviceUniqueId, ): clonglong =
   fcQPointingDeviceUniqueId_numericId(self.h)
 
+proc staticMetaObject*(_: type gen_qevent_types.QPointingDeviceUniqueId): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fcQPointingDeviceUniqueId_staticMetaObject())
 proc delete*(self: gen_qevent_types.QPointingDeviceUniqueId) =
   fcQPointingDeviceUniqueId_delete(self.h)
 

@@ -39,6 +39,7 @@ QJSEngine* QJSEngine_new2(QObject* parent);
 void QJSEngine_virtbase(QJSEngine* src, QObject** outptr_QObject);
 QMetaObject* QJSEngine_metaObject(const QJSEngine* self);
 void* QJSEngine_metacast(QJSEngine* self, const char* param1);
+int QJSEngine_metacall(QJSEngine* self, int param1, int param2, void** param3);
 struct miqt_string QJSEngine_tr(const char* s);
 struct miqt_string QJSEngine_trUtf8(const char* s);
 QJSValue* QJSEngine_globalObject(const QJSEngine* self);
@@ -71,6 +72,12 @@ QJSValue* QJSEngine_newErrorObject2(QJSEngine* self, int errorType, struct miqt_
 void QJSEngine_installTranslatorFunctions1(QJSEngine* self, QJSValue* object);
 void QJSEngine_installExtensions2(QJSEngine* self, int extensions, QJSValue* object);
 void QJSEngine_throwError2(QJSEngine* self, int errorType, struct miqt_string message);
+bool QJSEngine_override_virtual_metaObject(void* self, intptr_t slot);
+QMetaObject* QJSEngine_virtualbase_metaObject(const void* self);
+bool QJSEngine_override_virtual_metacast(void* self, intptr_t slot);
+void* QJSEngine_virtualbase_metacast(void* self, const char* param1);
+bool QJSEngine_override_virtual_metacall(void* self, intptr_t slot);
+int QJSEngine_virtualbase_metacall(void* self, int param1, int param2, void** param3);
 bool QJSEngine_override_virtual_event(void* self, intptr_t slot);
 bool QJSEngine_virtualbase_event(void* self, QEvent* event);
 bool QJSEngine_override_virtual_eventFilter(void* self, intptr_t slot);
@@ -89,6 +96,7 @@ QObject* QJSEngine_protectedbase_sender(bool* _dynamic_cast_ok, const void* self
 int QJSEngine_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
 int QJSEngine_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
 bool QJSEngine_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+const QMetaObject* QJSEngine_staticMetaObject();
 void QJSEngine_delete(QJSEngine* self);
 
 #ifdef __cplusplus

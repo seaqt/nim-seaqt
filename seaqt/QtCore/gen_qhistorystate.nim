@@ -67,6 +67,7 @@ proc fcQHistoryState_new3(parent: pointer): ptr cQHistoryState {.importc: "QHist
 proc fcQHistoryState_new4(typeVal: cint, parent: pointer): ptr cQHistoryState {.importc: "QHistoryState_new4".}
 proc fcQHistoryState_metaObject(self: pointer, ): pointer {.importc: "QHistoryState_metaObject".}
 proc fcQHistoryState_metacast(self: pointer, param1: cstring): pointer {.importc: "QHistoryState_metacast".}
+proc fcQHistoryState_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QHistoryState_metacall".}
 proc fcQHistoryState_tr(s: cstring): struct_miqt_string {.importc: "QHistoryState_tr".}
 proc fcQHistoryState_trUtf8(s: cstring): struct_miqt_string {.importc: "QHistoryState_trUtf8".}
 proc fcQHistoryState_defaultTransition(self: pointer, ): pointer {.importc: "QHistoryState_defaultTransition".}
@@ -79,6 +80,12 @@ proc fcQHistoryState_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: 
 proc fcQHistoryState_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QHistoryState_tr3".}
 proc fcQHistoryState_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QHistoryState_trUtf82".}
 proc fcQHistoryState_trUtf83(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QHistoryState_trUtf83".}
+proc fQHistoryState_virtualbase_metaObject(self: pointer, ): pointer{.importc: "QHistoryState_virtualbase_metaObject".}
+proc fcQHistoryState_override_virtual_metaObject(self: pointer, slot: int) {.importc: "QHistoryState_override_virtual_metaObject".}
+proc fQHistoryState_virtualbase_metacast(self: pointer, param1: cstring): pointer{.importc: "QHistoryState_virtualbase_metacast".}
+proc fcQHistoryState_override_virtual_metacast(self: pointer, slot: int) {.importc: "QHistoryState_override_virtual_metacast".}
+proc fQHistoryState_virtualbase_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint{.importc: "QHistoryState_virtualbase_metacall".}
+proc fcQHistoryState_override_virtual_metacall(self: pointer, slot: int) {.importc: "QHistoryState_override_virtual_metacall".}
 proc fQHistoryState_virtualbase_onEntry(self: pointer, event: pointer): void{.importc: "QHistoryState_virtualbase_onEntry".}
 proc fcQHistoryState_override_virtual_onEntry(self: pointer, slot: int) {.importc: "QHistoryState_override_virtual_onEntry".}
 proc fQHistoryState_virtualbase_onExit(self: pointer, event: pointer): void{.importc: "QHistoryState_virtualbase_onExit".}
@@ -97,6 +104,7 @@ proc fQHistoryState_virtualbase_connectNotify(self: pointer, signal: pointer): v
 proc fcQHistoryState_override_virtual_connectNotify(self: pointer, slot: int) {.importc: "QHistoryState_override_virtual_connectNotify".}
 proc fQHistoryState_virtualbase_disconnectNotify(self: pointer, signal: pointer): void{.importc: "QHistoryState_virtualbase_disconnectNotify".}
 proc fcQHistoryState_override_virtual_disconnectNotify(self: pointer, slot: int) {.importc: "QHistoryState_override_virtual_disconnectNotify".}
+proc fcQHistoryState_staticMetaObject(): pointer {.importc: "QHistoryState_staticMetaObject".}
 proc fcQHistoryState_delete(self: pointer) {.importc: "QHistoryState_delete".}
 
 
@@ -119,6 +127,9 @@ proc metaObject*(self: gen_qhistorystate_types.QHistoryState, ): gen_qobjectdefs
 
 proc metacast*(self: gen_qhistorystate_types.QHistoryState, param1: cstring): pointer =
   fcQHistoryState_metacast(self.h, param1)
+
+proc metacall*(self: gen_qhistorystate_types.QHistoryState, param1: cint, param2: cint, param3: pointer): cint =
+  fcQHistoryState_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qhistorystate_types.QHistoryState, s: cstring): string =
   let v_ms = fcQHistoryState_tr(s)
@@ -174,6 +185,65 @@ proc trUtf8*(_: type gen_qhistorystate_types.QHistoryState, s: cstring, c: cstri
   c_free(v_ms.data)
   vx_ret
 
+proc QHistoryStatemetaObject*(self: gen_qhistorystate_types.QHistoryState, ): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fQHistoryState_virtualbase_metaObject(self.h))
+
+type QHistoryStatemetaObjectProc* = proc(): gen_qobjectdefs_types.QMetaObject
+proc onmetaObject*(self: gen_qhistorystate_types.QHistoryState, slot: QHistoryStatemetaObjectProc) =
+  # TODO check subclass
+  var tmp = new QHistoryStatemetaObjectProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQHistoryState_override_virtual_metaObject(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QHistoryState_metaObject(self: ptr cQHistoryState, slot: int): pointer {.exportc: "miqt_exec_callback_QHistoryState_metaObject ".} =
+  var nimfunc = cast[ptr QHistoryStatemetaObjectProc](cast[pointer](slot))
+
+  let virtualReturn = nimfunc[]( )
+
+  virtualReturn.h
+proc QHistoryStatemetacast*(self: gen_qhistorystate_types.QHistoryState, param1: cstring): pointer =
+  fQHistoryState_virtualbase_metacast(self.h, param1)
+
+type QHistoryStatemetacastProc* = proc(param1: cstring): pointer
+proc onmetacast*(self: gen_qhistorystate_types.QHistoryState, slot: QHistoryStatemetacastProc) =
+  # TODO check subclass
+  var tmp = new QHistoryStatemetacastProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQHistoryState_override_virtual_metacast(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QHistoryState_metacast(self: ptr cQHistoryState, slot: int, param1: cstring): pointer {.exportc: "miqt_exec_callback_QHistoryState_metacast ".} =
+  var nimfunc = cast[ptr QHistoryStatemetacastProc](cast[pointer](slot))
+  let slotval1 = (param1)
+
+
+  let virtualReturn = nimfunc[](slotval1 )
+
+  virtualReturn
+proc QHistoryStatemetacall*(self: gen_qhistorystate_types.QHistoryState, param1: cint, param2: cint, param3: pointer): cint =
+  fQHistoryState_virtualbase_metacall(self.h, cint(param1), param2, param3)
+
+type QHistoryStatemetacallProc* = proc(param1: cint, param2: cint, param3: pointer): cint
+proc onmetacall*(self: gen_qhistorystate_types.QHistoryState, slot: QHistoryStatemetacallProc) =
+  # TODO check subclass
+  var tmp = new QHistoryStatemetacallProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQHistoryState_override_virtual_metacall(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QHistoryState_metacall(self: ptr cQHistoryState, slot: int, param1: cint, param2: cint, param3: pointer): cint {.exportc: "miqt_exec_callback_QHistoryState_metacall ".} =
+  var nimfunc = cast[ptr QHistoryStatemetacallProc](cast[pointer](slot))
+  let slotval1 = cint(param1)
+
+  let slotval2 = param2
+
+  let slotval3 = param3
+
+
+  let virtualReturn = nimfunc[](slotval1, slotval2, slotval3 )
+
+  virtualReturn
 proc QHistoryStateonEntry*(self: gen_qhistorystate_types.QHistoryState, event: gen_qcoreevent_types.QEvent): void =
   fQHistoryState_virtualbase_onEntry(self.h, event.h)
 
@@ -333,5 +403,7 @@ proc miqt_exec_callback_QHistoryState_disconnectNotify(self: ptr cQHistoryState,
 
 
   nimfunc[](slotval1)
+proc staticMetaObject*(_: type gen_qhistorystate_types.QHistoryState): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fcQHistoryState_staticMetaObject())
 proc delete*(self: gen_qhistorystate_types.QHistoryState) =
   fcQHistoryState_delete(self.h)

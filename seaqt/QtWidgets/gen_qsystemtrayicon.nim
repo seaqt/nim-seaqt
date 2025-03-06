@@ -77,6 +77,7 @@ proc fcQSystemTrayIcon_new3(parent: pointer): ptr cQSystemTrayIcon {.importc: "Q
 proc fcQSystemTrayIcon_new4(icon: pointer, parent: pointer): ptr cQSystemTrayIcon {.importc: "QSystemTrayIcon_new4".}
 proc fcQSystemTrayIcon_metaObject(self: pointer, ): pointer {.importc: "QSystemTrayIcon_metaObject".}
 proc fcQSystemTrayIcon_metacast(self: pointer, param1: cstring): pointer {.importc: "QSystemTrayIcon_metacast".}
+proc fcQSystemTrayIcon_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QSystemTrayIcon_metacall".}
 proc fcQSystemTrayIcon_tr(s: cstring): struct_miqt_string {.importc: "QSystemTrayIcon_tr".}
 proc fcQSystemTrayIcon_trUtf8(s: cstring): struct_miqt_string {.importc: "QSystemTrayIcon_trUtf8".}
 proc fcQSystemTrayIcon_setContextMenu(self: pointer, menu: pointer): void {.importc: "QSystemTrayIcon_setContextMenu".}
@@ -105,6 +106,12 @@ proc fcQSystemTrayIcon_trUtf83(s: cstring, c: cstring, n: cint): struct_miqt_str
 proc fcQSystemTrayIcon_showMessage4(self: pointer, title: struct_miqt_string, msg: struct_miqt_string, icon: pointer, msecs: cint): void {.importc: "QSystemTrayIcon_showMessage4".}
 proc fcQSystemTrayIcon_showMessage3(self: pointer, title: struct_miqt_string, msg: struct_miqt_string, icon: cint): void {.importc: "QSystemTrayIcon_showMessage3".}
 proc fcQSystemTrayIcon_showMessage42(self: pointer, title: struct_miqt_string, msg: struct_miqt_string, icon: cint, msecs: cint): void {.importc: "QSystemTrayIcon_showMessage42".}
+proc fQSystemTrayIcon_virtualbase_metaObject(self: pointer, ): pointer{.importc: "QSystemTrayIcon_virtualbase_metaObject".}
+proc fcQSystemTrayIcon_override_virtual_metaObject(self: pointer, slot: int) {.importc: "QSystemTrayIcon_override_virtual_metaObject".}
+proc fQSystemTrayIcon_virtualbase_metacast(self: pointer, param1: cstring): pointer{.importc: "QSystemTrayIcon_virtualbase_metacast".}
+proc fcQSystemTrayIcon_override_virtual_metacast(self: pointer, slot: int) {.importc: "QSystemTrayIcon_override_virtual_metacast".}
+proc fQSystemTrayIcon_virtualbase_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint{.importc: "QSystemTrayIcon_virtualbase_metacall".}
+proc fcQSystemTrayIcon_override_virtual_metacall(self: pointer, slot: int) {.importc: "QSystemTrayIcon_override_virtual_metacall".}
 proc fQSystemTrayIcon_virtualbase_event(self: pointer, event: pointer): bool{.importc: "QSystemTrayIcon_virtualbase_event".}
 proc fcQSystemTrayIcon_override_virtual_event(self: pointer, slot: int) {.importc: "QSystemTrayIcon_override_virtual_event".}
 proc fQSystemTrayIcon_virtualbase_eventFilter(self: pointer, watched: pointer, event: pointer): bool{.importc: "QSystemTrayIcon_virtualbase_eventFilter".}
@@ -119,6 +126,7 @@ proc fQSystemTrayIcon_virtualbase_connectNotify(self: pointer, signal: pointer):
 proc fcQSystemTrayIcon_override_virtual_connectNotify(self: pointer, slot: int) {.importc: "QSystemTrayIcon_override_virtual_connectNotify".}
 proc fQSystemTrayIcon_virtualbase_disconnectNotify(self: pointer, signal: pointer): void{.importc: "QSystemTrayIcon_virtualbase_disconnectNotify".}
 proc fcQSystemTrayIcon_override_virtual_disconnectNotify(self: pointer, slot: int) {.importc: "QSystemTrayIcon_override_virtual_disconnectNotify".}
+proc fcQSystemTrayIcon_staticMetaObject(): pointer {.importc: "QSystemTrayIcon_staticMetaObject".}
 proc fcQSystemTrayIcon_delete(self: pointer) {.importc: "QSystemTrayIcon_delete".}
 
 
@@ -141,6 +149,9 @@ proc metaObject*(self: gen_qsystemtrayicon_types.QSystemTrayIcon, ): gen_qobject
 
 proc metacast*(self: gen_qsystemtrayicon_types.QSystemTrayIcon, param1: cstring): pointer =
   fcQSystemTrayIcon_metacast(self.h, param1)
+
+proc metacall*(self: gen_qsystemtrayicon_types.QSystemTrayIcon, param1: cint, param2: cint, param3: pointer): cint =
+  fcQSystemTrayIcon_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qsystemtrayicon_types.QSystemTrayIcon, s: cstring): string =
   let v_ms = fcQSystemTrayIcon_tr(s)
@@ -265,6 +276,65 @@ proc showMessage*(self: gen_qsystemtrayicon_types.QSystemTrayIcon, title: string
 proc showMessage*(self: gen_qsystemtrayicon_types.QSystemTrayIcon, title: string, msg: string, icon: cint, msecs: cint): void =
   fcQSystemTrayIcon_showMessage42(self.h, struct_miqt_string(data: title, len: csize_t(len(title))), struct_miqt_string(data: msg, len: csize_t(len(msg))), cint(icon), msecs)
 
+proc QSystemTrayIconmetaObject*(self: gen_qsystemtrayicon_types.QSystemTrayIcon, ): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fQSystemTrayIcon_virtualbase_metaObject(self.h))
+
+type QSystemTrayIconmetaObjectProc* = proc(): gen_qobjectdefs_types.QMetaObject
+proc onmetaObject*(self: gen_qsystemtrayicon_types.QSystemTrayIcon, slot: QSystemTrayIconmetaObjectProc) =
+  # TODO check subclass
+  var tmp = new QSystemTrayIconmetaObjectProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQSystemTrayIcon_override_virtual_metaObject(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QSystemTrayIcon_metaObject(self: ptr cQSystemTrayIcon, slot: int): pointer {.exportc: "miqt_exec_callback_QSystemTrayIcon_metaObject ".} =
+  var nimfunc = cast[ptr QSystemTrayIconmetaObjectProc](cast[pointer](slot))
+
+  let virtualReturn = nimfunc[]( )
+
+  virtualReturn.h
+proc QSystemTrayIconmetacast*(self: gen_qsystemtrayicon_types.QSystemTrayIcon, param1: cstring): pointer =
+  fQSystemTrayIcon_virtualbase_metacast(self.h, param1)
+
+type QSystemTrayIconmetacastProc* = proc(param1: cstring): pointer
+proc onmetacast*(self: gen_qsystemtrayicon_types.QSystemTrayIcon, slot: QSystemTrayIconmetacastProc) =
+  # TODO check subclass
+  var tmp = new QSystemTrayIconmetacastProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQSystemTrayIcon_override_virtual_metacast(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QSystemTrayIcon_metacast(self: ptr cQSystemTrayIcon, slot: int, param1: cstring): pointer {.exportc: "miqt_exec_callback_QSystemTrayIcon_metacast ".} =
+  var nimfunc = cast[ptr QSystemTrayIconmetacastProc](cast[pointer](slot))
+  let slotval1 = (param1)
+
+
+  let virtualReturn = nimfunc[](slotval1 )
+
+  virtualReturn
+proc QSystemTrayIconmetacall*(self: gen_qsystemtrayicon_types.QSystemTrayIcon, param1: cint, param2: cint, param3: pointer): cint =
+  fQSystemTrayIcon_virtualbase_metacall(self.h, cint(param1), param2, param3)
+
+type QSystemTrayIconmetacallProc* = proc(param1: cint, param2: cint, param3: pointer): cint
+proc onmetacall*(self: gen_qsystemtrayicon_types.QSystemTrayIcon, slot: QSystemTrayIconmetacallProc) =
+  # TODO check subclass
+  var tmp = new QSystemTrayIconmetacallProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQSystemTrayIcon_override_virtual_metacall(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QSystemTrayIcon_metacall(self: ptr cQSystemTrayIcon, slot: int, param1: cint, param2: cint, param3: pointer): cint {.exportc: "miqt_exec_callback_QSystemTrayIcon_metacall ".} =
+  var nimfunc = cast[ptr QSystemTrayIconmetacallProc](cast[pointer](slot))
+  let slotval1 = cint(param1)
+
+  let slotval2 = param2
+
+  let slotval3 = param3
+
+
+  let virtualReturn = nimfunc[](slotval1, slotval2, slotval3 )
+
+  virtualReturn
 proc QSystemTrayIconevent*(self: gen_qsystemtrayicon_types.QSystemTrayIcon, event: gen_qcoreevent_types.QEvent): bool =
   fQSystemTrayIcon_virtualbase_event(self.h, event.h)
 
@@ -390,5 +460,7 @@ proc miqt_exec_callback_QSystemTrayIcon_disconnectNotify(self: ptr cQSystemTrayI
 
 
   nimfunc[](slotval1)
+proc staticMetaObject*(_: type gen_qsystemtrayicon_types.QSystemTrayIcon): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fcQSystemTrayIcon_staticMetaObject())
 proc delete*(self: gen_qsystemtrayicon_types.QSystemTrayIcon) =
   fcQSystemTrayIcon_delete(self.h)

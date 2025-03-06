@@ -48,6 +48,7 @@ type cQCameraFlashControl*{.exportc: "QCameraFlashControl", incompleteStruct.} =
 
 proc fcQCameraFlashControl_metaObject(self: pointer, ): pointer {.importc: "QCameraFlashControl_metaObject".}
 proc fcQCameraFlashControl_metacast(self: pointer, param1: cstring): pointer {.importc: "QCameraFlashControl_metacast".}
+proc fcQCameraFlashControl_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QCameraFlashControl_metacall".}
 proc fcQCameraFlashControl_tr(s: cstring): struct_miqt_string {.importc: "QCameraFlashControl_tr".}
 proc fcQCameraFlashControl_trUtf8(s: cstring): struct_miqt_string {.importc: "QCameraFlashControl_trUtf8".}
 proc fcQCameraFlashControl_flashMode(self: pointer, ): cint {.importc: "QCameraFlashControl_flashMode".}
@@ -60,6 +61,7 @@ proc fcQCameraFlashControl_tr2(s: cstring, c: cstring): struct_miqt_string {.imp
 proc fcQCameraFlashControl_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QCameraFlashControl_tr3".}
 proc fcQCameraFlashControl_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QCameraFlashControl_trUtf82".}
 proc fcQCameraFlashControl_trUtf83(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QCameraFlashControl_trUtf83".}
+proc fcQCameraFlashControl_staticMetaObject(): pointer {.importc: "QCameraFlashControl_staticMetaObject".}
 proc fcQCameraFlashControl_delete(self: pointer) {.importc: "QCameraFlashControl_delete".}
 
 
@@ -70,6 +72,9 @@ proc metaObject*(self: gen_qcameraflashcontrol_types.QCameraFlashControl, ): gen
 
 proc metacast*(self: gen_qcameraflashcontrol_types.QCameraFlashControl, param1: cstring): pointer =
   fcQCameraFlashControl_metacast(self.h, param1)
+
+proc metacall*(self: gen_qcameraflashcontrol_types.QCameraFlashControl, param1: cint, param2: cint, param3: pointer): cint =
+  fcQCameraFlashControl_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qcameraflashcontrol_types.QCameraFlashControl, s: cstring): string =
   let v_ms = fcQCameraFlashControl_tr(s)
@@ -135,5 +140,7 @@ proc trUtf8*(_: type gen_qcameraflashcontrol_types.QCameraFlashControl, s: cstri
   c_free(v_ms.data)
   vx_ret
 
+proc staticMetaObject*(_: type gen_qcameraflashcontrol_types.QCameraFlashControl): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fcQCameraFlashControl_staticMetaObject())
 proc delete*(self: gen_qcameraflashcontrol_types.QCameraFlashControl) =
   fcQCameraFlashControl_delete(self.h)

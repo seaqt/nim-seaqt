@@ -93,6 +93,7 @@ QQuickPaintedItem* QQuickPaintedItem_new2(QQuickItem* parent);
 void QQuickPaintedItem_virtbase(QQuickPaintedItem* src, QQuickItem** outptr_QQuickItem);
 QMetaObject* QQuickPaintedItem_metaObject(const QQuickPaintedItem* self);
 void* QQuickPaintedItem_metacast(QQuickPaintedItem* self, const char* param1);
+int QQuickPaintedItem_metacall(QQuickPaintedItem* self, int param1, int param2, void** param3);
 struct miqt_string QQuickPaintedItem_tr(const char* s);
 struct miqt_string QQuickPaintedItem_trUtf8(const char* s);
 void QQuickPaintedItem_update(QQuickPaintedItem* self);
@@ -139,6 +140,12 @@ struct miqt_string QQuickPaintedItem_trUtf82(const char* s, const char* c);
 struct miqt_string QQuickPaintedItem_trUtf83(const char* s, const char* c, int n);
 void QQuickPaintedItem_update1(QQuickPaintedItem* self, QRect* rect);
 void QQuickPaintedItem_setPerformanceHint2(QQuickPaintedItem* self, int hint, bool enabled);
+bool QQuickPaintedItem_override_virtual_metaObject(void* self, intptr_t slot);
+QMetaObject* QQuickPaintedItem_virtualbase_metaObject(const void* self);
+bool QQuickPaintedItem_override_virtual_metacast(void* self, intptr_t slot);
+void* QQuickPaintedItem_virtualbase_metacast(void* self, const char* param1);
+bool QQuickPaintedItem_override_virtual_metacall(void* self, intptr_t slot);
+int QQuickPaintedItem_virtualbase_metacall(void* self, int param1, int param2, void** param3);
 bool QQuickPaintedItem_override_virtual_paint(void* self, intptr_t slot);
 void QQuickPaintedItem_virtualbase_paint(void* self, QPainter* painter);
 bool QQuickPaintedItem_override_virtual_isTextureProvider(void* self, intptr_t slot);
@@ -234,6 +241,7 @@ QObject* QQuickPaintedItem_protectedbase_sender(bool* _dynamic_cast_ok, const vo
 int QQuickPaintedItem_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
 int QQuickPaintedItem_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
 bool QQuickPaintedItem_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+const QMetaObject* QQuickPaintedItem_staticMetaObject();
 void QQuickPaintedItem_delete(QQuickPaintedItem* self);
 
 #ifdef __cplusplus

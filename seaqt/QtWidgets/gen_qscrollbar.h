@@ -93,6 +93,7 @@ QScrollBar* QScrollBar_new4(int param1, QWidget* parent);
 void QScrollBar_virtbase(QScrollBar* src, QAbstractSlider** outptr_QAbstractSlider);
 QMetaObject* QScrollBar_metaObject(const QScrollBar* self);
 void* QScrollBar_metacast(QScrollBar* self, const char* param1);
+int QScrollBar_metacall(QScrollBar* self, int param1, int param2, void** param3);
 struct miqt_string QScrollBar_tr(const char* s);
 struct miqt_string QScrollBar_trUtf8(const char* s);
 QSize* QScrollBar_sizeHint(const QScrollBar* self);
@@ -109,6 +110,12 @@ struct miqt_string QScrollBar_tr2(const char* s, const char* c);
 struct miqt_string QScrollBar_tr3(const char* s, const char* c, int n);
 struct miqt_string QScrollBar_trUtf82(const char* s, const char* c);
 struct miqt_string QScrollBar_trUtf83(const char* s, const char* c, int n);
+bool QScrollBar_override_virtual_metaObject(void* self, intptr_t slot);
+QMetaObject* QScrollBar_virtualbase_metaObject(const void* self);
+bool QScrollBar_override_virtual_metacast(void* self, intptr_t slot);
+void* QScrollBar_virtualbase_metacast(void* self, const char* param1);
+bool QScrollBar_override_virtual_metacall(void* self, intptr_t slot);
+int QScrollBar_virtualbase_metacall(void* self, int param1, int param2, void** param3);
 bool QScrollBar_override_virtual_sizeHint(void* self, intptr_t slot);
 QSize* QScrollBar_virtualbase_sizeHint(const void* self);
 bool QScrollBar_override_virtual_event(void* self, intptr_t slot);
@@ -217,6 +224,7 @@ QObject* QScrollBar_protectedbase_sender(bool* _dynamic_cast_ok, const void* sel
 int QScrollBar_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
 int QScrollBar_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
 bool QScrollBar_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+const QMetaObject* QScrollBar_staticMetaObject();
 void QScrollBar_delete(QScrollBar* self);
 
 #ifdef __cplusplus

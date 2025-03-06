@@ -118,6 +118,7 @@ proc fcQQuickWindow_new2(renderControl: pointer): ptr cQQuickWindow {.importc: "
 proc fcQQuickWindow_new3(parent: pointer): ptr cQQuickWindow {.importc: "QQuickWindow_new3".}
 proc fcQQuickWindow_metaObject(self: pointer, ): pointer {.importc: "QQuickWindow_metaObject".}
 proc fcQQuickWindow_metacast(self: pointer, param1: cstring): pointer {.importc: "QQuickWindow_metacast".}
+proc fcQQuickWindow_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QQuickWindow_metacall".}
 proc fcQQuickWindow_tr(s: cstring): struct_miqt_string {.importc: "QQuickWindow_tr".}
 proc fcQQuickWindow_trUtf8(s: cstring): struct_miqt_string {.importc: "QQuickWindow_trUtf8".}
 proc fcQQuickWindow_contentItem(self: pointer, ): pointer {.importc: "QQuickWindow_contentItem".}
@@ -197,6 +198,12 @@ proc fcQQuickWindow_trUtf82(s: cstring, c: cstring): struct_miqt_string {.import
 proc fcQQuickWindow_trUtf83(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QQuickWindow_trUtf83".}
 proc fcQQuickWindow_createTextureFromId3(self: pointer, id: cuint, size: pointer, options: cint): pointer {.importc: "QQuickWindow_createTextureFromId3".}
 proc fcQQuickWindow_createTextureFromNativeObject5(self: pointer, typeVal: cint, nativeObjectPtr: pointer, nativeLayout: cint, size: pointer, options: cint): pointer {.importc: "QQuickWindow_createTextureFromNativeObject5".}
+proc fQQuickWindow_virtualbase_metaObject(self: pointer, ): pointer{.importc: "QQuickWindow_virtualbase_metaObject".}
+proc fcQQuickWindow_override_virtual_metaObject(self: pointer, slot: int) {.importc: "QQuickWindow_override_virtual_metaObject".}
+proc fQQuickWindow_virtualbase_metacast(self: pointer, param1: cstring): pointer{.importc: "QQuickWindow_virtualbase_metacast".}
+proc fcQQuickWindow_override_virtual_metacast(self: pointer, slot: int) {.importc: "QQuickWindow_override_virtual_metacast".}
+proc fQQuickWindow_virtualbase_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint{.importc: "QQuickWindow_virtualbase_metacall".}
+proc fcQQuickWindow_override_virtual_metacall(self: pointer, slot: int) {.importc: "QQuickWindow_override_virtual_metacall".}
 proc fQQuickWindow_virtualbase_focusObject(self: pointer, ): pointer{.importc: "QQuickWindow_virtualbase_focusObject".}
 proc fcQQuickWindow_override_virtual_focusObject(self: pointer, slot: int) {.importc: "QQuickWindow_override_virtual_focusObject".}
 proc fQQuickWindow_virtualbase_accessibleRoot(self: pointer, ): pointer{.importc: "QQuickWindow_virtualbase_accessibleRoot".}
@@ -255,6 +262,7 @@ proc fQQuickWindow_virtualbase_connectNotify(self: pointer, signal: pointer): vo
 proc fcQQuickWindow_override_virtual_connectNotify(self: pointer, slot: int) {.importc: "QQuickWindow_override_virtual_connectNotify".}
 proc fQQuickWindow_virtualbase_disconnectNotify(self: pointer, signal: pointer): void{.importc: "QQuickWindow_virtualbase_disconnectNotify".}
 proc fcQQuickWindow_override_virtual_disconnectNotify(self: pointer, slot: int) {.importc: "QQuickWindow_override_virtual_disconnectNotify".}
+proc fcQQuickWindow_staticMetaObject(): pointer {.importc: "QQuickWindow_staticMetaObject".}
 proc fcQQuickWindow_delete(self: pointer) {.importc: "QQuickWindow_delete".}
 proc fcQQuickWindowGraphicsStateInfo_delete(self: pointer) {.importc: "QQuickWindow__GraphicsStateInfo_delete".}
 
@@ -275,6 +283,9 @@ proc metaObject*(self: gen_qquickwindow_types.QQuickWindow, ): gen_qobjectdefs_t
 
 proc metacast*(self: gen_qquickwindow_types.QQuickWindow, param1: cstring): pointer =
   fcQQuickWindow_metacast(self.h, param1)
+
+proc metacall*(self: gen_qquickwindow_types.QQuickWindow, param1: cint, param2: cint, param3: pointer): cint =
+  fcQQuickWindow_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qquickwindow_types.QQuickWindow, s: cstring): string =
   let v_ms = fcQQuickWindow_tr(s)
@@ -655,6 +666,65 @@ proc createTextureFromId*(self: gen_qquickwindow_types.QQuickWindow, id: cuint, 
 proc createTextureFromNativeObject*(self: gen_qquickwindow_types.QQuickWindow, typeVal: cint, nativeObjectPtr: pointer, nativeLayout: cint, size: gen_qsize_types.QSize, options: cint): gen_qsgtexture_types.QSGTexture =
   gen_qsgtexture_types.QSGTexture(h: fcQQuickWindow_createTextureFromNativeObject5(self.h, cint(typeVal), nativeObjectPtr, nativeLayout, size.h, cint(options)))
 
+proc QQuickWindowmetaObject*(self: gen_qquickwindow_types.QQuickWindow, ): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fQQuickWindow_virtualbase_metaObject(self.h))
+
+type QQuickWindowmetaObjectProc* = proc(): gen_qobjectdefs_types.QMetaObject
+proc onmetaObject*(self: gen_qquickwindow_types.QQuickWindow, slot: QQuickWindowmetaObjectProc) =
+  # TODO check subclass
+  var tmp = new QQuickWindowmetaObjectProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQQuickWindow_override_virtual_metaObject(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QQuickWindow_metaObject(self: ptr cQQuickWindow, slot: int): pointer {.exportc: "miqt_exec_callback_QQuickWindow_metaObject ".} =
+  var nimfunc = cast[ptr QQuickWindowmetaObjectProc](cast[pointer](slot))
+
+  let virtualReturn = nimfunc[]( )
+
+  virtualReturn.h
+proc QQuickWindowmetacast*(self: gen_qquickwindow_types.QQuickWindow, param1: cstring): pointer =
+  fQQuickWindow_virtualbase_metacast(self.h, param1)
+
+type QQuickWindowmetacastProc* = proc(param1: cstring): pointer
+proc onmetacast*(self: gen_qquickwindow_types.QQuickWindow, slot: QQuickWindowmetacastProc) =
+  # TODO check subclass
+  var tmp = new QQuickWindowmetacastProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQQuickWindow_override_virtual_metacast(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QQuickWindow_metacast(self: ptr cQQuickWindow, slot: int, param1: cstring): pointer {.exportc: "miqt_exec_callback_QQuickWindow_metacast ".} =
+  var nimfunc = cast[ptr QQuickWindowmetacastProc](cast[pointer](slot))
+  let slotval1 = (param1)
+
+
+  let virtualReturn = nimfunc[](slotval1 )
+
+  virtualReturn
+proc QQuickWindowmetacall*(self: gen_qquickwindow_types.QQuickWindow, param1: cint, param2: cint, param3: pointer): cint =
+  fQQuickWindow_virtualbase_metacall(self.h, cint(param1), param2, param3)
+
+type QQuickWindowmetacallProc* = proc(param1: cint, param2: cint, param3: pointer): cint
+proc onmetacall*(self: gen_qquickwindow_types.QQuickWindow, slot: QQuickWindowmetacallProc) =
+  # TODO check subclass
+  var tmp = new QQuickWindowmetacallProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQQuickWindow_override_virtual_metacall(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QQuickWindow_metacall(self: ptr cQQuickWindow, slot: int, param1: cint, param2: cint, param3: pointer): cint {.exportc: "miqt_exec_callback_QQuickWindow_metacall ".} =
+  var nimfunc = cast[ptr QQuickWindowmetacallProc](cast[pointer](slot))
+  let slotval1 = cint(param1)
+
+  let slotval2 = param2
+
+  let slotval3 = param3
+
+
+  let virtualReturn = nimfunc[](slotval1, slotval2, slotval3 )
+
+  virtualReturn
 proc QQuickWindowfocusObject*(self: gen_qquickwindow_types.QQuickWindow, ): gen_qobject_types.QObject =
   gen_qobject_types.QObject(h: fQQuickWindow_virtualbase_focusObject(self.h))
 
@@ -1163,6 +1233,8 @@ proc miqt_exec_callback_QQuickWindow_disconnectNotify(self: ptr cQQuickWindow, s
 
 
   nimfunc[](slotval1)
+proc staticMetaObject*(_: type gen_qquickwindow_types.QQuickWindow): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fcQQuickWindow_staticMetaObject())
 proc delete*(self: gen_qquickwindow_types.QQuickWindow) =
   fcQQuickWindow_delete(self.h)
 

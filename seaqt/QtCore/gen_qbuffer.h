@@ -39,6 +39,7 @@ QBuffer* QBuffer_new2(QObject* parent);
 void QBuffer_virtbase(QBuffer* src, QIODevice** outptr_QIODevice);
 QMetaObject* QBuffer_metaObject(const QBuffer* self);
 void* QBuffer_metacast(QBuffer* self, const char* param1);
+int QBuffer_metacall(QBuffer* self, int param1, int param2, void** param3);
 struct miqt_string QBuffer_tr(const char* s);
 struct miqt_string QBuffer_trUtf8(const char* s);
 struct miqt_string QBuffer_buffer(QBuffer* self);
@@ -61,6 +62,12 @@ struct miqt_string QBuffer_tr2(const char* s, const char* c);
 struct miqt_string QBuffer_tr3(const char* s, const char* c, int n);
 struct miqt_string QBuffer_trUtf82(const char* s, const char* c);
 struct miqt_string QBuffer_trUtf83(const char* s, const char* c, int n);
+bool QBuffer_override_virtual_metaObject(void* self, intptr_t slot);
+QMetaObject* QBuffer_virtualbase_metaObject(const void* self);
+bool QBuffer_override_virtual_metacast(void* self, intptr_t slot);
+void* QBuffer_virtualbase_metacast(void* self, const char* param1);
+bool QBuffer_override_virtual_metacall(void* self, intptr_t slot);
+int QBuffer_virtualbase_metacall(void* self, int param1, int param2, void** param3);
 bool QBuffer_override_virtual_open(void* self, intptr_t slot);
 bool QBuffer_virtualbase_open(void* self, int openMode);
 bool QBuffer_override_virtual_close(void* self, intptr_t slot);
@@ -113,6 +120,7 @@ QObject* QBuffer_protectedbase_sender(bool* _dynamic_cast_ok, const void* self);
 int QBuffer_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
 int QBuffer_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
 bool QBuffer_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+const QMetaObject* QBuffer_staticMetaObject();
 void QBuffer_delete(QBuffer* self);
 
 #ifdef __cplusplus

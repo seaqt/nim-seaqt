@@ -58,6 +58,7 @@ proc fcQTemporaryFile_new3(parent: pointer): ptr cQTemporaryFile {.importc: "QTe
 proc fcQTemporaryFile_new4(templateName: struct_miqt_string, parent: pointer): ptr cQTemporaryFile {.importc: "QTemporaryFile_new4".}
 proc fcQTemporaryFile_metaObject(self: pointer, ): pointer {.importc: "QTemporaryFile_metaObject".}
 proc fcQTemporaryFile_metacast(self: pointer, param1: cstring): pointer {.importc: "QTemporaryFile_metacast".}
+proc fcQTemporaryFile_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QTemporaryFile_metacall".}
 proc fcQTemporaryFile_tr(s: cstring): struct_miqt_string {.importc: "QTemporaryFile_tr".}
 proc fcQTemporaryFile_trUtf8(s: cstring): struct_miqt_string {.importc: "QTemporaryFile_trUtf8".}
 proc fcQTemporaryFile_autoRemove(self: pointer, ): bool {.importc: "QTemporaryFile_autoRemove".}
@@ -75,6 +76,12 @@ proc fcQTemporaryFile_tr2(s: cstring, c: cstring): struct_miqt_string {.importc:
 proc fcQTemporaryFile_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QTemporaryFile_tr3".}
 proc fcQTemporaryFile_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QTemporaryFile_trUtf82".}
 proc fcQTemporaryFile_trUtf83(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QTemporaryFile_trUtf83".}
+proc fQTemporaryFile_virtualbase_metaObject(self: pointer, ): pointer{.importc: "QTemporaryFile_virtualbase_metaObject".}
+proc fcQTemporaryFile_override_virtual_metaObject(self: pointer, slot: int) {.importc: "QTemporaryFile_override_virtual_metaObject".}
+proc fQTemporaryFile_virtualbase_metacast(self: pointer, param1: cstring): pointer{.importc: "QTemporaryFile_virtualbase_metacast".}
+proc fcQTemporaryFile_override_virtual_metacast(self: pointer, slot: int) {.importc: "QTemporaryFile_override_virtual_metacast".}
+proc fQTemporaryFile_virtualbase_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint{.importc: "QTemporaryFile_virtualbase_metacall".}
+proc fcQTemporaryFile_override_virtual_metacall(self: pointer, slot: int) {.importc: "QTemporaryFile_override_virtual_metacall".}
 proc fQTemporaryFile_virtualbase_fileName(self: pointer, ): struct_miqt_string{.importc: "QTemporaryFile_virtualbase_fileName".}
 proc fcQTemporaryFile_override_virtual_fileName(self: pointer, slot: int) {.importc: "QTemporaryFile_override_virtual_fileName".}
 proc fQTemporaryFile_virtualbase_openWithFlags(self: pointer, flags: cint): bool{.importc: "QTemporaryFile_virtualbase_openWithFlags".}
@@ -129,6 +136,7 @@ proc fQTemporaryFile_virtualbase_connectNotify(self: pointer, signal: pointer): 
 proc fcQTemporaryFile_override_virtual_connectNotify(self: pointer, slot: int) {.importc: "QTemporaryFile_override_virtual_connectNotify".}
 proc fQTemporaryFile_virtualbase_disconnectNotify(self: pointer, signal: pointer): void{.importc: "QTemporaryFile_virtualbase_disconnectNotify".}
 proc fcQTemporaryFile_override_virtual_disconnectNotify(self: pointer, slot: int) {.importc: "QTemporaryFile_override_virtual_disconnectNotify".}
+proc fcQTemporaryFile_staticMetaObject(): pointer {.importc: "QTemporaryFile_staticMetaObject".}
 proc fcQTemporaryFile_delete(self: pointer) {.importc: "QTemporaryFile_delete".}
 
 
@@ -151,6 +159,9 @@ proc metaObject*(self: gen_qtemporaryfile_types.QTemporaryFile, ): gen_qobjectde
 
 proc metacast*(self: gen_qtemporaryfile_types.QTemporaryFile, param1: cstring): pointer =
   fcQTemporaryFile_metacast(self.h, param1)
+
+proc metacall*(self: gen_qtemporaryfile_types.QTemporaryFile, param1: cint, param2: cint, param3: pointer): cint =
+  fcQTemporaryFile_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qtemporaryfile_types.QTemporaryFile, s: cstring): string =
   let v_ms = fcQTemporaryFile_tr(s)
@@ -227,6 +238,65 @@ proc trUtf8*(_: type gen_qtemporaryfile_types.QTemporaryFile, s: cstring, c: cst
   c_free(v_ms.data)
   vx_ret
 
+proc QTemporaryFilemetaObject*(self: gen_qtemporaryfile_types.QTemporaryFile, ): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fQTemporaryFile_virtualbase_metaObject(self.h))
+
+type QTemporaryFilemetaObjectProc* = proc(): gen_qobjectdefs_types.QMetaObject
+proc onmetaObject*(self: gen_qtemporaryfile_types.QTemporaryFile, slot: QTemporaryFilemetaObjectProc) =
+  # TODO check subclass
+  var tmp = new QTemporaryFilemetaObjectProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQTemporaryFile_override_virtual_metaObject(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QTemporaryFile_metaObject(self: ptr cQTemporaryFile, slot: int): pointer {.exportc: "miqt_exec_callback_QTemporaryFile_metaObject ".} =
+  var nimfunc = cast[ptr QTemporaryFilemetaObjectProc](cast[pointer](slot))
+
+  let virtualReturn = nimfunc[]( )
+
+  virtualReturn.h
+proc QTemporaryFilemetacast*(self: gen_qtemporaryfile_types.QTemporaryFile, param1: cstring): pointer =
+  fQTemporaryFile_virtualbase_metacast(self.h, param1)
+
+type QTemporaryFilemetacastProc* = proc(param1: cstring): pointer
+proc onmetacast*(self: gen_qtemporaryfile_types.QTemporaryFile, slot: QTemporaryFilemetacastProc) =
+  # TODO check subclass
+  var tmp = new QTemporaryFilemetacastProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQTemporaryFile_override_virtual_metacast(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QTemporaryFile_metacast(self: ptr cQTemporaryFile, slot: int, param1: cstring): pointer {.exportc: "miqt_exec_callback_QTemporaryFile_metacast ".} =
+  var nimfunc = cast[ptr QTemporaryFilemetacastProc](cast[pointer](slot))
+  let slotval1 = (param1)
+
+
+  let virtualReturn = nimfunc[](slotval1 )
+
+  virtualReturn
+proc QTemporaryFilemetacall*(self: gen_qtemporaryfile_types.QTemporaryFile, param1: cint, param2: cint, param3: pointer): cint =
+  fQTemporaryFile_virtualbase_metacall(self.h, cint(param1), param2, param3)
+
+type QTemporaryFilemetacallProc* = proc(param1: cint, param2: cint, param3: pointer): cint
+proc onmetacall*(self: gen_qtemporaryfile_types.QTemporaryFile, slot: QTemporaryFilemetacallProc) =
+  # TODO check subclass
+  var tmp = new QTemporaryFilemetacallProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQTemporaryFile_override_virtual_metacall(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QTemporaryFile_metacall(self: ptr cQTemporaryFile, slot: int, param1: cint, param2: cint, param3: pointer): cint {.exportc: "miqt_exec_callback_QTemporaryFile_metacall ".} =
+  var nimfunc = cast[ptr QTemporaryFilemetacallProc](cast[pointer](slot))
+  let slotval1 = cint(param1)
+
+  let slotval2 = param2
+
+  let slotval3 = param3
+
+
+  let virtualReturn = nimfunc[](slotval1, slotval2, slotval3 )
+
+  virtualReturn
 proc QTemporaryFilefileName*(self: gen_qtemporaryfile_types.QTemporaryFile, ): string =
   let v_ms = fQTemporaryFile_virtualbase_fileName(self.h)
   let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
@@ -717,5 +787,7 @@ proc miqt_exec_callback_QTemporaryFile_disconnectNotify(self: ptr cQTemporaryFil
 
 
   nimfunc[](slotval1)
+proc staticMetaObject*(_: type gen_qtemporaryfile_types.QTemporaryFile): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fcQTemporaryFile_staticMetaObject())
 proc delete*(self: gen_qtemporaryfile_types.QTemporaryFile) =
   fcQTemporaryFile_delete(self.h)

@@ -61,6 +61,7 @@ type cQInputMethod*{.exportc: "QInputMethod", incompleteStruct.} = object
 
 proc fcQInputMethod_metaObject(self: pointer, ): pointer {.importc: "QInputMethod_metaObject".}
 proc fcQInputMethod_metacast(self: pointer, param1: cstring): pointer {.importc: "QInputMethod_metacast".}
+proc fcQInputMethod_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QInputMethod_metacall".}
 proc fcQInputMethod_tr(s: cstring): struct_miqt_string {.importc: "QInputMethod_tr".}
 proc fcQInputMethod_trUtf8(s: cstring): struct_miqt_string {.importc: "QInputMethod_trUtf8".}
 proc fcQInputMethod_inputItemTransform(self: pointer, ): pointer {.importc: "QInputMethod_inputItemTransform".}
@@ -103,6 +104,7 @@ proc fcQInputMethod_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "
 proc fcQInputMethod_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QInputMethod_tr3".}
 proc fcQInputMethod_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QInputMethod_trUtf82".}
 proc fcQInputMethod_trUtf83(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QInputMethod_trUtf83".}
+proc fcQInputMethod_staticMetaObject(): pointer {.importc: "QInputMethod_staticMetaObject".}
 
 
 func init*(T: type gen_qinputmethod_types.QInputMethod, h: ptr cQInputMethod): gen_qinputmethod_types.QInputMethod =
@@ -112,6 +114,9 @@ proc metaObject*(self: gen_qinputmethod_types.QInputMethod, ): gen_qobjectdefs_t
 
 proc metacast*(self: gen_qinputmethod_types.QInputMethod, param1: cstring): pointer =
   fcQInputMethod_metacast(self.h, param1)
+
+proc metacall*(self: gen_qinputmethod_types.QInputMethod, param1: cint, param2: cint, param3: pointer): cint =
+  fcQInputMethod_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qinputmethod_types.QInputMethod, s: cstring): string =
   let v_ms = fcQInputMethod_tr(s)
@@ -323,3 +328,5 @@ proc trUtf8*(_: type gen_qinputmethod_types.QInputMethod, s: cstring, c: cstring
   c_free(v_ms.data)
   vx_ret
 
+proc staticMetaObject*(_: type gen_qinputmethod_types.QInputMethod): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fcQInputMethod_staticMetaObject())

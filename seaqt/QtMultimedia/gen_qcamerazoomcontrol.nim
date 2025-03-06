@@ -48,6 +48,7 @@ type cQCameraZoomControl*{.exportc: "QCameraZoomControl", incompleteStruct.} = o
 
 proc fcQCameraZoomControl_metaObject(self: pointer, ): pointer {.importc: "QCameraZoomControl_metaObject".}
 proc fcQCameraZoomControl_metacast(self: pointer, param1: cstring): pointer {.importc: "QCameraZoomControl_metacast".}
+proc fcQCameraZoomControl_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QCameraZoomControl_metacall".}
 proc fcQCameraZoomControl_tr(s: cstring): struct_miqt_string {.importc: "QCameraZoomControl_tr".}
 proc fcQCameraZoomControl_trUtf8(s: cstring): struct_miqt_string {.importc: "QCameraZoomControl_trUtf8".}
 proc fcQCameraZoomControl_maximumOpticalZoom(self: pointer, ): float64 {.importc: "QCameraZoomControl_maximumOpticalZoom".}
@@ -73,6 +74,7 @@ proc fcQCameraZoomControl_tr2(s: cstring, c: cstring): struct_miqt_string {.impo
 proc fcQCameraZoomControl_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QCameraZoomControl_tr3".}
 proc fcQCameraZoomControl_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QCameraZoomControl_trUtf82".}
 proc fcQCameraZoomControl_trUtf83(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QCameraZoomControl_trUtf83".}
+proc fcQCameraZoomControl_staticMetaObject(): pointer {.importc: "QCameraZoomControl_staticMetaObject".}
 proc fcQCameraZoomControl_delete(self: pointer) {.importc: "QCameraZoomControl_delete".}
 
 
@@ -83,6 +85,9 @@ proc metaObject*(self: gen_qcamerazoomcontrol_types.QCameraZoomControl, ): gen_q
 
 proc metacast*(self: gen_qcamerazoomcontrol_types.QCameraZoomControl, param1: cstring): pointer =
   fcQCameraZoomControl_metacast(self.h, param1)
+
+proc metacall*(self: gen_qcamerazoomcontrol_types.QCameraZoomControl, param1: cint, param2: cint, param3: pointer): cint =
+  fcQCameraZoomControl_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qcamerazoomcontrol_types.QCameraZoomControl, s: cstring): string =
   let v_ms = fcQCameraZoomControl_tr(s)
@@ -237,5 +242,7 @@ proc trUtf8*(_: type gen_qcamerazoomcontrol_types.QCameraZoomControl, s: cstring
   c_free(v_ms.data)
   vx_ret
 
+proc staticMetaObject*(_: type gen_qcamerazoomcontrol_types.QCameraZoomControl): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fcQCameraZoomControl_staticMetaObject())
 proc delete*(self: gen_qcamerazoomcontrol_types.QCameraZoomControl) =
   fcQCameraZoomControl_delete(self.h)

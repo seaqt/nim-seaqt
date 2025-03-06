@@ -80,6 +80,7 @@ proc fcQAbstractScrollArea_new(parent: pointer): ptr cQAbstractScrollArea {.impo
 proc fcQAbstractScrollArea_new2(): ptr cQAbstractScrollArea {.importc: "QAbstractScrollArea_new2".}
 proc fcQAbstractScrollArea_metaObject(self: pointer, ): pointer {.importc: "QAbstractScrollArea_metaObject".}
 proc fcQAbstractScrollArea_metacast(self: pointer, param1: cstring): pointer {.importc: "QAbstractScrollArea_metacast".}
+proc fcQAbstractScrollArea_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QAbstractScrollArea_metacall".}
 proc fcQAbstractScrollArea_tr(s: cstring): struct_miqt_string {.importc: "QAbstractScrollArea_tr".}
 proc fcQAbstractScrollArea_trUtf8(s: cstring): struct_miqt_string {.importc: "QAbstractScrollArea_trUtf8".}
 proc fcQAbstractScrollArea_verticalScrollBarPolicy(self: pointer, ): cint {.importc: "QAbstractScrollArea_verticalScrollBarPolicy".}
@@ -106,6 +107,12 @@ proc fcQAbstractScrollArea_tr2(s: cstring, c: cstring): struct_miqt_string {.imp
 proc fcQAbstractScrollArea_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QAbstractScrollArea_tr3".}
 proc fcQAbstractScrollArea_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QAbstractScrollArea_trUtf82".}
 proc fcQAbstractScrollArea_trUtf83(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QAbstractScrollArea_trUtf83".}
+proc fQAbstractScrollArea_virtualbase_metaObject(self: pointer, ): pointer{.importc: "QAbstractScrollArea_virtualbase_metaObject".}
+proc fcQAbstractScrollArea_override_virtual_metaObject(self: pointer, slot: int) {.importc: "QAbstractScrollArea_override_virtual_metaObject".}
+proc fQAbstractScrollArea_virtualbase_metacast(self: pointer, param1: cstring): pointer{.importc: "QAbstractScrollArea_virtualbase_metacast".}
+proc fcQAbstractScrollArea_override_virtual_metacast(self: pointer, slot: int) {.importc: "QAbstractScrollArea_override_virtual_metacast".}
+proc fQAbstractScrollArea_virtualbase_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint{.importc: "QAbstractScrollArea_virtualbase_metacall".}
+proc fcQAbstractScrollArea_override_virtual_metacall(self: pointer, slot: int) {.importc: "QAbstractScrollArea_override_virtual_metacall".}
 proc fQAbstractScrollArea_virtualbase_minimumSizeHint(self: pointer, ): pointer{.importc: "QAbstractScrollArea_virtualbase_minimumSizeHint".}
 proc fcQAbstractScrollArea_override_virtual_minimumSizeHint(self: pointer, slot: int) {.importc: "QAbstractScrollArea_override_virtual_minimumSizeHint".}
 proc fQAbstractScrollArea_virtualbase_sizeHint(self: pointer, ): pointer{.importc: "QAbstractScrollArea_virtualbase_sizeHint".}
@@ -208,6 +215,7 @@ proc fQAbstractScrollArea_virtualbase_connectNotify(self: pointer, signal: point
 proc fcQAbstractScrollArea_override_virtual_connectNotify(self: pointer, slot: int) {.importc: "QAbstractScrollArea_override_virtual_connectNotify".}
 proc fQAbstractScrollArea_virtualbase_disconnectNotify(self: pointer, signal: pointer): void{.importc: "QAbstractScrollArea_virtualbase_disconnectNotify".}
 proc fcQAbstractScrollArea_override_virtual_disconnectNotify(self: pointer, slot: int) {.importc: "QAbstractScrollArea_override_virtual_disconnectNotify".}
+proc fcQAbstractScrollArea_staticMetaObject(): pointer {.importc: "QAbstractScrollArea_staticMetaObject".}
 proc fcQAbstractScrollArea_delete(self: pointer) {.importc: "QAbstractScrollArea_delete".}
 
 
@@ -224,6 +232,9 @@ proc metaObject*(self: gen_qabstractscrollarea_types.QAbstractScrollArea, ): gen
 
 proc metacast*(self: gen_qabstractscrollarea_types.QAbstractScrollArea, param1: cstring): pointer =
   fcQAbstractScrollArea_metacast(self.h, param1)
+
+proc metacall*(self: gen_qabstractscrollarea_types.QAbstractScrollArea, param1: cint, param2: cint, param3: pointer): cint =
+  fcQAbstractScrollArea_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qabstractscrollarea_types.QAbstractScrollArea, s: cstring): string =
   let v_ms = fcQAbstractScrollArea_tr(s)
@@ -326,6 +337,65 @@ proc trUtf8*(_: type gen_qabstractscrollarea_types.QAbstractScrollArea, s: cstri
   c_free(v_ms.data)
   vx_ret
 
+proc QAbstractScrollAreametaObject*(self: gen_qabstractscrollarea_types.QAbstractScrollArea, ): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fQAbstractScrollArea_virtualbase_metaObject(self.h))
+
+type QAbstractScrollAreametaObjectProc* = proc(): gen_qobjectdefs_types.QMetaObject
+proc onmetaObject*(self: gen_qabstractscrollarea_types.QAbstractScrollArea, slot: QAbstractScrollAreametaObjectProc) =
+  # TODO check subclass
+  var tmp = new QAbstractScrollAreametaObjectProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQAbstractScrollArea_override_virtual_metaObject(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QAbstractScrollArea_metaObject(self: ptr cQAbstractScrollArea, slot: int): pointer {.exportc: "miqt_exec_callback_QAbstractScrollArea_metaObject ".} =
+  var nimfunc = cast[ptr QAbstractScrollAreametaObjectProc](cast[pointer](slot))
+
+  let virtualReturn = nimfunc[]( )
+
+  virtualReturn.h
+proc QAbstractScrollAreametacast*(self: gen_qabstractscrollarea_types.QAbstractScrollArea, param1: cstring): pointer =
+  fQAbstractScrollArea_virtualbase_metacast(self.h, param1)
+
+type QAbstractScrollAreametacastProc* = proc(param1: cstring): pointer
+proc onmetacast*(self: gen_qabstractscrollarea_types.QAbstractScrollArea, slot: QAbstractScrollAreametacastProc) =
+  # TODO check subclass
+  var tmp = new QAbstractScrollAreametacastProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQAbstractScrollArea_override_virtual_metacast(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QAbstractScrollArea_metacast(self: ptr cQAbstractScrollArea, slot: int, param1: cstring): pointer {.exportc: "miqt_exec_callback_QAbstractScrollArea_metacast ".} =
+  var nimfunc = cast[ptr QAbstractScrollAreametacastProc](cast[pointer](slot))
+  let slotval1 = (param1)
+
+
+  let virtualReturn = nimfunc[](slotval1 )
+
+  virtualReturn
+proc QAbstractScrollAreametacall*(self: gen_qabstractscrollarea_types.QAbstractScrollArea, param1: cint, param2: cint, param3: pointer): cint =
+  fQAbstractScrollArea_virtualbase_metacall(self.h, cint(param1), param2, param3)
+
+type QAbstractScrollAreametacallProc* = proc(param1: cint, param2: cint, param3: pointer): cint
+proc onmetacall*(self: gen_qabstractscrollarea_types.QAbstractScrollArea, slot: QAbstractScrollAreametacallProc) =
+  # TODO check subclass
+  var tmp = new QAbstractScrollAreametacallProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQAbstractScrollArea_override_virtual_metacall(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QAbstractScrollArea_metacall(self: ptr cQAbstractScrollArea, slot: int, param1: cint, param2: cint, param3: pointer): cint {.exportc: "miqt_exec_callback_QAbstractScrollArea_metacall ".} =
+  var nimfunc = cast[ptr QAbstractScrollAreametacallProc](cast[pointer](slot))
+  let slotval1 = cint(param1)
+
+  let slotval2 = param2
+
+  let slotval3 = param3
+
+
+  let virtualReturn = nimfunc[](slotval1, slotval2, slotval3 )
+
+  virtualReturn
 proc QAbstractScrollAreaminimumSizeHint*(self: gen_qabstractscrollarea_types.QAbstractScrollArea, ): gen_qsize_types.QSize =
   gen_qsize_types.QSize(h: fQAbstractScrollArea_virtualbase_minimumSizeHint(self.h))
 
@@ -1222,5 +1292,7 @@ proc miqt_exec_callback_QAbstractScrollArea_disconnectNotify(self: ptr cQAbstrac
 
 
   nimfunc[](slotval1)
+proc staticMetaObject*(_: type gen_qabstractscrollarea_types.QAbstractScrollArea): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fcQAbstractScrollArea_staticMetaObject())
 proc delete*(self: gen_qabstractscrollarea_types.QAbstractScrollArea) =
   fcQAbstractScrollArea_delete(self.h)

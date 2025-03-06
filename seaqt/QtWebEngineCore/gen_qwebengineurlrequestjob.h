@@ -33,6 +33,7 @@ typedef struct QWebEngineUrlRequestJob QWebEngineUrlRequestJob;
 void QWebEngineUrlRequestJob_virtbase(QWebEngineUrlRequestJob* src, QObject** outptr_QObject);
 QMetaObject* QWebEngineUrlRequestJob_metaObject(const QWebEngineUrlRequestJob* self);
 void* QWebEngineUrlRequestJob_metacast(QWebEngineUrlRequestJob* self, const char* param1);
+int QWebEngineUrlRequestJob_metacall(QWebEngineUrlRequestJob* self, int param1, int param2, void** param3);
 struct miqt_string QWebEngineUrlRequestJob_tr(const char* s);
 struct miqt_string QWebEngineUrlRequestJob_trUtf8(const char* s);
 QUrl* QWebEngineUrlRequestJob_requestUrl(const QWebEngineUrlRequestJob* self);
@@ -45,6 +46,7 @@ struct miqt_string QWebEngineUrlRequestJob_tr2(const char* s, const char* c);
 struct miqt_string QWebEngineUrlRequestJob_tr3(const char* s, const char* c, int n);
 struct miqt_string QWebEngineUrlRequestJob_trUtf82(const char* s, const char* c);
 struct miqt_string QWebEngineUrlRequestJob_trUtf83(const char* s, const char* c, int n);
+const QMetaObject* QWebEngineUrlRequestJob_staticMetaObject();
 void QWebEngineUrlRequestJob_delete(QWebEngineUrlRequestJob* self);
 
 #ifdef __cplusplus

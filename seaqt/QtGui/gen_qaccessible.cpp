@@ -115,6 +115,7 @@ struct miqt_map /* tuple of int and int */  QAccessible_qAccessibleTextBoundaryH
 	return _out;
 }
 
+const QMetaObject* QAccessible_staticMetaObject() { return &QAccessible::staticMetaObject; }
 void QAccessible_delete(QAccessible* self) {
 	delete self;
 }

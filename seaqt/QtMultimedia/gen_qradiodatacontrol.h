@@ -31,6 +31,7 @@ typedef struct QRadioDataControl QRadioDataControl;
 void QRadioDataControl_virtbase(QRadioDataControl* src, QMediaControl** outptr_QMediaControl);
 QMetaObject* QRadioDataControl_metaObject(const QRadioDataControl* self);
 void* QRadioDataControl_metacast(QRadioDataControl* self, const char* param1);
+int QRadioDataControl_metacall(QRadioDataControl* self, int param1, int param2, void** param3);
 struct miqt_string QRadioDataControl_tr(const char* s);
 struct miqt_string QRadioDataControl_trUtf8(const char* s);
 struct miqt_string QRadioDataControl_stationId(const QRadioDataControl* self);
@@ -60,6 +61,7 @@ struct miqt_string QRadioDataControl_tr2(const char* s, const char* c);
 struct miqt_string QRadioDataControl_tr3(const char* s, const char* c, int n);
 struct miqt_string QRadioDataControl_trUtf82(const char* s, const char* c);
 struct miqt_string QRadioDataControl_trUtf83(const char* s, const char* c, int n);
+const QMetaObject* QRadioDataControl_staticMetaObject();
 void QRadioDataControl_delete(QRadioDataControl* self);
 
 #ifdef __cplusplus

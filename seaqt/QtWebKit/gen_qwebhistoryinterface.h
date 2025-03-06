@@ -37,6 +37,7 @@ QWebHistoryInterface* QWebHistoryInterface_new2(QObject* parent);
 void QWebHistoryInterface_virtbase(QWebHistoryInterface* src, QObject** outptr_QObject);
 QMetaObject* QWebHistoryInterface_metaObject(const QWebHistoryInterface* self);
 void* QWebHistoryInterface_metacast(QWebHistoryInterface* self, const char* param1);
+int QWebHistoryInterface_metacall(QWebHistoryInterface* self, int param1, int param2, void** param3);
 struct miqt_string QWebHistoryInterface_tr(const char* s);
 struct miqt_string QWebHistoryInterface_trUtf8(const char* s);
 void QWebHistoryInterface_setDefaultInterface(QWebHistoryInterface* defaultInterface);
@@ -47,6 +48,12 @@ struct miqt_string QWebHistoryInterface_tr2(const char* s, const char* c);
 struct miqt_string QWebHistoryInterface_tr3(const char* s, const char* c, int n);
 struct miqt_string QWebHistoryInterface_trUtf82(const char* s, const char* c);
 struct miqt_string QWebHistoryInterface_trUtf83(const char* s, const char* c, int n);
+bool QWebHistoryInterface_override_virtual_metaObject(void* self, intptr_t slot);
+QMetaObject* QWebHistoryInterface_virtualbase_metaObject(const void* self);
+bool QWebHistoryInterface_override_virtual_metacast(void* self, intptr_t slot);
+void* QWebHistoryInterface_virtualbase_metacast(void* self, const char* param1);
+bool QWebHistoryInterface_override_virtual_metacall(void* self, intptr_t slot);
+int QWebHistoryInterface_virtualbase_metacall(void* self, int param1, int param2, void** param3);
 bool QWebHistoryInterface_override_virtual_historyContains(void* self, intptr_t slot);
 bool QWebHistoryInterface_virtualbase_historyContains(const void* self, struct miqt_string url);
 bool QWebHistoryInterface_override_virtual_addHistoryEntry(void* self, intptr_t slot);
@@ -69,6 +76,7 @@ QObject* QWebHistoryInterface_protectedbase_sender(bool* _dynamic_cast_ok, const
 int QWebHistoryInterface_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
 int QWebHistoryInterface_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
 bool QWebHistoryInterface_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+const QMetaObject* QWebHistoryInterface_staticMetaObject();
 void QWebHistoryInterface_delete(QWebHistoryInterface* self);
 
 #ifdef __cplusplus

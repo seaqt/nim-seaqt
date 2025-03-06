@@ -43,6 +43,7 @@ QPluginLoader* QPluginLoader_new4(struct miqt_string fileName, QObject* parent);
 void QPluginLoader_virtbase(QPluginLoader* src, QObject** outptr_QObject);
 QMetaObject* QPluginLoader_metaObject(const QPluginLoader* self);
 void* QPluginLoader_metacast(QPluginLoader* self, const char* param1);
+int QPluginLoader_metacall(QPluginLoader* self, int param1, int param2, void** param3);
 struct miqt_string QPluginLoader_tr(const char* s);
 struct miqt_string QPluginLoader_trUtf8(const char* s);
 QObject* QPluginLoader_instance(QPluginLoader* self);
@@ -61,6 +62,12 @@ struct miqt_string QPluginLoader_tr2(const char* s, const char* c);
 struct miqt_string QPluginLoader_tr3(const char* s, const char* c, int n);
 struct miqt_string QPluginLoader_trUtf82(const char* s, const char* c);
 struct miqt_string QPluginLoader_trUtf83(const char* s, const char* c, int n);
+bool QPluginLoader_override_virtual_metaObject(void* self, intptr_t slot);
+QMetaObject* QPluginLoader_virtualbase_metaObject(const void* self);
+bool QPluginLoader_override_virtual_metacast(void* self, intptr_t slot);
+void* QPluginLoader_virtualbase_metacast(void* self, const char* param1);
+bool QPluginLoader_override_virtual_metacall(void* self, intptr_t slot);
+int QPluginLoader_virtualbase_metacall(void* self, int param1, int param2, void** param3);
 bool QPluginLoader_override_virtual_event(void* self, intptr_t slot);
 bool QPluginLoader_virtualbase_event(void* self, QEvent* event);
 bool QPluginLoader_override_virtual_eventFilter(void* self, intptr_t slot);
@@ -79,6 +86,7 @@ QObject* QPluginLoader_protectedbase_sender(bool* _dynamic_cast_ok, const void* 
 int QPluginLoader_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
 int QPluginLoader_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
 bool QPluginLoader_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+const QMetaObject* QPluginLoader_staticMetaObject();
 void QPluginLoader_delete(QPluginLoader* self);
 
 #ifdef __cplusplus

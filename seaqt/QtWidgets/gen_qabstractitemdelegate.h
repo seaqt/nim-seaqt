@@ -55,6 +55,7 @@ QAbstractItemDelegate* QAbstractItemDelegate_new2(QObject* parent);
 void QAbstractItemDelegate_virtbase(QAbstractItemDelegate* src, QObject** outptr_QObject);
 QMetaObject* QAbstractItemDelegate_metaObject(const QAbstractItemDelegate* self);
 void* QAbstractItemDelegate_metacast(QAbstractItemDelegate* self, const char* param1);
+int QAbstractItemDelegate_metacall(QAbstractItemDelegate* self, int param1, int param2, void** param3);
 struct miqt_string QAbstractItemDelegate_tr(const char* s);
 struct miqt_string QAbstractItemDelegate_trUtf8(const char* s);
 void QAbstractItemDelegate_paint(const QAbstractItemDelegate* self, QPainter* painter, QStyleOptionViewItem* option, QModelIndex* index);
@@ -80,6 +81,12 @@ struct miqt_string QAbstractItemDelegate_trUtf82(const char* s, const char* c);
 struct miqt_string QAbstractItemDelegate_trUtf83(const char* s, const char* c, int n);
 void QAbstractItemDelegate_closeEditor2(QAbstractItemDelegate* self, QWidget* editor, int hint);
 void QAbstractItemDelegate_connect_closeEditor2(QAbstractItemDelegate* self, intptr_t slot);
+bool QAbstractItemDelegate_override_virtual_metaObject(void* self, intptr_t slot);
+QMetaObject* QAbstractItemDelegate_virtualbase_metaObject(const void* self);
+bool QAbstractItemDelegate_override_virtual_metacast(void* self, intptr_t slot);
+void* QAbstractItemDelegate_virtualbase_metacast(void* self, const char* param1);
+bool QAbstractItemDelegate_override_virtual_metacall(void* self, intptr_t slot);
+int QAbstractItemDelegate_virtualbase_metacall(void* self, int param1, int param2, void** param3);
 bool QAbstractItemDelegate_override_virtual_paint(void* self, intptr_t slot);
 void QAbstractItemDelegate_virtualbase_paint(const void* self, QPainter* painter, QStyleOptionViewItem* option, QModelIndex* index);
 bool QAbstractItemDelegate_override_virtual_sizeHint(void* self, intptr_t slot);
@@ -118,6 +125,7 @@ QObject* QAbstractItemDelegate_protectedbase_sender(bool* _dynamic_cast_ok, cons
 int QAbstractItemDelegate_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
 int QAbstractItemDelegate_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
 bool QAbstractItemDelegate_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+const QMetaObject* QAbstractItemDelegate_staticMetaObject();
 void QAbstractItemDelegate_delete(QAbstractItemDelegate* self);
 
 #ifdef __cplusplus

@@ -50,6 +50,7 @@ type cQMetaDataWriterControl*{.exportc: "QMetaDataWriterControl", incompleteStru
 
 proc fcQMetaDataWriterControl_metaObject(self: pointer, ): pointer {.importc: "QMetaDataWriterControl_metaObject".}
 proc fcQMetaDataWriterControl_metacast(self: pointer, param1: cstring): pointer {.importc: "QMetaDataWriterControl_metacast".}
+proc fcQMetaDataWriterControl_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QMetaDataWriterControl_metacall".}
 proc fcQMetaDataWriterControl_tr(s: cstring): struct_miqt_string {.importc: "QMetaDataWriterControl_tr".}
 proc fcQMetaDataWriterControl_trUtf8(s: cstring): struct_miqt_string {.importc: "QMetaDataWriterControl_trUtf8".}
 proc fcQMetaDataWriterControl_isWritable(self: pointer, ): bool {.importc: "QMetaDataWriterControl_isWritable".}
@@ -69,6 +70,7 @@ proc fcQMetaDataWriterControl_tr2(s: cstring, c: cstring): struct_miqt_string {.
 proc fcQMetaDataWriterControl_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QMetaDataWriterControl_tr3".}
 proc fcQMetaDataWriterControl_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QMetaDataWriterControl_trUtf82".}
 proc fcQMetaDataWriterControl_trUtf83(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QMetaDataWriterControl_trUtf83".}
+proc fcQMetaDataWriterControl_staticMetaObject(): pointer {.importc: "QMetaDataWriterControl_staticMetaObject".}
 proc fcQMetaDataWriterControl_delete(self: pointer) {.importc: "QMetaDataWriterControl_delete".}
 
 
@@ -79,6 +81,9 @@ proc metaObject*(self: gen_qmetadatawritercontrol_types.QMetaDataWriterControl, 
 
 proc metacast*(self: gen_qmetadatawritercontrol_types.QMetaDataWriterControl, param1: cstring): pointer =
   fcQMetaDataWriterControl_metacast(self.h, param1)
+
+proc metacall*(self: gen_qmetadatawritercontrol_types.QMetaDataWriterControl, param1: cint, param2: cint, param3: pointer): cint =
+  fcQMetaDataWriterControl_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qmetadatawritercontrol_types.QMetaDataWriterControl, s: cstring): string =
   let v_ms = fcQMetaDataWriterControl_tr(s)
@@ -206,5 +211,7 @@ proc trUtf8*(_: type gen_qmetadatawritercontrol_types.QMetaDataWriterControl, s:
   c_free(v_ms.data)
   vx_ret
 
+proc staticMetaObject*(_: type gen_qmetadatawritercontrol_types.QMetaDataWriterControl): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fcQMetaDataWriterControl_staticMetaObject())
 proc delete*(self: gen_qmetadatawritercontrol_types.QMetaDataWriterControl) =
   fcQMetaDataWriterControl_delete(self.h)

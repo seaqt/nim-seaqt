@@ -88,6 +88,7 @@ QDesktopWidget* QDesktopWidget_new();
 void QDesktopWidget_virtbase(QDesktopWidget* src, QWidget** outptr_QWidget);
 QMetaObject* QDesktopWidget_metaObject(const QDesktopWidget* self);
 void* QDesktopWidget_metacast(QDesktopWidget* self, const char* param1);
+int QDesktopWidget_metacall(QDesktopWidget* self, int param1, int param2, void** param3);
 struct miqt_string QDesktopWidget_tr(const char* s);
 struct miqt_string QDesktopWidget_trUtf8(const char* s);
 int QDesktopWidget_screenNumber(const QDesktopWidget* self);
@@ -120,6 +121,12 @@ int QDesktopWidget_screenNumber1(const QDesktopWidget* self, QWidget* widget);
 QWidget* QDesktopWidget_screen1(QDesktopWidget* self, int screen);
 QRect* QDesktopWidget_screenGeometry1(const QDesktopWidget* self, int screen);
 QRect* QDesktopWidget_availableGeometry1(const QDesktopWidget* self, int screen);
+bool QDesktopWidget_override_virtual_metaObject(void* self, intptr_t slot);
+QMetaObject* QDesktopWidget_virtualbase_metaObject(const void* self);
+bool QDesktopWidget_override_virtual_metacast(void* self, intptr_t slot);
+void* QDesktopWidget_virtualbase_metacast(void* self, const char* param1);
+bool QDesktopWidget_override_virtual_metacall(void* self, intptr_t slot);
+int QDesktopWidget_virtualbase_metacall(void* self, int param1, int param2, void** param3);
 bool QDesktopWidget_override_virtual_resizeEvent(void* self, intptr_t slot);
 void QDesktopWidget_virtualbase_resizeEvent(void* self, QResizeEvent* e);
 bool QDesktopWidget_override_virtual_devType(void* self, intptr_t slot);
@@ -223,6 +230,7 @@ QObject* QDesktopWidget_protectedbase_sender(bool* _dynamic_cast_ok, const void*
 int QDesktopWidget_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
 int QDesktopWidget_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
 bool QDesktopWidget_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+const QMetaObject* QDesktopWidget_staticMetaObject();
 void QDesktopWidget_delete(QDesktopWidget* self);
 
 #ifdef __cplusplus

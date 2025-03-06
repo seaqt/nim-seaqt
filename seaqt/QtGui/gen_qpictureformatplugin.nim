@@ -56,6 +56,7 @@ proc fcQPictureFormatPlugin_new(): ptr cQPictureFormatPlugin {.importc: "QPictur
 proc fcQPictureFormatPlugin_new2(parent: pointer): ptr cQPictureFormatPlugin {.importc: "QPictureFormatPlugin_new2".}
 proc fcQPictureFormatPlugin_metaObject(self: pointer, ): pointer {.importc: "QPictureFormatPlugin_metaObject".}
 proc fcQPictureFormatPlugin_metacast(self: pointer, param1: cstring): pointer {.importc: "QPictureFormatPlugin_metacast".}
+proc fcQPictureFormatPlugin_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QPictureFormatPlugin_metacall".}
 proc fcQPictureFormatPlugin_tr(s: cstring): struct_miqt_string {.importc: "QPictureFormatPlugin_tr".}
 proc fcQPictureFormatPlugin_trUtf8(s: cstring): struct_miqt_string {.importc: "QPictureFormatPlugin_trUtf8".}
 proc fcQPictureFormatPlugin_loadPicture(self: pointer, format: struct_miqt_string, filename: struct_miqt_string, pic: pointer): bool {.importc: "QPictureFormatPlugin_loadPicture".}
@@ -65,6 +66,12 @@ proc fcQPictureFormatPlugin_tr2(s: cstring, c: cstring): struct_miqt_string {.im
 proc fcQPictureFormatPlugin_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QPictureFormatPlugin_tr3".}
 proc fcQPictureFormatPlugin_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QPictureFormatPlugin_trUtf82".}
 proc fcQPictureFormatPlugin_trUtf83(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QPictureFormatPlugin_trUtf83".}
+proc fQPictureFormatPlugin_virtualbase_metaObject(self: pointer, ): pointer{.importc: "QPictureFormatPlugin_virtualbase_metaObject".}
+proc fcQPictureFormatPlugin_override_virtual_metaObject(self: pointer, slot: int) {.importc: "QPictureFormatPlugin_override_virtual_metaObject".}
+proc fQPictureFormatPlugin_virtualbase_metacast(self: pointer, param1: cstring): pointer{.importc: "QPictureFormatPlugin_virtualbase_metacast".}
+proc fcQPictureFormatPlugin_override_virtual_metacast(self: pointer, slot: int) {.importc: "QPictureFormatPlugin_override_virtual_metacast".}
+proc fQPictureFormatPlugin_virtualbase_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint{.importc: "QPictureFormatPlugin_virtualbase_metacall".}
+proc fcQPictureFormatPlugin_override_virtual_metacall(self: pointer, slot: int) {.importc: "QPictureFormatPlugin_override_virtual_metacall".}
 proc fQPictureFormatPlugin_virtualbase_loadPicture(self: pointer, format: struct_miqt_string, filename: struct_miqt_string, pic: pointer): bool{.importc: "QPictureFormatPlugin_virtualbase_loadPicture".}
 proc fcQPictureFormatPlugin_override_virtual_loadPicture(self: pointer, slot: int) {.importc: "QPictureFormatPlugin_override_virtual_loadPicture".}
 proc fQPictureFormatPlugin_virtualbase_savePicture(self: pointer, format: struct_miqt_string, filename: struct_miqt_string, pic: pointer): bool{.importc: "QPictureFormatPlugin_virtualbase_savePicture".}
@@ -84,6 +91,7 @@ proc fQPictureFormatPlugin_virtualbase_connectNotify(self: pointer, signal: poin
 proc fcQPictureFormatPlugin_override_virtual_connectNotify(self: pointer, slot: int) {.importc: "QPictureFormatPlugin_override_virtual_connectNotify".}
 proc fQPictureFormatPlugin_virtualbase_disconnectNotify(self: pointer, signal: pointer): void{.importc: "QPictureFormatPlugin_virtualbase_disconnectNotify".}
 proc fcQPictureFormatPlugin_override_virtual_disconnectNotify(self: pointer, slot: int) {.importc: "QPictureFormatPlugin_override_virtual_disconnectNotify".}
+proc fcQPictureFormatPlugin_staticMetaObject(): pointer {.importc: "QPictureFormatPlugin_staticMetaObject".}
 proc fcQPictureFormatPlugin_delete(self: pointer) {.importc: "QPictureFormatPlugin_delete".}
 
 
@@ -100,6 +108,9 @@ proc metaObject*(self: gen_qpictureformatplugin_types.QPictureFormatPlugin, ): g
 
 proc metacast*(self: gen_qpictureformatplugin_types.QPictureFormatPlugin, param1: cstring): pointer =
   fcQPictureFormatPlugin_metacast(self.h, param1)
+
+proc metacall*(self: gen_qpictureformatplugin_types.QPictureFormatPlugin, param1: cint, param2: cint, param3: pointer): cint =
+  fcQPictureFormatPlugin_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qpictureformatplugin_types.QPictureFormatPlugin, s: cstring): string =
   let v_ms = fcQPictureFormatPlugin_tr(s)
@@ -146,6 +157,65 @@ proc trUtf8*(_: type gen_qpictureformatplugin_types.QPictureFormatPlugin, s: cst
   c_free(v_ms.data)
   vx_ret
 
+proc QPictureFormatPluginmetaObject*(self: gen_qpictureformatplugin_types.QPictureFormatPlugin, ): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fQPictureFormatPlugin_virtualbase_metaObject(self.h))
+
+type QPictureFormatPluginmetaObjectProc* = proc(): gen_qobjectdefs_types.QMetaObject
+proc onmetaObject*(self: gen_qpictureformatplugin_types.QPictureFormatPlugin, slot: QPictureFormatPluginmetaObjectProc) =
+  # TODO check subclass
+  var tmp = new QPictureFormatPluginmetaObjectProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQPictureFormatPlugin_override_virtual_metaObject(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QPictureFormatPlugin_metaObject(self: ptr cQPictureFormatPlugin, slot: int): pointer {.exportc: "miqt_exec_callback_QPictureFormatPlugin_metaObject ".} =
+  var nimfunc = cast[ptr QPictureFormatPluginmetaObjectProc](cast[pointer](slot))
+
+  let virtualReturn = nimfunc[]( )
+
+  virtualReturn.h
+proc QPictureFormatPluginmetacast*(self: gen_qpictureformatplugin_types.QPictureFormatPlugin, param1: cstring): pointer =
+  fQPictureFormatPlugin_virtualbase_metacast(self.h, param1)
+
+type QPictureFormatPluginmetacastProc* = proc(param1: cstring): pointer
+proc onmetacast*(self: gen_qpictureformatplugin_types.QPictureFormatPlugin, slot: QPictureFormatPluginmetacastProc) =
+  # TODO check subclass
+  var tmp = new QPictureFormatPluginmetacastProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQPictureFormatPlugin_override_virtual_metacast(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QPictureFormatPlugin_metacast(self: ptr cQPictureFormatPlugin, slot: int, param1: cstring): pointer {.exportc: "miqt_exec_callback_QPictureFormatPlugin_metacast ".} =
+  var nimfunc = cast[ptr QPictureFormatPluginmetacastProc](cast[pointer](slot))
+  let slotval1 = (param1)
+
+
+  let virtualReturn = nimfunc[](slotval1 )
+
+  virtualReturn
+proc QPictureFormatPluginmetacall*(self: gen_qpictureformatplugin_types.QPictureFormatPlugin, param1: cint, param2: cint, param3: pointer): cint =
+  fQPictureFormatPlugin_virtualbase_metacall(self.h, cint(param1), param2, param3)
+
+type QPictureFormatPluginmetacallProc* = proc(param1: cint, param2: cint, param3: pointer): cint
+proc onmetacall*(self: gen_qpictureformatplugin_types.QPictureFormatPlugin, slot: QPictureFormatPluginmetacallProc) =
+  # TODO check subclass
+  var tmp = new QPictureFormatPluginmetacallProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQPictureFormatPlugin_override_virtual_metacall(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QPictureFormatPlugin_metacall(self: ptr cQPictureFormatPlugin, slot: int, param1: cint, param2: cint, param3: pointer): cint {.exportc: "miqt_exec_callback_QPictureFormatPlugin_metacall ".} =
+  var nimfunc = cast[ptr QPictureFormatPluginmetacallProc](cast[pointer](slot))
+  let slotval1 = cint(param1)
+
+  let slotval2 = param2
+
+  let slotval3 = param3
+
+
+  let virtualReturn = nimfunc[](slotval1, slotval2, slotval3 )
+
+  virtualReturn
 proc QPictureFormatPluginloadPicture*(self: gen_qpictureformatplugin_types.QPictureFormatPlugin, format: string, filename: string, pic: gen_qpicture_types.QPicture): bool =
   fQPictureFormatPlugin_virtualbase_loadPicture(self.h, struct_miqt_string(data: format, len: csize_t(len(format))), struct_miqt_string(data: filename, len: csize_t(len(filename))), pic.h)
 
@@ -348,5 +418,7 @@ proc miqt_exec_callback_QPictureFormatPlugin_disconnectNotify(self: ptr cQPictur
 
 
   nimfunc[](slotval1)
+proc staticMetaObject*(_: type gen_qpictureformatplugin_types.QPictureFormatPlugin): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fcQPictureFormatPlugin_staticMetaObject())
 proc delete*(self: gen_qpictureformatplugin_types.QPictureFormatPlugin) =
   fcQPictureFormatPlugin_delete(self.h)

@@ -93,6 +93,7 @@ QFontComboBox* QFontComboBox_new2();
 void QFontComboBox_virtbase(QFontComboBox* src, QComboBox** outptr_QComboBox);
 QMetaObject* QFontComboBox_metaObject(const QFontComboBox* self);
 void* QFontComboBox_metacast(QFontComboBox* self, const char* param1);
+int QFontComboBox_metacall(QFontComboBox* self, int param1, int param2, void** param3);
 struct miqt_string QFontComboBox_tr(const char* s);
 struct miqt_string QFontComboBox_trUtf8(const char* s);
 void QFontComboBox_setWritingSystem(QFontComboBox* self, int writingSystem);
@@ -109,6 +110,12 @@ struct miqt_string QFontComboBox_tr2(const char* s, const char* c);
 struct miqt_string QFontComboBox_tr3(const char* s, const char* c, int n);
 struct miqt_string QFontComboBox_trUtf82(const char* s, const char* c);
 struct miqt_string QFontComboBox_trUtf83(const char* s, const char* c, int n);
+bool QFontComboBox_override_virtual_metaObject(void* self, intptr_t slot);
+QMetaObject* QFontComboBox_virtualbase_metaObject(const void* self);
+bool QFontComboBox_override_virtual_metacast(void* self, intptr_t slot);
+void* QFontComboBox_virtualbase_metacast(void* self, const char* param1);
+bool QFontComboBox_override_virtual_metacall(void* self, intptr_t slot);
+int QFontComboBox_virtualbase_metacall(void* self, int param1, int param2, void** param3);
 bool QFontComboBox_override_virtual_sizeHint(void* self, intptr_t slot);
 QSize* QFontComboBox_virtualbase_sizeHint(const void* self);
 bool QFontComboBox_override_virtual_event(void* self, intptr_t slot);
@@ -217,6 +224,7 @@ QObject* QFontComboBox_protectedbase_sender(bool* _dynamic_cast_ok, const void* 
 int QFontComboBox_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
 int QFontComboBox_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
 bool QFontComboBox_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+const QMetaObject* QFontComboBox_staticMetaObject();
 void QFontComboBox_delete(QFontComboBox* self);
 
 #ifdef __cplusplus

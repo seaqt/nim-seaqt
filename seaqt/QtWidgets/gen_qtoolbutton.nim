@@ -82,6 +82,7 @@ proc fcQToolButton_new(parent: pointer): ptr cQToolButton {.importc: "QToolButto
 proc fcQToolButton_new2(): ptr cQToolButton {.importc: "QToolButton_new2".}
 proc fcQToolButton_metaObject(self: pointer, ): pointer {.importc: "QToolButton_metaObject".}
 proc fcQToolButton_metacast(self: pointer, param1: cstring): pointer {.importc: "QToolButton_metacast".}
+proc fcQToolButton_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QToolButton_metacall".}
 proc fcQToolButton_tr(s: cstring): struct_miqt_string {.importc: "QToolButton_tr".}
 proc fcQToolButton_trUtf8(s: cstring): struct_miqt_string {.importc: "QToolButton_trUtf8".}
 proc fcQToolButton_sizeHint(self: pointer, ): pointer {.importc: "QToolButton_sizeHint".}
@@ -105,6 +106,12 @@ proc fcQToolButton_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "Q
 proc fcQToolButton_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QToolButton_tr3".}
 proc fcQToolButton_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QToolButton_trUtf82".}
 proc fcQToolButton_trUtf83(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QToolButton_trUtf83".}
+proc fQToolButton_virtualbase_metaObject(self: pointer, ): pointer{.importc: "QToolButton_virtualbase_metaObject".}
+proc fcQToolButton_override_virtual_metaObject(self: pointer, slot: int) {.importc: "QToolButton_override_virtual_metaObject".}
+proc fQToolButton_virtualbase_metacast(self: pointer, param1: cstring): pointer{.importc: "QToolButton_virtualbase_metacast".}
+proc fcQToolButton_override_virtual_metacast(self: pointer, slot: int) {.importc: "QToolButton_override_virtual_metacast".}
+proc fQToolButton_virtualbase_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint{.importc: "QToolButton_virtualbase_metacall".}
+proc fcQToolButton_override_virtual_metacall(self: pointer, slot: int) {.importc: "QToolButton_override_virtual_metacall".}
 proc fQToolButton_virtualbase_sizeHint(self: pointer, ): pointer{.importc: "QToolButton_virtualbase_sizeHint".}
 proc fcQToolButton_override_virtual_sizeHint(self: pointer, slot: int) {.importc: "QToolButton_override_virtual_sizeHint".}
 proc fQToolButton_virtualbase_minimumSizeHint(self: pointer, ): pointer{.importc: "QToolButton_virtualbase_minimumSizeHint".}
@@ -205,6 +212,7 @@ proc fQToolButton_virtualbase_connectNotify(self: pointer, signal: pointer): voi
 proc fcQToolButton_override_virtual_connectNotify(self: pointer, slot: int) {.importc: "QToolButton_override_virtual_connectNotify".}
 proc fQToolButton_virtualbase_disconnectNotify(self: pointer, signal: pointer): void{.importc: "QToolButton_virtualbase_disconnectNotify".}
 proc fcQToolButton_override_virtual_disconnectNotify(self: pointer, slot: int) {.importc: "QToolButton_override_virtual_disconnectNotify".}
+proc fcQToolButton_staticMetaObject(): pointer {.importc: "QToolButton_staticMetaObject".}
 proc fcQToolButton_delete(self: pointer) {.importc: "QToolButton_delete".}
 
 
@@ -221,6 +229,9 @@ proc metaObject*(self: gen_qtoolbutton_types.QToolButton, ): gen_qobjectdefs_typ
 
 proc metacast*(self: gen_qtoolbutton_types.QToolButton, param1: cstring): pointer =
   fcQToolButton_metacast(self.h, param1)
+
+proc metacall*(self: gen_qtoolbutton_types.QToolButton, param1: cint, param2: cint, param3: pointer): cint =
+  fcQToolButton_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qtoolbutton_types.QToolButton, s: cstring): string =
   let v_ms = fcQToolButton_tr(s)
@@ -319,6 +330,65 @@ proc trUtf8*(_: type gen_qtoolbutton_types.QToolButton, s: cstring, c: cstring, 
   c_free(v_ms.data)
   vx_ret
 
+proc QToolButtonmetaObject*(self: gen_qtoolbutton_types.QToolButton, ): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fQToolButton_virtualbase_metaObject(self.h))
+
+type QToolButtonmetaObjectProc* = proc(): gen_qobjectdefs_types.QMetaObject
+proc onmetaObject*(self: gen_qtoolbutton_types.QToolButton, slot: QToolButtonmetaObjectProc) =
+  # TODO check subclass
+  var tmp = new QToolButtonmetaObjectProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQToolButton_override_virtual_metaObject(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QToolButton_metaObject(self: ptr cQToolButton, slot: int): pointer {.exportc: "miqt_exec_callback_QToolButton_metaObject ".} =
+  var nimfunc = cast[ptr QToolButtonmetaObjectProc](cast[pointer](slot))
+
+  let virtualReturn = nimfunc[]( )
+
+  virtualReturn.h
+proc QToolButtonmetacast*(self: gen_qtoolbutton_types.QToolButton, param1: cstring): pointer =
+  fQToolButton_virtualbase_metacast(self.h, param1)
+
+type QToolButtonmetacastProc* = proc(param1: cstring): pointer
+proc onmetacast*(self: gen_qtoolbutton_types.QToolButton, slot: QToolButtonmetacastProc) =
+  # TODO check subclass
+  var tmp = new QToolButtonmetacastProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQToolButton_override_virtual_metacast(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QToolButton_metacast(self: ptr cQToolButton, slot: int, param1: cstring): pointer {.exportc: "miqt_exec_callback_QToolButton_metacast ".} =
+  var nimfunc = cast[ptr QToolButtonmetacastProc](cast[pointer](slot))
+  let slotval1 = (param1)
+
+
+  let virtualReturn = nimfunc[](slotval1 )
+
+  virtualReturn
+proc QToolButtonmetacall*(self: gen_qtoolbutton_types.QToolButton, param1: cint, param2: cint, param3: pointer): cint =
+  fQToolButton_virtualbase_metacall(self.h, cint(param1), param2, param3)
+
+type QToolButtonmetacallProc* = proc(param1: cint, param2: cint, param3: pointer): cint
+proc onmetacall*(self: gen_qtoolbutton_types.QToolButton, slot: QToolButtonmetacallProc) =
+  # TODO check subclass
+  var tmp = new QToolButtonmetacallProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQToolButton_override_virtual_metacall(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QToolButton_metacall(self: ptr cQToolButton, slot: int, param1: cint, param2: cint, param3: pointer): cint {.exportc: "miqt_exec_callback_QToolButton_metacall ".} =
+  var nimfunc = cast[ptr QToolButtonmetacallProc](cast[pointer](slot))
+  let slotval1 = cint(param1)
+
+  let slotval2 = param2
+
+  let slotval3 = param3
+
+
+  let virtualReturn = nimfunc[](slotval1, slotval2, slotval3 )
+
+  virtualReturn
 proc QToolButtonsizeHint*(self: gen_qtoolbutton_types.QToolButton, ): gen_qsize_types.QSize =
   gen_qsize_types.QSize(h: fQToolButton_virtualbase_sizeHint(self.h))
 
@@ -1192,5 +1262,7 @@ proc miqt_exec_callback_QToolButton_disconnectNotify(self: ptr cQToolButton, slo
 
 
   nimfunc[](slotval1)
+proc staticMetaObject*(_: type gen_qtoolbutton_types.QToolButton): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fcQToolButton_staticMetaObject())
 proc delete*(self: gen_qtoolbutton_types.QToolButton) =
   fcQToolButton_delete(self.h)

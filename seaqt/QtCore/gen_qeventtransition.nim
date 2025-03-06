@@ -60,6 +60,7 @@ proc fcQEventTransition_new3(sourceState: pointer): ptr cQEventTransition {.impo
 proc fcQEventTransition_new4(objectVal: pointer, typeVal: cint, sourceState: pointer): ptr cQEventTransition {.importc: "QEventTransition_new4".}
 proc fcQEventTransition_metaObject(self: pointer, ): pointer {.importc: "QEventTransition_metaObject".}
 proc fcQEventTransition_metacast(self: pointer, param1: cstring): pointer {.importc: "QEventTransition_metacast".}
+proc fcQEventTransition_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QEventTransition_metacall".}
 proc fcQEventTransition_tr(s: cstring): struct_miqt_string {.importc: "QEventTransition_tr".}
 proc fcQEventTransition_trUtf8(s: cstring): struct_miqt_string {.importc: "QEventTransition_trUtf8".}
 proc fcQEventTransition_eventSource(self: pointer, ): pointer {.importc: "QEventTransition_eventSource".}
@@ -70,6 +71,12 @@ proc fcQEventTransition_tr2(s: cstring, c: cstring): struct_miqt_string {.import
 proc fcQEventTransition_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QEventTransition_tr3".}
 proc fcQEventTransition_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QEventTransition_trUtf82".}
 proc fcQEventTransition_trUtf83(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QEventTransition_trUtf83".}
+proc fQEventTransition_virtualbase_metaObject(self: pointer, ): pointer{.importc: "QEventTransition_virtualbase_metaObject".}
+proc fcQEventTransition_override_virtual_metaObject(self: pointer, slot: int) {.importc: "QEventTransition_override_virtual_metaObject".}
+proc fQEventTransition_virtualbase_metacast(self: pointer, param1: cstring): pointer{.importc: "QEventTransition_virtualbase_metacast".}
+proc fcQEventTransition_override_virtual_metacast(self: pointer, slot: int) {.importc: "QEventTransition_override_virtual_metacast".}
+proc fQEventTransition_virtualbase_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint{.importc: "QEventTransition_virtualbase_metacall".}
+proc fcQEventTransition_override_virtual_metacall(self: pointer, slot: int) {.importc: "QEventTransition_override_virtual_metacall".}
 proc fQEventTransition_virtualbase_eventTest(self: pointer, event: pointer): bool{.importc: "QEventTransition_virtualbase_eventTest".}
 proc fcQEventTransition_override_virtual_eventTest(self: pointer, slot: int) {.importc: "QEventTransition_override_virtual_eventTest".}
 proc fQEventTransition_virtualbase_onTransition(self: pointer, event: pointer): void{.importc: "QEventTransition_virtualbase_onTransition".}
@@ -88,6 +95,7 @@ proc fQEventTransition_virtualbase_connectNotify(self: pointer, signal: pointer)
 proc fcQEventTransition_override_virtual_connectNotify(self: pointer, slot: int) {.importc: "QEventTransition_override_virtual_connectNotify".}
 proc fQEventTransition_virtualbase_disconnectNotify(self: pointer, signal: pointer): void{.importc: "QEventTransition_virtualbase_disconnectNotify".}
 proc fcQEventTransition_override_virtual_disconnectNotify(self: pointer, slot: int) {.importc: "QEventTransition_override_virtual_disconnectNotify".}
+proc fcQEventTransition_staticMetaObject(): pointer {.importc: "QEventTransition_staticMetaObject".}
 proc fcQEventTransition_delete(self: pointer) {.importc: "QEventTransition_delete".}
 
 
@@ -110,6 +118,9 @@ proc metaObject*(self: gen_qeventtransition_types.QEventTransition, ): gen_qobje
 
 proc metacast*(self: gen_qeventtransition_types.QEventTransition, param1: cstring): pointer =
   fcQEventTransition_metacast(self.h, param1)
+
+proc metacall*(self: gen_qeventtransition_types.QEventTransition, param1: cint, param2: cint, param3: pointer): cint =
+  fcQEventTransition_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qeventtransition_types.QEventTransition, s: cstring): string =
   let v_ms = fcQEventTransition_tr(s)
@@ -159,6 +170,65 @@ proc trUtf8*(_: type gen_qeventtransition_types.QEventTransition, s: cstring, c:
   c_free(v_ms.data)
   vx_ret
 
+proc QEventTransitionmetaObject*(self: gen_qeventtransition_types.QEventTransition, ): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fQEventTransition_virtualbase_metaObject(self.h))
+
+type QEventTransitionmetaObjectProc* = proc(): gen_qobjectdefs_types.QMetaObject
+proc onmetaObject*(self: gen_qeventtransition_types.QEventTransition, slot: QEventTransitionmetaObjectProc) =
+  # TODO check subclass
+  var tmp = new QEventTransitionmetaObjectProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQEventTransition_override_virtual_metaObject(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QEventTransition_metaObject(self: ptr cQEventTransition, slot: int): pointer {.exportc: "miqt_exec_callback_QEventTransition_metaObject ".} =
+  var nimfunc = cast[ptr QEventTransitionmetaObjectProc](cast[pointer](slot))
+
+  let virtualReturn = nimfunc[]( )
+
+  virtualReturn.h
+proc QEventTransitionmetacast*(self: gen_qeventtransition_types.QEventTransition, param1: cstring): pointer =
+  fQEventTransition_virtualbase_metacast(self.h, param1)
+
+type QEventTransitionmetacastProc* = proc(param1: cstring): pointer
+proc onmetacast*(self: gen_qeventtransition_types.QEventTransition, slot: QEventTransitionmetacastProc) =
+  # TODO check subclass
+  var tmp = new QEventTransitionmetacastProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQEventTransition_override_virtual_metacast(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QEventTransition_metacast(self: ptr cQEventTransition, slot: int, param1: cstring): pointer {.exportc: "miqt_exec_callback_QEventTransition_metacast ".} =
+  var nimfunc = cast[ptr QEventTransitionmetacastProc](cast[pointer](slot))
+  let slotval1 = (param1)
+
+
+  let virtualReturn = nimfunc[](slotval1 )
+
+  virtualReturn
+proc QEventTransitionmetacall*(self: gen_qeventtransition_types.QEventTransition, param1: cint, param2: cint, param3: pointer): cint =
+  fQEventTransition_virtualbase_metacall(self.h, cint(param1), param2, param3)
+
+type QEventTransitionmetacallProc* = proc(param1: cint, param2: cint, param3: pointer): cint
+proc onmetacall*(self: gen_qeventtransition_types.QEventTransition, slot: QEventTransitionmetacallProc) =
+  # TODO check subclass
+  var tmp = new QEventTransitionmetacallProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQEventTransition_override_virtual_metacall(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QEventTransition_metacall(self: ptr cQEventTransition, slot: int, param1: cint, param2: cint, param3: pointer): cint {.exportc: "miqt_exec_callback_QEventTransition_metacall ".} =
+  var nimfunc = cast[ptr QEventTransitionmetacallProc](cast[pointer](slot))
+  let slotval1 = cint(param1)
+
+  let slotval2 = param2
+
+  let slotval3 = param3
+
+
+  let virtualReturn = nimfunc[](slotval1, slotval2, slotval3 )
+
+  virtualReturn
 proc QEventTransitioneventTest*(self: gen_qeventtransition_types.QEventTransition, event: gen_qcoreevent_types.QEvent): bool =
   fQEventTransition_virtualbase_eventTest(self.h, event.h)
 
@@ -320,5 +390,7 @@ proc miqt_exec_callback_QEventTransition_disconnectNotify(self: ptr cQEventTrans
 
 
   nimfunc[](slotval1)
+proc staticMetaObject*(_: type gen_qeventtransition_types.QEventTransition): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fcQEventTransition_staticMetaObject())
 proc delete*(self: gen_qeventtransition_types.QEventTransition) =
   fcQEventTransition_delete(self.h)

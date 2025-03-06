@@ -406,6 +406,7 @@ QGraphicsObject* QGraphicsObject_new2(QGraphicsItem* parent);
 void QGraphicsObject_virtbase(QGraphicsObject* src, QObject** outptr_QObject, QGraphicsItem** outptr_QGraphicsItem);
 QMetaObject* QGraphicsObject_metaObject(const QGraphicsObject* self);
 void* QGraphicsObject_metacast(QGraphicsObject* self, const char* param1);
+int QGraphicsObject_metacall(QGraphicsObject* self, int param1, int param2, void** param3);
 struct miqt_string QGraphicsObject_tr(const char* s);
 struct miqt_string QGraphicsObject_trUtf8(const char* s);
 void QGraphicsObject_grabGesture(QGraphicsObject* self, int type);
@@ -440,6 +441,12 @@ struct miqt_string QGraphicsObject_tr3(const char* s, const char* c, int n);
 struct miqt_string QGraphicsObject_trUtf82(const char* s, const char* c);
 struct miqt_string QGraphicsObject_trUtf83(const char* s, const char* c, int n);
 void QGraphicsObject_grabGesture2(QGraphicsObject* self, int type, int flags);
+bool QGraphicsObject_override_virtual_metaObject(void* self, intptr_t slot);
+QMetaObject* QGraphicsObject_virtualbase_metaObject(const void* self);
+bool QGraphicsObject_override_virtual_metacast(void* self, intptr_t slot);
+void* QGraphicsObject_virtualbase_metacast(void* self, const char* param1);
+bool QGraphicsObject_override_virtual_metacall(void* self, intptr_t slot);
+int QGraphicsObject_virtualbase_metacall(void* self, int param1, int param2, void** param3);
 bool QGraphicsObject_override_virtual_event(void* self, intptr_t slot);
 bool QGraphicsObject_virtualbase_event(void* self, QEvent* ev);
 bool QGraphicsObject_override_virtual_eventFilter(void* self, intptr_t slot);
@@ -532,6 +539,7 @@ bool QGraphicsObject_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, con
 void QGraphicsObject_protectedbase_addToIndex(bool* _dynamic_cast_ok, void* self);
 void QGraphicsObject_protectedbase_removeFromIndex(bool* _dynamic_cast_ok, void* self);
 void QGraphicsObject_protectedbase_prepareGeometryChange(bool* _dynamic_cast_ok, void* self);
+const QMetaObject* QGraphicsObject_staticMetaObject();
 void QGraphicsObject_delete(QGraphicsObject* self);
 
 QAbstractGraphicsShapeItem* QAbstractGraphicsShapeItem_new();
@@ -1204,6 +1212,7 @@ QGraphicsTextItem* QGraphicsTextItem_new4(struct miqt_string text, QGraphicsItem
 void QGraphicsTextItem_virtbase(QGraphicsTextItem* src, QGraphicsObject** outptr_QGraphicsObject);
 QMetaObject* QGraphicsTextItem_metaObject(const QGraphicsTextItem* self);
 void* QGraphicsTextItem_metacast(QGraphicsTextItem* self, const char* param1);
+int QGraphicsTextItem_metacall(QGraphicsTextItem* self, int param1, int param2, void** param3);
 struct miqt_string QGraphicsTextItem_tr(const char* s);
 struct miqt_string QGraphicsTextItem_trUtf8(const char* s);
 struct miqt_string QGraphicsTextItem_toHtml(const QGraphicsTextItem* self);
@@ -1264,6 +1273,12 @@ struct miqt_string QGraphicsTextItem_tr2(const char* s, const char* c);
 struct miqt_string QGraphicsTextItem_tr3(const char* s, const char* c, int n);
 struct miqt_string QGraphicsTextItem_trUtf82(const char* s, const char* c);
 struct miqt_string QGraphicsTextItem_trUtf83(const char* s, const char* c, int n);
+bool QGraphicsTextItem_override_virtual_metaObject(void* self, intptr_t slot);
+QMetaObject* QGraphicsTextItem_virtualbase_metaObject(const void* self);
+bool QGraphicsTextItem_override_virtual_metacast(void* self, intptr_t slot);
+void* QGraphicsTextItem_virtualbase_metacast(void* self, const char* param1);
+bool QGraphicsTextItem_override_virtual_metacall(void* self, intptr_t slot);
+int QGraphicsTextItem_virtualbase_metacall(void* self, int param1, int param2, void** param3);
 bool QGraphicsTextItem_override_virtual_boundingRect(void* self, intptr_t slot);
 QRectF* QGraphicsTextItem_virtualbase_boundingRect(const void* self);
 bool QGraphicsTextItem_override_virtual_shape(void* self, intptr_t slot);
@@ -1356,6 +1371,7 @@ bool QGraphicsTextItem_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, c
 void QGraphicsTextItem_protectedbase_addToIndex(bool* _dynamic_cast_ok, void* self);
 void QGraphicsTextItem_protectedbase_removeFromIndex(bool* _dynamic_cast_ok, void* self);
 void QGraphicsTextItem_protectedbase_prepareGeometryChange(bool* _dynamic_cast_ok, void* self);
+const QMetaObject* QGraphicsTextItem_staticMetaObject();
 void QGraphicsTextItem_delete(QGraphicsTextItem* self);
 
 QGraphicsSimpleTextItem* QGraphicsSimpleTextItem_new();

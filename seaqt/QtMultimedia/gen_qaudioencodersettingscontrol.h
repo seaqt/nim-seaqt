@@ -33,6 +33,7 @@ typedef struct QObject QObject;
 void QAudioEncoderSettingsControl_virtbase(QAudioEncoderSettingsControl* src, QMediaControl** outptr_QMediaControl);
 QMetaObject* QAudioEncoderSettingsControl_metaObject(const QAudioEncoderSettingsControl* self);
 void* QAudioEncoderSettingsControl_metacast(QAudioEncoderSettingsControl* self, const char* param1);
+int QAudioEncoderSettingsControl_metacall(QAudioEncoderSettingsControl* self, int param1, int param2, void** param3);
 struct miqt_string QAudioEncoderSettingsControl_tr(const char* s);
 struct miqt_string QAudioEncoderSettingsControl_trUtf8(const char* s);
 struct miqt_array /* of struct miqt_string */  QAudioEncoderSettingsControl_supportedAudioCodecs(const QAudioEncoderSettingsControl* self);
@@ -44,6 +45,7 @@ struct miqt_string QAudioEncoderSettingsControl_tr2(const char* s, const char* c
 struct miqt_string QAudioEncoderSettingsControl_tr3(const char* s, const char* c, int n);
 struct miqt_string QAudioEncoderSettingsControl_trUtf82(const char* s, const char* c);
 struct miqt_string QAudioEncoderSettingsControl_trUtf83(const char* s, const char* c, int n);
+const QMetaObject* QAudioEncoderSettingsControl_staticMetaObject();
 void QAudioEncoderSettingsControl_delete(QAudioEncoderSettingsControl* self);
 
 #ifdef __cplusplus

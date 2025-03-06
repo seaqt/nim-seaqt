@@ -58,12 +58,19 @@ proc fcQFinalState_new(): ptr cQFinalState {.importc: "QFinalState_new".}
 proc fcQFinalState_new2(parent: pointer): ptr cQFinalState {.importc: "QFinalState_new2".}
 proc fcQFinalState_metaObject(self: pointer, ): pointer {.importc: "QFinalState_metaObject".}
 proc fcQFinalState_metacast(self: pointer, param1: cstring): pointer {.importc: "QFinalState_metacast".}
+proc fcQFinalState_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QFinalState_metacall".}
 proc fcQFinalState_tr(s: cstring): struct_miqt_string {.importc: "QFinalState_tr".}
 proc fcQFinalState_trUtf8(s: cstring): struct_miqt_string {.importc: "QFinalState_trUtf8".}
 proc fcQFinalState_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QFinalState_tr2".}
 proc fcQFinalState_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QFinalState_tr3".}
 proc fcQFinalState_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QFinalState_trUtf82".}
 proc fcQFinalState_trUtf83(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QFinalState_trUtf83".}
+proc fQFinalState_virtualbase_metaObject(self: pointer, ): pointer{.importc: "QFinalState_virtualbase_metaObject".}
+proc fcQFinalState_override_virtual_metaObject(self: pointer, slot: int) {.importc: "QFinalState_override_virtual_metaObject".}
+proc fQFinalState_virtualbase_metacast(self: pointer, param1: cstring): pointer{.importc: "QFinalState_virtualbase_metacast".}
+proc fcQFinalState_override_virtual_metacast(self: pointer, slot: int) {.importc: "QFinalState_override_virtual_metacast".}
+proc fQFinalState_virtualbase_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint{.importc: "QFinalState_virtualbase_metacall".}
+proc fcQFinalState_override_virtual_metacall(self: pointer, slot: int) {.importc: "QFinalState_override_virtual_metacall".}
 proc fQFinalState_virtualbase_onEntry(self: pointer, event: pointer): void{.importc: "QFinalState_virtualbase_onEntry".}
 proc fcQFinalState_override_virtual_onEntry(self: pointer, slot: int) {.importc: "QFinalState_override_virtual_onEntry".}
 proc fQFinalState_virtualbase_onExit(self: pointer, event: pointer): void{.importc: "QFinalState_virtualbase_onExit".}
@@ -82,6 +89,7 @@ proc fQFinalState_virtualbase_connectNotify(self: pointer, signal: pointer): voi
 proc fcQFinalState_override_virtual_connectNotify(self: pointer, slot: int) {.importc: "QFinalState_override_virtual_connectNotify".}
 proc fQFinalState_virtualbase_disconnectNotify(self: pointer, signal: pointer): void{.importc: "QFinalState_virtualbase_disconnectNotify".}
 proc fcQFinalState_override_virtual_disconnectNotify(self: pointer, slot: int) {.importc: "QFinalState_override_virtual_disconnectNotify".}
+proc fcQFinalState_staticMetaObject(): pointer {.importc: "QFinalState_staticMetaObject".}
 proc fcQFinalState_delete(self: pointer) {.importc: "QFinalState_delete".}
 
 
@@ -98,6 +106,9 @@ proc metaObject*(self: gen_qfinalstate_types.QFinalState, ): gen_qobjectdefs_typ
 
 proc metacast*(self: gen_qfinalstate_types.QFinalState, param1: cstring): pointer =
   fcQFinalState_metacast(self.h, param1)
+
+proc metacall*(self: gen_qfinalstate_types.QFinalState, param1: cint, param2: cint, param3: pointer): cint =
+  fcQFinalState_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qfinalstate_types.QFinalState, s: cstring): string =
   let v_ms = fcQFinalState_tr(s)
@@ -135,6 +146,65 @@ proc trUtf8*(_: type gen_qfinalstate_types.QFinalState, s: cstring, c: cstring, 
   c_free(v_ms.data)
   vx_ret
 
+proc QFinalStatemetaObject*(self: gen_qfinalstate_types.QFinalState, ): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fQFinalState_virtualbase_metaObject(self.h))
+
+type QFinalStatemetaObjectProc* = proc(): gen_qobjectdefs_types.QMetaObject
+proc onmetaObject*(self: gen_qfinalstate_types.QFinalState, slot: QFinalStatemetaObjectProc) =
+  # TODO check subclass
+  var tmp = new QFinalStatemetaObjectProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQFinalState_override_virtual_metaObject(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QFinalState_metaObject(self: ptr cQFinalState, slot: int): pointer {.exportc: "miqt_exec_callback_QFinalState_metaObject ".} =
+  var nimfunc = cast[ptr QFinalStatemetaObjectProc](cast[pointer](slot))
+
+  let virtualReturn = nimfunc[]( )
+
+  virtualReturn.h
+proc QFinalStatemetacast*(self: gen_qfinalstate_types.QFinalState, param1: cstring): pointer =
+  fQFinalState_virtualbase_metacast(self.h, param1)
+
+type QFinalStatemetacastProc* = proc(param1: cstring): pointer
+proc onmetacast*(self: gen_qfinalstate_types.QFinalState, slot: QFinalStatemetacastProc) =
+  # TODO check subclass
+  var tmp = new QFinalStatemetacastProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQFinalState_override_virtual_metacast(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QFinalState_metacast(self: ptr cQFinalState, slot: int, param1: cstring): pointer {.exportc: "miqt_exec_callback_QFinalState_metacast ".} =
+  var nimfunc = cast[ptr QFinalStatemetacastProc](cast[pointer](slot))
+  let slotval1 = (param1)
+
+
+  let virtualReturn = nimfunc[](slotval1 )
+
+  virtualReturn
+proc QFinalStatemetacall*(self: gen_qfinalstate_types.QFinalState, param1: cint, param2: cint, param3: pointer): cint =
+  fQFinalState_virtualbase_metacall(self.h, cint(param1), param2, param3)
+
+type QFinalStatemetacallProc* = proc(param1: cint, param2: cint, param3: pointer): cint
+proc onmetacall*(self: gen_qfinalstate_types.QFinalState, slot: QFinalStatemetacallProc) =
+  # TODO check subclass
+  var tmp = new QFinalStatemetacallProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQFinalState_override_virtual_metacall(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QFinalState_metacall(self: ptr cQFinalState, slot: int, param1: cint, param2: cint, param3: pointer): cint {.exportc: "miqt_exec_callback_QFinalState_metacall ".} =
+  var nimfunc = cast[ptr QFinalStatemetacallProc](cast[pointer](slot))
+  let slotval1 = cint(param1)
+
+  let slotval2 = param2
+
+  let slotval3 = param3
+
+
+  let virtualReturn = nimfunc[](slotval1, slotval2, slotval3 )
+
+  virtualReturn
 proc QFinalStateonEntry*(self: gen_qfinalstate_types.QFinalState, event: gen_qcoreevent_types.QEvent): void =
   fQFinalState_virtualbase_onEntry(self.h, event.h)
 
@@ -294,5 +364,7 @@ proc miqt_exec_callback_QFinalState_disconnectNotify(self: ptr cQFinalState, slo
 
 
   nimfunc[](slotval1)
+proc staticMetaObject*(_: type gen_qfinalstate_types.QFinalState): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fcQFinalState_staticMetaObject())
 proc delete*(self: gen_qfinalstate_types.QFinalState) =
   fcQFinalState_delete(self.h)

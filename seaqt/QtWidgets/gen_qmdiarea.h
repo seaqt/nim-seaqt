@@ -99,6 +99,7 @@ QMdiArea* QMdiArea_new2();
 void QMdiArea_virtbase(QMdiArea* src, QAbstractScrollArea** outptr_QAbstractScrollArea);
 QMetaObject* QMdiArea_metaObject(const QMdiArea* self);
 void* QMdiArea_metacast(QMdiArea* self, const char* param1);
+int QMdiArea_metacall(QMdiArea* self, int param1, int param2, void** param3);
 struct miqt_string QMdiArea_tr(const char* s);
 struct miqt_string QMdiArea_trUtf8(const char* s);
 QSize* QMdiArea_sizeHint(const QMdiArea* self);
@@ -152,6 +153,12 @@ struct miqt_string QMdiArea_trUtf83(const char* s, const char* c, int n);
 struct miqt_array /* of QMdiSubWindow* */  QMdiArea_subWindowList1(const QMdiArea* self, int order);
 QMdiSubWindow* QMdiArea_addSubWindow2(QMdiArea* self, QWidget* widget, int flags);
 void QMdiArea_setOption2(QMdiArea* self, int option, bool on);
+bool QMdiArea_override_virtual_metaObject(void* self, intptr_t slot);
+QMetaObject* QMdiArea_virtualbase_metaObject(const void* self);
+bool QMdiArea_override_virtual_metacast(void* self, intptr_t slot);
+void* QMdiArea_virtualbase_metacast(void* self, const char* param1);
+bool QMdiArea_override_virtual_metacall(void* self, intptr_t slot);
+int QMdiArea_virtualbase_metacall(void* self, int param1, int param2, void** param3);
 bool QMdiArea_override_virtual_sizeHint(void* self, intptr_t slot);
 QSize* QMdiArea_virtualbase_sizeHint(const void* self);
 bool QMdiArea_override_virtual_minimumSizeHint(void* self, intptr_t slot);
@@ -267,6 +274,7 @@ QObject* QMdiArea_protectedbase_sender(bool* _dynamic_cast_ok, const void* self)
 int QMdiArea_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
 int QMdiArea_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
 bool QMdiArea_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+const QMetaObject* QMdiArea_staticMetaObject();
 void QMdiArea_delete(QMdiArea* self);
 
 #ifdef __cplusplus

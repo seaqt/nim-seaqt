@@ -58,6 +58,7 @@ type cQMediaStreamsControl*{.exportc: "QMediaStreamsControl", incompleteStruct.}
 
 proc fcQMediaStreamsControl_metaObject(self: pointer, ): pointer {.importc: "QMediaStreamsControl_metaObject".}
 proc fcQMediaStreamsControl_metacast(self: pointer, param1: cstring): pointer {.importc: "QMediaStreamsControl_metacast".}
+proc fcQMediaStreamsControl_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QMediaStreamsControl_metacall".}
 proc fcQMediaStreamsControl_tr(s: cstring): struct_miqt_string {.importc: "QMediaStreamsControl_tr".}
 proc fcQMediaStreamsControl_trUtf8(s: cstring): struct_miqt_string {.importc: "QMediaStreamsControl_trUtf8".}
 proc fcQMediaStreamsControl_streamCount(self: pointer, ): cint {.importc: "QMediaStreamsControl_streamCount".}
@@ -73,6 +74,7 @@ proc fcQMediaStreamsControl_tr2(s: cstring, c: cstring): struct_miqt_string {.im
 proc fcQMediaStreamsControl_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QMediaStreamsControl_tr3".}
 proc fcQMediaStreamsControl_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QMediaStreamsControl_trUtf82".}
 proc fcQMediaStreamsControl_trUtf83(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QMediaStreamsControl_trUtf83".}
+proc fcQMediaStreamsControl_staticMetaObject(): pointer {.importc: "QMediaStreamsControl_staticMetaObject".}
 proc fcQMediaStreamsControl_delete(self: pointer) {.importc: "QMediaStreamsControl_delete".}
 
 
@@ -83,6 +85,9 @@ proc metaObject*(self: gen_qmediastreamscontrol_types.QMediaStreamsControl, ): g
 
 proc metacast*(self: gen_qmediastreamscontrol_types.QMediaStreamsControl, param1: cstring): pointer =
   fcQMediaStreamsControl_metacast(self.h, param1)
+
+proc metacall*(self: gen_qmediastreamscontrol_types.QMediaStreamsControl, param1: cint, param2: cint, param3: pointer): cint =
+  fcQMediaStreamsControl_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qmediastreamscontrol_types.QMediaStreamsControl, s: cstring): string =
   let v_ms = fcQMediaStreamsControl_tr(s)
@@ -163,5 +168,7 @@ proc trUtf8*(_: type gen_qmediastreamscontrol_types.QMediaStreamsControl, s: cst
   c_free(v_ms.data)
   vx_ret
 
+proc staticMetaObject*(_: type gen_qmediastreamscontrol_types.QMediaStreamsControl): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fcQMediaStreamsControl_staticMetaObject())
 proc delete*(self: gen_qmediastreamscontrol_types.QMediaStreamsControl) =
   fcQMediaStreamsControl_delete(self.h)

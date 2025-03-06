@@ -35,6 +35,10 @@ void* QClipboard_metacast(QClipboard* self, const char* param1) {
 	return self->qt_metacast(param1);
 }
 
+int QClipboard_metacall(QClipboard* self, int param1, int param2, void** param3) {
+	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
+}
+
 struct miqt_string QClipboard_tr(const char* s) {
 	QString _ret = QClipboard::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
@@ -275,3 +279,4 @@ void QClipboard_setPixmap2(QClipboard* self, QPixmap* param1, int mode) {
 	self->setPixmap(*param1, static_cast<QClipboard::Mode>(mode));
 }
 
+const QMetaObject* QClipboard_staticMetaObject() { return &QClipboard::staticMetaObject; }

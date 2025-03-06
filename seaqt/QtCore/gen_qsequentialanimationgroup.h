@@ -43,6 +43,7 @@ QSequentialAnimationGroup* QSequentialAnimationGroup_new2(QObject* parent);
 void QSequentialAnimationGroup_virtbase(QSequentialAnimationGroup* src, QAnimationGroup** outptr_QAnimationGroup);
 QMetaObject* QSequentialAnimationGroup_metaObject(const QSequentialAnimationGroup* self);
 void* QSequentialAnimationGroup_metacast(QSequentialAnimationGroup* self, const char* param1);
+int QSequentialAnimationGroup_metacall(QSequentialAnimationGroup* self, int param1, int param2, void** param3);
 struct miqt_string QSequentialAnimationGroup_tr(const char* s);
 struct miqt_string QSequentialAnimationGroup_trUtf8(const char* s);
 QPauseAnimation* QSequentialAnimationGroup_addPause(QSequentialAnimationGroup* self, int msecs);
@@ -59,6 +60,12 @@ struct miqt_string QSequentialAnimationGroup_tr2(const char* s, const char* c);
 struct miqt_string QSequentialAnimationGroup_tr3(const char* s, const char* c, int n);
 struct miqt_string QSequentialAnimationGroup_trUtf82(const char* s, const char* c);
 struct miqt_string QSequentialAnimationGroup_trUtf83(const char* s, const char* c, int n);
+bool QSequentialAnimationGroup_override_virtual_metaObject(void* self, intptr_t slot);
+QMetaObject* QSequentialAnimationGroup_virtualbase_metaObject(const void* self);
+bool QSequentialAnimationGroup_override_virtual_metacast(void* self, intptr_t slot);
+void* QSequentialAnimationGroup_virtualbase_metacast(void* self, const char* param1);
+bool QSequentialAnimationGroup_override_virtual_metacall(void* self, intptr_t slot);
+int QSequentialAnimationGroup_virtualbase_metacall(void* self, int param1, int param2, void** param3);
 bool QSequentialAnimationGroup_override_virtual_duration(void* self, intptr_t slot);
 int QSequentialAnimationGroup_virtualbase_duration(const void* self);
 bool QSequentialAnimationGroup_override_virtual_event(void* self, intptr_t slot);
@@ -85,6 +92,7 @@ QObject* QSequentialAnimationGroup_protectedbase_sender(bool* _dynamic_cast_ok, 
 int QSequentialAnimationGroup_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
 int QSequentialAnimationGroup_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
 bool QSequentialAnimationGroup_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+const QMetaObject* QSequentialAnimationGroup_staticMetaObject();
 void QSequentialAnimationGroup_delete(QSequentialAnimationGroup* self);
 
 #ifdef __cplusplus

@@ -43,6 +43,7 @@ typedef struct QSize QSize;
 void QSGAbstractRenderer_virtbase(QSGAbstractRenderer* src, QObject** outptr_QObject);
 QMetaObject* QSGAbstractRenderer_metaObject(const QSGAbstractRenderer* self);
 void* QSGAbstractRenderer_metacast(QSGAbstractRenderer* self, const char* param1);
+int QSGAbstractRenderer_metacall(QSGAbstractRenderer* self, int param1, int param2, void** param3);
 struct miqt_string QSGAbstractRenderer_tr(const char* s);
 struct miqt_string QSGAbstractRenderer_trUtf8(const char* s);
 void QSGAbstractRenderer_setRootNode(QSGAbstractRenderer* self, QSGRootNode* node);
@@ -71,6 +72,7 @@ struct miqt_string QSGAbstractRenderer_tr2(const char* s, const char* c);
 struct miqt_string QSGAbstractRenderer_tr3(const char* s, const char* c, int n);
 struct miqt_string QSGAbstractRenderer_trUtf82(const char* s, const char* c);
 struct miqt_string QSGAbstractRenderer_trUtf83(const char* s, const char* c, int n);
+const QMetaObject* QSGAbstractRenderer_staticMetaObject();
 void QSGAbstractRenderer_delete(QSGAbstractRenderer* self);
 
 #ifdef __cplusplus

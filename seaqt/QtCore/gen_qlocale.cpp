@@ -1288,6 +1288,7 @@ struct miqt_string QLocale_quoteString2(const QLocale* self, struct miqt_string 
 	return _ms;
 }
 
+const QMetaObject* QLocale_staticMetaObject() { return &QLocale::staticMetaObject; }
 void QLocale_delete(QLocale* self) {
 	delete self;
 }

@@ -77,6 +77,7 @@ proc fcQRubberBand_new(param1: cint): ptr cQRubberBand {.importc: "QRubberBand_n
 proc fcQRubberBand_new2(param1: cint, param2: pointer): ptr cQRubberBand {.importc: "QRubberBand_new2".}
 proc fcQRubberBand_metaObject(self: pointer, ): pointer {.importc: "QRubberBand_metaObject".}
 proc fcQRubberBand_metacast(self: pointer, param1: cstring): pointer {.importc: "QRubberBand_metacast".}
+proc fcQRubberBand_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QRubberBand_metacall".}
 proc fcQRubberBand_tr(s: cstring): struct_miqt_string {.importc: "QRubberBand_tr".}
 proc fcQRubberBand_trUtf8(s: cstring): struct_miqt_string {.importc: "QRubberBand_trUtf8".}
 proc fcQRubberBand_shape(self: pointer, ): cint {.importc: "QRubberBand_shape".}
@@ -90,6 +91,12 @@ proc fcQRubberBand_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "Q
 proc fcQRubberBand_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QRubberBand_tr3".}
 proc fcQRubberBand_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QRubberBand_trUtf82".}
 proc fcQRubberBand_trUtf83(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QRubberBand_trUtf83".}
+proc fQRubberBand_virtualbase_metaObject(self: pointer, ): pointer{.importc: "QRubberBand_virtualbase_metaObject".}
+proc fcQRubberBand_override_virtual_metaObject(self: pointer, slot: int) {.importc: "QRubberBand_override_virtual_metaObject".}
+proc fQRubberBand_virtualbase_metacast(self: pointer, param1: cstring): pointer{.importc: "QRubberBand_virtualbase_metacast".}
+proc fcQRubberBand_override_virtual_metacast(self: pointer, slot: int) {.importc: "QRubberBand_override_virtual_metacast".}
+proc fQRubberBand_virtualbase_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint{.importc: "QRubberBand_virtualbase_metacall".}
+proc fcQRubberBand_override_virtual_metacall(self: pointer, slot: int) {.importc: "QRubberBand_override_virtual_metacall".}
 proc fQRubberBand_virtualbase_event(self: pointer, e: pointer): bool{.importc: "QRubberBand_virtualbase_event".}
 proc fcQRubberBand_override_virtual_event(self: pointer, slot: int) {.importc: "QRubberBand_override_virtual_event".}
 proc fQRubberBand_virtualbase_paintEvent(self: pointer, param1: pointer): void{.importc: "QRubberBand_virtualbase_paintEvent".}
@@ -184,6 +191,7 @@ proc fQRubberBand_virtualbase_connectNotify(self: pointer, signal: pointer): voi
 proc fcQRubberBand_override_virtual_connectNotify(self: pointer, slot: int) {.importc: "QRubberBand_override_virtual_connectNotify".}
 proc fQRubberBand_virtualbase_disconnectNotify(self: pointer, signal: pointer): void{.importc: "QRubberBand_virtualbase_disconnectNotify".}
 proc fcQRubberBand_override_virtual_disconnectNotify(self: pointer, slot: int) {.importc: "QRubberBand_override_virtual_disconnectNotify".}
+proc fcQRubberBand_staticMetaObject(): pointer {.importc: "QRubberBand_staticMetaObject".}
 proc fcQRubberBand_delete(self: pointer) {.importc: "QRubberBand_delete".}
 
 
@@ -200,6 +208,9 @@ proc metaObject*(self: gen_qrubberband_types.QRubberBand, ): gen_qobjectdefs_typ
 
 proc metacast*(self: gen_qrubberband_types.QRubberBand, param1: cstring): pointer =
   fcQRubberBand_metacast(self.h, param1)
+
+proc metacall*(self: gen_qrubberband_types.QRubberBand, param1: cint, param2: cint, param3: pointer): cint =
+  fcQRubberBand_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qrubberband_types.QRubberBand, s: cstring): string =
   let v_ms = fcQRubberBand_tr(s)
@@ -258,6 +269,65 @@ proc trUtf8*(_: type gen_qrubberband_types.QRubberBand, s: cstring, c: cstring, 
   c_free(v_ms.data)
   vx_ret
 
+proc QRubberBandmetaObject*(self: gen_qrubberband_types.QRubberBand, ): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fQRubberBand_virtualbase_metaObject(self.h))
+
+type QRubberBandmetaObjectProc* = proc(): gen_qobjectdefs_types.QMetaObject
+proc onmetaObject*(self: gen_qrubberband_types.QRubberBand, slot: QRubberBandmetaObjectProc) =
+  # TODO check subclass
+  var tmp = new QRubberBandmetaObjectProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQRubberBand_override_virtual_metaObject(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QRubberBand_metaObject(self: ptr cQRubberBand, slot: int): pointer {.exportc: "miqt_exec_callback_QRubberBand_metaObject ".} =
+  var nimfunc = cast[ptr QRubberBandmetaObjectProc](cast[pointer](slot))
+
+  let virtualReturn = nimfunc[]( )
+
+  virtualReturn.h
+proc QRubberBandmetacast*(self: gen_qrubberband_types.QRubberBand, param1: cstring): pointer =
+  fQRubberBand_virtualbase_metacast(self.h, param1)
+
+type QRubberBandmetacastProc* = proc(param1: cstring): pointer
+proc onmetacast*(self: gen_qrubberband_types.QRubberBand, slot: QRubberBandmetacastProc) =
+  # TODO check subclass
+  var tmp = new QRubberBandmetacastProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQRubberBand_override_virtual_metacast(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QRubberBand_metacast(self: ptr cQRubberBand, slot: int, param1: cstring): pointer {.exportc: "miqt_exec_callback_QRubberBand_metacast ".} =
+  var nimfunc = cast[ptr QRubberBandmetacastProc](cast[pointer](slot))
+  let slotval1 = (param1)
+
+
+  let virtualReturn = nimfunc[](slotval1 )
+
+  virtualReturn
+proc QRubberBandmetacall*(self: gen_qrubberband_types.QRubberBand, param1: cint, param2: cint, param3: pointer): cint =
+  fQRubberBand_virtualbase_metacall(self.h, cint(param1), param2, param3)
+
+type QRubberBandmetacallProc* = proc(param1: cint, param2: cint, param3: pointer): cint
+proc onmetacall*(self: gen_qrubberband_types.QRubberBand, slot: QRubberBandmetacallProc) =
+  # TODO check subclass
+  var tmp = new QRubberBandmetacallProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQRubberBand_override_virtual_metacall(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QRubberBand_metacall(self: ptr cQRubberBand, slot: int, param1: cint, param2: cint, param3: pointer): cint {.exportc: "miqt_exec_callback_QRubberBand_metacall ".} =
+  var nimfunc = cast[ptr QRubberBandmetacallProc](cast[pointer](slot))
+  let slotval1 = cint(param1)
+
+  let slotval2 = param2
+
+  let slotval3 = param3
+
+
+  let virtualReturn = nimfunc[](slotval1, slotval2, slotval3 )
+
+  virtualReturn
 proc QRubberBandevent*(self: gen_qrubberband_types.QRubberBand, e: gen_qcoreevent_types.QEvent): bool =
   fQRubberBand_virtualbase_event(self.h, e.h)
 
@@ -1082,5 +1152,7 @@ proc miqt_exec_callback_QRubberBand_disconnectNotify(self: ptr cQRubberBand, slo
 
 
   nimfunc[](slotval1)
+proc staticMetaObject*(_: type gen_qrubberband_types.QRubberBand): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fcQRubberBand_staticMetaObject())
 proc delete*(self: gen_qrubberband_types.QRubberBand) =
   fcQRubberBand_delete(self.h)

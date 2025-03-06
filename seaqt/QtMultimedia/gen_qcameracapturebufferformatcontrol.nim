@@ -48,6 +48,7 @@ type cQCameraCaptureBufferFormatControl*{.exportc: "QCameraCaptureBufferFormatCo
 
 proc fcQCameraCaptureBufferFormatControl_metaObject(self: pointer, ): pointer {.importc: "QCameraCaptureBufferFormatControl_metaObject".}
 proc fcQCameraCaptureBufferFormatControl_metacast(self: pointer, param1: cstring): pointer {.importc: "QCameraCaptureBufferFormatControl_metacast".}
+proc fcQCameraCaptureBufferFormatControl_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QCameraCaptureBufferFormatControl_metacall".}
 proc fcQCameraCaptureBufferFormatControl_tr(s: cstring): struct_miqt_string {.importc: "QCameraCaptureBufferFormatControl_tr".}
 proc fcQCameraCaptureBufferFormatControl_trUtf8(s: cstring): struct_miqt_string {.importc: "QCameraCaptureBufferFormatControl_trUtf8".}
 proc fcQCameraCaptureBufferFormatControl_supportedBufferFormats(self: pointer, ): struct_miqt_array {.importc: "QCameraCaptureBufferFormatControl_supportedBufferFormats".}
@@ -59,6 +60,7 @@ proc fcQCameraCaptureBufferFormatControl_tr2(s: cstring, c: cstring): struct_miq
 proc fcQCameraCaptureBufferFormatControl_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QCameraCaptureBufferFormatControl_tr3".}
 proc fcQCameraCaptureBufferFormatControl_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QCameraCaptureBufferFormatControl_trUtf82".}
 proc fcQCameraCaptureBufferFormatControl_trUtf83(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QCameraCaptureBufferFormatControl_trUtf83".}
+proc fcQCameraCaptureBufferFormatControl_staticMetaObject(): pointer {.importc: "QCameraCaptureBufferFormatControl_staticMetaObject".}
 proc fcQCameraCaptureBufferFormatControl_delete(self: pointer) {.importc: "QCameraCaptureBufferFormatControl_delete".}
 
 
@@ -69,6 +71,9 @@ proc metaObject*(self: gen_qcameracapturebufferformatcontrol_types.QCameraCaptur
 
 proc metacast*(self: gen_qcameracapturebufferformatcontrol_types.QCameraCaptureBufferFormatControl, param1: cstring): pointer =
   fcQCameraCaptureBufferFormatControl_metacast(self.h, param1)
+
+proc metacall*(self: gen_qcameracapturebufferformatcontrol_types.QCameraCaptureBufferFormatControl, param1: cint, param2: cint, param3: pointer): cint =
+  fcQCameraCaptureBufferFormatControl_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qcameracapturebufferformatcontrol_types.QCameraCaptureBufferFormatControl, s: cstring): string =
   let v_ms = fcQCameraCaptureBufferFormatControl_tr(s)
@@ -136,5 +141,7 @@ proc trUtf8*(_: type gen_qcameracapturebufferformatcontrol_types.QCameraCaptureB
   c_free(v_ms.data)
   vx_ret
 
+proc staticMetaObject*(_: type gen_qcameracapturebufferformatcontrol_types.QCameraCaptureBufferFormatControl): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fcQCameraCaptureBufferFormatControl_staticMetaObject())
 proc delete*(self: gen_qcameracapturebufferformatcontrol_types.QCameraCaptureBufferFormatControl) =
   fcQCameraCaptureBufferFormatControl_delete(self.h)

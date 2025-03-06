@@ -75,6 +75,7 @@ proc fcQBoxLayout_new(param1: cint): ptr cQBoxLayout {.importc: "QBoxLayout_new"
 proc fcQBoxLayout_new2(param1: cint, parent: pointer): ptr cQBoxLayout {.importc: "QBoxLayout_new2".}
 proc fcQBoxLayout_metaObject(self: pointer, ): pointer {.importc: "QBoxLayout_metaObject".}
 proc fcQBoxLayout_metacast(self: pointer, param1: cstring): pointer {.importc: "QBoxLayout_metacast".}
+proc fcQBoxLayout_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QBoxLayout_metacall".}
 proc fcQBoxLayout_tr(s: cstring): struct_miqt_string {.importc: "QBoxLayout_tr".}
 proc fcQBoxLayout_trUtf8(s: cstring): struct_miqt_string {.importc: "QBoxLayout_trUtf8".}
 proc fcQBoxLayout_direction(self: pointer, ): cint {.importc: "QBoxLayout_direction".}
@@ -122,6 +123,12 @@ proc fcQBoxLayout_insertStretch2(self: pointer, index: cint, stretch: cint): voi
 proc fcQBoxLayout_insertWidget3(self: pointer, index: cint, widget: pointer, stretch: cint): void {.importc: "QBoxLayout_insertWidget3".}
 proc fcQBoxLayout_insertWidget4(self: pointer, index: cint, widget: pointer, stretch: cint, alignment: cint): void {.importc: "QBoxLayout_insertWidget4".}
 proc fcQBoxLayout_insertLayout3(self: pointer, index: cint, layout: pointer, stretch: cint): void {.importc: "QBoxLayout_insertLayout3".}
+proc fQBoxLayout_virtualbase_metaObject(self: pointer, ): pointer{.importc: "QBoxLayout_virtualbase_metaObject".}
+proc fcQBoxLayout_override_virtual_metaObject(self: pointer, slot: int) {.importc: "QBoxLayout_override_virtual_metaObject".}
+proc fQBoxLayout_virtualbase_metacast(self: pointer, param1: cstring): pointer{.importc: "QBoxLayout_virtualbase_metacast".}
+proc fcQBoxLayout_override_virtual_metacast(self: pointer, slot: int) {.importc: "QBoxLayout_override_virtual_metacast".}
+proc fQBoxLayout_virtualbase_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint{.importc: "QBoxLayout_virtualbase_metacall".}
+proc fcQBoxLayout_override_virtual_metacall(self: pointer, slot: int) {.importc: "QBoxLayout_override_virtual_metacall".}
 proc fQBoxLayout_virtualbase_addItem(self: pointer, param1: pointer): void{.importc: "QBoxLayout_virtualbase_addItem".}
 proc fcQBoxLayout_override_virtual_addItem(self: pointer, slot: int) {.importc: "QBoxLayout_override_virtual_addItem".}
 proc fQBoxLayout_virtualbase_sizeHint(self: pointer, ): pointer{.importc: "QBoxLayout_virtualbase_sizeHint".}
@@ -176,17 +183,25 @@ proc fQBoxLayout_virtualbase_widget(self: pointer, ): pointer{.importc: "QBoxLay
 proc fcQBoxLayout_override_virtual_widget(self: pointer, slot: int) {.importc: "QBoxLayout_override_virtual_widget".}
 proc fQBoxLayout_virtualbase_spacerItem(self: pointer, ): pointer{.importc: "QBoxLayout_virtualbase_spacerItem".}
 proc fcQBoxLayout_override_virtual_spacerItem(self: pointer, slot: int) {.importc: "QBoxLayout_override_virtual_spacerItem".}
+proc fcQBoxLayout_staticMetaObject(): pointer {.importc: "QBoxLayout_staticMetaObject".}
 proc fcQBoxLayout_delete(self: pointer) {.importc: "QBoxLayout_delete".}
 proc fcQHBoxLayout_new(parent: pointer): ptr cQHBoxLayout {.importc: "QHBoxLayout_new".}
 proc fcQHBoxLayout_new2(): ptr cQHBoxLayout {.importc: "QHBoxLayout_new2".}
 proc fcQHBoxLayout_metaObject(self: pointer, ): pointer {.importc: "QHBoxLayout_metaObject".}
 proc fcQHBoxLayout_metacast(self: pointer, param1: cstring): pointer {.importc: "QHBoxLayout_metacast".}
+proc fcQHBoxLayout_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QHBoxLayout_metacall".}
 proc fcQHBoxLayout_tr(s: cstring): struct_miqt_string {.importc: "QHBoxLayout_tr".}
 proc fcQHBoxLayout_trUtf8(s: cstring): struct_miqt_string {.importc: "QHBoxLayout_trUtf8".}
 proc fcQHBoxLayout_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QHBoxLayout_tr2".}
 proc fcQHBoxLayout_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QHBoxLayout_tr3".}
 proc fcQHBoxLayout_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QHBoxLayout_trUtf82".}
 proc fcQHBoxLayout_trUtf83(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QHBoxLayout_trUtf83".}
+proc fQHBoxLayout_virtualbase_metaObject(self: pointer, ): pointer{.importc: "QHBoxLayout_virtualbase_metaObject".}
+proc fcQHBoxLayout_override_virtual_metaObject(self: pointer, slot: int) {.importc: "QHBoxLayout_override_virtual_metaObject".}
+proc fQHBoxLayout_virtualbase_metacast(self: pointer, param1: cstring): pointer{.importc: "QHBoxLayout_virtualbase_metacast".}
+proc fcQHBoxLayout_override_virtual_metacast(self: pointer, slot: int) {.importc: "QHBoxLayout_override_virtual_metacast".}
+proc fQHBoxLayout_virtualbase_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint{.importc: "QHBoxLayout_virtualbase_metacall".}
+proc fcQHBoxLayout_override_virtual_metacall(self: pointer, slot: int) {.importc: "QHBoxLayout_override_virtual_metacall".}
 proc fQHBoxLayout_virtualbase_addItem(self: pointer, param1: pointer): void{.importc: "QHBoxLayout_virtualbase_addItem".}
 proc fcQHBoxLayout_override_virtual_addItem(self: pointer, slot: int) {.importc: "QHBoxLayout_override_virtual_addItem".}
 proc fQHBoxLayout_virtualbase_sizeHint(self: pointer, ): pointer{.importc: "QHBoxLayout_virtualbase_sizeHint".}
@@ -241,17 +256,25 @@ proc fQHBoxLayout_virtualbase_widget(self: pointer, ): pointer{.importc: "QHBoxL
 proc fcQHBoxLayout_override_virtual_widget(self: pointer, slot: int) {.importc: "QHBoxLayout_override_virtual_widget".}
 proc fQHBoxLayout_virtualbase_spacerItem(self: pointer, ): pointer{.importc: "QHBoxLayout_virtualbase_spacerItem".}
 proc fcQHBoxLayout_override_virtual_spacerItem(self: pointer, slot: int) {.importc: "QHBoxLayout_override_virtual_spacerItem".}
+proc fcQHBoxLayout_staticMetaObject(): pointer {.importc: "QHBoxLayout_staticMetaObject".}
 proc fcQHBoxLayout_delete(self: pointer) {.importc: "QHBoxLayout_delete".}
 proc fcQVBoxLayout_new(parent: pointer): ptr cQVBoxLayout {.importc: "QVBoxLayout_new".}
 proc fcQVBoxLayout_new2(): ptr cQVBoxLayout {.importc: "QVBoxLayout_new2".}
 proc fcQVBoxLayout_metaObject(self: pointer, ): pointer {.importc: "QVBoxLayout_metaObject".}
 proc fcQVBoxLayout_metacast(self: pointer, param1: cstring): pointer {.importc: "QVBoxLayout_metacast".}
+proc fcQVBoxLayout_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QVBoxLayout_metacall".}
 proc fcQVBoxLayout_tr(s: cstring): struct_miqt_string {.importc: "QVBoxLayout_tr".}
 proc fcQVBoxLayout_trUtf8(s: cstring): struct_miqt_string {.importc: "QVBoxLayout_trUtf8".}
 proc fcQVBoxLayout_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QVBoxLayout_tr2".}
 proc fcQVBoxLayout_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QVBoxLayout_tr3".}
 proc fcQVBoxLayout_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QVBoxLayout_trUtf82".}
 proc fcQVBoxLayout_trUtf83(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QVBoxLayout_trUtf83".}
+proc fQVBoxLayout_virtualbase_metaObject(self: pointer, ): pointer{.importc: "QVBoxLayout_virtualbase_metaObject".}
+proc fcQVBoxLayout_override_virtual_metaObject(self: pointer, slot: int) {.importc: "QVBoxLayout_override_virtual_metaObject".}
+proc fQVBoxLayout_virtualbase_metacast(self: pointer, param1: cstring): pointer{.importc: "QVBoxLayout_virtualbase_metacast".}
+proc fcQVBoxLayout_override_virtual_metacast(self: pointer, slot: int) {.importc: "QVBoxLayout_override_virtual_metacast".}
+proc fQVBoxLayout_virtualbase_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint{.importc: "QVBoxLayout_virtualbase_metacall".}
+proc fcQVBoxLayout_override_virtual_metacall(self: pointer, slot: int) {.importc: "QVBoxLayout_override_virtual_metacall".}
 proc fQVBoxLayout_virtualbase_addItem(self: pointer, param1: pointer): void{.importc: "QVBoxLayout_virtualbase_addItem".}
 proc fcQVBoxLayout_override_virtual_addItem(self: pointer, slot: int) {.importc: "QVBoxLayout_override_virtual_addItem".}
 proc fQVBoxLayout_virtualbase_sizeHint(self: pointer, ): pointer{.importc: "QVBoxLayout_virtualbase_sizeHint".}
@@ -306,6 +329,7 @@ proc fQVBoxLayout_virtualbase_widget(self: pointer, ): pointer{.importc: "QVBoxL
 proc fcQVBoxLayout_override_virtual_widget(self: pointer, slot: int) {.importc: "QVBoxLayout_override_virtual_widget".}
 proc fQVBoxLayout_virtualbase_spacerItem(self: pointer, ): pointer{.importc: "QVBoxLayout_virtualbase_spacerItem".}
 proc fcQVBoxLayout_override_virtual_spacerItem(self: pointer, slot: int) {.importc: "QVBoxLayout_override_virtual_spacerItem".}
+proc fcQVBoxLayout_staticMetaObject(): pointer {.importc: "QVBoxLayout_staticMetaObject".}
 proc fcQVBoxLayout_delete(self: pointer) {.importc: "QVBoxLayout_delete".}
 
 
@@ -322,6 +346,9 @@ proc metaObject*(self: gen_qboxlayout_types.QBoxLayout, ): gen_qobjectdefs_types
 
 proc metacast*(self: gen_qboxlayout_types.QBoxLayout, param1: cstring): pointer =
   fcQBoxLayout_metacast(self.h, param1)
+
+proc metacall*(self: gen_qboxlayout_types.QBoxLayout, param1: cint, param2: cint, param3: pointer): cint =
+  fcQBoxLayout_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qboxlayout_types.QBoxLayout, s: cstring): string =
   let v_ms = fcQBoxLayout_tr(s)
@@ -482,6 +509,65 @@ proc insertWidget*(self: gen_qboxlayout_types.QBoxLayout, index: cint, widget: g
 proc insertLayout*(self: gen_qboxlayout_types.QBoxLayout, index: cint, layout: gen_qlayout_types.QLayout, stretch: cint): void =
   fcQBoxLayout_insertLayout3(self.h, index, layout.h, stretch)
 
+proc QBoxLayoutmetaObject*(self: gen_qboxlayout_types.QBoxLayout, ): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fQBoxLayout_virtualbase_metaObject(self.h))
+
+type QBoxLayoutmetaObjectProc* = proc(): gen_qobjectdefs_types.QMetaObject
+proc onmetaObject*(self: gen_qboxlayout_types.QBoxLayout, slot: QBoxLayoutmetaObjectProc) =
+  # TODO check subclass
+  var tmp = new QBoxLayoutmetaObjectProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQBoxLayout_override_virtual_metaObject(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QBoxLayout_metaObject(self: ptr cQBoxLayout, slot: int): pointer {.exportc: "miqt_exec_callback_QBoxLayout_metaObject ".} =
+  var nimfunc = cast[ptr QBoxLayoutmetaObjectProc](cast[pointer](slot))
+
+  let virtualReturn = nimfunc[]( )
+
+  virtualReturn.h
+proc QBoxLayoutmetacast*(self: gen_qboxlayout_types.QBoxLayout, param1: cstring): pointer =
+  fQBoxLayout_virtualbase_metacast(self.h, param1)
+
+type QBoxLayoutmetacastProc* = proc(param1: cstring): pointer
+proc onmetacast*(self: gen_qboxlayout_types.QBoxLayout, slot: QBoxLayoutmetacastProc) =
+  # TODO check subclass
+  var tmp = new QBoxLayoutmetacastProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQBoxLayout_override_virtual_metacast(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QBoxLayout_metacast(self: ptr cQBoxLayout, slot: int, param1: cstring): pointer {.exportc: "miqt_exec_callback_QBoxLayout_metacast ".} =
+  var nimfunc = cast[ptr QBoxLayoutmetacastProc](cast[pointer](slot))
+  let slotval1 = (param1)
+
+
+  let virtualReturn = nimfunc[](slotval1 )
+
+  virtualReturn
+proc QBoxLayoutmetacall*(self: gen_qboxlayout_types.QBoxLayout, param1: cint, param2: cint, param3: pointer): cint =
+  fQBoxLayout_virtualbase_metacall(self.h, cint(param1), param2, param3)
+
+type QBoxLayoutmetacallProc* = proc(param1: cint, param2: cint, param3: pointer): cint
+proc onmetacall*(self: gen_qboxlayout_types.QBoxLayout, slot: QBoxLayoutmetacallProc) =
+  # TODO check subclass
+  var tmp = new QBoxLayoutmetacallProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQBoxLayout_override_virtual_metacall(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QBoxLayout_metacall(self: ptr cQBoxLayout, slot: int, param1: cint, param2: cint, param3: pointer): cint {.exportc: "miqt_exec_callback_QBoxLayout_metacall ".} =
+  var nimfunc = cast[ptr QBoxLayoutmetacallProc](cast[pointer](slot))
+  let slotval1 = cint(param1)
+
+  let slotval2 = param2
+
+  let slotval3 = param3
+
+
+  let virtualReturn = nimfunc[](slotval1, slotval2, slotval3 )
+
+  virtualReturn
 proc QBoxLayoutaddItem*(self: gen_qboxlayout_types.QBoxLayout, param1: gen_qlayoutitem_types.QLayoutItem): void =
   fQBoxLayout_virtualbase_addItem(self.h, param1.h)
 
@@ -955,6 +1041,8 @@ proc miqt_exec_callback_QBoxLayout_spacerItem(self: ptr cQBoxLayout, slot: int):
   let virtualReturn = nimfunc[]( )
 
   virtualReturn.h
+proc staticMetaObject*(_: type gen_qboxlayout_types.QBoxLayout): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fcQBoxLayout_staticMetaObject())
 proc delete*(self: gen_qboxlayout_types.QBoxLayout) =
   fcQBoxLayout_delete(self.h)
 
@@ -971,6 +1059,9 @@ proc metaObject*(self: gen_qboxlayout_types.QHBoxLayout, ): gen_qobjectdefs_type
 
 proc metacast*(self: gen_qboxlayout_types.QHBoxLayout, param1: cstring): pointer =
   fcQHBoxLayout_metacast(self.h, param1)
+
+proc metacall*(self: gen_qboxlayout_types.QHBoxLayout, param1: cint, param2: cint, param3: pointer): cint =
+  fcQHBoxLayout_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qboxlayout_types.QHBoxLayout, s: cstring): string =
   let v_ms = fcQHBoxLayout_tr(s)
@@ -1008,6 +1099,65 @@ proc trUtf8*(_: type gen_qboxlayout_types.QHBoxLayout, s: cstring, c: cstring, n
   c_free(v_ms.data)
   vx_ret
 
+proc QHBoxLayoutmetaObject*(self: gen_qboxlayout_types.QHBoxLayout, ): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fQHBoxLayout_virtualbase_metaObject(self.h))
+
+type QHBoxLayoutmetaObjectProc* = proc(): gen_qobjectdefs_types.QMetaObject
+proc onmetaObject*(self: gen_qboxlayout_types.QHBoxLayout, slot: QHBoxLayoutmetaObjectProc) =
+  # TODO check subclass
+  var tmp = new QHBoxLayoutmetaObjectProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQHBoxLayout_override_virtual_metaObject(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QHBoxLayout_metaObject(self: ptr cQHBoxLayout, slot: int): pointer {.exportc: "miqt_exec_callback_QHBoxLayout_metaObject ".} =
+  var nimfunc = cast[ptr QHBoxLayoutmetaObjectProc](cast[pointer](slot))
+
+  let virtualReturn = nimfunc[]( )
+
+  virtualReturn.h
+proc QHBoxLayoutmetacast*(self: gen_qboxlayout_types.QHBoxLayout, param1: cstring): pointer =
+  fQHBoxLayout_virtualbase_metacast(self.h, param1)
+
+type QHBoxLayoutmetacastProc* = proc(param1: cstring): pointer
+proc onmetacast*(self: gen_qboxlayout_types.QHBoxLayout, slot: QHBoxLayoutmetacastProc) =
+  # TODO check subclass
+  var tmp = new QHBoxLayoutmetacastProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQHBoxLayout_override_virtual_metacast(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QHBoxLayout_metacast(self: ptr cQHBoxLayout, slot: int, param1: cstring): pointer {.exportc: "miqt_exec_callback_QHBoxLayout_metacast ".} =
+  var nimfunc = cast[ptr QHBoxLayoutmetacastProc](cast[pointer](slot))
+  let slotval1 = (param1)
+
+
+  let virtualReturn = nimfunc[](slotval1 )
+
+  virtualReturn
+proc QHBoxLayoutmetacall*(self: gen_qboxlayout_types.QHBoxLayout, param1: cint, param2: cint, param3: pointer): cint =
+  fQHBoxLayout_virtualbase_metacall(self.h, cint(param1), param2, param3)
+
+type QHBoxLayoutmetacallProc* = proc(param1: cint, param2: cint, param3: pointer): cint
+proc onmetacall*(self: gen_qboxlayout_types.QHBoxLayout, slot: QHBoxLayoutmetacallProc) =
+  # TODO check subclass
+  var tmp = new QHBoxLayoutmetacallProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQHBoxLayout_override_virtual_metacall(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QHBoxLayout_metacall(self: ptr cQHBoxLayout, slot: int, param1: cint, param2: cint, param3: pointer): cint {.exportc: "miqt_exec_callback_QHBoxLayout_metacall ".} =
+  var nimfunc = cast[ptr QHBoxLayoutmetacallProc](cast[pointer](slot))
+  let slotval1 = cint(param1)
+
+  let slotval2 = param2
+
+  let slotval3 = param3
+
+
+  let virtualReturn = nimfunc[](slotval1, slotval2, slotval3 )
+
+  virtualReturn
 proc QHBoxLayoutaddItem*(self: gen_qboxlayout_types.QHBoxLayout, param1: gen_qlayoutitem_types.QLayoutItem): void =
   fQHBoxLayout_virtualbase_addItem(self.h, param1.h)
 
@@ -1481,6 +1631,8 @@ proc miqt_exec_callback_QHBoxLayout_spacerItem(self: ptr cQHBoxLayout, slot: int
   let virtualReturn = nimfunc[]( )
 
   virtualReturn.h
+proc staticMetaObject*(_: type gen_qboxlayout_types.QHBoxLayout): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fcQHBoxLayout_staticMetaObject())
 proc delete*(self: gen_qboxlayout_types.QHBoxLayout) =
   fcQHBoxLayout_delete(self.h)
 
@@ -1497,6 +1649,9 @@ proc metaObject*(self: gen_qboxlayout_types.QVBoxLayout, ): gen_qobjectdefs_type
 
 proc metacast*(self: gen_qboxlayout_types.QVBoxLayout, param1: cstring): pointer =
   fcQVBoxLayout_metacast(self.h, param1)
+
+proc metacall*(self: gen_qboxlayout_types.QVBoxLayout, param1: cint, param2: cint, param3: pointer): cint =
+  fcQVBoxLayout_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qboxlayout_types.QVBoxLayout, s: cstring): string =
   let v_ms = fcQVBoxLayout_tr(s)
@@ -1534,6 +1689,65 @@ proc trUtf8*(_: type gen_qboxlayout_types.QVBoxLayout, s: cstring, c: cstring, n
   c_free(v_ms.data)
   vx_ret
 
+proc QVBoxLayoutmetaObject*(self: gen_qboxlayout_types.QVBoxLayout, ): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fQVBoxLayout_virtualbase_metaObject(self.h))
+
+type QVBoxLayoutmetaObjectProc* = proc(): gen_qobjectdefs_types.QMetaObject
+proc onmetaObject*(self: gen_qboxlayout_types.QVBoxLayout, slot: QVBoxLayoutmetaObjectProc) =
+  # TODO check subclass
+  var tmp = new QVBoxLayoutmetaObjectProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQVBoxLayout_override_virtual_metaObject(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QVBoxLayout_metaObject(self: ptr cQVBoxLayout, slot: int): pointer {.exportc: "miqt_exec_callback_QVBoxLayout_metaObject ".} =
+  var nimfunc = cast[ptr QVBoxLayoutmetaObjectProc](cast[pointer](slot))
+
+  let virtualReturn = nimfunc[]( )
+
+  virtualReturn.h
+proc QVBoxLayoutmetacast*(self: gen_qboxlayout_types.QVBoxLayout, param1: cstring): pointer =
+  fQVBoxLayout_virtualbase_metacast(self.h, param1)
+
+type QVBoxLayoutmetacastProc* = proc(param1: cstring): pointer
+proc onmetacast*(self: gen_qboxlayout_types.QVBoxLayout, slot: QVBoxLayoutmetacastProc) =
+  # TODO check subclass
+  var tmp = new QVBoxLayoutmetacastProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQVBoxLayout_override_virtual_metacast(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QVBoxLayout_metacast(self: ptr cQVBoxLayout, slot: int, param1: cstring): pointer {.exportc: "miqt_exec_callback_QVBoxLayout_metacast ".} =
+  var nimfunc = cast[ptr QVBoxLayoutmetacastProc](cast[pointer](slot))
+  let slotval1 = (param1)
+
+
+  let virtualReturn = nimfunc[](slotval1 )
+
+  virtualReturn
+proc QVBoxLayoutmetacall*(self: gen_qboxlayout_types.QVBoxLayout, param1: cint, param2: cint, param3: pointer): cint =
+  fQVBoxLayout_virtualbase_metacall(self.h, cint(param1), param2, param3)
+
+type QVBoxLayoutmetacallProc* = proc(param1: cint, param2: cint, param3: pointer): cint
+proc onmetacall*(self: gen_qboxlayout_types.QVBoxLayout, slot: QVBoxLayoutmetacallProc) =
+  # TODO check subclass
+  var tmp = new QVBoxLayoutmetacallProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQVBoxLayout_override_virtual_metacall(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QVBoxLayout_metacall(self: ptr cQVBoxLayout, slot: int, param1: cint, param2: cint, param3: pointer): cint {.exportc: "miqt_exec_callback_QVBoxLayout_metacall ".} =
+  var nimfunc = cast[ptr QVBoxLayoutmetacallProc](cast[pointer](slot))
+  let slotval1 = cint(param1)
+
+  let slotval2 = param2
+
+  let slotval3 = param3
+
+
+  let virtualReturn = nimfunc[](slotval1, slotval2, slotval3 )
+
+  virtualReturn
 proc QVBoxLayoutaddItem*(self: gen_qboxlayout_types.QVBoxLayout, param1: gen_qlayoutitem_types.QLayoutItem): void =
   fQVBoxLayout_virtualbase_addItem(self.h, param1.h)
 
@@ -2007,5 +2221,7 @@ proc miqt_exec_callback_QVBoxLayout_spacerItem(self: ptr cQVBoxLayout, slot: int
   let virtualReturn = nimfunc[]( )
 
   virtualReturn.h
+proc staticMetaObject*(_: type gen_qboxlayout_types.QVBoxLayout): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fcQVBoxLayout_staticMetaObject())
 proc delete*(self: gen_qboxlayout_types.QVBoxLayout) =
   fcQVBoxLayout_delete(self.h)

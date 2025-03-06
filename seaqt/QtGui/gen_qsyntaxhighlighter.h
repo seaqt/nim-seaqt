@@ -49,6 +49,7 @@ QSyntaxHighlighter* QSyntaxHighlighter_new2(QTextDocument* parent);
 void QSyntaxHighlighter_virtbase(QSyntaxHighlighter* src, QObject** outptr_QObject);
 QMetaObject* QSyntaxHighlighter_metaObject(const QSyntaxHighlighter* self);
 void* QSyntaxHighlighter_metacast(QSyntaxHighlighter* self, const char* param1);
+int QSyntaxHighlighter_metacall(QSyntaxHighlighter* self, int param1, int param2, void** param3);
 struct miqt_string QSyntaxHighlighter_tr(const char* s);
 struct miqt_string QSyntaxHighlighter_trUtf8(const char* s);
 void QSyntaxHighlighter_setDocument(QSyntaxHighlighter* self, QTextDocument* doc);
@@ -60,6 +61,12 @@ struct miqt_string QSyntaxHighlighter_tr2(const char* s, const char* c);
 struct miqt_string QSyntaxHighlighter_tr3(const char* s, const char* c, int n);
 struct miqt_string QSyntaxHighlighter_trUtf82(const char* s, const char* c);
 struct miqt_string QSyntaxHighlighter_trUtf83(const char* s, const char* c, int n);
+bool QSyntaxHighlighter_override_virtual_metaObject(void* self, intptr_t slot);
+QMetaObject* QSyntaxHighlighter_virtualbase_metaObject(const void* self);
+bool QSyntaxHighlighter_override_virtual_metacast(void* self, intptr_t slot);
+void* QSyntaxHighlighter_virtualbase_metacast(void* self, const char* param1);
+bool QSyntaxHighlighter_override_virtual_metacall(void* self, intptr_t slot);
+int QSyntaxHighlighter_virtualbase_metacall(void* self, int param1, int param2, void** param3);
 bool QSyntaxHighlighter_override_virtual_highlightBlock(void* self, intptr_t slot);
 void QSyntaxHighlighter_virtualbase_highlightBlock(void* self, struct miqt_string text);
 bool QSyntaxHighlighter_override_virtual_event(void* self, intptr_t slot);
@@ -90,6 +97,7 @@ QObject* QSyntaxHighlighter_protectedbase_sender(bool* _dynamic_cast_ok, const v
 int QSyntaxHighlighter_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
 int QSyntaxHighlighter_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
 bool QSyntaxHighlighter_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+const QMetaObject* QSyntaxHighlighter_staticMetaObject();
 void QSyntaxHighlighter_delete(QSyntaxHighlighter* self);
 
 #ifdef __cplusplus

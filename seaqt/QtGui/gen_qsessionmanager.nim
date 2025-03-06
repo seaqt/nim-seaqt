@@ -55,6 +55,7 @@ type cQSessionManager*{.exportc: "QSessionManager", incompleteStruct.} = object
 
 proc fcQSessionManager_metaObject(self: pointer, ): pointer {.importc: "QSessionManager_metaObject".}
 proc fcQSessionManager_metacast(self: pointer, param1: cstring): pointer {.importc: "QSessionManager_metacast".}
+proc fcQSessionManager_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QSessionManager_metacall".}
 proc fcQSessionManager_tr(s: cstring): struct_miqt_string {.importc: "QSessionManager_tr".}
 proc fcQSessionManager_trUtf8(s: cstring): struct_miqt_string {.importc: "QSessionManager_trUtf8".}
 proc fcQSessionManager_sessionId(self: pointer, ): struct_miqt_string {.importc: "QSessionManager_sessionId".}
@@ -77,6 +78,7 @@ proc fcQSessionManager_tr2(s: cstring, c: cstring): struct_miqt_string {.importc
 proc fcQSessionManager_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QSessionManager_tr3".}
 proc fcQSessionManager_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QSessionManager_trUtf82".}
 proc fcQSessionManager_trUtf83(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QSessionManager_trUtf83".}
+proc fcQSessionManager_staticMetaObject(): pointer {.importc: "QSessionManager_staticMetaObject".}
 
 
 func init*(T: type gen_qsessionmanager_types.QSessionManager, h: ptr cQSessionManager): gen_qsessionmanager_types.QSessionManager =
@@ -86,6 +88,9 @@ proc metaObject*(self: gen_qsessionmanager_types.QSessionManager, ): gen_qobject
 
 proc metacast*(self: gen_qsessionmanager_types.QSessionManager, param1: cstring): pointer =
   fcQSessionManager_metacast(self.h, param1)
+
+proc metacall*(self: gen_qsessionmanager_types.QSessionManager, param1: cint, param2: cint, param3: pointer): cint =
+  fcQSessionManager_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qsessionmanager_types.QSessionManager, s: cstring): string =
   let v_ms = fcQSessionManager_tr(s)
@@ -205,3 +210,5 @@ proc trUtf8*(_: type gen_qsessionmanager_types.QSessionManager, s: cstring, c: c
   c_free(v_ms.data)
   vx_ret
 
+proc staticMetaObject*(_: type gen_qsessionmanager_types.QSessionManager): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fcQSessionManager_staticMetaObject())

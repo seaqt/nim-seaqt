@@ -102,6 +102,7 @@ QGraphicsWidget* QGraphicsWidget_new3(QGraphicsItem* parent, int wFlags);
 void QGraphicsWidget_virtbase(QGraphicsWidget* src, QGraphicsObject** outptr_QGraphicsObject, QGraphicsLayoutItem** outptr_QGraphicsLayoutItem);
 QMetaObject* QGraphicsWidget_metaObject(const QGraphicsWidget* self);
 void* QGraphicsWidget_metacast(QGraphicsWidget* self, const char* param1);
+int QGraphicsWidget_metacall(QGraphicsWidget* self, int param1, int param2, void** param3);
 struct miqt_string QGraphicsWidget_tr(const char* s);
 struct miqt_string QGraphicsWidget_trUtf8(const char* s);
 QGraphicsLayout* QGraphicsWidget_layout(const QGraphicsWidget* self);
@@ -198,6 +199,12 @@ int QGraphicsWidget_grabShortcut2(QGraphicsWidget* self, QKeySequence* sequence,
 void QGraphicsWidget_setShortcutEnabled2(QGraphicsWidget* self, int id, bool enabled);
 void QGraphicsWidget_setShortcutAutoRepeat2(QGraphicsWidget* self, int id, bool enabled);
 void QGraphicsWidget_setAttribute2(QGraphicsWidget* self, int attribute, bool on);
+bool QGraphicsWidget_override_virtual_metaObject(void* self, intptr_t slot);
+QMetaObject* QGraphicsWidget_virtualbase_metaObject(const void* self);
+bool QGraphicsWidget_override_virtual_metacast(void* self, intptr_t slot);
+void* QGraphicsWidget_virtualbase_metacast(void* self, const char* param1);
+bool QGraphicsWidget_override_virtual_metacall(void* self, intptr_t slot);
+int QGraphicsWidget_virtualbase_metacall(void* self, int param1, int param2, void** param3);
 bool QGraphicsWidget_override_virtual_setGeometry(void* self, intptr_t slot);
 void QGraphicsWidget_virtualbase_setGeometry(void* self, QRectF* rect);
 bool QGraphicsWidget_override_virtual_getContentsMargins(void* self, intptr_t slot);
@@ -334,6 +341,7 @@ void QGraphicsWidget_protectedbase_removeFromIndex(bool* _dynamic_cast_ok, void*
 void QGraphicsWidget_protectedbase_prepareGeometryChange(bool* _dynamic_cast_ok, void* self);
 void QGraphicsWidget_protectedbase_setGraphicsItem(bool* _dynamic_cast_ok, void* self, QGraphicsItem* item);
 void QGraphicsWidget_protectedbase_setOwnedByLayout(bool* _dynamic_cast_ok, void* self, bool ownedByLayout);
+const QMetaObject* QGraphicsWidget_staticMetaObject();
 void QGraphicsWidget_delete(QGraphicsWidget* self);
 
 #ifdef __cplusplus

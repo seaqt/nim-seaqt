@@ -32,6 +32,10 @@ void* QMediaStreamsControl_metacast(QMediaStreamsControl* self, const char* para
 	return self->qt_metacast(param1);
 }
 
+int QMediaStreamsControl_metacall(QMediaStreamsControl* self, int param1, int param2, void** param3) {
+	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
+}
+
 struct miqt_string QMediaStreamsControl_tr(const char* s) {
 	QString _ret = QMediaStreamsControl::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
@@ -140,6 +144,7 @@ struct miqt_string QMediaStreamsControl_trUtf83(const char* s, const char* c, in
 	return _ms;
 }
 
+const QMetaObject* QMediaStreamsControl_staticMetaObject() { return &QMediaStreamsControl::staticMetaObject; }
 void QMediaStreamsControl_delete(QMediaStreamsControl* self) {
 	delete self;
 }

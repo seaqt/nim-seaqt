@@ -115,6 +115,7 @@ proc fcQWebHitTestResult_frame(self: pointer, ): pointer {.importc: "QWebHitTest
 proc fcQWebHitTestResult_delete(self: pointer) {.importc: "QWebHitTestResult_delete".}
 proc fcQWebFrame_metaObject(self: pointer, ): pointer {.importc: "QWebFrame_metaObject".}
 proc fcQWebFrame_metacast(self: pointer, param1: cstring): pointer {.importc: "QWebFrame_metacast".}
+proc fcQWebFrame_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QWebFrame_metacall".}
 proc fcQWebFrame_tr(s: cstring): struct_miqt_string {.importc: "QWebFrame_tr".}
 proc fcQWebFrame_trUtf8(s: cstring): struct_miqt_string {.importc: "QWebFrame_trUtf8".}
 proc fcQWebFrame_page(self: pointer, ): pointer {.importc: "QWebFrame_page".}
@@ -197,6 +198,7 @@ proc fcQWebFrame_setContent3(self: pointer, data: struct_miqt_string, mimeType: 
 proc fcQWebFrame_addToJavaScriptWindowObject3(self: pointer, name: struct_miqt_string, objectVal: pointer, ownership: cint): void {.importc: "QWebFrame_addToJavaScriptWindowObject3".}
 proc fcQWebFrame_render22(self: pointer, param1: pointer, clip: pointer): void {.importc: "QWebFrame_render22".}
 proc fcQWebFrame_render3(self: pointer, param1: pointer, layer: cint, clip: pointer): void {.importc: "QWebFrame_render3".}
+proc fcQWebFrame_staticMetaObject(): pointer {.importc: "QWebFrame_staticMetaObject".}
 
 
 func init*(T: type gen_qwebframe_types.QWebHitTestResult, h: ptr cQWebHitTestResult): gen_qwebframe_types.QWebHitTestResult =
@@ -289,6 +291,9 @@ proc metaObject*(self: gen_qwebframe_types.QWebFrame, ): gen_qobjectdefs_types.Q
 
 proc metacast*(self: gen_qwebframe_types.QWebFrame, param1: cstring): pointer =
   fcQWebFrame_metacast(self.h, param1)
+
+proc metacall*(self: gen_qwebframe_types.QWebFrame, param1: cint, param2: cint, param3: pointer): cint =
+  fcQWebFrame_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qwebframe_types.QWebFrame, s: cstring): string =
   let v_ms = fcQWebFrame_tr(s)
@@ -662,3 +667,5 @@ proc render*(self: gen_qwebframe_types.QWebFrame, param1: gen_qpainter_types.QPa
 proc render*(self: gen_qwebframe_types.QWebFrame, param1: gen_qpainter_types.QPainter, layer: cint, clip: gen_qregion_types.QRegion): void =
   fcQWebFrame_render3(self.h, param1.h, cint(layer), clip.h)
 
+proc staticMetaObject*(_: type gen_qwebframe_types.QWebFrame): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fcQWebFrame_staticMetaObject())

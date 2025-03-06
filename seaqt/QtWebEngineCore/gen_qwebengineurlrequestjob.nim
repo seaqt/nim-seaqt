@@ -61,6 +61,7 @@ type cQWebEngineUrlRequestJob*{.exportc: "QWebEngineUrlRequestJob", incompleteSt
 
 proc fcQWebEngineUrlRequestJob_metaObject(self: pointer, ): pointer {.importc: "QWebEngineUrlRequestJob_metaObject".}
 proc fcQWebEngineUrlRequestJob_metacast(self: pointer, param1: cstring): pointer {.importc: "QWebEngineUrlRequestJob_metacast".}
+proc fcQWebEngineUrlRequestJob_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QWebEngineUrlRequestJob_metacall".}
 proc fcQWebEngineUrlRequestJob_tr(s: cstring): struct_miqt_string {.importc: "QWebEngineUrlRequestJob_tr".}
 proc fcQWebEngineUrlRequestJob_trUtf8(s: cstring): struct_miqt_string {.importc: "QWebEngineUrlRequestJob_trUtf8".}
 proc fcQWebEngineUrlRequestJob_requestUrl(self: pointer, ): pointer {.importc: "QWebEngineUrlRequestJob_requestUrl".}
@@ -73,6 +74,7 @@ proc fcQWebEngineUrlRequestJob_tr2(s: cstring, c: cstring): struct_miqt_string {
 proc fcQWebEngineUrlRequestJob_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QWebEngineUrlRequestJob_tr3".}
 proc fcQWebEngineUrlRequestJob_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QWebEngineUrlRequestJob_trUtf82".}
 proc fcQWebEngineUrlRequestJob_trUtf83(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QWebEngineUrlRequestJob_trUtf83".}
+proc fcQWebEngineUrlRequestJob_staticMetaObject(): pointer {.importc: "QWebEngineUrlRequestJob_staticMetaObject".}
 proc fcQWebEngineUrlRequestJob_delete(self: pointer) {.importc: "QWebEngineUrlRequestJob_delete".}
 
 
@@ -83,6 +85,9 @@ proc metaObject*(self: gen_qwebengineurlrequestjob_types.QWebEngineUrlRequestJob
 
 proc metacast*(self: gen_qwebengineurlrequestjob_types.QWebEngineUrlRequestJob, param1: cstring): pointer =
   fcQWebEngineUrlRequestJob_metacast(self.h, param1)
+
+proc metacall*(self: gen_qwebengineurlrequestjob_types.QWebEngineUrlRequestJob, param1: cint, param2: cint, param3: pointer): cint =
+  fcQWebEngineUrlRequestJob_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qwebengineurlrequestjob_types.QWebEngineUrlRequestJob, s: cstring): string =
   let v_ms = fcQWebEngineUrlRequestJob_tr(s)
@@ -141,5 +146,7 @@ proc trUtf8*(_: type gen_qwebengineurlrequestjob_types.QWebEngineUrlRequestJob, 
   c_free(v_ms.data)
   vx_ret
 
+proc staticMetaObject*(_: type gen_qwebengineurlrequestjob_types.QWebEngineUrlRequestJob): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fcQWebEngineUrlRequestJob_staticMetaObject())
 proc delete*(self: gen_qwebengineurlrequestjob_types.QWebEngineUrlRequestJob) =
   fcQWebEngineUrlRequestJob_delete(self.h)

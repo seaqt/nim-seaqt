@@ -63,6 +63,7 @@ proc fcQConcatenateTablesProxyModel_new(): ptr cQConcatenateTablesProxyModel {.i
 proc fcQConcatenateTablesProxyModel_new2(parent: pointer): ptr cQConcatenateTablesProxyModel {.importc: "QConcatenateTablesProxyModel_new2".}
 proc fcQConcatenateTablesProxyModel_metaObject(self: pointer, ): pointer {.importc: "QConcatenateTablesProxyModel_metaObject".}
 proc fcQConcatenateTablesProxyModel_metacast(self: pointer, param1: cstring): pointer {.importc: "QConcatenateTablesProxyModel_metacast".}
+proc fcQConcatenateTablesProxyModel_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QConcatenateTablesProxyModel_metacall".}
 proc fcQConcatenateTablesProxyModel_tr(s: cstring): struct_miqt_string {.importc: "QConcatenateTablesProxyModel_tr".}
 proc fcQConcatenateTablesProxyModel_trUtf8(s: cstring): struct_miqt_string {.importc: "QConcatenateTablesProxyModel_trUtf8".}
 proc fcQConcatenateTablesProxyModel_sourceModels(self: pointer, ): struct_miqt_array {.importc: "QConcatenateTablesProxyModel_sourceModels".}
@@ -89,6 +90,12 @@ proc fcQConcatenateTablesProxyModel_tr2(s: cstring, c: cstring): struct_miqt_str
 proc fcQConcatenateTablesProxyModel_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QConcatenateTablesProxyModel_tr3".}
 proc fcQConcatenateTablesProxyModel_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QConcatenateTablesProxyModel_trUtf82".}
 proc fcQConcatenateTablesProxyModel_trUtf83(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QConcatenateTablesProxyModel_trUtf83".}
+proc fQConcatenateTablesProxyModel_virtualbase_metaObject(self: pointer, ): pointer{.importc: "QConcatenateTablesProxyModel_virtualbase_metaObject".}
+proc fcQConcatenateTablesProxyModel_override_virtual_metaObject(self: pointer, slot: int) {.importc: "QConcatenateTablesProxyModel_override_virtual_metaObject".}
+proc fQConcatenateTablesProxyModel_virtualbase_metacast(self: pointer, param1: cstring): pointer{.importc: "QConcatenateTablesProxyModel_virtualbase_metacast".}
+proc fcQConcatenateTablesProxyModel_override_virtual_metacast(self: pointer, slot: int) {.importc: "QConcatenateTablesProxyModel_override_virtual_metacast".}
+proc fQConcatenateTablesProxyModel_virtualbase_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint{.importc: "QConcatenateTablesProxyModel_virtualbase_metacall".}
+proc fcQConcatenateTablesProxyModel_override_virtual_metacall(self: pointer, slot: int) {.importc: "QConcatenateTablesProxyModel_override_virtual_metacall".}
 proc fQConcatenateTablesProxyModel_virtualbase_data(self: pointer, index: pointer, role: cint): pointer{.importc: "QConcatenateTablesProxyModel_virtualbase_data".}
 proc fcQConcatenateTablesProxyModel_override_virtual_data(self: pointer, slot: int) {.importc: "QConcatenateTablesProxyModel_override_virtual_data".}
 proc fQConcatenateTablesProxyModel_virtualbase_setData(self: pointer, index: pointer, value: pointer, role: cint): bool{.importc: "QConcatenateTablesProxyModel_virtualbase_setData".}
@@ -171,6 +178,7 @@ proc fQConcatenateTablesProxyModel_virtualbase_connectNotify(self: pointer, sign
 proc fcQConcatenateTablesProxyModel_override_virtual_connectNotify(self: pointer, slot: int) {.importc: "QConcatenateTablesProxyModel_override_virtual_connectNotify".}
 proc fQConcatenateTablesProxyModel_virtualbase_disconnectNotify(self: pointer, signal: pointer): void{.importc: "QConcatenateTablesProxyModel_virtualbase_disconnectNotify".}
 proc fcQConcatenateTablesProxyModel_override_virtual_disconnectNotify(self: pointer, slot: int) {.importc: "QConcatenateTablesProxyModel_override_virtual_disconnectNotify".}
+proc fcQConcatenateTablesProxyModel_staticMetaObject(): pointer {.importc: "QConcatenateTablesProxyModel_staticMetaObject".}
 proc fcQConcatenateTablesProxyModel_delete(self: pointer) {.importc: "QConcatenateTablesProxyModel_delete".}
 
 
@@ -187,6 +195,9 @@ proc metaObject*(self: gen_qconcatenatetablesproxymodel_types.QConcatenateTables
 
 proc metacast*(self: gen_qconcatenatetablesproxymodel_types.QConcatenateTablesProxyModel, param1: cstring): pointer =
   fcQConcatenateTablesProxyModel_metacast(self.h, param1)
+
+proc metacall*(self: gen_qconcatenatetablesproxymodel_types.QConcatenateTablesProxyModel, param1: cint, param2: cint, param3: pointer): cint =
+  fcQConcatenateTablesProxyModel_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qconcatenatetablesproxymodel_types.QConcatenateTablesProxyModel, s: cstring): string =
   let v_ms = fcQConcatenateTablesProxyModel_tr(s)
@@ -319,6 +330,65 @@ proc trUtf8*(_: type gen_qconcatenatetablesproxymodel_types.QConcatenateTablesPr
   c_free(v_ms.data)
   vx_ret
 
+proc QConcatenateTablesProxyModelmetaObject*(self: gen_qconcatenatetablesproxymodel_types.QConcatenateTablesProxyModel, ): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fQConcatenateTablesProxyModel_virtualbase_metaObject(self.h))
+
+type QConcatenateTablesProxyModelmetaObjectProc* = proc(): gen_qobjectdefs_types.QMetaObject
+proc onmetaObject*(self: gen_qconcatenatetablesproxymodel_types.QConcatenateTablesProxyModel, slot: QConcatenateTablesProxyModelmetaObjectProc) =
+  # TODO check subclass
+  var tmp = new QConcatenateTablesProxyModelmetaObjectProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQConcatenateTablesProxyModel_override_virtual_metaObject(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QConcatenateTablesProxyModel_metaObject(self: ptr cQConcatenateTablesProxyModel, slot: int): pointer {.exportc: "miqt_exec_callback_QConcatenateTablesProxyModel_metaObject ".} =
+  var nimfunc = cast[ptr QConcatenateTablesProxyModelmetaObjectProc](cast[pointer](slot))
+
+  let virtualReturn = nimfunc[]( )
+
+  virtualReturn.h
+proc QConcatenateTablesProxyModelmetacast*(self: gen_qconcatenatetablesproxymodel_types.QConcatenateTablesProxyModel, param1: cstring): pointer =
+  fQConcatenateTablesProxyModel_virtualbase_metacast(self.h, param1)
+
+type QConcatenateTablesProxyModelmetacastProc* = proc(param1: cstring): pointer
+proc onmetacast*(self: gen_qconcatenatetablesproxymodel_types.QConcatenateTablesProxyModel, slot: QConcatenateTablesProxyModelmetacastProc) =
+  # TODO check subclass
+  var tmp = new QConcatenateTablesProxyModelmetacastProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQConcatenateTablesProxyModel_override_virtual_metacast(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QConcatenateTablesProxyModel_metacast(self: ptr cQConcatenateTablesProxyModel, slot: int, param1: cstring): pointer {.exportc: "miqt_exec_callback_QConcatenateTablesProxyModel_metacast ".} =
+  var nimfunc = cast[ptr QConcatenateTablesProxyModelmetacastProc](cast[pointer](slot))
+  let slotval1 = (param1)
+
+
+  let virtualReturn = nimfunc[](slotval1 )
+
+  virtualReturn
+proc QConcatenateTablesProxyModelmetacall*(self: gen_qconcatenatetablesproxymodel_types.QConcatenateTablesProxyModel, param1: cint, param2: cint, param3: pointer): cint =
+  fQConcatenateTablesProxyModel_virtualbase_metacall(self.h, cint(param1), param2, param3)
+
+type QConcatenateTablesProxyModelmetacallProc* = proc(param1: cint, param2: cint, param3: pointer): cint
+proc onmetacall*(self: gen_qconcatenatetablesproxymodel_types.QConcatenateTablesProxyModel, slot: QConcatenateTablesProxyModelmetacallProc) =
+  # TODO check subclass
+  var tmp = new QConcatenateTablesProxyModelmetacallProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQConcatenateTablesProxyModel_override_virtual_metacall(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QConcatenateTablesProxyModel_metacall(self: ptr cQConcatenateTablesProxyModel, slot: int, param1: cint, param2: cint, param3: pointer): cint {.exportc: "miqt_exec_callback_QConcatenateTablesProxyModel_metacall ".} =
+  var nimfunc = cast[ptr QConcatenateTablesProxyModelmetacallProc](cast[pointer](slot))
+  let slotval1 = cint(param1)
+
+  let slotval2 = param2
+
+  let slotval3 = param3
+
+
+  let virtualReturn = nimfunc[](slotval1, slotval2, slotval3 )
+
+  virtualReturn
 proc QConcatenateTablesProxyModeldata*(self: gen_qconcatenatetablesproxymodel_types.QConcatenateTablesProxyModel, index: gen_qabstractitemmodel_types.QModelIndex, role: cint): gen_qvariant_types.QVariant =
   gen_qvariant_types.QVariant(h: fQConcatenateTablesProxyModel_virtualbase_data(self.h, index.h, role))
 
@@ -1243,5 +1313,7 @@ proc miqt_exec_callback_QConcatenateTablesProxyModel_disconnectNotify(self: ptr 
 
 
   nimfunc[](slotval1)
+proc staticMetaObject*(_: type gen_qconcatenatetablesproxymodel_types.QConcatenateTablesProxyModel): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fcQConcatenateTablesProxyModel_staticMetaObject())
 proc delete*(self: gen_qconcatenatetablesproxymodel_types.QConcatenateTablesProxyModel) =
   fcQConcatenateTablesProxyModel_delete(self.h)

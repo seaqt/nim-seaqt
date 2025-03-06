@@ -85,6 +85,7 @@ proc fcQSslSocket_new(): ptr cQSslSocket {.importc: "QSslSocket_new".}
 proc fcQSslSocket_new2(parent: pointer): ptr cQSslSocket {.importc: "QSslSocket_new2".}
 proc fcQSslSocket_metaObject(self: pointer, ): pointer {.importc: "QSslSocket_metaObject".}
 proc fcQSslSocket_metacast(self: pointer, param1: cstring): pointer {.importc: "QSslSocket_metacast".}
+proc fcQSslSocket_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QSslSocket_metacall".}
 proc fcQSslSocket_tr(s: cstring): struct_miqt_string {.importc: "QSslSocket_tr".}
 proc fcQSslSocket_trUtf8(s: cstring): struct_miqt_string {.importc: "QSslSocket_trUtf8".}
 proc fcQSslSocket_resume(self: pointer, ): void {.importc: "QSslSocket_resume".}
@@ -194,6 +195,12 @@ proc fcQSslSocket_addCaCertificates3(self: pointer, path: struct_miqt_string, fo
 proc fcQSslSocket_addDefaultCaCertificates2(path: struct_miqt_string, format: cint): bool {.importc: "QSslSocket_addDefaultCaCertificates2".}
 proc fcQSslSocket_addDefaultCaCertificates3(path: struct_miqt_string, format: cint, syntax: cint): bool {.importc: "QSslSocket_addDefaultCaCertificates3".}
 proc fcQSslSocket_waitForEncrypted1(self: pointer, msecs: cint): bool {.importc: "QSslSocket_waitForEncrypted1".}
+proc fQSslSocket_virtualbase_metaObject(self: pointer, ): pointer{.importc: "QSslSocket_virtualbase_metaObject".}
+proc fcQSslSocket_override_virtual_metaObject(self: pointer, slot: int) {.importc: "QSslSocket_override_virtual_metaObject".}
+proc fQSslSocket_virtualbase_metacast(self: pointer, param1: cstring): pointer{.importc: "QSslSocket_virtualbase_metacast".}
+proc fcQSslSocket_override_virtual_metacast(self: pointer, slot: int) {.importc: "QSslSocket_override_virtual_metacast".}
+proc fQSslSocket_virtualbase_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint{.importc: "QSslSocket_virtualbase_metacall".}
+proc fcQSslSocket_override_virtual_metacall(self: pointer, slot: int) {.importc: "QSslSocket_override_virtual_metacall".}
 proc fQSslSocket_virtualbase_resume(self: pointer, ): void{.importc: "QSslSocket_virtualbase_resume".}
 proc fcQSslSocket_override_virtual_resume(self: pointer, slot: int) {.importc: "QSslSocket_override_virtual_resume".}
 proc fQSslSocket_virtualbase_setSocketDescriptor(self: pointer, socketDescriptor: uint, state: cint, openMode: cint): bool{.importc: "QSslSocket_virtualbase_setSocketDescriptor".}
@@ -260,6 +267,7 @@ proc fQSslSocket_virtualbase_connectNotify(self: pointer, signal: pointer): void
 proc fcQSslSocket_override_virtual_connectNotify(self: pointer, slot: int) {.importc: "QSslSocket_override_virtual_connectNotify".}
 proc fQSslSocket_virtualbase_disconnectNotify(self: pointer, signal: pointer): void{.importc: "QSslSocket_virtualbase_disconnectNotify".}
 proc fcQSslSocket_override_virtual_disconnectNotify(self: pointer, slot: int) {.importc: "QSslSocket_override_virtual_disconnectNotify".}
+proc fcQSslSocket_staticMetaObject(): pointer {.importc: "QSslSocket_staticMetaObject".}
 proc fcQSslSocket_delete(self: pointer) {.importc: "QSslSocket_delete".}
 
 
@@ -276,6 +284,9 @@ proc metaObject*(self: gen_qsslsocket_types.QSslSocket, ): gen_qobjectdefs_types
 
 proc metacast*(self: gen_qsslsocket_types.QSslSocket, param1: cstring): pointer =
   fcQSslSocket_metacast(self.h, param1)
+
+proc metacall*(self: gen_qsslsocket_types.QSslSocket, param1: cint, param2: cint, param3: pointer): cint =
+  fcQSslSocket_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qsslsocket_types.QSslSocket, s: cstring): string =
   let v_ms = fcQSslSocket_tr(s)
@@ -793,6 +804,65 @@ proc addDefaultCaCertificates*(_: type gen_qsslsocket_types.QSslSocket, path: st
 proc waitForEncrypted*(self: gen_qsslsocket_types.QSslSocket, msecs: cint): bool =
   fcQSslSocket_waitForEncrypted1(self.h, msecs)
 
+proc QSslSocketmetaObject*(self: gen_qsslsocket_types.QSslSocket, ): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fQSslSocket_virtualbase_metaObject(self.h))
+
+type QSslSocketmetaObjectProc* = proc(): gen_qobjectdefs_types.QMetaObject
+proc onmetaObject*(self: gen_qsslsocket_types.QSslSocket, slot: QSslSocketmetaObjectProc) =
+  # TODO check subclass
+  var tmp = new QSslSocketmetaObjectProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQSslSocket_override_virtual_metaObject(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QSslSocket_metaObject(self: ptr cQSslSocket, slot: int): pointer {.exportc: "miqt_exec_callback_QSslSocket_metaObject ".} =
+  var nimfunc = cast[ptr QSslSocketmetaObjectProc](cast[pointer](slot))
+
+  let virtualReturn = nimfunc[]( )
+
+  virtualReturn.h
+proc QSslSocketmetacast*(self: gen_qsslsocket_types.QSslSocket, param1: cstring): pointer =
+  fQSslSocket_virtualbase_metacast(self.h, param1)
+
+type QSslSocketmetacastProc* = proc(param1: cstring): pointer
+proc onmetacast*(self: gen_qsslsocket_types.QSslSocket, slot: QSslSocketmetacastProc) =
+  # TODO check subclass
+  var tmp = new QSslSocketmetacastProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQSslSocket_override_virtual_metacast(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QSslSocket_metacast(self: ptr cQSslSocket, slot: int, param1: cstring): pointer {.exportc: "miqt_exec_callback_QSslSocket_metacast ".} =
+  var nimfunc = cast[ptr QSslSocketmetacastProc](cast[pointer](slot))
+  let slotval1 = (param1)
+
+
+  let virtualReturn = nimfunc[](slotval1 )
+
+  virtualReturn
+proc QSslSocketmetacall*(self: gen_qsslsocket_types.QSslSocket, param1: cint, param2: cint, param3: pointer): cint =
+  fQSslSocket_virtualbase_metacall(self.h, cint(param1), param2, param3)
+
+type QSslSocketmetacallProc* = proc(param1: cint, param2: cint, param3: pointer): cint
+proc onmetacall*(self: gen_qsslsocket_types.QSslSocket, slot: QSslSocketmetacallProc) =
+  # TODO check subclass
+  var tmp = new QSslSocketmetacallProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQSslSocket_override_virtual_metacall(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QSslSocket_metacall(self: ptr cQSslSocket, slot: int, param1: cint, param2: cint, param3: pointer): cint {.exportc: "miqt_exec_callback_QSslSocket_metacall ".} =
+  var nimfunc = cast[ptr QSslSocketmetacallProc](cast[pointer](slot))
+  let slotval1 = cint(param1)
+
+  let slotval2 = param2
+
+  let slotval3 = param3
+
+
+  let virtualReturn = nimfunc[](slotval1, slotval2, slotval3 )
+
+  virtualReturn
 proc QSslSocketresume*(self: gen_qsslsocket_types.QSslSocket, ): void =
   fQSslSocket_virtualbase_resume(self.h)
 
@@ -1397,5 +1467,7 @@ proc miqt_exec_callback_QSslSocket_disconnectNotify(self: ptr cQSslSocket, slot:
 
 
   nimfunc[](slotval1)
+proc staticMetaObject*(_: type gen_qsslsocket_types.QSslSocket): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fcQSslSocket_staticMetaObject())
 proc delete*(self: gen_qsslsocket_types.QSslSocket) =
   fcQSslSocket_delete(self.h)

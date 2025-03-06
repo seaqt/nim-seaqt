@@ -91,6 +91,7 @@ QAbstractSpinBox* QAbstractSpinBox_new2();
 void QAbstractSpinBox_virtbase(QAbstractSpinBox* src, QWidget** outptr_QWidget);
 QMetaObject* QAbstractSpinBox_metaObject(const QAbstractSpinBox* self);
 void* QAbstractSpinBox_metacast(QAbstractSpinBox* self, const char* param1);
+int QAbstractSpinBox_metacall(QAbstractSpinBox* self, int param1, int param2, void** param3);
 struct miqt_string QAbstractSpinBox_tr(const char* s);
 struct miqt_string QAbstractSpinBox_trUtf8(const char* s);
 int QAbstractSpinBox_buttonSymbols(const QAbstractSpinBox* self);
@@ -150,6 +151,12 @@ struct miqt_string QAbstractSpinBox_tr2(const char* s, const char* c);
 struct miqt_string QAbstractSpinBox_tr3(const char* s, const char* c, int n);
 struct miqt_string QAbstractSpinBox_trUtf82(const char* s, const char* c);
 struct miqt_string QAbstractSpinBox_trUtf83(const char* s, const char* c, int n);
+bool QAbstractSpinBox_override_virtual_metaObject(void* self, intptr_t slot);
+QMetaObject* QAbstractSpinBox_virtualbase_metaObject(const void* self);
+bool QAbstractSpinBox_override_virtual_metacast(void* self, intptr_t slot);
+void* QAbstractSpinBox_virtualbase_metacast(void* self, const char* param1);
+bool QAbstractSpinBox_override_virtual_metacall(void* self, intptr_t slot);
+int QAbstractSpinBox_virtualbase_metacall(void* self, int param1, int param2, void** param3);
 bool QAbstractSpinBox_override_virtual_sizeHint(void* self, intptr_t slot);
 QSize* QAbstractSpinBox_virtualbase_sizeHint(const void* self);
 bool QAbstractSpinBox_override_virtual_minimumSizeHint(void* self, intptr_t slot);
@@ -266,6 +273,7 @@ QObject* QAbstractSpinBox_protectedbase_sender(bool* _dynamic_cast_ok, const voi
 int QAbstractSpinBox_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
 int QAbstractSpinBox_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
 bool QAbstractSpinBox_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+const QMetaObject* QAbstractSpinBox_staticMetaObject();
 void QAbstractSpinBox_delete(QAbstractSpinBox* self);
 
 #ifdef __cplusplus

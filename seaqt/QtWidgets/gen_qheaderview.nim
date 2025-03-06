@@ -90,6 +90,7 @@ proc fcQHeaderView_new(orientation: cint): ptr cQHeaderView {.importc: "QHeaderV
 proc fcQHeaderView_new2(orientation: cint, parent: pointer): ptr cQHeaderView {.importc: "QHeaderView_new2".}
 proc fcQHeaderView_metaObject(self: pointer, ): pointer {.importc: "QHeaderView_metaObject".}
 proc fcQHeaderView_metacast(self: pointer, param1: cstring): pointer {.importc: "QHeaderView_metacast".}
+proc fcQHeaderView_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QHeaderView_metacall".}
 proc fcQHeaderView_tr(s: cstring): struct_miqt_string {.importc: "QHeaderView_tr".}
 proc fcQHeaderView_trUtf8(s: cstring): struct_miqt_string {.importc: "QHeaderView_trUtf8".}
 proc fcQHeaderView_setModel(self: pointer, model: pointer): void {.importc: "QHeaderView_setModel".}
@@ -184,6 +185,12 @@ proc fcQHeaderView_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "Q
 proc fcQHeaderView_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QHeaderView_tr3".}
 proc fcQHeaderView_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QHeaderView_trUtf82".}
 proc fcQHeaderView_trUtf83(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QHeaderView_trUtf83".}
+proc fQHeaderView_virtualbase_metaObject(self: pointer, ): pointer{.importc: "QHeaderView_virtualbase_metaObject".}
+proc fcQHeaderView_override_virtual_metaObject(self: pointer, slot: int) {.importc: "QHeaderView_override_virtual_metaObject".}
+proc fQHeaderView_virtualbase_metacast(self: pointer, param1: cstring): pointer{.importc: "QHeaderView_virtualbase_metacast".}
+proc fcQHeaderView_override_virtual_metacast(self: pointer, slot: int) {.importc: "QHeaderView_override_virtual_metacast".}
+proc fQHeaderView_virtualbase_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint{.importc: "QHeaderView_virtualbase_metacall".}
+proc fcQHeaderView_override_virtual_metacall(self: pointer, slot: int) {.importc: "QHeaderView_override_virtual_metacall".}
 proc fQHeaderView_virtualbase_setModel(self: pointer, model: pointer): void{.importc: "QHeaderView_virtualbase_setModel".}
 proc fcQHeaderView_override_virtual_setModel(self: pointer, slot: int) {.importc: "QHeaderView_override_virtual_setModel".}
 proc fQHeaderView_virtualbase_sizeHint(self: pointer, ): pointer{.importc: "QHeaderView_virtualbase_sizeHint".}
@@ -366,6 +373,7 @@ proc fQHeaderView_virtualbase_connectNotify(self: pointer, signal: pointer): voi
 proc fcQHeaderView_override_virtual_connectNotify(self: pointer, slot: int) {.importc: "QHeaderView_override_virtual_connectNotify".}
 proc fQHeaderView_virtualbase_disconnectNotify(self: pointer, signal: pointer): void{.importc: "QHeaderView_virtualbase_disconnectNotify".}
 proc fcQHeaderView_override_virtual_disconnectNotify(self: pointer, slot: int) {.importc: "QHeaderView_override_virtual_disconnectNotify".}
+proc fcQHeaderView_staticMetaObject(): pointer {.importc: "QHeaderView_staticMetaObject".}
 proc fcQHeaderView_delete(self: pointer) {.importc: "QHeaderView_delete".}
 
 
@@ -382,6 +390,9 @@ proc metaObject*(self: gen_qheaderview_types.QHeaderView, ): gen_qobjectdefs_typ
 
 proc metacast*(self: gen_qheaderview_types.QHeaderView, param1: cstring): pointer =
   fcQHeaderView_metacast(self.h, param1)
+
+proc metacall*(self: gen_qheaderview_types.QHeaderView, param1: cint, param2: cint, param3: pointer): cint =
+  fcQHeaderView_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qheaderview_types.QHeaderView, s: cstring): string =
   let v_ms = fcQHeaderView_tr(s)
@@ -796,6 +807,65 @@ proc trUtf8*(_: type gen_qheaderview_types.QHeaderView, s: cstring, c: cstring, 
   c_free(v_ms.data)
   vx_ret
 
+proc QHeaderViewmetaObject*(self: gen_qheaderview_types.QHeaderView, ): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fQHeaderView_virtualbase_metaObject(self.h))
+
+type QHeaderViewmetaObjectProc* = proc(): gen_qobjectdefs_types.QMetaObject
+proc onmetaObject*(self: gen_qheaderview_types.QHeaderView, slot: QHeaderViewmetaObjectProc) =
+  # TODO check subclass
+  var tmp = new QHeaderViewmetaObjectProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQHeaderView_override_virtual_metaObject(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QHeaderView_metaObject(self: ptr cQHeaderView, slot: int): pointer {.exportc: "miqt_exec_callback_QHeaderView_metaObject ".} =
+  var nimfunc = cast[ptr QHeaderViewmetaObjectProc](cast[pointer](slot))
+
+  let virtualReturn = nimfunc[]( )
+
+  virtualReturn.h
+proc QHeaderViewmetacast*(self: gen_qheaderview_types.QHeaderView, param1: cstring): pointer =
+  fQHeaderView_virtualbase_metacast(self.h, param1)
+
+type QHeaderViewmetacastProc* = proc(param1: cstring): pointer
+proc onmetacast*(self: gen_qheaderview_types.QHeaderView, slot: QHeaderViewmetacastProc) =
+  # TODO check subclass
+  var tmp = new QHeaderViewmetacastProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQHeaderView_override_virtual_metacast(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QHeaderView_metacast(self: ptr cQHeaderView, slot: int, param1: cstring): pointer {.exportc: "miqt_exec_callback_QHeaderView_metacast ".} =
+  var nimfunc = cast[ptr QHeaderViewmetacastProc](cast[pointer](slot))
+  let slotval1 = (param1)
+
+
+  let virtualReturn = nimfunc[](slotval1 )
+
+  virtualReturn
+proc QHeaderViewmetacall*(self: gen_qheaderview_types.QHeaderView, param1: cint, param2: cint, param3: pointer): cint =
+  fQHeaderView_virtualbase_metacall(self.h, cint(param1), param2, param3)
+
+type QHeaderViewmetacallProc* = proc(param1: cint, param2: cint, param3: pointer): cint
+proc onmetacall*(self: gen_qheaderview_types.QHeaderView, slot: QHeaderViewmetacallProc) =
+  # TODO check subclass
+  var tmp = new QHeaderViewmetacallProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQHeaderView_override_virtual_metacall(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QHeaderView_metacall(self: ptr cQHeaderView, slot: int, param1: cint, param2: cint, param3: pointer): cint {.exportc: "miqt_exec_callback_QHeaderView_metacall ".} =
+  var nimfunc = cast[ptr QHeaderViewmetacallProc](cast[pointer](slot))
+  let slotval1 = cint(param1)
+
+  let slotval2 = param2
+
+  let slotval3 = param3
+
+
+  let virtualReturn = nimfunc[](slotval1, slotval2, slotval3 )
+
+  virtualReturn
 proc QHeaderViewsetModel*(self: gen_qheaderview_types.QHeaderView, model: gen_qabstractitemmodel_types.QAbstractItemModel): void =
   fQHeaderView_virtualbase_setModel(self.h, model.h)
 
@@ -2435,5 +2505,7 @@ proc miqt_exec_callback_QHeaderView_disconnectNotify(self: ptr cQHeaderView, slo
 
 
   nimfunc[](slotval1)
+proc staticMetaObject*(_: type gen_qheaderview_types.QHeaderView): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fcQHeaderView_staticMetaObject())
 proc delete*(self: gen_qheaderview_types.QHeaderView) =
   fcQHeaderView_delete(self.h)

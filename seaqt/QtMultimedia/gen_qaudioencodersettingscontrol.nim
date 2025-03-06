@@ -50,6 +50,7 @@ type cQAudioEncoderSettingsControl*{.exportc: "QAudioEncoderSettingsControl", in
 
 proc fcQAudioEncoderSettingsControl_metaObject(self: pointer, ): pointer {.importc: "QAudioEncoderSettingsControl_metaObject".}
 proc fcQAudioEncoderSettingsControl_metacast(self: pointer, param1: cstring): pointer {.importc: "QAudioEncoderSettingsControl_metacast".}
+proc fcQAudioEncoderSettingsControl_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QAudioEncoderSettingsControl_metacall".}
 proc fcQAudioEncoderSettingsControl_tr(s: cstring): struct_miqt_string {.importc: "QAudioEncoderSettingsControl_tr".}
 proc fcQAudioEncoderSettingsControl_trUtf8(s: cstring): struct_miqt_string {.importc: "QAudioEncoderSettingsControl_trUtf8".}
 proc fcQAudioEncoderSettingsControl_supportedAudioCodecs(self: pointer, ): struct_miqt_array {.importc: "QAudioEncoderSettingsControl_supportedAudioCodecs".}
@@ -61,6 +62,7 @@ proc fcQAudioEncoderSettingsControl_tr2(s: cstring, c: cstring): struct_miqt_str
 proc fcQAudioEncoderSettingsControl_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QAudioEncoderSettingsControl_tr3".}
 proc fcQAudioEncoderSettingsControl_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QAudioEncoderSettingsControl_trUtf82".}
 proc fcQAudioEncoderSettingsControl_trUtf83(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QAudioEncoderSettingsControl_trUtf83".}
+proc fcQAudioEncoderSettingsControl_staticMetaObject(): pointer {.importc: "QAudioEncoderSettingsControl_staticMetaObject".}
 proc fcQAudioEncoderSettingsControl_delete(self: pointer) {.importc: "QAudioEncoderSettingsControl_delete".}
 
 
@@ -71,6 +73,9 @@ proc metaObject*(self: gen_qaudioencodersettingscontrol_types.QAudioEncoderSetti
 
 proc metacast*(self: gen_qaudioencodersettingscontrol_types.QAudioEncoderSettingsControl, param1: cstring): pointer =
   fcQAudioEncoderSettingsControl_metacast(self.h, param1)
+
+proc metacall*(self: gen_qaudioencodersettingscontrol_types.QAudioEncoderSettingsControl, param1: cint, param2: cint, param3: pointer): cint =
+  fcQAudioEncoderSettingsControl_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qaudioencodersettingscontrol_types.QAudioEncoderSettingsControl, s: cstring): string =
   let v_ms = fcQAudioEncoderSettingsControl_tr(s)
@@ -139,5 +144,7 @@ proc trUtf8*(_: type gen_qaudioencodersettingscontrol_types.QAudioEncoderSetting
   c_free(v_ms.data)
   vx_ret
 
+proc staticMetaObject*(_: type gen_qaudioencodersettingscontrol_types.QAudioEncoderSettingsControl): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fcQAudioEncoderSettingsControl_staticMetaObject())
 proc delete*(self: gen_qaudioencodersettingscontrol_types.QAudioEncoderSettingsControl) =
   fcQAudioEncoderSettingsControl_delete(self.h)

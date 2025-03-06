@@ -52,6 +52,7 @@ type cQCameraFocusControl*{.exportc: "QCameraFocusControl", incompleteStruct.} =
 
 proc fcQCameraFocusControl_metaObject(self: pointer, ): pointer {.importc: "QCameraFocusControl_metaObject".}
 proc fcQCameraFocusControl_metacast(self: pointer, param1: cstring): pointer {.importc: "QCameraFocusControl_metacast".}
+proc fcQCameraFocusControl_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QCameraFocusControl_metacall".}
 proc fcQCameraFocusControl_tr(s: cstring): struct_miqt_string {.importc: "QCameraFocusControl_tr".}
 proc fcQCameraFocusControl_trUtf8(s: cstring): struct_miqt_string {.importc: "QCameraFocusControl_trUtf8".}
 proc fcQCameraFocusControl_focusMode(self: pointer, ): cint {.importc: "QCameraFocusControl_focusMode".}
@@ -75,6 +76,7 @@ proc fcQCameraFocusControl_tr2(s: cstring, c: cstring): struct_miqt_string {.imp
 proc fcQCameraFocusControl_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QCameraFocusControl_tr3".}
 proc fcQCameraFocusControl_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QCameraFocusControl_trUtf82".}
 proc fcQCameraFocusControl_trUtf83(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QCameraFocusControl_trUtf83".}
+proc fcQCameraFocusControl_staticMetaObject(): pointer {.importc: "QCameraFocusControl_staticMetaObject".}
 proc fcQCameraFocusControl_delete(self: pointer) {.importc: "QCameraFocusControl_delete".}
 
 
@@ -85,6 +87,9 @@ proc metaObject*(self: gen_qcamerafocuscontrol_types.QCameraFocusControl, ): gen
 
 proc metacast*(self: gen_qcamerafocuscontrol_types.QCameraFocusControl, param1: cstring): pointer =
   fcQCameraFocusControl_metacast(self.h, param1)
+
+proc metacall*(self: gen_qcamerafocuscontrol_types.QCameraFocusControl, param1: cint, param2: cint, param3: pointer): cint =
+  fcQCameraFocusControl_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qcamerafocuscontrol_types.QCameraFocusControl, s: cstring): string =
   let v_ms = fcQCameraFocusControl_tr(s)
@@ -216,5 +221,7 @@ proc trUtf8*(_: type gen_qcamerafocuscontrol_types.QCameraFocusControl, s: cstri
   c_free(v_ms.data)
   vx_ret
 
+proc staticMetaObject*(_: type gen_qcamerafocuscontrol_types.QCameraFocusControl): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fcQCameraFocusControl_staticMetaObject())
 proc delete*(self: gen_qcamerafocuscontrol_types.QCameraFocusControl) =
   fcQCameraFocusControl_delete(self.h)

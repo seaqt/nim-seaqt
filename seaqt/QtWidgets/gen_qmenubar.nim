@@ -78,6 +78,7 @@ proc fcQMenuBar_new(parent: pointer): ptr cQMenuBar {.importc: "QMenuBar_new".}
 proc fcQMenuBar_new2(): ptr cQMenuBar {.importc: "QMenuBar_new2".}
 proc fcQMenuBar_metaObject(self: pointer, ): pointer {.importc: "QMenuBar_metaObject".}
 proc fcQMenuBar_metacast(self: pointer, param1: cstring): pointer {.importc: "QMenuBar_metacast".}
+proc fcQMenuBar_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QMenuBar_metacall".}
 proc fcQMenuBar_tr(s: cstring): struct_miqt_string {.importc: "QMenuBar_tr".}
 proc fcQMenuBar_trUtf8(s: cstring): struct_miqt_string {.importc: "QMenuBar_trUtf8".}
 proc fcQMenuBar_addAction(self: pointer, text: struct_miqt_string): pointer {.importc: "QMenuBar_addAction".}
@@ -112,6 +113,12 @@ proc fcQMenuBar_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "
 proc fcQMenuBar_trUtf83(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QMenuBar_trUtf83".}
 proc fcQMenuBar_setCornerWidget2(self: pointer, w: pointer, corner: cint): void {.importc: "QMenuBar_setCornerWidget2".}
 proc fcQMenuBar_cornerWidget1(self: pointer, corner: cint): pointer {.importc: "QMenuBar_cornerWidget1".}
+proc fQMenuBar_virtualbase_metaObject(self: pointer, ): pointer{.importc: "QMenuBar_virtualbase_metaObject".}
+proc fcQMenuBar_override_virtual_metaObject(self: pointer, slot: int) {.importc: "QMenuBar_override_virtual_metaObject".}
+proc fQMenuBar_virtualbase_metacast(self: pointer, param1: cstring): pointer{.importc: "QMenuBar_virtualbase_metacast".}
+proc fcQMenuBar_override_virtual_metacast(self: pointer, slot: int) {.importc: "QMenuBar_override_virtual_metacast".}
+proc fQMenuBar_virtualbase_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint{.importc: "QMenuBar_virtualbase_metacall".}
+proc fcQMenuBar_override_virtual_metacall(self: pointer, slot: int) {.importc: "QMenuBar_override_virtual_metacall".}
 proc fQMenuBar_virtualbase_sizeHint(self: pointer, ): pointer{.importc: "QMenuBar_virtualbase_sizeHint".}
 proc fcQMenuBar_override_virtual_sizeHint(self: pointer, slot: int) {.importc: "QMenuBar_override_virtual_sizeHint".}
 proc fQMenuBar_virtualbase_minimumSizeHint(self: pointer, ): pointer{.importc: "QMenuBar_virtualbase_minimumSizeHint".}
@@ -206,6 +213,7 @@ proc fQMenuBar_virtualbase_connectNotify(self: pointer, signal: pointer): void{.
 proc fcQMenuBar_override_virtual_connectNotify(self: pointer, slot: int) {.importc: "QMenuBar_override_virtual_connectNotify".}
 proc fQMenuBar_virtualbase_disconnectNotify(self: pointer, signal: pointer): void{.importc: "QMenuBar_virtualbase_disconnectNotify".}
 proc fcQMenuBar_override_virtual_disconnectNotify(self: pointer, slot: int) {.importc: "QMenuBar_override_virtual_disconnectNotify".}
+proc fcQMenuBar_staticMetaObject(): pointer {.importc: "QMenuBar_staticMetaObject".}
 proc fcQMenuBar_delete(self: pointer) {.importc: "QMenuBar_delete".}
 
 
@@ -222,6 +230,9 @@ proc metaObject*(self: gen_qmenubar_types.QMenuBar, ): gen_qobjectdefs_types.QMe
 
 proc metacast*(self: gen_qmenubar_types.QMenuBar, param1: cstring): pointer =
   fcQMenuBar_metacast(self.h, param1)
+
+proc metacall*(self: gen_qmenubar_types.QMenuBar, param1: cint, param2: cint, param3: pointer): cint =
+  fcQMenuBar_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qmenubar_types.QMenuBar, s: cstring): string =
   let v_ms = fcQMenuBar_tr(s)
@@ -363,6 +374,65 @@ proc setCornerWidget*(self: gen_qmenubar_types.QMenuBar, w: gen_qwidget_types.QW
 proc cornerWidget*(self: gen_qmenubar_types.QMenuBar, corner: cint): gen_qwidget_types.QWidget =
   gen_qwidget_types.QWidget(h: fcQMenuBar_cornerWidget1(self.h, cint(corner)))
 
+proc QMenuBarmetaObject*(self: gen_qmenubar_types.QMenuBar, ): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fQMenuBar_virtualbase_metaObject(self.h))
+
+type QMenuBarmetaObjectProc* = proc(): gen_qobjectdefs_types.QMetaObject
+proc onmetaObject*(self: gen_qmenubar_types.QMenuBar, slot: QMenuBarmetaObjectProc) =
+  # TODO check subclass
+  var tmp = new QMenuBarmetaObjectProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQMenuBar_override_virtual_metaObject(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QMenuBar_metaObject(self: ptr cQMenuBar, slot: int): pointer {.exportc: "miqt_exec_callback_QMenuBar_metaObject ".} =
+  var nimfunc = cast[ptr QMenuBarmetaObjectProc](cast[pointer](slot))
+
+  let virtualReturn = nimfunc[]( )
+
+  virtualReturn.h
+proc QMenuBarmetacast*(self: gen_qmenubar_types.QMenuBar, param1: cstring): pointer =
+  fQMenuBar_virtualbase_metacast(self.h, param1)
+
+type QMenuBarmetacastProc* = proc(param1: cstring): pointer
+proc onmetacast*(self: gen_qmenubar_types.QMenuBar, slot: QMenuBarmetacastProc) =
+  # TODO check subclass
+  var tmp = new QMenuBarmetacastProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQMenuBar_override_virtual_metacast(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QMenuBar_metacast(self: ptr cQMenuBar, slot: int, param1: cstring): pointer {.exportc: "miqt_exec_callback_QMenuBar_metacast ".} =
+  var nimfunc = cast[ptr QMenuBarmetacastProc](cast[pointer](slot))
+  let slotval1 = (param1)
+
+
+  let virtualReturn = nimfunc[](slotval1 )
+
+  virtualReturn
+proc QMenuBarmetacall*(self: gen_qmenubar_types.QMenuBar, param1: cint, param2: cint, param3: pointer): cint =
+  fQMenuBar_virtualbase_metacall(self.h, cint(param1), param2, param3)
+
+type QMenuBarmetacallProc* = proc(param1: cint, param2: cint, param3: pointer): cint
+proc onmetacall*(self: gen_qmenubar_types.QMenuBar, slot: QMenuBarmetacallProc) =
+  # TODO check subclass
+  var tmp = new QMenuBarmetacallProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQMenuBar_override_virtual_metacall(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QMenuBar_metacall(self: ptr cQMenuBar, slot: int, param1: cint, param2: cint, param3: pointer): cint {.exportc: "miqt_exec_callback_QMenuBar_metacall ".} =
+  var nimfunc = cast[ptr QMenuBarmetacallProc](cast[pointer](slot))
+  let slotval1 = cint(param1)
+
+  let slotval2 = param2
+
+  let slotval3 = param3
+
+
+  let virtualReturn = nimfunc[](slotval1, slotval2, slotval3 )
+
+  virtualReturn
 proc QMenuBarsizeHint*(self: gen_qmenubar_types.QMenuBar, ): gen_qsize_types.QSize =
   gen_qsize_types.QSize(h: fQMenuBar_virtualbase_sizeHint(self.h))
 
@@ -1187,5 +1257,7 @@ proc miqt_exec_callback_QMenuBar_disconnectNotify(self: ptr cQMenuBar, slot: int
 
 
   nimfunc[](slotval1)
+proc staticMetaObject*(_: type gen_qmenubar_types.QMenuBar): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fcQMenuBar_staticMetaObject())
 proc delete*(self: gen_qmenubar_types.QMenuBar) =
   fcQMenuBar_delete(self.h)

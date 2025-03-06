@@ -99,6 +99,7 @@ proc fcQQuickView_new5(parent: pointer): ptr cQQuickView {.importc: "QQuickView_
 proc fcQQuickView_new6(source: pointer, parent: pointer): ptr cQQuickView {.importc: "QQuickView_new6".}
 proc fcQQuickView_metaObject(self: pointer, ): pointer {.importc: "QQuickView_metaObject".}
 proc fcQQuickView_metacast(self: pointer, param1: cstring): pointer {.importc: "QQuickView_metacast".}
+proc fcQQuickView_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QQuickView_metacall".}
 proc fcQQuickView_tr(s: cstring): struct_miqt_string {.importc: "QQuickView_tr".}
 proc fcQQuickView_trUtf8(s: cstring): struct_miqt_string {.importc: "QQuickView_trUtf8".}
 proc fcQQuickView_source(self: pointer, ): pointer {.importc: "QQuickView_source".}
@@ -120,6 +121,12 @@ proc fcQQuickView_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QQ
 proc fcQQuickView_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QQuickView_tr3".}
 proc fcQQuickView_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QQuickView_trUtf82".}
 proc fcQQuickView_trUtf83(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QQuickView_trUtf83".}
+proc fQQuickView_virtualbase_metaObject(self: pointer, ): pointer{.importc: "QQuickView_virtualbase_metaObject".}
+proc fcQQuickView_override_virtual_metaObject(self: pointer, slot: int) {.importc: "QQuickView_override_virtual_metaObject".}
+proc fQQuickView_virtualbase_metacast(self: pointer, param1: cstring): pointer{.importc: "QQuickView_virtualbase_metacast".}
+proc fcQQuickView_override_virtual_metacast(self: pointer, slot: int) {.importc: "QQuickView_override_virtual_metacast".}
+proc fQQuickView_virtualbase_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint{.importc: "QQuickView_virtualbase_metacall".}
+proc fcQQuickView_override_virtual_metacall(self: pointer, slot: int) {.importc: "QQuickView_override_virtual_metacall".}
 proc fQQuickView_virtualbase_resizeEvent(self: pointer, param1: pointer): void{.importc: "QQuickView_virtualbase_resizeEvent".}
 proc fcQQuickView_override_virtual_resizeEvent(self: pointer, slot: int) {.importc: "QQuickView_override_virtual_resizeEvent".}
 proc fQQuickView_virtualbase_timerEvent(self: pointer, param1: pointer): void{.importc: "QQuickView_virtualbase_timerEvent".}
@@ -178,6 +185,7 @@ proc fQQuickView_virtualbase_connectNotify(self: pointer, signal: pointer): void
 proc fcQQuickView_override_virtual_connectNotify(self: pointer, slot: int) {.importc: "QQuickView_override_virtual_connectNotify".}
 proc fQQuickView_virtualbase_disconnectNotify(self: pointer, signal: pointer): void{.importc: "QQuickView_virtualbase_disconnectNotify".}
 proc fcQQuickView_override_virtual_disconnectNotify(self: pointer, slot: int) {.importc: "QQuickView_override_virtual_disconnectNotify".}
+proc fcQQuickView_staticMetaObject(): pointer {.importc: "QQuickView_staticMetaObject".}
 proc fcQQuickView_delete(self: pointer) {.importc: "QQuickView_delete".}
 
 
@@ -206,6 +214,9 @@ proc metaObject*(self: gen_qquickview_types.QQuickView, ): gen_qobjectdefs_types
 
 proc metacast*(self: gen_qquickview_types.QQuickView, param1: cstring): pointer =
   fcQQuickView_metacast(self.h, param1)
+
+proc metacall*(self: gen_qquickview_types.QQuickView, param1: cint, param2: cint, param3: pointer): cint =
+  fcQQuickView_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qquickview_types.QQuickView, s: cstring): string =
   let v_ms = fcQQuickView_tr(s)
@@ -311,6 +322,65 @@ proc trUtf8*(_: type gen_qquickview_types.QQuickView, s: cstring, c: cstring, n:
   c_free(v_ms.data)
   vx_ret
 
+proc QQuickViewmetaObject*(self: gen_qquickview_types.QQuickView, ): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fQQuickView_virtualbase_metaObject(self.h))
+
+type QQuickViewmetaObjectProc* = proc(): gen_qobjectdefs_types.QMetaObject
+proc onmetaObject*(self: gen_qquickview_types.QQuickView, slot: QQuickViewmetaObjectProc) =
+  # TODO check subclass
+  var tmp = new QQuickViewmetaObjectProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQQuickView_override_virtual_metaObject(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QQuickView_metaObject(self: ptr cQQuickView, slot: int): pointer {.exportc: "miqt_exec_callback_QQuickView_metaObject ".} =
+  var nimfunc = cast[ptr QQuickViewmetaObjectProc](cast[pointer](slot))
+
+  let virtualReturn = nimfunc[]( )
+
+  virtualReturn.h
+proc QQuickViewmetacast*(self: gen_qquickview_types.QQuickView, param1: cstring): pointer =
+  fQQuickView_virtualbase_metacast(self.h, param1)
+
+type QQuickViewmetacastProc* = proc(param1: cstring): pointer
+proc onmetacast*(self: gen_qquickview_types.QQuickView, slot: QQuickViewmetacastProc) =
+  # TODO check subclass
+  var tmp = new QQuickViewmetacastProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQQuickView_override_virtual_metacast(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QQuickView_metacast(self: ptr cQQuickView, slot: int, param1: cstring): pointer {.exportc: "miqt_exec_callback_QQuickView_metacast ".} =
+  var nimfunc = cast[ptr QQuickViewmetacastProc](cast[pointer](slot))
+  let slotval1 = (param1)
+
+
+  let virtualReturn = nimfunc[](slotval1 )
+
+  virtualReturn
+proc QQuickViewmetacall*(self: gen_qquickview_types.QQuickView, param1: cint, param2: cint, param3: pointer): cint =
+  fQQuickView_virtualbase_metacall(self.h, cint(param1), param2, param3)
+
+type QQuickViewmetacallProc* = proc(param1: cint, param2: cint, param3: pointer): cint
+proc onmetacall*(self: gen_qquickview_types.QQuickView, slot: QQuickViewmetacallProc) =
+  # TODO check subclass
+  var tmp = new QQuickViewmetacallProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQQuickView_override_virtual_metacall(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QQuickView_metacall(self: ptr cQQuickView, slot: int, param1: cint, param2: cint, param3: pointer): cint {.exportc: "miqt_exec_callback_QQuickView_metacall ".} =
+  var nimfunc = cast[ptr QQuickViewmetacallProc](cast[pointer](slot))
+  let slotval1 = cint(param1)
+
+  let slotval2 = param2
+
+  let slotval3 = param3
+
+
+  let virtualReturn = nimfunc[](slotval1, slotval2, slotval3 )
+
+  virtualReturn
 proc QQuickViewresizeEvent*(self: gen_qquickview_types.QQuickView, param1: gen_qevent_types.QResizeEvent): void =
   fQQuickView_virtualbase_resizeEvent(self.h, param1.h)
 
@@ -819,5 +889,7 @@ proc miqt_exec_callback_QQuickView_disconnectNotify(self: ptr cQQuickView, slot:
 
 
   nimfunc[](slotval1)
+proc staticMetaObject*(_: type gen_qquickview_types.QQuickView): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fcQQuickView_staticMetaObject())
 proc delete*(self: gen_qquickview_types.QQuickView) =
   fcQQuickView_delete(self.h)

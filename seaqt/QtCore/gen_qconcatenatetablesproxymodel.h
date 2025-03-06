@@ -49,6 +49,7 @@ QConcatenateTablesProxyModel* QConcatenateTablesProxyModel_new2(QObject* parent)
 void QConcatenateTablesProxyModel_virtbase(QConcatenateTablesProxyModel* src, QAbstractItemModel** outptr_QAbstractItemModel);
 QMetaObject* QConcatenateTablesProxyModel_metaObject(const QConcatenateTablesProxyModel* self);
 void* QConcatenateTablesProxyModel_metacast(QConcatenateTablesProxyModel* self, const char* param1);
+int QConcatenateTablesProxyModel_metacall(QConcatenateTablesProxyModel* self, int param1, int param2, void** param3);
 struct miqt_string QConcatenateTablesProxyModel_tr(const char* s);
 struct miqt_string QConcatenateTablesProxyModel_trUtf8(const char* s);
 struct miqt_array /* of QAbstractItemModel* */  QConcatenateTablesProxyModel_sourceModels(const QConcatenateTablesProxyModel* self);
@@ -75,6 +76,12 @@ struct miqt_string QConcatenateTablesProxyModel_tr2(const char* s, const char* c
 struct miqt_string QConcatenateTablesProxyModel_tr3(const char* s, const char* c, int n);
 struct miqt_string QConcatenateTablesProxyModel_trUtf82(const char* s, const char* c);
 struct miqt_string QConcatenateTablesProxyModel_trUtf83(const char* s, const char* c, int n);
+bool QConcatenateTablesProxyModel_override_virtual_metaObject(void* self, intptr_t slot);
+QMetaObject* QConcatenateTablesProxyModel_virtualbase_metaObject(const void* self);
+bool QConcatenateTablesProxyModel_override_virtual_metacast(void* self, intptr_t slot);
+void* QConcatenateTablesProxyModel_virtualbase_metacast(void* self, const char* param1);
+bool QConcatenateTablesProxyModel_override_virtual_metacall(void* self, intptr_t slot);
+int QConcatenateTablesProxyModel_virtualbase_metacall(void* self, int param1, int param2, void** param3);
 bool QConcatenateTablesProxyModel_override_virtual_data(void* self, intptr_t slot);
 QVariant* QConcatenateTablesProxyModel_virtualbase_data(const void* self, QModelIndex* index, int role);
 bool QConcatenateTablesProxyModel_override_virtual_setData(void* self, intptr_t slot);
@@ -182,6 +189,7 @@ QObject* QConcatenateTablesProxyModel_protectedbase_sender(bool* _dynamic_cast_o
 int QConcatenateTablesProxyModel_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
 int QConcatenateTablesProxyModel_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
 bool QConcatenateTablesProxyModel_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+const QMetaObject* QConcatenateTablesProxyModel_staticMetaObject();
 void QConcatenateTablesProxyModel_delete(QConcatenateTablesProxyModel* self);
 
 #ifdef __cplusplus

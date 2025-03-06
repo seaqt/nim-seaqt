@@ -68,6 +68,7 @@ type cQSGAbstractRenderer*{.exportc: "QSGAbstractRenderer", incompleteStruct.} =
 
 proc fcQSGAbstractRenderer_metaObject(self: pointer, ): pointer {.importc: "QSGAbstractRenderer_metaObject".}
 proc fcQSGAbstractRenderer_metacast(self: pointer, param1: cstring): pointer {.importc: "QSGAbstractRenderer_metacast".}
+proc fcQSGAbstractRenderer_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QSGAbstractRenderer_metacall".}
 proc fcQSGAbstractRenderer_tr(s: cstring): struct_miqt_string {.importc: "QSGAbstractRenderer_tr".}
 proc fcQSGAbstractRenderer_trUtf8(s: cstring): struct_miqt_string {.importc: "QSGAbstractRenderer_trUtf8".}
 proc fcQSGAbstractRenderer_setRootNode(self: pointer, node: pointer): void {.importc: "QSGAbstractRenderer_setRootNode".}
@@ -95,6 +96,7 @@ proc fcQSGAbstractRenderer_tr2(s: cstring, c: cstring): struct_miqt_string {.imp
 proc fcQSGAbstractRenderer_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QSGAbstractRenderer_tr3".}
 proc fcQSGAbstractRenderer_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QSGAbstractRenderer_trUtf82".}
 proc fcQSGAbstractRenderer_trUtf83(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QSGAbstractRenderer_trUtf83".}
+proc fcQSGAbstractRenderer_staticMetaObject(): pointer {.importc: "QSGAbstractRenderer_staticMetaObject".}
 proc fcQSGAbstractRenderer_delete(self: pointer) {.importc: "QSGAbstractRenderer_delete".}
 
 
@@ -105,6 +107,9 @@ proc metaObject*(self: gen_qsgabstractrenderer_types.QSGAbstractRenderer, ): gen
 
 proc metacast*(self: gen_qsgabstractrenderer_types.QSGAbstractRenderer, param1: cstring): pointer =
   fcQSGAbstractRenderer_metacast(self.h, param1)
+
+proc metacall*(self: gen_qsgabstractrenderer_types.QSGAbstractRenderer, param1: cint, param2: cint, param3: pointer): cint =
+  fcQSGAbstractRenderer_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qsgabstractrenderer_types.QSGAbstractRenderer, s: cstring): string =
   let v_ms = fcQSGAbstractRenderer_tr(s)
@@ -213,5 +218,7 @@ proc trUtf8*(_: type gen_qsgabstractrenderer_types.QSGAbstractRenderer, s: cstri
   c_free(v_ms.data)
   vx_ret
 
+proc staticMetaObject*(_: type gen_qsgabstractrenderer_types.QSGAbstractRenderer): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fcQSGAbstractRenderer_staticMetaObject())
 proc delete*(self: gen_qsgabstractrenderer_types.QSGAbstractRenderer) =
   fcQSGAbstractRenderer_delete(self.h)

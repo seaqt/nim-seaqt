@@ -29,6 +29,10 @@ void* QCameraInfoControl_metacast(QCameraInfoControl* self, const char* param1) 
 	return self->qt_metacast(param1);
 }
 
+int QCameraInfoControl_metacall(QCameraInfoControl* self, int param1, int param2, void** param3) {
+	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
+}
+
 struct miqt_string QCameraInfoControl_tr(const char* s) {
 	QString _ret = QCameraInfoControl::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
@@ -106,6 +110,7 @@ struct miqt_string QCameraInfoControl_trUtf83(const char* s, const char* c, int 
 	return _ms;
 }
 
+const QMetaObject* QCameraInfoControl_staticMetaObject() { return &QCameraInfoControl::staticMetaObject; }
 void QCameraInfoControl_delete(QCameraInfoControl* self) {
 	delete self;
 }

@@ -166,6 +166,7 @@ proc fcQListWidget_new(parent: pointer): ptr cQListWidget {.importc: "QListWidge
 proc fcQListWidget_new2(): ptr cQListWidget {.importc: "QListWidget_new2".}
 proc fcQListWidget_metaObject(self: pointer, ): pointer {.importc: "QListWidget_metaObject".}
 proc fcQListWidget_metacast(self: pointer, param1: cstring): pointer {.importc: "QListWidget_metacast".}
+proc fcQListWidget_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QListWidget_metacall".}
 proc fcQListWidget_tr(s: cstring): struct_miqt_string {.importc: "QListWidget_tr".}
 proc fcQListWidget_trUtf8(s: cstring): struct_miqt_string {.importc: "QListWidget_trUtf8".}
 proc fcQListWidget_setSelectionModel(self: pointer, selectionModel: pointer): void {.importc: "QListWidget_setSelectionModel".}
@@ -233,6 +234,12 @@ proc fcQListWidget_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc
 proc fcQListWidget_trUtf83(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QListWidget_trUtf83".}
 proc fcQListWidget_sortItems1(self: pointer, order: cint): void {.importc: "QListWidget_sortItems1".}
 proc fcQListWidget_scrollToItem2(self: pointer, item: pointer, hint: cint): void {.importc: "QListWidget_scrollToItem2".}
+proc fQListWidget_virtualbase_metaObject(self: pointer, ): pointer{.importc: "QListWidget_virtualbase_metaObject".}
+proc fcQListWidget_override_virtual_metaObject(self: pointer, slot: int) {.importc: "QListWidget_override_virtual_metaObject".}
+proc fQListWidget_virtualbase_metacast(self: pointer, param1: cstring): pointer{.importc: "QListWidget_virtualbase_metacast".}
+proc fcQListWidget_override_virtual_metacast(self: pointer, slot: int) {.importc: "QListWidget_override_virtual_metacast".}
+proc fQListWidget_virtualbase_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint{.importc: "QListWidget_virtualbase_metacall".}
+proc fcQListWidget_override_virtual_metacall(self: pointer, slot: int) {.importc: "QListWidget_override_virtual_metacall".}
 proc fQListWidget_virtualbase_setSelectionModel(self: pointer, selectionModel: pointer): void{.importc: "QListWidget_virtualbase_setSelectionModel".}
 proc fcQListWidget_override_virtual_setSelectionModel(self: pointer, slot: int) {.importc: "QListWidget_override_virtual_setSelectionModel".}
 proc fQListWidget_virtualbase_dropEvent(self: pointer, event: pointer): void{.importc: "QListWidget_virtualbase_dropEvent".}
@@ -417,6 +424,7 @@ proc fQListWidget_virtualbase_connectNotify(self: pointer, signal: pointer): voi
 proc fcQListWidget_override_virtual_connectNotify(self: pointer, slot: int) {.importc: "QListWidget_override_virtual_connectNotify".}
 proc fQListWidget_virtualbase_disconnectNotify(self: pointer, signal: pointer): void{.importc: "QListWidget_virtualbase_disconnectNotify".}
 proc fcQListWidget_override_virtual_disconnectNotify(self: pointer, slot: int) {.importc: "QListWidget_override_virtual_disconnectNotify".}
+proc fcQListWidget_staticMetaObject(): pointer {.importc: "QListWidget_staticMetaObject".}
 proc fcQListWidget_delete(self: pointer) {.importc: "QListWidget_delete".}
 
 
@@ -728,6 +736,9 @@ proc metaObject*(self: gen_qlistwidget_types.QListWidget, ): gen_qobjectdefs_typ
 
 proc metacast*(self: gen_qlistwidget_types.QListWidget, param1: cstring): pointer =
   fcQListWidget_metacast(self.h, param1)
+
+proc metacall*(self: gen_qlistwidget_types.QListWidget, param1: cint, param2: cint, param3: pointer): cint =
+  fcQListWidget_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qlistwidget_types.QListWidget, s: cstring): string =
   let v_ms = fcQListWidget_tr(s)
@@ -1069,6 +1080,65 @@ proc sortItems*(self: gen_qlistwidget_types.QListWidget, order: cint): void =
 proc scrollToItem*(self: gen_qlistwidget_types.QListWidget, item: gen_qlistwidget_types.QListWidgetItem, hint: cint): void =
   fcQListWidget_scrollToItem2(self.h, item.h, cint(hint))
 
+proc QListWidgetmetaObject*(self: gen_qlistwidget_types.QListWidget, ): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fQListWidget_virtualbase_metaObject(self.h))
+
+type QListWidgetmetaObjectProc* = proc(): gen_qobjectdefs_types.QMetaObject
+proc onmetaObject*(self: gen_qlistwidget_types.QListWidget, slot: QListWidgetmetaObjectProc) =
+  # TODO check subclass
+  var tmp = new QListWidgetmetaObjectProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQListWidget_override_virtual_metaObject(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QListWidget_metaObject(self: ptr cQListWidget, slot: int): pointer {.exportc: "miqt_exec_callback_QListWidget_metaObject ".} =
+  var nimfunc = cast[ptr QListWidgetmetaObjectProc](cast[pointer](slot))
+
+  let virtualReturn = nimfunc[]( )
+
+  virtualReturn.h
+proc QListWidgetmetacast*(self: gen_qlistwidget_types.QListWidget, param1: cstring): pointer =
+  fQListWidget_virtualbase_metacast(self.h, param1)
+
+type QListWidgetmetacastProc* = proc(param1: cstring): pointer
+proc onmetacast*(self: gen_qlistwidget_types.QListWidget, slot: QListWidgetmetacastProc) =
+  # TODO check subclass
+  var tmp = new QListWidgetmetacastProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQListWidget_override_virtual_metacast(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QListWidget_metacast(self: ptr cQListWidget, slot: int, param1: cstring): pointer {.exportc: "miqt_exec_callback_QListWidget_metacast ".} =
+  var nimfunc = cast[ptr QListWidgetmetacastProc](cast[pointer](slot))
+  let slotval1 = (param1)
+
+
+  let virtualReturn = nimfunc[](slotval1 )
+
+  virtualReturn
+proc QListWidgetmetacall*(self: gen_qlistwidget_types.QListWidget, param1: cint, param2: cint, param3: pointer): cint =
+  fQListWidget_virtualbase_metacall(self.h, cint(param1), param2, param3)
+
+type QListWidgetmetacallProc* = proc(param1: cint, param2: cint, param3: pointer): cint
+proc onmetacall*(self: gen_qlistwidget_types.QListWidget, slot: QListWidgetmetacallProc) =
+  # TODO check subclass
+  var tmp = new QListWidgetmetacallProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQListWidget_override_virtual_metacall(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QListWidget_metacall(self: ptr cQListWidget, slot: int, param1: cint, param2: cint, param3: pointer): cint {.exportc: "miqt_exec_callback_QListWidget_metacall ".} =
+  var nimfunc = cast[ptr QListWidgetmetacallProc](cast[pointer](slot))
+  let slotval1 = cint(param1)
+
+  let slotval2 = param2
+
+  let slotval3 = param3
+
+
+  let virtualReturn = nimfunc[](slotval1, slotval2, slotval3 )
+
+  virtualReturn
 proc QListWidgetsetSelectionModel*(self: gen_qlistwidget_types.QListWidget, selectionModel: gen_qitemselectionmodel_types.QItemSelectionModel): void =
   fQListWidget_virtualbase_setSelectionModel(self.h, selectionModel.h)
 
@@ -2748,5 +2818,7 @@ proc miqt_exec_callback_QListWidget_disconnectNotify(self: ptr cQListWidget, slo
 
 
   nimfunc[](slotval1)
+proc staticMetaObject*(_: type gen_qlistwidget_types.QListWidget): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fcQListWidget_staticMetaObject())
 proc delete*(self: gen_qlistwidget_types.QListWidget) =
   fcQListWidget_delete(self.h)

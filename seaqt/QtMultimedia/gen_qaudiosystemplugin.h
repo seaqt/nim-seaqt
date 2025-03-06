@@ -52,6 +52,7 @@ QAudioSystemPlugin* QAudioSystemPlugin_new2(QObject* parent);
 void QAudioSystemPlugin_virtbase(QAudioSystemPlugin* src, QObject** outptr_QObject, QAudioSystemFactoryInterface** outptr_QAudioSystemFactoryInterface);
 QMetaObject* QAudioSystemPlugin_metaObject(const QAudioSystemPlugin* self);
 void* QAudioSystemPlugin_metacast(QAudioSystemPlugin* self, const char* param1);
+int QAudioSystemPlugin_metacall(QAudioSystemPlugin* self, int param1, int param2, void** param3);
 struct miqt_string QAudioSystemPlugin_tr(const char* s);
 struct miqt_string QAudioSystemPlugin_trUtf8(const char* s);
 struct miqt_array /* of struct miqt_string */  QAudioSystemPlugin_availableDevices(const QAudioSystemPlugin* self, int param1);
@@ -62,6 +63,12 @@ struct miqt_string QAudioSystemPlugin_tr2(const char* s, const char* c);
 struct miqt_string QAudioSystemPlugin_tr3(const char* s, const char* c, int n);
 struct miqt_string QAudioSystemPlugin_trUtf82(const char* s, const char* c);
 struct miqt_string QAudioSystemPlugin_trUtf83(const char* s, const char* c, int n);
+bool QAudioSystemPlugin_override_virtual_metaObject(void* self, intptr_t slot);
+QMetaObject* QAudioSystemPlugin_virtualbase_metaObject(const void* self);
+bool QAudioSystemPlugin_override_virtual_metacast(void* self, intptr_t slot);
+void* QAudioSystemPlugin_virtualbase_metacast(void* self, const char* param1);
+bool QAudioSystemPlugin_override_virtual_metacall(void* self, intptr_t slot);
+int QAudioSystemPlugin_virtualbase_metacall(void* self, int param1, int param2, void** param3);
 bool QAudioSystemPlugin_override_virtual_availableDevices(void* self, intptr_t slot);
 struct miqt_array /* of struct miqt_string */  QAudioSystemPlugin_virtualbase_availableDevices(const void* self, int param1);
 bool QAudioSystemPlugin_override_virtual_createInput(void* self, intptr_t slot);
@@ -88,6 +95,7 @@ QObject* QAudioSystemPlugin_protectedbase_sender(bool* _dynamic_cast_ok, const v
 int QAudioSystemPlugin_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
 int QAudioSystemPlugin_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
 bool QAudioSystemPlugin_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+const QMetaObject* QAudioSystemPlugin_staticMetaObject();
 void QAudioSystemPlugin_delete(QAudioSystemPlugin* self);
 
 #ifdef __cplusplus

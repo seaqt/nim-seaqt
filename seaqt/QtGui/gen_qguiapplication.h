@@ -61,6 +61,7 @@ QGuiApplication* QGuiApplication_new2(int* argc, char** argv, int param3);
 void QGuiApplication_virtbase(QGuiApplication* src, QCoreApplication** outptr_QCoreApplication);
 QMetaObject* QGuiApplication_metaObject(const QGuiApplication* self);
 void* QGuiApplication_metacast(QGuiApplication* self, const char* param1);
+int QGuiApplication_metacall(QGuiApplication* self, int param1, int param2, void** param3);
 struct miqt_string QGuiApplication_tr(const char* s);
 struct miqt_string QGuiApplication_trUtf8(const char* s);
 void QGuiApplication_setApplicationDisplayName(struct miqt_string name);
@@ -147,6 +148,12 @@ struct miqt_string QGuiApplication_tr2(const char* s, const char* c);
 struct miqt_string QGuiApplication_tr3(const char* s, const char* c, int n);
 struct miqt_string QGuiApplication_trUtf82(const char* s, const char* c);
 struct miqt_string QGuiApplication_trUtf83(const char* s, const char* c, int n);
+bool QGuiApplication_override_virtual_metaObject(void* self, intptr_t slot);
+QMetaObject* QGuiApplication_virtualbase_metaObject(const void* self);
+bool QGuiApplication_override_virtual_metacast(void* self, intptr_t slot);
+void* QGuiApplication_virtualbase_metacast(void* self, const char* param1);
+bool QGuiApplication_override_virtual_metacall(void* self, intptr_t slot);
+int QGuiApplication_virtualbase_metacall(void* self, int param1, int param2, void** param3);
 bool QGuiApplication_override_virtual_notify(void* self, intptr_t slot);
 bool QGuiApplication_virtualbase_notify(void* self, QObject* param1, QEvent* param2);
 bool QGuiApplication_override_virtual_event(void* self, intptr_t slot);
@@ -167,6 +174,7 @@ QObject* QGuiApplication_protectedbase_sender(bool* _dynamic_cast_ok, const void
 int QGuiApplication_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
 int QGuiApplication_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
 bool QGuiApplication_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+const QMetaObject* QGuiApplication_staticMetaObject();
 void QGuiApplication_delete(QGuiApplication* self);
 
 #ifdef __cplusplus

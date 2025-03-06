@@ -52,6 +52,7 @@ type cQMediaObject*{.exportc: "QMediaObject", incompleteStruct.} = object
 
 proc fcQMediaObject_metaObject(self: pointer, ): pointer {.importc: "QMediaObject_metaObject".}
 proc fcQMediaObject_metacast(self: pointer, param1: cstring): pointer {.importc: "QMediaObject_metacast".}
+proc fcQMediaObject_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QMediaObject_metacall".}
 proc fcQMediaObject_tr(s: cstring): struct_miqt_string {.importc: "QMediaObject_tr".}
 proc fcQMediaObject_trUtf8(s: cstring): struct_miqt_string {.importc: "QMediaObject_trUtf8".}
 proc fcQMediaObject_isAvailable(self: pointer, ): bool {.importc: "QMediaObject_isAvailable".}
@@ -80,6 +81,7 @@ proc fcQMediaObject_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "
 proc fcQMediaObject_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QMediaObject_tr3".}
 proc fcQMediaObject_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QMediaObject_trUtf82".}
 proc fcQMediaObject_trUtf83(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QMediaObject_trUtf83".}
+proc fcQMediaObject_staticMetaObject(): pointer {.importc: "QMediaObject_staticMetaObject".}
 proc fcQMediaObject_delete(self: pointer) {.importc: "QMediaObject_delete".}
 
 
@@ -90,6 +92,9 @@ proc metaObject*(self: gen_qmediaobject_types.QMediaObject, ): gen_qobjectdefs_t
 
 proc metacast*(self: gen_qmediaobject_types.QMediaObject, param1: cstring): pointer =
   fcQMediaObject_metacast(self.h, param1)
+
+proc metacall*(self: gen_qmediaobject_types.QMediaObject, param1: cint, param2: cint, param3: pointer): cint =
+  fcQMediaObject_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qmediaobject_types.QMediaObject, s: cstring): string =
   let v_ms = fcQMediaObject_tr(s)
@@ -264,5 +269,7 @@ proc trUtf8*(_: type gen_qmediaobject_types.QMediaObject, s: cstring, c: cstring
   c_free(v_ms.data)
   vx_ret
 
+proc staticMetaObject*(_: type gen_qmediaobject_types.QMediaObject): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fcQMediaObject_staticMetaObject())
 proc delete*(self: gen_qmediaobject_types.QMediaObject) =
   fcQMediaObject_delete(self.h)

@@ -39,6 +39,10 @@ void* QAbstractAudioDeviceInfo_metacast(QAbstractAudioDeviceInfo* self, const ch
 	return self->qt_metacast(param1);
 }
 
+int QAbstractAudioDeviceInfo_metacall(QAbstractAudioDeviceInfo* self, int param1, int param2, void** param3) {
+	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
+}
+
 struct miqt_string QAbstractAudioDeviceInfo_tr(const char* s) {
 	QString _ret = QAbstractAudioDeviceInfo::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
@@ -211,6 +215,7 @@ struct miqt_string QAbstractAudioDeviceInfo_trUtf83(const char* s, const char* c
 	return _ms;
 }
 
+const QMetaObject* QAbstractAudioDeviceInfo_staticMetaObject() { return &QAbstractAudioDeviceInfo::staticMetaObject; }
 void QAbstractAudioDeviceInfo_delete(QAbstractAudioDeviceInfo* self) {
 	delete self;
 }
@@ -225,6 +230,10 @@ QMetaObject* QAbstractAudioOutput_metaObject(const QAbstractAudioOutput* self) {
 
 void* QAbstractAudioOutput_metacast(QAbstractAudioOutput* self, const char* param1) {
 	return self->qt_metacast(param1);
+}
+
+int QAbstractAudioOutput_metacall(QAbstractAudioOutput* self, int param1, int param2, void** param3) {
+	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
 struct miqt_string QAbstractAudioOutput_tr(const char* s) {
@@ -428,6 +437,7 @@ struct miqt_string QAbstractAudioOutput_trUtf83(const char* s, const char* c, in
 	return _ms;
 }
 
+const QMetaObject* QAbstractAudioOutput_staticMetaObject() { return &QAbstractAudioOutput::staticMetaObject; }
 void QAbstractAudioOutput_delete(QAbstractAudioOutput* self) {
 	delete self;
 }
@@ -442,6 +452,10 @@ QMetaObject* QAbstractAudioInput_metaObject(const QAbstractAudioInput* self) {
 
 void* QAbstractAudioInput_metacast(QAbstractAudioInput* self, const char* param1) {
 	return self->qt_metacast(param1);
+}
+
+int QAbstractAudioInput_metacall(QAbstractAudioInput* self, int param1, int param2, void** param3) {
+	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
 struct miqt_string QAbstractAudioInput_tr(const char* s) {
@@ -629,6 +643,7 @@ struct miqt_string QAbstractAudioInput_trUtf83(const char* s, const char* c, int
 	return _ms;
 }
 
+const QMetaObject* QAbstractAudioInput_staticMetaObject() { return &QAbstractAudioInput::staticMetaObject; }
 void QAbstractAudioInput_delete(QAbstractAudioInput* self) {
 	delete self;
 }

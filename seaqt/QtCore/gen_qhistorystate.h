@@ -45,6 +45,7 @@ QHistoryState* QHistoryState_new4(int type, QState* parent);
 void QHistoryState_virtbase(QHistoryState* src, QAbstractState** outptr_QAbstractState);
 QMetaObject* QHistoryState_metaObject(const QHistoryState* self);
 void* QHistoryState_metacast(QHistoryState* self, const char* param1);
+int QHistoryState_metacall(QHistoryState* self, int param1, int param2, void** param3);
 struct miqt_string QHistoryState_tr(const char* s);
 struct miqt_string QHistoryState_trUtf8(const char* s);
 QAbstractTransition* QHistoryState_defaultTransition(const QHistoryState* self);
@@ -60,6 +61,12 @@ struct miqt_string QHistoryState_tr2(const char* s, const char* c);
 struct miqt_string QHistoryState_tr3(const char* s, const char* c, int n);
 struct miqt_string QHistoryState_trUtf82(const char* s, const char* c);
 struct miqt_string QHistoryState_trUtf83(const char* s, const char* c, int n);
+bool QHistoryState_override_virtual_metaObject(void* self, intptr_t slot);
+QMetaObject* QHistoryState_virtualbase_metaObject(const void* self);
+bool QHistoryState_override_virtual_metacast(void* self, intptr_t slot);
+void* QHistoryState_virtualbase_metacast(void* self, const char* param1);
+bool QHistoryState_override_virtual_metacall(void* self, intptr_t slot);
+int QHistoryState_virtualbase_metacall(void* self, int param1, int param2, void** param3);
 bool QHistoryState_override_virtual_onEntry(void* self, intptr_t slot);
 void QHistoryState_virtualbase_onEntry(void* self, QEvent* event);
 bool QHistoryState_override_virtual_onExit(void* self, intptr_t slot);
@@ -82,6 +89,7 @@ QObject* QHistoryState_protectedbase_sender(bool* _dynamic_cast_ok, const void* 
 int QHistoryState_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
 int QHistoryState_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
 bool QHistoryState_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+const QMetaObject* QHistoryState_staticMetaObject();
 void QHistoryState_delete(QHistoryState* self);
 
 #ifdef __cplusplus

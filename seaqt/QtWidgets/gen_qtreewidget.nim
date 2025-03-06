@@ -198,6 +198,7 @@ proc fcQTreeWidget_new(parent: pointer): ptr cQTreeWidget {.importc: "QTreeWidge
 proc fcQTreeWidget_new2(): ptr cQTreeWidget {.importc: "QTreeWidget_new2".}
 proc fcQTreeWidget_metaObject(self: pointer, ): pointer {.importc: "QTreeWidget_metaObject".}
 proc fcQTreeWidget_metacast(self: pointer, param1: cstring): pointer {.importc: "QTreeWidget_metacast".}
+proc fcQTreeWidget_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QTreeWidget_metacall".}
 proc fcQTreeWidget_tr(s: cstring): struct_miqt_string {.importc: "QTreeWidget_tr".}
 proc fcQTreeWidget_trUtf8(s: cstring): struct_miqt_string {.importc: "QTreeWidget_trUtf8".}
 proc fcQTreeWidget_columnCount(self: pointer, ): cint {.importc: "QTreeWidget_columnCount".}
@@ -279,6 +280,12 @@ proc fcQTreeWidget_closePersistentEditor2(self: pointer, item: pointer, column: 
 proc fcQTreeWidget_isPersistentEditorOpen2(self: pointer, item: pointer, column: cint): bool {.importc: "QTreeWidget_isPersistentEditorOpen2".}
 proc fcQTreeWidget_findItems3(self: pointer, text: struct_miqt_string, flags: cint, column: cint): struct_miqt_array {.importc: "QTreeWidget_findItems3".}
 proc fcQTreeWidget_scrollToItem2(self: pointer, item: pointer, hint: cint): void {.importc: "QTreeWidget_scrollToItem2".}
+proc fQTreeWidget_virtualbase_metaObject(self: pointer, ): pointer{.importc: "QTreeWidget_virtualbase_metaObject".}
+proc fcQTreeWidget_override_virtual_metaObject(self: pointer, slot: int) {.importc: "QTreeWidget_override_virtual_metaObject".}
+proc fQTreeWidget_virtualbase_metacast(self: pointer, param1: cstring): pointer{.importc: "QTreeWidget_virtualbase_metacast".}
+proc fcQTreeWidget_override_virtual_metacast(self: pointer, slot: int) {.importc: "QTreeWidget_override_virtual_metacast".}
+proc fQTreeWidget_virtualbase_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint{.importc: "QTreeWidget_virtualbase_metacall".}
+proc fcQTreeWidget_override_virtual_metacall(self: pointer, slot: int) {.importc: "QTreeWidget_override_virtual_metacall".}
 proc fQTreeWidget_virtualbase_setSelectionModel(self: pointer, selectionModel: pointer): void{.importc: "QTreeWidget_virtualbase_setSelectionModel".}
 proc fcQTreeWidget_override_virtual_setSelectionModel(self: pointer, slot: int) {.importc: "QTreeWidget_override_virtual_setSelectionModel".}
 proc fQTreeWidget_virtualbase_event(self: pointer, e: pointer): bool{.importc: "QTreeWidget_virtualbase_event".}
@@ -467,6 +474,7 @@ proc fQTreeWidget_virtualbase_connectNotify(self: pointer, signal: pointer): voi
 proc fcQTreeWidget_override_virtual_connectNotify(self: pointer, slot: int) {.importc: "QTreeWidget_override_virtual_connectNotify".}
 proc fQTreeWidget_virtualbase_disconnectNotify(self: pointer, signal: pointer): void{.importc: "QTreeWidget_virtualbase_disconnectNotify".}
 proc fcQTreeWidget_override_virtual_disconnectNotify(self: pointer, slot: int) {.importc: "QTreeWidget_override_virtual_disconnectNotify".}
+proc fcQTreeWidget_staticMetaObject(): pointer {.importc: "QTreeWidget_staticMetaObject".}
 proc fcQTreeWidget_delete(self: pointer) {.importc: "QTreeWidget_delete".}
 
 
@@ -887,6 +895,9 @@ proc metaObject*(self: gen_qtreewidget_types.QTreeWidget, ): gen_qobjectdefs_typ
 proc metacast*(self: gen_qtreewidget_types.QTreeWidget, param1: cstring): pointer =
   fcQTreeWidget_metacast(self.h, param1)
 
+proc metacall*(self: gen_qtreewidget_types.QTreeWidget, param1: cint, param2: cint, param3: pointer): cint =
+  fcQTreeWidget_metacall(self.h, cint(param1), param2, param3)
+
 proc tr*(_: type gen_qtreewidget_types.QTreeWidget, s: cstring): string =
   let v_ms = fcQTreeWidget_tr(s)
   let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
@@ -1287,6 +1298,65 @@ proc findItems*(self: gen_qtreewidget_types.QTreeWidget, text: string, flags: ci
 proc scrollToItem*(self: gen_qtreewidget_types.QTreeWidget, item: gen_qtreewidget_types.QTreeWidgetItem, hint: cint): void =
   fcQTreeWidget_scrollToItem2(self.h, item.h, cint(hint))
 
+proc QTreeWidgetmetaObject*(self: gen_qtreewidget_types.QTreeWidget, ): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fQTreeWidget_virtualbase_metaObject(self.h))
+
+type QTreeWidgetmetaObjectProc* = proc(): gen_qobjectdefs_types.QMetaObject
+proc onmetaObject*(self: gen_qtreewidget_types.QTreeWidget, slot: QTreeWidgetmetaObjectProc) =
+  # TODO check subclass
+  var tmp = new QTreeWidgetmetaObjectProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQTreeWidget_override_virtual_metaObject(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QTreeWidget_metaObject(self: ptr cQTreeWidget, slot: int): pointer {.exportc: "miqt_exec_callback_QTreeWidget_metaObject ".} =
+  var nimfunc = cast[ptr QTreeWidgetmetaObjectProc](cast[pointer](slot))
+
+  let virtualReturn = nimfunc[]( )
+
+  virtualReturn.h
+proc QTreeWidgetmetacast*(self: gen_qtreewidget_types.QTreeWidget, param1: cstring): pointer =
+  fQTreeWidget_virtualbase_metacast(self.h, param1)
+
+type QTreeWidgetmetacastProc* = proc(param1: cstring): pointer
+proc onmetacast*(self: gen_qtreewidget_types.QTreeWidget, slot: QTreeWidgetmetacastProc) =
+  # TODO check subclass
+  var tmp = new QTreeWidgetmetacastProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQTreeWidget_override_virtual_metacast(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QTreeWidget_metacast(self: ptr cQTreeWidget, slot: int, param1: cstring): pointer {.exportc: "miqt_exec_callback_QTreeWidget_metacast ".} =
+  var nimfunc = cast[ptr QTreeWidgetmetacastProc](cast[pointer](slot))
+  let slotval1 = (param1)
+
+
+  let virtualReturn = nimfunc[](slotval1 )
+
+  virtualReturn
+proc QTreeWidgetmetacall*(self: gen_qtreewidget_types.QTreeWidget, param1: cint, param2: cint, param3: pointer): cint =
+  fQTreeWidget_virtualbase_metacall(self.h, cint(param1), param2, param3)
+
+type QTreeWidgetmetacallProc* = proc(param1: cint, param2: cint, param3: pointer): cint
+proc onmetacall*(self: gen_qtreewidget_types.QTreeWidget, slot: QTreeWidgetmetacallProc) =
+  # TODO check subclass
+  var tmp = new QTreeWidgetmetacallProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQTreeWidget_override_virtual_metacall(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QTreeWidget_metacall(self: ptr cQTreeWidget, slot: int, param1: cint, param2: cint, param3: pointer): cint {.exportc: "miqt_exec_callback_QTreeWidget_metacall ".} =
+  var nimfunc = cast[ptr QTreeWidgetmetacallProc](cast[pointer](slot))
+  let slotval1 = cint(param1)
+
+  let slotval2 = param2
+
+  let slotval3 = param3
+
+
+  let virtualReturn = nimfunc[](slotval1, slotval2, slotval3 )
+
+  virtualReturn
 proc QTreeWidgetsetSelectionModel*(self: gen_qtreewidget_types.QTreeWidget, selectionModel: gen_qitemselectionmodel_types.QItemSelectionModel): void =
   fQTreeWidget_virtualbase_setSelectionModel(self.h, selectionModel.h)
 
@@ -3010,5 +3080,7 @@ proc miqt_exec_callback_QTreeWidget_disconnectNotify(self: ptr cQTreeWidget, slo
 
 
   nimfunc[](slotval1)
+proc staticMetaObject*(_: type gen_qtreewidget_types.QTreeWidget): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fcQTreeWidget_staticMetaObject())
 proc delete*(self: gen_qtreewidget_types.QTreeWidget) =
   fcQTreeWidget_delete(self.h)

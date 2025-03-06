@@ -258,6 +258,7 @@ int QTabletEvent_xTilt(const QTabletEvent* self);
 int QTabletEvent_yTilt(const QTabletEvent* self);
 int QTabletEvent_button(const QTabletEvent* self);
 int QTabletEvent_buttons(const QTabletEvent* self);
+const QMetaObject* QTabletEvent_staticMetaObject();
 void QTabletEvent_delete(QTabletEvent* self);
 
 QNativeGestureEvent* QNativeGestureEvent_new(int type, QPointF* localPos, QPointF* windowPos, QPointF* screenPos, double value, unsigned long sequenceId, unsigned long long intArgument);
@@ -505,6 +506,7 @@ QPointingDeviceUniqueId* QPointingDeviceUniqueId_new2(QPointingDeviceUniqueId* p
 QPointingDeviceUniqueId* QPointingDeviceUniqueId_fromNumericId(long long id);
 bool QPointingDeviceUniqueId_isValid(const QPointingDeviceUniqueId* self);
 long long QPointingDeviceUniqueId_numericId(const QPointingDeviceUniqueId* self);
+const QMetaObject* QPointingDeviceUniqueId_staticMetaObject();
 void QPointingDeviceUniqueId_delete(QPointingDeviceUniqueId* self);
 
 QTouchEvent* QTouchEvent_new(int eventType);

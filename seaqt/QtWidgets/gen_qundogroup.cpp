@@ -25,6 +25,9 @@ void miqt_exec_callback_QUndoGroup_canUndoChanged(intptr_t, bool);
 void miqt_exec_callback_QUndoGroup_canRedoChanged(intptr_t, bool);
 void miqt_exec_callback_QUndoGroup_undoTextChanged(intptr_t, struct miqt_string);
 void miqt_exec_callback_QUndoGroup_redoTextChanged(intptr_t, struct miqt_string);
+QMetaObject* miqt_exec_callback_QUndoGroup_metaObject(const QUndoGroup*, intptr_t);
+void* miqt_exec_callback_QUndoGroup_metacast(QUndoGroup*, intptr_t, const char*);
+int miqt_exec_callback_QUndoGroup_metacall(QUndoGroup*, intptr_t, int, int, void**);
 bool miqt_exec_callback_QUndoGroup_event(QUndoGroup*, intptr_t, QEvent*);
 bool miqt_exec_callback_QUndoGroup_eventFilter(QUndoGroup*, intptr_t, QObject*, QEvent*);
 void miqt_exec_callback_QUndoGroup_timerEvent(QUndoGroup*, intptr_t, QTimerEvent*);
@@ -43,6 +46,62 @@ public:
 	VirtualQUndoGroup(QObject* parent): QUndoGroup(parent) {};
 
 	virtual ~VirtualQUndoGroup() override = default;
+
+	// cgo.Handle value for overwritten implementation
+	intptr_t handle__metaObject = 0;
+
+	// Subclass to allow providing a Go implementation
+	virtual const QMetaObject* metaObject() const override {
+		if (handle__metaObject == 0) {
+			return QUndoGroup::metaObject();
+		}
+		
+
+		QMetaObject* callback_return_value = miqt_exec_callback_QUndoGroup_metaObject(this, handle__metaObject);
+
+		return callback_return_value;
+	}
+
+	friend QMetaObject* QUndoGroup_virtualbase_metaObject(const void* self);
+
+	// cgo.Handle value for overwritten implementation
+	intptr_t handle__metacast = 0;
+
+	// Subclass to allow providing a Go implementation
+	virtual void* qt_metacast(const char* param1) override {
+		if (handle__metacast == 0) {
+			return QUndoGroup::qt_metacast(param1);
+		}
+		
+		const char* sigval1 = (const char*) param1;
+
+		void* callback_return_value = miqt_exec_callback_QUndoGroup_metacast(this, handle__metacast, sigval1);
+
+		return callback_return_value;
+	}
+
+	friend void* QUndoGroup_virtualbase_metacast(void* self, const char* param1);
+
+	// cgo.Handle value for overwritten implementation
+	intptr_t handle__metacall = 0;
+
+	// Subclass to allow providing a Go implementation
+	virtual int qt_metacall(QMetaObject::Call param1, int param2, void** param3) override {
+		if (handle__metacall == 0) {
+			return QUndoGroup::qt_metacall(param1, param2, param3);
+		}
+		
+		QMetaObject::Call param1_ret = param1;
+		int sigval1 = static_cast<int>(param1_ret);
+		int sigval2 = param2;
+		void** sigval3 = param3;
+
+		int callback_return_value = miqt_exec_callback_QUndoGroup_metacall(this, handle__metacall, sigval1, sigval2, sigval3);
+
+		return static_cast<int>(callback_return_value);
+	}
+
+	friend int QUndoGroup_virtualbase_metacall(void* self, int param1, int param2, void** param3);
 
 	// cgo.Handle value for overwritten implementation
 	intptr_t handle__event = 0;
@@ -205,6 +264,10 @@ QMetaObject* QUndoGroup_metaObject(const QUndoGroup* self) {
 
 void* QUndoGroup_metacast(QUndoGroup* self, const char* param1) {
 	return self->qt_metacast(param1);
+}
+
+int QUndoGroup_metacall(QUndoGroup* self, int param1, int param2, void** param3) {
+	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
 struct miqt_string QUndoGroup_tr(const char* s) {
@@ -455,6 +518,54 @@ QAction* QUndoGroup_createRedoAction2(const QUndoGroup* self, QObject* parent, s
 	return self->createRedoAction(parent, prefix_QString);
 }
 
+bool QUndoGroup_override_virtual_metaObject(void* self, intptr_t slot) {
+	VirtualQUndoGroup* self_cast = dynamic_cast<VirtualQUndoGroup*>( (QUndoGroup*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+	
+	self_cast->handle__metaObject = slot;
+	return true;
+}
+
+QMetaObject* QUndoGroup_virtualbase_metaObject(const void* self) {
+
+	return (QMetaObject*) ( (const VirtualQUndoGroup*)(self) )->QUndoGroup::metaObject();
+
+}
+
+bool QUndoGroup_override_virtual_metacast(void* self, intptr_t slot) {
+	VirtualQUndoGroup* self_cast = dynamic_cast<VirtualQUndoGroup*>( (QUndoGroup*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+	
+	self_cast->handle__metacast = slot;
+	return true;
+}
+
+void* QUndoGroup_virtualbase_metacast(void* self, const char* param1) {
+
+	return ( (VirtualQUndoGroup*)(self) )->QUndoGroup::qt_metacast(param1);
+
+}
+
+bool QUndoGroup_override_virtual_metacall(void* self, intptr_t slot) {
+	VirtualQUndoGroup* self_cast = dynamic_cast<VirtualQUndoGroup*>( (QUndoGroup*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+	
+	self_cast->handle__metacall = slot;
+	return true;
+}
+
+int QUndoGroup_virtualbase_metacall(void* self, int param1, int param2, void** param3) {
+
+	return ( (VirtualQUndoGroup*)(self) )->QUndoGroup::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
+
+}
+
 bool QUndoGroup_override_virtual_event(void* self, intptr_t slot) {
 	VirtualQUndoGroup* self_cast = dynamic_cast<VirtualQUndoGroup*>( (QUndoGroup*)(self) );
 	if (self_cast == nullptr) {
@@ -567,6 +678,7 @@ void QUndoGroup_virtualbase_disconnectNotify(void* self, QMetaMethod* signal) {
 
 }
 
+const QMetaObject* QUndoGroup_staticMetaObject() { return &QUndoGroup::staticMetaObject; }
 QObject* QUndoGroup_protectedbase_sender(bool* _dynamic_cast_ok, const void* self) {
 	VirtualQUndoGroup* self_cast = dynamic_cast<VirtualQUndoGroup*>( (QUndoGroup*)(self) );
 	if (self_cast == nullptr) {

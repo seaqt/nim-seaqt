@@ -52,6 +52,7 @@ type cQVideoWindowControl*{.exportc: "QVideoWindowControl", incompleteStruct.} =
 
 proc fcQVideoWindowControl_metaObject(self: pointer, ): pointer {.importc: "QVideoWindowControl_metaObject".}
 proc fcQVideoWindowControl_metacast(self: pointer, param1: cstring): pointer {.importc: "QVideoWindowControl_metacast".}
+proc fcQVideoWindowControl_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QVideoWindowControl_metacall".}
 proc fcQVideoWindowControl_tr(s: cstring): struct_miqt_string {.importc: "QVideoWindowControl_tr".}
 proc fcQVideoWindowControl_trUtf8(s: cstring): struct_miqt_string {.importc: "QVideoWindowControl_trUtf8".}
 proc fcQVideoWindowControl_winId(self: pointer, ): uint {.importc: "QVideoWindowControl_winId".}
@@ -88,6 +89,7 @@ proc fcQVideoWindowControl_tr2(s: cstring, c: cstring): struct_miqt_string {.imp
 proc fcQVideoWindowControl_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QVideoWindowControl_tr3".}
 proc fcQVideoWindowControl_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QVideoWindowControl_trUtf82".}
 proc fcQVideoWindowControl_trUtf83(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QVideoWindowControl_trUtf83".}
+proc fcQVideoWindowControl_staticMetaObject(): pointer {.importc: "QVideoWindowControl_staticMetaObject".}
 proc fcQVideoWindowControl_delete(self: pointer) {.importc: "QVideoWindowControl_delete".}
 
 
@@ -98,6 +100,9 @@ proc metaObject*(self: gen_qvideowindowcontrol_types.QVideoWindowControl, ): gen
 
 proc metacast*(self: gen_qvideowindowcontrol_types.QVideoWindowControl, param1: cstring): pointer =
   fcQVideoWindowControl_metacast(self.h, param1)
+
+proc metacall*(self: gen_qvideowindowcontrol_types.QVideoWindowControl, param1: cint, param2: cint, param3: pointer): cint =
+  fcQVideoWindowControl_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qvideowindowcontrol_types.QVideoWindowControl, s: cstring): string =
   let v_ms = fcQVideoWindowControl_tr(s)
@@ -283,5 +288,7 @@ proc trUtf8*(_: type gen_qvideowindowcontrol_types.QVideoWindowControl, s: cstri
   c_free(v_ms.data)
   vx_ret
 
+proc staticMetaObject*(_: type gen_qvideowindowcontrol_types.QVideoWindowControl): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fcQVideoWindowControl_staticMetaObject())
 proc delete*(self: gen_qvideowindowcontrol_types.QVideoWindowControl) =
   fcQVideoWindowControl_delete(self.h)

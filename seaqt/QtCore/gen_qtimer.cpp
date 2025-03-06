@@ -15,6 +15,9 @@
 extern "C" {
 #endif
 
+QMetaObject* miqt_exec_callback_QTimer_metaObject(const QTimer*, intptr_t);
+void* miqt_exec_callback_QTimer_metacast(QTimer*, intptr_t, const char*);
+int miqt_exec_callback_QTimer_metacall(QTimer*, intptr_t, int, int, void**);
 void miqt_exec_callback_QTimer_timerEvent(QTimer*, intptr_t, QTimerEvent*);
 bool miqt_exec_callback_QTimer_event(QTimer*, intptr_t, QEvent*);
 bool miqt_exec_callback_QTimer_eventFilter(QTimer*, intptr_t, QObject*, QEvent*);
@@ -33,6 +36,62 @@ public:
 	VirtualQTimer(QObject* parent): QTimer(parent) {};
 
 	virtual ~VirtualQTimer() override = default;
+
+	// cgo.Handle value for overwritten implementation
+	intptr_t handle__metaObject = 0;
+
+	// Subclass to allow providing a Go implementation
+	virtual const QMetaObject* metaObject() const override {
+		if (handle__metaObject == 0) {
+			return QTimer::metaObject();
+		}
+		
+
+		QMetaObject* callback_return_value = miqt_exec_callback_QTimer_metaObject(this, handle__metaObject);
+
+		return callback_return_value;
+	}
+
+	friend QMetaObject* QTimer_virtualbase_metaObject(const void* self);
+
+	// cgo.Handle value for overwritten implementation
+	intptr_t handle__metacast = 0;
+
+	// Subclass to allow providing a Go implementation
+	virtual void* qt_metacast(const char* param1) override {
+		if (handle__metacast == 0) {
+			return QTimer::qt_metacast(param1);
+		}
+		
+		const char* sigval1 = (const char*) param1;
+
+		void* callback_return_value = miqt_exec_callback_QTimer_metacast(this, handle__metacast, sigval1);
+
+		return callback_return_value;
+	}
+
+	friend void* QTimer_virtualbase_metacast(void* self, const char* param1);
+
+	// cgo.Handle value for overwritten implementation
+	intptr_t handle__metacall = 0;
+
+	// Subclass to allow providing a Go implementation
+	virtual int qt_metacall(QMetaObject::Call param1, int param2, void** param3) override {
+		if (handle__metacall == 0) {
+			return QTimer::qt_metacall(param1, param2, param3);
+		}
+		
+		QMetaObject::Call param1_ret = param1;
+		int sigval1 = static_cast<int>(param1_ret);
+		int sigval2 = param2;
+		void** sigval3 = param3;
+
+		int callback_return_value = miqt_exec_callback_QTimer_metacall(this, handle__metacall, sigval1, sigval2, sigval3);
+
+		return static_cast<int>(callback_return_value);
+	}
+
+	friend int QTimer_virtualbase_metacall(void* self, int param1, int param2, void** param3);
 
 	// cgo.Handle value for overwritten implementation
 	intptr_t handle__timerEvent = 0;
@@ -197,6 +256,10 @@ void* QTimer_metacast(QTimer* self, const char* param1) {
 	return self->qt_metacast(param1);
 }
 
+int QTimer_metacall(QTimer* self, int param1, int param2, void** param3) {
+	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
+}
+
 struct miqt_string QTimer_tr(const char* s) {
 	QString _ret = QTimer::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
@@ -312,6 +375,54 @@ struct miqt_string QTimer_trUtf83(const char* s, const char* c, int n) {
 	return _ms;
 }
 
+bool QTimer_override_virtual_metaObject(void* self, intptr_t slot) {
+	VirtualQTimer* self_cast = dynamic_cast<VirtualQTimer*>( (QTimer*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+	
+	self_cast->handle__metaObject = slot;
+	return true;
+}
+
+QMetaObject* QTimer_virtualbase_metaObject(const void* self) {
+
+	return (QMetaObject*) ( (const VirtualQTimer*)(self) )->QTimer::metaObject();
+
+}
+
+bool QTimer_override_virtual_metacast(void* self, intptr_t slot) {
+	VirtualQTimer* self_cast = dynamic_cast<VirtualQTimer*>( (QTimer*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+	
+	self_cast->handle__metacast = slot;
+	return true;
+}
+
+void* QTimer_virtualbase_metacast(void* self, const char* param1) {
+
+	return ( (VirtualQTimer*)(self) )->QTimer::qt_metacast(param1);
+
+}
+
+bool QTimer_override_virtual_metacall(void* self, intptr_t slot) {
+	VirtualQTimer* self_cast = dynamic_cast<VirtualQTimer*>( (QTimer*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+	
+	self_cast->handle__metacall = slot;
+	return true;
+}
+
+int QTimer_virtualbase_metacall(void* self, int param1, int param2, void** param3) {
+
+	return ( (VirtualQTimer*)(self) )->QTimer::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
+
+}
+
 bool QTimer_override_virtual_timerEvent(void* self, intptr_t slot) {
 	VirtualQTimer* self_cast = dynamic_cast<VirtualQTimer*>( (QTimer*)(self) );
 	if (self_cast == nullptr) {
@@ -424,6 +535,7 @@ void QTimer_virtualbase_disconnectNotify(void* self, QMetaMethod* signal) {
 
 }
 
+const QMetaObject* QTimer_staticMetaObject() { return &QTimer::staticMetaObject; }
 QObject* QTimer_protectedbase_sender(bool* _dynamic_cast_ok, const void* self) {
 	VirtualQTimer* self_cast = dynamic_cast<VirtualQTimer*>( (QTimer*)(self) );
 	if (self_cast == nullptr) {

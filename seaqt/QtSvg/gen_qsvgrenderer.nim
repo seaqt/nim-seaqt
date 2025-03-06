@@ -72,6 +72,7 @@ proc fcQSvgRenderer_new7(contents: struct_miqt_string, parent: pointer): ptr cQS
 proc fcQSvgRenderer_new8(contents: pointer, parent: pointer): ptr cQSvgRenderer {.importc: "QSvgRenderer_new8".}
 proc fcQSvgRenderer_metaObject(self: pointer, ): pointer {.importc: "QSvgRenderer_metaObject".}
 proc fcQSvgRenderer_metacast(self: pointer, param1: cstring): pointer {.importc: "QSvgRenderer_metacast".}
+proc fcQSvgRenderer_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QSvgRenderer_metacall".}
 proc fcQSvgRenderer_tr(s: cstring): struct_miqt_string {.importc: "QSvgRenderer_tr".}
 proc fcQSvgRenderer_trUtf8(s: cstring): struct_miqt_string {.importc: "QSvgRenderer_trUtf8".}
 proc fcQSvgRenderer_isValid(self: pointer, ): bool {.importc: "QSvgRenderer_isValid".}
@@ -105,6 +106,12 @@ proc fcQSvgRenderer_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.i
 proc fcQSvgRenderer_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QSvgRenderer_trUtf82".}
 proc fcQSvgRenderer_trUtf83(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QSvgRenderer_trUtf83".}
 proc fcQSvgRenderer_render32(self: pointer, p: pointer, elementId: struct_miqt_string, bounds: pointer): void {.importc: "QSvgRenderer_render32".}
+proc fQSvgRenderer_virtualbase_metaObject(self: pointer, ): pointer{.importc: "QSvgRenderer_virtualbase_metaObject".}
+proc fcQSvgRenderer_override_virtual_metaObject(self: pointer, slot: int) {.importc: "QSvgRenderer_override_virtual_metaObject".}
+proc fQSvgRenderer_virtualbase_metacast(self: pointer, param1: cstring): pointer{.importc: "QSvgRenderer_virtualbase_metacast".}
+proc fcQSvgRenderer_override_virtual_metacast(self: pointer, slot: int) {.importc: "QSvgRenderer_override_virtual_metacast".}
+proc fQSvgRenderer_virtualbase_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint{.importc: "QSvgRenderer_virtualbase_metacall".}
+proc fcQSvgRenderer_override_virtual_metacall(self: pointer, slot: int) {.importc: "QSvgRenderer_override_virtual_metacall".}
 proc fQSvgRenderer_virtualbase_event(self: pointer, event: pointer): bool{.importc: "QSvgRenderer_virtualbase_event".}
 proc fcQSvgRenderer_override_virtual_event(self: pointer, slot: int) {.importc: "QSvgRenderer_override_virtual_event".}
 proc fQSvgRenderer_virtualbase_eventFilter(self: pointer, watched: pointer, event: pointer): bool{.importc: "QSvgRenderer_virtualbase_eventFilter".}
@@ -119,6 +126,7 @@ proc fQSvgRenderer_virtualbase_connectNotify(self: pointer, signal: pointer): vo
 proc fcQSvgRenderer_override_virtual_connectNotify(self: pointer, slot: int) {.importc: "QSvgRenderer_override_virtual_connectNotify".}
 proc fQSvgRenderer_virtualbase_disconnectNotify(self: pointer, signal: pointer): void{.importc: "QSvgRenderer_virtualbase_disconnectNotify".}
 proc fcQSvgRenderer_override_virtual_disconnectNotify(self: pointer, slot: int) {.importc: "QSvgRenderer_override_virtual_disconnectNotify".}
+proc fcQSvgRenderer_staticMetaObject(): pointer {.importc: "QSvgRenderer_staticMetaObject".}
 proc fcQSvgRenderer_delete(self: pointer) {.importc: "QSvgRenderer_delete".}
 
 
@@ -153,6 +161,9 @@ proc metaObject*(self: gen_qsvgrenderer_types.QSvgRenderer, ): gen_qobjectdefs_t
 
 proc metacast*(self: gen_qsvgrenderer_types.QSvgRenderer, param1: cstring): pointer =
   fcQSvgRenderer_metacast(self.h, param1)
+
+proc metacall*(self: gen_qsvgrenderer_types.QSvgRenderer, param1: cint, param2: cint, param3: pointer): cint =
+  fcQSvgRenderer_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qsvgrenderer_types.QSvgRenderer, s: cstring): string =
   let v_ms = fcQSvgRenderer_tr(s)
@@ -279,6 +290,65 @@ proc trUtf8*(_: type gen_qsvgrenderer_types.QSvgRenderer, s: cstring, c: cstring
 proc render*(self: gen_qsvgrenderer_types.QSvgRenderer, p: gen_qpainter_types.QPainter, elementId: string, bounds: gen_qrect_types.QRectF): void =
   fcQSvgRenderer_render32(self.h, p.h, struct_miqt_string(data: elementId, len: csize_t(len(elementId))), bounds.h)
 
+proc QSvgRenderermetaObject*(self: gen_qsvgrenderer_types.QSvgRenderer, ): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fQSvgRenderer_virtualbase_metaObject(self.h))
+
+type QSvgRenderermetaObjectProc* = proc(): gen_qobjectdefs_types.QMetaObject
+proc onmetaObject*(self: gen_qsvgrenderer_types.QSvgRenderer, slot: QSvgRenderermetaObjectProc) =
+  # TODO check subclass
+  var tmp = new QSvgRenderermetaObjectProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQSvgRenderer_override_virtual_metaObject(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QSvgRenderer_metaObject(self: ptr cQSvgRenderer, slot: int): pointer {.exportc: "miqt_exec_callback_QSvgRenderer_metaObject ".} =
+  var nimfunc = cast[ptr QSvgRenderermetaObjectProc](cast[pointer](slot))
+
+  let virtualReturn = nimfunc[]( )
+
+  virtualReturn.h
+proc QSvgRenderermetacast*(self: gen_qsvgrenderer_types.QSvgRenderer, param1: cstring): pointer =
+  fQSvgRenderer_virtualbase_metacast(self.h, param1)
+
+type QSvgRenderermetacastProc* = proc(param1: cstring): pointer
+proc onmetacast*(self: gen_qsvgrenderer_types.QSvgRenderer, slot: QSvgRenderermetacastProc) =
+  # TODO check subclass
+  var tmp = new QSvgRenderermetacastProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQSvgRenderer_override_virtual_metacast(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QSvgRenderer_metacast(self: ptr cQSvgRenderer, slot: int, param1: cstring): pointer {.exportc: "miqt_exec_callback_QSvgRenderer_metacast ".} =
+  var nimfunc = cast[ptr QSvgRenderermetacastProc](cast[pointer](slot))
+  let slotval1 = (param1)
+
+
+  let virtualReturn = nimfunc[](slotval1 )
+
+  virtualReturn
+proc QSvgRenderermetacall*(self: gen_qsvgrenderer_types.QSvgRenderer, param1: cint, param2: cint, param3: pointer): cint =
+  fQSvgRenderer_virtualbase_metacall(self.h, cint(param1), param2, param3)
+
+type QSvgRenderermetacallProc* = proc(param1: cint, param2: cint, param3: pointer): cint
+proc onmetacall*(self: gen_qsvgrenderer_types.QSvgRenderer, slot: QSvgRenderermetacallProc) =
+  # TODO check subclass
+  var tmp = new QSvgRenderermetacallProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQSvgRenderer_override_virtual_metacall(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QSvgRenderer_metacall(self: ptr cQSvgRenderer, slot: int, param1: cint, param2: cint, param3: pointer): cint {.exportc: "miqt_exec_callback_QSvgRenderer_metacall ".} =
+  var nimfunc = cast[ptr QSvgRenderermetacallProc](cast[pointer](slot))
+  let slotval1 = cint(param1)
+
+  let slotval2 = param2
+
+  let slotval3 = param3
+
+
+  let virtualReturn = nimfunc[](slotval1, slotval2, slotval3 )
+
+  virtualReturn
 proc QSvgRendererevent*(self: gen_qsvgrenderer_types.QSvgRenderer, event: gen_qcoreevent_types.QEvent): bool =
   fQSvgRenderer_virtualbase_event(self.h, event.h)
 
@@ -404,5 +474,7 @@ proc miqt_exec_callback_QSvgRenderer_disconnectNotify(self: ptr cQSvgRenderer, s
 
 
   nimfunc[](slotval1)
+proc staticMetaObject*(_: type gen_qsvgrenderer_types.QSvgRenderer): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fcQSvgRenderer_staticMetaObject())
 proc delete*(self: gen_qsvgrenderer_types.QSvgRenderer) =
   fcQSvgRenderer_delete(self.h)

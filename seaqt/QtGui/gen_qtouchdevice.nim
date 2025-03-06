@@ -52,6 +52,10 @@ template MouseEmulation*(_: type QTouchDeviceCapabilityFlagEnum): untyped = 64
 import ./gen_qtouchdevice_types
 export gen_qtouchdevice_types
 
+import
+  ../QtCore/gen_qobjectdefs_types
+export
+  gen_qobjectdefs_types
 
 type cQTouchDevice*{.exportc: "QTouchDevice", incompleteStruct.} = object
 
@@ -65,6 +69,7 @@ proc fcQTouchDevice_setName(self: pointer, name: struct_miqt_string): void {.imp
 proc fcQTouchDevice_setType(self: pointer, devType: cint): void {.importc: "QTouchDevice_setType".}
 proc fcQTouchDevice_setCapabilities(self: pointer, caps: cint): void {.importc: "QTouchDevice_setCapabilities".}
 proc fcQTouchDevice_setMaximumTouchPoints(self: pointer, max: cint): void {.importc: "QTouchDevice_setMaximumTouchPoints".}
+proc fcQTouchDevice_staticMetaObject(): pointer {.importc: "QTouchDevice_staticMetaObject".}
 proc fcQTouchDevice_delete(self: pointer) {.importc: "QTouchDevice_delete".}
 
 
@@ -108,5 +113,7 @@ proc setCapabilities*(self: gen_qtouchdevice_types.QTouchDevice, caps: cint): vo
 proc setMaximumTouchPoints*(self: gen_qtouchdevice_types.QTouchDevice, max: cint): void =
   fcQTouchDevice_setMaximumTouchPoints(self.h, max)
 
+proc staticMetaObject*(_: type gen_qtouchdevice_types.QTouchDevice): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fcQTouchDevice_staticMetaObject())
 proc delete*(self: gen_qtouchdevice_types.QTouchDevice) =
   fcQTouchDevice_delete(self.h)

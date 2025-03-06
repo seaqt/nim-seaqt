@@ -67,6 +67,7 @@ proc fcQIODevice_new(): ptr cQIODevice {.importc: "QIODevice_new".}
 proc fcQIODevice_new2(parent: pointer): ptr cQIODevice {.importc: "QIODevice_new2".}
 proc fcQIODevice_metaObject(self: pointer, ): pointer {.importc: "QIODevice_metaObject".}
 proc fcQIODevice_metacast(self: pointer, param1: cstring): pointer {.importc: "QIODevice_metacast".}
+proc fcQIODevice_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QIODevice_metacall".}
 proc fcQIODevice_tr(s: cstring): struct_miqt_string {.importc: "QIODevice_tr".}
 proc fcQIODevice_trUtf8(s: cstring): struct_miqt_string {.importc: "QIODevice_trUtf8".}
 proc fcQIODevice_openMode(self: pointer, ): cint {.importc: "QIODevice_openMode".}
@@ -130,6 +131,12 @@ proc fcQIODevice_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.impo
 proc fcQIODevice_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QIODevice_trUtf82".}
 proc fcQIODevice_trUtf83(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QIODevice_trUtf83".}
 proc fcQIODevice_readLine1(self: pointer, maxlen: clonglong): struct_miqt_string {.importc: "QIODevice_readLine1".}
+proc fQIODevice_virtualbase_metaObject(self: pointer, ): pointer{.importc: "QIODevice_virtualbase_metaObject".}
+proc fcQIODevice_override_virtual_metaObject(self: pointer, slot: int) {.importc: "QIODevice_override_virtual_metaObject".}
+proc fQIODevice_virtualbase_metacast(self: pointer, param1: cstring): pointer{.importc: "QIODevice_virtualbase_metacast".}
+proc fcQIODevice_override_virtual_metacast(self: pointer, slot: int) {.importc: "QIODevice_override_virtual_metacast".}
+proc fQIODevice_virtualbase_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint{.importc: "QIODevice_virtualbase_metacall".}
+proc fcQIODevice_override_virtual_metacall(self: pointer, slot: int) {.importc: "QIODevice_override_virtual_metacall".}
 proc fQIODevice_virtualbase_isSequential(self: pointer, ): bool{.importc: "QIODevice_virtualbase_isSequential".}
 proc fcQIODevice_override_virtual_isSequential(self: pointer, slot: int) {.importc: "QIODevice_override_virtual_isSequential".}
 proc fQIODevice_virtualbase_open(self: pointer, mode: cint): bool{.importc: "QIODevice_virtualbase_open".}
@@ -174,6 +181,7 @@ proc fQIODevice_virtualbase_connectNotify(self: pointer, signal: pointer): void{
 proc fcQIODevice_override_virtual_connectNotify(self: pointer, slot: int) {.importc: "QIODevice_override_virtual_connectNotify".}
 proc fQIODevice_virtualbase_disconnectNotify(self: pointer, signal: pointer): void{.importc: "QIODevice_virtualbase_disconnectNotify".}
 proc fcQIODevice_override_virtual_disconnectNotify(self: pointer, slot: int) {.importc: "QIODevice_override_virtual_disconnectNotify".}
+proc fcQIODevice_staticMetaObject(): pointer {.importc: "QIODevice_staticMetaObject".}
 proc fcQIODevice_delete(self: pointer) {.importc: "QIODevice_delete".}
 
 
@@ -190,6 +198,9 @@ proc metaObject*(self: gen_qiodevice_types.QIODevice, ): gen_qobjectdefs_types.Q
 
 proc metacast*(self: gen_qiodevice_types.QIODevice, param1: cstring): pointer =
   fcQIODevice_metacast(self.h, param1)
+
+proc metacall*(self: gen_qiodevice_types.QIODevice, param1: cint, param2: cint, param3: pointer): cint =
+  fcQIODevice_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qiodevice_types.QIODevice, s: cstring): string =
   let v_ms = fcQIODevice_tr(s)
@@ -472,6 +483,65 @@ proc readLine*(self: gen_qiodevice_types.QIODevice, maxlen: clonglong): seq[byte
   c_free(v_bytearray.data)
   vx_ret
 
+proc QIODevicemetaObject*(self: gen_qiodevice_types.QIODevice, ): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fQIODevice_virtualbase_metaObject(self.h))
+
+type QIODevicemetaObjectProc* = proc(): gen_qobjectdefs_types.QMetaObject
+proc onmetaObject*(self: gen_qiodevice_types.QIODevice, slot: QIODevicemetaObjectProc) =
+  # TODO check subclass
+  var tmp = new QIODevicemetaObjectProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQIODevice_override_virtual_metaObject(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QIODevice_metaObject(self: ptr cQIODevice, slot: int): pointer {.exportc: "miqt_exec_callback_QIODevice_metaObject ".} =
+  var nimfunc = cast[ptr QIODevicemetaObjectProc](cast[pointer](slot))
+
+  let virtualReturn = nimfunc[]( )
+
+  virtualReturn.h
+proc QIODevicemetacast*(self: gen_qiodevice_types.QIODevice, param1: cstring): pointer =
+  fQIODevice_virtualbase_metacast(self.h, param1)
+
+type QIODevicemetacastProc* = proc(param1: cstring): pointer
+proc onmetacast*(self: gen_qiodevice_types.QIODevice, slot: QIODevicemetacastProc) =
+  # TODO check subclass
+  var tmp = new QIODevicemetacastProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQIODevice_override_virtual_metacast(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QIODevice_metacast(self: ptr cQIODevice, slot: int, param1: cstring): pointer {.exportc: "miqt_exec_callback_QIODevice_metacast ".} =
+  var nimfunc = cast[ptr QIODevicemetacastProc](cast[pointer](slot))
+  let slotval1 = (param1)
+
+
+  let virtualReturn = nimfunc[](slotval1 )
+
+  virtualReturn
+proc QIODevicemetacall*(self: gen_qiodevice_types.QIODevice, param1: cint, param2: cint, param3: pointer): cint =
+  fQIODevice_virtualbase_metacall(self.h, cint(param1), param2, param3)
+
+type QIODevicemetacallProc* = proc(param1: cint, param2: cint, param3: pointer): cint
+proc onmetacall*(self: gen_qiodevice_types.QIODevice, slot: QIODevicemetacallProc) =
+  # TODO check subclass
+  var tmp = new QIODevicemetacallProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQIODevice_override_virtual_metacall(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QIODevice_metacall(self: ptr cQIODevice, slot: int, param1: cint, param2: cint, param3: pointer): cint {.exportc: "miqt_exec_callback_QIODevice_metacall ".} =
+  var nimfunc = cast[ptr QIODevicemetacallProc](cast[pointer](slot))
+  let slotval1 = cint(param1)
+
+  let slotval2 = param2
+
+  let slotval3 = param3
+
+
+  let virtualReturn = nimfunc[](slotval1, slotval2, slotval3 )
+
+  virtualReturn
 proc QIODeviceisSequential*(self: gen_qiodevice_types.QIODevice, ): bool =
   fQIODevice_virtualbase_isSequential(self.h)
 
@@ -881,5 +951,7 @@ proc miqt_exec_callback_QIODevice_disconnectNotify(self: ptr cQIODevice, slot: i
 
 
   nimfunc[](slotval1)
+proc staticMetaObject*(_: type gen_qiodevice_types.QIODevice): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fcQIODevice_staticMetaObject())
 proc delete*(self: gen_qiodevice_types.QIODevice) =
   fcQIODevice_delete(self.h)

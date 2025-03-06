@@ -43,6 +43,7 @@ QRadioTuner* QRadioTuner_new2(QObject* parent);
 void QRadioTuner_virtbase(QRadioTuner* src, QMediaObject** outptr_QMediaObject);
 QMetaObject* QRadioTuner_metaObject(const QRadioTuner* self);
 void* QRadioTuner_metacast(QRadioTuner* self, const char* param1);
+int QRadioTuner_metacall(QRadioTuner* self, int param1, int param2, void** param3);
 struct miqt_string QRadioTuner_tr(const char* s);
 struct miqt_string QRadioTuner_trUtf8(const char* s);
 int QRadioTuner_availability(const QRadioTuner* self);
@@ -100,6 +101,12 @@ struct miqt_string QRadioTuner_tr3(const char* s, const char* c, int n);
 struct miqt_string QRadioTuner_trUtf82(const char* s, const char* c);
 struct miqt_string QRadioTuner_trUtf83(const char* s, const char* c, int n);
 void QRadioTuner_searchAllStations1(QRadioTuner* self, int searchMode);
+bool QRadioTuner_override_virtual_metaObject(void* self, intptr_t slot);
+QMetaObject* QRadioTuner_virtualbase_metaObject(const void* self);
+bool QRadioTuner_override_virtual_metacast(void* self, intptr_t slot);
+void* QRadioTuner_virtualbase_metacast(void* self, const char* param1);
+bool QRadioTuner_override_virtual_metacall(void* self, intptr_t slot);
+int QRadioTuner_virtualbase_metacall(void* self, int param1, int param2, void** param3);
 bool QRadioTuner_override_virtual_availability(void* self, intptr_t slot);
 int QRadioTuner_virtualbase_availability(const void* self);
 bool QRadioTuner_override_virtual_isAvailable(void* self, intptr_t slot);
@@ -130,6 +137,7 @@ QObject* QRadioTuner_protectedbase_sender(bool* _dynamic_cast_ok, const void* se
 int QRadioTuner_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
 int QRadioTuner_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
 bool QRadioTuner_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+const QMetaObject* QRadioTuner_staticMetaObject();
 void QRadioTuner_delete(QRadioTuner* self);
 
 #ifdef __cplusplus

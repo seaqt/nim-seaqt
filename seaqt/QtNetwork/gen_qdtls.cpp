@@ -25,6 +25,9 @@
 extern "C" {
 #endif
 
+QMetaObject* miqt_exec_callback_QDtlsClientVerifier_metaObject(const QDtlsClientVerifier*, intptr_t);
+void* miqt_exec_callback_QDtlsClientVerifier_metacast(QDtlsClientVerifier*, intptr_t, const char*);
+int miqt_exec_callback_QDtlsClientVerifier_metacall(QDtlsClientVerifier*, intptr_t, int, int, void**);
 bool miqt_exec_callback_QDtlsClientVerifier_event(QDtlsClientVerifier*, intptr_t, QEvent*);
 bool miqt_exec_callback_QDtlsClientVerifier_eventFilter(QDtlsClientVerifier*, intptr_t, QObject*, QEvent*);
 void miqt_exec_callback_QDtlsClientVerifier_timerEvent(QDtlsClientVerifier*, intptr_t, QTimerEvent*);
@@ -34,6 +37,9 @@ void miqt_exec_callback_QDtlsClientVerifier_connectNotify(QDtlsClientVerifier*, 
 void miqt_exec_callback_QDtlsClientVerifier_disconnectNotify(QDtlsClientVerifier*, intptr_t, QMetaMethod*);
 void miqt_exec_callback_QDtls_pskRequired(intptr_t, QSslPreSharedKeyAuthenticator*);
 void miqt_exec_callback_QDtls_handshakeTimeout(intptr_t);
+QMetaObject* miqt_exec_callback_QDtls_metaObject(const QDtls*, intptr_t);
+void* miqt_exec_callback_QDtls_metacast(QDtls*, intptr_t, const char*);
+int miqt_exec_callback_QDtls_metacall(QDtls*, intptr_t, int, int, void**);
 bool miqt_exec_callback_QDtls_event(QDtls*, intptr_t, QEvent*);
 bool miqt_exec_callback_QDtls_eventFilter(QDtls*, intptr_t, QObject*, QEvent*);
 void miqt_exec_callback_QDtls_timerEvent(QDtls*, intptr_t, QTimerEvent*);
@@ -52,6 +58,62 @@ public:
 	VirtualQDtlsClientVerifier(QObject* parent): QDtlsClientVerifier(parent) {};
 
 	virtual ~VirtualQDtlsClientVerifier() override = default;
+
+	// cgo.Handle value for overwritten implementation
+	intptr_t handle__metaObject = 0;
+
+	// Subclass to allow providing a Go implementation
+	virtual const QMetaObject* metaObject() const override {
+		if (handle__metaObject == 0) {
+			return QDtlsClientVerifier::metaObject();
+		}
+		
+
+		QMetaObject* callback_return_value = miqt_exec_callback_QDtlsClientVerifier_metaObject(this, handle__metaObject);
+
+		return callback_return_value;
+	}
+
+	friend QMetaObject* QDtlsClientVerifier_virtualbase_metaObject(const void* self);
+
+	// cgo.Handle value for overwritten implementation
+	intptr_t handle__metacast = 0;
+
+	// Subclass to allow providing a Go implementation
+	virtual void* qt_metacast(const char* param1) override {
+		if (handle__metacast == 0) {
+			return QDtlsClientVerifier::qt_metacast(param1);
+		}
+		
+		const char* sigval1 = (const char*) param1;
+
+		void* callback_return_value = miqt_exec_callback_QDtlsClientVerifier_metacast(this, handle__metacast, sigval1);
+
+		return callback_return_value;
+	}
+
+	friend void* QDtlsClientVerifier_virtualbase_metacast(void* self, const char* param1);
+
+	// cgo.Handle value for overwritten implementation
+	intptr_t handle__metacall = 0;
+
+	// Subclass to allow providing a Go implementation
+	virtual int qt_metacall(QMetaObject::Call param1, int param2, void** param3) override {
+		if (handle__metacall == 0) {
+			return QDtlsClientVerifier::qt_metacall(param1, param2, param3);
+		}
+		
+		QMetaObject::Call param1_ret = param1;
+		int sigval1 = static_cast<int>(param1_ret);
+		int sigval2 = param2;
+		void** sigval3 = param3;
+
+		int callback_return_value = miqt_exec_callback_QDtlsClientVerifier_metacall(this, handle__metacall, sigval1, sigval2, sigval3);
+
+		return static_cast<int>(callback_return_value);
+	}
+
+	friend int QDtlsClientVerifier_virtualbase_metacall(void* self, int param1, int param2, void** param3);
 
 	// cgo.Handle value for overwritten implementation
 	intptr_t handle__event = 0;
@@ -216,6 +278,10 @@ void* QDtlsClientVerifier_metacast(QDtlsClientVerifier* self, const char* param1
 	return self->qt_metacast(param1);
 }
 
+int QDtlsClientVerifier_metacall(QDtlsClientVerifier* self, int param1, int param2, void** param3) {
+	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
+}
+
 struct miqt_string QDtlsClientVerifier_tr(const char* s) {
 	QString _ret = QDtlsClientVerifier::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
@@ -318,6 +384,54 @@ struct miqt_string QDtlsClientVerifier_trUtf83(const char* s, const char* c, int
 	_ms.data = static_cast<char*>(malloc(_ms.len));
 	memcpy(_ms.data, _b.data(), _ms.len);
 	return _ms;
+}
+
+bool QDtlsClientVerifier_override_virtual_metaObject(void* self, intptr_t slot) {
+	VirtualQDtlsClientVerifier* self_cast = dynamic_cast<VirtualQDtlsClientVerifier*>( (QDtlsClientVerifier*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+	
+	self_cast->handle__metaObject = slot;
+	return true;
+}
+
+QMetaObject* QDtlsClientVerifier_virtualbase_metaObject(const void* self) {
+
+	return (QMetaObject*) ( (const VirtualQDtlsClientVerifier*)(self) )->QDtlsClientVerifier::metaObject();
+
+}
+
+bool QDtlsClientVerifier_override_virtual_metacast(void* self, intptr_t slot) {
+	VirtualQDtlsClientVerifier* self_cast = dynamic_cast<VirtualQDtlsClientVerifier*>( (QDtlsClientVerifier*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+	
+	self_cast->handle__metacast = slot;
+	return true;
+}
+
+void* QDtlsClientVerifier_virtualbase_metacast(void* self, const char* param1) {
+
+	return ( (VirtualQDtlsClientVerifier*)(self) )->QDtlsClientVerifier::qt_metacast(param1);
+
+}
+
+bool QDtlsClientVerifier_override_virtual_metacall(void* self, intptr_t slot) {
+	VirtualQDtlsClientVerifier* self_cast = dynamic_cast<VirtualQDtlsClientVerifier*>( (QDtlsClientVerifier*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+	
+	self_cast->handle__metacall = slot;
+	return true;
+}
+
+int QDtlsClientVerifier_virtualbase_metacall(void* self, int param1, int param2, void** param3) {
+
+	return ( (VirtualQDtlsClientVerifier*)(self) )->QDtlsClientVerifier::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
+
 }
 
 bool QDtlsClientVerifier_override_virtual_event(void* self, intptr_t slot) {
@@ -432,6 +546,7 @@ void QDtlsClientVerifier_virtualbase_disconnectNotify(void* self, QMetaMethod* s
 
 }
 
+const QMetaObject* QDtlsClientVerifier_staticMetaObject() { return &QDtlsClientVerifier::staticMetaObject; }
 QObject* QDtlsClientVerifier_protectedbase_sender(bool* _dynamic_cast_ok, const void* self) {
 	VirtualQDtlsClientVerifier* self_cast = dynamic_cast<VirtualQDtlsClientVerifier*>( (QDtlsClientVerifier*)(self) );
 	if (self_cast == nullptr) {
@@ -495,6 +610,62 @@ public:
 	VirtualQDtls(QSslSocket::SslMode mode, QObject* parent): QDtls(mode, parent) {};
 
 	virtual ~VirtualQDtls() override = default;
+
+	// cgo.Handle value for overwritten implementation
+	intptr_t handle__metaObject = 0;
+
+	// Subclass to allow providing a Go implementation
+	virtual const QMetaObject* metaObject() const override {
+		if (handle__metaObject == 0) {
+			return QDtls::metaObject();
+		}
+		
+
+		QMetaObject* callback_return_value = miqt_exec_callback_QDtls_metaObject(this, handle__metaObject);
+
+		return callback_return_value;
+	}
+
+	friend QMetaObject* QDtls_virtualbase_metaObject(const void* self);
+
+	// cgo.Handle value for overwritten implementation
+	intptr_t handle__metacast = 0;
+
+	// Subclass to allow providing a Go implementation
+	virtual void* qt_metacast(const char* param1) override {
+		if (handle__metacast == 0) {
+			return QDtls::qt_metacast(param1);
+		}
+		
+		const char* sigval1 = (const char*) param1;
+
+		void* callback_return_value = miqt_exec_callback_QDtls_metacast(this, handle__metacast, sigval1);
+
+		return callback_return_value;
+	}
+
+	friend void* QDtls_virtualbase_metacast(void* self, const char* param1);
+
+	// cgo.Handle value for overwritten implementation
+	intptr_t handle__metacall = 0;
+
+	// Subclass to allow providing a Go implementation
+	virtual int qt_metacall(QMetaObject::Call param1, int param2, void** param3) override {
+		if (handle__metacall == 0) {
+			return QDtls::qt_metacall(param1, param2, param3);
+		}
+		
+		QMetaObject::Call param1_ret = param1;
+		int sigval1 = static_cast<int>(param1_ret);
+		int sigval2 = param2;
+		void** sigval3 = param3;
+
+		int callback_return_value = miqt_exec_callback_QDtls_metacall(this, handle__metacall, sigval1, sigval2, sigval3);
+
+		return static_cast<int>(callback_return_value);
+	}
+
+	friend int QDtls_virtualbase_metacall(void* self, int param1, int param2, void** param3);
 
 	// cgo.Handle value for overwritten implementation
 	intptr_t handle__event = 0;
@@ -657,6 +828,10 @@ QMetaObject* QDtls_metaObject(const QDtls* self) {
 
 void* QDtls_metacast(QDtls* self, const char* param1) {
 	return self->qt_metacast(param1);
+}
+
+int QDtls_metacall(QDtls* self, int param1, int param2, void** param3) {
+	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
 struct miqt_string QDtls_tr(const char* s) {
@@ -908,6 +1083,54 @@ bool QDtls_doHandshake2(QDtls* self, QUdpSocket* socket, struct miqt_string dgra
 	return self->doHandshake(socket, dgram_QByteArray);
 }
 
+bool QDtls_override_virtual_metaObject(void* self, intptr_t slot) {
+	VirtualQDtls* self_cast = dynamic_cast<VirtualQDtls*>( (QDtls*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+	
+	self_cast->handle__metaObject = slot;
+	return true;
+}
+
+QMetaObject* QDtls_virtualbase_metaObject(const void* self) {
+
+	return (QMetaObject*) ( (const VirtualQDtls*)(self) )->QDtls::metaObject();
+
+}
+
+bool QDtls_override_virtual_metacast(void* self, intptr_t slot) {
+	VirtualQDtls* self_cast = dynamic_cast<VirtualQDtls*>( (QDtls*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+	
+	self_cast->handle__metacast = slot;
+	return true;
+}
+
+void* QDtls_virtualbase_metacast(void* self, const char* param1) {
+
+	return ( (VirtualQDtls*)(self) )->QDtls::qt_metacast(param1);
+
+}
+
+bool QDtls_override_virtual_metacall(void* self, intptr_t slot) {
+	VirtualQDtls* self_cast = dynamic_cast<VirtualQDtls*>( (QDtls*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+	
+	self_cast->handle__metacall = slot;
+	return true;
+}
+
+int QDtls_virtualbase_metacall(void* self, int param1, int param2, void** param3) {
+
+	return ( (VirtualQDtls*)(self) )->QDtls::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
+
+}
+
 bool QDtls_override_virtual_event(void* self, intptr_t slot) {
 	VirtualQDtls* self_cast = dynamic_cast<VirtualQDtls*>( (QDtls*)(self) );
 	if (self_cast == nullptr) {
@@ -1020,6 +1243,7 @@ void QDtls_virtualbase_disconnectNotify(void* self, QMetaMethod* signal) {
 
 }
 
+const QMetaObject* QDtls_staticMetaObject() { return &QDtls::staticMetaObject; }
 QObject* QDtls_protectedbase_sender(bool* _dynamic_cast_ok, const void* self) {
 	VirtualQDtls* self_cast = dynamic_cast<VirtualQDtls*>( (QDtls*)(self) );
 	if (self_cast == nullptr) {

@@ -77,6 +77,7 @@ QGraphicsSvgItem* QGraphicsSvgItem_new4(struct miqt_string fileName, QGraphicsIt
 void QGraphicsSvgItem_virtbase(QGraphicsSvgItem* src, QGraphicsObject** outptr_QGraphicsObject);
 QMetaObject* QGraphicsSvgItem_metaObject(const QGraphicsSvgItem* self);
 void* QGraphicsSvgItem_metacast(QGraphicsSvgItem* self, const char* param1);
+int QGraphicsSvgItem_metacall(QGraphicsSvgItem* self, int param1, int param2, void** param3);
 struct miqt_string QGraphicsSvgItem_tr(const char* s);
 struct miqt_string QGraphicsSvgItem_trUtf8(const char* s);
 void QGraphicsSvgItem_setSharedRenderer(QGraphicsSvgItem* self, QSvgRenderer* renderer);
@@ -94,6 +95,12 @@ struct miqt_string QGraphicsSvgItem_tr2(const char* s, const char* c);
 struct miqt_string QGraphicsSvgItem_tr3(const char* s, const char* c, int n);
 struct miqt_string QGraphicsSvgItem_trUtf82(const char* s, const char* c);
 struct miqt_string QGraphicsSvgItem_trUtf83(const char* s, const char* c, int n);
+bool QGraphicsSvgItem_override_virtual_metaObject(void* self, intptr_t slot);
+QMetaObject* QGraphicsSvgItem_virtualbase_metaObject(const void* self);
+bool QGraphicsSvgItem_override_virtual_metacast(void* self, intptr_t slot);
+void* QGraphicsSvgItem_virtualbase_metacast(void* self, const char* param1);
+bool QGraphicsSvgItem_override_virtual_metacall(void* self, intptr_t slot);
+int QGraphicsSvgItem_virtualbase_metacall(void* self, int param1, int param2, void** param3);
 bool QGraphicsSvgItem_override_virtual_boundingRect(void* self, intptr_t slot);
 QRectF* QGraphicsSvgItem_virtualbase_boundingRect(const void* self);
 bool QGraphicsSvgItem_override_virtual_paint(void* self, intptr_t slot);
@@ -186,6 +193,7 @@ bool QGraphicsSvgItem_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, co
 void QGraphicsSvgItem_protectedbase_addToIndex(bool* _dynamic_cast_ok, void* self);
 void QGraphicsSvgItem_protectedbase_removeFromIndex(bool* _dynamic_cast_ok, void* self);
 void QGraphicsSvgItem_protectedbase_prepareGeometryChange(bool* _dynamic_cast_ok, void* self);
+const QMetaObject* QGraphicsSvgItem_staticMetaObject();
 void QGraphicsSvgItem_delete(QGraphicsSvgItem* self);
 
 #ifdef __cplusplus

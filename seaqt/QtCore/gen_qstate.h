@@ -47,6 +47,7 @@ QState* QState_new4(int childMode, QState* parent);
 void QState_virtbase(QState* src, QAbstractState** outptr_QAbstractState);
 QMetaObject* QState_metaObject(const QState* self);
 void* QState_metacast(QState* self, const char* param1);
+int QState_metacall(QState* self, int param1, int param2, void** param3);
 struct miqt_string QState_tr(const char* s);
 struct miqt_string QState_trUtf8(const char* s);
 QAbstractState* QState_errorState(const QState* self);
@@ -68,6 +69,12 @@ struct miqt_string QState_tr2(const char* s, const char* c);
 struct miqt_string QState_tr3(const char* s, const char* c, int n);
 struct miqt_string QState_trUtf82(const char* s, const char* c);
 struct miqt_string QState_trUtf83(const char* s, const char* c, int n);
+bool QState_override_virtual_metaObject(void* self, intptr_t slot);
+QMetaObject* QState_virtualbase_metaObject(const void* self);
+bool QState_override_virtual_metacast(void* self, intptr_t slot);
+void* QState_virtualbase_metacast(void* self, const char* param1);
+bool QState_override_virtual_metacall(void* self, intptr_t slot);
+int QState_virtualbase_metacall(void* self, int param1, int param2, void** param3);
 bool QState_override_virtual_onEntry(void* self, intptr_t slot);
 void QState_virtualbase_onEntry(void* self, QEvent* event);
 bool QState_override_virtual_onExit(void* self, intptr_t slot);
@@ -90,6 +97,7 @@ QObject* QState_protectedbase_sender(bool* _dynamic_cast_ok, const void* self);
 int QState_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
 int QState_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
 bool QState_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+const QMetaObject* QState_staticMetaObject();
 void QState_delete(QState* self);
 
 #ifdef __cplusplus

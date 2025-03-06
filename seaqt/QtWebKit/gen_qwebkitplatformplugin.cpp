@@ -112,6 +112,10 @@ void* QWebSelectMethod_metacast(QWebSelectMethod* self, const char* param1) {
 	return self->qt_metacast(param1);
 }
 
+int QWebSelectMethod_metacall(QWebSelectMethod* self, int param1, int param2, void** param3) {
+	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
+}
+
 struct miqt_string QWebSelectMethod_tr(const char* s) {
 	QString _ret = QWebSelectMethod::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
@@ -217,6 +221,7 @@ struct miqt_string QWebSelectMethod_trUtf83(const char* s, const char* c, int n)
 	return _ms;
 }
 
+const QMetaObject* QWebSelectMethod_staticMetaObject() { return &QWebSelectMethod::staticMetaObject; }
 void QWebSelectMethod_delete(QWebSelectMethod* self) {
 	delete self;
 }
@@ -269,6 +274,10 @@ QMetaObject* QWebNotificationPresenter_metaObject(const QWebNotificationPresente
 
 void* QWebNotificationPresenter_metacast(QWebNotificationPresenter* self, const char* param1) {
 	return self->qt_metacast(param1);
+}
+
+int QWebNotificationPresenter_metacall(QWebNotificationPresenter* self, int param1, int param2, void** param3) {
+	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
 struct miqt_string QWebNotificationPresenter_tr(const char* s) {
@@ -361,6 +370,7 @@ struct miqt_string QWebNotificationPresenter_trUtf83(const char* s, const char* 
 	return _ms;
 }
 
+const QMetaObject* QWebNotificationPresenter_staticMetaObject() { return &QWebNotificationPresenter::staticMetaObject; }
 void QWebNotificationPresenter_delete(QWebNotificationPresenter* self) {
 	delete self;
 }
@@ -375,6 +385,10 @@ QMetaObject* QWebHapticFeedbackPlayer_metaObject(const QWebHapticFeedbackPlayer*
 
 void* QWebHapticFeedbackPlayer_metacast(QWebHapticFeedbackPlayer* self, const char* param1) {
 	return self->qt_metacast(param1);
+}
+
+int QWebHapticFeedbackPlayer_metacall(QWebHapticFeedbackPlayer* self, int param1, int param2, void** param3) {
+	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
 struct miqt_string QWebHapticFeedbackPlayer_tr(const char* s) {
@@ -448,6 +462,7 @@ struct miqt_string QWebHapticFeedbackPlayer_trUtf83(const char* s, const char* c
 	return _ms;
 }
 
+const QMetaObject* QWebHapticFeedbackPlayer_staticMetaObject() { return &QWebHapticFeedbackPlayer::staticMetaObject; }
 void QWebHapticFeedbackPlayer_delete(QWebHapticFeedbackPlayer* self) {
 	delete self;
 }
@@ -462,6 +477,10 @@ QMetaObject* QWebTouchModifier_metaObject(const QWebTouchModifier* self) {
 
 void* QWebTouchModifier_metacast(QWebTouchModifier* self, const char* param1) {
 	return self->qt_metacast(param1);
+}
+
+int QWebTouchModifier_metacall(QWebTouchModifier* self, int param1, int param2, void** param3) {
+	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
 struct miqt_string QWebTouchModifier_tr(const char* s) {
@@ -534,6 +553,7 @@ struct miqt_string QWebTouchModifier_trUtf83(const char* s, const char* c, int n
 	return _ms;
 }
 
+const QMetaObject* QWebTouchModifier_staticMetaObject() { return &QWebTouchModifier::staticMetaObject; }
 void QWebTouchModifier_delete(QWebTouchModifier* self) {
 	delete self;
 }
@@ -548,6 +568,10 @@ QMetaObject* QWebSpellChecker_metaObject(const QWebSpellChecker* self) {
 
 void* QWebSpellChecker_metacast(QWebSpellChecker* self, const char* param1) {
 	return self->qt_metacast(param1);
+}
+
+int QWebSpellChecker_metacall(QWebSpellChecker* self, int param1, int param2, void** param3) {
+	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
 struct miqt_string QWebSpellChecker_tr(const char* s) {
@@ -683,6 +707,7 @@ struct miqt_string QWebSpellChecker_trUtf83(const char* s, const char* c, int n)
 	return _ms;
 }
 
+const QMetaObject* QWebSpellChecker_staticMetaObject() { return &QWebSpellChecker::staticMetaObject; }
 void QWebSpellChecker_delete(QWebSpellChecker* self) {
 	delete self;
 }

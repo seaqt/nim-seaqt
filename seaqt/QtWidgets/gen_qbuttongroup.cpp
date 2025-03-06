@@ -29,6 +29,9 @@ void miqt_exec_callback_QButtonGroup_buttonClickedWithInt(intptr_t, int);
 void miqt_exec_callback_QButtonGroup_buttonPressedWithInt(intptr_t, int);
 void miqt_exec_callback_QButtonGroup_buttonReleasedWithInt(intptr_t, int);
 void miqt_exec_callback_QButtonGroup_buttonToggled2(intptr_t, int, bool);
+QMetaObject* miqt_exec_callback_QButtonGroup_metaObject(const QButtonGroup*, intptr_t);
+void* miqt_exec_callback_QButtonGroup_metacast(QButtonGroup*, intptr_t, const char*);
+int miqt_exec_callback_QButtonGroup_metacall(QButtonGroup*, intptr_t, int, int, void**);
 bool miqt_exec_callback_QButtonGroup_event(QButtonGroup*, intptr_t, QEvent*);
 bool miqt_exec_callback_QButtonGroup_eventFilter(QButtonGroup*, intptr_t, QObject*, QEvent*);
 void miqt_exec_callback_QButtonGroup_timerEvent(QButtonGroup*, intptr_t, QTimerEvent*);
@@ -47,6 +50,62 @@ public:
 	VirtualQButtonGroup(QObject* parent): QButtonGroup(parent) {};
 
 	virtual ~VirtualQButtonGroup() override = default;
+
+	// cgo.Handle value for overwritten implementation
+	intptr_t handle__metaObject = 0;
+
+	// Subclass to allow providing a Go implementation
+	virtual const QMetaObject* metaObject() const override {
+		if (handle__metaObject == 0) {
+			return QButtonGroup::metaObject();
+		}
+		
+
+		QMetaObject* callback_return_value = miqt_exec_callback_QButtonGroup_metaObject(this, handle__metaObject);
+
+		return callback_return_value;
+	}
+
+	friend QMetaObject* QButtonGroup_virtualbase_metaObject(const void* self);
+
+	// cgo.Handle value for overwritten implementation
+	intptr_t handle__metacast = 0;
+
+	// Subclass to allow providing a Go implementation
+	virtual void* qt_metacast(const char* param1) override {
+		if (handle__metacast == 0) {
+			return QButtonGroup::qt_metacast(param1);
+		}
+		
+		const char* sigval1 = (const char*) param1;
+
+		void* callback_return_value = miqt_exec_callback_QButtonGroup_metacast(this, handle__metacast, sigval1);
+
+		return callback_return_value;
+	}
+
+	friend void* QButtonGroup_virtualbase_metacast(void* self, const char* param1);
+
+	// cgo.Handle value for overwritten implementation
+	intptr_t handle__metacall = 0;
+
+	// Subclass to allow providing a Go implementation
+	virtual int qt_metacall(QMetaObject::Call param1, int param2, void** param3) override {
+		if (handle__metacall == 0) {
+			return QButtonGroup::qt_metacall(param1, param2, param3);
+		}
+		
+		QMetaObject::Call param1_ret = param1;
+		int sigval1 = static_cast<int>(param1_ret);
+		int sigval2 = param2;
+		void** sigval3 = param3;
+
+		int callback_return_value = miqt_exec_callback_QButtonGroup_metacall(this, handle__metacall, sigval1, sigval2, sigval3);
+
+		return static_cast<int>(callback_return_value);
+	}
+
+	friend int QButtonGroup_virtualbase_metacall(void* self, int param1, int param2, void** param3);
 
 	// cgo.Handle value for overwritten implementation
 	intptr_t handle__event = 0;
@@ -209,6 +268,10 @@ QMetaObject* QButtonGroup_metaObject(const QButtonGroup* self) {
 
 void* QButtonGroup_metacast(QButtonGroup* self, const char* param1) {
 	return self->qt_metacast(param1);
+}
+
+int QButtonGroup_metacall(QButtonGroup* self, int param1, int param2, void** param3) {
+	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
 struct miqt_string QButtonGroup_tr(const char* s) {
@@ -465,6 +528,54 @@ void QButtonGroup_addButton2(QButtonGroup* self, QAbstractButton* param1, int id
 	self->addButton(param1, static_cast<int>(id));
 }
 
+bool QButtonGroup_override_virtual_metaObject(void* self, intptr_t slot) {
+	VirtualQButtonGroup* self_cast = dynamic_cast<VirtualQButtonGroup*>( (QButtonGroup*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+	
+	self_cast->handle__metaObject = slot;
+	return true;
+}
+
+QMetaObject* QButtonGroup_virtualbase_metaObject(const void* self) {
+
+	return (QMetaObject*) ( (const VirtualQButtonGroup*)(self) )->QButtonGroup::metaObject();
+
+}
+
+bool QButtonGroup_override_virtual_metacast(void* self, intptr_t slot) {
+	VirtualQButtonGroup* self_cast = dynamic_cast<VirtualQButtonGroup*>( (QButtonGroup*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+	
+	self_cast->handle__metacast = slot;
+	return true;
+}
+
+void* QButtonGroup_virtualbase_metacast(void* self, const char* param1) {
+
+	return ( (VirtualQButtonGroup*)(self) )->QButtonGroup::qt_metacast(param1);
+
+}
+
+bool QButtonGroup_override_virtual_metacall(void* self, intptr_t slot) {
+	VirtualQButtonGroup* self_cast = dynamic_cast<VirtualQButtonGroup*>( (QButtonGroup*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+	
+	self_cast->handle__metacall = slot;
+	return true;
+}
+
+int QButtonGroup_virtualbase_metacall(void* self, int param1, int param2, void** param3) {
+
+	return ( (VirtualQButtonGroup*)(self) )->QButtonGroup::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
+
+}
+
 bool QButtonGroup_override_virtual_event(void* self, intptr_t slot) {
 	VirtualQButtonGroup* self_cast = dynamic_cast<VirtualQButtonGroup*>( (QButtonGroup*)(self) );
 	if (self_cast == nullptr) {
@@ -577,6 +688,7 @@ void QButtonGroup_virtualbase_disconnectNotify(void* self, QMetaMethod* signal) 
 
 }
 
+const QMetaObject* QButtonGroup_staticMetaObject() { return &QButtonGroup::staticMetaObject; }
 QObject* QButtonGroup_protectedbase_sender(bool* _dynamic_cast_ok, const void* self) {
 	VirtualQButtonGroup* self_cast = dynamic_cast<VirtualQButtonGroup*>( (QButtonGroup*)(self) );
 	if (self_cast == nullptr) {

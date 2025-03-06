@@ -49,6 +49,7 @@ QGridLayout* QGridLayout_new2();
 void QGridLayout_virtbase(QGridLayout* src, QLayout** outptr_QLayout);
 QMetaObject* QGridLayout_metaObject(const QGridLayout* self);
 void* QGridLayout_metacast(QGridLayout* self, const char* param1);
+int QGridLayout_metacall(QGridLayout* self, int param1, int param2, void** param3);
 struct miqt_string QGridLayout_tr(const char* s);
 struct miqt_string QGridLayout_trUtf8(const char* s);
 QSize* QGridLayout_sizeHint(const QGridLayout* self);
@@ -103,6 +104,12 @@ void QGridLayout_addLayout6(QGridLayout* self, QLayout* param1, int row, int col
 void QGridLayout_addItem4(QGridLayout* self, QLayoutItem* item, int row, int column, int rowSpan);
 void QGridLayout_addItem5(QGridLayout* self, QLayoutItem* item, int row, int column, int rowSpan, int columnSpan);
 void QGridLayout_addItem6(QGridLayout* self, QLayoutItem* item, int row, int column, int rowSpan, int columnSpan, int param6);
+bool QGridLayout_override_virtual_metaObject(void* self, intptr_t slot);
+QMetaObject* QGridLayout_virtualbase_metaObject(const void* self);
+bool QGridLayout_override_virtual_metacast(void* self, intptr_t slot);
+void* QGridLayout_virtualbase_metacast(void* self, const char* param1);
+bool QGridLayout_override_virtual_metacall(void* self, intptr_t slot);
+int QGridLayout_virtualbase_metacall(void* self, int param1, int param2, void** param3);
 bool QGridLayout_override_virtual_sizeHint(void* self, intptr_t slot);
 QSize* QGridLayout_virtualbase_sizeHint(const void* self);
 bool QGridLayout_override_virtual_minimumSize(void* self, intptr_t slot);
@@ -166,6 +173,7 @@ QObject* QGridLayout_protectedbase_sender(bool* _dynamic_cast_ok, const void* se
 int QGridLayout_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
 int QGridLayout_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
 bool QGridLayout_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+const QMetaObject* QGridLayout_staticMetaObject();
 void QGridLayout_delete(QGridLayout* self);
 
 #ifdef __cplusplus

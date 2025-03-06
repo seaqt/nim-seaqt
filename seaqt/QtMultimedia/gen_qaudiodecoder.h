@@ -47,6 +47,7 @@ QAudioDecoder* QAudioDecoder_new2(QObject* parent);
 void QAudioDecoder_virtbase(QAudioDecoder* src, QMediaObject** outptr_QMediaObject);
 QMetaObject* QAudioDecoder_metaObject(const QAudioDecoder* self);
 void* QAudioDecoder_metacast(QAudioDecoder* self, const char* param1);
+int QAudioDecoder_metacall(QAudioDecoder* self, int param1, int param2, void** param3);
 struct miqt_string QAudioDecoder_tr(const char* s);
 struct miqt_string QAudioDecoder_trUtf8(const char* s);
 int QAudioDecoder_hasSupport(struct miqt_string mimeType);
@@ -90,6 +91,12 @@ struct miqt_string QAudioDecoder_tr3(const char* s, const char* c, int n);
 struct miqt_string QAudioDecoder_trUtf82(const char* s, const char* c);
 struct miqt_string QAudioDecoder_trUtf83(const char* s, const char* c, int n);
 int QAudioDecoder_hasSupport2(struct miqt_string mimeType, struct miqt_array /* of struct miqt_string */  codecs);
+bool QAudioDecoder_override_virtual_metaObject(void* self, intptr_t slot);
+QMetaObject* QAudioDecoder_virtualbase_metaObject(const void* self);
+bool QAudioDecoder_override_virtual_metacast(void* self, intptr_t slot);
+void* QAudioDecoder_virtualbase_metacast(void* self, const char* param1);
+bool QAudioDecoder_override_virtual_metacall(void* self, intptr_t slot);
+int QAudioDecoder_virtualbase_metacall(void* self, int param1, int param2, void** param3);
 bool QAudioDecoder_override_virtual_bind(void* self, intptr_t slot);
 bool QAudioDecoder_virtualbase_bind(void* self, QObject* param1);
 bool QAudioDecoder_override_virtual_unbind(void* self, intptr_t slot);
@@ -120,6 +127,7 @@ QObject* QAudioDecoder_protectedbase_sender(bool* _dynamic_cast_ok, const void* 
 int QAudioDecoder_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
 int QAudioDecoder_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
 bool QAudioDecoder_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+const QMetaObject* QAudioDecoder_staticMetaObject();
 void QAudioDecoder_delete(QAudioDecoder* self);
 
 #ifdef __cplusplus

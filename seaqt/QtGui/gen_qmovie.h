@@ -55,6 +55,7 @@ QMovie* QMovie_new8(struct miqt_string fileName, struct miqt_string format, QObj
 void QMovie_virtbase(QMovie* src, QObject** outptr_QObject);
 QMetaObject* QMovie_metaObject(const QMovie* self);
 void* QMovie_metacast(QMovie* self, const char* param1);
+int QMovie_metacall(QMovie* self, int param1, int param2, void** param3);
 struct miqt_string QMovie_tr(const char* s);
 struct miqt_string QMovie_trUtf8(const char* s);
 struct miqt_array /* of struct miqt_string */  QMovie_supportedFormats();
@@ -106,6 +107,12 @@ struct miqt_string QMovie_tr2(const char* s, const char* c);
 struct miqt_string QMovie_tr3(const char* s, const char* c, int n);
 struct miqt_string QMovie_trUtf82(const char* s, const char* c);
 struct miqt_string QMovie_trUtf83(const char* s, const char* c, int n);
+bool QMovie_override_virtual_metaObject(void* self, intptr_t slot);
+QMetaObject* QMovie_virtualbase_metaObject(const void* self);
+bool QMovie_override_virtual_metacast(void* self, intptr_t slot);
+void* QMovie_virtualbase_metacast(void* self, const char* param1);
+bool QMovie_override_virtual_metacall(void* self, intptr_t slot);
+int QMovie_virtualbase_metacall(void* self, int param1, int param2, void** param3);
 bool QMovie_override_virtual_event(void* self, intptr_t slot);
 bool QMovie_virtualbase_event(void* self, QEvent* event);
 bool QMovie_override_virtual_eventFilter(void* self, intptr_t slot);
@@ -124,6 +131,7 @@ QObject* QMovie_protectedbase_sender(bool* _dynamic_cast_ok, const void* self);
 int QMovie_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
 int QMovie_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
 bool QMovie_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+const QMetaObject* QMovie_staticMetaObject();
 void QMovie_delete(QMovie* self);
 
 #ifdef __cplusplus

@@ -60,6 +60,7 @@ void QNetworkCacheMetaData_delete(QNetworkCacheMetaData* self);
 void QAbstractNetworkCache_virtbase(QAbstractNetworkCache* src, QObject** outptr_QObject);
 QMetaObject* QAbstractNetworkCache_metaObject(const QAbstractNetworkCache* self);
 void* QAbstractNetworkCache_metacast(QAbstractNetworkCache* self, const char* param1);
+int QAbstractNetworkCache_metacall(QAbstractNetworkCache* self, int param1, int param2, void** param3);
 struct miqt_string QAbstractNetworkCache_tr(const char* s);
 struct miqt_string QAbstractNetworkCache_trUtf8(const char* s);
 QNetworkCacheMetaData* QAbstractNetworkCache_metaData(QAbstractNetworkCache* self, QUrl* url);
@@ -74,6 +75,7 @@ struct miqt_string QAbstractNetworkCache_tr2(const char* s, const char* c);
 struct miqt_string QAbstractNetworkCache_tr3(const char* s, const char* c, int n);
 struct miqt_string QAbstractNetworkCache_trUtf82(const char* s, const char* c);
 struct miqt_string QAbstractNetworkCache_trUtf83(const char* s, const char* c, int n);
+const QMetaObject* QAbstractNetworkCache_staticMetaObject();
 void QAbstractNetworkCache_delete(QAbstractNetworkCache* self);
 
 #ifdef __cplusplus

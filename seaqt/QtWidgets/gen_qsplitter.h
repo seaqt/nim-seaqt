@@ -95,6 +95,7 @@ QSplitter* QSplitter_new4(int param1, QWidget* parent);
 void QSplitter_virtbase(QSplitter* src, QFrame** outptr_QFrame);
 QMetaObject* QSplitter_metaObject(const QSplitter* self);
 void* QSplitter_metacast(QSplitter* self, const char* param1);
+int QSplitter_metacall(QSplitter* self, int param1, int param2, void** param3);
 struct miqt_string QSplitter_tr(const char* s);
 struct miqt_string QSplitter_trUtf8(const char* s);
 void QSplitter_addWidget(QSplitter* self, QWidget* widget);
@@ -135,6 +136,12 @@ struct miqt_string QSplitter_tr3(const char* s, const char* c, int n);
 struct miqt_string QSplitter_trUtf82(const char* s, const char* c);
 struct miqt_string QSplitter_trUtf83(const char* s, const char* c, int n);
 void QSplitter_setOpaqueResize1(QSplitter* self, bool opaque);
+bool QSplitter_override_virtual_metaObject(void* self, intptr_t slot);
+QMetaObject* QSplitter_virtualbase_metaObject(const void* self);
+bool QSplitter_override_virtual_metacast(void* self, intptr_t slot);
+void* QSplitter_virtualbase_metacast(void* self, const char* param1);
+bool QSplitter_override_virtual_metacall(void* self, intptr_t slot);
+int QSplitter_virtualbase_metacall(void* self, int param1, int param2, void** param3);
 bool QSplitter_override_virtual_sizeHint(void* self, intptr_t slot);
 QSize* QSplitter_virtualbase_sizeHint(const void* self);
 bool QSplitter_override_virtual_minimumSizeHint(void* self, intptr_t slot);
@@ -245,12 +252,14 @@ QObject* QSplitter_protectedbase_sender(bool* _dynamic_cast_ok, const void* self
 int QSplitter_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
 int QSplitter_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
 bool QSplitter_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+const QMetaObject* QSplitter_staticMetaObject();
 void QSplitter_delete(QSplitter* self);
 
 QSplitterHandle* QSplitterHandle_new(int o, QSplitter* parent);
 void QSplitterHandle_virtbase(QSplitterHandle* src, QWidget** outptr_QWidget);
 QMetaObject* QSplitterHandle_metaObject(const QSplitterHandle* self);
 void* QSplitterHandle_metacast(QSplitterHandle* self, const char* param1);
+int QSplitterHandle_metacall(QSplitterHandle* self, int param1, int param2, void** param3);
 struct miqt_string QSplitterHandle_tr(const char* s);
 struct miqt_string QSplitterHandle_trUtf8(const char* s);
 void QSplitterHandle_setOrientation(QSplitterHandle* self, int o);
@@ -268,6 +277,12 @@ struct miqt_string QSplitterHandle_tr2(const char* s, const char* c);
 struct miqt_string QSplitterHandle_tr3(const char* s, const char* c, int n);
 struct miqt_string QSplitterHandle_trUtf82(const char* s, const char* c);
 struct miqt_string QSplitterHandle_trUtf83(const char* s, const char* c, int n);
+bool QSplitterHandle_override_virtual_metaObject(void* self, intptr_t slot);
+QMetaObject* QSplitterHandle_virtualbase_metaObject(const void* self);
+bool QSplitterHandle_override_virtual_metacast(void* self, intptr_t slot);
+void* QSplitterHandle_virtualbase_metacast(void* self, const char* param1);
+bool QSplitterHandle_override_virtual_metacall(void* self, intptr_t slot);
+int QSplitterHandle_virtualbase_metacall(void* self, int param1, int param2, void** param3);
 bool QSplitterHandle_override_virtual_sizeHint(void* self, intptr_t slot);
 QSize* QSplitterHandle_virtualbase_sizeHint(const void* self);
 bool QSplitterHandle_override_virtual_paintEvent(void* self, intptr_t slot);
@@ -373,6 +388,7 @@ QObject* QSplitterHandle_protectedbase_sender(bool* _dynamic_cast_ok, const void
 int QSplitterHandle_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
 int QSplitterHandle_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
 bool QSplitterHandle_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+const QMetaObject* QSplitterHandle_staticMetaObject();
 void QSplitterHandle_delete(QSplitterHandle* self);
 
 #ifdef __cplusplus

@@ -64,6 +64,7 @@ struct miqt_string QCalendar_standaloneMonthName3(const QCalendar* self, QLocale
 struct miqt_string QCalendar_standaloneMonthName4(const QCalendar* self, QLocale* locale, int month, int year, int format);
 struct miqt_string QCalendar_weekDayName3(const QCalendar* self, QLocale* locale, int day, int format);
 struct miqt_string QCalendar_standaloneWeekDayName3(const QCalendar* self, QLocale* locale, int day, int format);
+const QMetaObject* QCalendar_staticMetaObject();
 void QCalendar_delete(QCalendar* self);
 
 QCalendar__YearMonthDay* QCalendar__YearMonthDay_new();

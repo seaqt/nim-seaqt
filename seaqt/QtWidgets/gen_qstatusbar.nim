@@ -70,6 +70,7 @@ proc fcQStatusBar_new(parent: pointer): ptr cQStatusBar {.importc: "QStatusBar_n
 proc fcQStatusBar_new2(): ptr cQStatusBar {.importc: "QStatusBar_new2".}
 proc fcQStatusBar_metaObject(self: pointer, ): pointer {.importc: "QStatusBar_metaObject".}
 proc fcQStatusBar_metacast(self: pointer, param1: cstring): pointer {.importc: "QStatusBar_metacast".}
+proc fcQStatusBar_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QStatusBar_metacall".}
 proc fcQStatusBar_tr(s: cstring): struct_miqt_string {.importc: "QStatusBar_tr".}
 proc fcQStatusBar_trUtf8(s: cstring): struct_miqt_string {.importc: "QStatusBar_trUtf8".}
 proc fcQStatusBar_addWidget(self: pointer, widget: pointer): void {.importc: "QStatusBar_addWidget".}
@@ -93,6 +94,12 @@ proc fcQStatusBar_insertWidget3(self: pointer, index: cint, widget: pointer, str
 proc fcQStatusBar_addPermanentWidget2(self: pointer, widget: pointer, stretch: cint): void {.importc: "QStatusBar_addPermanentWidget2".}
 proc fcQStatusBar_insertPermanentWidget3(self: pointer, index: cint, widget: pointer, stretch: cint): cint {.importc: "QStatusBar_insertPermanentWidget3".}
 proc fcQStatusBar_showMessage2(self: pointer, text: struct_miqt_string, timeout: cint): void {.importc: "QStatusBar_showMessage2".}
+proc fQStatusBar_virtualbase_metaObject(self: pointer, ): pointer{.importc: "QStatusBar_virtualbase_metaObject".}
+proc fcQStatusBar_override_virtual_metaObject(self: pointer, slot: int) {.importc: "QStatusBar_override_virtual_metaObject".}
+proc fQStatusBar_virtualbase_metacast(self: pointer, param1: cstring): pointer{.importc: "QStatusBar_virtualbase_metacast".}
+proc fcQStatusBar_override_virtual_metacast(self: pointer, slot: int) {.importc: "QStatusBar_override_virtual_metacast".}
+proc fQStatusBar_virtualbase_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint{.importc: "QStatusBar_virtualbase_metacall".}
+proc fcQStatusBar_override_virtual_metacall(self: pointer, slot: int) {.importc: "QStatusBar_override_virtual_metacall".}
 proc fQStatusBar_virtualbase_showEvent(self: pointer, param1: pointer): void{.importc: "QStatusBar_virtualbase_showEvent".}
 proc fcQStatusBar_override_virtual_showEvent(self: pointer, slot: int) {.importc: "QStatusBar_override_virtual_showEvent".}
 proc fQStatusBar_virtualbase_paintEvent(self: pointer, param1: pointer): void{.importc: "QStatusBar_virtualbase_paintEvent".}
@@ -187,6 +194,7 @@ proc fQStatusBar_virtualbase_connectNotify(self: pointer, signal: pointer): void
 proc fcQStatusBar_override_virtual_connectNotify(self: pointer, slot: int) {.importc: "QStatusBar_override_virtual_connectNotify".}
 proc fQStatusBar_virtualbase_disconnectNotify(self: pointer, signal: pointer): void{.importc: "QStatusBar_virtualbase_disconnectNotify".}
 proc fcQStatusBar_override_virtual_disconnectNotify(self: pointer, slot: int) {.importc: "QStatusBar_override_virtual_disconnectNotify".}
+proc fcQStatusBar_staticMetaObject(): pointer {.importc: "QStatusBar_staticMetaObject".}
 proc fcQStatusBar_delete(self: pointer) {.importc: "QStatusBar_delete".}
 
 
@@ -203,6 +211,9 @@ proc metaObject*(self: gen_qstatusbar_types.QStatusBar, ): gen_qobjectdefs_types
 
 proc metacast*(self: gen_qstatusbar_types.QStatusBar, param1: cstring): pointer =
   fcQStatusBar_metacast(self.h, param1)
+
+proc metacall*(self: gen_qstatusbar_types.QStatusBar, param1: cint, param2: cint, param3: pointer): cint =
+  fcQStatusBar_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qstatusbar_types.QStatusBar, s: cstring): string =
   let v_ms = fcQStatusBar_tr(s)
@@ -307,6 +318,65 @@ proc insertPermanentWidget*(self: gen_qstatusbar_types.QStatusBar, index: cint, 
 proc showMessage*(self: gen_qstatusbar_types.QStatusBar, text: string, timeout: cint): void =
   fcQStatusBar_showMessage2(self.h, struct_miqt_string(data: text, len: csize_t(len(text))), timeout)
 
+proc QStatusBarmetaObject*(self: gen_qstatusbar_types.QStatusBar, ): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fQStatusBar_virtualbase_metaObject(self.h))
+
+type QStatusBarmetaObjectProc* = proc(): gen_qobjectdefs_types.QMetaObject
+proc onmetaObject*(self: gen_qstatusbar_types.QStatusBar, slot: QStatusBarmetaObjectProc) =
+  # TODO check subclass
+  var tmp = new QStatusBarmetaObjectProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQStatusBar_override_virtual_metaObject(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QStatusBar_metaObject(self: ptr cQStatusBar, slot: int): pointer {.exportc: "miqt_exec_callback_QStatusBar_metaObject ".} =
+  var nimfunc = cast[ptr QStatusBarmetaObjectProc](cast[pointer](slot))
+
+  let virtualReturn = nimfunc[]( )
+
+  virtualReturn.h
+proc QStatusBarmetacast*(self: gen_qstatusbar_types.QStatusBar, param1: cstring): pointer =
+  fQStatusBar_virtualbase_metacast(self.h, param1)
+
+type QStatusBarmetacastProc* = proc(param1: cstring): pointer
+proc onmetacast*(self: gen_qstatusbar_types.QStatusBar, slot: QStatusBarmetacastProc) =
+  # TODO check subclass
+  var tmp = new QStatusBarmetacastProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQStatusBar_override_virtual_metacast(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QStatusBar_metacast(self: ptr cQStatusBar, slot: int, param1: cstring): pointer {.exportc: "miqt_exec_callback_QStatusBar_metacast ".} =
+  var nimfunc = cast[ptr QStatusBarmetacastProc](cast[pointer](slot))
+  let slotval1 = (param1)
+
+
+  let virtualReturn = nimfunc[](slotval1 )
+
+  virtualReturn
+proc QStatusBarmetacall*(self: gen_qstatusbar_types.QStatusBar, param1: cint, param2: cint, param3: pointer): cint =
+  fQStatusBar_virtualbase_metacall(self.h, cint(param1), param2, param3)
+
+type QStatusBarmetacallProc* = proc(param1: cint, param2: cint, param3: pointer): cint
+proc onmetacall*(self: gen_qstatusbar_types.QStatusBar, slot: QStatusBarmetacallProc) =
+  # TODO check subclass
+  var tmp = new QStatusBarmetacallProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQStatusBar_override_virtual_metacall(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QStatusBar_metacall(self: ptr cQStatusBar, slot: int, param1: cint, param2: cint, param3: pointer): cint {.exportc: "miqt_exec_callback_QStatusBar_metacall ".} =
+  var nimfunc = cast[ptr QStatusBarmetacallProc](cast[pointer](slot))
+  let slotval1 = cint(param1)
+
+  let slotval2 = param2
+
+  let slotval3 = param3
+
+
+  let virtualReturn = nimfunc[](slotval1, slotval2, slotval3 )
+
+  virtualReturn
 proc QStatusBarshowEvent*(self: gen_qstatusbar_types.QStatusBar, param1: gen_qevent_types.QShowEvent): void =
   fQStatusBar_virtualbase_showEvent(self.h, param1.h)
 
@@ -1131,5 +1201,7 @@ proc miqt_exec_callback_QStatusBar_disconnectNotify(self: ptr cQStatusBar, slot:
 
 
   nimfunc[](slotval1)
+proc staticMetaObject*(_: type gen_qstatusbar_types.QStatusBar): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fcQStatusBar_staticMetaObject())
 proc delete*(self: gen_qstatusbar_types.QStatusBar) =
   fcQStatusBar_delete(self.h)

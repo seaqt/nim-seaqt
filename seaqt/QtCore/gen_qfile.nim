@@ -58,6 +58,7 @@ proc fcQFile_new3(parent: pointer): ptr cQFile {.importc: "QFile_new3".}
 proc fcQFile_new4(name: struct_miqt_string, parent: pointer): ptr cQFile {.importc: "QFile_new4".}
 proc fcQFile_metaObject(self: pointer, ): pointer {.importc: "QFile_metaObject".}
 proc fcQFile_metacast(self: pointer, param1: cstring): pointer {.importc: "QFile_metacast".}
+proc fcQFile_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QFile_metacall".}
 proc fcQFile_tr(s: cstring): struct_miqt_string {.importc: "QFile_tr".}
 proc fcQFile_trUtf8(s: cstring): struct_miqt_string {.importc: "QFile_trUtf8".}
 proc fcQFile_fileName(self: pointer, ): struct_miqt_string {.importc: "QFile_fileName".}
@@ -95,6 +96,12 @@ proc fcQFile_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc:
 proc fcQFile_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QFile_trUtf82".}
 proc fcQFile_trUtf83(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QFile_trUtf83".}
 proc fcQFile_open33(self: pointer, fd: cint, ioFlags: cint, handleFlags: cint): bool {.importc: "QFile_open33".}
+proc fQFile_virtualbase_metaObject(self: pointer, ): pointer{.importc: "QFile_virtualbase_metaObject".}
+proc fcQFile_override_virtual_metaObject(self: pointer, slot: int) {.importc: "QFile_override_virtual_metaObject".}
+proc fQFile_virtualbase_metacast(self: pointer, param1: cstring): pointer{.importc: "QFile_virtualbase_metacast".}
+proc fcQFile_override_virtual_metacast(self: pointer, slot: int) {.importc: "QFile_override_virtual_metacast".}
+proc fQFile_virtualbase_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint{.importc: "QFile_virtualbase_metacall".}
+proc fcQFile_override_virtual_metacall(self: pointer, slot: int) {.importc: "QFile_override_virtual_metacall".}
 proc fQFile_virtualbase_fileName(self: pointer, ): struct_miqt_string{.importc: "QFile_virtualbase_fileName".}
 proc fcQFile_override_virtual_fileName(self: pointer, slot: int) {.importc: "QFile_override_virtual_fileName".}
 proc fQFile_virtualbase_open(self: pointer, flags: cint): bool{.importc: "QFile_virtualbase_open".}
@@ -149,6 +156,7 @@ proc fQFile_virtualbase_connectNotify(self: pointer, signal: pointer): void{.imp
 proc fcQFile_override_virtual_connectNotify(self: pointer, slot: int) {.importc: "QFile_override_virtual_connectNotify".}
 proc fQFile_virtualbase_disconnectNotify(self: pointer, signal: pointer): void{.importc: "QFile_virtualbase_disconnectNotify".}
 proc fcQFile_override_virtual_disconnectNotify(self: pointer, slot: int) {.importc: "QFile_override_virtual_disconnectNotify".}
+proc fcQFile_staticMetaObject(): pointer {.importc: "QFile_staticMetaObject".}
 proc fcQFile_delete(self: pointer) {.importc: "QFile_delete".}
 
 
@@ -171,6 +179,9 @@ proc metaObject*(self: gen_qfile_types.QFile, ): gen_qobjectdefs_types.QMetaObje
 
 proc metacast*(self: gen_qfile_types.QFile, param1: cstring): pointer =
   fcQFile_metacast(self.h, param1)
+
+proc metacall*(self: gen_qfile_types.QFile, param1: cint, param2: cint, param3: pointer): cint =
+  fcQFile_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qfile_types.QFile, s: cstring): string =
   let v_ms = fcQFile_tr(s)
@@ -325,6 +336,65 @@ proc trUtf8*(_: type gen_qfile_types.QFile, s: cstring, c: cstring, n: cint): st
 proc open*(self: gen_qfile_types.QFile, fd: cint, ioFlags: cint, handleFlags: cint): bool =
   fcQFile_open33(self.h, fd, cint(ioFlags), cint(handleFlags))
 
+proc QFilemetaObject*(self: gen_qfile_types.QFile, ): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fQFile_virtualbase_metaObject(self.h))
+
+type QFilemetaObjectProc* = proc(): gen_qobjectdefs_types.QMetaObject
+proc onmetaObject*(self: gen_qfile_types.QFile, slot: QFilemetaObjectProc) =
+  # TODO check subclass
+  var tmp = new QFilemetaObjectProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQFile_override_virtual_metaObject(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QFile_metaObject(self: ptr cQFile, slot: int): pointer {.exportc: "miqt_exec_callback_QFile_metaObject ".} =
+  var nimfunc = cast[ptr QFilemetaObjectProc](cast[pointer](slot))
+
+  let virtualReturn = nimfunc[]( )
+
+  virtualReturn.h
+proc QFilemetacast*(self: gen_qfile_types.QFile, param1: cstring): pointer =
+  fQFile_virtualbase_metacast(self.h, param1)
+
+type QFilemetacastProc* = proc(param1: cstring): pointer
+proc onmetacast*(self: gen_qfile_types.QFile, slot: QFilemetacastProc) =
+  # TODO check subclass
+  var tmp = new QFilemetacastProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQFile_override_virtual_metacast(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QFile_metacast(self: ptr cQFile, slot: int, param1: cstring): pointer {.exportc: "miqt_exec_callback_QFile_metacast ".} =
+  var nimfunc = cast[ptr QFilemetacastProc](cast[pointer](slot))
+  let slotval1 = (param1)
+
+
+  let virtualReturn = nimfunc[](slotval1 )
+
+  virtualReturn
+proc QFilemetacall*(self: gen_qfile_types.QFile, param1: cint, param2: cint, param3: pointer): cint =
+  fQFile_virtualbase_metacall(self.h, cint(param1), param2, param3)
+
+type QFilemetacallProc* = proc(param1: cint, param2: cint, param3: pointer): cint
+proc onmetacall*(self: gen_qfile_types.QFile, slot: QFilemetacallProc) =
+  # TODO check subclass
+  var tmp = new QFilemetacallProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQFile_override_virtual_metacall(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QFile_metacall(self: ptr cQFile, slot: int, param1: cint, param2: cint, param3: pointer): cint {.exportc: "miqt_exec_callback_QFile_metacall ".} =
+  var nimfunc = cast[ptr QFilemetacallProc](cast[pointer](slot))
+  let slotval1 = cint(param1)
+
+  let slotval2 = param2
+
+  let slotval3 = param3
+
+
+  let virtualReturn = nimfunc[](slotval1, slotval2, slotval3 )
+
+  virtualReturn
 proc QFilefileName*(self: gen_qfile_types.QFile, ): string =
   let v_ms = fQFile_virtualbase_fileName(self.h)
   let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
@@ -815,5 +885,7 @@ proc miqt_exec_callback_QFile_disconnectNotify(self: ptr cQFile, slot: int, sign
 
 
   nimfunc[](slotval1)
+proc staticMetaObject*(_: type gen_qfile_types.QFile): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fcQFile_staticMetaObject())
 proc delete*(self: gen_qfile_types.QFile) =
   fcQFile_delete(self.h)

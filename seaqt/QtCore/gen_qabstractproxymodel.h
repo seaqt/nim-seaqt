@@ -51,6 +51,7 @@ QAbstractProxyModel* QAbstractProxyModel_new2(QObject* parent);
 void QAbstractProxyModel_virtbase(QAbstractProxyModel* src, QAbstractItemModel** outptr_QAbstractItemModel);
 QMetaObject* QAbstractProxyModel_metaObject(const QAbstractProxyModel* self);
 void* QAbstractProxyModel_metacast(QAbstractProxyModel* self, const char* param1);
+int QAbstractProxyModel_metacall(QAbstractProxyModel* self, int param1, int param2, void** param3);
 struct miqt_string QAbstractProxyModel_tr(const char* s);
 struct miqt_string QAbstractProxyModel_trUtf8(const char* s);
 void QAbstractProxyModel_setSourceModel(QAbstractProxyModel* self, QAbstractItemModel* sourceModel);
@@ -85,6 +86,12 @@ struct miqt_string QAbstractProxyModel_tr2(const char* s, const char* c);
 struct miqt_string QAbstractProxyModel_tr3(const char* s, const char* c, int n);
 struct miqt_string QAbstractProxyModel_trUtf82(const char* s, const char* c);
 struct miqt_string QAbstractProxyModel_trUtf83(const char* s, const char* c, int n);
+bool QAbstractProxyModel_override_virtual_metaObject(void* self, intptr_t slot);
+QMetaObject* QAbstractProxyModel_virtualbase_metaObject(const void* self);
+bool QAbstractProxyModel_override_virtual_metacast(void* self, intptr_t slot);
+void* QAbstractProxyModel_virtualbase_metacast(void* self, const char* param1);
+bool QAbstractProxyModel_override_virtual_metacall(void* self, intptr_t slot);
+int QAbstractProxyModel_virtualbase_metacall(void* self, int param1, int param2, void** param3);
 bool QAbstractProxyModel_override_virtual_setSourceModel(void* self, intptr_t slot);
 void QAbstractProxyModel_virtualbase_setSourceModel(void* self, QAbstractItemModel* sourceModel);
 bool QAbstractProxyModel_override_virtual_mapToSource(void* self, intptr_t slot);
@@ -202,6 +209,7 @@ QObject* QAbstractProxyModel_protectedbase_sender(bool* _dynamic_cast_ok, const 
 int QAbstractProxyModel_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* self);
 int QAbstractProxyModel_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
 bool QAbstractProxyModel_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
+const QMetaObject* QAbstractProxyModel_staticMetaObject();
 void QAbstractProxyModel_delete(QAbstractProxyModel* self);
 
 #ifdef __cplusplus

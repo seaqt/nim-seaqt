@@ -94,6 +94,7 @@ type cQCameraExposure*{.exportc: "QCameraExposure", incompleteStruct.} = object
 
 proc fcQCameraExposure_metaObject(self: pointer, ): pointer {.importc: "QCameraExposure_metaObject".}
 proc fcQCameraExposure_metacast(self: pointer, param1: cstring): pointer {.importc: "QCameraExposure_metacast".}
+proc fcQCameraExposure_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QCameraExposure_metacall".}
 proc fcQCameraExposure_tr(s: cstring): struct_miqt_string {.importc: "QCameraExposure_tr".}
 proc fcQCameraExposure_trUtf8(s: cstring): struct_miqt_string {.importc: "QCameraExposure_trUtf8".}
 proc fcQCameraExposure_isAvailable(self: pointer, ): bool {.importc: "QCameraExposure_isAvailable".}
@@ -147,6 +148,7 @@ proc fcQCameraExposure_trUtf83(s: cstring, c: cstring, n: cint): struct_miqt_str
 proc fcQCameraExposure_supportedIsoSensitivities1(self: pointer, continuous: ptr bool): struct_miqt_array {.importc: "QCameraExposure_supportedIsoSensitivities1".}
 proc fcQCameraExposure_supportedApertures1(self: pointer, continuous: ptr bool): struct_miqt_array {.importc: "QCameraExposure_supportedApertures1".}
 proc fcQCameraExposure_supportedShutterSpeeds1(self: pointer, continuous: ptr bool): struct_miqt_array {.importc: "QCameraExposure_supportedShutterSpeeds1".}
+proc fcQCameraExposure_staticMetaObject(): pointer {.importc: "QCameraExposure_staticMetaObject".}
 
 
 func init*(T: type gen_qcameraexposure_types.QCameraExposure, h: ptr cQCameraExposure): gen_qcameraexposure_types.QCameraExposure =
@@ -156,6 +158,9 @@ proc metaObject*(self: gen_qcameraexposure_types.QCameraExposure, ): gen_qobject
 
 proc metacast*(self: gen_qcameraexposure_types.QCameraExposure, param1: cstring): pointer =
   fcQCameraExposure_metacast(self.h, param1)
+
+proc metacall*(self: gen_qcameraexposure_types.QCameraExposure, param1: cint, param2: cint, param3: pointer): cint =
+  fcQCameraExposure_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qcameraexposure_types.QCameraExposure, s: cstring): string =
   let v_ms = fcQCameraExposure_tr(s)
@@ -430,3 +435,5 @@ proc supportedShutterSpeeds*(self: gen_qcameraexposure_types.QCameraExposure, co
     vx_ret[i] = v_outCast[i]
   vx_ret
 
+proc staticMetaObject*(_: type gen_qcameraexposure_types.QCameraExposure): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fcQCameraExposure_staticMetaObject())

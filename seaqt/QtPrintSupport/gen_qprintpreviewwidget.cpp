@@ -44,6 +44,9 @@ extern "C" {
 
 void miqt_exec_callback_QPrintPreviewWidget_paintRequested(intptr_t, QPrinter*);
 void miqt_exec_callback_QPrintPreviewWidget_previewChanged(intptr_t);
+QMetaObject* miqt_exec_callback_QPrintPreviewWidget_metaObject(const QPrintPreviewWidget*, intptr_t);
+void* miqt_exec_callback_QPrintPreviewWidget_metacast(QPrintPreviewWidget*, intptr_t, const char*);
+int miqt_exec_callback_QPrintPreviewWidget_metacall(QPrintPreviewWidget*, intptr_t, int, int, void**);
 void miqt_exec_callback_QPrintPreviewWidget_setVisible(QPrintPreviewWidget*, intptr_t, bool);
 int miqt_exec_callback_QPrintPreviewWidget_devType(const QPrintPreviewWidget*, intptr_t);
 QSize* miqt_exec_callback_QPrintPreviewWidget_sizeHint(const QPrintPreviewWidget*, intptr_t);
@@ -106,6 +109,62 @@ public:
 	VirtualQPrintPreviewWidget(QWidget* parent, Qt::WindowFlags flags): QPrintPreviewWidget(parent, flags) {};
 
 	virtual ~VirtualQPrintPreviewWidget() override = default;
+
+	// cgo.Handle value for overwritten implementation
+	intptr_t handle__metaObject = 0;
+
+	// Subclass to allow providing a Go implementation
+	virtual const QMetaObject* metaObject() const override {
+		if (handle__metaObject == 0) {
+			return QPrintPreviewWidget::metaObject();
+		}
+		
+
+		QMetaObject* callback_return_value = miqt_exec_callback_QPrintPreviewWidget_metaObject(this, handle__metaObject);
+
+		return callback_return_value;
+	}
+
+	friend QMetaObject* QPrintPreviewWidget_virtualbase_metaObject(const void* self);
+
+	// cgo.Handle value for overwritten implementation
+	intptr_t handle__metacast = 0;
+
+	// Subclass to allow providing a Go implementation
+	virtual void* qt_metacast(const char* param1) override {
+		if (handle__metacast == 0) {
+			return QPrintPreviewWidget::qt_metacast(param1);
+		}
+		
+		const char* sigval1 = (const char*) param1;
+
+		void* callback_return_value = miqt_exec_callback_QPrintPreviewWidget_metacast(this, handle__metacast, sigval1);
+
+		return callback_return_value;
+	}
+
+	friend void* QPrintPreviewWidget_virtualbase_metacast(void* self, const char* param1);
+
+	// cgo.Handle value for overwritten implementation
+	intptr_t handle__metacall = 0;
+
+	// Subclass to allow providing a Go implementation
+	virtual int qt_metacall(QMetaObject::Call param1, int param2, void** param3) override {
+		if (handle__metacall == 0) {
+			return QPrintPreviewWidget::qt_metacall(param1, param2, param3);
+		}
+		
+		QMetaObject::Call param1_ret = param1;
+		int sigval1 = static_cast<int>(param1_ret);
+		int sigval2 = param2;
+		void** sigval3 = param3;
+
+		int callback_return_value = miqt_exec_callback_QPrintPreviewWidget_metacall(this, handle__metacall, sigval1, sigval2, sigval3);
+
+		return static_cast<int>(callback_return_value);
+	}
+
+	friend int QPrintPreviewWidget_virtualbase_metacall(void* self, int param1, int param2, void** param3);
 
 	// cgo.Handle value for overwritten implementation
 	intptr_t handle__setVisible = 0;
@@ -1042,6 +1101,10 @@ void* QPrintPreviewWidget_metacast(QPrintPreviewWidget* self, const char* param1
 	return self->qt_metacast(param1);
 }
 
+int QPrintPreviewWidget_metacall(QPrintPreviewWidget* self, int param1, int param2, void** param3) {
+	return self->qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
+}
+
 struct miqt_string QPrintPreviewWidget_tr(const char* s) {
 	QString _ret = QPrintPreviewWidget::tr(s);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
@@ -1231,6 +1294,54 @@ void QPrintPreviewWidget_zoomIn1(QPrintPreviewWidget* self, double zoom) {
 
 void QPrintPreviewWidget_zoomOut1(QPrintPreviewWidget* self, double zoom) {
 	self->zoomOut(static_cast<qreal>(zoom));
+}
+
+bool QPrintPreviewWidget_override_virtual_metaObject(void* self, intptr_t slot) {
+	VirtualQPrintPreviewWidget* self_cast = dynamic_cast<VirtualQPrintPreviewWidget*>( (QPrintPreviewWidget*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+	
+	self_cast->handle__metaObject = slot;
+	return true;
+}
+
+QMetaObject* QPrintPreviewWidget_virtualbase_metaObject(const void* self) {
+
+	return (QMetaObject*) ( (const VirtualQPrintPreviewWidget*)(self) )->QPrintPreviewWidget::metaObject();
+
+}
+
+bool QPrintPreviewWidget_override_virtual_metacast(void* self, intptr_t slot) {
+	VirtualQPrintPreviewWidget* self_cast = dynamic_cast<VirtualQPrintPreviewWidget*>( (QPrintPreviewWidget*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+	
+	self_cast->handle__metacast = slot;
+	return true;
+}
+
+void* QPrintPreviewWidget_virtualbase_metacast(void* self, const char* param1) {
+
+	return ( (VirtualQPrintPreviewWidget*)(self) )->QPrintPreviewWidget::qt_metacast(param1);
+
+}
+
+bool QPrintPreviewWidget_override_virtual_metacall(void* self, intptr_t slot) {
+	VirtualQPrintPreviewWidget* self_cast = dynamic_cast<VirtualQPrintPreviewWidget*>( (QPrintPreviewWidget*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+	
+	self_cast->handle__metacall = slot;
+	return true;
+}
+
+int QPrintPreviewWidget_virtualbase_metacall(void* self, int param1, int param2, void** param3) {
+
+	return ( (VirtualQPrintPreviewWidget*)(self) )->QPrintPreviewWidget::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
+
 }
 
 bool QPrintPreviewWidget_override_virtual_setVisible(void* self, intptr_t slot) {
@@ -1986,6 +2097,7 @@ void QPrintPreviewWidget_virtualbase_disconnectNotify(void* self, QMetaMethod* s
 
 }
 
+const QMetaObject* QPrintPreviewWidget_staticMetaObject() { return &QPrintPreviewWidget::staticMetaObject; }
 void QPrintPreviewWidget_protectedbase_updateMicroFocus(bool* _dynamic_cast_ok, void* self) {
 	VirtualQPrintPreviewWidget* self_cast = dynamic_cast<VirtualQPrintPreviewWidget*>( (QPrintPreviewWidget*)(self) );
 	if (self_cast == nullptr) {

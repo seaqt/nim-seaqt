@@ -80,6 +80,7 @@ proc fcQGraphicsVideoItem_new(): ptr cQGraphicsVideoItem {.importc: "QGraphicsVi
 proc fcQGraphicsVideoItem_new2(parent: pointer): ptr cQGraphicsVideoItem {.importc: "QGraphicsVideoItem_new2".}
 proc fcQGraphicsVideoItem_metaObject(self: pointer, ): pointer {.importc: "QGraphicsVideoItem_metaObject".}
 proc fcQGraphicsVideoItem_metacast(self: pointer, param1: cstring): pointer {.importc: "QGraphicsVideoItem_metacast".}
+proc fcQGraphicsVideoItem_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QGraphicsVideoItem_metacall".}
 proc fcQGraphicsVideoItem_tr(s: cstring): struct_miqt_string {.importc: "QGraphicsVideoItem_tr".}
 proc fcQGraphicsVideoItem_trUtf8(s: cstring): struct_miqt_string {.importc: "QGraphicsVideoItem_trUtf8".}
 proc fcQGraphicsVideoItem_mediaObject(self: pointer, ): pointer {.importc: "QGraphicsVideoItem_mediaObject".}
@@ -99,6 +100,12 @@ proc fcQGraphicsVideoItem_tr2(s: cstring, c: cstring): struct_miqt_string {.impo
 proc fcQGraphicsVideoItem_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QGraphicsVideoItem_tr3".}
 proc fcQGraphicsVideoItem_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QGraphicsVideoItem_trUtf82".}
 proc fcQGraphicsVideoItem_trUtf83(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QGraphicsVideoItem_trUtf83".}
+proc fQGraphicsVideoItem_virtualbase_metaObject(self: pointer, ): pointer{.importc: "QGraphicsVideoItem_virtualbase_metaObject".}
+proc fcQGraphicsVideoItem_override_virtual_metaObject(self: pointer, slot: int) {.importc: "QGraphicsVideoItem_override_virtual_metaObject".}
+proc fQGraphicsVideoItem_virtualbase_metacast(self: pointer, param1: cstring): pointer{.importc: "QGraphicsVideoItem_virtualbase_metacast".}
+proc fcQGraphicsVideoItem_override_virtual_metacast(self: pointer, slot: int) {.importc: "QGraphicsVideoItem_override_virtual_metacast".}
+proc fQGraphicsVideoItem_virtualbase_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint{.importc: "QGraphicsVideoItem_virtualbase_metacall".}
+proc fcQGraphicsVideoItem_override_virtual_metacall(self: pointer, slot: int) {.importc: "QGraphicsVideoItem_override_virtual_metacall".}
 proc fQGraphicsVideoItem_virtualbase_mediaObject(self: pointer, ): pointer{.importc: "QGraphicsVideoItem_virtualbase_mediaObject".}
 proc fcQGraphicsVideoItem_override_virtual_mediaObject(self: pointer, slot: int) {.importc: "QGraphicsVideoItem_override_virtual_mediaObject".}
 proc fQGraphicsVideoItem_virtualbase_boundingRect(self: pointer, ): pointer{.importc: "QGraphicsVideoItem_virtualbase_boundingRect".}
@@ -187,6 +194,7 @@ proc fQGraphicsVideoItem_virtualbase_setExtension(self: pointer, extension: cint
 proc fcQGraphicsVideoItem_override_virtual_setExtension(self: pointer, slot: int) {.importc: "QGraphicsVideoItem_override_virtual_setExtension".}
 proc fQGraphicsVideoItem_virtualbase_extension(self: pointer, variant: pointer): pointer{.importc: "QGraphicsVideoItem_virtualbase_extension".}
 proc fcQGraphicsVideoItem_override_virtual_extension(self: pointer, slot: int) {.importc: "QGraphicsVideoItem_override_virtual_extension".}
+proc fcQGraphicsVideoItem_staticMetaObject(): pointer {.importc: "QGraphicsVideoItem_staticMetaObject".}
 proc fcQGraphicsVideoItem_delete(self: pointer) {.importc: "QGraphicsVideoItem_delete".}
 
 
@@ -203,6 +211,9 @@ proc metaObject*(self: gen_qgraphicsvideoitem_types.QGraphicsVideoItem, ): gen_q
 
 proc metacast*(self: gen_qgraphicsvideoitem_types.QGraphicsVideoItem, param1: cstring): pointer =
   fcQGraphicsVideoItem_metacast(self.h, param1)
+
+proc metacall*(self: gen_qgraphicsvideoitem_types.QGraphicsVideoItem, param1: cint, param2: cint, param3: pointer): cint =
+  fcQGraphicsVideoItem_metacall(self.h, cint(param1), param2, param3)
 
 proc tr*(_: type gen_qgraphicsvideoitem_types.QGraphicsVideoItem, s: cstring): string =
   let v_ms = fcQGraphicsVideoItem_tr(s)
@@ -289,6 +300,65 @@ proc trUtf8*(_: type gen_qgraphicsvideoitem_types.QGraphicsVideoItem, s: cstring
   c_free(v_ms.data)
   vx_ret
 
+proc QGraphicsVideoItemmetaObject*(self: gen_qgraphicsvideoitem_types.QGraphicsVideoItem, ): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fQGraphicsVideoItem_virtualbase_metaObject(self.h))
+
+type QGraphicsVideoItemmetaObjectProc* = proc(): gen_qobjectdefs_types.QMetaObject
+proc onmetaObject*(self: gen_qgraphicsvideoitem_types.QGraphicsVideoItem, slot: QGraphicsVideoItemmetaObjectProc) =
+  # TODO check subclass
+  var tmp = new QGraphicsVideoItemmetaObjectProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQGraphicsVideoItem_override_virtual_metaObject(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QGraphicsVideoItem_metaObject(self: ptr cQGraphicsVideoItem, slot: int): pointer {.exportc: "miqt_exec_callback_QGraphicsVideoItem_metaObject ".} =
+  var nimfunc = cast[ptr QGraphicsVideoItemmetaObjectProc](cast[pointer](slot))
+
+  let virtualReturn = nimfunc[]( )
+
+  virtualReturn.h
+proc QGraphicsVideoItemmetacast*(self: gen_qgraphicsvideoitem_types.QGraphicsVideoItem, param1: cstring): pointer =
+  fQGraphicsVideoItem_virtualbase_metacast(self.h, param1)
+
+type QGraphicsVideoItemmetacastProc* = proc(param1: cstring): pointer
+proc onmetacast*(self: gen_qgraphicsvideoitem_types.QGraphicsVideoItem, slot: QGraphicsVideoItemmetacastProc) =
+  # TODO check subclass
+  var tmp = new QGraphicsVideoItemmetacastProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQGraphicsVideoItem_override_virtual_metacast(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QGraphicsVideoItem_metacast(self: ptr cQGraphicsVideoItem, slot: int, param1: cstring): pointer {.exportc: "miqt_exec_callback_QGraphicsVideoItem_metacast ".} =
+  var nimfunc = cast[ptr QGraphicsVideoItemmetacastProc](cast[pointer](slot))
+  let slotval1 = (param1)
+
+
+  let virtualReturn = nimfunc[](slotval1 )
+
+  virtualReturn
+proc QGraphicsVideoItemmetacall*(self: gen_qgraphicsvideoitem_types.QGraphicsVideoItem, param1: cint, param2: cint, param3: pointer): cint =
+  fQGraphicsVideoItem_virtualbase_metacall(self.h, cint(param1), param2, param3)
+
+type QGraphicsVideoItemmetacallProc* = proc(param1: cint, param2: cint, param3: pointer): cint
+proc onmetacall*(self: gen_qgraphicsvideoitem_types.QGraphicsVideoItem, slot: QGraphicsVideoItemmetacallProc) =
+  # TODO check subclass
+  var tmp = new QGraphicsVideoItemmetacallProc
+  tmp[] = slot
+  GC_ref(tmp)
+  fcQGraphicsVideoItem_override_virtual_metacall(self.h, cast[int](addr tmp[]))
+
+proc miqt_exec_callback_QGraphicsVideoItem_metacall(self: ptr cQGraphicsVideoItem, slot: int, param1: cint, param2: cint, param3: pointer): cint {.exportc: "miqt_exec_callback_QGraphicsVideoItem_metacall ".} =
+  var nimfunc = cast[ptr QGraphicsVideoItemmetacallProc](cast[pointer](slot))
+  let slotval1 = cint(param1)
+
+  let slotval2 = param2
+
+  let slotval3 = param3
+
+
+  let virtualReturn = nimfunc[](slotval1, slotval2, slotval3 )
+
+  virtualReturn
 proc QGraphicsVideoItemmediaObject*(self: gen_qgraphicsvideoitem_types.QGraphicsVideoItem, ): gen_qmediaobject_types.QMediaObject =
   gen_qmediaobject_types.QMediaObject(h: fQGraphicsVideoItem_virtualbase_mediaObject(self.h))
 
@@ -1079,5 +1149,7 @@ proc miqt_exec_callback_QGraphicsVideoItem_extension(self: ptr cQGraphicsVideoIt
   let virtualReturn = nimfunc[](slotval1 )
 
   virtualReturn.h
+proc staticMetaObject*(_: type gen_qgraphicsvideoitem_types.QGraphicsVideoItem): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fcQGraphicsVideoItem_staticMetaObject())
 proc delete*(self: gen_qgraphicsvideoitem_types.QGraphicsVideoItem) =
   fcQGraphicsVideoItem_delete(self.h)
