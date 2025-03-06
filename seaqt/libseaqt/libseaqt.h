@@ -11,7 +11,7 @@ namespace seaqt {
 struct release_callback {
   void (*release)(intptr_t);
 
-  release_callback(void (*release)(intptr_t)) : release(release) {}
+  constexpr release_callback(void (*release)(intptr_t)) : release(release) {}
   release_callback(release_callback &&rhs) : release(rhs.release) {
     rhs.release = 0;
   }
