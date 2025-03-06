@@ -1,0 +1,2 @@
+import ./QtMultimedia/gen_qaudioinput
+export gen_qaudioinput

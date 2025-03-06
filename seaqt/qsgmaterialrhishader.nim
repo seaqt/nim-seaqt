@@ -1,0 +1,2 @@
+import ./QtQuick/gen_qsgmaterialrhishader
+export gen_qsgmaterialrhishader

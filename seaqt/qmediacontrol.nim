@@ -1,0 +1,2 @@
+import ./QtMultimedia/gen_qmediacontrol
+export gen_qmediacontrol

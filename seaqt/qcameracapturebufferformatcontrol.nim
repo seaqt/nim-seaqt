@@ -1,0 +1,2 @@
+import ./QtMultimedia/gen_qcameracapturebufferformatcontrol
+export gen_qcameracapturebufferformatcontrol

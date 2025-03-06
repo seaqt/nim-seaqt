@@ -1,0 +1,2 @@
+import ./QtMultimedia/gen_qmediaaudioprobecontrol
+export gen_qmediaaudioprobecontrol

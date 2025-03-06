@@ -1,0 +1,2 @@
+import ./QtMultimedia/gen_qmediagaplessplaybackcontrol
+export gen_qmediagaplessplaybackcontrol

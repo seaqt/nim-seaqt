@@ -1,0 +1,2 @@
+import ./QtMultimedia/gen_qcameraviewfindersettings
+export gen_qcameraviewfindersettings

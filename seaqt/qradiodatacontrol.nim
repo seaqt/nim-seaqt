@@ -1,0 +1,2 @@
+import ./QtMultimedia/gen_qradiodatacontrol
+export gen_qradiodatacontrol

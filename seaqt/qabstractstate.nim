@@ -1,0 +1,2 @@
+import ./QtCore/gen_qabstractstate
+export gen_qabstractstate

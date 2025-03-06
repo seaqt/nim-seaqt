@@ -1,0 +1,2 @@
+import ./QtCore/gen_qcommandlineparser
+export gen_qcommandlineparser

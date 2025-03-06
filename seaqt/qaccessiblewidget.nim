@@ -1,0 +1,2 @@
+import ./QtWidgets/gen_qaccessiblewidget
+export gen_qaccessiblewidget

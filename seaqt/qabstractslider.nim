@@ -1,0 +1,2 @@
+import ./QtWidgets/gen_qabstractslider
+export gen_qabstractslider

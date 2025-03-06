@@ -1,0 +1,2 @@
+import ./QtWidgets/gen_qinputdialog
+export gen_qinputdialog

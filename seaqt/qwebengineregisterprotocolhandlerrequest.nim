@@ -1,0 +1,2 @@
+import ./QtWebEngineCore/gen_qwebengineregisterprotocolhandlerrequest
+export gen_qwebengineregisterprotocolhandlerrequest

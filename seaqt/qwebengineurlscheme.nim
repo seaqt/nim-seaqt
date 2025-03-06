@@ -1,0 +1,2 @@
+import ./QtWebEngineCore/gen_qwebengineurlscheme
+export gen_qwebengineurlscheme

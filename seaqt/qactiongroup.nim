@@ -1,0 +1,2 @@
+import ./QtWidgets/gen_qactiongroup
+export gen_qactiongroup

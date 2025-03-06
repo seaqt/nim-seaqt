@@ -1,0 +1,2 @@
+import ./QtMultimedia/gen_qmediaserviceproviderplugin
+export gen_qmediaserviceproviderplugin

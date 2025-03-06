@@ -1,0 +1,2 @@
+import ./QtMultimedia/gen_qmediaobject
+export gen_qmediaobject

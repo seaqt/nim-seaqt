@@ -1,0 +1,2 @@
+import ./QtQuick/gen_qsgsimplerectnode
+export gen_qsgsimplerectnode

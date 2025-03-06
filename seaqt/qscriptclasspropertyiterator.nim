@@ -1,0 +1,2 @@
+import ./QtScript/gen_qscriptclasspropertyiterator
+export gen_qscriptclasspropertyiterator

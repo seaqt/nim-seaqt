@@ -1,0 +1,2 @@
+import ./QtMultimedia/gen_qabstractvideofilter
+export gen_qabstractvideofilter

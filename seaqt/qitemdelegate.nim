@@ -1,0 +1,2 @@
+import ./QtWidgets/gen_qitemdelegate
+export gen_qitemdelegate

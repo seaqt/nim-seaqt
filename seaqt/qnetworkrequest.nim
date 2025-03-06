@@ -1,0 +1,2 @@
+import ./QtNetwork/gen_qnetworkrequest
+export gen_qnetworkrequest

@@ -1,0 +1,4 @@
+import ./gen_qgraphicslayoutitem_types
+export gen_qgraphicslayoutitem_types
+
+type QGraphicsLayout* = object of gen_qgraphicslayoutitem_types.QGraphicsLayoutItem

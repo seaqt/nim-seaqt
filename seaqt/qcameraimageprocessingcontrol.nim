@@ -1,0 +1,2 @@
+import ./QtMultimedia/gen_qcameraimageprocessingcontrol
+export gen_qcameraimageprocessingcontrol

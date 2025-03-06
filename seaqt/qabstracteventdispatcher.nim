@@ -1,0 +1,2 @@
+import ./QtCore/gen_qabstracteventdispatcher
+export gen_qabstracteventdispatcher

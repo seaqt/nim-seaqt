@@ -1,0 +1,2 @@
+import ./QtMultimedia/gen_qcamerafocus
+export gen_qcamerafocus

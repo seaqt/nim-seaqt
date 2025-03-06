@@ -1,0 +1,2 @@
+import ./QtNetwork/gen_qnetworkinterface
+export gen_qnetworkinterface

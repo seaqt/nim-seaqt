@@ -1,0 +1,2 @@
+import ./QtWebKitWidgets/gen_qwebinspector
+export gen_qwebinspector

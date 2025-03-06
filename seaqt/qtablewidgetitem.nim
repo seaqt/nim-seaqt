@@ -1,0 +1,2 @@
+import ./QtWidgets/gen_qtablewidget
+export gen_qtablewidget

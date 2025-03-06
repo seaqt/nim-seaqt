@@ -1,0 +1,2 @@
+import ./QtWidgets/gen_qprogressdialog
+export gen_qprogressdialog

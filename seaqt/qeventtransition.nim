@@ -1,0 +1,2 @@
+import ./QtCore/gen_qeventtransition
+export gen_qeventtransition

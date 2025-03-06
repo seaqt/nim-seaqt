@@ -1,0 +1,2 @@
+import ./QtMultimedia/gen_qmetadatareadercontrol
+export gen_qmetadatareadercontrol

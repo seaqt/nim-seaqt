@@ -1,0 +1,2 @@
+import ./QtQuick/gen_qsgninepatchnode
+export gen_qsgninepatchnode

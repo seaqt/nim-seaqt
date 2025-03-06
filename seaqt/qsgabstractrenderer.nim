@@ -1,0 +1,2 @@
+import ./QtQuick/gen_qsgabstractrenderer
+export gen_qsgabstractrenderer

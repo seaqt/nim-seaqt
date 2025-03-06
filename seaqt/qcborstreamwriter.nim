@@ -1,0 +1,2 @@
+import ./QtCore/gen_qcborstreamwriter
+export gen_qcborstreamwriter

@@ -1,0 +1,2 @@
+import ./QtMultimedia/gen_qvideodeviceselectorcontrol
+export gen_qvideodeviceselectorcontrol

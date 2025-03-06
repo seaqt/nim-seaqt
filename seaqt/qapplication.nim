@@ -1,0 +1,2 @@
+import ./QtWidgets/gen_qapplication
+export gen_qapplication

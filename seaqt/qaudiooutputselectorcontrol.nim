@@ -1,0 +1,2 @@
+import ./QtMultimedia/gen_qaudiooutputselectorcontrol
+export gen_qaudiooutputselectorcontrol

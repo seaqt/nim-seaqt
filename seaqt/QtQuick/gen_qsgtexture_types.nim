@@ -1,0 +1,7 @@
+import ../QtCore/gen_qobject_types
+export gen_qobject_types
+
+type QSGTexture* = object of gen_qobject_types.QObject
+type QSGDynamicTexture* = object of QSGTexture
+type QSGTextureNativeTexture* {.inheritable, pure.} = object
+  h*: pointer

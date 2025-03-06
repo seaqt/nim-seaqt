@@ -1,0 +1,4 @@
+import ./gen_qabstracttransition_types
+export gen_qabstracttransition_types
+
+type QSignalTransition* = object of gen_qabstracttransition_types.QAbstractTransition

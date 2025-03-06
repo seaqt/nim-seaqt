@@ -1,0 +1,2 @@
+import ./QtMultimedia/gen_qcameraexposure
+export gen_qcameraexposure

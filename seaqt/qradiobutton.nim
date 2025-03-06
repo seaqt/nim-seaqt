@@ -1,0 +1,2 @@
+import ./QtWidgets/gen_qradiobutton
+export gen_qradiobutton

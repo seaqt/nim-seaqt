@@ -1,0 +1,2 @@
+import ./QtWidgets/gen_qplaintextedit
+export gen_qplaintextedit

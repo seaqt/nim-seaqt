@@ -1,0 +1,41 @@
+#pragma once
+#ifndef SEAQT_QTCORE_GEN_QSYSTEMSEMAPHORE_H
+#define SEAQT_QTCORE_GEN_QSYSTEMSEMAPHORE_H
+
+#include <stdbool.h>
+#include <stddef.h>
+#include <stdint.h>
+
+#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
+
+#include "../libseaqt/libseaqt.h"
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+#ifdef __cplusplus
+class QSystemSemaphore;
+#else
+typedef struct QSystemSemaphore QSystemSemaphore;
+#endif
+
+QSystemSemaphore* QSystemSemaphore_new(struct miqt_string key);
+QSystemSemaphore* QSystemSemaphore_new2(struct miqt_string key, int initialValue);
+QSystemSemaphore* QSystemSemaphore_new3(struct miqt_string key, int initialValue, int mode);
+void QSystemSemaphore_setKey(QSystemSemaphore* self, struct miqt_string key);
+struct miqt_string QSystemSemaphore_key(const QSystemSemaphore* self);
+bool QSystemSemaphore_acquire(QSystemSemaphore* self);
+bool QSystemSemaphore_release(QSystemSemaphore* self);
+int QSystemSemaphore_error(const QSystemSemaphore* self);
+struct miqt_string QSystemSemaphore_errorString(const QSystemSemaphore* self);
+void QSystemSemaphore_setKey2(QSystemSemaphore* self, struct miqt_string key, int initialValue);
+void QSystemSemaphore_setKey3(QSystemSemaphore* self, struct miqt_string key, int initialValue, int mode);
+bool QSystemSemaphore_release1(QSystemSemaphore* self, int n);
+void QSystemSemaphore_delete(QSystemSemaphore* self);
+
+#ifdef __cplusplus
+} /* extern C */
+#endif
+
+#endif

@@ -1,0 +1,2 @@
+import ./QtNetwork/gen_qsslpresharedkeyauthenticator
+export gen_qsslpresharedkeyauthenticator

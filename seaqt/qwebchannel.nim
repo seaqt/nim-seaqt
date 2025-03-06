@@ -1,0 +1,2 @@
+import ./QtWebChannel/gen_qwebchannel
+export gen_qwebchannel

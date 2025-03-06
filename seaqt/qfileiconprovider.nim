@@ -1,0 +1,2 @@
+import ./QtWidgets/gen_qfileiconprovider
+export gen_qfileiconprovider

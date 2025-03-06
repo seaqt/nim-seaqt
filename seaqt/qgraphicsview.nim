@@ -1,0 +1,2 @@
+import ./QtWidgets/gen_qgraphicsview
+export gen_qgraphicsview

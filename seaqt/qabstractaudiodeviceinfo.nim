@@ -1,0 +1,2 @@
+import ./QtMultimedia/gen_qaudiosystem
+export gen_qaudiosystem

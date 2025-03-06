@@ -1,0 +1,2 @@
+import ./QtMultimediaWidgets/gen_qvideowidgetcontrol
+export gen_qvideowidgetcontrol

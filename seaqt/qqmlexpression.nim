@@ -1,0 +1,2 @@
+import ./QtQml/gen_qqmlexpression
+export gen_qqmlexpression

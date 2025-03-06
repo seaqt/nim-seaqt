@@ -1,0 +1,2 @@
+import ./QtCore/gen_qoperatingsystemversion
+export gen_qoperatingsystemversion

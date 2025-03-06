@@ -1,0 +1,2 @@
+import ./QtWidgets/gen_qgesturerecognizer
+export gen_qgesturerecognizer
