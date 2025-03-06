@@ -2,7 +2,7 @@ import ./Qt6Gui_libs
 
 {.push raises: [].}
 
-from system/ansi_c import c_free
+from system/ansi_c import c_free, c_malloc
 
 type
   struct_miqt_string {.used.} = object
@@ -484,6 +484,7 @@ proc allFormats*(self: gen_qtextdocument_types.QTextDocument, ): seq[gen_qtextfo
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
     vx_ret[i] = gen_qtextformat_types.QTextFormat(h: v_outCast[i])
+  c_free(v_ma.data)
   vx_ret
 
 proc markContentsDirty*(self: gen_qtextdocument_types.QTextDocument, fromVal: cint, length: cint): void =

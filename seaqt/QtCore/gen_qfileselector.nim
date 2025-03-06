@@ -2,7 +2,7 @@ import ./Qt6Core_libs
 
 {.push raises: [].}
 
-from system/ansi_c import c_free
+from system/ansi_c import c_free, c_malloc
 
 type
   struct_miqt_string {.used.} = object
@@ -127,6 +127,7 @@ proc extraSelectors*(self: gen_qfileselector_types.QFileSelector, ): seq[string]
     let vx_lvx_ret = string.fromBytes(toOpenArrayByte(vx_lv_ms.data, 0, int(vx_lv_ms.len)-1))
     c_free(vx_lv_ms.data)
     vx_ret[i] = vx_lvx_ret
+  c_free(v_ma.data)
   vx_ret
 
 proc setExtraSelectors*(self: gen_qfileselector_types.QFileSelector, list: seq[string]): void =
@@ -145,6 +146,7 @@ proc allSelectors*(self: gen_qfileselector_types.QFileSelector, ): seq[string] =
     let vx_lvx_ret = string.fromBytes(toOpenArrayByte(vx_lv_ms.data, 0, int(vx_lv_ms.len)-1))
     c_free(vx_lv_ms.data)
     vx_ret[i] = vx_lvx_ret
+  c_free(v_ma.data)
   vx_ret
 
 proc tr*(_: type gen_qfileselector_types.QFileSelector, s: cstring, c: cstring): string =

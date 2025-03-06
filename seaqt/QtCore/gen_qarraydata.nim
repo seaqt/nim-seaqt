@@ -2,7 +2,7 @@ import ./Qt6Core_libs
 
 {.push raises: [].}
 
-from system/ansi_c import c_free
+from system/ansi_c import c_free, c_malloc
 
 type
   struct_miqt_string {.used.} = object
@@ -102,6 +102,8 @@ proc reallocateUnaligned*(_: type gen_qarraydata_types.QArrayData, data: gen_qar
 
   var v_entry_Second = v_Second_CArray[0]
 
+  c_free(v_mm.keys)
+  c_free(v_mm.values)
   (first: v_entry_First , second: v_entry_Second )
 
 proc deallocate*(_: type gen_qarraydata_types.QArrayData, data: gen_qarraydata_types.QArrayData, objectSize: int64, alignment: int64): void =

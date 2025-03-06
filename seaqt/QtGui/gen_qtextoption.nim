@@ -2,7 +2,7 @@ import ./Qt6Gui_libs
 
 {.push raises: [].}
 
-from system/ansi_c import c_free
+from system/ansi_c import c_free, c_malloc
 
 type
   struct_miqt_string {.used.} = object
@@ -143,6 +143,7 @@ proc tabArray*(self: gen_qtextoption_types.QTextOption, ): seq[float64] =
   let v_outCast = cast[ptr UncheckedArray[float64]](v_ma.data)
   for i in 0 ..< v_ma.len:
     vx_ret[i] = v_outCast[i]
+  c_free(v_ma.data)
   vx_ret
 
 proc setTabs*(self: gen_qtextoption_types.QTextOption, tabStops: seq[gen_qtextoption_types.QTextOptionTab]): void =
@@ -158,6 +159,7 @@ proc tabs*(self: gen_qtextoption_types.QTextOption, ): seq[gen_qtextoption_types
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
     vx_ret[i] = gen_qtextoption_types.QTextOptionTab(h: v_outCast[i])
+  c_free(v_ma.data)
   vx_ret
 
 proc setUseDesignMetrics*(self: gen_qtextoption_types.QTextOption, b: bool): void =

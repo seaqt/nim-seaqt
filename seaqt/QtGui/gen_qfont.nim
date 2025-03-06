@@ -2,7 +2,7 @@ import ./Qt6Gui_libs
 
 {.push raises: [].}
 
-from system/ansi_c import c_free
+from system/ansi_c import c_free, c_malloc
 
 type
   struct_miqt_string {.used.} = object
@@ -260,6 +260,7 @@ proc families*(self: gen_qfont_types.QFont, ): seq[string] =
     let vx_lvx_ret = string.fromBytes(toOpenArrayByte(vx_lv_ms.data, 0, int(vx_lv_ms.len)-1))
     c_free(vx_lv_ms.data)
     vx_ret[i] = vx_lvx_ret
+  c_free(v_ma.data)
   vx_ret
 
 proc setFamilies*(self: gen_qfont_types.QFont, families: seq[string]): void =
@@ -446,6 +447,7 @@ proc substitutes*(_: type gen_qfont_types.QFont, param1: string): seq[string] =
     let vx_lvx_ret = string.fromBytes(toOpenArrayByte(vx_lv_ms.data, 0, int(vx_lv_ms.len)-1))
     c_free(vx_lv_ms.data)
     vx_ret[i] = vx_lvx_ret
+  c_free(v_ma.data)
   vx_ret
 
 proc substitutions*(_: type gen_qfont_types.QFont, ): seq[string] =
@@ -457,6 +459,7 @@ proc substitutions*(_: type gen_qfont_types.QFont, ): seq[string] =
     let vx_lvx_ret = string.fromBytes(toOpenArrayByte(vx_lv_ms.data, 0, int(vx_lv_ms.len)-1))
     c_free(vx_lv_ms.data)
     vx_ret[i] = vx_lvx_ret
+  c_free(v_ma.data)
   vx_ret
 
 proc insertSubstitution*(_: type gen_qfont_types.QFont, param1: string, param2: string): void =

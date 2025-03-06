@@ -2,7 +2,7 @@ import ./Qt6Widgets_libs
 
 {.push raises: [].}
 
-from system/ansi_c import c_free
+from system/ansi_c import c_free, c_malloc
 
 type
   struct_miqt_string {.used.} = object
@@ -193,6 +193,7 @@ proc paintingRoles*(self: gen_qabstractitemdelegate_types.QAbstractItemDelegate,
   let v_outCast = cast[ptr UncheckedArray[cint]](v_ma.data)
   for i in 0 ..< v_ma.len:
     vx_ret[i] = v_outCast[i]
+  c_free(v_ma.data)
   vx_ret
 
 proc commitData*(self: gen_qabstractitemdelegate_types.QAbstractItemDelegate, editor: gen_qwidget_types.QWidget): void =
@@ -464,13 +465,14 @@ proc QAbstractItemDelegatepaintingRoles*(self: gen_qabstractitemdelegate_types.Q
   let v_outCast = cast[ptr UncheckedArray[cint]](v_ma.data)
   for i in 0 ..< v_ma.len:
     vx_ret[i] = v_outCast[i]
+  c_free(v_ma.data)
   vx_ret
 
 proc miqt_exec_callback_cQAbstractItemDelegate_paintingRoles(vtbl: pointer, self: pointer): struct_miqt_array {.cdecl.} =
   let vtbl = cast[ptr QAbstractItemDelegateVTable](vtbl)
   let self = QAbstractItemDelegate(h: self)
   var virtualReturn = vtbl[].paintingRoles(self)
-  var virtualReturn_CArray = newSeq[cint](len(virtualReturn))
+  var virtualReturn_CArray = cast[ptr UncheckedArray[cint]](if len(virtualReturn) > 0: c_malloc(c_sizet(sizeof(cint) * len(virtualReturn))) else: nil)
   for i in 0..<len(virtualReturn):
     virtualReturn_CArray[i] = virtualReturn[i]
 

@@ -2,7 +2,7 @@ import ./Qt6Core_libs
 
 {.push raises: [].}
 
-from system/ansi_c import c_free
+from system/ansi_c import c_free, c_malloc
 
 type
   struct_miqt_string {.used.} = object
@@ -158,7 +158,7 @@ proc fromVariantMap*(_: type gen_qjsonobject_types.QJsonObject, map: Table[strin
   var map_Keys_CArray = newSeq[struct_miqt_string](len(map))
   var map_Values_CArray = newSeq[pointer](len(map))
   var map_ctr = 0
-  for mapk, mapv in map:
+  for map_k, map_v in map:
     map_Keys_CArray[map_ctr] = struct_miqt_string(data: map_k, len: csize_t(len(map_k)))
     map_Values_CArray[map_ctr] = map_v.h
     map_ctr += 1
@@ -179,13 +179,15 @@ proc toVariantMap*(self: gen_qjsonobject_types.QJsonObject, ): Table[string,gen_
     var v_entry_Value = gen_qvariant_types.QVariant(h: v_Values[i])
 
     vx_ret[v_entry_Key] = v_entry_Value
+  c_free(v_mm.keys)
+  c_free(v_mm.values)
   vx_ret
 
 proc fromVariantHash*(_: type gen_qjsonobject_types.QJsonObject, map: Table[string,gen_qvariant_types.QVariant]): gen_qjsonobject_types.QJsonObject =
   var map_Keys_CArray = newSeq[struct_miqt_string](len(map))
   var map_Values_CArray = newSeq[pointer](len(map))
   var map_ctr = 0
-  for mapk, mapv in map:
+  for map_k, map_v in map:
     map_Keys_CArray[map_ctr] = struct_miqt_string(data: map_k, len: csize_t(len(map_k)))
     map_Values_CArray[map_ctr] = map_v.h
     map_ctr += 1
@@ -206,6 +208,8 @@ proc toVariantHash*(self: gen_qjsonobject_types.QJsonObject, ): Table[string,gen
     var v_entry_Value = gen_qvariant_types.QVariant(h: v_Values[i])
 
     vx_ret[v_entry_Key] = v_entry_Value
+  c_free(v_mm.keys)
+  c_free(v_mm.values)
   vx_ret
 
 proc keys*(self: gen_qjsonobject_types.QJsonObject, ): seq[string] =
@@ -217,6 +221,7 @@ proc keys*(self: gen_qjsonobject_types.QJsonObject, ): seq[string] =
     let vx_lvx_ret = string.fromBytes(toOpenArrayByte(vx_lv_ms.data, 0, int(vx_lv_ms.len)-1))
     c_free(vx_lv_ms.data)
     vx_ret[i] = vx_lvx_ret
+  c_free(v_ma.data)
   vx_ret
 
 proc size*(self: gen_qjsonobject_types.QJsonObject, ): int64 =

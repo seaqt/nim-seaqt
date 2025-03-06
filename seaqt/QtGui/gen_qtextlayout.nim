@@ -2,7 +2,7 @@ import ./Qt6Gui_libs
 
 {.push raises: [].}
 
-from system/ansi_c import c_free
+from system/ansi_c import c_free, c_malloc
 
 type
   struct_miqt_string {.used.} = object
@@ -277,6 +277,7 @@ proc formats*(self: gen_qtextlayout_types.QTextLayout, ): seq[gen_qtextlayout_ty
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
     vx_ret[i] = gen_qtextlayout_types.QTextLayoutFormatRange(h: v_outCast[i])
+  c_free(v_ma.data)
   vx_ret
 
 proc clearFormats*(self: gen_qtextlayout_types.QTextLayout, ): void =
@@ -360,6 +361,7 @@ proc glyphRuns*(self: gen_qtextlayout_types.QTextLayout, ): seq[gen_qglyphrun_ty
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
     vx_ret[i] = gen_qglyphrun_types.QGlyphRun(h: v_outCast[i])
+  c_free(v_ma.data)
   vx_ret
 
 proc setFlags*(self: gen_qtextlayout_types.QTextLayout, flags: cint): void =
@@ -391,6 +393,7 @@ proc glyphRuns*(self: gen_qtextlayout_types.QTextLayout, fromVal: cint): seq[gen
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
     vx_ret[i] = gen_qglyphrun_types.QGlyphRun(h: v_outCast[i])
+  c_free(v_ma.data)
   vx_ret
 
 proc glyphRuns*(self: gen_qtextlayout_types.QTextLayout, fromVal: cint, length: cint): seq[gen_qglyphrun_types.QGlyphRun] =
@@ -399,6 +402,7 @@ proc glyphRuns*(self: gen_qtextlayout_types.QTextLayout, fromVal: cint, length: 
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
     vx_ret[i] = gen_qglyphrun_types.QGlyphRun(h: v_outCast[i])
+  c_free(v_ma.data)
   vx_ret
 
 proc create*(T: type gen_qtextlayout_types.QTextLayout): gen_qtextlayout_types.QTextLayout =
@@ -506,6 +510,7 @@ proc glyphRuns*(self: gen_qtextlayout_types.QTextLine, ): seq[gen_qglyphrun_type
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
     vx_ret[i] = gen_qglyphrun_types.QGlyphRun(h: v_outCast[i])
+  c_free(v_ma.data)
   vx_ret
 
 proc cursorToX*(self: gen_qtextlayout_types.QTextLine, cursorPos: ptr cint, edge: cint): float64 =
@@ -523,6 +528,7 @@ proc glyphRuns*(self: gen_qtextlayout_types.QTextLine, fromVal: cint): seq[gen_q
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
     vx_ret[i] = gen_qglyphrun_types.QGlyphRun(h: v_outCast[i])
+  c_free(v_ma.data)
   vx_ret
 
 proc glyphRuns*(self: gen_qtextlayout_types.QTextLine, fromVal: cint, length: cint): seq[gen_qglyphrun_types.QGlyphRun] =
@@ -531,6 +537,7 @@ proc glyphRuns*(self: gen_qtextlayout_types.QTextLine, fromVal: cint, length: ci
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
     vx_ret[i] = gen_qglyphrun_types.QGlyphRun(h: v_outCast[i])
+  c_free(v_ma.data)
   vx_ret
 
 proc create*(T: type gen_qtextlayout_types.QTextLine): gen_qtextlayout_types.QTextLine =

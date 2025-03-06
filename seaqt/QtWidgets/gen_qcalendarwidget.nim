@@ -2,7 +2,7 @@ import ./Qt6Widgets_libs
 
 {.push raises: [].}
 
-from system/ansi_c import c_free
+from system/ansi_c import c_free, c_malloc
 
 type
   struct_miqt_string {.used.} = object
@@ -370,6 +370,8 @@ proc dateTextFormat*(self: gen_qcalendarwidget_types.QCalendarWidget, ): Table[g
     var v_entry_Value = gen_qtextformat_types.QTextCharFormat(h: v_Values[i])
 
     vx_ret[v_entry_Key] = v_entry_Value
+  c_free(v_mm.keys)
+  c_free(v_mm.values)
   vx_ret
 
 proc dateTextFormat*(self: gen_qcalendarwidget_types.QCalendarWidget, date: gen_qdatetime_types.QDate): gen_qtextformat_types.QTextCharFormat =

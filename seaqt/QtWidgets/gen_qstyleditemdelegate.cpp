@@ -123,8 +123,10 @@ public:
 		QModelIndex* sigval2 = const_cast<QModelIndex*>(&index_ret);
 
 		QSize* callback_return_value = vtbl->sizeHint(vtbl, this, sigval1, sigval2);
+		auto callback_return_value_Value = std::move(*callback_return_value);
+		delete callback_return_value;
 
-		return *callback_return_value;
+		return callback_return_value_Value;
 	}
 
 	friend QSize* QStyledItemDelegate_virtualbase_sizeHint(const void* self, QStyleOptionViewItem* option, QModelIndex* index);
@@ -223,6 +225,7 @@ public:
 
 		struct miqt_string callback_return_value = vtbl->displayText(vtbl, this, sigval1, sigval2);
 		QString callback_return_value_QString = QString::fromUtf8(callback_return_value.data, callback_return_value.len);
+		free(callback_return_value.data);
 
 		return callback_return_value_QString;
 	}
@@ -339,6 +342,7 @@ public:
 		for(size_t i = 0; i < callback_return_value.len; ++i) {
 			callback_return_value_QList.push_back(static_cast<int>(callback_return_value_arr[i]));
 		}
+		free(callback_return_value.data);
 
 		return callback_return_value_QList;
 	}

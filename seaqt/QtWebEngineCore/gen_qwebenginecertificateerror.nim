@@ -2,7 +2,7 @@ import ./Qt6WebEngineCore_libs
 
 {.push raises: [].}
 
-from system/ansi_c import c_free
+from system/ansi_c import c_free, c_malloc
 
 type
   struct_miqt_string {.used.} = object
@@ -115,6 +115,7 @@ proc certificateChain*(self: gen_qwebenginecertificateerror_types.QWebEngineCert
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
     vx_ret[i] = gen_qsslcertificate_types.QSslCertificate(h: v_outCast[i])
+  c_free(v_ma.data)
   vx_ret
 
 proc create*(T: type gen_qwebenginecertificateerror_types.QWebEngineCertificateError,

@@ -2,7 +2,7 @@ import ./Qt6PrintSupport_libs
 
 {.push raises: [].}
 
-from system/ansi_c import c_free
+from system/ansi_c import c_free, c_malloc
 
 type
   struct_miqt_string {.used.} = object
@@ -341,6 +341,7 @@ proc supportedResolutions*(self: gen_qprinter_types.QPrinter, ): seq[cint] =
   let v_outCast = cast[ptr UncheckedArray[cint]](v_ma.data)
   for i in 0 ..< v_ma.len:
     vx_ret[i] = v_outCast[i]
+  c_free(v_ma.data)
   vx_ret
 
 proc setFontEmbeddingEnabled*(self: gen_qprinter_types.QPrinter, enable: bool): void =

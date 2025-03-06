@@ -124,8 +124,10 @@ public:
 		int sigval1 = static_cast<int>(query_ret);
 
 		QVariant* callback_return_value = vtbl->inputMethodQuery(vtbl, this, sigval1);
+		auto callback_return_value_Value = std::move(*callback_return_value);
+		delete callback_return_value;
 
-		return *callback_return_value;
+		return callback_return_value_Value;
 	}
 
 	friend QVariant* QGraphicsScene_virtualbase_inputMethodQuery(const void* self, int query);

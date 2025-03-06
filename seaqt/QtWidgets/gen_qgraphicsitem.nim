@@ -2,7 +2,7 @@ import ./Qt6Widgets_libs
 
 {.push raises: [].}
 
-from system/ansi_c import c_free
+from system/ansi_c import c_free, c_malloc
 
 type
   struct_miqt_string {.used.} = object
@@ -1619,6 +1619,7 @@ proc childItems*(self: gen_qgraphicsitem_types.QGraphicsItem, ): seq[gen_qgraphi
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
     vx_ret[i] = gen_qgraphicsitem_types.QGraphicsItem(h: v_outCast[i])
+  c_free(v_ma.data)
   vx_ret
 
 proc isWidget*(self: gen_qgraphicsitem_types.QGraphicsItem, ): bool =
@@ -1873,6 +1874,7 @@ proc transformations*(self: gen_qgraphicsitem_types.QGraphicsItem, ): seq[gen_qg
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
     vx_ret[i] = gen_qgraphicstransform_types.QGraphicsTransform(h: v_outCast[i])
+  c_free(v_ma.data)
   vx_ret
 
 proc setTransformations*(self: gen_qgraphicsitem_types.QGraphicsItem, transformations: seq[gen_qgraphicstransform_types.QGraphicsTransform]): void =
@@ -1936,6 +1938,7 @@ proc collidingItems*(self: gen_qgraphicsitem_types.QGraphicsItem, ): seq[gen_qgr
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
     vx_ret[i] = gen_qgraphicsitem_types.QGraphicsItem(h: v_outCast[i])
+  c_free(v_ma.data)
   vx_ret
 
 proc isObscured*(self: gen_qgraphicsitem_types.QGraphicsItem, ): bool =
@@ -2127,6 +2130,7 @@ proc collidingItems*(self: gen_qgraphicsitem_types.QGraphicsItem, mode: cint): s
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
     vx_ret[i] = gen_qgraphicsitem_types.QGraphicsItem(h: v_outCast[i])
+  c_free(v_ma.data)
   vx_ret
 
 proc isObscured*(self: gen_qgraphicsitem_types.QGraphicsItem, rect: gen_qrect_types.QRectF): bool =

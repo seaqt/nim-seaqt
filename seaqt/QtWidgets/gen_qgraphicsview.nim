@@ -2,7 +2,7 @@ import ./Qt6Widgets_libs
 
 {.push raises: [].}
 
-from system/ansi_c import c_free
+from system/ansi_c import c_free, c_malloc
 
 type
   struct_miqt_string {.used.} = object
@@ -517,6 +517,7 @@ proc items*(self: gen_qgraphicsview_types.QGraphicsView, ): seq[gen_qgraphicsite
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
     vx_ret[i] = gen_qgraphicsitem_types.QGraphicsItem(h: v_outCast[i])
+  c_free(v_ma.data)
   vx_ret
 
 proc items*(self: gen_qgraphicsview_types.QGraphicsView, pos: gen_qpoint_types.QPoint): seq[gen_qgraphicsitem_types.QGraphicsItem] =
@@ -525,6 +526,7 @@ proc items*(self: gen_qgraphicsview_types.QGraphicsView, pos: gen_qpoint_types.Q
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
     vx_ret[i] = gen_qgraphicsitem_types.QGraphicsItem(h: v_outCast[i])
+  c_free(v_ma.data)
   vx_ret
 
 proc items*(self: gen_qgraphicsview_types.QGraphicsView, x: cint, y: cint): seq[gen_qgraphicsitem_types.QGraphicsItem] =
@@ -533,6 +535,7 @@ proc items*(self: gen_qgraphicsview_types.QGraphicsView, x: cint, y: cint): seq[
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
     vx_ret[i] = gen_qgraphicsitem_types.QGraphicsItem(h: v_outCast[i])
+  c_free(v_ma.data)
   vx_ret
 
 proc items*(self: gen_qgraphicsview_types.QGraphicsView, rect: gen_qrect_types.QRect): seq[gen_qgraphicsitem_types.QGraphicsItem] =
@@ -541,6 +544,7 @@ proc items*(self: gen_qgraphicsview_types.QGraphicsView, rect: gen_qrect_types.Q
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
     vx_ret[i] = gen_qgraphicsitem_types.QGraphicsItem(h: v_outCast[i])
+  c_free(v_ma.data)
   vx_ret
 
 proc items*(self: gen_qgraphicsview_types.QGraphicsView, x: cint, y: cint, w: cint, h: cint): seq[gen_qgraphicsitem_types.QGraphicsItem] =
@@ -549,6 +553,7 @@ proc items*(self: gen_qgraphicsview_types.QGraphicsView, x: cint, y: cint, w: ci
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
     vx_ret[i] = gen_qgraphicsitem_types.QGraphicsItem(h: v_outCast[i])
+  c_free(v_ma.data)
   vx_ret
 
 proc items*(self: gen_qgraphicsview_types.QGraphicsView, path: gen_qpainterpath_types.QPainterPath): seq[gen_qgraphicsitem_types.QGraphicsItem] =
@@ -557,6 +562,7 @@ proc items*(self: gen_qgraphicsview_types.QGraphicsView, path: gen_qpainterpath_
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
     vx_ret[i] = gen_qgraphicsitem_types.QGraphicsItem(h: v_outCast[i])
+  c_free(v_ma.data)
   vx_ret
 
 proc itemAt*(self: gen_qgraphicsview_types.QGraphicsView, pos: gen_qpoint_types.QPoint): gen_qgraphicsitem_types.QGraphicsItem =
@@ -698,6 +704,7 @@ proc items*(self: gen_qgraphicsview_types.QGraphicsView, rect: gen_qrect_types.Q
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
     vx_ret[i] = gen_qgraphicsitem_types.QGraphicsItem(h: v_outCast[i])
+  c_free(v_ma.data)
   vx_ret
 
 proc items*(self: gen_qgraphicsview_types.QGraphicsView, x: cint, y: cint, w: cint, h: cint, mode: cint): seq[gen_qgraphicsitem_types.QGraphicsItem] =
@@ -706,6 +713,7 @@ proc items*(self: gen_qgraphicsview_types.QGraphicsView, x: cint, y: cint, w: ci
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
     vx_ret[i] = gen_qgraphicsitem_types.QGraphicsItem(h: v_outCast[i])
+  c_free(v_ma.data)
   vx_ret
 
 proc items*(self: gen_qgraphicsview_types.QGraphicsView, path: gen_qpainterpath_types.QPainterPath, mode: cint): seq[gen_qgraphicsitem_types.QGraphicsItem] =
@@ -714,6 +722,7 @@ proc items*(self: gen_qgraphicsview_types.QGraphicsView, path: gen_qpainterpath_
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
     vx_ret[i] = gen_qgraphicsitem_types.QGraphicsItem(h: v_outCast[i])
+  c_free(v_ma.data)
   vx_ret
 
 proc invalidateScene*(self: gen_qgraphicsview_types.QGraphicsView, rect: gen_qrect_types.QRectF): void =

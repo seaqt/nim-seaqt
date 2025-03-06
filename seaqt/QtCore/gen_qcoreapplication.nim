@@ -2,7 +2,7 @@ import ./Qt6Core_libs
 
 {.push raises: [].}
 
-from system/ansi_c import c_free
+from system/ansi_c import c_free, c_malloc
 
 type
   struct_miqt_string {.used.} = object
@@ -187,6 +187,7 @@ proc arguments*(_: type gen_qcoreapplication_types.QCoreApplication, ): seq[stri
     let vx_lvx_ret = string.fromBytes(toOpenArrayByte(vx_lv_ms.data, 0, int(vx_lv_ms.len)-1))
     c_free(vx_lv_ms.data)
     vx_ret[i] = vx_lvx_ret
+  c_free(v_ma.data)
   vx_ret
 
 proc setAttribute*(_: type gen_qcoreapplication_types.QCoreApplication, attribute: cint): void =
@@ -307,6 +308,7 @@ proc libraryPaths*(_: type gen_qcoreapplication_types.QCoreApplication, ): seq[s
     let vx_lvx_ret = string.fromBytes(toOpenArrayByte(vx_lv_ms.data, 0, int(vx_lv_ms.len)-1))
     c_free(vx_lv_ms.data)
     vx_ret[i] = vx_lvx_ret
+  c_free(v_ma.data)
   vx_ret
 
 proc addLibraryPath*(_: type gen_qcoreapplication_types.QCoreApplication, param1: string): void =

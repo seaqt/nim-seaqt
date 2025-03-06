@@ -2,7 +2,7 @@ import ./Qt6Gui_libs
 
 {.push raises: [].}
 
-from system/ansi_c import c_free
+from system/ansi_c import c_free, c_malloc
 
 type
   struct_miqt_string {.used.} = object
@@ -321,6 +321,7 @@ proc blockList*(self: gen_qtextobject_types.QTextBlockGroup, ): seq[gen_qtextobj
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
     vx_ret[i] = gen_qtextobject_types.QTextBlock(h: v_outCast[i])
+  c_free(v_ma.data)
   vx_ret
 
 proc setFormat*(self: gen_qtextobject_types.QTextBlockGroup, format: gen_qtextformat_types.QTextFormat): void =
@@ -390,6 +391,7 @@ proc childFrames*(self: gen_qtextobject_types.QTextFrame, ): seq[gen_qtextobject
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
     vx_ret[i] = gen_qtextobject_types.QTextFrame(h: v_outCast[i])
+  c_free(v_ma.data)
   vx_ret
 
 proc parentFrame*(self: gen_qtextobject_types.QTextFrame, ): gen_qtextobject_types.QTextFrame =
@@ -643,6 +645,7 @@ proc textFormats*(self: gen_qtextobject_types.QTextBlock, ): seq[gen_qtextlayout
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
     vx_ret[i] = gen_qtextlayout_types.QTextLayoutFormatRange(h: v_outCast[i])
+  c_free(v_ma.data)
   vx_ret
 
 proc document*(self: gen_qtextobject_types.QTextBlock, ): gen_qtextdocument_types.QTextDocument =
@@ -753,6 +756,7 @@ proc glyphRuns*(self: gen_qtextobject_types.QTextFragment, ): seq[gen_qglyphrun_
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
     vx_ret[i] = gen_qglyphrun_types.QGlyphRun(h: v_outCast[i])
+  c_free(v_ma.data)
   vx_ret
 
 proc glyphRuns*(self: gen_qtextobject_types.QTextFragment, fromVal: cint): seq[gen_qglyphrun_types.QGlyphRun] =
@@ -761,6 +765,7 @@ proc glyphRuns*(self: gen_qtextobject_types.QTextFragment, fromVal: cint): seq[g
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
     vx_ret[i] = gen_qglyphrun_types.QGlyphRun(h: v_outCast[i])
+  c_free(v_ma.data)
   vx_ret
 
 proc glyphRuns*(self: gen_qtextobject_types.QTextFragment, fromVal: cint, length: cint): seq[gen_qglyphrun_types.QGlyphRun] =
@@ -769,6 +774,7 @@ proc glyphRuns*(self: gen_qtextobject_types.QTextFragment, fromVal: cint, length
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
     vx_ret[i] = gen_qglyphrun_types.QGlyphRun(h: v_outCast[i])
+  c_free(v_ma.data)
   vx_ret
 
 proc create*(T: type gen_qtextobject_types.QTextFragment): gen_qtextobject_types.QTextFragment =

@@ -2,7 +2,7 @@ import ./Qt6Core_libs
 
 {.push raises: [].}
 
-from system/ansi_c import c_free
+from system/ansi_c import c_free, c_malloc
 
 type
   struct_miqt_string {.used.} = object
@@ -253,6 +253,7 @@ proc indexes*(self: gen_qitemselectionmodel_types.QItemSelectionRange, ): seq[ge
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
     vx_ret[i] = gen_qabstractitemmodel_types.QModelIndex(h: v_outCast[i])
+  c_free(v_ma.data)
   vx_ret
 
 proc create*(T: type gen_qitemselectionmodel_types.QItemSelectionRange): gen_qitemselectionmodel_types.QItemSelectionRange =
@@ -314,6 +315,7 @@ proc selectedIndexes*(self: gen_qitemselectionmodel_types.QItemSelectionModel, )
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
     vx_ret[i] = gen_qabstractitemmodel_types.QModelIndex(h: v_outCast[i])
+  c_free(v_ma.data)
   vx_ret
 
 proc selectedRows*(self: gen_qitemselectionmodel_types.QItemSelectionModel, ): seq[gen_qabstractitemmodel_types.QModelIndex] =
@@ -322,6 +324,7 @@ proc selectedRows*(self: gen_qitemselectionmodel_types.QItemSelectionModel, ): s
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
     vx_ret[i] = gen_qabstractitemmodel_types.QModelIndex(h: v_outCast[i])
+  c_free(v_ma.data)
   vx_ret
 
 proc selectedColumns*(self: gen_qitemselectionmodel_types.QItemSelectionModel, ): seq[gen_qabstractitemmodel_types.QModelIndex] =
@@ -330,6 +333,7 @@ proc selectedColumns*(self: gen_qitemselectionmodel_types.QItemSelectionModel, )
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
     vx_ret[i] = gen_qabstractitemmodel_types.QModelIndex(h: v_outCast[i])
+  c_free(v_ma.data)
   vx_ret
 
 proc selection*(self: gen_qitemselectionmodel_types.QItemSelectionModel, ): gen_qitemselectionmodel_types.QItemSelection =
@@ -503,6 +507,7 @@ proc selectedRows*(self: gen_qitemselectionmodel_types.QItemSelectionModel, colu
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
     vx_ret[i] = gen_qabstractitemmodel_types.QModelIndex(h: v_outCast[i])
+  c_free(v_ma.data)
   vx_ret
 
 proc selectedColumns*(self: gen_qitemselectionmodel_types.QItemSelectionModel, row: cint): seq[gen_qabstractitemmodel_types.QModelIndex] =
@@ -511,6 +516,7 @@ proc selectedColumns*(self: gen_qitemselectionmodel_types.QItemSelectionModel, r
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
     vx_ret[i] = gen_qabstractitemmodel_types.QModelIndex(h: v_outCast[i])
+  c_free(v_ma.data)
   vx_ret
 
 type QItemSelectionModelmetaObjectProc* = proc(self: QItemSelectionModel): gen_qobjectdefs_types.QMetaObject {.raises: [], gcsafe.}
@@ -854,6 +860,7 @@ proc indexes*(self: gen_qitemselectionmodel_types.QItemSelection, ): seq[gen_qab
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
     vx_ret[i] = gen_qabstractitemmodel_types.QModelIndex(h: v_outCast[i])
+  c_free(v_ma.data)
   vx_ret
 
 proc merge*(self: gen_qitemselectionmodel_types.QItemSelection, other: gen_qitemselectionmodel_types.QItemSelection, command: cint): void =

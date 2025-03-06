@@ -112,6 +112,7 @@ public:
 
 		struct miqt_string callback_return_value = vtbl->text(vtbl, this);
 		QString callback_return_value_QString = QString::fromUtf8(callback_return_value.data, callback_return_value.len);
+		free(callback_return_value.data);
 
 		return callback_return_value_QString;
 	}
@@ -126,8 +127,10 @@ public:
 
 
 		QSize* callback_return_value = vtbl->sizeHint(vtbl, this);
+		auto callback_return_value_Value = std::move(*callback_return_value);
+		delete callback_return_value;
 
-		return *callback_return_value;
+		return callback_return_value_Value;
 	}
 
 	friend QSize* QProgressBar_virtualbase_sizeHint(const void* self);
@@ -140,8 +143,10 @@ public:
 
 
 		QSize* callback_return_value = vtbl->minimumSizeHint(vtbl, this);
+		auto callback_return_value_Value = std::move(*callback_return_value);
+		delete callback_return_value;
 
-		return *callback_return_value;
+		return callback_return_value_Value;
 	}
 
 	friend QSize* QProgressBar_virtualbase_minimumSizeHint(const void* self);
@@ -731,8 +736,10 @@ public:
 		int sigval1 = static_cast<int>(param1_ret);
 
 		QVariant* callback_return_value = vtbl->inputMethodQuery(vtbl, this, sigval1);
+		auto callback_return_value_Value = std::move(*callback_return_value);
+		delete callback_return_value;
 
-		return *callback_return_value;
+		return callback_return_value_Value;
 	}
 
 	friend QVariant* QProgressBar_virtualbase_inputMethodQuery(const void* self, int param1);

@@ -2,7 +2,7 @@ import ./Qt6WebEngineCore_libs
 
 {.push raises: [].}
 
-from system/ansi_c import c_free
+from system/ansi_c import c_free, c_malloc
 
 type
   struct_miqt_string {.used.} = object
@@ -1473,6 +1473,7 @@ proc QWebEnginePagechooseFiles*(self: gen_qwebenginepage_types.QWebEnginePage, m
     let vx_lvx_ret = string.fromBytes(toOpenArrayByte(vx_lv_ms.data, 0, int(vx_lv_ms.len)-1))
     c_free(vx_lv_ms.data)
     vx_ret[i] = vx_lvx_ret
+  c_free(v_ma.data)
   vx_ret
 
 proc miqt_exec_callback_cQWebEnginePage_chooseFiles(vtbl: pointer, self: pointer, mode: cint, oldFiles: struct_miqt_array, acceptedMimeTypes: struct_miqt_array): struct_miqt_array {.cdecl.} =
@@ -1487,6 +1488,7 @@ proc miqt_exec_callback_cQWebEnginePage_chooseFiles(vtbl: pointer, self: pointer
     let voldFiles_lvx_ret = string.fromBytes(toOpenArrayByte(voldFiles_lv_ms.data, 0, int(voldFiles_lv_ms.len)-1))
     c_free(voldFiles_lv_ms.data)
     voldFilesx_ret[i] = voldFiles_lvx_ret
+  c_free(voldFiles_ma.data)
   let slotval2 = voldFilesx_ret
   var vacceptedMimeTypes_ma = acceptedMimeTypes
   var vacceptedMimeTypesx_ret = newSeq[string](int(vacceptedMimeTypes_ma.len))
@@ -1496,11 +1498,14 @@ proc miqt_exec_callback_cQWebEnginePage_chooseFiles(vtbl: pointer, self: pointer
     let vacceptedMimeTypes_lvx_ret = string.fromBytes(toOpenArrayByte(vacceptedMimeTypes_lv_ms.data, 0, int(vacceptedMimeTypes_lv_ms.len)-1))
     c_free(vacceptedMimeTypes_lv_ms.data)
     vacceptedMimeTypesx_ret[i] = vacceptedMimeTypes_lvx_ret
+  c_free(vacceptedMimeTypes_ma.data)
   let slotval3 = vacceptedMimeTypesx_ret
   var virtualReturn = vtbl[].chooseFiles(self, slotval1, slotval2, slotval3)
-  var virtualReturn_CArray = newSeq[struct_miqt_string](len(virtualReturn))
+  var virtualReturn_CArray = cast[ptr UncheckedArray[struct_miqt_string]](if len(virtualReturn) > 0: c_malloc(c_sizet(sizeof(struct_miqt_string) * len(virtualReturn))) else: nil)
   for i in 0..<len(virtualReturn):
-    virtualReturn_CArray[i] = struct_miqt_string(data: virtualReturn[i], len: csize_t(len(virtualReturn[i])))
+    var virtualReturn_i_copy = cast[cstring](if len(virtualReturn[i]) > 0: c_malloc(csize_t(len(virtualReturn[i]))) else: nil)
+    if len(virtualReturn[i]) > 0: copyMem(cast[pointer](virtualReturn_i_copy), addr virtualReturn[i][0], csize_t(len(virtualReturn[i])))
+    virtualReturn_CArray[i] = struct_miqt_string(data: virtualReturn_i_copy, len: csize_t(len(virtualReturn[i])))
 
   struct_miqt_array(len: csize_t(len(virtualReturn)), data: if len(virtualReturn) == 0: nil else: addr(virtualReturn_CArray[0]))
 

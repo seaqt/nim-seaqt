@@ -2,7 +2,7 @@ import ./Qt6Gui_libs
 
 {.push raises: [].}
 
-from system/ansi_c import c_free
+from system/ansi_c import c_free, c_malloc
 
 type
   struct_miqt_string {.used.} = object
@@ -665,6 +665,7 @@ proc lengthVectorProperty*(self: gen_qtextformat_types.QTextFormat, propertyId: 
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
     vx_ret[i] = gen_qtextformat_types.QTextLength(h: v_outCast[i])
+  c_free(v_ma.data)
   vx_ret
 
 proc setProperty*(self: gen_qtextformat_types.QTextFormat, propertyId: cint, lengths: seq[gen_qtextformat_types.QTextLength]): void =
@@ -685,6 +686,8 @@ proc properties*(self: gen_qtextformat_types.QTextFormat, ): Table[cint,gen_qvar
     var v_entry_Value = gen_qvariant_types.QVariant(h: v_Values[i])
 
     vx_ret[v_entry_Key] = v_entry_Value
+  c_free(v_mm.keys)
+  c_free(v_mm.values)
   vx_ret
 
 proc propertyCount*(self: gen_qtextformat_types.QTextFormat, ): cint =
@@ -998,6 +1001,7 @@ proc anchorNames*(self: gen_qtextformat_types.QTextCharFormat, ): seq[string] =
     let vx_lvx_ret = string.fromBytes(toOpenArrayByte(vx_lv_ms.data, 0, int(vx_lv_ms.len)-1))
     c_free(vx_lv_ms.data)
     vx_ret[i] = vx_lvx_ret
+  c_free(v_ma.data)
   vx_ret
 
 proc setTableCellRowSpan*(self: gen_qtextformat_types.QTextCharFormat, tableCellRowSpan: cint): void =
@@ -1115,6 +1119,7 @@ proc tabPositions*(self: gen_qtextformat_types.QTextBlockFormat, ): seq[gen_qtex
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
     vx_ret[i] = gen_qtextoption_types.QTextOptionTab(h: v_outCast[i])
+  c_free(v_ma.data)
   vx_ret
 
 proc setMarker*(self: gen_qtextformat_types.QTextBlockFormat, marker: cint): void =
@@ -1330,6 +1335,7 @@ proc columnWidthConstraints*(self: gen_qtextformat_types.QTextTableFormat, ): se
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
     vx_ret[i] = gen_qtextformat_types.QTextLength(h: v_outCast[i])
+  c_free(v_ma.data)
   vx_ret
 
 proc clearColumnWidthConstraints*(self: gen_qtextformat_types.QTextTableFormat, ): void =

@@ -2,7 +2,7 @@ import ./Qt6Network_libs
 
 {.push raises: [].}
 
-from system/ansi_c import c_free
+from system/ansi_c import c_free, c_malloc
 
 type
   struct_miqt_string {.used.} = object
@@ -206,6 +206,7 @@ proc supportedSchemes*(self: gen_qnetworkaccessmanager_types.QNetworkAccessManag
     let vx_lvx_ret = string.fromBytes(toOpenArrayByte(vx_lv_ms.data, 0, int(vx_lv_ms.len)-1))
     c_free(vx_lv_ms.data)
     vx_ret[i] = vx_lvx_ret
+  c_free(v_ma.data)
   vx_ret
 
 proc clearAccessCache*(self: gen_qnetworkaccessmanager_types.QNetworkAccessManager, ): void =
@@ -263,6 +264,7 @@ proc strictTransportSecurityHosts*(self: gen_qnetworkaccessmanager_types.QNetwor
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
     vx_ret[i] = gen_qhstspolicy_types.QHstsPolicy(h: v_outCast[i])
+  c_free(v_ma.data)
   vx_ret
 
 proc head*(self: gen_qnetworkaccessmanager_types.QNetworkAccessManager, request: gen_qnetworkrequest_types.QNetworkRequest): gen_qnetworkreply_types.QNetworkReply =
@@ -429,6 +431,7 @@ proc miqt_exec_callback_cQNetworkAccessManager_sslErrors(slot: int, reply: point
   let verrors_outCast = cast[ptr UncheckedArray[pointer]](verrors_ma.data)
   for i in 0 ..< verrors_ma.len:
     verrorsx_ret[i] = gen_qsslerror_types.QSslError(h: verrors_outCast[i])
+  c_free(verrors_ma.data)
   let slotval2 = verrorsx_ret
 
   nimfunc[](slotval1, slotval2)
@@ -561,15 +564,18 @@ proc QNetworkAccessManagersupportedSchemes*(self: gen_qnetworkaccessmanager_type
     let vx_lvx_ret = string.fromBytes(toOpenArrayByte(vx_lv_ms.data, 0, int(vx_lv_ms.len)-1))
     c_free(vx_lv_ms.data)
     vx_ret[i] = vx_lvx_ret
+  c_free(v_ma.data)
   vx_ret
 
 proc miqt_exec_callback_cQNetworkAccessManager_supportedSchemes(vtbl: pointer, self: pointer): struct_miqt_array {.cdecl.} =
   let vtbl = cast[ptr QNetworkAccessManagerVTable](vtbl)
   let self = QNetworkAccessManager(h: self)
   var virtualReturn = vtbl[].supportedSchemes(self)
-  var virtualReturn_CArray = newSeq[struct_miqt_string](len(virtualReturn))
+  var virtualReturn_CArray = cast[ptr UncheckedArray[struct_miqt_string]](if len(virtualReturn) > 0: c_malloc(c_sizet(sizeof(struct_miqt_string) * len(virtualReturn))) else: nil)
   for i in 0..<len(virtualReturn):
-    virtualReturn_CArray[i] = struct_miqt_string(data: virtualReturn[i], len: csize_t(len(virtualReturn[i])))
+    var virtualReturn_i_copy = cast[cstring](if len(virtualReturn[i]) > 0: c_malloc(csize_t(len(virtualReturn[i]))) else: nil)
+    if len(virtualReturn[i]) > 0: copyMem(cast[pointer](virtualReturn_i_copy), addr virtualReturn[i][0], csize_t(len(virtualReturn[i])))
+    virtualReturn_CArray[i] = struct_miqt_string(data: virtualReturn_i_copy, len: csize_t(len(virtualReturn[i])))
 
   struct_miqt_array(len: csize_t(len(virtualReturn)), data: if len(virtualReturn) == 0: nil else: addr(virtualReturn_CArray[0]))
 
@@ -660,6 +666,7 @@ proc supportedSchemesImplementation*(self: gen_qnetworkaccessmanager_types.QNetw
     let vx_lvx_ret = string.fromBytes(toOpenArrayByte(vx_lv_ms.data, 0, int(vx_lv_ms.len)-1))
     c_free(vx_lv_ms.data)
     vx_ret[i] = vx_lvx_ret
+  c_free(v_ma.data)
   vx_ret
 
 proc sender*(self: gen_qnetworkaccessmanager_types.QNetworkAccessManager, ): gen_qobject_types.QObject =

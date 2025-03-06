@@ -178,8 +178,10 @@ public:
 		QModelIndex* sigval1 = const_cast<QModelIndex*>(&index_ret);
 
 		QRect* callback_return_value = vtbl->visualRect(vtbl, this, sigval1);
+		auto callback_return_value_Value = std::move(*callback_return_value);
+		delete callback_return_value;
 
-		return *callback_return_value;
+		return callback_return_value_Value;
 	}
 
 	// Subclass to allow providing a Go implementation
@@ -209,8 +211,10 @@ public:
 		QPoint* sigval1 = const_cast<QPoint*>(&point_ret);
 
 		QModelIndex* callback_return_value = vtbl->indexAt(vtbl, this, sigval1);
+		auto callback_return_value_Value = std::move(*callback_return_value);
+		delete callback_return_value;
 
-		return *callback_return_value;
+		return callback_return_value_Value;
 	}
 
 	// Subclass to allow providing a Go implementation
@@ -270,8 +274,10 @@ public:
 		int sigval1 = static_cast<int>(query_ret);
 
 		QVariant* callback_return_value = vtbl->inputMethodQuery(vtbl, this, sigval1);
+		auto callback_return_value_Value = std::move(*callback_return_value);
+		delete callback_return_value;
 
-		return *callback_return_value;
+		return callback_return_value_Value;
 	}
 
 	friend QVariant* QAbstractItemView_virtualbase_inputMethodQuery(const void* self, int query);
@@ -604,8 +610,10 @@ public:
 		int sigval2 = static_cast<int>(modifiers_ret);
 
 		QModelIndex* callback_return_value = vtbl->moveCursor(vtbl, this, sigval1, sigval2);
+		auto callback_return_value_Value = std::move(*callback_return_value);
+		delete callback_return_value;
 
-		return *callback_return_value;
+		return callback_return_value_Value;
 	}
 
 	// Subclass to allow providing a Go implementation
@@ -674,8 +682,10 @@ public:
 		QItemSelection* sigval1 = const_cast<QItemSelection*>(&selection_ret);
 
 		QRegion* callback_return_value = vtbl->visualRegionForSelection(vtbl, this, sigval1);
+		auto callback_return_value_Value = std::move(*callback_return_value);
+		delete callback_return_value;
 
-		return *callback_return_value;
+		return callback_return_value_Value;
 	}
 
 	// Subclass to allow providing a Go implementation
@@ -692,6 +702,7 @@ public:
 		for(size_t i = 0; i < callback_return_value.len; ++i) {
 			callback_return_value_QList.push_back(*(callback_return_value_arr[i]));
 		}
+		free(callback_return_value.data);
 
 		return callback_return_value_QList;
 	}
@@ -1046,8 +1057,10 @@ public:
 
 
 		QSize* callback_return_value = vtbl->viewportSizeHint(vtbl, this);
+		auto callback_return_value_Value = std::move(*callback_return_value);
+		delete callback_return_value;
 
-		return *callback_return_value;
+		return callback_return_value_Value;
 	}
 
 	friend QSize* QAbstractItemView_virtualbase_viewportSizeHint(const void* self);
@@ -1060,8 +1073,10 @@ public:
 
 
 		QSize* callback_return_value = vtbl->minimumSizeHint(vtbl, this);
+		auto callback_return_value_Value = std::move(*callback_return_value);
+		delete callback_return_value;
 
-		return *callback_return_value;
+		return callback_return_value_Value;
 	}
 
 	friend QSize* QAbstractItemView_virtualbase_minimumSizeHint(const void* self);
@@ -1074,8 +1089,10 @@ public:
 
 
 		QSize* callback_return_value = vtbl->sizeHint(vtbl, this);
+		auto callback_return_value_Value = std::move(*callback_return_value);
+		delete callback_return_value;
 
-		return *callback_return_value;
+		return callback_return_value_Value;
 	}
 
 	friend QSize* QAbstractItemView_virtualbase_sizeHint(const void* self);

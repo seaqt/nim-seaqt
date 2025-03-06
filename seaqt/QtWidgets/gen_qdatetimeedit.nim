@@ -2,7 +2,7 @@ import ./Qt6Widgets_libs
 
 {.push raises: [].}
 
-from system/ansi_c import c_free
+from system/ansi_c import c_free, c_malloc
 
 type
   struct_miqt_string {.used.} = object
@@ -1097,7 +1097,9 @@ proc miqt_exec_callback_cQDateTimeEdit_textFromDateTime(vtbl: pointer, self: poi
   let self = QDateTimeEdit(h: self)
   let slotval1 = gen_qdatetime_types.QDateTime(h: dt)
   var virtualReturn = vtbl[].textFromDateTime(self, slotval1)
-  struct_miqt_string(data: virtualReturn, len: csize_t(len(virtualReturn)))
+  var virtualReturn_copy = cast[cstring](if len(virtualReturn) > 0: c_malloc(csize_t(len(virtualReturn))) else: nil)
+  if len(virtualReturn) > 0: copyMem(cast[pointer](virtualReturn_copy), addr virtualReturn[0], csize_t(len(virtualReturn)))
+  struct_miqt_string(data: virtualReturn_copy, len: csize_t(len(virtualReturn)))
 
 proc QDateTimeEditstepEnabled*(self: gen_qdatetimeedit_types.QDateTimeEdit, ): cint =
   cint(fcQDateTimeEdit_virtualbase_stepEnabled(self.h))
@@ -2861,7 +2863,9 @@ proc miqt_exec_callback_cQTimeEdit_textFromDateTime(vtbl: pointer, self: pointer
   let self = QTimeEdit(h: self)
   let slotval1 = gen_qdatetime_types.QDateTime(h: dt)
   var virtualReturn = vtbl[].textFromDateTime(self, slotval1)
-  struct_miqt_string(data: virtualReturn, len: csize_t(len(virtualReturn)))
+  var virtualReturn_copy = cast[cstring](if len(virtualReturn) > 0: c_malloc(csize_t(len(virtualReturn))) else: nil)
+  if len(virtualReturn) > 0: copyMem(cast[pointer](virtualReturn_copy), addr virtualReturn[0], csize_t(len(virtualReturn)))
+  struct_miqt_string(data: virtualReturn_copy, len: csize_t(len(virtualReturn)))
 
 proc QTimeEditstepEnabled*(self: gen_qdatetimeedit_types.QTimeEdit, ): cint =
   cint(fcQTimeEdit_virtualbase_stepEnabled(self.h))
@@ -4121,7 +4125,9 @@ proc miqt_exec_callback_cQDateEdit_textFromDateTime(vtbl: pointer, self: pointer
   let self = QDateEdit(h: self)
   let slotval1 = gen_qdatetime_types.QDateTime(h: dt)
   var virtualReturn = vtbl[].textFromDateTime(self, slotval1)
-  struct_miqt_string(data: virtualReturn, len: csize_t(len(virtualReturn)))
+  var virtualReturn_copy = cast[cstring](if len(virtualReturn) > 0: c_malloc(csize_t(len(virtualReturn))) else: nil)
+  if len(virtualReturn) > 0: copyMem(cast[pointer](virtualReturn_copy), addr virtualReturn[0], csize_t(len(virtualReturn)))
+  struct_miqt_string(data: virtualReturn_copy, len: csize_t(len(virtualReturn)))
 
 proc QDateEditstepEnabled*(self: gen_qdatetimeedit_types.QDateEdit, ): cint =
   cint(fcQDateEdit_virtualbase_stepEnabled(self.h))

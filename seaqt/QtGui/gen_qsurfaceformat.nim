@@ -2,7 +2,7 @@ import ./Qt6Gui_libs
 
 {.push raises: [].}
 
-from system/ansi_c import c_free
+from system/ansi_c import c_free, c_malloc
 
 type
   struct_miqt_string {.used.} = object
@@ -213,6 +213,8 @@ proc version*(self: gen_qsurfaceformat_types.QSurfaceFormat, ): tuple[first: cin
 
   var v_entry_Second = v_Second_CArray[0]
 
+  c_free(v_mm.keys)
+  c_free(v_mm.values)
   (first: v_entry_First , second: v_entry_Second )
 
 proc setVersion*(self: gen_qsurfaceformat_types.QSurfaceFormat, major: cint, minor: cint): void =

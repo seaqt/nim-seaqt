@@ -2,7 +2,7 @@ import ./Qt6Widgets_libs
 
 {.push raises: [].}
 
-from system/ansi_c import c_free
+from system/ansi_c import c_free, c_malloc
 
 type
   struct_miqt_string {.used.} = object
@@ -97,6 +97,7 @@ proc colormap*(self: gen_qcolormap_types.QColormap, ): seq[gen_qcolor_types.QCol
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
     vx_ret[i] = gen_qcolor_types.QColor(h: v_outCast[i])
+  c_free(v_ma.data)
   vx_ret
 
 proc instance*(_: type gen_qcolormap_types.QColormap, screen: cint): gen_qcolormap_types.QColormap =

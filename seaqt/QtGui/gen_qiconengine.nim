@@ -2,7 +2,7 @@ import ./Qt6Gui_libs
 
 {.push raises: [].}
 
-from system/ansi_c import c_free
+from system/ansi_c import c_free, c_malloc
 
 type
   struct_miqt_string {.used.} = object
@@ -142,6 +142,7 @@ proc availableSizes*(self: gen_qiconengine_types.QIconEngine, mode: cint, state:
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
     vx_ret[i] = gen_qsize_types.QSize(h: v_outCast[i])
+  c_free(v_ma.data)
   vx_ret
 
 proc iconName*(self: gen_qiconengine_types.QIconEngine, ): string =
@@ -258,7 +259,9 @@ proc miqt_exec_callback_cQIconEngine_key(vtbl: pointer, self: pointer): struct_m
   let vtbl = cast[ptr QIconEngineVTable](vtbl)
   let self = QIconEngine(h: self)
   var virtualReturn = vtbl[].key(self)
-  struct_miqt_string(data: virtualReturn, len: csize_t(len(virtualReturn)))
+  var virtualReturn_copy = cast[cstring](if len(virtualReturn) > 0: c_malloc(csize_t(len(virtualReturn))) else: nil)
+  if len(virtualReturn) > 0: copyMem(cast[pointer](virtualReturn_copy), addr virtualReturn[0], csize_t(len(virtualReturn)))
+  struct_miqt_string(data: virtualReturn_copy, len: csize_t(len(virtualReturn)))
 
 proc miqt_exec_callback_cQIconEngine_clone(vtbl: pointer, self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QIconEngineVTable](vtbl)
@@ -292,6 +295,7 @@ proc QIconEngineavailableSizes*(self: gen_qiconengine_types.QIconEngine, mode: c
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
     vx_ret[i] = gen_qsize_types.QSize(h: v_outCast[i])
+  c_free(v_ma.data)
   vx_ret
 
 proc miqt_exec_callback_cQIconEngine_availableSizes(vtbl: pointer, self: pointer, mode: cint, state: cint): struct_miqt_array {.cdecl.} =
@@ -300,7 +304,7 @@ proc miqt_exec_callback_cQIconEngine_availableSizes(vtbl: pointer, self: pointer
   let slotval1 = cint(mode)
   let slotval2 = cint(state)
   var virtualReturn = vtbl[].availableSizes(self, slotval1, slotval2)
-  var virtualReturn_CArray = newSeq[pointer](len(virtualReturn))
+  var virtualReturn_CArray = cast[ptr UncheckedArray[pointer]](if len(virtualReturn) > 0: c_malloc(c_sizet(sizeof(pointer) * len(virtualReturn))) else: nil)
   for i in 0..<len(virtualReturn):
     virtualReturn_CArray[i] = virtualReturn[i].h
 
@@ -316,7 +320,9 @@ proc miqt_exec_callback_cQIconEngine_iconName(vtbl: pointer, self: pointer): str
   let vtbl = cast[ptr QIconEngineVTable](vtbl)
   let self = QIconEngine(h: self)
   var virtualReturn = vtbl[].iconName(self)
-  struct_miqt_string(data: virtualReturn, len: csize_t(len(virtualReturn)))
+  var virtualReturn_copy = cast[cstring](if len(virtualReturn) > 0: c_malloc(csize_t(len(virtualReturn))) else: nil)
+  if len(virtualReturn) > 0: copyMem(cast[pointer](virtualReturn_copy), addr virtualReturn[0], csize_t(len(virtualReturn)))
+  struct_miqt_string(data: virtualReturn_copy, len: csize_t(len(virtualReturn)))
 
 proc QIconEngineisNull*(self: gen_qiconengine_types.QIconEngine, ): bool =
   fcQIconEngine_virtualbase_isNull(self.h)

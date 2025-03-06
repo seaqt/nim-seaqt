@@ -154,8 +154,10 @@ public:
 		QUrl* sigval2 = const_cast<QUrl*>(&name_ret);
 
 		QVariant* callback_return_value = vtbl->loadResource(vtbl, this, sigval1, sigval2);
+		auto callback_return_value_Value = std::move(*callback_return_value);
+		delete callback_return_value;
 
-		return *callback_return_value;
+		return callback_return_value_Value;
 	}
 
 	friend QVariant* QTextDocument_virtualbase_loadResource(void* self, int type, QUrl* name);

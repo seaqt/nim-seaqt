@@ -2,7 +2,7 @@ import ./Qt6Core_libs
 
 {.push raises: [].}
 
-from system/ansi_c import c_free
+from system/ansi_c import c_free, c_malloc
 
 type
   struct_miqt_string {.used.} = object
@@ -165,7 +165,10 @@ proc keyValues*(self: gen_qvariantanimation_types.QVariantAnimation, ): seq[tupl
 
     var vx_lv_entry_Second = gen_qvariant_types.QVariant(h: vx_lv_Second_CArray[0])
 
+    c_free(vx_lv_mm.keys)
+    c_free(vx_lv_mm.values)
     vx_ret[i] = (first: vx_lv_entry_First , second: vx_lv_entry_Second )
+  c_free(v_ma.data)
   vx_ret
 
 proc setKeyValues*(self: gen_qvariantanimation_types.QVariantAnimation, values: seq[tuple[first: float64, second: gen_qvariant_types.QVariant]]): void =

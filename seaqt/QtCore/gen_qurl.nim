@@ -2,7 +2,7 @@ import ./Qt6Core_libs
 
 {.push raises: [].}
 
-from system/ansi_c import c_free
+from system/ansi_c import c_free, c_malloc
 
 type
   struct_miqt_string {.used.} = object
@@ -405,6 +405,7 @@ proc idnWhitelist*(_: type gen_qurl_types.QUrl, ): seq[string] =
     let vx_lvx_ret = string.fromBytes(toOpenArrayByte(vx_lv_ms.data, 0, int(vx_lv_ms.len)-1))
     c_free(vx_lv_ms.data)
     vx_ret[i] = vx_lvx_ret
+  c_free(v_ma.data)
   vx_ret
 
 proc toStringList*(_: type gen_qurl_types.QUrl, uris: seq[gen_qurl_types.QUrl]): seq[string] =
@@ -420,6 +421,7 @@ proc toStringList*(_: type gen_qurl_types.QUrl, uris: seq[gen_qurl_types.QUrl]):
     let vx_lvx_ret = string.fromBytes(toOpenArrayByte(vx_lv_ms.data, 0, int(vx_lv_ms.len)-1))
     c_free(vx_lv_ms.data)
     vx_ret[i] = vx_lvx_ret
+  c_free(v_ma.data)
   vx_ret
 
 proc fromStringList*(_: type gen_qurl_types.QUrl, uris: seq[string]): seq[gen_qurl_types.QUrl] =
@@ -432,6 +434,7 @@ proc fromStringList*(_: type gen_qurl_types.QUrl, uris: seq[string]): seq[gen_qu
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
     vx_ret[i] = gen_qurl_types.QUrl(h: v_outCast[i])
+  c_free(v_ma.data)
   vx_ret
 
 proc setIdnWhitelist*(_: type gen_qurl_types.QUrl, idnWhitelist: seq[string]): void =
@@ -568,6 +571,7 @@ proc fromStringList*(_: type gen_qurl_types.QUrl, uris: seq[string], mode: cint)
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
     vx_ret[i] = gen_qurl_types.QUrl(h: v_outCast[i])
+  c_free(v_ma.data)
   vx_ret
 
 proc create*(T: type gen_qurl_types.QUrl): gen_qurl_types.QUrl =

@@ -2,7 +2,7 @@ import ./Qt6Core_libs
 
 {.push raises: [].}
 
-from system/ansi_c import c_free
+from system/ansi_c import c_free, c_malloc
 
 type
   struct_miqt_string {.used.} = object
@@ -132,6 +132,7 @@ proc staticInstances*(_: type gen_qpluginloader_types.QPluginLoader, ): seq[gen_
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
     vx_ret[i] = gen_qobject_types.QObject(h: v_outCast[i])
+  c_free(v_ma.data)
   vx_ret
 
 proc staticPlugins*(_: type gen_qpluginloader_types.QPluginLoader, ): seq[gen_qplugin_types.QStaticPlugin] =
@@ -140,6 +141,7 @@ proc staticPlugins*(_: type gen_qpluginloader_types.QPluginLoader, ): seq[gen_qp
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
     vx_ret[i] = gen_qplugin_types.QStaticPlugin(h: v_outCast[i])
+  c_free(v_ma.data)
   vx_ret
 
 proc load*(self: gen_qpluginloader_types.QPluginLoader, ): bool =

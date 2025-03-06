@@ -2,7 +2,7 @@ import ./Qt6WebEngineCore_libs
 
 {.push raises: [].}
 
-from system/ansi_c import c_free
+from system/ansi_c import c_free, c_malloc
 
 type
   struct_miqt_string {.used.} = object
@@ -70,6 +70,7 @@ proc find*(self: gen_qwebenginescriptcollection_types.QWebEngineScriptCollection
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
     vx_ret[i] = gen_qwebenginescript_types.QWebEngineScript(h: v_outCast[i])
+  c_free(v_ma.data)
   vx_ret
 
 proc insert*(self: gen_qwebenginescriptcollection_types.QWebEngineScriptCollection, param1: gen_qwebenginescript_types.QWebEngineScript): void =
@@ -94,6 +95,7 @@ proc toList*(self: gen_qwebenginescriptcollection_types.QWebEngineScriptCollecti
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
     vx_ret[i] = gen_qwebenginescript_types.QWebEngineScript(h: v_outCast[i])
+  c_free(v_ma.data)
   vx_ret
 
 proc delete*(self: gen_qwebenginescriptcollection_types.QWebEngineScriptCollection) =

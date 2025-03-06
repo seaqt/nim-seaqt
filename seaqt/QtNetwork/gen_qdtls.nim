@@ -2,7 +2,7 @@ import ./Qt6Network_libs
 
 {.push raises: [].}
 
-from system/ansi_c import c_free
+from system/ansi_c import c_free, c_malloc
 
 type
   struct_miqt_string {.used.} = object
@@ -550,6 +550,7 @@ proc peerVerificationErrors*(self: gen_qdtls_types.QDtls, ): seq[gen_qsslerror_t
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
     vx_ret[i] = gen_qsslerror_types.QSslError(h: v_outCast[i])
+  c_free(v_ma.data)
   vx_ret
 
 proc ignoreVerificationErrors*(self: gen_qdtls_types.QDtls, errorsToIgnore: seq[gen_qsslerror_types.QSslError]): void =

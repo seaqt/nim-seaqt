@@ -2,7 +2,7 @@ import ./Qt6Widgets_libs
 
 {.push raises: [].}
 
-from system/ansi_c import c_free
+from system/ansi_c import c_free, c_malloc
 
 type
   struct_miqt_string {.used.} = object
@@ -402,6 +402,7 @@ proc selectedFiles*(self: gen_qfiledialog_types.QFileDialog, ): seq[string] =
     let vx_lvx_ret = string.fromBytes(toOpenArrayByte(vx_lv_ms.data, 0, int(vx_lv_ms.len)-1))
     c_free(vx_lv_ms.data)
     vx_ret[i] = vx_lvx_ret
+  c_free(v_ma.data)
   vx_ret
 
 proc selectUrl*(self: gen_qfiledialog_types.QFileDialog, url: gen_qurl_types.QUrl): void =
@@ -413,6 +414,7 @@ proc selectedUrls*(self: gen_qfiledialog_types.QFileDialog, ): seq[gen_qurl_type
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
     vx_ret[i] = gen_qurl_types.QUrl(h: v_outCast[i])
+  c_free(v_ma.data)
   vx_ret
 
 proc setNameFilter*(self: gen_qfiledialog_types.QFileDialog, filter: string): void =
@@ -434,6 +436,7 @@ proc nameFilters*(self: gen_qfiledialog_types.QFileDialog, ): seq[string] =
     let vx_lvx_ret = string.fromBytes(toOpenArrayByte(vx_lv_ms.data, 0, int(vx_lv_ms.len)-1))
     c_free(vx_lv_ms.data)
     vx_ret[i] = vx_lvx_ret
+  c_free(v_ma.data)
   vx_ret
 
 proc selectNameFilter*(self: gen_qfiledialog_types.QFileDialog, filter: string): void =
@@ -467,6 +470,7 @@ proc mimeTypeFilters*(self: gen_qfiledialog_types.QFileDialog, ): seq[string] =
     let vx_lvx_ret = string.fromBytes(toOpenArrayByte(vx_lv_ms.data, 0, int(vx_lv_ms.len)-1))
     c_free(vx_lv_ms.data)
     vx_ret[i] = vx_lvx_ret
+  c_free(v_ma.data)
   vx_ret
 
 proc selectMimeTypeFilter*(self: gen_qfiledialog_types.QFileDialog, filter: string): void =
@@ -509,6 +513,7 @@ proc sidebarUrls*(self: gen_qfiledialog_types.QFileDialog, ): seq[gen_qurl_types
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
     vx_ret[i] = gen_qurl_types.QUrl(h: v_outCast[i])
+  c_free(v_ma.data)
   vx_ret
 
 proc saveState*(self: gen_qfiledialog_types.QFileDialog, ): seq[byte] =
@@ -545,6 +550,7 @@ proc history*(self: gen_qfiledialog_types.QFileDialog, ): seq[string] =
     let vx_lvx_ret = string.fromBytes(toOpenArrayByte(vx_lv_ms.data, 0, int(vx_lv_ms.len)-1))
     c_free(vx_lv_ms.data)
     vx_ret[i] = vx_lvx_ret
+  c_free(v_ma.data)
   vx_ret
 
 proc setItemDelegate*(self: gen_qfiledialog_types.QFileDialog, delegate: gen_qabstractitemdelegate_types.QAbstractItemDelegate): void =
@@ -584,6 +590,7 @@ proc supportedSchemes*(self: gen_qfiledialog_types.QFileDialog, ): seq[string] =
     let vx_lvx_ret = string.fromBytes(toOpenArrayByte(vx_lv_ms.data, 0, int(vx_lv_ms.len)-1))
     c_free(vx_lv_ms.data)
     vx_ret[i] = vx_lvx_ret
+  c_free(v_ma.data)
   vx_ret
 
 proc setProxyModel*(self: gen_qfiledialog_types.QFileDialog, model: gen_qabstractproxymodel_types.QAbstractProxyModel): void =
@@ -648,6 +655,7 @@ proc miqt_exec_callback_cQFileDialog_filesSelected(slot: int, files: struct_miqt
     let vfiles_lvx_ret = string.fromBytes(toOpenArrayByte(vfiles_lv_ms.data, 0, int(vfiles_lv_ms.len)-1))
     c_free(vfiles_lv_ms.data)
     vfilesx_ret[i] = vfiles_lvx_ret
+  c_free(vfiles_ma.data)
   let slotval1 = vfilesx_ret
 
   nimfunc[](slotval1)
@@ -743,6 +751,7 @@ proc miqt_exec_callback_cQFileDialog_urlsSelected(slot: int, urls: struct_miqt_a
   let vurls_outCast = cast[ptr UncheckedArray[pointer]](vurls_ma.data)
   for i in 0 ..< vurls_ma.len:
     vurlsx_ret[i] = gen_qurl_types.QUrl(h: vurls_outCast[i])
+  c_free(vurls_ma.data)
   let slotval1 = vurlsx_ret
 
   nimfunc[](slotval1)
@@ -856,6 +865,7 @@ proc getOpenFileNames*(_: type gen_qfiledialog_types.QFileDialog, ): seq[string]
     let vx_lvx_ret = string.fromBytes(toOpenArrayByte(vx_lv_ms.data, 0, int(vx_lv_ms.len)-1))
     c_free(vx_lv_ms.data)
     vx_ret[i] = vx_lvx_ret
+  c_free(v_ma.data)
   vx_ret
 
 proc getOpenFileUrls*(_: type gen_qfiledialog_types.QFileDialog, ): seq[gen_qurl_types.QUrl] =
@@ -864,6 +874,7 @@ proc getOpenFileUrls*(_: type gen_qfiledialog_types.QFileDialog, ): seq[gen_qurl
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
     vx_ret[i] = gen_qurl_types.QUrl(h: v_outCast[i])
+  c_free(v_ma.data)
   vx_ret
 
 proc saveFileContent*(_: type gen_qfiledialog_types.QFileDialog, fileContent: seq[byte], fileNameHint: string): void =
@@ -1008,6 +1019,7 @@ proc getOpenFileNames*(_: type gen_qfiledialog_types.QFileDialog, parent: gen_qw
     let vx_lvx_ret = string.fromBytes(toOpenArrayByte(vx_lv_ms.data, 0, int(vx_lv_ms.len)-1))
     c_free(vx_lv_ms.data)
     vx_ret[i] = vx_lvx_ret
+  c_free(v_ma.data)
   vx_ret
 
 proc getOpenFileNames*(_: type gen_qfiledialog_types.QFileDialog, parent: gen_qwidget_types.QWidget, caption: string): seq[string] =
@@ -1019,6 +1031,7 @@ proc getOpenFileNames*(_: type gen_qfiledialog_types.QFileDialog, parent: gen_qw
     let vx_lvx_ret = string.fromBytes(toOpenArrayByte(vx_lv_ms.data, 0, int(vx_lv_ms.len)-1))
     c_free(vx_lv_ms.data)
     vx_ret[i] = vx_lvx_ret
+  c_free(v_ma.data)
   vx_ret
 
 proc getOpenFileNames*(_: type gen_qfiledialog_types.QFileDialog, parent: gen_qwidget_types.QWidget, caption: string, dir: string): seq[string] =
@@ -1030,6 +1043,7 @@ proc getOpenFileNames*(_: type gen_qfiledialog_types.QFileDialog, parent: gen_qw
     let vx_lvx_ret = string.fromBytes(toOpenArrayByte(vx_lv_ms.data, 0, int(vx_lv_ms.len)-1))
     c_free(vx_lv_ms.data)
     vx_ret[i] = vx_lvx_ret
+  c_free(v_ma.data)
   vx_ret
 
 proc getOpenFileNames*(_: type gen_qfiledialog_types.QFileDialog, parent: gen_qwidget_types.QWidget, caption: string, dir: string, filter: string): seq[string] =
@@ -1041,6 +1055,7 @@ proc getOpenFileNames*(_: type gen_qfiledialog_types.QFileDialog, parent: gen_qw
     let vx_lvx_ret = string.fromBytes(toOpenArrayByte(vx_lv_ms.data, 0, int(vx_lv_ms.len)-1))
     c_free(vx_lv_ms.data)
     vx_ret[i] = vx_lvx_ret
+  c_free(v_ma.data)
   vx_ret
 
 proc getOpenFileUrls*(_: type gen_qfiledialog_types.QFileDialog, parent: gen_qwidget_types.QWidget): seq[gen_qurl_types.QUrl] =
@@ -1049,6 +1064,7 @@ proc getOpenFileUrls*(_: type gen_qfiledialog_types.QFileDialog, parent: gen_qwi
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
     vx_ret[i] = gen_qurl_types.QUrl(h: v_outCast[i])
+  c_free(v_ma.data)
   vx_ret
 
 proc getOpenFileUrls*(_: type gen_qfiledialog_types.QFileDialog, parent: gen_qwidget_types.QWidget, caption: string): seq[gen_qurl_types.QUrl] =
@@ -1057,6 +1073,7 @@ proc getOpenFileUrls*(_: type gen_qfiledialog_types.QFileDialog, parent: gen_qwi
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
     vx_ret[i] = gen_qurl_types.QUrl(h: v_outCast[i])
+  c_free(v_ma.data)
   vx_ret
 
 proc getOpenFileUrls*(_: type gen_qfiledialog_types.QFileDialog, parent: gen_qwidget_types.QWidget, caption: string, dir: gen_qurl_types.QUrl): seq[gen_qurl_types.QUrl] =
@@ -1065,6 +1082,7 @@ proc getOpenFileUrls*(_: type gen_qfiledialog_types.QFileDialog, parent: gen_qwi
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
     vx_ret[i] = gen_qurl_types.QUrl(h: v_outCast[i])
+  c_free(v_ma.data)
   vx_ret
 
 proc getOpenFileUrls*(_: type gen_qfiledialog_types.QFileDialog, parent: gen_qwidget_types.QWidget, caption: string, dir: gen_qurl_types.QUrl, filter: string): seq[gen_qurl_types.QUrl] =
@@ -1073,6 +1091,7 @@ proc getOpenFileUrls*(_: type gen_qfiledialog_types.QFileDialog, parent: gen_qwi
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
     vx_ret[i] = gen_qurl_types.QUrl(h: v_outCast[i])
+  c_free(v_ma.data)
   vx_ret
 
 type QFileDialogmetaObjectProc* = proc(self: QFileDialog): gen_qobjectdefs_types.QMetaObject {.raises: [], gcsafe.}

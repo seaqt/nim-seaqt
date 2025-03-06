@@ -2,7 +2,7 @@ import ./Qt6Widgets_libs
 
 {.push raises: [].}
 
-from system/ansi_c import c_free
+from system/ansi_c import c_free, c_malloc
 
 type
   struct_miqt_string {.used.} = object
@@ -212,6 +212,7 @@ proc allWidgets*(_: type gen_qapplication_types.QApplication, ): seq[gen_qwidget
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
     vx_ret[i] = gen_qwidget_types.QWidget(h: v_outCast[i])
+  c_free(v_ma.data)
   vx_ret
 
 proc topLevelWidgets*(_: type gen_qapplication_types.QApplication, ): seq[gen_qwidget_types.QWidget] =
@@ -220,6 +221,7 @@ proc topLevelWidgets*(_: type gen_qapplication_types.QApplication, ): seq[gen_qw
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
     vx_ret[i] = gen_qwidget_types.QWidget(h: v_outCast[i])
+  c_free(v_ma.data)
   vx_ret
 
 proc activePopupWidget*(_: type gen_qapplication_types.QApplication, ): gen_qwidget_types.QWidget =

@@ -2,7 +2,7 @@ import ./Qt6Multimedia_libs
 
 {.push raises: [].}
 
-from system/ansi_c import c_free
+from system/ansi_c import c_free, c_malloc
 
 type
   struct_miqt_string {.used.} = object
@@ -124,6 +124,7 @@ proc audioInputs*(_: type gen_qmediadevices_types.QMediaDevices, ): seq[gen_qaud
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
     vx_ret[i] = gen_qaudiodevice_types.QAudioDevice(h: v_outCast[i])
+  c_free(v_ma.data)
   vx_ret
 
 proc audioOutputs*(_: type gen_qmediadevices_types.QMediaDevices, ): seq[gen_qaudiodevice_types.QAudioDevice] =
@@ -132,6 +133,7 @@ proc audioOutputs*(_: type gen_qmediadevices_types.QMediaDevices, ): seq[gen_qau
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
     vx_ret[i] = gen_qaudiodevice_types.QAudioDevice(h: v_outCast[i])
+  c_free(v_ma.data)
   vx_ret
 
 proc videoInputs*(_: type gen_qmediadevices_types.QMediaDevices, ): seq[gen_qcameradevice_types.QCameraDevice] =
@@ -140,6 +142,7 @@ proc videoInputs*(_: type gen_qmediadevices_types.QMediaDevices, ): seq[gen_qcam
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
     vx_ret[i] = gen_qcameradevice_types.QCameraDevice(h: v_outCast[i])
+  c_free(v_ma.data)
   vx_ret
 
 proc defaultAudioInput*(_: type gen_qmediadevices_types.QMediaDevices, ): gen_qaudiodevice_types.QAudioDevice =

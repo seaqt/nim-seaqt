@@ -2,7 +2,7 @@ import ./Qt6Network_libs
 
 {.push raises: [].}
 
-from system/ansi_c import c_free
+from system/ansi_c import c_free, c_malloc
 
 type
   struct_miqt_string {.used.} = object
@@ -338,6 +338,7 @@ proc rawHeaderList*(self: gen_qnetworkproxy_types.QNetworkProxy, ): seq[seq[byte
     var vx_lvx_ret = @(toOpenArrayByte(vx_lv_bytearray.data, 0, int(vx_lv_bytearray.len)-1))
     c_free(vx_lv_bytearray.data)
     vx_ret[i] = vx_lvx_ret
+  c_free(v_ma.data)
   vx_ret
 
 proc rawHeader*(self: gen_qnetworkproxy_types.QNetworkProxy, headerName: seq[byte]): seq[byte] =
@@ -384,6 +385,7 @@ proc queryProxy*(self: gen_qnetworkproxy_types.QNetworkProxyFactory, query: gen_
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
     vx_ret[i] = gen_qnetworkproxy_types.QNetworkProxy(h: v_outCast[i])
+  c_free(v_ma.data)
   vx_ret
 
 proc usesSystemConfiguration*(_: type gen_qnetworkproxy_types.QNetworkProxyFactory, ): bool =
@@ -401,6 +403,7 @@ proc proxyForQuery*(_: type gen_qnetworkproxy_types.QNetworkProxyFactory, query:
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
     vx_ret[i] = gen_qnetworkproxy_types.QNetworkProxy(h: v_outCast[i])
+  c_free(v_ma.data)
   vx_ret
 
 proc systemProxyForQuery*(_: type gen_qnetworkproxy_types.QNetworkProxyFactory, ): seq[gen_qnetworkproxy_types.QNetworkProxy] =
@@ -409,6 +412,7 @@ proc systemProxyForQuery*(_: type gen_qnetworkproxy_types.QNetworkProxyFactory, 
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
     vx_ret[i] = gen_qnetworkproxy_types.QNetworkProxy(h: v_outCast[i])
+  c_free(v_ma.data)
   vx_ret
 
 proc operatorAssign*(self: gen_qnetworkproxy_types.QNetworkProxyFactory, param1: gen_qnetworkproxy_types.QNetworkProxyFactory): void =
@@ -420,6 +424,7 @@ proc systemProxyForQuery*(_: type gen_qnetworkproxy_types.QNetworkProxyFactory, 
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
     vx_ret[i] = gen_qnetworkproxy_types.QNetworkProxy(h: v_outCast[i])
+  c_free(v_ma.data)
   vx_ret
 
 type QNetworkProxyFactoryqueryProxyProc* = proc(self: QNetworkProxyFactory, query: gen_qnetworkproxy_types.QNetworkProxyQuery): seq[gen_qnetworkproxy_types.QNetworkProxy] {.raises: [], gcsafe.}
@@ -431,7 +436,7 @@ proc miqt_exec_callback_cQNetworkProxyFactory_queryProxy(vtbl: pointer, self: po
   let self = QNetworkProxyFactory(h: self)
   let slotval1 = gen_qnetworkproxy_types.QNetworkProxyQuery(h: query)
   var virtualReturn = vtbl[].queryProxy(self, slotval1)
-  var virtualReturn_CArray = newSeq[pointer](len(virtualReturn))
+  var virtualReturn_CArray = cast[ptr UncheckedArray[pointer]](if len(virtualReturn) > 0: c_malloc(c_sizet(sizeof(pointer) * len(virtualReturn))) else: nil)
   for i in 0..<len(virtualReturn):
     virtualReturn_CArray[i] = virtualReturn[i].h
 

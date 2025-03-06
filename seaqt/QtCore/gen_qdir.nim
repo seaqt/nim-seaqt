@@ -2,7 +2,7 @@ import ./Qt6Core_libs
 
 {.push raises: [].}
 
-from system/ansi_c import c_free
+from system/ansi_c import c_free, c_malloc
 
 type
   struct_miqt_string {.used.} = object
@@ -213,6 +213,7 @@ proc searchPaths*(_: type gen_qdir_types.QDir, prefix: string): seq[string] =
     let vx_lvx_ret = string.fromBytes(toOpenArrayByte(vx_lv_ms.data, 0, int(vx_lv_ms.len)-1))
     c_free(vx_lv_ms.data)
     vx_ret[i] = vx_lvx_ret
+  c_free(v_ma.data)
   vx_ret
 
 proc dirName*(self: gen_qdir_types.QDir, ): string =
@@ -266,6 +267,7 @@ proc nameFilters*(self: gen_qdir_types.QDir, ): seq[string] =
     let vx_lvx_ret = string.fromBytes(toOpenArrayByte(vx_lv_ms.data, 0, int(vx_lv_ms.len)-1))
     c_free(vx_lv_ms.data)
     vx_ret[i] = vx_lvx_ret
+  c_free(v_ma.data)
   vx_ret
 
 proc setNameFilters*(self: gen_qdir_types.QDir, nameFilters: seq[string]): void =
@@ -308,6 +310,7 @@ proc nameFiltersFromString*(_: type gen_qdir_types.QDir, nameFilter: string): se
     let vx_lvx_ret = string.fromBytes(toOpenArrayByte(vx_lv_ms.data, 0, int(vx_lv_ms.len)-1))
     c_free(vx_lv_ms.data)
     vx_ret[i] = vx_lvx_ret
+  c_free(v_ma.data)
   vx_ret
 
 proc entryList*(self: gen_qdir_types.QDir, ): seq[string] =
@@ -319,6 +322,7 @@ proc entryList*(self: gen_qdir_types.QDir, ): seq[string] =
     let vx_lvx_ret = string.fromBytes(toOpenArrayByte(vx_lv_ms.data, 0, int(vx_lv_ms.len)-1))
     c_free(vx_lv_ms.data)
     vx_ret[i] = vx_lvx_ret
+  c_free(v_ma.data)
   vx_ret
 
 proc entryList*(self: gen_qdir_types.QDir, nameFilters: seq[string]): seq[string] =
@@ -334,6 +338,7 @@ proc entryList*(self: gen_qdir_types.QDir, nameFilters: seq[string]): seq[string
     let vx_lvx_ret = string.fromBytes(toOpenArrayByte(vx_lv_ms.data, 0, int(vx_lv_ms.len)-1))
     c_free(vx_lv_ms.data)
     vx_ret[i] = vx_lvx_ret
+  c_free(v_ma.data)
   vx_ret
 
 proc entryInfoList*(self: gen_qdir_types.QDir, ): seq[gen_qfileinfo_types.QFileInfo] =
@@ -342,6 +347,7 @@ proc entryInfoList*(self: gen_qdir_types.QDir, ): seq[gen_qfileinfo_types.QFileI
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
     vx_ret[i] = gen_qfileinfo_types.QFileInfo(h: v_outCast[i])
+  c_free(v_ma.data)
   vx_ret
 
 proc entryInfoList*(self: gen_qdir_types.QDir, nameFilters: seq[string]): seq[gen_qfileinfo_types.QFileInfo] =
@@ -354,6 +360,7 @@ proc entryInfoList*(self: gen_qdir_types.QDir, nameFilters: seq[string]): seq[ge
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
     vx_ret[i] = gen_qfileinfo_types.QFileInfo(h: v_outCast[i])
+  c_free(v_ma.data)
   vx_ret
 
 proc mkdir*(self: gen_qdir_types.QDir, dirName: string): bool =
@@ -419,6 +426,7 @@ proc drives*(_: type gen_qdir_types.QDir, ): seq[gen_qfileinfo_types.QFileInfo] 
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
     vx_ret[i] = gen_qfileinfo_types.QFileInfo(h: v_outCast[i])
+  c_free(v_ma.data)
   vx_ret
 
 proc listSeparator*(_: type gen_qdir_types.QDir, ): gen_qchar_types.QChar =
@@ -497,6 +505,7 @@ proc entryList*(self: gen_qdir_types.QDir, filters: cint): seq[string] =
     let vx_lvx_ret = string.fromBytes(toOpenArrayByte(vx_lv_ms.data, 0, int(vx_lv_ms.len)-1))
     c_free(vx_lv_ms.data)
     vx_ret[i] = vx_lvx_ret
+  c_free(v_ma.data)
   vx_ret
 
 proc entryList*(self: gen_qdir_types.QDir, filters: cint, sort: cint): seq[string] =
@@ -508,6 +517,7 @@ proc entryList*(self: gen_qdir_types.QDir, filters: cint, sort: cint): seq[strin
     let vx_lvx_ret = string.fromBytes(toOpenArrayByte(vx_lv_ms.data, 0, int(vx_lv_ms.len)-1))
     c_free(vx_lv_ms.data)
     vx_ret[i] = vx_lvx_ret
+  c_free(v_ma.data)
   vx_ret
 
 proc entryList*(self: gen_qdir_types.QDir, nameFilters: seq[string], filters: cint): seq[string] =
@@ -523,6 +533,7 @@ proc entryList*(self: gen_qdir_types.QDir, nameFilters: seq[string], filters: ci
     let vx_lvx_ret = string.fromBytes(toOpenArrayByte(vx_lv_ms.data, 0, int(vx_lv_ms.len)-1))
     c_free(vx_lv_ms.data)
     vx_ret[i] = vx_lvx_ret
+  c_free(v_ma.data)
   vx_ret
 
 proc entryList*(self: gen_qdir_types.QDir, nameFilters: seq[string], filters: cint, sort: cint): seq[string] =
@@ -538,6 +549,7 @@ proc entryList*(self: gen_qdir_types.QDir, nameFilters: seq[string], filters: ci
     let vx_lvx_ret = string.fromBytes(toOpenArrayByte(vx_lv_ms.data, 0, int(vx_lv_ms.len)-1))
     c_free(vx_lv_ms.data)
     vx_ret[i] = vx_lvx_ret
+  c_free(v_ma.data)
   vx_ret
 
 proc entryInfoList*(self: gen_qdir_types.QDir, filters: cint): seq[gen_qfileinfo_types.QFileInfo] =
@@ -546,6 +558,7 @@ proc entryInfoList*(self: gen_qdir_types.QDir, filters: cint): seq[gen_qfileinfo
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
     vx_ret[i] = gen_qfileinfo_types.QFileInfo(h: v_outCast[i])
+  c_free(v_ma.data)
   vx_ret
 
 proc entryInfoList*(self: gen_qdir_types.QDir, filters: cint, sort: cint): seq[gen_qfileinfo_types.QFileInfo] =
@@ -554,6 +567,7 @@ proc entryInfoList*(self: gen_qdir_types.QDir, filters: cint, sort: cint): seq[g
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
     vx_ret[i] = gen_qfileinfo_types.QFileInfo(h: v_outCast[i])
+  c_free(v_ma.data)
   vx_ret
 
 proc entryInfoList*(self: gen_qdir_types.QDir, nameFilters: seq[string], filters: cint): seq[gen_qfileinfo_types.QFileInfo] =
@@ -566,6 +580,7 @@ proc entryInfoList*(self: gen_qdir_types.QDir, nameFilters: seq[string], filters
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
     vx_ret[i] = gen_qfileinfo_types.QFileInfo(h: v_outCast[i])
+  c_free(v_ma.data)
   vx_ret
 
 proc entryInfoList*(self: gen_qdir_types.QDir, nameFilters: seq[string], filters: cint, sort: cint): seq[gen_qfileinfo_types.QFileInfo] =
@@ -578,6 +593,7 @@ proc entryInfoList*(self: gen_qdir_types.QDir, nameFilters: seq[string], filters
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
     vx_ret[i] = gen_qfileinfo_types.QFileInfo(h: v_outCast[i])
+  c_free(v_ma.data)
   vx_ret
 
 proc create*(T: type gen_qdir_types.QDir,

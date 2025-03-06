@@ -2,7 +2,7 @@ import ./Qt6Gui_libs
 
 {.push raises: [].}
 
-from system/ansi_c import c_free
+from system/ansi_c import c_free, c_malloc
 
 type
   struct_miqt_string {.used.} = object
@@ -201,6 +201,7 @@ proc availableSizes*(self: gen_qicon_types.QIcon, ): seq[gen_qsize_types.QSize] 
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
     vx_ret[i] = gen_qsize_types.QSize(h: v_outCast[i])
+  c_free(v_ma.data)
   vx_ret
 
 proc setIsMask*(self: gen_qicon_types.QIcon, isMask: bool): void =
@@ -227,6 +228,7 @@ proc themeSearchPaths*(_: type gen_qicon_types.QIcon, ): seq[string] =
     let vx_lvx_ret = string.fromBytes(toOpenArrayByte(vx_lv_ms.data, 0, int(vx_lv_ms.len)-1))
     c_free(vx_lv_ms.data)
     vx_ret[i] = vx_lvx_ret
+  c_free(v_ma.data)
   vx_ret
 
 proc setThemeSearchPaths*(_: type gen_qicon_types.QIcon, searchpath: seq[string]): void =
@@ -245,6 +247,7 @@ proc fallbackSearchPaths*(_: type gen_qicon_types.QIcon, ): seq[string] =
     let vx_lvx_ret = string.fromBytes(toOpenArrayByte(vx_lv_ms.data, 0, int(vx_lv_ms.len)-1))
     c_free(vx_lv_ms.data)
     vx_ret[i] = vx_lvx_ret
+  c_free(v_ma.data)
   vx_ret
 
 proc setFallbackSearchPaths*(_: type gen_qicon_types.QIcon, paths: seq[string]): void =
@@ -353,6 +356,7 @@ proc availableSizes*(self: gen_qicon_types.QIcon, mode: cint): seq[gen_qsize_typ
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
     vx_ret[i] = gen_qsize_types.QSize(h: v_outCast[i])
+  c_free(v_ma.data)
   vx_ret
 
 proc availableSizes*(self: gen_qicon_types.QIcon, mode: cint, state: cint): seq[gen_qsize_types.QSize] =
@@ -361,6 +365,7 @@ proc availableSizes*(self: gen_qicon_types.QIcon, mode: cint, state: cint): seq[
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
     vx_ret[i] = gen_qsize_types.QSize(h: v_outCast[i])
+  c_free(v_ma.data)
   vx_ret
 
 proc create*(T: type gen_qicon_types.QIcon): gen_qicon_types.QIcon =

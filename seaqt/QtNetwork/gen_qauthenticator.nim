@@ -2,7 +2,7 @@ import ./Qt6Network_libs
 
 {.push raises: [].}
 
-from system/ansi_c import c_free
+from system/ansi_c import c_free, c_malloc
 
 type
   struct_miqt_string {.used.} = object
@@ -116,6 +116,8 @@ proc options*(self: gen_qauthenticator_types.QAuthenticator, ): Table[string,gen
     var v_entry_Value = gen_qvariant_types.QVariant(h: v_Values[i])
 
     vx_ret[v_entry_Key] = v_entry_Value
+  c_free(v_mm.keys)
+  c_free(v_mm.values)
   vx_ret
 
 proc setOption*(self: gen_qauthenticator_types.QAuthenticator, opt: string, value: gen_qvariant_types.QVariant): void =

@@ -36,8 +36,10 @@ public:
 
 
 		QSize* callback_return_value = vtbl->sizeHint(vtbl, this);
+		auto callback_return_value_Value = std::move(*callback_return_value);
+		delete callback_return_value;
 
-		return *callback_return_value;
+		return callback_return_value_Value;
 	}
 
 	// Subclass to allow providing a Go implementation
@@ -48,8 +50,10 @@ public:
 
 
 		QSize* callback_return_value = vtbl->minimumSize(vtbl, this);
+		auto callback_return_value_Value = std::move(*callback_return_value);
+		delete callback_return_value;
 
-		return *callback_return_value;
+		return callback_return_value_Value;
 	}
 
 	// Subclass to allow providing a Go implementation
@@ -60,8 +64,10 @@ public:
 
 
 		QSize* callback_return_value = vtbl->maximumSize(vtbl, this);
+		auto callback_return_value_Value = std::move(*callback_return_value);
+		delete callback_return_value;
 
-		return *callback_return_value;
+		return callback_return_value_Value;
 	}
 
 	// Subclass to allow providing a Go implementation
@@ -98,8 +104,10 @@ public:
 
 
 		QRect* callback_return_value = vtbl->geometry(vtbl, this);
+		auto callback_return_value_Value = std::move(*callback_return_value);
+		delete callback_return_value;
 
-		return *callback_return_value;
+		return callback_return_value_Value;
 	}
 
 	// Subclass to allow providing a Go implementation
@@ -385,8 +393,10 @@ public:
 
 
 		QSize* callback_return_value = vtbl->sizeHint(vtbl, this);
+		auto callback_return_value_Value = std::move(*callback_return_value);
+		delete callback_return_value;
 
-		return *callback_return_value;
+		return callback_return_value_Value;
 	}
 
 	friend QSize* QSpacerItem_virtualbase_sizeHint(const void* self);
@@ -399,8 +409,10 @@ public:
 
 
 		QSize* callback_return_value = vtbl->minimumSize(vtbl, this);
+		auto callback_return_value_Value = std::move(*callback_return_value);
+		delete callback_return_value;
 
-		return *callback_return_value;
+		return callback_return_value_Value;
 	}
 
 	friend QSize* QSpacerItem_virtualbase_minimumSize(const void* self);
@@ -413,8 +425,10 @@ public:
 
 
 		QSize* callback_return_value = vtbl->maximumSize(vtbl, this);
+		auto callback_return_value_Value = std::move(*callback_return_value);
+		delete callback_return_value;
 
-		return *callback_return_value;
+		return callback_return_value_Value;
 	}
 
 	friend QSize* QSpacerItem_virtualbase_maximumSize(const void* self);
@@ -472,8 +486,10 @@ public:
 
 
 		QRect* callback_return_value = vtbl->geometry(vtbl, this);
+		auto callback_return_value_Value = std::move(*callback_return_value);
+		delete callback_return_value;
 
-		return *callback_return_value;
+		return callback_return_value_Value;
 	}
 
 	friend QRect* QSpacerItem_virtualbase_geometry(const void* self);
@@ -775,8 +791,10 @@ public:
 
 
 		QSize* callback_return_value = vtbl->sizeHint(vtbl, this);
+		auto callback_return_value_Value = std::move(*callback_return_value);
+		delete callback_return_value;
 
-		return *callback_return_value;
+		return callback_return_value_Value;
 	}
 
 	friend QSize* QWidgetItem_virtualbase_sizeHint(const void* self);
@@ -789,8 +807,10 @@ public:
 
 
 		QSize* callback_return_value = vtbl->minimumSize(vtbl, this);
+		auto callback_return_value_Value = std::move(*callback_return_value);
+		delete callback_return_value;
 
-		return *callback_return_value;
+		return callback_return_value_Value;
 	}
 
 	friend QSize* QWidgetItem_virtualbase_minimumSize(const void* self);
@@ -803,8 +823,10 @@ public:
 
 
 		QSize* callback_return_value = vtbl->maximumSize(vtbl, this);
+		auto callback_return_value_Value = std::move(*callback_return_value);
+		delete callback_return_value;
 
-		return *callback_return_value;
+		return callback_return_value_Value;
 	}
 
 	friend QSize* QWidgetItem_virtualbase_maximumSize(const void* self);
@@ -862,8 +884,10 @@ public:
 
 
 		QRect* callback_return_value = vtbl->geometry(vtbl, this);
+		auto callback_return_value_Value = std::move(*callback_return_value);
+		delete callback_return_value;
 
-		return *callback_return_value;
+		return callback_return_value_Value;
 	}
 
 	friend QRect* QWidgetItem_virtualbase_geometry(const void* self);
@@ -1154,8 +1178,10 @@ public:
 
 
 		QSize* callback_return_value = vtbl->sizeHint(vtbl, this);
+		auto callback_return_value_Value = std::move(*callback_return_value);
+		delete callback_return_value;
 
-		return *callback_return_value;
+		return callback_return_value_Value;
 	}
 
 	friend QSize* QWidgetItemV2_virtualbase_sizeHint(const void* self);
@@ -1168,8 +1194,10 @@ public:
 
 
 		QSize* callback_return_value = vtbl->minimumSize(vtbl, this);
+		auto callback_return_value_Value = std::move(*callback_return_value);
+		delete callback_return_value;
 
-		return *callback_return_value;
+		return callback_return_value_Value;
 	}
 
 	friend QSize* QWidgetItemV2_virtualbase_minimumSize(const void* self);
@@ -1182,8 +1210,10 @@ public:
 
 
 		QSize* callback_return_value = vtbl->maximumSize(vtbl, this);
+		auto callback_return_value_Value = std::move(*callback_return_value);
+		delete callback_return_value;
 
-		return *callback_return_value;
+		return callback_return_value_Value;
 	}
 
 	friend QSize* QWidgetItemV2_virtualbase_maximumSize(const void* self);
@@ -1256,8 +1286,10 @@ public:
 
 
 		QRect* callback_return_value = vtbl->geometry(vtbl, this);
+		auto callback_return_value_Value = std::move(*callback_return_value);
+		delete callback_return_value;
 
-		return *callback_return_value;
+		return callback_return_value_Value;
 	}
 
 	friend QRect* QWidgetItemV2_virtualbase_geometry(const void* self);

@@ -2,7 +2,7 @@ import ./Qt6Gui_libs
 
 {.push raises: [].}
 
-from system/ansi_c import c_free
+from system/ansi_c import c_free, c_malloc
 
 type
   struct_miqt_string {.used.} = object
@@ -150,6 +150,7 @@ proc supportedSubTypes*(self: gen_qimagewriter_types.QImageWriter, ): seq[seq[by
     var vx_lvx_ret = @(toOpenArrayByte(vx_lv_bytearray.data, 0, int(vx_lv_bytearray.len)-1))
     c_free(vx_lv_bytearray.data)
     vx_ret[i] = vx_lvx_ret
+  c_free(v_ma.data)
   vx_ret
 
 proc setOptimizedWrite*(self: gen_qimagewriter_types.QImageWriter, optimize: bool): void =
@@ -200,6 +201,7 @@ proc supportedImageFormats*(_: type gen_qimagewriter_types.QImageWriter, ): seq[
     var vx_lvx_ret = @(toOpenArrayByte(vx_lv_bytearray.data, 0, int(vx_lv_bytearray.len)-1))
     c_free(vx_lv_bytearray.data)
     vx_ret[i] = vx_lvx_ret
+  c_free(v_ma.data)
   vx_ret
 
 proc supportedMimeTypes*(_: type gen_qimagewriter_types.QImageWriter, ): seq[seq[byte]] =
@@ -211,6 +213,7 @@ proc supportedMimeTypes*(_: type gen_qimagewriter_types.QImageWriter, ): seq[seq
     var vx_lvx_ret = @(toOpenArrayByte(vx_lv_bytearray.data, 0, int(vx_lv_bytearray.len)-1))
     c_free(vx_lv_bytearray.data)
     vx_ret[i] = vx_lvx_ret
+  c_free(v_ma.data)
   vx_ret
 
 proc imageFormatsForMimeType*(_: type gen_qimagewriter_types.QImageWriter, mimeType: seq[byte]): seq[seq[byte]] =
@@ -222,6 +225,7 @@ proc imageFormatsForMimeType*(_: type gen_qimagewriter_types.QImageWriter, mimeT
     var vx_lvx_ret = @(toOpenArrayByte(vx_lv_bytearray.data, 0, int(vx_lv_bytearray.len)-1))
     c_free(vx_lv_bytearray.data)
     vx_ret[i] = vx_lvx_ret
+  c_free(v_ma.data)
   vx_ret
 
 proc tr*(_: type gen_qimagewriter_types.QImageWriter, sourceText: cstring, disambiguation: cstring): string =

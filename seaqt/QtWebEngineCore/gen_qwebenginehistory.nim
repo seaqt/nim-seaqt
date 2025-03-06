@@ -2,7 +2,7 @@ import ./Qt6WebEngineCore_libs
 
 {.push raises: [].}
 
-from system/ansi_c import c_free
+from system/ansi_c import c_free, c_malloc
 
 type
   struct_miqt_string {.used.} = object
@@ -211,6 +211,8 @@ proc roleNames*(self: gen_qwebenginehistory_types.QWebEngineHistoryModel, ): Tab
     var v_entry_Value = vx_hashvalx_ret
 
     vx_ret[v_entry_Key] = v_entry_Value
+  c_free(v_mm.keys)
+  c_free(v_mm.values)
   vx_ret
 
 proc reset*(self: gen_qwebenginehistory_types.QWebEngineHistoryModel, ): void =
@@ -303,6 +305,7 @@ proc persistentIndexList*(self: gen_qwebenginehistory_types.QWebEngineHistoryMod
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
     vx_ret[i] = gen_qabstractitemmodel_types.QModelIndex(h: v_outCast[i])
+  c_free(v_ma.data)
   vx_ret
 
 proc sender*(self: gen_qwebenginehistory_types.QWebEngineHistoryModel, ): gen_qobject_types.QObject =
@@ -343,6 +346,7 @@ proc items*(self: gen_qwebenginehistory_types.QWebEngineHistory, ): seq[gen_qweb
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
     vx_ret[i] = gen_qwebenginehistory_types.QWebEngineHistoryItem(h: v_outCast[i])
+  c_free(v_ma.data)
   vx_ret
 
 proc backItems*(self: gen_qwebenginehistory_types.QWebEngineHistory, maxItems: cint): seq[gen_qwebenginehistory_types.QWebEngineHistoryItem] =
@@ -351,6 +355,7 @@ proc backItems*(self: gen_qwebenginehistory_types.QWebEngineHistory, maxItems: c
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
     vx_ret[i] = gen_qwebenginehistory_types.QWebEngineHistoryItem(h: v_outCast[i])
+  c_free(v_ma.data)
   vx_ret
 
 proc forwardItems*(self: gen_qwebenginehistory_types.QWebEngineHistory, maxItems: cint): seq[gen_qwebenginehistory_types.QWebEngineHistoryItem] =
@@ -359,6 +364,7 @@ proc forwardItems*(self: gen_qwebenginehistory_types.QWebEngineHistory, maxItems
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
     vx_ret[i] = gen_qwebenginehistory_types.QWebEngineHistoryItem(h: v_outCast[i])
+  c_free(v_ma.data)
   vx_ret
 
 proc canGoBack*(self: gen_qwebenginehistory_types.QWebEngineHistory, ): bool =

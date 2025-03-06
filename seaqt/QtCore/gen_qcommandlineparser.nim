@@ -2,7 +2,7 @@ import ./Qt6Core_libs
 
 {.push raises: [].}
 
-from system/ansi_c import c_free
+from system/ansi_c import c_free, c_malloc
 
 type
   struct_miqt_string {.used.} = object
@@ -174,6 +174,7 @@ proc values*(self: gen_qcommandlineparser_types.QCommandLineParser, name: string
     let vx_lvx_ret = string.fromBytes(toOpenArrayByte(vx_lv_ms.data, 0, int(vx_lv_ms.len)-1))
     c_free(vx_lv_ms.data)
     vx_ret[i] = vx_lvx_ret
+  c_free(v_ma.data)
   vx_ret
 
 proc isSet*(self: gen_qcommandlineparser_types.QCommandLineParser, option: gen_qcommandlineoption_types.QCommandLineOption): bool =
@@ -194,6 +195,7 @@ proc values*(self: gen_qcommandlineparser_types.QCommandLineParser, option: gen_
     let vx_lvx_ret = string.fromBytes(toOpenArrayByte(vx_lv_ms.data, 0, int(vx_lv_ms.len)-1))
     c_free(vx_lv_ms.data)
     vx_ret[i] = vx_lvx_ret
+  c_free(v_ma.data)
   vx_ret
 
 proc positionalArguments*(self: gen_qcommandlineparser_types.QCommandLineParser, ): seq[string] =
@@ -205,6 +207,7 @@ proc positionalArguments*(self: gen_qcommandlineparser_types.QCommandLineParser,
     let vx_lvx_ret = string.fromBytes(toOpenArrayByte(vx_lv_ms.data, 0, int(vx_lv_ms.len)-1))
     c_free(vx_lv_ms.data)
     vx_ret[i] = vx_lvx_ret
+  c_free(v_ma.data)
   vx_ret
 
 proc optionNames*(self: gen_qcommandlineparser_types.QCommandLineParser, ): seq[string] =
@@ -216,6 +219,7 @@ proc optionNames*(self: gen_qcommandlineparser_types.QCommandLineParser, ): seq[
     let vx_lvx_ret = string.fromBytes(toOpenArrayByte(vx_lv_ms.data, 0, int(vx_lv_ms.len)-1))
     c_free(vx_lv_ms.data)
     vx_ret[i] = vx_lvx_ret
+  c_free(v_ma.data)
   vx_ret
 
 proc unknownOptionNames*(self: gen_qcommandlineparser_types.QCommandLineParser, ): seq[string] =
@@ -227,6 +231,7 @@ proc unknownOptionNames*(self: gen_qcommandlineparser_types.QCommandLineParser, 
     let vx_lvx_ret = string.fromBytes(toOpenArrayByte(vx_lv_ms.data, 0, int(vx_lv_ms.len)-1))
     c_free(vx_lv_ms.data)
     vx_ret[i] = vx_lvx_ret
+  c_free(v_ma.data)
   vx_ret
 
 proc showVersion*(self: gen_qcommandlineparser_types.QCommandLineParser, ): void =

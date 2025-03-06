@@ -32,8 +32,10 @@ public:
 		int sigval2 = static_cast<int>(type_ret);
 
 		QUrl* callback_return_value = vtbl->intercept(vtbl, this, sigval1, sigval2);
+		auto callback_return_value_Value = std::move(*callback_return_value);
+		delete callback_return_value;
 
-		return *callback_return_value;
+		return callback_return_value_Value;
 	}
 
 };

@@ -2,7 +2,7 @@ import ./Qt6Widgets_libs
 
 {.push raises: [].}
 
-from system/ansi_c import c_free
+from system/ansi_c import c_free, c_malloc
 
 type
   struct_miqt_string {.used.} = object
@@ -1840,6 +1840,7 @@ proc gestures*(self: gen_qgesture_types.QGestureEvent, ): seq[gen_qgesture_types
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
     vx_ret[i] = gen_qgesture_types.QGesture(h: v_outCast[i])
+  c_free(v_ma.data)
   vx_ret
 
 proc gesture*(self: gen_qgesture_types.QGestureEvent, typeVal: cint): gen_qgesture_types.QGesture =
@@ -1851,6 +1852,7 @@ proc activeGestures*(self: gen_qgesture_types.QGestureEvent, ): seq[gen_qgesture
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
     vx_ret[i] = gen_qgesture_types.QGesture(h: v_outCast[i])
+  c_free(v_ma.data)
   vx_ret
 
 proc canceledGestures*(self: gen_qgesture_types.QGestureEvent, ): seq[gen_qgesture_types.QGesture] =
@@ -1859,6 +1861,7 @@ proc canceledGestures*(self: gen_qgesture_types.QGestureEvent, ): seq[gen_qgestu
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
     vx_ret[i] = gen_qgesture_types.QGesture(h: v_outCast[i])
+  c_free(v_ma.data)
   vx_ret
 
 proc setAccepted*(self: gen_qgesture_types.QGestureEvent, param1: gen_qgesture_types.QGesture, param2: bool): void =

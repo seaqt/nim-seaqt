@@ -2,7 +2,7 @@ import ./Qt6Network_libs
 
 {.push raises: [].}
 
-from system/ansi_c import c_free
+from system/ansi_c import c_free, c_malloc
 
 type
   struct_miqt_string {.used.} = object
@@ -131,6 +131,7 @@ proc cookiesForUrl*(self: gen_qnetworkcookiejar_types.QNetworkCookieJar, url: ge
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
     vx_ret[i] = gen_qnetworkcookie_types.QNetworkCookie(h: v_outCast[i])
+  c_free(v_ma.data)
   vx_ret
 
 proc setCookiesFromUrl*(self: gen_qnetworkcookiejar_types.QNetworkCookieJar, cookieList: seq[gen_qnetworkcookie_types.QNetworkCookie], url: gen_qurl_types.QUrl): bool =
@@ -232,6 +233,7 @@ proc QNetworkCookieJarcookiesForUrl*(self: gen_qnetworkcookiejar_types.QNetworkC
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
     vx_ret[i] = gen_qnetworkcookie_types.QNetworkCookie(h: v_outCast[i])
+  c_free(v_ma.data)
   vx_ret
 
 proc miqt_exec_callback_cQNetworkCookieJar_cookiesForUrl(vtbl: pointer, self: pointer, url: pointer): struct_miqt_array {.cdecl.} =
@@ -239,7 +241,7 @@ proc miqt_exec_callback_cQNetworkCookieJar_cookiesForUrl(vtbl: pointer, self: po
   let self = QNetworkCookieJar(h: self)
   let slotval1 = gen_qurl_types.QUrl(h: url)
   var virtualReturn = vtbl[].cookiesForUrl(self, slotval1)
-  var virtualReturn_CArray = newSeq[pointer](len(virtualReturn))
+  var virtualReturn_CArray = cast[ptr UncheckedArray[pointer]](if len(virtualReturn) > 0: c_malloc(c_sizet(sizeof(pointer) * len(virtualReturn))) else: nil)
   for i in 0..<len(virtualReturn):
     virtualReturn_CArray[i] = virtualReturn[i].h
 
@@ -260,6 +262,7 @@ proc miqt_exec_callback_cQNetworkCookieJar_setCookiesFromUrl(vtbl: pointer, self
   let vcookieList_outCast = cast[ptr UncheckedArray[pointer]](vcookieList_ma.data)
   for i in 0 ..< vcookieList_ma.len:
     vcookieListx_ret[i] = gen_qnetworkcookie_types.QNetworkCookie(h: vcookieList_outCast[i])
+  c_free(vcookieList_ma.data)
   let slotval1 = vcookieListx_ret
   let slotval2 = gen_qurl_types.QUrl(h: url)
   var virtualReturn = vtbl[].setCookiesFromUrl(self, slotval1, slotval2)
@@ -378,6 +381,7 @@ proc allCookies*(self: gen_qnetworkcookiejar_types.QNetworkCookieJar, ): seq[gen
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
     vx_ret[i] = gen_qnetworkcookie_types.QNetworkCookie(h: v_outCast[i])
+  c_free(v_ma.data)
   vx_ret
 
 proc setAllCookies*(self: gen_qnetworkcookiejar_types.QNetworkCookieJar, cookieList: seq[gen_qnetworkcookie_types.QNetworkCookie]): void =

@@ -140,8 +140,10 @@ public:
 		int sigval1 = role;
 
 		QVariant* callback_return_value = vtbl->data(vtbl, this, sigval1);
+		auto callback_return_value_Value = std::move(*callback_return_value);
+		delete callback_return_value;
 
-		return *callback_return_value;
+		return callback_return_value_Value;
 	}
 
 	friend QVariant* QTableWidgetItem_virtualbase_data(const void* self, int role);
@@ -565,8 +567,10 @@ public:
 		struct miqt_string* callback_return_value_arr = static_cast<struct miqt_string*>(callback_return_value.data);
 		for(size_t i = 0; i < callback_return_value.len; ++i) {
 			QString callback_return_value_arr_i_QString = QString::fromUtf8(callback_return_value_arr[i].data, callback_return_value_arr[i].len);
+			free(callback_return_value_arr[i].data);
 			callback_return_value_QList.push_back(callback_return_value_arr_i_QString);
 		}
+		free(callback_return_value.data);
 
 		return callback_return_value_QList;
 	}
@@ -702,8 +706,10 @@ public:
 		QModelIndex* sigval1 = const_cast<QModelIndex*>(&index_ret);
 
 		QRect* callback_return_value = vtbl->visualRect(vtbl, this, sigval1);
+		auto callback_return_value_Value = std::move(*callback_return_value);
+		delete callback_return_value;
 
-		return *callback_return_value;
+		return callback_return_value_Value;
 	}
 
 	friend QRect* QTableWidget_virtualbase_visualRect(const void* self, QModelIndex* index);
@@ -738,8 +744,10 @@ public:
 		QPoint* sigval1 = const_cast<QPoint*>(&p_ret);
 
 		QModelIndex* callback_return_value = vtbl->indexAt(vtbl, this, sigval1);
+		auto callback_return_value_Value = std::move(*callback_return_value);
+		delete callback_return_value;
 
-		return *callback_return_value;
+		return callback_return_value_Value;
 	}
 
 	friend QModelIndex* QTableWidget_virtualbase_indexAt(const void* self, QPoint* p);
@@ -845,8 +853,10 @@ public:
 		int sigval2 = static_cast<int>(modifiers_ret);
 
 		QModelIndex* callback_return_value = vtbl->moveCursor(vtbl, this, sigval1, sigval2);
+		auto callback_return_value_Value = std::move(*callback_return_value);
+		delete callback_return_value;
 
-		return *callback_return_value;
+		return callback_return_value_Value;
 	}
 
 	friend QModelIndex* QTableWidget_virtualbase_moveCursor(void* self, int cursorAction, int modifiers);
@@ -881,8 +891,10 @@ public:
 		QItemSelection* sigval1 = const_cast<QItemSelection*>(&selection_ret);
 
 		QRegion* callback_return_value = vtbl->visualRegionForSelection(vtbl, this, sigval1);
+		auto callback_return_value_Value = std::move(*callback_return_value);
+		delete callback_return_value;
 
-		return *callback_return_value;
+		return callback_return_value_Value;
 	}
 
 	friend QRegion* QTableWidget_virtualbase_visualRegionForSelection(const void* self, QItemSelection* selection);
@@ -901,6 +913,7 @@ public:
 		for(size_t i = 0; i < callback_return_value.len; ++i) {
 			callback_return_value_QList.push_back(*(callback_return_value_arr[i]));
 		}
+		free(callback_return_value.data);
 
 		return callback_return_value_QList;
 	}
@@ -929,8 +942,10 @@ public:
 
 
 		QSize* callback_return_value = vtbl->viewportSizeHint(vtbl, this);
+		auto callback_return_value_Value = std::move(*callback_return_value);
+		delete callback_return_value;
 
-		return *callback_return_value;
+		return callback_return_value_Value;
 	}
 
 	friend QSize* QTableWidget_virtualbase_viewportSizeHint(const void* self);
@@ -1101,8 +1116,10 @@ public:
 		int sigval1 = static_cast<int>(query_ret);
 
 		QVariant* callback_return_value = vtbl->inputMethodQuery(vtbl, this, sigval1);
+		auto callback_return_value_Value = std::move(*callback_return_value);
+		delete callback_return_value;
 
-		return *callback_return_value;
+		return callback_return_value_Value;
 	}
 
 	friend QVariant* QTableWidget_virtualbase_inputMethodQuery(const void* self, int query);
@@ -1596,8 +1613,10 @@ public:
 
 
 		QSize* callback_return_value = vtbl->minimumSizeHint(vtbl, this);
+		auto callback_return_value_Value = std::move(*callback_return_value);
+		delete callback_return_value;
 
-		return *callback_return_value;
+		return callback_return_value_Value;
 	}
 
 	friend QSize* QTableWidget_virtualbase_minimumSizeHint(const void* self);
@@ -1610,8 +1629,10 @@ public:
 
 
 		QSize* callback_return_value = vtbl->sizeHint(vtbl, this);
+		auto callback_return_value_Value = std::move(*callback_return_value);
+		delete callback_return_value;
 
-		return *callback_return_value;
+		return callback_return_value_Value;
 	}
 
 	friend QSize* QTableWidget_virtualbase_sizeHint(const void* self);

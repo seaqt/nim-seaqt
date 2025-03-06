@@ -2,7 +2,7 @@ import ./Qt6Widgets_libs
 
 {.push raises: [].}
 
-from system/ansi_c import c_free
+from system/ansi_c import c_free, c_malloc
 
 type
   struct_miqt_string {.used.} = object
@@ -286,6 +286,7 @@ proc splitPath*(self: gen_qcompleter_types.QCompleter, path: string): seq[string
     let vx_lvx_ret = string.fromBytes(toOpenArrayByte(vx_lv_ms.data, 0, int(vx_lv_ms.len)-1))
     c_free(vx_lv_ms.data)
     vx_ret[i] = vx_lvx_ret
+  c_free(v_ma.data)
   vx_ret
 
 proc activated*(self: gen_qcompleter_types.QCompleter, text: string): void =
@@ -457,7 +458,9 @@ proc miqt_exec_callback_cQCompleter_pathFromIndex(vtbl: pointer, self: pointer, 
   let self = QCompleter(h: self)
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index)
   var virtualReturn = vtbl[].pathFromIndex(self, slotval1)
-  struct_miqt_string(data: virtualReturn, len: csize_t(len(virtualReturn)))
+  var virtualReturn_copy = cast[cstring](if len(virtualReturn) > 0: c_malloc(csize_t(len(virtualReturn))) else: nil)
+  if len(virtualReturn) > 0: copyMem(cast[pointer](virtualReturn_copy), addr virtualReturn[0], csize_t(len(virtualReturn)))
+  struct_miqt_string(data: virtualReturn_copy, len: csize_t(len(virtualReturn)))
 
 proc QCompletersplitPath*(self: gen_qcompleter_types.QCompleter, path: string): seq[string] =
   var v_ma = fcQCompleter_virtualbase_splitPath(self.h, struct_miqt_string(data: path, len: csize_t(len(path))))
@@ -468,6 +471,7 @@ proc QCompletersplitPath*(self: gen_qcompleter_types.QCompleter, path: string): 
     let vx_lvx_ret = string.fromBytes(toOpenArrayByte(vx_lv_ms.data, 0, int(vx_lv_ms.len)-1))
     c_free(vx_lv_ms.data)
     vx_ret[i] = vx_lvx_ret
+  c_free(v_ma.data)
   vx_ret
 
 proc miqt_exec_callback_cQCompleter_splitPath(vtbl: pointer, self: pointer, path: struct_miqt_string): struct_miqt_array {.cdecl.} =
@@ -478,9 +482,11 @@ proc miqt_exec_callback_cQCompleter_splitPath(vtbl: pointer, self: pointer, path
   c_free(vpath_ms.data)
   let slotval1 = vpathx_ret
   var virtualReturn = vtbl[].splitPath(self, slotval1)
-  var virtualReturn_CArray = newSeq[struct_miqt_string](len(virtualReturn))
+  var virtualReturn_CArray = cast[ptr UncheckedArray[struct_miqt_string]](if len(virtualReturn) > 0: c_malloc(c_sizet(sizeof(struct_miqt_string) * len(virtualReturn))) else: nil)
   for i in 0..<len(virtualReturn):
-    virtualReturn_CArray[i] = struct_miqt_string(data: virtualReturn[i], len: csize_t(len(virtualReturn[i])))
+    var virtualReturn_i_copy = cast[cstring](if len(virtualReturn[i]) > 0: c_malloc(csize_t(len(virtualReturn[i]))) else: nil)
+    if len(virtualReturn[i]) > 0: copyMem(cast[pointer](virtualReturn_i_copy), addr virtualReturn[i][0], csize_t(len(virtualReturn[i])))
+    virtualReturn_CArray[i] = struct_miqt_string(data: virtualReturn_i_copy, len: csize_t(len(virtualReturn[i])))
 
   struct_miqt_array(len: csize_t(len(virtualReturn)), data: if len(virtualReturn) == 0: nil else: addr(virtualReturn_CArray[0]))
 

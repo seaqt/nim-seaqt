@@ -2,7 +2,7 @@ import ./Qt6Multimedia_libs
 
 {.push raises: [].}
 
-from system/ansi_c import c_free
+from system/ansi_c import c_free, c_malloc
 
 type
   struct_miqt_string {.used.} = object
@@ -151,6 +151,7 @@ proc photoResolutions*(self: gen_qcameradevice_types.QCameraDevice, ): seq[gen_q
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
     vx_ret[i] = gen_qsize_types.QSize(h: v_outCast[i])
+  c_free(v_ma.data)
   vx_ret
 
 proc videoFormats*(self: gen_qcameradevice_types.QCameraDevice, ): seq[gen_qcameradevice_types.QCameraFormat] =
@@ -159,6 +160,7 @@ proc videoFormats*(self: gen_qcameradevice_types.QCameraDevice, ): seq[gen_qcame
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
     vx_ret[i] = gen_qcameradevice_types.QCameraFormat(h: v_outCast[i])
+  c_free(v_ma.data)
   vx_ret
 
 proc create*(T: type gen_qcameradevice_types.QCameraDevice): gen_qcameradevice_types.QCameraDevice =

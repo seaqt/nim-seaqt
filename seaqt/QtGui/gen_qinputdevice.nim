@@ -2,7 +2,7 @@ import ./Qt6Gui_libs
 
 {.push raises: [].}
 
-from system/ansi_c import c_free
+from system/ansi_c import c_free, c_malloc
 
 type
   struct_miqt_string {.used.} = object
@@ -188,6 +188,7 @@ proc seatNames*(_: type gen_qinputdevice_types.QInputDevice, ): seq[string] =
     let vx_lvx_ret = string.fromBytes(toOpenArrayByte(vx_lv_ms.data, 0, int(vx_lv_ms.len)-1))
     c_free(vx_lv_ms.data)
     vx_ret[i] = vx_lvx_ret
+  c_free(v_ma.data)
   vx_ret
 
 proc devices*(_: type gen_qinputdevice_types.QInputDevice, ): seq[gen_qinputdevice_types.QInputDevice] =
@@ -196,6 +197,7 @@ proc devices*(_: type gen_qinputdevice_types.QInputDevice, ): seq[gen_qinputdevi
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
     vx_ret[i] = gen_qinputdevice_types.QInputDevice(h: v_outCast[i])
+  c_free(v_ma.data)
   vx_ret
 
 proc primaryKeyboard*(_: type gen_qinputdevice_types.QInputDevice, ): gen_qinputdevice_types.QInputDevice =

@@ -2,7 +2,7 @@ import ./Qt6Widgets_libs
 
 {.push raises: [].}
 
-from system/ansi_c import c_free
+from system/ansi_c import c_free, c_malloc
 
 type
   struct_miqt_string {.used.} = object
@@ -359,6 +359,7 @@ proc items*(self: gen_qgraphicsscene_types.QGraphicsScene, ): seq[gen_qgraphicsi
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
     vx_ret[i] = gen_qgraphicsitem_types.QGraphicsItem(h: v_outCast[i])
+  c_free(v_ma.data)
   vx_ret
 
 proc items*(self: gen_qgraphicsscene_types.QGraphicsScene, pos: gen_qpoint_types.QPointF): seq[gen_qgraphicsitem_types.QGraphicsItem] =
@@ -367,6 +368,7 @@ proc items*(self: gen_qgraphicsscene_types.QGraphicsScene, pos: gen_qpoint_types
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
     vx_ret[i] = gen_qgraphicsitem_types.QGraphicsItem(h: v_outCast[i])
+  c_free(v_ma.data)
   vx_ret
 
 proc items*(self: gen_qgraphicsscene_types.QGraphicsScene, rect: gen_qrect_types.QRectF): seq[gen_qgraphicsitem_types.QGraphicsItem] =
@@ -375,6 +377,7 @@ proc items*(self: gen_qgraphicsscene_types.QGraphicsScene, rect: gen_qrect_types
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
     vx_ret[i] = gen_qgraphicsitem_types.QGraphicsItem(h: v_outCast[i])
+  c_free(v_ma.data)
   vx_ret
 
 proc items*(self: gen_qgraphicsscene_types.QGraphicsScene, path: gen_qpainterpath_types.QPainterPath): seq[gen_qgraphicsitem_types.QGraphicsItem] =
@@ -383,6 +386,7 @@ proc items*(self: gen_qgraphicsscene_types.QGraphicsScene, path: gen_qpainterpat
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
     vx_ret[i] = gen_qgraphicsitem_types.QGraphicsItem(h: v_outCast[i])
+  c_free(v_ma.data)
   vx_ret
 
 proc items*(self: gen_qgraphicsscene_types.QGraphicsScene, x: float64, y: float64, w: float64, h: float64, mode: cint, order: cint): seq[gen_qgraphicsitem_types.QGraphicsItem] =
@@ -391,6 +395,7 @@ proc items*(self: gen_qgraphicsscene_types.QGraphicsScene, x: float64, y: float6
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
     vx_ret[i] = gen_qgraphicsitem_types.QGraphicsItem(h: v_outCast[i])
+  c_free(v_ma.data)
   vx_ret
 
 proc collidingItems*(self: gen_qgraphicsscene_types.QGraphicsScene, item: gen_qgraphicsitem_types.QGraphicsItem): seq[gen_qgraphicsitem_types.QGraphicsItem] =
@@ -399,6 +404,7 @@ proc collidingItems*(self: gen_qgraphicsscene_types.QGraphicsScene, item: gen_qg
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
     vx_ret[i] = gen_qgraphicsitem_types.QGraphicsItem(h: v_outCast[i])
+  c_free(v_ma.data)
   vx_ret
 
 proc itemAt*(self: gen_qgraphicsscene_types.QGraphicsScene, pos: gen_qpoint_types.QPointF, deviceTransform: gen_qtransform_types.QTransform): gen_qgraphicsitem_types.QGraphicsItem =
@@ -413,6 +419,7 @@ proc selectedItems*(self: gen_qgraphicsscene_types.QGraphicsScene, ): seq[gen_qg
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
     vx_ret[i] = gen_qgraphicsitem_types.QGraphicsItem(h: v_outCast[i])
+  c_free(v_ma.data)
   vx_ret
 
 proc selectionArea*(self: gen_qgraphicsscene_types.QGraphicsScene, ): gen_qpainterpath_types.QPainterPath =
@@ -518,6 +525,7 @@ proc views*(self: gen_qgraphicsscene_types.QGraphicsScene, ): seq[gen_qgraphicsv
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
     vx_ret[i] = gen_qgraphicsview_types.QGraphicsView(h: v_outCast[i])
+  c_free(v_ma.data)
   vx_ret
 
 proc update*(self: gen_qgraphicsscene_types.QGraphicsScene, x: float64, y: float64, w: float64, h: float64): void =
@@ -604,6 +612,7 @@ proc miqt_exec_callback_cQGraphicsScene_changed(slot: int, region: struct_miqt_a
   let vregion_outCast = cast[ptr UncheckedArray[pointer]](vregion_ma.data)
   for i in 0 ..< vregion_ma.len:
     vregionx_ret[i] = gen_qrect_types.QRectF(h: vregion_outCast[i])
+  c_free(vregion_ma.data)
   let slotval1 = vregionx_ret
 
   nimfunc[](slotval1)
@@ -707,6 +716,7 @@ proc items*(self: gen_qgraphicsscene_types.QGraphicsScene, order: cint): seq[gen
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
     vx_ret[i] = gen_qgraphicsitem_types.QGraphicsItem(h: v_outCast[i])
+  c_free(v_ma.data)
   vx_ret
 
 proc items*(self: gen_qgraphicsscene_types.QGraphicsScene, pos: gen_qpoint_types.QPointF, mode: cint): seq[gen_qgraphicsitem_types.QGraphicsItem] =
@@ -715,6 +725,7 @@ proc items*(self: gen_qgraphicsscene_types.QGraphicsScene, pos: gen_qpoint_types
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
     vx_ret[i] = gen_qgraphicsitem_types.QGraphicsItem(h: v_outCast[i])
+  c_free(v_ma.data)
   vx_ret
 
 proc items*(self: gen_qgraphicsscene_types.QGraphicsScene, pos: gen_qpoint_types.QPointF, mode: cint, order: cint): seq[gen_qgraphicsitem_types.QGraphicsItem] =
@@ -723,6 +734,7 @@ proc items*(self: gen_qgraphicsscene_types.QGraphicsScene, pos: gen_qpoint_types
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
     vx_ret[i] = gen_qgraphicsitem_types.QGraphicsItem(h: v_outCast[i])
+  c_free(v_ma.data)
   vx_ret
 
 proc items*(self: gen_qgraphicsscene_types.QGraphicsScene, pos: gen_qpoint_types.QPointF, mode: cint, order: cint, deviceTransform: gen_qtransform_types.QTransform): seq[gen_qgraphicsitem_types.QGraphicsItem] =
@@ -731,6 +743,7 @@ proc items*(self: gen_qgraphicsscene_types.QGraphicsScene, pos: gen_qpoint_types
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
     vx_ret[i] = gen_qgraphicsitem_types.QGraphicsItem(h: v_outCast[i])
+  c_free(v_ma.data)
   vx_ret
 
 proc items*(self: gen_qgraphicsscene_types.QGraphicsScene, rect: gen_qrect_types.QRectF, mode: cint): seq[gen_qgraphicsitem_types.QGraphicsItem] =
@@ -739,6 +752,7 @@ proc items*(self: gen_qgraphicsscene_types.QGraphicsScene, rect: gen_qrect_types
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
     vx_ret[i] = gen_qgraphicsitem_types.QGraphicsItem(h: v_outCast[i])
+  c_free(v_ma.data)
   vx_ret
 
 proc items*(self: gen_qgraphicsscene_types.QGraphicsScene, rect: gen_qrect_types.QRectF, mode: cint, order: cint): seq[gen_qgraphicsitem_types.QGraphicsItem] =
@@ -747,6 +761,7 @@ proc items*(self: gen_qgraphicsscene_types.QGraphicsScene, rect: gen_qrect_types
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
     vx_ret[i] = gen_qgraphicsitem_types.QGraphicsItem(h: v_outCast[i])
+  c_free(v_ma.data)
   vx_ret
 
 proc items*(self: gen_qgraphicsscene_types.QGraphicsScene, rect: gen_qrect_types.QRectF, mode: cint, order: cint, deviceTransform: gen_qtransform_types.QTransform): seq[gen_qgraphicsitem_types.QGraphicsItem] =
@@ -755,6 +770,7 @@ proc items*(self: gen_qgraphicsscene_types.QGraphicsScene, rect: gen_qrect_types
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
     vx_ret[i] = gen_qgraphicsitem_types.QGraphicsItem(h: v_outCast[i])
+  c_free(v_ma.data)
   vx_ret
 
 proc items*(self: gen_qgraphicsscene_types.QGraphicsScene, path: gen_qpainterpath_types.QPainterPath, mode: cint): seq[gen_qgraphicsitem_types.QGraphicsItem] =
@@ -763,6 +779,7 @@ proc items*(self: gen_qgraphicsscene_types.QGraphicsScene, path: gen_qpainterpat
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
     vx_ret[i] = gen_qgraphicsitem_types.QGraphicsItem(h: v_outCast[i])
+  c_free(v_ma.data)
   vx_ret
 
 proc items*(self: gen_qgraphicsscene_types.QGraphicsScene, path: gen_qpainterpath_types.QPainterPath, mode: cint, order: cint): seq[gen_qgraphicsitem_types.QGraphicsItem] =
@@ -771,6 +788,7 @@ proc items*(self: gen_qgraphicsscene_types.QGraphicsScene, path: gen_qpainterpat
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
     vx_ret[i] = gen_qgraphicsitem_types.QGraphicsItem(h: v_outCast[i])
+  c_free(v_ma.data)
   vx_ret
 
 proc items*(self: gen_qgraphicsscene_types.QGraphicsScene, path: gen_qpainterpath_types.QPainterPath, mode: cint, order: cint, deviceTransform: gen_qtransform_types.QTransform): seq[gen_qgraphicsitem_types.QGraphicsItem] =
@@ -779,6 +797,7 @@ proc items*(self: gen_qgraphicsscene_types.QGraphicsScene, path: gen_qpainterpat
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
     vx_ret[i] = gen_qgraphicsitem_types.QGraphicsItem(h: v_outCast[i])
+  c_free(v_ma.data)
   vx_ret
 
 proc items*(self: gen_qgraphicsscene_types.QGraphicsScene, x: float64, y: float64, w: float64, h: float64, mode: cint, order: cint, deviceTransform: gen_qtransform_types.QTransform): seq[gen_qgraphicsitem_types.QGraphicsItem] =
@@ -787,6 +806,7 @@ proc items*(self: gen_qgraphicsscene_types.QGraphicsScene, x: float64, y: float6
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
     vx_ret[i] = gen_qgraphicsitem_types.QGraphicsItem(h: v_outCast[i])
+  c_free(v_ma.data)
   vx_ret
 
 proc collidingItems*(self: gen_qgraphicsscene_types.QGraphicsScene, item: gen_qgraphicsitem_types.QGraphicsItem, mode: cint): seq[gen_qgraphicsitem_types.QGraphicsItem] =
@@ -795,6 +815,7 @@ proc collidingItems*(self: gen_qgraphicsscene_types.QGraphicsScene, item: gen_qg
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
     vx_ret[i] = gen_qgraphicsitem_types.QGraphicsItem(h: v_outCast[i])
+  c_free(v_ma.data)
   vx_ret
 
 proc setSelectionArea*(self: gen_qgraphicsscene_types.QGraphicsScene, path: gen_qpainterpath_types.QPainterPath, selectionOperation: cint): void =

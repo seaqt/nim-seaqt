@@ -2,7 +2,7 @@ import ./Qt6Core_libs
 
 {.push raises: [].}
 
-from system/ansi_c import c_free
+from system/ansi_c import c_free, c_malloc
 
 type
   struct_miqt_string {.used.} = object
@@ -148,6 +148,7 @@ proc mountedVolumes*(_: type gen_qstorageinfo_types.QStorageInfo, ): seq[gen_qst
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
     vx_ret[i] = gen_qstorageinfo_types.QStorageInfo(h: v_outCast[i])
+  c_free(v_ma.data)
   vx_ret
 
 proc root*(_: type gen_qstorageinfo_types.QStorageInfo, ): gen_qstorageinfo_types.QStorageInfo =

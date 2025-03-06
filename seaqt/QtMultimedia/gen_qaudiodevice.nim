@@ -2,7 +2,7 @@ import ./Qt6Multimedia_libs
 
 {.push raises: [].}
 
-from system/ansi_c import c_free
+from system/ansi_c import c_free, c_malloc
 
 type
   struct_miqt_string {.used.} = object
@@ -131,6 +131,7 @@ proc supportedSampleFormats*(self: gen_qaudiodevice_types.QAudioDevice, ): seq[c
   let v_outCast = cast[ptr UncheckedArray[cint]](v_ma.data)
   for i in 0 ..< v_ma.len:
     vx_ret[i] = cint(v_outCast[i])
+  c_free(v_ma.data)
   vx_ret
 
 proc channelConfiguration*(self: gen_qaudiodevice_types.QAudioDevice, ): cint =

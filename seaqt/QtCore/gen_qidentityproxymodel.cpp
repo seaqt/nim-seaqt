@@ -117,8 +117,10 @@ public:
 		QModelIndex* sigval3 = const_cast<QModelIndex*>(&parent_ret);
 
 		QModelIndex* callback_return_value = vtbl->index(vtbl, this, sigval1, sigval2, sigval3);
+		auto callback_return_value_Value = std::move(*callback_return_value);
+		delete callback_return_value;
 
-		return *callback_return_value;
+		return callback_return_value_Value;
 	}
 
 	friend QModelIndex* QIdentityProxyModel_virtualbase_index(const void* self, int row, int column, QModelIndex* parent);
@@ -134,8 +136,10 @@ public:
 		QModelIndex* sigval1 = const_cast<QModelIndex*>(&sourceIndex_ret);
 
 		QModelIndex* callback_return_value = vtbl->mapFromSource(vtbl, this, sigval1);
+		auto callback_return_value_Value = std::move(*callback_return_value);
+		delete callback_return_value;
 
-		return *callback_return_value;
+		return callback_return_value_Value;
 	}
 
 	friend QModelIndex* QIdentityProxyModel_virtualbase_mapFromSource(const void* self, QModelIndex* sourceIndex);
@@ -151,8 +155,10 @@ public:
 		QModelIndex* sigval1 = const_cast<QModelIndex*>(&proxyIndex_ret);
 
 		QModelIndex* callback_return_value = vtbl->mapToSource(vtbl, this, sigval1);
+		auto callback_return_value_Value = std::move(*callback_return_value);
+		delete callback_return_value;
 
-		return *callback_return_value;
+		return callback_return_value_Value;
 	}
 
 	friend QModelIndex* QIdentityProxyModel_virtualbase_mapToSource(const void* self, QModelIndex* proxyIndex);
@@ -168,8 +174,10 @@ public:
 		QModelIndex* sigval1 = const_cast<QModelIndex*>(&child_ret);
 
 		QModelIndex* callback_return_value = vtbl->parent(vtbl, this, sigval1);
+		auto callback_return_value_Value = std::move(*callback_return_value);
+		delete callback_return_value;
 
-		return *callback_return_value;
+		return callback_return_value_Value;
 	}
 
 	friend QModelIndex* QIdentityProxyModel_virtualbase_parent(const void* self, QModelIndex* child);
@@ -203,8 +211,10 @@ public:
 		int sigval3 = role;
 
 		QVariant* callback_return_value = vtbl->headerData(vtbl, this, sigval1, sigval2, sigval3);
+		auto callback_return_value_Value = std::move(*callback_return_value);
+		delete callback_return_value;
 
-		return *callback_return_value;
+		return callback_return_value_Value;
 	}
 
 	friend QVariant* QIdentityProxyModel_virtualbase_headerData(const void* self, int section, int orientation, int role);
@@ -244,8 +254,10 @@ public:
 		QModelIndex* sigval3 = const_cast<QModelIndex*>(&idx_ret);
 
 		QModelIndex* callback_return_value = vtbl->sibling(vtbl, this, sigval1, sigval2, sigval3);
+		auto callback_return_value_Value = std::move(*callback_return_value);
+		delete callback_return_value;
 
-		return *callback_return_value;
+		return callback_return_value_Value;
 	}
 
 	friend QModelIndex* QIdentityProxyModel_virtualbase_sibling(const void* self, int row, int column, QModelIndex* idx);
@@ -261,8 +273,10 @@ public:
 		QItemSelection* sigval1 = const_cast<QItemSelection*>(&selection_ret);
 
 		QItemSelection* callback_return_value = vtbl->mapSelectionFromSource(vtbl, this, sigval1);
+		auto callback_return_value_Value = std::move(*callback_return_value);
+		delete callback_return_value;
 
-		return *callback_return_value;
+		return callback_return_value_Value;
 	}
 
 	friend QItemSelection* QIdentityProxyModel_virtualbase_mapSelectionFromSource(const void* self, QItemSelection* selection);
@@ -278,8 +292,10 @@ public:
 		QItemSelection* sigval1 = const_cast<QItemSelection*>(&selection_ret);
 
 		QItemSelection* callback_return_value = vtbl->mapSelectionToSource(vtbl, this, sigval1);
+		auto callback_return_value_Value = std::move(*callback_return_value);
+		delete callback_return_value;
 
-		return *callback_return_value;
+		return callback_return_value_Value;
 	}
 
 	friend QItemSelection* QIdentityProxyModel_virtualbase_mapSelectionToSource(const void* self, QItemSelection* selection);
@@ -308,6 +324,7 @@ public:
 		for(size_t i = 0; i < callback_return_value.len; ++i) {
 			callback_return_value_QList.push_back(*(callback_return_value_arr[i]));
 		}
+		free(callback_return_value.data);
 
 		return callback_return_value_QList;
 	}
@@ -491,8 +508,10 @@ public:
 		int sigval2 = role;
 
 		QVariant* callback_return_value = vtbl->data(vtbl, this, sigval1, sigval2);
+		auto callback_return_value_Value = std::move(*callback_return_value);
+		delete callback_return_value;
 
-		return *callback_return_value;
+		return callback_return_value_Value;
 	}
 
 	friend QVariant* QIdentityProxyModel_virtualbase_data(const void* self, QModelIndex* proxyIndex, int role);
@@ -514,6 +533,8 @@ public:
 		for(size_t i = 0; i < callback_return_value.len; ++i) {
 			callback_return_value_QMap[static_cast<int>(callback_return_value_karr[i])] = *(callback_return_value_varr[i]);
 		}
+		free(callback_return_value.keys);
+		free(callback_return_value.values);
 
 		return callback_return_value_QMap;
 	}
@@ -639,8 +660,10 @@ public:
 		QModelIndex* sigval1 = const_cast<QModelIndex*>(&index_ret);
 
 		QModelIndex* callback_return_value = vtbl->buddy(vtbl, this, sigval1);
+		auto callback_return_value_Value = std::move(*callback_return_value);
+		delete callback_return_value;
 
-		return *callback_return_value;
+		return callback_return_value_Value;
 	}
 
 	friend QModelIndex* QIdentityProxyModel_virtualbase_buddy(const void* self, QModelIndex* index);
@@ -707,8 +730,10 @@ public:
 		QModelIndex* sigval1 = const_cast<QModelIndex*>(&index_ret);
 
 		QSize* callback_return_value = vtbl->span(vtbl, this, sigval1);
+		auto callback_return_value_Value = std::move(*callback_return_value);
+		delete callback_return_value;
 
-		return *callback_return_value;
+		return callback_return_value_Value;
 	}
 
 	friend QSize* QIdentityProxyModel_virtualbase_span(const void* self, QModelIndex* index);
@@ -789,8 +814,10 @@ public:
 		struct miqt_string* callback_return_value_arr = static_cast<struct miqt_string*>(callback_return_value.data);
 		for(size_t i = 0; i < callback_return_value.len; ++i) {
 			QString callback_return_value_arr_i_QString = QString::fromUtf8(callback_return_value_arr[i].data, callback_return_value_arr[i].len);
+			free(callback_return_value_arr[i].data);
 			callback_return_value_QList.push_back(callback_return_value_arr_i_QString);
 		}
+		free(callback_return_value.data);
 
 		return callback_return_value_QList;
 	}
@@ -839,8 +866,11 @@ public:
 		struct miqt_string* callback_return_value_varr = static_cast<struct miqt_string*>(callback_return_value.values);
 		for(size_t i = 0; i < callback_return_value.len; ++i) {
 			QByteArray callback_return_value_varr_i_QByteArray(callback_return_value_varr[i].data, callback_return_value_varr[i].len);
+			free(callback_return_value_varr[i].data);
 			callback_return_value_QMap[static_cast<int>(callback_return_value_karr[i])] = callback_return_value_varr_i_QByteArray;
 		}
+		free(callback_return_value.keys);
+		free(callback_return_value.values);
 
 		return callback_return_value_QMap;
 	}

@@ -2,7 +2,7 @@ import ./Qt6Widgets_libs
 
 {.push raises: [].}
 
-from system/ansi_c import c_free
+from system/ansi_c import c_free, c_malloc
 
 type
   struct_miqt_string {.used.} = object
@@ -296,6 +296,7 @@ proc subWindowList*(self: gen_qmdiarea_types.QMdiArea, ): seq[gen_qmdisubwindow_
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
     vx_ret[i] = gen_qmdisubwindow_types.QMdiSubWindow(h: v_outCast[i])
+  c_free(v_ma.data)
   vx_ret
 
 proc addSubWindow*(self: gen_qmdiarea_types.QMdiArea, widget: gen_qwidget_types.QWidget): gen_qmdisubwindow_types.QMdiSubWindow =
@@ -417,6 +418,7 @@ proc subWindowList*(self: gen_qmdiarea_types.QMdiArea, order: cint): seq[gen_qmd
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
     vx_ret[i] = gen_qmdisubwindow_types.QMdiSubWindow(h: v_outCast[i])
+  c_free(v_ma.data)
   vx_ret
 
 proc addSubWindow*(self: gen_qmdiarea_types.QMdiArea, widget: gen_qwidget_types.QWidget, flags: cint): gen_qmdisubwindow_types.QMdiSubWindow =

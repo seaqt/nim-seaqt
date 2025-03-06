@@ -104,8 +104,10 @@ public:
 		QUrl* sigval1 = const_cast<QUrl*>(&url_ret);
 
 		QNetworkCacheMetaData* callback_return_value = vtbl->metaData(vtbl, this, sigval1);
+		auto callback_return_value_Value = std::move(*callback_return_value);
+		delete callback_return_value;
 
-		return *callback_return_value;
+		return callback_return_value_Value;
 	}
 
 	friend QNetworkCacheMetaData* QNetworkDiskCache_virtualbase_metaData(void* self, QUrl* url);

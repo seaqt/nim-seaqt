@@ -2,7 +2,7 @@ import ./Qt6Gui_libs
 
 {.push raises: [].}
 
-from system/ansi_c import c_free
+from system/ansi_c import c_free, c_malloc
 
 type
   struct_miqt_string {.used.} = object
@@ -155,6 +155,7 @@ proc glyphIndexesForString*(self: gen_qrawfont_types.QRawFont, text: string): se
   let v_outCast = cast[ptr UncheckedArray[cuint]](v_ma.data)
   for i in 0 ..< v_ma.len:
     vx_ret[i] = v_outCast[i]
+  c_free(v_ma.data)
   vx_ret
 
 proc advancesForGlyphIndexes*(self: gen_qrawfont_types.QRawFont, glyphIndexes: seq[cuint]): seq[gen_qpoint_types.QPointF] =
@@ -167,6 +168,7 @@ proc advancesForGlyphIndexes*(self: gen_qrawfont_types.QRawFont, glyphIndexes: s
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
     vx_ret[i] = gen_qpoint_types.QPointF(h: v_outCast[i])
+  c_free(v_ma.data)
   vx_ret
 
 proc advancesForGlyphIndexes*(self: gen_qrawfont_types.QRawFont, glyphIndexes: seq[cuint], layoutFlags: cint): seq[gen_qpoint_types.QPointF] =
@@ -179,6 +181,7 @@ proc advancesForGlyphIndexes*(self: gen_qrawfont_types.QRawFont, glyphIndexes: s
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
     vx_ret[i] = gen_qpoint_types.QPointF(h: v_outCast[i])
+  c_free(v_ma.data)
   vx_ret
 
 proc glyphIndexesForChars*(self: gen_qrawfont_types.QRawFont, chars: gen_qchar_types.QChar, numChars: cint, glyphIndexes: ptr cuint, numGlyphs: ptr cint): bool =
@@ -256,6 +259,7 @@ proc supportedWritingSystems*(self: gen_qrawfont_types.QRawFont, ): seq[cint] =
   let v_outCast = cast[ptr UncheckedArray[cint]](v_ma.data)
   for i in 0 ..< v_ma.len:
     vx_ret[i] = cint(v_outCast[i])
+  c_free(v_ma.data)
   vx_ret
 
 proc fontTable*(self: gen_qrawfont_types.QRawFont, tagName: cstring): seq[byte] =

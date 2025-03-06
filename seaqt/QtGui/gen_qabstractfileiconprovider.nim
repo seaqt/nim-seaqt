@@ -2,7 +2,7 @@ import ./Qt6Gui_libs
 
 {.push raises: [].}
 
-from system/ansi_c import c_free
+from system/ansi_c import c_free, c_malloc
 
 type
   struct_miqt_string {.used.} = object
@@ -141,7 +141,9 @@ proc miqt_exec_callback_cQAbstractFileIconProvider_typeX(vtbl: pointer, self: po
   let self = QAbstractFileIconProvider(h: self)
   let slotval1 = gen_qfileinfo_types.QFileInfo(h: param1)
   var virtualReturn = vtbl[].typeX(self, slotval1)
-  struct_miqt_string(data: virtualReturn, len: csize_t(len(virtualReturn)))
+  var virtualReturn_copy = cast[cstring](if len(virtualReturn) > 0: c_malloc(csize_t(len(virtualReturn))) else: nil)
+  if len(virtualReturn) > 0: copyMem(cast[pointer](virtualReturn_copy), addr virtualReturn[0], csize_t(len(virtualReturn)))
+  struct_miqt_string(data: virtualReturn_copy, len: csize_t(len(virtualReturn)))
 
 proc QAbstractFileIconProvidersetOptions*(self: gen_qabstractfileiconprovider_types.QAbstractFileIconProvider, options: cint): void =
   fcQAbstractFileIconProvider_virtualbase_setOptions(self.h, cint(options))

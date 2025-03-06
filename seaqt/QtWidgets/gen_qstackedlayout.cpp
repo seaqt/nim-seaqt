@@ -119,8 +119,10 @@ public:
 
 
 		QSize* callback_return_value = vtbl->sizeHint(vtbl, this);
+		auto callback_return_value_Value = std::move(*callback_return_value);
+		delete callback_return_value;
 
-		return *callback_return_value;
+		return callback_return_value_Value;
 	}
 
 	friend QSize* QStackedLayout_virtualbase_sizeHint(const void* self);
@@ -133,8 +135,10 @@ public:
 
 
 		QSize* callback_return_value = vtbl->minimumSize(vtbl, this);
+		auto callback_return_value_Value = std::move(*callback_return_value);
+		delete callback_return_value;
 
-		return *callback_return_value;
+		return callback_return_value_Value;
 	}
 
 	friend QSize* QStackedLayout_virtualbase_minimumSize(const void* self);
@@ -266,8 +270,10 @@ public:
 
 
 		QRect* callback_return_value = vtbl->geometry(vtbl, this);
+		auto callback_return_value_Value = std::move(*callback_return_value);
+		delete callback_return_value;
 
-		return *callback_return_value;
+		return callback_return_value_Value;
 	}
 
 	friend QRect* QStackedLayout_virtualbase_geometry(const void* self);
@@ -294,8 +300,10 @@ public:
 
 
 		QSize* callback_return_value = vtbl->maximumSize(vtbl, this);
+		auto callback_return_value_Value = std::move(*callback_return_value);
+		delete callback_return_value;
 
-		return *callback_return_value;
+		return callback_return_value_Value;
 	}
 
 	friend QSize* QStackedLayout_virtualbase_maximumSize(const void* self);

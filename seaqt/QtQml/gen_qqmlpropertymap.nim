@@ -2,7 +2,7 @@ import ./Qt6Qml_libs
 
 {.push raises: [].}
 
-from system/ansi_c import c_free
+from system/ansi_c import c_free, c_malloc
 
 type
   struct_miqt_string {.used.} = object
@@ -131,7 +131,7 @@ proc insert*(self: gen_qqmlpropertymap_types.QQmlPropertyMap, values: Table[stri
   var values_Keys_CArray = newSeq[struct_miqt_string](len(values))
   var values_Values_CArray = newSeq[pointer](len(values))
   var values_ctr = 0
-  for valuesk, valuesv in values:
+  for values_k, values_v in values:
     values_Keys_CArray[values_ctr] = struct_miqt_string(data: values_k, len: csize_t(len(values_k)))
     values_Values_CArray[values_ctr] = values_v.h
     values_ctr += 1
@@ -153,6 +153,7 @@ proc keys*(self: gen_qqmlpropertymap_types.QQmlPropertyMap, ): seq[string] =
     let vx_lvx_ret = string.fromBytes(toOpenArrayByte(vx_lv_ms.data, 0, int(vx_lv_ms.len)-1))
     c_free(vx_lv_ms.data)
     vx_ret[i] = vx_lvx_ret
+  c_free(v_ma.data)
   vx_ret
 
 proc count*(self: gen_qqmlpropertymap_types.QQmlPropertyMap, ): cint =

@@ -97,8 +97,10 @@ public:
 		QVariant* sigval2 = const_cast<QVariant*>(&input_ret);
 
 		QVariant* callback_return_value = vtbl->updateValue(vtbl, this, sigval1, sigval2);
+		auto callback_return_value_Value = std::move(*callback_return_value);
+		delete callback_return_value;
 
-		return *callback_return_value;
+		return callback_return_value_Value;
 	}
 
 	friend QVariant* QQmlPropertyMap_virtualbase_updateValue(void* self, struct miqt_string key, QVariant* input);
