@@ -30,7 +30,7 @@ func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
     else:
       copyMem(addr result[0], unsafeAddr v[0], v.len)
 
-const cflags = gorge("pkg-config --cflags Qt6Gui")  & " -fPIC"
+const cflags = gorge("pkg-config --cflags Qt6Gui") & " -fPIC"
 {.compile("gen_qaction.cpp", cflags).}
 
 
@@ -157,7 +157,7 @@ proc fcQAction_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.import
 proc fcQAction_showStatusText1(self: pointer, objectVal: pointer): bool {.importc: "QAction_showStatusText1".}
 proc fcQAction_triggered1(self: pointer, checked: bool): void {.importc: "QAction_triggered1".}
 proc fcQAction_connect_triggered1(self: pointer, slot: int, callback: proc (slot: int, checked: bool) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QAction_connect_triggered1".}
-type cQActionVTable = object
+type cQActionVTable {.pure.} = object
   destructor*: proc(vtbl: ptr cQActionVTable, self: ptr cQAction) {.cdecl, raises:[], gcsafe.}
   metaObject*: proc(vtbl, self: pointer, ): pointer {.cdecl, raises: [], gcsafe.}
   metacast*: proc(vtbl, self: pointer, param1: cstring): pointer {.cdecl, raises: [], gcsafe.}
@@ -190,10 +190,9 @@ proc fcQAction_new4(vtbl: pointer, parent: pointer): ptr cQAction {.importc: "QA
 proc fcQAction_new5(vtbl: pointer, text: struct_miqt_string, parent: pointer): ptr cQAction {.importc: "QAction_new5".}
 proc fcQAction_new6(vtbl: pointer, icon: pointer, text: struct_miqt_string, parent: pointer): ptr cQAction {.importc: "QAction_new6".}
 proc fcQAction_staticMetaObject(): pointer {.importc: "QAction_staticMetaObject".}
-proc fcQAction_delete(self: pointer) {.importc: "QAction_delete".}
 
 proc metaObject*(self: gen_qaction_types.QAction, ): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQAction_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQAction_metaObject(self.h), owned: false)
 
 proc metacast*(self: gen_qaction_types.QAction, param1: cstring): pointer =
   fcQAction_metacast(self.h, param1)
@@ -212,7 +211,7 @@ proc associatedObjects*(self: gen_qaction_types.QAction, ): seq[gen_qobject_type
   var vx_ret = newSeq[gen_qobject_types.QObject](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
-    vx_ret[i] = gen_qobject_types.QObject(h: v_outCast[i])
+    vx_ret[i] = gen_qobject_types.QObject(h: v_outCast[i], owned: false)
   c_free(v_ma.data)
   vx_ret
 
@@ -220,13 +219,13 @@ proc setActionGroup*(self: gen_qaction_types.QAction, group: gen_qactiongroup_ty
   fcQAction_setActionGroup(self.h, group.h)
 
 proc actionGroup*(self: gen_qaction_types.QAction, ): gen_qactiongroup_types.QActionGroup =
-  gen_qactiongroup_types.QActionGroup(h: fcQAction_actionGroup(self.h))
+  gen_qactiongroup_types.QActionGroup(h: fcQAction_actionGroup(self.h), owned: false)
 
 proc setIcon*(self: gen_qaction_types.QAction, icon: gen_qicon_types.QIcon): void =
   fcQAction_setIcon(self.h, icon.h)
 
 proc icon*(self: gen_qaction_types.QAction, ): gen_qicon_types.QIcon =
-  gen_qicon_types.QIcon(h: fcQAction_icon(self.h))
+  gen_qicon_types.QIcon(h: fcQAction_icon(self.h), owned: true)
 
 proc setText*(self: gen_qaction_types.QAction, text: string): void =
   fcQAction_setText(self.h, struct_miqt_string(data: text, len: csize_t(len(text))))
@@ -289,7 +288,7 @@ proc setShortcut*(self: gen_qaction_types.QAction, shortcut: gen_qkeysequence_ty
   fcQAction_setShortcut(self.h, shortcut.h)
 
 proc shortcut*(self: gen_qaction_types.QAction, ): gen_qkeysequence_types.QKeySequence =
-  gen_qkeysequence_types.QKeySequence(h: fcQAction_shortcut(self.h))
+  gen_qkeysequence_types.QKeySequence(h: fcQAction_shortcut(self.h), owned: true)
 
 proc setShortcuts*(self: gen_qaction_types.QAction, shortcuts: seq[gen_qkeysequence_types.QKeySequence]): void =
   var shortcuts_CArray = newSeq[pointer](len(shortcuts))
@@ -306,7 +305,7 @@ proc shortcuts*(self: gen_qaction_types.QAction, ): seq[gen_qkeysequence_types.Q
   var vx_ret = newSeq[gen_qkeysequence_types.QKeySequence](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
-    vx_ret[i] = gen_qkeysequence_types.QKeySequence(h: v_outCast[i])
+    vx_ret[i] = gen_qkeysequence_types.QKeySequence(h: v_outCast[i], owned: true)
   c_free(v_ma.data)
   vx_ret
 
@@ -326,7 +325,7 @@ proc setFont*(self: gen_qaction_types.QAction, font: gen_qfont_types.QFont): voi
   fcQAction_setFont(self.h, font.h)
 
 proc font*(self: gen_qaction_types.QAction, ): gen_qfont_types.QFont =
-  gen_qfont_types.QFont(h: fcQAction_font(self.h))
+  gen_qfont_types.QFont(h: fcQAction_font(self.h), owned: true)
 
 proc setCheckable*(self: gen_qaction_types.QAction, checkable: bool): void =
   fcQAction_setCheckable(self.h, checkable)
@@ -335,7 +334,7 @@ proc isCheckable*(self: gen_qaction_types.QAction, ): bool =
   fcQAction_isCheckable(self.h)
 
 proc data*(self: gen_qaction_types.QAction, ): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQAction_data(self.h))
+  gen_qvariant_types.QVariant(h: fcQAction_data(self.h), owned: true)
 
 proc setData*(self: gen_qaction_types.QAction, varVal: gen_qvariant_types.QVariant): void =
   fcQAction_setData(self.h, varVal.h)
@@ -574,7 +573,7 @@ type QActionchildEventProc* = proc(self: QAction, event: gen_qcoreevent_types.QC
 type QActioncustomEventProc* = proc(self: QAction, event: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
 type QActionconnectNotifyProc* = proc(self: QAction, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
 type QActiondisconnectNotifyProc* = proc(self: QAction, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
-type QActionVTable* = object
+type QActionVTable* {.inheritable, pure.} = object
   vtbl: cQActionVTable
   metaObject*: QActionmetaObjectProc
   metacast*: QActionmetacastProc
@@ -587,13 +586,16 @@ type QActionVTable* = object
   connectNotify*: QActionconnectNotifyProc
   disconnectNotify*: QActiondisconnectNotifyProc
 proc QActionmetaObject*(self: gen_qaction_types.QAction, ): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQAction_virtualbase_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQAction_virtualbase_metaObject(self.h), owned: false)
 
 proc miqt_exec_callback_cQAction_metaObject(vtbl: pointer, self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QActionVTable](vtbl)
   let self = QAction(h: self)
   var virtualReturn = vtbl[].metaObject(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QActionmetacast*(self: gen_qaction_types.QAction, param1: cstring): pointer =
   fcQAction_virtualbase_metacast(self.h, param1)
@@ -623,7 +625,7 @@ proc QActionevent*(self: gen_qaction_types.QAction, param1: gen_qcoreevent_types
 proc miqt_exec_callback_cQAction_event(vtbl: pointer, self: pointer, param1: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QActionVTable](vtbl)
   let self = QAction(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: param1)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: param1, owned: false)
   var virtualReturn = vtbl[].event(self, slotval1)
   virtualReturn
 
@@ -633,8 +635,8 @@ proc QActioneventFilter*(self: gen_qaction_types.QAction, watched: gen_qobject_t
 proc miqt_exec_callback_cQAction_eventFilter(vtbl: pointer, self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QActionVTable](vtbl)
   let self = QAction(h: self)
-  let slotval1 = gen_qobject_types.QObject(h: watched)
-  let slotval2 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].eventFilter(self, slotval1, slotval2)
   virtualReturn
 
@@ -644,7 +646,7 @@ proc QActiontimerEvent*(self: gen_qaction_types.QAction, event: gen_qcoreevent_t
 proc miqt_exec_callback_cQAction_timerEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QActionVTable](vtbl)
   let self = QAction(h: self)
-  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   vtbl[].timerEvent(self, slotval1)
 
 proc QActionchildEvent*(self: gen_qaction_types.QAction, event: gen_qcoreevent_types.QChildEvent): void =
@@ -653,7 +655,7 @@ proc QActionchildEvent*(self: gen_qaction_types.QAction, event: gen_qcoreevent_t
 proc miqt_exec_callback_cQAction_childEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QActionVTable](vtbl)
   let self = QAction(h: self)
-  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   vtbl[].childEvent(self, slotval1)
 
 proc QActioncustomEvent*(self: gen_qaction_types.QAction, event: gen_qcoreevent_types.QEvent): void =
@@ -662,7 +664,7 @@ proc QActioncustomEvent*(self: gen_qaction_types.QAction, event: gen_qcoreevent_
 proc miqt_exec_callback_cQAction_customEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QActionVTable](vtbl)
   let self = QAction(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].customEvent(self, slotval1)
 
 proc QActionconnectNotify*(self: gen_qaction_types.QAction, signal: gen_qmetaobject_types.QMetaMethod): void =
@@ -671,7 +673,7 @@ proc QActionconnectNotify*(self: gen_qaction_types.QAction, signal: gen_qmetaobj
 proc miqt_exec_callback_cQAction_connectNotify(vtbl: pointer, self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QActionVTable](vtbl)
   let self = QAction(h: self)
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].connectNotify(self, slotval1)
 
 proc QActiondisconnectNotify*(self: gen_qaction_types.QAction, signal: gen_qmetaobject_types.QMetaMethod): void =
@@ -680,11 +682,93 @@ proc QActiondisconnectNotify*(self: gen_qaction_types.QAction, signal: gen_qmeta
 proc miqt_exec_callback_cQAction_disconnectNotify(vtbl: pointer, self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QActionVTable](vtbl)
   let self = QAction(h: self)
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].disconnectNotify(self, slotval1)
 
+type VirtualQAction* {.inheritable.} = ref object of QAction
+  vtbl*: cQActionVTable
+method metaObject*(self: VirtualQAction, ): gen_qobjectdefs_types.QMetaObject {.base.} =
+  QActionmetaObject(self[])
+proc miqt_exec_method_cQAction_metaObject(vtbl: pointer, inst: pointer): pointer {.cdecl.} =
+  let vtbl = cast[VirtualQAction](cast[uint](vtbl) - uint(offsetOf(VirtualQAction, vtbl)))
+  var virtualReturn = vtbl.metaObject()
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
+
+method metacast*(self: VirtualQAction, param1: cstring): pointer {.base.} =
+  QActionmetacast(self[], param1)
+proc miqt_exec_method_cQAction_metacast(vtbl: pointer, inst: pointer, param1: cstring): pointer {.cdecl.} =
+  let vtbl = cast[VirtualQAction](cast[uint](vtbl) - uint(offsetOf(VirtualQAction, vtbl)))
+  let slotval1 = (param1)
+  var virtualReturn = vtbl.metacast(slotval1)
+  virtualReturn
+
+method metacall*(self: VirtualQAction, param1: cint, param2: cint, param3: pointer): cint {.base.} =
+  QActionmetacall(self[], param1, param2, param3)
+proc miqt_exec_method_cQAction_metacall(vtbl: pointer, inst: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
+  let vtbl = cast[VirtualQAction](cast[uint](vtbl) - uint(offsetOf(VirtualQAction, vtbl)))
+  let slotval1 = cint(param1)
+  let slotval2 = param2
+  let slotval3 = param3
+  var virtualReturn = vtbl.metacall(slotval1, slotval2, slotval3)
+  virtualReturn
+
+method event*(self: VirtualQAction, param1: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QActionevent(self[], param1)
+proc miqt_exec_method_cQAction_event(vtbl: pointer, inst: pointer, param1: pointer): bool {.cdecl.} =
+  let vtbl = cast[VirtualQAction](cast[uint](vtbl) - uint(offsetOf(VirtualQAction, vtbl)))
+  let slotval1 = gen_qcoreevent_types.QEvent(h: param1, owned: false)
+  var virtualReturn = vtbl.event(slotval1)
+  virtualReturn
+
+method eventFilter*(self: VirtualQAction, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QActioneventFilter(self[], watched, event)
+proc miqt_exec_method_cQAction_eventFilter(vtbl: pointer, inst: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
+  let vtbl = cast[VirtualQAction](cast[uint](vtbl) - uint(offsetOf(VirtualQAction, vtbl)))
+  let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
+  var virtualReturn = vtbl.eventFilter(slotval1, slotval2)
+  virtualReturn
+
+method timerEvent*(self: VirtualQAction, event: gen_qcoreevent_types.QTimerEvent): void {.base.} =
+  QActiontimerEvent(self[], event)
+proc miqt_exec_method_cQAction_timerEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQAction](cast[uint](vtbl) - uint(offsetOf(VirtualQAction, vtbl)))
+  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
+  vtbl.timerEvent(slotval1)
+
+method childEvent*(self: VirtualQAction, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
+  QActionchildEvent(self[], event)
+proc miqt_exec_method_cQAction_childEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQAction](cast[uint](vtbl) - uint(offsetOf(VirtualQAction, vtbl)))
+  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
+  vtbl.childEvent(slotval1)
+
+method customEvent*(self: VirtualQAction, event: gen_qcoreevent_types.QEvent): void {.base.} =
+  QActioncustomEvent(self[], event)
+proc miqt_exec_method_cQAction_customEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQAction](cast[uint](vtbl) - uint(offsetOf(VirtualQAction, vtbl)))
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
+  vtbl.customEvent(slotval1)
+
+method connectNotify*(self: VirtualQAction, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QActionconnectNotify(self[], signal)
+proc miqt_exec_method_cQAction_connectNotify(vtbl: pointer, inst: pointer, signal: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQAction](cast[uint](vtbl) - uint(offsetOf(VirtualQAction, vtbl)))
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
+  vtbl.connectNotify(slotval1)
+
+method disconnectNotify*(self: VirtualQAction, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QActiondisconnectNotify(self[], signal)
+proc miqt_exec_method_cQAction_disconnectNotify(vtbl: pointer, inst: pointer, signal: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQAction](cast[uint](vtbl) - uint(offsetOf(VirtualQAction, vtbl)))
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
+  vtbl.disconnectNotify(slotval1)
+
 proc sender*(self: gen_qaction_types.QAction, ): gen_qobject_types.QObject =
-  gen_qobject_types.QObject(h: fcQAction_protectedbase_sender(self.h))
+  gen_qobject_types.QObject(h: fcQAction_protectedbase_sender(self.h), owned: false)
 
 proc senderSignalIndex*(self: gen_qaction_types.QAction, ): cint =
   fcQAction_protectedbase_senderSignalIndex(self.h)
@@ -699,182 +783,311 @@ proc create*(T: type gen_qaction_types.QAction,
     vtbl: ref QActionVTable = nil): gen_qaction_types.QAction =
   let vtbl = if vtbl == nil: new QActionVTable else: vtbl
   GC_ref(vtbl)
-  vtbl.vtbl.destructor = proc(vtbl: ptr cQActionVTable, _: ptr cQAction) {.cdecl.} =
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQActionVTable, _: ptr cQAction) {.cdecl.} =
     let vtbl = cast[ref QActionVTable](vtbl)
     GC_unref(vtbl)
-  if not isNil(vtbl.metaObject):
+  if not isNil(vtbl[].metaObject):
     vtbl[].vtbl.metaObject = miqt_exec_callback_cQAction_metaObject
-  if not isNil(vtbl.metacast):
+  if not isNil(vtbl[].metacast):
     vtbl[].vtbl.metacast = miqt_exec_callback_cQAction_metacast
-  if not isNil(vtbl.metacall):
+  if not isNil(vtbl[].metacall):
     vtbl[].vtbl.metacall = miqt_exec_callback_cQAction_metacall
-  if not isNil(vtbl.event):
+  if not isNil(vtbl[].event):
     vtbl[].vtbl.event = miqt_exec_callback_cQAction_event
-  if not isNil(vtbl.eventFilter):
+  if not isNil(vtbl[].eventFilter):
     vtbl[].vtbl.eventFilter = miqt_exec_callback_cQAction_eventFilter
-  if not isNil(vtbl.timerEvent):
+  if not isNil(vtbl[].timerEvent):
     vtbl[].vtbl.timerEvent = miqt_exec_callback_cQAction_timerEvent
-  if not isNil(vtbl.childEvent):
+  if not isNil(vtbl[].childEvent):
     vtbl[].vtbl.childEvent = miqt_exec_callback_cQAction_childEvent
-  if not isNil(vtbl.customEvent):
+  if not isNil(vtbl[].customEvent):
     vtbl[].vtbl.customEvent = miqt_exec_callback_cQAction_customEvent
-  if not isNil(vtbl.connectNotify):
+  if not isNil(vtbl[].connectNotify):
     vtbl[].vtbl.connectNotify = miqt_exec_callback_cQAction_connectNotify
-  if not isNil(vtbl.disconnectNotify):
+  if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQAction_disconnectNotify
-  gen_qaction_types.QAction(h: fcQAction_new(addr(vtbl[]), ))
+  gen_qaction_types.QAction(h: fcQAction_new(addr(vtbl[].vtbl), ), owned: true)
 
 proc create*(T: type gen_qaction_types.QAction,
     text: string,
     vtbl: ref QActionVTable = nil): gen_qaction_types.QAction =
   let vtbl = if vtbl == nil: new QActionVTable else: vtbl
   GC_ref(vtbl)
-  vtbl.vtbl.destructor = proc(vtbl: ptr cQActionVTable, _: ptr cQAction) {.cdecl.} =
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQActionVTable, _: ptr cQAction) {.cdecl.} =
     let vtbl = cast[ref QActionVTable](vtbl)
     GC_unref(vtbl)
-  if not isNil(vtbl.metaObject):
+  if not isNil(vtbl[].metaObject):
     vtbl[].vtbl.metaObject = miqt_exec_callback_cQAction_metaObject
-  if not isNil(vtbl.metacast):
+  if not isNil(vtbl[].metacast):
     vtbl[].vtbl.metacast = miqt_exec_callback_cQAction_metacast
-  if not isNil(vtbl.metacall):
+  if not isNil(vtbl[].metacall):
     vtbl[].vtbl.metacall = miqt_exec_callback_cQAction_metacall
-  if not isNil(vtbl.event):
+  if not isNil(vtbl[].event):
     vtbl[].vtbl.event = miqt_exec_callback_cQAction_event
-  if not isNil(vtbl.eventFilter):
+  if not isNil(vtbl[].eventFilter):
     vtbl[].vtbl.eventFilter = miqt_exec_callback_cQAction_eventFilter
-  if not isNil(vtbl.timerEvent):
+  if not isNil(vtbl[].timerEvent):
     vtbl[].vtbl.timerEvent = miqt_exec_callback_cQAction_timerEvent
-  if not isNil(vtbl.childEvent):
+  if not isNil(vtbl[].childEvent):
     vtbl[].vtbl.childEvent = miqt_exec_callback_cQAction_childEvent
-  if not isNil(vtbl.customEvent):
+  if not isNil(vtbl[].customEvent):
     vtbl[].vtbl.customEvent = miqt_exec_callback_cQAction_customEvent
-  if not isNil(vtbl.connectNotify):
+  if not isNil(vtbl[].connectNotify):
     vtbl[].vtbl.connectNotify = miqt_exec_callback_cQAction_connectNotify
-  if not isNil(vtbl.disconnectNotify):
+  if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQAction_disconnectNotify
-  gen_qaction_types.QAction(h: fcQAction_new2(addr(vtbl[]), struct_miqt_string(data: text, len: csize_t(len(text)))))
+  gen_qaction_types.QAction(h: fcQAction_new2(addr(vtbl[].vtbl), struct_miqt_string(data: text, len: csize_t(len(text)))), owned: true)
 
 proc create*(T: type gen_qaction_types.QAction,
     icon: gen_qicon_types.QIcon, text: string,
     vtbl: ref QActionVTable = nil): gen_qaction_types.QAction =
   let vtbl = if vtbl == nil: new QActionVTable else: vtbl
   GC_ref(vtbl)
-  vtbl.vtbl.destructor = proc(vtbl: ptr cQActionVTable, _: ptr cQAction) {.cdecl.} =
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQActionVTable, _: ptr cQAction) {.cdecl.} =
     let vtbl = cast[ref QActionVTable](vtbl)
     GC_unref(vtbl)
-  if not isNil(vtbl.metaObject):
+  if not isNil(vtbl[].metaObject):
     vtbl[].vtbl.metaObject = miqt_exec_callback_cQAction_metaObject
-  if not isNil(vtbl.metacast):
+  if not isNil(vtbl[].metacast):
     vtbl[].vtbl.metacast = miqt_exec_callback_cQAction_metacast
-  if not isNil(vtbl.metacall):
+  if not isNil(vtbl[].metacall):
     vtbl[].vtbl.metacall = miqt_exec_callback_cQAction_metacall
-  if not isNil(vtbl.event):
+  if not isNil(vtbl[].event):
     vtbl[].vtbl.event = miqt_exec_callback_cQAction_event
-  if not isNil(vtbl.eventFilter):
+  if not isNil(vtbl[].eventFilter):
     vtbl[].vtbl.eventFilter = miqt_exec_callback_cQAction_eventFilter
-  if not isNil(vtbl.timerEvent):
+  if not isNil(vtbl[].timerEvent):
     vtbl[].vtbl.timerEvent = miqt_exec_callback_cQAction_timerEvent
-  if not isNil(vtbl.childEvent):
+  if not isNil(vtbl[].childEvent):
     vtbl[].vtbl.childEvent = miqt_exec_callback_cQAction_childEvent
-  if not isNil(vtbl.customEvent):
+  if not isNil(vtbl[].customEvent):
     vtbl[].vtbl.customEvent = miqt_exec_callback_cQAction_customEvent
-  if not isNil(vtbl.connectNotify):
+  if not isNil(vtbl[].connectNotify):
     vtbl[].vtbl.connectNotify = miqt_exec_callback_cQAction_connectNotify
-  if not isNil(vtbl.disconnectNotify):
+  if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQAction_disconnectNotify
-  gen_qaction_types.QAction(h: fcQAction_new3(addr(vtbl[]), icon.h, struct_miqt_string(data: text, len: csize_t(len(text)))))
+  gen_qaction_types.QAction(h: fcQAction_new3(addr(vtbl[].vtbl), icon.h, struct_miqt_string(data: text, len: csize_t(len(text)))), owned: true)
 
 proc create*(T: type gen_qaction_types.QAction,
     parent: gen_qobject_types.QObject,
     vtbl: ref QActionVTable = nil): gen_qaction_types.QAction =
   let vtbl = if vtbl == nil: new QActionVTable else: vtbl
   GC_ref(vtbl)
-  vtbl.vtbl.destructor = proc(vtbl: ptr cQActionVTable, _: ptr cQAction) {.cdecl.} =
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQActionVTable, _: ptr cQAction) {.cdecl.} =
     let vtbl = cast[ref QActionVTable](vtbl)
     GC_unref(vtbl)
-  if not isNil(vtbl.metaObject):
+  if not isNil(vtbl[].metaObject):
     vtbl[].vtbl.metaObject = miqt_exec_callback_cQAction_metaObject
-  if not isNil(vtbl.metacast):
+  if not isNil(vtbl[].metacast):
     vtbl[].vtbl.metacast = miqt_exec_callback_cQAction_metacast
-  if not isNil(vtbl.metacall):
+  if not isNil(vtbl[].metacall):
     vtbl[].vtbl.metacall = miqt_exec_callback_cQAction_metacall
-  if not isNil(vtbl.event):
+  if not isNil(vtbl[].event):
     vtbl[].vtbl.event = miqt_exec_callback_cQAction_event
-  if not isNil(vtbl.eventFilter):
+  if not isNil(vtbl[].eventFilter):
     vtbl[].vtbl.eventFilter = miqt_exec_callback_cQAction_eventFilter
-  if not isNil(vtbl.timerEvent):
+  if not isNil(vtbl[].timerEvent):
     vtbl[].vtbl.timerEvent = miqt_exec_callback_cQAction_timerEvent
-  if not isNil(vtbl.childEvent):
+  if not isNil(vtbl[].childEvent):
     vtbl[].vtbl.childEvent = miqt_exec_callback_cQAction_childEvent
-  if not isNil(vtbl.customEvent):
+  if not isNil(vtbl[].customEvent):
     vtbl[].vtbl.customEvent = miqt_exec_callback_cQAction_customEvent
-  if not isNil(vtbl.connectNotify):
+  if not isNil(vtbl[].connectNotify):
     vtbl[].vtbl.connectNotify = miqt_exec_callback_cQAction_connectNotify
-  if not isNil(vtbl.disconnectNotify):
+  if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQAction_disconnectNotify
-  gen_qaction_types.QAction(h: fcQAction_new4(addr(vtbl[]), parent.h))
+  gen_qaction_types.QAction(h: fcQAction_new4(addr(vtbl[].vtbl), parent.h), owned: true)
 
 proc create*(T: type gen_qaction_types.QAction,
     text: string, parent: gen_qobject_types.QObject,
     vtbl: ref QActionVTable = nil): gen_qaction_types.QAction =
   let vtbl = if vtbl == nil: new QActionVTable else: vtbl
   GC_ref(vtbl)
-  vtbl.vtbl.destructor = proc(vtbl: ptr cQActionVTable, _: ptr cQAction) {.cdecl.} =
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQActionVTable, _: ptr cQAction) {.cdecl.} =
     let vtbl = cast[ref QActionVTable](vtbl)
     GC_unref(vtbl)
-  if not isNil(vtbl.metaObject):
+  if not isNil(vtbl[].metaObject):
     vtbl[].vtbl.metaObject = miqt_exec_callback_cQAction_metaObject
-  if not isNil(vtbl.metacast):
+  if not isNil(vtbl[].metacast):
     vtbl[].vtbl.metacast = miqt_exec_callback_cQAction_metacast
-  if not isNil(vtbl.metacall):
+  if not isNil(vtbl[].metacall):
     vtbl[].vtbl.metacall = miqt_exec_callback_cQAction_metacall
-  if not isNil(vtbl.event):
+  if not isNil(vtbl[].event):
     vtbl[].vtbl.event = miqt_exec_callback_cQAction_event
-  if not isNil(vtbl.eventFilter):
+  if not isNil(vtbl[].eventFilter):
     vtbl[].vtbl.eventFilter = miqt_exec_callback_cQAction_eventFilter
-  if not isNil(vtbl.timerEvent):
+  if not isNil(vtbl[].timerEvent):
     vtbl[].vtbl.timerEvent = miqt_exec_callback_cQAction_timerEvent
-  if not isNil(vtbl.childEvent):
+  if not isNil(vtbl[].childEvent):
     vtbl[].vtbl.childEvent = miqt_exec_callback_cQAction_childEvent
-  if not isNil(vtbl.customEvent):
+  if not isNil(vtbl[].customEvent):
     vtbl[].vtbl.customEvent = miqt_exec_callback_cQAction_customEvent
-  if not isNil(vtbl.connectNotify):
+  if not isNil(vtbl[].connectNotify):
     vtbl[].vtbl.connectNotify = miqt_exec_callback_cQAction_connectNotify
-  if not isNil(vtbl.disconnectNotify):
+  if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQAction_disconnectNotify
-  gen_qaction_types.QAction(h: fcQAction_new5(addr(vtbl[]), struct_miqt_string(data: text, len: csize_t(len(text))), parent.h))
+  gen_qaction_types.QAction(h: fcQAction_new5(addr(vtbl[].vtbl), struct_miqt_string(data: text, len: csize_t(len(text))), parent.h), owned: true)
 
 proc create*(T: type gen_qaction_types.QAction,
     icon: gen_qicon_types.QIcon, text: string, parent: gen_qobject_types.QObject,
     vtbl: ref QActionVTable = nil): gen_qaction_types.QAction =
   let vtbl = if vtbl == nil: new QActionVTable else: vtbl
   GC_ref(vtbl)
-  vtbl.vtbl.destructor = proc(vtbl: ptr cQActionVTable, _: ptr cQAction) {.cdecl.} =
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQActionVTable, _: ptr cQAction) {.cdecl.} =
     let vtbl = cast[ref QActionVTable](vtbl)
     GC_unref(vtbl)
-  if not isNil(vtbl.metaObject):
+  if not isNil(vtbl[].metaObject):
     vtbl[].vtbl.metaObject = miqt_exec_callback_cQAction_metaObject
-  if not isNil(vtbl.metacast):
+  if not isNil(vtbl[].metacast):
     vtbl[].vtbl.metacast = miqt_exec_callback_cQAction_metacast
-  if not isNil(vtbl.metacall):
+  if not isNil(vtbl[].metacall):
     vtbl[].vtbl.metacall = miqt_exec_callback_cQAction_metacall
-  if not isNil(vtbl.event):
+  if not isNil(vtbl[].event):
     vtbl[].vtbl.event = miqt_exec_callback_cQAction_event
-  if not isNil(vtbl.eventFilter):
+  if not isNil(vtbl[].eventFilter):
     vtbl[].vtbl.eventFilter = miqt_exec_callback_cQAction_eventFilter
-  if not isNil(vtbl.timerEvent):
+  if not isNil(vtbl[].timerEvent):
     vtbl[].vtbl.timerEvent = miqt_exec_callback_cQAction_timerEvent
-  if not isNil(vtbl.childEvent):
+  if not isNil(vtbl[].childEvent):
     vtbl[].vtbl.childEvent = miqt_exec_callback_cQAction_childEvent
-  if not isNil(vtbl.customEvent):
+  if not isNil(vtbl[].customEvent):
     vtbl[].vtbl.customEvent = miqt_exec_callback_cQAction_customEvent
-  if not isNil(vtbl.connectNotify):
+  if not isNil(vtbl[].connectNotify):
     vtbl[].vtbl.connectNotify = miqt_exec_callback_cQAction_connectNotify
-  if not isNil(vtbl.disconnectNotify):
+  if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQAction_disconnectNotify
-  gen_qaction_types.QAction(h: fcQAction_new6(addr(vtbl[]), icon.h, struct_miqt_string(data: text, len: csize_t(len(text))), parent.h))
+  gen_qaction_types.QAction(h: fcQAction_new6(addr(vtbl[].vtbl), icon.h, struct_miqt_string(data: text, len: csize_t(len(text))), parent.h), owned: true)
+
+proc create*(T: type gen_qaction_types.QAction,
+    vtbl: VirtualQAction) =
+
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQActionVTable, _: ptr cQAction) {.cdecl.} =
+    let vtbl = cast[ptr typeof(VirtualQAction()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQAction, vtbl)))
+    vtbl[].h = nil
+    vtbl[].owned = false
+  vtbl[].vtbl.metaObject = miqt_exec_method_cQAction_metaObject
+  vtbl[].vtbl.metacast = miqt_exec_method_cQAction_metacast
+  vtbl[].vtbl.metacall = miqt_exec_method_cQAction_metacall
+  vtbl[].vtbl.event = miqt_exec_method_cQAction_event
+  vtbl[].vtbl.eventFilter = miqt_exec_method_cQAction_eventFilter
+  vtbl[].vtbl.timerEvent = miqt_exec_method_cQAction_timerEvent
+  vtbl[].vtbl.childEvent = miqt_exec_method_cQAction_childEvent
+  vtbl[].vtbl.customEvent = miqt_exec_method_cQAction_customEvent
+  vtbl[].vtbl.connectNotify = miqt_exec_method_cQAction_connectNotify
+  vtbl[].vtbl.disconnectNotify = miqt_exec_method_cQAction_disconnectNotify
+  if vtbl[].h != nil: delete(move(vtbl[]))
+  vtbl[].h = fcQAction_new(addr(vtbl[].vtbl), )
+  vtbl[].owned = true
+
+proc create*(T: type gen_qaction_types.QAction,
+    text: string,
+    vtbl: VirtualQAction) =
+
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQActionVTable, _: ptr cQAction) {.cdecl.} =
+    let vtbl = cast[ptr typeof(VirtualQAction()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQAction, vtbl)))
+    vtbl[].h = nil
+    vtbl[].owned = false
+  vtbl[].vtbl.metaObject = miqt_exec_method_cQAction_metaObject
+  vtbl[].vtbl.metacast = miqt_exec_method_cQAction_metacast
+  vtbl[].vtbl.metacall = miqt_exec_method_cQAction_metacall
+  vtbl[].vtbl.event = miqt_exec_method_cQAction_event
+  vtbl[].vtbl.eventFilter = miqt_exec_method_cQAction_eventFilter
+  vtbl[].vtbl.timerEvent = miqt_exec_method_cQAction_timerEvent
+  vtbl[].vtbl.childEvent = miqt_exec_method_cQAction_childEvent
+  vtbl[].vtbl.customEvent = miqt_exec_method_cQAction_customEvent
+  vtbl[].vtbl.connectNotify = miqt_exec_method_cQAction_connectNotify
+  vtbl[].vtbl.disconnectNotify = miqt_exec_method_cQAction_disconnectNotify
+  if vtbl[].h != nil: delete(move(vtbl[]))
+  vtbl[].h = fcQAction_new2(addr(vtbl[].vtbl), struct_miqt_string(data: text, len: csize_t(len(text))))
+  vtbl[].owned = true
+
+proc create*(T: type gen_qaction_types.QAction,
+    icon: gen_qicon_types.QIcon, text: string,
+    vtbl: VirtualQAction) =
+
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQActionVTable, _: ptr cQAction) {.cdecl.} =
+    let vtbl = cast[ptr typeof(VirtualQAction()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQAction, vtbl)))
+    vtbl[].h = nil
+    vtbl[].owned = false
+  vtbl[].vtbl.metaObject = miqt_exec_method_cQAction_metaObject
+  vtbl[].vtbl.metacast = miqt_exec_method_cQAction_metacast
+  vtbl[].vtbl.metacall = miqt_exec_method_cQAction_metacall
+  vtbl[].vtbl.event = miqt_exec_method_cQAction_event
+  vtbl[].vtbl.eventFilter = miqt_exec_method_cQAction_eventFilter
+  vtbl[].vtbl.timerEvent = miqt_exec_method_cQAction_timerEvent
+  vtbl[].vtbl.childEvent = miqt_exec_method_cQAction_childEvent
+  vtbl[].vtbl.customEvent = miqt_exec_method_cQAction_customEvent
+  vtbl[].vtbl.connectNotify = miqt_exec_method_cQAction_connectNotify
+  vtbl[].vtbl.disconnectNotify = miqt_exec_method_cQAction_disconnectNotify
+  if vtbl[].h != nil: delete(move(vtbl[]))
+  vtbl[].h = fcQAction_new3(addr(vtbl[].vtbl), icon.h, struct_miqt_string(data: text, len: csize_t(len(text))))
+  vtbl[].owned = true
+
+proc create*(T: type gen_qaction_types.QAction,
+    parent: gen_qobject_types.QObject,
+    vtbl: VirtualQAction) =
+
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQActionVTable, _: ptr cQAction) {.cdecl.} =
+    let vtbl = cast[ptr typeof(VirtualQAction()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQAction, vtbl)))
+    vtbl[].h = nil
+    vtbl[].owned = false
+  vtbl[].vtbl.metaObject = miqt_exec_method_cQAction_metaObject
+  vtbl[].vtbl.metacast = miqt_exec_method_cQAction_metacast
+  vtbl[].vtbl.metacall = miqt_exec_method_cQAction_metacall
+  vtbl[].vtbl.event = miqt_exec_method_cQAction_event
+  vtbl[].vtbl.eventFilter = miqt_exec_method_cQAction_eventFilter
+  vtbl[].vtbl.timerEvent = miqt_exec_method_cQAction_timerEvent
+  vtbl[].vtbl.childEvent = miqt_exec_method_cQAction_childEvent
+  vtbl[].vtbl.customEvent = miqt_exec_method_cQAction_customEvent
+  vtbl[].vtbl.connectNotify = miqt_exec_method_cQAction_connectNotify
+  vtbl[].vtbl.disconnectNotify = miqt_exec_method_cQAction_disconnectNotify
+  if vtbl[].h != nil: delete(move(vtbl[]))
+  vtbl[].h = fcQAction_new4(addr(vtbl[].vtbl), parent.h)
+  vtbl[].owned = true
+
+proc create*(T: type gen_qaction_types.QAction,
+    text: string, parent: gen_qobject_types.QObject,
+    vtbl: VirtualQAction) =
+
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQActionVTable, _: ptr cQAction) {.cdecl.} =
+    let vtbl = cast[ptr typeof(VirtualQAction()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQAction, vtbl)))
+    vtbl[].h = nil
+    vtbl[].owned = false
+  vtbl[].vtbl.metaObject = miqt_exec_method_cQAction_metaObject
+  vtbl[].vtbl.metacast = miqt_exec_method_cQAction_metacast
+  vtbl[].vtbl.metacall = miqt_exec_method_cQAction_metacall
+  vtbl[].vtbl.event = miqt_exec_method_cQAction_event
+  vtbl[].vtbl.eventFilter = miqt_exec_method_cQAction_eventFilter
+  vtbl[].vtbl.timerEvent = miqt_exec_method_cQAction_timerEvent
+  vtbl[].vtbl.childEvent = miqt_exec_method_cQAction_childEvent
+  vtbl[].vtbl.customEvent = miqt_exec_method_cQAction_customEvent
+  vtbl[].vtbl.connectNotify = miqt_exec_method_cQAction_connectNotify
+  vtbl[].vtbl.disconnectNotify = miqt_exec_method_cQAction_disconnectNotify
+  if vtbl[].h != nil: delete(move(vtbl[]))
+  vtbl[].h = fcQAction_new5(addr(vtbl[].vtbl), struct_miqt_string(data: text, len: csize_t(len(text))), parent.h)
+  vtbl[].owned = true
+
+proc create*(T: type gen_qaction_types.QAction,
+    icon: gen_qicon_types.QIcon, text: string, parent: gen_qobject_types.QObject,
+    vtbl: VirtualQAction) =
+
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQActionVTable, _: ptr cQAction) {.cdecl.} =
+    let vtbl = cast[ptr typeof(VirtualQAction()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQAction, vtbl)))
+    vtbl[].h = nil
+    vtbl[].owned = false
+  vtbl[].vtbl.metaObject = miqt_exec_method_cQAction_metaObject
+  vtbl[].vtbl.metacast = miqt_exec_method_cQAction_metacast
+  vtbl[].vtbl.metacall = miqt_exec_method_cQAction_metacall
+  vtbl[].vtbl.event = miqt_exec_method_cQAction_event
+  vtbl[].vtbl.eventFilter = miqt_exec_method_cQAction_eventFilter
+  vtbl[].vtbl.timerEvent = miqt_exec_method_cQAction_timerEvent
+  vtbl[].vtbl.childEvent = miqt_exec_method_cQAction_childEvent
+  vtbl[].vtbl.customEvent = miqt_exec_method_cQAction_customEvent
+  vtbl[].vtbl.connectNotify = miqt_exec_method_cQAction_connectNotify
+  vtbl[].vtbl.disconnectNotify = miqt_exec_method_cQAction_disconnectNotify
+  if vtbl[].h != nil: delete(move(vtbl[]))
+  vtbl[].h = fcQAction_new6(addr(vtbl[].vtbl), icon.h, struct_miqt_string(data: text, len: csize_t(len(text))), parent.h)
+  vtbl[].owned = true
 
 proc staticMetaObject*(_: type gen_qaction_types.QAction): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQAction_staticMetaObject())
-proc delete*(self: gen_qaction_types.QAction) =
-  fcQAction_delete(self.h)

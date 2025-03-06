@@ -30,7 +30,7 @@ func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
     else:
       copyMem(addr result[0], unsafeAddr v[0], v.len)
 
-const cflags = gorge("pkg-config --cflags Qt6Widgets")  & " -fPIC"
+const cflags = gorge("pkg-config --cflags Qt6Widgets") & " -fPIC"
 {.compile("gen_qlineedit.cpp", cflags).}
 
 
@@ -186,7 +186,7 @@ proc fcQLineEdit_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QLi
 proc fcQLineEdit_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QLineEdit_tr3".}
 proc fcQLineEdit_cursorForward2(self: pointer, mark: bool, steps: cint): void {.importc: "QLineEdit_cursorForward2".}
 proc fcQLineEdit_cursorBackward2(self: pointer, mark: bool, steps: cint): void {.importc: "QLineEdit_cursorBackward2".}
-type cQLineEditVTable = object
+type cQLineEditVTable {.pure.} = object
   destructor*: proc(vtbl: ptr cQLineEditVTable, self: ptr cQLineEdit) {.cdecl, raises:[], gcsafe.}
   metaObject*: proc(vtbl, self: pointer, ): pointer {.cdecl, raises: [], gcsafe.}
   metacast*: proc(vtbl, self: pointer, param1: cstring): pointer {.cdecl, raises: [], gcsafe.}
@@ -305,10 +305,9 @@ proc fcQLineEdit_new2(vtbl: pointer, ): ptr cQLineEdit {.importc: "QLineEdit_new
 proc fcQLineEdit_new3(vtbl: pointer, param1: struct_miqt_string): ptr cQLineEdit {.importc: "QLineEdit_new3".}
 proc fcQLineEdit_new4(vtbl: pointer, param1: struct_miqt_string, parent: pointer): ptr cQLineEdit {.importc: "QLineEdit_new4".}
 proc fcQLineEdit_staticMetaObject(): pointer {.importc: "QLineEdit_staticMetaObject".}
-proc fcQLineEdit_delete(self: pointer) {.importc: "QLineEdit_delete".}
 
 proc metaObject*(self: gen_qlineedit_types.QLineEdit, ): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQLineEdit_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQLineEdit_metaObject(self.h), owned: false)
 
 proc metacast*(self: gen_qlineedit_types.QLineEdit, param1: cstring): pointer =
   fcQLineEdit_metacast(self.h, param1)
@@ -377,19 +376,19 @@ proc setValidator*(self: gen_qlineedit_types.QLineEdit, validator: gen_qvalidato
   fcQLineEdit_setValidator(self.h, validator.h)
 
 proc validator*(self: gen_qlineedit_types.QLineEdit, ): gen_qvalidator_types.QValidator =
-  gen_qvalidator_types.QValidator(h: fcQLineEdit_validator(self.h))
+  gen_qvalidator_types.QValidator(h: fcQLineEdit_validator(self.h), owned: false)
 
 proc setCompleter*(self: gen_qlineedit_types.QLineEdit, completer: gen_qcompleter_types.QCompleter): void =
   fcQLineEdit_setCompleter(self.h, completer.h)
 
 proc completer*(self: gen_qlineedit_types.QLineEdit, ): gen_qcompleter_types.QCompleter =
-  gen_qcompleter_types.QCompleter(h: fcQLineEdit_completer(self.h))
+  gen_qcompleter_types.QCompleter(h: fcQLineEdit_completer(self.h), owned: false)
 
 proc sizeHint*(self: gen_qlineedit_types.QLineEdit, ): gen_qsize_types.QSize =
-  gen_qsize_types.QSize(h: fcQLineEdit_sizeHint(self.h))
+  gen_qsize_types.QSize(h: fcQLineEdit_sizeHint(self.h), owned: true)
 
 proc minimumSizeHint*(self: gen_qlineedit_types.QLineEdit, ): gen_qsize_types.QSize =
-  gen_qsize_types.QSize(h: fcQLineEdit_minimumSizeHint(self.h))
+  gen_qsize_types.QSize(h: fcQLineEdit_minimumSizeHint(self.h), owned: true)
 
 proc cursorPosition*(self: gen_qlineedit_types.QLineEdit, ): cint =
   fcQLineEdit_cursorPosition(self.h)
@@ -494,13 +493,13 @@ proc setTextMargins*(self: gen_qlineedit_types.QLineEdit, margins: gen_qmargins_
   fcQLineEdit_setTextMarginsWithMargins(self.h, margins.h)
 
 proc textMargins*(self: gen_qlineedit_types.QLineEdit, ): gen_qmargins_types.QMargins =
-  gen_qmargins_types.QMargins(h: fcQLineEdit_textMargins(self.h))
+  gen_qmargins_types.QMargins(h: fcQLineEdit_textMargins(self.h), owned: true)
 
 proc addAction*(self: gen_qlineedit_types.QLineEdit, action: gen_qaction_types.QAction, position: cint): void =
   fcQLineEdit_addAction(self.h, action.h, cint(position))
 
 proc addAction*(self: gen_qlineedit_types.QLineEdit, icon: gen_qicon_types.QIcon, position: cint): gen_qaction_types.QAction =
-  gen_qaction_types.QAction(h: fcQLineEdit_addAction2(self.h, icon.h, cint(position)))
+  gen_qaction_types.QAction(h: fcQLineEdit_addAction2(self.h, icon.h, cint(position)), owned: false)
 
 proc setText*(self: gen_qlineedit_types.QLineEdit, text: string): void =
   fcQLineEdit_setText(self.h, struct_miqt_string(data: text, len: csize_t(len(text))))
@@ -533,7 +532,7 @@ proc insert*(self: gen_qlineedit_types.QLineEdit, param1: string): void =
   fcQLineEdit_insert(self.h, struct_miqt_string(data: param1, len: csize_t(len(param1))))
 
 proc createStandardContextMenu*(self: gen_qlineedit_types.QLineEdit, ): gen_qmenu_types.QMenu =
-  gen_qmenu_types.QMenu(h: fcQLineEdit_createStandardContextMenu(self.h))
+  gen_qmenu_types.QMenu(h: fcQLineEdit_createStandardContextMenu(self.h), owned: false)
 
 proc textChanged*(self: gen_qlineedit_types.QLineEdit, param1: string): void =
   fcQLineEdit_textChanged(self.h, struct_miqt_string(data: param1, len: csize_t(len(param1))))
@@ -676,10 +675,10 @@ proc oninputRejected*(self: gen_qlineedit_types.QLineEdit, slot: QLineEditinputR
   fcQLineEdit_connect_inputRejected(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQLineEdit_inputRejected, miqt_exec_callback_cQLineEdit_inputRejected_release)
 
 proc inputMethodQuery*(self: gen_qlineedit_types.QLineEdit, param1: cint): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQLineEdit_inputMethodQuery(self.h, cint(param1)))
+  gen_qvariant_types.QVariant(h: fcQLineEdit_inputMethodQuery(self.h, cint(param1)), owned: true)
 
 proc inputMethodQuery*(self: gen_qlineedit_types.QLineEdit, property: cint, argument: gen_qvariant_types.QVariant): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQLineEdit_inputMethodQuery2(self.h, cint(property), argument.h))
+  gen_qvariant_types.QVariant(h: fcQLineEdit_inputMethodQuery2(self.h, cint(property), argument.h), owned: true)
 
 proc timerEvent*(self: gen_qlineedit_types.QLineEdit, param1: gen_qcoreevent_types.QTimerEvent): void =
   fcQLineEdit_timerEvent(self.h, param1.h)
@@ -756,7 +755,7 @@ type QLineEditchildEventProc* = proc(self: QLineEdit, event: gen_qcoreevent_type
 type QLineEditcustomEventProc* = proc(self: QLineEdit, event: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
 type QLineEditconnectNotifyProc* = proc(self: QLineEdit, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
 type QLineEditdisconnectNotifyProc* = proc(self: QLineEdit, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
-type QLineEditVTable* = object
+type QLineEditVTable* {.inheritable, pure.} = object
   vtbl: cQLineEditVTable
   metaObject*: QLineEditmetaObjectProc
   metacast*: QLineEditmetacastProc
@@ -810,13 +809,16 @@ type QLineEditVTable* = object
   connectNotify*: QLineEditconnectNotifyProc
   disconnectNotify*: QLineEditdisconnectNotifyProc
 proc QLineEditmetaObject*(self: gen_qlineedit_types.QLineEdit, ): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQLineEdit_virtualbase_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQLineEdit_virtualbase_metaObject(self.h), owned: false)
 
 proc miqt_exec_callback_cQLineEdit_metaObject(vtbl: pointer, self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QLineEditVTable](vtbl)
   let self = QLineEdit(h: self)
   var virtualReturn = vtbl[].metaObject(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QLineEditmetacast*(self: gen_qlineedit_types.QLineEdit, param1: cstring): pointer =
   fcQLineEdit_virtualbase_metacast(self.h, param1)
@@ -841,22 +843,28 @@ proc miqt_exec_callback_cQLineEdit_metacall(vtbl: pointer, self: pointer, param1
   virtualReturn
 
 proc QLineEditsizeHint*(self: gen_qlineedit_types.QLineEdit, ): gen_qsize_types.QSize =
-  gen_qsize_types.QSize(h: fcQLineEdit_virtualbase_sizeHint(self.h))
+  gen_qsize_types.QSize(h: fcQLineEdit_virtualbase_sizeHint(self.h), owned: true)
 
 proc miqt_exec_callback_cQLineEdit_sizeHint(vtbl: pointer, self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QLineEditVTable](vtbl)
   let self = QLineEdit(h: self)
   var virtualReturn = vtbl[].sizeHint(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QLineEditminimumSizeHint*(self: gen_qlineedit_types.QLineEdit, ): gen_qsize_types.QSize =
-  gen_qsize_types.QSize(h: fcQLineEdit_virtualbase_minimumSizeHint(self.h))
+  gen_qsize_types.QSize(h: fcQLineEdit_virtualbase_minimumSizeHint(self.h), owned: true)
 
 proc miqt_exec_callback_cQLineEdit_minimumSizeHint(vtbl: pointer, self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QLineEditVTable](vtbl)
   let self = QLineEdit(h: self)
   var virtualReturn = vtbl[].minimumSizeHint(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QLineEditmousePressEvent*(self: gen_qlineedit_types.QLineEdit, param1: gen_qevent_types.QMouseEvent): void =
   fcQLineEdit_virtualbase_mousePressEvent(self.h, param1.h)
@@ -864,7 +872,7 @@ proc QLineEditmousePressEvent*(self: gen_qlineedit_types.QLineEdit, param1: gen_
 proc miqt_exec_callback_cQLineEdit_mousePressEvent(vtbl: pointer, self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QLineEditVTable](vtbl)
   let self = QLineEdit(h: self)
-  let slotval1 = gen_qevent_types.QMouseEvent(h: param1)
+  let slotval1 = gen_qevent_types.QMouseEvent(h: param1, owned: false)
   vtbl[].mousePressEvent(self, slotval1)
 
 proc QLineEditmouseMoveEvent*(self: gen_qlineedit_types.QLineEdit, param1: gen_qevent_types.QMouseEvent): void =
@@ -873,7 +881,7 @@ proc QLineEditmouseMoveEvent*(self: gen_qlineedit_types.QLineEdit, param1: gen_q
 proc miqt_exec_callback_cQLineEdit_mouseMoveEvent(vtbl: pointer, self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QLineEditVTable](vtbl)
   let self = QLineEdit(h: self)
-  let slotval1 = gen_qevent_types.QMouseEvent(h: param1)
+  let slotval1 = gen_qevent_types.QMouseEvent(h: param1, owned: false)
   vtbl[].mouseMoveEvent(self, slotval1)
 
 proc QLineEditmouseReleaseEvent*(self: gen_qlineedit_types.QLineEdit, param1: gen_qevent_types.QMouseEvent): void =
@@ -882,7 +890,7 @@ proc QLineEditmouseReleaseEvent*(self: gen_qlineedit_types.QLineEdit, param1: ge
 proc miqt_exec_callback_cQLineEdit_mouseReleaseEvent(vtbl: pointer, self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QLineEditVTable](vtbl)
   let self = QLineEdit(h: self)
-  let slotval1 = gen_qevent_types.QMouseEvent(h: param1)
+  let slotval1 = gen_qevent_types.QMouseEvent(h: param1, owned: false)
   vtbl[].mouseReleaseEvent(self, slotval1)
 
 proc QLineEditmouseDoubleClickEvent*(self: gen_qlineedit_types.QLineEdit, param1: gen_qevent_types.QMouseEvent): void =
@@ -891,7 +899,7 @@ proc QLineEditmouseDoubleClickEvent*(self: gen_qlineedit_types.QLineEdit, param1
 proc miqt_exec_callback_cQLineEdit_mouseDoubleClickEvent(vtbl: pointer, self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QLineEditVTable](vtbl)
   let self = QLineEdit(h: self)
-  let slotval1 = gen_qevent_types.QMouseEvent(h: param1)
+  let slotval1 = gen_qevent_types.QMouseEvent(h: param1, owned: false)
   vtbl[].mouseDoubleClickEvent(self, slotval1)
 
 proc QLineEditkeyPressEvent*(self: gen_qlineedit_types.QLineEdit, param1: gen_qevent_types.QKeyEvent): void =
@@ -900,7 +908,7 @@ proc QLineEditkeyPressEvent*(self: gen_qlineedit_types.QLineEdit, param1: gen_qe
 proc miqt_exec_callback_cQLineEdit_keyPressEvent(vtbl: pointer, self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QLineEditVTable](vtbl)
   let self = QLineEdit(h: self)
-  let slotval1 = gen_qevent_types.QKeyEvent(h: param1)
+  let slotval1 = gen_qevent_types.QKeyEvent(h: param1, owned: false)
   vtbl[].keyPressEvent(self, slotval1)
 
 proc QLineEditkeyReleaseEvent*(self: gen_qlineedit_types.QLineEdit, param1: gen_qevent_types.QKeyEvent): void =
@@ -909,7 +917,7 @@ proc QLineEditkeyReleaseEvent*(self: gen_qlineedit_types.QLineEdit, param1: gen_
 proc miqt_exec_callback_cQLineEdit_keyReleaseEvent(vtbl: pointer, self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QLineEditVTable](vtbl)
   let self = QLineEdit(h: self)
-  let slotval1 = gen_qevent_types.QKeyEvent(h: param1)
+  let slotval1 = gen_qevent_types.QKeyEvent(h: param1, owned: false)
   vtbl[].keyReleaseEvent(self, slotval1)
 
 proc QLineEditfocusInEvent*(self: gen_qlineedit_types.QLineEdit, param1: gen_qevent_types.QFocusEvent): void =
@@ -918,7 +926,7 @@ proc QLineEditfocusInEvent*(self: gen_qlineedit_types.QLineEdit, param1: gen_qev
 proc miqt_exec_callback_cQLineEdit_focusInEvent(vtbl: pointer, self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QLineEditVTable](vtbl)
   let self = QLineEdit(h: self)
-  let slotval1 = gen_qevent_types.QFocusEvent(h: param1)
+  let slotval1 = gen_qevent_types.QFocusEvent(h: param1, owned: false)
   vtbl[].focusInEvent(self, slotval1)
 
 proc QLineEditfocusOutEvent*(self: gen_qlineedit_types.QLineEdit, param1: gen_qevent_types.QFocusEvent): void =
@@ -927,7 +935,7 @@ proc QLineEditfocusOutEvent*(self: gen_qlineedit_types.QLineEdit, param1: gen_qe
 proc miqt_exec_callback_cQLineEdit_focusOutEvent(vtbl: pointer, self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QLineEditVTable](vtbl)
   let self = QLineEdit(h: self)
-  let slotval1 = gen_qevent_types.QFocusEvent(h: param1)
+  let slotval1 = gen_qevent_types.QFocusEvent(h: param1, owned: false)
   vtbl[].focusOutEvent(self, slotval1)
 
 proc QLineEditpaintEvent*(self: gen_qlineedit_types.QLineEdit, param1: gen_qevent_types.QPaintEvent): void =
@@ -936,7 +944,7 @@ proc QLineEditpaintEvent*(self: gen_qlineedit_types.QLineEdit, param1: gen_qeven
 proc miqt_exec_callback_cQLineEdit_paintEvent(vtbl: pointer, self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QLineEditVTable](vtbl)
   let self = QLineEdit(h: self)
-  let slotval1 = gen_qevent_types.QPaintEvent(h: param1)
+  let slotval1 = gen_qevent_types.QPaintEvent(h: param1, owned: false)
   vtbl[].paintEvent(self, slotval1)
 
 proc QLineEditdragEnterEvent*(self: gen_qlineedit_types.QLineEdit, param1: gen_qevent_types.QDragEnterEvent): void =
@@ -945,7 +953,7 @@ proc QLineEditdragEnterEvent*(self: gen_qlineedit_types.QLineEdit, param1: gen_q
 proc miqt_exec_callback_cQLineEdit_dragEnterEvent(vtbl: pointer, self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QLineEditVTable](vtbl)
   let self = QLineEdit(h: self)
-  let slotval1 = gen_qevent_types.QDragEnterEvent(h: param1)
+  let slotval1 = gen_qevent_types.QDragEnterEvent(h: param1, owned: false)
   vtbl[].dragEnterEvent(self, slotval1)
 
 proc QLineEditdragMoveEvent*(self: gen_qlineedit_types.QLineEdit, e: gen_qevent_types.QDragMoveEvent): void =
@@ -954,7 +962,7 @@ proc QLineEditdragMoveEvent*(self: gen_qlineedit_types.QLineEdit, e: gen_qevent_
 proc miqt_exec_callback_cQLineEdit_dragMoveEvent(vtbl: pointer, self: pointer, e: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QLineEditVTable](vtbl)
   let self = QLineEdit(h: self)
-  let slotval1 = gen_qevent_types.QDragMoveEvent(h: e)
+  let slotval1 = gen_qevent_types.QDragMoveEvent(h: e, owned: false)
   vtbl[].dragMoveEvent(self, slotval1)
 
 proc QLineEditdragLeaveEvent*(self: gen_qlineedit_types.QLineEdit, e: gen_qevent_types.QDragLeaveEvent): void =
@@ -963,7 +971,7 @@ proc QLineEditdragLeaveEvent*(self: gen_qlineedit_types.QLineEdit, e: gen_qevent
 proc miqt_exec_callback_cQLineEdit_dragLeaveEvent(vtbl: pointer, self: pointer, e: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QLineEditVTable](vtbl)
   let self = QLineEdit(h: self)
-  let slotval1 = gen_qevent_types.QDragLeaveEvent(h: e)
+  let slotval1 = gen_qevent_types.QDragLeaveEvent(h: e, owned: false)
   vtbl[].dragLeaveEvent(self, slotval1)
 
 proc QLineEditdropEvent*(self: gen_qlineedit_types.QLineEdit, param1: gen_qevent_types.QDropEvent): void =
@@ -972,7 +980,7 @@ proc QLineEditdropEvent*(self: gen_qlineedit_types.QLineEdit, param1: gen_qevent
 proc miqt_exec_callback_cQLineEdit_dropEvent(vtbl: pointer, self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QLineEditVTable](vtbl)
   let self = QLineEdit(h: self)
-  let slotval1 = gen_qevent_types.QDropEvent(h: param1)
+  let slotval1 = gen_qevent_types.QDropEvent(h: param1, owned: false)
   vtbl[].dropEvent(self, slotval1)
 
 proc QLineEditchangeEvent*(self: gen_qlineedit_types.QLineEdit, param1: gen_qcoreevent_types.QEvent): void =
@@ -981,7 +989,7 @@ proc QLineEditchangeEvent*(self: gen_qlineedit_types.QLineEdit, param1: gen_qcor
 proc miqt_exec_callback_cQLineEdit_changeEvent(vtbl: pointer, self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QLineEditVTable](vtbl)
   let self = QLineEdit(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: param1)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: param1, owned: false)
   vtbl[].changeEvent(self, slotval1)
 
 proc QLineEditcontextMenuEvent*(self: gen_qlineedit_types.QLineEdit, param1: gen_qevent_types.QContextMenuEvent): void =
@@ -990,7 +998,7 @@ proc QLineEditcontextMenuEvent*(self: gen_qlineedit_types.QLineEdit, param1: gen
 proc miqt_exec_callback_cQLineEdit_contextMenuEvent(vtbl: pointer, self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QLineEditVTable](vtbl)
   let self = QLineEdit(h: self)
-  let slotval1 = gen_qevent_types.QContextMenuEvent(h: param1)
+  let slotval1 = gen_qevent_types.QContextMenuEvent(h: param1, owned: false)
   vtbl[].contextMenuEvent(self, slotval1)
 
 proc QLineEditinputMethodEvent*(self: gen_qlineedit_types.QLineEdit, param1: gen_qevent_types.QInputMethodEvent): void =
@@ -999,7 +1007,7 @@ proc QLineEditinputMethodEvent*(self: gen_qlineedit_types.QLineEdit, param1: gen
 proc miqt_exec_callback_cQLineEdit_inputMethodEvent(vtbl: pointer, self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QLineEditVTable](vtbl)
   let self = QLineEdit(h: self)
-  let slotval1 = gen_qevent_types.QInputMethodEvent(h: param1)
+  let slotval1 = gen_qevent_types.QInputMethodEvent(h: param1, owned: false)
   vtbl[].inputMethodEvent(self, slotval1)
 
 proc QLineEditinitStyleOption*(self: gen_qlineedit_types.QLineEdit, option: gen_qstyleoption_types.QStyleOptionFrame): void =
@@ -1008,18 +1016,21 @@ proc QLineEditinitStyleOption*(self: gen_qlineedit_types.QLineEdit, option: gen_
 proc miqt_exec_callback_cQLineEdit_initStyleOption(vtbl: pointer, self: pointer, option: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QLineEditVTable](vtbl)
   let self = QLineEdit(h: self)
-  let slotval1 = gen_qstyleoption_types.QStyleOptionFrame(h: option)
+  let slotval1 = gen_qstyleoption_types.QStyleOptionFrame(h: option, owned: false)
   vtbl[].initStyleOption(self, slotval1)
 
 proc QLineEditinputMethodQuery*(self: gen_qlineedit_types.QLineEdit, param1: cint): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQLineEdit_virtualbase_inputMethodQuery(self.h, cint(param1)))
+  gen_qvariant_types.QVariant(h: fcQLineEdit_virtualbase_inputMethodQuery(self.h, cint(param1)), owned: true)
 
 proc miqt_exec_callback_cQLineEdit_inputMethodQuery(vtbl: pointer, self: pointer, param1: cint): pointer {.cdecl.} =
   let vtbl = cast[ptr QLineEditVTable](vtbl)
   let self = QLineEdit(h: self)
   let slotval1 = cint(param1)
   var virtualReturn = vtbl[].inputMethodQuery(self, slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QLineEdittimerEvent*(self: gen_qlineedit_types.QLineEdit, param1: gen_qcoreevent_types.QTimerEvent): void =
   fcQLineEdit_virtualbase_timerEvent(self.h, param1.h)
@@ -1027,7 +1038,7 @@ proc QLineEdittimerEvent*(self: gen_qlineedit_types.QLineEdit, param1: gen_qcore
 proc miqt_exec_callback_cQLineEdit_timerEvent(vtbl: pointer, self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QLineEditVTable](vtbl)
   let self = QLineEdit(h: self)
-  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: param1)
+  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: param1, owned: false)
   vtbl[].timerEvent(self, slotval1)
 
 proc QLineEditevent*(self: gen_qlineedit_types.QLineEdit, param1: gen_qcoreevent_types.QEvent): bool =
@@ -1036,7 +1047,7 @@ proc QLineEditevent*(self: gen_qlineedit_types.QLineEdit, param1: gen_qcoreevent
 proc miqt_exec_callback_cQLineEdit_event(vtbl: pointer, self: pointer, param1: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QLineEditVTable](vtbl)
   let self = QLineEdit(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: param1)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: param1, owned: false)
   var virtualReturn = vtbl[].event(self, slotval1)
   virtualReturn
 
@@ -1078,13 +1089,16 @@ proc miqt_exec_callback_cQLineEdit_hasHeightForWidth(vtbl: pointer, self: pointe
   virtualReturn
 
 proc QLineEditpaintEngine*(self: gen_qlineedit_types.QLineEdit, ): gen_qpaintengine_types.QPaintEngine =
-  gen_qpaintengine_types.QPaintEngine(h: fcQLineEdit_virtualbase_paintEngine(self.h))
+  gen_qpaintengine_types.QPaintEngine(h: fcQLineEdit_virtualbase_paintEngine(self.h), owned: false)
 
 proc miqt_exec_callback_cQLineEdit_paintEngine(vtbl: pointer, self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QLineEditVTable](vtbl)
   let self = QLineEdit(h: self)
   var virtualReturn = vtbl[].paintEngine(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QLineEditwheelEvent*(self: gen_qlineedit_types.QLineEdit, event: gen_qevent_types.QWheelEvent): void =
   fcQLineEdit_virtualbase_wheelEvent(self.h, event.h)
@@ -1092,7 +1106,7 @@ proc QLineEditwheelEvent*(self: gen_qlineedit_types.QLineEdit, event: gen_qevent
 proc miqt_exec_callback_cQLineEdit_wheelEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QLineEditVTable](vtbl)
   let self = QLineEdit(h: self)
-  let slotval1 = gen_qevent_types.QWheelEvent(h: event)
+  let slotval1 = gen_qevent_types.QWheelEvent(h: event, owned: false)
   vtbl[].wheelEvent(self, slotval1)
 
 proc QLineEditenterEvent*(self: gen_qlineedit_types.QLineEdit, event: gen_qevent_types.QEnterEvent): void =
@@ -1101,7 +1115,7 @@ proc QLineEditenterEvent*(self: gen_qlineedit_types.QLineEdit, event: gen_qevent
 proc miqt_exec_callback_cQLineEdit_enterEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QLineEditVTable](vtbl)
   let self = QLineEdit(h: self)
-  let slotval1 = gen_qevent_types.QEnterEvent(h: event)
+  let slotval1 = gen_qevent_types.QEnterEvent(h: event, owned: false)
   vtbl[].enterEvent(self, slotval1)
 
 proc QLineEditleaveEvent*(self: gen_qlineedit_types.QLineEdit, event: gen_qcoreevent_types.QEvent): void =
@@ -1110,7 +1124,7 @@ proc QLineEditleaveEvent*(self: gen_qlineedit_types.QLineEdit, event: gen_qcoree
 proc miqt_exec_callback_cQLineEdit_leaveEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QLineEditVTable](vtbl)
   let self = QLineEdit(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].leaveEvent(self, slotval1)
 
 proc QLineEditmoveEvent*(self: gen_qlineedit_types.QLineEdit, event: gen_qevent_types.QMoveEvent): void =
@@ -1119,7 +1133,7 @@ proc QLineEditmoveEvent*(self: gen_qlineedit_types.QLineEdit, event: gen_qevent_
 proc miqt_exec_callback_cQLineEdit_moveEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QLineEditVTable](vtbl)
   let self = QLineEdit(h: self)
-  let slotval1 = gen_qevent_types.QMoveEvent(h: event)
+  let slotval1 = gen_qevent_types.QMoveEvent(h: event, owned: false)
   vtbl[].moveEvent(self, slotval1)
 
 proc QLineEditresizeEvent*(self: gen_qlineedit_types.QLineEdit, event: gen_qevent_types.QResizeEvent): void =
@@ -1128,7 +1142,7 @@ proc QLineEditresizeEvent*(self: gen_qlineedit_types.QLineEdit, event: gen_qeven
 proc miqt_exec_callback_cQLineEdit_resizeEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QLineEditVTable](vtbl)
   let self = QLineEdit(h: self)
-  let slotval1 = gen_qevent_types.QResizeEvent(h: event)
+  let slotval1 = gen_qevent_types.QResizeEvent(h: event, owned: false)
   vtbl[].resizeEvent(self, slotval1)
 
 proc QLineEditcloseEvent*(self: gen_qlineedit_types.QLineEdit, event: gen_qevent_types.QCloseEvent): void =
@@ -1137,7 +1151,7 @@ proc QLineEditcloseEvent*(self: gen_qlineedit_types.QLineEdit, event: gen_qevent
 proc miqt_exec_callback_cQLineEdit_closeEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QLineEditVTable](vtbl)
   let self = QLineEdit(h: self)
-  let slotval1 = gen_qevent_types.QCloseEvent(h: event)
+  let slotval1 = gen_qevent_types.QCloseEvent(h: event, owned: false)
   vtbl[].closeEvent(self, slotval1)
 
 proc QLineEdittabletEvent*(self: gen_qlineedit_types.QLineEdit, event: gen_qevent_types.QTabletEvent): void =
@@ -1146,7 +1160,7 @@ proc QLineEdittabletEvent*(self: gen_qlineedit_types.QLineEdit, event: gen_qeven
 proc miqt_exec_callback_cQLineEdit_tabletEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QLineEditVTable](vtbl)
   let self = QLineEdit(h: self)
-  let slotval1 = gen_qevent_types.QTabletEvent(h: event)
+  let slotval1 = gen_qevent_types.QTabletEvent(h: event, owned: false)
   vtbl[].tabletEvent(self, slotval1)
 
 proc QLineEditactionEvent*(self: gen_qlineedit_types.QLineEdit, event: gen_qevent_types.QActionEvent): void =
@@ -1155,7 +1169,7 @@ proc QLineEditactionEvent*(self: gen_qlineedit_types.QLineEdit, event: gen_qeven
 proc miqt_exec_callback_cQLineEdit_actionEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QLineEditVTable](vtbl)
   let self = QLineEdit(h: self)
-  let slotval1 = gen_qevent_types.QActionEvent(h: event)
+  let slotval1 = gen_qevent_types.QActionEvent(h: event, owned: false)
   vtbl[].actionEvent(self, slotval1)
 
 proc QLineEditshowEvent*(self: gen_qlineedit_types.QLineEdit, event: gen_qevent_types.QShowEvent): void =
@@ -1164,7 +1178,7 @@ proc QLineEditshowEvent*(self: gen_qlineedit_types.QLineEdit, event: gen_qevent_
 proc miqt_exec_callback_cQLineEdit_showEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QLineEditVTable](vtbl)
   let self = QLineEdit(h: self)
-  let slotval1 = gen_qevent_types.QShowEvent(h: event)
+  let slotval1 = gen_qevent_types.QShowEvent(h: event, owned: false)
   vtbl[].showEvent(self, slotval1)
 
 proc QLineEdithideEvent*(self: gen_qlineedit_types.QLineEdit, event: gen_qevent_types.QHideEvent): void =
@@ -1173,7 +1187,7 @@ proc QLineEdithideEvent*(self: gen_qlineedit_types.QLineEdit, event: gen_qevent_
 proc miqt_exec_callback_cQLineEdit_hideEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QLineEditVTable](vtbl)
   let self = QLineEdit(h: self)
-  let slotval1 = gen_qevent_types.QHideEvent(h: event)
+  let slotval1 = gen_qevent_types.QHideEvent(h: event, owned: false)
   vtbl[].hideEvent(self, slotval1)
 
 proc QLineEditnativeEvent*(self: gen_qlineedit_types.QLineEdit, eventType: seq[byte], message: pointer, resultVal: ptr uint): bool =
@@ -1207,27 +1221,33 @@ proc QLineEditinitPainter*(self: gen_qlineedit_types.QLineEdit, painter: gen_qpa
 proc miqt_exec_callback_cQLineEdit_initPainter(vtbl: pointer, self: pointer, painter: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QLineEditVTable](vtbl)
   let self = QLineEdit(h: self)
-  let slotval1 = gen_qpainter_types.QPainter(h: painter)
+  let slotval1 = gen_qpainter_types.QPainter(h: painter, owned: false)
   vtbl[].initPainter(self, slotval1)
 
 proc QLineEditredirected*(self: gen_qlineedit_types.QLineEdit, offset: gen_qpoint_types.QPoint): gen_qpaintdevice_types.QPaintDevice =
-  gen_qpaintdevice_types.QPaintDevice(h: fcQLineEdit_virtualbase_redirected(self.h, offset.h))
+  gen_qpaintdevice_types.QPaintDevice(h: fcQLineEdit_virtualbase_redirected(self.h, offset.h), owned: false)
 
 proc miqt_exec_callback_cQLineEdit_redirected(vtbl: pointer, self: pointer, offset: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QLineEditVTable](vtbl)
   let self = QLineEdit(h: self)
-  let slotval1 = gen_qpoint_types.QPoint(h: offset)
+  let slotval1 = gen_qpoint_types.QPoint(h: offset, owned: false)
   var virtualReturn = vtbl[].redirected(self, slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QLineEditsharedPainter*(self: gen_qlineedit_types.QLineEdit, ): gen_qpainter_types.QPainter =
-  gen_qpainter_types.QPainter(h: fcQLineEdit_virtualbase_sharedPainter(self.h))
+  gen_qpainter_types.QPainter(h: fcQLineEdit_virtualbase_sharedPainter(self.h), owned: false)
 
 proc miqt_exec_callback_cQLineEdit_sharedPainter(vtbl: pointer, self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QLineEditVTable](vtbl)
   let self = QLineEdit(h: self)
   var virtualReturn = vtbl[].sharedPainter(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QLineEditfocusNextPrevChild*(self: gen_qlineedit_types.QLineEdit, next: bool): bool =
   fcQLineEdit_virtualbase_focusNextPrevChild(self.h, next)
@@ -1245,8 +1265,8 @@ proc QLineEditeventFilter*(self: gen_qlineedit_types.QLineEdit, watched: gen_qob
 proc miqt_exec_callback_cQLineEdit_eventFilter(vtbl: pointer, self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QLineEditVTable](vtbl)
   let self = QLineEdit(h: self)
-  let slotval1 = gen_qobject_types.QObject(h: watched)
-  let slotval2 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].eventFilter(self, slotval1, slotval2)
   virtualReturn
 
@@ -1256,7 +1276,7 @@ proc QLineEditchildEvent*(self: gen_qlineedit_types.QLineEdit, event: gen_qcoree
 proc miqt_exec_callback_cQLineEdit_childEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QLineEditVTable](vtbl)
   let self = QLineEdit(h: self)
-  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   vtbl[].childEvent(self, slotval1)
 
 proc QLineEditcustomEvent*(self: gen_qlineedit_types.QLineEdit, event: gen_qcoreevent_types.QEvent): void =
@@ -1265,7 +1285,7 @@ proc QLineEditcustomEvent*(self: gen_qlineedit_types.QLineEdit, event: gen_qcore
 proc miqt_exec_callback_cQLineEdit_customEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QLineEditVTable](vtbl)
   let self = QLineEdit(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].customEvent(self, slotval1)
 
 proc QLineEditconnectNotify*(self: gen_qlineedit_types.QLineEdit, signal: gen_qmetaobject_types.QMetaMethod): void =
@@ -1274,7 +1294,7 @@ proc QLineEditconnectNotify*(self: gen_qlineedit_types.QLineEdit, signal: gen_qm
 proc miqt_exec_callback_cQLineEdit_connectNotify(vtbl: pointer, self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QLineEditVTable](vtbl)
   let self = QLineEdit(h: self)
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].connectNotify(self, slotval1)
 
 proc QLineEditdisconnectNotify*(self: gen_qlineedit_types.QLineEdit, signal: gen_qmetaobject_types.QMetaMethod): void =
@@ -1283,11 +1303,409 @@ proc QLineEditdisconnectNotify*(self: gen_qlineedit_types.QLineEdit, signal: gen
 proc miqt_exec_callback_cQLineEdit_disconnectNotify(vtbl: pointer, self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QLineEditVTable](vtbl)
   let self = QLineEdit(h: self)
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].disconnectNotify(self, slotval1)
 
+type VirtualQLineEdit* {.inheritable.} = ref object of QLineEdit
+  vtbl*: cQLineEditVTable
+method metaObject*(self: VirtualQLineEdit, ): gen_qobjectdefs_types.QMetaObject {.base.} =
+  QLineEditmetaObject(self[])
+proc miqt_exec_method_cQLineEdit_metaObject(vtbl: pointer, inst: pointer): pointer {.cdecl.} =
+  let vtbl = cast[VirtualQLineEdit](cast[uint](vtbl) - uint(offsetOf(VirtualQLineEdit, vtbl)))
+  var virtualReturn = vtbl.metaObject()
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
+
+method metacast*(self: VirtualQLineEdit, param1: cstring): pointer {.base.} =
+  QLineEditmetacast(self[], param1)
+proc miqt_exec_method_cQLineEdit_metacast(vtbl: pointer, inst: pointer, param1: cstring): pointer {.cdecl.} =
+  let vtbl = cast[VirtualQLineEdit](cast[uint](vtbl) - uint(offsetOf(VirtualQLineEdit, vtbl)))
+  let slotval1 = (param1)
+  var virtualReturn = vtbl.metacast(slotval1)
+  virtualReturn
+
+method metacall*(self: VirtualQLineEdit, param1: cint, param2: cint, param3: pointer): cint {.base.} =
+  QLineEditmetacall(self[], param1, param2, param3)
+proc miqt_exec_method_cQLineEdit_metacall(vtbl: pointer, inst: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
+  let vtbl = cast[VirtualQLineEdit](cast[uint](vtbl) - uint(offsetOf(VirtualQLineEdit, vtbl)))
+  let slotval1 = cint(param1)
+  let slotval2 = param2
+  let slotval3 = param3
+  var virtualReturn = vtbl.metacall(slotval1, slotval2, slotval3)
+  virtualReturn
+
+method sizeHint*(self: VirtualQLineEdit, ): gen_qsize_types.QSize {.base.} =
+  QLineEditsizeHint(self[])
+proc miqt_exec_method_cQLineEdit_sizeHint(vtbl: pointer, inst: pointer): pointer {.cdecl.} =
+  let vtbl = cast[VirtualQLineEdit](cast[uint](vtbl) - uint(offsetOf(VirtualQLineEdit, vtbl)))
+  var virtualReturn = vtbl.sizeHint()
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
+
+method minimumSizeHint*(self: VirtualQLineEdit, ): gen_qsize_types.QSize {.base.} =
+  QLineEditminimumSizeHint(self[])
+proc miqt_exec_method_cQLineEdit_minimumSizeHint(vtbl: pointer, inst: pointer): pointer {.cdecl.} =
+  let vtbl = cast[VirtualQLineEdit](cast[uint](vtbl) - uint(offsetOf(VirtualQLineEdit, vtbl)))
+  var virtualReturn = vtbl.minimumSizeHint()
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
+
+method mousePressEvent*(self: VirtualQLineEdit, param1: gen_qevent_types.QMouseEvent): void {.base.} =
+  QLineEditmousePressEvent(self[], param1)
+proc miqt_exec_method_cQLineEdit_mousePressEvent(vtbl: pointer, inst: pointer, param1: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQLineEdit](cast[uint](vtbl) - uint(offsetOf(VirtualQLineEdit, vtbl)))
+  let slotval1 = gen_qevent_types.QMouseEvent(h: param1, owned: false)
+  vtbl.mousePressEvent(slotval1)
+
+method mouseMoveEvent*(self: VirtualQLineEdit, param1: gen_qevent_types.QMouseEvent): void {.base.} =
+  QLineEditmouseMoveEvent(self[], param1)
+proc miqt_exec_method_cQLineEdit_mouseMoveEvent(vtbl: pointer, inst: pointer, param1: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQLineEdit](cast[uint](vtbl) - uint(offsetOf(VirtualQLineEdit, vtbl)))
+  let slotval1 = gen_qevent_types.QMouseEvent(h: param1, owned: false)
+  vtbl.mouseMoveEvent(slotval1)
+
+method mouseReleaseEvent*(self: VirtualQLineEdit, param1: gen_qevent_types.QMouseEvent): void {.base.} =
+  QLineEditmouseReleaseEvent(self[], param1)
+proc miqt_exec_method_cQLineEdit_mouseReleaseEvent(vtbl: pointer, inst: pointer, param1: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQLineEdit](cast[uint](vtbl) - uint(offsetOf(VirtualQLineEdit, vtbl)))
+  let slotval1 = gen_qevent_types.QMouseEvent(h: param1, owned: false)
+  vtbl.mouseReleaseEvent(slotval1)
+
+method mouseDoubleClickEvent*(self: VirtualQLineEdit, param1: gen_qevent_types.QMouseEvent): void {.base.} =
+  QLineEditmouseDoubleClickEvent(self[], param1)
+proc miqt_exec_method_cQLineEdit_mouseDoubleClickEvent(vtbl: pointer, inst: pointer, param1: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQLineEdit](cast[uint](vtbl) - uint(offsetOf(VirtualQLineEdit, vtbl)))
+  let slotval1 = gen_qevent_types.QMouseEvent(h: param1, owned: false)
+  vtbl.mouseDoubleClickEvent(slotval1)
+
+method keyPressEvent*(self: VirtualQLineEdit, param1: gen_qevent_types.QKeyEvent): void {.base.} =
+  QLineEditkeyPressEvent(self[], param1)
+proc miqt_exec_method_cQLineEdit_keyPressEvent(vtbl: pointer, inst: pointer, param1: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQLineEdit](cast[uint](vtbl) - uint(offsetOf(VirtualQLineEdit, vtbl)))
+  let slotval1 = gen_qevent_types.QKeyEvent(h: param1, owned: false)
+  vtbl.keyPressEvent(slotval1)
+
+method keyReleaseEvent*(self: VirtualQLineEdit, param1: gen_qevent_types.QKeyEvent): void {.base.} =
+  QLineEditkeyReleaseEvent(self[], param1)
+proc miqt_exec_method_cQLineEdit_keyReleaseEvent(vtbl: pointer, inst: pointer, param1: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQLineEdit](cast[uint](vtbl) - uint(offsetOf(VirtualQLineEdit, vtbl)))
+  let slotval1 = gen_qevent_types.QKeyEvent(h: param1, owned: false)
+  vtbl.keyReleaseEvent(slotval1)
+
+method focusInEvent*(self: VirtualQLineEdit, param1: gen_qevent_types.QFocusEvent): void {.base.} =
+  QLineEditfocusInEvent(self[], param1)
+proc miqt_exec_method_cQLineEdit_focusInEvent(vtbl: pointer, inst: pointer, param1: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQLineEdit](cast[uint](vtbl) - uint(offsetOf(VirtualQLineEdit, vtbl)))
+  let slotval1 = gen_qevent_types.QFocusEvent(h: param1, owned: false)
+  vtbl.focusInEvent(slotval1)
+
+method focusOutEvent*(self: VirtualQLineEdit, param1: gen_qevent_types.QFocusEvent): void {.base.} =
+  QLineEditfocusOutEvent(self[], param1)
+proc miqt_exec_method_cQLineEdit_focusOutEvent(vtbl: pointer, inst: pointer, param1: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQLineEdit](cast[uint](vtbl) - uint(offsetOf(VirtualQLineEdit, vtbl)))
+  let slotval1 = gen_qevent_types.QFocusEvent(h: param1, owned: false)
+  vtbl.focusOutEvent(slotval1)
+
+method paintEvent*(self: VirtualQLineEdit, param1: gen_qevent_types.QPaintEvent): void {.base.} =
+  QLineEditpaintEvent(self[], param1)
+proc miqt_exec_method_cQLineEdit_paintEvent(vtbl: pointer, inst: pointer, param1: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQLineEdit](cast[uint](vtbl) - uint(offsetOf(VirtualQLineEdit, vtbl)))
+  let slotval1 = gen_qevent_types.QPaintEvent(h: param1, owned: false)
+  vtbl.paintEvent(slotval1)
+
+method dragEnterEvent*(self: VirtualQLineEdit, param1: gen_qevent_types.QDragEnterEvent): void {.base.} =
+  QLineEditdragEnterEvent(self[], param1)
+proc miqt_exec_method_cQLineEdit_dragEnterEvent(vtbl: pointer, inst: pointer, param1: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQLineEdit](cast[uint](vtbl) - uint(offsetOf(VirtualQLineEdit, vtbl)))
+  let slotval1 = gen_qevent_types.QDragEnterEvent(h: param1, owned: false)
+  vtbl.dragEnterEvent(slotval1)
+
+method dragMoveEvent*(self: VirtualQLineEdit, e: gen_qevent_types.QDragMoveEvent): void {.base.} =
+  QLineEditdragMoveEvent(self[], e)
+proc miqt_exec_method_cQLineEdit_dragMoveEvent(vtbl: pointer, inst: pointer, e: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQLineEdit](cast[uint](vtbl) - uint(offsetOf(VirtualQLineEdit, vtbl)))
+  let slotval1 = gen_qevent_types.QDragMoveEvent(h: e, owned: false)
+  vtbl.dragMoveEvent(slotval1)
+
+method dragLeaveEvent*(self: VirtualQLineEdit, e: gen_qevent_types.QDragLeaveEvent): void {.base.} =
+  QLineEditdragLeaveEvent(self[], e)
+proc miqt_exec_method_cQLineEdit_dragLeaveEvent(vtbl: pointer, inst: pointer, e: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQLineEdit](cast[uint](vtbl) - uint(offsetOf(VirtualQLineEdit, vtbl)))
+  let slotval1 = gen_qevent_types.QDragLeaveEvent(h: e, owned: false)
+  vtbl.dragLeaveEvent(slotval1)
+
+method dropEvent*(self: VirtualQLineEdit, param1: gen_qevent_types.QDropEvent): void {.base.} =
+  QLineEditdropEvent(self[], param1)
+proc miqt_exec_method_cQLineEdit_dropEvent(vtbl: pointer, inst: pointer, param1: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQLineEdit](cast[uint](vtbl) - uint(offsetOf(VirtualQLineEdit, vtbl)))
+  let slotval1 = gen_qevent_types.QDropEvent(h: param1, owned: false)
+  vtbl.dropEvent(slotval1)
+
+method changeEvent*(self: VirtualQLineEdit, param1: gen_qcoreevent_types.QEvent): void {.base.} =
+  QLineEditchangeEvent(self[], param1)
+proc miqt_exec_method_cQLineEdit_changeEvent(vtbl: pointer, inst: pointer, param1: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQLineEdit](cast[uint](vtbl) - uint(offsetOf(VirtualQLineEdit, vtbl)))
+  let slotval1 = gen_qcoreevent_types.QEvent(h: param1, owned: false)
+  vtbl.changeEvent(slotval1)
+
+method contextMenuEvent*(self: VirtualQLineEdit, param1: gen_qevent_types.QContextMenuEvent): void {.base.} =
+  QLineEditcontextMenuEvent(self[], param1)
+proc miqt_exec_method_cQLineEdit_contextMenuEvent(vtbl: pointer, inst: pointer, param1: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQLineEdit](cast[uint](vtbl) - uint(offsetOf(VirtualQLineEdit, vtbl)))
+  let slotval1 = gen_qevent_types.QContextMenuEvent(h: param1, owned: false)
+  vtbl.contextMenuEvent(slotval1)
+
+method inputMethodEvent*(self: VirtualQLineEdit, param1: gen_qevent_types.QInputMethodEvent): void {.base.} =
+  QLineEditinputMethodEvent(self[], param1)
+proc miqt_exec_method_cQLineEdit_inputMethodEvent(vtbl: pointer, inst: pointer, param1: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQLineEdit](cast[uint](vtbl) - uint(offsetOf(VirtualQLineEdit, vtbl)))
+  let slotval1 = gen_qevent_types.QInputMethodEvent(h: param1, owned: false)
+  vtbl.inputMethodEvent(slotval1)
+
+method initStyleOption*(self: VirtualQLineEdit, option: gen_qstyleoption_types.QStyleOptionFrame): void {.base.} =
+  QLineEditinitStyleOption(self[], option)
+proc miqt_exec_method_cQLineEdit_initStyleOption(vtbl: pointer, inst: pointer, option: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQLineEdit](cast[uint](vtbl) - uint(offsetOf(VirtualQLineEdit, vtbl)))
+  let slotval1 = gen_qstyleoption_types.QStyleOptionFrame(h: option, owned: false)
+  vtbl.initStyleOption(slotval1)
+
+method inputMethodQuery*(self: VirtualQLineEdit, param1: cint): gen_qvariant_types.QVariant {.base.} =
+  QLineEditinputMethodQuery(self[], param1)
+proc miqt_exec_method_cQLineEdit_inputMethodQuery(vtbl: pointer, inst: pointer, param1: cint): pointer {.cdecl.} =
+  let vtbl = cast[VirtualQLineEdit](cast[uint](vtbl) - uint(offsetOf(VirtualQLineEdit, vtbl)))
+  let slotval1 = cint(param1)
+  var virtualReturn = vtbl.inputMethodQuery(slotval1)
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
+
+method timerEvent*(self: VirtualQLineEdit, param1: gen_qcoreevent_types.QTimerEvent): void {.base.} =
+  QLineEdittimerEvent(self[], param1)
+proc miqt_exec_method_cQLineEdit_timerEvent(vtbl: pointer, inst: pointer, param1: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQLineEdit](cast[uint](vtbl) - uint(offsetOf(VirtualQLineEdit, vtbl)))
+  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: param1, owned: false)
+  vtbl.timerEvent(slotval1)
+
+method event*(self: VirtualQLineEdit, param1: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QLineEditevent(self[], param1)
+proc miqt_exec_method_cQLineEdit_event(vtbl: pointer, inst: pointer, param1: pointer): bool {.cdecl.} =
+  let vtbl = cast[VirtualQLineEdit](cast[uint](vtbl) - uint(offsetOf(VirtualQLineEdit, vtbl)))
+  let slotval1 = gen_qcoreevent_types.QEvent(h: param1, owned: false)
+  var virtualReturn = vtbl.event(slotval1)
+  virtualReturn
+
+method devType*(self: VirtualQLineEdit, ): cint {.base.} =
+  QLineEditdevType(self[])
+proc miqt_exec_method_cQLineEdit_devType(vtbl: pointer, inst: pointer): cint {.cdecl.} =
+  let vtbl = cast[VirtualQLineEdit](cast[uint](vtbl) - uint(offsetOf(VirtualQLineEdit, vtbl)))
+  var virtualReturn = vtbl.devType()
+  virtualReturn
+
+method setVisible*(self: VirtualQLineEdit, visible: bool): void {.base.} =
+  QLineEditsetVisible(self[], visible)
+proc miqt_exec_method_cQLineEdit_setVisible(vtbl: pointer, inst: pointer, visible: bool): void {.cdecl.} =
+  let vtbl = cast[VirtualQLineEdit](cast[uint](vtbl) - uint(offsetOf(VirtualQLineEdit, vtbl)))
+  let slotval1 = visible
+  vtbl.setVisible(slotval1)
+
+method heightForWidth*(self: VirtualQLineEdit, param1: cint): cint {.base.} =
+  QLineEditheightForWidth(self[], param1)
+proc miqt_exec_method_cQLineEdit_heightForWidth(vtbl: pointer, inst: pointer, param1: cint): cint {.cdecl.} =
+  let vtbl = cast[VirtualQLineEdit](cast[uint](vtbl) - uint(offsetOf(VirtualQLineEdit, vtbl)))
+  let slotval1 = param1
+  var virtualReturn = vtbl.heightForWidth(slotval1)
+  virtualReturn
+
+method hasHeightForWidth*(self: VirtualQLineEdit, ): bool {.base.} =
+  QLineEdithasHeightForWidth(self[])
+proc miqt_exec_method_cQLineEdit_hasHeightForWidth(vtbl: pointer, inst: pointer): bool {.cdecl.} =
+  let vtbl = cast[VirtualQLineEdit](cast[uint](vtbl) - uint(offsetOf(VirtualQLineEdit, vtbl)))
+  var virtualReturn = vtbl.hasHeightForWidth()
+  virtualReturn
+
+method paintEngine*(self: VirtualQLineEdit, ): gen_qpaintengine_types.QPaintEngine {.base.} =
+  QLineEditpaintEngine(self[])
+proc miqt_exec_method_cQLineEdit_paintEngine(vtbl: pointer, inst: pointer): pointer {.cdecl.} =
+  let vtbl = cast[VirtualQLineEdit](cast[uint](vtbl) - uint(offsetOf(VirtualQLineEdit, vtbl)))
+  var virtualReturn = vtbl.paintEngine()
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
+
+method wheelEvent*(self: VirtualQLineEdit, event: gen_qevent_types.QWheelEvent): void {.base.} =
+  QLineEditwheelEvent(self[], event)
+proc miqt_exec_method_cQLineEdit_wheelEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQLineEdit](cast[uint](vtbl) - uint(offsetOf(VirtualQLineEdit, vtbl)))
+  let slotval1 = gen_qevent_types.QWheelEvent(h: event, owned: false)
+  vtbl.wheelEvent(slotval1)
+
+method enterEvent*(self: VirtualQLineEdit, event: gen_qevent_types.QEnterEvent): void {.base.} =
+  QLineEditenterEvent(self[], event)
+proc miqt_exec_method_cQLineEdit_enterEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQLineEdit](cast[uint](vtbl) - uint(offsetOf(VirtualQLineEdit, vtbl)))
+  let slotval1 = gen_qevent_types.QEnterEvent(h: event, owned: false)
+  vtbl.enterEvent(slotval1)
+
+method leaveEvent*(self: VirtualQLineEdit, event: gen_qcoreevent_types.QEvent): void {.base.} =
+  QLineEditleaveEvent(self[], event)
+proc miqt_exec_method_cQLineEdit_leaveEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQLineEdit](cast[uint](vtbl) - uint(offsetOf(VirtualQLineEdit, vtbl)))
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
+  vtbl.leaveEvent(slotval1)
+
+method moveEvent*(self: VirtualQLineEdit, event: gen_qevent_types.QMoveEvent): void {.base.} =
+  QLineEditmoveEvent(self[], event)
+proc miqt_exec_method_cQLineEdit_moveEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQLineEdit](cast[uint](vtbl) - uint(offsetOf(VirtualQLineEdit, vtbl)))
+  let slotval1 = gen_qevent_types.QMoveEvent(h: event, owned: false)
+  vtbl.moveEvent(slotval1)
+
+method resizeEvent*(self: VirtualQLineEdit, event: gen_qevent_types.QResizeEvent): void {.base.} =
+  QLineEditresizeEvent(self[], event)
+proc miqt_exec_method_cQLineEdit_resizeEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQLineEdit](cast[uint](vtbl) - uint(offsetOf(VirtualQLineEdit, vtbl)))
+  let slotval1 = gen_qevent_types.QResizeEvent(h: event, owned: false)
+  vtbl.resizeEvent(slotval1)
+
+method closeEvent*(self: VirtualQLineEdit, event: gen_qevent_types.QCloseEvent): void {.base.} =
+  QLineEditcloseEvent(self[], event)
+proc miqt_exec_method_cQLineEdit_closeEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQLineEdit](cast[uint](vtbl) - uint(offsetOf(VirtualQLineEdit, vtbl)))
+  let slotval1 = gen_qevent_types.QCloseEvent(h: event, owned: false)
+  vtbl.closeEvent(slotval1)
+
+method tabletEvent*(self: VirtualQLineEdit, event: gen_qevent_types.QTabletEvent): void {.base.} =
+  QLineEdittabletEvent(self[], event)
+proc miqt_exec_method_cQLineEdit_tabletEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQLineEdit](cast[uint](vtbl) - uint(offsetOf(VirtualQLineEdit, vtbl)))
+  let slotval1 = gen_qevent_types.QTabletEvent(h: event, owned: false)
+  vtbl.tabletEvent(slotval1)
+
+method actionEvent*(self: VirtualQLineEdit, event: gen_qevent_types.QActionEvent): void {.base.} =
+  QLineEditactionEvent(self[], event)
+proc miqt_exec_method_cQLineEdit_actionEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQLineEdit](cast[uint](vtbl) - uint(offsetOf(VirtualQLineEdit, vtbl)))
+  let slotval1 = gen_qevent_types.QActionEvent(h: event, owned: false)
+  vtbl.actionEvent(slotval1)
+
+method showEvent*(self: VirtualQLineEdit, event: gen_qevent_types.QShowEvent): void {.base.} =
+  QLineEditshowEvent(self[], event)
+proc miqt_exec_method_cQLineEdit_showEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQLineEdit](cast[uint](vtbl) - uint(offsetOf(VirtualQLineEdit, vtbl)))
+  let slotval1 = gen_qevent_types.QShowEvent(h: event, owned: false)
+  vtbl.showEvent(slotval1)
+
+method hideEvent*(self: VirtualQLineEdit, event: gen_qevent_types.QHideEvent): void {.base.} =
+  QLineEdithideEvent(self[], event)
+proc miqt_exec_method_cQLineEdit_hideEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQLineEdit](cast[uint](vtbl) - uint(offsetOf(VirtualQLineEdit, vtbl)))
+  let slotval1 = gen_qevent_types.QHideEvent(h: event, owned: false)
+  vtbl.hideEvent(slotval1)
+
+method nativeEvent*(self: VirtualQLineEdit, eventType: seq[byte], message: pointer, resultVal: ptr uint): bool {.base.} =
+  QLineEditnativeEvent(self[], eventType, message, resultVal)
+proc miqt_exec_method_cQLineEdit_nativeEvent(vtbl: pointer, inst: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr uint): bool {.cdecl.} =
+  let vtbl = cast[VirtualQLineEdit](cast[uint](vtbl) - uint(offsetOf(VirtualQLineEdit, vtbl)))
+  var veventType_bytearray = eventType
+  var veventTypex_ret = @(toOpenArrayByte(veventType_bytearray.data, 0, int(veventType_bytearray.len)-1))
+  c_free(veventType_bytearray.data)
+  let slotval1 = veventTypex_ret
+  let slotval2 = message
+  let slotval3 = resultVal
+  var virtualReturn = vtbl.nativeEvent(slotval1, slotval2, slotval3)
+  virtualReturn
+
+method metric*(self: VirtualQLineEdit, param1: cint): cint {.base.} =
+  QLineEditmetric(self[], param1)
+proc miqt_exec_method_cQLineEdit_metric(vtbl: pointer, inst: pointer, param1: cint): cint {.cdecl.} =
+  let vtbl = cast[VirtualQLineEdit](cast[uint](vtbl) - uint(offsetOf(VirtualQLineEdit, vtbl)))
+  let slotval1 = cint(param1)
+  var virtualReturn = vtbl.metric(slotval1)
+  virtualReturn
+
+method initPainter*(self: VirtualQLineEdit, painter: gen_qpainter_types.QPainter): void {.base.} =
+  QLineEditinitPainter(self[], painter)
+proc miqt_exec_method_cQLineEdit_initPainter(vtbl: pointer, inst: pointer, painter: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQLineEdit](cast[uint](vtbl) - uint(offsetOf(VirtualQLineEdit, vtbl)))
+  let slotval1 = gen_qpainter_types.QPainter(h: painter, owned: false)
+  vtbl.initPainter(slotval1)
+
+method redirected*(self: VirtualQLineEdit, offset: gen_qpoint_types.QPoint): gen_qpaintdevice_types.QPaintDevice {.base.} =
+  QLineEditredirected(self[], offset)
+proc miqt_exec_method_cQLineEdit_redirected(vtbl: pointer, inst: pointer, offset: pointer): pointer {.cdecl.} =
+  let vtbl = cast[VirtualQLineEdit](cast[uint](vtbl) - uint(offsetOf(VirtualQLineEdit, vtbl)))
+  let slotval1 = gen_qpoint_types.QPoint(h: offset, owned: false)
+  var virtualReturn = vtbl.redirected(slotval1)
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
+
+method sharedPainter*(self: VirtualQLineEdit, ): gen_qpainter_types.QPainter {.base.} =
+  QLineEditsharedPainter(self[])
+proc miqt_exec_method_cQLineEdit_sharedPainter(vtbl: pointer, inst: pointer): pointer {.cdecl.} =
+  let vtbl = cast[VirtualQLineEdit](cast[uint](vtbl) - uint(offsetOf(VirtualQLineEdit, vtbl)))
+  var virtualReturn = vtbl.sharedPainter()
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
+
+method focusNextPrevChild*(self: VirtualQLineEdit, next: bool): bool {.base.} =
+  QLineEditfocusNextPrevChild(self[], next)
+proc miqt_exec_method_cQLineEdit_focusNextPrevChild(vtbl: pointer, inst: pointer, next: bool): bool {.cdecl.} =
+  let vtbl = cast[VirtualQLineEdit](cast[uint](vtbl) - uint(offsetOf(VirtualQLineEdit, vtbl)))
+  let slotval1 = next
+  var virtualReturn = vtbl.focusNextPrevChild(slotval1)
+  virtualReturn
+
+method eventFilter*(self: VirtualQLineEdit, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QLineEditeventFilter(self[], watched, event)
+proc miqt_exec_method_cQLineEdit_eventFilter(vtbl: pointer, inst: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
+  let vtbl = cast[VirtualQLineEdit](cast[uint](vtbl) - uint(offsetOf(VirtualQLineEdit, vtbl)))
+  let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
+  var virtualReturn = vtbl.eventFilter(slotval1, slotval2)
+  virtualReturn
+
+method childEvent*(self: VirtualQLineEdit, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
+  QLineEditchildEvent(self[], event)
+proc miqt_exec_method_cQLineEdit_childEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQLineEdit](cast[uint](vtbl) - uint(offsetOf(VirtualQLineEdit, vtbl)))
+  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
+  vtbl.childEvent(slotval1)
+
+method customEvent*(self: VirtualQLineEdit, event: gen_qcoreevent_types.QEvent): void {.base.} =
+  QLineEditcustomEvent(self[], event)
+proc miqt_exec_method_cQLineEdit_customEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQLineEdit](cast[uint](vtbl) - uint(offsetOf(VirtualQLineEdit, vtbl)))
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
+  vtbl.customEvent(slotval1)
+
+method connectNotify*(self: VirtualQLineEdit, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QLineEditconnectNotify(self[], signal)
+proc miqt_exec_method_cQLineEdit_connectNotify(vtbl: pointer, inst: pointer, signal: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQLineEdit](cast[uint](vtbl) - uint(offsetOf(VirtualQLineEdit, vtbl)))
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
+  vtbl.connectNotify(slotval1)
+
+method disconnectNotify*(self: VirtualQLineEdit, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QLineEditdisconnectNotify(self[], signal)
+proc miqt_exec_method_cQLineEdit_disconnectNotify(vtbl: pointer, inst: pointer, signal: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQLineEdit](cast[uint](vtbl) - uint(offsetOf(VirtualQLineEdit, vtbl)))
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
+  vtbl.disconnectNotify(slotval1)
+
 proc cursorRect*(self: gen_qlineedit_types.QLineEdit, ): gen_qrect_types.QRect =
-  gen_qrect_types.QRect(h: fcQLineEdit_protectedbase_cursorRect(self.h))
+  gen_qrect_types.QRect(h: fcQLineEdit_protectedbase_cursorRect(self.h), owned: true)
 
 proc updateMicroFocus*(self: gen_qlineedit_types.QLineEdit, ): void =
   fcQLineEdit_protectedbase_updateMicroFocus(self.h)
@@ -1305,7 +1723,7 @@ proc focusPreviousChild*(self: gen_qlineedit_types.QLineEdit, ): bool =
   fcQLineEdit_protectedbase_focusPreviousChild(self.h)
 
 proc sender*(self: gen_qlineedit_types.QLineEdit, ): gen_qobject_types.QObject =
-  gen_qobject_types.QObject(h: fcQLineEdit_protectedbase_sender(self.h))
+  gen_qobject_types.QObject(h: fcQLineEdit_protectedbase_sender(self.h), owned: false)
 
 proc senderSignalIndex*(self: gen_qlineedit_types.QLineEdit, ): cint =
   fcQLineEdit_protectedbase_senderSignalIndex(self.h)
@@ -1321,449 +1739,698 @@ proc create*(T: type gen_qlineedit_types.QLineEdit,
     vtbl: ref QLineEditVTable = nil): gen_qlineedit_types.QLineEdit =
   let vtbl = if vtbl == nil: new QLineEditVTable else: vtbl
   GC_ref(vtbl)
-  vtbl.vtbl.destructor = proc(vtbl: ptr cQLineEditVTable, _: ptr cQLineEdit) {.cdecl.} =
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQLineEditVTable, _: ptr cQLineEdit) {.cdecl.} =
     let vtbl = cast[ref QLineEditVTable](vtbl)
     GC_unref(vtbl)
-  if not isNil(vtbl.metaObject):
+  if not isNil(vtbl[].metaObject):
     vtbl[].vtbl.metaObject = miqt_exec_callback_cQLineEdit_metaObject
-  if not isNil(vtbl.metacast):
+  if not isNil(vtbl[].metacast):
     vtbl[].vtbl.metacast = miqt_exec_callback_cQLineEdit_metacast
-  if not isNil(vtbl.metacall):
+  if not isNil(vtbl[].metacall):
     vtbl[].vtbl.metacall = miqt_exec_callback_cQLineEdit_metacall
-  if not isNil(vtbl.sizeHint):
+  if not isNil(vtbl[].sizeHint):
     vtbl[].vtbl.sizeHint = miqt_exec_callback_cQLineEdit_sizeHint
-  if not isNil(vtbl.minimumSizeHint):
+  if not isNil(vtbl[].minimumSizeHint):
     vtbl[].vtbl.minimumSizeHint = miqt_exec_callback_cQLineEdit_minimumSizeHint
-  if not isNil(vtbl.mousePressEvent):
+  if not isNil(vtbl[].mousePressEvent):
     vtbl[].vtbl.mousePressEvent = miqt_exec_callback_cQLineEdit_mousePressEvent
-  if not isNil(vtbl.mouseMoveEvent):
+  if not isNil(vtbl[].mouseMoveEvent):
     vtbl[].vtbl.mouseMoveEvent = miqt_exec_callback_cQLineEdit_mouseMoveEvent
-  if not isNil(vtbl.mouseReleaseEvent):
+  if not isNil(vtbl[].mouseReleaseEvent):
     vtbl[].vtbl.mouseReleaseEvent = miqt_exec_callback_cQLineEdit_mouseReleaseEvent
-  if not isNil(vtbl.mouseDoubleClickEvent):
+  if not isNil(vtbl[].mouseDoubleClickEvent):
     vtbl[].vtbl.mouseDoubleClickEvent = miqt_exec_callback_cQLineEdit_mouseDoubleClickEvent
-  if not isNil(vtbl.keyPressEvent):
+  if not isNil(vtbl[].keyPressEvent):
     vtbl[].vtbl.keyPressEvent = miqt_exec_callback_cQLineEdit_keyPressEvent
-  if not isNil(vtbl.keyReleaseEvent):
+  if not isNil(vtbl[].keyReleaseEvent):
     vtbl[].vtbl.keyReleaseEvent = miqt_exec_callback_cQLineEdit_keyReleaseEvent
-  if not isNil(vtbl.focusInEvent):
+  if not isNil(vtbl[].focusInEvent):
     vtbl[].vtbl.focusInEvent = miqt_exec_callback_cQLineEdit_focusInEvent
-  if not isNil(vtbl.focusOutEvent):
+  if not isNil(vtbl[].focusOutEvent):
     vtbl[].vtbl.focusOutEvent = miqt_exec_callback_cQLineEdit_focusOutEvent
-  if not isNil(vtbl.paintEvent):
+  if not isNil(vtbl[].paintEvent):
     vtbl[].vtbl.paintEvent = miqt_exec_callback_cQLineEdit_paintEvent
-  if not isNil(vtbl.dragEnterEvent):
+  if not isNil(vtbl[].dragEnterEvent):
     vtbl[].vtbl.dragEnterEvent = miqt_exec_callback_cQLineEdit_dragEnterEvent
-  if not isNil(vtbl.dragMoveEvent):
+  if not isNil(vtbl[].dragMoveEvent):
     vtbl[].vtbl.dragMoveEvent = miqt_exec_callback_cQLineEdit_dragMoveEvent
-  if not isNil(vtbl.dragLeaveEvent):
+  if not isNil(vtbl[].dragLeaveEvent):
     vtbl[].vtbl.dragLeaveEvent = miqt_exec_callback_cQLineEdit_dragLeaveEvent
-  if not isNil(vtbl.dropEvent):
+  if not isNil(vtbl[].dropEvent):
     vtbl[].vtbl.dropEvent = miqt_exec_callback_cQLineEdit_dropEvent
-  if not isNil(vtbl.changeEvent):
+  if not isNil(vtbl[].changeEvent):
     vtbl[].vtbl.changeEvent = miqt_exec_callback_cQLineEdit_changeEvent
-  if not isNil(vtbl.contextMenuEvent):
+  if not isNil(vtbl[].contextMenuEvent):
     vtbl[].vtbl.contextMenuEvent = miqt_exec_callback_cQLineEdit_contextMenuEvent
-  if not isNil(vtbl.inputMethodEvent):
+  if not isNil(vtbl[].inputMethodEvent):
     vtbl[].vtbl.inputMethodEvent = miqt_exec_callback_cQLineEdit_inputMethodEvent
-  if not isNil(vtbl.initStyleOption):
+  if not isNil(vtbl[].initStyleOption):
     vtbl[].vtbl.initStyleOption = miqt_exec_callback_cQLineEdit_initStyleOption
-  if not isNil(vtbl.inputMethodQuery):
+  if not isNil(vtbl[].inputMethodQuery):
     vtbl[].vtbl.inputMethodQuery = miqt_exec_callback_cQLineEdit_inputMethodQuery
-  if not isNil(vtbl.timerEvent):
+  if not isNil(vtbl[].timerEvent):
     vtbl[].vtbl.timerEvent = miqt_exec_callback_cQLineEdit_timerEvent
-  if not isNil(vtbl.event):
+  if not isNil(vtbl[].event):
     vtbl[].vtbl.event = miqt_exec_callback_cQLineEdit_event
-  if not isNil(vtbl.devType):
+  if not isNil(vtbl[].devType):
     vtbl[].vtbl.devType = miqt_exec_callback_cQLineEdit_devType
-  if not isNil(vtbl.setVisible):
+  if not isNil(vtbl[].setVisible):
     vtbl[].vtbl.setVisible = miqt_exec_callback_cQLineEdit_setVisible
-  if not isNil(vtbl.heightForWidth):
+  if not isNil(vtbl[].heightForWidth):
     vtbl[].vtbl.heightForWidth = miqt_exec_callback_cQLineEdit_heightForWidth
-  if not isNil(vtbl.hasHeightForWidth):
+  if not isNil(vtbl[].hasHeightForWidth):
     vtbl[].vtbl.hasHeightForWidth = miqt_exec_callback_cQLineEdit_hasHeightForWidth
-  if not isNil(vtbl.paintEngine):
+  if not isNil(vtbl[].paintEngine):
     vtbl[].vtbl.paintEngine = miqt_exec_callback_cQLineEdit_paintEngine
-  if not isNil(vtbl.wheelEvent):
+  if not isNil(vtbl[].wheelEvent):
     vtbl[].vtbl.wheelEvent = miqt_exec_callback_cQLineEdit_wheelEvent
-  if not isNil(vtbl.enterEvent):
+  if not isNil(vtbl[].enterEvent):
     vtbl[].vtbl.enterEvent = miqt_exec_callback_cQLineEdit_enterEvent
-  if not isNil(vtbl.leaveEvent):
+  if not isNil(vtbl[].leaveEvent):
     vtbl[].vtbl.leaveEvent = miqt_exec_callback_cQLineEdit_leaveEvent
-  if not isNil(vtbl.moveEvent):
+  if not isNil(vtbl[].moveEvent):
     vtbl[].vtbl.moveEvent = miqt_exec_callback_cQLineEdit_moveEvent
-  if not isNil(vtbl.resizeEvent):
+  if not isNil(vtbl[].resizeEvent):
     vtbl[].vtbl.resizeEvent = miqt_exec_callback_cQLineEdit_resizeEvent
-  if not isNil(vtbl.closeEvent):
+  if not isNil(vtbl[].closeEvent):
     vtbl[].vtbl.closeEvent = miqt_exec_callback_cQLineEdit_closeEvent
-  if not isNil(vtbl.tabletEvent):
+  if not isNil(vtbl[].tabletEvent):
     vtbl[].vtbl.tabletEvent = miqt_exec_callback_cQLineEdit_tabletEvent
-  if not isNil(vtbl.actionEvent):
+  if not isNil(vtbl[].actionEvent):
     vtbl[].vtbl.actionEvent = miqt_exec_callback_cQLineEdit_actionEvent
-  if not isNil(vtbl.showEvent):
+  if not isNil(vtbl[].showEvent):
     vtbl[].vtbl.showEvent = miqt_exec_callback_cQLineEdit_showEvent
-  if not isNil(vtbl.hideEvent):
+  if not isNil(vtbl[].hideEvent):
     vtbl[].vtbl.hideEvent = miqt_exec_callback_cQLineEdit_hideEvent
-  if not isNil(vtbl.nativeEvent):
+  if not isNil(vtbl[].nativeEvent):
     vtbl[].vtbl.nativeEvent = miqt_exec_callback_cQLineEdit_nativeEvent
-  if not isNil(vtbl.metric):
+  if not isNil(vtbl[].metric):
     vtbl[].vtbl.metric = miqt_exec_callback_cQLineEdit_metric
-  if not isNil(vtbl.initPainter):
+  if not isNil(vtbl[].initPainter):
     vtbl[].vtbl.initPainter = miqt_exec_callback_cQLineEdit_initPainter
-  if not isNil(vtbl.redirected):
+  if not isNil(vtbl[].redirected):
     vtbl[].vtbl.redirected = miqt_exec_callback_cQLineEdit_redirected
-  if not isNil(vtbl.sharedPainter):
+  if not isNil(vtbl[].sharedPainter):
     vtbl[].vtbl.sharedPainter = miqt_exec_callback_cQLineEdit_sharedPainter
-  if not isNil(vtbl.focusNextPrevChild):
+  if not isNil(vtbl[].focusNextPrevChild):
     vtbl[].vtbl.focusNextPrevChild = miqt_exec_callback_cQLineEdit_focusNextPrevChild
-  if not isNil(vtbl.eventFilter):
+  if not isNil(vtbl[].eventFilter):
     vtbl[].vtbl.eventFilter = miqt_exec_callback_cQLineEdit_eventFilter
-  if not isNil(vtbl.childEvent):
+  if not isNil(vtbl[].childEvent):
     vtbl[].vtbl.childEvent = miqt_exec_callback_cQLineEdit_childEvent
-  if not isNil(vtbl.customEvent):
+  if not isNil(vtbl[].customEvent):
     vtbl[].vtbl.customEvent = miqt_exec_callback_cQLineEdit_customEvent
-  if not isNil(vtbl.connectNotify):
+  if not isNil(vtbl[].connectNotify):
     vtbl[].vtbl.connectNotify = miqt_exec_callback_cQLineEdit_connectNotify
-  if not isNil(vtbl.disconnectNotify):
+  if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQLineEdit_disconnectNotify
-  gen_qlineedit_types.QLineEdit(h: fcQLineEdit_new(addr(vtbl[]), parent.h))
+  gen_qlineedit_types.QLineEdit(h: fcQLineEdit_new(addr(vtbl[].vtbl), parent.h), owned: true)
 
 proc create*(T: type gen_qlineedit_types.QLineEdit,
     vtbl: ref QLineEditVTable = nil): gen_qlineedit_types.QLineEdit =
   let vtbl = if vtbl == nil: new QLineEditVTable else: vtbl
   GC_ref(vtbl)
-  vtbl.vtbl.destructor = proc(vtbl: ptr cQLineEditVTable, _: ptr cQLineEdit) {.cdecl.} =
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQLineEditVTable, _: ptr cQLineEdit) {.cdecl.} =
     let vtbl = cast[ref QLineEditVTable](vtbl)
     GC_unref(vtbl)
-  if not isNil(vtbl.metaObject):
+  if not isNil(vtbl[].metaObject):
     vtbl[].vtbl.metaObject = miqt_exec_callback_cQLineEdit_metaObject
-  if not isNil(vtbl.metacast):
+  if not isNil(vtbl[].metacast):
     vtbl[].vtbl.metacast = miqt_exec_callback_cQLineEdit_metacast
-  if not isNil(vtbl.metacall):
+  if not isNil(vtbl[].metacall):
     vtbl[].vtbl.metacall = miqt_exec_callback_cQLineEdit_metacall
-  if not isNil(vtbl.sizeHint):
+  if not isNil(vtbl[].sizeHint):
     vtbl[].vtbl.sizeHint = miqt_exec_callback_cQLineEdit_sizeHint
-  if not isNil(vtbl.minimumSizeHint):
+  if not isNil(vtbl[].minimumSizeHint):
     vtbl[].vtbl.minimumSizeHint = miqt_exec_callback_cQLineEdit_minimumSizeHint
-  if not isNil(vtbl.mousePressEvent):
+  if not isNil(vtbl[].mousePressEvent):
     vtbl[].vtbl.mousePressEvent = miqt_exec_callback_cQLineEdit_mousePressEvent
-  if not isNil(vtbl.mouseMoveEvent):
+  if not isNil(vtbl[].mouseMoveEvent):
     vtbl[].vtbl.mouseMoveEvent = miqt_exec_callback_cQLineEdit_mouseMoveEvent
-  if not isNil(vtbl.mouseReleaseEvent):
+  if not isNil(vtbl[].mouseReleaseEvent):
     vtbl[].vtbl.mouseReleaseEvent = miqt_exec_callback_cQLineEdit_mouseReleaseEvent
-  if not isNil(vtbl.mouseDoubleClickEvent):
+  if not isNil(vtbl[].mouseDoubleClickEvent):
     vtbl[].vtbl.mouseDoubleClickEvent = miqt_exec_callback_cQLineEdit_mouseDoubleClickEvent
-  if not isNil(vtbl.keyPressEvent):
+  if not isNil(vtbl[].keyPressEvent):
     vtbl[].vtbl.keyPressEvent = miqt_exec_callback_cQLineEdit_keyPressEvent
-  if not isNil(vtbl.keyReleaseEvent):
+  if not isNil(vtbl[].keyReleaseEvent):
     vtbl[].vtbl.keyReleaseEvent = miqt_exec_callback_cQLineEdit_keyReleaseEvent
-  if not isNil(vtbl.focusInEvent):
+  if not isNil(vtbl[].focusInEvent):
     vtbl[].vtbl.focusInEvent = miqt_exec_callback_cQLineEdit_focusInEvent
-  if not isNil(vtbl.focusOutEvent):
+  if not isNil(vtbl[].focusOutEvent):
     vtbl[].vtbl.focusOutEvent = miqt_exec_callback_cQLineEdit_focusOutEvent
-  if not isNil(vtbl.paintEvent):
+  if not isNil(vtbl[].paintEvent):
     vtbl[].vtbl.paintEvent = miqt_exec_callback_cQLineEdit_paintEvent
-  if not isNil(vtbl.dragEnterEvent):
+  if not isNil(vtbl[].dragEnterEvent):
     vtbl[].vtbl.dragEnterEvent = miqt_exec_callback_cQLineEdit_dragEnterEvent
-  if not isNil(vtbl.dragMoveEvent):
+  if not isNil(vtbl[].dragMoveEvent):
     vtbl[].vtbl.dragMoveEvent = miqt_exec_callback_cQLineEdit_dragMoveEvent
-  if not isNil(vtbl.dragLeaveEvent):
+  if not isNil(vtbl[].dragLeaveEvent):
     vtbl[].vtbl.dragLeaveEvent = miqt_exec_callback_cQLineEdit_dragLeaveEvent
-  if not isNil(vtbl.dropEvent):
+  if not isNil(vtbl[].dropEvent):
     vtbl[].vtbl.dropEvent = miqt_exec_callback_cQLineEdit_dropEvent
-  if not isNil(vtbl.changeEvent):
+  if not isNil(vtbl[].changeEvent):
     vtbl[].vtbl.changeEvent = miqt_exec_callback_cQLineEdit_changeEvent
-  if not isNil(vtbl.contextMenuEvent):
+  if not isNil(vtbl[].contextMenuEvent):
     vtbl[].vtbl.contextMenuEvent = miqt_exec_callback_cQLineEdit_contextMenuEvent
-  if not isNil(vtbl.inputMethodEvent):
+  if not isNil(vtbl[].inputMethodEvent):
     vtbl[].vtbl.inputMethodEvent = miqt_exec_callback_cQLineEdit_inputMethodEvent
-  if not isNil(vtbl.initStyleOption):
+  if not isNil(vtbl[].initStyleOption):
     vtbl[].vtbl.initStyleOption = miqt_exec_callback_cQLineEdit_initStyleOption
-  if not isNil(vtbl.inputMethodQuery):
+  if not isNil(vtbl[].inputMethodQuery):
     vtbl[].vtbl.inputMethodQuery = miqt_exec_callback_cQLineEdit_inputMethodQuery
-  if not isNil(vtbl.timerEvent):
+  if not isNil(vtbl[].timerEvent):
     vtbl[].vtbl.timerEvent = miqt_exec_callback_cQLineEdit_timerEvent
-  if not isNil(vtbl.event):
+  if not isNil(vtbl[].event):
     vtbl[].vtbl.event = miqt_exec_callback_cQLineEdit_event
-  if not isNil(vtbl.devType):
+  if not isNil(vtbl[].devType):
     vtbl[].vtbl.devType = miqt_exec_callback_cQLineEdit_devType
-  if not isNil(vtbl.setVisible):
+  if not isNil(vtbl[].setVisible):
     vtbl[].vtbl.setVisible = miqt_exec_callback_cQLineEdit_setVisible
-  if not isNil(vtbl.heightForWidth):
+  if not isNil(vtbl[].heightForWidth):
     vtbl[].vtbl.heightForWidth = miqt_exec_callback_cQLineEdit_heightForWidth
-  if not isNil(vtbl.hasHeightForWidth):
+  if not isNil(vtbl[].hasHeightForWidth):
     vtbl[].vtbl.hasHeightForWidth = miqt_exec_callback_cQLineEdit_hasHeightForWidth
-  if not isNil(vtbl.paintEngine):
+  if not isNil(vtbl[].paintEngine):
     vtbl[].vtbl.paintEngine = miqt_exec_callback_cQLineEdit_paintEngine
-  if not isNil(vtbl.wheelEvent):
+  if not isNil(vtbl[].wheelEvent):
     vtbl[].vtbl.wheelEvent = miqt_exec_callback_cQLineEdit_wheelEvent
-  if not isNil(vtbl.enterEvent):
+  if not isNil(vtbl[].enterEvent):
     vtbl[].vtbl.enterEvent = miqt_exec_callback_cQLineEdit_enterEvent
-  if not isNil(vtbl.leaveEvent):
+  if not isNil(vtbl[].leaveEvent):
     vtbl[].vtbl.leaveEvent = miqt_exec_callback_cQLineEdit_leaveEvent
-  if not isNil(vtbl.moveEvent):
+  if not isNil(vtbl[].moveEvent):
     vtbl[].vtbl.moveEvent = miqt_exec_callback_cQLineEdit_moveEvent
-  if not isNil(vtbl.resizeEvent):
+  if not isNil(vtbl[].resizeEvent):
     vtbl[].vtbl.resizeEvent = miqt_exec_callback_cQLineEdit_resizeEvent
-  if not isNil(vtbl.closeEvent):
+  if not isNil(vtbl[].closeEvent):
     vtbl[].vtbl.closeEvent = miqt_exec_callback_cQLineEdit_closeEvent
-  if not isNil(vtbl.tabletEvent):
+  if not isNil(vtbl[].tabletEvent):
     vtbl[].vtbl.tabletEvent = miqt_exec_callback_cQLineEdit_tabletEvent
-  if not isNil(vtbl.actionEvent):
+  if not isNil(vtbl[].actionEvent):
     vtbl[].vtbl.actionEvent = miqt_exec_callback_cQLineEdit_actionEvent
-  if not isNil(vtbl.showEvent):
+  if not isNil(vtbl[].showEvent):
     vtbl[].vtbl.showEvent = miqt_exec_callback_cQLineEdit_showEvent
-  if not isNil(vtbl.hideEvent):
+  if not isNil(vtbl[].hideEvent):
     vtbl[].vtbl.hideEvent = miqt_exec_callback_cQLineEdit_hideEvent
-  if not isNil(vtbl.nativeEvent):
+  if not isNil(vtbl[].nativeEvent):
     vtbl[].vtbl.nativeEvent = miqt_exec_callback_cQLineEdit_nativeEvent
-  if not isNil(vtbl.metric):
+  if not isNil(vtbl[].metric):
     vtbl[].vtbl.metric = miqt_exec_callback_cQLineEdit_metric
-  if not isNil(vtbl.initPainter):
+  if not isNil(vtbl[].initPainter):
     vtbl[].vtbl.initPainter = miqt_exec_callback_cQLineEdit_initPainter
-  if not isNil(vtbl.redirected):
+  if not isNil(vtbl[].redirected):
     vtbl[].vtbl.redirected = miqt_exec_callback_cQLineEdit_redirected
-  if not isNil(vtbl.sharedPainter):
+  if not isNil(vtbl[].sharedPainter):
     vtbl[].vtbl.sharedPainter = miqt_exec_callback_cQLineEdit_sharedPainter
-  if not isNil(vtbl.focusNextPrevChild):
+  if not isNil(vtbl[].focusNextPrevChild):
     vtbl[].vtbl.focusNextPrevChild = miqt_exec_callback_cQLineEdit_focusNextPrevChild
-  if not isNil(vtbl.eventFilter):
+  if not isNil(vtbl[].eventFilter):
     vtbl[].vtbl.eventFilter = miqt_exec_callback_cQLineEdit_eventFilter
-  if not isNil(vtbl.childEvent):
+  if not isNil(vtbl[].childEvent):
     vtbl[].vtbl.childEvent = miqt_exec_callback_cQLineEdit_childEvent
-  if not isNil(vtbl.customEvent):
+  if not isNil(vtbl[].customEvent):
     vtbl[].vtbl.customEvent = miqt_exec_callback_cQLineEdit_customEvent
-  if not isNil(vtbl.connectNotify):
+  if not isNil(vtbl[].connectNotify):
     vtbl[].vtbl.connectNotify = miqt_exec_callback_cQLineEdit_connectNotify
-  if not isNil(vtbl.disconnectNotify):
+  if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQLineEdit_disconnectNotify
-  gen_qlineedit_types.QLineEdit(h: fcQLineEdit_new2(addr(vtbl[]), ))
+  gen_qlineedit_types.QLineEdit(h: fcQLineEdit_new2(addr(vtbl[].vtbl), ), owned: true)
 
 proc create*(T: type gen_qlineedit_types.QLineEdit,
     param1: string,
     vtbl: ref QLineEditVTable = nil): gen_qlineedit_types.QLineEdit =
   let vtbl = if vtbl == nil: new QLineEditVTable else: vtbl
   GC_ref(vtbl)
-  vtbl.vtbl.destructor = proc(vtbl: ptr cQLineEditVTable, _: ptr cQLineEdit) {.cdecl.} =
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQLineEditVTable, _: ptr cQLineEdit) {.cdecl.} =
     let vtbl = cast[ref QLineEditVTable](vtbl)
     GC_unref(vtbl)
-  if not isNil(vtbl.metaObject):
+  if not isNil(vtbl[].metaObject):
     vtbl[].vtbl.metaObject = miqt_exec_callback_cQLineEdit_metaObject
-  if not isNil(vtbl.metacast):
+  if not isNil(vtbl[].metacast):
     vtbl[].vtbl.metacast = miqt_exec_callback_cQLineEdit_metacast
-  if not isNil(vtbl.metacall):
+  if not isNil(vtbl[].metacall):
     vtbl[].vtbl.metacall = miqt_exec_callback_cQLineEdit_metacall
-  if not isNil(vtbl.sizeHint):
+  if not isNil(vtbl[].sizeHint):
     vtbl[].vtbl.sizeHint = miqt_exec_callback_cQLineEdit_sizeHint
-  if not isNil(vtbl.minimumSizeHint):
+  if not isNil(vtbl[].minimumSizeHint):
     vtbl[].vtbl.minimumSizeHint = miqt_exec_callback_cQLineEdit_minimumSizeHint
-  if not isNil(vtbl.mousePressEvent):
+  if not isNil(vtbl[].mousePressEvent):
     vtbl[].vtbl.mousePressEvent = miqt_exec_callback_cQLineEdit_mousePressEvent
-  if not isNil(vtbl.mouseMoveEvent):
+  if not isNil(vtbl[].mouseMoveEvent):
     vtbl[].vtbl.mouseMoveEvent = miqt_exec_callback_cQLineEdit_mouseMoveEvent
-  if not isNil(vtbl.mouseReleaseEvent):
+  if not isNil(vtbl[].mouseReleaseEvent):
     vtbl[].vtbl.mouseReleaseEvent = miqt_exec_callback_cQLineEdit_mouseReleaseEvent
-  if not isNil(vtbl.mouseDoubleClickEvent):
+  if not isNil(vtbl[].mouseDoubleClickEvent):
     vtbl[].vtbl.mouseDoubleClickEvent = miqt_exec_callback_cQLineEdit_mouseDoubleClickEvent
-  if not isNil(vtbl.keyPressEvent):
+  if not isNil(vtbl[].keyPressEvent):
     vtbl[].vtbl.keyPressEvent = miqt_exec_callback_cQLineEdit_keyPressEvent
-  if not isNil(vtbl.keyReleaseEvent):
+  if not isNil(vtbl[].keyReleaseEvent):
     vtbl[].vtbl.keyReleaseEvent = miqt_exec_callback_cQLineEdit_keyReleaseEvent
-  if not isNil(vtbl.focusInEvent):
+  if not isNil(vtbl[].focusInEvent):
     vtbl[].vtbl.focusInEvent = miqt_exec_callback_cQLineEdit_focusInEvent
-  if not isNil(vtbl.focusOutEvent):
+  if not isNil(vtbl[].focusOutEvent):
     vtbl[].vtbl.focusOutEvent = miqt_exec_callback_cQLineEdit_focusOutEvent
-  if not isNil(vtbl.paintEvent):
+  if not isNil(vtbl[].paintEvent):
     vtbl[].vtbl.paintEvent = miqt_exec_callback_cQLineEdit_paintEvent
-  if not isNil(vtbl.dragEnterEvent):
+  if not isNil(vtbl[].dragEnterEvent):
     vtbl[].vtbl.dragEnterEvent = miqt_exec_callback_cQLineEdit_dragEnterEvent
-  if not isNil(vtbl.dragMoveEvent):
+  if not isNil(vtbl[].dragMoveEvent):
     vtbl[].vtbl.dragMoveEvent = miqt_exec_callback_cQLineEdit_dragMoveEvent
-  if not isNil(vtbl.dragLeaveEvent):
+  if not isNil(vtbl[].dragLeaveEvent):
     vtbl[].vtbl.dragLeaveEvent = miqt_exec_callback_cQLineEdit_dragLeaveEvent
-  if not isNil(vtbl.dropEvent):
+  if not isNil(vtbl[].dropEvent):
     vtbl[].vtbl.dropEvent = miqt_exec_callback_cQLineEdit_dropEvent
-  if not isNil(vtbl.changeEvent):
+  if not isNil(vtbl[].changeEvent):
     vtbl[].vtbl.changeEvent = miqt_exec_callback_cQLineEdit_changeEvent
-  if not isNil(vtbl.contextMenuEvent):
+  if not isNil(vtbl[].contextMenuEvent):
     vtbl[].vtbl.contextMenuEvent = miqt_exec_callback_cQLineEdit_contextMenuEvent
-  if not isNil(vtbl.inputMethodEvent):
+  if not isNil(vtbl[].inputMethodEvent):
     vtbl[].vtbl.inputMethodEvent = miqt_exec_callback_cQLineEdit_inputMethodEvent
-  if not isNil(vtbl.initStyleOption):
+  if not isNil(vtbl[].initStyleOption):
     vtbl[].vtbl.initStyleOption = miqt_exec_callback_cQLineEdit_initStyleOption
-  if not isNil(vtbl.inputMethodQuery):
+  if not isNil(vtbl[].inputMethodQuery):
     vtbl[].vtbl.inputMethodQuery = miqt_exec_callback_cQLineEdit_inputMethodQuery
-  if not isNil(vtbl.timerEvent):
+  if not isNil(vtbl[].timerEvent):
     vtbl[].vtbl.timerEvent = miqt_exec_callback_cQLineEdit_timerEvent
-  if not isNil(vtbl.event):
+  if not isNil(vtbl[].event):
     vtbl[].vtbl.event = miqt_exec_callback_cQLineEdit_event
-  if not isNil(vtbl.devType):
+  if not isNil(vtbl[].devType):
     vtbl[].vtbl.devType = miqt_exec_callback_cQLineEdit_devType
-  if not isNil(vtbl.setVisible):
+  if not isNil(vtbl[].setVisible):
     vtbl[].vtbl.setVisible = miqt_exec_callback_cQLineEdit_setVisible
-  if not isNil(vtbl.heightForWidth):
+  if not isNil(vtbl[].heightForWidth):
     vtbl[].vtbl.heightForWidth = miqt_exec_callback_cQLineEdit_heightForWidth
-  if not isNil(vtbl.hasHeightForWidth):
+  if not isNil(vtbl[].hasHeightForWidth):
     vtbl[].vtbl.hasHeightForWidth = miqt_exec_callback_cQLineEdit_hasHeightForWidth
-  if not isNil(vtbl.paintEngine):
+  if not isNil(vtbl[].paintEngine):
     vtbl[].vtbl.paintEngine = miqt_exec_callback_cQLineEdit_paintEngine
-  if not isNil(vtbl.wheelEvent):
+  if not isNil(vtbl[].wheelEvent):
     vtbl[].vtbl.wheelEvent = miqt_exec_callback_cQLineEdit_wheelEvent
-  if not isNil(vtbl.enterEvent):
+  if not isNil(vtbl[].enterEvent):
     vtbl[].vtbl.enterEvent = miqt_exec_callback_cQLineEdit_enterEvent
-  if not isNil(vtbl.leaveEvent):
+  if not isNil(vtbl[].leaveEvent):
     vtbl[].vtbl.leaveEvent = miqt_exec_callback_cQLineEdit_leaveEvent
-  if not isNil(vtbl.moveEvent):
+  if not isNil(vtbl[].moveEvent):
     vtbl[].vtbl.moveEvent = miqt_exec_callback_cQLineEdit_moveEvent
-  if not isNil(vtbl.resizeEvent):
+  if not isNil(vtbl[].resizeEvent):
     vtbl[].vtbl.resizeEvent = miqt_exec_callback_cQLineEdit_resizeEvent
-  if not isNil(vtbl.closeEvent):
+  if not isNil(vtbl[].closeEvent):
     vtbl[].vtbl.closeEvent = miqt_exec_callback_cQLineEdit_closeEvent
-  if not isNil(vtbl.tabletEvent):
+  if not isNil(vtbl[].tabletEvent):
     vtbl[].vtbl.tabletEvent = miqt_exec_callback_cQLineEdit_tabletEvent
-  if not isNil(vtbl.actionEvent):
+  if not isNil(vtbl[].actionEvent):
     vtbl[].vtbl.actionEvent = miqt_exec_callback_cQLineEdit_actionEvent
-  if not isNil(vtbl.showEvent):
+  if not isNil(vtbl[].showEvent):
     vtbl[].vtbl.showEvent = miqt_exec_callback_cQLineEdit_showEvent
-  if not isNil(vtbl.hideEvent):
+  if not isNil(vtbl[].hideEvent):
     vtbl[].vtbl.hideEvent = miqt_exec_callback_cQLineEdit_hideEvent
-  if not isNil(vtbl.nativeEvent):
+  if not isNil(vtbl[].nativeEvent):
     vtbl[].vtbl.nativeEvent = miqt_exec_callback_cQLineEdit_nativeEvent
-  if not isNil(vtbl.metric):
+  if not isNil(vtbl[].metric):
     vtbl[].vtbl.metric = miqt_exec_callback_cQLineEdit_metric
-  if not isNil(vtbl.initPainter):
+  if not isNil(vtbl[].initPainter):
     vtbl[].vtbl.initPainter = miqt_exec_callback_cQLineEdit_initPainter
-  if not isNil(vtbl.redirected):
+  if not isNil(vtbl[].redirected):
     vtbl[].vtbl.redirected = miqt_exec_callback_cQLineEdit_redirected
-  if not isNil(vtbl.sharedPainter):
+  if not isNil(vtbl[].sharedPainter):
     vtbl[].vtbl.sharedPainter = miqt_exec_callback_cQLineEdit_sharedPainter
-  if not isNil(vtbl.focusNextPrevChild):
+  if not isNil(vtbl[].focusNextPrevChild):
     vtbl[].vtbl.focusNextPrevChild = miqt_exec_callback_cQLineEdit_focusNextPrevChild
-  if not isNil(vtbl.eventFilter):
+  if not isNil(vtbl[].eventFilter):
     vtbl[].vtbl.eventFilter = miqt_exec_callback_cQLineEdit_eventFilter
-  if not isNil(vtbl.childEvent):
+  if not isNil(vtbl[].childEvent):
     vtbl[].vtbl.childEvent = miqt_exec_callback_cQLineEdit_childEvent
-  if not isNil(vtbl.customEvent):
+  if not isNil(vtbl[].customEvent):
     vtbl[].vtbl.customEvent = miqt_exec_callback_cQLineEdit_customEvent
-  if not isNil(vtbl.connectNotify):
+  if not isNil(vtbl[].connectNotify):
     vtbl[].vtbl.connectNotify = miqt_exec_callback_cQLineEdit_connectNotify
-  if not isNil(vtbl.disconnectNotify):
+  if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQLineEdit_disconnectNotify
-  gen_qlineedit_types.QLineEdit(h: fcQLineEdit_new3(addr(vtbl[]), struct_miqt_string(data: param1, len: csize_t(len(param1)))))
+  gen_qlineedit_types.QLineEdit(h: fcQLineEdit_new3(addr(vtbl[].vtbl), struct_miqt_string(data: param1, len: csize_t(len(param1)))), owned: true)
 
 proc create*(T: type gen_qlineedit_types.QLineEdit,
     param1: string, parent: gen_qwidget_types.QWidget,
     vtbl: ref QLineEditVTable = nil): gen_qlineedit_types.QLineEdit =
   let vtbl = if vtbl == nil: new QLineEditVTable else: vtbl
   GC_ref(vtbl)
-  vtbl.vtbl.destructor = proc(vtbl: ptr cQLineEditVTable, _: ptr cQLineEdit) {.cdecl.} =
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQLineEditVTable, _: ptr cQLineEdit) {.cdecl.} =
     let vtbl = cast[ref QLineEditVTable](vtbl)
     GC_unref(vtbl)
-  if not isNil(vtbl.metaObject):
+  if not isNil(vtbl[].metaObject):
     vtbl[].vtbl.metaObject = miqt_exec_callback_cQLineEdit_metaObject
-  if not isNil(vtbl.metacast):
+  if not isNil(vtbl[].metacast):
     vtbl[].vtbl.metacast = miqt_exec_callback_cQLineEdit_metacast
-  if not isNil(vtbl.metacall):
+  if not isNil(vtbl[].metacall):
     vtbl[].vtbl.metacall = miqt_exec_callback_cQLineEdit_metacall
-  if not isNil(vtbl.sizeHint):
+  if not isNil(vtbl[].sizeHint):
     vtbl[].vtbl.sizeHint = miqt_exec_callback_cQLineEdit_sizeHint
-  if not isNil(vtbl.minimumSizeHint):
+  if not isNil(vtbl[].minimumSizeHint):
     vtbl[].vtbl.minimumSizeHint = miqt_exec_callback_cQLineEdit_minimumSizeHint
-  if not isNil(vtbl.mousePressEvent):
+  if not isNil(vtbl[].mousePressEvent):
     vtbl[].vtbl.mousePressEvent = miqt_exec_callback_cQLineEdit_mousePressEvent
-  if not isNil(vtbl.mouseMoveEvent):
+  if not isNil(vtbl[].mouseMoveEvent):
     vtbl[].vtbl.mouseMoveEvent = miqt_exec_callback_cQLineEdit_mouseMoveEvent
-  if not isNil(vtbl.mouseReleaseEvent):
+  if not isNil(vtbl[].mouseReleaseEvent):
     vtbl[].vtbl.mouseReleaseEvent = miqt_exec_callback_cQLineEdit_mouseReleaseEvent
-  if not isNil(vtbl.mouseDoubleClickEvent):
+  if not isNil(vtbl[].mouseDoubleClickEvent):
     vtbl[].vtbl.mouseDoubleClickEvent = miqt_exec_callback_cQLineEdit_mouseDoubleClickEvent
-  if not isNil(vtbl.keyPressEvent):
+  if not isNil(vtbl[].keyPressEvent):
     vtbl[].vtbl.keyPressEvent = miqt_exec_callback_cQLineEdit_keyPressEvent
-  if not isNil(vtbl.keyReleaseEvent):
+  if not isNil(vtbl[].keyReleaseEvent):
     vtbl[].vtbl.keyReleaseEvent = miqt_exec_callback_cQLineEdit_keyReleaseEvent
-  if not isNil(vtbl.focusInEvent):
+  if not isNil(vtbl[].focusInEvent):
     vtbl[].vtbl.focusInEvent = miqt_exec_callback_cQLineEdit_focusInEvent
-  if not isNil(vtbl.focusOutEvent):
+  if not isNil(vtbl[].focusOutEvent):
     vtbl[].vtbl.focusOutEvent = miqt_exec_callback_cQLineEdit_focusOutEvent
-  if not isNil(vtbl.paintEvent):
+  if not isNil(vtbl[].paintEvent):
     vtbl[].vtbl.paintEvent = miqt_exec_callback_cQLineEdit_paintEvent
-  if not isNil(vtbl.dragEnterEvent):
+  if not isNil(vtbl[].dragEnterEvent):
     vtbl[].vtbl.dragEnterEvent = miqt_exec_callback_cQLineEdit_dragEnterEvent
-  if not isNil(vtbl.dragMoveEvent):
+  if not isNil(vtbl[].dragMoveEvent):
     vtbl[].vtbl.dragMoveEvent = miqt_exec_callback_cQLineEdit_dragMoveEvent
-  if not isNil(vtbl.dragLeaveEvent):
+  if not isNil(vtbl[].dragLeaveEvent):
     vtbl[].vtbl.dragLeaveEvent = miqt_exec_callback_cQLineEdit_dragLeaveEvent
-  if not isNil(vtbl.dropEvent):
+  if not isNil(vtbl[].dropEvent):
     vtbl[].vtbl.dropEvent = miqt_exec_callback_cQLineEdit_dropEvent
-  if not isNil(vtbl.changeEvent):
+  if not isNil(vtbl[].changeEvent):
     vtbl[].vtbl.changeEvent = miqt_exec_callback_cQLineEdit_changeEvent
-  if not isNil(vtbl.contextMenuEvent):
+  if not isNil(vtbl[].contextMenuEvent):
     vtbl[].vtbl.contextMenuEvent = miqt_exec_callback_cQLineEdit_contextMenuEvent
-  if not isNil(vtbl.inputMethodEvent):
+  if not isNil(vtbl[].inputMethodEvent):
     vtbl[].vtbl.inputMethodEvent = miqt_exec_callback_cQLineEdit_inputMethodEvent
-  if not isNil(vtbl.initStyleOption):
+  if not isNil(vtbl[].initStyleOption):
     vtbl[].vtbl.initStyleOption = miqt_exec_callback_cQLineEdit_initStyleOption
-  if not isNil(vtbl.inputMethodQuery):
+  if not isNil(vtbl[].inputMethodQuery):
     vtbl[].vtbl.inputMethodQuery = miqt_exec_callback_cQLineEdit_inputMethodQuery
-  if not isNil(vtbl.timerEvent):
+  if not isNil(vtbl[].timerEvent):
     vtbl[].vtbl.timerEvent = miqt_exec_callback_cQLineEdit_timerEvent
-  if not isNil(vtbl.event):
+  if not isNil(vtbl[].event):
     vtbl[].vtbl.event = miqt_exec_callback_cQLineEdit_event
-  if not isNil(vtbl.devType):
+  if not isNil(vtbl[].devType):
     vtbl[].vtbl.devType = miqt_exec_callback_cQLineEdit_devType
-  if not isNil(vtbl.setVisible):
+  if not isNil(vtbl[].setVisible):
     vtbl[].vtbl.setVisible = miqt_exec_callback_cQLineEdit_setVisible
-  if not isNil(vtbl.heightForWidth):
+  if not isNil(vtbl[].heightForWidth):
     vtbl[].vtbl.heightForWidth = miqt_exec_callback_cQLineEdit_heightForWidth
-  if not isNil(vtbl.hasHeightForWidth):
+  if not isNil(vtbl[].hasHeightForWidth):
     vtbl[].vtbl.hasHeightForWidth = miqt_exec_callback_cQLineEdit_hasHeightForWidth
-  if not isNil(vtbl.paintEngine):
+  if not isNil(vtbl[].paintEngine):
     vtbl[].vtbl.paintEngine = miqt_exec_callback_cQLineEdit_paintEngine
-  if not isNil(vtbl.wheelEvent):
+  if not isNil(vtbl[].wheelEvent):
     vtbl[].vtbl.wheelEvent = miqt_exec_callback_cQLineEdit_wheelEvent
-  if not isNil(vtbl.enterEvent):
+  if not isNil(vtbl[].enterEvent):
     vtbl[].vtbl.enterEvent = miqt_exec_callback_cQLineEdit_enterEvent
-  if not isNil(vtbl.leaveEvent):
+  if not isNil(vtbl[].leaveEvent):
     vtbl[].vtbl.leaveEvent = miqt_exec_callback_cQLineEdit_leaveEvent
-  if not isNil(vtbl.moveEvent):
+  if not isNil(vtbl[].moveEvent):
     vtbl[].vtbl.moveEvent = miqt_exec_callback_cQLineEdit_moveEvent
-  if not isNil(vtbl.resizeEvent):
+  if not isNil(vtbl[].resizeEvent):
     vtbl[].vtbl.resizeEvent = miqt_exec_callback_cQLineEdit_resizeEvent
-  if not isNil(vtbl.closeEvent):
+  if not isNil(vtbl[].closeEvent):
     vtbl[].vtbl.closeEvent = miqt_exec_callback_cQLineEdit_closeEvent
-  if not isNil(vtbl.tabletEvent):
+  if not isNil(vtbl[].tabletEvent):
     vtbl[].vtbl.tabletEvent = miqt_exec_callback_cQLineEdit_tabletEvent
-  if not isNil(vtbl.actionEvent):
+  if not isNil(vtbl[].actionEvent):
     vtbl[].vtbl.actionEvent = miqt_exec_callback_cQLineEdit_actionEvent
-  if not isNil(vtbl.showEvent):
+  if not isNil(vtbl[].showEvent):
     vtbl[].vtbl.showEvent = miqt_exec_callback_cQLineEdit_showEvent
-  if not isNil(vtbl.hideEvent):
+  if not isNil(vtbl[].hideEvent):
     vtbl[].vtbl.hideEvent = miqt_exec_callback_cQLineEdit_hideEvent
-  if not isNil(vtbl.nativeEvent):
+  if not isNil(vtbl[].nativeEvent):
     vtbl[].vtbl.nativeEvent = miqt_exec_callback_cQLineEdit_nativeEvent
-  if not isNil(vtbl.metric):
+  if not isNil(vtbl[].metric):
     vtbl[].vtbl.metric = miqt_exec_callback_cQLineEdit_metric
-  if not isNil(vtbl.initPainter):
+  if not isNil(vtbl[].initPainter):
     vtbl[].vtbl.initPainter = miqt_exec_callback_cQLineEdit_initPainter
-  if not isNil(vtbl.redirected):
+  if not isNil(vtbl[].redirected):
     vtbl[].vtbl.redirected = miqt_exec_callback_cQLineEdit_redirected
-  if not isNil(vtbl.sharedPainter):
+  if not isNil(vtbl[].sharedPainter):
     vtbl[].vtbl.sharedPainter = miqt_exec_callback_cQLineEdit_sharedPainter
-  if not isNil(vtbl.focusNextPrevChild):
+  if not isNil(vtbl[].focusNextPrevChild):
     vtbl[].vtbl.focusNextPrevChild = miqt_exec_callback_cQLineEdit_focusNextPrevChild
-  if not isNil(vtbl.eventFilter):
+  if not isNil(vtbl[].eventFilter):
     vtbl[].vtbl.eventFilter = miqt_exec_callback_cQLineEdit_eventFilter
-  if not isNil(vtbl.childEvent):
+  if not isNil(vtbl[].childEvent):
     vtbl[].vtbl.childEvent = miqt_exec_callback_cQLineEdit_childEvent
-  if not isNil(vtbl.customEvent):
+  if not isNil(vtbl[].customEvent):
     vtbl[].vtbl.customEvent = miqt_exec_callback_cQLineEdit_customEvent
-  if not isNil(vtbl.connectNotify):
+  if not isNil(vtbl[].connectNotify):
     vtbl[].vtbl.connectNotify = miqt_exec_callback_cQLineEdit_connectNotify
-  if not isNil(vtbl.disconnectNotify):
+  if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQLineEdit_disconnectNotify
-  gen_qlineedit_types.QLineEdit(h: fcQLineEdit_new4(addr(vtbl[]), struct_miqt_string(data: param1, len: csize_t(len(param1))), parent.h))
+  gen_qlineedit_types.QLineEdit(h: fcQLineEdit_new4(addr(vtbl[].vtbl), struct_miqt_string(data: param1, len: csize_t(len(param1))), parent.h), owned: true)
+
+proc create*(T: type gen_qlineedit_types.QLineEdit,
+    parent: gen_qwidget_types.QWidget,
+    vtbl: VirtualQLineEdit) =
+
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQLineEditVTable, _: ptr cQLineEdit) {.cdecl.} =
+    let vtbl = cast[ptr typeof(VirtualQLineEdit()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQLineEdit, vtbl)))
+    vtbl[].h = nil
+    vtbl[].owned = false
+  vtbl[].vtbl.metaObject = miqt_exec_method_cQLineEdit_metaObject
+  vtbl[].vtbl.metacast = miqt_exec_method_cQLineEdit_metacast
+  vtbl[].vtbl.metacall = miqt_exec_method_cQLineEdit_metacall
+  vtbl[].vtbl.sizeHint = miqt_exec_method_cQLineEdit_sizeHint
+  vtbl[].vtbl.minimumSizeHint = miqt_exec_method_cQLineEdit_minimumSizeHint
+  vtbl[].vtbl.mousePressEvent = miqt_exec_method_cQLineEdit_mousePressEvent
+  vtbl[].vtbl.mouseMoveEvent = miqt_exec_method_cQLineEdit_mouseMoveEvent
+  vtbl[].vtbl.mouseReleaseEvent = miqt_exec_method_cQLineEdit_mouseReleaseEvent
+  vtbl[].vtbl.mouseDoubleClickEvent = miqt_exec_method_cQLineEdit_mouseDoubleClickEvent
+  vtbl[].vtbl.keyPressEvent = miqt_exec_method_cQLineEdit_keyPressEvent
+  vtbl[].vtbl.keyReleaseEvent = miqt_exec_method_cQLineEdit_keyReleaseEvent
+  vtbl[].vtbl.focusInEvent = miqt_exec_method_cQLineEdit_focusInEvent
+  vtbl[].vtbl.focusOutEvent = miqt_exec_method_cQLineEdit_focusOutEvent
+  vtbl[].vtbl.paintEvent = miqt_exec_method_cQLineEdit_paintEvent
+  vtbl[].vtbl.dragEnterEvent = miqt_exec_method_cQLineEdit_dragEnterEvent
+  vtbl[].vtbl.dragMoveEvent = miqt_exec_method_cQLineEdit_dragMoveEvent
+  vtbl[].vtbl.dragLeaveEvent = miqt_exec_method_cQLineEdit_dragLeaveEvent
+  vtbl[].vtbl.dropEvent = miqt_exec_method_cQLineEdit_dropEvent
+  vtbl[].vtbl.changeEvent = miqt_exec_method_cQLineEdit_changeEvent
+  vtbl[].vtbl.contextMenuEvent = miqt_exec_method_cQLineEdit_contextMenuEvent
+  vtbl[].vtbl.inputMethodEvent = miqt_exec_method_cQLineEdit_inputMethodEvent
+  vtbl[].vtbl.initStyleOption = miqt_exec_method_cQLineEdit_initStyleOption
+  vtbl[].vtbl.inputMethodQuery = miqt_exec_method_cQLineEdit_inputMethodQuery
+  vtbl[].vtbl.timerEvent = miqt_exec_method_cQLineEdit_timerEvent
+  vtbl[].vtbl.event = miqt_exec_method_cQLineEdit_event
+  vtbl[].vtbl.devType = miqt_exec_method_cQLineEdit_devType
+  vtbl[].vtbl.setVisible = miqt_exec_method_cQLineEdit_setVisible
+  vtbl[].vtbl.heightForWidth = miqt_exec_method_cQLineEdit_heightForWidth
+  vtbl[].vtbl.hasHeightForWidth = miqt_exec_method_cQLineEdit_hasHeightForWidth
+  vtbl[].vtbl.paintEngine = miqt_exec_method_cQLineEdit_paintEngine
+  vtbl[].vtbl.wheelEvent = miqt_exec_method_cQLineEdit_wheelEvent
+  vtbl[].vtbl.enterEvent = miqt_exec_method_cQLineEdit_enterEvent
+  vtbl[].vtbl.leaveEvent = miqt_exec_method_cQLineEdit_leaveEvent
+  vtbl[].vtbl.moveEvent = miqt_exec_method_cQLineEdit_moveEvent
+  vtbl[].vtbl.resizeEvent = miqt_exec_method_cQLineEdit_resizeEvent
+  vtbl[].vtbl.closeEvent = miqt_exec_method_cQLineEdit_closeEvent
+  vtbl[].vtbl.tabletEvent = miqt_exec_method_cQLineEdit_tabletEvent
+  vtbl[].vtbl.actionEvent = miqt_exec_method_cQLineEdit_actionEvent
+  vtbl[].vtbl.showEvent = miqt_exec_method_cQLineEdit_showEvent
+  vtbl[].vtbl.hideEvent = miqt_exec_method_cQLineEdit_hideEvent
+  vtbl[].vtbl.nativeEvent = miqt_exec_method_cQLineEdit_nativeEvent
+  vtbl[].vtbl.metric = miqt_exec_method_cQLineEdit_metric
+  vtbl[].vtbl.initPainter = miqt_exec_method_cQLineEdit_initPainter
+  vtbl[].vtbl.redirected = miqt_exec_method_cQLineEdit_redirected
+  vtbl[].vtbl.sharedPainter = miqt_exec_method_cQLineEdit_sharedPainter
+  vtbl[].vtbl.focusNextPrevChild = miqt_exec_method_cQLineEdit_focusNextPrevChild
+  vtbl[].vtbl.eventFilter = miqt_exec_method_cQLineEdit_eventFilter
+  vtbl[].vtbl.childEvent = miqt_exec_method_cQLineEdit_childEvent
+  vtbl[].vtbl.customEvent = miqt_exec_method_cQLineEdit_customEvent
+  vtbl[].vtbl.connectNotify = miqt_exec_method_cQLineEdit_connectNotify
+  vtbl[].vtbl.disconnectNotify = miqt_exec_method_cQLineEdit_disconnectNotify
+  if vtbl[].h != nil: delete(move(vtbl[]))
+  vtbl[].h = fcQLineEdit_new(addr(vtbl[].vtbl), parent.h)
+  vtbl[].owned = true
+
+proc create*(T: type gen_qlineedit_types.QLineEdit,
+    vtbl: VirtualQLineEdit) =
+
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQLineEditVTable, _: ptr cQLineEdit) {.cdecl.} =
+    let vtbl = cast[ptr typeof(VirtualQLineEdit()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQLineEdit, vtbl)))
+    vtbl[].h = nil
+    vtbl[].owned = false
+  vtbl[].vtbl.metaObject = miqt_exec_method_cQLineEdit_metaObject
+  vtbl[].vtbl.metacast = miqt_exec_method_cQLineEdit_metacast
+  vtbl[].vtbl.metacall = miqt_exec_method_cQLineEdit_metacall
+  vtbl[].vtbl.sizeHint = miqt_exec_method_cQLineEdit_sizeHint
+  vtbl[].vtbl.minimumSizeHint = miqt_exec_method_cQLineEdit_minimumSizeHint
+  vtbl[].vtbl.mousePressEvent = miqt_exec_method_cQLineEdit_mousePressEvent
+  vtbl[].vtbl.mouseMoveEvent = miqt_exec_method_cQLineEdit_mouseMoveEvent
+  vtbl[].vtbl.mouseReleaseEvent = miqt_exec_method_cQLineEdit_mouseReleaseEvent
+  vtbl[].vtbl.mouseDoubleClickEvent = miqt_exec_method_cQLineEdit_mouseDoubleClickEvent
+  vtbl[].vtbl.keyPressEvent = miqt_exec_method_cQLineEdit_keyPressEvent
+  vtbl[].vtbl.keyReleaseEvent = miqt_exec_method_cQLineEdit_keyReleaseEvent
+  vtbl[].vtbl.focusInEvent = miqt_exec_method_cQLineEdit_focusInEvent
+  vtbl[].vtbl.focusOutEvent = miqt_exec_method_cQLineEdit_focusOutEvent
+  vtbl[].vtbl.paintEvent = miqt_exec_method_cQLineEdit_paintEvent
+  vtbl[].vtbl.dragEnterEvent = miqt_exec_method_cQLineEdit_dragEnterEvent
+  vtbl[].vtbl.dragMoveEvent = miqt_exec_method_cQLineEdit_dragMoveEvent
+  vtbl[].vtbl.dragLeaveEvent = miqt_exec_method_cQLineEdit_dragLeaveEvent
+  vtbl[].vtbl.dropEvent = miqt_exec_method_cQLineEdit_dropEvent
+  vtbl[].vtbl.changeEvent = miqt_exec_method_cQLineEdit_changeEvent
+  vtbl[].vtbl.contextMenuEvent = miqt_exec_method_cQLineEdit_contextMenuEvent
+  vtbl[].vtbl.inputMethodEvent = miqt_exec_method_cQLineEdit_inputMethodEvent
+  vtbl[].vtbl.initStyleOption = miqt_exec_method_cQLineEdit_initStyleOption
+  vtbl[].vtbl.inputMethodQuery = miqt_exec_method_cQLineEdit_inputMethodQuery
+  vtbl[].vtbl.timerEvent = miqt_exec_method_cQLineEdit_timerEvent
+  vtbl[].vtbl.event = miqt_exec_method_cQLineEdit_event
+  vtbl[].vtbl.devType = miqt_exec_method_cQLineEdit_devType
+  vtbl[].vtbl.setVisible = miqt_exec_method_cQLineEdit_setVisible
+  vtbl[].vtbl.heightForWidth = miqt_exec_method_cQLineEdit_heightForWidth
+  vtbl[].vtbl.hasHeightForWidth = miqt_exec_method_cQLineEdit_hasHeightForWidth
+  vtbl[].vtbl.paintEngine = miqt_exec_method_cQLineEdit_paintEngine
+  vtbl[].vtbl.wheelEvent = miqt_exec_method_cQLineEdit_wheelEvent
+  vtbl[].vtbl.enterEvent = miqt_exec_method_cQLineEdit_enterEvent
+  vtbl[].vtbl.leaveEvent = miqt_exec_method_cQLineEdit_leaveEvent
+  vtbl[].vtbl.moveEvent = miqt_exec_method_cQLineEdit_moveEvent
+  vtbl[].vtbl.resizeEvent = miqt_exec_method_cQLineEdit_resizeEvent
+  vtbl[].vtbl.closeEvent = miqt_exec_method_cQLineEdit_closeEvent
+  vtbl[].vtbl.tabletEvent = miqt_exec_method_cQLineEdit_tabletEvent
+  vtbl[].vtbl.actionEvent = miqt_exec_method_cQLineEdit_actionEvent
+  vtbl[].vtbl.showEvent = miqt_exec_method_cQLineEdit_showEvent
+  vtbl[].vtbl.hideEvent = miqt_exec_method_cQLineEdit_hideEvent
+  vtbl[].vtbl.nativeEvent = miqt_exec_method_cQLineEdit_nativeEvent
+  vtbl[].vtbl.metric = miqt_exec_method_cQLineEdit_metric
+  vtbl[].vtbl.initPainter = miqt_exec_method_cQLineEdit_initPainter
+  vtbl[].vtbl.redirected = miqt_exec_method_cQLineEdit_redirected
+  vtbl[].vtbl.sharedPainter = miqt_exec_method_cQLineEdit_sharedPainter
+  vtbl[].vtbl.focusNextPrevChild = miqt_exec_method_cQLineEdit_focusNextPrevChild
+  vtbl[].vtbl.eventFilter = miqt_exec_method_cQLineEdit_eventFilter
+  vtbl[].vtbl.childEvent = miqt_exec_method_cQLineEdit_childEvent
+  vtbl[].vtbl.customEvent = miqt_exec_method_cQLineEdit_customEvent
+  vtbl[].vtbl.connectNotify = miqt_exec_method_cQLineEdit_connectNotify
+  vtbl[].vtbl.disconnectNotify = miqt_exec_method_cQLineEdit_disconnectNotify
+  if vtbl[].h != nil: delete(move(vtbl[]))
+  vtbl[].h = fcQLineEdit_new2(addr(vtbl[].vtbl), )
+  vtbl[].owned = true
+
+proc create*(T: type gen_qlineedit_types.QLineEdit,
+    param1: string,
+    vtbl: VirtualQLineEdit) =
+
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQLineEditVTable, _: ptr cQLineEdit) {.cdecl.} =
+    let vtbl = cast[ptr typeof(VirtualQLineEdit()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQLineEdit, vtbl)))
+    vtbl[].h = nil
+    vtbl[].owned = false
+  vtbl[].vtbl.metaObject = miqt_exec_method_cQLineEdit_metaObject
+  vtbl[].vtbl.metacast = miqt_exec_method_cQLineEdit_metacast
+  vtbl[].vtbl.metacall = miqt_exec_method_cQLineEdit_metacall
+  vtbl[].vtbl.sizeHint = miqt_exec_method_cQLineEdit_sizeHint
+  vtbl[].vtbl.minimumSizeHint = miqt_exec_method_cQLineEdit_minimumSizeHint
+  vtbl[].vtbl.mousePressEvent = miqt_exec_method_cQLineEdit_mousePressEvent
+  vtbl[].vtbl.mouseMoveEvent = miqt_exec_method_cQLineEdit_mouseMoveEvent
+  vtbl[].vtbl.mouseReleaseEvent = miqt_exec_method_cQLineEdit_mouseReleaseEvent
+  vtbl[].vtbl.mouseDoubleClickEvent = miqt_exec_method_cQLineEdit_mouseDoubleClickEvent
+  vtbl[].vtbl.keyPressEvent = miqt_exec_method_cQLineEdit_keyPressEvent
+  vtbl[].vtbl.keyReleaseEvent = miqt_exec_method_cQLineEdit_keyReleaseEvent
+  vtbl[].vtbl.focusInEvent = miqt_exec_method_cQLineEdit_focusInEvent
+  vtbl[].vtbl.focusOutEvent = miqt_exec_method_cQLineEdit_focusOutEvent
+  vtbl[].vtbl.paintEvent = miqt_exec_method_cQLineEdit_paintEvent
+  vtbl[].vtbl.dragEnterEvent = miqt_exec_method_cQLineEdit_dragEnterEvent
+  vtbl[].vtbl.dragMoveEvent = miqt_exec_method_cQLineEdit_dragMoveEvent
+  vtbl[].vtbl.dragLeaveEvent = miqt_exec_method_cQLineEdit_dragLeaveEvent
+  vtbl[].vtbl.dropEvent = miqt_exec_method_cQLineEdit_dropEvent
+  vtbl[].vtbl.changeEvent = miqt_exec_method_cQLineEdit_changeEvent
+  vtbl[].vtbl.contextMenuEvent = miqt_exec_method_cQLineEdit_contextMenuEvent
+  vtbl[].vtbl.inputMethodEvent = miqt_exec_method_cQLineEdit_inputMethodEvent
+  vtbl[].vtbl.initStyleOption = miqt_exec_method_cQLineEdit_initStyleOption
+  vtbl[].vtbl.inputMethodQuery = miqt_exec_method_cQLineEdit_inputMethodQuery
+  vtbl[].vtbl.timerEvent = miqt_exec_method_cQLineEdit_timerEvent
+  vtbl[].vtbl.event = miqt_exec_method_cQLineEdit_event
+  vtbl[].vtbl.devType = miqt_exec_method_cQLineEdit_devType
+  vtbl[].vtbl.setVisible = miqt_exec_method_cQLineEdit_setVisible
+  vtbl[].vtbl.heightForWidth = miqt_exec_method_cQLineEdit_heightForWidth
+  vtbl[].vtbl.hasHeightForWidth = miqt_exec_method_cQLineEdit_hasHeightForWidth
+  vtbl[].vtbl.paintEngine = miqt_exec_method_cQLineEdit_paintEngine
+  vtbl[].vtbl.wheelEvent = miqt_exec_method_cQLineEdit_wheelEvent
+  vtbl[].vtbl.enterEvent = miqt_exec_method_cQLineEdit_enterEvent
+  vtbl[].vtbl.leaveEvent = miqt_exec_method_cQLineEdit_leaveEvent
+  vtbl[].vtbl.moveEvent = miqt_exec_method_cQLineEdit_moveEvent
+  vtbl[].vtbl.resizeEvent = miqt_exec_method_cQLineEdit_resizeEvent
+  vtbl[].vtbl.closeEvent = miqt_exec_method_cQLineEdit_closeEvent
+  vtbl[].vtbl.tabletEvent = miqt_exec_method_cQLineEdit_tabletEvent
+  vtbl[].vtbl.actionEvent = miqt_exec_method_cQLineEdit_actionEvent
+  vtbl[].vtbl.showEvent = miqt_exec_method_cQLineEdit_showEvent
+  vtbl[].vtbl.hideEvent = miqt_exec_method_cQLineEdit_hideEvent
+  vtbl[].vtbl.nativeEvent = miqt_exec_method_cQLineEdit_nativeEvent
+  vtbl[].vtbl.metric = miqt_exec_method_cQLineEdit_metric
+  vtbl[].vtbl.initPainter = miqt_exec_method_cQLineEdit_initPainter
+  vtbl[].vtbl.redirected = miqt_exec_method_cQLineEdit_redirected
+  vtbl[].vtbl.sharedPainter = miqt_exec_method_cQLineEdit_sharedPainter
+  vtbl[].vtbl.focusNextPrevChild = miqt_exec_method_cQLineEdit_focusNextPrevChild
+  vtbl[].vtbl.eventFilter = miqt_exec_method_cQLineEdit_eventFilter
+  vtbl[].vtbl.childEvent = miqt_exec_method_cQLineEdit_childEvent
+  vtbl[].vtbl.customEvent = miqt_exec_method_cQLineEdit_customEvent
+  vtbl[].vtbl.connectNotify = miqt_exec_method_cQLineEdit_connectNotify
+  vtbl[].vtbl.disconnectNotify = miqt_exec_method_cQLineEdit_disconnectNotify
+  if vtbl[].h != nil: delete(move(vtbl[]))
+  vtbl[].h = fcQLineEdit_new3(addr(vtbl[].vtbl), struct_miqt_string(data: param1, len: csize_t(len(param1))))
+  vtbl[].owned = true
+
+proc create*(T: type gen_qlineedit_types.QLineEdit,
+    param1: string, parent: gen_qwidget_types.QWidget,
+    vtbl: VirtualQLineEdit) =
+
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQLineEditVTable, _: ptr cQLineEdit) {.cdecl.} =
+    let vtbl = cast[ptr typeof(VirtualQLineEdit()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQLineEdit, vtbl)))
+    vtbl[].h = nil
+    vtbl[].owned = false
+  vtbl[].vtbl.metaObject = miqt_exec_method_cQLineEdit_metaObject
+  vtbl[].vtbl.metacast = miqt_exec_method_cQLineEdit_metacast
+  vtbl[].vtbl.metacall = miqt_exec_method_cQLineEdit_metacall
+  vtbl[].vtbl.sizeHint = miqt_exec_method_cQLineEdit_sizeHint
+  vtbl[].vtbl.minimumSizeHint = miqt_exec_method_cQLineEdit_minimumSizeHint
+  vtbl[].vtbl.mousePressEvent = miqt_exec_method_cQLineEdit_mousePressEvent
+  vtbl[].vtbl.mouseMoveEvent = miqt_exec_method_cQLineEdit_mouseMoveEvent
+  vtbl[].vtbl.mouseReleaseEvent = miqt_exec_method_cQLineEdit_mouseReleaseEvent
+  vtbl[].vtbl.mouseDoubleClickEvent = miqt_exec_method_cQLineEdit_mouseDoubleClickEvent
+  vtbl[].vtbl.keyPressEvent = miqt_exec_method_cQLineEdit_keyPressEvent
+  vtbl[].vtbl.keyReleaseEvent = miqt_exec_method_cQLineEdit_keyReleaseEvent
+  vtbl[].vtbl.focusInEvent = miqt_exec_method_cQLineEdit_focusInEvent
+  vtbl[].vtbl.focusOutEvent = miqt_exec_method_cQLineEdit_focusOutEvent
+  vtbl[].vtbl.paintEvent = miqt_exec_method_cQLineEdit_paintEvent
+  vtbl[].vtbl.dragEnterEvent = miqt_exec_method_cQLineEdit_dragEnterEvent
+  vtbl[].vtbl.dragMoveEvent = miqt_exec_method_cQLineEdit_dragMoveEvent
+  vtbl[].vtbl.dragLeaveEvent = miqt_exec_method_cQLineEdit_dragLeaveEvent
+  vtbl[].vtbl.dropEvent = miqt_exec_method_cQLineEdit_dropEvent
+  vtbl[].vtbl.changeEvent = miqt_exec_method_cQLineEdit_changeEvent
+  vtbl[].vtbl.contextMenuEvent = miqt_exec_method_cQLineEdit_contextMenuEvent
+  vtbl[].vtbl.inputMethodEvent = miqt_exec_method_cQLineEdit_inputMethodEvent
+  vtbl[].vtbl.initStyleOption = miqt_exec_method_cQLineEdit_initStyleOption
+  vtbl[].vtbl.inputMethodQuery = miqt_exec_method_cQLineEdit_inputMethodQuery
+  vtbl[].vtbl.timerEvent = miqt_exec_method_cQLineEdit_timerEvent
+  vtbl[].vtbl.event = miqt_exec_method_cQLineEdit_event
+  vtbl[].vtbl.devType = miqt_exec_method_cQLineEdit_devType
+  vtbl[].vtbl.setVisible = miqt_exec_method_cQLineEdit_setVisible
+  vtbl[].vtbl.heightForWidth = miqt_exec_method_cQLineEdit_heightForWidth
+  vtbl[].vtbl.hasHeightForWidth = miqt_exec_method_cQLineEdit_hasHeightForWidth
+  vtbl[].vtbl.paintEngine = miqt_exec_method_cQLineEdit_paintEngine
+  vtbl[].vtbl.wheelEvent = miqt_exec_method_cQLineEdit_wheelEvent
+  vtbl[].vtbl.enterEvent = miqt_exec_method_cQLineEdit_enterEvent
+  vtbl[].vtbl.leaveEvent = miqt_exec_method_cQLineEdit_leaveEvent
+  vtbl[].vtbl.moveEvent = miqt_exec_method_cQLineEdit_moveEvent
+  vtbl[].vtbl.resizeEvent = miqt_exec_method_cQLineEdit_resizeEvent
+  vtbl[].vtbl.closeEvent = miqt_exec_method_cQLineEdit_closeEvent
+  vtbl[].vtbl.tabletEvent = miqt_exec_method_cQLineEdit_tabletEvent
+  vtbl[].vtbl.actionEvent = miqt_exec_method_cQLineEdit_actionEvent
+  vtbl[].vtbl.showEvent = miqt_exec_method_cQLineEdit_showEvent
+  vtbl[].vtbl.hideEvent = miqt_exec_method_cQLineEdit_hideEvent
+  vtbl[].vtbl.nativeEvent = miqt_exec_method_cQLineEdit_nativeEvent
+  vtbl[].vtbl.metric = miqt_exec_method_cQLineEdit_metric
+  vtbl[].vtbl.initPainter = miqt_exec_method_cQLineEdit_initPainter
+  vtbl[].vtbl.redirected = miqt_exec_method_cQLineEdit_redirected
+  vtbl[].vtbl.sharedPainter = miqt_exec_method_cQLineEdit_sharedPainter
+  vtbl[].vtbl.focusNextPrevChild = miqt_exec_method_cQLineEdit_focusNextPrevChild
+  vtbl[].vtbl.eventFilter = miqt_exec_method_cQLineEdit_eventFilter
+  vtbl[].vtbl.childEvent = miqt_exec_method_cQLineEdit_childEvent
+  vtbl[].vtbl.customEvent = miqt_exec_method_cQLineEdit_customEvent
+  vtbl[].vtbl.connectNotify = miqt_exec_method_cQLineEdit_connectNotify
+  vtbl[].vtbl.disconnectNotify = miqt_exec_method_cQLineEdit_disconnectNotify
+  if vtbl[].h != nil: delete(move(vtbl[]))
+  vtbl[].h = fcQLineEdit_new4(addr(vtbl[].vtbl), struct_miqt_string(data: param1, len: csize_t(len(param1))), parent.h)
+  vtbl[].owned = true
 
 proc staticMetaObject*(_: type gen_qlineedit_types.QLineEdit): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQLineEdit_staticMetaObject())
-proc delete*(self: gen_qlineedit_types.QLineEdit) =
-  fcQLineEdit_delete(self.h)

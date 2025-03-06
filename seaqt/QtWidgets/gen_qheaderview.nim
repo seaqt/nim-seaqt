@@ -30,7 +30,7 @@ func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
     else:
       copyMem(addr result[0], unsafeAddr v[0], v.len)
 
-const cflags = gorge("pkg-config --cflags Qt6Widgets")  & " -fPIC"
+const cflags = gorge("pkg-config --cflags Qt6Widgets") & " -fPIC"
 {.compile("gen_qheaderview.cpp", cflags).}
 
 
@@ -188,7 +188,7 @@ proc fcQHeaderView_sortIndicatorClearableChanged(self: pointer, clearable: bool)
 proc fcQHeaderView_connect_sortIndicatorClearableChanged(self: pointer, slot: int, callback: proc (slot: int, clearable: bool) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QHeaderView_connect_sortIndicatorClearableChanged".}
 proc fcQHeaderView_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QHeaderView_tr2".}
 proc fcQHeaderView_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QHeaderView_tr3".}
-type cQHeaderViewVTable = object
+type cQHeaderViewVTable {.pure.} = object
   destructor*: proc(vtbl: ptr cQHeaderViewVTable, self: ptr cQHeaderView) {.cdecl, raises:[], gcsafe.}
   metaObject*: proc(vtbl, self: pointer, ): pointer {.cdecl, raises: [], gcsafe.}
   metacast*: proc(vtbl, self: pointer, param1: cstring): pointer {.cdecl, raises: [], gcsafe.}
@@ -417,10 +417,9 @@ proc fcQHeaderView_protectedbase_isSignalConnected(self: pointer, signal: pointe
 proc fcQHeaderView_new(vtbl: pointer, orientation: cint): ptr cQHeaderView {.importc: "QHeaderView_new".}
 proc fcQHeaderView_new2(vtbl: pointer, orientation: cint, parent: pointer): ptr cQHeaderView {.importc: "QHeaderView_new2".}
 proc fcQHeaderView_staticMetaObject(): pointer {.importc: "QHeaderView_staticMetaObject".}
-proc fcQHeaderView_delete(self: pointer) {.importc: "QHeaderView_delete".}
 
 proc metaObject*(self: gen_qheaderview_types.QHeaderView, ): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQHeaderView_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQHeaderView_metaObject(self.h), owned: false)
 
 proc metacast*(self: gen_qheaderview_types.QHeaderView, param1: cstring): pointer =
   fcQHeaderView_metacast(self.h, param1)
@@ -447,7 +446,7 @@ proc length*(self: gen_qheaderview_types.QHeaderView, ): cint =
   fcQHeaderView_length(self.h)
 
 proc sizeHint*(self: gen_qheaderview_types.QHeaderView, ): gen_qsize_types.QSize =
-  gen_qsize_types.QSize(h: fcQHeaderView_sizeHint(self.h))
+  gen_qsize_types.QSize(h: fcQHeaderView_sizeHint(self.h), owned: true)
 
 proc setVisible*(self: gen_qheaderview_types.QHeaderView, v: bool): void =
   fcQHeaderView_setVisible(self.h, v)
@@ -986,7 +985,7 @@ type QHeaderViewchildEventProc* = proc(self: QHeaderView, event: gen_qcoreevent_
 type QHeaderViewcustomEventProc* = proc(self: QHeaderView, event: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
 type QHeaderViewconnectNotifyProc* = proc(self: QHeaderView, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
 type QHeaderViewdisconnectNotifyProc* = proc(self: QHeaderView, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
-type QHeaderViewVTable* = object
+type QHeaderViewVTable* {.inheritable, pure.} = object
   vtbl: cQHeaderViewVTable
   metaObject*: QHeaderViewmetaObjectProc
   metacast*: QHeaderViewmetacastProc
@@ -1086,13 +1085,16 @@ type QHeaderViewVTable* = object
   connectNotify*: QHeaderViewconnectNotifyProc
   disconnectNotify*: QHeaderViewdisconnectNotifyProc
 proc QHeaderViewmetaObject*(self: gen_qheaderview_types.QHeaderView, ): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQHeaderView_virtualbase_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQHeaderView_virtualbase_metaObject(self.h), owned: false)
 
 proc miqt_exec_callback_cQHeaderView_metaObject(vtbl: pointer, self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QHeaderViewVTable](vtbl)
   let self = QHeaderView(h: self)
   var virtualReturn = vtbl[].metaObject(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QHeaderViewmetacast*(self: gen_qheaderview_types.QHeaderView, param1: cstring): pointer =
   fcQHeaderView_virtualbase_metacast(self.h, param1)
@@ -1122,17 +1124,20 @@ proc QHeaderViewsetModel*(self: gen_qheaderview_types.QHeaderView, model: gen_qa
 proc miqt_exec_callback_cQHeaderView_setModel(vtbl: pointer, self: pointer, model: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QHeaderViewVTable](vtbl)
   let self = QHeaderView(h: self)
-  let slotval1 = gen_qabstractitemmodel_types.QAbstractItemModel(h: model)
+  let slotval1 = gen_qabstractitemmodel_types.QAbstractItemModel(h: model, owned: false)
   vtbl[].setModel(self, slotval1)
 
 proc QHeaderViewsizeHint*(self: gen_qheaderview_types.QHeaderView, ): gen_qsize_types.QSize =
-  gen_qsize_types.QSize(h: fcQHeaderView_virtualbase_sizeHint(self.h))
+  gen_qsize_types.QSize(h: fcQHeaderView_virtualbase_sizeHint(self.h), owned: true)
 
 proc miqt_exec_callback_cQHeaderView_sizeHint(vtbl: pointer, self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QHeaderViewVTable](vtbl)
   let self = QHeaderView(h: self)
   var virtualReturn = vtbl[].sizeHint(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QHeaderViewsetVisible*(self: gen_qheaderview_types.QHeaderView, v: bool): void =
   fcQHeaderView_virtualbase_setVisible(self.h, v)
@@ -1165,8 +1170,8 @@ proc QHeaderViewcurrentChanged*(self: gen_qheaderview_types.QHeaderView, current
 proc miqt_exec_callback_cQHeaderView_currentChanged(vtbl: pointer, self: pointer, current: pointer, old: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QHeaderViewVTable](vtbl)
   let self = QHeaderView(h: self)
-  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: current)
-  let slotval2 = gen_qabstractitemmodel_types.QModelIndex(h: old)
+  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: current, owned: false)
+  let slotval2 = gen_qabstractitemmodel_types.QModelIndex(h: old, owned: false)
   vtbl[].currentChanged(self, slotval1, slotval2)
 
 proc QHeaderViewevent*(self: gen_qheaderview_types.QHeaderView, e: gen_qcoreevent_types.QEvent): bool =
@@ -1175,7 +1180,7 @@ proc QHeaderViewevent*(self: gen_qheaderview_types.QHeaderView, e: gen_qcoreeven
 proc miqt_exec_callback_cQHeaderView_event(vtbl: pointer, self: pointer, e: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QHeaderViewVTable](vtbl)
   let self = QHeaderView(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: e)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: e, owned: false)
   var virtualReturn = vtbl[].event(self, slotval1)
   virtualReturn
 
@@ -1185,7 +1190,7 @@ proc QHeaderViewpaintEvent*(self: gen_qheaderview_types.QHeaderView, e: gen_qeve
 proc miqt_exec_callback_cQHeaderView_paintEvent(vtbl: pointer, self: pointer, e: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QHeaderViewVTable](vtbl)
   let self = QHeaderView(h: self)
-  let slotval1 = gen_qevent_types.QPaintEvent(h: e)
+  let slotval1 = gen_qevent_types.QPaintEvent(h: e, owned: false)
   vtbl[].paintEvent(self, slotval1)
 
 proc QHeaderViewmousePressEvent*(self: gen_qheaderview_types.QHeaderView, e: gen_qevent_types.QMouseEvent): void =
@@ -1194,7 +1199,7 @@ proc QHeaderViewmousePressEvent*(self: gen_qheaderview_types.QHeaderView, e: gen
 proc miqt_exec_callback_cQHeaderView_mousePressEvent(vtbl: pointer, self: pointer, e: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QHeaderViewVTable](vtbl)
   let self = QHeaderView(h: self)
-  let slotval1 = gen_qevent_types.QMouseEvent(h: e)
+  let slotval1 = gen_qevent_types.QMouseEvent(h: e, owned: false)
   vtbl[].mousePressEvent(self, slotval1)
 
 proc QHeaderViewmouseMoveEvent*(self: gen_qheaderview_types.QHeaderView, e: gen_qevent_types.QMouseEvent): void =
@@ -1203,7 +1208,7 @@ proc QHeaderViewmouseMoveEvent*(self: gen_qheaderview_types.QHeaderView, e: gen_
 proc miqt_exec_callback_cQHeaderView_mouseMoveEvent(vtbl: pointer, self: pointer, e: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QHeaderViewVTable](vtbl)
   let self = QHeaderView(h: self)
-  let slotval1 = gen_qevent_types.QMouseEvent(h: e)
+  let slotval1 = gen_qevent_types.QMouseEvent(h: e, owned: false)
   vtbl[].mouseMoveEvent(self, slotval1)
 
 proc QHeaderViewmouseReleaseEvent*(self: gen_qheaderview_types.QHeaderView, e: gen_qevent_types.QMouseEvent): void =
@@ -1212,7 +1217,7 @@ proc QHeaderViewmouseReleaseEvent*(self: gen_qheaderview_types.QHeaderView, e: g
 proc miqt_exec_callback_cQHeaderView_mouseReleaseEvent(vtbl: pointer, self: pointer, e: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QHeaderViewVTable](vtbl)
   let self = QHeaderView(h: self)
-  let slotval1 = gen_qevent_types.QMouseEvent(h: e)
+  let slotval1 = gen_qevent_types.QMouseEvent(h: e, owned: false)
   vtbl[].mouseReleaseEvent(self, slotval1)
 
 proc QHeaderViewmouseDoubleClickEvent*(self: gen_qheaderview_types.QHeaderView, e: gen_qevent_types.QMouseEvent): void =
@@ -1221,7 +1226,7 @@ proc QHeaderViewmouseDoubleClickEvent*(self: gen_qheaderview_types.QHeaderView, 
 proc miqt_exec_callback_cQHeaderView_mouseDoubleClickEvent(vtbl: pointer, self: pointer, e: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QHeaderViewVTable](vtbl)
   let self = QHeaderView(h: self)
-  let slotval1 = gen_qevent_types.QMouseEvent(h: e)
+  let slotval1 = gen_qevent_types.QMouseEvent(h: e, owned: false)
   vtbl[].mouseDoubleClickEvent(self, slotval1)
 
 proc QHeaderViewviewportEvent*(self: gen_qheaderview_types.QHeaderView, e: gen_qcoreevent_types.QEvent): bool =
@@ -1230,7 +1235,7 @@ proc QHeaderViewviewportEvent*(self: gen_qheaderview_types.QHeaderView, e: gen_q
 proc miqt_exec_callback_cQHeaderView_viewportEvent(vtbl: pointer, self: pointer, e: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QHeaderViewVTable](vtbl)
   let self = QHeaderView(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: e)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: e, owned: false)
   var virtualReturn = vtbl[].viewportEvent(self, slotval1)
   virtualReturn
 
@@ -1240,20 +1245,23 @@ proc QHeaderViewpaintSection*(self: gen_qheaderview_types.QHeaderView, painter: 
 proc miqt_exec_callback_cQHeaderView_paintSection(vtbl: pointer, self: pointer, painter: pointer, rect: pointer, logicalIndex: cint): void {.cdecl.} =
   let vtbl = cast[ptr QHeaderViewVTable](vtbl)
   let self = QHeaderView(h: self)
-  let slotval1 = gen_qpainter_types.QPainter(h: painter)
-  let slotval2 = gen_qrect_types.QRect(h: rect)
+  let slotval1 = gen_qpainter_types.QPainter(h: painter, owned: false)
+  let slotval2 = gen_qrect_types.QRect(h: rect, owned: false)
   let slotval3 = logicalIndex
   vtbl[].paintSection(self, slotval1, slotval2, slotval3)
 
 proc QHeaderViewsectionSizeFromContents*(self: gen_qheaderview_types.QHeaderView, logicalIndex: cint): gen_qsize_types.QSize =
-  gen_qsize_types.QSize(h: fcQHeaderView_virtualbase_sectionSizeFromContents(self.h, logicalIndex))
+  gen_qsize_types.QSize(h: fcQHeaderView_virtualbase_sectionSizeFromContents(self.h, logicalIndex), owned: true)
 
 proc miqt_exec_callback_cQHeaderView_sectionSizeFromContents(vtbl: pointer, self: pointer, logicalIndex: cint): pointer {.cdecl.} =
   let vtbl = cast[ptr QHeaderViewVTable](vtbl)
   let self = QHeaderView(h: self)
   let slotval1 = logicalIndex
   var virtualReturn = vtbl[].sectionSizeFromContents(self, slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QHeaderViewhorizontalOffset*(self: gen_qheaderview_types.QHeaderView, ): cint =
   fcQHeaderView_virtualbase_horizontalOffset(self.h)
@@ -1301,8 +1309,8 @@ proc QHeaderViewdataChanged*(self: gen_qheaderview_types.QHeaderView, topLeft: g
 proc miqt_exec_callback_cQHeaderView_dataChanged(vtbl: pointer, self: pointer, topLeft: pointer, bottomRight: pointer, roles: struct_miqt_array): void {.cdecl.} =
   let vtbl = cast[ptr QHeaderViewVTable](vtbl)
   let self = QHeaderView(h: self)
-  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: topLeft)
-  let slotval2 = gen_qabstractitemmodel_types.QModelIndex(h: bottomRight)
+  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: topLeft, owned: false)
+  let slotval2 = gen_qabstractitemmodel_types.QModelIndex(h: bottomRight, owned: false)
   var vroles_ma = roles
   var vrolesx_ret = newSeq[cint](int(vroles_ma.len))
   let vroles_outCast = cast[ptr UncheckedArray[cint]](vroles_ma.data)
@@ -1318,20 +1326,23 @@ proc QHeaderViewrowsInserted*(self: gen_qheaderview_types.QHeaderView, parent: g
 proc miqt_exec_callback_cQHeaderView_rowsInserted(vtbl: pointer, self: pointer, parent: pointer, start: cint, endVal: cint): void {.cdecl.} =
   let vtbl = cast[ptr QHeaderViewVTable](vtbl)
   let self = QHeaderView(h: self)
-  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: parent)
+  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: parent, owned: false)
   let slotval2 = start
   let slotval3 = endVal
   vtbl[].rowsInserted(self, slotval1, slotval2, slotval3)
 
 proc QHeaderViewvisualRect*(self: gen_qheaderview_types.QHeaderView, index: gen_qabstractitemmodel_types.QModelIndex): gen_qrect_types.QRect =
-  gen_qrect_types.QRect(h: fcQHeaderView_virtualbase_visualRect(self.h, index.h))
+  gen_qrect_types.QRect(h: fcQHeaderView_virtualbase_visualRect(self.h, index.h), owned: true)
 
 proc miqt_exec_callback_cQHeaderView_visualRect(vtbl: pointer, self: pointer, index: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QHeaderViewVTable](vtbl)
   let self = QHeaderView(h: self)
-  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index)
+  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
   var virtualReturn = vtbl[].visualRect(self, slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QHeaderViewscrollTo*(self: gen_qheaderview_types.QHeaderView, index: gen_qabstractitemmodel_types.QModelIndex, hint: cint): void =
   fcQHeaderView_virtualbase_scrollTo(self.h, index.h, cint(hint))
@@ -1339,19 +1350,22 @@ proc QHeaderViewscrollTo*(self: gen_qheaderview_types.QHeaderView, index: gen_qa
 proc miqt_exec_callback_cQHeaderView_scrollTo(vtbl: pointer, self: pointer, index: pointer, hint: cint): void {.cdecl.} =
   let vtbl = cast[ptr QHeaderViewVTable](vtbl)
   let self = QHeaderView(h: self)
-  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index)
+  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
   let slotval2 = cint(hint)
   vtbl[].scrollTo(self, slotval1, slotval2)
 
 proc QHeaderViewindexAt*(self: gen_qheaderview_types.QHeaderView, p: gen_qpoint_types.QPoint): gen_qabstractitemmodel_types.QModelIndex =
-  gen_qabstractitemmodel_types.QModelIndex(h: fcQHeaderView_virtualbase_indexAt(self.h, p.h))
+  gen_qabstractitemmodel_types.QModelIndex(h: fcQHeaderView_virtualbase_indexAt(self.h, p.h), owned: true)
 
 proc miqt_exec_callback_cQHeaderView_indexAt(vtbl: pointer, self: pointer, p: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QHeaderViewVTable](vtbl)
   let self = QHeaderView(h: self)
-  let slotval1 = gen_qpoint_types.QPoint(h: p)
+  let slotval1 = gen_qpoint_types.QPoint(h: p, owned: false)
   var virtualReturn = vtbl[].indexAt(self, slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QHeaderViewisIndexHidden*(self: gen_qheaderview_types.QHeaderView, index: gen_qabstractitemmodel_types.QModelIndex): bool =
   fcQHeaderView_virtualbase_isIndexHidden(self.h, index.h)
@@ -1359,12 +1373,12 @@ proc QHeaderViewisIndexHidden*(self: gen_qheaderview_types.QHeaderView, index: g
 proc miqt_exec_callback_cQHeaderView_isIndexHidden(vtbl: pointer, self: pointer, index: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QHeaderViewVTable](vtbl)
   let self = QHeaderView(h: self)
-  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index)
+  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
   var virtualReturn = vtbl[].isIndexHidden(self, slotval1)
   virtualReturn
 
 proc QHeaderViewmoveCursor*(self: gen_qheaderview_types.QHeaderView, param1: cint, param2: cint): gen_qabstractitemmodel_types.QModelIndex =
-  gen_qabstractitemmodel_types.QModelIndex(h: fcQHeaderView_virtualbase_moveCursor(self.h, cint(param1), cint(param2)))
+  gen_qabstractitemmodel_types.QModelIndex(h: fcQHeaderView_virtualbase_moveCursor(self.h, cint(param1), cint(param2)), owned: true)
 
 proc miqt_exec_callback_cQHeaderView_moveCursor(vtbl: pointer, self: pointer, param1: cint, param2: cint): pointer {.cdecl.} =
   let vtbl = cast[ptr QHeaderViewVTable](vtbl)
@@ -1372,7 +1386,10 @@ proc miqt_exec_callback_cQHeaderView_moveCursor(vtbl: pointer, self: pointer, pa
   let slotval1 = cint(param1)
   let slotval2 = cint(param2)
   var virtualReturn = vtbl[].moveCursor(self, slotval1, slotval2)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QHeaderViewsetSelection*(self: gen_qheaderview_types.QHeaderView, rect: gen_qrect_types.QRect, flags: cint): void =
   fcQHeaderView_virtualbase_setSelection(self.h, rect.h, cint(flags))
@@ -1380,19 +1397,22 @@ proc QHeaderViewsetSelection*(self: gen_qheaderview_types.QHeaderView, rect: gen
 proc miqt_exec_callback_cQHeaderView_setSelection(vtbl: pointer, self: pointer, rect: pointer, flags: cint): void {.cdecl.} =
   let vtbl = cast[ptr QHeaderViewVTable](vtbl)
   let self = QHeaderView(h: self)
-  let slotval1 = gen_qrect_types.QRect(h: rect)
+  let slotval1 = gen_qrect_types.QRect(h: rect, owned: false)
   let slotval2 = cint(flags)
   vtbl[].setSelection(self, slotval1, slotval2)
 
 proc QHeaderViewvisualRegionForSelection*(self: gen_qheaderview_types.QHeaderView, selection: gen_qitemselectionmodel_types.QItemSelection): gen_qregion_types.QRegion =
-  gen_qregion_types.QRegion(h: fcQHeaderView_virtualbase_visualRegionForSelection(self.h, selection.h))
+  gen_qregion_types.QRegion(h: fcQHeaderView_virtualbase_visualRegionForSelection(self.h, selection.h), owned: true)
 
 proc miqt_exec_callback_cQHeaderView_visualRegionForSelection(vtbl: pointer, self: pointer, selection: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QHeaderViewVTable](vtbl)
   let self = QHeaderView(h: self)
-  let slotval1 = gen_qitemselectionmodel_types.QItemSelection(h: selection)
+  let slotval1 = gen_qitemselectionmodel_types.QItemSelection(h: selection, owned: false)
   var virtualReturn = vtbl[].visualRegionForSelection(self, slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QHeaderViewinitStyleOptionForIndex*(self: gen_qheaderview_types.QHeaderView, option: gen_qstyleoption_types.QStyleOptionHeader, logicalIndex: cint): void =
   fcQHeaderView_virtualbase_initStyleOptionForIndex(self.h, option.h, logicalIndex)
@@ -1400,7 +1420,7 @@ proc QHeaderViewinitStyleOptionForIndex*(self: gen_qheaderview_types.QHeaderView
 proc miqt_exec_callback_cQHeaderView_initStyleOptionForIndex(vtbl: pointer, self: pointer, option: pointer, logicalIndex: cint): void {.cdecl.} =
   let vtbl = cast[ptr QHeaderViewVTable](vtbl)
   let self = QHeaderView(h: self)
-  let slotval1 = gen_qstyleoption_types.QStyleOptionHeader(h: option)
+  let slotval1 = gen_qstyleoption_types.QStyleOptionHeader(h: option, owned: false)
   let slotval2 = logicalIndex
   vtbl[].initStyleOptionForIndex(self, slotval1, slotval2)
 
@@ -1410,7 +1430,7 @@ proc QHeaderViewinitStyleOption*(self: gen_qheaderview_types.QHeaderView, option
 proc miqt_exec_callback_cQHeaderView_initStyleOption(vtbl: pointer, self: pointer, option: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QHeaderViewVTable](vtbl)
   let self = QHeaderView(h: self)
-  let slotval1 = gen_qstyleoption_types.QStyleOptionHeader(h: option)
+  let slotval1 = gen_qstyleoption_types.QStyleOptionHeader(h: option, owned: false)
   vtbl[].initStyleOption(self, slotval1)
 
 proc QHeaderViewsetSelectionModel*(self: gen_qheaderview_types.QHeaderView, selectionModel: gen_qitemselectionmodel_types.QItemSelectionModel): void =
@@ -1419,7 +1439,7 @@ proc QHeaderViewsetSelectionModel*(self: gen_qheaderview_types.QHeaderView, sele
 proc miqt_exec_callback_cQHeaderView_setSelectionModel(vtbl: pointer, self: pointer, selectionModel: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QHeaderViewVTable](vtbl)
   let self = QHeaderView(h: self)
-  let slotval1 = gen_qitemselectionmodel_types.QItemSelectionModel(h: selectionModel)
+  let slotval1 = gen_qitemselectionmodel_types.QItemSelectionModel(h: selectionModel, owned: false)
   vtbl[].setSelectionModel(self, slotval1)
 
 proc QHeaderViewkeyboardSearch*(self: gen_qheaderview_types.QHeaderView, search: string): void =
@@ -1455,24 +1475,30 @@ proc miqt_exec_callback_cQHeaderView_sizeHintForColumn(vtbl: pointer, self: poin
   virtualReturn
 
 proc QHeaderViewitemDelegateForIndex*(self: gen_qheaderview_types.QHeaderView, index: gen_qabstractitemmodel_types.QModelIndex): gen_qabstractitemdelegate_types.QAbstractItemDelegate =
-  gen_qabstractitemdelegate_types.QAbstractItemDelegate(h: fcQHeaderView_virtualbase_itemDelegateForIndex(self.h, index.h))
+  gen_qabstractitemdelegate_types.QAbstractItemDelegate(h: fcQHeaderView_virtualbase_itemDelegateForIndex(self.h, index.h), owned: false)
 
 proc miqt_exec_callback_cQHeaderView_itemDelegateForIndex(vtbl: pointer, self: pointer, index: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QHeaderViewVTable](vtbl)
   let self = QHeaderView(h: self)
-  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index)
+  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
   var virtualReturn = vtbl[].itemDelegateForIndex(self, slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QHeaderViewinputMethodQuery*(self: gen_qheaderview_types.QHeaderView, query: cint): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQHeaderView_virtualbase_inputMethodQuery(self.h, cint(query)))
+  gen_qvariant_types.QVariant(h: fcQHeaderView_virtualbase_inputMethodQuery(self.h, cint(query)), owned: true)
 
 proc miqt_exec_callback_cQHeaderView_inputMethodQuery(vtbl: pointer, self: pointer, query: cint): pointer {.cdecl.} =
   let vtbl = cast[ptr QHeaderViewVTable](vtbl)
   let self = QHeaderView(h: self)
   let slotval1 = cint(query)
   var virtualReturn = vtbl[].inputMethodQuery(self, slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QHeaderViewsetRootIndex*(self: gen_qheaderview_types.QHeaderView, index: gen_qabstractitemmodel_types.QModelIndex): void =
   fcQHeaderView_virtualbase_setRootIndex(self.h, index.h)
@@ -1480,7 +1506,7 @@ proc QHeaderViewsetRootIndex*(self: gen_qheaderview_types.QHeaderView, index: ge
 proc miqt_exec_callback_cQHeaderView_setRootIndex(vtbl: pointer, self: pointer, index: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QHeaderViewVTable](vtbl)
   let self = QHeaderView(h: self)
-  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index)
+  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
   vtbl[].setRootIndex(self, slotval1)
 
 proc QHeaderViewselectAll*(self: gen_qheaderview_types.QHeaderView, ): void =
@@ -1497,7 +1523,7 @@ proc QHeaderViewrowsAboutToBeRemoved*(self: gen_qheaderview_types.QHeaderView, p
 proc miqt_exec_callback_cQHeaderView_rowsAboutToBeRemoved(vtbl: pointer, self: pointer, parent: pointer, start: cint, endVal: cint): void {.cdecl.} =
   let vtbl = cast[ptr QHeaderViewVTable](vtbl)
   let self = QHeaderView(h: self)
-  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: parent)
+  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: parent, owned: false)
   let slotval2 = start
   let slotval3 = endVal
   vtbl[].rowsAboutToBeRemoved(self, slotval1, slotval2, slotval3)
@@ -1508,8 +1534,8 @@ proc QHeaderViewselectionChanged*(self: gen_qheaderview_types.QHeaderView, selec
 proc miqt_exec_callback_cQHeaderView_selectionChanged(vtbl: pointer, self: pointer, selected: pointer, deselected: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QHeaderViewVTable](vtbl)
   let self = QHeaderView(h: self)
-  let slotval1 = gen_qitemselectionmodel_types.QItemSelection(h: selected)
-  let slotval2 = gen_qitemselectionmodel_types.QItemSelection(h: deselected)
+  let slotval1 = gen_qitemselectionmodel_types.QItemSelection(h: selected, owned: false)
+  let slotval2 = gen_qitemselectionmodel_types.QItemSelection(h: deselected, owned: false)
   vtbl[].selectionChanged(self, slotval1, slotval2)
 
 proc QHeaderViewupdateEditorData*(self: gen_qheaderview_types.QHeaderView, ): void =
@@ -1570,7 +1596,7 @@ proc QHeaderViewcloseEditor*(self: gen_qheaderview_types.QHeaderView, editor: ge
 proc miqt_exec_callback_cQHeaderView_closeEditor(vtbl: pointer, self: pointer, editor: pointer, hint: cint): void {.cdecl.} =
   let vtbl = cast[ptr QHeaderViewVTable](vtbl)
   let self = QHeaderView(h: self)
-  let slotval1 = gen_qwidget_types.QWidget(h: editor)
+  let slotval1 = gen_qwidget_types.QWidget(h: editor, owned: false)
   let slotval2 = cint(hint)
   vtbl[].closeEditor(self, slotval1, slotval2)
 
@@ -1580,7 +1606,7 @@ proc QHeaderViewcommitData*(self: gen_qheaderview_types.QHeaderView, editor: gen
 proc miqt_exec_callback_cQHeaderView_commitData(vtbl: pointer, self: pointer, editor: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QHeaderViewVTable](vtbl)
   let self = QHeaderView(h: self)
-  let slotval1 = gen_qwidget_types.QWidget(h: editor)
+  let slotval1 = gen_qwidget_types.QWidget(h: editor, owned: false)
   vtbl[].commitData(self, slotval1)
 
 proc QHeaderVieweditorDestroyed*(self: gen_qheaderview_types.QHeaderView, editor: gen_qobject_types.QObject): void =
@@ -1589,7 +1615,7 @@ proc QHeaderVieweditorDestroyed*(self: gen_qheaderview_types.QHeaderView, editor
 proc miqt_exec_callback_cQHeaderView_editorDestroyed(vtbl: pointer, self: pointer, editor: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QHeaderViewVTable](vtbl)
   let self = QHeaderView(h: self)
-  let slotval1 = gen_qobject_types.QObject(h: editor)
+  let slotval1 = gen_qobject_types.QObject(h: editor, owned: false)
   vtbl[].editorDestroyed(self, slotval1)
 
 proc QHeaderViewselectedIndexes*(self: gen_qheaderview_types.QHeaderView, ): seq[gen_qabstractitemmodel_types.QModelIndex] =
@@ -1597,7 +1623,7 @@ proc QHeaderViewselectedIndexes*(self: gen_qheaderview_types.QHeaderView, ): seq
   var vx_ret = newSeq[gen_qabstractitemmodel_types.QModelIndex](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
-    vx_ret[i] = gen_qabstractitemmodel_types.QModelIndex(h: v_outCast[i])
+    vx_ret[i] = gen_qabstractitemmodel_types.QModelIndex(h: v_outCast[i], owned: true)
   c_free(v_ma.data)
   vx_ret
 
@@ -1607,7 +1633,10 @@ proc miqt_exec_callback_cQHeaderView_selectedIndexes(vtbl: pointer, self: pointe
   var virtualReturn = vtbl[].selectedIndexes(self)
   var virtualReturn_CArray = cast[ptr UncheckedArray[pointer]](if len(virtualReturn) > 0: c_malloc(c_sizet(sizeof(pointer) * len(virtualReturn))) else: nil)
   for i in 0..<len(virtualReturn):
-    virtualReturn_CArray[i] = virtualReturn[i].h
+    virtualReturn[i].owned = false # TODO move?
+    let virtualReturn_i_h = virtualReturn[i].h
+    virtualReturn[i].h = nil
+    virtualReturn_CArray[i] = virtualReturn_i_h
 
   struct_miqt_array(len: csize_t(len(virtualReturn)), data: if len(virtualReturn) == 0: nil else: addr(virtualReturn_CArray[0]))
 
@@ -1617,9 +1646,9 @@ proc QHeaderViewedit*(self: gen_qheaderview_types.QHeaderView, index: gen_qabstr
 proc miqt_exec_callback_cQHeaderView_edit2(vtbl: pointer, self: pointer, index: pointer, trigger: cint, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QHeaderViewVTable](vtbl)
   let self = QHeaderView(h: self)
-  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index)
+  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
   let slotval2 = cint(trigger)
-  let slotval3 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval3 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].edit2(self, slotval1, slotval2, slotval3)
   virtualReturn
 
@@ -1629,8 +1658,8 @@ proc QHeaderViewselectionCommand*(self: gen_qheaderview_types.QHeaderView, index
 proc miqt_exec_callback_cQHeaderView_selectionCommand(vtbl: pointer, self: pointer, index: pointer, event: pointer): cint {.cdecl.} =
   let vtbl = cast[ptr QHeaderViewVTable](vtbl)
   let self = QHeaderView(h: self)
-  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index)
-  let slotval2 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].selectionCommand(self, slotval1, slotval2)
   cint(virtualReturn)
 
@@ -1649,7 +1678,7 @@ proc QHeaderViewinitViewItemOption*(self: gen_qheaderview_types.QHeaderView, opt
 proc miqt_exec_callback_cQHeaderView_initViewItemOption(vtbl: pointer, self: pointer, option: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QHeaderViewVTable](vtbl)
   let self = QHeaderView(h: self)
-  let slotval1 = gen_qstyleoption_types.QStyleOptionViewItem(h: option)
+  let slotval1 = gen_qstyleoption_types.QStyleOptionViewItem(h: option, owned: false)
   vtbl[].initViewItemOption(self, slotval1)
 
 proc QHeaderViewfocusNextPrevChild*(self: gen_qheaderview_types.QHeaderView, next: bool): bool =
@@ -1668,7 +1697,7 @@ proc QHeaderViewdragEnterEvent*(self: gen_qheaderview_types.QHeaderView, event: 
 proc miqt_exec_callback_cQHeaderView_dragEnterEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QHeaderViewVTable](vtbl)
   let self = QHeaderView(h: self)
-  let slotval1 = gen_qevent_types.QDragEnterEvent(h: event)
+  let slotval1 = gen_qevent_types.QDragEnterEvent(h: event, owned: false)
   vtbl[].dragEnterEvent(self, slotval1)
 
 proc QHeaderViewdragMoveEvent*(self: gen_qheaderview_types.QHeaderView, event: gen_qevent_types.QDragMoveEvent): void =
@@ -1677,7 +1706,7 @@ proc QHeaderViewdragMoveEvent*(self: gen_qheaderview_types.QHeaderView, event: g
 proc miqt_exec_callback_cQHeaderView_dragMoveEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QHeaderViewVTable](vtbl)
   let self = QHeaderView(h: self)
-  let slotval1 = gen_qevent_types.QDragMoveEvent(h: event)
+  let slotval1 = gen_qevent_types.QDragMoveEvent(h: event, owned: false)
   vtbl[].dragMoveEvent(self, slotval1)
 
 proc QHeaderViewdragLeaveEvent*(self: gen_qheaderview_types.QHeaderView, event: gen_qevent_types.QDragLeaveEvent): void =
@@ -1686,7 +1715,7 @@ proc QHeaderViewdragLeaveEvent*(self: gen_qheaderview_types.QHeaderView, event: 
 proc miqt_exec_callback_cQHeaderView_dragLeaveEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QHeaderViewVTable](vtbl)
   let self = QHeaderView(h: self)
-  let slotval1 = gen_qevent_types.QDragLeaveEvent(h: event)
+  let slotval1 = gen_qevent_types.QDragLeaveEvent(h: event, owned: false)
   vtbl[].dragLeaveEvent(self, slotval1)
 
 proc QHeaderViewdropEvent*(self: gen_qheaderview_types.QHeaderView, event: gen_qevent_types.QDropEvent): void =
@@ -1695,7 +1724,7 @@ proc QHeaderViewdropEvent*(self: gen_qheaderview_types.QHeaderView, event: gen_q
 proc miqt_exec_callback_cQHeaderView_dropEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QHeaderViewVTable](vtbl)
   let self = QHeaderView(h: self)
-  let slotval1 = gen_qevent_types.QDropEvent(h: event)
+  let slotval1 = gen_qevent_types.QDropEvent(h: event, owned: false)
   vtbl[].dropEvent(self, slotval1)
 
 proc QHeaderViewfocusInEvent*(self: gen_qheaderview_types.QHeaderView, event: gen_qevent_types.QFocusEvent): void =
@@ -1704,7 +1733,7 @@ proc QHeaderViewfocusInEvent*(self: gen_qheaderview_types.QHeaderView, event: ge
 proc miqt_exec_callback_cQHeaderView_focusInEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QHeaderViewVTable](vtbl)
   let self = QHeaderView(h: self)
-  let slotval1 = gen_qevent_types.QFocusEvent(h: event)
+  let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
   vtbl[].focusInEvent(self, slotval1)
 
 proc QHeaderViewfocusOutEvent*(self: gen_qheaderview_types.QHeaderView, event: gen_qevent_types.QFocusEvent): void =
@@ -1713,7 +1742,7 @@ proc QHeaderViewfocusOutEvent*(self: gen_qheaderview_types.QHeaderView, event: g
 proc miqt_exec_callback_cQHeaderView_focusOutEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QHeaderViewVTable](vtbl)
   let self = QHeaderView(h: self)
-  let slotval1 = gen_qevent_types.QFocusEvent(h: event)
+  let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
   vtbl[].focusOutEvent(self, slotval1)
 
 proc QHeaderViewkeyPressEvent*(self: gen_qheaderview_types.QHeaderView, event: gen_qevent_types.QKeyEvent): void =
@@ -1722,7 +1751,7 @@ proc QHeaderViewkeyPressEvent*(self: gen_qheaderview_types.QHeaderView, event: g
 proc miqt_exec_callback_cQHeaderView_keyPressEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QHeaderViewVTable](vtbl)
   let self = QHeaderView(h: self)
-  let slotval1 = gen_qevent_types.QKeyEvent(h: event)
+  let slotval1 = gen_qevent_types.QKeyEvent(h: event, owned: false)
   vtbl[].keyPressEvent(self, slotval1)
 
 proc QHeaderViewresizeEvent*(self: gen_qheaderview_types.QHeaderView, event: gen_qevent_types.QResizeEvent): void =
@@ -1731,7 +1760,7 @@ proc QHeaderViewresizeEvent*(self: gen_qheaderview_types.QHeaderView, event: gen
 proc miqt_exec_callback_cQHeaderView_resizeEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QHeaderViewVTable](vtbl)
   let self = QHeaderView(h: self)
-  let slotval1 = gen_qevent_types.QResizeEvent(h: event)
+  let slotval1 = gen_qevent_types.QResizeEvent(h: event, owned: false)
   vtbl[].resizeEvent(self, slotval1)
 
 proc QHeaderViewtimerEvent*(self: gen_qheaderview_types.QHeaderView, event: gen_qcoreevent_types.QTimerEvent): void =
@@ -1740,7 +1769,7 @@ proc QHeaderViewtimerEvent*(self: gen_qheaderview_types.QHeaderView, event: gen_
 proc miqt_exec_callback_cQHeaderView_timerEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QHeaderViewVTable](vtbl)
   let self = QHeaderView(h: self)
-  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   vtbl[].timerEvent(self, slotval1)
 
 proc QHeaderViewinputMethodEvent*(self: gen_qheaderview_types.QHeaderView, event: gen_qevent_types.QInputMethodEvent): void =
@@ -1749,7 +1778,7 @@ proc QHeaderViewinputMethodEvent*(self: gen_qheaderview_types.QHeaderView, event
 proc miqt_exec_callback_cQHeaderView_inputMethodEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QHeaderViewVTable](vtbl)
   let self = QHeaderView(h: self)
-  let slotval1 = gen_qevent_types.QInputMethodEvent(h: event)
+  let slotval1 = gen_qevent_types.QInputMethodEvent(h: event, owned: false)
   vtbl[].inputMethodEvent(self, slotval1)
 
 proc QHeaderVieweventFilter*(self: gen_qheaderview_types.QHeaderView, objectVal: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool =
@@ -1758,28 +1787,34 @@ proc QHeaderVieweventFilter*(self: gen_qheaderview_types.QHeaderView, objectVal:
 proc miqt_exec_callback_cQHeaderView_eventFilter(vtbl: pointer, self: pointer, objectVal: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QHeaderViewVTable](vtbl)
   let self = QHeaderView(h: self)
-  let slotval1 = gen_qobject_types.QObject(h: objectVal)
-  let slotval2 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qobject_types.QObject(h: objectVal, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].eventFilter(self, slotval1, slotval2)
   virtualReturn
 
 proc QHeaderViewviewportSizeHint*(self: gen_qheaderview_types.QHeaderView, ): gen_qsize_types.QSize =
-  gen_qsize_types.QSize(h: fcQHeaderView_virtualbase_viewportSizeHint(self.h))
+  gen_qsize_types.QSize(h: fcQHeaderView_virtualbase_viewportSizeHint(self.h), owned: true)
 
 proc miqt_exec_callback_cQHeaderView_viewportSizeHint(vtbl: pointer, self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QHeaderViewVTable](vtbl)
   let self = QHeaderView(h: self)
   var virtualReturn = vtbl[].viewportSizeHint(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QHeaderViewminimumSizeHint*(self: gen_qheaderview_types.QHeaderView, ): gen_qsize_types.QSize =
-  gen_qsize_types.QSize(h: fcQHeaderView_virtualbase_minimumSizeHint(self.h))
+  gen_qsize_types.QSize(h: fcQHeaderView_virtualbase_minimumSizeHint(self.h), owned: true)
 
 proc miqt_exec_callback_cQHeaderView_minimumSizeHint(vtbl: pointer, self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QHeaderViewVTable](vtbl)
   let self = QHeaderView(h: self)
   var virtualReturn = vtbl[].minimumSizeHint(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QHeaderViewsetupViewport*(self: gen_qheaderview_types.QHeaderView, viewport: gen_qwidget_types.QWidget): void =
   fcQHeaderView_virtualbase_setupViewport(self.h, viewport.h)
@@ -1787,7 +1822,7 @@ proc QHeaderViewsetupViewport*(self: gen_qheaderview_types.QHeaderView, viewport
 proc miqt_exec_callback_cQHeaderView_setupViewport(vtbl: pointer, self: pointer, viewport: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QHeaderViewVTable](vtbl)
   let self = QHeaderView(h: self)
-  let slotval1 = gen_qwidget_types.QWidget(h: viewport)
+  let slotval1 = gen_qwidget_types.QWidget(h: viewport, owned: false)
   vtbl[].setupViewport(self, slotval1)
 
 proc QHeaderViewwheelEvent*(self: gen_qheaderview_types.QHeaderView, param1: gen_qevent_types.QWheelEvent): void =
@@ -1796,7 +1831,7 @@ proc QHeaderViewwheelEvent*(self: gen_qheaderview_types.QHeaderView, param1: gen
 proc miqt_exec_callback_cQHeaderView_wheelEvent(vtbl: pointer, self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QHeaderViewVTable](vtbl)
   let self = QHeaderView(h: self)
-  let slotval1 = gen_qevent_types.QWheelEvent(h: param1)
+  let slotval1 = gen_qevent_types.QWheelEvent(h: param1, owned: false)
   vtbl[].wheelEvent(self, slotval1)
 
 proc QHeaderViewcontextMenuEvent*(self: gen_qheaderview_types.QHeaderView, param1: gen_qevent_types.QContextMenuEvent): void =
@@ -1805,7 +1840,7 @@ proc QHeaderViewcontextMenuEvent*(self: gen_qheaderview_types.QHeaderView, param
 proc miqt_exec_callback_cQHeaderView_contextMenuEvent(vtbl: pointer, self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QHeaderViewVTable](vtbl)
   let self = QHeaderView(h: self)
-  let slotval1 = gen_qevent_types.QContextMenuEvent(h: param1)
+  let slotval1 = gen_qevent_types.QContextMenuEvent(h: param1, owned: false)
   vtbl[].contextMenuEvent(self, slotval1)
 
 proc QHeaderViewchangeEvent*(self: gen_qheaderview_types.QHeaderView, param1: gen_qcoreevent_types.QEvent): void =
@@ -1814,7 +1849,7 @@ proc QHeaderViewchangeEvent*(self: gen_qheaderview_types.QHeaderView, param1: ge
 proc miqt_exec_callback_cQHeaderView_changeEvent(vtbl: pointer, self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QHeaderViewVTable](vtbl)
   let self = QHeaderView(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: param1)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: param1, owned: false)
   vtbl[].changeEvent(self, slotval1)
 
 proc QHeaderViewdevType*(self: gen_qheaderview_types.QHeaderView, ): cint =
@@ -1846,13 +1881,16 @@ proc miqt_exec_callback_cQHeaderView_hasHeightForWidth(vtbl: pointer, self: poin
   virtualReturn
 
 proc QHeaderViewpaintEngine*(self: gen_qheaderview_types.QHeaderView, ): gen_qpaintengine_types.QPaintEngine =
-  gen_qpaintengine_types.QPaintEngine(h: fcQHeaderView_virtualbase_paintEngine(self.h))
+  gen_qpaintengine_types.QPaintEngine(h: fcQHeaderView_virtualbase_paintEngine(self.h), owned: false)
 
 proc miqt_exec_callback_cQHeaderView_paintEngine(vtbl: pointer, self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QHeaderViewVTable](vtbl)
   let self = QHeaderView(h: self)
   var virtualReturn = vtbl[].paintEngine(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QHeaderViewkeyReleaseEvent*(self: gen_qheaderview_types.QHeaderView, event: gen_qevent_types.QKeyEvent): void =
   fcQHeaderView_virtualbase_keyReleaseEvent(self.h, event.h)
@@ -1860,7 +1898,7 @@ proc QHeaderViewkeyReleaseEvent*(self: gen_qheaderview_types.QHeaderView, event:
 proc miqt_exec_callback_cQHeaderView_keyReleaseEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QHeaderViewVTable](vtbl)
   let self = QHeaderView(h: self)
-  let slotval1 = gen_qevent_types.QKeyEvent(h: event)
+  let slotval1 = gen_qevent_types.QKeyEvent(h: event, owned: false)
   vtbl[].keyReleaseEvent(self, slotval1)
 
 proc QHeaderViewenterEvent*(self: gen_qheaderview_types.QHeaderView, event: gen_qevent_types.QEnterEvent): void =
@@ -1869,7 +1907,7 @@ proc QHeaderViewenterEvent*(self: gen_qheaderview_types.QHeaderView, event: gen_
 proc miqt_exec_callback_cQHeaderView_enterEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QHeaderViewVTable](vtbl)
   let self = QHeaderView(h: self)
-  let slotval1 = gen_qevent_types.QEnterEvent(h: event)
+  let slotval1 = gen_qevent_types.QEnterEvent(h: event, owned: false)
   vtbl[].enterEvent(self, slotval1)
 
 proc QHeaderViewleaveEvent*(self: gen_qheaderview_types.QHeaderView, event: gen_qcoreevent_types.QEvent): void =
@@ -1878,7 +1916,7 @@ proc QHeaderViewleaveEvent*(self: gen_qheaderview_types.QHeaderView, event: gen_
 proc miqt_exec_callback_cQHeaderView_leaveEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QHeaderViewVTable](vtbl)
   let self = QHeaderView(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].leaveEvent(self, slotval1)
 
 proc QHeaderViewmoveEvent*(self: gen_qheaderview_types.QHeaderView, event: gen_qevent_types.QMoveEvent): void =
@@ -1887,7 +1925,7 @@ proc QHeaderViewmoveEvent*(self: gen_qheaderview_types.QHeaderView, event: gen_q
 proc miqt_exec_callback_cQHeaderView_moveEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QHeaderViewVTable](vtbl)
   let self = QHeaderView(h: self)
-  let slotval1 = gen_qevent_types.QMoveEvent(h: event)
+  let slotval1 = gen_qevent_types.QMoveEvent(h: event, owned: false)
   vtbl[].moveEvent(self, slotval1)
 
 proc QHeaderViewcloseEvent*(self: gen_qheaderview_types.QHeaderView, event: gen_qevent_types.QCloseEvent): void =
@@ -1896,7 +1934,7 @@ proc QHeaderViewcloseEvent*(self: gen_qheaderview_types.QHeaderView, event: gen_
 proc miqt_exec_callback_cQHeaderView_closeEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QHeaderViewVTable](vtbl)
   let self = QHeaderView(h: self)
-  let slotval1 = gen_qevent_types.QCloseEvent(h: event)
+  let slotval1 = gen_qevent_types.QCloseEvent(h: event, owned: false)
   vtbl[].closeEvent(self, slotval1)
 
 proc QHeaderViewtabletEvent*(self: gen_qheaderview_types.QHeaderView, event: gen_qevent_types.QTabletEvent): void =
@@ -1905,7 +1943,7 @@ proc QHeaderViewtabletEvent*(self: gen_qheaderview_types.QHeaderView, event: gen
 proc miqt_exec_callback_cQHeaderView_tabletEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QHeaderViewVTable](vtbl)
   let self = QHeaderView(h: self)
-  let slotval1 = gen_qevent_types.QTabletEvent(h: event)
+  let slotval1 = gen_qevent_types.QTabletEvent(h: event, owned: false)
   vtbl[].tabletEvent(self, slotval1)
 
 proc QHeaderViewactionEvent*(self: gen_qheaderview_types.QHeaderView, event: gen_qevent_types.QActionEvent): void =
@@ -1914,7 +1952,7 @@ proc QHeaderViewactionEvent*(self: gen_qheaderview_types.QHeaderView, event: gen
 proc miqt_exec_callback_cQHeaderView_actionEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QHeaderViewVTable](vtbl)
   let self = QHeaderView(h: self)
-  let slotval1 = gen_qevent_types.QActionEvent(h: event)
+  let slotval1 = gen_qevent_types.QActionEvent(h: event, owned: false)
   vtbl[].actionEvent(self, slotval1)
 
 proc QHeaderViewshowEvent*(self: gen_qheaderview_types.QHeaderView, event: gen_qevent_types.QShowEvent): void =
@@ -1923,7 +1961,7 @@ proc QHeaderViewshowEvent*(self: gen_qheaderview_types.QHeaderView, event: gen_q
 proc miqt_exec_callback_cQHeaderView_showEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QHeaderViewVTable](vtbl)
   let self = QHeaderView(h: self)
-  let slotval1 = gen_qevent_types.QShowEvent(h: event)
+  let slotval1 = gen_qevent_types.QShowEvent(h: event, owned: false)
   vtbl[].showEvent(self, slotval1)
 
 proc QHeaderViewhideEvent*(self: gen_qheaderview_types.QHeaderView, event: gen_qevent_types.QHideEvent): void =
@@ -1932,7 +1970,7 @@ proc QHeaderViewhideEvent*(self: gen_qheaderview_types.QHeaderView, event: gen_q
 proc miqt_exec_callback_cQHeaderView_hideEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QHeaderViewVTable](vtbl)
   let self = QHeaderView(h: self)
-  let slotval1 = gen_qevent_types.QHideEvent(h: event)
+  let slotval1 = gen_qevent_types.QHideEvent(h: event, owned: false)
   vtbl[].hideEvent(self, slotval1)
 
 proc QHeaderViewnativeEvent*(self: gen_qheaderview_types.QHeaderView, eventType: seq[byte], message: pointer, resultVal: ptr uint): bool =
@@ -1966,27 +2004,33 @@ proc QHeaderViewinitPainter*(self: gen_qheaderview_types.QHeaderView, painter: g
 proc miqt_exec_callback_cQHeaderView_initPainter(vtbl: pointer, self: pointer, painter: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QHeaderViewVTable](vtbl)
   let self = QHeaderView(h: self)
-  let slotval1 = gen_qpainter_types.QPainter(h: painter)
+  let slotval1 = gen_qpainter_types.QPainter(h: painter, owned: false)
   vtbl[].initPainter(self, slotval1)
 
 proc QHeaderViewredirected*(self: gen_qheaderview_types.QHeaderView, offset: gen_qpoint_types.QPoint): gen_qpaintdevice_types.QPaintDevice =
-  gen_qpaintdevice_types.QPaintDevice(h: fcQHeaderView_virtualbase_redirected(self.h, offset.h))
+  gen_qpaintdevice_types.QPaintDevice(h: fcQHeaderView_virtualbase_redirected(self.h, offset.h), owned: false)
 
 proc miqt_exec_callback_cQHeaderView_redirected(vtbl: pointer, self: pointer, offset: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QHeaderViewVTable](vtbl)
   let self = QHeaderView(h: self)
-  let slotval1 = gen_qpoint_types.QPoint(h: offset)
+  let slotval1 = gen_qpoint_types.QPoint(h: offset, owned: false)
   var virtualReturn = vtbl[].redirected(self, slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QHeaderViewsharedPainter*(self: gen_qheaderview_types.QHeaderView, ): gen_qpainter_types.QPainter =
-  gen_qpainter_types.QPainter(h: fcQHeaderView_virtualbase_sharedPainter(self.h))
+  gen_qpainter_types.QPainter(h: fcQHeaderView_virtualbase_sharedPainter(self.h), owned: false)
 
 proc miqt_exec_callback_cQHeaderView_sharedPainter(vtbl: pointer, self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QHeaderViewVTable](vtbl)
   let self = QHeaderView(h: self)
   var virtualReturn = vtbl[].sharedPainter(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QHeaderViewchildEvent*(self: gen_qheaderview_types.QHeaderView, event: gen_qcoreevent_types.QChildEvent): void =
   fcQHeaderView_virtualbase_childEvent(self.h, event.h)
@@ -1994,7 +2038,7 @@ proc QHeaderViewchildEvent*(self: gen_qheaderview_types.QHeaderView, event: gen_
 proc miqt_exec_callback_cQHeaderView_childEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QHeaderViewVTable](vtbl)
   let self = QHeaderView(h: self)
-  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   vtbl[].childEvent(self, slotval1)
 
 proc QHeaderViewcustomEvent*(self: gen_qheaderview_types.QHeaderView, event: gen_qcoreevent_types.QEvent): void =
@@ -2003,7 +2047,7 @@ proc QHeaderViewcustomEvent*(self: gen_qheaderview_types.QHeaderView, event: gen
 proc miqt_exec_callback_cQHeaderView_customEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QHeaderViewVTable](vtbl)
   let self = QHeaderView(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].customEvent(self, slotval1)
 
 proc QHeaderViewconnectNotify*(self: gen_qheaderview_types.QHeaderView, signal: gen_qmetaobject_types.QMetaMethod): void =
@@ -2012,7 +2056,7 @@ proc QHeaderViewconnectNotify*(self: gen_qheaderview_types.QHeaderView, signal: 
 proc miqt_exec_callback_cQHeaderView_connectNotify(vtbl: pointer, self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QHeaderViewVTable](vtbl)
   let self = QHeaderView(h: self)
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].connectNotify(self, slotval1)
 
 proc QHeaderViewdisconnectNotify*(self: gen_qheaderview_types.QHeaderView, signal: gen_qmetaobject_types.QMetaMethod): void =
@@ -2021,8 +2065,790 @@ proc QHeaderViewdisconnectNotify*(self: gen_qheaderview_types.QHeaderView, signa
 proc miqt_exec_callback_cQHeaderView_disconnectNotify(vtbl: pointer, self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QHeaderViewVTable](vtbl)
   let self = QHeaderView(h: self)
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].disconnectNotify(self, slotval1)
+
+type VirtualQHeaderView* {.inheritable.} = ref object of QHeaderView
+  vtbl*: cQHeaderViewVTable
+method metaObject*(self: VirtualQHeaderView, ): gen_qobjectdefs_types.QMetaObject {.base.} =
+  QHeaderViewmetaObject(self[])
+proc miqt_exec_method_cQHeaderView_metaObject(vtbl: pointer, inst: pointer): pointer {.cdecl.} =
+  let vtbl = cast[VirtualQHeaderView](cast[uint](vtbl) - uint(offsetOf(VirtualQHeaderView, vtbl)))
+  var virtualReturn = vtbl.metaObject()
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
+
+method metacast*(self: VirtualQHeaderView, param1: cstring): pointer {.base.} =
+  QHeaderViewmetacast(self[], param1)
+proc miqt_exec_method_cQHeaderView_metacast(vtbl: pointer, inst: pointer, param1: cstring): pointer {.cdecl.} =
+  let vtbl = cast[VirtualQHeaderView](cast[uint](vtbl) - uint(offsetOf(VirtualQHeaderView, vtbl)))
+  let slotval1 = (param1)
+  var virtualReturn = vtbl.metacast(slotval1)
+  virtualReturn
+
+method metacall*(self: VirtualQHeaderView, param1: cint, param2: cint, param3: pointer): cint {.base.} =
+  QHeaderViewmetacall(self[], param1, param2, param3)
+proc miqt_exec_method_cQHeaderView_metacall(vtbl: pointer, inst: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
+  let vtbl = cast[VirtualQHeaderView](cast[uint](vtbl) - uint(offsetOf(VirtualQHeaderView, vtbl)))
+  let slotval1 = cint(param1)
+  let slotval2 = param2
+  let slotval3 = param3
+  var virtualReturn = vtbl.metacall(slotval1, slotval2, slotval3)
+  virtualReturn
+
+method setModel*(self: VirtualQHeaderView, model: gen_qabstractitemmodel_types.QAbstractItemModel): void {.base.} =
+  QHeaderViewsetModel(self[], model)
+proc miqt_exec_method_cQHeaderView_setModel(vtbl: pointer, inst: pointer, model: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQHeaderView](cast[uint](vtbl) - uint(offsetOf(VirtualQHeaderView, vtbl)))
+  let slotval1 = gen_qabstractitemmodel_types.QAbstractItemModel(h: model, owned: false)
+  vtbl.setModel(slotval1)
+
+method sizeHint*(self: VirtualQHeaderView, ): gen_qsize_types.QSize {.base.} =
+  QHeaderViewsizeHint(self[])
+proc miqt_exec_method_cQHeaderView_sizeHint(vtbl: pointer, inst: pointer): pointer {.cdecl.} =
+  let vtbl = cast[VirtualQHeaderView](cast[uint](vtbl) - uint(offsetOf(VirtualQHeaderView, vtbl)))
+  var virtualReturn = vtbl.sizeHint()
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
+
+method setVisible*(self: VirtualQHeaderView, v: bool): void {.base.} =
+  QHeaderViewsetVisible(self[], v)
+proc miqt_exec_method_cQHeaderView_setVisible(vtbl: pointer, inst: pointer, v: bool): void {.cdecl.} =
+  let vtbl = cast[VirtualQHeaderView](cast[uint](vtbl) - uint(offsetOf(VirtualQHeaderView, vtbl)))
+  let slotval1 = v
+  vtbl.setVisible(slotval1)
+
+method doItemsLayout*(self: VirtualQHeaderView, ): void {.base.} =
+  QHeaderViewdoItemsLayout(self[])
+proc miqt_exec_method_cQHeaderView_doItemsLayout(vtbl: pointer, inst: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQHeaderView](cast[uint](vtbl) - uint(offsetOf(VirtualQHeaderView, vtbl)))
+  vtbl.doItemsLayout()
+
+method reset*(self: VirtualQHeaderView, ): void {.base.} =
+  QHeaderViewreset(self[])
+proc miqt_exec_method_cQHeaderView_reset(vtbl: pointer, inst: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQHeaderView](cast[uint](vtbl) - uint(offsetOf(VirtualQHeaderView, vtbl)))
+  vtbl.reset()
+
+method currentChanged*(self: VirtualQHeaderView, current: gen_qabstractitemmodel_types.QModelIndex, old: gen_qabstractitemmodel_types.QModelIndex): void {.base.} =
+  QHeaderViewcurrentChanged(self[], current, old)
+proc miqt_exec_method_cQHeaderView_currentChanged(vtbl: pointer, inst: pointer, current: pointer, old: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQHeaderView](cast[uint](vtbl) - uint(offsetOf(VirtualQHeaderView, vtbl)))
+  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: current, owned: false)
+  let slotval2 = gen_qabstractitemmodel_types.QModelIndex(h: old, owned: false)
+  vtbl.currentChanged(slotval1, slotval2)
+
+method event*(self: VirtualQHeaderView, e: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QHeaderViewevent(self[], e)
+proc miqt_exec_method_cQHeaderView_event(vtbl: pointer, inst: pointer, e: pointer): bool {.cdecl.} =
+  let vtbl = cast[VirtualQHeaderView](cast[uint](vtbl) - uint(offsetOf(VirtualQHeaderView, vtbl)))
+  let slotval1 = gen_qcoreevent_types.QEvent(h: e, owned: false)
+  var virtualReturn = vtbl.event(slotval1)
+  virtualReturn
+
+method paintEvent*(self: VirtualQHeaderView, e: gen_qevent_types.QPaintEvent): void {.base.} =
+  QHeaderViewpaintEvent(self[], e)
+proc miqt_exec_method_cQHeaderView_paintEvent(vtbl: pointer, inst: pointer, e: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQHeaderView](cast[uint](vtbl) - uint(offsetOf(VirtualQHeaderView, vtbl)))
+  let slotval1 = gen_qevent_types.QPaintEvent(h: e, owned: false)
+  vtbl.paintEvent(slotval1)
+
+method mousePressEvent*(self: VirtualQHeaderView, e: gen_qevent_types.QMouseEvent): void {.base.} =
+  QHeaderViewmousePressEvent(self[], e)
+proc miqt_exec_method_cQHeaderView_mousePressEvent(vtbl: pointer, inst: pointer, e: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQHeaderView](cast[uint](vtbl) - uint(offsetOf(VirtualQHeaderView, vtbl)))
+  let slotval1 = gen_qevent_types.QMouseEvent(h: e, owned: false)
+  vtbl.mousePressEvent(slotval1)
+
+method mouseMoveEvent*(self: VirtualQHeaderView, e: gen_qevent_types.QMouseEvent): void {.base.} =
+  QHeaderViewmouseMoveEvent(self[], e)
+proc miqt_exec_method_cQHeaderView_mouseMoveEvent(vtbl: pointer, inst: pointer, e: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQHeaderView](cast[uint](vtbl) - uint(offsetOf(VirtualQHeaderView, vtbl)))
+  let slotval1 = gen_qevent_types.QMouseEvent(h: e, owned: false)
+  vtbl.mouseMoveEvent(slotval1)
+
+method mouseReleaseEvent*(self: VirtualQHeaderView, e: gen_qevent_types.QMouseEvent): void {.base.} =
+  QHeaderViewmouseReleaseEvent(self[], e)
+proc miqt_exec_method_cQHeaderView_mouseReleaseEvent(vtbl: pointer, inst: pointer, e: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQHeaderView](cast[uint](vtbl) - uint(offsetOf(VirtualQHeaderView, vtbl)))
+  let slotval1 = gen_qevent_types.QMouseEvent(h: e, owned: false)
+  vtbl.mouseReleaseEvent(slotval1)
+
+method mouseDoubleClickEvent*(self: VirtualQHeaderView, e: gen_qevent_types.QMouseEvent): void {.base.} =
+  QHeaderViewmouseDoubleClickEvent(self[], e)
+proc miqt_exec_method_cQHeaderView_mouseDoubleClickEvent(vtbl: pointer, inst: pointer, e: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQHeaderView](cast[uint](vtbl) - uint(offsetOf(VirtualQHeaderView, vtbl)))
+  let slotval1 = gen_qevent_types.QMouseEvent(h: e, owned: false)
+  vtbl.mouseDoubleClickEvent(slotval1)
+
+method viewportEvent*(self: VirtualQHeaderView, e: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QHeaderViewviewportEvent(self[], e)
+proc miqt_exec_method_cQHeaderView_viewportEvent(vtbl: pointer, inst: pointer, e: pointer): bool {.cdecl.} =
+  let vtbl = cast[VirtualQHeaderView](cast[uint](vtbl) - uint(offsetOf(VirtualQHeaderView, vtbl)))
+  let slotval1 = gen_qcoreevent_types.QEvent(h: e, owned: false)
+  var virtualReturn = vtbl.viewportEvent(slotval1)
+  virtualReturn
+
+method paintSection*(self: VirtualQHeaderView, painter: gen_qpainter_types.QPainter, rect: gen_qrect_types.QRect, logicalIndex: cint): void {.base.} =
+  QHeaderViewpaintSection(self[], painter, rect, logicalIndex)
+proc miqt_exec_method_cQHeaderView_paintSection(vtbl: pointer, inst: pointer, painter: pointer, rect: pointer, logicalIndex: cint): void {.cdecl.} =
+  let vtbl = cast[VirtualQHeaderView](cast[uint](vtbl) - uint(offsetOf(VirtualQHeaderView, vtbl)))
+  let slotval1 = gen_qpainter_types.QPainter(h: painter, owned: false)
+  let slotval2 = gen_qrect_types.QRect(h: rect, owned: false)
+  let slotval3 = logicalIndex
+  vtbl.paintSection(slotval1, slotval2, slotval3)
+
+method sectionSizeFromContents*(self: VirtualQHeaderView, logicalIndex: cint): gen_qsize_types.QSize {.base.} =
+  QHeaderViewsectionSizeFromContents(self[], logicalIndex)
+proc miqt_exec_method_cQHeaderView_sectionSizeFromContents(vtbl: pointer, inst: pointer, logicalIndex: cint): pointer {.cdecl.} =
+  let vtbl = cast[VirtualQHeaderView](cast[uint](vtbl) - uint(offsetOf(VirtualQHeaderView, vtbl)))
+  let slotval1 = logicalIndex
+  var virtualReturn = vtbl.sectionSizeFromContents(slotval1)
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
+
+method horizontalOffset*(self: VirtualQHeaderView, ): cint {.base.} =
+  QHeaderViewhorizontalOffset(self[])
+proc miqt_exec_method_cQHeaderView_horizontalOffset(vtbl: pointer, inst: pointer): cint {.cdecl.} =
+  let vtbl = cast[VirtualQHeaderView](cast[uint](vtbl) - uint(offsetOf(VirtualQHeaderView, vtbl)))
+  var virtualReturn = vtbl.horizontalOffset()
+  virtualReturn
+
+method verticalOffset*(self: VirtualQHeaderView, ): cint {.base.} =
+  QHeaderViewverticalOffset(self[])
+proc miqt_exec_method_cQHeaderView_verticalOffset(vtbl: pointer, inst: pointer): cint {.cdecl.} =
+  let vtbl = cast[VirtualQHeaderView](cast[uint](vtbl) - uint(offsetOf(VirtualQHeaderView, vtbl)))
+  var virtualReturn = vtbl.verticalOffset()
+  virtualReturn
+
+method updateGeometries*(self: VirtualQHeaderView, ): void {.base.} =
+  QHeaderViewupdateGeometries(self[])
+proc miqt_exec_method_cQHeaderView_updateGeometries(vtbl: pointer, inst: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQHeaderView](cast[uint](vtbl) - uint(offsetOf(VirtualQHeaderView, vtbl)))
+  vtbl.updateGeometries()
+
+method scrollContentsBy*(self: VirtualQHeaderView, dx: cint, dy: cint): void {.base.} =
+  QHeaderViewscrollContentsBy(self[], dx, dy)
+proc miqt_exec_method_cQHeaderView_scrollContentsBy(vtbl: pointer, inst: pointer, dx: cint, dy: cint): void {.cdecl.} =
+  let vtbl = cast[VirtualQHeaderView](cast[uint](vtbl) - uint(offsetOf(VirtualQHeaderView, vtbl)))
+  let slotval1 = dx
+  let slotval2 = dy
+  vtbl.scrollContentsBy(slotval1, slotval2)
+
+method dataChanged*(self: VirtualQHeaderView, topLeft: gen_qabstractitemmodel_types.QModelIndex, bottomRight: gen_qabstractitemmodel_types.QModelIndex, roles: seq[cint]): void {.base.} =
+  QHeaderViewdataChanged(self[], topLeft, bottomRight, roles)
+proc miqt_exec_method_cQHeaderView_dataChanged(vtbl: pointer, inst: pointer, topLeft: pointer, bottomRight: pointer, roles: struct_miqt_array): void {.cdecl.} =
+  let vtbl = cast[VirtualQHeaderView](cast[uint](vtbl) - uint(offsetOf(VirtualQHeaderView, vtbl)))
+  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: topLeft, owned: false)
+  let slotval2 = gen_qabstractitemmodel_types.QModelIndex(h: bottomRight, owned: false)
+  var vroles_ma = roles
+  var vrolesx_ret = newSeq[cint](int(vroles_ma.len))
+  let vroles_outCast = cast[ptr UncheckedArray[cint]](vroles_ma.data)
+  for i in 0 ..< vroles_ma.len:
+    vrolesx_ret[i] = vroles_outCast[i]
+  c_free(vroles_ma.data)
+  let slotval3 = vrolesx_ret
+  vtbl.dataChanged(slotval1, slotval2, slotval3)
+
+method rowsInserted*(self: VirtualQHeaderView, parent: gen_qabstractitemmodel_types.QModelIndex, start: cint, endVal: cint): void {.base.} =
+  QHeaderViewrowsInserted(self[], parent, start, endVal)
+proc miqt_exec_method_cQHeaderView_rowsInserted(vtbl: pointer, inst: pointer, parent: pointer, start: cint, endVal: cint): void {.cdecl.} =
+  let vtbl = cast[VirtualQHeaderView](cast[uint](vtbl) - uint(offsetOf(VirtualQHeaderView, vtbl)))
+  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: parent, owned: false)
+  let slotval2 = start
+  let slotval3 = endVal
+  vtbl.rowsInserted(slotval1, slotval2, slotval3)
+
+method visualRect*(self: VirtualQHeaderView, index: gen_qabstractitemmodel_types.QModelIndex): gen_qrect_types.QRect {.base.} =
+  QHeaderViewvisualRect(self[], index)
+proc miqt_exec_method_cQHeaderView_visualRect(vtbl: pointer, inst: pointer, index: pointer): pointer {.cdecl.} =
+  let vtbl = cast[VirtualQHeaderView](cast[uint](vtbl) - uint(offsetOf(VirtualQHeaderView, vtbl)))
+  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
+  var virtualReturn = vtbl.visualRect(slotval1)
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
+
+method scrollTo*(self: VirtualQHeaderView, index: gen_qabstractitemmodel_types.QModelIndex, hint: cint): void {.base.} =
+  QHeaderViewscrollTo(self[], index, hint)
+proc miqt_exec_method_cQHeaderView_scrollTo(vtbl: pointer, inst: pointer, index: pointer, hint: cint): void {.cdecl.} =
+  let vtbl = cast[VirtualQHeaderView](cast[uint](vtbl) - uint(offsetOf(VirtualQHeaderView, vtbl)))
+  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
+  let slotval2 = cint(hint)
+  vtbl.scrollTo(slotval1, slotval2)
+
+method indexAt*(self: VirtualQHeaderView, p: gen_qpoint_types.QPoint): gen_qabstractitemmodel_types.QModelIndex {.base.} =
+  QHeaderViewindexAt(self[], p)
+proc miqt_exec_method_cQHeaderView_indexAt(vtbl: pointer, inst: pointer, p: pointer): pointer {.cdecl.} =
+  let vtbl = cast[VirtualQHeaderView](cast[uint](vtbl) - uint(offsetOf(VirtualQHeaderView, vtbl)))
+  let slotval1 = gen_qpoint_types.QPoint(h: p, owned: false)
+  var virtualReturn = vtbl.indexAt(slotval1)
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
+
+method isIndexHidden*(self: VirtualQHeaderView, index: gen_qabstractitemmodel_types.QModelIndex): bool {.base.} =
+  QHeaderViewisIndexHidden(self[], index)
+proc miqt_exec_method_cQHeaderView_isIndexHidden(vtbl: pointer, inst: pointer, index: pointer): bool {.cdecl.} =
+  let vtbl = cast[VirtualQHeaderView](cast[uint](vtbl) - uint(offsetOf(VirtualQHeaderView, vtbl)))
+  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
+  var virtualReturn = vtbl.isIndexHidden(slotval1)
+  virtualReturn
+
+method moveCursor*(self: VirtualQHeaderView, param1: cint, param2: cint): gen_qabstractitemmodel_types.QModelIndex {.base.} =
+  QHeaderViewmoveCursor(self[], param1, param2)
+proc miqt_exec_method_cQHeaderView_moveCursor(vtbl: pointer, inst: pointer, param1: cint, param2: cint): pointer {.cdecl.} =
+  let vtbl = cast[VirtualQHeaderView](cast[uint](vtbl) - uint(offsetOf(VirtualQHeaderView, vtbl)))
+  let slotval1 = cint(param1)
+  let slotval2 = cint(param2)
+  var virtualReturn = vtbl.moveCursor(slotval1, slotval2)
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
+
+method setSelection*(self: VirtualQHeaderView, rect: gen_qrect_types.QRect, flags: cint): void {.base.} =
+  QHeaderViewsetSelection(self[], rect, flags)
+proc miqt_exec_method_cQHeaderView_setSelection(vtbl: pointer, inst: pointer, rect: pointer, flags: cint): void {.cdecl.} =
+  let vtbl = cast[VirtualQHeaderView](cast[uint](vtbl) - uint(offsetOf(VirtualQHeaderView, vtbl)))
+  let slotval1 = gen_qrect_types.QRect(h: rect, owned: false)
+  let slotval2 = cint(flags)
+  vtbl.setSelection(slotval1, slotval2)
+
+method visualRegionForSelection*(self: VirtualQHeaderView, selection: gen_qitemselectionmodel_types.QItemSelection): gen_qregion_types.QRegion {.base.} =
+  QHeaderViewvisualRegionForSelection(self[], selection)
+proc miqt_exec_method_cQHeaderView_visualRegionForSelection(vtbl: pointer, inst: pointer, selection: pointer): pointer {.cdecl.} =
+  let vtbl = cast[VirtualQHeaderView](cast[uint](vtbl) - uint(offsetOf(VirtualQHeaderView, vtbl)))
+  let slotval1 = gen_qitemselectionmodel_types.QItemSelection(h: selection, owned: false)
+  var virtualReturn = vtbl.visualRegionForSelection(slotval1)
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
+
+method initStyleOptionForIndex*(self: VirtualQHeaderView, option: gen_qstyleoption_types.QStyleOptionHeader, logicalIndex: cint): void {.base.} =
+  QHeaderViewinitStyleOptionForIndex(self[], option, logicalIndex)
+proc miqt_exec_method_cQHeaderView_initStyleOptionForIndex(vtbl: pointer, inst: pointer, option: pointer, logicalIndex: cint): void {.cdecl.} =
+  let vtbl = cast[VirtualQHeaderView](cast[uint](vtbl) - uint(offsetOf(VirtualQHeaderView, vtbl)))
+  let slotval1 = gen_qstyleoption_types.QStyleOptionHeader(h: option, owned: false)
+  let slotval2 = logicalIndex
+  vtbl.initStyleOptionForIndex(slotval1, slotval2)
+
+method initStyleOption*(self: VirtualQHeaderView, option: gen_qstyleoption_types.QStyleOptionHeader): void {.base.} =
+  QHeaderViewinitStyleOption(self[], option)
+proc miqt_exec_method_cQHeaderView_initStyleOption(vtbl: pointer, inst: pointer, option: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQHeaderView](cast[uint](vtbl) - uint(offsetOf(VirtualQHeaderView, vtbl)))
+  let slotval1 = gen_qstyleoption_types.QStyleOptionHeader(h: option, owned: false)
+  vtbl.initStyleOption(slotval1)
+
+method setSelectionModel*(self: VirtualQHeaderView, selectionModel: gen_qitemselectionmodel_types.QItemSelectionModel): void {.base.} =
+  QHeaderViewsetSelectionModel(self[], selectionModel)
+proc miqt_exec_method_cQHeaderView_setSelectionModel(vtbl: pointer, inst: pointer, selectionModel: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQHeaderView](cast[uint](vtbl) - uint(offsetOf(VirtualQHeaderView, vtbl)))
+  let slotval1 = gen_qitemselectionmodel_types.QItemSelectionModel(h: selectionModel, owned: false)
+  vtbl.setSelectionModel(slotval1)
+
+method keyboardSearch*(self: VirtualQHeaderView, search: string): void {.base.} =
+  QHeaderViewkeyboardSearch(self[], search)
+proc miqt_exec_method_cQHeaderView_keyboardSearch(vtbl: pointer, inst: pointer, search: struct_miqt_string): void {.cdecl.} =
+  let vtbl = cast[VirtualQHeaderView](cast[uint](vtbl) - uint(offsetOf(VirtualQHeaderView, vtbl)))
+  let vsearch_ms = search
+  let vsearchx_ret = string.fromBytes(toOpenArrayByte(vsearch_ms.data, 0, int(vsearch_ms.len)-1))
+  c_free(vsearch_ms.data)
+  let slotval1 = vsearchx_ret
+  vtbl.keyboardSearch(slotval1)
+
+method sizeHintForRow*(self: VirtualQHeaderView, row: cint): cint {.base.} =
+  QHeaderViewsizeHintForRow(self[], row)
+proc miqt_exec_method_cQHeaderView_sizeHintForRow(vtbl: pointer, inst: pointer, row: cint): cint {.cdecl.} =
+  let vtbl = cast[VirtualQHeaderView](cast[uint](vtbl) - uint(offsetOf(VirtualQHeaderView, vtbl)))
+  let slotval1 = row
+  var virtualReturn = vtbl.sizeHintForRow(slotval1)
+  virtualReturn
+
+method sizeHintForColumn*(self: VirtualQHeaderView, column: cint): cint {.base.} =
+  QHeaderViewsizeHintForColumn(self[], column)
+proc miqt_exec_method_cQHeaderView_sizeHintForColumn(vtbl: pointer, inst: pointer, column: cint): cint {.cdecl.} =
+  let vtbl = cast[VirtualQHeaderView](cast[uint](vtbl) - uint(offsetOf(VirtualQHeaderView, vtbl)))
+  let slotval1 = column
+  var virtualReturn = vtbl.sizeHintForColumn(slotval1)
+  virtualReturn
+
+method itemDelegateForIndex*(self: VirtualQHeaderView, index: gen_qabstractitemmodel_types.QModelIndex): gen_qabstractitemdelegate_types.QAbstractItemDelegate {.base.} =
+  QHeaderViewitemDelegateForIndex(self[], index)
+proc miqt_exec_method_cQHeaderView_itemDelegateForIndex(vtbl: pointer, inst: pointer, index: pointer): pointer {.cdecl.} =
+  let vtbl = cast[VirtualQHeaderView](cast[uint](vtbl) - uint(offsetOf(VirtualQHeaderView, vtbl)))
+  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
+  var virtualReturn = vtbl.itemDelegateForIndex(slotval1)
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
+
+method inputMethodQuery*(self: VirtualQHeaderView, query: cint): gen_qvariant_types.QVariant {.base.} =
+  QHeaderViewinputMethodQuery(self[], query)
+proc miqt_exec_method_cQHeaderView_inputMethodQuery(vtbl: pointer, inst: pointer, query: cint): pointer {.cdecl.} =
+  let vtbl = cast[VirtualQHeaderView](cast[uint](vtbl) - uint(offsetOf(VirtualQHeaderView, vtbl)))
+  let slotval1 = cint(query)
+  var virtualReturn = vtbl.inputMethodQuery(slotval1)
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
+
+method setRootIndex*(self: VirtualQHeaderView, index: gen_qabstractitemmodel_types.QModelIndex): void {.base.} =
+  QHeaderViewsetRootIndex(self[], index)
+proc miqt_exec_method_cQHeaderView_setRootIndex(vtbl: pointer, inst: pointer, index: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQHeaderView](cast[uint](vtbl) - uint(offsetOf(VirtualQHeaderView, vtbl)))
+  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
+  vtbl.setRootIndex(slotval1)
+
+method selectAll*(self: VirtualQHeaderView, ): void {.base.} =
+  QHeaderViewselectAll(self[])
+proc miqt_exec_method_cQHeaderView_selectAll(vtbl: pointer, inst: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQHeaderView](cast[uint](vtbl) - uint(offsetOf(VirtualQHeaderView, vtbl)))
+  vtbl.selectAll()
+
+method rowsAboutToBeRemoved*(self: VirtualQHeaderView, parent: gen_qabstractitemmodel_types.QModelIndex, start: cint, endVal: cint): void {.base.} =
+  QHeaderViewrowsAboutToBeRemoved(self[], parent, start, endVal)
+proc miqt_exec_method_cQHeaderView_rowsAboutToBeRemoved(vtbl: pointer, inst: pointer, parent: pointer, start: cint, endVal: cint): void {.cdecl.} =
+  let vtbl = cast[VirtualQHeaderView](cast[uint](vtbl) - uint(offsetOf(VirtualQHeaderView, vtbl)))
+  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: parent, owned: false)
+  let slotval2 = start
+  let slotval3 = endVal
+  vtbl.rowsAboutToBeRemoved(slotval1, slotval2, slotval3)
+
+method selectionChanged*(self: VirtualQHeaderView, selected: gen_qitemselectionmodel_types.QItemSelection, deselected: gen_qitemselectionmodel_types.QItemSelection): void {.base.} =
+  QHeaderViewselectionChanged(self[], selected, deselected)
+proc miqt_exec_method_cQHeaderView_selectionChanged(vtbl: pointer, inst: pointer, selected: pointer, deselected: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQHeaderView](cast[uint](vtbl) - uint(offsetOf(VirtualQHeaderView, vtbl)))
+  let slotval1 = gen_qitemselectionmodel_types.QItemSelection(h: selected, owned: false)
+  let slotval2 = gen_qitemselectionmodel_types.QItemSelection(h: deselected, owned: false)
+  vtbl.selectionChanged(slotval1, slotval2)
+
+method updateEditorData*(self: VirtualQHeaderView, ): void {.base.} =
+  QHeaderViewupdateEditorData(self[])
+proc miqt_exec_method_cQHeaderView_updateEditorData(vtbl: pointer, inst: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQHeaderView](cast[uint](vtbl) - uint(offsetOf(VirtualQHeaderView, vtbl)))
+  vtbl.updateEditorData()
+
+method updateEditorGeometries*(self: VirtualQHeaderView, ): void {.base.} =
+  QHeaderViewupdateEditorGeometries(self[])
+proc miqt_exec_method_cQHeaderView_updateEditorGeometries(vtbl: pointer, inst: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQHeaderView](cast[uint](vtbl) - uint(offsetOf(VirtualQHeaderView, vtbl)))
+  vtbl.updateEditorGeometries()
+
+method verticalScrollbarAction*(self: VirtualQHeaderView, action: cint): void {.base.} =
+  QHeaderViewverticalScrollbarAction(self[], action)
+proc miqt_exec_method_cQHeaderView_verticalScrollbarAction(vtbl: pointer, inst: pointer, action: cint): void {.cdecl.} =
+  let vtbl = cast[VirtualQHeaderView](cast[uint](vtbl) - uint(offsetOf(VirtualQHeaderView, vtbl)))
+  let slotval1 = action
+  vtbl.verticalScrollbarAction(slotval1)
+
+method horizontalScrollbarAction*(self: VirtualQHeaderView, action: cint): void {.base.} =
+  QHeaderViewhorizontalScrollbarAction(self[], action)
+proc miqt_exec_method_cQHeaderView_horizontalScrollbarAction(vtbl: pointer, inst: pointer, action: cint): void {.cdecl.} =
+  let vtbl = cast[VirtualQHeaderView](cast[uint](vtbl) - uint(offsetOf(VirtualQHeaderView, vtbl)))
+  let slotval1 = action
+  vtbl.horizontalScrollbarAction(slotval1)
+
+method verticalScrollbarValueChanged*(self: VirtualQHeaderView, value: cint): void {.base.} =
+  QHeaderViewverticalScrollbarValueChanged(self[], value)
+proc miqt_exec_method_cQHeaderView_verticalScrollbarValueChanged(vtbl: pointer, inst: pointer, value: cint): void {.cdecl.} =
+  let vtbl = cast[VirtualQHeaderView](cast[uint](vtbl) - uint(offsetOf(VirtualQHeaderView, vtbl)))
+  let slotval1 = value
+  vtbl.verticalScrollbarValueChanged(slotval1)
+
+method horizontalScrollbarValueChanged*(self: VirtualQHeaderView, value: cint): void {.base.} =
+  QHeaderViewhorizontalScrollbarValueChanged(self[], value)
+proc miqt_exec_method_cQHeaderView_horizontalScrollbarValueChanged(vtbl: pointer, inst: pointer, value: cint): void {.cdecl.} =
+  let vtbl = cast[VirtualQHeaderView](cast[uint](vtbl) - uint(offsetOf(VirtualQHeaderView, vtbl)))
+  let slotval1 = value
+  vtbl.horizontalScrollbarValueChanged(slotval1)
+
+method closeEditor*(self: VirtualQHeaderView, editor: gen_qwidget_types.QWidget, hint: cint): void {.base.} =
+  QHeaderViewcloseEditor(self[], editor, hint)
+proc miqt_exec_method_cQHeaderView_closeEditor(vtbl: pointer, inst: pointer, editor: pointer, hint: cint): void {.cdecl.} =
+  let vtbl = cast[VirtualQHeaderView](cast[uint](vtbl) - uint(offsetOf(VirtualQHeaderView, vtbl)))
+  let slotval1 = gen_qwidget_types.QWidget(h: editor, owned: false)
+  let slotval2 = cint(hint)
+  vtbl.closeEditor(slotval1, slotval2)
+
+method commitData*(self: VirtualQHeaderView, editor: gen_qwidget_types.QWidget): void {.base.} =
+  QHeaderViewcommitData(self[], editor)
+proc miqt_exec_method_cQHeaderView_commitData(vtbl: pointer, inst: pointer, editor: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQHeaderView](cast[uint](vtbl) - uint(offsetOf(VirtualQHeaderView, vtbl)))
+  let slotval1 = gen_qwidget_types.QWidget(h: editor, owned: false)
+  vtbl.commitData(slotval1)
+
+method editorDestroyed*(self: VirtualQHeaderView, editor: gen_qobject_types.QObject): void {.base.} =
+  QHeaderVieweditorDestroyed(self[], editor)
+proc miqt_exec_method_cQHeaderView_editorDestroyed(vtbl: pointer, inst: pointer, editor: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQHeaderView](cast[uint](vtbl) - uint(offsetOf(VirtualQHeaderView, vtbl)))
+  let slotval1 = gen_qobject_types.QObject(h: editor, owned: false)
+  vtbl.editorDestroyed(slotval1)
+
+method selectedIndexes*(self: VirtualQHeaderView, ): seq[gen_qabstractitemmodel_types.QModelIndex] {.base.} =
+  QHeaderViewselectedIndexes(self[])
+proc miqt_exec_method_cQHeaderView_selectedIndexes(vtbl: pointer, inst: pointer): struct_miqt_array {.cdecl.} =
+  let vtbl = cast[VirtualQHeaderView](cast[uint](vtbl) - uint(offsetOf(VirtualQHeaderView, vtbl)))
+  var virtualReturn = vtbl.selectedIndexes()
+  var virtualReturn_CArray = cast[ptr UncheckedArray[pointer]](if len(virtualReturn) > 0: c_malloc(c_sizet(sizeof(pointer) * len(virtualReturn))) else: nil)
+  for i in 0..<len(virtualReturn):
+    virtualReturn[i].owned = false # TODO move?
+    let virtualReturn_i_h = virtualReturn[i].h
+    virtualReturn[i].h = nil
+    virtualReturn_CArray[i] = virtualReturn_i_h
+
+  struct_miqt_array(len: csize_t(len(virtualReturn)), data: if len(virtualReturn) == 0: nil else: addr(virtualReturn_CArray[0]))
+
+method edit*(self: VirtualQHeaderView, index: gen_qabstractitemmodel_types.QModelIndex, trigger: cint, event: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QHeaderViewedit(self[], index, trigger, event)
+proc miqt_exec_method_cQHeaderView_edit2(vtbl: pointer, inst: pointer, index: pointer, trigger: cint, event: pointer): bool {.cdecl.} =
+  let vtbl = cast[VirtualQHeaderView](cast[uint](vtbl) - uint(offsetOf(VirtualQHeaderView, vtbl)))
+  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
+  let slotval2 = cint(trigger)
+  let slotval3 = gen_qcoreevent_types.QEvent(h: event, owned: false)
+  var virtualReturn = vtbl.edit(slotval1, slotval2, slotval3)
+  virtualReturn
+
+method selectionCommand*(self: VirtualQHeaderView, index: gen_qabstractitemmodel_types.QModelIndex, event: gen_qcoreevent_types.QEvent): cint {.base.} =
+  QHeaderViewselectionCommand(self[], index, event)
+proc miqt_exec_method_cQHeaderView_selectionCommand(vtbl: pointer, inst: pointer, index: pointer, event: pointer): cint {.cdecl.} =
+  let vtbl = cast[VirtualQHeaderView](cast[uint](vtbl) - uint(offsetOf(VirtualQHeaderView, vtbl)))
+  let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
+  var virtualReturn = vtbl.selectionCommand(slotval1, slotval2)
+  cint(virtualReturn)
+
+method startDrag*(self: VirtualQHeaderView, supportedActions: cint): void {.base.} =
+  QHeaderViewstartDrag(self[], supportedActions)
+proc miqt_exec_method_cQHeaderView_startDrag(vtbl: pointer, inst: pointer, supportedActions: cint): void {.cdecl.} =
+  let vtbl = cast[VirtualQHeaderView](cast[uint](vtbl) - uint(offsetOf(VirtualQHeaderView, vtbl)))
+  let slotval1 = cint(supportedActions)
+  vtbl.startDrag(slotval1)
+
+method initViewItemOption*(self: VirtualQHeaderView, option: gen_qstyleoption_types.QStyleOptionViewItem): void {.base.} =
+  QHeaderViewinitViewItemOption(self[], option)
+proc miqt_exec_method_cQHeaderView_initViewItemOption(vtbl: pointer, inst: pointer, option: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQHeaderView](cast[uint](vtbl) - uint(offsetOf(VirtualQHeaderView, vtbl)))
+  let slotval1 = gen_qstyleoption_types.QStyleOptionViewItem(h: option, owned: false)
+  vtbl.initViewItemOption(slotval1)
+
+method focusNextPrevChild*(self: VirtualQHeaderView, next: bool): bool {.base.} =
+  QHeaderViewfocusNextPrevChild(self[], next)
+proc miqt_exec_method_cQHeaderView_focusNextPrevChild(vtbl: pointer, inst: pointer, next: bool): bool {.cdecl.} =
+  let vtbl = cast[VirtualQHeaderView](cast[uint](vtbl) - uint(offsetOf(VirtualQHeaderView, vtbl)))
+  let slotval1 = next
+  var virtualReturn = vtbl.focusNextPrevChild(slotval1)
+  virtualReturn
+
+method dragEnterEvent*(self: VirtualQHeaderView, event: gen_qevent_types.QDragEnterEvent): void {.base.} =
+  QHeaderViewdragEnterEvent(self[], event)
+proc miqt_exec_method_cQHeaderView_dragEnterEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQHeaderView](cast[uint](vtbl) - uint(offsetOf(VirtualQHeaderView, vtbl)))
+  let slotval1 = gen_qevent_types.QDragEnterEvent(h: event, owned: false)
+  vtbl.dragEnterEvent(slotval1)
+
+method dragMoveEvent*(self: VirtualQHeaderView, event: gen_qevent_types.QDragMoveEvent): void {.base.} =
+  QHeaderViewdragMoveEvent(self[], event)
+proc miqt_exec_method_cQHeaderView_dragMoveEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQHeaderView](cast[uint](vtbl) - uint(offsetOf(VirtualQHeaderView, vtbl)))
+  let slotval1 = gen_qevent_types.QDragMoveEvent(h: event, owned: false)
+  vtbl.dragMoveEvent(slotval1)
+
+method dragLeaveEvent*(self: VirtualQHeaderView, event: gen_qevent_types.QDragLeaveEvent): void {.base.} =
+  QHeaderViewdragLeaveEvent(self[], event)
+proc miqt_exec_method_cQHeaderView_dragLeaveEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQHeaderView](cast[uint](vtbl) - uint(offsetOf(VirtualQHeaderView, vtbl)))
+  let slotval1 = gen_qevent_types.QDragLeaveEvent(h: event, owned: false)
+  vtbl.dragLeaveEvent(slotval1)
+
+method dropEvent*(self: VirtualQHeaderView, event: gen_qevent_types.QDropEvent): void {.base.} =
+  QHeaderViewdropEvent(self[], event)
+proc miqt_exec_method_cQHeaderView_dropEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQHeaderView](cast[uint](vtbl) - uint(offsetOf(VirtualQHeaderView, vtbl)))
+  let slotval1 = gen_qevent_types.QDropEvent(h: event, owned: false)
+  vtbl.dropEvent(slotval1)
+
+method focusInEvent*(self: VirtualQHeaderView, event: gen_qevent_types.QFocusEvent): void {.base.} =
+  QHeaderViewfocusInEvent(self[], event)
+proc miqt_exec_method_cQHeaderView_focusInEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQHeaderView](cast[uint](vtbl) - uint(offsetOf(VirtualQHeaderView, vtbl)))
+  let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
+  vtbl.focusInEvent(slotval1)
+
+method focusOutEvent*(self: VirtualQHeaderView, event: gen_qevent_types.QFocusEvent): void {.base.} =
+  QHeaderViewfocusOutEvent(self[], event)
+proc miqt_exec_method_cQHeaderView_focusOutEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQHeaderView](cast[uint](vtbl) - uint(offsetOf(VirtualQHeaderView, vtbl)))
+  let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
+  vtbl.focusOutEvent(slotval1)
+
+method keyPressEvent*(self: VirtualQHeaderView, event: gen_qevent_types.QKeyEvent): void {.base.} =
+  QHeaderViewkeyPressEvent(self[], event)
+proc miqt_exec_method_cQHeaderView_keyPressEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQHeaderView](cast[uint](vtbl) - uint(offsetOf(VirtualQHeaderView, vtbl)))
+  let slotval1 = gen_qevent_types.QKeyEvent(h: event, owned: false)
+  vtbl.keyPressEvent(slotval1)
+
+method resizeEvent*(self: VirtualQHeaderView, event: gen_qevent_types.QResizeEvent): void {.base.} =
+  QHeaderViewresizeEvent(self[], event)
+proc miqt_exec_method_cQHeaderView_resizeEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQHeaderView](cast[uint](vtbl) - uint(offsetOf(VirtualQHeaderView, vtbl)))
+  let slotval1 = gen_qevent_types.QResizeEvent(h: event, owned: false)
+  vtbl.resizeEvent(slotval1)
+
+method timerEvent*(self: VirtualQHeaderView, event: gen_qcoreevent_types.QTimerEvent): void {.base.} =
+  QHeaderViewtimerEvent(self[], event)
+proc miqt_exec_method_cQHeaderView_timerEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQHeaderView](cast[uint](vtbl) - uint(offsetOf(VirtualQHeaderView, vtbl)))
+  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
+  vtbl.timerEvent(slotval1)
+
+method inputMethodEvent*(self: VirtualQHeaderView, event: gen_qevent_types.QInputMethodEvent): void {.base.} =
+  QHeaderViewinputMethodEvent(self[], event)
+proc miqt_exec_method_cQHeaderView_inputMethodEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQHeaderView](cast[uint](vtbl) - uint(offsetOf(VirtualQHeaderView, vtbl)))
+  let slotval1 = gen_qevent_types.QInputMethodEvent(h: event, owned: false)
+  vtbl.inputMethodEvent(slotval1)
+
+method eventFilter*(self: VirtualQHeaderView, objectVal: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QHeaderVieweventFilter(self[], objectVal, event)
+proc miqt_exec_method_cQHeaderView_eventFilter(vtbl: pointer, inst: pointer, objectVal: pointer, event: pointer): bool {.cdecl.} =
+  let vtbl = cast[VirtualQHeaderView](cast[uint](vtbl) - uint(offsetOf(VirtualQHeaderView, vtbl)))
+  let slotval1 = gen_qobject_types.QObject(h: objectVal, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
+  var virtualReturn = vtbl.eventFilter(slotval1, slotval2)
+  virtualReturn
+
+method viewportSizeHint*(self: VirtualQHeaderView, ): gen_qsize_types.QSize {.base.} =
+  QHeaderViewviewportSizeHint(self[])
+proc miqt_exec_method_cQHeaderView_viewportSizeHint(vtbl: pointer, inst: pointer): pointer {.cdecl.} =
+  let vtbl = cast[VirtualQHeaderView](cast[uint](vtbl) - uint(offsetOf(VirtualQHeaderView, vtbl)))
+  var virtualReturn = vtbl.viewportSizeHint()
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
+
+method minimumSizeHint*(self: VirtualQHeaderView, ): gen_qsize_types.QSize {.base.} =
+  QHeaderViewminimumSizeHint(self[])
+proc miqt_exec_method_cQHeaderView_minimumSizeHint(vtbl: pointer, inst: pointer): pointer {.cdecl.} =
+  let vtbl = cast[VirtualQHeaderView](cast[uint](vtbl) - uint(offsetOf(VirtualQHeaderView, vtbl)))
+  var virtualReturn = vtbl.minimumSizeHint()
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
+
+method setupViewport*(self: VirtualQHeaderView, viewport: gen_qwidget_types.QWidget): void {.base.} =
+  QHeaderViewsetupViewport(self[], viewport)
+proc miqt_exec_method_cQHeaderView_setupViewport(vtbl: pointer, inst: pointer, viewport: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQHeaderView](cast[uint](vtbl) - uint(offsetOf(VirtualQHeaderView, vtbl)))
+  let slotval1 = gen_qwidget_types.QWidget(h: viewport, owned: false)
+  vtbl.setupViewport(slotval1)
+
+method wheelEvent*(self: VirtualQHeaderView, param1: gen_qevent_types.QWheelEvent): void {.base.} =
+  QHeaderViewwheelEvent(self[], param1)
+proc miqt_exec_method_cQHeaderView_wheelEvent(vtbl: pointer, inst: pointer, param1: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQHeaderView](cast[uint](vtbl) - uint(offsetOf(VirtualQHeaderView, vtbl)))
+  let slotval1 = gen_qevent_types.QWheelEvent(h: param1, owned: false)
+  vtbl.wheelEvent(slotval1)
+
+method contextMenuEvent*(self: VirtualQHeaderView, param1: gen_qevent_types.QContextMenuEvent): void {.base.} =
+  QHeaderViewcontextMenuEvent(self[], param1)
+proc miqt_exec_method_cQHeaderView_contextMenuEvent(vtbl: pointer, inst: pointer, param1: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQHeaderView](cast[uint](vtbl) - uint(offsetOf(VirtualQHeaderView, vtbl)))
+  let slotval1 = gen_qevent_types.QContextMenuEvent(h: param1, owned: false)
+  vtbl.contextMenuEvent(slotval1)
+
+method changeEvent*(self: VirtualQHeaderView, param1: gen_qcoreevent_types.QEvent): void {.base.} =
+  QHeaderViewchangeEvent(self[], param1)
+proc miqt_exec_method_cQHeaderView_changeEvent(vtbl: pointer, inst: pointer, param1: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQHeaderView](cast[uint](vtbl) - uint(offsetOf(VirtualQHeaderView, vtbl)))
+  let slotval1 = gen_qcoreevent_types.QEvent(h: param1, owned: false)
+  vtbl.changeEvent(slotval1)
+
+method devType*(self: VirtualQHeaderView, ): cint {.base.} =
+  QHeaderViewdevType(self[])
+proc miqt_exec_method_cQHeaderView_devType(vtbl: pointer, inst: pointer): cint {.cdecl.} =
+  let vtbl = cast[VirtualQHeaderView](cast[uint](vtbl) - uint(offsetOf(VirtualQHeaderView, vtbl)))
+  var virtualReturn = vtbl.devType()
+  virtualReturn
+
+method heightForWidth*(self: VirtualQHeaderView, param1: cint): cint {.base.} =
+  QHeaderViewheightForWidth(self[], param1)
+proc miqt_exec_method_cQHeaderView_heightForWidth(vtbl: pointer, inst: pointer, param1: cint): cint {.cdecl.} =
+  let vtbl = cast[VirtualQHeaderView](cast[uint](vtbl) - uint(offsetOf(VirtualQHeaderView, vtbl)))
+  let slotval1 = param1
+  var virtualReturn = vtbl.heightForWidth(slotval1)
+  virtualReturn
+
+method hasHeightForWidth*(self: VirtualQHeaderView, ): bool {.base.} =
+  QHeaderViewhasHeightForWidth(self[])
+proc miqt_exec_method_cQHeaderView_hasHeightForWidth(vtbl: pointer, inst: pointer): bool {.cdecl.} =
+  let vtbl = cast[VirtualQHeaderView](cast[uint](vtbl) - uint(offsetOf(VirtualQHeaderView, vtbl)))
+  var virtualReturn = vtbl.hasHeightForWidth()
+  virtualReturn
+
+method paintEngine*(self: VirtualQHeaderView, ): gen_qpaintengine_types.QPaintEngine {.base.} =
+  QHeaderViewpaintEngine(self[])
+proc miqt_exec_method_cQHeaderView_paintEngine(vtbl: pointer, inst: pointer): pointer {.cdecl.} =
+  let vtbl = cast[VirtualQHeaderView](cast[uint](vtbl) - uint(offsetOf(VirtualQHeaderView, vtbl)))
+  var virtualReturn = vtbl.paintEngine()
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
+
+method keyReleaseEvent*(self: VirtualQHeaderView, event: gen_qevent_types.QKeyEvent): void {.base.} =
+  QHeaderViewkeyReleaseEvent(self[], event)
+proc miqt_exec_method_cQHeaderView_keyReleaseEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQHeaderView](cast[uint](vtbl) - uint(offsetOf(VirtualQHeaderView, vtbl)))
+  let slotval1 = gen_qevent_types.QKeyEvent(h: event, owned: false)
+  vtbl.keyReleaseEvent(slotval1)
+
+method enterEvent*(self: VirtualQHeaderView, event: gen_qevent_types.QEnterEvent): void {.base.} =
+  QHeaderViewenterEvent(self[], event)
+proc miqt_exec_method_cQHeaderView_enterEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQHeaderView](cast[uint](vtbl) - uint(offsetOf(VirtualQHeaderView, vtbl)))
+  let slotval1 = gen_qevent_types.QEnterEvent(h: event, owned: false)
+  vtbl.enterEvent(slotval1)
+
+method leaveEvent*(self: VirtualQHeaderView, event: gen_qcoreevent_types.QEvent): void {.base.} =
+  QHeaderViewleaveEvent(self[], event)
+proc miqt_exec_method_cQHeaderView_leaveEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQHeaderView](cast[uint](vtbl) - uint(offsetOf(VirtualQHeaderView, vtbl)))
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
+  vtbl.leaveEvent(slotval1)
+
+method moveEvent*(self: VirtualQHeaderView, event: gen_qevent_types.QMoveEvent): void {.base.} =
+  QHeaderViewmoveEvent(self[], event)
+proc miqt_exec_method_cQHeaderView_moveEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQHeaderView](cast[uint](vtbl) - uint(offsetOf(VirtualQHeaderView, vtbl)))
+  let slotval1 = gen_qevent_types.QMoveEvent(h: event, owned: false)
+  vtbl.moveEvent(slotval1)
+
+method closeEvent*(self: VirtualQHeaderView, event: gen_qevent_types.QCloseEvent): void {.base.} =
+  QHeaderViewcloseEvent(self[], event)
+proc miqt_exec_method_cQHeaderView_closeEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQHeaderView](cast[uint](vtbl) - uint(offsetOf(VirtualQHeaderView, vtbl)))
+  let slotval1 = gen_qevent_types.QCloseEvent(h: event, owned: false)
+  vtbl.closeEvent(slotval1)
+
+method tabletEvent*(self: VirtualQHeaderView, event: gen_qevent_types.QTabletEvent): void {.base.} =
+  QHeaderViewtabletEvent(self[], event)
+proc miqt_exec_method_cQHeaderView_tabletEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQHeaderView](cast[uint](vtbl) - uint(offsetOf(VirtualQHeaderView, vtbl)))
+  let slotval1 = gen_qevent_types.QTabletEvent(h: event, owned: false)
+  vtbl.tabletEvent(slotval1)
+
+method actionEvent*(self: VirtualQHeaderView, event: gen_qevent_types.QActionEvent): void {.base.} =
+  QHeaderViewactionEvent(self[], event)
+proc miqt_exec_method_cQHeaderView_actionEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQHeaderView](cast[uint](vtbl) - uint(offsetOf(VirtualQHeaderView, vtbl)))
+  let slotval1 = gen_qevent_types.QActionEvent(h: event, owned: false)
+  vtbl.actionEvent(slotval1)
+
+method showEvent*(self: VirtualQHeaderView, event: gen_qevent_types.QShowEvent): void {.base.} =
+  QHeaderViewshowEvent(self[], event)
+proc miqt_exec_method_cQHeaderView_showEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQHeaderView](cast[uint](vtbl) - uint(offsetOf(VirtualQHeaderView, vtbl)))
+  let slotval1 = gen_qevent_types.QShowEvent(h: event, owned: false)
+  vtbl.showEvent(slotval1)
+
+method hideEvent*(self: VirtualQHeaderView, event: gen_qevent_types.QHideEvent): void {.base.} =
+  QHeaderViewhideEvent(self[], event)
+proc miqt_exec_method_cQHeaderView_hideEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQHeaderView](cast[uint](vtbl) - uint(offsetOf(VirtualQHeaderView, vtbl)))
+  let slotval1 = gen_qevent_types.QHideEvent(h: event, owned: false)
+  vtbl.hideEvent(slotval1)
+
+method nativeEvent*(self: VirtualQHeaderView, eventType: seq[byte], message: pointer, resultVal: ptr uint): bool {.base.} =
+  QHeaderViewnativeEvent(self[], eventType, message, resultVal)
+proc miqt_exec_method_cQHeaderView_nativeEvent(vtbl: pointer, inst: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr uint): bool {.cdecl.} =
+  let vtbl = cast[VirtualQHeaderView](cast[uint](vtbl) - uint(offsetOf(VirtualQHeaderView, vtbl)))
+  var veventType_bytearray = eventType
+  var veventTypex_ret = @(toOpenArrayByte(veventType_bytearray.data, 0, int(veventType_bytearray.len)-1))
+  c_free(veventType_bytearray.data)
+  let slotval1 = veventTypex_ret
+  let slotval2 = message
+  let slotval3 = resultVal
+  var virtualReturn = vtbl.nativeEvent(slotval1, slotval2, slotval3)
+  virtualReturn
+
+method metric*(self: VirtualQHeaderView, param1: cint): cint {.base.} =
+  QHeaderViewmetric(self[], param1)
+proc miqt_exec_method_cQHeaderView_metric(vtbl: pointer, inst: pointer, param1: cint): cint {.cdecl.} =
+  let vtbl = cast[VirtualQHeaderView](cast[uint](vtbl) - uint(offsetOf(VirtualQHeaderView, vtbl)))
+  let slotval1 = cint(param1)
+  var virtualReturn = vtbl.metric(slotval1)
+  virtualReturn
+
+method initPainter*(self: VirtualQHeaderView, painter: gen_qpainter_types.QPainter): void {.base.} =
+  QHeaderViewinitPainter(self[], painter)
+proc miqt_exec_method_cQHeaderView_initPainter(vtbl: pointer, inst: pointer, painter: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQHeaderView](cast[uint](vtbl) - uint(offsetOf(VirtualQHeaderView, vtbl)))
+  let slotval1 = gen_qpainter_types.QPainter(h: painter, owned: false)
+  vtbl.initPainter(slotval1)
+
+method redirected*(self: VirtualQHeaderView, offset: gen_qpoint_types.QPoint): gen_qpaintdevice_types.QPaintDevice {.base.} =
+  QHeaderViewredirected(self[], offset)
+proc miqt_exec_method_cQHeaderView_redirected(vtbl: pointer, inst: pointer, offset: pointer): pointer {.cdecl.} =
+  let vtbl = cast[VirtualQHeaderView](cast[uint](vtbl) - uint(offsetOf(VirtualQHeaderView, vtbl)))
+  let slotval1 = gen_qpoint_types.QPoint(h: offset, owned: false)
+  var virtualReturn = vtbl.redirected(slotval1)
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
+
+method sharedPainter*(self: VirtualQHeaderView, ): gen_qpainter_types.QPainter {.base.} =
+  QHeaderViewsharedPainter(self[])
+proc miqt_exec_method_cQHeaderView_sharedPainter(vtbl: pointer, inst: pointer): pointer {.cdecl.} =
+  let vtbl = cast[VirtualQHeaderView](cast[uint](vtbl) - uint(offsetOf(VirtualQHeaderView, vtbl)))
+  var virtualReturn = vtbl.sharedPainter()
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
+
+method childEvent*(self: VirtualQHeaderView, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
+  QHeaderViewchildEvent(self[], event)
+proc miqt_exec_method_cQHeaderView_childEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQHeaderView](cast[uint](vtbl) - uint(offsetOf(VirtualQHeaderView, vtbl)))
+  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
+  vtbl.childEvent(slotval1)
+
+method customEvent*(self: VirtualQHeaderView, event: gen_qcoreevent_types.QEvent): void {.base.} =
+  QHeaderViewcustomEvent(self[], event)
+proc miqt_exec_method_cQHeaderView_customEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQHeaderView](cast[uint](vtbl) - uint(offsetOf(VirtualQHeaderView, vtbl)))
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
+  vtbl.customEvent(slotval1)
+
+method connectNotify*(self: VirtualQHeaderView, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QHeaderViewconnectNotify(self[], signal)
+proc miqt_exec_method_cQHeaderView_connectNotify(vtbl: pointer, inst: pointer, signal: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQHeaderView](cast[uint](vtbl) - uint(offsetOf(VirtualQHeaderView, vtbl)))
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
+  vtbl.connectNotify(slotval1)
+
+method disconnectNotify*(self: VirtualQHeaderView, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QHeaderViewdisconnectNotify(self[], signal)
+proc miqt_exec_method_cQHeaderView_disconnectNotify(vtbl: pointer, inst: pointer, signal: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQHeaderView](cast[uint](vtbl) - uint(offsetOf(VirtualQHeaderView, vtbl)))
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
+  vtbl.disconnectNotify(slotval1)
 
 proc updateSection*(self: gen_qheaderview_types.QHeaderView, logicalIndex: cint): void =
   fcQHeaderView_protectedbase_updateSection(self.h, logicalIndex)
@@ -2064,7 +2890,7 @@ proc scrollDirtyRegion*(self: gen_qheaderview_types.QHeaderView, dx: cint, dy: c
   fcQHeaderView_protectedbase_scrollDirtyRegion(self.h, dx, dy)
 
 proc dirtyRegionOffset*(self: gen_qheaderview_types.QHeaderView, ): gen_qpoint_types.QPoint =
-  gen_qpoint_types.QPoint(h: fcQHeaderView_protectedbase_dirtyRegionOffset(self.h))
+  gen_qpoint_types.QPoint(h: fcQHeaderView_protectedbase_dirtyRegionOffset(self.h), owned: true)
 
 proc startAutoScroll*(self: gen_qheaderview_types.QHeaderView, ): void =
   fcQHeaderView_protectedbase_startAutoScroll(self.h)
@@ -2082,7 +2908,7 @@ proc setViewportMargins*(self: gen_qheaderview_types.QHeaderView, left: cint, to
   fcQHeaderView_protectedbase_setViewportMargins(self.h, left, top, right, bottom)
 
 proc viewportMargins*(self: gen_qheaderview_types.QHeaderView, ): gen_qmargins_types.QMargins =
-  gen_qmargins_types.QMargins(h: fcQHeaderView_protectedbase_viewportMargins(self.h))
+  gen_qmargins_types.QMargins(h: fcQHeaderView_protectedbase_viewportMargins(self.h), owned: true)
 
 proc drawFrame*(self: gen_qheaderview_types.QHeaderView, param1: gen_qpainter_types.QPainter): void =
   fcQHeaderView_protectedbase_drawFrame(self.h, param1.h)
@@ -2103,7 +2929,7 @@ proc focusPreviousChild*(self: gen_qheaderview_types.QHeaderView, ): bool =
   fcQHeaderView_protectedbase_focusPreviousChild(self.h)
 
 proc sender*(self: gen_qheaderview_types.QHeaderView, ): gen_qobject_types.QObject =
-  gen_qobject_types.QObject(h: fcQHeaderView_protectedbase_sender(self.h))
+  gen_qobject_types.QObject(h: fcQHeaderView_protectedbase_sender(self.h), owned: false)
 
 proc senderSignalIndex*(self: gen_qheaderview_types.QHeaderView, ): cint =
   fcQHeaderView_protectedbase_senderSignalIndex(self.h)
@@ -2119,410 +2945,626 @@ proc create*(T: type gen_qheaderview_types.QHeaderView,
     vtbl: ref QHeaderViewVTable = nil): gen_qheaderview_types.QHeaderView =
   let vtbl = if vtbl == nil: new QHeaderViewVTable else: vtbl
   GC_ref(vtbl)
-  vtbl.vtbl.destructor = proc(vtbl: ptr cQHeaderViewVTable, _: ptr cQHeaderView) {.cdecl.} =
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQHeaderViewVTable, _: ptr cQHeaderView) {.cdecl.} =
     let vtbl = cast[ref QHeaderViewVTable](vtbl)
     GC_unref(vtbl)
-  if not isNil(vtbl.metaObject):
+  if not isNil(vtbl[].metaObject):
     vtbl[].vtbl.metaObject = miqt_exec_callback_cQHeaderView_metaObject
-  if not isNil(vtbl.metacast):
+  if not isNil(vtbl[].metacast):
     vtbl[].vtbl.metacast = miqt_exec_callback_cQHeaderView_metacast
-  if not isNil(vtbl.metacall):
+  if not isNil(vtbl[].metacall):
     vtbl[].vtbl.metacall = miqt_exec_callback_cQHeaderView_metacall
-  if not isNil(vtbl.setModel):
+  if not isNil(vtbl[].setModel):
     vtbl[].vtbl.setModel = miqt_exec_callback_cQHeaderView_setModel
-  if not isNil(vtbl.sizeHint):
+  if not isNil(vtbl[].sizeHint):
     vtbl[].vtbl.sizeHint = miqt_exec_callback_cQHeaderView_sizeHint
-  if not isNil(vtbl.setVisible):
+  if not isNil(vtbl[].setVisible):
     vtbl[].vtbl.setVisible = miqt_exec_callback_cQHeaderView_setVisible
-  if not isNil(vtbl.doItemsLayout):
+  if not isNil(vtbl[].doItemsLayout):
     vtbl[].vtbl.doItemsLayout = miqt_exec_callback_cQHeaderView_doItemsLayout
-  if not isNil(vtbl.reset):
+  if not isNil(vtbl[].reset):
     vtbl[].vtbl.reset = miqt_exec_callback_cQHeaderView_reset
-  if not isNil(vtbl.currentChanged):
+  if not isNil(vtbl[].currentChanged):
     vtbl[].vtbl.currentChanged = miqt_exec_callback_cQHeaderView_currentChanged
-  if not isNil(vtbl.event):
+  if not isNil(vtbl[].event):
     vtbl[].vtbl.event = miqt_exec_callback_cQHeaderView_event
-  if not isNil(vtbl.paintEvent):
+  if not isNil(vtbl[].paintEvent):
     vtbl[].vtbl.paintEvent = miqt_exec_callback_cQHeaderView_paintEvent
-  if not isNil(vtbl.mousePressEvent):
+  if not isNil(vtbl[].mousePressEvent):
     vtbl[].vtbl.mousePressEvent = miqt_exec_callback_cQHeaderView_mousePressEvent
-  if not isNil(vtbl.mouseMoveEvent):
+  if not isNil(vtbl[].mouseMoveEvent):
     vtbl[].vtbl.mouseMoveEvent = miqt_exec_callback_cQHeaderView_mouseMoveEvent
-  if not isNil(vtbl.mouseReleaseEvent):
+  if not isNil(vtbl[].mouseReleaseEvent):
     vtbl[].vtbl.mouseReleaseEvent = miqt_exec_callback_cQHeaderView_mouseReleaseEvent
-  if not isNil(vtbl.mouseDoubleClickEvent):
+  if not isNil(vtbl[].mouseDoubleClickEvent):
     vtbl[].vtbl.mouseDoubleClickEvent = miqt_exec_callback_cQHeaderView_mouseDoubleClickEvent
-  if not isNil(vtbl.viewportEvent):
+  if not isNil(vtbl[].viewportEvent):
     vtbl[].vtbl.viewportEvent = miqt_exec_callback_cQHeaderView_viewportEvent
-  if not isNil(vtbl.paintSection):
+  if not isNil(vtbl[].paintSection):
     vtbl[].vtbl.paintSection = miqt_exec_callback_cQHeaderView_paintSection
-  if not isNil(vtbl.sectionSizeFromContents):
+  if not isNil(vtbl[].sectionSizeFromContents):
     vtbl[].vtbl.sectionSizeFromContents = miqt_exec_callback_cQHeaderView_sectionSizeFromContents
-  if not isNil(vtbl.horizontalOffset):
+  if not isNil(vtbl[].horizontalOffset):
     vtbl[].vtbl.horizontalOffset = miqt_exec_callback_cQHeaderView_horizontalOffset
-  if not isNil(vtbl.verticalOffset):
+  if not isNil(vtbl[].verticalOffset):
     vtbl[].vtbl.verticalOffset = miqt_exec_callback_cQHeaderView_verticalOffset
-  if not isNil(vtbl.updateGeometries):
+  if not isNil(vtbl[].updateGeometries):
     vtbl[].vtbl.updateGeometries = miqt_exec_callback_cQHeaderView_updateGeometries
-  if not isNil(vtbl.scrollContentsBy):
+  if not isNil(vtbl[].scrollContentsBy):
     vtbl[].vtbl.scrollContentsBy = miqt_exec_callback_cQHeaderView_scrollContentsBy
-  if not isNil(vtbl.dataChanged):
+  if not isNil(vtbl[].dataChanged):
     vtbl[].vtbl.dataChanged = miqt_exec_callback_cQHeaderView_dataChanged
-  if not isNil(vtbl.rowsInserted):
+  if not isNil(vtbl[].rowsInserted):
     vtbl[].vtbl.rowsInserted = miqt_exec_callback_cQHeaderView_rowsInserted
-  if not isNil(vtbl.visualRect):
+  if not isNil(vtbl[].visualRect):
     vtbl[].vtbl.visualRect = miqt_exec_callback_cQHeaderView_visualRect
-  if not isNil(vtbl.scrollTo):
+  if not isNil(vtbl[].scrollTo):
     vtbl[].vtbl.scrollTo = miqt_exec_callback_cQHeaderView_scrollTo
-  if not isNil(vtbl.indexAt):
+  if not isNil(vtbl[].indexAt):
     vtbl[].vtbl.indexAt = miqt_exec_callback_cQHeaderView_indexAt
-  if not isNil(vtbl.isIndexHidden):
+  if not isNil(vtbl[].isIndexHidden):
     vtbl[].vtbl.isIndexHidden = miqt_exec_callback_cQHeaderView_isIndexHidden
-  if not isNil(vtbl.moveCursor):
+  if not isNil(vtbl[].moveCursor):
     vtbl[].vtbl.moveCursor = miqt_exec_callback_cQHeaderView_moveCursor
-  if not isNil(vtbl.setSelection):
+  if not isNil(vtbl[].setSelection):
     vtbl[].vtbl.setSelection = miqt_exec_callback_cQHeaderView_setSelection
-  if not isNil(vtbl.visualRegionForSelection):
+  if not isNil(vtbl[].visualRegionForSelection):
     vtbl[].vtbl.visualRegionForSelection = miqt_exec_callback_cQHeaderView_visualRegionForSelection
-  if not isNil(vtbl.initStyleOptionForIndex):
+  if not isNil(vtbl[].initStyleOptionForIndex):
     vtbl[].vtbl.initStyleOptionForIndex = miqt_exec_callback_cQHeaderView_initStyleOptionForIndex
-  if not isNil(vtbl.initStyleOption):
+  if not isNil(vtbl[].initStyleOption):
     vtbl[].vtbl.initStyleOption = miqt_exec_callback_cQHeaderView_initStyleOption
-  if not isNil(vtbl.setSelectionModel):
+  if not isNil(vtbl[].setSelectionModel):
     vtbl[].vtbl.setSelectionModel = miqt_exec_callback_cQHeaderView_setSelectionModel
-  if not isNil(vtbl.keyboardSearch):
+  if not isNil(vtbl[].keyboardSearch):
     vtbl[].vtbl.keyboardSearch = miqt_exec_callback_cQHeaderView_keyboardSearch
-  if not isNil(vtbl.sizeHintForRow):
+  if not isNil(vtbl[].sizeHintForRow):
     vtbl[].vtbl.sizeHintForRow = miqt_exec_callback_cQHeaderView_sizeHintForRow
-  if not isNil(vtbl.sizeHintForColumn):
+  if not isNil(vtbl[].sizeHintForColumn):
     vtbl[].vtbl.sizeHintForColumn = miqt_exec_callback_cQHeaderView_sizeHintForColumn
-  if not isNil(vtbl.itemDelegateForIndex):
+  if not isNil(vtbl[].itemDelegateForIndex):
     vtbl[].vtbl.itemDelegateForIndex = miqt_exec_callback_cQHeaderView_itemDelegateForIndex
-  if not isNil(vtbl.inputMethodQuery):
+  if not isNil(vtbl[].inputMethodQuery):
     vtbl[].vtbl.inputMethodQuery = miqt_exec_callback_cQHeaderView_inputMethodQuery
-  if not isNil(vtbl.setRootIndex):
+  if not isNil(vtbl[].setRootIndex):
     vtbl[].vtbl.setRootIndex = miqt_exec_callback_cQHeaderView_setRootIndex
-  if not isNil(vtbl.selectAll):
+  if not isNil(vtbl[].selectAll):
     vtbl[].vtbl.selectAll = miqt_exec_callback_cQHeaderView_selectAll
-  if not isNil(vtbl.rowsAboutToBeRemoved):
+  if not isNil(vtbl[].rowsAboutToBeRemoved):
     vtbl[].vtbl.rowsAboutToBeRemoved = miqt_exec_callback_cQHeaderView_rowsAboutToBeRemoved
-  if not isNil(vtbl.selectionChanged):
+  if not isNil(vtbl[].selectionChanged):
     vtbl[].vtbl.selectionChanged = miqt_exec_callback_cQHeaderView_selectionChanged
-  if not isNil(vtbl.updateEditorData):
+  if not isNil(vtbl[].updateEditorData):
     vtbl[].vtbl.updateEditorData = miqt_exec_callback_cQHeaderView_updateEditorData
-  if not isNil(vtbl.updateEditorGeometries):
+  if not isNil(vtbl[].updateEditorGeometries):
     vtbl[].vtbl.updateEditorGeometries = miqt_exec_callback_cQHeaderView_updateEditorGeometries
-  if not isNil(vtbl.verticalScrollbarAction):
+  if not isNil(vtbl[].verticalScrollbarAction):
     vtbl[].vtbl.verticalScrollbarAction = miqt_exec_callback_cQHeaderView_verticalScrollbarAction
-  if not isNil(vtbl.horizontalScrollbarAction):
+  if not isNil(vtbl[].horizontalScrollbarAction):
     vtbl[].vtbl.horizontalScrollbarAction = miqt_exec_callback_cQHeaderView_horizontalScrollbarAction
-  if not isNil(vtbl.verticalScrollbarValueChanged):
+  if not isNil(vtbl[].verticalScrollbarValueChanged):
     vtbl[].vtbl.verticalScrollbarValueChanged = miqt_exec_callback_cQHeaderView_verticalScrollbarValueChanged
-  if not isNil(vtbl.horizontalScrollbarValueChanged):
+  if not isNil(vtbl[].horizontalScrollbarValueChanged):
     vtbl[].vtbl.horizontalScrollbarValueChanged = miqt_exec_callback_cQHeaderView_horizontalScrollbarValueChanged
-  if not isNil(vtbl.closeEditor):
+  if not isNil(vtbl[].closeEditor):
     vtbl[].vtbl.closeEditor = miqt_exec_callback_cQHeaderView_closeEditor
-  if not isNil(vtbl.commitData):
+  if not isNil(vtbl[].commitData):
     vtbl[].vtbl.commitData = miqt_exec_callback_cQHeaderView_commitData
-  if not isNil(vtbl.editorDestroyed):
+  if not isNil(vtbl[].editorDestroyed):
     vtbl[].vtbl.editorDestroyed = miqt_exec_callback_cQHeaderView_editorDestroyed
-  if not isNil(vtbl.selectedIndexes):
+  if not isNil(vtbl[].selectedIndexes):
     vtbl[].vtbl.selectedIndexes = miqt_exec_callback_cQHeaderView_selectedIndexes
-  if not isNil(vtbl.edit2):
+  if not isNil(vtbl[].edit2):
     vtbl[].vtbl.edit2 = miqt_exec_callback_cQHeaderView_edit2
-  if not isNil(vtbl.selectionCommand):
+  if not isNil(vtbl[].selectionCommand):
     vtbl[].vtbl.selectionCommand = miqt_exec_callback_cQHeaderView_selectionCommand
-  if not isNil(vtbl.startDrag):
+  if not isNil(vtbl[].startDrag):
     vtbl[].vtbl.startDrag = miqt_exec_callback_cQHeaderView_startDrag
-  if not isNil(vtbl.initViewItemOption):
+  if not isNil(vtbl[].initViewItemOption):
     vtbl[].vtbl.initViewItemOption = miqt_exec_callback_cQHeaderView_initViewItemOption
-  if not isNil(vtbl.focusNextPrevChild):
+  if not isNil(vtbl[].focusNextPrevChild):
     vtbl[].vtbl.focusNextPrevChild = miqt_exec_callback_cQHeaderView_focusNextPrevChild
-  if not isNil(vtbl.dragEnterEvent):
+  if not isNil(vtbl[].dragEnterEvent):
     vtbl[].vtbl.dragEnterEvent = miqt_exec_callback_cQHeaderView_dragEnterEvent
-  if not isNil(vtbl.dragMoveEvent):
+  if not isNil(vtbl[].dragMoveEvent):
     vtbl[].vtbl.dragMoveEvent = miqt_exec_callback_cQHeaderView_dragMoveEvent
-  if not isNil(vtbl.dragLeaveEvent):
+  if not isNil(vtbl[].dragLeaveEvent):
     vtbl[].vtbl.dragLeaveEvent = miqt_exec_callback_cQHeaderView_dragLeaveEvent
-  if not isNil(vtbl.dropEvent):
+  if not isNil(vtbl[].dropEvent):
     vtbl[].vtbl.dropEvent = miqt_exec_callback_cQHeaderView_dropEvent
-  if not isNil(vtbl.focusInEvent):
+  if not isNil(vtbl[].focusInEvent):
     vtbl[].vtbl.focusInEvent = miqt_exec_callback_cQHeaderView_focusInEvent
-  if not isNil(vtbl.focusOutEvent):
+  if not isNil(vtbl[].focusOutEvent):
     vtbl[].vtbl.focusOutEvent = miqt_exec_callback_cQHeaderView_focusOutEvent
-  if not isNil(vtbl.keyPressEvent):
+  if not isNil(vtbl[].keyPressEvent):
     vtbl[].vtbl.keyPressEvent = miqt_exec_callback_cQHeaderView_keyPressEvent
-  if not isNil(vtbl.resizeEvent):
+  if not isNil(vtbl[].resizeEvent):
     vtbl[].vtbl.resizeEvent = miqt_exec_callback_cQHeaderView_resizeEvent
-  if not isNil(vtbl.timerEvent):
+  if not isNil(vtbl[].timerEvent):
     vtbl[].vtbl.timerEvent = miqt_exec_callback_cQHeaderView_timerEvent
-  if not isNil(vtbl.inputMethodEvent):
+  if not isNil(vtbl[].inputMethodEvent):
     vtbl[].vtbl.inputMethodEvent = miqt_exec_callback_cQHeaderView_inputMethodEvent
-  if not isNil(vtbl.eventFilter):
+  if not isNil(vtbl[].eventFilter):
     vtbl[].vtbl.eventFilter = miqt_exec_callback_cQHeaderView_eventFilter
-  if not isNil(vtbl.viewportSizeHint):
+  if not isNil(vtbl[].viewportSizeHint):
     vtbl[].vtbl.viewportSizeHint = miqt_exec_callback_cQHeaderView_viewportSizeHint
-  if not isNil(vtbl.minimumSizeHint):
+  if not isNil(vtbl[].minimumSizeHint):
     vtbl[].vtbl.minimumSizeHint = miqt_exec_callback_cQHeaderView_minimumSizeHint
-  if not isNil(vtbl.setupViewport):
+  if not isNil(vtbl[].setupViewport):
     vtbl[].vtbl.setupViewport = miqt_exec_callback_cQHeaderView_setupViewport
-  if not isNil(vtbl.wheelEvent):
+  if not isNil(vtbl[].wheelEvent):
     vtbl[].vtbl.wheelEvent = miqt_exec_callback_cQHeaderView_wheelEvent
-  if not isNil(vtbl.contextMenuEvent):
+  if not isNil(vtbl[].contextMenuEvent):
     vtbl[].vtbl.contextMenuEvent = miqt_exec_callback_cQHeaderView_contextMenuEvent
-  if not isNil(vtbl.changeEvent):
+  if not isNil(vtbl[].changeEvent):
     vtbl[].vtbl.changeEvent = miqt_exec_callback_cQHeaderView_changeEvent
-  if not isNil(vtbl.devType):
+  if not isNil(vtbl[].devType):
     vtbl[].vtbl.devType = miqt_exec_callback_cQHeaderView_devType
-  if not isNil(vtbl.heightForWidth):
+  if not isNil(vtbl[].heightForWidth):
     vtbl[].vtbl.heightForWidth = miqt_exec_callback_cQHeaderView_heightForWidth
-  if not isNil(vtbl.hasHeightForWidth):
+  if not isNil(vtbl[].hasHeightForWidth):
     vtbl[].vtbl.hasHeightForWidth = miqt_exec_callback_cQHeaderView_hasHeightForWidth
-  if not isNil(vtbl.paintEngine):
+  if not isNil(vtbl[].paintEngine):
     vtbl[].vtbl.paintEngine = miqt_exec_callback_cQHeaderView_paintEngine
-  if not isNil(vtbl.keyReleaseEvent):
+  if not isNil(vtbl[].keyReleaseEvent):
     vtbl[].vtbl.keyReleaseEvent = miqt_exec_callback_cQHeaderView_keyReleaseEvent
-  if not isNil(vtbl.enterEvent):
+  if not isNil(vtbl[].enterEvent):
     vtbl[].vtbl.enterEvent = miqt_exec_callback_cQHeaderView_enterEvent
-  if not isNil(vtbl.leaveEvent):
+  if not isNil(vtbl[].leaveEvent):
     vtbl[].vtbl.leaveEvent = miqt_exec_callback_cQHeaderView_leaveEvent
-  if not isNil(vtbl.moveEvent):
+  if not isNil(vtbl[].moveEvent):
     vtbl[].vtbl.moveEvent = miqt_exec_callback_cQHeaderView_moveEvent
-  if not isNil(vtbl.closeEvent):
+  if not isNil(vtbl[].closeEvent):
     vtbl[].vtbl.closeEvent = miqt_exec_callback_cQHeaderView_closeEvent
-  if not isNil(vtbl.tabletEvent):
+  if not isNil(vtbl[].tabletEvent):
     vtbl[].vtbl.tabletEvent = miqt_exec_callback_cQHeaderView_tabletEvent
-  if not isNil(vtbl.actionEvent):
+  if not isNil(vtbl[].actionEvent):
     vtbl[].vtbl.actionEvent = miqt_exec_callback_cQHeaderView_actionEvent
-  if not isNil(vtbl.showEvent):
+  if not isNil(vtbl[].showEvent):
     vtbl[].vtbl.showEvent = miqt_exec_callback_cQHeaderView_showEvent
-  if not isNil(vtbl.hideEvent):
+  if not isNil(vtbl[].hideEvent):
     vtbl[].vtbl.hideEvent = miqt_exec_callback_cQHeaderView_hideEvent
-  if not isNil(vtbl.nativeEvent):
+  if not isNil(vtbl[].nativeEvent):
     vtbl[].vtbl.nativeEvent = miqt_exec_callback_cQHeaderView_nativeEvent
-  if not isNil(vtbl.metric):
+  if not isNil(vtbl[].metric):
     vtbl[].vtbl.metric = miqt_exec_callback_cQHeaderView_metric
-  if not isNil(vtbl.initPainter):
+  if not isNil(vtbl[].initPainter):
     vtbl[].vtbl.initPainter = miqt_exec_callback_cQHeaderView_initPainter
-  if not isNil(vtbl.redirected):
+  if not isNil(vtbl[].redirected):
     vtbl[].vtbl.redirected = miqt_exec_callback_cQHeaderView_redirected
-  if not isNil(vtbl.sharedPainter):
+  if not isNil(vtbl[].sharedPainter):
     vtbl[].vtbl.sharedPainter = miqt_exec_callback_cQHeaderView_sharedPainter
-  if not isNil(vtbl.childEvent):
+  if not isNil(vtbl[].childEvent):
     vtbl[].vtbl.childEvent = miqt_exec_callback_cQHeaderView_childEvent
-  if not isNil(vtbl.customEvent):
+  if not isNil(vtbl[].customEvent):
     vtbl[].vtbl.customEvent = miqt_exec_callback_cQHeaderView_customEvent
-  if not isNil(vtbl.connectNotify):
+  if not isNil(vtbl[].connectNotify):
     vtbl[].vtbl.connectNotify = miqt_exec_callback_cQHeaderView_connectNotify
-  if not isNil(vtbl.disconnectNotify):
+  if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQHeaderView_disconnectNotify
-  gen_qheaderview_types.QHeaderView(h: fcQHeaderView_new(addr(vtbl[]), cint(orientation)))
+  gen_qheaderview_types.QHeaderView(h: fcQHeaderView_new(addr(vtbl[].vtbl), cint(orientation)), owned: true)
 
 proc create*(T: type gen_qheaderview_types.QHeaderView,
     orientation: cint, parent: gen_qwidget_types.QWidget,
     vtbl: ref QHeaderViewVTable = nil): gen_qheaderview_types.QHeaderView =
   let vtbl = if vtbl == nil: new QHeaderViewVTable else: vtbl
   GC_ref(vtbl)
-  vtbl.vtbl.destructor = proc(vtbl: ptr cQHeaderViewVTable, _: ptr cQHeaderView) {.cdecl.} =
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQHeaderViewVTable, _: ptr cQHeaderView) {.cdecl.} =
     let vtbl = cast[ref QHeaderViewVTable](vtbl)
     GC_unref(vtbl)
-  if not isNil(vtbl.metaObject):
+  if not isNil(vtbl[].metaObject):
     vtbl[].vtbl.metaObject = miqt_exec_callback_cQHeaderView_metaObject
-  if not isNil(vtbl.metacast):
+  if not isNil(vtbl[].metacast):
     vtbl[].vtbl.metacast = miqt_exec_callback_cQHeaderView_metacast
-  if not isNil(vtbl.metacall):
+  if not isNil(vtbl[].metacall):
     vtbl[].vtbl.metacall = miqt_exec_callback_cQHeaderView_metacall
-  if not isNil(vtbl.setModel):
+  if not isNil(vtbl[].setModel):
     vtbl[].vtbl.setModel = miqt_exec_callback_cQHeaderView_setModel
-  if not isNil(vtbl.sizeHint):
+  if not isNil(vtbl[].sizeHint):
     vtbl[].vtbl.sizeHint = miqt_exec_callback_cQHeaderView_sizeHint
-  if not isNil(vtbl.setVisible):
+  if not isNil(vtbl[].setVisible):
     vtbl[].vtbl.setVisible = miqt_exec_callback_cQHeaderView_setVisible
-  if not isNil(vtbl.doItemsLayout):
+  if not isNil(vtbl[].doItemsLayout):
     vtbl[].vtbl.doItemsLayout = miqt_exec_callback_cQHeaderView_doItemsLayout
-  if not isNil(vtbl.reset):
+  if not isNil(vtbl[].reset):
     vtbl[].vtbl.reset = miqt_exec_callback_cQHeaderView_reset
-  if not isNil(vtbl.currentChanged):
+  if not isNil(vtbl[].currentChanged):
     vtbl[].vtbl.currentChanged = miqt_exec_callback_cQHeaderView_currentChanged
-  if not isNil(vtbl.event):
+  if not isNil(vtbl[].event):
     vtbl[].vtbl.event = miqt_exec_callback_cQHeaderView_event
-  if not isNil(vtbl.paintEvent):
+  if not isNil(vtbl[].paintEvent):
     vtbl[].vtbl.paintEvent = miqt_exec_callback_cQHeaderView_paintEvent
-  if not isNil(vtbl.mousePressEvent):
+  if not isNil(vtbl[].mousePressEvent):
     vtbl[].vtbl.mousePressEvent = miqt_exec_callback_cQHeaderView_mousePressEvent
-  if not isNil(vtbl.mouseMoveEvent):
+  if not isNil(vtbl[].mouseMoveEvent):
     vtbl[].vtbl.mouseMoveEvent = miqt_exec_callback_cQHeaderView_mouseMoveEvent
-  if not isNil(vtbl.mouseReleaseEvent):
+  if not isNil(vtbl[].mouseReleaseEvent):
     vtbl[].vtbl.mouseReleaseEvent = miqt_exec_callback_cQHeaderView_mouseReleaseEvent
-  if not isNil(vtbl.mouseDoubleClickEvent):
+  if not isNil(vtbl[].mouseDoubleClickEvent):
     vtbl[].vtbl.mouseDoubleClickEvent = miqt_exec_callback_cQHeaderView_mouseDoubleClickEvent
-  if not isNil(vtbl.viewportEvent):
+  if not isNil(vtbl[].viewportEvent):
     vtbl[].vtbl.viewportEvent = miqt_exec_callback_cQHeaderView_viewportEvent
-  if not isNil(vtbl.paintSection):
+  if not isNil(vtbl[].paintSection):
     vtbl[].vtbl.paintSection = miqt_exec_callback_cQHeaderView_paintSection
-  if not isNil(vtbl.sectionSizeFromContents):
+  if not isNil(vtbl[].sectionSizeFromContents):
     vtbl[].vtbl.sectionSizeFromContents = miqt_exec_callback_cQHeaderView_sectionSizeFromContents
-  if not isNil(vtbl.horizontalOffset):
+  if not isNil(vtbl[].horizontalOffset):
     vtbl[].vtbl.horizontalOffset = miqt_exec_callback_cQHeaderView_horizontalOffset
-  if not isNil(vtbl.verticalOffset):
+  if not isNil(vtbl[].verticalOffset):
     vtbl[].vtbl.verticalOffset = miqt_exec_callback_cQHeaderView_verticalOffset
-  if not isNil(vtbl.updateGeometries):
+  if not isNil(vtbl[].updateGeometries):
     vtbl[].vtbl.updateGeometries = miqt_exec_callback_cQHeaderView_updateGeometries
-  if not isNil(vtbl.scrollContentsBy):
+  if not isNil(vtbl[].scrollContentsBy):
     vtbl[].vtbl.scrollContentsBy = miqt_exec_callback_cQHeaderView_scrollContentsBy
-  if not isNil(vtbl.dataChanged):
+  if not isNil(vtbl[].dataChanged):
     vtbl[].vtbl.dataChanged = miqt_exec_callback_cQHeaderView_dataChanged
-  if not isNil(vtbl.rowsInserted):
+  if not isNil(vtbl[].rowsInserted):
     vtbl[].vtbl.rowsInserted = miqt_exec_callback_cQHeaderView_rowsInserted
-  if not isNil(vtbl.visualRect):
+  if not isNil(vtbl[].visualRect):
     vtbl[].vtbl.visualRect = miqt_exec_callback_cQHeaderView_visualRect
-  if not isNil(vtbl.scrollTo):
+  if not isNil(vtbl[].scrollTo):
     vtbl[].vtbl.scrollTo = miqt_exec_callback_cQHeaderView_scrollTo
-  if not isNil(vtbl.indexAt):
+  if not isNil(vtbl[].indexAt):
     vtbl[].vtbl.indexAt = miqt_exec_callback_cQHeaderView_indexAt
-  if not isNil(vtbl.isIndexHidden):
+  if not isNil(vtbl[].isIndexHidden):
     vtbl[].vtbl.isIndexHidden = miqt_exec_callback_cQHeaderView_isIndexHidden
-  if not isNil(vtbl.moveCursor):
+  if not isNil(vtbl[].moveCursor):
     vtbl[].vtbl.moveCursor = miqt_exec_callback_cQHeaderView_moveCursor
-  if not isNil(vtbl.setSelection):
+  if not isNil(vtbl[].setSelection):
     vtbl[].vtbl.setSelection = miqt_exec_callback_cQHeaderView_setSelection
-  if not isNil(vtbl.visualRegionForSelection):
+  if not isNil(vtbl[].visualRegionForSelection):
     vtbl[].vtbl.visualRegionForSelection = miqt_exec_callback_cQHeaderView_visualRegionForSelection
-  if not isNil(vtbl.initStyleOptionForIndex):
+  if not isNil(vtbl[].initStyleOptionForIndex):
     vtbl[].vtbl.initStyleOptionForIndex = miqt_exec_callback_cQHeaderView_initStyleOptionForIndex
-  if not isNil(vtbl.initStyleOption):
+  if not isNil(vtbl[].initStyleOption):
     vtbl[].vtbl.initStyleOption = miqt_exec_callback_cQHeaderView_initStyleOption
-  if not isNil(vtbl.setSelectionModel):
+  if not isNil(vtbl[].setSelectionModel):
     vtbl[].vtbl.setSelectionModel = miqt_exec_callback_cQHeaderView_setSelectionModel
-  if not isNil(vtbl.keyboardSearch):
+  if not isNil(vtbl[].keyboardSearch):
     vtbl[].vtbl.keyboardSearch = miqt_exec_callback_cQHeaderView_keyboardSearch
-  if not isNil(vtbl.sizeHintForRow):
+  if not isNil(vtbl[].sizeHintForRow):
     vtbl[].vtbl.sizeHintForRow = miqt_exec_callback_cQHeaderView_sizeHintForRow
-  if not isNil(vtbl.sizeHintForColumn):
+  if not isNil(vtbl[].sizeHintForColumn):
     vtbl[].vtbl.sizeHintForColumn = miqt_exec_callback_cQHeaderView_sizeHintForColumn
-  if not isNil(vtbl.itemDelegateForIndex):
+  if not isNil(vtbl[].itemDelegateForIndex):
     vtbl[].vtbl.itemDelegateForIndex = miqt_exec_callback_cQHeaderView_itemDelegateForIndex
-  if not isNil(vtbl.inputMethodQuery):
+  if not isNil(vtbl[].inputMethodQuery):
     vtbl[].vtbl.inputMethodQuery = miqt_exec_callback_cQHeaderView_inputMethodQuery
-  if not isNil(vtbl.setRootIndex):
+  if not isNil(vtbl[].setRootIndex):
     vtbl[].vtbl.setRootIndex = miqt_exec_callback_cQHeaderView_setRootIndex
-  if not isNil(vtbl.selectAll):
+  if not isNil(vtbl[].selectAll):
     vtbl[].vtbl.selectAll = miqt_exec_callback_cQHeaderView_selectAll
-  if not isNil(vtbl.rowsAboutToBeRemoved):
+  if not isNil(vtbl[].rowsAboutToBeRemoved):
     vtbl[].vtbl.rowsAboutToBeRemoved = miqt_exec_callback_cQHeaderView_rowsAboutToBeRemoved
-  if not isNil(vtbl.selectionChanged):
+  if not isNil(vtbl[].selectionChanged):
     vtbl[].vtbl.selectionChanged = miqt_exec_callback_cQHeaderView_selectionChanged
-  if not isNil(vtbl.updateEditorData):
+  if not isNil(vtbl[].updateEditorData):
     vtbl[].vtbl.updateEditorData = miqt_exec_callback_cQHeaderView_updateEditorData
-  if not isNil(vtbl.updateEditorGeometries):
+  if not isNil(vtbl[].updateEditorGeometries):
     vtbl[].vtbl.updateEditorGeometries = miqt_exec_callback_cQHeaderView_updateEditorGeometries
-  if not isNil(vtbl.verticalScrollbarAction):
+  if not isNil(vtbl[].verticalScrollbarAction):
     vtbl[].vtbl.verticalScrollbarAction = miqt_exec_callback_cQHeaderView_verticalScrollbarAction
-  if not isNil(vtbl.horizontalScrollbarAction):
+  if not isNil(vtbl[].horizontalScrollbarAction):
     vtbl[].vtbl.horizontalScrollbarAction = miqt_exec_callback_cQHeaderView_horizontalScrollbarAction
-  if not isNil(vtbl.verticalScrollbarValueChanged):
+  if not isNil(vtbl[].verticalScrollbarValueChanged):
     vtbl[].vtbl.verticalScrollbarValueChanged = miqt_exec_callback_cQHeaderView_verticalScrollbarValueChanged
-  if not isNil(vtbl.horizontalScrollbarValueChanged):
+  if not isNil(vtbl[].horizontalScrollbarValueChanged):
     vtbl[].vtbl.horizontalScrollbarValueChanged = miqt_exec_callback_cQHeaderView_horizontalScrollbarValueChanged
-  if not isNil(vtbl.closeEditor):
+  if not isNil(vtbl[].closeEditor):
     vtbl[].vtbl.closeEditor = miqt_exec_callback_cQHeaderView_closeEditor
-  if not isNil(vtbl.commitData):
+  if not isNil(vtbl[].commitData):
     vtbl[].vtbl.commitData = miqt_exec_callback_cQHeaderView_commitData
-  if not isNil(vtbl.editorDestroyed):
+  if not isNil(vtbl[].editorDestroyed):
     vtbl[].vtbl.editorDestroyed = miqt_exec_callback_cQHeaderView_editorDestroyed
-  if not isNil(vtbl.selectedIndexes):
+  if not isNil(vtbl[].selectedIndexes):
     vtbl[].vtbl.selectedIndexes = miqt_exec_callback_cQHeaderView_selectedIndexes
-  if not isNil(vtbl.edit2):
+  if not isNil(vtbl[].edit2):
     vtbl[].vtbl.edit2 = miqt_exec_callback_cQHeaderView_edit2
-  if not isNil(vtbl.selectionCommand):
+  if not isNil(vtbl[].selectionCommand):
     vtbl[].vtbl.selectionCommand = miqt_exec_callback_cQHeaderView_selectionCommand
-  if not isNil(vtbl.startDrag):
+  if not isNil(vtbl[].startDrag):
     vtbl[].vtbl.startDrag = miqt_exec_callback_cQHeaderView_startDrag
-  if not isNil(vtbl.initViewItemOption):
+  if not isNil(vtbl[].initViewItemOption):
     vtbl[].vtbl.initViewItemOption = miqt_exec_callback_cQHeaderView_initViewItemOption
-  if not isNil(vtbl.focusNextPrevChild):
+  if not isNil(vtbl[].focusNextPrevChild):
     vtbl[].vtbl.focusNextPrevChild = miqt_exec_callback_cQHeaderView_focusNextPrevChild
-  if not isNil(vtbl.dragEnterEvent):
+  if not isNil(vtbl[].dragEnterEvent):
     vtbl[].vtbl.dragEnterEvent = miqt_exec_callback_cQHeaderView_dragEnterEvent
-  if not isNil(vtbl.dragMoveEvent):
+  if not isNil(vtbl[].dragMoveEvent):
     vtbl[].vtbl.dragMoveEvent = miqt_exec_callback_cQHeaderView_dragMoveEvent
-  if not isNil(vtbl.dragLeaveEvent):
+  if not isNil(vtbl[].dragLeaveEvent):
     vtbl[].vtbl.dragLeaveEvent = miqt_exec_callback_cQHeaderView_dragLeaveEvent
-  if not isNil(vtbl.dropEvent):
+  if not isNil(vtbl[].dropEvent):
     vtbl[].vtbl.dropEvent = miqt_exec_callback_cQHeaderView_dropEvent
-  if not isNil(vtbl.focusInEvent):
+  if not isNil(vtbl[].focusInEvent):
     vtbl[].vtbl.focusInEvent = miqt_exec_callback_cQHeaderView_focusInEvent
-  if not isNil(vtbl.focusOutEvent):
+  if not isNil(vtbl[].focusOutEvent):
     vtbl[].vtbl.focusOutEvent = miqt_exec_callback_cQHeaderView_focusOutEvent
-  if not isNil(vtbl.keyPressEvent):
+  if not isNil(vtbl[].keyPressEvent):
     vtbl[].vtbl.keyPressEvent = miqt_exec_callback_cQHeaderView_keyPressEvent
-  if not isNil(vtbl.resizeEvent):
+  if not isNil(vtbl[].resizeEvent):
     vtbl[].vtbl.resizeEvent = miqt_exec_callback_cQHeaderView_resizeEvent
-  if not isNil(vtbl.timerEvent):
+  if not isNil(vtbl[].timerEvent):
     vtbl[].vtbl.timerEvent = miqt_exec_callback_cQHeaderView_timerEvent
-  if not isNil(vtbl.inputMethodEvent):
+  if not isNil(vtbl[].inputMethodEvent):
     vtbl[].vtbl.inputMethodEvent = miqt_exec_callback_cQHeaderView_inputMethodEvent
-  if not isNil(vtbl.eventFilter):
+  if not isNil(vtbl[].eventFilter):
     vtbl[].vtbl.eventFilter = miqt_exec_callback_cQHeaderView_eventFilter
-  if not isNil(vtbl.viewportSizeHint):
+  if not isNil(vtbl[].viewportSizeHint):
     vtbl[].vtbl.viewportSizeHint = miqt_exec_callback_cQHeaderView_viewportSizeHint
-  if not isNil(vtbl.minimumSizeHint):
+  if not isNil(vtbl[].minimumSizeHint):
     vtbl[].vtbl.minimumSizeHint = miqt_exec_callback_cQHeaderView_minimumSizeHint
-  if not isNil(vtbl.setupViewport):
+  if not isNil(vtbl[].setupViewport):
     vtbl[].vtbl.setupViewport = miqt_exec_callback_cQHeaderView_setupViewport
-  if not isNil(vtbl.wheelEvent):
+  if not isNil(vtbl[].wheelEvent):
     vtbl[].vtbl.wheelEvent = miqt_exec_callback_cQHeaderView_wheelEvent
-  if not isNil(vtbl.contextMenuEvent):
+  if not isNil(vtbl[].contextMenuEvent):
     vtbl[].vtbl.contextMenuEvent = miqt_exec_callback_cQHeaderView_contextMenuEvent
-  if not isNil(vtbl.changeEvent):
+  if not isNil(vtbl[].changeEvent):
     vtbl[].vtbl.changeEvent = miqt_exec_callback_cQHeaderView_changeEvent
-  if not isNil(vtbl.devType):
+  if not isNil(vtbl[].devType):
     vtbl[].vtbl.devType = miqt_exec_callback_cQHeaderView_devType
-  if not isNil(vtbl.heightForWidth):
+  if not isNil(vtbl[].heightForWidth):
     vtbl[].vtbl.heightForWidth = miqt_exec_callback_cQHeaderView_heightForWidth
-  if not isNil(vtbl.hasHeightForWidth):
+  if not isNil(vtbl[].hasHeightForWidth):
     vtbl[].vtbl.hasHeightForWidth = miqt_exec_callback_cQHeaderView_hasHeightForWidth
-  if not isNil(vtbl.paintEngine):
+  if not isNil(vtbl[].paintEngine):
     vtbl[].vtbl.paintEngine = miqt_exec_callback_cQHeaderView_paintEngine
-  if not isNil(vtbl.keyReleaseEvent):
+  if not isNil(vtbl[].keyReleaseEvent):
     vtbl[].vtbl.keyReleaseEvent = miqt_exec_callback_cQHeaderView_keyReleaseEvent
-  if not isNil(vtbl.enterEvent):
+  if not isNil(vtbl[].enterEvent):
     vtbl[].vtbl.enterEvent = miqt_exec_callback_cQHeaderView_enterEvent
-  if not isNil(vtbl.leaveEvent):
+  if not isNil(vtbl[].leaveEvent):
     vtbl[].vtbl.leaveEvent = miqt_exec_callback_cQHeaderView_leaveEvent
-  if not isNil(vtbl.moveEvent):
+  if not isNil(vtbl[].moveEvent):
     vtbl[].vtbl.moveEvent = miqt_exec_callback_cQHeaderView_moveEvent
-  if not isNil(vtbl.closeEvent):
+  if not isNil(vtbl[].closeEvent):
     vtbl[].vtbl.closeEvent = miqt_exec_callback_cQHeaderView_closeEvent
-  if not isNil(vtbl.tabletEvent):
+  if not isNil(vtbl[].tabletEvent):
     vtbl[].vtbl.tabletEvent = miqt_exec_callback_cQHeaderView_tabletEvent
-  if not isNil(vtbl.actionEvent):
+  if not isNil(vtbl[].actionEvent):
     vtbl[].vtbl.actionEvent = miqt_exec_callback_cQHeaderView_actionEvent
-  if not isNil(vtbl.showEvent):
+  if not isNil(vtbl[].showEvent):
     vtbl[].vtbl.showEvent = miqt_exec_callback_cQHeaderView_showEvent
-  if not isNil(vtbl.hideEvent):
+  if not isNil(vtbl[].hideEvent):
     vtbl[].vtbl.hideEvent = miqt_exec_callback_cQHeaderView_hideEvent
-  if not isNil(vtbl.nativeEvent):
+  if not isNil(vtbl[].nativeEvent):
     vtbl[].vtbl.nativeEvent = miqt_exec_callback_cQHeaderView_nativeEvent
-  if not isNil(vtbl.metric):
+  if not isNil(vtbl[].metric):
     vtbl[].vtbl.metric = miqt_exec_callback_cQHeaderView_metric
-  if not isNil(vtbl.initPainter):
+  if not isNil(vtbl[].initPainter):
     vtbl[].vtbl.initPainter = miqt_exec_callback_cQHeaderView_initPainter
-  if not isNil(vtbl.redirected):
+  if not isNil(vtbl[].redirected):
     vtbl[].vtbl.redirected = miqt_exec_callback_cQHeaderView_redirected
-  if not isNil(vtbl.sharedPainter):
+  if not isNil(vtbl[].sharedPainter):
     vtbl[].vtbl.sharedPainter = miqt_exec_callback_cQHeaderView_sharedPainter
-  if not isNil(vtbl.childEvent):
+  if not isNil(vtbl[].childEvent):
     vtbl[].vtbl.childEvent = miqt_exec_callback_cQHeaderView_childEvent
-  if not isNil(vtbl.customEvent):
+  if not isNil(vtbl[].customEvent):
     vtbl[].vtbl.customEvent = miqt_exec_callback_cQHeaderView_customEvent
-  if not isNil(vtbl.connectNotify):
+  if not isNil(vtbl[].connectNotify):
     vtbl[].vtbl.connectNotify = miqt_exec_callback_cQHeaderView_connectNotify
-  if not isNil(vtbl.disconnectNotify):
+  if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQHeaderView_disconnectNotify
-  gen_qheaderview_types.QHeaderView(h: fcQHeaderView_new2(addr(vtbl[]), cint(orientation), parent.h))
+  gen_qheaderview_types.QHeaderView(h: fcQHeaderView_new2(addr(vtbl[].vtbl), cint(orientation), parent.h), owned: true)
+
+proc create*(T: type gen_qheaderview_types.QHeaderView,
+    orientation: cint,
+    vtbl: VirtualQHeaderView) =
+
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQHeaderViewVTable, _: ptr cQHeaderView) {.cdecl.} =
+    let vtbl = cast[ptr typeof(VirtualQHeaderView()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQHeaderView, vtbl)))
+    vtbl[].h = nil
+    vtbl[].owned = false
+  vtbl[].vtbl.metaObject = miqt_exec_method_cQHeaderView_metaObject
+  vtbl[].vtbl.metacast = miqt_exec_method_cQHeaderView_metacast
+  vtbl[].vtbl.metacall = miqt_exec_method_cQHeaderView_metacall
+  vtbl[].vtbl.setModel = miqt_exec_method_cQHeaderView_setModel
+  vtbl[].vtbl.sizeHint = miqt_exec_method_cQHeaderView_sizeHint
+  vtbl[].vtbl.setVisible = miqt_exec_method_cQHeaderView_setVisible
+  vtbl[].vtbl.doItemsLayout = miqt_exec_method_cQHeaderView_doItemsLayout
+  vtbl[].vtbl.reset = miqt_exec_method_cQHeaderView_reset
+  vtbl[].vtbl.currentChanged = miqt_exec_method_cQHeaderView_currentChanged
+  vtbl[].vtbl.event = miqt_exec_method_cQHeaderView_event
+  vtbl[].vtbl.paintEvent = miqt_exec_method_cQHeaderView_paintEvent
+  vtbl[].vtbl.mousePressEvent = miqt_exec_method_cQHeaderView_mousePressEvent
+  vtbl[].vtbl.mouseMoveEvent = miqt_exec_method_cQHeaderView_mouseMoveEvent
+  vtbl[].vtbl.mouseReleaseEvent = miqt_exec_method_cQHeaderView_mouseReleaseEvent
+  vtbl[].vtbl.mouseDoubleClickEvent = miqt_exec_method_cQHeaderView_mouseDoubleClickEvent
+  vtbl[].vtbl.viewportEvent = miqt_exec_method_cQHeaderView_viewportEvent
+  vtbl[].vtbl.paintSection = miqt_exec_method_cQHeaderView_paintSection
+  vtbl[].vtbl.sectionSizeFromContents = miqt_exec_method_cQHeaderView_sectionSizeFromContents
+  vtbl[].vtbl.horizontalOffset = miqt_exec_method_cQHeaderView_horizontalOffset
+  vtbl[].vtbl.verticalOffset = miqt_exec_method_cQHeaderView_verticalOffset
+  vtbl[].vtbl.updateGeometries = miqt_exec_method_cQHeaderView_updateGeometries
+  vtbl[].vtbl.scrollContentsBy = miqt_exec_method_cQHeaderView_scrollContentsBy
+  vtbl[].vtbl.dataChanged = miqt_exec_method_cQHeaderView_dataChanged
+  vtbl[].vtbl.rowsInserted = miqt_exec_method_cQHeaderView_rowsInserted
+  vtbl[].vtbl.visualRect = miqt_exec_method_cQHeaderView_visualRect
+  vtbl[].vtbl.scrollTo = miqt_exec_method_cQHeaderView_scrollTo
+  vtbl[].vtbl.indexAt = miqt_exec_method_cQHeaderView_indexAt
+  vtbl[].vtbl.isIndexHidden = miqt_exec_method_cQHeaderView_isIndexHidden
+  vtbl[].vtbl.moveCursor = miqt_exec_method_cQHeaderView_moveCursor
+  vtbl[].vtbl.setSelection = miqt_exec_method_cQHeaderView_setSelection
+  vtbl[].vtbl.visualRegionForSelection = miqt_exec_method_cQHeaderView_visualRegionForSelection
+  vtbl[].vtbl.initStyleOptionForIndex = miqt_exec_method_cQHeaderView_initStyleOptionForIndex
+  vtbl[].vtbl.initStyleOption = miqt_exec_method_cQHeaderView_initStyleOption
+  vtbl[].vtbl.setSelectionModel = miqt_exec_method_cQHeaderView_setSelectionModel
+  vtbl[].vtbl.keyboardSearch = miqt_exec_method_cQHeaderView_keyboardSearch
+  vtbl[].vtbl.sizeHintForRow = miqt_exec_method_cQHeaderView_sizeHintForRow
+  vtbl[].vtbl.sizeHintForColumn = miqt_exec_method_cQHeaderView_sizeHintForColumn
+  vtbl[].vtbl.itemDelegateForIndex = miqt_exec_method_cQHeaderView_itemDelegateForIndex
+  vtbl[].vtbl.inputMethodQuery = miqt_exec_method_cQHeaderView_inputMethodQuery
+  vtbl[].vtbl.setRootIndex = miqt_exec_method_cQHeaderView_setRootIndex
+  vtbl[].vtbl.selectAll = miqt_exec_method_cQHeaderView_selectAll
+  vtbl[].vtbl.rowsAboutToBeRemoved = miqt_exec_method_cQHeaderView_rowsAboutToBeRemoved
+  vtbl[].vtbl.selectionChanged = miqt_exec_method_cQHeaderView_selectionChanged
+  vtbl[].vtbl.updateEditorData = miqt_exec_method_cQHeaderView_updateEditorData
+  vtbl[].vtbl.updateEditorGeometries = miqt_exec_method_cQHeaderView_updateEditorGeometries
+  vtbl[].vtbl.verticalScrollbarAction = miqt_exec_method_cQHeaderView_verticalScrollbarAction
+  vtbl[].vtbl.horizontalScrollbarAction = miqt_exec_method_cQHeaderView_horizontalScrollbarAction
+  vtbl[].vtbl.verticalScrollbarValueChanged = miqt_exec_method_cQHeaderView_verticalScrollbarValueChanged
+  vtbl[].vtbl.horizontalScrollbarValueChanged = miqt_exec_method_cQHeaderView_horizontalScrollbarValueChanged
+  vtbl[].vtbl.closeEditor = miqt_exec_method_cQHeaderView_closeEditor
+  vtbl[].vtbl.commitData = miqt_exec_method_cQHeaderView_commitData
+  vtbl[].vtbl.editorDestroyed = miqt_exec_method_cQHeaderView_editorDestroyed
+  vtbl[].vtbl.selectedIndexes = miqt_exec_method_cQHeaderView_selectedIndexes
+  vtbl[].vtbl.edit = miqt_exec_method_cQHeaderView_edit2
+  vtbl[].vtbl.selectionCommand = miqt_exec_method_cQHeaderView_selectionCommand
+  vtbl[].vtbl.startDrag = miqt_exec_method_cQHeaderView_startDrag
+  vtbl[].vtbl.initViewItemOption = miqt_exec_method_cQHeaderView_initViewItemOption
+  vtbl[].vtbl.focusNextPrevChild = miqt_exec_method_cQHeaderView_focusNextPrevChild
+  vtbl[].vtbl.dragEnterEvent = miqt_exec_method_cQHeaderView_dragEnterEvent
+  vtbl[].vtbl.dragMoveEvent = miqt_exec_method_cQHeaderView_dragMoveEvent
+  vtbl[].vtbl.dragLeaveEvent = miqt_exec_method_cQHeaderView_dragLeaveEvent
+  vtbl[].vtbl.dropEvent = miqt_exec_method_cQHeaderView_dropEvent
+  vtbl[].vtbl.focusInEvent = miqt_exec_method_cQHeaderView_focusInEvent
+  vtbl[].vtbl.focusOutEvent = miqt_exec_method_cQHeaderView_focusOutEvent
+  vtbl[].vtbl.keyPressEvent = miqt_exec_method_cQHeaderView_keyPressEvent
+  vtbl[].vtbl.resizeEvent = miqt_exec_method_cQHeaderView_resizeEvent
+  vtbl[].vtbl.timerEvent = miqt_exec_method_cQHeaderView_timerEvent
+  vtbl[].vtbl.inputMethodEvent = miqt_exec_method_cQHeaderView_inputMethodEvent
+  vtbl[].vtbl.eventFilter = miqt_exec_method_cQHeaderView_eventFilter
+  vtbl[].vtbl.viewportSizeHint = miqt_exec_method_cQHeaderView_viewportSizeHint
+  vtbl[].vtbl.minimumSizeHint = miqt_exec_method_cQHeaderView_minimumSizeHint
+  vtbl[].vtbl.setupViewport = miqt_exec_method_cQHeaderView_setupViewport
+  vtbl[].vtbl.wheelEvent = miqt_exec_method_cQHeaderView_wheelEvent
+  vtbl[].vtbl.contextMenuEvent = miqt_exec_method_cQHeaderView_contextMenuEvent
+  vtbl[].vtbl.changeEvent = miqt_exec_method_cQHeaderView_changeEvent
+  vtbl[].vtbl.devType = miqt_exec_method_cQHeaderView_devType
+  vtbl[].vtbl.heightForWidth = miqt_exec_method_cQHeaderView_heightForWidth
+  vtbl[].vtbl.hasHeightForWidth = miqt_exec_method_cQHeaderView_hasHeightForWidth
+  vtbl[].vtbl.paintEngine = miqt_exec_method_cQHeaderView_paintEngine
+  vtbl[].vtbl.keyReleaseEvent = miqt_exec_method_cQHeaderView_keyReleaseEvent
+  vtbl[].vtbl.enterEvent = miqt_exec_method_cQHeaderView_enterEvent
+  vtbl[].vtbl.leaveEvent = miqt_exec_method_cQHeaderView_leaveEvent
+  vtbl[].vtbl.moveEvent = miqt_exec_method_cQHeaderView_moveEvent
+  vtbl[].vtbl.closeEvent = miqt_exec_method_cQHeaderView_closeEvent
+  vtbl[].vtbl.tabletEvent = miqt_exec_method_cQHeaderView_tabletEvent
+  vtbl[].vtbl.actionEvent = miqt_exec_method_cQHeaderView_actionEvent
+  vtbl[].vtbl.showEvent = miqt_exec_method_cQHeaderView_showEvent
+  vtbl[].vtbl.hideEvent = miqt_exec_method_cQHeaderView_hideEvent
+  vtbl[].vtbl.nativeEvent = miqt_exec_method_cQHeaderView_nativeEvent
+  vtbl[].vtbl.metric = miqt_exec_method_cQHeaderView_metric
+  vtbl[].vtbl.initPainter = miqt_exec_method_cQHeaderView_initPainter
+  vtbl[].vtbl.redirected = miqt_exec_method_cQHeaderView_redirected
+  vtbl[].vtbl.sharedPainter = miqt_exec_method_cQHeaderView_sharedPainter
+  vtbl[].vtbl.childEvent = miqt_exec_method_cQHeaderView_childEvent
+  vtbl[].vtbl.customEvent = miqt_exec_method_cQHeaderView_customEvent
+  vtbl[].vtbl.connectNotify = miqt_exec_method_cQHeaderView_connectNotify
+  vtbl[].vtbl.disconnectNotify = miqt_exec_method_cQHeaderView_disconnectNotify
+  if vtbl[].h != nil: delete(move(vtbl[]))
+  vtbl[].h = fcQHeaderView_new(addr(vtbl[].vtbl), cint(orientation))
+  vtbl[].owned = true
+
+proc create*(T: type gen_qheaderview_types.QHeaderView,
+    orientation: cint, parent: gen_qwidget_types.QWidget,
+    vtbl: VirtualQHeaderView) =
+
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQHeaderViewVTable, _: ptr cQHeaderView) {.cdecl.} =
+    let vtbl = cast[ptr typeof(VirtualQHeaderView()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQHeaderView, vtbl)))
+    vtbl[].h = nil
+    vtbl[].owned = false
+  vtbl[].vtbl.metaObject = miqt_exec_method_cQHeaderView_metaObject
+  vtbl[].vtbl.metacast = miqt_exec_method_cQHeaderView_metacast
+  vtbl[].vtbl.metacall = miqt_exec_method_cQHeaderView_metacall
+  vtbl[].vtbl.setModel = miqt_exec_method_cQHeaderView_setModel
+  vtbl[].vtbl.sizeHint = miqt_exec_method_cQHeaderView_sizeHint
+  vtbl[].vtbl.setVisible = miqt_exec_method_cQHeaderView_setVisible
+  vtbl[].vtbl.doItemsLayout = miqt_exec_method_cQHeaderView_doItemsLayout
+  vtbl[].vtbl.reset = miqt_exec_method_cQHeaderView_reset
+  vtbl[].vtbl.currentChanged = miqt_exec_method_cQHeaderView_currentChanged
+  vtbl[].vtbl.event = miqt_exec_method_cQHeaderView_event
+  vtbl[].vtbl.paintEvent = miqt_exec_method_cQHeaderView_paintEvent
+  vtbl[].vtbl.mousePressEvent = miqt_exec_method_cQHeaderView_mousePressEvent
+  vtbl[].vtbl.mouseMoveEvent = miqt_exec_method_cQHeaderView_mouseMoveEvent
+  vtbl[].vtbl.mouseReleaseEvent = miqt_exec_method_cQHeaderView_mouseReleaseEvent
+  vtbl[].vtbl.mouseDoubleClickEvent = miqt_exec_method_cQHeaderView_mouseDoubleClickEvent
+  vtbl[].vtbl.viewportEvent = miqt_exec_method_cQHeaderView_viewportEvent
+  vtbl[].vtbl.paintSection = miqt_exec_method_cQHeaderView_paintSection
+  vtbl[].vtbl.sectionSizeFromContents = miqt_exec_method_cQHeaderView_sectionSizeFromContents
+  vtbl[].vtbl.horizontalOffset = miqt_exec_method_cQHeaderView_horizontalOffset
+  vtbl[].vtbl.verticalOffset = miqt_exec_method_cQHeaderView_verticalOffset
+  vtbl[].vtbl.updateGeometries = miqt_exec_method_cQHeaderView_updateGeometries
+  vtbl[].vtbl.scrollContentsBy = miqt_exec_method_cQHeaderView_scrollContentsBy
+  vtbl[].vtbl.dataChanged = miqt_exec_method_cQHeaderView_dataChanged
+  vtbl[].vtbl.rowsInserted = miqt_exec_method_cQHeaderView_rowsInserted
+  vtbl[].vtbl.visualRect = miqt_exec_method_cQHeaderView_visualRect
+  vtbl[].vtbl.scrollTo = miqt_exec_method_cQHeaderView_scrollTo
+  vtbl[].vtbl.indexAt = miqt_exec_method_cQHeaderView_indexAt
+  vtbl[].vtbl.isIndexHidden = miqt_exec_method_cQHeaderView_isIndexHidden
+  vtbl[].vtbl.moveCursor = miqt_exec_method_cQHeaderView_moveCursor
+  vtbl[].vtbl.setSelection = miqt_exec_method_cQHeaderView_setSelection
+  vtbl[].vtbl.visualRegionForSelection = miqt_exec_method_cQHeaderView_visualRegionForSelection
+  vtbl[].vtbl.initStyleOptionForIndex = miqt_exec_method_cQHeaderView_initStyleOptionForIndex
+  vtbl[].vtbl.initStyleOption = miqt_exec_method_cQHeaderView_initStyleOption
+  vtbl[].vtbl.setSelectionModel = miqt_exec_method_cQHeaderView_setSelectionModel
+  vtbl[].vtbl.keyboardSearch = miqt_exec_method_cQHeaderView_keyboardSearch
+  vtbl[].vtbl.sizeHintForRow = miqt_exec_method_cQHeaderView_sizeHintForRow
+  vtbl[].vtbl.sizeHintForColumn = miqt_exec_method_cQHeaderView_sizeHintForColumn
+  vtbl[].vtbl.itemDelegateForIndex = miqt_exec_method_cQHeaderView_itemDelegateForIndex
+  vtbl[].vtbl.inputMethodQuery = miqt_exec_method_cQHeaderView_inputMethodQuery
+  vtbl[].vtbl.setRootIndex = miqt_exec_method_cQHeaderView_setRootIndex
+  vtbl[].vtbl.selectAll = miqt_exec_method_cQHeaderView_selectAll
+  vtbl[].vtbl.rowsAboutToBeRemoved = miqt_exec_method_cQHeaderView_rowsAboutToBeRemoved
+  vtbl[].vtbl.selectionChanged = miqt_exec_method_cQHeaderView_selectionChanged
+  vtbl[].vtbl.updateEditorData = miqt_exec_method_cQHeaderView_updateEditorData
+  vtbl[].vtbl.updateEditorGeometries = miqt_exec_method_cQHeaderView_updateEditorGeometries
+  vtbl[].vtbl.verticalScrollbarAction = miqt_exec_method_cQHeaderView_verticalScrollbarAction
+  vtbl[].vtbl.horizontalScrollbarAction = miqt_exec_method_cQHeaderView_horizontalScrollbarAction
+  vtbl[].vtbl.verticalScrollbarValueChanged = miqt_exec_method_cQHeaderView_verticalScrollbarValueChanged
+  vtbl[].vtbl.horizontalScrollbarValueChanged = miqt_exec_method_cQHeaderView_horizontalScrollbarValueChanged
+  vtbl[].vtbl.closeEditor = miqt_exec_method_cQHeaderView_closeEditor
+  vtbl[].vtbl.commitData = miqt_exec_method_cQHeaderView_commitData
+  vtbl[].vtbl.editorDestroyed = miqt_exec_method_cQHeaderView_editorDestroyed
+  vtbl[].vtbl.selectedIndexes = miqt_exec_method_cQHeaderView_selectedIndexes
+  vtbl[].vtbl.edit = miqt_exec_method_cQHeaderView_edit2
+  vtbl[].vtbl.selectionCommand = miqt_exec_method_cQHeaderView_selectionCommand
+  vtbl[].vtbl.startDrag = miqt_exec_method_cQHeaderView_startDrag
+  vtbl[].vtbl.initViewItemOption = miqt_exec_method_cQHeaderView_initViewItemOption
+  vtbl[].vtbl.focusNextPrevChild = miqt_exec_method_cQHeaderView_focusNextPrevChild
+  vtbl[].vtbl.dragEnterEvent = miqt_exec_method_cQHeaderView_dragEnterEvent
+  vtbl[].vtbl.dragMoveEvent = miqt_exec_method_cQHeaderView_dragMoveEvent
+  vtbl[].vtbl.dragLeaveEvent = miqt_exec_method_cQHeaderView_dragLeaveEvent
+  vtbl[].vtbl.dropEvent = miqt_exec_method_cQHeaderView_dropEvent
+  vtbl[].vtbl.focusInEvent = miqt_exec_method_cQHeaderView_focusInEvent
+  vtbl[].vtbl.focusOutEvent = miqt_exec_method_cQHeaderView_focusOutEvent
+  vtbl[].vtbl.keyPressEvent = miqt_exec_method_cQHeaderView_keyPressEvent
+  vtbl[].vtbl.resizeEvent = miqt_exec_method_cQHeaderView_resizeEvent
+  vtbl[].vtbl.timerEvent = miqt_exec_method_cQHeaderView_timerEvent
+  vtbl[].vtbl.inputMethodEvent = miqt_exec_method_cQHeaderView_inputMethodEvent
+  vtbl[].vtbl.eventFilter = miqt_exec_method_cQHeaderView_eventFilter
+  vtbl[].vtbl.viewportSizeHint = miqt_exec_method_cQHeaderView_viewportSizeHint
+  vtbl[].vtbl.minimumSizeHint = miqt_exec_method_cQHeaderView_minimumSizeHint
+  vtbl[].vtbl.setupViewport = miqt_exec_method_cQHeaderView_setupViewport
+  vtbl[].vtbl.wheelEvent = miqt_exec_method_cQHeaderView_wheelEvent
+  vtbl[].vtbl.contextMenuEvent = miqt_exec_method_cQHeaderView_contextMenuEvent
+  vtbl[].vtbl.changeEvent = miqt_exec_method_cQHeaderView_changeEvent
+  vtbl[].vtbl.devType = miqt_exec_method_cQHeaderView_devType
+  vtbl[].vtbl.heightForWidth = miqt_exec_method_cQHeaderView_heightForWidth
+  vtbl[].vtbl.hasHeightForWidth = miqt_exec_method_cQHeaderView_hasHeightForWidth
+  vtbl[].vtbl.paintEngine = miqt_exec_method_cQHeaderView_paintEngine
+  vtbl[].vtbl.keyReleaseEvent = miqt_exec_method_cQHeaderView_keyReleaseEvent
+  vtbl[].vtbl.enterEvent = miqt_exec_method_cQHeaderView_enterEvent
+  vtbl[].vtbl.leaveEvent = miqt_exec_method_cQHeaderView_leaveEvent
+  vtbl[].vtbl.moveEvent = miqt_exec_method_cQHeaderView_moveEvent
+  vtbl[].vtbl.closeEvent = miqt_exec_method_cQHeaderView_closeEvent
+  vtbl[].vtbl.tabletEvent = miqt_exec_method_cQHeaderView_tabletEvent
+  vtbl[].vtbl.actionEvent = miqt_exec_method_cQHeaderView_actionEvent
+  vtbl[].vtbl.showEvent = miqt_exec_method_cQHeaderView_showEvent
+  vtbl[].vtbl.hideEvent = miqt_exec_method_cQHeaderView_hideEvent
+  vtbl[].vtbl.nativeEvent = miqt_exec_method_cQHeaderView_nativeEvent
+  vtbl[].vtbl.metric = miqt_exec_method_cQHeaderView_metric
+  vtbl[].vtbl.initPainter = miqt_exec_method_cQHeaderView_initPainter
+  vtbl[].vtbl.redirected = miqt_exec_method_cQHeaderView_redirected
+  vtbl[].vtbl.sharedPainter = miqt_exec_method_cQHeaderView_sharedPainter
+  vtbl[].vtbl.childEvent = miqt_exec_method_cQHeaderView_childEvent
+  vtbl[].vtbl.customEvent = miqt_exec_method_cQHeaderView_customEvent
+  vtbl[].vtbl.connectNotify = miqt_exec_method_cQHeaderView_connectNotify
+  vtbl[].vtbl.disconnectNotify = miqt_exec_method_cQHeaderView_disconnectNotify
+  if vtbl[].h != nil: delete(move(vtbl[]))
+  vtbl[].h = fcQHeaderView_new2(addr(vtbl[].vtbl), cint(orientation), parent.h)
+  vtbl[].owned = true
 
 proc staticMetaObject*(_: type gen_qheaderview_types.QHeaderView): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQHeaderView_staticMetaObject())
-proc delete*(self: gen_qheaderview_types.QHeaderView) =
-  fcQHeaderView_delete(self.h)

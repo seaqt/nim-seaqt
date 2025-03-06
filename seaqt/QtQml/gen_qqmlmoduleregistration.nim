@@ -30,9 +30,6 @@ func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
     else:
       copyMem(addr result[0], unsafeAddr v[0], v.len)
 
-const cflags = gorge("pkg-config --cflags Qt6Qml")  & " -fPIC"
-{.compile("gen_qqmlmoduleregistration.cpp", cflags).}
-
 
 import ./gen_qqmlmoduleregistration_types
 export gen_qqmlmoduleregistration_types
@@ -40,7 +37,4 @@ export gen_qqmlmoduleregistration_types
 
 type cQQmlModuleRegistration*{.exportc: "QQmlModuleRegistration", incompleteStruct.} = object
 
-proc fcQQmlModuleRegistration_delete(self: pointer) {.importc: "QQmlModuleRegistration_delete".}
 
-proc delete*(self: gen_qqmlmoduleregistration_types.QQmlModuleRegistration) =
-  fcQQmlModuleRegistration_delete(self.h)

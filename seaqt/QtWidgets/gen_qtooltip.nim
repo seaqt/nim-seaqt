@@ -30,9 +30,6 @@ func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
     else:
       copyMem(addr result[0], unsafeAddr v[0], v.len)
 
-const cflags = gorge("pkg-config --cflags Qt6Widgets")  & " -fPIC"
-{.compile("gen_qtooltip.cpp", cflags).}
-
 
 import ./gen_qtooltip_types
 export gen_qtooltip_types
@@ -63,7 +60,6 @@ proc fcQToolTip_setFont(font: pointer): void {.importc: "QToolTip_setFont".}
 proc fcQToolTip_showText3(pos: pointer, text: struct_miqt_string, w: pointer): void {.importc: "QToolTip_showText3".}
 proc fcQToolTip_showText4(pos: pointer, text: struct_miqt_string, w: pointer, rect: pointer): void {.importc: "QToolTip_showText4".}
 proc fcQToolTip_showText5(pos: pointer, text: struct_miqt_string, w: pointer, rect: pointer, msecShowTime: cint): void {.importc: "QToolTip_showText5".}
-proc fcQToolTip_delete(self: pointer) {.importc: "QToolTip_delete".}
 
 proc showText*(_: type gen_qtooltip_types.QToolTip, pos: gen_qpoint_types.QPoint, text: string): void =
   fcQToolTip_showText(pos.h, struct_miqt_string(data: text, len: csize_t(len(text))))
@@ -81,13 +77,13 @@ proc text*(_: type gen_qtooltip_types.QToolTip, ): string =
   vx_ret
 
 proc palette*(_: type gen_qtooltip_types.QToolTip, ): gen_qpalette_types.QPalette =
-  gen_qpalette_types.QPalette(h: fcQToolTip_palette())
+  gen_qpalette_types.QPalette(h: fcQToolTip_palette(), owned: true)
 
 proc setPalette*(_: type gen_qtooltip_types.QToolTip, palette: gen_qpalette_types.QPalette): void =
   fcQToolTip_setPalette(palette.h)
 
 proc font*(_: type gen_qtooltip_types.QToolTip, ): gen_qfont_types.QFont =
-  gen_qfont_types.QFont(h: fcQToolTip_font())
+  gen_qfont_types.QFont(h: fcQToolTip_font(), owned: true)
 
 proc setFont*(_: type gen_qtooltip_types.QToolTip, font: gen_qfont_types.QFont): void =
   fcQToolTip_setFont(font.h)
@@ -101,5 +97,3 @@ proc showText*(_: type gen_qtooltip_types.QToolTip, pos: gen_qpoint_types.QPoint
 proc showText*(_: type gen_qtooltip_types.QToolTip, pos: gen_qpoint_types.QPoint, text: string, w: gen_qwidget_types.QWidget, rect: gen_qrect_types.QRect, msecShowTime: cint): void =
   fcQToolTip_showText5(pos.h, struct_miqt_string(data: text, len: csize_t(len(text))), w.h, rect.h, msecShowTime)
 
-proc delete*(self: gen_qtooltip_types.QToolTip) =
-  fcQToolTip_delete(self.h)

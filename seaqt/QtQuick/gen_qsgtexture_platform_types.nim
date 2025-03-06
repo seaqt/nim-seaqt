@@ -1,4 +1,8 @@
-type QNativeInterfaceQSGOpenGLTexture* {.inheritable, pure.} = object
+type QNativeInterfaceQSGOpenGLTexture* {.inheritable.} = object
   h*: pointer
-type QNativeInterfaceQSGVulkanTexture* {.inheritable, pure.} = object
+  owned*: bool
+
+type QNativeInterfaceQSGVulkanTexture* {.inheritable.} = object
   h*: pointer
+  owned*: bool
+

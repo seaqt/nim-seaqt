@@ -30,9 +30,6 @@ func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
     else:
       copyMem(addr result[0], unsafeAddr v[0], v.len)
 
-const cflags = gorge("pkg-config --cflags Qt6PrintSupport")  & " -fPIC"
-{.compile("gen_qprintengine.cpp", cflags).}
-
 
 type QPrintEnginePrintEnginePropertyKeyEnum* = distinct cint
 template PPK_CollateCopies*(_: type QPrintEnginePrintEnginePropertyKeyEnum): untyped = 0
@@ -86,13 +83,12 @@ proc fcQPrintEngine_abort(self: pointer, ): bool {.importc: "QPrintEngine_abort"
 proc fcQPrintEngine_metric(self: pointer, param1: cint): cint {.importc: "QPrintEngine_metric".}
 proc fcQPrintEngine_printerState(self: pointer, ): cint {.importc: "QPrintEngine_printerState".}
 proc fcQPrintEngine_operatorAssign(self: pointer, param1: pointer): void {.importc: "QPrintEngine_operatorAssign".}
-proc fcQPrintEngine_delete(self: pointer) {.importc: "QPrintEngine_delete".}
 
 proc setProperty*(self: gen_qprintengine_types.QPrintEngine, key: cint, value: gen_qvariant_types.QVariant): void =
   fcQPrintEngine_setProperty(self.h, cint(key), value.h)
 
 proc property*(self: gen_qprintengine_types.QPrintEngine, key: cint): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQPrintEngine_property(self.h, cint(key)))
+  gen_qvariant_types.QVariant(h: fcQPrintEngine_property(self.h, cint(key)), owned: true)
 
 proc newPage*(self: gen_qprintengine_types.QPrintEngine, ): bool =
   fcQPrintEngine_newPage(self.h)
@@ -109,5 +105,3 @@ proc printerState*(self: gen_qprintengine_types.QPrintEngine, ): cint =
 proc operatorAssign*(self: gen_qprintengine_types.QPrintEngine, param1: gen_qprintengine_types.QPrintEngine): void =
   fcQPrintEngine_operatorAssign(self.h, param1.h)
 
-proc delete*(self: gen_qprintengine_types.QPrintEngine) =
-  fcQPrintEngine_delete(self.h)

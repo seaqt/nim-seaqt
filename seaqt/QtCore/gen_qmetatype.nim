@@ -30,9 +30,6 @@ func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
     else:
       copyMem(addr result[0], unsafeAddr v[0], v.len)
 
-const cflags = gorge("pkg-config --cflags Qt6Core")  & " -fPIC"
-{.compile("gen_qmetatype.cpp", cflags).}
-
 
 type QMetaTypeTypeEnum* = distinct cint
 template Bool*(_: type QMetaTypeTypeEnum): untyped = 1
@@ -221,7 +218,6 @@ proc fcQMetaType_construct2(self: pointer, where: pointer, copy: pointer): point
 proc fcQMetaType_new(typeVal: cint): ptr cQMetaType {.importc: "QMetaType_new".}
 proc fcQMetaType_new2(): ptr cQMetaType {.importc: "QMetaType_new2".}
 proc fcQMetaType_new3(param1: pointer): ptr cQMetaType {.importc: "QMetaType_new3".}
-proc fcQMetaType_delete(self: pointer) {.importc: "QMetaType_delete".}
 
 proc registerNormalizedTypedef*(_: type gen_qmetatype_types.QMetaType, normalizedTypeName: seq[byte], typeVal: gen_qmetatype_types.QMetaType): void =
   fcQMetaType_registerNormalizedTypedef(struct_miqt_string(data: cast[cstring](if len(normalizedTypeName) == 0: nil else: unsafeAddr normalizedTypeName[0]), len: csize_t(len(normalizedTypeName))), typeVal.h)
@@ -242,7 +238,7 @@ proc typeFlags*(_: type gen_qmetatype_types.QMetaType, typeVal: cint): cint =
   cint(fcQMetaType_typeFlags(typeVal))
 
 proc metaObjectForType*(_: type gen_qmetatype_types.QMetaType, typeVal: cint): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQMetaType_metaObjectForType(typeVal))
+  gen_qobjectdefs_types.QMetaObject(h: fcQMetaType_metaObjectForType(typeVal), owned: false)
 
 proc create*(_: type gen_qmetatype_types.QMetaType, typeVal: cint): pointer =
   fcQMetaType_create(typeVal)
@@ -278,7 +274,7 @@ proc flags*(self: gen_qmetatype_types.QMetaType, ): cint =
   cint(fcQMetaType_flags(self.h))
 
 proc metaObject*(self: gen_qmetatype_types.QMetaType, ): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQMetaType_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQMetaType_metaObject(self.h), owned: false)
 
 proc name*(self: gen_qmetatype_types.QMetaType, ): cstring =
   (fcQMetaType_name(self.h))
@@ -296,7 +292,7 @@ proc destruct*(self: gen_qmetatype_types.QMetaType, data: pointer): void =
   fcQMetaType_destructWithData(self.h, data)
 
 proc compare*(self: gen_qmetatype_types.QMetaType, lhs: pointer, rhs: pointer): gen_qcompare_types.QPartialOrdering =
-  gen_qcompare_types.QPartialOrdering(h: fcQMetaType_compare(self.h, lhs, rhs))
+  gen_qcompare_types.QPartialOrdering(h: fcQMetaType_compare(self.h, lhs, rhs), owned: true)
 
 proc equals*(self: gen_qmetatype_types.QMetaType, lhs: pointer, rhs: pointer): bool =
   fcQMetaType_equals(self.h, lhs, rhs)
@@ -323,7 +319,7 @@ proc load*(_: type gen_qmetatype_types.QMetaType, stream: gen_qdatastream_types.
   fcQMetaType_load2(stream.h, typeVal, data)
 
 proc fromName*(_: type gen_qmetatype_types.QMetaType, name: gen_qbytearrayview_types.QByteArrayView): gen_qmetatype_types.QMetaType =
-  gen_qmetatype_types.QMetaType(h: fcQMetaType_fromName(name.h))
+  gen_qmetatype_types.QMetaType(h: fcQMetaType_fromName(name.h), owned: true)
 
 proc debugStream*(self: gen_qmetatype_types.QMetaType, dbg: gen_qdebug_types.QDebug, rhs: pointer): bool =
   fcQMetaType_debugStream(self.h, dbg.h, rhs)
@@ -387,14 +383,12 @@ proc construct*(self: gen_qmetatype_types.QMetaType, where: pointer, copy: point
 
 proc create*(T: type gen_qmetatype_types.QMetaType,
     typeVal: cint): gen_qmetatype_types.QMetaType =
-  gen_qmetatype_types.QMetaType(h: fcQMetaType_new(typeVal))
+  gen_qmetatype_types.QMetaType(h: fcQMetaType_new(typeVal), owned: true)
 
 proc create*(T: type gen_qmetatype_types.QMetaType): gen_qmetatype_types.QMetaType =
-  gen_qmetatype_types.QMetaType(h: fcQMetaType_new2())
+  gen_qmetatype_types.QMetaType(h: fcQMetaType_new2(), owned: true)
 
 proc create*(T: type gen_qmetatype_types.QMetaType,
     param1: gen_qmetatype_types.QMetaType): gen_qmetatype_types.QMetaType =
-  gen_qmetatype_types.QMetaType(h: fcQMetaType_new3(param1.h))
+  gen_qmetatype_types.QMetaType(h: fcQMetaType_new3(param1.h), owned: true)
 
-proc delete*(self: gen_qmetatype_types.QMetaType) =
-  fcQMetaType_delete(self.h)

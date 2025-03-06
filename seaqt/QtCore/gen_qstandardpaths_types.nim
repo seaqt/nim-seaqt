@@ -1,2 +1,4 @@
-type QStandardPaths* {.inheritable, pure.} = object
+type QStandardPaths* {.inheritable.} = object
   h*: pointer
+  owned*: bool
+

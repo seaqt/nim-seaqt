@@ -30,7 +30,7 @@ func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
     else:
       copyMem(addr result[0], unsafeAddr v[0], v.len)
 
-const cflags = gorge("pkg-config --cflags Qt6Widgets")  & " -fPIC"
+const cflags = gorge("pkg-config --cflags Qt6Widgets") & " -fPIC"
 {.compile("gen_qgridlayout.cpp", cflags).}
 
 
@@ -113,7 +113,7 @@ proc fcQGridLayout_addLayout6(self: pointer, param1: pointer, row: cint, column:
 proc fcQGridLayout_addItem4(self: pointer, item: pointer, row: cint, column: cint, rowSpan: cint): void {.importc: "QGridLayout_addItem4".}
 proc fcQGridLayout_addItem5(self: pointer, item: pointer, row: cint, column: cint, rowSpan: cint, columnSpan: cint): void {.importc: "QGridLayout_addItem5".}
 proc fcQGridLayout_addItem6(self: pointer, item: pointer, row: cint, column: cint, rowSpan: cint, columnSpan: cint, param6: cint): void {.importc: "QGridLayout_addItem6".}
-type cQGridLayoutVTable = object
+type cQGridLayoutVTable {.pure.} = object
   destructor*: proc(vtbl: ptr cQGridLayoutVTable, self: ptr cQGridLayout) {.cdecl, raises:[], gcsafe.}
   metaObject*: proc(vtbl, self: pointer, ): pointer {.cdecl, raises: [], gcsafe.}
   metacast*: proc(vtbl, self: pointer, param1: cstring): pointer {.cdecl, raises: [], gcsafe.}
@@ -193,10 +193,9 @@ proc fcQGridLayout_protectedbase_isSignalConnected(self: pointer, signal: pointe
 proc fcQGridLayout_new(vtbl: pointer, parent: pointer): ptr cQGridLayout {.importc: "QGridLayout_new".}
 proc fcQGridLayout_new2(vtbl: pointer, ): ptr cQGridLayout {.importc: "QGridLayout_new2".}
 proc fcQGridLayout_staticMetaObject(): pointer {.importc: "QGridLayout_staticMetaObject".}
-proc fcQGridLayout_delete(self: pointer) {.importc: "QGridLayout_delete".}
 
 proc metaObject*(self: gen_qgridlayout_types.QGridLayout, ): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQGridLayout_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQGridLayout_metaObject(self.h), owned: false)
 
 proc metacast*(self: gen_qgridlayout_types.QGridLayout, param1: cstring): pointer =
   fcQGridLayout_metacast(self.h, param1)
@@ -211,13 +210,13 @@ proc tr*(_: type gen_qgridlayout_types.QGridLayout, s: cstring): string =
   vx_ret
 
 proc sizeHint*(self: gen_qgridlayout_types.QGridLayout, ): gen_qsize_types.QSize =
-  gen_qsize_types.QSize(h: fcQGridLayout_sizeHint(self.h))
+  gen_qsize_types.QSize(h: fcQGridLayout_sizeHint(self.h), owned: true)
 
 proc minimumSize*(self: gen_qgridlayout_types.QGridLayout, ): gen_qsize_types.QSize =
-  gen_qsize_types.QSize(h: fcQGridLayout_minimumSize(self.h))
+  gen_qsize_types.QSize(h: fcQGridLayout_minimumSize(self.h), owned: true)
 
 proc maximumSize*(self: gen_qgridlayout_types.QGridLayout, ): gen_qsize_types.QSize =
-  gen_qsize_types.QSize(h: fcQGridLayout_maximumSize(self.h))
+  gen_qsize_types.QSize(h: fcQGridLayout_maximumSize(self.h), owned: true)
 
 proc setHorizontalSpacing*(self: gen_qgridlayout_types.QGridLayout, spacing: cint): void =
   fcQGridLayout_setHorizontalSpacing(self.h, spacing)
@@ -268,7 +267,7 @@ proc rowCount*(self: gen_qgridlayout_types.QGridLayout, ): cint =
   fcQGridLayout_rowCount(self.h)
 
 proc cellRect*(self: gen_qgridlayout_types.QGridLayout, row: cint, column: cint): gen_qrect_types.QRect =
-  gen_qrect_types.QRect(h: fcQGridLayout_cellRect(self.h, row, column))
+  gen_qrect_types.QRect(h: fcQGridLayout_cellRect(self.h, row, column), owned: true)
 
 proc hasHeightForWidth*(self: gen_qgridlayout_types.QGridLayout, ): bool =
   fcQGridLayout_hasHeightForWidth(self.h)
@@ -307,13 +306,13 @@ proc originCorner*(self: gen_qgridlayout_types.QGridLayout, ): cint =
   cint(fcQGridLayout_originCorner(self.h))
 
 proc itemAt*(self: gen_qgridlayout_types.QGridLayout, index: cint): gen_qlayoutitem_types.QLayoutItem =
-  gen_qlayoutitem_types.QLayoutItem(h: fcQGridLayout_itemAt(self.h, index))
+  gen_qlayoutitem_types.QLayoutItem(h: fcQGridLayout_itemAt(self.h, index), owned: false)
 
 proc itemAtPosition*(self: gen_qgridlayout_types.QGridLayout, row: cint, column: cint): gen_qlayoutitem_types.QLayoutItem =
-  gen_qlayoutitem_types.QLayoutItem(h: fcQGridLayout_itemAtPosition(self.h, row, column))
+  gen_qlayoutitem_types.QLayoutItem(h: fcQGridLayout_itemAtPosition(self.h, row, column), owned: false)
 
 proc takeAt*(self: gen_qgridlayout_types.QGridLayout, index: cint): gen_qlayoutitem_types.QLayoutItem =
-  gen_qlayoutitem_types.QLayoutItem(h: fcQGridLayout_takeAt(self.h, index))
+  gen_qlayoutitem_types.QLayoutItem(h: fcQGridLayout_takeAt(self.h, index), owned: false)
 
 proc count*(self: gen_qgridlayout_types.QGridLayout, ): cint =
   fcQGridLayout_count(self.h)
@@ -396,7 +395,7 @@ type QGridLayoutconnectNotifyProc* = proc(self: QGridLayout, signal: gen_qmetaob
 type QGridLayoutdisconnectNotifyProc* = proc(self: QGridLayout, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
 type QGridLayoutwidgetProc* = proc(self: QGridLayout): gen_qwidget_types.QWidget {.raises: [], gcsafe.}
 type QGridLayoutspacerItemProc* = proc(self: QGridLayout): gen_qlayoutitem_types.QSpacerItem {.raises: [], gcsafe.}
-type QGridLayoutVTable* = object
+type QGridLayoutVTable* {.inheritable, pure.} = object
   vtbl: cQGridLayoutVTable
   metaObject*: QGridLayoutmetaObjectProc
   metacast*: QGridLayoutmetacastProc
@@ -432,13 +431,16 @@ type QGridLayoutVTable* = object
   widget*: QGridLayoutwidgetProc
   spacerItem*: QGridLayoutspacerItemProc
 proc QGridLayoutmetaObject*(self: gen_qgridlayout_types.QGridLayout, ): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQGridLayout_virtualbase_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQGridLayout_virtualbase_metaObject(self.h), owned: false)
 
 proc miqt_exec_callback_cQGridLayout_metaObject(vtbl: pointer, self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QGridLayoutVTable](vtbl)
   let self = QGridLayout(h: self)
   var virtualReturn = vtbl[].metaObject(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QGridLayoutmetacast*(self: gen_qgridlayout_types.QGridLayout, param1: cstring): pointer =
   fcQGridLayout_virtualbase_metacast(self.h, param1)
@@ -463,31 +465,40 @@ proc miqt_exec_callback_cQGridLayout_metacall(vtbl: pointer, self: pointer, para
   virtualReturn
 
 proc QGridLayoutsizeHint*(self: gen_qgridlayout_types.QGridLayout, ): gen_qsize_types.QSize =
-  gen_qsize_types.QSize(h: fcQGridLayout_virtualbase_sizeHint(self.h))
+  gen_qsize_types.QSize(h: fcQGridLayout_virtualbase_sizeHint(self.h), owned: true)
 
 proc miqt_exec_callback_cQGridLayout_sizeHint(vtbl: pointer, self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QGridLayoutVTable](vtbl)
   let self = QGridLayout(h: self)
   var virtualReturn = vtbl[].sizeHint(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QGridLayoutminimumSize*(self: gen_qgridlayout_types.QGridLayout, ): gen_qsize_types.QSize =
-  gen_qsize_types.QSize(h: fcQGridLayout_virtualbase_minimumSize(self.h))
+  gen_qsize_types.QSize(h: fcQGridLayout_virtualbase_minimumSize(self.h), owned: true)
 
 proc miqt_exec_callback_cQGridLayout_minimumSize(vtbl: pointer, self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QGridLayoutVTable](vtbl)
   let self = QGridLayout(h: self)
   var virtualReturn = vtbl[].minimumSize(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QGridLayoutmaximumSize*(self: gen_qgridlayout_types.QGridLayout, ): gen_qsize_types.QSize =
-  gen_qsize_types.QSize(h: fcQGridLayout_virtualbase_maximumSize(self.h))
+  gen_qsize_types.QSize(h: fcQGridLayout_virtualbase_maximumSize(self.h), owned: true)
 
 proc miqt_exec_callback_cQGridLayout_maximumSize(vtbl: pointer, self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QGridLayoutVTable](vtbl)
   let self = QGridLayout(h: self)
   var virtualReturn = vtbl[].maximumSize(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QGridLayoutsetSpacing*(self: gen_qgridlayout_types.QGridLayout, spacing: cint): void =
   fcQGridLayout_virtualbase_setSpacing(self.h, spacing)
@@ -554,24 +565,30 @@ proc miqt_exec_callback_cQGridLayout_invalidate(vtbl: pointer, self: pointer): v
   vtbl[].invalidate(self)
 
 proc QGridLayoutitemAt*(self: gen_qgridlayout_types.QGridLayout, index: cint): gen_qlayoutitem_types.QLayoutItem =
-  gen_qlayoutitem_types.QLayoutItem(h: fcQGridLayout_virtualbase_itemAt(self.h, index))
+  gen_qlayoutitem_types.QLayoutItem(h: fcQGridLayout_virtualbase_itemAt(self.h, index), owned: false)
 
 proc miqt_exec_callback_cQGridLayout_itemAt(vtbl: pointer, self: pointer, index: cint): pointer {.cdecl.} =
   let vtbl = cast[ptr QGridLayoutVTable](vtbl)
   let self = QGridLayout(h: self)
   let slotval1 = index
   var virtualReturn = vtbl[].itemAt(self, slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QGridLayouttakeAt*(self: gen_qgridlayout_types.QGridLayout, index: cint): gen_qlayoutitem_types.QLayoutItem =
-  gen_qlayoutitem_types.QLayoutItem(h: fcQGridLayout_virtualbase_takeAt(self.h, index))
+  gen_qlayoutitem_types.QLayoutItem(h: fcQGridLayout_virtualbase_takeAt(self.h, index), owned: false)
 
 proc miqt_exec_callback_cQGridLayout_takeAt(vtbl: pointer, self: pointer, index: cint): pointer {.cdecl.} =
   let vtbl = cast[ptr QGridLayoutVTable](vtbl)
   let self = QGridLayout(h: self)
   let slotval1 = index
   var virtualReturn = vtbl[].takeAt(self, slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QGridLayoutcount*(self: gen_qgridlayout_types.QGridLayout, ): cint =
   fcQGridLayout_virtualbase_count(self.h)
@@ -588,7 +605,7 @@ proc QGridLayoutsetGeometry*(self: gen_qgridlayout_types.QGridLayout, geometry: 
 proc miqt_exec_callback_cQGridLayout_setGeometry(vtbl: pointer, self: pointer, geometry: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGridLayoutVTable](vtbl)
   let self = QGridLayout(h: self)
-  let slotval1 = gen_qrect_types.QRect(h: geometry)
+  let slotval1 = gen_qrect_types.QRect(h: geometry, owned: false)
   vtbl[].setGeometry(self, slotval1)
 
 proc QGridLayoutaddItem*(self: gen_qgridlayout_types.QGridLayout, param1: gen_qlayoutitem_types.QLayoutItem): void =
@@ -597,17 +614,20 @@ proc QGridLayoutaddItem*(self: gen_qgridlayout_types.QGridLayout, param1: gen_ql
 proc miqt_exec_callback_cQGridLayout_addItemWithQLayoutItem(vtbl: pointer, self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGridLayoutVTable](vtbl)
   let self = QGridLayout(h: self)
-  let slotval1 = gen_qlayoutitem_types.QLayoutItem(h: param1)
+  let slotval1 = gen_qlayoutitem_types.QLayoutItem(h: param1, owned: false)
   vtbl[].addItemWithQLayoutItem(self, slotval1)
 
 proc QGridLayoutgeometry*(self: gen_qgridlayout_types.QGridLayout, ): gen_qrect_types.QRect =
-  gen_qrect_types.QRect(h: fcQGridLayout_virtualbase_geometry(self.h))
+  gen_qrect_types.QRect(h: fcQGridLayout_virtualbase_geometry(self.h), owned: true)
 
 proc miqt_exec_callback_cQGridLayout_geometry(vtbl: pointer, self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QGridLayoutVTable](vtbl)
   let self = QGridLayout(h: self)
   var virtualReturn = vtbl[].geometry(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QGridLayoutindexOf*(self: gen_qgridlayout_types.QGridLayout, param1: gen_qwidget_types.QWidget): cint =
   fcQGridLayout_virtualbase_indexOf(self.h, param1.h)
@@ -615,7 +635,7 @@ proc QGridLayoutindexOf*(self: gen_qgridlayout_types.QGridLayout, param1: gen_qw
 proc miqt_exec_callback_cQGridLayout_indexOf(vtbl: pointer, self: pointer, param1: pointer): cint {.cdecl.} =
   let vtbl = cast[ptr QGridLayoutVTable](vtbl)
   let self = QGridLayout(h: self)
-  let slotval1 = gen_qwidget_types.QWidget(h: param1)
+  let slotval1 = gen_qwidget_types.QWidget(h: param1, owned: false)
   var virtualReturn = vtbl[].indexOf(self, slotval1)
   virtualReturn
 
@@ -638,25 +658,31 @@ proc miqt_exec_callback_cQGridLayout_controlTypes(vtbl: pointer, self: pointer):
   cint(virtualReturn)
 
 proc QGridLayoutreplaceWidget*(self: gen_qgridlayout_types.QGridLayout, fromVal: gen_qwidget_types.QWidget, to: gen_qwidget_types.QWidget, options: cint): gen_qlayoutitem_types.QLayoutItem =
-  gen_qlayoutitem_types.QLayoutItem(h: fcQGridLayout_virtualbase_replaceWidget(self.h, fromVal.h, to.h, cint(options)))
+  gen_qlayoutitem_types.QLayoutItem(h: fcQGridLayout_virtualbase_replaceWidget(self.h, fromVal.h, to.h, cint(options)), owned: false)
 
 proc miqt_exec_callback_cQGridLayout_replaceWidget(vtbl: pointer, self: pointer, fromVal: pointer, to: pointer, options: cint): pointer {.cdecl.} =
   let vtbl = cast[ptr QGridLayoutVTable](vtbl)
   let self = QGridLayout(h: self)
-  let slotval1 = gen_qwidget_types.QWidget(h: fromVal)
-  let slotval2 = gen_qwidget_types.QWidget(h: to)
+  let slotval1 = gen_qwidget_types.QWidget(h: fromVal, owned: false)
+  let slotval2 = gen_qwidget_types.QWidget(h: to, owned: false)
   let slotval3 = cint(options)
   var virtualReturn = vtbl[].replaceWidget(self, slotval1, slotval2, slotval3)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QGridLayoutlayout*(self: gen_qgridlayout_types.QGridLayout, ): gen_qlayout_types.QLayout =
-  gen_qlayout_types.QLayout(h: fcQGridLayout_virtualbase_layout(self.h))
+  gen_qlayout_types.QLayout(h: fcQGridLayout_virtualbase_layout(self.h), owned: false)
 
 proc miqt_exec_callback_cQGridLayout_layout(vtbl: pointer, self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QGridLayoutVTable](vtbl)
   let self = QGridLayout(h: self)
   var virtualReturn = vtbl[].layout(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QGridLayoutchildEvent*(self: gen_qgridlayout_types.QGridLayout, e: gen_qcoreevent_types.QChildEvent): void =
   fcQGridLayout_virtualbase_childEvent(self.h, e.h)
@@ -664,7 +690,7 @@ proc QGridLayoutchildEvent*(self: gen_qgridlayout_types.QGridLayout, e: gen_qcor
 proc miqt_exec_callback_cQGridLayout_childEvent(vtbl: pointer, self: pointer, e: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGridLayoutVTable](vtbl)
   let self = QGridLayout(h: self)
-  let slotval1 = gen_qcoreevent_types.QChildEvent(h: e)
+  let slotval1 = gen_qcoreevent_types.QChildEvent(h: e, owned: false)
   vtbl[].childEvent(self, slotval1)
 
 proc QGridLayoutevent*(self: gen_qgridlayout_types.QGridLayout, event: gen_qcoreevent_types.QEvent): bool =
@@ -673,7 +699,7 @@ proc QGridLayoutevent*(self: gen_qgridlayout_types.QGridLayout, event: gen_qcore
 proc miqt_exec_callback_cQGridLayout_event(vtbl: pointer, self: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QGridLayoutVTable](vtbl)
   let self = QGridLayout(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].event(self, slotval1)
   virtualReturn
 
@@ -683,8 +709,8 @@ proc QGridLayouteventFilter*(self: gen_qgridlayout_types.QGridLayout, watched: g
 proc miqt_exec_callback_cQGridLayout_eventFilter(vtbl: pointer, self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QGridLayoutVTable](vtbl)
   let self = QGridLayout(h: self)
-  let slotval1 = gen_qobject_types.QObject(h: watched)
-  let slotval2 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].eventFilter(self, slotval1, slotval2)
   virtualReturn
 
@@ -694,7 +720,7 @@ proc QGridLayouttimerEvent*(self: gen_qgridlayout_types.QGridLayout, event: gen_
 proc miqt_exec_callback_cQGridLayout_timerEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGridLayoutVTable](vtbl)
   let self = QGridLayout(h: self)
-  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   vtbl[].timerEvent(self, slotval1)
 
 proc QGridLayoutcustomEvent*(self: gen_qgridlayout_types.QGridLayout, event: gen_qcoreevent_types.QEvent): void =
@@ -703,7 +729,7 @@ proc QGridLayoutcustomEvent*(self: gen_qgridlayout_types.QGridLayout, event: gen
 proc miqt_exec_callback_cQGridLayout_customEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGridLayoutVTable](vtbl)
   let self = QGridLayout(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].customEvent(self, slotval1)
 
 proc QGridLayoutconnectNotify*(self: gen_qgridlayout_types.QGridLayout, signal: gen_qmetaobject_types.QMetaMethod): void =
@@ -712,7 +738,7 @@ proc QGridLayoutconnectNotify*(self: gen_qgridlayout_types.QGridLayout, signal: 
 proc miqt_exec_callback_cQGridLayout_connectNotify(vtbl: pointer, self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGridLayoutVTable](vtbl)
   let self = QGridLayout(h: self)
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].connectNotify(self, slotval1)
 
 proc QGridLayoutdisconnectNotify*(self: gen_qgridlayout_types.QGridLayout, signal: gen_qmetaobject_types.QMetaMethod): void =
@@ -721,26 +747,312 @@ proc QGridLayoutdisconnectNotify*(self: gen_qgridlayout_types.QGridLayout, signa
 proc miqt_exec_callback_cQGridLayout_disconnectNotify(vtbl: pointer, self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGridLayoutVTable](vtbl)
   let self = QGridLayout(h: self)
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].disconnectNotify(self, slotval1)
 
 proc QGridLayoutwidget*(self: gen_qgridlayout_types.QGridLayout, ): gen_qwidget_types.QWidget =
-  gen_qwidget_types.QWidget(h: fcQGridLayout_virtualbase_widget(self.h))
+  gen_qwidget_types.QWidget(h: fcQGridLayout_virtualbase_widget(self.h), owned: false)
 
 proc miqt_exec_callback_cQGridLayout_widget(vtbl: pointer, self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QGridLayoutVTable](vtbl)
   let self = QGridLayout(h: self)
   var virtualReturn = vtbl[].widget(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QGridLayoutspacerItem*(self: gen_qgridlayout_types.QGridLayout, ): gen_qlayoutitem_types.QSpacerItem =
-  gen_qlayoutitem_types.QSpacerItem(h: fcQGridLayout_virtualbase_spacerItem(self.h))
+  gen_qlayoutitem_types.QSpacerItem(h: fcQGridLayout_virtualbase_spacerItem(self.h), owned: false)
 
 proc miqt_exec_callback_cQGridLayout_spacerItem(vtbl: pointer, self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QGridLayoutVTable](vtbl)
   let self = QGridLayout(h: self)
   var virtualReturn = vtbl[].spacerItem(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
+
+type VirtualQGridLayout* {.inheritable.} = ref object of QGridLayout
+  vtbl*: cQGridLayoutVTable
+method metaObject*(self: VirtualQGridLayout, ): gen_qobjectdefs_types.QMetaObject {.base.} =
+  QGridLayoutmetaObject(self[])
+proc miqt_exec_method_cQGridLayout_metaObject(vtbl: pointer, inst: pointer): pointer {.cdecl.} =
+  let vtbl = cast[VirtualQGridLayout](cast[uint](vtbl) - uint(offsetOf(VirtualQGridLayout, vtbl)))
+  var virtualReturn = vtbl.metaObject()
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
+
+method metacast*(self: VirtualQGridLayout, param1: cstring): pointer {.base.} =
+  QGridLayoutmetacast(self[], param1)
+proc miqt_exec_method_cQGridLayout_metacast(vtbl: pointer, inst: pointer, param1: cstring): pointer {.cdecl.} =
+  let vtbl = cast[VirtualQGridLayout](cast[uint](vtbl) - uint(offsetOf(VirtualQGridLayout, vtbl)))
+  let slotval1 = (param1)
+  var virtualReturn = vtbl.metacast(slotval1)
+  virtualReturn
+
+method metacall*(self: VirtualQGridLayout, param1: cint, param2: cint, param3: pointer): cint {.base.} =
+  QGridLayoutmetacall(self[], param1, param2, param3)
+proc miqt_exec_method_cQGridLayout_metacall(vtbl: pointer, inst: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
+  let vtbl = cast[VirtualQGridLayout](cast[uint](vtbl) - uint(offsetOf(VirtualQGridLayout, vtbl)))
+  let slotval1 = cint(param1)
+  let slotval2 = param2
+  let slotval3 = param3
+  var virtualReturn = vtbl.metacall(slotval1, slotval2, slotval3)
+  virtualReturn
+
+method sizeHint*(self: VirtualQGridLayout, ): gen_qsize_types.QSize {.base.} =
+  QGridLayoutsizeHint(self[])
+proc miqt_exec_method_cQGridLayout_sizeHint(vtbl: pointer, inst: pointer): pointer {.cdecl.} =
+  let vtbl = cast[VirtualQGridLayout](cast[uint](vtbl) - uint(offsetOf(VirtualQGridLayout, vtbl)))
+  var virtualReturn = vtbl.sizeHint()
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
+
+method minimumSize*(self: VirtualQGridLayout, ): gen_qsize_types.QSize {.base.} =
+  QGridLayoutminimumSize(self[])
+proc miqt_exec_method_cQGridLayout_minimumSize(vtbl: pointer, inst: pointer): pointer {.cdecl.} =
+  let vtbl = cast[VirtualQGridLayout](cast[uint](vtbl) - uint(offsetOf(VirtualQGridLayout, vtbl)))
+  var virtualReturn = vtbl.minimumSize()
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
+
+method maximumSize*(self: VirtualQGridLayout, ): gen_qsize_types.QSize {.base.} =
+  QGridLayoutmaximumSize(self[])
+proc miqt_exec_method_cQGridLayout_maximumSize(vtbl: pointer, inst: pointer): pointer {.cdecl.} =
+  let vtbl = cast[VirtualQGridLayout](cast[uint](vtbl) - uint(offsetOf(VirtualQGridLayout, vtbl)))
+  var virtualReturn = vtbl.maximumSize()
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
+
+method setSpacing*(self: VirtualQGridLayout, spacing: cint): void {.base.} =
+  QGridLayoutsetSpacing(self[], spacing)
+proc miqt_exec_method_cQGridLayout_setSpacing(vtbl: pointer, inst: pointer, spacing: cint): void {.cdecl.} =
+  let vtbl = cast[VirtualQGridLayout](cast[uint](vtbl) - uint(offsetOf(VirtualQGridLayout, vtbl)))
+  let slotval1 = spacing
+  vtbl.setSpacing(slotval1)
+
+method spacing*(self: VirtualQGridLayout, ): cint {.base.} =
+  QGridLayoutspacing(self[])
+proc miqt_exec_method_cQGridLayout_spacing(vtbl: pointer, inst: pointer): cint {.cdecl.} =
+  let vtbl = cast[VirtualQGridLayout](cast[uint](vtbl) - uint(offsetOf(VirtualQGridLayout, vtbl)))
+  var virtualReturn = vtbl.spacing()
+  virtualReturn
+
+method hasHeightForWidth*(self: VirtualQGridLayout, ): bool {.base.} =
+  QGridLayouthasHeightForWidth(self[])
+proc miqt_exec_method_cQGridLayout_hasHeightForWidth(vtbl: pointer, inst: pointer): bool {.cdecl.} =
+  let vtbl = cast[VirtualQGridLayout](cast[uint](vtbl) - uint(offsetOf(VirtualQGridLayout, vtbl)))
+  var virtualReturn = vtbl.hasHeightForWidth()
+  virtualReturn
+
+method heightForWidth*(self: VirtualQGridLayout, param1: cint): cint {.base.} =
+  QGridLayoutheightForWidth(self[], param1)
+proc miqt_exec_method_cQGridLayout_heightForWidth(vtbl: pointer, inst: pointer, param1: cint): cint {.cdecl.} =
+  let vtbl = cast[VirtualQGridLayout](cast[uint](vtbl) - uint(offsetOf(VirtualQGridLayout, vtbl)))
+  let slotval1 = param1
+  var virtualReturn = vtbl.heightForWidth(slotval1)
+  virtualReturn
+
+method minimumHeightForWidth*(self: VirtualQGridLayout, param1: cint): cint {.base.} =
+  QGridLayoutminimumHeightForWidth(self[], param1)
+proc miqt_exec_method_cQGridLayout_minimumHeightForWidth(vtbl: pointer, inst: pointer, param1: cint): cint {.cdecl.} =
+  let vtbl = cast[VirtualQGridLayout](cast[uint](vtbl) - uint(offsetOf(VirtualQGridLayout, vtbl)))
+  let slotval1 = param1
+  var virtualReturn = vtbl.minimumHeightForWidth(slotval1)
+  virtualReturn
+
+method expandingDirections*(self: VirtualQGridLayout, ): cint {.base.} =
+  QGridLayoutexpandingDirections(self[])
+proc miqt_exec_method_cQGridLayout_expandingDirections(vtbl: pointer, inst: pointer): cint {.cdecl.} =
+  let vtbl = cast[VirtualQGridLayout](cast[uint](vtbl) - uint(offsetOf(VirtualQGridLayout, vtbl)))
+  var virtualReturn = vtbl.expandingDirections()
+  cint(virtualReturn)
+
+method invalidate*(self: VirtualQGridLayout, ): void {.base.} =
+  QGridLayoutinvalidate(self[])
+proc miqt_exec_method_cQGridLayout_invalidate(vtbl: pointer, inst: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQGridLayout](cast[uint](vtbl) - uint(offsetOf(VirtualQGridLayout, vtbl)))
+  vtbl.invalidate()
+
+method itemAt*(self: VirtualQGridLayout, index: cint): gen_qlayoutitem_types.QLayoutItem {.base.} =
+  QGridLayoutitemAt(self[], index)
+proc miqt_exec_method_cQGridLayout_itemAt(vtbl: pointer, inst: pointer, index: cint): pointer {.cdecl.} =
+  let vtbl = cast[VirtualQGridLayout](cast[uint](vtbl) - uint(offsetOf(VirtualQGridLayout, vtbl)))
+  let slotval1 = index
+  var virtualReturn = vtbl.itemAt(slotval1)
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
+
+method takeAt*(self: VirtualQGridLayout, index: cint): gen_qlayoutitem_types.QLayoutItem {.base.} =
+  QGridLayouttakeAt(self[], index)
+proc miqt_exec_method_cQGridLayout_takeAt(vtbl: pointer, inst: pointer, index: cint): pointer {.cdecl.} =
+  let vtbl = cast[VirtualQGridLayout](cast[uint](vtbl) - uint(offsetOf(VirtualQGridLayout, vtbl)))
+  let slotval1 = index
+  var virtualReturn = vtbl.takeAt(slotval1)
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
+
+method count*(self: VirtualQGridLayout, ): cint {.base.} =
+  QGridLayoutcount(self[])
+proc miqt_exec_method_cQGridLayout_count(vtbl: pointer, inst: pointer): cint {.cdecl.} =
+  let vtbl = cast[VirtualQGridLayout](cast[uint](vtbl) - uint(offsetOf(VirtualQGridLayout, vtbl)))
+  var virtualReturn = vtbl.count()
+  virtualReturn
+
+method setGeometry*(self: VirtualQGridLayout, geometry: gen_qrect_types.QRect): void {.base.} =
+  QGridLayoutsetGeometry(self[], geometry)
+proc miqt_exec_method_cQGridLayout_setGeometry(vtbl: pointer, inst: pointer, geometry: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQGridLayout](cast[uint](vtbl) - uint(offsetOf(VirtualQGridLayout, vtbl)))
+  let slotval1 = gen_qrect_types.QRect(h: geometry, owned: false)
+  vtbl.setGeometry(slotval1)
+
+method addItem*(self: VirtualQGridLayout, param1: gen_qlayoutitem_types.QLayoutItem): void {.base.} =
+  QGridLayoutaddItem(self[], param1)
+proc miqt_exec_method_cQGridLayout_addItemWithQLayoutItem(vtbl: pointer, inst: pointer, param1: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQGridLayout](cast[uint](vtbl) - uint(offsetOf(VirtualQGridLayout, vtbl)))
+  let slotval1 = gen_qlayoutitem_types.QLayoutItem(h: param1, owned: false)
+  vtbl.addItem(slotval1)
+
+method geometry*(self: VirtualQGridLayout, ): gen_qrect_types.QRect {.base.} =
+  QGridLayoutgeometry(self[])
+proc miqt_exec_method_cQGridLayout_geometry(vtbl: pointer, inst: pointer): pointer {.cdecl.} =
+  let vtbl = cast[VirtualQGridLayout](cast[uint](vtbl) - uint(offsetOf(VirtualQGridLayout, vtbl)))
+  var virtualReturn = vtbl.geometry()
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
+
+method indexOf*(self: VirtualQGridLayout, param1: gen_qwidget_types.QWidget): cint {.base.} =
+  QGridLayoutindexOf(self[], param1)
+proc miqt_exec_method_cQGridLayout_indexOf(vtbl: pointer, inst: pointer, param1: pointer): cint {.cdecl.} =
+  let vtbl = cast[VirtualQGridLayout](cast[uint](vtbl) - uint(offsetOf(VirtualQGridLayout, vtbl)))
+  let slotval1 = gen_qwidget_types.QWidget(h: param1, owned: false)
+  var virtualReturn = vtbl.indexOf(slotval1)
+  virtualReturn
+
+method isEmpty*(self: VirtualQGridLayout, ): bool {.base.} =
+  QGridLayoutisEmpty(self[])
+proc miqt_exec_method_cQGridLayout_isEmpty(vtbl: pointer, inst: pointer): bool {.cdecl.} =
+  let vtbl = cast[VirtualQGridLayout](cast[uint](vtbl) - uint(offsetOf(VirtualQGridLayout, vtbl)))
+  var virtualReturn = vtbl.isEmpty()
+  virtualReturn
+
+method controlTypes*(self: VirtualQGridLayout, ): cint {.base.} =
+  QGridLayoutcontrolTypes(self[])
+proc miqt_exec_method_cQGridLayout_controlTypes(vtbl: pointer, inst: pointer): cint {.cdecl.} =
+  let vtbl = cast[VirtualQGridLayout](cast[uint](vtbl) - uint(offsetOf(VirtualQGridLayout, vtbl)))
+  var virtualReturn = vtbl.controlTypes()
+  cint(virtualReturn)
+
+method replaceWidget*(self: VirtualQGridLayout, fromVal: gen_qwidget_types.QWidget, to: gen_qwidget_types.QWidget, options: cint): gen_qlayoutitem_types.QLayoutItem {.base.} =
+  QGridLayoutreplaceWidget(self[], fromVal, to, options)
+proc miqt_exec_method_cQGridLayout_replaceWidget(vtbl: pointer, inst: pointer, fromVal: pointer, to: pointer, options: cint): pointer {.cdecl.} =
+  let vtbl = cast[VirtualQGridLayout](cast[uint](vtbl) - uint(offsetOf(VirtualQGridLayout, vtbl)))
+  let slotval1 = gen_qwidget_types.QWidget(h: fromVal, owned: false)
+  let slotval2 = gen_qwidget_types.QWidget(h: to, owned: false)
+  let slotval3 = cint(options)
+  var virtualReturn = vtbl.replaceWidget(slotval1, slotval2, slotval3)
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
+
+method layout*(self: VirtualQGridLayout, ): gen_qlayout_types.QLayout {.base.} =
+  QGridLayoutlayout(self[])
+proc miqt_exec_method_cQGridLayout_layout(vtbl: pointer, inst: pointer): pointer {.cdecl.} =
+  let vtbl = cast[VirtualQGridLayout](cast[uint](vtbl) - uint(offsetOf(VirtualQGridLayout, vtbl)))
+  var virtualReturn = vtbl.layout()
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
+
+method childEvent*(self: VirtualQGridLayout, e: gen_qcoreevent_types.QChildEvent): void {.base.} =
+  QGridLayoutchildEvent(self[], e)
+proc miqt_exec_method_cQGridLayout_childEvent(vtbl: pointer, inst: pointer, e: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQGridLayout](cast[uint](vtbl) - uint(offsetOf(VirtualQGridLayout, vtbl)))
+  let slotval1 = gen_qcoreevent_types.QChildEvent(h: e, owned: false)
+  vtbl.childEvent(slotval1)
+
+method event*(self: VirtualQGridLayout, event: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QGridLayoutevent(self[], event)
+proc miqt_exec_method_cQGridLayout_event(vtbl: pointer, inst: pointer, event: pointer): bool {.cdecl.} =
+  let vtbl = cast[VirtualQGridLayout](cast[uint](vtbl) - uint(offsetOf(VirtualQGridLayout, vtbl)))
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
+  var virtualReturn = vtbl.event(slotval1)
+  virtualReturn
+
+method eventFilter*(self: VirtualQGridLayout, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QGridLayouteventFilter(self[], watched, event)
+proc miqt_exec_method_cQGridLayout_eventFilter(vtbl: pointer, inst: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
+  let vtbl = cast[VirtualQGridLayout](cast[uint](vtbl) - uint(offsetOf(VirtualQGridLayout, vtbl)))
+  let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
+  var virtualReturn = vtbl.eventFilter(slotval1, slotval2)
+  virtualReturn
+
+method timerEvent*(self: VirtualQGridLayout, event: gen_qcoreevent_types.QTimerEvent): void {.base.} =
+  QGridLayouttimerEvent(self[], event)
+proc miqt_exec_method_cQGridLayout_timerEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQGridLayout](cast[uint](vtbl) - uint(offsetOf(VirtualQGridLayout, vtbl)))
+  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
+  vtbl.timerEvent(slotval1)
+
+method customEvent*(self: VirtualQGridLayout, event: gen_qcoreevent_types.QEvent): void {.base.} =
+  QGridLayoutcustomEvent(self[], event)
+proc miqt_exec_method_cQGridLayout_customEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQGridLayout](cast[uint](vtbl) - uint(offsetOf(VirtualQGridLayout, vtbl)))
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
+  vtbl.customEvent(slotval1)
+
+method connectNotify*(self: VirtualQGridLayout, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QGridLayoutconnectNotify(self[], signal)
+proc miqt_exec_method_cQGridLayout_connectNotify(vtbl: pointer, inst: pointer, signal: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQGridLayout](cast[uint](vtbl) - uint(offsetOf(VirtualQGridLayout, vtbl)))
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
+  vtbl.connectNotify(slotval1)
+
+method disconnectNotify*(self: VirtualQGridLayout, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QGridLayoutdisconnectNotify(self[], signal)
+proc miqt_exec_method_cQGridLayout_disconnectNotify(vtbl: pointer, inst: pointer, signal: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQGridLayout](cast[uint](vtbl) - uint(offsetOf(VirtualQGridLayout, vtbl)))
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
+  vtbl.disconnectNotify(slotval1)
+
+method widget*(self: VirtualQGridLayout, ): gen_qwidget_types.QWidget {.base.} =
+  QGridLayoutwidget(self[])
+proc miqt_exec_method_cQGridLayout_widget(vtbl: pointer, inst: pointer): pointer {.cdecl.} =
+  let vtbl = cast[VirtualQGridLayout](cast[uint](vtbl) - uint(offsetOf(VirtualQGridLayout, vtbl)))
+  var virtualReturn = vtbl.widget()
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
+
+method spacerItem*(self: VirtualQGridLayout, ): gen_qlayoutitem_types.QSpacerItem {.base.} =
+  QGridLayoutspacerItem(self[])
+proc miqt_exec_method_cQGridLayout_spacerItem(vtbl: pointer, inst: pointer): pointer {.cdecl.} =
+  let vtbl = cast[VirtualQGridLayout](cast[uint](vtbl) - uint(offsetOf(VirtualQGridLayout, vtbl)))
+  var virtualReturn = vtbl.spacerItem()
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc widgetEvent*(self: gen_qgridlayout_types.QGridLayout, param1: gen_qcoreevent_types.QEvent): void =
   fcQGridLayout_protectedbase_widgetEvent(self.h, param1.h)
@@ -755,10 +1067,10 @@ proc adoptLayout*(self: gen_qgridlayout_types.QGridLayout, layout: gen_qlayout_t
   fcQGridLayout_protectedbase_adoptLayout(self.h, layout.h)
 
 proc alignmentRect*(self: gen_qgridlayout_types.QGridLayout, param1: gen_qrect_types.QRect): gen_qrect_types.QRect =
-  gen_qrect_types.QRect(h: fcQGridLayout_protectedbase_alignmentRect(self.h, param1.h))
+  gen_qrect_types.QRect(h: fcQGridLayout_protectedbase_alignmentRect(self.h, param1.h), owned: true)
 
 proc sender*(self: gen_qgridlayout_types.QGridLayout, ): gen_qobject_types.QObject =
-  gen_qobject_types.QObject(h: fcQGridLayout_protectedbase_sender(self.h))
+  gen_qobject_types.QObject(h: fcQGridLayout_protectedbase_sender(self.h), owned: false)
 
 proc senderSignalIndex*(self: gen_qgridlayout_types.QGridLayout, ): cint =
   fcQGridLayout_protectedbase_senderSignalIndex(self.h)
@@ -774,153 +1086,240 @@ proc create*(T: type gen_qgridlayout_types.QGridLayout,
     vtbl: ref QGridLayoutVTable = nil): gen_qgridlayout_types.QGridLayout =
   let vtbl = if vtbl == nil: new QGridLayoutVTable else: vtbl
   GC_ref(vtbl)
-  vtbl.vtbl.destructor = proc(vtbl: ptr cQGridLayoutVTable, _: ptr cQGridLayout) {.cdecl.} =
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQGridLayoutVTable, _: ptr cQGridLayout) {.cdecl.} =
     let vtbl = cast[ref QGridLayoutVTable](vtbl)
     GC_unref(vtbl)
-  if not isNil(vtbl.metaObject):
+  if not isNil(vtbl[].metaObject):
     vtbl[].vtbl.metaObject = miqt_exec_callback_cQGridLayout_metaObject
-  if not isNil(vtbl.metacast):
+  if not isNil(vtbl[].metacast):
     vtbl[].vtbl.metacast = miqt_exec_callback_cQGridLayout_metacast
-  if not isNil(vtbl.metacall):
+  if not isNil(vtbl[].metacall):
     vtbl[].vtbl.metacall = miqt_exec_callback_cQGridLayout_metacall
-  if not isNil(vtbl.sizeHint):
+  if not isNil(vtbl[].sizeHint):
     vtbl[].vtbl.sizeHint = miqt_exec_callback_cQGridLayout_sizeHint
-  if not isNil(vtbl.minimumSize):
+  if not isNil(vtbl[].minimumSize):
     vtbl[].vtbl.minimumSize = miqt_exec_callback_cQGridLayout_minimumSize
-  if not isNil(vtbl.maximumSize):
+  if not isNil(vtbl[].maximumSize):
     vtbl[].vtbl.maximumSize = miqt_exec_callback_cQGridLayout_maximumSize
-  if not isNil(vtbl.setSpacing):
+  if not isNil(vtbl[].setSpacing):
     vtbl[].vtbl.setSpacing = miqt_exec_callback_cQGridLayout_setSpacing
-  if not isNil(vtbl.spacing):
+  if not isNil(vtbl[].spacing):
     vtbl[].vtbl.spacing = miqt_exec_callback_cQGridLayout_spacing
-  if not isNil(vtbl.hasHeightForWidth):
+  if not isNil(vtbl[].hasHeightForWidth):
     vtbl[].vtbl.hasHeightForWidth = miqt_exec_callback_cQGridLayout_hasHeightForWidth
-  if not isNil(vtbl.heightForWidth):
+  if not isNil(vtbl[].heightForWidth):
     vtbl[].vtbl.heightForWidth = miqt_exec_callback_cQGridLayout_heightForWidth
-  if not isNil(vtbl.minimumHeightForWidth):
+  if not isNil(vtbl[].minimumHeightForWidth):
     vtbl[].vtbl.minimumHeightForWidth = miqt_exec_callback_cQGridLayout_minimumHeightForWidth
-  if not isNil(vtbl.expandingDirections):
+  if not isNil(vtbl[].expandingDirections):
     vtbl[].vtbl.expandingDirections = miqt_exec_callback_cQGridLayout_expandingDirections
-  if not isNil(vtbl.invalidate):
+  if not isNil(vtbl[].invalidate):
     vtbl[].vtbl.invalidate = miqt_exec_callback_cQGridLayout_invalidate
-  if not isNil(vtbl.itemAt):
+  if not isNil(vtbl[].itemAt):
     vtbl[].vtbl.itemAt = miqt_exec_callback_cQGridLayout_itemAt
-  if not isNil(vtbl.takeAt):
+  if not isNil(vtbl[].takeAt):
     vtbl[].vtbl.takeAt = miqt_exec_callback_cQGridLayout_takeAt
-  if not isNil(vtbl.count):
+  if not isNil(vtbl[].count):
     vtbl[].vtbl.count = miqt_exec_callback_cQGridLayout_count
-  if not isNil(vtbl.setGeometry):
+  if not isNil(vtbl[].setGeometry):
     vtbl[].vtbl.setGeometry = miqt_exec_callback_cQGridLayout_setGeometry
-  if not isNil(vtbl.addItemWithQLayoutItem):
+  if not isNil(vtbl[].addItemWithQLayoutItem):
     vtbl[].vtbl.addItemWithQLayoutItem = miqt_exec_callback_cQGridLayout_addItemWithQLayoutItem
-  if not isNil(vtbl.geometry):
+  if not isNil(vtbl[].geometry):
     vtbl[].vtbl.geometry = miqt_exec_callback_cQGridLayout_geometry
-  if not isNil(vtbl.indexOf):
+  if not isNil(vtbl[].indexOf):
     vtbl[].vtbl.indexOf = miqt_exec_callback_cQGridLayout_indexOf
-  if not isNil(vtbl.isEmpty):
+  if not isNil(vtbl[].isEmpty):
     vtbl[].vtbl.isEmpty = miqt_exec_callback_cQGridLayout_isEmpty
-  if not isNil(vtbl.controlTypes):
+  if not isNil(vtbl[].controlTypes):
     vtbl[].vtbl.controlTypes = miqt_exec_callback_cQGridLayout_controlTypes
-  if not isNil(vtbl.replaceWidget):
+  if not isNil(vtbl[].replaceWidget):
     vtbl[].vtbl.replaceWidget = miqt_exec_callback_cQGridLayout_replaceWidget
-  if not isNil(vtbl.layout):
+  if not isNil(vtbl[].layout):
     vtbl[].vtbl.layout = miqt_exec_callback_cQGridLayout_layout
-  if not isNil(vtbl.childEvent):
+  if not isNil(vtbl[].childEvent):
     vtbl[].vtbl.childEvent = miqt_exec_callback_cQGridLayout_childEvent
-  if not isNil(vtbl.event):
+  if not isNil(vtbl[].event):
     vtbl[].vtbl.event = miqt_exec_callback_cQGridLayout_event
-  if not isNil(vtbl.eventFilter):
+  if not isNil(vtbl[].eventFilter):
     vtbl[].vtbl.eventFilter = miqt_exec_callback_cQGridLayout_eventFilter
-  if not isNil(vtbl.timerEvent):
+  if not isNil(vtbl[].timerEvent):
     vtbl[].vtbl.timerEvent = miqt_exec_callback_cQGridLayout_timerEvent
-  if not isNil(vtbl.customEvent):
+  if not isNil(vtbl[].customEvent):
     vtbl[].vtbl.customEvent = miqt_exec_callback_cQGridLayout_customEvent
-  if not isNil(vtbl.connectNotify):
+  if not isNil(vtbl[].connectNotify):
     vtbl[].vtbl.connectNotify = miqt_exec_callback_cQGridLayout_connectNotify
-  if not isNil(vtbl.disconnectNotify):
+  if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQGridLayout_disconnectNotify
-  if not isNil(vtbl.widget):
+  if not isNil(vtbl[].widget):
     vtbl[].vtbl.widget = miqt_exec_callback_cQGridLayout_widget
-  if not isNil(vtbl.spacerItem):
+  if not isNil(vtbl[].spacerItem):
     vtbl[].vtbl.spacerItem = miqt_exec_callback_cQGridLayout_spacerItem
-  gen_qgridlayout_types.QGridLayout(h: fcQGridLayout_new(addr(vtbl[]), parent.h))
+  gen_qgridlayout_types.QGridLayout(h: fcQGridLayout_new(addr(vtbl[].vtbl), parent.h), owned: true)
 
 proc create*(T: type gen_qgridlayout_types.QGridLayout,
     vtbl: ref QGridLayoutVTable = nil): gen_qgridlayout_types.QGridLayout =
   let vtbl = if vtbl == nil: new QGridLayoutVTable else: vtbl
   GC_ref(vtbl)
-  vtbl.vtbl.destructor = proc(vtbl: ptr cQGridLayoutVTable, _: ptr cQGridLayout) {.cdecl.} =
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQGridLayoutVTable, _: ptr cQGridLayout) {.cdecl.} =
     let vtbl = cast[ref QGridLayoutVTable](vtbl)
     GC_unref(vtbl)
-  if not isNil(vtbl.metaObject):
+  if not isNil(vtbl[].metaObject):
     vtbl[].vtbl.metaObject = miqt_exec_callback_cQGridLayout_metaObject
-  if not isNil(vtbl.metacast):
+  if not isNil(vtbl[].metacast):
     vtbl[].vtbl.metacast = miqt_exec_callback_cQGridLayout_metacast
-  if not isNil(vtbl.metacall):
+  if not isNil(vtbl[].metacall):
     vtbl[].vtbl.metacall = miqt_exec_callback_cQGridLayout_metacall
-  if not isNil(vtbl.sizeHint):
+  if not isNil(vtbl[].sizeHint):
     vtbl[].vtbl.sizeHint = miqt_exec_callback_cQGridLayout_sizeHint
-  if not isNil(vtbl.minimumSize):
+  if not isNil(vtbl[].minimumSize):
     vtbl[].vtbl.minimumSize = miqt_exec_callback_cQGridLayout_minimumSize
-  if not isNil(vtbl.maximumSize):
+  if not isNil(vtbl[].maximumSize):
     vtbl[].vtbl.maximumSize = miqt_exec_callback_cQGridLayout_maximumSize
-  if not isNil(vtbl.setSpacing):
+  if not isNil(vtbl[].setSpacing):
     vtbl[].vtbl.setSpacing = miqt_exec_callback_cQGridLayout_setSpacing
-  if not isNil(vtbl.spacing):
+  if not isNil(vtbl[].spacing):
     vtbl[].vtbl.spacing = miqt_exec_callback_cQGridLayout_spacing
-  if not isNil(vtbl.hasHeightForWidth):
+  if not isNil(vtbl[].hasHeightForWidth):
     vtbl[].vtbl.hasHeightForWidth = miqt_exec_callback_cQGridLayout_hasHeightForWidth
-  if not isNil(vtbl.heightForWidth):
+  if not isNil(vtbl[].heightForWidth):
     vtbl[].vtbl.heightForWidth = miqt_exec_callback_cQGridLayout_heightForWidth
-  if not isNil(vtbl.minimumHeightForWidth):
+  if not isNil(vtbl[].minimumHeightForWidth):
     vtbl[].vtbl.minimumHeightForWidth = miqt_exec_callback_cQGridLayout_minimumHeightForWidth
-  if not isNil(vtbl.expandingDirections):
+  if not isNil(vtbl[].expandingDirections):
     vtbl[].vtbl.expandingDirections = miqt_exec_callback_cQGridLayout_expandingDirections
-  if not isNil(vtbl.invalidate):
+  if not isNil(vtbl[].invalidate):
     vtbl[].vtbl.invalidate = miqt_exec_callback_cQGridLayout_invalidate
-  if not isNil(vtbl.itemAt):
+  if not isNil(vtbl[].itemAt):
     vtbl[].vtbl.itemAt = miqt_exec_callback_cQGridLayout_itemAt
-  if not isNil(vtbl.takeAt):
+  if not isNil(vtbl[].takeAt):
     vtbl[].vtbl.takeAt = miqt_exec_callback_cQGridLayout_takeAt
-  if not isNil(vtbl.count):
+  if not isNil(vtbl[].count):
     vtbl[].vtbl.count = miqt_exec_callback_cQGridLayout_count
-  if not isNil(vtbl.setGeometry):
+  if not isNil(vtbl[].setGeometry):
     vtbl[].vtbl.setGeometry = miqt_exec_callback_cQGridLayout_setGeometry
-  if not isNil(vtbl.addItemWithQLayoutItem):
+  if not isNil(vtbl[].addItemWithQLayoutItem):
     vtbl[].vtbl.addItemWithQLayoutItem = miqt_exec_callback_cQGridLayout_addItemWithQLayoutItem
-  if not isNil(vtbl.geometry):
+  if not isNil(vtbl[].geometry):
     vtbl[].vtbl.geometry = miqt_exec_callback_cQGridLayout_geometry
-  if not isNil(vtbl.indexOf):
+  if not isNil(vtbl[].indexOf):
     vtbl[].vtbl.indexOf = miqt_exec_callback_cQGridLayout_indexOf
-  if not isNil(vtbl.isEmpty):
+  if not isNil(vtbl[].isEmpty):
     vtbl[].vtbl.isEmpty = miqt_exec_callback_cQGridLayout_isEmpty
-  if not isNil(vtbl.controlTypes):
+  if not isNil(vtbl[].controlTypes):
     vtbl[].vtbl.controlTypes = miqt_exec_callback_cQGridLayout_controlTypes
-  if not isNil(vtbl.replaceWidget):
+  if not isNil(vtbl[].replaceWidget):
     vtbl[].vtbl.replaceWidget = miqt_exec_callback_cQGridLayout_replaceWidget
-  if not isNil(vtbl.layout):
+  if not isNil(vtbl[].layout):
     vtbl[].vtbl.layout = miqt_exec_callback_cQGridLayout_layout
-  if not isNil(vtbl.childEvent):
+  if not isNil(vtbl[].childEvent):
     vtbl[].vtbl.childEvent = miqt_exec_callback_cQGridLayout_childEvent
-  if not isNil(vtbl.event):
+  if not isNil(vtbl[].event):
     vtbl[].vtbl.event = miqt_exec_callback_cQGridLayout_event
-  if not isNil(vtbl.eventFilter):
+  if not isNil(vtbl[].eventFilter):
     vtbl[].vtbl.eventFilter = miqt_exec_callback_cQGridLayout_eventFilter
-  if not isNil(vtbl.timerEvent):
+  if not isNil(vtbl[].timerEvent):
     vtbl[].vtbl.timerEvent = miqt_exec_callback_cQGridLayout_timerEvent
-  if not isNil(vtbl.customEvent):
+  if not isNil(vtbl[].customEvent):
     vtbl[].vtbl.customEvent = miqt_exec_callback_cQGridLayout_customEvent
-  if not isNil(vtbl.connectNotify):
+  if not isNil(vtbl[].connectNotify):
     vtbl[].vtbl.connectNotify = miqt_exec_callback_cQGridLayout_connectNotify
-  if not isNil(vtbl.disconnectNotify):
+  if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQGridLayout_disconnectNotify
-  if not isNil(vtbl.widget):
+  if not isNil(vtbl[].widget):
     vtbl[].vtbl.widget = miqt_exec_callback_cQGridLayout_widget
-  if not isNil(vtbl.spacerItem):
+  if not isNil(vtbl[].spacerItem):
     vtbl[].vtbl.spacerItem = miqt_exec_callback_cQGridLayout_spacerItem
-  gen_qgridlayout_types.QGridLayout(h: fcQGridLayout_new2(addr(vtbl[]), ))
+  gen_qgridlayout_types.QGridLayout(h: fcQGridLayout_new2(addr(vtbl[].vtbl), ), owned: true)
+
+proc create*(T: type gen_qgridlayout_types.QGridLayout,
+    parent: gen_qwidget_types.QWidget,
+    vtbl: VirtualQGridLayout) =
+
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQGridLayoutVTable, _: ptr cQGridLayout) {.cdecl.} =
+    let vtbl = cast[ptr typeof(VirtualQGridLayout()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQGridLayout, vtbl)))
+    vtbl[].h = nil
+    vtbl[].owned = false
+  vtbl[].vtbl.metaObject = miqt_exec_method_cQGridLayout_metaObject
+  vtbl[].vtbl.metacast = miqt_exec_method_cQGridLayout_metacast
+  vtbl[].vtbl.metacall = miqt_exec_method_cQGridLayout_metacall
+  vtbl[].vtbl.sizeHint = miqt_exec_method_cQGridLayout_sizeHint
+  vtbl[].vtbl.minimumSize = miqt_exec_method_cQGridLayout_minimumSize
+  vtbl[].vtbl.maximumSize = miqt_exec_method_cQGridLayout_maximumSize
+  vtbl[].vtbl.setSpacing = miqt_exec_method_cQGridLayout_setSpacing
+  vtbl[].vtbl.spacing = miqt_exec_method_cQGridLayout_spacing
+  vtbl[].vtbl.hasHeightForWidth = miqt_exec_method_cQGridLayout_hasHeightForWidth
+  vtbl[].vtbl.heightForWidth = miqt_exec_method_cQGridLayout_heightForWidth
+  vtbl[].vtbl.minimumHeightForWidth = miqt_exec_method_cQGridLayout_minimumHeightForWidth
+  vtbl[].vtbl.expandingDirections = miqt_exec_method_cQGridLayout_expandingDirections
+  vtbl[].vtbl.invalidate = miqt_exec_method_cQGridLayout_invalidate
+  vtbl[].vtbl.itemAt = miqt_exec_method_cQGridLayout_itemAt
+  vtbl[].vtbl.takeAt = miqt_exec_method_cQGridLayout_takeAt
+  vtbl[].vtbl.count = miqt_exec_method_cQGridLayout_count
+  vtbl[].vtbl.setGeometry = miqt_exec_method_cQGridLayout_setGeometry
+  vtbl[].vtbl.addItem = miqt_exec_method_cQGridLayout_addItemWithQLayoutItem
+  vtbl[].vtbl.geometry = miqt_exec_method_cQGridLayout_geometry
+  vtbl[].vtbl.indexOf = miqt_exec_method_cQGridLayout_indexOf
+  vtbl[].vtbl.isEmpty = miqt_exec_method_cQGridLayout_isEmpty
+  vtbl[].vtbl.controlTypes = miqt_exec_method_cQGridLayout_controlTypes
+  vtbl[].vtbl.replaceWidget = miqt_exec_method_cQGridLayout_replaceWidget
+  vtbl[].vtbl.layout = miqt_exec_method_cQGridLayout_layout
+  vtbl[].vtbl.childEvent = miqt_exec_method_cQGridLayout_childEvent
+  vtbl[].vtbl.event = miqt_exec_method_cQGridLayout_event
+  vtbl[].vtbl.eventFilter = miqt_exec_method_cQGridLayout_eventFilter
+  vtbl[].vtbl.timerEvent = miqt_exec_method_cQGridLayout_timerEvent
+  vtbl[].vtbl.customEvent = miqt_exec_method_cQGridLayout_customEvent
+  vtbl[].vtbl.connectNotify = miqt_exec_method_cQGridLayout_connectNotify
+  vtbl[].vtbl.disconnectNotify = miqt_exec_method_cQGridLayout_disconnectNotify
+  vtbl[].vtbl.widget = miqt_exec_method_cQGridLayout_widget
+  vtbl[].vtbl.spacerItem = miqt_exec_method_cQGridLayout_spacerItem
+  if vtbl[].h != nil: delete(move(vtbl[]))
+  vtbl[].h = fcQGridLayout_new(addr(vtbl[].vtbl), parent.h)
+  vtbl[].owned = true
+
+proc create*(T: type gen_qgridlayout_types.QGridLayout,
+    vtbl: VirtualQGridLayout) =
+
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQGridLayoutVTable, _: ptr cQGridLayout) {.cdecl.} =
+    let vtbl = cast[ptr typeof(VirtualQGridLayout()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQGridLayout, vtbl)))
+    vtbl[].h = nil
+    vtbl[].owned = false
+  vtbl[].vtbl.metaObject = miqt_exec_method_cQGridLayout_metaObject
+  vtbl[].vtbl.metacast = miqt_exec_method_cQGridLayout_metacast
+  vtbl[].vtbl.metacall = miqt_exec_method_cQGridLayout_metacall
+  vtbl[].vtbl.sizeHint = miqt_exec_method_cQGridLayout_sizeHint
+  vtbl[].vtbl.minimumSize = miqt_exec_method_cQGridLayout_minimumSize
+  vtbl[].vtbl.maximumSize = miqt_exec_method_cQGridLayout_maximumSize
+  vtbl[].vtbl.setSpacing = miqt_exec_method_cQGridLayout_setSpacing
+  vtbl[].vtbl.spacing = miqt_exec_method_cQGridLayout_spacing
+  vtbl[].vtbl.hasHeightForWidth = miqt_exec_method_cQGridLayout_hasHeightForWidth
+  vtbl[].vtbl.heightForWidth = miqt_exec_method_cQGridLayout_heightForWidth
+  vtbl[].vtbl.minimumHeightForWidth = miqt_exec_method_cQGridLayout_minimumHeightForWidth
+  vtbl[].vtbl.expandingDirections = miqt_exec_method_cQGridLayout_expandingDirections
+  vtbl[].vtbl.invalidate = miqt_exec_method_cQGridLayout_invalidate
+  vtbl[].vtbl.itemAt = miqt_exec_method_cQGridLayout_itemAt
+  vtbl[].vtbl.takeAt = miqt_exec_method_cQGridLayout_takeAt
+  vtbl[].vtbl.count = miqt_exec_method_cQGridLayout_count
+  vtbl[].vtbl.setGeometry = miqt_exec_method_cQGridLayout_setGeometry
+  vtbl[].vtbl.addItem = miqt_exec_method_cQGridLayout_addItemWithQLayoutItem
+  vtbl[].vtbl.geometry = miqt_exec_method_cQGridLayout_geometry
+  vtbl[].vtbl.indexOf = miqt_exec_method_cQGridLayout_indexOf
+  vtbl[].vtbl.isEmpty = miqt_exec_method_cQGridLayout_isEmpty
+  vtbl[].vtbl.controlTypes = miqt_exec_method_cQGridLayout_controlTypes
+  vtbl[].vtbl.replaceWidget = miqt_exec_method_cQGridLayout_replaceWidget
+  vtbl[].vtbl.layout = miqt_exec_method_cQGridLayout_layout
+  vtbl[].vtbl.childEvent = miqt_exec_method_cQGridLayout_childEvent
+  vtbl[].vtbl.event = miqt_exec_method_cQGridLayout_event
+  vtbl[].vtbl.eventFilter = miqt_exec_method_cQGridLayout_eventFilter
+  vtbl[].vtbl.timerEvent = miqt_exec_method_cQGridLayout_timerEvent
+  vtbl[].vtbl.customEvent = miqt_exec_method_cQGridLayout_customEvent
+  vtbl[].vtbl.connectNotify = miqt_exec_method_cQGridLayout_connectNotify
+  vtbl[].vtbl.disconnectNotify = miqt_exec_method_cQGridLayout_disconnectNotify
+  vtbl[].vtbl.widget = miqt_exec_method_cQGridLayout_widget
+  vtbl[].vtbl.spacerItem = miqt_exec_method_cQGridLayout_spacerItem
+  if vtbl[].h != nil: delete(move(vtbl[]))
+  vtbl[].h = fcQGridLayout_new2(addr(vtbl[].vtbl), )
+  vtbl[].owned = true
 
 proc staticMetaObject*(_: type gen_qgridlayout_types.QGridLayout): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQGridLayout_staticMetaObject())
-proc delete*(self: gen_qgridlayout_types.QGridLayout) =
-  fcQGridLayout_delete(self.h)

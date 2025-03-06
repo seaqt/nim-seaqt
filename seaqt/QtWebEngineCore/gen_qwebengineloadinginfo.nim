@@ -30,9 +30,6 @@ func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
     else:
       copyMem(addr result[0], unsafeAddr v[0], v.len)
 
-const cflags = gorge("pkg-config --cflags Qt6WebEngineCore")  & " -fPIC"
-{.compile("gen_qwebengineloadinginfo.cpp", cflags).}
-
 
 type QWebEngineLoadingInfoLoadStatusEnum* = distinct cint
 template LoadStartedStatus*(_: type QWebEngineLoadingInfoLoadStatusEnum): untyped = 0
@@ -73,13 +70,12 @@ proc fcQWebEngineLoadingInfo_errorDomain(self: pointer, ): cint {.importc: "QWeb
 proc fcQWebEngineLoadingInfo_errorCode(self: pointer, ): cint {.importc: "QWebEngineLoadingInfo_errorCode".}
 proc fcQWebEngineLoadingInfo_new(other: pointer): ptr cQWebEngineLoadingInfo {.importc: "QWebEngineLoadingInfo_new".}
 proc fcQWebEngineLoadingInfo_staticMetaObject(): pointer {.importc: "QWebEngineLoadingInfo_staticMetaObject".}
-proc fcQWebEngineLoadingInfo_delete(self: pointer) {.importc: "QWebEngineLoadingInfo_delete".}
 
 proc operatorAssign*(self: gen_qwebengineloadinginfo_types.QWebEngineLoadingInfo, other: gen_qwebengineloadinginfo_types.QWebEngineLoadingInfo): void =
   fcQWebEngineLoadingInfo_operatorAssign(self.h, other.h)
 
 proc url*(self: gen_qwebengineloadinginfo_types.QWebEngineLoadingInfo, ): gen_qurl_types.QUrl =
-  gen_qurl_types.QUrl(h: fcQWebEngineLoadingInfo_url(self.h))
+  gen_qurl_types.QUrl(h: fcQWebEngineLoadingInfo_url(self.h), owned: true)
 
 proc isErrorPage*(self: gen_qwebengineloadinginfo_types.QWebEngineLoadingInfo, ): bool =
   fcQWebEngineLoadingInfo_isErrorPage(self.h)
@@ -101,9 +97,7 @@ proc errorCode*(self: gen_qwebengineloadinginfo_types.QWebEngineLoadingInfo, ): 
 
 proc create*(T: type gen_qwebengineloadinginfo_types.QWebEngineLoadingInfo,
     other: gen_qwebengineloadinginfo_types.QWebEngineLoadingInfo): gen_qwebengineloadinginfo_types.QWebEngineLoadingInfo =
-  gen_qwebengineloadinginfo_types.QWebEngineLoadingInfo(h: fcQWebEngineLoadingInfo_new(other.h))
+  gen_qwebengineloadinginfo_types.QWebEngineLoadingInfo(h: fcQWebEngineLoadingInfo_new(other.h), owned: true)
 
 proc staticMetaObject*(_: type gen_qwebengineloadinginfo_types.QWebEngineLoadingInfo): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQWebEngineLoadingInfo_staticMetaObject())
-proc delete*(self: gen_qwebengineloadinginfo_types.QWebEngineLoadingInfo) =
-  fcQWebEngineLoadingInfo_delete(self.h)

@@ -1,5 +1,28 @@
-type QStringConverterBase* {.inheritable, pure.} = object
+type QStringConverterBase* {.inheritable.} = object
   h*: pointer
+  owned*: bool
+
 type QStringConverter* = object of QStringConverterBase
-type QStringConverterBaseState* {.inheritable, pure.} = object
+type QStringConverterBaseState* {.inheritable.} = object
   h*: pointer
+  owned*: bool
+
+const cflags = gorge("pkg-config --cflags Qt6Core") & " -fPIC"
+{.compile("gen_qstringconverter_base.cpp", cflags).}
+
+proc fcQStringConverterBaseState_delete(self: pointer) {.importc: "QStringConverterBase__State_delete".}
+proc `=destroy`(self: var QStringConverterBaseState) =
+  if self.owned: fcQStringConverterBaseState_delete(self.h)
+
+proc `=sink`(dest: var QStringConverterBaseState, source: QStringConverterBaseState) =
+  `=destroy`(dest)
+  wasMoved(dest)
+  dest.h = source.h
+  dest.owned = source.owned
+
+proc `=copy`(dest: var QStringConverterBaseState, source: QStringConverterBaseState) {.error.}
+proc delete*(self: sink QStringConverterBaseState) =
+  let h = self.h
+  wasMoved(self)
+  fcQStringConverterBaseState_delete(h)
+

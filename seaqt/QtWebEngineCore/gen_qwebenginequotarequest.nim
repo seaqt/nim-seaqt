@@ -30,9 +30,6 @@ func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
     else:
       copyMem(addr result[0], unsafeAddr v[0], v.len)
 
-const cflags = gorge("pkg-config --cflags Qt6WebEngineCore")  & " -fPIC"
-{.compile("gen_qwebenginequotarequest.cpp", cflags).}
-
 
 import ./gen_qwebenginequotarequest_types
 export gen_qwebenginequotarequest_types
@@ -55,7 +52,6 @@ proc fcQWebEngineQuotaRequest_operatorNotEqual(self: pointer, that: pointer): bo
 proc fcQWebEngineQuotaRequest_new(): ptr cQWebEngineQuotaRequest {.importc: "QWebEngineQuotaRequest_new".}
 proc fcQWebEngineQuotaRequest_new2(param1: pointer): ptr cQWebEngineQuotaRequest {.importc: "QWebEngineQuotaRequest_new2".}
 proc fcQWebEngineQuotaRequest_staticMetaObject(): pointer {.importc: "QWebEngineQuotaRequest_staticMetaObject".}
-proc fcQWebEngineQuotaRequest_delete(self: pointer) {.importc: "QWebEngineQuotaRequest_delete".}
 
 proc accept*(self: gen_qwebenginequotarequest_types.QWebEngineQuotaRequest, ): void =
   fcQWebEngineQuotaRequest_accept(self.h)
@@ -64,7 +60,7 @@ proc reject*(self: gen_qwebenginequotarequest_types.QWebEngineQuotaRequest, ): v
   fcQWebEngineQuotaRequest_reject(self.h)
 
 proc origin*(self: gen_qwebenginequotarequest_types.QWebEngineQuotaRequest, ): gen_qurl_types.QUrl =
-  gen_qurl_types.QUrl(h: fcQWebEngineQuotaRequest_origin(self.h))
+  gen_qurl_types.QUrl(h: fcQWebEngineQuotaRequest_origin(self.h), owned: true)
 
 proc requestedSize*(self: gen_qwebenginequotarequest_types.QWebEngineQuotaRequest, ): clonglong =
   fcQWebEngineQuotaRequest_requestedSize(self.h)
@@ -76,13 +72,11 @@ proc operatorNotEqual*(self: gen_qwebenginequotarequest_types.QWebEngineQuotaReq
   fcQWebEngineQuotaRequest_operatorNotEqual(self.h, that.h)
 
 proc create*(T: type gen_qwebenginequotarequest_types.QWebEngineQuotaRequest): gen_qwebenginequotarequest_types.QWebEngineQuotaRequest =
-  gen_qwebenginequotarequest_types.QWebEngineQuotaRequest(h: fcQWebEngineQuotaRequest_new())
+  gen_qwebenginequotarequest_types.QWebEngineQuotaRequest(h: fcQWebEngineQuotaRequest_new(), owned: true)
 
 proc create*(T: type gen_qwebenginequotarequest_types.QWebEngineQuotaRequest,
     param1: gen_qwebenginequotarequest_types.QWebEngineQuotaRequest): gen_qwebenginequotarequest_types.QWebEngineQuotaRequest =
-  gen_qwebenginequotarequest_types.QWebEngineQuotaRequest(h: fcQWebEngineQuotaRequest_new2(param1.h))
+  gen_qwebenginequotarequest_types.QWebEngineQuotaRequest(h: fcQWebEngineQuotaRequest_new2(param1.h), owned: true)
 
 proc staticMetaObject*(_: type gen_qwebenginequotarequest_types.QWebEngineQuotaRequest): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQWebEngineQuotaRequest_staticMetaObject())
-proc delete*(self: gen_qwebenginequotarequest_types.QWebEngineQuotaRequest) =
-  fcQWebEngineQuotaRequest_delete(self.h)

@@ -30,7 +30,7 @@ func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
     else:
       copyMem(addr result[0], unsafeAddr v[0], v.len)
 
-const cflags = gorge("pkg-config --cflags Qt6Core")  & " -fPIC"
+const cflags = gorge("pkg-config --cflags Qt6Core") & " -fPIC"
 {.compile("gen_qstringtokenizer.cpp", cflags).}
 
 
@@ -44,5 +44,5 @@ proc fcQStringTokenizerBaseBase_new(param1: pointer): ptr cQStringTokenizerBaseB
 
 proc create*(T: type gen_qstringtokenizer_types.QStringTokenizerBaseBase,
     param1: gen_qstringtokenizer_types.QStringTokenizerBaseBase): gen_qstringtokenizer_types.QStringTokenizerBaseBase =
-  gen_qstringtokenizer_types.QStringTokenizerBaseBase(h: fcQStringTokenizerBaseBase_new(param1.h))
+  gen_qstringtokenizer_types.QStringTokenizerBaseBase(h: fcQStringTokenizerBaseBase_new(param1.h), owned: true)
 

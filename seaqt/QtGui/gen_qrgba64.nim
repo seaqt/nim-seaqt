@@ -30,9 +30,6 @@ func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
     else:
       copyMem(addr result[0], unsafeAddr v[0], v.len)
 
-const cflags = gorge("pkg-config --cflags Qt6Gui")  & " -fPIC"
-{.compile("gen_qrgba64.cpp", cflags).}
-
 
 import ./gen_qrgba64_types
 export gen_qrgba64_types
@@ -66,19 +63,18 @@ proc fcQRgba64_ToUnsignedLongLong(self: pointer, ): culonglong {.importc: "QRgba
 proc fcQRgba64_operatorAssign(self: pointer, x_rgba: culonglong): void {.importc: "QRgba64_operatorAssign".}
 proc fcQRgba64_new(): ptr cQRgba64 {.importc: "QRgba64_new".}
 proc fcQRgba64_new2(param1: pointer): ptr cQRgba64 {.importc: "QRgba64_new2".}
-proc fcQRgba64_delete(self: pointer) {.importc: "QRgba64_delete".}
 
 proc fromRgba64*(_: type gen_qrgba64_types.QRgba64, c: culonglong): gen_qrgba64_types.QRgba64 =
-  gen_qrgba64_types.QRgba64(h: fcQRgba64_fromRgba64(c))
+  gen_qrgba64_types.QRgba64(h: fcQRgba64_fromRgba64(c), owned: true)
 
 proc fromRgba64*(_: type gen_qrgba64_types.QRgba64, red: cushort, green: cushort, blue: cushort, alpha: cushort): gen_qrgba64_types.QRgba64 =
-  gen_qrgba64_types.QRgba64(h: fcQRgba64_fromRgba642(red, green, blue, alpha))
+  gen_qrgba64_types.QRgba64(h: fcQRgba64_fromRgba642(red, green, blue, alpha), owned: true)
 
 proc fromRgba*(_: type gen_qrgba64_types.QRgba64, red: uint8, green: uint8, blue: uint8, alpha: uint8): gen_qrgba64_types.QRgba64 =
-  gen_qrgba64_types.QRgba64(h: fcQRgba64_fromRgba(red, green, blue, alpha))
+  gen_qrgba64_types.QRgba64(h: fcQRgba64_fromRgba(red, green, blue, alpha), owned: true)
 
 proc fromArgb32*(_: type gen_qrgba64_types.QRgba64, rgb: cuint): gen_qrgba64_types.QRgba64 =
-  gen_qrgba64_types.QRgba64(h: fcQRgba64_fromArgb32(rgb))
+  gen_qrgba64_types.QRgba64(h: fcQRgba64_fromArgb32(rgb), owned: true)
 
 proc isOpaque*(self: gen_qrgba64_types.QRgba64, ): bool =
   fcQRgba64_isOpaque(self.h)
@@ -129,10 +125,10 @@ proc toRgb16*(self: gen_qrgba64_types.QRgba64, ): cushort =
   fcQRgba64_toRgb16(self.h)
 
 proc premultiplied*(self: gen_qrgba64_types.QRgba64, ): gen_qrgba64_types.QRgba64 =
-  gen_qrgba64_types.QRgba64(h: fcQRgba64_premultiplied(self.h))
+  gen_qrgba64_types.QRgba64(h: fcQRgba64_premultiplied(self.h), owned: true)
 
 proc unpremultiplied*(self: gen_qrgba64_types.QRgba64, ): gen_qrgba64_types.QRgba64 =
-  gen_qrgba64_types.QRgba64(h: fcQRgba64_unpremultiplied(self.h))
+  gen_qrgba64_types.QRgba64(h: fcQRgba64_unpremultiplied(self.h), owned: true)
 
 proc ToUnsignedLongLong*(self: gen_qrgba64_types.QRgba64, ): culonglong =
   fcQRgba64_ToUnsignedLongLong(self.h)
@@ -141,11 +137,9 @@ proc operatorAssign*(self: gen_qrgba64_types.QRgba64, x_rgba: culonglong): void 
   fcQRgba64_operatorAssign(self.h, x_rgba)
 
 proc create*(T: type gen_qrgba64_types.QRgba64): gen_qrgba64_types.QRgba64 =
-  gen_qrgba64_types.QRgba64(h: fcQRgba64_new())
+  gen_qrgba64_types.QRgba64(h: fcQRgba64_new(), owned: true)
 
 proc create*(T: type gen_qrgba64_types.QRgba64,
     param1: gen_qrgba64_types.QRgba64): gen_qrgba64_types.QRgba64 =
-  gen_qrgba64_types.QRgba64(h: fcQRgba64_new2(param1.h))
+  gen_qrgba64_types.QRgba64(h: fcQRgba64_new2(param1.h), owned: true)
 
-proc delete*(self: gen_qrgba64_types.QRgba64) =
-  fcQRgba64_delete(self.h)

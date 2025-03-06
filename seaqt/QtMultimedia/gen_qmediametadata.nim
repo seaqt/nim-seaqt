@@ -30,9 +30,6 @@ func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
     else:
       copyMem(addr result[0], unsafeAddr v[0], v.len)
 
-const cflags = gorge("pkg-config --cflags Qt6Multimedia")  & " -fPIC"
-{.compile("gen_qmediametadata.cpp", cflags).}
-
 
 type QMediaMetaDataKeyEnum* = distinct cint
 template Title*(_: type QMediaMetaDataKeyEnum): untyped = 0
@@ -89,10 +86,9 @@ proc fcQMediaMetaData_metaDataKeyToString(k: cint): struct_miqt_string {.importc
 proc fcQMediaMetaData_new(param1: pointer): ptr cQMediaMetaData {.importc: "QMediaMetaData_new".}
 proc fcQMediaMetaData_new2(): ptr cQMediaMetaData {.importc: "QMediaMetaData_new2".}
 proc fcQMediaMetaData_staticMetaObject(): pointer {.importc: "QMediaMetaData_staticMetaObject".}
-proc fcQMediaMetaData_delete(self: pointer) {.importc: "QMediaMetaData_delete".}
 
 proc value*(self: gen_qmediametadata_types.QMediaMetaData, k: cint): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQMediaMetaData_value(self.h, cint(k)))
+  gen_qvariant_types.QVariant(h: fcQMediaMetaData_value(self.h, cint(k)), owned: true)
 
 proc insert*(self: gen_qmediametadata_types.QMediaMetaData, k: cint, value: gen_qvariant_types.QVariant): void =
   fcQMediaMetaData_insert(self.h, cint(k), value.h)
@@ -110,7 +106,7 @@ proc keys*(self: gen_qmediametadata_types.QMediaMetaData, ): seq[cint] =
   vx_ret
 
 proc operatorSubscript*(self: gen_qmediametadata_types.QMediaMetaData, k: cint): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQMediaMetaData_operatorSubscript(self.h, cint(k)))
+  gen_qvariant_types.QVariant(h: fcQMediaMetaData_operatorSubscript(self.h, cint(k)), owned: false)
 
 proc clear*(self: gen_qmediametadata_types.QMediaMetaData, ): void =
   fcQMediaMetaData_clear(self.h)
@@ -132,12 +128,10 @@ proc metaDataKeyToString*(_: type gen_qmediametadata_types.QMediaMetaData, k: ci
 
 proc create*(T: type gen_qmediametadata_types.QMediaMetaData,
     param1: gen_qmediametadata_types.QMediaMetaData): gen_qmediametadata_types.QMediaMetaData =
-  gen_qmediametadata_types.QMediaMetaData(h: fcQMediaMetaData_new(param1.h))
+  gen_qmediametadata_types.QMediaMetaData(h: fcQMediaMetaData_new(param1.h), owned: true)
 
 proc create*(T: type gen_qmediametadata_types.QMediaMetaData): gen_qmediametadata_types.QMediaMetaData =
-  gen_qmediametadata_types.QMediaMetaData(h: fcQMediaMetaData_new2())
+  gen_qmediametadata_types.QMediaMetaData(h: fcQMediaMetaData_new2(), owned: true)
 
 proc staticMetaObject*(_: type gen_qmediametadata_types.QMediaMetaData): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQMediaMetaData_staticMetaObject())
-proc delete*(self: gen_qmediametadata_types.QMediaMetaData) =
-  fcQMediaMetaData_delete(self.h)

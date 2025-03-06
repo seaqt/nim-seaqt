@@ -30,7 +30,7 @@ func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
     else:
       copyMem(addr result[0], unsafeAddr v[0], v.len)
 
-const cflags = gorge("pkg-config --cflags Qt6Gui")  & " -fPIC"
+const cflags = gorge("pkg-config --cflags Qt6Gui") & " -fPIC"
 {.compile("gen_qpagedpaintdevice.cpp", cflags).}
 
 
@@ -66,7 +66,6 @@ proc fcQPagedPaintDevice_setPageMargins(self: pointer, margins: pointer, units: 
 proc fcQPagedPaintDevice_pageLayout(self: pointer, ): pointer {.importc: "QPagedPaintDevice_pageLayout".}
 proc fcQPagedPaintDevice_setPageRanges(self: pointer, ranges: pointer): void {.importc: "QPagedPaintDevice_setPageRanges".}
 proc fcQPagedPaintDevice_pageRanges(self: pointer, ): pointer {.importc: "QPagedPaintDevice_pageRanges".}
-proc fcQPagedPaintDevice_delete(self: pointer) {.importc: "QPagedPaintDevice_delete".}
 
 proc newPage*(self: gen_qpagedpaintdevice_types.QPagedPaintDevice, ): bool =
   fcQPagedPaintDevice_newPage(self.h)
@@ -84,13 +83,11 @@ proc setPageMargins*(self: gen_qpagedpaintdevice_types.QPagedPaintDevice, margin
   fcQPagedPaintDevice_setPageMargins(self.h, margins.h, cint(units))
 
 proc pageLayout*(self: gen_qpagedpaintdevice_types.QPagedPaintDevice, ): gen_qpagelayout_types.QPageLayout =
-  gen_qpagelayout_types.QPageLayout(h: fcQPagedPaintDevice_pageLayout(self.h))
+  gen_qpagelayout_types.QPageLayout(h: fcQPagedPaintDevice_pageLayout(self.h), owned: true)
 
 proc setPageRanges*(self: gen_qpagedpaintdevice_types.QPagedPaintDevice, ranges: gen_qpageranges_types.QPageRanges): void =
   fcQPagedPaintDevice_setPageRanges(self.h, ranges.h)
 
 proc pageRanges*(self: gen_qpagedpaintdevice_types.QPagedPaintDevice, ): gen_qpageranges_types.QPageRanges =
-  gen_qpageranges_types.QPageRanges(h: fcQPagedPaintDevice_pageRanges(self.h))
+  gen_qpageranges_types.QPageRanges(h: fcQPagedPaintDevice_pageRanges(self.h), owned: true)
 
-proc delete*(self: gen_qpagedpaintdevice_types.QPagedPaintDevice) =
-  fcQPagedPaintDevice_delete(self.h)

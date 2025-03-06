@@ -1,2 +1,4 @@
-type QStringTokenizerBaseBase* {.inheritable, pure.} = object
+type QStringTokenizerBaseBase* {.inheritable.} = object
   h*: pointer
+  owned*: bool
+

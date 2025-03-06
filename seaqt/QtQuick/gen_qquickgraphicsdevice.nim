@@ -30,9 +30,6 @@ func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
     else:
       copyMem(addr result[0], unsafeAddr v[0], v.len)
 
-const cflags = gorge("pkg-config --cflags Qt6Quick")  & " -fPIC"
-{.compile("gen_qquickgraphicsdevice.cpp", cflags).}
-
 
 import ./gen_qquickgraphicsdevice_types
 export gen_qquickgraphicsdevice_types
@@ -47,7 +44,6 @@ proc fcQQuickGraphicsDevice_fromDeviceObjects(physicalDevice: cVkPhysicalDevice,
 proc fcQQuickGraphicsDevice_fromDeviceObjects4(physicalDevice: cVkPhysicalDevice, device: cVkDevice, queueFamilyIndex: cint, queueIndex: cint): pointer {.importc: "QQuickGraphicsDevice_fromDeviceObjects4".}
 proc fcQQuickGraphicsDevice_new(): ptr cQQuickGraphicsDevice {.importc: "QQuickGraphicsDevice_new".}
 proc fcQQuickGraphicsDevice_new2(other: pointer): ptr cQQuickGraphicsDevice {.importc: "QQuickGraphicsDevice_new2".}
-proc fcQQuickGraphicsDevice_delete(self: pointer) {.importc: "QQuickGraphicsDevice_delete".}
 
 proc operatorAssign*(self: gen_qquickgraphicsdevice_types.QQuickGraphicsDevice, other: gen_qquickgraphicsdevice_types.QQuickGraphicsDevice): void =
   fcQQuickGraphicsDevice_operatorAssign(self.h, other.h)
@@ -56,20 +52,18 @@ proc isNull*(self: gen_qquickgraphicsdevice_types.QQuickGraphicsDevice, ): bool 
   fcQQuickGraphicsDevice_isNull(self.h)
 
 proc fromPhysicalDevice*(_: type gen_qquickgraphicsdevice_types.QQuickGraphicsDevice, physicalDevice: VkPhysicalDevice): gen_qquickgraphicsdevice_types.QQuickGraphicsDevice =
-  gen_qquickgraphicsdevice_types.QQuickGraphicsDevice(h: fcQQuickGraphicsDevice_fromPhysicalDevice(physicalDevice))
+  gen_qquickgraphicsdevice_types.QQuickGraphicsDevice(h: fcQQuickGraphicsDevice_fromPhysicalDevice(physicalDevice), owned: true)
 
 proc fromDeviceObjects*(_: type gen_qquickgraphicsdevice_types.QQuickGraphicsDevice, physicalDevice: VkPhysicalDevice, device: VkDevice, queueFamilyIndex: cint): gen_qquickgraphicsdevice_types.QQuickGraphicsDevice =
-  gen_qquickgraphicsdevice_types.QQuickGraphicsDevice(h: fcQQuickGraphicsDevice_fromDeviceObjects(physicalDevice, device, queueFamilyIndex))
+  gen_qquickgraphicsdevice_types.QQuickGraphicsDevice(h: fcQQuickGraphicsDevice_fromDeviceObjects(physicalDevice, device, queueFamilyIndex), owned: true)
 
 proc fromDeviceObjects*(_: type gen_qquickgraphicsdevice_types.QQuickGraphicsDevice, physicalDevice: VkPhysicalDevice, device: VkDevice, queueFamilyIndex: cint, queueIndex: cint): gen_qquickgraphicsdevice_types.QQuickGraphicsDevice =
-  gen_qquickgraphicsdevice_types.QQuickGraphicsDevice(h: fcQQuickGraphicsDevice_fromDeviceObjects4(physicalDevice, device, queueFamilyIndex, queueIndex))
+  gen_qquickgraphicsdevice_types.QQuickGraphicsDevice(h: fcQQuickGraphicsDevice_fromDeviceObjects4(physicalDevice, device, queueFamilyIndex, queueIndex), owned: true)
 
 proc create*(T: type gen_qquickgraphicsdevice_types.QQuickGraphicsDevice): gen_qquickgraphicsdevice_types.QQuickGraphicsDevice =
-  gen_qquickgraphicsdevice_types.QQuickGraphicsDevice(h: fcQQuickGraphicsDevice_new())
+  gen_qquickgraphicsdevice_types.QQuickGraphicsDevice(h: fcQQuickGraphicsDevice_new(), owned: true)
 
 proc create*(T: type gen_qquickgraphicsdevice_types.QQuickGraphicsDevice,
     other: gen_qquickgraphicsdevice_types.QQuickGraphicsDevice): gen_qquickgraphicsdevice_types.QQuickGraphicsDevice =
-  gen_qquickgraphicsdevice_types.QQuickGraphicsDevice(h: fcQQuickGraphicsDevice_new2(other.h))
+  gen_qquickgraphicsdevice_types.QQuickGraphicsDevice(h: fcQQuickGraphicsDevice_new2(other.h), owned: true)
 
-proc delete*(self: gen_qquickgraphicsdevice_types.QQuickGraphicsDevice) =
-  fcQQuickGraphicsDevice_delete(self.h)

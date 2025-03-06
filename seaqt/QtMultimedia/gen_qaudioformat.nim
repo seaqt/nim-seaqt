@@ -30,9 +30,6 @@ func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
     else:
       copyMem(addr result[0], unsafeAddr v[0], v.len)
 
-const cflags = gorge("pkg-config --cflags Qt6Multimedia")  & " -fPIC"
-{.compile("gen_qaudioformat.cpp", cflags).}
-
 
 type QAudioFormatSampleFormatEnum* = distinct cushort
 template Unknown*(_: type QAudioFormatSampleFormatEnum): untyped = 0
@@ -112,7 +109,6 @@ proc fcQAudioFormat_normalizedSampleValue(self: pointer, sample: pointer): float
 proc fcQAudioFormat_defaultChannelConfigForChannelCount(channelCount: cint): cint {.importc: "QAudioFormat_defaultChannelConfigForChannelCount".}
 proc fcQAudioFormat_new(): ptr cQAudioFormat {.importc: "QAudioFormat_new".}
 proc fcQAudioFormat_new2(param1: pointer): ptr cQAudioFormat {.importc: "QAudioFormat_new2".}
-proc fcQAudioFormat_delete(self: pointer) {.importc: "QAudioFormat_delete".}
 
 proc isValid*(self: gen_qaudioformat_types.QAudioFormat, ): bool =
   fcQAudioFormat_isValid(self.h)
@@ -175,11 +171,9 @@ proc defaultChannelConfigForChannelCount*(_: type gen_qaudioformat_types.QAudioF
   cint(fcQAudioFormat_defaultChannelConfigForChannelCount(channelCount))
 
 proc create*(T: type gen_qaudioformat_types.QAudioFormat): gen_qaudioformat_types.QAudioFormat =
-  gen_qaudioformat_types.QAudioFormat(h: fcQAudioFormat_new())
+  gen_qaudioformat_types.QAudioFormat(h: fcQAudioFormat_new(), owned: true)
 
 proc create*(T: type gen_qaudioformat_types.QAudioFormat,
     param1: gen_qaudioformat_types.QAudioFormat): gen_qaudioformat_types.QAudioFormat =
-  gen_qaudioformat_types.QAudioFormat(h: fcQAudioFormat_new2(param1.h))
+  gen_qaudioformat_types.QAudioFormat(h: fcQAudioFormat_new2(param1.h), owned: true)
 
-proc delete*(self: gen_qaudioformat_types.QAudioFormat) =
-  fcQAudioFormat_delete(self.h)

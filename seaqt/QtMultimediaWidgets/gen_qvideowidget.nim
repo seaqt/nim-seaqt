@@ -30,7 +30,7 @@ func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
     else:
       copyMem(addr result[0], unsafeAddr v[0], v.len)
 
-const cflags = gorge("pkg-config --cflags Qt6MultimediaWidgets")  & " -fPIC"
+const cflags = gorge("pkg-config --cflags Qt6MultimediaWidgets") & " -fPIC"
 {.compile("gen_qvideowidget.cpp", cflags).}
 
 
@@ -83,7 +83,7 @@ proc fcQVideoWidget_aspectRatioModeChanged(self: pointer, mode: cint): void {.im
 proc fcQVideoWidget_connect_aspectRatioModeChanged(self: pointer, slot: int, callback: proc (slot: int, mode: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QVideoWidget_connect_aspectRatioModeChanged".}
 proc fcQVideoWidget_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QVideoWidget_tr2".}
 proc fcQVideoWidget_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QVideoWidget_tr3".}
-type cQVideoWidgetVTable = object
+type cQVideoWidgetVTable {.pure.} = object
   destructor*: proc(vtbl: ptr cQVideoWidgetVTable, self: ptr cQVideoWidget) {.cdecl, raises:[], gcsafe.}
   metaObject*: proc(vtbl, self: pointer, ): pointer {.cdecl, raises: [], gcsafe.}
   metacast*: proc(vtbl, self: pointer, param1: cstring): pointer {.cdecl, raises: [], gcsafe.}
@@ -197,10 +197,9 @@ proc fcQVideoWidget_protectedbase_isSignalConnected(self: pointer, signal: point
 proc fcQVideoWidget_new(vtbl: pointer, parent: pointer): ptr cQVideoWidget {.importc: "QVideoWidget_new".}
 proc fcQVideoWidget_new2(vtbl: pointer, ): ptr cQVideoWidget {.importc: "QVideoWidget_new2".}
 proc fcQVideoWidget_staticMetaObject(): pointer {.importc: "QVideoWidget_staticMetaObject".}
-proc fcQVideoWidget_delete(self: pointer) {.importc: "QVideoWidget_delete".}
 
 proc metaObject*(self: gen_qvideowidget_types.QVideoWidget, ): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQVideoWidget_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQVideoWidget_metaObject(self.h), owned: false)
 
 proc metacast*(self: gen_qvideowidget_types.QVideoWidget, param1: cstring): pointer =
   fcQVideoWidget_metacast(self.h, param1)
@@ -215,13 +214,13 @@ proc tr*(_: type gen_qvideowidget_types.QVideoWidget, s: cstring): string =
   vx_ret
 
 proc videoSink*(self: gen_qvideowidget_types.QVideoWidget, ): gen_qvideosink_types.QVideoSink =
-  gen_qvideosink_types.QVideoSink(h: fcQVideoWidget_videoSink(self.h))
+  gen_qvideosink_types.QVideoSink(h: fcQVideoWidget_videoSink(self.h), owned: false)
 
 proc aspectRatioMode*(self: gen_qvideowidget_types.QVideoWidget, ): cint =
   cint(fcQVideoWidget_aspectRatioMode(self.h))
 
 proc sizeHint*(self: gen_qvideowidget_types.QVideoWidget, ): gen_qsize_types.QSize =
-  gen_qsize_types.QSize(h: fcQVideoWidget_sizeHint(self.h))
+  gen_qsize_types.QSize(h: fcQVideoWidget_sizeHint(self.h), owned: true)
 
 proc setFullScreen*(self: gen_qvideowidget_types.QVideoWidget, fullScreen: bool): void =
   fcQVideoWidget_setFullScreen(self.h, fullScreen)
@@ -331,7 +330,7 @@ type QVideoWidgetchildEventProc* = proc(self: QVideoWidget, event: gen_qcoreeven
 type QVideoWidgetcustomEventProc* = proc(self: QVideoWidget, event: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
 type QVideoWidgetconnectNotifyProc* = proc(self: QVideoWidget, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
 type QVideoWidgetdisconnectNotifyProc* = proc(self: QVideoWidget, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
-type QVideoWidgetVTable* = object
+type QVideoWidgetVTable* {.inheritable, pure.} = object
   vtbl: cQVideoWidgetVTable
   metaObject*: QVideoWidgetmetaObjectProc
   metacast*: QVideoWidgetmetacastProc
@@ -384,13 +383,16 @@ type QVideoWidgetVTable* = object
   connectNotify*: QVideoWidgetconnectNotifyProc
   disconnectNotify*: QVideoWidgetdisconnectNotifyProc
 proc QVideoWidgetmetaObject*(self: gen_qvideowidget_types.QVideoWidget, ): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQVideoWidget_virtualbase_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQVideoWidget_virtualbase_metaObject(self.h), owned: false)
 
 proc miqt_exec_callback_cQVideoWidget_metaObject(vtbl: pointer, self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QVideoWidgetVTable](vtbl)
   let self = QVideoWidget(h: self)
   var virtualReturn = vtbl[].metaObject(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QVideoWidgetmetacast*(self: gen_qvideowidget_types.QVideoWidget, param1: cstring): pointer =
   fcQVideoWidget_virtualbase_metacast(self.h, param1)
@@ -415,13 +417,16 @@ proc miqt_exec_callback_cQVideoWidget_metacall(vtbl: pointer, self: pointer, par
   virtualReturn
 
 proc QVideoWidgetsizeHint*(self: gen_qvideowidget_types.QVideoWidget, ): gen_qsize_types.QSize =
-  gen_qsize_types.QSize(h: fcQVideoWidget_virtualbase_sizeHint(self.h))
+  gen_qsize_types.QSize(h: fcQVideoWidget_virtualbase_sizeHint(self.h), owned: true)
 
 proc miqt_exec_callback_cQVideoWidget_sizeHint(vtbl: pointer, self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QVideoWidgetVTable](vtbl)
   let self = QVideoWidget(h: self)
   var virtualReturn = vtbl[].sizeHint(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QVideoWidgetevent*(self: gen_qvideowidget_types.QVideoWidget, event: gen_qcoreevent_types.QEvent): bool =
   fcQVideoWidget_virtualbase_event(self.h, event.h)
@@ -429,7 +434,7 @@ proc QVideoWidgetevent*(self: gen_qvideowidget_types.QVideoWidget, event: gen_qc
 proc miqt_exec_callback_cQVideoWidget_event(vtbl: pointer, self: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QVideoWidgetVTable](vtbl)
   let self = QVideoWidget(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].event(self, slotval1)
   virtualReturn
 
@@ -439,7 +444,7 @@ proc QVideoWidgetshowEvent*(self: gen_qvideowidget_types.QVideoWidget, event: ge
 proc miqt_exec_callback_cQVideoWidget_showEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QVideoWidgetVTable](vtbl)
   let self = QVideoWidget(h: self)
-  let slotval1 = gen_qevent_types.QShowEvent(h: event)
+  let slotval1 = gen_qevent_types.QShowEvent(h: event, owned: false)
   vtbl[].showEvent(self, slotval1)
 
 proc QVideoWidgethideEvent*(self: gen_qvideowidget_types.QVideoWidget, event: gen_qevent_types.QHideEvent): void =
@@ -448,7 +453,7 @@ proc QVideoWidgethideEvent*(self: gen_qvideowidget_types.QVideoWidget, event: ge
 proc miqt_exec_callback_cQVideoWidget_hideEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QVideoWidgetVTable](vtbl)
   let self = QVideoWidget(h: self)
-  let slotval1 = gen_qevent_types.QHideEvent(h: event)
+  let slotval1 = gen_qevent_types.QHideEvent(h: event, owned: false)
   vtbl[].hideEvent(self, slotval1)
 
 proc QVideoWidgetresizeEvent*(self: gen_qvideowidget_types.QVideoWidget, event: gen_qevent_types.QResizeEvent): void =
@@ -457,7 +462,7 @@ proc QVideoWidgetresizeEvent*(self: gen_qvideowidget_types.QVideoWidget, event: 
 proc miqt_exec_callback_cQVideoWidget_resizeEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QVideoWidgetVTable](vtbl)
   let self = QVideoWidget(h: self)
-  let slotval1 = gen_qevent_types.QResizeEvent(h: event)
+  let slotval1 = gen_qevent_types.QResizeEvent(h: event, owned: false)
   vtbl[].resizeEvent(self, slotval1)
 
 proc QVideoWidgetmoveEvent*(self: gen_qvideowidget_types.QVideoWidget, event: gen_qevent_types.QMoveEvent): void =
@@ -466,7 +471,7 @@ proc QVideoWidgetmoveEvent*(self: gen_qvideowidget_types.QVideoWidget, event: ge
 proc miqt_exec_callback_cQVideoWidget_moveEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QVideoWidgetVTable](vtbl)
   let self = QVideoWidget(h: self)
-  let slotval1 = gen_qevent_types.QMoveEvent(h: event)
+  let slotval1 = gen_qevent_types.QMoveEvent(h: event, owned: false)
   vtbl[].moveEvent(self, slotval1)
 
 proc QVideoWidgetdevType*(self: gen_qvideowidget_types.QVideoWidget, ): cint =
@@ -488,13 +493,16 @@ proc miqt_exec_callback_cQVideoWidget_setVisible(vtbl: pointer, self: pointer, v
   vtbl[].setVisible(self, slotval1)
 
 proc QVideoWidgetminimumSizeHint*(self: gen_qvideowidget_types.QVideoWidget, ): gen_qsize_types.QSize =
-  gen_qsize_types.QSize(h: fcQVideoWidget_virtualbase_minimumSizeHint(self.h))
+  gen_qsize_types.QSize(h: fcQVideoWidget_virtualbase_minimumSizeHint(self.h), owned: true)
 
 proc miqt_exec_callback_cQVideoWidget_minimumSizeHint(vtbl: pointer, self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QVideoWidgetVTable](vtbl)
   let self = QVideoWidget(h: self)
   var virtualReturn = vtbl[].minimumSizeHint(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QVideoWidgetheightForWidth*(self: gen_qvideowidget_types.QVideoWidget, param1: cint): cint =
   fcQVideoWidget_virtualbase_heightForWidth(self.h, param1)
@@ -516,13 +524,16 @@ proc miqt_exec_callback_cQVideoWidget_hasHeightForWidth(vtbl: pointer, self: poi
   virtualReturn
 
 proc QVideoWidgetpaintEngine*(self: gen_qvideowidget_types.QVideoWidget, ): gen_qpaintengine_types.QPaintEngine =
-  gen_qpaintengine_types.QPaintEngine(h: fcQVideoWidget_virtualbase_paintEngine(self.h))
+  gen_qpaintengine_types.QPaintEngine(h: fcQVideoWidget_virtualbase_paintEngine(self.h), owned: false)
 
 proc miqt_exec_callback_cQVideoWidget_paintEngine(vtbl: pointer, self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QVideoWidgetVTable](vtbl)
   let self = QVideoWidget(h: self)
   var virtualReturn = vtbl[].paintEngine(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QVideoWidgetmousePressEvent*(self: gen_qvideowidget_types.QVideoWidget, event: gen_qevent_types.QMouseEvent): void =
   fcQVideoWidget_virtualbase_mousePressEvent(self.h, event.h)
@@ -530,7 +541,7 @@ proc QVideoWidgetmousePressEvent*(self: gen_qvideowidget_types.QVideoWidget, eve
 proc miqt_exec_callback_cQVideoWidget_mousePressEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QVideoWidgetVTable](vtbl)
   let self = QVideoWidget(h: self)
-  let slotval1 = gen_qevent_types.QMouseEvent(h: event)
+  let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   vtbl[].mousePressEvent(self, slotval1)
 
 proc QVideoWidgetmouseReleaseEvent*(self: gen_qvideowidget_types.QVideoWidget, event: gen_qevent_types.QMouseEvent): void =
@@ -539,7 +550,7 @@ proc QVideoWidgetmouseReleaseEvent*(self: gen_qvideowidget_types.QVideoWidget, e
 proc miqt_exec_callback_cQVideoWidget_mouseReleaseEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QVideoWidgetVTable](vtbl)
   let self = QVideoWidget(h: self)
-  let slotval1 = gen_qevent_types.QMouseEvent(h: event)
+  let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   vtbl[].mouseReleaseEvent(self, slotval1)
 
 proc QVideoWidgetmouseDoubleClickEvent*(self: gen_qvideowidget_types.QVideoWidget, event: gen_qevent_types.QMouseEvent): void =
@@ -548,7 +559,7 @@ proc QVideoWidgetmouseDoubleClickEvent*(self: gen_qvideowidget_types.QVideoWidge
 proc miqt_exec_callback_cQVideoWidget_mouseDoubleClickEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QVideoWidgetVTable](vtbl)
   let self = QVideoWidget(h: self)
-  let slotval1 = gen_qevent_types.QMouseEvent(h: event)
+  let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   vtbl[].mouseDoubleClickEvent(self, slotval1)
 
 proc QVideoWidgetmouseMoveEvent*(self: gen_qvideowidget_types.QVideoWidget, event: gen_qevent_types.QMouseEvent): void =
@@ -557,7 +568,7 @@ proc QVideoWidgetmouseMoveEvent*(self: gen_qvideowidget_types.QVideoWidget, even
 proc miqt_exec_callback_cQVideoWidget_mouseMoveEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QVideoWidgetVTable](vtbl)
   let self = QVideoWidget(h: self)
-  let slotval1 = gen_qevent_types.QMouseEvent(h: event)
+  let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   vtbl[].mouseMoveEvent(self, slotval1)
 
 proc QVideoWidgetwheelEvent*(self: gen_qvideowidget_types.QVideoWidget, event: gen_qevent_types.QWheelEvent): void =
@@ -566,7 +577,7 @@ proc QVideoWidgetwheelEvent*(self: gen_qvideowidget_types.QVideoWidget, event: g
 proc miqt_exec_callback_cQVideoWidget_wheelEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QVideoWidgetVTable](vtbl)
   let self = QVideoWidget(h: self)
-  let slotval1 = gen_qevent_types.QWheelEvent(h: event)
+  let slotval1 = gen_qevent_types.QWheelEvent(h: event, owned: false)
   vtbl[].wheelEvent(self, slotval1)
 
 proc QVideoWidgetkeyPressEvent*(self: gen_qvideowidget_types.QVideoWidget, event: gen_qevent_types.QKeyEvent): void =
@@ -575,7 +586,7 @@ proc QVideoWidgetkeyPressEvent*(self: gen_qvideowidget_types.QVideoWidget, event
 proc miqt_exec_callback_cQVideoWidget_keyPressEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QVideoWidgetVTable](vtbl)
   let self = QVideoWidget(h: self)
-  let slotval1 = gen_qevent_types.QKeyEvent(h: event)
+  let slotval1 = gen_qevent_types.QKeyEvent(h: event, owned: false)
   vtbl[].keyPressEvent(self, slotval1)
 
 proc QVideoWidgetkeyReleaseEvent*(self: gen_qvideowidget_types.QVideoWidget, event: gen_qevent_types.QKeyEvent): void =
@@ -584,7 +595,7 @@ proc QVideoWidgetkeyReleaseEvent*(self: gen_qvideowidget_types.QVideoWidget, eve
 proc miqt_exec_callback_cQVideoWidget_keyReleaseEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QVideoWidgetVTable](vtbl)
   let self = QVideoWidget(h: self)
-  let slotval1 = gen_qevent_types.QKeyEvent(h: event)
+  let slotval1 = gen_qevent_types.QKeyEvent(h: event, owned: false)
   vtbl[].keyReleaseEvent(self, slotval1)
 
 proc QVideoWidgetfocusInEvent*(self: gen_qvideowidget_types.QVideoWidget, event: gen_qevent_types.QFocusEvent): void =
@@ -593,7 +604,7 @@ proc QVideoWidgetfocusInEvent*(self: gen_qvideowidget_types.QVideoWidget, event:
 proc miqt_exec_callback_cQVideoWidget_focusInEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QVideoWidgetVTable](vtbl)
   let self = QVideoWidget(h: self)
-  let slotval1 = gen_qevent_types.QFocusEvent(h: event)
+  let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
   vtbl[].focusInEvent(self, slotval1)
 
 proc QVideoWidgetfocusOutEvent*(self: gen_qvideowidget_types.QVideoWidget, event: gen_qevent_types.QFocusEvent): void =
@@ -602,7 +613,7 @@ proc QVideoWidgetfocusOutEvent*(self: gen_qvideowidget_types.QVideoWidget, event
 proc miqt_exec_callback_cQVideoWidget_focusOutEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QVideoWidgetVTable](vtbl)
   let self = QVideoWidget(h: self)
-  let slotval1 = gen_qevent_types.QFocusEvent(h: event)
+  let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
   vtbl[].focusOutEvent(self, slotval1)
 
 proc QVideoWidgetenterEvent*(self: gen_qvideowidget_types.QVideoWidget, event: gen_qevent_types.QEnterEvent): void =
@@ -611,7 +622,7 @@ proc QVideoWidgetenterEvent*(self: gen_qvideowidget_types.QVideoWidget, event: g
 proc miqt_exec_callback_cQVideoWidget_enterEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QVideoWidgetVTable](vtbl)
   let self = QVideoWidget(h: self)
-  let slotval1 = gen_qevent_types.QEnterEvent(h: event)
+  let slotval1 = gen_qevent_types.QEnterEvent(h: event, owned: false)
   vtbl[].enterEvent(self, slotval1)
 
 proc QVideoWidgetleaveEvent*(self: gen_qvideowidget_types.QVideoWidget, event: gen_qcoreevent_types.QEvent): void =
@@ -620,7 +631,7 @@ proc QVideoWidgetleaveEvent*(self: gen_qvideowidget_types.QVideoWidget, event: g
 proc miqt_exec_callback_cQVideoWidget_leaveEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QVideoWidgetVTable](vtbl)
   let self = QVideoWidget(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].leaveEvent(self, slotval1)
 
 proc QVideoWidgetpaintEvent*(self: gen_qvideowidget_types.QVideoWidget, event: gen_qevent_types.QPaintEvent): void =
@@ -629,7 +640,7 @@ proc QVideoWidgetpaintEvent*(self: gen_qvideowidget_types.QVideoWidget, event: g
 proc miqt_exec_callback_cQVideoWidget_paintEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QVideoWidgetVTable](vtbl)
   let self = QVideoWidget(h: self)
-  let slotval1 = gen_qevent_types.QPaintEvent(h: event)
+  let slotval1 = gen_qevent_types.QPaintEvent(h: event, owned: false)
   vtbl[].paintEvent(self, slotval1)
 
 proc QVideoWidgetcloseEvent*(self: gen_qvideowidget_types.QVideoWidget, event: gen_qevent_types.QCloseEvent): void =
@@ -638,7 +649,7 @@ proc QVideoWidgetcloseEvent*(self: gen_qvideowidget_types.QVideoWidget, event: g
 proc miqt_exec_callback_cQVideoWidget_closeEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QVideoWidgetVTable](vtbl)
   let self = QVideoWidget(h: self)
-  let slotval1 = gen_qevent_types.QCloseEvent(h: event)
+  let slotval1 = gen_qevent_types.QCloseEvent(h: event, owned: false)
   vtbl[].closeEvent(self, slotval1)
 
 proc QVideoWidgetcontextMenuEvent*(self: gen_qvideowidget_types.QVideoWidget, event: gen_qevent_types.QContextMenuEvent): void =
@@ -647,7 +658,7 @@ proc QVideoWidgetcontextMenuEvent*(self: gen_qvideowidget_types.QVideoWidget, ev
 proc miqt_exec_callback_cQVideoWidget_contextMenuEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QVideoWidgetVTable](vtbl)
   let self = QVideoWidget(h: self)
-  let slotval1 = gen_qevent_types.QContextMenuEvent(h: event)
+  let slotval1 = gen_qevent_types.QContextMenuEvent(h: event, owned: false)
   vtbl[].contextMenuEvent(self, slotval1)
 
 proc QVideoWidgettabletEvent*(self: gen_qvideowidget_types.QVideoWidget, event: gen_qevent_types.QTabletEvent): void =
@@ -656,7 +667,7 @@ proc QVideoWidgettabletEvent*(self: gen_qvideowidget_types.QVideoWidget, event: 
 proc miqt_exec_callback_cQVideoWidget_tabletEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QVideoWidgetVTable](vtbl)
   let self = QVideoWidget(h: self)
-  let slotval1 = gen_qevent_types.QTabletEvent(h: event)
+  let slotval1 = gen_qevent_types.QTabletEvent(h: event, owned: false)
   vtbl[].tabletEvent(self, slotval1)
 
 proc QVideoWidgetactionEvent*(self: gen_qvideowidget_types.QVideoWidget, event: gen_qevent_types.QActionEvent): void =
@@ -665,7 +676,7 @@ proc QVideoWidgetactionEvent*(self: gen_qvideowidget_types.QVideoWidget, event: 
 proc miqt_exec_callback_cQVideoWidget_actionEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QVideoWidgetVTable](vtbl)
   let self = QVideoWidget(h: self)
-  let slotval1 = gen_qevent_types.QActionEvent(h: event)
+  let slotval1 = gen_qevent_types.QActionEvent(h: event, owned: false)
   vtbl[].actionEvent(self, slotval1)
 
 proc QVideoWidgetdragEnterEvent*(self: gen_qvideowidget_types.QVideoWidget, event: gen_qevent_types.QDragEnterEvent): void =
@@ -674,7 +685,7 @@ proc QVideoWidgetdragEnterEvent*(self: gen_qvideowidget_types.QVideoWidget, even
 proc miqt_exec_callback_cQVideoWidget_dragEnterEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QVideoWidgetVTable](vtbl)
   let self = QVideoWidget(h: self)
-  let slotval1 = gen_qevent_types.QDragEnterEvent(h: event)
+  let slotval1 = gen_qevent_types.QDragEnterEvent(h: event, owned: false)
   vtbl[].dragEnterEvent(self, slotval1)
 
 proc QVideoWidgetdragMoveEvent*(self: gen_qvideowidget_types.QVideoWidget, event: gen_qevent_types.QDragMoveEvent): void =
@@ -683,7 +694,7 @@ proc QVideoWidgetdragMoveEvent*(self: gen_qvideowidget_types.QVideoWidget, event
 proc miqt_exec_callback_cQVideoWidget_dragMoveEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QVideoWidgetVTable](vtbl)
   let self = QVideoWidget(h: self)
-  let slotval1 = gen_qevent_types.QDragMoveEvent(h: event)
+  let slotval1 = gen_qevent_types.QDragMoveEvent(h: event, owned: false)
   vtbl[].dragMoveEvent(self, slotval1)
 
 proc QVideoWidgetdragLeaveEvent*(self: gen_qvideowidget_types.QVideoWidget, event: gen_qevent_types.QDragLeaveEvent): void =
@@ -692,7 +703,7 @@ proc QVideoWidgetdragLeaveEvent*(self: gen_qvideowidget_types.QVideoWidget, even
 proc miqt_exec_callback_cQVideoWidget_dragLeaveEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QVideoWidgetVTable](vtbl)
   let self = QVideoWidget(h: self)
-  let slotval1 = gen_qevent_types.QDragLeaveEvent(h: event)
+  let slotval1 = gen_qevent_types.QDragLeaveEvent(h: event, owned: false)
   vtbl[].dragLeaveEvent(self, slotval1)
 
 proc QVideoWidgetdropEvent*(self: gen_qvideowidget_types.QVideoWidget, event: gen_qevent_types.QDropEvent): void =
@@ -701,7 +712,7 @@ proc QVideoWidgetdropEvent*(self: gen_qvideowidget_types.QVideoWidget, event: ge
 proc miqt_exec_callback_cQVideoWidget_dropEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QVideoWidgetVTable](vtbl)
   let self = QVideoWidget(h: self)
-  let slotval1 = gen_qevent_types.QDropEvent(h: event)
+  let slotval1 = gen_qevent_types.QDropEvent(h: event, owned: false)
   vtbl[].dropEvent(self, slotval1)
 
 proc QVideoWidgetnativeEvent*(self: gen_qvideowidget_types.QVideoWidget, eventType: seq[byte], message: pointer, resultVal: ptr uint): bool =
@@ -725,7 +736,7 @@ proc QVideoWidgetchangeEvent*(self: gen_qvideowidget_types.QVideoWidget, param1:
 proc miqt_exec_callback_cQVideoWidget_changeEvent(vtbl: pointer, self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QVideoWidgetVTable](vtbl)
   let self = QVideoWidget(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: param1)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: param1, owned: false)
   vtbl[].changeEvent(self, slotval1)
 
 proc QVideoWidgetmetric*(self: gen_qvideowidget_types.QVideoWidget, param1: cint): cint =
@@ -744,27 +755,33 @@ proc QVideoWidgetinitPainter*(self: gen_qvideowidget_types.QVideoWidget, painter
 proc miqt_exec_callback_cQVideoWidget_initPainter(vtbl: pointer, self: pointer, painter: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QVideoWidgetVTable](vtbl)
   let self = QVideoWidget(h: self)
-  let slotval1 = gen_qpainter_types.QPainter(h: painter)
+  let slotval1 = gen_qpainter_types.QPainter(h: painter, owned: false)
   vtbl[].initPainter(self, slotval1)
 
 proc QVideoWidgetredirected*(self: gen_qvideowidget_types.QVideoWidget, offset: gen_qpoint_types.QPoint): gen_qpaintdevice_types.QPaintDevice =
-  gen_qpaintdevice_types.QPaintDevice(h: fcQVideoWidget_virtualbase_redirected(self.h, offset.h))
+  gen_qpaintdevice_types.QPaintDevice(h: fcQVideoWidget_virtualbase_redirected(self.h, offset.h), owned: false)
 
 proc miqt_exec_callback_cQVideoWidget_redirected(vtbl: pointer, self: pointer, offset: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QVideoWidgetVTable](vtbl)
   let self = QVideoWidget(h: self)
-  let slotval1 = gen_qpoint_types.QPoint(h: offset)
+  let slotval1 = gen_qpoint_types.QPoint(h: offset, owned: false)
   var virtualReturn = vtbl[].redirected(self, slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QVideoWidgetsharedPainter*(self: gen_qvideowidget_types.QVideoWidget, ): gen_qpainter_types.QPainter =
-  gen_qpainter_types.QPainter(h: fcQVideoWidget_virtualbase_sharedPainter(self.h))
+  gen_qpainter_types.QPainter(h: fcQVideoWidget_virtualbase_sharedPainter(self.h), owned: false)
 
 proc miqt_exec_callback_cQVideoWidget_sharedPainter(vtbl: pointer, self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QVideoWidgetVTable](vtbl)
   let self = QVideoWidget(h: self)
   var virtualReturn = vtbl[].sharedPainter(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QVideoWidgetinputMethodEvent*(self: gen_qvideowidget_types.QVideoWidget, param1: gen_qevent_types.QInputMethodEvent): void =
   fcQVideoWidget_virtualbase_inputMethodEvent(self.h, param1.h)
@@ -772,18 +789,21 @@ proc QVideoWidgetinputMethodEvent*(self: gen_qvideowidget_types.QVideoWidget, pa
 proc miqt_exec_callback_cQVideoWidget_inputMethodEvent(vtbl: pointer, self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QVideoWidgetVTable](vtbl)
   let self = QVideoWidget(h: self)
-  let slotval1 = gen_qevent_types.QInputMethodEvent(h: param1)
+  let slotval1 = gen_qevent_types.QInputMethodEvent(h: param1, owned: false)
   vtbl[].inputMethodEvent(self, slotval1)
 
 proc QVideoWidgetinputMethodQuery*(self: gen_qvideowidget_types.QVideoWidget, param1: cint): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQVideoWidget_virtualbase_inputMethodQuery(self.h, cint(param1)))
+  gen_qvariant_types.QVariant(h: fcQVideoWidget_virtualbase_inputMethodQuery(self.h, cint(param1)), owned: true)
 
 proc miqt_exec_callback_cQVideoWidget_inputMethodQuery(vtbl: pointer, self: pointer, param1: cint): pointer {.cdecl.} =
   let vtbl = cast[ptr QVideoWidgetVTable](vtbl)
   let self = QVideoWidget(h: self)
   let slotval1 = cint(param1)
   var virtualReturn = vtbl[].inputMethodQuery(self, slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QVideoWidgetfocusNextPrevChild*(self: gen_qvideowidget_types.QVideoWidget, next: bool): bool =
   fcQVideoWidget_virtualbase_focusNextPrevChild(self.h, next)
@@ -801,8 +821,8 @@ proc QVideoWidgeteventFilter*(self: gen_qvideowidget_types.QVideoWidget, watched
 proc miqt_exec_callback_cQVideoWidget_eventFilter(vtbl: pointer, self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QVideoWidgetVTable](vtbl)
   let self = QVideoWidget(h: self)
-  let slotval1 = gen_qobject_types.QObject(h: watched)
-  let slotval2 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].eventFilter(self, slotval1, slotval2)
   virtualReturn
 
@@ -812,7 +832,7 @@ proc QVideoWidgettimerEvent*(self: gen_qvideowidget_types.QVideoWidget, event: g
 proc miqt_exec_callback_cQVideoWidget_timerEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QVideoWidgetVTable](vtbl)
   let self = QVideoWidget(h: self)
-  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   vtbl[].timerEvent(self, slotval1)
 
 proc QVideoWidgetchildEvent*(self: gen_qvideowidget_types.QVideoWidget, event: gen_qcoreevent_types.QChildEvent): void =
@@ -821,7 +841,7 @@ proc QVideoWidgetchildEvent*(self: gen_qvideowidget_types.QVideoWidget, event: g
 proc miqt_exec_callback_cQVideoWidget_childEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QVideoWidgetVTable](vtbl)
   let self = QVideoWidget(h: self)
-  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   vtbl[].childEvent(self, slotval1)
 
 proc QVideoWidgetcustomEvent*(self: gen_qvideowidget_types.QVideoWidget, event: gen_qcoreevent_types.QEvent): void =
@@ -830,7 +850,7 @@ proc QVideoWidgetcustomEvent*(self: gen_qvideowidget_types.QVideoWidget, event: 
 proc miqt_exec_callback_cQVideoWidget_customEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QVideoWidgetVTable](vtbl)
   let self = QVideoWidget(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].customEvent(self, slotval1)
 
 proc QVideoWidgetconnectNotify*(self: gen_qvideowidget_types.QVideoWidget, signal: gen_qmetaobject_types.QMetaMethod): void =
@@ -839,7 +859,7 @@ proc QVideoWidgetconnectNotify*(self: gen_qvideowidget_types.QVideoWidget, signa
 proc miqt_exec_callback_cQVideoWidget_connectNotify(vtbl: pointer, self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QVideoWidgetVTable](vtbl)
   let self = QVideoWidget(h: self)
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].connectNotify(self, slotval1)
 
 proc QVideoWidgetdisconnectNotify*(self: gen_qvideowidget_types.QVideoWidget, signal: gen_qmetaobject_types.QMetaMethod): void =
@@ -848,8 +868,399 @@ proc QVideoWidgetdisconnectNotify*(self: gen_qvideowidget_types.QVideoWidget, si
 proc miqt_exec_callback_cQVideoWidget_disconnectNotify(vtbl: pointer, self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QVideoWidgetVTable](vtbl)
   let self = QVideoWidget(h: self)
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].disconnectNotify(self, slotval1)
+
+type VirtualQVideoWidget* {.inheritable.} = ref object of QVideoWidget
+  vtbl*: cQVideoWidgetVTable
+method metaObject*(self: VirtualQVideoWidget, ): gen_qobjectdefs_types.QMetaObject {.base.} =
+  QVideoWidgetmetaObject(self[])
+proc miqt_exec_method_cQVideoWidget_metaObject(vtbl: pointer, inst: pointer): pointer {.cdecl.} =
+  let vtbl = cast[VirtualQVideoWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQVideoWidget, vtbl)))
+  var virtualReturn = vtbl.metaObject()
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
+
+method metacast*(self: VirtualQVideoWidget, param1: cstring): pointer {.base.} =
+  QVideoWidgetmetacast(self[], param1)
+proc miqt_exec_method_cQVideoWidget_metacast(vtbl: pointer, inst: pointer, param1: cstring): pointer {.cdecl.} =
+  let vtbl = cast[VirtualQVideoWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQVideoWidget, vtbl)))
+  let slotval1 = (param1)
+  var virtualReturn = vtbl.metacast(slotval1)
+  virtualReturn
+
+method metacall*(self: VirtualQVideoWidget, param1: cint, param2: cint, param3: pointer): cint {.base.} =
+  QVideoWidgetmetacall(self[], param1, param2, param3)
+proc miqt_exec_method_cQVideoWidget_metacall(vtbl: pointer, inst: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
+  let vtbl = cast[VirtualQVideoWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQVideoWidget, vtbl)))
+  let slotval1 = cint(param1)
+  let slotval2 = param2
+  let slotval3 = param3
+  var virtualReturn = vtbl.metacall(slotval1, slotval2, slotval3)
+  virtualReturn
+
+method sizeHint*(self: VirtualQVideoWidget, ): gen_qsize_types.QSize {.base.} =
+  QVideoWidgetsizeHint(self[])
+proc miqt_exec_method_cQVideoWidget_sizeHint(vtbl: pointer, inst: pointer): pointer {.cdecl.} =
+  let vtbl = cast[VirtualQVideoWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQVideoWidget, vtbl)))
+  var virtualReturn = vtbl.sizeHint()
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
+
+method event*(self: VirtualQVideoWidget, event: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QVideoWidgetevent(self[], event)
+proc miqt_exec_method_cQVideoWidget_event(vtbl: pointer, inst: pointer, event: pointer): bool {.cdecl.} =
+  let vtbl = cast[VirtualQVideoWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQVideoWidget, vtbl)))
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
+  var virtualReturn = vtbl.event(slotval1)
+  virtualReturn
+
+method showEvent*(self: VirtualQVideoWidget, event: gen_qevent_types.QShowEvent): void {.base.} =
+  QVideoWidgetshowEvent(self[], event)
+proc miqt_exec_method_cQVideoWidget_showEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQVideoWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQVideoWidget, vtbl)))
+  let slotval1 = gen_qevent_types.QShowEvent(h: event, owned: false)
+  vtbl.showEvent(slotval1)
+
+method hideEvent*(self: VirtualQVideoWidget, event: gen_qevent_types.QHideEvent): void {.base.} =
+  QVideoWidgethideEvent(self[], event)
+proc miqt_exec_method_cQVideoWidget_hideEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQVideoWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQVideoWidget, vtbl)))
+  let slotval1 = gen_qevent_types.QHideEvent(h: event, owned: false)
+  vtbl.hideEvent(slotval1)
+
+method resizeEvent*(self: VirtualQVideoWidget, event: gen_qevent_types.QResizeEvent): void {.base.} =
+  QVideoWidgetresizeEvent(self[], event)
+proc miqt_exec_method_cQVideoWidget_resizeEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQVideoWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQVideoWidget, vtbl)))
+  let slotval1 = gen_qevent_types.QResizeEvent(h: event, owned: false)
+  vtbl.resizeEvent(slotval1)
+
+method moveEvent*(self: VirtualQVideoWidget, event: gen_qevent_types.QMoveEvent): void {.base.} =
+  QVideoWidgetmoveEvent(self[], event)
+proc miqt_exec_method_cQVideoWidget_moveEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQVideoWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQVideoWidget, vtbl)))
+  let slotval1 = gen_qevent_types.QMoveEvent(h: event, owned: false)
+  vtbl.moveEvent(slotval1)
+
+method devType*(self: VirtualQVideoWidget, ): cint {.base.} =
+  QVideoWidgetdevType(self[])
+proc miqt_exec_method_cQVideoWidget_devType(vtbl: pointer, inst: pointer): cint {.cdecl.} =
+  let vtbl = cast[VirtualQVideoWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQVideoWidget, vtbl)))
+  var virtualReturn = vtbl.devType()
+  virtualReturn
+
+method setVisible*(self: VirtualQVideoWidget, visible: bool): void {.base.} =
+  QVideoWidgetsetVisible(self[], visible)
+proc miqt_exec_method_cQVideoWidget_setVisible(vtbl: pointer, inst: pointer, visible: bool): void {.cdecl.} =
+  let vtbl = cast[VirtualQVideoWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQVideoWidget, vtbl)))
+  let slotval1 = visible
+  vtbl.setVisible(slotval1)
+
+method minimumSizeHint*(self: VirtualQVideoWidget, ): gen_qsize_types.QSize {.base.} =
+  QVideoWidgetminimumSizeHint(self[])
+proc miqt_exec_method_cQVideoWidget_minimumSizeHint(vtbl: pointer, inst: pointer): pointer {.cdecl.} =
+  let vtbl = cast[VirtualQVideoWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQVideoWidget, vtbl)))
+  var virtualReturn = vtbl.minimumSizeHint()
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
+
+method heightForWidth*(self: VirtualQVideoWidget, param1: cint): cint {.base.} =
+  QVideoWidgetheightForWidth(self[], param1)
+proc miqt_exec_method_cQVideoWidget_heightForWidth(vtbl: pointer, inst: pointer, param1: cint): cint {.cdecl.} =
+  let vtbl = cast[VirtualQVideoWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQVideoWidget, vtbl)))
+  let slotval1 = param1
+  var virtualReturn = vtbl.heightForWidth(slotval1)
+  virtualReturn
+
+method hasHeightForWidth*(self: VirtualQVideoWidget, ): bool {.base.} =
+  QVideoWidgethasHeightForWidth(self[])
+proc miqt_exec_method_cQVideoWidget_hasHeightForWidth(vtbl: pointer, inst: pointer): bool {.cdecl.} =
+  let vtbl = cast[VirtualQVideoWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQVideoWidget, vtbl)))
+  var virtualReturn = vtbl.hasHeightForWidth()
+  virtualReturn
+
+method paintEngine*(self: VirtualQVideoWidget, ): gen_qpaintengine_types.QPaintEngine {.base.} =
+  QVideoWidgetpaintEngine(self[])
+proc miqt_exec_method_cQVideoWidget_paintEngine(vtbl: pointer, inst: pointer): pointer {.cdecl.} =
+  let vtbl = cast[VirtualQVideoWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQVideoWidget, vtbl)))
+  var virtualReturn = vtbl.paintEngine()
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
+
+method mousePressEvent*(self: VirtualQVideoWidget, event: gen_qevent_types.QMouseEvent): void {.base.} =
+  QVideoWidgetmousePressEvent(self[], event)
+proc miqt_exec_method_cQVideoWidget_mousePressEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQVideoWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQVideoWidget, vtbl)))
+  let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
+  vtbl.mousePressEvent(slotval1)
+
+method mouseReleaseEvent*(self: VirtualQVideoWidget, event: gen_qevent_types.QMouseEvent): void {.base.} =
+  QVideoWidgetmouseReleaseEvent(self[], event)
+proc miqt_exec_method_cQVideoWidget_mouseReleaseEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQVideoWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQVideoWidget, vtbl)))
+  let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
+  vtbl.mouseReleaseEvent(slotval1)
+
+method mouseDoubleClickEvent*(self: VirtualQVideoWidget, event: gen_qevent_types.QMouseEvent): void {.base.} =
+  QVideoWidgetmouseDoubleClickEvent(self[], event)
+proc miqt_exec_method_cQVideoWidget_mouseDoubleClickEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQVideoWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQVideoWidget, vtbl)))
+  let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
+  vtbl.mouseDoubleClickEvent(slotval1)
+
+method mouseMoveEvent*(self: VirtualQVideoWidget, event: gen_qevent_types.QMouseEvent): void {.base.} =
+  QVideoWidgetmouseMoveEvent(self[], event)
+proc miqt_exec_method_cQVideoWidget_mouseMoveEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQVideoWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQVideoWidget, vtbl)))
+  let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
+  vtbl.mouseMoveEvent(slotval1)
+
+method wheelEvent*(self: VirtualQVideoWidget, event: gen_qevent_types.QWheelEvent): void {.base.} =
+  QVideoWidgetwheelEvent(self[], event)
+proc miqt_exec_method_cQVideoWidget_wheelEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQVideoWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQVideoWidget, vtbl)))
+  let slotval1 = gen_qevent_types.QWheelEvent(h: event, owned: false)
+  vtbl.wheelEvent(slotval1)
+
+method keyPressEvent*(self: VirtualQVideoWidget, event: gen_qevent_types.QKeyEvent): void {.base.} =
+  QVideoWidgetkeyPressEvent(self[], event)
+proc miqt_exec_method_cQVideoWidget_keyPressEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQVideoWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQVideoWidget, vtbl)))
+  let slotval1 = gen_qevent_types.QKeyEvent(h: event, owned: false)
+  vtbl.keyPressEvent(slotval1)
+
+method keyReleaseEvent*(self: VirtualQVideoWidget, event: gen_qevent_types.QKeyEvent): void {.base.} =
+  QVideoWidgetkeyReleaseEvent(self[], event)
+proc miqt_exec_method_cQVideoWidget_keyReleaseEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQVideoWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQVideoWidget, vtbl)))
+  let slotval1 = gen_qevent_types.QKeyEvent(h: event, owned: false)
+  vtbl.keyReleaseEvent(slotval1)
+
+method focusInEvent*(self: VirtualQVideoWidget, event: gen_qevent_types.QFocusEvent): void {.base.} =
+  QVideoWidgetfocusInEvent(self[], event)
+proc miqt_exec_method_cQVideoWidget_focusInEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQVideoWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQVideoWidget, vtbl)))
+  let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
+  vtbl.focusInEvent(slotval1)
+
+method focusOutEvent*(self: VirtualQVideoWidget, event: gen_qevent_types.QFocusEvent): void {.base.} =
+  QVideoWidgetfocusOutEvent(self[], event)
+proc miqt_exec_method_cQVideoWidget_focusOutEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQVideoWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQVideoWidget, vtbl)))
+  let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
+  vtbl.focusOutEvent(slotval1)
+
+method enterEvent*(self: VirtualQVideoWidget, event: gen_qevent_types.QEnterEvent): void {.base.} =
+  QVideoWidgetenterEvent(self[], event)
+proc miqt_exec_method_cQVideoWidget_enterEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQVideoWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQVideoWidget, vtbl)))
+  let slotval1 = gen_qevent_types.QEnterEvent(h: event, owned: false)
+  vtbl.enterEvent(slotval1)
+
+method leaveEvent*(self: VirtualQVideoWidget, event: gen_qcoreevent_types.QEvent): void {.base.} =
+  QVideoWidgetleaveEvent(self[], event)
+proc miqt_exec_method_cQVideoWidget_leaveEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQVideoWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQVideoWidget, vtbl)))
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
+  vtbl.leaveEvent(slotval1)
+
+method paintEvent*(self: VirtualQVideoWidget, event: gen_qevent_types.QPaintEvent): void {.base.} =
+  QVideoWidgetpaintEvent(self[], event)
+proc miqt_exec_method_cQVideoWidget_paintEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQVideoWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQVideoWidget, vtbl)))
+  let slotval1 = gen_qevent_types.QPaintEvent(h: event, owned: false)
+  vtbl.paintEvent(slotval1)
+
+method closeEvent*(self: VirtualQVideoWidget, event: gen_qevent_types.QCloseEvent): void {.base.} =
+  QVideoWidgetcloseEvent(self[], event)
+proc miqt_exec_method_cQVideoWidget_closeEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQVideoWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQVideoWidget, vtbl)))
+  let slotval1 = gen_qevent_types.QCloseEvent(h: event, owned: false)
+  vtbl.closeEvent(slotval1)
+
+method contextMenuEvent*(self: VirtualQVideoWidget, event: gen_qevent_types.QContextMenuEvent): void {.base.} =
+  QVideoWidgetcontextMenuEvent(self[], event)
+proc miqt_exec_method_cQVideoWidget_contextMenuEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQVideoWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQVideoWidget, vtbl)))
+  let slotval1 = gen_qevent_types.QContextMenuEvent(h: event, owned: false)
+  vtbl.contextMenuEvent(slotval1)
+
+method tabletEvent*(self: VirtualQVideoWidget, event: gen_qevent_types.QTabletEvent): void {.base.} =
+  QVideoWidgettabletEvent(self[], event)
+proc miqt_exec_method_cQVideoWidget_tabletEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQVideoWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQVideoWidget, vtbl)))
+  let slotval1 = gen_qevent_types.QTabletEvent(h: event, owned: false)
+  vtbl.tabletEvent(slotval1)
+
+method actionEvent*(self: VirtualQVideoWidget, event: gen_qevent_types.QActionEvent): void {.base.} =
+  QVideoWidgetactionEvent(self[], event)
+proc miqt_exec_method_cQVideoWidget_actionEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQVideoWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQVideoWidget, vtbl)))
+  let slotval1 = gen_qevent_types.QActionEvent(h: event, owned: false)
+  vtbl.actionEvent(slotval1)
+
+method dragEnterEvent*(self: VirtualQVideoWidget, event: gen_qevent_types.QDragEnterEvent): void {.base.} =
+  QVideoWidgetdragEnterEvent(self[], event)
+proc miqt_exec_method_cQVideoWidget_dragEnterEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQVideoWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQVideoWidget, vtbl)))
+  let slotval1 = gen_qevent_types.QDragEnterEvent(h: event, owned: false)
+  vtbl.dragEnterEvent(slotval1)
+
+method dragMoveEvent*(self: VirtualQVideoWidget, event: gen_qevent_types.QDragMoveEvent): void {.base.} =
+  QVideoWidgetdragMoveEvent(self[], event)
+proc miqt_exec_method_cQVideoWidget_dragMoveEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQVideoWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQVideoWidget, vtbl)))
+  let slotval1 = gen_qevent_types.QDragMoveEvent(h: event, owned: false)
+  vtbl.dragMoveEvent(slotval1)
+
+method dragLeaveEvent*(self: VirtualQVideoWidget, event: gen_qevent_types.QDragLeaveEvent): void {.base.} =
+  QVideoWidgetdragLeaveEvent(self[], event)
+proc miqt_exec_method_cQVideoWidget_dragLeaveEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQVideoWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQVideoWidget, vtbl)))
+  let slotval1 = gen_qevent_types.QDragLeaveEvent(h: event, owned: false)
+  vtbl.dragLeaveEvent(slotval1)
+
+method dropEvent*(self: VirtualQVideoWidget, event: gen_qevent_types.QDropEvent): void {.base.} =
+  QVideoWidgetdropEvent(self[], event)
+proc miqt_exec_method_cQVideoWidget_dropEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQVideoWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQVideoWidget, vtbl)))
+  let slotval1 = gen_qevent_types.QDropEvent(h: event, owned: false)
+  vtbl.dropEvent(slotval1)
+
+method nativeEvent*(self: VirtualQVideoWidget, eventType: seq[byte], message: pointer, resultVal: ptr uint): bool {.base.} =
+  QVideoWidgetnativeEvent(self[], eventType, message, resultVal)
+proc miqt_exec_method_cQVideoWidget_nativeEvent(vtbl: pointer, inst: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr uint): bool {.cdecl.} =
+  let vtbl = cast[VirtualQVideoWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQVideoWidget, vtbl)))
+  var veventType_bytearray = eventType
+  var veventTypex_ret = @(toOpenArrayByte(veventType_bytearray.data, 0, int(veventType_bytearray.len)-1))
+  c_free(veventType_bytearray.data)
+  let slotval1 = veventTypex_ret
+  let slotval2 = message
+  let slotval3 = resultVal
+  var virtualReturn = vtbl.nativeEvent(slotval1, slotval2, slotval3)
+  virtualReturn
+
+method changeEvent*(self: VirtualQVideoWidget, param1: gen_qcoreevent_types.QEvent): void {.base.} =
+  QVideoWidgetchangeEvent(self[], param1)
+proc miqt_exec_method_cQVideoWidget_changeEvent(vtbl: pointer, inst: pointer, param1: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQVideoWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQVideoWidget, vtbl)))
+  let slotval1 = gen_qcoreevent_types.QEvent(h: param1, owned: false)
+  vtbl.changeEvent(slotval1)
+
+method metric*(self: VirtualQVideoWidget, param1: cint): cint {.base.} =
+  QVideoWidgetmetric(self[], param1)
+proc miqt_exec_method_cQVideoWidget_metric(vtbl: pointer, inst: pointer, param1: cint): cint {.cdecl.} =
+  let vtbl = cast[VirtualQVideoWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQVideoWidget, vtbl)))
+  let slotval1 = cint(param1)
+  var virtualReturn = vtbl.metric(slotval1)
+  virtualReturn
+
+method initPainter*(self: VirtualQVideoWidget, painter: gen_qpainter_types.QPainter): void {.base.} =
+  QVideoWidgetinitPainter(self[], painter)
+proc miqt_exec_method_cQVideoWidget_initPainter(vtbl: pointer, inst: pointer, painter: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQVideoWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQVideoWidget, vtbl)))
+  let slotval1 = gen_qpainter_types.QPainter(h: painter, owned: false)
+  vtbl.initPainter(slotval1)
+
+method redirected*(self: VirtualQVideoWidget, offset: gen_qpoint_types.QPoint): gen_qpaintdevice_types.QPaintDevice {.base.} =
+  QVideoWidgetredirected(self[], offset)
+proc miqt_exec_method_cQVideoWidget_redirected(vtbl: pointer, inst: pointer, offset: pointer): pointer {.cdecl.} =
+  let vtbl = cast[VirtualQVideoWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQVideoWidget, vtbl)))
+  let slotval1 = gen_qpoint_types.QPoint(h: offset, owned: false)
+  var virtualReturn = vtbl.redirected(slotval1)
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
+
+method sharedPainter*(self: VirtualQVideoWidget, ): gen_qpainter_types.QPainter {.base.} =
+  QVideoWidgetsharedPainter(self[])
+proc miqt_exec_method_cQVideoWidget_sharedPainter(vtbl: pointer, inst: pointer): pointer {.cdecl.} =
+  let vtbl = cast[VirtualQVideoWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQVideoWidget, vtbl)))
+  var virtualReturn = vtbl.sharedPainter()
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
+
+method inputMethodEvent*(self: VirtualQVideoWidget, param1: gen_qevent_types.QInputMethodEvent): void {.base.} =
+  QVideoWidgetinputMethodEvent(self[], param1)
+proc miqt_exec_method_cQVideoWidget_inputMethodEvent(vtbl: pointer, inst: pointer, param1: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQVideoWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQVideoWidget, vtbl)))
+  let slotval1 = gen_qevent_types.QInputMethodEvent(h: param1, owned: false)
+  vtbl.inputMethodEvent(slotval1)
+
+method inputMethodQuery*(self: VirtualQVideoWidget, param1: cint): gen_qvariant_types.QVariant {.base.} =
+  QVideoWidgetinputMethodQuery(self[], param1)
+proc miqt_exec_method_cQVideoWidget_inputMethodQuery(vtbl: pointer, inst: pointer, param1: cint): pointer {.cdecl.} =
+  let vtbl = cast[VirtualQVideoWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQVideoWidget, vtbl)))
+  let slotval1 = cint(param1)
+  var virtualReturn = vtbl.inputMethodQuery(slotval1)
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
+
+method focusNextPrevChild*(self: VirtualQVideoWidget, next: bool): bool {.base.} =
+  QVideoWidgetfocusNextPrevChild(self[], next)
+proc miqt_exec_method_cQVideoWidget_focusNextPrevChild(vtbl: pointer, inst: pointer, next: bool): bool {.cdecl.} =
+  let vtbl = cast[VirtualQVideoWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQVideoWidget, vtbl)))
+  let slotval1 = next
+  var virtualReturn = vtbl.focusNextPrevChild(slotval1)
+  virtualReturn
+
+method eventFilter*(self: VirtualQVideoWidget, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QVideoWidgeteventFilter(self[], watched, event)
+proc miqt_exec_method_cQVideoWidget_eventFilter(vtbl: pointer, inst: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
+  let vtbl = cast[VirtualQVideoWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQVideoWidget, vtbl)))
+  let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
+  var virtualReturn = vtbl.eventFilter(slotval1, slotval2)
+  virtualReturn
+
+method timerEvent*(self: VirtualQVideoWidget, event: gen_qcoreevent_types.QTimerEvent): void {.base.} =
+  QVideoWidgettimerEvent(self[], event)
+proc miqt_exec_method_cQVideoWidget_timerEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQVideoWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQVideoWidget, vtbl)))
+  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
+  vtbl.timerEvent(slotval1)
+
+method childEvent*(self: VirtualQVideoWidget, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
+  QVideoWidgetchildEvent(self[], event)
+proc miqt_exec_method_cQVideoWidget_childEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQVideoWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQVideoWidget, vtbl)))
+  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
+  vtbl.childEvent(slotval1)
+
+method customEvent*(self: VirtualQVideoWidget, event: gen_qcoreevent_types.QEvent): void {.base.} =
+  QVideoWidgetcustomEvent(self[], event)
+proc miqt_exec_method_cQVideoWidget_customEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQVideoWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQVideoWidget, vtbl)))
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
+  vtbl.customEvent(slotval1)
+
+method connectNotify*(self: VirtualQVideoWidget, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QVideoWidgetconnectNotify(self[], signal)
+proc miqt_exec_method_cQVideoWidget_connectNotify(vtbl: pointer, inst: pointer, signal: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQVideoWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQVideoWidget, vtbl)))
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
+  vtbl.connectNotify(slotval1)
+
+method disconnectNotify*(self: VirtualQVideoWidget, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QVideoWidgetdisconnectNotify(self[], signal)
+proc miqt_exec_method_cQVideoWidget_disconnectNotify(vtbl: pointer, inst: pointer, signal: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQVideoWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQVideoWidget, vtbl)))
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
+  vtbl.disconnectNotify(slotval1)
 
 proc updateMicroFocus*(self: gen_qvideowidget_types.QVideoWidget, ): void =
   fcQVideoWidget_protectedbase_updateMicroFocus(self.h)
@@ -867,7 +1278,7 @@ proc focusPreviousChild*(self: gen_qvideowidget_types.QVideoWidget, ): bool =
   fcQVideoWidget_protectedbase_focusPreviousChild(self.h)
 
 proc sender*(self: gen_qvideowidget_types.QVideoWidget, ): gen_qobject_types.QObject =
-  gen_qobject_types.QObject(h: fcQVideoWidget_protectedbase_sender(self.h))
+  gen_qobject_types.QObject(h: fcQVideoWidget_protectedbase_sender(self.h), owned: false)
 
 proc senderSignalIndex*(self: gen_qvideowidget_types.QVideoWidget, ): cint =
   fcQVideoWidget_protectedbase_senderSignalIndex(self.h)
@@ -883,221 +1294,342 @@ proc create*(T: type gen_qvideowidget_types.QVideoWidget,
     vtbl: ref QVideoWidgetVTable = nil): gen_qvideowidget_types.QVideoWidget =
   let vtbl = if vtbl == nil: new QVideoWidgetVTable else: vtbl
   GC_ref(vtbl)
-  vtbl.vtbl.destructor = proc(vtbl: ptr cQVideoWidgetVTable, _: ptr cQVideoWidget) {.cdecl.} =
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQVideoWidgetVTable, _: ptr cQVideoWidget) {.cdecl.} =
     let vtbl = cast[ref QVideoWidgetVTable](vtbl)
     GC_unref(vtbl)
-  if not isNil(vtbl.metaObject):
+  if not isNil(vtbl[].metaObject):
     vtbl[].vtbl.metaObject = miqt_exec_callback_cQVideoWidget_metaObject
-  if not isNil(vtbl.metacast):
+  if not isNil(vtbl[].metacast):
     vtbl[].vtbl.metacast = miqt_exec_callback_cQVideoWidget_metacast
-  if not isNil(vtbl.metacall):
+  if not isNil(vtbl[].metacall):
     vtbl[].vtbl.metacall = miqt_exec_callback_cQVideoWidget_metacall
-  if not isNil(vtbl.sizeHint):
+  if not isNil(vtbl[].sizeHint):
     vtbl[].vtbl.sizeHint = miqt_exec_callback_cQVideoWidget_sizeHint
-  if not isNil(vtbl.event):
+  if not isNil(vtbl[].event):
     vtbl[].vtbl.event = miqt_exec_callback_cQVideoWidget_event
-  if not isNil(vtbl.showEvent):
+  if not isNil(vtbl[].showEvent):
     vtbl[].vtbl.showEvent = miqt_exec_callback_cQVideoWidget_showEvent
-  if not isNil(vtbl.hideEvent):
+  if not isNil(vtbl[].hideEvent):
     vtbl[].vtbl.hideEvent = miqt_exec_callback_cQVideoWidget_hideEvent
-  if not isNil(vtbl.resizeEvent):
+  if not isNil(vtbl[].resizeEvent):
     vtbl[].vtbl.resizeEvent = miqt_exec_callback_cQVideoWidget_resizeEvent
-  if not isNil(vtbl.moveEvent):
+  if not isNil(vtbl[].moveEvent):
     vtbl[].vtbl.moveEvent = miqt_exec_callback_cQVideoWidget_moveEvent
-  if not isNil(vtbl.devType):
+  if not isNil(vtbl[].devType):
     vtbl[].vtbl.devType = miqt_exec_callback_cQVideoWidget_devType
-  if not isNil(vtbl.setVisible):
+  if not isNil(vtbl[].setVisible):
     vtbl[].vtbl.setVisible = miqt_exec_callback_cQVideoWidget_setVisible
-  if not isNil(vtbl.minimumSizeHint):
+  if not isNil(vtbl[].minimumSizeHint):
     vtbl[].vtbl.minimumSizeHint = miqt_exec_callback_cQVideoWidget_minimumSizeHint
-  if not isNil(vtbl.heightForWidth):
+  if not isNil(vtbl[].heightForWidth):
     vtbl[].vtbl.heightForWidth = miqt_exec_callback_cQVideoWidget_heightForWidth
-  if not isNil(vtbl.hasHeightForWidth):
+  if not isNil(vtbl[].hasHeightForWidth):
     vtbl[].vtbl.hasHeightForWidth = miqt_exec_callback_cQVideoWidget_hasHeightForWidth
-  if not isNil(vtbl.paintEngine):
+  if not isNil(vtbl[].paintEngine):
     vtbl[].vtbl.paintEngine = miqt_exec_callback_cQVideoWidget_paintEngine
-  if not isNil(vtbl.mousePressEvent):
+  if not isNil(vtbl[].mousePressEvent):
     vtbl[].vtbl.mousePressEvent = miqt_exec_callback_cQVideoWidget_mousePressEvent
-  if not isNil(vtbl.mouseReleaseEvent):
+  if not isNil(vtbl[].mouseReleaseEvent):
     vtbl[].vtbl.mouseReleaseEvent = miqt_exec_callback_cQVideoWidget_mouseReleaseEvent
-  if not isNil(vtbl.mouseDoubleClickEvent):
+  if not isNil(vtbl[].mouseDoubleClickEvent):
     vtbl[].vtbl.mouseDoubleClickEvent = miqt_exec_callback_cQVideoWidget_mouseDoubleClickEvent
-  if not isNil(vtbl.mouseMoveEvent):
+  if not isNil(vtbl[].mouseMoveEvent):
     vtbl[].vtbl.mouseMoveEvent = miqt_exec_callback_cQVideoWidget_mouseMoveEvent
-  if not isNil(vtbl.wheelEvent):
+  if not isNil(vtbl[].wheelEvent):
     vtbl[].vtbl.wheelEvent = miqt_exec_callback_cQVideoWidget_wheelEvent
-  if not isNil(vtbl.keyPressEvent):
+  if not isNil(vtbl[].keyPressEvent):
     vtbl[].vtbl.keyPressEvent = miqt_exec_callback_cQVideoWidget_keyPressEvent
-  if not isNil(vtbl.keyReleaseEvent):
+  if not isNil(vtbl[].keyReleaseEvent):
     vtbl[].vtbl.keyReleaseEvent = miqt_exec_callback_cQVideoWidget_keyReleaseEvent
-  if not isNil(vtbl.focusInEvent):
+  if not isNil(vtbl[].focusInEvent):
     vtbl[].vtbl.focusInEvent = miqt_exec_callback_cQVideoWidget_focusInEvent
-  if not isNil(vtbl.focusOutEvent):
+  if not isNil(vtbl[].focusOutEvent):
     vtbl[].vtbl.focusOutEvent = miqt_exec_callback_cQVideoWidget_focusOutEvent
-  if not isNil(vtbl.enterEvent):
+  if not isNil(vtbl[].enterEvent):
     vtbl[].vtbl.enterEvent = miqt_exec_callback_cQVideoWidget_enterEvent
-  if not isNil(vtbl.leaveEvent):
+  if not isNil(vtbl[].leaveEvent):
     vtbl[].vtbl.leaveEvent = miqt_exec_callback_cQVideoWidget_leaveEvent
-  if not isNil(vtbl.paintEvent):
+  if not isNil(vtbl[].paintEvent):
     vtbl[].vtbl.paintEvent = miqt_exec_callback_cQVideoWidget_paintEvent
-  if not isNil(vtbl.closeEvent):
+  if not isNil(vtbl[].closeEvent):
     vtbl[].vtbl.closeEvent = miqt_exec_callback_cQVideoWidget_closeEvent
-  if not isNil(vtbl.contextMenuEvent):
+  if not isNil(vtbl[].contextMenuEvent):
     vtbl[].vtbl.contextMenuEvent = miqt_exec_callback_cQVideoWidget_contextMenuEvent
-  if not isNil(vtbl.tabletEvent):
+  if not isNil(vtbl[].tabletEvent):
     vtbl[].vtbl.tabletEvent = miqt_exec_callback_cQVideoWidget_tabletEvent
-  if not isNil(vtbl.actionEvent):
+  if not isNil(vtbl[].actionEvent):
     vtbl[].vtbl.actionEvent = miqt_exec_callback_cQVideoWidget_actionEvent
-  if not isNil(vtbl.dragEnterEvent):
+  if not isNil(vtbl[].dragEnterEvent):
     vtbl[].vtbl.dragEnterEvent = miqt_exec_callback_cQVideoWidget_dragEnterEvent
-  if not isNil(vtbl.dragMoveEvent):
+  if not isNil(vtbl[].dragMoveEvent):
     vtbl[].vtbl.dragMoveEvent = miqt_exec_callback_cQVideoWidget_dragMoveEvent
-  if not isNil(vtbl.dragLeaveEvent):
+  if not isNil(vtbl[].dragLeaveEvent):
     vtbl[].vtbl.dragLeaveEvent = miqt_exec_callback_cQVideoWidget_dragLeaveEvent
-  if not isNil(vtbl.dropEvent):
+  if not isNil(vtbl[].dropEvent):
     vtbl[].vtbl.dropEvent = miqt_exec_callback_cQVideoWidget_dropEvent
-  if not isNil(vtbl.nativeEvent):
+  if not isNil(vtbl[].nativeEvent):
     vtbl[].vtbl.nativeEvent = miqt_exec_callback_cQVideoWidget_nativeEvent
-  if not isNil(vtbl.changeEvent):
+  if not isNil(vtbl[].changeEvent):
     vtbl[].vtbl.changeEvent = miqt_exec_callback_cQVideoWidget_changeEvent
-  if not isNil(vtbl.metric):
+  if not isNil(vtbl[].metric):
     vtbl[].vtbl.metric = miqt_exec_callback_cQVideoWidget_metric
-  if not isNil(vtbl.initPainter):
+  if not isNil(vtbl[].initPainter):
     vtbl[].vtbl.initPainter = miqt_exec_callback_cQVideoWidget_initPainter
-  if not isNil(vtbl.redirected):
+  if not isNil(vtbl[].redirected):
     vtbl[].vtbl.redirected = miqt_exec_callback_cQVideoWidget_redirected
-  if not isNil(vtbl.sharedPainter):
+  if not isNil(vtbl[].sharedPainter):
     vtbl[].vtbl.sharedPainter = miqt_exec_callback_cQVideoWidget_sharedPainter
-  if not isNil(vtbl.inputMethodEvent):
+  if not isNil(vtbl[].inputMethodEvent):
     vtbl[].vtbl.inputMethodEvent = miqt_exec_callback_cQVideoWidget_inputMethodEvent
-  if not isNil(vtbl.inputMethodQuery):
+  if not isNil(vtbl[].inputMethodQuery):
     vtbl[].vtbl.inputMethodQuery = miqt_exec_callback_cQVideoWidget_inputMethodQuery
-  if not isNil(vtbl.focusNextPrevChild):
+  if not isNil(vtbl[].focusNextPrevChild):
     vtbl[].vtbl.focusNextPrevChild = miqt_exec_callback_cQVideoWidget_focusNextPrevChild
-  if not isNil(vtbl.eventFilter):
+  if not isNil(vtbl[].eventFilter):
     vtbl[].vtbl.eventFilter = miqt_exec_callback_cQVideoWidget_eventFilter
-  if not isNil(vtbl.timerEvent):
+  if not isNil(vtbl[].timerEvent):
     vtbl[].vtbl.timerEvent = miqt_exec_callback_cQVideoWidget_timerEvent
-  if not isNil(vtbl.childEvent):
+  if not isNil(vtbl[].childEvent):
     vtbl[].vtbl.childEvent = miqt_exec_callback_cQVideoWidget_childEvent
-  if not isNil(vtbl.customEvent):
+  if not isNil(vtbl[].customEvent):
     vtbl[].vtbl.customEvent = miqt_exec_callback_cQVideoWidget_customEvent
-  if not isNil(vtbl.connectNotify):
+  if not isNil(vtbl[].connectNotify):
     vtbl[].vtbl.connectNotify = miqt_exec_callback_cQVideoWidget_connectNotify
-  if not isNil(vtbl.disconnectNotify):
+  if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQVideoWidget_disconnectNotify
-  gen_qvideowidget_types.QVideoWidget(h: fcQVideoWidget_new(addr(vtbl[]), parent.h))
+  gen_qvideowidget_types.QVideoWidget(h: fcQVideoWidget_new(addr(vtbl[].vtbl), parent.h), owned: true)
 
 proc create*(T: type gen_qvideowidget_types.QVideoWidget,
     vtbl: ref QVideoWidgetVTable = nil): gen_qvideowidget_types.QVideoWidget =
   let vtbl = if vtbl == nil: new QVideoWidgetVTable else: vtbl
   GC_ref(vtbl)
-  vtbl.vtbl.destructor = proc(vtbl: ptr cQVideoWidgetVTable, _: ptr cQVideoWidget) {.cdecl.} =
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQVideoWidgetVTable, _: ptr cQVideoWidget) {.cdecl.} =
     let vtbl = cast[ref QVideoWidgetVTable](vtbl)
     GC_unref(vtbl)
-  if not isNil(vtbl.metaObject):
+  if not isNil(vtbl[].metaObject):
     vtbl[].vtbl.metaObject = miqt_exec_callback_cQVideoWidget_metaObject
-  if not isNil(vtbl.metacast):
+  if not isNil(vtbl[].metacast):
     vtbl[].vtbl.metacast = miqt_exec_callback_cQVideoWidget_metacast
-  if not isNil(vtbl.metacall):
+  if not isNil(vtbl[].metacall):
     vtbl[].vtbl.metacall = miqt_exec_callback_cQVideoWidget_metacall
-  if not isNil(vtbl.sizeHint):
+  if not isNil(vtbl[].sizeHint):
     vtbl[].vtbl.sizeHint = miqt_exec_callback_cQVideoWidget_sizeHint
-  if not isNil(vtbl.event):
+  if not isNil(vtbl[].event):
     vtbl[].vtbl.event = miqt_exec_callback_cQVideoWidget_event
-  if not isNil(vtbl.showEvent):
+  if not isNil(vtbl[].showEvent):
     vtbl[].vtbl.showEvent = miqt_exec_callback_cQVideoWidget_showEvent
-  if not isNil(vtbl.hideEvent):
+  if not isNil(vtbl[].hideEvent):
     vtbl[].vtbl.hideEvent = miqt_exec_callback_cQVideoWidget_hideEvent
-  if not isNil(vtbl.resizeEvent):
+  if not isNil(vtbl[].resizeEvent):
     vtbl[].vtbl.resizeEvent = miqt_exec_callback_cQVideoWidget_resizeEvent
-  if not isNil(vtbl.moveEvent):
+  if not isNil(vtbl[].moveEvent):
     vtbl[].vtbl.moveEvent = miqt_exec_callback_cQVideoWidget_moveEvent
-  if not isNil(vtbl.devType):
+  if not isNil(vtbl[].devType):
     vtbl[].vtbl.devType = miqt_exec_callback_cQVideoWidget_devType
-  if not isNil(vtbl.setVisible):
+  if not isNil(vtbl[].setVisible):
     vtbl[].vtbl.setVisible = miqt_exec_callback_cQVideoWidget_setVisible
-  if not isNil(vtbl.minimumSizeHint):
+  if not isNil(vtbl[].minimumSizeHint):
     vtbl[].vtbl.minimumSizeHint = miqt_exec_callback_cQVideoWidget_minimumSizeHint
-  if not isNil(vtbl.heightForWidth):
+  if not isNil(vtbl[].heightForWidth):
     vtbl[].vtbl.heightForWidth = miqt_exec_callback_cQVideoWidget_heightForWidth
-  if not isNil(vtbl.hasHeightForWidth):
+  if not isNil(vtbl[].hasHeightForWidth):
     vtbl[].vtbl.hasHeightForWidth = miqt_exec_callback_cQVideoWidget_hasHeightForWidth
-  if not isNil(vtbl.paintEngine):
+  if not isNil(vtbl[].paintEngine):
     vtbl[].vtbl.paintEngine = miqt_exec_callback_cQVideoWidget_paintEngine
-  if not isNil(vtbl.mousePressEvent):
+  if not isNil(vtbl[].mousePressEvent):
     vtbl[].vtbl.mousePressEvent = miqt_exec_callback_cQVideoWidget_mousePressEvent
-  if not isNil(vtbl.mouseReleaseEvent):
+  if not isNil(vtbl[].mouseReleaseEvent):
     vtbl[].vtbl.mouseReleaseEvent = miqt_exec_callback_cQVideoWidget_mouseReleaseEvent
-  if not isNil(vtbl.mouseDoubleClickEvent):
+  if not isNil(vtbl[].mouseDoubleClickEvent):
     vtbl[].vtbl.mouseDoubleClickEvent = miqt_exec_callback_cQVideoWidget_mouseDoubleClickEvent
-  if not isNil(vtbl.mouseMoveEvent):
+  if not isNil(vtbl[].mouseMoveEvent):
     vtbl[].vtbl.mouseMoveEvent = miqt_exec_callback_cQVideoWidget_mouseMoveEvent
-  if not isNil(vtbl.wheelEvent):
+  if not isNil(vtbl[].wheelEvent):
     vtbl[].vtbl.wheelEvent = miqt_exec_callback_cQVideoWidget_wheelEvent
-  if not isNil(vtbl.keyPressEvent):
+  if not isNil(vtbl[].keyPressEvent):
     vtbl[].vtbl.keyPressEvent = miqt_exec_callback_cQVideoWidget_keyPressEvent
-  if not isNil(vtbl.keyReleaseEvent):
+  if not isNil(vtbl[].keyReleaseEvent):
     vtbl[].vtbl.keyReleaseEvent = miqt_exec_callback_cQVideoWidget_keyReleaseEvent
-  if not isNil(vtbl.focusInEvent):
+  if not isNil(vtbl[].focusInEvent):
     vtbl[].vtbl.focusInEvent = miqt_exec_callback_cQVideoWidget_focusInEvent
-  if not isNil(vtbl.focusOutEvent):
+  if not isNil(vtbl[].focusOutEvent):
     vtbl[].vtbl.focusOutEvent = miqt_exec_callback_cQVideoWidget_focusOutEvent
-  if not isNil(vtbl.enterEvent):
+  if not isNil(vtbl[].enterEvent):
     vtbl[].vtbl.enterEvent = miqt_exec_callback_cQVideoWidget_enterEvent
-  if not isNil(vtbl.leaveEvent):
+  if not isNil(vtbl[].leaveEvent):
     vtbl[].vtbl.leaveEvent = miqt_exec_callback_cQVideoWidget_leaveEvent
-  if not isNil(vtbl.paintEvent):
+  if not isNil(vtbl[].paintEvent):
     vtbl[].vtbl.paintEvent = miqt_exec_callback_cQVideoWidget_paintEvent
-  if not isNil(vtbl.closeEvent):
+  if not isNil(vtbl[].closeEvent):
     vtbl[].vtbl.closeEvent = miqt_exec_callback_cQVideoWidget_closeEvent
-  if not isNil(vtbl.contextMenuEvent):
+  if not isNil(vtbl[].contextMenuEvent):
     vtbl[].vtbl.contextMenuEvent = miqt_exec_callback_cQVideoWidget_contextMenuEvent
-  if not isNil(vtbl.tabletEvent):
+  if not isNil(vtbl[].tabletEvent):
     vtbl[].vtbl.tabletEvent = miqt_exec_callback_cQVideoWidget_tabletEvent
-  if not isNil(vtbl.actionEvent):
+  if not isNil(vtbl[].actionEvent):
     vtbl[].vtbl.actionEvent = miqt_exec_callback_cQVideoWidget_actionEvent
-  if not isNil(vtbl.dragEnterEvent):
+  if not isNil(vtbl[].dragEnterEvent):
     vtbl[].vtbl.dragEnterEvent = miqt_exec_callback_cQVideoWidget_dragEnterEvent
-  if not isNil(vtbl.dragMoveEvent):
+  if not isNil(vtbl[].dragMoveEvent):
     vtbl[].vtbl.dragMoveEvent = miqt_exec_callback_cQVideoWidget_dragMoveEvent
-  if not isNil(vtbl.dragLeaveEvent):
+  if not isNil(vtbl[].dragLeaveEvent):
     vtbl[].vtbl.dragLeaveEvent = miqt_exec_callback_cQVideoWidget_dragLeaveEvent
-  if not isNil(vtbl.dropEvent):
+  if not isNil(vtbl[].dropEvent):
     vtbl[].vtbl.dropEvent = miqt_exec_callback_cQVideoWidget_dropEvent
-  if not isNil(vtbl.nativeEvent):
+  if not isNil(vtbl[].nativeEvent):
     vtbl[].vtbl.nativeEvent = miqt_exec_callback_cQVideoWidget_nativeEvent
-  if not isNil(vtbl.changeEvent):
+  if not isNil(vtbl[].changeEvent):
     vtbl[].vtbl.changeEvent = miqt_exec_callback_cQVideoWidget_changeEvent
-  if not isNil(vtbl.metric):
+  if not isNil(vtbl[].metric):
     vtbl[].vtbl.metric = miqt_exec_callback_cQVideoWidget_metric
-  if not isNil(vtbl.initPainter):
+  if not isNil(vtbl[].initPainter):
     vtbl[].vtbl.initPainter = miqt_exec_callback_cQVideoWidget_initPainter
-  if not isNil(vtbl.redirected):
+  if not isNil(vtbl[].redirected):
     vtbl[].vtbl.redirected = miqt_exec_callback_cQVideoWidget_redirected
-  if not isNil(vtbl.sharedPainter):
+  if not isNil(vtbl[].sharedPainter):
     vtbl[].vtbl.sharedPainter = miqt_exec_callback_cQVideoWidget_sharedPainter
-  if not isNil(vtbl.inputMethodEvent):
+  if not isNil(vtbl[].inputMethodEvent):
     vtbl[].vtbl.inputMethodEvent = miqt_exec_callback_cQVideoWidget_inputMethodEvent
-  if not isNil(vtbl.inputMethodQuery):
+  if not isNil(vtbl[].inputMethodQuery):
     vtbl[].vtbl.inputMethodQuery = miqt_exec_callback_cQVideoWidget_inputMethodQuery
-  if not isNil(vtbl.focusNextPrevChild):
+  if not isNil(vtbl[].focusNextPrevChild):
     vtbl[].vtbl.focusNextPrevChild = miqt_exec_callback_cQVideoWidget_focusNextPrevChild
-  if not isNil(vtbl.eventFilter):
+  if not isNil(vtbl[].eventFilter):
     vtbl[].vtbl.eventFilter = miqt_exec_callback_cQVideoWidget_eventFilter
-  if not isNil(vtbl.timerEvent):
+  if not isNil(vtbl[].timerEvent):
     vtbl[].vtbl.timerEvent = miqt_exec_callback_cQVideoWidget_timerEvent
-  if not isNil(vtbl.childEvent):
+  if not isNil(vtbl[].childEvent):
     vtbl[].vtbl.childEvent = miqt_exec_callback_cQVideoWidget_childEvent
-  if not isNil(vtbl.customEvent):
+  if not isNil(vtbl[].customEvent):
     vtbl[].vtbl.customEvent = miqt_exec_callback_cQVideoWidget_customEvent
-  if not isNil(vtbl.connectNotify):
+  if not isNil(vtbl[].connectNotify):
     vtbl[].vtbl.connectNotify = miqt_exec_callback_cQVideoWidget_connectNotify
-  if not isNil(vtbl.disconnectNotify):
+  if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQVideoWidget_disconnectNotify
-  gen_qvideowidget_types.QVideoWidget(h: fcQVideoWidget_new2(addr(vtbl[]), ))
+  gen_qvideowidget_types.QVideoWidget(h: fcQVideoWidget_new2(addr(vtbl[].vtbl), ), owned: true)
+
+proc create*(T: type gen_qvideowidget_types.QVideoWidget,
+    parent: gen_qwidget_types.QWidget,
+    vtbl: VirtualQVideoWidget) =
+
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQVideoWidgetVTable, _: ptr cQVideoWidget) {.cdecl.} =
+    let vtbl = cast[ptr typeof(VirtualQVideoWidget()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQVideoWidget, vtbl)))
+    vtbl[].h = nil
+    vtbl[].owned = false
+  vtbl[].vtbl.metaObject = miqt_exec_method_cQVideoWidget_metaObject
+  vtbl[].vtbl.metacast = miqt_exec_method_cQVideoWidget_metacast
+  vtbl[].vtbl.metacall = miqt_exec_method_cQVideoWidget_metacall
+  vtbl[].vtbl.sizeHint = miqt_exec_method_cQVideoWidget_sizeHint
+  vtbl[].vtbl.event = miqt_exec_method_cQVideoWidget_event
+  vtbl[].vtbl.showEvent = miqt_exec_method_cQVideoWidget_showEvent
+  vtbl[].vtbl.hideEvent = miqt_exec_method_cQVideoWidget_hideEvent
+  vtbl[].vtbl.resizeEvent = miqt_exec_method_cQVideoWidget_resizeEvent
+  vtbl[].vtbl.moveEvent = miqt_exec_method_cQVideoWidget_moveEvent
+  vtbl[].vtbl.devType = miqt_exec_method_cQVideoWidget_devType
+  vtbl[].vtbl.setVisible = miqt_exec_method_cQVideoWidget_setVisible
+  vtbl[].vtbl.minimumSizeHint = miqt_exec_method_cQVideoWidget_minimumSizeHint
+  vtbl[].vtbl.heightForWidth = miqt_exec_method_cQVideoWidget_heightForWidth
+  vtbl[].vtbl.hasHeightForWidth = miqt_exec_method_cQVideoWidget_hasHeightForWidth
+  vtbl[].vtbl.paintEngine = miqt_exec_method_cQVideoWidget_paintEngine
+  vtbl[].vtbl.mousePressEvent = miqt_exec_method_cQVideoWidget_mousePressEvent
+  vtbl[].vtbl.mouseReleaseEvent = miqt_exec_method_cQVideoWidget_mouseReleaseEvent
+  vtbl[].vtbl.mouseDoubleClickEvent = miqt_exec_method_cQVideoWidget_mouseDoubleClickEvent
+  vtbl[].vtbl.mouseMoveEvent = miqt_exec_method_cQVideoWidget_mouseMoveEvent
+  vtbl[].vtbl.wheelEvent = miqt_exec_method_cQVideoWidget_wheelEvent
+  vtbl[].vtbl.keyPressEvent = miqt_exec_method_cQVideoWidget_keyPressEvent
+  vtbl[].vtbl.keyReleaseEvent = miqt_exec_method_cQVideoWidget_keyReleaseEvent
+  vtbl[].vtbl.focusInEvent = miqt_exec_method_cQVideoWidget_focusInEvent
+  vtbl[].vtbl.focusOutEvent = miqt_exec_method_cQVideoWidget_focusOutEvent
+  vtbl[].vtbl.enterEvent = miqt_exec_method_cQVideoWidget_enterEvent
+  vtbl[].vtbl.leaveEvent = miqt_exec_method_cQVideoWidget_leaveEvent
+  vtbl[].vtbl.paintEvent = miqt_exec_method_cQVideoWidget_paintEvent
+  vtbl[].vtbl.closeEvent = miqt_exec_method_cQVideoWidget_closeEvent
+  vtbl[].vtbl.contextMenuEvent = miqt_exec_method_cQVideoWidget_contextMenuEvent
+  vtbl[].vtbl.tabletEvent = miqt_exec_method_cQVideoWidget_tabletEvent
+  vtbl[].vtbl.actionEvent = miqt_exec_method_cQVideoWidget_actionEvent
+  vtbl[].vtbl.dragEnterEvent = miqt_exec_method_cQVideoWidget_dragEnterEvent
+  vtbl[].vtbl.dragMoveEvent = miqt_exec_method_cQVideoWidget_dragMoveEvent
+  vtbl[].vtbl.dragLeaveEvent = miqt_exec_method_cQVideoWidget_dragLeaveEvent
+  vtbl[].vtbl.dropEvent = miqt_exec_method_cQVideoWidget_dropEvent
+  vtbl[].vtbl.nativeEvent = miqt_exec_method_cQVideoWidget_nativeEvent
+  vtbl[].vtbl.changeEvent = miqt_exec_method_cQVideoWidget_changeEvent
+  vtbl[].vtbl.metric = miqt_exec_method_cQVideoWidget_metric
+  vtbl[].vtbl.initPainter = miqt_exec_method_cQVideoWidget_initPainter
+  vtbl[].vtbl.redirected = miqt_exec_method_cQVideoWidget_redirected
+  vtbl[].vtbl.sharedPainter = miqt_exec_method_cQVideoWidget_sharedPainter
+  vtbl[].vtbl.inputMethodEvent = miqt_exec_method_cQVideoWidget_inputMethodEvent
+  vtbl[].vtbl.inputMethodQuery = miqt_exec_method_cQVideoWidget_inputMethodQuery
+  vtbl[].vtbl.focusNextPrevChild = miqt_exec_method_cQVideoWidget_focusNextPrevChild
+  vtbl[].vtbl.eventFilter = miqt_exec_method_cQVideoWidget_eventFilter
+  vtbl[].vtbl.timerEvent = miqt_exec_method_cQVideoWidget_timerEvent
+  vtbl[].vtbl.childEvent = miqt_exec_method_cQVideoWidget_childEvent
+  vtbl[].vtbl.customEvent = miqt_exec_method_cQVideoWidget_customEvent
+  vtbl[].vtbl.connectNotify = miqt_exec_method_cQVideoWidget_connectNotify
+  vtbl[].vtbl.disconnectNotify = miqt_exec_method_cQVideoWidget_disconnectNotify
+  if vtbl[].h != nil: delete(move(vtbl[]))
+  vtbl[].h = fcQVideoWidget_new(addr(vtbl[].vtbl), parent.h)
+  vtbl[].owned = true
+
+proc create*(T: type gen_qvideowidget_types.QVideoWidget,
+    vtbl: VirtualQVideoWidget) =
+
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQVideoWidgetVTable, _: ptr cQVideoWidget) {.cdecl.} =
+    let vtbl = cast[ptr typeof(VirtualQVideoWidget()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQVideoWidget, vtbl)))
+    vtbl[].h = nil
+    vtbl[].owned = false
+  vtbl[].vtbl.metaObject = miqt_exec_method_cQVideoWidget_metaObject
+  vtbl[].vtbl.metacast = miqt_exec_method_cQVideoWidget_metacast
+  vtbl[].vtbl.metacall = miqt_exec_method_cQVideoWidget_metacall
+  vtbl[].vtbl.sizeHint = miqt_exec_method_cQVideoWidget_sizeHint
+  vtbl[].vtbl.event = miqt_exec_method_cQVideoWidget_event
+  vtbl[].vtbl.showEvent = miqt_exec_method_cQVideoWidget_showEvent
+  vtbl[].vtbl.hideEvent = miqt_exec_method_cQVideoWidget_hideEvent
+  vtbl[].vtbl.resizeEvent = miqt_exec_method_cQVideoWidget_resizeEvent
+  vtbl[].vtbl.moveEvent = miqt_exec_method_cQVideoWidget_moveEvent
+  vtbl[].vtbl.devType = miqt_exec_method_cQVideoWidget_devType
+  vtbl[].vtbl.setVisible = miqt_exec_method_cQVideoWidget_setVisible
+  vtbl[].vtbl.minimumSizeHint = miqt_exec_method_cQVideoWidget_minimumSizeHint
+  vtbl[].vtbl.heightForWidth = miqt_exec_method_cQVideoWidget_heightForWidth
+  vtbl[].vtbl.hasHeightForWidth = miqt_exec_method_cQVideoWidget_hasHeightForWidth
+  vtbl[].vtbl.paintEngine = miqt_exec_method_cQVideoWidget_paintEngine
+  vtbl[].vtbl.mousePressEvent = miqt_exec_method_cQVideoWidget_mousePressEvent
+  vtbl[].vtbl.mouseReleaseEvent = miqt_exec_method_cQVideoWidget_mouseReleaseEvent
+  vtbl[].vtbl.mouseDoubleClickEvent = miqt_exec_method_cQVideoWidget_mouseDoubleClickEvent
+  vtbl[].vtbl.mouseMoveEvent = miqt_exec_method_cQVideoWidget_mouseMoveEvent
+  vtbl[].vtbl.wheelEvent = miqt_exec_method_cQVideoWidget_wheelEvent
+  vtbl[].vtbl.keyPressEvent = miqt_exec_method_cQVideoWidget_keyPressEvent
+  vtbl[].vtbl.keyReleaseEvent = miqt_exec_method_cQVideoWidget_keyReleaseEvent
+  vtbl[].vtbl.focusInEvent = miqt_exec_method_cQVideoWidget_focusInEvent
+  vtbl[].vtbl.focusOutEvent = miqt_exec_method_cQVideoWidget_focusOutEvent
+  vtbl[].vtbl.enterEvent = miqt_exec_method_cQVideoWidget_enterEvent
+  vtbl[].vtbl.leaveEvent = miqt_exec_method_cQVideoWidget_leaveEvent
+  vtbl[].vtbl.paintEvent = miqt_exec_method_cQVideoWidget_paintEvent
+  vtbl[].vtbl.closeEvent = miqt_exec_method_cQVideoWidget_closeEvent
+  vtbl[].vtbl.contextMenuEvent = miqt_exec_method_cQVideoWidget_contextMenuEvent
+  vtbl[].vtbl.tabletEvent = miqt_exec_method_cQVideoWidget_tabletEvent
+  vtbl[].vtbl.actionEvent = miqt_exec_method_cQVideoWidget_actionEvent
+  vtbl[].vtbl.dragEnterEvent = miqt_exec_method_cQVideoWidget_dragEnterEvent
+  vtbl[].vtbl.dragMoveEvent = miqt_exec_method_cQVideoWidget_dragMoveEvent
+  vtbl[].vtbl.dragLeaveEvent = miqt_exec_method_cQVideoWidget_dragLeaveEvent
+  vtbl[].vtbl.dropEvent = miqt_exec_method_cQVideoWidget_dropEvent
+  vtbl[].vtbl.nativeEvent = miqt_exec_method_cQVideoWidget_nativeEvent
+  vtbl[].vtbl.changeEvent = miqt_exec_method_cQVideoWidget_changeEvent
+  vtbl[].vtbl.metric = miqt_exec_method_cQVideoWidget_metric
+  vtbl[].vtbl.initPainter = miqt_exec_method_cQVideoWidget_initPainter
+  vtbl[].vtbl.redirected = miqt_exec_method_cQVideoWidget_redirected
+  vtbl[].vtbl.sharedPainter = miqt_exec_method_cQVideoWidget_sharedPainter
+  vtbl[].vtbl.inputMethodEvent = miqt_exec_method_cQVideoWidget_inputMethodEvent
+  vtbl[].vtbl.inputMethodQuery = miqt_exec_method_cQVideoWidget_inputMethodQuery
+  vtbl[].vtbl.focusNextPrevChild = miqt_exec_method_cQVideoWidget_focusNextPrevChild
+  vtbl[].vtbl.eventFilter = miqt_exec_method_cQVideoWidget_eventFilter
+  vtbl[].vtbl.timerEvent = miqt_exec_method_cQVideoWidget_timerEvent
+  vtbl[].vtbl.childEvent = miqt_exec_method_cQVideoWidget_childEvent
+  vtbl[].vtbl.customEvent = miqt_exec_method_cQVideoWidget_customEvent
+  vtbl[].vtbl.connectNotify = miqt_exec_method_cQVideoWidget_connectNotify
+  vtbl[].vtbl.disconnectNotify = miqt_exec_method_cQVideoWidget_disconnectNotify
+  if vtbl[].h != nil: delete(move(vtbl[]))
+  vtbl[].h = fcQVideoWidget_new2(addr(vtbl[].vtbl), )
+  vtbl[].owned = true
 
 proc staticMetaObject*(_: type gen_qvideowidget_types.QVideoWidget): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQVideoWidget_staticMetaObject())
-proc delete*(self: gen_qvideowidget_types.QVideoWidget) =
-  fcQVideoWidget_delete(self.h)

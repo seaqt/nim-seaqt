@@ -30,7 +30,7 @@ func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
     else:
       copyMem(addr result[0], unsafeAddr v[0], v.len)
 
-const cflags = gorge("pkg-config --cflags Qt6WebEngineCore")  & " -fPIC"
+const cflags = gorge("pkg-config --cflags Qt6WebEngineCore") & " -fPIC"
 {.compile("gen_qwebenginenewwindowrequest.cpp", cflags).}
 
 
@@ -77,10 +77,9 @@ proc fcQWebEngineNewWindowRequest_protectedbase_senderSignalIndex(self: pointer,
 proc fcQWebEngineNewWindowRequest_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QWebEngineNewWindowRequest_protectedbase_receivers".}
 proc fcQWebEngineNewWindowRequest_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QWebEngineNewWindowRequest_protectedbase_isSignalConnected".}
 proc fcQWebEngineNewWindowRequest_staticMetaObject(): pointer {.importc: "QWebEngineNewWindowRequest_staticMetaObject".}
-proc fcQWebEngineNewWindowRequest_delete(self: pointer) {.importc: "QWebEngineNewWindowRequest_delete".}
 
 proc metaObject*(self: gen_qwebenginenewwindowrequest_types.QWebEngineNewWindowRequest, ): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQWebEngineNewWindowRequest_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQWebEngineNewWindowRequest_metaObject(self.h), owned: false)
 
 proc metacast*(self: gen_qwebenginenewwindowrequest_types.QWebEngineNewWindowRequest, param1: cstring): pointer =
   fcQWebEngineNewWindowRequest_metacast(self.h, param1)
@@ -98,10 +97,10 @@ proc destination*(self: gen_qwebenginenewwindowrequest_types.QWebEngineNewWindow
   cint(fcQWebEngineNewWindowRequest_destination(self.h))
 
 proc requestedUrl*(self: gen_qwebenginenewwindowrequest_types.QWebEngineNewWindowRequest, ): gen_qurl_types.QUrl =
-  gen_qurl_types.QUrl(h: fcQWebEngineNewWindowRequest_requestedUrl(self.h))
+  gen_qurl_types.QUrl(h: fcQWebEngineNewWindowRequest_requestedUrl(self.h), owned: true)
 
 proc requestedGeometry*(self: gen_qwebenginenewwindowrequest_types.QWebEngineNewWindowRequest, ): gen_qrect_types.QRect =
-  gen_qrect_types.QRect(h: fcQWebEngineNewWindowRequest_requestedGeometry(self.h))
+  gen_qrect_types.QRect(h: fcQWebEngineNewWindowRequest_requestedGeometry(self.h), owned: true)
 
 proc isUserInitiated*(self: gen_qwebenginenewwindowrequest_types.QWebEngineNewWindowRequest, ): bool =
   fcQWebEngineNewWindowRequest_isUserInitiated(self.h)
@@ -122,7 +121,7 @@ proc tr*(_: type gen_qwebenginenewwindowrequest_types.QWebEngineNewWindowRequest
   vx_ret
 
 proc sender*(self: gen_qwebenginenewwindowrequest_types.QWebEngineNewWindowRequest, ): gen_qobject_types.QObject =
-  gen_qobject_types.QObject(h: fcQWebEngineNewWindowRequest_protectedbase_sender(self.h))
+  gen_qobject_types.QObject(h: fcQWebEngineNewWindowRequest_protectedbase_sender(self.h), owned: false)
 
 proc senderSignalIndex*(self: gen_qwebenginenewwindowrequest_types.QWebEngineNewWindowRequest, ): cint =
   fcQWebEngineNewWindowRequest_protectedbase_senderSignalIndex(self.h)
@@ -135,5 +134,3 @@ proc isSignalConnected*(self: gen_qwebenginenewwindowrequest_types.QWebEngineNew
 
 proc staticMetaObject*(_: type gen_qwebenginenewwindowrequest_types.QWebEngineNewWindowRequest): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQWebEngineNewWindowRequest_staticMetaObject())
-proc delete*(self: gen_qwebenginenewwindowrequest_types.QWebEngineNewWindowRequest) =
-  fcQWebEngineNewWindowRequest_delete(self.h)

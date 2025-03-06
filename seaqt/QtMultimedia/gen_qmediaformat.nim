@@ -30,9 +30,6 @@ func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
     else:
       copyMem(addr result[0], unsafeAddr v[0], v.len)
 
-const cflags = gorge("pkg-config --cflags Qt6Multimedia")  & " -fPIC"
-{.compile("gen_qmediaformat.cpp", cflags).}
-
 
 type QMediaFormatFileFormatEnum* = distinct cint
 template UnspecifiedFormat*(_: type QMediaFormatFileFormatEnum): untyped = -1
@@ -132,7 +129,6 @@ proc fcQMediaFormat_new(): ptr cQMediaFormat {.importc: "QMediaFormat_new".}
 proc fcQMediaFormat_new2(other: pointer): ptr cQMediaFormat {.importc: "QMediaFormat_new2".}
 proc fcQMediaFormat_new3(format: cint): ptr cQMediaFormat {.importc: "QMediaFormat_new3".}
 proc fcQMediaFormat_staticMetaObject(): pointer {.importc: "QMediaFormat_staticMetaObject".}
-proc fcQMediaFormat_delete(self: pointer) {.importc: "QMediaFormat_delete".}
 
 proc operatorAssign*(self: gen_qmediaformat_types.QMediaFormat, other: gen_qmediaformat_types.QMediaFormat): void =
   fcQMediaFormat_operatorAssign(self.h, other.h)
@@ -162,7 +158,7 @@ proc isSupported*(self: gen_qmediaformat_types.QMediaFormat, mode: cint): bool =
   fcQMediaFormat_isSupported(self.h, cint(mode))
 
 proc mimeType*(self: gen_qmediaformat_types.QMediaFormat, ): gen_qmimetype_types.QMimeType =
-  gen_qmimetype_types.QMimeType(h: fcQMediaFormat_mimeType(self.h))
+  gen_qmimetype_types.QMimeType(h: fcQMediaFormat_mimeType(self.h), owned: true)
 
 proc supportedFileFormats*(self: gen_qmediaformat_types.QMediaFormat, m: cint): seq[cint] =
   var v_ma = fcQMediaFormat_supportedFileFormats(self.h, cint(m))
@@ -237,17 +233,15 @@ proc resolveForEncoding*(self: gen_qmediaformat_types.QMediaFormat, flags: cint)
   fcQMediaFormat_resolveForEncoding(self.h, cint(flags))
 
 proc create*(T: type gen_qmediaformat_types.QMediaFormat): gen_qmediaformat_types.QMediaFormat =
-  gen_qmediaformat_types.QMediaFormat(h: fcQMediaFormat_new())
+  gen_qmediaformat_types.QMediaFormat(h: fcQMediaFormat_new(), owned: true)
 
 proc create*(T: type gen_qmediaformat_types.QMediaFormat,
     other: gen_qmediaformat_types.QMediaFormat): gen_qmediaformat_types.QMediaFormat =
-  gen_qmediaformat_types.QMediaFormat(h: fcQMediaFormat_new2(other.h))
+  gen_qmediaformat_types.QMediaFormat(h: fcQMediaFormat_new2(other.h), owned: true)
 
 proc create*(T: type gen_qmediaformat_types.QMediaFormat,
     format: cint): gen_qmediaformat_types.QMediaFormat =
-  gen_qmediaformat_types.QMediaFormat(h: fcQMediaFormat_new3(cint(format)))
+  gen_qmediaformat_types.QMediaFormat(h: fcQMediaFormat_new3(cint(format)), owned: true)
 
 proc staticMetaObject*(_: type gen_qmediaformat_types.QMediaFormat): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQMediaFormat_staticMetaObject())
-proc delete*(self: gen_qmediaformat_types.QMediaFormat) =
-  fcQMediaFormat_delete(self.h)

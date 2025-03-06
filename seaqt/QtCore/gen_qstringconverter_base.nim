@@ -30,9 +30,6 @@ func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
     else:
       copyMem(addr result[0], unsafeAddr v[0], v.len)
 
-const cflags = gorge("pkg-config --cflags Qt6Core")  & " -fPIC"
-{.compile("gen_qstringconverter_base.cpp", cflags).}
-
 
 type QStringConverterBaseFlagEnum* = distinct cint
 template Default*(_: type QStringConverterBaseFlagEnum): untyped = 0
@@ -73,7 +70,6 @@ proc fcQStringConverterBaseState_clear(self: pointer, ): void {.importc: "QStrin
 proc fcQStringConverterBaseState_reset(self: pointer, ): void {.importc: "QStringConverterBase__State_reset".}
 proc fcQStringConverterBaseState_new(): ptr cQStringConverterBaseState {.importc: "QStringConverterBase__State_new".}
 proc fcQStringConverterBaseState_new2(f: cint): ptr cQStringConverterBaseState {.importc: "QStringConverterBase__State_new2".}
-proc fcQStringConverterBaseState_delete(self: pointer) {.importc: "QStringConverterBase__State_delete".}
 
 proc isValid*(self: gen_qstringconverter_base_types.QStringConverter, ): bool =
   fcQStringConverter_isValid(self.h)
@@ -97,11 +93,9 @@ proc reset*(self: gen_qstringconverter_base_types.QStringConverterBaseState, ): 
   fcQStringConverterBaseState_reset(self.h)
 
 proc create*(T: type gen_qstringconverter_base_types.QStringConverterBaseState): gen_qstringconverter_base_types.QStringConverterBaseState =
-  gen_qstringconverter_base_types.QStringConverterBaseState(h: fcQStringConverterBaseState_new())
+  gen_qstringconverter_base_types.QStringConverterBaseState(h: fcQStringConverterBaseState_new(), owned: true)
 
 proc create*(T: type gen_qstringconverter_base_types.QStringConverterBaseState,
     f: cint): gen_qstringconverter_base_types.QStringConverterBaseState =
-  gen_qstringconverter_base_types.QStringConverterBaseState(h: fcQStringConverterBaseState_new2(cint(f)))
+  gen_qstringconverter_base_types.QStringConverterBaseState(h: fcQStringConverterBaseState_new2(cint(f)), owned: true)
 
-proc delete*(self: gen_qstringconverter_base_types.QStringConverterBaseState) =
-  fcQStringConverterBaseState_delete(self.h)

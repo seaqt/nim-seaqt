@@ -30,9 +30,6 @@ func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
     else:
       copyMem(addr result[0], unsafeAddr v[0], v.len)
 
-const cflags = gorge("pkg-config --cflags Qt6Quick")  & " -fPIC"
-{.compile("gen_qquickrendertarget.cpp", cflags).}
-
 
 import ./gen_qquickrendertarget_types
 export gen_qquickrendertarget_types
@@ -62,7 +59,6 @@ proc fcQQuickRenderTarget_fromOpenGLTexture3(textureId: cuint, pixelSize: pointe
 proc fcQQuickRenderTarget_fromOpenGLRenderBuffer3(renderbufferId: cuint, pixelSize: pointer, sampleCount: cint): pointer {.importc: "QQuickRenderTarget_fromOpenGLRenderBuffer3".}
 proc fcQQuickRenderTarget_new(): ptr cQQuickRenderTarget {.importc: "QQuickRenderTarget_new".}
 proc fcQQuickRenderTarget_new2(other: pointer): ptr cQQuickRenderTarget {.importc: "QQuickRenderTarget_new2".}
-proc fcQQuickRenderTarget_delete(self: pointer) {.importc: "QQuickRenderTarget_delete".}
 
 proc operatorAssign*(self: gen_qquickrendertarget_types.QQuickRenderTarget, other: gen_qquickrendertarget_types.QQuickRenderTarget): void =
   fcQQuickRenderTarget_operatorAssign(self.h, other.h)
@@ -83,35 +79,33 @@ proc setMirrorVertically*(self: gen_qquickrendertarget_types.QQuickRenderTarget,
   fcQQuickRenderTarget_setMirrorVertically(self.h, enable)
 
 proc fromOpenGLTexture*(_: type gen_qquickrendertarget_types.QQuickRenderTarget, textureId: cuint, format: cuint, pixelSize: gen_qsize_types.QSize): gen_qquickrendertarget_types.QQuickRenderTarget =
-  gen_qquickrendertarget_types.QQuickRenderTarget(h: fcQQuickRenderTarget_fromOpenGLTexture(textureId, format, pixelSize.h))
+  gen_qquickrendertarget_types.QQuickRenderTarget(h: fcQQuickRenderTarget_fromOpenGLTexture(textureId, format, pixelSize.h), owned: true)
 
 proc fromOpenGLTexture*(_: type gen_qquickrendertarget_types.QQuickRenderTarget, textureId: cuint, pixelSize: gen_qsize_types.QSize): gen_qquickrendertarget_types.QQuickRenderTarget =
-  gen_qquickrendertarget_types.QQuickRenderTarget(h: fcQQuickRenderTarget_fromOpenGLTexture2(textureId, pixelSize.h))
+  gen_qquickrendertarget_types.QQuickRenderTarget(h: fcQQuickRenderTarget_fromOpenGLTexture2(textureId, pixelSize.h), owned: true)
 
 proc fromOpenGLRenderBuffer*(_: type gen_qquickrendertarget_types.QQuickRenderTarget, renderbufferId: cuint, pixelSize: gen_qsize_types.QSize): gen_qquickrendertarget_types.QQuickRenderTarget =
-  gen_qquickrendertarget_types.QQuickRenderTarget(h: fcQQuickRenderTarget_fromOpenGLRenderBuffer(renderbufferId, pixelSize.h))
+  gen_qquickrendertarget_types.QQuickRenderTarget(h: fcQQuickRenderTarget_fromOpenGLRenderBuffer(renderbufferId, pixelSize.h), owned: true)
 
 proc fromRhiRenderTarget*(_: type gen_qquickrendertarget_types.QQuickRenderTarget, renderTarget: ptr QRhiRenderTarget): gen_qquickrendertarget_types.QQuickRenderTarget =
-  gen_qquickrendertarget_types.QQuickRenderTarget(h: fcQQuickRenderTarget_fromRhiRenderTarget(renderTarget))
+  gen_qquickrendertarget_types.QQuickRenderTarget(h: fcQQuickRenderTarget_fromRhiRenderTarget(renderTarget), owned: true)
 
 proc fromPaintDevice*(_: type gen_qquickrendertarget_types.QQuickRenderTarget, device: gen_qpaintdevice_types.QPaintDevice): gen_qquickrendertarget_types.QQuickRenderTarget =
-  gen_qquickrendertarget_types.QQuickRenderTarget(h: fcQQuickRenderTarget_fromPaintDevice(device.h))
+  gen_qquickrendertarget_types.QQuickRenderTarget(h: fcQQuickRenderTarget_fromPaintDevice(device.h), owned: true)
 
 proc fromOpenGLTexture*(_: type gen_qquickrendertarget_types.QQuickRenderTarget, textureId: cuint, format: cuint, pixelSize: gen_qsize_types.QSize, sampleCount: cint): gen_qquickrendertarget_types.QQuickRenderTarget =
-  gen_qquickrendertarget_types.QQuickRenderTarget(h: fcQQuickRenderTarget_fromOpenGLTexture4(textureId, format, pixelSize.h, sampleCount))
+  gen_qquickrendertarget_types.QQuickRenderTarget(h: fcQQuickRenderTarget_fromOpenGLTexture4(textureId, format, pixelSize.h, sampleCount), owned: true)
 
 proc fromOpenGLTexture*(_: type gen_qquickrendertarget_types.QQuickRenderTarget, textureId: cuint, pixelSize: gen_qsize_types.QSize, sampleCount: cint): gen_qquickrendertarget_types.QQuickRenderTarget =
-  gen_qquickrendertarget_types.QQuickRenderTarget(h: fcQQuickRenderTarget_fromOpenGLTexture3(textureId, pixelSize.h, sampleCount))
+  gen_qquickrendertarget_types.QQuickRenderTarget(h: fcQQuickRenderTarget_fromOpenGLTexture3(textureId, pixelSize.h, sampleCount), owned: true)
 
 proc fromOpenGLRenderBuffer*(_: type gen_qquickrendertarget_types.QQuickRenderTarget, renderbufferId: cuint, pixelSize: gen_qsize_types.QSize, sampleCount: cint): gen_qquickrendertarget_types.QQuickRenderTarget =
-  gen_qquickrendertarget_types.QQuickRenderTarget(h: fcQQuickRenderTarget_fromOpenGLRenderBuffer3(renderbufferId, pixelSize.h, sampleCount))
+  gen_qquickrendertarget_types.QQuickRenderTarget(h: fcQQuickRenderTarget_fromOpenGLRenderBuffer3(renderbufferId, pixelSize.h, sampleCount), owned: true)
 
 proc create*(T: type gen_qquickrendertarget_types.QQuickRenderTarget): gen_qquickrendertarget_types.QQuickRenderTarget =
-  gen_qquickrendertarget_types.QQuickRenderTarget(h: fcQQuickRenderTarget_new())
+  gen_qquickrendertarget_types.QQuickRenderTarget(h: fcQQuickRenderTarget_new(), owned: true)
 
 proc create*(T: type gen_qquickrendertarget_types.QQuickRenderTarget,
     other: gen_qquickrendertarget_types.QQuickRenderTarget): gen_qquickrendertarget_types.QQuickRenderTarget =
-  gen_qquickrendertarget_types.QQuickRenderTarget(h: fcQQuickRenderTarget_new2(other.h))
+  gen_qquickrendertarget_types.QQuickRenderTarget(h: fcQQuickRenderTarget_new2(other.h), owned: true)
 
-proc delete*(self: gen_qquickrendertarget_types.QQuickRenderTarget) =
-  fcQQuickRenderTarget_delete(self.h)

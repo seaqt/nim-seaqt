@@ -30,9 +30,6 @@ func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
     else:
       copyMem(addr result[0], unsafeAddr v[0], v.len)
 
-const cflags = gorge("pkg-config --cflags Qt6Widgets")  & " -fPIC"
-{.compile("gen_qwhatsthis.cpp", cflags).}
-
 
 import ./gen_qwhatsthis_types
 export gen_qwhatsthis_types
@@ -58,7 +55,6 @@ proc fcQWhatsThis_hideText(): void {.importc: "QWhatsThis_hideText".}
 proc fcQWhatsThis_createAction(): pointer {.importc: "QWhatsThis_createAction".}
 proc fcQWhatsThis_showText3(pos: pointer, text: struct_miqt_string, w: pointer): void {.importc: "QWhatsThis_showText3".}
 proc fcQWhatsThis_createAction1(parent: pointer): pointer {.importc: "QWhatsThis_createAction1".}
-proc fcQWhatsThis_delete(self: pointer) {.importc: "QWhatsThis_delete".}
 
 proc enterWhatsThisMode*(_: type gen_qwhatsthis_types.QWhatsThis, ): void =
   fcQWhatsThis_enterWhatsThisMode()
@@ -76,13 +72,11 @@ proc hideText*(_: type gen_qwhatsthis_types.QWhatsThis, ): void =
   fcQWhatsThis_hideText()
 
 proc createAction*(_: type gen_qwhatsthis_types.QWhatsThis, ): gen_qaction_types.QAction =
-  gen_qaction_types.QAction(h: fcQWhatsThis_createAction())
+  gen_qaction_types.QAction(h: fcQWhatsThis_createAction(), owned: false)
 
 proc showText*(_: type gen_qwhatsthis_types.QWhatsThis, pos: gen_qpoint_types.QPoint, text: string, w: gen_qwidget_types.QWidget): void =
   fcQWhatsThis_showText3(pos.h, struct_miqt_string(data: text, len: csize_t(len(text))), w.h)
 
 proc createAction*(_: type gen_qwhatsthis_types.QWhatsThis, parent: gen_qobject_types.QObject): gen_qaction_types.QAction =
-  gen_qaction_types.QAction(h: fcQWhatsThis_createAction1(parent.h))
+  gen_qaction_types.QAction(h: fcQWhatsThis_createAction1(parent.h), owned: false)
 
-proc delete*(self: gen_qwhatsthis_types.QWhatsThis) =
-  fcQWhatsThis_delete(self.h)

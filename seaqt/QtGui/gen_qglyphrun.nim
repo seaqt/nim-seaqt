@@ -30,9 +30,6 @@ func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
     else:
       copyMem(addr result[0], unsafeAddr v[0], v.len)
 
-const cflags = gorge("pkg-config --cflags Qt6Gui")  & " -fPIC"
-{.compile("gen_qglyphrun.cpp", cflags).}
-
 
 type QGlyphRunGlyphRunFlagEnum* = distinct cint
 template Overline*(_: type QGlyphRunGlyphRunFlagEnum): untyped = 1
@@ -85,7 +82,6 @@ proc fcQGlyphRun_isEmpty(self: pointer, ): bool {.importc: "QGlyphRun_isEmpty".}
 proc fcQGlyphRun_setFlag2(self: pointer, flag: cint, enabled: bool): void {.importc: "QGlyphRun_setFlag2".}
 proc fcQGlyphRun_new(): ptr cQGlyphRun {.importc: "QGlyphRun_new".}
 proc fcQGlyphRun_new2(other: pointer): ptr cQGlyphRun {.importc: "QGlyphRun_new2".}
-proc fcQGlyphRun_delete(self: pointer) {.importc: "QGlyphRun_delete".}
 
 proc operatorAssign*(self: gen_qglyphrun_types.QGlyphRun, other: gen_qglyphrun_types.QGlyphRun): void =
   fcQGlyphRun_operatorAssign(self.h, other.h)
@@ -94,7 +90,7 @@ proc swap*(self: gen_qglyphrun_types.QGlyphRun, other: gen_qglyphrun_types.QGlyp
   fcQGlyphRun_swap(self.h, other.h)
 
 proc rawFont*(self: gen_qglyphrun_types.QGlyphRun, ): gen_qrawfont_types.QRawFont =
-  gen_qrawfont_types.QRawFont(h: fcQGlyphRun_rawFont(self.h))
+  gen_qrawfont_types.QRawFont(h: fcQGlyphRun_rawFont(self.h), owned: true)
 
 proc setRawFont*(self: gen_qglyphrun_types.QGlyphRun, rawFont: gen_qrawfont_types.QRawFont): void =
   fcQGlyphRun_setRawFont(self.h, rawFont.h)
@@ -123,7 +119,7 @@ proc positions*(self: gen_qglyphrun_types.QGlyphRun, ): seq[gen_qpoint_types.QPo
   var vx_ret = newSeq[gen_qpoint_types.QPointF](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
-    vx_ret[i] = gen_qpoint_types.QPointF(h: v_outCast[i])
+    vx_ret[i] = gen_qpoint_types.QPointF(h: v_outCast[i], owned: true)
   c_free(v_ma.data)
   vx_ret
 
@@ -180,7 +176,7 @@ proc setBoundingRect*(self: gen_qglyphrun_types.QGlyphRun, boundingRect: gen_qre
   fcQGlyphRun_setBoundingRect(self.h, boundingRect.h)
 
 proc boundingRect*(self: gen_qglyphrun_types.QGlyphRun, ): gen_qrect_types.QRectF =
-  gen_qrect_types.QRectF(h: fcQGlyphRun_boundingRect(self.h))
+  gen_qrect_types.QRectF(h: fcQGlyphRun_boundingRect(self.h), owned: true)
 
 proc isEmpty*(self: gen_qglyphrun_types.QGlyphRun, ): bool =
   fcQGlyphRun_isEmpty(self.h)
@@ -189,11 +185,9 @@ proc setFlag*(self: gen_qglyphrun_types.QGlyphRun, flag: cint, enabled: bool): v
   fcQGlyphRun_setFlag2(self.h, cint(flag), enabled)
 
 proc create*(T: type gen_qglyphrun_types.QGlyphRun): gen_qglyphrun_types.QGlyphRun =
-  gen_qglyphrun_types.QGlyphRun(h: fcQGlyphRun_new())
+  gen_qglyphrun_types.QGlyphRun(h: fcQGlyphRun_new(), owned: true)
 
 proc create*(T: type gen_qglyphrun_types.QGlyphRun,
     other: gen_qglyphrun_types.QGlyphRun): gen_qglyphrun_types.QGlyphRun =
-  gen_qglyphrun_types.QGlyphRun(h: fcQGlyphRun_new2(other.h))
+  gen_qglyphrun_types.QGlyphRun(h: fcQGlyphRun_new2(other.h), owned: true)
 
-proc delete*(self: gen_qglyphrun_types.QGlyphRun) =
-  fcQGlyphRun_delete(self.h)

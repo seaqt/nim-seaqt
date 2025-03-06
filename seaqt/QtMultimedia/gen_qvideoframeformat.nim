@@ -30,9 +30,6 @@ func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
     else:
       copyMem(addr result[0], unsafeAddr v[0], v.len)
 
-const cflags = gorge("pkg-config --cflags Qt6Multimedia")  & " -fPIC"
-{.compile("gen_qvideoframeformat.cpp", cflags).}
-
 
 type QVideoFrameFormatPixelFormatEnum* = distinct cint
 template Format_Invalid*(_: type QVideoFrameFormatPixelFormatEnum): untyped = 0
@@ -160,7 +157,6 @@ proc fcQVideoFrameFormat_pixelFormatToString(pixelFormat: cint): struct_miqt_str
 proc fcQVideoFrameFormat_new(): ptr cQVideoFrameFormat {.importc: "QVideoFrameFormat_new".}
 proc fcQVideoFrameFormat_new2(size: pointer, pixelFormat: cint): ptr cQVideoFrameFormat {.importc: "QVideoFrameFormat_new2".}
 proc fcQVideoFrameFormat_new3(format: pointer): ptr cQVideoFrameFormat {.importc: "QVideoFrameFormat_new3".}
-proc fcQVideoFrameFormat_delete(self: pointer) {.importc: "QVideoFrameFormat_delete".}
 
 proc swap*(self: gen_qvideoframeformat_types.QVideoFrameFormat, other: gen_qvideoframeformat_types.QVideoFrameFormat): void =
   fcQVideoFrameFormat_swap(self.h, other.h)
@@ -184,7 +180,7 @@ proc pixelFormat*(self: gen_qvideoframeformat_types.QVideoFrameFormat, ): cint =
   cint(fcQVideoFrameFormat_pixelFormat(self.h))
 
 proc frameSize*(self: gen_qvideoframeformat_types.QVideoFrameFormat, ): gen_qsize_types.QSize =
-  gen_qsize_types.QSize(h: fcQVideoFrameFormat_frameSize(self.h))
+  gen_qsize_types.QSize(h: fcQVideoFrameFormat_frameSize(self.h), owned: true)
 
 proc setFrameSize*(self: gen_qvideoframeformat_types.QVideoFrameFormat, size: gen_qsize_types.QSize): void =
   fcQVideoFrameFormat_setFrameSize(self.h, size.h)
@@ -202,7 +198,7 @@ proc planeCount*(self: gen_qvideoframeformat_types.QVideoFrameFormat, ): cint =
   fcQVideoFrameFormat_planeCount(self.h)
 
 proc viewport*(self: gen_qvideoframeformat_types.QVideoFrameFormat, ): gen_qrect_types.QRect =
-  gen_qrect_types.QRect(h: fcQVideoFrameFormat_viewport(self.h))
+  gen_qrect_types.QRect(h: fcQVideoFrameFormat_viewport(self.h), owned: true)
 
 proc setViewport*(self: gen_qvideoframeformat_types.QVideoFrameFormat, viewport: gen_qrect_types.QRect): void =
   fcQVideoFrameFormat_setViewport(self.h, viewport.h)
@@ -280,15 +276,13 @@ proc pixelFormatToString*(_: type gen_qvideoframeformat_types.QVideoFrameFormat,
   vx_ret
 
 proc create*(T: type gen_qvideoframeformat_types.QVideoFrameFormat): gen_qvideoframeformat_types.QVideoFrameFormat =
-  gen_qvideoframeformat_types.QVideoFrameFormat(h: fcQVideoFrameFormat_new())
+  gen_qvideoframeformat_types.QVideoFrameFormat(h: fcQVideoFrameFormat_new(), owned: true)
 
 proc create*(T: type gen_qvideoframeformat_types.QVideoFrameFormat,
     size: gen_qsize_types.QSize, pixelFormat: cint): gen_qvideoframeformat_types.QVideoFrameFormat =
-  gen_qvideoframeformat_types.QVideoFrameFormat(h: fcQVideoFrameFormat_new2(size.h, cint(pixelFormat)))
+  gen_qvideoframeformat_types.QVideoFrameFormat(h: fcQVideoFrameFormat_new2(size.h, cint(pixelFormat)), owned: true)
 
 proc create*(T: type gen_qvideoframeformat_types.QVideoFrameFormat,
     format: gen_qvideoframeformat_types.QVideoFrameFormat): gen_qvideoframeformat_types.QVideoFrameFormat =
-  gen_qvideoframeformat_types.QVideoFrameFormat(h: fcQVideoFrameFormat_new3(format.h))
+  gen_qvideoframeformat_types.QVideoFrameFormat(h: fcQVideoFrameFormat_new3(format.h), owned: true)
 
-proc delete*(self: gen_qvideoframeformat_types.QVideoFrameFormat) =
-  fcQVideoFrameFormat_delete(self.h)

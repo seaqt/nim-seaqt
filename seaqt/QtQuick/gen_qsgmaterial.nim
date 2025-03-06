@@ -30,9 +30,6 @@ func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
     else:
       copyMem(addr result[0], unsafeAddr v[0], v.len)
 
-const cflags = gorge("pkg-config --cflags Qt6Quick")  & " -fPIC"
-{.compile("gen_qsgmaterial.cpp", cflags).}
-
 
 type QSGMaterialFlagEnum* = distinct cint
 template Blending*(_: type QSGMaterialFlagEnum): untyped = 1
@@ -61,20 +58,19 @@ proc fcQSGMaterial_compare(self: pointer, other: pointer): cint {.importc: "QSGM
 proc fcQSGMaterial_flags(self: pointer, ): cint {.importc: "QSGMaterial_flags".}
 proc fcQSGMaterial_setFlag(self: pointer, flags: cint): void {.importc: "QSGMaterial_setFlag".}
 proc fcQSGMaterial_setFlag2(self: pointer, flags: cint, on: bool): void {.importc: "QSGMaterial_setFlag2".}
-type cQSGMaterialVTable = object
+type cQSGMaterialVTable {.pure.} = object
   destructor*: proc(vtbl: ptr cQSGMaterialVTable, self: ptr cQSGMaterial) {.cdecl, raises:[], gcsafe.}
   typeX*: proc(vtbl, self: pointer, ): pointer {.cdecl, raises: [], gcsafe.}
   createShader*: proc(vtbl, self: pointer, renderMode: cint): pointer {.cdecl, raises: [], gcsafe.}
   compare*: proc(vtbl, self: pointer, other: pointer): cint {.cdecl, raises: [], gcsafe.}
 proc fcQSGMaterial_virtualbase_compare(self: pointer, other: pointer): cint {.importc: "QSGMaterial_virtualbase_compare".}
 proc fcQSGMaterial_new(vtbl: pointer, ): ptr cQSGMaterial {.importc: "QSGMaterial_new".}
-proc fcQSGMaterial_delete(self: pointer) {.importc: "QSGMaterial_delete".}
 
 proc typeX*(self: gen_qsgmaterial_types.QSGMaterial, ): gen_qsgmaterialtype_types.QSGMaterialType =
-  gen_qsgmaterialtype_types.QSGMaterialType(h: fcQSGMaterial_typeX(self.h))
+  gen_qsgmaterialtype_types.QSGMaterialType(h: fcQSGMaterial_typeX(self.h), owned: false)
 
 proc createShader*(self: gen_qsgmaterial_types.QSGMaterial, renderMode: cint): gen_qsgmaterialshader_types.QSGMaterialShader =
-  gen_qsgmaterialshader_types.QSGMaterialShader(h: fcQSGMaterial_createShader(self.h, cint(renderMode)))
+  gen_qsgmaterialshader_types.QSGMaterialShader(h: fcQSGMaterial_createShader(self.h, cint(renderMode)), owned: false)
 
 proc compare*(self: gen_qsgmaterial_types.QSGMaterial, other: gen_qsgmaterial_types.QSGMaterial): cint =
   fcQSGMaterial_compare(self.h, other.h)
@@ -91,7 +87,7 @@ proc setFlag*(self: gen_qsgmaterial_types.QSGMaterial, flags: cint, on: bool): v
 type QSGMaterialtypeXProc* = proc(self: QSGMaterial): gen_qsgmaterialtype_types.QSGMaterialType {.raises: [], gcsafe.}
 type QSGMaterialcreateShaderProc* = proc(self: QSGMaterial, renderMode: cint): gen_qsgmaterialshader_types.QSGMaterialShader {.raises: [], gcsafe.}
 type QSGMaterialcompareProc* = proc(self: QSGMaterial, other: gen_qsgmaterial_types.QSGMaterial): cint {.raises: [], gcsafe.}
-type QSGMaterialVTable* = object
+type QSGMaterialVTable* {.inheritable, pure.} = object
   vtbl: cQSGMaterialVTable
   typeX*: QSGMaterialtypeXProc
   createShader*: QSGMaterialcreateShaderProc
@@ -100,14 +96,20 @@ proc miqt_exec_callback_cQSGMaterial_typeX(vtbl: pointer, self: pointer): pointe
   let vtbl = cast[ptr QSGMaterialVTable](vtbl)
   let self = QSGMaterial(h: self)
   var virtualReturn = vtbl[].typeX(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc miqt_exec_callback_cQSGMaterial_createShader(vtbl: pointer, self: pointer, renderMode: cint): pointer {.cdecl.} =
   let vtbl = cast[ptr QSGMaterialVTable](vtbl)
   let self = QSGMaterial(h: self)
   let slotval1 = cint(renderMode)
   var virtualReturn = vtbl[].createShader(self, slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QSGMaterialcompare*(self: gen_qsgmaterial_types.QSGMaterial, other: gen_qsgmaterial_types.QSGMaterial): cint =
   fcQSGMaterial_virtualbase_compare(self.h, other.h)
@@ -115,24 +117,67 @@ proc QSGMaterialcompare*(self: gen_qsgmaterial_types.QSGMaterial, other: gen_qsg
 proc miqt_exec_callback_cQSGMaterial_compare(vtbl: pointer, self: pointer, other: pointer): cint {.cdecl.} =
   let vtbl = cast[ptr QSGMaterialVTable](vtbl)
   let self = QSGMaterial(h: self)
-  let slotval1 = gen_qsgmaterial_types.QSGMaterial(h: other)
+  let slotval1 = gen_qsgmaterial_types.QSGMaterial(h: other, owned: false)
   var virtualReturn = vtbl[].compare(self, slotval1)
+  virtualReturn
+
+type VirtualQSGMaterial* {.inheritable.} = ref object of QSGMaterial
+  vtbl*: cQSGMaterialVTable
+method typeX*(self: VirtualQSGMaterial, ): gen_qsgmaterialtype_types.QSGMaterialType {.base.} =
+  raiseAssert("missing implementation of QSGMaterial_virtualbase_type")
+proc miqt_exec_method_cQSGMaterial_typeX(vtbl: pointer, inst: pointer): pointer {.cdecl.} =
+  let vtbl = cast[VirtualQSGMaterial](cast[uint](vtbl) - uint(offsetOf(VirtualQSGMaterial, vtbl)))
+  var virtualReturn = vtbl.typeX()
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
+
+method createShader*(self: VirtualQSGMaterial, renderMode: cint): gen_qsgmaterialshader_types.QSGMaterialShader {.base.} =
+  raiseAssert("missing implementation of QSGMaterial_virtualbase_createShader")
+proc miqt_exec_method_cQSGMaterial_createShader(vtbl: pointer, inst: pointer, renderMode: cint): pointer {.cdecl.} =
+  let vtbl = cast[VirtualQSGMaterial](cast[uint](vtbl) - uint(offsetOf(VirtualQSGMaterial, vtbl)))
+  let slotval1 = cint(renderMode)
+  var virtualReturn = vtbl.createShader(slotval1)
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
+
+method compare*(self: VirtualQSGMaterial, other: gen_qsgmaterial_types.QSGMaterial): cint {.base.} =
+  QSGMaterialcompare(self[], other)
+proc miqt_exec_method_cQSGMaterial_compare(vtbl: pointer, inst: pointer, other: pointer): cint {.cdecl.} =
+  let vtbl = cast[VirtualQSGMaterial](cast[uint](vtbl) - uint(offsetOf(VirtualQSGMaterial, vtbl)))
+  let slotval1 = gen_qsgmaterial_types.QSGMaterial(h: other, owned: false)
+  var virtualReturn = vtbl.compare(slotval1)
   virtualReturn
 
 proc create*(T: type gen_qsgmaterial_types.QSGMaterial,
     vtbl: ref QSGMaterialVTable = nil): gen_qsgmaterial_types.QSGMaterial =
   let vtbl = if vtbl == nil: new QSGMaterialVTable else: vtbl
   GC_ref(vtbl)
-  vtbl.vtbl.destructor = proc(vtbl: ptr cQSGMaterialVTable, _: ptr cQSGMaterial) {.cdecl.} =
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQSGMaterialVTable, _: ptr cQSGMaterial) {.cdecl.} =
     let vtbl = cast[ref QSGMaterialVTable](vtbl)
     GC_unref(vtbl)
-  if not isNil(vtbl.typeX):
+  if not isNil(vtbl[].typeX):
     vtbl[].vtbl.typeX = miqt_exec_callback_cQSGMaterial_typeX
-  if not isNil(vtbl.createShader):
+  if not isNil(vtbl[].createShader):
     vtbl[].vtbl.createShader = miqt_exec_callback_cQSGMaterial_createShader
-  if not isNil(vtbl.compare):
+  if not isNil(vtbl[].compare):
     vtbl[].vtbl.compare = miqt_exec_callback_cQSGMaterial_compare
-  gen_qsgmaterial_types.QSGMaterial(h: fcQSGMaterial_new(addr(vtbl[]), ))
+  gen_qsgmaterial_types.QSGMaterial(h: fcQSGMaterial_new(addr(vtbl[].vtbl), ), owned: true)
 
-proc delete*(self: gen_qsgmaterial_types.QSGMaterial) =
-  fcQSGMaterial_delete(self.h)
+proc create*(T: type gen_qsgmaterial_types.QSGMaterial,
+    vtbl: VirtualQSGMaterial) =
+
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQSGMaterialVTable, _: ptr cQSGMaterial) {.cdecl.} =
+    let vtbl = cast[ptr typeof(VirtualQSGMaterial()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQSGMaterial, vtbl)))
+    vtbl[].h = nil
+    vtbl[].owned = false
+  vtbl[].vtbl.typeX = miqt_exec_method_cQSGMaterial_typeX
+  vtbl[].vtbl.createShader = miqt_exec_method_cQSGMaterial_createShader
+  vtbl[].vtbl.compare = miqt_exec_method_cQSGMaterial_compare
+  if vtbl[].h != nil: delete(move(vtbl[]))
+  vtbl[].h = fcQSGMaterial_new(addr(vtbl[].vtbl), )
+  vtbl[].owned = true
+

@@ -30,7 +30,7 @@ func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
     else:
       copyMem(addr result[0], unsafeAddr v[0], v.len)
 
-const cflags = gorge("pkg-config --cflags Qt6Widgets")  & " -fPIC"
+const cflags = gorge("pkg-config --cflags Qt6Widgets") & " -fPIC"
 {.compile("gen_qscrollbar.cpp", cflags).}
 
 
@@ -78,7 +78,7 @@ proc fcQScrollBar_sizeHint(self: pointer, ): pointer {.importc: "QScrollBar_size
 proc fcQScrollBar_event(self: pointer, event: pointer): bool {.importc: "QScrollBar_event".}
 proc fcQScrollBar_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QScrollBar_tr2".}
 proc fcQScrollBar_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QScrollBar_tr3".}
-type cQScrollBarVTable = object
+type cQScrollBarVTable {.pure.} = object
   destructor*: proc(vtbl: ptr cQScrollBarVTable, self: ptr cQScrollBar) {.cdecl, raises:[], gcsafe.}
   metaObject*: proc(vtbl, self: pointer, ): pointer {.cdecl, raises: [], gcsafe.}
   metacast*: proc(vtbl, self: pointer, param1: cstring): pointer {.cdecl, raises: [], gcsafe.}
@@ -200,10 +200,9 @@ proc fcQScrollBar_new2(vtbl: pointer, ): ptr cQScrollBar {.importc: "QScrollBar_
 proc fcQScrollBar_new3(vtbl: pointer, param1: cint): ptr cQScrollBar {.importc: "QScrollBar_new3".}
 proc fcQScrollBar_new4(vtbl: pointer, param1: cint, parent: pointer): ptr cQScrollBar {.importc: "QScrollBar_new4".}
 proc fcQScrollBar_staticMetaObject(): pointer {.importc: "QScrollBar_staticMetaObject".}
-proc fcQScrollBar_delete(self: pointer) {.importc: "QScrollBar_delete".}
 
 proc metaObject*(self: gen_qscrollbar_types.QScrollBar, ): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQScrollBar_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQScrollBar_metaObject(self.h), owned: false)
 
 proc metacast*(self: gen_qscrollbar_types.QScrollBar, param1: cstring): pointer =
   fcQScrollBar_metacast(self.h, param1)
@@ -218,7 +217,7 @@ proc tr*(_: type gen_qscrollbar_types.QScrollBar, s: cstring): string =
   vx_ret
 
 proc sizeHint*(self: gen_qscrollbar_types.QScrollBar, ): gen_qsize_types.QSize =
-  gen_qsize_types.QSize(h: fcQScrollBar_sizeHint(self.h))
+  gen_qsize_types.QSize(h: fcQScrollBar_sizeHint(self.h), owned: true)
 
 proc event*(self: gen_qscrollbar_types.QScrollBar, event: gen_qcoreevent_types.QEvent): bool =
   fcQScrollBar_event(self.h, event.h)
@@ -287,7 +286,7 @@ type QScrollBarchildEventProc* = proc(self: QScrollBar, event: gen_qcoreevent_ty
 type QScrollBarcustomEventProc* = proc(self: QScrollBar, event: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
 type QScrollBarconnectNotifyProc* = proc(self: QScrollBar, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
 type QScrollBardisconnectNotifyProc* = proc(self: QScrollBar, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
-type QScrollBarVTable* = object
+type QScrollBarVTable* {.inheritable, pure.} = object
   vtbl: cQScrollBarVTable
   metaObject*: QScrollBarmetaObjectProc
   metacast*: QScrollBarmetacastProc
@@ -342,13 +341,16 @@ type QScrollBarVTable* = object
   connectNotify*: QScrollBarconnectNotifyProc
   disconnectNotify*: QScrollBardisconnectNotifyProc
 proc QScrollBarmetaObject*(self: gen_qscrollbar_types.QScrollBar, ): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQScrollBar_virtualbase_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQScrollBar_virtualbase_metaObject(self.h), owned: false)
 
 proc miqt_exec_callback_cQScrollBar_metaObject(vtbl: pointer, self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QScrollBarVTable](vtbl)
   let self = QScrollBar(h: self)
   var virtualReturn = vtbl[].metaObject(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QScrollBarmetacast*(self: gen_qscrollbar_types.QScrollBar, param1: cstring): pointer =
   fcQScrollBar_virtualbase_metacast(self.h, param1)
@@ -373,13 +375,16 @@ proc miqt_exec_callback_cQScrollBar_metacall(vtbl: pointer, self: pointer, param
   virtualReturn
 
 proc QScrollBarsizeHint*(self: gen_qscrollbar_types.QScrollBar, ): gen_qsize_types.QSize =
-  gen_qsize_types.QSize(h: fcQScrollBar_virtualbase_sizeHint(self.h))
+  gen_qsize_types.QSize(h: fcQScrollBar_virtualbase_sizeHint(self.h), owned: true)
 
 proc miqt_exec_callback_cQScrollBar_sizeHint(vtbl: pointer, self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QScrollBarVTable](vtbl)
   let self = QScrollBar(h: self)
   var virtualReturn = vtbl[].sizeHint(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QScrollBarevent*(self: gen_qscrollbar_types.QScrollBar, event: gen_qcoreevent_types.QEvent): bool =
   fcQScrollBar_virtualbase_event(self.h, event.h)
@@ -387,7 +392,7 @@ proc QScrollBarevent*(self: gen_qscrollbar_types.QScrollBar, event: gen_qcoreeve
 proc miqt_exec_callback_cQScrollBar_event(vtbl: pointer, self: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QScrollBarVTable](vtbl)
   let self = QScrollBar(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].event(self, slotval1)
   virtualReturn
 
@@ -397,7 +402,7 @@ proc QScrollBarwheelEvent*(self: gen_qscrollbar_types.QScrollBar, param1: gen_qe
 proc miqt_exec_callback_cQScrollBar_wheelEvent(vtbl: pointer, self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QScrollBarVTable](vtbl)
   let self = QScrollBar(h: self)
-  let slotval1 = gen_qevent_types.QWheelEvent(h: param1)
+  let slotval1 = gen_qevent_types.QWheelEvent(h: param1, owned: false)
   vtbl[].wheelEvent(self, slotval1)
 
 proc QScrollBarpaintEvent*(self: gen_qscrollbar_types.QScrollBar, param1: gen_qevent_types.QPaintEvent): void =
@@ -406,7 +411,7 @@ proc QScrollBarpaintEvent*(self: gen_qscrollbar_types.QScrollBar, param1: gen_qe
 proc miqt_exec_callback_cQScrollBar_paintEvent(vtbl: pointer, self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QScrollBarVTable](vtbl)
   let self = QScrollBar(h: self)
-  let slotval1 = gen_qevent_types.QPaintEvent(h: param1)
+  let slotval1 = gen_qevent_types.QPaintEvent(h: param1, owned: false)
   vtbl[].paintEvent(self, slotval1)
 
 proc QScrollBarmousePressEvent*(self: gen_qscrollbar_types.QScrollBar, param1: gen_qevent_types.QMouseEvent): void =
@@ -415,7 +420,7 @@ proc QScrollBarmousePressEvent*(self: gen_qscrollbar_types.QScrollBar, param1: g
 proc miqt_exec_callback_cQScrollBar_mousePressEvent(vtbl: pointer, self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QScrollBarVTable](vtbl)
   let self = QScrollBar(h: self)
-  let slotval1 = gen_qevent_types.QMouseEvent(h: param1)
+  let slotval1 = gen_qevent_types.QMouseEvent(h: param1, owned: false)
   vtbl[].mousePressEvent(self, slotval1)
 
 proc QScrollBarmouseReleaseEvent*(self: gen_qscrollbar_types.QScrollBar, param1: gen_qevent_types.QMouseEvent): void =
@@ -424,7 +429,7 @@ proc QScrollBarmouseReleaseEvent*(self: gen_qscrollbar_types.QScrollBar, param1:
 proc miqt_exec_callback_cQScrollBar_mouseReleaseEvent(vtbl: pointer, self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QScrollBarVTable](vtbl)
   let self = QScrollBar(h: self)
-  let slotval1 = gen_qevent_types.QMouseEvent(h: param1)
+  let slotval1 = gen_qevent_types.QMouseEvent(h: param1, owned: false)
   vtbl[].mouseReleaseEvent(self, slotval1)
 
 proc QScrollBarmouseMoveEvent*(self: gen_qscrollbar_types.QScrollBar, param1: gen_qevent_types.QMouseEvent): void =
@@ -433,7 +438,7 @@ proc QScrollBarmouseMoveEvent*(self: gen_qscrollbar_types.QScrollBar, param1: ge
 proc miqt_exec_callback_cQScrollBar_mouseMoveEvent(vtbl: pointer, self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QScrollBarVTable](vtbl)
   let self = QScrollBar(h: self)
-  let slotval1 = gen_qevent_types.QMouseEvent(h: param1)
+  let slotval1 = gen_qevent_types.QMouseEvent(h: param1, owned: false)
   vtbl[].mouseMoveEvent(self, slotval1)
 
 proc QScrollBarhideEvent*(self: gen_qscrollbar_types.QScrollBar, param1: gen_qevent_types.QHideEvent): void =
@@ -442,7 +447,7 @@ proc QScrollBarhideEvent*(self: gen_qscrollbar_types.QScrollBar, param1: gen_qev
 proc miqt_exec_callback_cQScrollBar_hideEvent(vtbl: pointer, self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QScrollBarVTable](vtbl)
   let self = QScrollBar(h: self)
-  let slotval1 = gen_qevent_types.QHideEvent(h: param1)
+  let slotval1 = gen_qevent_types.QHideEvent(h: param1, owned: false)
   vtbl[].hideEvent(self, slotval1)
 
 proc QScrollBarsliderChange*(self: gen_qscrollbar_types.QScrollBar, change: cint): void =
@@ -460,7 +465,7 @@ proc QScrollBarcontextMenuEvent*(self: gen_qscrollbar_types.QScrollBar, param1: 
 proc miqt_exec_callback_cQScrollBar_contextMenuEvent(vtbl: pointer, self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QScrollBarVTable](vtbl)
   let self = QScrollBar(h: self)
-  let slotval1 = gen_qevent_types.QContextMenuEvent(h: param1)
+  let slotval1 = gen_qevent_types.QContextMenuEvent(h: param1, owned: false)
   vtbl[].contextMenuEvent(self, slotval1)
 
 proc QScrollBarinitStyleOption*(self: gen_qscrollbar_types.QScrollBar, option: gen_qstyleoption_types.QStyleOptionSlider): void =
@@ -469,7 +474,7 @@ proc QScrollBarinitStyleOption*(self: gen_qscrollbar_types.QScrollBar, option: g
 proc miqt_exec_callback_cQScrollBar_initStyleOption(vtbl: pointer, self: pointer, option: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QScrollBarVTable](vtbl)
   let self = QScrollBar(h: self)
-  let slotval1 = gen_qstyleoption_types.QStyleOptionSlider(h: option)
+  let slotval1 = gen_qstyleoption_types.QStyleOptionSlider(h: option, owned: false)
   vtbl[].initStyleOption(self, slotval1)
 
 proc QScrollBarkeyPressEvent*(self: gen_qscrollbar_types.QScrollBar, ev: gen_qevent_types.QKeyEvent): void =
@@ -478,7 +483,7 @@ proc QScrollBarkeyPressEvent*(self: gen_qscrollbar_types.QScrollBar, ev: gen_qev
 proc miqt_exec_callback_cQScrollBar_keyPressEvent(vtbl: pointer, self: pointer, ev: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QScrollBarVTable](vtbl)
   let self = QScrollBar(h: self)
-  let slotval1 = gen_qevent_types.QKeyEvent(h: ev)
+  let slotval1 = gen_qevent_types.QKeyEvent(h: ev, owned: false)
   vtbl[].keyPressEvent(self, slotval1)
 
 proc QScrollBartimerEvent*(self: gen_qscrollbar_types.QScrollBar, param1: gen_qcoreevent_types.QTimerEvent): void =
@@ -487,7 +492,7 @@ proc QScrollBartimerEvent*(self: gen_qscrollbar_types.QScrollBar, param1: gen_qc
 proc miqt_exec_callback_cQScrollBar_timerEvent(vtbl: pointer, self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QScrollBarVTable](vtbl)
   let self = QScrollBar(h: self)
-  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: param1)
+  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: param1, owned: false)
   vtbl[].timerEvent(self, slotval1)
 
 proc QScrollBarchangeEvent*(self: gen_qscrollbar_types.QScrollBar, e: gen_qcoreevent_types.QEvent): void =
@@ -496,7 +501,7 @@ proc QScrollBarchangeEvent*(self: gen_qscrollbar_types.QScrollBar, e: gen_qcoree
 proc miqt_exec_callback_cQScrollBar_changeEvent(vtbl: pointer, self: pointer, e: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QScrollBarVTable](vtbl)
   let self = QScrollBar(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: e)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: e, owned: false)
   vtbl[].changeEvent(self, slotval1)
 
 proc QScrollBardevType*(self: gen_qscrollbar_types.QScrollBar, ): cint =
@@ -518,13 +523,16 @@ proc miqt_exec_callback_cQScrollBar_setVisible(vtbl: pointer, self: pointer, vis
   vtbl[].setVisible(self, slotval1)
 
 proc QScrollBarminimumSizeHint*(self: gen_qscrollbar_types.QScrollBar, ): gen_qsize_types.QSize =
-  gen_qsize_types.QSize(h: fcQScrollBar_virtualbase_minimumSizeHint(self.h))
+  gen_qsize_types.QSize(h: fcQScrollBar_virtualbase_minimumSizeHint(self.h), owned: true)
 
 proc miqt_exec_callback_cQScrollBar_minimumSizeHint(vtbl: pointer, self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QScrollBarVTable](vtbl)
   let self = QScrollBar(h: self)
   var virtualReturn = vtbl[].minimumSizeHint(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QScrollBarheightForWidth*(self: gen_qscrollbar_types.QScrollBar, param1: cint): cint =
   fcQScrollBar_virtualbase_heightForWidth(self.h, param1)
@@ -546,13 +554,16 @@ proc miqt_exec_callback_cQScrollBar_hasHeightForWidth(vtbl: pointer, self: point
   virtualReturn
 
 proc QScrollBarpaintEngine*(self: gen_qscrollbar_types.QScrollBar, ): gen_qpaintengine_types.QPaintEngine =
-  gen_qpaintengine_types.QPaintEngine(h: fcQScrollBar_virtualbase_paintEngine(self.h))
+  gen_qpaintengine_types.QPaintEngine(h: fcQScrollBar_virtualbase_paintEngine(self.h), owned: false)
 
 proc miqt_exec_callback_cQScrollBar_paintEngine(vtbl: pointer, self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QScrollBarVTable](vtbl)
   let self = QScrollBar(h: self)
   var virtualReturn = vtbl[].paintEngine(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QScrollBarmouseDoubleClickEvent*(self: gen_qscrollbar_types.QScrollBar, event: gen_qevent_types.QMouseEvent): void =
   fcQScrollBar_virtualbase_mouseDoubleClickEvent(self.h, event.h)
@@ -560,7 +571,7 @@ proc QScrollBarmouseDoubleClickEvent*(self: gen_qscrollbar_types.QScrollBar, eve
 proc miqt_exec_callback_cQScrollBar_mouseDoubleClickEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QScrollBarVTable](vtbl)
   let self = QScrollBar(h: self)
-  let slotval1 = gen_qevent_types.QMouseEvent(h: event)
+  let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   vtbl[].mouseDoubleClickEvent(self, slotval1)
 
 proc QScrollBarkeyReleaseEvent*(self: gen_qscrollbar_types.QScrollBar, event: gen_qevent_types.QKeyEvent): void =
@@ -569,7 +580,7 @@ proc QScrollBarkeyReleaseEvent*(self: gen_qscrollbar_types.QScrollBar, event: ge
 proc miqt_exec_callback_cQScrollBar_keyReleaseEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QScrollBarVTable](vtbl)
   let self = QScrollBar(h: self)
-  let slotval1 = gen_qevent_types.QKeyEvent(h: event)
+  let slotval1 = gen_qevent_types.QKeyEvent(h: event, owned: false)
   vtbl[].keyReleaseEvent(self, slotval1)
 
 proc QScrollBarfocusInEvent*(self: gen_qscrollbar_types.QScrollBar, event: gen_qevent_types.QFocusEvent): void =
@@ -578,7 +589,7 @@ proc QScrollBarfocusInEvent*(self: gen_qscrollbar_types.QScrollBar, event: gen_q
 proc miqt_exec_callback_cQScrollBar_focusInEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QScrollBarVTable](vtbl)
   let self = QScrollBar(h: self)
-  let slotval1 = gen_qevent_types.QFocusEvent(h: event)
+  let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
   vtbl[].focusInEvent(self, slotval1)
 
 proc QScrollBarfocusOutEvent*(self: gen_qscrollbar_types.QScrollBar, event: gen_qevent_types.QFocusEvent): void =
@@ -587,7 +598,7 @@ proc QScrollBarfocusOutEvent*(self: gen_qscrollbar_types.QScrollBar, event: gen_
 proc miqt_exec_callback_cQScrollBar_focusOutEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QScrollBarVTable](vtbl)
   let self = QScrollBar(h: self)
-  let slotval1 = gen_qevent_types.QFocusEvent(h: event)
+  let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
   vtbl[].focusOutEvent(self, slotval1)
 
 proc QScrollBarenterEvent*(self: gen_qscrollbar_types.QScrollBar, event: gen_qevent_types.QEnterEvent): void =
@@ -596,7 +607,7 @@ proc QScrollBarenterEvent*(self: gen_qscrollbar_types.QScrollBar, event: gen_qev
 proc miqt_exec_callback_cQScrollBar_enterEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QScrollBarVTable](vtbl)
   let self = QScrollBar(h: self)
-  let slotval1 = gen_qevent_types.QEnterEvent(h: event)
+  let slotval1 = gen_qevent_types.QEnterEvent(h: event, owned: false)
   vtbl[].enterEvent(self, slotval1)
 
 proc QScrollBarleaveEvent*(self: gen_qscrollbar_types.QScrollBar, event: gen_qcoreevent_types.QEvent): void =
@@ -605,7 +616,7 @@ proc QScrollBarleaveEvent*(self: gen_qscrollbar_types.QScrollBar, event: gen_qco
 proc miqt_exec_callback_cQScrollBar_leaveEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QScrollBarVTable](vtbl)
   let self = QScrollBar(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].leaveEvent(self, slotval1)
 
 proc QScrollBarmoveEvent*(self: gen_qscrollbar_types.QScrollBar, event: gen_qevent_types.QMoveEvent): void =
@@ -614,7 +625,7 @@ proc QScrollBarmoveEvent*(self: gen_qscrollbar_types.QScrollBar, event: gen_qeve
 proc miqt_exec_callback_cQScrollBar_moveEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QScrollBarVTable](vtbl)
   let self = QScrollBar(h: self)
-  let slotval1 = gen_qevent_types.QMoveEvent(h: event)
+  let slotval1 = gen_qevent_types.QMoveEvent(h: event, owned: false)
   vtbl[].moveEvent(self, slotval1)
 
 proc QScrollBarresizeEvent*(self: gen_qscrollbar_types.QScrollBar, event: gen_qevent_types.QResizeEvent): void =
@@ -623,7 +634,7 @@ proc QScrollBarresizeEvent*(self: gen_qscrollbar_types.QScrollBar, event: gen_qe
 proc miqt_exec_callback_cQScrollBar_resizeEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QScrollBarVTable](vtbl)
   let self = QScrollBar(h: self)
-  let slotval1 = gen_qevent_types.QResizeEvent(h: event)
+  let slotval1 = gen_qevent_types.QResizeEvent(h: event, owned: false)
   vtbl[].resizeEvent(self, slotval1)
 
 proc QScrollBarcloseEvent*(self: gen_qscrollbar_types.QScrollBar, event: gen_qevent_types.QCloseEvent): void =
@@ -632,7 +643,7 @@ proc QScrollBarcloseEvent*(self: gen_qscrollbar_types.QScrollBar, event: gen_qev
 proc miqt_exec_callback_cQScrollBar_closeEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QScrollBarVTable](vtbl)
   let self = QScrollBar(h: self)
-  let slotval1 = gen_qevent_types.QCloseEvent(h: event)
+  let slotval1 = gen_qevent_types.QCloseEvent(h: event, owned: false)
   vtbl[].closeEvent(self, slotval1)
 
 proc QScrollBartabletEvent*(self: gen_qscrollbar_types.QScrollBar, event: gen_qevent_types.QTabletEvent): void =
@@ -641,7 +652,7 @@ proc QScrollBartabletEvent*(self: gen_qscrollbar_types.QScrollBar, event: gen_qe
 proc miqt_exec_callback_cQScrollBar_tabletEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QScrollBarVTable](vtbl)
   let self = QScrollBar(h: self)
-  let slotval1 = gen_qevent_types.QTabletEvent(h: event)
+  let slotval1 = gen_qevent_types.QTabletEvent(h: event, owned: false)
   vtbl[].tabletEvent(self, slotval1)
 
 proc QScrollBaractionEvent*(self: gen_qscrollbar_types.QScrollBar, event: gen_qevent_types.QActionEvent): void =
@@ -650,7 +661,7 @@ proc QScrollBaractionEvent*(self: gen_qscrollbar_types.QScrollBar, event: gen_qe
 proc miqt_exec_callback_cQScrollBar_actionEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QScrollBarVTable](vtbl)
   let self = QScrollBar(h: self)
-  let slotval1 = gen_qevent_types.QActionEvent(h: event)
+  let slotval1 = gen_qevent_types.QActionEvent(h: event, owned: false)
   vtbl[].actionEvent(self, slotval1)
 
 proc QScrollBardragEnterEvent*(self: gen_qscrollbar_types.QScrollBar, event: gen_qevent_types.QDragEnterEvent): void =
@@ -659,7 +670,7 @@ proc QScrollBardragEnterEvent*(self: gen_qscrollbar_types.QScrollBar, event: gen
 proc miqt_exec_callback_cQScrollBar_dragEnterEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QScrollBarVTable](vtbl)
   let self = QScrollBar(h: self)
-  let slotval1 = gen_qevent_types.QDragEnterEvent(h: event)
+  let slotval1 = gen_qevent_types.QDragEnterEvent(h: event, owned: false)
   vtbl[].dragEnterEvent(self, slotval1)
 
 proc QScrollBardragMoveEvent*(self: gen_qscrollbar_types.QScrollBar, event: gen_qevent_types.QDragMoveEvent): void =
@@ -668,7 +679,7 @@ proc QScrollBardragMoveEvent*(self: gen_qscrollbar_types.QScrollBar, event: gen_
 proc miqt_exec_callback_cQScrollBar_dragMoveEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QScrollBarVTable](vtbl)
   let self = QScrollBar(h: self)
-  let slotval1 = gen_qevent_types.QDragMoveEvent(h: event)
+  let slotval1 = gen_qevent_types.QDragMoveEvent(h: event, owned: false)
   vtbl[].dragMoveEvent(self, slotval1)
 
 proc QScrollBardragLeaveEvent*(self: gen_qscrollbar_types.QScrollBar, event: gen_qevent_types.QDragLeaveEvent): void =
@@ -677,7 +688,7 @@ proc QScrollBardragLeaveEvent*(self: gen_qscrollbar_types.QScrollBar, event: gen
 proc miqt_exec_callback_cQScrollBar_dragLeaveEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QScrollBarVTable](vtbl)
   let self = QScrollBar(h: self)
-  let slotval1 = gen_qevent_types.QDragLeaveEvent(h: event)
+  let slotval1 = gen_qevent_types.QDragLeaveEvent(h: event, owned: false)
   vtbl[].dragLeaveEvent(self, slotval1)
 
 proc QScrollBardropEvent*(self: gen_qscrollbar_types.QScrollBar, event: gen_qevent_types.QDropEvent): void =
@@ -686,7 +697,7 @@ proc QScrollBardropEvent*(self: gen_qscrollbar_types.QScrollBar, event: gen_qeve
 proc miqt_exec_callback_cQScrollBar_dropEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QScrollBarVTable](vtbl)
   let self = QScrollBar(h: self)
-  let slotval1 = gen_qevent_types.QDropEvent(h: event)
+  let slotval1 = gen_qevent_types.QDropEvent(h: event, owned: false)
   vtbl[].dropEvent(self, slotval1)
 
 proc QScrollBarshowEvent*(self: gen_qscrollbar_types.QScrollBar, event: gen_qevent_types.QShowEvent): void =
@@ -695,7 +706,7 @@ proc QScrollBarshowEvent*(self: gen_qscrollbar_types.QScrollBar, event: gen_qeve
 proc miqt_exec_callback_cQScrollBar_showEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QScrollBarVTable](vtbl)
   let self = QScrollBar(h: self)
-  let slotval1 = gen_qevent_types.QShowEvent(h: event)
+  let slotval1 = gen_qevent_types.QShowEvent(h: event, owned: false)
   vtbl[].showEvent(self, slotval1)
 
 proc QScrollBarnativeEvent*(self: gen_qscrollbar_types.QScrollBar, eventType: seq[byte], message: pointer, resultVal: ptr uint): bool =
@@ -729,27 +740,33 @@ proc QScrollBarinitPainter*(self: gen_qscrollbar_types.QScrollBar, painter: gen_
 proc miqt_exec_callback_cQScrollBar_initPainter(vtbl: pointer, self: pointer, painter: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QScrollBarVTable](vtbl)
   let self = QScrollBar(h: self)
-  let slotval1 = gen_qpainter_types.QPainter(h: painter)
+  let slotval1 = gen_qpainter_types.QPainter(h: painter, owned: false)
   vtbl[].initPainter(self, slotval1)
 
 proc QScrollBarredirected*(self: gen_qscrollbar_types.QScrollBar, offset: gen_qpoint_types.QPoint): gen_qpaintdevice_types.QPaintDevice =
-  gen_qpaintdevice_types.QPaintDevice(h: fcQScrollBar_virtualbase_redirected(self.h, offset.h))
+  gen_qpaintdevice_types.QPaintDevice(h: fcQScrollBar_virtualbase_redirected(self.h, offset.h), owned: false)
 
 proc miqt_exec_callback_cQScrollBar_redirected(vtbl: pointer, self: pointer, offset: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QScrollBarVTable](vtbl)
   let self = QScrollBar(h: self)
-  let slotval1 = gen_qpoint_types.QPoint(h: offset)
+  let slotval1 = gen_qpoint_types.QPoint(h: offset, owned: false)
   var virtualReturn = vtbl[].redirected(self, slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QScrollBarsharedPainter*(self: gen_qscrollbar_types.QScrollBar, ): gen_qpainter_types.QPainter =
-  gen_qpainter_types.QPainter(h: fcQScrollBar_virtualbase_sharedPainter(self.h))
+  gen_qpainter_types.QPainter(h: fcQScrollBar_virtualbase_sharedPainter(self.h), owned: false)
 
 proc miqt_exec_callback_cQScrollBar_sharedPainter(vtbl: pointer, self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QScrollBarVTable](vtbl)
   let self = QScrollBar(h: self)
   var virtualReturn = vtbl[].sharedPainter(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QScrollBarinputMethodEvent*(self: gen_qscrollbar_types.QScrollBar, param1: gen_qevent_types.QInputMethodEvent): void =
   fcQScrollBar_virtualbase_inputMethodEvent(self.h, param1.h)
@@ -757,18 +774,21 @@ proc QScrollBarinputMethodEvent*(self: gen_qscrollbar_types.QScrollBar, param1: 
 proc miqt_exec_callback_cQScrollBar_inputMethodEvent(vtbl: pointer, self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QScrollBarVTable](vtbl)
   let self = QScrollBar(h: self)
-  let slotval1 = gen_qevent_types.QInputMethodEvent(h: param1)
+  let slotval1 = gen_qevent_types.QInputMethodEvent(h: param1, owned: false)
   vtbl[].inputMethodEvent(self, slotval1)
 
 proc QScrollBarinputMethodQuery*(self: gen_qscrollbar_types.QScrollBar, param1: cint): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQScrollBar_virtualbase_inputMethodQuery(self.h, cint(param1)))
+  gen_qvariant_types.QVariant(h: fcQScrollBar_virtualbase_inputMethodQuery(self.h, cint(param1)), owned: true)
 
 proc miqt_exec_callback_cQScrollBar_inputMethodQuery(vtbl: pointer, self: pointer, param1: cint): pointer {.cdecl.} =
   let vtbl = cast[ptr QScrollBarVTable](vtbl)
   let self = QScrollBar(h: self)
   let slotval1 = cint(param1)
   var virtualReturn = vtbl[].inputMethodQuery(self, slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QScrollBarfocusNextPrevChild*(self: gen_qscrollbar_types.QScrollBar, next: bool): bool =
   fcQScrollBar_virtualbase_focusNextPrevChild(self.h, next)
@@ -786,8 +806,8 @@ proc QScrollBareventFilter*(self: gen_qscrollbar_types.QScrollBar, watched: gen_
 proc miqt_exec_callback_cQScrollBar_eventFilter(vtbl: pointer, self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QScrollBarVTable](vtbl)
   let self = QScrollBar(h: self)
-  let slotval1 = gen_qobject_types.QObject(h: watched)
-  let slotval2 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].eventFilter(self, slotval1, slotval2)
   virtualReturn
 
@@ -797,7 +817,7 @@ proc QScrollBarchildEvent*(self: gen_qscrollbar_types.QScrollBar, event: gen_qco
 proc miqt_exec_callback_cQScrollBar_childEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QScrollBarVTable](vtbl)
   let self = QScrollBar(h: self)
-  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   vtbl[].childEvent(self, slotval1)
 
 proc QScrollBarcustomEvent*(self: gen_qscrollbar_types.QScrollBar, event: gen_qcoreevent_types.QEvent): void =
@@ -806,7 +826,7 @@ proc QScrollBarcustomEvent*(self: gen_qscrollbar_types.QScrollBar, event: gen_qc
 proc miqt_exec_callback_cQScrollBar_customEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QScrollBarVTable](vtbl)
   let self = QScrollBar(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].customEvent(self, slotval1)
 
 proc QScrollBarconnectNotify*(self: gen_qscrollbar_types.QScrollBar, signal: gen_qmetaobject_types.QMetaMethod): void =
@@ -815,7 +835,7 @@ proc QScrollBarconnectNotify*(self: gen_qscrollbar_types.QScrollBar, signal: gen
 proc miqt_exec_callback_cQScrollBar_connectNotify(vtbl: pointer, self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QScrollBarVTable](vtbl)
   let self = QScrollBar(h: self)
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].connectNotify(self, slotval1)
 
 proc QScrollBardisconnectNotify*(self: gen_qscrollbar_types.QScrollBar, signal: gen_qmetaobject_types.QMetaMethod): void =
@@ -824,8 +844,413 @@ proc QScrollBardisconnectNotify*(self: gen_qscrollbar_types.QScrollBar, signal: 
 proc miqt_exec_callback_cQScrollBar_disconnectNotify(vtbl: pointer, self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QScrollBarVTable](vtbl)
   let self = QScrollBar(h: self)
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].disconnectNotify(self, slotval1)
+
+type VirtualQScrollBar* {.inheritable.} = ref object of QScrollBar
+  vtbl*: cQScrollBarVTable
+method metaObject*(self: VirtualQScrollBar, ): gen_qobjectdefs_types.QMetaObject {.base.} =
+  QScrollBarmetaObject(self[])
+proc miqt_exec_method_cQScrollBar_metaObject(vtbl: pointer, inst: pointer): pointer {.cdecl.} =
+  let vtbl = cast[VirtualQScrollBar](cast[uint](vtbl) - uint(offsetOf(VirtualQScrollBar, vtbl)))
+  var virtualReturn = vtbl.metaObject()
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
+
+method metacast*(self: VirtualQScrollBar, param1: cstring): pointer {.base.} =
+  QScrollBarmetacast(self[], param1)
+proc miqt_exec_method_cQScrollBar_metacast(vtbl: pointer, inst: pointer, param1: cstring): pointer {.cdecl.} =
+  let vtbl = cast[VirtualQScrollBar](cast[uint](vtbl) - uint(offsetOf(VirtualQScrollBar, vtbl)))
+  let slotval1 = (param1)
+  var virtualReturn = vtbl.metacast(slotval1)
+  virtualReturn
+
+method metacall*(self: VirtualQScrollBar, param1: cint, param2: cint, param3: pointer): cint {.base.} =
+  QScrollBarmetacall(self[], param1, param2, param3)
+proc miqt_exec_method_cQScrollBar_metacall(vtbl: pointer, inst: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
+  let vtbl = cast[VirtualQScrollBar](cast[uint](vtbl) - uint(offsetOf(VirtualQScrollBar, vtbl)))
+  let slotval1 = cint(param1)
+  let slotval2 = param2
+  let slotval3 = param3
+  var virtualReturn = vtbl.metacall(slotval1, slotval2, slotval3)
+  virtualReturn
+
+method sizeHint*(self: VirtualQScrollBar, ): gen_qsize_types.QSize {.base.} =
+  QScrollBarsizeHint(self[])
+proc miqt_exec_method_cQScrollBar_sizeHint(vtbl: pointer, inst: pointer): pointer {.cdecl.} =
+  let vtbl = cast[VirtualQScrollBar](cast[uint](vtbl) - uint(offsetOf(VirtualQScrollBar, vtbl)))
+  var virtualReturn = vtbl.sizeHint()
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
+
+method event*(self: VirtualQScrollBar, event: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QScrollBarevent(self[], event)
+proc miqt_exec_method_cQScrollBar_event(vtbl: pointer, inst: pointer, event: pointer): bool {.cdecl.} =
+  let vtbl = cast[VirtualQScrollBar](cast[uint](vtbl) - uint(offsetOf(VirtualQScrollBar, vtbl)))
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
+  var virtualReturn = vtbl.event(slotval1)
+  virtualReturn
+
+method wheelEvent*(self: VirtualQScrollBar, param1: gen_qevent_types.QWheelEvent): void {.base.} =
+  QScrollBarwheelEvent(self[], param1)
+proc miqt_exec_method_cQScrollBar_wheelEvent(vtbl: pointer, inst: pointer, param1: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQScrollBar](cast[uint](vtbl) - uint(offsetOf(VirtualQScrollBar, vtbl)))
+  let slotval1 = gen_qevent_types.QWheelEvent(h: param1, owned: false)
+  vtbl.wheelEvent(slotval1)
+
+method paintEvent*(self: VirtualQScrollBar, param1: gen_qevent_types.QPaintEvent): void {.base.} =
+  QScrollBarpaintEvent(self[], param1)
+proc miqt_exec_method_cQScrollBar_paintEvent(vtbl: pointer, inst: pointer, param1: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQScrollBar](cast[uint](vtbl) - uint(offsetOf(VirtualQScrollBar, vtbl)))
+  let slotval1 = gen_qevent_types.QPaintEvent(h: param1, owned: false)
+  vtbl.paintEvent(slotval1)
+
+method mousePressEvent*(self: VirtualQScrollBar, param1: gen_qevent_types.QMouseEvent): void {.base.} =
+  QScrollBarmousePressEvent(self[], param1)
+proc miqt_exec_method_cQScrollBar_mousePressEvent(vtbl: pointer, inst: pointer, param1: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQScrollBar](cast[uint](vtbl) - uint(offsetOf(VirtualQScrollBar, vtbl)))
+  let slotval1 = gen_qevent_types.QMouseEvent(h: param1, owned: false)
+  vtbl.mousePressEvent(slotval1)
+
+method mouseReleaseEvent*(self: VirtualQScrollBar, param1: gen_qevent_types.QMouseEvent): void {.base.} =
+  QScrollBarmouseReleaseEvent(self[], param1)
+proc miqt_exec_method_cQScrollBar_mouseReleaseEvent(vtbl: pointer, inst: pointer, param1: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQScrollBar](cast[uint](vtbl) - uint(offsetOf(VirtualQScrollBar, vtbl)))
+  let slotval1 = gen_qevent_types.QMouseEvent(h: param1, owned: false)
+  vtbl.mouseReleaseEvent(slotval1)
+
+method mouseMoveEvent*(self: VirtualQScrollBar, param1: gen_qevent_types.QMouseEvent): void {.base.} =
+  QScrollBarmouseMoveEvent(self[], param1)
+proc miqt_exec_method_cQScrollBar_mouseMoveEvent(vtbl: pointer, inst: pointer, param1: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQScrollBar](cast[uint](vtbl) - uint(offsetOf(VirtualQScrollBar, vtbl)))
+  let slotval1 = gen_qevent_types.QMouseEvent(h: param1, owned: false)
+  vtbl.mouseMoveEvent(slotval1)
+
+method hideEvent*(self: VirtualQScrollBar, param1: gen_qevent_types.QHideEvent): void {.base.} =
+  QScrollBarhideEvent(self[], param1)
+proc miqt_exec_method_cQScrollBar_hideEvent(vtbl: pointer, inst: pointer, param1: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQScrollBar](cast[uint](vtbl) - uint(offsetOf(VirtualQScrollBar, vtbl)))
+  let slotval1 = gen_qevent_types.QHideEvent(h: param1, owned: false)
+  vtbl.hideEvent(slotval1)
+
+method sliderChange*(self: VirtualQScrollBar, change: cint): void {.base.} =
+  QScrollBarsliderChange(self[], change)
+proc miqt_exec_method_cQScrollBar_sliderChange(vtbl: pointer, inst: pointer, change: cint): void {.cdecl.} =
+  let vtbl = cast[VirtualQScrollBar](cast[uint](vtbl) - uint(offsetOf(VirtualQScrollBar, vtbl)))
+  let slotval1 = cint(change)
+  vtbl.sliderChange(slotval1)
+
+method contextMenuEvent*(self: VirtualQScrollBar, param1: gen_qevent_types.QContextMenuEvent): void {.base.} =
+  QScrollBarcontextMenuEvent(self[], param1)
+proc miqt_exec_method_cQScrollBar_contextMenuEvent(vtbl: pointer, inst: pointer, param1: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQScrollBar](cast[uint](vtbl) - uint(offsetOf(VirtualQScrollBar, vtbl)))
+  let slotval1 = gen_qevent_types.QContextMenuEvent(h: param1, owned: false)
+  vtbl.contextMenuEvent(slotval1)
+
+method initStyleOption*(self: VirtualQScrollBar, option: gen_qstyleoption_types.QStyleOptionSlider): void {.base.} =
+  QScrollBarinitStyleOption(self[], option)
+proc miqt_exec_method_cQScrollBar_initStyleOption(vtbl: pointer, inst: pointer, option: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQScrollBar](cast[uint](vtbl) - uint(offsetOf(VirtualQScrollBar, vtbl)))
+  let slotval1 = gen_qstyleoption_types.QStyleOptionSlider(h: option, owned: false)
+  vtbl.initStyleOption(slotval1)
+
+method keyPressEvent*(self: VirtualQScrollBar, ev: gen_qevent_types.QKeyEvent): void {.base.} =
+  QScrollBarkeyPressEvent(self[], ev)
+proc miqt_exec_method_cQScrollBar_keyPressEvent(vtbl: pointer, inst: pointer, ev: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQScrollBar](cast[uint](vtbl) - uint(offsetOf(VirtualQScrollBar, vtbl)))
+  let slotval1 = gen_qevent_types.QKeyEvent(h: ev, owned: false)
+  vtbl.keyPressEvent(slotval1)
+
+method timerEvent*(self: VirtualQScrollBar, param1: gen_qcoreevent_types.QTimerEvent): void {.base.} =
+  QScrollBartimerEvent(self[], param1)
+proc miqt_exec_method_cQScrollBar_timerEvent(vtbl: pointer, inst: pointer, param1: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQScrollBar](cast[uint](vtbl) - uint(offsetOf(VirtualQScrollBar, vtbl)))
+  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: param1, owned: false)
+  vtbl.timerEvent(slotval1)
+
+method changeEvent*(self: VirtualQScrollBar, e: gen_qcoreevent_types.QEvent): void {.base.} =
+  QScrollBarchangeEvent(self[], e)
+proc miqt_exec_method_cQScrollBar_changeEvent(vtbl: pointer, inst: pointer, e: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQScrollBar](cast[uint](vtbl) - uint(offsetOf(VirtualQScrollBar, vtbl)))
+  let slotval1 = gen_qcoreevent_types.QEvent(h: e, owned: false)
+  vtbl.changeEvent(slotval1)
+
+method devType*(self: VirtualQScrollBar, ): cint {.base.} =
+  QScrollBardevType(self[])
+proc miqt_exec_method_cQScrollBar_devType(vtbl: pointer, inst: pointer): cint {.cdecl.} =
+  let vtbl = cast[VirtualQScrollBar](cast[uint](vtbl) - uint(offsetOf(VirtualQScrollBar, vtbl)))
+  var virtualReturn = vtbl.devType()
+  virtualReturn
+
+method setVisible*(self: VirtualQScrollBar, visible: bool): void {.base.} =
+  QScrollBarsetVisible(self[], visible)
+proc miqt_exec_method_cQScrollBar_setVisible(vtbl: pointer, inst: pointer, visible: bool): void {.cdecl.} =
+  let vtbl = cast[VirtualQScrollBar](cast[uint](vtbl) - uint(offsetOf(VirtualQScrollBar, vtbl)))
+  let slotval1 = visible
+  vtbl.setVisible(slotval1)
+
+method minimumSizeHint*(self: VirtualQScrollBar, ): gen_qsize_types.QSize {.base.} =
+  QScrollBarminimumSizeHint(self[])
+proc miqt_exec_method_cQScrollBar_minimumSizeHint(vtbl: pointer, inst: pointer): pointer {.cdecl.} =
+  let vtbl = cast[VirtualQScrollBar](cast[uint](vtbl) - uint(offsetOf(VirtualQScrollBar, vtbl)))
+  var virtualReturn = vtbl.minimumSizeHint()
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
+
+method heightForWidth*(self: VirtualQScrollBar, param1: cint): cint {.base.} =
+  QScrollBarheightForWidth(self[], param1)
+proc miqt_exec_method_cQScrollBar_heightForWidth(vtbl: pointer, inst: pointer, param1: cint): cint {.cdecl.} =
+  let vtbl = cast[VirtualQScrollBar](cast[uint](vtbl) - uint(offsetOf(VirtualQScrollBar, vtbl)))
+  let slotval1 = param1
+  var virtualReturn = vtbl.heightForWidth(slotval1)
+  virtualReturn
+
+method hasHeightForWidth*(self: VirtualQScrollBar, ): bool {.base.} =
+  QScrollBarhasHeightForWidth(self[])
+proc miqt_exec_method_cQScrollBar_hasHeightForWidth(vtbl: pointer, inst: pointer): bool {.cdecl.} =
+  let vtbl = cast[VirtualQScrollBar](cast[uint](vtbl) - uint(offsetOf(VirtualQScrollBar, vtbl)))
+  var virtualReturn = vtbl.hasHeightForWidth()
+  virtualReturn
+
+method paintEngine*(self: VirtualQScrollBar, ): gen_qpaintengine_types.QPaintEngine {.base.} =
+  QScrollBarpaintEngine(self[])
+proc miqt_exec_method_cQScrollBar_paintEngine(vtbl: pointer, inst: pointer): pointer {.cdecl.} =
+  let vtbl = cast[VirtualQScrollBar](cast[uint](vtbl) - uint(offsetOf(VirtualQScrollBar, vtbl)))
+  var virtualReturn = vtbl.paintEngine()
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
+
+method mouseDoubleClickEvent*(self: VirtualQScrollBar, event: gen_qevent_types.QMouseEvent): void {.base.} =
+  QScrollBarmouseDoubleClickEvent(self[], event)
+proc miqt_exec_method_cQScrollBar_mouseDoubleClickEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQScrollBar](cast[uint](vtbl) - uint(offsetOf(VirtualQScrollBar, vtbl)))
+  let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
+  vtbl.mouseDoubleClickEvent(slotval1)
+
+method keyReleaseEvent*(self: VirtualQScrollBar, event: gen_qevent_types.QKeyEvent): void {.base.} =
+  QScrollBarkeyReleaseEvent(self[], event)
+proc miqt_exec_method_cQScrollBar_keyReleaseEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQScrollBar](cast[uint](vtbl) - uint(offsetOf(VirtualQScrollBar, vtbl)))
+  let slotval1 = gen_qevent_types.QKeyEvent(h: event, owned: false)
+  vtbl.keyReleaseEvent(slotval1)
+
+method focusInEvent*(self: VirtualQScrollBar, event: gen_qevent_types.QFocusEvent): void {.base.} =
+  QScrollBarfocusInEvent(self[], event)
+proc miqt_exec_method_cQScrollBar_focusInEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQScrollBar](cast[uint](vtbl) - uint(offsetOf(VirtualQScrollBar, vtbl)))
+  let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
+  vtbl.focusInEvent(slotval1)
+
+method focusOutEvent*(self: VirtualQScrollBar, event: gen_qevent_types.QFocusEvent): void {.base.} =
+  QScrollBarfocusOutEvent(self[], event)
+proc miqt_exec_method_cQScrollBar_focusOutEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQScrollBar](cast[uint](vtbl) - uint(offsetOf(VirtualQScrollBar, vtbl)))
+  let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
+  vtbl.focusOutEvent(slotval1)
+
+method enterEvent*(self: VirtualQScrollBar, event: gen_qevent_types.QEnterEvent): void {.base.} =
+  QScrollBarenterEvent(self[], event)
+proc miqt_exec_method_cQScrollBar_enterEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQScrollBar](cast[uint](vtbl) - uint(offsetOf(VirtualQScrollBar, vtbl)))
+  let slotval1 = gen_qevent_types.QEnterEvent(h: event, owned: false)
+  vtbl.enterEvent(slotval1)
+
+method leaveEvent*(self: VirtualQScrollBar, event: gen_qcoreevent_types.QEvent): void {.base.} =
+  QScrollBarleaveEvent(self[], event)
+proc miqt_exec_method_cQScrollBar_leaveEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQScrollBar](cast[uint](vtbl) - uint(offsetOf(VirtualQScrollBar, vtbl)))
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
+  vtbl.leaveEvent(slotval1)
+
+method moveEvent*(self: VirtualQScrollBar, event: gen_qevent_types.QMoveEvent): void {.base.} =
+  QScrollBarmoveEvent(self[], event)
+proc miqt_exec_method_cQScrollBar_moveEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQScrollBar](cast[uint](vtbl) - uint(offsetOf(VirtualQScrollBar, vtbl)))
+  let slotval1 = gen_qevent_types.QMoveEvent(h: event, owned: false)
+  vtbl.moveEvent(slotval1)
+
+method resizeEvent*(self: VirtualQScrollBar, event: gen_qevent_types.QResizeEvent): void {.base.} =
+  QScrollBarresizeEvent(self[], event)
+proc miqt_exec_method_cQScrollBar_resizeEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQScrollBar](cast[uint](vtbl) - uint(offsetOf(VirtualQScrollBar, vtbl)))
+  let slotval1 = gen_qevent_types.QResizeEvent(h: event, owned: false)
+  vtbl.resizeEvent(slotval1)
+
+method closeEvent*(self: VirtualQScrollBar, event: gen_qevent_types.QCloseEvent): void {.base.} =
+  QScrollBarcloseEvent(self[], event)
+proc miqt_exec_method_cQScrollBar_closeEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQScrollBar](cast[uint](vtbl) - uint(offsetOf(VirtualQScrollBar, vtbl)))
+  let slotval1 = gen_qevent_types.QCloseEvent(h: event, owned: false)
+  vtbl.closeEvent(slotval1)
+
+method tabletEvent*(self: VirtualQScrollBar, event: gen_qevent_types.QTabletEvent): void {.base.} =
+  QScrollBartabletEvent(self[], event)
+proc miqt_exec_method_cQScrollBar_tabletEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQScrollBar](cast[uint](vtbl) - uint(offsetOf(VirtualQScrollBar, vtbl)))
+  let slotval1 = gen_qevent_types.QTabletEvent(h: event, owned: false)
+  vtbl.tabletEvent(slotval1)
+
+method actionEvent*(self: VirtualQScrollBar, event: gen_qevent_types.QActionEvent): void {.base.} =
+  QScrollBaractionEvent(self[], event)
+proc miqt_exec_method_cQScrollBar_actionEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQScrollBar](cast[uint](vtbl) - uint(offsetOf(VirtualQScrollBar, vtbl)))
+  let slotval1 = gen_qevent_types.QActionEvent(h: event, owned: false)
+  vtbl.actionEvent(slotval1)
+
+method dragEnterEvent*(self: VirtualQScrollBar, event: gen_qevent_types.QDragEnterEvent): void {.base.} =
+  QScrollBardragEnterEvent(self[], event)
+proc miqt_exec_method_cQScrollBar_dragEnterEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQScrollBar](cast[uint](vtbl) - uint(offsetOf(VirtualQScrollBar, vtbl)))
+  let slotval1 = gen_qevent_types.QDragEnterEvent(h: event, owned: false)
+  vtbl.dragEnterEvent(slotval1)
+
+method dragMoveEvent*(self: VirtualQScrollBar, event: gen_qevent_types.QDragMoveEvent): void {.base.} =
+  QScrollBardragMoveEvent(self[], event)
+proc miqt_exec_method_cQScrollBar_dragMoveEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQScrollBar](cast[uint](vtbl) - uint(offsetOf(VirtualQScrollBar, vtbl)))
+  let slotval1 = gen_qevent_types.QDragMoveEvent(h: event, owned: false)
+  vtbl.dragMoveEvent(slotval1)
+
+method dragLeaveEvent*(self: VirtualQScrollBar, event: gen_qevent_types.QDragLeaveEvent): void {.base.} =
+  QScrollBardragLeaveEvent(self[], event)
+proc miqt_exec_method_cQScrollBar_dragLeaveEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQScrollBar](cast[uint](vtbl) - uint(offsetOf(VirtualQScrollBar, vtbl)))
+  let slotval1 = gen_qevent_types.QDragLeaveEvent(h: event, owned: false)
+  vtbl.dragLeaveEvent(slotval1)
+
+method dropEvent*(self: VirtualQScrollBar, event: gen_qevent_types.QDropEvent): void {.base.} =
+  QScrollBardropEvent(self[], event)
+proc miqt_exec_method_cQScrollBar_dropEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQScrollBar](cast[uint](vtbl) - uint(offsetOf(VirtualQScrollBar, vtbl)))
+  let slotval1 = gen_qevent_types.QDropEvent(h: event, owned: false)
+  vtbl.dropEvent(slotval1)
+
+method showEvent*(self: VirtualQScrollBar, event: gen_qevent_types.QShowEvent): void {.base.} =
+  QScrollBarshowEvent(self[], event)
+proc miqt_exec_method_cQScrollBar_showEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQScrollBar](cast[uint](vtbl) - uint(offsetOf(VirtualQScrollBar, vtbl)))
+  let slotval1 = gen_qevent_types.QShowEvent(h: event, owned: false)
+  vtbl.showEvent(slotval1)
+
+method nativeEvent*(self: VirtualQScrollBar, eventType: seq[byte], message: pointer, resultVal: ptr uint): bool {.base.} =
+  QScrollBarnativeEvent(self[], eventType, message, resultVal)
+proc miqt_exec_method_cQScrollBar_nativeEvent(vtbl: pointer, inst: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr uint): bool {.cdecl.} =
+  let vtbl = cast[VirtualQScrollBar](cast[uint](vtbl) - uint(offsetOf(VirtualQScrollBar, vtbl)))
+  var veventType_bytearray = eventType
+  var veventTypex_ret = @(toOpenArrayByte(veventType_bytearray.data, 0, int(veventType_bytearray.len)-1))
+  c_free(veventType_bytearray.data)
+  let slotval1 = veventTypex_ret
+  let slotval2 = message
+  let slotval3 = resultVal
+  var virtualReturn = vtbl.nativeEvent(slotval1, slotval2, slotval3)
+  virtualReturn
+
+method metric*(self: VirtualQScrollBar, param1: cint): cint {.base.} =
+  QScrollBarmetric(self[], param1)
+proc miqt_exec_method_cQScrollBar_metric(vtbl: pointer, inst: pointer, param1: cint): cint {.cdecl.} =
+  let vtbl = cast[VirtualQScrollBar](cast[uint](vtbl) - uint(offsetOf(VirtualQScrollBar, vtbl)))
+  let slotval1 = cint(param1)
+  var virtualReturn = vtbl.metric(slotval1)
+  virtualReturn
+
+method initPainter*(self: VirtualQScrollBar, painter: gen_qpainter_types.QPainter): void {.base.} =
+  QScrollBarinitPainter(self[], painter)
+proc miqt_exec_method_cQScrollBar_initPainter(vtbl: pointer, inst: pointer, painter: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQScrollBar](cast[uint](vtbl) - uint(offsetOf(VirtualQScrollBar, vtbl)))
+  let slotval1 = gen_qpainter_types.QPainter(h: painter, owned: false)
+  vtbl.initPainter(slotval1)
+
+method redirected*(self: VirtualQScrollBar, offset: gen_qpoint_types.QPoint): gen_qpaintdevice_types.QPaintDevice {.base.} =
+  QScrollBarredirected(self[], offset)
+proc miqt_exec_method_cQScrollBar_redirected(vtbl: pointer, inst: pointer, offset: pointer): pointer {.cdecl.} =
+  let vtbl = cast[VirtualQScrollBar](cast[uint](vtbl) - uint(offsetOf(VirtualQScrollBar, vtbl)))
+  let slotval1 = gen_qpoint_types.QPoint(h: offset, owned: false)
+  var virtualReturn = vtbl.redirected(slotval1)
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
+
+method sharedPainter*(self: VirtualQScrollBar, ): gen_qpainter_types.QPainter {.base.} =
+  QScrollBarsharedPainter(self[])
+proc miqt_exec_method_cQScrollBar_sharedPainter(vtbl: pointer, inst: pointer): pointer {.cdecl.} =
+  let vtbl = cast[VirtualQScrollBar](cast[uint](vtbl) - uint(offsetOf(VirtualQScrollBar, vtbl)))
+  var virtualReturn = vtbl.sharedPainter()
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
+
+method inputMethodEvent*(self: VirtualQScrollBar, param1: gen_qevent_types.QInputMethodEvent): void {.base.} =
+  QScrollBarinputMethodEvent(self[], param1)
+proc miqt_exec_method_cQScrollBar_inputMethodEvent(vtbl: pointer, inst: pointer, param1: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQScrollBar](cast[uint](vtbl) - uint(offsetOf(VirtualQScrollBar, vtbl)))
+  let slotval1 = gen_qevent_types.QInputMethodEvent(h: param1, owned: false)
+  vtbl.inputMethodEvent(slotval1)
+
+method inputMethodQuery*(self: VirtualQScrollBar, param1: cint): gen_qvariant_types.QVariant {.base.} =
+  QScrollBarinputMethodQuery(self[], param1)
+proc miqt_exec_method_cQScrollBar_inputMethodQuery(vtbl: pointer, inst: pointer, param1: cint): pointer {.cdecl.} =
+  let vtbl = cast[VirtualQScrollBar](cast[uint](vtbl) - uint(offsetOf(VirtualQScrollBar, vtbl)))
+  let slotval1 = cint(param1)
+  var virtualReturn = vtbl.inputMethodQuery(slotval1)
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
+
+method focusNextPrevChild*(self: VirtualQScrollBar, next: bool): bool {.base.} =
+  QScrollBarfocusNextPrevChild(self[], next)
+proc miqt_exec_method_cQScrollBar_focusNextPrevChild(vtbl: pointer, inst: pointer, next: bool): bool {.cdecl.} =
+  let vtbl = cast[VirtualQScrollBar](cast[uint](vtbl) - uint(offsetOf(VirtualQScrollBar, vtbl)))
+  let slotval1 = next
+  var virtualReturn = vtbl.focusNextPrevChild(slotval1)
+  virtualReturn
+
+method eventFilter*(self: VirtualQScrollBar, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QScrollBareventFilter(self[], watched, event)
+proc miqt_exec_method_cQScrollBar_eventFilter(vtbl: pointer, inst: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
+  let vtbl = cast[VirtualQScrollBar](cast[uint](vtbl) - uint(offsetOf(VirtualQScrollBar, vtbl)))
+  let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
+  var virtualReturn = vtbl.eventFilter(slotval1, slotval2)
+  virtualReturn
+
+method childEvent*(self: VirtualQScrollBar, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
+  QScrollBarchildEvent(self[], event)
+proc miqt_exec_method_cQScrollBar_childEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQScrollBar](cast[uint](vtbl) - uint(offsetOf(VirtualQScrollBar, vtbl)))
+  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
+  vtbl.childEvent(slotval1)
+
+method customEvent*(self: VirtualQScrollBar, event: gen_qcoreevent_types.QEvent): void {.base.} =
+  QScrollBarcustomEvent(self[], event)
+proc miqt_exec_method_cQScrollBar_customEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQScrollBar](cast[uint](vtbl) - uint(offsetOf(VirtualQScrollBar, vtbl)))
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
+  vtbl.customEvent(slotval1)
+
+method connectNotify*(self: VirtualQScrollBar, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QScrollBarconnectNotify(self[], signal)
+proc miqt_exec_method_cQScrollBar_connectNotify(vtbl: pointer, inst: pointer, signal: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQScrollBar](cast[uint](vtbl) - uint(offsetOf(VirtualQScrollBar, vtbl)))
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
+  vtbl.connectNotify(slotval1)
+
+method disconnectNotify*(self: VirtualQScrollBar, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QScrollBardisconnectNotify(self[], signal)
+proc miqt_exec_method_cQScrollBar_disconnectNotify(vtbl: pointer, inst: pointer, signal: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQScrollBar](cast[uint](vtbl) - uint(offsetOf(VirtualQScrollBar, vtbl)))
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
+  vtbl.disconnectNotify(slotval1)
 
 proc setRepeatAction*(self: gen_qscrollbar_types.QScrollBar, action: cint): void =
   fcQScrollBar_protectedbase_setRepeatAction(self.h, cint(action))
@@ -849,7 +1274,7 @@ proc focusPreviousChild*(self: gen_qscrollbar_types.QScrollBar, ): bool =
   fcQScrollBar_protectedbase_focusPreviousChild(self.h)
 
 proc sender*(self: gen_qscrollbar_types.QScrollBar, ): gen_qobject_types.QObject =
-  gen_qobject_types.QObject(h: fcQScrollBar_protectedbase_sender(self.h))
+  gen_qobject_types.QObject(h: fcQScrollBar_protectedbase_sender(self.h), owned: false)
 
 proc senderSignalIndex*(self: gen_qscrollbar_types.QScrollBar, ): cint =
   fcQScrollBar_protectedbase_senderSignalIndex(self.h)
@@ -865,457 +1290,710 @@ proc create*(T: type gen_qscrollbar_types.QScrollBar,
     vtbl: ref QScrollBarVTable = nil): gen_qscrollbar_types.QScrollBar =
   let vtbl = if vtbl == nil: new QScrollBarVTable else: vtbl
   GC_ref(vtbl)
-  vtbl.vtbl.destructor = proc(vtbl: ptr cQScrollBarVTable, _: ptr cQScrollBar) {.cdecl.} =
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQScrollBarVTable, _: ptr cQScrollBar) {.cdecl.} =
     let vtbl = cast[ref QScrollBarVTable](vtbl)
     GC_unref(vtbl)
-  if not isNil(vtbl.metaObject):
+  if not isNil(vtbl[].metaObject):
     vtbl[].vtbl.metaObject = miqt_exec_callback_cQScrollBar_metaObject
-  if not isNil(vtbl.metacast):
+  if not isNil(vtbl[].metacast):
     vtbl[].vtbl.metacast = miqt_exec_callback_cQScrollBar_metacast
-  if not isNil(vtbl.metacall):
+  if not isNil(vtbl[].metacall):
     vtbl[].vtbl.metacall = miqt_exec_callback_cQScrollBar_metacall
-  if not isNil(vtbl.sizeHint):
+  if not isNil(vtbl[].sizeHint):
     vtbl[].vtbl.sizeHint = miqt_exec_callback_cQScrollBar_sizeHint
-  if not isNil(vtbl.event):
+  if not isNil(vtbl[].event):
     vtbl[].vtbl.event = miqt_exec_callback_cQScrollBar_event
-  if not isNil(vtbl.wheelEvent):
+  if not isNil(vtbl[].wheelEvent):
     vtbl[].vtbl.wheelEvent = miqt_exec_callback_cQScrollBar_wheelEvent
-  if not isNil(vtbl.paintEvent):
+  if not isNil(vtbl[].paintEvent):
     vtbl[].vtbl.paintEvent = miqt_exec_callback_cQScrollBar_paintEvent
-  if not isNil(vtbl.mousePressEvent):
+  if not isNil(vtbl[].mousePressEvent):
     vtbl[].vtbl.mousePressEvent = miqt_exec_callback_cQScrollBar_mousePressEvent
-  if not isNil(vtbl.mouseReleaseEvent):
+  if not isNil(vtbl[].mouseReleaseEvent):
     vtbl[].vtbl.mouseReleaseEvent = miqt_exec_callback_cQScrollBar_mouseReleaseEvent
-  if not isNil(vtbl.mouseMoveEvent):
+  if not isNil(vtbl[].mouseMoveEvent):
     vtbl[].vtbl.mouseMoveEvent = miqt_exec_callback_cQScrollBar_mouseMoveEvent
-  if not isNil(vtbl.hideEvent):
+  if not isNil(vtbl[].hideEvent):
     vtbl[].vtbl.hideEvent = miqt_exec_callback_cQScrollBar_hideEvent
-  if not isNil(vtbl.sliderChange):
+  if not isNil(vtbl[].sliderChange):
     vtbl[].vtbl.sliderChange = miqt_exec_callback_cQScrollBar_sliderChange
-  if not isNil(vtbl.contextMenuEvent):
+  if not isNil(vtbl[].contextMenuEvent):
     vtbl[].vtbl.contextMenuEvent = miqt_exec_callback_cQScrollBar_contextMenuEvent
-  if not isNil(vtbl.initStyleOption):
+  if not isNil(vtbl[].initStyleOption):
     vtbl[].vtbl.initStyleOption = miqt_exec_callback_cQScrollBar_initStyleOption
-  if not isNil(vtbl.keyPressEvent):
+  if not isNil(vtbl[].keyPressEvent):
     vtbl[].vtbl.keyPressEvent = miqt_exec_callback_cQScrollBar_keyPressEvent
-  if not isNil(vtbl.timerEvent):
+  if not isNil(vtbl[].timerEvent):
     vtbl[].vtbl.timerEvent = miqt_exec_callback_cQScrollBar_timerEvent
-  if not isNil(vtbl.changeEvent):
+  if not isNil(vtbl[].changeEvent):
     vtbl[].vtbl.changeEvent = miqt_exec_callback_cQScrollBar_changeEvent
-  if not isNil(vtbl.devType):
+  if not isNil(vtbl[].devType):
     vtbl[].vtbl.devType = miqt_exec_callback_cQScrollBar_devType
-  if not isNil(vtbl.setVisible):
+  if not isNil(vtbl[].setVisible):
     vtbl[].vtbl.setVisible = miqt_exec_callback_cQScrollBar_setVisible
-  if not isNil(vtbl.minimumSizeHint):
+  if not isNil(vtbl[].minimumSizeHint):
     vtbl[].vtbl.minimumSizeHint = miqt_exec_callback_cQScrollBar_minimumSizeHint
-  if not isNil(vtbl.heightForWidth):
+  if not isNil(vtbl[].heightForWidth):
     vtbl[].vtbl.heightForWidth = miqt_exec_callback_cQScrollBar_heightForWidth
-  if not isNil(vtbl.hasHeightForWidth):
+  if not isNil(vtbl[].hasHeightForWidth):
     vtbl[].vtbl.hasHeightForWidth = miqt_exec_callback_cQScrollBar_hasHeightForWidth
-  if not isNil(vtbl.paintEngine):
+  if not isNil(vtbl[].paintEngine):
     vtbl[].vtbl.paintEngine = miqt_exec_callback_cQScrollBar_paintEngine
-  if not isNil(vtbl.mouseDoubleClickEvent):
+  if not isNil(vtbl[].mouseDoubleClickEvent):
     vtbl[].vtbl.mouseDoubleClickEvent = miqt_exec_callback_cQScrollBar_mouseDoubleClickEvent
-  if not isNil(vtbl.keyReleaseEvent):
+  if not isNil(vtbl[].keyReleaseEvent):
     vtbl[].vtbl.keyReleaseEvent = miqt_exec_callback_cQScrollBar_keyReleaseEvent
-  if not isNil(vtbl.focusInEvent):
+  if not isNil(vtbl[].focusInEvent):
     vtbl[].vtbl.focusInEvent = miqt_exec_callback_cQScrollBar_focusInEvent
-  if not isNil(vtbl.focusOutEvent):
+  if not isNil(vtbl[].focusOutEvent):
     vtbl[].vtbl.focusOutEvent = miqt_exec_callback_cQScrollBar_focusOutEvent
-  if not isNil(vtbl.enterEvent):
+  if not isNil(vtbl[].enterEvent):
     vtbl[].vtbl.enterEvent = miqt_exec_callback_cQScrollBar_enterEvent
-  if not isNil(vtbl.leaveEvent):
+  if not isNil(vtbl[].leaveEvent):
     vtbl[].vtbl.leaveEvent = miqt_exec_callback_cQScrollBar_leaveEvent
-  if not isNil(vtbl.moveEvent):
+  if not isNil(vtbl[].moveEvent):
     vtbl[].vtbl.moveEvent = miqt_exec_callback_cQScrollBar_moveEvent
-  if not isNil(vtbl.resizeEvent):
+  if not isNil(vtbl[].resizeEvent):
     vtbl[].vtbl.resizeEvent = miqt_exec_callback_cQScrollBar_resizeEvent
-  if not isNil(vtbl.closeEvent):
+  if not isNil(vtbl[].closeEvent):
     vtbl[].vtbl.closeEvent = miqt_exec_callback_cQScrollBar_closeEvent
-  if not isNil(vtbl.tabletEvent):
+  if not isNil(vtbl[].tabletEvent):
     vtbl[].vtbl.tabletEvent = miqt_exec_callback_cQScrollBar_tabletEvent
-  if not isNil(vtbl.actionEvent):
+  if not isNil(vtbl[].actionEvent):
     vtbl[].vtbl.actionEvent = miqt_exec_callback_cQScrollBar_actionEvent
-  if not isNil(vtbl.dragEnterEvent):
+  if not isNil(vtbl[].dragEnterEvent):
     vtbl[].vtbl.dragEnterEvent = miqt_exec_callback_cQScrollBar_dragEnterEvent
-  if not isNil(vtbl.dragMoveEvent):
+  if not isNil(vtbl[].dragMoveEvent):
     vtbl[].vtbl.dragMoveEvent = miqt_exec_callback_cQScrollBar_dragMoveEvent
-  if not isNil(vtbl.dragLeaveEvent):
+  if not isNil(vtbl[].dragLeaveEvent):
     vtbl[].vtbl.dragLeaveEvent = miqt_exec_callback_cQScrollBar_dragLeaveEvent
-  if not isNil(vtbl.dropEvent):
+  if not isNil(vtbl[].dropEvent):
     vtbl[].vtbl.dropEvent = miqt_exec_callback_cQScrollBar_dropEvent
-  if not isNil(vtbl.showEvent):
+  if not isNil(vtbl[].showEvent):
     vtbl[].vtbl.showEvent = miqt_exec_callback_cQScrollBar_showEvent
-  if not isNil(vtbl.nativeEvent):
+  if not isNil(vtbl[].nativeEvent):
     vtbl[].vtbl.nativeEvent = miqt_exec_callback_cQScrollBar_nativeEvent
-  if not isNil(vtbl.metric):
+  if not isNil(vtbl[].metric):
     vtbl[].vtbl.metric = miqt_exec_callback_cQScrollBar_metric
-  if not isNil(vtbl.initPainter):
+  if not isNil(vtbl[].initPainter):
     vtbl[].vtbl.initPainter = miqt_exec_callback_cQScrollBar_initPainter
-  if not isNil(vtbl.redirected):
+  if not isNil(vtbl[].redirected):
     vtbl[].vtbl.redirected = miqt_exec_callback_cQScrollBar_redirected
-  if not isNil(vtbl.sharedPainter):
+  if not isNil(vtbl[].sharedPainter):
     vtbl[].vtbl.sharedPainter = miqt_exec_callback_cQScrollBar_sharedPainter
-  if not isNil(vtbl.inputMethodEvent):
+  if not isNil(vtbl[].inputMethodEvent):
     vtbl[].vtbl.inputMethodEvent = miqt_exec_callback_cQScrollBar_inputMethodEvent
-  if not isNil(vtbl.inputMethodQuery):
+  if not isNil(vtbl[].inputMethodQuery):
     vtbl[].vtbl.inputMethodQuery = miqt_exec_callback_cQScrollBar_inputMethodQuery
-  if not isNil(vtbl.focusNextPrevChild):
+  if not isNil(vtbl[].focusNextPrevChild):
     vtbl[].vtbl.focusNextPrevChild = miqt_exec_callback_cQScrollBar_focusNextPrevChild
-  if not isNil(vtbl.eventFilter):
+  if not isNil(vtbl[].eventFilter):
     vtbl[].vtbl.eventFilter = miqt_exec_callback_cQScrollBar_eventFilter
-  if not isNil(vtbl.childEvent):
+  if not isNil(vtbl[].childEvent):
     vtbl[].vtbl.childEvent = miqt_exec_callback_cQScrollBar_childEvent
-  if not isNil(vtbl.customEvent):
+  if not isNil(vtbl[].customEvent):
     vtbl[].vtbl.customEvent = miqt_exec_callback_cQScrollBar_customEvent
-  if not isNil(vtbl.connectNotify):
+  if not isNil(vtbl[].connectNotify):
     vtbl[].vtbl.connectNotify = miqt_exec_callback_cQScrollBar_connectNotify
-  if not isNil(vtbl.disconnectNotify):
+  if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQScrollBar_disconnectNotify
-  gen_qscrollbar_types.QScrollBar(h: fcQScrollBar_new(addr(vtbl[]), parent.h))
+  gen_qscrollbar_types.QScrollBar(h: fcQScrollBar_new(addr(vtbl[].vtbl), parent.h), owned: true)
 
 proc create*(T: type gen_qscrollbar_types.QScrollBar,
     vtbl: ref QScrollBarVTable = nil): gen_qscrollbar_types.QScrollBar =
   let vtbl = if vtbl == nil: new QScrollBarVTable else: vtbl
   GC_ref(vtbl)
-  vtbl.vtbl.destructor = proc(vtbl: ptr cQScrollBarVTable, _: ptr cQScrollBar) {.cdecl.} =
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQScrollBarVTable, _: ptr cQScrollBar) {.cdecl.} =
     let vtbl = cast[ref QScrollBarVTable](vtbl)
     GC_unref(vtbl)
-  if not isNil(vtbl.metaObject):
+  if not isNil(vtbl[].metaObject):
     vtbl[].vtbl.metaObject = miqt_exec_callback_cQScrollBar_metaObject
-  if not isNil(vtbl.metacast):
+  if not isNil(vtbl[].metacast):
     vtbl[].vtbl.metacast = miqt_exec_callback_cQScrollBar_metacast
-  if not isNil(vtbl.metacall):
+  if not isNil(vtbl[].metacall):
     vtbl[].vtbl.metacall = miqt_exec_callback_cQScrollBar_metacall
-  if not isNil(vtbl.sizeHint):
+  if not isNil(vtbl[].sizeHint):
     vtbl[].vtbl.sizeHint = miqt_exec_callback_cQScrollBar_sizeHint
-  if not isNil(vtbl.event):
+  if not isNil(vtbl[].event):
     vtbl[].vtbl.event = miqt_exec_callback_cQScrollBar_event
-  if not isNil(vtbl.wheelEvent):
+  if not isNil(vtbl[].wheelEvent):
     vtbl[].vtbl.wheelEvent = miqt_exec_callback_cQScrollBar_wheelEvent
-  if not isNil(vtbl.paintEvent):
+  if not isNil(vtbl[].paintEvent):
     vtbl[].vtbl.paintEvent = miqt_exec_callback_cQScrollBar_paintEvent
-  if not isNil(vtbl.mousePressEvent):
+  if not isNil(vtbl[].mousePressEvent):
     vtbl[].vtbl.mousePressEvent = miqt_exec_callback_cQScrollBar_mousePressEvent
-  if not isNil(vtbl.mouseReleaseEvent):
+  if not isNil(vtbl[].mouseReleaseEvent):
     vtbl[].vtbl.mouseReleaseEvent = miqt_exec_callback_cQScrollBar_mouseReleaseEvent
-  if not isNil(vtbl.mouseMoveEvent):
+  if not isNil(vtbl[].mouseMoveEvent):
     vtbl[].vtbl.mouseMoveEvent = miqt_exec_callback_cQScrollBar_mouseMoveEvent
-  if not isNil(vtbl.hideEvent):
+  if not isNil(vtbl[].hideEvent):
     vtbl[].vtbl.hideEvent = miqt_exec_callback_cQScrollBar_hideEvent
-  if not isNil(vtbl.sliderChange):
+  if not isNil(vtbl[].sliderChange):
     vtbl[].vtbl.sliderChange = miqt_exec_callback_cQScrollBar_sliderChange
-  if not isNil(vtbl.contextMenuEvent):
+  if not isNil(vtbl[].contextMenuEvent):
     vtbl[].vtbl.contextMenuEvent = miqt_exec_callback_cQScrollBar_contextMenuEvent
-  if not isNil(vtbl.initStyleOption):
+  if not isNil(vtbl[].initStyleOption):
     vtbl[].vtbl.initStyleOption = miqt_exec_callback_cQScrollBar_initStyleOption
-  if not isNil(vtbl.keyPressEvent):
+  if not isNil(vtbl[].keyPressEvent):
     vtbl[].vtbl.keyPressEvent = miqt_exec_callback_cQScrollBar_keyPressEvent
-  if not isNil(vtbl.timerEvent):
+  if not isNil(vtbl[].timerEvent):
     vtbl[].vtbl.timerEvent = miqt_exec_callback_cQScrollBar_timerEvent
-  if not isNil(vtbl.changeEvent):
+  if not isNil(vtbl[].changeEvent):
     vtbl[].vtbl.changeEvent = miqt_exec_callback_cQScrollBar_changeEvent
-  if not isNil(vtbl.devType):
+  if not isNil(vtbl[].devType):
     vtbl[].vtbl.devType = miqt_exec_callback_cQScrollBar_devType
-  if not isNil(vtbl.setVisible):
+  if not isNil(vtbl[].setVisible):
     vtbl[].vtbl.setVisible = miqt_exec_callback_cQScrollBar_setVisible
-  if not isNil(vtbl.minimumSizeHint):
+  if not isNil(vtbl[].minimumSizeHint):
     vtbl[].vtbl.minimumSizeHint = miqt_exec_callback_cQScrollBar_minimumSizeHint
-  if not isNil(vtbl.heightForWidth):
+  if not isNil(vtbl[].heightForWidth):
     vtbl[].vtbl.heightForWidth = miqt_exec_callback_cQScrollBar_heightForWidth
-  if not isNil(vtbl.hasHeightForWidth):
+  if not isNil(vtbl[].hasHeightForWidth):
     vtbl[].vtbl.hasHeightForWidth = miqt_exec_callback_cQScrollBar_hasHeightForWidth
-  if not isNil(vtbl.paintEngine):
+  if not isNil(vtbl[].paintEngine):
     vtbl[].vtbl.paintEngine = miqt_exec_callback_cQScrollBar_paintEngine
-  if not isNil(vtbl.mouseDoubleClickEvent):
+  if not isNil(vtbl[].mouseDoubleClickEvent):
     vtbl[].vtbl.mouseDoubleClickEvent = miqt_exec_callback_cQScrollBar_mouseDoubleClickEvent
-  if not isNil(vtbl.keyReleaseEvent):
+  if not isNil(vtbl[].keyReleaseEvent):
     vtbl[].vtbl.keyReleaseEvent = miqt_exec_callback_cQScrollBar_keyReleaseEvent
-  if not isNil(vtbl.focusInEvent):
+  if not isNil(vtbl[].focusInEvent):
     vtbl[].vtbl.focusInEvent = miqt_exec_callback_cQScrollBar_focusInEvent
-  if not isNil(vtbl.focusOutEvent):
+  if not isNil(vtbl[].focusOutEvent):
     vtbl[].vtbl.focusOutEvent = miqt_exec_callback_cQScrollBar_focusOutEvent
-  if not isNil(vtbl.enterEvent):
+  if not isNil(vtbl[].enterEvent):
     vtbl[].vtbl.enterEvent = miqt_exec_callback_cQScrollBar_enterEvent
-  if not isNil(vtbl.leaveEvent):
+  if not isNil(vtbl[].leaveEvent):
     vtbl[].vtbl.leaveEvent = miqt_exec_callback_cQScrollBar_leaveEvent
-  if not isNil(vtbl.moveEvent):
+  if not isNil(vtbl[].moveEvent):
     vtbl[].vtbl.moveEvent = miqt_exec_callback_cQScrollBar_moveEvent
-  if not isNil(vtbl.resizeEvent):
+  if not isNil(vtbl[].resizeEvent):
     vtbl[].vtbl.resizeEvent = miqt_exec_callback_cQScrollBar_resizeEvent
-  if not isNil(vtbl.closeEvent):
+  if not isNil(vtbl[].closeEvent):
     vtbl[].vtbl.closeEvent = miqt_exec_callback_cQScrollBar_closeEvent
-  if not isNil(vtbl.tabletEvent):
+  if not isNil(vtbl[].tabletEvent):
     vtbl[].vtbl.tabletEvent = miqt_exec_callback_cQScrollBar_tabletEvent
-  if not isNil(vtbl.actionEvent):
+  if not isNil(vtbl[].actionEvent):
     vtbl[].vtbl.actionEvent = miqt_exec_callback_cQScrollBar_actionEvent
-  if not isNil(vtbl.dragEnterEvent):
+  if not isNil(vtbl[].dragEnterEvent):
     vtbl[].vtbl.dragEnterEvent = miqt_exec_callback_cQScrollBar_dragEnterEvent
-  if not isNil(vtbl.dragMoveEvent):
+  if not isNil(vtbl[].dragMoveEvent):
     vtbl[].vtbl.dragMoveEvent = miqt_exec_callback_cQScrollBar_dragMoveEvent
-  if not isNil(vtbl.dragLeaveEvent):
+  if not isNil(vtbl[].dragLeaveEvent):
     vtbl[].vtbl.dragLeaveEvent = miqt_exec_callback_cQScrollBar_dragLeaveEvent
-  if not isNil(vtbl.dropEvent):
+  if not isNil(vtbl[].dropEvent):
     vtbl[].vtbl.dropEvent = miqt_exec_callback_cQScrollBar_dropEvent
-  if not isNil(vtbl.showEvent):
+  if not isNil(vtbl[].showEvent):
     vtbl[].vtbl.showEvent = miqt_exec_callback_cQScrollBar_showEvent
-  if not isNil(vtbl.nativeEvent):
+  if not isNil(vtbl[].nativeEvent):
     vtbl[].vtbl.nativeEvent = miqt_exec_callback_cQScrollBar_nativeEvent
-  if not isNil(vtbl.metric):
+  if not isNil(vtbl[].metric):
     vtbl[].vtbl.metric = miqt_exec_callback_cQScrollBar_metric
-  if not isNil(vtbl.initPainter):
+  if not isNil(vtbl[].initPainter):
     vtbl[].vtbl.initPainter = miqt_exec_callback_cQScrollBar_initPainter
-  if not isNil(vtbl.redirected):
+  if not isNil(vtbl[].redirected):
     vtbl[].vtbl.redirected = miqt_exec_callback_cQScrollBar_redirected
-  if not isNil(vtbl.sharedPainter):
+  if not isNil(vtbl[].sharedPainter):
     vtbl[].vtbl.sharedPainter = miqt_exec_callback_cQScrollBar_sharedPainter
-  if not isNil(vtbl.inputMethodEvent):
+  if not isNil(vtbl[].inputMethodEvent):
     vtbl[].vtbl.inputMethodEvent = miqt_exec_callback_cQScrollBar_inputMethodEvent
-  if not isNil(vtbl.inputMethodQuery):
+  if not isNil(vtbl[].inputMethodQuery):
     vtbl[].vtbl.inputMethodQuery = miqt_exec_callback_cQScrollBar_inputMethodQuery
-  if not isNil(vtbl.focusNextPrevChild):
+  if not isNil(vtbl[].focusNextPrevChild):
     vtbl[].vtbl.focusNextPrevChild = miqt_exec_callback_cQScrollBar_focusNextPrevChild
-  if not isNil(vtbl.eventFilter):
+  if not isNil(vtbl[].eventFilter):
     vtbl[].vtbl.eventFilter = miqt_exec_callback_cQScrollBar_eventFilter
-  if not isNil(vtbl.childEvent):
+  if not isNil(vtbl[].childEvent):
     vtbl[].vtbl.childEvent = miqt_exec_callback_cQScrollBar_childEvent
-  if not isNil(vtbl.customEvent):
+  if not isNil(vtbl[].customEvent):
     vtbl[].vtbl.customEvent = miqt_exec_callback_cQScrollBar_customEvent
-  if not isNil(vtbl.connectNotify):
+  if not isNil(vtbl[].connectNotify):
     vtbl[].vtbl.connectNotify = miqt_exec_callback_cQScrollBar_connectNotify
-  if not isNil(vtbl.disconnectNotify):
+  if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQScrollBar_disconnectNotify
-  gen_qscrollbar_types.QScrollBar(h: fcQScrollBar_new2(addr(vtbl[]), ))
+  gen_qscrollbar_types.QScrollBar(h: fcQScrollBar_new2(addr(vtbl[].vtbl), ), owned: true)
 
 proc create*(T: type gen_qscrollbar_types.QScrollBar,
     param1: cint,
     vtbl: ref QScrollBarVTable = nil): gen_qscrollbar_types.QScrollBar =
   let vtbl = if vtbl == nil: new QScrollBarVTable else: vtbl
   GC_ref(vtbl)
-  vtbl.vtbl.destructor = proc(vtbl: ptr cQScrollBarVTable, _: ptr cQScrollBar) {.cdecl.} =
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQScrollBarVTable, _: ptr cQScrollBar) {.cdecl.} =
     let vtbl = cast[ref QScrollBarVTable](vtbl)
     GC_unref(vtbl)
-  if not isNil(vtbl.metaObject):
+  if not isNil(vtbl[].metaObject):
     vtbl[].vtbl.metaObject = miqt_exec_callback_cQScrollBar_metaObject
-  if not isNil(vtbl.metacast):
+  if not isNil(vtbl[].metacast):
     vtbl[].vtbl.metacast = miqt_exec_callback_cQScrollBar_metacast
-  if not isNil(vtbl.metacall):
+  if not isNil(vtbl[].metacall):
     vtbl[].vtbl.metacall = miqt_exec_callback_cQScrollBar_metacall
-  if not isNil(vtbl.sizeHint):
+  if not isNil(vtbl[].sizeHint):
     vtbl[].vtbl.sizeHint = miqt_exec_callback_cQScrollBar_sizeHint
-  if not isNil(vtbl.event):
+  if not isNil(vtbl[].event):
     vtbl[].vtbl.event = miqt_exec_callback_cQScrollBar_event
-  if not isNil(vtbl.wheelEvent):
+  if not isNil(vtbl[].wheelEvent):
     vtbl[].vtbl.wheelEvent = miqt_exec_callback_cQScrollBar_wheelEvent
-  if not isNil(vtbl.paintEvent):
+  if not isNil(vtbl[].paintEvent):
     vtbl[].vtbl.paintEvent = miqt_exec_callback_cQScrollBar_paintEvent
-  if not isNil(vtbl.mousePressEvent):
+  if not isNil(vtbl[].mousePressEvent):
     vtbl[].vtbl.mousePressEvent = miqt_exec_callback_cQScrollBar_mousePressEvent
-  if not isNil(vtbl.mouseReleaseEvent):
+  if not isNil(vtbl[].mouseReleaseEvent):
     vtbl[].vtbl.mouseReleaseEvent = miqt_exec_callback_cQScrollBar_mouseReleaseEvent
-  if not isNil(vtbl.mouseMoveEvent):
+  if not isNil(vtbl[].mouseMoveEvent):
     vtbl[].vtbl.mouseMoveEvent = miqt_exec_callback_cQScrollBar_mouseMoveEvent
-  if not isNil(vtbl.hideEvent):
+  if not isNil(vtbl[].hideEvent):
     vtbl[].vtbl.hideEvent = miqt_exec_callback_cQScrollBar_hideEvent
-  if not isNil(vtbl.sliderChange):
+  if not isNil(vtbl[].sliderChange):
     vtbl[].vtbl.sliderChange = miqt_exec_callback_cQScrollBar_sliderChange
-  if not isNil(vtbl.contextMenuEvent):
+  if not isNil(vtbl[].contextMenuEvent):
     vtbl[].vtbl.contextMenuEvent = miqt_exec_callback_cQScrollBar_contextMenuEvent
-  if not isNil(vtbl.initStyleOption):
+  if not isNil(vtbl[].initStyleOption):
     vtbl[].vtbl.initStyleOption = miqt_exec_callback_cQScrollBar_initStyleOption
-  if not isNil(vtbl.keyPressEvent):
+  if not isNil(vtbl[].keyPressEvent):
     vtbl[].vtbl.keyPressEvent = miqt_exec_callback_cQScrollBar_keyPressEvent
-  if not isNil(vtbl.timerEvent):
+  if not isNil(vtbl[].timerEvent):
     vtbl[].vtbl.timerEvent = miqt_exec_callback_cQScrollBar_timerEvent
-  if not isNil(vtbl.changeEvent):
+  if not isNil(vtbl[].changeEvent):
     vtbl[].vtbl.changeEvent = miqt_exec_callback_cQScrollBar_changeEvent
-  if not isNil(vtbl.devType):
+  if not isNil(vtbl[].devType):
     vtbl[].vtbl.devType = miqt_exec_callback_cQScrollBar_devType
-  if not isNil(vtbl.setVisible):
+  if not isNil(vtbl[].setVisible):
     vtbl[].vtbl.setVisible = miqt_exec_callback_cQScrollBar_setVisible
-  if not isNil(vtbl.minimumSizeHint):
+  if not isNil(vtbl[].minimumSizeHint):
     vtbl[].vtbl.minimumSizeHint = miqt_exec_callback_cQScrollBar_minimumSizeHint
-  if not isNil(vtbl.heightForWidth):
+  if not isNil(vtbl[].heightForWidth):
     vtbl[].vtbl.heightForWidth = miqt_exec_callback_cQScrollBar_heightForWidth
-  if not isNil(vtbl.hasHeightForWidth):
+  if not isNil(vtbl[].hasHeightForWidth):
     vtbl[].vtbl.hasHeightForWidth = miqt_exec_callback_cQScrollBar_hasHeightForWidth
-  if not isNil(vtbl.paintEngine):
+  if not isNil(vtbl[].paintEngine):
     vtbl[].vtbl.paintEngine = miqt_exec_callback_cQScrollBar_paintEngine
-  if not isNil(vtbl.mouseDoubleClickEvent):
+  if not isNil(vtbl[].mouseDoubleClickEvent):
     vtbl[].vtbl.mouseDoubleClickEvent = miqt_exec_callback_cQScrollBar_mouseDoubleClickEvent
-  if not isNil(vtbl.keyReleaseEvent):
+  if not isNil(vtbl[].keyReleaseEvent):
     vtbl[].vtbl.keyReleaseEvent = miqt_exec_callback_cQScrollBar_keyReleaseEvent
-  if not isNil(vtbl.focusInEvent):
+  if not isNil(vtbl[].focusInEvent):
     vtbl[].vtbl.focusInEvent = miqt_exec_callback_cQScrollBar_focusInEvent
-  if not isNil(vtbl.focusOutEvent):
+  if not isNil(vtbl[].focusOutEvent):
     vtbl[].vtbl.focusOutEvent = miqt_exec_callback_cQScrollBar_focusOutEvent
-  if not isNil(vtbl.enterEvent):
+  if not isNil(vtbl[].enterEvent):
     vtbl[].vtbl.enterEvent = miqt_exec_callback_cQScrollBar_enterEvent
-  if not isNil(vtbl.leaveEvent):
+  if not isNil(vtbl[].leaveEvent):
     vtbl[].vtbl.leaveEvent = miqt_exec_callback_cQScrollBar_leaveEvent
-  if not isNil(vtbl.moveEvent):
+  if not isNil(vtbl[].moveEvent):
     vtbl[].vtbl.moveEvent = miqt_exec_callback_cQScrollBar_moveEvent
-  if not isNil(vtbl.resizeEvent):
+  if not isNil(vtbl[].resizeEvent):
     vtbl[].vtbl.resizeEvent = miqt_exec_callback_cQScrollBar_resizeEvent
-  if not isNil(vtbl.closeEvent):
+  if not isNil(vtbl[].closeEvent):
     vtbl[].vtbl.closeEvent = miqt_exec_callback_cQScrollBar_closeEvent
-  if not isNil(vtbl.tabletEvent):
+  if not isNil(vtbl[].tabletEvent):
     vtbl[].vtbl.tabletEvent = miqt_exec_callback_cQScrollBar_tabletEvent
-  if not isNil(vtbl.actionEvent):
+  if not isNil(vtbl[].actionEvent):
     vtbl[].vtbl.actionEvent = miqt_exec_callback_cQScrollBar_actionEvent
-  if not isNil(vtbl.dragEnterEvent):
+  if not isNil(vtbl[].dragEnterEvent):
     vtbl[].vtbl.dragEnterEvent = miqt_exec_callback_cQScrollBar_dragEnterEvent
-  if not isNil(vtbl.dragMoveEvent):
+  if not isNil(vtbl[].dragMoveEvent):
     vtbl[].vtbl.dragMoveEvent = miqt_exec_callback_cQScrollBar_dragMoveEvent
-  if not isNil(vtbl.dragLeaveEvent):
+  if not isNil(vtbl[].dragLeaveEvent):
     vtbl[].vtbl.dragLeaveEvent = miqt_exec_callback_cQScrollBar_dragLeaveEvent
-  if not isNil(vtbl.dropEvent):
+  if not isNil(vtbl[].dropEvent):
     vtbl[].vtbl.dropEvent = miqt_exec_callback_cQScrollBar_dropEvent
-  if not isNil(vtbl.showEvent):
+  if not isNil(vtbl[].showEvent):
     vtbl[].vtbl.showEvent = miqt_exec_callback_cQScrollBar_showEvent
-  if not isNil(vtbl.nativeEvent):
+  if not isNil(vtbl[].nativeEvent):
     vtbl[].vtbl.nativeEvent = miqt_exec_callback_cQScrollBar_nativeEvent
-  if not isNil(vtbl.metric):
+  if not isNil(vtbl[].metric):
     vtbl[].vtbl.metric = miqt_exec_callback_cQScrollBar_metric
-  if not isNil(vtbl.initPainter):
+  if not isNil(vtbl[].initPainter):
     vtbl[].vtbl.initPainter = miqt_exec_callback_cQScrollBar_initPainter
-  if not isNil(vtbl.redirected):
+  if not isNil(vtbl[].redirected):
     vtbl[].vtbl.redirected = miqt_exec_callback_cQScrollBar_redirected
-  if not isNil(vtbl.sharedPainter):
+  if not isNil(vtbl[].sharedPainter):
     vtbl[].vtbl.sharedPainter = miqt_exec_callback_cQScrollBar_sharedPainter
-  if not isNil(vtbl.inputMethodEvent):
+  if not isNil(vtbl[].inputMethodEvent):
     vtbl[].vtbl.inputMethodEvent = miqt_exec_callback_cQScrollBar_inputMethodEvent
-  if not isNil(vtbl.inputMethodQuery):
+  if not isNil(vtbl[].inputMethodQuery):
     vtbl[].vtbl.inputMethodQuery = miqt_exec_callback_cQScrollBar_inputMethodQuery
-  if not isNil(vtbl.focusNextPrevChild):
+  if not isNil(vtbl[].focusNextPrevChild):
     vtbl[].vtbl.focusNextPrevChild = miqt_exec_callback_cQScrollBar_focusNextPrevChild
-  if not isNil(vtbl.eventFilter):
+  if not isNil(vtbl[].eventFilter):
     vtbl[].vtbl.eventFilter = miqt_exec_callback_cQScrollBar_eventFilter
-  if not isNil(vtbl.childEvent):
+  if not isNil(vtbl[].childEvent):
     vtbl[].vtbl.childEvent = miqt_exec_callback_cQScrollBar_childEvent
-  if not isNil(vtbl.customEvent):
+  if not isNil(vtbl[].customEvent):
     vtbl[].vtbl.customEvent = miqt_exec_callback_cQScrollBar_customEvent
-  if not isNil(vtbl.connectNotify):
+  if not isNil(vtbl[].connectNotify):
     vtbl[].vtbl.connectNotify = miqt_exec_callback_cQScrollBar_connectNotify
-  if not isNil(vtbl.disconnectNotify):
+  if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQScrollBar_disconnectNotify
-  gen_qscrollbar_types.QScrollBar(h: fcQScrollBar_new3(addr(vtbl[]), cint(param1)))
+  gen_qscrollbar_types.QScrollBar(h: fcQScrollBar_new3(addr(vtbl[].vtbl), cint(param1)), owned: true)
 
 proc create*(T: type gen_qscrollbar_types.QScrollBar,
     param1: cint, parent: gen_qwidget_types.QWidget,
     vtbl: ref QScrollBarVTable = nil): gen_qscrollbar_types.QScrollBar =
   let vtbl = if vtbl == nil: new QScrollBarVTable else: vtbl
   GC_ref(vtbl)
-  vtbl.vtbl.destructor = proc(vtbl: ptr cQScrollBarVTable, _: ptr cQScrollBar) {.cdecl.} =
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQScrollBarVTable, _: ptr cQScrollBar) {.cdecl.} =
     let vtbl = cast[ref QScrollBarVTable](vtbl)
     GC_unref(vtbl)
-  if not isNil(vtbl.metaObject):
+  if not isNil(vtbl[].metaObject):
     vtbl[].vtbl.metaObject = miqt_exec_callback_cQScrollBar_metaObject
-  if not isNil(vtbl.metacast):
+  if not isNil(vtbl[].metacast):
     vtbl[].vtbl.metacast = miqt_exec_callback_cQScrollBar_metacast
-  if not isNil(vtbl.metacall):
+  if not isNil(vtbl[].metacall):
     vtbl[].vtbl.metacall = miqt_exec_callback_cQScrollBar_metacall
-  if not isNil(vtbl.sizeHint):
+  if not isNil(vtbl[].sizeHint):
     vtbl[].vtbl.sizeHint = miqt_exec_callback_cQScrollBar_sizeHint
-  if not isNil(vtbl.event):
+  if not isNil(vtbl[].event):
     vtbl[].vtbl.event = miqt_exec_callback_cQScrollBar_event
-  if not isNil(vtbl.wheelEvent):
+  if not isNil(vtbl[].wheelEvent):
     vtbl[].vtbl.wheelEvent = miqt_exec_callback_cQScrollBar_wheelEvent
-  if not isNil(vtbl.paintEvent):
+  if not isNil(vtbl[].paintEvent):
     vtbl[].vtbl.paintEvent = miqt_exec_callback_cQScrollBar_paintEvent
-  if not isNil(vtbl.mousePressEvent):
+  if not isNil(vtbl[].mousePressEvent):
     vtbl[].vtbl.mousePressEvent = miqt_exec_callback_cQScrollBar_mousePressEvent
-  if not isNil(vtbl.mouseReleaseEvent):
+  if not isNil(vtbl[].mouseReleaseEvent):
     vtbl[].vtbl.mouseReleaseEvent = miqt_exec_callback_cQScrollBar_mouseReleaseEvent
-  if not isNil(vtbl.mouseMoveEvent):
+  if not isNil(vtbl[].mouseMoveEvent):
     vtbl[].vtbl.mouseMoveEvent = miqt_exec_callback_cQScrollBar_mouseMoveEvent
-  if not isNil(vtbl.hideEvent):
+  if not isNil(vtbl[].hideEvent):
     vtbl[].vtbl.hideEvent = miqt_exec_callback_cQScrollBar_hideEvent
-  if not isNil(vtbl.sliderChange):
+  if not isNil(vtbl[].sliderChange):
     vtbl[].vtbl.sliderChange = miqt_exec_callback_cQScrollBar_sliderChange
-  if not isNil(vtbl.contextMenuEvent):
+  if not isNil(vtbl[].contextMenuEvent):
     vtbl[].vtbl.contextMenuEvent = miqt_exec_callback_cQScrollBar_contextMenuEvent
-  if not isNil(vtbl.initStyleOption):
+  if not isNil(vtbl[].initStyleOption):
     vtbl[].vtbl.initStyleOption = miqt_exec_callback_cQScrollBar_initStyleOption
-  if not isNil(vtbl.keyPressEvent):
+  if not isNil(vtbl[].keyPressEvent):
     vtbl[].vtbl.keyPressEvent = miqt_exec_callback_cQScrollBar_keyPressEvent
-  if not isNil(vtbl.timerEvent):
+  if not isNil(vtbl[].timerEvent):
     vtbl[].vtbl.timerEvent = miqt_exec_callback_cQScrollBar_timerEvent
-  if not isNil(vtbl.changeEvent):
+  if not isNil(vtbl[].changeEvent):
     vtbl[].vtbl.changeEvent = miqt_exec_callback_cQScrollBar_changeEvent
-  if not isNil(vtbl.devType):
+  if not isNil(vtbl[].devType):
     vtbl[].vtbl.devType = miqt_exec_callback_cQScrollBar_devType
-  if not isNil(vtbl.setVisible):
+  if not isNil(vtbl[].setVisible):
     vtbl[].vtbl.setVisible = miqt_exec_callback_cQScrollBar_setVisible
-  if not isNil(vtbl.minimumSizeHint):
+  if not isNil(vtbl[].minimumSizeHint):
     vtbl[].vtbl.minimumSizeHint = miqt_exec_callback_cQScrollBar_minimumSizeHint
-  if not isNil(vtbl.heightForWidth):
+  if not isNil(vtbl[].heightForWidth):
     vtbl[].vtbl.heightForWidth = miqt_exec_callback_cQScrollBar_heightForWidth
-  if not isNil(vtbl.hasHeightForWidth):
+  if not isNil(vtbl[].hasHeightForWidth):
     vtbl[].vtbl.hasHeightForWidth = miqt_exec_callback_cQScrollBar_hasHeightForWidth
-  if not isNil(vtbl.paintEngine):
+  if not isNil(vtbl[].paintEngine):
     vtbl[].vtbl.paintEngine = miqt_exec_callback_cQScrollBar_paintEngine
-  if not isNil(vtbl.mouseDoubleClickEvent):
+  if not isNil(vtbl[].mouseDoubleClickEvent):
     vtbl[].vtbl.mouseDoubleClickEvent = miqt_exec_callback_cQScrollBar_mouseDoubleClickEvent
-  if not isNil(vtbl.keyReleaseEvent):
+  if not isNil(vtbl[].keyReleaseEvent):
     vtbl[].vtbl.keyReleaseEvent = miqt_exec_callback_cQScrollBar_keyReleaseEvent
-  if not isNil(vtbl.focusInEvent):
+  if not isNil(vtbl[].focusInEvent):
     vtbl[].vtbl.focusInEvent = miqt_exec_callback_cQScrollBar_focusInEvent
-  if not isNil(vtbl.focusOutEvent):
+  if not isNil(vtbl[].focusOutEvent):
     vtbl[].vtbl.focusOutEvent = miqt_exec_callback_cQScrollBar_focusOutEvent
-  if not isNil(vtbl.enterEvent):
+  if not isNil(vtbl[].enterEvent):
     vtbl[].vtbl.enterEvent = miqt_exec_callback_cQScrollBar_enterEvent
-  if not isNil(vtbl.leaveEvent):
+  if not isNil(vtbl[].leaveEvent):
     vtbl[].vtbl.leaveEvent = miqt_exec_callback_cQScrollBar_leaveEvent
-  if not isNil(vtbl.moveEvent):
+  if not isNil(vtbl[].moveEvent):
     vtbl[].vtbl.moveEvent = miqt_exec_callback_cQScrollBar_moveEvent
-  if not isNil(vtbl.resizeEvent):
+  if not isNil(vtbl[].resizeEvent):
     vtbl[].vtbl.resizeEvent = miqt_exec_callback_cQScrollBar_resizeEvent
-  if not isNil(vtbl.closeEvent):
+  if not isNil(vtbl[].closeEvent):
     vtbl[].vtbl.closeEvent = miqt_exec_callback_cQScrollBar_closeEvent
-  if not isNil(vtbl.tabletEvent):
+  if not isNil(vtbl[].tabletEvent):
     vtbl[].vtbl.tabletEvent = miqt_exec_callback_cQScrollBar_tabletEvent
-  if not isNil(vtbl.actionEvent):
+  if not isNil(vtbl[].actionEvent):
     vtbl[].vtbl.actionEvent = miqt_exec_callback_cQScrollBar_actionEvent
-  if not isNil(vtbl.dragEnterEvent):
+  if not isNil(vtbl[].dragEnterEvent):
     vtbl[].vtbl.dragEnterEvent = miqt_exec_callback_cQScrollBar_dragEnterEvent
-  if not isNil(vtbl.dragMoveEvent):
+  if not isNil(vtbl[].dragMoveEvent):
     vtbl[].vtbl.dragMoveEvent = miqt_exec_callback_cQScrollBar_dragMoveEvent
-  if not isNil(vtbl.dragLeaveEvent):
+  if not isNil(vtbl[].dragLeaveEvent):
     vtbl[].vtbl.dragLeaveEvent = miqt_exec_callback_cQScrollBar_dragLeaveEvent
-  if not isNil(vtbl.dropEvent):
+  if not isNil(vtbl[].dropEvent):
     vtbl[].vtbl.dropEvent = miqt_exec_callback_cQScrollBar_dropEvent
-  if not isNil(vtbl.showEvent):
+  if not isNil(vtbl[].showEvent):
     vtbl[].vtbl.showEvent = miqt_exec_callback_cQScrollBar_showEvent
-  if not isNil(vtbl.nativeEvent):
+  if not isNil(vtbl[].nativeEvent):
     vtbl[].vtbl.nativeEvent = miqt_exec_callback_cQScrollBar_nativeEvent
-  if not isNil(vtbl.metric):
+  if not isNil(vtbl[].metric):
     vtbl[].vtbl.metric = miqt_exec_callback_cQScrollBar_metric
-  if not isNil(vtbl.initPainter):
+  if not isNil(vtbl[].initPainter):
     vtbl[].vtbl.initPainter = miqt_exec_callback_cQScrollBar_initPainter
-  if not isNil(vtbl.redirected):
+  if not isNil(vtbl[].redirected):
     vtbl[].vtbl.redirected = miqt_exec_callback_cQScrollBar_redirected
-  if not isNil(vtbl.sharedPainter):
+  if not isNil(vtbl[].sharedPainter):
     vtbl[].vtbl.sharedPainter = miqt_exec_callback_cQScrollBar_sharedPainter
-  if not isNil(vtbl.inputMethodEvent):
+  if not isNil(vtbl[].inputMethodEvent):
     vtbl[].vtbl.inputMethodEvent = miqt_exec_callback_cQScrollBar_inputMethodEvent
-  if not isNil(vtbl.inputMethodQuery):
+  if not isNil(vtbl[].inputMethodQuery):
     vtbl[].vtbl.inputMethodQuery = miqt_exec_callback_cQScrollBar_inputMethodQuery
-  if not isNil(vtbl.focusNextPrevChild):
+  if not isNil(vtbl[].focusNextPrevChild):
     vtbl[].vtbl.focusNextPrevChild = miqt_exec_callback_cQScrollBar_focusNextPrevChild
-  if not isNil(vtbl.eventFilter):
+  if not isNil(vtbl[].eventFilter):
     vtbl[].vtbl.eventFilter = miqt_exec_callback_cQScrollBar_eventFilter
-  if not isNil(vtbl.childEvent):
+  if not isNil(vtbl[].childEvent):
     vtbl[].vtbl.childEvent = miqt_exec_callback_cQScrollBar_childEvent
-  if not isNil(vtbl.customEvent):
+  if not isNil(vtbl[].customEvent):
     vtbl[].vtbl.customEvent = miqt_exec_callback_cQScrollBar_customEvent
-  if not isNil(vtbl.connectNotify):
+  if not isNil(vtbl[].connectNotify):
     vtbl[].vtbl.connectNotify = miqt_exec_callback_cQScrollBar_connectNotify
-  if not isNil(vtbl.disconnectNotify):
+  if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQScrollBar_disconnectNotify
-  gen_qscrollbar_types.QScrollBar(h: fcQScrollBar_new4(addr(vtbl[]), cint(param1), parent.h))
+  gen_qscrollbar_types.QScrollBar(h: fcQScrollBar_new4(addr(vtbl[].vtbl), cint(param1), parent.h), owned: true)
+
+proc create*(T: type gen_qscrollbar_types.QScrollBar,
+    parent: gen_qwidget_types.QWidget,
+    vtbl: VirtualQScrollBar) =
+
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQScrollBarVTable, _: ptr cQScrollBar) {.cdecl.} =
+    let vtbl = cast[ptr typeof(VirtualQScrollBar()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQScrollBar, vtbl)))
+    vtbl[].h = nil
+    vtbl[].owned = false
+  vtbl[].vtbl.metaObject = miqt_exec_method_cQScrollBar_metaObject
+  vtbl[].vtbl.metacast = miqt_exec_method_cQScrollBar_metacast
+  vtbl[].vtbl.metacall = miqt_exec_method_cQScrollBar_metacall
+  vtbl[].vtbl.sizeHint = miqt_exec_method_cQScrollBar_sizeHint
+  vtbl[].vtbl.event = miqt_exec_method_cQScrollBar_event
+  vtbl[].vtbl.wheelEvent = miqt_exec_method_cQScrollBar_wheelEvent
+  vtbl[].vtbl.paintEvent = miqt_exec_method_cQScrollBar_paintEvent
+  vtbl[].vtbl.mousePressEvent = miqt_exec_method_cQScrollBar_mousePressEvent
+  vtbl[].vtbl.mouseReleaseEvent = miqt_exec_method_cQScrollBar_mouseReleaseEvent
+  vtbl[].vtbl.mouseMoveEvent = miqt_exec_method_cQScrollBar_mouseMoveEvent
+  vtbl[].vtbl.hideEvent = miqt_exec_method_cQScrollBar_hideEvent
+  vtbl[].vtbl.sliderChange = miqt_exec_method_cQScrollBar_sliderChange
+  vtbl[].vtbl.contextMenuEvent = miqt_exec_method_cQScrollBar_contextMenuEvent
+  vtbl[].vtbl.initStyleOption = miqt_exec_method_cQScrollBar_initStyleOption
+  vtbl[].vtbl.keyPressEvent = miqt_exec_method_cQScrollBar_keyPressEvent
+  vtbl[].vtbl.timerEvent = miqt_exec_method_cQScrollBar_timerEvent
+  vtbl[].vtbl.changeEvent = miqt_exec_method_cQScrollBar_changeEvent
+  vtbl[].vtbl.devType = miqt_exec_method_cQScrollBar_devType
+  vtbl[].vtbl.setVisible = miqt_exec_method_cQScrollBar_setVisible
+  vtbl[].vtbl.minimumSizeHint = miqt_exec_method_cQScrollBar_minimumSizeHint
+  vtbl[].vtbl.heightForWidth = miqt_exec_method_cQScrollBar_heightForWidth
+  vtbl[].vtbl.hasHeightForWidth = miqt_exec_method_cQScrollBar_hasHeightForWidth
+  vtbl[].vtbl.paintEngine = miqt_exec_method_cQScrollBar_paintEngine
+  vtbl[].vtbl.mouseDoubleClickEvent = miqt_exec_method_cQScrollBar_mouseDoubleClickEvent
+  vtbl[].vtbl.keyReleaseEvent = miqt_exec_method_cQScrollBar_keyReleaseEvent
+  vtbl[].vtbl.focusInEvent = miqt_exec_method_cQScrollBar_focusInEvent
+  vtbl[].vtbl.focusOutEvent = miqt_exec_method_cQScrollBar_focusOutEvent
+  vtbl[].vtbl.enterEvent = miqt_exec_method_cQScrollBar_enterEvent
+  vtbl[].vtbl.leaveEvent = miqt_exec_method_cQScrollBar_leaveEvent
+  vtbl[].vtbl.moveEvent = miqt_exec_method_cQScrollBar_moveEvent
+  vtbl[].vtbl.resizeEvent = miqt_exec_method_cQScrollBar_resizeEvent
+  vtbl[].vtbl.closeEvent = miqt_exec_method_cQScrollBar_closeEvent
+  vtbl[].vtbl.tabletEvent = miqt_exec_method_cQScrollBar_tabletEvent
+  vtbl[].vtbl.actionEvent = miqt_exec_method_cQScrollBar_actionEvent
+  vtbl[].vtbl.dragEnterEvent = miqt_exec_method_cQScrollBar_dragEnterEvent
+  vtbl[].vtbl.dragMoveEvent = miqt_exec_method_cQScrollBar_dragMoveEvent
+  vtbl[].vtbl.dragLeaveEvent = miqt_exec_method_cQScrollBar_dragLeaveEvent
+  vtbl[].vtbl.dropEvent = miqt_exec_method_cQScrollBar_dropEvent
+  vtbl[].vtbl.showEvent = miqt_exec_method_cQScrollBar_showEvent
+  vtbl[].vtbl.nativeEvent = miqt_exec_method_cQScrollBar_nativeEvent
+  vtbl[].vtbl.metric = miqt_exec_method_cQScrollBar_metric
+  vtbl[].vtbl.initPainter = miqt_exec_method_cQScrollBar_initPainter
+  vtbl[].vtbl.redirected = miqt_exec_method_cQScrollBar_redirected
+  vtbl[].vtbl.sharedPainter = miqt_exec_method_cQScrollBar_sharedPainter
+  vtbl[].vtbl.inputMethodEvent = miqt_exec_method_cQScrollBar_inputMethodEvent
+  vtbl[].vtbl.inputMethodQuery = miqt_exec_method_cQScrollBar_inputMethodQuery
+  vtbl[].vtbl.focusNextPrevChild = miqt_exec_method_cQScrollBar_focusNextPrevChild
+  vtbl[].vtbl.eventFilter = miqt_exec_method_cQScrollBar_eventFilter
+  vtbl[].vtbl.childEvent = miqt_exec_method_cQScrollBar_childEvent
+  vtbl[].vtbl.customEvent = miqt_exec_method_cQScrollBar_customEvent
+  vtbl[].vtbl.connectNotify = miqt_exec_method_cQScrollBar_connectNotify
+  vtbl[].vtbl.disconnectNotify = miqt_exec_method_cQScrollBar_disconnectNotify
+  if vtbl[].h != nil: delete(move(vtbl[]))
+  vtbl[].h = fcQScrollBar_new(addr(vtbl[].vtbl), parent.h)
+  vtbl[].owned = true
+
+proc create*(T: type gen_qscrollbar_types.QScrollBar,
+    vtbl: VirtualQScrollBar) =
+
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQScrollBarVTable, _: ptr cQScrollBar) {.cdecl.} =
+    let vtbl = cast[ptr typeof(VirtualQScrollBar()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQScrollBar, vtbl)))
+    vtbl[].h = nil
+    vtbl[].owned = false
+  vtbl[].vtbl.metaObject = miqt_exec_method_cQScrollBar_metaObject
+  vtbl[].vtbl.metacast = miqt_exec_method_cQScrollBar_metacast
+  vtbl[].vtbl.metacall = miqt_exec_method_cQScrollBar_metacall
+  vtbl[].vtbl.sizeHint = miqt_exec_method_cQScrollBar_sizeHint
+  vtbl[].vtbl.event = miqt_exec_method_cQScrollBar_event
+  vtbl[].vtbl.wheelEvent = miqt_exec_method_cQScrollBar_wheelEvent
+  vtbl[].vtbl.paintEvent = miqt_exec_method_cQScrollBar_paintEvent
+  vtbl[].vtbl.mousePressEvent = miqt_exec_method_cQScrollBar_mousePressEvent
+  vtbl[].vtbl.mouseReleaseEvent = miqt_exec_method_cQScrollBar_mouseReleaseEvent
+  vtbl[].vtbl.mouseMoveEvent = miqt_exec_method_cQScrollBar_mouseMoveEvent
+  vtbl[].vtbl.hideEvent = miqt_exec_method_cQScrollBar_hideEvent
+  vtbl[].vtbl.sliderChange = miqt_exec_method_cQScrollBar_sliderChange
+  vtbl[].vtbl.contextMenuEvent = miqt_exec_method_cQScrollBar_contextMenuEvent
+  vtbl[].vtbl.initStyleOption = miqt_exec_method_cQScrollBar_initStyleOption
+  vtbl[].vtbl.keyPressEvent = miqt_exec_method_cQScrollBar_keyPressEvent
+  vtbl[].vtbl.timerEvent = miqt_exec_method_cQScrollBar_timerEvent
+  vtbl[].vtbl.changeEvent = miqt_exec_method_cQScrollBar_changeEvent
+  vtbl[].vtbl.devType = miqt_exec_method_cQScrollBar_devType
+  vtbl[].vtbl.setVisible = miqt_exec_method_cQScrollBar_setVisible
+  vtbl[].vtbl.minimumSizeHint = miqt_exec_method_cQScrollBar_minimumSizeHint
+  vtbl[].vtbl.heightForWidth = miqt_exec_method_cQScrollBar_heightForWidth
+  vtbl[].vtbl.hasHeightForWidth = miqt_exec_method_cQScrollBar_hasHeightForWidth
+  vtbl[].vtbl.paintEngine = miqt_exec_method_cQScrollBar_paintEngine
+  vtbl[].vtbl.mouseDoubleClickEvent = miqt_exec_method_cQScrollBar_mouseDoubleClickEvent
+  vtbl[].vtbl.keyReleaseEvent = miqt_exec_method_cQScrollBar_keyReleaseEvent
+  vtbl[].vtbl.focusInEvent = miqt_exec_method_cQScrollBar_focusInEvent
+  vtbl[].vtbl.focusOutEvent = miqt_exec_method_cQScrollBar_focusOutEvent
+  vtbl[].vtbl.enterEvent = miqt_exec_method_cQScrollBar_enterEvent
+  vtbl[].vtbl.leaveEvent = miqt_exec_method_cQScrollBar_leaveEvent
+  vtbl[].vtbl.moveEvent = miqt_exec_method_cQScrollBar_moveEvent
+  vtbl[].vtbl.resizeEvent = miqt_exec_method_cQScrollBar_resizeEvent
+  vtbl[].vtbl.closeEvent = miqt_exec_method_cQScrollBar_closeEvent
+  vtbl[].vtbl.tabletEvent = miqt_exec_method_cQScrollBar_tabletEvent
+  vtbl[].vtbl.actionEvent = miqt_exec_method_cQScrollBar_actionEvent
+  vtbl[].vtbl.dragEnterEvent = miqt_exec_method_cQScrollBar_dragEnterEvent
+  vtbl[].vtbl.dragMoveEvent = miqt_exec_method_cQScrollBar_dragMoveEvent
+  vtbl[].vtbl.dragLeaveEvent = miqt_exec_method_cQScrollBar_dragLeaveEvent
+  vtbl[].vtbl.dropEvent = miqt_exec_method_cQScrollBar_dropEvent
+  vtbl[].vtbl.showEvent = miqt_exec_method_cQScrollBar_showEvent
+  vtbl[].vtbl.nativeEvent = miqt_exec_method_cQScrollBar_nativeEvent
+  vtbl[].vtbl.metric = miqt_exec_method_cQScrollBar_metric
+  vtbl[].vtbl.initPainter = miqt_exec_method_cQScrollBar_initPainter
+  vtbl[].vtbl.redirected = miqt_exec_method_cQScrollBar_redirected
+  vtbl[].vtbl.sharedPainter = miqt_exec_method_cQScrollBar_sharedPainter
+  vtbl[].vtbl.inputMethodEvent = miqt_exec_method_cQScrollBar_inputMethodEvent
+  vtbl[].vtbl.inputMethodQuery = miqt_exec_method_cQScrollBar_inputMethodQuery
+  vtbl[].vtbl.focusNextPrevChild = miqt_exec_method_cQScrollBar_focusNextPrevChild
+  vtbl[].vtbl.eventFilter = miqt_exec_method_cQScrollBar_eventFilter
+  vtbl[].vtbl.childEvent = miqt_exec_method_cQScrollBar_childEvent
+  vtbl[].vtbl.customEvent = miqt_exec_method_cQScrollBar_customEvent
+  vtbl[].vtbl.connectNotify = miqt_exec_method_cQScrollBar_connectNotify
+  vtbl[].vtbl.disconnectNotify = miqt_exec_method_cQScrollBar_disconnectNotify
+  if vtbl[].h != nil: delete(move(vtbl[]))
+  vtbl[].h = fcQScrollBar_new2(addr(vtbl[].vtbl), )
+  vtbl[].owned = true
+
+proc create*(T: type gen_qscrollbar_types.QScrollBar,
+    param1: cint,
+    vtbl: VirtualQScrollBar) =
+
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQScrollBarVTable, _: ptr cQScrollBar) {.cdecl.} =
+    let vtbl = cast[ptr typeof(VirtualQScrollBar()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQScrollBar, vtbl)))
+    vtbl[].h = nil
+    vtbl[].owned = false
+  vtbl[].vtbl.metaObject = miqt_exec_method_cQScrollBar_metaObject
+  vtbl[].vtbl.metacast = miqt_exec_method_cQScrollBar_metacast
+  vtbl[].vtbl.metacall = miqt_exec_method_cQScrollBar_metacall
+  vtbl[].vtbl.sizeHint = miqt_exec_method_cQScrollBar_sizeHint
+  vtbl[].vtbl.event = miqt_exec_method_cQScrollBar_event
+  vtbl[].vtbl.wheelEvent = miqt_exec_method_cQScrollBar_wheelEvent
+  vtbl[].vtbl.paintEvent = miqt_exec_method_cQScrollBar_paintEvent
+  vtbl[].vtbl.mousePressEvent = miqt_exec_method_cQScrollBar_mousePressEvent
+  vtbl[].vtbl.mouseReleaseEvent = miqt_exec_method_cQScrollBar_mouseReleaseEvent
+  vtbl[].vtbl.mouseMoveEvent = miqt_exec_method_cQScrollBar_mouseMoveEvent
+  vtbl[].vtbl.hideEvent = miqt_exec_method_cQScrollBar_hideEvent
+  vtbl[].vtbl.sliderChange = miqt_exec_method_cQScrollBar_sliderChange
+  vtbl[].vtbl.contextMenuEvent = miqt_exec_method_cQScrollBar_contextMenuEvent
+  vtbl[].vtbl.initStyleOption = miqt_exec_method_cQScrollBar_initStyleOption
+  vtbl[].vtbl.keyPressEvent = miqt_exec_method_cQScrollBar_keyPressEvent
+  vtbl[].vtbl.timerEvent = miqt_exec_method_cQScrollBar_timerEvent
+  vtbl[].vtbl.changeEvent = miqt_exec_method_cQScrollBar_changeEvent
+  vtbl[].vtbl.devType = miqt_exec_method_cQScrollBar_devType
+  vtbl[].vtbl.setVisible = miqt_exec_method_cQScrollBar_setVisible
+  vtbl[].vtbl.minimumSizeHint = miqt_exec_method_cQScrollBar_minimumSizeHint
+  vtbl[].vtbl.heightForWidth = miqt_exec_method_cQScrollBar_heightForWidth
+  vtbl[].vtbl.hasHeightForWidth = miqt_exec_method_cQScrollBar_hasHeightForWidth
+  vtbl[].vtbl.paintEngine = miqt_exec_method_cQScrollBar_paintEngine
+  vtbl[].vtbl.mouseDoubleClickEvent = miqt_exec_method_cQScrollBar_mouseDoubleClickEvent
+  vtbl[].vtbl.keyReleaseEvent = miqt_exec_method_cQScrollBar_keyReleaseEvent
+  vtbl[].vtbl.focusInEvent = miqt_exec_method_cQScrollBar_focusInEvent
+  vtbl[].vtbl.focusOutEvent = miqt_exec_method_cQScrollBar_focusOutEvent
+  vtbl[].vtbl.enterEvent = miqt_exec_method_cQScrollBar_enterEvent
+  vtbl[].vtbl.leaveEvent = miqt_exec_method_cQScrollBar_leaveEvent
+  vtbl[].vtbl.moveEvent = miqt_exec_method_cQScrollBar_moveEvent
+  vtbl[].vtbl.resizeEvent = miqt_exec_method_cQScrollBar_resizeEvent
+  vtbl[].vtbl.closeEvent = miqt_exec_method_cQScrollBar_closeEvent
+  vtbl[].vtbl.tabletEvent = miqt_exec_method_cQScrollBar_tabletEvent
+  vtbl[].vtbl.actionEvent = miqt_exec_method_cQScrollBar_actionEvent
+  vtbl[].vtbl.dragEnterEvent = miqt_exec_method_cQScrollBar_dragEnterEvent
+  vtbl[].vtbl.dragMoveEvent = miqt_exec_method_cQScrollBar_dragMoveEvent
+  vtbl[].vtbl.dragLeaveEvent = miqt_exec_method_cQScrollBar_dragLeaveEvent
+  vtbl[].vtbl.dropEvent = miqt_exec_method_cQScrollBar_dropEvent
+  vtbl[].vtbl.showEvent = miqt_exec_method_cQScrollBar_showEvent
+  vtbl[].vtbl.nativeEvent = miqt_exec_method_cQScrollBar_nativeEvent
+  vtbl[].vtbl.metric = miqt_exec_method_cQScrollBar_metric
+  vtbl[].vtbl.initPainter = miqt_exec_method_cQScrollBar_initPainter
+  vtbl[].vtbl.redirected = miqt_exec_method_cQScrollBar_redirected
+  vtbl[].vtbl.sharedPainter = miqt_exec_method_cQScrollBar_sharedPainter
+  vtbl[].vtbl.inputMethodEvent = miqt_exec_method_cQScrollBar_inputMethodEvent
+  vtbl[].vtbl.inputMethodQuery = miqt_exec_method_cQScrollBar_inputMethodQuery
+  vtbl[].vtbl.focusNextPrevChild = miqt_exec_method_cQScrollBar_focusNextPrevChild
+  vtbl[].vtbl.eventFilter = miqt_exec_method_cQScrollBar_eventFilter
+  vtbl[].vtbl.childEvent = miqt_exec_method_cQScrollBar_childEvent
+  vtbl[].vtbl.customEvent = miqt_exec_method_cQScrollBar_customEvent
+  vtbl[].vtbl.connectNotify = miqt_exec_method_cQScrollBar_connectNotify
+  vtbl[].vtbl.disconnectNotify = miqt_exec_method_cQScrollBar_disconnectNotify
+  if vtbl[].h != nil: delete(move(vtbl[]))
+  vtbl[].h = fcQScrollBar_new3(addr(vtbl[].vtbl), cint(param1))
+  vtbl[].owned = true
+
+proc create*(T: type gen_qscrollbar_types.QScrollBar,
+    param1: cint, parent: gen_qwidget_types.QWidget,
+    vtbl: VirtualQScrollBar) =
+
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQScrollBarVTable, _: ptr cQScrollBar) {.cdecl.} =
+    let vtbl = cast[ptr typeof(VirtualQScrollBar()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQScrollBar, vtbl)))
+    vtbl[].h = nil
+    vtbl[].owned = false
+  vtbl[].vtbl.metaObject = miqt_exec_method_cQScrollBar_metaObject
+  vtbl[].vtbl.metacast = miqt_exec_method_cQScrollBar_metacast
+  vtbl[].vtbl.metacall = miqt_exec_method_cQScrollBar_metacall
+  vtbl[].vtbl.sizeHint = miqt_exec_method_cQScrollBar_sizeHint
+  vtbl[].vtbl.event = miqt_exec_method_cQScrollBar_event
+  vtbl[].vtbl.wheelEvent = miqt_exec_method_cQScrollBar_wheelEvent
+  vtbl[].vtbl.paintEvent = miqt_exec_method_cQScrollBar_paintEvent
+  vtbl[].vtbl.mousePressEvent = miqt_exec_method_cQScrollBar_mousePressEvent
+  vtbl[].vtbl.mouseReleaseEvent = miqt_exec_method_cQScrollBar_mouseReleaseEvent
+  vtbl[].vtbl.mouseMoveEvent = miqt_exec_method_cQScrollBar_mouseMoveEvent
+  vtbl[].vtbl.hideEvent = miqt_exec_method_cQScrollBar_hideEvent
+  vtbl[].vtbl.sliderChange = miqt_exec_method_cQScrollBar_sliderChange
+  vtbl[].vtbl.contextMenuEvent = miqt_exec_method_cQScrollBar_contextMenuEvent
+  vtbl[].vtbl.initStyleOption = miqt_exec_method_cQScrollBar_initStyleOption
+  vtbl[].vtbl.keyPressEvent = miqt_exec_method_cQScrollBar_keyPressEvent
+  vtbl[].vtbl.timerEvent = miqt_exec_method_cQScrollBar_timerEvent
+  vtbl[].vtbl.changeEvent = miqt_exec_method_cQScrollBar_changeEvent
+  vtbl[].vtbl.devType = miqt_exec_method_cQScrollBar_devType
+  vtbl[].vtbl.setVisible = miqt_exec_method_cQScrollBar_setVisible
+  vtbl[].vtbl.minimumSizeHint = miqt_exec_method_cQScrollBar_minimumSizeHint
+  vtbl[].vtbl.heightForWidth = miqt_exec_method_cQScrollBar_heightForWidth
+  vtbl[].vtbl.hasHeightForWidth = miqt_exec_method_cQScrollBar_hasHeightForWidth
+  vtbl[].vtbl.paintEngine = miqt_exec_method_cQScrollBar_paintEngine
+  vtbl[].vtbl.mouseDoubleClickEvent = miqt_exec_method_cQScrollBar_mouseDoubleClickEvent
+  vtbl[].vtbl.keyReleaseEvent = miqt_exec_method_cQScrollBar_keyReleaseEvent
+  vtbl[].vtbl.focusInEvent = miqt_exec_method_cQScrollBar_focusInEvent
+  vtbl[].vtbl.focusOutEvent = miqt_exec_method_cQScrollBar_focusOutEvent
+  vtbl[].vtbl.enterEvent = miqt_exec_method_cQScrollBar_enterEvent
+  vtbl[].vtbl.leaveEvent = miqt_exec_method_cQScrollBar_leaveEvent
+  vtbl[].vtbl.moveEvent = miqt_exec_method_cQScrollBar_moveEvent
+  vtbl[].vtbl.resizeEvent = miqt_exec_method_cQScrollBar_resizeEvent
+  vtbl[].vtbl.closeEvent = miqt_exec_method_cQScrollBar_closeEvent
+  vtbl[].vtbl.tabletEvent = miqt_exec_method_cQScrollBar_tabletEvent
+  vtbl[].vtbl.actionEvent = miqt_exec_method_cQScrollBar_actionEvent
+  vtbl[].vtbl.dragEnterEvent = miqt_exec_method_cQScrollBar_dragEnterEvent
+  vtbl[].vtbl.dragMoveEvent = miqt_exec_method_cQScrollBar_dragMoveEvent
+  vtbl[].vtbl.dragLeaveEvent = miqt_exec_method_cQScrollBar_dragLeaveEvent
+  vtbl[].vtbl.dropEvent = miqt_exec_method_cQScrollBar_dropEvent
+  vtbl[].vtbl.showEvent = miqt_exec_method_cQScrollBar_showEvent
+  vtbl[].vtbl.nativeEvent = miqt_exec_method_cQScrollBar_nativeEvent
+  vtbl[].vtbl.metric = miqt_exec_method_cQScrollBar_metric
+  vtbl[].vtbl.initPainter = miqt_exec_method_cQScrollBar_initPainter
+  vtbl[].vtbl.redirected = miqt_exec_method_cQScrollBar_redirected
+  vtbl[].vtbl.sharedPainter = miqt_exec_method_cQScrollBar_sharedPainter
+  vtbl[].vtbl.inputMethodEvent = miqt_exec_method_cQScrollBar_inputMethodEvent
+  vtbl[].vtbl.inputMethodQuery = miqt_exec_method_cQScrollBar_inputMethodQuery
+  vtbl[].vtbl.focusNextPrevChild = miqt_exec_method_cQScrollBar_focusNextPrevChild
+  vtbl[].vtbl.eventFilter = miqt_exec_method_cQScrollBar_eventFilter
+  vtbl[].vtbl.childEvent = miqt_exec_method_cQScrollBar_childEvent
+  vtbl[].vtbl.customEvent = miqt_exec_method_cQScrollBar_customEvent
+  vtbl[].vtbl.connectNotify = miqt_exec_method_cQScrollBar_connectNotify
+  vtbl[].vtbl.disconnectNotify = miqt_exec_method_cQScrollBar_disconnectNotify
+  if vtbl[].h != nil: delete(move(vtbl[]))
+  vtbl[].h = fcQScrollBar_new4(addr(vtbl[].vtbl), cint(param1), parent.h)
+  vtbl[].owned = true
 
 proc staticMetaObject*(_: type gen_qscrollbar_types.QScrollBar): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQScrollBar_staticMetaObject())
-proc delete*(self: gen_qscrollbar_types.QScrollBar) =
-  fcQScrollBar_delete(self.h)

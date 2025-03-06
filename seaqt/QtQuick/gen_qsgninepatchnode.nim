@@ -30,7 +30,7 @@ func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
     else:
       copyMem(addr result[0], unsafeAddr v[0], v.len)
 
-const cflags = gorge("pkg-config --cflags Qt6Quick")  & " -fPIC"
+const cflags = gorge("pkg-config --cflags Qt6Quick") & " -fPIC"
 {.compile("gen_qsgninepatchnode.cpp", cflags).}
 
 
@@ -58,7 +58,6 @@ proc fcQSGNinePatchNode_setDevicePixelRatio(self: pointer, ratio: float64): void
 proc fcQSGNinePatchNode_setPadding(self: pointer, left: float64, top: float64, right: float64, bottom: float64): void {.importc: "QSGNinePatchNode_setPadding".}
 proc fcQSGNinePatchNode_update(self: pointer, ): void {.importc: "QSGNinePatchNode_update".}
 proc fcQSGNinePatchNode_rebuildGeometry(texture: pointer, geometry: pointer, padding: pointer, bounds: pointer, dpr: float64): void {.importc: "QSGNinePatchNode_rebuildGeometry".}
-proc fcQSGNinePatchNode_delete(self: pointer) {.importc: "QSGNinePatchNode_delete".}
 
 proc setTexture*(self: gen_qsgninepatchnode_types.QSGNinePatchNode, texture: gen_qsgtexture_types.QSGTexture): void =
   fcQSGNinePatchNode_setTexture(self.h, texture.h)
@@ -78,5 +77,3 @@ proc update*(self: gen_qsgninepatchnode_types.QSGNinePatchNode, ): void =
 proc rebuildGeometry*(_: type gen_qsgninepatchnode_types.QSGNinePatchNode, texture: gen_qsgtexture_types.QSGTexture, geometry: gen_qsggeometry_types.QSGGeometry, padding: gen_qvectornd_types.QVector4D, bounds: gen_qrect_types.QRectF, dpr: float64): void =
   fcQSGNinePatchNode_rebuildGeometry(texture.h, geometry.h, padding.h, bounds.h, dpr)
 
-proc delete*(self: gen_qsgninepatchnode_types.QSGNinePatchNode) =
-  fcQSGNinePatchNode_delete(self.h)

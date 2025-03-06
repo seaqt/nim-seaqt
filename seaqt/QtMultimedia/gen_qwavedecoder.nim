@@ -30,7 +30,7 @@ func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
     else:
       copyMem(addr result[0], unsafeAddr v[0], v.len)
 
-const cflags = gorge("pkg-config --cflags Qt6Multimedia")  & " -fPIC"
+const cflags = gorge("pkg-config --cflags Qt6Multimedia") & " -fPIC"
 {.compile("gen_qwavedecoder.cpp", cflags).}
 
 
@@ -75,7 +75,7 @@ proc fcQWaveDecoder_parsingError(self: pointer, ): void {.importc: "QWaveDecoder
 proc fcQWaveDecoder_connect_parsingError(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QWaveDecoder_connect_parsingError".}
 proc fcQWaveDecoder_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QWaveDecoder_tr2".}
 proc fcQWaveDecoder_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QWaveDecoder_tr3".}
-type cQWaveDecoderVTable = object
+type cQWaveDecoderVTable {.pure.} = object
   destructor*: proc(vtbl: ptr cQWaveDecoderVTable, self: ptr cQWaveDecoder) {.cdecl, raises:[], gcsafe.}
   metaObject*: proc(vtbl, self: pointer, ): pointer {.cdecl, raises: [], gcsafe.}
   metacast*: proc(vtbl, self: pointer, param1: cstring): pointer {.cdecl, raises: [], gcsafe.}
@@ -138,10 +138,9 @@ proc fcQWaveDecoder_new2(vtbl: pointer, device: pointer, format: pointer): ptr c
 proc fcQWaveDecoder_new3(vtbl: pointer, device: pointer, parent: pointer): ptr cQWaveDecoder {.importc: "QWaveDecoder_new3".}
 proc fcQWaveDecoder_new4(vtbl: pointer, device: pointer, format: pointer, parent: pointer): ptr cQWaveDecoder {.importc: "QWaveDecoder_new4".}
 proc fcQWaveDecoder_staticMetaObject(): pointer {.importc: "QWaveDecoder_staticMetaObject".}
-proc fcQWaveDecoder_delete(self: pointer) {.importc: "QWaveDecoder_delete".}
 
 proc metaObject*(self: gen_qwavedecoder_types.QWaveDecoder, ): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQWaveDecoder_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQWaveDecoder_metaObject(self.h), owned: false)
 
 proc metacast*(self: gen_qwavedecoder_types.QWaveDecoder, param1: cstring): pointer =
   fcQWaveDecoder_metacast(self.h, param1)
@@ -156,10 +155,10 @@ proc tr*(_: type gen_qwavedecoder_types.QWaveDecoder, s: cstring): string =
   vx_ret
 
 proc audioFormat*(self: gen_qwavedecoder_types.QWaveDecoder, ): gen_qaudioformat_types.QAudioFormat =
-  gen_qaudioformat_types.QAudioFormat(h: fcQWaveDecoder_audioFormat(self.h))
+  gen_qaudioformat_types.QAudioFormat(h: fcQWaveDecoder_audioFormat(self.h), owned: true)
 
 proc getDevice*(self: gen_qwavedecoder_types.QWaveDecoder, ): gen_qiodevice_types.QIODevice =
-  gen_qiodevice_types.QIODevice(h: fcQWaveDecoder_getDevice(self.h))
+  gen_qiodevice_types.QIODevice(h: fcQWaveDecoder_getDevice(self.h), owned: false)
 
 proc duration*(self: gen_qwavedecoder_types.QWaveDecoder, ): cint =
   fcQWaveDecoder_duration(self.h)
@@ -261,7 +260,7 @@ type QWaveDecoderchildEventProc* = proc(self: QWaveDecoder, event: gen_qcoreeven
 type QWaveDecodercustomEventProc* = proc(self: QWaveDecoder, event: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
 type QWaveDecoderconnectNotifyProc* = proc(self: QWaveDecoder, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
 type QWaveDecoderdisconnectNotifyProc* = proc(self: QWaveDecoder, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
-type QWaveDecoderVTable* = object
+type QWaveDecoderVTable* {.inheritable, pure.} = object
   vtbl: cQWaveDecoderVTable
   metaObject*: QWaveDecodermetaObjectProc
   metacast*: QWaveDecodermetacastProc
@@ -289,13 +288,16 @@ type QWaveDecoderVTable* = object
   connectNotify*: QWaveDecoderconnectNotifyProc
   disconnectNotify*: QWaveDecoderdisconnectNotifyProc
 proc QWaveDecodermetaObject*(self: gen_qwavedecoder_types.QWaveDecoder, ): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQWaveDecoder_virtualbase_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQWaveDecoder_virtualbase_metaObject(self.h), owned: false)
 
 proc miqt_exec_callback_cQWaveDecoder_metaObject(vtbl: pointer, self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QWaveDecoderVTable](vtbl)
   let self = QWaveDecoder(h: self)
   var virtualReturn = vtbl[].metaObject(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QWaveDecodermetacast*(self: gen_qwavedecoder_types.QWaveDecoder, param1: cstring): pointer =
   fcQWaveDecoder_virtualbase_metacast(self.h, param1)
@@ -466,7 +468,7 @@ proc QWaveDecoderevent*(self: gen_qwavedecoder_types.QWaveDecoder, event: gen_qc
 proc miqt_exec_callback_cQWaveDecoder_event(vtbl: pointer, self: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QWaveDecoderVTable](vtbl)
   let self = QWaveDecoder(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].event(self, slotval1)
   virtualReturn
 
@@ -476,8 +478,8 @@ proc QWaveDecodereventFilter*(self: gen_qwavedecoder_types.QWaveDecoder, watched
 proc miqt_exec_callback_cQWaveDecoder_eventFilter(vtbl: pointer, self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QWaveDecoderVTable](vtbl)
   let self = QWaveDecoder(h: self)
-  let slotval1 = gen_qobject_types.QObject(h: watched)
-  let slotval2 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].eventFilter(self, slotval1, slotval2)
   virtualReturn
 
@@ -487,7 +489,7 @@ proc QWaveDecodertimerEvent*(self: gen_qwavedecoder_types.QWaveDecoder, event: g
 proc miqt_exec_callback_cQWaveDecoder_timerEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QWaveDecoderVTable](vtbl)
   let self = QWaveDecoder(h: self)
-  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   vtbl[].timerEvent(self, slotval1)
 
 proc QWaveDecoderchildEvent*(self: gen_qwavedecoder_types.QWaveDecoder, event: gen_qcoreevent_types.QChildEvent): void =
@@ -496,7 +498,7 @@ proc QWaveDecoderchildEvent*(self: gen_qwavedecoder_types.QWaveDecoder, event: g
 proc miqt_exec_callback_cQWaveDecoder_childEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QWaveDecoderVTable](vtbl)
   let self = QWaveDecoder(h: self)
-  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   vtbl[].childEvent(self, slotval1)
 
 proc QWaveDecodercustomEvent*(self: gen_qwavedecoder_types.QWaveDecoder, event: gen_qcoreevent_types.QEvent): void =
@@ -505,7 +507,7 @@ proc QWaveDecodercustomEvent*(self: gen_qwavedecoder_types.QWaveDecoder, event: 
 proc miqt_exec_callback_cQWaveDecoder_customEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QWaveDecoderVTable](vtbl)
   let self = QWaveDecoder(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].customEvent(self, slotval1)
 
 proc QWaveDecoderconnectNotify*(self: gen_qwavedecoder_types.QWaveDecoder, signal: gen_qmetaobject_types.QMetaMethod): void =
@@ -514,7 +516,7 @@ proc QWaveDecoderconnectNotify*(self: gen_qwavedecoder_types.QWaveDecoder, signa
 proc miqt_exec_callback_cQWaveDecoder_connectNotify(vtbl: pointer, self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QWaveDecoderVTable](vtbl)
   let self = QWaveDecoder(h: self)
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].connectNotify(self, slotval1)
 
 proc QWaveDecoderdisconnectNotify*(self: gen_qwavedecoder_types.QWaveDecoder, signal: gen_qmetaobject_types.QMetaMethod): void =
@@ -523,8 +525,201 @@ proc QWaveDecoderdisconnectNotify*(self: gen_qwavedecoder_types.QWaveDecoder, si
 proc miqt_exec_callback_cQWaveDecoder_disconnectNotify(vtbl: pointer, self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QWaveDecoderVTable](vtbl)
   let self = QWaveDecoder(h: self)
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].disconnectNotify(self, slotval1)
+
+type VirtualQWaveDecoder* {.inheritable.} = ref object of QWaveDecoder
+  vtbl*: cQWaveDecoderVTable
+method metaObject*(self: VirtualQWaveDecoder, ): gen_qobjectdefs_types.QMetaObject {.base.} =
+  QWaveDecodermetaObject(self[])
+proc miqt_exec_method_cQWaveDecoder_metaObject(vtbl: pointer, inst: pointer): pointer {.cdecl.} =
+  let vtbl = cast[VirtualQWaveDecoder](cast[uint](vtbl) - uint(offsetOf(VirtualQWaveDecoder, vtbl)))
+  var virtualReturn = vtbl.metaObject()
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
+
+method metacast*(self: VirtualQWaveDecoder, param1: cstring): pointer {.base.} =
+  QWaveDecodermetacast(self[], param1)
+proc miqt_exec_method_cQWaveDecoder_metacast(vtbl: pointer, inst: pointer, param1: cstring): pointer {.cdecl.} =
+  let vtbl = cast[VirtualQWaveDecoder](cast[uint](vtbl) - uint(offsetOf(VirtualQWaveDecoder, vtbl)))
+  let slotval1 = (param1)
+  var virtualReturn = vtbl.metacast(slotval1)
+  virtualReturn
+
+method metacall*(self: VirtualQWaveDecoder, param1: cint, param2: cint, param3: pointer): cint {.base.} =
+  QWaveDecodermetacall(self[], param1, param2, param3)
+proc miqt_exec_method_cQWaveDecoder_metacall(vtbl: pointer, inst: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
+  let vtbl = cast[VirtualQWaveDecoder](cast[uint](vtbl) - uint(offsetOf(VirtualQWaveDecoder, vtbl)))
+  let slotval1 = cint(param1)
+  let slotval2 = param2
+  let slotval3 = param3
+  var virtualReturn = vtbl.metacall(slotval1, slotval2, slotval3)
+  virtualReturn
+
+method open*(self: VirtualQWaveDecoder, mode: cint): bool {.base.} =
+  QWaveDecoderopen(self[], mode)
+proc miqt_exec_method_cQWaveDecoder_open(vtbl: pointer, inst: pointer, mode: cint): bool {.cdecl.} =
+  let vtbl = cast[VirtualQWaveDecoder](cast[uint](vtbl) - uint(offsetOf(VirtualQWaveDecoder, vtbl)))
+  let slotval1 = cint(mode)
+  var virtualReturn = vtbl.open(slotval1)
+  virtualReturn
+
+method close*(self: VirtualQWaveDecoder, ): void {.base.} =
+  QWaveDecoderclose(self[])
+proc miqt_exec_method_cQWaveDecoder_close(vtbl: pointer, inst: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQWaveDecoder](cast[uint](vtbl) - uint(offsetOf(VirtualQWaveDecoder, vtbl)))
+  vtbl.close()
+
+method seek*(self: VirtualQWaveDecoder, pos: clonglong): bool {.base.} =
+  QWaveDecoderseek(self[], pos)
+proc miqt_exec_method_cQWaveDecoder_seek(vtbl: pointer, inst: pointer, pos: clonglong): bool {.cdecl.} =
+  let vtbl = cast[VirtualQWaveDecoder](cast[uint](vtbl) - uint(offsetOf(VirtualQWaveDecoder, vtbl)))
+  let slotval1 = pos
+  var virtualReturn = vtbl.seek(slotval1)
+  virtualReturn
+
+method pos*(self: VirtualQWaveDecoder, ): clonglong {.base.} =
+  QWaveDecoderpos(self[])
+proc miqt_exec_method_cQWaveDecoder_pos(vtbl: pointer, inst: pointer): clonglong {.cdecl.} =
+  let vtbl = cast[VirtualQWaveDecoder](cast[uint](vtbl) - uint(offsetOf(VirtualQWaveDecoder, vtbl)))
+  var virtualReturn = vtbl.pos()
+  virtualReturn
+
+method size*(self: VirtualQWaveDecoder, ): clonglong {.base.} =
+  QWaveDecodersize(self[])
+proc miqt_exec_method_cQWaveDecoder_size(vtbl: pointer, inst: pointer): clonglong {.cdecl.} =
+  let vtbl = cast[VirtualQWaveDecoder](cast[uint](vtbl) - uint(offsetOf(VirtualQWaveDecoder, vtbl)))
+  var virtualReturn = vtbl.size()
+  virtualReturn
+
+method isSequential*(self: VirtualQWaveDecoder, ): bool {.base.} =
+  QWaveDecoderisSequential(self[])
+proc miqt_exec_method_cQWaveDecoder_isSequential(vtbl: pointer, inst: pointer): bool {.cdecl.} =
+  let vtbl = cast[VirtualQWaveDecoder](cast[uint](vtbl) - uint(offsetOf(VirtualQWaveDecoder, vtbl)))
+  var virtualReturn = vtbl.isSequential()
+  virtualReturn
+
+method bytesAvailable*(self: VirtualQWaveDecoder, ): clonglong {.base.} =
+  QWaveDecoderbytesAvailable(self[])
+proc miqt_exec_method_cQWaveDecoder_bytesAvailable(vtbl: pointer, inst: pointer): clonglong {.cdecl.} =
+  let vtbl = cast[VirtualQWaveDecoder](cast[uint](vtbl) - uint(offsetOf(VirtualQWaveDecoder, vtbl)))
+  var virtualReturn = vtbl.bytesAvailable()
+  virtualReturn
+
+method atEnd*(self: VirtualQWaveDecoder, ): bool {.base.} =
+  QWaveDecoderatEnd(self[])
+proc miqt_exec_method_cQWaveDecoder_atEnd(vtbl: pointer, inst: pointer): bool {.cdecl.} =
+  let vtbl = cast[VirtualQWaveDecoder](cast[uint](vtbl) - uint(offsetOf(VirtualQWaveDecoder, vtbl)))
+  var virtualReturn = vtbl.atEnd()
+  virtualReturn
+
+method reset*(self: VirtualQWaveDecoder, ): bool {.base.} =
+  QWaveDecoderreset(self[])
+proc miqt_exec_method_cQWaveDecoder_reset(vtbl: pointer, inst: pointer): bool {.cdecl.} =
+  let vtbl = cast[VirtualQWaveDecoder](cast[uint](vtbl) - uint(offsetOf(VirtualQWaveDecoder, vtbl)))
+  var virtualReturn = vtbl.reset()
+  virtualReturn
+
+method bytesToWrite*(self: VirtualQWaveDecoder, ): clonglong {.base.} =
+  QWaveDecoderbytesToWrite(self[])
+proc miqt_exec_method_cQWaveDecoder_bytesToWrite(vtbl: pointer, inst: pointer): clonglong {.cdecl.} =
+  let vtbl = cast[VirtualQWaveDecoder](cast[uint](vtbl) - uint(offsetOf(VirtualQWaveDecoder, vtbl)))
+  var virtualReturn = vtbl.bytesToWrite()
+  virtualReturn
+
+method canReadLine*(self: VirtualQWaveDecoder, ): bool {.base.} =
+  QWaveDecodercanReadLine(self[])
+proc miqt_exec_method_cQWaveDecoder_canReadLine(vtbl: pointer, inst: pointer): bool {.cdecl.} =
+  let vtbl = cast[VirtualQWaveDecoder](cast[uint](vtbl) - uint(offsetOf(VirtualQWaveDecoder, vtbl)))
+  var virtualReturn = vtbl.canReadLine()
+  virtualReturn
+
+method waitForReadyRead*(self: VirtualQWaveDecoder, msecs: cint): bool {.base.} =
+  QWaveDecoderwaitForReadyRead(self[], msecs)
+proc miqt_exec_method_cQWaveDecoder_waitForReadyRead(vtbl: pointer, inst: pointer, msecs: cint): bool {.cdecl.} =
+  let vtbl = cast[VirtualQWaveDecoder](cast[uint](vtbl) - uint(offsetOf(VirtualQWaveDecoder, vtbl)))
+  let slotval1 = msecs
+  var virtualReturn = vtbl.waitForReadyRead(slotval1)
+  virtualReturn
+
+method waitForBytesWritten*(self: VirtualQWaveDecoder, msecs: cint): bool {.base.} =
+  QWaveDecoderwaitForBytesWritten(self[], msecs)
+proc miqt_exec_method_cQWaveDecoder_waitForBytesWritten(vtbl: pointer, inst: pointer, msecs: cint): bool {.cdecl.} =
+  let vtbl = cast[VirtualQWaveDecoder](cast[uint](vtbl) - uint(offsetOf(VirtualQWaveDecoder, vtbl)))
+  let slotval1 = msecs
+  var virtualReturn = vtbl.waitForBytesWritten(slotval1)
+  virtualReturn
+
+method readLineData*(self: VirtualQWaveDecoder, data: cstring, maxlen: clonglong): clonglong {.base.} =
+  QWaveDecoderreadLineData(self[], data, maxlen)
+proc miqt_exec_method_cQWaveDecoder_readLineData(vtbl: pointer, inst: pointer, data: cstring, maxlen: clonglong): clonglong {.cdecl.} =
+  let vtbl = cast[VirtualQWaveDecoder](cast[uint](vtbl) - uint(offsetOf(VirtualQWaveDecoder, vtbl)))
+  let slotval1 = (data)
+  let slotval2 = maxlen
+  var virtualReturn = vtbl.readLineData(slotval1, slotval2)
+  virtualReturn
+
+method skipData*(self: VirtualQWaveDecoder, maxSize: clonglong): clonglong {.base.} =
+  QWaveDecoderskipData(self[], maxSize)
+proc miqt_exec_method_cQWaveDecoder_skipData(vtbl: pointer, inst: pointer, maxSize: clonglong): clonglong {.cdecl.} =
+  let vtbl = cast[VirtualQWaveDecoder](cast[uint](vtbl) - uint(offsetOf(VirtualQWaveDecoder, vtbl)))
+  let slotval1 = maxSize
+  var virtualReturn = vtbl.skipData(slotval1)
+  virtualReturn
+
+method event*(self: VirtualQWaveDecoder, event: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QWaveDecoderevent(self[], event)
+proc miqt_exec_method_cQWaveDecoder_event(vtbl: pointer, inst: pointer, event: pointer): bool {.cdecl.} =
+  let vtbl = cast[VirtualQWaveDecoder](cast[uint](vtbl) - uint(offsetOf(VirtualQWaveDecoder, vtbl)))
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
+  var virtualReturn = vtbl.event(slotval1)
+  virtualReturn
+
+method eventFilter*(self: VirtualQWaveDecoder, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QWaveDecodereventFilter(self[], watched, event)
+proc miqt_exec_method_cQWaveDecoder_eventFilter(vtbl: pointer, inst: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
+  let vtbl = cast[VirtualQWaveDecoder](cast[uint](vtbl) - uint(offsetOf(VirtualQWaveDecoder, vtbl)))
+  let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
+  var virtualReturn = vtbl.eventFilter(slotval1, slotval2)
+  virtualReturn
+
+method timerEvent*(self: VirtualQWaveDecoder, event: gen_qcoreevent_types.QTimerEvent): void {.base.} =
+  QWaveDecodertimerEvent(self[], event)
+proc miqt_exec_method_cQWaveDecoder_timerEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQWaveDecoder](cast[uint](vtbl) - uint(offsetOf(VirtualQWaveDecoder, vtbl)))
+  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
+  vtbl.timerEvent(slotval1)
+
+method childEvent*(self: VirtualQWaveDecoder, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
+  QWaveDecoderchildEvent(self[], event)
+proc miqt_exec_method_cQWaveDecoder_childEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQWaveDecoder](cast[uint](vtbl) - uint(offsetOf(VirtualQWaveDecoder, vtbl)))
+  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
+  vtbl.childEvent(slotval1)
+
+method customEvent*(self: VirtualQWaveDecoder, event: gen_qcoreevent_types.QEvent): void {.base.} =
+  QWaveDecodercustomEvent(self[], event)
+proc miqt_exec_method_cQWaveDecoder_customEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQWaveDecoder](cast[uint](vtbl) - uint(offsetOf(VirtualQWaveDecoder, vtbl)))
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
+  vtbl.customEvent(slotval1)
+
+method connectNotify*(self: VirtualQWaveDecoder, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QWaveDecoderconnectNotify(self[], signal)
+proc miqt_exec_method_cQWaveDecoder_connectNotify(vtbl: pointer, inst: pointer, signal: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQWaveDecoder](cast[uint](vtbl) - uint(offsetOf(VirtualQWaveDecoder, vtbl)))
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
+  vtbl.connectNotify(slotval1)
+
+method disconnectNotify*(self: VirtualQWaveDecoder, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QWaveDecoderdisconnectNotify(self[], signal)
+proc miqt_exec_method_cQWaveDecoder_disconnectNotify(vtbl: pointer, inst: pointer, signal: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQWaveDecoder](cast[uint](vtbl) - uint(offsetOf(VirtualQWaveDecoder, vtbl)))
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
+  vtbl.disconnectNotify(slotval1)
 
 proc setOpenMode*(self: gen_qwavedecoder_types.QWaveDecoder, openMode: cint): void =
   fcQWaveDecoder_protectedbase_setOpenMode(self.h, cint(openMode))
@@ -533,7 +728,7 @@ proc setErrorString*(self: gen_qwavedecoder_types.QWaveDecoder, errorString: str
   fcQWaveDecoder_protectedbase_setErrorString(self.h, struct_miqt_string(data: errorString, len: csize_t(len(errorString))))
 
 proc sender*(self: gen_qwavedecoder_types.QWaveDecoder, ): gen_qobject_types.QObject =
-  gen_qobject_types.QObject(h: fcQWaveDecoder_protectedbase_sender(self.h))
+  gen_qobject_types.QObject(h: fcQWaveDecoder_protectedbase_sender(self.h), owned: false)
 
 proc senderSignalIndex*(self: gen_qwavedecoder_types.QWaveDecoder, ): cint =
   fcQWaveDecoder_protectedbase_senderSignalIndex(self.h)
@@ -549,242 +744,388 @@ proc create*(T: type gen_qwavedecoder_types.QWaveDecoder,
     vtbl: ref QWaveDecoderVTable = nil): gen_qwavedecoder_types.QWaveDecoder =
   let vtbl = if vtbl == nil: new QWaveDecoderVTable else: vtbl
   GC_ref(vtbl)
-  vtbl.vtbl.destructor = proc(vtbl: ptr cQWaveDecoderVTable, _: ptr cQWaveDecoder) {.cdecl.} =
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQWaveDecoderVTable, _: ptr cQWaveDecoder) {.cdecl.} =
     let vtbl = cast[ref QWaveDecoderVTable](vtbl)
     GC_unref(vtbl)
-  if not isNil(vtbl.metaObject):
+  if not isNil(vtbl[].metaObject):
     vtbl[].vtbl.metaObject = miqt_exec_callback_cQWaveDecoder_metaObject
-  if not isNil(vtbl.metacast):
+  if not isNil(vtbl[].metacast):
     vtbl[].vtbl.metacast = miqt_exec_callback_cQWaveDecoder_metacast
-  if not isNil(vtbl.metacall):
+  if not isNil(vtbl[].metacall):
     vtbl[].vtbl.metacall = miqt_exec_callback_cQWaveDecoder_metacall
-  if not isNil(vtbl.open):
+  if not isNil(vtbl[].open):
     vtbl[].vtbl.open = miqt_exec_callback_cQWaveDecoder_open
-  if not isNil(vtbl.close):
+  if not isNil(vtbl[].close):
     vtbl[].vtbl.close = miqt_exec_callback_cQWaveDecoder_close
-  if not isNil(vtbl.seek):
+  if not isNil(vtbl[].seek):
     vtbl[].vtbl.seek = miqt_exec_callback_cQWaveDecoder_seek
-  if not isNil(vtbl.pos):
+  if not isNil(vtbl[].pos):
     vtbl[].vtbl.pos = miqt_exec_callback_cQWaveDecoder_pos
-  if not isNil(vtbl.size):
+  if not isNil(vtbl[].size):
     vtbl[].vtbl.size = miqt_exec_callback_cQWaveDecoder_size
-  if not isNil(vtbl.isSequential):
+  if not isNil(vtbl[].isSequential):
     vtbl[].vtbl.isSequential = miqt_exec_callback_cQWaveDecoder_isSequential
-  if not isNil(vtbl.bytesAvailable):
+  if not isNil(vtbl[].bytesAvailable):
     vtbl[].vtbl.bytesAvailable = miqt_exec_callback_cQWaveDecoder_bytesAvailable
-  if not isNil(vtbl.atEnd):
+  if not isNil(vtbl[].atEnd):
     vtbl[].vtbl.atEnd = miqt_exec_callback_cQWaveDecoder_atEnd
-  if not isNil(vtbl.reset):
+  if not isNil(vtbl[].reset):
     vtbl[].vtbl.reset = miqt_exec_callback_cQWaveDecoder_reset
-  if not isNil(vtbl.bytesToWrite):
+  if not isNil(vtbl[].bytesToWrite):
     vtbl[].vtbl.bytesToWrite = miqt_exec_callback_cQWaveDecoder_bytesToWrite
-  if not isNil(vtbl.canReadLine):
+  if not isNil(vtbl[].canReadLine):
     vtbl[].vtbl.canReadLine = miqt_exec_callback_cQWaveDecoder_canReadLine
-  if not isNil(vtbl.waitForReadyRead):
+  if not isNil(vtbl[].waitForReadyRead):
     vtbl[].vtbl.waitForReadyRead = miqt_exec_callback_cQWaveDecoder_waitForReadyRead
-  if not isNil(vtbl.waitForBytesWritten):
+  if not isNil(vtbl[].waitForBytesWritten):
     vtbl[].vtbl.waitForBytesWritten = miqt_exec_callback_cQWaveDecoder_waitForBytesWritten
-  if not isNil(vtbl.readLineData):
+  if not isNil(vtbl[].readLineData):
     vtbl[].vtbl.readLineData = miqt_exec_callback_cQWaveDecoder_readLineData
-  if not isNil(vtbl.skipData):
+  if not isNil(vtbl[].skipData):
     vtbl[].vtbl.skipData = miqt_exec_callback_cQWaveDecoder_skipData
-  if not isNil(vtbl.event):
+  if not isNil(vtbl[].event):
     vtbl[].vtbl.event = miqt_exec_callback_cQWaveDecoder_event
-  if not isNil(vtbl.eventFilter):
+  if not isNil(vtbl[].eventFilter):
     vtbl[].vtbl.eventFilter = miqt_exec_callback_cQWaveDecoder_eventFilter
-  if not isNil(vtbl.timerEvent):
+  if not isNil(vtbl[].timerEvent):
     vtbl[].vtbl.timerEvent = miqt_exec_callback_cQWaveDecoder_timerEvent
-  if not isNil(vtbl.childEvent):
+  if not isNil(vtbl[].childEvent):
     vtbl[].vtbl.childEvent = miqt_exec_callback_cQWaveDecoder_childEvent
-  if not isNil(vtbl.customEvent):
+  if not isNil(vtbl[].customEvent):
     vtbl[].vtbl.customEvent = miqt_exec_callback_cQWaveDecoder_customEvent
-  if not isNil(vtbl.connectNotify):
+  if not isNil(vtbl[].connectNotify):
     vtbl[].vtbl.connectNotify = miqt_exec_callback_cQWaveDecoder_connectNotify
-  if not isNil(vtbl.disconnectNotify):
+  if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQWaveDecoder_disconnectNotify
-  gen_qwavedecoder_types.QWaveDecoder(h: fcQWaveDecoder_new(addr(vtbl[]), device.h))
+  gen_qwavedecoder_types.QWaveDecoder(h: fcQWaveDecoder_new(addr(vtbl[].vtbl), device.h), owned: true)
 
 proc create*(T: type gen_qwavedecoder_types.QWaveDecoder,
     device: gen_qiodevice_types.QIODevice, format: gen_qaudioformat_types.QAudioFormat,
     vtbl: ref QWaveDecoderVTable = nil): gen_qwavedecoder_types.QWaveDecoder =
   let vtbl = if vtbl == nil: new QWaveDecoderVTable else: vtbl
   GC_ref(vtbl)
-  vtbl.vtbl.destructor = proc(vtbl: ptr cQWaveDecoderVTable, _: ptr cQWaveDecoder) {.cdecl.} =
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQWaveDecoderVTable, _: ptr cQWaveDecoder) {.cdecl.} =
     let vtbl = cast[ref QWaveDecoderVTable](vtbl)
     GC_unref(vtbl)
-  if not isNil(vtbl.metaObject):
+  if not isNil(vtbl[].metaObject):
     vtbl[].vtbl.metaObject = miqt_exec_callback_cQWaveDecoder_metaObject
-  if not isNil(vtbl.metacast):
+  if not isNil(vtbl[].metacast):
     vtbl[].vtbl.metacast = miqt_exec_callback_cQWaveDecoder_metacast
-  if not isNil(vtbl.metacall):
+  if not isNil(vtbl[].metacall):
     vtbl[].vtbl.metacall = miqt_exec_callback_cQWaveDecoder_metacall
-  if not isNil(vtbl.open):
+  if not isNil(vtbl[].open):
     vtbl[].vtbl.open = miqt_exec_callback_cQWaveDecoder_open
-  if not isNil(vtbl.close):
+  if not isNil(vtbl[].close):
     vtbl[].vtbl.close = miqt_exec_callback_cQWaveDecoder_close
-  if not isNil(vtbl.seek):
+  if not isNil(vtbl[].seek):
     vtbl[].vtbl.seek = miqt_exec_callback_cQWaveDecoder_seek
-  if not isNil(vtbl.pos):
+  if not isNil(vtbl[].pos):
     vtbl[].vtbl.pos = miqt_exec_callback_cQWaveDecoder_pos
-  if not isNil(vtbl.size):
+  if not isNil(vtbl[].size):
     vtbl[].vtbl.size = miqt_exec_callback_cQWaveDecoder_size
-  if not isNil(vtbl.isSequential):
+  if not isNil(vtbl[].isSequential):
     vtbl[].vtbl.isSequential = miqt_exec_callback_cQWaveDecoder_isSequential
-  if not isNil(vtbl.bytesAvailable):
+  if not isNil(vtbl[].bytesAvailable):
     vtbl[].vtbl.bytesAvailable = miqt_exec_callback_cQWaveDecoder_bytesAvailable
-  if not isNil(vtbl.atEnd):
+  if not isNil(vtbl[].atEnd):
     vtbl[].vtbl.atEnd = miqt_exec_callback_cQWaveDecoder_atEnd
-  if not isNil(vtbl.reset):
+  if not isNil(vtbl[].reset):
     vtbl[].vtbl.reset = miqt_exec_callback_cQWaveDecoder_reset
-  if not isNil(vtbl.bytesToWrite):
+  if not isNil(vtbl[].bytesToWrite):
     vtbl[].vtbl.bytesToWrite = miqt_exec_callback_cQWaveDecoder_bytesToWrite
-  if not isNil(vtbl.canReadLine):
+  if not isNil(vtbl[].canReadLine):
     vtbl[].vtbl.canReadLine = miqt_exec_callback_cQWaveDecoder_canReadLine
-  if not isNil(vtbl.waitForReadyRead):
+  if not isNil(vtbl[].waitForReadyRead):
     vtbl[].vtbl.waitForReadyRead = miqt_exec_callback_cQWaveDecoder_waitForReadyRead
-  if not isNil(vtbl.waitForBytesWritten):
+  if not isNil(vtbl[].waitForBytesWritten):
     vtbl[].vtbl.waitForBytesWritten = miqt_exec_callback_cQWaveDecoder_waitForBytesWritten
-  if not isNil(vtbl.readLineData):
+  if not isNil(vtbl[].readLineData):
     vtbl[].vtbl.readLineData = miqt_exec_callback_cQWaveDecoder_readLineData
-  if not isNil(vtbl.skipData):
+  if not isNil(vtbl[].skipData):
     vtbl[].vtbl.skipData = miqt_exec_callback_cQWaveDecoder_skipData
-  if not isNil(vtbl.event):
+  if not isNil(vtbl[].event):
     vtbl[].vtbl.event = miqt_exec_callback_cQWaveDecoder_event
-  if not isNil(vtbl.eventFilter):
+  if not isNil(vtbl[].eventFilter):
     vtbl[].vtbl.eventFilter = miqt_exec_callback_cQWaveDecoder_eventFilter
-  if not isNil(vtbl.timerEvent):
+  if not isNil(vtbl[].timerEvent):
     vtbl[].vtbl.timerEvent = miqt_exec_callback_cQWaveDecoder_timerEvent
-  if not isNil(vtbl.childEvent):
+  if not isNil(vtbl[].childEvent):
     vtbl[].vtbl.childEvent = miqt_exec_callback_cQWaveDecoder_childEvent
-  if not isNil(vtbl.customEvent):
+  if not isNil(vtbl[].customEvent):
     vtbl[].vtbl.customEvent = miqt_exec_callback_cQWaveDecoder_customEvent
-  if not isNil(vtbl.connectNotify):
+  if not isNil(vtbl[].connectNotify):
     vtbl[].vtbl.connectNotify = miqt_exec_callback_cQWaveDecoder_connectNotify
-  if not isNil(vtbl.disconnectNotify):
+  if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQWaveDecoder_disconnectNotify
-  gen_qwavedecoder_types.QWaveDecoder(h: fcQWaveDecoder_new2(addr(vtbl[]), device.h, format.h))
+  gen_qwavedecoder_types.QWaveDecoder(h: fcQWaveDecoder_new2(addr(vtbl[].vtbl), device.h, format.h), owned: true)
 
 proc create*(T: type gen_qwavedecoder_types.QWaveDecoder,
     device: gen_qiodevice_types.QIODevice, parent: gen_qobject_types.QObject,
     vtbl: ref QWaveDecoderVTable = nil): gen_qwavedecoder_types.QWaveDecoder =
   let vtbl = if vtbl == nil: new QWaveDecoderVTable else: vtbl
   GC_ref(vtbl)
-  vtbl.vtbl.destructor = proc(vtbl: ptr cQWaveDecoderVTable, _: ptr cQWaveDecoder) {.cdecl.} =
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQWaveDecoderVTable, _: ptr cQWaveDecoder) {.cdecl.} =
     let vtbl = cast[ref QWaveDecoderVTable](vtbl)
     GC_unref(vtbl)
-  if not isNil(vtbl.metaObject):
+  if not isNil(vtbl[].metaObject):
     vtbl[].vtbl.metaObject = miqt_exec_callback_cQWaveDecoder_metaObject
-  if not isNil(vtbl.metacast):
+  if not isNil(vtbl[].metacast):
     vtbl[].vtbl.metacast = miqt_exec_callback_cQWaveDecoder_metacast
-  if not isNil(vtbl.metacall):
+  if not isNil(vtbl[].metacall):
     vtbl[].vtbl.metacall = miqt_exec_callback_cQWaveDecoder_metacall
-  if not isNil(vtbl.open):
+  if not isNil(vtbl[].open):
     vtbl[].vtbl.open = miqt_exec_callback_cQWaveDecoder_open
-  if not isNil(vtbl.close):
+  if not isNil(vtbl[].close):
     vtbl[].vtbl.close = miqt_exec_callback_cQWaveDecoder_close
-  if not isNil(vtbl.seek):
+  if not isNil(vtbl[].seek):
     vtbl[].vtbl.seek = miqt_exec_callback_cQWaveDecoder_seek
-  if not isNil(vtbl.pos):
+  if not isNil(vtbl[].pos):
     vtbl[].vtbl.pos = miqt_exec_callback_cQWaveDecoder_pos
-  if not isNil(vtbl.size):
+  if not isNil(vtbl[].size):
     vtbl[].vtbl.size = miqt_exec_callback_cQWaveDecoder_size
-  if not isNil(vtbl.isSequential):
+  if not isNil(vtbl[].isSequential):
     vtbl[].vtbl.isSequential = miqt_exec_callback_cQWaveDecoder_isSequential
-  if not isNil(vtbl.bytesAvailable):
+  if not isNil(vtbl[].bytesAvailable):
     vtbl[].vtbl.bytesAvailable = miqt_exec_callback_cQWaveDecoder_bytesAvailable
-  if not isNil(vtbl.atEnd):
+  if not isNil(vtbl[].atEnd):
     vtbl[].vtbl.atEnd = miqt_exec_callback_cQWaveDecoder_atEnd
-  if not isNil(vtbl.reset):
+  if not isNil(vtbl[].reset):
     vtbl[].vtbl.reset = miqt_exec_callback_cQWaveDecoder_reset
-  if not isNil(vtbl.bytesToWrite):
+  if not isNil(vtbl[].bytesToWrite):
     vtbl[].vtbl.bytesToWrite = miqt_exec_callback_cQWaveDecoder_bytesToWrite
-  if not isNil(vtbl.canReadLine):
+  if not isNil(vtbl[].canReadLine):
     vtbl[].vtbl.canReadLine = miqt_exec_callback_cQWaveDecoder_canReadLine
-  if not isNil(vtbl.waitForReadyRead):
+  if not isNil(vtbl[].waitForReadyRead):
     vtbl[].vtbl.waitForReadyRead = miqt_exec_callback_cQWaveDecoder_waitForReadyRead
-  if not isNil(vtbl.waitForBytesWritten):
+  if not isNil(vtbl[].waitForBytesWritten):
     vtbl[].vtbl.waitForBytesWritten = miqt_exec_callback_cQWaveDecoder_waitForBytesWritten
-  if not isNil(vtbl.readLineData):
+  if not isNil(vtbl[].readLineData):
     vtbl[].vtbl.readLineData = miqt_exec_callback_cQWaveDecoder_readLineData
-  if not isNil(vtbl.skipData):
+  if not isNil(vtbl[].skipData):
     vtbl[].vtbl.skipData = miqt_exec_callback_cQWaveDecoder_skipData
-  if not isNil(vtbl.event):
+  if not isNil(vtbl[].event):
     vtbl[].vtbl.event = miqt_exec_callback_cQWaveDecoder_event
-  if not isNil(vtbl.eventFilter):
+  if not isNil(vtbl[].eventFilter):
     vtbl[].vtbl.eventFilter = miqt_exec_callback_cQWaveDecoder_eventFilter
-  if not isNil(vtbl.timerEvent):
+  if not isNil(vtbl[].timerEvent):
     vtbl[].vtbl.timerEvent = miqt_exec_callback_cQWaveDecoder_timerEvent
-  if not isNil(vtbl.childEvent):
+  if not isNil(vtbl[].childEvent):
     vtbl[].vtbl.childEvent = miqt_exec_callback_cQWaveDecoder_childEvent
-  if not isNil(vtbl.customEvent):
+  if not isNil(vtbl[].customEvent):
     vtbl[].vtbl.customEvent = miqt_exec_callback_cQWaveDecoder_customEvent
-  if not isNil(vtbl.connectNotify):
+  if not isNil(vtbl[].connectNotify):
     vtbl[].vtbl.connectNotify = miqt_exec_callback_cQWaveDecoder_connectNotify
-  if not isNil(vtbl.disconnectNotify):
+  if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQWaveDecoder_disconnectNotify
-  gen_qwavedecoder_types.QWaveDecoder(h: fcQWaveDecoder_new3(addr(vtbl[]), device.h, parent.h))
+  gen_qwavedecoder_types.QWaveDecoder(h: fcQWaveDecoder_new3(addr(vtbl[].vtbl), device.h, parent.h), owned: true)
 
 proc create*(T: type gen_qwavedecoder_types.QWaveDecoder,
     device: gen_qiodevice_types.QIODevice, format: gen_qaudioformat_types.QAudioFormat, parent: gen_qobject_types.QObject,
     vtbl: ref QWaveDecoderVTable = nil): gen_qwavedecoder_types.QWaveDecoder =
   let vtbl = if vtbl == nil: new QWaveDecoderVTable else: vtbl
   GC_ref(vtbl)
-  vtbl.vtbl.destructor = proc(vtbl: ptr cQWaveDecoderVTable, _: ptr cQWaveDecoder) {.cdecl.} =
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQWaveDecoderVTable, _: ptr cQWaveDecoder) {.cdecl.} =
     let vtbl = cast[ref QWaveDecoderVTable](vtbl)
     GC_unref(vtbl)
-  if not isNil(vtbl.metaObject):
+  if not isNil(vtbl[].metaObject):
     vtbl[].vtbl.metaObject = miqt_exec_callback_cQWaveDecoder_metaObject
-  if not isNil(vtbl.metacast):
+  if not isNil(vtbl[].metacast):
     vtbl[].vtbl.metacast = miqt_exec_callback_cQWaveDecoder_metacast
-  if not isNil(vtbl.metacall):
+  if not isNil(vtbl[].metacall):
     vtbl[].vtbl.metacall = miqt_exec_callback_cQWaveDecoder_metacall
-  if not isNil(vtbl.open):
+  if not isNil(vtbl[].open):
     vtbl[].vtbl.open = miqt_exec_callback_cQWaveDecoder_open
-  if not isNil(vtbl.close):
+  if not isNil(vtbl[].close):
     vtbl[].vtbl.close = miqt_exec_callback_cQWaveDecoder_close
-  if not isNil(vtbl.seek):
+  if not isNil(vtbl[].seek):
     vtbl[].vtbl.seek = miqt_exec_callback_cQWaveDecoder_seek
-  if not isNil(vtbl.pos):
+  if not isNil(vtbl[].pos):
     vtbl[].vtbl.pos = miqt_exec_callback_cQWaveDecoder_pos
-  if not isNil(vtbl.size):
+  if not isNil(vtbl[].size):
     vtbl[].vtbl.size = miqt_exec_callback_cQWaveDecoder_size
-  if not isNil(vtbl.isSequential):
+  if not isNil(vtbl[].isSequential):
     vtbl[].vtbl.isSequential = miqt_exec_callback_cQWaveDecoder_isSequential
-  if not isNil(vtbl.bytesAvailable):
+  if not isNil(vtbl[].bytesAvailable):
     vtbl[].vtbl.bytesAvailable = miqt_exec_callback_cQWaveDecoder_bytesAvailable
-  if not isNil(vtbl.atEnd):
+  if not isNil(vtbl[].atEnd):
     vtbl[].vtbl.atEnd = miqt_exec_callback_cQWaveDecoder_atEnd
-  if not isNil(vtbl.reset):
+  if not isNil(vtbl[].reset):
     vtbl[].vtbl.reset = miqt_exec_callback_cQWaveDecoder_reset
-  if not isNil(vtbl.bytesToWrite):
+  if not isNil(vtbl[].bytesToWrite):
     vtbl[].vtbl.bytesToWrite = miqt_exec_callback_cQWaveDecoder_bytesToWrite
-  if not isNil(vtbl.canReadLine):
+  if not isNil(vtbl[].canReadLine):
     vtbl[].vtbl.canReadLine = miqt_exec_callback_cQWaveDecoder_canReadLine
-  if not isNil(vtbl.waitForReadyRead):
+  if not isNil(vtbl[].waitForReadyRead):
     vtbl[].vtbl.waitForReadyRead = miqt_exec_callback_cQWaveDecoder_waitForReadyRead
-  if not isNil(vtbl.waitForBytesWritten):
+  if not isNil(vtbl[].waitForBytesWritten):
     vtbl[].vtbl.waitForBytesWritten = miqt_exec_callback_cQWaveDecoder_waitForBytesWritten
-  if not isNil(vtbl.readLineData):
+  if not isNil(vtbl[].readLineData):
     vtbl[].vtbl.readLineData = miqt_exec_callback_cQWaveDecoder_readLineData
-  if not isNil(vtbl.skipData):
+  if not isNil(vtbl[].skipData):
     vtbl[].vtbl.skipData = miqt_exec_callback_cQWaveDecoder_skipData
-  if not isNil(vtbl.event):
+  if not isNil(vtbl[].event):
     vtbl[].vtbl.event = miqt_exec_callback_cQWaveDecoder_event
-  if not isNil(vtbl.eventFilter):
+  if not isNil(vtbl[].eventFilter):
     vtbl[].vtbl.eventFilter = miqt_exec_callback_cQWaveDecoder_eventFilter
-  if not isNil(vtbl.timerEvent):
+  if not isNil(vtbl[].timerEvent):
     vtbl[].vtbl.timerEvent = miqt_exec_callback_cQWaveDecoder_timerEvent
-  if not isNil(vtbl.childEvent):
+  if not isNil(vtbl[].childEvent):
     vtbl[].vtbl.childEvent = miqt_exec_callback_cQWaveDecoder_childEvent
-  if not isNil(vtbl.customEvent):
+  if not isNil(vtbl[].customEvent):
     vtbl[].vtbl.customEvent = miqt_exec_callback_cQWaveDecoder_customEvent
-  if not isNil(vtbl.connectNotify):
+  if not isNil(vtbl[].connectNotify):
     vtbl[].vtbl.connectNotify = miqt_exec_callback_cQWaveDecoder_connectNotify
-  if not isNil(vtbl.disconnectNotify):
+  if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQWaveDecoder_disconnectNotify
-  gen_qwavedecoder_types.QWaveDecoder(h: fcQWaveDecoder_new4(addr(vtbl[]), device.h, format.h, parent.h))
+  gen_qwavedecoder_types.QWaveDecoder(h: fcQWaveDecoder_new4(addr(vtbl[].vtbl), device.h, format.h, parent.h), owned: true)
+
+proc create*(T: type gen_qwavedecoder_types.QWaveDecoder,
+    device: gen_qiodevice_types.QIODevice,
+    vtbl: VirtualQWaveDecoder) =
+
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQWaveDecoderVTable, _: ptr cQWaveDecoder) {.cdecl.} =
+    let vtbl = cast[ptr typeof(VirtualQWaveDecoder()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQWaveDecoder, vtbl)))
+    vtbl[].h = nil
+    vtbl[].owned = false
+  vtbl[].vtbl.metaObject = miqt_exec_method_cQWaveDecoder_metaObject
+  vtbl[].vtbl.metacast = miqt_exec_method_cQWaveDecoder_metacast
+  vtbl[].vtbl.metacall = miqt_exec_method_cQWaveDecoder_metacall
+  vtbl[].vtbl.open = miqt_exec_method_cQWaveDecoder_open
+  vtbl[].vtbl.close = miqt_exec_method_cQWaveDecoder_close
+  vtbl[].vtbl.seek = miqt_exec_method_cQWaveDecoder_seek
+  vtbl[].vtbl.pos = miqt_exec_method_cQWaveDecoder_pos
+  vtbl[].vtbl.size = miqt_exec_method_cQWaveDecoder_size
+  vtbl[].vtbl.isSequential = miqt_exec_method_cQWaveDecoder_isSequential
+  vtbl[].vtbl.bytesAvailable = miqt_exec_method_cQWaveDecoder_bytesAvailable
+  vtbl[].vtbl.atEnd = miqt_exec_method_cQWaveDecoder_atEnd
+  vtbl[].vtbl.reset = miqt_exec_method_cQWaveDecoder_reset
+  vtbl[].vtbl.bytesToWrite = miqt_exec_method_cQWaveDecoder_bytesToWrite
+  vtbl[].vtbl.canReadLine = miqt_exec_method_cQWaveDecoder_canReadLine
+  vtbl[].vtbl.waitForReadyRead = miqt_exec_method_cQWaveDecoder_waitForReadyRead
+  vtbl[].vtbl.waitForBytesWritten = miqt_exec_method_cQWaveDecoder_waitForBytesWritten
+  vtbl[].vtbl.readLineData = miqt_exec_method_cQWaveDecoder_readLineData
+  vtbl[].vtbl.skipData = miqt_exec_method_cQWaveDecoder_skipData
+  vtbl[].vtbl.event = miqt_exec_method_cQWaveDecoder_event
+  vtbl[].vtbl.eventFilter = miqt_exec_method_cQWaveDecoder_eventFilter
+  vtbl[].vtbl.timerEvent = miqt_exec_method_cQWaveDecoder_timerEvent
+  vtbl[].vtbl.childEvent = miqt_exec_method_cQWaveDecoder_childEvent
+  vtbl[].vtbl.customEvent = miqt_exec_method_cQWaveDecoder_customEvent
+  vtbl[].vtbl.connectNotify = miqt_exec_method_cQWaveDecoder_connectNotify
+  vtbl[].vtbl.disconnectNotify = miqt_exec_method_cQWaveDecoder_disconnectNotify
+  if vtbl[].h != nil: delete(move(vtbl[]))
+  vtbl[].h = fcQWaveDecoder_new(addr(vtbl[].vtbl), device.h)
+  vtbl[].owned = true
+
+proc create*(T: type gen_qwavedecoder_types.QWaveDecoder,
+    device: gen_qiodevice_types.QIODevice, format: gen_qaudioformat_types.QAudioFormat,
+    vtbl: VirtualQWaveDecoder) =
+
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQWaveDecoderVTable, _: ptr cQWaveDecoder) {.cdecl.} =
+    let vtbl = cast[ptr typeof(VirtualQWaveDecoder()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQWaveDecoder, vtbl)))
+    vtbl[].h = nil
+    vtbl[].owned = false
+  vtbl[].vtbl.metaObject = miqt_exec_method_cQWaveDecoder_metaObject
+  vtbl[].vtbl.metacast = miqt_exec_method_cQWaveDecoder_metacast
+  vtbl[].vtbl.metacall = miqt_exec_method_cQWaveDecoder_metacall
+  vtbl[].vtbl.open = miqt_exec_method_cQWaveDecoder_open
+  vtbl[].vtbl.close = miqt_exec_method_cQWaveDecoder_close
+  vtbl[].vtbl.seek = miqt_exec_method_cQWaveDecoder_seek
+  vtbl[].vtbl.pos = miqt_exec_method_cQWaveDecoder_pos
+  vtbl[].vtbl.size = miqt_exec_method_cQWaveDecoder_size
+  vtbl[].vtbl.isSequential = miqt_exec_method_cQWaveDecoder_isSequential
+  vtbl[].vtbl.bytesAvailable = miqt_exec_method_cQWaveDecoder_bytesAvailable
+  vtbl[].vtbl.atEnd = miqt_exec_method_cQWaveDecoder_atEnd
+  vtbl[].vtbl.reset = miqt_exec_method_cQWaveDecoder_reset
+  vtbl[].vtbl.bytesToWrite = miqt_exec_method_cQWaveDecoder_bytesToWrite
+  vtbl[].vtbl.canReadLine = miqt_exec_method_cQWaveDecoder_canReadLine
+  vtbl[].vtbl.waitForReadyRead = miqt_exec_method_cQWaveDecoder_waitForReadyRead
+  vtbl[].vtbl.waitForBytesWritten = miqt_exec_method_cQWaveDecoder_waitForBytesWritten
+  vtbl[].vtbl.readLineData = miqt_exec_method_cQWaveDecoder_readLineData
+  vtbl[].vtbl.skipData = miqt_exec_method_cQWaveDecoder_skipData
+  vtbl[].vtbl.event = miqt_exec_method_cQWaveDecoder_event
+  vtbl[].vtbl.eventFilter = miqt_exec_method_cQWaveDecoder_eventFilter
+  vtbl[].vtbl.timerEvent = miqt_exec_method_cQWaveDecoder_timerEvent
+  vtbl[].vtbl.childEvent = miqt_exec_method_cQWaveDecoder_childEvent
+  vtbl[].vtbl.customEvent = miqt_exec_method_cQWaveDecoder_customEvent
+  vtbl[].vtbl.connectNotify = miqt_exec_method_cQWaveDecoder_connectNotify
+  vtbl[].vtbl.disconnectNotify = miqt_exec_method_cQWaveDecoder_disconnectNotify
+  if vtbl[].h != nil: delete(move(vtbl[]))
+  vtbl[].h = fcQWaveDecoder_new2(addr(vtbl[].vtbl), device.h, format.h)
+  vtbl[].owned = true
+
+proc create*(T: type gen_qwavedecoder_types.QWaveDecoder,
+    device: gen_qiodevice_types.QIODevice, parent: gen_qobject_types.QObject,
+    vtbl: VirtualQWaveDecoder) =
+
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQWaveDecoderVTable, _: ptr cQWaveDecoder) {.cdecl.} =
+    let vtbl = cast[ptr typeof(VirtualQWaveDecoder()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQWaveDecoder, vtbl)))
+    vtbl[].h = nil
+    vtbl[].owned = false
+  vtbl[].vtbl.metaObject = miqt_exec_method_cQWaveDecoder_metaObject
+  vtbl[].vtbl.metacast = miqt_exec_method_cQWaveDecoder_metacast
+  vtbl[].vtbl.metacall = miqt_exec_method_cQWaveDecoder_metacall
+  vtbl[].vtbl.open = miqt_exec_method_cQWaveDecoder_open
+  vtbl[].vtbl.close = miqt_exec_method_cQWaveDecoder_close
+  vtbl[].vtbl.seek = miqt_exec_method_cQWaveDecoder_seek
+  vtbl[].vtbl.pos = miqt_exec_method_cQWaveDecoder_pos
+  vtbl[].vtbl.size = miqt_exec_method_cQWaveDecoder_size
+  vtbl[].vtbl.isSequential = miqt_exec_method_cQWaveDecoder_isSequential
+  vtbl[].vtbl.bytesAvailable = miqt_exec_method_cQWaveDecoder_bytesAvailable
+  vtbl[].vtbl.atEnd = miqt_exec_method_cQWaveDecoder_atEnd
+  vtbl[].vtbl.reset = miqt_exec_method_cQWaveDecoder_reset
+  vtbl[].vtbl.bytesToWrite = miqt_exec_method_cQWaveDecoder_bytesToWrite
+  vtbl[].vtbl.canReadLine = miqt_exec_method_cQWaveDecoder_canReadLine
+  vtbl[].vtbl.waitForReadyRead = miqt_exec_method_cQWaveDecoder_waitForReadyRead
+  vtbl[].vtbl.waitForBytesWritten = miqt_exec_method_cQWaveDecoder_waitForBytesWritten
+  vtbl[].vtbl.readLineData = miqt_exec_method_cQWaveDecoder_readLineData
+  vtbl[].vtbl.skipData = miqt_exec_method_cQWaveDecoder_skipData
+  vtbl[].vtbl.event = miqt_exec_method_cQWaveDecoder_event
+  vtbl[].vtbl.eventFilter = miqt_exec_method_cQWaveDecoder_eventFilter
+  vtbl[].vtbl.timerEvent = miqt_exec_method_cQWaveDecoder_timerEvent
+  vtbl[].vtbl.childEvent = miqt_exec_method_cQWaveDecoder_childEvent
+  vtbl[].vtbl.customEvent = miqt_exec_method_cQWaveDecoder_customEvent
+  vtbl[].vtbl.connectNotify = miqt_exec_method_cQWaveDecoder_connectNotify
+  vtbl[].vtbl.disconnectNotify = miqt_exec_method_cQWaveDecoder_disconnectNotify
+  if vtbl[].h != nil: delete(move(vtbl[]))
+  vtbl[].h = fcQWaveDecoder_new3(addr(vtbl[].vtbl), device.h, parent.h)
+  vtbl[].owned = true
+
+proc create*(T: type gen_qwavedecoder_types.QWaveDecoder,
+    device: gen_qiodevice_types.QIODevice, format: gen_qaudioformat_types.QAudioFormat, parent: gen_qobject_types.QObject,
+    vtbl: VirtualQWaveDecoder) =
+
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQWaveDecoderVTable, _: ptr cQWaveDecoder) {.cdecl.} =
+    let vtbl = cast[ptr typeof(VirtualQWaveDecoder()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQWaveDecoder, vtbl)))
+    vtbl[].h = nil
+    vtbl[].owned = false
+  vtbl[].vtbl.metaObject = miqt_exec_method_cQWaveDecoder_metaObject
+  vtbl[].vtbl.metacast = miqt_exec_method_cQWaveDecoder_metacast
+  vtbl[].vtbl.metacall = miqt_exec_method_cQWaveDecoder_metacall
+  vtbl[].vtbl.open = miqt_exec_method_cQWaveDecoder_open
+  vtbl[].vtbl.close = miqt_exec_method_cQWaveDecoder_close
+  vtbl[].vtbl.seek = miqt_exec_method_cQWaveDecoder_seek
+  vtbl[].vtbl.pos = miqt_exec_method_cQWaveDecoder_pos
+  vtbl[].vtbl.size = miqt_exec_method_cQWaveDecoder_size
+  vtbl[].vtbl.isSequential = miqt_exec_method_cQWaveDecoder_isSequential
+  vtbl[].vtbl.bytesAvailable = miqt_exec_method_cQWaveDecoder_bytesAvailable
+  vtbl[].vtbl.atEnd = miqt_exec_method_cQWaveDecoder_atEnd
+  vtbl[].vtbl.reset = miqt_exec_method_cQWaveDecoder_reset
+  vtbl[].vtbl.bytesToWrite = miqt_exec_method_cQWaveDecoder_bytesToWrite
+  vtbl[].vtbl.canReadLine = miqt_exec_method_cQWaveDecoder_canReadLine
+  vtbl[].vtbl.waitForReadyRead = miqt_exec_method_cQWaveDecoder_waitForReadyRead
+  vtbl[].vtbl.waitForBytesWritten = miqt_exec_method_cQWaveDecoder_waitForBytesWritten
+  vtbl[].vtbl.readLineData = miqt_exec_method_cQWaveDecoder_readLineData
+  vtbl[].vtbl.skipData = miqt_exec_method_cQWaveDecoder_skipData
+  vtbl[].vtbl.event = miqt_exec_method_cQWaveDecoder_event
+  vtbl[].vtbl.eventFilter = miqt_exec_method_cQWaveDecoder_eventFilter
+  vtbl[].vtbl.timerEvent = miqt_exec_method_cQWaveDecoder_timerEvent
+  vtbl[].vtbl.childEvent = miqt_exec_method_cQWaveDecoder_childEvent
+  vtbl[].vtbl.customEvent = miqt_exec_method_cQWaveDecoder_customEvent
+  vtbl[].vtbl.connectNotify = miqt_exec_method_cQWaveDecoder_connectNotify
+  vtbl[].vtbl.disconnectNotify = miqt_exec_method_cQWaveDecoder_disconnectNotify
+  if vtbl[].h != nil: delete(move(vtbl[]))
+  vtbl[].h = fcQWaveDecoder_new4(addr(vtbl[].vtbl), device.h, format.h, parent.h)
+  vtbl[].owned = true
 
 proc staticMetaObject*(_: type gen_qwavedecoder_types.QWaveDecoder): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQWaveDecoder_staticMetaObject())
-proc delete*(self: gen_qwavedecoder_types.QWaveDecoder) =
-  fcQWaveDecoder_delete(self.h)

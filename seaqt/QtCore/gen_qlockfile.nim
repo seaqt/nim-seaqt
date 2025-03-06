@@ -30,9 +30,6 @@ func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
     else:
       copyMem(addr result[0], unsafeAddr v[0], v.len)
 
-const cflags = gorge("pkg-config --cflags Qt6Core")  & " -fPIC"
-{.compile("gen_qlockfile.cpp", cflags).}
-
 
 type QLockFileLockErrorEnum* = distinct cint
 template NoError*(_: type QLockFileLockErrorEnum): untyped = 0
@@ -58,7 +55,6 @@ proc fcQLockFile_removeStaleLockFile(self: pointer, ): bool {.importc: "QLockFil
 proc fcQLockFile_error(self: pointer, ): cint {.importc: "QLockFile_error".}
 proc fcQLockFile_tryLock1(self: pointer, timeout: cint): bool {.importc: "QLockFile_tryLock1".}
 proc fcQLockFile_new(fileName: struct_miqt_string): ptr cQLockFile {.importc: "QLockFile_new".}
-proc fcQLockFile_delete(self: pointer) {.importc: "QLockFile_delete".}
 
 proc fileName*(self: gen_qlockfile_types.QLockFile, ): string =
   let v_ms = fcQLockFile_fileName(self.h)
@@ -95,7 +91,5 @@ proc tryLock*(self: gen_qlockfile_types.QLockFile, timeout: cint): bool =
 
 proc create*(T: type gen_qlockfile_types.QLockFile,
     fileName: string): gen_qlockfile_types.QLockFile =
-  gen_qlockfile_types.QLockFile(h: fcQLockFile_new(struct_miqt_string(data: fileName, len: csize_t(len(fileName)))))
+  gen_qlockfile_types.QLockFile(h: fcQLockFile_new(struct_miqt_string(data: fileName, len: csize_t(len(fileName)))), owned: true)
 
-proc delete*(self: gen_qlockfile_types.QLockFile) =
-  fcQLockFile_delete(self.h)

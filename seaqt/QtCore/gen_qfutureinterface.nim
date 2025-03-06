@@ -30,9 +30,6 @@ func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
     else:
       copyMem(addr result[0], unsafeAddr v[0], v.len)
 
-const cflags = gorge("pkg-config --cflags Qt6Core")  & " -fPIC"
-{.compile("gen_qfutureinterface.cpp", cflags).}
-
 
 type QFutureInterfaceBaseStateEnum* = distinct cint
 template NoState*(_: type QFutureInterfaceBaseStateEnum): untyped = 0
@@ -129,7 +126,6 @@ proc fcQFutureInterfaceBase_protectedbase_cancelWithMode(self: pointer, mode: ci
 proc fcQFutureInterfaceBase_new(): ptr cQFutureInterfaceBase {.importc: "QFutureInterfaceBase_new".}
 proc fcQFutureInterfaceBase_new2(other: pointer): ptr cQFutureInterfaceBase {.importc: "QFutureInterfaceBase_new2".}
 proc fcQFutureInterfaceBase_new3(initialState: cint): ptr cQFutureInterfaceBase {.importc: "QFutureInterfaceBase_new3".}
-proc fcQFutureInterfaceBase_delete(self: pointer) {.importc: "QFutureInterfaceBase_delete".}
 
 proc operatorAssign*(self: gen_qfutureinterface_types.QFutureInterfaceBase, other: gen_qfutureinterface_types.QFutureInterfaceBase): void =
   fcQFutureInterfaceBase_operatorAssign(self.h, other.h)
@@ -153,7 +149,7 @@ proc setThreadPool*(self: gen_qfutureinterface_types.QFutureInterfaceBase, pool:
   fcQFutureInterfaceBase_setThreadPool(self.h, pool.h)
 
 proc threadPool*(self: gen_qfutureinterface_types.QFutureInterfaceBase, ): gen_qthreadpool_types.QThreadPool =
-  gen_qthreadpool_types.QThreadPool(h: fcQFutureInterfaceBase_threadPool(self.h))
+  gen_qthreadpool_types.QThreadPool(h: fcQFutureInterfaceBase_threadPool(self.h), owned: false)
 
 proc setFilterMode*(self: gen_qfutureinterface_types.QFutureInterfaceBase, enable: bool): void =
   fcQFutureInterfaceBase_setFilterMode(self.h, enable)
@@ -270,7 +266,7 @@ proc suspendIfRequested*(self: gen_qfutureinterface_types.QFutureInterfaceBase, 
   fcQFutureInterfaceBase_suspendIfRequested(self.h)
 
 proc mutex*(self: gen_qfutureinterface_types.QFutureInterfaceBase, ): gen_qmutex_types.QMutex =
-  gen_qmutex_types.QMutex(h: fcQFutureInterfaceBase_mutex(self.h))
+  gen_qmutex_types.QMutex(h: fcQFutureInterfaceBase_mutex(self.h), owned: false)
 
 proc hasException*(self: gen_qfutureinterface_types.QFutureInterfaceBase, ): bool =
   fcQFutureInterfaceBase_hasException(self.h)
@@ -318,15 +314,13 @@ proc cancel*(self: gen_qfutureinterface_types.QFutureInterfaceBase, mode: cint):
   fcQFutureInterfaceBase_protectedbase_cancelWithMode(self.h, cint(mode))
 
 proc create*(T: type gen_qfutureinterface_types.QFutureInterfaceBase): gen_qfutureinterface_types.QFutureInterfaceBase =
-  gen_qfutureinterface_types.QFutureInterfaceBase(h: fcQFutureInterfaceBase_new())
+  gen_qfutureinterface_types.QFutureInterfaceBase(h: fcQFutureInterfaceBase_new(), owned: true)
 
 proc create*(T: type gen_qfutureinterface_types.QFutureInterfaceBase,
     other: gen_qfutureinterface_types.QFutureInterfaceBase): gen_qfutureinterface_types.QFutureInterfaceBase =
-  gen_qfutureinterface_types.QFutureInterfaceBase(h: fcQFutureInterfaceBase_new2(other.h))
+  gen_qfutureinterface_types.QFutureInterfaceBase(h: fcQFutureInterfaceBase_new2(other.h), owned: true)
 
 proc create*(T: type gen_qfutureinterface_types.QFutureInterfaceBase,
     initialState: cint): gen_qfutureinterface_types.QFutureInterfaceBase =
-  gen_qfutureinterface_types.QFutureInterfaceBase(h: fcQFutureInterfaceBase_new3(cint(initialState)))
+  gen_qfutureinterface_types.QFutureInterfaceBase(h: fcQFutureInterfaceBase_new3(cint(initialState)), owned: true)
 
-proc delete*(self: gen_qfutureinterface_types.QFutureInterfaceBase) =
-  fcQFutureInterfaceBase_delete(self.h)

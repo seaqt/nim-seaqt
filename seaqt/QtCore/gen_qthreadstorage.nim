@@ -30,9 +30,6 @@ func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
     else:
       copyMem(addr result[0], unsafeAddr v[0], v.len)
 
-const cflags = gorge("pkg-config --cflags Qt6Core")  & " -fPIC"
-{.compile("gen_qthreadstorage.cpp", cflags).}
-
 
 import ./gen_qthreadstorage_types
 export gen_qthreadstorage_types
@@ -44,7 +41,6 @@ proc fcQThreadStorageData_get(self: pointer, ): pointer {.importc: "QThreadStora
 proc fcQThreadStorageData_set(self: pointer, p: pointer): pointer {.importc: "QThreadStorageData_set".}
 proc fcQThreadStorageData_finish(param1: pointer): void {.importc: "QThreadStorageData_finish".}
 proc fcQThreadStorageData_new(param1: pointer): ptr cQThreadStorageData {.importc: "QThreadStorageData_new".}
-proc fcQThreadStorageData_delete(self: pointer) {.importc: "QThreadStorageData_delete".}
 
 proc get*(self: gen_qthreadstorage_types.QThreadStorageData, ): pointer =
   fcQThreadStorageData_get(self.h)
@@ -57,7 +53,5 @@ proc finish*(_: type gen_qthreadstorage_types.QThreadStorageData, param1: pointe
 
 proc create*(T: type gen_qthreadstorage_types.QThreadStorageData,
     param1: gen_qthreadstorage_types.QThreadStorageData): gen_qthreadstorage_types.QThreadStorageData =
-  gen_qthreadstorage_types.QThreadStorageData(h: fcQThreadStorageData_new(param1.h))
+  gen_qthreadstorage_types.QThreadStorageData(h: fcQThreadStorageData_new(param1.h), owned: true)
 
-proc delete*(self: gen_qthreadstorage_types.QThreadStorageData) =
-  fcQThreadStorageData_delete(self.h)

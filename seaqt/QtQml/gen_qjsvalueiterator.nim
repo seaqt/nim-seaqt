@@ -30,9 +30,6 @@ func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
     else:
       copyMem(addr result[0], unsafeAddr v[0], v.len)
 
-const cflags = gorge("pkg-config --cflags Qt6Qml")  & " -fPIC"
-{.compile("gen_qjsvalueiterator.cpp", cflags).}
-
 
 import ./gen_qjsvalueiterator_types
 export gen_qjsvalueiterator_types
@@ -50,7 +47,6 @@ proc fcQJSValueIterator_name(self: pointer, ): struct_miqt_string {.importc: "QJ
 proc fcQJSValueIterator_value(self: pointer, ): pointer {.importc: "QJSValueIterator_value".}
 proc fcQJSValueIterator_operatorAssign(self: pointer, value: pointer): void {.importc: "QJSValueIterator_operatorAssign".}
 proc fcQJSValueIterator_new(value: pointer): ptr cQJSValueIterator {.importc: "QJSValueIterator_new".}
-proc fcQJSValueIterator_delete(self: pointer) {.importc: "QJSValueIterator_delete".}
 
 proc hasNext*(self: gen_qjsvalueiterator_types.QJSValueIterator, ): bool =
   fcQJSValueIterator_hasNext(self.h)
@@ -65,14 +61,12 @@ proc name*(self: gen_qjsvalueiterator_types.QJSValueIterator, ): string =
   vx_ret
 
 proc value*(self: gen_qjsvalueiterator_types.QJSValueIterator, ): gen_qjsvalue_types.QJSValue =
-  gen_qjsvalue_types.QJSValue(h: fcQJSValueIterator_value(self.h))
+  gen_qjsvalue_types.QJSValue(h: fcQJSValueIterator_value(self.h), owned: true)
 
 proc operatorAssign*(self: gen_qjsvalueiterator_types.QJSValueIterator, value: gen_qjsvalue_types.QJSValue): void =
   fcQJSValueIterator_operatorAssign(self.h, value.h)
 
 proc create*(T: type gen_qjsvalueiterator_types.QJSValueIterator,
     value: gen_qjsvalue_types.QJSValue): gen_qjsvalueiterator_types.QJSValueIterator =
-  gen_qjsvalueiterator_types.QJSValueIterator(h: fcQJSValueIterator_new(value.h))
+  gen_qjsvalueiterator_types.QJSValueIterator(h: fcQJSValueIterator_new(value.h), owned: true)
 
-proc delete*(self: gen_qjsvalueiterator_types.QJSValueIterator) =
-  fcQJSValueIterator_delete(self.h)

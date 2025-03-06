@@ -41,5 +41,26 @@ type QScrollPrepareEvent* = object of gen_qcoreevent_types.QEvent
 type QScrollEvent* = object of gen_qcoreevent_types.QEvent
 type QScreenOrientationChangeEvent* = object of gen_qcoreevent_types.QEvent
 type QApplicationStateChangeEvent* = object of gen_qcoreevent_types.QEvent
-type QInputMethodEventAttribute* {.inheritable, pure.} = object
+type QInputMethodEventAttribute* {.inheritable.} = object
   h*: pointer
+  owned*: bool
+
+const cflags = gorge("pkg-config --cflags Qt6Gui") & " -fPIC"
+{.compile("gen_qevent.cpp", cflags).}
+
+proc fcQInputMethodEventAttribute_delete(self: pointer) {.importc: "QInputMethodEvent__Attribute_delete".}
+proc `=destroy`(self: var QInputMethodEventAttribute) =
+  if self.owned: fcQInputMethodEventAttribute_delete(self.h)
+
+proc `=sink`(dest: var QInputMethodEventAttribute, source: QInputMethodEventAttribute) =
+  `=destroy`(dest)
+  wasMoved(dest)
+  dest.h = source.h
+  dest.owned = source.owned
+
+proc `=copy`(dest: var QInputMethodEventAttribute, source: QInputMethodEventAttribute) {.error.}
+proc delete*(self: sink QInputMethodEventAttribute) =
+  let h = self.h
+  wasMoved(self)
+  fcQInputMethodEventAttribute_delete(h)
+

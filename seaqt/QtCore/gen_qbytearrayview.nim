@@ -30,9 +30,6 @@ func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
     else:
       copyMem(addr result[0], unsafeAddr v[0], v.len)
 
-const cflags = gorge("pkg-config --cflags Qt6Core")  & " -fPIC"
-{.compile("gen_qbytearrayview.cpp", cflags).}
-
 
 import ./gen_qbytearrayview_types
 export gen_qbytearrayview_types
@@ -115,7 +112,6 @@ proc fcQByteArrayView_lastIndexOf22(self: pointer, ch: cchar, fromVal: int64): i
 proc fcQByteArrayView_compare2(self: pointer, a: pointer, cs: cint): cint {.importc: "QByteArrayView_compare2".}
 proc fcQByteArrayView_new(): ptr cQByteArrayView {.importc: "QByteArrayView_new".}
 proc fcQByteArrayView_new2(param1: pointer): ptr cQByteArrayView {.importc: "QByteArrayView_new2".}
-proc fcQByteArrayView_delete(self: pointer) {.importc: "QByteArrayView_delete".}
 
 proc toByteArray*(self: gen_qbytearrayview_types.QByteArrayView, ): seq[byte] =
   var v_bytearray = fcQByteArrayView_toByteArray(self.h)
@@ -139,19 +135,19 @@ proc at*(self: gen_qbytearrayview_types.QByteArrayView, n: int64): cchar =
   fcQByteArrayView_at(self.h, n)
 
 proc first*(self: gen_qbytearrayview_types.QByteArrayView, n: int64): gen_qbytearrayview_types.QByteArrayView =
-  gen_qbytearrayview_types.QByteArrayView(h: fcQByteArrayView_first(self.h, n))
+  gen_qbytearrayview_types.QByteArrayView(h: fcQByteArrayView_first(self.h, n), owned: true)
 
 proc last*(self: gen_qbytearrayview_types.QByteArrayView, n: int64): gen_qbytearrayview_types.QByteArrayView =
-  gen_qbytearrayview_types.QByteArrayView(h: fcQByteArrayView_last(self.h, n))
+  gen_qbytearrayview_types.QByteArrayView(h: fcQByteArrayView_last(self.h, n), owned: true)
 
 proc sliced*(self: gen_qbytearrayview_types.QByteArrayView, pos: int64): gen_qbytearrayview_types.QByteArrayView =
-  gen_qbytearrayview_types.QByteArrayView(h: fcQByteArrayView_sliced(self.h, pos))
+  gen_qbytearrayview_types.QByteArrayView(h: fcQByteArrayView_sliced(self.h, pos), owned: true)
 
 proc sliced*(self: gen_qbytearrayview_types.QByteArrayView, pos: int64, n: int64): gen_qbytearrayview_types.QByteArrayView =
-  gen_qbytearrayview_types.QByteArrayView(h: fcQByteArrayView_sliced2(self.h, pos, n))
+  gen_qbytearrayview_types.QByteArrayView(h: fcQByteArrayView_sliced2(self.h, pos, n), owned: true)
 
 proc chopped*(self: gen_qbytearrayview_types.QByteArrayView, len: int64): gen_qbytearrayview_types.QByteArrayView =
-  gen_qbytearrayview_types.QByteArrayView(h: fcQByteArrayView_chopped(self.h, len))
+  gen_qbytearrayview_types.QByteArrayView(h: fcQByteArrayView_chopped(self.h, len), owned: true)
 
 proc truncate*(self: gen_qbytearrayview_types.QByteArrayView, n: int64): void =
   fcQByteArrayView_truncate(self.h, n)
@@ -160,7 +156,7 @@ proc chop*(self: gen_qbytearrayview_types.QByteArrayView, n: int64): void =
   fcQByteArrayView_chop(self.h, n)
 
 proc trimmed*(self: gen_qbytearrayview_types.QByteArrayView, ): gen_qbytearrayview_types.QByteArrayView =
-  gen_qbytearrayview_types.QByteArrayView(h: fcQByteArrayView_trimmed(self.h))
+  gen_qbytearrayview_types.QByteArrayView(h: fcQByteArrayView_trimmed(self.h), owned: true)
 
 proc toShort*(self: gen_qbytearrayview_types.QByteArrayView, ): cshort =
   fcQByteArrayView_toShort(self.h)
@@ -340,11 +336,9 @@ proc compare*(self: gen_qbytearrayview_types.QByteArrayView, a: gen_qbytearrayvi
   fcQByteArrayView_compare2(self.h, a.h, cint(cs))
 
 proc create*(T: type gen_qbytearrayview_types.QByteArrayView): gen_qbytearrayview_types.QByteArrayView =
-  gen_qbytearrayview_types.QByteArrayView(h: fcQByteArrayView_new())
+  gen_qbytearrayview_types.QByteArrayView(h: fcQByteArrayView_new(), owned: true)
 
 proc create*(T: type gen_qbytearrayview_types.QByteArrayView,
     param1: gen_qbytearrayview_types.QByteArrayView): gen_qbytearrayview_types.QByteArrayView =
-  gen_qbytearrayview_types.QByteArrayView(h: fcQByteArrayView_new2(param1.h))
+  gen_qbytearrayview_types.QByteArrayView(h: fcQByteArrayView_new2(param1.h), owned: true)
 
-proc delete*(self: gen_qbytearrayview_types.QByteArrayView) =
-  fcQByteArrayView_delete(self.h)

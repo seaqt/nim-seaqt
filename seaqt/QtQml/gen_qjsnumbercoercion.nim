@@ -30,9 +30,6 @@ func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
     else:
       copyMem(addr result[0], unsafeAddr v[0], v.len)
 
-const cflags = gorge("pkg-config --cflags Qt6Qml")  & " -fPIC"
-{.compile("gen_qjsnumbercoercion.cpp", cflags).}
-
 
 import ./gen_qjsnumbercoercion_types
 export gen_qjsnumbercoercion_types
@@ -44,7 +41,6 @@ proc fcQJSNumberCoercion_isInteger(d: float64): bool {.importc: "QJSNumberCoerci
 proc fcQJSNumberCoercion_toInteger(d: float64): cint {.importc: "QJSNumberCoercion_toInteger".}
 proc fcQJSNumberCoercion_equals(lhs: float64, rhs: float64): bool {.importc: "QJSNumberCoercion_equals".}
 proc fcQJSNumberCoercion_new(param1: pointer): ptr cQJSNumberCoercion {.importc: "QJSNumberCoercion_new".}
-proc fcQJSNumberCoercion_delete(self: pointer) {.importc: "QJSNumberCoercion_delete".}
 
 proc isInteger*(_: type gen_qjsnumbercoercion_types.QJSNumberCoercion, d: float64): bool =
   fcQJSNumberCoercion_isInteger(d)
@@ -57,7 +53,5 @@ proc equals*(_: type gen_qjsnumbercoercion_types.QJSNumberCoercion, lhs: float64
 
 proc create*(T: type gen_qjsnumbercoercion_types.QJSNumberCoercion,
     param1: gen_qjsnumbercoercion_types.QJSNumberCoercion): gen_qjsnumbercoercion_types.QJSNumberCoercion =
-  gen_qjsnumbercoercion_types.QJSNumberCoercion(h: fcQJSNumberCoercion_new(param1.h))
+  gen_qjsnumbercoercion_types.QJSNumberCoercion(h: fcQJSNumberCoercion_new(param1.h), owned: true)
 
-proc delete*(self: gen_qjsnumbercoercion_types.QJSNumberCoercion) =
-  fcQJSNumberCoercion_delete(self.h)

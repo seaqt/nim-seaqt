@@ -30,9 +30,6 @@ func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
     else:
       copyMem(addr result[0], unsafeAddr v[0], v.len)
 
-const cflags = gorge("pkg-config --cflags Qt6Multimedia")  & " -fPIC"
-{.compile("gen_qcameradevice.cpp", cflags).}
-
 
 type QCameraDevicePositionEnum* = distinct cint
 template UnspecifiedPosition*(_: type QCameraDevicePositionEnum): untyped = 0
@@ -64,7 +61,6 @@ proc fcQCameraFormat_operatorNotEqual(self: pointer, other: pointer): bool {.imp
 proc fcQCameraFormat_new(): ptr cQCameraFormat {.importc: "QCameraFormat_new".}
 proc fcQCameraFormat_new2(other: pointer): ptr cQCameraFormat {.importc: "QCameraFormat_new2".}
 proc fcQCameraFormat_staticMetaObject(): pointer {.importc: "QCameraFormat_staticMetaObject".}
-proc fcQCameraFormat_delete(self: pointer) {.importc: "QCameraFormat_delete".}
 proc fcQCameraDevice_operatorAssign(self: pointer, other: pointer): void {.importc: "QCameraDevice_operatorAssign".}
 proc fcQCameraDevice_operatorEqual(self: pointer, other: pointer): bool {.importc: "QCameraDevice_operatorEqual".}
 proc fcQCameraDevice_operatorNotEqual(self: pointer, other: pointer): bool {.importc: "QCameraDevice_operatorNotEqual".}
@@ -78,7 +74,6 @@ proc fcQCameraDevice_videoFormats(self: pointer, ): struct_miqt_array {.importc:
 proc fcQCameraDevice_new(): ptr cQCameraDevice {.importc: "QCameraDevice_new".}
 proc fcQCameraDevice_new2(other: pointer): ptr cQCameraDevice {.importc: "QCameraDevice_new2".}
 proc fcQCameraDevice_staticMetaObject(): pointer {.importc: "QCameraDevice_staticMetaObject".}
-proc fcQCameraDevice_delete(self: pointer) {.importc: "QCameraDevice_delete".}
 
 proc operatorAssign*(self: gen_qcameradevice_types.QCameraFormat, other: gen_qcameradevice_types.QCameraFormat): void =
   fcQCameraFormat_operatorAssign(self.h, other.h)
@@ -87,7 +82,7 @@ proc pixelFormat*(self: gen_qcameradevice_types.QCameraFormat, ): cint =
   cint(fcQCameraFormat_pixelFormat(self.h))
 
 proc resolution*(self: gen_qcameradevice_types.QCameraFormat, ): gen_qsize_types.QSize =
-  gen_qsize_types.QSize(h: fcQCameraFormat_resolution(self.h))
+  gen_qsize_types.QSize(h: fcQCameraFormat_resolution(self.h), owned: true)
 
 proc minFrameRate*(self: gen_qcameradevice_types.QCameraFormat, ): float32 =
   fcQCameraFormat_minFrameRate(self.h)
@@ -105,16 +100,14 @@ proc operatorNotEqual*(self: gen_qcameradevice_types.QCameraFormat, other: gen_q
   fcQCameraFormat_operatorNotEqual(self.h, other.h)
 
 proc create*(T: type gen_qcameradevice_types.QCameraFormat): gen_qcameradevice_types.QCameraFormat =
-  gen_qcameradevice_types.QCameraFormat(h: fcQCameraFormat_new())
+  gen_qcameradevice_types.QCameraFormat(h: fcQCameraFormat_new(), owned: true)
 
 proc create*(T: type gen_qcameradevice_types.QCameraFormat,
     other: gen_qcameradevice_types.QCameraFormat): gen_qcameradevice_types.QCameraFormat =
-  gen_qcameradevice_types.QCameraFormat(h: fcQCameraFormat_new2(other.h))
+  gen_qcameradevice_types.QCameraFormat(h: fcQCameraFormat_new2(other.h), owned: true)
 
 proc staticMetaObject*(_: type gen_qcameradevice_types.QCameraFormat): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQCameraFormat_staticMetaObject())
-proc delete*(self: gen_qcameradevice_types.QCameraFormat) =
-  fcQCameraFormat_delete(self.h)
 proc operatorAssign*(self: gen_qcameradevice_types.QCameraDevice, other: gen_qcameradevice_types.QCameraDevice): void =
   fcQCameraDevice_operatorAssign(self.h, other.h)
 
@@ -150,7 +143,7 @@ proc photoResolutions*(self: gen_qcameradevice_types.QCameraDevice, ): seq[gen_q
   var vx_ret = newSeq[gen_qsize_types.QSize](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
-    vx_ret[i] = gen_qsize_types.QSize(h: v_outCast[i])
+    vx_ret[i] = gen_qsize_types.QSize(h: v_outCast[i], owned: true)
   c_free(v_ma.data)
   vx_ret
 
@@ -159,18 +152,16 @@ proc videoFormats*(self: gen_qcameradevice_types.QCameraDevice, ): seq[gen_qcame
   var vx_ret = newSeq[gen_qcameradevice_types.QCameraFormat](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
-    vx_ret[i] = gen_qcameradevice_types.QCameraFormat(h: v_outCast[i])
+    vx_ret[i] = gen_qcameradevice_types.QCameraFormat(h: v_outCast[i], owned: true)
   c_free(v_ma.data)
   vx_ret
 
 proc create*(T: type gen_qcameradevice_types.QCameraDevice): gen_qcameradevice_types.QCameraDevice =
-  gen_qcameradevice_types.QCameraDevice(h: fcQCameraDevice_new())
+  gen_qcameradevice_types.QCameraDevice(h: fcQCameraDevice_new(), owned: true)
 
 proc create*(T: type gen_qcameradevice_types.QCameraDevice,
     other: gen_qcameradevice_types.QCameraDevice): gen_qcameradevice_types.QCameraDevice =
-  gen_qcameradevice_types.QCameraDevice(h: fcQCameraDevice_new2(other.h))
+  gen_qcameradevice_types.QCameraDevice(h: fcQCameraDevice_new2(other.h), owned: true)
 
 proc staticMetaObject*(_: type gen_qcameradevice_types.QCameraDevice): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQCameraDevice_staticMetaObject())
-proc delete*(self: gen_qcameradevice_types.QCameraDevice) =
-  fcQCameraDevice_delete(self.h)

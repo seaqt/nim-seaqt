@@ -30,9 +30,6 @@ func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
     else:
       copyMem(addr result[0], unsafeAddr v[0], v.len)
 
-const cflags = gorge("pkg-config --cflags Qt6Qml")  & " -fPIC"
-{.compile("gen_qqmlparserstatus.cpp", cflags).}
-
 
 import ./gen_qqmlparserstatus_types
 export gen_qqmlparserstatus_types
@@ -42,12 +39,11 @@ type cQQmlParserStatus*{.exportc: "QQmlParserStatus", incompleteStruct.} = objec
 
 proc fcQQmlParserStatus_classBegin(self: pointer, ): void {.importc: "QQmlParserStatus_classBegin".}
 proc fcQQmlParserStatus_componentComplete(self: pointer, ): void {.importc: "QQmlParserStatus_componentComplete".}
-type cQQmlParserStatusVTable = object
+type cQQmlParserStatusVTable {.pure.} = object
   destructor*: proc(vtbl: ptr cQQmlParserStatusVTable, self: ptr cQQmlParserStatus) {.cdecl, raises:[], gcsafe.}
   classBegin*: proc(vtbl, self: pointer, ): void {.cdecl, raises: [], gcsafe.}
   componentComplete*: proc(vtbl, self: pointer, ): void {.cdecl, raises: [], gcsafe.}
 proc fcQQmlParserStatus_new(vtbl: pointer, ): ptr cQQmlParserStatus {.importc: "QQmlParserStatus_new".}
-proc fcQQmlParserStatus_delete(self: pointer) {.importc: "QQmlParserStatus_delete".}
 
 proc classBegin*(self: gen_qqmlparserstatus_types.QQmlParserStatus, ): void =
   fcQQmlParserStatus_classBegin(self.h)
@@ -57,7 +53,7 @@ proc componentComplete*(self: gen_qqmlparserstatus_types.QQmlParserStatus, ): vo
 
 type QQmlParserStatusclassBeginProc* = proc(self: QQmlParserStatus): void {.raises: [], gcsafe.}
 type QQmlParserStatuscomponentCompleteProc* = proc(self: QQmlParserStatus): void {.raises: [], gcsafe.}
-type QQmlParserStatusVTable* = object
+type QQmlParserStatusVTable* {.inheritable, pure.} = object
   vtbl: cQQmlParserStatusVTable
   classBegin*: QQmlParserStatusclassBeginProc
   componentComplete*: QQmlParserStatuscomponentCompleteProc
@@ -71,18 +67,43 @@ proc miqt_exec_callback_cQQmlParserStatus_componentComplete(vtbl: pointer, self:
   let self = QQmlParserStatus(h: self)
   vtbl[].componentComplete(self)
 
+type VirtualQQmlParserStatus* {.inheritable.} = ref object of QQmlParserStatus
+  vtbl*: cQQmlParserStatusVTable
+method classBegin*(self: VirtualQQmlParserStatus, ): void {.base.} =
+  raiseAssert("missing implementation of QQmlParserStatus_virtualbase_classBegin")
+proc miqt_exec_method_cQQmlParserStatus_classBegin(vtbl: pointer, inst: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQQmlParserStatus](cast[uint](vtbl) - uint(offsetOf(VirtualQQmlParserStatus, vtbl)))
+  vtbl.classBegin()
+
+method componentComplete*(self: VirtualQQmlParserStatus, ): void {.base.} =
+  raiseAssert("missing implementation of QQmlParserStatus_virtualbase_componentComplete")
+proc miqt_exec_method_cQQmlParserStatus_componentComplete(vtbl: pointer, inst: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQQmlParserStatus](cast[uint](vtbl) - uint(offsetOf(VirtualQQmlParserStatus, vtbl)))
+  vtbl.componentComplete()
+
 proc create*(T: type gen_qqmlparserstatus_types.QQmlParserStatus,
     vtbl: ref QQmlParserStatusVTable = nil): gen_qqmlparserstatus_types.QQmlParserStatus =
   let vtbl = if vtbl == nil: new QQmlParserStatusVTable else: vtbl
   GC_ref(vtbl)
-  vtbl.vtbl.destructor = proc(vtbl: ptr cQQmlParserStatusVTable, _: ptr cQQmlParserStatus) {.cdecl.} =
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQQmlParserStatusVTable, _: ptr cQQmlParserStatus) {.cdecl.} =
     let vtbl = cast[ref QQmlParserStatusVTable](vtbl)
     GC_unref(vtbl)
-  if not isNil(vtbl.classBegin):
+  if not isNil(vtbl[].classBegin):
     vtbl[].vtbl.classBegin = miqt_exec_callback_cQQmlParserStatus_classBegin
-  if not isNil(vtbl.componentComplete):
+  if not isNil(vtbl[].componentComplete):
     vtbl[].vtbl.componentComplete = miqt_exec_callback_cQQmlParserStatus_componentComplete
-  gen_qqmlparserstatus_types.QQmlParserStatus(h: fcQQmlParserStatus_new(addr(vtbl[]), ))
+  gen_qqmlparserstatus_types.QQmlParserStatus(h: fcQQmlParserStatus_new(addr(vtbl[].vtbl), ), owned: true)
 
-proc delete*(self: gen_qqmlparserstatus_types.QQmlParserStatus) =
-  fcQQmlParserStatus_delete(self.h)
+proc create*(T: type gen_qqmlparserstatus_types.QQmlParserStatus,
+    vtbl: VirtualQQmlParserStatus) =
+
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQQmlParserStatusVTable, _: ptr cQQmlParserStatus) {.cdecl.} =
+    let vtbl = cast[ptr typeof(VirtualQQmlParserStatus()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQQmlParserStatus, vtbl)))
+    vtbl[].h = nil
+    vtbl[].owned = false
+  vtbl[].vtbl.classBegin = miqt_exec_method_cQQmlParserStatus_classBegin
+  vtbl[].vtbl.componentComplete = miqt_exec_method_cQQmlParserStatus_componentComplete
+  if vtbl[].h != nil: delete(move(vtbl[]))
+  vtbl[].h = fcQQmlParserStatus_new(addr(vtbl[].vtbl), )
+  vtbl[].owned = true
+

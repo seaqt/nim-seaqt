@@ -30,9 +30,6 @@ func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
     else:
       copyMem(addr result[0], unsafeAddr v[0], v.len)
 
-const cflags = gorge("pkg-config --cflags Qt6Core")  & " -fPIC"
-{.compile("gen_qsocketnotifier.cpp", cflags).}
-
 
 type QSocketNotifierTypeEnum* = distinct cint
 template Read*(_: type QSocketNotifierTypeEnum): untyped = 0
@@ -69,7 +66,7 @@ proc fcQSocketNotifier_isEnabled(self: pointer, ): bool {.importc: "QSocketNotif
 proc fcQSocketNotifier_setEnabled(self: pointer, enabled: bool): void {.importc: "QSocketNotifier_setEnabled".}
 proc fcQSocketNotifier_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QSocketNotifier_tr2".}
 proc fcQSocketNotifier_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QSocketNotifier_tr3".}
-type cQSocketNotifierVTable = object
+type cQSocketNotifierVTable {.pure.} = object
   destructor*: proc(vtbl: ptr cQSocketNotifierVTable, self: ptr cQSocketNotifier) {.cdecl, raises:[], gcsafe.}
   metaObject*: proc(vtbl, self: pointer, ): pointer {.cdecl, raises: [], gcsafe.}
   metacast*: proc(vtbl, self: pointer, param1: cstring): pointer {.cdecl, raises: [], gcsafe.}
@@ -100,16 +97,14 @@ proc fcQSocketNotifier_new2(vtbl: pointer, socket: uint, param2: cint): ptr cQSo
 proc fcQSocketNotifier_new3(vtbl: pointer, param1: cint, parent: pointer): ptr cQSocketNotifier {.importc: "QSocketNotifier_new3".}
 proc fcQSocketNotifier_new4(vtbl: pointer, socket: uint, param2: cint, parent: pointer): ptr cQSocketNotifier {.importc: "QSocketNotifier_new4".}
 proc fcQSocketNotifier_staticMetaObject(): pointer {.importc: "QSocketNotifier_staticMetaObject".}
-proc fcQSocketNotifier_delete(self: pointer) {.importc: "QSocketNotifier_delete".}
 proc fcQSocketDescriptor_ToInt(self: pointer, ): cint {.importc: "QSocketDescriptor_ToInt".}
 proc fcQSocketDescriptor_isValid(self: pointer, ): bool {.importc: "QSocketDescriptor_isValid".}
 proc fcQSocketDescriptor_new(): ptr cQSocketDescriptor {.importc: "QSocketDescriptor_new".}
 proc fcQSocketDescriptor_new2(param1: pointer): ptr cQSocketDescriptor {.importc: "QSocketDescriptor_new2".}
 proc fcQSocketDescriptor_new3(descriptor: cint): ptr cQSocketDescriptor {.importc: "QSocketDescriptor_new3".}
-proc fcQSocketDescriptor_delete(self: pointer) {.importc: "QSocketDescriptor_delete".}
 
 proc metaObject*(self: gen_qsocketnotifier_types.QSocketNotifier, ): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQSocketNotifier_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQSocketNotifier_metaObject(self.h), owned: false)
 
 proc metacast*(self: gen_qsocketnotifier_types.QSocketNotifier, param1: cstring): pointer =
   fcQSocketNotifier_metacast(self.h, param1)
@@ -163,7 +158,7 @@ type QSocketNotifierchildEventProc* = proc(self: QSocketNotifier, event: gen_qco
 type QSocketNotifiercustomEventProc* = proc(self: QSocketNotifier, event: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
 type QSocketNotifierconnectNotifyProc* = proc(self: QSocketNotifier, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
 type QSocketNotifierdisconnectNotifyProc* = proc(self: QSocketNotifier, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
-type QSocketNotifierVTable* = object
+type QSocketNotifierVTable* {.inheritable, pure.} = object
   vtbl: cQSocketNotifierVTable
   metaObject*: QSocketNotifiermetaObjectProc
   metacast*: QSocketNotifiermetacastProc
@@ -176,13 +171,16 @@ type QSocketNotifierVTable* = object
   connectNotify*: QSocketNotifierconnectNotifyProc
   disconnectNotify*: QSocketNotifierdisconnectNotifyProc
 proc QSocketNotifiermetaObject*(self: gen_qsocketnotifier_types.QSocketNotifier, ): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQSocketNotifier_virtualbase_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQSocketNotifier_virtualbase_metaObject(self.h), owned: false)
 
 proc miqt_exec_callback_cQSocketNotifier_metaObject(vtbl: pointer, self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QSocketNotifierVTable](vtbl)
   let self = QSocketNotifier(h: self)
   var virtualReturn = vtbl[].metaObject(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QSocketNotifiermetacast*(self: gen_qsocketnotifier_types.QSocketNotifier, param1: cstring): pointer =
   fcQSocketNotifier_virtualbase_metacast(self.h, param1)
@@ -212,7 +210,7 @@ proc QSocketNotifierevent*(self: gen_qsocketnotifier_types.QSocketNotifier, para
 proc miqt_exec_callback_cQSocketNotifier_event(vtbl: pointer, self: pointer, param1: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QSocketNotifierVTable](vtbl)
   let self = QSocketNotifier(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: param1)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: param1, owned: false)
   var virtualReturn = vtbl[].event(self, slotval1)
   virtualReturn
 
@@ -222,8 +220,8 @@ proc QSocketNotifiereventFilter*(self: gen_qsocketnotifier_types.QSocketNotifier
 proc miqt_exec_callback_cQSocketNotifier_eventFilter(vtbl: pointer, self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QSocketNotifierVTable](vtbl)
   let self = QSocketNotifier(h: self)
-  let slotval1 = gen_qobject_types.QObject(h: watched)
-  let slotval2 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].eventFilter(self, slotval1, slotval2)
   virtualReturn
 
@@ -233,7 +231,7 @@ proc QSocketNotifiertimerEvent*(self: gen_qsocketnotifier_types.QSocketNotifier,
 proc miqt_exec_callback_cQSocketNotifier_timerEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSocketNotifierVTable](vtbl)
   let self = QSocketNotifier(h: self)
-  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   vtbl[].timerEvent(self, slotval1)
 
 proc QSocketNotifierchildEvent*(self: gen_qsocketnotifier_types.QSocketNotifier, event: gen_qcoreevent_types.QChildEvent): void =
@@ -242,7 +240,7 @@ proc QSocketNotifierchildEvent*(self: gen_qsocketnotifier_types.QSocketNotifier,
 proc miqt_exec_callback_cQSocketNotifier_childEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSocketNotifierVTable](vtbl)
   let self = QSocketNotifier(h: self)
-  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   vtbl[].childEvent(self, slotval1)
 
 proc QSocketNotifiercustomEvent*(self: gen_qsocketnotifier_types.QSocketNotifier, event: gen_qcoreevent_types.QEvent): void =
@@ -251,7 +249,7 @@ proc QSocketNotifiercustomEvent*(self: gen_qsocketnotifier_types.QSocketNotifier
 proc miqt_exec_callback_cQSocketNotifier_customEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSocketNotifierVTable](vtbl)
   let self = QSocketNotifier(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].customEvent(self, slotval1)
 
 proc QSocketNotifierconnectNotify*(self: gen_qsocketnotifier_types.QSocketNotifier, signal: gen_qmetaobject_types.QMetaMethod): void =
@@ -260,7 +258,7 @@ proc QSocketNotifierconnectNotify*(self: gen_qsocketnotifier_types.QSocketNotifi
 proc miqt_exec_callback_cQSocketNotifier_connectNotify(vtbl: pointer, self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSocketNotifierVTable](vtbl)
   let self = QSocketNotifier(h: self)
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].connectNotify(self, slotval1)
 
 proc QSocketNotifierdisconnectNotify*(self: gen_qsocketnotifier_types.QSocketNotifier, signal: gen_qmetaobject_types.QMetaMethod): void =
@@ -269,11 +267,93 @@ proc QSocketNotifierdisconnectNotify*(self: gen_qsocketnotifier_types.QSocketNot
 proc miqt_exec_callback_cQSocketNotifier_disconnectNotify(vtbl: pointer, self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSocketNotifierVTable](vtbl)
   let self = QSocketNotifier(h: self)
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].disconnectNotify(self, slotval1)
 
+type VirtualQSocketNotifier* {.inheritable.} = ref object of QSocketNotifier
+  vtbl*: cQSocketNotifierVTable
+method metaObject*(self: VirtualQSocketNotifier, ): gen_qobjectdefs_types.QMetaObject {.base.} =
+  QSocketNotifiermetaObject(self[])
+proc miqt_exec_method_cQSocketNotifier_metaObject(vtbl: pointer, inst: pointer): pointer {.cdecl.} =
+  let vtbl = cast[VirtualQSocketNotifier](cast[uint](vtbl) - uint(offsetOf(VirtualQSocketNotifier, vtbl)))
+  var virtualReturn = vtbl.metaObject()
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
+
+method metacast*(self: VirtualQSocketNotifier, param1: cstring): pointer {.base.} =
+  QSocketNotifiermetacast(self[], param1)
+proc miqt_exec_method_cQSocketNotifier_metacast(vtbl: pointer, inst: pointer, param1: cstring): pointer {.cdecl.} =
+  let vtbl = cast[VirtualQSocketNotifier](cast[uint](vtbl) - uint(offsetOf(VirtualQSocketNotifier, vtbl)))
+  let slotval1 = (param1)
+  var virtualReturn = vtbl.metacast(slotval1)
+  virtualReturn
+
+method metacall*(self: VirtualQSocketNotifier, param1: cint, param2: cint, param3: pointer): cint {.base.} =
+  QSocketNotifiermetacall(self[], param1, param2, param3)
+proc miqt_exec_method_cQSocketNotifier_metacall(vtbl: pointer, inst: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
+  let vtbl = cast[VirtualQSocketNotifier](cast[uint](vtbl) - uint(offsetOf(VirtualQSocketNotifier, vtbl)))
+  let slotval1 = cint(param1)
+  let slotval2 = param2
+  let slotval3 = param3
+  var virtualReturn = vtbl.metacall(slotval1, slotval2, slotval3)
+  virtualReturn
+
+method event*(self: VirtualQSocketNotifier, param1: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QSocketNotifierevent(self[], param1)
+proc miqt_exec_method_cQSocketNotifier_event(vtbl: pointer, inst: pointer, param1: pointer): bool {.cdecl.} =
+  let vtbl = cast[VirtualQSocketNotifier](cast[uint](vtbl) - uint(offsetOf(VirtualQSocketNotifier, vtbl)))
+  let slotval1 = gen_qcoreevent_types.QEvent(h: param1, owned: false)
+  var virtualReturn = vtbl.event(slotval1)
+  virtualReturn
+
+method eventFilter*(self: VirtualQSocketNotifier, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QSocketNotifiereventFilter(self[], watched, event)
+proc miqt_exec_method_cQSocketNotifier_eventFilter(vtbl: pointer, inst: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
+  let vtbl = cast[VirtualQSocketNotifier](cast[uint](vtbl) - uint(offsetOf(VirtualQSocketNotifier, vtbl)))
+  let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
+  var virtualReturn = vtbl.eventFilter(slotval1, slotval2)
+  virtualReturn
+
+method timerEvent*(self: VirtualQSocketNotifier, event: gen_qcoreevent_types.QTimerEvent): void {.base.} =
+  QSocketNotifiertimerEvent(self[], event)
+proc miqt_exec_method_cQSocketNotifier_timerEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQSocketNotifier](cast[uint](vtbl) - uint(offsetOf(VirtualQSocketNotifier, vtbl)))
+  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
+  vtbl.timerEvent(slotval1)
+
+method childEvent*(self: VirtualQSocketNotifier, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
+  QSocketNotifierchildEvent(self[], event)
+proc miqt_exec_method_cQSocketNotifier_childEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQSocketNotifier](cast[uint](vtbl) - uint(offsetOf(VirtualQSocketNotifier, vtbl)))
+  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
+  vtbl.childEvent(slotval1)
+
+method customEvent*(self: VirtualQSocketNotifier, event: gen_qcoreevent_types.QEvent): void {.base.} =
+  QSocketNotifiercustomEvent(self[], event)
+proc miqt_exec_method_cQSocketNotifier_customEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQSocketNotifier](cast[uint](vtbl) - uint(offsetOf(VirtualQSocketNotifier, vtbl)))
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
+  vtbl.customEvent(slotval1)
+
+method connectNotify*(self: VirtualQSocketNotifier, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QSocketNotifierconnectNotify(self[], signal)
+proc miqt_exec_method_cQSocketNotifier_connectNotify(vtbl: pointer, inst: pointer, signal: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQSocketNotifier](cast[uint](vtbl) - uint(offsetOf(VirtualQSocketNotifier, vtbl)))
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
+  vtbl.connectNotify(slotval1)
+
+method disconnectNotify*(self: VirtualQSocketNotifier, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QSocketNotifierdisconnectNotify(self[], signal)
+proc miqt_exec_method_cQSocketNotifier_disconnectNotify(vtbl: pointer, inst: pointer, signal: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQSocketNotifier](cast[uint](vtbl) - uint(offsetOf(VirtualQSocketNotifier, vtbl)))
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
+  vtbl.disconnectNotify(slotval1)
+
 proc sender*(self: gen_qsocketnotifier_types.QSocketNotifier, ): gen_qobject_types.QObject =
-  gen_qobject_types.QObject(h: fcQSocketNotifier_protectedbase_sender(self.h))
+  gen_qobject_types.QObject(h: fcQSocketNotifier_protectedbase_sender(self.h), owned: false)
 
 proc senderSignalIndex*(self: gen_qsocketnotifier_types.QSocketNotifier, ): cint =
   fcQSocketNotifier_protectedbase_senderSignalIndex(self.h)
@@ -289,125 +369,211 @@ proc create*(T: type gen_qsocketnotifier_types.QSocketNotifier,
     vtbl: ref QSocketNotifierVTable = nil): gen_qsocketnotifier_types.QSocketNotifier =
   let vtbl = if vtbl == nil: new QSocketNotifierVTable else: vtbl
   GC_ref(vtbl)
-  vtbl.vtbl.destructor = proc(vtbl: ptr cQSocketNotifierVTable, _: ptr cQSocketNotifier) {.cdecl.} =
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQSocketNotifierVTable, _: ptr cQSocketNotifier) {.cdecl.} =
     let vtbl = cast[ref QSocketNotifierVTable](vtbl)
     GC_unref(vtbl)
-  if not isNil(vtbl.metaObject):
+  if not isNil(vtbl[].metaObject):
     vtbl[].vtbl.metaObject = miqt_exec_callback_cQSocketNotifier_metaObject
-  if not isNil(vtbl.metacast):
+  if not isNil(vtbl[].metacast):
     vtbl[].vtbl.metacast = miqt_exec_callback_cQSocketNotifier_metacast
-  if not isNil(vtbl.metacall):
+  if not isNil(vtbl[].metacall):
     vtbl[].vtbl.metacall = miqt_exec_callback_cQSocketNotifier_metacall
-  if not isNil(vtbl.event):
+  if not isNil(vtbl[].event):
     vtbl[].vtbl.event = miqt_exec_callback_cQSocketNotifier_event
-  if not isNil(vtbl.eventFilter):
+  if not isNil(vtbl[].eventFilter):
     vtbl[].vtbl.eventFilter = miqt_exec_callback_cQSocketNotifier_eventFilter
-  if not isNil(vtbl.timerEvent):
+  if not isNil(vtbl[].timerEvent):
     vtbl[].vtbl.timerEvent = miqt_exec_callback_cQSocketNotifier_timerEvent
-  if not isNil(vtbl.childEvent):
+  if not isNil(vtbl[].childEvent):
     vtbl[].vtbl.childEvent = miqt_exec_callback_cQSocketNotifier_childEvent
-  if not isNil(vtbl.customEvent):
+  if not isNil(vtbl[].customEvent):
     vtbl[].vtbl.customEvent = miqt_exec_callback_cQSocketNotifier_customEvent
-  if not isNil(vtbl.connectNotify):
+  if not isNil(vtbl[].connectNotify):
     vtbl[].vtbl.connectNotify = miqt_exec_callback_cQSocketNotifier_connectNotify
-  if not isNil(vtbl.disconnectNotify):
+  if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQSocketNotifier_disconnectNotify
-  gen_qsocketnotifier_types.QSocketNotifier(h: fcQSocketNotifier_new(addr(vtbl[]), cint(param1)))
+  gen_qsocketnotifier_types.QSocketNotifier(h: fcQSocketNotifier_new(addr(vtbl[].vtbl), cint(param1)), owned: true)
 
 proc create*(T: type gen_qsocketnotifier_types.QSocketNotifier,
     socket: uint, param2: cint,
     vtbl: ref QSocketNotifierVTable = nil): gen_qsocketnotifier_types.QSocketNotifier =
   let vtbl = if vtbl == nil: new QSocketNotifierVTable else: vtbl
   GC_ref(vtbl)
-  vtbl.vtbl.destructor = proc(vtbl: ptr cQSocketNotifierVTable, _: ptr cQSocketNotifier) {.cdecl.} =
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQSocketNotifierVTable, _: ptr cQSocketNotifier) {.cdecl.} =
     let vtbl = cast[ref QSocketNotifierVTable](vtbl)
     GC_unref(vtbl)
-  if not isNil(vtbl.metaObject):
+  if not isNil(vtbl[].metaObject):
     vtbl[].vtbl.metaObject = miqt_exec_callback_cQSocketNotifier_metaObject
-  if not isNil(vtbl.metacast):
+  if not isNil(vtbl[].metacast):
     vtbl[].vtbl.metacast = miqt_exec_callback_cQSocketNotifier_metacast
-  if not isNil(vtbl.metacall):
+  if not isNil(vtbl[].metacall):
     vtbl[].vtbl.metacall = miqt_exec_callback_cQSocketNotifier_metacall
-  if not isNil(vtbl.event):
+  if not isNil(vtbl[].event):
     vtbl[].vtbl.event = miqt_exec_callback_cQSocketNotifier_event
-  if not isNil(vtbl.eventFilter):
+  if not isNil(vtbl[].eventFilter):
     vtbl[].vtbl.eventFilter = miqt_exec_callback_cQSocketNotifier_eventFilter
-  if not isNil(vtbl.timerEvent):
+  if not isNil(vtbl[].timerEvent):
     vtbl[].vtbl.timerEvent = miqt_exec_callback_cQSocketNotifier_timerEvent
-  if not isNil(vtbl.childEvent):
+  if not isNil(vtbl[].childEvent):
     vtbl[].vtbl.childEvent = miqt_exec_callback_cQSocketNotifier_childEvent
-  if not isNil(vtbl.customEvent):
+  if not isNil(vtbl[].customEvent):
     vtbl[].vtbl.customEvent = miqt_exec_callback_cQSocketNotifier_customEvent
-  if not isNil(vtbl.connectNotify):
+  if not isNil(vtbl[].connectNotify):
     vtbl[].vtbl.connectNotify = miqt_exec_callback_cQSocketNotifier_connectNotify
-  if not isNil(vtbl.disconnectNotify):
+  if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQSocketNotifier_disconnectNotify
-  gen_qsocketnotifier_types.QSocketNotifier(h: fcQSocketNotifier_new2(addr(vtbl[]), socket, cint(param2)))
+  gen_qsocketnotifier_types.QSocketNotifier(h: fcQSocketNotifier_new2(addr(vtbl[].vtbl), socket, cint(param2)), owned: true)
 
 proc create*(T: type gen_qsocketnotifier_types.QSocketNotifier,
     param1: cint, parent: gen_qobject_types.QObject,
     vtbl: ref QSocketNotifierVTable = nil): gen_qsocketnotifier_types.QSocketNotifier =
   let vtbl = if vtbl == nil: new QSocketNotifierVTable else: vtbl
   GC_ref(vtbl)
-  vtbl.vtbl.destructor = proc(vtbl: ptr cQSocketNotifierVTable, _: ptr cQSocketNotifier) {.cdecl.} =
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQSocketNotifierVTable, _: ptr cQSocketNotifier) {.cdecl.} =
     let vtbl = cast[ref QSocketNotifierVTable](vtbl)
     GC_unref(vtbl)
-  if not isNil(vtbl.metaObject):
+  if not isNil(vtbl[].metaObject):
     vtbl[].vtbl.metaObject = miqt_exec_callback_cQSocketNotifier_metaObject
-  if not isNil(vtbl.metacast):
+  if not isNil(vtbl[].metacast):
     vtbl[].vtbl.metacast = miqt_exec_callback_cQSocketNotifier_metacast
-  if not isNil(vtbl.metacall):
+  if not isNil(vtbl[].metacall):
     vtbl[].vtbl.metacall = miqt_exec_callback_cQSocketNotifier_metacall
-  if not isNil(vtbl.event):
+  if not isNil(vtbl[].event):
     vtbl[].vtbl.event = miqt_exec_callback_cQSocketNotifier_event
-  if not isNil(vtbl.eventFilter):
+  if not isNil(vtbl[].eventFilter):
     vtbl[].vtbl.eventFilter = miqt_exec_callback_cQSocketNotifier_eventFilter
-  if not isNil(vtbl.timerEvent):
+  if not isNil(vtbl[].timerEvent):
     vtbl[].vtbl.timerEvent = miqt_exec_callback_cQSocketNotifier_timerEvent
-  if not isNil(vtbl.childEvent):
+  if not isNil(vtbl[].childEvent):
     vtbl[].vtbl.childEvent = miqt_exec_callback_cQSocketNotifier_childEvent
-  if not isNil(vtbl.customEvent):
+  if not isNil(vtbl[].customEvent):
     vtbl[].vtbl.customEvent = miqt_exec_callback_cQSocketNotifier_customEvent
-  if not isNil(vtbl.connectNotify):
+  if not isNil(vtbl[].connectNotify):
     vtbl[].vtbl.connectNotify = miqt_exec_callback_cQSocketNotifier_connectNotify
-  if not isNil(vtbl.disconnectNotify):
+  if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQSocketNotifier_disconnectNotify
-  gen_qsocketnotifier_types.QSocketNotifier(h: fcQSocketNotifier_new3(addr(vtbl[]), cint(param1), parent.h))
+  gen_qsocketnotifier_types.QSocketNotifier(h: fcQSocketNotifier_new3(addr(vtbl[].vtbl), cint(param1), parent.h), owned: true)
 
 proc create*(T: type gen_qsocketnotifier_types.QSocketNotifier,
     socket: uint, param2: cint, parent: gen_qobject_types.QObject,
     vtbl: ref QSocketNotifierVTable = nil): gen_qsocketnotifier_types.QSocketNotifier =
   let vtbl = if vtbl == nil: new QSocketNotifierVTable else: vtbl
   GC_ref(vtbl)
-  vtbl.vtbl.destructor = proc(vtbl: ptr cQSocketNotifierVTable, _: ptr cQSocketNotifier) {.cdecl.} =
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQSocketNotifierVTable, _: ptr cQSocketNotifier) {.cdecl.} =
     let vtbl = cast[ref QSocketNotifierVTable](vtbl)
     GC_unref(vtbl)
-  if not isNil(vtbl.metaObject):
+  if not isNil(vtbl[].metaObject):
     vtbl[].vtbl.metaObject = miqt_exec_callback_cQSocketNotifier_metaObject
-  if not isNil(vtbl.metacast):
+  if not isNil(vtbl[].metacast):
     vtbl[].vtbl.metacast = miqt_exec_callback_cQSocketNotifier_metacast
-  if not isNil(vtbl.metacall):
+  if not isNil(vtbl[].metacall):
     vtbl[].vtbl.metacall = miqt_exec_callback_cQSocketNotifier_metacall
-  if not isNil(vtbl.event):
+  if not isNil(vtbl[].event):
     vtbl[].vtbl.event = miqt_exec_callback_cQSocketNotifier_event
-  if not isNil(vtbl.eventFilter):
+  if not isNil(vtbl[].eventFilter):
     vtbl[].vtbl.eventFilter = miqt_exec_callback_cQSocketNotifier_eventFilter
-  if not isNil(vtbl.timerEvent):
+  if not isNil(vtbl[].timerEvent):
     vtbl[].vtbl.timerEvent = miqt_exec_callback_cQSocketNotifier_timerEvent
-  if not isNil(vtbl.childEvent):
+  if not isNil(vtbl[].childEvent):
     vtbl[].vtbl.childEvent = miqt_exec_callback_cQSocketNotifier_childEvent
-  if not isNil(vtbl.customEvent):
+  if not isNil(vtbl[].customEvent):
     vtbl[].vtbl.customEvent = miqt_exec_callback_cQSocketNotifier_customEvent
-  if not isNil(vtbl.connectNotify):
+  if not isNil(vtbl[].connectNotify):
     vtbl[].vtbl.connectNotify = miqt_exec_callback_cQSocketNotifier_connectNotify
-  if not isNil(vtbl.disconnectNotify):
+  if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQSocketNotifier_disconnectNotify
-  gen_qsocketnotifier_types.QSocketNotifier(h: fcQSocketNotifier_new4(addr(vtbl[]), socket, cint(param2), parent.h))
+  gen_qsocketnotifier_types.QSocketNotifier(h: fcQSocketNotifier_new4(addr(vtbl[].vtbl), socket, cint(param2), parent.h), owned: true)
+
+proc create*(T: type gen_qsocketnotifier_types.QSocketNotifier,
+    param1: cint,
+    vtbl: VirtualQSocketNotifier) =
+
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQSocketNotifierVTable, _: ptr cQSocketNotifier) {.cdecl.} =
+    let vtbl = cast[ptr typeof(VirtualQSocketNotifier()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQSocketNotifier, vtbl)))
+    vtbl[].h = nil
+    vtbl[].owned = false
+  vtbl[].vtbl.metaObject = miqt_exec_method_cQSocketNotifier_metaObject
+  vtbl[].vtbl.metacast = miqt_exec_method_cQSocketNotifier_metacast
+  vtbl[].vtbl.metacall = miqt_exec_method_cQSocketNotifier_metacall
+  vtbl[].vtbl.event = miqt_exec_method_cQSocketNotifier_event
+  vtbl[].vtbl.eventFilter = miqt_exec_method_cQSocketNotifier_eventFilter
+  vtbl[].vtbl.timerEvent = miqt_exec_method_cQSocketNotifier_timerEvent
+  vtbl[].vtbl.childEvent = miqt_exec_method_cQSocketNotifier_childEvent
+  vtbl[].vtbl.customEvent = miqt_exec_method_cQSocketNotifier_customEvent
+  vtbl[].vtbl.connectNotify = miqt_exec_method_cQSocketNotifier_connectNotify
+  vtbl[].vtbl.disconnectNotify = miqt_exec_method_cQSocketNotifier_disconnectNotify
+  if vtbl[].h != nil: delete(move(vtbl[]))
+  vtbl[].h = fcQSocketNotifier_new(addr(vtbl[].vtbl), cint(param1))
+  vtbl[].owned = true
+
+proc create*(T: type gen_qsocketnotifier_types.QSocketNotifier,
+    socket: uint, param2: cint,
+    vtbl: VirtualQSocketNotifier) =
+
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQSocketNotifierVTable, _: ptr cQSocketNotifier) {.cdecl.} =
+    let vtbl = cast[ptr typeof(VirtualQSocketNotifier()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQSocketNotifier, vtbl)))
+    vtbl[].h = nil
+    vtbl[].owned = false
+  vtbl[].vtbl.metaObject = miqt_exec_method_cQSocketNotifier_metaObject
+  vtbl[].vtbl.metacast = miqt_exec_method_cQSocketNotifier_metacast
+  vtbl[].vtbl.metacall = miqt_exec_method_cQSocketNotifier_metacall
+  vtbl[].vtbl.event = miqt_exec_method_cQSocketNotifier_event
+  vtbl[].vtbl.eventFilter = miqt_exec_method_cQSocketNotifier_eventFilter
+  vtbl[].vtbl.timerEvent = miqt_exec_method_cQSocketNotifier_timerEvent
+  vtbl[].vtbl.childEvent = miqt_exec_method_cQSocketNotifier_childEvent
+  vtbl[].vtbl.customEvent = miqt_exec_method_cQSocketNotifier_customEvent
+  vtbl[].vtbl.connectNotify = miqt_exec_method_cQSocketNotifier_connectNotify
+  vtbl[].vtbl.disconnectNotify = miqt_exec_method_cQSocketNotifier_disconnectNotify
+  if vtbl[].h != nil: delete(move(vtbl[]))
+  vtbl[].h = fcQSocketNotifier_new2(addr(vtbl[].vtbl), socket, cint(param2))
+  vtbl[].owned = true
+
+proc create*(T: type gen_qsocketnotifier_types.QSocketNotifier,
+    param1: cint, parent: gen_qobject_types.QObject,
+    vtbl: VirtualQSocketNotifier) =
+
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQSocketNotifierVTable, _: ptr cQSocketNotifier) {.cdecl.} =
+    let vtbl = cast[ptr typeof(VirtualQSocketNotifier()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQSocketNotifier, vtbl)))
+    vtbl[].h = nil
+    vtbl[].owned = false
+  vtbl[].vtbl.metaObject = miqt_exec_method_cQSocketNotifier_metaObject
+  vtbl[].vtbl.metacast = miqt_exec_method_cQSocketNotifier_metacast
+  vtbl[].vtbl.metacall = miqt_exec_method_cQSocketNotifier_metacall
+  vtbl[].vtbl.event = miqt_exec_method_cQSocketNotifier_event
+  vtbl[].vtbl.eventFilter = miqt_exec_method_cQSocketNotifier_eventFilter
+  vtbl[].vtbl.timerEvent = miqt_exec_method_cQSocketNotifier_timerEvent
+  vtbl[].vtbl.childEvent = miqt_exec_method_cQSocketNotifier_childEvent
+  vtbl[].vtbl.customEvent = miqt_exec_method_cQSocketNotifier_customEvent
+  vtbl[].vtbl.connectNotify = miqt_exec_method_cQSocketNotifier_connectNotify
+  vtbl[].vtbl.disconnectNotify = miqt_exec_method_cQSocketNotifier_disconnectNotify
+  if vtbl[].h != nil: delete(move(vtbl[]))
+  vtbl[].h = fcQSocketNotifier_new3(addr(vtbl[].vtbl), cint(param1), parent.h)
+  vtbl[].owned = true
+
+proc create*(T: type gen_qsocketnotifier_types.QSocketNotifier,
+    socket: uint, param2: cint, parent: gen_qobject_types.QObject,
+    vtbl: VirtualQSocketNotifier) =
+
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQSocketNotifierVTable, _: ptr cQSocketNotifier) {.cdecl.} =
+    let vtbl = cast[ptr typeof(VirtualQSocketNotifier()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQSocketNotifier, vtbl)))
+    vtbl[].h = nil
+    vtbl[].owned = false
+  vtbl[].vtbl.metaObject = miqt_exec_method_cQSocketNotifier_metaObject
+  vtbl[].vtbl.metacast = miqt_exec_method_cQSocketNotifier_metacast
+  vtbl[].vtbl.metacall = miqt_exec_method_cQSocketNotifier_metacall
+  vtbl[].vtbl.event = miqt_exec_method_cQSocketNotifier_event
+  vtbl[].vtbl.eventFilter = miqt_exec_method_cQSocketNotifier_eventFilter
+  vtbl[].vtbl.timerEvent = miqt_exec_method_cQSocketNotifier_timerEvent
+  vtbl[].vtbl.childEvent = miqt_exec_method_cQSocketNotifier_childEvent
+  vtbl[].vtbl.customEvent = miqt_exec_method_cQSocketNotifier_customEvent
+  vtbl[].vtbl.connectNotify = miqt_exec_method_cQSocketNotifier_connectNotify
+  vtbl[].vtbl.disconnectNotify = miqt_exec_method_cQSocketNotifier_disconnectNotify
+  if vtbl[].h != nil: delete(move(vtbl[]))
+  vtbl[].h = fcQSocketNotifier_new4(addr(vtbl[].vtbl), socket, cint(param2), parent.h)
+  vtbl[].owned = true
 
 proc staticMetaObject*(_: type gen_qsocketnotifier_types.QSocketNotifier): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQSocketNotifier_staticMetaObject())
-proc delete*(self: gen_qsocketnotifier_types.QSocketNotifier) =
-  fcQSocketNotifier_delete(self.h)
 proc ToInt*(self: gen_qsocketnotifier_types.QSocketDescriptor, ): cint =
   fcQSocketDescriptor_ToInt(self.h)
 
@@ -415,15 +581,13 @@ proc isValid*(self: gen_qsocketnotifier_types.QSocketDescriptor, ): bool =
   fcQSocketDescriptor_isValid(self.h)
 
 proc create*(T: type gen_qsocketnotifier_types.QSocketDescriptor): gen_qsocketnotifier_types.QSocketDescriptor =
-  gen_qsocketnotifier_types.QSocketDescriptor(h: fcQSocketDescriptor_new())
+  gen_qsocketnotifier_types.QSocketDescriptor(h: fcQSocketDescriptor_new(), owned: true)
 
 proc create*(T: type gen_qsocketnotifier_types.QSocketDescriptor,
     param1: gen_qsocketnotifier_types.QSocketDescriptor): gen_qsocketnotifier_types.QSocketDescriptor =
-  gen_qsocketnotifier_types.QSocketDescriptor(h: fcQSocketDescriptor_new2(param1.h))
+  gen_qsocketnotifier_types.QSocketDescriptor(h: fcQSocketDescriptor_new2(param1.h), owned: true)
 
 proc create*(T: type gen_qsocketnotifier_types.QSocketDescriptor,
     descriptor: cint): gen_qsocketnotifier_types.QSocketDescriptor =
-  gen_qsocketnotifier_types.QSocketDescriptor(h: fcQSocketDescriptor_new3(descriptor))
+  gen_qsocketnotifier_types.QSocketDescriptor(h: fcQSocketDescriptor_new3(descriptor), owned: true)
 
-proc delete*(self: gen_qsocketnotifier_types.QSocketDescriptor) =
-  fcQSocketDescriptor_delete(self.h)

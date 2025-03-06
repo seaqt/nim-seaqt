@@ -30,9 +30,6 @@ func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
     else:
       copyMem(addr result[0], unsafeAddr v[0], v.len)
 
-const cflags = gorge("pkg-config --cflags Qt6Gui")  & " -fPIC"
-{.compile("gen_qaccessible_base.cpp", cflags).}
-
 
 type QAccessibleEventEnum* = distinct cint
 template SoundPlayed*(_: type QAccessibleEventEnum): untyped = 1
@@ -256,12 +253,9 @@ proc fcQAccessible_setRootObject(objectVal: pointer): void {.importc: "QAccessib
 proc fcQAccessible_cleanup(): void {.importc: "QAccessible_cleanup".}
 proc fcQAccessible_qAccessibleTextBoundaryHelper(cursor: pointer, boundaryType: cint): struct_miqt_map {.importc: "QAccessible_qAccessibleTextBoundaryHelper".}
 proc fcQAccessible_staticMetaObject(): pointer {.importc: "QAccessible_staticMetaObject".}
-proc fcQAccessible_delete(self: pointer) {.importc: "QAccessible_delete".}
 proc fcQAccessibleState_new(): ptr cQAccessibleState {.importc: "QAccessible__State_new".}
-proc fcQAccessibleState_delete(self: pointer) {.importc: "QAccessible__State_delete".}
 proc fcQAccessibleActivationObserver_accessibilityActiveChanged(self: pointer, active: bool): void {.importc: "QAccessible__ActivationObserver_accessibilityActiveChanged".}
 proc fcQAccessibleActivationObserver_operatorAssign(self: pointer, param1: pointer): void {.importc: "QAccessible__ActivationObserver_operatorAssign".}
-proc fcQAccessibleActivationObserver_delete(self: pointer) {.importc: "QAccessible__ActivationObserver_delete".}
 
 proc installActivationObserver*(_: type gen_qaccessible_base_types.QAccessible, param1: gen_qaccessible_base_types.QAccessibleActivationObserver): void =
   fcQAccessible_installActivationObserver(param1.h)
@@ -270,13 +264,13 @@ proc removeActivationObserver*(_: type gen_qaccessible_base_types.QAccessible, p
   fcQAccessible_removeActivationObserver(param1.h)
 
 proc queryAccessibleInterface*(_: type gen_qaccessible_base_types.QAccessible, param1: gen_qobject_types.QObject): gen_qaccessible_types.QAccessibleInterface =
-  gen_qaccessible_types.QAccessibleInterface(h: fcQAccessible_queryAccessibleInterface(param1.h))
+  gen_qaccessible_types.QAccessibleInterface(h: fcQAccessible_queryAccessibleInterface(param1.h), owned: false)
 
 proc uniqueId*(_: type gen_qaccessible_base_types.QAccessible, iface: gen_qaccessible_types.QAccessibleInterface): cuint =
   fcQAccessible_uniqueId(iface.h)
 
 proc accessibleInterface*(_: type gen_qaccessible_base_types.QAccessible, uniqueId: cuint): gen_qaccessible_types.QAccessibleInterface =
-  gen_qaccessible_types.QAccessibleInterface(h: fcQAccessible_accessibleInterface(uniqueId))
+  gen_qaccessible_types.QAccessibleInterface(h: fcQAccessible_accessibleInterface(uniqueId), owned: false)
 
 proc registerAccessibleInterface*(_: type gen_qaccessible_base_types.QAccessible, iface: gen_qaccessible_types.QAccessibleInterface): cuint =
   fcQAccessible_registerAccessibleInterface(iface.h)
@@ -313,18 +307,12 @@ proc qAccessibleTextBoundaryHelper*(_: type gen_qaccessible_base_types.QAccessib
 
 proc staticMetaObject*(_: type gen_qaccessible_base_types.QAccessible): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQAccessible_staticMetaObject())
-proc delete*(self: gen_qaccessible_base_types.QAccessible) =
-  fcQAccessible_delete(self.h)
 proc create*(T: type gen_qaccessible_base_types.QAccessibleState): gen_qaccessible_base_types.QAccessibleState =
-  gen_qaccessible_base_types.QAccessibleState(h: fcQAccessibleState_new())
+  gen_qaccessible_base_types.QAccessibleState(h: fcQAccessibleState_new(), owned: true)
 
-proc delete*(self: gen_qaccessible_base_types.QAccessibleState) =
-  fcQAccessibleState_delete(self.h)
 proc accessibilityActiveChanged*(self: gen_qaccessible_base_types.QAccessibleActivationObserver, active: bool): void =
   fcQAccessibleActivationObserver_accessibilityActiveChanged(self.h, active)
 
 proc operatorAssign*(self: gen_qaccessible_base_types.QAccessibleActivationObserver, param1: gen_qaccessible_base_types.QAccessibleActivationObserver): void =
   fcQAccessibleActivationObserver_operatorAssign(self.h, param1.h)
 
-proc delete*(self: gen_qaccessible_base_types.QAccessibleActivationObserver) =
-  fcQAccessibleActivationObserver_delete(self.h)

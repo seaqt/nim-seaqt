@@ -30,7 +30,7 @@ func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
     else:
       copyMem(addr result[0], unsafeAddr v[0], v.len)
 
-const cflags = gorge("pkg-config --cflags Qt6WebEngineCore")  & " -fPIC"
+const cflags = gorge("pkg-config --cflags Qt6WebEngineCore") & " -fPIC"
 {.compile("gen_qwebenginenavigationrequest.cpp", cflags).}
 
 
@@ -83,10 +83,9 @@ proc fcQWebEngineNavigationRequest_protectedbase_senderSignalIndex(self: pointer
 proc fcQWebEngineNavigationRequest_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QWebEngineNavigationRequest_protectedbase_receivers".}
 proc fcQWebEngineNavigationRequest_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QWebEngineNavigationRequest_protectedbase_isSignalConnected".}
 proc fcQWebEngineNavigationRequest_staticMetaObject(): pointer {.importc: "QWebEngineNavigationRequest_staticMetaObject".}
-proc fcQWebEngineNavigationRequest_delete(self: pointer) {.importc: "QWebEngineNavigationRequest_delete".}
 
 proc metaObject*(self: gen_qwebenginenavigationrequest_types.QWebEngineNavigationRequest, ): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQWebEngineNavigationRequest_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQWebEngineNavigationRequest_metaObject(self.h), owned: false)
 
 proc metacast*(self: gen_qwebenginenavigationrequest_types.QWebEngineNavigationRequest, param1: cstring): pointer =
   fcQWebEngineNavigationRequest_metacast(self.h, param1)
@@ -101,7 +100,7 @@ proc tr*(_: type gen_qwebenginenavigationrequest_types.QWebEngineNavigationReque
   vx_ret
 
 proc url*(self: gen_qwebenginenavigationrequest_types.QWebEngineNavigationRequest, ): gen_qurl_types.QUrl =
-  gen_qurl_types.QUrl(h: fcQWebEngineNavigationRequest_url(self.h))
+  gen_qurl_types.QUrl(h: fcQWebEngineNavigationRequest_url(self.h), owned: true)
 
 proc isMainFrame*(self: gen_qwebenginenavigationrequest_types.QWebEngineNavigationRequest, ): bool =
   fcQWebEngineNavigationRequest_isMainFrame(self.h)
@@ -146,7 +145,7 @@ proc tr*(_: type gen_qwebenginenavigationrequest_types.QWebEngineNavigationReque
   vx_ret
 
 proc sender*(self: gen_qwebenginenavigationrequest_types.QWebEngineNavigationRequest, ): gen_qobject_types.QObject =
-  gen_qobject_types.QObject(h: fcQWebEngineNavigationRequest_protectedbase_sender(self.h))
+  gen_qobject_types.QObject(h: fcQWebEngineNavigationRequest_protectedbase_sender(self.h), owned: false)
 
 proc senderSignalIndex*(self: gen_qwebenginenavigationrequest_types.QWebEngineNavigationRequest, ): cint =
   fcQWebEngineNavigationRequest_protectedbase_senderSignalIndex(self.h)
@@ -159,5 +158,3 @@ proc isSignalConnected*(self: gen_qwebenginenavigationrequest_types.QWebEngineNa
 
 proc staticMetaObject*(_: type gen_qwebenginenavigationrequest_types.QWebEngineNavigationRequest): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQWebEngineNavigationRequest_staticMetaObject())
-proc delete*(self: gen_qwebenginenavigationrequest_types.QWebEngineNavigationRequest) =
-  fcQWebEngineNavigationRequest_delete(self.h)

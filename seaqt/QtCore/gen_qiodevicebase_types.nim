@@ -1,2 +1,4 @@
-type QIODeviceBase* {.inheritable, pure.} = object
+type QIODeviceBase* {.inheritable.} = object
   h*: pointer
+  owned*: bool
+

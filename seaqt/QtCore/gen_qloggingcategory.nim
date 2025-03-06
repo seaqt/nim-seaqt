@@ -30,9 +30,6 @@ func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
     else:
       copyMem(addr result[0], unsafeAddr v[0], v.len)
 
-const cflags = gorge("pkg-config --cflags Qt6Core")  & " -fPIC"
-{.compile("gen_qloggingcategory.cpp", cflags).}
-
 
 import ./gen_qloggingcategory_types
 export gen_qloggingcategory_types
@@ -50,7 +47,6 @@ proc fcQLoggingCategory_operatorCall2(self: pointer, ): pointer {.importc: "QLog
 proc fcQLoggingCategory_defaultCategory(): pointer {.importc: "QLoggingCategory_defaultCategory".}
 proc fcQLoggingCategory_setFilterRules(rules: struct_miqt_string): void {.importc: "QLoggingCategory_setFilterRules".}
 proc fcQLoggingCategory_new(category: cstring): ptr cQLoggingCategory {.importc: "QLoggingCategory_new".}
-proc fcQLoggingCategory_delete(self: pointer) {.importc: "QLoggingCategory_delete".}
 
 proc isDebugEnabled*(self: gen_qloggingcategory_types.QLoggingCategory, ): bool =
   fcQLoggingCategory_isDebugEnabled(self.h)
@@ -68,20 +64,18 @@ proc categoryName*(self: gen_qloggingcategory_types.QLoggingCategory, ): cstring
   (fcQLoggingCategory_categoryName(self.h))
 
 proc operatorCall*(self: gen_qloggingcategory_types.QLoggingCategory, ): gen_qloggingcategory_types.QLoggingCategory =
-  gen_qloggingcategory_types.QLoggingCategory(h: fcQLoggingCategory_operatorCall(self.h))
+  gen_qloggingcategory_types.QLoggingCategory(h: fcQLoggingCategory_operatorCall(self.h), owned: false)
 
 proc operatorCall2*(self: gen_qloggingcategory_types.QLoggingCategory, ): gen_qloggingcategory_types.QLoggingCategory =
-  gen_qloggingcategory_types.QLoggingCategory(h: fcQLoggingCategory_operatorCall2(self.h))
+  gen_qloggingcategory_types.QLoggingCategory(h: fcQLoggingCategory_operatorCall2(self.h), owned: false)
 
 proc defaultCategory*(_: type gen_qloggingcategory_types.QLoggingCategory, ): gen_qloggingcategory_types.QLoggingCategory =
-  gen_qloggingcategory_types.QLoggingCategory(h: fcQLoggingCategory_defaultCategory())
+  gen_qloggingcategory_types.QLoggingCategory(h: fcQLoggingCategory_defaultCategory(), owned: false)
 
 proc setFilterRules*(_: type gen_qloggingcategory_types.QLoggingCategory, rules: string): void =
   fcQLoggingCategory_setFilterRules(struct_miqt_string(data: rules, len: csize_t(len(rules))))
 
 proc create*(T: type gen_qloggingcategory_types.QLoggingCategory,
     category: cstring): gen_qloggingcategory_types.QLoggingCategory =
-  gen_qloggingcategory_types.QLoggingCategory(h: fcQLoggingCategory_new(category))
+  gen_qloggingcategory_types.QLoggingCategory(h: fcQLoggingCategory_new(category), owned: true)
 
-proc delete*(self: gen_qloggingcategory_types.QLoggingCategory) =
-  fcQLoggingCategory_delete(self.h)

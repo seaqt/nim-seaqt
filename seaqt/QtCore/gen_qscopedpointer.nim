@@ -30,9 +30,6 @@ func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
     else:
       copyMem(addr result[0], unsafeAddr v[0], v.len)
 
-const cflags = gorge("pkg-config --cflags Qt6Core")  & " -fPIC"
-{.compile("gen_qscopedpointer.cpp", cflags).}
-
 
 import ./gen_qscopedpointer_types
 export gen_qscopedpointer_types
@@ -42,7 +39,6 @@ type cQScopedPointerPodDeleter*{.exportc: "QScopedPointerPodDeleter", incomplete
 
 proc fcQScopedPointerPodDeleter_cleanup(pointer: pointer): void {.importc: "QScopedPointerPodDeleter_cleanup".}
 proc fcQScopedPointerPodDeleter_operatorCall(self: pointer, pointer: pointer): void {.importc: "QScopedPointerPodDeleter_operatorCall".}
-proc fcQScopedPointerPodDeleter_delete(self: pointer) {.importc: "QScopedPointerPodDeleter_delete".}
 
 proc cleanup*(_: type gen_qscopedpointer_types.QScopedPointerPodDeleter, pointer: pointer): void =
   fcQScopedPointerPodDeleter_cleanup(pointer)
@@ -50,5 +46,3 @@ proc cleanup*(_: type gen_qscopedpointer_types.QScopedPointerPodDeleter, pointer
 proc operatorCall*(self: gen_qscopedpointer_types.QScopedPointerPodDeleter, pointer: pointer): void =
   fcQScopedPointerPodDeleter_operatorCall(self.h, pointer)
 
-proc delete*(self: gen_qscopedpointer_types.QScopedPointerPodDeleter) =
-  fcQScopedPointerPodDeleter_delete(self.h)

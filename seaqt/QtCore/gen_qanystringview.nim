@@ -30,9 +30,6 @@ func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
     else:
       copyMem(addr result[0], unsafeAddr v[0], v.len)
 
-const cflags = gorge("pkg-config --cflags Qt6Core")  & " -fPIC"
-{.compile("gen_qanystringview.cpp", cflags).}
-
 
 import ./gen_qanystringview_types
 export gen_qanystringview_types
@@ -62,7 +59,6 @@ proc fcQAnyStringView_new2(str: struct_miqt_string): ptr cQAnyStringView {.impor
 proc fcQAnyStringView_new3(str: struct_miqt_string): ptr cQAnyStringView {.importc: "QAnyStringView_new3".}
 proc fcQAnyStringView_new4(c: pointer): ptr cQAnyStringView {.importc: "QAnyStringView_new4".}
 proc fcQAnyStringView_new5(param1: pointer): ptr cQAnyStringView {.importc: "QAnyStringView_new5".}
-proc fcQAnyStringView_delete(self: pointer) {.importc: "QAnyStringView_delete".}
 
 proc toString*(self: gen_qanystringview_types.QAnyStringView, ): string =
   let v_ms = fcQAnyStringView_toString(self.h)
@@ -83,10 +79,10 @@ proc equal*(_: type gen_qanystringview_types.QAnyStringView, lhs: gen_qanystring
   fcQAnyStringView_equal(lhs.h, rhs.h)
 
 proc front*(self: gen_qanystringview_types.QAnyStringView, ): gen_qchar_types.QChar =
-  gen_qchar_types.QChar(h: fcQAnyStringView_front(self.h))
+  gen_qchar_types.QChar(h: fcQAnyStringView_front(self.h), owned: true)
 
 proc back*(self: gen_qanystringview_types.QAnyStringView, ): gen_qchar_types.QChar =
-  gen_qchar_types.QChar(h: fcQAnyStringView_back(self.h))
+  gen_qchar_types.QChar(h: fcQAnyStringView_back(self.h), owned: true)
 
 proc empty*(self: gen_qanystringview_types.QAnyStringView, ): bool =
   fcQAnyStringView_empty(self.h)
@@ -107,23 +103,21 @@ proc compare*(_: type gen_qanystringview_types.QAnyStringView, lhs: gen_qanystri
   fcQAnyStringView_compare3(lhs.h, rhs.h, cint(cs))
 
 proc create*(T: type gen_qanystringview_types.QAnyStringView): gen_qanystringview_types.QAnyStringView =
-  gen_qanystringview_types.QAnyStringView(h: fcQAnyStringView_new())
+  gen_qanystringview_types.QAnyStringView(h: fcQAnyStringView_new(), owned: true)
 
 proc create*(T: type gen_qanystringview_types.QAnyStringView,
     str: seq[byte]): gen_qanystringview_types.QAnyStringView =
-  gen_qanystringview_types.QAnyStringView(h: fcQAnyStringView_new2(struct_miqt_string(data: cast[cstring](if len(str) == 0: nil else: unsafeAddr str[0]), len: csize_t(len(str)))))
+  gen_qanystringview_types.QAnyStringView(h: fcQAnyStringView_new2(struct_miqt_string(data: cast[cstring](if len(str) == 0: nil else: unsafeAddr str[0]), len: csize_t(len(str)))), owned: true)
 
 proc create*(T: type gen_qanystringview_types.QAnyStringView,
     str: string): gen_qanystringview_types.QAnyStringView =
-  gen_qanystringview_types.QAnyStringView(h: fcQAnyStringView_new3(struct_miqt_string(data: str, len: csize_t(len(str)))))
+  gen_qanystringview_types.QAnyStringView(h: fcQAnyStringView_new3(struct_miqt_string(data: str, len: csize_t(len(str)))), owned: true)
 
 proc create*(T: type gen_qanystringview_types.QAnyStringView,
     c: gen_qchar_types.QChar): gen_qanystringview_types.QAnyStringView =
-  gen_qanystringview_types.QAnyStringView(h: fcQAnyStringView_new4(c.h))
+  gen_qanystringview_types.QAnyStringView(h: fcQAnyStringView_new4(c.h), owned: true)
 
 proc create*(T: type gen_qanystringview_types.QAnyStringView,
     param1: gen_qanystringview_types.QAnyStringView): gen_qanystringview_types.QAnyStringView =
-  gen_qanystringview_types.QAnyStringView(h: fcQAnyStringView_new5(param1.h))
+  gen_qanystringview_types.QAnyStringView(h: fcQAnyStringView_new5(param1.h), owned: true)
 
-proc delete*(self: gen_qanystringview_types.QAnyStringView) =
-  fcQAnyStringView_delete(self.h)

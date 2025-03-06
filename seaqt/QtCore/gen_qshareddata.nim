@@ -30,9 +30,6 @@ func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
     else:
       copyMem(addr result[0], unsafeAddr v[0], v.len)
 
-const cflags = gorge("pkg-config --cflags Qt6Core")  & " -fPIC"
-{.compile("gen_qshareddata.cpp", cflags).}
-
 
 import ./gen_qshareddata_types
 export gen_qshareddata_types
@@ -43,21 +40,15 @@ type cQAdoptSharedDataTag*{.exportc: "QAdoptSharedDataTag", incompleteStruct.} =
 
 proc fcQSharedData_new(): ptr cQSharedData {.importc: "QSharedData_new".}
 proc fcQSharedData_new2(param1: pointer): ptr cQSharedData {.importc: "QSharedData_new2".}
-proc fcQSharedData_delete(self: pointer) {.importc: "QSharedData_delete".}
 proc fcQAdoptSharedDataTag_new(): ptr cQAdoptSharedDataTag {.importc: "QAdoptSharedDataTag_new".}
-proc fcQAdoptSharedDataTag_delete(self: pointer) {.importc: "QAdoptSharedDataTag_delete".}
 
 proc create*(T: type gen_qshareddata_types.QSharedData): gen_qshareddata_types.QSharedData =
-  gen_qshareddata_types.QSharedData(h: fcQSharedData_new())
+  gen_qshareddata_types.QSharedData(h: fcQSharedData_new(), owned: true)
 
 proc create*(T: type gen_qshareddata_types.QSharedData,
     param1: gen_qshareddata_types.QSharedData): gen_qshareddata_types.QSharedData =
-  gen_qshareddata_types.QSharedData(h: fcQSharedData_new2(param1.h))
+  gen_qshareddata_types.QSharedData(h: fcQSharedData_new2(param1.h), owned: true)
 
-proc delete*(self: gen_qshareddata_types.QSharedData) =
-  fcQSharedData_delete(self.h)
 proc create*(T: type gen_qshareddata_types.QAdoptSharedDataTag): gen_qshareddata_types.QAdoptSharedDataTag =
-  gen_qshareddata_types.QAdoptSharedDataTag(h: fcQAdoptSharedDataTag_new())
+  gen_qshareddata_types.QAdoptSharedDataTag(h: fcQAdoptSharedDataTag_new(), owned: true)
 
-proc delete*(self: gen_qshareddata_types.QAdoptSharedDataTag) =
-  fcQAdoptSharedDataTag_delete(self.h)

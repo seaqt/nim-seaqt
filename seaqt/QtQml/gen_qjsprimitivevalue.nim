@@ -30,9 +30,6 @@ func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
     else:
       copyMem(addr result[0], unsafeAddr v[0], v.len)
 
-const cflags = gorge("pkg-config --cflags Qt6Qml")  & " -fPIC"
-{.compile("gen_qjsprimitivevalue.cpp", cflags).}
-
 
 type QJSPrimitiveValueTypeEnum* = distinct uint8
 template Undefined*(_: type QJSPrimitiveValueTypeEnum): untyped = 0
@@ -59,10 +56,8 @@ type cQJSPrimitiveValue*{.exportc: "QJSPrimitiveValue", incompleteStruct.} = obj
 
 proc fcQJSPrimitiveUndefined_new(): ptr cQJSPrimitiveUndefined {.importc: "QJSPrimitiveUndefined_new".}
 proc fcQJSPrimitiveUndefined_new2(param1: pointer): ptr cQJSPrimitiveUndefined {.importc: "QJSPrimitiveUndefined_new2".}
-proc fcQJSPrimitiveUndefined_delete(self: pointer) {.importc: "QJSPrimitiveUndefined_delete".}
 proc fcQJSPrimitiveNull_new(): ptr cQJSPrimitiveNull {.importc: "QJSPrimitiveNull_new".}
 proc fcQJSPrimitiveNull_new2(param1: pointer): ptr cQJSPrimitiveNull {.importc: "QJSPrimitiveNull_new2".}
-proc fcQJSPrimitiveNull_delete(self: pointer) {.importc: "QJSPrimitiveNull_delete".}
 proc fcQJSPrimitiveValue_typeX(self: pointer, ): cint {.importc: "QJSPrimitiveValue_type".}
 proc fcQJSPrimitiveValue_toBoolean(self: pointer, ): bool {.importc: "QJSPrimitiveValue_toBoolean".}
 proc fcQJSPrimitiveValue_toInteger(self: pointer, ): cint {.importc: "QJSPrimitiveValue_toInteger".}
@@ -87,26 +82,21 @@ proc fcQJSPrimitiveValue_new7(string: struct_miqt_string): ptr cQJSPrimitiveValu
 proc fcQJSPrimitiveValue_new8(typeVal: pointer, value: pointer): ptr cQJSPrimitiveValue {.importc: "QJSPrimitiveValue_new8".}
 proc fcQJSPrimitiveValue_new9(variant: pointer): ptr cQJSPrimitiveValue {.importc: "QJSPrimitiveValue_new9".}
 proc fcQJSPrimitiveValue_new10(param1: pointer): ptr cQJSPrimitiveValue {.importc: "QJSPrimitiveValue_new10".}
-proc fcQJSPrimitiveValue_delete(self: pointer) {.importc: "QJSPrimitiveValue_delete".}
 
 proc create*(T: type gen_qjsprimitivevalue_types.QJSPrimitiveUndefined): gen_qjsprimitivevalue_types.QJSPrimitiveUndefined =
-  gen_qjsprimitivevalue_types.QJSPrimitiveUndefined(h: fcQJSPrimitiveUndefined_new())
+  gen_qjsprimitivevalue_types.QJSPrimitiveUndefined(h: fcQJSPrimitiveUndefined_new(), owned: true)
 
 proc create*(T: type gen_qjsprimitivevalue_types.QJSPrimitiveUndefined,
     param1: gen_qjsprimitivevalue_types.QJSPrimitiveUndefined): gen_qjsprimitivevalue_types.QJSPrimitiveUndefined =
-  gen_qjsprimitivevalue_types.QJSPrimitiveUndefined(h: fcQJSPrimitiveUndefined_new2(param1.h))
+  gen_qjsprimitivevalue_types.QJSPrimitiveUndefined(h: fcQJSPrimitiveUndefined_new2(param1.h), owned: true)
 
-proc delete*(self: gen_qjsprimitivevalue_types.QJSPrimitiveUndefined) =
-  fcQJSPrimitiveUndefined_delete(self.h)
 proc create*(T: type gen_qjsprimitivevalue_types.QJSPrimitiveNull): gen_qjsprimitivevalue_types.QJSPrimitiveNull =
-  gen_qjsprimitivevalue_types.QJSPrimitiveNull(h: fcQJSPrimitiveNull_new())
+  gen_qjsprimitivevalue_types.QJSPrimitiveNull(h: fcQJSPrimitiveNull_new(), owned: true)
 
 proc create*(T: type gen_qjsprimitivevalue_types.QJSPrimitiveNull,
     param1: gen_qjsprimitivevalue_types.QJSPrimitiveNull): gen_qjsprimitivevalue_types.QJSPrimitiveNull =
-  gen_qjsprimitivevalue_types.QJSPrimitiveNull(h: fcQJSPrimitiveNull_new2(param1.h))
+  gen_qjsprimitivevalue_types.QJSPrimitiveNull(h: fcQJSPrimitiveNull_new2(param1.h), owned: true)
 
-proc delete*(self: gen_qjsprimitivevalue_types.QJSPrimitiveNull) =
-  fcQJSPrimitiveNull_delete(self.h)
 proc typeX*(self: gen_qjsprimitivevalue_types.QJSPrimitiveValue, ): cint =
   cint(fcQJSPrimitiveValue_typeX(self.h))
 
@@ -126,25 +116,25 @@ proc toString*(self: gen_qjsprimitivevalue_types.QJSPrimitiveValue, ): string =
   vx_ret
 
 proc toVariant*(self: gen_qjsprimitivevalue_types.QJSPrimitiveValue, ): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQJSPrimitiveValue_toVariant(self.h))
+  gen_qvariant_types.QVariant(h: fcQJSPrimitiveValue_toVariant(self.h), owned: true)
 
 proc operatorPlusPlus*(self: gen_qjsprimitivevalue_types.QJSPrimitiveValue, ): gen_qjsprimitivevalue_types.QJSPrimitiveValue =
-  gen_qjsprimitivevalue_types.QJSPrimitiveValue(h: fcQJSPrimitiveValue_operatorPlusPlus(self.h))
+  gen_qjsprimitivevalue_types.QJSPrimitiveValue(h: fcQJSPrimitiveValue_operatorPlusPlus(self.h), owned: false)
 
 proc operatorPlusPlus*(self: gen_qjsprimitivevalue_types.QJSPrimitiveValue, param1: cint): gen_qjsprimitivevalue_types.QJSPrimitiveValue =
-  gen_qjsprimitivevalue_types.QJSPrimitiveValue(h: fcQJSPrimitiveValue_operatorPlusPlusWithInt(self.h, param1))
+  gen_qjsprimitivevalue_types.QJSPrimitiveValue(h: fcQJSPrimitiveValue_operatorPlusPlusWithInt(self.h, param1), owned: true)
 
 proc operatorMinusMinus*(self: gen_qjsprimitivevalue_types.QJSPrimitiveValue, ): gen_qjsprimitivevalue_types.QJSPrimitiveValue =
-  gen_qjsprimitivevalue_types.QJSPrimitiveValue(h: fcQJSPrimitiveValue_operatorMinusMinus(self.h))
+  gen_qjsprimitivevalue_types.QJSPrimitiveValue(h: fcQJSPrimitiveValue_operatorMinusMinus(self.h), owned: false)
 
 proc operatorMinusMinus*(self: gen_qjsprimitivevalue_types.QJSPrimitiveValue, param1: cint): gen_qjsprimitivevalue_types.QJSPrimitiveValue =
-  gen_qjsprimitivevalue_types.QJSPrimitiveValue(h: fcQJSPrimitiveValue_operatorMinusMinusWithInt(self.h, param1))
+  gen_qjsprimitivevalue_types.QJSPrimitiveValue(h: fcQJSPrimitiveValue_operatorMinusMinusWithInt(self.h, param1), owned: true)
 
 proc operatorPlus*(self: gen_qjsprimitivevalue_types.QJSPrimitiveValue, ): gen_qjsprimitivevalue_types.QJSPrimitiveValue =
-  gen_qjsprimitivevalue_types.QJSPrimitiveValue(h: fcQJSPrimitiveValue_operatorPlus(self.h))
+  gen_qjsprimitivevalue_types.QJSPrimitiveValue(h: fcQJSPrimitiveValue_operatorPlus(self.h), owned: true)
 
 proc operatorMinus*(self: gen_qjsprimitivevalue_types.QJSPrimitiveValue, ): gen_qjsprimitivevalue_types.QJSPrimitiveValue =
-  gen_qjsprimitivevalue_types.QJSPrimitiveValue(h: fcQJSPrimitiveValue_operatorMinus(self.h))
+  gen_qjsprimitivevalue_types.QJSPrimitiveValue(h: fcQJSPrimitiveValue_operatorMinus(self.h), owned: true)
 
 proc strictlyEquals*(self: gen_qjsprimitivevalue_types.QJSPrimitiveValue, other: gen_qjsprimitivevalue_types.QJSPrimitiveValue): bool =
   fcQJSPrimitiveValue_strictlyEquals(self.h, other.h)
@@ -153,43 +143,41 @@ proc equals*(self: gen_qjsprimitivevalue_types.QJSPrimitiveValue, other: gen_qjs
   fcQJSPrimitiveValue_equals(self.h, other.h)
 
 proc create*(T: type gen_qjsprimitivevalue_types.QJSPrimitiveValue): gen_qjsprimitivevalue_types.QJSPrimitiveValue =
-  gen_qjsprimitivevalue_types.QJSPrimitiveValue(h: fcQJSPrimitiveValue_new())
+  gen_qjsprimitivevalue_types.QJSPrimitiveValue(h: fcQJSPrimitiveValue_new(), owned: true)
 
 proc create*(T: type gen_qjsprimitivevalue_types.QJSPrimitiveValue,
     undefined: gen_qjsprimitivevalue_types.QJSPrimitiveUndefined): gen_qjsprimitivevalue_types.QJSPrimitiveValue =
-  gen_qjsprimitivevalue_types.QJSPrimitiveValue(h: fcQJSPrimitiveValue_new2(undefined.h))
+  gen_qjsprimitivevalue_types.QJSPrimitiveValue(h: fcQJSPrimitiveValue_new2(undefined.h), owned: true)
 
 proc create*(T: type gen_qjsprimitivevalue_types.QJSPrimitiveValue,
     null: gen_qjsprimitivevalue_types.QJSPrimitiveNull): gen_qjsprimitivevalue_types.QJSPrimitiveValue =
-  gen_qjsprimitivevalue_types.QJSPrimitiveValue(h: fcQJSPrimitiveValue_new3(null.h))
+  gen_qjsprimitivevalue_types.QJSPrimitiveValue(h: fcQJSPrimitiveValue_new3(null.h), owned: true)
 
 proc create*(T: type gen_qjsprimitivevalue_types.QJSPrimitiveValue,
     value: bool): gen_qjsprimitivevalue_types.QJSPrimitiveValue =
-  gen_qjsprimitivevalue_types.QJSPrimitiveValue(h: fcQJSPrimitiveValue_new4(value))
+  gen_qjsprimitivevalue_types.QJSPrimitiveValue(h: fcQJSPrimitiveValue_new4(value), owned: true)
 
 proc create*(T: type gen_qjsprimitivevalue_types.QJSPrimitiveValue,
     value: cint): gen_qjsprimitivevalue_types.QJSPrimitiveValue =
-  gen_qjsprimitivevalue_types.QJSPrimitiveValue(h: fcQJSPrimitiveValue_new5(value))
+  gen_qjsprimitivevalue_types.QJSPrimitiveValue(h: fcQJSPrimitiveValue_new5(value), owned: true)
 
 proc create*(T: type gen_qjsprimitivevalue_types.QJSPrimitiveValue,
     value: float64): gen_qjsprimitivevalue_types.QJSPrimitiveValue =
-  gen_qjsprimitivevalue_types.QJSPrimitiveValue(h: fcQJSPrimitiveValue_new6(value))
+  gen_qjsprimitivevalue_types.QJSPrimitiveValue(h: fcQJSPrimitiveValue_new6(value), owned: true)
 
 proc create*(T: type gen_qjsprimitivevalue_types.QJSPrimitiveValue,
     string: string): gen_qjsprimitivevalue_types.QJSPrimitiveValue =
-  gen_qjsprimitivevalue_types.QJSPrimitiveValue(h: fcQJSPrimitiveValue_new7(struct_miqt_string(data: string, len: csize_t(len(string)))))
+  gen_qjsprimitivevalue_types.QJSPrimitiveValue(h: fcQJSPrimitiveValue_new7(struct_miqt_string(data: string, len: csize_t(len(string)))), owned: true)
 
 proc create*(T: type gen_qjsprimitivevalue_types.QJSPrimitiveValue,
     typeVal: gen_qmetatype_types.QMetaType, value: pointer): gen_qjsprimitivevalue_types.QJSPrimitiveValue =
-  gen_qjsprimitivevalue_types.QJSPrimitiveValue(h: fcQJSPrimitiveValue_new8(typeVal.h, value))
+  gen_qjsprimitivevalue_types.QJSPrimitiveValue(h: fcQJSPrimitiveValue_new8(typeVal.h, value), owned: true)
 
 proc create*(T: type gen_qjsprimitivevalue_types.QJSPrimitiveValue,
     variant: gen_qvariant_types.QVariant): gen_qjsprimitivevalue_types.QJSPrimitiveValue =
-  gen_qjsprimitivevalue_types.QJSPrimitiveValue(h: fcQJSPrimitiveValue_new9(variant.h))
+  gen_qjsprimitivevalue_types.QJSPrimitiveValue(h: fcQJSPrimitiveValue_new9(variant.h), owned: true)
 
 proc create*(T: type gen_qjsprimitivevalue_types.QJSPrimitiveValue,
     param1: gen_qjsprimitivevalue_types.QJSPrimitiveValue): gen_qjsprimitivevalue_types.QJSPrimitiveValue =
-  gen_qjsprimitivevalue_types.QJSPrimitiveValue(h: fcQJSPrimitiveValue_new10(param1.h))
+  gen_qjsprimitivevalue_types.QJSPrimitiveValue(h: fcQJSPrimitiveValue_new10(param1.h), owned: true)
 
-proc delete*(self: gen_qjsprimitivevalue_types.QJSPrimitiveValue) =
-  fcQJSPrimitiveValue_delete(self.h)

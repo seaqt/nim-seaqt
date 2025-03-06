@@ -1,5 +1,26 @@
-type QWidgetData* {.inheritable, pure.} = object
+type QWidgetData* {.inheritable.} = object
   h*: pointer
+  owned*: bool
+
+const cflags = gorge("pkg-config --cflags Qt6Widgets") & " -fPIC"
+{.compile("gen_qwidget.cpp", cflags).}
+
+proc fcQWidgetData_delete(self: pointer) {.importc: "QWidgetData_delete".}
+proc `=destroy`(self: var QWidgetData) =
+  if self.owned: fcQWidgetData_delete(self.h)
+
+proc `=sink`(dest: var QWidgetData, source: QWidgetData) =
+  `=destroy`(dest)
+  wasMoved(dest)
+  dest.h = source.h
+  dest.owned = source.owned
+
+proc `=copy`(dest: var QWidgetData, source: QWidgetData) {.error.}
+proc delete*(self: sink QWidgetData) =
+  let h = self.h
+  wasMoved(self)
+  fcQWidgetData_delete(h)
+
 import ../QtCore/gen_qobject_types
 export gen_qobject_types
 

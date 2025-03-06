@@ -30,7 +30,7 @@ func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
     else:
       copyMem(addr result[0], unsafeAddr v[0], v.len)
 
-const cflags = gorge("pkg-config --cflags Qt6Widgets")  & " -fPIC"
+const cflags = gorge("pkg-config --cflags Qt6Widgets") & " -fPIC"
 {.compile("gen_qscroller.cpp", cflags).}
 
 
@@ -118,7 +118,7 @@ proc fcQScroller_protectedbase_isSignalConnected(self: pointer, signal: pointer)
 proc fcQScroller_staticMetaObject(): pointer {.importc: "QScroller_staticMetaObject".}
 
 proc metaObject*(self: gen_qscroller_types.QScroller, ): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQScroller_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQScroller_metaObject(self.h), owned: false)
 
 proc metacast*(self: gen_qscroller_types.QScroller, param1: cstring): pointer =
   fcQScroller_metacast(self.h, param1)
@@ -136,10 +136,10 @@ proc hasScroller*(_: type gen_qscroller_types.QScroller, target: gen_qobject_typ
   fcQScroller_hasScroller(target.h)
 
 proc scroller*(_: type gen_qscroller_types.QScroller, target: gen_qobject_types.QObject): gen_qscroller_types.QScroller =
-  gen_qscroller_types.QScroller(h: fcQScroller_scroller(target.h))
+  gen_qscroller_types.QScroller(h: fcQScroller_scroller(target.h), owned: false)
 
 proc scroller2*(_: type gen_qscroller_types.QScroller, target: gen_qobject_types.QObject): gen_qscroller_types.QScroller =
-  gen_qscroller_types.QScroller(h: fcQScroller_scrollerWithTarget(target.h))
+  gen_qscroller_types.QScroller(h: fcQScroller_scrollerWithTarget(target.h), owned: false)
 
 proc grabGesture*(_: type gen_qscroller_types.QScroller, target: gen_qobject_types.QObject): cint =
   cint(fcQScroller_grabGesture(target.h))
@@ -155,12 +155,12 @@ proc activeScrollers*(_: type gen_qscroller_types.QScroller, ): seq[gen_qscrolle
   var vx_ret = newSeq[gen_qscroller_types.QScroller](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
-    vx_ret[i] = gen_qscroller_types.QScroller(h: v_outCast[i])
+    vx_ret[i] = gen_qscroller_types.QScroller(h: v_outCast[i], owned: false)
   c_free(v_ma.data)
   vx_ret
 
 proc target*(self: gen_qscroller_types.QScroller, ): gen_qobject_types.QObject =
-  gen_qobject_types.QObject(h: fcQScroller_target(self.h))
+  gen_qobject_types.QObject(h: fcQScroller_target(self.h), owned: false)
 
 proc state*(self: gen_qscroller_types.QScroller, ): cint =
   cint(fcQScroller_state(self.h))
@@ -172,16 +172,16 @@ proc stop*(self: gen_qscroller_types.QScroller, ): void =
   fcQScroller_stop(self.h)
 
 proc velocity*(self: gen_qscroller_types.QScroller, ): gen_qpoint_types.QPointF =
-  gen_qpoint_types.QPointF(h: fcQScroller_velocity(self.h))
+  gen_qpoint_types.QPointF(h: fcQScroller_velocity(self.h), owned: true)
 
 proc finalPosition*(self: gen_qscroller_types.QScroller, ): gen_qpoint_types.QPointF =
-  gen_qpoint_types.QPointF(h: fcQScroller_finalPosition(self.h))
+  gen_qpoint_types.QPointF(h: fcQScroller_finalPosition(self.h), owned: true)
 
 proc pixelPerMeter*(self: gen_qscroller_types.QScroller, ): gen_qpoint_types.QPointF =
-  gen_qpoint_types.QPointF(h: fcQScroller_pixelPerMeter(self.h))
+  gen_qpoint_types.QPointF(h: fcQScroller_pixelPerMeter(self.h), owned: true)
 
 proc scrollerProperties*(self: gen_qscroller_types.QScroller, ): gen_qscrollerproperties_types.QScrollerProperties =
-  gen_qscrollerproperties_types.QScrollerProperties(h: fcQScroller_scrollerProperties(self.h))
+  gen_qscrollerproperties_types.QScrollerProperties(h: fcQScroller_scrollerProperties(self.h), owned: true)
 
 proc setSnapPositionsX*(self: gen_qscroller_types.QScroller, positions: seq[float64]): void =
   var positions_CArray = newSeq[float64](len(positions))
@@ -247,7 +247,7 @@ proc scrollerPropertiesChanged*(self: gen_qscroller_types.QScroller, param1: gen
 type QScrollerscrollerPropertiesChangedSlot* = proc(param1: gen_qscrollerproperties_types.QScrollerProperties)
 proc miqt_exec_callback_cQScroller_scrollerPropertiesChanged(slot: int, param1: pointer) {.cdecl.} =
   let nimfunc = cast[ptr QScrollerscrollerPropertiesChangedSlot](cast[pointer](slot))
-  let slotval1 = gen_qscrollerproperties_types.QScrollerProperties(h: param1)
+  let slotval1 = gen_qscrollerproperties_types.QScrollerProperties(h: param1, owned: false)
 
   nimfunc[](slotval1)
 
@@ -280,7 +280,7 @@ proc handleInput*(self: gen_qscroller_types.QScroller, input: cint, position: ge
   fcQScroller_handleInput3(self.h, cint(input), position.h, timestamp)
 
 proc sender*(self: gen_qscroller_types.QScroller, ): gen_qobject_types.QObject =
-  gen_qobject_types.QObject(h: fcQScroller_protectedbase_sender(self.h))
+  gen_qobject_types.QObject(h: fcQScroller_protectedbase_sender(self.h), owned: false)
 
 proc senderSignalIndex*(self: gen_qscroller_types.QScroller, ): cint =
   fcQScroller_protectedbase_senderSignalIndex(self.h)

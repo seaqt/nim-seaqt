@@ -30,9 +30,6 @@ func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
     else:
       copyMem(addr result[0], unsafeAddr v[0], v.len)
 
-const cflags = gorge("pkg-config --cflags Qt6Gui")  & " -fPIC"
-{.compile("gen_qeventpoint.cpp", cflags).}
-
 
 type QEventPointStateEnum* = distinct uint8
 template Unknown*(_: type QEventPointStateEnum): untyped = 0
@@ -110,7 +107,6 @@ proc fcQEventPoint_new3(other: pointer): ptr cQEventPoint {.importc: "QEventPoin
 proc fcQEventPoint_new4(id: cint): ptr cQEventPoint {.importc: "QEventPoint_new4".}
 proc fcQEventPoint_new5(id: cint, device: pointer): ptr cQEventPoint {.importc: "QEventPoint_new5".}
 proc fcQEventPoint_staticMetaObject(): pointer {.importc: "QEventPoint_staticMetaObject".}
-proc fcQEventPoint_delete(self: pointer) {.importc: "QEventPoint_delete".}
 
 proc operatorAssign*(self: gen_qeventpoint_types.QEventPoint, other: gen_qeventpoint_types.QEventPoint): void =
   fcQEventPoint_operatorAssign(self.h, other.h)
@@ -125,94 +121,94 @@ proc swap*(self: gen_qeventpoint_types.QEventPoint, other: gen_qeventpoint_types
   fcQEventPoint_swap(self.h, other.h)
 
 proc position*(self: gen_qeventpoint_types.QEventPoint, ): gen_qpoint_types.QPointF =
-  gen_qpoint_types.QPointF(h: fcQEventPoint_position(self.h))
+  gen_qpoint_types.QPointF(h: fcQEventPoint_position(self.h), owned: true)
 
 proc pressPosition*(self: gen_qeventpoint_types.QEventPoint, ): gen_qpoint_types.QPointF =
-  gen_qpoint_types.QPointF(h: fcQEventPoint_pressPosition(self.h))
+  gen_qpoint_types.QPointF(h: fcQEventPoint_pressPosition(self.h), owned: true)
 
 proc grabPosition*(self: gen_qeventpoint_types.QEventPoint, ): gen_qpoint_types.QPointF =
-  gen_qpoint_types.QPointF(h: fcQEventPoint_grabPosition(self.h))
+  gen_qpoint_types.QPointF(h: fcQEventPoint_grabPosition(self.h), owned: true)
 
 proc lastPosition*(self: gen_qeventpoint_types.QEventPoint, ): gen_qpoint_types.QPointF =
-  gen_qpoint_types.QPointF(h: fcQEventPoint_lastPosition(self.h))
+  gen_qpoint_types.QPointF(h: fcQEventPoint_lastPosition(self.h), owned: true)
 
 proc scenePosition*(self: gen_qeventpoint_types.QEventPoint, ): gen_qpoint_types.QPointF =
-  gen_qpoint_types.QPointF(h: fcQEventPoint_scenePosition(self.h))
+  gen_qpoint_types.QPointF(h: fcQEventPoint_scenePosition(self.h), owned: true)
 
 proc scenePressPosition*(self: gen_qeventpoint_types.QEventPoint, ): gen_qpoint_types.QPointF =
-  gen_qpoint_types.QPointF(h: fcQEventPoint_scenePressPosition(self.h))
+  gen_qpoint_types.QPointF(h: fcQEventPoint_scenePressPosition(self.h), owned: true)
 
 proc sceneGrabPosition*(self: gen_qeventpoint_types.QEventPoint, ): gen_qpoint_types.QPointF =
-  gen_qpoint_types.QPointF(h: fcQEventPoint_sceneGrabPosition(self.h))
+  gen_qpoint_types.QPointF(h: fcQEventPoint_sceneGrabPosition(self.h), owned: true)
 
 proc sceneLastPosition*(self: gen_qeventpoint_types.QEventPoint, ): gen_qpoint_types.QPointF =
-  gen_qpoint_types.QPointF(h: fcQEventPoint_sceneLastPosition(self.h))
+  gen_qpoint_types.QPointF(h: fcQEventPoint_sceneLastPosition(self.h), owned: true)
 
 proc globalPosition*(self: gen_qeventpoint_types.QEventPoint, ): gen_qpoint_types.QPointF =
-  gen_qpoint_types.QPointF(h: fcQEventPoint_globalPosition(self.h))
+  gen_qpoint_types.QPointF(h: fcQEventPoint_globalPosition(self.h), owned: true)
 
 proc globalPressPosition*(self: gen_qeventpoint_types.QEventPoint, ): gen_qpoint_types.QPointF =
-  gen_qpoint_types.QPointF(h: fcQEventPoint_globalPressPosition(self.h))
+  gen_qpoint_types.QPointF(h: fcQEventPoint_globalPressPosition(self.h), owned: true)
 
 proc globalGrabPosition*(self: gen_qeventpoint_types.QEventPoint, ): gen_qpoint_types.QPointF =
-  gen_qpoint_types.QPointF(h: fcQEventPoint_globalGrabPosition(self.h))
+  gen_qpoint_types.QPointF(h: fcQEventPoint_globalGrabPosition(self.h), owned: true)
 
 proc globalLastPosition*(self: gen_qeventpoint_types.QEventPoint, ): gen_qpoint_types.QPointF =
-  gen_qpoint_types.QPointF(h: fcQEventPoint_globalLastPosition(self.h))
+  gen_qpoint_types.QPointF(h: fcQEventPoint_globalLastPosition(self.h), owned: true)
 
 proc normalizedPosition*(self: gen_qeventpoint_types.QEventPoint, ): gen_qpoint_types.QPointF =
-  gen_qpoint_types.QPointF(h: fcQEventPoint_normalizedPosition(self.h))
+  gen_qpoint_types.QPointF(h: fcQEventPoint_normalizedPosition(self.h), owned: true)
 
 proc pos*(self: gen_qeventpoint_types.QEventPoint, ): gen_qpoint_types.QPointF =
-  gen_qpoint_types.QPointF(h: fcQEventPoint_pos(self.h))
+  gen_qpoint_types.QPointF(h: fcQEventPoint_pos(self.h), owned: true)
 
 proc startPos*(self: gen_qeventpoint_types.QEventPoint, ): gen_qpoint_types.QPointF =
-  gen_qpoint_types.QPointF(h: fcQEventPoint_startPos(self.h))
+  gen_qpoint_types.QPointF(h: fcQEventPoint_startPos(self.h), owned: true)
 
 proc scenePos*(self: gen_qeventpoint_types.QEventPoint, ): gen_qpoint_types.QPointF =
-  gen_qpoint_types.QPointF(h: fcQEventPoint_scenePos(self.h))
+  gen_qpoint_types.QPointF(h: fcQEventPoint_scenePos(self.h), owned: true)
 
 proc startScenePos*(self: gen_qeventpoint_types.QEventPoint, ): gen_qpoint_types.QPointF =
-  gen_qpoint_types.QPointF(h: fcQEventPoint_startScenePos(self.h))
+  gen_qpoint_types.QPointF(h: fcQEventPoint_startScenePos(self.h), owned: true)
 
 proc screenPos*(self: gen_qeventpoint_types.QEventPoint, ): gen_qpoint_types.QPointF =
-  gen_qpoint_types.QPointF(h: fcQEventPoint_screenPos(self.h))
+  gen_qpoint_types.QPointF(h: fcQEventPoint_screenPos(self.h), owned: true)
 
 proc startScreenPos*(self: gen_qeventpoint_types.QEventPoint, ): gen_qpoint_types.QPointF =
-  gen_qpoint_types.QPointF(h: fcQEventPoint_startScreenPos(self.h))
+  gen_qpoint_types.QPointF(h: fcQEventPoint_startScreenPos(self.h), owned: true)
 
 proc startNormalizedPos*(self: gen_qeventpoint_types.QEventPoint, ): gen_qpoint_types.QPointF =
-  gen_qpoint_types.QPointF(h: fcQEventPoint_startNormalizedPos(self.h))
+  gen_qpoint_types.QPointF(h: fcQEventPoint_startNormalizedPos(self.h), owned: true)
 
 proc normalizedPos*(self: gen_qeventpoint_types.QEventPoint, ): gen_qpoint_types.QPointF =
-  gen_qpoint_types.QPointF(h: fcQEventPoint_normalizedPos(self.h))
+  gen_qpoint_types.QPointF(h: fcQEventPoint_normalizedPos(self.h), owned: true)
 
 proc lastPos*(self: gen_qeventpoint_types.QEventPoint, ): gen_qpoint_types.QPointF =
-  gen_qpoint_types.QPointF(h: fcQEventPoint_lastPos(self.h))
+  gen_qpoint_types.QPointF(h: fcQEventPoint_lastPos(self.h), owned: true)
 
 proc lastScenePos*(self: gen_qeventpoint_types.QEventPoint, ): gen_qpoint_types.QPointF =
-  gen_qpoint_types.QPointF(h: fcQEventPoint_lastScenePos(self.h))
+  gen_qpoint_types.QPointF(h: fcQEventPoint_lastScenePos(self.h), owned: true)
 
 proc lastScreenPos*(self: gen_qeventpoint_types.QEventPoint, ): gen_qpoint_types.QPointF =
-  gen_qpoint_types.QPointF(h: fcQEventPoint_lastScreenPos(self.h))
+  gen_qpoint_types.QPointF(h: fcQEventPoint_lastScreenPos(self.h), owned: true)
 
 proc lastNormalizedPos*(self: gen_qeventpoint_types.QEventPoint, ): gen_qpoint_types.QPointF =
-  gen_qpoint_types.QPointF(h: fcQEventPoint_lastNormalizedPos(self.h))
+  gen_qpoint_types.QPointF(h: fcQEventPoint_lastNormalizedPos(self.h), owned: true)
 
 proc velocity*(self: gen_qeventpoint_types.QEventPoint, ): gen_qvectornd_types.QVector2D =
-  gen_qvectornd_types.QVector2D(h: fcQEventPoint_velocity(self.h))
+  gen_qvectornd_types.QVector2D(h: fcQEventPoint_velocity(self.h), owned: true)
 
 proc state*(self: gen_qeventpoint_types.QEventPoint, ): cint =
   cint(fcQEventPoint_state(self.h))
 
 proc device*(self: gen_qeventpoint_types.QEventPoint, ): gen_qpointingdevice_types.QPointingDevice =
-  gen_qpointingdevice_types.QPointingDevice(h: fcQEventPoint_device(self.h))
+  gen_qpointingdevice_types.QPointingDevice(h: fcQEventPoint_device(self.h), owned: false)
 
 proc id*(self: gen_qeventpoint_types.QEventPoint, ): cint =
   fcQEventPoint_id(self.h)
 
 proc uniqueId*(self: gen_qeventpoint_types.QEventPoint, ): gen_qpointingdevice_types.QPointingDeviceUniqueId =
-  gen_qpointingdevice_types.QPointingDeviceUniqueId(h: fcQEventPoint_uniqueId(self.h))
+  gen_qpointingdevice_types.QPointingDeviceUniqueId(h: fcQEventPoint_uniqueId(self.h), owned: true)
 
 proc timestamp*(self: gen_qeventpoint_types.QEventPoint, ): culong =
   fcQEventPoint_timestamp(self.h)
@@ -233,7 +229,7 @@ proc rotation*(self: gen_qeventpoint_types.QEventPoint, ): float64 =
   fcQEventPoint_rotation(self.h)
 
 proc ellipseDiameters*(self: gen_qeventpoint_types.QEventPoint, ): gen_qsize_types.QSizeF =
-  gen_qsize_types.QSizeF(h: fcQEventPoint_ellipseDiameters(self.h))
+  gen_qsize_types.QSizeF(h: fcQEventPoint_ellipseDiameters(self.h), owned: true)
 
 proc isAccepted*(self: gen_qeventpoint_types.QEventPoint, ): bool =
   fcQEventPoint_isAccepted(self.h)
@@ -245,25 +241,23 @@ proc setAccepted*(self: gen_qeventpoint_types.QEventPoint, accepted: bool): void
   fcQEventPoint_setAccepted1(self.h, accepted)
 
 proc create*(T: type gen_qeventpoint_types.QEventPoint): gen_qeventpoint_types.QEventPoint =
-  gen_qeventpoint_types.QEventPoint(h: fcQEventPoint_new())
+  gen_qeventpoint_types.QEventPoint(h: fcQEventPoint_new(), owned: true)
 
 proc create*(T: type gen_qeventpoint_types.QEventPoint,
     pointId: cint, state: cint, scenePosition: gen_qpoint_types.QPointF, globalPosition: gen_qpoint_types.QPointF): gen_qeventpoint_types.QEventPoint =
-  gen_qeventpoint_types.QEventPoint(h: fcQEventPoint_new2(pointId, cint(state), scenePosition.h, globalPosition.h))
+  gen_qeventpoint_types.QEventPoint(h: fcQEventPoint_new2(pointId, cint(state), scenePosition.h, globalPosition.h), owned: true)
 
 proc create*(T: type gen_qeventpoint_types.QEventPoint,
     other: gen_qeventpoint_types.QEventPoint): gen_qeventpoint_types.QEventPoint =
-  gen_qeventpoint_types.QEventPoint(h: fcQEventPoint_new3(other.h))
+  gen_qeventpoint_types.QEventPoint(h: fcQEventPoint_new3(other.h), owned: true)
 
 proc create*(T: type gen_qeventpoint_types.QEventPoint,
     id: cint): gen_qeventpoint_types.QEventPoint =
-  gen_qeventpoint_types.QEventPoint(h: fcQEventPoint_new4(id))
+  gen_qeventpoint_types.QEventPoint(h: fcQEventPoint_new4(id), owned: true)
 
 proc create*(T: type gen_qeventpoint_types.QEventPoint,
     id: cint, device: gen_qpointingdevice_types.QPointingDevice): gen_qeventpoint_types.QEventPoint =
-  gen_qeventpoint_types.QEventPoint(h: fcQEventPoint_new5(id, device.h))
+  gen_qeventpoint_types.QEventPoint(h: fcQEventPoint_new5(id, device.h), owned: true)
 
 proc staticMetaObject*(_: type gen_qeventpoint_types.QEventPoint): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQEventPoint_staticMetaObject())
-proc delete*(self: gen_qeventpoint_types.QEventPoint) =
-  fcQEventPoint_delete(self.h)

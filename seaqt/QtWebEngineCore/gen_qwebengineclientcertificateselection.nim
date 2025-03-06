@@ -30,9 +30,6 @@ func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
     else:
       copyMem(addr result[0], unsafeAddr v[0], v.len)
 
-const cflags = gorge("pkg-config --cflags Qt6WebEngineCore")  & " -fPIC"
-{.compile("gen_qwebengineclientcertificateselection.cpp", cflags).}
-
 
 import ./gen_qwebengineclientcertificateselection_types
 export gen_qwebengineclientcertificateselection_types
@@ -52,13 +49,12 @@ proc fcQWebEngineClientCertificateSelection_select(self: pointer, certificate: p
 proc fcQWebEngineClientCertificateSelection_selectNone(self: pointer, ): void {.importc: "QWebEngineClientCertificateSelection_selectNone".}
 proc fcQWebEngineClientCertificateSelection_certificates(self: pointer, ): struct_miqt_array {.importc: "QWebEngineClientCertificateSelection_certificates".}
 proc fcQWebEngineClientCertificateSelection_new(param1: pointer): ptr cQWebEngineClientCertificateSelection {.importc: "QWebEngineClientCertificateSelection_new".}
-proc fcQWebEngineClientCertificateSelection_delete(self: pointer) {.importc: "QWebEngineClientCertificateSelection_delete".}
 
 proc operatorAssign*(self: gen_qwebengineclientcertificateselection_types.QWebEngineClientCertificateSelection, param1: gen_qwebengineclientcertificateselection_types.QWebEngineClientCertificateSelection): void =
   fcQWebEngineClientCertificateSelection_operatorAssign(self.h, param1.h)
 
 proc host*(self: gen_qwebengineclientcertificateselection_types.QWebEngineClientCertificateSelection, ): gen_qurl_types.QUrl =
-  gen_qurl_types.QUrl(h: fcQWebEngineClientCertificateSelection_host(self.h))
+  gen_qurl_types.QUrl(h: fcQWebEngineClientCertificateSelection_host(self.h), owned: true)
 
 proc select*(self: gen_qwebengineclientcertificateselection_types.QWebEngineClientCertificateSelection, certificate: gen_qsslcertificate_types.QSslCertificate): void =
   fcQWebEngineClientCertificateSelection_select(self.h, certificate.h)
@@ -71,13 +67,11 @@ proc certificates*(self: gen_qwebengineclientcertificateselection_types.QWebEngi
   var vx_ret = newSeq[gen_qsslcertificate_types.QSslCertificate](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
-    vx_ret[i] = gen_qsslcertificate_types.QSslCertificate(h: v_outCast[i])
+    vx_ret[i] = gen_qsslcertificate_types.QSslCertificate(h: v_outCast[i], owned: true)
   c_free(v_ma.data)
   vx_ret
 
 proc create*(T: type gen_qwebengineclientcertificateselection_types.QWebEngineClientCertificateSelection,
     param1: gen_qwebengineclientcertificateselection_types.QWebEngineClientCertificateSelection): gen_qwebengineclientcertificateselection_types.QWebEngineClientCertificateSelection =
-  gen_qwebengineclientcertificateselection_types.QWebEngineClientCertificateSelection(h: fcQWebEngineClientCertificateSelection_new(param1.h))
+  gen_qwebengineclientcertificateselection_types.QWebEngineClientCertificateSelection(h: fcQWebEngineClientCertificateSelection_new(param1.h), owned: true)
 
-proc delete*(self: gen_qwebengineclientcertificateselection_types.QWebEngineClientCertificateSelection) =
-  fcQWebEngineClientCertificateSelection_delete(self.h)

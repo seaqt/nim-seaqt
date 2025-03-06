@@ -30,9 +30,6 @@ func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
     else:
       copyMem(addr result[0], unsafeAddr v[0], v.len)
 
-const cflags = gorge("pkg-config --cflags Qt6Core")  & " -fPIC"
-{.compile("gen_qnamespace.cpp", cflags).}
-
 
 type GlobalColorEnum* = distinct cint
 template color0*(_: type GlobalColorEnum): untyped = 0
@@ -1518,9 +1515,7 @@ type cQKeyCombination*{.exportc: "QKeyCombination", incompleteStruct.} = object
 
 proc fcDisambiguated_t_new(): ptr cDisambiguated_t {.importc: "Disambiguated_t_new".}
 proc fcDisambiguated_t_new2(param1: pointer): ptr cDisambiguated_t {.importc: "Disambiguated_t_new2".}
-proc fcDisambiguated_t_delete(self: pointer) {.importc: "Disambiguated_t_delete".}
 proc fcQInternal_activateCallbacks(param1: cint, param2: pointer): bool {.importc: "QInternal_activateCallbacks".}
-proc fcQInternal_delete(self: pointer) {.importc: "QInternal_delete".}
 proc fcQKeyCombination_keyboardModifiers(self: pointer, ): cint {.importc: "QKeyCombination_keyboardModifiers".}
 proc fcQKeyCombination_key(self: pointer, ): cint {.importc: "QKeyCombination_key".}
 proc fcQKeyCombination_fromCombined(combined: cint): pointer {.importc: "QKeyCombination_fromCombined".}
@@ -1533,22 +1528,17 @@ proc fcQKeyCombination_new4(param1: pointer): ptr cQKeyCombination {.importc: "Q
 proc fcQKeyCombination_new5(key: cint): ptr cQKeyCombination {.importc: "QKeyCombination_new5".}
 proc fcQKeyCombination_new6(modifiers: cint, key: cint): ptr cQKeyCombination {.importc: "QKeyCombination_new6".}
 proc fcQKeyCombination_new7(modifiers: cint, key: cint): ptr cQKeyCombination {.importc: "QKeyCombination_new7".}
-proc fcQKeyCombination_delete(self: pointer) {.importc: "QKeyCombination_delete".}
 
 proc create*(T: type gen_qnamespace_types.Disambiguated_t): gen_qnamespace_types.Disambiguated_t =
-  gen_qnamespace_types.Disambiguated_t(h: fcDisambiguated_t_new())
+  gen_qnamespace_types.Disambiguated_t(h: fcDisambiguated_t_new(), owned: true)
 
 proc create*(T: type gen_qnamespace_types.Disambiguated_t,
     param1: gen_qnamespace_types.Disambiguated_t): gen_qnamespace_types.Disambiguated_t =
-  gen_qnamespace_types.Disambiguated_t(h: fcDisambiguated_t_new2(param1.h))
+  gen_qnamespace_types.Disambiguated_t(h: fcDisambiguated_t_new2(param1.h), owned: true)
 
-proc delete*(self: gen_qnamespace_types.Disambiguated_t) =
-  fcDisambiguated_t_delete(self.h)
 proc activateCallbacks*(_: type gen_qnamespace_types.QInternal, param1: cint, param2: pointer): bool =
   fcQInternal_activateCallbacks(cint(param1), param2)
 
-proc delete*(self: gen_qnamespace_types.QInternal) =
-  fcQInternal_delete(self.h)
 proc keyboardModifiers*(self: gen_qnamespace_types.QKeyCombination, ): cint =
   cint(fcQKeyCombination_keyboardModifiers(self.h))
 
@@ -1556,7 +1546,7 @@ proc key*(self: gen_qnamespace_types.QKeyCombination, ): cint =
   cint(fcQKeyCombination_key(self.h))
 
 proc fromCombined*(_: type gen_qnamespace_types.QKeyCombination, combined: cint): gen_qnamespace_types.QKeyCombination =
-  gen_qnamespace_types.QKeyCombination(h: fcQKeyCombination_fromCombined(combined))
+  gen_qnamespace_types.QKeyCombination(h: fcQKeyCombination_fromCombined(combined), owned: true)
 
 proc toCombined*(self: gen_qnamespace_types.QKeyCombination, ): cint =
   fcQKeyCombination_toCombined(self.h)
@@ -1565,31 +1555,29 @@ proc ToInt*(self: gen_qnamespace_types.QKeyCombination, ): cint =
   fcQKeyCombination_ToInt(self.h)
 
 proc create*(T: type gen_qnamespace_types.QKeyCombination): gen_qnamespace_types.QKeyCombination =
-  gen_qnamespace_types.QKeyCombination(h: fcQKeyCombination_new())
+  gen_qnamespace_types.QKeyCombination(h: fcQKeyCombination_new(), owned: true)
 
 proc create*(T: type gen_qnamespace_types.QKeyCombination,
     modifiers: cint): gen_qnamespace_types.QKeyCombination =
-  gen_qnamespace_types.QKeyCombination(h: fcQKeyCombination_new2(cint(modifiers)))
+  gen_qnamespace_types.QKeyCombination(h: fcQKeyCombination_new2(cint(modifiers)), owned: true)
 
 proc create2*(T: type gen_qnamespace_types.QKeyCombination,
     modifiers: cint): gen_qnamespace_types.QKeyCombination =
-  gen_qnamespace_types.QKeyCombination(h: fcQKeyCombination_new3(cint(modifiers)))
+  gen_qnamespace_types.QKeyCombination(h: fcQKeyCombination_new3(cint(modifiers)), owned: true)
 
 proc create*(T: type gen_qnamespace_types.QKeyCombination,
     param1: gen_qnamespace_types.QKeyCombination): gen_qnamespace_types.QKeyCombination =
-  gen_qnamespace_types.QKeyCombination(h: fcQKeyCombination_new4(param1.h))
+  gen_qnamespace_types.QKeyCombination(h: fcQKeyCombination_new4(param1.h), owned: true)
 
 proc create3*(T: type gen_qnamespace_types.QKeyCombination,
     key: cint): gen_qnamespace_types.QKeyCombination =
-  gen_qnamespace_types.QKeyCombination(h: fcQKeyCombination_new5(cint(key)))
+  gen_qnamespace_types.QKeyCombination(h: fcQKeyCombination_new5(cint(key)), owned: true)
 
 proc create*(T: type gen_qnamespace_types.QKeyCombination,
     modifiers: cint, key: cint): gen_qnamespace_types.QKeyCombination =
-  gen_qnamespace_types.QKeyCombination(h: fcQKeyCombination_new6(cint(modifiers), cint(key)))
+  gen_qnamespace_types.QKeyCombination(h: fcQKeyCombination_new6(cint(modifiers), cint(key)), owned: true)
 
 proc create2*(T: type gen_qnamespace_types.QKeyCombination,
     modifiers: cint, key: cint): gen_qnamespace_types.QKeyCombination =
-  gen_qnamespace_types.QKeyCombination(h: fcQKeyCombination_new7(cint(modifiers), cint(key)))
+  gen_qnamespace_types.QKeyCombination(h: fcQKeyCombination_new7(cint(modifiers), cint(key)), owned: true)
 
-proc delete*(self: gen_qnamespace_types.QKeyCombination) =
-  fcQKeyCombination_delete(self.h)

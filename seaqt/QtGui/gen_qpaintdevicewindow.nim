@@ -30,7 +30,7 @@ func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
     else:
       copyMem(addr result[0], unsafeAddr v[0], v.len)
 
-const cflags = gorge("pkg-config --cflags Qt6Gui")  & " -fPIC"
+const cflags = gorge("pkg-config --cflags Qt6Gui") & " -fPIC"
 {.compile("gen_qpaintdevicewindow.cpp", cflags).}
 
 
@@ -69,10 +69,9 @@ proc fcQPaintDeviceWindow_protectedbase_senderSignalIndex(self: pointer, ): cint
 proc fcQPaintDeviceWindow_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QPaintDeviceWindow_protectedbase_receivers".}
 proc fcQPaintDeviceWindow_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QPaintDeviceWindow_protectedbase_isSignalConnected".}
 proc fcQPaintDeviceWindow_staticMetaObject(): pointer {.importc: "QPaintDeviceWindow_staticMetaObject".}
-proc fcQPaintDeviceWindow_delete(self: pointer) {.importc: "QPaintDeviceWindow_delete".}
 
 proc metaObject*(self: gen_qpaintdevicewindow_types.QPaintDeviceWindow, ): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQPaintDeviceWindow_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQPaintDeviceWindow_metaObject(self.h), owned: false)
 
 proc metacast*(self: gen_qpaintdevicewindow_types.QPaintDeviceWindow, param1: cstring): pointer =
   fcQPaintDeviceWindow_metacast(self.h, param1)
@@ -111,7 +110,7 @@ proc resolveInterface*(self: gen_qpaintdevicewindow_types.QPaintDeviceWindow, na
   fcQPaintDeviceWindow_protectedbase_resolveInterface(self.h, name, revision)
 
 proc sender*(self: gen_qpaintdevicewindow_types.QPaintDeviceWindow, ): gen_qobject_types.QObject =
-  gen_qobject_types.QObject(h: fcQPaintDeviceWindow_protectedbase_sender(self.h))
+  gen_qobject_types.QObject(h: fcQPaintDeviceWindow_protectedbase_sender(self.h), owned: false)
 
 proc senderSignalIndex*(self: gen_qpaintdevicewindow_types.QPaintDeviceWindow, ): cint =
   fcQPaintDeviceWindow_protectedbase_senderSignalIndex(self.h)
@@ -124,5 +123,3 @@ proc isSignalConnected*(self: gen_qpaintdevicewindow_types.QPaintDeviceWindow, s
 
 proc staticMetaObject*(_: type gen_qpaintdevicewindow_types.QPaintDeviceWindow): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQPaintDeviceWindow_staticMetaObject())
-proc delete*(self: gen_qpaintdevicewindow_types.QPaintDeviceWindow) =
-  fcQPaintDeviceWindow_delete(self.h)

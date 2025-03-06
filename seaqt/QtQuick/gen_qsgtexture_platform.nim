@@ -30,7 +30,7 @@ func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
     else:
       copyMem(addr result[0], unsafeAddr v[0], v.len)
 
-const cflags = gorge("pkg-config --cflags Qt6Quick")  & " -fPIC"
+const cflags = gorge("pkg-config --cflags Qt6Quick") & " -fPIC"
 {.compile("gen_qsgtexture_platform.cpp", cflags).}
 
 
@@ -45,8 +45,8 @@ proc fcQNativeInterfaceQSGOpenGLTexture_new(): ptr cQNativeInterfaceQSGOpenGLTex
 proc fcQNativeInterfaceQSGVulkanTexture_new(): ptr cQNativeInterfaceQSGVulkanTexture {.importc: "QNativeInterface__QSGVulkanTexture_new".}
 
 proc create*(T: type gen_qsgtexture_platform_types.QNativeInterfaceQSGOpenGLTexture): gen_qsgtexture_platform_types.QNativeInterfaceQSGOpenGLTexture =
-  gen_qsgtexture_platform_types.QNativeInterfaceQSGOpenGLTexture(h: fcQNativeInterfaceQSGOpenGLTexture_new())
+  gen_qsgtexture_platform_types.QNativeInterfaceQSGOpenGLTexture(h: fcQNativeInterfaceQSGOpenGLTexture_new(), owned: true)
 
 proc create*(T: type gen_qsgtexture_platform_types.QNativeInterfaceQSGVulkanTexture): gen_qsgtexture_platform_types.QNativeInterfaceQSGVulkanTexture =
-  gen_qsgtexture_platform_types.QNativeInterfaceQSGVulkanTexture(h: fcQNativeInterfaceQSGVulkanTexture_new())
+  gen_qsgtexture_platform_types.QNativeInterfaceQSGVulkanTexture(h: fcQNativeInterfaceQSGVulkanTexture_new(), owned: true)
 

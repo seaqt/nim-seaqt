@@ -30,9 +30,6 @@ func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
     else:
       copyMem(addr result[0], unsafeAddr v[0], v.len)
 
-const cflags = gorge("pkg-config --cflags Qt6Core")  & " -fPIC"
-{.compile("gen_qcborcommon.cpp", cflags).}
-
 
 type QCborSimpleTypeEnum* = distinct uint8
 template False*(_: type QCborSimpleTypeEnum): untyped = 20
@@ -102,7 +99,6 @@ type cQCborError*{.exportc: "QCborError", incompleteStruct.} = object
 proc fcQCborError_ToQCborError__Code(self: pointer, ): cint {.importc: "QCborError_ToQCborError__Code".}
 proc fcQCborError_toString(self: pointer, ): struct_miqt_string {.importc: "QCborError_toString".}
 proc fcQCborError_staticMetaObject(): pointer {.importc: "QCborError_staticMetaObject".}
-proc fcQCborError_delete(self: pointer) {.importc: "QCborError_delete".}
 
 proc ToQCborError__Code*(self: gen_qcborcommon_types.QCborError, ): cint =
   cint(fcQCborError_ToQCborError__Code(self.h))
@@ -115,5 +111,3 @@ proc toString*(self: gen_qcborcommon_types.QCborError, ): string =
 
 proc staticMetaObject*(_: type gen_qcborcommon_types.QCborError): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQCborError_staticMetaObject())
-proc delete*(self: gen_qcborcommon_types.QCborError) =
-  fcQCborError_delete(self.h)

@@ -30,9 +30,6 @@ func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
     else:
       copyMem(addr result[0], unsafeAddr v[0], v.len)
 
-const cflags = gorge("pkg-config --cflags Qt6Core")  & " -fPIC"
-{.compile("gen_qcoreevent.cpp", cflags).}
-
 
 type QEventTypeEnum* = distinct cint
 template None*(_: type QEventTypeEnum): untyped = 0
@@ -237,7 +234,7 @@ proc fcQEvent_isSinglePointEvent(self: pointer, ): bool {.importc: "QEvent_isSin
 proc fcQEvent_registerEventType(): cint {.importc: "QEvent_registerEventType".}
 proc fcQEvent_clone(self: pointer, ): pointer {.importc: "QEvent_clone".}
 proc fcQEvent_registerEventType1(hint: cint): cint {.importc: "QEvent_registerEventType1".}
-type cQEventVTable = object
+type cQEventVTable {.pure.} = object
   destructor*: proc(vtbl: ptr cQEventVTable, self: ptr cQEvent) {.cdecl, raises:[], gcsafe.}
   setAccepted*: proc(vtbl, self: pointer, accepted: bool): void {.cdecl, raises: [], gcsafe.}
   clone*: proc(vtbl, self: pointer, ): pointer {.cdecl, raises: [], gcsafe.}
@@ -245,40 +242,36 @@ proc fcQEvent_virtualbase_setAccepted(self: pointer, accepted: bool): void {.imp
 proc fcQEvent_virtualbase_clone(self: pointer, ): pointer {.importc: "QEvent_virtualbase_clone".}
 proc fcQEvent_new(vtbl: pointer, typeVal: cint): ptr cQEvent {.importc: "QEvent_new".}
 proc fcQEvent_staticMetaObject(): pointer {.importc: "QEvent_staticMetaObject".}
-proc fcQEvent_delete(self: pointer) {.importc: "QEvent_delete".}
 proc fcQTimerEvent_clone(self: pointer, ): pointer {.importc: "QTimerEvent_clone".}
 proc fcQTimerEvent_timerId(self: pointer, ): cint {.importc: "QTimerEvent_timerId".}
-type cQTimerEventVTable = object
+type cQTimerEventVTable {.pure.} = object
   destructor*: proc(vtbl: ptr cQTimerEventVTable, self: ptr cQTimerEvent) {.cdecl, raises:[], gcsafe.}
   clone*: proc(vtbl, self: pointer, ): pointer {.cdecl, raises: [], gcsafe.}
   setAccepted*: proc(vtbl, self: pointer, accepted: bool): void {.cdecl, raises: [], gcsafe.}
 proc fcQTimerEvent_virtualbase_clone(self: pointer, ): pointer {.importc: "QTimerEvent_virtualbase_clone".}
 proc fcQTimerEvent_virtualbase_setAccepted(self: pointer, accepted: bool): void {.importc: "QTimerEvent_virtualbase_setAccepted".}
 proc fcQTimerEvent_new(vtbl: pointer, timerId: cint): ptr cQTimerEvent {.importc: "QTimerEvent_new".}
-proc fcQTimerEvent_delete(self: pointer) {.importc: "QTimerEvent_delete".}
 proc fcQChildEvent_clone(self: pointer, ): pointer {.importc: "QChildEvent_clone".}
 proc fcQChildEvent_child(self: pointer, ): pointer {.importc: "QChildEvent_child".}
 proc fcQChildEvent_added(self: pointer, ): bool {.importc: "QChildEvent_added".}
 proc fcQChildEvent_polished(self: pointer, ): bool {.importc: "QChildEvent_polished".}
 proc fcQChildEvent_removed(self: pointer, ): bool {.importc: "QChildEvent_removed".}
-type cQChildEventVTable = object
+type cQChildEventVTable {.pure.} = object
   destructor*: proc(vtbl: ptr cQChildEventVTable, self: ptr cQChildEvent) {.cdecl, raises:[], gcsafe.}
   clone*: proc(vtbl, self: pointer, ): pointer {.cdecl, raises: [], gcsafe.}
   setAccepted*: proc(vtbl, self: pointer, accepted: bool): void {.cdecl, raises: [], gcsafe.}
 proc fcQChildEvent_virtualbase_clone(self: pointer, ): pointer {.importc: "QChildEvent_virtualbase_clone".}
 proc fcQChildEvent_virtualbase_setAccepted(self: pointer, accepted: bool): void {.importc: "QChildEvent_virtualbase_setAccepted".}
 proc fcQChildEvent_new(vtbl: pointer, typeVal: cint, child: pointer): ptr cQChildEvent {.importc: "QChildEvent_new".}
-proc fcQChildEvent_delete(self: pointer) {.importc: "QChildEvent_delete".}
 proc fcQDynamicPropertyChangeEvent_clone(self: pointer, ): pointer {.importc: "QDynamicPropertyChangeEvent_clone".}
 proc fcQDynamicPropertyChangeEvent_propertyName(self: pointer, ): struct_miqt_string {.importc: "QDynamicPropertyChangeEvent_propertyName".}
-type cQDynamicPropertyChangeEventVTable = object
+type cQDynamicPropertyChangeEventVTable {.pure.} = object
   destructor*: proc(vtbl: ptr cQDynamicPropertyChangeEventVTable, self: ptr cQDynamicPropertyChangeEvent) {.cdecl, raises:[], gcsafe.}
   clone*: proc(vtbl, self: pointer, ): pointer {.cdecl, raises: [], gcsafe.}
   setAccepted*: proc(vtbl, self: pointer, accepted: bool): void {.cdecl, raises: [], gcsafe.}
 proc fcQDynamicPropertyChangeEvent_virtualbase_clone(self: pointer, ): pointer {.importc: "QDynamicPropertyChangeEvent_virtualbase_clone".}
 proc fcQDynamicPropertyChangeEvent_virtualbase_setAccepted(self: pointer, accepted: bool): void {.importc: "QDynamicPropertyChangeEvent_virtualbase_setAccepted".}
 proc fcQDynamicPropertyChangeEvent_new(vtbl: pointer, name: struct_miqt_string): ptr cQDynamicPropertyChangeEvent {.importc: "QDynamicPropertyChangeEvent_new".}
-proc fcQDynamicPropertyChangeEvent_delete(self: pointer) {.importc: "QDynamicPropertyChangeEvent_delete".}
 
 proc typeX*(self: gen_qcoreevent_types.QEvent, ): cint =
   cint(fcQEvent_typeX(self.h))
@@ -311,14 +304,14 @@ proc registerEventType*(_: type gen_qcoreevent_types.QEvent, ): cint =
   fcQEvent_registerEventType()
 
 proc clone*(self: gen_qcoreevent_types.QEvent, ): gen_qcoreevent_types.QEvent =
-  gen_qcoreevent_types.QEvent(h: fcQEvent_clone(self.h))
+  gen_qcoreevent_types.QEvent(h: fcQEvent_clone(self.h), owned: false)
 
 proc registerEventType*(_: type gen_qcoreevent_types.QEvent, hint: cint): cint =
   fcQEvent_registerEventType1(hint)
 
 type QEventsetAcceptedProc* = proc(self: QEvent, accepted: bool): void {.raises: [], gcsafe.}
 type QEventcloneProc* = proc(self: QEvent): gen_qcoreevent_types.QEvent {.raises: [], gcsafe.}
-type QEventVTable* = object
+type QEventVTable* {.inheritable, pure.} = object
   vtbl: cQEventVTable
   setAccepted*: QEventsetAcceptedProc
   clone*: QEventcloneProc
@@ -332,52 +325,89 @@ proc miqt_exec_callback_cQEvent_setAccepted(vtbl: pointer, self: pointer, accept
   vtbl[].setAccepted(self, slotval1)
 
 proc QEventclone*(self: gen_qcoreevent_types.QEvent, ): gen_qcoreevent_types.QEvent =
-  gen_qcoreevent_types.QEvent(h: fcQEvent_virtualbase_clone(self.h))
+  gen_qcoreevent_types.QEvent(h: fcQEvent_virtualbase_clone(self.h), owned: false)
 
 proc miqt_exec_callback_cQEvent_clone(vtbl: pointer, self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QEventVTable](vtbl)
   let self = QEvent(h: self)
   var virtualReturn = vtbl[].clone(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
+
+type VirtualQEvent* {.inheritable.} = ref object of QEvent
+  vtbl*: cQEventVTable
+method setAccepted*(self: VirtualQEvent, accepted: bool): void {.base.} =
+  QEventsetAccepted(self[], accepted)
+proc miqt_exec_method_cQEvent_setAccepted(vtbl: pointer, inst: pointer, accepted: bool): void {.cdecl.} =
+  let vtbl = cast[VirtualQEvent](cast[uint](vtbl) - uint(offsetOf(VirtualQEvent, vtbl)))
+  let slotval1 = accepted
+  vtbl.setAccepted(slotval1)
+
+method clone*(self: VirtualQEvent, ): gen_qcoreevent_types.QEvent {.base.} =
+  QEventclone(self[])
+proc miqt_exec_method_cQEvent_clone(vtbl: pointer, inst: pointer): pointer {.cdecl.} =
+  let vtbl = cast[VirtualQEvent](cast[uint](vtbl) - uint(offsetOf(VirtualQEvent, vtbl)))
+  var virtualReturn = vtbl.clone()
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc create*(T: type gen_qcoreevent_types.QEvent,
     typeVal: cint,
     vtbl: ref QEventVTable = nil): gen_qcoreevent_types.QEvent =
   let vtbl = if vtbl == nil: new QEventVTable else: vtbl
   GC_ref(vtbl)
-  vtbl.vtbl.destructor = proc(vtbl: ptr cQEventVTable, _: ptr cQEvent) {.cdecl.} =
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQEventVTable, _: ptr cQEvent) {.cdecl.} =
     let vtbl = cast[ref QEventVTable](vtbl)
     GC_unref(vtbl)
-  if not isNil(vtbl.setAccepted):
+  if not isNil(vtbl[].setAccepted):
     vtbl[].vtbl.setAccepted = miqt_exec_callback_cQEvent_setAccepted
-  if not isNil(vtbl.clone):
+  if not isNil(vtbl[].clone):
     vtbl[].vtbl.clone = miqt_exec_callback_cQEvent_clone
-  gen_qcoreevent_types.QEvent(h: fcQEvent_new(addr(vtbl[]), cint(typeVal)))
+  gen_qcoreevent_types.QEvent(h: fcQEvent_new(addr(vtbl[].vtbl), cint(typeVal)), owned: true)
+
+proc create*(T: type gen_qcoreevent_types.QEvent,
+    typeVal: cint,
+    vtbl: VirtualQEvent) =
+
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQEventVTable, _: ptr cQEvent) {.cdecl.} =
+    let vtbl = cast[ptr typeof(VirtualQEvent()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQEvent, vtbl)))
+    vtbl[].h = nil
+    vtbl[].owned = false
+  vtbl[].vtbl.setAccepted = miqt_exec_method_cQEvent_setAccepted
+  vtbl[].vtbl.clone = miqt_exec_method_cQEvent_clone
+  if vtbl[].h != nil: delete(move(vtbl[]))
+  vtbl[].h = fcQEvent_new(addr(vtbl[].vtbl), cint(typeVal))
+  vtbl[].owned = true
 
 proc staticMetaObject*(_: type gen_qcoreevent_types.QEvent): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQEvent_staticMetaObject())
-proc delete*(self: gen_qcoreevent_types.QEvent) =
-  fcQEvent_delete(self.h)
 proc clone*(self: gen_qcoreevent_types.QTimerEvent, ): gen_qcoreevent_types.QTimerEvent =
-  gen_qcoreevent_types.QTimerEvent(h: fcQTimerEvent_clone(self.h))
+  gen_qcoreevent_types.QTimerEvent(h: fcQTimerEvent_clone(self.h), owned: false)
 
 proc timerId*(self: gen_qcoreevent_types.QTimerEvent, ): cint =
   fcQTimerEvent_timerId(self.h)
 
 type QTimerEventcloneProc* = proc(self: QTimerEvent): gen_qcoreevent_types.QTimerEvent {.raises: [], gcsafe.}
 type QTimerEventsetAcceptedProc* = proc(self: QTimerEvent, accepted: bool): void {.raises: [], gcsafe.}
-type QTimerEventVTable* = object
+type QTimerEventVTable* {.inheritable, pure.} = object
   vtbl: cQTimerEventVTable
   clone*: QTimerEventcloneProc
   setAccepted*: QTimerEventsetAcceptedProc
 proc QTimerEventclone*(self: gen_qcoreevent_types.QTimerEvent, ): gen_qcoreevent_types.QTimerEvent =
-  gen_qcoreevent_types.QTimerEvent(h: fcQTimerEvent_virtualbase_clone(self.h))
+  gen_qcoreevent_types.QTimerEvent(h: fcQTimerEvent_virtualbase_clone(self.h), owned: false)
 
 proc miqt_exec_callback_cQTimerEvent_clone(vtbl: pointer, self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QTimerEventVTable](vtbl)
   let self = QTimerEvent(h: self)
   var virtualReturn = vtbl[].clone(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QTimerEventsetAccepted*(self: gen_qcoreevent_types.QTimerEvent, accepted: bool): void =
   fcQTimerEvent_virtualbase_setAccepted(self.h, accepted)
@@ -388,27 +418,58 @@ proc miqt_exec_callback_cQTimerEvent_setAccepted(vtbl: pointer, self: pointer, a
   let slotval1 = accepted
   vtbl[].setAccepted(self, slotval1)
 
+type VirtualQTimerEvent* {.inheritable.} = ref object of QTimerEvent
+  vtbl*: cQTimerEventVTable
+method clone*(self: VirtualQTimerEvent, ): gen_qcoreevent_types.QTimerEvent {.base.} =
+  QTimerEventclone(self[])
+proc miqt_exec_method_cQTimerEvent_clone(vtbl: pointer, inst: pointer): pointer {.cdecl.} =
+  let vtbl = cast[VirtualQTimerEvent](cast[uint](vtbl) - uint(offsetOf(VirtualQTimerEvent, vtbl)))
+  var virtualReturn = vtbl.clone()
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
+
+method setAccepted*(self: VirtualQTimerEvent, accepted: bool): void {.base.} =
+  QTimerEventsetAccepted(self[], accepted)
+proc miqt_exec_method_cQTimerEvent_setAccepted(vtbl: pointer, inst: pointer, accepted: bool): void {.cdecl.} =
+  let vtbl = cast[VirtualQTimerEvent](cast[uint](vtbl) - uint(offsetOf(VirtualQTimerEvent, vtbl)))
+  let slotval1 = accepted
+  vtbl.setAccepted(slotval1)
+
 proc create*(T: type gen_qcoreevent_types.QTimerEvent,
     timerId: cint,
     vtbl: ref QTimerEventVTable = nil): gen_qcoreevent_types.QTimerEvent =
   let vtbl = if vtbl == nil: new QTimerEventVTable else: vtbl
   GC_ref(vtbl)
-  vtbl.vtbl.destructor = proc(vtbl: ptr cQTimerEventVTable, _: ptr cQTimerEvent) {.cdecl.} =
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQTimerEventVTable, _: ptr cQTimerEvent) {.cdecl.} =
     let vtbl = cast[ref QTimerEventVTable](vtbl)
     GC_unref(vtbl)
-  if not isNil(vtbl.clone):
+  if not isNil(vtbl[].clone):
     vtbl[].vtbl.clone = miqt_exec_callback_cQTimerEvent_clone
-  if not isNil(vtbl.setAccepted):
+  if not isNil(vtbl[].setAccepted):
     vtbl[].vtbl.setAccepted = miqt_exec_callback_cQTimerEvent_setAccepted
-  gen_qcoreevent_types.QTimerEvent(h: fcQTimerEvent_new(addr(vtbl[]), timerId))
+  gen_qcoreevent_types.QTimerEvent(h: fcQTimerEvent_new(addr(vtbl[].vtbl), timerId), owned: true)
 
-proc delete*(self: gen_qcoreevent_types.QTimerEvent) =
-  fcQTimerEvent_delete(self.h)
+proc create*(T: type gen_qcoreevent_types.QTimerEvent,
+    timerId: cint,
+    vtbl: VirtualQTimerEvent) =
+
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQTimerEventVTable, _: ptr cQTimerEvent) {.cdecl.} =
+    let vtbl = cast[ptr typeof(VirtualQTimerEvent()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQTimerEvent, vtbl)))
+    vtbl[].h = nil
+    vtbl[].owned = false
+  vtbl[].vtbl.clone = miqt_exec_method_cQTimerEvent_clone
+  vtbl[].vtbl.setAccepted = miqt_exec_method_cQTimerEvent_setAccepted
+  if vtbl[].h != nil: delete(move(vtbl[]))
+  vtbl[].h = fcQTimerEvent_new(addr(vtbl[].vtbl), timerId)
+  vtbl[].owned = true
+
 proc clone*(self: gen_qcoreevent_types.QChildEvent, ): gen_qcoreevent_types.QChildEvent =
-  gen_qcoreevent_types.QChildEvent(h: fcQChildEvent_clone(self.h))
+  gen_qcoreevent_types.QChildEvent(h: fcQChildEvent_clone(self.h), owned: false)
 
 proc child*(self: gen_qcoreevent_types.QChildEvent, ): gen_qobject_types.QObject =
-  gen_qobject_types.QObject(h: fcQChildEvent_child(self.h))
+  gen_qobject_types.QObject(h: fcQChildEvent_child(self.h), owned: false)
 
 proc added*(self: gen_qcoreevent_types.QChildEvent, ): bool =
   fcQChildEvent_added(self.h)
@@ -421,18 +482,21 @@ proc removed*(self: gen_qcoreevent_types.QChildEvent, ): bool =
 
 type QChildEventcloneProc* = proc(self: QChildEvent): gen_qcoreevent_types.QChildEvent {.raises: [], gcsafe.}
 type QChildEventsetAcceptedProc* = proc(self: QChildEvent, accepted: bool): void {.raises: [], gcsafe.}
-type QChildEventVTable* = object
+type QChildEventVTable* {.inheritable, pure.} = object
   vtbl: cQChildEventVTable
   clone*: QChildEventcloneProc
   setAccepted*: QChildEventsetAcceptedProc
 proc QChildEventclone*(self: gen_qcoreevent_types.QChildEvent, ): gen_qcoreevent_types.QChildEvent =
-  gen_qcoreevent_types.QChildEvent(h: fcQChildEvent_virtualbase_clone(self.h))
+  gen_qcoreevent_types.QChildEvent(h: fcQChildEvent_virtualbase_clone(self.h), owned: false)
 
 proc miqt_exec_callback_cQChildEvent_clone(vtbl: pointer, self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QChildEventVTable](vtbl)
   let self = QChildEvent(h: self)
   var virtualReturn = vtbl[].clone(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QChildEventsetAccepted*(self: gen_qcoreevent_types.QChildEvent, accepted: bool): void =
   fcQChildEvent_virtualbase_setAccepted(self.h, accepted)
@@ -443,24 +507,55 @@ proc miqt_exec_callback_cQChildEvent_setAccepted(vtbl: pointer, self: pointer, a
   let slotval1 = accepted
   vtbl[].setAccepted(self, slotval1)
 
+type VirtualQChildEvent* {.inheritable.} = ref object of QChildEvent
+  vtbl*: cQChildEventVTable
+method clone*(self: VirtualQChildEvent, ): gen_qcoreevent_types.QChildEvent {.base.} =
+  QChildEventclone(self[])
+proc miqt_exec_method_cQChildEvent_clone(vtbl: pointer, inst: pointer): pointer {.cdecl.} =
+  let vtbl = cast[VirtualQChildEvent](cast[uint](vtbl) - uint(offsetOf(VirtualQChildEvent, vtbl)))
+  var virtualReturn = vtbl.clone()
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
+
+method setAccepted*(self: VirtualQChildEvent, accepted: bool): void {.base.} =
+  QChildEventsetAccepted(self[], accepted)
+proc miqt_exec_method_cQChildEvent_setAccepted(vtbl: pointer, inst: pointer, accepted: bool): void {.cdecl.} =
+  let vtbl = cast[VirtualQChildEvent](cast[uint](vtbl) - uint(offsetOf(VirtualQChildEvent, vtbl)))
+  let slotval1 = accepted
+  vtbl.setAccepted(slotval1)
+
 proc create*(T: type gen_qcoreevent_types.QChildEvent,
     typeVal: cint, child: gen_qobject_types.QObject,
     vtbl: ref QChildEventVTable = nil): gen_qcoreevent_types.QChildEvent =
   let vtbl = if vtbl == nil: new QChildEventVTable else: vtbl
   GC_ref(vtbl)
-  vtbl.vtbl.destructor = proc(vtbl: ptr cQChildEventVTable, _: ptr cQChildEvent) {.cdecl.} =
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQChildEventVTable, _: ptr cQChildEvent) {.cdecl.} =
     let vtbl = cast[ref QChildEventVTable](vtbl)
     GC_unref(vtbl)
-  if not isNil(vtbl.clone):
+  if not isNil(vtbl[].clone):
     vtbl[].vtbl.clone = miqt_exec_callback_cQChildEvent_clone
-  if not isNil(vtbl.setAccepted):
+  if not isNil(vtbl[].setAccepted):
     vtbl[].vtbl.setAccepted = miqt_exec_callback_cQChildEvent_setAccepted
-  gen_qcoreevent_types.QChildEvent(h: fcQChildEvent_new(addr(vtbl[]), cint(typeVal), child.h))
+  gen_qcoreevent_types.QChildEvent(h: fcQChildEvent_new(addr(vtbl[].vtbl), cint(typeVal), child.h), owned: true)
 
-proc delete*(self: gen_qcoreevent_types.QChildEvent) =
-  fcQChildEvent_delete(self.h)
+proc create*(T: type gen_qcoreevent_types.QChildEvent,
+    typeVal: cint, child: gen_qobject_types.QObject,
+    vtbl: VirtualQChildEvent) =
+
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQChildEventVTable, _: ptr cQChildEvent) {.cdecl.} =
+    let vtbl = cast[ptr typeof(VirtualQChildEvent()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQChildEvent, vtbl)))
+    vtbl[].h = nil
+    vtbl[].owned = false
+  vtbl[].vtbl.clone = miqt_exec_method_cQChildEvent_clone
+  vtbl[].vtbl.setAccepted = miqt_exec_method_cQChildEvent_setAccepted
+  if vtbl[].h != nil: delete(move(vtbl[]))
+  vtbl[].h = fcQChildEvent_new(addr(vtbl[].vtbl), cint(typeVal), child.h)
+  vtbl[].owned = true
+
 proc clone*(self: gen_qcoreevent_types.QDynamicPropertyChangeEvent, ): gen_qcoreevent_types.QDynamicPropertyChangeEvent =
-  gen_qcoreevent_types.QDynamicPropertyChangeEvent(h: fcQDynamicPropertyChangeEvent_clone(self.h))
+  gen_qcoreevent_types.QDynamicPropertyChangeEvent(h: fcQDynamicPropertyChangeEvent_clone(self.h), owned: false)
 
 proc propertyName*(self: gen_qcoreevent_types.QDynamicPropertyChangeEvent, ): seq[byte] =
   var v_bytearray = fcQDynamicPropertyChangeEvent_propertyName(self.h)
@@ -470,18 +565,21 @@ proc propertyName*(self: gen_qcoreevent_types.QDynamicPropertyChangeEvent, ): se
 
 type QDynamicPropertyChangeEventcloneProc* = proc(self: QDynamicPropertyChangeEvent): gen_qcoreevent_types.QDynamicPropertyChangeEvent {.raises: [], gcsafe.}
 type QDynamicPropertyChangeEventsetAcceptedProc* = proc(self: QDynamicPropertyChangeEvent, accepted: bool): void {.raises: [], gcsafe.}
-type QDynamicPropertyChangeEventVTable* = object
+type QDynamicPropertyChangeEventVTable* {.inheritable, pure.} = object
   vtbl: cQDynamicPropertyChangeEventVTable
   clone*: QDynamicPropertyChangeEventcloneProc
   setAccepted*: QDynamicPropertyChangeEventsetAcceptedProc
 proc QDynamicPropertyChangeEventclone*(self: gen_qcoreevent_types.QDynamicPropertyChangeEvent, ): gen_qcoreevent_types.QDynamicPropertyChangeEvent =
-  gen_qcoreevent_types.QDynamicPropertyChangeEvent(h: fcQDynamicPropertyChangeEvent_virtualbase_clone(self.h))
+  gen_qcoreevent_types.QDynamicPropertyChangeEvent(h: fcQDynamicPropertyChangeEvent_virtualbase_clone(self.h), owned: false)
 
 proc miqt_exec_callback_cQDynamicPropertyChangeEvent_clone(vtbl: pointer, self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QDynamicPropertyChangeEventVTable](vtbl)
   let self = QDynamicPropertyChangeEvent(h: self)
   var virtualReturn = vtbl[].clone(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QDynamicPropertyChangeEventsetAccepted*(self: gen_qcoreevent_types.QDynamicPropertyChangeEvent, accepted: bool): void =
   fcQDynamicPropertyChangeEvent_virtualbase_setAccepted(self.h, accepted)
@@ -492,19 +590,50 @@ proc miqt_exec_callback_cQDynamicPropertyChangeEvent_setAccepted(vtbl: pointer, 
   let slotval1 = accepted
   vtbl[].setAccepted(self, slotval1)
 
+type VirtualQDynamicPropertyChangeEvent* {.inheritable.} = ref object of QDynamicPropertyChangeEvent
+  vtbl*: cQDynamicPropertyChangeEventVTable
+method clone*(self: VirtualQDynamicPropertyChangeEvent, ): gen_qcoreevent_types.QDynamicPropertyChangeEvent {.base.} =
+  QDynamicPropertyChangeEventclone(self[])
+proc miqt_exec_method_cQDynamicPropertyChangeEvent_clone(vtbl: pointer, inst: pointer): pointer {.cdecl.} =
+  let vtbl = cast[VirtualQDynamicPropertyChangeEvent](cast[uint](vtbl) - uint(offsetOf(VirtualQDynamicPropertyChangeEvent, vtbl)))
+  var virtualReturn = vtbl.clone()
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
+
+method setAccepted*(self: VirtualQDynamicPropertyChangeEvent, accepted: bool): void {.base.} =
+  QDynamicPropertyChangeEventsetAccepted(self[], accepted)
+proc miqt_exec_method_cQDynamicPropertyChangeEvent_setAccepted(vtbl: pointer, inst: pointer, accepted: bool): void {.cdecl.} =
+  let vtbl = cast[VirtualQDynamicPropertyChangeEvent](cast[uint](vtbl) - uint(offsetOf(VirtualQDynamicPropertyChangeEvent, vtbl)))
+  let slotval1 = accepted
+  vtbl.setAccepted(slotval1)
+
 proc create*(T: type gen_qcoreevent_types.QDynamicPropertyChangeEvent,
     name: seq[byte],
     vtbl: ref QDynamicPropertyChangeEventVTable = nil): gen_qcoreevent_types.QDynamicPropertyChangeEvent =
   let vtbl = if vtbl == nil: new QDynamicPropertyChangeEventVTable else: vtbl
   GC_ref(vtbl)
-  vtbl.vtbl.destructor = proc(vtbl: ptr cQDynamicPropertyChangeEventVTable, _: ptr cQDynamicPropertyChangeEvent) {.cdecl.} =
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQDynamicPropertyChangeEventVTable, _: ptr cQDynamicPropertyChangeEvent) {.cdecl.} =
     let vtbl = cast[ref QDynamicPropertyChangeEventVTable](vtbl)
     GC_unref(vtbl)
-  if not isNil(vtbl.clone):
+  if not isNil(vtbl[].clone):
     vtbl[].vtbl.clone = miqt_exec_callback_cQDynamicPropertyChangeEvent_clone
-  if not isNil(vtbl.setAccepted):
+  if not isNil(vtbl[].setAccepted):
     vtbl[].vtbl.setAccepted = miqt_exec_callback_cQDynamicPropertyChangeEvent_setAccepted
-  gen_qcoreevent_types.QDynamicPropertyChangeEvent(h: fcQDynamicPropertyChangeEvent_new(addr(vtbl[]), struct_miqt_string(data: cast[cstring](if len(name) == 0: nil else: unsafeAddr name[0]), len: csize_t(len(name)))))
+  gen_qcoreevent_types.QDynamicPropertyChangeEvent(h: fcQDynamicPropertyChangeEvent_new(addr(vtbl[].vtbl), struct_miqt_string(data: cast[cstring](if len(name) == 0: nil else: unsafeAddr name[0]), len: csize_t(len(name)))), owned: true)
 
-proc delete*(self: gen_qcoreevent_types.QDynamicPropertyChangeEvent) =
-  fcQDynamicPropertyChangeEvent_delete(self.h)
+proc create*(T: type gen_qcoreevent_types.QDynamicPropertyChangeEvent,
+    name: seq[byte],
+    vtbl: VirtualQDynamicPropertyChangeEvent) =
+
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQDynamicPropertyChangeEventVTable, _: ptr cQDynamicPropertyChangeEvent) {.cdecl.} =
+    let vtbl = cast[ptr typeof(VirtualQDynamicPropertyChangeEvent()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQDynamicPropertyChangeEvent, vtbl)))
+    vtbl[].h = nil
+    vtbl[].owned = false
+  vtbl[].vtbl.clone = miqt_exec_method_cQDynamicPropertyChangeEvent_clone
+  vtbl[].vtbl.setAccepted = miqt_exec_method_cQDynamicPropertyChangeEvent_setAccepted
+  if vtbl[].h != nil: delete(move(vtbl[]))
+  vtbl[].h = fcQDynamicPropertyChangeEvent_new(addr(vtbl[].vtbl), struct_miqt_string(data: cast[cstring](if len(name) == 0: nil else: unsafeAddr name[0]), len: csize_t(len(name))))
+  vtbl[].owned = true
+

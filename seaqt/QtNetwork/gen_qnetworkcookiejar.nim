@@ -30,7 +30,7 @@ func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
     else:
       copyMem(addr result[0], unsafeAddr v[0], v.len)
 
-const cflags = gorge("pkg-config --cflags Qt6Network")  & " -fPIC"
+const cflags = gorge("pkg-config --cflags Qt6Network") & " -fPIC"
 {.compile("gen_qnetworkcookiejar.cpp", cflags).}
 
 
@@ -65,7 +65,7 @@ proc fcQNetworkCookieJar_updateCookie(self: pointer, cookie: pointer): bool {.im
 proc fcQNetworkCookieJar_deleteCookie(self: pointer, cookie: pointer): bool {.importc: "QNetworkCookieJar_deleteCookie".}
 proc fcQNetworkCookieJar_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QNetworkCookieJar_tr2".}
 proc fcQNetworkCookieJar_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QNetworkCookieJar_tr3".}
-type cQNetworkCookieJarVTable = object
+type cQNetworkCookieJarVTable {.pure.} = object
   destructor*: proc(vtbl: ptr cQNetworkCookieJarVTable, self: ptr cQNetworkCookieJar) {.cdecl, raises:[], gcsafe.}
   metaObject*: proc(vtbl, self: pointer, ): pointer {.cdecl, raises: [], gcsafe.}
   metacast*: proc(vtbl, self: pointer, param1: cstring): pointer {.cdecl, raises: [], gcsafe.}
@@ -108,10 +108,9 @@ proc fcQNetworkCookieJar_protectedbase_isSignalConnected(self: pointer, signal: 
 proc fcQNetworkCookieJar_new(vtbl: pointer, ): ptr cQNetworkCookieJar {.importc: "QNetworkCookieJar_new".}
 proc fcQNetworkCookieJar_new2(vtbl: pointer, parent: pointer): ptr cQNetworkCookieJar {.importc: "QNetworkCookieJar_new2".}
 proc fcQNetworkCookieJar_staticMetaObject(): pointer {.importc: "QNetworkCookieJar_staticMetaObject".}
-proc fcQNetworkCookieJar_delete(self: pointer) {.importc: "QNetworkCookieJar_delete".}
 
 proc metaObject*(self: gen_qnetworkcookiejar_types.QNetworkCookieJar, ): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQNetworkCookieJar_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQNetworkCookieJar_metaObject(self.h), owned: false)
 
 proc metacast*(self: gen_qnetworkcookiejar_types.QNetworkCookieJar, param1: cstring): pointer =
   fcQNetworkCookieJar_metacast(self.h, param1)
@@ -130,7 +129,7 @@ proc cookiesForUrl*(self: gen_qnetworkcookiejar_types.QNetworkCookieJar, url: ge
   var vx_ret = newSeq[gen_qnetworkcookie_types.QNetworkCookie](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
-    vx_ret[i] = gen_qnetworkcookie_types.QNetworkCookie(h: v_outCast[i])
+    vx_ret[i] = gen_qnetworkcookie_types.QNetworkCookie(h: v_outCast[i], owned: true)
   c_free(v_ma.data)
   vx_ret
 
@@ -178,7 +177,7 @@ type QNetworkCookieJarchildEventProc* = proc(self: QNetworkCookieJar, event: gen
 type QNetworkCookieJarcustomEventProc* = proc(self: QNetworkCookieJar, event: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
 type QNetworkCookieJarconnectNotifyProc* = proc(self: QNetworkCookieJar, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
 type QNetworkCookieJardisconnectNotifyProc* = proc(self: QNetworkCookieJar, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
-type QNetworkCookieJarVTable* = object
+type QNetworkCookieJarVTable* {.inheritable, pure.} = object
   vtbl: cQNetworkCookieJarVTable
   metaObject*: QNetworkCookieJarmetaObjectProc
   metacast*: QNetworkCookieJarmetacastProc
@@ -197,13 +196,16 @@ type QNetworkCookieJarVTable* = object
   connectNotify*: QNetworkCookieJarconnectNotifyProc
   disconnectNotify*: QNetworkCookieJardisconnectNotifyProc
 proc QNetworkCookieJarmetaObject*(self: gen_qnetworkcookiejar_types.QNetworkCookieJar, ): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQNetworkCookieJar_virtualbase_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQNetworkCookieJar_virtualbase_metaObject(self.h), owned: false)
 
 proc miqt_exec_callback_cQNetworkCookieJar_metaObject(vtbl: pointer, self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QNetworkCookieJarVTable](vtbl)
   let self = QNetworkCookieJar(h: self)
   var virtualReturn = vtbl[].metaObject(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QNetworkCookieJarmetacast*(self: gen_qnetworkcookiejar_types.QNetworkCookieJar, param1: cstring): pointer =
   fcQNetworkCookieJar_virtualbase_metacast(self.h, param1)
@@ -232,18 +234,21 @@ proc QNetworkCookieJarcookiesForUrl*(self: gen_qnetworkcookiejar_types.QNetworkC
   var vx_ret = newSeq[gen_qnetworkcookie_types.QNetworkCookie](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
-    vx_ret[i] = gen_qnetworkcookie_types.QNetworkCookie(h: v_outCast[i])
+    vx_ret[i] = gen_qnetworkcookie_types.QNetworkCookie(h: v_outCast[i], owned: true)
   c_free(v_ma.data)
   vx_ret
 
 proc miqt_exec_callback_cQNetworkCookieJar_cookiesForUrl(vtbl: pointer, self: pointer, url: pointer): struct_miqt_array {.cdecl.} =
   let vtbl = cast[ptr QNetworkCookieJarVTable](vtbl)
   let self = QNetworkCookieJar(h: self)
-  let slotval1 = gen_qurl_types.QUrl(h: url)
+  let slotval1 = gen_qurl_types.QUrl(h: url, owned: false)
   var virtualReturn = vtbl[].cookiesForUrl(self, slotval1)
   var virtualReturn_CArray = cast[ptr UncheckedArray[pointer]](if len(virtualReturn) > 0: c_malloc(c_sizet(sizeof(pointer) * len(virtualReturn))) else: nil)
   for i in 0..<len(virtualReturn):
-    virtualReturn_CArray[i] = virtualReturn[i].h
+    virtualReturn[i].owned = false # TODO move?
+    let virtualReturn_i_h = virtualReturn[i].h
+    virtualReturn[i].h = nil
+    virtualReturn_CArray[i] = virtualReturn_i_h
 
   struct_miqt_array(len: csize_t(len(virtualReturn)), data: if len(virtualReturn) == 0: nil else: addr(virtualReturn_CArray[0]))
 
@@ -261,10 +266,10 @@ proc miqt_exec_callback_cQNetworkCookieJar_setCookiesFromUrl(vtbl: pointer, self
   var vcookieListx_ret = newSeq[gen_qnetworkcookie_types.QNetworkCookie](int(vcookieList_ma.len))
   let vcookieList_outCast = cast[ptr UncheckedArray[pointer]](vcookieList_ma.data)
   for i in 0 ..< vcookieList_ma.len:
-    vcookieListx_ret[i] = gen_qnetworkcookie_types.QNetworkCookie(h: vcookieList_outCast[i])
+    vcookieListx_ret[i] = gen_qnetworkcookie_types.QNetworkCookie(h: vcookieList_outCast[i], owned: true)
   c_free(vcookieList_ma.data)
   let slotval1 = vcookieListx_ret
-  let slotval2 = gen_qurl_types.QUrl(h: url)
+  let slotval2 = gen_qurl_types.QUrl(h: url, owned: false)
   var virtualReturn = vtbl[].setCookiesFromUrl(self, slotval1, slotval2)
   virtualReturn
 
@@ -274,7 +279,7 @@ proc QNetworkCookieJarinsertCookie*(self: gen_qnetworkcookiejar_types.QNetworkCo
 proc miqt_exec_callback_cQNetworkCookieJar_insertCookie(vtbl: pointer, self: pointer, cookie: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QNetworkCookieJarVTable](vtbl)
   let self = QNetworkCookieJar(h: self)
-  let slotval1 = gen_qnetworkcookie_types.QNetworkCookie(h: cookie)
+  let slotval1 = gen_qnetworkcookie_types.QNetworkCookie(h: cookie, owned: false)
   var virtualReturn = vtbl[].insertCookie(self, slotval1)
   virtualReturn
 
@@ -284,7 +289,7 @@ proc QNetworkCookieJarupdateCookie*(self: gen_qnetworkcookiejar_types.QNetworkCo
 proc miqt_exec_callback_cQNetworkCookieJar_updateCookie(vtbl: pointer, self: pointer, cookie: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QNetworkCookieJarVTable](vtbl)
   let self = QNetworkCookieJar(h: self)
-  let slotval1 = gen_qnetworkcookie_types.QNetworkCookie(h: cookie)
+  let slotval1 = gen_qnetworkcookie_types.QNetworkCookie(h: cookie, owned: false)
   var virtualReturn = vtbl[].updateCookie(self, slotval1)
   virtualReturn
 
@@ -294,7 +299,7 @@ proc QNetworkCookieJardeleteCookie*(self: gen_qnetworkcookiejar_types.QNetworkCo
 proc miqt_exec_callback_cQNetworkCookieJar_deleteCookie(vtbl: pointer, self: pointer, cookie: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QNetworkCookieJarVTable](vtbl)
   let self = QNetworkCookieJar(h: self)
-  let slotval1 = gen_qnetworkcookie_types.QNetworkCookie(h: cookie)
+  let slotval1 = gen_qnetworkcookie_types.QNetworkCookie(h: cookie, owned: false)
   var virtualReturn = vtbl[].deleteCookie(self, slotval1)
   virtualReturn
 
@@ -304,8 +309,8 @@ proc QNetworkCookieJarvalidateCookie*(self: gen_qnetworkcookiejar_types.QNetwork
 proc miqt_exec_callback_cQNetworkCookieJar_validateCookie(vtbl: pointer, self: pointer, cookie: pointer, url: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QNetworkCookieJarVTable](vtbl)
   let self = QNetworkCookieJar(h: self)
-  let slotval1 = gen_qnetworkcookie_types.QNetworkCookie(h: cookie)
-  let slotval2 = gen_qurl_types.QUrl(h: url)
+  let slotval1 = gen_qnetworkcookie_types.QNetworkCookie(h: cookie, owned: false)
+  let slotval2 = gen_qurl_types.QUrl(h: url, owned: false)
   var virtualReturn = vtbl[].validateCookie(self, slotval1, slotval2)
   virtualReturn
 
@@ -315,7 +320,7 @@ proc QNetworkCookieJarevent*(self: gen_qnetworkcookiejar_types.QNetworkCookieJar
 proc miqt_exec_callback_cQNetworkCookieJar_event(vtbl: pointer, self: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QNetworkCookieJarVTable](vtbl)
   let self = QNetworkCookieJar(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].event(self, slotval1)
   virtualReturn
 
@@ -325,8 +330,8 @@ proc QNetworkCookieJareventFilter*(self: gen_qnetworkcookiejar_types.QNetworkCoo
 proc miqt_exec_callback_cQNetworkCookieJar_eventFilter(vtbl: pointer, self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QNetworkCookieJarVTable](vtbl)
   let self = QNetworkCookieJar(h: self)
-  let slotval1 = gen_qobject_types.QObject(h: watched)
-  let slotval2 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].eventFilter(self, slotval1, slotval2)
   virtualReturn
 
@@ -336,7 +341,7 @@ proc QNetworkCookieJartimerEvent*(self: gen_qnetworkcookiejar_types.QNetworkCook
 proc miqt_exec_callback_cQNetworkCookieJar_timerEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QNetworkCookieJarVTable](vtbl)
   let self = QNetworkCookieJar(h: self)
-  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   vtbl[].timerEvent(self, slotval1)
 
 proc QNetworkCookieJarchildEvent*(self: gen_qnetworkcookiejar_types.QNetworkCookieJar, event: gen_qcoreevent_types.QChildEvent): void =
@@ -345,7 +350,7 @@ proc QNetworkCookieJarchildEvent*(self: gen_qnetworkcookiejar_types.QNetworkCook
 proc miqt_exec_callback_cQNetworkCookieJar_childEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QNetworkCookieJarVTable](vtbl)
   let self = QNetworkCookieJar(h: self)
-  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   vtbl[].childEvent(self, slotval1)
 
 proc QNetworkCookieJarcustomEvent*(self: gen_qnetworkcookiejar_types.QNetworkCookieJar, event: gen_qcoreevent_types.QEvent): void =
@@ -354,7 +359,7 @@ proc QNetworkCookieJarcustomEvent*(self: gen_qnetworkcookiejar_types.QNetworkCoo
 proc miqt_exec_callback_cQNetworkCookieJar_customEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QNetworkCookieJarVTable](vtbl)
   let self = QNetworkCookieJar(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].customEvent(self, slotval1)
 
 proc QNetworkCookieJarconnectNotify*(self: gen_qnetworkcookiejar_types.QNetworkCookieJar, signal: gen_qmetaobject_types.QMetaMethod): void =
@@ -363,7 +368,7 @@ proc QNetworkCookieJarconnectNotify*(self: gen_qnetworkcookiejar_types.QNetworkC
 proc miqt_exec_callback_cQNetworkCookieJar_connectNotify(vtbl: pointer, self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QNetworkCookieJarVTable](vtbl)
   let self = QNetworkCookieJar(h: self)
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].connectNotify(self, slotval1)
 
 proc QNetworkCookieJardisconnectNotify*(self: gen_qnetworkcookiejar_types.QNetworkCookieJar, signal: gen_qmetaobject_types.QMetaMethod): void =
@@ -372,15 +377,160 @@ proc QNetworkCookieJardisconnectNotify*(self: gen_qnetworkcookiejar_types.QNetwo
 proc miqt_exec_callback_cQNetworkCookieJar_disconnectNotify(vtbl: pointer, self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QNetworkCookieJarVTable](vtbl)
   let self = QNetworkCookieJar(h: self)
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].disconnectNotify(self, slotval1)
+
+type VirtualQNetworkCookieJar* {.inheritable.} = ref object of QNetworkCookieJar
+  vtbl*: cQNetworkCookieJarVTable
+method metaObject*(self: VirtualQNetworkCookieJar, ): gen_qobjectdefs_types.QMetaObject {.base.} =
+  QNetworkCookieJarmetaObject(self[])
+proc miqt_exec_method_cQNetworkCookieJar_metaObject(vtbl: pointer, inst: pointer): pointer {.cdecl.} =
+  let vtbl = cast[VirtualQNetworkCookieJar](cast[uint](vtbl) - uint(offsetOf(VirtualQNetworkCookieJar, vtbl)))
+  var virtualReturn = vtbl.metaObject()
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
+
+method metacast*(self: VirtualQNetworkCookieJar, param1: cstring): pointer {.base.} =
+  QNetworkCookieJarmetacast(self[], param1)
+proc miqt_exec_method_cQNetworkCookieJar_metacast(vtbl: pointer, inst: pointer, param1: cstring): pointer {.cdecl.} =
+  let vtbl = cast[VirtualQNetworkCookieJar](cast[uint](vtbl) - uint(offsetOf(VirtualQNetworkCookieJar, vtbl)))
+  let slotval1 = (param1)
+  var virtualReturn = vtbl.metacast(slotval1)
+  virtualReturn
+
+method metacall*(self: VirtualQNetworkCookieJar, param1: cint, param2: cint, param3: pointer): cint {.base.} =
+  QNetworkCookieJarmetacall(self[], param1, param2, param3)
+proc miqt_exec_method_cQNetworkCookieJar_metacall(vtbl: pointer, inst: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
+  let vtbl = cast[VirtualQNetworkCookieJar](cast[uint](vtbl) - uint(offsetOf(VirtualQNetworkCookieJar, vtbl)))
+  let slotval1 = cint(param1)
+  let slotval2 = param2
+  let slotval3 = param3
+  var virtualReturn = vtbl.metacall(slotval1, slotval2, slotval3)
+  virtualReturn
+
+method cookiesForUrl*(self: VirtualQNetworkCookieJar, url: gen_qurl_types.QUrl): seq[gen_qnetworkcookie_types.QNetworkCookie] {.base.} =
+  QNetworkCookieJarcookiesForUrl(self[], url)
+proc miqt_exec_method_cQNetworkCookieJar_cookiesForUrl(vtbl: pointer, inst: pointer, url: pointer): struct_miqt_array {.cdecl.} =
+  let vtbl = cast[VirtualQNetworkCookieJar](cast[uint](vtbl) - uint(offsetOf(VirtualQNetworkCookieJar, vtbl)))
+  let slotval1 = gen_qurl_types.QUrl(h: url, owned: false)
+  var virtualReturn = vtbl.cookiesForUrl(slotval1)
+  var virtualReturn_CArray = cast[ptr UncheckedArray[pointer]](if len(virtualReturn) > 0: c_malloc(c_sizet(sizeof(pointer) * len(virtualReturn))) else: nil)
+  for i in 0..<len(virtualReturn):
+    virtualReturn[i].owned = false # TODO move?
+    let virtualReturn_i_h = virtualReturn[i].h
+    virtualReturn[i].h = nil
+    virtualReturn_CArray[i] = virtualReturn_i_h
+
+  struct_miqt_array(len: csize_t(len(virtualReturn)), data: if len(virtualReturn) == 0: nil else: addr(virtualReturn_CArray[0]))
+
+method setCookiesFromUrl*(self: VirtualQNetworkCookieJar, cookieList: seq[gen_qnetworkcookie_types.QNetworkCookie], url: gen_qurl_types.QUrl): bool {.base.} =
+  QNetworkCookieJarsetCookiesFromUrl(self[], cookieList, url)
+proc miqt_exec_method_cQNetworkCookieJar_setCookiesFromUrl(vtbl: pointer, inst: pointer, cookieList: struct_miqt_array, url: pointer): bool {.cdecl.} =
+  let vtbl = cast[VirtualQNetworkCookieJar](cast[uint](vtbl) - uint(offsetOf(VirtualQNetworkCookieJar, vtbl)))
+  var vcookieList_ma = cookieList
+  var vcookieListx_ret = newSeq[gen_qnetworkcookie_types.QNetworkCookie](int(vcookieList_ma.len))
+  let vcookieList_outCast = cast[ptr UncheckedArray[pointer]](vcookieList_ma.data)
+  for i in 0 ..< vcookieList_ma.len:
+    vcookieListx_ret[i] = gen_qnetworkcookie_types.QNetworkCookie(h: vcookieList_outCast[i], owned: true)
+  c_free(vcookieList_ma.data)
+  let slotval1 = vcookieListx_ret
+  let slotval2 = gen_qurl_types.QUrl(h: url, owned: false)
+  var virtualReturn = vtbl.setCookiesFromUrl(slotval1, slotval2)
+  virtualReturn
+
+method insertCookie*(self: VirtualQNetworkCookieJar, cookie: gen_qnetworkcookie_types.QNetworkCookie): bool {.base.} =
+  QNetworkCookieJarinsertCookie(self[], cookie)
+proc miqt_exec_method_cQNetworkCookieJar_insertCookie(vtbl: pointer, inst: pointer, cookie: pointer): bool {.cdecl.} =
+  let vtbl = cast[VirtualQNetworkCookieJar](cast[uint](vtbl) - uint(offsetOf(VirtualQNetworkCookieJar, vtbl)))
+  let slotval1 = gen_qnetworkcookie_types.QNetworkCookie(h: cookie, owned: false)
+  var virtualReturn = vtbl.insertCookie(slotval1)
+  virtualReturn
+
+method updateCookie*(self: VirtualQNetworkCookieJar, cookie: gen_qnetworkcookie_types.QNetworkCookie): bool {.base.} =
+  QNetworkCookieJarupdateCookie(self[], cookie)
+proc miqt_exec_method_cQNetworkCookieJar_updateCookie(vtbl: pointer, inst: pointer, cookie: pointer): bool {.cdecl.} =
+  let vtbl = cast[VirtualQNetworkCookieJar](cast[uint](vtbl) - uint(offsetOf(VirtualQNetworkCookieJar, vtbl)))
+  let slotval1 = gen_qnetworkcookie_types.QNetworkCookie(h: cookie, owned: false)
+  var virtualReturn = vtbl.updateCookie(slotval1)
+  virtualReturn
+
+method deleteCookie*(self: VirtualQNetworkCookieJar, cookie: gen_qnetworkcookie_types.QNetworkCookie): bool {.base.} =
+  QNetworkCookieJardeleteCookie(self[], cookie)
+proc miqt_exec_method_cQNetworkCookieJar_deleteCookie(vtbl: pointer, inst: pointer, cookie: pointer): bool {.cdecl.} =
+  let vtbl = cast[VirtualQNetworkCookieJar](cast[uint](vtbl) - uint(offsetOf(VirtualQNetworkCookieJar, vtbl)))
+  let slotval1 = gen_qnetworkcookie_types.QNetworkCookie(h: cookie, owned: false)
+  var virtualReturn = vtbl.deleteCookie(slotval1)
+  virtualReturn
+
+method validateCookie*(self: VirtualQNetworkCookieJar, cookie: gen_qnetworkcookie_types.QNetworkCookie, url: gen_qurl_types.QUrl): bool {.base.} =
+  QNetworkCookieJarvalidateCookie(self[], cookie, url)
+proc miqt_exec_method_cQNetworkCookieJar_validateCookie(vtbl: pointer, inst: pointer, cookie: pointer, url: pointer): bool {.cdecl.} =
+  let vtbl = cast[VirtualQNetworkCookieJar](cast[uint](vtbl) - uint(offsetOf(VirtualQNetworkCookieJar, vtbl)))
+  let slotval1 = gen_qnetworkcookie_types.QNetworkCookie(h: cookie, owned: false)
+  let slotval2 = gen_qurl_types.QUrl(h: url, owned: false)
+  var virtualReturn = vtbl.validateCookie(slotval1, slotval2)
+  virtualReturn
+
+method event*(self: VirtualQNetworkCookieJar, event: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QNetworkCookieJarevent(self[], event)
+proc miqt_exec_method_cQNetworkCookieJar_event(vtbl: pointer, inst: pointer, event: pointer): bool {.cdecl.} =
+  let vtbl = cast[VirtualQNetworkCookieJar](cast[uint](vtbl) - uint(offsetOf(VirtualQNetworkCookieJar, vtbl)))
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
+  var virtualReturn = vtbl.event(slotval1)
+  virtualReturn
+
+method eventFilter*(self: VirtualQNetworkCookieJar, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QNetworkCookieJareventFilter(self[], watched, event)
+proc miqt_exec_method_cQNetworkCookieJar_eventFilter(vtbl: pointer, inst: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
+  let vtbl = cast[VirtualQNetworkCookieJar](cast[uint](vtbl) - uint(offsetOf(VirtualQNetworkCookieJar, vtbl)))
+  let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
+  var virtualReturn = vtbl.eventFilter(slotval1, slotval2)
+  virtualReturn
+
+method timerEvent*(self: VirtualQNetworkCookieJar, event: gen_qcoreevent_types.QTimerEvent): void {.base.} =
+  QNetworkCookieJartimerEvent(self[], event)
+proc miqt_exec_method_cQNetworkCookieJar_timerEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQNetworkCookieJar](cast[uint](vtbl) - uint(offsetOf(VirtualQNetworkCookieJar, vtbl)))
+  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
+  vtbl.timerEvent(slotval1)
+
+method childEvent*(self: VirtualQNetworkCookieJar, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
+  QNetworkCookieJarchildEvent(self[], event)
+proc miqt_exec_method_cQNetworkCookieJar_childEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQNetworkCookieJar](cast[uint](vtbl) - uint(offsetOf(VirtualQNetworkCookieJar, vtbl)))
+  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
+  vtbl.childEvent(slotval1)
+
+method customEvent*(self: VirtualQNetworkCookieJar, event: gen_qcoreevent_types.QEvent): void {.base.} =
+  QNetworkCookieJarcustomEvent(self[], event)
+proc miqt_exec_method_cQNetworkCookieJar_customEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQNetworkCookieJar](cast[uint](vtbl) - uint(offsetOf(VirtualQNetworkCookieJar, vtbl)))
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
+  vtbl.customEvent(slotval1)
+
+method connectNotify*(self: VirtualQNetworkCookieJar, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QNetworkCookieJarconnectNotify(self[], signal)
+proc miqt_exec_method_cQNetworkCookieJar_connectNotify(vtbl: pointer, inst: pointer, signal: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQNetworkCookieJar](cast[uint](vtbl) - uint(offsetOf(VirtualQNetworkCookieJar, vtbl)))
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
+  vtbl.connectNotify(slotval1)
+
+method disconnectNotify*(self: VirtualQNetworkCookieJar, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QNetworkCookieJardisconnectNotify(self[], signal)
+proc miqt_exec_method_cQNetworkCookieJar_disconnectNotify(vtbl: pointer, inst: pointer, signal: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQNetworkCookieJar](cast[uint](vtbl) - uint(offsetOf(VirtualQNetworkCookieJar, vtbl)))
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
+  vtbl.disconnectNotify(slotval1)
 
 proc allCookies*(self: gen_qnetworkcookiejar_types.QNetworkCookieJar, ): seq[gen_qnetworkcookie_types.QNetworkCookie] =
   var v_ma = fcQNetworkCookieJar_protectedbase_allCookies(self.h)
   var vx_ret = newSeq[gen_qnetworkcookie_types.QNetworkCookie](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
-    vx_ret[i] = gen_qnetworkcookie_types.QNetworkCookie(h: v_outCast[i])
+    vx_ret[i] = gen_qnetworkcookie_types.QNetworkCookie(h: v_outCast[i], owned: true)
   c_free(v_ma.data)
   vx_ret
 
@@ -392,7 +542,7 @@ proc setAllCookies*(self: gen_qnetworkcookiejar_types.QNetworkCookieJar, cookieL
   fcQNetworkCookieJar_protectedbase_setAllCookies(self.h, struct_miqt_array(len: csize_t(len(cookieList)), data: if len(cookieList) == 0: nil else: addr(cookieList_CArray[0])))
 
 proc sender*(self: gen_qnetworkcookiejar_types.QNetworkCookieJar, ): gen_qobject_types.QObject =
-  gen_qobject_types.QObject(h: fcQNetworkCookieJar_protectedbase_sender(self.h))
+  gen_qobject_types.QObject(h: fcQNetworkCookieJar_protectedbase_sender(self.h), owned: false)
 
 proc senderSignalIndex*(self: gen_qnetworkcookiejar_types.QNetworkCookieJar, ): cint =
   fcQNetworkCookieJar_protectedbase_senderSignalIndex(self.h)
@@ -407,86 +557,139 @@ proc create*(T: type gen_qnetworkcookiejar_types.QNetworkCookieJar,
     vtbl: ref QNetworkCookieJarVTable = nil): gen_qnetworkcookiejar_types.QNetworkCookieJar =
   let vtbl = if vtbl == nil: new QNetworkCookieJarVTable else: vtbl
   GC_ref(vtbl)
-  vtbl.vtbl.destructor = proc(vtbl: ptr cQNetworkCookieJarVTable, _: ptr cQNetworkCookieJar) {.cdecl.} =
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQNetworkCookieJarVTable, _: ptr cQNetworkCookieJar) {.cdecl.} =
     let vtbl = cast[ref QNetworkCookieJarVTable](vtbl)
     GC_unref(vtbl)
-  if not isNil(vtbl.metaObject):
+  if not isNil(vtbl[].metaObject):
     vtbl[].vtbl.metaObject = miqt_exec_callback_cQNetworkCookieJar_metaObject
-  if not isNil(vtbl.metacast):
+  if not isNil(vtbl[].metacast):
     vtbl[].vtbl.metacast = miqt_exec_callback_cQNetworkCookieJar_metacast
-  if not isNil(vtbl.metacall):
+  if not isNil(vtbl[].metacall):
     vtbl[].vtbl.metacall = miqt_exec_callback_cQNetworkCookieJar_metacall
-  if not isNil(vtbl.cookiesForUrl):
+  if not isNil(vtbl[].cookiesForUrl):
     vtbl[].vtbl.cookiesForUrl = miqt_exec_callback_cQNetworkCookieJar_cookiesForUrl
-  if not isNil(vtbl.setCookiesFromUrl):
+  if not isNil(vtbl[].setCookiesFromUrl):
     vtbl[].vtbl.setCookiesFromUrl = miqt_exec_callback_cQNetworkCookieJar_setCookiesFromUrl
-  if not isNil(vtbl.insertCookie):
+  if not isNil(vtbl[].insertCookie):
     vtbl[].vtbl.insertCookie = miqt_exec_callback_cQNetworkCookieJar_insertCookie
-  if not isNil(vtbl.updateCookie):
+  if not isNil(vtbl[].updateCookie):
     vtbl[].vtbl.updateCookie = miqt_exec_callback_cQNetworkCookieJar_updateCookie
-  if not isNil(vtbl.deleteCookie):
+  if not isNil(vtbl[].deleteCookie):
     vtbl[].vtbl.deleteCookie = miqt_exec_callback_cQNetworkCookieJar_deleteCookie
-  if not isNil(vtbl.validateCookie):
+  if not isNil(vtbl[].validateCookie):
     vtbl[].vtbl.validateCookie = miqt_exec_callback_cQNetworkCookieJar_validateCookie
-  if not isNil(vtbl.event):
+  if not isNil(vtbl[].event):
     vtbl[].vtbl.event = miqt_exec_callback_cQNetworkCookieJar_event
-  if not isNil(vtbl.eventFilter):
+  if not isNil(vtbl[].eventFilter):
     vtbl[].vtbl.eventFilter = miqt_exec_callback_cQNetworkCookieJar_eventFilter
-  if not isNil(vtbl.timerEvent):
+  if not isNil(vtbl[].timerEvent):
     vtbl[].vtbl.timerEvent = miqt_exec_callback_cQNetworkCookieJar_timerEvent
-  if not isNil(vtbl.childEvent):
+  if not isNil(vtbl[].childEvent):
     vtbl[].vtbl.childEvent = miqt_exec_callback_cQNetworkCookieJar_childEvent
-  if not isNil(vtbl.customEvent):
+  if not isNil(vtbl[].customEvent):
     vtbl[].vtbl.customEvent = miqt_exec_callback_cQNetworkCookieJar_customEvent
-  if not isNil(vtbl.connectNotify):
+  if not isNil(vtbl[].connectNotify):
     vtbl[].vtbl.connectNotify = miqt_exec_callback_cQNetworkCookieJar_connectNotify
-  if not isNil(vtbl.disconnectNotify):
+  if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQNetworkCookieJar_disconnectNotify
-  gen_qnetworkcookiejar_types.QNetworkCookieJar(h: fcQNetworkCookieJar_new(addr(vtbl[]), ))
+  gen_qnetworkcookiejar_types.QNetworkCookieJar(h: fcQNetworkCookieJar_new(addr(vtbl[].vtbl), ), owned: true)
 
 proc create*(T: type gen_qnetworkcookiejar_types.QNetworkCookieJar,
     parent: gen_qobject_types.QObject,
     vtbl: ref QNetworkCookieJarVTable = nil): gen_qnetworkcookiejar_types.QNetworkCookieJar =
   let vtbl = if vtbl == nil: new QNetworkCookieJarVTable else: vtbl
   GC_ref(vtbl)
-  vtbl.vtbl.destructor = proc(vtbl: ptr cQNetworkCookieJarVTable, _: ptr cQNetworkCookieJar) {.cdecl.} =
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQNetworkCookieJarVTable, _: ptr cQNetworkCookieJar) {.cdecl.} =
     let vtbl = cast[ref QNetworkCookieJarVTable](vtbl)
     GC_unref(vtbl)
-  if not isNil(vtbl.metaObject):
+  if not isNil(vtbl[].metaObject):
     vtbl[].vtbl.metaObject = miqt_exec_callback_cQNetworkCookieJar_metaObject
-  if not isNil(vtbl.metacast):
+  if not isNil(vtbl[].metacast):
     vtbl[].vtbl.metacast = miqt_exec_callback_cQNetworkCookieJar_metacast
-  if not isNil(vtbl.metacall):
+  if not isNil(vtbl[].metacall):
     vtbl[].vtbl.metacall = miqt_exec_callback_cQNetworkCookieJar_metacall
-  if not isNil(vtbl.cookiesForUrl):
+  if not isNil(vtbl[].cookiesForUrl):
     vtbl[].vtbl.cookiesForUrl = miqt_exec_callback_cQNetworkCookieJar_cookiesForUrl
-  if not isNil(vtbl.setCookiesFromUrl):
+  if not isNil(vtbl[].setCookiesFromUrl):
     vtbl[].vtbl.setCookiesFromUrl = miqt_exec_callback_cQNetworkCookieJar_setCookiesFromUrl
-  if not isNil(vtbl.insertCookie):
+  if not isNil(vtbl[].insertCookie):
     vtbl[].vtbl.insertCookie = miqt_exec_callback_cQNetworkCookieJar_insertCookie
-  if not isNil(vtbl.updateCookie):
+  if not isNil(vtbl[].updateCookie):
     vtbl[].vtbl.updateCookie = miqt_exec_callback_cQNetworkCookieJar_updateCookie
-  if not isNil(vtbl.deleteCookie):
+  if not isNil(vtbl[].deleteCookie):
     vtbl[].vtbl.deleteCookie = miqt_exec_callback_cQNetworkCookieJar_deleteCookie
-  if not isNil(vtbl.validateCookie):
+  if not isNil(vtbl[].validateCookie):
     vtbl[].vtbl.validateCookie = miqt_exec_callback_cQNetworkCookieJar_validateCookie
-  if not isNil(vtbl.event):
+  if not isNil(vtbl[].event):
     vtbl[].vtbl.event = miqt_exec_callback_cQNetworkCookieJar_event
-  if not isNil(vtbl.eventFilter):
+  if not isNil(vtbl[].eventFilter):
     vtbl[].vtbl.eventFilter = miqt_exec_callback_cQNetworkCookieJar_eventFilter
-  if not isNil(vtbl.timerEvent):
+  if not isNil(vtbl[].timerEvent):
     vtbl[].vtbl.timerEvent = miqt_exec_callback_cQNetworkCookieJar_timerEvent
-  if not isNil(vtbl.childEvent):
+  if not isNil(vtbl[].childEvent):
     vtbl[].vtbl.childEvent = miqt_exec_callback_cQNetworkCookieJar_childEvent
-  if not isNil(vtbl.customEvent):
+  if not isNil(vtbl[].customEvent):
     vtbl[].vtbl.customEvent = miqt_exec_callback_cQNetworkCookieJar_customEvent
-  if not isNil(vtbl.connectNotify):
+  if not isNil(vtbl[].connectNotify):
     vtbl[].vtbl.connectNotify = miqt_exec_callback_cQNetworkCookieJar_connectNotify
-  if not isNil(vtbl.disconnectNotify):
+  if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQNetworkCookieJar_disconnectNotify
-  gen_qnetworkcookiejar_types.QNetworkCookieJar(h: fcQNetworkCookieJar_new2(addr(vtbl[]), parent.h))
+  gen_qnetworkcookiejar_types.QNetworkCookieJar(h: fcQNetworkCookieJar_new2(addr(vtbl[].vtbl), parent.h), owned: true)
+
+proc create*(T: type gen_qnetworkcookiejar_types.QNetworkCookieJar,
+    vtbl: VirtualQNetworkCookieJar) =
+
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQNetworkCookieJarVTable, _: ptr cQNetworkCookieJar) {.cdecl.} =
+    let vtbl = cast[ptr typeof(VirtualQNetworkCookieJar()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQNetworkCookieJar, vtbl)))
+    vtbl[].h = nil
+    vtbl[].owned = false
+  vtbl[].vtbl.metaObject = miqt_exec_method_cQNetworkCookieJar_metaObject
+  vtbl[].vtbl.metacast = miqt_exec_method_cQNetworkCookieJar_metacast
+  vtbl[].vtbl.metacall = miqt_exec_method_cQNetworkCookieJar_metacall
+  vtbl[].vtbl.cookiesForUrl = miqt_exec_method_cQNetworkCookieJar_cookiesForUrl
+  vtbl[].vtbl.setCookiesFromUrl = miqt_exec_method_cQNetworkCookieJar_setCookiesFromUrl
+  vtbl[].vtbl.insertCookie = miqt_exec_method_cQNetworkCookieJar_insertCookie
+  vtbl[].vtbl.updateCookie = miqt_exec_method_cQNetworkCookieJar_updateCookie
+  vtbl[].vtbl.deleteCookie = miqt_exec_method_cQNetworkCookieJar_deleteCookie
+  vtbl[].vtbl.validateCookie = miqt_exec_method_cQNetworkCookieJar_validateCookie
+  vtbl[].vtbl.event = miqt_exec_method_cQNetworkCookieJar_event
+  vtbl[].vtbl.eventFilter = miqt_exec_method_cQNetworkCookieJar_eventFilter
+  vtbl[].vtbl.timerEvent = miqt_exec_method_cQNetworkCookieJar_timerEvent
+  vtbl[].vtbl.childEvent = miqt_exec_method_cQNetworkCookieJar_childEvent
+  vtbl[].vtbl.customEvent = miqt_exec_method_cQNetworkCookieJar_customEvent
+  vtbl[].vtbl.connectNotify = miqt_exec_method_cQNetworkCookieJar_connectNotify
+  vtbl[].vtbl.disconnectNotify = miqt_exec_method_cQNetworkCookieJar_disconnectNotify
+  if vtbl[].h != nil: delete(move(vtbl[]))
+  vtbl[].h = fcQNetworkCookieJar_new(addr(vtbl[].vtbl), )
+  vtbl[].owned = true
+
+proc create*(T: type gen_qnetworkcookiejar_types.QNetworkCookieJar,
+    parent: gen_qobject_types.QObject,
+    vtbl: VirtualQNetworkCookieJar) =
+
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQNetworkCookieJarVTable, _: ptr cQNetworkCookieJar) {.cdecl.} =
+    let vtbl = cast[ptr typeof(VirtualQNetworkCookieJar()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQNetworkCookieJar, vtbl)))
+    vtbl[].h = nil
+    vtbl[].owned = false
+  vtbl[].vtbl.metaObject = miqt_exec_method_cQNetworkCookieJar_metaObject
+  vtbl[].vtbl.metacast = miqt_exec_method_cQNetworkCookieJar_metacast
+  vtbl[].vtbl.metacall = miqt_exec_method_cQNetworkCookieJar_metacall
+  vtbl[].vtbl.cookiesForUrl = miqt_exec_method_cQNetworkCookieJar_cookiesForUrl
+  vtbl[].vtbl.setCookiesFromUrl = miqt_exec_method_cQNetworkCookieJar_setCookiesFromUrl
+  vtbl[].vtbl.insertCookie = miqt_exec_method_cQNetworkCookieJar_insertCookie
+  vtbl[].vtbl.updateCookie = miqt_exec_method_cQNetworkCookieJar_updateCookie
+  vtbl[].vtbl.deleteCookie = miqt_exec_method_cQNetworkCookieJar_deleteCookie
+  vtbl[].vtbl.validateCookie = miqt_exec_method_cQNetworkCookieJar_validateCookie
+  vtbl[].vtbl.event = miqt_exec_method_cQNetworkCookieJar_event
+  vtbl[].vtbl.eventFilter = miqt_exec_method_cQNetworkCookieJar_eventFilter
+  vtbl[].vtbl.timerEvent = miqt_exec_method_cQNetworkCookieJar_timerEvent
+  vtbl[].vtbl.childEvent = miqt_exec_method_cQNetworkCookieJar_childEvent
+  vtbl[].vtbl.customEvent = miqt_exec_method_cQNetworkCookieJar_customEvent
+  vtbl[].vtbl.connectNotify = miqt_exec_method_cQNetworkCookieJar_connectNotify
+  vtbl[].vtbl.disconnectNotify = miqt_exec_method_cQNetworkCookieJar_disconnectNotify
+  if vtbl[].h != nil: delete(move(vtbl[]))
+  vtbl[].h = fcQNetworkCookieJar_new2(addr(vtbl[].vtbl), parent.h)
+  vtbl[].owned = true
 
 proc staticMetaObject*(_: type gen_qnetworkcookiejar_types.QNetworkCookieJar): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQNetworkCookieJar_staticMetaObject())
-proc delete*(self: gen_qnetworkcookiejar_types.QNetworkCookieJar) =
-  fcQNetworkCookieJar_delete(self.h)

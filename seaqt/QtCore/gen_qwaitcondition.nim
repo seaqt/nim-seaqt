@@ -30,9 +30,6 @@ func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
     else:
       copyMem(addr result[0], unsafeAddr v[0], v.len)
 
-const cflags = gorge("pkg-config --cflags Qt6Core")  & " -fPIC"
-{.compile("gen_qwaitcondition.cpp", cflags).}
-
 
 import ./gen_qwaitcondition_types
 export gen_qwaitcondition_types
@@ -59,7 +56,6 @@ proc fcQWaitCondition_notifyAll(self: pointer, ): void {.importc: "QWaitConditio
 proc fcQWaitCondition_wait22(self: pointer, lockedMutex: pointer, deadline: pointer): bool {.importc: "QWaitCondition_wait22".}
 proc fcQWaitCondition_wait23(self: pointer, lockedReadWriteLock: pointer, deadline: pointer): bool {.importc: "QWaitCondition_wait23".}
 proc fcQWaitCondition_new(): ptr cQWaitCondition {.importc: "QWaitCondition_new".}
-proc fcQWaitCondition_delete(self: pointer) {.importc: "QWaitCondition_delete".}
 
 proc wait*(self: gen_qwaitcondition_types.QWaitCondition, lockedMutex: gen_qmutex_types.QMutex): bool =
   fcQWaitCondition_wait(self.h, lockedMutex.h)
@@ -92,7 +88,5 @@ proc wait*(self: gen_qwaitcondition_types.QWaitCondition, lockedReadWriteLock: g
   fcQWaitCondition_wait23(self.h, lockedReadWriteLock.h, deadline.h)
 
 proc create*(T: type gen_qwaitcondition_types.QWaitCondition): gen_qwaitcondition_types.QWaitCondition =
-  gen_qwaitcondition_types.QWaitCondition(h: fcQWaitCondition_new())
+  gen_qwaitcondition_types.QWaitCondition(h: fcQWaitCondition_new(), owned: true)
 
-proc delete*(self: gen_qwaitcondition_types.QWaitCondition) =
-  fcQWaitCondition_delete(self.h)

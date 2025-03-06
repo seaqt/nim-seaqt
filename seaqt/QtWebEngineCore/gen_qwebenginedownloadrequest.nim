@@ -30,7 +30,7 @@ func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
     else:
       copyMem(addr result[0], unsafeAddr v[0], v.len)
 
-const cflags = gorge("pkg-config --cflags Qt6WebEngineCore")  & " -fPIC"
+const cflags = gorge("pkg-config --cflags Qt6WebEngineCore") & " -fPIC"
 {.compile("gen_qwebenginedownloadrequest.cpp", cflags).}
 
 
@@ -146,10 +146,9 @@ proc fcQWebEngineDownloadRequest_protectedbase_senderSignalIndex(self: pointer, 
 proc fcQWebEngineDownloadRequest_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QWebEngineDownloadRequest_protectedbase_receivers".}
 proc fcQWebEngineDownloadRequest_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QWebEngineDownloadRequest_protectedbase_isSignalConnected".}
 proc fcQWebEngineDownloadRequest_staticMetaObject(): pointer {.importc: "QWebEngineDownloadRequest_staticMetaObject".}
-proc fcQWebEngineDownloadRequest_delete(self: pointer) {.importc: "QWebEngineDownloadRequest_delete".}
 
 proc metaObject*(self: gen_qwebenginedownloadrequest_types.QWebEngineDownloadRequest, ): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQWebEngineDownloadRequest_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQWebEngineDownloadRequest_metaObject(self.h), owned: false)
 
 proc metacast*(self: gen_qwebenginedownloadrequest_types.QWebEngineDownloadRequest, param1: cstring): pointer =
   fcQWebEngineDownloadRequest_metacast(self.h, param1)
@@ -176,7 +175,7 @@ proc receivedBytes*(self: gen_qwebenginedownloadrequest_types.QWebEngineDownload
   fcQWebEngineDownloadRequest_receivedBytes(self.h)
 
 proc url*(self: gen_qwebenginedownloadrequest_types.QWebEngineDownloadRequest, ): gen_qurl_types.QUrl =
-  gen_qurl_types.QUrl(h: fcQWebEngineDownloadRequest_url(self.h))
+  gen_qurl_types.QUrl(h: fcQWebEngineDownloadRequest_url(self.h), owned: true)
 
 proc mimeType*(self: gen_qwebenginedownloadrequest_types.QWebEngineDownloadRequest, ): string =
   let v_ms = fcQWebEngineDownloadRequest_mimeType(self.h)
@@ -233,7 +232,7 @@ proc setDownloadFileName*(self: gen_qwebenginedownloadrequest_types.QWebEngineDo
   fcQWebEngineDownloadRequest_setDownloadFileName(self.h, struct_miqt_string(data: fileName, len: csize_t(len(fileName))))
 
 proc page*(self: gen_qwebenginedownloadrequest_types.QWebEngineDownloadRequest, ): gen_qwebenginepage_types.QWebEnginePage =
-  gen_qwebenginepage_types.QWebEnginePage(h: fcQWebEngineDownloadRequest_page(self.h))
+  gen_qwebenginepage_types.QWebEnginePage(h: fcQWebEngineDownloadRequest_page(self.h), owned: false)
 
 proc accept*(self: gen_qwebenginedownloadrequest_types.QWebEngineDownloadRequest, ): void =
   fcQWebEngineDownloadRequest_accept(self.h)
@@ -424,7 +423,7 @@ proc tr*(_: type gen_qwebenginedownloadrequest_types.QWebEngineDownloadRequest, 
   vx_ret
 
 proc sender*(self: gen_qwebenginedownloadrequest_types.QWebEngineDownloadRequest, ): gen_qobject_types.QObject =
-  gen_qobject_types.QObject(h: fcQWebEngineDownloadRequest_protectedbase_sender(self.h))
+  gen_qobject_types.QObject(h: fcQWebEngineDownloadRequest_protectedbase_sender(self.h), owned: false)
 
 proc senderSignalIndex*(self: gen_qwebenginedownloadrequest_types.QWebEngineDownloadRequest, ): cint =
   fcQWebEngineDownloadRequest_protectedbase_senderSignalIndex(self.h)
@@ -437,5 +436,3 @@ proc isSignalConnected*(self: gen_qwebenginedownloadrequest_types.QWebEngineDown
 
 proc staticMetaObject*(_: type gen_qwebenginedownloadrequest_types.QWebEngineDownloadRequest): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQWebEngineDownloadRequest_staticMetaObject())
-proc delete*(self: gen_qwebenginedownloadrequest_types.QWebEngineDownloadRequest) =
-  fcQWebEngineDownloadRequest_delete(self.h)

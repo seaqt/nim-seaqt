@@ -30,9 +30,6 @@ func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
     else:
       copyMem(addr result[0], unsafeAddr v[0], v.len)
 
-const cflags = gorge("pkg-config --cflags Qt6Gui")  & " -fPIC"
-{.compile("gen_qfontinfo.cpp", cflags).}
-
 
 import ./gen_qfontinfo_types
 export gen_qfontinfo_types
@@ -64,7 +61,6 @@ proc fcQFontInfo_legacyWeight(self: pointer, ): cint {.importc: "QFontInfo_legac
 proc fcQFontInfo_exactMatch(self: pointer, ): bool {.importc: "QFontInfo_exactMatch".}
 proc fcQFontInfo_new(param1: pointer): ptr cQFontInfo {.importc: "QFontInfo_new".}
 proc fcQFontInfo_new2(param1: pointer): ptr cQFontInfo {.importc: "QFontInfo_new2".}
-proc fcQFontInfo_delete(self: pointer) {.importc: "QFontInfo_delete".}
 
 proc operatorAssign*(self: gen_qfontinfo_types.QFontInfo, param1: gen_qfontinfo_types.QFontInfo): void =
   fcQFontInfo_operatorAssign(self.h, param1.h)
@@ -128,11 +124,9 @@ proc exactMatch*(self: gen_qfontinfo_types.QFontInfo, ): bool =
 
 proc create*(T: type gen_qfontinfo_types.QFontInfo,
     param1: gen_qfont_types.QFont): gen_qfontinfo_types.QFontInfo =
-  gen_qfontinfo_types.QFontInfo(h: fcQFontInfo_new(param1.h))
+  gen_qfontinfo_types.QFontInfo(h: fcQFontInfo_new(param1.h), owned: true)
 
 proc create*(T: type gen_qfontinfo_types.QFontInfo,
     param1: gen_qfontinfo_types.QFontInfo): gen_qfontinfo_types.QFontInfo =
-  gen_qfontinfo_types.QFontInfo(h: fcQFontInfo_new2(param1.h))
+  gen_qfontinfo_types.QFontInfo(h: fcQFontInfo_new2(param1.h), owned: true)
 
-proc delete*(self: gen_qfontinfo_types.QFontInfo) =
-  fcQFontInfo_delete(self.h)

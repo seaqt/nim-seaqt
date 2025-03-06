@@ -30,9 +30,6 @@ func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
     else:
       copyMem(addr result[0], unsafeAddr v[0], v.len)
 
-const cflags = gorge("pkg-config --cflags Qt6Gui")  & " -fPIC"
-{.compile("gen_qsurface.cpp", cflags).}
-
 
 type QSurfaceSurfaceClassEnum* = distinct cint
 template Window*(_: type QSurfaceSurfaceClassEnum): untyped = 0
@@ -69,13 +66,12 @@ proc fcQSurface_surfaceType(self: pointer, ): cint {.importc: "QSurface_surfaceT
 proc fcQSurface_supportsOpenGL(self: pointer, ): bool {.importc: "QSurface_supportsOpenGL".}
 proc fcQSurface_size(self: pointer, ): pointer {.importc: "QSurface_size".}
 proc fcQSurface_staticMetaObject(): pointer {.importc: "QSurface_staticMetaObject".}
-proc fcQSurface_delete(self: pointer) {.importc: "QSurface_delete".}
 
 proc surfaceClass*(self: gen_qsurface_types.QSurface, ): cint =
   cint(fcQSurface_surfaceClass(self.h))
 
 proc format*(self: gen_qsurface_types.QSurface, ): gen_qsurfaceformat_types.QSurfaceFormat =
-  gen_qsurfaceformat_types.QSurfaceFormat(h: fcQSurface_format(self.h))
+  gen_qsurfaceformat_types.QSurfaceFormat(h: fcQSurface_format(self.h), owned: true)
 
 proc surfaceType*(self: gen_qsurface_types.QSurface, ): cint =
   cint(fcQSurface_surfaceType(self.h))
@@ -84,9 +80,7 @@ proc supportsOpenGL*(self: gen_qsurface_types.QSurface, ): bool =
   fcQSurface_supportsOpenGL(self.h)
 
 proc size*(self: gen_qsurface_types.QSurface, ): gen_qsize_types.QSize =
-  gen_qsize_types.QSize(h: fcQSurface_size(self.h))
+  gen_qsize_types.QSize(h: fcQSurface_size(self.h), owned: true)
 
 proc staticMetaObject*(_: type gen_qsurface_types.QSurface): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQSurface_staticMetaObject())
-proc delete*(self: gen_qsurface_types.QSurface) =
-  fcQSurface_delete(self.h)

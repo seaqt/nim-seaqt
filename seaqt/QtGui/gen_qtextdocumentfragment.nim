@@ -30,9 +30,6 @@ func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
     else:
       copyMem(addr result[0], unsafeAddr v[0], v.len)
 
-const cflags = gorge("pkg-config --cflags Qt6Gui")  & " -fPIC"
-{.compile("gen_qtextdocumentfragment.cpp", cflags).}
-
 
 import ./gen_qtextdocumentfragment_types
 export gen_qtextdocumentfragment_types
@@ -62,7 +59,6 @@ proc fcQTextDocumentFragment_new(): ptr cQTextDocumentFragment {.importc: "QText
 proc fcQTextDocumentFragment_new2(document: pointer): ptr cQTextDocumentFragment {.importc: "QTextDocumentFragment_new2".}
 proc fcQTextDocumentFragment_new3(range: pointer): ptr cQTextDocumentFragment {.importc: "QTextDocumentFragment_new3".}
 proc fcQTextDocumentFragment_new4(rhs: pointer): ptr cQTextDocumentFragment {.importc: "QTextDocumentFragment_new4".}
-proc fcQTextDocumentFragment_delete(self: pointer) {.importc: "QTextDocumentFragment_delete".}
 
 proc operatorAssign*(self: gen_qtextdocumentfragment_types.QTextDocumentFragment, rhs: gen_qtextdocumentfragment_types.QTextDocumentFragment): void =
   fcQTextDocumentFragment_operatorAssign(self.h, rhs.h)
@@ -95,13 +91,13 @@ proc toMarkdown*(self: gen_qtextdocumentfragment_types.QTextDocumentFragment, ):
   vx_ret
 
 proc fromPlainText*(_: type gen_qtextdocumentfragment_types.QTextDocumentFragment, plainText: string): gen_qtextdocumentfragment_types.QTextDocumentFragment =
-  gen_qtextdocumentfragment_types.QTextDocumentFragment(h: fcQTextDocumentFragment_fromPlainText(struct_miqt_string(data: plainText, len: csize_t(len(plainText)))))
+  gen_qtextdocumentfragment_types.QTextDocumentFragment(h: fcQTextDocumentFragment_fromPlainText(struct_miqt_string(data: plainText, len: csize_t(len(plainText)))), owned: true)
 
 proc fromHtml*(_: type gen_qtextdocumentfragment_types.QTextDocumentFragment, html: string): gen_qtextdocumentfragment_types.QTextDocumentFragment =
-  gen_qtextdocumentfragment_types.QTextDocumentFragment(h: fcQTextDocumentFragment_fromHtml(struct_miqt_string(data: html, len: csize_t(len(html)))))
+  gen_qtextdocumentfragment_types.QTextDocumentFragment(h: fcQTextDocumentFragment_fromHtml(struct_miqt_string(data: html, len: csize_t(len(html)))), owned: true)
 
 proc fromMarkdown*(_: type gen_qtextdocumentfragment_types.QTextDocumentFragment, markdown: string): gen_qtextdocumentfragment_types.QTextDocumentFragment =
-  gen_qtextdocumentfragment_types.QTextDocumentFragment(h: fcQTextDocumentFragment_fromMarkdown(struct_miqt_string(data: markdown, len: csize_t(len(markdown)))))
+  gen_qtextdocumentfragment_types.QTextDocumentFragment(h: fcQTextDocumentFragment_fromMarkdown(struct_miqt_string(data: markdown, len: csize_t(len(markdown)))), owned: true)
 
 proc toMarkdown*(self: gen_qtextdocumentfragment_types.QTextDocumentFragment, features: cint): string =
   let v_ms = fcQTextDocumentFragment_toMarkdown1(self.h, cint(features))
@@ -110,25 +106,23 @@ proc toMarkdown*(self: gen_qtextdocumentfragment_types.QTextDocumentFragment, fe
   vx_ret
 
 proc fromHtml*(_: type gen_qtextdocumentfragment_types.QTextDocumentFragment, html: string, resourceProvider: gen_qtextdocument_types.QTextDocument): gen_qtextdocumentfragment_types.QTextDocumentFragment =
-  gen_qtextdocumentfragment_types.QTextDocumentFragment(h: fcQTextDocumentFragment_fromHtml2(struct_miqt_string(data: html, len: csize_t(len(html))), resourceProvider.h))
+  gen_qtextdocumentfragment_types.QTextDocumentFragment(h: fcQTextDocumentFragment_fromHtml2(struct_miqt_string(data: html, len: csize_t(len(html))), resourceProvider.h), owned: true)
 
 proc fromMarkdown*(_: type gen_qtextdocumentfragment_types.QTextDocumentFragment, markdown: string, features: cint): gen_qtextdocumentfragment_types.QTextDocumentFragment =
-  gen_qtextdocumentfragment_types.QTextDocumentFragment(h: fcQTextDocumentFragment_fromMarkdown2(struct_miqt_string(data: markdown, len: csize_t(len(markdown))), cint(features)))
+  gen_qtextdocumentfragment_types.QTextDocumentFragment(h: fcQTextDocumentFragment_fromMarkdown2(struct_miqt_string(data: markdown, len: csize_t(len(markdown))), cint(features)), owned: true)
 
 proc create*(T: type gen_qtextdocumentfragment_types.QTextDocumentFragment): gen_qtextdocumentfragment_types.QTextDocumentFragment =
-  gen_qtextdocumentfragment_types.QTextDocumentFragment(h: fcQTextDocumentFragment_new())
+  gen_qtextdocumentfragment_types.QTextDocumentFragment(h: fcQTextDocumentFragment_new(), owned: true)
 
 proc create*(T: type gen_qtextdocumentfragment_types.QTextDocumentFragment,
     document: gen_qtextdocument_types.QTextDocument): gen_qtextdocumentfragment_types.QTextDocumentFragment =
-  gen_qtextdocumentfragment_types.QTextDocumentFragment(h: fcQTextDocumentFragment_new2(document.h))
+  gen_qtextdocumentfragment_types.QTextDocumentFragment(h: fcQTextDocumentFragment_new2(document.h), owned: true)
 
 proc create*(T: type gen_qtextdocumentfragment_types.QTextDocumentFragment,
     range: gen_qtextcursor_types.QTextCursor): gen_qtextdocumentfragment_types.QTextDocumentFragment =
-  gen_qtextdocumentfragment_types.QTextDocumentFragment(h: fcQTextDocumentFragment_new3(range.h))
+  gen_qtextdocumentfragment_types.QTextDocumentFragment(h: fcQTextDocumentFragment_new3(range.h), owned: true)
 
 proc create*(T: type gen_qtextdocumentfragment_types.QTextDocumentFragment,
     rhs: gen_qtextdocumentfragment_types.QTextDocumentFragment): gen_qtextdocumentfragment_types.QTextDocumentFragment =
-  gen_qtextdocumentfragment_types.QTextDocumentFragment(h: fcQTextDocumentFragment_new4(rhs.h))
+  gen_qtextdocumentfragment_types.QTextDocumentFragment(h: fcQTextDocumentFragment_new4(rhs.h), owned: true)
 
-proc delete*(self: gen_qtextdocumentfragment_types.QTextDocumentFragment) =
-  fcQTextDocumentFragment_delete(self.h)

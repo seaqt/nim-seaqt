@@ -30,9 +30,6 @@ func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
     else:
       copyMem(addr result[0], unsafeAddr v[0], v.len)
 
-const cflags = gorge("pkg-config --cflags Qt6Network")  & " -fPIC"
-{.compile("gen_qsslconfiguration.cpp", cflags).}
-
 
 type QSslConfigurationNextProtocolNegotiationStatusEnum* = distinct cint
 template NextProtocolNegotiationNone*(_: type QSslConfigurationNextProtocolNegotiationStatusEnum): untyped = 0
@@ -126,7 +123,6 @@ proc fcQSslConfiguration_addCaCertificates2(self: pointer, path: struct_miqt_str
 proc fcQSslConfiguration_addCaCertificates3(self: pointer, path: struct_miqt_string, format: cint, syntax: cint): bool {.importc: "QSslConfiguration_addCaCertificates3".}
 proc fcQSslConfiguration_new(): ptr cQSslConfiguration {.importc: "QSslConfiguration_new".}
 proc fcQSslConfiguration_new2(other: pointer): ptr cQSslConfiguration {.importc: "QSslConfiguration_new2".}
-proc fcQSslConfiguration_delete(self: pointer) {.importc: "QSslConfiguration_delete".}
 
 proc operatorAssign*(self: gen_qsslconfiguration_types.QSslConfiguration, other: gen_qsslconfiguration_types.QSslConfiguration): void =
   fcQSslConfiguration_operatorAssign(self.h, other.h)
@@ -166,7 +162,7 @@ proc localCertificateChain*(self: gen_qsslconfiguration_types.QSslConfiguration,
   var vx_ret = newSeq[gen_qsslcertificate_types.QSslCertificate](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
-    vx_ret[i] = gen_qsslcertificate_types.QSslCertificate(h: v_outCast[i])
+    vx_ret[i] = gen_qsslcertificate_types.QSslCertificate(h: v_outCast[i], owned: true)
   c_free(v_ma.data)
   vx_ret
 
@@ -178,31 +174,31 @@ proc setLocalCertificateChain*(self: gen_qsslconfiguration_types.QSslConfigurati
   fcQSslConfiguration_setLocalCertificateChain(self.h, struct_miqt_array(len: csize_t(len(localChain)), data: if len(localChain) == 0: nil else: addr(localChain_CArray[0])))
 
 proc localCertificate*(self: gen_qsslconfiguration_types.QSslConfiguration, ): gen_qsslcertificate_types.QSslCertificate =
-  gen_qsslcertificate_types.QSslCertificate(h: fcQSslConfiguration_localCertificate(self.h))
+  gen_qsslcertificate_types.QSslCertificate(h: fcQSslConfiguration_localCertificate(self.h), owned: true)
 
 proc setLocalCertificate*(self: gen_qsslconfiguration_types.QSslConfiguration, certificate: gen_qsslcertificate_types.QSslCertificate): void =
   fcQSslConfiguration_setLocalCertificate(self.h, certificate.h)
 
 proc peerCertificate*(self: gen_qsslconfiguration_types.QSslConfiguration, ): gen_qsslcertificate_types.QSslCertificate =
-  gen_qsslcertificate_types.QSslCertificate(h: fcQSslConfiguration_peerCertificate(self.h))
+  gen_qsslcertificate_types.QSslCertificate(h: fcQSslConfiguration_peerCertificate(self.h), owned: true)
 
 proc peerCertificateChain*(self: gen_qsslconfiguration_types.QSslConfiguration, ): seq[gen_qsslcertificate_types.QSslCertificate] =
   var v_ma = fcQSslConfiguration_peerCertificateChain(self.h)
   var vx_ret = newSeq[gen_qsslcertificate_types.QSslCertificate](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
-    vx_ret[i] = gen_qsslcertificate_types.QSslCertificate(h: v_outCast[i])
+    vx_ret[i] = gen_qsslcertificate_types.QSslCertificate(h: v_outCast[i], owned: true)
   c_free(v_ma.data)
   vx_ret
 
 proc sessionCipher*(self: gen_qsslconfiguration_types.QSslConfiguration, ): gen_qsslcipher_types.QSslCipher =
-  gen_qsslcipher_types.QSslCipher(h: fcQSslConfiguration_sessionCipher(self.h))
+  gen_qsslcipher_types.QSslCipher(h: fcQSslConfiguration_sessionCipher(self.h), owned: true)
 
 proc sessionProtocol*(self: gen_qsslconfiguration_types.QSslConfiguration, ): cint =
   cint(fcQSslConfiguration_sessionProtocol(self.h))
 
 proc privateKey*(self: gen_qsslconfiguration_types.QSslConfiguration, ): gen_qsslkey_types.QSslKey =
-  gen_qsslkey_types.QSslKey(h: fcQSslConfiguration_privateKey(self.h))
+  gen_qsslkey_types.QSslKey(h: fcQSslConfiguration_privateKey(self.h), owned: true)
 
 proc setPrivateKey*(self: gen_qsslconfiguration_types.QSslConfiguration, key: gen_qsslkey_types.QSslKey): void =
   fcQSslConfiguration_setPrivateKey(self.h, key.h)
@@ -212,7 +208,7 @@ proc ciphers*(self: gen_qsslconfiguration_types.QSslConfiguration, ): seq[gen_qs
   var vx_ret = newSeq[gen_qsslcipher_types.QSslCipher](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
-    vx_ret[i] = gen_qsslcipher_types.QSslCipher(h: v_outCast[i])
+    vx_ret[i] = gen_qsslcipher_types.QSslCipher(h: v_outCast[i], owned: true)
   c_free(v_ma.data)
   vx_ret
 
@@ -231,7 +227,7 @@ proc supportedCiphers*(_: type gen_qsslconfiguration_types.QSslConfiguration, ):
   var vx_ret = newSeq[gen_qsslcipher_types.QSslCipher](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
-    vx_ret[i] = gen_qsslcipher_types.QSslCipher(h: v_outCast[i])
+    vx_ret[i] = gen_qsslcipher_types.QSslCipher(h: v_outCast[i], owned: true)
   c_free(v_ma.data)
   vx_ret
 
@@ -240,7 +236,7 @@ proc caCertificates*(self: gen_qsslconfiguration_types.QSslConfiguration, ): seq
   var vx_ret = newSeq[gen_qsslcertificate_types.QSslCertificate](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
-    vx_ret[i] = gen_qsslcertificate_types.QSslCertificate(h: v_outCast[i])
+    vx_ret[i] = gen_qsslcertificate_types.QSslCertificate(h: v_outCast[i], owned: true)
   c_free(v_ma.data)
   vx_ret
 
@@ -269,7 +265,7 @@ proc systemCaCertificates*(_: type gen_qsslconfiguration_types.QSslConfiguration
   var vx_ret = newSeq[gen_qsslcertificate_types.QSslCertificate](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
-    vx_ret[i] = gen_qsslcertificate_types.QSslCertificate(h: v_outCast[i])
+    vx_ret[i] = gen_qsslcertificate_types.QSslCertificate(h: v_outCast[i], owned: true)
   c_free(v_ma.data)
   vx_ret
 
@@ -292,14 +288,14 @@ proc sessionTicketLifeTimeHint*(self: gen_qsslconfiguration_types.QSslConfigurat
   fcQSslConfiguration_sessionTicketLifeTimeHint(self.h)
 
 proc ephemeralServerKey*(self: gen_qsslconfiguration_types.QSslConfiguration, ): gen_qsslkey_types.QSslKey =
-  gen_qsslkey_types.QSslKey(h: fcQSslConfiguration_ephemeralServerKey(self.h))
+  gen_qsslkey_types.QSslKey(h: fcQSslConfiguration_ephemeralServerKey(self.h), owned: true)
 
 proc ellipticCurves*(self: gen_qsslconfiguration_types.QSslConfiguration, ): seq[gen_qsslellipticcurve_types.QSslEllipticCurve] =
   var v_ma = fcQSslConfiguration_ellipticCurves(self.h)
   var vx_ret = newSeq[gen_qsslellipticcurve_types.QSslEllipticCurve](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
-    vx_ret[i] = gen_qsslellipticcurve_types.QSslEllipticCurve(h: v_outCast[i])
+    vx_ret[i] = gen_qsslellipticcurve_types.QSslEllipticCurve(h: v_outCast[i], owned: true)
   c_free(v_ma.data)
   vx_ret
 
@@ -315,7 +311,7 @@ proc supportedEllipticCurves*(_: type gen_qsslconfiguration_types.QSslConfigurat
   var vx_ret = newSeq[gen_qsslellipticcurve_types.QSslEllipticCurve](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
-    vx_ret[i] = gen_qsslellipticcurve_types.QSslEllipticCurve(h: v_outCast[i])
+    vx_ret[i] = gen_qsslellipticcurve_types.QSslEllipticCurve(h: v_outCast[i], owned: true)
   c_free(v_ma.data)
   vx_ret
 
@@ -329,7 +325,7 @@ proc setPreSharedKeyIdentityHint*(self: gen_qsslconfiguration_types.QSslConfigur
   fcQSslConfiguration_setPreSharedKeyIdentityHint(self.h, struct_miqt_string(data: cast[cstring](if len(hint) == 0: nil else: unsafeAddr hint[0]), len: csize_t(len(hint))))
 
 proc diffieHellmanParameters*(self: gen_qsslconfiguration_types.QSslConfiguration, ): gen_qssldiffiehellmanparameters_types.QSslDiffieHellmanParameters =
-  gen_qssldiffiehellmanparameters_types.QSslDiffieHellmanParameters(h: fcQSslConfiguration_diffieHellmanParameters(self.h))
+  gen_qssldiffiehellmanparameters_types.QSslDiffieHellmanParameters(h: fcQSslConfiguration_diffieHellmanParameters(self.h), owned: true)
 
 proc setDiffieHellmanParameters*(self: gen_qsslconfiguration_types.QSslConfiguration, dhparams: gen_qssldiffiehellmanparameters_types.QSslDiffieHellmanParameters): void =
   fcQSslConfiguration_setDiffieHellmanParameters(self.h, dhparams.h)
@@ -341,7 +337,7 @@ proc setBackendConfiguration*(self: gen_qsslconfiguration_types.QSslConfiguratio
   fcQSslConfiguration_setBackendConfiguration(self.h)
 
 proc defaultConfiguration*(_: type gen_qsslconfiguration_types.QSslConfiguration, ): gen_qsslconfiguration_types.QSslConfiguration =
-  gen_qsslconfiguration_types.QSslConfiguration(h: fcQSslConfiguration_defaultConfiguration())
+  gen_qsslconfiguration_types.QSslConfiguration(h: fcQSslConfiguration_defaultConfiguration(), owned: true)
 
 proc setDefaultConfiguration*(_: type gen_qsslconfiguration_types.QSslConfiguration, configuration: gen_qsslconfiguration_types.QSslConfiguration): void =
   fcQSslConfiguration_setDefaultConfiguration(configuration.h)
@@ -353,7 +349,7 @@ proc setDtlsCookieVerificationEnabled*(self: gen_qsslconfiguration_types.QSslCon
   fcQSslConfiguration_setDtlsCookieVerificationEnabled(self.h, enable)
 
 proc defaultDtlsConfiguration*(_: type gen_qsslconfiguration_types.QSslConfiguration, ): gen_qsslconfiguration_types.QSslConfiguration =
-  gen_qsslconfiguration_types.QSslConfiguration(h: fcQSslConfiguration_defaultDtlsConfiguration())
+  gen_qsslconfiguration_types.QSslConfiguration(h: fcQSslConfiguration_defaultDtlsConfiguration(), owned: true)
 
 proc setDefaultDtlsConfiguration*(_: type gen_qsslconfiguration_types.QSslConfiguration, configuration: gen_qsslconfiguration_types.QSslConfiguration): void =
   fcQSslConfiguration_setDefaultDtlsConfiguration(configuration.h)
@@ -411,11 +407,9 @@ proc addCaCertificates*(self: gen_qsslconfiguration_types.QSslConfiguration, pat
   fcQSslConfiguration_addCaCertificates3(self.h, struct_miqt_string(data: path, len: csize_t(len(path))), cint(format), cint(syntax))
 
 proc create*(T: type gen_qsslconfiguration_types.QSslConfiguration): gen_qsslconfiguration_types.QSslConfiguration =
-  gen_qsslconfiguration_types.QSslConfiguration(h: fcQSslConfiguration_new())
+  gen_qsslconfiguration_types.QSslConfiguration(h: fcQSslConfiguration_new(), owned: true)
 
 proc create*(T: type gen_qsslconfiguration_types.QSslConfiguration,
     other: gen_qsslconfiguration_types.QSslConfiguration): gen_qsslconfiguration_types.QSslConfiguration =
-  gen_qsslconfiguration_types.QSslConfiguration(h: fcQSslConfiguration_new2(other.h))
+  gen_qsslconfiguration_types.QSslConfiguration(h: fcQSslConfiguration_new2(other.h), owned: true)
 
-proc delete*(self: gen_qsslconfiguration_types.QSslConfiguration) =
-  fcQSslConfiguration_delete(self.h)

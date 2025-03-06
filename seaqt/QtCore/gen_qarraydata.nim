@@ -30,9 +30,6 @@ func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
     else:
       copyMem(addr result[0], unsafeAddr v[0], v.len)
 
-const cflags = gorge("pkg-config --cflags Qt6Core")  & " -fPIC"
-{.compile("gen_qarraydata.cpp", cflags).}
-
 
 type QArrayDataAllocationOptionEnum* = distinct cint
 template Grow*(_: type QArrayDataAllocationOptionEnum): untyped = 0
@@ -71,7 +68,6 @@ proc fcQArrayData_needsDetach(self: pointer, ): bool {.importc: "QArrayData_need
 proc fcQArrayData_detachCapacity(self: pointer, newSize: int64): int64 {.importc: "QArrayData_detachCapacity".}
 proc fcQArrayData_reallocateUnaligned(data: pointer, dataPointer: pointer, objectSize: int64, newCapacity: int64, option: cint): struct_miqt_map {.importc: "QArrayData_reallocateUnaligned".}
 proc fcQArrayData_deallocate(data: pointer, objectSize: int64, alignment: int64): void {.importc: "QArrayData_deallocate".}
-proc fcQArrayData_delete(self: pointer) {.importc: "QArrayData_delete".}
 
 proc allocatedCapacity*(self: gen_qarraydata_types.QArrayData, ): int64 =
   fcQArrayData_allocatedCapacity(self.h)
@@ -98,7 +94,7 @@ proc reallocateUnaligned*(_: type gen_qarraydata_types.QArrayData, data: gen_qar
   var v_mm = fcQArrayData_reallocateUnaligned(data.h, dataPointer, objectSize, newCapacity, cint(option))
   var v_First_CArray = cast[ptr UncheckedArray[pointer]](v_mm.keys)
   var v_Second_CArray = cast[ptr UncheckedArray[pointer]](v_mm.values)
-  var v_entry_First = gen_qarraydata_types.QArrayData(h: v_First_CArray[0])
+  var v_entry_First = gen_qarraydata_types.QArrayData(h: v_First_CArray[0], owned: false)
 
   var v_entry_Second = v_Second_CArray[0]
 
@@ -109,5 +105,3 @@ proc reallocateUnaligned*(_: type gen_qarraydata_types.QArrayData, data: gen_qar
 proc deallocate*(_: type gen_qarraydata_types.QArrayData, data: gen_qarraydata_types.QArrayData, objectSize: int64, alignment: int64): void =
   fcQArrayData_deallocate(data.h, objectSize, alignment)
 
-proc delete*(self: gen_qarraydata_types.QArrayData) =
-  fcQArrayData_delete(self.h)

@@ -30,9 +30,6 @@ func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
     else:
       copyMem(addr result[0], unsafeAddr v[0], v.len)
 
-const cflags = gorge("pkg-config --cflags Qt6WebEngineCore")  & " -fPIC"
-{.compile("gen_qwebenginescriptcollection.cpp", cflags).}
-
 
 import ./gen_qwebenginescriptcollection_types
 export gen_qwebenginescriptcollection_types
@@ -53,7 +50,6 @@ proc fcQWebEngineScriptCollection_insertWithList(self: pointer, list: struct_miq
 proc fcQWebEngineScriptCollection_remove(self: pointer, param1: pointer): bool {.importc: "QWebEngineScriptCollection_remove".}
 proc fcQWebEngineScriptCollection_clear(self: pointer, ): void {.importc: "QWebEngineScriptCollection_clear".}
 proc fcQWebEngineScriptCollection_toList(self: pointer, ): struct_miqt_array {.importc: "QWebEngineScriptCollection_toList".}
-proc fcQWebEngineScriptCollection_delete(self: pointer) {.importc: "QWebEngineScriptCollection_delete".}
 
 proc isEmpty*(self: gen_qwebenginescriptcollection_types.QWebEngineScriptCollection, ): bool =
   fcQWebEngineScriptCollection_isEmpty(self.h)
@@ -69,7 +65,7 @@ proc find*(self: gen_qwebenginescriptcollection_types.QWebEngineScriptCollection
   var vx_ret = newSeq[gen_qwebenginescript_types.QWebEngineScript](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
-    vx_ret[i] = gen_qwebenginescript_types.QWebEngineScript(h: v_outCast[i])
+    vx_ret[i] = gen_qwebenginescript_types.QWebEngineScript(h: v_outCast[i], owned: true)
   c_free(v_ma.data)
   vx_ret
 
@@ -94,9 +90,7 @@ proc toList*(self: gen_qwebenginescriptcollection_types.QWebEngineScriptCollecti
   var vx_ret = newSeq[gen_qwebenginescript_types.QWebEngineScript](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
-    vx_ret[i] = gen_qwebenginescript_types.QWebEngineScript(h: v_outCast[i])
+    vx_ret[i] = gen_qwebenginescript_types.QWebEngineScript(h: v_outCast[i], owned: true)
   c_free(v_ma.data)
   vx_ret
 
-proc delete*(self: gen_qwebenginescriptcollection_types.QWebEngineScriptCollection) =
-  fcQWebEngineScriptCollection_delete(self.h)

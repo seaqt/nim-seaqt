@@ -30,7 +30,7 @@ func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
     else:
       copyMem(addr result[0], unsafeAddr v[0], v.len)
 
-const cflags = gorge("pkg-config --cflags Qt6WebEngineCore")  & " -fPIC"
+const cflags = gorge("pkg-config --cflags Qt6WebEngineCore") & " -fPIC"
 {.compile("gen_qwebenginenotification.cpp", cflags).}
 
 
@@ -76,10 +76,9 @@ proc fcQWebEngineNotification_protectedbase_senderSignalIndex(self: pointer, ): 
 proc fcQWebEngineNotification_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QWebEngineNotification_protectedbase_receivers".}
 proc fcQWebEngineNotification_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QWebEngineNotification_protectedbase_isSignalConnected".}
 proc fcQWebEngineNotification_staticMetaObject(): pointer {.importc: "QWebEngineNotification_staticMetaObject".}
-proc fcQWebEngineNotification_delete(self: pointer) {.importc: "QWebEngineNotification_delete".}
 
 proc metaObject*(self: gen_qwebenginenotification_types.QWebEngineNotification, ): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQWebEngineNotification_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQWebEngineNotification_metaObject(self.h), owned: false)
 
 proc metacast*(self: gen_qwebenginenotification_types.QWebEngineNotification, param1: cstring): pointer =
   fcQWebEngineNotification_metacast(self.h, param1)
@@ -97,10 +96,10 @@ proc matches*(self: gen_qwebenginenotification_types.QWebEngineNotification, oth
   fcQWebEngineNotification_matches(self.h, other.h)
 
 proc origin*(self: gen_qwebenginenotification_types.QWebEngineNotification, ): gen_qurl_types.QUrl =
-  gen_qurl_types.QUrl(h: fcQWebEngineNotification_origin(self.h))
+  gen_qurl_types.QUrl(h: fcQWebEngineNotification_origin(self.h), owned: true)
 
 proc icon*(self: gen_qwebenginenotification_types.QWebEngineNotification, ): gen_qimage_types.QImage =
-  gen_qimage_types.QImage(h: fcQWebEngineNotification_icon(self.h))
+  gen_qimage_types.QImage(h: fcQWebEngineNotification_icon(self.h), owned: true)
 
 proc title*(self: gen_qwebenginenotification_types.QWebEngineNotification, ): string =
   let v_ms = fcQWebEngineNotification_title(self.h)
@@ -169,7 +168,7 @@ proc tr*(_: type gen_qwebenginenotification_types.QWebEngineNotification, s: cst
   vx_ret
 
 proc sender*(self: gen_qwebenginenotification_types.QWebEngineNotification, ): gen_qobject_types.QObject =
-  gen_qobject_types.QObject(h: fcQWebEngineNotification_protectedbase_sender(self.h))
+  gen_qobject_types.QObject(h: fcQWebEngineNotification_protectedbase_sender(self.h), owned: false)
 
 proc senderSignalIndex*(self: gen_qwebenginenotification_types.QWebEngineNotification, ): cint =
   fcQWebEngineNotification_protectedbase_senderSignalIndex(self.h)
@@ -182,5 +181,3 @@ proc isSignalConnected*(self: gen_qwebenginenotification_types.QWebEngineNotific
 
 proc staticMetaObject*(_: type gen_qwebenginenotification_types.QWebEngineNotification): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQWebEngineNotification_staticMetaObject())
-proc delete*(self: gen_qwebenginenotification_types.QWebEngineNotification) =
-  fcQWebEngineNotification_delete(self.h)

@@ -30,7 +30,7 @@ func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
     else:
       copyMem(addr result[0], unsafeAddr v[0], v.len)
 
-const cflags = gorge("pkg-config --cflags Qt6Quick")  & " -fPIC"
+const cflags = gorge("pkg-config --cflags Qt6Quick") & " -fPIC"
 {.compile("gen_qsgsimplerectnode.cpp", cflags).}
 
 
@@ -53,7 +53,7 @@ proc fcQSGSimpleRectNode_setRect2(self: pointer, x: float64, y: float64, w: floa
 proc fcQSGSimpleRectNode_rect(self: pointer, ): pointer {.importc: "QSGSimpleRectNode_rect".}
 proc fcQSGSimpleRectNode_setColor(self: pointer, color: pointer): void {.importc: "QSGSimpleRectNode_setColor".}
 proc fcQSGSimpleRectNode_color(self: pointer, ): pointer {.importc: "QSGSimpleRectNode_color".}
-type cQSGSimpleRectNodeVTable = object
+type cQSGSimpleRectNodeVTable {.pure.} = object
   destructor*: proc(vtbl: ptr cQSGSimpleRectNodeVTable, self: ptr cQSGSimpleRectNode) {.cdecl, raises:[], gcsafe.}
   isSubtreeBlocked*: proc(vtbl, self: pointer, ): bool {.cdecl, raises: [], gcsafe.}
   preprocess*: proc(vtbl, self: pointer, ): void {.cdecl, raises: [], gcsafe.}
@@ -61,7 +61,6 @@ proc fcQSGSimpleRectNode_virtualbase_isSubtreeBlocked(self: pointer, ): bool {.i
 proc fcQSGSimpleRectNode_virtualbase_preprocess(self: pointer, ): void {.importc: "QSGSimpleRectNode_virtualbase_preprocess".}
 proc fcQSGSimpleRectNode_new(vtbl: pointer, rect: pointer, color: pointer): ptr cQSGSimpleRectNode {.importc: "QSGSimpleRectNode_new".}
 proc fcQSGSimpleRectNode_new2(vtbl: pointer, ): ptr cQSGSimpleRectNode {.importc: "QSGSimpleRectNode_new2".}
-proc fcQSGSimpleRectNode_delete(self: pointer) {.importc: "QSGSimpleRectNode_delete".}
 
 proc setRect*(self: gen_qsgsimplerectnode_types.QSGSimpleRectNode, rect: gen_qrect_types.QRectF): void =
   fcQSGSimpleRectNode_setRect(self.h, rect.h)
@@ -70,17 +69,17 @@ proc setRect*(self: gen_qsgsimplerectnode_types.QSGSimpleRectNode, x: float64, y
   fcQSGSimpleRectNode_setRect2(self.h, x, y, w, h)
 
 proc rect*(self: gen_qsgsimplerectnode_types.QSGSimpleRectNode, ): gen_qrect_types.QRectF =
-  gen_qrect_types.QRectF(h: fcQSGSimpleRectNode_rect(self.h))
+  gen_qrect_types.QRectF(h: fcQSGSimpleRectNode_rect(self.h), owned: true)
 
 proc setColor*(self: gen_qsgsimplerectnode_types.QSGSimpleRectNode, color: gen_qcolor_types.QColor): void =
   fcQSGSimpleRectNode_setColor(self.h, color.h)
 
 proc color*(self: gen_qsgsimplerectnode_types.QSGSimpleRectNode, ): gen_qcolor_types.QColor =
-  gen_qcolor_types.QColor(h: fcQSGSimpleRectNode_color(self.h))
+  gen_qcolor_types.QColor(h: fcQSGSimpleRectNode_color(self.h), owned: true)
 
 type QSGSimpleRectNodeisSubtreeBlockedProc* = proc(self: QSGSimpleRectNode): bool {.raises: [], gcsafe.}
 type QSGSimpleRectNodepreprocessProc* = proc(self: QSGSimpleRectNode): void {.raises: [], gcsafe.}
-type QSGSimpleRectNodeVTable* = object
+type QSGSimpleRectNodeVTable* {.inheritable, pure.} = object
   vtbl: cQSGSimpleRectNodeVTable
   isSubtreeBlocked*: QSGSimpleRectNodeisSubtreeBlockedProc
   preprocess*: QSGSimpleRectNodepreprocessProc
@@ -101,32 +100,72 @@ proc miqt_exec_callback_cQSGSimpleRectNode_preprocess(vtbl: pointer, self: point
   let self = QSGSimpleRectNode(h: self)
   vtbl[].preprocess(self)
 
+type VirtualQSGSimpleRectNode* {.inheritable.} = ref object of QSGSimpleRectNode
+  vtbl*: cQSGSimpleRectNodeVTable
+method isSubtreeBlocked*(self: VirtualQSGSimpleRectNode, ): bool {.base.} =
+  QSGSimpleRectNodeisSubtreeBlocked(self[])
+proc miqt_exec_method_cQSGSimpleRectNode_isSubtreeBlocked(vtbl: pointer, inst: pointer): bool {.cdecl.} =
+  let vtbl = cast[VirtualQSGSimpleRectNode](cast[uint](vtbl) - uint(offsetOf(VirtualQSGSimpleRectNode, vtbl)))
+  var virtualReturn = vtbl.isSubtreeBlocked()
+  virtualReturn
+
+method preprocess*(self: VirtualQSGSimpleRectNode, ): void {.base.} =
+  QSGSimpleRectNodepreprocess(self[])
+proc miqt_exec_method_cQSGSimpleRectNode_preprocess(vtbl: pointer, inst: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQSGSimpleRectNode](cast[uint](vtbl) - uint(offsetOf(VirtualQSGSimpleRectNode, vtbl)))
+  vtbl.preprocess()
+
 proc create*(T: type gen_qsgsimplerectnode_types.QSGSimpleRectNode,
     rect: gen_qrect_types.QRectF, color: gen_qcolor_types.QColor,
     vtbl: ref QSGSimpleRectNodeVTable = nil): gen_qsgsimplerectnode_types.QSGSimpleRectNode =
   let vtbl = if vtbl == nil: new QSGSimpleRectNodeVTable else: vtbl
   GC_ref(vtbl)
-  vtbl.vtbl.destructor = proc(vtbl: ptr cQSGSimpleRectNodeVTable, _: ptr cQSGSimpleRectNode) {.cdecl.} =
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQSGSimpleRectNodeVTable, _: ptr cQSGSimpleRectNode) {.cdecl.} =
     let vtbl = cast[ref QSGSimpleRectNodeVTable](vtbl)
     GC_unref(vtbl)
-  if not isNil(vtbl.isSubtreeBlocked):
+  if not isNil(vtbl[].isSubtreeBlocked):
     vtbl[].vtbl.isSubtreeBlocked = miqt_exec_callback_cQSGSimpleRectNode_isSubtreeBlocked
-  if not isNil(vtbl.preprocess):
+  if not isNil(vtbl[].preprocess):
     vtbl[].vtbl.preprocess = miqt_exec_callback_cQSGSimpleRectNode_preprocess
-  gen_qsgsimplerectnode_types.QSGSimpleRectNode(h: fcQSGSimpleRectNode_new(addr(vtbl[]), rect.h, color.h))
+  gen_qsgsimplerectnode_types.QSGSimpleRectNode(h: fcQSGSimpleRectNode_new(addr(vtbl[].vtbl), rect.h, color.h), owned: true)
 
 proc create*(T: type gen_qsgsimplerectnode_types.QSGSimpleRectNode,
     vtbl: ref QSGSimpleRectNodeVTable = nil): gen_qsgsimplerectnode_types.QSGSimpleRectNode =
   let vtbl = if vtbl == nil: new QSGSimpleRectNodeVTable else: vtbl
   GC_ref(vtbl)
-  vtbl.vtbl.destructor = proc(vtbl: ptr cQSGSimpleRectNodeVTable, _: ptr cQSGSimpleRectNode) {.cdecl.} =
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQSGSimpleRectNodeVTable, _: ptr cQSGSimpleRectNode) {.cdecl.} =
     let vtbl = cast[ref QSGSimpleRectNodeVTable](vtbl)
     GC_unref(vtbl)
-  if not isNil(vtbl.isSubtreeBlocked):
+  if not isNil(vtbl[].isSubtreeBlocked):
     vtbl[].vtbl.isSubtreeBlocked = miqt_exec_callback_cQSGSimpleRectNode_isSubtreeBlocked
-  if not isNil(vtbl.preprocess):
+  if not isNil(vtbl[].preprocess):
     vtbl[].vtbl.preprocess = miqt_exec_callback_cQSGSimpleRectNode_preprocess
-  gen_qsgsimplerectnode_types.QSGSimpleRectNode(h: fcQSGSimpleRectNode_new2(addr(vtbl[]), ))
+  gen_qsgsimplerectnode_types.QSGSimpleRectNode(h: fcQSGSimpleRectNode_new2(addr(vtbl[].vtbl), ), owned: true)
 
-proc delete*(self: gen_qsgsimplerectnode_types.QSGSimpleRectNode) =
-  fcQSGSimpleRectNode_delete(self.h)
+proc create*(T: type gen_qsgsimplerectnode_types.QSGSimpleRectNode,
+    rect: gen_qrect_types.QRectF, color: gen_qcolor_types.QColor,
+    vtbl: VirtualQSGSimpleRectNode) =
+
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQSGSimpleRectNodeVTable, _: ptr cQSGSimpleRectNode) {.cdecl.} =
+    let vtbl = cast[ptr typeof(VirtualQSGSimpleRectNode()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQSGSimpleRectNode, vtbl)))
+    vtbl[].h = nil
+    vtbl[].owned = false
+  vtbl[].vtbl.isSubtreeBlocked = miqt_exec_method_cQSGSimpleRectNode_isSubtreeBlocked
+  vtbl[].vtbl.preprocess = miqt_exec_method_cQSGSimpleRectNode_preprocess
+  if vtbl[].h != nil: delete(move(vtbl[]))
+  vtbl[].h = fcQSGSimpleRectNode_new(addr(vtbl[].vtbl), rect.h, color.h)
+  vtbl[].owned = true
+
+proc create*(T: type gen_qsgsimplerectnode_types.QSGSimpleRectNode,
+    vtbl: VirtualQSGSimpleRectNode) =
+
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQSGSimpleRectNodeVTable, _: ptr cQSGSimpleRectNode) {.cdecl.} =
+    let vtbl = cast[ptr typeof(VirtualQSGSimpleRectNode()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQSGSimpleRectNode, vtbl)))
+    vtbl[].h = nil
+    vtbl[].owned = false
+  vtbl[].vtbl.isSubtreeBlocked = miqt_exec_method_cQSGSimpleRectNode_isSubtreeBlocked
+  vtbl[].vtbl.preprocess = miqt_exec_method_cQSGSimpleRectNode_preprocess
+  if vtbl[].h != nil: delete(move(vtbl[]))
+  vtbl[].h = fcQSGSimpleRectNode_new2(addr(vtbl[].vtbl), )
+  vtbl[].owned = true
+

@@ -30,9 +30,6 @@ func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
     else:
       copyMem(addr result[0], unsafeAddr v[0], v.len)
 
-const cflags = gorge("pkg-config --cflags Qt6Qml")  & " -fPIC"
-{.compile("gen_qqmldebug.cpp", cflags).}
-
 
 type QQmlDebuggingEnablerStartModeEnum* = distinct cint
 template DoNotWaitForClient*(_: type QQmlDebuggingEnablerStartModeEnum): untyped = 0
@@ -65,7 +62,6 @@ proc fcQQmlDebuggingEnabler_connectToLocalDebugger2(socketFileName: struct_miqt_
 proc fcQQmlDebuggingEnabler_startDebugConnector2(pluginName: struct_miqt_string, configuration: struct_miqt_map): bool {.importc: "QQmlDebuggingEnabler_startDebugConnector2".}
 proc fcQQmlDebuggingEnabler_new(): ptr cQQmlDebuggingEnabler {.importc: "QQmlDebuggingEnabler_new".}
 proc fcQQmlDebuggingEnabler_new2(printWarning: bool): ptr cQQmlDebuggingEnabler {.importc: "QQmlDebuggingEnabler_new2".}
-proc fcQQmlDebuggingEnabler_delete(self: pointer) {.importc: "QQmlDebuggingEnabler_delete".}
 
 proc enableDebugging*(_: type gen_qqmldebug_types.QQmlDebuggingEnabler, printWarning: bool): void =
   fcQQmlDebuggingEnabler_enableDebugging(printWarning)
@@ -147,19 +143,20 @@ proc startDebugConnector*(_: type gen_qqmldebug_types.QQmlDebuggingEnabler, plug
   var configuration_Keys_CArray = newSeq[struct_miqt_string](len(configuration))
   var configuration_Values_CArray = newSeq[pointer](len(configuration))
   var configuration_ctr = 0
-  for configuration_k, configuration_v in configuration:
+  for configuration_k in configuration.keys():
     configuration_Keys_CArray[configuration_ctr] = struct_miqt_string(data: configuration_k, len: csize_t(len(configuration_k)))
+    configuration_ctr += 1
+  configuration_ctr = 0
+  for configuration_v in configuration.values():
     configuration_Values_CArray[configuration_ctr] = configuration_v.h
     configuration_ctr += 1
 
   fcQQmlDebuggingEnabler_startDebugConnector2(struct_miqt_string(data: pluginName, len: csize_t(len(pluginName))), struct_miqt_map(len: csize_t(len(configuration)),keys: if len(configuration) == 0: nil else: addr(configuration_Keys_CArray[0]), values: if len(configuration) == 0: nil else: addr(configuration_Values_CArray[0]),))
 
 proc create*(T: type gen_qqmldebug_types.QQmlDebuggingEnabler): gen_qqmldebug_types.QQmlDebuggingEnabler =
-  gen_qqmldebug_types.QQmlDebuggingEnabler(h: fcQQmlDebuggingEnabler_new())
+  gen_qqmldebug_types.QQmlDebuggingEnabler(h: fcQQmlDebuggingEnabler_new(), owned: true)
 
 proc create*(T: type gen_qqmldebug_types.QQmlDebuggingEnabler,
     printWarning: bool): gen_qqmldebug_types.QQmlDebuggingEnabler =
-  gen_qqmldebug_types.QQmlDebuggingEnabler(h: fcQQmlDebuggingEnabler_new2(printWarning))
+  gen_qqmldebug_types.QQmlDebuggingEnabler(h: fcQQmlDebuggingEnabler_new2(printWarning), owned: true)
 
-proc delete*(self: gen_qqmldebug_types.QQmlDebuggingEnabler) =
-  fcQQmlDebuggingEnabler_delete(self.h)

@@ -30,9 +30,6 @@ func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
     else:
       copyMem(addr result[0], unsafeAddr v[0], v.len)
 
-const cflags = gorge("pkg-config --cflags Qt6Gui")  & " -fPIC"
-{.compile("gen_qtestsupport_gui.cpp", cflags).}
-
 
 import ./gen_qtestsupport_gui_types
 export gen_qtestsupport_gui_types
@@ -59,40 +56,37 @@ proc fcQTestQTouchEventSequence_release3(self: pointer, touchId: cint, pt: point
 proc fcQTestQTouchEventSequence_protectedbase_mapToScreen(self: pointer, window: pointer, pt: pointer): pointer {.importc: "QTest__QTouchEventSequence_protectedbase_mapToScreen".}
 proc fcQTestQTouchEventSequence_protectedbase_point(self: pointer, touchId: cint): pointer {.importc: "QTest__QTouchEventSequence_protectedbase_point".}
 proc fcQTestQTouchEventSequence_protectedbase_pointOrPreviousPoint(self: pointer, touchId: cint): pointer {.importc: "QTest__QTouchEventSequence_protectedbase_pointOrPreviousPoint".}
-proc fcQTestQTouchEventSequence_delete(self: pointer) {.importc: "QTest__QTouchEventSequence_delete".}
 
 proc press*(self: gen_qtestsupport_gui_types.QTestQTouchEventSequence, touchId: cint, pt: gen_qpoint_types.QPoint): gen_qtestsupport_gui_types.QTestQTouchEventSequence =
-  gen_qtestsupport_gui_types.QTestQTouchEventSequence(h: fcQTestQTouchEventSequence_press(self.h, touchId, pt.h))
+  gen_qtestsupport_gui_types.QTestQTouchEventSequence(h: fcQTestQTouchEventSequence_press(self.h, touchId, pt.h), owned: false)
 
 proc move*(self: gen_qtestsupport_gui_types.QTestQTouchEventSequence, touchId: cint, pt: gen_qpoint_types.QPoint): gen_qtestsupport_gui_types.QTestQTouchEventSequence =
-  gen_qtestsupport_gui_types.QTestQTouchEventSequence(h: fcQTestQTouchEventSequence_move(self.h, touchId, pt.h))
+  gen_qtestsupport_gui_types.QTestQTouchEventSequence(h: fcQTestQTouchEventSequence_move(self.h, touchId, pt.h), owned: false)
 
 proc release*(self: gen_qtestsupport_gui_types.QTestQTouchEventSequence, touchId: cint, pt: gen_qpoint_types.QPoint): gen_qtestsupport_gui_types.QTestQTouchEventSequence =
-  gen_qtestsupport_gui_types.QTestQTouchEventSequence(h: fcQTestQTouchEventSequence_release(self.h, touchId, pt.h))
+  gen_qtestsupport_gui_types.QTestQTouchEventSequence(h: fcQTestQTouchEventSequence_release(self.h, touchId, pt.h), owned: false)
 
 proc stationary*(self: gen_qtestsupport_gui_types.QTestQTouchEventSequence, touchId: cint): gen_qtestsupport_gui_types.QTestQTouchEventSequence =
-  gen_qtestsupport_gui_types.QTestQTouchEventSequence(h: fcQTestQTouchEventSequence_stationary(self.h, touchId))
+  gen_qtestsupport_gui_types.QTestQTouchEventSequence(h: fcQTestQTouchEventSequence_stationary(self.h, touchId), owned: false)
 
 proc commit*(self: gen_qtestsupport_gui_types.QTestQTouchEventSequence, processEvents: bool): bool =
   fcQTestQTouchEventSequence_commit(self.h, processEvents)
 
 proc press*(self: gen_qtestsupport_gui_types.QTestQTouchEventSequence, touchId: cint, pt: gen_qpoint_types.QPoint, window: gen_qwindow_types.QWindow): gen_qtestsupport_gui_types.QTestQTouchEventSequence =
-  gen_qtestsupport_gui_types.QTestQTouchEventSequence(h: fcQTestQTouchEventSequence_press3(self.h, touchId, pt.h, window.h))
+  gen_qtestsupport_gui_types.QTestQTouchEventSequence(h: fcQTestQTouchEventSequence_press3(self.h, touchId, pt.h, window.h), owned: false)
 
 proc move*(self: gen_qtestsupport_gui_types.QTestQTouchEventSequence, touchId: cint, pt: gen_qpoint_types.QPoint, window: gen_qwindow_types.QWindow): gen_qtestsupport_gui_types.QTestQTouchEventSequence =
-  gen_qtestsupport_gui_types.QTestQTouchEventSequence(h: fcQTestQTouchEventSequence_move3(self.h, touchId, pt.h, window.h))
+  gen_qtestsupport_gui_types.QTestQTouchEventSequence(h: fcQTestQTouchEventSequence_move3(self.h, touchId, pt.h, window.h), owned: false)
 
 proc release*(self: gen_qtestsupport_gui_types.QTestQTouchEventSequence, touchId: cint, pt: gen_qpoint_types.QPoint, window: gen_qwindow_types.QWindow): gen_qtestsupport_gui_types.QTestQTouchEventSequence =
-  gen_qtestsupport_gui_types.QTestQTouchEventSequence(h: fcQTestQTouchEventSequence_release3(self.h, touchId, pt.h, window.h))
+  gen_qtestsupport_gui_types.QTestQTouchEventSequence(h: fcQTestQTouchEventSequence_release3(self.h, touchId, pt.h, window.h), owned: false)
 
 proc mapToScreen*(self: gen_qtestsupport_gui_types.QTestQTouchEventSequence, window: gen_qwindow_types.QWindow, pt: gen_qpoint_types.QPoint): gen_qpoint_types.QPoint =
-  gen_qpoint_types.QPoint(h: fcQTestQTouchEventSequence_protectedbase_mapToScreen(self.h, window.h, pt.h))
+  gen_qpoint_types.QPoint(h: fcQTestQTouchEventSequence_protectedbase_mapToScreen(self.h, window.h, pt.h), owned: true)
 
 proc point*(self: gen_qtestsupport_gui_types.QTestQTouchEventSequence, touchId: cint): gen_qeventpoint_types.QEventPoint =
-  gen_qeventpoint_types.QEventPoint(h: fcQTestQTouchEventSequence_protectedbase_point(self.h, touchId))
+  gen_qeventpoint_types.QEventPoint(h: fcQTestQTouchEventSequence_protectedbase_point(self.h, touchId), owned: false)
 
 proc pointOrPreviousPoint*(self: gen_qtestsupport_gui_types.QTestQTouchEventSequence, touchId: cint): gen_qeventpoint_types.QEventPoint =
-  gen_qeventpoint_types.QEventPoint(h: fcQTestQTouchEventSequence_protectedbase_pointOrPreviousPoint(self.h, touchId))
+  gen_qeventpoint_types.QEventPoint(h: fcQTestQTouchEventSequence_protectedbase_pointOrPreviousPoint(self.h, touchId), owned: false)
 
-proc delete*(self: gen_qtestsupport_gui_types.QTestQTouchEventSequence) =
-  fcQTestQTouchEventSequence_delete(self.h)

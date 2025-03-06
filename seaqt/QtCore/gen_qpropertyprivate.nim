@@ -30,9 +30,6 @@ func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
     else:
       copyMem(addr result[0], unsafeAddr v[0], v.len)
 
-const cflags = gorge("pkg-config --cflags Qt6Core")  & " -fPIC"
-{.compile("gen_qpropertyprivate.cpp", cflags).}
-
 
 import ./gen_qpropertyprivate_types
 export gen_qpropertyprivate_types
@@ -41,10 +38,4 @@ export gen_qpropertyprivate_types
 type cQUntypedPropertyData*{.exportc: "QUntypedPropertyData", incompleteStruct.} = object
 type cQPropertyProxyBindingData*{.exportc: "QPropertyProxyBindingData", incompleteStruct.} = object
 
-proc fcQUntypedPropertyData_delete(self: pointer) {.importc: "QUntypedPropertyData_delete".}
-proc fcQPropertyProxyBindingData_delete(self: pointer) {.importc: "QPropertyProxyBindingData_delete".}
 
-proc delete*(self: gen_qpropertyprivate_types.QUntypedPropertyData) =
-  fcQUntypedPropertyData_delete(self.h)
-proc delete*(self: gen_qpropertyprivate_types.QPropertyProxyBindingData) =
-  fcQPropertyProxyBindingData_delete(self.h)

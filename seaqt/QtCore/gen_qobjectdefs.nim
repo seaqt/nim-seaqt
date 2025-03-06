@@ -30,9 +30,6 @@ func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
     else:
       copyMem(addr result[0], unsafeAddr v[0], v.len)
 
-const cflags = gorge("pkg-config --cflags Qt6Core")  & " -fPIC"
-{.compile("gen_qobjectdefs.cpp", cflags).}
-
 
 type QMetaObjectCallEnum* = distinct cint
 template InvokeMetaMethod*(_: type QMetaObjectCallEnum): untyped = 0
@@ -67,19 +64,16 @@ type cQMetaObjectConnection*{.exportc: "QMetaObject__Connection", incompleteStru
 type cQMetaObjectSuperData*{.exportc: "QMetaObject__SuperData", incompleteStruct.} = object
 type cQMetaObjectData*{.exportc: "QMetaObject__Data", incompleteStruct.} = object
 
-proc fcQMethodRawArguments_delete(self: pointer) {.importc: "QMethodRawArguments_delete".}
 proc fcQGenericArgument_data(self: pointer, ): pointer {.importc: "QGenericArgument_data".}
 proc fcQGenericArgument_name(self: pointer, ): cstring {.importc: "QGenericArgument_name".}
 proc fcQGenericArgument_new(): ptr cQGenericArgument {.importc: "QGenericArgument_new".}
 proc fcQGenericArgument_new2(param1: pointer): ptr cQGenericArgument {.importc: "QGenericArgument_new2".}
 proc fcQGenericArgument_new3(aName: cstring): ptr cQGenericArgument {.importc: "QGenericArgument_new3".}
 proc fcQGenericArgument_new4(aName: cstring, aData: pointer): ptr cQGenericArgument {.importc: "QGenericArgument_new4".}
-proc fcQGenericArgument_delete(self: pointer) {.importc: "QGenericArgument_delete".}
 proc fcQGenericReturnArgument_new(): ptr cQGenericReturnArgument {.importc: "QGenericReturnArgument_new".}
 proc fcQGenericReturnArgument_new2(param1: pointer): ptr cQGenericReturnArgument {.importc: "QGenericReturnArgument_new2".}
 proc fcQGenericReturnArgument_new3(aName: cstring): ptr cQGenericReturnArgument {.importc: "QGenericReturnArgument_new3".}
 proc fcQGenericReturnArgument_new4(aName: cstring, aData: pointer): ptr cQGenericReturnArgument {.importc: "QGenericReturnArgument_new4".}
-proc fcQGenericReturnArgument_delete(self: pointer) {.importc: "QGenericReturnArgument_delete".}
 proc fcQMetaObject_className(self: pointer, ): cstring {.importc: "QMetaObject_className".}
 proc fcQMetaObject_superClass(self: pointer, ): pointer {.importc: "QMetaObject_superClass".}
 proc fcQMetaObject_inherits(self: pointer, metaObject: pointer): bool {.importc: "QMetaObject_inherits".}
@@ -182,26 +176,20 @@ proc fcQMetaObject_newInstance9(self: pointer, val0: pointer, val1: pointer, val
 proc fcQMetaObject_newInstance10(self: pointer, val0: pointer, val1: pointer, val2: pointer, val3: pointer, val4: pointer, val5: pointer, val6: pointer, val7: pointer, val8: pointer, val9: pointer): pointer {.importc: "QMetaObject_newInstance10".}
 proc fcQMetaObject_new(): ptr cQMetaObject {.importc: "QMetaObject_new".}
 proc fcQMetaObject_new2(param1: pointer): ptr cQMetaObject {.importc: "QMetaObject_new2".}
-proc fcQMetaObject_delete(self: pointer) {.importc: "QMetaObject_delete".}
 proc fcQMetaObjectConnection_operatorAssign(self: pointer, other: pointer): void {.importc: "QMetaObject__Connection_operatorAssign".}
 proc fcQMetaObjectConnection_swap(self: pointer, other: pointer): void {.importc: "QMetaObject__Connection_swap".}
 proc fcQMetaObjectConnection_new(): ptr cQMetaObjectConnection {.importc: "QMetaObject__Connection_new".}
 proc fcQMetaObjectConnection_new2(other: pointer): ptr cQMetaObjectConnection {.importc: "QMetaObject__Connection_new2".}
-proc fcQMetaObjectConnection_delete(self: pointer) {.importc: "QMetaObject__Connection_delete".}
 proc fcQMetaObjectSuperData_operatorMinusGreater(self: pointer, ): pointer {.importc: "QMetaObject__SuperData_operatorMinusGreater".}
 proc fcQMetaObjectSuperData_ToConstQMetaObjectMultiply(self: pointer, ): pointer {.importc: "QMetaObject__SuperData_ToConstQMetaObjectMultiply".}
 proc fcQMetaObjectSuperData_operatorAssign(self: pointer, param1: pointer): void {.importc: "QMetaObject__SuperData_operatorAssign".}
 proc fcQMetaObjectSuperData_new(): ptr cQMetaObjectSuperData {.importc: "QMetaObject__SuperData_new".}
 proc fcQMetaObjectSuperData_new2(mo: pointer): ptr cQMetaObjectSuperData {.importc: "QMetaObject__SuperData_new2".}
 proc fcQMetaObjectSuperData_new3(param1: pointer): ptr cQMetaObjectSuperData {.importc: "QMetaObject__SuperData_new3".}
-proc fcQMetaObjectSuperData_delete(self: pointer) {.importc: "QMetaObject__SuperData_delete".}
 proc fcQMetaObjectData_operatorAssign(self: pointer, param1: pointer): void {.importc: "QMetaObject__Data_operatorAssign".}
 proc fcQMetaObjectData_new(): ptr cQMetaObjectData {.importc: "QMetaObject__Data_new".}
 proc fcQMetaObjectData_new2(param1: pointer): ptr cQMetaObjectData {.importc: "QMetaObject__Data_new2".}
-proc fcQMetaObjectData_delete(self: pointer) {.importc: "QMetaObject__Data_delete".}
 
-proc delete*(self: gen_qobjectdefs_types.QMethodRawArguments) =
-  fcQMethodRawArguments_delete(self.h)
 proc data*(self: gen_qobjectdefs_types.QGenericArgument, ): pointer =
   fcQGenericArgument_data(self.h)
 
@@ -209,53 +197,49 @@ proc name*(self: gen_qobjectdefs_types.QGenericArgument, ): cstring =
   (fcQGenericArgument_name(self.h))
 
 proc create*(T: type gen_qobjectdefs_types.QGenericArgument): gen_qobjectdefs_types.QGenericArgument =
-  gen_qobjectdefs_types.QGenericArgument(h: fcQGenericArgument_new())
+  gen_qobjectdefs_types.QGenericArgument(h: fcQGenericArgument_new(), owned: true)
 
 proc create*(T: type gen_qobjectdefs_types.QGenericArgument,
     param1: gen_qobjectdefs_types.QGenericArgument): gen_qobjectdefs_types.QGenericArgument =
-  gen_qobjectdefs_types.QGenericArgument(h: fcQGenericArgument_new2(param1.h))
+  gen_qobjectdefs_types.QGenericArgument(h: fcQGenericArgument_new2(param1.h), owned: true)
 
 proc create*(T: type gen_qobjectdefs_types.QGenericArgument,
     aName: cstring): gen_qobjectdefs_types.QGenericArgument =
-  gen_qobjectdefs_types.QGenericArgument(h: fcQGenericArgument_new3(aName))
+  gen_qobjectdefs_types.QGenericArgument(h: fcQGenericArgument_new3(aName), owned: true)
 
 proc create*(T: type gen_qobjectdefs_types.QGenericArgument,
     aName: cstring, aData: pointer): gen_qobjectdefs_types.QGenericArgument =
-  gen_qobjectdefs_types.QGenericArgument(h: fcQGenericArgument_new4(aName, aData))
+  gen_qobjectdefs_types.QGenericArgument(h: fcQGenericArgument_new4(aName, aData), owned: true)
 
-proc delete*(self: gen_qobjectdefs_types.QGenericArgument) =
-  fcQGenericArgument_delete(self.h)
 proc create*(T: type gen_qobjectdefs_types.QGenericReturnArgument): gen_qobjectdefs_types.QGenericReturnArgument =
-  gen_qobjectdefs_types.QGenericReturnArgument(h: fcQGenericReturnArgument_new())
+  gen_qobjectdefs_types.QGenericReturnArgument(h: fcQGenericReturnArgument_new(), owned: true)
 
 proc create*(T: type gen_qobjectdefs_types.QGenericReturnArgument,
     param1: gen_qobjectdefs_types.QGenericReturnArgument): gen_qobjectdefs_types.QGenericReturnArgument =
-  gen_qobjectdefs_types.QGenericReturnArgument(h: fcQGenericReturnArgument_new2(param1.h))
+  gen_qobjectdefs_types.QGenericReturnArgument(h: fcQGenericReturnArgument_new2(param1.h), owned: true)
 
 proc create*(T: type gen_qobjectdefs_types.QGenericReturnArgument,
     aName: cstring): gen_qobjectdefs_types.QGenericReturnArgument =
-  gen_qobjectdefs_types.QGenericReturnArgument(h: fcQGenericReturnArgument_new3(aName))
+  gen_qobjectdefs_types.QGenericReturnArgument(h: fcQGenericReturnArgument_new3(aName), owned: true)
 
 proc create*(T: type gen_qobjectdefs_types.QGenericReturnArgument,
     aName: cstring, aData: pointer): gen_qobjectdefs_types.QGenericReturnArgument =
-  gen_qobjectdefs_types.QGenericReturnArgument(h: fcQGenericReturnArgument_new4(aName, aData))
+  gen_qobjectdefs_types.QGenericReturnArgument(h: fcQGenericReturnArgument_new4(aName, aData), owned: true)
 
-proc delete*(self: gen_qobjectdefs_types.QGenericReturnArgument) =
-  fcQGenericReturnArgument_delete(self.h)
 proc className*(self: gen_qobjectdefs_types.QMetaObject, ): cstring =
   (fcQMetaObject_className(self.h))
 
 proc superClass*(self: gen_qobjectdefs_types.QMetaObject, ): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQMetaObject_superClass(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQMetaObject_superClass(self.h), owned: false)
 
 proc inherits*(self: gen_qobjectdefs_types.QMetaObject, metaObject: gen_qobjectdefs_types.QMetaObject): bool =
   fcQMetaObject_inherits(self.h, metaObject.h)
 
 proc castX*(self: gen_qobjectdefs_types.QMetaObject, obj: gen_qobject_types.QObject): gen_qobject_types.QObject =
-  gen_qobject_types.QObject(h: fcQMetaObject_castX(self.h, obj.h))
+  gen_qobject_types.QObject(h: fcQMetaObject_castX(self.h, obj.h), owned: false)
 
 proc castX2*(self: gen_qobjectdefs_types.QMetaObject, obj: gen_qobject_types.QObject): gen_qobject_types.QObject =
-  gen_qobject_types.QObject(h: fcQMetaObject_castWithObj(self.h, obj.h))
+  gen_qobject_types.QObject(h: fcQMetaObject_castWithObj(self.h, obj.h), owned: false)
 
 proc tr*(self: gen_qobjectdefs_types.QMetaObject, s: cstring, c: cstring): string =
   let v_ms = fcQMetaObject_tr(self.h, s, c)
@@ -264,7 +248,7 @@ proc tr*(self: gen_qobjectdefs_types.QMetaObject, s: cstring, c: cstring): strin
   vx_ret
 
 proc metaType*(self: gen_qobjectdefs_types.QMetaObject, ): gen_qmetatype_types.QMetaType =
-  gen_qmetatype_types.QMetaType(h: fcQMetaObject_metaType(self.h))
+  gen_qmetatype_types.QMetaType(h: fcQMetaObject_metaType(self.h), owned: true)
 
 proc methodOffset*(self: gen_qobjectdefs_types.QMetaObject, ): cint =
   fcQMetaObject_methodOffset(self.h)
@@ -315,22 +299,22 @@ proc indexOfClassInfo*(self: gen_qobjectdefs_types.QMetaObject, name: cstring): 
   fcQMetaObject_indexOfClassInfo(self.h, name)
 
 proc constructor*(self: gen_qobjectdefs_types.QMetaObject, index: cint): gen_qmetaobject_types.QMetaMethod =
-  gen_qmetaobject_types.QMetaMethod(h: fcQMetaObject_constructor(self.h, index))
+  gen_qmetaobject_types.QMetaMethod(h: fcQMetaObject_constructor(self.h, index), owned: true)
 
 proc methodX*(self: gen_qobjectdefs_types.QMetaObject, index: cint): gen_qmetaobject_types.QMetaMethod =
-  gen_qmetaobject_types.QMetaMethod(h: fcQMetaObject_methodX(self.h, index))
+  gen_qmetaobject_types.QMetaMethod(h: fcQMetaObject_methodX(self.h, index), owned: true)
 
 proc enumerator*(self: gen_qobjectdefs_types.QMetaObject, index: cint): gen_qmetaobject_types.QMetaEnum =
-  gen_qmetaobject_types.QMetaEnum(h: fcQMetaObject_enumerator(self.h, index))
+  gen_qmetaobject_types.QMetaEnum(h: fcQMetaObject_enumerator(self.h, index), owned: true)
 
 proc property*(self: gen_qobjectdefs_types.QMetaObject, index: cint): gen_qmetaobject_types.QMetaProperty =
-  gen_qmetaobject_types.QMetaProperty(h: fcQMetaObject_property(self.h, index))
+  gen_qmetaobject_types.QMetaProperty(h: fcQMetaObject_property(self.h, index), owned: true)
 
 proc classInfo*(self: gen_qobjectdefs_types.QMetaObject, index: cint): gen_qmetaobject_types.QMetaClassInfo =
-  gen_qmetaobject_types.QMetaClassInfo(h: fcQMetaObject_classInfo(self.h, index))
+  gen_qmetaobject_types.QMetaClassInfo(h: fcQMetaObject_classInfo(self.h, index), owned: true)
 
 proc userProperty*(self: gen_qobjectdefs_types.QMetaObject, ): gen_qmetaobject_types.QMetaProperty =
-  gen_qmetaobject_types.QMetaProperty(h: fcQMetaObject_userProperty(self.h))
+  gen_qmetaobject_types.QMetaProperty(h: fcQMetaObject_userProperty(self.h), owned: true)
 
 proc checkConnectArgs*(_: type gen_qobjectdefs_types.QMetaObject, signal: cstring, methodVal: cstring): bool =
   fcQMetaObject_checkConnectArgs(signal, methodVal)
@@ -351,7 +335,7 @@ proc normalizedType*(_: type gen_qobjectdefs_types.QMetaObject, typeVal: cstring
   vx_ret
 
 proc connect*(_: type gen_qobjectdefs_types.QMetaObject, sender: gen_qobject_types.QObject, signal_index: cint, receiver: gen_qobject_types.QObject, method_index: cint): gen_qobjectdefs_types.QMetaObjectConnection =
-  gen_qobjectdefs_types.QMetaObjectConnection(h: fcQMetaObject_connect(sender.h, signal_index, receiver.h, method_index))
+  gen_qobjectdefs_types.QMetaObjectConnection(h: fcQMetaObject_connect(sender.h, signal_index, receiver.h, method_index), owned: true)
 
 proc disconnect*(_: type gen_qobjectdefs_types.QMetaObject, sender: gen_qobject_types.QObject, signal_index: cint, receiver: gen_qobject_types.QObject, method_index: cint): bool =
   fcQMetaObject_disconnect(sender.h, signal_index, receiver.h, method_index)
@@ -384,7 +368,7 @@ proc invokeMethod*(_: type gen_qobjectdefs_types.QMetaObject, obj: gen_qobject_t
   fcQMetaObject_invokeMethod4(obj.h, member)
 
 proc newInstance*(self: gen_qobjectdefs_types.QMetaObject, ): gen_qobject_types.QObject =
-  gen_qobject_types.QObject(h: fcQMetaObject_newInstance(self.h))
+  gen_qobject_types.QObject(h: fcQMetaObject_newInstance(self.h), owned: false)
 
 proc staticMetacall*(self: gen_qobjectdefs_types.QMetaObject, param1: cint, param2: cint, param3: pointer): cint =
   fcQMetaObject_staticMetacall(self.h, cint(param1), param2, param3)
@@ -399,10 +383,10 @@ proc tr*(self: gen_qobjectdefs_types.QMetaObject, s: cstring, c: cstring, n: cin
   vx_ret
 
 proc connect*(_: type gen_qobjectdefs_types.QMetaObject, sender: gen_qobject_types.QObject, signal_index: cint, receiver: gen_qobject_types.QObject, method_index: cint, typeVal: cint): gen_qobjectdefs_types.QMetaObjectConnection =
-  gen_qobjectdefs_types.QMetaObjectConnection(h: fcQMetaObject_connect5(sender.h, signal_index, receiver.h, method_index, typeVal))
+  gen_qobjectdefs_types.QMetaObjectConnection(h: fcQMetaObject_connect5(sender.h, signal_index, receiver.h, method_index, typeVal), owned: true)
 
 proc connect*(_: type gen_qobjectdefs_types.QMetaObject, sender: gen_qobject_types.QObject, signal_index: cint, receiver: gen_qobject_types.QObject, method_index: cint, typeVal: cint, types: ptr cint): gen_qobjectdefs_types.QMetaObjectConnection =
-  gen_qobjectdefs_types.QMetaObjectConnection(h: fcQMetaObject_connect6(sender.h, signal_index, receiver.h, method_index, typeVal, types))
+  gen_qobjectdefs_types.QMetaObjectConnection(h: fcQMetaObject_connect6(sender.h, signal_index, receiver.h, method_index, typeVal, types), owned: true)
 
 proc invokeMethod*(_: type gen_qobjectdefs_types.QMetaObject, obj: gen_qobject_types.QObject, member: cstring, param3: cint, retVal: gen_qobjectdefs_types.QGenericReturnArgument, val0: gen_qobjectdefs_types.QGenericArgument): bool =
   fcQMetaObject_invokeMethod5(obj.h, member, cint(param3), retVal.h, val0.h)
@@ -525,44 +509,42 @@ proc invokeMethod*(_: type gen_qobjectdefs_types.QMetaObject, obj: gen_qobject_t
   fcQMetaObject_invokeMethod124(obj.h, member, val0.h, val1.h, val2.h, val3.h, val4.h, val5.h, val6.h, val7.h, val8.h, val9.h)
 
 proc newInstance*(self: gen_qobjectdefs_types.QMetaObject, val0: gen_qobjectdefs_types.QGenericArgument): gen_qobject_types.QObject =
-  gen_qobject_types.QObject(h: fcQMetaObject_newInstance1(self.h, val0.h))
+  gen_qobject_types.QObject(h: fcQMetaObject_newInstance1(self.h, val0.h), owned: false)
 
 proc newInstance*(self: gen_qobjectdefs_types.QMetaObject, val0: gen_qobjectdefs_types.QGenericArgument, val1: gen_qobjectdefs_types.QGenericArgument): gen_qobject_types.QObject =
-  gen_qobject_types.QObject(h: fcQMetaObject_newInstance2(self.h, val0.h, val1.h))
+  gen_qobject_types.QObject(h: fcQMetaObject_newInstance2(self.h, val0.h, val1.h), owned: false)
 
 proc newInstance*(self: gen_qobjectdefs_types.QMetaObject, val0: gen_qobjectdefs_types.QGenericArgument, val1: gen_qobjectdefs_types.QGenericArgument, val2: gen_qobjectdefs_types.QGenericArgument): gen_qobject_types.QObject =
-  gen_qobject_types.QObject(h: fcQMetaObject_newInstance3(self.h, val0.h, val1.h, val2.h))
+  gen_qobject_types.QObject(h: fcQMetaObject_newInstance3(self.h, val0.h, val1.h, val2.h), owned: false)
 
 proc newInstance*(self: gen_qobjectdefs_types.QMetaObject, val0: gen_qobjectdefs_types.QGenericArgument, val1: gen_qobjectdefs_types.QGenericArgument, val2: gen_qobjectdefs_types.QGenericArgument, val3: gen_qobjectdefs_types.QGenericArgument): gen_qobject_types.QObject =
-  gen_qobject_types.QObject(h: fcQMetaObject_newInstance4(self.h, val0.h, val1.h, val2.h, val3.h))
+  gen_qobject_types.QObject(h: fcQMetaObject_newInstance4(self.h, val0.h, val1.h, val2.h, val3.h), owned: false)
 
 proc newInstance*(self: gen_qobjectdefs_types.QMetaObject, val0: gen_qobjectdefs_types.QGenericArgument, val1: gen_qobjectdefs_types.QGenericArgument, val2: gen_qobjectdefs_types.QGenericArgument, val3: gen_qobjectdefs_types.QGenericArgument, val4: gen_qobjectdefs_types.QGenericArgument): gen_qobject_types.QObject =
-  gen_qobject_types.QObject(h: fcQMetaObject_newInstance5(self.h, val0.h, val1.h, val2.h, val3.h, val4.h))
+  gen_qobject_types.QObject(h: fcQMetaObject_newInstance5(self.h, val0.h, val1.h, val2.h, val3.h, val4.h), owned: false)
 
 proc newInstance*(self: gen_qobjectdefs_types.QMetaObject, val0: gen_qobjectdefs_types.QGenericArgument, val1: gen_qobjectdefs_types.QGenericArgument, val2: gen_qobjectdefs_types.QGenericArgument, val3: gen_qobjectdefs_types.QGenericArgument, val4: gen_qobjectdefs_types.QGenericArgument, val5: gen_qobjectdefs_types.QGenericArgument): gen_qobject_types.QObject =
-  gen_qobject_types.QObject(h: fcQMetaObject_newInstance6(self.h, val0.h, val1.h, val2.h, val3.h, val4.h, val5.h))
+  gen_qobject_types.QObject(h: fcQMetaObject_newInstance6(self.h, val0.h, val1.h, val2.h, val3.h, val4.h, val5.h), owned: false)
 
 proc newInstance*(self: gen_qobjectdefs_types.QMetaObject, val0: gen_qobjectdefs_types.QGenericArgument, val1: gen_qobjectdefs_types.QGenericArgument, val2: gen_qobjectdefs_types.QGenericArgument, val3: gen_qobjectdefs_types.QGenericArgument, val4: gen_qobjectdefs_types.QGenericArgument, val5: gen_qobjectdefs_types.QGenericArgument, val6: gen_qobjectdefs_types.QGenericArgument): gen_qobject_types.QObject =
-  gen_qobject_types.QObject(h: fcQMetaObject_newInstance7(self.h, val0.h, val1.h, val2.h, val3.h, val4.h, val5.h, val6.h))
+  gen_qobject_types.QObject(h: fcQMetaObject_newInstance7(self.h, val0.h, val1.h, val2.h, val3.h, val4.h, val5.h, val6.h), owned: false)
 
 proc newInstance*(self: gen_qobjectdefs_types.QMetaObject, val0: gen_qobjectdefs_types.QGenericArgument, val1: gen_qobjectdefs_types.QGenericArgument, val2: gen_qobjectdefs_types.QGenericArgument, val3: gen_qobjectdefs_types.QGenericArgument, val4: gen_qobjectdefs_types.QGenericArgument, val5: gen_qobjectdefs_types.QGenericArgument, val6: gen_qobjectdefs_types.QGenericArgument, val7: gen_qobjectdefs_types.QGenericArgument): gen_qobject_types.QObject =
-  gen_qobject_types.QObject(h: fcQMetaObject_newInstance8(self.h, val0.h, val1.h, val2.h, val3.h, val4.h, val5.h, val6.h, val7.h))
+  gen_qobject_types.QObject(h: fcQMetaObject_newInstance8(self.h, val0.h, val1.h, val2.h, val3.h, val4.h, val5.h, val6.h, val7.h), owned: false)
 
 proc newInstance*(self: gen_qobjectdefs_types.QMetaObject, val0: gen_qobjectdefs_types.QGenericArgument, val1: gen_qobjectdefs_types.QGenericArgument, val2: gen_qobjectdefs_types.QGenericArgument, val3: gen_qobjectdefs_types.QGenericArgument, val4: gen_qobjectdefs_types.QGenericArgument, val5: gen_qobjectdefs_types.QGenericArgument, val6: gen_qobjectdefs_types.QGenericArgument, val7: gen_qobjectdefs_types.QGenericArgument, val8: gen_qobjectdefs_types.QGenericArgument): gen_qobject_types.QObject =
-  gen_qobject_types.QObject(h: fcQMetaObject_newInstance9(self.h, val0.h, val1.h, val2.h, val3.h, val4.h, val5.h, val6.h, val7.h, val8.h))
+  gen_qobject_types.QObject(h: fcQMetaObject_newInstance9(self.h, val0.h, val1.h, val2.h, val3.h, val4.h, val5.h, val6.h, val7.h, val8.h), owned: false)
 
 proc newInstance*(self: gen_qobjectdefs_types.QMetaObject, val0: gen_qobjectdefs_types.QGenericArgument, val1: gen_qobjectdefs_types.QGenericArgument, val2: gen_qobjectdefs_types.QGenericArgument, val3: gen_qobjectdefs_types.QGenericArgument, val4: gen_qobjectdefs_types.QGenericArgument, val5: gen_qobjectdefs_types.QGenericArgument, val6: gen_qobjectdefs_types.QGenericArgument, val7: gen_qobjectdefs_types.QGenericArgument, val8: gen_qobjectdefs_types.QGenericArgument, val9: gen_qobjectdefs_types.QGenericArgument): gen_qobject_types.QObject =
-  gen_qobject_types.QObject(h: fcQMetaObject_newInstance10(self.h, val0.h, val1.h, val2.h, val3.h, val4.h, val5.h, val6.h, val7.h, val8.h, val9.h))
+  gen_qobject_types.QObject(h: fcQMetaObject_newInstance10(self.h, val0.h, val1.h, val2.h, val3.h, val4.h, val5.h, val6.h, val7.h, val8.h, val9.h), owned: false)
 
 proc create*(T: type gen_qobjectdefs_types.QMetaObject): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQMetaObject_new())
+  gen_qobjectdefs_types.QMetaObject(h: fcQMetaObject_new(), owned: true)
 
 proc create*(T: type gen_qobjectdefs_types.QMetaObject,
     param1: gen_qobjectdefs_types.QMetaObject): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQMetaObject_new2(param1.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQMetaObject_new2(param1.h), owned: true)
 
-proc delete*(self: gen_qobjectdefs_types.QMetaObject) =
-  fcQMetaObject_delete(self.h)
 proc operatorAssign*(self: gen_qobjectdefs_types.QMetaObjectConnection, other: gen_qobjectdefs_types.QMetaObjectConnection): void =
   fcQMetaObjectConnection_operatorAssign(self.h, other.h)
 
@@ -570,45 +552,39 @@ proc swap*(self: gen_qobjectdefs_types.QMetaObjectConnection, other: gen_qobject
   fcQMetaObjectConnection_swap(self.h, other.h)
 
 proc create*(T: type gen_qobjectdefs_types.QMetaObjectConnection): gen_qobjectdefs_types.QMetaObjectConnection =
-  gen_qobjectdefs_types.QMetaObjectConnection(h: fcQMetaObjectConnection_new())
+  gen_qobjectdefs_types.QMetaObjectConnection(h: fcQMetaObjectConnection_new(), owned: true)
 
 proc create*(T: type gen_qobjectdefs_types.QMetaObjectConnection,
     other: gen_qobjectdefs_types.QMetaObjectConnection): gen_qobjectdefs_types.QMetaObjectConnection =
-  gen_qobjectdefs_types.QMetaObjectConnection(h: fcQMetaObjectConnection_new2(other.h))
+  gen_qobjectdefs_types.QMetaObjectConnection(h: fcQMetaObjectConnection_new2(other.h), owned: true)
 
-proc delete*(self: gen_qobjectdefs_types.QMetaObjectConnection) =
-  fcQMetaObjectConnection_delete(self.h)
 proc operatorMinusGreater*(self: gen_qobjectdefs_types.QMetaObjectSuperData, ): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQMetaObjectSuperData_operatorMinusGreater(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQMetaObjectSuperData_operatorMinusGreater(self.h), owned: false)
 
 proc ToConstQMetaObjectMultiply*(self: gen_qobjectdefs_types.QMetaObjectSuperData, ): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQMetaObjectSuperData_ToConstQMetaObjectMultiply(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQMetaObjectSuperData_ToConstQMetaObjectMultiply(self.h), owned: false)
 
 proc operatorAssign*(self: gen_qobjectdefs_types.QMetaObjectSuperData, param1: gen_qobjectdefs_types.QMetaObjectSuperData): void =
   fcQMetaObjectSuperData_operatorAssign(self.h, param1.h)
 
 proc create*(T: type gen_qobjectdefs_types.QMetaObjectSuperData): gen_qobjectdefs_types.QMetaObjectSuperData =
-  gen_qobjectdefs_types.QMetaObjectSuperData(h: fcQMetaObjectSuperData_new())
+  gen_qobjectdefs_types.QMetaObjectSuperData(h: fcQMetaObjectSuperData_new(), owned: true)
 
 proc create*(T: type gen_qobjectdefs_types.QMetaObjectSuperData,
     mo: gen_qobjectdefs_types.QMetaObject): gen_qobjectdefs_types.QMetaObjectSuperData =
-  gen_qobjectdefs_types.QMetaObjectSuperData(h: fcQMetaObjectSuperData_new2(mo.h))
+  gen_qobjectdefs_types.QMetaObjectSuperData(h: fcQMetaObjectSuperData_new2(mo.h), owned: true)
 
 proc create*(T: type gen_qobjectdefs_types.QMetaObjectSuperData,
     param1: gen_qobjectdefs_types.QMetaObjectSuperData): gen_qobjectdefs_types.QMetaObjectSuperData =
-  gen_qobjectdefs_types.QMetaObjectSuperData(h: fcQMetaObjectSuperData_new3(param1.h))
+  gen_qobjectdefs_types.QMetaObjectSuperData(h: fcQMetaObjectSuperData_new3(param1.h), owned: true)
 
-proc delete*(self: gen_qobjectdefs_types.QMetaObjectSuperData) =
-  fcQMetaObjectSuperData_delete(self.h)
 proc operatorAssign*(self: gen_qobjectdefs_types.QMetaObjectData, param1: gen_qobjectdefs_types.QMetaObjectData): void =
   fcQMetaObjectData_operatorAssign(self.h, param1.h)
 
 proc create*(T: type gen_qobjectdefs_types.QMetaObjectData): gen_qobjectdefs_types.QMetaObjectData =
-  gen_qobjectdefs_types.QMetaObjectData(h: fcQMetaObjectData_new())
+  gen_qobjectdefs_types.QMetaObjectData(h: fcQMetaObjectData_new(), owned: true)
 
 proc create*(T: type gen_qobjectdefs_types.QMetaObjectData,
     param1: gen_qobjectdefs_types.QMetaObjectData): gen_qobjectdefs_types.QMetaObjectData =
-  gen_qobjectdefs_types.QMetaObjectData(h: fcQMetaObjectData_new2(param1.h))
+  gen_qobjectdefs_types.QMetaObjectData(h: fcQMetaObjectData_new2(param1.h), owned: true)
 
-proc delete*(self: gen_qobjectdefs_types.QMetaObjectData) =
-  fcQMetaObjectData_delete(self.h)

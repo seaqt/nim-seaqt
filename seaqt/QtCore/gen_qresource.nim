@@ -30,9 +30,6 @@ func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
     else:
       copyMem(addr result[0], unsafeAddr v[0], v.len)
 
-const cflags = gorge("pkg-config --cflags Qt6Core")  & " -fPIC"
-{.compile("gen_qresource.cpp", cflags).}
-
 
 type QResourceCompressionEnum* = distinct cint
 template NoCompression*(_: type QResourceCompressionEnum): untyped = 0
@@ -78,7 +75,6 @@ proc fcQResource_protectedbase_children(self: pointer, ): struct_miqt_array {.im
 proc fcQResource_new(): ptr cQResource {.importc: "QResource_new".}
 proc fcQResource_new2(file: struct_miqt_string): ptr cQResource {.importc: "QResource_new2".}
 proc fcQResource_new3(file: struct_miqt_string, locale: pointer): ptr cQResource {.importc: "QResource_new3".}
-proc fcQResource_delete(self: pointer) {.importc: "QResource_delete".}
 
 proc setFileName*(self: gen_qresource_types.QResource, file: string): void =
   fcQResource_setFileName(self.h, struct_miqt_string(data: file, len: csize_t(len(file))))
@@ -99,7 +95,7 @@ proc setLocale*(self: gen_qresource_types.QResource, locale: gen_qlocale_types.Q
   fcQResource_setLocale(self.h, locale.h)
 
 proc locale*(self: gen_qresource_types.QResource, ): gen_qlocale_types.QLocale =
-  gen_qlocale_types.QLocale(h: fcQResource_locale(self.h))
+  gen_qlocale_types.QLocale(h: fcQResource_locale(self.h), owned: true)
 
 proc isValid*(self: gen_qresource_types.QResource, ): bool =
   fcQResource_isValid(self.h)
@@ -123,7 +119,7 @@ proc uncompressedData*(self: gen_qresource_types.QResource, ): seq[byte] =
   vx_ret
 
 proc lastModified*(self: gen_qresource_types.QResource, ): gen_qdatetime_types.QDateTime =
-  gen_qdatetime_types.QDateTime(h: fcQResource_lastModified(self.h))
+  gen_qdatetime_types.QDateTime(h: fcQResource_lastModified(self.h), owned: true)
 
 proc registerResource*(_: type gen_qresource_types.QResource, rccFilename: string): bool =
   fcQResource_registerResource(struct_miqt_string(data: rccFilename, len: csize_t(len(rccFilename))))
@@ -168,15 +164,13 @@ proc children*(self: gen_qresource_types.QResource, ): seq[string] =
   vx_ret
 
 proc create*(T: type gen_qresource_types.QResource): gen_qresource_types.QResource =
-  gen_qresource_types.QResource(h: fcQResource_new())
+  gen_qresource_types.QResource(h: fcQResource_new(), owned: true)
 
 proc create*(T: type gen_qresource_types.QResource,
     file: string): gen_qresource_types.QResource =
-  gen_qresource_types.QResource(h: fcQResource_new2(struct_miqt_string(data: file, len: csize_t(len(file)))))
+  gen_qresource_types.QResource(h: fcQResource_new2(struct_miqt_string(data: file, len: csize_t(len(file)))), owned: true)
 
 proc create*(T: type gen_qresource_types.QResource,
     file: string, locale: gen_qlocale_types.QLocale): gen_qresource_types.QResource =
-  gen_qresource_types.QResource(h: fcQResource_new3(struct_miqt_string(data: file, len: csize_t(len(file))), locale.h))
+  gen_qresource_types.QResource(h: fcQResource_new3(struct_miqt_string(data: file, len: csize_t(len(file))), locale.h), owned: true)
 
-proc delete*(self: gen_qresource_types.QResource) =
-  fcQResource_delete(self.h)

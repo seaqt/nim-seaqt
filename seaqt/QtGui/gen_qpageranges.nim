@@ -30,9 +30,6 @@ func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
     else:
       copyMem(addr result[0], unsafeAddr v[0], v.len)
 
-const cflags = gorge("pkg-config --cflags Qt6Gui")  & " -fPIC"
-{.compile("gen_qpageranges.cpp", cflags).}
-
 
 import ./gen_qpageranges_types
 export gen_qpageranges_types
@@ -56,11 +53,9 @@ proc fcQPageRanges_lastPage(self: pointer, ): cint {.importc: "QPageRanges_lastP
 proc fcQPageRanges_detach(self: pointer, ): void {.importc: "QPageRanges_detach".}
 proc fcQPageRanges_new(): ptr cQPageRanges {.importc: "QPageRanges_new".}
 proc fcQPageRanges_new2(other: pointer): ptr cQPageRanges {.importc: "QPageRanges_new2".}
-proc fcQPageRanges_delete(self: pointer) {.importc: "QPageRanges_delete".}
 proc fcQPageRangesRange_contains(self: pointer, pageNumber: cint): bool {.importc: "QPageRanges__Range_contains".}
 proc fcQPageRangesRange_new(): ptr cQPageRangesRange {.importc: "QPageRanges__Range_new".}
 proc fcQPageRangesRange_new2(param1: pointer): ptr cQPageRangesRange {.importc: "QPageRanges__Range_new2".}
-proc fcQPageRangesRange_delete(self: pointer) {.importc: "QPageRanges__Range_delete".}
 
 proc operatorAssign*(self: gen_qpageranges_types.QPageRanges, other: gen_qpageranges_types.QPageRanges): void =
   fcQPageRanges_operatorAssign(self.h, other.h)
@@ -79,7 +74,7 @@ proc toRangeList*(self: gen_qpageranges_types.QPageRanges, ): seq[gen_qpagerange
   var vx_ret = newSeq[gen_qpageranges_types.QPageRangesRange](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
-    vx_ret[i] = gen_qpageranges_types.QPageRangesRange(h: v_outCast[i])
+    vx_ret[i] = gen_qpageranges_types.QPageRangesRange(h: v_outCast[i], owned: true)
   c_free(v_ma.data)
   vx_ret
 
@@ -93,7 +88,7 @@ proc toString*(self: gen_qpageranges_types.QPageRanges, ): string =
   vx_ret
 
 proc fromString*(_: type gen_qpageranges_types.QPageRanges, ranges: string): gen_qpageranges_types.QPageRanges =
-  gen_qpageranges_types.QPageRanges(h: fcQPageRanges_fromString(struct_miqt_string(data: ranges, len: csize_t(len(ranges)))))
+  gen_qpageranges_types.QPageRanges(h: fcQPageRanges_fromString(struct_miqt_string(data: ranges, len: csize_t(len(ranges)))), owned: true)
 
 proc contains*(self: gen_qpageranges_types.QPageRanges, pageNumber: cint): bool =
   fcQPageRanges_contains(self.h, pageNumber)
@@ -111,23 +106,19 @@ proc detach*(self: gen_qpageranges_types.QPageRanges, ): void =
   fcQPageRanges_detach(self.h)
 
 proc create*(T: type gen_qpageranges_types.QPageRanges): gen_qpageranges_types.QPageRanges =
-  gen_qpageranges_types.QPageRanges(h: fcQPageRanges_new())
+  gen_qpageranges_types.QPageRanges(h: fcQPageRanges_new(), owned: true)
 
 proc create*(T: type gen_qpageranges_types.QPageRanges,
     other: gen_qpageranges_types.QPageRanges): gen_qpageranges_types.QPageRanges =
-  gen_qpageranges_types.QPageRanges(h: fcQPageRanges_new2(other.h))
+  gen_qpageranges_types.QPageRanges(h: fcQPageRanges_new2(other.h), owned: true)
 
-proc delete*(self: gen_qpageranges_types.QPageRanges) =
-  fcQPageRanges_delete(self.h)
 proc contains*(self: gen_qpageranges_types.QPageRangesRange, pageNumber: cint): bool =
   fcQPageRangesRange_contains(self.h, pageNumber)
 
 proc create*(T: type gen_qpageranges_types.QPageRangesRange): gen_qpageranges_types.QPageRangesRange =
-  gen_qpageranges_types.QPageRangesRange(h: fcQPageRangesRange_new())
+  gen_qpageranges_types.QPageRangesRange(h: fcQPageRangesRange_new(), owned: true)
 
 proc create*(T: type gen_qpageranges_types.QPageRangesRange,
     param1: gen_qpageranges_types.QPageRangesRange): gen_qpageranges_types.QPageRangesRange =
-  gen_qpageranges_types.QPageRangesRange(h: fcQPageRangesRange_new2(param1.h))
+  gen_qpageranges_types.QPageRangesRange(h: fcQPageRangesRange_new2(param1.h), owned: true)
 
-proc delete*(self: gen_qpageranges_types.QPageRangesRange) =
-  fcQPageRangesRange_delete(self.h)

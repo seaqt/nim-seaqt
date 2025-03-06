@@ -30,7 +30,7 @@ func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
     else:
       copyMem(addr result[0], unsafeAddr v[0], v.len)
 
-const cflags = gorge("pkg-config --cflags Qt6Network")  & " -fPIC"
+const cflags = gorge("pkg-config --cflags Qt6Network") & " -fPIC"
 {.compile("gen_qnetworkinformation.cpp", cflags).}
 
 
@@ -104,7 +104,7 @@ proc fcQNetworkInformation_protectedbase_isSignalConnected(self: pointer, signal
 proc fcQNetworkInformation_staticMetaObject(): pointer {.importc: "QNetworkInformation_staticMetaObject".}
 
 proc metaObject*(self: gen_qnetworkinformation_types.QNetworkInformation, ): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQNetworkInformation_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQNetworkInformation_metaObject(self.h), owned: false)
 
 proc metacast*(self: gen_qnetworkinformation_types.QNetworkInformation, param1: cstring): pointer =
   fcQNetworkInformation_metacast(self.h, param1)
@@ -164,7 +164,7 @@ proc availableBackends*(_: type gen_qnetworkinformation_types.QNetworkInformatio
   vx_ret
 
 proc instance*(_: type gen_qnetworkinformation_types.QNetworkInformation, ): gen_qnetworkinformation_types.QNetworkInformation =
-  gen_qnetworkinformation_types.QNetworkInformation(h: fcQNetworkInformation_instance())
+  gen_qnetworkinformation_types.QNetworkInformation(h: fcQNetworkInformation_instance(), owned: false)
 
 proc reachabilityChanged*(self: gen_qnetworkinformation_types.QNetworkInformation, newReachability: cint): void =
   fcQNetworkInformation_reachabilityChanged(self.h, cint(newReachability))
@@ -259,7 +259,7 @@ proc tr*(_: type gen_qnetworkinformation_types.QNetworkInformation, s: cstring, 
   vx_ret
 
 proc sender*(self: gen_qnetworkinformation_types.QNetworkInformation, ): gen_qobject_types.QObject =
-  gen_qobject_types.QObject(h: fcQNetworkInformation_protectedbase_sender(self.h))
+  gen_qobject_types.QObject(h: fcQNetworkInformation_protectedbase_sender(self.h), owned: false)
 
 proc senderSignalIndex*(self: gen_qnetworkinformation_types.QNetworkInformation, ): cint =
   fcQNetworkInformation_protectedbase_senderSignalIndex(self.h)

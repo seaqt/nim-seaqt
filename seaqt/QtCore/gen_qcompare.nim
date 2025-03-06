@@ -30,9 +30,6 @@ func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
     else:
       copyMem(addr result[0], unsafeAddr v[0], v.len)
 
-const cflags = gorge("pkg-config --cflags Qt6Core")  & " -fPIC"
-{.compile("gen_qcompare.cpp", cflags).}
-
 
 type QtPrivateOrderingEnum* = distinct cschar
 template Equal*(_: type QtPrivateOrderingEnum): untyped = 0
@@ -52,11 +49,8 @@ export gen_qcompare_types
 type cQPartialOrdering*{.exportc: "QPartialOrdering", incompleteStruct.} = object
 
 proc fcQPartialOrdering_new(param1: pointer): ptr cQPartialOrdering {.importc: "QPartialOrdering_new".}
-proc fcQPartialOrdering_delete(self: pointer) {.importc: "QPartialOrdering_delete".}
 
 proc create*(T: type gen_qcompare_types.QPartialOrdering,
     param1: gen_qcompare_types.QPartialOrdering): gen_qcompare_types.QPartialOrdering =
-  gen_qcompare_types.QPartialOrdering(h: fcQPartialOrdering_new(param1.h))
+  gen_qcompare_types.QPartialOrdering(h: fcQPartialOrdering_new(param1.h), owned: true)
 
-proc delete*(self: gen_qcompare_types.QPartialOrdering) =
-  fcQPartialOrdering_delete(self.h)
