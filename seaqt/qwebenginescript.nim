@@ -1,0 +1,2 @@
+import ./QtWebEngineCore/gen_qwebenginescript
+export gen_qwebenginescript

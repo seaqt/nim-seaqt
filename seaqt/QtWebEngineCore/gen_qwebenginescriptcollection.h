@@ -1,0 +1,40 @@
+#pragma once
+#ifndef SEAQT_QTWEBENGINECORE_GEN_QWEBENGINESCRIPTCOLLECTION_H
+#define SEAQT_QTWEBENGINECORE_GEN_QWEBENGINESCRIPTCOLLECTION_H
+
+#include <stdbool.h>
+#include <stddef.h>
+#include <stdint.h>
+
+#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
+
+#include "../libseaqt/libseaqt.h"
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+#ifdef __cplusplus
+class QWebEngineScript;
+class QWebEngineScriptCollection;
+#else
+typedef struct QWebEngineScript QWebEngineScript;
+typedef struct QWebEngineScriptCollection QWebEngineScriptCollection;
+#endif
+
+bool QWebEngineScriptCollection_isEmpty(const QWebEngineScriptCollection* self);
+int QWebEngineScriptCollection_count(const QWebEngineScriptCollection* self);
+bool QWebEngineScriptCollection_contains(const QWebEngineScriptCollection* self, QWebEngineScript* value);
+struct miqt_array /* of QWebEngineScript* */  QWebEngineScriptCollection_find(const QWebEngineScriptCollection* self, struct miqt_string name);
+void QWebEngineScriptCollection_insert(QWebEngineScriptCollection* self, QWebEngineScript* param1);
+void QWebEngineScriptCollection_insertWithList(QWebEngineScriptCollection* self, struct miqt_array /* of QWebEngineScript* */  list);
+bool QWebEngineScriptCollection_remove(QWebEngineScriptCollection* self, QWebEngineScript* param1);
+void QWebEngineScriptCollection_clear(QWebEngineScriptCollection* self);
+struct miqt_array /* of QWebEngineScript* */  QWebEngineScriptCollection_toList(const QWebEngineScriptCollection* self);
+void QWebEngineScriptCollection_delete(QWebEngineScriptCollection* self);
+
+#ifdef __cplusplus
+} /* extern C */
+#endif
+
+#endif

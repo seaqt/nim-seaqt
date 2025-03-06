@@ -1,0 +1,2 @@
+import ./QtWebEngineCore/gen_qwebenginefindtextresult
+export gen_qwebenginefindtextresult

@@ -1,0 +1,2 @@
+import ./QtQuick/gen_qquickframebufferobject
+export gen_qquickframebufferobject

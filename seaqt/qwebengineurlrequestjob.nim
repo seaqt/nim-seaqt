@@ -1,0 +1,2 @@
+import ./QtWebEngineCore/gen_qwebengineurlrequestjob
+export gen_qwebengineurlrequestjob

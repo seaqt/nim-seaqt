@@ -1,0 +1,2 @@
+import ./QtCore/gen_qbindingstorage
+export gen_qbindingstorage

@@ -1,0 +1,2 @@
+import ./QtWebEngineCore/gen_qwebenginenotification
+export gen_qwebenginenotification

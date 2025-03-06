@@ -1,0 +1,2 @@
+import ./QtMultimedia/gen_qmediaformat
+export gen_qmediaformat

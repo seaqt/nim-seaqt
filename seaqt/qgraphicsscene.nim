@@ -1,0 +1,2 @@
+import ./QtWidgets/gen_qgraphicsscene
+export gen_qgraphicsscene

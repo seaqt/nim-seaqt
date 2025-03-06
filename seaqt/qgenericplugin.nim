@@ -1,0 +1,2 @@
+import ./QtGui/gen_qgenericplugin
+export gen_qgenericplugin

@@ -1,0 +1,2 @@
+import ./QtCore/gen_qidentityproxymodel
+export gen_qidentityproxymodel

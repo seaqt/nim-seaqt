@@ -1,0 +1,2 @@
+import ./QtWebEngineCore/gen_qwebengineprofile
+export gen_qwebengineprofile

@@ -1,0 +1,2 @@
+import ./QtNetwork/gen_qlocalserver
+export gen_qlocalserver

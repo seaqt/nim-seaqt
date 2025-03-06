@@ -1,0 +1,2 @@
+import ./QtGui/gen_qstandarditemmodel
+export gen_qstandarditemmodel

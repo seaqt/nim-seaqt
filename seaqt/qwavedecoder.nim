@@ -1,0 +1,2 @@
+import ./QtMultimedia/gen_qwavedecoder
+export gen_qwavedecoder

@@ -1,0 +1,2 @@
+import ./QtWebEngineCore/gen_qwebenginequotarequest
+export gen_qwebenginequotarequest

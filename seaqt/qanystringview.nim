@@ -1,0 +1,2 @@
+import ./QtCore/gen_qanystringview
+export gen_qanystringview

@@ -1,0 +1,2 @@
+import ./QtSpatialAudio/gen_qambientsound
+export gen_qambientsound

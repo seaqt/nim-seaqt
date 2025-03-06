@@ -1,0 +1,2 @@
+import ./QtNetwork/gen_qauthenticator
+export gen_qauthenticator

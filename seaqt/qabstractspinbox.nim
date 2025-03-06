@@ -1,0 +1,2 @@
+import ./QtWidgets/gen_qabstractspinbox
+export gen_qabstractspinbox

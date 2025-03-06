@@ -1,0 +1,2 @@
+import ./QtWidgets/gen_qstackedwidget
+export gen_qstackedwidget

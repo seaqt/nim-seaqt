@@ -1,0 +1,2 @@
+import ./QtWidgets/gen_qcalendarwidget
+export gen_qcalendarwidget

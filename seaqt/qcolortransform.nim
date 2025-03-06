@@ -1,0 +1,2 @@
+import ./QtGui/gen_qcolortransform
+export gen_qcolortransform

@@ -1,0 +1,2 @@
+import ./QtCore/gen_qconcatenatetablesproxymodel
+export gen_qconcatenatetablesproxymodel

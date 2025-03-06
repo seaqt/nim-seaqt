@@ -1,0 +1,4 @@
+import ./gen_qabstractprintdialog_types
+export gen_qabstractprintdialog_types
+
+type QPrintDialog* = object of gen_qabstractprintdialog_types.QAbstractPrintDialog

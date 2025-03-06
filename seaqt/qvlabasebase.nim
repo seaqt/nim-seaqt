@@ -1,0 +1,2 @@
+import ./QtCore/gen_qvarlengtharray
+export gen_qvarlengtharray

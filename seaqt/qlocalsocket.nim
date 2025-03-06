@@ -1,0 +1,2 @@
+import ./QtNetwork/gen_qlocalsocket
+export gen_qlocalsocket

@@ -1,0 +1,2 @@
+import ./QtCore/gen_qfutureinterface
+export gen_qfutureinterface

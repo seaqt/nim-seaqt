@@ -1,0 +1,2 @@
+import ./QtNetwork/gen_qnetworkdatagram
+export gen_qnetworkdatagram

@@ -1,0 +1,2 @@
+import ./QtQml/gen_qqmlfileselector
+export gen_qqmlfileselector

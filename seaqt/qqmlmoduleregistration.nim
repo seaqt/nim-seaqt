@@ -1,0 +1,2 @@
+import ./QtQml/gen_qqmlmoduleregistration
+export gen_qqmlmoduleregistration

@@ -1,0 +1,2 @@
+import ./QtGui/gen_qsyntaxhighlighter
+export gen_qsyntaxhighlighter

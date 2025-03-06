@@ -1,0 +1,2 @@
+import ./QtQml/gen_qqmlabstracturlinterceptor
+export gen_qqmlabstracturlinterceptor

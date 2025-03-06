@@ -1,0 +1,2 @@
+import ./QtCore/gen_qsystemsemaphore
+export gen_qsystemsemaphore

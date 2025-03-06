@@ -1,0 +1,2 @@
+import ./QtQuick/gen_qquickpainteditem
+export gen_qquickpainteditem

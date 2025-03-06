@@ -1,0 +1,2 @@
+import ./QtWebEngineCore/gen_qwebenginedownloadrequest
+export gen_qwebenginedownloadrequest

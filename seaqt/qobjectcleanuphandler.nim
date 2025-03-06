@@ -1,0 +1,2 @@
+import ./QtCore/gen_qobjectcleanuphandler
+export gen_qobjectcleanuphandler

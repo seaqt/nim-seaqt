@@ -1,0 +1,2 @@
+import ./QtWebEngineCore/gen_qwebengineurlrequestinterceptor
+export gen_qwebengineurlrequestinterceptor

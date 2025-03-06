@@ -1,0 +1,2 @@
+import ./QtWidgets/gen_qdatetimeedit
+export gen_qdatetimeedit

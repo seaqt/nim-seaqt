@@ -1,0 +1,2 @@
+import ./QtWidgets/gen_qgraphicsanchorlayout
+export gen_qgraphicsanchorlayout
