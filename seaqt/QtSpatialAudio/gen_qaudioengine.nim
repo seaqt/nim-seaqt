@@ -76,15 +76,15 @@ proc fcQAudioEngine_roomEffectsEnabled(self: pointer, ): bool {.importc: "QAudio
 proc fcQAudioEngine_setDistanceScale(self: pointer, scale: float32): void {.importc: "QAudioEngine_setDistanceScale".}
 proc fcQAudioEngine_distanceScale(self: pointer, ): float32 {.importc: "QAudioEngine_distanceScale".}
 proc fcQAudioEngine_outputModeChanged(self: pointer, ): void {.importc: "QAudioEngine_outputModeChanged".}
-proc fcQAudioEngine_connect_outputModeChanged(self: pointer, slot: int) {.importc: "QAudioEngine_connect_outputModeChanged".}
+proc fcQAudioEngine_connect_outputModeChanged(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QAudioEngine_connect_outputModeChanged".}
 proc fcQAudioEngine_outputDeviceChanged(self: pointer, ): void {.importc: "QAudioEngine_outputDeviceChanged".}
-proc fcQAudioEngine_connect_outputDeviceChanged(self: pointer, slot: int) {.importc: "QAudioEngine_connect_outputDeviceChanged".}
+proc fcQAudioEngine_connect_outputDeviceChanged(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QAudioEngine_connect_outputDeviceChanged".}
 proc fcQAudioEngine_masterVolumeChanged(self: pointer, ): void {.importc: "QAudioEngine_masterVolumeChanged".}
-proc fcQAudioEngine_connect_masterVolumeChanged(self: pointer, slot: int) {.importc: "QAudioEngine_connect_masterVolumeChanged".}
+proc fcQAudioEngine_connect_masterVolumeChanged(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QAudioEngine_connect_masterVolumeChanged".}
 proc fcQAudioEngine_pausedChanged(self: pointer, ): void {.importc: "QAudioEngine_pausedChanged".}
-proc fcQAudioEngine_connect_pausedChanged(self: pointer, slot: int) {.importc: "QAudioEngine_connect_pausedChanged".}
+proc fcQAudioEngine_connect_pausedChanged(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QAudioEngine_connect_pausedChanged".}
 proc fcQAudioEngine_distanceScaleChanged(self: pointer, ): void {.importc: "QAudioEngine_distanceScaleChanged".}
-proc fcQAudioEngine_connect_distanceScaleChanged(self: pointer, slot: int) {.importc: "QAudioEngine_connect_distanceScaleChanged".}
+proc fcQAudioEngine_connect_distanceScaleChanged(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QAudioEngine_connect_distanceScaleChanged".}
 proc fcQAudioEngine_start(self: pointer, ): void {.importc: "QAudioEngine_start".}
 proc fcQAudioEngine_stop(self: pointer, ): void {.importc: "QAudioEngine_stop".}
 proc fcQAudioEngine_pause(self: pointer, ): void {.importc: "QAudioEngine_pause".}
@@ -178,71 +178,91 @@ proc outputModeChanged*(self: gen_qaudioengine_types.QAudioEngine, ): void =
   fcQAudioEngine_outputModeChanged(self.h)
 
 type QAudioEngineoutputModeChangedSlot* = proc()
-proc miqt_exec_callback_cQAudioEngine_outputModeChanged(slot: int) {.exportc: "miqt_exec_callback_QAudioEngine_outputModeChanged".} =
+proc miqt_exec_callback_cQAudioEngine_outputModeChanged(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QAudioEngineoutputModeChangedSlot](cast[pointer](slot))
   nimfunc[]()
+
+proc miqt_exec_callback_cQAudioEngine_outputModeChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QAudioEngineoutputModeChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
 
 proc onoutputModeChanged*(self: gen_qaudioengine_types.QAudioEngine, slot: QAudioEngineoutputModeChangedSlot) =
   var tmp = new QAudioEngineoutputModeChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQAudioEngine_connect_outputModeChanged(self.h, cast[int](addr tmp[]))
+  fcQAudioEngine_connect_outputModeChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQAudioEngine_outputModeChanged, miqt_exec_callback_cQAudioEngine_outputModeChanged_release)
 
 proc outputDeviceChanged*(self: gen_qaudioengine_types.QAudioEngine, ): void =
   fcQAudioEngine_outputDeviceChanged(self.h)
 
 type QAudioEngineoutputDeviceChangedSlot* = proc()
-proc miqt_exec_callback_cQAudioEngine_outputDeviceChanged(slot: int) {.exportc: "miqt_exec_callback_QAudioEngine_outputDeviceChanged".} =
+proc miqt_exec_callback_cQAudioEngine_outputDeviceChanged(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QAudioEngineoutputDeviceChangedSlot](cast[pointer](slot))
   nimfunc[]()
+
+proc miqt_exec_callback_cQAudioEngine_outputDeviceChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QAudioEngineoutputDeviceChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
 
 proc onoutputDeviceChanged*(self: gen_qaudioengine_types.QAudioEngine, slot: QAudioEngineoutputDeviceChangedSlot) =
   var tmp = new QAudioEngineoutputDeviceChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQAudioEngine_connect_outputDeviceChanged(self.h, cast[int](addr tmp[]))
+  fcQAudioEngine_connect_outputDeviceChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQAudioEngine_outputDeviceChanged, miqt_exec_callback_cQAudioEngine_outputDeviceChanged_release)
 
 proc masterVolumeChanged*(self: gen_qaudioengine_types.QAudioEngine, ): void =
   fcQAudioEngine_masterVolumeChanged(self.h)
 
 type QAudioEnginemasterVolumeChangedSlot* = proc()
-proc miqt_exec_callback_cQAudioEngine_masterVolumeChanged(slot: int) {.exportc: "miqt_exec_callback_QAudioEngine_masterVolumeChanged".} =
+proc miqt_exec_callback_cQAudioEngine_masterVolumeChanged(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QAudioEnginemasterVolumeChangedSlot](cast[pointer](slot))
   nimfunc[]()
+
+proc miqt_exec_callback_cQAudioEngine_masterVolumeChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QAudioEnginemasterVolumeChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
 
 proc onmasterVolumeChanged*(self: gen_qaudioengine_types.QAudioEngine, slot: QAudioEnginemasterVolumeChangedSlot) =
   var tmp = new QAudioEnginemasterVolumeChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQAudioEngine_connect_masterVolumeChanged(self.h, cast[int](addr tmp[]))
+  fcQAudioEngine_connect_masterVolumeChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQAudioEngine_masterVolumeChanged, miqt_exec_callback_cQAudioEngine_masterVolumeChanged_release)
 
 proc pausedChanged*(self: gen_qaudioengine_types.QAudioEngine, ): void =
   fcQAudioEngine_pausedChanged(self.h)
 
 type QAudioEnginepausedChangedSlot* = proc()
-proc miqt_exec_callback_cQAudioEngine_pausedChanged(slot: int) {.exportc: "miqt_exec_callback_QAudioEngine_pausedChanged".} =
+proc miqt_exec_callback_cQAudioEngine_pausedChanged(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QAudioEnginepausedChangedSlot](cast[pointer](slot))
   nimfunc[]()
+
+proc miqt_exec_callback_cQAudioEngine_pausedChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QAudioEnginepausedChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
 
 proc onpausedChanged*(self: gen_qaudioengine_types.QAudioEngine, slot: QAudioEnginepausedChangedSlot) =
   var tmp = new QAudioEnginepausedChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQAudioEngine_connect_pausedChanged(self.h, cast[int](addr tmp[]))
+  fcQAudioEngine_connect_pausedChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQAudioEngine_pausedChanged, miqt_exec_callback_cQAudioEngine_pausedChanged_release)
 
 proc distanceScaleChanged*(self: gen_qaudioengine_types.QAudioEngine, ): void =
   fcQAudioEngine_distanceScaleChanged(self.h)
 
 type QAudioEnginedistanceScaleChangedSlot* = proc()
-proc miqt_exec_callback_cQAudioEngine_distanceScaleChanged(slot: int) {.exportc: "miqt_exec_callback_QAudioEngine_distanceScaleChanged".} =
+proc miqt_exec_callback_cQAudioEngine_distanceScaleChanged(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QAudioEnginedistanceScaleChangedSlot](cast[pointer](slot))
   nimfunc[]()
+
+proc miqt_exec_callback_cQAudioEngine_distanceScaleChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QAudioEnginedistanceScaleChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
 
 proc ondistanceScaleChanged*(self: gen_qaudioengine_types.QAudioEngine, slot: QAudioEnginedistanceScaleChangedSlot) =
   var tmp = new QAudioEnginedistanceScaleChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQAudioEngine_connect_distanceScaleChanged(self.h, cast[int](addr tmp[]))
+  fcQAudioEngine_connect_distanceScaleChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQAudioEngine_distanceScaleChanged, miqt_exec_callback_cQAudioEngine_distanceScaleChanged_release)
 
 proc start*(self: gen_qaudioengine_types.QAudioEngine, ): void =
   fcQAudioEngine_start(self.h)

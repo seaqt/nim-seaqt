@@ -69,7 +69,7 @@ struct miqt_array /* of QInputDevice* */  QInputDevice_devices();
 QInputDevice* QInputDevice_primaryKeyboard();
 bool QInputDevice_operatorEqual(const QInputDevice* self, QInputDevice* other);
 void QInputDevice_availableVirtualGeometryChanged(QInputDevice* self, QRect* area);
-void QInputDevice_connect_availableVirtualGeometryChanged(QInputDevice* self, intptr_t slot);
+void QInputDevice_connect_availableVirtualGeometryChanged(QInputDevice* self, intptr_t slot, void (*callback)(intptr_t, QRect*), void (*release)(intptr_t));
 struct miqt_string QInputDevice_tr2(const char* s, const char* c);
 struct miqt_string QInputDevice_tr3(const char* s, const char* c, int n);
 QInputDevice* QInputDevice_primaryKeyboard1(struct miqt_string seatName);

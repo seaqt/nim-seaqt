@@ -66,7 +66,7 @@ proc fcQLocalServer_metacast(self: pointer, param1: cstring): pointer {.importc:
 proc fcQLocalServer_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QLocalServer_metacall".}
 proc fcQLocalServer_tr(s: cstring): struct_miqt_string {.importc: "QLocalServer_tr".}
 proc fcQLocalServer_newConnection(self: pointer, ): void {.importc: "QLocalServer_newConnection".}
-proc fcQLocalServer_connect_newConnection(self: pointer, slot: int) {.importc: "QLocalServer_connect_newConnection".}
+proc fcQLocalServer_connect_newConnection(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QLocalServer_connect_newConnection".}
 proc fcQLocalServer_close(self: pointer, ): void {.importc: "QLocalServer_close".}
 proc fcQLocalServer_errorString(self: pointer, ): struct_miqt_string {.importc: "QLocalServer_errorString".}
 proc fcQLocalServer_hasPendingConnections(self: pointer, ): bool {.importc: "QLocalServer_hasPendingConnections".}
@@ -142,15 +142,19 @@ proc newConnection*(self: gen_qlocalserver_types.QLocalServer, ): void =
   fcQLocalServer_newConnection(self.h)
 
 type QLocalServernewConnectionSlot* = proc()
-proc miqt_exec_callback_cQLocalServer_newConnection(slot: int) {.exportc: "miqt_exec_callback_QLocalServer_newConnection".} =
+proc miqt_exec_callback_cQLocalServer_newConnection(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QLocalServernewConnectionSlot](cast[pointer](slot))
   nimfunc[]()
+
+proc miqt_exec_callback_cQLocalServer_newConnection_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QLocalServernewConnectionSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
 
 proc onnewConnection*(self: gen_qlocalserver_types.QLocalServer, slot: QLocalServernewConnectionSlot) =
   var tmp = new QLocalServernewConnectionSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQLocalServer_connect_newConnection(self.h, cast[int](addr tmp[]))
+  fcQLocalServer_connect_newConnection(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQLocalServer_newConnection, miqt_exec_callback_cQLocalServer_newConnection_release)
 
 proc close*(self: gen_qlocalserver_types.QLocalServer, ): void =
   fcQLocalServer_close(self.h)

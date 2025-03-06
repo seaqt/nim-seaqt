@@ -242,25 +242,25 @@ proc fcQTreeWidget_expandItem(self: pointer, item: pointer): void {.importc: "QT
 proc fcQTreeWidget_collapseItem(self: pointer, item: pointer): void {.importc: "QTreeWidget_collapseItem".}
 proc fcQTreeWidget_clear(self: pointer, ): void {.importc: "QTreeWidget_clear".}
 proc fcQTreeWidget_itemPressed(self: pointer, item: pointer, column: cint): void {.importc: "QTreeWidget_itemPressed".}
-proc fcQTreeWidget_connect_itemPressed(self: pointer, slot: int) {.importc: "QTreeWidget_connect_itemPressed".}
+proc fcQTreeWidget_connect_itemPressed(self: pointer, slot: int, callback: proc (slot: int, item: pointer, column: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QTreeWidget_connect_itemPressed".}
 proc fcQTreeWidget_itemClicked(self: pointer, item: pointer, column: cint): void {.importc: "QTreeWidget_itemClicked".}
-proc fcQTreeWidget_connect_itemClicked(self: pointer, slot: int) {.importc: "QTreeWidget_connect_itemClicked".}
+proc fcQTreeWidget_connect_itemClicked(self: pointer, slot: int, callback: proc (slot: int, item: pointer, column: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QTreeWidget_connect_itemClicked".}
 proc fcQTreeWidget_itemDoubleClicked(self: pointer, item: pointer, column: cint): void {.importc: "QTreeWidget_itemDoubleClicked".}
-proc fcQTreeWidget_connect_itemDoubleClicked(self: pointer, slot: int) {.importc: "QTreeWidget_connect_itemDoubleClicked".}
+proc fcQTreeWidget_connect_itemDoubleClicked(self: pointer, slot: int, callback: proc (slot: int, item: pointer, column: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QTreeWidget_connect_itemDoubleClicked".}
 proc fcQTreeWidget_itemActivated(self: pointer, item: pointer, column: cint): void {.importc: "QTreeWidget_itemActivated".}
-proc fcQTreeWidget_connect_itemActivated(self: pointer, slot: int) {.importc: "QTreeWidget_connect_itemActivated".}
+proc fcQTreeWidget_connect_itemActivated(self: pointer, slot: int, callback: proc (slot: int, item: pointer, column: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QTreeWidget_connect_itemActivated".}
 proc fcQTreeWidget_itemEntered(self: pointer, item: pointer, column: cint): void {.importc: "QTreeWidget_itemEntered".}
-proc fcQTreeWidget_connect_itemEntered(self: pointer, slot: int) {.importc: "QTreeWidget_connect_itemEntered".}
+proc fcQTreeWidget_connect_itemEntered(self: pointer, slot: int, callback: proc (slot: int, item: pointer, column: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QTreeWidget_connect_itemEntered".}
 proc fcQTreeWidget_itemChanged(self: pointer, item: pointer, column: cint): void {.importc: "QTreeWidget_itemChanged".}
-proc fcQTreeWidget_connect_itemChanged(self: pointer, slot: int) {.importc: "QTreeWidget_connect_itemChanged".}
+proc fcQTreeWidget_connect_itemChanged(self: pointer, slot: int, callback: proc (slot: int, item: pointer, column: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QTreeWidget_connect_itemChanged".}
 proc fcQTreeWidget_itemExpanded(self: pointer, item: pointer): void {.importc: "QTreeWidget_itemExpanded".}
-proc fcQTreeWidget_connect_itemExpanded(self: pointer, slot: int) {.importc: "QTreeWidget_connect_itemExpanded".}
+proc fcQTreeWidget_connect_itemExpanded(self: pointer, slot: int, callback: proc (slot: int, item: pointer) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QTreeWidget_connect_itemExpanded".}
 proc fcQTreeWidget_itemCollapsed(self: pointer, item: pointer): void {.importc: "QTreeWidget_itemCollapsed".}
-proc fcQTreeWidget_connect_itemCollapsed(self: pointer, slot: int) {.importc: "QTreeWidget_connect_itemCollapsed".}
+proc fcQTreeWidget_connect_itemCollapsed(self: pointer, slot: int, callback: proc (slot: int, item: pointer) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QTreeWidget_connect_itemCollapsed".}
 proc fcQTreeWidget_currentItemChanged(self: pointer, current: pointer, previous: pointer): void {.importc: "QTreeWidget_currentItemChanged".}
-proc fcQTreeWidget_connect_currentItemChanged(self: pointer, slot: int) {.importc: "QTreeWidget_connect_currentItemChanged".}
+proc fcQTreeWidget_connect_currentItemChanged(self: pointer, slot: int, callback: proc (slot: int, current: pointer, previous: pointer) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QTreeWidget_connect_currentItemChanged".}
 proc fcQTreeWidget_itemSelectionChanged(self: pointer, ): void {.importc: "QTreeWidget_itemSelectionChanged".}
-proc fcQTreeWidget_connect_itemSelectionChanged(self: pointer, slot: int) {.importc: "QTreeWidget_connect_itemSelectionChanged".}
+proc fcQTreeWidget_connect_itemSelectionChanged(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QTreeWidget_connect_itemSelectionChanged".}
 proc fcQTreeWidget_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QTreeWidget_tr2".}
 proc fcQTreeWidget_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QTreeWidget_tr3".}
 proc fcQTreeWidget_editItem2(self: pointer, item: pointer, column: cint): void {.importc: "QTreeWidget_editItem2".}
@@ -1322,7 +1322,7 @@ proc itemPressed*(self: gen_qtreewidget_types.QTreeWidget, item: gen_qtreewidget
   fcQTreeWidget_itemPressed(self.h, item.h, column)
 
 type QTreeWidgetitemPressedSlot* = proc(item: gen_qtreewidget_types.QTreeWidgetItem, column: cint)
-proc miqt_exec_callback_cQTreeWidget_itemPressed(slot: int, item: pointer, column: cint) {.exportc: "miqt_exec_callback_QTreeWidget_itemPressed".} =
+proc miqt_exec_callback_cQTreeWidget_itemPressed(slot: int, item: pointer, column: cint) {.cdecl.} =
   let nimfunc = cast[ptr QTreeWidgetitemPressedSlot](cast[pointer](slot))
   let slotval1 = gen_qtreewidget_types.QTreeWidgetItem(h: item)
 
@@ -1330,17 +1330,21 @@ proc miqt_exec_callback_cQTreeWidget_itemPressed(slot: int, item: pointer, colum
 
   nimfunc[](slotval1, slotval2)
 
+proc miqt_exec_callback_cQTreeWidget_itemPressed_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QTreeWidgetitemPressedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onitemPressed*(self: gen_qtreewidget_types.QTreeWidget, slot: QTreeWidgetitemPressedSlot) =
   var tmp = new QTreeWidgetitemPressedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQTreeWidget_connect_itemPressed(self.h, cast[int](addr tmp[]))
+  fcQTreeWidget_connect_itemPressed(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQTreeWidget_itemPressed, miqt_exec_callback_cQTreeWidget_itemPressed_release)
 
 proc itemClicked*(self: gen_qtreewidget_types.QTreeWidget, item: gen_qtreewidget_types.QTreeWidgetItem, column: cint): void =
   fcQTreeWidget_itemClicked(self.h, item.h, column)
 
 type QTreeWidgetitemClickedSlot* = proc(item: gen_qtreewidget_types.QTreeWidgetItem, column: cint)
-proc miqt_exec_callback_cQTreeWidget_itemClicked(slot: int, item: pointer, column: cint) {.exportc: "miqt_exec_callback_QTreeWidget_itemClicked".} =
+proc miqt_exec_callback_cQTreeWidget_itemClicked(slot: int, item: pointer, column: cint) {.cdecl.} =
   let nimfunc = cast[ptr QTreeWidgetitemClickedSlot](cast[pointer](slot))
   let slotval1 = gen_qtreewidget_types.QTreeWidgetItem(h: item)
 
@@ -1348,17 +1352,21 @@ proc miqt_exec_callback_cQTreeWidget_itemClicked(slot: int, item: pointer, colum
 
   nimfunc[](slotval1, slotval2)
 
+proc miqt_exec_callback_cQTreeWidget_itemClicked_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QTreeWidgetitemClickedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onitemClicked*(self: gen_qtreewidget_types.QTreeWidget, slot: QTreeWidgetitemClickedSlot) =
   var tmp = new QTreeWidgetitemClickedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQTreeWidget_connect_itemClicked(self.h, cast[int](addr tmp[]))
+  fcQTreeWidget_connect_itemClicked(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQTreeWidget_itemClicked, miqt_exec_callback_cQTreeWidget_itemClicked_release)
 
 proc itemDoubleClicked*(self: gen_qtreewidget_types.QTreeWidget, item: gen_qtreewidget_types.QTreeWidgetItem, column: cint): void =
   fcQTreeWidget_itemDoubleClicked(self.h, item.h, column)
 
 type QTreeWidgetitemDoubleClickedSlot* = proc(item: gen_qtreewidget_types.QTreeWidgetItem, column: cint)
-proc miqt_exec_callback_cQTreeWidget_itemDoubleClicked(slot: int, item: pointer, column: cint) {.exportc: "miqt_exec_callback_QTreeWidget_itemDoubleClicked".} =
+proc miqt_exec_callback_cQTreeWidget_itemDoubleClicked(slot: int, item: pointer, column: cint) {.cdecl.} =
   let nimfunc = cast[ptr QTreeWidgetitemDoubleClickedSlot](cast[pointer](slot))
   let slotval1 = gen_qtreewidget_types.QTreeWidgetItem(h: item)
 
@@ -1366,17 +1374,21 @@ proc miqt_exec_callback_cQTreeWidget_itemDoubleClicked(slot: int, item: pointer,
 
   nimfunc[](slotval1, slotval2)
 
+proc miqt_exec_callback_cQTreeWidget_itemDoubleClicked_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QTreeWidgetitemDoubleClickedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onitemDoubleClicked*(self: gen_qtreewidget_types.QTreeWidget, slot: QTreeWidgetitemDoubleClickedSlot) =
   var tmp = new QTreeWidgetitemDoubleClickedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQTreeWidget_connect_itemDoubleClicked(self.h, cast[int](addr tmp[]))
+  fcQTreeWidget_connect_itemDoubleClicked(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQTreeWidget_itemDoubleClicked, miqt_exec_callback_cQTreeWidget_itemDoubleClicked_release)
 
 proc itemActivated*(self: gen_qtreewidget_types.QTreeWidget, item: gen_qtreewidget_types.QTreeWidgetItem, column: cint): void =
   fcQTreeWidget_itemActivated(self.h, item.h, column)
 
 type QTreeWidgetitemActivatedSlot* = proc(item: gen_qtreewidget_types.QTreeWidgetItem, column: cint)
-proc miqt_exec_callback_cQTreeWidget_itemActivated(slot: int, item: pointer, column: cint) {.exportc: "miqt_exec_callback_QTreeWidget_itemActivated".} =
+proc miqt_exec_callback_cQTreeWidget_itemActivated(slot: int, item: pointer, column: cint) {.cdecl.} =
   let nimfunc = cast[ptr QTreeWidgetitemActivatedSlot](cast[pointer](slot))
   let slotval1 = gen_qtreewidget_types.QTreeWidgetItem(h: item)
 
@@ -1384,17 +1396,21 @@ proc miqt_exec_callback_cQTreeWidget_itemActivated(slot: int, item: pointer, col
 
   nimfunc[](slotval1, slotval2)
 
+proc miqt_exec_callback_cQTreeWidget_itemActivated_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QTreeWidgetitemActivatedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onitemActivated*(self: gen_qtreewidget_types.QTreeWidget, slot: QTreeWidgetitemActivatedSlot) =
   var tmp = new QTreeWidgetitemActivatedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQTreeWidget_connect_itemActivated(self.h, cast[int](addr tmp[]))
+  fcQTreeWidget_connect_itemActivated(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQTreeWidget_itemActivated, miqt_exec_callback_cQTreeWidget_itemActivated_release)
 
 proc itemEntered*(self: gen_qtreewidget_types.QTreeWidget, item: gen_qtreewidget_types.QTreeWidgetItem, column: cint): void =
   fcQTreeWidget_itemEntered(self.h, item.h, column)
 
 type QTreeWidgetitemEnteredSlot* = proc(item: gen_qtreewidget_types.QTreeWidgetItem, column: cint)
-proc miqt_exec_callback_cQTreeWidget_itemEntered(slot: int, item: pointer, column: cint) {.exportc: "miqt_exec_callback_QTreeWidget_itemEntered".} =
+proc miqt_exec_callback_cQTreeWidget_itemEntered(slot: int, item: pointer, column: cint) {.cdecl.} =
   let nimfunc = cast[ptr QTreeWidgetitemEnteredSlot](cast[pointer](slot))
   let slotval1 = gen_qtreewidget_types.QTreeWidgetItem(h: item)
 
@@ -1402,17 +1418,21 @@ proc miqt_exec_callback_cQTreeWidget_itemEntered(slot: int, item: pointer, colum
 
   nimfunc[](slotval1, slotval2)
 
+proc miqt_exec_callback_cQTreeWidget_itemEntered_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QTreeWidgetitemEnteredSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onitemEntered*(self: gen_qtreewidget_types.QTreeWidget, slot: QTreeWidgetitemEnteredSlot) =
   var tmp = new QTreeWidgetitemEnteredSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQTreeWidget_connect_itemEntered(self.h, cast[int](addr tmp[]))
+  fcQTreeWidget_connect_itemEntered(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQTreeWidget_itemEntered, miqt_exec_callback_cQTreeWidget_itemEntered_release)
 
 proc itemChanged*(self: gen_qtreewidget_types.QTreeWidget, item: gen_qtreewidget_types.QTreeWidgetItem, column: cint): void =
   fcQTreeWidget_itemChanged(self.h, item.h, column)
 
 type QTreeWidgetitemChangedSlot* = proc(item: gen_qtreewidget_types.QTreeWidgetItem, column: cint)
-proc miqt_exec_callback_cQTreeWidget_itemChanged(slot: int, item: pointer, column: cint) {.exportc: "miqt_exec_callback_QTreeWidget_itemChanged".} =
+proc miqt_exec_callback_cQTreeWidget_itemChanged(slot: int, item: pointer, column: cint) {.cdecl.} =
   let nimfunc = cast[ptr QTreeWidgetitemChangedSlot](cast[pointer](slot))
   let slotval1 = gen_qtreewidget_types.QTreeWidgetItem(h: item)
 
@@ -1420,49 +1440,61 @@ proc miqt_exec_callback_cQTreeWidget_itemChanged(slot: int, item: pointer, colum
 
   nimfunc[](slotval1, slotval2)
 
+proc miqt_exec_callback_cQTreeWidget_itemChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QTreeWidgetitemChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onitemChanged*(self: gen_qtreewidget_types.QTreeWidget, slot: QTreeWidgetitemChangedSlot) =
   var tmp = new QTreeWidgetitemChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQTreeWidget_connect_itemChanged(self.h, cast[int](addr tmp[]))
+  fcQTreeWidget_connect_itemChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQTreeWidget_itemChanged, miqt_exec_callback_cQTreeWidget_itemChanged_release)
 
 proc itemExpanded*(self: gen_qtreewidget_types.QTreeWidget, item: gen_qtreewidget_types.QTreeWidgetItem): void =
   fcQTreeWidget_itemExpanded(self.h, item.h)
 
 type QTreeWidgetitemExpandedSlot* = proc(item: gen_qtreewidget_types.QTreeWidgetItem)
-proc miqt_exec_callback_cQTreeWidget_itemExpanded(slot: int, item: pointer) {.exportc: "miqt_exec_callback_QTreeWidget_itemExpanded".} =
+proc miqt_exec_callback_cQTreeWidget_itemExpanded(slot: int, item: pointer) {.cdecl.} =
   let nimfunc = cast[ptr QTreeWidgetitemExpandedSlot](cast[pointer](slot))
   let slotval1 = gen_qtreewidget_types.QTreeWidgetItem(h: item)
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQTreeWidget_itemExpanded_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QTreeWidgetitemExpandedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onitemExpanded*(self: gen_qtreewidget_types.QTreeWidget, slot: QTreeWidgetitemExpandedSlot) =
   var tmp = new QTreeWidgetitemExpandedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQTreeWidget_connect_itemExpanded(self.h, cast[int](addr tmp[]))
+  fcQTreeWidget_connect_itemExpanded(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQTreeWidget_itemExpanded, miqt_exec_callback_cQTreeWidget_itemExpanded_release)
 
 proc itemCollapsed*(self: gen_qtreewidget_types.QTreeWidget, item: gen_qtreewidget_types.QTreeWidgetItem): void =
   fcQTreeWidget_itemCollapsed(self.h, item.h)
 
 type QTreeWidgetitemCollapsedSlot* = proc(item: gen_qtreewidget_types.QTreeWidgetItem)
-proc miqt_exec_callback_cQTreeWidget_itemCollapsed(slot: int, item: pointer) {.exportc: "miqt_exec_callback_QTreeWidget_itemCollapsed".} =
+proc miqt_exec_callback_cQTreeWidget_itemCollapsed(slot: int, item: pointer) {.cdecl.} =
   let nimfunc = cast[ptr QTreeWidgetitemCollapsedSlot](cast[pointer](slot))
   let slotval1 = gen_qtreewidget_types.QTreeWidgetItem(h: item)
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQTreeWidget_itemCollapsed_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QTreeWidgetitemCollapsedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onitemCollapsed*(self: gen_qtreewidget_types.QTreeWidget, slot: QTreeWidgetitemCollapsedSlot) =
   var tmp = new QTreeWidgetitemCollapsedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQTreeWidget_connect_itemCollapsed(self.h, cast[int](addr tmp[]))
+  fcQTreeWidget_connect_itemCollapsed(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQTreeWidget_itemCollapsed, miqt_exec_callback_cQTreeWidget_itemCollapsed_release)
 
 proc currentItemChanged*(self: gen_qtreewidget_types.QTreeWidget, current: gen_qtreewidget_types.QTreeWidgetItem, previous: gen_qtreewidget_types.QTreeWidgetItem): void =
   fcQTreeWidget_currentItemChanged(self.h, current.h, previous.h)
 
 type QTreeWidgetcurrentItemChangedSlot* = proc(current: gen_qtreewidget_types.QTreeWidgetItem, previous: gen_qtreewidget_types.QTreeWidgetItem)
-proc miqt_exec_callback_cQTreeWidget_currentItemChanged(slot: int, current: pointer, previous: pointer) {.exportc: "miqt_exec_callback_QTreeWidget_currentItemChanged".} =
+proc miqt_exec_callback_cQTreeWidget_currentItemChanged(slot: int, current: pointer, previous: pointer) {.cdecl.} =
   let nimfunc = cast[ptr QTreeWidgetcurrentItemChangedSlot](cast[pointer](slot))
   let slotval1 = gen_qtreewidget_types.QTreeWidgetItem(h: current)
 
@@ -1470,25 +1502,33 @@ proc miqt_exec_callback_cQTreeWidget_currentItemChanged(slot: int, current: poin
 
   nimfunc[](slotval1, slotval2)
 
+proc miqt_exec_callback_cQTreeWidget_currentItemChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QTreeWidgetcurrentItemChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc oncurrentItemChanged*(self: gen_qtreewidget_types.QTreeWidget, slot: QTreeWidgetcurrentItemChangedSlot) =
   var tmp = new QTreeWidgetcurrentItemChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQTreeWidget_connect_currentItemChanged(self.h, cast[int](addr tmp[]))
+  fcQTreeWidget_connect_currentItemChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQTreeWidget_currentItemChanged, miqt_exec_callback_cQTreeWidget_currentItemChanged_release)
 
 proc itemSelectionChanged*(self: gen_qtreewidget_types.QTreeWidget, ): void =
   fcQTreeWidget_itemSelectionChanged(self.h)
 
 type QTreeWidgetitemSelectionChangedSlot* = proc()
-proc miqt_exec_callback_cQTreeWidget_itemSelectionChanged(slot: int) {.exportc: "miqt_exec_callback_QTreeWidget_itemSelectionChanged".} =
+proc miqt_exec_callback_cQTreeWidget_itemSelectionChanged(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QTreeWidgetitemSelectionChangedSlot](cast[pointer](slot))
   nimfunc[]()
+
+proc miqt_exec_callback_cQTreeWidget_itemSelectionChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QTreeWidgetitemSelectionChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
 
 proc onitemSelectionChanged*(self: gen_qtreewidget_types.QTreeWidget, slot: QTreeWidgetitemSelectionChangedSlot) =
   var tmp = new QTreeWidgetitemSelectionChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQTreeWidget_connect_itemSelectionChanged(self.h, cast[int](addr tmp[]))
+  fcQTreeWidget_connect_itemSelectionChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQTreeWidget_itemSelectionChanged, miqt_exec_callback_cQTreeWidget_itemSelectionChanged_release)
 
 proc tr*(_: type gen_qtreewidget_types.QTreeWidget, s: cstring, c: cstring): string =
   let v_ms = fcQTreeWidget_tr2(s, c)

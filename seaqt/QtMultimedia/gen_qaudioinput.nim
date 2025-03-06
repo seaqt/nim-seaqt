@@ -63,11 +63,11 @@ proc fcQAudioInput_setDevice(self: pointer, device: pointer): void {.importc: "Q
 proc fcQAudioInput_setVolume(self: pointer, volume: float32): void {.importc: "QAudioInput_setVolume".}
 proc fcQAudioInput_setMuted(self: pointer, muted: bool): void {.importc: "QAudioInput_setMuted".}
 proc fcQAudioInput_deviceChanged(self: pointer, ): void {.importc: "QAudioInput_deviceChanged".}
-proc fcQAudioInput_connect_deviceChanged(self: pointer, slot: int) {.importc: "QAudioInput_connect_deviceChanged".}
+proc fcQAudioInput_connect_deviceChanged(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QAudioInput_connect_deviceChanged".}
 proc fcQAudioInput_volumeChanged(self: pointer, volume: float32): void {.importc: "QAudioInput_volumeChanged".}
-proc fcQAudioInput_connect_volumeChanged(self: pointer, slot: int) {.importc: "QAudioInput_connect_volumeChanged".}
+proc fcQAudioInput_connect_volumeChanged(self: pointer, slot: int, callback: proc (slot: int, volume: float32) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QAudioInput_connect_volumeChanged".}
 proc fcQAudioInput_mutedChanged(self: pointer, muted: bool): void {.importc: "QAudioInput_mutedChanged".}
-proc fcQAudioInput_connect_mutedChanged(self: pointer, slot: int) {.importc: "QAudioInput_connect_mutedChanged".}
+proc fcQAudioInput_connect_mutedChanged(self: pointer, slot: int, callback: proc (slot: int, muted: bool) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QAudioInput_connect_mutedChanged".}
 proc fcQAudioInput_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QAudioInput_tr2".}
 proc fcQAudioInput_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QAudioInput_tr3".}
 type cQAudioInputVTable = object
@@ -136,47 +136,59 @@ proc deviceChanged*(self: gen_qaudioinput_types.QAudioInput, ): void =
   fcQAudioInput_deviceChanged(self.h)
 
 type QAudioInputdeviceChangedSlot* = proc()
-proc miqt_exec_callback_cQAudioInput_deviceChanged(slot: int) {.exportc: "miqt_exec_callback_QAudioInput_deviceChanged".} =
+proc miqt_exec_callback_cQAudioInput_deviceChanged(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QAudioInputdeviceChangedSlot](cast[pointer](slot))
   nimfunc[]()
+
+proc miqt_exec_callback_cQAudioInput_deviceChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QAudioInputdeviceChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
 
 proc ondeviceChanged*(self: gen_qaudioinput_types.QAudioInput, slot: QAudioInputdeviceChangedSlot) =
   var tmp = new QAudioInputdeviceChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQAudioInput_connect_deviceChanged(self.h, cast[int](addr tmp[]))
+  fcQAudioInput_connect_deviceChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQAudioInput_deviceChanged, miqt_exec_callback_cQAudioInput_deviceChanged_release)
 
 proc volumeChanged*(self: gen_qaudioinput_types.QAudioInput, volume: float32): void =
   fcQAudioInput_volumeChanged(self.h, volume)
 
 type QAudioInputvolumeChangedSlot* = proc(volume: float32)
-proc miqt_exec_callback_cQAudioInput_volumeChanged(slot: int, volume: float32) {.exportc: "miqt_exec_callback_QAudioInput_volumeChanged".} =
+proc miqt_exec_callback_cQAudioInput_volumeChanged(slot: int, volume: float32) {.cdecl.} =
   let nimfunc = cast[ptr QAudioInputvolumeChangedSlot](cast[pointer](slot))
   let slotval1 = volume
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQAudioInput_volumeChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QAudioInputvolumeChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onvolumeChanged*(self: gen_qaudioinput_types.QAudioInput, slot: QAudioInputvolumeChangedSlot) =
   var tmp = new QAudioInputvolumeChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQAudioInput_connect_volumeChanged(self.h, cast[int](addr tmp[]))
+  fcQAudioInput_connect_volumeChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQAudioInput_volumeChanged, miqt_exec_callback_cQAudioInput_volumeChanged_release)
 
 proc mutedChanged*(self: gen_qaudioinput_types.QAudioInput, muted: bool): void =
   fcQAudioInput_mutedChanged(self.h, muted)
 
 type QAudioInputmutedChangedSlot* = proc(muted: bool)
-proc miqt_exec_callback_cQAudioInput_mutedChanged(slot: int, muted: bool) {.exportc: "miqt_exec_callback_QAudioInput_mutedChanged".} =
+proc miqt_exec_callback_cQAudioInput_mutedChanged(slot: int, muted: bool) {.cdecl.} =
   let nimfunc = cast[ptr QAudioInputmutedChangedSlot](cast[pointer](slot))
   let slotval1 = muted
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQAudioInput_mutedChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QAudioInputmutedChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onmutedChanged*(self: gen_qaudioinput_types.QAudioInput, slot: QAudioInputmutedChangedSlot) =
   var tmp = new QAudioInputmutedChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQAudioInput_connect_mutedChanged(self.h, cast[int](addr tmp[]))
+  fcQAudioInput_connect_mutedChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQAudioInput_mutedChanged, miqt_exec_callback_cQAudioInput_mutedChanged_release)
 
 proc tr*(_: type gen_qaudioinput_types.QAudioInput, s: cstring, c: cstring): string =
   let v_ms = fcQAudioInput_tr2(s, c)

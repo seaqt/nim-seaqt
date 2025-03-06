@@ -19,20 +19,6 @@
 extern "C" {
 #endif
 
-void miqt_exec_callback_QSpatialSound_sourceChanged(intptr_t);
-void miqt_exec_callback_QSpatialSound_loopsChanged(intptr_t);
-void miqt_exec_callback_QSpatialSound_autoPlayChanged(intptr_t);
-void miqt_exec_callback_QSpatialSound_positionChanged(intptr_t);
-void miqt_exec_callback_QSpatialSound_rotationChanged(intptr_t);
-void miqt_exec_callback_QSpatialSound_volumeChanged(intptr_t);
-void miqt_exec_callback_QSpatialSound_distanceModelChanged(intptr_t);
-void miqt_exec_callback_QSpatialSound_sizeChanged(intptr_t);
-void miqt_exec_callback_QSpatialSound_distanceCutoffChanged(intptr_t);
-void miqt_exec_callback_QSpatialSound_manualAttenuationChanged(intptr_t);
-void miqt_exec_callback_QSpatialSound_occlusionIntensityChanged(intptr_t);
-void miqt_exec_callback_QSpatialSound_directivityChanged(intptr_t);
-void miqt_exec_callback_QSpatialSound_directivityOrderChanged(intptr_t);
-void miqt_exec_callback_QSpatialSound_nearFieldGainChanged(intptr_t);
 #ifdef __cplusplus
 } /* extern C */
 #endif
@@ -361,140 +347,210 @@ void QSpatialSound_sourceChanged(QSpatialSound* self) {
 	self->sourceChanged();
 }
 
-void QSpatialSound_connect_sourceChanged(QSpatialSound* self, intptr_t slot) {
-	VirtualQSpatialSound::connect(self, static_cast<void (QSpatialSound::*)()>(&QSpatialSound::sourceChanged), self, [=]() {
-		miqt_exec_callback_QSpatialSound_sourceChanged(slot);
-	});
+void QSpatialSound_connect_sourceChanged(QSpatialSound* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t);
+		void operator()() {
+			callback(slot);
+		}
+	};
+	VirtualQSpatialSound::connect(self, static_cast<void (QSpatialSound::*)()>(&QSpatialSound::sourceChanged), self, local_caller{slot, callback, release});
 }
 
 void QSpatialSound_loopsChanged(QSpatialSound* self) {
 	self->loopsChanged();
 }
 
-void QSpatialSound_connect_loopsChanged(QSpatialSound* self, intptr_t slot) {
-	VirtualQSpatialSound::connect(self, static_cast<void (QSpatialSound::*)()>(&QSpatialSound::loopsChanged), self, [=]() {
-		miqt_exec_callback_QSpatialSound_loopsChanged(slot);
-	});
+void QSpatialSound_connect_loopsChanged(QSpatialSound* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t);
+		void operator()() {
+			callback(slot);
+		}
+	};
+	VirtualQSpatialSound::connect(self, static_cast<void (QSpatialSound::*)()>(&QSpatialSound::loopsChanged), self, local_caller{slot, callback, release});
 }
 
 void QSpatialSound_autoPlayChanged(QSpatialSound* self) {
 	self->autoPlayChanged();
 }
 
-void QSpatialSound_connect_autoPlayChanged(QSpatialSound* self, intptr_t slot) {
-	VirtualQSpatialSound::connect(self, static_cast<void (QSpatialSound::*)()>(&QSpatialSound::autoPlayChanged), self, [=]() {
-		miqt_exec_callback_QSpatialSound_autoPlayChanged(slot);
-	});
+void QSpatialSound_connect_autoPlayChanged(QSpatialSound* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t);
+		void operator()() {
+			callback(slot);
+		}
+	};
+	VirtualQSpatialSound::connect(self, static_cast<void (QSpatialSound::*)()>(&QSpatialSound::autoPlayChanged), self, local_caller{slot, callback, release});
 }
 
 void QSpatialSound_positionChanged(QSpatialSound* self) {
 	self->positionChanged();
 }
 
-void QSpatialSound_connect_positionChanged(QSpatialSound* self, intptr_t slot) {
-	VirtualQSpatialSound::connect(self, static_cast<void (QSpatialSound::*)()>(&QSpatialSound::positionChanged), self, [=]() {
-		miqt_exec_callback_QSpatialSound_positionChanged(slot);
-	});
+void QSpatialSound_connect_positionChanged(QSpatialSound* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t);
+		void operator()() {
+			callback(slot);
+		}
+	};
+	VirtualQSpatialSound::connect(self, static_cast<void (QSpatialSound::*)()>(&QSpatialSound::positionChanged), self, local_caller{slot, callback, release});
 }
 
 void QSpatialSound_rotationChanged(QSpatialSound* self) {
 	self->rotationChanged();
 }
 
-void QSpatialSound_connect_rotationChanged(QSpatialSound* self, intptr_t slot) {
-	VirtualQSpatialSound::connect(self, static_cast<void (QSpatialSound::*)()>(&QSpatialSound::rotationChanged), self, [=]() {
-		miqt_exec_callback_QSpatialSound_rotationChanged(slot);
-	});
+void QSpatialSound_connect_rotationChanged(QSpatialSound* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t);
+		void operator()() {
+			callback(slot);
+		}
+	};
+	VirtualQSpatialSound::connect(self, static_cast<void (QSpatialSound::*)()>(&QSpatialSound::rotationChanged), self, local_caller{slot, callback, release});
 }
 
 void QSpatialSound_volumeChanged(QSpatialSound* self) {
 	self->volumeChanged();
 }
 
-void QSpatialSound_connect_volumeChanged(QSpatialSound* self, intptr_t slot) {
-	VirtualQSpatialSound::connect(self, static_cast<void (QSpatialSound::*)()>(&QSpatialSound::volumeChanged), self, [=]() {
-		miqt_exec_callback_QSpatialSound_volumeChanged(slot);
-	});
+void QSpatialSound_connect_volumeChanged(QSpatialSound* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t);
+		void operator()() {
+			callback(slot);
+		}
+	};
+	VirtualQSpatialSound::connect(self, static_cast<void (QSpatialSound::*)()>(&QSpatialSound::volumeChanged), self, local_caller{slot, callback, release});
 }
 
 void QSpatialSound_distanceModelChanged(QSpatialSound* self) {
 	self->distanceModelChanged();
 }
 
-void QSpatialSound_connect_distanceModelChanged(QSpatialSound* self, intptr_t slot) {
-	VirtualQSpatialSound::connect(self, static_cast<void (QSpatialSound::*)()>(&QSpatialSound::distanceModelChanged), self, [=]() {
-		miqt_exec_callback_QSpatialSound_distanceModelChanged(slot);
-	});
+void QSpatialSound_connect_distanceModelChanged(QSpatialSound* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t);
+		void operator()() {
+			callback(slot);
+		}
+	};
+	VirtualQSpatialSound::connect(self, static_cast<void (QSpatialSound::*)()>(&QSpatialSound::distanceModelChanged), self, local_caller{slot, callback, release});
 }
 
 void QSpatialSound_sizeChanged(QSpatialSound* self) {
 	self->sizeChanged();
 }
 
-void QSpatialSound_connect_sizeChanged(QSpatialSound* self, intptr_t slot) {
-	VirtualQSpatialSound::connect(self, static_cast<void (QSpatialSound::*)()>(&QSpatialSound::sizeChanged), self, [=]() {
-		miqt_exec_callback_QSpatialSound_sizeChanged(slot);
-	});
+void QSpatialSound_connect_sizeChanged(QSpatialSound* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t);
+		void operator()() {
+			callback(slot);
+		}
+	};
+	VirtualQSpatialSound::connect(self, static_cast<void (QSpatialSound::*)()>(&QSpatialSound::sizeChanged), self, local_caller{slot, callback, release});
 }
 
 void QSpatialSound_distanceCutoffChanged(QSpatialSound* self) {
 	self->distanceCutoffChanged();
 }
 
-void QSpatialSound_connect_distanceCutoffChanged(QSpatialSound* self, intptr_t slot) {
-	VirtualQSpatialSound::connect(self, static_cast<void (QSpatialSound::*)()>(&QSpatialSound::distanceCutoffChanged), self, [=]() {
-		miqt_exec_callback_QSpatialSound_distanceCutoffChanged(slot);
-	});
+void QSpatialSound_connect_distanceCutoffChanged(QSpatialSound* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t);
+		void operator()() {
+			callback(slot);
+		}
+	};
+	VirtualQSpatialSound::connect(self, static_cast<void (QSpatialSound::*)()>(&QSpatialSound::distanceCutoffChanged), self, local_caller{slot, callback, release});
 }
 
 void QSpatialSound_manualAttenuationChanged(QSpatialSound* self) {
 	self->manualAttenuationChanged();
 }
 
-void QSpatialSound_connect_manualAttenuationChanged(QSpatialSound* self, intptr_t slot) {
-	VirtualQSpatialSound::connect(self, static_cast<void (QSpatialSound::*)()>(&QSpatialSound::manualAttenuationChanged), self, [=]() {
-		miqt_exec_callback_QSpatialSound_manualAttenuationChanged(slot);
-	});
+void QSpatialSound_connect_manualAttenuationChanged(QSpatialSound* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t);
+		void operator()() {
+			callback(slot);
+		}
+	};
+	VirtualQSpatialSound::connect(self, static_cast<void (QSpatialSound::*)()>(&QSpatialSound::manualAttenuationChanged), self, local_caller{slot, callback, release});
 }
 
 void QSpatialSound_occlusionIntensityChanged(QSpatialSound* self) {
 	self->occlusionIntensityChanged();
 }
 
-void QSpatialSound_connect_occlusionIntensityChanged(QSpatialSound* self, intptr_t slot) {
-	VirtualQSpatialSound::connect(self, static_cast<void (QSpatialSound::*)()>(&QSpatialSound::occlusionIntensityChanged), self, [=]() {
-		miqt_exec_callback_QSpatialSound_occlusionIntensityChanged(slot);
-	});
+void QSpatialSound_connect_occlusionIntensityChanged(QSpatialSound* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t);
+		void operator()() {
+			callback(slot);
+		}
+	};
+	VirtualQSpatialSound::connect(self, static_cast<void (QSpatialSound::*)()>(&QSpatialSound::occlusionIntensityChanged), self, local_caller{slot, callback, release});
 }
 
 void QSpatialSound_directivityChanged(QSpatialSound* self) {
 	self->directivityChanged();
 }
 
-void QSpatialSound_connect_directivityChanged(QSpatialSound* self, intptr_t slot) {
-	VirtualQSpatialSound::connect(self, static_cast<void (QSpatialSound::*)()>(&QSpatialSound::directivityChanged), self, [=]() {
-		miqt_exec_callback_QSpatialSound_directivityChanged(slot);
-	});
+void QSpatialSound_connect_directivityChanged(QSpatialSound* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t);
+		void operator()() {
+			callback(slot);
+		}
+	};
+	VirtualQSpatialSound::connect(self, static_cast<void (QSpatialSound::*)()>(&QSpatialSound::directivityChanged), self, local_caller{slot, callback, release});
 }
 
 void QSpatialSound_directivityOrderChanged(QSpatialSound* self) {
 	self->directivityOrderChanged();
 }
 
-void QSpatialSound_connect_directivityOrderChanged(QSpatialSound* self, intptr_t slot) {
-	VirtualQSpatialSound::connect(self, static_cast<void (QSpatialSound::*)()>(&QSpatialSound::directivityOrderChanged), self, [=]() {
-		miqt_exec_callback_QSpatialSound_directivityOrderChanged(slot);
-	});
+void QSpatialSound_connect_directivityOrderChanged(QSpatialSound* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t);
+		void operator()() {
+			callback(slot);
+		}
+	};
+	VirtualQSpatialSound::connect(self, static_cast<void (QSpatialSound::*)()>(&QSpatialSound::directivityOrderChanged), self, local_caller{slot, callback, release});
 }
 
 void QSpatialSound_nearFieldGainChanged(QSpatialSound* self) {
 	self->nearFieldGainChanged();
 }
 
-void QSpatialSound_connect_nearFieldGainChanged(QSpatialSound* self, intptr_t slot) {
-	VirtualQSpatialSound::connect(self, static_cast<void (QSpatialSound::*)()>(&QSpatialSound::nearFieldGainChanged), self, [=]() {
-		miqt_exec_callback_QSpatialSound_nearFieldGainChanged(slot);
-	});
+void QSpatialSound_connect_nearFieldGainChanged(QSpatialSound* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t);
+		void operator()() {
+			callback(slot);
+		}
+	};
+	VirtualQSpatialSound::connect(self, static_cast<void (QSpatialSound::*)()>(&QSpatialSound::nearFieldGainChanged), self, local_caller{slot, callback, release});
 }
 
 void QSpatialSound_play(QSpatialSound* self) {

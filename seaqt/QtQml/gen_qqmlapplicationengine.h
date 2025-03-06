@@ -71,9 +71,9 @@ void QQmlApplicationEngine_setInitialProperties(QQmlApplicationEngine* self, str
 void QQmlApplicationEngine_setExtraFileSelectors(QQmlApplicationEngine* self, struct miqt_array /* of struct miqt_string */  extraFileSelectors);
 void QQmlApplicationEngine_loadData(QQmlApplicationEngine* self, struct miqt_string data);
 void QQmlApplicationEngine_objectCreated(QQmlApplicationEngine* self, QObject* object, QUrl* url);
-void QQmlApplicationEngine_connect_objectCreated(QQmlApplicationEngine* self, intptr_t slot);
+void QQmlApplicationEngine_connect_objectCreated(QQmlApplicationEngine* self, intptr_t slot, void (*callback)(intptr_t, QObject*, QUrl*), void (*release)(intptr_t));
 void QQmlApplicationEngine_objectCreationFailed(QQmlApplicationEngine* self, QUrl* url);
-void QQmlApplicationEngine_connect_objectCreationFailed(QQmlApplicationEngine* self, intptr_t slot);
+void QQmlApplicationEngine_connect_objectCreationFailed(QQmlApplicationEngine* self, intptr_t slot, void (*callback)(intptr_t, QUrl*), void (*release)(intptr_t));
 struct miqt_string QQmlApplicationEngine_tr2(const char* s, const char* c);
 struct miqt_string QQmlApplicationEngine_tr3(const char* s, const char* c, int n);
 void QQmlApplicationEngine_loadData2(QQmlApplicationEngine* self, struct miqt_string data, QUrl* url);

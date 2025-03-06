@@ -127,7 +127,7 @@ QQuickTextureFactory* QQuickImageResponse_textureFactory(const QQuickImageRespon
 struct miqt_string QQuickImageResponse_errorString(const QQuickImageResponse* self);
 void QQuickImageResponse_cancel(QQuickImageResponse* self);
 void QQuickImageResponse_finished(QQuickImageResponse* self);
-void QQuickImageResponse_connect_finished(QQuickImageResponse* self, intptr_t slot);
+void QQuickImageResponse_connect_finished(QQuickImageResponse* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t));
 struct miqt_string QQuickImageResponse_tr2(const char* s, const char* c);
 struct miqt_string QQuickImageResponse_tr3(const char* s, const char* c, int n);
 QMetaObject* QQuickImageResponse_virtualbase_metaObject(const void* self);

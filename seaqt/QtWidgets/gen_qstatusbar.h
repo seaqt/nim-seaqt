@@ -155,7 +155,7 @@ struct miqt_string QStatusBar_currentMessage(const QStatusBar* self);
 void QStatusBar_showMessage(QStatusBar* self, struct miqt_string text);
 void QStatusBar_clearMessage(QStatusBar* self);
 void QStatusBar_messageChanged(QStatusBar* self, struct miqt_string text);
-void QStatusBar_connect_messageChanged(QStatusBar* self, intptr_t slot);
+void QStatusBar_connect_messageChanged(QStatusBar* self, intptr_t slot, void (*callback)(intptr_t, struct miqt_string), void (*release)(intptr_t));
 void QStatusBar_showEvent(QStatusBar* self, QShowEvent* param1);
 void QStatusBar_paintEvent(QStatusBar* self, QPaintEvent* param1);
 void QStatusBar_resizeEvent(QStatusBar* self, QResizeEvent* param1);

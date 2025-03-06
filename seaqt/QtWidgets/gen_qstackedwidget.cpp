@@ -44,8 +44,6 @@
 extern "C" {
 #endif
 
-void miqt_exec_callback_QStackedWidget_currentChanged(intptr_t, int);
-void miqt_exec_callback_QStackedWidget_widgetRemoved(intptr_t, int);
 #ifdef __cplusplus
 } /* extern C */
 #endif
@@ -927,22 +925,32 @@ void QStackedWidget_currentChanged(QStackedWidget* self, int param1) {
 	self->currentChanged(static_cast<int>(param1));
 }
 
-void QStackedWidget_connect_currentChanged(QStackedWidget* self, intptr_t slot) {
-	VirtualQStackedWidget::connect(self, static_cast<void (QStackedWidget::*)(int)>(&QStackedWidget::currentChanged), self, [=](int param1) {
-		int sigval1 = param1;
-		miqt_exec_callback_QStackedWidget_currentChanged(slot, sigval1);
-	});
+void QStackedWidget_connect_currentChanged(QStackedWidget* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t, int);
+		void operator()(int param1) {
+			int sigval1 = param1;
+			callback(slot, sigval1);
+		}
+	};
+	VirtualQStackedWidget::connect(self, static_cast<void (QStackedWidget::*)(int)>(&QStackedWidget::currentChanged), self, local_caller{slot, callback, release});
 }
 
 void QStackedWidget_widgetRemoved(QStackedWidget* self, int index) {
 	self->widgetRemoved(static_cast<int>(index));
 }
 
-void QStackedWidget_connect_widgetRemoved(QStackedWidget* self, intptr_t slot) {
-	VirtualQStackedWidget::connect(self, static_cast<void (QStackedWidget::*)(int)>(&QStackedWidget::widgetRemoved), self, [=](int index) {
-		int sigval1 = index;
-		miqt_exec_callback_QStackedWidget_widgetRemoved(slot, sigval1);
-	});
+void QStackedWidget_connect_widgetRemoved(QStackedWidget* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t, int);
+		void operator()(int index) {
+			int sigval1 = index;
+			callback(slot, sigval1);
+		}
+	};
+	VirtualQStackedWidget::connect(self, static_cast<void (QStackedWidget::*)(int)>(&QStackedWidget::widgetRemoved), self, local_caller{slot, callback, release});
 }
 
 struct miqt_string QStackedWidget_tr2(const char* s, const char* c) {

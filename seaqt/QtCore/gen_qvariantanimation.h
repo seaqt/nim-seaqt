@@ -78,7 +78,7 @@ void QVariantAnimation_setDuration(QVariantAnimation* self, int msecs);
 QEasingCurve* QVariantAnimation_easingCurve(const QVariantAnimation* self);
 void QVariantAnimation_setEasingCurve(QVariantAnimation* self, QEasingCurve* easing);
 void QVariantAnimation_valueChanged(QVariantAnimation* self, QVariant* value);
-void QVariantAnimation_connect_valueChanged(QVariantAnimation* self, intptr_t slot);
+void QVariantAnimation_connect_valueChanged(QVariantAnimation* self, intptr_t slot, void (*callback)(intptr_t, QVariant*), void (*release)(intptr_t));
 bool QVariantAnimation_event(QVariantAnimation* self, QEvent* event);
 void QVariantAnimation_updateCurrentTime(QVariantAnimation* self, int param1);
 void QVariantAnimation_updateState(QVariantAnimation* self, int newState, int oldState);

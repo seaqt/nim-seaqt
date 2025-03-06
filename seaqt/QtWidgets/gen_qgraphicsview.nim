@@ -189,7 +189,7 @@ proc fcQGraphicsView_updateScene(self: pointer, rects: struct_miqt_array): void 
 proc fcQGraphicsView_invalidateScene(self: pointer, ): void {.importc: "QGraphicsView_invalidateScene".}
 proc fcQGraphicsView_updateSceneRect(self: pointer, rect: pointer): void {.importc: "QGraphicsView_updateSceneRect".}
 proc fcQGraphicsView_rubberBandChanged(self: pointer, viewportRect: pointer, fromScenePoint: pointer, toScenePoint: pointer): void {.importc: "QGraphicsView_rubberBandChanged".}
-proc fcQGraphicsView_connect_rubberBandChanged(self: pointer, slot: int) {.importc: "QGraphicsView_connect_rubberBandChanged".}
+proc fcQGraphicsView_connect_rubberBandChanged(self: pointer, slot: int, callback: proc (slot: int, viewportRect: pointer, fromScenePoint: pointer, toScenePoint: pointer) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QGraphicsView_connect_rubberBandChanged".}
 proc fcQGraphicsView_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QGraphicsView_tr2".}
 proc fcQGraphicsView_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QGraphicsView_tr3".}
 proc fcQGraphicsView_setRenderHint2(self: pointer, hint: cint, enabled: bool): void {.importc: "QGraphicsView_setRenderHint2".}
@@ -601,7 +601,7 @@ proc rubberBandChanged*(self: gen_qgraphicsview_types.QGraphicsView, viewportRec
   fcQGraphicsView_rubberBandChanged(self.h, viewportRect.h, fromScenePoint.h, toScenePoint.h)
 
 type QGraphicsViewrubberBandChangedSlot* = proc(viewportRect: gen_qrect_types.QRect, fromScenePoint: gen_qpoint_types.QPointF, toScenePoint: gen_qpoint_types.QPointF)
-proc miqt_exec_callback_cQGraphicsView_rubberBandChanged(slot: int, viewportRect: pointer, fromScenePoint: pointer, toScenePoint: pointer) {.exportc: "miqt_exec_callback_QGraphicsView_rubberBandChanged".} =
+proc miqt_exec_callback_cQGraphicsView_rubberBandChanged(slot: int, viewportRect: pointer, fromScenePoint: pointer, toScenePoint: pointer) {.cdecl.} =
   let nimfunc = cast[ptr QGraphicsViewrubberBandChangedSlot](cast[pointer](slot))
   let slotval1 = gen_qrect_types.QRect(h: viewportRect)
 
@@ -611,11 +611,15 @@ proc miqt_exec_callback_cQGraphicsView_rubberBandChanged(slot: int, viewportRect
 
   nimfunc[](slotval1, slotval2, slotval3)
 
+proc miqt_exec_callback_cQGraphicsView_rubberBandChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QGraphicsViewrubberBandChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onrubberBandChanged*(self: gen_qgraphicsview_types.QGraphicsView, slot: QGraphicsViewrubberBandChangedSlot) =
   var tmp = new QGraphicsViewrubberBandChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQGraphicsView_connect_rubberBandChanged(self.h, cast[int](addr tmp[]))
+  fcQGraphicsView_connect_rubberBandChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQGraphicsView_rubberBandChanged, miqt_exec_callback_cQGraphicsView_rubberBandChanged_release)
 
 proc tr*(_: type gen_qgraphicsview_types.QGraphicsView, s: cstring, c: cstring): string =
   let v_ms = fcQGraphicsView_tr2(s, c)

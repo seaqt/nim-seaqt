@@ -22,19 +22,6 @@
 extern "C" {
 #endif
 
-void miqt_exec_callback_QQuickWebEngineProfile_storageNameChanged(intptr_t);
-void miqt_exec_callback_QQuickWebEngineProfile_offTheRecordChanged(intptr_t);
-void miqt_exec_callback_QQuickWebEngineProfile_persistentStoragePathChanged(intptr_t);
-void miqt_exec_callback_QQuickWebEngineProfile_cachePathChanged(intptr_t);
-void miqt_exec_callback_QQuickWebEngineProfile_httpUserAgentChanged(intptr_t);
-void miqt_exec_callback_QQuickWebEngineProfile_httpCacheTypeChanged(intptr_t);
-void miqt_exec_callback_QQuickWebEngineProfile_persistentCookiesPolicyChanged(intptr_t);
-void miqt_exec_callback_QQuickWebEngineProfile_httpCacheMaximumSizeChanged(intptr_t);
-void miqt_exec_callback_QQuickWebEngineProfile_httpAcceptLanguageChanged(intptr_t);
-void miqt_exec_callback_QQuickWebEngineProfile_spellCheckLanguagesChanged(intptr_t);
-void miqt_exec_callback_QQuickWebEngineProfile_spellCheckEnabledChanged(intptr_t);
-void miqt_exec_callback_QQuickWebEngineProfile_downloadPathChanged(intptr_t);
-void miqt_exec_callback_QQuickWebEngineProfile_presentNotification(intptr_t, QWebEngineNotification*);
 #ifdef __cplusplus
 } /* extern C */
 #endif
@@ -463,131 +450,196 @@ void QQuickWebEngineProfile_storageNameChanged(QQuickWebEngineProfile* self) {
 	self->storageNameChanged();
 }
 
-void QQuickWebEngineProfile_connect_storageNameChanged(QQuickWebEngineProfile* self, intptr_t slot) {
-	VirtualQQuickWebEngineProfile::connect(self, static_cast<void (QQuickWebEngineProfile::*)()>(&QQuickWebEngineProfile::storageNameChanged), self, [=]() {
-		miqt_exec_callback_QQuickWebEngineProfile_storageNameChanged(slot);
-	});
+void QQuickWebEngineProfile_connect_storageNameChanged(QQuickWebEngineProfile* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t);
+		void operator()() {
+			callback(slot);
+		}
+	};
+	VirtualQQuickWebEngineProfile::connect(self, static_cast<void (QQuickWebEngineProfile::*)()>(&QQuickWebEngineProfile::storageNameChanged), self, local_caller{slot, callback, release});
 }
 
 void QQuickWebEngineProfile_offTheRecordChanged(QQuickWebEngineProfile* self) {
 	self->offTheRecordChanged();
 }
 
-void QQuickWebEngineProfile_connect_offTheRecordChanged(QQuickWebEngineProfile* self, intptr_t slot) {
-	VirtualQQuickWebEngineProfile::connect(self, static_cast<void (QQuickWebEngineProfile::*)()>(&QQuickWebEngineProfile::offTheRecordChanged), self, [=]() {
-		miqt_exec_callback_QQuickWebEngineProfile_offTheRecordChanged(slot);
-	});
+void QQuickWebEngineProfile_connect_offTheRecordChanged(QQuickWebEngineProfile* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t);
+		void operator()() {
+			callback(slot);
+		}
+	};
+	VirtualQQuickWebEngineProfile::connect(self, static_cast<void (QQuickWebEngineProfile::*)()>(&QQuickWebEngineProfile::offTheRecordChanged), self, local_caller{slot, callback, release});
 }
 
 void QQuickWebEngineProfile_persistentStoragePathChanged(QQuickWebEngineProfile* self) {
 	self->persistentStoragePathChanged();
 }
 
-void QQuickWebEngineProfile_connect_persistentStoragePathChanged(QQuickWebEngineProfile* self, intptr_t slot) {
-	VirtualQQuickWebEngineProfile::connect(self, static_cast<void (QQuickWebEngineProfile::*)()>(&QQuickWebEngineProfile::persistentStoragePathChanged), self, [=]() {
-		miqt_exec_callback_QQuickWebEngineProfile_persistentStoragePathChanged(slot);
-	});
+void QQuickWebEngineProfile_connect_persistentStoragePathChanged(QQuickWebEngineProfile* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t);
+		void operator()() {
+			callback(slot);
+		}
+	};
+	VirtualQQuickWebEngineProfile::connect(self, static_cast<void (QQuickWebEngineProfile::*)()>(&QQuickWebEngineProfile::persistentStoragePathChanged), self, local_caller{slot, callback, release});
 }
 
 void QQuickWebEngineProfile_cachePathChanged(QQuickWebEngineProfile* self) {
 	self->cachePathChanged();
 }
 
-void QQuickWebEngineProfile_connect_cachePathChanged(QQuickWebEngineProfile* self, intptr_t slot) {
-	VirtualQQuickWebEngineProfile::connect(self, static_cast<void (QQuickWebEngineProfile::*)()>(&QQuickWebEngineProfile::cachePathChanged), self, [=]() {
-		miqt_exec_callback_QQuickWebEngineProfile_cachePathChanged(slot);
-	});
+void QQuickWebEngineProfile_connect_cachePathChanged(QQuickWebEngineProfile* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t);
+		void operator()() {
+			callback(slot);
+		}
+	};
+	VirtualQQuickWebEngineProfile::connect(self, static_cast<void (QQuickWebEngineProfile::*)()>(&QQuickWebEngineProfile::cachePathChanged), self, local_caller{slot, callback, release});
 }
 
 void QQuickWebEngineProfile_httpUserAgentChanged(QQuickWebEngineProfile* self) {
 	self->httpUserAgentChanged();
 }
 
-void QQuickWebEngineProfile_connect_httpUserAgentChanged(QQuickWebEngineProfile* self, intptr_t slot) {
-	VirtualQQuickWebEngineProfile::connect(self, static_cast<void (QQuickWebEngineProfile::*)()>(&QQuickWebEngineProfile::httpUserAgentChanged), self, [=]() {
-		miqt_exec_callback_QQuickWebEngineProfile_httpUserAgentChanged(slot);
-	});
+void QQuickWebEngineProfile_connect_httpUserAgentChanged(QQuickWebEngineProfile* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t);
+		void operator()() {
+			callback(slot);
+		}
+	};
+	VirtualQQuickWebEngineProfile::connect(self, static_cast<void (QQuickWebEngineProfile::*)()>(&QQuickWebEngineProfile::httpUserAgentChanged), self, local_caller{slot, callback, release});
 }
 
 void QQuickWebEngineProfile_httpCacheTypeChanged(QQuickWebEngineProfile* self) {
 	self->httpCacheTypeChanged();
 }
 
-void QQuickWebEngineProfile_connect_httpCacheTypeChanged(QQuickWebEngineProfile* self, intptr_t slot) {
-	VirtualQQuickWebEngineProfile::connect(self, static_cast<void (QQuickWebEngineProfile::*)()>(&QQuickWebEngineProfile::httpCacheTypeChanged), self, [=]() {
-		miqt_exec_callback_QQuickWebEngineProfile_httpCacheTypeChanged(slot);
-	});
+void QQuickWebEngineProfile_connect_httpCacheTypeChanged(QQuickWebEngineProfile* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t);
+		void operator()() {
+			callback(slot);
+		}
+	};
+	VirtualQQuickWebEngineProfile::connect(self, static_cast<void (QQuickWebEngineProfile::*)()>(&QQuickWebEngineProfile::httpCacheTypeChanged), self, local_caller{slot, callback, release});
 }
 
 void QQuickWebEngineProfile_persistentCookiesPolicyChanged(QQuickWebEngineProfile* self) {
 	self->persistentCookiesPolicyChanged();
 }
 
-void QQuickWebEngineProfile_connect_persistentCookiesPolicyChanged(QQuickWebEngineProfile* self, intptr_t slot) {
-	VirtualQQuickWebEngineProfile::connect(self, static_cast<void (QQuickWebEngineProfile::*)()>(&QQuickWebEngineProfile::persistentCookiesPolicyChanged), self, [=]() {
-		miqt_exec_callback_QQuickWebEngineProfile_persistentCookiesPolicyChanged(slot);
-	});
+void QQuickWebEngineProfile_connect_persistentCookiesPolicyChanged(QQuickWebEngineProfile* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t);
+		void operator()() {
+			callback(slot);
+		}
+	};
+	VirtualQQuickWebEngineProfile::connect(self, static_cast<void (QQuickWebEngineProfile::*)()>(&QQuickWebEngineProfile::persistentCookiesPolicyChanged), self, local_caller{slot, callback, release});
 }
 
 void QQuickWebEngineProfile_httpCacheMaximumSizeChanged(QQuickWebEngineProfile* self) {
 	self->httpCacheMaximumSizeChanged();
 }
 
-void QQuickWebEngineProfile_connect_httpCacheMaximumSizeChanged(QQuickWebEngineProfile* self, intptr_t slot) {
-	VirtualQQuickWebEngineProfile::connect(self, static_cast<void (QQuickWebEngineProfile::*)()>(&QQuickWebEngineProfile::httpCacheMaximumSizeChanged), self, [=]() {
-		miqt_exec_callback_QQuickWebEngineProfile_httpCacheMaximumSizeChanged(slot);
-	});
+void QQuickWebEngineProfile_connect_httpCacheMaximumSizeChanged(QQuickWebEngineProfile* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t);
+		void operator()() {
+			callback(slot);
+		}
+	};
+	VirtualQQuickWebEngineProfile::connect(self, static_cast<void (QQuickWebEngineProfile::*)()>(&QQuickWebEngineProfile::httpCacheMaximumSizeChanged), self, local_caller{slot, callback, release});
 }
 
 void QQuickWebEngineProfile_httpAcceptLanguageChanged(QQuickWebEngineProfile* self) {
 	self->httpAcceptLanguageChanged();
 }
 
-void QQuickWebEngineProfile_connect_httpAcceptLanguageChanged(QQuickWebEngineProfile* self, intptr_t slot) {
-	VirtualQQuickWebEngineProfile::connect(self, static_cast<void (QQuickWebEngineProfile::*)()>(&QQuickWebEngineProfile::httpAcceptLanguageChanged), self, [=]() {
-		miqt_exec_callback_QQuickWebEngineProfile_httpAcceptLanguageChanged(slot);
-	});
+void QQuickWebEngineProfile_connect_httpAcceptLanguageChanged(QQuickWebEngineProfile* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t);
+		void operator()() {
+			callback(slot);
+		}
+	};
+	VirtualQQuickWebEngineProfile::connect(self, static_cast<void (QQuickWebEngineProfile::*)()>(&QQuickWebEngineProfile::httpAcceptLanguageChanged), self, local_caller{slot, callback, release});
 }
 
 void QQuickWebEngineProfile_spellCheckLanguagesChanged(QQuickWebEngineProfile* self) {
 	self->spellCheckLanguagesChanged();
 }
 
-void QQuickWebEngineProfile_connect_spellCheckLanguagesChanged(QQuickWebEngineProfile* self, intptr_t slot) {
-	VirtualQQuickWebEngineProfile::connect(self, static_cast<void (QQuickWebEngineProfile::*)()>(&QQuickWebEngineProfile::spellCheckLanguagesChanged), self, [=]() {
-		miqt_exec_callback_QQuickWebEngineProfile_spellCheckLanguagesChanged(slot);
-	});
+void QQuickWebEngineProfile_connect_spellCheckLanguagesChanged(QQuickWebEngineProfile* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t);
+		void operator()() {
+			callback(slot);
+		}
+	};
+	VirtualQQuickWebEngineProfile::connect(self, static_cast<void (QQuickWebEngineProfile::*)()>(&QQuickWebEngineProfile::spellCheckLanguagesChanged), self, local_caller{slot, callback, release});
 }
 
 void QQuickWebEngineProfile_spellCheckEnabledChanged(QQuickWebEngineProfile* self) {
 	self->spellCheckEnabledChanged();
 }
 
-void QQuickWebEngineProfile_connect_spellCheckEnabledChanged(QQuickWebEngineProfile* self, intptr_t slot) {
-	VirtualQQuickWebEngineProfile::connect(self, static_cast<void (QQuickWebEngineProfile::*)()>(&QQuickWebEngineProfile::spellCheckEnabledChanged), self, [=]() {
-		miqt_exec_callback_QQuickWebEngineProfile_spellCheckEnabledChanged(slot);
-	});
+void QQuickWebEngineProfile_connect_spellCheckEnabledChanged(QQuickWebEngineProfile* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t);
+		void operator()() {
+			callback(slot);
+		}
+	};
+	VirtualQQuickWebEngineProfile::connect(self, static_cast<void (QQuickWebEngineProfile::*)()>(&QQuickWebEngineProfile::spellCheckEnabledChanged), self, local_caller{slot, callback, release});
 }
 
 void QQuickWebEngineProfile_downloadPathChanged(QQuickWebEngineProfile* self) {
 	self->downloadPathChanged();
 }
 
-void QQuickWebEngineProfile_connect_downloadPathChanged(QQuickWebEngineProfile* self, intptr_t slot) {
-	VirtualQQuickWebEngineProfile::connect(self, static_cast<void (QQuickWebEngineProfile::*)()>(&QQuickWebEngineProfile::downloadPathChanged), self, [=]() {
-		miqt_exec_callback_QQuickWebEngineProfile_downloadPathChanged(slot);
-	});
+void QQuickWebEngineProfile_connect_downloadPathChanged(QQuickWebEngineProfile* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t);
+		void operator()() {
+			callback(slot);
+		}
+	};
+	VirtualQQuickWebEngineProfile::connect(self, static_cast<void (QQuickWebEngineProfile::*)()>(&QQuickWebEngineProfile::downloadPathChanged), self, local_caller{slot, callback, release});
 }
 
 void QQuickWebEngineProfile_presentNotification(QQuickWebEngineProfile* self, QWebEngineNotification* notification) {
 	self->presentNotification(notification);
 }
 
-void QQuickWebEngineProfile_connect_presentNotification(QQuickWebEngineProfile* self, intptr_t slot) {
-	VirtualQQuickWebEngineProfile::connect(self, static_cast<void (QQuickWebEngineProfile::*)(QWebEngineNotification*)>(&QQuickWebEngineProfile::presentNotification), self, [=](QWebEngineNotification* notification) {
-		QWebEngineNotification* sigval1 = notification;
-		miqt_exec_callback_QQuickWebEngineProfile_presentNotification(slot, sigval1);
-	});
+void QQuickWebEngineProfile_connect_presentNotification(QQuickWebEngineProfile* self, intptr_t slot, void (*callback)(intptr_t, QWebEngineNotification*), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QWebEngineNotification*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t, QWebEngineNotification*);
+		void operator()(QWebEngineNotification* notification) {
+			QWebEngineNotification* sigval1 = notification;
+			callback(slot, sigval1);
+		}
+	};
+	VirtualQQuickWebEngineProfile::connect(self, static_cast<void (QQuickWebEngineProfile::*)(QWebEngineNotification*)>(&QQuickWebEngineProfile::presentNotification), self, local_caller{slot, callback, release});
 }
 
 struct miqt_string QQuickWebEngineProfile_tr2(const char* s, const char* c) {

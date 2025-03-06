@@ -24,7 +24,6 @@
 extern "C" {
 #endif
 
-void miqt_exec_callback_QApplication_focusChanged(intptr_t, QWidget*, QWidget*);
 #ifdef __cplusplus
 } /* extern C */
 #endif
@@ -437,12 +436,17 @@ void QApplication_focusChanged(QApplication* self, QWidget* old, QWidget* now) {
 	self->focusChanged(old, now);
 }
 
-void QApplication_connect_focusChanged(QApplication* self, intptr_t slot) {
-	VirtualQApplication::connect(self, static_cast<void (QApplication::*)(QWidget*, QWidget*)>(&QApplication::focusChanged), self, [=](QWidget* old, QWidget* now) {
-		QWidget* sigval1 = old;
-		QWidget* sigval2 = now;
-		miqt_exec_callback_QApplication_focusChanged(slot, sigval1, sigval2);
-	});
+void QApplication_connect_focusChanged(QApplication* self, intptr_t slot, void (*callback)(intptr_t, QWidget*, QWidget*), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QWidget*, QWidget*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t, QWidget*, QWidget*);
+		void operator()(QWidget* old, QWidget* now) {
+			QWidget* sigval1 = old;
+			QWidget* sigval2 = now;
+			callback(slot, sigval1, sigval2);
+		}
+	};
+	VirtualQApplication::connect(self, static_cast<void (QApplication::*)(QWidget*, QWidget*)>(&QApplication::focusChanged), self, local_caller{slot, callback, release});
 }
 
 struct miqt_string QApplication_styleSheet(const QApplication* self) {

@@ -81,17 +81,17 @@ proc fcQMediaCaptureSession_videoSink(self: pointer, ): pointer {.importc: "QMed
 proc fcQMediaCaptureSession_setAudioOutput(self: pointer, output: pointer): void {.importc: "QMediaCaptureSession_setAudioOutput".}
 proc fcQMediaCaptureSession_audioOutput(self: pointer, ): pointer {.importc: "QMediaCaptureSession_audioOutput".}
 proc fcQMediaCaptureSession_audioInputChanged(self: pointer, ): void {.importc: "QMediaCaptureSession_audioInputChanged".}
-proc fcQMediaCaptureSession_connect_audioInputChanged(self: pointer, slot: int) {.importc: "QMediaCaptureSession_connect_audioInputChanged".}
+proc fcQMediaCaptureSession_connect_audioInputChanged(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QMediaCaptureSession_connect_audioInputChanged".}
 proc fcQMediaCaptureSession_cameraChanged(self: pointer, ): void {.importc: "QMediaCaptureSession_cameraChanged".}
-proc fcQMediaCaptureSession_connect_cameraChanged(self: pointer, slot: int) {.importc: "QMediaCaptureSession_connect_cameraChanged".}
+proc fcQMediaCaptureSession_connect_cameraChanged(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QMediaCaptureSession_connect_cameraChanged".}
 proc fcQMediaCaptureSession_imageCaptureChanged(self: pointer, ): void {.importc: "QMediaCaptureSession_imageCaptureChanged".}
-proc fcQMediaCaptureSession_connect_imageCaptureChanged(self: pointer, slot: int) {.importc: "QMediaCaptureSession_connect_imageCaptureChanged".}
+proc fcQMediaCaptureSession_connect_imageCaptureChanged(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QMediaCaptureSession_connect_imageCaptureChanged".}
 proc fcQMediaCaptureSession_recorderChanged(self: pointer, ): void {.importc: "QMediaCaptureSession_recorderChanged".}
-proc fcQMediaCaptureSession_connect_recorderChanged(self: pointer, slot: int) {.importc: "QMediaCaptureSession_connect_recorderChanged".}
+proc fcQMediaCaptureSession_connect_recorderChanged(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QMediaCaptureSession_connect_recorderChanged".}
 proc fcQMediaCaptureSession_videoOutputChanged(self: pointer, ): void {.importc: "QMediaCaptureSession_videoOutputChanged".}
-proc fcQMediaCaptureSession_connect_videoOutputChanged(self: pointer, slot: int) {.importc: "QMediaCaptureSession_connect_videoOutputChanged".}
+proc fcQMediaCaptureSession_connect_videoOutputChanged(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QMediaCaptureSession_connect_videoOutputChanged".}
 proc fcQMediaCaptureSession_audioOutputChanged(self: pointer, ): void {.importc: "QMediaCaptureSession_audioOutputChanged".}
-proc fcQMediaCaptureSession_connect_audioOutputChanged(self: pointer, slot: int) {.importc: "QMediaCaptureSession_connect_audioOutputChanged".}
+proc fcQMediaCaptureSession_connect_audioOutputChanged(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QMediaCaptureSession_connect_audioOutputChanged".}
 proc fcQMediaCaptureSession_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QMediaCaptureSession_tr2".}
 proc fcQMediaCaptureSession_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QMediaCaptureSession_tr3".}
 type cQMediaCaptureSessionVTable = object
@@ -182,85 +182,109 @@ proc audioInputChanged*(self: gen_qmediacapturesession_types.QMediaCaptureSessio
   fcQMediaCaptureSession_audioInputChanged(self.h)
 
 type QMediaCaptureSessionaudioInputChangedSlot* = proc()
-proc miqt_exec_callback_cQMediaCaptureSession_audioInputChanged(slot: int) {.exportc: "miqt_exec_callback_QMediaCaptureSession_audioInputChanged".} =
+proc miqt_exec_callback_cQMediaCaptureSession_audioInputChanged(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QMediaCaptureSessionaudioInputChangedSlot](cast[pointer](slot))
   nimfunc[]()
+
+proc miqt_exec_callback_cQMediaCaptureSession_audioInputChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QMediaCaptureSessionaudioInputChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
 
 proc onaudioInputChanged*(self: gen_qmediacapturesession_types.QMediaCaptureSession, slot: QMediaCaptureSessionaudioInputChangedSlot) =
   var tmp = new QMediaCaptureSessionaudioInputChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQMediaCaptureSession_connect_audioInputChanged(self.h, cast[int](addr tmp[]))
+  fcQMediaCaptureSession_connect_audioInputChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQMediaCaptureSession_audioInputChanged, miqt_exec_callback_cQMediaCaptureSession_audioInputChanged_release)
 
 proc cameraChanged*(self: gen_qmediacapturesession_types.QMediaCaptureSession, ): void =
   fcQMediaCaptureSession_cameraChanged(self.h)
 
 type QMediaCaptureSessioncameraChangedSlot* = proc()
-proc miqt_exec_callback_cQMediaCaptureSession_cameraChanged(slot: int) {.exportc: "miqt_exec_callback_QMediaCaptureSession_cameraChanged".} =
+proc miqt_exec_callback_cQMediaCaptureSession_cameraChanged(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QMediaCaptureSessioncameraChangedSlot](cast[pointer](slot))
   nimfunc[]()
+
+proc miqt_exec_callback_cQMediaCaptureSession_cameraChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QMediaCaptureSessioncameraChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
 
 proc oncameraChanged*(self: gen_qmediacapturesession_types.QMediaCaptureSession, slot: QMediaCaptureSessioncameraChangedSlot) =
   var tmp = new QMediaCaptureSessioncameraChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQMediaCaptureSession_connect_cameraChanged(self.h, cast[int](addr tmp[]))
+  fcQMediaCaptureSession_connect_cameraChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQMediaCaptureSession_cameraChanged, miqt_exec_callback_cQMediaCaptureSession_cameraChanged_release)
 
 proc imageCaptureChanged*(self: gen_qmediacapturesession_types.QMediaCaptureSession, ): void =
   fcQMediaCaptureSession_imageCaptureChanged(self.h)
 
 type QMediaCaptureSessionimageCaptureChangedSlot* = proc()
-proc miqt_exec_callback_cQMediaCaptureSession_imageCaptureChanged(slot: int) {.exportc: "miqt_exec_callback_QMediaCaptureSession_imageCaptureChanged".} =
+proc miqt_exec_callback_cQMediaCaptureSession_imageCaptureChanged(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QMediaCaptureSessionimageCaptureChangedSlot](cast[pointer](slot))
   nimfunc[]()
+
+proc miqt_exec_callback_cQMediaCaptureSession_imageCaptureChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QMediaCaptureSessionimageCaptureChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
 
 proc onimageCaptureChanged*(self: gen_qmediacapturesession_types.QMediaCaptureSession, slot: QMediaCaptureSessionimageCaptureChangedSlot) =
   var tmp = new QMediaCaptureSessionimageCaptureChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQMediaCaptureSession_connect_imageCaptureChanged(self.h, cast[int](addr tmp[]))
+  fcQMediaCaptureSession_connect_imageCaptureChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQMediaCaptureSession_imageCaptureChanged, miqt_exec_callback_cQMediaCaptureSession_imageCaptureChanged_release)
 
 proc recorderChanged*(self: gen_qmediacapturesession_types.QMediaCaptureSession, ): void =
   fcQMediaCaptureSession_recorderChanged(self.h)
 
 type QMediaCaptureSessionrecorderChangedSlot* = proc()
-proc miqt_exec_callback_cQMediaCaptureSession_recorderChanged(slot: int) {.exportc: "miqt_exec_callback_QMediaCaptureSession_recorderChanged".} =
+proc miqt_exec_callback_cQMediaCaptureSession_recorderChanged(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QMediaCaptureSessionrecorderChangedSlot](cast[pointer](slot))
   nimfunc[]()
+
+proc miqt_exec_callback_cQMediaCaptureSession_recorderChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QMediaCaptureSessionrecorderChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
 
 proc onrecorderChanged*(self: gen_qmediacapturesession_types.QMediaCaptureSession, slot: QMediaCaptureSessionrecorderChangedSlot) =
   var tmp = new QMediaCaptureSessionrecorderChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQMediaCaptureSession_connect_recorderChanged(self.h, cast[int](addr tmp[]))
+  fcQMediaCaptureSession_connect_recorderChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQMediaCaptureSession_recorderChanged, miqt_exec_callback_cQMediaCaptureSession_recorderChanged_release)
 
 proc videoOutputChanged*(self: gen_qmediacapturesession_types.QMediaCaptureSession, ): void =
   fcQMediaCaptureSession_videoOutputChanged(self.h)
 
 type QMediaCaptureSessionvideoOutputChangedSlot* = proc()
-proc miqt_exec_callback_cQMediaCaptureSession_videoOutputChanged(slot: int) {.exportc: "miqt_exec_callback_QMediaCaptureSession_videoOutputChanged".} =
+proc miqt_exec_callback_cQMediaCaptureSession_videoOutputChanged(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QMediaCaptureSessionvideoOutputChangedSlot](cast[pointer](slot))
   nimfunc[]()
+
+proc miqt_exec_callback_cQMediaCaptureSession_videoOutputChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QMediaCaptureSessionvideoOutputChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
 
 proc onvideoOutputChanged*(self: gen_qmediacapturesession_types.QMediaCaptureSession, slot: QMediaCaptureSessionvideoOutputChangedSlot) =
   var tmp = new QMediaCaptureSessionvideoOutputChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQMediaCaptureSession_connect_videoOutputChanged(self.h, cast[int](addr tmp[]))
+  fcQMediaCaptureSession_connect_videoOutputChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQMediaCaptureSession_videoOutputChanged, miqt_exec_callback_cQMediaCaptureSession_videoOutputChanged_release)
 
 proc audioOutputChanged*(self: gen_qmediacapturesession_types.QMediaCaptureSession, ): void =
   fcQMediaCaptureSession_audioOutputChanged(self.h)
 
 type QMediaCaptureSessionaudioOutputChangedSlot* = proc()
-proc miqt_exec_callback_cQMediaCaptureSession_audioOutputChanged(slot: int) {.exportc: "miqt_exec_callback_QMediaCaptureSession_audioOutputChanged".} =
+proc miqt_exec_callback_cQMediaCaptureSession_audioOutputChanged(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QMediaCaptureSessionaudioOutputChangedSlot](cast[pointer](slot))
   nimfunc[]()
+
+proc miqt_exec_callback_cQMediaCaptureSession_audioOutputChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QMediaCaptureSessionaudioOutputChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
 
 proc onaudioOutputChanged*(self: gen_qmediacapturesession_types.QMediaCaptureSession, slot: QMediaCaptureSessionaudioOutputChangedSlot) =
   var tmp = new QMediaCaptureSessionaudioOutputChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQMediaCaptureSession_connect_audioOutputChanged(self.h, cast[int](addr tmp[]))
+  fcQMediaCaptureSession_connect_audioOutputChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQMediaCaptureSession_audioOutputChanged, miqt_exec_callback_cQMediaCaptureSession_audioOutputChanged_release)
 
 proc tr*(_: type gen_qmediacapturesession_types.QMediaCaptureSession, s: cstring, c: cstring): string =
   let v_ms = fcQMediaCaptureSession_tr2(s, c)

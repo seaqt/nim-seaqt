@@ -161,7 +161,7 @@ bool QCheckBox_isTristate(const QCheckBox* self);
 int QCheckBox_checkState(const QCheckBox* self);
 void QCheckBox_setCheckState(QCheckBox* self, int state);
 void QCheckBox_stateChanged(QCheckBox* self, int param1);
-void QCheckBox_connect_stateChanged(QCheckBox* self, intptr_t slot);
+void QCheckBox_connect_stateChanged(QCheckBox* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t));
 bool QCheckBox_event(QCheckBox* self, QEvent* e);
 bool QCheckBox_hitButton(const QCheckBox* self, QPoint* pos);
 void QCheckBox_checkStateSet(QCheckBox* self);

@@ -111,29 +111,29 @@ proc fcQImageCapture_addMetaData(self: pointer, metaData: pointer): void {.impor
 proc fcQImageCapture_captureToFile(self: pointer, ): cint {.importc: "QImageCapture_captureToFile".}
 proc fcQImageCapture_capture(self: pointer, ): cint {.importc: "QImageCapture_capture".}
 proc fcQImageCapture_errorChanged(self: pointer, ): void {.importc: "QImageCapture_errorChanged".}
-proc fcQImageCapture_connect_errorChanged(self: pointer, slot: int) {.importc: "QImageCapture_connect_errorChanged".}
+proc fcQImageCapture_connect_errorChanged(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QImageCapture_connect_errorChanged".}
 proc fcQImageCapture_errorOccurred(self: pointer, id: cint, error: cint, errorString: struct_miqt_string): void {.importc: "QImageCapture_errorOccurred".}
-proc fcQImageCapture_connect_errorOccurred(self: pointer, slot: int) {.importc: "QImageCapture_connect_errorOccurred".}
+proc fcQImageCapture_connect_errorOccurred(self: pointer, slot: int, callback: proc (slot: int, id: cint, error: cint, errorString: struct_miqt_string) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QImageCapture_connect_errorOccurred".}
 proc fcQImageCapture_readyForCaptureChanged(self: pointer, ready: bool): void {.importc: "QImageCapture_readyForCaptureChanged".}
-proc fcQImageCapture_connect_readyForCaptureChanged(self: pointer, slot: int) {.importc: "QImageCapture_connect_readyForCaptureChanged".}
+proc fcQImageCapture_connect_readyForCaptureChanged(self: pointer, slot: int, callback: proc (slot: int, ready: bool) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QImageCapture_connect_readyForCaptureChanged".}
 proc fcQImageCapture_metaDataChanged(self: pointer, ): void {.importc: "QImageCapture_metaDataChanged".}
-proc fcQImageCapture_connect_metaDataChanged(self: pointer, slot: int) {.importc: "QImageCapture_connect_metaDataChanged".}
+proc fcQImageCapture_connect_metaDataChanged(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QImageCapture_connect_metaDataChanged".}
 proc fcQImageCapture_fileFormatChanged(self: pointer, ): void {.importc: "QImageCapture_fileFormatChanged".}
-proc fcQImageCapture_connect_fileFormatChanged(self: pointer, slot: int) {.importc: "QImageCapture_connect_fileFormatChanged".}
+proc fcQImageCapture_connect_fileFormatChanged(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QImageCapture_connect_fileFormatChanged".}
 proc fcQImageCapture_qualityChanged(self: pointer, ): void {.importc: "QImageCapture_qualityChanged".}
-proc fcQImageCapture_connect_qualityChanged(self: pointer, slot: int) {.importc: "QImageCapture_connect_qualityChanged".}
+proc fcQImageCapture_connect_qualityChanged(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QImageCapture_connect_qualityChanged".}
 proc fcQImageCapture_resolutionChanged(self: pointer, ): void {.importc: "QImageCapture_resolutionChanged".}
-proc fcQImageCapture_connect_resolutionChanged(self: pointer, slot: int) {.importc: "QImageCapture_connect_resolutionChanged".}
+proc fcQImageCapture_connect_resolutionChanged(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QImageCapture_connect_resolutionChanged".}
 proc fcQImageCapture_imageExposed(self: pointer, id: cint): void {.importc: "QImageCapture_imageExposed".}
-proc fcQImageCapture_connect_imageExposed(self: pointer, slot: int) {.importc: "QImageCapture_connect_imageExposed".}
+proc fcQImageCapture_connect_imageExposed(self: pointer, slot: int, callback: proc (slot: int, id: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QImageCapture_connect_imageExposed".}
 proc fcQImageCapture_imageCaptured(self: pointer, id: cint, preview: pointer): void {.importc: "QImageCapture_imageCaptured".}
-proc fcQImageCapture_connect_imageCaptured(self: pointer, slot: int) {.importc: "QImageCapture_connect_imageCaptured".}
+proc fcQImageCapture_connect_imageCaptured(self: pointer, slot: int, callback: proc (slot: int, id: cint, preview: pointer) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QImageCapture_connect_imageCaptured".}
 proc fcQImageCapture_imageMetadataAvailable(self: pointer, id: cint, metaData: pointer): void {.importc: "QImageCapture_imageMetadataAvailable".}
-proc fcQImageCapture_connect_imageMetadataAvailable(self: pointer, slot: int) {.importc: "QImageCapture_connect_imageMetadataAvailable".}
+proc fcQImageCapture_connect_imageMetadataAvailable(self: pointer, slot: int, callback: proc (slot: int, id: cint, metaData: pointer) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QImageCapture_connect_imageMetadataAvailable".}
 proc fcQImageCapture_imageAvailable(self: pointer, id: cint, frame: pointer): void {.importc: "QImageCapture_imageAvailable".}
-proc fcQImageCapture_connect_imageAvailable(self: pointer, slot: int) {.importc: "QImageCapture_connect_imageAvailable".}
+proc fcQImageCapture_connect_imageAvailable(self: pointer, slot: int, callback: proc (slot: int, id: cint, frame: pointer) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QImageCapture_connect_imageAvailable".}
 proc fcQImageCapture_imageSaved(self: pointer, id: cint, fileName: struct_miqt_string): void {.importc: "QImageCapture_imageSaved".}
-proc fcQImageCapture_connect_imageSaved(self: pointer, slot: int) {.importc: "QImageCapture_connect_imageSaved".}
+proc fcQImageCapture_connect_imageSaved(self: pointer, slot: int, callback: proc (slot: int, id: cint, fileName: struct_miqt_string) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QImageCapture_connect_imageSaved".}
 proc fcQImageCapture_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QImageCapture_tr2".}
 proc fcQImageCapture_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QImageCapture_tr3".}
 proc fcQImageCapture_captureToFile1(self: pointer, location: struct_miqt_string): cint {.importc: "QImageCapture_captureToFile1".}
@@ -257,21 +257,25 @@ proc errorChanged*(self: gen_qimagecapture_types.QImageCapture, ): void =
   fcQImageCapture_errorChanged(self.h)
 
 type QImageCaptureerrorChangedSlot* = proc()
-proc miqt_exec_callback_cQImageCapture_errorChanged(slot: int) {.exportc: "miqt_exec_callback_QImageCapture_errorChanged".} =
+proc miqt_exec_callback_cQImageCapture_errorChanged(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QImageCaptureerrorChangedSlot](cast[pointer](slot))
   nimfunc[]()
+
+proc miqt_exec_callback_cQImageCapture_errorChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QImageCaptureerrorChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
 
 proc onerrorChanged*(self: gen_qimagecapture_types.QImageCapture, slot: QImageCaptureerrorChangedSlot) =
   var tmp = new QImageCaptureerrorChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQImageCapture_connect_errorChanged(self.h, cast[int](addr tmp[]))
+  fcQImageCapture_connect_errorChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQImageCapture_errorChanged, miqt_exec_callback_cQImageCapture_errorChanged_release)
 
 proc errorOccurred*(self: gen_qimagecapture_types.QImageCapture, id: cint, error: cint, errorString: string): void =
   fcQImageCapture_errorOccurred(self.h, id, cint(error), struct_miqt_string(data: errorString, len: csize_t(len(errorString))))
 
 type QImageCaptureerrorOccurredSlot* = proc(id: cint, error: cint, errorString: string)
-proc miqt_exec_callback_cQImageCapture_errorOccurred(slot: int, id: cint, error: cint, errorString: struct_miqt_string) {.exportc: "miqt_exec_callback_QImageCapture_errorOccurred".} =
+proc miqt_exec_callback_cQImageCapture_errorOccurred(slot: int, id: cint, error: cint, errorString: struct_miqt_string) {.cdecl.} =
   let nimfunc = cast[ptr QImageCaptureerrorOccurredSlot](cast[pointer](slot))
   let slotval1 = id
 
@@ -284,105 +288,133 @@ proc miqt_exec_callback_cQImageCapture_errorOccurred(slot: int, id: cint, error:
 
   nimfunc[](slotval1, slotval2, slotval3)
 
+proc miqt_exec_callback_cQImageCapture_errorOccurred_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QImageCaptureerrorOccurredSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onerrorOccurred*(self: gen_qimagecapture_types.QImageCapture, slot: QImageCaptureerrorOccurredSlot) =
   var tmp = new QImageCaptureerrorOccurredSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQImageCapture_connect_errorOccurred(self.h, cast[int](addr tmp[]))
+  fcQImageCapture_connect_errorOccurred(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQImageCapture_errorOccurred, miqt_exec_callback_cQImageCapture_errorOccurred_release)
 
 proc readyForCaptureChanged*(self: gen_qimagecapture_types.QImageCapture, ready: bool): void =
   fcQImageCapture_readyForCaptureChanged(self.h, ready)
 
 type QImageCapturereadyForCaptureChangedSlot* = proc(ready: bool)
-proc miqt_exec_callback_cQImageCapture_readyForCaptureChanged(slot: int, ready: bool) {.exportc: "miqt_exec_callback_QImageCapture_readyForCaptureChanged".} =
+proc miqt_exec_callback_cQImageCapture_readyForCaptureChanged(slot: int, ready: bool) {.cdecl.} =
   let nimfunc = cast[ptr QImageCapturereadyForCaptureChangedSlot](cast[pointer](slot))
   let slotval1 = ready
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQImageCapture_readyForCaptureChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QImageCapturereadyForCaptureChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onreadyForCaptureChanged*(self: gen_qimagecapture_types.QImageCapture, slot: QImageCapturereadyForCaptureChangedSlot) =
   var tmp = new QImageCapturereadyForCaptureChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQImageCapture_connect_readyForCaptureChanged(self.h, cast[int](addr tmp[]))
+  fcQImageCapture_connect_readyForCaptureChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQImageCapture_readyForCaptureChanged, miqt_exec_callback_cQImageCapture_readyForCaptureChanged_release)
 
 proc metaDataChanged*(self: gen_qimagecapture_types.QImageCapture, ): void =
   fcQImageCapture_metaDataChanged(self.h)
 
 type QImageCapturemetaDataChangedSlot* = proc()
-proc miqt_exec_callback_cQImageCapture_metaDataChanged(slot: int) {.exportc: "miqt_exec_callback_QImageCapture_metaDataChanged".} =
+proc miqt_exec_callback_cQImageCapture_metaDataChanged(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QImageCapturemetaDataChangedSlot](cast[pointer](slot))
   nimfunc[]()
+
+proc miqt_exec_callback_cQImageCapture_metaDataChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QImageCapturemetaDataChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
 
 proc onmetaDataChanged*(self: gen_qimagecapture_types.QImageCapture, slot: QImageCapturemetaDataChangedSlot) =
   var tmp = new QImageCapturemetaDataChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQImageCapture_connect_metaDataChanged(self.h, cast[int](addr tmp[]))
+  fcQImageCapture_connect_metaDataChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQImageCapture_metaDataChanged, miqt_exec_callback_cQImageCapture_metaDataChanged_release)
 
 proc fileFormatChanged*(self: gen_qimagecapture_types.QImageCapture, ): void =
   fcQImageCapture_fileFormatChanged(self.h)
 
 type QImageCapturefileFormatChangedSlot* = proc()
-proc miqt_exec_callback_cQImageCapture_fileFormatChanged(slot: int) {.exportc: "miqt_exec_callback_QImageCapture_fileFormatChanged".} =
+proc miqt_exec_callback_cQImageCapture_fileFormatChanged(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QImageCapturefileFormatChangedSlot](cast[pointer](slot))
   nimfunc[]()
+
+proc miqt_exec_callback_cQImageCapture_fileFormatChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QImageCapturefileFormatChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
 
 proc onfileFormatChanged*(self: gen_qimagecapture_types.QImageCapture, slot: QImageCapturefileFormatChangedSlot) =
   var tmp = new QImageCapturefileFormatChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQImageCapture_connect_fileFormatChanged(self.h, cast[int](addr tmp[]))
+  fcQImageCapture_connect_fileFormatChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQImageCapture_fileFormatChanged, miqt_exec_callback_cQImageCapture_fileFormatChanged_release)
 
 proc qualityChanged*(self: gen_qimagecapture_types.QImageCapture, ): void =
   fcQImageCapture_qualityChanged(self.h)
 
 type QImageCapturequalityChangedSlot* = proc()
-proc miqt_exec_callback_cQImageCapture_qualityChanged(slot: int) {.exportc: "miqt_exec_callback_QImageCapture_qualityChanged".} =
+proc miqt_exec_callback_cQImageCapture_qualityChanged(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QImageCapturequalityChangedSlot](cast[pointer](slot))
   nimfunc[]()
+
+proc miqt_exec_callback_cQImageCapture_qualityChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QImageCapturequalityChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
 
 proc onqualityChanged*(self: gen_qimagecapture_types.QImageCapture, slot: QImageCapturequalityChangedSlot) =
   var tmp = new QImageCapturequalityChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQImageCapture_connect_qualityChanged(self.h, cast[int](addr tmp[]))
+  fcQImageCapture_connect_qualityChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQImageCapture_qualityChanged, miqt_exec_callback_cQImageCapture_qualityChanged_release)
 
 proc resolutionChanged*(self: gen_qimagecapture_types.QImageCapture, ): void =
   fcQImageCapture_resolutionChanged(self.h)
 
 type QImageCaptureresolutionChangedSlot* = proc()
-proc miqt_exec_callback_cQImageCapture_resolutionChanged(slot: int) {.exportc: "miqt_exec_callback_QImageCapture_resolutionChanged".} =
+proc miqt_exec_callback_cQImageCapture_resolutionChanged(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QImageCaptureresolutionChangedSlot](cast[pointer](slot))
   nimfunc[]()
+
+proc miqt_exec_callback_cQImageCapture_resolutionChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QImageCaptureresolutionChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
 
 proc onresolutionChanged*(self: gen_qimagecapture_types.QImageCapture, slot: QImageCaptureresolutionChangedSlot) =
   var tmp = new QImageCaptureresolutionChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQImageCapture_connect_resolutionChanged(self.h, cast[int](addr tmp[]))
+  fcQImageCapture_connect_resolutionChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQImageCapture_resolutionChanged, miqt_exec_callback_cQImageCapture_resolutionChanged_release)
 
 proc imageExposed*(self: gen_qimagecapture_types.QImageCapture, id: cint): void =
   fcQImageCapture_imageExposed(self.h, id)
 
 type QImageCaptureimageExposedSlot* = proc(id: cint)
-proc miqt_exec_callback_cQImageCapture_imageExposed(slot: int, id: cint) {.exportc: "miqt_exec_callback_QImageCapture_imageExposed".} =
+proc miqt_exec_callback_cQImageCapture_imageExposed(slot: int, id: cint) {.cdecl.} =
   let nimfunc = cast[ptr QImageCaptureimageExposedSlot](cast[pointer](slot))
   let slotval1 = id
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQImageCapture_imageExposed_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QImageCaptureimageExposedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onimageExposed*(self: gen_qimagecapture_types.QImageCapture, slot: QImageCaptureimageExposedSlot) =
   var tmp = new QImageCaptureimageExposedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQImageCapture_connect_imageExposed(self.h, cast[int](addr tmp[]))
+  fcQImageCapture_connect_imageExposed(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQImageCapture_imageExposed, miqt_exec_callback_cQImageCapture_imageExposed_release)
 
 proc imageCaptured*(self: gen_qimagecapture_types.QImageCapture, id: cint, preview: gen_qimage_types.QImage): void =
   fcQImageCapture_imageCaptured(self.h, id, preview.h)
 
 type QImageCaptureimageCapturedSlot* = proc(id: cint, preview: gen_qimage_types.QImage)
-proc miqt_exec_callback_cQImageCapture_imageCaptured(slot: int, id: cint, preview: pointer) {.exportc: "miqt_exec_callback_QImageCapture_imageCaptured".} =
+proc miqt_exec_callback_cQImageCapture_imageCaptured(slot: int, id: cint, preview: pointer) {.cdecl.} =
   let nimfunc = cast[ptr QImageCaptureimageCapturedSlot](cast[pointer](slot))
   let slotval1 = id
 
@@ -390,17 +422,21 @@ proc miqt_exec_callback_cQImageCapture_imageCaptured(slot: int, id: cint, previe
 
   nimfunc[](slotval1, slotval2)
 
+proc miqt_exec_callback_cQImageCapture_imageCaptured_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QImageCaptureimageCapturedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onimageCaptured*(self: gen_qimagecapture_types.QImageCapture, slot: QImageCaptureimageCapturedSlot) =
   var tmp = new QImageCaptureimageCapturedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQImageCapture_connect_imageCaptured(self.h, cast[int](addr tmp[]))
+  fcQImageCapture_connect_imageCaptured(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQImageCapture_imageCaptured, miqt_exec_callback_cQImageCapture_imageCaptured_release)
 
 proc imageMetadataAvailable*(self: gen_qimagecapture_types.QImageCapture, id: cint, metaData: gen_qmediametadata_types.QMediaMetaData): void =
   fcQImageCapture_imageMetadataAvailable(self.h, id, metaData.h)
 
 type QImageCaptureimageMetadataAvailableSlot* = proc(id: cint, metaData: gen_qmediametadata_types.QMediaMetaData)
-proc miqt_exec_callback_cQImageCapture_imageMetadataAvailable(slot: int, id: cint, metaData: pointer) {.exportc: "miqt_exec_callback_QImageCapture_imageMetadataAvailable".} =
+proc miqt_exec_callback_cQImageCapture_imageMetadataAvailable(slot: int, id: cint, metaData: pointer) {.cdecl.} =
   let nimfunc = cast[ptr QImageCaptureimageMetadataAvailableSlot](cast[pointer](slot))
   let slotval1 = id
 
@@ -408,17 +444,21 @@ proc miqt_exec_callback_cQImageCapture_imageMetadataAvailable(slot: int, id: cin
 
   nimfunc[](slotval1, slotval2)
 
+proc miqt_exec_callback_cQImageCapture_imageMetadataAvailable_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QImageCaptureimageMetadataAvailableSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onimageMetadataAvailable*(self: gen_qimagecapture_types.QImageCapture, slot: QImageCaptureimageMetadataAvailableSlot) =
   var tmp = new QImageCaptureimageMetadataAvailableSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQImageCapture_connect_imageMetadataAvailable(self.h, cast[int](addr tmp[]))
+  fcQImageCapture_connect_imageMetadataAvailable(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQImageCapture_imageMetadataAvailable, miqt_exec_callback_cQImageCapture_imageMetadataAvailable_release)
 
 proc imageAvailable*(self: gen_qimagecapture_types.QImageCapture, id: cint, frame: gen_qvideoframe_types.QVideoFrame): void =
   fcQImageCapture_imageAvailable(self.h, id, frame.h)
 
 type QImageCaptureimageAvailableSlot* = proc(id: cint, frame: gen_qvideoframe_types.QVideoFrame)
-proc miqt_exec_callback_cQImageCapture_imageAvailable(slot: int, id: cint, frame: pointer) {.exportc: "miqt_exec_callback_QImageCapture_imageAvailable".} =
+proc miqt_exec_callback_cQImageCapture_imageAvailable(slot: int, id: cint, frame: pointer) {.cdecl.} =
   let nimfunc = cast[ptr QImageCaptureimageAvailableSlot](cast[pointer](slot))
   let slotval1 = id
 
@@ -426,17 +466,21 @@ proc miqt_exec_callback_cQImageCapture_imageAvailable(slot: int, id: cint, frame
 
   nimfunc[](slotval1, slotval2)
 
+proc miqt_exec_callback_cQImageCapture_imageAvailable_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QImageCaptureimageAvailableSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onimageAvailable*(self: gen_qimagecapture_types.QImageCapture, slot: QImageCaptureimageAvailableSlot) =
   var tmp = new QImageCaptureimageAvailableSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQImageCapture_connect_imageAvailable(self.h, cast[int](addr tmp[]))
+  fcQImageCapture_connect_imageAvailable(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQImageCapture_imageAvailable, miqt_exec_callback_cQImageCapture_imageAvailable_release)
 
 proc imageSaved*(self: gen_qimagecapture_types.QImageCapture, id: cint, fileName: string): void =
   fcQImageCapture_imageSaved(self.h, id, struct_miqt_string(data: fileName, len: csize_t(len(fileName))))
 
 type QImageCaptureimageSavedSlot* = proc(id: cint, fileName: string)
-proc miqt_exec_callback_cQImageCapture_imageSaved(slot: int, id: cint, fileName: struct_miqt_string) {.exportc: "miqt_exec_callback_QImageCapture_imageSaved".} =
+proc miqt_exec_callback_cQImageCapture_imageSaved(slot: int, id: cint, fileName: struct_miqt_string) {.cdecl.} =
   let nimfunc = cast[ptr QImageCaptureimageSavedSlot](cast[pointer](slot))
   let slotval1 = id
 
@@ -447,11 +491,15 @@ proc miqt_exec_callback_cQImageCapture_imageSaved(slot: int, id: cint, fileName:
 
   nimfunc[](slotval1, slotval2)
 
+proc miqt_exec_callback_cQImageCapture_imageSaved_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QImageCaptureimageSavedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onimageSaved*(self: gen_qimagecapture_types.QImageCapture, slot: QImageCaptureimageSavedSlot) =
   var tmp = new QImageCaptureimageSavedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQImageCapture_connect_imageSaved(self.h, cast[int](addr tmp[]))
+  fcQImageCapture_connect_imageSaved(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQImageCapture_imageSaved, miqt_exec_callback_cQImageCapture_imageSaved_release)
 
 proc tr*(_: type gen_qimagecapture_types.QImageCapture, s: cstring, c: cstring): string =
   let v_ms = fcQImageCapture_tr2(s, c)

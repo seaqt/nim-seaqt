@@ -161,7 +161,7 @@ QPrinter* QPrintPreviewDialog_printer(QPrintPreviewDialog* self);
 void QPrintPreviewDialog_setVisible(QPrintPreviewDialog* self, bool visible);
 void QPrintPreviewDialog_done(QPrintPreviewDialog* self, int result);
 void QPrintPreviewDialog_paintRequested(QPrintPreviewDialog* self, QPrinter* printer);
-void QPrintPreviewDialog_connect_paintRequested(QPrintPreviewDialog* self, intptr_t slot);
+void QPrintPreviewDialog_connect_paintRequested(QPrintPreviewDialog* self, intptr_t slot, void (*callback)(intptr_t, QPrinter*), void (*release)(intptr_t));
 struct miqt_string QPrintPreviewDialog_tr2(const char* s, const char* c);
 struct miqt_string QPrintPreviewDialog_tr3(const char* s, const char* c, int n);
 QMetaObject* QPrintPreviewDialog_virtualbase_metaObject(const void* self);

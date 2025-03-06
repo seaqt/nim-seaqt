@@ -78,7 +78,7 @@ proc fcQAudioSink_state(self: pointer, ): cint {.importc: "QAudioSink_state".}
 proc fcQAudioSink_setVolume(self: pointer, volume: float64): void {.importc: "QAudioSink_setVolume".}
 proc fcQAudioSink_volume(self: pointer, ): float64 {.importc: "QAudioSink_volume".}
 proc fcQAudioSink_stateChanged(self: pointer, state: cint): void {.importc: "QAudioSink_stateChanged".}
-proc fcQAudioSink_connect_stateChanged(self: pointer, slot: int) {.importc: "QAudioSink_connect_stateChanged".}
+proc fcQAudioSink_connect_stateChanged(self: pointer, slot: int, callback: proc (slot: int, state: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QAudioSink_connect_stateChanged".}
 proc fcQAudioSink_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QAudioSink_tr2".}
 proc fcQAudioSink_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QAudioSink_tr3".}
 type cQAudioSinkVTable = object
@@ -182,17 +182,21 @@ proc stateChanged*(self: gen_qaudiosink_types.QAudioSink, state: cint): void =
   fcQAudioSink_stateChanged(self.h, cint(state))
 
 type QAudioSinkstateChangedSlot* = proc(state: cint)
-proc miqt_exec_callback_cQAudioSink_stateChanged(slot: int, state: cint) {.exportc: "miqt_exec_callback_QAudioSink_stateChanged".} =
+proc miqt_exec_callback_cQAudioSink_stateChanged(slot: int, state: cint) {.cdecl.} =
   let nimfunc = cast[ptr QAudioSinkstateChangedSlot](cast[pointer](slot))
   let slotval1 = cint(state)
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQAudioSink_stateChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QAudioSinkstateChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onstateChanged*(self: gen_qaudiosink_types.QAudioSink, slot: QAudioSinkstateChangedSlot) =
   var tmp = new QAudioSinkstateChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQAudioSink_connect_stateChanged(self.h, cast[int](addr tmp[]))
+  fcQAudioSink_connect_stateChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQAudioSink_stateChanged, miqt_exec_callback_cQAudioSink_stateChanged_release)
 
 proc tr*(_: type gen_qaudiosink_types.QAudioSink, s: cstring, c: cstring): string =
   let v_ms = fcQAudioSink_tr2(s, c)

@@ -45,14 +45,6 @@
 extern "C" {
 #endif
 
-void miqt_exec_callback_QToolBar_actionTriggered(intptr_t, QAction*);
-void miqt_exec_callback_QToolBar_movableChanged(intptr_t, bool);
-void miqt_exec_callback_QToolBar_allowedAreasChanged(intptr_t, int);
-void miqt_exec_callback_QToolBar_orientationChanged(intptr_t, int);
-void miqt_exec_callback_QToolBar_iconSizeChanged(intptr_t, QSize*);
-void miqt_exec_callback_QToolBar_toolButtonStyleChanged(intptr_t, int);
-void miqt_exec_callback_QToolBar_topLevelChanged(intptr_t, bool);
-void miqt_exec_callback_QToolBar_visibilityChanged(intptr_t, bool);
 #ifdef __cplusplus
 } /* extern C */
 #endif
@@ -1004,93 +996,133 @@ void QToolBar_actionTriggered(QToolBar* self, QAction* action) {
 	self->actionTriggered(action);
 }
 
-void QToolBar_connect_actionTriggered(QToolBar* self, intptr_t slot) {
-	VirtualQToolBar::connect(self, static_cast<void (QToolBar::*)(QAction*)>(&QToolBar::actionTriggered), self, [=](QAction* action) {
-		QAction* sigval1 = action;
-		miqt_exec_callback_QToolBar_actionTriggered(slot, sigval1);
-	});
+void QToolBar_connect_actionTriggered(QToolBar* self, intptr_t slot, void (*callback)(intptr_t, QAction*), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QAction*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t, QAction*);
+		void operator()(QAction* action) {
+			QAction* sigval1 = action;
+			callback(slot, sigval1);
+		}
+	};
+	VirtualQToolBar::connect(self, static_cast<void (QToolBar::*)(QAction*)>(&QToolBar::actionTriggered), self, local_caller{slot, callback, release});
 }
 
 void QToolBar_movableChanged(QToolBar* self, bool movable) {
 	self->movableChanged(movable);
 }
 
-void QToolBar_connect_movableChanged(QToolBar* self, intptr_t slot) {
-	VirtualQToolBar::connect(self, static_cast<void (QToolBar::*)(bool)>(&QToolBar::movableChanged), self, [=](bool movable) {
-		bool sigval1 = movable;
-		miqt_exec_callback_QToolBar_movableChanged(slot, sigval1);
-	});
+void QToolBar_connect_movableChanged(QToolBar* self, intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t, bool);
+		void operator()(bool movable) {
+			bool sigval1 = movable;
+			callback(slot, sigval1);
+		}
+	};
+	VirtualQToolBar::connect(self, static_cast<void (QToolBar::*)(bool)>(&QToolBar::movableChanged), self, local_caller{slot, callback, release});
 }
 
 void QToolBar_allowedAreasChanged(QToolBar* self, int allowedAreas) {
 	self->allowedAreasChanged(static_cast<Qt::ToolBarAreas>(allowedAreas));
 }
 
-void QToolBar_connect_allowedAreasChanged(QToolBar* self, intptr_t slot) {
-	VirtualQToolBar::connect(self, static_cast<void (QToolBar::*)(Qt::ToolBarAreas)>(&QToolBar::allowedAreasChanged), self, [=](Qt::ToolBarAreas allowedAreas) {
-		Qt::ToolBarAreas allowedAreas_ret = allowedAreas;
-		int sigval1 = static_cast<int>(allowedAreas_ret);
-		miqt_exec_callback_QToolBar_allowedAreasChanged(slot, sigval1);
-	});
+void QToolBar_connect_allowedAreasChanged(QToolBar* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t, int);
+		void operator()(Qt::ToolBarAreas allowedAreas) {
+			Qt::ToolBarAreas allowedAreas_ret = allowedAreas;
+			int sigval1 = static_cast<int>(allowedAreas_ret);
+			callback(slot, sigval1);
+		}
+	};
+	VirtualQToolBar::connect(self, static_cast<void (QToolBar::*)(Qt::ToolBarAreas)>(&QToolBar::allowedAreasChanged), self, local_caller{slot, callback, release});
 }
 
 void QToolBar_orientationChanged(QToolBar* self, int orientation) {
 	self->orientationChanged(static_cast<Qt::Orientation>(orientation));
 }
 
-void QToolBar_connect_orientationChanged(QToolBar* self, intptr_t slot) {
-	VirtualQToolBar::connect(self, static_cast<void (QToolBar::*)(Qt::Orientation)>(&QToolBar::orientationChanged), self, [=](Qt::Orientation orientation) {
-		Qt::Orientation orientation_ret = orientation;
-		int sigval1 = static_cast<int>(orientation_ret);
-		miqt_exec_callback_QToolBar_orientationChanged(slot, sigval1);
-	});
+void QToolBar_connect_orientationChanged(QToolBar* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t, int);
+		void operator()(Qt::Orientation orientation) {
+			Qt::Orientation orientation_ret = orientation;
+			int sigval1 = static_cast<int>(orientation_ret);
+			callback(slot, sigval1);
+		}
+	};
+	VirtualQToolBar::connect(self, static_cast<void (QToolBar::*)(Qt::Orientation)>(&QToolBar::orientationChanged), self, local_caller{slot, callback, release});
 }
 
 void QToolBar_iconSizeChanged(QToolBar* self, QSize* iconSize) {
 	self->iconSizeChanged(*iconSize);
 }
 
-void QToolBar_connect_iconSizeChanged(QToolBar* self, intptr_t slot) {
-	VirtualQToolBar::connect(self, static_cast<void (QToolBar::*)(const QSize&)>(&QToolBar::iconSizeChanged), self, [=](const QSize& iconSize) {
-		const QSize& iconSize_ret = iconSize;
-		// Cast returned reference into pointer
-		QSize* sigval1 = const_cast<QSize*>(&iconSize_ret);
-		miqt_exec_callback_QToolBar_iconSizeChanged(slot, sigval1);
-	});
+void QToolBar_connect_iconSizeChanged(QToolBar* self, intptr_t slot, void (*callback)(intptr_t, QSize*), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QSize*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t, QSize*);
+		void operator()(const QSize& iconSize) {
+			const QSize& iconSize_ret = iconSize;
+			// Cast returned reference into pointer
+			QSize* sigval1 = const_cast<QSize*>(&iconSize_ret);
+			callback(slot, sigval1);
+		}
+	};
+	VirtualQToolBar::connect(self, static_cast<void (QToolBar::*)(const QSize&)>(&QToolBar::iconSizeChanged), self, local_caller{slot, callback, release});
 }
 
 void QToolBar_toolButtonStyleChanged(QToolBar* self, int toolButtonStyle) {
 	self->toolButtonStyleChanged(static_cast<Qt::ToolButtonStyle>(toolButtonStyle));
 }
 
-void QToolBar_connect_toolButtonStyleChanged(QToolBar* self, intptr_t slot) {
-	VirtualQToolBar::connect(self, static_cast<void (QToolBar::*)(Qt::ToolButtonStyle)>(&QToolBar::toolButtonStyleChanged), self, [=](Qt::ToolButtonStyle toolButtonStyle) {
-		Qt::ToolButtonStyle toolButtonStyle_ret = toolButtonStyle;
-		int sigval1 = static_cast<int>(toolButtonStyle_ret);
-		miqt_exec_callback_QToolBar_toolButtonStyleChanged(slot, sigval1);
-	});
+void QToolBar_connect_toolButtonStyleChanged(QToolBar* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t, int);
+		void operator()(Qt::ToolButtonStyle toolButtonStyle) {
+			Qt::ToolButtonStyle toolButtonStyle_ret = toolButtonStyle;
+			int sigval1 = static_cast<int>(toolButtonStyle_ret);
+			callback(slot, sigval1);
+		}
+	};
+	VirtualQToolBar::connect(self, static_cast<void (QToolBar::*)(Qt::ToolButtonStyle)>(&QToolBar::toolButtonStyleChanged), self, local_caller{slot, callback, release});
 }
 
 void QToolBar_topLevelChanged(QToolBar* self, bool topLevel) {
 	self->topLevelChanged(topLevel);
 }
 
-void QToolBar_connect_topLevelChanged(QToolBar* self, intptr_t slot) {
-	VirtualQToolBar::connect(self, static_cast<void (QToolBar::*)(bool)>(&QToolBar::topLevelChanged), self, [=](bool topLevel) {
-		bool sigval1 = topLevel;
-		miqt_exec_callback_QToolBar_topLevelChanged(slot, sigval1);
-	});
+void QToolBar_connect_topLevelChanged(QToolBar* self, intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t, bool);
+		void operator()(bool topLevel) {
+			bool sigval1 = topLevel;
+			callback(slot, sigval1);
+		}
+	};
+	VirtualQToolBar::connect(self, static_cast<void (QToolBar::*)(bool)>(&QToolBar::topLevelChanged), self, local_caller{slot, callback, release});
 }
 
 void QToolBar_visibilityChanged(QToolBar* self, bool visible) {
 	self->visibilityChanged(visible);
 }
 
-void QToolBar_connect_visibilityChanged(QToolBar* self, intptr_t slot) {
-	VirtualQToolBar::connect(self, static_cast<void (QToolBar::*)(bool)>(&QToolBar::visibilityChanged), self, [=](bool visible) {
-		bool sigval1 = visible;
-		miqt_exec_callback_QToolBar_visibilityChanged(slot, sigval1);
-	});
+void QToolBar_connect_visibilityChanged(QToolBar* self, intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t, bool);
+		void operator()(bool visible) {
+			bool sigval1 = visible;
+			callback(slot, sigval1);
+		}
+	};
+	VirtualQToolBar::connect(self, static_cast<void (QToolBar::*)(bool)>(&QToolBar::visibilityChanged), self, local_caller{slot, callback, release});
 }
 
 struct miqt_string QToolBar_tr2(const char* s, const char* c) {

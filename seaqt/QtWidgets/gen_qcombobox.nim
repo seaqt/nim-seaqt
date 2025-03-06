@@ -171,19 +171,19 @@ proc fcQComboBox_setEditText(self: pointer, text: struct_miqt_string): void {.im
 proc fcQComboBox_setCurrentIndex(self: pointer, index: cint): void {.importc: "QComboBox_setCurrentIndex".}
 proc fcQComboBox_setCurrentText(self: pointer, text: struct_miqt_string): void {.importc: "QComboBox_setCurrentText".}
 proc fcQComboBox_editTextChanged(self: pointer, param1: struct_miqt_string): void {.importc: "QComboBox_editTextChanged".}
-proc fcQComboBox_connect_editTextChanged(self: pointer, slot: int) {.importc: "QComboBox_connect_editTextChanged".}
+proc fcQComboBox_connect_editTextChanged(self: pointer, slot: int, callback: proc (slot: int, param1: struct_miqt_string) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QComboBox_connect_editTextChanged".}
 proc fcQComboBox_activated(self: pointer, index: cint): void {.importc: "QComboBox_activated".}
-proc fcQComboBox_connect_activated(self: pointer, slot: int) {.importc: "QComboBox_connect_activated".}
+proc fcQComboBox_connect_activated(self: pointer, slot: int, callback: proc (slot: int, index: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QComboBox_connect_activated".}
 proc fcQComboBox_textActivated(self: pointer, param1: struct_miqt_string): void {.importc: "QComboBox_textActivated".}
-proc fcQComboBox_connect_textActivated(self: pointer, slot: int) {.importc: "QComboBox_connect_textActivated".}
+proc fcQComboBox_connect_textActivated(self: pointer, slot: int, callback: proc (slot: int, param1: struct_miqt_string) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QComboBox_connect_textActivated".}
 proc fcQComboBox_highlighted(self: pointer, index: cint): void {.importc: "QComboBox_highlighted".}
-proc fcQComboBox_connect_highlighted(self: pointer, slot: int) {.importc: "QComboBox_connect_highlighted".}
+proc fcQComboBox_connect_highlighted(self: pointer, slot: int, callback: proc (slot: int, index: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QComboBox_connect_highlighted".}
 proc fcQComboBox_textHighlighted(self: pointer, param1: struct_miqt_string): void {.importc: "QComboBox_textHighlighted".}
-proc fcQComboBox_connect_textHighlighted(self: pointer, slot: int) {.importc: "QComboBox_connect_textHighlighted".}
+proc fcQComboBox_connect_textHighlighted(self: pointer, slot: int, callback: proc (slot: int, param1: struct_miqt_string) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QComboBox_connect_textHighlighted".}
 proc fcQComboBox_currentIndexChanged(self: pointer, index: cint): void {.importc: "QComboBox_currentIndexChanged".}
-proc fcQComboBox_connect_currentIndexChanged(self: pointer, slot: int) {.importc: "QComboBox_connect_currentIndexChanged".}
+proc fcQComboBox_connect_currentIndexChanged(self: pointer, slot: int, callback: proc (slot: int, index: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QComboBox_connect_currentIndexChanged".}
 proc fcQComboBox_currentTextChanged(self: pointer, param1: struct_miqt_string): void {.importc: "QComboBox_currentTextChanged".}
-proc fcQComboBox_connect_currentTextChanged(self: pointer, slot: int) {.importc: "QComboBox_connect_currentTextChanged".}
+proc fcQComboBox_connect_currentTextChanged(self: pointer, slot: int, callback: proc (slot: int, param1: struct_miqt_string) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QComboBox_connect_currentTextChanged".}
 proc fcQComboBox_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QComboBox_tr2".}
 proc fcQComboBox_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QComboBox_tr3".}
 proc fcQComboBox_findText2(self: pointer, text: struct_miqt_string, flags: cint): cint {.importc: "QComboBox_findText2".}
@@ -551,7 +551,7 @@ proc editTextChanged*(self: gen_qcombobox_types.QComboBox, param1: string): void
   fcQComboBox_editTextChanged(self.h, struct_miqt_string(data: param1, len: csize_t(len(param1))))
 
 type QComboBoxeditTextChangedSlot* = proc(param1: string)
-proc miqt_exec_callback_cQComboBox_editTextChanged(slot: int, param1: struct_miqt_string) {.exportc: "miqt_exec_callback_QComboBox_editTextChanged".} =
+proc miqt_exec_callback_cQComboBox_editTextChanged(slot: int, param1: struct_miqt_string) {.cdecl.} =
   let nimfunc = cast[ptr QComboBoxeditTextChangedSlot](cast[pointer](slot))
   let vparam1_ms = param1
   let vparam1x_ret = string.fromBytes(toOpenArrayByte(vparam1_ms.data, 0, int(vparam1_ms.len)-1))
@@ -560,33 +560,41 @@ proc miqt_exec_callback_cQComboBox_editTextChanged(slot: int, param1: struct_miq
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQComboBox_editTextChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QComboBoxeditTextChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc oneditTextChanged*(self: gen_qcombobox_types.QComboBox, slot: QComboBoxeditTextChangedSlot) =
   var tmp = new QComboBoxeditTextChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQComboBox_connect_editTextChanged(self.h, cast[int](addr tmp[]))
+  fcQComboBox_connect_editTextChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQComboBox_editTextChanged, miqt_exec_callback_cQComboBox_editTextChanged_release)
 
 proc activated*(self: gen_qcombobox_types.QComboBox, index: cint): void =
   fcQComboBox_activated(self.h, index)
 
 type QComboBoxactivatedSlot* = proc(index: cint)
-proc miqt_exec_callback_cQComboBox_activated(slot: int, index: cint) {.exportc: "miqt_exec_callback_QComboBox_activated".} =
+proc miqt_exec_callback_cQComboBox_activated(slot: int, index: cint) {.cdecl.} =
   let nimfunc = cast[ptr QComboBoxactivatedSlot](cast[pointer](slot))
   let slotval1 = index
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQComboBox_activated_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QComboBoxactivatedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onactivated*(self: gen_qcombobox_types.QComboBox, slot: QComboBoxactivatedSlot) =
   var tmp = new QComboBoxactivatedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQComboBox_connect_activated(self.h, cast[int](addr tmp[]))
+  fcQComboBox_connect_activated(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQComboBox_activated, miqt_exec_callback_cQComboBox_activated_release)
 
 proc textActivated*(self: gen_qcombobox_types.QComboBox, param1: string): void =
   fcQComboBox_textActivated(self.h, struct_miqt_string(data: param1, len: csize_t(len(param1))))
 
 type QComboBoxtextActivatedSlot* = proc(param1: string)
-proc miqt_exec_callback_cQComboBox_textActivated(slot: int, param1: struct_miqt_string) {.exportc: "miqt_exec_callback_QComboBox_textActivated".} =
+proc miqt_exec_callback_cQComboBox_textActivated(slot: int, param1: struct_miqt_string) {.cdecl.} =
   let nimfunc = cast[ptr QComboBoxtextActivatedSlot](cast[pointer](slot))
   let vparam1_ms = param1
   let vparam1x_ret = string.fromBytes(toOpenArrayByte(vparam1_ms.data, 0, int(vparam1_ms.len)-1))
@@ -595,33 +603,41 @@ proc miqt_exec_callback_cQComboBox_textActivated(slot: int, param1: struct_miqt_
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQComboBox_textActivated_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QComboBoxtextActivatedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc ontextActivated*(self: gen_qcombobox_types.QComboBox, slot: QComboBoxtextActivatedSlot) =
   var tmp = new QComboBoxtextActivatedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQComboBox_connect_textActivated(self.h, cast[int](addr tmp[]))
+  fcQComboBox_connect_textActivated(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQComboBox_textActivated, miqt_exec_callback_cQComboBox_textActivated_release)
 
 proc highlighted*(self: gen_qcombobox_types.QComboBox, index: cint): void =
   fcQComboBox_highlighted(self.h, index)
 
 type QComboBoxhighlightedSlot* = proc(index: cint)
-proc miqt_exec_callback_cQComboBox_highlighted(slot: int, index: cint) {.exportc: "miqt_exec_callback_QComboBox_highlighted".} =
+proc miqt_exec_callback_cQComboBox_highlighted(slot: int, index: cint) {.cdecl.} =
   let nimfunc = cast[ptr QComboBoxhighlightedSlot](cast[pointer](slot))
   let slotval1 = index
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQComboBox_highlighted_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QComboBoxhighlightedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onhighlighted*(self: gen_qcombobox_types.QComboBox, slot: QComboBoxhighlightedSlot) =
   var tmp = new QComboBoxhighlightedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQComboBox_connect_highlighted(self.h, cast[int](addr tmp[]))
+  fcQComboBox_connect_highlighted(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQComboBox_highlighted, miqt_exec_callback_cQComboBox_highlighted_release)
 
 proc textHighlighted*(self: gen_qcombobox_types.QComboBox, param1: string): void =
   fcQComboBox_textHighlighted(self.h, struct_miqt_string(data: param1, len: csize_t(len(param1))))
 
 type QComboBoxtextHighlightedSlot* = proc(param1: string)
-proc miqt_exec_callback_cQComboBox_textHighlighted(slot: int, param1: struct_miqt_string) {.exportc: "miqt_exec_callback_QComboBox_textHighlighted".} =
+proc miqt_exec_callback_cQComboBox_textHighlighted(slot: int, param1: struct_miqt_string) {.cdecl.} =
   let nimfunc = cast[ptr QComboBoxtextHighlightedSlot](cast[pointer](slot))
   let vparam1_ms = param1
   let vparam1x_ret = string.fromBytes(toOpenArrayByte(vparam1_ms.data, 0, int(vparam1_ms.len)-1))
@@ -630,33 +646,41 @@ proc miqt_exec_callback_cQComboBox_textHighlighted(slot: int, param1: struct_miq
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQComboBox_textHighlighted_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QComboBoxtextHighlightedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc ontextHighlighted*(self: gen_qcombobox_types.QComboBox, slot: QComboBoxtextHighlightedSlot) =
   var tmp = new QComboBoxtextHighlightedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQComboBox_connect_textHighlighted(self.h, cast[int](addr tmp[]))
+  fcQComboBox_connect_textHighlighted(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQComboBox_textHighlighted, miqt_exec_callback_cQComboBox_textHighlighted_release)
 
 proc currentIndexChanged*(self: gen_qcombobox_types.QComboBox, index: cint): void =
   fcQComboBox_currentIndexChanged(self.h, index)
 
 type QComboBoxcurrentIndexChangedSlot* = proc(index: cint)
-proc miqt_exec_callback_cQComboBox_currentIndexChanged(slot: int, index: cint) {.exportc: "miqt_exec_callback_QComboBox_currentIndexChanged".} =
+proc miqt_exec_callback_cQComboBox_currentIndexChanged(slot: int, index: cint) {.cdecl.} =
   let nimfunc = cast[ptr QComboBoxcurrentIndexChangedSlot](cast[pointer](slot))
   let slotval1 = index
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQComboBox_currentIndexChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QComboBoxcurrentIndexChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc oncurrentIndexChanged*(self: gen_qcombobox_types.QComboBox, slot: QComboBoxcurrentIndexChangedSlot) =
   var tmp = new QComboBoxcurrentIndexChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQComboBox_connect_currentIndexChanged(self.h, cast[int](addr tmp[]))
+  fcQComboBox_connect_currentIndexChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQComboBox_currentIndexChanged, miqt_exec_callback_cQComboBox_currentIndexChanged_release)
 
 proc currentTextChanged*(self: gen_qcombobox_types.QComboBox, param1: string): void =
   fcQComboBox_currentTextChanged(self.h, struct_miqt_string(data: param1, len: csize_t(len(param1))))
 
 type QComboBoxcurrentTextChangedSlot* = proc(param1: string)
-proc miqt_exec_callback_cQComboBox_currentTextChanged(slot: int, param1: struct_miqt_string) {.exportc: "miqt_exec_callback_QComboBox_currentTextChanged".} =
+proc miqt_exec_callback_cQComboBox_currentTextChanged(slot: int, param1: struct_miqt_string) {.cdecl.} =
   let nimfunc = cast[ptr QComboBoxcurrentTextChangedSlot](cast[pointer](slot))
   let vparam1_ms = param1
   let vparam1x_ret = string.fromBytes(toOpenArrayByte(vparam1_ms.data, 0, int(vparam1_ms.len)-1))
@@ -665,11 +689,15 @@ proc miqt_exec_callback_cQComboBox_currentTextChanged(slot: int, param1: struct_
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQComboBox_currentTextChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QComboBoxcurrentTextChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc oncurrentTextChanged*(self: gen_qcombobox_types.QComboBox, slot: QComboBoxcurrentTextChangedSlot) =
   var tmp = new QComboBoxcurrentTextChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQComboBox_connect_currentTextChanged(self.h, cast[int](addr tmp[]))
+  fcQComboBox_connect_currentTextChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQComboBox_currentTextChanged, miqt_exec_callback_cQComboBox_currentTextChanged_release)
 
 proc tr*(_: type gen_qcombobox_types.QComboBox, s: cstring, c: cstring): string =
   let v_ms = fcQComboBox_tr2(s, c)

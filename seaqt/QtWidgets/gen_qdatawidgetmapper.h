@@ -88,7 +88,7 @@ void QDataWidgetMapper_toPrevious(QDataWidgetMapper* self);
 void QDataWidgetMapper_setCurrentIndex(QDataWidgetMapper* self, int index);
 void QDataWidgetMapper_setCurrentModelIndex(QDataWidgetMapper* self, QModelIndex* index);
 void QDataWidgetMapper_currentIndexChanged(QDataWidgetMapper* self, int index);
-void QDataWidgetMapper_connect_currentIndexChanged(QDataWidgetMapper* self, intptr_t slot);
+void QDataWidgetMapper_connect_currentIndexChanged(QDataWidgetMapper* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t));
 struct miqt_string QDataWidgetMapper_tr2(const char* s, const char* c);
 struct miqt_string QDataWidgetMapper_tr3(const char* s, const char* c, int n);
 QMetaObject* QDataWidgetMapper_virtualbase_metaObject(const void* self);

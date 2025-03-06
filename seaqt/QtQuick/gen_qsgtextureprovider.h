@@ -35,7 +35,7 @@ int QSGTextureProvider_metacall(QSGTextureProvider* self, int param1, int param2
 struct miqt_string QSGTextureProvider_tr(const char* s);
 QSGTexture* QSGTextureProvider_texture(const QSGTextureProvider* self);
 void QSGTextureProvider_textureChanged(QSGTextureProvider* self);
-void QSGTextureProvider_connect_textureChanged(QSGTextureProvider* self, intptr_t slot);
+void QSGTextureProvider_connect_textureChanged(QSGTextureProvider* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t));
 struct miqt_string QSGTextureProvider_tr2(const char* s, const char* c);
 struct miqt_string QSGTextureProvider_tr3(const char* s, const char* c, int n);
 const QMetaObject* QSGTextureProvider_staticMetaObject();

@@ -19,15 +19,6 @@
 extern "C" {
 #endif
 
-void miqt_exec_callback_QAudioDecoder_bufferAvailableChanged(intptr_t, bool);
-void miqt_exec_callback_QAudioDecoder_bufferReady(intptr_t);
-void miqt_exec_callback_QAudioDecoder_finished(intptr_t);
-void miqt_exec_callback_QAudioDecoder_isDecodingChanged(intptr_t, bool);
-void miqt_exec_callback_QAudioDecoder_formatChanged(intptr_t, QAudioFormat*);
-void miqt_exec_callback_QAudioDecoder_errorWithError(intptr_t, int);
-void miqt_exec_callback_QAudioDecoder_sourceChanged(intptr_t);
-void miqt_exec_callback_QAudioDecoder_positionChanged(intptr_t, long long);
-void miqt_exec_callback_QAudioDecoder_durationChanged(intptr_t, long long);
 #ifdef __cplusplus
 } /* extern C */
 #endif
@@ -318,101 +309,146 @@ void QAudioDecoder_bufferAvailableChanged(QAudioDecoder* self, bool param1) {
 	self->bufferAvailableChanged(param1);
 }
 
-void QAudioDecoder_connect_bufferAvailableChanged(QAudioDecoder* self, intptr_t slot) {
-	VirtualQAudioDecoder::connect(self, static_cast<void (QAudioDecoder::*)(bool)>(&QAudioDecoder::bufferAvailableChanged), self, [=](bool param1) {
-		bool sigval1 = param1;
-		miqt_exec_callback_QAudioDecoder_bufferAvailableChanged(slot, sigval1);
-	});
+void QAudioDecoder_connect_bufferAvailableChanged(QAudioDecoder* self, intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t, bool);
+		void operator()(bool param1) {
+			bool sigval1 = param1;
+			callback(slot, sigval1);
+		}
+	};
+	VirtualQAudioDecoder::connect(self, static_cast<void (QAudioDecoder::*)(bool)>(&QAudioDecoder::bufferAvailableChanged), self, local_caller{slot, callback, release});
 }
 
 void QAudioDecoder_bufferReady(QAudioDecoder* self) {
 	self->bufferReady();
 }
 
-void QAudioDecoder_connect_bufferReady(QAudioDecoder* self, intptr_t slot) {
-	VirtualQAudioDecoder::connect(self, static_cast<void (QAudioDecoder::*)()>(&QAudioDecoder::bufferReady), self, [=]() {
-		miqt_exec_callback_QAudioDecoder_bufferReady(slot);
-	});
+void QAudioDecoder_connect_bufferReady(QAudioDecoder* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t);
+		void operator()() {
+			callback(slot);
+		}
+	};
+	VirtualQAudioDecoder::connect(self, static_cast<void (QAudioDecoder::*)()>(&QAudioDecoder::bufferReady), self, local_caller{slot, callback, release});
 }
 
 void QAudioDecoder_finished(QAudioDecoder* self) {
 	self->finished();
 }
 
-void QAudioDecoder_connect_finished(QAudioDecoder* self, intptr_t slot) {
-	VirtualQAudioDecoder::connect(self, static_cast<void (QAudioDecoder::*)()>(&QAudioDecoder::finished), self, [=]() {
-		miqt_exec_callback_QAudioDecoder_finished(slot);
-	});
+void QAudioDecoder_connect_finished(QAudioDecoder* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t);
+		void operator()() {
+			callback(slot);
+		}
+	};
+	VirtualQAudioDecoder::connect(self, static_cast<void (QAudioDecoder::*)()>(&QAudioDecoder::finished), self, local_caller{slot, callback, release});
 }
 
 void QAudioDecoder_isDecodingChanged(QAudioDecoder* self, bool param1) {
 	self->isDecodingChanged(param1);
 }
 
-void QAudioDecoder_connect_isDecodingChanged(QAudioDecoder* self, intptr_t slot) {
-	VirtualQAudioDecoder::connect(self, static_cast<void (QAudioDecoder::*)(bool)>(&QAudioDecoder::isDecodingChanged), self, [=](bool param1) {
-		bool sigval1 = param1;
-		miqt_exec_callback_QAudioDecoder_isDecodingChanged(slot, sigval1);
-	});
+void QAudioDecoder_connect_isDecodingChanged(QAudioDecoder* self, intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t, bool);
+		void operator()(bool param1) {
+			bool sigval1 = param1;
+			callback(slot, sigval1);
+		}
+	};
+	VirtualQAudioDecoder::connect(self, static_cast<void (QAudioDecoder::*)(bool)>(&QAudioDecoder::isDecodingChanged), self, local_caller{slot, callback, release});
 }
 
 void QAudioDecoder_formatChanged(QAudioDecoder* self, QAudioFormat* format) {
 	self->formatChanged(*format);
 }
 
-void QAudioDecoder_connect_formatChanged(QAudioDecoder* self, intptr_t slot) {
-	VirtualQAudioDecoder::connect(self, static_cast<void (QAudioDecoder::*)(const QAudioFormat&)>(&QAudioDecoder::formatChanged), self, [=](const QAudioFormat& format) {
-		const QAudioFormat& format_ret = format;
-		// Cast returned reference into pointer
-		QAudioFormat* sigval1 = const_cast<QAudioFormat*>(&format_ret);
-		miqt_exec_callback_QAudioDecoder_formatChanged(slot, sigval1);
-	});
+void QAudioDecoder_connect_formatChanged(QAudioDecoder* self, intptr_t slot, void (*callback)(intptr_t, QAudioFormat*), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QAudioFormat*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t, QAudioFormat*);
+		void operator()(const QAudioFormat& format) {
+			const QAudioFormat& format_ret = format;
+			// Cast returned reference into pointer
+			QAudioFormat* sigval1 = const_cast<QAudioFormat*>(&format_ret);
+			callback(slot, sigval1);
+		}
+	};
+	VirtualQAudioDecoder::connect(self, static_cast<void (QAudioDecoder::*)(const QAudioFormat&)>(&QAudioDecoder::formatChanged), self, local_caller{slot, callback, release});
 }
 
 void QAudioDecoder_errorWithError(QAudioDecoder* self, int error) {
 	self->error(static_cast<QAudioDecoder::Error>(error));
 }
 
-void QAudioDecoder_connect_errorWithError(QAudioDecoder* self, intptr_t slot) {
-	VirtualQAudioDecoder::connect(self, static_cast<void (QAudioDecoder::*)(QAudioDecoder::Error)>(&QAudioDecoder::error), self, [=](QAudioDecoder::Error error) {
-		QAudioDecoder::Error error_ret = error;
-		int sigval1 = static_cast<int>(error_ret);
-		miqt_exec_callback_QAudioDecoder_errorWithError(slot, sigval1);
-	});
+void QAudioDecoder_connect_errorWithError(QAudioDecoder* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t, int);
+		void operator()(QAudioDecoder::Error error) {
+			QAudioDecoder::Error error_ret = error;
+			int sigval1 = static_cast<int>(error_ret);
+			callback(slot, sigval1);
+		}
+	};
+	VirtualQAudioDecoder::connect(self, static_cast<void (QAudioDecoder::*)(QAudioDecoder::Error)>(&QAudioDecoder::error), self, local_caller{slot, callback, release});
 }
 
 void QAudioDecoder_sourceChanged(QAudioDecoder* self) {
 	self->sourceChanged();
 }
 
-void QAudioDecoder_connect_sourceChanged(QAudioDecoder* self, intptr_t slot) {
-	VirtualQAudioDecoder::connect(self, static_cast<void (QAudioDecoder::*)()>(&QAudioDecoder::sourceChanged), self, [=]() {
-		miqt_exec_callback_QAudioDecoder_sourceChanged(slot);
-	});
+void QAudioDecoder_connect_sourceChanged(QAudioDecoder* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t);
+		void operator()() {
+			callback(slot);
+		}
+	};
+	VirtualQAudioDecoder::connect(self, static_cast<void (QAudioDecoder::*)()>(&QAudioDecoder::sourceChanged), self, local_caller{slot, callback, release});
 }
 
 void QAudioDecoder_positionChanged(QAudioDecoder* self, long long position) {
 	self->positionChanged(static_cast<qint64>(position));
 }
 
-void QAudioDecoder_connect_positionChanged(QAudioDecoder* self, intptr_t slot) {
-	VirtualQAudioDecoder::connect(self, static_cast<void (QAudioDecoder::*)(qint64)>(&QAudioDecoder::positionChanged), self, [=](qint64 position) {
-		qint64 position_ret = position;
-		long long sigval1 = static_cast<long long>(position_ret);
-		miqt_exec_callback_QAudioDecoder_positionChanged(slot, sigval1);
-	});
+void QAudioDecoder_connect_positionChanged(QAudioDecoder* self, intptr_t slot, void (*callback)(intptr_t, long long), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, long long), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t, long long);
+		void operator()(qint64 position) {
+			qint64 position_ret = position;
+			long long sigval1 = static_cast<long long>(position_ret);
+			callback(slot, sigval1);
+		}
+	};
+	VirtualQAudioDecoder::connect(self, static_cast<void (QAudioDecoder::*)(qint64)>(&QAudioDecoder::positionChanged), self, local_caller{slot, callback, release});
 }
 
 void QAudioDecoder_durationChanged(QAudioDecoder* self, long long duration) {
 	self->durationChanged(static_cast<qint64>(duration));
 }
 
-void QAudioDecoder_connect_durationChanged(QAudioDecoder* self, intptr_t slot) {
-	VirtualQAudioDecoder::connect(self, static_cast<void (QAudioDecoder::*)(qint64)>(&QAudioDecoder::durationChanged), self, [=](qint64 duration) {
-		qint64 duration_ret = duration;
-		long long sigval1 = static_cast<long long>(duration_ret);
-		miqt_exec_callback_QAudioDecoder_durationChanged(slot, sigval1);
-	});
+void QAudioDecoder_connect_durationChanged(QAudioDecoder* self, intptr_t slot, void (*callback)(intptr_t, long long), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, long long), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t, long long);
+		void operator()(qint64 duration) {
+			qint64 duration_ret = duration;
+			long long sigval1 = static_cast<long long>(duration_ret);
+			callback(slot, sigval1);
+		}
+	};
+	VirtualQAudioDecoder::connect(self, static_cast<void (QAudioDecoder::*)(qint64)>(&QAudioDecoder::durationChanged), self, local_caller{slot, callback, release});
 }
 
 struct miqt_string QAudioDecoder_tr2(const char* s, const char* c) {

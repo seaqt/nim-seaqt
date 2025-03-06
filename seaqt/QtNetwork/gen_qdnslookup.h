@@ -136,13 +136,13 @@ struct miqt_array /* of QDnsTextRecord* */  QDnsLookup_textRecords(const QDnsLoo
 void QDnsLookup_abort(QDnsLookup* self);
 void QDnsLookup_lookup(QDnsLookup* self);
 void QDnsLookup_finished(QDnsLookup* self);
-void QDnsLookup_connect_finished(QDnsLookup* self, intptr_t slot);
+void QDnsLookup_connect_finished(QDnsLookup* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t));
 void QDnsLookup_nameChanged(QDnsLookup* self, struct miqt_string name);
-void QDnsLookup_connect_nameChanged(QDnsLookup* self, intptr_t slot);
+void QDnsLookup_connect_nameChanged(QDnsLookup* self, intptr_t slot, void (*callback)(intptr_t, struct miqt_string), void (*release)(intptr_t));
 void QDnsLookup_typeChanged(QDnsLookup* self, int type);
-void QDnsLookup_connect_typeChanged(QDnsLookup* self, intptr_t slot);
+void QDnsLookup_connect_typeChanged(QDnsLookup* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t));
 void QDnsLookup_nameserverChanged(QDnsLookup* self, QHostAddress* nameserver);
-void QDnsLookup_connect_nameserverChanged(QDnsLookup* self, intptr_t slot);
+void QDnsLookup_connect_nameserverChanged(QDnsLookup* self, intptr_t slot, void (*callback)(intptr_t, QHostAddress*), void (*release)(intptr_t));
 struct miqt_string QDnsLookup_tr2(const char* s, const char* c);
 struct miqt_string QDnsLookup_tr3(const char* s, const char* c, int n);
 QMetaObject* QDnsLookup_virtualbase_metaObject(const void* self);

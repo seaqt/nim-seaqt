@@ -92,7 +92,7 @@ proc fcQDataWidgetMapper_toPrevious(self: pointer, ): void {.importc: "QDataWidg
 proc fcQDataWidgetMapper_setCurrentIndex(self: pointer, index: cint): void {.importc: "QDataWidgetMapper_setCurrentIndex".}
 proc fcQDataWidgetMapper_setCurrentModelIndex(self: pointer, index: pointer): void {.importc: "QDataWidgetMapper_setCurrentModelIndex".}
 proc fcQDataWidgetMapper_currentIndexChanged(self: pointer, index: cint): void {.importc: "QDataWidgetMapper_currentIndexChanged".}
-proc fcQDataWidgetMapper_connect_currentIndexChanged(self: pointer, slot: int) {.importc: "QDataWidgetMapper_connect_currentIndexChanged".}
+proc fcQDataWidgetMapper_connect_currentIndexChanged(self: pointer, slot: int, callback: proc (slot: int, index: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QDataWidgetMapper_connect_currentIndexChanged".}
 proc fcQDataWidgetMapper_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QDataWidgetMapper_tr2".}
 proc fcQDataWidgetMapper_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QDataWidgetMapper_tr3".}
 type cQDataWidgetMapperVTable = object
@@ -224,17 +224,21 @@ proc currentIndexChanged*(self: gen_qdatawidgetmapper_types.QDataWidgetMapper, i
   fcQDataWidgetMapper_currentIndexChanged(self.h, index)
 
 type QDataWidgetMappercurrentIndexChangedSlot* = proc(index: cint)
-proc miqt_exec_callback_cQDataWidgetMapper_currentIndexChanged(slot: int, index: cint) {.exportc: "miqt_exec_callback_QDataWidgetMapper_currentIndexChanged".} =
+proc miqt_exec_callback_cQDataWidgetMapper_currentIndexChanged(slot: int, index: cint) {.cdecl.} =
   let nimfunc = cast[ptr QDataWidgetMappercurrentIndexChangedSlot](cast[pointer](slot))
   let slotval1 = index
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQDataWidgetMapper_currentIndexChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QDataWidgetMappercurrentIndexChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc oncurrentIndexChanged*(self: gen_qdatawidgetmapper_types.QDataWidgetMapper, slot: QDataWidgetMappercurrentIndexChangedSlot) =
   var tmp = new QDataWidgetMappercurrentIndexChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQDataWidgetMapper_connect_currentIndexChanged(self.h, cast[int](addr tmp[]))
+  fcQDataWidgetMapper_connect_currentIndexChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQDataWidgetMapper_currentIndexChanged, miqt_exec_callback_cQDataWidgetMapper_currentIndexChanged_release)
 
 proc tr*(_: type gen_qdatawidgetmapper_types.QDataWidgetMapper, s: cstring, c: cstring): string =
   let v_ms = fcQDataWidgetMapper_tr2(s, c)

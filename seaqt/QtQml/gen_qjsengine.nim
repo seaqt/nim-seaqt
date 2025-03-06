@@ -92,7 +92,7 @@ proc fcQJSEngine_catchError(self: pointer, ): pointer {.importc: "QJSEngine_catc
 proc fcQJSEngine_uiLanguage(self: pointer, ): struct_miqt_string {.importc: "QJSEngine_uiLanguage".}
 proc fcQJSEngine_setUiLanguage(self: pointer, language: struct_miqt_string): void {.importc: "QJSEngine_setUiLanguage".}
 proc fcQJSEngine_uiLanguageChanged(self: pointer, ): void {.importc: "QJSEngine_uiLanguageChanged".}
-proc fcQJSEngine_connect_uiLanguageChanged(self: pointer, slot: int) {.importc: "QJSEngine_connect_uiLanguageChanged".}
+proc fcQJSEngine_connect_uiLanguageChanged(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QJSEngine_connect_uiLanguageChanged".}
 proc fcQJSEngine_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QJSEngine_tr2".}
 proc fcQJSEngine_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QJSEngine_tr3".}
 proc fcQJSEngine_evaluate2(self: pointer, program: struct_miqt_string, fileName: struct_miqt_string): pointer {.importc: "QJSEngine_evaluate2".}
@@ -220,15 +220,19 @@ proc uiLanguageChanged*(self: gen_qjsengine_types.QJSEngine, ): void =
   fcQJSEngine_uiLanguageChanged(self.h)
 
 type QJSEngineuiLanguageChangedSlot* = proc()
-proc miqt_exec_callback_cQJSEngine_uiLanguageChanged(slot: int) {.exportc: "miqt_exec_callback_QJSEngine_uiLanguageChanged".} =
+proc miqt_exec_callback_cQJSEngine_uiLanguageChanged(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QJSEngineuiLanguageChangedSlot](cast[pointer](slot))
   nimfunc[]()
+
+proc miqt_exec_callback_cQJSEngine_uiLanguageChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QJSEngineuiLanguageChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
 
 proc onuiLanguageChanged*(self: gen_qjsengine_types.QJSEngine, slot: QJSEngineuiLanguageChangedSlot) =
   var tmp = new QJSEngineuiLanguageChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQJSEngine_connect_uiLanguageChanged(self.h, cast[int](addr tmp[]))
+  fcQJSEngine_connect_uiLanguageChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQJSEngine_uiLanguageChanged, miqt_exec_callback_cQJSEngine_uiLanguageChanged_release)
 
 proc tr*(_: type gen_qjsengine_types.QJSEngine, s: cstring, c: cstring): string =
   let v_ms = fcQJSEngine_tr2(s, c)

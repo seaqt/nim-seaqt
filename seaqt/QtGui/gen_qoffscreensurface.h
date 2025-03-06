@@ -75,7 +75,7 @@ QSize* QOffscreenSurface_size(const QOffscreenSurface* self);
 QScreen* QOffscreenSurface_screen(const QOffscreenSurface* self);
 void QOffscreenSurface_setScreen(QOffscreenSurface* self, QScreen* screen);
 void QOffscreenSurface_screenChanged(QOffscreenSurface* self, QScreen* screen);
-void QOffscreenSurface_connect_screenChanged(QOffscreenSurface* self, intptr_t slot);
+void QOffscreenSurface_connect_screenChanged(QOffscreenSurface* self, intptr_t slot, void (*callback)(intptr_t, QScreen*), void (*release)(intptr_t));
 struct miqt_string QOffscreenSurface_tr2(const char* s, const char* c);
 struct miqt_string QOffscreenSurface_tr3(const char* s, const char* c, int n);
 QMetaObject* QOffscreenSurface_virtualbase_metaObject(const void* self);

@@ -21,11 +21,6 @@
 extern "C" {
 #endif
 
-void miqt_exec_callback_QItemSelectionModel_selectionChanged(intptr_t, QItemSelection*, QItemSelection*);
-void miqt_exec_callback_QItemSelectionModel_currentChanged(intptr_t, QModelIndex*, QModelIndex*);
-void miqt_exec_callback_QItemSelectionModel_currentRowChanged(intptr_t, QModelIndex*, QModelIndex*);
-void miqt_exec_callback_QItemSelectionModel_currentColumnChanged(intptr_t, QModelIndex*, QModelIndex*);
-void miqt_exec_callback_QItemSelectionModel_modelChanged(intptr_t, QAbstractItemModel*);
 #ifdef __cplusplus
 } /* extern C */
 #endif
@@ -571,75 +566,100 @@ void QItemSelectionModel_selectionChanged(QItemSelectionModel* self, QItemSelect
 	self->selectionChanged(*selected, *deselected);
 }
 
-void QItemSelectionModel_connect_selectionChanged(QItemSelectionModel* self, intptr_t slot) {
-	VirtualQItemSelectionModel::connect(self, static_cast<void (QItemSelectionModel::*)(const QItemSelection&, const QItemSelection&)>(&QItemSelectionModel::selectionChanged), self, [=](const QItemSelection& selected, const QItemSelection& deselected) {
-		const QItemSelection& selected_ret = selected;
-		// Cast returned reference into pointer
-		QItemSelection* sigval1 = const_cast<QItemSelection*>(&selected_ret);
-		const QItemSelection& deselected_ret = deselected;
-		// Cast returned reference into pointer
-		QItemSelection* sigval2 = const_cast<QItemSelection*>(&deselected_ret);
-		miqt_exec_callback_QItemSelectionModel_selectionChanged(slot, sigval1, sigval2);
-	});
+void QItemSelectionModel_connect_selectionChanged(QItemSelectionModel* self, intptr_t slot, void (*callback)(intptr_t, QItemSelection*, QItemSelection*), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QItemSelection*, QItemSelection*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t, QItemSelection*, QItemSelection*);
+		void operator()(const QItemSelection& selected, const QItemSelection& deselected) {
+			const QItemSelection& selected_ret = selected;
+			// Cast returned reference into pointer
+			QItemSelection* sigval1 = const_cast<QItemSelection*>(&selected_ret);
+			const QItemSelection& deselected_ret = deselected;
+			// Cast returned reference into pointer
+			QItemSelection* sigval2 = const_cast<QItemSelection*>(&deselected_ret);
+			callback(slot, sigval1, sigval2);
+		}
+	};
+	VirtualQItemSelectionModel::connect(self, static_cast<void (QItemSelectionModel::*)(const QItemSelection&, const QItemSelection&)>(&QItemSelectionModel::selectionChanged), self, local_caller{slot, callback, release});
 }
 
 void QItemSelectionModel_currentChanged(QItemSelectionModel* self, QModelIndex* current, QModelIndex* previous) {
 	self->currentChanged(*current, *previous);
 }
 
-void QItemSelectionModel_connect_currentChanged(QItemSelectionModel* self, intptr_t slot) {
-	VirtualQItemSelectionModel::connect(self, static_cast<void (QItemSelectionModel::*)(const QModelIndex&, const QModelIndex&)>(&QItemSelectionModel::currentChanged), self, [=](const QModelIndex& current, const QModelIndex& previous) {
-		const QModelIndex& current_ret = current;
-		// Cast returned reference into pointer
-		QModelIndex* sigval1 = const_cast<QModelIndex*>(&current_ret);
-		const QModelIndex& previous_ret = previous;
-		// Cast returned reference into pointer
-		QModelIndex* sigval2 = const_cast<QModelIndex*>(&previous_ret);
-		miqt_exec_callback_QItemSelectionModel_currentChanged(slot, sigval1, sigval2);
-	});
+void QItemSelectionModel_connect_currentChanged(QItemSelectionModel* self, intptr_t slot, void (*callback)(intptr_t, QModelIndex*, QModelIndex*), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QModelIndex*, QModelIndex*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t, QModelIndex*, QModelIndex*);
+		void operator()(const QModelIndex& current, const QModelIndex& previous) {
+			const QModelIndex& current_ret = current;
+			// Cast returned reference into pointer
+			QModelIndex* sigval1 = const_cast<QModelIndex*>(&current_ret);
+			const QModelIndex& previous_ret = previous;
+			// Cast returned reference into pointer
+			QModelIndex* sigval2 = const_cast<QModelIndex*>(&previous_ret);
+			callback(slot, sigval1, sigval2);
+		}
+	};
+	VirtualQItemSelectionModel::connect(self, static_cast<void (QItemSelectionModel::*)(const QModelIndex&, const QModelIndex&)>(&QItemSelectionModel::currentChanged), self, local_caller{slot, callback, release});
 }
 
 void QItemSelectionModel_currentRowChanged(QItemSelectionModel* self, QModelIndex* current, QModelIndex* previous) {
 	self->currentRowChanged(*current, *previous);
 }
 
-void QItemSelectionModel_connect_currentRowChanged(QItemSelectionModel* self, intptr_t slot) {
-	VirtualQItemSelectionModel::connect(self, static_cast<void (QItemSelectionModel::*)(const QModelIndex&, const QModelIndex&)>(&QItemSelectionModel::currentRowChanged), self, [=](const QModelIndex& current, const QModelIndex& previous) {
-		const QModelIndex& current_ret = current;
-		// Cast returned reference into pointer
-		QModelIndex* sigval1 = const_cast<QModelIndex*>(&current_ret);
-		const QModelIndex& previous_ret = previous;
-		// Cast returned reference into pointer
-		QModelIndex* sigval2 = const_cast<QModelIndex*>(&previous_ret);
-		miqt_exec_callback_QItemSelectionModel_currentRowChanged(slot, sigval1, sigval2);
-	});
+void QItemSelectionModel_connect_currentRowChanged(QItemSelectionModel* self, intptr_t slot, void (*callback)(intptr_t, QModelIndex*, QModelIndex*), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QModelIndex*, QModelIndex*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t, QModelIndex*, QModelIndex*);
+		void operator()(const QModelIndex& current, const QModelIndex& previous) {
+			const QModelIndex& current_ret = current;
+			// Cast returned reference into pointer
+			QModelIndex* sigval1 = const_cast<QModelIndex*>(&current_ret);
+			const QModelIndex& previous_ret = previous;
+			// Cast returned reference into pointer
+			QModelIndex* sigval2 = const_cast<QModelIndex*>(&previous_ret);
+			callback(slot, sigval1, sigval2);
+		}
+	};
+	VirtualQItemSelectionModel::connect(self, static_cast<void (QItemSelectionModel::*)(const QModelIndex&, const QModelIndex&)>(&QItemSelectionModel::currentRowChanged), self, local_caller{slot, callback, release});
 }
 
 void QItemSelectionModel_currentColumnChanged(QItemSelectionModel* self, QModelIndex* current, QModelIndex* previous) {
 	self->currentColumnChanged(*current, *previous);
 }
 
-void QItemSelectionModel_connect_currentColumnChanged(QItemSelectionModel* self, intptr_t slot) {
-	VirtualQItemSelectionModel::connect(self, static_cast<void (QItemSelectionModel::*)(const QModelIndex&, const QModelIndex&)>(&QItemSelectionModel::currentColumnChanged), self, [=](const QModelIndex& current, const QModelIndex& previous) {
-		const QModelIndex& current_ret = current;
-		// Cast returned reference into pointer
-		QModelIndex* sigval1 = const_cast<QModelIndex*>(&current_ret);
-		const QModelIndex& previous_ret = previous;
-		// Cast returned reference into pointer
-		QModelIndex* sigval2 = const_cast<QModelIndex*>(&previous_ret);
-		miqt_exec_callback_QItemSelectionModel_currentColumnChanged(slot, sigval1, sigval2);
-	});
+void QItemSelectionModel_connect_currentColumnChanged(QItemSelectionModel* self, intptr_t slot, void (*callback)(intptr_t, QModelIndex*, QModelIndex*), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QModelIndex*, QModelIndex*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t, QModelIndex*, QModelIndex*);
+		void operator()(const QModelIndex& current, const QModelIndex& previous) {
+			const QModelIndex& current_ret = current;
+			// Cast returned reference into pointer
+			QModelIndex* sigval1 = const_cast<QModelIndex*>(&current_ret);
+			const QModelIndex& previous_ret = previous;
+			// Cast returned reference into pointer
+			QModelIndex* sigval2 = const_cast<QModelIndex*>(&previous_ret);
+			callback(slot, sigval1, sigval2);
+		}
+	};
+	VirtualQItemSelectionModel::connect(self, static_cast<void (QItemSelectionModel::*)(const QModelIndex&, const QModelIndex&)>(&QItemSelectionModel::currentColumnChanged), self, local_caller{slot, callback, release});
 }
 
 void QItemSelectionModel_modelChanged(QItemSelectionModel* self, QAbstractItemModel* model) {
 	self->modelChanged(model);
 }
 
-void QItemSelectionModel_connect_modelChanged(QItemSelectionModel* self, intptr_t slot) {
-	VirtualQItemSelectionModel::connect(self, static_cast<void (QItemSelectionModel::*)(QAbstractItemModel*)>(&QItemSelectionModel::modelChanged), self, [=](QAbstractItemModel* model) {
-		QAbstractItemModel* sigval1 = model;
-		miqt_exec_callback_QItemSelectionModel_modelChanged(slot, sigval1);
-	});
+void QItemSelectionModel_connect_modelChanged(QItemSelectionModel* self, intptr_t slot, void (*callback)(intptr_t, QAbstractItemModel*), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QAbstractItemModel*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t, QAbstractItemModel*);
+		void operator()(QAbstractItemModel* model) {
+			QAbstractItemModel* sigval1 = model;
+			callback(slot, sigval1);
+		}
+	};
+	VirtualQItemSelectionModel::connect(self, static_cast<void (QItemSelectionModel::*)(QAbstractItemModel*)>(&QItemSelectionModel::modelChanged), self, local_caller{slot, callback, release});
 }
 
 struct miqt_string QItemSelectionModel_tr2(const char* s, const char* c) {

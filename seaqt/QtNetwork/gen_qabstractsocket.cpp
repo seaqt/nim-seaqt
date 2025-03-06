@@ -21,12 +21,6 @@
 extern "C" {
 #endif
 
-void miqt_exec_callback_QAbstractSocket_hostFound(intptr_t);
-void miqt_exec_callback_QAbstractSocket_connected(intptr_t);
-void miqt_exec_callback_QAbstractSocket_disconnected(intptr_t);
-void miqt_exec_callback_QAbstractSocket_stateChanged(intptr_t, int);
-void miqt_exec_callback_QAbstractSocket_errorOccurred(intptr_t, int);
-void miqt_exec_callback_QAbstractSocket_proxyAuthenticationRequired(intptr_t, QNetworkProxy*, QAuthenticator*);
 #ifdef __cplusplus
 } /* extern C */
 #endif
@@ -868,68 +862,98 @@ void QAbstractSocket_hostFound(QAbstractSocket* self) {
 	self->hostFound();
 }
 
-void QAbstractSocket_connect_hostFound(QAbstractSocket* self, intptr_t slot) {
-	VirtualQAbstractSocket::connect(self, static_cast<void (QAbstractSocket::*)()>(&QAbstractSocket::hostFound), self, [=]() {
-		miqt_exec_callback_QAbstractSocket_hostFound(slot);
-	});
+void QAbstractSocket_connect_hostFound(QAbstractSocket* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t);
+		void operator()() {
+			callback(slot);
+		}
+	};
+	VirtualQAbstractSocket::connect(self, static_cast<void (QAbstractSocket::*)()>(&QAbstractSocket::hostFound), self, local_caller{slot, callback, release});
 }
 
 void QAbstractSocket_connected(QAbstractSocket* self) {
 	self->connected();
 }
 
-void QAbstractSocket_connect_connected(QAbstractSocket* self, intptr_t slot) {
-	VirtualQAbstractSocket::connect(self, static_cast<void (QAbstractSocket::*)()>(&QAbstractSocket::connected), self, [=]() {
-		miqt_exec_callback_QAbstractSocket_connected(slot);
-	});
+void QAbstractSocket_connect_connected(QAbstractSocket* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t);
+		void operator()() {
+			callback(slot);
+		}
+	};
+	VirtualQAbstractSocket::connect(self, static_cast<void (QAbstractSocket::*)()>(&QAbstractSocket::connected), self, local_caller{slot, callback, release});
 }
 
 void QAbstractSocket_disconnected(QAbstractSocket* self) {
 	self->disconnected();
 }
 
-void QAbstractSocket_connect_disconnected(QAbstractSocket* self, intptr_t slot) {
-	VirtualQAbstractSocket::connect(self, static_cast<void (QAbstractSocket::*)()>(&QAbstractSocket::disconnected), self, [=]() {
-		miqt_exec_callback_QAbstractSocket_disconnected(slot);
-	});
+void QAbstractSocket_connect_disconnected(QAbstractSocket* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t);
+		void operator()() {
+			callback(slot);
+		}
+	};
+	VirtualQAbstractSocket::connect(self, static_cast<void (QAbstractSocket::*)()>(&QAbstractSocket::disconnected), self, local_caller{slot, callback, release});
 }
 
 void QAbstractSocket_stateChanged(QAbstractSocket* self, int param1) {
 	self->stateChanged(static_cast<QAbstractSocket::SocketState>(param1));
 }
 
-void QAbstractSocket_connect_stateChanged(QAbstractSocket* self, intptr_t slot) {
-	VirtualQAbstractSocket::connect(self, static_cast<void (QAbstractSocket::*)(QAbstractSocket::SocketState)>(&QAbstractSocket::stateChanged), self, [=](QAbstractSocket::SocketState param1) {
-		QAbstractSocket::SocketState param1_ret = param1;
-		int sigval1 = static_cast<int>(param1_ret);
-		miqt_exec_callback_QAbstractSocket_stateChanged(slot, sigval1);
-	});
+void QAbstractSocket_connect_stateChanged(QAbstractSocket* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t, int);
+		void operator()(QAbstractSocket::SocketState param1) {
+			QAbstractSocket::SocketState param1_ret = param1;
+			int sigval1 = static_cast<int>(param1_ret);
+			callback(slot, sigval1);
+		}
+	};
+	VirtualQAbstractSocket::connect(self, static_cast<void (QAbstractSocket::*)(QAbstractSocket::SocketState)>(&QAbstractSocket::stateChanged), self, local_caller{slot, callback, release});
 }
 
 void QAbstractSocket_errorOccurred(QAbstractSocket* self, int param1) {
 	self->errorOccurred(static_cast<QAbstractSocket::SocketError>(param1));
 }
 
-void QAbstractSocket_connect_errorOccurred(QAbstractSocket* self, intptr_t slot) {
-	VirtualQAbstractSocket::connect(self, static_cast<void (QAbstractSocket::*)(QAbstractSocket::SocketError)>(&QAbstractSocket::errorOccurred), self, [=](QAbstractSocket::SocketError param1) {
-		QAbstractSocket::SocketError param1_ret = param1;
-		int sigval1 = static_cast<int>(param1_ret);
-		miqt_exec_callback_QAbstractSocket_errorOccurred(slot, sigval1);
-	});
+void QAbstractSocket_connect_errorOccurred(QAbstractSocket* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t, int);
+		void operator()(QAbstractSocket::SocketError param1) {
+			QAbstractSocket::SocketError param1_ret = param1;
+			int sigval1 = static_cast<int>(param1_ret);
+			callback(slot, sigval1);
+		}
+	};
+	VirtualQAbstractSocket::connect(self, static_cast<void (QAbstractSocket::*)(QAbstractSocket::SocketError)>(&QAbstractSocket::errorOccurred), self, local_caller{slot, callback, release});
 }
 
 void QAbstractSocket_proxyAuthenticationRequired(QAbstractSocket* self, QNetworkProxy* proxy, QAuthenticator* authenticator) {
 	self->proxyAuthenticationRequired(*proxy, authenticator);
 }
 
-void QAbstractSocket_connect_proxyAuthenticationRequired(QAbstractSocket* self, intptr_t slot) {
-	VirtualQAbstractSocket::connect(self, static_cast<void (QAbstractSocket::*)(const QNetworkProxy&, QAuthenticator*)>(&QAbstractSocket::proxyAuthenticationRequired), self, [=](const QNetworkProxy& proxy, QAuthenticator* authenticator) {
-		const QNetworkProxy& proxy_ret = proxy;
-		// Cast returned reference into pointer
-		QNetworkProxy* sigval1 = const_cast<QNetworkProxy*>(&proxy_ret);
-		QAuthenticator* sigval2 = authenticator;
-		miqt_exec_callback_QAbstractSocket_proxyAuthenticationRequired(slot, sigval1, sigval2);
-	});
+void QAbstractSocket_connect_proxyAuthenticationRequired(QAbstractSocket* self, intptr_t slot, void (*callback)(intptr_t, QNetworkProxy*, QAuthenticator*), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QNetworkProxy*, QAuthenticator*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t, QNetworkProxy*, QAuthenticator*);
+		void operator()(const QNetworkProxy& proxy, QAuthenticator* authenticator) {
+			const QNetworkProxy& proxy_ret = proxy;
+			// Cast returned reference into pointer
+			QNetworkProxy* sigval1 = const_cast<QNetworkProxy*>(&proxy_ret);
+			QAuthenticator* sigval2 = authenticator;
+			callback(slot, sigval1, sigval2);
+		}
+	};
+	VirtualQAbstractSocket::connect(self, static_cast<void (QAbstractSocket::*)(const QNetworkProxy&, QAuthenticator*)>(&QAbstractSocket::proxyAuthenticationRequired), self, local_caller{slot, callback, release});
 }
 
 struct miqt_string QAbstractSocket_tr2(const char* s, const char* c) {

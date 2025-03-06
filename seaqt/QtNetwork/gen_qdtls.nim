@@ -153,9 +153,9 @@ proc fcQDtls_dtlsErrorString(self: pointer, ): struct_miqt_string {.importc: "QD
 proc fcQDtls_peerVerificationErrors(self: pointer, ): struct_miqt_array {.importc: "QDtls_peerVerificationErrors".}
 proc fcQDtls_ignoreVerificationErrors(self: pointer, errorsToIgnore: struct_miqt_array): void {.importc: "QDtls_ignoreVerificationErrors".}
 proc fcQDtls_pskRequired(self: pointer, authenticator: pointer): void {.importc: "QDtls_pskRequired".}
-proc fcQDtls_connect_pskRequired(self: pointer, slot: int) {.importc: "QDtls_connect_pskRequired".}
+proc fcQDtls_connect_pskRequired(self: pointer, slot: int, callback: proc (slot: int, authenticator: pointer) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QDtls_connect_pskRequired".}
 proc fcQDtls_handshakeTimeout(self: pointer, ): void {.importc: "QDtls_handshakeTimeout".}
-proc fcQDtls_connect_handshakeTimeout(self: pointer, slot: int) {.importc: "QDtls_connect_handshakeTimeout".}
+proc fcQDtls_connect_handshakeTimeout(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QDtls_connect_handshakeTimeout".}
 proc fcQDtls_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QDtls_tr2".}
 proc fcQDtls_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QDtls_tr3".}
 proc fcQDtls_setPeer3(self: pointer, address: pointer, port: cushort, verificationName: struct_miqt_string): bool {.importc: "QDtls_setPeer3".}
@@ -543,31 +543,39 @@ proc pskRequired*(self: gen_qdtls_types.QDtls, authenticator: gen_qsslpresharedk
   fcQDtls_pskRequired(self.h, authenticator.h)
 
 type QDtlspskRequiredSlot* = proc(authenticator: gen_qsslpresharedkeyauthenticator_types.QSslPreSharedKeyAuthenticator)
-proc miqt_exec_callback_cQDtls_pskRequired(slot: int, authenticator: pointer) {.exportc: "miqt_exec_callback_QDtls_pskRequired".} =
+proc miqt_exec_callback_cQDtls_pskRequired(slot: int, authenticator: pointer) {.cdecl.} =
   let nimfunc = cast[ptr QDtlspskRequiredSlot](cast[pointer](slot))
   let slotval1 = gen_qsslpresharedkeyauthenticator_types.QSslPreSharedKeyAuthenticator(h: authenticator)
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQDtls_pskRequired_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QDtlspskRequiredSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onpskRequired*(self: gen_qdtls_types.QDtls, slot: QDtlspskRequiredSlot) =
   var tmp = new QDtlspskRequiredSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQDtls_connect_pskRequired(self.h, cast[int](addr tmp[]))
+  fcQDtls_connect_pskRequired(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQDtls_pskRequired, miqt_exec_callback_cQDtls_pskRequired_release)
 
 proc handshakeTimeout*(self: gen_qdtls_types.QDtls, ): void =
   fcQDtls_handshakeTimeout(self.h)
 
 type QDtlshandshakeTimeoutSlot* = proc()
-proc miqt_exec_callback_cQDtls_handshakeTimeout(slot: int) {.exportc: "miqt_exec_callback_QDtls_handshakeTimeout".} =
+proc miqt_exec_callback_cQDtls_handshakeTimeout(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QDtlshandshakeTimeoutSlot](cast[pointer](slot))
   nimfunc[]()
+
+proc miqt_exec_callback_cQDtls_handshakeTimeout_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QDtlshandshakeTimeoutSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
 
 proc onhandshakeTimeout*(self: gen_qdtls_types.QDtls, slot: QDtlshandshakeTimeoutSlot) =
   var tmp = new QDtlshandshakeTimeoutSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQDtls_connect_handshakeTimeout(self.h, cast[int](addr tmp[]))
+  fcQDtls_connect_handshakeTimeout(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQDtls_handshakeTimeout, miqt_exec_callback_cQDtls_handshakeTimeout_release)
 
 proc tr*(_: type gen_qdtls_types.QDtls, s: cstring, c: cstring): string =
   let v_ms = fcQDtls_tr2(s, c)

@@ -94,7 +94,7 @@ void QSvgRenderer_render(QSvgRenderer* self, QPainter* p);
 void QSvgRenderer_render2(QSvgRenderer* self, QPainter* p, QRectF* bounds);
 void QSvgRenderer_render3(QSvgRenderer* self, QPainter* p, struct miqt_string elementId);
 void QSvgRenderer_repaintNeeded(QSvgRenderer* self);
-void QSvgRenderer_connect_repaintNeeded(QSvgRenderer* self, intptr_t slot);
+void QSvgRenderer_connect_repaintNeeded(QSvgRenderer* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t));
 struct miqt_string QSvgRenderer_tr2(const char* s, const char* c);
 struct miqt_string QSvgRenderer_tr3(const char* s, const char* c, int n);
 void QSvgRenderer_render32(QSvgRenderer* self, QPainter* p, struct miqt_string elementId, QRectF* bounds);

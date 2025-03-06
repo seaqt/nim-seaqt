@@ -18,7 +18,6 @@
 extern "C" {
 #endif
 
-void miqt_exec_callback_QAudioSource_stateChanged(intptr_t, int);
 #ifdef __cplusplus
 } /* extern C */
 #endif
@@ -330,12 +329,17 @@ void QAudioSource_stateChanged(QAudioSource* self, int state) {
 	self->stateChanged(static_cast<QAudio::State>(state));
 }
 
-void QAudioSource_connect_stateChanged(QAudioSource* self, intptr_t slot) {
-	VirtualQAudioSource::connect(self, static_cast<void (QAudioSource::*)(QAudio::State)>(&QAudioSource::stateChanged), self, [=](QAudio::State state) {
-		QAudio::State state_ret = state;
-		int sigval1 = static_cast<int>(state_ret);
-		miqt_exec_callback_QAudioSource_stateChanged(slot, sigval1);
-	});
+void QAudioSource_connect_stateChanged(QAudioSource* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t, int);
+		void operator()(QAudio::State state) {
+			QAudio::State state_ret = state;
+			int sigval1 = static_cast<int>(state_ret);
+			callback(slot, sigval1);
+		}
+	};
+	VirtualQAudioSource::connect(self, static_cast<void (QAudioSource::*)(QAudio::State)>(&QAudioSource::stateChanged), self, local_caller{slot, callback, release});
 }
 
 struct miqt_string QAudioSource_tr2(const char* s, const char* c) {

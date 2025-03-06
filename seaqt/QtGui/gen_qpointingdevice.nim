@@ -98,7 +98,7 @@ proc fcQPointingDevice_uniqueId(self: pointer, ): pointer {.importc: "QPointingD
 proc fcQPointingDevice_primaryPointingDevice(): pointer {.importc: "QPointingDevice_primaryPointingDevice".}
 proc fcQPointingDevice_operatorEqual(self: pointer, other: pointer): bool {.importc: "QPointingDevice_operatorEqual".}
 proc fcQPointingDevice_grabChanged(self: pointer, grabber: pointer, transition: cint, event: pointer, point: pointer): void {.importc: "QPointingDevice_grabChanged".}
-proc fcQPointingDevice_connect_grabChanged(self: pointer, slot: int) {.importc: "QPointingDevice_connect_grabChanged".}
+proc fcQPointingDevice_connect_grabChanged(self: pointer, slot: int, callback: proc (slot: int, grabber: pointer, transition: cint, event: pointer, point: pointer) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QPointingDevice_connect_grabChanged".}
 proc fcQPointingDevice_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QPointingDevice_tr2".}
 proc fcQPointingDevice_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QPointingDevice_tr3".}
 proc fcQPointingDevice_primaryPointingDevice1(seatName: struct_miqt_string): pointer {.importc: "QPointingDevice_primaryPointingDevice1".}
@@ -199,7 +199,7 @@ proc grabChanged*(self: gen_qpointingdevice_types.QPointingDevice, grabber: gen_
   fcQPointingDevice_grabChanged(self.h, grabber.h, cint(transition), event.h, point.h)
 
 type QPointingDevicegrabChangedSlot* = proc(grabber: gen_qobject_types.QObject, transition: cint, event: gen_qevent_types.QPointerEvent, point: gen_qeventpoint_types.QEventPoint)
-proc miqt_exec_callback_cQPointingDevice_grabChanged(slot: int, grabber: pointer, transition: cint, event: pointer, point: pointer) {.exportc: "miqt_exec_callback_QPointingDevice_grabChanged".} =
+proc miqt_exec_callback_cQPointingDevice_grabChanged(slot: int, grabber: pointer, transition: cint, event: pointer, point: pointer) {.cdecl.} =
   let nimfunc = cast[ptr QPointingDevicegrabChangedSlot](cast[pointer](slot))
   let slotval1 = gen_qobject_types.QObject(h: grabber)
 
@@ -211,11 +211,15 @@ proc miqt_exec_callback_cQPointingDevice_grabChanged(slot: int, grabber: pointer
 
   nimfunc[](slotval1, slotval2, slotval3, slotval4)
 
+proc miqt_exec_callback_cQPointingDevice_grabChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QPointingDevicegrabChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc ongrabChanged*(self: gen_qpointingdevice_types.QPointingDevice, slot: QPointingDevicegrabChangedSlot) =
   var tmp = new QPointingDevicegrabChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQPointingDevice_connect_grabChanged(self.h, cast[int](addr tmp[]))
+  fcQPointingDevice_connect_grabChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQPointingDevice_grabChanged, miqt_exec_callback_cQPointingDevice_grabChanged_release)
 
 proc tr*(_: type gen_qpointingdevice_types.QPointingDevice, s: cstring, c: cstring): string =
   let v_ms = fcQPointingDevice_tr2(s, c)

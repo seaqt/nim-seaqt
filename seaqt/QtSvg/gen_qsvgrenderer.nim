@@ -88,7 +88,7 @@ proc fcQSvgRenderer_render(self: pointer, p: pointer): void {.importc: "QSvgRend
 proc fcQSvgRenderer_render2(self: pointer, p: pointer, bounds: pointer): void {.importc: "QSvgRenderer_render2".}
 proc fcQSvgRenderer_render3(self: pointer, p: pointer, elementId: struct_miqt_string): void {.importc: "QSvgRenderer_render3".}
 proc fcQSvgRenderer_repaintNeeded(self: pointer, ): void {.importc: "QSvgRenderer_repaintNeeded".}
-proc fcQSvgRenderer_connect_repaintNeeded(self: pointer, slot: int) {.importc: "QSvgRenderer_connect_repaintNeeded".}
+proc fcQSvgRenderer_connect_repaintNeeded(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QSvgRenderer_connect_repaintNeeded".}
 proc fcQSvgRenderer_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QSvgRenderer_tr2".}
 proc fcQSvgRenderer_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QSvgRenderer_tr3".}
 proc fcQSvgRenderer_render32(self: pointer, p: pointer, elementId: struct_miqt_string, bounds: pointer): void {.importc: "QSvgRenderer_render32".}
@@ -213,15 +213,19 @@ proc repaintNeeded*(self: gen_qsvgrenderer_types.QSvgRenderer, ): void =
   fcQSvgRenderer_repaintNeeded(self.h)
 
 type QSvgRendererrepaintNeededSlot* = proc()
-proc miqt_exec_callback_cQSvgRenderer_repaintNeeded(slot: int) {.exportc: "miqt_exec_callback_QSvgRenderer_repaintNeeded".} =
+proc miqt_exec_callback_cQSvgRenderer_repaintNeeded(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QSvgRendererrepaintNeededSlot](cast[pointer](slot))
   nimfunc[]()
+
+proc miqt_exec_callback_cQSvgRenderer_repaintNeeded_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QSvgRendererrepaintNeededSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
 
 proc onrepaintNeeded*(self: gen_qsvgrenderer_types.QSvgRenderer, slot: QSvgRendererrepaintNeededSlot) =
   var tmp = new QSvgRendererrepaintNeededSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQSvgRenderer_connect_repaintNeeded(self.h, cast[int](addr tmp[]))
+  fcQSvgRenderer_connect_repaintNeeded(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQSvgRenderer_repaintNeeded, miqt_exec_callback_cQSvgRenderer_repaintNeeded_release)
 
 proc tr*(_: type gen_qsvgrenderer_types.QSvgRenderer, s: cstring, c: cstring): string =
   let v_ms = fcQSvgRenderer_tr2(s, c)

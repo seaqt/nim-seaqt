@@ -18,14 +18,6 @@
 extern "C" {
 #endif
 
-void miqt_exec_callback_QAudioRoom_positionChanged(intptr_t);
-void miqt_exec_callback_QAudioRoom_dimensionsChanged(intptr_t);
-void miqt_exec_callback_QAudioRoom_rotationChanged(intptr_t);
-void miqt_exec_callback_QAudioRoom_wallsChanged(intptr_t);
-void miqt_exec_callback_QAudioRoom_reflectionGainChanged(intptr_t);
-void miqt_exec_callback_QAudioRoom_reverbGainChanged(intptr_t);
-void miqt_exec_callback_QAudioRoom_reverbTimeChanged(intptr_t);
-void miqt_exec_callback_QAudioRoom_reverbBrightnessChanged(intptr_t);
 #ifdef __cplusplus
 } /* extern C */
 #endif
@@ -302,80 +294,120 @@ void QAudioRoom_positionChanged(QAudioRoom* self) {
 	self->positionChanged();
 }
 
-void QAudioRoom_connect_positionChanged(QAudioRoom* self, intptr_t slot) {
-	VirtualQAudioRoom::connect(self, static_cast<void (QAudioRoom::*)()>(&QAudioRoom::positionChanged), self, [=]() {
-		miqt_exec_callback_QAudioRoom_positionChanged(slot);
-	});
+void QAudioRoom_connect_positionChanged(QAudioRoom* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t);
+		void operator()() {
+			callback(slot);
+		}
+	};
+	VirtualQAudioRoom::connect(self, static_cast<void (QAudioRoom::*)()>(&QAudioRoom::positionChanged), self, local_caller{slot, callback, release});
 }
 
 void QAudioRoom_dimensionsChanged(QAudioRoom* self) {
 	self->dimensionsChanged();
 }
 
-void QAudioRoom_connect_dimensionsChanged(QAudioRoom* self, intptr_t slot) {
-	VirtualQAudioRoom::connect(self, static_cast<void (QAudioRoom::*)()>(&QAudioRoom::dimensionsChanged), self, [=]() {
-		miqt_exec_callback_QAudioRoom_dimensionsChanged(slot);
-	});
+void QAudioRoom_connect_dimensionsChanged(QAudioRoom* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t);
+		void operator()() {
+			callback(slot);
+		}
+	};
+	VirtualQAudioRoom::connect(self, static_cast<void (QAudioRoom::*)()>(&QAudioRoom::dimensionsChanged), self, local_caller{slot, callback, release});
 }
 
 void QAudioRoom_rotationChanged(QAudioRoom* self) {
 	self->rotationChanged();
 }
 
-void QAudioRoom_connect_rotationChanged(QAudioRoom* self, intptr_t slot) {
-	VirtualQAudioRoom::connect(self, static_cast<void (QAudioRoom::*)()>(&QAudioRoom::rotationChanged), self, [=]() {
-		miqt_exec_callback_QAudioRoom_rotationChanged(slot);
-	});
+void QAudioRoom_connect_rotationChanged(QAudioRoom* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t);
+		void operator()() {
+			callback(slot);
+		}
+	};
+	VirtualQAudioRoom::connect(self, static_cast<void (QAudioRoom::*)()>(&QAudioRoom::rotationChanged), self, local_caller{slot, callback, release});
 }
 
 void QAudioRoom_wallsChanged(QAudioRoom* self) {
 	self->wallsChanged();
 }
 
-void QAudioRoom_connect_wallsChanged(QAudioRoom* self, intptr_t slot) {
-	VirtualQAudioRoom::connect(self, static_cast<void (QAudioRoom::*)()>(&QAudioRoom::wallsChanged), self, [=]() {
-		miqt_exec_callback_QAudioRoom_wallsChanged(slot);
-	});
+void QAudioRoom_connect_wallsChanged(QAudioRoom* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t);
+		void operator()() {
+			callback(slot);
+		}
+	};
+	VirtualQAudioRoom::connect(self, static_cast<void (QAudioRoom::*)()>(&QAudioRoom::wallsChanged), self, local_caller{slot, callback, release});
 }
 
 void QAudioRoom_reflectionGainChanged(QAudioRoom* self) {
 	self->reflectionGainChanged();
 }
 
-void QAudioRoom_connect_reflectionGainChanged(QAudioRoom* self, intptr_t slot) {
-	VirtualQAudioRoom::connect(self, static_cast<void (QAudioRoom::*)()>(&QAudioRoom::reflectionGainChanged), self, [=]() {
-		miqt_exec_callback_QAudioRoom_reflectionGainChanged(slot);
-	});
+void QAudioRoom_connect_reflectionGainChanged(QAudioRoom* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t);
+		void operator()() {
+			callback(slot);
+		}
+	};
+	VirtualQAudioRoom::connect(self, static_cast<void (QAudioRoom::*)()>(&QAudioRoom::reflectionGainChanged), self, local_caller{slot, callback, release});
 }
 
 void QAudioRoom_reverbGainChanged(QAudioRoom* self) {
 	self->reverbGainChanged();
 }
 
-void QAudioRoom_connect_reverbGainChanged(QAudioRoom* self, intptr_t slot) {
-	VirtualQAudioRoom::connect(self, static_cast<void (QAudioRoom::*)()>(&QAudioRoom::reverbGainChanged), self, [=]() {
-		miqt_exec_callback_QAudioRoom_reverbGainChanged(slot);
-	});
+void QAudioRoom_connect_reverbGainChanged(QAudioRoom* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t);
+		void operator()() {
+			callback(slot);
+		}
+	};
+	VirtualQAudioRoom::connect(self, static_cast<void (QAudioRoom::*)()>(&QAudioRoom::reverbGainChanged), self, local_caller{slot, callback, release});
 }
 
 void QAudioRoom_reverbTimeChanged(QAudioRoom* self) {
 	self->reverbTimeChanged();
 }
 
-void QAudioRoom_connect_reverbTimeChanged(QAudioRoom* self, intptr_t slot) {
-	VirtualQAudioRoom::connect(self, static_cast<void (QAudioRoom::*)()>(&QAudioRoom::reverbTimeChanged), self, [=]() {
-		miqt_exec_callback_QAudioRoom_reverbTimeChanged(slot);
-	});
+void QAudioRoom_connect_reverbTimeChanged(QAudioRoom* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t);
+		void operator()() {
+			callback(slot);
+		}
+	};
+	VirtualQAudioRoom::connect(self, static_cast<void (QAudioRoom::*)()>(&QAudioRoom::reverbTimeChanged), self, local_caller{slot, callback, release});
 }
 
 void QAudioRoom_reverbBrightnessChanged(QAudioRoom* self) {
 	self->reverbBrightnessChanged();
 }
 
-void QAudioRoom_connect_reverbBrightnessChanged(QAudioRoom* self, intptr_t slot) {
-	VirtualQAudioRoom::connect(self, static_cast<void (QAudioRoom::*)()>(&QAudioRoom::reverbBrightnessChanged), self, [=]() {
-		miqt_exec_callback_QAudioRoom_reverbBrightnessChanged(slot);
-	});
+void QAudioRoom_connect_reverbBrightnessChanged(QAudioRoom* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t);
+		void operator()() {
+			callback(slot);
+		}
+	};
+	VirtualQAudioRoom::connect(self, static_cast<void (QAudioRoom::*)()>(&QAudioRoom::reverbBrightnessChanged), self, local_caller{slot, callback, release});
 }
 
 struct miqt_string QAudioRoom_tr2(const char* s, const char* c) {

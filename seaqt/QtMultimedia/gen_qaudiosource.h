@@ -80,7 +80,7 @@ long long QAudioSource_elapsedUSecs(const QAudioSource* self);
 int QAudioSource_error(const QAudioSource* self);
 int QAudioSource_state(const QAudioSource* self);
 void QAudioSource_stateChanged(QAudioSource* self, int state);
-void QAudioSource_connect_stateChanged(QAudioSource* self, intptr_t slot);
+void QAudioSource_connect_stateChanged(QAudioSource* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t));
 struct miqt_string QAudioSource_tr2(const char* s, const char* c);
 struct miqt_string QAudioSource_tr3(const char* s, const char* c, int n);
 QMetaObject* QAudioSource_virtualbase_metaObject(const void* self);

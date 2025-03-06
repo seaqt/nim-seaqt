@@ -200,43 +200,43 @@ proc fcQWindow_setMaximumHeight(self: pointer, h: cint): void {.importc: "QWindo
 proc fcQWindow_alert(self: pointer, msec: cint): void {.importc: "QWindow_alert".}
 proc fcQWindow_requestUpdate(self: pointer, ): void {.importc: "QWindow_requestUpdate".}
 proc fcQWindow_screenChanged(self: pointer, screen: pointer): void {.importc: "QWindow_screenChanged".}
-proc fcQWindow_connect_screenChanged(self: pointer, slot: int) {.importc: "QWindow_connect_screenChanged".}
+proc fcQWindow_connect_screenChanged(self: pointer, slot: int, callback: proc (slot: int, screen: pointer) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QWindow_connect_screenChanged".}
 proc fcQWindow_modalityChanged(self: pointer, modality: cint): void {.importc: "QWindow_modalityChanged".}
-proc fcQWindow_connect_modalityChanged(self: pointer, slot: int) {.importc: "QWindow_connect_modalityChanged".}
+proc fcQWindow_connect_modalityChanged(self: pointer, slot: int, callback: proc (slot: int, modality: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QWindow_connect_modalityChanged".}
 proc fcQWindow_windowStateChanged(self: pointer, windowState: cint): void {.importc: "QWindow_windowStateChanged".}
-proc fcQWindow_connect_windowStateChanged(self: pointer, slot: int) {.importc: "QWindow_connect_windowStateChanged".}
+proc fcQWindow_connect_windowStateChanged(self: pointer, slot: int, callback: proc (slot: int, windowState: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QWindow_connect_windowStateChanged".}
 proc fcQWindow_windowTitleChanged(self: pointer, title: struct_miqt_string): void {.importc: "QWindow_windowTitleChanged".}
-proc fcQWindow_connect_windowTitleChanged(self: pointer, slot: int) {.importc: "QWindow_connect_windowTitleChanged".}
+proc fcQWindow_connect_windowTitleChanged(self: pointer, slot: int, callback: proc (slot: int, title: struct_miqt_string) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QWindow_connect_windowTitleChanged".}
 proc fcQWindow_xChanged(self: pointer, arg: cint): void {.importc: "QWindow_xChanged".}
-proc fcQWindow_connect_xChanged(self: pointer, slot: int) {.importc: "QWindow_connect_xChanged".}
+proc fcQWindow_connect_xChanged(self: pointer, slot: int, callback: proc (slot: int, arg: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QWindow_connect_xChanged".}
 proc fcQWindow_yChanged(self: pointer, arg: cint): void {.importc: "QWindow_yChanged".}
-proc fcQWindow_connect_yChanged(self: pointer, slot: int) {.importc: "QWindow_connect_yChanged".}
+proc fcQWindow_connect_yChanged(self: pointer, slot: int, callback: proc (slot: int, arg: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QWindow_connect_yChanged".}
 proc fcQWindow_widthChanged(self: pointer, arg: cint): void {.importc: "QWindow_widthChanged".}
-proc fcQWindow_connect_widthChanged(self: pointer, slot: int) {.importc: "QWindow_connect_widthChanged".}
+proc fcQWindow_connect_widthChanged(self: pointer, slot: int, callback: proc (slot: int, arg: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QWindow_connect_widthChanged".}
 proc fcQWindow_heightChanged(self: pointer, arg: cint): void {.importc: "QWindow_heightChanged".}
-proc fcQWindow_connect_heightChanged(self: pointer, slot: int) {.importc: "QWindow_connect_heightChanged".}
+proc fcQWindow_connect_heightChanged(self: pointer, slot: int, callback: proc (slot: int, arg: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QWindow_connect_heightChanged".}
 proc fcQWindow_minimumWidthChanged(self: pointer, arg: cint): void {.importc: "QWindow_minimumWidthChanged".}
-proc fcQWindow_connect_minimumWidthChanged(self: pointer, slot: int) {.importc: "QWindow_connect_minimumWidthChanged".}
+proc fcQWindow_connect_minimumWidthChanged(self: pointer, slot: int, callback: proc (slot: int, arg: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QWindow_connect_minimumWidthChanged".}
 proc fcQWindow_minimumHeightChanged(self: pointer, arg: cint): void {.importc: "QWindow_minimumHeightChanged".}
-proc fcQWindow_connect_minimumHeightChanged(self: pointer, slot: int) {.importc: "QWindow_connect_minimumHeightChanged".}
+proc fcQWindow_connect_minimumHeightChanged(self: pointer, slot: int, callback: proc (slot: int, arg: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QWindow_connect_minimumHeightChanged".}
 proc fcQWindow_maximumWidthChanged(self: pointer, arg: cint): void {.importc: "QWindow_maximumWidthChanged".}
-proc fcQWindow_connect_maximumWidthChanged(self: pointer, slot: int) {.importc: "QWindow_connect_maximumWidthChanged".}
+proc fcQWindow_connect_maximumWidthChanged(self: pointer, slot: int, callback: proc (slot: int, arg: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QWindow_connect_maximumWidthChanged".}
 proc fcQWindow_maximumHeightChanged(self: pointer, arg: cint): void {.importc: "QWindow_maximumHeightChanged".}
-proc fcQWindow_connect_maximumHeightChanged(self: pointer, slot: int) {.importc: "QWindow_connect_maximumHeightChanged".}
+proc fcQWindow_connect_maximumHeightChanged(self: pointer, slot: int, callback: proc (slot: int, arg: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QWindow_connect_maximumHeightChanged".}
 proc fcQWindow_visibleChanged(self: pointer, arg: bool): void {.importc: "QWindow_visibleChanged".}
-proc fcQWindow_connect_visibleChanged(self: pointer, slot: int) {.importc: "QWindow_connect_visibleChanged".}
+proc fcQWindow_connect_visibleChanged(self: pointer, slot: int, callback: proc (slot: int, arg: bool) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QWindow_connect_visibleChanged".}
 proc fcQWindow_visibilityChanged(self: pointer, visibility: cint): void {.importc: "QWindow_visibilityChanged".}
-proc fcQWindow_connect_visibilityChanged(self: pointer, slot: int) {.importc: "QWindow_connect_visibilityChanged".}
+proc fcQWindow_connect_visibilityChanged(self: pointer, slot: int, callback: proc (slot: int, visibility: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QWindow_connect_visibilityChanged".}
 proc fcQWindow_activeChanged(self: pointer, ): void {.importc: "QWindow_activeChanged".}
-proc fcQWindow_connect_activeChanged(self: pointer, slot: int) {.importc: "QWindow_connect_activeChanged".}
+proc fcQWindow_connect_activeChanged(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QWindow_connect_activeChanged".}
 proc fcQWindow_contentOrientationChanged(self: pointer, orientation: cint): void {.importc: "QWindow_contentOrientationChanged".}
-proc fcQWindow_connect_contentOrientationChanged(self: pointer, slot: int) {.importc: "QWindow_connect_contentOrientationChanged".}
+proc fcQWindow_connect_contentOrientationChanged(self: pointer, slot: int, callback: proc (slot: int, orientation: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QWindow_connect_contentOrientationChanged".}
 proc fcQWindow_focusObjectChanged(self: pointer, objectVal: pointer): void {.importc: "QWindow_focusObjectChanged".}
-proc fcQWindow_connect_focusObjectChanged(self: pointer, slot: int) {.importc: "QWindow_connect_focusObjectChanged".}
+proc fcQWindow_connect_focusObjectChanged(self: pointer, slot: int, callback: proc (slot: int, objectVal: pointer) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QWindow_connect_focusObjectChanged".}
 proc fcQWindow_opacityChanged(self: pointer, opacity: float64): void {.importc: "QWindow_opacityChanged".}
-proc fcQWindow_connect_opacityChanged(self: pointer, slot: int) {.importc: "QWindow_connect_opacityChanged".}
+proc fcQWindow_connect_opacityChanged(self: pointer, slot: int, callback: proc (slot: int, opacity: float64) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QWindow_connect_opacityChanged".}
 proc fcQWindow_transientParentChanged(self: pointer, transientParent: pointer): void {.importc: "QWindow_transientParentChanged".}
-proc fcQWindow_connect_transientParentChanged(self: pointer, slot: int) {.importc: "QWindow_connect_transientParentChanged".}
+proc fcQWindow_connect_transientParentChanged(self: pointer, slot: int, callback: proc (slot: int, transientParent: pointer) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QWindow_connect_transientParentChanged".}
 proc fcQWindow_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QWindow_tr2".}
 proc fcQWindow_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QWindow_tr3".}
 proc fcQWindow_parent1(self: pointer, mode: cint): pointer {.importc: "QWindow_parent1".}
@@ -670,55 +670,67 @@ proc screenChanged*(self: gen_qwindow_types.QWindow, screen: gen_qscreen_types.Q
   fcQWindow_screenChanged(self.h, screen.h)
 
 type QWindowscreenChangedSlot* = proc(screen: gen_qscreen_types.QScreen)
-proc miqt_exec_callback_cQWindow_screenChanged(slot: int, screen: pointer) {.exportc: "miqt_exec_callback_QWindow_screenChanged".} =
+proc miqt_exec_callback_cQWindow_screenChanged(slot: int, screen: pointer) {.cdecl.} =
   let nimfunc = cast[ptr QWindowscreenChangedSlot](cast[pointer](slot))
   let slotval1 = gen_qscreen_types.QScreen(h: screen)
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQWindow_screenChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QWindowscreenChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onscreenChanged*(self: gen_qwindow_types.QWindow, slot: QWindowscreenChangedSlot) =
   var tmp = new QWindowscreenChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQWindow_connect_screenChanged(self.h, cast[int](addr tmp[]))
+  fcQWindow_connect_screenChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQWindow_screenChanged, miqt_exec_callback_cQWindow_screenChanged_release)
 
 proc modalityChanged*(self: gen_qwindow_types.QWindow, modality: cint): void =
   fcQWindow_modalityChanged(self.h, cint(modality))
 
 type QWindowmodalityChangedSlot* = proc(modality: cint)
-proc miqt_exec_callback_cQWindow_modalityChanged(slot: int, modality: cint) {.exportc: "miqt_exec_callback_QWindow_modalityChanged".} =
+proc miqt_exec_callback_cQWindow_modalityChanged(slot: int, modality: cint) {.cdecl.} =
   let nimfunc = cast[ptr QWindowmodalityChangedSlot](cast[pointer](slot))
   let slotval1 = cint(modality)
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQWindow_modalityChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QWindowmodalityChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onmodalityChanged*(self: gen_qwindow_types.QWindow, slot: QWindowmodalityChangedSlot) =
   var tmp = new QWindowmodalityChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQWindow_connect_modalityChanged(self.h, cast[int](addr tmp[]))
+  fcQWindow_connect_modalityChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQWindow_modalityChanged, miqt_exec_callback_cQWindow_modalityChanged_release)
 
 proc windowStateChanged*(self: gen_qwindow_types.QWindow, windowState: cint): void =
   fcQWindow_windowStateChanged(self.h, cint(windowState))
 
 type QWindowwindowStateChangedSlot* = proc(windowState: cint)
-proc miqt_exec_callback_cQWindow_windowStateChanged(slot: int, windowState: cint) {.exportc: "miqt_exec_callback_QWindow_windowStateChanged".} =
+proc miqt_exec_callback_cQWindow_windowStateChanged(slot: int, windowState: cint) {.cdecl.} =
   let nimfunc = cast[ptr QWindowwindowStateChangedSlot](cast[pointer](slot))
   let slotval1 = cint(windowState)
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQWindow_windowStateChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QWindowwindowStateChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onwindowStateChanged*(self: gen_qwindow_types.QWindow, slot: QWindowwindowStateChangedSlot) =
   var tmp = new QWindowwindowStateChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQWindow_connect_windowStateChanged(self.h, cast[int](addr tmp[]))
+  fcQWindow_connect_windowStateChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQWindow_windowStateChanged, miqt_exec_callback_cQWindow_windowStateChanged_release)
 
 proc windowTitleChanged*(self: gen_qwindow_types.QWindow, title: string): void =
   fcQWindow_windowTitleChanged(self.h, struct_miqt_string(data: title, len: csize_t(len(title))))
 
 type QWindowwindowTitleChangedSlot* = proc(title: string)
-proc miqt_exec_callback_cQWindow_windowTitleChanged(slot: int, title: struct_miqt_string) {.exportc: "miqt_exec_callback_QWindow_windowTitleChanged".} =
+proc miqt_exec_callback_cQWindow_windowTitleChanged(slot: int, title: struct_miqt_string) {.cdecl.} =
   let nimfunc = cast[ptr QWindowwindowTitleChangedSlot](cast[pointer](slot))
   let vtitle_ms = title
   let vtitlex_ret = string.fromBytes(toOpenArrayByte(vtitle_ms.data, 0, int(vtitle_ms.len)-1))
@@ -727,249 +739,313 @@ proc miqt_exec_callback_cQWindow_windowTitleChanged(slot: int, title: struct_miq
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQWindow_windowTitleChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QWindowwindowTitleChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onwindowTitleChanged*(self: gen_qwindow_types.QWindow, slot: QWindowwindowTitleChangedSlot) =
   var tmp = new QWindowwindowTitleChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQWindow_connect_windowTitleChanged(self.h, cast[int](addr tmp[]))
+  fcQWindow_connect_windowTitleChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQWindow_windowTitleChanged, miqt_exec_callback_cQWindow_windowTitleChanged_release)
 
 proc xChanged*(self: gen_qwindow_types.QWindow, arg: cint): void =
   fcQWindow_xChanged(self.h, arg)
 
 type QWindowxChangedSlot* = proc(arg: cint)
-proc miqt_exec_callback_cQWindow_xChanged(slot: int, arg: cint) {.exportc: "miqt_exec_callback_QWindow_xChanged".} =
+proc miqt_exec_callback_cQWindow_xChanged(slot: int, arg: cint) {.cdecl.} =
   let nimfunc = cast[ptr QWindowxChangedSlot](cast[pointer](slot))
   let slotval1 = arg
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQWindow_xChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QWindowxChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onxChanged*(self: gen_qwindow_types.QWindow, slot: QWindowxChangedSlot) =
   var tmp = new QWindowxChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQWindow_connect_xChanged(self.h, cast[int](addr tmp[]))
+  fcQWindow_connect_xChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQWindow_xChanged, miqt_exec_callback_cQWindow_xChanged_release)
 
 proc yChanged*(self: gen_qwindow_types.QWindow, arg: cint): void =
   fcQWindow_yChanged(self.h, arg)
 
 type QWindowyChangedSlot* = proc(arg: cint)
-proc miqt_exec_callback_cQWindow_yChanged(slot: int, arg: cint) {.exportc: "miqt_exec_callback_QWindow_yChanged".} =
+proc miqt_exec_callback_cQWindow_yChanged(slot: int, arg: cint) {.cdecl.} =
   let nimfunc = cast[ptr QWindowyChangedSlot](cast[pointer](slot))
   let slotval1 = arg
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQWindow_yChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QWindowyChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onyChanged*(self: gen_qwindow_types.QWindow, slot: QWindowyChangedSlot) =
   var tmp = new QWindowyChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQWindow_connect_yChanged(self.h, cast[int](addr tmp[]))
+  fcQWindow_connect_yChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQWindow_yChanged, miqt_exec_callback_cQWindow_yChanged_release)
 
 proc widthChanged*(self: gen_qwindow_types.QWindow, arg: cint): void =
   fcQWindow_widthChanged(self.h, arg)
 
 type QWindowwidthChangedSlot* = proc(arg: cint)
-proc miqt_exec_callback_cQWindow_widthChanged(slot: int, arg: cint) {.exportc: "miqt_exec_callback_QWindow_widthChanged".} =
+proc miqt_exec_callback_cQWindow_widthChanged(slot: int, arg: cint) {.cdecl.} =
   let nimfunc = cast[ptr QWindowwidthChangedSlot](cast[pointer](slot))
   let slotval1 = arg
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQWindow_widthChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QWindowwidthChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onwidthChanged*(self: gen_qwindow_types.QWindow, slot: QWindowwidthChangedSlot) =
   var tmp = new QWindowwidthChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQWindow_connect_widthChanged(self.h, cast[int](addr tmp[]))
+  fcQWindow_connect_widthChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQWindow_widthChanged, miqt_exec_callback_cQWindow_widthChanged_release)
 
 proc heightChanged*(self: gen_qwindow_types.QWindow, arg: cint): void =
   fcQWindow_heightChanged(self.h, arg)
 
 type QWindowheightChangedSlot* = proc(arg: cint)
-proc miqt_exec_callback_cQWindow_heightChanged(slot: int, arg: cint) {.exportc: "miqt_exec_callback_QWindow_heightChanged".} =
+proc miqt_exec_callback_cQWindow_heightChanged(slot: int, arg: cint) {.cdecl.} =
   let nimfunc = cast[ptr QWindowheightChangedSlot](cast[pointer](slot))
   let slotval1 = arg
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQWindow_heightChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QWindowheightChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onheightChanged*(self: gen_qwindow_types.QWindow, slot: QWindowheightChangedSlot) =
   var tmp = new QWindowheightChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQWindow_connect_heightChanged(self.h, cast[int](addr tmp[]))
+  fcQWindow_connect_heightChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQWindow_heightChanged, miqt_exec_callback_cQWindow_heightChanged_release)
 
 proc minimumWidthChanged*(self: gen_qwindow_types.QWindow, arg: cint): void =
   fcQWindow_minimumWidthChanged(self.h, arg)
 
 type QWindowminimumWidthChangedSlot* = proc(arg: cint)
-proc miqt_exec_callback_cQWindow_minimumWidthChanged(slot: int, arg: cint) {.exportc: "miqt_exec_callback_QWindow_minimumWidthChanged".} =
+proc miqt_exec_callback_cQWindow_minimumWidthChanged(slot: int, arg: cint) {.cdecl.} =
   let nimfunc = cast[ptr QWindowminimumWidthChangedSlot](cast[pointer](slot))
   let slotval1 = arg
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQWindow_minimumWidthChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QWindowminimumWidthChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onminimumWidthChanged*(self: gen_qwindow_types.QWindow, slot: QWindowminimumWidthChangedSlot) =
   var tmp = new QWindowminimumWidthChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQWindow_connect_minimumWidthChanged(self.h, cast[int](addr tmp[]))
+  fcQWindow_connect_minimumWidthChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQWindow_minimumWidthChanged, miqt_exec_callback_cQWindow_minimumWidthChanged_release)
 
 proc minimumHeightChanged*(self: gen_qwindow_types.QWindow, arg: cint): void =
   fcQWindow_minimumHeightChanged(self.h, arg)
 
 type QWindowminimumHeightChangedSlot* = proc(arg: cint)
-proc miqt_exec_callback_cQWindow_minimumHeightChanged(slot: int, arg: cint) {.exportc: "miqt_exec_callback_QWindow_minimumHeightChanged".} =
+proc miqt_exec_callback_cQWindow_minimumHeightChanged(slot: int, arg: cint) {.cdecl.} =
   let nimfunc = cast[ptr QWindowminimumHeightChangedSlot](cast[pointer](slot))
   let slotval1 = arg
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQWindow_minimumHeightChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QWindowminimumHeightChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onminimumHeightChanged*(self: gen_qwindow_types.QWindow, slot: QWindowminimumHeightChangedSlot) =
   var tmp = new QWindowminimumHeightChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQWindow_connect_minimumHeightChanged(self.h, cast[int](addr tmp[]))
+  fcQWindow_connect_minimumHeightChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQWindow_minimumHeightChanged, miqt_exec_callback_cQWindow_minimumHeightChanged_release)
 
 proc maximumWidthChanged*(self: gen_qwindow_types.QWindow, arg: cint): void =
   fcQWindow_maximumWidthChanged(self.h, arg)
 
 type QWindowmaximumWidthChangedSlot* = proc(arg: cint)
-proc miqt_exec_callback_cQWindow_maximumWidthChanged(slot: int, arg: cint) {.exportc: "miqt_exec_callback_QWindow_maximumWidthChanged".} =
+proc miqt_exec_callback_cQWindow_maximumWidthChanged(slot: int, arg: cint) {.cdecl.} =
   let nimfunc = cast[ptr QWindowmaximumWidthChangedSlot](cast[pointer](slot))
   let slotval1 = arg
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQWindow_maximumWidthChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QWindowmaximumWidthChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onmaximumWidthChanged*(self: gen_qwindow_types.QWindow, slot: QWindowmaximumWidthChangedSlot) =
   var tmp = new QWindowmaximumWidthChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQWindow_connect_maximumWidthChanged(self.h, cast[int](addr tmp[]))
+  fcQWindow_connect_maximumWidthChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQWindow_maximumWidthChanged, miqt_exec_callback_cQWindow_maximumWidthChanged_release)
 
 proc maximumHeightChanged*(self: gen_qwindow_types.QWindow, arg: cint): void =
   fcQWindow_maximumHeightChanged(self.h, arg)
 
 type QWindowmaximumHeightChangedSlot* = proc(arg: cint)
-proc miqt_exec_callback_cQWindow_maximumHeightChanged(slot: int, arg: cint) {.exportc: "miqt_exec_callback_QWindow_maximumHeightChanged".} =
+proc miqt_exec_callback_cQWindow_maximumHeightChanged(slot: int, arg: cint) {.cdecl.} =
   let nimfunc = cast[ptr QWindowmaximumHeightChangedSlot](cast[pointer](slot))
   let slotval1 = arg
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQWindow_maximumHeightChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QWindowmaximumHeightChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onmaximumHeightChanged*(self: gen_qwindow_types.QWindow, slot: QWindowmaximumHeightChangedSlot) =
   var tmp = new QWindowmaximumHeightChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQWindow_connect_maximumHeightChanged(self.h, cast[int](addr tmp[]))
+  fcQWindow_connect_maximumHeightChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQWindow_maximumHeightChanged, miqt_exec_callback_cQWindow_maximumHeightChanged_release)
 
 proc visibleChanged*(self: gen_qwindow_types.QWindow, arg: bool): void =
   fcQWindow_visibleChanged(self.h, arg)
 
 type QWindowvisibleChangedSlot* = proc(arg: bool)
-proc miqt_exec_callback_cQWindow_visibleChanged(slot: int, arg: bool) {.exportc: "miqt_exec_callback_QWindow_visibleChanged".} =
+proc miqt_exec_callback_cQWindow_visibleChanged(slot: int, arg: bool) {.cdecl.} =
   let nimfunc = cast[ptr QWindowvisibleChangedSlot](cast[pointer](slot))
   let slotval1 = arg
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQWindow_visibleChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QWindowvisibleChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onvisibleChanged*(self: gen_qwindow_types.QWindow, slot: QWindowvisibleChangedSlot) =
   var tmp = new QWindowvisibleChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQWindow_connect_visibleChanged(self.h, cast[int](addr tmp[]))
+  fcQWindow_connect_visibleChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQWindow_visibleChanged, miqt_exec_callback_cQWindow_visibleChanged_release)
 
 proc visibilityChanged*(self: gen_qwindow_types.QWindow, visibility: cint): void =
   fcQWindow_visibilityChanged(self.h, cint(visibility))
 
 type QWindowvisibilityChangedSlot* = proc(visibility: cint)
-proc miqt_exec_callback_cQWindow_visibilityChanged(slot: int, visibility: cint) {.exportc: "miqt_exec_callback_QWindow_visibilityChanged".} =
+proc miqt_exec_callback_cQWindow_visibilityChanged(slot: int, visibility: cint) {.cdecl.} =
   let nimfunc = cast[ptr QWindowvisibilityChangedSlot](cast[pointer](slot))
   let slotval1 = cint(visibility)
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQWindow_visibilityChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QWindowvisibilityChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onvisibilityChanged*(self: gen_qwindow_types.QWindow, slot: QWindowvisibilityChangedSlot) =
   var tmp = new QWindowvisibilityChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQWindow_connect_visibilityChanged(self.h, cast[int](addr tmp[]))
+  fcQWindow_connect_visibilityChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQWindow_visibilityChanged, miqt_exec_callback_cQWindow_visibilityChanged_release)
 
 proc activeChanged*(self: gen_qwindow_types.QWindow, ): void =
   fcQWindow_activeChanged(self.h)
 
 type QWindowactiveChangedSlot* = proc()
-proc miqt_exec_callback_cQWindow_activeChanged(slot: int) {.exportc: "miqt_exec_callback_QWindow_activeChanged".} =
+proc miqt_exec_callback_cQWindow_activeChanged(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QWindowactiveChangedSlot](cast[pointer](slot))
   nimfunc[]()
+
+proc miqt_exec_callback_cQWindow_activeChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QWindowactiveChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
 
 proc onactiveChanged*(self: gen_qwindow_types.QWindow, slot: QWindowactiveChangedSlot) =
   var tmp = new QWindowactiveChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQWindow_connect_activeChanged(self.h, cast[int](addr tmp[]))
+  fcQWindow_connect_activeChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQWindow_activeChanged, miqt_exec_callback_cQWindow_activeChanged_release)
 
 proc contentOrientationChanged*(self: gen_qwindow_types.QWindow, orientation: cint): void =
   fcQWindow_contentOrientationChanged(self.h, cint(orientation))
 
 type QWindowcontentOrientationChangedSlot* = proc(orientation: cint)
-proc miqt_exec_callback_cQWindow_contentOrientationChanged(slot: int, orientation: cint) {.exportc: "miqt_exec_callback_QWindow_contentOrientationChanged".} =
+proc miqt_exec_callback_cQWindow_contentOrientationChanged(slot: int, orientation: cint) {.cdecl.} =
   let nimfunc = cast[ptr QWindowcontentOrientationChangedSlot](cast[pointer](slot))
   let slotval1 = cint(orientation)
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQWindow_contentOrientationChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QWindowcontentOrientationChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc oncontentOrientationChanged*(self: gen_qwindow_types.QWindow, slot: QWindowcontentOrientationChangedSlot) =
   var tmp = new QWindowcontentOrientationChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQWindow_connect_contentOrientationChanged(self.h, cast[int](addr tmp[]))
+  fcQWindow_connect_contentOrientationChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQWindow_contentOrientationChanged, miqt_exec_callback_cQWindow_contentOrientationChanged_release)
 
 proc focusObjectChanged*(self: gen_qwindow_types.QWindow, objectVal: gen_qobject_types.QObject): void =
   fcQWindow_focusObjectChanged(self.h, objectVal.h)
 
 type QWindowfocusObjectChangedSlot* = proc(objectVal: gen_qobject_types.QObject)
-proc miqt_exec_callback_cQWindow_focusObjectChanged(slot: int, objectVal: pointer) {.exportc: "miqt_exec_callback_QWindow_focusObjectChanged".} =
+proc miqt_exec_callback_cQWindow_focusObjectChanged(slot: int, objectVal: pointer) {.cdecl.} =
   let nimfunc = cast[ptr QWindowfocusObjectChangedSlot](cast[pointer](slot))
   let slotval1 = gen_qobject_types.QObject(h: objectVal)
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQWindow_focusObjectChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QWindowfocusObjectChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onfocusObjectChanged*(self: gen_qwindow_types.QWindow, slot: QWindowfocusObjectChangedSlot) =
   var tmp = new QWindowfocusObjectChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQWindow_connect_focusObjectChanged(self.h, cast[int](addr tmp[]))
+  fcQWindow_connect_focusObjectChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQWindow_focusObjectChanged, miqt_exec_callback_cQWindow_focusObjectChanged_release)
 
 proc opacityChanged*(self: gen_qwindow_types.QWindow, opacity: float64): void =
   fcQWindow_opacityChanged(self.h, opacity)
 
 type QWindowopacityChangedSlot* = proc(opacity: float64)
-proc miqt_exec_callback_cQWindow_opacityChanged(slot: int, opacity: float64) {.exportc: "miqt_exec_callback_QWindow_opacityChanged".} =
+proc miqt_exec_callback_cQWindow_opacityChanged(slot: int, opacity: float64) {.cdecl.} =
   let nimfunc = cast[ptr QWindowopacityChangedSlot](cast[pointer](slot))
   let slotval1 = opacity
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQWindow_opacityChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QWindowopacityChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onopacityChanged*(self: gen_qwindow_types.QWindow, slot: QWindowopacityChangedSlot) =
   var tmp = new QWindowopacityChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQWindow_connect_opacityChanged(self.h, cast[int](addr tmp[]))
+  fcQWindow_connect_opacityChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQWindow_opacityChanged, miqt_exec_callback_cQWindow_opacityChanged_release)
 
 proc transientParentChanged*(self: gen_qwindow_types.QWindow, transientParent: gen_qwindow_types.QWindow): void =
   fcQWindow_transientParentChanged(self.h, transientParent.h)
 
 type QWindowtransientParentChangedSlot* = proc(transientParent: gen_qwindow_types.QWindow)
-proc miqt_exec_callback_cQWindow_transientParentChanged(slot: int, transientParent: pointer) {.exportc: "miqt_exec_callback_QWindow_transientParentChanged".} =
+proc miqt_exec_callback_cQWindow_transientParentChanged(slot: int, transientParent: pointer) {.cdecl.} =
   let nimfunc = cast[ptr QWindowtransientParentChangedSlot](cast[pointer](slot))
   let slotval1 = gen_qwindow_types.QWindow(h: transientParent)
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQWindow_transientParentChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QWindowtransientParentChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc ontransientParentChanged*(self: gen_qwindow_types.QWindow, slot: QWindowtransientParentChangedSlot) =
   var tmp = new QWindowtransientParentChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQWindow_connect_transientParentChanged(self.h, cast[int](addr tmp[]))
+  fcQWindow_connect_transientParentChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQWindow_transientParentChanged, miqt_exec_callback_cQWindow_transientParentChanged_release)
 
 proc tr*(_: type gen_qwindow_types.QWindow, s: cstring, c: cstring): string =
   let v_ms = fcQWindow_tr2(s, c)

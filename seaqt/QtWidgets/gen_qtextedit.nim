@@ -201,19 +201,19 @@ proc fcQTextEdit_scrollToAnchor(self: pointer, name: struct_miqt_string): void {
 proc fcQTextEdit_zoomIn(self: pointer, ): void {.importc: "QTextEdit_zoomIn".}
 proc fcQTextEdit_zoomOut(self: pointer, ): void {.importc: "QTextEdit_zoomOut".}
 proc fcQTextEdit_textChanged(self: pointer, ): void {.importc: "QTextEdit_textChanged".}
-proc fcQTextEdit_connect_textChanged(self: pointer, slot: int) {.importc: "QTextEdit_connect_textChanged".}
+proc fcQTextEdit_connect_textChanged(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QTextEdit_connect_textChanged".}
 proc fcQTextEdit_undoAvailable(self: pointer, b: bool): void {.importc: "QTextEdit_undoAvailable".}
-proc fcQTextEdit_connect_undoAvailable(self: pointer, slot: int) {.importc: "QTextEdit_connect_undoAvailable".}
+proc fcQTextEdit_connect_undoAvailable(self: pointer, slot: int, callback: proc (slot: int, b: bool) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QTextEdit_connect_undoAvailable".}
 proc fcQTextEdit_redoAvailable(self: pointer, b: bool): void {.importc: "QTextEdit_redoAvailable".}
-proc fcQTextEdit_connect_redoAvailable(self: pointer, slot: int) {.importc: "QTextEdit_connect_redoAvailable".}
+proc fcQTextEdit_connect_redoAvailable(self: pointer, slot: int, callback: proc (slot: int, b: bool) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QTextEdit_connect_redoAvailable".}
 proc fcQTextEdit_currentCharFormatChanged(self: pointer, format: pointer): void {.importc: "QTextEdit_currentCharFormatChanged".}
-proc fcQTextEdit_connect_currentCharFormatChanged(self: pointer, slot: int) {.importc: "QTextEdit_connect_currentCharFormatChanged".}
+proc fcQTextEdit_connect_currentCharFormatChanged(self: pointer, slot: int, callback: proc (slot: int, format: pointer) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QTextEdit_connect_currentCharFormatChanged".}
 proc fcQTextEdit_copyAvailable(self: pointer, b: bool): void {.importc: "QTextEdit_copyAvailable".}
-proc fcQTextEdit_connect_copyAvailable(self: pointer, slot: int) {.importc: "QTextEdit_connect_copyAvailable".}
+proc fcQTextEdit_connect_copyAvailable(self: pointer, slot: int, callback: proc (slot: int, b: bool) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QTextEdit_connect_copyAvailable".}
 proc fcQTextEdit_selectionChanged(self: pointer, ): void {.importc: "QTextEdit_selectionChanged".}
-proc fcQTextEdit_connect_selectionChanged(self: pointer, slot: int) {.importc: "QTextEdit_connect_selectionChanged".}
+proc fcQTextEdit_connect_selectionChanged(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QTextEdit_connect_selectionChanged".}
 proc fcQTextEdit_cursorPositionChanged(self: pointer, ): void {.importc: "QTextEdit_cursorPositionChanged".}
-proc fcQTextEdit_connect_cursorPositionChanged(self: pointer, slot: int) {.importc: "QTextEdit_connect_cursorPositionChanged".}
+proc fcQTextEdit_connect_cursorPositionChanged(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QTextEdit_connect_cursorPositionChanged".}
 proc fcQTextEdit_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QTextEdit_tr2".}
 proc fcQTextEdit_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QTextEdit_tr3".}
 proc fcQTextEdit_find2(self: pointer, exp: struct_miqt_string, options: cint): bool {.importc: "QTextEdit_find2".}
@@ -673,107 +673,135 @@ proc textChanged*(self: gen_qtextedit_types.QTextEdit, ): void =
   fcQTextEdit_textChanged(self.h)
 
 type QTextEdittextChangedSlot* = proc()
-proc miqt_exec_callback_cQTextEdit_textChanged(slot: int) {.exportc: "miqt_exec_callback_QTextEdit_textChanged".} =
+proc miqt_exec_callback_cQTextEdit_textChanged(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QTextEdittextChangedSlot](cast[pointer](slot))
   nimfunc[]()
+
+proc miqt_exec_callback_cQTextEdit_textChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QTextEdittextChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
 
 proc ontextChanged*(self: gen_qtextedit_types.QTextEdit, slot: QTextEdittextChangedSlot) =
   var tmp = new QTextEdittextChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQTextEdit_connect_textChanged(self.h, cast[int](addr tmp[]))
+  fcQTextEdit_connect_textChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQTextEdit_textChanged, miqt_exec_callback_cQTextEdit_textChanged_release)
 
 proc undoAvailable*(self: gen_qtextedit_types.QTextEdit, b: bool): void =
   fcQTextEdit_undoAvailable(self.h, b)
 
 type QTextEditundoAvailableSlot* = proc(b: bool)
-proc miqt_exec_callback_cQTextEdit_undoAvailable(slot: int, b: bool) {.exportc: "miqt_exec_callback_QTextEdit_undoAvailable".} =
+proc miqt_exec_callback_cQTextEdit_undoAvailable(slot: int, b: bool) {.cdecl.} =
   let nimfunc = cast[ptr QTextEditundoAvailableSlot](cast[pointer](slot))
   let slotval1 = b
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQTextEdit_undoAvailable_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QTextEditundoAvailableSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onundoAvailable*(self: gen_qtextedit_types.QTextEdit, slot: QTextEditundoAvailableSlot) =
   var tmp = new QTextEditundoAvailableSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQTextEdit_connect_undoAvailable(self.h, cast[int](addr tmp[]))
+  fcQTextEdit_connect_undoAvailable(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQTextEdit_undoAvailable, miqt_exec_callback_cQTextEdit_undoAvailable_release)
 
 proc redoAvailable*(self: gen_qtextedit_types.QTextEdit, b: bool): void =
   fcQTextEdit_redoAvailable(self.h, b)
 
 type QTextEditredoAvailableSlot* = proc(b: bool)
-proc miqt_exec_callback_cQTextEdit_redoAvailable(slot: int, b: bool) {.exportc: "miqt_exec_callback_QTextEdit_redoAvailable".} =
+proc miqt_exec_callback_cQTextEdit_redoAvailable(slot: int, b: bool) {.cdecl.} =
   let nimfunc = cast[ptr QTextEditredoAvailableSlot](cast[pointer](slot))
   let slotval1 = b
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQTextEdit_redoAvailable_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QTextEditredoAvailableSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onredoAvailable*(self: gen_qtextedit_types.QTextEdit, slot: QTextEditredoAvailableSlot) =
   var tmp = new QTextEditredoAvailableSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQTextEdit_connect_redoAvailable(self.h, cast[int](addr tmp[]))
+  fcQTextEdit_connect_redoAvailable(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQTextEdit_redoAvailable, miqt_exec_callback_cQTextEdit_redoAvailable_release)
 
 proc currentCharFormatChanged*(self: gen_qtextedit_types.QTextEdit, format: gen_qtextformat_types.QTextCharFormat): void =
   fcQTextEdit_currentCharFormatChanged(self.h, format.h)
 
 type QTextEditcurrentCharFormatChangedSlot* = proc(format: gen_qtextformat_types.QTextCharFormat)
-proc miqt_exec_callback_cQTextEdit_currentCharFormatChanged(slot: int, format: pointer) {.exportc: "miqt_exec_callback_QTextEdit_currentCharFormatChanged".} =
+proc miqt_exec_callback_cQTextEdit_currentCharFormatChanged(slot: int, format: pointer) {.cdecl.} =
   let nimfunc = cast[ptr QTextEditcurrentCharFormatChangedSlot](cast[pointer](slot))
   let slotval1 = gen_qtextformat_types.QTextCharFormat(h: format)
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQTextEdit_currentCharFormatChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QTextEditcurrentCharFormatChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc oncurrentCharFormatChanged*(self: gen_qtextedit_types.QTextEdit, slot: QTextEditcurrentCharFormatChangedSlot) =
   var tmp = new QTextEditcurrentCharFormatChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQTextEdit_connect_currentCharFormatChanged(self.h, cast[int](addr tmp[]))
+  fcQTextEdit_connect_currentCharFormatChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQTextEdit_currentCharFormatChanged, miqt_exec_callback_cQTextEdit_currentCharFormatChanged_release)
 
 proc copyAvailable*(self: gen_qtextedit_types.QTextEdit, b: bool): void =
   fcQTextEdit_copyAvailable(self.h, b)
 
 type QTextEditcopyAvailableSlot* = proc(b: bool)
-proc miqt_exec_callback_cQTextEdit_copyAvailable(slot: int, b: bool) {.exportc: "miqt_exec_callback_QTextEdit_copyAvailable".} =
+proc miqt_exec_callback_cQTextEdit_copyAvailable(slot: int, b: bool) {.cdecl.} =
   let nimfunc = cast[ptr QTextEditcopyAvailableSlot](cast[pointer](slot))
   let slotval1 = b
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQTextEdit_copyAvailable_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QTextEditcopyAvailableSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc oncopyAvailable*(self: gen_qtextedit_types.QTextEdit, slot: QTextEditcopyAvailableSlot) =
   var tmp = new QTextEditcopyAvailableSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQTextEdit_connect_copyAvailable(self.h, cast[int](addr tmp[]))
+  fcQTextEdit_connect_copyAvailable(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQTextEdit_copyAvailable, miqt_exec_callback_cQTextEdit_copyAvailable_release)
 
 proc selectionChanged*(self: gen_qtextedit_types.QTextEdit, ): void =
   fcQTextEdit_selectionChanged(self.h)
 
 type QTextEditselectionChangedSlot* = proc()
-proc miqt_exec_callback_cQTextEdit_selectionChanged(slot: int) {.exportc: "miqt_exec_callback_QTextEdit_selectionChanged".} =
+proc miqt_exec_callback_cQTextEdit_selectionChanged(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QTextEditselectionChangedSlot](cast[pointer](slot))
   nimfunc[]()
+
+proc miqt_exec_callback_cQTextEdit_selectionChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QTextEditselectionChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
 
 proc onselectionChanged*(self: gen_qtextedit_types.QTextEdit, slot: QTextEditselectionChangedSlot) =
   var tmp = new QTextEditselectionChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQTextEdit_connect_selectionChanged(self.h, cast[int](addr tmp[]))
+  fcQTextEdit_connect_selectionChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQTextEdit_selectionChanged, miqt_exec_callback_cQTextEdit_selectionChanged_release)
 
 proc cursorPositionChanged*(self: gen_qtextedit_types.QTextEdit, ): void =
   fcQTextEdit_cursorPositionChanged(self.h)
 
 type QTextEditcursorPositionChangedSlot* = proc()
-proc miqt_exec_callback_cQTextEdit_cursorPositionChanged(slot: int) {.exportc: "miqt_exec_callback_QTextEdit_cursorPositionChanged".} =
+proc miqt_exec_callback_cQTextEdit_cursorPositionChanged(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QTextEditcursorPositionChangedSlot](cast[pointer](slot))
   nimfunc[]()
+
+proc miqt_exec_callback_cQTextEdit_cursorPositionChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QTextEditcursorPositionChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
 
 proc oncursorPositionChanged*(self: gen_qtextedit_types.QTextEdit, slot: QTextEditcursorPositionChangedSlot) =
   var tmp = new QTextEditcursorPositionChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQTextEdit_connect_cursorPositionChanged(self.h, cast[int](addr tmp[]))
+  fcQTextEdit_connect_cursorPositionChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQTextEdit_cursorPositionChanged, miqt_exec_callback_cQTextEdit_cursorPositionChanged_release)
 
 proc tr*(_: type gen_qtextedit_types.QTextEdit, s: cstring, c: cstring): string =
   let v_ms = fcQTextEdit_tr2(s, c)

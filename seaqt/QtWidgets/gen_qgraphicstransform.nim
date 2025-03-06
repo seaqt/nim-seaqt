@@ -104,15 +104,15 @@ proc fcQGraphicsScale_zScale(self: pointer, ): float64 {.importc: "QGraphicsScal
 proc fcQGraphicsScale_setZScale(self: pointer, zScale: float64): void {.importc: "QGraphicsScale_setZScale".}
 proc fcQGraphicsScale_applyTo(self: pointer, matrix: pointer): void {.importc: "QGraphicsScale_applyTo".}
 proc fcQGraphicsScale_originChanged(self: pointer, ): void {.importc: "QGraphicsScale_originChanged".}
-proc fcQGraphicsScale_connect_originChanged(self: pointer, slot: int) {.importc: "QGraphicsScale_connect_originChanged".}
+proc fcQGraphicsScale_connect_originChanged(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QGraphicsScale_connect_originChanged".}
 proc fcQGraphicsScale_xScaleChanged(self: pointer, ): void {.importc: "QGraphicsScale_xScaleChanged".}
-proc fcQGraphicsScale_connect_xScaleChanged(self: pointer, slot: int) {.importc: "QGraphicsScale_connect_xScaleChanged".}
+proc fcQGraphicsScale_connect_xScaleChanged(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QGraphicsScale_connect_xScaleChanged".}
 proc fcQGraphicsScale_yScaleChanged(self: pointer, ): void {.importc: "QGraphicsScale_yScaleChanged".}
-proc fcQGraphicsScale_connect_yScaleChanged(self: pointer, slot: int) {.importc: "QGraphicsScale_connect_yScaleChanged".}
+proc fcQGraphicsScale_connect_yScaleChanged(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QGraphicsScale_connect_yScaleChanged".}
 proc fcQGraphicsScale_zScaleChanged(self: pointer, ): void {.importc: "QGraphicsScale_zScaleChanged".}
-proc fcQGraphicsScale_connect_zScaleChanged(self: pointer, slot: int) {.importc: "QGraphicsScale_connect_zScaleChanged".}
+proc fcQGraphicsScale_connect_zScaleChanged(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QGraphicsScale_connect_zScaleChanged".}
 proc fcQGraphicsScale_scaleChanged(self: pointer, ): void {.importc: "QGraphicsScale_scaleChanged".}
-proc fcQGraphicsScale_connect_scaleChanged(self: pointer, slot: int) {.importc: "QGraphicsScale_connect_scaleChanged".}
+proc fcQGraphicsScale_connect_scaleChanged(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QGraphicsScale_connect_scaleChanged".}
 proc fcQGraphicsScale_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QGraphicsScale_tr2".}
 proc fcQGraphicsScale_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QGraphicsScale_tr3".}
 type cQGraphicsScaleVTable = object
@@ -156,11 +156,11 @@ proc fcQGraphicsRotation_setAxis(self: pointer, axis: pointer): void {.importc: 
 proc fcQGraphicsRotation_setAxisWithAxis(self: pointer, axis: cint): void {.importc: "QGraphicsRotation_setAxisWithAxis".}
 proc fcQGraphicsRotation_applyTo(self: pointer, matrix: pointer): void {.importc: "QGraphicsRotation_applyTo".}
 proc fcQGraphicsRotation_originChanged(self: pointer, ): void {.importc: "QGraphicsRotation_originChanged".}
-proc fcQGraphicsRotation_connect_originChanged(self: pointer, slot: int) {.importc: "QGraphicsRotation_connect_originChanged".}
+proc fcQGraphicsRotation_connect_originChanged(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QGraphicsRotation_connect_originChanged".}
 proc fcQGraphicsRotation_angleChanged(self: pointer, ): void {.importc: "QGraphicsRotation_angleChanged".}
-proc fcQGraphicsRotation_connect_angleChanged(self: pointer, slot: int) {.importc: "QGraphicsRotation_connect_angleChanged".}
+proc fcQGraphicsRotation_connect_angleChanged(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QGraphicsRotation_connect_angleChanged".}
 proc fcQGraphicsRotation_axisChanged(self: pointer, ): void {.importc: "QGraphicsRotation_axisChanged".}
-proc fcQGraphicsRotation_connect_axisChanged(self: pointer, slot: int) {.importc: "QGraphicsRotation_connect_axisChanged".}
+proc fcQGraphicsRotation_connect_axisChanged(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QGraphicsRotation_connect_axisChanged".}
 proc fcQGraphicsRotation_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QGraphicsRotation_tr2".}
 proc fcQGraphicsRotation_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QGraphicsRotation_tr3".}
 type cQGraphicsRotationVTable = object
@@ -462,71 +462,91 @@ proc originChanged*(self: gen_qgraphicstransform_types.QGraphicsScale, ): void =
   fcQGraphicsScale_originChanged(self.h)
 
 type QGraphicsScaleoriginChangedSlot* = proc()
-proc miqt_exec_callback_cQGraphicsScale_originChanged(slot: int) {.exportc: "miqt_exec_callback_QGraphicsScale_originChanged".} =
+proc miqt_exec_callback_cQGraphicsScale_originChanged(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QGraphicsScaleoriginChangedSlot](cast[pointer](slot))
   nimfunc[]()
+
+proc miqt_exec_callback_cQGraphicsScale_originChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QGraphicsScaleoriginChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
 
 proc onoriginChanged*(self: gen_qgraphicstransform_types.QGraphicsScale, slot: QGraphicsScaleoriginChangedSlot) =
   var tmp = new QGraphicsScaleoriginChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQGraphicsScale_connect_originChanged(self.h, cast[int](addr tmp[]))
+  fcQGraphicsScale_connect_originChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQGraphicsScale_originChanged, miqt_exec_callback_cQGraphicsScale_originChanged_release)
 
 proc xScaleChanged*(self: gen_qgraphicstransform_types.QGraphicsScale, ): void =
   fcQGraphicsScale_xScaleChanged(self.h)
 
 type QGraphicsScalexScaleChangedSlot* = proc()
-proc miqt_exec_callback_cQGraphicsScale_xScaleChanged(slot: int) {.exportc: "miqt_exec_callback_QGraphicsScale_xScaleChanged".} =
+proc miqt_exec_callback_cQGraphicsScale_xScaleChanged(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QGraphicsScalexScaleChangedSlot](cast[pointer](slot))
   nimfunc[]()
+
+proc miqt_exec_callback_cQGraphicsScale_xScaleChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QGraphicsScalexScaleChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
 
 proc onxScaleChanged*(self: gen_qgraphicstransform_types.QGraphicsScale, slot: QGraphicsScalexScaleChangedSlot) =
   var tmp = new QGraphicsScalexScaleChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQGraphicsScale_connect_xScaleChanged(self.h, cast[int](addr tmp[]))
+  fcQGraphicsScale_connect_xScaleChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQGraphicsScale_xScaleChanged, miqt_exec_callback_cQGraphicsScale_xScaleChanged_release)
 
 proc yScaleChanged*(self: gen_qgraphicstransform_types.QGraphicsScale, ): void =
   fcQGraphicsScale_yScaleChanged(self.h)
 
 type QGraphicsScaleyScaleChangedSlot* = proc()
-proc miqt_exec_callback_cQGraphicsScale_yScaleChanged(slot: int) {.exportc: "miqt_exec_callback_QGraphicsScale_yScaleChanged".} =
+proc miqt_exec_callback_cQGraphicsScale_yScaleChanged(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QGraphicsScaleyScaleChangedSlot](cast[pointer](slot))
   nimfunc[]()
+
+proc miqt_exec_callback_cQGraphicsScale_yScaleChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QGraphicsScaleyScaleChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
 
 proc onyScaleChanged*(self: gen_qgraphicstransform_types.QGraphicsScale, slot: QGraphicsScaleyScaleChangedSlot) =
   var tmp = new QGraphicsScaleyScaleChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQGraphicsScale_connect_yScaleChanged(self.h, cast[int](addr tmp[]))
+  fcQGraphicsScale_connect_yScaleChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQGraphicsScale_yScaleChanged, miqt_exec_callback_cQGraphicsScale_yScaleChanged_release)
 
 proc zScaleChanged*(self: gen_qgraphicstransform_types.QGraphicsScale, ): void =
   fcQGraphicsScale_zScaleChanged(self.h)
 
 type QGraphicsScalezScaleChangedSlot* = proc()
-proc miqt_exec_callback_cQGraphicsScale_zScaleChanged(slot: int) {.exportc: "miqt_exec_callback_QGraphicsScale_zScaleChanged".} =
+proc miqt_exec_callback_cQGraphicsScale_zScaleChanged(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QGraphicsScalezScaleChangedSlot](cast[pointer](slot))
   nimfunc[]()
+
+proc miqt_exec_callback_cQGraphicsScale_zScaleChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QGraphicsScalezScaleChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
 
 proc onzScaleChanged*(self: gen_qgraphicstransform_types.QGraphicsScale, slot: QGraphicsScalezScaleChangedSlot) =
   var tmp = new QGraphicsScalezScaleChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQGraphicsScale_connect_zScaleChanged(self.h, cast[int](addr tmp[]))
+  fcQGraphicsScale_connect_zScaleChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQGraphicsScale_zScaleChanged, miqt_exec_callback_cQGraphicsScale_zScaleChanged_release)
 
 proc scaleChanged*(self: gen_qgraphicstransform_types.QGraphicsScale, ): void =
   fcQGraphicsScale_scaleChanged(self.h)
 
 type QGraphicsScalescaleChangedSlot* = proc()
-proc miqt_exec_callback_cQGraphicsScale_scaleChanged(slot: int) {.exportc: "miqt_exec_callback_QGraphicsScale_scaleChanged".} =
+proc miqt_exec_callback_cQGraphicsScale_scaleChanged(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QGraphicsScalescaleChangedSlot](cast[pointer](slot))
   nimfunc[]()
+
+proc miqt_exec_callback_cQGraphicsScale_scaleChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QGraphicsScalescaleChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
 
 proc onscaleChanged*(self: gen_qgraphicstransform_types.QGraphicsScale, slot: QGraphicsScalescaleChangedSlot) =
   var tmp = new QGraphicsScalescaleChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQGraphicsScale_connect_scaleChanged(self.h, cast[int](addr tmp[]))
+  fcQGraphicsScale_connect_scaleChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQGraphicsScale_scaleChanged, miqt_exec_callback_cQGraphicsScale_scaleChanged_release)
 
 proc tr*(_: type gen_qgraphicstransform_types.QGraphicsScale, s: cstring, c: cstring): string =
   let v_ms = fcQGraphicsScale_tr2(s, c)
@@ -780,43 +800,55 @@ proc originChanged*(self: gen_qgraphicstransform_types.QGraphicsRotation, ): voi
   fcQGraphicsRotation_originChanged(self.h)
 
 type QGraphicsRotationoriginChangedSlot* = proc()
-proc miqt_exec_callback_cQGraphicsRotation_originChanged(slot: int) {.exportc: "miqt_exec_callback_QGraphicsRotation_originChanged".} =
+proc miqt_exec_callback_cQGraphicsRotation_originChanged(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QGraphicsRotationoriginChangedSlot](cast[pointer](slot))
   nimfunc[]()
+
+proc miqt_exec_callback_cQGraphicsRotation_originChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QGraphicsRotationoriginChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
 
 proc onoriginChanged*(self: gen_qgraphicstransform_types.QGraphicsRotation, slot: QGraphicsRotationoriginChangedSlot) =
   var tmp = new QGraphicsRotationoriginChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQGraphicsRotation_connect_originChanged(self.h, cast[int](addr tmp[]))
+  fcQGraphicsRotation_connect_originChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQGraphicsRotation_originChanged, miqt_exec_callback_cQGraphicsRotation_originChanged_release)
 
 proc angleChanged*(self: gen_qgraphicstransform_types.QGraphicsRotation, ): void =
   fcQGraphicsRotation_angleChanged(self.h)
 
 type QGraphicsRotationangleChangedSlot* = proc()
-proc miqt_exec_callback_cQGraphicsRotation_angleChanged(slot: int) {.exportc: "miqt_exec_callback_QGraphicsRotation_angleChanged".} =
+proc miqt_exec_callback_cQGraphicsRotation_angleChanged(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QGraphicsRotationangleChangedSlot](cast[pointer](slot))
   nimfunc[]()
+
+proc miqt_exec_callback_cQGraphicsRotation_angleChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QGraphicsRotationangleChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
 
 proc onangleChanged*(self: gen_qgraphicstransform_types.QGraphicsRotation, slot: QGraphicsRotationangleChangedSlot) =
   var tmp = new QGraphicsRotationangleChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQGraphicsRotation_connect_angleChanged(self.h, cast[int](addr tmp[]))
+  fcQGraphicsRotation_connect_angleChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQGraphicsRotation_angleChanged, miqt_exec_callback_cQGraphicsRotation_angleChanged_release)
 
 proc axisChanged*(self: gen_qgraphicstransform_types.QGraphicsRotation, ): void =
   fcQGraphicsRotation_axisChanged(self.h)
 
 type QGraphicsRotationaxisChangedSlot* = proc()
-proc miqt_exec_callback_cQGraphicsRotation_axisChanged(slot: int) {.exportc: "miqt_exec_callback_QGraphicsRotation_axisChanged".} =
+proc miqt_exec_callback_cQGraphicsRotation_axisChanged(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QGraphicsRotationaxisChangedSlot](cast[pointer](slot))
   nimfunc[]()
+
+proc miqt_exec_callback_cQGraphicsRotation_axisChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QGraphicsRotationaxisChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
 
 proc onaxisChanged*(self: gen_qgraphicstransform_types.QGraphicsRotation, slot: QGraphicsRotationaxisChangedSlot) =
   var tmp = new QGraphicsRotationaxisChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQGraphicsRotation_connect_axisChanged(self.h, cast[int](addr tmp[]))
+  fcQGraphicsRotation_connect_axisChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQGraphicsRotation_axisChanged, miqt_exec_callback_cQGraphicsRotation_axisChanged_release)
 
 proc tr*(_: type gen_qgraphicstransform_types.QGraphicsRotation, s: cstring, c: cstring): string =
   let v_ms = fcQGraphicsRotation_tr2(s, c)

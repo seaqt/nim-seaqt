@@ -81,9 +81,9 @@ proc fcQTcpServer_resumeAccepting(self: pointer, ): void {.importc: "QTcpServer_
 proc fcQTcpServer_setProxy(self: pointer, networkProxy: pointer): void {.importc: "QTcpServer_setProxy".}
 proc fcQTcpServer_proxy(self: pointer, ): pointer {.importc: "QTcpServer_proxy".}
 proc fcQTcpServer_newConnection(self: pointer, ): void {.importc: "QTcpServer_newConnection".}
-proc fcQTcpServer_connect_newConnection(self: pointer, slot: int) {.importc: "QTcpServer_connect_newConnection".}
+proc fcQTcpServer_connect_newConnection(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QTcpServer_connect_newConnection".}
 proc fcQTcpServer_acceptError(self: pointer, socketError: cint): void {.importc: "QTcpServer_acceptError".}
-proc fcQTcpServer_connect_acceptError(self: pointer, slot: int) {.importc: "QTcpServer_connect_acceptError".}
+proc fcQTcpServer_connect_acceptError(self: pointer, slot: int, callback: proc (slot: int, socketError: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QTcpServer_connect_acceptError".}
 proc fcQTcpServer_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QTcpServer_tr2".}
 proc fcQTcpServer_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QTcpServer_tr3".}
 proc fcQTcpServer_listen1(self: pointer, address: pointer): bool {.importc: "QTcpServer_listen1".}
@@ -205,31 +205,39 @@ proc newConnection*(self: gen_qtcpserver_types.QTcpServer, ): void =
   fcQTcpServer_newConnection(self.h)
 
 type QTcpServernewConnectionSlot* = proc()
-proc miqt_exec_callback_cQTcpServer_newConnection(slot: int) {.exportc: "miqt_exec_callback_QTcpServer_newConnection".} =
+proc miqt_exec_callback_cQTcpServer_newConnection(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QTcpServernewConnectionSlot](cast[pointer](slot))
   nimfunc[]()
+
+proc miqt_exec_callback_cQTcpServer_newConnection_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QTcpServernewConnectionSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
 
 proc onnewConnection*(self: gen_qtcpserver_types.QTcpServer, slot: QTcpServernewConnectionSlot) =
   var tmp = new QTcpServernewConnectionSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQTcpServer_connect_newConnection(self.h, cast[int](addr tmp[]))
+  fcQTcpServer_connect_newConnection(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQTcpServer_newConnection, miqt_exec_callback_cQTcpServer_newConnection_release)
 
 proc acceptError*(self: gen_qtcpserver_types.QTcpServer, socketError: cint): void =
   fcQTcpServer_acceptError(self.h, cint(socketError))
 
 type QTcpServeracceptErrorSlot* = proc(socketError: cint)
-proc miqt_exec_callback_cQTcpServer_acceptError(slot: int, socketError: cint) {.exportc: "miqt_exec_callback_QTcpServer_acceptError".} =
+proc miqt_exec_callback_cQTcpServer_acceptError(slot: int, socketError: cint) {.cdecl.} =
   let nimfunc = cast[ptr QTcpServeracceptErrorSlot](cast[pointer](slot))
   let slotval1 = cint(socketError)
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQTcpServer_acceptError_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QTcpServeracceptErrorSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onacceptError*(self: gen_qtcpserver_types.QTcpServer, slot: QTcpServeracceptErrorSlot) =
   var tmp = new QTcpServeracceptErrorSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQTcpServer_connect_acceptError(self.h, cast[int](addr tmp[]))
+  fcQTcpServer_connect_acceptError(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQTcpServer_acceptError, miqt_exec_callback_cQTcpServer_acceptError_release)
 
 proc tr*(_: type gen_qtcpserver_types.QTcpServer, s: cstring, c: cstring): string =
   let v_ms = fcQTcpServer_tr2(s, c)

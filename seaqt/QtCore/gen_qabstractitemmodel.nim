@@ -190,13 +190,13 @@ proc fcQAbstractItemModel_roleNames(self: pointer, ): struct_miqt_map {.importc:
 proc fcQAbstractItemModel_checkIndex(self: pointer, index: pointer): bool {.importc: "QAbstractItemModel_checkIndex".}
 proc fcQAbstractItemModel_multiData(self: pointer, index: pointer, roleDataSpan: pointer): void {.importc: "QAbstractItemModel_multiData".}
 proc fcQAbstractItemModel_dataChanged(self: pointer, topLeft: pointer, bottomRight: pointer): void {.importc: "QAbstractItemModel_dataChanged".}
-proc fcQAbstractItemModel_connect_dataChanged(self: pointer, slot: int) {.importc: "QAbstractItemModel_connect_dataChanged".}
+proc fcQAbstractItemModel_connect_dataChanged(self: pointer, slot: int, callback: proc (slot: int, topLeft: pointer, bottomRight: pointer) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QAbstractItemModel_connect_dataChanged".}
 proc fcQAbstractItemModel_headerDataChanged(self: pointer, orientation: cint, first: cint, last: cint): void {.importc: "QAbstractItemModel_headerDataChanged".}
-proc fcQAbstractItemModel_connect_headerDataChanged(self: pointer, slot: int) {.importc: "QAbstractItemModel_connect_headerDataChanged".}
+proc fcQAbstractItemModel_connect_headerDataChanged(self: pointer, slot: int, callback: proc (slot: int, orientation: cint, first: cint, last: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QAbstractItemModel_connect_headerDataChanged".}
 proc fcQAbstractItemModel_layoutChanged(self: pointer, ): void {.importc: "QAbstractItemModel_layoutChanged".}
-proc fcQAbstractItemModel_connect_layoutChanged(self: pointer, slot: int) {.importc: "QAbstractItemModel_connect_layoutChanged".}
+proc fcQAbstractItemModel_connect_layoutChanged(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QAbstractItemModel_connect_layoutChanged".}
 proc fcQAbstractItemModel_layoutAboutToBeChanged(self: pointer, ): void {.importc: "QAbstractItemModel_layoutAboutToBeChanged".}
-proc fcQAbstractItemModel_connect_layoutAboutToBeChanged(self: pointer, slot: int) {.importc: "QAbstractItemModel_connect_layoutAboutToBeChanged".}
+proc fcQAbstractItemModel_connect_layoutAboutToBeChanged(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QAbstractItemModel_connect_layoutAboutToBeChanged".}
 proc fcQAbstractItemModel_submit(self: pointer, ): bool {.importc: "QAbstractItemModel_submit".}
 proc fcQAbstractItemModel_revert(self: pointer, ): void {.importc: "QAbstractItemModel_revert".}
 proc fcQAbstractItemModel_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QAbstractItemModel_tr2".}
@@ -208,15 +208,15 @@ proc fcQAbstractItemModel_removeRow2(self: pointer, row: cint, parent: pointer):
 proc fcQAbstractItemModel_removeColumn2(self: pointer, column: cint, parent: pointer): bool {.importc: "QAbstractItemModel_removeColumn2".}
 proc fcQAbstractItemModel_checkIndex2(self: pointer, index: pointer, options: cint): bool {.importc: "QAbstractItemModel_checkIndex2".}
 proc fcQAbstractItemModel_dataChanged3(self: pointer, topLeft: pointer, bottomRight: pointer, roles: struct_miqt_array): void {.importc: "QAbstractItemModel_dataChanged3".}
-proc fcQAbstractItemModel_connect_dataChanged3(self: pointer, slot: int) {.importc: "QAbstractItemModel_connect_dataChanged3".}
+proc fcQAbstractItemModel_connect_dataChanged3(self: pointer, slot: int, callback: proc (slot: int, topLeft: pointer, bottomRight: pointer, roles: struct_miqt_array) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QAbstractItemModel_connect_dataChanged3".}
 proc fcQAbstractItemModel_layoutChanged1(self: pointer, parents: struct_miqt_array): void {.importc: "QAbstractItemModel_layoutChanged1".}
-proc fcQAbstractItemModel_connect_layoutChanged1(self: pointer, slot: int) {.importc: "QAbstractItemModel_connect_layoutChanged1".}
+proc fcQAbstractItemModel_connect_layoutChanged1(self: pointer, slot: int, callback: proc (slot: int, parents: struct_miqt_array) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QAbstractItemModel_connect_layoutChanged1".}
 proc fcQAbstractItemModel_layoutChanged2(self: pointer, parents: struct_miqt_array, hint: cint): void {.importc: "QAbstractItemModel_layoutChanged2".}
-proc fcQAbstractItemModel_connect_layoutChanged2(self: pointer, slot: int) {.importc: "QAbstractItemModel_connect_layoutChanged2".}
+proc fcQAbstractItemModel_connect_layoutChanged2(self: pointer, slot: int, callback: proc (slot: int, parents: struct_miqt_array, hint: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QAbstractItemModel_connect_layoutChanged2".}
 proc fcQAbstractItemModel_layoutAboutToBeChanged1(self: pointer, parents: struct_miqt_array): void {.importc: "QAbstractItemModel_layoutAboutToBeChanged1".}
-proc fcQAbstractItemModel_connect_layoutAboutToBeChanged1(self: pointer, slot: int) {.importc: "QAbstractItemModel_connect_layoutAboutToBeChanged1".}
+proc fcQAbstractItemModel_connect_layoutAboutToBeChanged1(self: pointer, slot: int, callback: proc (slot: int, parents: struct_miqt_array) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QAbstractItemModel_connect_layoutAboutToBeChanged1".}
 proc fcQAbstractItemModel_layoutAboutToBeChanged2(self: pointer, parents: struct_miqt_array, hint: cint): void {.importc: "QAbstractItemModel_layoutAboutToBeChanged2".}
-proc fcQAbstractItemModel_connect_layoutAboutToBeChanged2(self: pointer, slot: int) {.importc: "QAbstractItemModel_connect_layoutAboutToBeChanged2".}
+proc fcQAbstractItemModel_connect_layoutAboutToBeChanged2(self: pointer, slot: int, callback: proc (slot: int, parents: struct_miqt_array, hint: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QAbstractItemModel_connect_layoutAboutToBeChanged2".}
 type cQAbstractItemModelVTable = object
   destructor*: proc(vtbl: ptr cQAbstractItemModelVTable, self: ptr cQAbstractItemModel) {.cdecl, raises:[], gcsafe.}
   metaObject*: proc(vtbl, self: pointer, ): pointer {.cdecl, raises: [], gcsafe.}
@@ -916,7 +916,7 @@ proc dataChanged*(self: gen_qabstractitemmodel_types.QAbstractItemModel, topLeft
   fcQAbstractItemModel_dataChanged(self.h, topLeft.h, bottomRight.h)
 
 type QAbstractItemModeldataChangedSlot* = proc(topLeft: gen_qabstractitemmodel_types.QModelIndex, bottomRight: gen_qabstractitemmodel_types.QModelIndex)
-proc miqt_exec_callback_cQAbstractItemModel_dataChanged(slot: int, topLeft: pointer, bottomRight: pointer) {.exportc: "miqt_exec_callback_QAbstractItemModel_dataChanged".} =
+proc miqt_exec_callback_cQAbstractItemModel_dataChanged(slot: int, topLeft: pointer, bottomRight: pointer) {.cdecl.} =
   let nimfunc = cast[ptr QAbstractItemModeldataChangedSlot](cast[pointer](slot))
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: topLeft)
 
@@ -924,17 +924,21 @@ proc miqt_exec_callback_cQAbstractItemModel_dataChanged(slot: int, topLeft: poin
 
   nimfunc[](slotval1, slotval2)
 
+proc miqt_exec_callback_cQAbstractItemModel_dataChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QAbstractItemModeldataChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc ondataChanged*(self: gen_qabstractitemmodel_types.QAbstractItemModel, slot: QAbstractItemModeldataChangedSlot) =
   var tmp = new QAbstractItemModeldataChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQAbstractItemModel_connect_dataChanged(self.h, cast[int](addr tmp[]))
+  fcQAbstractItemModel_connect_dataChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQAbstractItemModel_dataChanged, miqt_exec_callback_cQAbstractItemModel_dataChanged_release)
 
 proc headerDataChanged*(self: gen_qabstractitemmodel_types.QAbstractItemModel, orientation: cint, first: cint, last: cint): void =
   fcQAbstractItemModel_headerDataChanged(self.h, cint(orientation), first, last)
 
 type QAbstractItemModelheaderDataChangedSlot* = proc(orientation: cint, first: cint, last: cint)
-proc miqt_exec_callback_cQAbstractItemModel_headerDataChanged(slot: int, orientation: cint, first: cint, last: cint) {.exportc: "miqt_exec_callback_QAbstractItemModel_headerDataChanged".} =
+proc miqt_exec_callback_cQAbstractItemModel_headerDataChanged(slot: int, orientation: cint, first: cint, last: cint) {.cdecl.} =
   let nimfunc = cast[ptr QAbstractItemModelheaderDataChangedSlot](cast[pointer](slot))
   let slotval1 = cint(orientation)
 
@@ -944,39 +948,51 @@ proc miqt_exec_callback_cQAbstractItemModel_headerDataChanged(slot: int, orienta
 
   nimfunc[](slotval1, slotval2, slotval3)
 
+proc miqt_exec_callback_cQAbstractItemModel_headerDataChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QAbstractItemModelheaderDataChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onheaderDataChanged*(self: gen_qabstractitemmodel_types.QAbstractItemModel, slot: QAbstractItemModelheaderDataChangedSlot) =
   var tmp = new QAbstractItemModelheaderDataChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQAbstractItemModel_connect_headerDataChanged(self.h, cast[int](addr tmp[]))
+  fcQAbstractItemModel_connect_headerDataChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQAbstractItemModel_headerDataChanged, miqt_exec_callback_cQAbstractItemModel_headerDataChanged_release)
 
 proc layoutChanged*(self: gen_qabstractitemmodel_types.QAbstractItemModel, ): void =
   fcQAbstractItemModel_layoutChanged(self.h)
 
 type QAbstractItemModellayoutChangedSlot* = proc()
-proc miqt_exec_callback_cQAbstractItemModel_layoutChanged(slot: int) {.exportc: "miqt_exec_callback_QAbstractItemModel_layoutChanged".} =
+proc miqt_exec_callback_cQAbstractItemModel_layoutChanged(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QAbstractItemModellayoutChangedSlot](cast[pointer](slot))
   nimfunc[]()
+
+proc miqt_exec_callback_cQAbstractItemModel_layoutChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QAbstractItemModellayoutChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
 
 proc onlayoutChanged*(self: gen_qabstractitemmodel_types.QAbstractItemModel, slot: QAbstractItemModellayoutChangedSlot) =
   var tmp = new QAbstractItemModellayoutChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQAbstractItemModel_connect_layoutChanged(self.h, cast[int](addr tmp[]))
+  fcQAbstractItemModel_connect_layoutChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQAbstractItemModel_layoutChanged, miqt_exec_callback_cQAbstractItemModel_layoutChanged_release)
 
 proc layoutAboutToBeChanged*(self: gen_qabstractitemmodel_types.QAbstractItemModel, ): void =
   fcQAbstractItemModel_layoutAboutToBeChanged(self.h)
 
 type QAbstractItemModellayoutAboutToBeChangedSlot* = proc()
-proc miqt_exec_callback_cQAbstractItemModel_layoutAboutToBeChanged(slot: int) {.exportc: "miqt_exec_callback_QAbstractItemModel_layoutAboutToBeChanged".} =
+proc miqt_exec_callback_cQAbstractItemModel_layoutAboutToBeChanged(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QAbstractItemModellayoutAboutToBeChangedSlot](cast[pointer](slot))
   nimfunc[]()
+
+proc miqt_exec_callback_cQAbstractItemModel_layoutAboutToBeChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QAbstractItemModellayoutAboutToBeChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
 
 proc onlayoutAboutToBeChanged*(self: gen_qabstractitemmodel_types.QAbstractItemModel, slot: QAbstractItemModellayoutAboutToBeChangedSlot) =
   var tmp = new QAbstractItemModellayoutAboutToBeChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQAbstractItemModel_connect_layoutAboutToBeChanged(self.h, cast[int](addr tmp[]))
+  fcQAbstractItemModel_connect_layoutAboutToBeChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQAbstractItemModel_layoutAboutToBeChanged, miqt_exec_callback_cQAbstractItemModel_layoutAboutToBeChanged_release)
 
 proc submit*(self: gen_qabstractitemmodel_types.QAbstractItemModel, ): bool =
   fcQAbstractItemModel_submit(self.h)
@@ -1022,7 +1038,7 @@ proc dataChanged*(self: gen_qabstractitemmodel_types.QAbstractItemModel, topLeft
   fcQAbstractItemModel_dataChanged3(self.h, topLeft.h, bottomRight.h, struct_miqt_array(len: csize_t(len(roles)), data: if len(roles) == 0: nil else: addr(roles_CArray[0])))
 
 type QAbstractItemModeldataChanged3Slot* = proc(topLeft: gen_qabstractitemmodel_types.QModelIndex, bottomRight: gen_qabstractitemmodel_types.QModelIndex, roles: seq[cint])
-proc miqt_exec_callback_cQAbstractItemModel_dataChanged3(slot: int, topLeft: pointer, bottomRight: pointer, roles: struct_miqt_array) {.exportc: "miqt_exec_callback_QAbstractItemModel_dataChanged3".} =
+proc miqt_exec_callback_cQAbstractItemModel_dataChanged3(slot: int, topLeft: pointer, bottomRight: pointer, roles: struct_miqt_array) {.cdecl.} =
   let nimfunc = cast[ptr QAbstractItemModeldataChanged3Slot](cast[pointer](slot))
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: topLeft)
 
@@ -1037,11 +1053,15 @@ proc miqt_exec_callback_cQAbstractItemModel_dataChanged3(slot: int, topLeft: poi
 
   nimfunc[](slotval1, slotval2, slotval3)
 
+proc miqt_exec_callback_cQAbstractItemModel_dataChanged3_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QAbstractItemModeldataChanged3Slot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc ondataChanged*(self: gen_qabstractitemmodel_types.QAbstractItemModel, slot: QAbstractItemModeldataChanged3Slot) =
   var tmp = new QAbstractItemModeldataChanged3Slot
   tmp[] = slot
   GC_ref(tmp)
-  fcQAbstractItemModel_connect_dataChanged3(self.h, cast[int](addr tmp[]))
+  fcQAbstractItemModel_connect_dataChanged3(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQAbstractItemModel_dataChanged3, miqt_exec_callback_cQAbstractItemModel_dataChanged3_release)
 
 proc layoutChanged*(self: gen_qabstractitemmodel_types.QAbstractItemModel, parents: seq[gen_qabstractitemmodel_types.QPersistentModelIndex]): void =
   var parents_CArray = newSeq[pointer](len(parents))
@@ -1051,7 +1071,7 @@ proc layoutChanged*(self: gen_qabstractitemmodel_types.QAbstractItemModel, paren
   fcQAbstractItemModel_layoutChanged1(self.h, struct_miqt_array(len: csize_t(len(parents)), data: if len(parents) == 0: nil else: addr(parents_CArray[0])))
 
 type QAbstractItemModellayoutChanged1Slot* = proc(parents: seq[gen_qabstractitemmodel_types.QPersistentModelIndex])
-proc miqt_exec_callback_cQAbstractItemModel_layoutChanged1(slot: int, parents: struct_miqt_array) {.exportc: "miqt_exec_callback_QAbstractItemModel_layoutChanged1".} =
+proc miqt_exec_callback_cQAbstractItemModel_layoutChanged1(slot: int, parents: struct_miqt_array) {.cdecl.} =
   let nimfunc = cast[ptr QAbstractItemModellayoutChanged1Slot](cast[pointer](slot))
   var vparents_ma = parents
   var vparentsx_ret = newSeq[gen_qabstractitemmodel_types.QPersistentModelIndex](int(vparents_ma.len))
@@ -1062,11 +1082,15 @@ proc miqt_exec_callback_cQAbstractItemModel_layoutChanged1(slot: int, parents: s
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQAbstractItemModel_layoutChanged1_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QAbstractItemModellayoutChanged1Slot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onlayoutChanged*(self: gen_qabstractitemmodel_types.QAbstractItemModel, slot: QAbstractItemModellayoutChanged1Slot) =
   var tmp = new QAbstractItemModellayoutChanged1Slot
   tmp[] = slot
   GC_ref(tmp)
-  fcQAbstractItemModel_connect_layoutChanged1(self.h, cast[int](addr tmp[]))
+  fcQAbstractItemModel_connect_layoutChanged1(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQAbstractItemModel_layoutChanged1, miqt_exec_callback_cQAbstractItemModel_layoutChanged1_release)
 
 proc layoutChanged*(self: gen_qabstractitemmodel_types.QAbstractItemModel, parents: seq[gen_qabstractitemmodel_types.QPersistentModelIndex], hint: cint): void =
   var parents_CArray = newSeq[pointer](len(parents))
@@ -1076,7 +1100,7 @@ proc layoutChanged*(self: gen_qabstractitemmodel_types.QAbstractItemModel, paren
   fcQAbstractItemModel_layoutChanged2(self.h, struct_miqt_array(len: csize_t(len(parents)), data: if len(parents) == 0: nil else: addr(parents_CArray[0])), cint(hint))
 
 type QAbstractItemModellayoutChanged2Slot* = proc(parents: seq[gen_qabstractitemmodel_types.QPersistentModelIndex], hint: cint)
-proc miqt_exec_callback_cQAbstractItemModel_layoutChanged2(slot: int, parents: struct_miqt_array, hint: cint) {.exportc: "miqt_exec_callback_QAbstractItemModel_layoutChanged2".} =
+proc miqt_exec_callback_cQAbstractItemModel_layoutChanged2(slot: int, parents: struct_miqt_array, hint: cint) {.cdecl.} =
   let nimfunc = cast[ptr QAbstractItemModellayoutChanged2Slot](cast[pointer](slot))
   var vparents_ma = parents
   var vparentsx_ret = newSeq[gen_qabstractitemmodel_types.QPersistentModelIndex](int(vparents_ma.len))
@@ -1089,11 +1113,15 @@ proc miqt_exec_callback_cQAbstractItemModel_layoutChanged2(slot: int, parents: s
 
   nimfunc[](slotval1, slotval2)
 
+proc miqt_exec_callback_cQAbstractItemModel_layoutChanged2_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QAbstractItemModellayoutChanged2Slot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onlayoutChanged*(self: gen_qabstractitemmodel_types.QAbstractItemModel, slot: QAbstractItemModellayoutChanged2Slot) =
   var tmp = new QAbstractItemModellayoutChanged2Slot
   tmp[] = slot
   GC_ref(tmp)
-  fcQAbstractItemModel_connect_layoutChanged2(self.h, cast[int](addr tmp[]))
+  fcQAbstractItemModel_connect_layoutChanged2(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQAbstractItemModel_layoutChanged2, miqt_exec_callback_cQAbstractItemModel_layoutChanged2_release)
 
 proc layoutAboutToBeChanged*(self: gen_qabstractitemmodel_types.QAbstractItemModel, parents: seq[gen_qabstractitemmodel_types.QPersistentModelIndex]): void =
   var parents_CArray = newSeq[pointer](len(parents))
@@ -1103,7 +1131,7 @@ proc layoutAboutToBeChanged*(self: gen_qabstractitemmodel_types.QAbstractItemMod
   fcQAbstractItemModel_layoutAboutToBeChanged1(self.h, struct_miqt_array(len: csize_t(len(parents)), data: if len(parents) == 0: nil else: addr(parents_CArray[0])))
 
 type QAbstractItemModellayoutAboutToBeChanged1Slot* = proc(parents: seq[gen_qabstractitemmodel_types.QPersistentModelIndex])
-proc miqt_exec_callback_cQAbstractItemModel_layoutAboutToBeChanged1(slot: int, parents: struct_miqt_array) {.exportc: "miqt_exec_callback_QAbstractItemModel_layoutAboutToBeChanged1".} =
+proc miqt_exec_callback_cQAbstractItemModel_layoutAboutToBeChanged1(slot: int, parents: struct_miqt_array) {.cdecl.} =
   let nimfunc = cast[ptr QAbstractItemModellayoutAboutToBeChanged1Slot](cast[pointer](slot))
   var vparents_ma = parents
   var vparentsx_ret = newSeq[gen_qabstractitemmodel_types.QPersistentModelIndex](int(vparents_ma.len))
@@ -1114,11 +1142,15 @@ proc miqt_exec_callback_cQAbstractItemModel_layoutAboutToBeChanged1(slot: int, p
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQAbstractItemModel_layoutAboutToBeChanged1_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QAbstractItemModellayoutAboutToBeChanged1Slot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onlayoutAboutToBeChanged*(self: gen_qabstractitemmodel_types.QAbstractItemModel, slot: QAbstractItemModellayoutAboutToBeChanged1Slot) =
   var tmp = new QAbstractItemModellayoutAboutToBeChanged1Slot
   tmp[] = slot
   GC_ref(tmp)
-  fcQAbstractItemModel_connect_layoutAboutToBeChanged1(self.h, cast[int](addr tmp[]))
+  fcQAbstractItemModel_connect_layoutAboutToBeChanged1(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQAbstractItemModel_layoutAboutToBeChanged1, miqt_exec_callback_cQAbstractItemModel_layoutAboutToBeChanged1_release)
 
 proc layoutAboutToBeChanged*(self: gen_qabstractitemmodel_types.QAbstractItemModel, parents: seq[gen_qabstractitemmodel_types.QPersistentModelIndex], hint: cint): void =
   var parents_CArray = newSeq[pointer](len(parents))
@@ -1128,7 +1160,7 @@ proc layoutAboutToBeChanged*(self: gen_qabstractitemmodel_types.QAbstractItemMod
   fcQAbstractItemModel_layoutAboutToBeChanged2(self.h, struct_miqt_array(len: csize_t(len(parents)), data: if len(parents) == 0: nil else: addr(parents_CArray[0])), cint(hint))
 
 type QAbstractItemModellayoutAboutToBeChanged2Slot* = proc(parents: seq[gen_qabstractitemmodel_types.QPersistentModelIndex], hint: cint)
-proc miqt_exec_callback_cQAbstractItemModel_layoutAboutToBeChanged2(slot: int, parents: struct_miqt_array, hint: cint) {.exportc: "miqt_exec_callback_QAbstractItemModel_layoutAboutToBeChanged2".} =
+proc miqt_exec_callback_cQAbstractItemModel_layoutAboutToBeChanged2(slot: int, parents: struct_miqt_array, hint: cint) {.cdecl.} =
   let nimfunc = cast[ptr QAbstractItemModellayoutAboutToBeChanged2Slot](cast[pointer](slot))
   var vparents_ma = parents
   var vparentsx_ret = newSeq[gen_qabstractitemmodel_types.QPersistentModelIndex](int(vparents_ma.len))
@@ -1141,11 +1173,15 @@ proc miqt_exec_callback_cQAbstractItemModel_layoutAboutToBeChanged2(slot: int, p
 
   nimfunc[](slotval1, slotval2)
 
+proc miqt_exec_callback_cQAbstractItemModel_layoutAboutToBeChanged2_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QAbstractItemModellayoutAboutToBeChanged2Slot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onlayoutAboutToBeChanged*(self: gen_qabstractitemmodel_types.QAbstractItemModel, slot: QAbstractItemModellayoutAboutToBeChanged2Slot) =
   var tmp = new QAbstractItemModellayoutAboutToBeChanged2Slot
   tmp[] = slot
   GC_ref(tmp)
-  fcQAbstractItemModel_connect_layoutAboutToBeChanged2(self.h, cast[int](addr tmp[]))
+  fcQAbstractItemModel_connect_layoutAboutToBeChanged2(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQAbstractItemModel_layoutAboutToBeChanged2, miqt_exec_callback_cQAbstractItemModel_layoutAboutToBeChanged2_release)
 
 type QAbstractItemModelmetaObjectProc* = proc(self: QAbstractItemModel): gen_qobjectdefs_types.QMetaObject {.raises: [], gcsafe.}
 type QAbstractItemModelmetacastProc* = proc(self: QAbstractItemModel, param1: cstring): pointer {.raises: [], gcsafe.}

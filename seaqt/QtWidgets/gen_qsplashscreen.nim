@@ -84,7 +84,7 @@ proc fcQSplashScreen_message(self: pointer, ): struct_miqt_string {.importc: "QS
 proc fcQSplashScreen_showMessage(self: pointer, message: struct_miqt_string): void {.importc: "QSplashScreen_showMessage".}
 proc fcQSplashScreen_clearMessage(self: pointer, ): void {.importc: "QSplashScreen_clearMessage".}
 proc fcQSplashScreen_messageChanged(self: pointer, message: struct_miqt_string): void {.importc: "QSplashScreen_messageChanged".}
-proc fcQSplashScreen_connect_messageChanged(self: pointer, slot: int) {.importc: "QSplashScreen_connect_messageChanged".}
+proc fcQSplashScreen_connect_messageChanged(self: pointer, slot: int, callback: proc (slot: int, message: struct_miqt_string) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QSplashScreen_connect_messageChanged".}
 proc fcQSplashScreen_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QSplashScreen_tr2".}
 proc fcQSplashScreen_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QSplashScreen_tr3".}
 proc fcQSplashScreen_showMessage2(self: pointer, message: struct_miqt_string, alignment: cint): void {.importc: "QSplashScreen_showMessage2".}
@@ -245,7 +245,7 @@ proc messageChanged*(self: gen_qsplashscreen_types.QSplashScreen, message: strin
   fcQSplashScreen_messageChanged(self.h, struct_miqt_string(data: message, len: csize_t(len(message))))
 
 type QSplashScreenmessageChangedSlot* = proc(message: string)
-proc miqt_exec_callback_cQSplashScreen_messageChanged(slot: int, message: struct_miqt_string) {.exportc: "miqt_exec_callback_QSplashScreen_messageChanged".} =
+proc miqt_exec_callback_cQSplashScreen_messageChanged(slot: int, message: struct_miqt_string) {.cdecl.} =
   let nimfunc = cast[ptr QSplashScreenmessageChangedSlot](cast[pointer](slot))
   let vmessage_ms = message
   let vmessagex_ret = string.fromBytes(toOpenArrayByte(vmessage_ms.data, 0, int(vmessage_ms.len)-1))
@@ -254,11 +254,15 @@ proc miqt_exec_callback_cQSplashScreen_messageChanged(slot: int, message: struct
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQSplashScreen_messageChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QSplashScreenmessageChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onmessageChanged*(self: gen_qsplashscreen_types.QSplashScreen, slot: QSplashScreenmessageChangedSlot) =
   var tmp = new QSplashScreenmessageChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQSplashScreen_connect_messageChanged(self.h, cast[int](addr tmp[]))
+  fcQSplashScreen_connect_messageChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQSplashScreen_messageChanged, miqt_exec_callback_cQSplashScreen_messageChanged_release)
 
 proc tr*(_: type gen_qsplashscreen_types.QSplashScreen, s: cstring, c: cstring): string =
   let v_ms = fcQSplashScreen_tr2(s, c)

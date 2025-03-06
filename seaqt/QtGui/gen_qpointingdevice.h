@@ -82,7 +82,7 @@ QPointingDeviceUniqueId* QPointingDevice_uniqueId(const QPointingDevice* self);
 QPointingDevice* QPointingDevice_primaryPointingDevice();
 bool QPointingDevice_operatorEqual(const QPointingDevice* self, QPointingDevice* other);
 void QPointingDevice_grabChanged(const QPointingDevice* self, QObject* grabber, int transition, QPointerEvent* event, QEventPoint* point);
-void QPointingDevice_connect_grabChanged(QPointingDevice* self, intptr_t slot);
+void QPointingDevice_connect_grabChanged(QPointingDevice* self, intptr_t slot, void (*callback)(intptr_t, QObject*, int, QPointerEvent*, QEventPoint*), void (*release)(intptr_t));
 struct miqt_string QPointingDevice_tr2(const char* s, const char* c);
 struct miqt_string QPointingDevice_tr3(const char* s, const char* c, int n);
 QPointingDevice* QPointingDevice_primaryPointingDevice1(struct miqt_string seatName);

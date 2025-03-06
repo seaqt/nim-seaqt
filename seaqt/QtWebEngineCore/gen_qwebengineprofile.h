@@ -108,7 +108,7 @@ void QWebEngineProfile_setDownloadPath(QWebEngineProfile* self, struct miqt_stri
 QWebEngineClientCertificateStore* QWebEngineProfile_clientCertificateStore(QWebEngineProfile* self);
 QWebEngineProfile* QWebEngineProfile_defaultProfile();
 void QWebEngineProfile_downloadRequested(QWebEngineProfile* self, QWebEngineDownloadRequest* download);
-void QWebEngineProfile_connect_downloadRequested(QWebEngineProfile* self, intptr_t slot);
+void QWebEngineProfile_connect_downloadRequested(QWebEngineProfile* self, intptr_t slot, void (*callback)(intptr_t, QWebEngineDownloadRequest*), void (*release)(intptr_t));
 struct miqt_string QWebEngineProfile_tr2(const char* s, const char* c);
 struct miqt_string QWebEngineProfile_tr3(const char* s, const char* c, int n);
 QMetaObject* QWebEngineProfile_virtualbase_metaObject(const void* self);

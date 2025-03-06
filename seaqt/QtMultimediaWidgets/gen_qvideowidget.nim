@@ -78,9 +78,9 @@ proc fcQVideoWidget_sizeHint(self: pointer, ): pointer {.importc: "QVideoWidget_
 proc fcQVideoWidget_setFullScreen(self: pointer, fullScreen: bool): void {.importc: "QVideoWidget_setFullScreen".}
 proc fcQVideoWidget_setAspectRatioMode(self: pointer, mode: cint): void {.importc: "QVideoWidget_setAspectRatioMode".}
 proc fcQVideoWidget_fullScreenChanged(self: pointer, fullScreen: bool): void {.importc: "QVideoWidget_fullScreenChanged".}
-proc fcQVideoWidget_connect_fullScreenChanged(self: pointer, slot: int) {.importc: "QVideoWidget_connect_fullScreenChanged".}
+proc fcQVideoWidget_connect_fullScreenChanged(self: pointer, slot: int, callback: proc (slot: int, fullScreen: bool) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QVideoWidget_connect_fullScreenChanged".}
 proc fcQVideoWidget_aspectRatioModeChanged(self: pointer, mode: cint): void {.importc: "QVideoWidget_aspectRatioModeChanged".}
-proc fcQVideoWidget_connect_aspectRatioModeChanged(self: pointer, slot: int) {.importc: "QVideoWidget_connect_aspectRatioModeChanged".}
+proc fcQVideoWidget_connect_aspectRatioModeChanged(self: pointer, slot: int, callback: proc (slot: int, mode: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QVideoWidget_connect_aspectRatioModeChanged".}
 proc fcQVideoWidget_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QVideoWidget_tr2".}
 proc fcQVideoWidget_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QVideoWidget_tr3".}
 type cQVideoWidgetVTable = object
@@ -224,33 +224,41 @@ proc fullScreenChanged*(self: gen_qvideowidget_types.QVideoWidget, fullScreen: b
   fcQVideoWidget_fullScreenChanged(self.h, fullScreen)
 
 type QVideoWidgetfullScreenChangedSlot* = proc(fullScreen: bool)
-proc miqt_exec_callback_cQVideoWidget_fullScreenChanged(slot: int, fullScreen: bool) {.exportc: "miqt_exec_callback_QVideoWidget_fullScreenChanged".} =
+proc miqt_exec_callback_cQVideoWidget_fullScreenChanged(slot: int, fullScreen: bool) {.cdecl.} =
   let nimfunc = cast[ptr QVideoWidgetfullScreenChangedSlot](cast[pointer](slot))
   let slotval1 = fullScreen
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQVideoWidget_fullScreenChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QVideoWidgetfullScreenChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onfullScreenChanged*(self: gen_qvideowidget_types.QVideoWidget, slot: QVideoWidgetfullScreenChangedSlot) =
   var tmp = new QVideoWidgetfullScreenChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQVideoWidget_connect_fullScreenChanged(self.h, cast[int](addr tmp[]))
+  fcQVideoWidget_connect_fullScreenChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQVideoWidget_fullScreenChanged, miqt_exec_callback_cQVideoWidget_fullScreenChanged_release)
 
 proc aspectRatioModeChanged*(self: gen_qvideowidget_types.QVideoWidget, mode: cint): void =
   fcQVideoWidget_aspectRatioModeChanged(self.h, cint(mode))
 
 type QVideoWidgetaspectRatioModeChangedSlot* = proc(mode: cint)
-proc miqt_exec_callback_cQVideoWidget_aspectRatioModeChanged(slot: int, mode: cint) {.exportc: "miqt_exec_callback_QVideoWidget_aspectRatioModeChanged".} =
+proc miqt_exec_callback_cQVideoWidget_aspectRatioModeChanged(slot: int, mode: cint) {.cdecl.} =
   let nimfunc = cast[ptr QVideoWidgetaspectRatioModeChangedSlot](cast[pointer](slot))
   let slotval1 = cint(mode)
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQVideoWidget_aspectRatioModeChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QVideoWidgetaspectRatioModeChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onaspectRatioModeChanged*(self: gen_qvideowidget_types.QVideoWidget, slot: QVideoWidgetaspectRatioModeChangedSlot) =
   var tmp = new QVideoWidgetaspectRatioModeChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQVideoWidget_connect_aspectRatioModeChanged(self.h, cast[int](addr tmp[]))
+  fcQVideoWidget_connect_aspectRatioModeChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQVideoWidget_aspectRatioModeChanged, miqt_exec_callback_cQVideoWidget_aspectRatioModeChanged_release)
 
 proc tr*(_: type gen_qvideowidget_types.QVideoWidget, s: cstring, c: cstring): string =
   let v_ms = fcQVideoWidget_tr2(s, c)

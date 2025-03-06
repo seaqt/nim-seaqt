@@ -28,20 +28,6 @@
 extern "C" {
 #endif
 
-void miqt_exec_callback_QGuiApplication_fontDatabaseChanged(intptr_t);
-void miqt_exec_callback_QGuiApplication_screenAdded(intptr_t, QScreen*);
-void miqt_exec_callback_QGuiApplication_screenRemoved(intptr_t, QScreen*);
-void miqt_exec_callback_QGuiApplication_primaryScreenChanged(intptr_t, QScreen*);
-void miqt_exec_callback_QGuiApplication_lastWindowClosed(intptr_t);
-void miqt_exec_callback_QGuiApplication_focusObjectChanged(intptr_t, QObject*);
-void miqt_exec_callback_QGuiApplication_focusWindowChanged(intptr_t, QWindow*);
-void miqt_exec_callback_QGuiApplication_applicationStateChanged(intptr_t, int);
-void miqt_exec_callback_QGuiApplication_layoutDirectionChanged(intptr_t, int);
-void miqt_exec_callback_QGuiApplication_commitDataRequest(intptr_t, QSessionManager*);
-void miqt_exec_callback_QGuiApplication_saveStateRequest(intptr_t, QSessionManager*);
-void miqt_exec_callback_QGuiApplication_applicationDisplayNameChanged(intptr_t);
-void miqt_exec_callback_QGuiApplication_paletteChanged(intptr_t, QPalette*);
-void miqt_exec_callback_QGuiApplication_fontChanged(intptr_t, QFont*);
 #ifdef __cplusplus
 } /* extern C */
 #endif
@@ -542,161 +528,231 @@ void QGuiApplication_fontDatabaseChanged(QGuiApplication* self) {
 	self->fontDatabaseChanged();
 }
 
-void QGuiApplication_connect_fontDatabaseChanged(QGuiApplication* self, intptr_t slot) {
-	VirtualQGuiApplication::connect(self, static_cast<void (QGuiApplication::*)()>(&QGuiApplication::fontDatabaseChanged), self, [=]() {
-		miqt_exec_callback_QGuiApplication_fontDatabaseChanged(slot);
-	});
+void QGuiApplication_connect_fontDatabaseChanged(QGuiApplication* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t);
+		void operator()() {
+			callback(slot);
+		}
+	};
+	VirtualQGuiApplication::connect(self, static_cast<void (QGuiApplication::*)()>(&QGuiApplication::fontDatabaseChanged), self, local_caller{slot, callback, release});
 }
 
 void QGuiApplication_screenAdded(QGuiApplication* self, QScreen* screen) {
 	self->screenAdded(screen);
 }
 
-void QGuiApplication_connect_screenAdded(QGuiApplication* self, intptr_t slot) {
-	VirtualQGuiApplication::connect(self, static_cast<void (QGuiApplication::*)(QScreen*)>(&QGuiApplication::screenAdded), self, [=](QScreen* screen) {
-		QScreen* sigval1 = screen;
-		miqt_exec_callback_QGuiApplication_screenAdded(slot, sigval1);
-	});
+void QGuiApplication_connect_screenAdded(QGuiApplication* self, intptr_t slot, void (*callback)(intptr_t, QScreen*), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QScreen*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t, QScreen*);
+		void operator()(QScreen* screen) {
+			QScreen* sigval1 = screen;
+			callback(slot, sigval1);
+		}
+	};
+	VirtualQGuiApplication::connect(self, static_cast<void (QGuiApplication::*)(QScreen*)>(&QGuiApplication::screenAdded), self, local_caller{slot, callback, release});
 }
 
 void QGuiApplication_screenRemoved(QGuiApplication* self, QScreen* screen) {
 	self->screenRemoved(screen);
 }
 
-void QGuiApplication_connect_screenRemoved(QGuiApplication* self, intptr_t slot) {
-	VirtualQGuiApplication::connect(self, static_cast<void (QGuiApplication::*)(QScreen*)>(&QGuiApplication::screenRemoved), self, [=](QScreen* screen) {
-		QScreen* sigval1 = screen;
-		miqt_exec_callback_QGuiApplication_screenRemoved(slot, sigval1);
-	});
+void QGuiApplication_connect_screenRemoved(QGuiApplication* self, intptr_t slot, void (*callback)(intptr_t, QScreen*), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QScreen*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t, QScreen*);
+		void operator()(QScreen* screen) {
+			QScreen* sigval1 = screen;
+			callback(slot, sigval1);
+		}
+	};
+	VirtualQGuiApplication::connect(self, static_cast<void (QGuiApplication::*)(QScreen*)>(&QGuiApplication::screenRemoved), self, local_caller{slot, callback, release});
 }
 
 void QGuiApplication_primaryScreenChanged(QGuiApplication* self, QScreen* screen) {
 	self->primaryScreenChanged(screen);
 }
 
-void QGuiApplication_connect_primaryScreenChanged(QGuiApplication* self, intptr_t slot) {
-	VirtualQGuiApplication::connect(self, static_cast<void (QGuiApplication::*)(QScreen*)>(&QGuiApplication::primaryScreenChanged), self, [=](QScreen* screen) {
-		QScreen* sigval1 = screen;
-		miqt_exec_callback_QGuiApplication_primaryScreenChanged(slot, sigval1);
-	});
+void QGuiApplication_connect_primaryScreenChanged(QGuiApplication* self, intptr_t slot, void (*callback)(intptr_t, QScreen*), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QScreen*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t, QScreen*);
+		void operator()(QScreen* screen) {
+			QScreen* sigval1 = screen;
+			callback(slot, sigval1);
+		}
+	};
+	VirtualQGuiApplication::connect(self, static_cast<void (QGuiApplication::*)(QScreen*)>(&QGuiApplication::primaryScreenChanged), self, local_caller{slot, callback, release});
 }
 
 void QGuiApplication_lastWindowClosed(QGuiApplication* self) {
 	self->lastWindowClosed();
 }
 
-void QGuiApplication_connect_lastWindowClosed(QGuiApplication* self, intptr_t slot) {
-	VirtualQGuiApplication::connect(self, static_cast<void (QGuiApplication::*)()>(&QGuiApplication::lastWindowClosed), self, [=]() {
-		miqt_exec_callback_QGuiApplication_lastWindowClosed(slot);
-	});
+void QGuiApplication_connect_lastWindowClosed(QGuiApplication* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t);
+		void operator()() {
+			callback(slot);
+		}
+	};
+	VirtualQGuiApplication::connect(self, static_cast<void (QGuiApplication::*)()>(&QGuiApplication::lastWindowClosed), self, local_caller{slot, callback, release});
 }
 
 void QGuiApplication_focusObjectChanged(QGuiApplication* self, QObject* focusObject) {
 	self->focusObjectChanged(focusObject);
 }
 
-void QGuiApplication_connect_focusObjectChanged(QGuiApplication* self, intptr_t slot) {
-	VirtualQGuiApplication::connect(self, static_cast<void (QGuiApplication::*)(QObject*)>(&QGuiApplication::focusObjectChanged), self, [=](QObject* focusObject) {
-		QObject* sigval1 = focusObject;
-		miqt_exec_callback_QGuiApplication_focusObjectChanged(slot, sigval1);
-	});
+void QGuiApplication_connect_focusObjectChanged(QGuiApplication* self, intptr_t slot, void (*callback)(intptr_t, QObject*), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QObject*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t, QObject*);
+		void operator()(QObject* focusObject) {
+			QObject* sigval1 = focusObject;
+			callback(slot, sigval1);
+		}
+	};
+	VirtualQGuiApplication::connect(self, static_cast<void (QGuiApplication::*)(QObject*)>(&QGuiApplication::focusObjectChanged), self, local_caller{slot, callback, release});
 }
 
 void QGuiApplication_focusWindowChanged(QGuiApplication* self, QWindow* focusWindow) {
 	self->focusWindowChanged(focusWindow);
 }
 
-void QGuiApplication_connect_focusWindowChanged(QGuiApplication* self, intptr_t slot) {
-	VirtualQGuiApplication::connect(self, static_cast<void (QGuiApplication::*)(QWindow*)>(&QGuiApplication::focusWindowChanged), self, [=](QWindow* focusWindow) {
-		QWindow* sigval1 = focusWindow;
-		miqt_exec_callback_QGuiApplication_focusWindowChanged(slot, sigval1);
-	});
+void QGuiApplication_connect_focusWindowChanged(QGuiApplication* self, intptr_t slot, void (*callback)(intptr_t, QWindow*), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QWindow*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t, QWindow*);
+		void operator()(QWindow* focusWindow) {
+			QWindow* sigval1 = focusWindow;
+			callback(slot, sigval1);
+		}
+	};
+	VirtualQGuiApplication::connect(self, static_cast<void (QGuiApplication::*)(QWindow*)>(&QGuiApplication::focusWindowChanged), self, local_caller{slot, callback, release});
 }
 
 void QGuiApplication_applicationStateChanged(QGuiApplication* self, int state) {
 	self->applicationStateChanged(static_cast<Qt::ApplicationState>(state));
 }
 
-void QGuiApplication_connect_applicationStateChanged(QGuiApplication* self, intptr_t slot) {
-	VirtualQGuiApplication::connect(self, static_cast<void (QGuiApplication::*)(Qt::ApplicationState)>(&QGuiApplication::applicationStateChanged), self, [=](Qt::ApplicationState state) {
-		Qt::ApplicationState state_ret = state;
-		int sigval1 = static_cast<int>(state_ret);
-		miqt_exec_callback_QGuiApplication_applicationStateChanged(slot, sigval1);
-	});
+void QGuiApplication_connect_applicationStateChanged(QGuiApplication* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t, int);
+		void operator()(Qt::ApplicationState state) {
+			Qt::ApplicationState state_ret = state;
+			int sigval1 = static_cast<int>(state_ret);
+			callback(slot, sigval1);
+		}
+	};
+	VirtualQGuiApplication::connect(self, static_cast<void (QGuiApplication::*)(Qt::ApplicationState)>(&QGuiApplication::applicationStateChanged), self, local_caller{slot, callback, release});
 }
 
 void QGuiApplication_layoutDirectionChanged(QGuiApplication* self, int direction) {
 	self->layoutDirectionChanged(static_cast<Qt::LayoutDirection>(direction));
 }
 
-void QGuiApplication_connect_layoutDirectionChanged(QGuiApplication* self, intptr_t slot) {
-	VirtualQGuiApplication::connect(self, static_cast<void (QGuiApplication::*)(Qt::LayoutDirection)>(&QGuiApplication::layoutDirectionChanged), self, [=](Qt::LayoutDirection direction) {
-		Qt::LayoutDirection direction_ret = direction;
-		int sigval1 = static_cast<int>(direction_ret);
-		miqt_exec_callback_QGuiApplication_layoutDirectionChanged(slot, sigval1);
-	});
+void QGuiApplication_connect_layoutDirectionChanged(QGuiApplication* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t, int);
+		void operator()(Qt::LayoutDirection direction) {
+			Qt::LayoutDirection direction_ret = direction;
+			int sigval1 = static_cast<int>(direction_ret);
+			callback(slot, sigval1);
+		}
+	};
+	VirtualQGuiApplication::connect(self, static_cast<void (QGuiApplication::*)(Qt::LayoutDirection)>(&QGuiApplication::layoutDirectionChanged), self, local_caller{slot, callback, release});
 }
 
 void QGuiApplication_commitDataRequest(QGuiApplication* self, QSessionManager* sessionManager) {
 	self->commitDataRequest(*sessionManager);
 }
 
-void QGuiApplication_connect_commitDataRequest(QGuiApplication* self, intptr_t slot) {
-	VirtualQGuiApplication::connect(self, static_cast<void (QGuiApplication::*)(QSessionManager&)>(&QGuiApplication::commitDataRequest), self, [=](QSessionManager& sessionManager) {
-		QSessionManager& sessionManager_ret = sessionManager;
-		// Cast returned reference into pointer
-		QSessionManager* sigval1 = &sessionManager_ret;
-		miqt_exec_callback_QGuiApplication_commitDataRequest(slot, sigval1);
-	});
+void QGuiApplication_connect_commitDataRequest(QGuiApplication* self, intptr_t slot, void (*callback)(intptr_t, QSessionManager*), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QSessionManager*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t, QSessionManager*);
+		void operator()(QSessionManager& sessionManager) {
+			QSessionManager& sessionManager_ret = sessionManager;
+			// Cast returned reference into pointer
+			QSessionManager* sigval1 = &sessionManager_ret;
+			callback(slot, sigval1);
+		}
+	};
+	VirtualQGuiApplication::connect(self, static_cast<void (QGuiApplication::*)(QSessionManager&)>(&QGuiApplication::commitDataRequest), self, local_caller{slot, callback, release});
 }
 
 void QGuiApplication_saveStateRequest(QGuiApplication* self, QSessionManager* sessionManager) {
 	self->saveStateRequest(*sessionManager);
 }
 
-void QGuiApplication_connect_saveStateRequest(QGuiApplication* self, intptr_t slot) {
-	VirtualQGuiApplication::connect(self, static_cast<void (QGuiApplication::*)(QSessionManager&)>(&QGuiApplication::saveStateRequest), self, [=](QSessionManager& sessionManager) {
-		QSessionManager& sessionManager_ret = sessionManager;
-		// Cast returned reference into pointer
-		QSessionManager* sigval1 = &sessionManager_ret;
-		miqt_exec_callback_QGuiApplication_saveStateRequest(slot, sigval1);
-	});
+void QGuiApplication_connect_saveStateRequest(QGuiApplication* self, intptr_t slot, void (*callback)(intptr_t, QSessionManager*), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QSessionManager*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t, QSessionManager*);
+		void operator()(QSessionManager& sessionManager) {
+			QSessionManager& sessionManager_ret = sessionManager;
+			// Cast returned reference into pointer
+			QSessionManager* sigval1 = &sessionManager_ret;
+			callback(slot, sigval1);
+		}
+	};
+	VirtualQGuiApplication::connect(self, static_cast<void (QGuiApplication::*)(QSessionManager&)>(&QGuiApplication::saveStateRequest), self, local_caller{slot, callback, release});
 }
 
 void QGuiApplication_applicationDisplayNameChanged(QGuiApplication* self) {
 	self->applicationDisplayNameChanged();
 }
 
-void QGuiApplication_connect_applicationDisplayNameChanged(QGuiApplication* self, intptr_t slot) {
-	VirtualQGuiApplication::connect(self, static_cast<void (QGuiApplication::*)()>(&QGuiApplication::applicationDisplayNameChanged), self, [=]() {
-		miqt_exec_callback_QGuiApplication_applicationDisplayNameChanged(slot);
-	});
+void QGuiApplication_connect_applicationDisplayNameChanged(QGuiApplication* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t);
+		void operator()() {
+			callback(slot);
+		}
+	};
+	VirtualQGuiApplication::connect(self, static_cast<void (QGuiApplication::*)()>(&QGuiApplication::applicationDisplayNameChanged), self, local_caller{slot, callback, release});
 }
 
 void QGuiApplication_paletteChanged(QGuiApplication* self, QPalette* pal) {
 	self->paletteChanged(*pal);
 }
 
-void QGuiApplication_connect_paletteChanged(QGuiApplication* self, intptr_t slot) {
-	VirtualQGuiApplication::connect(self, static_cast<void (QGuiApplication::*)(const QPalette&)>(&QGuiApplication::paletteChanged), self, [=](const QPalette& pal) {
-		const QPalette& pal_ret = pal;
-		// Cast returned reference into pointer
-		QPalette* sigval1 = const_cast<QPalette*>(&pal_ret);
-		miqt_exec_callback_QGuiApplication_paletteChanged(slot, sigval1);
-	});
+void QGuiApplication_connect_paletteChanged(QGuiApplication* self, intptr_t slot, void (*callback)(intptr_t, QPalette*), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QPalette*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t, QPalette*);
+		void operator()(const QPalette& pal) {
+			const QPalette& pal_ret = pal;
+			// Cast returned reference into pointer
+			QPalette* sigval1 = const_cast<QPalette*>(&pal_ret);
+			callback(slot, sigval1);
+		}
+	};
+	VirtualQGuiApplication::connect(self, static_cast<void (QGuiApplication::*)(const QPalette&)>(&QGuiApplication::paletteChanged), self, local_caller{slot, callback, release});
 }
 
 void QGuiApplication_fontChanged(QGuiApplication* self, QFont* font) {
 	self->fontChanged(*font);
 }
 
-void QGuiApplication_connect_fontChanged(QGuiApplication* self, intptr_t slot) {
-	VirtualQGuiApplication::connect(self, static_cast<void (QGuiApplication::*)(const QFont&)>(&QGuiApplication::fontChanged), self, [=](const QFont& font) {
-		const QFont& font_ret = font;
-		// Cast returned reference into pointer
-		QFont* sigval1 = const_cast<QFont*>(&font_ret);
-		miqt_exec_callback_QGuiApplication_fontChanged(slot, sigval1);
-	});
+void QGuiApplication_connect_fontChanged(QGuiApplication* self, intptr_t slot, void (*callback)(intptr_t, QFont*), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QFont*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t, QFont*);
+		void operator()(const QFont& font) {
+			const QFont& font_ret = font;
+			// Cast returned reference into pointer
+			QFont* sigval1 = const_cast<QFont*>(&font_ret);
+			callback(slot, sigval1);
+		}
+	};
+	VirtualQGuiApplication::connect(self, static_cast<void (QGuiApplication::*)(const QFont&)>(&QGuiApplication::fontChanged), self, local_caller{slot, callback, release});
 }
 
 struct miqt_string QGuiApplication_tr2(const char* s, const char* c) {

@@ -94,9 +94,9 @@ proc fcQSpinBox_displayIntegerBase(self: pointer, ): cint {.importc: "QSpinBox_d
 proc fcQSpinBox_setDisplayIntegerBase(self: pointer, base: cint): void {.importc: "QSpinBox_setDisplayIntegerBase".}
 proc fcQSpinBox_setValue(self: pointer, val: cint): void {.importc: "QSpinBox_setValue".}
 proc fcQSpinBox_valueChanged(self: pointer, param1: cint): void {.importc: "QSpinBox_valueChanged".}
-proc fcQSpinBox_connect_valueChanged(self: pointer, slot: int) {.importc: "QSpinBox_connect_valueChanged".}
+proc fcQSpinBox_connect_valueChanged(self: pointer, slot: int, callback: proc (slot: int, param1: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QSpinBox_connect_valueChanged".}
 proc fcQSpinBox_textChanged(self: pointer, param1: struct_miqt_string): void {.importc: "QSpinBox_textChanged".}
-proc fcQSpinBox_connect_textChanged(self: pointer, slot: int) {.importc: "QSpinBox_connect_textChanged".}
+proc fcQSpinBox_connect_textChanged(self: pointer, slot: int, callback: proc (slot: int, param1: struct_miqt_string) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QSpinBox_connect_textChanged".}
 proc fcQSpinBox_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QSpinBox_tr2".}
 proc fcQSpinBox_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QSpinBox_tr3".}
 type cQSpinBoxVTable = object
@@ -248,9 +248,9 @@ proc fcQDoubleSpinBox_textFromValue(self: pointer, val: float64): struct_miqt_st
 proc fcQDoubleSpinBox_fixup(self: pointer, str: struct_miqt_string): void {.importc: "QDoubleSpinBox_fixup".}
 proc fcQDoubleSpinBox_setValue(self: pointer, val: float64): void {.importc: "QDoubleSpinBox_setValue".}
 proc fcQDoubleSpinBox_valueChanged(self: pointer, param1: float64): void {.importc: "QDoubleSpinBox_valueChanged".}
-proc fcQDoubleSpinBox_connect_valueChanged(self: pointer, slot: int) {.importc: "QDoubleSpinBox_connect_valueChanged".}
+proc fcQDoubleSpinBox_connect_valueChanged(self: pointer, slot: int, callback: proc (slot: int, param1: float64) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QDoubleSpinBox_connect_valueChanged".}
 proc fcQDoubleSpinBox_textChanged(self: pointer, param1: struct_miqt_string): void {.importc: "QDoubleSpinBox_textChanged".}
-proc fcQDoubleSpinBox_connect_textChanged(self: pointer, slot: int) {.importc: "QDoubleSpinBox_connect_textChanged".}
+proc fcQDoubleSpinBox_connect_textChanged(self: pointer, slot: int, callback: proc (slot: int, param1: struct_miqt_string) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QDoubleSpinBox_connect_textChanged".}
 proc fcQDoubleSpinBox_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QDoubleSpinBox_tr2".}
 proc fcQDoubleSpinBox_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QDoubleSpinBox_tr3".}
 type cQDoubleSpinBoxVTable = object
@@ -458,23 +458,27 @@ proc valueChanged*(self: gen_qspinbox_types.QSpinBox, param1: cint): void =
   fcQSpinBox_valueChanged(self.h, param1)
 
 type QSpinBoxvalueChangedSlot* = proc(param1: cint)
-proc miqt_exec_callback_cQSpinBox_valueChanged(slot: int, param1: cint) {.exportc: "miqt_exec_callback_QSpinBox_valueChanged".} =
+proc miqt_exec_callback_cQSpinBox_valueChanged(slot: int, param1: cint) {.cdecl.} =
   let nimfunc = cast[ptr QSpinBoxvalueChangedSlot](cast[pointer](slot))
   let slotval1 = param1
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQSpinBox_valueChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QSpinBoxvalueChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onvalueChanged*(self: gen_qspinbox_types.QSpinBox, slot: QSpinBoxvalueChangedSlot) =
   var tmp = new QSpinBoxvalueChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQSpinBox_connect_valueChanged(self.h, cast[int](addr tmp[]))
+  fcQSpinBox_connect_valueChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQSpinBox_valueChanged, miqt_exec_callback_cQSpinBox_valueChanged_release)
 
 proc textChanged*(self: gen_qspinbox_types.QSpinBox, param1: string): void =
   fcQSpinBox_textChanged(self.h, struct_miqt_string(data: param1, len: csize_t(len(param1))))
 
 type QSpinBoxtextChangedSlot* = proc(param1: string)
-proc miqt_exec_callback_cQSpinBox_textChanged(slot: int, param1: struct_miqt_string) {.exportc: "miqt_exec_callback_QSpinBox_textChanged".} =
+proc miqt_exec_callback_cQSpinBox_textChanged(slot: int, param1: struct_miqt_string) {.cdecl.} =
   let nimfunc = cast[ptr QSpinBoxtextChangedSlot](cast[pointer](slot))
   let vparam1_ms = param1
   let vparam1x_ret = string.fromBytes(toOpenArrayByte(vparam1_ms.data, 0, int(vparam1_ms.len)-1))
@@ -483,11 +487,15 @@ proc miqt_exec_callback_cQSpinBox_textChanged(slot: int, param1: struct_miqt_str
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQSpinBox_textChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QSpinBoxtextChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc ontextChanged*(self: gen_qspinbox_types.QSpinBox, slot: QSpinBoxtextChangedSlot) =
   var tmp = new QSpinBoxtextChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQSpinBox_connect_textChanged(self.h, cast[int](addr tmp[]))
+  fcQSpinBox_connect_textChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQSpinBox_textChanged, miqt_exec_callback_cQSpinBox_textChanged_release)
 
 proc tr*(_: type gen_qspinbox_types.QSpinBox, s: cstring, c: cstring): string =
   let v_ms = fcQSpinBox_tr2(s, c)
@@ -1526,23 +1534,27 @@ proc valueChanged*(self: gen_qspinbox_types.QDoubleSpinBox, param1: float64): vo
   fcQDoubleSpinBox_valueChanged(self.h, param1)
 
 type QDoubleSpinBoxvalueChangedSlot* = proc(param1: float64)
-proc miqt_exec_callback_cQDoubleSpinBox_valueChanged(slot: int, param1: float64) {.exportc: "miqt_exec_callback_QDoubleSpinBox_valueChanged".} =
+proc miqt_exec_callback_cQDoubleSpinBox_valueChanged(slot: int, param1: float64) {.cdecl.} =
   let nimfunc = cast[ptr QDoubleSpinBoxvalueChangedSlot](cast[pointer](slot))
   let slotval1 = param1
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQDoubleSpinBox_valueChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QDoubleSpinBoxvalueChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onvalueChanged*(self: gen_qspinbox_types.QDoubleSpinBox, slot: QDoubleSpinBoxvalueChangedSlot) =
   var tmp = new QDoubleSpinBoxvalueChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQDoubleSpinBox_connect_valueChanged(self.h, cast[int](addr tmp[]))
+  fcQDoubleSpinBox_connect_valueChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQDoubleSpinBox_valueChanged, miqt_exec_callback_cQDoubleSpinBox_valueChanged_release)
 
 proc textChanged*(self: gen_qspinbox_types.QDoubleSpinBox, param1: string): void =
   fcQDoubleSpinBox_textChanged(self.h, struct_miqt_string(data: param1, len: csize_t(len(param1))))
 
 type QDoubleSpinBoxtextChangedSlot* = proc(param1: string)
-proc miqt_exec_callback_cQDoubleSpinBox_textChanged(slot: int, param1: struct_miqt_string) {.exportc: "miqt_exec_callback_QDoubleSpinBox_textChanged".} =
+proc miqt_exec_callback_cQDoubleSpinBox_textChanged(slot: int, param1: struct_miqt_string) {.cdecl.} =
   let nimfunc = cast[ptr QDoubleSpinBoxtextChangedSlot](cast[pointer](slot))
   let vparam1_ms = param1
   let vparam1x_ret = string.fromBytes(toOpenArrayByte(vparam1_ms.data, 0, int(vparam1_ms.len)-1))
@@ -1551,11 +1563,15 @@ proc miqt_exec_callback_cQDoubleSpinBox_textChanged(slot: int, param1: struct_mi
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQDoubleSpinBox_textChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QDoubleSpinBoxtextChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc ontextChanged*(self: gen_qspinbox_types.QDoubleSpinBox, slot: QDoubleSpinBoxtextChangedSlot) =
   var tmp = new QDoubleSpinBoxtextChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQDoubleSpinBox_connect_textChanged(self.h, cast[int](addr tmp[]))
+  fcQDoubleSpinBox_connect_textChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQDoubleSpinBox_textChanged, miqt_exec_callback_cQDoubleSpinBox_textChanged_release)
 
 proc tr*(_: type gen_qspinbox_types.QDoubleSpinBox, s: cstring, c: cstring): string =
   let v_ms = fcQDoubleSpinBox_tr2(s, c)

@@ -76,9 +76,9 @@ proc fcQQuickRenderControl_renderWindowFor(win: pointer): pointer {.importc: "QQ
 proc fcQQuickRenderControl_renderWindow(self: pointer, offset: pointer): pointer {.importc: "QQuickRenderControl_renderWindow".}
 proc fcQQuickRenderControl_window(self: pointer, ): pointer {.importc: "QQuickRenderControl_window".}
 proc fcQQuickRenderControl_renderRequested(self: pointer, ): void {.importc: "QQuickRenderControl_renderRequested".}
-proc fcQQuickRenderControl_connect_renderRequested(self: pointer, slot: int) {.importc: "QQuickRenderControl_connect_renderRequested".}
+proc fcQQuickRenderControl_connect_renderRequested(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QQuickRenderControl_connect_renderRequested".}
 proc fcQQuickRenderControl_sceneChanged(self: pointer, ): void {.importc: "QQuickRenderControl_sceneChanged".}
-proc fcQQuickRenderControl_connect_sceneChanged(self: pointer, slot: int) {.importc: "QQuickRenderControl_connect_sceneChanged".}
+proc fcQQuickRenderControl_connect_sceneChanged(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QQuickRenderControl_connect_sceneChanged".}
 proc fcQQuickRenderControl_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QQuickRenderControl_tr2".}
 proc fcQQuickRenderControl_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QQuickRenderControl_tr3".}
 proc fcQQuickRenderControl_renderWindowFor2(win: pointer, offset: pointer): pointer {.importc: "QQuickRenderControl_renderWindowFor2".}
@@ -169,29 +169,37 @@ proc renderRequested*(self: gen_qquickrendercontrol_types.QQuickRenderControl, )
   fcQQuickRenderControl_renderRequested(self.h)
 
 type QQuickRenderControlrenderRequestedSlot* = proc()
-proc miqt_exec_callback_cQQuickRenderControl_renderRequested(slot: int) {.exportc: "miqt_exec_callback_QQuickRenderControl_renderRequested".} =
+proc miqt_exec_callback_cQQuickRenderControl_renderRequested(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QQuickRenderControlrenderRequestedSlot](cast[pointer](slot))
   nimfunc[]()
+
+proc miqt_exec_callback_cQQuickRenderControl_renderRequested_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QQuickRenderControlrenderRequestedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
 
 proc onrenderRequested*(self: gen_qquickrendercontrol_types.QQuickRenderControl, slot: QQuickRenderControlrenderRequestedSlot) =
   var tmp = new QQuickRenderControlrenderRequestedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQQuickRenderControl_connect_renderRequested(self.h, cast[int](addr tmp[]))
+  fcQQuickRenderControl_connect_renderRequested(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQQuickRenderControl_renderRequested, miqt_exec_callback_cQQuickRenderControl_renderRequested_release)
 
 proc sceneChanged*(self: gen_qquickrendercontrol_types.QQuickRenderControl, ): void =
   fcQQuickRenderControl_sceneChanged(self.h)
 
 type QQuickRenderControlsceneChangedSlot* = proc()
-proc miqt_exec_callback_cQQuickRenderControl_sceneChanged(slot: int) {.exportc: "miqt_exec_callback_QQuickRenderControl_sceneChanged".} =
+proc miqt_exec_callback_cQQuickRenderControl_sceneChanged(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QQuickRenderControlsceneChangedSlot](cast[pointer](slot))
   nimfunc[]()
+
+proc miqt_exec_callback_cQQuickRenderControl_sceneChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QQuickRenderControlsceneChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
 
 proc onsceneChanged*(self: gen_qquickrendercontrol_types.QQuickRenderControl, slot: QQuickRenderControlsceneChangedSlot) =
   var tmp = new QQuickRenderControlsceneChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQQuickRenderControl_connect_sceneChanged(self.h, cast[int](addr tmp[]))
+  fcQQuickRenderControl_connect_sceneChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQQuickRenderControl_sceneChanged, miqt_exec_callback_cQQuickRenderControl_sceneChanged_release)
 
 proc tr*(_: type gen_qquickrendercontrol_types.QQuickRenderControl, s: cstring, c: cstring): string =
   let v_ms = fcQQuickRenderControl_tr2(s, c)

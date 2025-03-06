@@ -247,7 +247,7 @@ proc fcQStandardItemModel_mimeTypes(self: pointer, ): struct_miqt_array {.import
 proc fcQStandardItemModel_mimeData(self: pointer, indexes: struct_miqt_array): pointer {.importc: "QStandardItemModel_mimeData".}
 proc fcQStandardItemModel_dropMimeData(self: pointer, data: pointer, action: cint, row: cint, column: cint, parent: pointer): bool {.importc: "QStandardItemModel_dropMimeData".}
 proc fcQStandardItemModel_itemChanged(self: pointer, item: pointer): void {.importc: "QStandardItemModel_itemChanged".}
-proc fcQStandardItemModel_connect_itemChanged(self: pointer, slot: int) {.importc: "QStandardItemModel_connect_itemChanged".}
+proc fcQStandardItemModel_connect_itemChanged(self: pointer, slot: int, callback: proc (slot: int, item: pointer) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QStandardItemModel_connect_itemChanged".}
 proc fcQStandardItemModel_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QStandardItemModel_tr2".}
 proc fcQStandardItemModel_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QStandardItemModel_tr3".}
 proc fcQStandardItemModel_item2(self: pointer, row: cint, column: cint): pointer {.importc: "QStandardItemModel_item2".}
@@ -1179,17 +1179,21 @@ proc itemChanged*(self: gen_qstandarditemmodel_types.QStandardItemModel, item: g
   fcQStandardItemModel_itemChanged(self.h, item.h)
 
 type QStandardItemModelitemChangedSlot* = proc(item: gen_qstandarditemmodel_types.QStandardItem)
-proc miqt_exec_callback_cQStandardItemModel_itemChanged(slot: int, item: pointer) {.exportc: "miqt_exec_callback_QStandardItemModel_itemChanged".} =
+proc miqt_exec_callback_cQStandardItemModel_itemChanged(slot: int, item: pointer) {.cdecl.} =
   let nimfunc = cast[ptr QStandardItemModelitemChangedSlot](cast[pointer](slot))
   let slotval1 = gen_qstandarditemmodel_types.QStandardItem(h: item)
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQStandardItemModel_itemChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QStandardItemModelitemChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onitemChanged*(self: gen_qstandarditemmodel_types.QStandardItemModel, slot: QStandardItemModelitemChangedSlot) =
   var tmp = new QStandardItemModelitemChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQStandardItemModel_connect_itemChanged(self.h, cast[int](addr tmp[]))
+  fcQStandardItemModel_connect_itemChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQStandardItemModel_itemChanged, miqt_exec_callback_cQStandardItemModel_itemChanged_release)
 
 proc tr*(_: type gen_qstandarditemmodel_types.QStandardItemModel, s: cstring, c: cstring): string =
   let v_ms = fcQStandardItemModel_tr2(s, c)

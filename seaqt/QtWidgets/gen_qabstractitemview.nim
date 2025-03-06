@@ -230,19 +230,19 @@ proc fcQAbstractItemView_scrollToTop(self: pointer, ): void {.importc: "QAbstrac
 proc fcQAbstractItemView_scrollToBottom(self: pointer, ): void {.importc: "QAbstractItemView_scrollToBottom".}
 proc fcQAbstractItemView_update(self: pointer, index: pointer): void {.importc: "QAbstractItemView_update".}
 proc fcQAbstractItemView_pressed(self: pointer, index: pointer): void {.importc: "QAbstractItemView_pressed".}
-proc fcQAbstractItemView_connect_pressed(self: pointer, slot: int) {.importc: "QAbstractItemView_connect_pressed".}
+proc fcQAbstractItemView_connect_pressed(self: pointer, slot: int, callback: proc (slot: int, index: pointer) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QAbstractItemView_connect_pressed".}
 proc fcQAbstractItemView_clicked(self: pointer, index: pointer): void {.importc: "QAbstractItemView_clicked".}
-proc fcQAbstractItemView_connect_clicked(self: pointer, slot: int) {.importc: "QAbstractItemView_connect_clicked".}
+proc fcQAbstractItemView_connect_clicked(self: pointer, slot: int, callback: proc (slot: int, index: pointer) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QAbstractItemView_connect_clicked".}
 proc fcQAbstractItemView_doubleClicked(self: pointer, index: pointer): void {.importc: "QAbstractItemView_doubleClicked".}
-proc fcQAbstractItemView_connect_doubleClicked(self: pointer, slot: int) {.importc: "QAbstractItemView_connect_doubleClicked".}
+proc fcQAbstractItemView_connect_doubleClicked(self: pointer, slot: int, callback: proc (slot: int, index: pointer) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QAbstractItemView_connect_doubleClicked".}
 proc fcQAbstractItemView_activated(self: pointer, index: pointer): void {.importc: "QAbstractItemView_activated".}
-proc fcQAbstractItemView_connect_activated(self: pointer, slot: int) {.importc: "QAbstractItemView_connect_activated".}
+proc fcQAbstractItemView_connect_activated(self: pointer, slot: int, callback: proc (slot: int, index: pointer) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QAbstractItemView_connect_activated".}
 proc fcQAbstractItemView_entered(self: pointer, index: pointer): void {.importc: "QAbstractItemView_entered".}
-proc fcQAbstractItemView_connect_entered(self: pointer, slot: int) {.importc: "QAbstractItemView_connect_entered".}
+proc fcQAbstractItemView_connect_entered(self: pointer, slot: int, callback: proc (slot: int, index: pointer) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QAbstractItemView_connect_entered".}
 proc fcQAbstractItemView_viewportEntered(self: pointer, ): void {.importc: "QAbstractItemView_viewportEntered".}
-proc fcQAbstractItemView_connect_viewportEntered(self: pointer, slot: int) {.importc: "QAbstractItemView_connect_viewportEntered".}
+proc fcQAbstractItemView_connect_viewportEntered(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QAbstractItemView_connect_viewportEntered".}
 proc fcQAbstractItemView_iconSizeChanged(self: pointer, size: pointer): void {.importc: "QAbstractItemView_iconSizeChanged".}
-proc fcQAbstractItemView_connect_iconSizeChanged(self: pointer, slot: int) {.importc: "QAbstractItemView_connect_iconSizeChanged".}
+proc fcQAbstractItemView_connect_iconSizeChanged(self: pointer, slot: int, callback: proc (slot: int, size: pointer) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QAbstractItemView_connect_iconSizeChanged".}
 proc fcQAbstractItemView_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QAbstractItemView_tr2".}
 proc fcQAbstractItemView_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QAbstractItemView_tr3".}
 type cQAbstractItemViewVTable = object
@@ -663,111 +663,139 @@ proc pressed*(self: gen_qabstractitemview_types.QAbstractItemView, index: gen_qa
   fcQAbstractItemView_pressed(self.h, index.h)
 
 type QAbstractItemViewpressedSlot* = proc(index: gen_qabstractitemmodel_types.QModelIndex)
-proc miqt_exec_callback_cQAbstractItemView_pressed(slot: int, index: pointer) {.exportc: "miqt_exec_callback_QAbstractItemView_pressed".} =
+proc miqt_exec_callback_cQAbstractItemView_pressed(slot: int, index: pointer) {.cdecl.} =
   let nimfunc = cast[ptr QAbstractItemViewpressedSlot](cast[pointer](slot))
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index)
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQAbstractItemView_pressed_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QAbstractItemViewpressedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onpressed*(self: gen_qabstractitemview_types.QAbstractItemView, slot: QAbstractItemViewpressedSlot) =
   var tmp = new QAbstractItemViewpressedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQAbstractItemView_connect_pressed(self.h, cast[int](addr tmp[]))
+  fcQAbstractItemView_connect_pressed(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQAbstractItemView_pressed, miqt_exec_callback_cQAbstractItemView_pressed_release)
 
 proc clicked*(self: gen_qabstractitemview_types.QAbstractItemView, index: gen_qabstractitemmodel_types.QModelIndex): void =
   fcQAbstractItemView_clicked(self.h, index.h)
 
 type QAbstractItemViewclickedSlot* = proc(index: gen_qabstractitemmodel_types.QModelIndex)
-proc miqt_exec_callback_cQAbstractItemView_clicked(slot: int, index: pointer) {.exportc: "miqt_exec_callback_QAbstractItemView_clicked".} =
+proc miqt_exec_callback_cQAbstractItemView_clicked(slot: int, index: pointer) {.cdecl.} =
   let nimfunc = cast[ptr QAbstractItemViewclickedSlot](cast[pointer](slot))
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index)
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQAbstractItemView_clicked_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QAbstractItemViewclickedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onclicked*(self: gen_qabstractitemview_types.QAbstractItemView, slot: QAbstractItemViewclickedSlot) =
   var tmp = new QAbstractItemViewclickedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQAbstractItemView_connect_clicked(self.h, cast[int](addr tmp[]))
+  fcQAbstractItemView_connect_clicked(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQAbstractItemView_clicked, miqt_exec_callback_cQAbstractItemView_clicked_release)
 
 proc doubleClicked*(self: gen_qabstractitemview_types.QAbstractItemView, index: gen_qabstractitemmodel_types.QModelIndex): void =
   fcQAbstractItemView_doubleClicked(self.h, index.h)
 
 type QAbstractItemViewdoubleClickedSlot* = proc(index: gen_qabstractitemmodel_types.QModelIndex)
-proc miqt_exec_callback_cQAbstractItemView_doubleClicked(slot: int, index: pointer) {.exportc: "miqt_exec_callback_QAbstractItemView_doubleClicked".} =
+proc miqt_exec_callback_cQAbstractItemView_doubleClicked(slot: int, index: pointer) {.cdecl.} =
   let nimfunc = cast[ptr QAbstractItemViewdoubleClickedSlot](cast[pointer](slot))
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index)
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQAbstractItemView_doubleClicked_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QAbstractItemViewdoubleClickedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc ondoubleClicked*(self: gen_qabstractitemview_types.QAbstractItemView, slot: QAbstractItemViewdoubleClickedSlot) =
   var tmp = new QAbstractItemViewdoubleClickedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQAbstractItemView_connect_doubleClicked(self.h, cast[int](addr tmp[]))
+  fcQAbstractItemView_connect_doubleClicked(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQAbstractItemView_doubleClicked, miqt_exec_callback_cQAbstractItemView_doubleClicked_release)
 
 proc activated*(self: gen_qabstractitemview_types.QAbstractItemView, index: gen_qabstractitemmodel_types.QModelIndex): void =
   fcQAbstractItemView_activated(self.h, index.h)
 
 type QAbstractItemViewactivatedSlot* = proc(index: gen_qabstractitemmodel_types.QModelIndex)
-proc miqt_exec_callback_cQAbstractItemView_activated(slot: int, index: pointer) {.exportc: "miqt_exec_callback_QAbstractItemView_activated".} =
+proc miqt_exec_callback_cQAbstractItemView_activated(slot: int, index: pointer) {.cdecl.} =
   let nimfunc = cast[ptr QAbstractItemViewactivatedSlot](cast[pointer](slot))
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index)
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQAbstractItemView_activated_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QAbstractItemViewactivatedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onactivated*(self: gen_qabstractitemview_types.QAbstractItemView, slot: QAbstractItemViewactivatedSlot) =
   var tmp = new QAbstractItemViewactivatedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQAbstractItemView_connect_activated(self.h, cast[int](addr tmp[]))
+  fcQAbstractItemView_connect_activated(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQAbstractItemView_activated, miqt_exec_callback_cQAbstractItemView_activated_release)
 
 proc entered*(self: gen_qabstractitemview_types.QAbstractItemView, index: gen_qabstractitemmodel_types.QModelIndex): void =
   fcQAbstractItemView_entered(self.h, index.h)
 
 type QAbstractItemViewenteredSlot* = proc(index: gen_qabstractitemmodel_types.QModelIndex)
-proc miqt_exec_callback_cQAbstractItemView_entered(slot: int, index: pointer) {.exportc: "miqt_exec_callback_QAbstractItemView_entered".} =
+proc miqt_exec_callback_cQAbstractItemView_entered(slot: int, index: pointer) {.cdecl.} =
   let nimfunc = cast[ptr QAbstractItemViewenteredSlot](cast[pointer](slot))
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index)
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQAbstractItemView_entered_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QAbstractItemViewenteredSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onentered*(self: gen_qabstractitemview_types.QAbstractItemView, slot: QAbstractItemViewenteredSlot) =
   var tmp = new QAbstractItemViewenteredSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQAbstractItemView_connect_entered(self.h, cast[int](addr tmp[]))
+  fcQAbstractItemView_connect_entered(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQAbstractItemView_entered, miqt_exec_callback_cQAbstractItemView_entered_release)
 
 proc viewportEntered*(self: gen_qabstractitemview_types.QAbstractItemView, ): void =
   fcQAbstractItemView_viewportEntered(self.h)
 
 type QAbstractItemViewviewportEnteredSlot* = proc()
-proc miqt_exec_callback_cQAbstractItemView_viewportEntered(slot: int) {.exportc: "miqt_exec_callback_QAbstractItemView_viewportEntered".} =
+proc miqt_exec_callback_cQAbstractItemView_viewportEntered(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QAbstractItemViewviewportEnteredSlot](cast[pointer](slot))
   nimfunc[]()
+
+proc miqt_exec_callback_cQAbstractItemView_viewportEntered_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QAbstractItemViewviewportEnteredSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
 
 proc onviewportEntered*(self: gen_qabstractitemview_types.QAbstractItemView, slot: QAbstractItemViewviewportEnteredSlot) =
   var tmp = new QAbstractItemViewviewportEnteredSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQAbstractItemView_connect_viewportEntered(self.h, cast[int](addr tmp[]))
+  fcQAbstractItemView_connect_viewportEntered(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQAbstractItemView_viewportEntered, miqt_exec_callback_cQAbstractItemView_viewportEntered_release)
 
 proc iconSizeChanged*(self: gen_qabstractitemview_types.QAbstractItemView, size: gen_qsize_types.QSize): void =
   fcQAbstractItemView_iconSizeChanged(self.h, size.h)
 
 type QAbstractItemViewiconSizeChangedSlot* = proc(size: gen_qsize_types.QSize)
-proc miqt_exec_callback_cQAbstractItemView_iconSizeChanged(slot: int, size: pointer) {.exportc: "miqt_exec_callback_QAbstractItemView_iconSizeChanged".} =
+proc miqt_exec_callback_cQAbstractItemView_iconSizeChanged(slot: int, size: pointer) {.cdecl.} =
   let nimfunc = cast[ptr QAbstractItemViewiconSizeChangedSlot](cast[pointer](slot))
   let slotval1 = gen_qsize_types.QSize(h: size)
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQAbstractItemView_iconSizeChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QAbstractItemViewiconSizeChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc oniconSizeChanged*(self: gen_qabstractitemview_types.QAbstractItemView, slot: QAbstractItemViewiconSizeChangedSlot) =
   var tmp = new QAbstractItemViewiconSizeChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQAbstractItemView_connect_iconSizeChanged(self.h, cast[int](addr tmp[]))
+  fcQAbstractItemView_connect_iconSizeChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQAbstractItemView_iconSizeChanged, miqt_exec_callback_cQAbstractItemView_iconSizeChanged_release)
 
 proc tr*(_: type gen_qabstractitemview_types.QAbstractItemView, s: cstring, c: cstring): string =
   let v_ms = fcQAbstractItemView_tr2(s, c)

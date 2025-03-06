@@ -21,12 +21,6 @@
 extern "C" {
 #endif
 
-void miqt_exec_callback_QMediaCaptureSession_audioInputChanged(intptr_t);
-void miqt_exec_callback_QMediaCaptureSession_cameraChanged(intptr_t);
-void miqt_exec_callback_QMediaCaptureSession_imageCaptureChanged(intptr_t);
-void miqt_exec_callback_QMediaCaptureSession_recorderChanged(intptr_t);
-void miqt_exec_callback_QMediaCaptureSession_videoOutputChanged(intptr_t);
-void miqt_exec_callback_QMediaCaptureSession_audioOutputChanged(intptr_t);
 #ifdef __cplusplus
 } /* extern C */
 #endif
@@ -299,60 +293,90 @@ void QMediaCaptureSession_audioInputChanged(QMediaCaptureSession* self) {
 	self->audioInputChanged();
 }
 
-void QMediaCaptureSession_connect_audioInputChanged(QMediaCaptureSession* self, intptr_t slot) {
-	VirtualQMediaCaptureSession::connect(self, static_cast<void (QMediaCaptureSession::*)()>(&QMediaCaptureSession::audioInputChanged), self, [=]() {
-		miqt_exec_callback_QMediaCaptureSession_audioInputChanged(slot);
-	});
+void QMediaCaptureSession_connect_audioInputChanged(QMediaCaptureSession* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t);
+		void operator()() {
+			callback(slot);
+		}
+	};
+	VirtualQMediaCaptureSession::connect(self, static_cast<void (QMediaCaptureSession::*)()>(&QMediaCaptureSession::audioInputChanged), self, local_caller{slot, callback, release});
 }
 
 void QMediaCaptureSession_cameraChanged(QMediaCaptureSession* self) {
 	self->cameraChanged();
 }
 
-void QMediaCaptureSession_connect_cameraChanged(QMediaCaptureSession* self, intptr_t slot) {
-	VirtualQMediaCaptureSession::connect(self, static_cast<void (QMediaCaptureSession::*)()>(&QMediaCaptureSession::cameraChanged), self, [=]() {
-		miqt_exec_callback_QMediaCaptureSession_cameraChanged(slot);
-	});
+void QMediaCaptureSession_connect_cameraChanged(QMediaCaptureSession* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t);
+		void operator()() {
+			callback(slot);
+		}
+	};
+	VirtualQMediaCaptureSession::connect(self, static_cast<void (QMediaCaptureSession::*)()>(&QMediaCaptureSession::cameraChanged), self, local_caller{slot, callback, release});
 }
 
 void QMediaCaptureSession_imageCaptureChanged(QMediaCaptureSession* self) {
 	self->imageCaptureChanged();
 }
 
-void QMediaCaptureSession_connect_imageCaptureChanged(QMediaCaptureSession* self, intptr_t slot) {
-	VirtualQMediaCaptureSession::connect(self, static_cast<void (QMediaCaptureSession::*)()>(&QMediaCaptureSession::imageCaptureChanged), self, [=]() {
-		miqt_exec_callback_QMediaCaptureSession_imageCaptureChanged(slot);
-	});
+void QMediaCaptureSession_connect_imageCaptureChanged(QMediaCaptureSession* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t);
+		void operator()() {
+			callback(slot);
+		}
+	};
+	VirtualQMediaCaptureSession::connect(self, static_cast<void (QMediaCaptureSession::*)()>(&QMediaCaptureSession::imageCaptureChanged), self, local_caller{slot, callback, release});
 }
 
 void QMediaCaptureSession_recorderChanged(QMediaCaptureSession* self) {
 	self->recorderChanged();
 }
 
-void QMediaCaptureSession_connect_recorderChanged(QMediaCaptureSession* self, intptr_t slot) {
-	VirtualQMediaCaptureSession::connect(self, static_cast<void (QMediaCaptureSession::*)()>(&QMediaCaptureSession::recorderChanged), self, [=]() {
-		miqt_exec_callback_QMediaCaptureSession_recorderChanged(slot);
-	});
+void QMediaCaptureSession_connect_recorderChanged(QMediaCaptureSession* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t);
+		void operator()() {
+			callback(slot);
+		}
+	};
+	VirtualQMediaCaptureSession::connect(self, static_cast<void (QMediaCaptureSession::*)()>(&QMediaCaptureSession::recorderChanged), self, local_caller{slot, callback, release});
 }
 
 void QMediaCaptureSession_videoOutputChanged(QMediaCaptureSession* self) {
 	self->videoOutputChanged();
 }
 
-void QMediaCaptureSession_connect_videoOutputChanged(QMediaCaptureSession* self, intptr_t slot) {
-	VirtualQMediaCaptureSession::connect(self, static_cast<void (QMediaCaptureSession::*)()>(&QMediaCaptureSession::videoOutputChanged), self, [=]() {
-		miqt_exec_callback_QMediaCaptureSession_videoOutputChanged(slot);
-	});
+void QMediaCaptureSession_connect_videoOutputChanged(QMediaCaptureSession* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t);
+		void operator()() {
+			callback(slot);
+		}
+	};
+	VirtualQMediaCaptureSession::connect(self, static_cast<void (QMediaCaptureSession::*)()>(&QMediaCaptureSession::videoOutputChanged), self, local_caller{slot, callback, release});
 }
 
 void QMediaCaptureSession_audioOutputChanged(QMediaCaptureSession* self) {
 	self->audioOutputChanged();
 }
 
-void QMediaCaptureSession_connect_audioOutputChanged(QMediaCaptureSession* self, intptr_t slot) {
-	VirtualQMediaCaptureSession::connect(self, static_cast<void (QMediaCaptureSession::*)()>(&QMediaCaptureSession::audioOutputChanged), self, [=]() {
-		miqt_exec_callback_QMediaCaptureSession_audioOutputChanged(slot);
-	});
+void QMediaCaptureSession_connect_audioOutputChanged(QMediaCaptureSession* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t);
+		void operator()() {
+			callback(slot);
+		}
+	};
+	VirtualQMediaCaptureSession::connect(self, static_cast<void (QMediaCaptureSession::*)()>(&QMediaCaptureSession::audioOutputChanged), self, local_caller{slot, callback, release});
 }
 
 struct miqt_string QMediaCaptureSession_tr2(const char* s, const char* c) {

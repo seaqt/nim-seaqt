@@ -147,13 +147,13 @@ proc fcQDnsLookup_textRecords(self: pointer, ): struct_miqt_array {.importc: "QD
 proc fcQDnsLookup_abort(self: pointer, ): void {.importc: "QDnsLookup_abort".}
 proc fcQDnsLookup_lookup(self: pointer, ): void {.importc: "QDnsLookup_lookup".}
 proc fcQDnsLookup_finished(self: pointer, ): void {.importc: "QDnsLookup_finished".}
-proc fcQDnsLookup_connect_finished(self: pointer, slot: int) {.importc: "QDnsLookup_connect_finished".}
+proc fcQDnsLookup_connect_finished(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QDnsLookup_connect_finished".}
 proc fcQDnsLookup_nameChanged(self: pointer, name: struct_miqt_string): void {.importc: "QDnsLookup_nameChanged".}
-proc fcQDnsLookup_connect_nameChanged(self: pointer, slot: int) {.importc: "QDnsLookup_connect_nameChanged".}
+proc fcQDnsLookup_connect_nameChanged(self: pointer, slot: int, callback: proc (slot: int, name: struct_miqt_string) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QDnsLookup_connect_nameChanged".}
 proc fcQDnsLookup_typeChanged(self: pointer, typeVal: cint): void {.importc: "QDnsLookup_typeChanged".}
-proc fcQDnsLookup_connect_typeChanged(self: pointer, slot: int) {.importc: "QDnsLookup_connect_typeChanged".}
+proc fcQDnsLookup_connect_typeChanged(self: pointer, slot: int, callback: proc (slot: int, typeVal: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QDnsLookup_connect_typeChanged".}
 proc fcQDnsLookup_nameserverChanged(self: pointer, nameserver: pointer): void {.importc: "QDnsLookup_nameserverChanged".}
-proc fcQDnsLookup_connect_nameserverChanged(self: pointer, slot: int) {.importc: "QDnsLookup_connect_nameserverChanged".}
+proc fcQDnsLookup_connect_nameserverChanged(self: pointer, slot: int, callback: proc (slot: int, nameserver: pointer) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QDnsLookup_connect_nameserverChanged".}
 proc fcQDnsLookup_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QDnsLookup_tr2".}
 proc fcQDnsLookup_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QDnsLookup_tr3".}
 type cQDnsLookupVTable = object
@@ -465,21 +465,25 @@ proc finished*(self: gen_qdnslookup_types.QDnsLookup, ): void =
   fcQDnsLookup_finished(self.h)
 
 type QDnsLookupfinishedSlot* = proc()
-proc miqt_exec_callback_cQDnsLookup_finished(slot: int) {.exportc: "miqt_exec_callback_QDnsLookup_finished".} =
+proc miqt_exec_callback_cQDnsLookup_finished(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QDnsLookupfinishedSlot](cast[pointer](slot))
   nimfunc[]()
+
+proc miqt_exec_callback_cQDnsLookup_finished_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QDnsLookupfinishedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
 
 proc onfinished*(self: gen_qdnslookup_types.QDnsLookup, slot: QDnsLookupfinishedSlot) =
   var tmp = new QDnsLookupfinishedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQDnsLookup_connect_finished(self.h, cast[int](addr tmp[]))
+  fcQDnsLookup_connect_finished(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQDnsLookup_finished, miqt_exec_callback_cQDnsLookup_finished_release)
 
 proc nameChanged*(self: gen_qdnslookup_types.QDnsLookup, name: string): void =
   fcQDnsLookup_nameChanged(self.h, struct_miqt_string(data: name, len: csize_t(len(name))))
 
 type QDnsLookupnameChangedSlot* = proc(name: string)
-proc miqt_exec_callback_cQDnsLookup_nameChanged(slot: int, name: struct_miqt_string) {.exportc: "miqt_exec_callback_QDnsLookup_nameChanged".} =
+proc miqt_exec_callback_cQDnsLookup_nameChanged(slot: int, name: struct_miqt_string) {.cdecl.} =
   let nimfunc = cast[ptr QDnsLookupnameChangedSlot](cast[pointer](slot))
   let vname_ms = name
   let vnamex_ret = string.fromBytes(toOpenArrayByte(vname_ms.data, 0, int(vname_ms.len)-1))
@@ -488,43 +492,55 @@ proc miqt_exec_callback_cQDnsLookup_nameChanged(slot: int, name: struct_miqt_str
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQDnsLookup_nameChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QDnsLookupnameChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onnameChanged*(self: gen_qdnslookup_types.QDnsLookup, slot: QDnsLookupnameChangedSlot) =
   var tmp = new QDnsLookupnameChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQDnsLookup_connect_nameChanged(self.h, cast[int](addr tmp[]))
+  fcQDnsLookup_connect_nameChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQDnsLookup_nameChanged, miqt_exec_callback_cQDnsLookup_nameChanged_release)
 
 proc typeChanged*(self: gen_qdnslookup_types.QDnsLookup, typeVal: cint): void =
   fcQDnsLookup_typeChanged(self.h, cint(typeVal))
 
 type QDnsLookuptypeChangedSlot* = proc(typeVal: cint)
-proc miqt_exec_callback_cQDnsLookup_typeChanged(slot: int, typeVal: cint) {.exportc: "miqt_exec_callback_QDnsLookup_typeChanged".} =
+proc miqt_exec_callback_cQDnsLookup_typeChanged(slot: int, typeVal: cint) {.cdecl.} =
   let nimfunc = cast[ptr QDnsLookuptypeChangedSlot](cast[pointer](slot))
   let slotval1 = cint(typeVal)
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQDnsLookup_typeChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QDnsLookuptypeChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc ontypeChanged*(self: gen_qdnslookup_types.QDnsLookup, slot: QDnsLookuptypeChangedSlot) =
   var tmp = new QDnsLookuptypeChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQDnsLookup_connect_typeChanged(self.h, cast[int](addr tmp[]))
+  fcQDnsLookup_connect_typeChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQDnsLookup_typeChanged, miqt_exec_callback_cQDnsLookup_typeChanged_release)
 
 proc nameserverChanged*(self: gen_qdnslookup_types.QDnsLookup, nameserver: gen_qhostaddress_types.QHostAddress): void =
   fcQDnsLookup_nameserverChanged(self.h, nameserver.h)
 
 type QDnsLookupnameserverChangedSlot* = proc(nameserver: gen_qhostaddress_types.QHostAddress)
-proc miqt_exec_callback_cQDnsLookup_nameserverChanged(slot: int, nameserver: pointer) {.exportc: "miqt_exec_callback_QDnsLookup_nameserverChanged".} =
+proc miqt_exec_callback_cQDnsLookup_nameserverChanged(slot: int, nameserver: pointer) {.cdecl.} =
   let nimfunc = cast[ptr QDnsLookupnameserverChangedSlot](cast[pointer](slot))
   let slotval1 = gen_qhostaddress_types.QHostAddress(h: nameserver)
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQDnsLookup_nameserverChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QDnsLookupnameserverChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onnameserverChanged*(self: gen_qdnslookup_types.QDnsLookup, slot: QDnsLookupnameserverChangedSlot) =
   var tmp = new QDnsLookupnameserverChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQDnsLookup_connect_nameserverChanged(self.h, cast[int](addr tmp[]))
+  fcQDnsLookup_connect_nameserverChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQDnsLookup_nameserverChanged, miqt_exec_callback_cQDnsLookup_nameserverChanged_release)
 
 proc tr*(_: type gen_qdnslookup_types.QDnsLookup, s: cstring, c: cstring): string =
   let v_ms = fcQDnsLookup_tr2(s, c)

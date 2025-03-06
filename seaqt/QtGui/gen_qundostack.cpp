@@ -17,12 +17,6 @@
 extern "C" {
 #endif
 
-void miqt_exec_callback_QUndoStack_indexChanged(intptr_t, int);
-void miqt_exec_callback_QUndoStack_cleanChanged(intptr_t, bool);
-void miqt_exec_callback_QUndoStack_canUndoChanged(intptr_t, bool);
-void miqt_exec_callback_QUndoStack_canRedoChanged(intptr_t, bool);
-void miqt_exec_callback_QUndoStack_undoTextChanged(intptr_t, struct miqt_string);
-void miqt_exec_callback_QUndoStack_redoTextChanged(intptr_t, struct miqt_string);
 #ifdef __cplusplus
 } /* extern C */
 #endif
@@ -536,44 +530,64 @@ void QUndoStack_indexChanged(QUndoStack* self, int idx) {
 	self->indexChanged(static_cast<int>(idx));
 }
 
-void QUndoStack_connect_indexChanged(QUndoStack* self, intptr_t slot) {
-	VirtualQUndoStack::connect(self, static_cast<void (QUndoStack::*)(int)>(&QUndoStack::indexChanged), self, [=](int idx) {
-		int sigval1 = idx;
-		miqt_exec_callback_QUndoStack_indexChanged(slot, sigval1);
-	});
+void QUndoStack_connect_indexChanged(QUndoStack* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t, int);
+		void operator()(int idx) {
+			int sigval1 = idx;
+			callback(slot, sigval1);
+		}
+	};
+	VirtualQUndoStack::connect(self, static_cast<void (QUndoStack::*)(int)>(&QUndoStack::indexChanged), self, local_caller{slot, callback, release});
 }
 
 void QUndoStack_cleanChanged(QUndoStack* self, bool clean) {
 	self->cleanChanged(clean);
 }
 
-void QUndoStack_connect_cleanChanged(QUndoStack* self, intptr_t slot) {
-	VirtualQUndoStack::connect(self, static_cast<void (QUndoStack::*)(bool)>(&QUndoStack::cleanChanged), self, [=](bool clean) {
-		bool sigval1 = clean;
-		miqt_exec_callback_QUndoStack_cleanChanged(slot, sigval1);
-	});
+void QUndoStack_connect_cleanChanged(QUndoStack* self, intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t, bool);
+		void operator()(bool clean) {
+			bool sigval1 = clean;
+			callback(slot, sigval1);
+		}
+	};
+	VirtualQUndoStack::connect(self, static_cast<void (QUndoStack::*)(bool)>(&QUndoStack::cleanChanged), self, local_caller{slot, callback, release});
 }
 
 void QUndoStack_canUndoChanged(QUndoStack* self, bool canUndo) {
 	self->canUndoChanged(canUndo);
 }
 
-void QUndoStack_connect_canUndoChanged(QUndoStack* self, intptr_t slot) {
-	VirtualQUndoStack::connect(self, static_cast<void (QUndoStack::*)(bool)>(&QUndoStack::canUndoChanged), self, [=](bool canUndo) {
-		bool sigval1 = canUndo;
-		miqt_exec_callback_QUndoStack_canUndoChanged(slot, sigval1);
-	});
+void QUndoStack_connect_canUndoChanged(QUndoStack* self, intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t, bool);
+		void operator()(bool canUndo) {
+			bool sigval1 = canUndo;
+			callback(slot, sigval1);
+		}
+	};
+	VirtualQUndoStack::connect(self, static_cast<void (QUndoStack::*)(bool)>(&QUndoStack::canUndoChanged), self, local_caller{slot, callback, release});
 }
 
 void QUndoStack_canRedoChanged(QUndoStack* self, bool canRedo) {
 	self->canRedoChanged(canRedo);
 }
 
-void QUndoStack_connect_canRedoChanged(QUndoStack* self, intptr_t slot) {
-	VirtualQUndoStack::connect(self, static_cast<void (QUndoStack::*)(bool)>(&QUndoStack::canRedoChanged), self, [=](bool canRedo) {
-		bool sigval1 = canRedo;
-		miqt_exec_callback_QUndoStack_canRedoChanged(slot, sigval1);
-	});
+void QUndoStack_connect_canRedoChanged(QUndoStack* self, intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t, bool);
+		void operator()(bool canRedo) {
+			bool sigval1 = canRedo;
+			callback(slot, sigval1);
+		}
+	};
+	VirtualQUndoStack::connect(self, static_cast<void (QUndoStack::*)(bool)>(&QUndoStack::canRedoChanged), self, local_caller{slot, callback, release});
 }
 
 void QUndoStack_undoTextChanged(QUndoStack* self, struct miqt_string undoText) {
@@ -581,18 +595,23 @@ void QUndoStack_undoTextChanged(QUndoStack* self, struct miqt_string undoText) {
 	self->undoTextChanged(undoText_QString);
 }
 
-void QUndoStack_connect_undoTextChanged(QUndoStack* self, intptr_t slot) {
-	VirtualQUndoStack::connect(self, static_cast<void (QUndoStack::*)(const QString&)>(&QUndoStack::undoTextChanged), self, [=](const QString& undoText) {
-		const QString undoText_ret = undoText;
-		// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
-		QByteArray undoText_b = undoText_ret.toUtf8();
-		struct miqt_string undoText_ms;
-		undoText_ms.len = undoText_b.length();
-		undoText_ms.data = static_cast<char*>(malloc(undoText_ms.len));
-		memcpy(undoText_ms.data, undoText_b.data(), undoText_ms.len);
-		struct miqt_string sigval1 = undoText_ms;
-		miqt_exec_callback_QUndoStack_undoTextChanged(slot, sigval1);
-	});
+void QUndoStack_connect_undoTextChanged(QUndoStack* self, intptr_t slot, void (*callback)(intptr_t, struct miqt_string), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, struct miqt_string), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t, struct miqt_string);
+		void operator()(const QString& undoText) {
+			const QString undoText_ret = undoText;
+			// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
+			QByteArray undoText_b = undoText_ret.toUtf8();
+			struct miqt_string undoText_ms;
+			undoText_ms.len = undoText_b.length();
+			undoText_ms.data = static_cast<char*>(malloc(undoText_ms.len));
+			memcpy(undoText_ms.data, undoText_b.data(), undoText_ms.len);
+			struct miqt_string sigval1 = undoText_ms;
+			callback(slot, sigval1);
+		}
+	};
+	VirtualQUndoStack::connect(self, static_cast<void (QUndoStack::*)(const QString&)>(&QUndoStack::undoTextChanged), self, local_caller{slot, callback, release});
 }
 
 void QUndoStack_redoTextChanged(QUndoStack* self, struct miqt_string redoText) {
@@ -600,18 +619,23 @@ void QUndoStack_redoTextChanged(QUndoStack* self, struct miqt_string redoText) {
 	self->redoTextChanged(redoText_QString);
 }
 
-void QUndoStack_connect_redoTextChanged(QUndoStack* self, intptr_t slot) {
-	VirtualQUndoStack::connect(self, static_cast<void (QUndoStack::*)(const QString&)>(&QUndoStack::redoTextChanged), self, [=](const QString& redoText) {
-		const QString redoText_ret = redoText;
-		// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
-		QByteArray redoText_b = redoText_ret.toUtf8();
-		struct miqt_string redoText_ms;
-		redoText_ms.len = redoText_b.length();
-		redoText_ms.data = static_cast<char*>(malloc(redoText_ms.len));
-		memcpy(redoText_ms.data, redoText_b.data(), redoText_ms.len);
-		struct miqt_string sigval1 = redoText_ms;
-		miqt_exec_callback_QUndoStack_redoTextChanged(slot, sigval1);
-	});
+void QUndoStack_connect_redoTextChanged(QUndoStack* self, intptr_t slot, void (*callback)(intptr_t, struct miqt_string), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, struct miqt_string), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t, struct miqt_string);
+		void operator()(const QString& redoText) {
+			const QString redoText_ret = redoText;
+			// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
+			QByteArray redoText_b = redoText_ret.toUtf8();
+			struct miqt_string redoText_ms;
+			redoText_ms.len = redoText_b.length();
+			redoText_ms.data = static_cast<char*>(malloc(redoText_ms.len));
+			memcpy(redoText_ms.data, redoText_b.data(), redoText_ms.len);
+			struct miqt_string sigval1 = redoText_ms;
+			callback(slot, sigval1);
+		}
+	};
+	VirtualQUndoStack::connect(self, static_cast<void (QUndoStack::*)(const QString&)>(&QUndoStack::redoTextChanged), self, local_caller{slot, callback, release});
 }
 
 struct miqt_string QUndoStack_tr2(const char* s, const char* c) {

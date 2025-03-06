@@ -17,12 +17,6 @@
 extern "C" {
 #endif
 
-void miqt_exec_callback_QAbstractAnimation_finished(intptr_t);
-void miqt_exec_callback_QAbstractAnimation_stateChanged(intptr_t, int, int);
-void miqt_exec_callback_QAbstractAnimation_currentLoopChanged(intptr_t, int);
-void miqt_exec_callback_QAbstractAnimation_directionChanged(intptr_t, int);
-void miqt_exec_callback_QAnimationDriver_started(intptr_t);
-void miqt_exec_callback_QAnimationDriver_stopped(intptr_t);
 #ifdef __cplusplus
 } /* extern C */
 #endif
@@ -343,47 +337,67 @@ void QAbstractAnimation_finished(QAbstractAnimation* self) {
 	self->finished();
 }
 
-void QAbstractAnimation_connect_finished(QAbstractAnimation* self, intptr_t slot) {
-	VirtualQAbstractAnimation::connect(self, static_cast<void (QAbstractAnimation::*)()>(&QAbstractAnimation::finished), self, [=]() {
-		miqt_exec_callback_QAbstractAnimation_finished(slot);
-	});
+void QAbstractAnimation_connect_finished(QAbstractAnimation* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t);
+		void operator()() {
+			callback(slot);
+		}
+	};
+	VirtualQAbstractAnimation::connect(self, static_cast<void (QAbstractAnimation::*)()>(&QAbstractAnimation::finished), self, local_caller{slot, callback, release});
 }
 
 void QAbstractAnimation_stateChanged(QAbstractAnimation* self, int newState, int oldState) {
 	self->stateChanged(static_cast<QAbstractAnimation::State>(newState), static_cast<QAbstractAnimation::State>(oldState));
 }
 
-void QAbstractAnimation_connect_stateChanged(QAbstractAnimation* self, intptr_t slot) {
-	VirtualQAbstractAnimation::connect(self, static_cast<void (QAbstractAnimation::*)(QAbstractAnimation::State, QAbstractAnimation::State)>(&QAbstractAnimation::stateChanged), self, [=](QAbstractAnimation::State newState, QAbstractAnimation::State oldState) {
-		QAbstractAnimation::State newState_ret = newState;
-		int sigval1 = static_cast<int>(newState_ret);
-		QAbstractAnimation::State oldState_ret = oldState;
-		int sigval2 = static_cast<int>(oldState_ret);
-		miqt_exec_callback_QAbstractAnimation_stateChanged(slot, sigval1, sigval2);
-	});
+void QAbstractAnimation_connect_stateChanged(QAbstractAnimation* self, intptr_t slot, void (*callback)(intptr_t, int, int), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t, int, int);
+		void operator()(QAbstractAnimation::State newState, QAbstractAnimation::State oldState) {
+			QAbstractAnimation::State newState_ret = newState;
+			int sigval1 = static_cast<int>(newState_ret);
+			QAbstractAnimation::State oldState_ret = oldState;
+			int sigval2 = static_cast<int>(oldState_ret);
+			callback(slot, sigval1, sigval2);
+		}
+	};
+	VirtualQAbstractAnimation::connect(self, static_cast<void (QAbstractAnimation::*)(QAbstractAnimation::State, QAbstractAnimation::State)>(&QAbstractAnimation::stateChanged), self, local_caller{slot, callback, release});
 }
 
 void QAbstractAnimation_currentLoopChanged(QAbstractAnimation* self, int currentLoop) {
 	self->currentLoopChanged(static_cast<int>(currentLoop));
 }
 
-void QAbstractAnimation_connect_currentLoopChanged(QAbstractAnimation* self, intptr_t slot) {
-	VirtualQAbstractAnimation::connect(self, static_cast<void (QAbstractAnimation::*)(int)>(&QAbstractAnimation::currentLoopChanged), self, [=](int currentLoop) {
-		int sigval1 = currentLoop;
-		miqt_exec_callback_QAbstractAnimation_currentLoopChanged(slot, sigval1);
-	});
+void QAbstractAnimation_connect_currentLoopChanged(QAbstractAnimation* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t, int);
+		void operator()(int currentLoop) {
+			int sigval1 = currentLoop;
+			callback(slot, sigval1);
+		}
+	};
+	VirtualQAbstractAnimation::connect(self, static_cast<void (QAbstractAnimation::*)(int)>(&QAbstractAnimation::currentLoopChanged), self, local_caller{slot, callback, release});
 }
 
 void QAbstractAnimation_directionChanged(QAbstractAnimation* self, int param1) {
 	self->directionChanged(static_cast<QAbstractAnimation::Direction>(param1));
 }
 
-void QAbstractAnimation_connect_directionChanged(QAbstractAnimation* self, intptr_t slot) {
-	VirtualQAbstractAnimation::connect(self, static_cast<void (QAbstractAnimation::*)(QAbstractAnimation::Direction)>(&QAbstractAnimation::directionChanged), self, [=](QAbstractAnimation::Direction param1) {
-		QAbstractAnimation::Direction param1_ret = param1;
-		int sigval1 = static_cast<int>(param1_ret);
-		miqt_exec_callback_QAbstractAnimation_directionChanged(slot, sigval1);
-	});
+void QAbstractAnimation_connect_directionChanged(QAbstractAnimation* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t, int);
+		void operator()(QAbstractAnimation::Direction param1) {
+			QAbstractAnimation::Direction param1_ret = param1;
+			int sigval1 = static_cast<int>(param1_ret);
+			callback(slot, sigval1);
+		}
+	};
+	VirtualQAbstractAnimation::connect(self, static_cast<void (QAbstractAnimation::*)(QAbstractAnimation::Direction)>(&QAbstractAnimation::directionChanged), self, local_caller{slot, callback, release});
 }
 
 void QAbstractAnimation_start(QAbstractAnimation* self) {
@@ -855,20 +869,30 @@ void QAnimationDriver_started(QAnimationDriver* self) {
 	self->started();
 }
 
-void QAnimationDriver_connect_started(QAnimationDriver* self, intptr_t slot) {
-	VirtualQAnimationDriver::connect(self, static_cast<void (QAnimationDriver::*)()>(&QAnimationDriver::started), self, [=]() {
-		miqt_exec_callback_QAnimationDriver_started(slot);
-	});
+void QAnimationDriver_connect_started(QAnimationDriver* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t);
+		void operator()() {
+			callback(slot);
+		}
+	};
+	VirtualQAnimationDriver::connect(self, static_cast<void (QAnimationDriver::*)()>(&QAnimationDriver::started), self, local_caller{slot, callback, release});
 }
 
 void QAnimationDriver_stopped(QAnimationDriver* self) {
 	self->stopped();
 }
 
-void QAnimationDriver_connect_stopped(QAnimationDriver* self, intptr_t slot) {
-	VirtualQAnimationDriver::connect(self, static_cast<void (QAnimationDriver::*)()>(&QAnimationDriver::stopped), self, [=]() {
-		miqt_exec_callback_QAnimationDriver_stopped(slot);
-	});
+void QAnimationDriver_connect_stopped(QAnimationDriver* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t);
+		void operator()() {
+			callback(slot);
+		}
+	};
+	VirtualQAnimationDriver::connect(self, static_cast<void (QAnimationDriver::*)()>(&QAnimationDriver::stopped), self, local_caller{slot, callback, release});
 }
 
 struct miqt_string QAnimationDriver_tr2(const char* s, const char* c) {

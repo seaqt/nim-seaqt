@@ -102,7 +102,7 @@ proc fcQProgressDialog_setLabelText(self: pointer, text: struct_miqt_string): vo
 proc fcQProgressDialog_setCancelButtonText(self: pointer, text: struct_miqt_string): void {.importc: "QProgressDialog_setCancelButtonText".}
 proc fcQProgressDialog_setMinimumDuration(self: pointer, ms: cint): void {.importc: "QProgressDialog_setMinimumDuration".}
 proc fcQProgressDialog_canceled(self: pointer, ): void {.importc: "QProgressDialog_canceled".}
-proc fcQProgressDialog_connect_canceled(self: pointer, slot: int) {.importc: "QProgressDialog_connect_canceled".}
+proc fcQProgressDialog_connect_canceled(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QProgressDialog_connect_canceled".}
 proc fcQProgressDialog_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QProgressDialog_tr2".}
 proc fcQProgressDialog_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QProgressDialog_tr3".}
 type cQProgressDialogVTable = object
@@ -317,15 +317,19 @@ proc canceled*(self: gen_qprogressdialog_types.QProgressDialog, ): void =
   fcQProgressDialog_canceled(self.h)
 
 type QProgressDialogcanceledSlot* = proc()
-proc miqt_exec_callback_cQProgressDialog_canceled(slot: int) {.exportc: "miqt_exec_callback_QProgressDialog_canceled".} =
+proc miqt_exec_callback_cQProgressDialog_canceled(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QProgressDialogcanceledSlot](cast[pointer](slot))
   nimfunc[]()
+
+proc miqt_exec_callback_cQProgressDialog_canceled_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QProgressDialogcanceledSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
 
 proc oncanceled*(self: gen_qprogressdialog_types.QProgressDialog, slot: QProgressDialogcanceledSlot) =
   var tmp = new QProgressDialogcanceledSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQProgressDialog_connect_canceled(self.h, cast[int](addr tmp[]))
+  fcQProgressDialog_connect_canceled(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQProgressDialog_canceled, miqt_exec_callback_cQProgressDialog_canceled_release)
 
 proc tr*(_: type gen_qprogressdialog_types.QProgressDialog, s: cstring, c: cstring): string =
   let v_ms = fcQProgressDialog_tr2(s, c)

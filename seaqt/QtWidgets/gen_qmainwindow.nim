@@ -142,11 +142,11 @@ proc fcQMainWindow_setAnimated(self: pointer, enabled: bool): void {.importc: "Q
 proc fcQMainWindow_setDockNestingEnabled(self: pointer, enabled: bool): void {.importc: "QMainWindow_setDockNestingEnabled".}
 proc fcQMainWindow_setUnifiedTitleAndToolBarOnMac(self: pointer, set: bool): void {.importc: "QMainWindow_setUnifiedTitleAndToolBarOnMac".}
 proc fcQMainWindow_iconSizeChanged(self: pointer, iconSize: pointer): void {.importc: "QMainWindow_iconSizeChanged".}
-proc fcQMainWindow_connect_iconSizeChanged(self: pointer, slot: int) {.importc: "QMainWindow_connect_iconSizeChanged".}
+proc fcQMainWindow_connect_iconSizeChanged(self: pointer, slot: int, callback: proc (slot: int, iconSize: pointer) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QMainWindow_connect_iconSizeChanged".}
 proc fcQMainWindow_toolButtonStyleChanged(self: pointer, toolButtonStyle: cint): void {.importc: "QMainWindow_toolButtonStyleChanged".}
-proc fcQMainWindow_connect_toolButtonStyleChanged(self: pointer, slot: int) {.importc: "QMainWindow_connect_toolButtonStyleChanged".}
+proc fcQMainWindow_connect_toolButtonStyleChanged(self: pointer, slot: int, callback: proc (slot: int, toolButtonStyle: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QMainWindow_connect_toolButtonStyleChanged".}
 proc fcQMainWindow_tabifiedDockWidgetActivated(self: pointer, dockWidget: pointer): void {.importc: "QMainWindow_tabifiedDockWidgetActivated".}
-proc fcQMainWindow_connect_tabifiedDockWidgetActivated(self: pointer, slot: int) {.importc: "QMainWindow_connect_tabifiedDockWidgetActivated".}
+proc fcQMainWindow_connect_tabifiedDockWidgetActivated(self: pointer, slot: int, callback: proc (slot: int, dockWidget: pointer) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QMainWindow_connect_tabifiedDockWidgetActivated".}
 proc fcQMainWindow_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QMainWindow_tr2".}
 proc fcQMainWindow_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QMainWindow_tr3".}
 proc fcQMainWindow_addToolBarBreak1(self: pointer, area: cint): void {.importc: "QMainWindow_addToolBarBreak1".}
@@ -453,49 +453,61 @@ proc iconSizeChanged*(self: gen_qmainwindow_types.QMainWindow, iconSize: gen_qsi
   fcQMainWindow_iconSizeChanged(self.h, iconSize.h)
 
 type QMainWindowiconSizeChangedSlot* = proc(iconSize: gen_qsize_types.QSize)
-proc miqt_exec_callback_cQMainWindow_iconSizeChanged(slot: int, iconSize: pointer) {.exportc: "miqt_exec_callback_QMainWindow_iconSizeChanged".} =
+proc miqt_exec_callback_cQMainWindow_iconSizeChanged(slot: int, iconSize: pointer) {.cdecl.} =
   let nimfunc = cast[ptr QMainWindowiconSizeChangedSlot](cast[pointer](slot))
   let slotval1 = gen_qsize_types.QSize(h: iconSize)
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQMainWindow_iconSizeChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QMainWindowiconSizeChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc oniconSizeChanged*(self: gen_qmainwindow_types.QMainWindow, slot: QMainWindowiconSizeChangedSlot) =
   var tmp = new QMainWindowiconSizeChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQMainWindow_connect_iconSizeChanged(self.h, cast[int](addr tmp[]))
+  fcQMainWindow_connect_iconSizeChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQMainWindow_iconSizeChanged, miqt_exec_callback_cQMainWindow_iconSizeChanged_release)
 
 proc toolButtonStyleChanged*(self: gen_qmainwindow_types.QMainWindow, toolButtonStyle: cint): void =
   fcQMainWindow_toolButtonStyleChanged(self.h, cint(toolButtonStyle))
 
 type QMainWindowtoolButtonStyleChangedSlot* = proc(toolButtonStyle: cint)
-proc miqt_exec_callback_cQMainWindow_toolButtonStyleChanged(slot: int, toolButtonStyle: cint) {.exportc: "miqt_exec_callback_QMainWindow_toolButtonStyleChanged".} =
+proc miqt_exec_callback_cQMainWindow_toolButtonStyleChanged(slot: int, toolButtonStyle: cint) {.cdecl.} =
   let nimfunc = cast[ptr QMainWindowtoolButtonStyleChangedSlot](cast[pointer](slot))
   let slotval1 = cint(toolButtonStyle)
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQMainWindow_toolButtonStyleChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QMainWindowtoolButtonStyleChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc ontoolButtonStyleChanged*(self: gen_qmainwindow_types.QMainWindow, slot: QMainWindowtoolButtonStyleChangedSlot) =
   var tmp = new QMainWindowtoolButtonStyleChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQMainWindow_connect_toolButtonStyleChanged(self.h, cast[int](addr tmp[]))
+  fcQMainWindow_connect_toolButtonStyleChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQMainWindow_toolButtonStyleChanged, miqt_exec_callback_cQMainWindow_toolButtonStyleChanged_release)
 
 proc tabifiedDockWidgetActivated*(self: gen_qmainwindow_types.QMainWindow, dockWidget: gen_qdockwidget_types.QDockWidget): void =
   fcQMainWindow_tabifiedDockWidgetActivated(self.h, dockWidget.h)
 
 type QMainWindowtabifiedDockWidgetActivatedSlot* = proc(dockWidget: gen_qdockwidget_types.QDockWidget)
-proc miqt_exec_callback_cQMainWindow_tabifiedDockWidgetActivated(slot: int, dockWidget: pointer) {.exportc: "miqt_exec_callback_QMainWindow_tabifiedDockWidgetActivated".} =
+proc miqt_exec_callback_cQMainWindow_tabifiedDockWidgetActivated(slot: int, dockWidget: pointer) {.cdecl.} =
   let nimfunc = cast[ptr QMainWindowtabifiedDockWidgetActivatedSlot](cast[pointer](slot))
   let slotval1 = gen_qdockwidget_types.QDockWidget(h: dockWidget)
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQMainWindow_tabifiedDockWidgetActivated_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QMainWindowtabifiedDockWidgetActivatedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc ontabifiedDockWidgetActivated*(self: gen_qmainwindow_types.QMainWindow, slot: QMainWindowtabifiedDockWidgetActivatedSlot) =
   var tmp = new QMainWindowtabifiedDockWidgetActivatedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQMainWindow_connect_tabifiedDockWidgetActivated(self.h, cast[int](addr tmp[]))
+  fcQMainWindow_connect_tabifiedDockWidgetActivated(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQMainWindow_tabifiedDockWidgetActivated, miqt_exec_callback_cQMainWindow_tabifiedDockWidgetActivated_release)
 
 proc tr*(_: type gen_qmainwindow_types.QMainWindow, s: cstring, c: cstring): string =
   let v_ms = fcQMainWindow_tr2(s, c)

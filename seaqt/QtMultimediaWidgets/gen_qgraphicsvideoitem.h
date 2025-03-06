@@ -137,7 +137,7 @@ QRectF* QGraphicsVideoItem_boundingRect(const QGraphicsVideoItem* self);
 void QGraphicsVideoItem_paint(QGraphicsVideoItem* self, QPainter* painter, QStyleOptionGraphicsItem* option, QWidget* widget);
 int QGraphicsVideoItem_type(const QGraphicsVideoItem* self);
 void QGraphicsVideoItem_nativeSizeChanged(QGraphicsVideoItem* self, QSizeF* size);
-void QGraphicsVideoItem_connect_nativeSizeChanged(QGraphicsVideoItem* self, intptr_t slot);
+void QGraphicsVideoItem_connect_nativeSizeChanged(QGraphicsVideoItem* self, intptr_t slot, void (*callback)(intptr_t, QSizeF*), void (*release)(intptr_t));
 void QGraphicsVideoItem_timerEvent(QGraphicsVideoItem* self, QTimerEvent* event);
 QVariant* QGraphicsVideoItem_itemChange(QGraphicsVideoItem* self, int change, QVariant* value);
 struct miqt_string QGraphicsVideoItem_tr2(const char* s, const char* c);

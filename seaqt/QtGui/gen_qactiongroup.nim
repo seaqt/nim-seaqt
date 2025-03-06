@@ -80,9 +80,9 @@ proc fcQActionGroup_setVisible(self: pointer, visible: bool): void {.importc: "Q
 proc fcQActionGroup_setExclusive(self: pointer, exclusive: bool): void {.importc: "QActionGroup_setExclusive".}
 proc fcQActionGroup_setExclusionPolicy(self: pointer, policy: cint): void {.importc: "QActionGroup_setExclusionPolicy".}
 proc fcQActionGroup_triggered(self: pointer, param1: pointer): void {.importc: "QActionGroup_triggered".}
-proc fcQActionGroup_connect_triggered(self: pointer, slot: int) {.importc: "QActionGroup_connect_triggered".}
+proc fcQActionGroup_connect_triggered(self: pointer, slot: int, callback: proc (slot: int, param1: pointer) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QActionGroup_connect_triggered".}
 proc fcQActionGroup_hovered(self: pointer, param1: pointer): void {.importc: "QActionGroup_hovered".}
-proc fcQActionGroup_connect_hovered(self: pointer, slot: int) {.importc: "QActionGroup_connect_hovered".}
+proc fcQActionGroup_connect_hovered(self: pointer, slot: int, callback: proc (slot: int, param1: pointer) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QActionGroup_connect_hovered".}
 proc fcQActionGroup_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QActionGroup_tr2".}
 proc fcQActionGroup_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QActionGroup_tr3".}
 type cQActionGroupVTable = object
@@ -180,33 +180,41 @@ proc triggered*(self: gen_qactiongroup_types.QActionGroup, param1: gen_qaction_t
   fcQActionGroup_triggered(self.h, param1.h)
 
 type QActionGrouptriggeredSlot* = proc(param1: gen_qaction_types.QAction)
-proc miqt_exec_callback_cQActionGroup_triggered(slot: int, param1: pointer) {.exportc: "miqt_exec_callback_QActionGroup_triggered".} =
+proc miqt_exec_callback_cQActionGroup_triggered(slot: int, param1: pointer) {.cdecl.} =
   let nimfunc = cast[ptr QActionGrouptriggeredSlot](cast[pointer](slot))
   let slotval1 = gen_qaction_types.QAction(h: param1)
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQActionGroup_triggered_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QActionGrouptriggeredSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc ontriggered*(self: gen_qactiongroup_types.QActionGroup, slot: QActionGrouptriggeredSlot) =
   var tmp = new QActionGrouptriggeredSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQActionGroup_connect_triggered(self.h, cast[int](addr tmp[]))
+  fcQActionGroup_connect_triggered(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQActionGroup_triggered, miqt_exec_callback_cQActionGroup_triggered_release)
 
 proc hovered*(self: gen_qactiongroup_types.QActionGroup, param1: gen_qaction_types.QAction): void =
   fcQActionGroup_hovered(self.h, param1.h)
 
 type QActionGrouphoveredSlot* = proc(param1: gen_qaction_types.QAction)
-proc miqt_exec_callback_cQActionGroup_hovered(slot: int, param1: pointer) {.exportc: "miqt_exec_callback_QActionGroup_hovered".} =
+proc miqt_exec_callback_cQActionGroup_hovered(slot: int, param1: pointer) {.cdecl.} =
   let nimfunc = cast[ptr QActionGrouphoveredSlot](cast[pointer](slot))
   let slotval1 = gen_qaction_types.QAction(h: param1)
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQActionGroup_hovered_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QActionGrouphoveredSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onhovered*(self: gen_qactiongroup_types.QActionGroup, slot: QActionGrouphoveredSlot) =
   var tmp = new QActionGrouphoveredSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQActionGroup_connect_hovered(self.h, cast[int](addr tmp[]))
+  fcQActionGroup_connect_hovered(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQActionGroup_hovered, miqt_exec_callback_cQActionGroup_hovered_release)
 
 proc tr*(_: type gen_qactiongroup_types.QActionGroup, s: cstring, c: cstring): string =
   let v_ms = fcQActionGroup_tr2(s, c)

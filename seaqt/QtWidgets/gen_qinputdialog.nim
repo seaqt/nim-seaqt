@@ -133,17 +133,17 @@ proc fcQInputDialog_getDouble(parent: pointer, title: struct_miqt_string, label:
 proc fcQInputDialog_setDoubleStep(self: pointer, step: float64): void {.importc: "QInputDialog_setDoubleStep".}
 proc fcQInputDialog_doubleStep(self: pointer, ): float64 {.importc: "QInputDialog_doubleStep".}
 proc fcQInputDialog_textValueChanged(self: pointer, text: struct_miqt_string): void {.importc: "QInputDialog_textValueChanged".}
-proc fcQInputDialog_connect_textValueChanged(self: pointer, slot: int) {.importc: "QInputDialog_connect_textValueChanged".}
+proc fcQInputDialog_connect_textValueChanged(self: pointer, slot: int, callback: proc (slot: int, text: struct_miqt_string) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QInputDialog_connect_textValueChanged".}
 proc fcQInputDialog_textValueSelected(self: pointer, text: struct_miqt_string): void {.importc: "QInputDialog_textValueSelected".}
-proc fcQInputDialog_connect_textValueSelected(self: pointer, slot: int) {.importc: "QInputDialog_connect_textValueSelected".}
+proc fcQInputDialog_connect_textValueSelected(self: pointer, slot: int, callback: proc (slot: int, text: struct_miqt_string) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QInputDialog_connect_textValueSelected".}
 proc fcQInputDialog_intValueChanged(self: pointer, value: cint): void {.importc: "QInputDialog_intValueChanged".}
-proc fcQInputDialog_connect_intValueChanged(self: pointer, slot: int) {.importc: "QInputDialog_connect_intValueChanged".}
+proc fcQInputDialog_connect_intValueChanged(self: pointer, slot: int, callback: proc (slot: int, value: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QInputDialog_connect_intValueChanged".}
 proc fcQInputDialog_intValueSelected(self: pointer, value: cint): void {.importc: "QInputDialog_intValueSelected".}
-proc fcQInputDialog_connect_intValueSelected(self: pointer, slot: int) {.importc: "QInputDialog_connect_intValueSelected".}
+proc fcQInputDialog_connect_intValueSelected(self: pointer, slot: int, callback: proc (slot: int, value: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QInputDialog_connect_intValueSelected".}
 proc fcQInputDialog_doubleValueChanged(self: pointer, value: float64): void {.importc: "QInputDialog_doubleValueChanged".}
-proc fcQInputDialog_connect_doubleValueChanged(self: pointer, slot: int) {.importc: "QInputDialog_connect_doubleValueChanged".}
+proc fcQInputDialog_connect_doubleValueChanged(self: pointer, slot: int, callback: proc (slot: int, value: float64) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QInputDialog_connect_doubleValueChanged".}
 proc fcQInputDialog_doubleValueSelected(self: pointer, value: float64): void {.importc: "QInputDialog_doubleValueSelected".}
-proc fcQInputDialog_connect_doubleValueSelected(self: pointer, slot: int) {.importc: "QInputDialog_connect_doubleValueSelected".}
+proc fcQInputDialog_connect_doubleValueSelected(self: pointer, slot: int, callback: proc (slot: int, value: float64) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QInputDialog_connect_doubleValueSelected".}
 proc fcQInputDialog_done(self: pointer, resultVal: cint): void {.importc: "QInputDialog_done".}
 proc fcQInputDialog_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QInputDialog_tr2".}
 proc fcQInputDialog_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QInputDialog_tr3".}
@@ -493,7 +493,7 @@ proc textValueChanged*(self: gen_qinputdialog_types.QInputDialog, text: string):
   fcQInputDialog_textValueChanged(self.h, struct_miqt_string(data: text, len: csize_t(len(text))))
 
 type QInputDialogtextValueChangedSlot* = proc(text: string)
-proc miqt_exec_callback_cQInputDialog_textValueChanged(slot: int, text: struct_miqt_string) {.exportc: "miqt_exec_callback_QInputDialog_textValueChanged".} =
+proc miqt_exec_callback_cQInputDialog_textValueChanged(slot: int, text: struct_miqt_string) {.cdecl.} =
   let nimfunc = cast[ptr QInputDialogtextValueChangedSlot](cast[pointer](slot))
   let vtext_ms = text
   let vtextx_ret = string.fromBytes(toOpenArrayByte(vtext_ms.data, 0, int(vtext_ms.len)-1))
@@ -502,17 +502,21 @@ proc miqt_exec_callback_cQInputDialog_textValueChanged(slot: int, text: struct_m
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQInputDialog_textValueChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QInputDialogtextValueChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc ontextValueChanged*(self: gen_qinputdialog_types.QInputDialog, slot: QInputDialogtextValueChangedSlot) =
   var tmp = new QInputDialogtextValueChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQInputDialog_connect_textValueChanged(self.h, cast[int](addr tmp[]))
+  fcQInputDialog_connect_textValueChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQInputDialog_textValueChanged, miqt_exec_callback_cQInputDialog_textValueChanged_release)
 
 proc textValueSelected*(self: gen_qinputdialog_types.QInputDialog, text: string): void =
   fcQInputDialog_textValueSelected(self.h, struct_miqt_string(data: text, len: csize_t(len(text))))
 
 type QInputDialogtextValueSelectedSlot* = proc(text: string)
-proc miqt_exec_callback_cQInputDialog_textValueSelected(slot: int, text: struct_miqt_string) {.exportc: "miqt_exec_callback_QInputDialog_textValueSelected".} =
+proc miqt_exec_callback_cQInputDialog_textValueSelected(slot: int, text: struct_miqt_string) {.cdecl.} =
   let nimfunc = cast[ptr QInputDialogtextValueSelectedSlot](cast[pointer](slot))
   let vtext_ms = text
   let vtextx_ret = string.fromBytes(toOpenArrayByte(vtext_ms.data, 0, int(vtext_ms.len)-1))
@@ -521,75 +525,95 @@ proc miqt_exec_callback_cQInputDialog_textValueSelected(slot: int, text: struct_
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQInputDialog_textValueSelected_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QInputDialogtextValueSelectedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc ontextValueSelected*(self: gen_qinputdialog_types.QInputDialog, slot: QInputDialogtextValueSelectedSlot) =
   var tmp = new QInputDialogtextValueSelectedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQInputDialog_connect_textValueSelected(self.h, cast[int](addr tmp[]))
+  fcQInputDialog_connect_textValueSelected(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQInputDialog_textValueSelected, miqt_exec_callback_cQInputDialog_textValueSelected_release)
 
 proc intValueChanged*(self: gen_qinputdialog_types.QInputDialog, value: cint): void =
   fcQInputDialog_intValueChanged(self.h, value)
 
 type QInputDialogintValueChangedSlot* = proc(value: cint)
-proc miqt_exec_callback_cQInputDialog_intValueChanged(slot: int, value: cint) {.exportc: "miqt_exec_callback_QInputDialog_intValueChanged".} =
+proc miqt_exec_callback_cQInputDialog_intValueChanged(slot: int, value: cint) {.cdecl.} =
   let nimfunc = cast[ptr QInputDialogintValueChangedSlot](cast[pointer](slot))
   let slotval1 = value
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQInputDialog_intValueChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QInputDialogintValueChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onintValueChanged*(self: gen_qinputdialog_types.QInputDialog, slot: QInputDialogintValueChangedSlot) =
   var tmp = new QInputDialogintValueChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQInputDialog_connect_intValueChanged(self.h, cast[int](addr tmp[]))
+  fcQInputDialog_connect_intValueChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQInputDialog_intValueChanged, miqt_exec_callback_cQInputDialog_intValueChanged_release)
 
 proc intValueSelected*(self: gen_qinputdialog_types.QInputDialog, value: cint): void =
   fcQInputDialog_intValueSelected(self.h, value)
 
 type QInputDialogintValueSelectedSlot* = proc(value: cint)
-proc miqt_exec_callback_cQInputDialog_intValueSelected(slot: int, value: cint) {.exportc: "miqt_exec_callback_QInputDialog_intValueSelected".} =
+proc miqt_exec_callback_cQInputDialog_intValueSelected(slot: int, value: cint) {.cdecl.} =
   let nimfunc = cast[ptr QInputDialogintValueSelectedSlot](cast[pointer](slot))
   let slotval1 = value
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQInputDialog_intValueSelected_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QInputDialogintValueSelectedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onintValueSelected*(self: gen_qinputdialog_types.QInputDialog, slot: QInputDialogintValueSelectedSlot) =
   var tmp = new QInputDialogintValueSelectedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQInputDialog_connect_intValueSelected(self.h, cast[int](addr tmp[]))
+  fcQInputDialog_connect_intValueSelected(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQInputDialog_intValueSelected, miqt_exec_callback_cQInputDialog_intValueSelected_release)
 
 proc doubleValueChanged*(self: gen_qinputdialog_types.QInputDialog, value: float64): void =
   fcQInputDialog_doubleValueChanged(self.h, value)
 
 type QInputDialogdoubleValueChangedSlot* = proc(value: float64)
-proc miqt_exec_callback_cQInputDialog_doubleValueChanged(slot: int, value: float64) {.exportc: "miqt_exec_callback_QInputDialog_doubleValueChanged".} =
+proc miqt_exec_callback_cQInputDialog_doubleValueChanged(slot: int, value: float64) {.cdecl.} =
   let nimfunc = cast[ptr QInputDialogdoubleValueChangedSlot](cast[pointer](slot))
   let slotval1 = value
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQInputDialog_doubleValueChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QInputDialogdoubleValueChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc ondoubleValueChanged*(self: gen_qinputdialog_types.QInputDialog, slot: QInputDialogdoubleValueChangedSlot) =
   var tmp = new QInputDialogdoubleValueChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQInputDialog_connect_doubleValueChanged(self.h, cast[int](addr tmp[]))
+  fcQInputDialog_connect_doubleValueChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQInputDialog_doubleValueChanged, miqt_exec_callback_cQInputDialog_doubleValueChanged_release)
 
 proc doubleValueSelected*(self: gen_qinputdialog_types.QInputDialog, value: float64): void =
   fcQInputDialog_doubleValueSelected(self.h, value)
 
 type QInputDialogdoubleValueSelectedSlot* = proc(value: float64)
-proc miqt_exec_callback_cQInputDialog_doubleValueSelected(slot: int, value: float64) {.exportc: "miqt_exec_callback_QInputDialog_doubleValueSelected".} =
+proc miqt_exec_callback_cQInputDialog_doubleValueSelected(slot: int, value: float64) {.cdecl.} =
   let nimfunc = cast[ptr QInputDialogdoubleValueSelectedSlot](cast[pointer](slot))
   let slotval1 = value
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQInputDialog_doubleValueSelected_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QInputDialogdoubleValueSelectedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc ondoubleValueSelected*(self: gen_qinputdialog_types.QInputDialog, slot: QInputDialogdoubleValueSelectedSlot) =
   var tmp = new QInputDialogdoubleValueSelectedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQInputDialog_connect_doubleValueSelected(self.h, cast[int](addr tmp[]))
+  fcQInputDialog_connect_doubleValueSelected(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQInputDialog_doubleValueSelected, miqt_exec_callback_cQInputDialog_doubleValueSelected_release)
 
 proc done*(self: gen_qinputdialog_types.QInputDialog, resultVal: cint): void =
   fcQInputDialog_done(self.h, resultVal)

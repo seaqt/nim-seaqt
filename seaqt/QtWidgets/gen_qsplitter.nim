@@ -102,7 +102,7 @@ proc fcQSplitter_getRange(self: pointer, index: cint, param2: ptr cint, param3: 
 proc fcQSplitter_handle(self: pointer, index: cint): pointer {.importc: "QSplitter_handle".}
 proc fcQSplitter_setStretchFactor(self: pointer, index: cint, stretch: cint): void {.importc: "QSplitter_setStretchFactor".}
 proc fcQSplitter_splitterMoved(self: pointer, pos: cint, index: cint): void {.importc: "QSplitter_splitterMoved".}
-proc fcQSplitter_connect_splitterMoved(self: pointer, slot: int) {.importc: "QSplitter_connect_splitterMoved".}
+proc fcQSplitter_connect_splitterMoved(self: pointer, slot: int, callback: proc (slot: int, pos: cint, index: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QSplitter_connect_splitterMoved".}
 proc fcQSplitter_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QSplitter_tr2".}
 proc fcQSplitter_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QSplitter_tr3".}
 proc fcQSplitter_setOpaqueResize1(self: pointer, opaque: bool): void {.importc: "QSplitter_setOpaqueResize1".}
@@ -444,7 +444,7 @@ proc splitterMoved*(self: gen_qsplitter_types.QSplitter, pos: cint, index: cint)
   fcQSplitter_splitterMoved(self.h, pos, index)
 
 type QSplittersplitterMovedSlot* = proc(pos: cint, index: cint)
-proc miqt_exec_callback_cQSplitter_splitterMoved(slot: int, pos: cint, index: cint) {.exportc: "miqt_exec_callback_QSplitter_splitterMoved".} =
+proc miqt_exec_callback_cQSplitter_splitterMoved(slot: int, pos: cint, index: cint) {.cdecl.} =
   let nimfunc = cast[ptr QSplittersplitterMovedSlot](cast[pointer](slot))
   let slotval1 = pos
 
@@ -452,11 +452,15 @@ proc miqt_exec_callback_cQSplitter_splitterMoved(slot: int, pos: cint, index: ci
 
   nimfunc[](slotval1, slotval2)
 
+proc miqt_exec_callback_cQSplitter_splitterMoved_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QSplittersplitterMovedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onsplitterMoved*(self: gen_qsplitter_types.QSplitter, slot: QSplittersplitterMovedSlot) =
   var tmp = new QSplittersplitterMovedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQSplitter_connect_splitterMoved(self.h, cast[int](addr tmp[]))
+  fcQSplitter_connect_splitterMoved(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQSplitter_splitterMoved, miqt_exec_callback_cQSplitter_splitterMoved_release)
 
 proc tr*(_: type gen_qsplitter_types.QSplitter, s: cstring, c: cstring): string =
   let v_ms = fcQSplitter_tr2(s, c)

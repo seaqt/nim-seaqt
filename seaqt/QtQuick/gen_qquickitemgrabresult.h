@@ -43,7 +43,7 @@ bool QQuickItemGrabResult_saveToFile(const QQuickItemGrabResult* self, struct mi
 bool QQuickItemGrabResult_saveToFileWithFileName(const QQuickItemGrabResult* self, QUrl* fileName);
 bool QQuickItemGrabResult_event(QQuickItemGrabResult* self, QEvent* param1);
 void QQuickItemGrabResult_ready(QQuickItemGrabResult* self);
-void QQuickItemGrabResult_connect_ready(QQuickItemGrabResult* self, intptr_t slot);
+void QQuickItemGrabResult_connect_ready(QQuickItemGrabResult* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t));
 struct miqt_string QQuickItemGrabResult_tr2(const char* s, const char* c);
 struct miqt_string QQuickItemGrabResult_tr3(const char* s, const char* c, int n);
 const QMetaObject* QQuickItemGrabResult_staticMetaObject();

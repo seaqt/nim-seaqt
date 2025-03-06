@@ -85,13 +85,13 @@ proc fcQAbstractAnimation_currentLoop(self: pointer, ): cint {.importc: "QAbstra
 proc fcQAbstractAnimation_duration(self: pointer, ): cint {.importc: "QAbstractAnimation_duration".}
 proc fcQAbstractAnimation_totalDuration(self: pointer, ): cint {.importc: "QAbstractAnimation_totalDuration".}
 proc fcQAbstractAnimation_finished(self: pointer, ): void {.importc: "QAbstractAnimation_finished".}
-proc fcQAbstractAnimation_connect_finished(self: pointer, slot: int) {.importc: "QAbstractAnimation_connect_finished".}
+proc fcQAbstractAnimation_connect_finished(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QAbstractAnimation_connect_finished".}
 proc fcQAbstractAnimation_stateChanged(self: pointer, newState: cint, oldState: cint): void {.importc: "QAbstractAnimation_stateChanged".}
-proc fcQAbstractAnimation_connect_stateChanged(self: pointer, slot: int) {.importc: "QAbstractAnimation_connect_stateChanged".}
+proc fcQAbstractAnimation_connect_stateChanged(self: pointer, slot: int, callback: proc (slot: int, newState: cint, oldState: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QAbstractAnimation_connect_stateChanged".}
 proc fcQAbstractAnimation_currentLoopChanged(self: pointer, currentLoop: cint): void {.importc: "QAbstractAnimation_currentLoopChanged".}
-proc fcQAbstractAnimation_connect_currentLoopChanged(self: pointer, slot: int) {.importc: "QAbstractAnimation_connect_currentLoopChanged".}
+proc fcQAbstractAnimation_connect_currentLoopChanged(self: pointer, slot: int, callback: proc (slot: int, currentLoop: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QAbstractAnimation_connect_currentLoopChanged".}
 proc fcQAbstractAnimation_directionChanged(self: pointer, param1: cint): void {.importc: "QAbstractAnimation_directionChanged".}
-proc fcQAbstractAnimation_connect_directionChanged(self: pointer, slot: int) {.importc: "QAbstractAnimation_connect_directionChanged".}
+proc fcQAbstractAnimation_connect_directionChanged(self: pointer, slot: int, callback: proc (slot: int, param1: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QAbstractAnimation_connect_directionChanged".}
 proc fcQAbstractAnimation_start(self: pointer, ): void {.importc: "QAbstractAnimation_start".}
 proc fcQAbstractAnimation_pause(self: pointer, ): void {.importc: "QAbstractAnimation_pause".}
 proc fcQAbstractAnimation_resume(self: pointer, ): void {.importc: "QAbstractAnimation_resume".}
@@ -143,9 +143,9 @@ proc fcQAnimationDriver_uninstall(self: pointer, ): void {.importc: "QAnimationD
 proc fcQAnimationDriver_isRunning(self: pointer, ): bool {.importc: "QAnimationDriver_isRunning".}
 proc fcQAnimationDriver_elapsed(self: pointer, ): clonglong {.importc: "QAnimationDriver_elapsed".}
 proc fcQAnimationDriver_started(self: pointer, ): void {.importc: "QAnimationDriver_started".}
-proc fcQAnimationDriver_connect_started(self: pointer, slot: int) {.importc: "QAnimationDriver_connect_started".}
+proc fcQAnimationDriver_connect_started(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QAnimationDriver_connect_started".}
 proc fcQAnimationDriver_stopped(self: pointer, ): void {.importc: "QAnimationDriver_stopped".}
-proc fcQAnimationDriver_connect_stopped(self: pointer, slot: int) {.importc: "QAnimationDriver_connect_stopped".}
+proc fcQAnimationDriver_connect_stopped(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QAnimationDriver_connect_stopped".}
 proc fcQAnimationDriver_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QAnimationDriver_tr2".}
 proc fcQAnimationDriver_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QAnimationDriver_tr3".}
 type cQAnimationDriverVTable = object
@@ -235,21 +235,25 @@ proc finished*(self: gen_qabstractanimation_types.QAbstractAnimation, ): void =
   fcQAbstractAnimation_finished(self.h)
 
 type QAbstractAnimationfinishedSlot* = proc()
-proc miqt_exec_callback_cQAbstractAnimation_finished(slot: int) {.exportc: "miqt_exec_callback_QAbstractAnimation_finished".} =
+proc miqt_exec_callback_cQAbstractAnimation_finished(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QAbstractAnimationfinishedSlot](cast[pointer](slot))
   nimfunc[]()
+
+proc miqt_exec_callback_cQAbstractAnimation_finished_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QAbstractAnimationfinishedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
 
 proc onfinished*(self: gen_qabstractanimation_types.QAbstractAnimation, slot: QAbstractAnimationfinishedSlot) =
   var tmp = new QAbstractAnimationfinishedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQAbstractAnimation_connect_finished(self.h, cast[int](addr tmp[]))
+  fcQAbstractAnimation_connect_finished(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQAbstractAnimation_finished, miqt_exec_callback_cQAbstractAnimation_finished_release)
 
 proc stateChanged*(self: gen_qabstractanimation_types.QAbstractAnimation, newState: cint, oldState: cint): void =
   fcQAbstractAnimation_stateChanged(self.h, cint(newState), cint(oldState))
 
 type QAbstractAnimationstateChangedSlot* = proc(newState: cint, oldState: cint)
-proc miqt_exec_callback_cQAbstractAnimation_stateChanged(slot: int, newState: cint, oldState: cint) {.exportc: "miqt_exec_callback_QAbstractAnimation_stateChanged".} =
+proc miqt_exec_callback_cQAbstractAnimation_stateChanged(slot: int, newState: cint, oldState: cint) {.cdecl.} =
   let nimfunc = cast[ptr QAbstractAnimationstateChangedSlot](cast[pointer](slot))
   let slotval1 = cint(newState)
 
@@ -257,43 +261,55 @@ proc miqt_exec_callback_cQAbstractAnimation_stateChanged(slot: int, newState: ci
 
   nimfunc[](slotval1, slotval2)
 
+proc miqt_exec_callback_cQAbstractAnimation_stateChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QAbstractAnimationstateChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onstateChanged*(self: gen_qabstractanimation_types.QAbstractAnimation, slot: QAbstractAnimationstateChangedSlot) =
   var tmp = new QAbstractAnimationstateChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQAbstractAnimation_connect_stateChanged(self.h, cast[int](addr tmp[]))
+  fcQAbstractAnimation_connect_stateChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQAbstractAnimation_stateChanged, miqt_exec_callback_cQAbstractAnimation_stateChanged_release)
 
 proc currentLoopChanged*(self: gen_qabstractanimation_types.QAbstractAnimation, currentLoop: cint): void =
   fcQAbstractAnimation_currentLoopChanged(self.h, currentLoop)
 
 type QAbstractAnimationcurrentLoopChangedSlot* = proc(currentLoop: cint)
-proc miqt_exec_callback_cQAbstractAnimation_currentLoopChanged(slot: int, currentLoop: cint) {.exportc: "miqt_exec_callback_QAbstractAnimation_currentLoopChanged".} =
+proc miqt_exec_callback_cQAbstractAnimation_currentLoopChanged(slot: int, currentLoop: cint) {.cdecl.} =
   let nimfunc = cast[ptr QAbstractAnimationcurrentLoopChangedSlot](cast[pointer](slot))
   let slotval1 = currentLoop
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQAbstractAnimation_currentLoopChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QAbstractAnimationcurrentLoopChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc oncurrentLoopChanged*(self: gen_qabstractanimation_types.QAbstractAnimation, slot: QAbstractAnimationcurrentLoopChangedSlot) =
   var tmp = new QAbstractAnimationcurrentLoopChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQAbstractAnimation_connect_currentLoopChanged(self.h, cast[int](addr tmp[]))
+  fcQAbstractAnimation_connect_currentLoopChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQAbstractAnimation_currentLoopChanged, miqt_exec_callback_cQAbstractAnimation_currentLoopChanged_release)
 
 proc directionChanged*(self: gen_qabstractanimation_types.QAbstractAnimation, param1: cint): void =
   fcQAbstractAnimation_directionChanged(self.h, cint(param1))
 
 type QAbstractAnimationdirectionChangedSlot* = proc(param1: cint)
-proc miqt_exec_callback_cQAbstractAnimation_directionChanged(slot: int, param1: cint) {.exportc: "miqt_exec_callback_QAbstractAnimation_directionChanged".} =
+proc miqt_exec_callback_cQAbstractAnimation_directionChanged(slot: int, param1: cint) {.cdecl.} =
   let nimfunc = cast[ptr QAbstractAnimationdirectionChangedSlot](cast[pointer](slot))
   let slotval1 = cint(param1)
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQAbstractAnimation_directionChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QAbstractAnimationdirectionChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc ondirectionChanged*(self: gen_qabstractanimation_types.QAbstractAnimation, slot: QAbstractAnimationdirectionChangedSlot) =
   var tmp = new QAbstractAnimationdirectionChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQAbstractAnimation_connect_directionChanged(self.h, cast[int](addr tmp[]))
+  fcQAbstractAnimation_connect_directionChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQAbstractAnimation_directionChanged, miqt_exec_callback_cQAbstractAnimation_directionChanged_release)
 
 proc start*(self: gen_qabstractanimation_types.QAbstractAnimation, ): void =
   fcQAbstractAnimation_start(self.h)
@@ -599,29 +615,37 @@ proc started*(self: gen_qabstractanimation_types.QAnimationDriver, ): void =
   fcQAnimationDriver_started(self.h)
 
 type QAnimationDriverstartedSlot* = proc()
-proc miqt_exec_callback_cQAnimationDriver_started(slot: int) {.exportc: "miqt_exec_callback_QAnimationDriver_started".} =
+proc miqt_exec_callback_cQAnimationDriver_started(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QAnimationDriverstartedSlot](cast[pointer](slot))
   nimfunc[]()
+
+proc miqt_exec_callback_cQAnimationDriver_started_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QAnimationDriverstartedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
 
 proc onstarted*(self: gen_qabstractanimation_types.QAnimationDriver, slot: QAnimationDriverstartedSlot) =
   var tmp = new QAnimationDriverstartedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQAnimationDriver_connect_started(self.h, cast[int](addr tmp[]))
+  fcQAnimationDriver_connect_started(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQAnimationDriver_started, miqt_exec_callback_cQAnimationDriver_started_release)
 
 proc stopped*(self: gen_qabstractanimation_types.QAnimationDriver, ): void =
   fcQAnimationDriver_stopped(self.h)
 
 type QAnimationDriverstoppedSlot* = proc()
-proc miqt_exec_callback_cQAnimationDriver_stopped(slot: int) {.exportc: "miqt_exec_callback_QAnimationDriver_stopped".} =
+proc miqt_exec_callback_cQAnimationDriver_stopped(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QAnimationDriverstoppedSlot](cast[pointer](slot))
   nimfunc[]()
+
+proc miqt_exec_callback_cQAnimationDriver_stopped_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QAnimationDriverstoppedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
 
 proc onstopped*(self: gen_qabstractanimation_types.QAnimationDriver, slot: QAnimationDriverstoppedSlot) =
   var tmp = new QAnimationDriverstoppedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQAnimationDriver_connect_stopped(self.h, cast[int](addr tmp[]))
+  fcQAnimationDriver_connect_stopped(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQAnimationDriver_stopped, miqt_exec_callback_cQAnimationDriver_stopped_release)
 
 proc tr*(_: type gen_qabstractanimation_types.QAnimationDriver, s: cstring, c: cstring): string =
   let v_ms = fcQAnimationDriver_tr2(s, c)

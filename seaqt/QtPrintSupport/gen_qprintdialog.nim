@@ -83,7 +83,7 @@ proc fcQPrintDialog_setOptions(self: pointer, options: cint): void {.importc: "Q
 proc fcQPrintDialog_options(self: pointer, ): cint {.importc: "QPrintDialog_options".}
 proc fcQPrintDialog_setVisible(self: pointer, visible: bool): void {.importc: "QPrintDialog_setVisible".}
 proc fcQPrintDialog_accepted(self: pointer, printer: pointer): void {.importc: "QPrintDialog_accepted".}
-proc fcQPrintDialog_connect_accepted(self: pointer, slot: int) {.importc: "QPrintDialog_connect_accepted".}
+proc fcQPrintDialog_connect_accepted(self: pointer, slot: int, callback: proc (slot: int, printer: pointer) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QPrintDialog_connect_accepted".}
 proc fcQPrintDialog_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QPrintDialog_tr2".}
 proc fcQPrintDialog_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QPrintDialog_tr3".}
 proc fcQPrintDialog_setOption2(self: pointer, option: cint, on: bool): void {.importc: "QPrintDialog_setOption2".}
@@ -249,17 +249,21 @@ proc accepted*(self: gen_qprintdialog_types.QPrintDialog, printer: gen_qprinter_
   fcQPrintDialog_accepted(self.h, printer.h)
 
 type QPrintDialogacceptedSlot* = proc(printer: gen_qprinter_types.QPrinter)
-proc miqt_exec_callback_cQPrintDialog_accepted(slot: int, printer: pointer) {.exportc: "miqt_exec_callback_QPrintDialog_accepted".} =
+proc miqt_exec_callback_cQPrintDialog_accepted(slot: int, printer: pointer) {.cdecl.} =
   let nimfunc = cast[ptr QPrintDialogacceptedSlot](cast[pointer](slot))
   let slotval1 = gen_qprinter_types.QPrinter(h: printer)
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQPrintDialog_accepted_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QPrintDialogacceptedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onaccepted*(self: gen_qprintdialog_types.QPrintDialog, slot: QPrintDialogacceptedSlot) =
   var tmp = new QPrintDialogacceptedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQPrintDialog_connect_accepted(self.h, cast[int](addr tmp[]))
+  fcQPrintDialog_connect_accepted(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQPrintDialog_accepted, miqt_exec_callback_cQPrintDialog_accepted_release)
 
 proc tr*(_: type gen_qprintdialog_types.QPrintDialog, s: cstring, c: cstring): string =
   let v_ms = fcQPrintDialog_tr2(s, c)

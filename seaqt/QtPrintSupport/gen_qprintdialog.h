@@ -166,7 +166,7 @@ void QPrintDialog_setOptions(QPrintDialog* self, int options);
 int QPrintDialog_options(const QPrintDialog* self);
 void QPrintDialog_setVisible(QPrintDialog* self, bool visible);
 void QPrintDialog_accepted(QPrintDialog* self, QPrinter* printer);
-void QPrintDialog_connect_accepted(QPrintDialog* self, intptr_t slot);
+void QPrintDialog_connect_accepted(QPrintDialog* self, intptr_t slot, void (*callback)(intptr_t, QPrinter*), void (*release)(intptr_t));
 struct miqt_string QPrintDialog_tr2(const char* s, const char* c);
 struct miqt_string QPrintDialog_tr3(const char* s, const char* c, int n);
 void QPrintDialog_setOption2(QPrintDialog* self, int option, bool on);

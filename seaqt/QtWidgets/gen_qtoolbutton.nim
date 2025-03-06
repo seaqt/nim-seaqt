@@ -100,7 +100,7 @@ proc fcQToolButton_showMenu(self: pointer, ): void {.importc: "QToolButton_showM
 proc fcQToolButton_setToolButtonStyle(self: pointer, style: cint): void {.importc: "QToolButton_setToolButtonStyle".}
 proc fcQToolButton_setDefaultAction(self: pointer, defaultAction: pointer): void {.importc: "QToolButton_setDefaultAction".}
 proc fcQToolButton_triggered(self: pointer, param1: pointer): void {.importc: "QToolButton_triggered".}
-proc fcQToolButton_connect_triggered(self: pointer, slot: int) {.importc: "QToolButton_connect_triggered".}
+proc fcQToolButton_connect_triggered(self: pointer, slot: int, callback: proc (slot: int, param1: pointer) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QToolButton_connect_triggered".}
 proc fcQToolButton_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QToolButton_tr2".}
 proc fcQToolButton_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QToolButton_tr3".}
 type cQToolButtonVTable = object
@@ -282,17 +282,21 @@ proc triggered*(self: gen_qtoolbutton_types.QToolButton, param1: gen_qaction_typ
   fcQToolButton_triggered(self.h, param1.h)
 
 type QToolButtontriggeredSlot* = proc(param1: gen_qaction_types.QAction)
-proc miqt_exec_callback_cQToolButton_triggered(slot: int, param1: pointer) {.exportc: "miqt_exec_callback_QToolButton_triggered".} =
+proc miqt_exec_callback_cQToolButton_triggered(slot: int, param1: pointer) {.cdecl.} =
   let nimfunc = cast[ptr QToolButtontriggeredSlot](cast[pointer](slot))
   let slotval1 = gen_qaction_types.QAction(h: param1)
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQToolButton_triggered_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QToolButtontriggeredSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc ontriggered*(self: gen_qtoolbutton_types.QToolButton, slot: QToolButtontriggeredSlot) =
   var tmp = new QToolButtontriggeredSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQToolButton_connect_triggered(self.h, cast[int](addr tmp[]))
+  fcQToolButton_connect_triggered(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQToolButton_triggered, miqt_exec_callback_cQToolButton_triggered_release)
 
 proc tr*(_: type gen_qtoolbutton_types.QToolButton, s: cstring, c: cstring): string =
   let v_ms = fcQToolButton_tr2(s, c)

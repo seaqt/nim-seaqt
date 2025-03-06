@@ -18,8 +18,6 @@
 extern "C" {
 #endif
 
-void miqt_exec_callback_QActionGroup_triggered(intptr_t, QAction*);
-void miqt_exec_callback_QActionGroup_hovered(intptr_t, QAction*);
 #ifdef __cplusplus
 } /* extern C */
 #endif
@@ -303,22 +301,32 @@ void QActionGroup_triggered(QActionGroup* self, QAction* param1) {
 	self->triggered(param1);
 }
 
-void QActionGroup_connect_triggered(QActionGroup* self, intptr_t slot) {
-	VirtualQActionGroup::connect(self, static_cast<void (QActionGroup::*)(QAction*)>(&QActionGroup::triggered), self, [=](QAction* param1) {
-		QAction* sigval1 = param1;
-		miqt_exec_callback_QActionGroup_triggered(slot, sigval1);
-	});
+void QActionGroup_connect_triggered(QActionGroup* self, intptr_t slot, void (*callback)(intptr_t, QAction*), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QAction*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t, QAction*);
+		void operator()(QAction* param1) {
+			QAction* sigval1 = param1;
+			callback(slot, sigval1);
+		}
+	};
+	VirtualQActionGroup::connect(self, static_cast<void (QActionGroup::*)(QAction*)>(&QActionGroup::triggered), self, local_caller{slot, callback, release});
 }
 
 void QActionGroup_hovered(QActionGroup* self, QAction* param1) {
 	self->hovered(param1);
 }
 
-void QActionGroup_connect_hovered(QActionGroup* self, intptr_t slot) {
-	VirtualQActionGroup::connect(self, static_cast<void (QActionGroup::*)(QAction*)>(&QActionGroup::hovered), self, [=](QAction* param1) {
-		QAction* sigval1 = param1;
-		miqt_exec_callback_QActionGroup_hovered(slot, sigval1);
-	});
+void QActionGroup_connect_hovered(QActionGroup* self, intptr_t slot, void (*callback)(intptr_t, QAction*), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QAction*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t, QAction*);
+		void operator()(QAction* param1) {
+			QAction* sigval1 = param1;
+			callback(slot, sigval1);
+		}
+	};
+	VirtualQActionGroup::connect(self, static_cast<void (QActionGroup::*)(QAction*)>(&QActionGroup::hovered), self, local_caller{slot, callback, release});
 }
 
 struct miqt_string QActionGroup_tr2(const char* s, const char* c) {

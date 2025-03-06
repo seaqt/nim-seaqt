@@ -73,13 +73,13 @@ proc fcQAmbientSound_setVolume(self: pointer, volume: float32): void {.importc: 
 proc fcQAmbientSound_volume(self: pointer, ): float32 {.importc: "QAmbientSound_volume".}
 proc fcQAmbientSound_engine(self: pointer, ): pointer {.importc: "QAmbientSound_engine".}
 proc fcQAmbientSound_sourceChanged(self: pointer, ): void {.importc: "QAmbientSound_sourceChanged".}
-proc fcQAmbientSound_connect_sourceChanged(self: pointer, slot: int) {.importc: "QAmbientSound_connect_sourceChanged".}
+proc fcQAmbientSound_connect_sourceChanged(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QAmbientSound_connect_sourceChanged".}
 proc fcQAmbientSound_loopsChanged(self: pointer, ): void {.importc: "QAmbientSound_loopsChanged".}
-proc fcQAmbientSound_connect_loopsChanged(self: pointer, slot: int) {.importc: "QAmbientSound_connect_loopsChanged".}
+proc fcQAmbientSound_connect_loopsChanged(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QAmbientSound_connect_loopsChanged".}
 proc fcQAmbientSound_autoPlayChanged(self: pointer, ): void {.importc: "QAmbientSound_autoPlayChanged".}
-proc fcQAmbientSound_connect_autoPlayChanged(self: pointer, slot: int) {.importc: "QAmbientSound_connect_autoPlayChanged".}
+proc fcQAmbientSound_connect_autoPlayChanged(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QAmbientSound_connect_autoPlayChanged".}
 proc fcQAmbientSound_volumeChanged(self: pointer, ): void {.importc: "QAmbientSound_volumeChanged".}
-proc fcQAmbientSound_connect_volumeChanged(self: pointer, slot: int) {.importc: "QAmbientSound_connect_volumeChanged".}
+proc fcQAmbientSound_connect_volumeChanged(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QAmbientSound_connect_volumeChanged".}
 proc fcQAmbientSound_play(self: pointer, ): void {.importc: "QAmbientSound_play".}
 proc fcQAmbientSound_pause(self: pointer, ): void {.importc: "QAmbientSound_pause".}
 proc fcQAmbientSound_stop(self: pointer, ): void {.importc: "QAmbientSound_stop".}
@@ -157,57 +157,73 @@ proc sourceChanged*(self: gen_qambientsound_types.QAmbientSound, ): void =
   fcQAmbientSound_sourceChanged(self.h)
 
 type QAmbientSoundsourceChangedSlot* = proc()
-proc miqt_exec_callback_cQAmbientSound_sourceChanged(slot: int) {.exportc: "miqt_exec_callback_QAmbientSound_sourceChanged".} =
+proc miqt_exec_callback_cQAmbientSound_sourceChanged(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QAmbientSoundsourceChangedSlot](cast[pointer](slot))
   nimfunc[]()
+
+proc miqt_exec_callback_cQAmbientSound_sourceChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QAmbientSoundsourceChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
 
 proc onsourceChanged*(self: gen_qambientsound_types.QAmbientSound, slot: QAmbientSoundsourceChangedSlot) =
   var tmp = new QAmbientSoundsourceChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQAmbientSound_connect_sourceChanged(self.h, cast[int](addr tmp[]))
+  fcQAmbientSound_connect_sourceChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQAmbientSound_sourceChanged, miqt_exec_callback_cQAmbientSound_sourceChanged_release)
 
 proc loopsChanged*(self: gen_qambientsound_types.QAmbientSound, ): void =
   fcQAmbientSound_loopsChanged(self.h)
 
 type QAmbientSoundloopsChangedSlot* = proc()
-proc miqt_exec_callback_cQAmbientSound_loopsChanged(slot: int) {.exportc: "miqt_exec_callback_QAmbientSound_loopsChanged".} =
+proc miqt_exec_callback_cQAmbientSound_loopsChanged(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QAmbientSoundloopsChangedSlot](cast[pointer](slot))
   nimfunc[]()
+
+proc miqt_exec_callback_cQAmbientSound_loopsChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QAmbientSoundloopsChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
 
 proc onloopsChanged*(self: gen_qambientsound_types.QAmbientSound, slot: QAmbientSoundloopsChangedSlot) =
   var tmp = new QAmbientSoundloopsChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQAmbientSound_connect_loopsChanged(self.h, cast[int](addr tmp[]))
+  fcQAmbientSound_connect_loopsChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQAmbientSound_loopsChanged, miqt_exec_callback_cQAmbientSound_loopsChanged_release)
 
 proc autoPlayChanged*(self: gen_qambientsound_types.QAmbientSound, ): void =
   fcQAmbientSound_autoPlayChanged(self.h)
 
 type QAmbientSoundautoPlayChangedSlot* = proc()
-proc miqt_exec_callback_cQAmbientSound_autoPlayChanged(slot: int) {.exportc: "miqt_exec_callback_QAmbientSound_autoPlayChanged".} =
+proc miqt_exec_callback_cQAmbientSound_autoPlayChanged(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QAmbientSoundautoPlayChangedSlot](cast[pointer](slot))
   nimfunc[]()
+
+proc miqt_exec_callback_cQAmbientSound_autoPlayChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QAmbientSoundautoPlayChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
 
 proc onautoPlayChanged*(self: gen_qambientsound_types.QAmbientSound, slot: QAmbientSoundautoPlayChangedSlot) =
   var tmp = new QAmbientSoundautoPlayChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQAmbientSound_connect_autoPlayChanged(self.h, cast[int](addr tmp[]))
+  fcQAmbientSound_connect_autoPlayChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQAmbientSound_autoPlayChanged, miqt_exec_callback_cQAmbientSound_autoPlayChanged_release)
 
 proc volumeChanged*(self: gen_qambientsound_types.QAmbientSound, ): void =
   fcQAmbientSound_volumeChanged(self.h)
 
 type QAmbientSoundvolumeChangedSlot* = proc()
-proc miqt_exec_callback_cQAmbientSound_volumeChanged(slot: int) {.exportc: "miqt_exec_callback_QAmbientSound_volumeChanged".} =
+proc miqt_exec_callback_cQAmbientSound_volumeChanged(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QAmbientSoundvolumeChangedSlot](cast[pointer](slot))
   nimfunc[]()
+
+proc miqt_exec_callback_cQAmbientSound_volumeChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QAmbientSoundvolumeChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
 
 proc onvolumeChanged*(self: gen_qambientsound_types.QAmbientSound, slot: QAmbientSoundvolumeChangedSlot) =
   var tmp = new QAmbientSoundvolumeChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQAmbientSound_connect_volumeChanged(self.h, cast[int](addr tmp[]))
+  fcQAmbientSound_connect_volumeChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQAmbientSound_volumeChanged, miqt_exec_callback_cQAmbientSound_volumeChanged_release)
 
 proc play*(self: gen_qambientsound_types.QAmbientSound, ): void =
   fcQAmbientSound_play(self.h)

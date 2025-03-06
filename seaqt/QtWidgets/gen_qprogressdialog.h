@@ -185,7 +185,7 @@ void QProgressDialog_setLabelText(QProgressDialog* self, struct miqt_string text
 void QProgressDialog_setCancelButtonText(QProgressDialog* self, struct miqt_string text);
 void QProgressDialog_setMinimumDuration(QProgressDialog* self, int ms);
 void QProgressDialog_canceled(QProgressDialog* self);
-void QProgressDialog_connect_canceled(QProgressDialog* self, intptr_t slot);
+void QProgressDialog_connect_canceled(QProgressDialog* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t));
 void QProgressDialog_resizeEvent(QProgressDialog* self, QResizeEvent* event);
 void QProgressDialog_closeEvent(QProgressDialog* self, QCloseEvent* event);
 void QProgressDialog_changeEvent(QProgressDialog* self, QEvent* event);

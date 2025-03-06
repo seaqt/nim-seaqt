@@ -78,7 +78,7 @@ proc fcQAudioSource_elapsedUSecs(self: pointer, ): clonglong {.importc: "QAudioS
 proc fcQAudioSource_error(self: pointer, ): cint {.importc: "QAudioSource_error".}
 proc fcQAudioSource_state(self: pointer, ): cint {.importc: "QAudioSource_state".}
 proc fcQAudioSource_stateChanged(self: pointer, state: cint): void {.importc: "QAudioSource_stateChanged".}
-proc fcQAudioSource_connect_stateChanged(self: pointer, slot: int) {.importc: "QAudioSource_connect_stateChanged".}
+proc fcQAudioSource_connect_stateChanged(self: pointer, slot: int, callback: proc (slot: int, state: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QAudioSource_connect_stateChanged".}
 proc fcQAudioSource_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QAudioSource_tr2".}
 proc fcQAudioSource_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QAudioSource_tr3".}
 type cQAudioSourceVTable = object
@@ -182,17 +182,21 @@ proc stateChanged*(self: gen_qaudiosource_types.QAudioSource, state: cint): void
   fcQAudioSource_stateChanged(self.h, cint(state))
 
 type QAudioSourcestateChangedSlot* = proc(state: cint)
-proc miqt_exec_callback_cQAudioSource_stateChanged(slot: int, state: cint) {.exportc: "miqt_exec_callback_QAudioSource_stateChanged".} =
+proc miqt_exec_callback_cQAudioSource_stateChanged(slot: int, state: cint) {.cdecl.} =
   let nimfunc = cast[ptr QAudioSourcestateChangedSlot](cast[pointer](slot))
   let slotval1 = cint(state)
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQAudioSource_stateChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QAudioSourcestateChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onstateChanged*(self: gen_qaudiosource_types.QAudioSource, slot: QAudioSourcestateChangedSlot) =
   var tmp = new QAudioSourcestateChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQAudioSource_connect_stateChanged(self.h, cast[int](addr tmp[]))
+  fcQAudioSource_connect_stateChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQAudioSource_stateChanged, miqt_exec_callback_cQAudioSource_stateChanged_release)
 
 proc tr*(_: type gen_qaudiosource_types.QAudioSource, s: cstring, c: cstring): string =
   let v_ms = fcQAudioSource_tr2(s, c)

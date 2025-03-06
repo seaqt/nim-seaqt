@@ -80,7 +80,7 @@ int QAudioSink_state(const QAudioSink* self);
 void QAudioSink_setVolume(QAudioSink* self, double volume);
 double QAudioSink_volume(const QAudioSink* self);
 void QAudioSink_stateChanged(QAudioSink* self, int state);
-void QAudioSink_connect_stateChanged(QAudioSink* self, intptr_t slot);
+void QAudioSink_connect_stateChanged(QAudioSink* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t));
 struct miqt_string QAudioSink_tr2(const char* s, const char* c);
 struct miqt_string QAudioSink_tr3(const char* s, const char* c, int n);
 QMetaObject* QAudioSink_virtualbase_metaObject(const void* self);

@@ -99,7 +99,7 @@ proc fcQInputDevice_devices(): struct_miqt_array {.importc: "QInputDevice_device
 proc fcQInputDevice_primaryKeyboard(): pointer {.importc: "QInputDevice_primaryKeyboard".}
 proc fcQInputDevice_operatorEqual(self: pointer, other: pointer): bool {.importc: "QInputDevice_operatorEqual".}
 proc fcQInputDevice_availableVirtualGeometryChanged(self: pointer, area: pointer): void {.importc: "QInputDevice_availableVirtualGeometryChanged".}
-proc fcQInputDevice_connect_availableVirtualGeometryChanged(self: pointer, slot: int) {.importc: "QInputDevice_connect_availableVirtualGeometryChanged".}
+proc fcQInputDevice_connect_availableVirtualGeometryChanged(self: pointer, slot: int, callback: proc (slot: int, area: pointer) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QInputDevice_connect_availableVirtualGeometryChanged".}
 proc fcQInputDevice_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QInputDevice_tr2".}
 proc fcQInputDevice_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QInputDevice_tr3".}
 proc fcQInputDevice_primaryKeyboard1(seatName: struct_miqt_string): pointer {.importc: "QInputDevice_primaryKeyboard1".}
@@ -204,17 +204,21 @@ proc availableVirtualGeometryChanged*(self: gen_qinputdevice_types.QInputDevice,
   fcQInputDevice_availableVirtualGeometryChanged(self.h, area.h)
 
 type QInputDeviceavailableVirtualGeometryChangedSlot* = proc(area: gen_qrect_types.QRect)
-proc miqt_exec_callback_cQInputDevice_availableVirtualGeometryChanged(slot: int, area: pointer) {.exportc: "miqt_exec_callback_QInputDevice_availableVirtualGeometryChanged".} =
+proc miqt_exec_callback_cQInputDevice_availableVirtualGeometryChanged(slot: int, area: pointer) {.cdecl.} =
   let nimfunc = cast[ptr QInputDeviceavailableVirtualGeometryChangedSlot](cast[pointer](slot))
   let slotval1 = gen_qrect_types.QRect(h: area)
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQInputDevice_availableVirtualGeometryChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QInputDeviceavailableVirtualGeometryChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onavailableVirtualGeometryChanged*(self: gen_qinputdevice_types.QInputDevice, slot: QInputDeviceavailableVirtualGeometryChangedSlot) =
   var tmp = new QInputDeviceavailableVirtualGeometryChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQInputDevice_connect_availableVirtualGeometryChanged(self.h, cast[int](addr tmp[]))
+  fcQInputDevice_connect_availableVirtualGeometryChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQInputDevice_availableVirtualGeometryChanged, miqt_exec_callback_cQInputDevice_availableVirtualGeometryChanged_release)
 
 proc tr*(_: type gen_qinputdevice_types.QInputDevice, s: cstring, c: cstring): string =
   let v_ms = fcQInputDevice_tr2(s, c)

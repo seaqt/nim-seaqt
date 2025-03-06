@@ -87,27 +87,27 @@ proc fcQStyleHints_setWheelScrollLines(self: pointer, scrollLines: cint): void {
 proc fcQStyleHints_setMouseQuickSelectionThreshold(self: pointer, threshold: cint): void {.importc: "QStyleHints_setMouseQuickSelectionThreshold".}
 proc fcQStyleHints_mouseQuickSelectionThreshold(self: pointer, ): cint {.importc: "QStyleHints_mouseQuickSelectionThreshold".}
 proc fcQStyleHints_cursorFlashTimeChanged(self: pointer, cursorFlashTime: cint): void {.importc: "QStyleHints_cursorFlashTimeChanged".}
-proc fcQStyleHints_connect_cursorFlashTimeChanged(self: pointer, slot: int) {.importc: "QStyleHints_connect_cursorFlashTimeChanged".}
+proc fcQStyleHints_connect_cursorFlashTimeChanged(self: pointer, slot: int, callback: proc (slot: int, cursorFlashTime: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QStyleHints_connect_cursorFlashTimeChanged".}
 proc fcQStyleHints_keyboardInputIntervalChanged(self: pointer, keyboardInputInterval: cint): void {.importc: "QStyleHints_keyboardInputIntervalChanged".}
-proc fcQStyleHints_connect_keyboardInputIntervalChanged(self: pointer, slot: int) {.importc: "QStyleHints_connect_keyboardInputIntervalChanged".}
+proc fcQStyleHints_connect_keyboardInputIntervalChanged(self: pointer, slot: int, callback: proc (slot: int, keyboardInputInterval: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QStyleHints_connect_keyboardInputIntervalChanged".}
 proc fcQStyleHints_mouseDoubleClickIntervalChanged(self: pointer, mouseDoubleClickInterval: cint): void {.importc: "QStyleHints_mouseDoubleClickIntervalChanged".}
-proc fcQStyleHints_connect_mouseDoubleClickIntervalChanged(self: pointer, slot: int) {.importc: "QStyleHints_connect_mouseDoubleClickIntervalChanged".}
+proc fcQStyleHints_connect_mouseDoubleClickIntervalChanged(self: pointer, slot: int, callback: proc (slot: int, mouseDoubleClickInterval: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QStyleHints_connect_mouseDoubleClickIntervalChanged".}
 proc fcQStyleHints_mousePressAndHoldIntervalChanged(self: pointer, mousePressAndHoldInterval: cint): void {.importc: "QStyleHints_mousePressAndHoldIntervalChanged".}
-proc fcQStyleHints_connect_mousePressAndHoldIntervalChanged(self: pointer, slot: int) {.importc: "QStyleHints_connect_mousePressAndHoldIntervalChanged".}
+proc fcQStyleHints_connect_mousePressAndHoldIntervalChanged(self: pointer, slot: int, callback: proc (slot: int, mousePressAndHoldInterval: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QStyleHints_connect_mousePressAndHoldIntervalChanged".}
 proc fcQStyleHints_startDragDistanceChanged(self: pointer, startDragDistance: cint): void {.importc: "QStyleHints_startDragDistanceChanged".}
-proc fcQStyleHints_connect_startDragDistanceChanged(self: pointer, slot: int) {.importc: "QStyleHints_connect_startDragDistanceChanged".}
+proc fcQStyleHints_connect_startDragDistanceChanged(self: pointer, slot: int, callback: proc (slot: int, startDragDistance: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QStyleHints_connect_startDragDistanceChanged".}
 proc fcQStyleHints_startDragTimeChanged(self: pointer, startDragTime: cint): void {.importc: "QStyleHints_startDragTimeChanged".}
-proc fcQStyleHints_connect_startDragTimeChanged(self: pointer, slot: int) {.importc: "QStyleHints_connect_startDragTimeChanged".}
+proc fcQStyleHints_connect_startDragTimeChanged(self: pointer, slot: int, callback: proc (slot: int, startDragTime: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QStyleHints_connect_startDragTimeChanged".}
 proc fcQStyleHints_tabFocusBehaviorChanged(self: pointer, tabFocusBehavior: cint): void {.importc: "QStyleHints_tabFocusBehaviorChanged".}
-proc fcQStyleHints_connect_tabFocusBehaviorChanged(self: pointer, slot: int) {.importc: "QStyleHints_connect_tabFocusBehaviorChanged".}
+proc fcQStyleHints_connect_tabFocusBehaviorChanged(self: pointer, slot: int, callback: proc (slot: int, tabFocusBehavior: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QStyleHints_connect_tabFocusBehaviorChanged".}
 proc fcQStyleHints_useHoverEffectsChanged(self: pointer, useHoverEffects: bool): void {.importc: "QStyleHints_useHoverEffectsChanged".}
-proc fcQStyleHints_connect_useHoverEffectsChanged(self: pointer, slot: int) {.importc: "QStyleHints_connect_useHoverEffectsChanged".}
+proc fcQStyleHints_connect_useHoverEffectsChanged(self: pointer, slot: int, callback: proc (slot: int, useHoverEffects: bool) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QStyleHints_connect_useHoverEffectsChanged".}
 proc fcQStyleHints_showShortcutsInContextMenusChanged(self: pointer, param1: bool): void {.importc: "QStyleHints_showShortcutsInContextMenusChanged".}
-proc fcQStyleHints_connect_showShortcutsInContextMenusChanged(self: pointer, slot: int) {.importc: "QStyleHints_connect_showShortcutsInContextMenusChanged".}
+proc fcQStyleHints_connect_showShortcutsInContextMenusChanged(self: pointer, slot: int, callback: proc (slot: int, param1: bool) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QStyleHints_connect_showShortcutsInContextMenusChanged".}
 proc fcQStyleHints_wheelScrollLinesChanged(self: pointer, scrollLines: cint): void {.importc: "QStyleHints_wheelScrollLinesChanged".}
-proc fcQStyleHints_connect_wheelScrollLinesChanged(self: pointer, slot: int) {.importc: "QStyleHints_connect_wheelScrollLinesChanged".}
+proc fcQStyleHints_connect_wheelScrollLinesChanged(self: pointer, slot: int, callback: proc (slot: int, scrollLines: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QStyleHints_connect_wheelScrollLinesChanged".}
 proc fcQStyleHints_mouseQuickSelectionThresholdChanged(self: pointer, threshold: cint): void {.importc: "QStyleHints_mouseQuickSelectionThresholdChanged".}
-proc fcQStyleHints_connect_mouseQuickSelectionThresholdChanged(self: pointer, slot: int) {.importc: "QStyleHints_connect_mouseQuickSelectionThresholdChanged".}
+proc fcQStyleHints_connect_mouseQuickSelectionThresholdChanged(self: pointer, slot: int, callback: proc (slot: int, threshold: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QStyleHints_connect_mouseQuickSelectionThresholdChanged".}
 proc fcQStyleHints_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QStyleHints_tr2".}
 proc fcQStyleHints_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QStyleHints_tr3".}
 proc fcQStyleHints_staticMetaObject(): pointer {.importc: "QStyleHints_staticMetaObject".}
@@ -234,177 +234,221 @@ proc cursorFlashTimeChanged*(self: gen_qstylehints_types.QStyleHints, cursorFlas
   fcQStyleHints_cursorFlashTimeChanged(self.h, cursorFlashTime)
 
 type QStyleHintscursorFlashTimeChangedSlot* = proc(cursorFlashTime: cint)
-proc miqt_exec_callback_cQStyleHints_cursorFlashTimeChanged(slot: int, cursorFlashTime: cint) {.exportc: "miqt_exec_callback_QStyleHints_cursorFlashTimeChanged".} =
+proc miqt_exec_callback_cQStyleHints_cursorFlashTimeChanged(slot: int, cursorFlashTime: cint) {.cdecl.} =
   let nimfunc = cast[ptr QStyleHintscursorFlashTimeChangedSlot](cast[pointer](slot))
   let slotval1 = cursorFlashTime
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQStyleHints_cursorFlashTimeChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QStyleHintscursorFlashTimeChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc oncursorFlashTimeChanged*(self: gen_qstylehints_types.QStyleHints, slot: QStyleHintscursorFlashTimeChangedSlot) =
   var tmp = new QStyleHintscursorFlashTimeChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQStyleHints_connect_cursorFlashTimeChanged(self.h, cast[int](addr tmp[]))
+  fcQStyleHints_connect_cursorFlashTimeChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQStyleHints_cursorFlashTimeChanged, miqt_exec_callback_cQStyleHints_cursorFlashTimeChanged_release)
 
 proc keyboardInputIntervalChanged*(self: gen_qstylehints_types.QStyleHints, keyboardInputInterval: cint): void =
   fcQStyleHints_keyboardInputIntervalChanged(self.h, keyboardInputInterval)
 
 type QStyleHintskeyboardInputIntervalChangedSlot* = proc(keyboardInputInterval: cint)
-proc miqt_exec_callback_cQStyleHints_keyboardInputIntervalChanged(slot: int, keyboardInputInterval: cint) {.exportc: "miqt_exec_callback_QStyleHints_keyboardInputIntervalChanged".} =
+proc miqt_exec_callback_cQStyleHints_keyboardInputIntervalChanged(slot: int, keyboardInputInterval: cint) {.cdecl.} =
   let nimfunc = cast[ptr QStyleHintskeyboardInputIntervalChangedSlot](cast[pointer](slot))
   let slotval1 = keyboardInputInterval
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQStyleHints_keyboardInputIntervalChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QStyleHintskeyboardInputIntervalChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onkeyboardInputIntervalChanged*(self: gen_qstylehints_types.QStyleHints, slot: QStyleHintskeyboardInputIntervalChangedSlot) =
   var tmp = new QStyleHintskeyboardInputIntervalChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQStyleHints_connect_keyboardInputIntervalChanged(self.h, cast[int](addr tmp[]))
+  fcQStyleHints_connect_keyboardInputIntervalChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQStyleHints_keyboardInputIntervalChanged, miqt_exec_callback_cQStyleHints_keyboardInputIntervalChanged_release)
 
 proc mouseDoubleClickIntervalChanged*(self: gen_qstylehints_types.QStyleHints, mouseDoubleClickInterval: cint): void =
   fcQStyleHints_mouseDoubleClickIntervalChanged(self.h, mouseDoubleClickInterval)
 
 type QStyleHintsmouseDoubleClickIntervalChangedSlot* = proc(mouseDoubleClickInterval: cint)
-proc miqt_exec_callback_cQStyleHints_mouseDoubleClickIntervalChanged(slot: int, mouseDoubleClickInterval: cint) {.exportc: "miqt_exec_callback_QStyleHints_mouseDoubleClickIntervalChanged".} =
+proc miqt_exec_callback_cQStyleHints_mouseDoubleClickIntervalChanged(slot: int, mouseDoubleClickInterval: cint) {.cdecl.} =
   let nimfunc = cast[ptr QStyleHintsmouseDoubleClickIntervalChangedSlot](cast[pointer](slot))
   let slotval1 = mouseDoubleClickInterval
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQStyleHints_mouseDoubleClickIntervalChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QStyleHintsmouseDoubleClickIntervalChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onmouseDoubleClickIntervalChanged*(self: gen_qstylehints_types.QStyleHints, slot: QStyleHintsmouseDoubleClickIntervalChangedSlot) =
   var tmp = new QStyleHintsmouseDoubleClickIntervalChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQStyleHints_connect_mouseDoubleClickIntervalChanged(self.h, cast[int](addr tmp[]))
+  fcQStyleHints_connect_mouseDoubleClickIntervalChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQStyleHints_mouseDoubleClickIntervalChanged, miqt_exec_callback_cQStyleHints_mouseDoubleClickIntervalChanged_release)
 
 proc mousePressAndHoldIntervalChanged*(self: gen_qstylehints_types.QStyleHints, mousePressAndHoldInterval: cint): void =
   fcQStyleHints_mousePressAndHoldIntervalChanged(self.h, mousePressAndHoldInterval)
 
 type QStyleHintsmousePressAndHoldIntervalChangedSlot* = proc(mousePressAndHoldInterval: cint)
-proc miqt_exec_callback_cQStyleHints_mousePressAndHoldIntervalChanged(slot: int, mousePressAndHoldInterval: cint) {.exportc: "miqt_exec_callback_QStyleHints_mousePressAndHoldIntervalChanged".} =
+proc miqt_exec_callback_cQStyleHints_mousePressAndHoldIntervalChanged(slot: int, mousePressAndHoldInterval: cint) {.cdecl.} =
   let nimfunc = cast[ptr QStyleHintsmousePressAndHoldIntervalChangedSlot](cast[pointer](slot))
   let slotval1 = mousePressAndHoldInterval
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQStyleHints_mousePressAndHoldIntervalChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QStyleHintsmousePressAndHoldIntervalChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onmousePressAndHoldIntervalChanged*(self: gen_qstylehints_types.QStyleHints, slot: QStyleHintsmousePressAndHoldIntervalChangedSlot) =
   var tmp = new QStyleHintsmousePressAndHoldIntervalChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQStyleHints_connect_mousePressAndHoldIntervalChanged(self.h, cast[int](addr tmp[]))
+  fcQStyleHints_connect_mousePressAndHoldIntervalChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQStyleHints_mousePressAndHoldIntervalChanged, miqt_exec_callback_cQStyleHints_mousePressAndHoldIntervalChanged_release)
 
 proc startDragDistanceChanged*(self: gen_qstylehints_types.QStyleHints, startDragDistance: cint): void =
   fcQStyleHints_startDragDistanceChanged(self.h, startDragDistance)
 
 type QStyleHintsstartDragDistanceChangedSlot* = proc(startDragDistance: cint)
-proc miqt_exec_callback_cQStyleHints_startDragDistanceChanged(slot: int, startDragDistance: cint) {.exportc: "miqt_exec_callback_QStyleHints_startDragDistanceChanged".} =
+proc miqt_exec_callback_cQStyleHints_startDragDistanceChanged(slot: int, startDragDistance: cint) {.cdecl.} =
   let nimfunc = cast[ptr QStyleHintsstartDragDistanceChangedSlot](cast[pointer](slot))
   let slotval1 = startDragDistance
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQStyleHints_startDragDistanceChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QStyleHintsstartDragDistanceChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onstartDragDistanceChanged*(self: gen_qstylehints_types.QStyleHints, slot: QStyleHintsstartDragDistanceChangedSlot) =
   var tmp = new QStyleHintsstartDragDistanceChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQStyleHints_connect_startDragDistanceChanged(self.h, cast[int](addr tmp[]))
+  fcQStyleHints_connect_startDragDistanceChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQStyleHints_startDragDistanceChanged, miqt_exec_callback_cQStyleHints_startDragDistanceChanged_release)
 
 proc startDragTimeChanged*(self: gen_qstylehints_types.QStyleHints, startDragTime: cint): void =
   fcQStyleHints_startDragTimeChanged(self.h, startDragTime)
 
 type QStyleHintsstartDragTimeChangedSlot* = proc(startDragTime: cint)
-proc miqt_exec_callback_cQStyleHints_startDragTimeChanged(slot: int, startDragTime: cint) {.exportc: "miqt_exec_callback_QStyleHints_startDragTimeChanged".} =
+proc miqt_exec_callback_cQStyleHints_startDragTimeChanged(slot: int, startDragTime: cint) {.cdecl.} =
   let nimfunc = cast[ptr QStyleHintsstartDragTimeChangedSlot](cast[pointer](slot))
   let slotval1 = startDragTime
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQStyleHints_startDragTimeChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QStyleHintsstartDragTimeChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onstartDragTimeChanged*(self: gen_qstylehints_types.QStyleHints, slot: QStyleHintsstartDragTimeChangedSlot) =
   var tmp = new QStyleHintsstartDragTimeChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQStyleHints_connect_startDragTimeChanged(self.h, cast[int](addr tmp[]))
+  fcQStyleHints_connect_startDragTimeChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQStyleHints_startDragTimeChanged, miqt_exec_callback_cQStyleHints_startDragTimeChanged_release)
 
 proc tabFocusBehaviorChanged*(self: gen_qstylehints_types.QStyleHints, tabFocusBehavior: cint): void =
   fcQStyleHints_tabFocusBehaviorChanged(self.h, cint(tabFocusBehavior))
 
 type QStyleHintstabFocusBehaviorChangedSlot* = proc(tabFocusBehavior: cint)
-proc miqt_exec_callback_cQStyleHints_tabFocusBehaviorChanged(slot: int, tabFocusBehavior: cint) {.exportc: "miqt_exec_callback_QStyleHints_tabFocusBehaviorChanged".} =
+proc miqt_exec_callback_cQStyleHints_tabFocusBehaviorChanged(slot: int, tabFocusBehavior: cint) {.cdecl.} =
   let nimfunc = cast[ptr QStyleHintstabFocusBehaviorChangedSlot](cast[pointer](slot))
   let slotval1 = cint(tabFocusBehavior)
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQStyleHints_tabFocusBehaviorChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QStyleHintstabFocusBehaviorChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc ontabFocusBehaviorChanged*(self: gen_qstylehints_types.QStyleHints, slot: QStyleHintstabFocusBehaviorChangedSlot) =
   var tmp = new QStyleHintstabFocusBehaviorChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQStyleHints_connect_tabFocusBehaviorChanged(self.h, cast[int](addr tmp[]))
+  fcQStyleHints_connect_tabFocusBehaviorChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQStyleHints_tabFocusBehaviorChanged, miqt_exec_callback_cQStyleHints_tabFocusBehaviorChanged_release)
 
 proc useHoverEffectsChanged*(self: gen_qstylehints_types.QStyleHints, useHoverEffects: bool): void =
   fcQStyleHints_useHoverEffectsChanged(self.h, useHoverEffects)
 
 type QStyleHintsuseHoverEffectsChangedSlot* = proc(useHoverEffects: bool)
-proc miqt_exec_callback_cQStyleHints_useHoverEffectsChanged(slot: int, useHoverEffects: bool) {.exportc: "miqt_exec_callback_QStyleHints_useHoverEffectsChanged".} =
+proc miqt_exec_callback_cQStyleHints_useHoverEffectsChanged(slot: int, useHoverEffects: bool) {.cdecl.} =
   let nimfunc = cast[ptr QStyleHintsuseHoverEffectsChangedSlot](cast[pointer](slot))
   let slotval1 = useHoverEffects
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQStyleHints_useHoverEffectsChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QStyleHintsuseHoverEffectsChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onuseHoverEffectsChanged*(self: gen_qstylehints_types.QStyleHints, slot: QStyleHintsuseHoverEffectsChangedSlot) =
   var tmp = new QStyleHintsuseHoverEffectsChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQStyleHints_connect_useHoverEffectsChanged(self.h, cast[int](addr tmp[]))
+  fcQStyleHints_connect_useHoverEffectsChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQStyleHints_useHoverEffectsChanged, miqt_exec_callback_cQStyleHints_useHoverEffectsChanged_release)
 
 proc showShortcutsInContextMenusChanged*(self: gen_qstylehints_types.QStyleHints, param1: bool): void =
   fcQStyleHints_showShortcutsInContextMenusChanged(self.h, param1)
 
 type QStyleHintsshowShortcutsInContextMenusChangedSlot* = proc(param1: bool)
-proc miqt_exec_callback_cQStyleHints_showShortcutsInContextMenusChanged(slot: int, param1: bool) {.exportc: "miqt_exec_callback_QStyleHints_showShortcutsInContextMenusChanged".} =
+proc miqt_exec_callback_cQStyleHints_showShortcutsInContextMenusChanged(slot: int, param1: bool) {.cdecl.} =
   let nimfunc = cast[ptr QStyleHintsshowShortcutsInContextMenusChangedSlot](cast[pointer](slot))
   let slotval1 = param1
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQStyleHints_showShortcutsInContextMenusChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QStyleHintsshowShortcutsInContextMenusChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onshowShortcutsInContextMenusChanged*(self: gen_qstylehints_types.QStyleHints, slot: QStyleHintsshowShortcutsInContextMenusChangedSlot) =
   var tmp = new QStyleHintsshowShortcutsInContextMenusChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQStyleHints_connect_showShortcutsInContextMenusChanged(self.h, cast[int](addr tmp[]))
+  fcQStyleHints_connect_showShortcutsInContextMenusChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQStyleHints_showShortcutsInContextMenusChanged, miqt_exec_callback_cQStyleHints_showShortcutsInContextMenusChanged_release)
 
 proc wheelScrollLinesChanged*(self: gen_qstylehints_types.QStyleHints, scrollLines: cint): void =
   fcQStyleHints_wheelScrollLinesChanged(self.h, scrollLines)
 
 type QStyleHintswheelScrollLinesChangedSlot* = proc(scrollLines: cint)
-proc miqt_exec_callback_cQStyleHints_wheelScrollLinesChanged(slot: int, scrollLines: cint) {.exportc: "miqt_exec_callback_QStyleHints_wheelScrollLinesChanged".} =
+proc miqt_exec_callback_cQStyleHints_wheelScrollLinesChanged(slot: int, scrollLines: cint) {.cdecl.} =
   let nimfunc = cast[ptr QStyleHintswheelScrollLinesChangedSlot](cast[pointer](slot))
   let slotval1 = scrollLines
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQStyleHints_wheelScrollLinesChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QStyleHintswheelScrollLinesChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onwheelScrollLinesChanged*(self: gen_qstylehints_types.QStyleHints, slot: QStyleHintswheelScrollLinesChangedSlot) =
   var tmp = new QStyleHintswheelScrollLinesChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQStyleHints_connect_wheelScrollLinesChanged(self.h, cast[int](addr tmp[]))
+  fcQStyleHints_connect_wheelScrollLinesChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQStyleHints_wheelScrollLinesChanged, miqt_exec_callback_cQStyleHints_wheelScrollLinesChanged_release)
 
 proc mouseQuickSelectionThresholdChanged*(self: gen_qstylehints_types.QStyleHints, threshold: cint): void =
   fcQStyleHints_mouseQuickSelectionThresholdChanged(self.h, threshold)
 
 type QStyleHintsmouseQuickSelectionThresholdChangedSlot* = proc(threshold: cint)
-proc miqt_exec_callback_cQStyleHints_mouseQuickSelectionThresholdChanged(slot: int, threshold: cint) {.exportc: "miqt_exec_callback_QStyleHints_mouseQuickSelectionThresholdChanged".} =
+proc miqt_exec_callback_cQStyleHints_mouseQuickSelectionThresholdChanged(slot: int, threshold: cint) {.cdecl.} =
   let nimfunc = cast[ptr QStyleHintsmouseQuickSelectionThresholdChangedSlot](cast[pointer](slot))
   let slotval1 = threshold
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQStyleHints_mouseQuickSelectionThresholdChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QStyleHintsmouseQuickSelectionThresholdChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onmouseQuickSelectionThresholdChanged*(self: gen_qstylehints_types.QStyleHints, slot: QStyleHintsmouseQuickSelectionThresholdChangedSlot) =
   var tmp = new QStyleHintsmouseQuickSelectionThresholdChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQStyleHints_connect_mouseQuickSelectionThresholdChanged(self.h, cast[int](addr tmp[]))
+  fcQStyleHints_connect_mouseQuickSelectionThresholdChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQStyleHints_mouseQuickSelectionThresholdChanged, miqt_exec_callback_cQStyleHints_mouseQuickSelectionThresholdChanged_release)
 
 proc tr*(_: type gen_qstylehints_types.QStyleHints, s: cstring, c: cstring): string =
   let v_ms = fcQStyleHints_tr2(s, c)

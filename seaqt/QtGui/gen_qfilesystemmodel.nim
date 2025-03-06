@@ -87,11 +87,11 @@ proc fcQFileSystemModel_metacast(self: pointer, param1: cstring): pointer {.impo
 proc fcQFileSystemModel_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QFileSystemModel_metacall".}
 proc fcQFileSystemModel_tr(s: cstring): struct_miqt_string {.importc: "QFileSystemModel_tr".}
 proc fcQFileSystemModel_rootPathChanged(self: pointer, newPath: struct_miqt_string): void {.importc: "QFileSystemModel_rootPathChanged".}
-proc fcQFileSystemModel_connect_rootPathChanged(self: pointer, slot: int) {.importc: "QFileSystemModel_connect_rootPathChanged".}
+proc fcQFileSystemModel_connect_rootPathChanged(self: pointer, slot: int, callback: proc (slot: int, newPath: struct_miqt_string) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QFileSystemModel_connect_rootPathChanged".}
 proc fcQFileSystemModel_fileRenamed(self: pointer, path: struct_miqt_string, oldName: struct_miqt_string, newName: struct_miqt_string): void {.importc: "QFileSystemModel_fileRenamed".}
-proc fcQFileSystemModel_connect_fileRenamed(self: pointer, slot: int) {.importc: "QFileSystemModel_connect_fileRenamed".}
+proc fcQFileSystemModel_connect_fileRenamed(self: pointer, slot: int, callback: proc (slot: int, path: struct_miqt_string, oldName: struct_miqt_string, newName: struct_miqt_string) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QFileSystemModel_connect_fileRenamed".}
 proc fcQFileSystemModel_directoryLoaded(self: pointer, path: struct_miqt_string): void {.importc: "QFileSystemModel_directoryLoaded".}
-proc fcQFileSystemModel_connect_directoryLoaded(self: pointer, slot: int) {.importc: "QFileSystemModel_connect_directoryLoaded".}
+proc fcQFileSystemModel_connect_directoryLoaded(self: pointer, slot: int, callback: proc (slot: int, path: struct_miqt_string) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QFileSystemModel_connect_directoryLoaded".}
 proc fcQFileSystemModel_index(self: pointer, row: cint, column: cint, parent: pointer): pointer {.importc: "QFileSystemModel_index".}
 proc fcQFileSystemModel_indexWithPath(self: pointer, path: struct_miqt_string): pointer {.importc: "QFileSystemModel_indexWithPath".}
 proc fcQFileSystemModel_parent(self: pointer, child: pointer): pointer {.importc: "QFileSystemModel_parent".}
@@ -268,7 +268,7 @@ proc rootPathChanged*(self: gen_qfilesystemmodel_types.QFileSystemModel, newPath
   fcQFileSystemModel_rootPathChanged(self.h, struct_miqt_string(data: newPath, len: csize_t(len(newPath))))
 
 type QFileSystemModelrootPathChangedSlot* = proc(newPath: string)
-proc miqt_exec_callback_cQFileSystemModel_rootPathChanged(slot: int, newPath: struct_miqt_string) {.exportc: "miqt_exec_callback_QFileSystemModel_rootPathChanged".} =
+proc miqt_exec_callback_cQFileSystemModel_rootPathChanged(slot: int, newPath: struct_miqt_string) {.cdecl.} =
   let nimfunc = cast[ptr QFileSystemModelrootPathChangedSlot](cast[pointer](slot))
   let vnewPath_ms = newPath
   let vnewPathx_ret = string.fromBytes(toOpenArrayByte(vnewPath_ms.data, 0, int(vnewPath_ms.len)-1))
@@ -277,17 +277,21 @@ proc miqt_exec_callback_cQFileSystemModel_rootPathChanged(slot: int, newPath: st
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQFileSystemModel_rootPathChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QFileSystemModelrootPathChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onrootPathChanged*(self: gen_qfilesystemmodel_types.QFileSystemModel, slot: QFileSystemModelrootPathChangedSlot) =
   var tmp = new QFileSystemModelrootPathChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQFileSystemModel_connect_rootPathChanged(self.h, cast[int](addr tmp[]))
+  fcQFileSystemModel_connect_rootPathChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQFileSystemModel_rootPathChanged, miqt_exec_callback_cQFileSystemModel_rootPathChanged_release)
 
 proc fileRenamed*(self: gen_qfilesystemmodel_types.QFileSystemModel, path: string, oldName: string, newName: string): void =
   fcQFileSystemModel_fileRenamed(self.h, struct_miqt_string(data: path, len: csize_t(len(path))), struct_miqt_string(data: oldName, len: csize_t(len(oldName))), struct_miqt_string(data: newName, len: csize_t(len(newName))))
 
 type QFileSystemModelfileRenamedSlot* = proc(path: string, oldName: string, newName: string)
-proc miqt_exec_callback_cQFileSystemModel_fileRenamed(slot: int, path: struct_miqt_string, oldName: struct_miqt_string, newName: struct_miqt_string) {.exportc: "miqt_exec_callback_QFileSystemModel_fileRenamed".} =
+proc miqt_exec_callback_cQFileSystemModel_fileRenamed(slot: int, path: struct_miqt_string, oldName: struct_miqt_string, newName: struct_miqt_string) {.cdecl.} =
   let nimfunc = cast[ptr QFileSystemModelfileRenamedSlot](cast[pointer](slot))
   let vpath_ms = path
   let vpathx_ret = string.fromBytes(toOpenArrayByte(vpath_ms.data, 0, int(vpath_ms.len)-1))
@@ -306,17 +310,21 @@ proc miqt_exec_callback_cQFileSystemModel_fileRenamed(slot: int, path: struct_mi
 
   nimfunc[](slotval1, slotval2, slotval3)
 
+proc miqt_exec_callback_cQFileSystemModel_fileRenamed_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QFileSystemModelfileRenamedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onfileRenamed*(self: gen_qfilesystemmodel_types.QFileSystemModel, slot: QFileSystemModelfileRenamedSlot) =
   var tmp = new QFileSystemModelfileRenamedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQFileSystemModel_connect_fileRenamed(self.h, cast[int](addr tmp[]))
+  fcQFileSystemModel_connect_fileRenamed(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQFileSystemModel_fileRenamed, miqt_exec_callback_cQFileSystemModel_fileRenamed_release)
 
 proc directoryLoaded*(self: gen_qfilesystemmodel_types.QFileSystemModel, path: string): void =
   fcQFileSystemModel_directoryLoaded(self.h, struct_miqt_string(data: path, len: csize_t(len(path))))
 
 type QFileSystemModeldirectoryLoadedSlot* = proc(path: string)
-proc miqt_exec_callback_cQFileSystemModel_directoryLoaded(slot: int, path: struct_miqt_string) {.exportc: "miqt_exec_callback_QFileSystemModel_directoryLoaded".} =
+proc miqt_exec_callback_cQFileSystemModel_directoryLoaded(slot: int, path: struct_miqt_string) {.cdecl.} =
   let nimfunc = cast[ptr QFileSystemModeldirectoryLoadedSlot](cast[pointer](slot))
   let vpath_ms = path
   let vpathx_ret = string.fromBytes(toOpenArrayByte(vpath_ms.data, 0, int(vpath_ms.len)-1))
@@ -325,11 +333,15 @@ proc miqt_exec_callback_cQFileSystemModel_directoryLoaded(slot: int, path: struc
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQFileSystemModel_directoryLoaded_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QFileSystemModeldirectoryLoadedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc ondirectoryLoaded*(self: gen_qfilesystemmodel_types.QFileSystemModel, slot: QFileSystemModeldirectoryLoadedSlot) =
   var tmp = new QFileSystemModeldirectoryLoadedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQFileSystemModel_connect_directoryLoaded(self.h, cast[int](addr tmp[]))
+  fcQFileSystemModel_connect_directoryLoaded(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQFileSystemModel_directoryLoaded, miqt_exec_callback_cQFileSystemModel_directoryLoaded_release)
 
 proc index*(self: gen_qfilesystemmodel_types.QFileSystemModel, row: cint, column: cint, parent: gen_qabstractitemmodel_types.QModelIndex): gen_qabstractitemmodel_types.QModelIndex =
   gen_qabstractitemmodel_types.QModelIndex(h: fcQFileSystemModel_index(self.h, row, column, parent.h))

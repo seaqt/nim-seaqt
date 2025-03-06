@@ -91,9 +91,9 @@ proc fcQSystemTrayIcon_hide(self: pointer, ): void {.importc: "QSystemTrayIcon_h
 proc fcQSystemTrayIcon_showMessage(self: pointer, title: struct_miqt_string, msg: struct_miqt_string, icon: pointer): void {.importc: "QSystemTrayIcon_showMessage".}
 proc fcQSystemTrayIcon_showMessage2(self: pointer, title: struct_miqt_string, msg: struct_miqt_string): void {.importc: "QSystemTrayIcon_showMessage2".}
 proc fcQSystemTrayIcon_activated(self: pointer, reason: cint): void {.importc: "QSystemTrayIcon_activated".}
-proc fcQSystemTrayIcon_connect_activated(self: pointer, slot: int) {.importc: "QSystemTrayIcon_connect_activated".}
+proc fcQSystemTrayIcon_connect_activated(self: pointer, slot: int, callback: proc (slot: int, reason: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QSystemTrayIcon_connect_activated".}
 proc fcQSystemTrayIcon_messageClicked(self: pointer, ): void {.importc: "QSystemTrayIcon_messageClicked".}
-proc fcQSystemTrayIcon_connect_messageClicked(self: pointer, slot: int) {.importc: "QSystemTrayIcon_connect_messageClicked".}
+proc fcQSystemTrayIcon_connect_messageClicked(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QSystemTrayIcon_connect_messageClicked".}
 proc fcQSystemTrayIcon_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QSystemTrayIcon_tr2".}
 proc fcQSystemTrayIcon_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QSystemTrayIcon_tr3".}
 proc fcQSystemTrayIcon_showMessage4(self: pointer, title: struct_miqt_string, msg: struct_miqt_string, icon: pointer, msecs: cint): void {.importc: "QSystemTrayIcon_showMessage4".}
@@ -195,31 +195,39 @@ proc activated*(self: gen_qsystemtrayicon_types.QSystemTrayIcon, reason: cint): 
   fcQSystemTrayIcon_activated(self.h, cint(reason))
 
 type QSystemTrayIconactivatedSlot* = proc(reason: cint)
-proc miqt_exec_callback_cQSystemTrayIcon_activated(slot: int, reason: cint) {.exportc: "miqt_exec_callback_QSystemTrayIcon_activated".} =
+proc miqt_exec_callback_cQSystemTrayIcon_activated(slot: int, reason: cint) {.cdecl.} =
   let nimfunc = cast[ptr QSystemTrayIconactivatedSlot](cast[pointer](slot))
   let slotval1 = cint(reason)
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQSystemTrayIcon_activated_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QSystemTrayIconactivatedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onactivated*(self: gen_qsystemtrayicon_types.QSystemTrayIcon, slot: QSystemTrayIconactivatedSlot) =
   var tmp = new QSystemTrayIconactivatedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQSystemTrayIcon_connect_activated(self.h, cast[int](addr tmp[]))
+  fcQSystemTrayIcon_connect_activated(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQSystemTrayIcon_activated, miqt_exec_callback_cQSystemTrayIcon_activated_release)
 
 proc messageClicked*(self: gen_qsystemtrayicon_types.QSystemTrayIcon, ): void =
   fcQSystemTrayIcon_messageClicked(self.h)
 
 type QSystemTrayIconmessageClickedSlot* = proc()
-proc miqt_exec_callback_cQSystemTrayIcon_messageClicked(slot: int) {.exportc: "miqt_exec_callback_QSystemTrayIcon_messageClicked".} =
+proc miqt_exec_callback_cQSystemTrayIcon_messageClicked(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QSystemTrayIconmessageClickedSlot](cast[pointer](slot))
   nimfunc[]()
+
+proc miqt_exec_callback_cQSystemTrayIcon_messageClicked_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QSystemTrayIconmessageClickedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
 
 proc onmessageClicked*(self: gen_qsystemtrayicon_types.QSystemTrayIcon, slot: QSystemTrayIconmessageClickedSlot) =
   var tmp = new QSystemTrayIconmessageClickedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQSystemTrayIcon_connect_messageClicked(self.h, cast[int](addr tmp[]))
+  fcQSystemTrayIcon_connect_messageClicked(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQSystemTrayIcon_messageClicked, miqt_exec_callback_cQSystemTrayIcon_messageClicked_release)
 
 proc tr*(_: type gen_qsystemtrayicon_types.QSystemTrayIcon, s: cstring, c: cstring): string =
   let v_ms = fcQSystemTrayIcon_tr2(s, c)

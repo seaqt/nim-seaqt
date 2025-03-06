@@ -19,8 +19,6 @@
 extern "C" {
 #endif
 
-void miqt_exec_callback_QQuickRenderControl_renderRequested(intptr_t);
-void miqt_exec_callback_QQuickRenderControl_sceneChanged(intptr_t);
 #ifdef __cplusplus
 } /* extern C */
 #endif
@@ -304,20 +302,30 @@ void QQuickRenderControl_renderRequested(QQuickRenderControl* self) {
 	self->renderRequested();
 }
 
-void QQuickRenderControl_connect_renderRequested(QQuickRenderControl* self, intptr_t slot) {
-	VirtualQQuickRenderControl::connect(self, static_cast<void (QQuickRenderControl::*)()>(&QQuickRenderControl::renderRequested), self, [=]() {
-		miqt_exec_callback_QQuickRenderControl_renderRequested(slot);
-	});
+void QQuickRenderControl_connect_renderRequested(QQuickRenderControl* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t);
+		void operator()() {
+			callback(slot);
+		}
+	};
+	VirtualQQuickRenderControl::connect(self, static_cast<void (QQuickRenderControl::*)()>(&QQuickRenderControl::renderRequested), self, local_caller{slot, callback, release});
 }
 
 void QQuickRenderControl_sceneChanged(QQuickRenderControl* self) {
 	self->sceneChanged();
 }
 
-void QQuickRenderControl_connect_sceneChanged(QQuickRenderControl* self, intptr_t slot) {
-	VirtualQQuickRenderControl::connect(self, static_cast<void (QQuickRenderControl::*)()>(&QQuickRenderControl::sceneChanged), self, [=]() {
-		miqt_exec_callback_QQuickRenderControl_sceneChanged(slot);
-	});
+void QQuickRenderControl_connect_sceneChanged(QQuickRenderControl* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t);
+		void operator()() {
+			callback(slot);
+		}
+	};
+	VirtualQQuickRenderControl::connect(self, static_cast<void (QQuickRenderControl::*)()>(&QQuickRenderControl::sceneChanged), self, local_caller{slot, callback, release});
 }
 
 struct miqt_string QQuickRenderControl_tr2(const char* s, const char* c) {

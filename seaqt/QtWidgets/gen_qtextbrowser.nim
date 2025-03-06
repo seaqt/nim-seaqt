@@ -102,17 +102,17 @@ proc fcQTextBrowser_forward(self: pointer, ): void {.importc: "QTextBrowser_forw
 proc fcQTextBrowser_home(self: pointer, ): void {.importc: "QTextBrowser_home".}
 proc fcQTextBrowser_reload(self: pointer, ): void {.importc: "QTextBrowser_reload".}
 proc fcQTextBrowser_backwardAvailable(self: pointer, param1: bool): void {.importc: "QTextBrowser_backwardAvailable".}
-proc fcQTextBrowser_connect_backwardAvailable(self: pointer, slot: int) {.importc: "QTextBrowser_connect_backwardAvailable".}
+proc fcQTextBrowser_connect_backwardAvailable(self: pointer, slot: int, callback: proc (slot: int, param1: bool) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QTextBrowser_connect_backwardAvailable".}
 proc fcQTextBrowser_forwardAvailable(self: pointer, param1: bool): void {.importc: "QTextBrowser_forwardAvailable".}
-proc fcQTextBrowser_connect_forwardAvailable(self: pointer, slot: int) {.importc: "QTextBrowser_connect_forwardAvailable".}
+proc fcQTextBrowser_connect_forwardAvailable(self: pointer, slot: int, callback: proc (slot: int, param1: bool) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QTextBrowser_connect_forwardAvailable".}
 proc fcQTextBrowser_historyChanged(self: pointer, ): void {.importc: "QTextBrowser_historyChanged".}
-proc fcQTextBrowser_connect_historyChanged(self: pointer, slot: int) {.importc: "QTextBrowser_connect_historyChanged".}
+proc fcQTextBrowser_connect_historyChanged(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QTextBrowser_connect_historyChanged".}
 proc fcQTextBrowser_sourceChanged(self: pointer, param1: pointer): void {.importc: "QTextBrowser_sourceChanged".}
-proc fcQTextBrowser_connect_sourceChanged(self: pointer, slot: int) {.importc: "QTextBrowser_connect_sourceChanged".}
+proc fcQTextBrowser_connect_sourceChanged(self: pointer, slot: int, callback: proc (slot: int, param1: pointer) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QTextBrowser_connect_sourceChanged".}
 proc fcQTextBrowser_highlighted(self: pointer, param1: pointer): void {.importc: "QTextBrowser_highlighted".}
-proc fcQTextBrowser_connect_highlighted(self: pointer, slot: int) {.importc: "QTextBrowser_connect_highlighted".}
+proc fcQTextBrowser_connect_highlighted(self: pointer, slot: int, callback: proc (slot: int, param1: pointer) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QTextBrowser_connect_highlighted".}
 proc fcQTextBrowser_anchorClicked(self: pointer, param1: pointer): void {.importc: "QTextBrowser_anchorClicked".}
-proc fcQTextBrowser_connect_anchorClicked(self: pointer, slot: int) {.importc: "QTextBrowser_connect_anchorClicked".}
+proc fcQTextBrowser_connect_anchorClicked(self: pointer, slot: int, callback: proc (slot: int, param1: pointer) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QTextBrowser_connect_anchorClicked".}
 proc fcQTextBrowser_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QTextBrowser_tr2".}
 proc fcQTextBrowser_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QTextBrowser_tr3".}
 proc fcQTextBrowser_setSource2(self: pointer, name: pointer, typeVal: cint): void {.importc: "QTextBrowser_setSource2".}
@@ -350,95 +350,119 @@ proc backwardAvailable*(self: gen_qtextbrowser_types.QTextBrowser, param1: bool)
   fcQTextBrowser_backwardAvailable(self.h, param1)
 
 type QTextBrowserbackwardAvailableSlot* = proc(param1: bool)
-proc miqt_exec_callback_cQTextBrowser_backwardAvailable(slot: int, param1: bool) {.exportc: "miqt_exec_callback_QTextBrowser_backwardAvailable".} =
+proc miqt_exec_callback_cQTextBrowser_backwardAvailable(slot: int, param1: bool) {.cdecl.} =
   let nimfunc = cast[ptr QTextBrowserbackwardAvailableSlot](cast[pointer](slot))
   let slotval1 = param1
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQTextBrowser_backwardAvailable_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QTextBrowserbackwardAvailableSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onbackwardAvailable*(self: gen_qtextbrowser_types.QTextBrowser, slot: QTextBrowserbackwardAvailableSlot) =
   var tmp = new QTextBrowserbackwardAvailableSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQTextBrowser_connect_backwardAvailable(self.h, cast[int](addr tmp[]))
+  fcQTextBrowser_connect_backwardAvailable(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQTextBrowser_backwardAvailable, miqt_exec_callback_cQTextBrowser_backwardAvailable_release)
 
 proc forwardAvailable*(self: gen_qtextbrowser_types.QTextBrowser, param1: bool): void =
   fcQTextBrowser_forwardAvailable(self.h, param1)
 
 type QTextBrowserforwardAvailableSlot* = proc(param1: bool)
-proc miqt_exec_callback_cQTextBrowser_forwardAvailable(slot: int, param1: bool) {.exportc: "miqt_exec_callback_QTextBrowser_forwardAvailable".} =
+proc miqt_exec_callback_cQTextBrowser_forwardAvailable(slot: int, param1: bool) {.cdecl.} =
   let nimfunc = cast[ptr QTextBrowserforwardAvailableSlot](cast[pointer](slot))
   let slotval1 = param1
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQTextBrowser_forwardAvailable_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QTextBrowserforwardAvailableSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onforwardAvailable*(self: gen_qtextbrowser_types.QTextBrowser, slot: QTextBrowserforwardAvailableSlot) =
   var tmp = new QTextBrowserforwardAvailableSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQTextBrowser_connect_forwardAvailable(self.h, cast[int](addr tmp[]))
+  fcQTextBrowser_connect_forwardAvailable(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQTextBrowser_forwardAvailable, miqt_exec_callback_cQTextBrowser_forwardAvailable_release)
 
 proc historyChanged*(self: gen_qtextbrowser_types.QTextBrowser, ): void =
   fcQTextBrowser_historyChanged(self.h)
 
 type QTextBrowserhistoryChangedSlot* = proc()
-proc miqt_exec_callback_cQTextBrowser_historyChanged(slot: int) {.exportc: "miqt_exec_callback_QTextBrowser_historyChanged".} =
+proc miqt_exec_callback_cQTextBrowser_historyChanged(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QTextBrowserhistoryChangedSlot](cast[pointer](slot))
   nimfunc[]()
+
+proc miqt_exec_callback_cQTextBrowser_historyChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QTextBrowserhistoryChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
 
 proc onhistoryChanged*(self: gen_qtextbrowser_types.QTextBrowser, slot: QTextBrowserhistoryChangedSlot) =
   var tmp = new QTextBrowserhistoryChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQTextBrowser_connect_historyChanged(self.h, cast[int](addr tmp[]))
+  fcQTextBrowser_connect_historyChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQTextBrowser_historyChanged, miqt_exec_callback_cQTextBrowser_historyChanged_release)
 
 proc sourceChanged*(self: gen_qtextbrowser_types.QTextBrowser, param1: gen_qurl_types.QUrl): void =
   fcQTextBrowser_sourceChanged(self.h, param1.h)
 
 type QTextBrowsersourceChangedSlot* = proc(param1: gen_qurl_types.QUrl)
-proc miqt_exec_callback_cQTextBrowser_sourceChanged(slot: int, param1: pointer) {.exportc: "miqt_exec_callback_QTextBrowser_sourceChanged".} =
+proc miqt_exec_callback_cQTextBrowser_sourceChanged(slot: int, param1: pointer) {.cdecl.} =
   let nimfunc = cast[ptr QTextBrowsersourceChangedSlot](cast[pointer](slot))
   let slotval1 = gen_qurl_types.QUrl(h: param1)
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQTextBrowser_sourceChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QTextBrowsersourceChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onsourceChanged*(self: gen_qtextbrowser_types.QTextBrowser, slot: QTextBrowsersourceChangedSlot) =
   var tmp = new QTextBrowsersourceChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQTextBrowser_connect_sourceChanged(self.h, cast[int](addr tmp[]))
+  fcQTextBrowser_connect_sourceChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQTextBrowser_sourceChanged, miqt_exec_callback_cQTextBrowser_sourceChanged_release)
 
 proc highlighted*(self: gen_qtextbrowser_types.QTextBrowser, param1: gen_qurl_types.QUrl): void =
   fcQTextBrowser_highlighted(self.h, param1.h)
 
 type QTextBrowserhighlightedSlot* = proc(param1: gen_qurl_types.QUrl)
-proc miqt_exec_callback_cQTextBrowser_highlighted(slot: int, param1: pointer) {.exportc: "miqt_exec_callback_QTextBrowser_highlighted".} =
+proc miqt_exec_callback_cQTextBrowser_highlighted(slot: int, param1: pointer) {.cdecl.} =
   let nimfunc = cast[ptr QTextBrowserhighlightedSlot](cast[pointer](slot))
   let slotval1 = gen_qurl_types.QUrl(h: param1)
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQTextBrowser_highlighted_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QTextBrowserhighlightedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onhighlighted*(self: gen_qtextbrowser_types.QTextBrowser, slot: QTextBrowserhighlightedSlot) =
   var tmp = new QTextBrowserhighlightedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQTextBrowser_connect_highlighted(self.h, cast[int](addr tmp[]))
+  fcQTextBrowser_connect_highlighted(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQTextBrowser_highlighted, miqt_exec_callback_cQTextBrowser_highlighted_release)
 
 proc anchorClicked*(self: gen_qtextbrowser_types.QTextBrowser, param1: gen_qurl_types.QUrl): void =
   fcQTextBrowser_anchorClicked(self.h, param1.h)
 
 type QTextBrowseranchorClickedSlot* = proc(param1: gen_qurl_types.QUrl)
-proc miqt_exec_callback_cQTextBrowser_anchorClicked(slot: int, param1: pointer) {.exportc: "miqt_exec_callback_QTextBrowser_anchorClicked".} =
+proc miqt_exec_callback_cQTextBrowser_anchorClicked(slot: int, param1: pointer) {.cdecl.} =
   let nimfunc = cast[ptr QTextBrowseranchorClickedSlot](cast[pointer](slot))
   let slotval1 = gen_qurl_types.QUrl(h: param1)
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQTextBrowser_anchorClicked_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QTextBrowseranchorClickedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onanchorClicked*(self: gen_qtextbrowser_types.QTextBrowser, slot: QTextBrowseranchorClickedSlot) =
   var tmp = new QTextBrowseranchorClickedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQTextBrowser_connect_anchorClicked(self.h, cast[int](addr tmp[]))
+  fcQTextBrowser_connect_anchorClicked(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQTextBrowser_anchorClicked, miqt_exec_callback_cQTextBrowser_anchorClicked_release)
 
 proc tr*(_: type gen_qtextbrowser_types.QTextBrowser, s: cstring, c: cstring): string =
   let v_ms = fcQTextBrowser_tr2(s, c)

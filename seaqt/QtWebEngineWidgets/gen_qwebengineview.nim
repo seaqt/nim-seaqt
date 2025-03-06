@@ -126,29 +126,29 @@ proc fcQWebEngineView_back(self: pointer, ): void {.importc: "QWebEngineView_bac
 proc fcQWebEngineView_forward(self: pointer, ): void {.importc: "QWebEngineView_forward".}
 proc fcQWebEngineView_reload(self: pointer, ): void {.importc: "QWebEngineView_reload".}
 proc fcQWebEngineView_loadStarted(self: pointer, ): void {.importc: "QWebEngineView_loadStarted".}
-proc fcQWebEngineView_connect_loadStarted(self: pointer, slot: int) {.importc: "QWebEngineView_connect_loadStarted".}
+proc fcQWebEngineView_connect_loadStarted(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QWebEngineView_connect_loadStarted".}
 proc fcQWebEngineView_loadProgress(self: pointer, progress: cint): void {.importc: "QWebEngineView_loadProgress".}
-proc fcQWebEngineView_connect_loadProgress(self: pointer, slot: int) {.importc: "QWebEngineView_connect_loadProgress".}
+proc fcQWebEngineView_connect_loadProgress(self: pointer, slot: int, callback: proc (slot: int, progress: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QWebEngineView_connect_loadProgress".}
 proc fcQWebEngineView_loadFinished(self: pointer, param1: bool): void {.importc: "QWebEngineView_loadFinished".}
-proc fcQWebEngineView_connect_loadFinished(self: pointer, slot: int) {.importc: "QWebEngineView_connect_loadFinished".}
+proc fcQWebEngineView_connect_loadFinished(self: pointer, slot: int, callback: proc (slot: int, param1: bool) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QWebEngineView_connect_loadFinished".}
 proc fcQWebEngineView_titleChanged(self: pointer, title: struct_miqt_string): void {.importc: "QWebEngineView_titleChanged".}
-proc fcQWebEngineView_connect_titleChanged(self: pointer, slot: int) {.importc: "QWebEngineView_connect_titleChanged".}
+proc fcQWebEngineView_connect_titleChanged(self: pointer, slot: int, callback: proc (slot: int, title: struct_miqt_string) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QWebEngineView_connect_titleChanged".}
 proc fcQWebEngineView_selectionChanged(self: pointer, ): void {.importc: "QWebEngineView_selectionChanged".}
-proc fcQWebEngineView_connect_selectionChanged(self: pointer, slot: int) {.importc: "QWebEngineView_connect_selectionChanged".}
+proc fcQWebEngineView_connect_selectionChanged(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QWebEngineView_connect_selectionChanged".}
 proc fcQWebEngineView_urlChanged(self: pointer, param1: pointer): void {.importc: "QWebEngineView_urlChanged".}
-proc fcQWebEngineView_connect_urlChanged(self: pointer, slot: int) {.importc: "QWebEngineView_connect_urlChanged".}
+proc fcQWebEngineView_connect_urlChanged(self: pointer, slot: int, callback: proc (slot: int, param1: pointer) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QWebEngineView_connect_urlChanged".}
 proc fcQWebEngineView_iconUrlChanged(self: pointer, param1: pointer): void {.importc: "QWebEngineView_iconUrlChanged".}
-proc fcQWebEngineView_connect_iconUrlChanged(self: pointer, slot: int) {.importc: "QWebEngineView_connect_iconUrlChanged".}
+proc fcQWebEngineView_connect_iconUrlChanged(self: pointer, slot: int, callback: proc (slot: int, param1: pointer) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QWebEngineView_connect_iconUrlChanged".}
 proc fcQWebEngineView_iconChanged(self: pointer, param1: pointer): void {.importc: "QWebEngineView_iconChanged".}
-proc fcQWebEngineView_connect_iconChanged(self: pointer, slot: int) {.importc: "QWebEngineView_connect_iconChanged".}
+proc fcQWebEngineView_connect_iconChanged(self: pointer, slot: int, callback: proc (slot: int, param1: pointer) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QWebEngineView_connect_iconChanged".}
 proc fcQWebEngineView_renderProcessTerminated(self: pointer, terminationStatus: cint, exitCode: cint): void {.importc: "QWebEngineView_renderProcessTerminated".}
-proc fcQWebEngineView_connect_renderProcessTerminated(self: pointer, slot: int) {.importc: "QWebEngineView_connect_renderProcessTerminated".}
+proc fcQWebEngineView_connect_renderProcessTerminated(self: pointer, slot: int, callback: proc (slot: int, terminationStatus: cint, exitCode: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QWebEngineView_connect_renderProcessTerminated".}
 proc fcQWebEngineView_pdfPrintingFinished(self: pointer, filePath: struct_miqt_string, success: bool): void {.importc: "QWebEngineView_pdfPrintingFinished".}
-proc fcQWebEngineView_connect_pdfPrintingFinished(self: pointer, slot: int) {.importc: "QWebEngineView_connect_pdfPrintingFinished".}
+proc fcQWebEngineView_connect_pdfPrintingFinished(self: pointer, slot: int, callback: proc (slot: int, filePath: struct_miqt_string, success: bool) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QWebEngineView_connect_pdfPrintingFinished".}
 proc fcQWebEngineView_printRequested(self: pointer, ): void {.importc: "QWebEngineView_printRequested".}
-proc fcQWebEngineView_connect_printRequested(self: pointer, slot: int) {.importc: "QWebEngineView_connect_printRequested".}
+proc fcQWebEngineView_connect_printRequested(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QWebEngineView_connect_printRequested".}
 proc fcQWebEngineView_printFinished(self: pointer, success: bool): void {.importc: "QWebEngineView_printFinished".}
-proc fcQWebEngineView_connect_printFinished(self: pointer, slot: int) {.importc: "QWebEngineView_connect_printFinished".}
+proc fcQWebEngineView_connect_printFinished(self: pointer, slot: int, callback: proc (slot: int, success: bool) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QWebEngineView_connect_printFinished".}
 proc fcQWebEngineView_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QWebEngineView_tr2".}
 proc fcQWebEngineView_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QWebEngineView_tr3".}
 proc fcQWebEngineView_setHtml2(self: pointer, html: struct_miqt_string, baseUrl: pointer): void {.importc: "QWebEngineView_setHtml2".}
@@ -382,53 +382,65 @@ proc loadStarted*(self: gen_qwebengineview_types.QWebEngineView, ): void =
   fcQWebEngineView_loadStarted(self.h)
 
 type QWebEngineViewloadStartedSlot* = proc()
-proc miqt_exec_callback_cQWebEngineView_loadStarted(slot: int) {.exportc: "miqt_exec_callback_QWebEngineView_loadStarted".} =
+proc miqt_exec_callback_cQWebEngineView_loadStarted(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QWebEngineViewloadStartedSlot](cast[pointer](slot))
   nimfunc[]()
+
+proc miqt_exec_callback_cQWebEngineView_loadStarted_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QWebEngineViewloadStartedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
 
 proc onloadStarted*(self: gen_qwebengineview_types.QWebEngineView, slot: QWebEngineViewloadStartedSlot) =
   var tmp = new QWebEngineViewloadStartedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQWebEngineView_connect_loadStarted(self.h, cast[int](addr tmp[]))
+  fcQWebEngineView_connect_loadStarted(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQWebEngineView_loadStarted, miqt_exec_callback_cQWebEngineView_loadStarted_release)
 
 proc loadProgress*(self: gen_qwebengineview_types.QWebEngineView, progress: cint): void =
   fcQWebEngineView_loadProgress(self.h, progress)
 
 type QWebEngineViewloadProgressSlot* = proc(progress: cint)
-proc miqt_exec_callback_cQWebEngineView_loadProgress(slot: int, progress: cint) {.exportc: "miqt_exec_callback_QWebEngineView_loadProgress".} =
+proc miqt_exec_callback_cQWebEngineView_loadProgress(slot: int, progress: cint) {.cdecl.} =
   let nimfunc = cast[ptr QWebEngineViewloadProgressSlot](cast[pointer](slot))
   let slotval1 = progress
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQWebEngineView_loadProgress_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QWebEngineViewloadProgressSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onloadProgress*(self: gen_qwebengineview_types.QWebEngineView, slot: QWebEngineViewloadProgressSlot) =
   var tmp = new QWebEngineViewloadProgressSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQWebEngineView_connect_loadProgress(self.h, cast[int](addr tmp[]))
+  fcQWebEngineView_connect_loadProgress(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQWebEngineView_loadProgress, miqt_exec_callback_cQWebEngineView_loadProgress_release)
 
 proc loadFinished*(self: gen_qwebengineview_types.QWebEngineView, param1: bool): void =
   fcQWebEngineView_loadFinished(self.h, param1)
 
 type QWebEngineViewloadFinishedSlot* = proc(param1: bool)
-proc miqt_exec_callback_cQWebEngineView_loadFinished(slot: int, param1: bool) {.exportc: "miqt_exec_callback_QWebEngineView_loadFinished".} =
+proc miqt_exec_callback_cQWebEngineView_loadFinished(slot: int, param1: bool) {.cdecl.} =
   let nimfunc = cast[ptr QWebEngineViewloadFinishedSlot](cast[pointer](slot))
   let slotval1 = param1
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQWebEngineView_loadFinished_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QWebEngineViewloadFinishedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onloadFinished*(self: gen_qwebengineview_types.QWebEngineView, slot: QWebEngineViewloadFinishedSlot) =
   var tmp = new QWebEngineViewloadFinishedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQWebEngineView_connect_loadFinished(self.h, cast[int](addr tmp[]))
+  fcQWebEngineView_connect_loadFinished(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQWebEngineView_loadFinished, miqt_exec_callback_cQWebEngineView_loadFinished_release)
 
 proc titleChanged*(self: gen_qwebengineview_types.QWebEngineView, title: string): void =
   fcQWebEngineView_titleChanged(self.h, struct_miqt_string(data: title, len: csize_t(len(title))))
 
 type QWebEngineViewtitleChangedSlot* = proc(title: string)
-proc miqt_exec_callback_cQWebEngineView_titleChanged(slot: int, title: struct_miqt_string) {.exportc: "miqt_exec_callback_QWebEngineView_titleChanged".} =
+proc miqt_exec_callback_cQWebEngineView_titleChanged(slot: int, title: struct_miqt_string) {.cdecl.} =
   let nimfunc = cast[ptr QWebEngineViewtitleChangedSlot](cast[pointer](slot))
   let vtitle_ms = title
   let vtitlex_ret = string.fromBytes(toOpenArrayByte(vtitle_ms.data, 0, int(vtitle_ms.len)-1))
@@ -437,79 +449,99 @@ proc miqt_exec_callback_cQWebEngineView_titleChanged(slot: int, title: struct_mi
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQWebEngineView_titleChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QWebEngineViewtitleChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc ontitleChanged*(self: gen_qwebengineview_types.QWebEngineView, slot: QWebEngineViewtitleChangedSlot) =
   var tmp = new QWebEngineViewtitleChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQWebEngineView_connect_titleChanged(self.h, cast[int](addr tmp[]))
+  fcQWebEngineView_connect_titleChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQWebEngineView_titleChanged, miqt_exec_callback_cQWebEngineView_titleChanged_release)
 
 proc selectionChanged*(self: gen_qwebengineview_types.QWebEngineView, ): void =
   fcQWebEngineView_selectionChanged(self.h)
 
 type QWebEngineViewselectionChangedSlot* = proc()
-proc miqt_exec_callback_cQWebEngineView_selectionChanged(slot: int) {.exportc: "miqt_exec_callback_QWebEngineView_selectionChanged".} =
+proc miqt_exec_callback_cQWebEngineView_selectionChanged(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QWebEngineViewselectionChangedSlot](cast[pointer](slot))
   nimfunc[]()
+
+proc miqt_exec_callback_cQWebEngineView_selectionChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QWebEngineViewselectionChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
 
 proc onselectionChanged*(self: gen_qwebengineview_types.QWebEngineView, slot: QWebEngineViewselectionChangedSlot) =
   var tmp = new QWebEngineViewselectionChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQWebEngineView_connect_selectionChanged(self.h, cast[int](addr tmp[]))
+  fcQWebEngineView_connect_selectionChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQWebEngineView_selectionChanged, miqt_exec_callback_cQWebEngineView_selectionChanged_release)
 
 proc urlChanged*(self: gen_qwebengineview_types.QWebEngineView, param1: gen_qurl_types.QUrl): void =
   fcQWebEngineView_urlChanged(self.h, param1.h)
 
 type QWebEngineViewurlChangedSlot* = proc(param1: gen_qurl_types.QUrl)
-proc miqt_exec_callback_cQWebEngineView_urlChanged(slot: int, param1: pointer) {.exportc: "miqt_exec_callback_QWebEngineView_urlChanged".} =
+proc miqt_exec_callback_cQWebEngineView_urlChanged(slot: int, param1: pointer) {.cdecl.} =
   let nimfunc = cast[ptr QWebEngineViewurlChangedSlot](cast[pointer](slot))
   let slotval1 = gen_qurl_types.QUrl(h: param1)
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQWebEngineView_urlChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QWebEngineViewurlChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onurlChanged*(self: gen_qwebengineview_types.QWebEngineView, slot: QWebEngineViewurlChangedSlot) =
   var tmp = new QWebEngineViewurlChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQWebEngineView_connect_urlChanged(self.h, cast[int](addr tmp[]))
+  fcQWebEngineView_connect_urlChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQWebEngineView_urlChanged, miqt_exec_callback_cQWebEngineView_urlChanged_release)
 
 proc iconUrlChanged*(self: gen_qwebengineview_types.QWebEngineView, param1: gen_qurl_types.QUrl): void =
   fcQWebEngineView_iconUrlChanged(self.h, param1.h)
 
 type QWebEngineViewiconUrlChangedSlot* = proc(param1: gen_qurl_types.QUrl)
-proc miqt_exec_callback_cQWebEngineView_iconUrlChanged(slot: int, param1: pointer) {.exportc: "miqt_exec_callback_QWebEngineView_iconUrlChanged".} =
+proc miqt_exec_callback_cQWebEngineView_iconUrlChanged(slot: int, param1: pointer) {.cdecl.} =
   let nimfunc = cast[ptr QWebEngineViewiconUrlChangedSlot](cast[pointer](slot))
   let slotval1 = gen_qurl_types.QUrl(h: param1)
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQWebEngineView_iconUrlChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QWebEngineViewiconUrlChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc oniconUrlChanged*(self: gen_qwebengineview_types.QWebEngineView, slot: QWebEngineViewiconUrlChangedSlot) =
   var tmp = new QWebEngineViewiconUrlChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQWebEngineView_connect_iconUrlChanged(self.h, cast[int](addr tmp[]))
+  fcQWebEngineView_connect_iconUrlChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQWebEngineView_iconUrlChanged, miqt_exec_callback_cQWebEngineView_iconUrlChanged_release)
 
 proc iconChanged*(self: gen_qwebengineview_types.QWebEngineView, param1: gen_qicon_types.QIcon): void =
   fcQWebEngineView_iconChanged(self.h, param1.h)
 
 type QWebEngineViewiconChangedSlot* = proc(param1: gen_qicon_types.QIcon)
-proc miqt_exec_callback_cQWebEngineView_iconChanged(slot: int, param1: pointer) {.exportc: "miqt_exec_callback_QWebEngineView_iconChanged".} =
+proc miqt_exec_callback_cQWebEngineView_iconChanged(slot: int, param1: pointer) {.cdecl.} =
   let nimfunc = cast[ptr QWebEngineViewiconChangedSlot](cast[pointer](slot))
   let slotval1 = gen_qicon_types.QIcon(h: param1)
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQWebEngineView_iconChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QWebEngineViewiconChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc oniconChanged*(self: gen_qwebengineview_types.QWebEngineView, slot: QWebEngineViewiconChangedSlot) =
   var tmp = new QWebEngineViewiconChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQWebEngineView_connect_iconChanged(self.h, cast[int](addr tmp[]))
+  fcQWebEngineView_connect_iconChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQWebEngineView_iconChanged, miqt_exec_callback_cQWebEngineView_iconChanged_release)
 
 proc renderProcessTerminated*(self: gen_qwebengineview_types.QWebEngineView, terminationStatus: cint, exitCode: cint): void =
   fcQWebEngineView_renderProcessTerminated(self.h, cint(terminationStatus), exitCode)
 
 type QWebEngineViewrenderProcessTerminatedSlot* = proc(terminationStatus: cint, exitCode: cint)
-proc miqt_exec_callback_cQWebEngineView_renderProcessTerminated(slot: int, terminationStatus: cint, exitCode: cint) {.exportc: "miqt_exec_callback_QWebEngineView_renderProcessTerminated".} =
+proc miqt_exec_callback_cQWebEngineView_renderProcessTerminated(slot: int, terminationStatus: cint, exitCode: cint) {.cdecl.} =
   let nimfunc = cast[ptr QWebEngineViewrenderProcessTerminatedSlot](cast[pointer](slot))
   let slotval1 = cint(terminationStatus)
 
@@ -517,17 +549,21 @@ proc miqt_exec_callback_cQWebEngineView_renderProcessTerminated(slot: int, termi
 
   nimfunc[](slotval1, slotval2)
 
+proc miqt_exec_callback_cQWebEngineView_renderProcessTerminated_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QWebEngineViewrenderProcessTerminatedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onrenderProcessTerminated*(self: gen_qwebengineview_types.QWebEngineView, slot: QWebEngineViewrenderProcessTerminatedSlot) =
   var tmp = new QWebEngineViewrenderProcessTerminatedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQWebEngineView_connect_renderProcessTerminated(self.h, cast[int](addr tmp[]))
+  fcQWebEngineView_connect_renderProcessTerminated(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQWebEngineView_renderProcessTerminated, miqt_exec_callback_cQWebEngineView_renderProcessTerminated_release)
 
 proc pdfPrintingFinished*(self: gen_qwebengineview_types.QWebEngineView, filePath: string, success: bool): void =
   fcQWebEngineView_pdfPrintingFinished(self.h, struct_miqt_string(data: filePath, len: csize_t(len(filePath))), success)
 
 type QWebEngineViewpdfPrintingFinishedSlot* = proc(filePath: string, success: bool)
-proc miqt_exec_callback_cQWebEngineView_pdfPrintingFinished(slot: int, filePath: struct_miqt_string, success: bool) {.exportc: "miqt_exec_callback_QWebEngineView_pdfPrintingFinished".} =
+proc miqt_exec_callback_cQWebEngineView_pdfPrintingFinished(slot: int, filePath: struct_miqt_string, success: bool) {.cdecl.} =
   let nimfunc = cast[ptr QWebEngineViewpdfPrintingFinishedSlot](cast[pointer](slot))
   let vfilePath_ms = filePath
   let vfilePathx_ret = string.fromBytes(toOpenArrayByte(vfilePath_ms.data, 0, int(vfilePath_ms.len)-1))
@@ -538,41 +574,53 @@ proc miqt_exec_callback_cQWebEngineView_pdfPrintingFinished(slot: int, filePath:
 
   nimfunc[](slotval1, slotval2)
 
+proc miqt_exec_callback_cQWebEngineView_pdfPrintingFinished_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QWebEngineViewpdfPrintingFinishedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onpdfPrintingFinished*(self: gen_qwebengineview_types.QWebEngineView, slot: QWebEngineViewpdfPrintingFinishedSlot) =
   var tmp = new QWebEngineViewpdfPrintingFinishedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQWebEngineView_connect_pdfPrintingFinished(self.h, cast[int](addr tmp[]))
+  fcQWebEngineView_connect_pdfPrintingFinished(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQWebEngineView_pdfPrintingFinished, miqt_exec_callback_cQWebEngineView_pdfPrintingFinished_release)
 
 proc printRequested*(self: gen_qwebengineview_types.QWebEngineView, ): void =
   fcQWebEngineView_printRequested(self.h)
 
 type QWebEngineViewprintRequestedSlot* = proc()
-proc miqt_exec_callback_cQWebEngineView_printRequested(slot: int) {.exportc: "miqt_exec_callback_QWebEngineView_printRequested".} =
+proc miqt_exec_callback_cQWebEngineView_printRequested(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QWebEngineViewprintRequestedSlot](cast[pointer](slot))
   nimfunc[]()
+
+proc miqt_exec_callback_cQWebEngineView_printRequested_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QWebEngineViewprintRequestedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
 
 proc onprintRequested*(self: gen_qwebengineview_types.QWebEngineView, slot: QWebEngineViewprintRequestedSlot) =
   var tmp = new QWebEngineViewprintRequestedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQWebEngineView_connect_printRequested(self.h, cast[int](addr tmp[]))
+  fcQWebEngineView_connect_printRequested(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQWebEngineView_printRequested, miqt_exec_callback_cQWebEngineView_printRequested_release)
 
 proc printFinished*(self: gen_qwebengineview_types.QWebEngineView, success: bool): void =
   fcQWebEngineView_printFinished(self.h, success)
 
 type QWebEngineViewprintFinishedSlot* = proc(success: bool)
-proc miqt_exec_callback_cQWebEngineView_printFinished(slot: int, success: bool) {.exportc: "miqt_exec_callback_QWebEngineView_printFinished".} =
+proc miqt_exec_callback_cQWebEngineView_printFinished(slot: int, success: bool) {.cdecl.} =
   let nimfunc = cast[ptr QWebEngineViewprintFinishedSlot](cast[pointer](slot))
   let slotval1 = success
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQWebEngineView_printFinished_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QWebEngineViewprintFinishedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onprintFinished*(self: gen_qwebengineview_types.QWebEngineView, slot: QWebEngineViewprintFinishedSlot) =
   var tmp = new QWebEngineViewprintFinishedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQWebEngineView_connect_printFinished(self.h, cast[int](addr tmp[]))
+  fcQWebEngineView_connect_printFinished(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQWebEngineView_printFinished, miqt_exec_callback_cQWebEngineView_printFinished_release)
 
 proc tr*(_: type gen_qwebengineview_types.QWebEngineView, s: cstring, c: cstring): string =
   let v_ms = fcQWebEngineView_tr2(s, c)

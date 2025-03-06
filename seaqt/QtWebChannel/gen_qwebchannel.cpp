@@ -17,7 +17,6 @@
 extern "C" {
 #endif
 
-void miqt_exec_callback_QWebChannel_blockUpdatesChanged(intptr_t, bool);
 #ifdef __cplusplus
 } /* extern C */
 #endif
@@ -296,11 +295,16 @@ void QWebChannel_blockUpdatesChanged(QWebChannel* self, bool block) {
 	self->blockUpdatesChanged(block);
 }
 
-void QWebChannel_connect_blockUpdatesChanged(QWebChannel* self, intptr_t slot) {
-	VirtualQWebChannel::connect(self, static_cast<void (QWebChannel::*)(bool)>(&QWebChannel::blockUpdatesChanged), self, [=](bool block) {
-		bool sigval1 = block;
-		miqt_exec_callback_QWebChannel_blockUpdatesChanged(slot, sigval1);
-	});
+void QWebChannel_connect_blockUpdatesChanged(QWebChannel* self, intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t, bool);
+		void operator()(bool block) {
+			bool sigval1 = block;
+			callback(slot, sigval1);
+		}
+	};
+	VirtualQWebChannel::connect(self, static_cast<void (QWebChannel::*)(bool)>(&QWebChannel::blockUpdatesChanged), self, local_caller{slot, callback, release});
 }
 
 void QWebChannel_connectTo(QWebChannel* self, QWebChannelAbstractTransport* transport) {

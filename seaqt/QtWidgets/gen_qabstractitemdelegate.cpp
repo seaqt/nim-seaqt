@@ -24,10 +24,6 @@
 extern "C" {
 #endif
 
-void miqt_exec_callback_QAbstractItemDelegate_commitData(intptr_t, QWidget*);
-void miqt_exec_callback_QAbstractItemDelegate_closeEditor(intptr_t, QWidget*);
-void miqt_exec_callback_QAbstractItemDelegate_sizeHintChanged(intptr_t, QModelIndex*);
-void miqt_exec_callback_QAbstractItemDelegate_closeEditor2(intptr_t, QWidget*, int);
 #ifdef __cplusplus
 } /* extern C */
 #endif
@@ -490,35 +486,50 @@ void QAbstractItemDelegate_commitData(QAbstractItemDelegate* self, QWidget* edit
 	self->commitData(editor);
 }
 
-void QAbstractItemDelegate_connect_commitData(QAbstractItemDelegate* self, intptr_t slot) {
-	VirtualQAbstractItemDelegate::connect(self, static_cast<void (QAbstractItemDelegate::*)(QWidget*)>(&QAbstractItemDelegate::commitData), self, [=](QWidget* editor) {
-		QWidget* sigval1 = editor;
-		miqt_exec_callback_QAbstractItemDelegate_commitData(slot, sigval1);
-	});
+void QAbstractItemDelegate_connect_commitData(QAbstractItemDelegate* self, intptr_t slot, void (*callback)(intptr_t, QWidget*), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QWidget*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t, QWidget*);
+		void operator()(QWidget* editor) {
+			QWidget* sigval1 = editor;
+			callback(slot, sigval1);
+		}
+	};
+	VirtualQAbstractItemDelegate::connect(self, static_cast<void (QAbstractItemDelegate::*)(QWidget*)>(&QAbstractItemDelegate::commitData), self, local_caller{slot, callback, release});
 }
 
 void QAbstractItemDelegate_closeEditor(QAbstractItemDelegate* self, QWidget* editor) {
 	self->closeEditor(editor);
 }
 
-void QAbstractItemDelegate_connect_closeEditor(QAbstractItemDelegate* self, intptr_t slot) {
-	VirtualQAbstractItemDelegate::connect(self, static_cast<void (QAbstractItemDelegate::*)(QWidget*, QAbstractItemDelegate::EndEditHint)>(&QAbstractItemDelegate::closeEditor), self, [=](QWidget* editor) {
-		QWidget* sigval1 = editor;
-		miqt_exec_callback_QAbstractItemDelegate_closeEditor(slot, sigval1);
-	});
+void QAbstractItemDelegate_connect_closeEditor(QAbstractItemDelegate* self, intptr_t slot, void (*callback)(intptr_t, QWidget*), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QWidget*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t, QWidget*);
+		void operator()(QWidget* editor) {
+			QWidget* sigval1 = editor;
+			callback(slot, sigval1);
+		}
+	};
+	VirtualQAbstractItemDelegate::connect(self, static_cast<void (QAbstractItemDelegate::*)(QWidget*, QAbstractItemDelegate::EndEditHint)>(&QAbstractItemDelegate::closeEditor), self, local_caller{slot, callback, release});
 }
 
 void QAbstractItemDelegate_sizeHintChanged(QAbstractItemDelegate* self, QModelIndex* param1) {
 	self->sizeHintChanged(*param1);
 }
 
-void QAbstractItemDelegate_connect_sizeHintChanged(QAbstractItemDelegate* self, intptr_t slot) {
-	VirtualQAbstractItemDelegate::connect(self, static_cast<void (QAbstractItemDelegate::*)(const QModelIndex&)>(&QAbstractItemDelegate::sizeHintChanged), self, [=](const QModelIndex& param1) {
-		const QModelIndex& param1_ret = param1;
-		// Cast returned reference into pointer
-		QModelIndex* sigval1 = const_cast<QModelIndex*>(&param1_ret);
-		miqt_exec_callback_QAbstractItemDelegate_sizeHintChanged(slot, sigval1);
-	});
+void QAbstractItemDelegate_connect_sizeHintChanged(QAbstractItemDelegate* self, intptr_t slot, void (*callback)(intptr_t, QModelIndex*), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QModelIndex*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t, QModelIndex*);
+		void operator()(const QModelIndex& param1) {
+			const QModelIndex& param1_ret = param1;
+			// Cast returned reference into pointer
+			QModelIndex* sigval1 = const_cast<QModelIndex*>(&param1_ret);
+			callback(slot, sigval1);
+		}
+	};
+	VirtualQAbstractItemDelegate::connect(self, static_cast<void (QAbstractItemDelegate::*)(const QModelIndex&)>(&QAbstractItemDelegate::sizeHintChanged), self, local_caller{slot, callback, release});
 }
 
 struct miqt_string QAbstractItemDelegate_tr2(const char* s, const char* c) {
@@ -547,13 +558,18 @@ void QAbstractItemDelegate_closeEditor2(QAbstractItemDelegate* self, QWidget* ed
 	self->closeEditor(editor, static_cast<QAbstractItemDelegate::EndEditHint>(hint));
 }
 
-void QAbstractItemDelegate_connect_closeEditor2(QAbstractItemDelegate* self, intptr_t slot) {
-	VirtualQAbstractItemDelegate::connect(self, static_cast<void (QAbstractItemDelegate::*)(QWidget*, QAbstractItemDelegate::EndEditHint)>(&QAbstractItemDelegate::closeEditor), self, [=](QWidget* editor, QAbstractItemDelegate::EndEditHint hint) {
-		QWidget* sigval1 = editor;
-		QAbstractItemDelegate::EndEditHint hint_ret = hint;
-		int sigval2 = static_cast<int>(hint_ret);
-		miqt_exec_callback_QAbstractItemDelegate_closeEditor2(slot, sigval1, sigval2);
-	});
+void QAbstractItemDelegate_connect_closeEditor2(QAbstractItemDelegate* self, intptr_t slot, void (*callback)(intptr_t, QWidget*, int), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QWidget*, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t, QWidget*, int);
+		void operator()(QWidget* editor, QAbstractItemDelegate::EndEditHint hint) {
+			QWidget* sigval1 = editor;
+			QAbstractItemDelegate::EndEditHint hint_ret = hint;
+			int sigval2 = static_cast<int>(hint_ret);
+			callback(slot, sigval1, sigval2);
+		}
+	};
+	VirtualQAbstractItemDelegate::connect(self, static_cast<void (QAbstractItemDelegate::*)(QWidget*, QAbstractItemDelegate::EndEditHint)>(&QAbstractItemDelegate::closeEditor), self, local_caller{slot, callback, release});
 }
 
 QMetaObject* QAbstractItemDelegate_virtualbase_metaObject(const void* self) {

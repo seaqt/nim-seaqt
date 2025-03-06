@@ -64,11 +64,11 @@ proc fcQVideoSink_setSubtitleText(self: pointer, subtitle: struct_miqt_string): 
 proc fcQVideoSink_setVideoFrame(self: pointer, frame: pointer): void {.importc: "QVideoSink_setVideoFrame".}
 proc fcQVideoSink_videoFrame(self: pointer, ): pointer {.importc: "QVideoSink_videoFrame".}
 proc fcQVideoSink_videoFrameChanged(self: pointer, frame: pointer): void {.importc: "QVideoSink_videoFrameChanged".}
-proc fcQVideoSink_connect_videoFrameChanged(self: pointer, slot: int) {.importc: "QVideoSink_connect_videoFrameChanged".}
+proc fcQVideoSink_connect_videoFrameChanged(self: pointer, slot: int, callback: proc (slot: int, frame: pointer) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QVideoSink_connect_videoFrameChanged".}
 proc fcQVideoSink_subtitleTextChanged(self: pointer, subtitleText: struct_miqt_string): void {.importc: "QVideoSink_subtitleTextChanged".}
-proc fcQVideoSink_connect_subtitleTextChanged(self: pointer, slot: int) {.importc: "QVideoSink_connect_subtitleTextChanged".}
+proc fcQVideoSink_connect_subtitleTextChanged(self: pointer, slot: int, callback: proc (slot: int, subtitleText: struct_miqt_string) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QVideoSink_connect_subtitleTextChanged".}
 proc fcQVideoSink_videoSizeChanged(self: pointer, ): void {.importc: "QVideoSink_videoSizeChanged".}
-proc fcQVideoSink_connect_videoSizeChanged(self: pointer, slot: int) {.importc: "QVideoSink_connect_videoSizeChanged".}
+proc fcQVideoSink_connect_videoSizeChanged(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QVideoSink_connect_videoSizeChanged".}
 proc fcQVideoSink_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QVideoSink_tr2".}
 proc fcQVideoSink_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QVideoSink_tr3".}
 type cQVideoSinkVTable = object
@@ -135,23 +135,27 @@ proc videoFrameChanged*(self: gen_qvideosink_types.QVideoSink, frame: gen_qvideo
   fcQVideoSink_videoFrameChanged(self.h, frame.h)
 
 type QVideoSinkvideoFrameChangedSlot* = proc(frame: gen_qvideoframe_types.QVideoFrame)
-proc miqt_exec_callback_cQVideoSink_videoFrameChanged(slot: int, frame: pointer) {.exportc: "miqt_exec_callback_QVideoSink_videoFrameChanged".} =
+proc miqt_exec_callback_cQVideoSink_videoFrameChanged(slot: int, frame: pointer) {.cdecl.} =
   let nimfunc = cast[ptr QVideoSinkvideoFrameChangedSlot](cast[pointer](slot))
   let slotval1 = gen_qvideoframe_types.QVideoFrame(h: frame)
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQVideoSink_videoFrameChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QVideoSinkvideoFrameChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onvideoFrameChanged*(self: gen_qvideosink_types.QVideoSink, slot: QVideoSinkvideoFrameChangedSlot) =
   var tmp = new QVideoSinkvideoFrameChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQVideoSink_connect_videoFrameChanged(self.h, cast[int](addr tmp[]))
+  fcQVideoSink_connect_videoFrameChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQVideoSink_videoFrameChanged, miqt_exec_callback_cQVideoSink_videoFrameChanged_release)
 
 proc subtitleTextChanged*(self: gen_qvideosink_types.QVideoSink, subtitleText: string): void =
   fcQVideoSink_subtitleTextChanged(self.h, struct_miqt_string(data: subtitleText, len: csize_t(len(subtitleText))))
 
 type QVideoSinksubtitleTextChangedSlot* = proc(subtitleText: string)
-proc miqt_exec_callback_cQVideoSink_subtitleTextChanged(slot: int, subtitleText: struct_miqt_string) {.exportc: "miqt_exec_callback_QVideoSink_subtitleTextChanged".} =
+proc miqt_exec_callback_cQVideoSink_subtitleTextChanged(slot: int, subtitleText: struct_miqt_string) {.cdecl.} =
   let nimfunc = cast[ptr QVideoSinksubtitleTextChangedSlot](cast[pointer](slot))
   let vsubtitleText_ms = subtitleText
   let vsubtitleTextx_ret = string.fromBytes(toOpenArrayByte(vsubtitleText_ms.data, 0, int(vsubtitleText_ms.len)-1))
@@ -160,25 +164,33 @@ proc miqt_exec_callback_cQVideoSink_subtitleTextChanged(slot: int, subtitleText:
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQVideoSink_subtitleTextChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QVideoSinksubtitleTextChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onsubtitleTextChanged*(self: gen_qvideosink_types.QVideoSink, slot: QVideoSinksubtitleTextChangedSlot) =
   var tmp = new QVideoSinksubtitleTextChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQVideoSink_connect_subtitleTextChanged(self.h, cast[int](addr tmp[]))
+  fcQVideoSink_connect_subtitleTextChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQVideoSink_subtitleTextChanged, miqt_exec_callback_cQVideoSink_subtitleTextChanged_release)
 
 proc videoSizeChanged*(self: gen_qvideosink_types.QVideoSink, ): void =
   fcQVideoSink_videoSizeChanged(self.h)
 
 type QVideoSinkvideoSizeChangedSlot* = proc()
-proc miqt_exec_callback_cQVideoSink_videoSizeChanged(slot: int) {.exportc: "miqt_exec_callback_QVideoSink_videoSizeChanged".} =
+proc miqt_exec_callback_cQVideoSink_videoSizeChanged(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QVideoSinkvideoSizeChangedSlot](cast[pointer](slot))
   nimfunc[]()
+
+proc miqt_exec_callback_cQVideoSink_videoSizeChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QVideoSinkvideoSizeChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
 
 proc onvideoSizeChanged*(self: gen_qvideosink_types.QVideoSink, slot: QVideoSinkvideoSizeChangedSlot) =
   var tmp = new QVideoSinkvideoSizeChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQVideoSink_connect_videoSizeChanged(self.h, cast[int](addr tmp[]))
+  fcQVideoSink_connect_videoSizeChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQVideoSink_videoSizeChanged, miqt_exec_callback_cQVideoSink_videoSizeChanged_release)
 
 proc tr*(_: type gen_qvideosink_types.QVideoSink, s: cstring, c: cstring): string =
   let v_ms = fcQVideoSink_tr2(s, c)

@@ -18,8 +18,6 @@
 extern "C" {
 #endif
 
-void miqt_exec_callback_QWaveDecoder_formatKnown(intptr_t);
-void miqt_exec_callback_QWaveDecoder_parsingError(intptr_t);
 #ifdef __cplusplus
 } /* extern C */
 #endif
@@ -517,20 +515,30 @@ void QWaveDecoder_formatKnown(QWaveDecoder* self) {
 	self->formatKnown();
 }
 
-void QWaveDecoder_connect_formatKnown(QWaveDecoder* self, intptr_t slot) {
-	VirtualQWaveDecoder::connect(self, static_cast<void (QWaveDecoder::*)()>(&QWaveDecoder::formatKnown), self, [=]() {
-		miqt_exec_callback_QWaveDecoder_formatKnown(slot);
-	});
+void QWaveDecoder_connect_formatKnown(QWaveDecoder* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t);
+		void operator()() {
+			callback(slot);
+		}
+	};
+	VirtualQWaveDecoder::connect(self, static_cast<void (QWaveDecoder::*)()>(&QWaveDecoder::formatKnown), self, local_caller{slot, callback, release});
 }
 
 void QWaveDecoder_parsingError(QWaveDecoder* self) {
 	self->parsingError();
 }
 
-void QWaveDecoder_connect_parsingError(QWaveDecoder* self, intptr_t slot) {
-	VirtualQWaveDecoder::connect(self, static_cast<void (QWaveDecoder::*)()>(&QWaveDecoder::parsingError), self, [=]() {
-		miqt_exec_callback_QWaveDecoder_parsingError(slot);
-	});
+void QWaveDecoder_connect_parsingError(QWaveDecoder* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t);
+		void operator()() {
+			callback(slot);
+		}
+	};
+	VirtualQWaveDecoder::connect(self, static_cast<void (QWaveDecoder::*)()>(&QWaveDecoder::parsingError), self, local_caller{slot, callback, release});
 }
 
 struct miqt_string QWaveDecoder_tr2(const char* s, const char* c) {

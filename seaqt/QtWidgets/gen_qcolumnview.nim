@@ -85,7 +85,7 @@ proc fcQColumnView_metacast(self: pointer, param1: cstring): pointer {.importc: 
 proc fcQColumnView_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QColumnView_metacall".}
 proc fcQColumnView_tr(s: cstring): struct_miqt_string {.importc: "QColumnView_tr".}
 proc fcQColumnView_updatePreviewWidget(self: pointer, index: pointer): void {.importc: "QColumnView_updatePreviewWidget".}
-proc fcQColumnView_connect_updatePreviewWidget(self: pointer, slot: int) {.importc: "QColumnView_connect_updatePreviewWidget".}
+proc fcQColumnView_connect_updatePreviewWidget(self: pointer, slot: int, callback: proc (slot: int, index: pointer) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QColumnView_connect_updatePreviewWidget".}
 proc fcQColumnView_indexAt(self: pointer, point: pointer): pointer {.importc: "QColumnView_indexAt".}
 proc fcQColumnView_scrollTo(self: pointer, index: pointer, hint: cint): void {.importc: "QColumnView_scrollTo".}
 proc fcQColumnView_sizeHint(self: pointer, ): pointer {.importc: "QColumnView_sizeHint".}
@@ -318,17 +318,21 @@ proc updatePreviewWidget*(self: gen_qcolumnview_types.QColumnView, index: gen_qa
   fcQColumnView_updatePreviewWidget(self.h, index.h)
 
 type QColumnViewupdatePreviewWidgetSlot* = proc(index: gen_qabstractitemmodel_types.QModelIndex)
-proc miqt_exec_callback_cQColumnView_updatePreviewWidget(slot: int, index: pointer) {.exportc: "miqt_exec_callback_QColumnView_updatePreviewWidget".} =
+proc miqt_exec_callback_cQColumnView_updatePreviewWidget(slot: int, index: pointer) {.cdecl.} =
   let nimfunc = cast[ptr QColumnViewupdatePreviewWidgetSlot](cast[pointer](slot))
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index)
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQColumnView_updatePreviewWidget_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QColumnViewupdatePreviewWidgetSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onupdatePreviewWidget*(self: gen_qcolumnview_types.QColumnView, slot: QColumnViewupdatePreviewWidgetSlot) =
   var tmp = new QColumnViewupdatePreviewWidgetSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQColumnView_connect_updatePreviewWidget(self.h, cast[int](addr tmp[]))
+  fcQColumnView_connect_updatePreviewWidget(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQColumnView_updatePreviewWidget, miqt_exec_callback_cQColumnView_updatePreviewWidget_release)
 
 proc indexAt*(self: gen_qcolumnview_types.QColumnView, point: gen_qpoint_types.QPoint): gen_qabstractitemmodel_types.QModelIndex =
   gen_qabstractitemmodel_types.QModelIndex(h: fcQColumnView_indexAt(self.h, point.h))

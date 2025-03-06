@@ -18,8 +18,6 @@
 extern "C" {
 #endif
 
-void miqt_exec_callback_QTcpServer_newConnection(intptr_t);
-void miqt_exec_callback_QTcpServer_acceptError(intptr_t, int);
 #ifdef __cplusplus
 } /* extern C */
 #endif
@@ -371,22 +369,32 @@ void QTcpServer_newConnection(QTcpServer* self) {
 	self->newConnection();
 }
 
-void QTcpServer_connect_newConnection(QTcpServer* self, intptr_t slot) {
-	VirtualQTcpServer::connect(self, static_cast<void (QTcpServer::*)()>(&QTcpServer::newConnection), self, [=]() {
-		miqt_exec_callback_QTcpServer_newConnection(slot);
-	});
+void QTcpServer_connect_newConnection(QTcpServer* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t);
+		void operator()() {
+			callback(slot);
+		}
+	};
+	VirtualQTcpServer::connect(self, static_cast<void (QTcpServer::*)()>(&QTcpServer::newConnection), self, local_caller{slot, callback, release});
 }
 
 void QTcpServer_acceptError(QTcpServer* self, int socketError) {
 	self->acceptError(static_cast<QAbstractSocket::SocketError>(socketError));
 }
 
-void QTcpServer_connect_acceptError(QTcpServer* self, intptr_t slot) {
-	VirtualQTcpServer::connect(self, static_cast<void (QTcpServer::*)(QAbstractSocket::SocketError)>(&QTcpServer::acceptError), self, [=](QAbstractSocket::SocketError socketError) {
-		QAbstractSocket::SocketError socketError_ret = socketError;
-		int sigval1 = static_cast<int>(socketError_ret);
-		miqt_exec_callback_QTcpServer_acceptError(slot, sigval1);
-	});
+void QTcpServer_connect_acceptError(QTcpServer* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t, int);
+		void operator()(QAbstractSocket::SocketError socketError) {
+			QAbstractSocket::SocketError socketError_ret = socketError;
+			int sigval1 = static_cast<int>(socketError_ret);
+			callback(slot, sigval1);
+		}
+	};
+	VirtualQTcpServer::connect(self, static_cast<void (QTcpServer::*)(QAbstractSocket::SocketError)>(&QTcpServer::acceptError), self, local_caller{slot, callback, release});
 }
 
 struct miqt_string QTcpServer_tr2(const char* s, const char* c) {

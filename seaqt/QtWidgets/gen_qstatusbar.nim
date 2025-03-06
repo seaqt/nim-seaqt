@@ -81,7 +81,7 @@ proc fcQStatusBar_currentMessage(self: pointer, ): struct_miqt_string {.importc:
 proc fcQStatusBar_showMessage(self: pointer, text: struct_miqt_string): void {.importc: "QStatusBar_showMessage".}
 proc fcQStatusBar_clearMessage(self: pointer, ): void {.importc: "QStatusBar_clearMessage".}
 proc fcQStatusBar_messageChanged(self: pointer, text: struct_miqt_string): void {.importc: "QStatusBar_messageChanged".}
-proc fcQStatusBar_connect_messageChanged(self: pointer, slot: int) {.importc: "QStatusBar_connect_messageChanged".}
+proc fcQStatusBar_connect_messageChanged(self: pointer, slot: int, callback: proc (slot: int, text: struct_miqt_string) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QStatusBar_connect_messageChanged".}
 proc fcQStatusBar_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QStatusBar_tr2".}
 proc fcQStatusBar_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QStatusBar_tr3".}
 proc fcQStatusBar_addWidget2(self: pointer, widget: pointer, stretch: cint): void {.importc: "QStatusBar_addWidget2".}
@@ -248,7 +248,7 @@ proc messageChanged*(self: gen_qstatusbar_types.QStatusBar, text: string): void 
   fcQStatusBar_messageChanged(self.h, struct_miqt_string(data: text, len: csize_t(len(text))))
 
 type QStatusBarmessageChangedSlot* = proc(text: string)
-proc miqt_exec_callback_cQStatusBar_messageChanged(slot: int, text: struct_miqt_string) {.exportc: "miqt_exec_callback_QStatusBar_messageChanged".} =
+proc miqt_exec_callback_cQStatusBar_messageChanged(slot: int, text: struct_miqt_string) {.cdecl.} =
   let nimfunc = cast[ptr QStatusBarmessageChangedSlot](cast[pointer](slot))
   let vtext_ms = text
   let vtextx_ret = string.fromBytes(toOpenArrayByte(vtext_ms.data, 0, int(vtext_ms.len)-1))
@@ -257,11 +257,15 @@ proc miqt_exec_callback_cQStatusBar_messageChanged(slot: int, text: struct_miqt_
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQStatusBar_messageChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QStatusBarmessageChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onmessageChanged*(self: gen_qstatusbar_types.QStatusBar, slot: QStatusBarmessageChangedSlot) =
   var tmp = new QStatusBarmessageChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQStatusBar_connect_messageChanged(self.h, cast[int](addr tmp[]))
+  fcQStatusBar_connect_messageChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQStatusBar_messageChanged, miqt_exec_callback_cQStatusBar_messageChanged_release)
 
 proc tr*(_: type gen_qstatusbar_types.QStatusBar, s: cstring, c: cstring): string =
   let v_ms = fcQStatusBar_tr2(s, c)

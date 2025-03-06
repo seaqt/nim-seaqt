@@ -70,9 +70,9 @@ proc fcQWaveDecoder_size(self: pointer, ): clonglong {.importc: "QWaveDecoder_si
 proc fcQWaveDecoder_isSequential(self: pointer, ): bool {.importc: "QWaveDecoder_isSequential".}
 proc fcQWaveDecoder_bytesAvailable(self: pointer, ): clonglong {.importc: "QWaveDecoder_bytesAvailable".}
 proc fcQWaveDecoder_formatKnown(self: pointer, ): void {.importc: "QWaveDecoder_formatKnown".}
-proc fcQWaveDecoder_connect_formatKnown(self: pointer, slot: int) {.importc: "QWaveDecoder_connect_formatKnown".}
+proc fcQWaveDecoder_connect_formatKnown(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QWaveDecoder_connect_formatKnown".}
 proc fcQWaveDecoder_parsingError(self: pointer, ): void {.importc: "QWaveDecoder_parsingError".}
-proc fcQWaveDecoder_connect_parsingError(self: pointer, slot: int) {.importc: "QWaveDecoder_connect_parsingError".}
+proc fcQWaveDecoder_connect_parsingError(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QWaveDecoder_connect_parsingError".}
 proc fcQWaveDecoder_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QWaveDecoder_tr2".}
 proc fcQWaveDecoder_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QWaveDecoder_tr3".}
 type cQWaveDecoderVTable = object
@@ -186,29 +186,37 @@ proc formatKnown*(self: gen_qwavedecoder_types.QWaveDecoder, ): void =
   fcQWaveDecoder_formatKnown(self.h)
 
 type QWaveDecoderformatKnownSlot* = proc()
-proc miqt_exec_callback_cQWaveDecoder_formatKnown(slot: int) {.exportc: "miqt_exec_callback_QWaveDecoder_formatKnown".} =
+proc miqt_exec_callback_cQWaveDecoder_formatKnown(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QWaveDecoderformatKnownSlot](cast[pointer](slot))
   nimfunc[]()
+
+proc miqt_exec_callback_cQWaveDecoder_formatKnown_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QWaveDecoderformatKnownSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
 
 proc onformatKnown*(self: gen_qwavedecoder_types.QWaveDecoder, slot: QWaveDecoderformatKnownSlot) =
   var tmp = new QWaveDecoderformatKnownSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQWaveDecoder_connect_formatKnown(self.h, cast[int](addr tmp[]))
+  fcQWaveDecoder_connect_formatKnown(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQWaveDecoder_formatKnown, miqt_exec_callback_cQWaveDecoder_formatKnown_release)
 
 proc parsingError*(self: gen_qwavedecoder_types.QWaveDecoder, ): void =
   fcQWaveDecoder_parsingError(self.h)
 
 type QWaveDecoderparsingErrorSlot* = proc()
-proc miqt_exec_callback_cQWaveDecoder_parsingError(slot: int) {.exportc: "miqt_exec_callback_QWaveDecoder_parsingError".} =
+proc miqt_exec_callback_cQWaveDecoder_parsingError(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QWaveDecoderparsingErrorSlot](cast[pointer](slot))
   nimfunc[]()
+
+proc miqt_exec_callback_cQWaveDecoder_parsingError_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QWaveDecoderparsingErrorSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
 
 proc onparsingError*(self: gen_qwavedecoder_types.QWaveDecoder, slot: QWaveDecoderparsingErrorSlot) =
   var tmp = new QWaveDecoderparsingErrorSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQWaveDecoder_connect_parsingError(self.h, cast[int](addr tmp[]))
+  fcQWaveDecoder_connect_parsingError(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQWaveDecoder_parsingError, miqt_exec_callback_cQWaveDecoder_parsingError_release)
 
 proc tr*(_: type gen_qwavedecoder_types.QWaveDecoder, s: cstring, c: cstring): string =
   let v_ms = fcQWaveDecoder_tr2(s, c)

@@ -14,15 +14,6 @@
 extern "C" {
 #endif
 
-void miqt_exec_callback_QWebEngineDownloadRequest_stateChanged(intptr_t, int);
-void miqt_exec_callback_QWebEngineDownloadRequest_savePageFormatChanged(intptr_t);
-void miqt_exec_callback_QWebEngineDownloadRequest_receivedBytesChanged(intptr_t);
-void miqt_exec_callback_QWebEngineDownloadRequest_totalBytesChanged(intptr_t);
-void miqt_exec_callback_QWebEngineDownloadRequest_interruptReasonChanged(intptr_t);
-void miqt_exec_callback_QWebEngineDownloadRequest_isFinishedChanged(intptr_t);
-void miqt_exec_callback_QWebEngineDownloadRequest_isPausedChanged(intptr_t);
-void miqt_exec_callback_QWebEngineDownloadRequest_downloadDirectoryChanged(intptr_t);
-void miqt_exec_callback_QWebEngineDownloadRequest_downloadFileNameChanged(intptr_t);
 #ifdef __cplusplus
 } /* extern C */
 #endif
@@ -193,92 +184,137 @@ void QWebEngineDownloadRequest_stateChanged(QWebEngineDownloadRequest* self, int
 	self->stateChanged(static_cast<QWebEngineDownloadRequest::DownloadState>(state));
 }
 
-void QWebEngineDownloadRequest_connect_stateChanged(QWebEngineDownloadRequest* self, intptr_t slot) {
-	QWebEngineDownloadRequest::connect(self, static_cast<void (QWebEngineDownloadRequest::*)(QWebEngineDownloadRequest::DownloadState)>(&QWebEngineDownloadRequest::stateChanged), self, [=](QWebEngineDownloadRequest::DownloadState state) {
-		QWebEngineDownloadRequest::DownloadState state_ret = state;
-		int sigval1 = static_cast<int>(state_ret);
-		miqt_exec_callback_QWebEngineDownloadRequest_stateChanged(slot, sigval1);
-	});
+void QWebEngineDownloadRequest_connect_stateChanged(QWebEngineDownloadRequest* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t, int);
+		void operator()(QWebEngineDownloadRequest::DownloadState state) {
+			QWebEngineDownloadRequest::DownloadState state_ret = state;
+			int sigval1 = static_cast<int>(state_ret);
+			callback(slot, sigval1);
+		}
+	};
+	QWebEngineDownloadRequest::connect(self, static_cast<void (QWebEngineDownloadRequest::*)(QWebEngineDownloadRequest::DownloadState)>(&QWebEngineDownloadRequest::stateChanged), self, local_caller{slot, callback, release});
 }
 
 void QWebEngineDownloadRequest_savePageFormatChanged(QWebEngineDownloadRequest* self) {
 	self->savePageFormatChanged();
 }
 
-void QWebEngineDownloadRequest_connect_savePageFormatChanged(QWebEngineDownloadRequest* self, intptr_t slot) {
-	QWebEngineDownloadRequest::connect(self, static_cast<void (QWebEngineDownloadRequest::*)()>(&QWebEngineDownloadRequest::savePageFormatChanged), self, [=]() {
-		miqt_exec_callback_QWebEngineDownloadRequest_savePageFormatChanged(slot);
-	});
+void QWebEngineDownloadRequest_connect_savePageFormatChanged(QWebEngineDownloadRequest* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t);
+		void operator()() {
+			callback(slot);
+		}
+	};
+	QWebEngineDownloadRequest::connect(self, static_cast<void (QWebEngineDownloadRequest::*)()>(&QWebEngineDownloadRequest::savePageFormatChanged), self, local_caller{slot, callback, release});
 }
 
 void QWebEngineDownloadRequest_receivedBytesChanged(QWebEngineDownloadRequest* self) {
 	self->receivedBytesChanged();
 }
 
-void QWebEngineDownloadRequest_connect_receivedBytesChanged(QWebEngineDownloadRequest* self, intptr_t slot) {
-	QWebEngineDownloadRequest::connect(self, static_cast<void (QWebEngineDownloadRequest::*)()>(&QWebEngineDownloadRequest::receivedBytesChanged), self, [=]() {
-		miqt_exec_callback_QWebEngineDownloadRequest_receivedBytesChanged(slot);
-	});
+void QWebEngineDownloadRequest_connect_receivedBytesChanged(QWebEngineDownloadRequest* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t);
+		void operator()() {
+			callback(slot);
+		}
+	};
+	QWebEngineDownloadRequest::connect(self, static_cast<void (QWebEngineDownloadRequest::*)()>(&QWebEngineDownloadRequest::receivedBytesChanged), self, local_caller{slot, callback, release});
 }
 
 void QWebEngineDownloadRequest_totalBytesChanged(QWebEngineDownloadRequest* self) {
 	self->totalBytesChanged();
 }
 
-void QWebEngineDownloadRequest_connect_totalBytesChanged(QWebEngineDownloadRequest* self, intptr_t slot) {
-	QWebEngineDownloadRequest::connect(self, static_cast<void (QWebEngineDownloadRequest::*)()>(&QWebEngineDownloadRequest::totalBytesChanged), self, [=]() {
-		miqt_exec_callback_QWebEngineDownloadRequest_totalBytesChanged(slot);
-	});
+void QWebEngineDownloadRequest_connect_totalBytesChanged(QWebEngineDownloadRequest* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t);
+		void operator()() {
+			callback(slot);
+		}
+	};
+	QWebEngineDownloadRequest::connect(self, static_cast<void (QWebEngineDownloadRequest::*)()>(&QWebEngineDownloadRequest::totalBytesChanged), self, local_caller{slot, callback, release});
 }
 
 void QWebEngineDownloadRequest_interruptReasonChanged(QWebEngineDownloadRequest* self) {
 	self->interruptReasonChanged();
 }
 
-void QWebEngineDownloadRequest_connect_interruptReasonChanged(QWebEngineDownloadRequest* self, intptr_t slot) {
-	QWebEngineDownloadRequest::connect(self, static_cast<void (QWebEngineDownloadRequest::*)()>(&QWebEngineDownloadRequest::interruptReasonChanged), self, [=]() {
-		miqt_exec_callback_QWebEngineDownloadRequest_interruptReasonChanged(slot);
-	});
+void QWebEngineDownloadRequest_connect_interruptReasonChanged(QWebEngineDownloadRequest* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t);
+		void operator()() {
+			callback(slot);
+		}
+	};
+	QWebEngineDownloadRequest::connect(self, static_cast<void (QWebEngineDownloadRequest::*)()>(&QWebEngineDownloadRequest::interruptReasonChanged), self, local_caller{slot, callback, release});
 }
 
 void QWebEngineDownloadRequest_isFinishedChanged(QWebEngineDownloadRequest* self) {
 	self->isFinishedChanged();
 }
 
-void QWebEngineDownloadRequest_connect_isFinishedChanged(QWebEngineDownloadRequest* self, intptr_t slot) {
-	QWebEngineDownloadRequest::connect(self, static_cast<void (QWebEngineDownloadRequest::*)()>(&QWebEngineDownloadRequest::isFinishedChanged), self, [=]() {
-		miqt_exec_callback_QWebEngineDownloadRequest_isFinishedChanged(slot);
-	});
+void QWebEngineDownloadRequest_connect_isFinishedChanged(QWebEngineDownloadRequest* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t);
+		void operator()() {
+			callback(slot);
+		}
+	};
+	QWebEngineDownloadRequest::connect(self, static_cast<void (QWebEngineDownloadRequest::*)()>(&QWebEngineDownloadRequest::isFinishedChanged), self, local_caller{slot, callback, release});
 }
 
 void QWebEngineDownloadRequest_isPausedChanged(QWebEngineDownloadRequest* self) {
 	self->isPausedChanged();
 }
 
-void QWebEngineDownloadRequest_connect_isPausedChanged(QWebEngineDownloadRequest* self, intptr_t slot) {
-	QWebEngineDownloadRequest::connect(self, static_cast<void (QWebEngineDownloadRequest::*)()>(&QWebEngineDownloadRequest::isPausedChanged), self, [=]() {
-		miqt_exec_callback_QWebEngineDownloadRequest_isPausedChanged(slot);
-	});
+void QWebEngineDownloadRequest_connect_isPausedChanged(QWebEngineDownloadRequest* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t);
+		void operator()() {
+			callback(slot);
+		}
+	};
+	QWebEngineDownloadRequest::connect(self, static_cast<void (QWebEngineDownloadRequest::*)()>(&QWebEngineDownloadRequest::isPausedChanged), self, local_caller{slot, callback, release});
 }
 
 void QWebEngineDownloadRequest_downloadDirectoryChanged(QWebEngineDownloadRequest* self) {
 	self->downloadDirectoryChanged();
 }
 
-void QWebEngineDownloadRequest_connect_downloadDirectoryChanged(QWebEngineDownloadRequest* self, intptr_t slot) {
-	QWebEngineDownloadRequest::connect(self, static_cast<void (QWebEngineDownloadRequest::*)()>(&QWebEngineDownloadRequest::downloadDirectoryChanged), self, [=]() {
-		miqt_exec_callback_QWebEngineDownloadRequest_downloadDirectoryChanged(slot);
-	});
+void QWebEngineDownloadRequest_connect_downloadDirectoryChanged(QWebEngineDownloadRequest* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t);
+		void operator()() {
+			callback(slot);
+		}
+	};
+	QWebEngineDownloadRequest::connect(self, static_cast<void (QWebEngineDownloadRequest::*)()>(&QWebEngineDownloadRequest::downloadDirectoryChanged), self, local_caller{slot, callback, release});
 }
 
 void QWebEngineDownloadRequest_downloadFileNameChanged(QWebEngineDownloadRequest* self) {
 	self->downloadFileNameChanged();
 }
 
-void QWebEngineDownloadRequest_connect_downloadFileNameChanged(QWebEngineDownloadRequest* self, intptr_t slot) {
-	QWebEngineDownloadRequest::connect(self, static_cast<void (QWebEngineDownloadRequest::*)()>(&QWebEngineDownloadRequest::downloadFileNameChanged), self, [=]() {
-		miqt_exec_callback_QWebEngineDownloadRequest_downloadFileNameChanged(slot);
-	});
+void QWebEngineDownloadRequest_connect_downloadFileNameChanged(QWebEngineDownloadRequest* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t);
+		void operator()() {
+			callback(slot);
+		}
+	};
+	QWebEngineDownloadRequest::connect(self, static_cast<void (QWebEngineDownloadRequest::*)()>(&QWebEngineDownloadRequest::downloadFileNameChanged), self, local_caller{slot, callback, release});
 }
 
 struct miqt_string QWebEngineDownloadRequest_tr2(const char* s, const char* c) {

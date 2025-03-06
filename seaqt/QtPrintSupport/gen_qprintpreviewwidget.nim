@@ -108,9 +108,9 @@ proc fcQPrintPreviewWidget_setFacingPagesViewMode(self: pointer, ): void {.impor
 proc fcQPrintPreviewWidget_setAllPagesViewMode(self: pointer, ): void {.importc: "QPrintPreviewWidget_setAllPagesViewMode".}
 proc fcQPrintPreviewWidget_updatePreview(self: pointer, ): void {.importc: "QPrintPreviewWidget_updatePreview".}
 proc fcQPrintPreviewWidget_paintRequested(self: pointer, printer: pointer): void {.importc: "QPrintPreviewWidget_paintRequested".}
-proc fcQPrintPreviewWidget_connect_paintRequested(self: pointer, slot: int) {.importc: "QPrintPreviewWidget_connect_paintRequested".}
+proc fcQPrintPreviewWidget_connect_paintRequested(self: pointer, slot: int, callback: proc (slot: int, printer: pointer) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QPrintPreviewWidget_connect_paintRequested".}
 proc fcQPrintPreviewWidget_previewChanged(self: pointer, ): void {.importc: "QPrintPreviewWidget_previewChanged".}
-proc fcQPrintPreviewWidget_connect_previewChanged(self: pointer, slot: int) {.importc: "QPrintPreviewWidget_connect_previewChanged".}
+proc fcQPrintPreviewWidget_connect_previewChanged(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QPrintPreviewWidget_connect_previewChanged".}
 proc fcQPrintPreviewWidget_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QPrintPreviewWidget_tr2".}
 proc fcQPrintPreviewWidget_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QPrintPreviewWidget_tr3".}
 proc fcQPrintPreviewWidget_zoomIn1(self: pointer, zoom: float64): void {.importc: "QPrintPreviewWidget_zoomIn1".}
@@ -314,31 +314,39 @@ proc paintRequested*(self: gen_qprintpreviewwidget_types.QPrintPreviewWidget, pr
   fcQPrintPreviewWidget_paintRequested(self.h, printer.h)
 
 type QPrintPreviewWidgetpaintRequestedSlot* = proc(printer: gen_qprinter_types.QPrinter)
-proc miqt_exec_callback_cQPrintPreviewWidget_paintRequested(slot: int, printer: pointer) {.exportc: "miqt_exec_callback_QPrintPreviewWidget_paintRequested".} =
+proc miqt_exec_callback_cQPrintPreviewWidget_paintRequested(slot: int, printer: pointer) {.cdecl.} =
   let nimfunc = cast[ptr QPrintPreviewWidgetpaintRequestedSlot](cast[pointer](slot))
   let slotval1 = gen_qprinter_types.QPrinter(h: printer)
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQPrintPreviewWidget_paintRequested_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QPrintPreviewWidgetpaintRequestedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onpaintRequested*(self: gen_qprintpreviewwidget_types.QPrintPreviewWidget, slot: QPrintPreviewWidgetpaintRequestedSlot) =
   var tmp = new QPrintPreviewWidgetpaintRequestedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQPrintPreviewWidget_connect_paintRequested(self.h, cast[int](addr tmp[]))
+  fcQPrintPreviewWidget_connect_paintRequested(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQPrintPreviewWidget_paintRequested, miqt_exec_callback_cQPrintPreviewWidget_paintRequested_release)
 
 proc previewChanged*(self: gen_qprintpreviewwidget_types.QPrintPreviewWidget, ): void =
   fcQPrintPreviewWidget_previewChanged(self.h)
 
 type QPrintPreviewWidgetpreviewChangedSlot* = proc()
-proc miqt_exec_callback_cQPrintPreviewWidget_previewChanged(slot: int) {.exportc: "miqt_exec_callback_QPrintPreviewWidget_previewChanged".} =
+proc miqt_exec_callback_cQPrintPreviewWidget_previewChanged(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QPrintPreviewWidgetpreviewChangedSlot](cast[pointer](slot))
   nimfunc[]()
+
+proc miqt_exec_callback_cQPrintPreviewWidget_previewChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QPrintPreviewWidgetpreviewChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
 
 proc onpreviewChanged*(self: gen_qprintpreviewwidget_types.QPrintPreviewWidget, slot: QPrintPreviewWidgetpreviewChangedSlot) =
   var tmp = new QPrintPreviewWidgetpreviewChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQPrintPreviewWidget_connect_previewChanged(self.h, cast[int](addr tmp[]))
+  fcQPrintPreviewWidget_connect_previewChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQPrintPreviewWidget_previewChanged, miqt_exec_callback_cQPrintPreviewWidget_previewChanged_release)
 
 proc tr*(_: type gen_qprintpreviewwidget_types.QPrintPreviewWidget, s: cstring, c: cstring): string =
   let v_ms = fcQPrintPreviewWidget_tr2(s, c)

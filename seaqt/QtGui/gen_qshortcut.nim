@@ -71,9 +71,9 @@ proc fcQShortcut_id(self: pointer, ): cint {.importc: "QShortcut_id".}
 proc fcQShortcut_setWhatsThis(self: pointer, text: struct_miqt_string): void {.importc: "QShortcut_setWhatsThis".}
 proc fcQShortcut_whatsThis(self: pointer, ): struct_miqt_string {.importc: "QShortcut_whatsThis".}
 proc fcQShortcut_activated(self: pointer, ): void {.importc: "QShortcut_activated".}
-proc fcQShortcut_connect_activated(self: pointer, slot: int) {.importc: "QShortcut_connect_activated".}
+proc fcQShortcut_connect_activated(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QShortcut_connect_activated".}
 proc fcQShortcut_activatedAmbiguously(self: pointer, ): void {.importc: "QShortcut_activatedAmbiguously".}
-proc fcQShortcut_connect_activatedAmbiguously(self: pointer, slot: int) {.importc: "QShortcut_connect_activatedAmbiguously".}
+proc fcQShortcut_connect_activatedAmbiguously(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QShortcut_connect_activatedAmbiguously".}
 proc fcQShortcut_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QShortcut_tr2".}
 proc fcQShortcut_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QShortcut_tr3".}
 type cQShortcutVTable = object
@@ -183,29 +183,37 @@ proc activated*(self: gen_qshortcut_types.QShortcut, ): void =
   fcQShortcut_activated(self.h)
 
 type QShortcutactivatedSlot* = proc()
-proc miqt_exec_callback_cQShortcut_activated(slot: int) {.exportc: "miqt_exec_callback_QShortcut_activated".} =
+proc miqt_exec_callback_cQShortcut_activated(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QShortcutactivatedSlot](cast[pointer](slot))
   nimfunc[]()
+
+proc miqt_exec_callback_cQShortcut_activated_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QShortcutactivatedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
 
 proc onactivated*(self: gen_qshortcut_types.QShortcut, slot: QShortcutactivatedSlot) =
   var tmp = new QShortcutactivatedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQShortcut_connect_activated(self.h, cast[int](addr tmp[]))
+  fcQShortcut_connect_activated(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQShortcut_activated, miqt_exec_callback_cQShortcut_activated_release)
 
 proc activatedAmbiguously*(self: gen_qshortcut_types.QShortcut, ): void =
   fcQShortcut_activatedAmbiguously(self.h)
 
 type QShortcutactivatedAmbiguouslySlot* = proc()
-proc miqt_exec_callback_cQShortcut_activatedAmbiguously(slot: int) {.exportc: "miqt_exec_callback_QShortcut_activatedAmbiguously".} =
+proc miqt_exec_callback_cQShortcut_activatedAmbiguously(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QShortcutactivatedAmbiguouslySlot](cast[pointer](slot))
   nimfunc[]()
+
+proc miqt_exec_callback_cQShortcut_activatedAmbiguously_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QShortcutactivatedAmbiguouslySlot](cast[pointer](slot))
+  GC_unref(nimfunc)
 
 proc onactivatedAmbiguously*(self: gen_qshortcut_types.QShortcut, slot: QShortcutactivatedAmbiguouslySlot) =
   var tmp = new QShortcutactivatedAmbiguouslySlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQShortcut_connect_activatedAmbiguously(self.h, cast[int](addr tmp[]))
+  fcQShortcut_connect_activatedAmbiguously(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQShortcut_activatedAmbiguously, miqt_exec_callback_cQShortcut_activatedAmbiguously_release)
 
 proc tr*(_: type gen_qshortcut_types.QShortcut, s: cstring, c: cstring): string =
   let v_ms = fcQShortcut_tr2(s, c)

@@ -205,25 +205,25 @@ proc fcQTextDocument_setBaseUrl(self: pointer, url: pointer): void {.importc: "Q
 proc fcQTextDocument_defaultCursorMoveStyle(self: pointer, ): cint {.importc: "QTextDocument_defaultCursorMoveStyle".}
 proc fcQTextDocument_setDefaultCursorMoveStyle(self: pointer, style: cint): void {.importc: "QTextDocument_setDefaultCursorMoveStyle".}
 proc fcQTextDocument_contentsChange(self: pointer, fromVal: cint, charsRemoved: cint, charsAdded: cint): void {.importc: "QTextDocument_contentsChange".}
-proc fcQTextDocument_connect_contentsChange(self: pointer, slot: int) {.importc: "QTextDocument_connect_contentsChange".}
+proc fcQTextDocument_connect_contentsChange(self: pointer, slot: int, callback: proc (slot: int, fromVal: cint, charsRemoved: cint, charsAdded: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QTextDocument_connect_contentsChange".}
 proc fcQTextDocument_contentsChanged(self: pointer, ): void {.importc: "QTextDocument_contentsChanged".}
-proc fcQTextDocument_connect_contentsChanged(self: pointer, slot: int) {.importc: "QTextDocument_connect_contentsChanged".}
+proc fcQTextDocument_connect_contentsChanged(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QTextDocument_connect_contentsChanged".}
 proc fcQTextDocument_undoAvailable(self: pointer, param1: bool): void {.importc: "QTextDocument_undoAvailable".}
-proc fcQTextDocument_connect_undoAvailable(self: pointer, slot: int) {.importc: "QTextDocument_connect_undoAvailable".}
+proc fcQTextDocument_connect_undoAvailable(self: pointer, slot: int, callback: proc (slot: int, param1: bool) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QTextDocument_connect_undoAvailable".}
 proc fcQTextDocument_redoAvailable(self: pointer, param1: bool): void {.importc: "QTextDocument_redoAvailable".}
-proc fcQTextDocument_connect_redoAvailable(self: pointer, slot: int) {.importc: "QTextDocument_connect_redoAvailable".}
+proc fcQTextDocument_connect_redoAvailable(self: pointer, slot: int, callback: proc (slot: int, param1: bool) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QTextDocument_connect_redoAvailable".}
 proc fcQTextDocument_undoCommandAdded(self: pointer, ): void {.importc: "QTextDocument_undoCommandAdded".}
-proc fcQTextDocument_connect_undoCommandAdded(self: pointer, slot: int) {.importc: "QTextDocument_connect_undoCommandAdded".}
+proc fcQTextDocument_connect_undoCommandAdded(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QTextDocument_connect_undoCommandAdded".}
 proc fcQTextDocument_modificationChanged(self: pointer, m: bool): void {.importc: "QTextDocument_modificationChanged".}
-proc fcQTextDocument_connect_modificationChanged(self: pointer, slot: int) {.importc: "QTextDocument_connect_modificationChanged".}
+proc fcQTextDocument_connect_modificationChanged(self: pointer, slot: int, callback: proc (slot: int, m: bool) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QTextDocument_connect_modificationChanged".}
 proc fcQTextDocument_cursorPositionChanged(self: pointer, cursor: pointer): void {.importc: "QTextDocument_cursorPositionChanged".}
-proc fcQTextDocument_connect_cursorPositionChanged(self: pointer, slot: int) {.importc: "QTextDocument_connect_cursorPositionChanged".}
+proc fcQTextDocument_connect_cursorPositionChanged(self: pointer, slot: int, callback: proc (slot: int, cursor: pointer) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QTextDocument_connect_cursorPositionChanged".}
 proc fcQTextDocument_blockCountChanged(self: pointer, newBlockCount: cint): void {.importc: "QTextDocument_blockCountChanged".}
-proc fcQTextDocument_connect_blockCountChanged(self: pointer, slot: int) {.importc: "QTextDocument_connect_blockCountChanged".}
+proc fcQTextDocument_connect_blockCountChanged(self: pointer, slot: int, callback: proc (slot: int, newBlockCount: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QTextDocument_connect_blockCountChanged".}
 proc fcQTextDocument_baseUrlChanged(self: pointer, url: pointer): void {.importc: "QTextDocument_baseUrlChanged".}
-proc fcQTextDocument_connect_baseUrlChanged(self: pointer, slot: int) {.importc: "QTextDocument_connect_baseUrlChanged".}
+proc fcQTextDocument_connect_baseUrlChanged(self: pointer, slot: int, callback: proc (slot: int, url: pointer) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QTextDocument_connect_baseUrlChanged".}
 proc fcQTextDocument_documentLayoutChanged(self: pointer, ): void {.importc: "QTextDocument_documentLayoutChanged".}
-proc fcQTextDocument_connect_documentLayoutChanged(self: pointer, slot: int) {.importc: "QTextDocument_connect_documentLayoutChanged".}
+proc fcQTextDocument_connect_documentLayoutChanged(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QTextDocument_connect_documentLayoutChanged".}
 proc fcQTextDocument_undo2(self: pointer, ): void {.importc: "QTextDocument_undo2".}
 proc fcQTextDocument_redo2(self: pointer, ): void {.importc: "QTextDocument_redo2".}
 proc fcQTextDocument_appendUndoItem(self: pointer, param1: pointer): void {.importc: "QTextDocument_appendUndoItem".}
@@ -582,7 +582,7 @@ proc contentsChange*(self: gen_qtextdocument_types.QTextDocument, fromVal: cint,
   fcQTextDocument_contentsChange(self.h, fromVal, charsRemoved, charsAdded)
 
 type QTextDocumentcontentsChangeSlot* = proc(fromVal: cint, charsRemoved: cint, charsAdded: cint)
-proc miqt_exec_callback_cQTextDocument_contentsChange(slot: int, fromVal: cint, charsRemoved: cint, charsAdded: cint) {.exportc: "miqt_exec_callback_QTextDocument_contentsChange".} =
+proc miqt_exec_callback_cQTextDocument_contentsChange(slot: int, fromVal: cint, charsRemoved: cint, charsAdded: cint) {.cdecl.} =
   let nimfunc = cast[ptr QTextDocumentcontentsChangeSlot](cast[pointer](slot))
   let slotval1 = fromVal
 
@@ -592,149 +592,189 @@ proc miqt_exec_callback_cQTextDocument_contentsChange(slot: int, fromVal: cint, 
 
   nimfunc[](slotval1, slotval2, slotval3)
 
+proc miqt_exec_callback_cQTextDocument_contentsChange_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QTextDocumentcontentsChangeSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc oncontentsChange*(self: gen_qtextdocument_types.QTextDocument, slot: QTextDocumentcontentsChangeSlot) =
   var tmp = new QTextDocumentcontentsChangeSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQTextDocument_connect_contentsChange(self.h, cast[int](addr tmp[]))
+  fcQTextDocument_connect_contentsChange(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQTextDocument_contentsChange, miqt_exec_callback_cQTextDocument_contentsChange_release)
 
 proc contentsChanged*(self: gen_qtextdocument_types.QTextDocument, ): void =
   fcQTextDocument_contentsChanged(self.h)
 
 type QTextDocumentcontentsChangedSlot* = proc()
-proc miqt_exec_callback_cQTextDocument_contentsChanged(slot: int) {.exportc: "miqt_exec_callback_QTextDocument_contentsChanged".} =
+proc miqt_exec_callback_cQTextDocument_contentsChanged(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QTextDocumentcontentsChangedSlot](cast[pointer](slot))
   nimfunc[]()
+
+proc miqt_exec_callback_cQTextDocument_contentsChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QTextDocumentcontentsChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
 
 proc oncontentsChanged*(self: gen_qtextdocument_types.QTextDocument, slot: QTextDocumentcontentsChangedSlot) =
   var tmp = new QTextDocumentcontentsChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQTextDocument_connect_contentsChanged(self.h, cast[int](addr tmp[]))
+  fcQTextDocument_connect_contentsChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQTextDocument_contentsChanged, miqt_exec_callback_cQTextDocument_contentsChanged_release)
 
 proc undoAvailable*(self: gen_qtextdocument_types.QTextDocument, param1: bool): void =
   fcQTextDocument_undoAvailable(self.h, param1)
 
 type QTextDocumentundoAvailableSlot* = proc(param1: bool)
-proc miqt_exec_callback_cQTextDocument_undoAvailable(slot: int, param1: bool) {.exportc: "miqt_exec_callback_QTextDocument_undoAvailable".} =
+proc miqt_exec_callback_cQTextDocument_undoAvailable(slot: int, param1: bool) {.cdecl.} =
   let nimfunc = cast[ptr QTextDocumentundoAvailableSlot](cast[pointer](slot))
   let slotval1 = param1
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQTextDocument_undoAvailable_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QTextDocumentundoAvailableSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onundoAvailable*(self: gen_qtextdocument_types.QTextDocument, slot: QTextDocumentundoAvailableSlot) =
   var tmp = new QTextDocumentundoAvailableSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQTextDocument_connect_undoAvailable(self.h, cast[int](addr tmp[]))
+  fcQTextDocument_connect_undoAvailable(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQTextDocument_undoAvailable, miqt_exec_callback_cQTextDocument_undoAvailable_release)
 
 proc redoAvailable*(self: gen_qtextdocument_types.QTextDocument, param1: bool): void =
   fcQTextDocument_redoAvailable(self.h, param1)
 
 type QTextDocumentredoAvailableSlot* = proc(param1: bool)
-proc miqt_exec_callback_cQTextDocument_redoAvailable(slot: int, param1: bool) {.exportc: "miqt_exec_callback_QTextDocument_redoAvailable".} =
+proc miqt_exec_callback_cQTextDocument_redoAvailable(slot: int, param1: bool) {.cdecl.} =
   let nimfunc = cast[ptr QTextDocumentredoAvailableSlot](cast[pointer](slot))
   let slotval1 = param1
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQTextDocument_redoAvailable_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QTextDocumentredoAvailableSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onredoAvailable*(self: gen_qtextdocument_types.QTextDocument, slot: QTextDocumentredoAvailableSlot) =
   var tmp = new QTextDocumentredoAvailableSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQTextDocument_connect_redoAvailable(self.h, cast[int](addr tmp[]))
+  fcQTextDocument_connect_redoAvailable(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQTextDocument_redoAvailable, miqt_exec_callback_cQTextDocument_redoAvailable_release)
 
 proc undoCommandAdded*(self: gen_qtextdocument_types.QTextDocument, ): void =
   fcQTextDocument_undoCommandAdded(self.h)
 
 type QTextDocumentundoCommandAddedSlot* = proc()
-proc miqt_exec_callback_cQTextDocument_undoCommandAdded(slot: int) {.exportc: "miqt_exec_callback_QTextDocument_undoCommandAdded".} =
+proc miqt_exec_callback_cQTextDocument_undoCommandAdded(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QTextDocumentundoCommandAddedSlot](cast[pointer](slot))
   nimfunc[]()
+
+proc miqt_exec_callback_cQTextDocument_undoCommandAdded_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QTextDocumentundoCommandAddedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
 
 proc onundoCommandAdded*(self: gen_qtextdocument_types.QTextDocument, slot: QTextDocumentundoCommandAddedSlot) =
   var tmp = new QTextDocumentundoCommandAddedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQTextDocument_connect_undoCommandAdded(self.h, cast[int](addr tmp[]))
+  fcQTextDocument_connect_undoCommandAdded(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQTextDocument_undoCommandAdded, miqt_exec_callback_cQTextDocument_undoCommandAdded_release)
 
 proc modificationChanged*(self: gen_qtextdocument_types.QTextDocument, m: bool): void =
   fcQTextDocument_modificationChanged(self.h, m)
 
 type QTextDocumentmodificationChangedSlot* = proc(m: bool)
-proc miqt_exec_callback_cQTextDocument_modificationChanged(slot: int, m: bool) {.exportc: "miqt_exec_callback_QTextDocument_modificationChanged".} =
+proc miqt_exec_callback_cQTextDocument_modificationChanged(slot: int, m: bool) {.cdecl.} =
   let nimfunc = cast[ptr QTextDocumentmodificationChangedSlot](cast[pointer](slot))
   let slotval1 = m
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQTextDocument_modificationChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QTextDocumentmodificationChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onmodificationChanged*(self: gen_qtextdocument_types.QTextDocument, slot: QTextDocumentmodificationChangedSlot) =
   var tmp = new QTextDocumentmodificationChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQTextDocument_connect_modificationChanged(self.h, cast[int](addr tmp[]))
+  fcQTextDocument_connect_modificationChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQTextDocument_modificationChanged, miqt_exec_callback_cQTextDocument_modificationChanged_release)
 
 proc cursorPositionChanged*(self: gen_qtextdocument_types.QTextDocument, cursor: gen_qtextcursor_types.QTextCursor): void =
   fcQTextDocument_cursorPositionChanged(self.h, cursor.h)
 
 type QTextDocumentcursorPositionChangedSlot* = proc(cursor: gen_qtextcursor_types.QTextCursor)
-proc miqt_exec_callback_cQTextDocument_cursorPositionChanged(slot: int, cursor: pointer) {.exportc: "miqt_exec_callback_QTextDocument_cursorPositionChanged".} =
+proc miqt_exec_callback_cQTextDocument_cursorPositionChanged(slot: int, cursor: pointer) {.cdecl.} =
   let nimfunc = cast[ptr QTextDocumentcursorPositionChangedSlot](cast[pointer](slot))
   let slotval1 = gen_qtextcursor_types.QTextCursor(h: cursor)
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQTextDocument_cursorPositionChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QTextDocumentcursorPositionChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc oncursorPositionChanged*(self: gen_qtextdocument_types.QTextDocument, slot: QTextDocumentcursorPositionChangedSlot) =
   var tmp = new QTextDocumentcursorPositionChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQTextDocument_connect_cursorPositionChanged(self.h, cast[int](addr tmp[]))
+  fcQTextDocument_connect_cursorPositionChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQTextDocument_cursorPositionChanged, miqt_exec_callback_cQTextDocument_cursorPositionChanged_release)
 
 proc blockCountChanged*(self: gen_qtextdocument_types.QTextDocument, newBlockCount: cint): void =
   fcQTextDocument_blockCountChanged(self.h, newBlockCount)
 
 type QTextDocumentblockCountChangedSlot* = proc(newBlockCount: cint)
-proc miqt_exec_callback_cQTextDocument_blockCountChanged(slot: int, newBlockCount: cint) {.exportc: "miqt_exec_callback_QTextDocument_blockCountChanged".} =
+proc miqt_exec_callback_cQTextDocument_blockCountChanged(slot: int, newBlockCount: cint) {.cdecl.} =
   let nimfunc = cast[ptr QTextDocumentblockCountChangedSlot](cast[pointer](slot))
   let slotval1 = newBlockCount
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQTextDocument_blockCountChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QTextDocumentblockCountChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onblockCountChanged*(self: gen_qtextdocument_types.QTextDocument, slot: QTextDocumentblockCountChangedSlot) =
   var tmp = new QTextDocumentblockCountChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQTextDocument_connect_blockCountChanged(self.h, cast[int](addr tmp[]))
+  fcQTextDocument_connect_blockCountChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQTextDocument_blockCountChanged, miqt_exec_callback_cQTextDocument_blockCountChanged_release)
 
 proc baseUrlChanged*(self: gen_qtextdocument_types.QTextDocument, url: gen_qurl_types.QUrl): void =
   fcQTextDocument_baseUrlChanged(self.h, url.h)
 
 type QTextDocumentbaseUrlChangedSlot* = proc(url: gen_qurl_types.QUrl)
-proc miqt_exec_callback_cQTextDocument_baseUrlChanged(slot: int, url: pointer) {.exportc: "miqt_exec_callback_QTextDocument_baseUrlChanged".} =
+proc miqt_exec_callback_cQTextDocument_baseUrlChanged(slot: int, url: pointer) {.cdecl.} =
   let nimfunc = cast[ptr QTextDocumentbaseUrlChangedSlot](cast[pointer](slot))
   let slotval1 = gen_qurl_types.QUrl(h: url)
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQTextDocument_baseUrlChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QTextDocumentbaseUrlChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onbaseUrlChanged*(self: gen_qtextdocument_types.QTextDocument, slot: QTextDocumentbaseUrlChangedSlot) =
   var tmp = new QTextDocumentbaseUrlChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQTextDocument_connect_baseUrlChanged(self.h, cast[int](addr tmp[]))
+  fcQTextDocument_connect_baseUrlChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQTextDocument_baseUrlChanged, miqt_exec_callback_cQTextDocument_baseUrlChanged_release)
 
 proc documentLayoutChanged*(self: gen_qtextdocument_types.QTextDocument, ): void =
   fcQTextDocument_documentLayoutChanged(self.h)
 
 type QTextDocumentdocumentLayoutChangedSlot* = proc()
-proc miqt_exec_callback_cQTextDocument_documentLayoutChanged(slot: int) {.exportc: "miqt_exec_callback_QTextDocument_documentLayoutChanged".} =
+proc miqt_exec_callback_cQTextDocument_documentLayoutChanged(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QTextDocumentdocumentLayoutChangedSlot](cast[pointer](slot))
   nimfunc[]()
+
+proc miqt_exec_callback_cQTextDocument_documentLayoutChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QTextDocumentdocumentLayoutChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
 
 proc ondocumentLayoutChanged*(self: gen_qtextdocument_types.QTextDocument, slot: QTextDocumentdocumentLayoutChangedSlot) =
   var tmp = new QTextDocumentdocumentLayoutChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQTextDocument_connect_documentLayoutChanged(self.h, cast[int](addr tmp[]))
+  fcQTextDocument_connect_documentLayoutChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQTextDocument_documentLayoutChanged, miqt_exec_callback_cQTextDocument_documentLayoutChanged_release)
 
 proc undo*(self: gen_qtextdocument_types.QTextDocument, ): void =
   fcQTextDocument_undo2(self.h)

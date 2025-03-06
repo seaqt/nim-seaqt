@@ -139,24 +139,24 @@ proc fcQAction_resetEnabled(self: pointer, ): void {.importc: "QAction_resetEnab
 proc fcQAction_setDisabled(self: pointer, b: bool): void {.importc: "QAction_setDisabled".}
 proc fcQAction_setVisible(self: pointer, visible: bool): void {.importc: "QAction_setVisible".}
 proc fcQAction_changed(self: pointer, ): void {.importc: "QAction_changed".}
-proc fcQAction_connect_changed(self: pointer, slot: int) {.importc: "QAction_connect_changed".}
+proc fcQAction_connect_changed(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QAction_connect_changed".}
 proc fcQAction_enabledChanged(self: pointer, enabled: bool): void {.importc: "QAction_enabledChanged".}
-proc fcQAction_connect_enabledChanged(self: pointer, slot: int) {.importc: "QAction_connect_enabledChanged".}
+proc fcQAction_connect_enabledChanged(self: pointer, slot: int, callback: proc (slot: int, enabled: bool) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QAction_connect_enabledChanged".}
 proc fcQAction_checkableChanged(self: pointer, checkable: bool): void {.importc: "QAction_checkableChanged".}
-proc fcQAction_connect_checkableChanged(self: pointer, slot: int) {.importc: "QAction_connect_checkableChanged".}
+proc fcQAction_connect_checkableChanged(self: pointer, slot: int, callback: proc (slot: int, checkable: bool) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QAction_connect_checkableChanged".}
 proc fcQAction_visibleChanged(self: pointer, ): void {.importc: "QAction_visibleChanged".}
-proc fcQAction_connect_visibleChanged(self: pointer, slot: int) {.importc: "QAction_connect_visibleChanged".}
+proc fcQAction_connect_visibleChanged(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QAction_connect_visibleChanged".}
 proc fcQAction_triggered(self: pointer, ): void {.importc: "QAction_triggered".}
-proc fcQAction_connect_triggered(self: pointer, slot: int) {.importc: "QAction_connect_triggered".}
+proc fcQAction_connect_triggered(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QAction_connect_triggered".}
 proc fcQAction_hovered(self: pointer, ): void {.importc: "QAction_hovered".}
-proc fcQAction_connect_hovered(self: pointer, slot: int) {.importc: "QAction_connect_hovered".}
+proc fcQAction_connect_hovered(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QAction_connect_hovered".}
 proc fcQAction_toggled(self: pointer, param1: bool): void {.importc: "QAction_toggled".}
-proc fcQAction_connect_toggled(self: pointer, slot: int) {.importc: "QAction_connect_toggled".}
+proc fcQAction_connect_toggled(self: pointer, slot: int, callback: proc (slot: int, param1: bool) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QAction_connect_toggled".}
 proc fcQAction_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QAction_tr2".}
 proc fcQAction_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QAction_tr3".}
 proc fcQAction_showStatusText1(self: pointer, objectVal: pointer): bool {.importc: "QAction_showStatusText1".}
 proc fcQAction_triggered1(self: pointer, checked: bool): void {.importc: "QAction_triggered1".}
-proc fcQAction_connect_triggered1(self: pointer, slot: int) {.importc: "QAction_connect_triggered1".}
+proc fcQAction_connect_triggered1(self: pointer, slot: int, callback: proc (slot: int, checked: bool) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QAction_connect_triggered1".}
 type cQActionVTable = object
   destructor*: proc(vtbl: ptr cQActionVTable, self: ptr cQAction) {.cdecl, raises:[], gcsafe.}
   metaObject*: proc(vtbl, self: pointer, ): pointer {.cdecl, raises: [], gcsafe.}
@@ -395,105 +395,133 @@ proc changed*(self: gen_qaction_types.QAction, ): void =
   fcQAction_changed(self.h)
 
 type QActionchangedSlot* = proc()
-proc miqt_exec_callback_cQAction_changed(slot: int) {.exportc: "miqt_exec_callback_QAction_changed".} =
+proc miqt_exec_callback_cQAction_changed(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QActionchangedSlot](cast[pointer](slot))
   nimfunc[]()
+
+proc miqt_exec_callback_cQAction_changed_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QActionchangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
 
 proc onchanged*(self: gen_qaction_types.QAction, slot: QActionchangedSlot) =
   var tmp = new QActionchangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQAction_connect_changed(self.h, cast[int](addr tmp[]))
+  fcQAction_connect_changed(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQAction_changed, miqt_exec_callback_cQAction_changed_release)
 
 proc enabledChanged*(self: gen_qaction_types.QAction, enabled: bool): void =
   fcQAction_enabledChanged(self.h, enabled)
 
 type QActionenabledChangedSlot* = proc(enabled: bool)
-proc miqt_exec_callback_cQAction_enabledChanged(slot: int, enabled: bool) {.exportc: "miqt_exec_callback_QAction_enabledChanged".} =
+proc miqt_exec_callback_cQAction_enabledChanged(slot: int, enabled: bool) {.cdecl.} =
   let nimfunc = cast[ptr QActionenabledChangedSlot](cast[pointer](slot))
   let slotval1 = enabled
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQAction_enabledChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QActionenabledChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onenabledChanged*(self: gen_qaction_types.QAction, slot: QActionenabledChangedSlot) =
   var tmp = new QActionenabledChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQAction_connect_enabledChanged(self.h, cast[int](addr tmp[]))
+  fcQAction_connect_enabledChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQAction_enabledChanged, miqt_exec_callback_cQAction_enabledChanged_release)
 
 proc checkableChanged*(self: gen_qaction_types.QAction, checkable: bool): void =
   fcQAction_checkableChanged(self.h, checkable)
 
 type QActioncheckableChangedSlot* = proc(checkable: bool)
-proc miqt_exec_callback_cQAction_checkableChanged(slot: int, checkable: bool) {.exportc: "miqt_exec_callback_QAction_checkableChanged".} =
+proc miqt_exec_callback_cQAction_checkableChanged(slot: int, checkable: bool) {.cdecl.} =
   let nimfunc = cast[ptr QActioncheckableChangedSlot](cast[pointer](slot))
   let slotval1 = checkable
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQAction_checkableChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QActioncheckableChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc oncheckableChanged*(self: gen_qaction_types.QAction, slot: QActioncheckableChangedSlot) =
   var tmp = new QActioncheckableChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQAction_connect_checkableChanged(self.h, cast[int](addr tmp[]))
+  fcQAction_connect_checkableChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQAction_checkableChanged, miqt_exec_callback_cQAction_checkableChanged_release)
 
 proc visibleChanged*(self: gen_qaction_types.QAction, ): void =
   fcQAction_visibleChanged(self.h)
 
 type QActionvisibleChangedSlot* = proc()
-proc miqt_exec_callback_cQAction_visibleChanged(slot: int) {.exportc: "miqt_exec_callback_QAction_visibleChanged".} =
+proc miqt_exec_callback_cQAction_visibleChanged(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QActionvisibleChangedSlot](cast[pointer](slot))
   nimfunc[]()
+
+proc miqt_exec_callback_cQAction_visibleChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QActionvisibleChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
 
 proc onvisibleChanged*(self: gen_qaction_types.QAction, slot: QActionvisibleChangedSlot) =
   var tmp = new QActionvisibleChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQAction_connect_visibleChanged(self.h, cast[int](addr tmp[]))
+  fcQAction_connect_visibleChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQAction_visibleChanged, miqt_exec_callback_cQAction_visibleChanged_release)
 
 proc triggered*(self: gen_qaction_types.QAction, ): void =
   fcQAction_triggered(self.h)
 
 type QActiontriggeredSlot* = proc()
-proc miqt_exec_callback_cQAction_triggered(slot: int) {.exportc: "miqt_exec_callback_QAction_triggered".} =
+proc miqt_exec_callback_cQAction_triggered(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QActiontriggeredSlot](cast[pointer](slot))
   nimfunc[]()
+
+proc miqt_exec_callback_cQAction_triggered_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QActiontriggeredSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
 
 proc ontriggered*(self: gen_qaction_types.QAction, slot: QActiontriggeredSlot) =
   var tmp = new QActiontriggeredSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQAction_connect_triggered(self.h, cast[int](addr tmp[]))
+  fcQAction_connect_triggered(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQAction_triggered, miqt_exec_callback_cQAction_triggered_release)
 
 proc hovered*(self: gen_qaction_types.QAction, ): void =
   fcQAction_hovered(self.h)
 
 type QActionhoveredSlot* = proc()
-proc miqt_exec_callback_cQAction_hovered(slot: int) {.exportc: "miqt_exec_callback_QAction_hovered".} =
+proc miqt_exec_callback_cQAction_hovered(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QActionhoveredSlot](cast[pointer](slot))
   nimfunc[]()
+
+proc miqt_exec_callback_cQAction_hovered_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QActionhoveredSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
 
 proc onhovered*(self: gen_qaction_types.QAction, slot: QActionhoveredSlot) =
   var tmp = new QActionhoveredSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQAction_connect_hovered(self.h, cast[int](addr tmp[]))
+  fcQAction_connect_hovered(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQAction_hovered, miqt_exec_callback_cQAction_hovered_release)
 
 proc toggled*(self: gen_qaction_types.QAction, param1: bool): void =
   fcQAction_toggled(self.h, param1)
 
 type QActiontoggledSlot* = proc(param1: bool)
-proc miqt_exec_callback_cQAction_toggled(slot: int, param1: bool) {.exportc: "miqt_exec_callback_QAction_toggled".} =
+proc miqt_exec_callback_cQAction_toggled(slot: int, param1: bool) {.cdecl.} =
   let nimfunc = cast[ptr QActiontoggledSlot](cast[pointer](slot))
   let slotval1 = param1
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQAction_toggled_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QActiontoggledSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc ontoggled*(self: gen_qaction_types.QAction, slot: QActiontoggledSlot) =
   var tmp = new QActiontoggledSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQAction_connect_toggled(self.h, cast[int](addr tmp[]))
+  fcQAction_connect_toggled(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQAction_toggled, miqt_exec_callback_cQAction_toggled_release)
 
 proc tr*(_: type gen_qaction_types.QAction, s: cstring, c: cstring): string =
   let v_ms = fcQAction_tr2(s, c)
@@ -514,17 +542,21 @@ proc triggered*(self: gen_qaction_types.QAction, checked: bool): void =
   fcQAction_triggered1(self.h, checked)
 
 type QActiontriggered1Slot* = proc(checked: bool)
-proc miqt_exec_callback_cQAction_triggered1(slot: int, checked: bool) {.exportc: "miqt_exec_callback_QAction_triggered1".} =
+proc miqt_exec_callback_cQAction_triggered1(slot: int, checked: bool) {.cdecl.} =
   let nimfunc = cast[ptr QActiontriggered1Slot](cast[pointer](slot))
   let slotval1 = checked
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQAction_triggered1_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QActiontriggered1Slot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc ontriggered*(self: gen_qaction_types.QAction, slot: QActiontriggered1Slot) =
   var tmp = new QActiontriggered1Slot
   tmp[] = slot
   GC_ref(tmp)
-  fcQAction_connect_triggered1(self.h, cast[int](addr tmp[]))
+  fcQAction_connect_triggered1(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQAction_triggered1, miqt_exec_callback_cQAction_triggered1_release)
 
 type QActionmetaObjectProc* = proc(self: QAction): gen_qobjectdefs_types.QMetaObject {.raises: [], gcsafe.}
 type QActionmetacastProc* = proc(self: QAction, param1: cstring): pointer {.raises: [], gcsafe.}

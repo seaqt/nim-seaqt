@@ -119,7 +119,7 @@ proc fcQMdiArea_tabShape(self: pointer, ): cint {.importc: "QMdiArea_tabShape".}
 proc fcQMdiArea_setTabPosition(self: pointer, position: cint): void {.importc: "QMdiArea_setTabPosition".}
 proc fcQMdiArea_tabPosition(self: pointer, ): cint {.importc: "QMdiArea_tabPosition".}
 proc fcQMdiArea_subWindowActivated(self: pointer, param1: pointer): void {.importc: "QMdiArea_subWindowActivated".}
-proc fcQMdiArea_connect_subWindowActivated(self: pointer, slot: int) {.importc: "QMdiArea_connect_subWindowActivated".}
+proc fcQMdiArea_connect_subWindowActivated(self: pointer, slot: int, callback: proc (slot: int, param1: pointer) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QMdiArea_connect_subWindowActivated".}
 proc fcQMdiArea_setActiveSubWindow(self: pointer, window: pointer): void {.importc: "QMdiArea_setActiveSubWindow".}
 proc fcQMdiArea_tileSubWindows(self: pointer, ): void {.importc: "QMdiArea_tileSubWindows".}
 proc fcQMdiArea_cascadeSubWindows(self: pointer, ): void {.importc: "QMdiArea_cascadeSubWindows".}
@@ -348,17 +348,21 @@ proc subWindowActivated*(self: gen_qmdiarea_types.QMdiArea, param1: gen_qmdisubw
   fcQMdiArea_subWindowActivated(self.h, param1.h)
 
 type QMdiAreasubWindowActivatedSlot* = proc(param1: gen_qmdisubwindow_types.QMdiSubWindow)
-proc miqt_exec_callback_cQMdiArea_subWindowActivated(slot: int, param1: pointer) {.exportc: "miqt_exec_callback_QMdiArea_subWindowActivated".} =
+proc miqt_exec_callback_cQMdiArea_subWindowActivated(slot: int, param1: pointer) {.cdecl.} =
   let nimfunc = cast[ptr QMdiAreasubWindowActivatedSlot](cast[pointer](slot))
   let slotval1 = gen_qmdisubwindow_types.QMdiSubWindow(h: param1)
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQMdiArea_subWindowActivated_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QMdiAreasubWindowActivatedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onsubWindowActivated*(self: gen_qmdiarea_types.QMdiArea, slot: QMdiAreasubWindowActivatedSlot) =
   var tmp = new QMdiAreasubWindowActivatedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQMdiArea_connect_subWindowActivated(self.h, cast[int](addr tmp[]))
+  fcQMdiArea_connect_subWindowActivated(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQMdiArea_subWindowActivated, miqt_exec_callback_cQMdiArea_subWindowActivated_release)
 
 proc setActiveSubWindow*(self: gen_qmdiarea_types.QMdiArea, window: gen_qmdisubwindow_types.QMdiSubWindow): void =
   fcQMdiArea_setActiveSubWindow(self.h, window.h)

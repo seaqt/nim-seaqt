@@ -47,10 +47,6 @@
 extern "C" {
 #endif
 
-void miqt_exec_callback_QMenu_aboutToShow(intptr_t);
-void miqt_exec_callback_QMenu_aboutToHide(intptr_t);
-void miqt_exec_callback_QMenu_triggered(intptr_t, QAction*);
-void miqt_exec_callback_QMenu_hovered(intptr_t, QAction*);
 #ifdef __cplusplus
 } /* extern C */
 #endif
@@ -1085,42 +1081,62 @@ void QMenu_aboutToShow(QMenu* self) {
 	self->aboutToShow();
 }
 
-void QMenu_connect_aboutToShow(QMenu* self, intptr_t slot) {
-	VirtualQMenu::connect(self, static_cast<void (QMenu::*)()>(&QMenu::aboutToShow), self, [=]() {
-		miqt_exec_callback_QMenu_aboutToShow(slot);
-	});
+void QMenu_connect_aboutToShow(QMenu* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t);
+		void operator()() {
+			callback(slot);
+		}
+	};
+	VirtualQMenu::connect(self, static_cast<void (QMenu::*)()>(&QMenu::aboutToShow), self, local_caller{slot, callback, release});
 }
 
 void QMenu_aboutToHide(QMenu* self) {
 	self->aboutToHide();
 }
 
-void QMenu_connect_aboutToHide(QMenu* self, intptr_t slot) {
-	VirtualQMenu::connect(self, static_cast<void (QMenu::*)()>(&QMenu::aboutToHide), self, [=]() {
-		miqt_exec_callback_QMenu_aboutToHide(slot);
-	});
+void QMenu_connect_aboutToHide(QMenu* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t);
+		void operator()() {
+			callback(slot);
+		}
+	};
+	VirtualQMenu::connect(self, static_cast<void (QMenu::*)()>(&QMenu::aboutToHide), self, local_caller{slot, callback, release});
 }
 
 void QMenu_triggered(QMenu* self, QAction* action) {
 	self->triggered(action);
 }
 
-void QMenu_connect_triggered(QMenu* self, intptr_t slot) {
-	VirtualQMenu::connect(self, static_cast<void (QMenu::*)(QAction*)>(&QMenu::triggered), self, [=](QAction* action) {
-		QAction* sigval1 = action;
-		miqt_exec_callback_QMenu_triggered(slot, sigval1);
-	});
+void QMenu_connect_triggered(QMenu* self, intptr_t slot, void (*callback)(intptr_t, QAction*), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QAction*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t, QAction*);
+		void operator()(QAction* action) {
+			QAction* sigval1 = action;
+			callback(slot, sigval1);
+		}
+	};
+	VirtualQMenu::connect(self, static_cast<void (QMenu::*)(QAction*)>(&QMenu::triggered), self, local_caller{slot, callback, release});
 }
 
 void QMenu_hovered(QMenu* self, QAction* action) {
 	self->hovered(action);
 }
 
-void QMenu_connect_hovered(QMenu* self, intptr_t slot) {
-	VirtualQMenu::connect(self, static_cast<void (QMenu::*)(QAction*)>(&QMenu::hovered), self, [=](QAction* action) {
-		QAction* sigval1 = action;
-		miqt_exec_callback_QMenu_hovered(slot, sigval1);
-	});
+void QMenu_connect_hovered(QMenu* self, intptr_t slot, void (*callback)(intptr_t, QAction*), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QAction*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t, QAction*);
+		void operator()(QAction* action) {
+			QAction* sigval1 = action;
+			callback(slot, sigval1);
+		}
+	};
+	VirtualQMenu::connect(self, static_cast<void (QMenu::*)(QAction*)>(&QMenu::hovered), self, local_caller{slot, callback, release});
 }
 
 struct miqt_string QMenu_tr2(const char* s, const char* c) {

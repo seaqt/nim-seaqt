@@ -65,7 +65,7 @@ proc fcQSequentialAnimationGroup_insertPause(self: pointer, index: cint, msecs: 
 proc fcQSequentialAnimationGroup_currentAnimation(self: pointer, ): pointer {.importc: "QSequentialAnimationGroup_currentAnimation".}
 proc fcQSequentialAnimationGroup_duration(self: pointer, ): cint {.importc: "QSequentialAnimationGroup_duration".}
 proc fcQSequentialAnimationGroup_currentAnimationChanged(self: pointer, current: pointer): void {.importc: "QSequentialAnimationGroup_currentAnimationChanged".}
-proc fcQSequentialAnimationGroup_connect_currentAnimationChanged(self: pointer, slot: int) {.importc: "QSequentialAnimationGroup_connect_currentAnimationChanged".}
+proc fcQSequentialAnimationGroup_connect_currentAnimationChanged(self: pointer, slot: int, callback: proc (slot: int, current: pointer) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QSequentialAnimationGroup_connect_currentAnimationChanged".}
 proc fcQSequentialAnimationGroup_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QSequentialAnimationGroup_tr2".}
 proc fcQSequentialAnimationGroup_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QSequentialAnimationGroup_tr3".}
 type cQSequentialAnimationGroupVTable = object
@@ -134,17 +134,21 @@ proc currentAnimationChanged*(self: gen_qsequentialanimationgroup_types.QSequent
   fcQSequentialAnimationGroup_currentAnimationChanged(self.h, current.h)
 
 type QSequentialAnimationGroupcurrentAnimationChangedSlot* = proc(current: gen_qabstractanimation_types.QAbstractAnimation)
-proc miqt_exec_callback_cQSequentialAnimationGroup_currentAnimationChanged(slot: int, current: pointer) {.exportc: "miqt_exec_callback_QSequentialAnimationGroup_currentAnimationChanged".} =
+proc miqt_exec_callback_cQSequentialAnimationGroup_currentAnimationChanged(slot: int, current: pointer) {.cdecl.} =
   let nimfunc = cast[ptr QSequentialAnimationGroupcurrentAnimationChangedSlot](cast[pointer](slot))
   let slotval1 = gen_qabstractanimation_types.QAbstractAnimation(h: current)
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQSequentialAnimationGroup_currentAnimationChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QSequentialAnimationGroupcurrentAnimationChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc oncurrentAnimationChanged*(self: gen_qsequentialanimationgroup_types.QSequentialAnimationGroup, slot: QSequentialAnimationGroupcurrentAnimationChangedSlot) =
   var tmp = new QSequentialAnimationGroupcurrentAnimationChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQSequentialAnimationGroup_connect_currentAnimationChanged(self.h, cast[int](addr tmp[]))
+  fcQSequentialAnimationGroup_connect_currentAnimationChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQSequentialAnimationGroup_currentAnimationChanged, miqt_exec_callback_cQSequentialAnimationGroup_currentAnimationChanged_release)
 
 proc tr*(_: type gen_qsequentialanimationgroup_types.QSequentialAnimationGroup, s: cstring, c: cstring): string =
   let v_ms = fcQSequentialAnimationGroup_tr2(s, c)

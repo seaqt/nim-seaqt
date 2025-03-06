@@ -113,21 +113,21 @@ proc fcQAudioRoom_reverbTime(self: pointer, ): float32 {.importc: "QAudioRoom_re
 proc fcQAudioRoom_setReverbBrightness(self: pointer, factor: float32): void {.importc: "QAudioRoom_setReverbBrightness".}
 proc fcQAudioRoom_reverbBrightness(self: pointer, ): float32 {.importc: "QAudioRoom_reverbBrightness".}
 proc fcQAudioRoom_positionChanged(self: pointer, ): void {.importc: "QAudioRoom_positionChanged".}
-proc fcQAudioRoom_connect_positionChanged(self: pointer, slot: int) {.importc: "QAudioRoom_connect_positionChanged".}
+proc fcQAudioRoom_connect_positionChanged(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QAudioRoom_connect_positionChanged".}
 proc fcQAudioRoom_dimensionsChanged(self: pointer, ): void {.importc: "QAudioRoom_dimensionsChanged".}
-proc fcQAudioRoom_connect_dimensionsChanged(self: pointer, slot: int) {.importc: "QAudioRoom_connect_dimensionsChanged".}
+proc fcQAudioRoom_connect_dimensionsChanged(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QAudioRoom_connect_dimensionsChanged".}
 proc fcQAudioRoom_rotationChanged(self: pointer, ): void {.importc: "QAudioRoom_rotationChanged".}
-proc fcQAudioRoom_connect_rotationChanged(self: pointer, slot: int) {.importc: "QAudioRoom_connect_rotationChanged".}
+proc fcQAudioRoom_connect_rotationChanged(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QAudioRoom_connect_rotationChanged".}
 proc fcQAudioRoom_wallsChanged(self: pointer, ): void {.importc: "QAudioRoom_wallsChanged".}
-proc fcQAudioRoom_connect_wallsChanged(self: pointer, slot: int) {.importc: "QAudioRoom_connect_wallsChanged".}
+proc fcQAudioRoom_connect_wallsChanged(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QAudioRoom_connect_wallsChanged".}
 proc fcQAudioRoom_reflectionGainChanged(self: pointer, ): void {.importc: "QAudioRoom_reflectionGainChanged".}
-proc fcQAudioRoom_connect_reflectionGainChanged(self: pointer, slot: int) {.importc: "QAudioRoom_connect_reflectionGainChanged".}
+proc fcQAudioRoom_connect_reflectionGainChanged(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QAudioRoom_connect_reflectionGainChanged".}
 proc fcQAudioRoom_reverbGainChanged(self: pointer, ): void {.importc: "QAudioRoom_reverbGainChanged".}
-proc fcQAudioRoom_connect_reverbGainChanged(self: pointer, slot: int) {.importc: "QAudioRoom_connect_reverbGainChanged".}
+proc fcQAudioRoom_connect_reverbGainChanged(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QAudioRoom_connect_reverbGainChanged".}
 proc fcQAudioRoom_reverbTimeChanged(self: pointer, ): void {.importc: "QAudioRoom_reverbTimeChanged".}
-proc fcQAudioRoom_connect_reverbTimeChanged(self: pointer, slot: int) {.importc: "QAudioRoom_connect_reverbTimeChanged".}
+proc fcQAudioRoom_connect_reverbTimeChanged(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QAudioRoom_connect_reverbTimeChanged".}
 proc fcQAudioRoom_reverbBrightnessChanged(self: pointer, ): void {.importc: "QAudioRoom_reverbBrightnessChanged".}
-proc fcQAudioRoom_connect_reverbBrightnessChanged(self: pointer, slot: int) {.importc: "QAudioRoom_connect_reverbBrightnessChanged".}
+proc fcQAudioRoom_connect_reverbBrightnessChanged(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QAudioRoom_connect_reverbBrightnessChanged".}
 proc fcQAudioRoom_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QAudioRoom_tr2".}
 proc fcQAudioRoom_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QAudioRoom_tr3".}
 type cQAudioRoomVTable = object
@@ -223,113 +223,145 @@ proc positionChanged*(self: gen_qaudioroom_types.QAudioRoom, ): void =
   fcQAudioRoom_positionChanged(self.h)
 
 type QAudioRoompositionChangedSlot* = proc()
-proc miqt_exec_callback_cQAudioRoom_positionChanged(slot: int) {.exportc: "miqt_exec_callback_QAudioRoom_positionChanged".} =
+proc miqt_exec_callback_cQAudioRoom_positionChanged(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QAudioRoompositionChangedSlot](cast[pointer](slot))
   nimfunc[]()
+
+proc miqt_exec_callback_cQAudioRoom_positionChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QAudioRoompositionChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
 
 proc onpositionChanged*(self: gen_qaudioroom_types.QAudioRoom, slot: QAudioRoompositionChangedSlot) =
   var tmp = new QAudioRoompositionChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQAudioRoom_connect_positionChanged(self.h, cast[int](addr tmp[]))
+  fcQAudioRoom_connect_positionChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQAudioRoom_positionChanged, miqt_exec_callback_cQAudioRoom_positionChanged_release)
 
 proc dimensionsChanged*(self: gen_qaudioroom_types.QAudioRoom, ): void =
   fcQAudioRoom_dimensionsChanged(self.h)
 
 type QAudioRoomdimensionsChangedSlot* = proc()
-proc miqt_exec_callback_cQAudioRoom_dimensionsChanged(slot: int) {.exportc: "miqt_exec_callback_QAudioRoom_dimensionsChanged".} =
+proc miqt_exec_callback_cQAudioRoom_dimensionsChanged(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QAudioRoomdimensionsChangedSlot](cast[pointer](slot))
   nimfunc[]()
+
+proc miqt_exec_callback_cQAudioRoom_dimensionsChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QAudioRoomdimensionsChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
 
 proc ondimensionsChanged*(self: gen_qaudioroom_types.QAudioRoom, slot: QAudioRoomdimensionsChangedSlot) =
   var tmp = new QAudioRoomdimensionsChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQAudioRoom_connect_dimensionsChanged(self.h, cast[int](addr tmp[]))
+  fcQAudioRoom_connect_dimensionsChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQAudioRoom_dimensionsChanged, miqt_exec_callback_cQAudioRoom_dimensionsChanged_release)
 
 proc rotationChanged*(self: gen_qaudioroom_types.QAudioRoom, ): void =
   fcQAudioRoom_rotationChanged(self.h)
 
 type QAudioRoomrotationChangedSlot* = proc()
-proc miqt_exec_callback_cQAudioRoom_rotationChanged(slot: int) {.exportc: "miqt_exec_callback_QAudioRoom_rotationChanged".} =
+proc miqt_exec_callback_cQAudioRoom_rotationChanged(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QAudioRoomrotationChangedSlot](cast[pointer](slot))
   nimfunc[]()
+
+proc miqt_exec_callback_cQAudioRoom_rotationChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QAudioRoomrotationChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
 
 proc onrotationChanged*(self: gen_qaudioroom_types.QAudioRoom, slot: QAudioRoomrotationChangedSlot) =
   var tmp = new QAudioRoomrotationChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQAudioRoom_connect_rotationChanged(self.h, cast[int](addr tmp[]))
+  fcQAudioRoom_connect_rotationChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQAudioRoom_rotationChanged, miqt_exec_callback_cQAudioRoom_rotationChanged_release)
 
 proc wallsChanged*(self: gen_qaudioroom_types.QAudioRoom, ): void =
   fcQAudioRoom_wallsChanged(self.h)
 
 type QAudioRoomwallsChangedSlot* = proc()
-proc miqt_exec_callback_cQAudioRoom_wallsChanged(slot: int) {.exportc: "miqt_exec_callback_QAudioRoom_wallsChanged".} =
+proc miqt_exec_callback_cQAudioRoom_wallsChanged(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QAudioRoomwallsChangedSlot](cast[pointer](slot))
   nimfunc[]()
+
+proc miqt_exec_callback_cQAudioRoom_wallsChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QAudioRoomwallsChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
 
 proc onwallsChanged*(self: gen_qaudioroom_types.QAudioRoom, slot: QAudioRoomwallsChangedSlot) =
   var tmp = new QAudioRoomwallsChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQAudioRoom_connect_wallsChanged(self.h, cast[int](addr tmp[]))
+  fcQAudioRoom_connect_wallsChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQAudioRoom_wallsChanged, miqt_exec_callback_cQAudioRoom_wallsChanged_release)
 
 proc reflectionGainChanged*(self: gen_qaudioroom_types.QAudioRoom, ): void =
   fcQAudioRoom_reflectionGainChanged(self.h)
 
 type QAudioRoomreflectionGainChangedSlot* = proc()
-proc miqt_exec_callback_cQAudioRoom_reflectionGainChanged(slot: int) {.exportc: "miqt_exec_callback_QAudioRoom_reflectionGainChanged".} =
+proc miqt_exec_callback_cQAudioRoom_reflectionGainChanged(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QAudioRoomreflectionGainChangedSlot](cast[pointer](slot))
   nimfunc[]()
+
+proc miqt_exec_callback_cQAudioRoom_reflectionGainChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QAudioRoomreflectionGainChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
 
 proc onreflectionGainChanged*(self: gen_qaudioroom_types.QAudioRoom, slot: QAudioRoomreflectionGainChangedSlot) =
   var tmp = new QAudioRoomreflectionGainChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQAudioRoom_connect_reflectionGainChanged(self.h, cast[int](addr tmp[]))
+  fcQAudioRoom_connect_reflectionGainChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQAudioRoom_reflectionGainChanged, miqt_exec_callback_cQAudioRoom_reflectionGainChanged_release)
 
 proc reverbGainChanged*(self: gen_qaudioroom_types.QAudioRoom, ): void =
   fcQAudioRoom_reverbGainChanged(self.h)
 
 type QAudioRoomreverbGainChangedSlot* = proc()
-proc miqt_exec_callback_cQAudioRoom_reverbGainChanged(slot: int) {.exportc: "miqt_exec_callback_QAudioRoom_reverbGainChanged".} =
+proc miqt_exec_callback_cQAudioRoom_reverbGainChanged(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QAudioRoomreverbGainChangedSlot](cast[pointer](slot))
   nimfunc[]()
+
+proc miqt_exec_callback_cQAudioRoom_reverbGainChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QAudioRoomreverbGainChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
 
 proc onreverbGainChanged*(self: gen_qaudioroom_types.QAudioRoom, slot: QAudioRoomreverbGainChangedSlot) =
   var tmp = new QAudioRoomreverbGainChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQAudioRoom_connect_reverbGainChanged(self.h, cast[int](addr tmp[]))
+  fcQAudioRoom_connect_reverbGainChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQAudioRoom_reverbGainChanged, miqt_exec_callback_cQAudioRoom_reverbGainChanged_release)
 
 proc reverbTimeChanged*(self: gen_qaudioroom_types.QAudioRoom, ): void =
   fcQAudioRoom_reverbTimeChanged(self.h)
 
 type QAudioRoomreverbTimeChangedSlot* = proc()
-proc miqt_exec_callback_cQAudioRoom_reverbTimeChanged(slot: int) {.exportc: "miqt_exec_callback_QAudioRoom_reverbTimeChanged".} =
+proc miqt_exec_callback_cQAudioRoom_reverbTimeChanged(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QAudioRoomreverbTimeChangedSlot](cast[pointer](slot))
   nimfunc[]()
+
+proc miqt_exec_callback_cQAudioRoom_reverbTimeChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QAudioRoomreverbTimeChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
 
 proc onreverbTimeChanged*(self: gen_qaudioroom_types.QAudioRoom, slot: QAudioRoomreverbTimeChangedSlot) =
   var tmp = new QAudioRoomreverbTimeChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQAudioRoom_connect_reverbTimeChanged(self.h, cast[int](addr tmp[]))
+  fcQAudioRoom_connect_reverbTimeChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQAudioRoom_reverbTimeChanged, miqt_exec_callback_cQAudioRoom_reverbTimeChanged_release)
 
 proc reverbBrightnessChanged*(self: gen_qaudioroom_types.QAudioRoom, ): void =
   fcQAudioRoom_reverbBrightnessChanged(self.h)
 
 type QAudioRoomreverbBrightnessChangedSlot* = proc()
-proc miqt_exec_callback_cQAudioRoom_reverbBrightnessChanged(slot: int) {.exportc: "miqt_exec_callback_QAudioRoom_reverbBrightnessChanged".} =
+proc miqt_exec_callback_cQAudioRoom_reverbBrightnessChanged(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QAudioRoomreverbBrightnessChangedSlot](cast[pointer](slot))
   nimfunc[]()
+
+proc miqt_exec_callback_cQAudioRoom_reverbBrightnessChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QAudioRoomreverbBrightnessChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
 
 proc onreverbBrightnessChanged*(self: gen_qaudioroom_types.QAudioRoom, slot: QAudioRoomreverbBrightnessChangedSlot) =
   var tmp = new QAudioRoomreverbBrightnessChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQAudioRoom_connect_reverbBrightnessChanged(self.h, cast[int](addr tmp[]))
+  fcQAudioRoom_connect_reverbBrightnessChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQAudioRoom_reverbBrightnessChanged, miqt_exec_callback_cQAudioRoom_reverbBrightnessChanged_release)
 
 proc tr*(_: type gen_qaudioroom_types.QAudioRoom, s: cstring, c: cstring): string =
   let v_ms = fcQAudioRoom_tr2(s, c)

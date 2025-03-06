@@ -25,7 +25,6 @@
 extern "C" {
 #endif
 
-void miqt_exec_callback_QWebEngineProfile_downloadRequested(intptr_t, QWebEngineDownloadRequest*);
 #ifdef __cplusplus
 } /* extern C */
 #endif
@@ -483,11 +482,16 @@ void QWebEngineProfile_downloadRequested(QWebEngineProfile* self, QWebEngineDown
 	self->downloadRequested(download);
 }
 
-void QWebEngineProfile_connect_downloadRequested(QWebEngineProfile* self, intptr_t slot) {
-	VirtualQWebEngineProfile::connect(self, static_cast<void (QWebEngineProfile::*)(QWebEngineDownloadRequest*)>(&QWebEngineProfile::downloadRequested), self, [=](QWebEngineDownloadRequest* download) {
-		QWebEngineDownloadRequest* sigval1 = download;
-		miqt_exec_callback_QWebEngineProfile_downloadRequested(slot, sigval1);
-	});
+void QWebEngineProfile_connect_downloadRequested(QWebEngineProfile* self, intptr_t slot, void (*callback)(intptr_t, QWebEngineDownloadRequest*), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QWebEngineDownloadRequest*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t, QWebEngineDownloadRequest*);
+		void operator()(QWebEngineDownloadRequest* download) {
+			QWebEngineDownloadRequest* sigval1 = download;
+			callback(slot, sigval1);
+		}
+	};
+	VirtualQWebEngineProfile::connect(self, static_cast<void (QWebEngineProfile::*)(QWebEngineDownloadRequest*)>(&QWebEngineProfile::downloadRequested), self, local_caller{slot, callback, release});
 }
 
 struct miqt_string QWebEngineProfile_tr2(const char* s, const char* c) {

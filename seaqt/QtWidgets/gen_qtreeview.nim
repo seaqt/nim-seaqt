@@ -139,9 +139,9 @@ proc fcQTreeView_reset(self: pointer, ): void {.importc: "QTreeView_reset".}
 proc fcQTreeView_dataChanged(self: pointer, topLeft: pointer, bottomRight: pointer, roles: struct_miqt_array): void {.importc: "QTreeView_dataChanged".}
 proc fcQTreeView_selectAll(self: pointer, ): void {.importc: "QTreeView_selectAll".}
 proc fcQTreeView_expanded(self: pointer, index: pointer): void {.importc: "QTreeView_expanded".}
-proc fcQTreeView_connect_expanded(self: pointer, slot: int) {.importc: "QTreeView_connect_expanded".}
+proc fcQTreeView_connect_expanded(self: pointer, slot: int, callback: proc (slot: int, index: pointer) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QTreeView_connect_expanded".}
 proc fcQTreeView_collapsed(self: pointer, index: pointer): void {.importc: "QTreeView_collapsed".}
-proc fcQTreeView_connect_collapsed(self: pointer, slot: int) {.importc: "QTreeView_connect_collapsed".}
+proc fcQTreeView_connect_collapsed(self: pointer, slot: int, callback: proc (slot: int, index: pointer) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QTreeView_connect_collapsed".}
 proc fcQTreeView_hideColumn(self: pointer, column: cint): void {.importc: "QTreeView_hideColumn".}
 proc fcQTreeView_showColumn(self: pointer, column: cint): void {.importc: "QTreeView_showColumn".}
 proc fcQTreeView_expand(self: pointer, index: pointer): void {.importc: "QTreeView_expand".}
@@ -533,33 +533,41 @@ proc expanded*(self: gen_qtreeview_types.QTreeView, index: gen_qabstractitemmode
   fcQTreeView_expanded(self.h, index.h)
 
 type QTreeViewexpandedSlot* = proc(index: gen_qabstractitemmodel_types.QModelIndex)
-proc miqt_exec_callback_cQTreeView_expanded(slot: int, index: pointer) {.exportc: "miqt_exec_callback_QTreeView_expanded".} =
+proc miqt_exec_callback_cQTreeView_expanded(slot: int, index: pointer) {.cdecl.} =
   let nimfunc = cast[ptr QTreeViewexpandedSlot](cast[pointer](slot))
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index)
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQTreeView_expanded_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QTreeViewexpandedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onexpanded*(self: gen_qtreeview_types.QTreeView, slot: QTreeViewexpandedSlot) =
   var tmp = new QTreeViewexpandedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQTreeView_connect_expanded(self.h, cast[int](addr tmp[]))
+  fcQTreeView_connect_expanded(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQTreeView_expanded, miqt_exec_callback_cQTreeView_expanded_release)
 
 proc collapsed*(self: gen_qtreeview_types.QTreeView, index: gen_qabstractitemmodel_types.QModelIndex): void =
   fcQTreeView_collapsed(self.h, index.h)
 
 type QTreeViewcollapsedSlot* = proc(index: gen_qabstractitemmodel_types.QModelIndex)
-proc miqt_exec_callback_cQTreeView_collapsed(slot: int, index: pointer) {.exportc: "miqt_exec_callback_QTreeView_collapsed".} =
+proc miqt_exec_callback_cQTreeView_collapsed(slot: int, index: pointer) {.cdecl.} =
   let nimfunc = cast[ptr QTreeViewcollapsedSlot](cast[pointer](slot))
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index)
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQTreeView_collapsed_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QTreeViewcollapsedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc oncollapsed*(self: gen_qtreeview_types.QTreeView, slot: QTreeViewcollapsedSlot) =
   var tmp = new QTreeViewcollapsedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQTreeView_connect_collapsed(self.h, cast[int](addr tmp[]))
+  fcQTreeView_connect_collapsed(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQTreeView_collapsed, miqt_exec_callback_cQTreeView_collapsed_release)
 
 proc hideColumn*(self: gen_qtreeview_types.QTreeView, column: cint): void =
   fcQTreeView_hideColumn(self.h, column)

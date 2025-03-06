@@ -144,11 +144,11 @@ proc fcQDateTimeEdit_clear(self: pointer, ): void {.importc: "QDateTimeEdit_clea
 proc fcQDateTimeEdit_stepBy(self: pointer, steps: cint): void {.importc: "QDateTimeEdit_stepBy".}
 proc fcQDateTimeEdit_event(self: pointer, event: pointer): bool {.importc: "QDateTimeEdit_event".}
 proc fcQDateTimeEdit_dateTimeChanged(self: pointer, dateTime: pointer): void {.importc: "QDateTimeEdit_dateTimeChanged".}
-proc fcQDateTimeEdit_connect_dateTimeChanged(self: pointer, slot: int) {.importc: "QDateTimeEdit_connect_dateTimeChanged".}
+proc fcQDateTimeEdit_connect_dateTimeChanged(self: pointer, slot: int, callback: proc (slot: int, dateTime: pointer) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QDateTimeEdit_connect_dateTimeChanged".}
 proc fcQDateTimeEdit_timeChanged(self: pointer, time: pointer): void {.importc: "QDateTimeEdit_timeChanged".}
-proc fcQDateTimeEdit_connect_timeChanged(self: pointer, slot: int) {.importc: "QDateTimeEdit_connect_timeChanged".}
+proc fcQDateTimeEdit_connect_timeChanged(self: pointer, slot: int, callback: proc (slot: int, time: pointer) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QDateTimeEdit_connect_timeChanged".}
 proc fcQDateTimeEdit_dateChanged(self: pointer, date: pointer): void {.importc: "QDateTimeEdit_dateChanged".}
-proc fcQDateTimeEdit_connect_dateChanged(self: pointer, slot: int) {.importc: "QDateTimeEdit_connect_dateChanged".}
+proc fcQDateTimeEdit_connect_dateChanged(self: pointer, slot: int, callback: proc (slot: int, date: pointer) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QDateTimeEdit_connect_dateChanged".}
 proc fcQDateTimeEdit_setDateTime(self: pointer, dateTime: pointer): void {.importc: "QDateTimeEdit_setDateTime".}
 proc fcQDateTimeEdit_setDate(self: pointer, date: pointer): void {.importc: "QDateTimeEdit_setDate".}
 proc fcQDateTimeEdit_setTime(self: pointer, time: pointer): void {.importc: "QDateTimeEdit_setTime".}
@@ -287,7 +287,7 @@ proc fcQTimeEdit_metacast(self: pointer, param1: cstring): pointer {.importc: "Q
 proc fcQTimeEdit_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QTimeEdit_metacall".}
 proc fcQTimeEdit_tr(s: cstring): struct_miqt_string {.importc: "QTimeEdit_tr".}
 proc fcQTimeEdit_userTimeChanged(self: pointer, time: pointer): void {.importc: "QTimeEdit_userTimeChanged".}
-proc fcQTimeEdit_connect_userTimeChanged(self: pointer, slot: int) {.importc: "QTimeEdit_connect_userTimeChanged".}
+proc fcQTimeEdit_connect_userTimeChanged(self: pointer, slot: int, callback: proc (slot: int, time: pointer) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QTimeEdit_connect_userTimeChanged".}
 proc fcQTimeEdit_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QTimeEdit_tr2".}
 proc fcQTimeEdit_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QTimeEdit_tr3".}
 type cQTimeEditVTable = object
@@ -419,7 +419,7 @@ proc fcQDateEdit_metacast(self: pointer, param1: cstring): pointer {.importc: "Q
 proc fcQDateEdit_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QDateEdit_metacall".}
 proc fcQDateEdit_tr(s: cstring): struct_miqt_string {.importc: "QDateEdit_tr".}
 proc fcQDateEdit_userDateChanged(self: pointer, date: pointer): void {.importc: "QDateEdit_userDateChanged".}
-proc fcQDateEdit_connect_userDateChanged(self: pointer, slot: int) {.importc: "QDateEdit_connect_userDateChanged".}
+proc fcQDateEdit_connect_userDateChanged(self: pointer, slot: int, callback: proc (slot: int, date: pointer) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QDateEdit_connect_userDateChanged".}
 proc fcQDateEdit_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QDateEdit_tr2".}
 proc fcQDateEdit_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QDateEdit_tr3".}
 type cQDateEditVTable = object
@@ -713,49 +713,61 @@ proc dateTimeChanged*(self: gen_qdatetimeedit_types.QDateTimeEdit, dateTime: gen
   fcQDateTimeEdit_dateTimeChanged(self.h, dateTime.h)
 
 type QDateTimeEditdateTimeChangedSlot* = proc(dateTime: gen_qdatetime_types.QDateTime)
-proc miqt_exec_callback_cQDateTimeEdit_dateTimeChanged(slot: int, dateTime: pointer) {.exportc: "miqt_exec_callback_QDateTimeEdit_dateTimeChanged".} =
+proc miqt_exec_callback_cQDateTimeEdit_dateTimeChanged(slot: int, dateTime: pointer) {.cdecl.} =
   let nimfunc = cast[ptr QDateTimeEditdateTimeChangedSlot](cast[pointer](slot))
   let slotval1 = gen_qdatetime_types.QDateTime(h: dateTime)
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQDateTimeEdit_dateTimeChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QDateTimeEditdateTimeChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc ondateTimeChanged*(self: gen_qdatetimeedit_types.QDateTimeEdit, slot: QDateTimeEditdateTimeChangedSlot) =
   var tmp = new QDateTimeEditdateTimeChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQDateTimeEdit_connect_dateTimeChanged(self.h, cast[int](addr tmp[]))
+  fcQDateTimeEdit_connect_dateTimeChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQDateTimeEdit_dateTimeChanged, miqt_exec_callback_cQDateTimeEdit_dateTimeChanged_release)
 
 proc timeChanged*(self: gen_qdatetimeedit_types.QDateTimeEdit, time: gen_qdatetime_types.QTime): void =
   fcQDateTimeEdit_timeChanged(self.h, time.h)
 
 type QDateTimeEdittimeChangedSlot* = proc(time: gen_qdatetime_types.QTime)
-proc miqt_exec_callback_cQDateTimeEdit_timeChanged(slot: int, time: pointer) {.exportc: "miqt_exec_callback_QDateTimeEdit_timeChanged".} =
+proc miqt_exec_callback_cQDateTimeEdit_timeChanged(slot: int, time: pointer) {.cdecl.} =
   let nimfunc = cast[ptr QDateTimeEdittimeChangedSlot](cast[pointer](slot))
   let slotval1 = gen_qdatetime_types.QTime(h: time)
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQDateTimeEdit_timeChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QDateTimeEdittimeChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc ontimeChanged*(self: gen_qdatetimeedit_types.QDateTimeEdit, slot: QDateTimeEdittimeChangedSlot) =
   var tmp = new QDateTimeEdittimeChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQDateTimeEdit_connect_timeChanged(self.h, cast[int](addr tmp[]))
+  fcQDateTimeEdit_connect_timeChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQDateTimeEdit_timeChanged, miqt_exec_callback_cQDateTimeEdit_timeChanged_release)
 
 proc dateChanged*(self: gen_qdatetimeedit_types.QDateTimeEdit, date: gen_qdatetime_types.QDate): void =
   fcQDateTimeEdit_dateChanged(self.h, date.h)
 
 type QDateTimeEditdateChangedSlot* = proc(date: gen_qdatetime_types.QDate)
-proc miqt_exec_callback_cQDateTimeEdit_dateChanged(slot: int, date: pointer) {.exportc: "miqt_exec_callback_QDateTimeEdit_dateChanged".} =
+proc miqt_exec_callback_cQDateTimeEdit_dateChanged(slot: int, date: pointer) {.cdecl.} =
   let nimfunc = cast[ptr QDateTimeEditdateChangedSlot](cast[pointer](slot))
   let slotval1 = gen_qdatetime_types.QDate(h: date)
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQDateTimeEdit_dateChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QDateTimeEditdateChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc ondateChanged*(self: gen_qdatetimeedit_types.QDateTimeEdit, slot: QDateTimeEditdateChangedSlot) =
   var tmp = new QDateTimeEditdateChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQDateTimeEdit_connect_dateChanged(self.h, cast[int](addr tmp[]))
+  fcQDateTimeEdit_connect_dateChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQDateTimeEdit_dateChanged, miqt_exec_callback_cQDateTimeEdit_dateChanged_release)
 
 proc setDateTime*(self: gen_qdatetimeedit_types.QDateTimeEdit, dateTime: gen_qdatetime_types.QDateTime): void =
   fcQDateTimeEdit_setDateTime(self.h, dateTime.h)
@@ -2481,17 +2493,21 @@ proc userTimeChanged*(self: gen_qdatetimeedit_types.QTimeEdit, time: gen_qdateti
   fcQTimeEdit_userTimeChanged(self.h, time.h)
 
 type QTimeEdituserTimeChangedSlot* = proc(time: gen_qdatetime_types.QTime)
-proc miqt_exec_callback_cQTimeEdit_userTimeChanged(slot: int, time: pointer) {.exportc: "miqt_exec_callback_QTimeEdit_userTimeChanged".} =
+proc miqt_exec_callback_cQTimeEdit_userTimeChanged(slot: int, time: pointer) {.cdecl.} =
   let nimfunc = cast[ptr QTimeEdituserTimeChangedSlot](cast[pointer](slot))
   let slotval1 = gen_qdatetime_types.QTime(h: time)
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQTimeEdit_userTimeChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QTimeEdituserTimeChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onuserTimeChanged*(self: gen_qdatetimeedit_types.QTimeEdit, slot: QTimeEdituserTimeChangedSlot) =
   var tmp = new QTimeEdituserTimeChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQTimeEdit_connect_userTimeChanged(self.h, cast[int](addr tmp[]))
+  fcQTimeEdit_connect_userTimeChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQTimeEdit_userTimeChanged, miqt_exec_callback_cQTimeEdit_userTimeChanged_release)
 
 proc tr*(_: type gen_qdatetimeedit_types.QTimeEdit, s: cstring, c: cstring): string =
   let v_ms = fcQTimeEdit_tr2(s, c)
@@ -3704,17 +3720,21 @@ proc userDateChanged*(self: gen_qdatetimeedit_types.QDateEdit, date: gen_qdateti
   fcQDateEdit_userDateChanged(self.h, date.h)
 
 type QDateEdituserDateChangedSlot* = proc(date: gen_qdatetime_types.QDate)
-proc miqt_exec_callback_cQDateEdit_userDateChanged(slot: int, date: pointer) {.exportc: "miqt_exec_callback_QDateEdit_userDateChanged".} =
+proc miqt_exec_callback_cQDateEdit_userDateChanged(slot: int, date: pointer) {.cdecl.} =
   let nimfunc = cast[ptr QDateEdituserDateChangedSlot](cast[pointer](slot))
   let slotval1 = gen_qdatetime_types.QDate(h: date)
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQDateEdit_userDateChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QDateEdituserDateChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onuserDateChanged*(self: gen_qdatetimeedit_types.QDateEdit, slot: QDateEdituserDateChangedSlot) =
   var tmp = new QDateEdituserDateChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQDateEdit_connect_userDateChanged(self.h, cast[int](addr tmp[]))
+  fcQDateEdit_connect_userDateChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQDateEdit_userDateChanged, miqt_exec_callback_cQDateEdit_userDateChanged_release)
 
 proc tr*(_: type gen_qdatetimeedit_types.QDateEdit, s: cstring, c: cstring): string =
   let v_ms = fcQDateEdit_tr2(s, c)

@@ -126,21 +126,21 @@ proc fcQSortFilterProxyModel_sort(self: pointer, column: cint, order: cint): voi
 proc fcQSortFilterProxyModel_mimeTypes(self: pointer, ): struct_miqt_array {.importc: "QSortFilterProxyModel_mimeTypes".}
 proc fcQSortFilterProxyModel_supportedDropActions(self: pointer, ): cint {.importc: "QSortFilterProxyModel_supportedDropActions".}
 proc fcQSortFilterProxyModel_dynamicSortFilterChanged(self: pointer, dynamicSortFilter: bool): void {.importc: "QSortFilterProxyModel_dynamicSortFilterChanged".}
-proc fcQSortFilterProxyModel_connect_dynamicSortFilterChanged(self: pointer, slot: int) {.importc: "QSortFilterProxyModel_connect_dynamicSortFilterChanged".}
+proc fcQSortFilterProxyModel_connect_dynamicSortFilterChanged(self: pointer, slot: int, callback: proc (slot: int, dynamicSortFilter: bool) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QSortFilterProxyModel_connect_dynamicSortFilterChanged".}
 proc fcQSortFilterProxyModel_filterCaseSensitivityChanged(self: pointer, filterCaseSensitivity: cint): void {.importc: "QSortFilterProxyModel_filterCaseSensitivityChanged".}
-proc fcQSortFilterProxyModel_connect_filterCaseSensitivityChanged(self: pointer, slot: int) {.importc: "QSortFilterProxyModel_connect_filterCaseSensitivityChanged".}
+proc fcQSortFilterProxyModel_connect_filterCaseSensitivityChanged(self: pointer, slot: int, callback: proc (slot: int, filterCaseSensitivity: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QSortFilterProxyModel_connect_filterCaseSensitivityChanged".}
 proc fcQSortFilterProxyModel_sortCaseSensitivityChanged(self: pointer, sortCaseSensitivity: cint): void {.importc: "QSortFilterProxyModel_sortCaseSensitivityChanged".}
-proc fcQSortFilterProxyModel_connect_sortCaseSensitivityChanged(self: pointer, slot: int) {.importc: "QSortFilterProxyModel_connect_sortCaseSensitivityChanged".}
+proc fcQSortFilterProxyModel_connect_sortCaseSensitivityChanged(self: pointer, slot: int, callback: proc (slot: int, sortCaseSensitivity: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QSortFilterProxyModel_connect_sortCaseSensitivityChanged".}
 proc fcQSortFilterProxyModel_sortLocaleAwareChanged(self: pointer, sortLocaleAware: bool): void {.importc: "QSortFilterProxyModel_sortLocaleAwareChanged".}
-proc fcQSortFilterProxyModel_connect_sortLocaleAwareChanged(self: pointer, slot: int) {.importc: "QSortFilterProxyModel_connect_sortLocaleAwareChanged".}
+proc fcQSortFilterProxyModel_connect_sortLocaleAwareChanged(self: pointer, slot: int, callback: proc (slot: int, sortLocaleAware: bool) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QSortFilterProxyModel_connect_sortLocaleAwareChanged".}
 proc fcQSortFilterProxyModel_sortRoleChanged(self: pointer, sortRole: cint): void {.importc: "QSortFilterProxyModel_sortRoleChanged".}
-proc fcQSortFilterProxyModel_connect_sortRoleChanged(self: pointer, slot: int) {.importc: "QSortFilterProxyModel_connect_sortRoleChanged".}
+proc fcQSortFilterProxyModel_connect_sortRoleChanged(self: pointer, slot: int, callback: proc (slot: int, sortRole: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QSortFilterProxyModel_connect_sortRoleChanged".}
 proc fcQSortFilterProxyModel_filterRoleChanged(self: pointer, filterRole: cint): void {.importc: "QSortFilterProxyModel_filterRoleChanged".}
-proc fcQSortFilterProxyModel_connect_filterRoleChanged(self: pointer, slot: int) {.importc: "QSortFilterProxyModel_connect_filterRoleChanged".}
+proc fcQSortFilterProxyModel_connect_filterRoleChanged(self: pointer, slot: int, callback: proc (slot: int, filterRole: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QSortFilterProxyModel_connect_filterRoleChanged".}
 proc fcQSortFilterProxyModel_recursiveFilteringEnabledChanged(self: pointer, recursiveFilteringEnabled: bool): void {.importc: "QSortFilterProxyModel_recursiveFilteringEnabledChanged".}
-proc fcQSortFilterProxyModel_connect_recursiveFilteringEnabledChanged(self: pointer, slot: int) {.importc: "QSortFilterProxyModel_connect_recursiveFilteringEnabledChanged".}
+proc fcQSortFilterProxyModel_connect_recursiveFilteringEnabledChanged(self: pointer, slot: int, callback: proc (slot: int, recursiveFilteringEnabled: bool) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QSortFilterProxyModel_connect_recursiveFilteringEnabledChanged".}
 proc fcQSortFilterProxyModel_autoAcceptChildRowsChanged(self: pointer, autoAcceptChildRows: bool): void {.importc: "QSortFilterProxyModel_autoAcceptChildRowsChanged".}
-proc fcQSortFilterProxyModel_connect_autoAcceptChildRowsChanged(self: pointer, slot: int) {.importc: "QSortFilterProxyModel_connect_autoAcceptChildRowsChanged".}
+proc fcQSortFilterProxyModel_connect_autoAcceptChildRowsChanged(self: pointer, slot: int, callback: proc (slot: int, autoAcceptChildRows: bool) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QSortFilterProxyModel_connect_autoAcceptChildRowsChanged".}
 proc fcQSortFilterProxyModel_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QSortFilterProxyModel_tr2".}
 proc fcQSortFilterProxyModel_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QSortFilterProxyModel_tr3".}
 type cQSortFilterProxyModelVTable = object
@@ -464,129 +464,161 @@ proc dynamicSortFilterChanged*(self: gen_qsortfilterproxymodel_types.QSortFilter
   fcQSortFilterProxyModel_dynamicSortFilterChanged(self.h, dynamicSortFilter)
 
 type QSortFilterProxyModeldynamicSortFilterChangedSlot* = proc(dynamicSortFilter: bool)
-proc miqt_exec_callback_cQSortFilterProxyModel_dynamicSortFilterChanged(slot: int, dynamicSortFilter: bool) {.exportc: "miqt_exec_callback_QSortFilterProxyModel_dynamicSortFilterChanged".} =
+proc miqt_exec_callback_cQSortFilterProxyModel_dynamicSortFilterChanged(slot: int, dynamicSortFilter: bool) {.cdecl.} =
   let nimfunc = cast[ptr QSortFilterProxyModeldynamicSortFilterChangedSlot](cast[pointer](slot))
   let slotval1 = dynamicSortFilter
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQSortFilterProxyModel_dynamicSortFilterChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QSortFilterProxyModeldynamicSortFilterChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc ondynamicSortFilterChanged*(self: gen_qsortfilterproxymodel_types.QSortFilterProxyModel, slot: QSortFilterProxyModeldynamicSortFilterChangedSlot) =
   var tmp = new QSortFilterProxyModeldynamicSortFilterChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQSortFilterProxyModel_connect_dynamicSortFilterChanged(self.h, cast[int](addr tmp[]))
+  fcQSortFilterProxyModel_connect_dynamicSortFilterChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQSortFilterProxyModel_dynamicSortFilterChanged, miqt_exec_callback_cQSortFilterProxyModel_dynamicSortFilterChanged_release)
 
 proc filterCaseSensitivityChanged*(self: gen_qsortfilterproxymodel_types.QSortFilterProxyModel, filterCaseSensitivity: cint): void =
   fcQSortFilterProxyModel_filterCaseSensitivityChanged(self.h, cint(filterCaseSensitivity))
 
 type QSortFilterProxyModelfilterCaseSensitivityChangedSlot* = proc(filterCaseSensitivity: cint)
-proc miqt_exec_callback_cQSortFilterProxyModel_filterCaseSensitivityChanged(slot: int, filterCaseSensitivity: cint) {.exportc: "miqt_exec_callback_QSortFilterProxyModel_filterCaseSensitivityChanged".} =
+proc miqt_exec_callback_cQSortFilterProxyModel_filterCaseSensitivityChanged(slot: int, filterCaseSensitivity: cint) {.cdecl.} =
   let nimfunc = cast[ptr QSortFilterProxyModelfilterCaseSensitivityChangedSlot](cast[pointer](slot))
   let slotval1 = cint(filterCaseSensitivity)
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQSortFilterProxyModel_filterCaseSensitivityChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QSortFilterProxyModelfilterCaseSensitivityChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onfilterCaseSensitivityChanged*(self: gen_qsortfilterproxymodel_types.QSortFilterProxyModel, slot: QSortFilterProxyModelfilterCaseSensitivityChangedSlot) =
   var tmp = new QSortFilterProxyModelfilterCaseSensitivityChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQSortFilterProxyModel_connect_filterCaseSensitivityChanged(self.h, cast[int](addr tmp[]))
+  fcQSortFilterProxyModel_connect_filterCaseSensitivityChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQSortFilterProxyModel_filterCaseSensitivityChanged, miqt_exec_callback_cQSortFilterProxyModel_filterCaseSensitivityChanged_release)
 
 proc sortCaseSensitivityChanged*(self: gen_qsortfilterproxymodel_types.QSortFilterProxyModel, sortCaseSensitivity: cint): void =
   fcQSortFilterProxyModel_sortCaseSensitivityChanged(self.h, cint(sortCaseSensitivity))
 
 type QSortFilterProxyModelsortCaseSensitivityChangedSlot* = proc(sortCaseSensitivity: cint)
-proc miqt_exec_callback_cQSortFilterProxyModel_sortCaseSensitivityChanged(slot: int, sortCaseSensitivity: cint) {.exportc: "miqt_exec_callback_QSortFilterProxyModel_sortCaseSensitivityChanged".} =
+proc miqt_exec_callback_cQSortFilterProxyModel_sortCaseSensitivityChanged(slot: int, sortCaseSensitivity: cint) {.cdecl.} =
   let nimfunc = cast[ptr QSortFilterProxyModelsortCaseSensitivityChangedSlot](cast[pointer](slot))
   let slotval1 = cint(sortCaseSensitivity)
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQSortFilterProxyModel_sortCaseSensitivityChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QSortFilterProxyModelsortCaseSensitivityChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onsortCaseSensitivityChanged*(self: gen_qsortfilterproxymodel_types.QSortFilterProxyModel, slot: QSortFilterProxyModelsortCaseSensitivityChangedSlot) =
   var tmp = new QSortFilterProxyModelsortCaseSensitivityChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQSortFilterProxyModel_connect_sortCaseSensitivityChanged(self.h, cast[int](addr tmp[]))
+  fcQSortFilterProxyModel_connect_sortCaseSensitivityChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQSortFilterProxyModel_sortCaseSensitivityChanged, miqt_exec_callback_cQSortFilterProxyModel_sortCaseSensitivityChanged_release)
 
 proc sortLocaleAwareChanged*(self: gen_qsortfilterproxymodel_types.QSortFilterProxyModel, sortLocaleAware: bool): void =
   fcQSortFilterProxyModel_sortLocaleAwareChanged(self.h, sortLocaleAware)
 
 type QSortFilterProxyModelsortLocaleAwareChangedSlot* = proc(sortLocaleAware: bool)
-proc miqt_exec_callback_cQSortFilterProxyModel_sortLocaleAwareChanged(slot: int, sortLocaleAware: bool) {.exportc: "miqt_exec_callback_QSortFilterProxyModel_sortLocaleAwareChanged".} =
+proc miqt_exec_callback_cQSortFilterProxyModel_sortLocaleAwareChanged(slot: int, sortLocaleAware: bool) {.cdecl.} =
   let nimfunc = cast[ptr QSortFilterProxyModelsortLocaleAwareChangedSlot](cast[pointer](slot))
   let slotval1 = sortLocaleAware
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQSortFilterProxyModel_sortLocaleAwareChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QSortFilterProxyModelsortLocaleAwareChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onsortLocaleAwareChanged*(self: gen_qsortfilterproxymodel_types.QSortFilterProxyModel, slot: QSortFilterProxyModelsortLocaleAwareChangedSlot) =
   var tmp = new QSortFilterProxyModelsortLocaleAwareChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQSortFilterProxyModel_connect_sortLocaleAwareChanged(self.h, cast[int](addr tmp[]))
+  fcQSortFilterProxyModel_connect_sortLocaleAwareChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQSortFilterProxyModel_sortLocaleAwareChanged, miqt_exec_callback_cQSortFilterProxyModel_sortLocaleAwareChanged_release)
 
 proc sortRoleChanged*(self: gen_qsortfilterproxymodel_types.QSortFilterProxyModel, sortRole: cint): void =
   fcQSortFilterProxyModel_sortRoleChanged(self.h, sortRole)
 
 type QSortFilterProxyModelsortRoleChangedSlot* = proc(sortRole: cint)
-proc miqt_exec_callback_cQSortFilterProxyModel_sortRoleChanged(slot: int, sortRole: cint) {.exportc: "miqt_exec_callback_QSortFilterProxyModel_sortRoleChanged".} =
+proc miqt_exec_callback_cQSortFilterProxyModel_sortRoleChanged(slot: int, sortRole: cint) {.cdecl.} =
   let nimfunc = cast[ptr QSortFilterProxyModelsortRoleChangedSlot](cast[pointer](slot))
   let slotval1 = sortRole
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQSortFilterProxyModel_sortRoleChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QSortFilterProxyModelsortRoleChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onsortRoleChanged*(self: gen_qsortfilterproxymodel_types.QSortFilterProxyModel, slot: QSortFilterProxyModelsortRoleChangedSlot) =
   var tmp = new QSortFilterProxyModelsortRoleChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQSortFilterProxyModel_connect_sortRoleChanged(self.h, cast[int](addr tmp[]))
+  fcQSortFilterProxyModel_connect_sortRoleChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQSortFilterProxyModel_sortRoleChanged, miqt_exec_callback_cQSortFilterProxyModel_sortRoleChanged_release)
 
 proc filterRoleChanged*(self: gen_qsortfilterproxymodel_types.QSortFilterProxyModel, filterRole: cint): void =
   fcQSortFilterProxyModel_filterRoleChanged(self.h, filterRole)
 
 type QSortFilterProxyModelfilterRoleChangedSlot* = proc(filterRole: cint)
-proc miqt_exec_callback_cQSortFilterProxyModel_filterRoleChanged(slot: int, filterRole: cint) {.exportc: "miqt_exec_callback_QSortFilterProxyModel_filterRoleChanged".} =
+proc miqt_exec_callback_cQSortFilterProxyModel_filterRoleChanged(slot: int, filterRole: cint) {.cdecl.} =
   let nimfunc = cast[ptr QSortFilterProxyModelfilterRoleChangedSlot](cast[pointer](slot))
   let slotval1 = filterRole
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQSortFilterProxyModel_filterRoleChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QSortFilterProxyModelfilterRoleChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onfilterRoleChanged*(self: gen_qsortfilterproxymodel_types.QSortFilterProxyModel, slot: QSortFilterProxyModelfilterRoleChangedSlot) =
   var tmp = new QSortFilterProxyModelfilterRoleChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQSortFilterProxyModel_connect_filterRoleChanged(self.h, cast[int](addr tmp[]))
+  fcQSortFilterProxyModel_connect_filterRoleChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQSortFilterProxyModel_filterRoleChanged, miqt_exec_callback_cQSortFilterProxyModel_filterRoleChanged_release)
 
 proc recursiveFilteringEnabledChanged*(self: gen_qsortfilterproxymodel_types.QSortFilterProxyModel, recursiveFilteringEnabled: bool): void =
   fcQSortFilterProxyModel_recursiveFilteringEnabledChanged(self.h, recursiveFilteringEnabled)
 
 type QSortFilterProxyModelrecursiveFilteringEnabledChangedSlot* = proc(recursiveFilteringEnabled: bool)
-proc miqt_exec_callback_cQSortFilterProxyModel_recursiveFilteringEnabledChanged(slot: int, recursiveFilteringEnabled: bool) {.exportc: "miqt_exec_callback_QSortFilterProxyModel_recursiveFilteringEnabledChanged".} =
+proc miqt_exec_callback_cQSortFilterProxyModel_recursiveFilteringEnabledChanged(slot: int, recursiveFilteringEnabled: bool) {.cdecl.} =
   let nimfunc = cast[ptr QSortFilterProxyModelrecursiveFilteringEnabledChangedSlot](cast[pointer](slot))
   let slotval1 = recursiveFilteringEnabled
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQSortFilterProxyModel_recursiveFilteringEnabledChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QSortFilterProxyModelrecursiveFilteringEnabledChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onrecursiveFilteringEnabledChanged*(self: gen_qsortfilterproxymodel_types.QSortFilterProxyModel, slot: QSortFilterProxyModelrecursiveFilteringEnabledChangedSlot) =
   var tmp = new QSortFilterProxyModelrecursiveFilteringEnabledChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQSortFilterProxyModel_connect_recursiveFilteringEnabledChanged(self.h, cast[int](addr tmp[]))
+  fcQSortFilterProxyModel_connect_recursiveFilteringEnabledChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQSortFilterProxyModel_recursiveFilteringEnabledChanged, miqt_exec_callback_cQSortFilterProxyModel_recursiveFilteringEnabledChanged_release)
 
 proc autoAcceptChildRowsChanged*(self: gen_qsortfilterproxymodel_types.QSortFilterProxyModel, autoAcceptChildRows: bool): void =
   fcQSortFilterProxyModel_autoAcceptChildRowsChanged(self.h, autoAcceptChildRows)
 
 type QSortFilterProxyModelautoAcceptChildRowsChangedSlot* = proc(autoAcceptChildRows: bool)
-proc miqt_exec_callback_cQSortFilterProxyModel_autoAcceptChildRowsChanged(slot: int, autoAcceptChildRows: bool) {.exportc: "miqt_exec_callback_QSortFilterProxyModel_autoAcceptChildRowsChanged".} =
+proc miqt_exec_callback_cQSortFilterProxyModel_autoAcceptChildRowsChanged(slot: int, autoAcceptChildRows: bool) {.cdecl.} =
   let nimfunc = cast[ptr QSortFilterProxyModelautoAcceptChildRowsChangedSlot](cast[pointer](slot))
   let slotval1 = autoAcceptChildRows
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQSortFilterProxyModel_autoAcceptChildRowsChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QSortFilterProxyModelautoAcceptChildRowsChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onautoAcceptChildRowsChanged*(self: gen_qsortfilterproxymodel_types.QSortFilterProxyModel, slot: QSortFilterProxyModelautoAcceptChildRowsChangedSlot) =
   var tmp = new QSortFilterProxyModelautoAcceptChildRowsChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQSortFilterProxyModel_connect_autoAcceptChildRowsChanged(self.h, cast[int](addr tmp[]))
+  fcQSortFilterProxyModel_connect_autoAcceptChildRowsChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQSortFilterProxyModel_autoAcceptChildRowsChanged, miqt_exec_callback_cQSortFilterProxyModel_autoAcceptChildRowsChanged_release)
 
 proc tr*(_: type gen_qsortfilterproxymodel_types.QSortFilterProxyModel, s: cstring, c: cstring): string =
   let v_ms = fcQSortFilterProxyModel_tr2(s, c)

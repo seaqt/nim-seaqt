@@ -20,22 +20,6 @@
 extern "C" {
 #endif
 
-void miqt_exec_callback_QMediaRecorder_recorderStateChanged(intptr_t, int);
-void miqt_exec_callback_QMediaRecorder_durationChanged(intptr_t, long long);
-void miqt_exec_callback_QMediaRecorder_actualLocationChanged(intptr_t, QUrl*);
-void miqt_exec_callback_QMediaRecorder_encoderSettingsChanged(intptr_t);
-void miqt_exec_callback_QMediaRecorder_errorOccurred(intptr_t, int, struct miqt_string);
-void miqt_exec_callback_QMediaRecorder_errorChanged(intptr_t);
-void miqt_exec_callback_QMediaRecorder_metaDataChanged(intptr_t);
-void miqt_exec_callback_QMediaRecorder_mediaFormatChanged(intptr_t);
-void miqt_exec_callback_QMediaRecorder_encodingModeChanged(intptr_t);
-void miqt_exec_callback_QMediaRecorder_qualityChanged(intptr_t);
-void miqt_exec_callback_QMediaRecorder_videoResolutionChanged(intptr_t);
-void miqt_exec_callback_QMediaRecorder_videoFrameRateChanged(intptr_t);
-void miqt_exec_callback_QMediaRecorder_videoBitRateChanged(intptr_t);
-void miqt_exec_callback_QMediaRecorder_audioBitRateChanged(intptr_t);
-void miqt_exec_callback_QMediaRecorder_audioChannelCountChanged(intptr_t);
-void miqt_exec_callback_QMediaRecorder_audioSampleRateChanged(intptr_t);
 #ifdef __cplusplus
 } /* extern C */
 #endif
@@ -401,47 +385,67 @@ void QMediaRecorder_recorderStateChanged(QMediaRecorder* self, int state) {
 	self->recorderStateChanged(static_cast<QMediaRecorder::RecorderState>(state));
 }
 
-void QMediaRecorder_connect_recorderStateChanged(QMediaRecorder* self, intptr_t slot) {
-	VirtualQMediaRecorder::connect(self, static_cast<void (QMediaRecorder::*)(QMediaRecorder::RecorderState)>(&QMediaRecorder::recorderStateChanged), self, [=](QMediaRecorder::RecorderState state) {
-		QMediaRecorder::RecorderState state_ret = state;
-		int sigval1 = static_cast<int>(state_ret);
-		miqt_exec_callback_QMediaRecorder_recorderStateChanged(slot, sigval1);
-	});
+void QMediaRecorder_connect_recorderStateChanged(QMediaRecorder* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t, int);
+		void operator()(QMediaRecorder::RecorderState state) {
+			QMediaRecorder::RecorderState state_ret = state;
+			int sigval1 = static_cast<int>(state_ret);
+			callback(slot, sigval1);
+		}
+	};
+	VirtualQMediaRecorder::connect(self, static_cast<void (QMediaRecorder::*)(QMediaRecorder::RecorderState)>(&QMediaRecorder::recorderStateChanged), self, local_caller{slot, callback, release});
 }
 
 void QMediaRecorder_durationChanged(QMediaRecorder* self, long long duration) {
 	self->durationChanged(static_cast<qint64>(duration));
 }
 
-void QMediaRecorder_connect_durationChanged(QMediaRecorder* self, intptr_t slot) {
-	VirtualQMediaRecorder::connect(self, static_cast<void (QMediaRecorder::*)(qint64)>(&QMediaRecorder::durationChanged), self, [=](qint64 duration) {
-		qint64 duration_ret = duration;
-		long long sigval1 = static_cast<long long>(duration_ret);
-		miqt_exec_callback_QMediaRecorder_durationChanged(slot, sigval1);
-	});
+void QMediaRecorder_connect_durationChanged(QMediaRecorder* self, intptr_t slot, void (*callback)(intptr_t, long long), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, long long), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t, long long);
+		void operator()(qint64 duration) {
+			qint64 duration_ret = duration;
+			long long sigval1 = static_cast<long long>(duration_ret);
+			callback(slot, sigval1);
+		}
+	};
+	VirtualQMediaRecorder::connect(self, static_cast<void (QMediaRecorder::*)(qint64)>(&QMediaRecorder::durationChanged), self, local_caller{slot, callback, release});
 }
 
 void QMediaRecorder_actualLocationChanged(QMediaRecorder* self, QUrl* location) {
 	self->actualLocationChanged(*location);
 }
 
-void QMediaRecorder_connect_actualLocationChanged(QMediaRecorder* self, intptr_t slot) {
-	VirtualQMediaRecorder::connect(self, static_cast<void (QMediaRecorder::*)(const QUrl&)>(&QMediaRecorder::actualLocationChanged), self, [=](const QUrl& location) {
-		const QUrl& location_ret = location;
-		// Cast returned reference into pointer
-		QUrl* sigval1 = const_cast<QUrl*>(&location_ret);
-		miqt_exec_callback_QMediaRecorder_actualLocationChanged(slot, sigval1);
-	});
+void QMediaRecorder_connect_actualLocationChanged(QMediaRecorder* self, intptr_t slot, void (*callback)(intptr_t, QUrl*), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QUrl*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t, QUrl*);
+		void operator()(const QUrl& location) {
+			const QUrl& location_ret = location;
+			// Cast returned reference into pointer
+			QUrl* sigval1 = const_cast<QUrl*>(&location_ret);
+			callback(slot, sigval1);
+		}
+	};
+	VirtualQMediaRecorder::connect(self, static_cast<void (QMediaRecorder::*)(const QUrl&)>(&QMediaRecorder::actualLocationChanged), self, local_caller{slot, callback, release});
 }
 
 void QMediaRecorder_encoderSettingsChanged(QMediaRecorder* self) {
 	self->encoderSettingsChanged();
 }
 
-void QMediaRecorder_connect_encoderSettingsChanged(QMediaRecorder* self, intptr_t slot) {
-	VirtualQMediaRecorder::connect(self, static_cast<void (QMediaRecorder::*)()>(&QMediaRecorder::encoderSettingsChanged), self, [=]() {
-		miqt_exec_callback_QMediaRecorder_encoderSettingsChanged(slot);
-	});
+void QMediaRecorder_connect_encoderSettingsChanged(QMediaRecorder* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t);
+		void operator()() {
+			callback(slot);
+		}
+	};
+	VirtualQMediaRecorder::connect(self, static_cast<void (QMediaRecorder::*)()>(&QMediaRecorder::encoderSettingsChanged), self, local_caller{slot, callback, release});
 }
 
 void QMediaRecorder_errorOccurred(QMediaRecorder* self, int error, struct miqt_string errorString) {
@@ -449,130 +453,190 @@ void QMediaRecorder_errorOccurred(QMediaRecorder* self, int error, struct miqt_s
 	self->errorOccurred(static_cast<QMediaRecorder::Error>(error), errorString_QString);
 }
 
-void QMediaRecorder_connect_errorOccurred(QMediaRecorder* self, intptr_t slot) {
-	VirtualQMediaRecorder::connect(self, static_cast<void (QMediaRecorder::*)(QMediaRecorder::Error, const QString&)>(&QMediaRecorder::errorOccurred), self, [=](QMediaRecorder::Error error, const QString& errorString) {
-		QMediaRecorder::Error error_ret = error;
-		int sigval1 = static_cast<int>(error_ret);
-		const QString errorString_ret = errorString;
-		// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
-		QByteArray errorString_b = errorString_ret.toUtf8();
-		struct miqt_string errorString_ms;
-		errorString_ms.len = errorString_b.length();
-		errorString_ms.data = static_cast<char*>(malloc(errorString_ms.len));
-		memcpy(errorString_ms.data, errorString_b.data(), errorString_ms.len);
-		struct miqt_string sigval2 = errorString_ms;
-		miqt_exec_callback_QMediaRecorder_errorOccurred(slot, sigval1, sigval2);
-	});
+void QMediaRecorder_connect_errorOccurred(QMediaRecorder* self, intptr_t slot, void (*callback)(intptr_t, int, struct miqt_string), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int, struct miqt_string), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t, int, struct miqt_string);
+		void operator()(QMediaRecorder::Error error, const QString& errorString) {
+			QMediaRecorder::Error error_ret = error;
+			int sigval1 = static_cast<int>(error_ret);
+			const QString errorString_ret = errorString;
+			// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
+			QByteArray errorString_b = errorString_ret.toUtf8();
+			struct miqt_string errorString_ms;
+			errorString_ms.len = errorString_b.length();
+			errorString_ms.data = static_cast<char*>(malloc(errorString_ms.len));
+			memcpy(errorString_ms.data, errorString_b.data(), errorString_ms.len);
+			struct miqt_string sigval2 = errorString_ms;
+			callback(slot, sigval1, sigval2);
+		}
+	};
+	VirtualQMediaRecorder::connect(self, static_cast<void (QMediaRecorder::*)(QMediaRecorder::Error, const QString&)>(&QMediaRecorder::errorOccurred), self, local_caller{slot, callback, release});
 }
 
 void QMediaRecorder_errorChanged(QMediaRecorder* self) {
 	self->errorChanged();
 }
 
-void QMediaRecorder_connect_errorChanged(QMediaRecorder* self, intptr_t slot) {
-	VirtualQMediaRecorder::connect(self, static_cast<void (QMediaRecorder::*)()>(&QMediaRecorder::errorChanged), self, [=]() {
-		miqt_exec_callback_QMediaRecorder_errorChanged(slot);
-	});
+void QMediaRecorder_connect_errorChanged(QMediaRecorder* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t);
+		void operator()() {
+			callback(slot);
+		}
+	};
+	VirtualQMediaRecorder::connect(self, static_cast<void (QMediaRecorder::*)()>(&QMediaRecorder::errorChanged), self, local_caller{slot, callback, release});
 }
 
 void QMediaRecorder_metaDataChanged(QMediaRecorder* self) {
 	self->metaDataChanged();
 }
 
-void QMediaRecorder_connect_metaDataChanged(QMediaRecorder* self, intptr_t slot) {
-	VirtualQMediaRecorder::connect(self, static_cast<void (QMediaRecorder::*)()>(&QMediaRecorder::metaDataChanged), self, [=]() {
-		miqt_exec_callback_QMediaRecorder_metaDataChanged(slot);
-	});
+void QMediaRecorder_connect_metaDataChanged(QMediaRecorder* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t);
+		void operator()() {
+			callback(slot);
+		}
+	};
+	VirtualQMediaRecorder::connect(self, static_cast<void (QMediaRecorder::*)()>(&QMediaRecorder::metaDataChanged), self, local_caller{slot, callback, release});
 }
 
 void QMediaRecorder_mediaFormatChanged(QMediaRecorder* self) {
 	self->mediaFormatChanged();
 }
 
-void QMediaRecorder_connect_mediaFormatChanged(QMediaRecorder* self, intptr_t slot) {
-	VirtualQMediaRecorder::connect(self, static_cast<void (QMediaRecorder::*)()>(&QMediaRecorder::mediaFormatChanged), self, [=]() {
-		miqt_exec_callback_QMediaRecorder_mediaFormatChanged(slot);
-	});
+void QMediaRecorder_connect_mediaFormatChanged(QMediaRecorder* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t);
+		void operator()() {
+			callback(slot);
+		}
+	};
+	VirtualQMediaRecorder::connect(self, static_cast<void (QMediaRecorder::*)()>(&QMediaRecorder::mediaFormatChanged), self, local_caller{slot, callback, release});
 }
 
 void QMediaRecorder_encodingModeChanged(QMediaRecorder* self) {
 	self->encodingModeChanged();
 }
 
-void QMediaRecorder_connect_encodingModeChanged(QMediaRecorder* self, intptr_t slot) {
-	VirtualQMediaRecorder::connect(self, static_cast<void (QMediaRecorder::*)()>(&QMediaRecorder::encodingModeChanged), self, [=]() {
-		miqt_exec_callback_QMediaRecorder_encodingModeChanged(slot);
-	});
+void QMediaRecorder_connect_encodingModeChanged(QMediaRecorder* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t);
+		void operator()() {
+			callback(slot);
+		}
+	};
+	VirtualQMediaRecorder::connect(self, static_cast<void (QMediaRecorder::*)()>(&QMediaRecorder::encodingModeChanged), self, local_caller{slot, callback, release});
 }
 
 void QMediaRecorder_qualityChanged(QMediaRecorder* self) {
 	self->qualityChanged();
 }
 
-void QMediaRecorder_connect_qualityChanged(QMediaRecorder* self, intptr_t slot) {
-	VirtualQMediaRecorder::connect(self, static_cast<void (QMediaRecorder::*)()>(&QMediaRecorder::qualityChanged), self, [=]() {
-		miqt_exec_callback_QMediaRecorder_qualityChanged(slot);
-	});
+void QMediaRecorder_connect_qualityChanged(QMediaRecorder* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t);
+		void operator()() {
+			callback(slot);
+		}
+	};
+	VirtualQMediaRecorder::connect(self, static_cast<void (QMediaRecorder::*)()>(&QMediaRecorder::qualityChanged), self, local_caller{slot, callback, release});
 }
 
 void QMediaRecorder_videoResolutionChanged(QMediaRecorder* self) {
 	self->videoResolutionChanged();
 }
 
-void QMediaRecorder_connect_videoResolutionChanged(QMediaRecorder* self, intptr_t slot) {
-	VirtualQMediaRecorder::connect(self, static_cast<void (QMediaRecorder::*)()>(&QMediaRecorder::videoResolutionChanged), self, [=]() {
-		miqt_exec_callback_QMediaRecorder_videoResolutionChanged(slot);
-	});
+void QMediaRecorder_connect_videoResolutionChanged(QMediaRecorder* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t);
+		void operator()() {
+			callback(slot);
+		}
+	};
+	VirtualQMediaRecorder::connect(self, static_cast<void (QMediaRecorder::*)()>(&QMediaRecorder::videoResolutionChanged), self, local_caller{slot, callback, release});
 }
 
 void QMediaRecorder_videoFrameRateChanged(QMediaRecorder* self) {
 	self->videoFrameRateChanged();
 }
 
-void QMediaRecorder_connect_videoFrameRateChanged(QMediaRecorder* self, intptr_t slot) {
-	VirtualQMediaRecorder::connect(self, static_cast<void (QMediaRecorder::*)()>(&QMediaRecorder::videoFrameRateChanged), self, [=]() {
-		miqt_exec_callback_QMediaRecorder_videoFrameRateChanged(slot);
-	});
+void QMediaRecorder_connect_videoFrameRateChanged(QMediaRecorder* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t);
+		void operator()() {
+			callback(slot);
+		}
+	};
+	VirtualQMediaRecorder::connect(self, static_cast<void (QMediaRecorder::*)()>(&QMediaRecorder::videoFrameRateChanged), self, local_caller{slot, callback, release});
 }
 
 void QMediaRecorder_videoBitRateChanged(QMediaRecorder* self) {
 	self->videoBitRateChanged();
 }
 
-void QMediaRecorder_connect_videoBitRateChanged(QMediaRecorder* self, intptr_t slot) {
-	VirtualQMediaRecorder::connect(self, static_cast<void (QMediaRecorder::*)()>(&QMediaRecorder::videoBitRateChanged), self, [=]() {
-		miqt_exec_callback_QMediaRecorder_videoBitRateChanged(slot);
-	});
+void QMediaRecorder_connect_videoBitRateChanged(QMediaRecorder* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t);
+		void operator()() {
+			callback(slot);
+		}
+	};
+	VirtualQMediaRecorder::connect(self, static_cast<void (QMediaRecorder::*)()>(&QMediaRecorder::videoBitRateChanged), self, local_caller{slot, callback, release});
 }
 
 void QMediaRecorder_audioBitRateChanged(QMediaRecorder* self) {
 	self->audioBitRateChanged();
 }
 
-void QMediaRecorder_connect_audioBitRateChanged(QMediaRecorder* self, intptr_t slot) {
-	VirtualQMediaRecorder::connect(self, static_cast<void (QMediaRecorder::*)()>(&QMediaRecorder::audioBitRateChanged), self, [=]() {
-		miqt_exec_callback_QMediaRecorder_audioBitRateChanged(slot);
-	});
+void QMediaRecorder_connect_audioBitRateChanged(QMediaRecorder* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t);
+		void operator()() {
+			callback(slot);
+		}
+	};
+	VirtualQMediaRecorder::connect(self, static_cast<void (QMediaRecorder::*)()>(&QMediaRecorder::audioBitRateChanged), self, local_caller{slot, callback, release});
 }
 
 void QMediaRecorder_audioChannelCountChanged(QMediaRecorder* self) {
 	self->audioChannelCountChanged();
 }
 
-void QMediaRecorder_connect_audioChannelCountChanged(QMediaRecorder* self, intptr_t slot) {
-	VirtualQMediaRecorder::connect(self, static_cast<void (QMediaRecorder::*)()>(&QMediaRecorder::audioChannelCountChanged), self, [=]() {
-		miqt_exec_callback_QMediaRecorder_audioChannelCountChanged(slot);
-	});
+void QMediaRecorder_connect_audioChannelCountChanged(QMediaRecorder* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t);
+		void operator()() {
+			callback(slot);
+		}
+	};
+	VirtualQMediaRecorder::connect(self, static_cast<void (QMediaRecorder::*)()>(&QMediaRecorder::audioChannelCountChanged), self, local_caller{slot, callback, release});
 }
 
 void QMediaRecorder_audioSampleRateChanged(QMediaRecorder* self) {
 	self->audioSampleRateChanged();
 }
 
-void QMediaRecorder_connect_audioSampleRateChanged(QMediaRecorder* self, intptr_t slot) {
-	VirtualQMediaRecorder::connect(self, static_cast<void (QMediaRecorder::*)()>(&QMediaRecorder::audioSampleRateChanged), self, [=]() {
-		miqt_exec_callback_QMediaRecorder_audioSampleRateChanged(slot);
-	});
+void QMediaRecorder_connect_audioSampleRateChanged(QMediaRecorder* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t);
+		void operator()() {
+			callback(slot);
+		}
+	};
+	VirtualQMediaRecorder::connect(self, static_cast<void (QMediaRecorder::*)()>(&QMediaRecorder::audioSampleRateChanged), self, local_caller{slot, callback, release});
 }
 
 struct miqt_string QMediaRecorder_tr2(const char* s, const char* c) {

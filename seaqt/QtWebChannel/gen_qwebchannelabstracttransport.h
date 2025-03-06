@@ -57,7 +57,7 @@ int QWebChannelAbstractTransport_metacall(QWebChannelAbstractTransport* self, in
 struct miqt_string QWebChannelAbstractTransport_tr(const char* s);
 void QWebChannelAbstractTransport_sendMessage(QWebChannelAbstractTransport* self, QJsonObject* message);
 void QWebChannelAbstractTransport_messageReceived(QWebChannelAbstractTransport* self, QJsonObject* message, QWebChannelAbstractTransport* transport);
-void QWebChannelAbstractTransport_connect_messageReceived(QWebChannelAbstractTransport* self, intptr_t slot);
+void QWebChannelAbstractTransport_connect_messageReceived(QWebChannelAbstractTransport* self, intptr_t slot, void (*callback)(intptr_t, QJsonObject*, QWebChannelAbstractTransport*), void (*release)(intptr_t));
 struct miqt_string QWebChannelAbstractTransport_tr2(const char* s, const char* c);
 struct miqt_string QWebChannelAbstractTransport_tr3(const char* s, const char* c, int n);
 QMetaObject* QWebChannelAbstractTransport_virtualbase_metaObject(const void* self);

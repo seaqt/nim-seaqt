@@ -65,11 +65,11 @@ proc fcQMediaDevices_defaultAudioInput(): pointer {.importc: "QMediaDevices_defa
 proc fcQMediaDevices_defaultAudioOutput(): pointer {.importc: "QMediaDevices_defaultAudioOutput".}
 proc fcQMediaDevices_defaultVideoInput(): pointer {.importc: "QMediaDevices_defaultVideoInput".}
 proc fcQMediaDevices_audioInputsChanged(self: pointer, ): void {.importc: "QMediaDevices_audioInputsChanged".}
-proc fcQMediaDevices_connect_audioInputsChanged(self: pointer, slot: int) {.importc: "QMediaDevices_connect_audioInputsChanged".}
+proc fcQMediaDevices_connect_audioInputsChanged(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QMediaDevices_connect_audioInputsChanged".}
 proc fcQMediaDevices_audioOutputsChanged(self: pointer, ): void {.importc: "QMediaDevices_audioOutputsChanged".}
-proc fcQMediaDevices_connect_audioOutputsChanged(self: pointer, slot: int) {.importc: "QMediaDevices_connect_audioOutputsChanged".}
+proc fcQMediaDevices_connect_audioOutputsChanged(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QMediaDevices_connect_audioOutputsChanged".}
 proc fcQMediaDevices_videoInputsChanged(self: pointer, ): void {.importc: "QMediaDevices_videoInputsChanged".}
-proc fcQMediaDevices_connect_videoInputsChanged(self: pointer, slot: int) {.importc: "QMediaDevices_connect_videoInputsChanged".}
+proc fcQMediaDevices_connect_videoInputsChanged(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QMediaDevices_connect_videoInputsChanged".}
 proc fcQMediaDevices_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QMediaDevices_tr2".}
 proc fcQMediaDevices_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QMediaDevices_tr3".}
 type cQMediaDevicesVTable = object
@@ -151,43 +151,55 @@ proc audioInputsChanged*(self: gen_qmediadevices_types.QMediaDevices, ): void =
   fcQMediaDevices_audioInputsChanged(self.h)
 
 type QMediaDevicesaudioInputsChangedSlot* = proc()
-proc miqt_exec_callback_cQMediaDevices_audioInputsChanged(slot: int) {.exportc: "miqt_exec_callback_QMediaDevices_audioInputsChanged".} =
+proc miqt_exec_callback_cQMediaDevices_audioInputsChanged(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QMediaDevicesaudioInputsChangedSlot](cast[pointer](slot))
   nimfunc[]()
+
+proc miqt_exec_callback_cQMediaDevices_audioInputsChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QMediaDevicesaudioInputsChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
 
 proc onaudioInputsChanged*(self: gen_qmediadevices_types.QMediaDevices, slot: QMediaDevicesaudioInputsChangedSlot) =
   var tmp = new QMediaDevicesaudioInputsChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQMediaDevices_connect_audioInputsChanged(self.h, cast[int](addr tmp[]))
+  fcQMediaDevices_connect_audioInputsChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQMediaDevices_audioInputsChanged, miqt_exec_callback_cQMediaDevices_audioInputsChanged_release)
 
 proc audioOutputsChanged*(self: gen_qmediadevices_types.QMediaDevices, ): void =
   fcQMediaDevices_audioOutputsChanged(self.h)
 
 type QMediaDevicesaudioOutputsChangedSlot* = proc()
-proc miqt_exec_callback_cQMediaDevices_audioOutputsChanged(slot: int) {.exportc: "miqt_exec_callback_QMediaDevices_audioOutputsChanged".} =
+proc miqt_exec_callback_cQMediaDevices_audioOutputsChanged(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QMediaDevicesaudioOutputsChangedSlot](cast[pointer](slot))
   nimfunc[]()
+
+proc miqt_exec_callback_cQMediaDevices_audioOutputsChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QMediaDevicesaudioOutputsChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
 
 proc onaudioOutputsChanged*(self: gen_qmediadevices_types.QMediaDevices, slot: QMediaDevicesaudioOutputsChangedSlot) =
   var tmp = new QMediaDevicesaudioOutputsChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQMediaDevices_connect_audioOutputsChanged(self.h, cast[int](addr tmp[]))
+  fcQMediaDevices_connect_audioOutputsChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQMediaDevices_audioOutputsChanged, miqt_exec_callback_cQMediaDevices_audioOutputsChanged_release)
 
 proc videoInputsChanged*(self: gen_qmediadevices_types.QMediaDevices, ): void =
   fcQMediaDevices_videoInputsChanged(self.h)
 
 type QMediaDevicesvideoInputsChangedSlot* = proc()
-proc miqt_exec_callback_cQMediaDevices_videoInputsChanged(slot: int) {.exportc: "miqt_exec_callback_QMediaDevices_videoInputsChanged".} =
+proc miqt_exec_callback_cQMediaDevices_videoInputsChanged(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QMediaDevicesvideoInputsChangedSlot](cast[pointer](slot))
   nimfunc[]()
+
+proc miqt_exec_callback_cQMediaDevices_videoInputsChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QMediaDevicesvideoInputsChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
 
 proc onvideoInputsChanged*(self: gen_qmediadevices_types.QMediaDevices, slot: QMediaDevicesvideoInputsChangedSlot) =
   var tmp = new QMediaDevicesvideoInputsChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQMediaDevices_connect_videoInputsChanged(self.h, cast[int](addr tmp[]))
+  fcQMediaDevices_connect_videoInputsChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQMediaDevices_videoInputsChanged, miqt_exec_callback_cQMediaDevices_videoInputsChanged_release)
 
 proc tr*(_: type gen_qmediadevices_types.QMediaDevices, s: cstring, c: cstring): string =
   let v_ms = fcQMediaDevices_tr2(s, c)

@@ -39,11 +39,6 @@
 extern "C" {
 #endif
 
-void miqt_exec_callback_QQuickPaintedItem_fillColorChanged(intptr_t);
-void miqt_exec_callback_QQuickPaintedItem_contentsSizeChanged(intptr_t);
-void miqt_exec_callback_QQuickPaintedItem_contentsScaleChanged(intptr_t);
-void miqt_exec_callback_QQuickPaintedItem_renderTargetChanged(intptr_t);
-void miqt_exec_callback_QQuickPaintedItem_textureSizeChanged(intptr_t);
 #ifdef __cplusplus
 } /* extern C */
 #endif
@@ -894,50 +889,75 @@ void QQuickPaintedItem_fillColorChanged(QQuickPaintedItem* self) {
 	self->fillColorChanged();
 }
 
-void QQuickPaintedItem_connect_fillColorChanged(QQuickPaintedItem* self, intptr_t slot) {
-	VirtualQQuickPaintedItem::connect(self, static_cast<void (QQuickPaintedItem::*)()>(&QQuickPaintedItem::fillColorChanged), self, [=]() {
-		miqt_exec_callback_QQuickPaintedItem_fillColorChanged(slot);
-	});
+void QQuickPaintedItem_connect_fillColorChanged(QQuickPaintedItem* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t);
+		void operator()() {
+			callback(slot);
+		}
+	};
+	VirtualQQuickPaintedItem::connect(self, static_cast<void (QQuickPaintedItem::*)()>(&QQuickPaintedItem::fillColorChanged), self, local_caller{slot, callback, release});
 }
 
 void QQuickPaintedItem_contentsSizeChanged(QQuickPaintedItem* self) {
 	self->contentsSizeChanged();
 }
 
-void QQuickPaintedItem_connect_contentsSizeChanged(QQuickPaintedItem* self, intptr_t slot) {
-	VirtualQQuickPaintedItem::connect(self, static_cast<void (QQuickPaintedItem::*)()>(&QQuickPaintedItem::contentsSizeChanged), self, [=]() {
-		miqt_exec_callback_QQuickPaintedItem_contentsSizeChanged(slot);
-	});
+void QQuickPaintedItem_connect_contentsSizeChanged(QQuickPaintedItem* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t);
+		void operator()() {
+			callback(slot);
+		}
+	};
+	VirtualQQuickPaintedItem::connect(self, static_cast<void (QQuickPaintedItem::*)()>(&QQuickPaintedItem::contentsSizeChanged), self, local_caller{slot, callback, release});
 }
 
 void QQuickPaintedItem_contentsScaleChanged(QQuickPaintedItem* self) {
 	self->contentsScaleChanged();
 }
 
-void QQuickPaintedItem_connect_contentsScaleChanged(QQuickPaintedItem* self, intptr_t slot) {
-	VirtualQQuickPaintedItem::connect(self, static_cast<void (QQuickPaintedItem::*)()>(&QQuickPaintedItem::contentsScaleChanged), self, [=]() {
-		miqt_exec_callback_QQuickPaintedItem_contentsScaleChanged(slot);
-	});
+void QQuickPaintedItem_connect_contentsScaleChanged(QQuickPaintedItem* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t);
+		void operator()() {
+			callback(slot);
+		}
+	};
+	VirtualQQuickPaintedItem::connect(self, static_cast<void (QQuickPaintedItem::*)()>(&QQuickPaintedItem::contentsScaleChanged), self, local_caller{slot, callback, release});
 }
 
 void QQuickPaintedItem_renderTargetChanged(QQuickPaintedItem* self) {
 	self->renderTargetChanged();
 }
 
-void QQuickPaintedItem_connect_renderTargetChanged(QQuickPaintedItem* self, intptr_t slot) {
-	VirtualQQuickPaintedItem::connect(self, static_cast<void (QQuickPaintedItem::*)()>(&QQuickPaintedItem::renderTargetChanged), self, [=]() {
-		miqt_exec_callback_QQuickPaintedItem_renderTargetChanged(slot);
-	});
+void QQuickPaintedItem_connect_renderTargetChanged(QQuickPaintedItem* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t);
+		void operator()() {
+			callback(slot);
+		}
+	};
+	VirtualQQuickPaintedItem::connect(self, static_cast<void (QQuickPaintedItem::*)()>(&QQuickPaintedItem::renderTargetChanged), self, local_caller{slot, callback, release});
 }
 
 void QQuickPaintedItem_textureSizeChanged(QQuickPaintedItem* self) {
 	self->textureSizeChanged();
 }
 
-void QQuickPaintedItem_connect_textureSizeChanged(QQuickPaintedItem* self, intptr_t slot) {
-	VirtualQQuickPaintedItem::connect(self, static_cast<void (QQuickPaintedItem::*)()>(&QQuickPaintedItem::textureSizeChanged), self, [=]() {
-		miqt_exec_callback_QQuickPaintedItem_textureSizeChanged(slot);
-	});
+void QQuickPaintedItem_connect_textureSizeChanged(QQuickPaintedItem* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t);
+		void operator()() {
+			callback(slot);
+		}
+	};
+	VirtualQQuickPaintedItem::connect(self, static_cast<void (QQuickPaintedItem::*)()>(&QQuickPaintedItem::textureSizeChanged), self, local_caller{slot, callback, release});
 }
 
 struct miqt_string QQuickPaintedItem_tr2(const char* s, const char* c) {

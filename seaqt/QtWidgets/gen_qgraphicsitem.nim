@@ -488,29 +488,29 @@ proc fcQGraphicsObject_tr(s: cstring): struct_miqt_string {.importc: "QGraphicsO
 proc fcQGraphicsObject_grabGesture(self: pointer, typeVal: cint): void {.importc: "QGraphicsObject_grabGesture".}
 proc fcQGraphicsObject_ungrabGesture(self: pointer, typeVal: cint): void {.importc: "QGraphicsObject_ungrabGesture".}
 proc fcQGraphicsObject_parentChanged(self: pointer, ): void {.importc: "QGraphicsObject_parentChanged".}
-proc fcQGraphicsObject_connect_parentChanged(self: pointer, slot: int) {.importc: "QGraphicsObject_connect_parentChanged".}
+proc fcQGraphicsObject_connect_parentChanged(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QGraphicsObject_connect_parentChanged".}
 proc fcQGraphicsObject_opacityChanged(self: pointer, ): void {.importc: "QGraphicsObject_opacityChanged".}
-proc fcQGraphicsObject_connect_opacityChanged(self: pointer, slot: int) {.importc: "QGraphicsObject_connect_opacityChanged".}
+proc fcQGraphicsObject_connect_opacityChanged(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QGraphicsObject_connect_opacityChanged".}
 proc fcQGraphicsObject_visibleChanged(self: pointer, ): void {.importc: "QGraphicsObject_visibleChanged".}
-proc fcQGraphicsObject_connect_visibleChanged(self: pointer, slot: int) {.importc: "QGraphicsObject_connect_visibleChanged".}
+proc fcQGraphicsObject_connect_visibleChanged(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QGraphicsObject_connect_visibleChanged".}
 proc fcQGraphicsObject_enabledChanged(self: pointer, ): void {.importc: "QGraphicsObject_enabledChanged".}
-proc fcQGraphicsObject_connect_enabledChanged(self: pointer, slot: int) {.importc: "QGraphicsObject_connect_enabledChanged".}
+proc fcQGraphicsObject_connect_enabledChanged(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QGraphicsObject_connect_enabledChanged".}
 proc fcQGraphicsObject_xChanged(self: pointer, ): void {.importc: "QGraphicsObject_xChanged".}
-proc fcQGraphicsObject_connect_xChanged(self: pointer, slot: int) {.importc: "QGraphicsObject_connect_xChanged".}
+proc fcQGraphicsObject_connect_xChanged(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QGraphicsObject_connect_xChanged".}
 proc fcQGraphicsObject_yChanged(self: pointer, ): void {.importc: "QGraphicsObject_yChanged".}
-proc fcQGraphicsObject_connect_yChanged(self: pointer, slot: int) {.importc: "QGraphicsObject_connect_yChanged".}
+proc fcQGraphicsObject_connect_yChanged(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QGraphicsObject_connect_yChanged".}
 proc fcQGraphicsObject_zChanged(self: pointer, ): void {.importc: "QGraphicsObject_zChanged".}
-proc fcQGraphicsObject_connect_zChanged(self: pointer, slot: int) {.importc: "QGraphicsObject_connect_zChanged".}
+proc fcQGraphicsObject_connect_zChanged(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QGraphicsObject_connect_zChanged".}
 proc fcQGraphicsObject_rotationChanged(self: pointer, ): void {.importc: "QGraphicsObject_rotationChanged".}
-proc fcQGraphicsObject_connect_rotationChanged(self: pointer, slot: int) {.importc: "QGraphicsObject_connect_rotationChanged".}
+proc fcQGraphicsObject_connect_rotationChanged(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QGraphicsObject_connect_rotationChanged".}
 proc fcQGraphicsObject_scaleChanged(self: pointer, ): void {.importc: "QGraphicsObject_scaleChanged".}
-proc fcQGraphicsObject_connect_scaleChanged(self: pointer, slot: int) {.importc: "QGraphicsObject_connect_scaleChanged".}
+proc fcQGraphicsObject_connect_scaleChanged(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QGraphicsObject_connect_scaleChanged".}
 proc fcQGraphicsObject_childrenChanged(self: pointer, ): void {.importc: "QGraphicsObject_childrenChanged".}
-proc fcQGraphicsObject_connect_childrenChanged(self: pointer, slot: int) {.importc: "QGraphicsObject_connect_childrenChanged".}
+proc fcQGraphicsObject_connect_childrenChanged(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QGraphicsObject_connect_childrenChanged".}
 proc fcQGraphicsObject_widthChanged(self: pointer, ): void {.importc: "QGraphicsObject_widthChanged".}
-proc fcQGraphicsObject_connect_widthChanged(self: pointer, slot: int) {.importc: "QGraphicsObject_connect_widthChanged".}
+proc fcQGraphicsObject_connect_widthChanged(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QGraphicsObject_connect_widthChanged".}
 proc fcQGraphicsObject_heightChanged(self: pointer, ): void {.importc: "QGraphicsObject_heightChanged".}
-proc fcQGraphicsObject_connect_heightChanged(self: pointer, slot: int) {.importc: "QGraphicsObject_connect_heightChanged".}
+proc fcQGraphicsObject_connect_heightChanged(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QGraphicsObject_connect_heightChanged".}
 proc fcQGraphicsObject_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QGraphicsObject_tr2".}
 proc fcQGraphicsObject_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QGraphicsObject_tr3".}
 proc fcQGraphicsObject_grabGesture2(self: pointer, typeVal: cint, flags: cint): void {.importc: "QGraphicsObject_grabGesture2".}
@@ -1256,9 +1256,9 @@ proc fcQGraphicsTextItem_openExternalLinks(self: pointer, ): bool {.importc: "QG
 proc fcQGraphicsTextItem_setTextCursor(self: pointer, cursor: pointer): void {.importc: "QGraphicsTextItem_setTextCursor".}
 proc fcQGraphicsTextItem_textCursor(self: pointer, ): pointer {.importc: "QGraphicsTextItem_textCursor".}
 proc fcQGraphicsTextItem_linkActivated(self: pointer, param1: struct_miqt_string): void {.importc: "QGraphicsTextItem_linkActivated".}
-proc fcQGraphicsTextItem_connect_linkActivated(self: pointer, slot: int) {.importc: "QGraphicsTextItem_connect_linkActivated".}
+proc fcQGraphicsTextItem_connect_linkActivated(self: pointer, slot: int, callback: proc (slot: int, param1: struct_miqt_string) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QGraphicsTextItem_connect_linkActivated".}
 proc fcQGraphicsTextItem_linkHovered(self: pointer, param1: struct_miqt_string): void {.importc: "QGraphicsTextItem_linkHovered".}
-proc fcQGraphicsTextItem_connect_linkHovered(self: pointer, slot: int) {.importc: "QGraphicsTextItem_connect_linkHovered".}
+proc fcQGraphicsTextItem_connect_linkHovered(self: pointer, slot: int, callback: proc (slot: int, param1: struct_miqt_string) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QGraphicsTextItem_connect_linkHovered".}
 proc fcQGraphicsTextItem_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QGraphicsTextItem_tr2".}
 proc fcQGraphicsTextItem_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QGraphicsTextItem_tr3".}
 type cQGraphicsTextItemVTable = object
@@ -2666,169 +2666,217 @@ proc parentChanged*(self: gen_qgraphicsitem_types.QGraphicsObject, ): void =
   fcQGraphicsObject_parentChanged(self.h)
 
 type QGraphicsObjectparentChangedSlot* = proc()
-proc miqt_exec_callback_cQGraphicsObject_parentChanged(slot: int) {.exportc: "miqt_exec_callback_QGraphicsObject_parentChanged".} =
+proc miqt_exec_callback_cQGraphicsObject_parentChanged(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QGraphicsObjectparentChangedSlot](cast[pointer](slot))
   nimfunc[]()
+
+proc miqt_exec_callback_cQGraphicsObject_parentChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QGraphicsObjectparentChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
 
 proc onparentChanged*(self: gen_qgraphicsitem_types.QGraphicsObject, slot: QGraphicsObjectparentChangedSlot) =
   var tmp = new QGraphicsObjectparentChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQGraphicsObject_connect_parentChanged(self.h, cast[int](addr tmp[]))
+  fcQGraphicsObject_connect_parentChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQGraphicsObject_parentChanged, miqt_exec_callback_cQGraphicsObject_parentChanged_release)
 
 proc opacityChanged*(self: gen_qgraphicsitem_types.QGraphicsObject, ): void =
   fcQGraphicsObject_opacityChanged(self.h)
 
 type QGraphicsObjectopacityChangedSlot* = proc()
-proc miqt_exec_callback_cQGraphicsObject_opacityChanged(slot: int) {.exportc: "miqt_exec_callback_QGraphicsObject_opacityChanged".} =
+proc miqt_exec_callback_cQGraphicsObject_opacityChanged(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QGraphicsObjectopacityChangedSlot](cast[pointer](slot))
   nimfunc[]()
+
+proc miqt_exec_callback_cQGraphicsObject_opacityChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QGraphicsObjectopacityChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
 
 proc onopacityChanged*(self: gen_qgraphicsitem_types.QGraphicsObject, slot: QGraphicsObjectopacityChangedSlot) =
   var tmp = new QGraphicsObjectopacityChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQGraphicsObject_connect_opacityChanged(self.h, cast[int](addr tmp[]))
+  fcQGraphicsObject_connect_opacityChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQGraphicsObject_opacityChanged, miqt_exec_callback_cQGraphicsObject_opacityChanged_release)
 
 proc visibleChanged*(self: gen_qgraphicsitem_types.QGraphicsObject, ): void =
   fcQGraphicsObject_visibleChanged(self.h)
 
 type QGraphicsObjectvisibleChangedSlot* = proc()
-proc miqt_exec_callback_cQGraphicsObject_visibleChanged(slot: int) {.exportc: "miqt_exec_callback_QGraphicsObject_visibleChanged".} =
+proc miqt_exec_callback_cQGraphicsObject_visibleChanged(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QGraphicsObjectvisibleChangedSlot](cast[pointer](slot))
   nimfunc[]()
+
+proc miqt_exec_callback_cQGraphicsObject_visibleChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QGraphicsObjectvisibleChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
 
 proc onvisibleChanged*(self: gen_qgraphicsitem_types.QGraphicsObject, slot: QGraphicsObjectvisibleChangedSlot) =
   var tmp = new QGraphicsObjectvisibleChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQGraphicsObject_connect_visibleChanged(self.h, cast[int](addr tmp[]))
+  fcQGraphicsObject_connect_visibleChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQGraphicsObject_visibleChanged, miqt_exec_callback_cQGraphicsObject_visibleChanged_release)
 
 proc enabledChanged*(self: gen_qgraphicsitem_types.QGraphicsObject, ): void =
   fcQGraphicsObject_enabledChanged(self.h)
 
 type QGraphicsObjectenabledChangedSlot* = proc()
-proc miqt_exec_callback_cQGraphicsObject_enabledChanged(slot: int) {.exportc: "miqt_exec_callback_QGraphicsObject_enabledChanged".} =
+proc miqt_exec_callback_cQGraphicsObject_enabledChanged(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QGraphicsObjectenabledChangedSlot](cast[pointer](slot))
   nimfunc[]()
+
+proc miqt_exec_callback_cQGraphicsObject_enabledChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QGraphicsObjectenabledChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
 
 proc onenabledChanged*(self: gen_qgraphicsitem_types.QGraphicsObject, slot: QGraphicsObjectenabledChangedSlot) =
   var tmp = new QGraphicsObjectenabledChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQGraphicsObject_connect_enabledChanged(self.h, cast[int](addr tmp[]))
+  fcQGraphicsObject_connect_enabledChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQGraphicsObject_enabledChanged, miqt_exec_callback_cQGraphicsObject_enabledChanged_release)
 
 proc xChanged*(self: gen_qgraphicsitem_types.QGraphicsObject, ): void =
   fcQGraphicsObject_xChanged(self.h)
 
 type QGraphicsObjectxChangedSlot* = proc()
-proc miqt_exec_callback_cQGraphicsObject_xChanged(slot: int) {.exportc: "miqt_exec_callback_QGraphicsObject_xChanged".} =
+proc miqt_exec_callback_cQGraphicsObject_xChanged(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QGraphicsObjectxChangedSlot](cast[pointer](slot))
   nimfunc[]()
+
+proc miqt_exec_callback_cQGraphicsObject_xChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QGraphicsObjectxChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
 
 proc onxChanged*(self: gen_qgraphicsitem_types.QGraphicsObject, slot: QGraphicsObjectxChangedSlot) =
   var tmp = new QGraphicsObjectxChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQGraphicsObject_connect_xChanged(self.h, cast[int](addr tmp[]))
+  fcQGraphicsObject_connect_xChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQGraphicsObject_xChanged, miqt_exec_callback_cQGraphicsObject_xChanged_release)
 
 proc yChanged*(self: gen_qgraphicsitem_types.QGraphicsObject, ): void =
   fcQGraphicsObject_yChanged(self.h)
 
 type QGraphicsObjectyChangedSlot* = proc()
-proc miqt_exec_callback_cQGraphicsObject_yChanged(slot: int) {.exportc: "miqt_exec_callback_QGraphicsObject_yChanged".} =
+proc miqt_exec_callback_cQGraphicsObject_yChanged(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QGraphicsObjectyChangedSlot](cast[pointer](slot))
   nimfunc[]()
+
+proc miqt_exec_callback_cQGraphicsObject_yChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QGraphicsObjectyChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
 
 proc onyChanged*(self: gen_qgraphicsitem_types.QGraphicsObject, slot: QGraphicsObjectyChangedSlot) =
   var tmp = new QGraphicsObjectyChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQGraphicsObject_connect_yChanged(self.h, cast[int](addr tmp[]))
+  fcQGraphicsObject_connect_yChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQGraphicsObject_yChanged, miqt_exec_callback_cQGraphicsObject_yChanged_release)
 
 proc zChanged*(self: gen_qgraphicsitem_types.QGraphicsObject, ): void =
   fcQGraphicsObject_zChanged(self.h)
 
 type QGraphicsObjectzChangedSlot* = proc()
-proc miqt_exec_callback_cQGraphicsObject_zChanged(slot: int) {.exportc: "miqt_exec_callback_QGraphicsObject_zChanged".} =
+proc miqt_exec_callback_cQGraphicsObject_zChanged(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QGraphicsObjectzChangedSlot](cast[pointer](slot))
   nimfunc[]()
+
+proc miqt_exec_callback_cQGraphicsObject_zChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QGraphicsObjectzChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
 
 proc onzChanged*(self: gen_qgraphicsitem_types.QGraphicsObject, slot: QGraphicsObjectzChangedSlot) =
   var tmp = new QGraphicsObjectzChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQGraphicsObject_connect_zChanged(self.h, cast[int](addr tmp[]))
+  fcQGraphicsObject_connect_zChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQGraphicsObject_zChanged, miqt_exec_callback_cQGraphicsObject_zChanged_release)
 
 proc rotationChanged*(self: gen_qgraphicsitem_types.QGraphicsObject, ): void =
   fcQGraphicsObject_rotationChanged(self.h)
 
 type QGraphicsObjectrotationChangedSlot* = proc()
-proc miqt_exec_callback_cQGraphicsObject_rotationChanged(slot: int) {.exportc: "miqt_exec_callback_QGraphicsObject_rotationChanged".} =
+proc miqt_exec_callback_cQGraphicsObject_rotationChanged(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QGraphicsObjectrotationChangedSlot](cast[pointer](slot))
   nimfunc[]()
+
+proc miqt_exec_callback_cQGraphicsObject_rotationChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QGraphicsObjectrotationChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
 
 proc onrotationChanged*(self: gen_qgraphicsitem_types.QGraphicsObject, slot: QGraphicsObjectrotationChangedSlot) =
   var tmp = new QGraphicsObjectrotationChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQGraphicsObject_connect_rotationChanged(self.h, cast[int](addr tmp[]))
+  fcQGraphicsObject_connect_rotationChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQGraphicsObject_rotationChanged, miqt_exec_callback_cQGraphicsObject_rotationChanged_release)
 
 proc scaleChanged*(self: gen_qgraphicsitem_types.QGraphicsObject, ): void =
   fcQGraphicsObject_scaleChanged(self.h)
 
 type QGraphicsObjectscaleChangedSlot* = proc()
-proc miqt_exec_callback_cQGraphicsObject_scaleChanged(slot: int) {.exportc: "miqt_exec_callback_QGraphicsObject_scaleChanged".} =
+proc miqt_exec_callback_cQGraphicsObject_scaleChanged(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QGraphicsObjectscaleChangedSlot](cast[pointer](slot))
   nimfunc[]()
+
+proc miqt_exec_callback_cQGraphicsObject_scaleChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QGraphicsObjectscaleChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
 
 proc onscaleChanged*(self: gen_qgraphicsitem_types.QGraphicsObject, slot: QGraphicsObjectscaleChangedSlot) =
   var tmp = new QGraphicsObjectscaleChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQGraphicsObject_connect_scaleChanged(self.h, cast[int](addr tmp[]))
+  fcQGraphicsObject_connect_scaleChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQGraphicsObject_scaleChanged, miqt_exec_callback_cQGraphicsObject_scaleChanged_release)
 
 proc childrenChanged*(self: gen_qgraphicsitem_types.QGraphicsObject, ): void =
   fcQGraphicsObject_childrenChanged(self.h)
 
 type QGraphicsObjectchildrenChangedSlot* = proc()
-proc miqt_exec_callback_cQGraphicsObject_childrenChanged(slot: int) {.exportc: "miqt_exec_callback_QGraphicsObject_childrenChanged".} =
+proc miqt_exec_callback_cQGraphicsObject_childrenChanged(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QGraphicsObjectchildrenChangedSlot](cast[pointer](slot))
   nimfunc[]()
+
+proc miqt_exec_callback_cQGraphicsObject_childrenChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QGraphicsObjectchildrenChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
 
 proc onchildrenChanged*(self: gen_qgraphicsitem_types.QGraphicsObject, slot: QGraphicsObjectchildrenChangedSlot) =
   var tmp = new QGraphicsObjectchildrenChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQGraphicsObject_connect_childrenChanged(self.h, cast[int](addr tmp[]))
+  fcQGraphicsObject_connect_childrenChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQGraphicsObject_childrenChanged, miqt_exec_callback_cQGraphicsObject_childrenChanged_release)
 
 proc widthChanged*(self: gen_qgraphicsitem_types.QGraphicsObject, ): void =
   fcQGraphicsObject_widthChanged(self.h)
 
 type QGraphicsObjectwidthChangedSlot* = proc()
-proc miqt_exec_callback_cQGraphicsObject_widthChanged(slot: int) {.exportc: "miqt_exec_callback_QGraphicsObject_widthChanged".} =
+proc miqt_exec_callback_cQGraphicsObject_widthChanged(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QGraphicsObjectwidthChangedSlot](cast[pointer](slot))
   nimfunc[]()
+
+proc miqt_exec_callback_cQGraphicsObject_widthChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QGraphicsObjectwidthChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
 
 proc onwidthChanged*(self: gen_qgraphicsitem_types.QGraphicsObject, slot: QGraphicsObjectwidthChangedSlot) =
   var tmp = new QGraphicsObjectwidthChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQGraphicsObject_connect_widthChanged(self.h, cast[int](addr tmp[]))
+  fcQGraphicsObject_connect_widthChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQGraphicsObject_widthChanged, miqt_exec_callback_cQGraphicsObject_widthChanged_release)
 
 proc heightChanged*(self: gen_qgraphicsitem_types.QGraphicsObject, ): void =
   fcQGraphicsObject_heightChanged(self.h)
 
 type QGraphicsObjectheightChangedSlot* = proc()
-proc miqt_exec_callback_cQGraphicsObject_heightChanged(slot: int) {.exportc: "miqt_exec_callback_QGraphicsObject_heightChanged".} =
+proc miqt_exec_callback_cQGraphicsObject_heightChanged(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QGraphicsObjectheightChangedSlot](cast[pointer](slot))
   nimfunc[]()
+
+proc miqt_exec_callback_cQGraphicsObject_heightChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QGraphicsObjectheightChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
 
 proc onheightChanged*(self: gen_qgraphicsitem_types.QGraphicsObject, slot: QGraphicsObjectheightChangedSlot) =
   var tmp = new QGraphicsObjectheightChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQGraphicsObject_connect_heightChanged(self.h, cast[int](addr tmp[]))
+  fcQGraphicsObject_connect_heightChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQGraphicsObject_heightChanged, miqt_exec_callback_cQGraphicsObject_heightChanged_release)
 
 proc tr*(_: type gen_qgraphicsitem_types.QGraphicsObject, s: cstring, c: cstring): string =
   let v_ms = fcQGraphicsObject_tr2(s, c)
@@ -9129,7 +9177,7 @@ proc linkActivated*(self: gen_qgraphicsitem_types.QGraphicsTextItem, param1: str
   fcQGraphicsTextItem_linkActivated(self.h, struct_miqt_string(data: param1, len: csize_t(len(param1))))
 
 type QGraphicsTextItemlinkActivatedSlot* = proc(param1: string)
-proc miqt_exec_callback_cQGraphicsTextItem_linkActivated(slot: int, param1: struct_miqt_string) {.exportc: "miqt_exec_callback_QGraphicsTextItem_linkActivated".} =
+proc miqt_exec_callback_cQGraphicsTextItem_linkActivated(slot: int, param1: struct_miqt_string) {.cdecl.} =
   let nimfunc = cast[ptr QGraphicsTextItemlinkActivatedSlot](cast[pointer](slot))
   let vparam1_ms = param1
   let vparam1x_ret = string.fromBytes(toOpenArrayByte(vparam1_ms.data, 0, int(vparam1_ms.len)-1))
@@ -9138,17 +9186,21 @@ proc miqt_exec_callback_cQGraphicsTextItem_linkActivated(slot: int, param1: stru
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQGraphicsTextItem_linkActivated_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QGraphicsTextItemlinkActivatedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onlinkActivated*(self: gen_qgraphicsitem_types.QGraphicsTextItem, slot: QGraphicsTextItemlinkActivatedSlot) =
   var tmp = new QGraphicsTextItemlinkActivatedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQGraphicsTextItem_connect_linkActivated(self.h, cast[int](addr tmp[]))
+  fcQGraphicsTextItem_connect_linkActivated(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQGraphicsTextItem_linkActivated, miqt_exec_callback_cQGraphicsTextItem_linkActivated_release)
 
 proc linkHovered*(self: gen_qgraphicsitem_types.QGraphicsTextItem, param1: string): void =
   fcQGraphicsTextItem_linkHovered(self.h, struct_miqt_string(data: param1, len: csize_t(len(param1))))
 
 type QGraphicsTextItemlinkHoveredSlot* = proc(param1: string)
-proc miqt_exec_callback_cQGraphicsTextItem_linkHovered(slot: int, param1: struct_miqt_string) {.exportc: "miqt_exec_callback_QGraphicsTextItem_linkHovered".} =
+proc miqt_exec_callback_cQGraphicsTextItem_linkHovered(slot: int, param1: struct_miqt_string) {.cdecl.} =
   let nimfunc = cast[ptr QGraphicsTextItemlinkHoveredSlot](cast[pointer](slot))
   let vparam1_ms = param1
   let vparam1x_ret = string.fromBytes(toOpenArrayByte(vparam1_ms.data, 0, int(vparam1_ms.len)-1))
@@ -9157,11 +9209,15 @@ proc miqt_exec_callback_cQGraphicsTextItem_linkHovered(slot: int, param1: struct
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQGraphicsTextItem_linkHovered_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QGraphicsTextItemlinkHoveredSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onlinkHovered*(self: gen_qgraphicsitem_types.QGraphicsTextItem, slot: QGraphicsTextItemlinkHoveredSlot) =
   var tmp = new QGraphicsTextItemlinkHoveredSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQGraphicsTextItem_connect_linkHovered(self.h, cast[int](addr tmp[]))
+  fcQGraphicsTextItem_connect_linkHovered(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQGraphicsTextItem_linkHovered, miqt_exec_callback_cQGraphicsTextItem_linkHovered_release)
 
 proc tr*(_: type gen_qgraphicsitem_types.QGraphicsTextItem, s: cstring, c: cstring): string =
   let v_ms = fcQGraphicsTextItem_tr2(s, c)

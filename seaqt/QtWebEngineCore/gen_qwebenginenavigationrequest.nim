@@ -73,7 +73,7 @@ proc fcQWebEngineNavigationRequest_navigationType(self: pointer, ): cint {.impor
 proc fcQWebEngineNavigationRequest_accept(self: pointer, ): void {.importc: "QWebEngineNavigationRequest_accept".}
 proc fcQWebEngineNavigationRequest_reject(self: pointer, ): void {.importc: "QWebEngineNavigationRequest_reject".}
 proc fcQWebEngineNavigationRequest_actionChanged(self: pointer, ): void {.importc: "QWebEngineNavigationRequest_actionChanged".}
-proc fcQWebEngineNavigationRequest_connect_actionChanged(self: pointer, slot: int) {.importc: "QWebEngineNavigationRequest_connect_actionChanged".}
+proc fcQWebEngineNavigationRequest_connect_actionChanged(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QWebEngineNavigationRequest_connect_actionChanged".}
 proc fcQWebEngineNavigationRequest_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QWebEngineNavigationRequest_tr2".}
 proc fcQWebEngineNavigationRequest_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QWebEngineNavigationRequest_tr3".}
 proc fcQWebEngineNavigationRequest_staticMetaObject(): pointer {.importc: "QWebEngineNavigationRequest_staticMetaObject".}
@@ -113,15 +113,19 @@ proc actionChanged*(self: gen_qwebenginenavigationrequest_types.QWebEngineNaviga
   fcQWebEngineNavigationRequest_actionChanged(self.h)
 
 type QWebEngineNavigationRequestactionChangedSlot* = proc()
-proc miqt_exec_callback_cQWebEngineNavigationRequest_actionChanged(slot: int) {.exportc: "miqt_exec_callback_QWebEngineNavigationRequest_actionChanged".} =
+proc miqt_exec_callback_cQWebEngineNavigationRequest_actionChanged(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QWebEngineNavigationRequestactionChangedSlot](cast[pointer](slot))
   nimfunc[]()
+
+proc miqt_exec_callback_cQWebEngineNavigationRequest_actionChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QWebEngineNavigationRequestactionChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
 
 proc onactionChanged*(self: gen_qwebenginenavigationrequest_types.QWebEngineNavigationRequest, slot: QWebEngineNavigationRequestactionChangedSlot) =
   var tmp = new QWebEngineNavigationRequestactionChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQWebEngineNavigationRequest_connect_actionChanged(self.h, cast[int](addr tmp[]))
+  fcQWebEngineNavigationRequest_connect_actionChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQWebEngineNavigationRequest_actionChanged, miqt_exec_callback_cQWebEngineNavigationRequest_actionChanged_release)
 
 proc tr*(_: type gen_qwebenginenavigationrequest_types.QWebEngineNavigationRequest, s: cstring, c: cstring): string =
   let v_ms = fcQWebEngineNavigationRequest_tr2(s, c)

@@ -56,17 +56,6 @@
 extern "C" {
 #endif
 
-void miqt_exec_callback_QHeaderView_sectionMoved(intptr_t, int, int, int);
-void miqt_exec_callback_QHeaderView_sectionResized(intptr_t, int, int, int);
-void miqt_exec_callback_QHeaderView_sectionPressed(intptr_t, int);
-void miqt_exec_callback_QHeaderView_sectionClicked(intptr_t, int);
-void miqt_exec_callback_QHeaderView_sectionEntered(intptr_t, int);
-void miqt_exec_callback_QHeaderView_sectionDoubleClicked(intptr_t, int);
-void miqt_exec_callback_QHeaderView_sectionCountChanged(intptr_t, int, int);
-void miqt_exec_callback_QHeaderView_sectionHandleDoubleClicked(intptr_t, int);
-void miqt_exec_callback_QHeaderView_geometriesChanged(intptr_t);
-void miqt_exec_callback_QHeaderView_sortIndicatorChanged(intptr_t, int, int);
-void miqt_exec_callback_QHeaderView_sortIndicatorClearableChanged(intptr_t, bool);
 #ifdef __cplusplus
 } /* extern C */
 #endif
@@ -1984,127 +1973,182 @@ void QHeaderView_sectionMoved(QHeaderView* self, int logicalIndex, int oldVisual
 	self->sectionMoved(static_cast<int>(logicalIndex), static_cast<int>(oldVisualIndex), static_cast<int>(newVisualIndex));
 }
 
-void QHeaderView_connect_sectionMoved(QHeaderView* self, intptr_t slot) {
-	VirtualQHeaderView::connect(self, static_cast<void (QHeaderView::*)(int, int, int)>(&QHeaderView::sectionMoved), self, [=](int logicalIndex, int oldVisualIndex, int newVisualIndex) {
-		int sigval1 = logicalIndex;
-		int sigval2 = oldVisualIndex;
-		int sigval3 = newVisualIndex;
-		miqt_exec_callback_QHeaderView_sectionMoved(slot, sigval1, sigval2, sigval3);
-	});
+void QHeaderView_connect_sectionMoved(QHeaderView* self, intptr_t slot, void (*callback)(intptr_t, int, int, int), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int, int, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t, int, int, int);
+		void operator()(int logicalIndex, int oldVisualIndex, int newVisualIndex) {
+			int sigval1 = logicalIndex;
+			int sigval2 = oldVisualIndex;
+			int sigval3 = newVisualIndex;
+			callback(slot, sigval1, sigval2, sigval3);
+		}
+	};
+	VirtualQHeaderView::connect(self, static_cast<void (QHeaderView::*)(int, int, int)>(&QHeaderView::sectionMoved), self, local_caller{slot, callback, release});
 }
 
 void QHeaderView_sectionResized(QHeaderView* self, int logicalIndex, int oldSize, int newSize) {
 	self->sectionResized(static_cast<int>(logicalIndex), static_cast<int>(oldSize), static_cast<int>(newSize));
 }
 
-void QHeaderView_connect_sectionResized(QHeaderView* self, intptr_t slot) {
-	VirtualQHeaderView::connect(self, static_cast<void (QHeaderView::*)(int, int, int)>(&QHeaderView::sectionResized), self, [=](int logicalIndex, int oldSize, int newSize) {
-		int sigval1 = logicalIndex;
-		int sigval2 = oldSize;
-		int sigval3 = newSize;
-		miqt_exec_callback_QHeaderView_sectionResized(slot, sigval1, sigval2, sigval3);
-	});
+void QHeaderView_connect_sectionResized(QHeaderView* self, intptr_t slot, void (*callback)(intptr_t, int, int, int), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int, int, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t, int, int, int);
+		void operator()(int logicalIndex, int oldSize, int newSize) {
+			int sigval1 = logicalIndex;
+			int sigval2 = oldSize;
+			int sigval3 = newSize;
+			callback(slot, sigval1, sigval2, sigval3);
+		}
+	};
+	VirtualQHeaderView::connect(self, static_cast<void (QHeaderView::*)(int, int, int)>(&QHeaderView::sectionResized), self, local_caller{slot, callback, release});
 }
 
 void QHeaderView_sectionPressed(QHeaderView* self, int logicalIndex) {
 	self->sectionPressed(static_cast<int>(logicalIndex));
 }
 
-void QHeaderView_connect_sectionPressed(QHeaderView* self, intptr_t slot) {
-	VirtualQHeaderView::connect(self, static_cast<void (QHeaderView::*)(int)>(&QHeaderView::sectionPressed), self, [=](int logicalIndex) {
-		int sigval1 = logicalIndex;
-		miqt_exec_callback_QHeaderView_sectionPressed(slot, sigval1);
-	});
+void QHeaderView_connect_sectionPressed(QHeaderView* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t, int);
+		void operator()(int logicalIndex) {
+			int sigval1 = logicalIndex;
+			callback(slot, sigval1);
+		}
+	};
+	VirtualQHeaderView::connect(self, static_cast<void (QHeaderView::*)(int)>(&QHeaderView::sectionPressed), self, local_caller{slot, callback, release});
 }
 
 void QHeaderView_sectionClicked(QHeaderView* self, int logicalIndex) {
 	self->sectionClicked(static_cast<int>(logicalIndex));
 }
 
-void QHeaderView_connect_sectionClicked(QHeaderView* self, intptr_t slot) {
-	VirtualQHeaderView::connect(self, static_cast<void (QHeaderView::*)(int)>(&QHeaderView::sectionClicked), self, [=](int logicalIndex) {
-		int sigval1 = logicalIndex;
-		miqt_exec_callback_QHeaderView_sectionClicked(slot, sigval1);
-	});
+void QHeaderView_connect_sectionClicked(QHeaderView* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t, int);
+		void operator()(int logicalIndex) {
+			int sigval1 = logicalIndex;
+			callback(slot, sigval1);
+		}
+	};
+	VirtualQHeaderView::connect(self, static_cast<void (QHeaderView::*)(int)>(&QHeaderView::sectionClicked), self, local_caller{slot, callback, release});
 }
 
 void QHeaderView_sectionEntered(QHeaderView* self, int logicalIndex) {
 	self->sectionEntered(static_cast<int>(logicalIndex));
 }
 
-void QHeaderView_connect_sectionEntered(QHeaderView* self, intptr_t slot) {
-	VirtualQHeaderView::connect(self, static_cast<void (QHeaderView::*)(int)>(&QHeaderView::sectionEntered), self, [=](int logicalIndex) {
-		int sigval1 = logicalIndex;
-		miqt_exec_callback_QHeaderView_sectionEntered(slot, sigval1);
-	});
+void QHeaderView_connect_sectionEntered(QHeaderView* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t, int);
+		void operator()(int logicalIndex) {
+			int sigval1 = logicalIndex;
+			callback(slot, sigval1);
+		}
+	};
+	VirtualQHeaderView::connect(self, static_cast<void (QHeaderView::*)(int)>(&QHeaderView::sectionEntered), self, local_caller{slot, callback, release});
 }
 
 void QHeaderView_sectionDoubleClicked(QHeaderView* self, int logicalIndex) {
 	self->sectionDoubleClicked(static_cast<int>(logicalIndex));
 }
 
-void QHeaderView_connect_sectionDoubleClicked(QHeaderView* self, intptr_t slot) {
-	VirtualQHeaderView::connect(self, static_cast<void (QHeaderView::*)(int)>(&QHeaderView::sectionDoubleClicked), self, [=](int logicalIndex) {
-		int sigval1 = logicalIndex;
-		miqt_exec_callback_QHeaderView_sectionDoubleClicked(slot, sigval1);
-	});
+void QHeaderView_connect_sectionDoubleClicked(QHeaderView* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t, int);
+		void operator()(int logicalIndex) {
+			int sigval1 = logicalIndex;
+			callback(slot, sigval1);
+		}
+	};
+	VirtualQHeaderView::connect(self, static_cast<void (QHeaderView::*)(int)>(&QHeaderView::sectionDoubleClicked), self, local_caller{slot, callback, release});
 }
 
 void QHeaderView_sectionCountChanged(QHeaderView* self, int oldCount, int newCount) {
 	self->sectionCountChanged(static_cast<int>(oldCount), static_cast<int>(newCount));
 }
 
-void QHeaderView_connect_sectionCountChanged(QHeaderView* self, intptr_t slot) {
-	VirtualQHeaderView::connect(self, static_cast<void (QHeaderView::*)(int, int)>(&QHeaderView::sectionCountChanged), self, [=](int oldCount, int newCount) {
-		int sigval1 = oldCount;
-		int sigval2 = newCount;
-		miqt_exec_callback_QHeaderView_sectionCountChanged(slot, sigval1, sigval2);
-	});
+void QHeaderView_connect_sectionCountChanged(QHeaderView* self, intptr_t slot, void (*callback)(intptr_t, int, int), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t, int, int);
+		void operator()(int oldCount, int newCount) {
+			int sigval1 = oldCount;
+			int sigval2 = newCount;
+			callback(slot, sigval1, sigval2);
+		}
+	};
+	VirtualQHeaderView::connect(self, static_cast<void (QHeaderView::*)(int, int)>(&QHeaderView::sectionCountChanged), self, local_caller{slot, callback, release});
 }
 
 void QHeaderView_sectionHandleDoubleClicked(QHeaderView* self, int logicalIndex) {
 	self->sectionHandleDoubleClicked(static_cast<int>(logicalIndex));
 }
 
-void QHeaderView_connect_sectionHandleDoubleClicked(QHeaderView* self, intptr_t slot) {
-	VirtualQHeaderView::connect(self, static_cast<void (QHeaderView::*)(int)>(&QHeaderView::sectionHandleDoubleClicked), self, [=](int logicalIndex) {
-		int sigval1 = logicalIndex;
-		miqt_exec_callback_QHeaderView_sectionHandleDoubleClicked(slot, sigval1);
-	});
+void QHeaderView_connect_sectionHandleDoubleClicked(QHeaderView* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t, int);
+		void operator()(int logicalIndex) {
+			int sigval1 = logicalIndex;
+			callback(slot, sigval1);
+		}
+	};
+	VirtualQHeaderView::connect(self, static_cast<void (QHeaderView::*)(int)>(&QHeaderView::sectionHandleDoubleClicked), self, local_caller{slot, callback, release});
 }
 
 void QHeaderView_geometriesChanged(QHeaderView* self) {
 	self->geometriesChanged();
 }
 
-void QHeaderView_connect_geometriesChanged(QHeaderView* self, intptr_t slot) {
-	VirtualQHeaderView::connect(self, static_cast<void (QHeaderView::*)()>(&QHeaderView::geometriesChanged), self, [=]() {
-		miqt_exec_callback_QHeaderView_geometriesChanged(slot);
-	});
+void QHeaderView_connect_geometriesChanged(QHeaderView* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t);
+		void operator()() {
+			callback(slot);
+		}
+	};
+	VirtualQHeaderView::connect(self, static_cast<void (QHeaderView::*)()>(&QHeaderView::geometriesChanged), self, local_caller{slot, callback, release});
 }
 
 void QHeaderView_sortIndicatorChanged(QHeaderView* self, int logicalIndex, int order) {
 	self->sortIndicatorChanged(static_cast<int>(logicalIndex), static_cast<Qt::SortOrder>(order));
 }
 
-void QHeaderView_connect_sortIndicatorChanged(QHeaderView* self, intptr_t slot) {
-	VirtualQHeaderView::connect(self, static_cast<void (QHeaderView::*)(int, Qt::SortOrder)>(&QHeaderView::sortIndicatorChanged), self, [=](int logicalIndex, Qt::SortOrder order) {
-		int sigval1 = logicalIndex;
-		Qt::SortOrder order_ret = order;
-		int sigval2 = static_cast<int>(order_ret);
-		miqt_exec_callback_QHeaderView_sortIndicatorChanged(slot, sigval1, sigval2);
-	});
+void QHeaderView_connect_sortIndicatorChanged(QHeaderView* self, intptr_t slot, void (*callback)(intptr_t, int, int), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t, int, int);
+		void operator()(int logicalIndex, Qt::SortOrder order) {
+			int sigval1 = logicalIndex;
+			Qt::SortOrder order_ret = order;
+			int sigval2 = static_cast<int>(order_ret);
+			callback(slot, sigval1, sigval2);
+		}
+	};
+	VirtualQHeaderView::connect(self, static_cast<void (QHeaderView::*)(int, Qt::SortOrder)>(&QHeaderView::sortIndicatorChanged), self, local_caller{slot, callback, release});
 }
 
 void QHeaderView_sortIndicatorClearableChanged(QHeaderView* self, bool clearable) {
 	self->sortIndicatorClearableChanged(clearable);
 }
 
-void QHeaderView_connect_sortIndicatorClearableChanged(QHeaderView* self, intptr_t slot) {
-	VirtualQHeaderView::connect(self, static_cast<void (QHeaderView::*)(bool)>(&QHeaderView::sortIndicatorClearableChanged), self, [=](bool clearable) {
-		bool sigval1 = clearable;
-		miqt_exec_callback_QHeaderView_sortIndicatorClearableChanged(slot, sigval1);
-	});
+void QHeaderView_connect_sortIndicatorClearableChanged(QHeaderView* self, intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t, bool);
+		void operator()(bool clearable) {
+			bool sigval1 = clearable;
+			callback(slot, sigval1);
+		}
+	};
+	VirtualQHeaderView::connect(self, static_cast<void (QHeaderView::*)(bool)>(&QHeaderView::sortIndicatorClearableChanged), self, local_caller{slot, callback, release});
 }
 
 struct miqt_string QHeaderView_tr2(const char* s, const char* c) {

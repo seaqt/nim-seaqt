@@ -267,63 +267,63 @@ proc fcQQuickItem_isTextureProvider(self: pointer, ): bool {.importc: "QQuickIte
 proc fcQQuickItem_textureProvider(self: pointer, ): pointer {.importc: "QQuickItem_textureProvider".}
 proc fcQQuickItem_update(self: pointer, ): void {.importc: "QQuickItem_update".}
 proc fcQQuickItem_childrenRectChanged(self: pointer, param1: pointer): void {.importc: "QQuickItem_childrenRectChanged".}
-proc fcQQuickItem_connect_childrenRectChanged(self: pointer, slot: int) {.importc: "QQuickItem_connect_childrenRectChanged".}
+proc fcQQuickItem_connect_childrenRectChanged(self: pointer, slot: int, callback: proc (slot: int, param1: pointer) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QQuickItem_connect_childrenRectChanged".}
 proc fcQQuickItem_baselineOffsetChanged(self: pointer, param1: float64): void {.importc: "QQuickItem_baselineOffsetChanged".}
-proc fcQQuickItem_connect_baselineOffsetChanged(self: pointer, slot: int) {.importc: "QQuickItem_connect_baselineOffsetChanged".}
+proc fcQQuickItem_connect_baselineOffsetChanged(self: pointer, slot: int, callback: proc (slot: int, param1: float64) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QQuickItem_connect_baselineOffsetChanged".}
 proc fcQQuickItem_stateChanged(self: pointer, param1: struct_miqt_string): void {.importc: "QQuickItem_stateChanged".}
-proc fcQQuickItem_connect_stateChanged(self: pointer, slot: int) {.importc: "QQuickItem_connect_stateChanged".}
+proc fcQQuickItem_connect_stateChanged(self: pointer, slot: int, callback: proc (slot: int, param1: struct_miqt_string) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QQuickItem_connect_stateChanged".}
 proc fcQQuickItem_focusChanged(self: pointer, param1: bool): void {.importc: "QQuickItem_focusChanged".}
-proc fcQQuickItem_connect_focusChanged(self: pointer, slot: int) {.importc: "QQuickItem_connect_focusChanged".}
+proc fcQQuickItem_connect_focusChanged(self: pointer, slot: int, callback: proc (slot: int, param1: bool) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QQuickItem_connect_focusChanged".}
 proc fcQQuickItem_activeFocusChanged(self: pointer, param1: bool): void {.importc: "QQuickItem_activeFocusChanged".}
-proc fcQQuickItem_connect_activeFocusChanged(self: pointer, slot: int) {.importc: "QQuickItem_connect_activeFocusChanged".}
+proc fcQQuickItem_connect_activeFocusChanged(self: pointer, slot: int, callback: proc (slot: int, param1: bool) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QQuickItem_connect_activeFocusChanged".}
 proc fcQQuickItem_activeFocusOnTabChanged(self: pointer, param1: bool): void {.importc: "QQuickItem_activeFocusOnTabChanged".}
-proc fcQQuickItem_connect_activeFocusOnTabChanged(self: pointer, slot: int) {.importc: "QQuickItem_connect_activeFocusOnTabChanged".}
+proc fcQQuickItem_connect_activeFocusOnTabChanged(self: pointer, slot: int, callback: proc (slot: int, param1: bool) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QQuickItem_connect_activeFocusOnTabChanged".}
 proc fcQQuickItem_parentChanged(self: pointer, param1: pointer): void {.importc: "QQuickItem_parentChanged".}
-proc fcQQuickItem_connect_parentChanged(self: pointer, slot: int) {.importc: "QQuickItem_connect_parentChanged".}
+proc fcQQuickItem_connect_parentChanged(self: pointer, slot: int, callback: proc (slot: int, param1: pointer) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QQuickItem_connect_parentChanged".}
 proc fcQQuickItem_transformOriginChanged(self: pointer, param1: cint): void {.importc: "QQuickItem_transformOriginChanged".}
-proc fcQQuickItem_connect_transformOriginChanged(self: pointer, slot: int) {.importc: "QQuickItem_connect_transformOriginChanged".}
+proc fcQQuickItem_connect_transformOriginChanged(self: pointer, slot: int, callback: proc (slot: int, param1: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QQuickItem_connect_transformOriginChanged".}
 proc fcQQuickItem_smoothChanged(self: pointer, param1: bool): void {.importc: "QQuickItem_smoothChanged".}
-proc fcQQuickItem_connect_smoothChanged(self: pointer, slot: int) {.importc: "QQuickItem_connect_smoothChanged".}
+proc fcQQuickItem_connect_smoothChanged(self: pointer, slot: int, callback: proc (slot: int, param1: bool) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QQuickItem_connect_smoothChanged".}
 proc fcQQuickItem_antialiasingChanged(self: pointer, param1: bool): void {.importc: "QQuickItem_antialiasingChanged".}
-proc fcQQuickItem_connect_antialiasingChanged(self: pointer, slot: int) {.importc: "QQuickItem_connect_antialiasingChanged".}
+proc fcQQuickItem_connect_antialiasingChanged(self: pointer, slot: int, callback: proc (slot: int, param1: bool) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QQuickItem_connect_antialiasingChanged".}
 proc fcQQuickItem_clipChanged(self: pointer, param1: bool): void {.importc: "QQuickItem_clipChanged".}
-proc fcQQuickItem_connect_clipChanged(self: pointer, slot: int) {.importc: "QQuickItem_connect_clipChanged".}
+proc fcQQuickItem_connect_clipChanged(self: pointer, slot: int, callback: proc (slot: int, param1: bool) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QQuickItem_connect_clipChanged".}
 proc fcQQuickItem_windowChanged(self: pointer, window: pointer): void {.importc: "QQuickItem_windowChanged".}
-proc fcQQuickItem_connect_windowChanged(self: pointer, slot: int) {.importc: "QQuickItem_connect_windowChanged".}
+proc fcQQuickItem_connect_windowChanged(self: pointer, slot: int, callback: proc (slot: int, window: pointer) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QQuickItem_connect_windowChanged".}
 proc fcQQuickItem_childrenChanged(self: pointer, ): void {.importc: "QQuickItem_childrenChanged".}
-proc fcQQuickItem_connect_childrenChanged(self: pointer, slot: int) {.importc: "QQuickItem_connect_childrenChanged".}
+proc fcQQuickItem_connect_childrenChanged(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QQuickItem_connect_childrenChanged".}
 proc fcQQuickItem_opacityChanged(self: pointer, ): void {.importc: "QQuickItem_opacityChanged".}
-proc fcQQuickItem_connect_opacityChanged(self: pointer, slot: int) {.importc: "QQuickItem_connect_opacityChanged".}
+proc fcQQuickItem_connect_opacityChanged(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QQuickItem_connect_opacityChanged".}
 proc fcQQuickItem_enabledChanged(self: pointer, ): void {.importc: "QQuickItem_enabledChanged".}
-proc fcQQuickItem_connect_enabledChanged(self: pointer, slot: int) {.importc: "QQuickItem_connect_enabledChanged".}
+proc fcQQuickItem_connect_enabledChanged(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QQuickItem_connect_enabledChanged".}
 proc fcQQuickItem_visibleChanged(self: pointer, ): void {.importc: "QQuickItem_visibleChanged".}
-proc fcQQuickItem_connect_visibleChanged(self: pointer, slot: int) {.importc: "QQuickItem_connect_visibleChanged".}
+proc fcQQuickItem_connect_visibleChanged(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QQuickItem_connect_visibleChanged".}
 proc fcQQuickItem_visibleChildrenChanged(self: pointer, ): void {.importc: "QQuickItem_visibleChildrenChanged".}
-proc fcQQuickItem_connect_visibleChildrenChanged(self: pointer, slot: int) {.importc: "QQuickItem_connect_visibleChildrenChanged".}
+proc fcQQuickItem_connect_visibleChildrenChanged(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QQuickItem_connect_visibleChildrenChanged".}
 proc fcQQuickItem_rotationChanged(self: pointer, ): void {.importc: "QQuickItem_rotationChanged".}
-proc fcQQuickItem_connect_rotationChanged(self: pointer, slot: int) {.importc: "QQuickItem_connect_rotationChanged".}
+proc fcQQuickItem_connect_rotationChanged(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QQuickItem_connect_rotationChanged".}
 proc fcQQuickItem_scaleChanged(self: pointer, ): void {.importc: "QQuickItem_scaleChanged".}
-proc fcQQuickItem_connect_scaleChanged(self: pointer, slot: int) {.importc: "QQuickItem_connect_scaleChanged".}
+proc fcQQuickItem_connect_scaleChanged(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QQuickItem_connect_scaleChanged".}
 proc fcQQuickItem_xChanged(self: pointer, ): void {.importc: "QQuickItem_xChanged".}
-proc fcQQuickItem_connect_xChanged(self: pointer, slot: int) {.importc: "QQuickItem_connect_xChanged".}
+proc fcQQuickItem_connect_xChanged(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QQuickItem_connect_xChanged".}
 proc fcQQuickItem_yChanged(self: pointer, ): void {.importc: "QQuickItem_yChanged".}
-proc fcQQuickItem_connect_yChanged(self: pointer, slot: int) {.importc: "QQuickItem_connect_yChanged".}
+proc fcQQuickItem_connect_yChanged(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QQuickItem_connect_yChanged".}
 proc fcQQuickItem_widthChanged(self: pointer, ): void {.importc: "QQuickItem_widthChanged".}
-proc fcQQuickItem_connect_widthChanged(self: pointer, slot: int) {.importc: "QQuickItem_connect_widthChanged".}
+proc fcQQuickItem_connect_widthChanged(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QQuickItem_connect_widthChanged".}
 proc fcQQuickItem_heightChanged(self: pointer, ): void {.importc: "QQuickItem_heightChanged".}
-proc fcQQuickItem_connect_heightChanged(self: pointer, slot: int) {.importc: "QQuickItem_connect_heightChanged".}
+proc fcQQuickItem_connect_heightChanged(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QQuickItem_connect_heightChanged".}
 proc fcQQuickItem_zChanged(self: pointer, ): void {.importc: "QQuickItem_zChanged".}
-proc fcQQuickItem_connect_zChanged(self: pointer, slot: int) {.importc: "QQuickItem_connect_zChanged".}
+proc fcQQuickItem_connect_zChanged(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QQuickItem_connect_zChanged".}
 proc fcQQuickItem_implicitWidthChanged(self: pointer, ): void {.importc: "QQuickItem_implicitWidthChanged".}
-proc fcQQuickItem_connect_implicitWidthChanged(self: pointer, slot: int) {.importc: "QQuickItem_connect_implicitWidthChanged".}
+proc fcQQuickItem_connect_implicitWidthChanged(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QQuickItem_connect_implicitWidthChanged".}
 proc fcQQuickItem_implicitHeightChanged(self: pointer, ): void {.importc: "QQuickItem_implicitHeightChanged".}
-proc fcQQuickItem_connect_implicitHeightChanged(self: pointer, slot: int) {.importc: "QQuickItem_connect_implicitHeightChanged".}
+proc fcQQuickItem_connect_implicitHeightChanged(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QQuickItem_connect_implicitHeightChanged".}
 proc fcQQuickItem_containmentMaskChanged(self: pointer, ): void {.importc: "QQuickItem_containmentMaskChanged".}
-proc fcQQuickItem_connect_containmentMaskChanged(self: pointer, slot: int) {.importc: "QQuickItem_connect_containmentMaskChanged".}
+proc fcQQuickItem_connect_containmentMaskChanged(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QQuickItem_connect_containmentMaskChanged".}
 proc fcQQuickItem_paletteChanged(self: pointer, ): void {.importc: "QQuickItem_paletteChanged".}
-proc fcQQuickItem_connect_paletteChanged(self: pointer, slot: int) {.importc: "QQuickItem_connect_paletteChanged".}
+proc fcQQuickItem_connect_paletteChanged(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QQuickItem_connect_paletteChanged".}
 proc fcQQuickItem_paletteCreated(self: pointer, ): void {.importc: "QQuickItem_paletteCreated".}
-proc fcQQuickItem_connect_paletteCreated(self: pointer, slot: int) {.importc: "QQuickItem_connect_paletteCreated".}
+proc fcQQuickItem_connect_paletteCreated(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QQuickItem_connect_paletteCreated".}
 proc fcQQuickItem_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QQuickItem_tr2".}
 proc fcQQuickItem_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QQuickItem_tr3".}
 proc fcQQuickItem_setFlag2(self: pointer, flag: cint, enabled: bool): void {.importc: "QQuickItem_setFlag2".}
@@ -1030,39 +1030,47 @@ proc childrenRectChanged*(self: gen_qquickitem_types.QQuickItem, param1: gen_qre
   fcQQuickItem_childrenRectChanged(self.h, param1.h)
 
 type QQuickItemchildrenRectChangedSlot* = proc(param1: gen_qrect_types.QRectF)
-proc miqt_exec_callback_cQQuickItem_childrenRectChanged(slot: int, param1: pointer) {.exportc: "miqt_exec_callback_QQuickItem_childrenRectChanged".} =
+proc miqt_exec_callback_cQQuickItem_childrenRectChanged(slot: int, param1: pointer) {.cdecl.} =
   let nimfunc = cast[ptr QQuickItemchildrenRectChangedSlot](cast[pointer](slot))
   let slotval1 = gen_qrect_types.QRectF(h: param1)
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQQuickItem_childrenRectChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QQuickItemchildrenRectChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onchildrenRectChanged*(self: gen_qquickitem_types.QQuickItem, slot: QQuickItemchildrenRectChangedSlot) =
   var tmp = new QQuickItemchildrenRectChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQQuickItem_connect_childrenRectChanged(self.h, cast[int](addr tmp[]))
+  fcQQuickItem_connect_childrenRectChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQQuickItem_childrenRectChanged, miqt_exec_callback_cQQuickItem_childrenRectChanged_release)
 
 proc baselineOffsetChanged*(self: gen_qquickitem_types.QQuickItem, param1: float64): void =
   fcQQuickItem_baselineOffsetChanged(self.h, param1)
 
 type QQuickItembaselineOffsetChangedSlot* = proc(param1: float64)
-proc miqt_exec_callback_cQQuickItem_baselineOffsetChanged(slot: int, param1: float64) {.exportc: "miqt_exec_callback_QQuickItem_baselineOffsetChanged".} =
+proc miqt_exec_callback_cQQuickItem_baselineOffsetChanged(slot: int, param1: float64) {.cdecl.} =
   let nimfunc = cast[ptr QQuickItembaselineOffsetChangedSlot](cast[pointer](slot))
   let slotval1 = param1
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQQuickItem_baselineOffsetChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QQuickItembaselineOffsetChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onbaselineOffsetChanged*(self: gen_qquickitem_types.QQuickItem, slot: QQuickItembaselineOffsetChangedSlot) =
   var tmp = new QQuickItembaselineOffsetChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQQuickItem_connect_baselineOffsetChanged(self.h, cast[int](addr tmp[]))
+  fcQQuickItem_connect_baselineOffsetChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQQuickItem_baselineOffsetChanged, miqt_exec_callback_cQQuickItem_baselineOffsetChanged_release)
 
 proc stateChanged*(self: gen_qquickitem_types.QQuickItem, param1: string): void =
   fcQQuickItem_stateChanged(self.h, struct_miqt_string(data: param1, len: csize_t(len(param1))))
 
 type QQuickItemstateChangedSlot* = proc(param1: string)
-proc miqt_exec_callback_cQQuickItem_stateChanged(slot: int, param1: struct_miqt_string) {.exportc: "miqt_exec_callback_QQuickItem_stateChanged".} =
+proc miqt_exec_callback_cQQuickItem_stateChanged(slot: int, param1: struct_miqt_string) {.cdecl.} =
   let nimfunc = cast[ptr QQuickItemstateChangedSlot](cast[pointer](slot))
   let vparam1_ms = param1
   let vparam1x_ret = string.fromBytes(toOpenArrayByte(vparam1_ms.data, 0, int(vparam1_ms.len)-1))
@@ -1071,393 +1079,501 @@ proc miqt_exec_callback_cQQuickItem_stateChanged(slot: int, param1: struct_miqt_
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQQuickItem_stateChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QQuickItemstateChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onstateChanged*(self: gen_qquickitem_types.QQuickItem, slot: QQuickItemstateChangedSlot) =
   var tmp = new QQuickItemstateChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQQuickItem_connect_stateChanged(self.h, cast[int](addr tmp[]))
+  fcQQuickItem_connect_stateChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQQuickItem_stateChanged, miqt_exec_callback_cQQuickItem_stateChanged_release)
 
 proc focusChanged*(self: gen_qquickitem_types.QQuickItem, param1: bool): void =
   fcQQuickItem_focusChanged(self.h, param1)
 
 type QQuickItemfocusChangedSlot* = proc(param1: bool)
-proc miqt_exec_callback_cQQuickItem_focusChanged(slot: int, param1: bool) {.exportc: "miqt_exec_callback_QQuickItem_focusChanged".} =
+proc miqt_exec_callback_cQQuickItem_focusChanged(slot: int, param1: bool) {.cdecl.} =
   let nimfunc = cast[ptr QQuickItemfocusChangedSlot](cast[pointer](slot))
   let slotval1 = param1
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQQuickItem_focusChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QQuickItemfocusChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onfocusChanged*(self: gen_qquickitem_types.QQuickItem, slot: QQuickItemfocusChangedSlot) =
   var tmp = new QQuickItemfocusChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQQuickItem_connect_focusChanged(self.h, cast[int](addr tmp[]))
+  fcQQuickItem_connect_focusChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQQuickItem_focusChanged, miqt_exec_callback_cQQuickItem_focusChanged_release)
 
 proc activeFocusChanged*(self: gen_qquickitem_types.QQuickItem, param1: bool): void =
   fcQQuickItem_activeFocusChanged(self.h, param1)
 
 type QQuickItemactiveFocusChangedSlot* = proc(param1: bool)
-proc miqt_exec_callback_cQQuickItem_activeFocusChanged(slot: int, param1: bool) {.exportc: "miqt_exec_callback_QQuickItem_activeFocusChanged".} =
+proc miqt_exec_callback_cQQuickItem_activeFocusChanged(slot: int, param1: bool) {.cdecl.} =
   let nimfunc = cast[ptr QQuickItemactiveFocusChangedSlot](cast[pointer](slot))
   let slotval1 = param1
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQQuickItem_activeFocusChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QQuickItemactiveFocusChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onactiveFocusChanged*(self: gen_qquickitem_types.QQuickItem, slot: QQuickItemactiveFocusChangedSlot) =
   var tmp = new QQuickItemactiveFocusChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQQuickItem_connect_activeFocusChanged(self.h, cast[int](addr tmp[]))
+  fcQQuickItem_connect_activeFocusChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQQuickItem_activeFocusChanged, miqt_exec_callback_cQQuickItem_activeFocusChanged_release)
 
 proc activeFocusOnTabChanged*(self: gen_qquickitem_types.QQuickItem, param1: bool): void =
   fcQQuickItem_activeFocusOnTabChanged(self.h, param1)
 
 type QQuickItemactiveFocusOnTabChangedSlot* = proc(param1: bool)
-proc miqt_exec_callback_cQQuickItem_activeFocusOnTabChanged(slot: int, param1: bool) {.exportc: "miqt_exec_callback_QQuickItem_activeFocusOnTabChanged".} =
+proc miqt_exec_callback_cQQuickItem_activeFocusOnTabChanged(slot: int, param1: bool) {.cdecl.} =
   let nimfunc = cast[ptr QQuickItemactiveFocusOnTabChangedSlot](cast[pointer](slot))
   let slotval1 = param1
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQQuickItem_activeFocusOnTabChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QQuickItemactiveFocusOnTabChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onactiveFocusOnTabChanged*(self: gen_qquickitem_types.QQuickItem, slot: QQuickItemactiveFocusOnTabChangedSlot) =
   var tmp = new QQuickItemactiveFocusOnTabChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQQuickItem_connect_activeFocusOnTabChanged(self.h, cast[int](addr tmp[]))
+  fcQQuickItem_connect_activeFocusOnTabChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQQuickItem_activeFocusOnTabChanged, miqt_exec_callback_cQQuickItem_activeFocusOnTabChanged_release)
 
 proc parentChanged*(self: gen_qquickitem_types.QQuickItem, param1: gen_qquickitem_types.QQuickItem): void =
   fcQQuickItem_parentChanged(self.h, param1.h)
 
 type QQuickItemparentChangedSlot* = proc(param1: gen_qquickitem_types.QQuickItem)
-proc miqt_exec_callback_cQQuickItem_parentChanged(slot: int, param1: pointer) {.exportc: "miqt_exec_callback_QQuickItem_parentChanged".} =
+proc miqt_exec_callback_cQQuickItem_parentChanged(slot: int, param1: pointer) {.cdecl.} =
   let nimfunc = cast[ptr QQuickItemparentChangedSlot](cast[pointer](slot))
   let slotval1 = gen_qquickitem_types.QQuickItem(h: param1)
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQQuickItem_parentChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QQuickItemparentChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onparentChanged*(self: gen_qquickitem_types.QQuickItem, slot: QQuickItemparentChangedSlot) =
   var tmp = new QQuickItemparentChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQQuickItem_connect_parentChanged(self.h, cast[int](addr tmp[]))
+  fcQQuickItem_connect_parentChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQQuickItem_parentChanged, miqt_exec_callback_cQQuickItem_parentChanged_release)
 
 proc transformOriginChanged*(self: gen_qquickitem_types.QQuickItem, param1: cint): void =
   fcQQuickItem_transformOriginChanged(self.h, cint(param1))
 
 type QQuickItemtransformOriginChangedSlot* = proc(param1: cint)
-proc miqt_exec_callback_cQQuickItem_transformOriginChanged(slot: int, param1: cint) {.exportc: "miqt_exec_callback_QQuickItem_transformOriginChanged".} =
+proc miqt_exec_callback_cQQuickItem_transformOriginChanged(slot: int, param1: cint) {.cdecl.} =
   let nimfunc = cast[ptr QQuickItemtransformOriginChangedSlot](cast[pointer](slot))
   let slotval1 = cint(param1)
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQQuickItem_transformOriginChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QQuickItemtransformOriginChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc ontransformOriginChanged*(self: gen_qquickitem_types.QQuickItem, slot: QQuickItemtransformOriginChangedSlot) =
   var tmp = new QQuickItemtransformOriginChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQQuickItem_connect_transformOriginChanged(self.h, cast[int](addr tmp[]))
+  fcQQuickItem_connect_transformOriginChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQQuickItem_transformOriginChanged, miqt_exec_callback_cQQuickItem_transformOriginChanged_release)
 
 proc smoothChanged*(self: gen_qquickitem_types.QQuickItem, param1: bool): void =
   fcQQuickItem_smoothChanged(self.h, param1)
 
 type QQuickItemsmoothChangedSlot* = proc(param1: bool)
-proc miqt_exec_callback_cQQuickItem_smoothChanged(slot: int, param1: bool) {.exportc: "miqt_exec_callback_QQuickItem_smoothChanged".} =
+proc miqt_exec_callback_cQQuickItem_smoothChanged(slot: int, param1: bool) {.cdecl.} =
   let nimfunc = cast[ptr QQuickItemsmoothChangedSlot](cast[pointer](slot))
   let slotval1 = param1
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQQuickItem_smoothChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QQuickItemsmoothChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onsmoothChanged*(self: gen_qquickitem_types.QQuickItem, slot: QQuickItemsmoothChangedSlot) =
   var tmp = new QQuickItemsmoothChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQQuickItem_connect_smoothChanged(self.h, cast[int](addr tmp[]))
+  fcQQuickItem_connect_smoothChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQQuickItem_smoothChanged, miqt_exec_callback_cQQuickItem_smoothChanged_release)
 
 proc antialiasingChanged*(self: gen_qquickitem_types.QQuickItem, param1: bool): void =
   fcQQuickItem_antialiasingChanged(self.h, param1)
 
 type QQuickItemantialiasingChangedSlot* = proc(param1: bool)
-proc miqt_exec_callback_cQQuickItem_antialiasingChanged(slot: int, param1: bool) {.exportc: "miqt_exec_callback_QQuickItem_antialiasingChanged".} =
+proc miqt_exec_callback_cQQuickItem_antialiasingChanged(slot: int, param1: bool) {.cdecl.} =
   let nimfunc = cast[ptr QQuickItemantialiasingChangedSlot](cast[pointer](slot))
   let slotval1 = param1
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQQuickItem_antialiasingChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QQuickItemantialiasingChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onantialiasingChanged*(self: gen_qquickitem_types.QQuickItem, slot: QQuickItemantialiasingChangedSlot) =
   var tmp = new QQuickItemantialiasingChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQQuickItem_connect_antialiasingChanged(self.h, cast[int](addr tmp[]))
+  fcQQuickItem_connect_antialiasingChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQQuickItem_antialiasingChanged, miqt_exec_callback_cQQuickItem_antialiasingChanged_release)
 
 proc clipChanged*(self: gen_qquickitem_types.QQuickItem, param1: bool): void =
   fcQQuickItem_clipChanged(self.h, param1)
 
 type QQuickItemclipChangedSlot* = proc(param1: bool)
-proc miqt_exec_callback_cQQuickItem_clipChanged(slot: int, param1: bool) {.exportc: "miqt_exec_callback_QQuickItem_clipChanged".} =
+proc miqt_exec_callback_cQQuickItem_clipChanged(slot: int, param1: bool) {.cdecl.} =
   let nimfunc = cast[ptr QQuickItemclipChangedSlot](cast[pointer](slot))
   let slotval1 = param1
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQQuickItem_clipChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QQuickItemclipChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onclipChanged*(self: gen_qquickitem_types.QQuickItem, slot: QQuickItemclipChangedSlot) =
   var tmp = new QQuickItemclipChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQQuickItem_connect_clipChanged(self.h, cast[int](addr tmp[]))
+  fcQQuickItem_connect_clipChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQQuickItem_clipChanged, miqt_exec_callback_cQQuickItem_clipChanged_release)
 
 proc windowChanged*(self: gen_qquickitem_types.QQuickItem, window: gen_qquickwindow_types.QQuickWindow): void =
   fcQQuickItem_windowChanged(self.h, window.h)
 
 type QQuickItemwindowChangedSlot* = proc(window: gen_qquickwindow_types.QQuickWindow)
-proc miqt_exec_callback_cQQuickItem_windowChanged(slot: int, window: pointer) {.exportc: "miqt_exec_callback_QQuickItem_windowChanged".} =
+proc miqt_exec_callback_cQQuickItem_windowChanged(slot: int, window: pointer) {.cdecl.} =
   let nimfunc = cast[ptr QQuickItemwindowChangedSlot](cast[pointer](slot))
   let slotval1 = gen_qquickwindow_types.QQuickWindow(h: window)
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQQuickItem_windowChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QQuickItemwindowChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onwindowChanged*(self: gen_qquickitem_types.QQuickItem, slot: QQuickItemwindowChangedSlot) =
   var tmp = new QQuickItemwindowChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQQuickItem_connect_windowChanged(self.h, cast[int](addr tmp[]))
+  fcQQuickItem_connect_windowChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQQuickItem_windowChanged, miqt_exec_callback_cQQuickItem_windowChanged_release)
 
 proc childrenChanged*(self: gen_qquickitem_types.QQuickItem, ): void =
   fcQQuickItem_childrenChanged(self.h)
 
 type QQuickItemchildrenChangedSlot* = proc()
-proc miqt_exec_callback_cQQuickItem_childrenChanged(slot: int) {.exportc: "miqt_exec_callback_QQuickItem_childrenChanged".} =
+proc miqt_exec_callback_cQQuickItem_childrenChanged(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QQuickItemchildrenChangedSlot](cast[pointer](slot))
   nimfunc[]()
+
+proc miqt_exec_callback_cQQuickItem_childrenChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QQuickItemchildrenChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
 
 proc onchildrenChanged*(self: gen_qquickitem_types.QQuickItem, slot: QQuickItemchildrenChangedSlot) =
   var tmp = new QQuickItemchildrenChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQQuickItem_connect_childrenChanged(self.h, cast[int](addr tmp[]))
+  fcQQuickItem_connect_childrenChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQQuickItem_childrenChanged, miqt_exec_callback_cQQuickItem_childrenChanged_release)
 
 proc opacityChanged*(self: gen_qquickitem_types.QQuickItem, ): void =
   fcQQuickItem_opacityChanged(self.h)
 
 type QQuickItemopacityChangedSlot* = proc()
-proc miqt_exec_callback_cQQuickItem_opacityChanged(slot: int) {.exportc: "miqt_exec_callback_QQuickItem_opacityChanged".} =
+proc miqt_exec_callback_cQQuickItem_opacityChanged(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QQuickItemopacityChangedSlot](cast[pointer](slot))
   nimfunc[]()
+
+proc miqt_exec_callback_cQQuickItem_opacityChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QQuickItemopacityChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
 
 proc onopacityChanged*(self: gen_qquickitem_types.QQuickItem, slot: QQuickItemopacityChangedSlot) =
   var tmp = new QQuickItemopacityChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQQuickItem_connect_opacityChanged(self.h, cast[int](addr tmp[]))
+  fcQQuickItem_connect_opacityChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQQuickItem_opacityChanged, miqt_exec_callback_cQQuickItem_opacityChanged_release)
 
 proc enabledChanged*(self: gen_qquickitem_types.QQuickItem, ): void =
   fcQQuickItem_enabledChanged(self.h)
 
 type QQuickItemenabledChangedSlot* = proc()
-proc miqt_exec_callback_cQQuickItem_enabledChanged(slot: int) {.exportc: "miqt_exec_callback_QQuickItem_enabledChanged".} =
+proc miqt_exec_callback_cQQuickItem_enabledChanged(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QQuickItemenabledChangedSlot](cast[pointer](slot))
   nimfunc[]()
+
+proc miqt_exec_callback_cQQuickItem_enabledChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QQuickItemenabledChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
 
 proc onenabledChanged*(self: gen_qquickitem_types.QQuickItem, slot: QQuickItemenabledChangedSlot) =
   var tmp = new QQuickItemenabledChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQQuickItem_connect_enabledChanged(self.h, cast[int](addr tmp[]))
+  fcQQuickItem_connect_enabledChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQQuickItem_enabledChanged, miqt_exec_callback_cQQuickItem_enabledChanged_release)
 
 proc visibleChanged*(self: gen_qquickitem_types.QQuickItem, ): void =
   fcQQuickItem_visibleChanged(self.h)
 
 type QQuickItemvisibleChangedSlot* = proc()
-proc miqt_exec_callback_cQQuickItem_visibleChanged(slot: int) {.exportc: "miqt_exec_callback_QQuickItem_visibleChanged".} =
+proc miqt_exec_callback_cQQuickItem_visibleChanged(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QQuickItemvisibleChangedSlot](cast[pointer](slot))
   nimfunc[]()
+
+proc miqt_exec_callback_cQQuickItem_visibleChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QQuickItemvisibleChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
 
 proc onvisibleChanged*(self: gen_qquickitem_types.QQuickItem, slot: QQuickItemvisibleChangedSlot) =
   var tmp = new QQuickItemvisibleChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQQuickItem_connect_visibleChanged(self.h, cast[int](addr tmp[]))
+  fcQQuickItem_connect_visibleChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQQuickItem_visibleChanged, miqt_exec_callback_cQQuickItem_visibleChanged_release)
 
 proc visibleChildrenChanged*(self: gen_qquickitem_types.QQuickItem, ): void =
   fcQQuickItem_visibleChildrenChanged(self.h)
 
 type QQuickItemvisibleChildrenChangedSlot* = proc()
-proc miqt_exec_callback_cQQuickItem_visibleChildrenChanged(slot: int) {.exportc: "miqt_exec_callback_QQuickItem_visibleChildrenChanged".} =
+proc miqt_exec_callback_cQQuickItem_visibleChildrenChanged(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QQuickItemvisibleChildrenChangedSlot](cast[pointer](slot))
   nimfunc[]()
+
+proc miqt_exec_callback_cQQuickItem_visibleChildrenChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QQuickItemvisibleChildrenChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
 
 proc onvisibleChildrenChanged*(self: gen_qquickitem_types.QQuickItem, slot: QQuickItemvisibleChildrenChangedSlot) =
   var tmp = new QQuickItemvisibleChildrenChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQQuickItem_connect_visibleChildrenChanged(self.h, cast[int](addr tmp[]))
+  fcQQuickItem_connect_visibleChildrenChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQQuickItem_visibleChildrenChanged, miqt_exec_callback_cQQuickItem_visibleChildrenChanged_release)
 
 proc rotationChanged*(self: gen_qquickitem_types.QQuickItem, ): void =
   fcQQuickItem_rotationChanged(self.h)
 
 type QQuickItemrotationChangedSlot* = proc()
-proc miqt_exec_callback_cQQuickItem_rotationChanged(slot: int) {.exportc: "miqt_exec_callback_QQuickItem_rotationChanged".} =
+proc miqt_exec_callback_cQQuickItem_rotationChanged(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QQuickItemrotationChangedSlot](cast[pointer](slot))
   nimfunc[]()
+
+proc miqt_exec_callback_cQQuickItem_rotationChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QQuickItemrotationChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
 
 proc onrotationChanged*(self: gen_qquickitem_types.QQuickItem, slot: QQuickItemrotationChangedSlot) =
   var tmp = new QQuickItemrotationChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQQuickItem_connect_rotationChanged(self.h, cast[int](addr tmp[]))
+  fcQQuickItem_connect_rotationChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQQuickItem_rotationChanged, miqt_exec_callback_cQQuickItem_rotationChanged_release)
 
 proc scaleChanged*(self: gen_qquickitem_types.QQuickItem, ): void =
   fcQQuickItem_scaleChanged(self.h)
 
 type QQuickItemscaleChangedSlot* = proc()
-proc miqt_exec_callback_cQQuickItem_scaleChanged(slot: int) {.exportc: "miqt_exec_callback_QQuickItem_scaleChanged".} =
+proc miqt_exec_callback_cQQuickItem_scaleChanged(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QQuickItemscaleChangedSlot](cast[pointer](slot))
   nimfunc[]()
+
+proc miqt_exec_callback_cQQuickItem_scaleChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QQuickItemscaleChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
 
 proc onscaleChanged*(self: gen_qquickitem_types.QQuickItem, slot: QQuickItemscaleChangedSlot) =
   var tmp = new QQuickItemscaleChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQQuickItem_connect_scaleChanged(self.h, cast[int](addr tmp[]))
+  fcQQuickItem_connect_scaleChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQQuickItem_scaleChanged, miqt_exec_callback_cQQuickItem_scaleChanged_release)
 
 proc xChanged*(self: gen_qquickitem_types.QQuickItem, ): void =
   fcQQuickItem_xChanged(self.h)
 
 type QQuickItemxChangedSlot* = proc()
-proc miqt_exec_callback_cQQuickItem_xChanged(slot: int) {.exportc: "miqt_exec_callback_QQuickItem_xChanged".} =
+proc miqt_exec_callback_cQQuickItem_xChanged(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QQuickItemxChangedSlot](cast[pointer](slot))
   nimfunc[]()
+
+proc miqt_exec_callback_cQQuickItem_xChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QQuickItemxChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
 
 proc onxChanged*(self: gen_qquickitem_types.QQuickItem, slot: QQuickItemxChangedSlot) =
   var tmp = new QQuickItemxChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQQuickItem_connect_xChanged(self.h, cast[int](addr tmp[]))
+  fcQQuickItem_connect_xChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQQuickItem_xChanged, miqt_exec_callback_cQQuickItem_xChanged_release)
 
 proc yChanged*(self: gen_qquickitem_types.QQuickItem, ): void =
   fcQQuickItem_yChanged(self.h)
 
 type QQuickItemyChangedSlot* = proc()
-proc miqt_exec_callback_cQQuickItem_yChanged(slot: int) {.exportc: "miqt_exec_callback_QQuickItem_yChanged".} =
+proc miqt_exec_callback_cQQuickItem_yChanged(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QQuickItemyChangedSlot](cast[pointer](slot))
   nimfunc[]()
+
+proc miqt_exec_callback_cQQuickItem_yChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QQuickItemyChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
 
 proc onyChanged*(self: gen_qquickitem_types.QQuickItem, slot: QQuickItemyChangedSlot) =
   var tmp = new QQuickItemyChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQQuickItem_connect_yChanged(self.h, cast[int](addr tmp[]))
+  fcQQuickItem_connect_yChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQQuickItem_yChanged, miqt_exec_callback_cQQuickItem_yChanged_release)
 
 proc widthChanged*(self: gen_qquickitem_types.QQuickItem, ): void =
   fcQQuickItem_widthChanged(self.h)
 
 type QQuickItemwidthChangedSlot* = proc()
-proc miqt_exec_callback_cQQuickItem_widthChanged(slot: int) {.exportc: "miqt_exec_callback_QQuickItem_widthChanged".} =
+proc miqt_exec_callback_cQQuickItem_widthChanged(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QQuickItemwidthChangedSlot](cast[pointer](slot))
   nimfunc[]()
+
+proc miqt_exec_callback_cQQuickItem_widthChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QQuickItemwidthChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
 
 proc onwidthChanged*(self: gen_qquickitem_types.QQuickItem, slot: QQuickItemwidthChangedSlot) =
   var tmp = new QQuickItemwidthChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQQuickItem_connect_widthChanged(self.h, cast[int](addr tmp[]))
+  fcQQuickItem_connect_widthChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQQuickItem_widthChanged, miqt_exec_callback_cQQuickItem_widthChanged_release)
 
 proc heightChanged*(self: gen_qquickitem_types.QQuickItem, ): void =
   fcQQuickItem_heightChanged(self.h)
 
 type QQuickItemheightChangedSlot* = proc()
-proc miqt_exec_callback_cQQuickItem_heightChanged(slot: int) {.exportc: "miqt_exec_callback_QQuickItem_heightChanged".} =
+proc miqt_exec_callback_cQQuickItem_heightChanged(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QQuickItemheightChangedSlot](cast[pointer](slot))
   nimfunc[]()
+
+proc miqt_exec_callback_cQQuickItem_heightChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QQuickItemheightChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
 
 proc onheightChanged*(self: gen_qquickitem_types.QQuickItem, slot: QQuickItemheightChangedSlot) =
   var tmp = new QQuickItemheightChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQQuickItem_connect_heightChanged(self.h, cast[int](addr tmp[]))
+  fcQQuickItem_connect_heightChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQQuickItem_heightChanged, miqt_exec_callback_cQQuickItem_heightChanged_release)
 
 proc zChanged*(self: gen_qquickitem_types.QQuickItem, ): void =
   fcQQuickItem_zChanged(self.h)
 
 type QQuickItemzChangedSlot* = proc()
-proc miqt_exec_callback_cQQuickItem_zChanged(slot: int) {.exportc: "miqt_exec_callback_QQuickItem_zChanged".} =
+proc miqt_exec_callback_cQQuickItem_zChanged(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QQuickItemzChangedSlot](cast[pointer](slot))
   nimfunc[]()
+
+proc miqt_exec_callback_cQQuickItem_zChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QQuickItemzChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
 
 proc onzChanged*(self: gen_qquickitem_types.QQuickItem, slot: QQuickItemzChangedSlot) =
   var tmp = new QQuickItemzChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQQuickItem_connect_zChanged(self.h, cast[int](addr tmp[]))
+  fcQQuickItem_connect_zChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQQuickItem_zChanged, miqt_exec_callback_cQQuickItem_zChanged_release)
 
 proc implicitWidthChanged*(self: gen_qquickitem_types.QQuickItem, ): void =
   fcQQuickItem_implicitWidthChanged(self.h)
 
 type QQuickItemimplicitWidthChangedSlot* = proc()
-proc miqt_exec_callback_cQQuickItem_implicitWidthChanged(slot: int) {.exportc: "miqt_exec_callback_QQuickItem_implicitWidthChanged".} =
+proc miqt_exec_callback_cQQuickItem_implicitWidthChanged(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QQuickItemimplicitWidthChangedSlot](cast[pointer](slot))
   nimfunc[]()
+
+proc miqt_exec_callback_cQQuickItem_implicitWidthChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QQuickItemimplicitWidthChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
 
 proc onimplicitWidthChanged*(self: gen_qquickitem_types.QQuickItem, slot: QQuickItemimplicitWidthChangedSlot) =
   var tmp = new QQuickItemimplicitWidthChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQQuickItem_connect_implicitWidthChanged(self.h, cast[int](addr tmp[]))
+  fcQQuickItem_connect_implicitWidthChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQQuickItem_implicitWidthChanged, miqt_exec_callback_cQQuickItem_implicitWidthChanged_release)
 
 proc implicitHeightChanged*(self: gen_qquickitem_types.QQuickItem, ): void =
   fcQQuickItem_implicitHeightChanged(self.h)
 
 type QQuickItemimplicitHeightChangedSlot* = proc()
-proc miqt_exec_callback_cQQuickItem_implicitHeightChanged(slot: int) {.exportc: "miqt_exec_callback_QQuickItem_implicitHeightChanged".} =
+proc miqt_exec_callback_cQQuickItem_implicitHeightChanged(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QQuickItemimplicitHeightChangedSlot](cast[pointer](slot))
   nimfunc[]()
+
+proc miqt_exec_callback_cQQuickItem_implicitHeightChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QQuickItemimplicitHeightChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
 
 proc onimplicitHeightChanged*(self: gen_qquickitem_types.QQuickItem, slot: QQuickItemimplicitHeightChangedSlot) =
   var tmp = new QQuickItemimplicitHeightChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQQuickItem_connect_implicitHeightChanged(self.h, cast[int](addr tmp[]))
+  fcQQuickItem_connect_implicitHeightChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQQuickItem_implicitHeightChanged, miqt_exec_callback_cQQuickItem_implicitHeightChanged_release)
 
 proc containmentMaskChanged*(self: gen_qquickitem_types.QQuickItem, ): void =
   fcQQuickItem_containmentMaskChanged(self.h)
 
 type QQuickItemcontainmentMaskChangedSlot* = proc()
-proc miqt_exec_callback_cQQuickItem_containmentMaskChanged(slot: int) {.exportc: "miqt_exec_callback_QQuickItem_containmentMaskChanged".} =
+proc miqt_exec_callback_cQQuickItem_containmentMaskChanged(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QQuickItemcontainmentMaskChangedSlot](cast[pointer](slot))
   nimfunc[]()
+
+proc miqt_exec_callback_cQQuickItem_containmentMaskChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QQuickItemcontainmentMaskChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
 
 proc oncontainmentMaskChanged*(self: gen_qquickitem_types.QQuickItem, slot: QQuickItemcontainmentMaskChangedSlot) =
   var tmp = new QQuickItemcontainmentMaskChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQQuickItem_connect_containmentMaskChanged(self.h, cast[int](addr tmp[]))
+  fcQQuickItem_connect_containmentMaskChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQQuickItem_containmentMaskChanged, miqt_exec_callback_cQQuickItem_containmentMaskChanged_release)
 
 proc paletteChanged*(self: gen_qquickitem_types.QQuickItem, ): void =
   fcQQuickItem_paletteChanged(self.h)
 
 type QQuickItempaletteChangedSlot* = proc()
-proc miqt_exec_callback_cQQuickItem_paletteChanged(slot: int) {.exportc: "miqt_exec_callback_QQuickItem_paletteChanged".} =
+proc miqt_exec_callback_cQQuickItem_paletteChanged(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QQuickItempaletteChangedSlot](cast[pointer](slot))
   nimfunc[]()
+
+proc miqt_exec_callback_cQQuickItem_paletteChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QQuickItempaletteChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
 
 proc onpaletteChanged*(self: gen_qquickitem_types.QQuickItem, slot: QQuickItempaletteChangedSlot) =
   var tmp = new QQuickItempaletteChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQQuickItem_connect_paletteChanged(self.h, cast[int](addr tmp[]))
+  fcQQuickItem_connect_paletteChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQQuickItem_paletteChanged, miqt_exec_callback_cQQuickItem_paletteChanged_release)
 
 proc paletteCreated*(self: gen_qquickitem_types.QQuickItem, ): void =
   fcQQuickItem_paletteCreated(self.h)
 
 type QQuickItempaletteCreatedSlot* = proc()
-proc miqt_exec_callback_cQQuickItem_paletteCreated(slot: int) {.exportc: "miqt_exec_callback_QQuickItem_paletteCreated".} =
+proc miqt_exec_callback_cQQuickItem_paletteCreated(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QQuickItempaletteCreatedSlot](cast[pointer](slot))
   nimfunc[]()
+
+proc miqt_exec_callback_cQQuickItem_paletteCreated_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QQuickItempaletteCreatedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
 
 proc onpaletteCreated*(self: gen_qquickitem_types.QQuickItem, slot: QQuickItempaletteCreatedSlot) =
   var tmp = new QQuickItempaletteCreatedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQQuickItem_connect_paletteCreated(self.h, cast[int](addr tmp[]))
+  fcQQuickItem_connect_paletteCreated(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQQuickItem_paletteCreated, miqt_exec_callback_cQQuickItem_paletteCreated_release)
 
 proc tr*(_: type gen_qquickitem_types.QQuickItem, s: cstring, c: cstring): string =
   let v_ms = fcQQuickItem_tr2(s, c)

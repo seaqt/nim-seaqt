@@ -21,14 +21,6 @@
 extern "C" {
 #endif
 
-void miqt_exec_callback_QAction_changed(intptr_t);
-void miqt_exec_callback_QAction_enabledChanged(intptr_t, bool);
-void miqt_exec_callback_QAction_checkableChanged(intptr_t, bool);
-void miqt_exec_callback_QAction_visibleChanged(intptr_t);
-void miqt_exec_callback_QAction_triggered(intptr_t);
-void miqt_exec_callback_QAction_hovered(intptr_t);
-void miqt_exec_callback_QAction_toggled(intptr_t, bool);
-void miqt_exec_callback_QAction_triggered1(intptr_t, bool);
 #ifdef __cplusplus
 } /* extern C */
 #endif
@@ -548,73 +540,108 @@ void QAction_changed(QAction* self) {
 	self->changed();
 }
 
-void QAction_connect_changed(QAction* self, intptr_t slot) {
-	VirtualQAction::connect(self, static_cast<void (QAction::*)()>(&QAction::changed), self, [=]() {
-		miqt_exec_callback_QAction_changed(slot);
-	});
+void QAction_connect_changed(QAction* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t);
+		void operator()() {
+			callback(slot);
+		}
+	};
+	VirtualQAction::connect(self, static_cast<void (QAction::*)()>(&QAction::changed), self, local_caller{slot, callback, release});
 }
 
 void QAction_enabledChanged(QAction* self, bool enabled) {
 	self->enabledChanged(enabled);
 }
 
-void QAction_connect_enabledChanged(QAction* self, intptr_t slot) {
-	VirtualQAction::connect(self, static_cast<void (QAction::*)(bool)>(&QAction::enabledChanged), self, [=](bool enabled) {
-		bool sigval1 = enabled;
-		miqt_exec_callback_QAction_enabledChanged(slot, sigval1);
-	});
+void QAction_connect_enabledChanged(QAction* self, intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t, bool);
+		void operator()(bool enabled) {
+			bool sigval1 = enabled;
+			callback(slot, sigval1);
+		}
+	};
+	VirtualQAction::connect(self, static_cast<void (QAction::*)(bool)>(&QAction::enabledChanged), self, local_caller{slot, callback, release});
 }
 
 void QAction_checkableChanged(QAction* self, bool checkable) {
 	self->checkableChanged(checkable);
 }
 
-void QAction_connect_checkableChanged(QAction* self, intptr_t slot) {
-	VirtualQAction::connect(self, static_cast<void (QAction::*)(bool)>(&QAction::checkableChanged), self, [=](bool checkable) {
-		bool sigval1 = checkable;
-		miqt_exec_callback_QAction_checkableChanged(slot, sigval1);
-	});
+void QAction_connect_checkableChanged(QAction* self, intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t, bool);
+		void operator()(bool checkable) {
+			bool sigval1 = checkable;
+			callback(slot, sigval1);
+		}
+	};
+	VirtualQAction::connect(self, static_cast<void (QAction::*)(bool)>(&QAction::checkableChanged), self, local_caller{slot, callback, release});
 }
 
 void QAction_visibleChanged(QAction* self) {
 	self->visibleChanged();
 }
 
-void QAction_connect_visibleChanged(QAction* self, intptr_t slot) {
-	VirtualQAction::connect(self, static_cast<void (QAction::*)()>(&QAction::visibleChanged), self, [=]() {
-		miqt_exec_callback_QAction_visibleChanged(slot);
-	});
+void QAction_connect_visibleChanged(QAction* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t);
+		void operator()() {
+			callback(slot);
+		}
+	};
+	VirtualQAction::connect(self, static_cast<void (QAction::*)()>(&QAction::visibleChanged), self, local_caller{slot, callback, release});
 }
 
 void QAction_triggered(QAction* self) {
 	self->triggered();
 }
 
-void QAction_connect_triggered(QAction* self, intptr_t slot) {
-	VirtualQAction::connect(self, static_cast<void (QAction::*)(bool)>(&QAction::triggered), self, [=]() {
-		miqt_exec_callback_QAction_triggered(slot);
-	});
+void QAction_connect_triggered(QAction* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t);
+		void operator()() {
+			callback(slot);
+		}
+	};
+	VirtualQAction::connect(self, static_cast<void (QAction::*)(bool)>(&QAction::triggered), self, local_caller{slot, callback, release});
 }
 
 void QAction_hovered(QAction* self) {
 	self->hovered();
 }
 
-void QAction_connect_hovered(QAction* self, intptr_t slot) {
-	VirtualQAction::connect(self, static_cast<void (QAction::*)()>(&QAction::hovered), self, [=]() {
-		miqt_exec_callback_QAction_hovered(slot);
-	});
+void QAction_connect_hovered(QAction* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t);
+		void operator()() {
+			callback(slot);
+		}
+	};
+	VirtualQAction::connect(self, static_cast<void (QAction::*)()>(&QAction::hovered), self, local_caller{slot, callback, release});
 }
 
 void QAction_toggled(QAction* self, bool param1) {
 	self->toggled(param1);
 }
 
-void QAction_connect_toggled(QAction* self, intptr_t slot) {
-	VirtualQAction::connect(self, static_cast<void (QAction::*)(bool)>(&QAction::toggled), self, [=](bool param1) {
-		bool sigval1 = param1;
-		miqt_exec_callback_QAction_toggled(slot, sigval1);
-	});
+void QAction_connect_toggled(QAction* self, intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t, bool);
+		void operator()(bool param1) {
+			bool sigval1 = param1;
+			callback(slot, sigval1);
+		}
+	};
+	VirtualQAction::connect(self, static_cast<void (QAction::*)(bool)>(&QAction::toggled), self, local_caller{slot, callback, release});
 }
 
 struct miqt_string QAction_tr2(const char* s, const char* c) {
@@ -647,11 +674,16 @@ void QAction_triggered1(QAction* self, bool checked) {
 	self->triggered(checked);
 }
 
-void QAction_connect_triggered1(QAction* self, intptr_t slot) {
-	VirtualQAction::connect(self, static_cast<void (QAction::*)(bool)>(&QAction::triggered), self, [=](bool checked) {
-		bool sigval1 = checked;
-		miqt_exec_callback_QAction_triggered1(slot, sigval1);
-	});
+void QAction_connect_triggered1(QAction* self, intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t, bool);
+		void operator()(bool checked) {
+			bool sigval1 = checked;
+			callback(slot, sigval1);
+		}
+	};
+	VirtualQAction::connect(self, static_cast<void (QAction::*)(bool)>(&QAction::triggered), self, local_caller{slot, callback, release});
 }
 
 QMetaObject* QAction_virtualbase_metaObject(const void* self) {

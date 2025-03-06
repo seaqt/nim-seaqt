@@ -120,7 +120,7 @@ proc fcQWebEngineProfile_setDownloadPath(self: pointer, path: struct_miqt_string
 proc fcQWebEngineProfile_clientCertificateStore(self: pointer, ): pointer {.importc: "QWebEngineProfile_clientCertificateStore".}
 proc fcQWebEngineProfile_defaultProfile(): pointer {.importc: "QWebEngineProfile_defaultProfile".}
 proc fcQWebEngineProfile_downloadRequested(self: pointer, download: pointer): void {.importc: "QWebEngineProfile_downloadRequested".}
-proc fcQWebEngineProfile_connect_downloadRequested(self: pointer, slot: int) {.importc: "QWebEngineProfile_connect_downloadRequested".}
+proc fcQWebEngineProfile_connect_downloadRequested(self: pointer, slot: int, callback: proc (slot: int, download: pointer) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QWebEngineProfile_connect_downloadRequested".}
 proc fcQWebEngineProfile_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QWebEngineProfile_tr2".}
 proc fcQWebEngineProfile_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QWebEngineProfile_tr3".}
 type cQWebEngineProfileVTable = object
@@ -316,17 +316,21 @@ proc downloadRequested*(self: gen_qwebengineprofile_types.QWebEngineProfile, dow
   fcQWebEngineProfile_downloadRequested(self.h, download.h)
 
 type QWebEngineProfiledownloadRequestedSlot* = proc(download: gen_qwebenginedownloadrequest_types.QWebEngineDownloadRequest)
-proc miqt_exec_callback_cQWebEngineProfile_downloadRequested(slot: int, download: pointer) {.exportc: "miqt_exec_callback_QWebEngineProfile_downloadRequested".} =
+proc miqt_exec_callback_cQWebEngineProfile_downloadRequested(slot: int, download: pointer) {.cdecl.} =
   let nimfunc = cast[ptr QWebEngineProfiledownloadRequestedSlot](cast[pointer](slot))
   let slotval1 = gen_qwebenginedownloadrequest_types.QWebEngineDownloadRequest(h: download)
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQWebEngineProfile_downloadRequested_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QWebEngineProfiledownloadRequestedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc ondownloadRequested*(self: gen_qwebengineprofile_types.QWebEngineProfile, slot: QWebEngineProfiledownloadRequestedSlot) =
   var tmp = new QWebEngineProfiledownloadRequestedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQWebEngineProfile_connect_downloadRequested(self.h, cast[int](addr tmp[]))
+  fcQWebEngineProfile_connect_downloadRequested(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQWebEngineProfile_downloadRequested, miqt_exec_callback_cQWebEngineProfile_downloadRequested_release)
 
 proc tr*(_: type gen_qwebengineprofile_types.QWebEngineProfile, s: cstring, c: cstring): string =
   let v_ms = fcQWebEngineProfile_tr2(s, c)

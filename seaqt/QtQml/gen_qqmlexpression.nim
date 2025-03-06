@@ -80,7 +80,7 @@ proc fcQQmlExpression_clearError(self: pointer, ): void {.importc: "QQmlExpressi
 proc fcQQmlExpression_error(self: pointer, ): pointer {.importc: "QQmlExpression_error".}
 proc fcQQmlExpression_evaluate(self: pointer, ): pointer {.importc: "QQmlExpression_evaluate".}
 proc fcQQmlExpression_valueChanged(self: pointer, ): void {.importc: "QQmlExpression_valueChanged".}
-proc fcQQmlExpression_connect_valueChanged(self: pointer, slot: int) {.importc: "QQmlExpression_connect_valueChanged".}
+proc fcQQmlExpression_connect_valueChanged(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QQmlExpression_connect_valueChanged".}
 proc fcQQmlExpression_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QQmlExpression_tr2".}
 proc fcQQmlExpression_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QQmlExpression_tr3".}
 proc fcQQmlExpression_setSourceLocation3(self: pointer, fileName: struct_miqt_string, line: cint, column: cint): void {.importc: "QQmlExpression_setSourceLocation3".}
@@ -187,15 +187,19 @@ proc valueChanged*(self: gen_qqmlexpression_types.QQmlExpression, ): void =
   fcQQmlExpression_valueChanged(self.h)
 
 type QQmlExpressionvalueChangedSlot* = proc()
-proc miqt_exec_callback_cQQmlExpression_valueChanged(slot: int) {.exportc: "miqt_exec_callback_QQmlExpression_valueChanged".} =
+proc miqt_exec_callback_cQQmlExpression_valueChanged(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QQmlExpressionvalueChangedSlot](cast[pointer](slot))
   nimfunc[]()
+
+proc miqt_exec_callback_cQQmlExpression_valueChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QQmlExpressionvalueChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
 
 proc onvalueChanged*(self: gen_qqmlexpression_types.QQmlExpression, slot: QQmlExpressionvalueChangedSlot) =
   var tmp = new QQmlExpressionvalueChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQQmlExpression_connect_valueChanged(self.h, cast[int](addr tmp[]))
+  fcQQmlExpression_connect_valueChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQQmlExpression_valueChanged, miqt_exec_callback_cQQmlExpression_valueChanged_release)
 
 proc tr*(_: type gen_qqmlexpression_types.QQmlExpression, s: cstring, c: cstring): string =
   let v_ms = fcQQmlExpression_tr2(s, c)

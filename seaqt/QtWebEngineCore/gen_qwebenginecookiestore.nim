@@ -61,9 +61,9 @@ proc fcQWebEngineCookieStore_deleteSessionCookies(self: pointer, ): void {.impor
 proc fcQWebEngineCookieStore_deleteAllCookies(self: pointer, ): void {.importc: "QWebEngineCookieStore_deleteAllCookies".}
 proc fcQWebEngineCookieStore_loadAllCookies(self: pointer, ): void {.importc: "QWebEngineCookieStore_loadAllCookies".}
 proc fcQWebEngineCookieStore_cookieAdded(self: pointer, cookie: pointer): void {.importc: "QWebEngineCookieStore_cookieAdded".}
-proc fcQWebEngineCookieStore_connect_cookieAdded(self: pointer, slot: int) {.importc: "QWebEngineCookieStore_connect_cookieAdded".}
+proc fcQWebEngineCookieStore_connect_cookieAdded(self: pointer, slot: int, callback: proc (slot: int, cookie: pointer) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QWebEngineCookieStore_connect_cookieAdded".}
 proc fcQWebEngineCookieStore_cookieRemoved(self: pointer, cookie: pointer): void {.importc: "QWebEngineCookieStore_cookieRemoved".}
-proc fcQWebEngineCookieStore_connect_cookieRemoved(self: pointer, slot: int) {.importc: "QWebEngineCookieStore_connect_cookieRemoved".}
+proc fcQWebEngineCookieStore_connect_cookieRemoved(self: pointer, slot: int, callback: proc (slot: int, cookie: pointer) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QWebEngineCookieStore_connect_cookieRemoved".}
 proc fcQWebEngineCookieStore_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QWebEngineCookieStore_tr2".}
 proc fcQWebEngineCookieStore_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QWebEngineCookieStore_tr3".}
 proc fcQWebEngineCookieStore_setCookie2(self: pointer, cookie: pointer, origin: pointer): void {.importc: "QWebEngineCookieStore_setCookie2".}
@@ -108,33 +108,41 @@ proc cookieAdded*(self: gen_qwebenginecookiestore_types.QWebEngineCookieStore, c
   fcQWebEngineCookieStore_cookieAdded(self.h, cookie.h)
 
 type QWebEngineCookieStorecookieAddedSlot* = proc(cookie: gen_qnetworkcookie_types.QNetworkCookie)
-proc miqt_exec_callback_cQWebEngineCookieStore_cookieAdded(slot: int, cookie: pointer) {.exportc: "miqt_exec_callback_QWebEngineCookieStore_cookieAdded".} =
+proc miqt_exec_callback_cQWebEngineCookieStore_cookieAdded(slot: int, cookie: pointer) {.cdecl.} =
   let nimfunc = cast[ptr QWebEngineCookieStorecookieAddedSlot](cast[pointer](slot))
   let slotval1 = gen_qnetworkcookie_types.QNetworkCookie(h: cookie)
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQWebEngineCookieStore_cookieAdded_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QWebEngineCookieStorecookieAddedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc oncookieAdded*(self: gen_qwebenginecookiestore_types.QWebEngineCookieStore, slot: QWebEngineCookieStorecookieAddedSlot) =
   var tmp = new QWebEngineCookieStorecookieAddedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQWebEngineCookieStore_connect_cookieAdded(self.h, cast[int](addr tmp[]))
+  fcQWebEngineCookieStore_connect_cookieAdded(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQWebEngineCookieStore_cookieAdded, miqt_exec_callback_cQWebEngineCookieStore_cookieAdded_release)
 
 proc cookieRemoved*(self: gen_qwebenginecookiestore_types.QWebEngineCookieStore, cookie: gen_qnetworkcookie_types.QNetworkCookie): void =
   fcQWebEngineCookieStore_cookieRemoved(self.h, cookie.h)
 
 type QWebEngineCookieStorecookieRemovedSlot* = proc(cookie: gen_qnetworkcookie_types.QNetworkCookie)
-proc miqt_exec_callback_cQWebEngineCookieStore_cookieRemoved(slot: int, cookie: pointer) {.exportc: "miqt_exec_callback_QWebEngineCookieStore_cookieRemoved".} =
+proc miqt_exec_callback_cQWebEngineCookieStore_cookieRemoved(slot: int, cookie: pointer) {.cdecl.} =
   let nimfunc = cast[ptr QWebEngineCookieStorecookieRemovedSlot](cast[pointer](slot))
   let slotval1 = gen_qnetworkcookie_types.QNetworkCookie(h: cookie)
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQWebEngineCookieStore_cookieRemoved_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QWebEngineCookieStorecookieRemovedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc oncookieRemoved*(self: gen_qwebenginecookiestore_types.QWebEngineCookieStore, slot: QWebEngineCookieStorecookieRemovedSlot) =
   var tmp = new QWebEngineCookieStorecookieRemovedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQWebEngineCookieStore_connect_cookieRemoved(self.h, cast[int](addr tmp[]))
+  fcQWebEngineCookieStore_connect_cookieRemoved(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQWebEngineCookieStore_cookieRemoved, miqt_exec_callback_cQWebEngineCookieStore_cookieRemoved_release)
 
 proc tr*(_: type gen_qwebenginecookiestore_types.QWebEngineCookieStore, s: cstring, c: cstring): string =
   let v_ms = fcQWebEngineCookieStore_tr2(s, c)
