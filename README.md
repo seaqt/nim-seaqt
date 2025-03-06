@@ -124,6 +124,12 @@ btn.onPressed(
 )
 ```
 
+## Alternatives for Nim+Qt
+
+* [nimqt](https://github.com/jerous86/nimqt/) - Bindings that generate C++ code on the fly and use [verdigris](https://github.com/woboq/verdigris) for meta-object integration - require `nim cpp`
+* [nimqml](https://github.com/filcuc/nimqml) - QML-focused bindings with `nim c` support based on [DOtherSide](https://github.com/filcuc/dotherside/)
+* [seaqt-nimqml](https://github.com/seaqt/nimqml-seaqt) - drop-in replacement of `nimqml` using `seaqt` backend (for full Qt access)
+
 ## wip
 
 Broadly, the aim is to support the majority of functionality Qt offers, albeit with adaptations for Nim.
