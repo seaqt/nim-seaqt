@@ -30,9 +30,6 @@ func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
     else:
       copyMem(addr result[0], unsafeAddr v[0], v.len)
 
-const cflags = gorge("pkg-config --cflags Qt5Widgets")  & " -fPIC"
-{.compile("gen_qdrawutil.cpp", cflags).}
-
 
 type QDrawBorderPixmapDrawingHintEnum* = distinct cint
 template OpaqueTopLeft*(_: type QDrawBorderPixmapDrawingHintEnum): untyped = 1
@@ -60,22 +57,19 @@ proc fcQTileRules_new(horizontalRule: cint, verticalRule: cint): ptr cQTileRules
 proc fcQTileRules_new2(): ptr cQTileRules {.importc: "QTileRules_new2".}
 proc fcQTileRules_new3(param1: pointer): ptr cQTileRules {.importc: "QTileRules_new3".}
 proc fcQTileRules_new4(rule: cint): ptr cQTileRules {.importc: "QTileRules_new4".}
-proc fcQTileRules_delete(self: pointer) {.importc: "QTileRules_delete".}
 
 proc create*(T: type gen_qdrawutil_types.QTileRules,
     horizontalRule: cint, verticalRule: cint): gen_qdrawutil_types.QTileRules =
-  gen_qdrawutil_types.QTileRules(h: fcQTileRules_new(cint(horizontalRule), cint(verticalRule)))
+  gen_qdrawutil_types.QTileRules(h: fcQTileRules_new(cint(horizontalRule), cint(verticalRule)), owned: true)
 
 proc create*(T: type gen_qdrawutil_types.QTileRules): gen_qdrawutil_types.QTileRules =
-  gen_qdrawutil_types.QTileRules(h: fcQTileRules_new2())
+  gen_qdrawutil_types.QTileRules(h: fcQTileRules_new2(), owned: true)
 
 proc create*(T: type gen_qdrawutil_types.QTileRules,
     param1: gen_qdrawutil_types.QTileRules): gen_qdrawutil_types.QTileRules =
-  gen_qdrawutil_types.QTileRules(h: fcQTileRules_new3(param1.h))
+  gen_qdrawutil_types.QTileRules(h: fcQTileRules_new3(param1.h), owned: true)
 
 proc create*(T: type gen_qdrawutil_types.QTileRules,
     rule: cint): gen_qdrawutil_types.QTileRules =
-  gen_qdrawutil_types.QTileRules(h: fcQTileRules_new4(cint(rule)))
+  gen_qdrawutil_types.QTileRules(h: fcQTileRules_new4(cint(rule)), owned: true)
 
-proc delete*(self: gen_qdrawutil_types.QTileRules) =
-  fcQTileRules_delete(self.h)

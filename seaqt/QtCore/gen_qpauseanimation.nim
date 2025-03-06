@@ -30,7 +30,7 @@ func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
     else:
       copyMem(addr result[0], unsafeAddr v[0], v.len)
 
-const cflags = gorge("pkg-config --cflags Qt5Core")  & " -fPIC"
+const cflags = gorge("pkg-config --cflags Qt5Core") & " -fPIC"
 {.compile("gen_qpauseanimation.cpp", cflags).}
 
 
@@ -63,7 +63,7 @@ proc fcQPauseAnimation_tr2(s: cstring, c: cstring): struct_miqt_string {.importc
 proc fcQPauseAnimation_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QPauseAnimation_tr3".}
 proc fcQPauseAnimation_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QPauseAnimation_trUtf82".}
 proc fcQPauseAnimation_trUtf83(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QPauseAnimation_trUtf83".}
-type cQPauseAnimationVTable = object
+type cQPauseAnimationVTable {.pure.} = object
   destructor*: proc(vtbl: ptr cQPauseAnimationVTable, self: ptr cQPauseAnimation) {.cdecl, raises:[], gcsafe.}
   metaObject*: proc(vtbl, self: pointer, ): pointer {.cdecl, raises: [], gcsafe.}
   metacast*: proc(vtbl, self: pointer, param1: cstring): pointer {.cdecl, raises: [], gcsafe.}
@@ -102,10 +102,9 @@ proc fcQPauseAnimation_new2(vtbl: pointer, msecs: cint): ptr cQPauseAnimation {.
 proc fcQPauseAnimation_new3(vtbl: pointer, parent: pointer): ptr cQPauseAnimation {.importc: "QPauseAnimation_new3".}
 proc fcQPauseAnimation_new4(vtbl: pointer, msecs: cint, parent: pointer): ptr cQPauseAnimation {.importc: "QPauseAnimation_new4".}
 proc fcQPauseAnimation_staticMetaObject(): pointer {.importc: "QPauseAnimation_staticMetaObject".}
-proc fcQPauseAnimation_delete(self: pointer) {.importc: "QPauseAnimation_delete".}
 
 proc metaObject*(self: gen_qpauseanimation_types.QPauseAnimation, ): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQPauseAnimation_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQPauseAnimation_metaObject(self.h), owned: false)
 
 proc metacast*(self: gen_qpauseanimation_types.QPauseAnimation, param1: cstring): pointer =
   fcQPauseAnimation_metacast(self.h, param1)
@@ -169,7 +168,7 @@ type QPauseAnimationchildEventProc* = proc(self: QPauseAnimation, event: gen_qco
 type QPauseAnimationcustomEventProc* = proc(self: QPauseAnimation, event: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
 type QPauseAnimationconnectNotifyProc* = proc(self: QPauseAnimation, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
 type QPauseAnimationdisconnectNotifyProc* = proc(self: QPauseAnimation, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
-type QPauseAnimationVTable* = object
+type QPauseAnimationVTable* {.inheritable, pure.} = object
   vtbl: cQPauseAnimationVTable
   metaObject*: QPauseAnimationmetaObjectProc
   metacast*: QPauseAnimationmetacastProc
@@ -186,13 +185,16 @@ type QPauseAnimationVTable* = object
   connectNotify*: QPauseAnimationconnectNotifyProc
   disconnectNotify*: QPauseAnimationdisconnectNotifyProc
 proc QPauseAnimationmetaObject*(self: gen_qpauseanimation_types.QPauseAnimation, ): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQPauseAnimation_virtualbase_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQPauseAnimation_virtualbase_metaObject(self.h), owned: false)
 
 proc miqt_exec_callback_cQPauseAnimation_metaObject(vtbl: pointer, self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QPauseAnimationVTable](vtbl)
   let self = QPauseAnimation(h: self)
   var virtualReturn = vtbl[].metaObject(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QPauseAnimationmetacast*(self: gen_qpauseanimation_types.QPauseAnimation, param1: cstring): pointer =
   fcQPauseAnimation_virtualbase_metacast(self.h, param1)
@@ -231,7 +233,7 @@ proc QPauseAnimationevent*(self: gen_qpauseanimation_types.QPauseAnimation, e: g
 proc miqt_exec_callback_cQPauseAnimation_event(vtbl: pointer, self: pointer, e: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QPauseAnimationVTable](vtbl)
   let self = QPauseAnimation(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: e)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: e, owned: false)
   var virtualReturn = vtbl[].event(self, slotval1)
   virtualReturn
 
@@ -269,8 +271,8 @@ proc QPauseAnimationeventFilter*(self: gen_qpauseanimation_types.QPauseAnimation
 proc miqt_exec_callback_cQPauseAnimation_eventFilter(vtbl: pointer, self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QPauseAnimationVTable](vtbl)
   let self = QPauseAnimation(h: self)
-  let slotval1 = gen_qobject_types.QObject(h: watched)
-  let slotval2 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].eventFilter(self, slotval1, slotval2)
   virtualReturn
 
@@ -280,7 +282,7 @@ proc QPauseAnimationtimerEvent*(self: gen_qpauseanimation_types.QPauseAnimation,
 proc miqt_exec_callback_cQPauseAnimation_timerEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QPauseAnimationVTable](vtbl)
   let self = QPauseAnimation(h: self)
-  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   vtbl[].timerEvent(self, slotval1)
 
 proc QPauseAnimationchildEvent*(self: gen_qpauseanimation_types.QPauseAnimation, event: gen_qcoreevent_types.QChildEvent): void =
@@ -289,7 +291,7 @@ proc QPauseAnimationchildEvent*(self: gen_qpauseanimation_types.QPauseAnimation,
 proc miqt_exec_callback_cQPauseAnimation_childEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QPauseAnimationVTable](vtbl)
   let self = QPauseAnimation(h: self)
-  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   vtbl[].childEvent(self, slotval1)
 
 proc QPauseAnimationcustomEvent*(self: gen_qpauseanimation_types.QPauseAnimation, event: gen_qcoreevent_types.QEvent): void =
@@ -298,7 +300,7 @@ proc QPauseAnimationcustomEvent*(self: gen_qpauseanimation_types.QPauseAnimation
 proc miqt_exec_callback_cQPauseAnimation_customEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QPauseAnimationVTable](vtbl)
   let self = QPauseAnimation(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].customEvent(self, slotval1)
 
 proc QPauseAnimationconnectNotify*(self: gen_qpauseanimation_types.QPauseAnimation, signal: gen_qmetaobject_types.QMetaMethod): void =
@@ -307,7 +309,7 @@ proc QPauseAnimationconnectNotify*(self: gen_qpauseanimation_types.QPauseAnimati
 proc miqt_exec_callback_cQPauseAnimation_connectNotify(vtbl: pointer, self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QPauseAnimationVTable](vtbl)
   let self = QPauseAnimation(h: self)
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].connectNotify(self, slotval1)
 
 proc QPauseAnimationdisconnectNotify*(self: gen_qpauseanimation_types.QPauseAnimation, signal: gen_qmetaobject_types.QMetaMethod): void =
@@ -316,11 +318,122 @@ proc QPauseAnimationdisconnectNotify*(self: gen_qpauseanimation_types.QPauseAnim
 proc miqt_exec_callback_cQPauseAnimation_disconnectNotify(vtbl: pointer, self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QPauseAnimationVTable](vtbl)
   let self = QPauseAnimation(h: self)
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].disconnectNotify(self, slotval1)
 
+type VirtualQPauseAnimation* {.inheritable.} = ref object of QPauseAnimation
+  vtbl*: cQPauseAnimationVTable
+method metaObject*(self: VirtualQPauseAnimation, ): gen_qobjectdefs_types.QMetaObject {.base.} =
+  QPauseAnimationmetaObject(self[])
+proc miqt_exec_method_cQPauseAnimation_metaObject(vtbl: pointer, inst: pointer): pointer {.cdecl.} =
+  let vtbl = cast[VirtualQPauseAnimation](cast[uint](vtbl) - uint(offsetOf(VirtualQPauseAnimation, vtbl)))
+  var virtualReturn = vtbl.metaObject()
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
+
+method metacast*(self: VirtualQPauseAnimation, param1: cstring): pointer {.base.} =
+  QPauseAnimationmetacast(self[], param1)
+proc miqt_exec_method_cQPauseAnimation_metacast(vtbl: pointer, inst: pointer, param1: cstring): pointer {.cdecl.} =
+  let vtbl = cast[VirtualQPauseAnimation](cast[uint](vtbl) - uint(offsetOf(VirtualQPauseAnimation, vtbl)))
+  let slotval1 = (param1)
+  var virtualReturn = vtbl.metacast(slotval1)
+  virtualReturn
+
+method metacall*(self: VirtualQPauseAnimation, param1: cint, param2: cint, param3: pointer): cint {.base.} =
+  QPauseAnimationmetacall(self[], param1, param2, param3)
+proc miqt_exec_method_cQPauseAnimation_metacall(vtbl: pointer, inst: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
+  let vtbl = cast[VirtualQPauseAnimation](cast[uint](vtbl) - uint(offsetOf(VirtualQPauseAnimation, vtbl)))
+  let slotval1 = cint(param1)
+  let slotval2 = param2
+  let slotval3 = param3
+  var virtualReturn = vtbl.metacall(slotval1, slotval2, slotval3)
+  virtualReturn
+
+method duration*(self: VirtualQPauseAnimation, ): cint {.base.} =
+  QPauseAnimationduration(self[])
+proc miqt_exec_method_cQPauseAnimation_duration(vtbl: pointer, inst: pointer): cint {.cdecl.} =
+  let vtbl = cast[VirtualQPauseAnimation](cast[uint](vtbl) - uint(offsetOf(VirtualQPauseAnimation, vtbl)))
+  var virtualReturn = vtbl.duration()
+  virtualReturn
+
+method event*(self: VirtualQPauseAnimation, e: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QPauseAnimationevent(self[], e)
+proc miqt_exec_method_cQPauseAnimation_event(vtbl: pointer, inst: pointer, e: pointer): bool {.cdecl.} =
+  let vtbl = cast[VirtualQPauseAnimation](cast[uint](vtbl) - uint(offsetOf(VirtualQPauseAnimation, vtbl)))
+  let slotval1 = gen_qcoreevent_types.QEvent(h: e, owned: false)
+  var virtualReturn = vtbl.event(slotval1)
+  virtualReturn
+
+method updateCurrentTime*(self: VirtualQPauseAnimation, param1: cint): void {.base.} =
+  QPauseAnimationupdateCurrentTime(self[], param1)
+proc miqt_exec_method_cQPauseAnimation_updateCurrentTime(vtbl: pointer, inst: pointer, param1: cint): void {.cdecl.} =
+  let vtbl = cast[VirtualQPauseAnimation](cast[uint](vtbl) - uint(offsetOf(VirtualQPauseAnimation, vtbl)))
+  let slotval1 = param1
+  vtbl.updateCurrentTime(slotval1)
+
+method updateState*(self: VirtualQPauseAnimation, newState: cint, oldState: cint): void {.base.} =
+  QPauseAnimationupdateState(self[], newState, oldState)
+proc miqt_exec_method_cQPauseAnimation_updateState(vtbl: pointer, inst: pointer, newState: cint, oldState: cint): void {.cdecl.} =
+  let vtbl = cast[VirtualQPauseAnimation](cast[uint](vtbl) - uint(offsetOf(VirtualQPauseAnimation, vtbl)))
+  let slotval1 = cint(newState)
+  let slotval2 = cint(oldState)
+  vtbl.updateState(slotval1, slotval2)
+
+method updateDirection*(self: VirtualQPauseAnimation, direction: cint): void {.base.} =
+  QPauseAnimationupdateDirection(self[], direction)
+proc miqt_exec_method_cQPauseAnimation_updateDirection(vtbl: pointer, inst: pointer, direction: cint): void {.cdecl.} =
+  let vtbl = cast[VirtualQPauseAnimation](cast[uint](vtbl) - uint(offsetOf(VirtualQPauseAnimation, vtbl)))
+  let slotval1 = cint(direction)
+  vtbl.updateDirection(slotval1)
+
+method eventFilter*(self: VirtualQPauseAnimation, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QPauseAnimationeventFilter(self[], watched, event)
+proc miqt_exec_method_cQPauseAnimation_eventFilter(vtbl: pointer, inst: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
+  let vtbl = cast[VirtualQPauseAnimation](cast[uint](vtbl) - uint(offsetOf(VirtualQPauseAnimation, vtbl)))
+  let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
+  var virtualReturn = vtbl.eventFilter(slotval1, slotval2)
+  virtualReturn
+
+method timerEvent*(self: VirtualQPauseAnimation, event: gen_qcoreevent_types.QTimerEvent): void {.base.} =
+  QPauseAnimationtimerEvent(self[], event)
+proc miqt_exec_method_cQPauseAnimation_timerEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQPauseAnimation](cast[uint](vtbl) - uint(offsetOf(VirtualQPauseAnimation, vtbl)))
+  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
+  vtbl.timerEvent(slotval1)
+
+method childEvent*(self: VirtualQPauseAnimation, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
+  QPauseAnimationchildEvent(self[], event)
+proc miqt_exec_method_cQPauseAnimation_childEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQPauseAnimation](cast[uint](vtbl) - uint(offsetOf(VirtualQPauseAnimation, vtbl)))
+  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
+  vtbl.childEvent(slotval1)
+
+method customEvent*(self: VirtualQPauseAnimation, event: gen_qcoreevent_types.QEvent): void {.base.} =
+  QPauseAnimationcustomEvent(self[], event)
+proc miqt_exec_method_cQPauseAnimation_customEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQPauseAnimation](cast[uint](vtbl) - uint(offsetOf(VirtualQPauseAnimation, vtbl)))
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
+  vtbl.customEvent(slotval1)
+
+method connectNotify*(self: VirtualQPauseAnimation, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QPauseAnimationconnectNotify(self[], signal)
+proc miqt_exec_method_cQPauseAnimation_connectNotify(vtbl: pointer, inst: pointer, signal: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQPauseAnimation](cast[uint](vtbl) - uint(offsetOf(VirtualQPauseAnimation, vtbl)))
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
+  vtbl.connectNotify(slotval1)
+
+method disconnectNotify*(self: VirtualQPauseAnimation, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QPauseAnimationdisconnectNotify(self[], signal)
+proc miqt_exec_method_cQPauseAnimation_disconnectNotify(vtbl: pointer, inst: pointer, signal: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQPauseAnimation](cast[uint](vtbl) - uint(offsetOf(VirtualQPauseAnimation, vtbl)))
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
+  vtbl.disconnectNotify(slotval1)
+
 proc sender*(self: gen_qpauseanimation_types.QPauseAnimation, ): gen_qobject_types.QObject =
-  gen_qobject_types.QObject(h: fcQPauseAnimation_protectedbase_sender(self.h))
+  gen_qobject_types.QObject(h: fcQPauseAnimation_protectedbase_sender(self.h), owned: false)
 
 proc senderSignalIndex*(self: gen_qpauseanimation_types.QPauseAnimation, ): cint =
   fcQPauseAnimation_protectedbase_senderSignalIndex(self.h)
@@ -335,154 +448,255 @@ proc create*(T: type gen_qpauseanimation_types.QPauseAnimation,
     vtbl: ref QPauseAnimationVTable = nil): gen_qpauseanimation_types.QPauseAnimation =
   let vtbl = if vtbl == nil: new QPauseAnimationVTable else: vtbl
   GC_ref(vtbl)
-  vtbl.vtbl.destructor = proc(vtbl: ptr cQPauseAnimationVTable, _: ptr cQPauseAnimation) {.cdecl.} =
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQPauseAnimationVTable, _: ptr cQPauseAnimation) {.cdecl.} =
     let vtbl = cast[ref QPauseAnimationVTable](vtbl)
     GC_unref(vtbl)
-  if not isNil(vtbl.metaObject):
+  if not isNil(vtbl[].metaObject):
     vtbl[].vtbl.metaObject = miqt_exec_callback_cQPauseAnimation_metaObject
-  if not isNil(vtbl.metacast):
+  if not isNil(vtbl[].metacast):
     vtbl[].vtbl.metacast = miqt_exec_callback_cQPauseAnimation_metacast
-  if not isNil(vtbl.metacall):
+  if not isNil(vtbl[].metacall):
     vtbl[].vtbl.metacall = miqt_exec_callback_cQPauseAnimation_metacall
-  if not isNil(vtbl.duration):
+  if not isNil(vtbl[].duration):
     vtbl[].vtbl.duration = miqt_exec_callback_cQPauseAnimation_duration
-  if not isNil(vtbl.event):
+  if not isNil(vtbl[].event):
     vtbl[].vtbl.event = miqt_exec_callback_cQPauseAnimation_event
-  if not isNil(vtbl.updateCurrentTime):
+  if not isNil(vtbl[].updateCurrentTime):
     vtbl[].vtbl.updateCurrentTime = miqt_exec_callback_cQPauseAnimation_updateCurrentTime
-  if not isNil(vtbl.updateState):
+  if not isNil(vtbl[].updateState):
     vtbl[].vtbl.updateState = miqt_exec_callback_cQPauseAnimation_updateState
-  if not isNil(vtbl.updateDirection):
+  if not isNil(vtbl[].updateDirection):
     vtbl[].vtbl.updateDirection = miqt_exec_callback_cQPauseAnimation_updateDirection
-  if not isNil(vtbl.eventFilter):
+  if not isNil(vtbl[].eventFilter):
     vtbl[].vtbl.eventFilter = miqt_exec_callback_cQPauseAnimation_eventFilter
-  if not isNil(vtbl.timerEvent):
+  if not isNil(vtbl[].timerEvent):
     vtbl[].vtbl.timerEvent = miqt_exec_callback_cQPauseAnimation_timerEvent
-  if not isNil(vtbl.childEvent):
+  if not isNil(vtbl[].childEvent):
     vtbl[].vtbl.childEvent = miqt_exec_callback_cQPauseAnimation_childEvent
-  if not isNil(vtbl.customEvent):
+  if not isNil(vtbl[].customEvent):
     vtbl[].vtbl.customEvent = miqt_exec_callback_cQPauseAnimation_customEvent
-  if not isNil(vtbl.connectNotify):
+  if not isNil(vtbl[].connectNotify):
     vtbl[].vtbl.connectNotify = miqt_exec_callback_cQPauseAnimation_connectNotify
-  if not isNil(vtbl.disconnectNotify):
+  if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQPauseAnimation_disconnectNotify
-  gen_qpauseanimation_types.QPauseAnimation(h: fcQPauseAnimation_new(addr(vtbl[]), ))
+  gen_qpauseanimation_types.QPauseAnimation(h: fcQPauseAnimation_new(addr(vtbl[].vtbl), ), owned: true)
 
 proc create*(T: type gen_qpauseanimation_types.QPauseAnimation,
     msecs: cint,
     vtbl: ref QPauseAnimationVTable = nil): gen_qpauseanimation_types.QPauseAnimation =
   let vtbl = if vtbl == nil: new QPauseAnimationVTable else: vtbl
   GC_ref(vtbl)
-  vtbl.vtbl.destructor = proc(vtbl: ptr cQPauseAnimationVTable, _: ptr cQPauseAnimation) {.cdecl.} =
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQPauseAnimationVTable, _: ptr cQPauseAnimation) {.cdecl.} =
     let vtbl = cast[ref QPauseAnimationVTable](vtbl)
     GC_unref(vtbl)
-  if not isNil(vtbl.metaObject):
+  if not isNil(vtbl[].metaObject):
     vtbl[].vtbl.metaObject = miqt_exec_callback_cQPauseAnimation_metaObject
-  if not isNil(vtbl.metacast):
+  if not isNil(vtbl[].metacast):
     vtbl[].vtbl.metacast = miqt_exec_callback_cQPauseAnimation_metacast
-  if not isNil(vtbl.metacall):
+  if not isNil(vtbl[].metacall):
     vtbl[].vtbl.metacall = miqt_exec_callback_cQPauseAnimation_metacall
-  if not isNil(vtbl.duration):
+  if not isNil(vtbl[].duration):
     vtbl[].vtbl.duration = miqt_exec_callback_cQPauseAnimation_duration
-  if not isNil(vtbl.event):
+  if not isNil(vtbl[].event):
     vtbl[].vtbl.event = miqt_exec_callback_cQPauseAnimation_event
-  if not isNil(vtbl.updateCurrentTime):
+  if not isNil(vtbl[].updateCurrentTime):
     vtbl[].vtbl.updateCurrentTime = miqt_exec_callback_cQPauseAnimation_updateCurrentTime
-  if not isNil(vtbl.updateState):
+  if not isNil(vtbl[].updateState):
     vtbl[].vtbl.updateState = miqt_exec_callback_cQPauseAnimation_updateState
-  if not isNil(vtbl.updateDirection):
+  if not isNil(vtbl[].updateDirection):
     vtbl[].vtbl.updateDirection = miqt_exec_callback_cQPauseAnimation_updateDirection
-  if not isNil(vtbl.eventFilter):
+  if not isNil(vtbl[].eventFilter):
     vtbl[].vtbl.eventFilter = miqt_exec_callback_cQPauseAnimation_eventFilter
-  if not isNil(vtbl.timerEvent):
+  if not isNil(vtbl[].timerEvent):
     vtbl[].vtbl.timerEvent = miqt_exec_callback_cQPauseAnimation_timerEvent
-  if not isNil(vtbl.childEvent):
+  if not isNil(vtbl[].childEvent):
     vtbl[].vtbl.childEvent = miqt_exec_callback_cQPauseAnimation_childEvent
-  if not isNil(vtbl.customEvent):
+  if not isNil(vtbl[].customEvent):
     vtbl[].vtbl.customEvent = miqt_exec_callback_cQPauseAnimation_customEvent
-  if not isNil(vtbl.connectNotify):
+  if not isNil(vtbl[].connectNotify):
     vtbl[].vtbl.connectNotify = miqt_exec_callback_cQPauseAnimation_connectNotify
-  if not isNil(vtbl.disconnectNotify):
+  if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQPauseAnimation_disconnectNotify
-  gen_qpauseanimation_types.QPauseAnimation(h: fcQPauseAnimation_new2(addr(vtbl[]), msecs))
+  gen_qpauseanimation_types.QPauseAnimation(h: fcQPauseAnimation_new2(addr(vtbl[].vtbl), msecs), owned: true)
 
 proc create*(T: type gen_qpauseanimation_types.QPauseAnimation,
     parent: gen_qobject_types.QObject,
     vtbl: ref QPauseAnimationVTable = nil): gen_qpauseanimation_types.QPauseAnimation =
   let vtbl = if vtbl == nil: new QPauseAnimationVTable else: vtbl
   GC_ref(vtbl)
-  vtbl.vtbl.destructor = proc(vtbl: ptr cQPauseAnimationVTable, _: ptr cQPauseAnimation) {.cdecl.} =
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQPauseAnimationVTable, _: ptr cQPauseAnimation) {.cdecl.} =
     let vtbl = cast[ref QPauseAnimationVTable](vtbl)
     GC_unref(vtbl)
-  if not isNil(vtbl.metaObject):
+  if not isNil(vtbl[].metaObject):
     vtbl[].vtbl.metaObject = miqt_exec_callback_cQPauseAnimation_metaObject
-  if not isNil(vtbl.metacast):
+  if not isNil(vtbl[].metacast):
     vtbl[].vtbl.metacast = miqt_exec_callback_cQPauseAnimation_metacast
-  if not isNil(vtbl.metacall):
+  if not isNil(vtbl[].metacall):
     vtbl[].vtbl.metacall = miqt_exec_callback_cQPauseAnimation_metacall
-  if not isNil(vtbl.duration):
+  if not isNil(vtbl[].duration):
     vtbl[].vtbl.duration = miqt_exec_callback_cQPauseAnimation_duration
-  if not isNil(vtbl.event):
+  if not isNil(vtbl[].event):
     vtbl[].vtbl.event = miqt_exec_callback_cQPauseAnimation_event
-  if not isNil(vtbl.updateCurrentTime):
+  if not isNil(vtbl[].updateCurrentTime):
     vtbl[].vtbl.updateCurrentTime = miqt_exec_callback_cQPauseAnimation_updateCurrentTime
-  if not isNil(vtbl.updateState):
+  if not isNil(vtbl[].updateState):
     vtbl[].vtbl.updateState = miqt_exec_callback_cQPauseAnimation_updateState
-  if not isNil(vtbl.updateDirection):
+  if not isNil(vtbl[].updateDirection):
     vtbl[].vtbl.updateDirection = miqt_exec_callback_cQPauseAnimation_updateDirection
-  if not isNil(vtbl.eventFilter):
+  if not isNil(vtbl[].eventFilter):
     vtbl[].vtbl.eventFilter = miqt_exec_callback_cQPauseAnimation_eventFilter
-  if not isNil(vtbl.timerEvent):
+  if not isNil(vtbl[].timerEvent):
     vtbl[].vtbl.timerEvent = miqt_exec_callback_cQPauseAnimation_timerEvent
-  if not isNil(vtbl.childEvent):
+  if not isNil(vtbl[].childEvent):
     vtbl[].vtbl.childEvent = miqt_exec_callback_cQPauseAnimation_childEvent
-  if not isNil(vtbl.customEvent):
+  if not isNil(vtbl[].customEvent):
     vtbl[].vtbl.customEvent = miqt_exec_callback_cQPauseAnimation_customEvent
-  if not isNil(vtbl.connectNotify):
+  if not isNil(vtbl[].connectNotify):
     vtbl[].vtbl.connectNotify = miqt_exec_callback_cQPauseAnimation_connectNotify
-  if not isNil(vtbl.disconnectNotify):
+  if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQPauseAnimation_disconnectNotify
-  gen_qpauseanimation_types.QPauseAnimation(h: fcQPauseAnimation_new3(addr(vtbl[]), parent.h))
+  gen_qpauseanimation_types.QPauseAnimation(h: fcQPauseAnimation_new3(addr(vtbl[].vtbl), parent.h), owned: true)
 
 proc create*(T: type gen_qpauseanimation_types.QPauseAnimation,
     msecs: cint, parent: gen_qobject_types.QObject,
     vtbl: ref QPauseAnimationVTable = nil): gen_qpauseanimation_types.QPauseAnimation =
   let vtbl = if vtbl == nil: new QPauseAnimationVTable else: vtbl
   GC_ref(vtbl)
-  vtbl.vtbl.destructor = proc(vtbl: ptr cQPauseAnimationVTable, _: ptr cQPauseAnimation) {.cdecl.} =
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQPauseAnimationVTable, _: ptr cQPauseAnimation) {.cdecl.} =
     let vtbl = cast[ref QPauseAnimationVTable](vtbl)
     GC_unref(vtbl)
-  if not isNil(vtbl.metaObject):
+  if not isNil(vtbl[].metaObject):
     vtbl[].vtbl.metaObject = miqt_exec_callback_cQPauseAnimation_metaObject
-  if not isNil(vtbl.metacast):
+  if not isNil(vtbl[].metacast):
     vtbl[].vtbl.metacast = miqt_exec_callback_cQPauseAnimation_metacast
-  if not isNil(vtbl.metacall):
+  if not isNil(vtbl[].metacall):
     vtbl[].vtbl.metacall = miqt_exec_callback_cQPauseAnimation_metacall
-  if not isNil(vtbl.duration):
+  if not isNil(vtbl[].duration):
     vtbl[].vtbl.duration = miqt_exec_callback_cQPauseAnimation_duration
-  if not isNil(vtbl.event):
+  if not isNil(vtbl[].event):
     vtbl[].vtbl.event = miqt_exec_callback_cQPauseAnimation_event
-  if not isNil(vtbl.updateCurrentTime):
+  if not isNil(vtbl[].updateCurrentTime):
     vtbl[].vtbl.updateCurrentTime = miqt_exec_callback_cQPauseAnimation_updateCurrentTime
-  if not isNil(vtbl.updateState):
+  if not isNil(vtbl[].updateState):
     vtbl[].vtbl.updateState = miqt_exec_callback_cQPauseAnimation_updateState
-  if not isNil(vtbl.updateDirection):
+  if not isNil(vtbl[].updateDirection):
     vtbl[].vtbl.updateDirection = miqt_exec_callback_cQPauseAnimation_updateDirection
-  if not isNil(vtbl.eventFilter):
+  if not isNil(vtbl[].eventFilter):
     vtbl[].vtbl.eventFilter = miqt_exec_callback_cQPauseAnimation_eventFilter
-  if not isNil(vtbl.timerEvent):
+  if not isNil(vtbl[].timerEvent):
     vtbl[].vtbl.timerEvent = miqt_exec_callback_cQPauseAnimation_timerEvent
-  if not isNil(vtbl.childEvent):
+  if not isNil(vtbl[].childEvent):
     vtbl[].vtbl.childEvent = miqt_exec_callback_cQPauseAnimation_childEvent
-  if not isNil(vtbl.customEvent):
+  if not isNil(vtbl[].customEvent):
     vtbl[].vtbl.customEvent = miqt_exec_callback_cQPauseAnimation_customEvent
-  if not isNil(vtbl.connectNotify):
+  if not isNil(vtbl[].connectNotify):
     vtbl[].vtbl.connectNotify = miqt_exec_callback_cQPauseAnimation_connectNotify
-  if not isNil(vtbl.disconnectNotify):
+  if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQPauseAnimation_disconnectNotify
-  gen_qpauseanimation_types.QPauseAnimation(h: fcQPauseAnimation_new4(addr(vtbl[]), msecs, parent.h))
+  gen_qpauseanimation_types.QPauseAnimation(h: fcQPauseAnimation_new4(addr(vtbl[].vtbl), msecs, parent.h), owned: true)
+
+proc create*(T: type gen_qpauseanimation_types.QPauseAnimation,
+    vtbl: VirtualQPauseAnimation) =
+
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQPauseAnimationVTable, _: ptr cQPauseAnimation) {.cdecl.} =
+    let vtbl = cast[ptr typeof(VirtualQPauseAnimation()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQPauseAnimation, vtbl)))
+    vtbl[].h = nil
+    vtbl[].owned = false
+  vtbl[].vtbl.metaObject = miqt_exec_method_cQPauseAnimation_metaObject
+  vtbl[].vtbl.metacast = miqt_exec_method_cQPauseAnimation_metacast
+  vtbl[].vtbl.metacall = miqt_exec_method_cQPauseAnimation_metacall
+  vtbl[].vtbl.duration = miqt_exec_method_cQPauseAnimation_duration
+  vtbl[].vtbl.event = miqt_exec_method_cQPauseAnimation_event
+  vtbl[].vtbl.updateCurrentTime = miqt_exec_method_cQPauseAnimation_updateCurrentTime
+  vtbl[].vtbl.updateState = miqt_exec_method_cQPauseAnimation_updateState
+  vtbl[].vtbl.updateDirection = miqt_exec_method_cQPauseAnimation_updateDirection
+  vtbl[].vtbl.eventFilter = miqt_exec_method_cQPauseAnimation_eventFilter
+  vtbl[].vtbl.timerEvent = miqt_exec_method_cQPauseAnimation_timerEvent
+  vtbl[].vtbl.childEvent = miqt_exec_method_cQPauseAnimation_childEvent
+  vtbl[].vtbl.customEvent = miqt_exec_method_cQPauseAnimation_customEvent
+  vtbl[].vtbl.connectNotify = miqt_exec_method_cQPauseAnimation_connectNotify
+  vtbl[].vtbl.disconnectNotify = miqt_exec_method_cQPauseAnimation_disconnectNotify
+  if vtbl[].h != nil: delete(move(vtbl[]))
+  vtbl[].h = fcQPauseAnimation_new(addr(vtbl[].vtbl), )
+  vtbl[].owned = true
+
+proc create*(T: type gen_qpauseanimation_types.QPauseAnimation,
+    msecs: cint,
+    vtbl: VirtualQPauseAnimation) =
+
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQPauseAnimationVTable, _: ptr cQPauseAnimation) {.cdecl.} =
+    let vtbl = cast[ptr typeof(VirtualQPauseAnimation()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQPauseAnimation, vtbl)))
+    vtbl[].h = nil
+    vtbl[].owned = false
+  vtbl[].vtbl.metaObject = miqt_exec_method_cQPauseAnimation_metaObject
+  vtbl[].vtbl.metacast = miqt_exec_method_cQPauseAnimation_metacast
+  vtbl[].vtbl.metacall = miqt_exec_method_cQPauseAnimation_metacall
+  vtbl[].vtbl.duration = miqt_exec_method_cQPauseAnimation_duration
+  vtbl[].vtbl.event = miqt_exec_method_cQPauseAnimation_event
+  vtbl[].vtbl.updateCurrentTime = miqt_exec_method_cQPauseAnimation_updateCurrentTime
+  vtbl[].vtbl.updateState = miqt_exec_method_cQPauseAnimation_updateState
+  vtbl[].vtbl.updateDirection = miqt_exec_method_cQPauseAnimation_updateDirection
+  vtbl[].vtbl.eventFilter = miqt_exec_method_cQPauseAnimation_eventFilter
+  vtbl[].vtbl.timerEvent = miqt_exec_method_cQPauseAnimation_timerEvent
+  vtbl[].vtbl.childEvent = miqt_exec_method_cQPauseAnimation_childEvent
+  vtbl[].vtbl.customEvent = miqt_exec_method_cQPauseAnimation_customEvent
+  vtbl[].vtbl.connectNotify = miqt_exec_method_cQPauseAnimation_connectNotify
+  vtbl[].vtbl.disconnectNotify = miqt_exec_method_cQPauseAnimation_disconnectNotify
+  if vtbl[].h != nil: delete(move(vtbl[]))
+  vtbl[].h = fcQPauseAnimation_new2(addr(vtbl[].vtbl), msecs)
+  vtbl[].owned = true
+
+proc create*(T: type gen_qpauseanimation_types.QPauseAnimation,
+    parent: gen_qobject_types.QObject,
+    vtbl: VirtualQPauseAnimation) =
+
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQPauseAnimationVTable, _: ptr cQPauseAnimation) {.cdecl.} =
+    let vtbl = cast[ptr typeof(VirtualQPauseAnimation()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQPauseAnimation, vtbl)))
+    vtbl[].h = nil
+    vtbl[].owned = false
+  vtbl[].vtbl.metaObject = miqt_exec_method_cQPauseAnimation_metaObject
+  vtbl[].vtbl.metacast = miqt_exec_method_cQPauseAnimation_metacast
+  vtbl[].vtbl.metacall = miqt_exec_method_cQPauseAnimation_metacall
+  vtbl[].vtbl.duration = miqt_exec_method_cQPauseAnimation_duration
+  vtbl[].vtbl.event = miqt_exec_method_cQPauseAnimation_event
+  vtbl[].vtbl.updateCurrentTime = miqt_exec_method_cQPauseAnimation_updateCurrentTime
+  vtbl[].vtbl.updateState = miqt_exec_method_cQPauseAnimation_updateState
+  vtbl[].vtbl.updateDirection = miqt_exec_method_cQPauseAnimation_updateDirection
+  vtbl[].vtbl.eventFilter = miqt_exec_method_cQPauseAnimation_eventFilter
+  vtbl[].vtbl.timerEvent = miqt_exec_method_cQPauseAnimation_timerEvent
+  vtbl[].vtbl.childEvent = miqt_exec_method_cQPauseAnimation_childEvent
+  vtbl[].vtbl.customEvent = miqt_exec_method_cQPauseAnimation_customEvent
+  vtbl[].vtbl.connectNotify = miqt_exec_method_cQPauseAnimation_connectNotify
+  vtbl[].vtbl.disconnectNotify = miqt_exec_method_cQPauseAnimation_disconnectNotify
+  if vtbl[].h != nil: delete(move(vtbl[]))
+  vtbl[].h = fcQPauseAnimation_new3(addr(vtbl[].vtbl), parent.h)
+  vtbl[].owned = true
+
+proc create*(T: type gen_qpauseanimation_types.QPauseAnimation,
+    msecs: cint, parent: gen_qobject_types.QObject,
+    vtbl: VirtualQPauseAnimation) =
+
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQPauseAnimationVTable, _: ptr cQPauseAnimation) {.cdecl.} =
+    let vtbl = cast[ptr typeof(VirtualQPauseAnimation()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQPauseAnimation, vtbl)))
+    vtbl[].h = nil
+    vtbl[].owned = false
+  vtbl[].vtbl.metaObject = miqt_exec_method_cQPauseAnimation_metaObject
+  vtbl[].vtbl.metacast = miqt_exec_method_cQPauseAnimation_metacast
+  vtbl[].vtbl.metacall = miqt_exec_method_cQPauseAnimation_metacall
+  vtbl[].vtbl.duration = miqt_exec_method_cQPauseAnimation_duration
+  vtbl[].vtbl.event = miqt_exec_method_cQPauseAnimation_event
+  vtbl[].vtbl.updateCurrentTime = miqt_exec_method_cQPauseAnimation_updateCurrentTime
+  vtbl[].vtbl.updateState = miqt_exec_method_cQPauseAnimation_updateState
+  vtbl[].vtbl.updateDirection = miqt_exec_method_cQPauseAnimation_updateDirection
+  vtbl[].vtbl.eventFilter = miqt_exec_method_cQPauseAnimation_eventFilter
+  vtbl[].vtbl.timerEvent = miqt_exec_method_cQPauseAnimation_timerEvent
+  vtbl[].vtbl.childEvent = miqt_exec_method_cQPauseAnimation_childEvent
+  vtbl[].vtbl.customEvent = miqt_exec_method_cQPauseAnimation_customEvent
+  vtbl[].vtbl.connectNotify = miqt_exec_method_cQPauseAnimation_connectNotify
+  vtbl[].vtbl.disconnectNotify = miqt_exec_method_cQPauseAnimation_disconnectNotify
+  if vtbl[].h != nil: delete(move(vtbl[]))
+  vtbl[].h = fcQPauseAnimation_new4(addr(vtbl[].vtbl), msecs, parent.h)
+  vtbl[].owned = true
 
 proc staticMetaObject*(_: type gen_qpauseanimation_types.QPauseAnimation): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQPauseAnimation_staticMetaObject())
-proc delete*(self: gen_qpauseanimation_types.QPauseAnimation) =
-  fcQPauseAnimation_delete(self.h)

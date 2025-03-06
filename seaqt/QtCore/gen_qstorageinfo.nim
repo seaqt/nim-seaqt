@@ -30,9 +30,6 @@ func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
     else:
       copyMem(addr result[0], unsafeAddr v[0], v.len)
 
-const cflags = gorge("pkg-config --cflags Qt5Core")  & " -fPIC"
-{.compile("gen_qstorageinfo.cpp", cflags).}
-
 
 import ./gen_qstorageinfo_types
 export gen_qstorageinfo_types
@@ -68,7 +65,6 @@ proc fcQStorageInfo_new(): ptr cQStorageInfo {.importc: "QStorageInfo_new".}
 proc fcQStorageInfo_new2(path: struct_miqt_string): ptr cQStorageInfo {.importc: "QStorageInfo_new2".}
 proc fcQStorageInfo_new3(dir: pointer): ptr cQStorageInfo {.importc: "QStorageInfo_new3".}
 proc fcQStorageInfo_new4(other: pointer): ptr cQStorageInfo {.importc: "QStorageInfo_new4".}
-proc fcQStorageInfo_delete(self: pointer) {.importc: "QStorageInfo_delete".}
 
 proc operatorAssign*(self: gen_qstorageinfo_types.QStorageInfo, other: gen_qstorageinfo_types.QStorageInfo): void =
   fcQStorageInfo_operatorAssign(self.h, other.h)
@@ -147,27 +143,25 @@ proc mountedVolumes*(_: type gen_qstorageinfo_types.QStorageInfo, ): seq[gen_qst
   var vx_ret = newSeq[gen_qstorageinfo_types.QStorageInfo](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
-    vx_ret[i] = gen_qstorageinfo_types.QStorageInfo(h: v_outCast[i])
+    vx_ret[i] = gen_qstorageinfo_types.QStorageInfo(h: v_outCast[i], owned: true)
   c_free(v_ma.data)
   vx_ret
 
 proc root*(_: type gen_qstorageinfo_types.QStorageInfo, ): gen_qstorageinfo_types.QStorageInfo =
-  gen_qstorageinfo_types.QStorageInfo(h: fcQStorageInfo_root())
+  gen_qstorageinfo_types.QStorageInfo(h: fcQStorageInfo_root(), owned: true)
 
 proc create*(T: type gen_qstorageinfo_types.QStorageInfo): gen_qstorageinfo_types.QStorageInfo =
-  gen_qstorageinfo_types.QStorageInfo(h: fcQStorageInfo_new())
+  gen_qstorageinfo_types.QStorageInfo(h: fcQStorageInfo_new(), owned: true)
 
 proc create*(T: type gen_qstorageinfo_types.QStorageInfo,
     path: string): gen_qstorageinfo_types.QStorageInfo =
-  gen_qstorageinfo_types.QStorageInfo(h: fcQStorageInfo_new2(struct_miqt_string(data: path, len: csize_t(len(path)))))
+  gen_qstorageinfo_types.QStorageInfo(h: fcQStorageInfo_new2(struct_miqt_string(data: path, len: csize_t(len(path)))), owned: true)
 
 proc create*(T: type gen_qstorageinfo_types.QStorageInfo,
     dir: gen_qdir_types.QDir): gen_qstorageinfo_types.QStorageInfo =
-  gen_qstorageinfo_types.QStorageInfo(h: fcQStorageInfo_new3(dir.h))
+  gen_qstorageinfo_types.QStorageInfo(h: fcQStorageInfo_new3(dir.h), owned: true)
 
 proc create*(T: type gen_qstorageinfo_types.QStorageInfo,
     other: gen_qstorageinfo_types.QStorageInfo): gen_qstorageinfo_types.QStorageInfo =
-  gen_qstorageinfo_types.QStorageInfo(h: fcQStorageInfo_new4(other.h))
+  gen_qstorageinfo_types.QStorageInfo(h: fcQStorageInfo_new4(other.h), owned: true)
 
-proc delete*(self: gen_qstorageinfo_types.QStorageInfo) =
-  fcQStorageInfo_delete(self.h)

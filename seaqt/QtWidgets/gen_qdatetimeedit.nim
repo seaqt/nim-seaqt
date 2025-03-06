@@ -30,7 +30,7 @@ func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
     else:
       copyMem(addr result[0], unsafeAddr v[0], v.len)
 
-const cflags = gorge("pkg-config --cflags Qt5Widgets")  & " -fPIC"
+const cflags = gorge("pkg-config --cflags Qt5Widgets") & " -fPIC"
 {.compile("gen_qdatetimeedit.cpp", cflags).}
 
 
@@ -159,7 +159,7 @@ proc fcQDateTimeEdit_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: 
 proc fcQDateTimeEdit_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QDateTimeEdit_tr3".}
 proc fcQDateTimeEdit_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QDateTimeEdit_trUtf82".}
 proc fcQDateTimeEdit_trUtf83(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QDateTimeEdit_trUtf83".}
-type cQDateTimeEditVTable = object
+type cQDateTimeEditVTable {.pure.} = object
   destructor*: proc(vtbl: ptr cQDateTimeEditVTable, self: ptr cQDateTimeEdit) {.cdecl, raises:[], gcsafe.}
   metaObject*: proc(vtbl, self: pointer, ): pointer {.cdecl, raises: [], gcsafe.}
   metacast*: proc(vtbl, self: pointer, param1: cstring): pointer {.cdecl, raises: [], gcsafe.}
@@ -296,7 +296,6 @@ proc fcQDateTimeEdit_new6(vtbl: pointer, dt: pointer, parent: pointer): ptr cQDa
 proc fcQDateTimeEdit_new7(vtbl: pointer, d: pointer, parent: pointer): ptr cQDateTimeEdit {.importc: "QDateTimeEdit_new7".}
 proc fcQDateTimeEdit_new8(vtbl: pointer, t: pointer, parent: pointer): ptr cQDateTimeEdit {.importc: "QDateTimeEdit_new8".}
 proc fcQDateTimeEdit_staticMetaObject(): pointer {.importc: "QDateTimeEdit_staticMetaObject".}
-proc fcQDateTimeEdit_delete(self: pointer) {.importc: "QDateTimeEdit_delete".}
 proc fcQTimeEdit_metaObject(self: pointer, ): pointer {.importc: "QTimeEdit_metaObject".}
 proc fcQTimeEdit_metacast(self: pointer, param1: cstring): pointer {.importc: "QTimeEdit_metacast".}
 proc fcQTimeEdit_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QTimeEdit_metacall".}
@@ -308,7 +307,7 @@ proc fcQTimeEdit_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QTi
 proc fcQTimeEdit_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QTimeEdit_tr3".}
 proc fcQTimeEdit_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QTimeEdit_trUtf82".}
 proc fcQTimeEdit_trUtf83(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QTimeEdit_trUtf83".}
-type cQTimeEditVTable = object
+type cQTimeEditVTable {.pure.} = object
   destructor*: proc(vtbl: ptr cQTimeEditVTable, self: ptr cQTimeEdit) {.cdecl, raises:[], gcsafe.}
   metaObject*: proc(vtbl, self: pointer, ): pointer {.cdecl, raises: [], gcsafe.}
   metacast*: proc(vtbl, self: pointer, param1: cstring): pointer {.cdecl, raises: [], gcsafe.}
@@ -441,7 +440,6 @@ proc fcQTimeEdit_new2(vtbl: pointer, ): ptr cQTimeEdit {.importc: "QTimeEdit_new
 proc fcQTimeEdit_new3(vtbl: pointer, time: pointer): ptr cQTimeEdit {.importc: "QTimeEdit_new3".}
 proc fcQTimeEdit_new4(vtbl: pointer, time: pointer, parent: pointer): ptr cQTimeEdit {.importc: "QTimeEdit_new4".}
 proc fcQTimeEdit_staticMetaObject(): pointer {.importc: "QTimeEdit_staticMetaObject".}
-proc fcQTimeEdit_delete(self: pointer) {.importc: "QTimeEdit_delete".}
 proc fcQDateEdit_metaObject(self: pointer, ): pointer {.importc: "QDateEdit_metaObject".}
 proc fcQDateEdit_metacast(self: pointer, param1: cstring): pointer {.importc: "QDateEdit_metacast".}
 proc fcQDateEdit_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QDateEdit_metacall".}
@@ -453,7 +451,7 @@ proc fcQDateEdit_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QDa
 proc fcQDateEdit_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QDateEdit_tr3".}
 proc fcQDateEdit_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QDateEdit_trUtf82".}
 proc fcQDateEdit_trUtf83(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QDateEdit_trUtf83".}
-type cQDateEditVTable = object
+type cQDateEditVTable {.pure.} = object
   destructor*: proc(vtbl: ptr cQDateEditVTable, self: ptr cQDateEdit) {.cdecl, raises:[], gcsafe.}
   metaObject*: proc(vtbl, self: pointer, ): pointer {.cdecl, raises: [], gcsafe.}
   metacast*: proc(vtbl, self: pointer, param1: cstring): pointer {.cdecl, raises: [], gcsafe.}
@@ -586,10 +584,9 @@ proc fcQDateEdit_new2(vtbl: pointer, ): ptr cQDateEdit {.importc: "QDateEdit_new
 proc fcQDateEdit_new3(vtbl: pointer, date: pointer): ptr cQDateEdit {.importc: "QDateEdit_new3".}
 proc fcQDateEdit_new4(vtbl: pointer, date: pointer, parent: pointer): ptr cQDateEdit {.importc: "QDateEdit_new4".}
 proc fcQDateEdit_staticMetaObject(): pointer {.importc: "QDateEdit_staticMetaObject".}
-proc fcQDateEdit_delete(self: pointer) {.importc: "QDateEdit_delete".}
 
 proc metaObject*(self: gen_qdatetimeedit_types.QDateTimeEdit, ): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQDateTimeEdit_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQDateTimeEdit_metaObject(self.h), owned: false)
 
 proc metacast*(self: gen_qdatetimeedit_types.QDateTimeEdit, param1: cstring): pointer =
   fcQDateTimeEdit_metacast(self.h, param1)
@@ -610,22 +607,22 @@ proc trUtf8*(_: type gen_qdatetimeedit_types.QDateTimeEdit, s: cstring): string 
   vx_ret
 
 proc dateTime*(self: gen_qdatetimeedit_types.QDateTimeEdit, ): gen_qdatetime_types.QDateTime =
-  gen_qdatetime_types.QDateTime(h: fcQDateTimeEdit_dateTime(self.h))
+  gen_qdatetime_types.QDateTime(h: fcQDateTimeEdit_dateTime(self.h), owned: true)
 
 proc date*(self: gen_qdatetimeedit_types.QDateTimeEdit, ): gen_qdatetime_types.QDate =
-  gen_qdatetime_types.QDate(h: fcQDateTimeEdit_date(self.h))
+  gen_qdatetime_types.QDate(h: fcQDateTimeEdit_date(self.h), owned: true)
 
 proc time*(self: gen_qdatetimeedit_types.QDateTimeEdit, ): gen_qdatetime_types.QTime =
-  gen_qdatetime_types.QTime(h: fcQDateTimeEdit_time(self.h))
+  gen_qdatetime_types.QTime(h: fcQDateTimeEdit_time(self.h), owned: true)
 
 proc calendar*(self: gen_qdatetimeedit_types.QDateTimeEdit, ): gen_qcalendar_types.QCalendar =
-  gen_qcalendar_types.QCalendar(h: fcQDateTimeEdit_calendar(self.h))
+  gen_qcalendar_types.QCalendar(h: fcQDateTimeEdit_calendar(self.h), owned: true)
 
 proc setCalendar*(self: gen_qdatetimeedit_types.QDateTimeEdit, calendar: gen_qcalendar_types.QCalendar): void =
   fcQDateTimeEdit_setCalendar(self.h, calendar.h)
 
 proc minimumDateTime*(self: gen_qdatetimeedit_types.QDateTimeEdit, ): gen_qdatetime_types.QDateTime =
-  gen_qdatetime_types.QDateTime(h: fcQDateTimeEdit_minimumDateTime(self.h))
+  gen_qdatetime_types.QDateTime(h: fcQDateTimeEdit_minimumDateTime(self.h), owned: true)
 
 proc clearMinimumDateTime*(self: gen_qdatetimeedit_types.QDateTimeEdit, ): void =
   fcQDateTimeEdit_clearMinimumDateTime(self.h)
@@ -634,7 +631,7 @@ proc setMinimumDateTime*(self: gen_qdatetimeedit_types.QDateTimeEdit, dt: gen_qd
   fcQDateTimeEdit_setMinimumDateTime(self.h, dt.h)
 
 proc maximumDateTime*(self: gen_qdatetimeedit_types.QDateTimeEdit, ): gen_qdatetime_types.QDateTime =
-  gen_qdatetime_types.QDateTime(h: fcQDateTimeEdit_maximumDateTime(self.h))
+  gen_qdatetime_types.QDateTime(h: fcQDateTimeEdit_maximumDateTime(self.h), owned: true)
 
 proc clearMaximumDateTime*(self: gen_qdatetimeedit_types.QDateTimeEdit, ): void =
   fcQDateTimeEdit_clearMaximumDateTime(self.h)
@@ -646,7 +643,7 @@ proc setDateTimeRange*(self: gen_qdatetimeedit_types.QDateTimeEdit, min: gen_qda
   fcQDateTimeEdit_setDateTimeRange(self.h, min.h, max.h)
 
 proc minimumDate*(self: gen_qdatetimeedit_types.QDateTimeEdit, ): gen_qdatetime_types.QDate =
-  gen_qdatetime_types.QDate(h: fcQDateTimeEdit_minimumDate(self.h))
+  gen_qdatetime_types.QDate(h: fcQDateTimeEdit_minimumDate(self.h), owned: true)
 
 proc setMinimumDate*(self: gen_qdatetimeedit_types.QDateTimeEdit, min: gen_qdatetime_types.QDate): void =
   fcQDateTimeEdit_setMinimumDate(self.h, min.h)
@@ -655,7 +652,7 @@ proc clearMinimumDate*(self: gen_qdatetimeedit_types.QDateTimeEdit, ): void =
   fcQDateTimeEdit_clearMinimumDate(self.h)
 
 proc maximumDate*(self: gen_qdatetimeedit_types.QDateTimeEdit, ): gen_qdatetime_types.QDate =
-  gen_qdatetime_types.QDate(h: fcQDateTimeEdit_maximumDate(self.h))
+  gen_qdatetime_types.QDate(h: fcQDateTimeEdit_maximumDate(self.h), owned: true)
 
 proc setMaximumDate*(self: gen_qdatetimeedit_types.QDateTimeEdit, max: gen_qdatetime_types.QDate): void =
   fcQDateTimeEdit_setMaximumDate(self.h, max.h)
@@ -667,7 +664,7 @@ proc setDateRange*(self: gen_qdatetimeedit_types.QDateTimeEdit, min: gen_qdateti
   fcQDateTimeEdit_setDateRange(self.h, min.h, max.h)
 
 proc minimumTime*(self: gen_qdatetimeedit_types.QDateTimeEdit, ): gen_qdatetime_types.QTime =
-  gen_qdatetime_types.QTime(h: fcQDateTimeEdit_minimumTime(self.h))
+  gen_qdatetime_types.QTime(h: fcQDateTimeEdit_minimumTime(self.h), owned: true)
 
 proc setMinimumTime*(self: gen_qdatetimeedit_types.QDateTimeEdit, min: gen_qdatetime_types.QTime): void =
   fcQDateTimeEdit_setMinimumTime(self.h, min.h)
@@ -676,7 +673,7 @@ proc clearMinimumTime*(self: gen_qdatetimeedit_types.QDateTimeEdit, ): void =
   fcQDateTimeEdit_clearMinimumTime(self.h)
 
 proc maximumTime*(self: gen_qdatetimeedit_types.QDateTimeEdit, ): gen_qdatetime_types.QTime =
-  gen_qdatetime_types.QTime(h: fcQDateTimeEdit_maximumTime(self.h))
+  gen_qdatetime_types.QTime(h: fcQDateTimeEdit_maximumTime(self.h), owned: true)
 
 proc setMaximumTime*(self: gen_qdatetimeedit_types.QDateTimeEdit, max: gen_qdatetime_types.QTime): void =
   fcQDateTimeEdit_setMaximumTime(self.h, max.h)
@@ -706,7 +703,7 @@ proc setCurrentSectionIndex*(self: gen_qdatetimeedit_types.QDateTimeEdit, index:
   fcQDateTimeEdit_setCurrentSectionIndex(self.h, index)
 
 proc calendarWidget*(self: gen_qdatetimeedit_types.QDateTimeEdit, ): gen_qcalendarwidget_types.QCalendarWidget =
-  gen_qcalendarwidget_types.QCalendarWidget(h: fcQDateTimeEdit_calendarWidget(self.h))
+  gen_qcalendarwidget_types.QCalendarWidget(h: fcQDateTimeEdit_calendarWidget(self.h), owned: false)
 
 proc setCalendarWidget*(self: gen_qdatetimeedit_types.QDateTimeEdit, calendarWidget: gen_qcalendarwidget_types.QCalendarWidget): void =
   fcQDateTimeEdit_setCalendarWidget(self.h, calendarWidget.h)
@@ -745,7 +742,7 @@ proc setTimeSpec*(self: gen_qdatetimeedit_types.QDateTimeEdit, spec: cint): void
   fcQDateTimeEdit_setTimeSpec(self.h, cint(spec))
 
 proc sizeHint*(self: gen_qdatetimeedit_types.QDateTimeEdit, ): gen_qsize_types.QSize =
-  gen_qsize_types.QSize(h: fcQDateTimeEdit_sizeHint(self.h))
+  gen_qsize_types.QSize(h: fcQDateTimeEdit_sizeHint(self.h), owned: true)
 
 proc clear*(self: gen_qdatetimeedit_types.QDateTimeEdit, ): void =
   fcQDateTimeEdit_clear(self.h)
@@ -762,7 +759,7 @@ proc dateTimeChanged*(self: gen_qdatetimeedit_types.QDateTimeEdit, dateTime: gen
 type QDateTimeEditdateTimeChangedSlot* = proc(dateTime: gen_qdatetime_types.QDateTime)
 proc miqt_exec_callback_cQDateTimeEdit_dateTimeChanged(slot: int, dateTime: pointer) {.cdecl.} =
   let nimfunc = cast[ptr QDateTimeEditdateTimeChangedSlot](cast[pointer](slot))
-  let slotval1 = gen_qdatetime_types.QDateTime(h: dateTime)
+  let slotval1 = gen_qdatetime_types.QDateTime(h: dateTime, owned: false)
 
   nimfunc[](slotval1)
 
@@ -782,7 +779,7 @@ proc timeChanged*(self: gen_qdatetimeedit_types.QDateTimeEdit, time: gen_qdateti
 type QDateTimeEdittimeChangedSlot* = proc(time: gen_qdatetime_types.QTime)
 proc miqt_exec_callback_cQDateTimeEdit_timeChanged(slot: int, time: pointer) {.cdecl.} =
   let nimfunc = cast[ptr QDateTimeEdittimeChangedSlot](cast[pointer](slot))
-  let slotval1 = gen_qdatetime_types.QTime(h: time)
+  let slotval1 = gen_qdatetime_types.QTime(h: time, owned: false)
 
   nimfunc[](slotval1)
 
@@ -802,7 +799,7 @@ proc dateChanged*(self: gen_qdatetimeedit_types.QDateTimeEdit, date: gen_qdateti
 type QDateTimeEditdateChangedSlot* = proc(date: gen_qdatetime_types.QDate)
 proc miqt_exec_callback_cQDateTimeEdit_dateChanged(slot: int, date: pointer) {.cdecl.} =
   let nimfunc = cast[ptr QDateTimeEditdateChangedSlot](cast[pointer](slot))
-  let slotval1 = gen_qdatetime_types.QDate(h: date)
+  let slotval1 = gen_qdatetime_types.QDate(h: date, owned: false)
 
   nimfunc[](slotval1)
 
@@ -906,7 +903,7 @@ type QDateTimeEditchildEventProc* = proc(self: QDateTimeEdit, event: gen_qcoreev
 type QDateTimeEditcustomEventProc* = proc(self: QDateTimeEdit, event: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
 type QDateTimeEditconnectNotifyProc* = proc(self: QDateTimeEdit, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
 type QDateTimeEditdisconnectNotifyProc* = proc(self: QDateTimeEdit, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
-type QDateTimeEditVTable* = object
+type QDateTimeEditVTable* {.inheritable, pure.} = object
   vtbl: cQDateTimeEditVTable
   metaObject*: QDateTimeEditmetaObjectProc
   metacast*: QDateTimeEditmetacastProc
@@ -966,13 +963,16 @@ type QDateTimeEditVTable* = object
   connectNotify*: QDateTimeEditconnectNotifyProc
   disconnectNotify*: QDateTimeEditdisconnectNotifyProc
 proc QDateTimeEditmetaObject*(self: gen_qdatetimeedit_types.QDateTimeEdit, ): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQDateTimeEdit_virtualbase_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQDateTimeEdit_virtualbase_metaObject(self.h), owned: false)
 
 proc miqt_exec_callback_cQDateTimeEdit_metaObject(vtbl: pointer, self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QDateTimeEditVTable](vtbl)
   let self = QDateTimeEdit(h: self)
   var virtualReturn = vtbl[].metaObject(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QDateTimeEditmetacast*(self: gen_qdatetimeedit_types.QDateTimeEdit, param1: cstring): pointer =
   fcQDateTimeEdit_virtualbase_metacast(self.h, param1)
@@ -997,13 +997,16 @@ proc miqt_exec_callback_cQDateTimeEdit_metacall(vtbl: pointer, self: pointer, pa
   virtualReturn
 
 proc QDateTimeEditsizeHint*(self: gen_qdatetimeedit_types.QDateTimeEdit, ): gen_qsize_types.QSize =
-  gen_qsize_types.QSize(h: fcQDateTimeEdit_virtualbase_sizeHint(self.h))
+  gen_qsize_types.QSize(h: fcQDateTimeEdit_virtualbase_sizeHint(self.h), owned: true)
 
 proc miqt_exec_callback_cQDateTimeEdit_sizeHint(vtbl: pointer, self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QDateTimeEditVTable](vtbl)
   let self = QDateTimeEdit(h: self)
   var virtualReturn = vtbl[].sizeHint(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QDateTimeEditclear*(self: gen_qdatetimeedit_types.QDateTimeEdit, ): void =
   fcQDateTimeEdit_virtualbase_clear(self.h)
@@ -1028,7 +1031,7 @@ proc QDateTimeEditevent*(self: gen_qdatetimeedit_types.QDateTimeEdit, event: gen
 proc miqt_exec_callback_cQDateTimeEdit_event(vtbl: pointer, self: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QDateTimeEditVTable](vtbl)
   let self = QDateTimeEdit(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].event(self, slotval1)
   virtualReturn
 
@@ -1038,7 +1041,7 @@ proc QDateTimeEditkeyPressEvent*(self: gen_qdatetimeedit_types.QDateTimeEdit, ev
 proc miqt_exec_callback_cQDateTimeEdit_keyPressEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDateTimeEditVTable](vtbl)
   let self = QDateTimeEdit(h: self)
-  let slotval1 = gen_qevent_types.QKeyEvent(h: event)
+  let slotval1 = gen_qevent_types.QKeyEvent(h: event, owned: false)
   vtbl[].keyPressEvent(self, slotval1)
 
 proc QDateTimeEditwheelEvent*(self: gen_qdatetimeedit_types.QDateTimeEdit, event: gen_qevent_types.QWheelEvent): void =
@@ -1047,7 +1050,7 @@ proc QDateTimeEditwheelEvent*(self: gen_qdatetimeedit_types.QDateTimeEdit, event
 proc miqt_exec_callback_cQDateTimeEdit_wheelEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDateTimeEditVTable](vtbl)
   let self = QDateTimeEdit(h: self)
-  let slotval1 = gen_qevent_types.QWheelEvent(h: event)
+  let slotval1 = gen_qevent_types.QWheelEvent(h: event, owned: false)
   vtbl[].wheelEvent(self, slotval1)
 
 proc QDateTimeEditfocusInEvent*(self: gen_qdatetimeedit_types.QDateTimeEdit, event: gen_qevent_types.QFocusEvent): void =
@@ -1056,7 +1059,7 @@ proc QDateTimeEditfocusInEvent*(self: gen_qdatetimeedit_types.QDateTimeEdit, eve
 proc miqt_exec_callback_cQDateTimeEdit_focusInEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDateTimeEditVTable](vtbl)
   let self = QDateTimeEdit(h: self)
-  let slotval1 = gen_qevent_types.QFocusEvent(h: event)
+  let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
   vtbl[].focusInEvent(self, slotval1)
 
 proc QDateTimeEditfocusNextPrevChild*(self: gen_qdatetimeedit_types.QDateTimeEdit, next: bool): bool =
@@ -1096,7 +1099,7 @@ proc miqt_exec_callback_cQDateTimeEdit_fixup(vtbl: pointer, self: pointer, input
   vtbl[].fixup(self, slotval1)
 
 proc QDateTimeEditdateTimeFromText*(self: gen_qdatetimeedit_types.QDateTimeEdit, text: string): gen_qdatetime_types.QDateTime =
-  gen_qdatetime_types.QDateTime(h: fcQDateTimeEdit_virtualbase_dateTimeFromText(self.h, struct_miqt_string(data: text, len: csize_t(len(text)))))
+  gen_qdatetime_types.QDateTime(h: fcQDateTimeEdit_virtualbase_dateTimeFromText(self.h, struct_miqt_string(data: text, len: csize_t(len(text)))), owned: true)
 
 proc miqt_exec_callback_cQDateTimeEdit_dateTimeFromText(vtbl: pointer, self: pointer, text: struct_miqt_string): pointer {.cdecl.} =
   let vtbl = cast[ptr QDateTimeEditVTable](vtbl)
@@ -1106,7 +1109,10 @@ proc miqt_exec_callback_cQDateTimeEdit_dateTimeFromText(vtbl: pointer, self: poi
   c_free(vtext_ms.data)
   let slotval1 = vtextx_ret
   var virtualReturn = vtbl[].dateTimeFromText(self, slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QDateTimeEdittextFromDateTime*(self: gen_qdatetimeedit_types.QDateTimeEdit, dt: gen_qdatetime_types.QDateTime): string =
   let v_ms = fcQDateTimeEdit_virtualbase_textFromDateTime(self.h, dt.h)
@@ -1117,7 +1123,7 @@ proc QDateTimeEdittextFromDateTime*(self: gen_qdatetimeedit_types.QDateTimeEdit,
 proc miqt_exec_callback_cQDateTimeEdit_textFromDateTime(vtbl: pointer, self: pointer, dt: pointer): struct_miqt_string {.cdecl.} =
   let vtbl = cast[ptr QDateTimeEditVTable](vtbl)
   let self = QDateTimeEdit(h: self)
-  let slotval1 = gen_qdatetime_types.QDateTime(h: dt)
+  let slotval1 = gen_qdatetime_types.QDateTime(h: dt, owned: false)
   var virtualReturn = vtbl[].textFromDateTime(self, slotval1)
   var virtualReturn_copy = cast[cstring](if len(virtualReturn) > 0: c_malloc(csize_t(len(virtualReturn))) else: nil)
   if len(virtualReturn) > 0: copyMem(cast[pointer](virtualReturn_copy), addr virtualReturn[0], csize_t(len(virtualReturn)))
@@ -1138,7 +1144,7 @@ proc QDateTimeEditmousePressEvent*(self: gen_qdatetimeedit_types.QDateTimeEdit, 
 proc miqt_exec_callback_cQDateTimeEdit_mousePressEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDateTimeEditVTable](vtbl)
   let self = QDateTimeEdit(h: self)
-  let slotval1 = gen_qevent_types.QMouseEvent(h: event)
+  let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   vtbl[].mousePressEvent(self, slotval1)
 
 proc QDateTimeEditpaintEvent*(self: gen_qdatetimeedit_types.QDateTimeEdit, event: gen_qevent_types.QPaintEvent): void =
@@ -1147,27 +1153,33 @@ proc QDateTimeEditpaintEvent*(self: gen_qdatetimeedit_types.QDateTimeEdit, event
 proc miqt_exec_callback_cQDateTimeEdit_paintEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDateTimeEditVTable](vtbl)
   let self = QDateTimeEdit(h: self)
-  let slotval1 = gen_qevent_types.QPaintEvent(h: event)
+  let slotval1 = gen_qevent_types.QPaintEvent(h: event, owned: false)
   vtbl[].paintEvent(self, slotval1)
 
 proc QDateTimeEditminimumSizeHint*(self: gen_qdatetimeedit_types.QDateTimeEdit, ): gen_qsize_types.QSize =
-  gen_qsize_types.QSize(h: fcQDateTimeEdit_virtualbase_minimumSizeHint(self.h))
+  gen_qsize_types.QSize(h: fcQDateTimeEdit_virtualbase_minimumSizeHint(self.h), owned: true)
 
 proc miqt_exec_callback_cQDateTimeEdit_minimumSizeHint(vtbl: pointer, self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QDateTimeEditVTable](vtbl)
   let self = QDateTimeEdit(h: self)
   var virtualReturn = vtbl[].minimumSizeHint(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QDateTimeEditinputMethodQuery*(self: gen_qdatetimeedit_types.QDateTimeEdit, param1: cint): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQDateTimeEdit_virtualbase_inputMethodQuery(self.h, cint(param1)))
+  gen_qvariant_types.QVariant(h: fcQDateTimeEdit_virtualbase_inputMethodQuery(self.h, cint(param1)), owned: true)
 
 proc miqt_exec_callback_cQDateTimeEdit_inputMethodQuery(vtbl: pointer, self: pointer, param1: cint): pointer {.cdecl.} =
   let vtbl = cast[ptr QDateTimeEditVTable](vtbl)
   let self = QDateTimeEdit(h: self)
   let slotval1 = cint(param1)
   var virtualReturn = vtbl[].inputMethodQuery(self, slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QDateTimeEditresizeEvent*(self: gen_qdatetimeedit_types.QDateTimeEdit, event: gen_qevent_types.QResizeEvent): void =
   fcQDateTimeEdit_virtualbase_resizeEvent(self.h, event.h)
@@ -1175,7 +1187,7 @@ proc QDateTimeEditresizeEvent*(self: gen_qdatetimeedit_types.QDateTimeEdit, even
 proc miqt_exec_callback_cQDateTimeEdit_resizeEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDateTimeEditVTable](vtbl)
   let self = QDateTimeEdit(h: self)
-  let slotval1 = gen_qevent_types.QResizeEvent(h: event)
+  let slotval1 = gen_qevent_types.QResizeEvent(h: event, owned: false)
   vtbl[].resizeEvent(self, slotval1)
 
 proc QDateTimeEditkeyReleaseEvent*(self: gen_qdatetimeedit_types.QDateTimeEdit, event: gen_qevent_types.QKeyEvent): void =
@@ -1184,7 +1196,7 @@ proc QDateTimeEditkeyReleaseEvent*(self: gen_qdatetimeedit_types.QDateTimeEdit, 
 proc miqt_exec_callback_cQDateTimeEdit_keyReleaseEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDateTimeEditVTable](vtbl)
   let self = QDateTimeEdit(h: self)
-  let slotval1 = gen_qevent_types.QKeyEvent(h: event)
+  let slotval1 = gen_qevent_types.QKeyEvent(h: event, owned: false)
   vtbl[].keyReleaseEvent(self, slotval1)
 
 proc QDateTimeEditfocusOutEvent*(self: gen_qdatetimeedit_types.QDateTimeEdit, event: gen_qevent_types.QFocusEvent): void =
@@ -1193,7 +1205,7 @@ proc QDateTimeEditfocusOutEvent*(self: gen_qdatetimeedit_types.QDateTimeEdit, ev
 proc miqt_exec_callback_cQDateTimeEdit_focusOutEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDateTimeEditVTable](vtbl)
   let self = QDateTimeEdit(h: self)
-  let slotval1 = gen_qevent_types.QFocusEvent(h: event)
+  let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
   vtbl[].focusOutEvent(self, slotval1)
 
 proc QDateTimeEditcontextMenuEvent*(self: gen_qdatetimeedit_types.QDateTimeEdit, event: gen_qevent_types.QContextMenuEvent): void =
@@ -1202,7 +1214,7 @@ proc QDateTimeEditcontextMenuEvent*(self: gen_qdatetimeedit_types.QDateTimeEdit,
 proc miqt_exec_callback_cQDateTimeEdit_contextMenuEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDateTimeEditVTable](vtbl)
   let self = QDateTimeEdit(h: self)
-  let slotval1 = gen_qevent_types.QContextMenuEvent(h: event)
+  let slotval1 = gen_qevent_types.QContextMenuEvent(h: event, owned: false)
   vtbl[].contextMenuEvent(self, slotval1)
 
 proc QDateTimeEditchangeEvent*(self: gen_qdatetimeedit_types.QDateTimeEdit, event: gen_qcoreevent_types.QEvent): void =
@@ -1211,7 +1223,7 @@ proc QDateTimeEditchangeEvent*(self: gen_qdatetimeedit_types.QDateTimeEdit, even
 proc miqt_exec_callback_cQDateTimeEdit_changeEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDateTimeEditVTable](vtbl)
   let self = QDateTimeEdit(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].changeEvent(self, slotval1)
 
 proc QDateTimeEditcloseEvent*(self: gen_qdatetimeedit_types.QDateTimeEdit, event: gen_qevent_types.QCloseEvent): void =
@@ -1220,7 +1232,7 @@ proc QDateTimeEditcloseEvent*(self: gen_qdatetimeedit_types.QDateTimeEdit, event
 proc miqt_exec_callback_cQDateTimeEdit_closeEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDateTimeEditVTable](vtbl)
   let self = QDateTimeEdit(h: self)
-  let slotval1 = gen_qevent_types.QCloseEvent(h: event)
+  let slotval1 = gen_qevent_types.QCloseEvent(h: event, owned: false)
   vtbl[].closeEvent(self, slotval1)
 
 proc QDateTimeEdithideEvent*(self: gen_qdatetimeedit_types.QDateTimeEdit, event: gen_qevent_types.QHideEvent): void =
@@ -1229,7 +1241,7 @@ proc QDateTimeEdithideEvent*(self: gen_qdatetimeedit_types.QDateTimeEdit, event:
 proc miqt_exec_callback_cQDateTimeEdit_hideEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDateTimeEditVTable](vtbl)
   let self = QDateTimeEdit(h: self)
-  let slotval1 = gen_qevent_types.QHideEvent(h: event)
+  let slotval1 = gen_qevent_types.QHideEvent(h: event, owned: false)
   vtbl[].hideEvent(self, slotval1)
 
 proc QDateTimeEditmouseReleaseEvent*(self: gen_qdatetimeedit_types.QDateTimeEdit, event: gen_qevent_types.QMouseEvent): void =
@@ -1238,7 +1250,7 @@ proc QDateTimeEditmouseReleaseEvent*(self: gen_qdatetimeedit_types.QDateTimeEdit
 proc miqt_exec_callback_cQDateTimeEdit_mouseReleaseEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDateTimeEditVTable](vtbl)
   let self = QDateTimeEdit(h: self)
-  let slotval1 = gen_qevent_types.QMouseEvent(h: event)
+  let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   vtbl[].mouseReleaseEvent(self, slotval1)
 
 proc QDateTimeEditmouseMoveEvent*(self: gen_qdatetimeedit_types.QDateTimeEdit, event: gen_qevent_types.QMouseEvent): void =
@@ -1247,7 +1259,7 @@ proc QDateTimeEditmouseMoveEvent*(self: gen_qdatetimeedit_types.QDateTimeEdit, e
 proc miqt_exec_callback_cQDateTimeEdit_mouseMoveEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDateTimeEditVTable](vtbl)
   let self = QDateTimeEdit(h: self)
-  let slotval1 = gen_qevent_types.QMouseEvent(h: event)
+  let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   vtbl[].mouseMoveEvent(self, slotval1)
 
 proc QDateTimeEdittimerEvent*(self: gen_qdatetimeedit_types.QDateTimeEdit, event: gen_qcoreevent_types.QTimerEvent): void =
@@ -1256,7 +1268,7 @@ proc QDateTimeEdittimerEvent*(self: gen_qdatetimeedit_types.QDateTimeEdit, event
 proc miqt_exec_callback_cQDateTimeEdit_timerEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDateTimeEditVTable](vtbl)
   let self = QDateTimeEdit(h: self)
-  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   vtbl[].timerEvent(self, slotval1)
 
 proc QDateTimeEditshowEvent*(self: gen_qdatetimeedit_types.QDateTimeEdit, event: gen_qevent_types.QShowEvent): void =
@@ -1265,7 +1277,7 @@ proc QDateTimeEditshowEvent*(self: gen_qdatetimeedit_types.QDateTimeEdit, event:
 proc miqt_exec_callback_cQDateTimeEdit_showEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDateTimeEditVTable](vtbl)
   let self = QDateTimeEdit(h: self)
-  let slotval1 = gen_qevent_types.QShowEvent(h: event)
+  let slotval1 = gen_qevent_types.QShowEvent(h: event, owned: false)
   vtbl[].showEvent(self, slotval1)
 
 proc QDateTimeEditdevType*(self: gen_qdatetimeedit_types.QDateTimeEdit, ): cint =
@@ -1306,13 +1318,16 @@ proc miqt_exec_callback_cQDateTimeEdit_hasHeightForWidth(vtbl: pointer, self: po
   virtualReturn
 
 proc QDateTimeEditpaintEngine*(self: gen_qdatetimeedit_types.QDateTimeEdit, ): gen_qpaintengine_types.QPaintEngine =
-  gen_qpaintengine_types.QPaintEngine(h: fcQDateTimeEdit_virtualbase_paintEngine(self.h))
+  gen_qpaintengine_types.QPaintEngine(h: fcQDateTimeEdit_virtualbase_paintEngine(self.h), owned: false)
 
 proc miqt_exec_callback_cQDateTimeEdit_paintEngine(vtbl: pointer, self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QDateTimeEditVTable](vtbl)
   let self = QDateTimeEdit(h: self)
   var virtualReturn = vtbl[].paintEngine(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QDateTimeEditmouseDoubleClickEvent*(self: gen_qdatetimeedit_types.QDateTimeEdit, event: gen_qevent_types.QMouseEvent): void =
   fcQDateTimeEdit_virtualbase_mouseDoubleClickEvent(self.h, event.h)
@@ -1320,7 +1335,7 @@ proc QDateTimeEditmouseDoubleClickEvent*(self: gen_qdatetimeedit_types.QDateTime
 proc miqt_exec_callback_cQDateTimeEdit_mouseDoubleClickEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDateTimeEditVTable](vtbl)
   let self = QDateTimeEdit(h: self)
-  let slotval1 = gen_qevent_types.QMouseEvent(h: event)
+  let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   vtbl[].mouseDoubleClickEvent(self, slotval1)
 
 proc QDateTimeEditenterEvent*(self: gen_qdatetimeedit_types.QDateTimeEdit, event: gen_qcoreevent_types.QEvent): void =
@@ -1329,7 +1344,7 @@ proc QDateTimeEditenterEvent*(self: gen_qdatetimeedit_types.QDateTimeEdit, event
 proc miqt_exec_callback_cQDateTimeEdit_enterEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDateTimeEditVTable](vtbl)
   let self = QDateTimeEdit(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].enterEvent(self, slotval1)
 
 proc QDateTimeEditleaveEvent*(self: gen_qdatetimeedit_types.QDateTimeEdit, event: gen_qcoreevent_types.QEvent): void =
@@ -1338,7 +1353,7 @@ proc QDateTimeEditleaveEvent*(self: gen_qdatetimeedit_types.QDateTimeEdit, event
 proc miqt_exec_callback_cQDateTimeEdit_leaveEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDateTimeEditVTable](vtbl)
   let self = QDateTimeEdit(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].leaveEvent(self, slotval1)
 
 proc QDateTimeEditmoveEvent*(self: gen_qdatetimeedit_types.QDateTimeEdit, event: gen_qevent_types.QMoveEvent): void =
@@ -1347,7 +1362,7 @@ proc QDateTimeEditmoveEvent*(self: gen_qdatetimeedit_types.QDateTimeEdit, event:
 proc miqt_exec_callback_cQDateTimeEdit_moveEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDateTimeEditVTable](vtbl)
   let self = QDateTimeEdit(h: self)
-  let slotval1 = gen_qevent_types.QMoveEvent(h: event)
+  let slotval1 = gen_qevent_types.QMoveEvent(h: event, owned: false)
   vtbl[].moveEvent(self, slotval1)
 
 proc QDateTimeEdittabletEvent*(self: gen_qdatetimeedit_types.QDateTimeEdit, event: gen_qevent_types.QTabletEvent): void =
@@ -1356,7 +1371,7 @@ proc QDateTimeEdittabletEvent*(self: gen_qdatetimeedit_types.QDateTimeEdit, even
 proc miqt_exec_callback_cQDateTimeEdit_tabletEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDateTimeEditVTable](vtbl)
   let self = QDateTimeEdit(h: self)
-  let slotval1 = gen_qevent_types.QTabletEvent(h: event)
+  let slotval1 = gen_qevent_types.QTabletEvent(h: event, owned: false)
   vtbl[].tabletEvent(self, slotval1)
 
 proc QDateTimeEditactionEvent*(self: gen_qdatetimeedit_types.QDateTimeEdit, event: gen_qevent_types.QActionEvent): void =
@@ -1365,7 +1380,7 @@ proc QDateTimeEditactionEvent*(self: gen_qdatetimeedit_types.QDateTimeEdit, even
 proc miqt_exec_callback_cQDateTimeEdit_actionEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDateTimeEditVTable](vtbl)
   let self = QDateTimeEdit(h: self)
-  let slotval1 = gen_qevent_types.QActionEvent(h: event)
+  let slotval1 = gen_qevent_types.QActionEvent(h: event, owned: false)
   vtbl[].actionEvent(self, slotval1)
 
 proc QDateTimeEditdragEnterEvent*(self: gen_qdatetimeedit_types.QDateTimeEdit, event: gen_qevent_types.QDragEnterEvent): void =
@@ -1374,7 +1389,7 @@ proc QDateTimeEditdragEnterEvent*(self: gen_qdatetimeedit_types.QDateTimeEdit, e
 proc miqt_exec_callback_cQDateTimeEdit_dragEnterEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDateTimeEditVTable](vtbl)
   let self = QDateTimeEdit(h: self)
-  let slotval1 = gen_qevent_types.QDragEnterEvent(h: event)
+  let slotval1 = gen_qevent_types.QDragEnterEvent(h: event, owned: false)
   vtbl[].dragEnterEvent(self, slotval1)
 
 proc QDateTimeEditdragMoveEvent*(self: gen_qdatetimeedit_types.QDateTimeEdit, event: gen_qevent_types.QDragMoveEvent): void =
@@ -1383,7 +1398,7 @@ proc QDateTimeEditdragMoveEvent*(self: gen_qdatetimeedit_types.QDateTimeEdit, ev
 proc miqt_exec_callback_cQDateTimeEdit_dragMoveEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDateTimeEditVTable](vtbl)
   let self = QDateTimeEdit(h: self)
-  let slotval1 = gen_qevent_types.QDragMoveEvent(h: event)
+  let slotval1 = gen_qevent_types.QDragMoveEvent(h: event, owned: false)
   vtbl[].dragMoveEvent(self, slotval1)
 
 proc QDateTimeEditdragLeaveEvent*(self: gen_qdatetimeedit_types.QDateTimeEdit, event: gen_qevent_types.QDragLeaveEvent): void =
@@ -1392,7 +1407,7 @@ proc QDateTimeEditdragLeaveEvent*(self: gen_qdatetimeedit_types.QDateTimeEdit, e
 proc miqt_exec_callback_cQDateTimeEdit_dragLeaveEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDateTimeEditVTable](vtbl)
   let self = QDateTimeEdit(h: self)
-  let slotval1 = gen_qevent_types.QDragLeaveEvent(h: event)
+  let slotval1 = gen_qevent_types.QDragLeaveEvent(h: event, owned: false)
   vtbl[].dragLeaveEvent(self, slotval1)
 
 proc QDateTimeEditdropEvent*(self: gen_qdatetimeedit_types.QDateTimeEdit, event: gen_qevent_types.QDropEvent): void =
@@ -1401,7 +1416,7 @@ proc QDateTimeEditdropEvent*(self: gen_qdatetimeedit_types.QDateTimeEdit, event:
 proc miqt_exec_callback_cQDateTimeEdit_dropEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDateTimeEditVTable](vtbl)
   let self = QDateTimeEdit(h: self)
-  let slotval1 = gen_qevent_types.QDropEvent(h: event)
+  let slotval1 = gen_qevent_types.QDropEvent(h: event, owned: false)
   vtbl[].dropEvent(self, slotval1)
 
 proc QDateTimeEditnativeEvent*(self: gen_qdatetimeedit_types.QDateTimeEdit, eventType: seq[byte], message: pointer, resultVal: ptr clong): bool =
@@ -1435,27 +1450,33 @@ proc QDateTimeEditinitPainter*(self: gen_qdatetimeedit_types.QDateTimeEdit, pain
 proc miqt_exec_callback_cQDateTimeEdit_initPainter(vtbl: pointer, self: pointer, painter: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDateTimeEditVTable](vtbl)
   let self = QDateTimeEdit(h: self)
-  let slotval1 = gen_qpainter_types.QPainter(h: painter)
+  let slotval1 = gen_qpainter_types.QPainter(h: painter, owned: false)
   vtbl[].initPainter(self, slotval1)
 
 proc QDateTimeEditredirected*(self: gen_qdatetimeedit_types.QDateTimeEdit, offset: gen_qpoint_types.QPoint): gen_qpaintdevice_types.QPaintDevice =
-  gen_qpaintdevice_types.QPaintDevice(h: fcQDateTimeEdit_virtualbase_redirected(self.h, offset.h))
+  gen_qpaintdevice_types.QPaintDevice(h: fcQDateTimeEdit_virtualbase_redirected(self.h, offset.h), owned: false)
 
 proc miqt_exec_callback_cQDateTimeEdit_redirected(vtbl: pointer, self: pointer, offset: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QDateTimeEditVTable](vtbl)
   let self = QDateTimeEdit(h: self)
-  let slotval1 = gen_qpoint_types.QPoint(h: offset)
+  let slotval1 = gen_qpoint_types.QPoint(h: offset, owned: false)
   var virtualReturn = vtbl[].redirected(self, slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QDateTimeEditsharedPainter*(self: gen_qdatetimeedit_types.QDateTimeEdit, ): gen_qpainter_types.QPainter =
-  gen_qpainter_types.QPainter(h: fcQDateTimeEdit_virtualbase_sharedPainter(self.h))
+  gen_qpainter_types.QPainter(h: fcQDateTimeEdit_virtualbase_sharedPainter(self.h), owned: false)
 
 proc miqt_exec_callback_cQDateTimeEdit_sharedPainter(vtbl: pointer, self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QDateTimeEditVTable](vtbl)
   let self = QDateTimeEdit(h: self)
   var virtualReturn = vtbl[].sharedPainter(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QDateTimeEditinputMethodEvent*(self: gen_qdatetimeedit_types.QDateTimeEdit, param1: gen_qevent_types.QInputMethodEvent): void =
   fcQDateTimeEdit_virtualbase_inputMethodEvent(self.h, param1.h)
@@ -1463,7 +1484,7 @@ proc QDateTimeEditinputMethodEvent*(self: gen_qdatetimeedit_types.QDateTimeEdit,
 proc miqt_exec_callback_cQDateTimeEdit_inputMethodEvent(vtbl: pointer, self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDateTimeEditVTable](vtbl)
   let self = QDateTimeEdit(h: self)
-  let slotval1 = gen_qevent_types.QInputMethodEvent(h: param1)
+  let slotval1 = gen_qevent_types.QInputMethodEvent(h: param1, owned: false)
   vtbl[].inputMethodEvent(self, slotval1)
 
 proc QDateTimeEditeventFilter*(self: gen_qdatetimeedit_types.QDateTimeEdit, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool =
@@ -1472,8 +1493,8 @@ proc QDateTimeEditeventFilter*(self: gen_qdatetimeedit_types.QDateTimeEdit, watc
 proc miqt_exec_callback_cQDateTimeEdit_eventFilter(vtbl: pointer, self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QDateTimeEditVTable](vtbl)
   let self = QDateTimeEdit(h: self)
-  let slotval1 = gen_qobject_types.QObject(h: watched)
-  let slotval2 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].eventFilter(self, slotval1, slotval2)
   virtualReturn
 
@@ -1483,7 +1504,7 @@ proc QDateTimeEditchildEvent*(self: gen_qdatetimeedit_types.QDateTimeEdit, event
 proc miqt_exec_callback_cQDateTimeEdit_childEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDateTimeEditVTable](vtbl)
   let self = QDateTimeEdit(h: self)
-  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   vtbl[].childEvent(self, slotval1)
 
 proc QDateTimeEditcustomEvent*(self: gen_qdatetimeedit_types.QDateTimeEdit, event: gen_qcoreevent_types.QEvent): void =
@@ -1492,7 +1513,7 @@ proc QDateTimeEditcustomEvent*(self: gen_qdatetimeedit_types.QDateTimeEdit, even
 proc miqt_exec_callback_cQDateTimeEdit_customEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDateTimeEditVTable](vtbl)
   let self = QDateTimeEdit(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].customEvent(self, slotval1)
 
 proc QDateTimeEditconnectNotify*(self: gen_qdatetimeedit_types.QDateTimeEdit, signal: gen_qmetaobject_types.QMetaMethod): void =
@@ -1501,7 +1522,7 @@ proc QDateTimeEditconnectNotify*(self: gen_qdatetimeedit_types.QDateTimeEdit, si
 proc miqt_exec_callback_cQDateTimeEdit_connectNotify(vtbl: pointer, self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDateTimeEditVTable](vtbl)
   let self = QDateTimeEdit(h: self)
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].connectNotify(self, slotval1)
 
 proc QDateTimeEditdisconnectNotify*(self: gen_qdatetimeedit_types.QDateTimeEdit, signal: gen_qmetaobject_types.QMetaMethod): void =
@@ -1510,14 +1531,471 @@ proc QDateTimeEditdisconnectNotify*(self: gen_qdatetimeedit_types.QDateTimeEdit,
 proc miqt_exec_callback_cQDateTimeEdit_disconnectNotify(vtbl: pointer, self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDateTimeEditVTable](vtbl)
   let self = QDateTimeEdit(h: self)
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].disconnectNotify(self, slotval1)
+
+type VirtualQDateTimeEdit* {.inheritable.} = ref object of QDateTimeEdit
+  vtbl*: cQDateTimeEditVTable
+method metaObject*(self: VirtualQDateTimeEdit, ): gen_qobjectdefs_types.QMetaObject {.base.} =
+  QDateTimeEditmetaObject(self[])
+proc miqt_exec_method_cQDateTimeEdit_metaObject(vtbl: pointer, inst: pointer): pointer {.cdecl.} =
+  let vtbl = cast[VirtualQDateTimeEdit](cast[uint](vtbl) - uint(offsetOf(VirtualQDateTimeEdit, vtbl)))
+  var virtualReturn = vtbl.metaObject()
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
+
+method metacast*(self: VirtualQDateTimeEdit, param1: cstring): pointer {.base.} =
+  QDateTimeEditmetacast(self[], param1)
+proc miqt_exec_method_cQDateTimeEdit_metacast(vtbl: pointer, inst: pointer, param1: cstring): pointer {.cdecl.} =
+  let vtbl = cast[VirtualQDateTimeEdit](cast[uint](vtbl) - uint(offsetOf(VirtualQDateTimeEdit, vtbl)))
+  let slotval1 = (param1)
+  var virtualReturn = vtbl.metacast(slotval1)
+  virtualReturn
+
+method metacall*(self: VirtualQDateTimeEdit, param1: cint, param2: cint, param3: pointer): cint {.base.} =
+  QDateTimeEditmetacall(self[], param1, param2, param3)
+proc miqt_exec_method_cQDateTimeEdit_metacall(vtbl: pointer, inst: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
+  let vtbl = cast[VirtualQDateTimeEdit](cast[uint](vtbl) - uint(offsetOf(VirtualQDateTimeEdit, vtbl)))
+  let slotval1 = cint(param1)
+  let slotval2 = param2
+  let slotval3 = param3
+  var virtualReturn = vtbl.metacall(slotval1, slotval2, slotval3)
+  virtualReturn
+
+method sizeHint*(self: VirtualQDateTimeEdit, ): gen_qsize_types.QSize {.base.} =
+  QDateTimeEditsizeHint(self[])
+proc miqt_exec_method_cQDateTimeEdit_sizeHint(vtbl: pointer, inst: pointer): pointer {.cdecl.} =
+  let vtbl = cast[VirtualQDateTimeEdit](cast[uint](vtbl) - uint(offsetOf(VirtualQDateTimeEdit, vtbl)))
+  var virtualReturn = vtbl.sizeHint()
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
+
+method clear*(self: VirtualQDateTimeEdit, ): void {.base.} =
+  QDateTimeEditclear(self[])
+proc miqt_exec_method_cQDateTimeEdit_clear(vtbl: pointer, inst: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQDateTimeEdit](cast[uint](vtbl) - uint(offsetOf(VirtualQDateTimeEdit, vtbl)))
+  vtbl.clear()
+
+method stepBy*(self: VirtualQDateTimeEdit, steps: cint): void {.base.} =
+  QDateTimeEditstepBy(self[], steps)
+proc miqt_exec_method_cQDateTimeEdit_stepBy(vtbl: pointer, inst: pointer, steps: cint): void {.cdecl.} =
+  let vtbl = cast[VirtualQDateTimeEdit](cast[uint](vtbl) - uint(offsetOf(VirtualQDateTimeEdit, vtbl)))
+  let slotval1 = steps
+  vtbl.stepBy(slotval1)
+
+method event*(self: VirtualQDateTimeEdit, event: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QDateTimeEditevent(self[], event)
+proc miqt_exec_method_cQDateTimeEdit_event(vtbl: pointer, inst: pointer, event: pointer): bool {.cdecl.} =
+  let vtbl = cast[VirtualQDateTimeEdit](cast[uint](vtbl) - uint(offsetOf(VirtualQDateTimeEdit, vtbl)))
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
+  var virtualReturn = vtbl.event(slotval1)
+  virtualReturn
+
+method keyPressEvent*(self: VirtualQDateTimeEdit, event: gen_qevent_types.QKeyEvent): void {.base.} =
+  QDateTimeEditkeyPressEvent(self[], event)
+proc miqt_exec_method_cQDateTimeEdit_keyPressEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQDateTimeEdit](cast[uint](vtbl) - uint(offsetOf(VirtualQDateTimeEdit, vtbl)))
+  let slotval1 = gen_qevent_types.QKeyEvent(h: event, owned: false)
+  vtbl.keyPressEvent(slotval1)
+
+method wheelEvent*(self: VirtualQDateTimeEdit, event: gen_qevent_types.QWheelEvent): void {.base.} =
+  QDateTimeEditwheelEvent(self[], event)
+proc miqt_exec_method_cQDateTimeEdit_wheelEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQDateTimeEdit](cast[uint](vtbl) - uint(offsetOf(VirtualQDateTimeEdit, vtbl)))
+  let slotval1 = gen_qevent_types.QWheelEvent(h: event, owned: false)
+  vtbl.wheelEvent(slotval1)
+
+method focusInEvent*(self: VirtualQDateTimeEdit, event: gen_qevent_types.QFocusEvent): void {.base.} =
+  QDateTimeEditfocusInEvent(self[], event)
+proc miqt_exec_method_cQDateTimeEdit_focusInEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQDateTimeEdit](cast[uint](vtbl) - uint(offsetOf(VirtualQDateTimeEdit, vtbl)))
+  let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
+  vtbl.focusInEvent(slotval1)
+
+method focusNextPrevChild*(self: VirtualQDateTimeEdit, next: bool): bool {.base.} =
+  QDateTimeEditfocusNextPrevChild(self[], next)
+proc miqt_exec_method_cQDateTimeEdit_focusNextPrevChild(vtbl: pointer, inst: pointer, next: bool): bool {.cdecl.} =
+  let vtbl = cast[VirtualQDateTimeEdit](cast[uint](vtbl) - uint(offsetOf(VirtualQDateTimeEdit, vtbl)))
+  let slotval1 = next
+  var virtualReturn = vtbl.focusNextPrevChild(slotval1)
+  virtualReturn
+
+method validate*(self: VirtualQDateTimeEdit, input: string, pos: ptr cint): cint {.base.} =
+  QDateTimeEditvalidate(self[], input, pos)
+proc miqt_exec_method_cQDateTimeEdit_validate(vtbl: pointer, inst: pointer, input: struct_miqt_string, pos: ptr cint): cint {.cdecl.} =
+  let vtbl = cast[VirtualQDateTimeEdit](cast[uint](vtbl) - uint(offsetOf(VirtualQDateTimeEdit, vtbl)))
+  let vinput_ms = input
+  let vinputx_ret = string.fromBytes(toOpenArrayByte(vinput_ms.data, 0, int(vinput_ms.len)-1))
+  c_free(vinput_ms.data)
+  let slotval1 = vinputx_ret
+  let slotval2 = pos
+  var virtualReturn = vtbl.validate(slotval1, slotval2)
+  cint(virtualReturn)
+
+method fixup*(self: VirtualQDateTimeEdit, input: string): void {.base.} =
+  QDateTimeEditfixup(self[], input)
+proc miqt_exec_method_cQDateTimeEdit_fixup(vtbl: pointer, inst: pointer, input: struct_miqt_string): void {.cdecl.} =
+  let vtbl = cast[VirtualQDateTimeEdit](cast[uint](vtbl) - uint(offsetOf(VirtualQDateTimeEdit, vtbl)))
+  let vinput_ms = input
+  let vinputx_ret = string.fromBytes(toOpenArrayByte(vinput_ms.data, 0, int(vinput_ms.len)-1))
+  c_free(vinput_ms.data)
+  let slotval1 = vinputx_ret
+  vtbl.fixup(slotval1)
+
+method dateTimeFromText*(self: VirtualQDateTimeEdit, text: string): gen_qdatetime_types.QDateTime {.base.} =
+  QDateTimeEditdateTimeFromText(self[], text)
+proc miqt_exec_method_cQDateTimeEdit_dateTimeFromText(vtbl: pointer, inst: pointer, text: struct_miqt_string): pointer {.cdecl.} =
+  let vtbl = cast[VirtualQDateTimeEdit](cast[uint](vtbl) - uint(offsetOf(VirtualQDateTimeEdit, vtbl)))
+  let vtext_ms = text
+  let vtextx_ret = string.fromBytes(toOpenArrayByte(vtext_ms.data, 0, int(vtext_ms.len)-1))
+  c_free(vtext_ms.data)
+  let slotval1 = vtextx_ret
+  var virtualReturn = vtbl.dateTimeFromText(slotval1)
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
+
+method textFromDateTime*(self: VirtualQDateTimeEdit, dt: gen_qdatetime_types.QDateTime): string {.base.} =
+  QDateTimeEdittextFromDateTime(self[], dt)
+proc miqt_exec_method_cQDateTimeEdit_textFromDateTime(vtbl: pointer, inst: pointer, dt: pointer): struct_miqt_string {.cdecl.} =
+  let vtbl = cast[VirtualQDateTimeEdit](cast[uint](vtbl) - uint(offsetOf(VirtualQDateTimeEdit, vtbl)))
+  let slotval1 = gen_qdatetime_types.QDateTime(h: dt, owned: false)
+  var virtualReturn = vtbl.textFromDateTime(slotval1)
+  var virtualReturn_copy = cast[cstring](if len(virtualReturn) > 0: c_malloc(csize_t(len(virtualReturn))) else: nil)
+  if len(virtualReturn) > 0: copyMem(cast[pointer](virtualReturn_copy), addr virtualReturn[0], csize_t(len(virtualReturn)))
+  struct_miqt_string(data: virtualReturn_copy, len: csize_t(len(virtualReturn)))
+
+method stepEnabled*(self: VirtualQDateTimeEdit, ): cint {.base.} =
+  QDateTimeEditstepEnabled(self[])
+proc miqt_exec_method_cQDateTimeEdit_stepEnabled(vtbl: pointer, inst: pointer): cint {.cdecl.} =
+  let vtbl = cast[VirtualQDateTimeEdit](cast[uint](vtbl) - uint(offsetOf(VirtualQDateTimeEdit, vtbl)))
+  var virtualReturn = vtbl.stepEnabled()
+  cint(virtualReturn)
+
+method mousePressEvent*(self: VirtualQDateTimeEdit, event: gen_qevent_types.QMouseEvent): void {.base.} =
+  QDateTimeEditmousePressEvent(self[], event)
+proc miqt_exec_method_cQDateTimeEdit_mousePressEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQDateTimeEdit](cast[uint](vtbl) - uint(offsetOf(VirtualQDateTimeEdit, vtbl)))
+  let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
+  vtbl.mousePressEvent(slotval1)
+
+method paintEvent*(self: VirtualQDateTimeEdit, event: gen_qevent_types.QPaintEvent): void {.base.} =
+  QDateTimeEditpaintEvent(self[], event)
+proc miqt_exec_method_cQDateTimeEdit_paintEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQDateTimeEdit](cast[uint](vtbl) - uint(offsetOf(VirtualQDateTimeEdit, vtbl)))
+  let slotval1 = gen_qevent_types.QPaintEvent(h: event, owned: false)
+  vtbl.paintEvent(slotval1)
+
+method minimumSizeHint*(self: VirtualQDateTimeEdit, ): gen_qsize_types.QSize {.base.} =
+  QDateTimeEditminimumSizeHint(self[])
+proc miqt_exec_method_cQDateTimeEdit_minimumSizeHint(vtbl: pointer, inst: pointer): pointer {.cdecl.} =
+  let vtbl = cast[VirtualQDateTimeEdit](cast[uint](vtbl) - uint(offsetOf(VirtualQDateTimeEdit, vtbl)))
+  var virtualReturn = vtbl.minimumSizeHint()
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
+
+method inputMethodQuery*(self: VirtualQDateTimeEdit, param1: cint): gen_qvariant_types.QVariant {.base.} =
+  QDateTimeEditinputMethodQuery(self[], param1)
+proc miqt_exec_method_cQDateTimeEdit_inputMethodQuery(vtbl: pointer, inst: pointer, param1: cint): pointer {.cdecl.} =
+  let vtbl = cast[VirtualQDateTimeEdit](cast[uint](vtbl) - uint(offsetOf(VirtualQDateTimeEdit, vtbl)))
+  let slotval1 = cint(param1)
+  var virtualReturn = vtbl.inputMethodQuery(slotval1)
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
+
+method resizeEvent*(self: VirtualQDateTimeEdit, event: gen_qevent_types.QResizeEvent): void {.base.} =
+  QDateTimeEditresizeEvent(self[], event)
+proc miqt_exec_method_cQDateTimeEdit_resizeEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQDateTimeEdit](cast[uint](vtbl) - uint(offsetOf(VirtualQDateTimeEdit, vtbl)))
+  let slotval1 = gen_qevent_types.QResizeEvent(h: event, owned: false)
+  vtbl.resizeEvent(slotval1)
+
+method keyReleaseEvent*(self: VirtualQDateTimeEdit, event: gen_qevent_types.QKeyEvent): void {.base.} =
+  QDateTimeEditkeyReleaseEvent(self[], event)
+proc miqt_exec_method_cQDateTimeEdit_keyReleaseEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQDateTimeEdit](cast[uint](vtbl) - uint(offsetOf(VirtualQDateTimeEdit, vtbl)))
+  let slotval1 = gen_qevent_types.QKeyEvent(h: event, owned: false)
+  vtbl.keyReleaseEvent(slotval1)
+
+method focusOutEvent*(self: VirtualQDateTimeEdit, event: gen_qevent_types.QFocusEvent): void {.base.} =
+  QDateTimeEditfocusOutEvent(self[], event)
+proc miqt_exec_method_cQDateTimeEdit_focusOutEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQDateTimeEdit](cast[uint](vtbl) - uint(offsetOf(VirtualQDateTimeEdit, vtbl)))
+  let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
+  vtbl.focusOutEvent(slotval1)
+
+method contextMenuEvent*(self: VirtualQDateTimeEdit, event: gen_qevent_types.QContextMenuEvent): void {.base.} =
+  QDateTimeEditcontextMenuEvent(self[], event)
+proc miqt_exec_method_cQDateTimeEdit_contextMenuEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQDateTimeEdit](cast[uint](vtbl) - uint(offsetOf(VirtualQDateTimeEdit, vtbl)))
+  let slotval1 = gen_qevent_types.QContextMenuEvent(h: event, owned: false)
+  vtbl.contextMenuEvent(slotval1)
+
+method changeEvent*(self: VirtualQDateTimeEdit, event: gen_qcoreevent_types.QEvent): void {.base.} =
+  QDateTimeEditchangeEvent(self[], event)
+proc miqt_exec_method_cQDateTimeEdit_changeEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQDateTimeEdit](cast[uint](vtbl) - uint(offsetOf(VirtualQDateTimeEdit, vtbl)))
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
+  vtbl.changeEvent(slotval1)
+
+method closeEvent*(self: VirtualQDateTimeEdit, event: gen_qevent_types.QCloseEvent): void {.base.} =
+  QDateTimeEditcloseEvent(self[], event)
+proc miqt_exec_method_cQDateTimeEdit_closeEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQDateTimeEdit](cast[uint](vtbl) - uint(offsetOf(VirtualQDateTimeEdit, vtbl)))
+  let slotval1 = gen_qevent_types.QCloseEvent(h: event, owned: false)
+  vtbl.closeEvent(slotval1)
+
+method hideEvent*(self: VirtualQDateTimeEdit, event: gen_qevent_types.QHideEvent): void {.base.} =
+  QDateTimeEdithideEvent(self[], event)
+proc miqt_exec_method_cQDateTimeEdit_hideEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQDateTimeEdit](cast[uint](vtbl) - uint(offsetOf(VirtualQDateTimeEdit, vtbl)))
+  let slotval1 = gen_qevent_types.QHideEvent(h: event, owned: false)
+  vtbl.hideEvent(slotval1)
+
+method mouseReleaseEvent*(self: VirtualQDateTimeEdit, event: gen_qevent_types.QMouseEvent): void {.base.} =
+  QDateTimeEditmouseReleaseEvent(self[], event)
+proc miqt_exec_method_cQDateTimeEdit_mouseReleaseEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQDateTimeEdit](cast[uint](vtbl) - uint(offsetOf(VirtualQDateTimeEdit, vtbl)))
+  let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
+  vtbl.mouseReleaseEvent(slotval1)
+
+method mouseMoveEvent*(self: VirtualQDateTimeEdit, event: gen_qevent_types.QMouseEvent): void {.base.} =
+  QDateTimeEditmouseMoveEvent(self[], event)
+proc miqt_exec_method_cQDateTimeEdit_mouseMoveEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQDateTimeEdit](cast[uint](vtbl) - uint(offsetOf(VirtualQDateTimeEdit, vtbl)))
+  let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
+  vtbl.mouseMoveEvent(slotval1)
+
+method timerEvent*(self: VirtualQDateTimeEdit, event: gen_qcoreevent_types.QTimerEvent): void {.base.} =
+  QDateTimeEdittimerEvent(self[], event)
+proc miqt_exec_method_cQDateTimeEdit_timerEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQDateTimeEdit](cast[uint](vtbl) - uint(offsetOf(VirtualQDateTimeEdit, vtbl)))
+  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
+  vtbl.timerEvent(slotval1)
+
+method showEvent*(self: VirtualQDateTimeEdit, event: gen_qevent_types.QShowEvent): void {.base.} =
+  QDateTimeEditshowEvent(self[], event)
+proc miqt_exec_method_cQDateTimeEdit_showEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQDateTimeEdit](cast[uint](vtbl) - uint(offsetOf(VirtualQDateTimeEdit, vtbl)))
+  let slotval1 = gen_qevent_types.QShowEvent(h: event, owned: false)
+  vtbl.showEvent(slotval1)
+
+method devType*(self: VirtualQDateTimeEdit, ): cint {.base.} =
+  QDateTimeEditdevType(self[])
+proc miqt_exec_method_cQDateTimeEdit_devType(vtbl: pointer, inst: pointer): cint {.cdecl.} =
+  let vtbl = cast[VirtualQDateTimeEdit](cast[uint](vtbl) - uint(offsetOf(VirtualQDateTimeEdit, vtbl)))
+  var virtualReturn = vtbl.devType()
+  virtualReturn
+
+method setVisible*(self: VirtualQDateTimeEdit, visible: bool): void {.base.} =
+  QDateTimeEditsetVisible(self[], visible)
+proc miqt_exec_method_cQDateTimeEdit_setVisible(vtbl: pointer, inst: pointer, visible: bool): void {.cdecl.} =
+  let vtbl = cast[VirtualQDateTimeEdit](cast[uint](vtbl) - uint(offsetOf(VirtualQDateTimeEdit, vtbl)))
+  let slotval1 = visible
+  vtbl.setVisible(slotval1)
+
+method heightForWidth*(self: VirtualQDateTimeEdit, param1: cint): cint {.base.} =
+  QDateTimeEditheightForWidth(self[], param1)
+proc miqt_exec_method_cQDateTimeEdit_heightForWidth(vtbl: pointer, inst: pointer, param1: cint): cint {.cdecl.} =
+  let vtbl = cast[VirtualQDateTimeEdit](cast[uint](vtbl) - uint(offsetOf(VirtualQDateTimeEdit, vtbl)))
+  let slotval1 = param1
+  var virtualReturn = vtbl.heightForWidth(slotval1)
+  virtualReturn
+
+method hasHeightForWidth*(self: VirtualQDateTimeEdit, ): bool {.base.} =
+  QDateTimeEdithasHeightForWidth(self[])
+proc miqt_exec_method_cQDateTimeEdit_hasHeightForWidth(vtbl: pointer, inst: pointer): bool {.cdecl.} =
+  let vtbl = cast[VirtualQDateTimeEdit](cast[uint](vtbl) - uint(offsetOf(VirtualQDateTimeEdit, vtbl)))
+  var virtualReturn = vtbl.hasHeightForWidth()
+  virtualReturn
+
+method paintEngine*(self: VirtualQDateTimeEdit, ): gen_qpaintengine_types.QPaintEngine {.base.} =
+  QDateTimeEditpaintEngine(self[])
+proc miqt_exec_method_cQDateTimeEdit_paintEngine(vtbl: pointer, inst: pointer): pointer {.cdecl.} =
+  let vtbl = cast[VirtualQDateTimeEdit](cast[uint](vtbl) - uint(offsetOf(VirtualQDateTimeEdit, vtbl)))
+  var virtualReturn = vtbl.paintEngine()
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
+
+method mouseDoubleClickEvent*(self: VirtualQDateTimeEdit, event: gen_qevent_types.QMouseEvent): void {.base.} =
+  QDateTimeEditmouseDoubleClickEvent(self[], event)
+proc miqt_exec_method_cQDateTimeEdit_mouseDoubleClickEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQDateTimeEdit](cast[uint](vtbl) - uint(offsetOf(VirtualQDateTimeEdit, vtbl)))
+  let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
+  vtbl.mouseDoubleClickEvent(slotval1)
+
+method enterEvent*(self: VirtualQDateTimeEdit, event: gen_qcoreevent_types.QEvent): void {.base.} =
+  QDateTimeEditenterEvent(self[], event)
+proc miqt_exec_method_cQDateTimeEdit_enterEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQDateTimeEdit](cast[uint](vtbl) - uint(offsetOf(VirtualQDateTimeEdit, vtbl)))
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
+  vtbl.enterEvent(slotval1)
+
+method leaveEvent*(self: VirtualQDateTimeEdit, event: gen_qcoreevent_types.QEvent): void {.base.} =
+  QDateTimeEditleaveEvent(self[], event)
+proc miqt_exec_method_cQDateTimeEdit_leaveEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQDateTimeEdit](cast[uint](vtbl) - uint(offsetOf(VirtualQDateTimeEdit, vtbl)))
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
+  vtbl.leaveEvent(slotval1)
+
+method moveEvent*(self: VirtualQDateTimeEdit, event: gen_qevent_types.QMoveEvent): void {.base.} =
+  QDateTimeEditmoveEvent(self[], event)
+proc miqt_exec_method_cQDateTimeEdit_moveEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQDateTimeEdit](cast[uint](vtbl) - uint(offsetOf(VirtualQDateTimeEdit, vtbl)))
+  let slotval1 = gen_qevent_types.QMoveEvent(h: event, owned: false)
+  vtbl.moveEvent(slotval1)
+
+method tabletEvent*(self: VirtualQDateTimeEdit, event: gen_qevent_types.QTabletEvent): void {.base.} =
+  QDateTimeEdittabletEvent(self[], event)
+proc miqt_exec_method_cQDateTimeEdit_tabletEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQDateTimeEdit](cast[uint](vtbl) - uint(offsetOf(VirtualQDateTimeEdit, vtbl)))
+  let slotval1 = gen_qevent_types.QTabletEvent(h: event, owned: false)
+  vtbl.tabletEvent(slotval1)
+
+method actionEvent*(self: VirtualQDateTimeEdit, event: gen_qevent_types.QActionEvent): void {.base.} =
+  QDateTimeEditactionEvent(self[], event)
+proc miqt_exec_method_cQDateTimeEdit_actionEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQDateTimeEdit](cast[uint](vtbl) - uint(offsetOf(VirtualQDateTimeEdit, vtbl)))
+  let slotval1 = gen_qevent_types.QActionEvent(h: event, owned: false)
+  vtbl.actionEvent(slotval1)
+
+method dragEnterEvent*(self: VirtualQDateTimeEdit, event: gen_qevent_types.QDragEnterEvent): void {.base.} =
+  QDateTimeEditdragEnterEvent(self[], event)
+proc miqt_exec_method_cQDateTimeEdit_dragEnterEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQDateTimeEdit](cast[uint](vtbl) - uint(offsetOf(VirtualQDateTimeEdit, vtbl)))
+  let slotval1 = gen_qevent_types.QDragEnterEvent(h: event, owned: false)
+  vtbl.dragEnterEvent(slotval1)
+
+method dragMoveEvent*(self: VirtualQDateTimeEdit, event: gen_qevent_types.QDragMoveEvent): void {.base.} =
+  QDateTimeEditdragMoveEvent(self[], event)
+proc miqt_exec_method_cQDateTimeEdit_dragMoveEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQDateTimeEdit](cast[uint](vtbl) - uint(offsetOf(VirtualQDateTimeEdit, vtbl)))
+  let slotval1 = gen_qevent_types.QDragMoveEvent(h: event, owned: false)
+  vtbl.dragMoveEvent(slotval1)
+
+method dragLeaveEvent*(self: VirtualQDateTimeEdit, event: gen_qevent_types.QDragLeaveEvent): void {.base.} =
+  QDateTimeEditdragLeaveEvent(self[], event)
+proc miqt_exec_method_cQDateTimeEdit_dragLeaveEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQDateTimeEdit](cast[uint](vtbl) - uint(offsetOf(VirtualQDateTimeEdit, vtbl)))
+  let slotval1 = gen_qevent_types.QDragLeaveEvent(h: event, owned: false)
+  vtbl.dragLeaveEvent(slotval1)
+
+method dropEvent*(self: VirtualQDateTimeEdit, event: gen_qevent_types.QDropEvent): void {.base.} =
+  QDateTimeEditdropEvent(self[], event)
+proc miqt_exec_method_cQDateTimeEdit_dropEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQDateTimeEdit](cast[uint](vtbl) - uint(offsetOf(VirtualQDateTimeEdit, vtbl)))
+  let slotval1 = gen_qevent_types.QDropEvent(h: event, owned: false)
+  vtbl.dropEvent(slotval1)
+
+method nativeEvent*(self: VirtualQDateTimeEdit, eventType: seq[byte], message: pointer, resultVal: ptr clong): bool {.base.} =
+  QDateTimeEditnativeEvent(self[], eventType, message, resultVal)
+proc miqt_exec_method_cQDateTimeEdit_nativeEvent(vtbl: pointer, inst: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr clong): bool {.cdecl.} =
+  let vtbl = cast[VirtualQDateTimeEdit](cast[uint](vtbl) - uint(offsetOf(VirtualQDateTimeEdit, vtbl)))
+  var veventType_bytearray = eventType
+  var veventTypex_ret = @(toOpenArrayByte(veventType_bytearray.data, 0, int(veventType_bytearray.len)-1))
+  c_free(veventType_bytearray.data)
+  let slotval1 = veventTypex_ret
+  let slotval2 = message
+  let slotval3 = resultVal
+  var virtualReturn = vtbl.nativeEvent(slotval1, slotval2, slotval3)
+  virtualReturn
+
+method metric*(self: VirtualQDateTimeEdit, param1: cint): cint {.base.} =
+  QDateTimeEditmetric(self[], param1)
+proc miqt_exec_method_cQDateTimeEdit_metric(vtbl: pointer, inst: pointer, param1: cint): cint {.cdecl.} =
+  let vtbl = cast[VirtualQDateTimeEdit](cast[uint](vtbl) - uint(offsetOf(VirtualQDateTimeEdit, vtbl)))
+  let slotval1 = cint(param1)
+  var virtualReturn = vtbl.metric(slotval1)
+  virtualReturn
+
+method initPainter*(self: VirtualQDateTimeEdit, painter: gen_qpainter_types.QPainter): void {.base.} =
+  QDateTimeEditinitPainter(self[], painter)
+proc miqt_exec_method_cQDateTimeEdit_initPainter(vtbl: pointer, inst: pointer, painter: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQDateTimeEdit](cast[uint](vtbl) - uint(offsetOf(VirtualQDateTimeEdit, vtbl)))
+  let slotval1 = gen_qpainter_types.QPainter(h: painter, owned: false)
+  vtbl.initPainter(slotval1)
+
+method redirected*(self: VirtualQDateTimeEdit, offset: gen_qpoint_types.QPoint): gen_qpaintdevice_types.QPaintDevice {.base.} =
+  QDateTimeEditredirected(self[], offset)
+proc miqt_exec_method_cQDateTimeEdit_redirected(vtbl: pointer, inst: pointer, offset: pointer): pointer {.cdecl.} =
+  let vtbl = cast[VirtualQDateTimeEdit](cast[uint](vtbl) - uint(offsetOf(VirtualQDateTimeEdit, vtbl)))
+  let slotval1 = gen_qpoint_types.QPoint(h: offset, owned: false)
+  var virtualReturn = vtbl.redirected(slotval1)
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
+
+method sharedPainter*(self: VirtualQDateTimeEdit, ): gen_qpainter_types.QPainter {.base.} =
+  QDateTimeEditsharedPainter(self[])
+proc miqt_exec_method_cQDateTimeEdit_sharedPainter(vtbl: pointer, inst: pointer): pointer {.cdecl.} =
+  let vtbl = cast[VirtualQDateTimeEdit](cast[uint](vtbl) - uint(offsetOf(VirtualQDateTimeEdit, vtbl)))
+  var virtualReturn = vtbl.sharedPainter()
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
+
+method inputMethodEvent*(self: VirtualQDateTimeEdit, param1: gen_qevent_types.QInputMethodEvent): void {.base.} =
+  QDateTimeEditinputMethodEvent(self[], param1)
+proc miqt_exec_method_cQDateTimeEdit_inputMethodEvent(vtbl: pointer, inst: pointer, param1: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQDateTimeEdit](cast[uint](vtbl) - uint(offsetOf(VirtualQDateTimeEdit, vtbl)))
+  let slotval1 = gen_qevent_types.QInputMethodEvent(h: param1, owned: false)
+  vtbl.inputMethodEvent(slotval1)
+
+method eventFilter*(self: VirtualQDateTimeEdit, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QDateTimeEditeventFilter(self[], watched, event)
+proc miqt_exec_method_cQDateTimeEdit_eventFilter(vtbl: pointer, inst: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
+  let vtbl = cast[VirtualQDateTimeEdit](cast[uint](vtbl) - uint(offsetOf(VirtualQDateTimeEdit, vtbl)))
+  let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
+  var virtualReturn = vtbl.eventFilter(slotval1, slotval2)
+  virtualReturn
+
+method childEvent*(self: VirtualQDateTimeEdit, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
+  QDateTimeEditchildEvent(self[], event)
+proc miqt_exec_method_cQDateTimeEdit_childEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQDateTimeEdit](cast[uint](vtbl) - uint(offsetOf(VirtualQDateTimeEdit, vtbl)))
+  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
+  vtbl.childEvent(slotval1)
+
+method customEvent*(self: VirtualQDateTimeEdit, event: gen_qcoreevent_types.QEvent): void {.base.} =
+  QDateTimeEditcustomEvent(self[], event)
+proc miqt_exec_method_cQDateTimeEdit_customEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQDateTimeEdit](cast[uint](vtbl) - uint(offsetOf(VirtualQDateTimeEdit, vtbl)))
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
+  vtbl.customEvent(slotval1)
+
+method connectNotify*(self: VirtualQDateTimeEdit, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QDateTimeEditconnectNotify(self[], signal)
+proc miqt_exec_method_cQDateTimeEdit_connectNotify(vtbl: pointer, inst: pointer, signal: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQDateTimeEdit](cast[uint](vtbl) - uint(offsetOf(VirtualQDateTimeEdit, vtbl)))
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
+  vtbl.connectNotify(slotval1)
+
+method disconnectNotify*(self: VirtualQDateTimeEdit, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QDateTimeEditdisconnectNotify(self[], signal)
+proc miqt_exec_method_cQDateTimeEdit_disconnectNotify(vtbl: pointer, inst: pointer, signal: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQDateTimeEdit](cast[uint](vtbl) - uint(offsetOf(VirtualQDateTimeEdit, vtbl)))
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
+  vtbl.disconnectNotify(slotval1)
 
 proc initStyleOption*(self: gen_qdatetimeedit_types.QDateTimeEdit, option: gen_qstyleoption_types.QStyleOptionSpinBox): void =
   fcQDateTimeEdit_protectedbase_initStyleOption(self.h, option.h)
 
 proc lineEdit*(self: gen_qdatetimeedit_types.QDateTimeEdit, ): gen_qlineedit_types.QLineEdit =
-  gen_qlineedit_types.QLineEdit(h: fcQDateTimeEdit_protectedbase_lineEdit(self.h))
+  gen_qlineedit_types.QLineEdit(h: fcQDateTimeEdit_protectedbase_lineEdit(self.h), owned: false)
 
 proc setLineEdit*(self: gen_qdatetimeedit_types.QDateTimeEdit, edit: gen_qlineedit_types.QLineEdit): void =
   fcQDateTimeEdit_protectedbase_setLineEdit(self.h, edit.h)
@@ -1538,7 +2016,7 @@ proc focusPreviousChild*(self: gen_qdatetimeedit_types.QDateTimeEdit, ): bool =
   fcQDateTimeEdit_protectedbase_focusPreviousChild(self.h)
 
 proc sender*(self: gen_qdatetimeedit_types.QDateTimeEdit, ): gen_qobject_types.QObject =
-  gen_qobject_types.QObject(h: fcQDateTimeEdit_protectedbase_sender(self.h))
+  gen_qobject_types.QObject(h: fcQDateTimeEdit_protectedbase_sender(self.h), owned: false)
 
 proc senderSignalIndex*(self: gen_qdatetimeedit_types.QDateTimeEdit, ): cint =
   fcQDateTimeEdit_protectedbase_senderSignalIndex(self.h)
@@ -1554,998 +2032,1547 @@ proc create*(T: type gen_qdatetimeedit_types.QDateTimeEdit,
     vtbl: ref QDateTimeEditVTable = nil): gen_qdatetimeedit_types.QDateTimeEdit =
   let vtbl = if vtbl == nil: new QDateTimeEditVTable else: vtbl
   GC_ref(vtbl)
-  vtbl.vtbl.destructor = proc(vtbl: ptr cQDateTimeEditVTable, _: ptr cQDateTimeEdit) {.cdecl.} =
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQDateTimeEditVTable, _: ptr cQDateTimeEdit) {.cdecl.} =
     let vtbl = cast[ref QDateTimeEditVTable](vtbl)
     GC_unref(vtbl)
-  if not isNil(vtbl.metaObject):
+  if not isNil(vtbl[].metaObject):
     vtbl[].vtbl.metaObject = miqt_exec_callback_cQDateTimeEdit_metaObject
-  if not isNil(vtbl.metacast):
+  if not isNil(vtbl[].metacast):
     vtbl[].vtbl.metacast = miqt_exec_callback_cQDateTimeEdit_metacast
-  if not isNil(vtbl.metacall):
+  if not isNil(vtbl[].metacall):
     vtbl[].vtbl.metacall = miqt_exec_callback_cQDateTimeEdit_metacall
-  if not isNil(vtbl.sizeHint):
+  if not isNil(vtbl[].sizeHint):
     vtbl[].vtbl.sizeHint = miqt_exec_callback_cQDateTimeEdit_sizeHint
-  if not isNil(vtbl.clear):
+  if not isNil(vtbl[].clear):
     vtbl[].vtbl.clear = miqt_exec_callback_cQDateTimeEdit_clear
-  if not isNil(vtbl.stepBy):
+  if not isNil(vtbl[].stepBy):
     vtbl[].vtbl.stepBy = miqt_exec_callback_cQDateTimeEdit_stepBy
-  if not isNil(vtbl.event):
+  if not isNil(vtbl[].event):
     vtbl[].vtbl.event = miqt_exec_callback_cQDateTimeEdit_event
-  if not isNil(vtbl.keyPressEvent):
+  if not isNil(vtbl[].keyPressEvent):
     vtbl[].vtbl.keyPressEvent = miqt_exec_callback_cQDateTimeEdit_keyPressEvent
-  if not isNil(vtbl.wheelEvent):
+  if not isNil(vtbl[].wheelEvent):
     vtbl[].vtbl.wheelEvent = miqt_exec_callback_cQDateTimeEdit_wheelEvent
-  if not isNil(vtbl.focusInEvent):
+  if not isNil(vtbl[].focusInEvent):
     vtbl[].vtbl.focusInEvent = miqt_exec_callback_cQDateTimeEdit_focusInEvent
-  if not isNil(vtbl.focusNextPrevChild):
+  if not isNil(vtbl[].focusNextPrevChild):
     vtbl[].vtbl.focusNextPrevChild = miqt_exec_callback_cQDateTimeEdit_focusNextPrevChild
-  if not isNil(vtbl.validate):
+  if not isNil(vtbl[].validate):
     vtbl[].vtbl.validate = miqt_exec_callback_cQDateTimeEdit_validate
-  if not isNil(vtbl.fixup):
+  if not isNil(vtbl[].fixup):
     vtbl[].vtbl.fixup = miqt_exec_callback_cQDateTimeEdit_fixup
-  if not isNil(vtbl.dateTimeFromText):
+  if not isNil(vtbl[].dateTimeFromText):
     vtbl[].vtbl.dateTimeFromText = miqt_exec_callback_cQDateTimeEdit_dateTimeFromText
-  if not isNil(vtbl.textFromDateTime):
+  if not isNil(vtbl[].textFromDateTime):
     vtbl[].vtbl.textFromDateTime = miqt_exec_callback_cQDateTimeEdit_textFromDateTime
-  if not isNil(vtbl.stepEnabled):
+  if not isNil(vtbl[].stepEnabled):
     vtbl[].vtbl.stepEnabled = miqt_exec_callback_cQDateTimeEdit_stepEnabled
-  if not isNil(vtbl.mousePressEvent):
+  if not isNil(vtbl[].mousePressEvent):
     vtbl[].vtbl.mousePressEvent = miqt_exec_callback_cQDateTimeEdit_mousePressEvent
-  if not isNil(vtbl.paintEvent):
+  if not isNil(vtbl[].paintEvent):
     vtbl[].vtbl.paintEvent = miqt_exec_callback_cQDateTimeEdit_paintEvent
-  if not isNil(vtbl.minimumSizeHint):
+  if not isNil(vtbl[].minimumSizeHint):
     vtbl[].vtbl.minimumSizeHint = miqt_exec_callback_cQDateTimeEdit_minimumSizeHint
-  if not isNil(vtbl.inputMethodQuery):
+  if not isNil(vtbl[].inputMethodQuery):
     vtbl[].vtbl.inputMethodQuery = miqt_exec_callback_cQDateTimeEdit_inputMethodQuery
-  if not isNil(vtbl.resizeEvent):
+  if not isNil(vtbl[].resizeEvent):
     vtbl[].vtbl.resizeEvent = miqt_exec_callback_cQDateTimeEdit_resizeEvent
-  if not isNil(vtbl.keyReleaseEvent):
+  if not isNil(vtbl[].keyReleaseEvent):
     vtbl[].vtbl.keyReleaseEvent = miqt_exec_callback_cQDateTimeEdit_keyReleaseEvent
-  if not isNil(vtbl.focusOutEvent):
+  if not isNil(vtbl[].focusOutEvent):
     vtbl[].vtbl.focusOutEvent = miqt_exec_callback_cQDateTimeEdit_focusOutEvent
-  if not isNil(vtbl.contextMenuEvent):
+  if not isNil(vtbl[].contextMenuEvent):
     vtbl[].vtbl.contextMenuEvent = miqt_exec_callback_cQDateTimeEdit_contextMenuEvent
-  if not isNil(vtbl.changeEvent):
+  if not isNil(vtbl[].changeEvent):
     vtbl[].vtbl.changeEvent = miqt_exec_callback_cQDateTimeEdit_changeEvent
-  if not isNil(vtbl.closeEvent):
+  if not isNil(vtbl[].closeEvent):
     vtbl[].vtbl.closeEvent = miqt_exec_callback_cQDateTimeEdit_closeEvent
-  if not isNil(vtbl.hideEvent):
+  if not isNil(vtbl[].hideEvent):
     vtbl[].vtbl.hideEvent = miqt_exec_callback_cQDateTimeEdit_hideEvent
-  if not isNil(vtbl.mouseReleaseEvent):
+  if not isNil(vtbl[].mouseReleaseEvent):
     vtbl[].vtbl.mouseReleaseEvent = miqt_exec_callback_cQDateTimeEdit_mouseReleaseEvent
-  if not isNil(vtbl.mouseMoveEvent):
+  if not isNil(vtbl[].mouseMoveEvent):
     vtbl[].vtbl.mouseMoveEvent = miqt_exec_callback_cQDateTimeEdit_mouseMoveEvent
-  if not isNil(vtbl.timerEvent):
+  if not isNil(vtbl[].timerEvent):
     vtbl[].vtbl.timerEvent = miqt_exec_callback_cQDateTimeEdit_timerEvent
-  if not isNil(vtbl.showEvent):
+  if not isNil(vtbl[].showEvent):
     vtbl[].vtbl.showEvent = miqt_exec_callback_cQDateTimeEdit_showEvent
-  if not isNil(vtbl.devType):
+  if not isNil(vtbl[].devType):
     vtbl[].vtbl.devType = miqt_exec_callback_cQDateTimeEdit_devType
-  if not isNil(vtbl.setVisible):
+  if not isNil(vtbl[].setVisible):
     vtbl[].vtbl.setVisible = miqt_exec_callback_cQDateTimeEdit_setVisible
-  if not isNil(vtbl.heightForWidth):
+  if not isNil(vtbl[].heightForWidth):
     vtbl[].vtbl.heightForWidth = miqt_exec_callback_cQDateTimeEdit_heightForWidth
-  if not isNil(vtbl.hasHeightForWidth):
+  if not isNil(vtbl[].hasHeightForWidth):
     vtbl[].vtbl.hasHeightForWidth = miqt_exec_callback_cQDateTimeEdit_hasHeightForWidth
-  if not isNil(vtbl.paintEngine):
+  if not isNil(vtbl[].paintEngine):
     vtbl[].vtbl.paintEngine = miqt_exec_callback_cQDateTimeEdit_paintEngine
-  if not isNil(vtbl.mouseDoubleClickEvent):
+  if not isNil(vtbl[].mouseDoubleClickEvent):
     vtbl[].vtbl.mouseDoubleClickEvent = miqt_exec_callback_cQDateTimeEdit_mouseDoubleClickEvent
-  if not isNil(vtbl.enterEvent):
+  if not isNil(vtbl[].enterEvent):
     vtbl[].vtbl.enterEvent = miqt_exec_callback_cQDateTimeEdit_enterEvent
-  if not isNil(vtbl.leaveEvent):
+  if not isNil(vtbl[].leaveEvent):
     vtbl[].vtbl.leaveEvent = miqt_exec_callback_cQDateTimeEdit_leaveEvent
-  if not isNil(vtbl.moveEvent):
+  if not isNil(vtbl[].moveEvent):
     vtbl[].vtbl.moveEvent = miqt_exec_callback_cQDateTimeEdit_moveEvent
-  if not isNil(vtbl.tabletEvent):
+  if not isNil(vtbl[].tabletEvent):
     vtbl[].vtbl.tabletEvent = miqt_exec_callback_cQDateTimeEdit_tabletEvent
-  if not isNil(vtbl.actionEvent):
+  if not isNil(vtbl[].actionEvent):
     vtbl[].vtbl.actionEvent = miqt_exec_callback_cQDateTimeEdit_actionEvent
-  if not isNil(vtbl.dragEnterEvent):
+  if not isNil(vtbl[].dragEnterEvent):
     vtbl[].vtbl.dragEnterEvent = miqt_exec_callback_cQDateTimeEdit_dragEnterEvent
-  if not isNil(vtbl.dragMoveEvent):
+  if not isNil(vtbl[].dragMoveEvent):
     vtbl[].vtbl.dragMoveEvent = miqt_exec_callback_cQDateTimeEdit_dragMoveEvent
-  if not isNil(vtbl.dragLeaveEvent):
+  if not isNil(vtbl[].dragLeaveEvent):
     vtbl[].vtbl.dragLeaveEvent = miqt_exec_callback_cQDateTimeEdit_dragLeaveEvent
-  if not isNil(vtbl.dropEvent):
+  if not isNil(vtbl[].dropEvent):
     vtbl[].vtbl.dropEvent = miqt_exec_callback_cQDateTimeEdit_dropEvent
-  if not isNil(vtbl.nativeEvent):
+  if not isNil(vtbl[].nativeEvent):
     vtbl[].vtbl.nativeEvent = miqt_exec_callback_cQDateTimeEdit_nativeEvent
-  if not isNil(vtbl.metric):
+  if not isNil(vtbl[].metric):
     vtbl[].vtbl.metric = miqt_exec_callback_cQDateTimeEdit_metric
-  if not isNil(vtbl.initPainter):
+  if not isNil(vtbl[].initPainter):
     vtbl[].vtbl.initPainter = miqt_exec_callback_cQDateTimeEdit_initPainter
-  if not isNil(vtbl.redirected):
+  if not isNil(vtbl[].redirected):
     vtbl[].vtbl.redirected = miqt_exec_callback_cQDateTimeEdit_redirected
-  if not isNil(vtbl.sharedPainter):
+  if not isNil(vtbl[].sharedPainter):
     vtbl[].vtbl.sharedPainter = miqt_exec_callback_cQDateTimeEdit_sharedPainter
-  if not isNil(vtbl.inputMethodEvent):
+  if not isNil(vtbl[].inputMethodEvent):
     vtbl[].vtbl.inputMethodEvent = miqt_exec_callback_cQDateTimeEdit_inputMethodEvent
-  if not isNil(vtbl.eventFilter):
+  if not isNil(vtbl[].eventFilter):
     vtbl[].vtbl.eventFilter = miqt_exec_callback_cQDateTimeEdit_eventFilter
-  if not isNil(vtbl.childEvent):
+  if not isNil(vtbl[].childEvent):
     vtbl[].vtbl.childEvent = miqt_exec_callback_cQDateTimeEdit_childEvent
-  if not isNil(vtbl.customEvent):
+  if not isNil(vtbl[].customEvent):
     vtbl[].vtbl.customEvent = miqt_exec_callback_cQDateTimeEdit_customEvent
-  if not isNil(vtbl.connectNotify):
+  if not isNil(vtbl[].connectNotify):
     vtbl[].vtbl.connectNotify = miqt_exec_callback_cQDateTimeEdit_connectNotify
-  if not isNil(vtbl.disconnectNotify):
+  if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQDateTimeEdit_disconnectNotify
-  gen_qdatetimeedit_types.QDateTimeEdit(h: fcQDateTimeEdit_new(addr(vtbl[]), parent.h))
+  gen_qdatetimeedit_types.QDateTimeEdit(h: fcQDateTimeEdit_new(addr(vtbl[].vtbl), parent.h), owned: true)
 
 proc create*(T: type gen_qdatetimeedit_types.QDateTimeEdit,
     vtbl: ref QDateTimeEditVTable = nil): gen_qdatetimeedit_types.QDateTimeEdit =
   let vtbl = if vtbl == nil: new QDateTimeEditVTable else: vtbl
   GC_ref(vtbl)
-  vtbl.vtbl.destructor = proc(vtbl: ptr cQDateTimeEditVTable, _: ptr cQDateTimeEdit) {.cdecl.} =
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQDateTimeEditVTable, _: ptr cQDateTimeEdit) {.cdecl.} =
     let vtbl = cast[ref QDateTimeEditVTable](vtbl)
     GC_unref(vtbl)
-  if not isNil(vtbl.metaObject):
+  if not isNil(vtbl[].metaObject):
     vtbl[].vtbl.metaObject = miqt_exec_callback_cQDateTimeEdit_metaObject
-  if not isNil(vtbl.metacast):
+  if not isNil(vtbl[].metacast):
     vtbl[].vtbl.metacast = miqt_exec_callback_cQDateTimeEdit_metacast
-  if not isNil(vtbl.metacall):
+  if not isNil(vtbl[].metacall):
     vtbl[].vtbl.metacall = miqt_exec_callback_cQDateTimeEdit_metacall
-  if not isNil(vtbl.sizeHint):
+  if not isNil(vtbl[].sizeHint):
     vtbl[].vtbl.sizeHint = miqt_exec_callback_cQDateTimeEdit_sizeHint
-  if not isNil(vtbl.clear):
+  if not isNil(vtbl[].clear):
     vtbl[].vtbl.clear = miqt_exec_callback_cQDateTimeEdit_clear
-  if not isNil(vtbl.stepBy):
+  if not isNil(vtbl[].stepBy):
     vtbl[].vtbl.stepBy = miqt_exec_callback_cQDateTimeEdit_stepBy
-  if not isNil(vtbl.event):
+  if not isNil(vtbl[].event):
     vtbl[].vtbl.event = miqt_exec_callback_cQDateTimeEdit_event
-  if not isNil(vtbl.keyPressEvent):
+  if not isNil(vtbl[].keyPressEvent):
     vtbl[].vtbl.keyPressEvent = miqt_exec_callback_cQDateTimeEdit_keyPressEvent
-  if not isNil(vtbl.wheelEvent):
+  if not isNil(vtbl[].wheelEvent):
     vtbl[].vtbl.wheelEvent = miqt_exec_callback_cQDateTimeEdit_wheelEvent
-  if not isNil(vtbl.focusInEvent):
+  if not isNil(vtbl[].focusInEvent):
     vtbl[].vtbl.focusInEvent = miqt_exec_callback_cQDateTimeEdit_focusInEvent
-  if not isNil(vtbl.focusNextPrevChild):
+  if not isNil(vtbl[].focusNextPrevChild):
     vtbl[].vtbl.focusNextPrevChild = miqt_exec_callback_cQDateTimeEdit_focusNextPrevChild
-  if not isNil(vtbl.validate):
+  if not isNil(vtbl[].validate):
     vtbl[].vtbl.validate = miqt_exec_callback_cQDateTimeEdit_validate
-  if not isNil(vtbl.fixup):
+  if not isNil(vtbl[].fixup):
     vtbl[].vtbl.fixup = miqt_exec_callback_cQDateTimeEdit_fixup
-  if not isNil(vtbl.dateTimeFromText):
+  if not isNil(vtbl[].dateTimeFromText):
     vtbl[].vtbl.dateTimeFromText = miqt_exec_callback_cQDateTimeEdit_dateTimeFromText
-  if not isNil(vtbl.textFromDateTime):
+  if not isNil(vtbl[].textFromDateTime):
     vtbl[].vtbl.textFromDateTime = miqt_exec_callback_cQDateTimeEdit_textFromDateTime
-  if not isNil(vtbl.stepEnabled):
+  if not isNil(vtbl[].stepEnabled):
     vtbl[].vtbl.stepEnabled = miqt_exec_callback_cQDateTimeEdit_stepEnabled
-  if not isNil(vtbl.mousePressEvent):
+  if not isNil(vtbl[].mousePressEvent):
     vtbl[].vtbl.mousePressEvent = miqt_exec_callback_cQDateTimeEdit_mousePressEvent
-  if not isNil(vtbl.paintEvent):
+  if not isNil(vtbl[].paintEvent):
     vtbl[].vtbl.paintEvent = miqt_exec_callback_cQDateTimeEdit_paintEvent
-  if not isNil(vtbl.minimumSizeHint):
+  if not isNil(vtbl[].minimumSizeHint):
     vtbl[].vtbl.minimumSizeHint = miqt_exec_callback_cQDateTimeEdit_minimumSizeHint
-  if not isNil(vtbl.inputMethodQuery):
+  if not isNil(vtbl[].inputMethodQuery):
     vtbl[].vtbl.inputMethodQuery = miqt_exec_callback_cQDateTimeEdit_inputMethodQuery
-  if not isNil(vtbl.resizeEvent):
+  if not isNil(vtbl[].resizeEvent):
     vtbl[].vtbl.resizeEvent = miqt_exec_callback_cQDateTimeEdit_resizeEvent
-  if not isNil(vtbl.keyReleaseEvent):
+  if not isNil(vtbl[].keyReleaseEvent):
     vtbl[].vtbl.keyReleaseEvent = miqt_exec_callback_cQDateTimeEdit_keyReleaseEvent
-  if not isNil(vtbl.focusOutEvent):
+  if not isNil(vtbl[].focusOutEvent):
     vtbl[].vtbl.focusOutEvent = miqt_exec_callback_cQDateTimeEdit_focusOutEvent
-  if not isNil(vtbl.contextMenuEvent):
+  if not isNil(vtbl[].contextMenuEvent):
     vtbl[].vtbl.contextMenuEvent = miqt_exec_callback_cQDateTimeEdit_contextMenuEvent
-  if not isNil(vtbl.changeEvent):
+  if not isNil(vtbl[].changeEvent):
     vtbl[].vtbl.changeEvent = miqt_exec_callback_cQDateTimeEdit_changeEvent
-  if not isNil(vtbl.closeEvent):
+  if not isNil(vtbl[].closeEvent):
     vtbl[].vtbl.closeEvent = miqt_exec_callback_cQDateTimeEdit_closeEvent
-  if not isNil(vtbl.hideEvent):
+  if not isNil(vtbl[].hideEvent):
     vtbl[].vtbl.hideEvent = miqt_exec_callback_cQDateTimeEdit_hideEvent
-  if not isNil(vtbl.mouseReleaseEvent):
+  if not isNil(vtbl[].mouseReleaseEvent):
     vtbl[].vtbl.mouseReleaseEvent = miqt_exec_callback_cQDateTimeEdit_mouseReleaseEvent
-  if not isNil(vtbl.mouseMoveEvent):
+  if not isNil(vtbl[].mouseMoveEvent):
     vtbl[].vtbl.mouseMoveEvent = miqt_exec_callback_cQDateTimeEdit_mouseMoveEvent
-  if not isNil(vtbl.timerEvent):
+  if not isNil(vtbl[].timerEvent):
     vtbl[].vtbl.timerEvent = miqt_exec_callback_cQDateTimeEdit_timerEvent
-  if not isNil(vtbl.showEvent):
+  if not isNil(vtbl[].showEvent):
     vtbl[].vtbl.showEvent = miqt_exec_callback_cQDateTimeEdit_showEvent
-  if not isNil(vtbl.devType):
+  if not isNil(vtbl[].devType):
     vtbl[].vtbl.devType = miqt_exec_callback_cQDateTimeEdit_devType
-  if not isNil(vtbl.setVisible):
+  if not isNil(vtbl[].setVisible):
     vtbl[].vtbl.setVisible = miqt_exec_callback_cQDateTimeEdit_setVisible
-  if not isNil(vtbl.heightForWidth):
+  if not isNil(vtbl[].heightForWidth):
     vtbl[].vtbl.heightForWidth = miqt_exec_callback_cQDateTimeEdit_heightForWidth
-  if not isNil(vtbl.hasHeightForWidth):
+  if not isNil(vtbl[].hasHeightForWidth):
     vtbl[].vtbl.hasHeightForWidth = miqt_exec_callback_cQDateTimeEdit_hasHeightForWidth
-  if not isNil(vtbl.paintEngine):
+  if not isNil(vtbl[].paintEngine):
     vtbl[].vtbl.paintEngine = miqt_exec_callback_cQDateTimeEdit_paintEngine
-  if not isNil(vtbl.mouseDoubleClickEvent):
+  if not isNil(vtbl[].mouseDoubleClickEvent):
     vtbl[].vtbl.mouseDoubleClickEvent = miqt_exec_callback_cQDateTimeEdit_mouseDoubleClickEvent
-  if not isNil(vtbl.enterEvent):
+  if not isNil(vtbl[].enterEvent):
     vtbl[].vtbl.enterEvent = miqt_exec_callback_cQDateTimeEdit_enterEvent
-  if not isNil(vtbl.leaveEvent):
+  if not isNil(vtbl[].leaveEvent):
     vtbl[].vtbl.leaveEvent = miqt_exec_callback_cQDateTimeEdit_leaveEvent
-  if not isNil(vtbl.moveEvent):
+  if not isNil(vtbl[].moveEvent):
     vtbl[].vtbl.moveEvent = miqt_exec_callback_cQDateTimeEdit_moveEvent
-  if not isNil(vtbl.tabletEvent):
+  if not isNil(vtbl[].tabletEvent):
     vtbl[].vtbl.tabletEvent = miqt_exec_callback_cQDateTimeEdit_tabletEvent
-  if not isNil(vtbl.actionEvent):
+  if not isNil(vtbl[].actionEvent):
     vtbl[].vtbl.actionEvent = miqt_exec_callback_cQDateTimeEdit_actionEvent
-  if not isNil(vtbl.dragEnterEvent):
+  if not isNil(vtbl[].dragEnterEvent):
     vtbl[].vtbl.dragEnterEvent = miqt_exec_callback_cQDateTimeEdit_dragEnterEvent
-  if not isNil(vtbl.dragMoveEvent):
+  if not isNil(vtbl[].dragMoveEvent):
     vtbl[].vtbl.dragMoveEvent = miqt_exec_callback_cQDateTimeEdit_dragMoveEvent
-  if not isNil(vtbl.dragLeaveEvent):
+  if not isNil(vtbl[].dragLeaveEvent):
     vtbl[].vtbl.dragLeaveEvent = miqt_exec_callback_cQDateTimeEdit_dragLeaveEvent
-  if not isNil(vtbl.dropEvent):
+  if not isNil(vtbl[].dropEvent):
     vtbl[].vtbl.dropEvent = miqt_exec_callback_cQDateTimeEdit_dropEvent
-  if not isNil(vtbl.nativeEvent):
+  if not isNil(vtbl[].nativeEvent):
     vtbl[].vtbl.nativeEvent = miqt_exec_callback_cQDateTimeEdit_nativeEvent
-  if not isNil(vtbl.metric):
+  if not isNil(vtbl[].metric):
     vtbl[].vtbl.metric = miqt_exec_callback_cQDateTimeEdit_metric
-  if not isNil(vtbl.initPainter):
+  if not isNil(vtbl[].initPainter):
     vtbl[].vtbl.initPainter = miqt_exec_callback_cQDateTimeEdit_initPainter
-  if not isNil(vtbl.redirected):
+  if not isNil(vtbl[].redirected):
     vtbl[].vtbl.redirected = miqt_exec_callback_cQDateTimeEdit_redirected
-  if not isNil(vtbl.sharedPainter):
+  if not isNil(vtbl[].sharedPainter):
     vtbl[].vtbl.sharedPainter = miqt_exec_callback_cQDateTimeEdit_sharedPainter
-  if not isNil(vtbl.inputMethodEvent):
+  if not isNil(vtbl[].inputMethodEvent):
     vtbl[].vtbl.inputMethodEvent = miqt_exec_callback_cQDateTimeEdit_inputMethodEvent
-  if not isNil(vtbl.eventFilter):
+  if not isNil(vtbl[].eventFilter):
     vtbl[].vtbl.eventFilter = miqt_exec_callback_cQDateTimeEdit_eventFilter
-  if not isNil(vtbl.childEvent):
+  if not isNil(vtbl[].childEvent):
     vtbl[].vtbl.childEvent = miqt_exec_callback_cQDateTimeEdit_childEvent
-  if not isNil(vtbl.customEvent):
+  if not isNil(vtbl[].customEvent):
     vtbl[].vtbl.customEvent = miqt_exec_callback_cQDateTimeEdit_customEvent
-  if not isNil(vtbl.connectNotify):
+  if not isNil(vtbl[].connectNotify):
     vtbl[].vtbl.connectNotify = miqt_exec_callback_cQDateTimeEdit_connectNotify
-  if not isNil(vtbl.disconnectNotify):
+  if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQDateTimeEdit_disconnectNotify
-  gen_qdatetimeedit_types.QDateTimeEdit(h: fcQDateTimeEdit_new2(addr(vtbl[]), ))
+  gen_qdatetimeedit_types.QDateTimeEdit(h: fcQDateTimeEdit_new2(addr(vtbl[].vtbl), ), owned: true)
 
 proc create*(T: type gen_qdatetimeedit_types.QDateTimeEdit,
     dt: gen_qdatetime_types.QDateTime,
     vtbl: ref QDateTimeEditVTable = nil): gen_qdatetimeedit_types.QDateTimeEdit =
   let vtbl = if vtbl == nil: new QDateTimeEditVTable else: vtbl
   GC_ref(vtbl)
-  vtbl.vtbl.destructor = proc(vtbl: ptr cQDateTimeEditVTable, _: ptr cQDateTimeEdit) {.cdecl.} =
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQDateTimeEditVTable, _: ptr cQDateTimeEdit) {.cdecl.} =
     let vtbl = cast[ref QDateTimeEditVTable](vtbl)
     GC_unref(vtbl)
-  if not isNil(vtbl.metaObject):
+  if not isNil(vtbl[].metaObject):
     vtbl[].vtbl.metaObject = miqt_exec_callback_cQDateTimeEdit_metaObject
-  if not isNil(vtbl.metacast):
+  if not isNil(vtbl[].metacast):
     vtbl[].vtbl.metacast = miqt_exec_callback_cQDateTimeEdit_metacast
-  if not isNil(vtbl.metacall):
+  if not isNil(vtbl[].metacall):
     vtbl[].vtbl.metacall = miqt_exec_callback_cQDateTimeEdit_metacall
-  if not isNil(vtbl.sizeHint):
+  if not isNil(vtbl[].sizeHint):
     vtbl[].vtbl.sizeHint = miqt_exec_callback_cQDateTimeEdit_sizeHint
-  if not isNil(vtbl.clear):
+  if not isNil(vtbl[].clear):
     vtbl[].vtbl.clear = miqt_exec_callback_cQDateTimeEdit_clear
-  if not isNil(vtbl.stepBy):
+  if not isNil(vtbl[].stepBy):
     vtbl[].vtbl.stepBy = miqt_exec_callback_cQDateTimeEdit_stepBy
-  if not isNil(vtbl.event):
+  if not isNil(vtbl[].event):
     vtbl[].vtbl.event = miqt_exec_callback_cQDateTimeEdit_event
-  if not isNil(vtbl.keyPressEvent):
+  if not isNil(vtbl[].keyPressEvent):
     vtbl[].vtbl.keyPressEvent = miqt_exec_callback_cQDateTimeEdit_keyPressEvent
-  if not isNil(vtbl.wheelEvent):
+  if not isNil(vtbl[].wheelEvent):
     vtbl[].vtbl.wheelEvent = miqt_exec_callback_cQDateTimeEdit_wheelEvent
-  if not isNil(vtbl.focusInEvent):
+  if not isNil(vtbl[].focusInEvent):
     vtbl[].vtbl.focusInEvent = miqt_exec_callback_cQDateTimeEdit_focusInEvent
-  if not isNil(vtbl.focusNextPrevChild):
+  if not isNil(vtbl[].focusNextPrevChild):
     vtbl[].vtbl.focusNextPrevChild = miqt_exec_callback_cQDateTimeEdit_focusNextPrevChild
-  if not isNil(vtbl.validate):
+  if not isNil(vtbl[].validate):
     vtbl[].vtbl.validate = miqt_exec_callback_cQDateTimeEdit_validate
-  if not isNil(vtbl.fixup):
+  if not isNil(vtbl[].fixup):
     vtbl[].vtbl.fixup = miqt_exec_callback_cQDateTimeEdit_fixup
-  if not isNil(vtbl.dateTimeFromText):
+  if not isNil(vtbl[].dateTimeFromText):
     vtbl[].vtbl.dateTimeFromText = miqt_exec_callback_cQDateTimeEdit_dateTimeFromText
-  if not isNil(vtbl.textFromDateTime):
+  if not isNil(vtbl[].textFromDateTime):
     vtbl[].vtbl.textFromDateTime = miqt_exec_callback_cQDateTimeEdit_textFromDateTime
-  if not isNil(vtbl.stepEnabled):
+  if not isNil(vtbl[].stepEnabled):
     vtbl[].vtbl.stepEnabled = miqt_exec_callback_cQDateTimeEdit_stepEnabled
-  if not isNil(vtbl.mousePressEvent):
+  if not isNil(vtbl[].mousePressEvent):
     vtbl[].vtbl.mousePressEvent = miqt_exec_callback_cQDateTimeEdit_mousePressEvent
-  if not isNil(vtbl.paintEvent):
+  if not isNil(vtbl[].paintEvent):
     vtbl[].vtbl.paintEvent = miqt_exec_callback_cQDateTimeEdit_paintEvent
-  if not isNil(vtbl.minimumSizeHint):
+  if not isNil(vtbl[].minimumSizeHint):
     vtbl[].vtbl.minimumSizeHint = miqt_exec_callback_cQDateTimeEdit_minimumSizeHint
-  if not isNil(vtbl.inputMethodQuery):
+  if not isNil(vtbl[].inputMethodQuery):
     vtbl[].vtbl.inputMethodQuery = miqt_exec_callback_cQDateTimeEdit_inputMethodQuery
-  if not isNil(vtbl.resizeEvent):
+  if not isNil(vtbl[].resizeEvent):
     vtbl[].vtbl.resizeEvent = miqt_exec_callback_cQDateTimeEdit_resizeEvent
-  if not isNil(vtbl.keyReleaseEvent):
+  if not isNil(vtbl[].keyReleaseEvent):
     vtbl[].vtbl.keyReleaseEvent = miqt_exec_callback_cQDateTimeEdit_keyReleaseEvent
-  if not isNil(vtbl.focusOutEvent):
+  if not isNil(vtbl[].focusOutEvent):
     vtbl[].vtbl.focusOutEvent = miqt_exec_callback_cQDateTimeEdit_focusOutEvent
-  if not isNil(vtbl.contextMenuEvent):
+  if not isNil(vtbl[].contextMenuEvent):
     vtbl[].vtbl.contextMenuEvent = miqt_exec_callback_cQDateTimeEdit_contextMenuEvent
-  if not isNil(vtbl.changeEvent):
+  if not isNil(vtbl[].changeEvent):
     vtbl[].vtbl.changeEvent = miqt_exec_callback_cQDateTimeEdit_changeEvent
-  if not isNil(vtbl.closeEvent):
+  if not isNil(vtbl[].closeEvent):
     vtbl[].vtbl.closeEvent = miqt_exec_callback_cQDateTimeEdit_closeEvent
-  if not isNil(vtbl.hideEvent):
+  if not isNil(vtbl[].hideEvent):
     vtbl[].vtbl.hideEvent = miqt_exec_callback_cQDateTimeEdit_hideEvent
-  if not isNil(vtbl.mouseReleaseEvent):
+  if not isNil(vtbl[].mouseReleaseEvent):
     vtbl[].vtbl.mouseReleaseEvent = miqt_exec_callback_cQDateTimeEdit_mouseReleaseEvent
-  if not isNil(vtbl.mouseMoveEvent):
+  if not isNil(vtbl[].mouseMoveEvent):
     vtbl[].vtbl.mouseMoveEvent = miqt_exec_callback_cQDateTimeEdit_mouseMoveEvent
-  if not isNil(vtbl.timerEvent):
+  if not isNil(vtbl[].timerEvent):
     vtbl[].vtbl.timerEvent = miqt_exec_callback_cQDateTimeEdit_timerEvent
-  if not isNil(vtbl.showEvent):
+  if not isNil(vtbl[].showEvent):
     vtbl[].vtbl.showEvent = miqt_exec_callback_cQDateTimeEdit_showEvent
-  if not isNil(vtbl.devType):
+  if not isNil(vtbl[].devType):
     vtbl[].vtbl.devType = miqt_exec_callback_cQDateTimeEdit_devType
-  if not isNil(vtbl.setVisible):
+  if not isNil(vtbl[].setVisible):
     vtbl[].vtbl.setVisible = miqt_exec_callback_cQDateTimeEdit_setVisible
-  if not isNil(vtbl.heightForWidth):
+  if not isNil(vtbl[].heightForWidth):
     vtbl[].vtbl.heightForWidth = miqt_exec_callback_cQDateTimeEdit_heightForWidth
-  if not isNil(vtbl.hasHeightForWidth):
+  if not isNil(vtbl[].hasHeightForWidth):
     vtbl[].vtbl.hasHeightForWidth = miqt_exec_callback_cQDateTimeEdit_hasHeightForWidth
-  if not isNil(vtbl.paintEngine):
+  if not isNil(vtbl[].paintEngine):
     vtbl[].vtbl.paintEngine = miqt_exec_callback_cQDateTimeEdit_paintEngine
-  if not isNil(vtbl.mouseDoubleClickEvent):
+  if not isNil(vtbl[].mouseDoubleClickEvent):
     vtbl[].vtbl.mouseDoubleClickEvent = miqt_exec_callback_cQDateTimeEdit_mouseDoubleClickEvent
-  if not isNil(vtbl.enterEvent):
+  if not isNil(vtbl[].enterEvent):
     vtbl[].vtbl.enterEvent = miqt_exec_callback_cQDateTimeEdit_enterEvent
-  if not isNil(vtbl.leaveEvent):
+  if not isNil(vtbl[].leaveEvent):
     vtbl[].vtbl.leaveEvent = miqt_exec_callback_cQDateTimeEdit_leaveEvent
-  if not isNil(vtbl.moveEvent):
+  if not isNil(vtbl[].moveEvent):
     vtbl[].vtbl.moveEvent = miqt_exec_callback_cQDateTimeEdit_moveEvent
-  if not isNil(vtbl.tabletEvent):
+  if not isNil(vtbl[].tabletEvent):
     vtbl[].vtbl.tabletEvent = miqt_exec_callback_cQDateTimeEdit_tabletEvent
-  if not isNil(vtbl.actionEvent):
+  if not isNil(vtbl[].actionEvent):
     vtbl[].vtbl.actionEvent = miqt_exec_callback_cQDateTimeEdit_actionEvent
-  if not isNil(vtbl.dragEnterEvent):
+  if not isNil(vtbl[].dragEnterEvent):
     vtbl[].vtbl.dragEnterEvent = miqt_exec_callback_cQDateTimeEdit_dragEnterEvent
-  if not isNil(vtbl.dragMoveEvent):
+  if not isNil(vtbl[].dragMoveEvent):
     vtbl[].vtbl.dragMoveEvent = miqt_exec_callback_cQDateTimeEdit_dragMoveEvent
-  if not isNil(vtbl.dragLeaveEvent):
+  if not isNil(vtbl[].dragLeaveEvent):
     vtbl[].vtbl.dragLeaveEvent = miqt_exec_callback_cQDateTimeEdit_dragLeaveEvent
-  if not isNil(vtbl.dropEvent):
+  if not isNil(vtbl[].dropEvent):
     vtbl[].vtbl.dropEvent = miqt_exec_callback_cQDateTimeEdit_dropEvent
-  if not isNil(vtbl.nativeEvent):
+  if not isNil(vtbl[].nativeEvent):
     vtbl[].vtbl.nativeEvent = miqt_exec_callback_cQDateTimeEdit_nativeEvent
-  if not isNil(vtbl.metric):
+  if not isNil(vtbl[].metric):
     vtbl[].vtbl.metric = miqt_exec_callback_cQDateTimeEdit_metric
-  if not isNil(vtbl.initPainter):
+  if not isNil(vtbl[].initPainter):
     vtbl[].vtbl.initPainter = miqt_exec_callback_cQDateTimeEdit_initPainter
-  if not isNil(vtbl.redirected):
+  if not isNil(vtbl[].redirected):
     vtbl[].vtbl.redirected = miqt_exec_callback_cQDateTimeEdit_redirected
-  if not isNil(vtbl.sharedPainter):
+  if not isNil(vtbl[].sharedPainter):
     vtbl[].vtbl.sharedPainter = miqt_exec_callback_cQDateTimeEdit_sharedPainter
-  if not isNil(vtbl.inputMethodEvent):
+  if not isNil(vtbl[].inputMethodEvent):
     vtbl[].vtbl.inputMethodEvent = miqt_exec_callback_cQDateTimeEdit_inputMethodEvent
-  if not isNil(vtbl.eventFilter):
+  if not isNil(vtbl[].eventFilter):
     vtbl[].vtbl.eventFilter = miqt_exec_callback_cQDateTimeEdit_eventFilter
-  if not isNil(vtbl.childEvent):
+  if not isNil(vtbl[].childEvent):
     vtbl[].vtbl.childEvent = miqt_exec_callback_cQDateTimeEdit_childEvent
-  if not isNil(vtbl.customEvent):
+  if not isNil(vtbl[].customEvent):
     vtbl[].vtbl.customEvent = miqt_exec_callback_cQDateTimeEdit_customEvent
-  if not isNil(vtbl.connectNotify):
+  if not isNil(vtbl[].connectNotify):
     vtbl[].vtbl.connectNotify = miqt_exec_callback_cQDateTimeEdit_connectNotify
-  if not isNil(vtbl.disconnectNotify):
+  if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQDateTimeEdit_disconnectNotify
-  gen_qdatetimeedit_types.QDateTimeEdit(h: fcQDateTimeEdit_new3(addr(vtbl[]), dt.h))
+  gen_qdatetimeedit_types.QDateTimeEdit(h: fcQDateTimeEdit_new3(addr(vtbl[].vtbl), dt.h), owned: true)
 
 proc create*(T: type gen_qdatetimeedit_types.QDateTimeEdit,
     d: gen_qdatetime_types.QDate,
     vtbl: ref QDateTimeEditVTable = nil): gen_qdatetimeedit_types.QDateTimeEdit =
   let vtbl = if vtbl == nil: new QDateTimeEditVTable else: vtbl
   GC_ref(vtbl)
-  vtbl.vtbl.destructor = proc(vtbl: ptr cQDateTimeEditVTable, _: ptr cQDateTimeEdit) {.cdecl.} =
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQDateTimeEditVTable, _: ptr cQDateTimeEdit) {.cdecl.} =
     let vtbl = cast[ref QDateTimeEditVTable](vtbl)
     GC_unref(vtbl)
-  if not isNil(vtbl.metaObject):
+  if not isNil(vtbl[].metaObject):
     vtbl[].vtbl.metaObject = miqt_exec_callback_cQDateTimeEdit_metaObject
-  if not isNil(vtbl.metacast):
+  if not isNil(vtbl[].metacast):
     vtbl[].vtbl.metacast = miqt_exec_callback_cQDateTimeEdit_metacast
-  if not isNil(vtbl.metacall):
+  if not isNil(vtbl[].metacall):
     vtbl[].vtbl.metacall = miqt_exec_callback_cQDateTimeEdit_metacall
-  if not isNil(vtbl.sizeHint):
+  if not isNil(vtbl[].sizeHint):
     vtbl[].vtbl.sizeHint = miqt_exec_callback_cQDateTimeEdit_sizeHint
-  if not isNil(vtbl.clear):
+  if not isNil(vtbl[].clear):
     vtbl[].vtbl.clear = miqt_exec_callback_cQDateTimeEdit_clear
-  if not isNil(vtbl.stepBy):
+  if not isNil(vtbl[].stepBy):
     vtbl[].vtbl.stepBy = miqt_exec_callback_cQDateTimeEdit_stepBy
-  if not isNil(vtbl.event):
+  if not isNil(vtbl[].event):
     vtbl[].vtbl.event = miqt_exec_callback_cQDateTimeEdit_event
-  if not isNil(vtbl.keyPressEvent):
+  if not isNil(vtbl[].keyPressEvent):
     vtbl[].vtbl.keyPressEvent = miqt_exec_callback_cQDateTimeEdit_keyPressEvent
-  if not isNil(vtbl.wheelEvent):
+  if not isNil(vtbl[].wheelEvent):
     vtbl[].vtbl.wheelEvent = miqt_exec_callback_cQDateTimeEdit_wheelEvent
-  if not isNil(vtbl.focusInEvent):
+  if not isNil(vtbl[].focusInEvent):
     vtbl[].vtbl.focusInEvent = miqt_exec_callback_cQDateTimeEdit_focusInEvent
-  if not isNil(vtbl.focusNextPrevChild):
+  if not isNil(vtbl[].focusNextPrevChild):
     vtbl[].vtbl.focusNextPrevChild = miqt_exec_callback_cQDateTimeEdit_focusNextPrevChild
-  if not isNil(vtbl.validate):
+  if not isNil(vtbl[].validate):
     vtbl[].vtbl.validate = miqt_exec_callback_cQDateTimeEdit_validate
-  if not isNil(vtbl.fixup):
+  if not isNil(vtbl[].fixup):
     vtbl[].vtbl.fixup = miqt_exec_callback_cQDateTimeEdit_fixup
-  if not isNil(vtbl.dateTimeFromText):
+  if not isNil(vtbl[].dateTimeFromText):
     vtbl[].vtbl.dateTimeFromText = miqt_exec_callback_cQDateTimeEdit_dateTimeFromText
-  if not isNil(vtbl.textFromDateTime):
+  if not isNil(vtbl[].textFromDateTime):
     vtbl[].vtbl.textFromDateTime = miqt_exec_callback_cQDateTimeEdit_textFromDateTime
-  if not isNil(vtbl.stepEnabled):
+  if not isNil(vtbl[].stepEnabled):
     vtbl[].vtbl.stepEnabled = miqt_exec_callback_cQDateTimeEdit_stepEnabled
-  if not isNil(vtbl.mousePressEvent):
+  if not isNil(vtbl[].mousePressEvent):
     vtbl[].vtbl.mousePressEvent = miqt_exec_callback_cQDateTimeEdit_mousePressEvent
-  if not isNil(vtbl.paintEvent):
+  if not isNil(vtbl[].paintEvent):
     vtbl[].vtbl.paintEvent = miqt_exec_callback_cQDateTimeEdit_paintEvent
-  if not isNil(vtbl.minimumSizeHint):
+  if not isNil(vtbl[].minimumSizeHint):
     vtbl[].vtbl.minimumSizeHint = miqt_exec_callback_cQDateTimeEdit_minimumSizeHint
-  if not isNil(vtbl.inputMethodQuery):
+  if not isNil(vtbl[].inputMethodQuery):
     vtbl[].vtbl.inputMethodQuery = miqt_exec_callback_cQDateTimeEdit_inputMethodQuery
-  if not isNil(vtbl.resizeEvent):
+  if not isNil(vtbl[].resizeEvent):
     vtbl[].vtbl.resizeEvent = miqt_exec_callback_cQDateTimeEdit_resizeEvent
-  if not isNil(vtbl.keyReleaseEvent):
+  if not isNil(vtbl[].keyReleaseEvent):
     vtbl[].vtbl.keyReleaseEvent = miqt_exec_callback_cQDateTimeEdit_keyReleaseEvent
-  if not isNil(vtbl.focusOutEvent):
+  if not isNil(vtbl[].focusOutEvent):
     vtbl[].vtbl.focusOutEvent = miqt_exec_callback_cQDateTimeEdit_focusOutEvent
-  if not isNil(vtbl.contextMenuEvent):
+  if not isNil(vtbl[].contextMenuEvent):
     vtbl[].vtbl.contextMenuEvent = miqt_exec_callback_cQDateTimeEdit_contextMenuEvent
-  if not isNil(vtbl.changeEvent):
+  if not isNil(vtbl[].changeEvent):
     vtbl[].vtbl.changeEvent = miqt_exec_callback_cQDateTimeEdit_changeEvent
-  if not isNil(vtbl.closeEvent):
+  if not isNil(vtbl[].closeEvent):
     vtbl[].vtbl.closeEvent = miqt_exec_callback_cQDateTimeEdit_closeEvent
-  if not isNil(vtbl.hideEvent):
+  if not isNil(vtbl[].hideEvent):
     vtbl[].vtbl.hideEvent = miqt_exec_callback_cQDateTimeEdit_hideEvent
-  if not isNil(vtbl.mouseReleaseEvent):
+  if not isNil(vtbl[].mouseReleaseEvent):
     vtbl[].vtbl.mouseReleaseEvent = miqt_exec_callback_cQDateTimeEdit_mouseReleaseEvent
-  if not isNil(vtbl.mouseMoveEvent):
+  if not isNil(vtbl[].mouseMoveEvent):
     vtbl[].vtbl.mouseMoveEvent = miqt_exec_callback_cQDateTimeEdit_mouseMoveEvent
-  if not isNil(vtbl.timerEvent):
+  if not isNil(vtbl[].timerEvent):
     vtbl[].vtbl.timerEvent = miqt_exec_callback_cQDateTimeEdit_timerEvent
-  if not isNil(vtbl.showEvent):
+  if not isNil(vtbl[].showEvent):
     vtbl[].vtbl.showEvent = miqt_exec_callback_cQDateTimeEdit_showEvent
-  if not isNil(vtbl.devType):
+  if not isNil(vtbl[].devType):
     vtbl[].vtbl.devType = miqt_exec_callback_cQDateTimeEdit_devType
-  if not isNil(vtbl.setVisible):
+  if not isNil(vtbl[].setVisible):
     vtbl[].vtbl.setVisible = miqt_exec_callback_cQDateTimeEdit_setVisible
-  if not isNil(vtbl.heightForWidth):
+  if not isNil(vtbl[].heightForWidth):
     vtbl[].vtbl.heightForWidth = miqt_exec_callback_cQDateTimeEdit_heightForWidth
-  if not isNil(vtbl.hasHeightForWidth):
+  if not isNil(vtbl[].hasHeightForWidth):
     vtbl[].vtbl.hasHeightForWidth = miqt_exec_callback_cQDateTimeEdit_hasHeightForWidth
-  if not isNil(vtbl.paintEngine):
+  if not isNil(vtbl[].paintEngine):
     vtbl[].vtbl.paintEngine = miqt_exec_callback_cQDateTimeEdit_paintEngine
-  if not isNil(vtbl.mouseDoubleClickEvent):
+  if not isNil(vtbl[].mouseDoubleClickEvent):
     vtbl[].vtbl.mouseDoubleClickEvent = miqt_exec_callback_cQDateTimeEdit_mouseDoubleClickEvent
-  if not isNil(vtbl.enterEvent):
+  if not isNil(vtbl[].enterEvent):
     vtbl[].vtbl.enterEvent = miqt_exec_callback_cQDateTimeEdit_enterEvent
-  if not isNil(vtbl.leaveEvent):
+  if not isNil(vtbl[].leaveEvent):
     vtbl[].vtbl.leaveEvent = miqt_exec_callback_cQDateTimeEdit_leaveEvent
-  if not isNil(vtbl.moveEvent):
+  if not isNil(vtbl[].moveEvent):
     vtbl[].vtbl.moveEvent = miqt_exec_callback_cQDateTimeEdit_moveEvent
-  if not isNil(vtbl.tabletEvent):
+  if not isNil(vtbl[].tabletEvent):
     vtbl[].vtbl.tabletEvent = miqt_exec_callback_cQDateTimeEdit_tabletEvent
-  if not isNil(vtbl.actionEvent):
+  if not isNil(vtbl[].actionEvent):
     vtbl[].vtbl.actionEvent = miqt_exec_callback_cQDateTimeEdit_actionEvent
-  if not isNil(vtbl.dragEnterEvent):
+  if not isNil(vtbl[].dragEnterEvent):
     vtbl[].vtbl.dragEnterEvent = miqt_exec_callback_cQDateTimeEdit_dragEnterEvent
-  if not isNil(vtbl.dragMoveEvent):
+  if not isNil(vtbl[].dragMoveEvent):
     vtbl[].vtbl.dragMoveEvent = miqt_exec_callback_cQDateTimeEdit_dragMoveEvent
-  if not isNil(vtbl.dragLeaveEvent):
+  if not isNil(vtbl[].dragLeaveEvent):
     vtbl[].vtbl.dragLeaveEvent = miqt_exec_callback_cQDateTimeEdit_dragLeaveEvent
-  if not isNil(vtbl.dropEvent):
+  if not isNil(vtbl[].dropEvent):
     vtbl[].vtbl.dropEvent = miqt_exec_callback_cQDateTimeEdit_dropEvent
-  if not isNil(vtbl.nativeEvent):
+  if not isNil(vtbl[].nativeEvent):
     vtbl[].vtbl.nativeEvent = miqt_exec_callback_cQDateTimeEdit_nativeEvent
-  if not isNil(vtbl.metric):
+  if not isNil(vtbl[].metric):
     vtbl[].vtbl.metric = miqt_exec_callback_cQDateTimeEdit_metric
-  if not isNil(vtbl.initPainter):
+  if not isNil(vtbl[].initPainter):
     vtbl[].vtbl.initPainter = miqt_exec_callback_cQDateTimeEdit_initPainter
-  if not isNil(vtbl.redirected):
+  if not isNil(vtbl[].redirected):
     vtbl[].vtbl.redirected = miqt_exec_callback_cQDateTimeEdit_redirected
-  if not isNil(vtbl.sharedPainter):
+  if not isNil(vtbl[].sharedPainter):
     vtbl[].vtbl.sharedPainter = miqt_exec_callback_cQDateTimeEdit_sharedPainter
-  if not isNil(vtbl.inputMethodEvent):
+  if not isNil(vtbl[].inputMethodEvent):
     vtbl[].vtbl.inputMethodEvent = miqt_exec_callback_cQDateTimeEdit_inputMethodEvent
-  if not isNil(vtbl.eventFilter):
+  if not isNil(vtbl[].eventFilter):
     vtbl[].vtbl.eventFilter = miqt_exec_callback_cQDateTimeEdit_eventFilter
-  if not isNil(vtbl.childEvent):
+  if not isNil(vtbl[].childEvent):
     vtbl[].vtbl.childEvent = miqt_exec_callback_cQDateTimeEdit_childEvent
-  if not isNil(vtbl.customEvent):
+  if not isNil(vtbl[].customEvent):
     vtbl[].vtbl.customEvent = miqt_exec_callback_cQDateTimeEdit_customEvent
-  if not isNil(vtbl.connectNotify):
+  if not isNil(vtbl[].connectNotify):
     vtbl[].vtbl.connectNotify = miqt_exec_callback_cQDateTimeEdit_connectNotify
-  if not isNil(vtbl.disconnectNotify):
+  if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQDateTimeEdit_disconnectNotify
-  gen_qdatetimeedit_types.QDateTimeEdit(h: fcQDateTimeEdit_new4(addr(vtbl[]), d.h))
+  gen_qdatetimeedit_types.QDateTimeEdit(h: fcQDateTimeEdit_new4(addr(vtbl[].vtbl), d.h), owned: true)
 
 proc create*(T: type gen_qdatetimeedit_types.QDateTimeEdit,
     t: gen_qdatetime_types.QTime,
     vtbl: ref QDateTimeEditVTable = nil): gen_qdatetimeedit_types.QDateTimeEdit =
   let vtbl = if vtbl == nil: new QDateTimeEditVTable else: vtbl
   GC_ref(vtbl)
-  vtbl.vtbl.destructor = proc(vtbl: ptr cQDateTimeEditVTable, _: ptr cQDateTimeEdit) {.cdecl.} =
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQDateTimeEditVTable, _: ptr cQDateTimeEdit) {.cdecl.} =
     let vtbl = cast[ref QDateTimeEditVTable](vtbl)
     GC_unref(vtbl)
-  if not isNil(vtbl.metaObject):
+  if not isNil(vtbl[].metaObject):
     vtbl[].vtbl.metaObject = miqt_exec_callback_cQDateTimeEdit_metaObject
-  if not isNil(vtbl.metacast):
+  if not isNil(vtbl[].metacast):
     vtbl[].vtbl.metacast = miqt_exec_callback_cQDateTimeEdit_metacast
-  if not isNil(vtbl.metacall):
+  if not isNil(vtbl[].metacall):
     vtbl[].vtbl.metacall = miqt_exec_callback_cQDateTimeEdit_metacall
-  if not isNil(vtbl.sizeHint):
+  if not isNil(vtbl[].sizeHint):
     vtbl[].vtbl.sizeHint = miqt_exec_callback_cQDateTimeEdit_sizeHint
-  if not isNil(vtbl.clear):
+  if not isNil(vtbl[].clear):
     vtbl[].vtbl.clear = miqt_exec_callback_cQDateTimeEdit_clear
-  if not isNil(vtbl.stepBy):
+  if not isNil(vtbl[].stepBy):
     vtbl[].vtbl.stepBy = miqt_exec_callback_cQDateTimeEdit_stepBy
-  if not isNil(vtbl.event):
+  if not isNil(vtbl[].event):
     vtbl[].vtbl.event = miqt_exec_callback_cQDateTimeEdit_event
-  if not isNil(vtbl.keyPressEvent):
+  if not isNil(vtbl[].keyPressEvent):
     vtbl[].vtbl.keyPressEvent = miqt_exec_callback_cQDateTimeEdit_keyPressEvent
-  if not isNil(vtbl.wheelEvent):
+  if not isNil(vtbl[].wheelEvent):
     vtbl[].vtbl.wheelEvent = miqt_exec_callback_cQDateTimeEdit_wheelEvent
-  if not isNil(vtbl.focusInEvent):
+  if not isNil(vtbl[].focusInEvent):
     vtbl[].vtbl.focusInEvent = miqt_exec_callback_cQDateTimeEdit_focusInEvent
-  if not isNil(vtbl.focusNextPrevChild):
+  if not isNil(vtbl[].focusNextPrevChild):
     vtbl[].vtbl.focusNextPrevChild = miqt_exec_callback_cQDateTimeEdit_focusNextPrevChild
-  if not isNil(vtbl.validate):
+  if not isNil(vtbl[].validate):
     vtbl[].vtbl.validate = miqt_exec_callback_cQDateTimeEdit_validate
-  if not isNil(vtbl.fixup):
+  if not isNil(vtbl[].fixup):
     vtbl[].vtbl.fixup = miqt_exec_callback_cQDateTimeEdit_fixup
-  if not isNil(vtbl.dateTimeFromText):
+  if not isNil(vtbl[].dateTimeFromText):
     vtbl[].vtbl.dateTimeFromText = miqt_exec_callback_cQDateTimeEdit_dateTimeFromText
-  if not isNil(vtbl.textFromDateTime):
+  if not isNil(vtbl[].textFromDateTime):
     vtbl[].vtbl.textFromDateTime = miqt_exec_callback_cQDateTimeEdit_textFromDateTime
-  if not isNil(vtbl.stepEnabled):
+  if not isNil(vtbl[].stepEnabled):
     vtbl[].vtbl.stepEnabled = miqt_exec_callback_cQDateTimeEdit_stepEnabled
-  if not isNil(vtbl.mousePressEvent):
+  if not isNil(vtbl[].mousePressEvent):
     vtbl[].vtbl.mousePressEvent = miqt_exec_callback_cQDateTimeEdit_mousePressEvent
-  if not isNil(vtbl.paintEvent):
+  if not isNil(vtbl[].paintEvent):
     vtbl[].vtbl.paintEvent = miqt_exec_callback_cQDateTimeEdit_paintEvent
-  if not isNil(vtbl.minimumSizeHint):
+  if not isNil(vtbl[].minimumSizeHint):
     vtbl[].vtbl.minimumSizeHint = miqt_exec_callback_cQDateTimeEdit_minimumSizeHint
-  if not isNil(vtbl.inputMethodQuery):
+  if not isNil(vtbl[].inputMethodQuery):
     vtbl[].vtbl.inputMethodQuery = miqt_exec_callback_cQDateTimeEdit_inputMethodQuery
-  if not isNil(vtbl.resizeEvent):
+  if not isNil(vtbl[].resizeEvent):
     vtbl[].vtbl.resizeEvent = miqt_exec_callback_cQDateTimeEdit_resizeEvent
-  if not isNil(vtbl.keyReleaseEvent):
+  if not isNil(vtbl[].keyReleaseEvent):
     vtbl[].vtbl.keyReleaseEvent = miqt_exec_callback_cQDateTimeEdit_keyReleaseEvent
-  if not isNil(vtbl.focusOutEvent):
+  if not isNil(vtbl[].focusOutEvent):
     vtbl[].vtbl.focusOutEvent = miqt_exec_callback_cQDateTimeEdit_focusOutEvent
-  if not isNil(vtbl.contextMenuEvent):
+  if not isNil(vtbl[].contextMenuEvent):
     vtbl[].vtbl.contextMenuEvent = miqt_exec_callback_cQDateTimeEdit_contextMenuEvent
-  if not isNil(vtbl.changeEvent):
+  if not isNil(vtbl[].changeEvent):
     vtbl[].vtbl.changeEvent = miqt_exec_callback_cQDateTimeEdit_changeEvent
-  if not isNil(vtbl.closeEvent):
+  if not isNil(vtbl[].closeEvent):
     vtbl[].vtbl.closeEvent = miqt_exec_callback_cQDateTimeEdit_closeEvent
-  if not isNil(vtbl.hideEvent):
+  if not isNil(vtbl[].hideEvent):
     vtbl[].vtbl.hideEvent = miqt_exec_callback_cQDateTimeEdit_hideEvent
-  if not isNil(vtbl.mouseReleaseEvent):
+  if not isNil(vtbl[].mouseReleaseEvent):
     vtbl[].vtbl.mouseReleaseEvent = miqt_exec_callback_cQDateTimeEdit_mouseReleaseEvent
-  if not isNil(vtbl.mouseMoveEvent):
+  if not isNil(vtbl[].mouseMoveEvent):
     vtbl[].vtbl.mouseMoveEvent = miqt_exec_callback_cQDateTimeEdit_mouseMoveEvent
-  if not isNil(vtbl.timerEvent):
+  if not isNil(vtbl[].timerEvent):
     vtbl[].vtbl.timerEvent = miqt_exec_callback_cQDateTimeEdit_timerEvent
-  if not isNil(vtbl.showEvent):
+  if not isNil(vtbl[].showEvent):
     vtbl[].vtbl.showEvent = miqt_exec_callback_cQDateTimeEdit_showEvent
-  if not isNil(vtbl.devType):
+  if not isNil(vtbl[].devType):
     vtbl[].vtbl.devType = miqt_exec_callback_cQDateTimeEdit_devType
-  if not isNil(vtbl.setVisible):
+  if not isNil(vtbl[].setVisible):
     vtbl[].vtbl.setVisible = miqt_exec_callback_cQDateTimeEdit_setVisible
-  if not isNil(vtbl.heightForWidth):
+  if not isNil(vtbl[].heightForWidth):
     vtbl[].vtbl.heightForWidth = miqt_exec_callback_cQDateTimeEdit_heightForWidth
-  if not isNil(vtbl.hasHeightForWidth):
+  if not isNil(vtbl[].hasHeightForWidth):
     vtbl[].vtbl.hasHeightForWidth = miqt_exec_callback_cQDateTimeEdit_hasHeightForWidth
-  if not isNil(vtbl.paintEngine):
+  if not isNil(vtbl[].paintEngine):
     vtbl[].vtbl.paintEngine = miqt_exec_callback_cQDateTimeEdit_paintEngine
-  if not isNil(vtbl.mouseDoubleClickEvent):
+  if not isNil(vtbl[].mouseDoubleClickEvent):
     vtbl[].vtbl.mouseDoubleClickEvent = miqt_exec_callback_cQDateTimeEdit_mouseDoubleClickEvent
-  if not isNil(vtbl.enterEvent):
+  if not isNil(vtbl[].enterEvent):
     vtbl[].vtbl.enterEvent = miqt_exec_callback_cQDateTimeEdit_enterEvent
-  if not isNil(vtbl.leaveEvent):
+  if not isNil(vtbl[].leaveEvent):
     vtbl[].vtbl.leaveEvent = miqt_exec_callback_cQDateTimeEdit_leaveEvent
-  if not isNil(vtbl.moveEvent):
+  if not isNil(vtbl[].moveEvent):
     vtbl[].vtbl.moveEvent = miqt_exec_callback_cQDateTimeEdit_moveEvent
-  if not isNil(vtbl.tabletEvent):
+  if not isNil(vtbl[].tabletEvent):
     vtbl[].vtbl.tabletEvent = miqt_exec_callback_cQDateTimeEdit_tabletEvent
-  if not isNil(vtbl.actionEvent):
+  if not isNil(vtbl[].actionEvent):
     vtbl[].vtbl.actionEvent = miqt_exec_callback_cQDateTimeEdit_actionEvent
-  if not isNil(vtbl.dragEnterEvent):
+  if not isNil(vtbl[].dragEnterEvent):
     vtbl[].vtbl.dragEnterEvent = miqt_exec_callback_cQDateTimeEdit_dragEnterEvent
-  if not isNil(vtbl.dragMoveEvent):
+  if not isNil(vtbl[].dragMoveEvent):
     vtbl[].vtbl.dragMoveEvent = miqt_exec_callback_cQDateTimeEdit_dragMoveEvent
-  if not isNil(vtbl.dragLeaveEvent):
+  if not isNil(vtbl[].dragLeaveEvent):
     vtbl[].vtbl.dragLeaveEvent = miqt_exec_callback_cQDateTimeEdit_dragLeaveEvent
-  if not isNil(vtbl.dropEvent):
+  if not isNil(vtbl[].dropEvent):
     vtbl[].vtbl.dropEvent = miqt_exec_callback_cQDateTimeEdit_dropEvent
-  if not isNil(vtbl.nativeEvent):
+  if not isNil(vtbl[].nativeEvent):
     vtbl[].vtbl.nativeEvent = miqt_exec_callback_cQDateTimeEdit_nativeEvent
-  if not isNil(vtbl.metric):
+  if not isNil(vtbl[].metric):
     vtbl[].vtbl.metric = miqt_exec_callback_cQDateTimeEdit_metric
-  if not isNil(vtbl.initPainter):
+  if not isNil(vtbl[].initPainter):
     vtbl[].vtbl.initPainter = miqt_exec_callback_cQDateTimeEdit_initPainter
-  if not isNil(vtbl.redirected):
+  if not isNil(vtbl[].redirected):
     vtbl[].vtbl.redirected = miqt_exec_callback_cQDateTimeEdit_redirected
-  if not isNil(vtbl.sharedPainter):
+  if not isNil(vtbl[].sharedPainter):
     vtbl[].vtbl.sharedPainter = miqt_exec_callback_cQDateTimeEdit_sharedPainter
-  if not isNil(vtbl.inputMethodEvent):
+  if not isNil(vtbl[].inputMethodEvent):
     vtbl[].vtbl.inputMethodEvent = miqt_exec_callback_cQDateTimeEdit_inputMethodEvent
-  if not isNil(vtbl.eventFilter):
+  if not isNil(vtbl[].eventFilter):
     vtbl[].vtbl.eventFilter = miqt_exec_callback_cQDateTimeEdit_eventFilter
-  if not isNil(vtbl.childEvent):
+  if not isNil(vtbl[].childEvent):
     vtbl[].vtbl.childEvent = miqt_exec_callback_cQDateTimeEdit_childEvent
-  if not isNil(vtbl.customEvent):
+  if not isNil(vtbl[].customEvent):
     vtbl[].vtbl.customEvent = miqt_exec_callback_cQDateTimeEdit_customEvent
-  if not isNil(vtbl.connectNotify):
+  if not isNil(vtbl[].connectNotify):
     vtbl[].vtbl.connectNotify = miqt_exec_callback_cQDateTimeEdit_connectNotify
-  if not isNil(vtbl.disconnectNotify):
+  if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQDateTimeEdit_disconnectNotify
-  gen_qdatetimeedit_types.QDateTimeEdit(h: fcQDateTimeEdit_new5(addr(vtbl[]), t.h))
+  gen_qdatetimeedit_types.QDateTimeEdit(h: fcQDateTimeEdit_new5(addr(vtbl[].vtbl), t.h), owned: true)
 
 proc create*(T: type gen_qdatetimeedit_types.QDateTimeEdit,
     dt: gen_qdatetime_types.QDateTime, parent: gen_qwidget_types.QWidget,
     vtbl: ref QDateTimeEditVTable = nil): gen_qdatetimeedit_types.QDateTimeEdit =
   let vtbl = if vtbl == nil: new QDateTimeEditVTable else: vtbl
   GC_ref(vtbl)
-  vtbl.vtbl.destructor = proc(vtbl: ptr cQDateTimeEditVTable, _: ptr cQDateTimeEdit) {.cdecl.} =
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQDateTimeEditVTable, _: ptr cQDateTimeEdit) {.cdecl.} =
     let vtbl = cast[ref QDateTimeEditVTable](vtbl)
     GC_unref(vtbl)
-  if not isNil(vtbl.metaObject):
+  if not isNil(vtbl[].metaObject):
     vtbl[].vtbl.metaObject = miqt_exec_callback_cQDateTimeEdit_metaObject
-  if not isNil(vtbl.metacast):
+  if not isNil(vtbl[].metacast):
     vtbl[].vtbl.metacast = miqt_exec_callback_cQDateTimeEdit_metacast
-  if not isNil(vtbl.metacall):
+  if not isNil(vtbl[].metacall):
     vtbl[].vtbl.metacall = miqt_exec_callback_cQDateTimeEdit_metacall
-  if not isNil(vtbl.sizeHint):
+  if not isNil(vtbl[].sizeHint):
     vtbl[].vtbl.sizeHint = miqt_exec_callback_cQDateTimeEdit_sizeHint
-  if not isNil(vtbl.clear):
+  if not isNil(vtbl[].clear):
     vtbl[].vtbl.clear = miqt_exec_callback_cQDateTimeEdit_clear
-  if not isNil(vtbl.stepBy):
+  if not isNil(vtbl[].stepBy):
     vtbl[].vtbl.stepBy = miqt_exec_callback_cQDateTimeEdit_stepBy
-  if not isNil(vtbl.event):
+  if not isNil(vtbl[].event):
     vtbl[].vtbl.event = miqt_exec_callback_cQDateTimeEdit_event
-  if not isNil(vtbl.keyPressEvent):
+  if not isNil(vtbl[].keyPressEvent):
     vtbl[].vtbl.keyPressEvent = miqt_exec_callback_cQDateTimeEdit_keyPressEvent
-  if not isNil(vtbl.wheelEvent):
+  if not isNil(vtbl[].wheelEvent):
     vtbl[].vtbl.wheelEvent = miqt_exec_callback_cQDateTimeEdit_wheelEvent
-  if not isNil(vtbl.focusInEvent):
+  if not isNil(vtbl[].focusInEvent):
     vtbl[].vtbl.focusInEvent = miqt_exec_callback_cQDateTimeEdit_focusInEvent
-  if not isNil(vtbl.focusNextPrevChild):
+  if not isNil(vtbl[].focusNextPrevChild):
     vtbl[].vtbl.focusNextPrevChild = miqt_exec_callback_cQDateTimeEdit_focusNextPrevChild
-  if not isNil(vtbl.validate):
+  if not isNil(vtbl[].validate):
     vtbl[].vtbl.validate = miqt_exec_callback_cQDateTimeEdit_validate
-  if not isNil(vtbl.fixup):
+  if not isNil(vtbl[].fixup):
     vtbl[].vtbl.fixup = miqt_exec_callback_cQDateTimeEdit_fixup
-  if not isNil(vtbl.dateTimeFromText):
+  if not isNil(vtbl[].dateTimeFromText):
     vtbl[].vtbl.dateTimeFromText = miqt_exec_callback_cQDateTimeEdit_dateTimeFromText
-  if not isNil(vtbl.textFromDateTime):
+  if not isNil(vtbl[].textFromDateTime):
     vtbl[].vtbl.textFromDateTime = miqt_exec_callback_cQDateTimeEdit_textFromDateTime
-  if not isNil(vtbl.stepEnabled):
+  if not isNil(vtbl[].stepEnabled):
     vtbl[].vtbl.stepEnabled = miqt_exec_callback_cQDateTimeEdit_stepEnabled
-  if not isNil(vtbl.mousePressEvent):
+  if not isNil(vtbl[].mousePressEvent):
     vtbl[].vtbl.mousePressEvent = miqt_exec_callback_cQDateTimeEdit_mousePressEvent
-  if not isNil(vtbl.paintEvent):
+  if not isNil(vtbl[].paintEvent):
     vtbl[].vtbl.paintEvent = miqt_exec_callback_cQDateTimeEdit_paintEvent
-  if not isNil(vtbl.minimumSizeHint):
+  if not isNil(vtbl[].minimumSizeHint):
     vtbl[].vtbl.minimumSizeHint = miqt_exec_callback_cQDateTimeEdit_minimumSizeHint
-  if not isNil(vtbl.inputMethodQuery):
+  if not isNil(vtbl[].inputMethodQuery):
     vtbl[].vtbl.inputMethodQuery = miqt_exec_callback_cQDateTimeEdit_inputMethodQuery
-  if not isNil(vtbl.resizeEvent):
+  if not isNil(vtbl[].resizeEvent):
     vtbl[].vtbl.resizeEvent = miqt_exec_callback_cQDateTimeEdit_resizeEvent
-  if not isNil(vtbl.keyReleaseEvent):
+  if not isNil(vtbl[].keyReleaseEvent):
     vtbl[].vtbl.keyReleaseEvent = miqt_exec_callback_cQDateTimeEdit_keyReleaseEvent
-  if not isNil(vtbl.focusOutEvent):
+  if not isNil(vtbl[].focusOutEvent):
     vtbl[].vtbl.focusOutEvent = miqt_exec_callback_cQDateTimeEdit_focusOutEvent
-  if not isNil(vtbl.contextMenuEvent):
+  if not isNil(vtbl[].contextMenuEvent):
     vtbl[].vtbl.contextMenuEvent = miqt_exec_callback_cQDateTimeEdit_contextMenuEvent
-  if not isNil(vtbl.changeEvent):
+  if not isNil(vtbl[].changeEvent):
     vtbl[].vtbl.changeEvent = miqt_exec_callback_cQDateTimeEdit_changeEvent
-  if not isNil(vtbl.closeEvent):
+  if not isNil(vtbl[].closeEvent):
     vtbl[].vtbl.closeEvent = miqt_exec_callback_cQDateTimeEdit_closeEvent
-  if not isNil(vtbl.hideEvent):
+  if not isNil(vtbl[].hideEvent):
     vtbl[].vtbl.hideEvent = miqt_exec_callback_cQDateTimeEdit_hideEvent
-  if not isNil(vtbl.mouseReleaseEvent):
+  if not isNil(vtbl[].mouseReleaseEvent):
     vtbl[].vtbl.mouseReleaseEvent = miqt_exec_callback_cQDateTimeEdit_mouseReleaseEvent
-  if not isNil(vtbl.mouseMoveEvent):
+  if not isNil(vtbl[].mouseMoveEvent):
     vtbl[].vtbl.mouseMoveEvent = miqt_exec_callback_cQDateTimeEdit_mouseMoveEvent
-  if not isNil(vtbl.timerEvent):
+  if not isNil(vtbl[].timerEvent):
     vtbl[].vtbl.timerEvent = miqt_exec_callback_cQDateTimeEdit_timerEvent
-  if not isNil(vtbl.showEvent):
+  if not isNil(vtbl[].showEvent):
     vtbl[].vtbl.showEvent = miqt_exec_callback_cQDateTimeEdit_showEvent
-  if not isNil(vtbl.devType):
+  if not isNil(vtbl[].devType):
     vtbl[].vtbl.devType = miqt_exec_callback_cQDateTimeEdit_devType
-  if not isNil(vtbl.setVisible):
+  if not isNil(vtbl[].setVisible):
     vtbl[].vtbl.setVisible = miqt_exec_callback_cQDateTimeEdit_setVisible
-  if not isNil(vtbl.heightForWidth):
+  if not isNil(vtbl[].heightForWidth):
     vtbl[].vtbl.heightForWidth = miqt_exec_callback_cQDateTimeEdit_heightForWidth
-  if not isNil(vtbl.hasHeightForWidth):
+  if not isNil(vtbl[].hasHeightForWidth):
     vtbl[].vtbl.hasHeightForWidth = miqt_exec_callback_cQDateTimeEdit_hasHeightForWidth
-  if not isNil(vtbl.paintEngine):
+  if not isNil(vtbl[].paintEngine):
     vtbl[].vtbl.paintEngine = miqt_exec_callback_cQDateTimeEdit_paintEngine
-  if not isNil(vtbl.mouseDoubleClickEvent):
+  if not isNil(vtbl[].mouseDoubleClickEvent):
     vtbl[].vtbl.mouseDoubleClickEvent = miqt_exec_callback_cQDateTimeEdit_mouseDoubleClickEvent
-  if not isNil(vtbl.enterEvent):
+  if not isNil(vtbl[].enterEvent):
     vtbl[].vtbl.enterEvent = miqt_exec_callback_cQDateTimeEdit_enterEvent
-  if not isNil(vtbl.leaveEvent):
+  if not isNil(vtbl[].leaveEvent):
     vtbl[].vtbl.leaveEvent = miqt_exec_callback_cQDateTimeEdit_leaveEvent
-  if not isNil(vtbl.moveEvent):
+  if not isNil(vtbl[].moveEvent):
     vtbl[].vtbl.moveEvent = miqt_exec_callback_cQDateTimeEdit_moveEvent
-  if not isNil(vtbl.tabletEvent):
+  if not isNil(vtbl[].tabletEvent):
     vtbl[].vtbl.tabletEvent = miqt_exec_callback_cQDateTimeEdit_tabletEvent
-  if not isNil(vtbl.actionEvent):
+  if not isNil(vtbl[].actionEvent):
     vtbl[].vtbl.actionEvent = miqt_exec_callback_cQDateTimeEdit_actionEvent
-  if not isNil(vtbl.dragEnterEvent):
+  if not isNil(vtbl[].dragEnterEvent):
     vtbl[].vtbl.dragEnterEvent = miqt_exec_callback_cQDateTimeEdit_dragEnterEvent
-  if not isNil(vtbl.dragMoveEvent):
+  if not isNil(vtbl[].dragMoveEvent):
     vtbl[].vtbl.dragMoveEvent = miqt_exec_callback_cQDateTimeEdit_dragMoveEvent
-  if not isNil(vtbl.dragLeaveEvent):
+  if not isNil(vtbl[].dragLeaveEvent):
     vtbl[].vtbl.dragLeaveEvent = miqt_exec_callback_cQDateTimeEdit_dragLeaveEvent
-  if not isNil(vtbl.dropEvent):
+  if not isNil(vtbl[].dropEvent):
     vtbl[].vtbl.dropEvent = miqt_exec_callback_cQDateTimeEdit_dropEvent
-  if not isNil(vtbl.nativeEvent):
+  if not isNil(vtbl[].nativeEvent):
     vtbl[].vtbl.nativeEvent = miqt_exec_callback_cQDateTimeEdit_nativeEvent
-  if not isNil(vtbl.metric):
+  if not isNil(vtbl[].metric):
     vtbl[].vtbl.metric = miqt_exec_callback_cQDateTimeEdit_metric
-  if not isNil(vtbl.initPainter):
+  if not isNil(vtbl[].initPainter):
     vtbl[].vtbl.initPainter = miqt_exec_callback_cQDateTimeEdit_initPainter
-  if not isNil(vtbl.redirected):
+  if not isNil(vtbl[].redirected):
     vtbl[].vtbl.redirected = miqt_exec_callback_cQDateTimeEdit_redirected
-  if not isNil(vtbl.sharedPainter):
+  if not isNil(vtbl[].sharedPainter):
     vtbl[].vtbl.sharedPainter = miqt_exec_callback_cQDateTimeEdit_sharedPainter
-  if not isNil(vtbl.inputMethodEvent):
+  if not isNil(vtbl[].inputMethodEvent):
     vtbl[].vtbl.inputMethodEvent = miqt_exec_callback_cQDateTimeEdit_inputMethodEvent
-  if not isNil(vtbl.eventFilter):
+  if not isNil(vtbl[].eventFilter):
     vtbl[].vtbl.eventFilter = miqt_exec_callback_cQDateTimeEdit_eventFilter
-  if not isNil(vtbl.childEvent):
+  if not isNil(vtbl[].childEvent):
     vtbl[].vtbl.childEvent = miqt_exec_callback_cQDateTimeEdit_childEvent
-  if not isNil(vtbl.customEvent):
+  if not isNil(vtbl[].customEvent):
     vtbl[].vtbl.customEvent = miqt_exec_callback_cQDateTimeEdit_customEvent
-  if not isNil(vtbl.connectNotify):
+  if not isNil(vtbl[].connectNotify):
     vtbl[].vtbl.connectNotify = miqt_exec_callback_cQDateTimeEdit_connectNotify
-  if not isNil(vtbl.disconnectNotify):
+  if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQDateTimeEdit_disconnectNotify
-  gen_qdatetimeedit_types.QDateTimeEdit(h: fcQDateTimeEdit_new6(addr(vtbl[]), dt.h, parent.h))
+  gen_qdatetimeedit_types.QDateTimeEdit(h: fcQDateTimeEdit_new6(addr(vtbl[].vtbl), dt.h, parent.h), owned: true)
 
 proc create*(T: type gen_qdatetimeedit_types.QDateTimeEdit,
     d: gen_qdatetime_types.QDate, parent: gen_qwidget_types.QWidget,
     vtbl: ref QDateTimeEditVTable = nil): gen_qdatetimeedit_types.QDateTimeEdit =
   let vtbl = if vtbl == nil: new QDateTimeEditVTable else: vtbl
   GC_ref(vtbl)
-  vtbl.vtbl.destructor = proc(vtbl: ptr cQDateTimeEditVTable, _: ptr cQDateTimeEdit) {.cdecl.} =
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQDateTimeEditVTable, _: ptr cQDateTimeEdit) {.cdecl.} =
     let vtbl = cast[ref QDateTimeEditVTable](vtbl)
     GC_unref(vtbl)
-  if not isNil(vtbl.metaObject):
+  if not isNil(vtbl[].metaObject):
     vtbl[].vtbl.metaObject = miqt_exec_callback_cQDateTimeEdit_metaObject
-  if not isNil(vtbl.metacast):
+  if not isNil(vtbl[].metacast):
     vtbl[].vtbl.metacast = miqt_exec_callback_cQDateTimeEdit_metacast
-  if not isNil(vtbl.metacall):
+  if not isNil(vtbl[].metacall):
     vtbl[].vtbl.metacall = miqt_exec_callback_cQDateTimeEdit_metacall
-  if not isNil(vtbl.sizeHint):
+  if not isNil(vtbl[].sizeHint):
     vtbl[].vtbl.sizeHint = miqt_exec_callback_cQDateTimeEdit_sizeHint
-  if not isNil(vtbl.clear):
+  if not isNil(vtbl[].clear):
     vtbl[].vtbl.clear = miqt_exec_callback_cQDateTimeEdit_clear
-  if not isNil(vtbl.stepBy):
+  if not isNil(vtbl[].stepBy):
     vtbl[].vtbl.stepBy = miqt_exec_callback_cQDateTimeEdit_stepBy
-  if not isNil(vtbl.event):
+  if not isNil(vtbl[].event):
     vtbl[].vtbl.event = miqt_exec_callback_cQDateTimeEdit_event
-  if not isNil(vtbl.keyPressEvent):
+  if not isNil(vtbl[].keyPressEvent):
     vtbl[].vtbl.keyPressEvent = miqt_exec_callback_cQDateTimeEdit_keyPressEvent
-  if not isNil(vtbl.wheelEvent):
+  if not isNil(vtbl[].wheelEvent):
     vtbl[].vtbl.wheelEvent = miqt_exec_callback_cQDateTimeEdit_wheelEvent
-  if not isNil(vtbl.focusInEvent):
+  if not isNil(vtbl[].focusInEvent):
     vtbl[].vtbl.focusInEvent = miqt_exec_callback_cQDateTimeEdit_focusInEvent
-  if not isNil(vtbl.focusNextPrevChild):
+  if not isNil(vtbl[].focusNextPrevChild):
     vtbl[].vtbl.focusNextPrevChild = miqt_exec_callback_cQDateTimeEdit_focusNextPrevChild
-  if not isNil(vtbl.validate):
+  if not isNil(vtbl[].validate):
     vtbl[].vtbl.validate = miqt_exec_callback_cQDateTimeEdit_validate
-  if not isNil(vtbl.fixup):
+  if not isNil(vtbl[].fixup):
     vtbl[].vtbl.fixup = miqt_exec_callback_cQDateTimeEdit_fixup
-  if not isNil(vtbl.dateTimeFromText):
+  if not isNil(vtbl[].dateTimeFromText):
     vtbl[].vtbl.dateTimeFromText = miqt_exec_callback_cQDateTimeEdit_dateTimeFromText
-  if not isNil(vtbl.textFromDateTime):
+  if not isNil(vtbl[].textFromDateTime):
     vtbl[].vtbl.textFromDateTime = miqt_exec_callback_cQDateTimeEdit_textFromDateTime
-  if not isNil(vtbl.stepEnabled):
+  if not isNil(vtbl[].stepEnabled):
     vtbl[].vtbl.stepEnabled = miqt_exec_callback_cQDateTimeEdit_stepEnabled
-  if not isNil(vtbl.mousePressEvent):
+  if not isNil(vtbl[].mousePressEvent):
     vtbl[].vtbl.mousePressEvent = miqt_exec_callback_cQDateTimeEdit_mousePressEvent
-  if not isNil(vtbl.paintEvent):
+  if not isNil(vtbl[].paintEvent):
     vtbl[].vtbl.paintEvent = miqt_exec_callback_cQDateTimeEdit_paintEvent
-  if not isNil(vtbl.minimumSizeHint):
+  if not isNil(vtbl[].minimumSizeHint):
     vtbl[].vtbl.minimumSizeHint = miqt_exec_callback_cQDateTimeEdit_minimumSizeHint
-  if not isNil(vtbl.inputMethodQuery):
+  if not isNil(vtbl[].inputMethodQuery):
     vtbl[].vtbl.inputMethodQuery = miqt_exec_callback_cQDateTimeEdit_inputMethodQuery
-  if not isNil(vtbl.resizeEvent):
+  if not isNil(vtbl[].resizeEvent):
     vtbl[].vtbl.resizeEvent = miqt_exec_callback_cQDateTimeEdit_resizeEvent
-  if not isNil(vtbl.keyReleaseEvent):
+  if not isNil(vtbl[].keyReleaseEvent):
     vtbl[].vtbl.keyReleaseEvent = miqt_exec_callback_cQDateTimeEdit_keyReleaseEvent
-  if not isNil(vtbl.focusOutEvent):
+  if not isNil(vtbl[].focusOutEvent):
     vtbl[].vtbl.focusOutEvent = miqt_exec_callback_cQDateTimeEdit_focusOutEvent
-  if not isNil(vtbl.contextMenuEvent):
+  if not isNil(vtbl[].contextMenuEvent):
     vtbl[].vtbl.contextMenuEvent = miqt_exec_callback_cQDateTimeEdit_contextMenuEvent
-  if not isNil(vtbl.changeEvent):
+  if not isNil(vtbl[].changeEvent):
     vtbl[].vtbl.changeEvent = miqt_exec_callback_cQDateTimeEdit_changeEvent
-  if not isNil(vtbl.closeEvent):
+  if not isNil(vtbl[].closeEvent):
     vtbl[].vtbl.closeEvent = miqt_exec_callback_cQDateTimeEdit_closeEvent
-  if not isNil(vtbl.hideEvent):
+  if not isNil(vtbl[].hideEvent):
     vtbl[].vtbl.hideEvent = miqt_exec_callback_cQDateTimeEdit_hideEvent
-  if not isNil(vtbl.mouseReleaseEvent):
+  if not isNil(vtbl[].mouseReleaseEvent):
     vtbl[].vtbl.mouseReleaseEvent = miqt_exec_callback_cQDateTimeEdit_mouseReleaseEvent
-  if not isNil(vtbl.mouseMoveEvent):
+  if not isNil(vtbl[].mouseMoveEvent):
     vtbl[].vtbl.mouseMoveEvent = miqt_exec_callback_cQDateTimeEdit_mouseMoveEvent
-  if not isNil(vtbl.timerEvent):
+  if not isNil(vtbl[].timerEvent):
     vtbl[].vtbl.timerEvent = miqt_exec_callback_cQDateTimeEdit_timerEvent
-  if not isNil(vtbl.showEvent):
+  if not isNil(vtbl[].showEvent):
     vtbl[].vtbl.showEvent = miqt_exec_callback_cQDateTimeEdit_showEvent
-  if not isNil(vtbl.devType):
+  if not isNil(vtbl[].devType):
     vtbl[].vtbl.devType = miqt_exec_callback_cQDateTimeEdit_devType
-  if not isNil(vtbl.setVisible):
+  if not isNil(vtbl[].setVisible):
     vtbl[].vtbl.setVisible = miqt_exec_callback_cQDateTimeEdit_setVisible
-  if not isNil(vtbl.heightForWidth):
+  if not isNil(vtbl[].heightForWidth):
     vtbl[].vtbl.heightForWidth = miqt_exec_callback_cQDateTimeEdit_heightForWidth
-  if not isNil(vtbl.hasHeightForWidth):
+  if not isNil(vtbl[].hasHeightForWidth):
     vtbl[].vtbl.hasHeightForWidth = miqt_exec_callback_cQDateTimeEdit_hasHeightForWidth
-  if not isNil(vtbl.paintEngine):
+  if not isNil(vtbl[].paintEngine):
     vtbl[].vtbl.paintEngine = miqt_exec_callback_cQDateTimeEdit_paintEngine
-  if not isNil(vtbl.mouseDoubleClickEvent):
+  if not isNil(vtbl[].mouseDoubleClickEvent):
     vtbl[].vtbl.mouseDoubleClickEvent = miqt_exec_callback_cQDateTimeEdit_mouseDoubleClickEvent
-  if not isNil(vtbl.enterEvent):
+  if not isNil(vtbl[].enterEvent):
     vtbl[].vtbl.enterEvent = miqt_exec_callback_cQDateTimeEdit_enterEvent
-  if not isNil(vtbl.leaveEvent):
+  if not isNil(vtbl[].leaveEvent):
     vtbl[].vtbl.leaveEvent = miqt_exec_callback_cQDateTimeEdit_leaveEvent
-  if not isNil(vtbl.moveEvent):
+  if not isNil(vtbl[].moveEvent):
     vtbl[].vtbl.moveEvent = miqt_exec_callback_cQDateTimeEdit_moveEvent
-  if not isNil(vtbl.tabletEvent):
+  if not isNil(vtbl[].tabletEvent):
     vtbl[].vtbl.tabletEvent = miqt_exec_callback_cQDateTimeEdit_tabletEvent
-  if not isNil(vtbl.actionEvent):
+  if not isNil(vtbl[].actionEvent):
     vtbl[].vtbl.actionEvent = miqt_exec_callback_cQDateTimeEdit_actionEvent
-  if not isNil(vtbl.dragEnterEvent):
+  if not isNil(vtbl[].dragEnterEvent):
     vtbl[].vtbl.dragEnterEvent = miqt_exec_callback_cQDateTimeEdit_dragEnterEvent
-  if not isNil(vtbl.dragMoveEvent):
+  if not isNil(vtbl[].dragMoveEvent):
     vtbl[].vtbl.dragMoveEvent = miqt_exec_callback_cQDateTimeEdit_dragMoveEvent
-  if not isNil(vtbl.dragLeaveEvent):
+  if not isNil(vtbl[].dragLeaveEvent):
     vtbl[].vtbl.dragLeaveEvent = miqt_exec_callback_cQDateTimeEdit_dragLeaveEvent
-  if not isNil(vtbl.dropEvent):
+  if not isNil(vtbl[].dropEvent):
     vtbl[].vtbl.dropEvent = miqt_exec_callback_cQDateTimeEdit_dropEvent
-  if not isNil(vtbl.nativeEvent):
+  if not isNil(vtbl[].nativeEvent):
     vtbl[].vtbl.nativeEvent = miqt_exec_callback_cQDateTimeEdit_nativeEvent
-  if not isNil(vtbl.metric):
+  if not isNil(vtbl[].metric):
     vtbl[].vtbl.metric = miqt_exec_callback_cQDateTimeEdit_metric
-  if not isNil(vtbl.initPainter):
+  if not isNil(vtbl[].initPainter):
     vtbl[].vtbl.initPainter = miqt_exec_callback_cQDateTimeEdit_initPainter
-  if not isNil(vtbl.redirected):
+  if not isNil(vtbl[].redirected):
     vtbl[].vtbl.redirected = miqt_exec_callback_cQDateTimeEdit_redirected
-  if not isNil(vtbl.sharedPainter):
+  if not isNil(vtbl[].sharedPainter):
     vtbl[].vtbl.sharedPainter = miqt_exec_callback_cQDateTimeEdit_sharedPainter
-  if not isNil(vtbl.inputMethodEvent):
+  if not isNil(vtbl[].inputMethodEvent):
     vtbl[].vtbl.inputMethodEvent = miqt_exec_callback_cQDateTimeEdit_inputMethodEvent
-  if not isNil(vtbl.eventFilter):
+  if not isNil(vtbl[].eventFilter):
     vtbl[].vtbl.eventFilter = miqt_exec_callback_cQDateTimeEdit_eventFilter
-  if not isNil(vtbl.childEvent):
+  if not isNil(vtbl[].childEvent):
     vtbl[].vtbl.childEvent = miqt_exec_callback_cQDateTimeEdit_childEvent
-  if not isNil(vtbl.customEvent):
+  if not isNil(vtbl[].customEvent):
     vtbl[].vtbl.customEvent = miqt_exec_callback_cQDateTimeEdit_customEvent
-  if not isNil(vtbl.connectNotify):
+  if not isNil(vtbl[].connectNotify):
     vtbl[].vtbl.connectNotify = miqt_exec_callback_cQDateTimeEdit_connectNotify
-  if not isNil(vtbl.disconnectNotify):
+  if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQDateTimeEdit_disconnectNotify
-  gen_qdatetimeedit_types.QDateTimeEdit(h: fcQDateTimeEdit_new7(addr(vtbl[]), d.h, parent.h))
+  gen_qdatetimeedit_types.QDateTimeEdit(h: fcQDateTimeEdit_new7(addr(vtbl[].vtbl), d.h, parent.h), owned: true)
 
 proc create*(T: type gen_qdatetimeedit_types.QDateTimeEdit,
     t: gen_qdatetime_types.QTime, parent: gen_qwidget_types.QWidget,
     vtbl: ref QDateTimeEditVTable = nil): gen_qdatetimeedit_types.QDateTimeEdit =
   let vtbl = if vtbl == nil: new QDateTimeEditVTable else: vtbl
   GC_ref(vtbl)
-  vtbl.vtbl.destructor = proc(vtbl: ptr cQDateTimeEditVTable, _: ptr cQDateTimeEdit) {.cdecl.} =
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQDateTimeEditVTable, _: ptr cQDateTimeEdit) {.cdecl.} =
     let vtbl = cast[ref QDateTimeEditVTable](vtbl)
     GC_unref(vtbl)
-  if not isNil(vtbl.metaObject):
+  if not isNil(vtbl[].metaObject):
     vtbl[].vtbl.metaObject = miqt_exec_callback_cQDateTimeEdit_metaObject
-  if not isNil(vtbl.metacast):
+  if not isNil(vtbl[].metacast):
     vtbl[].vtbl.metacast = miqt_exec_callback_cQDateTimeEdit_metacast
-  if not isNil(vtbl.metacall):
+  if not isNil(vtbl[].metacall):
     vtbl[].vtbl.metacall = miqt_exec_callback_cQDateTimeEdit_metacall
-  if not isNil(vtbl.sizeHint):
+  if not isNil(vtbl[].sizeHint):
     vtbl[].vtbl.sizeHint = miqt_exec_callback_cQDateTimeEdit_sizeHint
-  if not isNil(vtbl.clear):
+  if not isNil(vtbl[].clear):
     vtbl[].vtbl.clear = miqt_exec_callback_cQDateTimeEdit_clear
-  if not isNil(vtbl.stepBy):
+  if not isNil(vtbl[].stepBy):
     vtbl[].vtbl.stepBy = miqt_exec_callback_cQDateTimeEdit_stepBy
-  if not isNil(vtbl.event):
+  if not isNil(vtbl[].event):
     vtbl[].vtbl.event = miqt_exec_callback_cQDateTimeEdit_event
-  if not isNil(vtbl.keyPressEvent):
+  if not isNil(vtbl[].keyPressEvent):
     vtbl[].vtbl.keyPressEvent = miqt_exec_callback_cQDateTimeEdit_keyPressEvent
-  if not isNil(vtbl.wheelEvent):
+  if not isNil(vtbl[].wheelEvent):
     vtbl[].vtbl.wheelEvent = miqt_exec_callback_cQDateTimeEdit_wheelEvent
-  if not isNil(vtbl.focusInEvent):
+  if not isNil(vtbl[].focusInEvent):
     vtbl[].vtbl.focusInEvent = miqt_exec_callback_cQDateTimeEdit_focusInEvent
-  if not isNil(vtbl.focusNextPrevChild):
+  if not isNil(vtbl[].focusNextPrevChild):
     vtbl[].vtbl.focusNextPrevChild = miqt_exec_callback_cQDateTimeEdit_focusNextPrevChild
-  if not isNil(vtbl.validate):
+  if not isNil(vtbl[].validate):
     vtbl[].vtbl.validate = miqt_exec_callback_cQDateTimeEdit_validate
-  if not isNil(vtbl.fixup):
+  if not isNil(vtbl[].fixup):
     vtbl[].vtbl.fixup = miqt_exec_callback_cQDateTimeEdit_fixup
-  if not isNil(vtbl.dateTimeFromText):
+  if not isNil(vtbl[].dateTimeFromText):
     vtbl[].vtbl.dateTimeFromText = miqt_exec_callback_cQDateTimeEdit_dateTimeFromText
-  if not isNil(vtbl.textFromDateTime):
+  if not isNil(vtbl[].textFromDateTime):
     vtbl[].vtbl.textFromDateTime = miqt_exec_callback_cQDateTimeEdit_textFromDateTime
-  if not isNil(vtbl.stepEnabled):
+  if not isNil(vtbl[].stepEnabled):
     vtbl[].vtbl.stepEnabled = miqt_exec_callback_cQDateTimeEdit_stepEnabled
-  if not isNil(vtbl.mousePressEvent):
+  if not isNil(vtbl[].mousePressEvent):
     vtbl[].vtbl.mousePressEvent = miqt_exec_callback_cQDateTimeEdit_mousePressEvent
-  if not isNil(vtbl.paintEvent):
+  if not isNil(vtbl[].paintEvent):
     vtbl[].vtbl.paintEvent = miqt_exec_callback_cQDateTimeEdit_paintEvent
-  if not isNil(vtbl.minimumSizeHint):
+  if not isNil(vtbl[].minimumSizeHint):
     vtbl[].vtbl.minimumSizeHint = miqt_exec_callback_cQDateTimeEdit_minimumSizeHint
-  if not isNil(vtbl.inputMethodQuery):
+  if not isNil(vtbl[].inputMethodQuery):
     vtbl[].vtbl.inputMethodQuery = miqt_exec_callback_cQDateTimeEdit_inputMethodQuery
-  if not isNil(vtbl.resizeEvent):
+  if not isNil(vtbl[].resizeEvent):
     vtbl[].vtbl.resizeEvent = miqt_exec_callback_cQDateTimeEdit_resizeEvent
-  if not isNil(vtbl.keyReleaseEvent):
+  if not isNil(vtbl[].keyReleaseEvent):
     vtbl[].vtbl.keyReleaseEvent = miqt_exec_callback_cQDateTimeEdit_keyReleaseEvent
-  if not isNil(vtbl.focusOutEvent):
+  if not isNil(vtbl[].focusOutEvent):
     vtbl[].vtbl.focusOutEvent = miqt_exec_callback_cQDateTimeEdit_focusOutEvent
-  if not isNil(vtbl.contextMenuEvent):
+  if not isNil(vtbl[].contextMenuEvent):
     vtbl[].vtbl.contextMenuEvent = miqt_exec_callback_cQDateTimeEdit_contextMenuEvent
-  if not isNil(vtbl.changeEvent):
+  if not isNil(vtbl[].changeEvent):
     vtbl[].vtbl.changeEvent = miqt_exec_callback_cQDateTimeEdit_changeEvent
-  if not isNil(vtbl.closeEvent):
+  if not isNil(vtbl[].closeEvent):
     vtbl[].vtbl.closeEvent = miqt_exec_callback_cQDateTimeEdit_closeEvent
-  if not isNil(vtbl.hideEvent):
+  if not isNil(vtbl[].hideEvent):
     vtbl[].vtbl.hideEvent = miqt_exec_callback_cQDateTimeEdit_hideEvent
-  if not isNil(vtbl.mouseReleaseEvent):
+  if not isNil(vtbl[].mouseReleaseEvent):
     vtbl[].vtbl.mouseReleaseEvent = miqt_exec_callback_cQDateTimeEdit_mouseReleaseEvent
-  if not isNil(vtbl.mouseMoveEvent):
+  if not isNil(vtbl[].mouseMoveEvent):
     vtbl[].vtbl.mouseMoveEvent = miqt_exec_callback_cQDateTimeEdit_mouseMoveEvent
-  if not isNil(vtbl.timerEvent):
+  if not isNil(vtbl[].timerEvent):
     vtbl[].vtbl.timerEvent = miqt_exec_callback_cQDateTimeEdit_timerEvent
-  if not isNil(vtbl.showEvent):
+  if not isNil(vtbl[].showEvent):
     vtbl[].vtbl.showEvent = miqt_exec_callback_cQDateTimeEdit_showEvent
-  if not isNil(vtbl.devType):
+  if not isNil(vtbl[].devType):
     vtbl[].vtbl.devType = miqt_exec_callback_cQDateTimeEdit_devType
-  if not isNil(vtbl.setVisible):
+  if not isNil(vtbl[].setVisible):
     vtbl[].vtbl.setVisible = miqt_exec_callback_cQDateTimeEdit_setVisible
-  if not isNil(vtbl.heightForWidth):
+  if not isNil(vtbl[].heightForWidth):
     vtbl[].vtbl.heightForWidth = miqt_exec_callback_cQDateTimeEdit_heightForWidth
-  if not isNil(vtbl.hasHeightForWidth):
+  if not isNil(vtbl[].hasHeightForWidth):
     vtbl[].vtbl.hasHeightForWidth = miqt_exec_callback_cQDateTimeEdit_hasHeightForWidth
-  if not isNil(vtbl.paintEngine):
+  if not isNil(vtbl[].paintEngine):
     vtbl[].vtbl.paintEngine = miqt_exec_callback_cQDateTimeEdit_paintEngine
-  if not isNil(vtbl.mouseDoubleClickEvent):
+  if not isNil(vtbl[].mouseDoubleClickEvent):
     vtbl[].vtbl.mouseDoubleClickEvent = miqt_exec_callback_cQDateTimeEdit_mouseDoubleClickEvent
-  if not isNil(vtbl.enterEvent):
+  if not isNil(vtbl[].enterEvent):
     vtbl[].vtbl.enterEvent = miqt_exec_callback_cQDateTimeEdit_enterEvent
-  if not isNil(vtbl.leaveEvent):
+  if not isNil(vtbl[].leaveEvent):
     vtbl[].vtbl.leaveEvent = miqt_exec_callback_cQDateTimeEdit_leaveEvent
-  if not isNil(vtbl.moveEvent):
+  if not isNil(vtbl[].moveEvent):
     vtbl[].vtbl.moveEvent = miqt_exec_callback_cQDateTimeEdit_moveEvent
-  if not isNil(vtbl.tabletEvent):
+  if not isNil(vtbl[].tabletEvent):
     vtbl[].vtbl.tabletEvent = miqt_exec_callback_cQDateTimeEdit_tabletEvent
-  if not isNil(vtbl.actionEvent):
+  if not isNil(vtbl[].actionEvent):
     vtbl[].vtbl.actionEvent = miqt_exec_callback_cQDateTimeEdit_actionEvent
-  if not isNil(vtbl.dragEnterEvent):
+  if not isNil(vtbl[].dragEnterEvent):
     vtbl[].vtbl.dragEnterEvent = miqt_exec_callback_cQDateTimeEdit_dragEnterEvent
-  if not isNil(vtbl.dragMoveEvent):
+  if not isNil(vtbl[].dragMoveEvent):
     vtbl[].vtbl.dragMoveEvent = miqt_exec_callback_cQDateTimeEdit_dragMoveEvent
-  if not isNil(vtbl.dragLeaveEvent):
+  if not isNil(vtbl[].dragLeaveEvent):
     vtbl[].vtbl.dragLeaveEvent = miqt_exec_callback_cQDateTimeEdit_dragLeaveEvent
-  if not isNil(vtbl.dropEvent):
+  if not isNil(vtbl[].dropEvent):
     vtbl[].vtbl.dropEvent = miqt_exec_callback_cQDateTimeEdit_dropEvent
-  if not isNil(vtbl.nativeEvent):
+  if not isNil(vtbl[].nativeEvent):
     vtbl[].vtbl.nativeEvent = miqt_exec_callback_cQDateTimeEdit_nativeEvent
-  if not isNil(vtbl.metric):
+  if not isNil(vtbl[].metric):
     vtbl[].vtbl.metric = miqt_exec_callback_cQDateTimeEdit_metric
-  if not isNil(vtbl.initPainter):
+  if not isNil(vtbl[].initPainter):
     vtbl[].vtbl.initPainter = miqt_exec_callback_cQDateTimeEdit_initPainter
-  if not isNil(vtbl.redirected):
+  if not isNil(vtbl[].redirected):
     vtbl[].vtbl.redirected = miqt_exec_callback_cQDateTimeEdit_redirected
-  if not isNil(vtbl.sharedPainter):
+  if not isNil(vtbl[].sharedPainter):
     vtbl[].vtbl.sharedPainter = miqt_exec_callback_cQDateTimeEdit_sharedPainter
-  if not isNil(vtbl.inputMethodEvent):
+  if not isNil(vtbl[].inputMethodEvent):
     vtbl[].vtbl.inputMethodEvent = miqt_exec_callback_cQDateTimeEdit_inputMethodEvent
-  if not isNil(vtbl.eventFilter):
+  if not isNil(vtbl[].eventFilter):
     vtbl[].vtbl.eventFilter = miqt_exec_callback_cQDateTimeEdit_eventFilter
-  if not isNil(vtbl.childEvent):
+  if not isNil(vtbl[].childEvent):
     vtbl[].vtbl.childEvent = miqt_exec_callback_cQDateTimeEdit_childEvent
-  if not isNil(vtbl.customEvent):
+  if not isNil(vtbl[].customEvent):
     vtbl[].vtbl.customEvent = miqt_exec_callback_cQDateTimeEdit_customEvent
-  if not isNil(vtbl.connectNotify):
+  if not isNil(vtbl[].connectNotify):
     vtbl[].vtbl.connectNotify = miqt_exec_callback_cQDateTimeEdit_connectNotify
-  if not isNil(vtbl.disconnectNotify):
+  if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQDateTimeEdit_disconnectNotify
-  gen_qdatetimeedit_types.QDateTimeEdit(h: fcQDateTimeEdit_new8(addr(vtbl[]), t.h, parent.h))
+  gen_qdatetimeedit_types.QDateTimeEdit(h: fcQDateTimeEdit_new8(addr(vtbl[].vtbl), t.h, parent.h), owned: true)
+
+proc create*(T: type gen_qdatetimeedit_types.QDateTimeEdit,
+    parent: gen_qwidget_types.QWidget,
+    vtbl: VirtualQDateTimeEdit) =
+
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQDateTimeEditVTable, _: ptr cQDateTimeEdit) {.cdecl.} =
+    let vtbl = cast[ptr typeof(VirtualQDateTimeEdit()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQDateTimeEdit, vtbl)))
+    vtbl[].h = nil
+    vtbl[].owned = false
+  vtbl[].vtbl.metaObject = miqt_exec_method_cQDateTimeEdit_metaObject
+  vtbl[].vtbl.metacast = miqt_exec_method_cQDateTimeEdit_metacast
+  vtbl[].vtbl.metacall = miqt_exec_method_cQDateTimeEdit_metacall
+  vtbl[].vtbl.sizeHint = miqt_exec_method_cQDateTimeEdit_sizeHint
+  vtbl[].vtbl.clear = miqt_exec_method_cQDateTimeEdit_clear
+  vtbl[].vtbl.stepBy = miqt_exec_method_cQDateTimeEdit_stepBy
+  vtbl[].vtbl.event = miqt_exec_method_cQDateTimeEdit_event
+  vtbl[].vtbl.keyPressEvent = miqt_exec_method_cQDateTimeEdit_keyPressEvent
+  vtbl[].vtbl.wheelEvent = miqt_exec_method_cQDateTimeEdit_wheelEvent
+  vtbl[].vtbl.focusInEvent = miqt_exec_method_cQDateTimeEdit_focusInEvent
+  vtbl[].vtbl.focusNextPrevChild = miqt_exec_method_cQDateTimeEdit_focusNextPrevChild
+  vtbl[].vtbl.validate = miqt_exec_method_cQDateTimeEdit_validate
+  vtbl[].vtbl.fixup = miqt_exec_method_cQDateTimeEdit_fixup
+  vtbl[].vtbl.dateTimeFromText = miqt_exec_method_cQDateTimeEdit_dateTimeFromText
+  vtbl[].vtbl.textFromDateTime = miqt_exec_method_cQDateTimeEdit_textFromDateTime
+  vtbl[].vtbl.stepEnabled = miqt_exec_method_cQDateTimeEdit_stepEnabled
+  vtbl[].vtbl.mousePressEvent = miqt_exec_method_cQDateTimeEdit_mousePressEvent
+  vtbl[].vtbl.paintEvent = miqt_exec_method_cQDateTimeEdit_paintEvent
+  vtbl[].vtbl.minimumSizeHint = miqt_exec_method_cQDateTimeEdit_minimumSizeHint
+  vtbl[].vtbl.inputMethodQuery = miqt_exec_method_cQDateTimeEdit_inputMethodQuery
+  vtbl[].vtbl.resizeEvent = miqt_exec_method_cQDateTimeEdit_resizeEvent
+  vtbl[].vtbl.keyReleaseEvent = miqt_exec_method_cQDateTimeEdit_keyReleaseEvent
+  vtbl[].vtbl.focusOutEvent = miqt_exec_method_cQDateTimeEdit_focusOutEvent
+  vtbl[].vtbl.contextMenuEvent = miqt_exec_method_cQDateTimeEdit_contextMenuEvent
+  vtbl[].vtbl.changeEvent = miqt_exec_method_cQDateTimeEdit_changeEvent
+  vtbl[].vtbl.closeEvent = miqt_exec_method_cQDateTimeEdit_closeEvent
+  vtbl[].vtbl.hideEvent = miqt_exec_method_cQDateTimeEdit_hideEvent
+  vtbl[].vtbl.mouseReleaseEvent = miqt_exec_method_cQDateTimeEdit_mouseReleaseEvent
+  vtbl[].vtbl.mouseMoveEvent = miqt_exec_method_cQDateTimeEdit_mouseMoveEvent
+  vtbl[].vtbl.timerEvent = miqt_exec_method_cQDateTimeEdit_timerEvent
+  vtbl[].vtbl.showEvent = miqt_exec_method_cQDateTimeEdit_showEvent
+  vtbl[].vtbl.devType = miqt_exec_method_cQDateTimeEdit_devType
+  vtbl[].vtbl.setVisible = miqt_exec_method_cQDateTimeEdit_setVisible
+  vtbl[].vtbl.heightForWidth = miqt_exec_method_cQDateTimeEdit_heightForWidth
+  vtbl[].vtbl.hasHeightForWidth = miqt_exec_method_cQDateTimeEdit_hasHeightForWidth
+  vtbl[].vtbl.paintEngine = miqt_exec_method_cQDateTimeEdit_paintEngine
+  vtbl[].vtbl.mouseDoubleClickEvent = miqt_exec_method_cQDateTimeEdit_mouseDoubleClickEvent
+  vtbl[].vtbl.enterEvent = miqt_exec_method_cQDateTimeEdit_enterEvent
+  vtbl[].vtbl.leaveEvent = miqt_exec_method_cQDateTimeEdit_leaveEvent
+  vtbl[].vtbl.moveEvent = miqt_exec_method_cQDateTimeEdit_moveEvent
+  vtbl[].vtbl.tabletEvent = miqt_exec_method_cQDateTimeEdit_tabletEvent
+  vtbl[].vtbl.actionEvent = miqt_exec_method_cQDateTimeEdit_actionEvent
+  vtbl[].vtbl.dragEnterEvent = miqt_exec_method_cQDateTimeEdit_dragEnterEvent
+  vtbl[].vtbl.dragMoveEvent = miqt_exec_method_cQDateTimeEdit_dragMoveEvent
+  vtbl[].vtbl.dragLeaveEvent = miqt_exec_method_cQDateTimeEdit_dragLeaveEvent
+  vtbl[].vtbl.dropEvent = miqt_exec_method_cQDateTimeEdit_dropEvent
+  vtbl[].vtbl.nativeEvent = miqt_exec_method_cQDateTimeEdit_nativeEvent
+  vtbl[].vtbl.metric = miqt_exec_method_cQDateTimeEdit_metric
+  vtbl[].vtbl.initPainter = miqt_exec_method_cQDateTimeEdit_initPainter
+  vtbl[].vtbl.redirected = miqt_exec_method_cQDateTimeEdit_redirected
+  vtbl[].vtbl.sharedPainter = miqt_exec_method_cQDateTimeEdit_sharedPainter
+  vtbl[].vtbl.inputMethodEvent = miqt_exec_method_cQDateTimeEdit_inputMethodEvent
+  vtbl[].vtbl.eventFilter = miqt_exec_method_cQDateTimeEdit_eventFilter
+  vtbl[].vtbl.childEvent = miqt_exec_method_cQDateTimeEdit_childEvent
+  vtbl[].vtbl.customEvent = miqt_exec_method_cQDateTimeEdit_customEvent
+  vtbl[].vtbl.connectNotify = miqt_exec_method_cQDateTimeEdit_connectNotify
+  vtbl[].vtbl.disconnectNotify = miqt_exec_method_cQDateTimeEdit_disconnectNotify
+  if vtbl[].h != nil: delete(move(vtbl[]))
+  vtbl[].h = fcQDateTimeEdit_new(addr(vtbl[].vtbl), parent.h)
+  vtbl[].owned = true
+
+proc create*(T: type gen_qdatetimeedit_types.QDateTimeEdit,
+    vtbl: VirtualQDateTimeEdit) =
+
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQDateTimeEditVTable, _: ptr cQDateTimeEdit) {.cdecl.} =
+    let vtbl = cast[ptr typeof(VirtualQDateTimeEdit()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQDateTimeEdit, vtbl)))
+    vtbl[].h = nil
+    vtbl[].owned = false
+  vtbl[].vtbl.metaObject = miqt_exec_method_cQDateTimeEdit_metaObject
+  vtbl[].vtbl.metacast = miqt_exec_method_cQDateTimeEdit_metacast
+  vtbl[].vtbl.metacall = miqt_exec_method_cQDateTimeEdit_metacall
+  vtbl[].vtbl.sizeHint = miqt_exec_method_cQDateTimeEdit_sizeHint
+  vtbl[].vtbl.clear = miqt_exec_method_cQDateTimeEdit_clear
+  vtbl[].vtbl.stepBy = miqt_exec_method_cQDateTimeEdit_stepBy
+  vtbl[].vtbl.event = miqt_exec_method_cQDateTimeEdit_event
+  vtbl[].vtbl.keyPressEvent = miqt_exec_method_cQDateTimeEdit_keyPressEvent
+  vtbl[].vtbl.wheelEvent = miqt_exec_method_cQDateTimeEdit_wheelEvent
+  vtbl[].vtbl.focusInEvent = miqt_exec_method_cQDateTimeEdit_focusInEvent
+  vtbl[].vtbl.focusNextPrevChild = miqt_exec_method_cQDateTimeEdit_focusNextPrevChild
+  vtbl[].vtbl.validate = miqt_exec_method_cQDateTimeEdit_validate
+  vtbl[].vtbl.fixup = miqt_exec_method_cQDateTimeEdit_fixup
+  vtbl[].vtbl.dateTimeFromText = miqt_exec_method_cQDateTimeEdit_dateTimeFromText
+  vtbl[].vtbl.textFromDateTime = miqt_exec_method_cQDateTimeEdit_textFromDateTime
+  vtbl[].vtbl.stepEnabled = miqt_exec_method_cQDateTimeEdit_stepEnabled
+  vtbl[].vtbl.mousePressEvent = miqt_exec_method_cQDateTimeEdit_mousePressEvent
+  vtbl[].vtbl.paintEvent = miqt_exec_method_cQDateTimeEdit_paintEvent
+  vtbl[].vtbl.minimumSizeHint = miqt_exec_method_cQDateTimeEdit_minimumSizeHint
+  vtbl[].vtbl.inputMethodQuery = miqt_exec_method_cQDateTimeEdit_inputMethodQuery
+  vtbl[].vtbl.resizeEvent = miqt_exec_method_cQDateTimeEdit_resizeEvent
+  vtbl[].vtbl.keyReleaseEvent = miqt_exec_method_cQDateTimeEdit_keyReleaseEvent
+  vtbl[].vtbl.focusOutEvent = miqt_exec_method_cQDateTimeEdit_focusOutEvent
+  vtbl[].vtbl.contextMenuEvent = miqt_exec_method_cQDateTimeEdit_contextMenuEvent
+  vtbl[].vtbl.changeEvent = miqt_exec_method_cQDateTimeEdit_changeEvent
+  vtbl[].vtbl.closeEvent = miqt_exec_method_cQDateTimeEdit_closeEvent
+  vtbl[].vtbl.hideEvent = miqt_exec_method_cQDateTimeEdit_hideEvent
+  vtbl[].vtbl.mouseReleaseEvent = miqt_exec_method_cQDateTimeEdit_mouseReleaseEvent
+  vtbl[].vtbl.mouseMoveEvent = miqt_exec_method_cQDateTimeEdit_mouseMoveEvent
+  vtbl[].vtbl.timerEvent = miqt_exec_method_cQDateTimeEdit_timerEvent
+  vtbl[].vtbl.showEvent = miqt_exec_method_cQDateTimeEdit_showEvent
+  vtbl[].vtbl.devType = miqt_exec_method_cQDateTimeEdit_devType
+  vtbl[].vtbl.setVisible = miqt_exec_method_cQDateTimeEdit_setVisible
+  vtbl[].vtbl.heightForWidth = miqt_exec_method_cQDateTimeEdit_heightForWidth
+  vtbl[].vtbl.hasHeightForWidth = miqt_exec_method_cQDateTimeEdit_hasHeightForWidth
+  vtbl[].vtbl.paintEngine = miqt_exec_method_cQDateTimeEdit_paintEngine
+  vtbl[].vtbl.mouseDoubleClickEvent = miqt_exec_method_cQDateTimeEdit_mouseDoubleClickEvent
+  vtbl[].vtbl.enterEvent = miqt_exec_method_cQDateTimeEdit_enterEvent
+  vtbl[].vtbl.leaveEvent = miqt_exec_method_cQDateTimeEdit_leaveEvent
+  vtbl[].vtbl.moveEvent = miqt_exec_method_cQDateTimeEdit_moveEvent
+  vtbl[].vtbl.tabletEvent = miqt_exec_method_cQDateTimeEdit_tabletEvent
+  vtbl[].vtbl.actionEvent = miqt_exec_method_cQDateTimeEdit_actionEvent
+  vtbl[].vtbl.dragEnterEvent = miqt_exec_method_cQDateTimeEdit_dragEnterEvent
+  vtbl[].vtbl.dragMoveEvent = miqt_exec_method_cQDateTimeEdit_dragMoveEvent
+  vtbl[].vtbl.dragLeaveEvent = miqt_exec_method_cQDateTimeEdit_dragLeaveEvent
+  vtbl[].vtbl.dropEvent = miqt_exec_method_cQDateTimeEdit_dropEvent
+  vtbl[].vtbl.nativeEvent = miqt_exec_method_cQDateTimeEdit_nativeEvent
+  vtbl[].vtbl.metric = miqt_exec_method_cQDateTimeEdit_metric
+  vtbl[].vtbl.initPainter = miqt_exec_method_cQDateTimeEdit_initPainter
+  vtbl[].vtbl.redirected = miqt_exec_method_cQDateTimeEdit_redirected
+  vtbl[].vtbl.sharedPainter = miqt_exec_method_cQDateTimeEdit_sharedPainter
+  vtbl[].vtbl.inputMethodEvent = miqt_exec_method_cQDateTimeEdit_inputMethodEvent
+  vtbl[].vtbl.eventFilter = miqt_exec_method_cQDateTimeEdit_eventFilter
+  vtbl[].vtbl.childEvent = miqt_exec_method_cQDateTimeEdit_childEvent
+  vtbl[].vtbl.customEvent = miqt_exec_method_cQDateTimeEdit_customEvent
+  vtbl[].vtbl.connectNotify = miqt_exec_method_cQDateTimeEdit_connectNotify
+  vtbl[].vtbl.disconnectNotify = miqt_exec_method_cQDateTimeEdit_disconnectNotify
+  if vtbl[].h != nil: delete(move(vtbl[]))
+  vtbl[].h = fcQDateTimeEdit_new2(addr(vtbl[].vtbl), )
+  vtbl[].owned = true
+
+proc create*(T: type gen_qdatetimeedit_types.QDateTimeEdit,
+    dt: gen_qdatetime_types.QDateTime,
+    vtbl: VirtualQDateTimeEdit) =
+
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQDateTimeEditVTable, _: ptr cQDateTimeEdit) {.cdecl.} =
+    let vtbl = cast[ptr typeof(VirtualQDateTimeEdit()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQDateTimeEdit, vtbl)))
+    vtbl[].h = nil
+    vtbl[].owned = false
+  vtbl[].vtbl.metaObject = miqt_exec_method_cQDateTimeEdit_metaObject
+  vtbl[].vtbl.metacast = miqt_exec_method_cQDateTimeEdit_metacast
+  vtbl[].vtbl.metacall = miqt_exec_method_cQDateTimeEdit_metacall
+  vtbl[].vtbl.sizeHint = miqt_exec_method_cQDateTimeEdit_sizeHint
+  vtbl[].vtbl.clear = miqt_exec_method_cQDateTimeEdit_clear
+  vtbl[].vtbl.stepBy = miqt_exec_method_cQDateTimeEdit_stepBy
+  vtbl[].vtbl.event = miqt_exec_method_cQDateTimeEdit_event
+  vtbl[].vtbl.keyPressEvent = miqt_exec_method_cQDateTimeEdit_keyPressEvent
+  vtbl[].vtbl.wheelEvent = miqt_exec_method_cQDateTimeEdit_wheelEvent
+  vtbl[].vtbl.focusInEvent = miqt_exec_method_cQDateTimeEdit_focusInEvent
+  vtbl[].vtbl.focusNextPrevChild = miqt_exec_method_cQDateTimeEdit_focusNextPrevChild
+  vtbl[].vtbl.validate = miqt_exec_method_cQDateTimeEdit_validate
+  vtbl[].vtbl.fixup = miqt_exec_method_cQDateTimeEdit_fixup
+  vtbl[].vtbl.dateTimeFromText = miqt_exec_method_cQDateTimeEdit_dateTimeFromText
+  vtbl[].vtbl.textFromDateTime = miqt_exec_method_cQDateTimeEdit_textFromDateTime
+  vtbl[].vtbl.stepEnabled = miqt_exec_method_cQDateTimeEdit_stepEnabled
+  vtbl[].vtbl.mousePressEvent = miqt_exec_method_cQDateTimeEdit_mousePressEvent
+  vtbl[].vtbl.paintEvent = miqt_exec_method_cQDateTimeEdit_paintEvent
+  vtbl[].vtbl.minimumSizeHint = miqt_exec_method_cQDateTimeEdit_minimumSizeHint
+  vtbl[].vtbl.inputMethodQuery = miqt_exec_method_cQDateTimeEdit_inputMethodQuery
+  vtbl[].vtbl.resizeEvent = miqt_exec_method_cQDateTimeEdit_resizeEvent
+  vtbl[].vtbl.keyReleaseEvent = miqt_exec_method_cQDateTimeEdit_keyReleaseEvent
+  vtbl[].vtbl.focusOutEvent = miqt_exec_method_cQDateTimeEdit_focusOutEvent
+  vtbl[].vtbl.contextMenuEvent = miqt_exec_method_cQDateTimeEdit_contextMenuEvent
+  vtbl[].vtbl.changeEvent = miqt_exec_method_cQDateTimeEdit_changeEvent
+  vtbl[].vtbl.closeEvent = miqt_exec_method_cQDateTimeEdit_closeEvent
+  vtbl[].vtbl.hideEvent = miqt_exec_method_cQDateTimeEdit_hideEvent
+  vtbl[].vtbl.mouseReleaseEvent = miqt_exec_method_cQDateTimeEdit_mouseReleaseEvent
+  vtbl[].vtbl.mouseMoveEvent = miqt_exec_method_cQDateTimeEdit_mouseMoveEvent
+  vtbl[].vtbl.timerEvent = miqt_exec_method_cQDateTimeEdit_timerEvent
+  vtbl[].vtbl.showEvent = miqt_exec_method_cQDateTimeEdit_showEvent
+  vtbl[].vtbl.devType = miqt_exec_method_cQDateTimeEdit_devType
+  vtbl[].vtbl.setVisible = miqt_exec_method_cQDateTimeEdit_setVisible
+  vtbl[].vtbl.heightForWidth = miqt_exec_method_cQDateTimeEdit_heightForWidth
+  vtbl[].vtbl.hasHeightForWidth = miqt_exec_method_cQDateTimeEdit_hasHeightForWidth
+  vtbl[].vtbl.paintEngine = miqt_exec_method_cQDateTimeEdit_paintEngine
+  vtbl[].vtbl.mouseDoubleClickEvent = miqt_exec_method_cQDateTimeEdit_mouseDoubleClickEvent
+  vtbl[].vtbl.enterEvent = miqt_exec_method_cQDateTimeEdit_enterEvent
+  vtbl[].vtbl.leaveEvent = miqt_exec_method_cQDateTimeEdit_leaveEvent
+  vtbl[].vtbl.moveEvent = miqt_exec_method_cQDateTimeEdit_moveEvent
+  vtbl[].vtbl.tabletEvent = miqt_exec_method_cQDateTimeEdit_tabletEvent
+  vtbl[].vtbl.actionEvent = miqt_exec_method_cQDateTimeEdit_actionEvent
+  vtbl[].vtbl.dragEnterEvent = miqt_exec_method_cQDateTimeEdit_dragEnterEvent
+  vtbl[].vtbl.dragMoveEvent = miqt_exec_method_cQDateTimeEdit_dragMoveEvent
+  vtbl[].vtbl.dragLeaveEvent = miqt_exec_method_cQDateTimeEdit_dragLeaveEvent
+  vtbl[].vtbl.dropEvent = miqt_exec_method_cQDateTimeEdit_dropEvent
+  vtbl[].vtbl.nativeEvent = miqt_exec_method_cQDateTimeEdit_nativeEvent
+  vtbl[].vtbl.metric = miqt_exec_method_cQDateTimeEdit_metric
+  vtbl[].vtbl.initPainter = miqt_exec_method_cQDateTimeEdit_initPainter
+  vtbl[].vtbl.redirected = miqt_exec_method_cQDateTimeEdit_redirected
+  vtbl[].vtbl.sharedPainter = miqt_exec_method_cQDateTimeEdit_sharedPainter
+  vtbl[].vtbl.inputMethodEvent = miqt_exec_method_cQDateTimeEdit_inputMethodEvent
+  vtbl[].vtbl.eventFilter = miqt_exec_method_cQDateTimeEdit_eventFilter
+  vtbl[].vtbl.childEvent = miqt_exec_method_cQDateTimeEdit_childEvent
+  vtbl[].vtbl.customEvent = miqt_exec_method_cQDateTimeEdit_customEvent
+  vtbl[].vtbl.connectNotify = miqt_exec_method_cQDateTimeEdit_connectNotify
+  vtbl[].vtbl.disconnectNotify = miqt_exec_method_cQDateTimeEdit_disconnectNotify
+  if vtbl[].h != nil: delete(move(vtbl[]))
+  vtbl[].h = fcQDateTimeEdit_new3(addr(vtbl[].vtbl), dt.h)
+  vtbl[].owned = true
+
+proc create*(T: type gen_qdatetimeedit_types.QDateTimeEdit,
+    d: gen_qdatetime_types.QDate,
+    vtbl: VirtualQDateTimeEdit) =
+
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQDateTimeEditVTable, _: ptr cQDateTimeEdit) {.cdecl.} =
+    let vtbl = cast[ptr typeof(VirtualQDateTimeEdit()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQDateTimeEdit, vtbl)))
+    vtbl[].h = nil
+    vtbl[].owned = false
+  vtbl[].vtbl.metaObject = miqt_exec_method_cQDateTimeEdit_metaObject
+  vtbl[].vtbl.metacast = miqt_exec_method_cQDateTimeEdit_metacast
+  vtbl[].vtbl.metacall = miqt_exec_method_cQDateTimeEdit_metacall
+  vtbl[].vtbl.sizeHint = miqt_exec_method_cQDateTimeEdit_sizeHint
+  vtbl[].vtbl.clear = miqt_exec_method_cQDateTimeEdit_clear
+  vtbl[].vtbl.stepBy = miqt_exec_method_cQDateTimeEdit_stepBy
+  vtbl[].vtbl.event = miqt_exec_method_cQDateTimeEdit_event
+  vtbl[].vtbl.keyPressEvent = miqt_exec_method_cQDateTimeEdit_keyPressEvent
+  vtbl[].vtbl.wheelEvent = miqt_exec_method_cQDateTimeEdit_wheelEvent
+  vtbl[].vtbl.focusInEvent = miqt_exec_method_cQDateTimeEdit_focusInEvent
+  vtbl[].vtbl.focusNextPrevChild = miqt_exec_method_cQDateTimeEdit_focusNextPrevChild
+  vtbl[].vtbl.validate = miqt_exec_method_cQDateTimeEdit_validate
+  vtbl[].vtbl.fixup = miqt_exec_method_cQDateTimeEdit_fixup
+  vtbl[].vtbl.dateTimeFromText = miqt_exec_method_cQDateTimeEdit_dateTimeFromText
+  vtbl[].vtbl.textFromDateTime = miqt_exec_method_cQDateTimeEdit_textFromDateTime
+  vtbl[].vtbl.stepEnabled = miqt_exec_method_cQDateTimeEdit_stepEnabled
+  vtbl[].vtbl.mousePressEvent = miqt_exec_method_cQDateTimeEdit_mousePressEvent
+  vtbl[].vtbl.paintEvent = miqt_exec_method_cQDateTimeEdit_paintEvent
+  vtbl[].vtbl.minimumSizeHint = miqt_exec_method_cQDateTimeEdit_minimumSizeHint
+  vtbl[].vtbl.inputMethodQuery = miqt_exec_method_cQDateTimeEdit_inputMethodQuery
+  vtbl[].vtbl.resizeEvent = miqt_exec_method_cQDateTimeEdit_resizeEvent
+  vtbl[].vtbl.keyReleaseEvent = miqt_exec_method_cQDateTimeEdit_keyReleaseEvent
+  vtbl[].vtbl.focusOutEvent = miqt_exec_method_cQDateTimeEdit_focusOutEvent
+  vtbl[].vtbl.contextMenuEvent = miqt_exec_method_cQDateTimeEdit_contextMenuEvent
+  vtbl[].vtbl.changeEvent = miqt_exec_method_cQDateTimeEdit_changeEvent
+  vtbl[].vtbl.closeEvent = miqt_exec_method_cQDateTimeEdit_closeEvent
+  vtbl[].vtbl.hideEvent = miqt_exec_method_cQDateTimeEdit_hideEvent
+  vtbl[].vtbl.mouseReleaseEvent = miqt_exec_method_cQDateTimeEdit_mouseReleaseEvent
+  vtbl[].vtbl.mouseMoveEvent = miqt_exec_method_cQDateTimeEdit_mouseMoveEvent
+  vtbl[].vtbl.timerEvent = miqt_exec_method_cQDateTimeEdit_timerEvent
+  vtbl[].vtbl.showEvent = miqt_exec_method_cQDateTimeEdit_showEvent
+  vtbl[].vtbl.devType = miqt_exec_method_cQDateTimeEdit_devType
+  vtbl[].vtbl.setVisible = miqt_exec_method_cQDateTimeEdit_setVisible
+  vtbl[].vtbl.heightForWidth = miqt_exec_method_cQDateTimeEdit_heightForWidth
+  vtbl[].vtbl.hasHeightForWidth = miqt_exec_method_cQDateTimeEdit_hasHeightForWidth
+  vtbl[].vtbl.paintEngine = miqt_exec_method_cQDateTimeEdit_paintEngine
+  vtbl[].vtbl.mouseDoubleClickEvent = miqt_exec_method_cQDateTimeEdit_mouseDoubleClickEvent
+  vtbl[].vtbl.enterEvent = miqt_exec_method_cQDateTimeEdit_enterEvent
+  vtbl[].vtbl.leaveEvent = miqt_exec_method_cQDateTimeEdit_leaveEvent
+  vtbl[].vtbl.moveEvent = miqt_exec_method_cQDateTimeEdit_moveEvent
+  vtbl[].vtbl.tabletEvent = miqt_exec_method_cQDateTimeEdit_tabletEvent
+  vtbl[].vtbl.actionEvent = miqt_exec_method_cQDateTimeEdit_actionEvent
+  vtbl[].vtbl.dragEnterEvent = miqt_exec_method_cQDateTimeEdit_dragEnterEvent
+  vtbl[].vtbl.dragMoveEvent = miqt_exec_method_cQDateTimeEdit_dragMoveEvent
+  vtbl[].vtbl.dragLeaveEvent = miqt_exec_method_cQDateTimeEdit_dragLeaveEvent
+  vtbl[].vtbl.dropEvent = miqt_exec_method_cQDateTimeEdit_dropEvent
+  vtbl[].vtbl.nativeEvent = miqt_exec_method_cQDateTimeEdit_nativeEvent
+  vtbl[].vtbl.metric = miqt_exec_method_cQDateTimeEdit_metric
+  vtbl[].vtbl.initPainter = miqt_exec_method_cQDateTimeEdit_initPainter
+  vtbl[].vtbl.redirected = miqt_exec_method_cQDateTimeEdit_redirected
+  vtbl[].vtbl.sharedPainter = miqt_exec_method_cQDateTimeEdit_sharedPainter
+  vtbl[].vtbl.inputMethodEvent = miqt_exec_method_cQDateTimeEdit_inputMethodEvent
+  vtbl[].vtbl.eventFilter = miqt_exec_method_cQDateTimeEdit_eventFilter
+  vtbl[].vtbl.childEvent = miqt_exec_method_cQDateTimeEdit_childEvent
+  vtbl[].vtbl.customEvent = miqt_exec_method_cQDateTimeEdit_customEvent
+  vtbl[].vtbl.connectNotify = miqt_exec_method_cQDateTimeEdit_connectNotify
+  vtbl[].vtbl.disconnectNotify = miqt_exec_method_cQDateTimeEdit_disconnectNotify
+  if vtbl[].h != nil: delete(move(vtbl[]))
+  vtbl[].h = fcQDateTimeEdit_new4(addr(vtbl[].vtbl), d.h)
+  vtbl[].owned = true
+
+proc create*(T: type gen_qdatetimeedit_types.QDateTimeEdit,
+    t: gen_qdatetime_types.QTime,
+    vtbl: VirtualQDateTimeEdit) =
+
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQDateTimeEditVTable, _: ptr cQDateTimeEdit) {.cdecl.} =
+    let vtbl = cast[ptr typeof(VirtualQDateTimeEdit()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQDateTimeEdit, vtbl)))
+    vtbl[].h = nil
+    vtbl[].owned = false
+  vtbl[].vtbl.metaObject = miqt_exec_method_cQDateTimeEdit_metaObject
+  vtbl[].vtbl.metacast = miqt_exec_method_cQDateTimeEdit_metacast
+  vtbl[].vtbl.metacall = miqt_exec_method_cQDateTimeEdit_metacall
+  vtbl[].vtbl.sizeHint = miqt_exec_method_cQDateTimeEdit_sizeHint
+  vtbl[].vtbl.clear = miqt_exec_method_cQDateTimeEdit_clear
+  vtbl[].vtbl.stepBy = miqt_exec_method_cQDateTimeEdit_stepBy
+  vtbl[].vtbl.event = miqt_exec_method_cQDateTimeEdit_event
+  vtbl[].vtbl.keyPressEvent = miqt_exec_method_cQDateTimeEdit_keyPressEvent
+  vtbl[].vtbl.wheelEvent = miqt_exec_method_cQDateTimeEdit_wheelEvent
+  vtbl[].vtbl.focusInEvent = miqt_exec_method_cQDateTimeEdit_focusInEvent
+  vtbl[].vtbl.focusNextPrevChild = miqt_exec_method_cQDateTimeEdit_focusNextPrevChild
+  vtbl[].vtbl.validate = miqt_exec_method_cQDateTimeEdit_validate
+  vtbl[].vtbl.fixup = miqt_exec_method_cQDateTimeEdit_fixup
+  vtbl[].vtbl.dateTimeFromText = miqt_exec_method_cQDateTimeEdit_dateTimeFromText
+  vtbl[].vtbl.textFromDateTime = miqt_exec_method_cQDateTimeEdit_textFromDateTime
+  vtbl[].vtbl.stepEnabled = miqt_exec_method_cQDateTimeEdit_stepEnabled
+  vtbl[].vtbl.mousePressEvent = miqt_exec_method_cQDateTimeEdit_mousePressEvent
+  vtbl[].vtbl.paintEvent = miqt_exec_method_cQDateTimeEdit_paintEvent
+  vtbl[].vtbl.minimumSizeHint = miqt_exec_method_cQDateTimeEdit_minimumSizeHint
+  vtbl[].vtbl.inputMethodQuery = miqt_exec_method_cQDateTimeEdit_inputMethodQuery
+  vtbl[].vtbl.resizeEvent = miqt_exec_method_cQDateTimeEdit_resizeEvent
+  vtbl[].vtbl.keyReleaseEvent = miqt_exec_method_cQDateTimeEdit_keyReleaseEvent
+  vtbl[].vtbl.focusOutEvent = miqt_exec_method_cQDateTimeEdit_focusOutEvent
+  vtbl[].vtbl.contextMenuEvent = miqt_exec_method_cQDateTimeEdit_contextMenuEvent
+  vtbl[].vtbl.changeEvent = miqt_exec_method_cQDateTimeEdit_changeEvent
+  vtbl[].vtbl.closeEvent = miqt_exec_method_cQDateTimeEdit_closeEvent
+  vtbl[].vtbl.hideEvent = miqt_exec_method_cQDateTimeEdit_hideEvent
+  vtbl[].vtbl.mouseReleaseEvent = miqt_exec_method_cQDateTimeEdit_mouseReleaseEvent
+  vtbl[].vtbl.mouseMoveEvent = miqt_exec_method_cQDateTimeEdit_mouseMoveEvent
+  vtbl[].vtbl.timerEvent = miqt_exec_method_cQDateTimeEdit_timerEvent
+  vtbl[].vtbl.showEvent = miqt_exec_method_cQDateTimeEdit_showEvent
+  vtbl[].vtbl.devType = miqt_exec_method_cQDateTimeEdit_devType
+  vtbl[].vtbl.setVisible = miqt_exec_method_cQDateTimeEdit_setVisible
+  vtbl[].vtbl.heightForWidth = miqt_exec_method_cQDateTimeEdit_heightForWidth
+  vtbl[].vtbl.hasHeightForWidth = miqt_exec_method_cQDateTimeEdit_hasHeightForWidth
+  vtbl[].vtbl.paintEngine = miqt_exec_method_cQDateTimeEdit_paintEngine
+  vtbl[].vtbl.mouseDoubleClickEvent = miqt_exec_method_cQDateTimeEdit_mouseDoubleClickEvent
+  vtbl[].vtbl.enterEvent = miqt_exec_method_cQDateTimeEdit_enterEvent
+  vtbl[].vtbl.leaveEvent = miqt_exec_method_cQDateTimeEdit_leaveEvent
+  vtbl[].vtbl.moveEvent = miqt_exec_method_cQDateTimeEdit_moveEvent
+  vtbl[].vtbl.tabletEvent = miqt_exec_method_cQDateTimeEdit_tabletEvent
+  vtbl[].vtbl.actionEvent = miqt_exec_method_cQDateTimeEdit_actionEvent
+  vtbl[].vtbl.dragEnterEvent = miqt_exec_method_cQDateTimeEdit_dragEnterEvent
+  vtbl[].vtbl.dragMoveEvent = miqt_exec_method_cQDateTimeEdit_dragMoveEvent
+  vtbl[].vtbl.dragLeaveEvent = miqt_exec_method_cQDateTimeEdit_dragLeaveEvent
+  vtbl[].vtbl.dropEvent = miqt_exec_method_cQDateTimeEdit_dropEvent
+  vtbl[].vtbl.nativeEvent = miqt_exec_method_cQDateTimeEdit_nativeEvent
+  vtbl[].vtbl.metric = miqt_exec_method_cQDateTimeEdit_metric
+  vtbl[].vtbl.initPainter = miqt_exec_method_cQDateTimeEdit_initPainter
+  vtbl[].vtbl.redirected = miqt_exec_method_cQDateTimeEdit_redirected
+  vtbl[].vtbl.sharedPainter = miqt_exec_method_cQDateTimeEdit_sharedPainter
+  vtbl[].vtbl.inputMethodEvent = miqt_exec_method_cQDateTimeEdit_inputMethodEvent
+  vtbl[].vtbl.eventFilter = miqt_exec_method_cQDateTimeEdit_eventFilter
+  vtbl[].vtbl.childEvent = miqt_exec_method_cQDateTimeEdit_childEvent
+  vtbl[].vtbl.customEvent = miqt_exec_method_cQDateTimeEdit_customEvent
+  vtbl[].vtbl.connectNotify = miqt_exec_method_cQDateTimeEdit_connectNotify
+  vtbl[].vtbl.disconnectNotify = miqt_exec_method_cQDateTimeEdit_disconnectNotify
+  if vtbl[].h != nil: delete(move(vtbl[]))
+  vtbl[].h = fcQDateTimeEdit_new5(addr(vtbl[].vtbl), t.h)
+  vtbl[].owned = true
+
+proc create*(T: type gen_qdatetimeedit_types.QDateTimeEdit,
+    dt: gen_qdatetime_types.QDateTime, parent: gen_qwidget_types.QWidget,
+    vtbl: VirtualQDateTimeEdit) =
+
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQDateTimeEditVTable, _: ptr cQDateTimeEdit) {.cdecl.} =
+    let vtbl = cast[ptr typeof(VirtualQDateTimeEdit()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQDateTimeEdit, vtbl)))
+    vtbl[].h = nil
+    vtbl[].owned = false
+  vtbl[].vtbl.metaObject = miqt_exec_method_cQDateTimeEdit_metaObject
+  vtbl[].vtbl.metacast = miqt_exec_method_cQDateTimeEdit_metacast
+  vtbl[].vtbl.metacall = miqt_exec_method_cQDateTimeEdit_metacall
+  vtbl[].vtbl.sizeHint = miqt_exec_method_cQDateTimeEdit_sizeHint
+  vtbl[].vtbl.clear = miqt_exec_method_cQDateTimeEdit_clear
+  vtbl[].vtbl.stepBy = miqt_exec_method_cQDateTimeEdit_stepBy
+  vtbl[].vtbl.event = miqt_exec_method_cQDateTimeEdit_event
+  vtbl[].vtbl.keyPressEvent = miqt_exec_method_cQDateTimeEdit_keyPressEvent
+  vtbl[].vtbl.wheelEvent = miqt_exec_method_cQDateTimeEdit_wheelEvent
+  vtbl[].vtbl.focusInEvent = miqt_exec_method_cQDateTimeEdit_focusInEvent
+  vtbl[].vtbl.focusNextPrevChild = miqt_exec_method_cQDateTimeEdit_focusNextPrevChild
+  vtbl[].vtbl.validate = miqt_exec_method_cQDateTimeEdit_validate
+  vtbl[].vtbl.fixup = miqt_exec_method_cQDateTimeEdit_fixup
+  vtbl[].vtbl.dateTimeFromText = miqt_exec_method_cQDateTimeEdit_dateTimeFromText
+  vtbl[].vtbl.textFromDateTime = miqt_exec_method_cQDateTimeEdit_textFromDateTime
+  vtbl[].vtbl.stepEnabled = miqt_exec_method_cQDateTimeEdit_stepEnabled
+  vtbl[].vtbl.mousePressEvent = miqt_exec_method_cQDateTimeEdit_mousePressEvent
+  vtbl[].vtbl.paintEvent = miqt_exec_method_cQDateTimeEdit_paintEvent
+  vtbl[].vtbl.minimumSizeHint = miqt_exec_method_cQDateTimeEdit_minimumSizeHint
+  vtbl[].vtbl.inputMethodQuery = miqt_exec_method_cQDateTimeEdit_inputMethodQuery
+  vtbl[].vtbl.resizeEvent = miqt_exec_method_cQDateTimeEdit_resizeEvent
+  vtbl[].vtbl.keyReleaseEvent = miqt_exec_method_cQDateTimeEdit_keyReleaseEvent
+  vtbl[].vtbl.focusOutEvent = miqt_exec_method_cQDateTimeEdit_focusOutEvent
+  vtbl[].vtbl.contextMenuEvent = miqt_exec_method_cQDateTimeEdit_contextMenuEvent
+  vtbl[].vtbl.changeEvent = miqt_exec_method_cQDateTimeEdit_changeEvent
+  vtbl[].vtbl.closeEvent = miqt_exec_method_cQDateTimeEdit_closeEvent
+  vtbl[].vtbl.hideEvent = miqt_exec_method_cQDateTimeEdit_hideEvent
+  vtbl[].vtbl.mouseReleaseEvent = miqt_exec_method_cQDateTimeEdit_mouseReleaseEvent
+  vtbl[].vtbl.mouseMoveEvent = miqt_exec_method_cQDateTimeEdit_mouseMoveEvent
+  vtbl[].vtbl.timerEvent = miqt_exec_method_cQDateTimeEdit_timerEvent
+  vtbl[].vtbl.showEvent = miqt_exec_method_cQDateTimeEdit_showEvent
+  vtbl[].vtbl.devType = miqt_exec_method_cQDateTimeEdit_devType
+  vtbl[].vtbl.setVisible = miqt_exec_method_cQDateTimeEdit_setVisible
+  vtbl[].vtbl.heightForWidth = miqt_exec_method_cQDateTimeEdit_heightForWidth
+  vtbl[].vtbl.hasHeightForWidth = miqt_exec_method_cQDateTimeEdit_hasHeightForWidth
+  vtbl[].vtbl.paintEngine = miqt_exec_method_cQDateTimeEdit_paintEngine
+  vtbl[].vtbl.mouseDoubleClickEvent = miqt_exec_method_cQDateTimeEdit_mouseDoubleClickEvent
+  vtbl[].vtbl.enterEvent = miqt_exec_method_cQDateTimeEdit_enterEvent
+  vtbl[].vtbl.leaveEvent = miqt_exec_method_cQDateTimeEdit_leaveEvent
+  vtbl[].vtbl.moveEvent = miqt_exec_method_cQDateTimeEdit_moveEvent
+  vtbl[].vtbl.tabletEvent = miqt_exec_method_cQDateTimeEdit_tabletEvent
+  vtbl[].vtbl.actionEvent = miqt_exec_method_cQDateTimeEdit_actionEvent
+  vtbl[].vtbl.dragEnterEvent = miqt_exec_method_cQDateTimeEdit_dragEnterEvent
+  vtbl[].vtbl.dragMoveEvent = miqt_exec_method_cQDateTimeEdit_dragMoveEvent
+  vtbl[].vtbl.dragLeaveEvent = miqt_exec_method_cQDateTimeEdit_dragLeaveEvent
+  vtbl[].vtbl.dropEvent = miqt_exec_method_cQDateTimeEdit_dropEvent
+  vtbl[].vtbl.nativeEvent = miqt_exec_method_cQDateTimeEdit_nativeEvent
+  vtbl[].vtbl.metric = miqt_exec_method_cQDateTimeEdit_metric
+  vtbl[].vtbl.initPainter = miqt_exec_method_cQDateTimeEdit_initPainter
+  vtbl[].vtbl.redirected = miqt_exec_method_cQDateTimeEdit_redirected
+  vtbl[].vtbl.sharedPainter = miqt_exec_method_cQDateTimeEdit_sharedPainter
+  vtbl[].vtbl.inputMethodEvent = miqt_exec_method_cQDateTimeEdit_inputMethodEvent
+  vtbl[].vtbl.eventFilter = miqt_exec_method_cQDateTimeEdit_eventFilter
+  vtbl[].vtbl.childEvent = miqt_exec_method_cQDateTimeEdit_childEvent
+  vtbl[].vtbl.customEvent = miqt_exec_method_cQDateTimeEdit_customEvent
+  vtbl[].vtbl.connectNotify = miqt_exec_method_cQDateTimeEdit_connectNotify
+  vtbl[].vtbl.disconnectNotify = miqt_exec_method_cQDateTimeEdit_disconnectNotify
+  if vtbl[].h != nil: delete(move(vtbl[]))
+  vtbl[].h = fcQDateTimeEdit_new6(addr(vtbl[].vtbl), dt.h, parent.h)
+  vtbl[].owned = true
+
+proc create*(T: type gen_qdatetimeedit_types.QDateTimeEdit,
+    d: gen_qdatetime_types.QDate, parent: gen_qwidget_types.QWidget,
+    vtbl: VirtualQDateTimeEdit) =
+
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQDateTimeEditVTable, _: ptr cQDateTimeEdit) {.cdecl.} =
+    let vtbl = cast[ptr typeof(VirtualQDateTimeEdit()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQDateTimeEdit, vtbl)))
+    vtbl[].h = nil
+    vtbl[].owned = false
+  vtbl[].vtbl.metaObject = miqt_exec_method_cQDateTimeEdit_metaObject
+  vtbl[].vtbl.metacast = miqt_exec_method_cQDateTimeEdit_metacast
+  vtbl[].vtbl.metacall = miqt_exec_method_cQDateTimeEdit_metacall
+  vtbl[].vtbl.sizeHint = miqt_exec_method_cQDateTimeEdit_sizeHint
+  vtbl[].vtbl.clear = miqt_exec_method_cQDateTimeEdit_clear
+  vtbl[].vtbl.stepBy = miqt_exec_method_cQDateTimeEdit_stepBy
+  vtbl[].vtbl.event = miqt_exec_method_cQDateTimeEdit_event
+  vtbl[].vtbl.keyPressEvent = miqt_exec_method_cQDateTimeEdit_keyPressEvent
+  vtbl[].vtbl.wheelEvent = miqt_exec_method_cQDateTimeEdit_wheelEvent
+  vtbl[].vtbl.focusInEvent = miqt_exec_method_cQDateTimeEdit_focusInEvent
+  vtbl[].vtbl.focusNextPrevChild = miqt_exec_method_cQDateTimeEdit_focusNextPrevChild
+  vtbl[].vtbl.validate = miqt_exec_method_cQDateTimeEdit_validate
+  vtbl[].vtbl.fixup = miqt_exec_method_cQDateTimeEdit_fixup
+  vtbl[].vtbl.dateTimeFromText = miqt_exec_method_cQDateTimeEdit_dateTimeFromText
+  vtbl[].vtbl.textFromDateTime = miqt_exec_method_cQDateTimeEdit_textFromDateTime
+  vtbl[].vtbl.stepEnabled = miqt_exec_method_cQDateTimeEdit_stepEnabled
+  vtbl[].vtbl.mousePressEvent = miqt_exec_method_cQDateTimeEdit_mousePressEvent
+  vtbl[].vtbl.paintEvent = miqt_exec_method_cQDateTimeEdit_paintEvent
+  vtbl[].vtbl.minimumSizeHint = miqt_exec_method_cQDateTimeEdit_minimumSizeHint
+  vtbl[].vtbl.inputMethodQuery = miqt_exec_method_cQDateTimeEdit_inputMethodQuery
+  vtbl[].vtbl.resizeEvent = miqt_exec_method_cQDateTimeEdit_resizeEvent
+  vtbl[].vtbl.keyReleaseEvent = miqt_exec_method_cQDateTimeEdit_keyReleaseEvent
+  vtbl[].vtbl.focusOutEvent = miqt_exec_method_cQDateTimeEdit_focusOutEvent
+  vtbl[].vtbl.contextMenuEvent = miqt_exec_method_cQDateTimeEdit_contextMenuEvent
+  vtbl[].vtbl.changeEvent = miqt_exec_method_cQDateTimeEdit_changeEvent
+  vtbl[].vtbl.closeEvent = miqt_exec_method_cQDateTimeEdit_closeEvent
+  vtbl[].vtbl.hideEvent = miqt_exec_method_cQDateTimeEdit_hideEvent
+  vtbl[].vtbl.mouseReleaseEvent = miqt_exec_method_cQDateTimeEdit_mouseReleaseEvent
+  vtbl[].vtbl.mouseMoveEvent = miqt_exec_method_cQDateTimeEdit_mouseMoveEvent
+  vtbl[].vtbl.timerEvent = miqt_exec_method_cQDateTimeEdit_timerEvent
+  vtbl[].vtbl.showEvent = miqt_exec_method_cQDateTimeEdit_showEvent
+  vtbl[].vtbl.devType = miqt_exec_method_cQDateTimeEdit_devType
+  vtbl[].vtbl.setVisible = miqt_exec_method_cQDateTimeEdit_setVisible
+  vtbl[].vtbl.heightForWidth = miqt_exec_method_cQDateTimeEdit_heightForWidth
+  vtbl[].vtbl.hasHeightForWidth = miqt_exec_method_cQDateTimeEdit_hasHeightForWidth
+  vtbl[].vtbl.paintEngine = miqt_exec_method_cQDateTimeEdit_paintEngine
+  vtbl[].vtbl.mouseDoubleClickEvent = miqt_exec_method_cQDateTimeEdit_mouseDoubleClickEvent
+  vtbl[].vtbl.enterEvent = miqt_exec_method_cQDateTimeEdit_enterEvent
+  vtbl[].vtbl.leaveEvent = miqt_exec_method_cQDateTimeEdit_leaveEvent
+  vtbl[].vtbl.moveEvent = miqt_exec_method_cQDateTimeEdit_moveEvent
+  vtbl[].vtbl.tabletEvent = miqt_exec_method_cQDateTimeEdit_tabletEvent
+  vtbl[].vtbl.actionEvent = miqt_exec_method_cQDateTimeEdit_actionEvent
+  vtbl[].vtbl.dragEnterEvent = miqt_exec_method_cQDateTimeEdit_dragEnterEvent
+  vtbl[].vtbl.dragMoveEvent = miqt_exec_method_cQDateTimeEdit_dragMoveEvent
+  vtbl[].vtbl.dragLeaveEvent = miqt_exec_method_cQDateTimeEdit_dragLeaveEvent
+  vtbl[].vtbl.dropEvent = miqt_exec_method_cQDateTimeEdit_dropEvent
+  vtbl[].vtbl.nativeEvent = miqt_exec_method_cQDateTimeEdit_nativeEvent
+  vtbl[].vtbl.metric = miqt_exec_method_cQDateTimeEdit_metric
+  vtbl[].vtbl.initPainter = miqt_exec_method_cQDateTimeEdit_initPainter
+  vtbl[].vtbl.redirected = miqt_exec_method_cQDateTimeEdit_redirected
+  vtbl[].vtbl.sharedPainter = miqt_exec_method_cQDateTimeEdit_sharedPainter
+  vtbl[].vtbl.inputMethodEvent = miqt_exec_method_cQDateTimeEdit_inputMethodEvent
+  vtbl[].vtbl.eventFilter = miqt_exec_method_cQDateTimeEdit_eventFilter
+  vtbl[].vtbl.childEvent = miqt_exec_method_cQDateTimeEdit_childEvent
+  vtbl[].vtbl.customEvent = miqt_exec_method_cQDateTimeEdit_customEvent
+  vtbl[].vtbl.connectNotify = miqt_exec_method_cQDateTimeEdit_connectNotify
+  vtbl[].vtbl.disconnectNotify = miqt_exec_method_cQDateTimeEdit_disconnectNotify
+  if vtbl[].h != nil: delete(move(vtbl[]))
+  vtbl[].h = fcQDateTimeEdit_new7(addr(vtbl[].vtbl), d.h, parent.h)
+  vtbl[].owned = true
+
+proc create*(T: type gen_qdatetimeedit_types.QDateTimeEdit,
+    t: gen_qdatetime_types.QTime, parent: gen_qwidget_types.QWidget,
+    vtbl: VirtualQDateTimeEdit) =
+
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQDateTimeEditVTable, _: ptr cQDateTimeEdit) {.cdecl.} =
+    let vtbl = cast[ptr typeof(VirtualQDateTimeEdit()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQDateTimeEdit, vtbl)))
+    vtbl[].h = nil
+    vtbl[].owned = false
+  vtbl[].vtbl.metaObject = miqt_exec_method_cQDateTimeEdit_metaObject
+  vtbl[].vtbl.metacast = miqt_exec_method_cQDateTimeEdit_metacast
+  vtbl[].vtbl.metacall = miqt_exec_method_cQDateTimeEdit_metacall
+  vtbl[].vtbl.sizeHint = miqt_exec_method_cQDateTimeEdit_sizeHint
+  vtbl[].vtbl.clear = miqt_exec_method_cQDateTimeEdit_clear
+  vtbl[].vtbl.stepBy = miqt_exec_method_cQDateTimeEdit_stepBy
+  vtbl[].vtbl.event = miqt_exec_method_cQDateTimeEdit_event
+  vtbl[].vtbl.keyPressEvent = miqt_exec_method_cQDateTimeEdit_keyPressEvent
+  vtbl[].vtbl.wheelEvent = miqt_exec_method_cQDateTimeEdit_wheelEvent
+  vtbl[].vtbl.focusInEvent = miqt_exec_method_cQDateTimeEdit_focusInEvent
+  vtbl[].vtbl.focusNextPrevChild = miqt_exec_method_cQDateTimeEdit_focusNextPrevChild
+  vtbl[].vtbl.validate = miqt_exec_method_cQDateTimeEdit_validate
+  vtbl[].vtbl.fixup = miqt_exec_method_cQDateTimeEdit_fixup
+  vtbl[].vtbl.dateTimeFromText = miqt_exec_method_cQDateTimeEdit_dateTimeFromText
+  vtbl[].vtbl.textFromDateTime = miqt_exec_method_cQDateTimeEdit_textFromDateTime
+  vtbl[].vtbl.stepEnabled = miqt_exec_method_cQDateTimeEdit_stepEnabled
+  vtbl[].vtbl.mousePressEvent = miqt_exec_method_cQDateTimeEdit_mousePressEvent
+  vtbl[].vtbl.paintEvent = miqt_exec_method_cQDateTimeEdit_paintEvent
+  vtbl[].vtbl.minimumSizeHint = miqt_exec_method_cQDateTimeEdit_minimumSizeHint
+  vtbl[].vtbl.inputMethodQuery = miqt_exec_method_cQDateTimeEdit_inputMethodQuery
+  vtbl[].vtbl.resizeEvent = miqt_exec_method_cQDateTimeEdit_resizeEvent
+  vtbl[].vtbl.keyReleaseEvent = miqt_exec_method_cQDateTimeEdit_keyReleaseEvent
+  vtbl[].vtbl.focusOutEvent = miqt_exec_method_cQDateTimeEdit_focusOutEvent
+  vtbl[].vtbl.contextMenuEvent = miqt_exec_method_cQDateTimeEdit_contextMenuEvent
+  vtbl[].vtbl.changeEvent = miqt_exec_method_cQDateTimeEdit_changeEvent
+  vtbl[].vtbl.closeEvent = miqt_exec_method_cQDateTimeEdit_closeEvent
+  vtbl[].vtbl.hideEvent = miqt_exec_method_cQDateTimeEdit_hideEvent
+  vtbl[].vtbl.mouseReleaseEvent = miqt_exec_method_cQDateTimeEdit_mouseReleaseEvent
+  vtbl[].vtbl.mouseMoveEvent = miqt_exec_method_cQDateTimeEdit_mouseMoveEvent
+  vtbl[].vtbl.timerEvent = miqt_exec_method_cQDateTimeEdit_timerEvent
+  vtbl[].vtbl.showEvent = miqt_exec_method_cQDateTimeEdit_showEvent
+  vtbl[].vtbl.devType = miqt_exec_method_cQDateTimeEdit_devType
+  vtbl[].vtbl.setVisible = miqt_exec_method_cQDateTimeEdit_setVisible
+  vtbl[].vtbl.heightForWidth = miqt_exec_method_cQDateTimeEdit_heightForWidth
+  vtbl[].vtbl.hasHeightForWidth = miqt_exec_method_cQDateTimeEdit_hasHeightForWidth
+  vtbl[].vtbl.paintEngine = miqt_exec_method_cQDateTimeEdit_paintEngine
+  vtbl[].vtbl.mouseDoubleClickEvent = miqt_exec_method_cQDateTimeEdit_mouseDoubleClickEvent
+  vtbl[].vtbl.enterEvent = miqt_exec_method_cQDateTimeEdit_enterEvent
+  vtbl[].vtbl.leaveEvent = miqt_exec_method_cQDateTimeEdit_leaveEvent
+  vtbl[].vtbl.moveEvent = miqt_exec_method_cQDateTimeEdit_moveEvent
+  vtbl[].vtbl.tabletEvent = miqt_exec_method_cQDateTimeEdit_tabletEvent
+  vtbl[].vtbl.actionEvent = miqt_exec_method_cQDateTimeEdit_actionEvent
+  vtbl[].vtbl.dragEnterEvent = miqt_exec_method_cQDateTimeEdit_dragEnterEvent
+  vtbl[].vtbl.dragMoveEvent = miqt_exec_method_cQDateTimeEdit_dragMoveEvent
+  vtbl[].vtbl.dragLeaveEvent = miqt_exec_method_cQDateTimeEdit_dragLeaveEvent
+  vtbl[].vtbl.dropEvent = miqt_exec_method_cQDateTimeEdit_dropEvent
+  vtbl[].vtbl.nativeEvent = miqt_exec_method_cQDateTimeEdit_nativeEvent
+  vtbl[].vtbl.metric = miqt_exec_method_cQDateTimeEdit_metric
+  vtbl[].vtbl.initPainter = miqt_exec_method_cQDateTimeEdit_initPainter
+  vtbl[].vtbl.redirected = miqt_exec_method_cQDateTimeEdit_redirected
+  vtbl[].vtbl.sharedPainter = miqt_exec_method_cQDateTimeEdit_sharedPainter
+  vtbl[].vtbl.inputMethodEvent = miqt_exec_method_cQDateTimeEdit_inputMethodEvent
+  vtbl[].vtbl.eventFilter = miqt_exec_method_cQDateTimeEdit_eventFilter
+  vtbl[].vtbl.childEvent = miqt_exec_method_cQDateTimeEdit_childEvent
+  vtbl[].vtbl.customEvent = miqt_exec_method_cQDateTimeEdit_customEvent
+  vtbl[].vtbl.connectNotify = miqt_exec_method_cQDateTimeEdit_connectNotify
+  vtbl[].vtbl.disconnectNotify = miqt_exec_method_cQDateTimeEdit_disconnectNotify
+  if vtbl[].h != nil: delete(move(vtbl[]))
+  vtbl[].h = fcQDateTimeEdit_new8(addr(vtbl[].vtbl), t.h, parent.h)
+  vtbl[].owned = true
 
 proc staticMetaObject*(_: type gen_qdatetimeedit_types.QDateTimeEdit): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQDateTimeEdit_staticMetaObject())
-proc delete*(self: gen_qdatetimeedit_types.QDateTimeEdit) =
-  fcQDateTimeEdit_delete(self.h)
 proc metaObject*(self: gen_qdatetimeedit_types.QTimeEdit, ): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQTimeEdit_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQTimeEdit_metaObject(self.h), owned: false)
 
 proc metacast*(self: gen_qdatetimeedit_types.QTimeEdit, param1: cstring): pointer =
   fcQTimeEdit_metacast(self.h, param1)
@@ -2571,7 +3598,7 @@ proc userTimeChanged*(self: gen_qdatetimeedit_types.QTimeEdit, time: gen_qdateti
 type QTimeEdituserTimeChangedSlot* = proc(time: gen_qdatetime_types.QTime)
 proc miqt_exec_callback_cQTimeEdit_userTimeChanged(slot: int, time: pointer) {.cdecl.} =
   let nimfunc = cast[ptr QTimeEdituserTimeChangedSlot](cast[pointer](slot))
-  let slotval1 = gen_qdatetime_types.QTime(h: time)
+  let slotval1 = gen_qdatetime_types.QTime(h: time, owned: false)
 
   nimfunc[](slotval1)
 
@@ -2666,7 +3693,7 @@ type QTimeEditchildEventProc* = proc(self: QTimeEdit, event: gen_qcoreevent_type
 type QTimeEditcustomEventProc* = proc(self: QTimeEdit, event: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
 type QTimeEditconnectNotifyProc* = proc(self: QTimeEdit, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
 type QTimeEditdisconnectNotifyProc* = proc(self: QTimeEdit, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
-type QTimeEditVTable* = object
+type QTimeEditVTable* {.inheritable, pure.} = object
   vtbl: cQTimeEditVTable
   metaObject*: QTimeEditmetaObjectProc
   metacast*: QTimeEditmetacastProc
@@ -2726,13 +3753,16 @@ type QTimeEditVTable* = object
   connectNotify*: QTimeEditconnectNotifyProc
   disconnectNotify*: QTimeEditdisconnectNotifyProc
 proc QTimeEditmetaObject*(self: gen_qdatetimeedit_types.QTimeEdit, ): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQTimeEdit_virtualbase_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQTimeEdit_virtualbase_metaObject(self.h), owned: false)
 
 proc miqt_exec_callback_cQTimeEdit_metaObject(vtbl: pointer, self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QTimeEditVTable](vtbl)
   let self = QTimeEdit(h: self)
   var virtualReturn = vtbl[].metaObject(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QTimeEditmetacast*(self: gen_qdatetimeedit_types.QTimeEdit, param1: cstring): pointer =
   fcQTimeEdit_virtualbase_metacast(self.h, param1)
@@ -2757,13 +3787,16 @@ proc miqt_exec_callback_cQTimeEdit_metacall(vtbl: pointer, self: pointer, param1
   virtualReturn
 
 proc QTimeEditsizeHint*(self: gen_qdatetimeedit_types.QTimeEdit, ): gen_qsize_types.QSize =
-  gen_qsize_types.QSize(h: fcQTimeEdit_virtualbase_sizeHint(self.h))
+  gen_qsize_types.QSize(h: fcQTimeEdit_virtualbase_sizeHint(self.h), owned: true)
 
 proc miqt_exec_callback_cQTimeEdit_sizeHint(vtbl: pointer, self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QTimeEditVTable](vtbl)
   let self = QTimeEdit(h: self)
   var virtualReturn = vtbl[].sizeHint(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QTimeEditclear*(self: gen_qdatetimeedit_types.QTimeEdit, ): void =
   fcQTimeEdit_virtualbase_clear(self.h)
@@ -2788,7 +3821,7 @@ proc QTimeEditevent*(self: gen_qdatetimeedit_types.QTimeEdit, event: gen_qcoreev
 proc miqt_exec_callback_cQTimeEdit_event(vtbl: pointer, self: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QTimeEditVTable](vtbl)
   let self = QTimeEdit(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].event(self, slotval1)
   virtualReturn
 
@@ -2798,7 +3831,7 @@ proc QTimeEditkeyPressEvent*(self: gen_qdatetimeedit_types.QTimeEdit, event: gen
 proc miqt_exec_callback_cQTimeEdit_keyPressEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QTimeEditVTable](vtbl)
   let self = QTimeEdit(h: self)
-  let slotval1 = gen_qevent_types.QKeyEvent(h: event)
+  let slotval1 = gen_qevent_types.QKeyEvent(h: event, owned: false)
   vtbl[].keyPressEvent(self, slotval1)
 
 proc QTimeEditwheelEvent*(self: gen_qdatetimeedit_types.QTimeEdit, event: gen_qevent_types.QWheelEvent): void =
@@ -2807,7 +3840,7 @@ proc QTimeEditwheelEvent*(self: gen_qdatetimeedit_types.QTimeEdit, event: gen_qe
 proc miqt_exec_callback_cQTimeEdit_wheelEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QTimeEditVTable](vtbl)
   let self = QTimeEdit(h: self)
-  let slotval1 = gen_qevent_types.QWheelEvent(h: event)
+  let slotval1 = gen_qevent_types.QWheelEvent(h: event, owned: false)
   vtbl[].wheelEvent(self, slotval1)
 
 proc QTimeEditfocusInEvent*(self: gen_qdatetimeedit_types.QTimeEdit, event: gen_qevent_types.QFocusEvent): void =
@@ -2816,7 +3849,7 @@ proc QTimeEditfocusInEvent*(self: gen_qdatetimeedit_types.QTimeEdit, event: gen_
 proc miqt_exec_callback_cQTimeEdit_focusInEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QTimeEditVTable](vtbl)
   let self = QTimeEdit(h: self)
-  let slotval1 = gen_qevent_types.QFocusEvent(h: event)
+  let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
   vtbl[].focusInEvent(self, slotval1)
 
 proc QTimeEditfocusNextPrevChild*(self: gen_qdatetimeedit_types.QTimeEdit, next: bool): bool =
@@ -2856,7 +3889,7 @@ proc miqt_exec_callback_cQTimeEdit_fixup(vtbl: pointer, self: pointer, input: st
   vtbl[].fixup(self, slotval1)
 
 proc QTimeEditdateTimeFromText*(self: gen_qdatetimeedit_types.QTimeEdit, text: string): gen_qdatetime_types.QDateTime =
-  gen_qdatetime_types.QDateTime(h: fcQTimeEdit_virtualbase_dateTimeFromText(self.h, struct_miqt_string(data: text, len: csize_t(len(text)))))
+  gen_qdatetime_types.QDateTime(h: fcQTimeEdit_virtualbase_dateTimeFromText(self.h, struct_miqt_string(data: text, len: csize_t(len(text)))), owned: true)
 
 proc miqt_exec_callback_cQTimeEdit_dateTimeFromText(vtbl: pointer, self: pointer, text: struct_miqt_string): pointer {.cdecl.} =
   let vtbl = cast[ptr QTimeEditVTable](vtbl)
@@ -2866,7 +3899,10 @@ proc miqt_exec_callback_cQTimeEdit_dateTimeFromText(vtbl: pointer, self: pointer
   c_free(vtext_ms.data)
   let slotval1 = vtextx_ret
   var virtualReturn = vtbl[].dateTimeFromText(self, slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QTimeEdittextFromDateTime*(self: gen_qdatetimeedit_types.QTimeEdit, dt: gen_qdatetime_types.QDateTime): string =
   let v_ms = fcQTimeEdit_virtualbase_textFromDateTime(self.h, dt.h)
@@ -2877,7 +3913,7 @@ proc QTimeEdittextFromDateTime*(self: gen_qdatetimeedit_types.QTimeEdit, dt: gen
 proc miqt_exec_callback_cQTimeEdit_textFromDateTime(vtbl: pointer, self: pointer, dt: pointer): struct_miqt_string {.cdecl.} =
   let vtbl = cast[ptr QTimeEditVTable](vtbl)
   let self = QTimeEdit(h: self)
-  let slotval1 = gen_qdatetime_types.QDateTime(h: dt)
+  let slotval1 = gen_qdatetime_types.QDateTime(h: dt, owned: false)
   var virtualReturn = vtbl[].textFromDateTime(self, slotval1)
   var virtualReturn_copy = cast[cstring](if len(virtualReturn) > 0: c_malloc(csize_t(len(virtualReturn))) else: nil)
   if len(virtualReturn) > 0: copyMem(cast[pointer](virtualReturn_copy), addr virtualReturn[0], csize_t(len(virtualReturn)))
@@ -2898,7 +3934,7 @@ proc QTimeEditmousePressEvent*(self: gen_qdatetimeedit_types.QTimeEdit, event: g
 proc miqt_exec_callback_cQTimeEdit_mousePressEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QTimeEditVTable](vtbl)
   let self = QTimeEdit(h: self)
-  let slotval1 = gen_qevent_types.QMouseEvent(h: event)
+  let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   vtbl[].mousePressEvent(self, slotval1)
 
 proc QTimeEditpaintEvent*(self: gen_qdatetimeedit_types.QTimeEdit, event: gen_qevent_types.QPaintEvent): void =
@@ -2907,27 +3943,33 @@ proc QTimeEditpaintEvent*(self: gen_qdatetimeedit_types.QTimeEdit, event: gen_qe
 proc miqt_exec_callback_cQTimeEdit_paintEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QTimeEditVTable](vtbl)
   let self = QTimeEdit(h: self)
-  let slotval1 = gen_qevent_types.QPaintEvent(h: event)
+  let slotval1 = gen_qevent_types.QPaintEvent(h: event, owned: false)
   vtbl[].paintEvent(self, slotval1)
 
 proc QTimeEditminimumSizeHint*(self: gen_qdatetimeedit_types.QTimeEdit, ): gen_qsize_types.QSize =
-  gen_qsize_types.QSize(h: fcQTimeEdit_virtualbase_minimumSizeHint(self.h))
+  gen_qsize_types.QSize(h: fcQTimeEdit_virtualbase_minimumSizeHint(self.h), owned: true)
 
 proc miqt_exec_callback_cQTimeEdit_minimumSizeHint(vtbl: pointer, self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QTimeEditVTable](vtbl)
   let self = QTimeEdit(h: self)
   var virtualReturn = vtbl[].minimumSizeHint(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QTimeEditinputMethodQuery*(self: gen_qdatetimeedit_types.QTimeEdit, param1: cint): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQTimeEdit_virtualbase_inputMethodQuery(self.h, cint(param1)))
+  gen_qvariant_types.QVariant(h: fcQTimeEdit_virtualbase_inputMethodQuery(self.h, cint(param1)), owned: true)
 
 proc miqt_exec_callback_cQTimeEdit_inputMethodQuery(vtbl: pointer, self: pointer, param1: cint): pointer {.cdecl.} =
   let vtbl = cast[ptr QTimeEditVTable](vtbl)
   let self = QTimeEdit(h: self)
   let slotval1 = cint(param1)
   var virtualReturn = vtbl[].inputMethodQuery(self, slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QTimeEditresizeEvent*(self: gen_qdatetimeedit_types.QTimeEdit, event: gen_qevent_types.QResizeEvent): void =
   fcQTimeEdit_virtualbase_resizeEvent(self.h, event.h)
@@ -2935,7 +3977,7 @@ proc QTimeEditresizeEvent*(self: gen_qdatetimeedit_types.QTimeEdit, event: gen_q
 proc miqt_exec_callback_cQTimeEdit_resizeEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QTimeEditVTable](vtbl)
   let self = QTimeEdit(h: self)
-  let slotval1 = gen_qevent_types.QResizeEvent(h: event)
+  let slotval1 = gen_qevent_types.QResizeEvent(h: event, owned: false)
   vtbl[].resizeEvent(self, slotval1)
 
 proc QTimeEditkeyReleaseEvent*(self: gen_qdatetimeedit_types.QTimeEdit, event: gen_qevent_types.QKeyEvent): void =
@@ -2944,7 +3986,7 @@ proc QTimeEditkeyReleaseEvent*(self: gen_qdatetimeedit_types.QTimeEdit, event: g
 proc miqt_exec_callback_cQTimeEdit_keyReleaseEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QTimeEditVTable](vtbl)
   let self = QTimeEdit(h: self)
-  let slotval1 = gen_qevent_types.QKeyEvent(h: event)
+  let slotval1 = gen_qevent_types.QKeyEvent(h: event, owned: false)
   vtbl[].keyReleaseEvent(self, slotval1)
 
 proc QTimeEditfocusOutEvent*(self: gen_qdatetimeedit_types.QTimeEdit, event: gen_qevent_types.QFocusEvent): void =
@@ -2953,7 +3995,7 @@ proc QTimeEditfocusOutEvent*(self: gen_qdatetimeedit_types.QTimeEdit, event: gen
 proc miqt_exec_callback_cQTimeEdit_focusOutEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QTimeEditVTable](vtbl)
   let self = QTimeEdit(h: self)
-  let slotval1 = gen_qevent_types.QFocusEvent(h: event)
+  let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
   vtbl[].focusOutEvent(self, slotval1)
 
 proc QTimeEditcontextMenuEvent*(self: gen_qdatetimeedit_types.QTimeEdit, event: gen_qevent_types.QContextMenuEvent): void =
@@ -2962,7 +4004,7 @@ proc QTimeEditcontextMenuEvent*(self: gen_qdatetimeedit_types.QTimeEdit, event: 
 proc miqt_exec_callback_cQTimeEdit_contextMenuEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QTimeEditVTable](vtbl)
   let self = QTimeEdit(h: self)
-  let slotval1 = gen_qevent_types.QContextMenuEvent(h: event)
+  let slotval1 = gen_qevent_types.QContextMenuEvent(h: event, owned: false)
   vtbl[].contextMenuEvent(self, slotval1)
 
 proc QTimeEditchangeEvent*(self: gen_qdatetimeedit_types.QTimeEdit, event: gen_qcoreevent_types.QEvent): void =
@@ -2971,7 +4013,7 @@ proc QTimeEditchangeEvent*(self: gen_qdatetimeedit_types.QTimeEdit, event: gen_q
 proc miqt_exec_callback_cQTimeEdit_changeEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QTimeEditVTable](vtbl)
   let self = QTimeEdit(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].changeEvent(self, slotval1)
 
 proc QTimeEditcloseEvent*(self: gen_qdatetimeedit_types.QTimeEdit, event: gen_qevent_types.QCloseEvent): void =
@@ -2980,7 +4022,7 @@ proc QTimeEditcloseEvent*(self: gen_qdatetimeedit_types.QTimeEdit, event: gen_qe
 proc miqt_exec_callback_cQTimeEdit_closeEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QTimeEditVTable](vtbl)
   let self = QTimeEdit(h: self)
-  let slotval1 = gen_qevent_types.QCloseEvent(h: event)
+  let slotval1 = gen_qevent_types.QCloseEvent(h: event, owned: false)
   vtbl[].closeEvent(self, slotval1)
 
 proc QTimeEdithideEvent*(self: gen_qdatetimeedit_types.QTimeEdit, event: gen_qevent_types.QHideEvent): void =
@@ -2989,7 +4031,7 @@ proc QTimeEdithideEvent*(self: gen_qdatetimeedit_types.QTimeEdit, event: gen_qev
 proc miqt_exec_callback_cQTimeEdit_hideEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QTimeEditVTable](vtbl)
   let self = QTimeEdit(h: self)
-  let slotval1 = gen_qevent_types.QHideEvent(h: event)
+  let slotval1 = gen_qevent_types.QHideEvent(h: event, owned: false)
   vtbl[].hideEvent(self, slotval1)
 
 proc QTimeEditmouseReleaseEvent*(self: gen_qdatetimeedit_types.QTimeEdit, event: gen_qevent_types.QMouseEvent): void =
@@ -2998,7 +4040,7 @@ proc QTimeEditmouseReleaseEvent*(self: gen_qdatetimeedit_types.QTimeEdit, event:
 proc miqt_exec_callback_cQTimeEdit_mouseReleaseEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QTimeEditVTable](vtbl)
   let self = QTimeEdit(h: self)
-  let slotval1 = gen_qevent_types.QMouseEvent(h: event)
+  let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   vtbl[].mouseReleaseEvent(self, slotval1)
 
 proc QTimeEditmouseMoveEvent*(self: gen_qdatetimeedit_types.QTimeEdit, event: gen_qevent_types.QMouseEvent): void =
@@ -3007,7 +4049,7 @@ proc QTimeEditmouseMoveEvent*(self: gen_qdatetimeedit_types.QTimeEdit, event: ge
 proc miqt_exec_callback_cQTimeEdit_mouseMoveEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QTimeEditVTable](vtbl)
   let self = QTimeEdit(h: self)
-  let slotval1 = gen_qevent_types.QMouseEvent(h: event)
+  let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   vtbl[].mouseMoveEvent(self, slotval1)
 
 proc QTimeEdittimerEvent*(self: gen_qdatetimeedit_types.QTimeEdit, event: gen_qcoreevent_types.QTimerEvent): void =
@@ -3016,7 +4058,7 @@ proc QTimeEdittimerEvent*(self: gen_qdatetimeedit_types.QTimeEdit, event: gen_qc
 proc miqt_exec_callback_cQTimeEdit_timerEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QTimeEditVTable](vtbl)
   let self = QTimeEdit(h: self)
-  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   vtbl[].timerEvent(self, slotval1)
 
 proc QTimeEditshowEvent*(self: gen_qdatetimeedit_types.QTimeEdit, event: gen_qevent_types.QShowEvent): void =
@@ -3025,7 +4067,7 @@ proc QTimeEditshowEvent*(self: gen_qdatetimeedit_types.QTimeEdit, event: gen_qev
 proc miqt_exec_callback_cQTimeEdit_showEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QTimeEditVTable](vtbl)
   let self = QTimeEdit(h: self)
-  let slotval1 = gen_qevent_types.QShowEvent(h: event)
+  let slotval1 = gen_qevent_types.QShowEvent(h: event, owned: false)
   vtbl[].showEvent(self, slotval1)
 
 proc QTimeEditdevType*(self: gen_qdatetimeedit_types.QTimeEdit, ): cint =
@@ -3066,13 +4108,16 @@ proc miqt_exec_callback_cQTimeEdit_hasHeightForWidth(vtbl: pointer, self: pointe
   virtualReturn
 
 proc QTimeEditpaintEngine*(self: gen_qdatetimeedit_types.QTimeEdit, ): gen_qpaintengine_types.QPaintEngine =
-  gen_qpaintengine_types.QPaintEngine(h: fcQTimeEdit_virtualbase_paintEngine(self.h))
+  gen_qpaintengine_types.QPaintEngine(h: fcQTimeEdit_virtualbase_paintEngine(self.h), owned: false)
 
 proc miqt_exec_callback_cQTimeEdit_paintEngine(vtbl: pointer, self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QTimeEditVTable](vtbl)
   let self = QTimeEdit(h: self)
   var virtualReturn = vtbl[].paintEngine(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QTimeEditmouseDoubleClickEvent*(self: gen_qdatetimeedit_types.QTimeEdit, event: gen_qevent_types.QMouseEvent): void =
   fcQTimeEdit_virtualbase_mouseDoubleClickEvent(self.h, event.h)
@@ -3080,7 +4125,7 @@ proc QTimeEditmouseDoubleClickEvent*(self: gen_qdatetimeedit_types.QTimeEdit, ev
 proc miqt_exec_callback_cQTimeEdit_mouseDoubleClickEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QTimeEditVTable](vtbl)
   let self = QTimeEdit(h: self)
-  let slotval1 = gen_qevent_types.QMouseEvent(h: event)
+  let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   vtbl[].mouseDoubleClickEvent(self, slotval1)
 
 proc QTimeEditenterEvent*(self: gen_qdatetimeedit_types.QTimeEdit, event: gen_qcoreevent_types.QEvent): void =
@@ -3089,7 +4134,7 @@ proc QTimeEditenterEvent*(self: gen_qdatetimeedit_types.QTimeEdit, event: gen_qc
 proc miqt_exec_callback_cQTimeEdit_enterEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QTimeEditVTable](vtbl)
   let self = QTimeEdit(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].enterEvent(self, slotval1)
 
 proc QTimeEditleaveEvent*(self: gen_qdatetimeedit_types.QTimeEdit, event: gen_qcoreevent_types.QEvent): void =
@@ -3098,7 +4143,7 @@ proc QTimeEditleaveEvent*(self: gen_qdatetimeedit_types.QTimeEdit, event: gen_qc
 proc miqt_exec_callback_cQTimeEdit_leaveEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QTimeEditVTable](vtbl)
   let self = QTimeEdit(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].leaveEvent(self, slotval1)
 
 proc QTimeEditmoveEvent*(self: gen_qdatetimeedit_types.QTimeEdit, event: gen_qevent_types.QMoveEvent): void =
@@ -3107,7 +4152,7 @@ proc QTimeEditmoveEvent*(self: gen_qdatetimeedit_types.QTimeEdit, event: gen_qev
 proc miqt_exec_callback_cQTimeEdit_moveEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QTimeEditVTable](vtbl)
   let self = QTimeEdit(h: self)
-  let slotval1 = gen_qevent_types.QMoveEvent(h: event)
+  let slotval1 = gen_qevent_types.QMoveEvent(h: event, owned: false)
   vtbl[].moveEvent(self, slotval1)
 
 proc QTimeEdittabletEvent*(self: gen_qdatetimeedit_types.QTimeEdit, event: gen_qevent_types.QTabletEvent): void =
@@ -3116,7 +4161,7 @@ proc QTimeEdittabletEvent*(self: gen_qdatetimeedit_types.QTimeEdit, event: gen_q
 proc miqt_exec_callback_cQTimeEdit_tabletEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QTimeEditVTable](vtbl)
   let self = QTimeEdit(h: self)
-  let slotval1 = gen_qevent_types.QTabletEvent(h: event)
+  let slotval1 = gen_qevent_types.QTabletEvent(h: event, owned: false)
   vtbl[].tabletEvent(self, slotval1)
 
 proc QTimeEditactionEvent*(self: gen_qdatetimeedit_types.QTimeEdit, event: gen_qevent_types.QActionEvent): void =
@@ -3125,7 +4170,7 @@ proc QTimeEditactionEvent*(self: gen_qdatetimeedit_types.QTimeEdit, event: gen_q
 proc miqt_exec_callback_cQTimeEdit_actionEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QTimeEditVTable](vtbl)
   let self = QTimeEdit(h: self)
-  let slotval1 = gen_qevent_types.QActionEvent(h: event)
+  let slotval1 = gen_qevent_types.QActionEvent(h: event, owned: false)
   vtbl[].actionEvent(self, slotval1)
 
 proc QTimeEditdragEnterEvent*(self: gen_qdatetimeedit_types.QTimeEdit, event: gen_qevent_types.QDragEnterEvent): void =
@@ -3134,7 +4179,7 @@ proc QTimeEditdragEnterEvent*(self: gen_qdatetimeedit_types.QTimeEdit, event: ge
 proc miqt_exec_callback_cQTimeEdit_dragEnterEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QTimeEditVTable](vtbl)
   let self = QTimeEdit(h: self)
-  let slotval1 = gen_qevent_types.QDragEnterEvent(h: event)
+  let slotval1 = gen_qevent_types.QDragEnterEvent(h: event, owned: false)
   vtbl[].dragEnterEvent(self, slotval1)
 
 proc QTimeEditdragMoveEvent*(self: gen_qdatetimeedit_types.QTimeEdit, event: gen_qevent_types.QDragMoveEvent): void =
@@ -3143,7 +4188,7 @@ proc QTimeEditdragMoveEvent*(self: gen_qdatetimeedit_types.QTimeEdit, event: gen
 proc miqt_exec_callback_cQTimeEdit_dragMoveEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QTimeEditVTable](vtbl)
   let self = QTimeEdit(h: self)
-  let slotval1 = gen_qevent_types.QDragMoveEvent(h: event)
+  let slotval1 = gen_qevent_types.QDragMoveEvent(h: event, owned: false)
   vtbl[].dragMoveEvent(self, slotval1)
 
 proc QTimeEditdragLeaveEvent*(self: gen_qdatetimeedit_types.QTimeEdit, event: gen_qevent_types.QDragLeaveEvent): void =
@@ -3152,7 +4197,7 @@ proc QTimeEditdragLeaveEvent*(self: gen_qdatetimeedit_types.QTimeEdit, event: ge
 proc miqt_exec_callback_cQTimeEdit_dragLeaveEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QTimeEditVTable](vtbl)
   let self = QTimeEdit(h: self)
-  let slotval1 = gen_qevent_types.QDragLeaveEvent(h: event)
+  let slotval1 = gen_qevent_types.QDragLeaveEvent(h: event, owned: false)
   vtbl[].dragLeaveEvent(self, slotval1)
 
 proc QTimeEditdropEvent*(self: gen_qdatetimeedit_types.QTimeEdit, event: gen_qevent_types.QDropEvent): void =
@@ -3161,7 +4206,7 @@ proc QTimeEditdropEvent*(self: gen_qdatetimeedit_types.QTimeEdit, event: gen_qev
 proc miqt_exec_callback_cQTimeEdit_dropEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QTimeEditVTable](vtbl)
   let self = QTimeEdit(h: self)
-  let slotval1 = gen_qevent_types.QDropEvent(h: event)
+  let slotval1 = gen_qevent_types.QDropEvent(h: event, owned: false)
   vtbl[].dropEvent(self, slotval1)
 
 proc QTimeEditnativeEvent*(self: gen_qdatetimeedit_types.QTimeEdit, eventType: seq[byte], message: pointer, resultVal: ptr clong): bool =
@@ -3195,27 +4240,33 @@ proc QTimeEditinitPainter*(self: gen_qdatetimeedit_types.QTimeEdit, painter: gen
 proc miqt_exec_callback_cQTimeEdit_initPainter(vtbl: pointer, self: pointer, painter: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QTimeEditVTable](vtbl)
   let self = QTimeEdit(h: self)
-  let slotval1 = gen_qpainter_types.QPainter(h: painter)
+  let slotval1 = gen_qpainter_types.QPainter(h: painter, owned: false)
   vtbl[].initPainter(self, slotval1)
 
 proc QTimeEditredirected*(self: gen_qdatetimeedit_types.QTimeEdit, offset: gen_qpoint_types.QPoint): gen_qpaintdevice_types.QPaintDevice =
-  gen_qpaintdevice_types.QPaintDevice(h: fcQTimeEdit_virtualbase_redirected(self.h, offset.h))
+  gen_qpaintdevice_types.QPaintDevice(h: fcQTimeEdit_virtualbase_redirected(self.h, offset.h), owned: false)
 
 proc miqt_exec_callback_cQTimeEdit_redirected(vtbl: pointer, self: pointer, offset: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QTimeEditVTable](vtbl)
   let self = QTimeEdit(h: self)
-  let slotval1 = gen_qpoint_types.QPoint(h: offset)
+  let slotval1 = gen_qpoint_types.QPoint(h: offset, owned: false)
   var virtualReturn = vtbl[].redirected(self, slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QTimeEditsharedPainter*(self: gen_qdatetimeedit_types.QTimeEdit, ): gen_qpainter_types.QPainter =
-  gen_qpainter_types.QPainter(h: fcQTimeEdit_virtualbase_sharedPainter(self.h))
+  gen_qpainter_types.QPainter(h: fcQTimeEdit_virtualbase_sharedPainter(self.h), owned: false)
 
 proc miqt_exec_callback_cQTimeEdit_sharedPainter(vtbl: pointer, self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QTimeEditVTable](vtbl)
   let self = QTimeEdit(h: self)
   var virtualReturn = vtbl[].sharedPainter(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QTimeEditinputMethodEvent*(self: gen_qdatetimeedit_types.QTimeEdit, param1: gen_qevent_types.QInputMethodEvent): void =
   fcQTimeEdit_virtualbase_inputMethodEvent(self.h, param1.h)
@@ -3223,7 +4274,7 @@ proc QTimeEditinputMethodEvent*(self: gen_qdatetimeedit_types.QTimeEdit, param1:
 proc miqt_exec_callback_cQTimeEdit_inputMethodEvent(vtbl: pointer, self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QTimeEditVTable](vtbl)
   let self = QTimeEdit(h: self)
-  let slotval1 = gen_qevent_types.QInputMethodEvent(h: param1)
+  let slotval1 = gen_qevent_types.QInputMethodEvent(h: param1, owned: false)
   vtbl[].inputMethodEvent(self, slotval1)
 
 proc QTimeEditeventFilter*(self: gen_qdatetimeedit_types.QTimeEdit, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool =
@@ -3232,8 +4283,8 @@ proc QTimeEditeventFilter*(self: gen_qdatetimeedit_types.QTimeEdit, watched: gen
 proc miqt_exec_callback_cQTimeEdit_eventFilter(vtbl: pointer, self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QTimeEditVTable](vtbl)
   let self = QTimeEdit(h: self)
-  let slotval1 = gen_qobject_types.QObject(h: watched)
-  let slotval2 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].eventFilter(self, slotval1, slotval2)
   virtualReturn
 
@@ -3243,7 +4294,7 @@ proc QTimeEditchildEvent*(self: gen_qdatetimeedit_types.QTimeEdit, event: gen_qc
 proc miqt_exec_callback_cQTimeEdit_childEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QTimeEditVTable](vtbl)
   let self = QTimeEdit(h: self)
-  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   vtbl[].childEvent(self, slotval1)
 
 proc QTimeEditcustomEvent*(self: gen_qdatetimeedit_types.QTimeEdit, event: gen_qcoreevent_types.QEvent): void =
@@ -3252,7 +4303,7 @@ proc QTimeEditcustomEvent*(self: gen_qdatetimeedit_types.QTimeEdit, event: gen_q
 proc miqt_exec_callback_cQTimeEdit_customEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QTimeEditVTable](vtbl)
   let self = QTimeEdit(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].customEvent(self, slotval1)
 
 proc QTimeEditconnectNotify*(self: gen_qdatetimeedit_types.QTimeEdit, signal: gen_qmetaobject_types.QMetaMethod): void =
@@ -3261,7 +4312,7 @@ proc QTimeEditconnectNotify*(self: gen_qdatetimeedit_types.QTimeEdit, signal: ge
 proc miqt_exec_callback_cQTimeEdit_connectNotify(vtbl: pointer, self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QTimeEditVTable](vtbl)
   let self = QTimeEdit(h: self)
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].connectNotify(self, slotval1)
 
 proc QTimeEditdisconnectNotify*(self: gen_qdatetimeedit_types.QTimeEdit, signal: gen_qmetaobject_types.QMetaMethod): void =
@@ -3270,14 +4321,471 @@ proc QTimeEditdisconnectNotify*(self: gen_qdatetimeedit_types.QTimeEdit, signal:
 proc miqt_exec_callback_cQTimeEdit_disconnectNotify(vtbl: pointer, self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QTimeEditVTable](vtbl)
   let self = QTimeEdit(h: self)
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].disconnectNotify(self, slotval1)
+
+type VirtualQTimeEdit* {.inheritable.} = ref object of QTimeEdit
+  vtbl*: cQTimeEditVTable
+method metaObject*(self: VirtualQTimeEdit, ): gen_qobjectdefs_types.QMetaObject {.base.} =
+  QTimeEditmetaObject(self[])
+proc miqt_exec_method_cQTimeEdit_metaObject(vtbl: pointer, inst: pointer): pointer {.cdecl.} =
+  let vtbl = cast[VirtualQTimeEdit](cast[uint](vtbl) - uint(offsetOf(VirtualQTimeEdit, vtbl)))
+  var virtualReturn = vtbl.metaObject()
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
+
+method metacast*(self: VirtualQTimeEdit, param1: cstring): pointer {.base.} =
+  QTimeEditmetacast(self[], param1)
+proc miqt_exec_method_cQTimeEdit_metacast(vtbl: pointer, inst: pointer, param1: cstring): pointer {.cdecl.} =
+  let vtbl = cast[VirtualQTimeEdit](cast[uint](vtbl) - uint(offsetOf(VirtualQTimeEdit, vtbl)))
+  let slotval1 = (param1)
+  var virtualReturn = vtbl.metacast(slotval1)
+  virtualReturn
+
+method metacall*(self: VirtualQTimeEdit, param1: cint, param2: cint, param3: pointer): cint {.base.} =
+  QTimeEditmetacall(self[], param1, param2, param3)
+proc miqt_exec_method_cQTimeEdit_metacall(vtbl: pointer, inst: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
+  let vtbl = cast[VirtualQTimeEdit](cast[uint](vtbl) - uint(offsetOf(VirtualQTimeEdit, vtbl)))
+  let slotval1 = cint(param1)
+  let slotval2 = param2
+  let slotval3 = param3
+  var virtualReturn = vtbl.metacall(slotval1, slotval2, slotval3)
+  virtualReturn
+
+method sizeHint*(self: VirtualQTimeEdit, ): gen_qsize_types.QSize {.base.} =
+  QTimeEditsizeHint(self[])
+proc miqt_exec_method_cQTimeEdit_sizeHint(vtbl: pointer, inst: pointer): pointer {.cdecl.} =
+  let vtbl = cast[VirtualQTimeEdit](cast[uint](vtbl) - uint(offsetOf(VirtualQTimeEdit, vtbl)))
+  var virtualReturn = vtbl.sizeHint()
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
+
+method clear*(self: VirtualQTimeEdit, ): void {.base.} =
+  QTimeEditclear(self[])
+proc miqt_exec_method_cQTimeEdit_clear(vtbl: pointer, inst: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQTimeEdit](cast[uint](vtbl) - uint(offsetOf(VirtualQTimeEdit, vtbl)))
+  vtbl.clear()
+
+method stepBy*(self: VirtualQTimeEdit, steps: cint): void {.base.} =
+  QTimeEditstepBy(self[], steps)
+proc miqt_exec_method_cQTimeEdit_stepBy(vtbl: pointer, inst: pointer, steps: cint): void {.cdecl.} =
+  let vtbl = cast[VirtualQTimeEdit](cast[uint](vtbl) - uint(offsetOf(VirtualQTimeEdit, vtbl)))
+  let slotval1 = steps
+  vtbl.stepBy(slotval1)
+
+method event*(self: VirtualQTimeEdit, event: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QTimeEditevent(self[], event)
+proc miqt_exec_method_cQTimeEdit_event(vtbl: pointer, inst: pointer, event: pointer): bool {.cdecl.} =
+  let vtbl = cast[VirtualQTimeEdit](cast[uint](vtbl) - uint(offsetOf(VirtualQTimeEdit, vtbl)))
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
+  var virtualReturn = vtbl.event(slotval1)
+  virtualReturn
+
+method keyPressEvent*(self: VirtualQTimeEdit, event: gen_qevent_types.QKeyEvent): void {.base.} =
+  QTimeEditkeyPressEvent(self[], event)
+proc miqt_exec_method_cQTimeEdit_keyPressEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQTimeEdit](cast[uint](vtbl) - uint(offsetOf(VirtualQTimeEdit, vtbl)))
+  let slotval1 = gen_qevent_types.QKeyEvent(h: event, owned: false)
+  vtbl.keyPressEvent(slotval1)
+
+method wheelEvent*(self: VirtualQTimeEdit, event: gen_qevent_types.QWheelEvent): void {.base.} =
+  QTimeEditwheelEvent(self[], event)
+proc miqt_exec_method_cQTimeEdit_wheelEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQTimeEdit](cast[uint](vtbl) - uint(offsetOf(VirtualQTimeEdit, vtbl)))
+  let slotval1 = gen_qevent_types.QWheelEvent(h: event, owned: false)
+  vtbl.wheelEvent(slotval1)
+
+method focusInEvent*(self: VirtualQTimeEdit, event: gen_qevent_types.QFocusEvent): void {.base.} =
+  QTimeEditfocusInEvent(self[], event)
+proc miqt_exec_method_cQTimeEdit_focusInEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQTimeEdit](cast[uint](vtbl) - uint(offsetOf(VirtualQTimeEdit, vtbl)))
+  let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
+  vtbl.focusInEvent(slotval1)
+
+method focusNextPrevChild*(self: VirtualQTimeEdit, next: bool): bool {.base.} =
+  QTimeEditfocusNextPrevChild(self[], next)
+proc miqt_exec_method_cQTimeEdit_focusNextPrevChild(vtbl: pointer, inst: pointer, next: bool): bool {.cdecl.} =
+  let vtbl = cast[VirtualQTimeEdit](cast[uint](vtbl) - uint(offsetOf(VirtualQTimeEdit, vtbl)))
+  let slotval1 = next
+  var virtualReturn = vtbl.focusNextPrevChild(slotval1)
+  virtualReturn
+
+method validate*(self: VirtualQTimeEdit, input: string, pos: ptr cint): cint {.base.} =
+  QTimeEditvalidate(self[], input, pos)
+proc miqt_exec_method_cQTimeEdit_validate(vtbl: pointer, inst: pointer, input: struct_miqt_string, pos: ptr cint): cint {.cdecl.} =
+  let vtbl = cast[VirtualQTimeEdit](cast[uint](vtbl) - uint(offsetOf(VirtualQTimeEdit, vtbl)))
+  let vinput_ms = input
+  let vinputx_ret = string.fromBytes(toOpenArrayByte(vinput_ms.data, 0, int(vinput_ms.len)-1))
+  c_free(vinput_ms.data)
+  let slotval1 = vinputx_ret
+  let slotval2 = pos
+  var virtualReturn = vtbl.validate(slotval1, slotval2)
+  cint(virtualReturn)
+
+method fixup*(self: VirtualQTimeEdit, input: string): void {.base.} =
+  QTimeEditfixup(self[], input)
+proc miqt_exec_method_cQTimeEdit_fixup(vtbl: pointer, inst: pointer, input: struct_miqt_string): void {.cdecl.} =
+  let vtbl = cast[VirtualQTimeEdit](cast[uint](vtbl) - uint(offsetOf(VirtualQTimeEdit, vtbl)))
+  let vinput_ms = input
+  let vinputx_ret = string.fromBytes(toOpenArrayByte(vinput_ms.data, 0, int(vinput_ms.len)-1))
+  c_free(vinput_ms.data)
+  let slotval1 = vinputx_ret
+  vtbl.fixup(slotval1)
+
+method dateTimeFromText*(self: VirtualQTimeEdit, text: string): gen_qdatetime_types.QDateTime {.base.} =
+  QTimeEditdateTimeFromText(self[], text)
+proc miqt_exec_method_cQTimeEdit_dateTimeFromText(vtbl: pointer, inst: pointer, text: struct_miqt_string): pointer {.cdecl.} =
+  let vtbl = cast[VirtualQTimeEdit](cast[uint](vtbl) - uint(offsetOf(VirtualQTimeEdit, vtbl)))
+  let vtext_ms = text
+  let vtextx_ret = string.fromBytes(toOpenArrayByte(vtext_ms.data, 0, int(vtext_ms.len)-1))
+  c_free(vtext_ms.data)
+  let slotval1 = vtextx_ret
+  var virtualReturn = vtbl.dateTimeFromText(slotval1)
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
+
+method textFromDateTime*(self: VirtualQTimeEdit, dt: gen_qdatetime_types.QDateTime): string {.base.} =
+  QTimeEdittextFromDateTime(self[], dt)
+proc miqt_exec_method_cQTimeEdit_textFromDateTime(vtbl: pointer, inst: pointer, dt: pointer): struct_miqt_string {.cdecl.} =
+  let vtbl = cast[VirtualQTimeEdit](cast[uint](vtbl) - uint(offsetOf(VirtualQTimeEdit, vtbl)))
+  let slotval1 = gen_qdatetime_types.QDateTime(h: dt, owned: false)
+  var virtualReturn = vtbl.textFromDateTime(slotval1)
+  var virtualReturn_copy = cast[cstring](if len(virtualReturn) > 0: c_malloc(csize_t(len(virtualReturn))) else: nil)
+  if len(virtualReturn) > 0: copyMem(cast[pointer](virtualReturn_copy), addr virtualReturn[0], csize_t(len(virtualReturn)))
+  struct_miqt_string(data: virtualReturn_copy, len: csize_t(len(virtualReturn)))
+
+method stepEnabled*(self: VirtualQTimeEdit, ): cint {.base.} =
+  QTimeEditstepEnabled(self[])
+proc miqt_exec_method_cQTimeEdit_stepEnabled(vtbl: pointer, inst: pointer): cint {.cdecl.} =
+  let vtbl = cast[VirtualQTimeEdit](cast[uint](vtbl) - uint(offsetOf(VirtualQTimeEdit, vtbl)))
+  var virtualReturn = vtbl.stepEnabled()
+  cint(virtualReturn)
+
+method mousePressEvent*(self: VirtualQTimeEdit, event: gen_qevent_types.QMouseEvent): void {.base.} =
+  QTimeEditmousePressEvent(self[], event)
+proc miqt_exec_method_cQTimeEdit_mousePressEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQTimeEdit](cast[uint](vtbl) - uint(offsetOf(VirtualQTimeEdit, vtbl)))
+  let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
+  vtbl.mousePressEvent(slotval1)
+
+method paintEvent*(self: VirtualQTimeEdit, event: gen_qevent_types.QPaintEvent): void {.base.} =
+  QTimeEditpaintEvent(self[], event)
+proc miqt_exec_method_cQTimeEdit_paintEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQTimeEdit](cast[uint](vtbl) - uint(offsetOf(VirtualQTimeEdit, vtbl)))
+  let slotval1 = gen_qevent_types.QPaintEvent(h: event, owned: false)
+  vtbl.paintEvent(slotval1)
+
+method minimumSizeHint*(self: VirtualQTimeEdit, ): gen_qsize_types.QSize {.base.} =
+  QTimeEditminimumSizeHint(self[])
+proc miqt_exec_method_cQTimeEdit_minimumSizeHint(vtbl: pointer, inst: pointer): pointer {.cdecl.} =
+  let vtbl = cast[VirtualQTimeEdit](cast[uint](vtbl) - uint(offsetOf(VirtualQTimeEdit, vtbl)))
+  var virtualReturn = vtbl.minimumSizeHint()
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
+
+method inputMethodQuery*(self: VirtualQTimeEdit, param1: cint): gen_qvariant_types.QVariant {.base.} =
+  QTimeEditinputMethodQuery(self[], param1)
+proc miqt_exec_method_cQTimeEdit_inputMethodQuery(vtbl: pointer, inst: pointer, param1: cint): pointer {.cdecl.} =
+  let vtbl = cast[VirtualQTimeEdit](cast[uint](vtbl) - uint(offsetOf(VirtualQTimeEdit, vtbl)))
+  let slotval1 = cint(param1)
+  var virtualReturn = vtbl.inputMethodQuery(slotval1)
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
+
+method resizeEvent*(self: VirtualQTimeEdit, event: gen_qevent_types.QResizeEvent): void {.base.} =
+  QTimeEditresizeEvent(self[], event)
+proc miqt_exec_method_cQTimeEdit_resizeEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQTimeEdit](cast[uint](vtbl) - uint(offsetOf(VirtualQTimeEdit, vtbl)))
+  let slotval1 = gen_qevent_types.QResizeEvent(h: event, owned: false)
+  vtbl.resizeEvent(slotval1)
+
+method keyReleaseEvent*(self: VirtualQTimeEdit, event: gen_qevent_types.QKeyEvent): void {.base.} =
+  QTimeEditkeyReleaseEvent(self[], event)
+proc miqt_exec_method_cQTimeEdit_keyReleaseEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQTimeEdit](cast[uint](vtbl) - uint(offsetOf(VirtualQTimeEdit, vtbl)))
+  let slotval1 = gen_qevent_types.QKeyEvent(h: event, owned: false)
+  vtbl.keyReleaseEvent(slotval1)
+
+method focusOutEvent*(self: VirtualQTimeEdit, event: gen_qevent_types.QFocusEvent): void {.base.} =
+  QTimeEditfocusOutEvent(self[], event)
+proc miqt_exec_method_cQTimeEdit_focusOutEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQTimeEdit](cast[uint](vtbl) - uint(offsetOf(VirtualQTimeEdit, vtbl)))
+  let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
+  vtbl.focusOutEvent(slotval1)
+
+method contextMenuEvent*(self: VirtualQTimeEdit, event: gen_qevent_types.QContextMenuEvent): void {.base.} =
+  QTimeEditcontextMenuEvent(self[], event)
+proc miqt_exec_method_cQTimeEdit_contextMenuEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQTimeEdit](cast[uint](vtbl) - uint(offsetOf(VirtualQTimeEdit, vtbl)))
+  let slotval1 = gen_qevent_types.QContextMenuEvent(h: event, owned: false)
+  vtbl.contextMenuEvent(slotval1)
+
+method changeEvent*(self: VirtualQTimeEdit, event: gen_qcoreevent_types.QEvent): void {.base.} =
+  QTimeEditchangeEvent(self[], event)
+proc miqt_exec_method_cQTimeEdit_changeEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQTimeEdit](cast[uint](vtbl) - uint(offsetOf(VirtualQTimeEdit, vtbl)))
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
+  vtbl.changeEvent(slotval1)
+
+method closeEvent*(self: VirtualQTimeEdit, event: gen_qevent_types.QCloseEvent): void {.base.} =
+  QTimeEditcloseEvent(self[], event)
+proc miqt_exec_method_cQTimeEdit_closeEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQTimeEdit](cast[uint](vtbl) - uint(offsetOf(VirtualQTimeEdit, vtbl)))
+  let slotval1 = gen_qevent_types.QCloseEvent(h: event, owned: false)
+  vtbl.closeEvent(slotval1)
+
+method hideEvent*(self: VirtualQTimeEdit, event: gen_qevent_types.QHideEvent): void {.base.} =
+  QTimeEdithideEvent(self[], event)
+proc miqt_exec_method_cQTimeEdit_hideEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQTimeEdit](cast[uint](vtbl) - uint(offsetOf(VirtualQTimeEdit, vtbl)))
+  let slotval1 = gen_qevent_types.QHideEvent(h: event, owned: false)
+  vtbl.hideEvent(slotval1)
+
+method mouseReleaseEvent*(self: VirtualQTimeEdit, event: gen_qevent_types.QMouseEvent): void {.base.} =
+  QTimeEditmouseReleaseEvent(self[], event)
+proc miqt_exec_method_cQTimeEdit_mouseReleaseEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQTimeEdit](cast[uint](vtbl) - uint(offsetOf(VirtualQTimeEdit, vtbl)))
+  let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
+  vtbl.mouseReleaseEvent(slotval1)
+
+method mouseMoveEvent*(self: VirtualQTimeEdit, event: gen_qevent_types.QMouseEvent): void {.base.} =
+  QTimeEditmouseMoveEvent(self[], event)
+proc miqt_exec_method_cQTimeEdit_mouseMoveEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQTimeEdit](cast[uint](vtbl) - uint(offsetOf(VirtualQTimeEdit, vtbl)))
+  let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
+  vtbl.mouseMoveEvent(slotval1)
+
+method timerEvent*(self: VirtualQTimeEdit, event: gen_qcoreevent_types.QTimerEvent): void {.base.} =
+  QTimeEdittimerEvent(self[], event)
+proc miqt_exec_method_cQTimeEdit_timerEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQTimeEdit](cast[uint](vtbl) - uint(offsetOf(VirtualQTimeEdit, vtbl)))
+  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
+  vtbl.timerEvent(slotval1)
+
+method showEvent*(self: VirtualQTimeEdit, event: gen_qevent_types.QShowEvent): void {.base.} =
+  QTimeEditshowEvent(self[], event)
+proc miqt_exec_method_cQTimeEdit_showEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQTimeEdit](cast[uint](vtbl) - uint(offsetOf(VirtualQTimeEdit, vtbl)))
+  let slotval1 = gen_qevent_types.QShowEvent(h: event, owned: false)
+  vtbl.showEvent(slotval1)
+
+method devType*(self: VirtualQTimeEdit, ): cint {.base.} =
+  QTimeEditdevType(self[])
+proc miqt_exec_method_cQTimeEdit_devType(vtbl: pointer, inst: pointer): cint {.cdecl.} =
+  let vtbl = cast[VirtualQTimeEdit](cast[uint](vtbl) - uint(offsetOf(VirtualQTimeEdit, vtbl)))
+  var virtualReturn = vtbl.devType()
+  virtualReturn
+
+method setVisible*(self: VirtualQTimeEdit, visible: bool): void {.base.} =
+  QTimeEditsetVisible(self[], visible)
+proc miqt_exec_method_cQTimeEdit_setVisible(vtbl: pointer, inst: pointer, visible: bool): void {.cdecl.} =
+  let vtbl = cast[VirtualQTimeEdit](cast[uint](vtbl) - uint(offsetOf(VirtualQTimeEdit, vtbl)))
+  let slotval1 = visible
+  vtbl.setVisible(slotval1)
+
+method heightForWidth*(self: VirtualQTimeEdit, param1: cint): cint {.base.} =
+  QTimeEditheightForWidth(self[], param1)
+proc miqt_exec_method_cQTimeEdit_heightForWidth(vtbl: pointer, inst: pointer, param1: cint): cint {.cdecl.} =
+  let vtbl = cast[VirtualQTimeEdit](cast[uint](vtbl) - uint(offsetOf(VirtualQTimeEdit, vtbl)))
+  let slotval1 = param1
+  var virtualReturn = vtbl.heightForWidth(slotval1)
+  virtualReturn
+
+method hasHeightForWidth*(self: VirtualQTimeEdit, ): bool {.base.} =
+  QTimeEdithasHeightForWidth(self[])
+proc miqt_exec_method_cQTimeEdit_hasHeightForWidth(vtbl: pointer, inst: pointer): bool {.cdecl.} =
+  let vtbl = cast[VirtualQTimeEdit](cast[uint](vtbl) - uint(offsetOf(VirtualQTimeEdit, vtbl)))
+  var virtualReturn = vtbl.hasHeightForWidth()
+  virtualReturn
+
+method paintEngine*(self: VirtualQTimeEdit, ): gen_qpaintengine_types.QPaintEngine {.base.} =
+  QTimeEditpaintEngine(self[])
+proc miqt_exec_method_cQTimeEdit_paintEngine(vtbl: pointer, inst: pointer): pointer {.cdecl.} =
+  let vtbl = cast[VirtualQTimeEdit](cast[uint](vtbl) - uint(offsetOf(VirtualQTimeEdit, vtbl)))
+  var virtualReturn = vtbl.paintEngine()
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
+
+method mouseDoubleClickEvent*(self: VirtualQTimeEdit, event: gen_qevent_types.QMouseEvent): void {.base.} =
+  QTimeEditmouseDoubleClickEvent(self[], event)
+proc miqt_exec_method_cQTimeEdit_mouseDoubleClickEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQTimeEdit](cast[uint](vtbl) - uint(offsetOf(VirtualQTimeEdit, vtbl)))
+  let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
+  vtbl.mouseDoubleClickEvent(slotval1)
+
+method enterEvent*(self: VirtualQTimeEdit, event: gen_qcoreevent_types.QEvent): void {.base.} =
+  QTimeEditenterEvent(self[], event)
+proc miqt_exec_method_cQTimeEdit_enterEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQTimeEdit](cast[uint](vtbl) - uint(offsetOf(VirtualQTimeEdit, vtbl)))
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
+  vtbl.enterEvent(slotval1)
+
+method leaveEvent*(self: VirtualQTimeEdit, event: gen_qcoreevent_types.QEvent): void {.base.} =
+  QTimeEditleaveEvent(self[], event)
+proc miqt_exec_method_cQTimeEdit_leaveEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQTimeEdit](cast[uint](vtbl) - uint(offsetOf(VirtualQTimeEdit, vtbl)))
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
+  vtbl.leaveEvent(slotval1)
+
+method moveEvent*(self: VirtualQTimeEdit, event: gen_qevent_types.QMoveEvent): void {.base.} =
+  QTimeEditmoveEvent(self[], event)
+proc miqt_exec_method_cQTimeEdit_moveEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQTimeEdit](cast[uint](vtbl) - uint(offsetOf(VirtualQTimeEdit, vtbl)))
+  let slotval1 = gen_qevent_types.QMoveEvent(h: event, owned: false)
+  vtbl.moveEvent(slotval1)
+
+method tabletEvent*(self: VirtualQTimeEdit, event: gen_qevent_types.QTabletEvent): void {.base.} =
+  QTimeEdittabletEvent(self[], event)
+proc miqt_exec_method_cQTimeEdit_tabletEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQTimeEdit](cast[uint](vtbl) - uint(offsetOf(VirtualQTimeEdit, vtbl)))
+  let slotval1 = gen_qevent_types.QTabletEvent(h: event, owned: false)
+  vtbl.tabletEvent(slotval1)
+
+method actionEvent*(self: VirtualQTimeEdit, event: gen_qevent_types.QActionEvent): void {.base.} =
+  QTimeEditactionEvent(self[], event)
+proc miqt_exec_method_cQTimeEdit_actionEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQTimeEdit](cast[uint](vtbl) - uint(offsetOf(VirtualQTimeEdit, vtbl)))
+  let slotval1 = gen_qevent_types.QActionEvent(h: event, owned: false)
+  vtbl.actionEvent(slotval1)
+
+method dragEnterEvent*(self: VirtualQTimeEdit, event: gen_qevent_types.QDragEnterEvent): void {.base.} =
+  QTimeEditdragEnterEvent(self[], event)
+proc miqt_exec_method_cQTimeEdit_dragEnterEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQTimeEdit](cast[uint](vtbl) - uint(offsetOf(VirtualQTimeEdit, vtbl)))
+  let slotval1 = gen_qevent_types.QDragEnterEvent(h: event, owned: false)
+  vtbl.dragEnterEvent(slotval1)
+
+method dragMoveEvent*(self: VirtualQTimeEdit, event: gen_qevent_types.QDragMoveEvent): void {.base.} =
+  QTimeEditdragMoveEvent(self[], event)
+proc miqt_exec_method_cQTimeEdit_dragMoveEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQTimeEdit](cast[uint](vtbl) - uint(offsetOf(VirtualQTimeEdit, vtbl)))
+  let slotval1 = gen_qevent_types.QDragMoveEvent(h: event, owned: false)
+  vtbl.dragMoveEvent(slotval1)
+
+method dragLeaveEvent*(self: VirtualQTimeEdit, event: gen_qevent_types.QDragLeaveEvent): void {.base.} =
+  QTimeEditdragLeaveEvent(self[], event)
+proc miqt_exec_method_cQTimeEdit_dragLeaveEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQTimeEdit](cast[uint](vtbl) - uint(offsetOf(VirtualQTimeEdit, vtbl)))
+  let slotval1 = gen_qevent_types.QDragLeaveEvent(h: event, owned: false)
+  vtbl.dragLeaveEvent(slotval1)
+
+method dropEvent*(self: VirtualQTimeEdit, event: gen_qevent_types.QDropEvent): void {.base.} =
+  QTimeEditdropEvent(self[], event)
+proc miqt_exec_method_cQTimeEdit_dropEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQTimeEdit](cast[uint](vtbl) - uint(offsetOf(VirtualQTimeEdit, vtbl)))
+  let slotval1 = gen_qevent_types.QDropEvent(h: event, owned: false)
+  vtbl.dropEvent(slotval1)
+
+method nativeEvent*(self: VirtualQTimeEdit, eventType: seq[byte], message: pointer, resultVal: ptr clong): bool {.base.} =
+  QTimeEditnativeEvent(self[], eventType, message, resultVal)
+proc miqt_exec_method_cQTimeEdit_nativeEvent(vtbl: pointer, inst: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr clong): bool {.cdecl.} =
+  let vtbl = cast[VirtualQTimeEdit](cast[uint](vtbl) - uint(offsetOf(VirtualQTimeEdit, vtbl)))
+  var veventType_bytearray = eventType
+  var veventTypex_ret = @(toOpenArrayByte(veventType_bytearray.data, 0, int(veventType_bytearray.len)-1))
+  c_free(veventType_bytearray.data)
+  let slotval1 = veventTypex_ret
+  let slotval2 = message
+  let slotval3 = resultVal
+  var virtualReturn = vtbl.nativeEvent(slotval1, slotval2, slotval3)
+  virtualReturn
+
+method metric*(self: VirtualQTimeEdit, param1: cint): cint {.base.} =
+  QTimeEditmetric(self[], param1)
+proc miqt_exec_method_cQTimeEdit_metric(vtbl: pointer, inst: pointer, param1: cint): cint {.cdecl.} =
+  let vtbl = cast[VirtualQTimeEdit](cast[uint](vtbl) - uint(offsetOf(VirtualQTimeEdit, vtbl)))
+  let slotval1 = cint(param1)
+  var virtualReturn = vtbl.metric(slotval1)
+  virtualReturn
+
+method initPainter*(self: VirtualQTimeEdit, painter: gen_qpainter_types.QPainter): void {.base.} =
+  QTimeEditinitPainter(self[], painter)
+proc miqt_exec_method_cQTimeEdit_initPainter(vtbl: pointer, inst: pointer, painter: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQTimeEdit](cast[uint](vtbl) - uint(offsetOf(VirtualQTimeEdit, vtbl)))
+  let slotval1 = gen_qpainter_types.QPainter(h: painter, owned: false)
+  vtbl.initPainter(slotval1)
+
+method redirected*(self: VirtualQTimeEdit, offset: gen_qpoint_types.QPoint): gen_qpaintdevice_types.QPaintDevice {.base.} =
+  QTimeEditredirected(self[], offset)
+proc miqt_exec_method_cQTimeEdit_redirected(vtbl: pointer, inst: pointer, offset: pointer): pointer {.cdecl.} =
+  let vtbl = cast[VirtualQTimeEdit](cast[uint](vtbl) - uint(offsetOf(VirtualQTimeEdit, vtbl)))
+  let slotval1 = gen_qpoint_types.QPoint(h: offset, owned: false)
+  var virtualReturn = vtbl.redirected(slotval1)
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
+
+method sharedPainter*(self: VirtualQTimeEdit, ): gen_qpainter_types.QPainter {.base.} =
+  QTimeEditsharedPainter(self[])
+proc miqt_exec_method_cQTimeEdit_sharedPainter(vtbl: pointer, inst: pointer): pointer {.cdecl.} =
+  let vtbl = cast[VirtualQTimeEdit](cast[uint](vtbl) - uint(offsetOf(VirtualQTimeEdit, vtbl)))
+  var virtualReturn = vtbl.sharedPainter()
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
+
+method inputMethodEvent*(self: VirtualQTimeEdit, param1: gen_qevent_types.QInputMethodEvent): void {.base.} =
+  QTimeEditinputMethodEvent(self[], param1)
+proc miqt_exec_method_cQTimeEdit_inputMethodEvent(vtbl: pointer, inst: pointer, param1: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQTimeEdit](cast[uint](vtbl) - uint(offsetOf(VirtualQTimeEdit, vtbl)))
+  let slotval1 = gen_qevent_types.QInputMethodEvent(h: param1, owned: false)
+  vtbl.inputMethodEvent(slotval1)
+
+method eventFilter*(self: VirtualQTimeEdit, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QTimeEditeventFilter(self[], watched, event)
+proc miqt_exec_method_cQTimeEdit_eventFilter(vtbl: pointer, inst: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
+  let vtbl = cast[VirtualQTimeEdit](cast[uint](vtbl) - uint(offsetOf(VirtualQTimeEdit, vtbl)))
+  let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
+  var virtualReturn = vtbl.eventFilter(slotval1, slotval2)
+  virtualReturn
+
+method childEvent*(self: VirtualQTimeEdit, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
+  QTimeEditchildEvent(self[], event)
+proc miqt_exec_method_cQTimeEdit_childEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQTimeEdit](cast[uint](vtbl) - uint(offsetOf(VirtualQTimeEdit, vtbl)))
+  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
+  vtbl.childEvent(slotval1)
+
+method customEvent*(self: VirtualQTimeEdit, event: gen_qcoreevent_types.QEvent): void {.base.} =
+  QTimeEditcustomEvent(self[], event)
+proc miqt_exec_method_cQTimeEdit_customEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQTimeEdit](cast[uint](vtbl) - uint(offsetOf(VirtualQTimeEdit, vtbl)))
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
+  vtbl.customEvent(slotval1)
+
+method connectNotify*(self: VirtualQTimeEdit, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QTimeEditconnectNotify(self[], signal)
+proc miqt_exec_method_cQTimeEdit_connectNotify(vtbl: pointer, inst: pointer, signal: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQTimeEdit](cast[uint](vtbl) - uint(offsetOf(VirtualQTimeEdit, vtbl)))
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
+  vtbl.connectNotify(slotval1)
+
+method disconnectNotify*(self: VirtualQTimeEdit, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QTimeEditdisconnectNotify(self[], signal)
+proc miqt_exec_method_cQTimeEdit_disconnectNotify(vtbl: pointer, inst: pointer, signal: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQTimeEdit](cast[uint](vtbl) - uint(offsetOf(VirtualQTimeEdit, vtbl)))
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
+  vtbl.disconnectNotify(slotval1)
 
 proc initStyleOption*(self: gen_qdatetimeedit_types.QTimeEdit, option: gen_qstyleoption_types.QStyleOptionSpinBox): void =
   fcQTimeEdit_protectedbase_initStyleOption(self.h, option.h)
 
 proc lineEdit*(self: gen_qdatetimeedit_types.QTimeEdit, ): gen_qlineedit_types.QLineEdit =
-  gen_qlineedit_types.QLineEdit(h: fcQTimeEdit_protectedbase_lineEdit(self.h))
+  gen_qlineedit_types.QLineEdit(h: fcQTimeEdit_protectedbase_lineEdit(self.h), owned: false)
 
 proc setLineEdit*(self: gen_qdatetimeedit_types.QTimeEdit, edit: gen_qlineedit_types.QLineEdit): void =
   fcQTimeEdit_protectedbase_setLineEdit(self.h, edit.h)
@@ -3298,7 +4806,7 @@ proc focusPreviousChild*(self: gen_qdatetimeedit_types.QTimeEdit, ): bool =
   fcQTimeEdit_protectedbase_focusPreviousChild(self.h)
 
 proc sender*(self: gen_qdatetimeedit_types.QTimeEdit, ): gen_qobject_types.QObject =
-  gen_qobject_types.QObject(h: fcQTimeEdit_protectedbase_sender(self.h))
+  gen_qobject_types.QObject(h: fcQTimeEdit_protectedbase_sender(self.h), owned: false)
 
 proc senderSignalIndex*(self: gen_qdatetimeedit_types.QTimeEdit, ): cint =
   fcQTimeEdit_protectedbase_senderSignalIndex(self.h)
@@ -3314,502 +4822,775 @@ proc create*(T: type gen_qdatetimeedit_types.QTimeEdit,
     vtbl: ref QTimeEditVTable = nil): gen_qdatetimeedit_types.QTimeEdit =
   let vtbl = if vtbl == nil: new QTimeEditVTable else: vtbl
   GC_ref(vtbl)
-  vtbl.vtbl.destructor = proc(vtbl: ptr cQTimeEditVTable, _: ptr cQTimeEdit) {.cdecl.} =
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQTimeEditVTable, _: ptr cQTimeEdit) {.cdecl.} =
     let vtbl = cast[ref QTimeEditVTable](vtbl)
     GC_unref(vtbl)
-  if not isNil(vtbl.metaObject):
+  if not isNil(vtbl[].metaObject):
     vtbl[].vtbl.metaObject = miqt_exec_callback_cQTimeEdit_metaObject
-  if not isNil(vtbl.metacast):
+  if not isNil(vtbl[].metacast):
     vtbl[].vtbl.metacast = miqt_exec_callback_cQTimeEdit_metacast
-  if not isNil(vtbl.metacall):
+  if not isNil(vtbl[].metacall):
     vtbl[].vtbl.metacall = miqt_exec_callback_cQTimeEdit_metacall
-  if not isNil(vtbl.sizeHint):
+  if not isNil(vtbl[].sizeHint):
     vtbl[].vtbl.sizeHint = miqt_exec_callback_cQTimeEdit_sizeHint
-  if not isNil(vtbl.clear):
+  if not isNil(vtbl[].clear):
     vtbl[].vtbl.clear = miqt_exec_callback_cQTimeEdit_clear
-  if not isNil(vtbl.stepBy):
+  if not isNil(vtbl[].stepBy):
     vtbl[].vtbl.stepBy = miqt_exec_callback_cQTimeEdit_stepBy
-  if not isNil(vtbl.event):
+  if not isNil(vtbl[].event):
     vtbl[].vtbl.event = miqt_exec_callback_cQTimeEdit_event
-  if not isNil(vtbl.keyPressEvent):
+  if not isNil(vtbl[].keyPressEvent):
     vtbl[].vtbl.keyPressEvent = miqt_exec_callback_cQTimeEdit_keyPressEvent
-  if not isNil(vtbl.wheelEvent):
+  if not isNil(vtbl[].wheelEvent):
     vtbl[].vtbl.wheelEvent = miqt_exec_callback_cQTimeEdit_wheelEvent
-  if not isNil(vtbl.focusInEvent):
+  if not isNil(vtbl[].focusInEvent):
     vtbl[].vtbl.focusInEvent = miqt_exec_callback_cQTimeEdit_focusInEvent
-  if not isNil(vtbl.focusNextPrevChild):
+  if not isNil(vtbl[].focusNextPrevChild):
     vtbl[].vtbl.focusNextPrevChild = miqt_exec_callback_cQTimeEdit_focusNextPrevChild
-  if not isNil(vtbl.validate):
+  if not isNil(vtbl[].validate):
     vtbl[].vtbl.validate = miqt_exec_callback_cQTimeEdit_validate
-  if not isNil(vtbl.fixup):
+  if not isNil(vtbl[].fixup):
     vtbl[].vtbl.fixup = miqt_exec_callback_cQTimeEdit_fixup
-  if not isNil(vtbl.dateTimeFromText):
+  if not isNil(vtbl[].dateTimeFromText):
     vtbl[].vtbl.dateTimeFromText = miqt_exec_callback_cQTimeEdit_dateTimeFromText
-  if not isNil(vtbl.textFromDateTime):
+  if not isNil(vtbl[].textFromDateTime):
     vtbl[].vtbl.textFromDateTime = miqt_exec_callback_cQTimeEdit_textFromDateTime
-  if not isNil(vtbl.stepEnabled):
+  if not isNil(vtbl[].stepEnabled):
     vtbl[].vtbl.stepEnabled = miqt_exec_callback_cQTimeEdit_stepEnabled
-  if not isNil(vtbl.mousePressEvent):
+  if not isNil(vtbl[].mousePressEvent):
     vtbl[].vtbl.mousePressEvent = miqt_exec_callback_cQTimeEdit_mousePressEvent
-  if not isNil(vtbl.paintEvent):
+  if not isNil(vtbl[].paintEvent):
     vtbl[].vtbl.paintEvent = miqt_exec_callback_cQTimeEdit_paintEvent
-  if not isNil(vtbl.minimumSizeHint):
+  if not isNil(vtbl[].minimumSizeHint):
     vtbl[].vtbl.minimumSizeHint = miqt_exec_callback_cQTimeEdit_minimumSizeHint
-  if not isNil(vtbl.inputMethodQuery):
+  if not isNil(vtbl[].inputMethodQuery):
     vtbl[].vtbl.inputMethodQuery = miqt_exec_callback_cQTimeEdit_inputMethodQuery
-  if not isNil(vtbl.resizeEvent):
+  if not isNil(vtbl[].resizeEvent):
     vtbl[].vtbl.resizeEvent = miqt_exec_callback_cQTimeEdit_resizeEvent
-  if not isNil(vtbl.keyReleaseEvent):
+  if not isNil(vtbl[].keyReleaseEvent):
     vtbl[].vtbl.keyReleaseEvent = miqt_exec_callback_cQTimeEdit_keyReleaseEvent
-  if not isNil(vtbl.focusOutEvent):
+  if not isNil(vtbl[].focusOutEvent):
     vtbl[].vtbl.focusOutEvent = miqt_exec_callback_cQTimeEdit_focusOutEvent
-  if not isNil(vtbl.contextMenuEvent):
+  if not isNil(vtbl[].contextMenuEvent):
     vtbl[].vtbl.contextMenuEvent = miqt_exec_callback_cQTimeEdit_contextMenuEvent
-  if not isNil(vtbl.changeEvent):
+  if not isNil(vtbl[].changeEvent):
     vtbl[].vtbl.changeEvent = miqt_exec_callback_cQTimeEdit_changeEvent
-  if not isNil(vtbl.closeEvent):
+  if not isNil(vtbl[].closeEvent):
     vtbl[].vtbl.closeEvent = miqt_exec_callback_cQTimeEdit_closeEvent
-  if not isNil(vtbl.hideEvent):
+  if not isNil(vtbl[].hideEvent):
     vtbl[].vtbl.hideEvent = miqt_exec_callback_cQTimeEdit_hideEvent
-  if not isNil(vtbl.mouseReleaseEvent):
+  if not isNil(vtbl[].mouseReleaseEvent):
     vtbl[].vtbl.mouseReleaseEvent = miqt_exec_callback_cQTimeEdit_mouseReleaseEvent
-  if not isNil(vtbl.mouseMoveEvent):
+  if not isNil(vtbl[].mouseMoveEvent):
     vtbl[].vtbl.mouseMoveEvent = miqt_exec_callback_cQTimeEdit_mouseMoveEvent
-  if not isNil(vtbl.timerEvent):
+  if not isNil(vtbl[].timerEvent):
     vtbl[].vtbl.timerEvent = miqt_exec_callback_cQTimeEdit_timerEvent
-  if not isNil(vtbl.showEvent):
+  if not isNil(vtbl[].showEvent):
     vtbl[].vtbl.showEvent = miqt_exec_callback_cQTimeEdit_showEvent
-  if not isNil(vtbl.devType):
+  if not isNil(vtbl[].devType):
     vtbl[].vtbl.devType = miqt_exec_callback_cQTimeEdit_devType
-  if not isNil(vtbl.setVisible):
+  if not isNil(vtbl[].setVisible):
     vtbl[].vtbl.setVisible = miqt_exec_callback_cQTimeEdit_setVisible
-  if not isNil(vtbl.heightForWidth):
+  if not isNil(vtbl[].heightForWidth):
     vtbl[].vtbl.heightForWidth = miqt_exec_callback_cQTimeEdit_heightForWidth
-  if not isNil(vtbl.hasHeightForWidth):
+  if not isNil(vtbl[].hasHeightForWidth):
     vtbl[].vtbl.hasHeightForWidth = miqt_exec_callback_cQTimeEdit_hasHeightForWidth
-  if not isNil(vtbl.paintEngine):
+  if not isNil(vtbl[].paintEngine):
     vtbl[].vtbl.paintEngine = miqt_exec_callback_cQTimeEdit_paintEngine
-  if not isNil(vtbl.mouseDoubleClickEvent):
+  if not isNil(vtbl[].mouseDoubleClickEvent):
     vtbl[].vtbl.mouseDoubleClickEvent = miqt_exec_callback_cQTimeEdit_mouseDoubleClickEvent
-  if not isNil(vtbl.enterEvent):
+  if not isNil(vtbl[].enterEvent):
     vtbl[].vtbl.enterEvent = miqt_exec_callback_cQTimeEdit_enterEvent
-  if not isNil(vtbl.leaveEvent):
+  if not isNil(vtbl[].leaveEvent):
     vtbl[].vtbl.leaveEvent = miqt_exec_callback_cQTimeEdit_leaveEvent
-  if not isNil(vtbl.moveEvent):
+  if not isNil(vtbl[].moveEvent):
     vtbl[].vtbl.moveEvent = miqt_exec_callback_cQTimeEdit_moveEvent
-  if not isNil(vtbl.tabletEvent):
+  if not isNil(vtbl[].tabletEvent):
     vtbl[].vtbl.tabletEvent = miqt_exec_callback_cQTimeEdit_tabletEvent
-  if not isNil(vtbl.actionEvent):
+  if not isNil(vtbl[].actionEvent):
     vtbl[].vtbl.actionEvent = miqt_exec_callback_cQTimeEdit_actionEvent
-  if not isNil(vtbl.dragEnterEvent):
+  if not isNil(vtbl[].dragEnterEvent):
     vtbl[].vtbl.dragEnterEvent = miqt_exec_callback_cQTimeEdit_dragEnterEvent
-  if not isNil(vtbl.dragMoveEvent):
+  if not isNil(vtbl[].dragMoveEvent):
     vtbl[].vtbl.dragMoveEvent = miqt_exec_callback_cQTimeEdit_dragMoveEvent
-  if not isNil(vtbl.dragLeaveEvent):
+  if not isNil(vtbl[].dragLeaveEvent):
     vtbl[].vtbl.dragLeaveEvent = miqt_exec_callback_cQTimeEdit_dragLeaveEvent
-  if not isNil(vtbl.dropEvent):
+  if not isNil(vtbl[].dropEvent):
     vtbl[].vtbl.dropEvent = miqt_exec_callback_cQTimeEdit_dropEvent
-  if not isNil(vtbl.nativeEvent):
+  if not isNil(vtbl[].nativeEvent):
     vtbl[].vtbl.nativeEvent = miqt_exec_callback_cQTimeEdit_nativeEvent
-  if not isNil(vtbl.metric):
+  if not isNil(vtbl[].metric):
     vtbl[].vtbl.metric = miqt_exec_callback_cQTimeEdit_metric
-  if not isNil(vtbl.initPainter):
+  if not isNil(vtbl[].initPainter):
     vtbl[].vtbl.initPainter = miqt_exec_callback_cQTimeEdit_initPainter
-  if not isNil(vtbl.redirected):
+  if not isNil(vtbl[].redirected):
     vtbl[].vtbl.redirected = miqt_exec_callback_cQTimeEdit_redirected
-  if not isNil(vtbl.sharedPainter):
+  if not isNil(vtbl[].sharedPainter):
     vtbl[].vtbl.sharedPainter = miqt_exec_callback_cQTimeEdit_sharedPainter
-  if not isNil(vtbl.inputMethodEvent):
+  if not isNil(vtbl[].inputMethodEvent):
     vtbl[].vtbl.inputMethodEvent = miqt_exec_callback_cQTimeEdit_inputMethodEvent
-  if not isNil(vtbl.eventFilter):
+  if not isNil(vtbl[].eventFilter):
     vtbl[].vtbl.eventFilter = miqt_exec_callback_cQTimeEdit_eventFilter
-  if not isNil(vtbl.childEvent):
+  if not isNil(vtbl[].childEvent):
     vtbl[].vtbl.childEvent = miqt_exec_callback_cQTimeEdit_childEvent
-  if not isNil(vtbl.customEvent):
+  if not isNil(vtbl[].customEvent):
     vtbl[].vtbl.customEvent = miqt_exec_callback_cQTimeEdit_customEvent
-  if not isNil(vtbl.connectNotify):
+  if not isNil(vtbl[].connectNotify):
     vtbl[].vtbl.connectNotify = miqt_exec_callback_cQTimeEdit_connectNotify
-  if not isNil(vtbl.disconnectNotify):
+  if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQTimeEdit_disconnectNotify
-  gen_qdatetimeedit_types.QTimeEdit(h: fcQTimeEdit_new(addr(vtbl[]), parent.h))
+  gen_qdatetimeedit_types.QTimeEdit(h: fcQTimeEdit_new(addr(vtbl[].vtbl), parent.h), owned: true)
 
 proc create*(T: type gen_qdatetimeedit_types.QTimeEdit,
     vtbl: ref QTimeEditVTable = nil): gen_qdatetimeedit_types.QTimeEdit =
   let vtbl = if vtbl == nil: new QTimeEditVTable else: vtbl
   GC_ref(vtbl)
-  vtbl.vtbl.destructor = proc(vtbl: ptr cQTimeEditVTable, _: ptr cQTimeEdit) {.cdecl.} =
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQTimeEditVTable, _: ptr cQTimeEdit) {.cdecl.} =
     let vtbl = cast[ref QTimeEditVTable](vtbl)
     GC_unref(vtbl)
-  if not isNil(vtbl.metaObject):
+  if not isNil(vtbl[].metaObject):
     vtbl[].vtbl.metaObject = miqt_exec_callback_cQTimeEdit_metaObject
-  if not isNil(vtbl.metacast):
+  if not isNil(vtbl[].metacast):
     vtbl[].vtbl.metacast = miqt_exec_callback_cQTimeEdit_metacast
-  if not isNil(vtbl.metacall):
+  if not isNil(vtbl[].metacall):
     vtbl[].vtbl.metacall = miqt_exec_callback_cQTimeEdit_metacall
-  if not isNil(vtbl.sizeHint):
+  if not isNil(vtbl[].sizeHint):
     vtbl[].vtbl.sizeHint = miqt_exec_callback_cQTimeEdit_sizeHint
-  if not isNil(vtbl.clear):
+  if not isNil(vtbl[].clear):
     vtbl[].vtbl.clear = miqt_exec_callback_cQTimeEdit_clear
-  if not isNil(vtbl.stepBy):
+  if not isNil(vtbl[].stepBy):
     vtbl[].vtbl.stepBy = miqt_exec_callback_cQTimeEdit_stepBy
-  if not isNil(vtbl.event):
+  if not isNil(vtbl[].event):
     vtbl[].vtbl.event = miqt_exec_callback_cQTimeEdit_event
-  if not isNil(vtbl.keyPressEvent):
+  if not isNil(vtbl[].keyPressEvent):
     vtbl[].vtbl.keyPressEvent = miqt_exec_callback_cQTimeEdit_keyPressEvent
-  if not isNil(vtbl.wheelEvent):
+  if not isNil(vtbl[].wheelEvent):
     vtbl[].vtbl.wheelEvent = miqt_exec_callback_cQTimeEdit_wheelEvent
-  if not isNil(vtbl.focusInEvent):
+  if not isNil(vtbl[].focusInEvent):
     vtbl[].vtbl.focusInEvent = miqt_exec_callback_cQTimeEdit_focusInEvent
-  if not isNil(vtbl.focusNextPrevChild):
+  if not isNil(vtbl[].focusNextPrevChild):
     vtbl[].vtbl.focusNextPrevChild = miqt_exec_callback_cQTimeEdit_focusNextPrevChild
-  if not isNil(vtbl.validate):
+  if not isNil(vtbl[].validate):
     vtbl[].vtbl.validate = miqt_exec_callback_cQTimeEdit_validate
-  if not isNil(vtbl.fixup):
+  if not isNil(vtbl[].fixup):
     vtbl[].vtbl.fixup = miqt_exec_callback_cQTimeEdit_fixup
-  if not isNil(vtbl.dateTimeFromText):
+  if not isNil(vtbl[].dateTimeFromText):
     vtbl[].vtbl.dateTimeFromText = miqt_exec_callback_cQTimeEdit_dateTimeFromText
-  if not isNil(vtbl.textFromDateTime):
+  if not isNil(vtbl[].textFromDateTime):
     vtbl[].vtbl.textFromDateTime = miqt_exec_callback_cQTimeEdit_textFromDateTime
-  if not isNil(vtbl.stepEnabled):
+  if not isNil(vtbl[].stepEnabled):
     vtbl[].vtbl.stepEnabled = miqt_exec_callback_cQTimeEdit_stepEnabled
-  if not isNil(vtbl.mousePressEvent):
+  if not isNil(vtbl[].mousePressEvent):
     vtbl[].vtbl.mousePressEvent = miqt_exec_callback_cQTimeEdit_mousePressEvent
-  if not isNil(vtbl.paintEvent):
+  if not isNil(vtbl[].paintEvent):
     vtbl[].vtbl.paintEvent = miqt_exec_callback_cQTimeEdit_paintEvent
-  if not isNil(vtbl.minimumSizeHint):
+  if not isNil(vtbl[].minimumSizeHint):
     vtbl[].vtbl.minimumSizeHint = miqt_exec_callback_cQTimeEdit_minimumSizeHint
-  if not isNil(vtbl.inputMethodQuery):
+  if not isNil(vtbl[].inputMethodQuery):
     vtbl[].vtbl.inputMethodQuery = miqt_exec_callback_cQTimeEdit_inputMethodQuery
-  if not isNil(vtbl.resizeEvent):
+  if not isNil(vtbl[].resizeEvent):
     vtbl[].vtbl.resizeEvent = miqt_exec_callback_cQTimeEdit_resizeEvent
-  if not isNil(vtbl.keyReleaseEvent):
+  if not isNil(vtbl[].keyReleaseEvent):
     vtbl[].vtbl.keyReleaseEvent = miqt_exec_callback_cQTimeEdit_keyReleaseEvent
-  if not isNil(vtbl.focusOutEvent):
+  if not isNil(vtbl[].focusOutEvent):
     vtbl[].vtbl.focusOutEvent = miqt_exec_callback_cQTimeEdit_focusOutEvent
-  if not isNil(vtbl.contextMenuEvent):
+  if not isNil(vtbl[].contextMenuEvent):
     vtbl[].vtbl.contextMenuEvent = miqt_exec_callback_cQTimeEdit_contextMenuEvent
-  if not isNil(vtbl.changeEvent):
+  if not isNil(vtbl[].changeEvent):
     vtbl[].vtbl.changeEvent = miqt_exec_callback_cQTimeEdit_changeEvent
-  if not isNil(vtbl.closeEvent):
+  if not isNil(vtbl[].closeEvent):
     vtbl[].vtbl.closeEvent = miqt_exec_callback_cQTimeEdit_closeEvent
-  if not isNil(vtbl.hideEvent):
+  if not isNil(vtbl[].hideEvent):
     vtbl[].vtbl.hideEvent = miqt_exec_callback_cQTimeEdit_hideEvent
-  if not isNil(vtbl.mouseReleaseEvent):
+  if not isNil(vtbl[].mouseReleaseEvent):
     vtbl[].vtbl.mouseReleaseEvent = miqt_exec_callback_cQTimeEdit_mouseReleaseEvent
-  if not isNil(vtbl.mouseMoveEvent):
+  if not isNil(vtbl[].mouseMoveEvent):
     vtbl[].vtbl.mouseMoveEvent = miqt_exec_callback_cQTimeEdit_mouseMoveEvent
-  if not isNil(vtbl.timerEvent):
+  if not isNil(vtbl[].timerEvent):
     vtbl[].vtbl.timerEvent = miqt_exec_callback_cQTimeEdit_timerEvent
-  if not isNil(vtbl.showEvent):
+  if not isNil(vtbl[].showEvent):
     vtbl[].vtbl.showEvent = miqt_exec_callback_cQTimeEdit_showEvent
-  if not isNil(vtbl.devType):
+  if not isNil(vtbl[].devType):
     vtbl[].vtbl.devType = miqt_exec_callback_cQTimeEdit_devType
-  if not isNil(vtbl.setVisible):
+  if not isNil(vtbl[].setVisible):
     vtbl[].vtbl.setVisible = miqt_exec_callback_cQTimeEdit_setVisible
-  if not isNil(vtbl.heightForWidth):
+  if not isNil(vtbl[].heightForWidth):
     vtbl[].vtbl.heightForWidth = miqt_exec_callback_cQTimeEdit_heightForWidth
-  if not isNil(vtbl.hasHeightForWidth):
+  if not isNil(vtbl[].hasHeightForWidth):
     vtbl[].vtbl.hasHeightForWidth = miqt_exec_callback_cQTimeEdit_hasHeightForWidth
-  if not isNil(vtbl.paintEngine):
+  if not isNil(vtbl[].paintEngine):
     vtbl[].vtbl.paintEngine = miqt_exec_callback_cQTimeEdit_paintEngine
-  if not isNil(vtbl.mouseDoubleClickEvent):
+  if not isNil(vtbl[].mouseDoubleClickEvent):
     vtbl[].vtbl.mouseDoubleClickEvent = miqt_exec_callback_cQTimeEdit_mouseDoubleClickEvent
-  if not isNil(vtbl.enterEvent):
+  if not isNil(vtbl[].enterEvent):
     vtbl[].vtbl.enterEvent = miqt_exec_callback_cQTimeEdit_enterEvent
-  if not isNil(vtbl.leaveEvent):
+  if not isNil(vtbl[].leaveEvent):
     vtbl[].vtbl.leaveEvent = miqt_exec_callback_cQTimeEdit_leaveEvent
-  if not isNil(vtbl.moveEvent):
+  if not isNil(vtbl[].moveEvent):
     vtbl[].vtbl.moveEvent = miqt_exec_callback_cQTimeEdit_moveEvent
-  if not isNil(vtbl.tabletEvent):
+  if not isNil(vtbl[].tabletEvent):
     vtbl[].vtbl.tabletEvent = miqt_exec_callback_cQTimeEdit_tabletEvent
-  if not isNil(vtbl.actionEvent):
+  if not isNil(vtbl[].actionEvent):
     vtbl[].vtbl.actionEvent = miqt_exec_callback_cQTimeEdit_actionEvent
-  if not isNil(vtbl.dragEnterEvent):
+  if not isNil(vtbl[].dragEnterEvent):
     vtbl[].vtbl.dragEnterEvent = miqt_exec_callback_cQTimeEdit_dragEnterEvent
-  if not isNil(vtbl.dragMoveEvent):
+  if not isNil(vtbl[].dragMoveEvent):
     vtbl[].vtbl.dragMoveEvent = miqt_exec_callback_cQTimeEdit_dragMoveEvent
-  if not isNil(vtbl.dragLeaveEvent):
+  if not isNil(vtbl[].dragLeaveEvent):
     vtbl[].vtbl.dragLeaveEvent = miqt_exec_callback_cQTimeEdit_dragLeaveEvent
-  if not isNil(vtbl.dropEvent):
+  if not isNil(vtbl[].dropEvent):
     vtbl[].vtbl.dropEvent = miqt_exec_callback_cQTimeEdit_dropEvent
-  if not isNil(vtbl.nativeEvent):
+  if not isNil(vtbl[].nativeEvent):
     vtbl[].vtbl.nativeEvent = miqt_exec_callback_cQTimeEdit_nativeEvent
-  if not isNil(vtbl.metric):
+  if not isNil(vtbl[].metric):
     vtbl[].vtbl.metric = miqt_exec_callback_cQTimeEdit_metric
-  if not isNil(vtbl.initPainter):
+  if not isNil(vtbl[].initPainter):
     vtbl[].vtbl.initPainter = miqt_exec_callback_cQTimeEdit_initPainter
-  if not isNil(vtbl.redirected):
+  if not isNil(vtbl[].redirected):
     vtbl[].vtbl.redirected = miqt_exec_callback_cQTimeEdit_redirected
-  if not isNil(vtbl.sharedPainter):
+  if not isNil(vtbl[].sharedPainter):
     vtbl[].vtbl.sharedPainter = miqt_exec_callback_cQTimeEdit_sharedPainter
-  if not isNil(vtbl.inputMethodEvent):
+  if not isNil(vtbl[].inputMethodEvent):
     vtbl[].vtbl.inputMethodEvent = miqt_exec_callback_cQTimeEdit_inputMethodEvent
-  if not isNil(vtbl.eventFilter):
+  if not isNil(vtbl[].eventFilter):
     vtbl[].vtbl.eventFilter = miqt_exec_callback_cQTimeEdit_eventFilter
-  if not isNil(vtbl.childEvent):
+  if not isNil(vtbl[].childEvent):
     vtbl[].vtbl.childEvent = miqt_exec_callback_cQTimeEdit_childEvent
-  if not isNil(vtbl.customEvent):
+  if not isNil(vtbl[].customEvent):
     vtbl[].vtbl.customEvent = miqt_exec_callback_cQTimeEdit_customEvent
-  if not isNil(vtbl.connectNotify):
+  if not isNil(vtbl[].connectNotify):
     vtbl[].vtbl.connectNotify = miqt_exec_callback_cQTimeEdit_connectNotify
-  if not isNil(vtbl.disconnectNotify):
+  if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQTimeEdit_disconnectNotify
-  gen_qdatetimeedit_types.QTimeEdit(h: fcQTimeEdit_new2(addr(vtbl[]), ))
+  gen_qdatetimeedit_types.QTimeEdit(h: fcQTimeEdit_new2(addr(vtbl[].vtbl), ), owned: true)
 
 proc create*(T: type gen_qdatetimeedit_types.QTimeEdit,
     time: gen_qdatetime_types.QTime,
     vtbl: ref QTimeEditVTable = nil): gen_qdatetimeedit_types.QTimeEdit =
   let vtbl = if vtbl == nil: new QTimeEditVTable else: vtbl
   GC_ref(vtbl)
-  vtbl.vtbl.destructor = proc(vtbl: ptr cQTimeEditVTable, _: ptr cQTimeEdit) {.cdecl.} =
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQTimeEditVTable, _: ptr cQTimeEdit) {.cdecl.} =
     let vtbl = cast[ref QTimeEditVTable](vtbl)
     GC_unref(vtbl)
-  if not isNil(vtbl.metaObject):
+  if not isNil(vtbl[].metaObject):
     vtbl[].vtbl.metaObject = miqt_exec_callback_cQTimeEdit_metaObject
-  if not isNil(vtbl.metacast):
+  if not isNil(vtbl[].metacast):
     vtbl[].vtbl.metacast = miqt_exec_callback_cQTimeEdit_metacast
-  if not isNil(vtbl.metacall):
+  if not isNil(vtbl[].metacall):
     vtbl[].vtbl.metacall = miqt_exec_callback_cQTimeEdit_metacall
-  if not isNil(vtbl.sizeHint):
+  if not isNil(vtbl[].sizeHint):
     vtbl[].vtbl.sizeHint = miqt_exec_callback_cQTimeEdit_sizeHint
-  if not isNil(vtbl.clear):
+  if not isNil(vtbl[].clear):
     vtbl[].vtbl.clear = miqt_exec_callback_cQTimeEdit_clear
-  if not isNil(vtbl.stepBy):
+  if not isNil(vtbl[].stepBy):
     vtbl[].vtbl.stepBy = miqt_exec_callback_cQTimeEdit_stepBy
-  if not isNil(vtbl.event):
+  if not isNil(vtbl[].event):
     vtbl[].vtbl.event = miqt_exec_callback_cQTimeEdit_event
-  if not isNil(vtbl.keyPressEvent):
+  if not isNil(vtbl[].keyPressEvent):
     vtbl[].vtbl.keyPressEvent = miqt_exec_callback_cQTimeEdit_keyPressEvent
-  if not isNil(vtbl.wheelEvent):
+  if not isNil(vtbl[].wheelEvent):
     vtbl[].vtbl.wheelEvent = miqt_exec_callback_cQTimeEdit_wheelEvent
-  if not isNil(vtbl.focusInEvent):
+  if not isNil(vtbl[].focusInEvent):
     vtbl[].vtbl.focusInEvent = miqt_exec_callback_cQTimeEdit_focusInEvent
-  if not isNil(vtbl.focusNextPrevChild):
+  if not isNil(vtbl[].focusNextPrevChild):
     vtbl[].vtbl.focusNextPrevChild = miqt_exec_callback_cQTimeEdit_focusNextPrevChild
-  if not isNil(vtbl.validate):
+  if not isNil(vtbl[].validate):
     vtbl[].vtbl.validate = miqt_exec_callback_cQTimeEdit_validate
-  if not isNil(vtbl.fixup):
+  if not isNil(vtbl[].fixup):
     vtbl[].vtbl.fixup = miqt_exec_callback_cQTimeEdit_fixup
-  if not isNil(vtbl.dateTimeFromText):
+  if not isNil(vtbl[].dateTimeFromText):
     vtbl[].vtbl.dateTimeFromText = miqt_exec_callback_cQTimeEdit_dateTimeFromText
-  if not isNil(vtbl.textFromDateTime):
+  if not isNil(vtbl[].textFromDateTime):
     vtbl[].vtbl.textFromDateTime = miqt_exec_callback_cQTimeEdit_textFromDateTime
-  if not isNil(vtbl.stepEnabled):
+  if not isNil(vtbl[].stepEnabled):
     vtbl[].vtbl.stepEnabled = miqt_exec_callback_cQTimeEdit_stepEnabled
-  if not isNil(vtbl.mousePressEvent):
+  if not isNil(vtbl[].mousePressEvent):
     vtbl[].vtbl.mousePressEvent = miqt_exec_callback_cQTimeEdit_mousePressEvent
-  if not isNil(vtbl.paintEvent):
+  if not isNil(vtbl[].paintEvent):
     vtbl[].vtbl.paintEvent = miqt_exec_callback_cQTimeEdit_paintEvent
-  if not isNil(vtbl.minimumSizeHint):
+  if not isNil(vtbl[].minimumSizeHint):
     vtbl[].vtbl.minimumSizeHint = miqt_exec_callback_cQTimeEdit_minimumSizeHint
-  if not isNil(vtbl.inputMethodQuery):
+  if not isNil(vtbl[].inputMethodQuery):
     vtbl[].vtbl.inputMethodQuery = miqt_exec_callback_cQTimeEdit_inputMethodQuery
-  if not isNil(vtbl.resizeEvent):
+  if not isNil(vtbl[].resizeEvent):
     vtbl[].vtbl.resizeEvent = miqt_exec_callback_cQTimeEdit_resizeEvent
-  if not isNil(vtbl.keyReleaseEvent):
+  if not isNil(vtbl[].keyReleaseEvent):
     vtbl[].vtbl.keyReleaseEvent = miqt_exec_callback_cQTimeEdit_keyReleaseEvent
-  if not isNil(vtbl.focusOutEvent):
+  if not isNil(vtbl[].focusOutEvent):
     vtbl[].vtbl.focusOutEvent = miqt_exec_callback_cQTimeEdit_focusOutEvent
-  if not isNil(vtbl.contextMenuEvent):
+  if not isNil(vtbl[].contextMenuEvent):
     vtbl[].vtbl.contextMenuEvent = miqt_exec_callback_cQTimeEdit_contextMenuEvent
-  if not isNil(vtbl.changeEvent):
+  if not isNil(vtbl[].changeEvent):
     vtbl[].vtbl.changeEvent = miqt_exec_callback_cQTimeEdit_changeEvent
-  if not isNil(vtbl.closeEvent):
+  if not isNil(vtbl[].closeEvent):
     vtbl[].vtbl.closeEvent = miqt_exec_callback_cQTimeEdit_closeEvent
-  if not isNil(vtbl.hideEvent):
+  if not isNil(vtbl[].hideEvent):
     vtbl[].vtbl.hideEvent = miqt_exec_callback_cQTimeEdit_hideEvent
-  if not isNil(vtbl.mouseReleaseEvent):
+  if not isNil(vtbl[].mouseReleaseEvent):
     vtbl[].vtbl.mouseReleaseEvent = miqt_exec_callback_cQTimeEdit_mouseReleaseEvent
-  if not isNil(vtbl.mouseMoveEvent):
+  if not isNil(vtbl[].mouseMoveEvent):
     vtbl[].vtbl.mouseMoveEvent = miqt_exec_callback_cQTimeEdit_mouseMoveEvent
-  if not isNil(vtbl.timerEvent):
+  if not isNil(vtbl[].timerEvent):
     vtbl[].vtbl.timerEvent = miqt_exec_callback_cQTimeEdit_timerEvent
-  if not isNil(vtbl.showEvent):
+  if not isNil(vtbl[].showEvent):
     vtbl[].vtbl.showEvent = miqt_exec_callback_cQTimeEdit_showEvent
-  if not isNil(vtbl.devType):
+  if not isNil(vtbl[].devType):
     vtbl[].vtbl.devType = miqt_exec_callback_cQTimeEdit_devType
-  if not isNil(vtbl.setVisible):
+  if not isNil(vtbl[].setVisible):
     vtbl[].vtbl.setVisible = miqt_exec_callback_cQTimeEdit_setVisible
-  if not isNil(vtbl.heightForWidth):
+  if not isNil(vtbl[].heightForWidth):
     vtbl[].vtbl.heightForWidth = miqt_exec_callback_cQTimeEdit_heightForWidth
-  if not isNil(vtbl.hasHeightForWidth):
+  if not isNil(vtbl[].hasHeightForWidth):
     vtbl[].vtbl.hasHeightForWidth = miqt_exec_callback_cQTimeEdit_hasHeightForWidth
-  if not isNil(vtbl.paintEngine):
+  if not isNil(vtbl[].paintEngine):
     vtbl[].vtbl.paintEngine = miqt_exec_callback_cQTimeEdit_paintEngine
-  if not isNil(vtbl.mouseDoubleClickEvent):
+  if not isNil(vtbl[].mouseDoubleClickEvent):
     vtbl[].vtbl.mouseDoubleClickEvent = miqt_exec_callback_cQTimeEdit_mouseDoubleClickEvent
-  if not isNil(vtbl.enterEvent):
+  if not isNil(vtbl[].enterEvent):
     vtbl[].vtbl.enterEvent = miqt_exec_callback_cQTimeEdit_enterEvent
-  if not isNil(vtbl.leaveEvent):
+  if not isNil(vtbl[].leaveEvent):
     vtbl[].vtbl.leaveEvent = miqt_exec_callback_cQTimeEdit_leaveEvent
-  if not isNil(vtbl.moveEvent):
+  if not isNil(vtbl[].moveEvent):
     vtbl[].vtbl.moveEvent = miqt_exec_callback_cQTimeEdit_moveEvent
-  if not isNil(vtbl.tabletEvent):
+  if not isNil(vtbl[].tabletEvent):
     vtbl[].vtbl.tabletEvent = miqt_exec_callback_cQTimeEdit_tabletEvent
-  if not isNil(vtbl.actionEvent):
+  if not isNil(vtbl[].actionEvent):
     vtbl[].vtbl.actionEvent = miqt_exec_callback_cQTimeEdit_actionEvent
-  if not isNil(vtbl.dragEnterEvent):
+  if not isNil(vtbl[].dragEnterEvent):
     vtbl[].vtbl.dragEnterEvent = miqt_exec_callback_cQTimeEdit_dragEnterEvent
-  if not isNil(vtbl.dragMoveEvent):
+  if not isNil(vtbl[].dragMoveEvent):
     vtbl[].vtbl.dragMoveEvent = miqt_exec_callback_cQTimeEdit_dragMoveEvent
-  if not isNil(vtbl.dragLeaveEvent):
+  if not isNil(vtbl[].dragLeaveEvent):
     vtbl[].vtbl.dragLeaveEvent = miqt_exec_callback_cQTimeEdit_dragLeaveEvent
-  if not isNil(vtbl.dropEvent):
+  if not isNil(vtbl[].dropEvent):
     vtbl[].vtbl.dropEvent = miqt_exec_callback_cQTimeEdit_dropEvent
-  if not isNil(vtbl.nativeEvent):
+  if not isNil(vtbl[].nativeEvent):
     vtbl[].vtbl.nativeEvent = miqt_exec_callback_cQTimeEdit_nativeEvent
-  if not isNil(vtbl.metric):
+  if not isNil(vtbl[].metric):
     vtbl[].vtbl.metric = miqt_exec_callback_cQTimeEdit_metric
-  if not isNil(vtbl.initPainter):
+  if not isNil(vtbl[].initPainter):
     vtbl[].vtbl.initPainter = miqt_exec_callback_cQTimeEdit_initPainter
-  if not isNil(vtbl.redirected):
+  if not isNil(vtbl[].redirected):
     vtbl[].vtbl.redirected = miqt_exec_callback_cQTimeEdit_redirected
-  if not isNil(vtbl.sharedPainter):
+  if not isNil(vtbl[].sharedPainter):
     vtbl[].vtbl.sharedPainter = miqt_exec_callback_cQTimeEdit_sharedPainter
-  if not isNil(vtbl.inputMethodEvent):
+  if not isNil(vtbl[].inputMethodEvent):
     vtbl[].vtbl.inputMethodEvent = miqt_exec_callback_cQTimeEdit_inputMethodEvent
-  if not isNil(vtbl.eventFilter):
+  if not isNil(vtbl[].eventFilter):
     vtbl[].vtbl.eventFilter = miqt_exec_callback_cQTimeEdit_eventFilter
-  if not isNil(vtbl.childEvent):
+  if not isNil(vtbl[].childEvent):
     vtbl[].vtbl.childEvent = miqt_exec_callback_cQTimeEdit_childEvent
-  if not isNil(vtbl.customEvent):
+  if not isNil(vtbl[].customEvent):
     vtbl[].vtbl.customEvent = miqt_exec_callback_cQTimeEdit_customEvent
-  if not isNil(vtbl.connectNotify):
+  if not isNil(vtbl[].connectNotify):
     vtbl[].vtbl.connectNotify = miqt_exec_callback_cQTimeEdit_connectNotify
-  if not isNil(vtbl.disconnectNotify):
+  if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQTimeEdit_disconnectNotify
-  gen_qdatetimeedit_types.QTimeEdit(h: fcQTimeEdit_new3(addr(vtbl[]), time.h))
+  gen_qdatetimeedit_types.QTimeEdit(h: fcQTimeEdit_new3(addr(vtbl[].vtbl), time.h), owned: true)
 
 proc create*(T: type gen_qdatetimeedit_types.QTimeEdit,
     time: gen_qdatetime_types.QTime, parent: gen_qwidget_types.QWidget,
     vtbl: ref QTimeEditVTable = nil): gen_qdatetimeedit_types.QTimeEdit =
   let vtbl = if vtbl == nil: new QTimeEditVTable else: vtbl
   GC_ref(vtbl)
-  vtbl.vtbl.destructor = proc(vtbl: ptr cQTimeEditVTable, _: ptr cQTimeEdit) {.cdecl.} =
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQTimeEditVTable, _: ptr cQTimeEdit) {.cdecl.} =
     let vtbl = cast[ref QTimeEditVTable](vtbl)
     GC_unref(vtbl)
-  if not isNil(vtbl.metaObject):
+  if not isNil(vtbl[].metaObject):
     vtbl[].vtbl.metaObject = miqt_exec_callback_cQTimeEdit_metaObject
-  if not isNil(vtbl.metacast):
+  if not isNil(vtbl[].metacast):
     vtbl[].vtbl.metacast = miqt_exec_callback_cQTimeEdit_metacast
-  if not isNil(vtbl.metacall):
+  if not isNil(vtbl[].metacall):
     vtbl[].vtbl.metacall = miqt_exec_callback_cQTimeEdit_metacall
-  if not isNil(vtbl.sizeHint):
+  if not isNil(vtbl[].sizeHint):
     vtbl[].vtbl.sizeHint = miqt_exec_callback_cQTimeEdit_sizeHint
-  if not isNil(vtbl.clear):
+  if not isNil(vtbl[].clear):
     vtbl[].vtbl.clear = miqt_exec_callback_cQTimeEdit_clear
-  if not isNil(vtbl.stepBy):
+  if not isNil(vtbl[].stepBy):
     vtbl[].vtbl.stepBy = miqt_exec_callback_cQTimeEdit_stepBy
-  if not isNil(vtbl.event):
+  if not isNil(vtbl[].event):
     vtbl[].vtbl.event = miqt_exec_callback_cQTimeEdit_event
-  if not isNil(vtbl.keyPressEvent):
+  if not isNil(vtbl[].keyPressEvent):
     vtbl[].vtbl.keyPressEvent = miqt_exec_callback_cQTimeEdit_keyPressEvent
-  if not isNil(vtbl.wheelEvent):
+  if not isNil(vtbl[].wheelEvent):
     vtbl[].vtbl.wheelEvent = miqt_exec_callback_cQTimeEdit_wheelEvent
-  if not isNil(vtbl.focusInEvent):
+  if not isNil(vtbl[].focusInEvent):
     vtbl[].vtbl.focusInEvent = miqt_exec_callback_cQTimeEdit_focusInEvent
-  if not isNil(vtbl.focusNextPrevChild):
+  if not isNil(vtbl[].focusNextPrevChild):
     vtbl[].vtbl.focusNextPrevChild = miqt_exec_callback_cQTimeEdit_focusNextPrevChild
-  if not isNil(vtbl.validate):
+  if not isNil(vtbl[].validate):
     vtbl[].vtbl.validate = miqt_exec_callback_cQTimeEdit_validate
-  if not isNil(vtbl.fixup):
+  if not isNil(vtbl[].fixup):
     vtbl[].vtbl.fixup = miqt_exec_callback_cQTimeEdit_fixup
-  if not isNil(vtbl.dateTimeFromText):
+  if not isNil(vtbl[].dateTimeFromText):
     vtbl[].vtbl.dateTimeFromText = miqt_exec_callback_cQTimeEdit_dateTimeFromText
-  if not isNil(vtbl.textFromDateTime):
+  if not isNil(vtbl[].textFromDateTime):
     vtbl[].vtbl.textFromDateTime = miqt_exec_callback_cQTimeEdit_textFromDateTime
-  if not isNil(vtbl.stepEnabled):
+  if not isNil(vtbl[].stepEnabled):
     vtbl[].vtbl.stepEnabled = miqt_exec_callback_cQTimeEdit_stepEnabled
-  if not isNil(vtbl.mousePressEvent):
+  if not isNil(vtbl[].mousePressEvent):
     vtbl[].vtbl.mousePressEvent = miqt_exec_callback_cQTimeEdit_mousePressEvent
-  if not isNil(vtbl.paintEvent):
+  if not isNil(vtbl[].paintEvent):
     vtbl[].vtbl.paintEvent = miqt_exec_callback_cQTimeEdit_paintEvent
-  if not isNil(vtbl.minimumSizeHint):
+  if not isNil(vtbl[].minimumSizeHint):
     vtbl[].vtbl.minimumSizeHint = miqt_exec_callback_cQTimeEdit_minimumSizeHint
-  if not isNil(vtbl.inputMethodQuery):
+  if not isNil(vtbl[].inputMethodQuery):
     vtbl[].vtbl.inputMethodQuery = miqt_exec_callback_cQTimeEdit_inputMethodQuery
-  if not isNil(vtbl.resizeEvent):
+  if not isNil(vtbl[].resizeEvent):
     vtbl[].vtbl.resizeEvent = miqt_exec_callback_cQTimeEdit_resizeEvent
-  if not isNil(vtbl.keyReleaseEvent):
+  if not isNil(vtbl[].keyReleaseEvent):
     vtbl[].vtbl.keyReleaseEvent = miqt_exec_callback_cQTimeEdit_keyReleaseEvent
-  if not isNil(vtbl.focusOutEvent):
+  if not isNil(vtbl[].focusOutEvent):
     vtbl[].vtbl.focusOutEvent = miqt_exec_callback_cQTimeEdit_focusOutEvent
-  if not isNil(vtbl.contextMenuEvent):
+  if not isNil(vtbl[].contextMenuEvent):
     vtbl[].vtbl.contextMenuEvent = miqt_exec_callback_cQTimeEdit_contextMenuEvent
-  if not isNil(vtbl.changeEvent):
+  if not isNil(vtbl[].changeEvent):
     vtbl[].vtbl.changeEvent = miqt_exec_callback_cQTimeEdit_changeEvent
-  if not isNil(vtbl.closeEvent):
+  if not isNil(vtbl[].closeEvent):
     vtbl[].vtbl.closeEvent = miqt_exec_callback_cQTimeEdit_closeEvent
-  if not isNil(vtbl.hideEvent):
+  if not isNil(vtbl[].hideEvent):
     vtbl[].vtbl.hideEvent = miqt_exec_callback_cQTimeEdit_hideEvent
-  if not isNil(vtbl.mouseReleaseEvent):
+  if not isNil(vtbl[].mouseReleaseEvent):
     vtbl[].vtbl.mouseReleaseEvent = miqt_exec_callback_cQTimeEdit_mouseReleaseEvent
-  if not isNil(vtbl.mouseMoveEvent):
+  if not isNil(vtbl[].mouseMoveEvent):
     vtbl[].vtbl.mouseMoveEvent = miqt_exec_callback_cQTimeEdit_mouseMoveEvent
-  if not isNil(vtbl.timerEvent):
+  if not isNil(vtbl[].timerEvent):
     vtbl[].vtbl.timerEvent = miqt_exec_callback_cQTimeEdit_timerEvent
-  if not isNil(vtbl.showEvent):
+  if not isNil(vtbl[].showEvent):
     vtbl[].vtbl.showEvent = miqt_exec_callback_cQTimeEdit_showEvent
-  if not isNil(vtbl.devType):
+  if not isNil(vtbl[].devType):
     vtbl[].vtbl.devType = miqt_exec_callback_cQTimeEdit_devType
-  if not isNil(vtbl.setVisible):
+  if not isNil(vtbl[].setVisible):
     vtbl[].vtbl.setVisible = miqt_exec_callback_cQTimeEdit_setVisible
-  if not isNil(vtbl.heightForWidth):
+  if not isNil(vtbl[].heightForWidth):
     vtbl[].vtbl.heightForWidth = miqt_exec_callback_cQTimeEdit_heightForWidth
-  if not isNil(vtbl.hasHeightForWidth):
+  if not isNil(vtbl[].hasHeightForWidth):
     vtbl[].vtbl.hasHeightForWidth = miqt_exec_callback_cQTimeEdit_hasHeightForWidth
-  if not isNil(vtbl.paintEngine):
+  if not isNil(vtbl[].paintEngine):
     vtbl[].vtbl.paintEngine = miqt_exec_callback_cQTimeEdit_paintEngine
-  if not isNil(vtbl.mouseDoubleClickEvent):
+  if not isNil(vtbl[].mouseDoubleClickEvent):
     vtbl[].vtbl.mouseDoubleClickEvent = miqt_exec_callback_cQTimeEdit_mouseDoubleClickEvent
-  if not isNil(vtbl.enterEvent):
+  if not isNil(vtbl[].enterEvent):
     vtbl[].vtbl.enterEvent = miqt_exec_callback_cQTimeEdit_enterEvent
-  if not isNil(vtbl.leaveEvent):
+  if not isNil(vtbl[].leaveEvent):
     vtbl[].vtbl.leaveEvent = miqt_exec_callback_cQTimeEdit_leaveEvent
-  if not isNil(vtbl.moveEvent):
+  if not isNil(vtbl[].moveEvent):
     vtbl[].vtbl.moveEvent = miqt_exec_callback_cQTimeEdit_moveEvent
-  if not isNil(vtbl.tabletEvent):
+  if not isNil(vtbl[].tabletEvent):
     vtbl[].vtbl.tabletEvent = miqt_exec_callback_cQTimeEdit_tabletEvent
-  if not isNil(vtbl.actionEvent):
+  if not isNil(vtbl[].actionEvent):
     vtbl[].vtbl.actionEvent = miqt_exec_callback_cQTimeEdit_actionEvent
-  if not isNil(vtbl.dragEnterEvent):
+  if not isNil(vtbl[].dragEnterEvent):
     vtbl[].vtbl.dragEnterEvent = miqt_exec_callback_cQTimeEdit_dragEnterEvent
-  if not isNil(vtbl.dragMoveEvent):
+  if not isNil(vtbl[].dragMoveEvent):
     vtbl[].vtbl.dragMoveEvent = miqt_exec_callback_cQTimeEdit_dragMoveEvent
-  if not isNil(vtbl.dragLeaveEvent):
+  if not isNil(vtbl[].dragLeaveEvent):
     vtbl[].vtbl.dragLeaveEvent = miqt_exec_callback_cQTimeEdit_dragLeaveEvent
-  if not isNil(vtbl.dropEvent):
+  if not isNil(vtbl[].dropEvent):
     vtbl[].vtbl.dropEvent = miqt_exec_callback_cQTimeEdit_dropEvent
-  if not isNil(vtbl.nativeEvent):
+  if not isNil(vtbl[].nativeEvent):
     vtbl[].vtbl.nativeEvent = miqt_exec_callback_cQTimeEdit_nativeEvent
-  if not isNil(vtbl.metric):
+  if not isNil(vtbl[].metric):
     vtbl[].vtbl.metric = miqt_exec_callback_cQTimeEdit_metric
-  if not isNil(vtbl.initPainter):
+  if not isNil(vtbl[].initPainter):
     vtbl[].vtbl.initPainter = miqt_exec_callback_cQTimeEdit_initPainter
-  if not isNil(vtbl.redirected):
+  if not isNil(vtbl[].redirected):
     vtbl[].vtbl.redirected = miqt_exec_callback_cQTimeEdit_redirected
-  if not isNil(vtbl.sharedPainter):
+  if not isNil(vtbl[].sharedPainter):
     vtbl[].vtbl.sharedPainter = miqt_exec_callback_cQTimeEdit_sharedPainter
-  if not isNil(vtbl.inputMethodEvent):
+  if not isNil(vtbl[].inputMethodEvent):
     vtbl[].vtbl.inputMethodEvent = miqt_exec_callback_cQTimeEdit_inputMethodEvent
-  if not isNil(vtbl.eventFilter):
+  if not isNil(vtbl[].eventFilter):
     vtbl[].vtbl.eventFilter = miqt_exec_callback_cQTimeEdit_eventFilter
-  if not isNil(vtbl.childEvent):
+  if not isNil(vtbl[].childEvent):
     vtbl[].vtbl.childEvent = miqt_exec_callback_cQTimeEdit_childEvent
-  if not isNil(vtbl.customEvent):
+  if not isNil(vtbl[].customEvent):
     vtbl[].vtbl.customEvent = miqt_exec_callback_cQTimeEdit_customEvent
-  if not isNil(vtbl.connectNotify):
+  if not isNil(vtbl[].connectNotify):
     vtbl[].vtbl.connectNotify = miqt_exec_callback_cQTimeEdit_connectNotify
-  if not isNil(vtbl.disconnectNotify):
+  if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQTimeEdit_disconnectNotify
-  gen_qdatetimeedit_types.QTimeEdit(h: fcQTimeEdit_new4(addr(vtbl[]), time.h, parent.h))
+  gen_qdatetimeedit_types.QTimeEdit(h: fcQTimeEdit_new4(addr(vtbl[].vtbl), time.h, parent.h), owned: true)
+
+proc create*(T: type gen_qdatetimeedit_types.QTimeEdit,
+    parent: gen_qwidget_types.QWidget,
+    vtbl: VirtualQTimeEdit) =
+
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQTimeEditVTable, _: ptr cQTimeEdit) {.cdecl.} =
+    let vtbl = cast[ptr typeof(VirtualQTimeEdit()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQTimeEdit, vtbl)))
+    vtbl[].h = nil
+    vtbl[].owned = false
+  vtbl[].vtbl.metaObject = miqt_exec_method_cQTimeEdit_metaObject
+  vtbl[].vtbl.metacast = miqt_exec_method_cQTimeEdit_metacast
+  vtbl[].vtbl.metacall = miqt_exec_method_cQTimeEdit_metacall
+  vtbl[].vtbl.sizeHint = miqt_exec_method_cQTimeEdit_sizeHint
+  vtbl[].vtbl.clear = miqt_exec_method_cQTimeEdit_clear
+  vtbl[].vtbl.stepBy = miqt_exec_method_cQTimeEdit_stepBy
+  vtbl[].vtbl.event = miqt_exec_method_cQTimeEdit_event
+  vtbl[].vtbl.keyPressEvent = miqt_exec_method_cQTimeEdit_keyPressEvent
+  vtbl[].vtbl.wheelEvent = miqt_exec_method_cQTimeEdit_wheelEvent
+  vtbl[].vtbl.focusInEvent = miqt_exec_method_cQTimeEdit_focusInEvent
+  vtbl[].vtbl.focusNextPrevChild = miqt_exec_method_cQTimeEdit_focusNextPrevChild
+  vtbl[].vtbl.validate = miqt_exec_method_cQTimeEdit_validate
+  vtbl[].vtbl.fixup = miqt_exec_method_cQTimeEdit_fixup
+  vtbl[].vtbl.dateTimeFromText = miqt_exec_method_cQTimeEdit_dateTimeFromText
+  vtbl[].vtbl.textFromDateTime = miqt_exec_method_cQTimeEdit_textFromDateTime
+  vtbl[].vtbl.stepEnabled = miqt_exec_method_cQTimeEdit_stepEnabled
+  vtbl[].vtbl.mousePressEvent = miqt_exec_method_cQTimeEdit_mousePressEvent
+  vtbl[].vtbl.paintEvent = miqt_exec_method_cQTimeEdit_paintEvent
+  vtbl[].vtbl.minimumSizeHint = miqt_exec_method_cQTimeEdit_minimumSizeHint
+  vtbl[].vtbl.inputMethodQuery = miqt_exec_method_cQTimeEdit_inputMethodQuery
+  vtbl[].vtbl.resizeEvent = miqt_exec_method_cQTimeEdit_resizeEvent
+  vtbl[].vtbl.keyReleaseEvent = miqt_exec_method_cQTimeEdit_keyReleaseEvent
+  vtbl[].vtbl.focusOutEvent = miqt_exec_method_cQTimeEdit_focusOutEvent
+  vtbl[].vtbl.contextMenuEvent = miqt_exec_method_cQTimeEdit_contextMenuEvent
+  vtbl[].vtbl.changeEvent = miqt_exec_method_cQTimeEdit_changeEvent
+  vtbl[].vtbl.closeEvent = miqt_exec_method_cQTimeEdit_closeEvent
+  vtbl[].vtbl.hideEvent = miqt_exec_method_cQTimeEdit_hideEvent
+  vtbl[].vtbl.mouseReleaseEvent = miqt_exec_method_cQTimeEdit_mouseReleaseEvent
+  vtbl[].vtbl.mouseMoveEvent = miqt_exec_method_cQTimeEdit_mouseMoveEvent
+  vtbl[].vtbl.timerEvent = miqt_exec_method_cQTimeEdit_timerEvent
+  vtbl[].vtbl.showEvent = miqt_exec_method_cQTimeEdit_showEvent
+  vtbl[].vtbl.devType = miqt_exec_method_cQTimeEdit_devType
+  vtbl[].vtbl.setVisible = miqt_exec_method_cQTimeEdit_setVisible
+  vtbl[].vtbl.heightForWidth = miqt_exec_method_cQTimeEdit_heightForWidth
+  vtbl[].vtbl.hasHeightForWidth = miqt_exec_method_cQTimeEdit_hasHeightForWidth
+  vtbl[].vtbl.paintEngine = miqt_exec_method_cQTimeEdit_paintEngine
+  vtbl[].vtbl.mouseDoubleClickEvent = miqt_exec_method_cQTimeEdit_mouseDoubleClickEvent
+  vtbl[].vtbl.enterEvent = miqt_exec_method_cQTimeEdit_enterEvent
+  vtbl[].vtbl.leaveEvent = miqt_exec_method_cQTimeEdit_leaveEvent
+  vtbl[].vtbl.moveEvent = miqt_exec_method_cQTimeEdit_moveEvent
+  vtbl[].vtbl.tabletEvent = miqt_exec_method_cQTimeEdit_tabletEvent
+  vtbl[].vtbl.actionEvent = miqt_exec_method_cQTimeEdit_actionEvent
+  vtbl[].vtbl.dragEnterEvent = miqt_exec_method_cQTimeEdit_dragEnterEvent
+  vtbl[].vtbl.dragMoveEvent = miqt_exec_method_cQTimeEdit_dragMoveEvent
+  vtbl[].vtbl.dragLeaveEvent = miqt_exec_method_cQTimeEdit_dragLeaveEvent
+  vtbl[].vtbl.dropEvent = miqt_exec_method_cQTimeEdit_dropEvent
+  vtbl[].vtbl.nativeEvent = miqt_exec_method_cQTimeEdit_nativeEvent
+  vtbl[].vtbl.metric = miqt_exec_method_cQTimeEdit_metric
+  vtbl[].vtbl.initPainter = miqt_exec_method_cQTimeEdit_initPainter
+  vtbl[].vtbl.redirected = miqt_exec_method_cQTimeEdit_redirected
+  vtbl[].vtbl.sharedPainter = miqt_exec_method_cQTimeEdit_sharedPainter
+  vtbl[].vtbl.inputMethodEvent = miqt_exec_method_cQTimeEdit_inputMethodEvent
+  vtbl[].vtbl.eventFilter = miqt_exec_method_cQTimeEdit_eventFilter
+  vtbl[].vtbl.childEvent = miqt_exec_method_cQTimeEdit_childEvent
+  vtbl[].vtbl.customEvent = miqt_exec_method_cQTimeEdit_customEvent
+  vtbl[].vtbl.connectNotify = miqt_exec_method_cQTimeEdit_connectNotify
+  vtbl[].vtbl.disconnectNotify = miqt_exec_method_cQTimeEdit_disconnectNotify
+  if vtbl[].h != nil: delete(move(vtbl[]))
+  vtbl[].h = fcQTimeEdit_new(addr(vtbl[].vtbl), parent.h)
+  vtbl[].owned = true
+
+proc create*(T: type gen_qdatetimeedit_types.QTimeEdit,
+    vtbl: VirtualQTimeEdit) =
+
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQTimeEditVTable, _: ptr cQTimeEdit) {.cdecl.} =
+    let vtbl = cast[ptr typeof(VirtualQTimeEdit()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQTimeEdit, vtbl)))
+    vtbl[].h = nil
+    vtbl[].owned = false
+  vtbl[].vtbl.metaObject = miqt_exec_method_cQTimeEdit_metaObject
+  vtbl[].vtbl.metacast = miqt_exec_method_cQTimeEdit_metacast
+  vtbl[].vtbl.metacall = miqt_exec_method_cQTimeEdit_metacall
+  vtbl[].vtbl.sizeHint = miqt_exec_method_cQTimeEdit_sizeHint
+  vtbl[].vtbl.clear = miqt_exec_method_cQTimeEdit_clear
+  vtbl[].vtbl.stepBy = miqt_exec_method_cQTimeEdit_stepBy
+  vtbl[].vtbl.event = miqt_exec_method_cQTimeEdit_event
+  vtbl[].vtbl.keyPressEvent = miqt_exec_method_cQTimeEdit_keyPressEvent
+  vtbl[].vtbl.wheelEvent = miqt_exec_method_cQTimeEdit_wheelEvent
+  vtbl[].vtbl.focusInEvent = miqt_exec_method_cQTimeEdit_focusInEvent
+  vtbl[].vtbl.focusNextPrevChild = miqt_exec_method_cQTimeEdit_focusNextPrevChild
+  vtbl[].vtbl.validate = miqt_exec_method_cQTimeEdit_validate
+  vtbl[].vtbl.fixup = miqt_exec_method_cQTimeEdit_fixup
+  vtbl[].vtbl.dateTimeFromText = miqt_exec_method_cQTimeEdit_dateTimeFromText
+  vtbl[].vtbl.textFromDateTime = miqt_exec_method_cQTimeEdit_textFromDateTime
+  vtbl[].vtbl.stepEnabled = miqt_exec_method_cQTimeEdit_stepEnabled
+  vtbl[].vtbl.mousePressEvent = miqt_exec_method_cQTimeEdit_mousePressEvent
+  vtbl[].vtbl.paintEvent = miqt_exec_method_cQTimeEdit_paintEvent
+  vtbl[].vtbl.minimumSizeHint = miqt_exec_method_cQTimeEdit_minimumSizeHint
+  vtbl[].vtbl.inputMethodQuery = miqt_exec_method_cQTimeEdit_inputMethodQuery
+  vtbl[].vtbl.resizeEvent = miqt_exec_method_cQTimeEdit_resizeEvent
+  vtbl[].vtbl.keyReleaseEvent = miqt_exec_method_cQTimeEdit_keyReleaseEvent
+  vtbl[].vtbl.focusOutEvent = miqt_exec_method_cQTimeEdit_focusOutEvent
+  vtbl[].vtbl.contextMenuEvent = miqt_exec_method_cQTimeEdit_contextMenuEvent
+  vtbl[].vtbl.changeEvent = miqt_exec_method_cQTimeEdit_changeEvent
+  vtbl[].vtbl.closeEvent = miqt_exec_method_cQTimeEdit_closeEvent
+  vtbl[].vtbl.hideEvent = miqt_exec_method_cQTimeEdit_hideEvent
+  vtbl[].vtbl.mouseReleaseEvent = miqt_exec_method_cQTimeEdit_mouseReleaseEvent
+  vtbl[].vtbl.mouseMoveEvent = miqt_exec_method_cQTimeEdit_mouseMoveEvent
+  vtbl[].vtbl.timerEvent = miqt_exec_method_cQTimeEdit_timerEvent
+  vtbl[].vtbl.showEvent = miqt_exec_method_cQTimeEdit_showEvent
+  vtbl[].vtbl.devType = miqt_exec_method_cQTimeEdit_devType
+  vtbl[].vtbl.setVisible = miqt_exec_method_cQTimeEdit_setVisible
+  vtbl[].vtbl.heightForWidth = miqt_exec_method_cQTimeEdit_heightForWidth
+  vtbl[].vtbl.hasHeightForWidth = miqt_exec_method_cQTimeEdit_hasHeightForWidth
+  vtbl[].vtbl.paintEngine = miqt_exec_method_cQTimeEdit_paintEngine
+  vtbl[].vtbl.mouseDoubleClickEvent = miqt_exec_method_cQTimeEdit_mouseDoubleClickEvent
+  vtbl[].vtbl.enterEvent = miqt_exec_method_cQTimeEdit_enterEvent
+  vtbl[].vtbl.leaveEvent = miqt_exec_method_cQTimeEdit_leaveEvent
+  vtbl[].vtbl.moveEvent = miqt_exec_method_cQTimeEdit_moveEvent
+  vtbl[].vtbl.tabletEvent = miqt_exec_method_cQTimeEdit_tabletEvent
+  vtbl[].vtbl.actionEvent = miqt_exec_method_cQTimeEdit_actionEvent
+  vtbl[].vtbl.dragEnterEvent = miqt_exec_method_cQTimeEdit_dragEnterEvent
+  vtbl[].vtbl.dragMoveEvent = miqt_exec_method_cQTimeEdit_dragMoveEvent
+  vtbl[].vtbl.dragLeaveEvent = miqt_exec_method_cQTimeEdit_dragLeaveEvent
+  vtbl[].vtbl.dropEvent = miqt_exec_method_cQTimeEdit_dropEvent
+  vtbl[].vtbl.nativeEvent = miqt_exec_method_cQTimeEdit_nativeEvent
+  vtbl[].vtbl.metric = miqt_exec_method_cQTimeEdit_metric
+  vtbl[].vtbl.initPainter = miqt_exec_method_cQTimeEdit_initPainter
+  vtbl[].vtbl.redirected = miqt_exec_method_cQTimeEdit_redirected
+  vtbl[].vtbl.sharedPainter = miqt_exec_method_cQTimeEdit_sharedPainter
+  vtbl[].vtbl.inputMethodEvent = miqt_exec_method_cQTimeEdit_inputMethodEvent
+  vtbl[].vtbl.eventFilter = miqt_exec_method_cQTimeEdit_eventFilter
+  vtbl[].vtbl.childEvent = miqt_exec_method_cQTimeEdit_childEvent
+  vtbl[].vtbl.customEvent = miqt_exec_method_cQTimeEdit_customEvent
+  vtbl[].vtbl.connectNotify = miqt_exec_method_cQTimeEdit_connectNotify
+  vtbl[].vtbl.disconnectNotify = miqt_exec_method_cQTimeEdit_disconnectNotify
+  if vtbl[].h != nil: delete(move(vtbl[]))
+  vtbl[].h = fcQTimeEdit_new2(addr(vtbl[].vtbl), )
+  vtbl[].owned = true
+
+proc create*(T: type gen_qdatetimeedit_types.QTimeEdit,
+    time: gen_qdatetime_types.QTime,
+    vtbl: VirtualQTimeEdit) =
+
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQTimeEditVTable, _: ptr cQTimeEdit) {.cdecl.} =
+    let vtbl = cast[ptr typeof(VirtualQTimeEdit()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQTimeEdit, vtbl)))
+    vtbl[].h = nil
+    vtbl[].owned = false
+  vtbl[].vtbl.metaObject = miqt_exec_method_cQTimeEdit_metaObject
+  vtbl[].vtbl.metacast = miqt_exec_method_cQTimeEdit_metacast
+  vtbl[].vtbl.metacall = miqt_exec_method_cQTimeEdit_metacall
+  vtbl[].vtbl.sizeHint = miqt_exec_method_cQTimeEdit_sizeHint
+  vtbl[].vtbl.clear = miqt_exec_method_cQTimeEdit_clear
+  vtbl[].vtbl.stepBy = miqt_exec_method_cQTimeEdit_stepBy
+  vtbl[].vtbl.event = miqt_exec_method_cQTimeEdit_event
+  vtbl[].vtbl.keyPressEvent = miqt_exec_method_cQTimeEdit_keyPressEvent
+  vtbl[].vtbl.wheelEvent = miqt_exec_method_cQTimeEdit_wheelEvent
+  vtbl[].vtbl.focusInEvent = miqt_exec_method_cQTimeEdit_focusInEvent
+  vtbl[].vtbl.focusNextPrevChild = miqt_exec_method_cQTimeEdit_focusNextPrevChild
+  vtbl[].vtbl.validate = miqt_exec_method_cQTimeEdit_validate
+  vtbl[].vtbl.fixup = miqt_exec_method_cQTimeEdit_fixup
+  vtbl[].vtbl.dateTimeFromText = miqt_exec_method_cQTimeEdit_dateTimeFromText
+  vtbl[].vtbl.textFromDateTime = miqt_exec_method_cQTimeEdit_textFromDateTime
+  vtbl[].vtbl.stepEnabled = miqt_exec_method_cQTimeEdit_stepEnabled
+  vtbl[].vtbl.mousePressEvent = miqt_exec_method_cQTimeEdit_mousePressEvent
+  vtbl[].vtbl.paintEvent = miqt_exec_method_cQTimeEdit_paintEvent
+  vtbl[].vtbl.minimumSizeHint = miqt_exec_method_cQTimeEdit_minimumSizeHint
+  vtbl[].vtbl.inputMethodQuery = miqt_exec_method_cQTimeEdit_inputMethodQuery
+  vtbl[].vtbl.resizeEvent = miqt_exec_method_cQTimeEdit_resizeEvent
+  vtbl[].vtbl.keyReleaseEvent = miqt_exec_method_cQTimeEdit_keyReleaseEvent
+  vtbl[].vtbl.focusOutEvent = miqt_exec_method_cQTimeEdit_focusOutEvent
+  vtbl[].vtbl.contextMenuEvent = miqt_exec_method_cQTimeEdit_contextMenuEvent
+  vtbl[].vtbl.changeEvent = miqt_exec_method_cQTimeEdit_changeEvent
+  vtbl[].vtbl.closeEvent = miqt_exec_method_cQTimeEdit_closeEvent
+  vtbl[].vtbl.hideEvent = miqt_exec_method_cQTimeEdit_hideEvent
+  vtbl[].vtbl.mouseReleaseEvent = miqt_exec_method_cQTimeEdit_mouseReleaseEvent
+  vtbl[].vtbl.mouseMoveEvent = miqt_exec_method_cQTimeEdit_mouseMoveEvent
+  vtbl[].vtbl.timerEvent = miqt_exec_method_cQTimeEdit_timerEvent
+  vtbl[].vtbl.showEvent = miqt_exec_method_cQTimeEdit_showEvent
+  vtbl[].vtbl.devType = miqt_exec_method_cQTimeEdit_devType
+  vtbl[].vtbl.setVisible = miqt_exec_method_cQTimeEdit_setVisible
+  vtbl[].vtbl.heightForWidth = miqt_exec_method_cQTimeEdit_heightForWidth
+  vtbl[].vtbl.hasHeightForWidth = miqt_exec_method_cQTimeEdit_hasHeightForWidth
+  vtbl[].vtbl.paintEngine = miqt_exec_method_cQTimeEdit_paintEngine
+  vtbl[].vtbl.mouseDoubleClickEvent = miqt_exec_method_cQTimeEdit_mouseDoubleClickEvent
+  vtbl[].vtbl.enterEvent = miqt_exec_method_cQTimeEdit_enterEvent
+  vtbl[].vtbl.leaveEvent = miqt_exec_method_cQTimeEdit_leaveEvent
+  vtbl[].vtbl.moveEvent = miqt_exec_method_cQTimeEdit_moveEvent
+  vtbl[].vtbl.tabletEvent = miqt_exec_method_cQTimeEdit_tabletEvent
+  vtbl[].vtbl.actionEvent = miqt_exec_method_cQTimeEdit_actionEvent
+  vtbl[].vtbl.dragEnterEvent = miqt_exec_method_cQTimeEdit_dragEnterEvent
+  vtbl[].vtbl.dragMoveEvent = miqt_exec_method_cQTimeEdit_dragMoveEvent
+  vtbl[].vtbl.dragLeaveEvent = miqt_exec_method_cQTimeEdit_dragLeaveEvent
+  vtbl[].vtbl.dropEvent = miqt_exec_method_cQTimeEdit_dropEvent
+  vtbl[].vtbl.nativeEvent = miqt_exec_method_cQTimeEdit_nativeEvent
+  vtbl[].vtbl.metric = miqt_exec_method_cQTimeEdit_metric
+  vtbl[].vtbl.initPainter = miqt_exec_method_cQTimeEdit_initPainter
+  vtbl[].vtbl.redirected = miqt_exec_method_cQTimeEdit_redirected
+  vtbl[].vtbl.sharedPainter = miqt_exec_method_cQTimeEdit_sharedPainter
+  vtbl[].vtbl.inputMethodEvent = miqt_exec_method_cQTimeEdit_inputMethodEvent
+  vtbl[].vtbl.eventFilter = miqt_exec_method_cQTimeEdit_eventFilter
+  vtbl[].vtbl.childEvent = miqt_exec_method_cQTimeEdit_childEvent
+  vtbl[].vtbl.customEvent = miqt_exec_method_cQTimeEdit_customEvent
+  vtbl[].vtbl.connectNotify = miqt_exec_method_cQTimeEdit_connectNotify
+  vtbl[].vtbl.disconnectNotify = miqt_exec_method_cQTimeEdit_disconnectNotify
+  if vtbl[].h != nil: delete(move(vtbl[]))
+  vtbl[].h = fcQTimeEdit_new3(addr(vtbl[].vtbl), time.h)
+  vtbl[].owned = true
+
+proc create*(T: type gen_qdatetimeedit_types.QTimeEdit,
+    time: gen_qdatetime_types.QTime, parent: gen_qwidget_types.QWidget,
+    vtbl: VirtualQTimeEdit) =
+
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQTimeEditVTable, _: ptr cQTimeEdit) {.cdecl.} =
+    let vtbl = cast[ptr typeof(VirtualQTimeEdit()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQTimeEdit, vtbl)))
+    vtbl[].h = nil
+    vtbl[].owned = false
+  vtbl[].vtbl.metaObject = miqt_exec_method_cQTimeEdit_metaObject
+  vtbl[].vtbl.metacast = miqt_exec_method_cQTimeEdit_metacast
+  vtbl[].vtbl.metacall = miqt_exec_method_cQTimeEdit_metacall
+  vtbl[].vtbl.sizeHint = miqt_exec_method_cQTimeEdit_sizeHint
+  vtbl[].vtbl.clear = miqt_exec_method_cQTimeEdit_clear
+  vtbl[].vtbl.stepBy = miqt_exec_method_cQTimeEdit_stepBy
+  vtbl[].vtbl.event = miqt_exec_method_cQTimeEdit_event
+  vtbl[].vtbl.keyPressEvent = miqt_exec_method_cQTimeEdit_keyPressEvent
+  vtbl[].vtbl.wheelEvent = miqt_exec_method_cQTimeEdit_wheelEvent
+  vtbl[].vtbl.focusInEvent = miqt_exec_method_cQTimeEdit_focusInEvent
+  vtbl[].vtbl.focusNextPrevChild = miqt_exec_method_cQTimeEdit_focusNextPrevChild
+  vtbl[].vtbl.validate = miqt_exec_method_cQTimeEdit_validate
+  vtbl[].vtbl.fixup = miqt_exec_method_cQTimeEdit_fixup
+  vtbl[].vtbl.dateTimeFromText = miqt_exec_method_cQTimeEdit_dateTimeFromText
+  vtbl[].vtbl.textFromDateTime = miqt_exec_method_cQTimeEdit_textFromDateTime
+  vtbl[].vtbl.stepEnabled = miqt_exec_method_cQTimeEdit_stepEnabled
+  vtbl[].vtbl.mousePressEvent = miqt_exec_method_cQTimeEdit_mousePressEvent
+  vtbl[].vtbl.paintEvent = miqt_exec_method_cQTimeEdit_paintEvent
+  vtbl[].vtbl.minimumSizeHint = miqt_exec_method_cQTimeEdit_minimumSizeHint
+  vtbl[].vtbl.inputMethodQuery = miqt_exec_method_cQTimeEdit_inputMethodQuery
+  vtbl[].vtbl.resizeEvent = miqt_exec_method_cQTimeEdit_resizeEvent
+  vtbl[].vtbl.keyReleaseEvent = miqt_exec_method_cQTimeEdit_keyReleaseEvent
+  vtbl[].vtbl.focusOutEvent = miqt_exec_method_cQTimeEdit_focusOutEvent
+  vtbl[].vtbl.contextMenuEvent = miqt_exec_method_cQTimeEdit_contextMenuEvent
+  vtbl[].vtbl.changeEvent = miqt_exec_method_cQTimeEdit_changeEvent
+  vtbl[].vtbl.closeEvent = miqt_exec_method_cQTimeEdit_closeEvent
+  vtbl[].vtbl.hideEvent = miqt_exec_method_cQTimeEdit_hideEvent
+  vtbl[].vtbl.mouseReleaseEvent = miqt_exec_method_cQTimeEdit_mouseReleaseEvent
+  vtbl[].vtbl.mouseMoveEvent = miqt_exec_method_cQTimeEdit_mouseMoveEvent
+  vtbl[].vtbl.timerEvent = miqt_exec_method_cQTimeEdit_timerEvent
+  vtbl[].vtbl.showEvent = miqt_exec_method_cQTimeEdit_showEvent
+  vtbl[].vtbl.devType = miqt_exec_method_cQTimeEdit_devType
+  vtbl[].vtbl.setVisible = miqt_exec_method_cQTimeEdit_setVisible
+  vtbl[].vtbl.heightForWidth = miqt_exec_method_cQTimeEdit_heightForWidth
+  vtbl[].vtbl.hasHeightForWidth = miqt_exec_method_cQTimeEdit_hasHeightForWidth
+  vtbl[].vtbl.paintEngine = miqt_exec_method_cQTimeEdit_paintEngine
+  vtbl[].vtbl.mouseDoubleClickEvent = miqt_exec_method_cQTimeEdit_mouseDoubleClickEvent
+  vtbl[].vtbl.enterEvent = miqt_exec_method_cQTimeEdit_enterEvent
+  vtbl[].vtbl.leaveEvent = miqt_exec_method_cQTimeEdit_leaveEvent
+  vtbl[].vtbl.moveEvent = miqt_exec_method_cQTimeEdit_moveEvent
+  vtbl[].vtbl.tabletEvent = miqt_exec_method_cQTimeEdit_tabletEvent
+  vtbl[].vtbl.actionEvent = miqt_exec_method_cQTimeEdit_actionEvent
+  vtbl[].vtbl.dragEnterEvent = miqt_exec_method_cQTimeEdit_dragEnterEvent
+  vtbl[].vtbl.dragMoveEvent = miqt_exec_method_cQTimeEdit_dragMoveEvent
+  vtbl[].vtbl.dragLeaveEvent = miqt_exec_method_cQTimeEdit_dragLeaveEvent
+  vtbl[].vtbl.dropEvent = miqt_exec_method_cQTimeEdit_dropEvent
+  vtbl[].vtbl.nativeEvent = miqt_exec_method_cQTimeEdit_nativeEvent
+  vtbl[].vtbl.metric = miqt_exec_method_cQTimeEdit_metric
+  vtbl[].vtbl.initPainter = miqt_exec_method_cQTimeEdit_initPainter
+  vtbl[].vtbl.redirected = miqt_exec_method_cQTimeEdit_redirected
+  vtbl[].vtbl.sharedPainter = miqt_exec_method_cQTimeEdit_sharedPainter
+  vtbl[].vtbl.inputMethodEvent = miqt_exec_method_cQTimeEdit_inputMethodEvent
+  vtbl[].vtbl.eventFilter = miqt_exec_method_cQTimeEdit_eventFilter
+  vtbl[].vtbl.childEvent = miqt_exec_method_cQTimeEdit_childEvent
+  vtbl[].vtbl.customEvent = miqt_exec_method_cQTimeEdit_customEvent
+  vtbl[].vtbl.connectNotify = miqt_exec_method_cQTimeEdit_connectNotify
+  vtbl[].vtbl.disconnectNotify = miqt_exec_method_cQTimeEdit_disconnectNotify
+  if vtbl[].h != nil: delete(move(vtbl[]))
+  vtbl[].h = fcQTimeEdit_new4(addr(vtbl[].vtbl), time.h, parent.h)
+  vtbl[].owned = true
 
 proc staticMetaObject*(_: type gen_qdatetimeedit_types.QTimeEdit): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQTimeEdit_staticMetaObject())
-proc delete*(self: gen_qdatetimeedit_types.QTimeEdit) =
-  fcQTimeEdit_delete(self.h)
 proc metaObject*(self: gen_qdatetimeedit_types.QDateEdit, ): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQDateEdit_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQDateEdit_metaObject(self.h), owned: false)
 
 proc metacast*(self: gen_qdatetimeedit_types.QDateEdit, param1: cstring): pointer =
   fcQDateEdit_metacast(self.h, param1)
@@ -3835,7 +5616,7 @@ proc userDateChanged*(self: gen_qdatetimeedit_types.QDateEdit, date: gen_qdateti
 type QDateEdituserDateChangedSlot* = proc(date: gen_qdatetime_types.QDate)
 proc miqt_exec_callback_cQDateEdit_userDateChanged(slot: int, date: pointer) {.cdecl.} =
   let nimfunc = cast[ptr QDateEdituserDateChangedSlot](cast[pointer](slot))
-  let slotval1 = gen_qdatetime_types.QDate(h: date)
+  let slotval1 = gen_qdatetime_types.QDate(h: date, owned: false)
 
   nimfunc[](slotval1)
 
@@ -3930,7 +5711,7 @@ type QDateEditchildEventProc* = proc(self: QDateEdit, event: gen_qcoreevent_type
 type QDateEditcustomEventProc* = proc(self: QDateEdit, event: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
 type QDateEditconnectNotifyProc* = proc(self: QDateEdit, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
 type QDateEditdisconnectNotifyProc* = proc(self: QDateEdit, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
-type QDateEditVTable* = object
+type QDateEditVTable* {.inheritable, pure.} = object
   vtbl: cQDateEditVTable
   metaObject*: QDateEditmetaObjectProc
   metacast*: QDateEditmetacastProc
@@ -3990,13 +5771,16 @@ type QDateEditVTable* = object
   connectNotify*: QDateEditconnectNotifyProc
   disconnectNotify*: QDateEditdisconnectNotifyProc
 proc QDateEditmetaObject*(self: gen_qdatetimeedit_types.QDateEdit, ): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQDateEdit_virtualbase_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQDateEdit_virtualbase_metaObject(self.h), owned: false)
 
 proc miqt_exec_callback_cQDateEdit_metaObject(vtbl: pointer, self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QDateEditVTable](vtbl)
   let self = QDateEdit(h: self)
   var virtualReturn = vtbl[].metaObject(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QDateEditmetacast*(self: gen_qdatetimeedit_types.QDateEdit, param1: cstring): pointer =
   fcQDateEdit_virtualbase_metacast(self.h, param1)
@@ -4021,13 +5805,16 @@ proc miqt_exec_callback_cQDateEdit_metacall(vtbl: pointer, self: pointer, param1
   virtualReturn
 
 proc QDateEditsizeHint*(self: gen_qdatetimeedit_types.QDateEdit, ): gen_qsize_types.QSize =
-  gen_qsize_types.QSize(h: fcQDateEdit_virtualbase_sizeHint(self.h))
+  gen_qsize_types.QSize(h: fcQDateEdit_virtualbase_sizeHint(self.h), owned: true)
 
 proc miqt_exec_callback_cQDateEdit_sizeHint(vtbl: pointer, self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QDateEditVTable](vtbl)
   let self = QDateEdit(h: self)
   var virtualReturn = vtbl[].sizeHint(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QDateEditclear*(self: gen_qdatetimeedit_types.QDateEdit, ): void =
   fcQDateEdit_virtualbase_clear(self.h)
@@ -4052,7 +5839,7 @@ proc QDateEditevent*(self: gen_qdatetimeedit_types.QDateEdit, event: gen_qcoreev
 proc miqt_exec_callback_cQDateEdit_event(vtbl: pointer, self: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QDateEditVTable](vtbl)
   let self = QDateEdit(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].event(self, slotval1)
   virtualReturn
 
@@ -4062,7 +5849,7 @@ proc QDateEditkeyPressEvent*(self: gen_qdatetimeedit_types.QDateEdit, event: gen
 proc miqt_exec_callback_cQDateEdit_keyPressEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDateEditVTable](vtbl)
   let self = QDateEdit(h: self)
-  let slotval1 = gen_qevent_types.QKeyEvent(h: event)
+  let slotval1 = gen_qevent_types.QKeyEvent(h: event, owned: false)
   vtbl[].keyPressEvent(self, slotval1)
 
 proc QDateEditwheelEvent*(self: gen_qdatetimeedit_types.QDateEdit, event: gen_qevent_types.QWheelEvent): void =
@@ -4071,7 +5858,7 @@ proc QDateEditwheelEvent*(self: gen_qdatetimeedit_types.QDateEdit, event: gen_qe
 proc miqt_exec_callback_cQDateEdit_wheelEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDateEditVTable](vtbl)
   let self = QDateEdit(h: self)
-  let slotval1 = gen_qevent_types.QWheelEvent(h: event)
+  let slotval1 = gen_qevent_types.QWheelEvent(h: event, owned: false)
   vtbl[].wheelEvent(self, slotval1)
 
 proc QDateEditfocusInEvent*(self: gen_qdatetimeedit_types.QDateEdit, event: gen_qevent_types.QFocusEvent): void =
@@ -4080,7 +5867,7 @@ proc QDateEditfocusInEvent*(self: gen_qdatetimeedit_types.QDateEdit, event: gen_
 proc miqt_exec_callback_cQDateEdit_focusInEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDateEditVTable](vtbl)
   let self = QDateEdit(h: self)
-  let slotval1 = gen_qevent_types.QFocusEvent(h: event)
+  let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
   vtbl[].focusInEvent(self, slotval1)
 
 proc QDateEditfocusNextPrevChild*(self: gen_qdatetimeedit_types.QDateEdit, next: bool): bool =
@@ -4120,7 +5907,7 @@ proc miqt_exec_callback_cQDateEdit_fixup(vtbl: pointer, self: pointer, input: st
   vtbl[].fixup(self, slotval1)
 
 proc QDateEditdateTimeFromText*(self: gen_qdatetimeedit_types.QDateEdit, text: string): gen_qdatetime_types.QDateTime =
-  gen_qdatetime_types.QDateTime(h: fcQDateEdit_virtualbase_dateTimeFromText(self.h, struct_miqt_string(data: text, len: csize_t(len(text)))))
+  gen_qdatetime_types.QDateTime(h: fcQDateEdit_virtualbase_dateTimeFromText(self.h, struct_miqt_string(data: text, len: csize_t(len(text)))), owned: true)
 
 proc miqt_exec_callback_cQDateEdit_dateTimeFromText(vtbl: pointer, self: pointer, text: struct_miqt_string): pointer {.cdecl.} =
   let vtbl = cast[ptr QDateEditVTable](vtbl)
@@ -4130,7 +5917,10 @@ proc miqt_exec_callback_cQDateEdit_dateTimeFromText(vtbl: pointer, self: pointer
   c_free(vtext_ms.data)
   let slotval1 = vtextx_ret
   var virtualReturn = vtbl[].dateTimeFromText(self, slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QDateEdittextFromDateTime*(self: gen_qdatetimeedit_types.QDateEdit, dt: gen_qdatetime_types.QDateTime): string =
   let v_ms = fcQDateEdit_virtualbase_textFromDateTime(self.h, dt.h)
@@ -4141,7 +5931,7 @@ proc QDateEdittextFromDateTime*(self: gen_qdatetimeedit_types.QDateEdit, dt: gen
 proc miqt_exec_callback_cQDateEdit_textFromDateTime(vtbl: pointer, self: pointer, dt: pointer): struct_miqt_string {.cdecl.} =
   let vtbl = cast[ptr QDateEditVTable](vtbl)
   let self = QDateEdit(h: self)
-  let slotval1 = gen_qdatetime_types.QDateTime(h: dt)
+  let slotval1 = gen_qdatetime_types.QDateTime(h: dt, owned: false)
   var virtualReturn = vtbl[].textFromDateTime(self, slotval1)
   var virtualReturn_copy = cast[cstring](if len(virtualReturn) > 0: c_malloc(csize_t(len(virtualReturn))) else: nil)
   if len(virtualReturn) > 0: copyMem(cast[pointer](virtualReturn_copy), addr virtualReturn[0], csize_t(len(virtualReturn)))
@@ -4162,7 +5952,7 @@ proc QDateEditmousePressEvent*(self: gen_qdatetimeedit_types.QDateEdit, event: g
 proc miqt_exec_callback_cQDateEdit_mousePressEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDateEditVTable](vtbl)
   let self = QDateEdit(h: self)
-  let slotval1 = gen_qevent_types.QMouseEvent(h: event)
+  let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   vtbl[].mousePressEvent(self, slotval1)
 
 proc QDateEditpaintEvent*(self: gen_qdatetimeedit_types.QDateEdit, event: gen_qevent_types.QPaintEvent): void =
@@ -4171,27 +5961,33 @@ proc QDateEditpaintEvent*(self: gen_qdatetimeedit_types.QDateEdit, event: gen_qe
 proc miqt_exec_callback_cQDateEdit_paintEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDateEditVTable](vtbl)
   let self = QDateEdit(h: self)
-  let slotval1 = gen_qevent_types.QPaintEvent(h: event)
+  let slotval1 = gen_qevent_types.QPaintEvent(h: event, owned: false)
   vtbl[].paintEvent(self, slotval1)
 
 proc QDateEditminimumSizeHint*(self: gen_qdatetimeedit_types.QDateEdit, ): gen_qsize_types.QSize =
-  gen_qsize_types.QSize(h: fcQDateEdit_virtualbase_minimumSizeHint(self.h))
+  gen_qsize_types.QSize(h: fcQDateEdit_virtualbase_minimumSizeHint(self.h), owned: true)
 
 proc miqt_exec_callback_cQDateEdit_minimumSizeHint(vtbl: pointer, self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QDateEditVTable](vtbl)
   let self = QDateEdit(h: self)
   var virtualReturn = vtbl[].minimumSizeHint(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QDateEditinputMethodQuery*(self: gen_qdatetimeedit_types.QDateEdit, param1: cint): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQDateEdit_virtualbase_inputMethodQuery(self.h, cint(param1)))
+  gen_qvariant_types.QVariant(h: fcQDateEdit_virtualbase_inputMethodQuery(self.h, cint(param1)), owned: true)
 
 proc miqt_exec_callback_cQDateEdit_inputMethodQuery(vtbl: pointer, self: pointer, param1: cint): pointer {.cdecl.} =
   let vtbl = cast[ptr QDateEditVTable](vtbl)
   let self = QDateEdit(h: self)
   let slotval1 = cint(param1)
   var virtualReturn = vtbl[].inputMethodQuery(self, slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QDateEditresizeEvent*(self: gen_qdatetimeedit_types.QDateEdit, event: gen_qevent_types.QResizeEvent): void =
   fcQDateEdit_virtualbase_resizeEvent(self.h, event.h)
@@ -4199,7 +5995,7 @@ proc QDateEditresizeEvent*(self: gen_qdatetimeedit_types.QDateEdit, event: gen_q
 proc miqt_exec_callback_cQDateEdit_resizeEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDateEditVTable](vtbl)
   let self = QDateEdit(h: self)
-  let slotval1 = gen_qevent_types.QResizeEvent(h: event)
+  let slotval1 = gen_qevent_types.QResizeEvent(h: event, owned: false)
   vtbl[].resizeEvent(self, slotval1)
 
 proc QDateEditkeyReleaseEvent*(self: gen_qdatetimeedit_types.QDateEdit, event: gen_qevent_types.QKeyEvent): void =
@@ -4208,7 +6004,7 @@ proc QDateEditkeyReleaseEvent*(self: gen_qdatetimeedit_types.QDateEdit, event: g
 proc miqt_exec_callback_cQDateEdit_keyReleaseEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDateEditVTable](vtbl)
   let self = QDateEdit(h: self)
-  let slotval1 = gen_qevent_types.QKeyEvent(h: event)
+  let slotval1 = gen_qevent_types.QKeyEvent(h: event, owned: false)
   vtbl[].keyReleaseEvent(self, slotval1)
 
 proc QDateEditfocusOutEvent*(self: gen_qdatetimeedit_types.QDateEdit, event: gen_qevent_types.QFocusEvent): void =
@@ -4217,7 +6013,7 @@ proc QDateEditfocusOutEvent*(self: gen_qdatetimeedit_types.QDateEdit, event: gen
 proc miqt_exec_callback_cQDateEdit_focusOutEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDateEditVTable](vtbl)
   let self = QDateEdit(h: self)
-  let slotval1 = gen_qevent_types.QFocusEvent(h: event)
+  let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
   vtbl[].focusOutEvent(self, slotval1)
 
 proc QDateEditcontextMenuEvent*(self: gen_qdatetimeedit_types.QDateEdit, event: gen_qevent_types.QContextMenuEvent): void =
@@ -4226,7 +6022,7 @@ proc QDateEditcontextMenuEvent*(self: gen_qdatetimeedit_types.QDateEdit, event: 
 proc miqt_exec_callback_cQDateEdit_contextMenuEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDateEditVTable](vtbl)
   let self = QDateEdit(h: self)
-  let slotval1 = gen_qevent_types.QContextMenuEvent(h: event)
+  let slotval1 = gen_qevent_types.QContextMenuEvent(h: event, owned: false)
   vtbl[].contextMenuEvent(self, slotval1)
 
 proc QDateEditchangeEvent*(self: gen_qdatetimeedit_types.QDateEdit, event: gen_qcoreevent_types.QEvent): void =
@@ -4235,7 +6031,7 @@ proc QDateEditchangeEvent*(self: gen_qdatetimeedit_types.QDateEdit, event: gen_q
 proc miqt_exec_callback_cQDateEdit_changeEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDateEditVTable](vtbl)
   let self = QDateEdit(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].changeEvent(self, slotval1)
 
 proc QDateEditcloseEvent*(self: gen_qdatetimeedit_types.QDateEdit, event: gen_qevent_types.QCloseEvent): void =
@@ -4244,7 +6040,7 @@ proc QDateEditcloseEvent*(self: gen_qdatetimeedit_types.QDateEdit, event: gen_qe
 proc miqt_exec_callback_cQDateEdit_closeEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDateEditVTable](vtbl)
   let self = QDateEdit(h: self)
-  let slotval1 = gen_qevent_types.QCloseEvent(h: event)
+  let slotval1 = gen_qevent_types.QCloseEvent(h: event, owned: false)
   vtbl[].closeEvent(self, slotval1)
 
 proc QDateEdithideEvent*(self: gen_qdatetimeedit_types.QDateEdit, event: gen_qevent_types.QHideEvent): void =
@@ -4253,7 +6049,7 @@ proc QDateEdithideEvent*(self: gen_qdatetimeedit_types.QDateEdit, event: gen_qev
 proc miqt_exec_callback_cQDateEdit_hideEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDateEditVTable](vtbl)
   let self = QDateEdit(h: self)
-  let slotval1 = gen_qevent_types.QHideEvent(h: event)
+  let slotval1 = gen_qevent_types.QHideEvent(h: event, owned: false)
   vtbl[].hideEvent(self, slotval1)
 
 proc QDateEditmouseReleaseEvent*(self: gen_qdatetimeedit_types.QDateEdit, event: gen_qevent_types.QMouseEvent): void =
@@ -4262,7 +6058,7 @@ proc QDateEditmouseReleaseEvent*(self: gen_qdatetimeedit_types.QDateEdit, event:
 proc miqt_exec_callback_cQDateEdit_mouseReleaseEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDateEditVTable](vtbl)
   let self = QDateEdit(h: self)
-  let slotval1 = gen_qevent_types.QMouseEvent(h: event)
+  let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   vtbl[].mouseReleaseEvent(self, slotval1)
 
 proc QDateEditmouseMoveEvent*(self: gen_qdatetimeedit_types.QDateEdit, event: gen_qevent_types.QMouseEvent): void =
@@ -4271,7 +6067,7 @@ proc QDateEditmouseMoveEvent*(self: gen_qdatetimeedit_types.QDateEdit, event: ge
 proc miqt_exec_callback_cQDateEdit_mouseMoveEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDateEditVTable](vtbl)
   let self = QDateEdit(h: self)
-  let slotval1 = gen_qevent_types.QMouseEvent(h: event)
+  let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   vtbl[].mouseMoveEvent(self, slotval1)
 
 proc QDateEdittimerEvent*(self: gen_qdatetimeedit_types.QDateEdit, event: gen_qcoreevent_types.QTimerEvent): void =
@@ -4280,7 +6076,7 @@ proc QDateEdittimerEvent*(self: gen_qdatetimeedit_types.QDateEdit, event: gen_qc
 proc miqt_exec_callback_cQDateEdit_timerEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDateEditVTable](vtbl)
   let self = QDateEdit(h: self)
-  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   vtbl[].timerEvent(self, slotval1)
 
 proc QDateEditshowEvent*(self: gen_qdatetimeedit_types.QDateEdit, event: gen_qevent_types.QShowEvent): void =
@@ -4289,7 +6085,7 @@ proc QDateEditshowEvent*(self: gen_qdatetimeedit_types.QDateEdit, event: gen_qev
 proc miqt_exec_callback_cQDateEdit_showEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDateEditVTable](vtbl)
   let self = QDateEdit(h: self)
-  let slotval1 = gen_qevent_types.QShowEvent(h: event)
+  let slotval1 = gen_qevent_types.QShowEvent(h: event, owned: false)
   vtbl[].showEvent(self, slotval1)
 
 proc QDateEditdevType*(self: gen_qdatetimeedit_types.QDateEdit, ): cint =
@@ -4330,13 +6126,16 @@ proc miqt_exec_callback_cQDateEdit_hasHeightForWidth(vtbl: pointer, self: pointe
   virtualReturn
 
 proc QDateEditpaintEngine*(self: gen_qdatetimeedit_types.QDateEdit, ): gen_qpaintengine_types.QPaintEngine =
-  gen_qpaintengine_types.QPaintEngine(h: fcQDateEdit_virtualbase_paintEngine(self.h))
+  gen_qpaintengine_types.QPaintEngine(h: fcQDateEdit_virtualbase_paintEngine(self.h), owned: false)
 
 proc miqt_exec_callback_cQDateEdit_paintEngine(vtbl: pointer, self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QDateEditVTable](vtbl)
   let self = QDateEdit(h: self)
   var virtualReturn = vtbl[].paintEngine(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QDateEditmouseDoubleClickEvent*(self: gen_qdatetimeedit_types.QDateEdit, event: gen_qevent_types.QMouseEvent): void =
   fcQDateEdit_virtualbase_mouseDoubleClickEvent(self.h, event.h)
@@ -4344,7 +6143,7 @@ proc QDateEditmouseDoubleClickEvent*(self: gen_qdatetimeedit_types.QDateEdit, ev
 proc miqt_exec_callback_cQDateEdit_mouseDoubleClickEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDateEditVTable](vtbl)
   let self = QDateEdit(h: self)
-  let slotval1 = gen_qevent_types.QMouseEvent(h: event)
+  let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   vtbl[].mouseDoubleClickEvent(self, slotval1)
 
 proc QDateEditenterEvent*(self: gen_qdatetimeedit_types.QDateEdit, event: gen_qcoreevent_types.QEvent): void =
@@ -4353,7 +6152,7 @@ proc QDateEditenterEvent*(self: gen_qdatetimeedit_types.QDateEdit, event: gen_qc
 proc miqt_exec_callback_cQDateEdit_enterEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDateEditVTable](vtbl)
   let self = QDateEdit(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].enterEvent(self, slotval1)
 
 proc QDateEditleaveEvent*(self: gen_qdatetimeedit_types.QDateEdit, event: gen_qcoreevent_types.QEvent): void =
@@ -4362,7 +6161,7 @@ proc QDateEditleaveEvent*(self: gen_qdatetimeedit_types.QDateEdit, event: gen_qc
 proc miqt_exec_callback_cQDateEdit_leaveEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDateEditVTable](vtbl)
   let self = QDateEdit(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].leaveEvent(self, slotval1)
 
 proc QDateEditmoveEvent*(self: gen_qdatetimeedit_types.QDateEdit, event: gen_qevent_types.QMoveEvent): void =
@@ -4371,7 +6170,7 @@ proc QDateEditmoveEvent*(self: gen_qdatetimeedit_types.QDateEdit, event: gen_qev
 proc miqt_exec_callback_cQDateEdit_moveEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDateEditVTable](vtbl)
   let self = QDateEdit(h: self)
-  let slotval1 = gen_qevent_types.QMoveEvent(h: event)
+  let slotval1 = gen_qevent_types.QMoveEvent(h: event, owned: false)
   vtbl[].moveEvent(self, slotval1)
 
 proc QDateEdittabletEvent*(self: gen_qdatetimeedit_types.QDateEdit, event: gen_qevent_types.QTabletEvent): void =
@@ -4380,7 +6179,7 @@ proc QDateEdittabletEvent*(self: gen_qdatetimeedit_types.QDateEdit, event: gen_q
 proc miqt_exec_callback_cQDateEdit_tabletEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDateEditVTable](vtbl)
   let self = QDateEdit(h: self)
-  let slotval1 = gen_qevent_types.QTabletEvent(h: event)
+  let slotval1 = gen_qevent_types.QTabletEvent(h: event, owned: false)
   vtbl[].tabletEvent(self, slotval1)
 
 proc QDateEditactionEvent*(self: gen_qdatetimeedit_types.QDateEdit, event: gen_qevent_types.QActionEvent): void =
@@ -4389,7 +6188,7 @@ proc QDateEditactionEvent*(self: gen_qdatetimeedit_types.QDateEdit, event: gen_q
 proc miqt_exec_callback_cQDateEdit_actionEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDateEditVTable](vtbl)
   let self = QDateEdit(h: self)
-  let slotval1 = gen_qevent_types.QActionEvent(h: event)
+  let slotval1 = gen_qevent_types.QActionEvent(h: event, owned: false)
   vtbl[].actionEvent(self, slotval1)
 
 proc QDateEditdragEnterEvent*(self: gen_qdatetimeedit_types.QDateEdit, event: gen_qevent_types.QDragEnterEvent): void =
@@ -4398,7 +6197,7 @@ proc QDateEditdragEnterEvent*(self: gen_qdatetimeedit_types.QDateEdit, event: ge
 proc miqt_exec_callback_cQDateEdit_dragEnterEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDateEditVTable](vtbl)
   let self = QDateEdit(h: self)
-  let slotval1 = gen_qevent_types.QDragEnterEvent(h: event)
+  let slotval1 = gen_qevent_types.QDragEnterEvent(h: event, owned: false)
   vtbl[].dragEnterEvent(self, slotval1)
 
 proc QDateEditdragMoveEvent*(self: gen_qdatetimeedit_types.QDateEdit, event: gen_qevent_types.QDragMoveEvent): void =
@@ -4407,7 +6206,7 @@ proc QDateEditdragMoveEvent*(self: gen_qdatetimeedit_types.QDateEdit, event: gen
 proc miqt_exec_callback_cQDateEdit_dragMoveEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDateEditVTable](vtbl)
   let self = QDateEdit(h: self)
-  let slotval1 = gen_qevent_types.QDragMoveEvent(h: event)
+  let slotval1 = gen_qevent_types.QDragMoveEvent(h: event, owned: false)
   vtbl[].dragMoveEvent(self, slotval1)
 
 proc QDateEditdragLeaveEvent*(self: gen_qdatetimeedit_types.QDateEdit, event: gen_qevent_types.QDragLeaveEvent): void =
@@ -4416,7 +6215,7 @@ proc QDateEditdragLeaveEvent*(self: gen_qdatetimeedit_types.QDateEdit, event: ge
 proc miqt_exec_callback_cQDateEdit_dragLeaveEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDateEditVTable](vtbl)
   let self = QDateEdit(h: self)
-  let slotval1 = gen_qevent_types.QDragLeaveEvent(h: event)
+  let slotval1 = gen_qevent_types.QDragLeaveEvent(h: event, owned: false)
   vtbl[].dragLeaveEvent(self, slotval1)
 
 proc QDateEditdropEvent*(self: gen_qdatetimeedit_types.QDateEdit, event: gen_qevent_types.QDropEvent): void =
@@ -4425,7 +6224,7 @@ proc QDateEditdropEvent*(self: gen_qdatetimeedit_types.QDateEdit, event: gen_qev
 proc miqt_exec_callback_cQDateEdit_dropEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDateEditVTable](vtbl)
   let self = QDateEdit(h: self)
-  let slotval1 = gen_qevent_types.QDropEvent(h: event)
+  let slotval1 = gen_qevent_types.QDropEvent(h: event, owned: false)
   vtbl[].dropEvent(self, slotval1)
 
 proc QDateEditnativeEvent*(self: gen_qdatetimeedit_types.QDateEdit, eventType: seq[byte], message: pointer, resultVal: ptr clong): bool =
@@ -4459,27 +6258,33 @@ proc QDateEditinitPainter*(self: gen_qdatetimeedit_types.QDateEdit, painter: gen
 proc miqt_exec_callback_cQDateEdit_initPainter(vtbl: pointer, self: pointer, painter: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDateEditVTable](vtbl)
   let self = QDateEdit(h: self)
-  let slotval1 = gen_qpainter_types.QPainter(h: painter)
+  let slotval1 = gen_qpainter_types.QPainter(h: painter, owned: false)
   vtbl[].initPainter(self, slotval1)
 
 proc QDateEditredirected*(self: gen_qdatetimeedit_types.QDateEdit, offset: gen_qpoint_types.QPoint): gen_qpaintdevice_types.QPaintDevice =
-  gen_qpaintdevice_types.QPaintDevice(h: fcQDateEdit_virtualbase_redirected(self.h, offset.h))
+  gen_qpaintdevice_types.QPaintDevice(h: fcQDateEdit_virtualbase_redirected(self.h, offset.h), owned: false)
 
 proc miqt_exec_callback_cQDateEdit_redirected(vtbl: pointer, self: pointer, offset: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QDateEditVTable](vtbl)
   let self = QDateEdit(h: self)
-  let slotval1 = gen_qpoint_types.QPoint(h: offset)
+  let slotval1 = gen_qpoint_types.QPoint(h: offset, owned: false)
   var virtualReturn = vtbl[].redirected(self, slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QDateEditsharedPainter*(self: gen_qdatetimeedit_types.QDateEdit, ): gen_qpainter_types.QPainter =
-  gen_qpainter_types.QPainter(h: fcQDateEdit_virtualbase_sharedPainter(self.h))
+  gen_qpainter_types.QPainter(h: fcQDateEdit_virtualbase_sharedPainter(self.h), owned: false)
 
 proc miqt_exec_callback_cQDateEdit_sharedPainter(vtbl: pointer, self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QDateEditVTable](vtbl)
   let self = QDateEdit(h: self)
   var virtualReturn = vtbl[].sharedPainter(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QDateEditinputMethodEvent*(self: gen_qdatetimeedit_types.QDateEdit, param1: gen_qevent_types.QInputMethodEvent): void =
   fcQDateEdit_virtualbase_inputMethodEvent(self.h, param1.h)
@@ -4487,7 +6292,7 @@ proc QDateEditinputMethodEvent*(self: gen_qdatetimeedit_types.QDateEdit, param1:
 proc miqt_exec_callback_cQDateEdit_inputMethodEvent(vtbl: pointer, self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDateEditVTable](vtbl)
   let self = QDateEdit(h: self)
-  let slotval1 = gen_qevent_types.QInputMethodEvent(h: param1)
+  let slotval1 = gen_qevent_types.QInputMethodEvent(h: param1, owned: false)
   vtbl[].inputMethodEvent(self, slotval1)
 
 proc QDateEditeventFilter*(self: gen_qdatetimeedit_types.QDateEdit, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool =
@@ -4496,8 +6301,8 @@ proc QDateEditeventFilter*(self: gen_qdatetimeedit_types.QDateEdit, watched: gen
 proc miqt_exec_callback_cQDateEdit_eventFilter(vtbl: pointer, self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QDateEditVTable](vtbl)
   let self = QDateEdit(h: self)
-  let slotval1 = gen_qobject_types.QObject(h: watched)
-  let slotval2 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].eventFilter(self, slotval1, slotval2)
   virtualReturn
 
@@ -4507,7 +6312,7 @@ proc QDateEditchildEvent*(self: gen_qdatetimeedit_types.QDateEdit, event: gen_qc
 proc miqt_exec_callback_cQDateEdit_childEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDateEditVTable](vtbl)
   let self = QDateEdit(h: self)
-  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   vtbl[].childEvent(self, slotval1)
 
 proc QDateEditcustomEvent*(self: gen_qdatetimeedit_types.QDateEdit, event: gen_qcoreevent_types.QEvent): void =
@@ -4516,7 +6321,7 @@ proc QDateEditcustomEvent*(self: gen_qdatetimeedit_types.QDateEdit, event: gen_q
 proc miqt_exec_callback_cQDateEdit_customEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDateEditVTable](vtbl)
   let self = QDateEdit(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].customEvent(self, slotval1)
 
 proc QDateEditconnectNotify*(self: gen_qdatetimeedit_types.QDateEdit, signal: gen_qmetaobject_types.QMetaMethod): void =
@@ -4525,7 +6330,7 @@ proc QDateEditconnectNotify*(self: gen_qdatetimeedit_types.QDateEdit, signal: ge
 proc miqt_exec_callback_cQDateEdit_connectNotify(vtbl: pointer, self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDateEditVTable](vtbl)
   let self = QDateEdit(h: self)
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].connectNotify(self, slotval1)
 
 proc QDateEditdisconnectNotify*(self: gen_qdatetimeedit_types.QDateEdit, signal: gen_qmetaobject_types.QMetaMethod): void =
@@ -4534,14 +6339,471 @@ proc QDateEditdisconnectNotify*(self: gen_qdatetimeedit_types.QDateEdit, signal:
 proc miqt_exec_callback_cQDateEdit_disconnectNotify(vtbl: pointer, self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDateEditVTable](vtbl)
   let self = QDateEdit(h: self)
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].disconnectNotify(self, slotval1)
+
+type VirtualQDateEdit* {.inheritable.} = ref object of QDateEdit
+  vtbl*: cQDateEditVTable
+method metaObject*(self: VirtualQDateEdit, ): gen_qobjectdefs_types.QMetaObject {.base.} =
+  QDateEditmetaObject(self[])
+proc miqt_exec_method_cQDateEdit_metaObject(vtbl: pointer, inst: pointer): pointer {.cdecl.} =
+  let vtbl = cast[VirtualQDateEdit](cast[uint](vtbl) - uint(offsetOf(VirtualQDateEdit, vtbl)))
+  var virtualReturn = vtbl.metaObject()
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
+
+method metacast*(self: VirtualQDateEdit, param1: cstring): pointer {.base.} =
+  QDateEditmetacast(self[], param1)
+proc miqt_exec_method_cQDateEdit_metacast(vtbl: pointer, inst: pointer, param1: cstring): pointer {.cdecl.} =
+  let vtbl = cast[VirtualQDateEdit](cast[uint](vtbl) - uint(offsetOf(VirtualQDateEdit, vtbl)))
+  let slotval1 = (param1)
+  var virtualReturn = vtbl.metacast(slotval1)
+  virtualReturn
+
+method metacall*(self: VirtualQDateEdit, param1: cint, param2: cint, param3: pointer): cint {.base.} =
+  QDateEditmetacall(self[], param1, param2, param3)
+proc miqt_exec_method_cQDateEdit_metacall(vtbl: pointer, inst: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
+  let vtbl = cast[VirtualQDateEdit](cast[uint](vtbl) - uint(offsetOf(VirtualQDateEdit, vtbl)))
+  let slotval1 = cint(param1)
+  let slotval2 = param2
+  let slotval3 = param3
+  var virtualReturn = vtbl.metacall(slotval1, slotval2, slotval3)
+  virtualReturn
+
+method sizeHint*(self: VirtualQDateEdit, ): gen_qsize_types.QSize {.base.} =
+  QDateEditsizeHint(self[])
+proc miqt_exec_method_cQDateEdit_sizeHint(vtbl: pointer, inst: pointer): pointer {.cdecl.} =
+  let vtbl = cast[VirtualQDateEdit](cast[uint](vtbl) - uint(offsetOf(VirtualQDateEdit, vtbl)))
+  var virtualReturn = vtbl.sizeHint()
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
+
+method clear*(self: VirtualQDateEdit, ): void {.base.} =
+  QDateEditclear(self[])
+proc miqt_exec_method_cQDateEdit_clear(vtbl: pointer, inst: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQDateEdit](cast[uint](vtbl) - uint(offsetOf(VirtualQDateEdit, vtbl)))
+  vtbl.clear()
+
+method stepBy*(self: VirtualQDateEdit, steps: cint): void {.base.} =
+  QDateEditstepBy(self[], steps)
+proc miqt_exec_method_cQDateEdit_stepBy(vtbl: pointer, inst: pointer, steps: cint): void {.cdecl.} =
+  let vtbl = cast[VirtualQDateEdit](cast[uint](vtbl) - uint(offsetOf(VirtualQDateEdit, vtbl)))
+  let slotval1 = steps
+  vtbl.stepBy(slotval1)
+
+method event*(self: VirtualQDateEdit, event: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QDateEditevent(self[], event)
+proc miqt_exec_method_cQDateEdit_event(vtbl: pointer, inst: pointer, event: pointer): bool {.cdecl.} =
+  let vtbl = cast[VirtualQDateEdit](cast[uint](vtbl) - uint(offsetOf(VirtualQDateEdit, vtbl)))
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
+  var virtualReturn = vtbl.event(slotval1)
+  virtualReturn
+
+method keyPressEvent*(self: VirtualQDateEdit, event: gen_qevent_types.QKeyEvent): void {.base.} =
+  QDateEditkeyPressEvent(self[], event)
+proc miqt_exec_method_cQDateEdit_keyPressEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQDateEdit](cast[uint](vtbl) - uint(offsetOf(VirtualQDateEdit, vtbl)))
+  let slotval1 = gen_qevent_types.QKeyEvent(h: event, owned: false)
+  vtbl.keyPressEvent(slotval1)
+
+method wheelEvent*(self: VirtualQDateEdit, event: gen_qevent_types.QWheelEvent): void {.base.} =
+  QDateEditwheelEvent(self[], event)
+proc miqt_exec_method_cQDateEdit_wheelEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQDateEdit](cast[uint](vtbl) - uint(offsetOf(VirtualQDateEdit, vtbl)))
+  let slotval1 = gen_qevent_types.QWheelEvent(h: event, owned: false)
+  vtbl.wheelEvent(slotval1)
+
+method focusInEvent*(self: VirtualQDateEdit, event: gen_qevent_types.QFocusEvent): void {.base.} =
+  QDateEditfocusInEvent(self[], event)
+proc miqt_exec_method_cQDateEdit_focusInEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQDateEdit](cast[uint](vtbl) - uint(offsetOf(VirtualQDateEdit, vtbl)))
+  let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
+  vtbl.focusInEvent(slotval1)
+
+method focusNextPrevChild*(self: VirtualQDateEdit, next: bool): bool {.base.} =
+  QDateEditfocusNextPrevChild(self[], next)
+proc miqt_exec_method_cQDateEdit_focusNextPrevChild(vtbl: pointer, inst: pointer, next: bool): bool {.cdecl.} =
+  let vtbl = cast[VirtualQDateEdit](cast[uint](vtbl) - uint(offsetOf(VirtualQDateEdit, vtbl)))
+  let slotval1 = next
+  var virtualReturn = vtbl.focusNextPrevChild(slotval1)
+  virtualReturn
+
+method validate*(self: VirtualQDateEdit, input: string, pos: ptr cint): cint {.base.} =
+  QDateEditvalidate(self[], input, pos)
+proc miqt_exec_method_cQDateEdit_validate(vtbl: pointer, inst: pointer, input: struct_miqt_string, pos: ptr cint): cint {.cdecl.} =
+  let vtbl = cast[VirtualQDateEdit](cast[uint](vtbl) - uint(offsetOf(VirtualQDateEdit, vtbl)))
+  let vinput_ms = input
+  let vinputx_ret = string.fromBytes(toOpenArrayByte(vinput_ms.data, 0, int(vinput_ms.len)-1))
+  c_free(vinput_ms.data)
+  let slotval1 = vinputx_ret
+  let slotval2 = pos
+  var virtualReturn = vtbl.validate(slotval1, slotval2)
+  cint(virtualReturn)
+
+method fixup*(self: VirtualQDateEdit, input: string): void {.base.} =
+  QDateEditfixup(self[], input)
+proc miqt_exec_method_cQDateEdit_fixup(vtbl: pointer, inst: pointer, input: struct_miqt_string): void {.cdecl.} =
+  let vtbl = cast[VirtualQDateEdit](cast[uint](vtbl) - uint(offsetOf(VirtualQDateEdit, vtbl)))
+  let vinput_ms = input
+  let vinputx_ret = string.fromBytes(toOpenArrayByte(vinput_ms.data, 0, int(vinput_ms.len)-1))
+  c_free(vinput_ms.data)
+  let slotval1 = vinputx_ret
+  vtbl.fixup(slotval1)
+
+method dateTimeFromText*(self: VirtualQDateEdit, text: string): gen_qdatetime_types.QDateTime {.base.} =
+  QDateEditdateTimeFromText(self[], text)
+proc miqt_exec_method_cQDateEdit_dateTimeFromText(vtbl: pointer, inst: pointer, text: struct_miqt_string): pointer {.cdecl.} =
+  let vtbl = cast[VirtualQDateEdit](cast[uint](vtbl) - uint(offsetOf(VirtualQDateEdit, vtbl)))
+  let vtext_ms = text
+  let vtextx_ret = string.fromBytes(toOpenArrayByte(vtext_ms.data, 0, int(vtext_ms.len)-1))
+  c_free(vtext_ms.data)
+  let slotval1 = vtextx_ret
+  var virtualReturn = vtbl.dateTimeFromText(slotval1)
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
+
+method textFromDateTime*(self: VirtualQDateEdit, dt: gen_qdatetime_types.QDateTime): string {.base.} =
+  QDateEdittextFromDateTime(self[], dt)
+proc miqt_exec_method_cQDateEdit_textFromDateTime(vtbl: pointer, inst: pointer, dt: pointer): struct_miqt_string {.cdecl.} =
+  let vtbl = cast[VirtualQDateEdit](cast[uint](vtbl) - uint(offsetOf(VirtualQDateEdit, vtbl)))
+  let slotval1 = gen_qdatetime_types.QDateTime(h: dt, owned: false)
+  var virtualReturn = vtbl.textFromDateTime(slotval1)
+  var virtualReturn_copy = cast[cstring](if len(virtualReturn) > 0: c_malloc(csize_t(len(virtualReturn))) else: nil)
+  if len(virtualReturn) > 0: copyMem(cast[pointer](virtualReturn_copy), addr virtualReturn[0], csize_t(len(virtualReturn)))
+  struct_miqt_string(data: virtualReturn_copy, len: csize_t(len(virtualReturn)))
+
+method stepEnabled*(self: VirtualQDateEdit, ): cint {.base.} =
+  QDateEditstepEnabled(self[])
+proc miqt_exec_method_cQDateEdit_stepEnabled(vtbl: pointer, inst: pointer): cint {.cdecl.} =
+  let vtbl = cast[VirtualQDateEdit](cast[uint](vtbl) - uint(offsetOf(VirtualQDateEdit, vtbl)))
+  var virtualReturn = vtbl.stepEnabled()
+  cint(virtualReturn)
+
+method mousePressEvent*(self: VirtualQDateEdit, event: gen_qevent_types.QMouseEvent): void {.base.} =
+  QDateEditmousePressEvent(self[], event)
+proc miqt_exec_method_cQDateEdit_mousePressEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQDateEdit](cast[uint](vtbl) - uint(offsetOf(VirtualQDateEdit, vtbl)))
+  let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
+  vtbl.mousePressEvent(slotval1)
+
+method paintEvent*(self: VirtualQDateEdit, event: gen_qevent_types.QPaintEvent): void {.base.} =
+  QDateEditpaintEvent(self[], event)
+proc miqt_exec_method_cQDateEdit_paintEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQDateEdit](cast[uint](vtbl) - uint(offsetOf(VirtualQDateEdit, vtbl)))
+  let slotval1 = gen_qevent_types.QPaintEvent(h: event, owned: false)
+  vtbl.paintEvent(slotval1)
+
+method minimumSizeHint*(self: VirtualQDateEdit, ): gen_qsize_types.QSize {.base.} =
+  QDateEditminimumSizeHint(self[])
+proc miqt_exec_method_cQDateEdit_minimumSizeHint(vtbl: pointer, inst: pointer): pointer {.cdecl.} =
+  let vtbl = cast[VirtualQDateEdit](cast[uint](vtbl) - uint(offsetOf(VirtualQDateEdit, vtbl)))
+  var virtualReturn = vtbl.minimumSizeHint()
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
+
+method inputMethodQuery*(self: VirtualQDateEdit, param1: cint): gen_qvariant_types.QVariant {.base.} =
+  QDateEditinputMethodQuery(self[], param1)
+proc miqt_exec_method_cQDateEdit_inputMethodQuery(vtbl: pointer, inst: pointer, param1: cint): pointer {.cdecl.} =
+  let vtbl = cast[VirtualQDateEdit](cast[uint](vtbl) - uint(offsetOf(VirtualQDateEdit, vtbl)))
+  let slotval1 = cint(param1)
+  var virtualReturn = vtbl.inputMethodQuery(slotval1)
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
+
+method resizeEvent*(self: VirtualQDateEdit, event: gen_qevent_types.QResizeEvent): void {.base.} =
+  QDateEditresizeEvent(self[], event)
+proc miqt_exec_method_cQDateEdit_resizeEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQDateEdit](cast[uint](vtbl) - uint(offsetOf(VirtualQDateEdit, vtbl)))
+  let slotval1 = gen_qevent_types.QResizeEvent(h: event, owned: false)
+  vtbl.resizeEvent(slotval1)
+
+method keyReleaseEvent*(self: VirtualQDateEdit, event: gen_qevent_types.QKeyEvent): void {.base.} =
+  QDateEditkeyReleaseEvent(self[], event)
+proc miqt_exec_method_cQDateEdit_keyReleaseEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQDateEdit](cast[uint](vtbl) - uint(offsetOf(VirtualQDateEdit, vtbl)))
+  let slotval1 = gen_qevent_types.QKeyEvent(h: event, owned: false)
+  vtbl.keyReleaseEvent(slotval1)
+
+method focusOutEvent*(self: VirtualQDateEdit, event: gen_qevent_types.QFocusEvent): void {.base.} =
+  QDateEditfocusOutEvent(self[], event)
+proc miqt_exec_method_cQDateEdit_focusOutEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQDateEdit](cast[uint](vtbl) - uint(offsetOf(VirtualQDateEdit, vtbl)))
+  let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
+  vtbl.focusOutEvent(slotval1)
+
+method contextMenuEvent*(self: VirtualQDateEdit, event: gen_qevent_types.QContextMenuEvent): void {.base.} =
+  QDateEditcontextMenuEvent(self[], event)
+proc miqt_exec_method_cQDateEdit_contextMenuEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQDateEdit](cast[uint](vtbl) - uint(offsetOf(VirtualQDateEdit, vtbl)))
+  let slotval1 = gen_qevent_types.QContextMenuEvent(h: event, owned: false)
+  vtbl.contextMenuEvent(slotval1)
+
+method changeEvent*(self: VirtualQDateEdit, event: gen_qcoreevent_types.QEvent): void {.base.} =
+  QDateEditchangeEvent(self[], event)
+proc miqt_exec_method_cQDateEdit_changeEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQDateEdit](cast[uint](vtbl) - uint(offsetOf(VirtualQDateEdit, vtbl)))
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
+  vtbl.changeEvent(slotval1)
+
+method closeEvent*(self: VirtualQDateEdit, event: gen_qevent_types.QCloseEvent): void {.base.} =
+  QDateEditcloseEvent(self[], event)
+proc miqt_exec_method_cQDateEdit_closeEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQDateEdit](cast[uint](vtbl) - uint(offsetOf(VirtualQDateEdit, vtbl)))
+  let slotval1 = gen_qevent_types.QCloseEvent(h: event, owned: false)
+  vtbl.closeEvent(slotval1)
+
+method hideEvent*(self: VirtualQDateEdit, event: gen_qevent_types.QHideEvent): void {.base.} =
+  QDateEdithideEvent(self[], event)
+proc miqt_exec_method_cQDateEdit_hideEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQDateEdit](cast[uint](vtbl) - uint(offsetOf(VirtualQDateEdit, vtbl)))
+  let slotval1 = gen_qevent_types.QHideEvent(h: event, owned: false)
+  vtbl.hideEvent(slotval1)
+
+method mouseReleaseEvent*(self: VirtualQDateEdit, event: gen_qevent_types.QMouseEvent): void {.base.} =
+  QDateEditmouseReleaseEvent(self[], event)
+proc miqt_exec_method_cQDateEdit_mouseReleaseEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQDateEdit](cast[uint](vtbl) - uint(offsetOf(VirtualQDateEdit, vtbl)))
+  let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
+  vtbl.mouseReleaseEvent(slotval1)
+
+method mouseMoveEvent*(self: VirtualQDateEdit, event: gen_qevent_types.QMouseEvent): void {.base.} =
+  QDateEditmouseMoveEvent(self[], event)
+proc miqt_exec_method_cQDateEdit_mouseMoveEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQDateEdit](cast[uint](vtbl) - uint(offsetOf(VirtualQDateEdit, vtbl)))
+  let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
+  vtbl.mouseMoveEvent(slotval1)
+
+method timerEvent*(self: VirtualQDateEdit, event: gen_qcoreevent_types.QTimerEvent): void {.base.} =
+  QDateEdittimerEvent(self[], event)
+proc miqt_exec_method_cQDateEdit_timerEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQDateEdit](cast[uint](vtbl) - uint(offsetOf(VirtualQDateEdit, vtbl)))
+  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
+  vtbl.timerEvent(slotval1)
+
+method showEvent*(self: VirtualQDateEdit, event: gen_qevent_types.QShowEvent): void {.base.} =
+  QDateEditshowEvent(self[], event)
+proc miqt_exec_method_cQDateEdit_showEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQDateEdit](cast[uint](vtbl) - uint(offsetOf(VirtualQDateEdit, vtbl)))
+  let slotval1 = gen_qevent_types.QShowEvent(h: event, owned: false)
+  vtbl.showEvent(slotval1)
+
+method devType*(self: VirtualQDateEdit, ): cint {.base.} =
+  QDateEditdevType(self[])
+proc miqt_exec_method_cQDateEdit_devType(vtbl: pointer, inst: pointer): cint {.cdecl.} =
+  let vtbl = cast[VirtualQDateEdit](cast[uint](vtbl) - uint(offsetOf(VirtualQDateEdit, vtbl)))
+  var virtualReturn = vtbl.devType()
+  virtualReturn
+
+method setVisible*(self: VirtualQDateEdit, visible: bool): void {.base.} =
+  QDateEditsetVisible(self[], visible)
+proc miqt_exec_method_cQDateEdit_setVisible(vtbl: pointer, inst: pointer, visible: bool): void {.cdecl.} =
+  let vtbl = cast[VirtualQDateEdit](cast[uint](vtbl) - uint(offsetOf(VirtualQDateEdit, vtbl)))
+  let slotval1 = visible
+  vtbl.setVisible(slotval1)
+
+method heightForWidth*(self: VirtualQDateEdit, param1: cint): cint {.base.} =
+  QDateEditheightForWidth(self[], param1)
+proc miqt_exec_method_cQDateEdit_heightForWidth(vtbl: pointer, inst: pointer, param1: cint): cint {.cdecl.} =
+  let vtbl = cast[VirtualQDateEdit](cast[uint](vtbl) - uint(offsetOf(VirtualQDateEdit, vtbl)))
+  let slotval1 = param1
+  var virtualReturn = vtbl.heightForWidth(slotval1)
+  virtualReturn
+
+method hasHeightForWidth*(self: VirtualQDateEdit, ): bool {.base.} =
+  QDateEdithasHeightForWidth(self[])
+proc miqt_exec_method_cQDateEdit_hasHeightForWidth(vtbl: pointer, inst: pointer): bool {.cdecl.} =
+  let vtbl = cast[VirtualQDateEdit](cast[uint](vtbl) - uint(offsetOf(VirtualQDateEdit, vtbl)))
+  var virtualReturn = vtbl.hasHeightForWidth()
+  virtualReturn
+
+method paintEngine*(self: VirtualQDateEdit, ): gen_qpaintengine_types.QPaintEngine {.base.} =
+  QDateEditpaintEngine(self[])
+proc miqt_exec_method_cQDateEdit_paintEngine(vtbl: pointer, inst: pointer): pointer {.cdecl.} =
+  let vtbl = cast[VirtualQDateEdit](cast[uint](vtbl) - uint(offsetOf(VirtualQDateEdit, vtbl)))
+  var virtualReturn = vtbl.paintEngine()
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
+
+method mouseDoubleClickEvent*(self: VirtualQDateEdit, event: gen_qevent_types.QMouseEvent): void {.base.} =
+  QDateEditmouseDoubleClickEvent(self[], event)
+proc miqt_exec_method_cQDateEdit_mouseDoubleClickEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQDateEdit](cast[uint](vtbl) - uint(offsetOf(VirtualQDateEdit, vtbl)))
+  let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
+  vtbl.mouseDoubleClickEvent(slotval1)
+
+method enterEvent*(self: VirtualQDateEdit, event: gen_qcoreevent_types.QEvent): void {.base.} =
+  QDateEditenterEvent(self[], event)
+proc miqt_exec_method_cQDateEdit_enterEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQDateEdit](cast[uint](vtbl) - uint(offsetOf(VirtualQDateEdit, vtbl)))
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
+  vtbl.enterEvent(slotval1)
+
+method leaveEvent*(self: VirtualQDateEdit, event: gen_qcoreevent_types.QEvent): void {.base.} =
+  QDateEditleaveEvent(self[], event)
+proc miqt_exec_method_cQDateEdit_leaveEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQDateEdit](cast[uint](vtbl) - uint(offsetOf(VirtualQDateEdit, vtbl)))
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
+  vtbl.leaveEvent(slotval1)
+
+method moveEvent*(self: VirtualQDateEdit, event: gen_qevent_types.QMoveEvent): void {.base.} =
+  QDateEditmoveEvent(self[], event)
+proc miqt_exec_method_cQDateEdit_moveEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQDateEdit](cast[uint](vtbl) - uint(offsetOf(VirtualQDateEdit, vtbl)))
+  let slotval1 = gen_qevent_types.QMoveEvent(h: event, owned: false)
+  vtbl.moveEvent(slotval1)
+
+method tabletEvent*(self: VirtualQDateEdit, event: gen_qevent_types.QTabletEvent): void {.base.} =
+  QDateEdittabletEvent(self[], event)
+proc miqt_exec_method_cQDateEdit_tabletEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQDateEdit](cast[uint](vtbl) - uint(offsetOf(VirtualQDateEdit, vtbl)))
+  let slotval1 = gen_qevent_types.QTabletEvent(h: event, owned: false)
+  vtbl.tabletEvent(slotval1)
+
+method actionEvent*(self: VirtualQDateEdit, event: gen_qevent_types.QActionEvent): void {.base.} =
+  QDateEditactionEvent(self[], event)
+proc miqt_exec_method_cQDateEdit_actionEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQDateEdit](cast[uint](vtbl) - uint(offsetOf(VirtualQDateEdit, vtbl)))
+  let slotval1 = gen_qevent_types.QActionEvent(h: event, owned: false)
+  vtbl.actionEvent(slotval1)
+
+method dragEnterEvent*(self: VirtualQDateEdit, event: gen_qevent_types.QDragEnterEvent): void {.base.} =
+  QDateEditdragEnterEvent(self[], event)
+proc miqt_exec_method_cQDateEdit_dragEnterEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQDateEdit](cast[uint](vtbl) - uint(offsetOf(VirtualQDateEdit, vtbl)))
+  let slotval1 = gen_qevent_types.QDragEnterEvent(h: event, owned: false)
+  vtbl.dragEnterEvent(slotval1)
+
+method dragMoveEvent*(self: VirtualQDateEdit, event: gen_qevent_types.QDragMoveEvent): void {.base.} =
+  QDateEditdragMoveEvent(self[], event)
+proc miqt_exec_method_cQDateEdit_dragMoveEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQDateEdit](cast[uint](vtbl) - uint(offsetOf(VirtualQDateEdit, vtbl)))
+  let slotval1 = gen_qevent_types.QDragMoveEvent(h: event, owned: false)
+  vtbl.dragMoveEvent(slotval1)
+
+method dragLeaveEvent*(self: VirtualQDateEdit, event: gen_qevent_types.QDragLeaveEvent): void {.base.} =
+  QDateEditdragLeaveEvent(self[], event)
+proc miqt_exec_method_cQDateEdit_dragLeaveEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQDateEdit](cast[uint](vtbl) - uint(offsetOf(VirtualQDateEdit, vtbl)))
+  let slotval1 = gen_qevent_types.QDragLeaveEvent(h: event, owned: false)
+  vtbl.dragLeaveEvent(slotval1)
+
+method dropEvent*(self: VirtualQDateEdit, event: gen_qevent_types.QDropEvent): void {.base.} =
+  QDateEditdropEvent(self[], event)
+proc miqt_exec_method_cQDateEdit_dropEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQDateEdit](cast[uint](vtbl) - uint(offsetOf(VirtualQDateEdit, vtbl)))
+  let slotval1 = gen_qevent_types.QDropEvent(h: event, owned: false)
+  vtbl.dropEvent(slotval1)
+
+method nativeEvent*(self: VirtualQDateEdit, eventType: seq[byte], message: pointer, resultVal: ptr clong): bool {.base.} =
+  QDateEditnativeEvent(self[], eventType, message, resultVal)
+proc miqt_exec_method_cQDateEdit_nativeEvent(vtbl: pointer, inst: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr clong): bool {.cdecl.} =
+  let vtbl = cast[VirtualQDateEdit](cast[uint](vtbl) - uint(offsetOf(VirtualQDateEdit, vtbl)))
+  var veventType_bytearray = eventType
+  var veventTypex_ret = @(toOpenArrayByte(veventType_bytearray.data, 0, int(veventType_bytearray.len)-1))
+  c_free(veventType_bytearray.data)
+  let slotval1 = veventTypex_ret
+  let slotval2 = message
+  let slotval3 = resultVal
+  var virtualReturn = vtbl.nativeEvent(slotval1, slotval2, slotval3)
+  virtualReturn
+
+method metric*(self: VirtualQDateEdit, param1: cint): cint {.base.} =
+  QDateEditmetric(self[], param1)
+proc miqt_exec_method_cQDateEdit_metric(vtbl: pointer, inst: pointer, param1: cint): cint {.cdecl.} =
+  let vtbl = cast[VirtualQDateEdit](cast[uint](vtbl) - uint(offsetOf(VirtualQDateEdit, vtbl)))
+  let slotval1 = cint(param1)
+  var virtualReturn = vtbl.metric(slotval1)
+  virtualReturn
+
+method initPainter*(self: VirtualQDateEdit, painter: gen_qpainter_types.QPainter): void {.base.} =
+  QDateEditinitPainter(self[], painter)
+proc miqt_exec_method_cQDateEdit_initPainter(vtbl: pointer, inst: pointer, painter: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQDateEdit](cast[uint](vtbl) - uint(offsetOf(VirtualQDateEdit, vtbl)))
+  let slotval1 = gen_qpainter_types.QPainter(h: painter, owned: false)
+  vtbl.initPainter(slotval1)
+
+method redirected*(self: VirtualQDateEdit, offset: gen_qpoint_types.QPoint): gen_qpaintdevice_types.QPaintDevice {.base.} =
+  QDateEditredirected(self[], offset)
+proc miqt_exec_method_cQDateEdit_redirected(vtbl: pointer, inst: pointer, offset: pointer): pointer {.cdecl.} =
+  let vtbl = cast[VirtualQDateEdit](cast[uint](vtbl) - uint(offsetOf(VirtualQDateEdit, vtbl)))
+  let slotval1 = gen_qpoint_types.QPoint(h: offset, owned: false)
+  var virtualReturn = vtbl.redirected(slotval1)
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
+
+method sharedPainter*(self: VirtualQDateEdit, ): gen_qpainter_types.QPainter {.base.} =
+  QDateEditsharedPainter(self[])
+proc miqt_exec_method_cQDateEdit_sharedPainter(vtbl: pointer, inst: pointer): pointer {.cdecl.} =
+  let vtbl = cast[VirtualQDateEdit](cast[uint](vtbl) - uint(offsetOf(VirtualQDateEdit, vtbl)))
+  var virtualReturn = vtbl.sharedPainter()
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
+
+method inputMethodEvent*(self: VirtualQDateEdit, param1: gen_qevent_types.QInputMethodEvent): void {.base.} =
+  QDateEditinputMethodEvent(self[], param1)
+proc miqt_exec_method_cQDateEdit_inputMethodEvent(vtbl: pointer, inst: pointer, param1: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQDateEdit](cast[uint](vtbl) - uint(offsetOf(VirtualQDateEdit, vtbl)))
+  let slotval1 = gen_qevent_types.QInputMethodEvent(h: param1, owned: false)
+  vtbl.inputMethodEvent(slotval1)
+
+method eventFilter*(self: VirtualQDateEdit, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QDateEditeventFilter(self[], watched, event)
+proc miqt_exec_method_cQDateEdit_eventFilter(vtbl: pointer, inst: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
+  let vtbl = cast[VirtualQDateEdit](cast[uint](vtbl) - uint(offsetOf(VirtualQDateEdit, vtbl)))
+  let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
+  var virtualReturn = vtbl.eventFilter(slotval1, slotval2)
+  virtualReturn
+
+method childEvent*(self: VirtualQDateEdit, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
+  QDateEditchildEvent(self[], event)
+proc miqt_exec_method_cQDateEdit_childEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQDateEdit](cast[uint](vtbl) - uint(offsetOf(VirtualQDateEdit, vtbl)))
+  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
+  vtbl.childEvent(slotval1)
+
+method customEvent*(self: VirtualQDateEdit, event: gen_qcoreevent_types.QEvent): void {.base.} =
+  QDateEditcustomEvent(self[], event)
+proc miqt_exec_method_cQDateEdit_customEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQDateEdit](cast[uint](vtbl) - uint(offsetOf(VirtualQDateEdit, vtbl)))
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
+  vtbl.customEvent(slotval1)
+
+method connectNotify*(self: VirtualQDateEdit, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QDateEditconnectNotify(self[], signal)
+proc miqt_exec_method_cQDateEdit_connectNotify(vtbl: pointer, inst: pointer, signal: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQDateEdit](cast[uint](vtbl) - uint(offsetOf(VirtualQDateEdit, vtbl)))
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
+  vtbl.connectNotify(slotval1)
+
+method disconnectNotify*(self: VirtualQDateEdit, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QDateEditdisconnectNotify(self[], signal)
+proc miqt_exec_method_cQDateEdit_disconnectNotify(vtbl: pointer, inst: pointer, signal: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQDateEdit](cast[uint](vtbl) - uint(offsetOf(VirtualQDateEdit, vtbl)))
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
+  vtbl.disconnectNotify(slotval1)
 
 proc initStyleOption*(self: gen_qdatetimeedit_types.QDateEdit, option: gen_qstyleoption_types.QStyleOptionSpinBox): void =
   fcQDateEdit_protectedbase_initStyleOption(self.h, option.h)
 
 proc lineEdit*(self: gen_qdatetimeedit_types.QDateEdit, ): gen_qlineedit_types.QLineEdit =
-  gen_qlineedit_types.QLineEdit(h: fcQDateEdit_protectedbase_lineEdit(self.h))
+  gen_qlineedit_types.QLineEdit(h: fcQDateEdit_protectedbase_lineEdit(self.h), owned: false)
 
 proc setLineEdit*(self: gen_qdatetimeedit_types.QDateEdit, edit: gen_qlineedit_types.QLineEdit): void =
   fcQDateEdit_protectedbase_setLineEdit(self.h, edit.h)
@@ -4562,7 +6824,7 @@ proc focusPreviousChild*(self: gen_qdatetimeedit_types.QDateEdit, ): bool =
   fcQDateEdit_protectedbase_focusPreviousChild(self.h)
 
 proc sender*(self: gen_qdatetimeedit_types.QDateEdit, ): gen_qobject_types.QObject =
-  gen_qobject_types.QObject(h: fcQDateEdit_protectedbase_sender(self.h))
+  gen_qobject_types.QObject(h: fcQDateEdit_protectedbase_sender(self.h), owned: false)
 
 proc senderSignalIndex*(self: gen_qdatetimeedit_types.QDateEdit, ): cint =
   fcQDateEdit_protectedbase_senderSignalIndex(self.h)
@@ -4578,497 +6840,770 @@ proc create*(T: type gen_qdatetimeedit_types.QDateEdit,
     vtbl: ref QDateEditVTable = nil): gen_qdatetimeedit_types.QDateEdit =
   let vtbl = if vtbl == nil: new QDateEditVTable else: vtbl
   GC_ref(vtbl)
-  vtbl.vtbl.destructor = proc(vtbl: ptr cQDateEditVTable, _: ptr cQDateEdit) {.cdecl.} =
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQDateEditVTable, _: ptr cQDateEdit) {.cdecl.} =
     let vtbl = cast[ref QDateEditVTable](vtbl)
     GC_unref(vtbl)
-  if not isNil(vtbl.metaObject):
+  if not isNil(vtbl[].metaObject):
     vtbl[].vtbl.metaObject = miqt_exec_callback_cQDateEdit_metaObject
-  if not isNil(vtbl.metacast):
+  if not isNil(vtbl[].metacast):
     vtbl[].vtbl.metacast = miqt_exec_callback_cQDateEdit_metacast
-  if not isNil(vtbl.metacall):
+  if not isNil(vtbl[].metacall):
     vtbl[].vtbl.metacall = miqt_exec_callback_cQDateEdit_metacall
-  if not isNil(vtbl.sizeHint):
+  if not isNil(vtbl[].sizeHint):
     vtbl[].vtbl.sizeHint = miqt_exec_callback_cQDateEdit_sizeHint
-  if not isNil(vtbl.clear):
+  if not isNil(vtbl[].clear):
     vtbl[].vtbl.clear = miqt_exec_callback_cQDateEdit_clear
-  if not isNil(vtbl.stepBy):
+  if not isNil(vtbl[].stepBy):
     vtbl[].vtbl.stepBy = miqt_exec_callback_cQDateEdit_stepBy
-  if not isNil(vtbl.event):
+  if not isNil(vtbl[].event):
     vtbl[].vtbl.event = miqt_exec_callback_cQDateEdit_event
-  if not isNil(vtbl.keyPressEvent):
+  if not isNil(vtbl[].keyPressEvent):
     vtbl[].vtbl.keyPressEvent = miqt_exec_callback_cQDateEdit_keyPressEvent
-  if not isNil(vtbl.wheelEvent):
+  if not isNil(vtbl[].wheelEvent):
     vtbl[].vtbl.wheelEvent = miqt_exec_callback_cQDateEdit_wheelEvent
-  if not isNil(vtbl.focusInEvent):
+  if not isNil(vtbl[].focusInEvent):
     vtbl[].vtbl.focusInEvent = miqt_exec_callback_cQDateEdit_focusInEvent
-  if not isNil(vtbl.focusNextPrevChild):
+  if not isNil(vtbl[].focusNextPrevChild):
     vtbl[].vtbl.focusNextPrevChild = miqt_exec_callback_cQDateEdit_focusNextPrevChild
-  if not isNil(vtbl.validate):
+  if not isNil(vtbl[].validate):
     vtbl[].vtbl.validate = miqt_exec_callback_cQDateEdit_validate
-  if not isNil(vtbl.fixup):
+  if not isNil(vtbl[].fixup):
     vtbl[].vtbl.fixup = miqt_exec_callback_cQDateEdit_fixup
-  if not isNil(vtbl.dateTimeFromText):
+  if not isNil(vtbl[].dateTimeFromText):
     vtbl[].vtbl.dateTimeFromText = miqt_exec_callback_cQDateEdit_dateTimeFromText
-  if not isNil(vtbl.textFromDateTime):
+  if not isNil(vtbl[].textFromDateTime):
     vtbl[].vtbl.textFromDateTime = miqt_exec_callback_cQDateEdit_textFromDateTime
-  if not isNil(vtbl.stepEnabled):
+  if not isNil(vtbl[].stepEnabled):
     vtbl[].vtbl.stepEnabled = miqt_exec_callback_cQDateEdit_stepEnabled
-  if not isNil(vtbl.mousePressEvent):
+  if not isNil(vtbl[].mousePressEvent):
     vtbl[].vtbl.mousePressEvent = miqt_exec_callback_cQDateEdit_mousePressEvent
-  if not isNil(vtbl.paintEvent):
+  if not isNil(vtbl[].paintEvent):
     vtbl[].vtbl.paintEvent = miqt_exec_callback_cQDateEdit_paintEvent
-  if not isNil(vtbl.minimumSizeHint):
+  if not isNil(vtbl[].minimumSizeHint):
     vtbl[].vtbl.minimumSizeHint = miqt_exec_callback_cQDateEdit_minimumSizeHint
-  if not isNil(vtbl.inputMethodQuery):
+  if not isNil(vtbl[].inputMethodQuery):
     vtbl[].vtbl.inputMethodQuery = miqt_exec_callback_cQDateEdit_inputMethodQuery
-  if not isNil(vtbl.resizeEvent):
+  if not isNil(vtbl[].resizeEvent):
     vtbl[].vtbl.resizeEvent = miqt_exec_callback_cQDateEdit_resizeEvent
-  if not isNil(vtbl.keyReleaseEvent):
+  if not isNil(vtbl[].keyReleaseEvent):
     vtbl[].vtbl.keyReleaseEvent = miqt_exec_callback_cQDateEdit_keyReleaseEvent
-  if not isNil(vtbl.focusOutEvent):
+  if not isNil(vtbl[].focusOutEvent):
     vtbl[].vtbl.focusOutEvent = miqt_exec_callback_cQDateEdit_focusOutEvent
-  if not isNil(vtbl.contextMenuEvent):
+  if not isNil(vtbl[].contextMenuEvent):
     vtbl[].vtbl.contextMenuEvent = miqt_exec_callback_cQDateEdit_contextMenuEvent
-  if not isNil(vtbl.changeEvent):
+  if not isNil(vtbl[].changeEvent):
     vtbl[].vtbl.changeEvent = miqt_exec_callback_cQDateEdit_changeEvent
-  if not isNil(vtbl.closeEvent):
+  if not isNil(vtbl[].closeEvent):
     vtbl[].vtbl.closeEvent = miqt_exec_callback_cQDateEdit_closeEvent
-  if not isNil(vtbl.hideEvent):
+  if not isNil(vtbl[].hideEvent):
     vtbl[].vtbl.hideEvent = miqt_exec_callback_cQDateEdit_hideEvent
-  if not isNil(vtbl.mouseReleaseEvent):
+  if not isNil(vtbl[].mouseReleaseEvent):
     vtbl[].vtbl.mouseReleaseEvent = miqt_exec_callback_cQDateEdit_mouseReleaseEvent
-  if not isNil(vtbl.mouseMoveEvent):
+  if not isNil(vtbl[].mouseMoveEvent):
     vtbl[].vtbl.mouseMoveEvent = miqt_exec_callback_cQDateEdit_mouseMoveEvent
-  if not isNil(vtbl.timerEvent):
+  if not isNil(vtbl[].timerEvent):
     vtbl[].vtbl.timerEvent = miqt_exec_callback_cQDateEdit_timerEvent
-  if not isNil(vtbl.showEvent):
+  if not isNil(vtbl[].showEvent):
     vtbl[].vtbl.showEvent = miqt_exec_callback_cQDateEdit_showEvent
-  if not isNil(vtbl.devType):
+  if not isNil(vtbl[].devType):
     vtbl[].vtbl.devType = miqt_exec_callback_cQDateEdit_devType
-  if not isNil(vtbl.setVisible):
+  if not isNil(vtbl[].setVisible):
     vtbl[].vtbl.setVisible = miqt_exec_callback_cQDateEdit_setVisible
-  if not isNil(vtbl.heightForWidth):
+  if not isNil(vtbl[].heightForWidth):
     vtbl[].vtbl.heightForWidth = miqt_exec_callback_cQDateEdit_heightForWidth
-  if not isNil(vtbl.hasHeightForWidth):
+  if not isNil(vtbl[].hasHeightForWidth):
     vtbl[].vtbl.hasHeightForWidth = miqt_exec_callback_cQDateEdit_hasHeightForWidth
-  if not isNil(vtbl.paintEngine):
+  if not isNil(vtbl[].paintEngine):
     vtbl[].vtbl.paintEngine = miqt_exec_callback_cQDateEdit_paintEngine
-  if not isNil(vtbl.mouseDoubleClickEvent):
+  if not isNil(vtbl[].mouseDoubleClickEvent):
     vtbl[].vtbl.mouseDoubleClickEvent = miqt_exec_callback_cQDateEdit_mouseDoubleClickEvent
-  if not isNil(vtbl.enterEvent):
+  if not isNil(vtbl[].enterEvent):
     vtbl[].vtbl.enterEvent = miqt_exec_callback_cQDateEdit_enterEvent
-  if not isNil(vtbl.leaveEvent):
+  if not isNil(vtbl[].leaveEvent):
     vtbl[].vtbl.leaveEvent = miqt_exec_callback_cQDateEdit_leaveEvent
-  if not isNil(vtbl.moveEvent):
+  if not isNil(vtbl[].moveEvent):
     vtbl[].vtbl.moveEvent = miqt_exec_callback_cQDateEdit_moveEvent
-  if not isNil(vtbl.tabletEvent):
+  if not isNil(vtbl[].tabletEvent):
     vtbl[].vtbl.tabletEvent = miqt_exec_callback_cQDateEdit_tabletEvent
-  if not isNil(vtbl.actionEvent):
+  if not isNil(vtbl[].actionEvent):
     vtbl[].vtbl.actionEvent = miqt_exec_callback_cQDateEdit_actionEvent
-  if not isNil(vtbl.dragEnterEvent):
+  if not isNil(vtbl[].dragEnterEvent):
     vtbl[].vtbl.dragEnterEvent = miqt_exec_callback_cQDateEdit_dragEnterEvent
-  if not isNil(vtbl.dragMoveEvent):
+  if not isNil(vtbl[].dragMoveEvent):
     vtbl[].vtbl.dragMoveEvent = miqt_exec_callback_cQDateEdit_dragMoveEvent
-  if not isNil(vtbl.dragLeaveEvent):
+  if not isNil(vtbl[].dragLeaveEvent):
     vtbl[].vtbl.dragLeaveEvent = miqt_exec_callback_cQDateEdit_dragLeaveEvent
-  if not isNil(vtbl.dropEvent):
+  if not isNil(vtbl[].dropEvent):
     vtbl[].vtbl.dropEvent = miqt_exec_callback_cQDateEdit_dropEvent
-  if not isNil(vtbl.nativeEvent):
+  if not isNil(vtbl[].nativeEvent):
     vtbl[].vtbl.nativeEvent = miqt_exec_callback_cQDateEdit_nativeEvent
-  if not isNil(vtbl.metric):
+  if not isNil(vtbl[].metric):
     vtbl[].vtbl.metric = miqt_exec_callback_cQDateEdit_metric
-  if not isNil(vtbl.initPainter):
+  if not isNil(vtbl[].initPainter):
     vtbl[].vtbl.initPainter = miqt_exec_callback_cQDateEdit_initPainter
-  if not isNil(vtbl.redirected):
+  if not isNil(vtbl[].redirected):
     vtbl[].vtbl.redirected = miqt_exec_callback_cQDateEdit_redirected
-  if not isNil(vtbl.sharedPainter):
+  if not isNil(vtbl[].sharedPainter):
     vtbl[].vtbl.sharedPainter = miqt_exec_callback_cQDateEdit_sharedPainter
-  if not isNil(vtbl.inputMethodEvent):
+  if not isNil(vtbl[].inputMethodEvent):
     vtbl[].vtbl.inputMethodEvent = miqt_exec_callback_cQDateEdit_inputMethodEvent
-  if not isNil(vtbl.eventFilter):
+  if not isNil(vtbl[].eventFilter):
     vtbl[].vtbl.eventFilter = miqt_exec_callback_cQDateEdit_eventFilter
-  if not isNil(vtbl.childEvent):
+  if not isNil(vtbl[].childEvent):
     vtbl[].vtbl.childEvent = miqt_exec_callback_cQDateEdit_childEvent
-  if not isNil(vtbl.customEvent):
+  if not isNil(vtbl[].customEvent):
     vtbl[].vtbl.customEvent = miqt_exec_callback_cQDateEdit_customEvent
-  if not isNil(vtbl.connectNotify):
+  if not isNil(vtbl[].connectNotify):
     vtbl[].vtbl.connectNotify = miqt_exec_callback_cQDateEdit_connectNotify
-  if not isNil(vtbl.disconnectNotify):
+  if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQDateEdit_disconnectNotify
-  gen_qdatetimeedit_types.QDateEdit(h: fcQDateEdit_new(addr(vtbl[]), parent.h))
+  gen_qdatetimeedit_types.QDateEdit(h: fcQDateEdit_new(addr(vtbl[].vtbl), parent.h), owned: true)
 
 proc create*(T: type gen_qdatetimeedit_types.QDateEdit,
     vtbl: ref QDateEditVTable = nil): gen_qdatetimeedit_types.QDateEdit =
   let vtbl = if vtbl == nil: new QDateEditVTable else: vtbl
   GC_ref(vtbl)
-  vtbl.vtbl.destructor = proc(vtbl: ptr cQDateEditVTable, _: ptr cQDateEdit) {.cdecl.} =
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQDateEditVTable, _: ptr cQDateEdit) {.cdecl.} =
     let vtbl = cast[ref QDateEditVTable](vtbl)
     GC_unref(vtbl)
-  if not isNil(vtbl.metaObject):
+  if not isNil(vtbl[].metaObject):
     vtbl[].vtbl.metaObject = miqt_exec_callback_cQDateEdit_metaObject
-  if not isNil(vtbl.metacast):
+  if not isNil(vtbl[].metacast):
     vtbl[].vtbl.metacast = miqt_exec_callback_cQDateEdit_metacast
-  if not isNil(vtbl.metacall):
+  if not isNil(vtbl[].metacall):
     vtbl[].vtbl.metacall = miqt_exec_callback_cQDateEdit_metacall
-  if not isNil(vtbl.sizeHint):
+  if not isNil(vtbl[].sizeHint):
     vtbl[].vtbl.sizeHint = miqt_exec_callback_cQDateEdit_sizeHint
-  if not isNil(vtbl.clear):
+  if not isNil(vtbl[].clear):
     vtbl[].vtbl.clear = miqt_exec_callback_cQDateEdit_clear
-  if not isNil(vtbl.stepBy):
+  if not isNil(vtbl[].stepBy):
     vtbl[].vtbl.stepBy = miqt_exec_callback_cQDateEdit_stepBy
-  if not isNil(vtbl.event):
+  if not isNil(vtbl[].event):
     vtbl[].vtbl.event = miqt_exec_callback_cQDateEdit_event
-  if not isNil(vtbl.keyPressEvent):
+  if not isNil(vtbl[].keyPressEvent):
     vtbl[].vtbl.keyPressEvent = miqt_exec_callback_cQDateEdit_keyPressEvent
-  if not isNil(vtbl.wheelEvent):
+  if not isNil(vtbl[].wheelEvent):
     vtbl[].vtbl.wheelEvent = miqt_exec_callback_cQDateEdit_wheelEvent
-  if not isNil(vtbl.focusInEvent):
+  if not isNil(vtbl[].focusInEvent):
     vtbl[].vtbl.focusInEvent = miqt_exec_callback_cQDateEdit_focusInEvent
-  if not isNil(vtbl.focusNextPrevChild):
+  if not isNil(vtbl[].focusNextPrevChild):
     vtbl[].vtbl.focusNextPrevChild = miqt_exec_callback_cQDateEdit_focusNextPrevChild
-  if not isNil(vtbl.validate):
+  if not isNil(vtbl[].validate):
     vtbl[].vtbl.validate = miqt_exec_callback_cQDateEdit_validate
-  if not isNil(vtbl.fixup):
+  if not isNil(vtbl[].fixup):
     vtbl[].vtbl.fixup = miqt_exec_callback_cQDateEdit_fixup
-  if not isNil(vtbl.dateTimeFromText):
+  if not isNil(vtbl[].dateTimeFromText):
     vtbl[].vtbl.dateTimeFromText = miqt_exec_callback_cQDateEdit_dateTimeFromText
-  if not isNil(vtbl.textFromDateTime):
+  if not isNil(vtbl[].textFromDateTime):
     vtbl[].vtbl.textFromDateTime = miqt_exec_callback_cQDateEdit_textFromDateTime
-  if not isNil(vtbl.stepEnabled):
+  if not isNil(vtbl[].stepEnabled):
     vtbl[].vtbl.stepEnabled = miqt_exec_callback_cQDateEdit_stepEnabled
-  if not isNil(vtbl.mousePressEvent):
+  if not isNil(vtbl[].mousePressEvent):
     vtbl[].vtbl.mousePressEvent = miqt_exec_callback_cQDateEdit_mousePressEvent
-  if not isNil(vtbl.paintEvent):
+  if not isNil(vtbl[].paintEvent):
     vtbl[].vtbl.paintEvent = miqt_exec_callback_cQDateEdit_paintEvent
-  if not isNil(vtbl.minimumSizeHint):
+  if not isNil(vtbl[].minimumSizeHint):
     vtbl[].vtbl.minimumSizeHint = miqt_exec_callback_cQDateEdit_minimumSizeHint
-  if not isNil(vtbl.inputMethodQuery):
+  if not isNil(vtbl[].inputMethodQuery):
     vtbl[].vtbl.inputMethodQuery = miqt_exec_callback_cQDateEdit_inputMethodQuery
-  if not isNil(vtbl.resizeEvent):
+  if not isNil(vtbl[].resizeEvent):
     vtbl[].vtbl.resizeEvent = miqt_exec_callback_cQDateEdit_resizeEvent
-  if not isNil(vtbl.keyReleaseEvent):
+  if not isNil(vtbl[].keyReleaseEvent):
     vtbl[].vtbl.keyReleaseEvent = miqt_exec_callback_cQDateEdit_keyReleaseEvent
-  if not isNil(vtbl.focusOutEvent):
+  if not isNil(vtbl[].focusOutEvent):
     vtbl[].vtbl.focusOutEvent = miqt_exec_callback_cQDateEdit_focusOutEvent
-  if not isNil(vtbl.contextMenuEvent):
+  if not isNil(vtbl[].contextMenuEvent):
     vtbl[].vtbl.contextMenuEvent = miqt_exec_callback_cQDateEdit_contextMenuEvent
-  if not isNil(vtbl.changeEvent):
+  if not isNil(vtbl[].changeEvent):
     vtbl[].vtbl.changeEvent = miqt_exec_callback_cQDateEdit_changeEvent
-  if not isNil(vtbl.closeEvent):
+  if not isNil(vtbl[].closeEvent):
     vtbl[].vtbl.closeEvent = miqt_exec_callback_cQDateEdit_closeEvent
-  if not isNil(vtbl.hideEvent):
+  if not isNil(vtbl[].hideEvent):
     vtbl[].vtbl.hideEvent = miqt_exec_callback_cQDateEdit_hideEvent
-  if not isNil(vtbl.mouseReleaseEvent):
+  if not isNil(vtbl[].mouseReleaseEvent):
     vtbl[].vtbl.mouseReleaseEvent = miqt_exec_callback_cQDateEdit_mouseReleaseEvent
-  if not isNil(vtbl.mouseMoveEvent):
+  if not isNil(vtbl[].mouseMoveEvent):
     vtbl[].vtbl.mouseMoveEvent = miqt_exec_callback_cQDateEdit_mouseMoveEvent
-  if not isNil(vtbl.timerEvent):
+  if not isNil(vtbl[].timerEvent):
     vtbl[].vtbl.timerEvent = miqt_exec_callback_cQDateEdit_timerEvent
-  if not isNil(vtbl.showEvent):
+  if not isNil(vtbl[].showEvent):
     vtbl[].vtbl.showEvent = miqt_exec_callback_cQDateEdit_showEvent
-  if not isNil(vtbl.devType):
+  if not isNil(vtbl[].devType):
     vtbl[].vtbl.devType = miqt_exec_callback_cQDateEdit_devType
-  if not isNil(vtbl.setVisible):
+  if not isNil(vtbl[].setVisible):
     vtbl[].vtbl.setVisible = miqt_exec_callback_cQDateEdit_setVisible
-  if not isNil(vtbl.heightForWidth):
+  if not isNil(vtbl[].heightForWidth):
     vtbl[].vtbl.heightForWidth = miqt_exec_callback_cQDateEdit_heightForWidth
-  if not isNil(vtbl.hasHeightForWidth):
+  if not isNil(vtbl[].hasHeightForWidth):
     vtbl[].vtbl.hasHeightForWidth = miqt_exec_callback_cQDateEdit_hasHeightForWidth
-  if not isNil(vtbl.paintEngine):
+  if not isNil(vtbl[].paintEngine):
     vtbl[].vtbl.paintEngine = miqt_exec_callback_cQDateEdit_paintEngine
-  if not isNil(vtbl.mouseDoubleClickEvent):
+  if not isNil(vtbl[].mouseDoubleClickEvent):
     vtbl[].vtbl.mouseDoubleClickEvent = miqt_exec_callback_cQDateEdit_mouseDoubleClickEvent
-  if not isNil(vtbl.enterEvent):
+  if not isNil(vtbl[].enterEvent):
     vtbl[].vtbl.enterEvent = miqt_exec_callback_cQDateEdit_enterEvent
-  if not isNil(vtbl.leaveEvent):
+  if not isNil(vtbl[].leaveEvent):
     vtbl[].vtbl.leaveEvent = miqt_exec_callback_cQDateEdit_leaveEvent
-  if not isNil(vtbl.moveEvent):
+  if not isNil(vtbl[].moveEvent):
     vtbl[].vtbl.moveEvent = miqt_exec_callback_cQDateEdit_moveEvent
-  if not isNil(vtbl.tabletEvent):
+  if not isNil(vtbl[].tabletEvent):
     vtbl[].vtbl.tabletEvent = miqt_exec_callback_cQDateEdit_tabletEvent
-  if not isNil(vtbl.actionEvent):
+  if not isNil(vtbl[].actionEvent):
     vtbl[].vtbl.actionEvent = miqt_exec_callback_cQDateEdit_actionEvent
-  if not isNil(vtbl.dragEnterEvent):
+  if not isNil(vtbl[].dragEnterEvent):
     vtbl[].vtbl.dragEnterEvent = miqt_exec_callback_cQDateEdit_dragEnterEvent
-  if not isNil(vtbl.dragMoveEvent):
+  if not isNil(vtbl[].dragMoveEvent):
     vtbl[].vtbl.dragMoveEvent = miqt_exec_callback_cQDateEdit_dragMoveEvent
-  if not isNil(vtbl.dragLeaveEvent):
+  if not isNil(vtbl[].dragLeaveEvent):
     vtbl[].vtbl.dragLeaveEvent = miqt_exec_callback_cQDateEdit_dragLeaveEvent
-  if not isNil(vtbl.dropEvent):
+  if not isNil(vtbl[].dropEvent):
     vtbl[].vtbl.dropEvent = miqt_exec_callback_cQDateEdit_dropEvent
-  if not isNil(vtbl.nativeEvent):
+  if not isNil(vtbl[].nativeEvent):
     vtbl[].vtbl.nativeEvent = miqt_exec_callback_cQDateEdit_nativeEvent
-  if not isNil(vtbl.metric):
+  if not isNil(vtbl[].metric):
     vtbl[].vtbl.metric = miqt_exec_callback_cQDateEdit_metric
-  if not isNil(vtbl.initPainter):
+  if not isNil(vtbl[].initPainter):
     vtbl[].vtbl.initPainter = miqt_exec_callback_cQDateEdit_initPainter
-  if not isNil(vtbl.redirected):
+  if not isNil(vtbl[].redirected):
     vtbl[].vtbl.redirected = miqt_exec_callback_cQDateEdit_redirected
-  if not isNil(vtbl.sharedPainter):
+  if not isNil(vtbl[].sharedPainter):
     vtbl[].vtbl.sharedPainter = miqt_exec_callback_cQDateEdit_sharedPainter
-  if not isNil(vtbl.inputMethodEvent):
+  if not isNil(vtbl[].inputMethodEvent):
     vtbl[].vtbl.inputMethodEvent = miqt_exec_callback_cQDateEdit_inputMethodEvent
-  if not isNil(vtbl.eventFilter):
+  if not isNil(vtbl[].eventFilter):
     vtbl[].vtbl.eventFilter = miqt_exec_callback_cQDateEdit_eventFilter
-  if not isNil(vtbl.childEvent):
+  if not isNil(vtbl[].childEvent):
     vtbl[].vtbl.childEvent = miqt_exec_callback_cQDateEdit_childEvent
-  if not isNil(vtbl.customEvent):
+  if not isNil(vtbl[].customEvent):
     vtbl[].vtbl.customEvent = miqt_exec_callback_cQDateEdit_customEvent
-  if not isNil(vtbl.connectNotify):
+  if not isNil(vtbl[].connectNotify):
     vtbl[].vtbl.connectNotify = miqt_exec_callback_cQDateEdit_connectNotify
-  if not isNil(vtbl.disconnectNotify):
+  if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQDateEdit_disconnectNotify
-  gen_qdatetimeedit_types.QDateEdit(h: fcQDateEdit_new2(addr(vtbl[]), ))
+  gen_qdatetimeedit_types.QDateEdit(h: fcQDateEdit_new2(addr(vtbl[].vtbl), ), owned: true)
 
 proc create*(T: type gen_qdatetimeedit_types.QDateEdit,
     date: gen_qdatetime_types.QDate,
     vtbl: ref QDateEditVTable = nil): gen_qdatetimeedit_types.QDateEdit =
   let vtbl = if vtbl == nil: new QDateEditVTable else: vtbl
   GC_ref(vtbl)
-  vtbl.vtbl.destructor = proc(vtbl: ptr cQDateEditVTable, _: ptr cQDateEdit) {.cdecl.} =
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQDateEditVTable, _: ptr cQDateEdit) {.cdecl.} =
     let vtbl = cast[ref QDateEditVTable](vtbl)
     GC_unref(vtbl)
-  if not isNil(vtbl.metaObject):
+  if not isNil(vtbl[].metaObject):
     vtbl[].vtbl.metaObject = miqt_exec_callback_cQDateEdit_metaObject
-  if not isNil(vtbl.metacast):
+  if not isNil(vtbl[].metacast):
     vtbl[].vtbl.metacast = miqt_exec_callback_cQDateEdit_metacast
-  if not isNil(vtbl.metacall):
+  if not isNil(vtbl[].metacall):
     vtbl[].vtbl.metacall = miqt_exec_callback_cQDateEdit_metacall
-  if not isNil(vtbl.sizeHint):
+  if not isNil(vtbl[].sizeHint):
     vtbl[].vtbl.sizeHint = miqt_exec_callback_cQDateEdit_sizeHint
-  if not isNil(vtbl.clear):
+  if not isNil(vtbl[].clear):
     vtbl[].vtbl.clear = miqt_exec_callback_cQDateEdit_clear
-  if not isNil(vtbl.stepBy):
+  if not isNil(vtbl[].stepBy):
     vtbl[].vtbl.stepBy = miqt_exec_callback_cQDateEdit_stepBy
-  if not isNil(vtbl.event):
+  if not isNil(vtbl[].event):
     vtbl[].vtbl.event = miqt_exec_callback_cQDateEdit_event
-  if not isNil(vtbl.keyPressEvent):
+  if not isNil(vtbl[].keyPressEvent):
     vtbl[].vtbl.keyPressEvent = miqt_exec_callback_cQDateEdit_keyPressEvent
-  if not isNil(vtbl.wheelEvent):
+  if not isNil(vtbl[].wheelEvent):
     vtbl[].vtbl.wheelEvent = miqt_exec_callback_cQDateEdit_wheelEvent
-  if not isNil(vtbl.focusInEvent):
+  if not isNil(vtbl[].focusInEvent):
     vtbl[].vtbl.focusInEvent = miqt_exec_callback_cQDateEdit_focusInEvent
-  if not isNil(vtbl.focusNextPrevChild):
+  if not isNil(vtbl[].focusNextPrevChild):
     vtbl[].vtbl.focusNextPrevChild = miqt_exec_callback_cQDateEdit_focusNextPrevChild
-  if not isNil(vtbl.validate):
+  if not isNil(vtbl[].validate):
     vtbl[].vtbl.validate = miqt_exec_callback_cQDateEdit_validate
-  if not isNil(vtbl.fixup):
+  if not isNil(vtbl[].fixup):
     vtbl[].vtbl.fixup = miqt_exec_callback_cQDateEdit_fixup
-  if not isNil(vtbl.dateTimeFromText):
+  if not isNil(vtbl[].dateTimeFromText):
     vtbl[].vtbl.dateTimeFromText = miqt_exec_callback_cQDateEdit_dateTimeFromText
-  if not isNil(vtbl.textFromDateTime):
+  if not isNil(vtbl[].textFromDateTime):
     vtbl[].vtbl.textFromDateTime = miqt_exec_callback_cQDateEdit_textFromDateTime
-  if not isNil(vtbl.stepEnabled):
+  if not isNil(vtbl[].stepEnabled):
     vtbl[].vtbl.stepEnabled = miqt_exec_callback_cQDateEdit_stepEnabled
-  if not isNil(vtbl.mousePressEvent):
+  if not isNil(vtbl[].mousePressEvent):
     vtbl[].vtbl.mousePressEvent = miqt_exec_callback_cQDateEdit_mousePressEvent
-  if not isNil(vtbl.paintEvent):
+  if not isNil(vtbl[].paintEvent):
     vtbl[].vtbl.paintEvent = miqt_exec_callback_cQDateEdit_paintEvent
-  if not isNil(vtbl.minimumSizeHint):
+  if not isNil(vtbl[].minimumSizeHint):
     vtbl[].vtbl.minimumSizeHint = miqt_exec_callback_cQDateEdit_minimumSizeHint
-  if not isNil(vtbl.inputMethodQuery):
+  if not isNil(vtbl[].inputMethodQuery):
     vtbl[].vtbl.inputMethodQuery = miqt_exec_callback_cQDateEdit_inputMethodQuery
-  if not isNil(vtbl.resizeEvent):
+  if not isNil(vtbl[].resizeEvent):
     vtbl[].vtbl.resizeEvent = miqt_exec_callback_cQDateEdit_resizeEvent
-  if not isNil(vtbl.keyReleaseEvent):
+  if not isNil(vtbl[].keyReleaseEvent):
     vtbl[].vtbl.keyReleaseEvent = miqt_exec_callback_cQDateEdit_keyReleaseEvent
-  if not isNil(vtbl.focusOutEvent):
+  if not isNil(vtbl[].focusOutEvent):
     vtbl[].vtbl.focusOutEvent = miqt_exec_callback_cQDateEdit_focusOutEvent
-  if not isNil(vtbl.contextMenuEvent):
+  if not isNil(vtbl[].contextMenuEvent):
     vtbl[].vtbl.contextMenuEvent = miqt_exec_callback_cQDateEdit_contextMenuEvent
-  if not isNil(vtbl.changeEvent):
+  if not isNil(vtbl[].changeEvent):
     vtbl[].vtbl.changeEvent = miqt_exec_callback_cQDateEdit_changeEvent
-  if not isNil(vtbl.closeEvent):
+  if not isNil(vtbl[].closeEvent):
     vtbl[].vtbl.closeEvent = miqt_exec_callback_cQDateEdit_closeEvent
-  if not isNil(vtbl.hideEvent):
+  if not isNil(vtbl[].hideEvent):
     vtbl[].vtbl.hideEvent = miqt_exec_callback_cQDateEdit_hideEvent
-  if not isNil(vtbl.mouseReleaseEvent):
+  if not isNil(vtbl[].mouseReleaseEvent):
     vtbl[].vtbl.mouseReleaseEvent = miqt_exec_callback_cQDateEdit_mouseReleaseEvent
-  if not isNil(vtbl.mouseMoveEvent):
+  if not isNil(vtbl[].mouseMoveEvent):
     vtbl[].vtbl.mouseMoveEvent = miqt_exec_callback_cQDateEdit_mouseMoveEvent
-  if not isNil(vtbl.timerEvent):
+  if not isNil(vtbl[].timerEvent):
     vtbl[].vtbl.timerEvent = miqt_exec_callback_cQDateEdit_timerEvent
-  if not isNil(vtbl.showEvent):
+  if not isNil(vtbl[].showEvent):
     vtbl[].vtbl.showEvent = miqt_exec_callback_cQDateEdit_showEvent
-  if not isNil(vtbl.devType):
+  if not isNil(vtbl[].devType):
     vtbl[].vtbl.devType = miqt_exec_callback_cQDateEdit_devType
-  if not isNil(vtbl.setVisible):
+  if not isNil(vtbl[].setVisible):
     vtbl[].vtbl.setVisible = miqt_exec_callback_cQDateEdit_setVisible
-  if not isNil(vtbl.heightForWidth):
+  if not isNil(vtbl[].heightForWidth):
     vtbl[].vtbl.heightForWidth = miqt_exec_callback_cQDateEdit_heightForWidth
-  if not isNil(vtbl.hasHeightForWidth):
+  if not isNil(vtbl[].hasHeightForWidth):
     vtbl[].vtbl.hasHeightForWidth = miqt_exec_callback_cQDateEdit_hasHeightForWidth
-  if not isNil(vtbl.paintEngine):
+  if not isNil(vtbl[].paintEngine):
     vtbl[].vtbl.paintEngine = miqt_exec_callback_cQDateEdit_paintEngine
-  if not isNil(vtbl.mouseDoubleClickEvent):
+  if not isNil(vtbl[].mouseDoubleClickEvent):
     vtbl[].vtbl.mouseDoubleClickEvent = miqt_exec_callback_cQDateEdit_mouseDoubleClickEvent
-  if not isNil(vtbl.enterEvent):
+  if not isNil(vtbl[].enterEvent):
     vtbl[].vtbl.enterEvent = miqt_exec_callback_cQDateEdit_enterEvent
-  if not isNil(vtbl.leaveEvent):
+  if not isNil(vtbl[].leaveEvent):
     vtbl[].vtbl.leaveEvent = miqt_exec_callback_cQDateEdit_leaveEvent
-  if not isNil(vtbl.moveEvent):
+  if not isNil(vtbl[].moveEvent):
     vtbl[].vtbl.moveEvent = miqt_exec_callback_cQDateEdit_moveEvent
-  if not isNil(vtbl.tabletEvent):
+  if not isNil(vtbl[].tabletEvent):
     vtbl[].vtbl.tabletEvent = miqt_exec_callback_cQDateEdit_tabletEvent
-  if not isNil(vtbl.actionEvent):
+  if not isNil(vtbl[].actionEvent):
     vtbl[].vtbl.actionEvent = miqt_exec_callback_cQDateEdit_actionEvent
-  if not isNil(vtbl.dragEnterEvent):
+  if not isNil(vtbl[].dragEnterEvent):
     vtbl[].vtbl.dragEnterEvent = miqt_exec_callback_cQDateEdit_dragEnterEvent
-  if not isNil(vtbl.dragMoveEvent):
+  if not isNil(vtbl[].dragMoveEvent):
     vtbl[].vtbl.dragMoveEvent = miqt_exec_callback_cQDateEdit_dragMoveEvent
-  if not isNil(vtbl.dragLeaveEvent):
+  if not isNil(vtbl[].dragLeaveEvent):
     vtbl[].vtbl.dragLeaveEvent = miqt_exec_callback_cQDateEdit_dragLeaveEvent
-  if not isNil(vtbl.dropEvent):
+  if not isNil(vtbl[].dropEvent):
     vtbl[].vtbl.dropEvent = miqt_exec_callback_cQDateEdit_dropEvent
-  if not isNil(vtbl.nativeEvent):
+  if not isNil(vtbl[].nativeEvent):
     vtbl[].vtbl.nativeEvent = miqt_exec_callback_cQDateEdit_nativeEvent
-  if not isNil(vtbl.metric):
+  if not isNil(vtbl[].metric):
     vtbl[].vtbl.metric = miqt_exec_callback_cQDateEdit_metric
-  if not isNil(vtbl.initPainter):
+  if not isNil(vtbl[].initPainter):
     vtbl[].vtbl.initPainter = miqt_exec_callback_cQDateEdit_initPainter
-  if not isNil(vtbl.redirected):
+  if not isNil(vtbl[].redirected):
     vtbl[].vtbl.redirected = miqt_exec_callback_cQDateEdit_redirected
-  if not isNil(vtbl.sharedPainter):
+  if not isNil(vtbl[].sharedPainter):
     vtbl[].vtbl.sharedPainter = miqt_exec_callback_cQDateEdit_sharedPainter
-  if not isNil(vtbl.inputMethodEvent):
+  if not isNil(vtbl[].inputMethodEvent):
     vtbl[].vtbl.inputMethodEvent = miqt_exec_callback_cQDateEdit_inputMethodEvent
-  if not isNil(vtbl.eventFilter):
+  if not isNil(vtbl[].eventFilter):
     vtbl[].vtbl.eventFilter = miqt_exec_callback_cQDateEdit_eventFilter
-  if not isNil(vtbl.childEvent):
+  if not isNil(vtbl[].childEvent):
     vtbl[].vtbl.childEvent = miqt_exec_callback_cQDateEdit_childEvent
-  if not isNil(vtbl.customEvent):
+  if not isNil(vtbl[].customEvent):
     vtbl[].vtbl.customEvent = miqt_exec_callback_cQDateEdit_customEvent
-  if not isNil(vtbl.connectNotify):
+  if not isNil(vtbl[].connectNotify):
     vtbl[].vtbl.connectNotify = miqt_exec_callback_cQDateEdit_connectNotify
-  if not isNil(vtbl.disconnectNotify):
+  if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQDateEdit_disconnectNotify
-  gen_qdatetimeedit_types.QDateEdit(h: fcQDateEdit_new3(addr(vtbl[]), date.h))
+  gen_qdatetimeedit_types.QDateEdit(h: fcQDateEdit_new3(addr(vtbl[].vtbl), date.h), owned: true)
 
 proc create*(T: type gen_qdatetimeedit_types.QDateEdit,
     date: gen_qdatetime_types.QDate, parent: gen_qwidget_types.QWidget,
     vtbl: ref QDateEditVTable = nil): gen_qdatetimeedit_types.QDateEdit =
   let vtbl = if vtbl == nil: new QDateEditVTable else: vtbl
   GC_ref(vtbl)
-  vtbl.vtbl.destructor = proc(vtbl: ptr cQDateEditVTable, _: ptr cQDateEdit) {.cdecl.} =
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQDateEditVTable, _: ptr cQDateEdit) {.cdecl.} =
     let vtbl = cast[ref QDateEditVTable](vtbl)
     GC_unref(vtbl)
-  if not isNil(vtbl.metaObject):
+  if not isNil(vtbl[].metaObject):
     vtbl[].vtbl.metaObject = miqt_exec_callback_cQDateEdit_metaObject
-  if not isNil(vtbl.metacast):
+  if not isNil(vtbl[].metacast):
     vtbl[].vtbl.metacast = miqt_exec_callback_cQDateEdit_metacast
-  if not isNil(vtbl.metacall):
+  if not isNil(vtbl[].metacall):
     vtbl[].vtbl.metacall = miqt_exec_callback_cQDateEdit_metacall
-  if not isNil(vtbl.sizeHint):
+  if not isNil(vtbl[].sizeHint):
     vtbl[].vtbl.sizeHint = miqt_exec_callback_cQDateEdit_sizeHint
-  if not isNil(vtbl.clear):
+  if not isNil(vtbl[].clear):
     vtbl[].vtbl.clear = miqt_exec_callback_cQDateEdit_clear
-  if not isNil(vtbl.stepBy):
+  if not isNil(vtbl[].stepBy):
     vtbl[].vtbl.stepBy = miqt_exec_callback_cQDateEdit_stepBy
-  if not isNil(vtbl.event):
+  if not isNil(vtbl[].event):
     vtbl[].vtbl.event = miqt_exec_callback_cQDateEdit_event
-  if not isNil(vtbl.keyPressEvent):
+  if not isNil(vtbl[].keyPressEvent):
     vtbl[].vtbl.keyPressEvent = miqt_exec_callback_cQDateEdit_keyPressEvent
-  if not isNil(vtbl.wheelEvent):
+  if not isNil(vtbl[].wheelEvent):
     vtbl[].vtbl.wheelEvent = miqt_exec_callback_cQDateEdit_wheelEvent
-  if not isNil(vtbl.focusInEvent):
+  if not isNil(vtbl[].focusInEvent):
     vtbl[].vtbl.focusInEvent = miqt_exec_callback_cQDateEdit_focusInEvent
-  if not isNil(vtbl.focusNextPrevChild):
+  if not isNil(vtbl[].focusNextPrevChild):
     vtbl[].vtbl.focusNextPrevChild = miqt_exec_callback_cQDateEdit_focusNextPrevChild
-  if not isNil(vtbl.validate):
+  if not isNil(vtbl[].validate):
     vtbl[].vtbl.validate = miqt_exec_callback_cQDateEdit_validate
-  if not isNil(vtbl.fixup):
+  if not isNil(vtbl[].fixup):
     vtbl[].vtbl.fixup = miqt_exec_callback_cQDateEdit_fixup
-  if not isNil(vtbl.dateTimeFromText):
+  if not isNil(vtbl[].dateTimeFromText):
     vtbl[].vtbl.dateTimeFromText = miqt_exec_callback_cQDateEdit_dateTimeFromText
-  if not isNil(vtbl.textFromDateTime):
+  if not isNil(vtbl[].textFromDateTime):
     vtbl[].vtbl.textFromDateTime = miqt_exec_callback_cQDateEdit_textFromDateTime
-  if not isNil(vtbl.stepEnabled):
+  if not isNil(vtbl[].stepEnabled):
     vtbl[].vtbl.stepEnabled = miqt_exec_callback_cQDateEdit_stepEnabled
-  if not isNil(vtbl.mousePressEvent):
+  if not isNil(vtbl[].mousePressEvent):
     vtbl[].vtbl.mousePressEvent = miqt_exec_callback_cQDateEdit_mousePressEvent
-  if not isNil(vtbl.paintEvent):
+  if not isNil(vtbl[].paintEvent):
     vtbl[].vtbl.paintEvent = miqt_exec_callback_cQDateEdit_paintEvent
-  if not isNil(vtbl.minimumSizeHint):
+  if not isNil(vtbl[].minimumSizeHint):
     vtbl[].vtbl.minimumSizeHint = miqt_exec_callback_cQDateEdit_minimumSizeHint
-  if not isNil(vtbl.inputMethodQuery):
+  if not isNil(vtbl[].inputMethodQuery):
     vtbl[].vtbl.inputMethodQuery = miqt_exec_callback_cQDateEdit_inputMethodQuery
-  if not isNil(vtbl.resizeEvent):
+  if not isNil(vtbl[].resizeEvent):
     vtbl[].vtbl.resizeEvent = miqt_exec_callback_cQDateEdit_resizeEvent
-  if not isNil(vtbl.keyReleaseEvent):
+  if not isNil(vtbl[].keyReleaseEvent):
     vtbl[].vtbl.keyReleaseEvent = miqt_exec_callback_cQDateEdit_keyReleaseEvent
-  if not isNil(vtbl.focusOutEvent):
+  if not isNil(vtbl[].focusOutEvent):
     vtbl[].vtbl.focusOutEvent = miqt_exec_callback_cQDateEdit_focusOutEvent
-  if not isNil(vtbl.contextMenuEvent):
+  if not isNil(vtbl[].contextMenuEvent):
     vtbl[].vtbl.contextMenuEvent = miqt_exec_callback_cQDateEdit_contextMenuEvent
-  if not isNil(vtbl.changeEvent):
+  if not isNil(vtbl[].changeEvent):
     vtbl[].vtbl.changeEvent = miqt_exec_callback_cQDateEdit_changeEvent
-  if not isNil(vtbl.closeEvent):
+  if not isNil(vtbl[].closeEvent):
     vtbl[].vtbl.closeEvent = miqt_exec_callback_cQDateEdit_closeEvent
-  if not isNil(vtbl.hideEvent):
+  if not isNil(vtbl[].hideEvent):
     vtbl[].vtbl.hideEvent = miqt_exec_callback_cQDateEdit_hideEvent
-  if not isNil(vtbl.mouseReleaseEvent):
+  if not isNil(vtbl[].mouseReleaseEvent):
     vtbl[].vtbl.mouseReleaseEvent = miqt_exec_callback_cQDateEdit_mouseReleaseEvent
-  if not isNil(vtbl.mouseMoveEvent):
+  if not isNil(vtbl[].mouseMoveEvent):
     vtbl[].vtbl.mouseMoveEvent = miqt_exec_callback_cQDateEdit_mouseMoveEvent
-  if not isNil(vtbl.timerEvent):
+  if not isNil(vtbl[].timerEvent):
     vtbl[].vtbl.timerEvent = miqt_exec_callback_cQDateEdit_timerEvent
-  if not isNil(vtbl.showEvent):
+  if not isNil(vtbl[].showEvent):
     vtbl[].vtbl.showEvent = miqt_exec_callback_cQDateEdit_showEvent
-  if not isNil(vtbl.devType):
+  if not isNil(vtbl[].devType):
     vtbl[].vtbl.devType = miqt_exec_callback_cQDateEdit_devType
-  if not isNil(vtbl.setVisible):
+  if not isNil(vtbl[].setVisible):
     vtbl[].vtbl.setVisible = miqt_exec_callback_cQDateEdit_setVisible
-  if not isNil(vtbl.heightForWidth):
+  if not isNil(vtbl[].heightForWidth):
     vtbl[].vtbl.heightForWidth = miqt_exec_callback_cQDateEdit_heightForWidth
-  if not isNil(vtbl.hasHeightForWidth):
+  if not isNil(vtbl[].hasHeightForWidth):
     vtbl[].vtbl.hasHeightForWidth = miqt_exec_callback_cQDateEdit_hasHeightForWidth
-  if not isNil(vtbl.paintEngine):
+  if not isNil(vtbl[].paintEngine):
     vtbl[].vtbl.paintEngine = miqt_exec_callback_cQDateEdit_paintEngine
-  if not isNil(vtbl.mouseDoubleClickEvent):
+  if not isNil(vtbl[].mouseDoubleClickEvent):
     vtbl[].vtbl.mouseDoubleClickEvent = miqt_exec_callback_cQDateEdit_mouseDoubleClickEvent
-  if not isNil(vtbl.enterEvent):
+  if not isNil(vtbl[].enterEvent):
     vtbl[].vtbl.enterEvent = miqt_exec_callback_cQDateEdit_enterEvent
-  if not isNil(vtbl.leaveEvent):
+  if not isNil(vtbl[].leaveEvent):
     vtbl[].vtbl.leaveEvent = miqt_exec_callback_cQDateEdit_leaveEvent
-  if not isNil(vtbl.moveEvent):
+  if not isNil(vtbl[].moveEvent):
     vtbl[].vtbl.moveEvent = miqt_exec_callback_cQDateEdit_moveEvent
-  if not isNil(vtbl.tabletEvent):
+  if not isNil(vtbl[].tabletEvent):
     vtbl[].vtbl.tabletEvent = miqt_exec_callback_cQDateEdit_tabletEvent
-  if not isNil(vtbl.actionEvent):
+  if not isNil(vtbl[].actionEvent):
     vtbl[].vtbl.actionEvent = miqt_exec_callback_cQDateEdit_actionEvent
-  if not isNil(vtbl.dragEnterEvent):
+  if not isNil(vtbl[].dragEnterEvent):
     vtbl[].vtbl.dragEnterEvent = miqt_exec_callback_cQDateEdit_dragEnterEvent
-  if not isNil(vtbl.dragMoveEvent):
+  if not isNil(vtbl[].dragMoveEvent):
     vtbl[].vtbl.dragMoveEvent = miqt_exec_callback_cQDateEdit_dragMoveEvent
-  if not isNil(vtbl.dragLeaveEvent):
+  if not isNil(vtbl[].dragLeaveEvent):
     vtbl[].vtbl.dragLeaveEvent = miqt_exec_callback_cQDateEdit_dragLeaveEvent
-  if not isNil(vtbl.dropEvent):
+  if not isNil(vtbl[].dropEvent):
     vtbl[].vtbl.dropEvent = miqt_exec_callback_cQDateEdit_dropEvent
-  if not isNil(vtbl.nativeEvent):
+  if not isNil(vtbl[].nativeEvent):
     vtbl[].vtbl.nativeEvent = miqt_exec_callback_cQDateEdit_nativeEvent
-  if not isNil(vtbl.metric):
+  if not isNil(vtbl[].metric):
     vtbl[].vtbl.metric = miqt_exec_callback_cQDateEdit_metric
-  if not isNil(vtbl.initPainter):
+  if not isNil(vtbl[].initPainter):
     vtbl[].vtbl.initPainter = miqt_exec_callback_cQDateEdit_initPainter
-  if not isNil(vtbl.redirected):
+  if not isNil(vtbl[].redirected):
     vtbl[].vtbl.redirected = miqt_exec_callback_cQDateEdit_redirected
-  if not isNil(vtbl.sharedPainter):
+  if not isNil(vtbl[].sharedPainter):
     vtbl[].vtbl.sharedPainter = miqt_exec_callback_cQDateEdit_sharedPainter
-  if not isNil(vtbl.inputMethodEvent):
+  if not isNil(vtbl[].inputMethodEvent):
     vtbl[].vtbl.inputMethodEvent = miqt_exec_callback_cQDateEdit_inputMethodEvent
-  if not isNil(vtbl.eventFilter):
+  if not isNil(vtbl[].eventFilter):
     vtbl[].vtbl.eventFilter = miqt_exec_callback_cQDateEdit_eventFilter
-  if not isNil(vtbl.childEvent):
+  if not isNil(vtbl[].childEvent):
     vtbl[].vtbl.childEvent = miqt_exec_callback_cQDateEdit_childEvent
-  if not isNil(vtbl.customEvent):
+  if not isNil(vtbl[].customEvent):
     vtbl[].vtbl.customEvent = miqt_exec_callback_cQDateEdit_customEvent
-  if not isNil(vtbl.connectNotify):
+  if not isNil(vtbl[].connectNotify):
     vtbl[].vtbl.connectNotify = miqt_exec_callback_cQDateEdit_connectNotify
-  if not isNil(vtbl.disconnectNotify):
+  if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQDateEdit_disconnectNotify
-  gen_qdatetimeedit_types.QDateEdit(h: fcQDateEdit_new4(addr(vtbl[]), date.h, parent.h))
+  gen_qdatetimeedit_types.QDateEdit(h: fcQDateEdit_new4(addr(vtbl[].vtbl), date.h, parent.h), owned: true)
+
+proc create*(T: type gen_qdatetimeedit_types.QDateEdit,
+    parent: gen_qwidget_types.QWidget,
+    vtbl: VirtualQDateEdit) =
+
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQDateEditVTable, _: ptr cQDateEdit) {.cdecl.} =
+    let vtbl = cast[ptr typeof(VirtualQDateEdit()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQDateEdit, vtbl)))
+    vtbl[].h = nil
+    vtbl[].owned = false
+  vtbl[].vtbl.metaObject = miqt_exec_method_cQDateEdit_metaObject
+  vtbl[].vtbl.metacast = miqt_exec_method_cQDateEdit_metacast
+  vtbl[].vtbl.metacall = miqt_exec_method_cQDateEdit_metacall
+  vtbl[].vtbl.sizeHint = miqt_exec_method_cQDateEdit_sizeHint
+  vtbl[].vtbl.clear = miqt_exec_method_cQDateEdit_clear
+  vtbl[].vtbl.stepBy = miqt_exec_method_cQDateEdit_stepBy
+  vtbl[].vtbl.event = miqt_exec_method_cQDateEdit_event
+  vtbl[].vtbl.keyPressEvent = miqt_exec_method_cQDateEdit_keyPressEvent
+  vtbl[].vtbl.wheelEvent = miqt_exec_method_cQDateEdit_wheelEvent
+  vtbl[].vtbl.focusInEvent = miqt_exec_method_cQDateEdit_focusInEvent
+  vtbl[].vtbl.focusNextPrevChild = miqt_exec_method_cQDateEdit_focusNextPrevChild
+  vtbl[].vtbl.validate = miqt_exec_method_cQDateEdit_validate
+  vtbl[].vtbl.fixup = miqt_exec_method_cQDateEdit_fixup
+  vtbl[].vtbl.dateTimeFromText = miqt_exec_method_cQDateEdit_dateTimeFromText
+  vtbl[].vtbl.textFromDateTime = miqt_exec_method_cQDateEdit_textFromDateTime
+  vtbl[].vtbl.stepEnabled = miqt_exec_method_cQDateEdit_stepEnabled
+  vtbl[].vtbl.mousePressEvent = miqt_exec_method_cQDateEdit_mousePressEvent
+  vtbl[].vtbl.paintEvent = miqt_exec_method_cQDateEdit_paintEvent
+  vtbl[].vtbl.minimumSizeHint = miqt_exec_method_cQDateEdit_minimumSizeHint
+  vtbl[].vtbl.inputMethodQuery = miqt_exec_method_cQDateEdit_inputMethodQuery
+  vtbl[].vtbl.resizeEvent = miqt_exec_method_cQDateEdit_resizeEvent
+  vtbl[].vtbl.keyReleaseEvent = miqt_exec_method_cQDateEdit_keyReleaseEvent
+  vtbl[].vtbl.focusOutEvent = miqt_exec_method_cQDateEdit_focusOutEvent
+  vtbl[].vtbl.contextMenuEvent = miqt_exec_method_cQDateEdit_contextMenuEvent
+  vtbl[].vtbl.changeEvent = miqt_exec_method_cQDateEdit_changeEvent
+  vtbl[].vtbl.closeEvent = miqt_exec_method_cQDateEdit_closeEvent
+  vtbl[].vtbl.hideEvent = miqt_exec_method_cQDateEdit_hideEvent
+  vtbl[].vtbl.mouseReleaseEvent = miqt_exec_method_cQDateEdit_mouseReleaseEvent
+  vtbl[].vtbl.mouseMoveEvent = miqt_exec_method_cQDateEdit_mouseMoveEvent
+  vtbl[].vtbl.timerEvent = miqt_exec_method_cQDateEdit_timerEvent
+  vtbl[].vtbl.showEvent = miqt_exec_method_cQDateEdit_showEvent
+  vtbl[].vtbl.devType = miqt_exec_method_cQDateEdit_devType
+  vtbl[].vtbl.setVisible = miqt_exec_method_cQDateEdit_setVisible
+  vtbl[].vtbl.heightForWidth = miqt_exec_method_cQDateEdit_heightForWidth
+  vtbl[].vtbl.hasHeightForWidth = miqt_exec_method_cQDateEdit_hasHeightForWidth
+  vtbl[].vtbl.paintEngine = miqt_exec_method_cQDateEdit_paintEngine
+  vtbl[].vtbl.mouseDoubleClickEvent = miqt_exec_method_cQDateEdit_mouseDoubleClickEvent
+  vtbl[].vtbl.enterEvent = miqt_exec_method_cQDateEdit_enterEvent
+  vtbl[].vtbl.leaveEvent = miqt_exec_method_cQDateEdit_leaveEvent
+  vtbl[].vtbl.moveEvent = miqt_exec_method_cQDateEdit_moveEvent
+  vtbl[].vtbl.tabletEvent = miqt_exec_method_cQDateEdit_tabletEvent
+  vtbl[].vtbl.actionEvent = miqt_exec_method_cQDateEdit_actionEvent
+  vtbl[].vtbl.dragEnterEvent = miqt_exec_method_cQDateEdit_dragEnterEvent
+  vtbl[].vtbl.dragMoveEvent = miqt_exec_method_cQDateEdit_dragMoveEvent
+  vtbl[].vtbl.dragLeaveEvent = miqt_exec_method_cQDateEdit_dragLeaveEvent
+  vtbl[].vtbl.dropEvent = miqt_exec_method_cQDateEdit_dropEvent
+  vtbl[].vtbl.nativeEvent = miqt_exec_method_cQDateEdit_nativeEvent
+  vtbl[].vtbl.metric = miqt_exec_method_cQDateEdit_metric
+  vtbl[].vtbl.initPainter = miqt_exec_method_cQDateEdit_initPainter
+  vtbl[].vtbl.redirected = miqt_exec_method_cQDateEdit_redirected
+  vtbl[].vtbl.sharedPainter = miqt_exec_method_cQDateEdit_sharedPainter
+  vtbl[].vtbl.inputMethodEvent = miqt_exec_method_cQDateEdit_inputMethodEvent
+  vtbl[].vtbl.eventFilter = miqt_exec_method_cQDateEdit_eventFilter
+  vtbl[].vtbl.childEvent = miqt_exec_method_cQDateEdit_childEvent
+  vtbl[].vtbl.customEvent = miqt_exec_method_cQDateEdit_customEvent
+  vtbl[].vtbl.connectNotify = miqt_exec_method_cQDateEdit_connectNotify
+  vtbl[].vtbl.disconnectNotify = miqt_exec_method_cQDateEdit_disconnectNotify
+  if vtbl[].h != nil: delete(move(vtbl[]))
+  vtbl[].h = fcQDateEdit_new(addr(vtbl[].vtbl), parent.h)
+  vtbl[].owned = true
+
+proc create*(T: type gen_qdatetimeedit_types.QDateEdit,
+    vtbl: VirtualQDateEdit) =
+
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQDateEditVTable, _: ptr cQDateEdit) {.cdecl.} =
+    let vtbl = cast[ptr typeof(VirtualQDateEdit()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQDateEdit, vtbl)))
+    vtbl[].h = nil
+    vtbl[].owned = false
+  vtbl[].vtbl.metaObject = miqt_exec_method_cQDateEdit_metaObject
+  vtbl[].vtbl.metacast = miqt_exec_method_cQDateEdit_metacast
+  vtbl[].vtbl.metacall = miqt_exec_method_cQDateEdit_metacall
+  vtbl[].vtbl.sizeHint = miqt_exec_method_cQDateEdit_sizeHint
+  vtbl[].vtbl.clear = miqt_exec_method_cQDateEdit_clear
+  vtbl[].vtbl.stepBy = miqt_exec_method_cQDateEdit_stepBy
+  vtbl[].vtbl.event = miqt_exec_method_cQDateEdit_event
+  vtbl[].vtbl.keyPressEvent = miqt_exec_method_cQDateEdit_keyPressEvent
+  vtbl[].vtbl.wheelEvent = miqt_exec_method_cQDateEdit_wheelEvent
+  vtbl[].vtbl.focusInEvent = miqt_exec_method_cQDateEdit_focusInEvent
+  vtbl[].vtbl.focusNextPrevChild = miqt_exec_method_cQDateEdit_focusNextPrevChild
+  vtbl[].vtbl.validate = miqt_exec_method_cQDateEdit_validate
+  vtbl[].vtbl.fixup = miqt_exec_method_cQDateEdit_fixup
+  vtbl[].vtbl.dateTimeFromText = miqt_exec_method_cQDateEdit_dateTimeFromText
+  vtbl[].vtbl.textFromDateTime = miqt_exec_method_cQDateEdit_textFromDateTime
+  vtbl[].vtbl.stepEnabled = miqt_exec_method_cQDateEdit_stepEnabled
+  vtbl[].vtbl.mousePressEvent = miqt_exec_method_cQDateEdit_mousePressEvent
+  vtbl[].vtbl.paintEvent = miqt_exec_method_cQDateEdit_paintEvent
+  vtbl[].vtbl.minimumSizeHint = miqt_exec_method_cQDateEdit_minimumSizeHint
+  vtbl[].vtbl.inputMethodQuery = miqt_exec_method_cQDateEdit_inputMethodQuery
+  vtbl[].vtbl.resizeEvent = miqt_exec_method_cQDateEdit_resizeEvent
+  vtbl[].vtbl.keyReleaseEvent = miqt_exec_method_cQDateEdit_keyReleaseEvent
+  vtbl[].vtbl.focusOutEvent = miqt_exec_method_cQDateEdit_focusOutEvent
+  vtbl[].vtbl.contextMenuEvent = miqt_exec_method_cQDateEdit_contextMenuEvent
+  vtbl[].vtbl.changeEvent = miqt_exec_method_cQDateEdit_changeEvent
+  vtbl[].vtbl.closeEvent = miqt_exec_method_cQDateEdit_closeEvent
+  vtbl[].vtbl.hideEvent = miqt_exec_method_cQDateEdit_hideEvent
+  vtbl[].vtbl.mouseReleaseEvent = miqt_exec_method_cQDateEdit_mouseReleaseEvent
+  vtbl[].vtbl.mouseMoveEvent = miqt_exec_method_cQDateEdit_mouseMoveEvent
+  vtbl[].vtbl.timerEvent = miqt_exec_method_cQDateEdit_timerEvent
+  vtbl[].vtbl.showEvent = miqt_exec_method_cQDateEdit_showEvent
+  vtbl[].vtbl.devType = miqt_exec_method_cQDateEdit_devType
+  vtbl[].vtbl.setVisible = miqt_exec_method_cQDateEdit_setVisible
+  vtbl[].vtbl.heightForWidth = miqt_exec_method_cQDateEdit_heightForWidth
+  vtbl[].vtbl.hasHeightForWidth = miqt_exec_method_cQDateEdit_hasHeightForWidth
+  vtbl[].vtbl.paintEngine = miqt_exec_method_cQDateEdit_paintEngine
+  vtbl[].vtbl.mouseDoubleClickEvent = miqt_exec_method_cQDateEdit_mouseDoubleClickEvent
+  vtbl[].vtbl.enterEvent = miqt_exec_method_cQDateEdit_enterEvent
+  vtbl[].vtbl.leaveEvent = miqt_exec_method_cQDateEdit_leaveEvent
+  vtbl[].vtbl.moveEvent = miqt_exec_method_cQDateEdit_moveEvent
+  vtbl[].vtbl.tabletEvent = miqt_exec_method_cQDateEdit_tabletEvent
+  vtbl[].vtbl.actionEvent = miqt_exec_method_cQDateEdit_actionEvent
+  vtbl[].vtbl.dragEnterEvent = miqt_exec_method_cQDateEdit_dragEnterEvent
+  vtbl[].vtbl.dragMoveEvent = miqt_exec_method_cQDateEdit_dragMoveEvent
+  vtbl[].vtbl.dragLeaveEvent = miqt_exec_method_cQDateEdit_dragLeaveEvent
+  vtbl[].vtbl.dropEvent = miqt_exec_method_cQDateEdit_dropEvent
+  vtbl[].vtbl.nativeEvent = miqt_exec_method_cQDateEdit_nativeEvent
+  vtbl[].vtbl.metric = miqt_exec_method_cQDateEdit_metric
+  vtbl[].vtbl.initPainter = miqt_exec_method_cQDateEdit_initPainter
+  vtbl[].vtbl.redirected = miqt_exec_method_cQDateEdit_redirected
+  vtbl[].vtbl.sharedPainter = miqt_exec_method_cQDateEdit_sharedPainter
+  vtbl[].vtbl.inputMethodEvent = miqt_exec_method_cQDateEdit_inputMethodEvent
+  vtbl[].vtbl.eventFilter = miqt_exec_method_cQDateEdit_eventFilter
+  vtbl[].vtbl.childEvent = miqt_exec_method_cQDateEdit_childEvent
+  vtbl[].vtbl.customEvent = miqt_exec_method_cQDateEdit_customEvent
+  vtbl[].vtbl.connectNotify = miqt_exec_method_cQDateEdit_connectNotify
+  vtbl[].vtbl.disconnectNotify = miqt_exec_method_cQDateEdit_disconnectNotify
+  if vtbl[].h != nil: delete(move(vtbl[]))
+  vtbl[].h = fcQDateEdit_new2(addr(vtbl[].vtbl), )
+  vtbl[].owned = true
+
+proc create*(T: type gen_qdatetimeedit_types.QDateEdit,
+    date: gen_qdatetime_types.QDate,
+    vtbl: VirtualQDateEdit) =
+
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQDateEditVTable, _: ptr cQDateEdit) {.cdecl.} =
+    let vtbl = cast[ptr typeof(VirtualQDateEdit()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQDateEdit, vtbl)))
+    vtbl[].h = nil
+    vtbl[].owned = false
+  vtbl[].vtbl.metaObject = miqt_exec_method_cQDateEdit_metaObject
+  vtbl[].vtbl.metacast = miqt_exec_method_cQDateEdit_metacast
+  vtbl[].vtbl.metacall = miqt_exec_method_cQDateEdit_metacall
+  vtbl[].vtbl.sizeHint = miqt_exec_method_cQDateEdit_sizeHint
+  vtbl[].vtbl.clear = miqt_exec_method_cQDateEdit_clear
+  vtbl[].vtbl.stepBy = miqt_exec_method_cQDateEdit_stepBy
+  vtbl[].vtbl.event = miqt_exec_method_cQDateEdit_event
+  vtbl[].vtbl.keyPressEvent = miqt_exec_method_cQDateEdit_keyPressEvent
+  vtbl[].vtbl.wheelEvent = miqt_exec_method_cQDateEdit_wheelEvent
+  vtbl[].vtbl.focusInEvent = miqt_exec_method_cQDateEdit_focusInEvent
+  vtbl[].vtbl.focusNextPrevChild = miqt_exec_method_cQDateEdit_focusNextPrevChild
+  vtbl[].vtbl.validate = miqt_exec_method_cQDateEdit_validate
+  vtbl[].vtbl.fixup = miqt_exec_method_cQDateEdit_fixup
+  vtbl[].vtbl.dateTimeFromText = miqt_exec_method_cQDateEdit_dateTimeFromText
+  vtbl[].vtbl.textFromDateTime = miqt_exec_method_cQDateEdit_textFromDateTime
+  vtbl[].vtbl.stepEnabled = miqt_exec_method_cQDateEdit_stepEnabled
+  vtbl[].vtbl.mousePressEvent = miqt_exec_method_cQDateEdit_mousePressEvent
+  vtbl[].vtbl.paintEvent = miqt_exec_method_cQDateEdit_paintEvent
+  vtbl[].vtbl.minimumSizeHint = miqt_exec_method_cQDateEdit_minimumSizeHint
+  vtbl[].vtbl.inputMethodQuery = miqt_exec_method_cQDateEdit_inputMethodQuery
+  vtbl[].vtbl.resizeEvent = miqt_exec_method_cQDateEdit_resizeEvent
+  vtbl[].vtbl.keyReleaseEvent = miqt_exec_method_cQDateEdit_keyReleaseEvent
+  vtbl[].vtbl.focusOutEvent = miqt_exec_method_cQDateEdit_focusOutEvent
+  vtbl[].vtbl.contextMenuEvent = miqt_exec_method_cQDateEdit_contextMenuEvent
+  vtbl[].vtbl.changeEvent = miqt_exec_method_cQDateEdit_changeEvent
+  vtbl[].vtbl.closeEvent = miqt_exec_method_cQDateEdit_closeEvent
+  vtbl[].vtbl.hideEvent = miqt_exec_method_cQDateEdit_hideEvent
+  vtbl[].vtbl.mouseReleaseEvent = miqt_exec_method_cQDateEdit_mouseReleaseEvent
+  vtbl[].vtbl.mouseMoveEvent = miqt_exec_method_cQDateEdit_mouseMoveEvent
+  vtbl[].vtbl.timerEvent = miqt_exec_method_cQDateEdit_timerEvent
+  vtbl[].vtbl.showEvent = miqt_exec_method_cQDateEdit_showEvent
+  vtbl[].vtbl.devType = miqt_exec_method_cQDateEdit_devType
+  vtbl[].vtbl.setVisible = miqt_exec_method_cQDateEdit_setVisible
+  vtbl[].vtbl.heightForWidth = miqt_exec_method_cQDateEdit_heightForWidth
+  vtbl[].vtbl.hasHeightForWidth = miqt_exec_method_cQDateEdit_hasHeightForWidth
+  vtbl[].vtbl.paintEngine = miqt_exec_method_cQDateEdit_paintEngine
+  vtbl[].vtbl.mouseDoubleClickEvent = miqt_exec_method_cQDateEdit_mouseDoubleClickEvent
+  vtbl[].vtbl.enterEvent = miqt_exec_method_cQDateEdit_enterEvent
+  vtbl[].vtbl.leaveEvent = miqt_exec_method_cQDateEdit_leaveEvent
+  vtbl[].vtbl.moveEvent = miqt_exec_method_cQDateEdit_moveEvent
+  vtbl[].vtbl.tabletEvent = miqt_exec_method_cQDateEdit_tabletEvent
+  vtbl[].vtbl.actionEvent = miqt_exec_method_cQDateEdit_actionEvent
+  vtbl[].vtbl.dragEnterEvent = miqt_exec_method_cQDateEdit_dragEnterEvent
+  vtbl[].vtbl.dragMoveEvent = miqt_exec_method_cQDateEdit_dragMoveEvent
+  vtbl[].vtbl.dragLeaveEvent = miqt_exec_method_cQDateEdit_dragLeaveEvent
+  vtbl[].vtbl.dropEvent = miqt_exec_method_cQDateEdit_dropEvent
+  vtbl[].vtbl.nativeEvent = miqt_exec_method_cQDateEdit_nativeEvent
+  vtbl[].vtbl.metric = miqt_exec_method_cQDateEdit_metric
+  vtbl[].vtbl.initPainter = miqt_exec_method_cQDateEdit_initPainter
+  vtbl[].vtbl.redirected = miqt_exec_method_cQDateEdit_redirected
+  vtbl[].vtbl.sharedPainter = miqt_exec_method_cQDateEdit_sharedPainter
+  vtbl[].vtbl.inputMethodEvent = miqt_exec_method_cQDateEdit_inputMethodEvent
+  vtbl[].vtbl.eventFilter = miqt_exec_method_cQDateEdit_eventFilter
+  vtbl[].vtbl.childEvent = miqt_exec_method_cQDateEdit_childEvent
+  vtbl[].vtbl.customEvent = miqt_exec_method_cQDateEdit_customEvent
+  vtbl[].vtbl.connectNotify = miqt_exec_method_cQDateEdit_connectNotify
+  vtbl[].vtbl.disconnectNotify = miqt_exec_method_cQDateEdit_disconnectNotify
+  if vtbl[].h != nil: delete(move(vtbl[]))
+  vtbl[].h = fcQDateEdit_new3(addr(vtbl[].vtbl), date.h)
+  vtbl[].owned = true
+
+proc create*(T: type gen_qdatetimeedit_types.QDateEdit,
+    date: gen_qdatetime_types.QDate, parent: gen_qwidget_types.QWidget,
+    vtbl: VirtualQDateEdit) =
+
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQDateEditVTable, _: ptr cQDateEdit) {.cdecl.} =
+    let vtbl = cast[ptr typeof(VirtualQDateEdit()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQDateEdit, vtbl)))
+    vtbl[].h = nil
+    vtbl[].owned = false
+  vtbl[].vtbl.metaObject = miqt_exec_method_cQDateEdit_metaObject
+  vtbl[].vtbl.metacast = miqt_exec_method_cQDateEdit_metacast
+  vtbl[].vtbl.metacall = miqt_exec_method_cQDateEdit_metacall
+  vtbl[].vtbl.sizeHint = miqt_exec_method_cQDateEdit_sizeHint
+  vtbl[].vtbl.clear = miqt_exec_method_cQDateEdit_clear
+  vtbl[].vtbl.stepBy = miqt_exec_method_cQDateEdit_stepBy
+  vtbl[].vtbl.event = miqt_exec_method_cQDateEdit_event
+  vtbl[].vtbl.keyPressEvent = miqt_exec_method_cQDateEdit_keyPressEvent
+  vtbl[].vtbl.wheelEvent = miqt_exec_method_cQDateEdit_wheelEvent
+  vtbl[].vtbl.focusInEvent = miqt_exec_method_cQDateEdit_focusInEvent
+  vtbl[].vtbl.focusNextPrevChild = miqt_exec_method_cQDateEdit_focusNextPrevChild
+  vtbl[].vtbl.validate = miqt_exec_method_cQDateEdit_validate
+  vtbl[].vtbl.fixup = miqt_exec_method_cQDateEdit_fixup
+  vtbl[].vtbl.dateTimeFromText = miqt_exec_method_cQDateEdit_dateTimeFromText
+  vtbl[].vtbl.textFromDateTime = miqt_exec_method_cQDateEdit_textFromDateTime
+  vtbl[].vtbl.stepEnabled = miqt_exec_method_cQDateEdit_stepEnabled
+  vtbl[].vtbl.mousePressEvent = miqt_exec_method_cQDateEdit_mousePressEvent
+  vtbl[].vtbl.paintEvent = miqt_exec_method_cQDateEdit_paintEvent
+  vtbl[].vtbl.minimumSizeHint = miqt_exec_method_cQDateEdit_minimumSizeHint
+  vtbl[].vtbl.inputMethodQuery = miqt_exec_method_cQDateEdit_inputMethodQuery
+  vtbl[].vtbl.resizeEvent = miqt_exec_method_cQDateEdit_resizeEvent
+  vtbl[].vtbl.keyReleaseEvent = miqt_exec_method_cQDateEdit_keyReleaseEvent
+  vtbl[].vtbl.focusOutEvent = miqt_exec_method_cQDateEdit_focusOutEvent
+  vtbl[].vtbl.contextMenuEvent = miqt_exec_method_cQDateEdit_contextMenuEvent
+  vtbl[].vtbl.changeEvent = miqt_exec_method_cQDateEdit_changeEvent
+  vtbl[].vtbl.closeEvent = miqt_exec_method_cQDateEdit_closeEvent
+  vtbl[].vtbl.hideEvent = miqt_exec_method_cQDateEdit_hideEvent
+  vtbl[].vtbl.mouseReleaseEvent = miqt_exec_method_cQDateEdit_mouseReleaseEvent
+  vtbl[].vtbl.mouseMoveEvent = miqt_exec_method_cQDateEdit_mouseMoveEvent
+  vtbl[].vtbl.timerEvent = miqt_exec_method_cQDateEdit_timerEvent
+  vtbl[].vtbl.showEvent = miqt_exec_method_cQDateEdit_showEvent
+  vtbl[].vtbl.devType = miqt_exec_method_cQDateEdit_devType
+  vtbl[].vtbl.setVisible = miqt_exec_method_cQDateEdit_setVisible
+  vtbl[].vtbl.heightForWidth = miqt_exec_method_cQDateEdit_heightForWidth
+  vtbl[].vtbl.hasHeightForWidth = miqt_exec_method_cQDateEdit_hasHeightForWidth
+  vtbl[].vtbl.paintEngine = miqt_exec_method_cQDateEdit_paintEngine
+  vtbl[].vtbl.mouseDoubleClickEvent = miqt_exec_method_cQDateEdit_mouseDoubleClickEvent
+  vtbl[].vtbl.enterEvent = miqt_exec_method_cQDateEdit_enterEvent
+  vtbl[].vtbl.leaveEvent = miqt_exec_method_cQDateEdit_leaveEvent
+  vtbl[].vtbl.moveEvent = miqt_exec_method_cQDateEdit_moveEvent
+  vtbl[].vtbl.tabletEvent = miqt_exec_method_cQDateEdit_tabletEvent
+  vtbl[].vtbl.actionEvent = miqt_exec_method_cQDateEdit_actionEvent
+  vtbl[].vtbl.dragEnterEvent = miqt_exec_method_cQDateEdit_dragEnterEvent
+  vtbl[].vtbl.dragMoveEvent = miqt_exec_method_cQDateEdit_dragMoveEvent
+  vtbl[].vtbl.dragLeaveEvent = miqt_exec_method_cQDateEdit_dragLeaveEvent
+  vtbl[].vtbl.dropEvent = miqt_exec_method_cQDateEdit_dropEvent
+  vtbl[].vtbl.nativeEvent = miqt_exec_method_cQDateEdit_nativeEvent
+  vtbl[].vtbl.metric = miqt_exec_method_cQDateEdit_metric
+  vtbl[].vtbl.initPainter = miqt_exec_method_cQDateEdit_initPainter
+  vtbl[].vtbl.redirected = miqt_exec_method_cQDateEdit_redirected
+  vtbl[].vtbl.sharedPainter = miqt_exec_method_cQDateEdit_sharedPainter
+  vtbl[].vtbl.inputMethodEvent = miqt_exec_method_cQDateEdit_inputMethodEvent
+  vtbl[].vtbl.eventFilter = miqt_exec_method_cQDateEdit_eventFilter
+  vtbl[].vtbl.childEvent = miqt_exec_method_cQDateEdit_childEvent
+  vtbl[].vtbl.customEvent = miqt_exec_method_cQDateEdit_customEvent
+  vtbl[].vtbl.connectNotify = miqt_exec_method_cQDateEdit_connectNotify
+  vtbl[].vtbl.disconnectNotify = miqt_exec_method_cQDateEdit_disconnectNotify
+  if vtbl[].h != nil: delete(move(vtbl[]))
+  vtbl[].h = fcQDateEdit_new4(addr(vtbl[].vtbl), date.h, parent.h)
+  vtbl[].owned = true
 
 proc staticMetaObject*(_: type gen_qdatetimeedit_types.QDateEdit): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQDateEdit_staticMetaObject())
-proc delete*(self: gen_qdatetimeedit_types.QDateEdit) =
-  fcQDateEdit_delete(self.h)

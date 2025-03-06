@@ -30,7 +30,7 @@ func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
     else:
       copyMem(addr result[0], unsafeAddr v[0], v.len)
 
-const cflags = gorge("pkg-config --cflags Qt5Widgets")  & " -fPIC"
+const cflags = gorge("pkg-config --cflags Qt5Widgets") & " -fPIC"
 {.compile("gen_qkeysequenceedit.cpp", cflags).}
 
 
@@ -84,7 +84,7 @@ proc fcQKeySequenceEdit_tr2(s: cstring, c: cstring): struct_miqt_string {.import
 proc fcQKeySequenceEdit_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QKeySequenceEdit_tr3".}
 proc fcQKeySequenceEdit_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QKeySequenceEdit_trUtf82".}
 proc fcQKeySequenceEdit_trUtf83(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QKeySequenceEdit_trUtf83".}
-type cQKeySequenceEditVTable = object
+type cQKeySequenceEditVTable {.pure.} = object
   destructor*: proc(vtbl: ptr cQKeySequenceEditVTable, self: ptr cQKeySequenceEdit) {.cdecl, raises:[], gcsafe.}
   metaObject*: proc(vtbl, self: pointer, ): pointer {.cdecl, raises: [], gcsafe.}
   metacast*: proc(vtbl, self: pointer, param1: cstring): pointer {.cdecl, raises: [], gcsafe.}
@@ -200,10 +200,9 @@ proc fcQKeySequenceEdit_new2(vtbl: pointer, ): ptr cQKeySequenceEdit {.importc: 
 proc fcQKeySequenceEdit_new3(vtbl: pointer, keySequence: pointer): ptr cQKeySequenceEdit {.importc: "QKeySequenceEdit_new3".}
 proc fcQKeySequenceEdit_new4(vtbl: pointer, keySequence: pointer, parent: pointer): ptr cQKeySequenceEdit {.importc: "QKeySequenceEdit_new4".}
 proc fcQKeySequenceEdit_staticMetaObject(): pointer {.importc: "QKeySequenceEdit_staticMetaObject".}
-proc fcQKeySequenceEdit_delete(self: pointer) {.importc: "QKeySequenceEdit_delete".}
 
 proc metaObject*(self: gen_qkeysequenceedit_types.QKeySequenceEdit, ): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQKeySequenceEdit_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQKeySequenceEdit_metaObject(self.h), owned: false)
 
 proc metacast*(self: gen_qkeysequenceedit_types.QKeySequenceEdit, param1: cstring): pointer =
   fcQKeySequenceEdit_metacast(self.h, param1)
@@ -224,7 +223,7 @@ proc trUtf8*(_: type gen_qkeysequenceedit_types.QKeySequenceEdit, s: cstring): s
   vx_ret
 
 proc keySequence*(self: gen_qkeysequenceedit_types.QKeySequenceEdit, ): gen_qkeysequence_types.QKeySequence =
-  gen_qkeysequence_types.QKeySequence(h: fcQKeySequenceEdit_keySequence(self.h))
+  gen_qkeysequence_types.QKeySequence(h: fcQKeySequenceEdit_keySequence(self.h), owned: true)
 
 proc setKeySequence*(self: gen_qkeysequenceedit_types.QKeySequenceEdit, keySequence: gen_qkeysequence_types.QKeySequence): void =
   fcQKeySequenceEdit_setKeySequence(self.h, keySequence.h)
@@ -256,7 +255,7 @@ proc keySequenceChanged*(self: gen_qkeysequenceedit_types.QKeySequenceEdit, keyS
 type QKeySequenceEditkeySequenceChangedSlot* = proc(keySequence: gen_qkeysequence_types.QKeySequence)
 proc miqt_exec_callback_cQKeySequenceEdit_keySequenceChanged(slot: int, keySequence: pointer) {.cdecl.} =
   let nimfunc = cast[ptr QKeySequenceEditkeySequenceChangedSlot](cast[pointer](slot))
-  let slotval1 = gen_qkeysequence_types.QKeySequence(h: keySequence)
+  let slotval1 = gen_qkeysequence_types.QKeySequence(h: keySequence, owned: false)
 
   nimfunc[](slotval1)
 
@@ -344,7 +343,7 @@ type QKeySequenceEditchildEventProc* = proc(self: QKeySequenceEdit, event: gen_q
 type QKeySequenceEditcustomEventProc* = proc(self: QKeySequenceEdit, event: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
 type QKeySequenceEditconnectNotifyProc* = proc(self: QKeySequenceEdit, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
 type QKeySequenceEditdisconnectNotifyProc* = proc(self: QKeySequenceEdit, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
-type QKeySequenceEditVTable* = object
+type QKeySequenceEditVTable* {.inheritable, pure.} = object
   vtbl: cQKeySequenceEditVTable
   metaObject*: QKeySequenceEditmetaObjectProc
   metacast*: QKeySequenceEditmetacastProc
@@ -397,13 +396,16 @@ type QKeySequenceEditVTable* = object
   connectNotify*: QKeySequenceEditconnectNotifyProc
   disconnectNotify*: QKeySequenceEditdisconnectNotifyProc
 proc QKeySequenceEditmetaObject*(self: gen_qkeysequenceedit_types.QKeySequenceEdit, ): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQKeySequenceEdit_virtualbase_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQKeySequenceEdit_virtualbase_metaObject(self.h), owned: false)
 
 proc miqt_exec_callback_cQKeySequenceEdit_metaObject(vtbl: pointer, self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QKeySequenceEditVTable](vtbl)
   let self = QKeySequenceEdit(h: self)
   var virtualReturn = vtbl[].metaObject(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QKeySequenceEditmetacast*(self: gen_qkeysequenceedit_types.QKeySequenceEdit, param1: cstring): pointer =
   fcQKeySequenceEdit_virtualbase_metacast(self.h, param1)
@@ -433,7 +435,7 @@ proc QKeySequenceEditevent*(self: gen_qkeysequenceedit_types.QKeySequenceEdit, p
 proc miqt_exec_callback_cQKeySequenceEdit_event(vtbl: pointer, self: pointer, param1: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QKeySequenceEditVTable](vtbl)
   let self = QKeySequenceEdit(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: param1)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: param1, owned: false)
   var virtualReturn = vtbl[].event(self, slotval1)
   virtualReturn
 
@@ -443,7 +445,7 @@ proc QKeySequenceEditkeyPressEvent*(self: gen_qkeysequenceedit_types.QKeySequenc
 proc miqt_exec_callback_cQKeySequenceEdit_keyPressEvent(vtbl: pointer, self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QKeySequenceEditVTable](vtbl)
   let self = QKeySequenceEdit(h: self)
-  let slotval1 = gen_qevent_types.QKeyEvent(h: param1)
+  let slotval1 = gen_qevent_types.QKeyEvent(h: param1, owned: false)
   vtbl[].keyPressEvent(self, slotval1)
 
 proc QKeySequenceEditkeyReleaseEvent*(self: gen_qkeysequenceedit_types.QKeySequenceEdit, param1: gen_qevent_types.QKeyEvent): void =
@@ -452,7 +454,7 @@ proc QKeySequenceEditkeyReleaseEvent*(self: gen_qkeysequenceedit_types.QKeySeque
 proc miqt_exec_callback_cQKeySequenceEdit_keyReleaseEvent(vtbl: pointer, self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QKeySequenceEditVTable](vtbl)
   let self = QKeySequenceEdit(h: self)
-  let slotval1 = gen_qevent_types.QKeyEvent(h: param1)
+  let slotval1 = gen_qevent_types.QKeyEvent(h: param1, owned: false)
   vtbl[].keyReleaseEvent(self, slotval1)
 
 proc QKeySequenceEdittimerEvent*(self: gen_qkeysequenceedit_types.QKeySequenceEdit, param1: gen_qcoreevent_types.QTimerEvent): void =
@@ -461,7 +463,7 @@ proc QKeySequenceEdittimerEvent*(self: gen_qkeysequenceedit_types.QKeySequenceEd
 proc miqt_exec_callback_cQKeySequenceEdit_timerEvent(vtbl: pointer, self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QKeySequenceEditVTable](vtbl)
   let self = QKeySequenceEdit(h: self)
-  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: param1)
+  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: param1, owned: false)
   vtbl[].timerEvent(self, slotval1)
 
 proc QKeySequenceEditdevType*(self: gen_qkeysequenceedit_types.QKeySequenceEdit, ): cint =
@@ -483,22 +485,28 @@ proc miqt_exec_callback_cQKeySequenceEdit_setVisible(vtbl: pointer, self: pointe
   vtbl[].setVisible(self, slotval1)
 
 proc QKeySequenceEditsizeHint*(self: gen_qkeysequenceedit_types.QKeySequenceEdit, ): gen_qsize_types.QSize =
-  gen_qsize_types.QSize(h: fcQKeySequenceEdit_virtualbase_sizeHint(self.h))
+  gen_qsize_types.QSize(h: fcQKeySequenceEdit_virtualbase_sizeHint(self.h), owned: true)
 
 proc miqt_exec_callback_cQKeySequenceEdit_sizeHint(vtbl: pointer, self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QKeySequenceEditVTable](vtbl)
   let self = QKeySequenceEdit(h: self)
   var virtualReturn = vtbl[].sizeHint(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QKeySequenceEditminimumSizeHint*(self: gen_qkeysequenceedit_types.QKeySequenceEdit, ): gen_qsize_types.QSize =
-  gen_qsize_types.QSize(h: fcQKeySequenceEdit_virtualbase_minimumSizeHint(self.h))
+  gen_qsize_types.QSize(h: fcQKeySequenceEdit_virtualbase_minimumSizeHint(self.h), owned: true)
 
 proc miqt_exec_callback_cQKeySequenceEdit_minimumSizeHint(vtbl: pointer, self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QKeySequenceEditVTable](vtbl)
   let self = QKeySequenceEdit(h: self)
   var virtualReturn = vtbl[].minimumSizeHint(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QKeySequenceEditheightForWidth*(self: gen_qkeysequenceedit_types.QKeySequenceEdit, param1: cint): cint =
   fcQKeySequenceEdit_virtualbase_heightForWidth(self.h, param1)
@@ -520,13 +528,16 @@ proc miqt_exec_callback_cQKeySequenceEdit_hasHeightForWidth(vtbl: pointer, self:
   virtualReturn
 
 proc QKeySequenceEditpaintEngine*(self: gen_qkeysequenceedit_types.QKeySequenceEdit, ): gen_qpaintengine_types.QPaintEngine =
-  gen_qpaintengine_types.QPaintEngine(h: fcQKeySequenceEdit_virtualbase_paintEngine(self.h))
+  gen_qpaintengine_types.QPaintEngine(h: fcQKeySequenceEdit_virtualbase_paintEngine(self.h), owned: false)
 
 proc miqt_exec_callback_cQKeySequenceEdit_paintEngine(vtbl: pointer, self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QKeySequenceEditVTable](vtbl)
   let self = QKeySequenceEdit(h: self)
   var virtualReturn = vtbl[].paintEngine(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QKeySequenceEditmousePressEvent*(self: gen_qkeysequenceedit_types.QKeySequenceEdit, event: gen_qevent_types.QMouseEvent): void =
   fcQKeySequenceEdit_virtualbase_mousePressEvent(self.h, event.h)
@@ -534,7 +545,7 @@ proc QKeySequenceEditmousePressEvent*(self: gen_qkeysequenceedit_types.QKeySeque
 proc miqt_exec_callback_cQKeySequenceEdit_mousePressEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QKeySequenceEditVTable](vtbl)
   let self = QKeySequenceEdit(h: self)
-  let slotval1 = gen_qevent_types.QMouseEvent(h: event)
+  let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   vtbl[].mousePressEvent(self, slotval1)
 
 proc QKeySequenceEditmouseReleaseEvent*(self: gen_qkeysequenceedit_types.QKeySequenceEdit, event: gen_qevent_types.QMouseEvent): void =
@@ -543,7 +554,7 @@ proc QKeySequenceEditmouseReleaseEvent*(self: gen_qkeysequenceedit_types.QKeySeq
 proc miqt_exec_callback_cQKeySequenceEdit_mouseReleaseEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QKeySequenceEditVTable](vtbl)
   let self = QKeySequenceEdit(h: self)
-  let slotval1 = gen_qevent_types.QMouseEvent(h: event)
+  let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   vtbl[].mouseReleaseEvent(self, slotval1)
 
 proc QKeySequenceEditmouseDoubleClickEvent*(self: gen_qkeysequenceedit_types.QKeySequenceEdit, event: gen_qevent_types.QMouseEvent): void =
@@ -552,7 +563,7 @@ proc QKeySequenceEditmouseDoubleClickEvent*(self: gen_qkeysequenceedit_types.QKe
 proc miqt_exec_callback_cQKeySequenceEdit_mouseDoubleClickEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QKeySequenceEditVTable](vtbl)
   let self = QKeySequenceEdit(h: self)
-  let slotval1 = gen_qevent_types.QMouseEvent(h: event)
+  let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   vtbl[].mouseDoubleClickEvent(self, slotval1)
 
 proc QKeySequenceEditmouseMoveEvent*(self: gen_qkeysequenceedit_types.QKeySequenceEdit, event: gen_qevent_types.QMouseEvent): void =
@@ -561,7 +572,7 @@ proc QKeySequenceEditmouseMoveEvent*(self: gen_qkeysequenceedit_types.QKeySequen
 proc miqt_exec_callback_cQKeySequenceEdit_mouseMoveEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QKeySequenceEditVTable](vtbl)
   let self = QKeySequenceEdit(h: self)
-  let slotval1 = gen_qevent_types.QMouseEvent(h: event)
+  let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   vtbl[].mouseMoveEvent(self, slotval1)
 
 proc QKeySequenceEditwheelEvent*(self: gen_qkeysequenceedit_types.QKeySequenceEdit, event: gen_qevent_types.QWheelEvent): void =
@@ -570,7 +581,7 @@ proc QKeySequenceEditwheelEvent*(self: gen_qkeysequenceedit_types.QKeySequenceEd
 proc miqt_exec_callback_cQKeySequenceEdit_wheelEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QKeySequenceEditVTable](vtbl)
   let self = QKeySequenceEdit(h: self)
-  let slotval1 = gen_qevent_types.QWheelEvent(h: event)
+  let slotval1 = gen_qevent_types.QWheelEvent(h: event, owned: false)
   vtbl[].wheelEvent(self, slotval1)
 
 proc QKeySequenceEditfocusInEvent*(self: gen_qkeysequenceedit_types.QKeySequenceEdit, event: gen_qevent_types.QFocusEvent): void =
@@ -579,7 +590,7 @@ proc QKeySequenceEditfocusInEvent*(self: gen_qkeysequenceedit_types.QKeySequence
 proc miqt_exec_callback_cQKeySequenceEdit_focusInEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QKeySequenceEditVTable](vtbl)
   let self = QKeySequenceEdit(h: self)
-  let slotval1 = gen_qevent_types.QFocusEvent(h: event)
+  let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
   vtbl[].focusInEvent(self, slotval1)
 
 proc QKeySequenceEditfocusOutEvent*(self: gen_qkeysequenceedit_types.QKeySequenceEdit, event: gen_qevent_types.QFocusEvent): void =
@@ -588,7 +599,7 @@ proc QKeySequenceEditfocusOutEvent*(self: gen_qkeysequenceedit_types.QKeySequenc
 proc miqt_exec_callback_cQKeySequenceEdit_focusOutEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QKeySequenceEditVTable](vtbl)
   let self = QKeySequenceEdit(h: self)
-  let slotval1 = gen_qevent_types.QFocusEvent(h: event)
+  let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
   vtbl[].focusOutEvent(self, slotval1)
 
 proc QKeySequenceEditenterEvent*(self: gen_qkeysequenceedit_types.QKeySequenceEdit, event: gen_qcoreevent_types.QEvent): void =
@@ -597,7 +608,7 @@ proc QKeySequenceEditenterEvent*(self: gen_qkeysequenceedit_types.QKeySequenceEd
 proc miqt_exec_callback_cQKeySequenceEdit_enterEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QKeySequenceEditVTable](vtbl)
   let self = QKeySequenceEdit(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].enterEvent(self, slotval1)
 
 proc QKeySequenceEditleaveEvent*(self: gen_qkeysequenceedit_types.QKeySequenceEdit, event: gen_qcoreevent_types.QEvent): void =
@@ -606,7 +617,7 @@ proc QKeySequenceEditleaveEvent*(self: gen_qkeysequenceedit_types.QKeySequenceEd
 proc miqt_exec_callback_cQKeySequenceEdit_leaveEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QKeySequenceEditVTable](vtbl)
   let self = QKeySequenceEdit(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].leaveEvent(self, slotval1)
 
 proc QKeySequenceEditpaintEvent*(self: gen_qkeysequenceedit_types.QKeySequenceEdit, event: gen_qevent_types.QPaintEvent): void =
@@ -615,7 +626,7 @@ proc QKeySequenceEditpaintEvent*(self: gen_qkeysequenceedit_types.QKeySequenceEd
 proc miqt_exec_callback_cQKeySequenceEdit_paintEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QKeySequenceEditVTable](vtbl)
   let self = QKeySequenceEdit(h: self)
-  let slotval1 = gen_qevent_types.QPaintEvent(h: event)
+  let slotval1 = gen_qevent_types.QPaintEvent(h: event, owned: false)
   vtbl[].paintEvent(self, slotval1)
 
 proc QKeySequenceEditmoveEvent*(self: gen_qkeysequenceedit_types.QKeySequenceEdit, event: gen_qevent_types.QMoveEvent): void =
@@ -624,7 +635,7 @@ proc QKeySequenceEditmoveEvent*(self: gen_qkeysequenceedit_types.QKeySequenceEdi
 proc miqt_exec_callback_cQKeySequenceEdit_moveEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QKeySequenceEditVTable](vtbl)
   let self = QKeySequenceEdit(h: self)
-  let slotval1 = gen_qevent_types.QMoveEvent(h: event)
+  let slotval1 = gen_qevent_types.QMoveEvent(h: event, owned: false)
   vtbl[].moveEvent(self, slotval1)
 
 proc QKeySequenceEditresizeEvent*(self: gen_qkeysequenceedit_types.QKeySequenceEdit, event: gen_qevent_types.QResizeEvent): void =
@@ -633,7 +644,7 @@ proc QKeySequenceEditresizeEvent*(self: gen_qkeysequenceedit_types.QKeySequenceE
 proc miqt_exec_callback_cQKeySequenceEdit_resizeEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QKeySequenceEditVTable](vtbl)
   let self = QKeySequenceEdit(h: self)
-  let slotval1 = gen_qevent_types.QResizeEvent(h: event)
+  let slotval1 = gen_qevent_types.QResizeEvent(h: event, owned: false)
   vtbl[].resizeEvent(self, slotval1)
 
 proc QKeySequenceEditcloseEvent*(self: gen_qkeysequenceedit_types.QKeySequenceEdit, event: gen_qevent_types.QCloseEvent): void =
@@ -642,7 +653,7 @@ proc QKeySequenceEditcloseEvent*(self: gen_qkeysequenceedit_types.QKeySequenceEd
 proc miqt_exec_callback_cQKeySequenceEdit_closeEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QKeySequenceEditVTable](vtbl)
   let self = QKeySequenceEdit(h: self)
-  let slotval1 = gen_qevent_types.QCloseEvent(h: event)
+  let slotval1 = gen_qevent_types.QCloseEvent(h: event, owned: false)
   vtbl[].closeEvent(self, slotval1)
 
 proc QKeySequenceEditcontextMenuEvent*(self: gen_qkeysequenceedit_types.QKeySequenceEdit, event: gen_qevent_types.QContextMenuEvent): void =
@@ -651,7 +662,7 @@ proc QKeySequenceEditcontextMenuEvent*(self: gen_qkeysequenceedit_types.QKeySequ
 proc miqt_exec_callback_cQKeySequenceEdit_contextMenuEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QKeySequenceEditVTable](vtbl)
   let self = QKeySequenceEdit(h: self)
-  let slotval1 = gen_qevent_types.QContextMenuEvent(h: event)
+  let slotval1 = gen_qevent_types.QContextMenuEvent(h: event, owned: false)
   vtbl[].contextMenuEvent(self, slotval1)
 
 proc QKeySequenceEdittabletEvent*(self: gen_qkeysequenceedit_types.QKeySequenceEdit, event: gen_qevent_types.QTabletEvent): void =
@@ -660,7 +671,7 @@ proc QKeySequenceEdittabletEvent*(self: gen_qkeysequenceedit_types.QKeySequenceE
 proc miqt_exec_callback_cQKeySequenceEdit_tabletEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QKeySequenceEditVTable](vtbl)
   let self = QKeySequenceEdit(h: self)
-  let slotval1 = gen_qevent_types.QTabletEvent(h: event)
+  let slotval1 = gen_qevent_types.QTabletEvent(h: event, owned: false)
   vtbl[].tabletEvent(self, slotval1)
 
 proc QKeySequenceEditactionEvent*(self: gen_qkeysequenceedit_types.QKeySequenceEdit, event: gen_qevent_types.QActionEvent): void =
@@ -669,7 +680,7 @@ proc QKeySequenceEditactionEvent*(self: gen_qkeysequenceedit_types.QKeySequenceE
 proc miqt_exec_callback_cQKeySequenceEdit_actionEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QKeySequenceEditVTable](vtbl)
   let self = QKeySequenceEdit(h: self)
-  let slotval1 = gen_qevent_types.QActionEvent(h: event)
+  let slotval1 = gen_qevent_types.QActionEvent(h: event, owned: false)
   vtbl[].actionEvent(self, slotval1)
 
 proc QKeySequenceEditdragEnterEvent*(self: gen_qkeysequenceedit_types.QKeySequenceEdit, event: gen_qevent_types.QDragEnterEvent): void =
@@ -678,7 +689,7 @@ proc QKeySequenceEditdragEnterEvent*(self: gen_qkeysequenceedit_types.QKeySequen
 proc miqt_exec_callback_cQKeySequenceEdit_dragEnterEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QKeySequenceEditVTable](vtbl)
   let self = QKeySequenceEdit(h: self)
-  let slotval1 = gen_qevent_types.QDragEnterEvent(h: event)
+  let slotval1 = gen_qevent_types.QDragEnterEvent(h: event, owned: false)
   vtbl[].dragEnterEvent(self, slotval1)
 
 proc QKeySequenceEditdragMoveEvent*(self: gen_qkeysequenceedit_types.QKeySequenceEdit, event: gen_qevent_types.QDragMoveEvent): void =
@@ -687,7 +698,7 @@ proc QKeySequenceEditdragMoveEvent*(self: gen_qkeysequenceedit_types.QKeySequenc
 proc miqt_exec_callback_cQKeySequenceEdit_dragMoveEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QKeySequenceEditVTable](vtbl)
   let self = QKeySequenceEdit(h: self)
-  let slotval1 = gen_qevent_types.QDragMoveEvent(h: event)
+  let slotval1 = gen_qevent_types.QDragMoveEvent(h: event, owned: false)
   vtbl[].dragMoveEvent(self, slotval1)
 
 proc QKeySequenceEditdragLeaveEvent*(self: gen_qkeysequenceedit_types.QKeySequenceEdit, event: gen_qevent_types.QDragLeaveEvent): void =
@@ -696,7 +707,7 @@ proc QKeySequenceEditdragLeaveEvent*(self: gen_qkeysequenceedit_types.QKeySequen
 proc miqt_exec_callback_cQKeySequenceEdit_dragLeaveEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QKeySequenceEditVTable](vtbl)
   let self = QKeySequenceEdit(h: self)
-  let slotval1 = gen_qevent_types.QDragLeaveEvent(h: event)
+  let slotval1 = gen_qevent_types.QDragLeaveEvent(h: event, owned: false)
   vtbl[].dragLeaveEvent(self, slotval1)
 
 proc QKeySequenceEditdropEvent*(self: gen_qkeysequenceedit_types.QKeySequenceEdit, event: gen_qevent_types.QDropEvent): void =
@@ -705,7 +716,7 @@ proc QKeySequenceEditdropEvent*(self: gen_qkeysequenceedit_types.QKeySequenceEdi
 proc miqt_exec_callback_cQKeySequenceEdit_dropEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QKeySequenceEditVTable](vtbl)
   let self = QKeySequenceEdit(h: self)
-  let slotval1 = gen_qevent_types.QDropEvent(h: event)
+  let slotval1 = gen_qevent_types.QDropEvent(h: event, owned: false)
   vtbl[].dropEvent(self, slotval1)
 
 proc QKeySequenceEditshowEvent*(self: gen_qkeysequenceedit_types.QKeySequenceEdit, event: gen_qevent_types.QShowEvent): void =
@@ -714,7 +725,7 @@ proc QKeySequenceEditshowEvent*(self: gen_qkeysequenceedit_types.QKeySequenceEdi
 proc miqt_exec_callback_cQKeySequenceEdit_showEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QKeySequenceEditVTable](vtbl)
   let self = QKeySequenceEdit(h: self)
-  let slotval1 = gen_qevent_types.QShowEvent(h: event)
+  let slotval1 = gen_qevent_types.QShowEvent(h: event, owned: false)
   vtbl[].showEvent(self, slotval1)
 
 proc QKeySequenceEdithideEvent*(self: gen_qkeysequenceedit_types.QKeySequenceEdit, event: gen_qevent_types.QHideEvent): void =
@@ -723,7 +734,7 @@ proc QKeySequenceEdithideEvent*(self: gen_qkeysequenceedit_types.QKeySequenceEdi
 proc miqt_exec_callback_cQKeySequenceEdit_hideEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QKeySequenceEditVTable](vtbl)
   let self = QKeySequenceEdit(h: self)
-  let slotval1 = gen_qevent_types.QHideEvent(h: event)
+  let slotval1 = gen_qevent_types.QHideEvent(h: event, owned: false)
   vtbl[].hideEvent(self, slotval1)
 
 proc QKeySequenceEditnativeEvent*(self: gen_qkeysequenceedit_types.QKeySequenceEdit, eventType: seq[byte], message: pointer, resultVal: ptr clong): bool =
@@ -747,7 +758,7 @@ proc QKeySequenceEditchangeEvent*(self: gen_qkeysequenceedit_types.QKeySequenceE
 proc miqt_exec_callback_cQKeySequenceEdit_changeEvent(vtbl: pointer, self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QKeySequenceEditVTable](vtbl)
   let self = QKeySequenceEdit(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: param1)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: param1, owned: false)
   vtbl[].changeEvent(self, slotval1)
 
 proc QKeySequenceEditmetric*(self: gen_qkeysequenceedit_types.QKeySequenceEdit, param1: cint): cint =
@@ -766,27 +777,33 @@ proc QKeySequenceEditinitPainter*(self: gen_qkeysequenceedit_types.QKeySequenceE
 proc miqt_exec_callback_cQKeySequenceEdit_initPainter(vtbl: pointer, self: pointer, painter: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QKeySequenceEditVTable](vtbl)
   let self = QKeySequenceEdit(h: self)
-  let slotval1 = gen_qpainter_types.QPainter(h: painter)
+  let slotval1 = gen_qpainter_types.QPainter(h: painter, owned: false)
   vtbl[].initPainter(self, slotval1)
 
 proc QKeySequenceEditredirected*(self: gen_qkeysequenceedit_types.QKeySequenceEdit, offset: gen_qpoint_types.QPoint): gen_qpaintdevice_types.QPaintDevice =
-  gen_qpaintdevice_types.QPaintDevice(h: fcQKeySequenceEdit_virtualbase_redirected(self.h, offset.h))
+  gen_qpaintdevice_types.QPaintDevice(h: fcQKeySequenceEdit_virtualbase_redirected(self.h, offset.h), owned: false)
 
 proc miqt_exec_callback_cQKeySequenceEdit_redirected(vtbl: pointer, self: pointer, offset: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QKeySequenceEditVTable](vtbl)
   let self = QKeySequenceEdit(h: self)
-  let slotval1 = gen_qpoint_types.QPoint(h: offset)
+  let slotval1 = gen_qpoint_types.QPoint(h: offset, owned: false)
   var virtualReturn = vtbl[].redirected(self, slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QKeySequenceEditsharedPainter*(self: gen_qkeysequenceedit_types.QKeySequenceEdit, ): gen_qpainter_types.QPainter =
-  gen_qpainter_types.QPainter(h: fcQKeySequenceEdit_virtualbase_sharedPainter(self.h))
+  gen_qpainter_types.QPainter(h: fcQKeySequenceEdit_virtualbase_sharedPainter(self.h), owned: false)
 
 proc miqt_exec_callback_cQKeySequenceEdit_sharedPainter(vtbl: pointer, self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QKeySequenceEditVTable](vtbl)
   let self = QKeySequenceEdit(h: self)
   var virtualReturn = vtbl[].sharedPainter(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QKeySequenceEditinputMethodEvent*(self: gen_qkeysequenceedit_types.QKeySequenceEdit, param1: gen_qevent_types.QInputMethodEvent): void =
   fcQKeySequenceEdit_virtualbase_inputMethodEvent(self.h, param1.h)
@@ -794,18 +811,21 @@ proc QKeySequenceEditinputMethodEvent*(self: gen_qkeysequenceedit_types.QKeySequ
 proc miqt_exec_callback_cQKeySequenceEdit_inputMethodEvent(vtbl: pointer, self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QKeySequenceEditVTable](vtbl)
   let self = QKeySequenceEdit(h: self)
-  let slotval1 = gen_qevent_types.QInputMethodEvent(h: param1)
+  let slotval1 = gen_qevent_types.QInputMethodEvent(h: param1, owned: false)
   vtbl[].inputMethodEvent(self, slotval1)
 
 proc QKeySequenceEditinputMethodQuery*(self: gen_qkeysequenceedit_types.QKeySequenceEdit, param1: cint): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQKeySequenceEdit_virtualbase_inputMethodQuery(self.h, cint(param1)))
+  gen_qvariant_types.QVariant(h: fcQKeySequenceEdit_virtualbase_inputMethodQuery(self.h, cint(param1)), owned: true)
 
 proc miqt_exec_callback_cQKeySequenceEdit_inputMethodQuery(vtbl: pointer, self: pointer, param1: cint): pointer {.cdecl.} =
   let vtbl = cast[ptr QKeySequenceEditVTable](vtbl)
   let self = QKeySequenceEdit(h: self)
   let slotval1 = cint(param1)
   var virtualReturn = vtbl[].inputMethodQuery(self, slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QKeySequenceEditfocusNextPrevChild*(self: gen_qkeysequenceedit_types.QKeySequenceEdit, next: bool): bool =
   fcQKeySequenceEdit_virtualbase_focusNextPrevChild(self.h, next)
@@ -823,8 +843,8 @@ proc QKeySequenceEditeventFilter*(self: gen_qkeysequenceedit_types.QKeySequenceE
 proc miqt_exec_callback_cQKeySequenceEdit_eventFilter(vtbl: pointer, self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QKeySequenceEditVTable](vtbl)
   let self = QKeySequenceEdit(h: self)
-  let slotval1 = gen_qobject_types.QObject(h: watched)
-  let slotval2 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].eventFilter(self, slotval1, slotval2)
   virtualReturn
 
@@ -834,7 +854,7 @@ proc QKeySequenceEditchildEvent*(self: gen_qkeysequenceedit_types.QKeySequenceEd
 proc miqt_exec_callback_cQKeySequenceEdit_childEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QKeySequenceEditVTable](vtbl)
   let self = QKeySequenceEdit(h: self)
-  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   vtbl[].childEvent(self, slotval1)
 
 proc QKeySequenceEditcustomEvent*(self: gen_qkeysequenceedit_types.QKeySequenceEdit, event: gen_qcoreevent_types.QEvent): void =
@@ -843,7 +863,7 @@ proc QKeySequenceEditcustomEvent*(self: gen_qkeysequenceedit_types.QKeySequenceE
 proc miqt_exec_callback_cQKeySequenceEdit_customEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QKeySequenceEditVTable](vtbl)
   let self = QKeySequenceEdit(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].customEvent(self, slotval1)
 
 proc QKeySequenceEditconnectNotify*(self: gen_qkeysequenceedit_types.QKeySequenceEdit, signal: gen_qmetaobject_types.QMetaMethod): void =
@@ -852,7 +872,7 @@ proc QKeySequenceEditconnectNotify*(self: gen_qkeysequenceedit_types.QKeySequenc
 proc miqt_exec_callback_cQKeySequenceEdit_connectNotify(vtbl: pointer, self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QKeySequenceEditVTable](vtbl)
   let self = QKeySequenceEdit(h: self)
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].connectNotify(self, slotval1)
 
 proc QKeySequenceEditdisconnectNotify*(self: gen_qkeysequenceedit_types.QKeySequenceEdit, signal: gen_qmetaobject_types.QMetaMethod): void =
@@ -861,8 +881,399 @@ proc QKeySequenceEditdisconnectNotify*(self: gen_qkeysequenceedit_types.QKeySequ
 proc miqt_exec_callback_cQKeySequenceEdit_disconnectNotify(vtbl: pointer, self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QKeySequenceEditVTable](vtbl)
   let self = QKeySequenceEdit(h: self)
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].disconnectNotify(self, slotval1)
+
+type VirtualQKeySequenceEdit* {.inheritable.} = ref object of QKeySequenceEdit
+  vtbl*: cQKeySequenceEditVTable
+method metaObject*(self: VirtualQKeySequenceEdit, ): gen_qobjectdefs_types.QMetaObject {.base.} =
+  QKeySequenceEditmetaObject(self[])
+proc miqt_exec_method_cQKeySequenceEdit_metaObject(vtbl: pointer, inst: pointer): pointer {.cdecl.} =
+  let vtbl = cast[VirtualQKeySequenceEdit](cast[uint](vtbl) - uint(offsetOf(VirtualQKeySequenceEdit, vtbl)))
+  var virtualReturn = vtbl.metaObject()
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
+
+method metacast*(self: VirtualQKeySequenceEdit, param1: cstring): pointer {.base.} =
+  QKeySequenceEditmetacast(self[], param1)
+proc miqt_exec_method_cQKeySequenceEdit_metacast(vtbl: pointer, inst: pointer, param1: cstring): pointer {.cdecl.} =
+  let vtbl = cast[VirtualQKeySequenceEdit](cast[uint](vtbl) - uint(offsetOf(VirtualQKeySequenceEdit, vtbl)))
+  let slotval1 = (param1)
+  var virtualReturn = vtbl.metacast(slotval1)
+  virtualReturn
+
+method metacall*(self: VirtualQKeySequenceEdit, param1: cint, param2: cint, param3: pointer): cint {.base.} =
+  QKeySequenceEditmetacall(self[], param1, param2, param3)
+proc miqt_exec_method_cQKeySequenceEdit_metacall(vtbl: pointer, inst: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
+  let vtbl = cast[VirtualQKeySequenceEdit](cast[uint](vtbl) - uint(offsetOf(VirtualQKeySequenceEdit, vtbl)))
+  let slotval1 = cint(param1)
+  let slotval2 = param2
+  let slotval3 = param3
+  var virtualReturn = vtbl.metacall(slotval1, slotval2, slotval3)
+  virtualReturn
+
+method event*(self: VirtualQKeySequenceEdit, param1: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QKeySequenceEditevent(self[], param1)
+proc miqt_exec_method_cQKeySequenceEdit_event(vtbl: pointer, inst: pointer, param1: pointer): bool {.cdecl.} =
+  let vtbl = cast[VirtualQKeySequenceEdit](cast[uint](vtbl) - uint(offsetOf(VirtualQKeySequenceEdit, vtbl)))
+  let slotval1 = gen_qcoreevent_types.QEvent(h: param1, owned: false)
+  var virtualReturn = vtbl.event(slotval1)
+  virtualReturn
+
+method keyPressEvent*(self: VirtualQKeySequenceEdit, param1: gen_qevent_types.QKeyEvent): void {.base.} =
+  QKeySequenceEditkeyPressEvent(self[], param1)
+proc miqt_exec_method_cQKeySequenceEdit_keyPressEvent(vtbl: pointer, inst: pointer, param1: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQKeySequenceEdit](cast[uint](vtbl) - uint(offsetOf(VirtualQKeySequenceEdit, vtbl)))
+  let slotval1 = gen_qevent_types.QKeyEvent(h: param1, owned: false)
+  vtbl.keyPressEvent(slotval1)
+
+method keyReleaseEvent*(self: VirtualQKeySequenceEdit, param1: gen_qevent_types.QKeyEvent): void {.base.} =
+  QKeySequenceEditkeyReleaseEvent(self[], param1)
+proc miqt_exec_method_cQKeySequenceEdit_keyReleaseEvent(vtbl: pointer, inst: pointer, param1: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQKeySequenceEdit](cast[uint](vtbl) - uint(offsetOf(VirtualQKeySequenceEdit, vtbl)))
+  let slotval1 = gen_qevent_types.QKeyEvent(h: param1, owned: false)
+  vtbl.keyReleaseEvent(slotval1)
+
+method timerEvent*(self: VirtualQKeySequenceEdit, param1: gen_qcoreevent_types.QTimerEvent): void {.base.} =
+  QKeySequenceEdittimerEvent(self[], param1)
+proc miqt_exec_method_cQKeySequenceEdit_timerEvent(vtbl: pointer, inst: pointer, param1: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQKeySequenceEdit](cast[uint](vtbl) - uint(offsetOf(VirtualQKeySequenceEdit, vtbl)))
+  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: param1, owned: false)
+  vtbl.timerEvent(slotval1)
+
+method devType*(self: VirtualQKeySequenceEdit, ): cint {.base.} =
+  QKeySequenceEditdevType(self[])
+proc miqt_exec_method_cQKeySequenceEdit_devType(vtbl: pointer, inst: pointer): cint {.cdecl.} =
+  let vtbl = cast[VirtualQKeySequenceEdit](cast[uint](vtbl) - uint(offsetOf(VirtualQKeySequenceEdit, vtbl)))
+  var virtualReturn = vtbl.devType()
+  virtualReturn
+
+method setVisible*(self: VirtualQKeySequenceEdit, visible: bool): void {.base.} =
+  QKeySequenceEditsetVisible(self[], visible)
+proc miqt_exec_method_cQKeySequenceEdit_setVisible(vtbl: pointer, inst: pointer, visible: bool): void {.cdecl.} =
+  let vtbl = cast[VirtualQKeySequenceEdit](cast[uint](vtbl) - uint(offsetOf(VirtualQKeySequenceEdit, vtbl)))
+  let slotval1 = visible
+  vtbl.setVisible(slotval1)
+
+method sizeHint*(self: VirtualQKeySequenceEdit, ): gen_qsize_types.QSize {.base.} =
+  QKeySequenceEditsizeHint(self[])
+proc miqt_exec_method_cQKeySequenceEdit_sizeHint(vtbl: pointer, inst: pointer): pointer {.cdecl.} =
+  let vtbl = cast[VirtualQKeySequenceEdit](cast[uint](vtbl) - uint(offsetOf(VirtualQKeySequenceEdit, vtbl)))
+  var virtualReturn = vtbl.sizeHint()
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
+
+method minimumSizeHint*(self: VirtualQKeySequenceEdit, ): gen_qsize_types.QSize {.base.} =
+  QKeySequenceEditminimumSizeHint(self[])
+proc miqt_exec_method_cQKeySequenceEdit_minimumSizeHint(vtbl: pointer, inst: pointer): pointer {.cdecl.} =
+  let vtbl = cast[VirtualQKeySequenceEdit](cast[uint](vtbl) - uint(offsetOf(VirtualQKeySequenceEdit, vtbl)))
+  var virtualReturn = vtbl.minimumSizeHint()
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
+
+method heightForWidth*(self: VirtualQKeySequenceEdit, param1: cint): cint {.base.} =
+  QKeySequenceEditheightForWidth(self[], param1)
+proc miqt_exec_method_cQKeySequenceEdit_heightForWidth(vtbl: pointer, inst: pointer, param1: cint): cint {.cdecl.} =
+  let vtbl = cast[VirtualQKeySequenceEdit](cast[uint](vtbl) - uint(offsetOf(VirtualQKeySequenceEdit, vtbl)))
+  let slotval1 = param1
+  var virtualReturn = vtbl.heightForWidth(slotval1)
+  virtualReturn
+
+method hasHeightForWidth*(self: VirtualQKeySequenceEdit, ): bool {.base.} =
+  QKeySequenceEdithasHeightForWidth(self[])
+proc miqt_exec_method_cQKeySequenceEdit_hasHeightForWidth(vtbl: pointer, inst: pointer): bool {.cdecl.} =
+  let vtbl = cast[VirtualQKeySequenceEdit](cast[uint](vtbl) - uint(offsetOf(VirtualQKeySequenceEdit, vtbl)))
+  var virtualReturn = vtbl.hasHeightForWidth()
+  virtualReturn
+
+method paintEngine*(self: VirtualQKeySequenceEdit, ): gen_qpaintengine_types.QPaintEngine {.base.} =
+  QKeySequenceEditpaintEngine(self[])
+proc miqt_exec_method_cQKeySequenceEdit_paintEngine(vtbl: pointer, inst: pointer): pointer {.cdecl.} =
+  let vtbl = cast[VirtualQKeySequenceEdit](cast[uint](vtbl) - uint(offsetOf(VirtualQKeySequenceEdit, vtbl)))
+  var virtualReturn = vtbl.paintEngine()
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
+
+method mousePressEvent*(self: VirtualQKeySequenceEdit, event: gen_qevent_types.QMouseEvent): void {.base.} =
+  QKeySequenceEditmousePressEvent(self[], event)
+proc miqt_exec_method_cQKeySequenceEdit_mousePressEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQKeySequenceEdit](cast[uint](vtbl) - uint(offsetOf(VirtualQKeySequenceEdit, vtbl)))
+  let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
+  vtbl.mousePressEvent(slotval1)
+
+method mouseReleaseEvent*(self: VirtualQKeySequenceEdit, event: gen_qevent_types.QMouseEvent): void {.base.} =
+  QKeySequenceEditmouseReleaseEvent(self[], event)
+proc miqt_exec_method_cQKeySequenceEdit_mouseReleaseEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQKeySequenceEdit](cast[uint](vtbl) - uint(offsetOf(VirtualQKeySequenceEdit, vtbl)))
+  let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
+  vtbl.mouseReleaseEvent(slotval1)
+
+method mouseDoubleClickEvent*(self: VirtualQKeySequenceEdit, event: gen_qevent_types.QMouseEvent): void {.base.} =
+  QKeySequenceEditmouseDoubleClickEvent(self[], event)
+proc miqt_exec_method_cQKeySequenceEdit_mouseDoubleClickEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQKeySequenceEdit](cast[uint](vtbl) - uint(offsetOf(VirtualQKeySequenceEdit, vtbl)))
+  let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
+  vtbl.mouseDoubleClickEvent(slotval1)
+
+method mouseMoveEvent*(self: VirtualQKeySequenceEdit, event: gen_qevent_types.QMouseEvent): void {.base.} =
+  QKeySequenceEditmouseMoveEvent(self[], event)
+proc miqt_exec_method_cQKeySequenceEdit_mouseMoveEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQKeySequenceEdit](cast[uint](vtbl) - uint(offsetOf(VirtualQKeySequenceEdit, vtbl)))
+  let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
+  vtbl.mouseMoveEvent(slotval1)
+
+method wheelEvent*(self: VirtualQKeySequenceEdit, event: gen_qevent_types.QWheelEvent): void {.base.} =
+  QKeySequenceEditwheelEvent(self[], event)
+proc miqt_exec_method_cQKeySequenceEdit_wheelEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQKeySequenceEdit](cast[uint](vtbl) - uint(offsetOf(VirtualQKeySequenceEdit, vtbl)))
+  let slotval1 = gen_qevent_types.QWheelEvent(h: event, owned: false)
+  vtbl.wheelEvent(slotval1)
+
+method focusInEvent*(self: VirtualQKeySequenceEdit, event: gen_qevent_types.QFocusEvent): void {.base.} =
+  QKeySequenceEditfocusInEvent(self[], event)
+proc miqt_exec_method_cQKeySequenceEdit_focusInEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQKeySequenceEdit](cast[uint](vtbl) - uint(offsetOf(VirtualQKeySequenceEdit, vtbl)))
+  let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
+  vtbl.focusInEvent(slotval1)
+
+method focusOutEvent*(self: VirtualQKeySequenceEdit, event: gen_qevent_types.QFocusEvent): void {.base.} =
+  QKeySequenceEditfocusOutEvent(self[], event)
+proc miqt_exec_method_cQKeySequenceEdit_focusOutEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQKeySequenceEdit](cast[uint](vtbl) - uint(offsetOf(VirtualQKeySequenceEdit, vtbl)))
+  let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
+  vtbl.focusOutEvent(slotval1)
+
+method enterEvent*(self: VirtualQKeySequenceEdit, event: gen_qcoreevent_types.QEvent): void {.base.} =
+  QKeySequenceEditenterEvent(self[], event)
+proc miqt_exec_method_cQKeySequenceEdit_enterEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQKeySequenceEdit](cast[uint](vtbl) - uint(offsetOf(VirtualQKeySequenceEdit, vtbl)))
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
+  vtbl.enterEvent(slotval1)
+
+method leaveEvent*(self: VirtualQKeySequenceEdit, event: gen_qcoreevent_types.QEvent): void {.base.} =
+  QKeySequenceEditleaveEvent(self[], event)
+proc miqt_exec_method_cQKeySequenceEdit_leaveEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQKeySequenceEdit](cast[uint](vtbl) - uint(offsetOf(VirtualQKeySequenceEdit, vtbl)))
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
+  vtbl.leaveEvent(slotval1)
+
+method paintEvent*(self: VirtualQKeySequenceEdit, event: gen_qevent_types.QPaintEvent): void {.base.} =
+  QKeySequenceEditpaintEvent(self[], event)
+proc miqt_exec_method_cQKeySequenceEdit_paintEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQKeySequenceEdit](cast[uint](vtbl) - uint(offsetOf(VirtualQKeySequenceEdit, vtbl)))
+  let slotval1 = gen_qevent_types.QPaintEvent(h: event, owned: false)
+  vtbl.paintEvent(slotval1)
+
+method moveEvent*(self: VirtualQKeySequenceEdit, event: gen_qevent_types.QMoveEvent): void {.base.} =
+  QKeySequenceEditmoveEvent(self[], event)
+proc miqt_exec_method_cQKeySequenceEdit_moveEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQKeySequenceEdit](cast[uint](vtbl) - uint(offsetOf(VirtualQKeySequenceEdit, vtbl)))
+  let slotval1 = gen_qevent_types.QMoveEvent(h: event, owned: false)
+  vtbl.moveEvent(slotval1)
+
+method resizeEvent*(self: VirtualQKeySequenceEdit, event: gen_qevent_types.QResizeEvent): void {.base.} =
+  QKeySequenceEditresizeEvent(self[], event)
+proc miqt_exec_method_cQKeySequenceEdit_resizeEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQKeySequenceEdit](cast[uint](vtbl) - uint(offsetOf(VirtualQKeySequenceEdit, vtbl)))
+  let slotval1 = gen_qevent_types.QResizeEvent(h: event, owned: false)
+  vtbl.resizeEvent(slotval1)
+
+method closeEvent*(self: VirtualQKeySequenceEdit, event: gen_qevent_types.QCloseEvent): void {.base.} =
+  QKeySequenceEditcloseEvent(self[], event)
+proc miqt_exec_method_cQKeySequenceEdit_closeEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQKeySequenceEdit](cast[uint](vtbl) - uint(offsetOf(VirtualQKeySequenceEdit, vtbl)))
+  let slotval1 = gen_qevent_types.QCloseEvent(h: event, owned: false)
+  vtbl.closeEvent(slotval1)
+
+method contextMenuEvent*(self: VirtualQKeySequenceEdit, event: gen_qevent_types.QContextMenuEvent): void {.base.} =
+  QKeySequenceEditcontextMenuEvent(self[], event)
+proc miqt_exec_method_cQKeySequenceEdit_contextMenuEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQKeySequenceEdit](cast[uint](vtbl) - uint(offsetOf(VirtualQKeySequenceEdit, vtbl)))
+  let slotval1 = gen_qevent_types.QContextMenuEvent(h: event, owned: false)
+  vtbl.contextMenuEvent(slotval1)
+
+method tabletEvent*(self: VirtualQKeySequenceEdit, event: gen_qevent_types.QTabletEvent): void {.base.} =
+  QKeySequenceEdittabletEvent(self[], event)
+proc miqt_exec_method_cQKeySequenceEdit_tabletEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQKeySequenceEdit](cast[uint](vtbl) - uint(offsetOf(VirtualQKeySequenceEdit, vtbl)))
+  let slotval1 = gen_qevent_types.QTabletEvent(h: event, owned: false)
+  vtbl.tabletEvent(slotval1)
+
+method actionEvent*(self: VirtualQKeySequenceEdit, event: gen_qevent_types.QActionEvent): void {.base.} =
+  QKeySequenceEditactionEvent(self[], event)
+proc miqt_exec_method_cQKeySequenceEdit_actionEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQKeySequenceEdit](cast[uint](vtbl) - uint(offsetOf(VirtualQKeySequenceEdit, vtbl)))
+  let slotval1 = gen_qevent_types.QActionEvent(h: event, owned: false)
+  vtbl.actionEvent(slotval1)
+
+method dragEnterEvent*(self: VirtualQKeySequenceEdit, event: gen_qevent_types.QDragEnterEvent): void {.base.} =
+  QKeySequenceEditdragEnterEvent(self[], event)
+proc miqt_exec_method_cQKeySequenceEdit_dragEnterEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQKeySequenceEdit](cast[uint](vtbl) - uint(offsetOf(VirtualQKeySequenceEdit, vtbl)))
+  let slotval1 = gen_qevent_types.QDragEnterEvent(h: event, owned: false)
+  vtbl.dragEnterEvent(slotval1)
+
+method dragMoveEvent*(self: VirtualQKeySequenceEdit, event: gen_qevent_types.QDragMoveEvent): void {.base.} =
+  QKeySequenceEditdragMoveEvent(self[], event)
+proc miqt_exec_method_cQKeySequenceEdit_dragMoveEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQKeySequenceEdit](cast[uint](vtbl) - uint(offsetOf(VirtualQKeySequenceEdit, vtbl)))
+  let slotval1 = gen_qevent_types.QDragMoveEvent(h: event, owned: false)
+  vtbl.dragMoveEvent(slotval1)
+
+method dragLeaveEvent*(self: VirtualQKeySequenceEdit, event: gen_qevent_types.QDragLeaveEvent): void {.base.} =
+  QKeySequenceEditdragLeaveEvent(self[], event)
+proc miqt_exec_method_cQKeySequenceEdit_dragLeaveEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQKeySequenceEdit](cast[uint](vtbl) - uint(offsetOf(VirtualQKeySequenceEdit, vtbl)))
+  let slotval1 = gen_qevent_types.QDragLeaveEvent(h: event, owned: false)
+  vtbl.dragLeaveEvent(slotval1)
+
+method dropEvent*(self: VirtualQKeySequenceEdit, event: gen_qevent_types.QDropEvent): void {.base.} =
+  QKeySequenceEditdropEvent(self[], event)
+proc miqt_exec_method_cQKeySequenceEdit_dropEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQKeySequenceEdit](cast[uint](vtbl) - uint(offsetOf(VirtualQKeySequenceEdit, vtbl)))
+  let slotval1 = gen_qevent_types.QDropEvent(h: event, owned: false)
+  vtbl.dropEvent(slotval1)
+
+method showEvent*(self: VirtualQKeySequenceEdit, event: gen_qevent_types.QShowEvent): void {.base.} =
+  QKeySequenceEditshowEvent(self[], event)
+proc miqt_exec_method_cQKeySequenceEdit_showEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQKeySequenceEdit](cast[uint](vtbl) - uint(offsetOf(VirtualQKeySequenceEdit, vtbl)))
+  let slotval1 = gen_qevent_types.QShowEvent(h: event, owned: false)
+  vtbl.showEvent(slotval1)
+
+method hideEvent*(self: VirtualQKeySequenceEdit, event: gen_qevent_types.QHideEvent): void {.base.} =
+  QKeySequenceEdithideEvent(self[], event)
+proc miqt_exec_method_cQKeySequenceEdit_hideEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQKeySequenceEdit](cast[uint](vtbl) - uint(offsetOf(VirtualQKeySequenceEdit, vtbl)))
+  let slotval1 = gen_qevent_types.QHideEvent(h: event, owned: false)
+  vtbl.hideEvent(slotval1)
+
+method nativeEvent*(self: VirtualQKeySequenceEdit, eventType: seq[byte], message: pointer, resultVal: ptr clong): bool {.base.} =
+  QKeySequenceEditnativeEvent(self[], eventType, message, resultVal)
+proc miqt_exec_method_cQKeySequenceEdit_nativeEvent(vtbl: pointer, inst: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr clong): bool {.cdecl.} =
+  let vtbl = cast[VirtualQKeySequenceEdit](cast[uint](vtbl) - uint(offsetOf(VirtualQKeySequenceEdit, vtbl)))
+  var veventType_bytearray = eventType
+  var veventTypex_ret = @(toOpenArrayByte(veventType_bytearray.data, 0, int(veventType_bytearray.len)-1))
+  c_free(veventType_bytearray.data)
+  let slotval1 = veventTypex_ret
+  let slotval2 = message
+  let slotval3 = resultVal
+  var virtualReturn = vtbl.nativeEvent(slotval1, slotval2, slotval3)
+  virtualReturn
+
+method changeEvent*(self: VirtualQKeySequenceEdit, param1: gen_qcoreevent_types.QEvent): void {.base.} =
+  QKeySequenceEditchangeEvent(self[], param1)
+proc miqt_exec_method_cQKeySequenceEdit_changeEvent(vtbl: pointer, inst: pointer, param1: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQKeySequenceEdit](cast[uint](vtbl) - uint(offsetOf(VirtualQKeySequenceEdit, vtbl)))
+  let slotval1 = gen_qcoreevent_types.QEvent(h: param1, owned: false)
+  vtbl.changeEvent(slotval1)
+
+method metric*(self: VirtualQKeySequenceEdit, param1: cint): cint {.base.} =
+  QKeySequenceEditmetric(self[], param1)
+proc miqt_exec_method_cQKeySequenceEdit_metric(vtbl: pointer, inst: pointer, param1: cint): cint {.cdecl.} =
+  let vtbl = cast[VirtualQKeySequenceEdit](cast[uint](vtbl) - uint(offsetOf(VirtualQKeySequenceEdit, vtbl)))
+  let slotval1 = cint(param1)
+  var virtualReturn = vtbl.metric(slotval1)
+  virtualReturn
+
+method initPainter*(self: VirtualQKeySequenceEdit, painter: gen_qpainter_types.QPainter): void {.base.} =
+  QKeySequenceEditinitPainter(self[], painter)
+proc miqt_exec_method_cQKeySequenceEdit_initPainter(vtbl: pointer, inst: pointer, painter: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQKeySequenceEdit](cast[uint](vtbl) - uint(offsetOf(VirtualQKeySequenceEdit, vtbl)))
+  let slotval1 = gen_qpainter_types.QPainter(h: painter, owned: false)
+  vtbl.initPainter(slotval1)
+
+method redirected*(self: VirtualQKeySequenceEdit, offset: gen_qpoint_types.QPoint): gen_qpaintdevice_types.QPaintDevice {.base.} =
+  QKeySequenceEditredirected(self[], offset)
+proc miqt_exec_method_cQKeySequenceEdit_redirected(vtbl: pointer, inst: pointer, offset: pointer): pointer {.cdecl.} =
+  let vtbl = cast[VirtualQKeySequenceEdit](cast[uint](vtbl) - uint(offsetOf(VirtualQKeySequenceEdit, vtbl)))
+  let slotval1 = gen_qpoint_types.QPoint(h: offset, owned: false)
+  var virtualReturn = vtbl.redirected(slotval1)
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
+
+method sharedPainter*(self: VirtualQKeySequenceEdit, ): gen_qpainter_types.QPainter {.base.} =
+  QKeySequenceEditsharedPainter(self[])
+proc miqt_exec_method_cQKeySequenceEdit_sharedPainter(vtbl: pointer, inst: pointer): pointer {.cdecl.} =
+  let vtbl = cast[VirtualQKeySequenceEdit](cast[uint](vtbl) - uint(offsetOf(VirtualQKeySequenceEdit, vtbl)))
+  var virtualReturn = vtbl.sharedPainter()
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
+
+method inputMethodEvent*(self: VirtualQKeySequenceEdit, param1: gen_qevent_types.QInputMethodEvent): void {.base.} =
+  QKeySequenceEditinputMethodEvent(self[], param1)
+proc miqt_exec_method_cQKeySequenceEdit_inputMethodEvent(vtbl: pointer, inst: pointer, param1: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQKeySequenceEdit](cast[uint](vtbl) - uint(offsetOf(VirtualQKeySequenceEdit, vtbl)))
+  let slotval1 = gen_qevent_types.QInputMethodEvent(h: param1, owned: false)
+  vtbl.inputMethodEvent(slotval1)
+
+method inputMethodQuery*(self: VirtualQKeySequenceEdit, param1: cint): gen_qvariant_types.QVariant {.base.} =
+  QKeySequenceEditinputMethodQuery(self[], param1)
+proc miqt_exec_method_cQKeySequenceEdit_inputMethodQuery(vtbl: pointer, inst: pointer, param1: cint): pointer {.cdecl.} =
+  let vtbl = cast[VirtualQKeySequenceEdit](cast[uint](vtbl) - uint(offsetOf(VirtualQKeySequenceEdit, vtbl)))
+  let slotval1 = cint(param1)
+  var virtualReturn = vtbl.inputMethodQuery(slotval1)
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
+
+method focusNextPrevChild*(self: VirtualQKeySequenceEdit, next: bool): bool {.base.} =
+  QKeySequenceEditfocusNextPrevChild(self[], next)
+proc miqt_exec_method_cQKeySequenceEdit_focusNextPrevChild(vtbl: pointer, inst: pointer, next: bool): bool {.cdecl.} =
+  let vtbl = cast[VirtualQKeySequenceEdit](cast[uint](vtbl) - uint(offsetOf(VirtualQKeySequenceEdit, vtbl)))
+  let slotval1 = next
+  var virtualReturn = vtbl.focusNextPrevChild(slotval1)
+  virtualReturn
+
+method eventFilter*(self: VirtualQKeySequenceEdit, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QKeySequenceEditeventFilter(self[], watched, event)
+proc miqt_exec_method_cQKeySequenceEdit_eventFilter(vtbl: pointer, inst: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
+  let vtbl = cast[VirtualQKeySequenceEdit](cast[uint](vtbl) - uint(offsetOf(VirtualQKeySequenceEdit, vtbl)))
+  let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
+  var virtualReturn = vtbl.eventFilter(slotval1, slotval2)
+  virtualReturn
+
+method childEvent*(self: VirtualQKeySequenceEdit, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
+  QKeySequenceEditchildEvent(self[], event)
+proc miqt_exec_method_cQKeySequenceEdit_childEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQKeySequenceEdit](cast[uint](vtbl) - uint(offsetOf(VirtualQKeySequenceEdit, vtbl)))
+  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
+  vtbl.childEvent(slotval1)
+
+method customEvent*(self: VirtualQKeySequenceEdit, event: gen_qcoreevent_types.QEvent): void {.base.} =
+  QKeySequenceEditcustomEvent(self[], event)
+proc miqt_exec_method_cQKeySequenceEdit_customEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQKeySequenceEdit](cast[uint](vtbl) - uint(offsetOf(VirtualQKeySequenceEdit, vtbl)))
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
+  vtbl.customEvent(slotval1)
+
+method connectNotify*(self: VirtualQKeySequenceEdit, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QKeySequenceEditconnectNotify(self[], signal)
+proc miqt_exec_method_cQKeySequenceEdit_connectNotify(vtbl: pointer, inst: pointer, signal: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQKeySequenceEdit](cast[uint](vtbl) - uint(offsetOf(VirtualQKeySequenceEdit, vtbl)))
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
+  vtbl.connectNotify(slotval1)
+
+method disconnectNotify*(self: VirtualQKeySequenceEdit, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QKeySequenceEditdisconnectNotify(self[], signal)
+proc miqt_exec_method_cQKeySequenceEdit_disconnectNotify(vtbl: pointer, inst: pointer, signal: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQKeySequenceEdit](cast[uint](vtbl) - uint(offsetOf(VirtualQKeySequenceEdit, vtbl)))
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
+  vtbl.disconnectNotify(slotval1)
 
 proc updateMicroFocus*(self: gen_qkeysequenceedit_types.QKeySequenceEdit, ): void =
   fcQKeySequenceEdit_protectedbase_updateMicroFocus(self.h)
@@ -880,7 +1291,7 @@ proc focusPreviousChild*(self: gen_qkeysequenceedit_types.QKeySequenceEdit, ): b
   fcQKeySequenceEdit_protectedbase_focusPreviousChild(self.h)
 
 proc sender*(self: gen_qkeysequenceedit_types.QKeySequenceEdit, ): gen_qobject_types.QObject =
-  gen_qobject_types.QObject(h: fcQKeySequenceEdit_protectedbase_sender(self.h))
+  gen_qobject_types.QObject(h: fcQKeySequenceEdit_protectedbase_sender(self.h), owned: false)
 
 proc senderSignalIndex*(self: gen_qkeysequenceedit_types.QKeySequenceEdit, ): cint =
   fcQKeySequenceEdit_protectedbase_senderSignalIndex(self.h)
@@ -896,441 +1307,686 @@ proc create*(T: type gen_qkeysequenceedit_types.QKeySequenceEdit,
     vtbl: ref QKeySequenceEditVTable = nil): gen_qkeysequenceedit_types.QKeySequenceEdit =
   let vtbl = if vtbl == nil: new QKeySequenceEditVTable else: vtbl
   GC_ref(vtbl)
-  vtbl.vtbl.destructor = proc(vtbl: ptr cQKeySequenceEditVTable, _: ptr cQKeySequenceEdit) {.cdecl.} =
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQKeySequenceEditVTable, _: ptr cQKeySequenceEdit) {.cdecl.} =
     let vtbl = cast[ref QKeySequenceEditVTable](vtbl)
     GC_unref(vtbl)
-  if not isNil(vtbl.metaObject):
+  if not isNil(vtbl[].metaObject):
     vtbl[].vtbl.metaObject = miqt_exec_callback_cQKeySequenceEdit_metaObject
-  if not isNil(vtbl.metacast):
+  if not isNil(vtbl[].metacast):
     vtbl[].vtbl.metacast = miqt_exec_callback_cQKeySequenceEdit_metacast
-  if not isNil(vtbl.metacall):
+  if not isNil(vtbl[].metacall):
     vtbl[].vtbl.metacall = miqt_exec_callback_cQKeySequenceEdit_metacall
-  if not isNil(vtbl.event):
+  if not isNil(vtbl[].event):
     vtbl[].vtbl.event = miqt_exec_callback_cQKeySequenceEdit_event
-  if not isNil(vtbl.keyPressEvent):
+  if not isNil(vtbl[].keyPressEvent):
     vtbl[].vtbl.keyPressEvent = miqt_exec_callback_cQKeySequenceEdit_keyPressEvent
-  if not isNil(vtbl.keyReleaseEvent):
+  if not isNil(vtbl[].keyReleaseEvent):
     vtbl[].vtbl.keyReleaseEvent = miqt_exec_callback_cQKeySequenceEdit_keyReleaseEvent
-  if not isNil(vtbl.timerEvent):
+  if not isNil(vtbl[].timerEvent):
     vtbl[].vtbl.timerEvent = miqt_exec_callback_cQKeySequenceEdit_timerEvent
-  if not isNil(vtbl.devType):
+  if not isNil(vtbl[].devType):
     vtbl[].vtbl.devType = miqt_exec_callback_cQKeySequenceEdit_devType
-  if not isNil(vtbl.setVisible):
+  if not isNil(vtbl[].setVisible):
     vtbl[].vtbl.setVisible = miqt_exec_callback_cQKeySequenceEdit_setVisible
-  if not isNil(vtbl.sizeHint):
+  if not isNil(vtbl[].sizeHint):
     vtbl[].vtbl.sizeHint = miqt_exec_callback_cQKeySequenceEdit_sizeHint
-  if not isNil(vtbl.minimumSizeHint):
+  if not isNil(vtbl[].minimumSizeHint):
     vtbl[].vtbl.minimumSizeHint = miqt_exec_callback_cQKeySequenceEdit_minimumSizeHint
-  if not isNil(vtbl.heightForWidth):
+  if not isNil(vtbl[].heightForWidth):
     vtbl[].vtbl.heightForWidth = miqt_exec_callback_cQKeySequenceEdit_heightForWidth
-  if not isNil(vtbl.hasHeightForWidth):
+  if not isNil(vtbl[].hasHeightForWidth):
     vtbl[].vtbl.hasHeightForWidth = miqt_exec_callback_cQKeySequenceEdit_hasHeightForWidth
-  if not isNil(vtbl.paintEngine):
+  if not isNil(vtbl[].paintEngine):
     vtbl[].vtbl.paintEngine = miqt_exec_callback_cQKeySequenceEdit_paintEngine
-  if not isNil(vtbl.mousePressEvent):
+  if not isNil(vtbl[].mousePressEvent):
     vtbl[].vtbl.mousePressEvent = miqt_exec_callback_cQKeySequenceEdit_mousePressEvent
-  if not isNil(vtbl.mouseReleaseEvent):
+  if not isNil(vtbl[].mouseReleaseEvent):
     vtbl[].vtbl.mouseReleaseEvent = miqt_exec_callback_cQKeySequenceEdit_mouseReleaseEvent
-  if not isNil(vtbl.mouseDoubleClickEvent):
+  if not isNil(vtbl[].mouseDoubleClickEvent):
     vtbl[].vtbl.mouseDoubleClickEvent = miqt_exec_callback_cQKeySequenceEdit_mouseDoubleClickEvent
-  if not isNil(vtbl.mouseMoveEvent):
+  if not isNil(vtbl[].mouseMoveEvent):
     vtbl[].vtbl.mouseMoveEvent = miqt_exec_callback_cQKeySequenceEdit_mouseMoveEvent
-  if not isNil(vtbl.wheelEvent):
+  if not isNil(vtbl[].wheelEvent):
     vtbl[].vtbl.wheelEvent = miqt_exec_callback_cQKeySequenceEdit_wheelEvent
-  if not isNil(vtbl.focusInEvent):
+  if not isNil(vtbl[].focusInEvent):
     vtbl[].vtbl.focusInEvent = miqt_exec_callback_cQKeySequenceEdit_focusInEvent
-  if not isNil(vtbl.focusOutEvent):
+  if not isNil(vtbl[].focusOutEvent):
     vtbl[].vtbl.focusOutEvent = miqt_exec_callback_cQKeySequenceEdit_focusOutEvent
-  if not isNil(vtbl.enterEvent):
+  if not isNil(vtbl[].enterEvent):
     vtbl[].vtbl.enterEvent = miqt_exec_callback_cQKeySequenceEdit_enterEvent
-  if not isNil(vtbl.leaveEvent):
+  if not isNil(vtbl[].leaveEvent):
     vtbl[].vtbl.leaveEvent = miqt_exec_callback_cQKeySequenceEdit_leaveEvent
-  if not isNil(vtbl.paintEvent):
+  if not isNil(vtbl[].paintEvent):
     vtbl[].vtbl.paintEvent = miqt_exec_callback_cQKeySequenceEdit_paintEvent
-  if not isNil(vtbl.moveEvent):
+  if not isNil(vtbl[].moveEvent):
     vtbl[].vtbl.moveEvent = miqt_exec_callback_cQKeySequenceEdit_moveEvent
-  if not isNil(vtbl.resizeEvent):
+  if not isNil(vtbl[].resizeEvent):
     vtbl[].vtbl.resizeEvent = miqt_exec_callback_cQKeySequenceEdit_resizeEvent
-  if not isNil(vtbl.closeEvent):
+  if not isNil(vtbl[].closeEvent):
     vtbl[].vtbl.closeEvent = miqt_exec_callback_cQKeySequenceEdit_closeEvent
-  if not isNil(vtbl.contextMenuEvent):
+  if not isNil(vtbl[].contextMenuEvent):
     vtbl[].vtbl.contextMenuEvent = miqt_exec_callback_cQKeySequenceEdit_contextMenuEvent
-  if not isNil(vtbl.tabletEvent):
+  if not isNil(vtbl[].tabletEvent):
     vtbl[].vtbl.tabletEvent = miqt_exec_callback_cQKeySequenceEdit_tabletEvent
-  if not isNil(vtbl.actionEvent):
+  if not isNil(vtbl[].actionEvent):
     vtbl[].vtbl.actionEvent = miqt_exec_callback_cQKeySequenceEdit_actionEvent
-  if not isNil(vtbl.dragEnterEvent):
+  if not isNil(vtbl[].dragEnterEvent):
     vtbl[].vtbl.dragEnterEvent = miqt_exec_callback_cQKeySequenceEdit_dragEnterEvent
-  if not isNil(vtbl.dragMoveEvent):
+  if not isNil(vtbl[].dragMoveEvent):
     vtbl[].vtbl.dragMoveEvent = miqt_exec_callback_cQKeySequenceEdit_dragMoveEvent
-  if not isNil(vtbl.dragLeaveEvent):
+  if not isNil(vtbl[].dragLeaveEvent):
     vtbl[].vtbl.dragLeaveEvent = miqt_exec_callback_cQKeySequenceEdit_dragLeaveEvent
-  if not isNil(vtbl.dropEvent):
+  if not isNil(vtbl[].dropEvent):
     vtbl[].vtbl.dropEvent = miqt_exec_callback_cQKeySequenceEdit_dropEvent
-  if not isNil(vtbl.showEvent):
+  if not isNil(vtbl[].showEvent):
     vtbl[].vtbl.showEvent = miqt_exec_callback_cQKeySequenceEdit_showEvent
-  if not isNil(vtbl.hideEvent):
+  if not isNil(vtbl[].hideEvent):
     vtbl[].vtbl.hideEvent = miqt_exec_callback_cQKeySequenceEdit_hideEvent
-  if not isNil(vtbl.nativeEvent):
+  if not isNil(vtbl[].nativeEvent):
     vtbl[].vtbl.nativeEvent = miqt_exec_callback_cQKeySequenceEdit_nativeEvent
-  if not isNil(vtbl.changeEvent):
+  if not isNil(vtbl[].changeEvent):
     vtbl[].vtbl.changeEvent = miqt_exec_callback_cQKeySequenceEdit_changeEvent
-  if not isNil(vtbl.metric):
+  if not isNil(vtbl[].metric):
     vtbl[].vtbl.metric = miqt_exec_callback_cQKeySequenceEdit_metric
-  if not isNil(vtbl.initPainter):
+  if not isNil(vtbl[].initPainter):
     vtbl[].vtbl.initPainter = miqt_exec_callback_cQKeySequenceEdit_initPainter
-  if not isNil(vtbl.redirected):
+  if not isNil(vtbl[].redirected):
     vtbl[].vtbl.redirected = miqt_exec_callback_cQKeySequenceEdit_redirected
-  if not isNil(vtbl.sharedPainter):
+  if not isNil(vtbl[].sharedPainter):
     vtbl[].vtbl.sharedPainter = miqt_exec_callback_cQKeySequenceEdit_sharedPainter
-  if not isNil(vtbl.inputMethodEvent):
+  if not isNil(vtbl[].inputMethodEvent):
     vtbl[].vtbl.inputMethodEvent = miqt_exec_callback_cQKeySequenceEdit_inputMethodEvent
-  if not isNil(vtbl.inputMethodQuery):
+  if not isNil(vtbl[].inputMethodQuery):
     vtbl[].vtbl.inputMethodQuery = miqt_exec_callback_cQKeySequenceEdit_inputMethodQuery
-  if not isNil(vtbl.focusNextPrevChild):
+  if not isNil(vtbl[].focusNextPrevChild):
     vtbl[].vtbl.focusNextPrevChild = miqt_exec_callback_cQKeySequenceEdit_focusNextPrevChild
-  if not isNil(vtbl.eventFilter):
+  if not isNil(vtbl[].eventFilter):
     vtbl[].vtbl.eventFilter = miqt_exec_callback_cQKeySequenceEdit_eventFilter
-  if not isNil(vtbl.childEvent):
+  if not isNil(vtbl[].childEvent):
     vtbl[].vtbl.childEvent = miqt_exec_callback_cQKeySequenceEdit_childEvent
-  if not isNil(vtbl.customEvent):
+  if not isNil(vtbl[].customEvent):
     vtbl[].vtbl.customEvent = miqt_exec_callback_cQKeySequenceEdit_customEvent
-  if not isNil(vtbl.connectNotify):
+  if not isNil(vtbl[].connectNotify):
     vtbl[].vtbl.connectNotify = miqt_exec_callback_cQKeySequenceEdit_connectNotify
-  if not isNil(vtbl.disconnectNotify):
+  if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQKeySequenceEdit_disconnectNotify
-  gen_qkeysequenceedit_types.QKeySequenceEdit(h: fcQKeySequenceEdit_new(addr(vtbl[]), parent.h))
+  gen_qkeysequenceedit_types.QKeySequenceEdit(h: fcQKeySequenceEdit_new(addr(vtbl[].vtbl), parent.h), owned: true)
 
 proc create*(T: type gen_qkeysequenceedit_types.QKeySequenceEdit,
     vtbl: ref QKeySequenceEditVTable = nil): gen_qkeysequenceedit_types.QKeySequenceEdit =
   let vtbl = if vtbl == nil: new QKeySequenceEditVTable else: vtbl
   GC_ref(vtbl)
-  vtbl.vtbl.destructor = proc(vtbl: ptr cQKeySequenceEditVTable, _: ptr cQKeySequenceEdit) {.cdecl.} =
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQKeySequenceEditVTable, _: ptr cQKeySequenceEdit) {.cdecl.} =
     let vtbl = cast[ref QKeySequenceEditVTable](vtbl)
     GC_unref(vtbl)
-  if not isNil(vtbl.metaObject):
+  if not isNil(vtbl[].metaObject):
     vtbl[].vtbl.metaObject = miqt_exec_callback_cQKeySequenceEdit_metaObject
-  if not isNil(vtbl.metacast):
+  if not isNil(vtbl[].metacast):
     vtbl[].vtbl.metacast = miqt_exec_callback_cQKeySequenceEdit_metacast
-  if not isNil(vtbl.metacall):
+  if not isNil(vtbl[].metacall):
     vtbl[].vtbl.metacall = miqt_exec_callback_cQKeySequenceEdit_metacall
-  if not isNil(vtbl.event):
+  if not isNil(vtbl[].event):
     vtbl[].vtbl.event = miqt_exec_callback_cQKeySequenceEdit_event
-  if not isNil(vtbl.keyPressEvent):
+  if not isNil(vtbl[].keyPressEvent):
     vtbl[].vtbl.keyPressEvent = miqt_exec_callback_cQKeySequenceEdit_keyPressEvent
-  if not isNil(vtbl.keyReleaseEvent):
+  if not isNil(vtbl[].keyReleaseEvent):
     vtbl[].vtbl.keyReleaseEvent = miqt_exec_callback_cQKeySequenceEdit_keyReleaseEvent
-  if not isNil(vtbl.timerEvent):
+  if not isNil(vtbl[].timerEvent):
     vtbl[].vtbl.timerEvent = miqt_exec_callback_cQKeySequenceEdit_timerEvent
-  if not isNil(vtbl.devType):
+  if not isNil(vtbl[].devType):
     vtbl[].vtbl.devType = miqt_exec_callback_cQKeySequenceEdit_devType
-  if not isNil(vtbl.setVisible):
+  if not isNil(vtbl[].setVisible):
     vtbl[].vtbl.setVisible = miqt_exec_callback_cQKeySequenceEdit_setVisible
-  if not isNil(vtbl.sizeHint):
+  if not isNil(vtbl[].sizeHint):
     vtbl[].vtbl.sizeHint = miqt_exec_callback_cQKeySequenceEdit_sizeHint
-  if not isNil(vtbl.minimumSizeHint):
+  if not isNil(vtbl[].minimumSizeHint):
     vtbl[].vtbl.minimumSizeHint = miqt_exec_callback_cQKeySequenceEdit_minimumSizeHint
-  if not isNil(vtbl.heightForWidth):
+  if not isNil(vtbl[].heightForWidth):
     vtbl[].vtbl.heightForWidth = miqt_exec_callback_cQKeySequenceEdit_heightForWidth
-  if not isNil(vtbl.hasHeightForWidth):
+  if not isNil(vtbl[].hasHeightForWidth):
     vtbl[].vtbl.hasHeightForWidth = miqt_exec_callback_cQKeySequenceEdit_hasHeightForWidth
-  if not isNil(vtbl.paintEngine):
+  if not isNil(vtbl[].paintEngine):
     vtbl[].vtbl.paintEngine = miqt_exec_callback_cQKeySequenceEdit_paintEngine
-  if not isNil(vtbl.mousePressEvent):
+  if not isNil(vtbl[].mousePressEvent):
     vtbl[].vtbl.mousePressEvent = miqt_exec_callback_cQKeySequenceEdit_mousePressEvent
-  if not isNil(vtbl.mouseReleaseEvent):
+  if not isNil(vtbl[].mouseReleaseEvent):
     vtbl[].vtbl.mouseReleaseEvent = miqt_exec_callback_cQKeySequenceEdit_mouseReleaseEvent
-  if not isNil(vtbl.mouseDoubleClickEvent):
+  if not isNil(vtbl[].mouseDoubleClickEvent):
     vtbl[].vtbl.mouseDoubleClickEvent = miqt_exec_callback_cQKeySequenceEdit_mouseDoubleClickEvent
-  if not isNil(vtbl.mouseMoveEvent):
+  if not isNil(vtbl[].mouseMoveEvent):
     vtbl[].vtbl.mouseMoveEvent = miqt_exec_callback_cQKeySequenceEdit_mouseMoveEvent
-  if not isNil(vtbl.wheelEvent):
+  if not isNil(vtbl[].wheelEvent):
     vtbl[].vtbl.wheelEvent = miqt_exec_callback_cQKeySequenceEdit_wheelEvent
-  if not isNil(vtbl.focusInEvent):
+  if not isNil(vtbl[].focusInEvent):
     vtbl[].vtbl.focusInEvent = miqt_exec_callback_cQKeySequenceEdit_focusInEvent
-  if not isNil(vtbl.focusOutEvent):
+  if not isNil(vtbl[].focusOutEvent):
     vtbl[].vtbl.focusOutEvent = miqt_exec_callback_cQKeySequenceEdit_focusOutEvent
-  if not isNil(vtbl.enterEvent):
+  if not isNil(vtbl[].enterEvent):
     vtbl[].vtbl.enterEvent = miqt_exec_callback_cQKeySequenceEdit_enterEvent
-  if not isNil(vtbl.leaveEvent):
+  if not isNil(vtbl[].leaveEvent):
     vtbl[].vtbl.leaveEvent = miqt_exec_callback_cQKeySequenceEdit_leaveEvent
-  if not isNil(vtbl.paintEvent):
+  if not isNil(vtbl[].paintEvent):
     vtbl[].vtbl.paintEvent = miqt_exec_callback_cQKeySequenceEdit_paintEvent
-  if not isNil(vtbl.moveEvent):
+  if not isNil(vtbl[].moveEvent):
     vtbl[].vtbl.moveEvent = miqt_exec_callback_cQKeySequenceEdit_moveEvent
-  if not isNil(vtbl.resizeEvent):
+  if not isNil(vtbl[].resizeEvent):
     vtbl[].vtbl.resizeEvent = miqt_exec_callback_cQKeySequenceEdit_resizeEvent
-  if not isNil(vtbl.closeEvent):
+  if not isNil(vtbl[].closeEvent):
     vtbl[].vtbl.closeEvent = miqt_exec_callback_cQKeySequenceEdit_closeEvent
-  if not isNil(vtbl.contextMenuEvent):
+  if not isNil(vtbl[].contextMenuEvent):
     vtbl[].vtbl.contextMenuEvent = miqt_exec_callback_cQKeySequenceEdit_contextMenuEvent
-  if not isNil(vtbl.tabletEvent):
+  if not isNil(vtbl[].tabletEvent):
     vtbl[].vtbl.tabletEvent = miqt_exec_callback_cQKeySequenceEdit_tabletEvent
-  if not isNil(vtbl.actionEvent):
+  if not isNil(vtbl[].actionEvent):
     vtbl[].vtbl.actionEvent = miqt_exec_callback_cQKeySequenceEdit_actionEvent
-  if not isNil(vtbl.dragEnterEvent):
+  if not isNil(vtbl[].dragEnterEvent):
     vtbl[].vtbl.dragEnterEvent = miqt_exec_callback_cQKeySequenceEdit_dragEnterEvent
-  if not isNil(vtbl.dragMoveEvent):
+  if not isNil(vtbl[].dragMoveEvent):
     vtbl[].vtbl.dragMoveEvent = miqt_exec_callback_cQKeySequenceEdit_dragMoveEvent
-  if not isNil(vtbl.dragLeaveEvent):
+  if not isNil(vtbl[].dragLeaveEvent):
     vtbl[].vtbl.dragLeaveEvent = miqt_exec_callback_cQKeySequenceEdit_dragLeaveEvent
-  if not isNil(vtbl.dropEvent):
+  if not isNil(vtbl[].dropEvent):
     vtbl[].vtbl.dropEvent = miqt_exec_callback_cQKeySequenceEdit_dropEvent
-  if not isNil(vtbl.showEvent):
+  if not isNil(vtbl[].showEvent):
     vtbl[].vtbl.showEvent = miqt_exec_callback_cQKeySequenceEdit_showEvent
-  if not isNil(vtbl.hideEvent):
+  if not isNil(vtbl[].hideEvent):
     vtbl[].vtbl.hideEvent = miqt_exec_callback_cQKeySequenceEdit_hideEvent
-  if not isNil(vtbl.nativeEvent):
+  if not isNil(vtbl[].nativeEvent):
     vtbl[].vtbl.nativeEvent = miqt_exec_callback_cQKeySequenceEdit_nativeEvent
-  if not isNil(vtbl.changeEvent):
+  if not isNil(vtbl[].changeEvent):
     vtbl[].vtbl.changeEvent = miqt_exec_callback_cQKeySequenceEdit_changeEvent
-  if not isNil(vtbl.metric):
+  if not isNil(vtbl[].metric):
     vtbl[].vtbl.metric = miqt_exec_callback_cQKeySequenceEdit_metric
-  if not isNil(vtbl.initPainter):
+  if not isNil(vtbl[].initPainter):
     vtbl[].vtbl.initPainter = miqt_exec_callback_cQKeySequenceEdit_initPainter
-  if not isNil(vtbl.redirected):
+  if not isNil(vtbl[].redirected):
     vtbl[].vtbl.redirected = miqt_exec_callback_cQKeySequenceEdit_redirected
-  if not isNil(vtbl.sharedPainter):
+  if not isNil(vtbl[].sharedPainter):
     vtbl[].vtbl.sharedPainter = miqt_exec_callback_cQKeySequenceEdit_sharedPainter
-  if not isNil(vtbl.inputMethodEvent):
+  if not isNil(vtbl[].inputMethodEvent):
     vtbl[].vtbl.inputMethodEvent = miqt_exec_callback_cQKeySequenceEdit_inputMethodEvent
-  if not isNil(vtbl.inputMethodQuery):
+  if not isNil(vtbl[].inputMethodQuery):
     vtbl[].vtbl.inputMethodQuery = miqt_exec_callback_cQKeySequenceEdit_inputMethodQuery
-  if not isNil(vtbl.focusNextPrevChild):
+  if not isNil(vtbl[].focusNextPrevChild):
     vtbl[].vtbl.focusNextPrevChild = miqt_exec_callback_cQKeySequenceEdit_focusNextPrevChild
-  if not isNil(vtbl.eventFilter):
+  if not isNil(vtbl[].eventFilter):
     vtbl[].vtbl.eventFilter = miqt_exec_callback_cQKeySequenceEdit_eventFilter
-  if not isNil(vtbl.childEvent):
+  if not isNil(vtbl[].childEvent):
     vtbl[].vtbl.childEvent = miqt_exec_callback_cQKeySequenceEdit_childEvent
-  if not isNil(vtbl.customEvent):
+  if not isNil(vtbl[].customEvent):
     vtbl[].vtbl.customEvent = miqt_exec_callback_cQKeySequenceEdit_customEvent
-  if not isNil(vtbl.connectNotify):
+  if not isNil(vtbl[].connectNotify):
     vtbl[].vtbl.connectNotify = miqt_exec_callback_cQKeySequenceEdit_connectNotify
-  if not isNil(vtbl.disconnectNotify):
+  if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQKeySequenceEdit_disconnectNotify
-  gen_qkeysequenceedit_types.QKeySequenceEdit(h: fcQKeySequenceEdit_new2(addr(vtbl[]), ))
+  gen_qkeysequenceedit_types.QKeySequenceEdit(h: fcQKeySequenceEdit_new2(addr(vtbl[].vtbl), ), owned: true)
 
 proc create*(T: type gen_qkeysequenceedit_types.QKeySequenceEdit,
     keySequence: gen_qkeysequence_types.QKeySequence,
     vtbl: ref QKeySequenceEditVTable = nil): gen_qkeysequenceedit_types.QKeySequenceEdit =
   let vtbl = if vtbl == nil: new QKeySequenceEditVTable else: vtbl
   GC_ref(vtbl)
-  vtbl.vtbl.destructor = proc(vtbl: ptr cQKeySequenceEditVTable, _: ptr cQKeySequenceEdit) {.cdecl.} =
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQKeySequenceEditVTable, _: ptr cQKeySequenceEdit) {.cdecl.} =
     let vtbl = cast[ref QKeySequenceEditVTable](vtbl)
     GC_unref(vtbl)
-  if not isNil(vtbl.metaObject):
+  if not isNil(vtbl[].metaObject):
     vtbl[].vtbl.metaObject = miqt_exec_callback_cQKeySequenceEdit_metaObject
-  if not isNil(vtbl.metacast):
+  if not isNil(vtbl[].metacast):
     vtbl[].vtbl.metacast = miqt_exec_callback_cQKeySequenceEdit_metacast
-  if not isNil(vtbl.metacall):
+  if not isNil(vtbl[].metacall):
     vtbl[].vtbl.metacall = miqt_exec_callback_cQKeySequenceEdit_metacall
-  if not isNil(vtbl.event):
+  if not isNil(vtbl[].event):
     vtbl[].vtbl.event = miqt_exec_callback_cQKeySequenceEdit_event
-  if not isNil(vtbl.keyPressEvent):
+  if not isNil(vtbl[].keyPressEvent):
     vtbl[].vtbl.keyPressEvent = miqt_exec_callback_cQKeySequenceEdit_keyPressEvent
-  if not isNil(vtbl.keyReleaseEvent):
+  if not isNil(vtbl[].keyReleaseEvent):
     vtbl[].vtbl.keyReleaseEvent = miqt_exec_callback_cQKeySequenceEdit_keyReleaseEvent
-  if not isNil(vtbl.timerEvent):
+  if not isNil(vtbl[].timerEvent):
     vtbl[].vtbl.timerEvent = miqt_exec_callback_cQKeySequenceEdit_timerEvent
-  if not isNil(vtbl.devType):
+  if not isNil(vtbl[].devType):
     vtbl[].vtbl.devType = miqt_exec_callback_cQKeySequenceEdit_devType
-  if not isNil(vtbl.setVisible):
+  if not isNil(vtbl[].setVisible):
     vtbl[].vtbl.setVisible = miqt_exec_callback_cQKeySequenceEdit_setVisible
-  if not isNil(vtbl.sizeHint):
+  if not isNil(vtbl[].sizeHint):
     vtbl[].vtbl.sizeHint = miqt_exec_callback_cQKeySequenceEdit_sizeHint
-  if not isNil(vtbl.minimumSizeHint):
+  if not isNil(vtbl[].minimumSizeHint):
     vtbl[].vtbl.minimumSizeHint = miqt_exec_callback_cQKeySequenceEdit_minimumSizeHint
-  if not isNil(vtbl.heightForWidth):
+  if not isNil(vtbl[].heightForWidth):
     vtbl[].vtbl.heightForWidth = miqt_exec_callback_cQKeySequenceEdit_heightForWidth
-  if not isNil(vtbl.hasHeightForWidth):
+  if not isNil(vtbl[].hasHeightForWidth):
     vtbl[].vtbl.hasHeightForWidth = miqt_exec_callback_cQKeySequenceEdit_hasHeightForWidth
-  if not isNil(vtbl.paintEngine):
+  if not isNil(vtbl[].paintEngine):
     vtbl[].vtbl.paintEngine = miqt_exec_callback_cQKeySequenceEdit_paintEngine
-  if not isNil(vtbl.mousePressEvent):
+  if not isNil(vtbl[].mousePressEvent):
     vtbl[].vtbl.mousePressEvent = miqt_exec_callback_cQKeySequenceEdit_mousePressEvent
-  if not isNil(vtbl.mouseReleaseEvent):
+  if not isNil(vtbl[].mouseReleaseEvent):
     vtbl[].vtbl.mouseReleaseEvent = miqt_exec_callback_cQKeySequenceEdit_mouseReleaseEvent
-  if not isNil(vtbl.mouseDoubleClickEvent):
+  if not isNil(vtbl[].mouseDoubleClickEvent):
     vtbl[].vtbl.mouseDoubleClickEvent = miqt_exec_callback_cQKeySequenceEdit_mouseDoubleClickEvent
-  if not isNil(vtbl.mouseMoveEvent):
+  if not isNil(vtbl[].mouseMoveEvent):
     vtbl[].vtbl.mouseMoveEvent = miqt_exec_callback_cQKeySequenceEdit_mouseMoveEvent
-  if not isNil(vtbl.wheelEvent):
+  if not isNil(vtbl[].wheelEvent):
     vtbl[].vtbl.wheelEvent = miqt_exec_callback_cQKeySequenceEdit_wheelEvent
-  if not isNil(vtbl.focusInEvent):
+  if not isNil(vtbl[].focusInEvent):
     vtbl[].vtbl.focusInEvent = miqt_exec_callback_cQKeySequenceEdit_focusInEvent
-  if not isNil(vtbl.focusOutEvent):
+  if not isNil(vtbl[].focusOutEvent):
     vtbl[].vtbl.focusOutEvent = miqt_exec_callback_cQKeySequenceEdit_focusOutEvent
-  if not isNil(vtbl.enterEvent):
+  if not isNil(vtbl[].enterEvent):
     vtbl[].vtbl.enterEvent = miqt_exec_callback_cQKeySequenceEdit_enterEvent
-  if not isNil(vtbl.leaveEvent):
+  if not isNil(vtbl[].leaveEvent):
     vtbl[].vtbl.leaveEvent = miqt_exec_callback_cQKeySequenceEdit_leaveEvent
-  if not isNil(vtbl.paintEvent):
+  if not isNil(vtbl[].paintEvent):
     vtbl[].vtbl.paintEvent = miqt_exec_callback_cQKeySequenceEdit_paintEvent
-  if not isNil(vtbl.moveEvent):
+  if not isNil(vtbl[].moveEvent):
     vtbl[].vtbl.moveEvent = miqt_exec_callback_cQKeySequenceEdit_moveEvent
-  if not isNil(vtbl.resizeEvent):
+  if not isNil(vtbl[].resizeEvent):
     vtbl[].vtbl.resizeEvent = miqt_exec_callback_cQKeySequenceEdit_resizeEvent
-  if not isNil(vtbl.closeEvent):
+  if not isNil(vtbl[].closeEvent):
     vtbl[].vtbl.closeEvent = miqt_exec_callback_cQKeySequenceEdit_closeEvent
-  if not isNil(vtbl.contextMenuEvent):
+  if not isNil(vtbl[].contextMenuEvent):
     vtbl[].vtbl.contextMenuEvent = miqt_exec_callback_cQKeySequenceEdit_contextMenuEvent
-  if not isNil(vtbl.tabletEvent):
+  if not isNil(vtbl[].tabletEvent):
     vtbl[].vtbl.tabletEvent = miqt_exec_callback_cQKeySequenceEdit_tabletEvent
-  if not isNil(vtbl.actionEvent):
+  if not isNil(vtbl[].actionEvent):
     vtbl[].vtbl.actionEvent = miqt_exec_callback_cQKeySequenceEdit_actionEvent
-  if not isNil(vtbl.dragEnterEvent):
+  if not isNil(vtbl[].dragEnterEvent):
     vtbl[].vtbl.dragEnterEvent = miqt_exec_callback_cQKeySequenceEdit_dragEnterEvent
-  if not isNil(vtbl.dragMoveEvent):
+  if not isNil(vtbl[].dragMoveEvent):
     vtbl[].vtbl.dragMoveEvent = miqt_exec_callback_cQKeySequenceEdit_dragMoveEvent
-  if not isNil(vtbl.dragLeaveEvent):
+  if not isNil(vtbl[].dragLeaveEvent):
     vtbl[].vtbl.dragLeaveEvent = miqt_exec_callback_cQKeySequenceEdit_dragLeaveEvent
-  if not isNil(vtbl.dropEvent):
+  if not isNil(vtbl[].dropEvent):
     vtbl[].vtbl.dropEvent = miqt_exec_callback_cQKeySequenceEdit_dropEvent
-  if not isNil(vtbl.showEvent):
+  if not isNil(vtbl[].showEvent):
     vtbl[].vtbl.showEvent = miqt_exec_callback_cQKeySequenceEdit_showEvent
-  if not isNil(vtbl.hideEvent):
+  if not isNil(vtbl[].hideEvent):
     vtbl[].vtbl.hideEvent = miqt_exec_callback_cQKeySequenceEdit_hideEvent
-  if not isNil(vtbl.nativeEvent):
+  if not isNil(vtbl[].nativeEvent):
     vtbl[].vtbl.nativeEvent = miqt_exec_callback_cQKeySequenceEdit_nativeEvent
-  if not isNil(vtbl.changeEvent):
+  if not isNil(vtbl[].changeEvent):
     vtbl[].vtbl.changeEvent = miqt_exec_callback_cQKeySequenceEdit_changeEvent
-  if not isNil(vtbl.metric):
+  if not isNil(vtbl[].metric):
     vtbl[].vtbl.metric = miqt_exec_callback_cQKeySequenceEdit_metric
-  if not isNil(vtbl.initPainter):
+  if not isNil(vtbl[].initPainter):
     vtbl[].vtbl.initPainter = miqt_exec_callback_cQKeySequenceEdit_initPainter
-  if not isNil(vtbl.redirected):
+  if not isNil(vtbl[].redirected):
     vtbl[].vtbl.redirected = miqt_exec_callback_cQKeySequenceEdit_redirected
-  if not isNil(vtbl.sharedPainter):
+  if not isNil(vtbl[].sharedPainter):
     vtbl[].vtbl.sharedPainter = miqt_exec_callback_cQKeySequenceEdit_sharedPainter
-  if not isNil(vtbl.inputMethodEvent):
+  if not isNil(vtbl[].inputMethodEvent):
     vtbl[].vtbl.inputMethodEvent = miqt_exec_callback_cQKeySequenceEdit_inputMethodEvent
-  if not isNil(vtbl.inputMethodQuery):
+  if not isNil(vtbl[].inputMethodQuery):
     vtbl[].vtbl.inputMethodQuery = miqt_exec_callback_cQKeySequenceEdit_inputMethodQuery
-  if not isNil(vtbl.focusNextPrevChild):
+  if not isNil(vtbl[].focusNextPrevChild):
     vtbl[].vtbl.focusNextPrevChild = miqt_exec_callback_cQKeySequenceEdit_focusNextPrevChild
-  if not isNil(vtbl.eventFilter):
+  if not isNil(vtbl[].eventFilter):
     vtbl[].vtbl.eventFilter = miqt_exec_callback_cQKeySequenceEdit_eventFilter
-  if not isNil(vtbl.childEvent):
+  if not isNil(vtbl[].childEvent):
     vtbl[].vtbl.childEvent = miqt_exec_callback_cQKeySequenceEdit_childEvent
-  if not isNil(vtbl.customEvent):
+  if not isNil(vtbl[].customEvent):
     vtbl[].vtbl.customEvent = miqt_exec_callback_cQKeySequenceEdit_customEvent
-  if not isNil(vtbl.connectNotify):
+  if not isNil(vtbl[].connectNotify):
     vtbl[].vtbl.connectNotify = miqt_exec_callback_cQKeySequenceEdit_connectNotify
-  if not isNil(vtbl.disconnectNotify):
+  if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQKeySequenceEdit_disconnectNotify
-  gen_qkeysequenceedit_types.QKeySequenceEdit(h: fcQKeySequenceEdit_new3(addr(vtbl[]), keySequence.h))
+  gen_qkeysequenceedit_types.QKeySequenceEdit(h: fcQKeySequenceEdit_new3(addr(vtbl[].vtbl), keySequence.h), owned: true)
 
 proc create*(T: type gen_qkeysequenceedit_types.QKeySequenceEdit,
     keySequence: gen_qkeysequence_types.QKeySequence, parent: gen_qwidget_types.QWidget,
     vtbl: ref QKeySequenceEditVTable = nil): gen_qkeysequenceedit_types.QKeySequenceEdit =
   let vtbl = if vtbl == nil: new QKeySequenceEditVTable else: vtbl
   GC_ref(vtbl)
-  vtbl.vtbl.destructor = proc(vtbl: ptr cQKeySequenceEditVTable, _: ptr cQKeySequenceEdit) {.cdecl.} =
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQKeySequenceEditVTable, _: ptr cQKeySequenceEdit) {.cdecl.} =
     let vtbl = cast[ref QKeySequenceEditVTable](vtbl)
     GC_unref(vtbl)
-  if not isNil(vtbl.metaObject):
+  if not isNil(vtbl[].metaObject):
     vtbl[].vtbl.metaObject = miqt_exec_callback_cQKeySequenceEdit_metaObject
-  if not isNil(vtbl.metacast):
+  if not isNil(vtbl[].metacast):
     vtbl[].vtbl.metacast = miqt_exec_callback_cQKeySequenceEdit_metacast
-  if not isNil(vtbl.metacall):
+  if not isNil(vtbl[].metacall):
     vtbl[].vtbl.metacall = miqt_exec_callback_cQKeySequenceEdit_metacall
-  if not isNil(vtbl.event):
+  if not isNil(vtbl[].event):
     vtbl[].vtbl.event = miqt_exec_callback_cQKeySequenceEdit_event
-  if not isNil(vtbl.keyPressEvent):
+  if not isNil(vtbl[].keyPressEvent):
     vtbl[].vtbl.keyPressEvent = miqt_exec_callback_cQKeySequenceEdit_keyPressEvent
-  if not isNil(vtbl.keyReleaseEvent):
+  if not isNil(vtbl[].keyReleaseEvent):
     vtbl[].vtbl.keyReleaseEvent = miqt_exec_callback_cQKeySequenceEdit_keyReleaseEvent
-  if not isNil(vtbl.timerEvent):
+  if not isNil(vtbl[].timerEvent):
     vtbl[].vtbl.timerEvent = miqt_exec_callback_cQKeySequenceEdit_timerEvent
-  if not isNil(vtbl.devType):
+  if not isNil(vtbl[].devType):
     vtbl[].vtbl.devType = miqt_exec_callback_cQKeySequenceEdit_devType
-  if not isNil(vtbl.setVisible):
+  if not isNil(vtbl[].setVisible):
     vtbl[].vtbl.setVisible = miqt_exec_callback_cQKeySequenceEdit_setVisible
-  if not isNil(vtbl.sizeHint):
+  if not isNil(vtbl[].sizeHint):
     vtbl[].vtbl.sizeHint = miqt_exec_callback_cQKeySequenceEdit_sizeHint
-  if not isNil(vtbl.minimumSizeHint):
+  if not isNil(vtbl[].minimumSizeHint):
     vtbl[].vtbl.minimumSizeHint = miqt_exec_callback_cQKeySequenceEdit_minimumSizeHint
-  if not isNil(vtbl.heightForWidth):
+  if not isNil(vtbl[].heightForWidth):
     vtbl[].vtbl.heightForWidth = miqt_exec_callback_cQKeySequenceEdit_heightForWidth
-  if not isNil(vtbl.hasHeightForWidth):
+  if not isNil(vtbl[].hasHeightForWidth):
     vtbl[].vtbl.hasHeightForWidth = miqt_exec_callback_cQKeySequenceEdit_hasHeightForWidth
-  if not isNil(vtbl.paintEngine):
+  if not isNil(vtbl[].paintEngine):
     vtbl[].vtbl.paintEngine = miqt_exec_callback_cQKeySequenceEdit_paintEngine
-  if not isNil(vtbl.mousePressEvent):
+  if not isNil(vtbl[].mousePressEvent):
     vtbl[].vtbl.mousePressEvent = miqt_exec_callback_cQKeySequenceEdit_mousePressEvent
-  if not isNil(vtbl.mouseReleaseEvent):
+  if not isNil(vtbl[].mouseReleaseEvent):
     vtbl[].vtbl.mouseReleaseEvent = miqt_exec_callback_cQKeySequenceEdit_mouseReleaseEvent
-  if not isNil(vtbl.mouseDoubleClickEvent):
+  if not isNil(vtbl[].mouseDoubleClickEvent):
     vtbl[].vtbl.mouseDoubleClickEvent = miqt_exec_callback_cQKeySequenceEdit_mouseDoubleClickEvent
-  if not isNil(vtbl.mouseMoveEvent):
+  if not isNil(vtbl[].mouseMoveEvent):
     vtbl[].vtbl.mouseMoveEvent = miqt_exec_callback_cQKeySequenceEdit_mouseMoveEvent
-  if not isNil(vtbl.wheelEvent):
+  if not isNil(vtbl[].wheelEvent):
     vtbl[].vtbl.wheelEvent = miqt_exec_callback_cQKeySequenceEdit_wheelEvent
-  if not isNil(vtbl.focusInEvent):
+  if not isNil(vtbl[].focusInEvent):
     vtbl[].vtbl.focusInEvent = miqt_exec_callback_cQKeySequenceEdit_focusInEvent
-  if not isNil(vtbl.focusOutEvent):
+  if not isNil(vtbl[].focusOutEvent):
     vtbl[].vtbl.focusOutEvent = miqt_exec_callback_cQKeySequenceEdit_focusOutEvent
-  if not isNil(vtbl.enterEvent):
+  if not isNil(vtbl[].enterEvent):
     vtbl[].vtbl.enterEvent = miqt_exec_callback_cQKeySequenceEdit_enterEvent
-  if not isNil(vtbl.leaveEvent):
+  if not isNil(vtbl[].leaveEvent):
     vtbl[].vtbl.leaveEvent = miqt_exec_callback_cQKeySequenceEdit_leaveEvent
-  if not isNil(vtbl.paintEvent):
+  if not isNil(vtbl[].paintEvent):
     vtbl[].vtbl.paintEvent = miqt_exec_callback_cQKeySequenceEdit_paintEvent
-  if not isNil(vtbl.moveEvent):
+  if not isNil(vtbl[].moveEvent):
     vtbl[].vtbl.moveEvent = miqt_exec_callback_cQKeySequenceEdit_moveEvent
-  if not isNil(vtbl.resizeEvent):
+  if not isNil(vtbl[].resizeEvent):
     vtbl[].vtbl.resizeEvent = miqt_exec_callback_cQKeySequenceEdit_resizeEvent
-  if not isNil(vtbl.closeEvent):
+  if not isNil(vtbl[].closeEvent):
     vtbl[].vtbl.closeEvent = miqt_exec_callback_cQKeySequenceEdit_closeEvent
-  if not isNil(vtbl.contextMenuEvent):
+  if not isNil(vtbl[].contextMenuEvent):
     vtbl[].vtbl.contextMenuEvent = miqt_exec_callback_cQKeySequenceEdit_contextMenuEvent
-  if not isNil(vtbl.tabletEvent):
+  if not isNil(vtbl[].tabletEvent):
     vtbl[].vtbl.tabletEvent = miqt_exec_callback_cQKeySequenceEdit_tabletEvent
-  if not isNil(vtbl.actionEvent):
+  if not isNil(vtbl[].actionEvent):
     vtbl[].vtbl.actionEvent = miqt_exec_callback_cQKeySequenceEdit_actionEvent
-  if not isNil(vtbl.dragEnterEvent):
+  if not isNil(vtbl[].dragEnterEvent):
     vtbl[].vtbl.dragEnterEvent = miqt_exec_callback_cQKeySequenceEdit_dragEnterEvent
-  if not isNil(vtbl.dragMoveEvent):
+  if not isNil(vtbl[].dragMoveEvent):
     vtbl[].vtbl.dragMoveEvent = miqt_exec_callback_cQKeySequenceEdit_dragMoveEvent
-  if not isNil(vtbl.dragLeaveEvent):
+  if not isNil(vtbl[].dragLeaveEvent):
     vtbl[].vtbl.dragLeaveEvent = miqt_exec_callback_cQKeySequenceEdit_dragLeaveEvent
-  if not isNil(vtbl.dropEvent):
+  if not isNil(vtbl[].dropEvent):
     vtbl[].vtbl.dropEvent = miqt_exec_callback_cQKeySequenceEdit_dropEvent
-  if not isNil(vtbl.showEvent):
+  if not isNil(vtbl[].showEvent):
     vtbl[].vtbl.showEvent = miqt_exec_callback_cQKeySequenceEdit_showEvent
-  if not isNil(vtbl.hideEvent):
+  if not isNil(vtbl[].hideEvent):
     vtbl[].vtbl.hideEvent = miqt_exec_callback_cQKeySequenceEdit_hideEvent
-  if not isNil(vtbl.nativeEvent):
+  if not isNil(vtbl[].nativeEvent):
     vtbl[].vtbl.nativeEvent = miqt_exec_callback_cQKeySequenceEdit_nativeEvent
-  if not isNil(vtbl.changeEvent):
+  if not isNil(vtbl[].changeEvent):
     vtbl[].vtbl.changeEvent = miqt_exec_callback_cQKeySequenceEdit_changeEvent
-  if not isNil(vtbl.metric):
+  if not isNil(vtbl[].metric):
     vtbl[].vtbl.metric = miqt_exec_callback_cQKeySequenceEdit_metric
-  if not isNil(vtbl.initPainter):
+  if not isNil(vtbl[].initPainter):
     vtbl[].vtbl.initPainter = miqt_exec_callback_cQKeySequenceEdit_initPainter
-  if not isNil(vtbl.redirected):
+  if not isNil(vtbl[].redirected):
     vtbl[].vtbl.redirected = miqt_exec_callback_cQKeySequenceEdit_redirected
-  if not isNil(vtbl.sharedPainter):
+  if not isNil(vtbl[].sharedPainter):
     vtbl[].vtbl.sharedPainter = miqt_exec_callback_cQKeySequenceEdit_sharedPainter
-  if not isNil(vtbl.inputMethodEvent):
+  if not isNil(vtbl[].inputMethodEvent):
     vtbl[].vtbl.inputMethodEvent = miqt_exec_callback_cQKeySequenceEdit_inputMethodEvent
-  if not isNil(vtbl.inputMethodQuery):
+  if not isNil(vtbl[].inputMethodQuery):
     vtbl[].vtbl.inputMethodQuery = miqt_exec_callback_cQKeySequenceEdit_inputMethodQuery
-  if not isNil(vtbl.focusNextPrevChild):
+  if not isNil(vtbl[].focusNextPrevChild):
     vtbl[].vtbl.focusNextPrevChild = miqt_exec_callback_cQKeySequenceEdit_focusNextPrevChild
-  if not isNil(vtbl.eventFilter):
+  if not isNil(vtbl[].eventFilter):
     vtbl[].vtbl.eventFilter = miqt_exec_callback_cQKeySequenceEdit_eventFilter
-  if not isNil(vtbl.childEvent):
+  if not isNil(vtbl[].childEvent):
     vtbl[].vtbl.childEvent = miqt_exec_callback_cQKeySequenceEdit_childEvent
-  if not isNil(vtbl.customEvent):
+  if not isNil(vtbl[].customEvent):
     vtbl[].vtbl.customEvent = miqt_exec_callback_cQKeySequenceEdit_customEvent
-  if not isNil(vtbl.connectNotify):
+  if not isNil(vtbl[].connectNotify):
     vtbl[].vtbl.connectNotify = miqt_exec_callback_cQKeySequenceEdit_connectNotify
-  if not isNil(vtbl.disconnectNotify):
+  if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQKeySequenceEdit_disconnectNotify
-  gen_qkeysequenceedit_types.QKeySequenceEdit(h: fcQKeySequenceEdit_new4(addr(vtbl[]), keySequence.h, parent.h))
+  gen_qkeysequenceedit_types.QKeySequenceEdit(h: fcQKeySequenceEdit_new4(addr(vtbl[].vtbl), keySequence.h, parent.h), owned: true)
+
+proc create*(T: type gen_qkeysequenceedit_types.QKeySequenceEdit,
+    parent: gen_qwidget_types.QWidget,
+    vtbl: VirtualQKeySequenceEdit) =
+
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQKeySequenceEditVTable, _: ptr cQKeySequenceEdit) {.cdecl.} =
+    let vtbl = cast[ptr typeof(VirtualQKeySequenceEdit()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQKeySequenceEdit, vtbl)))
+    vtbl[].h = nil
+    vtbl[].owned = false
+  vtbl[].vtbl.metaObject = miqt_exec_method_cQKeySequenceEdit_metaObject
+  vtbl[].vtbl.metacast = miqt_exec_method_cQKeySequenceEdit_metacast
+  vtbl[].vtbl.metacall = miqt_exec_method_cQKeySequenceEdit_metacall
+  vtbl[].vtbl.event = miqt_exec_method_cQKeySequenceEdit_event
+  vtbl[].vtbl.keyPressEvent = miqt_exec_method_cQKeySequenceEdit_keyPressEvent
+  vtbl[].vtbl.keyReleaseEvent = miqt_exec_method_cQKeySequenceEdit_keyReleaseEvent
+  vtbl[].vtbl.timerEvent = miqt_exec_method_cQKeySequenceEdit_timerEvent
+  vtbl[].vtbl.devType = miqt_exec_method_cQKeySequenceEdit_devType
+  vtbl[].vtbl.setVisible = miqt_exec_method_cQKeySequenceEdit_setVisible
+  vtbl[].vtbl.sizeHint = miqt_exec_method_cQKeySequenceEdit_sizeHint
+  vtbl[].vtbl.minimumSizeHint = miqt_exec_method_cQKeySequenceEdit_minimumSizeHint
+  vtbl[].vtbl.heightForWidth = miqt_exec_method_cQKeySequenceEdit_heightForWidth
+  vtbl[].vtbl.hasHeightForWidth = miqt_exec_method_cQKeySequenceEdit_hasHeightForWidth
+  vtbl[].vtbl.paintEngine = miqt_exec_method_cQKeySequenceEdit_paintEngine
+  vtbl[].vtbl.mousePressEvent = miqt_exec_method_cQKeySequenceEdit_mousePressEvent
+  vtbl[].vtbl.mouseReleaseEvent = miqt_exec_method_cQKeySequenceEdit_mouseReleaseEvent
+  vtbl[].vtbl.mouseDoubleClickEvent = miqt_exec_method_cQKeySequenceEdit_mouseDoubleClickEvent
+  vtbl[].vtbl.mouseMoveEvent = miqt_exec_method_cQKeySequenceEdit_mouseMoveEvent
+  vtbl[].vtbl.wheelEvent = miqt_exec_method_cQKeySequenceEdit_wheelEvent
+  vtbl[].vtbl.focusInEvent = miqt_exec_method_cQKeySequenceEdit_focusInEvent
+  vtbl[].vtbl.focusOutEvent = miqt_exec_method_cQKeySequenceEdit_focusOutEvent
+  vtbl[].vtbl.enterEvent = miqt_exec_method_cQKeySequenceEdit_enterEvent
+  vtbl[].vtbl.leaveEvent = miqt_exec_method_cQKeySequenceEdit_leaveEvent
+  vtbl[].vtbl.paintEvent = miqt_exec_method_cQKeySequenceEdit_paintEvent
+  vtbl[].vtbl.moveEvent = miqt_exec_method_cQKeySequenceEdit_moveEvent
+  vtbl[].vtbl.resizeEvent = miqt_exec_method_cQKeySequenceEdit_resizeEvent
+  vtbl[].vtbl.closeEvent = miqt_exec_method_cQKeySequenceEdit_closeEvent
+  vtbl[].vtbl.contextMenuEvent = miqt_exec_method_cQKeySequenceEdit_contextMenuEvent
+  vtbl[].vtbl.tabletEvent = miqt_exec_method_cQKeySequenceEdit_tabletEvent
+  vtbl[].vtbl.actionEvent = miqt_exec_method_cQKeySequenceEdit_actionEvent
+  vtbl[].vtbl.dragEnterEvent = miqt_exec_method_cQKeySequenceEdit_dragEnterEvent
+  vtbl[].vtbl.dragMoveEvent = miqt_exec_method_cQKeySequenceEdit_dragMoveEvent
+  vtbl[].vtbl.dragLeaveEvent = miqt_exec_method_cQKeySequenceEdit_dragLeaveEvent
+  vtbl[].vtbl.dropEvent = miqt_exec_method_cQKeySequenceEdit_dropEvent
+  vtbl[].vtbl.showEvent = miqt_exec_method_cQKeySequenceEdit_showEvent
+  vtbl[].vtbl.hideEvent = miqt_exec_method_cQKeySequenceEdit_hideEvent
+  vtbl[].vtbl.nativeEvent = miqt_exec_method_cQKeySequenceEdit_nativeEvent
+  vtbl[].vtbl.changeEvent = miqt_exec_method_cQKeySequenceEdit_changeEvent
+  vtbl[].vtbl.metric = miqt_exec_method_cQKeySequenceEdit_metric
+  vtbl[].vtbl.initPainter = miqt_exec_method_cQKeySequenceEdit_initPainter
+  vtbl[].vtbl.redirected = miqt_exec_method_cQKeySequenceEdit_redirected
+  vtbl[].vtbl.sharedPainter = miqt_exec_method_cQKeySequenceEdit_sharedPainter
+  vtbl[].vtbl.inputMethodEvent = miqt_exec_method_cQKeySequenceEdit_inputMethodEvent
+  vtbl[].vtbl.inputMethodQuery = miqt_exec_method_cQKeySequenceEdit_inputMethodQuery
+  vtbl[].vtbl.focusNextPrevChild = miqt_exec_method_cQKeySequenceEdit_focusNextPrevChild
+  vtbl[].vtbl.eventFilter = miqt_exec_method_cQKeySequenceEdit_eventFilter
+  vtbl[].vtbl.childEvent = miqt_exec_method_cQKeySequenceEdit_childEvent
+  vtbl[].vtbl.customEvent = miqt_exec_method_cQKeySequenceEdit_customEvent
+  vtbl[].vtbl.connectNotify = miqt_exec_method_cQKeySequenceEdit_connectNotify
+  vtbl[].vtbl.disconnectNotify = miqt_exec_method_cQKeySequenceEdit_disconnectNotify
+  if vtbl[].h != nil: delete(move(vtbl[]))
+  vtbl[].h = fcQKeySequenceEdit_new(addr(vtbl[].vtbl), parent.h)
+  vtbl[].owned = true
+
+proc create*(T: type gen_qkeysequenceedit_types.QKeySequenceEdit,
+    vtbl: VirtualQKeySequenceEdit) =
+
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQKeySequenceEditVTable, _: ptr cQKeySequenceEdit) {.cdecl.} =
+    let vtbl = cast[ptr typeof(VirtualQKeySequenceEdit()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQKeySequenceEdit, vtbl)))
+    vtbl[].h = nil
+    vtbl[].owned = false
+  vtbl[].vtbl.metaObject = miqt_exec_method_cQKeySequenceEdit_metaObject
+  vtbl[].vtbl.metacast = miqt_exec_method_cQKeySequenceEdit_metacast
+  vtbl[].vtbl.metacall = miqt_exec_method_cQKeySequenceEdit_metacall
+  vtbl[].vtbl.event = miqt_exec_method_cQKeySequenceEdit_event
+  vtbl[].vtbl.keyPressEvent = miqt_exec_method_cQKeySequenceEdit_keyPressEvent
+  vtbl[].vtbl.keyReleaseEvent = miqt_exec_method_cQKeySequenceEdit_keyReleaseEvent
+  vtbl[].vtbl.timerEvent = miqt_exec_method_cQKeySequenceEdit_timerEvent
+  vtbl[].vtbl.devType = miqt_exec_method_cQKeySequenceEdit_devType
+  vtbl[].vtbl.setVisible = miqt_exec_method_cQKeySequenceEdit_setVisible
+  vtbl[].vtbl.sizeHint = miqt_exec_method_cQKeySequenceEdit_sizeHint
+  vtbl[].vtbl.minimumSizeHint = miqt_exec_method_cQKeySequenceEdit_minimumSizeHint
+  vtbl[].vtbl.heightForWidth = miqt_exec_method_cQKeySequenceEdit_heightForWidth
+  vtbl[].vtbl.hasHeightForWidth = miqt_exec_method_cQKeySequenceEdit_hasHeightForWidth
+  vtbl[].vtbl.paintEngine = miqt_exec_method_cQKeySequenceEdit_paintEngine
+  vtbl[].vtbl.mousePressEvent = miqt_exec_method_cQKeySequenceEdit_mousePressEvent
+  vtbl[].vtbl.mouseReleaseEvent = miqt_exec_method_cQKeySequenceEdit_mouseReleaseEvent
+  vtbl[].vtbl.mouseDoubleClickEvent = miqt_exec_method_cQKeySequenceEdit_mouseDoubleClickEvent
+  vtbl[].vtbl.mouseMoveEvent = miqt_exec_method_cQKeySequenceEdit_mouseMoveEvent
+  vtbl[].vtbl.wheelEvent = miqt_exec_method_cQKeySequenceEdit_wheelEvent
+  vtbl[].vtbl.focusInEvent = miqt_exec_method_cQKeySequenceEdit_focusInEvent
+  vtbl[].vtbl.focusOutEvent = miqt_exec_method_cQKeySequenceEdit_focusOutEvent
+  vtbl[].vtbl.enterEvent = miqt_exec_method_cQKeySequenceEdit_enterEvent
+  vtbl[].vtbl.leaveEvent = miqt_exec_method_cQKeySequenceEdit_leaveEvent
+  vtbl[].vtbl.paintEvent = miqt_exec_method_cQKeySequenceEdit_paintEvent
+  vtbl[].vtbl.moveEvent = miqt_exec_method_cQKeySequenceEdit_moveEvent
+  vtbl[].vtbl.resizeEvent = miqt_exec_method_cQKeySequenceEdit_resizeEvent
+  vtbl[].vtbl.closeEvent = miqt_exec_method_cQKeySequenceEdit_closeEvent
+  vtbl[].vtbl.contextMenuEvent = miqt_exec_method_cQKeySequenceEdit_contextMenuEvent
+  vtbl[].vtbl.tabletEvent = miqt_exec_method_cQKeySequenceEdit_tabletEvent
+  vtbl[].vtbl.actionEvent = miqt_exec_method_cQKeySequenceEdit_actionEvent
+  vtbl[].vtbl.dragEnterEvent = miqt_exec_method_cQKeySequenceEdit_dragEnterEvent
+  vtbl[].vtbl.dragMoveEvent = miqt_exec_method_cQKeySequenceEdit_dragMoveEvent
+  vtbl[].vtbl.dragLeaveEvent = miqt_exec_method_cQKeySequenceEdit_dragLeaveEvent
+  vtbl[].vtbl.dropEvent = miqt_exec_method_cQKeySequenceEdit_dropEvent
+  vtbl[].vtbl.showEvent = miqt_exec_method_cQKeySequenceEdit_showEvent
+  vtbl[].vtbl.hideEvent = miqt_exec_method_cQKeySequenceEdit_hideEvent
+  vtbl[].vtbl.nativeEvent = miqt_exec_method_cQKeySequenceEdit_nativeEvent
+  vtbl[].vtbl.changeEvent = miqt_exec_method_cQKeySequenceEdit_changeEvent
+  vtbl[].vtbl.metric = miqt_exec_method_cQKeySequenceEdit_metric
+  vtbl[].vtbl.initPainter = miqt_exec_method_cQKeySequenceEdit_initPainter
+  vtbl[].vtbl.redirected = miqt_exec_method_cQKeySequenceEdit_redirected
+  vtbl[].vtbl.sharedPainter = miqt_exec_method_cQKeySequenceEdit_sharedPainter
+  vtbl[].vtbl.inputMethodEvent = miqt_exec_method_cQKeySequenceEdit_inputMethodEvent
+  vtbl[].vtbl.inputMethodQuery = miqt_exec_method_cQKeySequenceEdit_inputMethodQuery
+  vtbl[].vtbl.focusNextPrevChild = miqt_exec_method_cQKeySequenceEdit_focusNextPrevChild
+  vtbl[].vtbl.eventFilter = miqt_exec_method_cQKeySequenceEdit_eventFilter
+  vtbl[].vtbl.childEvent = miqt_exec_method_cQKeySequenceEdit_childEvent
+  vtbl[].vtbl.customEvent = miqt_exec_method_cQKeySequenceEdit_customEvent
+  vtbl[].vtbl.connectNotify = miqt_exec_method_cQKeySequenceEdit_connectNotify
+  vtbl[].vtbl.disconnectNotify = miqt_exec_method_cQKeySequenceEdit_disconnectNotify
+  if vtbl[].h != nil: delete(move(vtbl[]))
+  vtbl[].h = fcQKeySequenceEdit_new2(addr(vtbl[].vtbl), )
+  vtbl[].owned = true
+
+proc create*(T: type gen_qkeysequenceedit_types.QKeySequenceEdit,
+    keySequence: gen_qkeysequence_types.QKeySequence,
+    vtbl: VirtualQKeySequenceEdit) =
+
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQKeySequenceEditVTable, _: ptr cQKeySequenceEdit) {.cdecl.} =
+    let vtbl = cast[ptr typeof(VirtualQKeySequenceEdit()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQKeySequenceEdit, vtbl)))
+    vtbl[].h = nil
+    vtbl[].owned = false
+  vtbl[].vtbl.metaObject = miqt_exec_method_cQKeySequenceEdit_metaObject
+  vtbl[].vtbl.metacast = miqt_exec_method_cQKeySequenceEdit_metacast
+  vtbl[].vtbl.metacall = miqt_exec_method_cQKeySequenceEdit_metacall
+  vtbl[].vtbl.event = miqt_exec_method_cQKeySequenceEdit_event
+  vtbl[].vtbl.keyPressEvent = miqt_exec_method_cQKeySequenceEdit_keyPressEvent
+  vtbl[].vtbl.keyReleaseEvent = miqt_exec_method_cQKeySequenceEdit_keyReleaseEvent
+  vtbl[].vtbl.timerEvent = miqt_exec_method_cQKeySequenceEdit_timerEvent
+  vtbl[].vtbl.devType = miqt_exec_method_cQKeySequenceEdit_devType
+  vtbl[].vtbl.setVisible = miqt_exec_method_cQKeySequenceEdit_setVisible
+  vtbl[].vtbl.sizeHint = miqt_exec_method_cQKeySequenceEdit_sizeHint
+  vtbl[].vtbl.minimumSizeHint = miqt_exec_method_cQKeySequenceEdit_minimumSizeHint
+  vtbl[].vtbl.heightForWidth = miqt_exec_method_cQKeySequenceEdit_heightForWidth
+  vtbl[].vtbl.hasHeightForWidth = miqt_exec_method_cQKeySequenceEdit_hasHeightForWidth
+  vtbl[].vtbl.paintEngine = miqt_exec_method_cQKeySequenceEdit_paintEngine
+  vtbl[].vtbl.mousePressEvent = miqt_exec_method_cQKeySequenceEdit_mousePressEvent
+  vtbl[].vtbl.mouseReleaseEvent = miqt_exec_method_cQKeySequenceEdit_mouseReleaseEvent
+  vtbl[].vtbl.mouseDoubleClickEvent = miqt_exec_method_cQKeySequenceEdit_mouseDoubleClickEvent
+  vtbl[].vtbl.mouseMoveEvent = miqt_exec_method_cQKeySequenceEdit_mouseMoveEvent
+  vtbl[].vtbl.wheelEvent = miqt_exec_method_cQKeySequenceEdit_wheelEvent
+  vtbl[].vtbl.focusInEvent = miqt_exec_method_cQKeySequenceEdit_focusInEvent
+  vtbl[].vtbl.focusOutEvent = miqt_exec_method_cQKeySequenceEdit_focusOutEvent
+  vtbl[].vtbl.enterEvent = miqt_exec_method_cQKeySequenceEdit_enterEvent
+  vtbl[].vtbl.leaveEvent = miqt_exec_method_cQKeySequenceEdit_leaveEvent
+  vtbl[].vtbl.paintEvent = miqt_exec_method_cQKeySequenceEdit_paintEvent
+  vtbl[].vtbl.moveEvent = miqt_exec_method_cQKeySequenceEdit_moveEvent
+  vtbl[].vtbl.resizeEvent = miqt_exec_method_cQKeySequenceEdit_resizeEvent
+  vtbl[].vtbl.closeEvent = miqt_exec_method_cQKeySequenceEdit_closeEvent
+  vtbl[].vtbl.contextMenuEvent = miqt_exec_method_cQKeySequenceEdit_contextMenuEvent
+  vtbl[].vtbl.tabletEvent = miqt_exec_method_cQKeySequenceEdit_tabletEvent
+  vtbl[].vtbl.actionEvent = miqt_exec_method_cQKeySequenceEdit_actionEvent
+  vtbl[].vtbl.dragEnterEvent = miqt_exec_method_cQKeySequenceEdit_dragEnterEvent
+  vtbl[].vtbl.dragMoveEvent = miqt_exec_method_cQKeySequenceEdit_dragMoveEvent
+  vtbl[].vtbl.dragLeaveEvent = miqt_exec_method_cQKeySequenceEdit_dragLeaveEvent
+  vtbl[].vtbl.dropEvent = miqt_exec_method_cQKeySequenceEdit_dropEvent
+  vtbl[].vtbl.showEvent = miqt_exec_method_cQKeySequenceEdit_showEvent
+  vtbl[].vtbl.hideEvent = miqt_exec_method_cQKeySequenceEdit_hideEvent
+  vtbl[].vtbl.nativeEvent = miqt_exec_method_cQKeySequenceEdit_nativeEvent
+  vtbl[].vtbl.changeEvent = miqt_exec_method_cQKeySequenceEdit_changeEvent
+  vtbl[].vtbl.metric = miqt_exec_method_cQKeySequenceEdit_metric
+  vtbl[].vtbl.initPainter = miqt_exec_method_cQKeySequenceEdit_initPainter
+  vtbl[].vtbl.redirected = miqt_exec_method_cQKeySequenceEdit_redirected
+  vtbl[].vtbl.sharedPainter = miqt_exec_method_cQKeySequenceEdit_sharedPainter
+  vtbl[].vtbl.inputMethodEvent = miqt_exec_method_cQKeySequenceEdit_inputMethodEvent
+  vtbl[].vtbl.inputMethodQuery = miqt_exec_method_cQKeySequenceEdit_inputMethodQuery
+  vtbl[].vtbl.focusNextPrevChild = miqt_exec_method_cQKeySequenceEdit_focusNextPrevChild
+  vtbl[].vtbl.eventFilter = miqt_exec_method_cQKeySequenceEdit_eventFilter
+  vtbl[].vtbl.childEvent = miqt_exec_method_cQKeySequenceEdit_childEvent
+  vtbl[].vtbl.customEvent = miqt_exec_method_cQKeySequenceEdit_customEvent
+  vtbl[].vtbl.connectNotify = miqt_exec_method_cQKeySequenceEdit_connectNotify
+  vtbl[].vtbl.disconnectNotify = miqt_exec_method_cQKeySequenceEdit_disconnectNotify
+  if vtbl[].h != nil: delete(move(vtbl[]))
+  vtbl[].h = fcQKeySequenceEdit_new3(addr(vtbl[].vtbl), keySequence.h)
+  vtbl[].owned = true
+
+proc create*(T: type gen_qkeysequenceedit_types.QKeySequenceEdit,
+    keySequence: gen_qkeysequence_types.QKeySequence, parent: gen_qwidget_types.QWidget,
+    vtbl: VirtualQKeySequenceEdit) =
+
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQKeySequenceEditVTable, _: ptr cQKeySequenceEdit) {.cdecl.} =
+    let vtbl = cast[ptr typeof(VirtualQKeySequenceEdit()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQKeySequenceEdit, vtbl)))
+    vtbl[].h = nil
+    vtbl[].owned = false
+  vtbl[].vtbl.metaObject = miqt_exec_method_cQKeySequenceEdit_metaObject
+  vtbl[].vtbl.metacast = miqt_exec_method_cQKeySequenceEdit_metacast
+  vtbl[].vtbl.metacall = miqt_exec_method_cQKeySequenceEdit_metacall
+  vtbl[].vtbl.event = miqt_exec_method_cQKeySequenceEdit_event
+  vtbl[].vtbl.keyPressEvent = miqt_exec_method_cQKeySequenceEdit_keyPressEvent
+  vtbl[].vtbl.keyReleaseEvent = miqt_exec_method_cQKeySequenceEdit_keyReleaseEvent
+  vtbl[].vtbl.timerEvent = miqt_exec_method_cQKeySequenceEdit_timerEvent
+  vtbl[].vtbl.devType = miqt_exec_method_cQKeySequenceEdit_devType
+  vtbl[].vtbl.setVisible = miqt_exec_method_cQKeySequenceEdit_setVisible
+  vtbl[].vtbl.sizeHint = miqt_exec_method_cQKeySequenceEdit_sizeHint
+  vtbl[].vtbl.minimumSizeHint = miqt_exec_method_cQKeySequenceEdit_minimumSizeHint
+  vtbl[].vtbl.heightForWidth = miqt_exec_method_cQKeySequenceEdit_heightForWidth
+  vtbl[].vtbl.hasHeightForWidth = miqt_exec_method_cQKeySequenceEdit_hasHeightForWidth
+  vtbl[].vtbl.paintEngine = miqt_exec_method_cQKeySequenceEdit_paintEngine
+  vtbl[].vtbl.mousePressEvent = miqt_exec_method_cQKeySequenceEdit_mousePressEvent
+  vtbl[].vtbl.mouseReleaseEvent = miqt_exec_method_cQKeySequenceEdit_mouseReleaseEvent
+  vtbl[].vtbl.mouseDoubleClickEvent = miqt_exec_method_cQKeySequenceEdit_mouseDoubleClickEvent
+  vtbl[].vtbl.mouseMoveEvent = miqt_exec_method_cQKeySequenceEdit_mouseMoveEvent
+  vtbl[].vtbl.wheelEvent = miqt_exec_method_cQKeySequenceEdit_wheelEvent
+  vtbl[].vtbl.focusInEvent = miqt_exec_method_cQKeySequenceEdit_focusInEvent
+  vtbl[].vtbl.focusOutEvent = miqt_exec_method_cQKeySequenceEdit_focusOutEvent
+  vtbl[].vtbl.enterEvent = miqt_exec_method_cQKeySequenceEdit_enterEvent
+  vtbl[].vtbl.leaveEvent = miqt_exec_method_cQKeySequenceEdit_leaveEvent
+  vtbl[].vtbl.paintEvent = miqt_exec_method_cQKeySequenceEdit_paintEvent
+  vtbl[].vtbl.moveEvent = miqt_exec_method_cQKeySequenceEdit_moveEvent
+  vtbl[].vtbl.resizeEvent = miqt_exec_method_cQKeySequenceEdit_resizeEvent
+  vtbl[].vtbl.closeEvent = miqt_exec_method_cQKeySequenceEdit_closeEvent
+  vtbl[].vtbl.contextMenuEvent = miqt_exec_method_cQKeySequenceEdit_contextMenuEvent
+  vtbl[].vtbl.tabletEvent = miqt_exec_method_cQKeySequenceEdit_tabletEvent
+  vtbl[].vtbl.actionEvent = miqt_exec_method_cQKeySequenceEdit_actionEvent
+  vtbl[].vtbl.dragEnterEvent = miqt_exec_method_cQKeySequenceEdit_dragEnterEvent
+  vtbl[].vtbl.dragMoveEvent = miqt_exec_method_cQKeySequenceEdit_dragMoveEvent
+  vtbl[].vtbl.dragLeaveEvent = miqt_exec_method_cQKeySequenceEdit_dragLeaveEvent
+  vtbl[].vtbl.dropEvent = miqt_exec_method_cQKeySequenceEdit_dropEvent
+  vtbl[].vtbl.showEvent = miqt_exec_method_cQKeySequenceEdit_showEvent
+  vtbl[].vtbl.hideEvent = miqt_exec_method_cQKeySequenceEdit_hideEvent
+  vtbl[].vtbl.nativeEvent = miqt_exec_method_cQKeySequenceEdit_nativeEvent
+  vtbl[].vtbl.changeEvent = miqt_exec_method_cQKeySequenceEdit_changeEvent
+  vtbl[].vtbl.metric = miqt_exec_method_cQKeySequenceEdit_metric
+  vtbl[].vtbl.initPainter = miqt_exec_method_cQKeySequenceEdit_initPainter
+  vtbl[].vtbl.redirected = miqt_exec_method_cQKeySequenceEdit_redirected
+  vtbl[].vtbl.sharedPainter = miqt_exec_method_cQKeySequenceEdit_sharedPainter
+  vtbl[].vtbl.inputMethodEvent = miqt_exec_method_cQKeySequenceEdit_inputMethodEvent
+  vtbl[].vtbl.inputMethodQuery = miqt_exec_method_cQKeySequenceEdit_inputMethodQuery
+  vtbl[].vtbl.focusNextPrevChild = miqt_exec_method_cQKeySequenceEdit_focusNextPrevChild
+  vtbl[].vtbl.eventFilter = miqt_exec_method_cQKeySequenceEdit_eventFilter
+  vtbl[].vtbl.childEvent = miqt_exec_method_cQKeySequenceEdit_childEvent
+  vtbl[].vtbl.customEvent = miqt_exec_method_cQKeySequenceEdit_customEvent
+  vtbl[].vtbl.connectNotify = miqt_exec_method_cQKeySequenceEdit_connectNotify
+  vtbl[].vtbl.disconnectNotify = miqt_exec_method_cQKeySequenceEdit_disconnectNotify
+  if vtbl[].h != nil: delete(move(vtbl[]))
+  vtbl[].h = fcQKeySequenceEdit_new4(addr(vtbl[].vtbl), keySequence.h, parent.h)
+  vtbl[].owned = true
 
 proc staticMetaObject*(_: type gen_qkeysequenceedit_types.QKeySequenceEdit): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQKeySequenceEdit_staticMetaObject())
-proc delete*(self: gen_qkeysequenceedit_types.QKeySequenceEdit) =
-  fcQKeySequenceEdit_delete(self.h)

@@ -30,7 +30,7 @@ func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
     else:
       copyMem(addr result[0], unsafeAddr v[0], v.len)
 
-const cflags = gorge("pkg-config --cflags Qt5Quick")  & " -fPIC"
+const cflags = gorge("pkg-config --cflags Qt5Quick") & " -fPIC"
 {.compile("gen_qsgabstractrenderer.cpp", cflags).}
 
 
@@ -103,10 +103,9 @@ proc fcQSGAbstractRenderer_protectedbase_senderSignalIndex(self: pointer, ): cin
 proc fcQSGAbstractRenderer_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QSGAbstractRenderer_protectedbase_receivers".}
 proc fcQSGAbstractRenderer_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QSGAbstractRenderer_protectedbase_isSignalConnected".}
 proc fcQSGAbstractRenderer_staticMetaObject(): pointer {.importc: "QSGAbstractRenderer_staticMetaObject".}
-proc fcQSGAbstractRenderer_delete(self: pointer) {.importc: "QSGAbstractRenderer_delete".}
 
 proc metaObject*(self: gen_qsgabstractrenderer_types.QSGAbstractRenderer, ): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQSGAbstractRenderer_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQSGAbstractRenderer_metaObject(self.h), owned: false)
 
 proc metacast*(self: gen_qsgabstractrenderer_types.QSGAbstractRenderer, param1: cstring): pointer =
   fcQSGAbstractRenderer_metacast(self.h, param1)
@@ -130,7 +129,7 @@ proc setRootNode*(self: gen_qsgabstractrenderer_types.QSGAbstractRenderer, node:
   fcQSGAbstractRenderer_setRootNode(self.h, node.h)
 
 proc rootNode*(self: gen_qsgabstractrenderer_types.QSGAbstractRenderer, ): gen_qsgnode_types.QSGRootNode =
-  gen_qsgnode_types.QSGRootNode(h: fcQSGAbstractRenderer_rootNode(self.h))
+  gen_qsgnode_types.QSGRootNode(h: fcQSGAbstractRenderer_rootNode(self.h), owned: false)
 
 proc setDeviceRect*(self: gen_qsgabstractrenderer_types.QSGAbstractRenderer, rect: gen_qrect_types.QRect): void =
   fcQSGAbstractRenderer_setDeviceRect(self.h, rect.h)
@@ -139,7 +138,7 @@ proc setDeviceRect*(self: gen_qsgabstractrenderer_types.QSGAbstractRenderer, siz
   fcQSGAbstractRenderer_setDeviceRectWithSize(self.h, size.h)
 
 proc deviceRect*(self: gen_qsgabstractrenderer_types.QSGAbstractRenderer, ): gen_qrect_types.QRect =
-  gen_qrect_types.QRect(h: fcQSGAbstractRenderer_deviceRect(self.h))
+  gen_qrect_types.QRect(h: fcQSGAbstractRenderer_deviceRect(self.h), owned: true)
 
 proc setViewportRect*(self: gen_qsgabstractrenderer_types.QSGAbstractRenderer, rect: gen_qrect_types.QRect): void =
   fcQSGAbstractRenderer_setViewportRect(self.h, rect.h)
@@ -148,7 +147,7 @@ proc setViewportRect*(self: gen_qsgabstractrenderer_types.QSGAbstractRenderer, s
   fcQSGAbstractRenderer_setViewportRectWithSize(self.h, size.h)
 
 proc viewportRect*(self: gen_qsgabstractrenderer_types.QSGAbstractRenderer, ): gen_qrect_types.QRect =
-  gen_qrect_types.QRect(h: fcQSGAbstractRenderer_viewportRect(self.h))
+  gen_qrect_types.QRect(h: fcQSGAbstractRenderer_viewportRect(self.h), owned: true)
 
 proc setProjectionMatrixToRect*(self: gen_qsgabstractrenderer_types.QSGAbstractRenderer, rect: gen_qrect_types.QRectF): void =
   fcQSGAbstractRenderer_setProjectionMatrixToRect(self.h, rect.h)
@@ -163,16 +162,16 @@ proc setProjectionMatrixWithNativeNDC*(self: gen_qsgabstractrenderer_types.QSGAb
   fcQSGAbstractRenderer_setProjectionMatrixWithNativeNDC(self.h, matrix.h)
 
 proc projectionMatrix*(self: gen_qsgabstractrenderer_types.QSGAbstractRenderer, ): gen_qmatrix4x4_types.QMatrix4x4 =
-  gen_qmatrix4x4_types.QMatrix4x4(h: fcQSGAbstractRenderer_projectionMatrix(self.h))
+  gen_qmatrix4x4_types.QMatrix4x4(h: fcQSGAbstractRenderer_projectionMatrix(self.h), owned: true)
 
 proc projectionMatrixWithNativeNDC*(self: gen_qsgabstractrenderer_types.QSGAbstractRenderer, ): gen_qmatrix4x4_types.QMatrix4x4 =
-  gen_qmatrix4x4_types.QMatrix4x4(h: fcQSGAbstractRenderer_projectionMatrixWithNativeNDC(self.h))
+  gen_qmatrix4x4_types.QMatrix4x4(h: fcQSGAbstractRenderer_projectionMatrixWithNativeNDC(self.h), owned: true)
 
 proc setClearColor*(self: gen_qsgabstractrenderer_types.QSGAbstractRenderer, color: gen_qcolor_types.QColor): void =
   fcQSGAbstractRenderer_setClearColor(self.h, color.h)
 
 proc clearColor*(self: gen_qsgabstractrenderer_types.QSGAbstractRenderer, ): gen_qcolor_types.QColor =
-  gen_qcolor_types.QColor(h: fcQSGAbstractRenderer_clearColor(self.h))
+  gen_qcolor_types.QColor(h: fcQSGAbstractRenderer_clearColor(self.h), owned: true)
 
 proc setClearMode*(self: gen_qsgabstractrenderer_types.QSGAbstractRenderer, mode: cint): void =
   fcQSGAbstractRenderer_setClearMode(self.h, cint(mode))
@@ -226,7 +225,7 @@ proc trUtf8*(_: type gen_qsgabstractrenderer_types.QSGAbstractRenderer, s: cstri
   vx_ret
 
 proc sender*(self: gen_qsgabstractrenderer_types.QSGAbstractRenderer, ): gen_qobject_types.QObject =
-  gen_qobject_types.QObject(h: fcQSGAbstractRenderer_protectedbase_sender(self.h))
+  gen_qobject_types.QObject(h: fcQSGAbstractRenderer_protectedbase_sender(self.h), owned: false)
 
 proc senderSignalIndex*(self: gen_qsgabstractrenderer_types.QSGAbstractRenderer, ): cint =
   fcQSGAbstractRenderer_protectedbase_senderSignalIndex(self.h)
@@ -239,5 +238,3 @@ proc isSignalConnected*(self: gen_qsgabstractrenderer_types.QSGAbstractRenderer,
 
 proc staticMetaObject*(_: type gen_qsgabstractrenderer_types.QSGAbstractRenderer): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQSGAbstractRenderer_staticMetaObject())
-proc delete*(self: gen_qsgabstractrenderer_types.QSGAbstractRenderer) =
-  fcQSGAbstractRenderer_delete(self.h)

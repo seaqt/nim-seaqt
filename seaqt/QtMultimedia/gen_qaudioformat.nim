@@ -30,9 +30,6 @@ func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
     else:
       copyMem(addr result[0], unsafeAddr v[0], v.len)
 
-const cflags = gorge("pkg-config --cflags Qt5Multimedia")  & " -fPIC"
-{.compile("gen_qaudioformat.cpp", cflags).}
-
 
 type QAudioFormatSampleTypeEnum* = distinct cint
 template Unknown*(_: type QAudioFormatSampleTypeEnum): untyped = 0
@@ -77,7 +74,6 @@ proc fcQAudioFormat_durationForFrames(self: pointer, frameCount: cint): clonglon
 proc fcQAudioFormat_bytesPerFrame(self: pointer, ): cint {.importc: "QAudioFormat_bytesPerFrame".}
 proc fcQAudioFormat_new(): ptr cQAudioFormat {.importc: "QAudioFormat_new".}
 proc fcQAudioFormat_new2(other: pointer): ptr cQAudioFormat {.importc: "QAudioFormat_new2".}
-proc fcQAudioFormat_delete(self: pointer) {.importc: "QAudioFormat_delete".}
 
 proc operatorAssign*(self: gen_qaudioformat_types.QAudioFormat, other: gen_qaudioformat_types.QAudioFormat): void =
   fcQAudioFormat_operatorAssign(self.h, other.h)
@@ -152,11 +148,9 @@ proc bytesPerFrame*(self: gen_qaudioformat_types.QAudioFormat, ): cint =
   fcQAudioFormat_bytesPerFrame(self.h)
 
 proc create*(T: type gen_qaudioformat_types.QAudioFormat): gen_qaudioformat_types.QAudioFormat =
-  gen_qaudioformat_types.QAudioFormat(h: fcQAudioFormat_new())
+  gen_qaudioformat_types.QAudioFormat(h: fcQAudioFormat_new(), owned: true)
 
 proc create*(T: type gen_qaudioformat_types.QAudioFormat,
     other: gen_qaudioformat_types.QAudioFormat): gen_qaudioformat_types.QAudioFormat =
-  gen_qaudioformat_types.QAudioFormat(h: fcQAudioFormat_new2(other.h))
+  gen_qaudioformat_types.QAudioFormat(h: fcQAudioFormat_new2(other.h), owned: true)
 
-proc delete*(self: gen_qaudioformat_types.QAudioFormat) =
-  fcQAudioFormat_delete(self.h)

@@ -30,7 +30,7 @@ func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
     else:
       copyMem(addr result[0], unsafeAddr v[0], v.len)
 
-const cflags = gorge("pkg-config --cflags Qt5Widgets")  & " -fPIC"
+const cflags = gorge("pkg-config --cflags Qt5Widgets") & " -fPIC"
 {.compile("gen_qgraphicsscene.cpp", cflags).}
 
 
@@ -237,7 +237,7 @@ proc fcQGraphicsScene_invalidate5(self: pointer, x: float64, y: float64, w: floa
 proc fcQGraphicsScene_update1(self: pointer, rect: pointer): void {.importc: "QGraphicsScene_update1".}
 proc fcQGraphicsScene_invalidate1(self: pointer, rect: pointer): void {.importc: "QGraphicsScene_invalidate1".}
 proc fcQGraphicsScene_invalidate22(self: pointer, rect: pointer, layers: cint): void {.importc: "QGraphicsScene_invalidate22".}
-type cQGraphicsSceneVTable = object
+type cQGraphicsSceneVTable {.pure.} = object
   destructor*: proc(vtbl: ptr cQGraphicsSceneVTable, self: ptr cQGraphicsScene) {.cdecl, raises:[], gcsafe.}
   metaObject*: proc(vtbl, self: pointer, ): pointer {.cdecl, raises: [], gcsafe.}
   metacast*: proc(vtbl, self: pointer, param1: cstring): pointer {.cdecl, raises: [], gcsafe.}
@@ -309,10 +309,9 @@ proc fcQGraphicsScene_new4(vtbl: pointer, parent: pointer): ptr cQGraphicsScene 
 proc fcQGraphicsScene_new5(vtbl: pointer, sceneRect: pointer, parent: pointer): ptr cQGraphicsScene {.importc: "QGraphicsScene_new5".}
 proc fcQGraphicsScene_new6(vtbl: pointer, x: float64, y: float64, width: float64, height: float64, parent: pointer): ptr cQGraphicsScene {.importc: "QGraphicsScene_new6".}
 proc fcQGraphicsScene_staticMetaObject(): pointer {.importc: "QGraphicsScene_staticMetaObject".}
-proc fcQGraphicsScene_delete(self: pointer) {.importc: "QGraphicsScene_delete".}
 
 proc metaObject*(self: gen_qgraphicsscene_types.QGraphicsScene, ): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQGraphicsScene_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQGraphicsScene_metaObject(self.h), owned: false)
 
 proc metacast*(self: gen_qgraphicsscene_types.QGraphicsScene, param1: cstring): pointer =
   fcQGraphicsScene_metacast(self.h, param1)
@@ -333,7 +332,7 @@ proc trUtf8*(_: type gen_qgraphicsscene_types.QGraphicsScene, s: cstring): strin
   vx_ret
 
 proc sceneRect*(self: gen_qgraphicsscene_types.QGraphicsScene, ): gen_qrect_types.QRectF =
-  gen_qrect_types.QRectF(h: fcQGraphicsScene_sceneRect(self.h))
+  gen_qrect_types.QRectF(h: fcQGraphicsScene_sceneRect(self.h), owned: true)
 
 proc width*(self: gen_qgraphicsscene_types.QGraphicsScene, ): float64 =
   fcQGraphicsScene_width(self.h)
@@ -369,14 +368,14 @@ proc setBspTreeDepth*(self: gen_qgraphicsscene_types.QGraphicsScene, depth: cint
   fcQGraphicsScene_setBspTreeDepth(self.h, depth)
 
 proc itemsBoundingRect*(self: gen_qgraphicsscene_types.QGraphicsScene, ): gen_qrect_types.QRectF =
-  gen_qrect_types.QRectF(h: fcQGraphicsScene_itemsBoundingRect(self.h))
+  gen_qrect_types.QRectF(h: fcQGraphicsScene_itemsBoundingRect(self.h), owned: true)
 
 proc items*(self: gen_qgraphicsscene_types.QGraphicsScene, ): seq[gen_qgraphicsitem_types.QGraphicsItem] =
   var v_ma = fcQGraphicsScene_items(self.h)
   var vx_ret = newSeq[gen_qgraphicsitem_types.QGraphicsItem](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
-    vx_ret[i] = gen_qgraphicsitem_types.QGraphicsItem(h: v_outCast[i])
+    vx_ret[i] = gen_qgraphicsitem_types.QGraphicsItem(h: v_outCast[i], owned: false)
   c_free(v_ma.data)
   vx_ret
 
@@ -385,7 +384,7 @@ proc items*(self: gen_qgraphicsscene_types.QGraphicsScene, pos: gen_qpoint_types
   var vx_ret = newSeq[gen_qgraphicsitem_types.QGraphicsItem](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
-    vx_ret[i] = gen_qgraphicsitem_types.QGraphicsItem(h: v_outCast[i])
+    vx_ret[i] = gen_qgraphicsitem_types.QGraphicsItem(h: v_outCast[i], owned: false)
   c_free(v_ma.data)
   vx_ret
 
@@ -394,7 +393,7 @@ proc items*(self: gen_qgraphicsscene_types.QGraphicsScene, rect: gen_qrect_types
   var vx_ret = newSeq[gen_qgraphicsitem_types.QGraphicsItem](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
-    vx_ret[i] = gen_qgraphicsitem_types.QGraphicsItem(h: v_outCast[i])
+    vx_ret[i] = gen_qgraphicsitem_types.QGraphicsItem(h: v_outCast[i], owned: false)
   c_free(v_ma.data)
   vx_ret
 
@@ -403,7 +402,7 @@ proc items*(self: gen_qgraphicsscene_types.QGraphicsScene, path: gen_qpainterpat
   var vx_ret = newSeq[gen_qgraphicsitem_types.QGraphicsItem](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
-    vx_ret[i] = gen_qgraphicsitem_types.QGraphicsItem(h: v_outCast[i])
+    vx_ret[i] = gen_qgraphicsitem_types.QGraphicsItem(h: v_outCast[i], owned: false)
   c_free(v_ma.data)
   vx_ret
 
@@ -412,36 +411,36 @@ proc collidingItems*(self: gen_qgraphicsscene_types.QGraphicsScene, item: gen_qg
   var vx_ret = newSeq[gen_qgraphicsitem_types.QGraphicsItem](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
-    vx_ret[i] = gen_qgraphicsitem_types.QGraphicsItem(h: v_outCast[i])
+    vx_ret[i] = gen_qgraphicsitem_types.QGraphicsItem(h: v_outCast[i], owned: false)
   c_free(v_ma.data)
   vx_ret
 
 proc itemAt*(self: gen_qgraphicsscene_types.QGraphicsScene, pos: gen_qpoint_types.QPointF, deviceTransform: gen_qtransform_types.QTransform): gen_qgraphicsitem_types.QGraphicsItem =
-  gen_qgraphicsitem_types.QGraphicsItem(h: fcQGraphicsScene_itemAt(self.h, pos.h, deviceTransform.h))
+  gen_qgraphicsitem_types.QGraphicsItem(h: fcQGraphicsScene_itemAt(self.h, pos.h, deviceTransform.h), owned: false)
 
 proc items*(self: gen_qgraphicsscene_types.QGraphicsScene, x: float64, y: float64, w: float64, h: float64, mode: cint, order: cint): seq[gen_qgraphicsitem_types.QGraphicsItem] =
   var v_ma = fcQGraphicsScene_items2(self.h, x, y, w, h, cint(mode), cint(order))
   var vx_ret = newSeq[gen_qgraphicsitem_types.QGraphicsItem](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
-    vx_ret[i] = gen_qgraphicsitem_types.QGraphicsItem(h: v_outCast[i])
+    vx_ret[i] = gen_qgraphicsitem_types.QGraphicsItem(h: v_outCast[i], owned: false)
   c_free(v_ma.data)
   vx_ret
 
 proc itemAt*(self: gen_qgraphicsscene_types.QGraphicsScene, x: float64, y: float64, deviceTransform: gen_qtransform_types.QTransform): gen_qgraphicsitem_types.QGraphicsItem =
-  gen_qgraphicsitem_types.QGraphicsItem(h: fcQGraphicsScene_itemAt2(self.h, x, y, deviceTransform.h))
+  gen_qgraphicsitem_types.QGraphicsItem(h: fcQGraphicsScene_itemAt2(self.h, x, y, deviceTransform.h), owned: false)
 
 proc selectedItems*(self: gen_qgraphicsscene_types.QGraphicsScene, ): seq[gen_qgraphicsitem_types.QGraphicsItem] =
   var v_ma = fcQGraphicsScene_selectedItems(self.h)
   var vx_ret = newSeq[gen_qgraphicsitem_types.QGraphicsItem](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
-    vx_ret[i] = gen_qgraphicsitem_types.QGraphicsItem(h: v_outCast[i])
+    vx_ret[i] = gen_qgraphicsitem_types.QGraphicsItem(h: v_outCast[i], owned: false)
   c_free(v_ma.data)
   vx_ret
 
 proc selectionArea*(self: gen_qgraphicsscene_types.QGraphicsScene, ): gen_qpainterpath_types.QPainterPath =
-  gen_qpainterpath_types.QPainterPath(h: fcQGraphicsScene_selectionArea(self.h))
+  gen_qpainterpath_types.QPainterPath(h: fcQGraphicsScene_selectionArea(self.h), owned: true)
 
 proc setSelectionArea*(self: gen_qgraphicsscene_types.QGraphicsScene, path: gen_qpainterpath_types.QPainterPath, deviceTransform: gen_qtransform_types.QTransform): void =
   fcQGraphicsScene_setSelectionArea(self.h, path.h, deviceTransform.h)
@@ -457,7 +456,7 @@ proc createItemGroup*(self: gen_qgraphicsscene_types.QGraphicsScene, items: seq[
   for i in 0..<len(items):
     items_CArray[i] = items[i].h
 
-  gen_qgraphicsitem_types.QGraphicsItemGroup(h: fcQGraphicsScene_createItemGroup(self.h, struct_miqt_array(len: csize_t(len(items)), data: if len(items) == 0: nil else: addr(items_CArray[0]))))
+  gen_qgraphicsitem_types.QGraphicsItemGroup(h: fcQGraphicsScene_createItemGroup(self.h, struct_miqt_array(len: csize_t(len(items)), data: if len(items) == 0: nil else: addr(items_CArray[0]))), owned: false)
 
 proc destroyItemGroup*(self: gen_qgraphicsscene_types.QGraphicsScene, group: gen_qgraphicsitem_types.QGraphicsItemGroup): void =
   fcQGraphicsScene_destroyItemGroup(self.h, group.h)
@@ -466,43 +465,43 @@ proc addItem*(self: gen_qgraphicsscene_types.QGraphicsScene, item: gen_qgraphics
   fcQGraphicsScene_addItem(self.h, item.h)
 
 proc addEllipse*(self: gen_qgraphicsscene_types.QGraphicsScene, rect: gen_qrect_types.QRectF): gen_qgraphicsitem_types.QGraphicsEllipseItem =
-  gen_qgraphicsitem_types.QGraphicsEllipseItem(h: fcQGraphicsScene_addEllipse(self.h, rect.h))
+  gen_qgraphicsitem_types.QGraphicsEllipseItem(h: fcQGraphicsScene_addEllipse(self.h, rect.h), owned: false)
 
 proc addLine*(self: gen_qgraphicsscene_types.QGraphicsScene, line: gen_qline_types.QLineF): gen_qgraphicsitem_types.QGraphicsLineItem =
-  gen_qgraphicsitem_types.QGraphicsLineItem(h: fcQGraphicsScene_addLine(self.h, line.h))
+  gen_qgraphicsitem_types.QGraphicsLineItem(h: fcQGraphicsScene_addLine(self.h, line.h), owned: false)
 
 proc addPath*(self: gen_qgraphicsscene_types.QGraphicsScene, path: gen_qpainterpath_types.QPainterPath): gen_qgraphicsitem_types.QGraphicsPathItem =
-  gen_qgraphicsitem_types.QGraphicsPathItem(h: fcQGraphicsScene_addPath(self.h, path.h))
+  gen_qgraphicsitem_types.QGraphicsPathItem(h: fcQGraphicsScene_addPath(self.h, path.h), owned: false)
 
 proc addPixmap*(self: gen_qgraphicsscene_types.QGraphicsScene, pixmap: gen_qpixmap_types.QPixmap): gen_qgraphicsitem_types.QGraphicsPixmapItem =
-  gen_qgraphicsitem_types.QGraphicsPixmapItem(h: fcQGraphicsScene_addPixmap(self.h, pixmap.h))
+  gen_qgraphicsitem_types.QGraphicsPixmapItem(h: fcQGraphicsScene_addPixmap(self.h, pixmap.h), owned: false)
 
 proc addRect*(self: gen_qgraphicsscene_types.QGraphicsScene, rect: gen_qrect_types.QRectF): gen_qgraphicsitem_types.QGraphicsRectItem =
-  gen_qgraphicsitem_types.QGraphicsRectItem(h: fcQGraphicsScene_addRect(self.h, rect.h))
+  gen_qgraphicsitem_types.QGraphicsRectItem(h: fcQGraphicsScene_addRect(self.h, rect.h), owned: false)
 
 proc addText*(self: gen_qgraphicsscene_types.QGraphicsScene, text: string): gen_qgraphicsitem_types.QGraphicsTextItem =
-  gen_qgraphicsitem_types.QGraphicsTextItem(h: fcQGraphicsScene_addText(self.h, struct_miqt_string(data: text, len: csize_t(len(text)))))
+  gen_qgraphicsitem_types.QGraphicsTextItem(h: fcQGraphicsScene_addText(self.h, struct_miqt_string(data: text, len: csize_t(len(text)))), owned: false)
 
 proc addSimpleText*(self: gen_qgraphicsscene_types.QGraphicsScene, text: string): gen_qgraphicsitem_types.QGraphicsSimpleTextItem =
-  gen_qgraphicsitem_types.QGraphicsSimpleTextItem(h: fcQGraphicsScene_addSimpleText(self.h, struct_miqt_string(data: text, len: csize_t(len(text)))))
+  gen_qgraphicsitem_types.QGraphicsSimpleTextItem(h: fcQGraphicsScene_addSimpleText(self.h, struct_miqt_string(data: text, len: csize_t(len(text)))), owned: false)
 
 proc addWidget*(self: gen_qgraphicsscene_types.QGraphicsScene, widget: gen_qwidget_types.QWidget): gen_qgraphicsproxywidget_types.QGraphicsProxyWidget =
-  gen_qgraphicsproxywidget_types.QGraphicsProxyWidget(h: fcQGraphicsScene_addWidget(self.h, widget.h))
+  gen_qgraphicsproxywidget_types.QGraphicsProxyWidget(h: fcQGraphicsScene_addWidget(self.h, widget.h), owned: false)
 
 proc addEllipse*(self: gen_qgraphicsscene_types.QGraphicsScene, x: float64, y: float64, w: float64, h: float64): gen_qgraphicsitem_types.QGraphicsEllipseItem =
-  gen_qgraphicsitem_types.QGraphicsEllipseItem(h: fcQGraphicsScene_addEllipse2(self.h, x, y, w, h))
+  gen_qgraphicsitem_types.QGraphicsEllipseItem(h: fcQGraphicsScene_addEllipse2(self.h, x, y, w, h), owned: false)
 
 proc addLine*(self: gen_qgraphicsscene_types.QGraphicsScene, x1: float64, y1: float64, x2: float64, y2: float64): gen_qgraphicsitem_types.QGraphicsLineItem =
-  gen_qgraphicsitem_types.QGraphicsLineItem(h: fcQGraphicsScene_addLine2(self.h, x1, y1, x2, y2))
+  gen_qgraphicsitem_types.QGraphicsLineItem(h: fcQGraphicsScene_addLine2(self.h, x1, y1, x2, y2), owned: false)
 
 proc addRect*(self: gen_qgraphicsscene_types.QGraphicsScene, x: float64, y: float64, w: float64, h: float64): gen_qgraphicsitem_types.QGraphicsRectItem =
-  gen_qgraphicsitem_types.QGraphicsRectItem(h: fcQGraphicsScene_addRect2(self.h, x, y, w, h))
+  gen_qgraphicsitem_types.QGraphicsRectItem(h: fcQGraphicsScene_addRect2(self.h, x, y, w, h), owned: false)
 
 proc removeItem*(self: gen_qgraphicsscene_types.QGraphicsScene, item: gen_qgraphicsitem_types.QGraphicsItem): void =
   fcQGraphicsScene_removeItem(self.h, item.h)
 
 proc focusItem*(self: gen_qgraphicsscene_types.QGraphicsScene, ): gen_qgraphicsitem_types.QGraphicsItem =
-  gen_qgraphicsitem_types.QGraphicsItem(h: fcQGraphicsScene_focusItem(self.h))
+  gen_qgraphicsitem_types.QGraphicsItem(h: fcQGraphicsScene_focusItem(self.h), owned: false)
 
 proc setFocusItem*(self: gen_qgraphicsscene_types.QGraphicsScene, item: gen_qgraphicsitem_types.QGraphicsItem): void =
   fcQGraphicsScene_setFocusItem(self.h, item.h)
@@ -523,29 +522,29 @@ proc stickyFocus*(self: gen_qgraphicsscene_types.QGraphicsScene, ): bool =
   fcQGraphicsScene_stickyFocus(self.h)
 
 proc mouseGrabberItem*(self: gen_qgraphicsscene_types.QGraphicsScene, ): gen_qgraphicsitem_types.QGraphicsItem =
-  gen_qgraphicsitem_types.QGraphicsItem(h: fcQGraphicsScene_mouseGrabberItem(self.h))
+  gen_qgraphicsitem_types.QGraphicsItem(h: fcQGraphicsScene_mouseGrabberItem(self.h), owned: false)
 
 proc backgroundBrush*(self: gen_qgraphicsscene_types.QGraphicsScene, ): gen_qbrush_types.QBrush =
-  gen_qbrush_types.QBrush(h: fcQGraphicsScene_backgroundBrush(self.h))
+  gen_qbrush_types.QBrush(h: fcQGraphicsScene_backgroundBrush(self.h), owned: true)
 
 proc setBackgroundBrush*(self: gen_qgraphicsscene_types.QGraphicsScene, brush: gen_qbrush_types.QBrush): void =
   fcQGraphicsScene_setBackgroundBrush(self.h, brush.h)
 
 proc foregroundBrush*(self: gen_qgraphicsscene_types.QGraphicsScene, ): gen_qbrush_types.QBrush =
-  gen_qbrush_types.QBrush(h: fcQGraphicsScene_foregroundBrush(self.h))
+  gen_qbrush_types.QBrush(h: fcQGraphicsScene_foregroundBrush(self.h), owned: true)
 
 proc setForegroundBrush*(self: gen_qgraphicsscene_types.QGraphicsScene, brush: gen_qbrush_types.QBrush): void =
   fcQGraphicsScene_setForegroundBrush(self.h, brush.h)
 
 proc inputMethodQuery*(self: gen_qgraphicsscene_types.QGraphicsScene, query: cint): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQGraphicsScene_inputMethodQuery(self.h, cint(query)))
+  gen_qvariant_types.QVariant(h: fcQGraphicsScene_inputMethodQuery(self.h, cint(query)), owned: true)
 
 proc views*(self: gen_qgraphicsscene_types.QGraphicsScene, ): seq[gen_qgraphicsview_types.QGraphicsView] =
   var v_ma = fcQGraphicsScene_views(self.h)
   var vx_ret = newSeq[gen_qgraphicsview_types.QGraphicsView](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
-    vx_ret[i] = gen_qgraphicsview_types.QGraphicsView(h: v_outCast[i])
+    vx_ret[i] = gen_qgraphicsview_types.QGraphicsView(h: v_outCast[i], owned: false)
   c_free(v_ma.data)
   vx_ret
 
@@ -556,19 +555,19 @@ proc invalidate*(self: gen_qgraphicsscene_types.QGraphicsScene, x: float64, y: f
   fcQGraphicsScene_invalidate(self.h, x, y, w, h)
 
 proc style*(self: gen_qgraphicsscene_types.QGraphicsScene, ): gen_qstyle_types.QStyle =
-  gen_qstyle_types.QStyle(h: fcQGraphicsScene_style(self.h))
+  gen_qstyle_types.QStyle(h: fcQGraphicsScene_style(self.h), owned: false)
 
 proc setStyle*(self: gen_qgraphicsscene_types.QGraphicsScene, style: gen_qstyle_types.QStyle): void =
   fcQGraphicsScene_setStyle(self.h, style.h)
 
 proc font*(self: gen_qgraphicsscene_types.QGraphicsScene, ): gen_qfont_types.QFont =
-  gen_qfont_types.QFont(h: fcQGraphicsScene_font(self.h))
+  gen_qfont_types.QFont(h: fcQGraphicsScene_font(self.h), owned: true)
 
 proc setFont*(self: gen_qgraphicsscene_types.QGraphicsScene, font: gen_qfont_types.QFont): void =
   fcQGraphicsScene_setFont(self.h, font.h)
 
 proc palette*(self: gen_qgraphicsscene_types.QGraphicsScene, ): gen_qpalette_types.QPalette =
-  gen_qpalette_types.QPalette(h: fcQGraphicsScene_palette(self.h))
+  gen_qpalette_types.QPalette(h: fcQGraphicsScene_palette(self.h), owned: true)
 
 proc setPalette*(self: gen_qgraphicsscene_types.QGraphicsScene, palette: gen_qpalette_types.QPalette): void =
   fcQGraphicsScene_setPalette(self.h, palette.h)
@@ -577,13 +576,13 @@ proc isActive*(self: gen_qgraphicsscene_types.QGraphicsScene, ): bool =
   fcQGraphicsScene_isActive(self.h)
 
 proc activePanel*(self: gen_qgraphicsscene_types.QGraphicsScene, ): gen_qgraphicsitem_types.QGraphicsItem =
-  gen_qgraphicsitem_types.QGraphicsItem(h: fcQGraphicsScene_activePanel(self.h))
+  gen_qgraphicsitem_types.QGraphicsItem(h: fcQGraphicsScene_activePanel(self.h), owned: false)
 
 proc setActivePanel*(self: gen_qgraphicsscene_types.QGraphicsScene, item: gen_qgraphicsitem_types.QGraphicsItem): void =
   fcQGraphicsScene_setActivePanel(self.h, item.h)
 
 proc activeWindow*(self: gen_qgraphicsscene_types.QGraphicsScene, ): gen_qgraphicswidget_types.QGraphicsWidget =
-  gen_qgraphicswidget_types.QGraphicsWidget(h: fcQGraphicsScene_activeWindow(self.h))
+  gen_qgraphicswidget_types.QGraphicsWidget(h: fcQGraphicsScene_activeWindow(self.h), owned: false)
 
 proc setActiveWindow*(self: gen_qgraphicsscene_types.QGraphicsScene, widget: gen_qgraphicswidget_types.QGraphicsWidget): void =
   fcQGraphicsScene_setActiveWindow(self.h, widget.h)
@@ -632,7 +631,7 @@ proc miqt_exec_callback_cQGraphicsScene_changed(slot: int, region: struct_miqt_a
   var vregionx_ret = newSeq[gen_qrect_types.QRectF](int(vregion_ma.len))
   let vregion_outCast = cast[ptr UncheckedArray[pointer]](vregion_ma.data)
   for i in 0 ..< vregion_ma.len:
-    vregionx_ret[i] = gen_qrect_types.QRectF(h: vregion_outCast[i])
+    vregionx_ret[i] = gen_qrect_types.QRectF(h: vregion_outCast[i], owned: true)
   c_free(vregion_ma.data)
   let slotval1 = vregionx_ret
 
@@ -654,7 +653,7 @@ proc sceneRectChanged*(self: gen_qgraphicsscene_types.QGraphicsScene, rect: gen_
 type QGraphicsScenesceneRectChangedSlot* = proc(rect: gen_qrect_types.QRectF)
 proc miqt_exec_callback_cQGraphicsScene_sceneRectChanged(slot: int, rect: pointer) {.cdecl.} =
   let nimfunc = cast[ptr QGraphicsScenesceneRectChangedSlot](cast[pointer](slot))
-  let slotval1 = gen_qrect_types.QRectF(h: rect)
+  let slotval1 = gen_qrect_types.QRectF(h: rect, owned: false)
 
   nimfunc[](slotval1)
 
@@ -692,9 +691,9 @@ proc focusItemChanged*(self: gen_qgraphicsscene_types.QGraphicsScene, newFocus: 
 type QGraphicsScenefocusItemChangedSlot* = proc(newFocus: gen_qgraphicsitem_types.QGraphicsItem, oldFocus: gen_qgraphicsitem_types.QGraphicsItem, reason: cint)
 proc miqt_exec_callback_cQGraphicsScene_focusItemChanged(slot: int, newFocus: pointer, oldFocus: pointer, reason: cint) {.cdecl.} =
   let nimfunc = cast[ptr QGraphicsScenefocusItemChangedSlot](cast[pointer](slot))
-  let slotval1 = gen_qgraphicsitem_types.QGraphicsItem(h: newFocus)
+  let slotval1 = gen_qgraphicsitem_types.QGraphicsItem(h: newFocus, owned: false)
 
-  let slotval2 = gen_qgraphicsitem_types.QGraphicsItem(h: oldFocus)
+  let slotval2 = gen_qgraphicsitem_types.QGraphicsItem(h: oldFocus, owned: false)
 
   let slotval3 = cint(reason)
 
@@ -748,7 +747,7 @@ proc items*(self: gen_qgraphicsscene_types.QGraphicsScene, order: cint): seq[gen
   var vx_ret = newSeq[gen_qgraphicsitem_types.QGraphicsItem](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
-    vx_ret[i] = gen_qgraphicsitem_types.QGraphicsItem(h: v_outCast[i])
+    vx_ret[i] = gen_qgraphicsitem_types.QGraphicsItem(h: v_outCast[i], owned: false)
   c_free(v_ma.data)
   vx_ret
 
@@ -757,7 +756,7 @@ proc items*(self: gen_qgraphicsscene_types.QGraphicsScene, pos: gen_qpoint_types
   var vx_ret = newSeq[gen_qgraphicsitem_types.QGraphicsItem](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
-    vx_ret[i] = gen_qgraphicsitem_types.QGraphicsItem(h: v_outCast[i])
+    vx_ret[i] = gen_qgraphicsitem_types.QGraphicsItem(h: v_outCast[i], owned: false)
   c_free(v_ma.data)
   vx_ret
 
@@ -766,7 +765,7 @@ proc items*(self: gen_qgraphicsscene_types.QGraphicsScene, pos: gen_qpoint_types
   var vx_ret = newSeq[gen_qgraphicsitem_types.QGraphicsItem](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
-    vx_ret[i] = gen_qgraphicsitem_types.QGraphicsItem(h: v_outCast[i])
+    vx_ret[i] = gen_qgraphicsitem_types.QGraphicsItem(h: v_outCast[i], owned: false)
   c_free(v_ma.data)
   vx_ret
 
@@ -775,7 +774,7 @@ proc items*(self: gen_qgraphicsscene_types.QGraphicsScene, pos: gen_qpoint_types
   var vx_ret = newSeq[gen_qgraphicsitem_types.QGraphicsItem](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
-    vx_ret[i] = gen_qgraphicsitem_types.QGraphicsItem(h: v_outCast[i])
+    vx_ret[i] = gen_qgraphicsitem_types.QGraphicsItem(h: v_outCast[i], owned: false)
   c_free(v_ma.data)
   vx_ret
 
@@ -784,7 +783,7 @@ proc items*(self: gen_qgraphicsscene_types.QGraphicsScene, rect: gen_qrect_types
   var vx_ret = newSeq[gen_qgraphicsitem_types.QGraphicsItem](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
-    vx_ret[i] = gen_qgraphicsitem_types.QGraphicsItem(h: v_outCast[i])
+    vx_ret[i] = gen_qgraphicsitem_types.QGraphicsItem(h: v_outCast[i], owned: false)
   c_free(v_ma.data)
   vx_ret
 
@@ -793,7 +792,7 @@ proc items*(self: gen_qgraphicsscene_types.QGraphicsScene, rect: gen_qrect_types
   var vx_ret = newSeq[gen_qgraphicsitem_types.QGraphicsItem](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
-    vx_ret[i] = gen_qgraphicsitem_types.QGraphicsItem(h: v_outCast[i])
+    vx_ret[i] = gen_qgraphicsitem_types.QGraphicsItem(h: v_outCast[i], owned: false)
   c_free(v_ma.data)
   vx_ret
 
@@ -802,7 +801,7 @@ proc items*(self: gen_qgraphicsscene_types.QGraphicsScene, rect: gen_qrect_types
   var vx_ret = newSeq[gen_qgraphicsitem_types.QGraphicsItem](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
-    vx_ret[i] = gen_qgraphicsitem_types.QGraphicsItem(h: v_outCast[i])
+    vx_ret[i] = gen_qgraphicsitem_types.QGraphicsItem(h: v_outCast[i], owned: false)
   c_free(v_ma.data)
   vx_ret
 
@@ -811,7 +810,7 @@ proc items*(self: gen_qgraphicsscene_types.QGraphicsScene, path: gen_qpainterpat
   var vx_ret = newSeq[gen_qgraphicsitem_types.QGraphicsItem](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
-    vx_ret[i] = gen_qgraphicsitem_types.QGraphicsItem(h: v_outCast[i])
+    vx_ret[i] = gen_qgraphicsitem_types.QGraphicsItem(h: v_outCast[i], owned: false)
   c_free(v_ma.data)
   vx_ret
 
@@ -820,7 +819,7 @@ proc items*(self: gen_qgraphicsscene_types.QGraphicsScene, path: gen_qpainterpat
   var vx_ret = newSeq[gen_qgraphicsitem_types.QGraphicsItem](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
-    vx_ret[i] = gen_qgraphicsitem_types.QGraphicsItem(h: v_outCast[i])
+    vx_ret[i] = gen_qgraphicsitem_types.QGraphicsItem(h: v_outCast[i], owned: false)
   c_free(v_ma.data)
   vx_ret
 
@@ -829,7 +828,7 @@ proc items*(self: gen_qgraphicsscene_types.QGraphicsScene, path: gen_qpainterpat
   var vx_ret = newSeq[gen_qgraphicsitem_types.QGraphicsItem](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
-    vx_ret[i] = gen_qgraphicsitem_types.QGraphicsItem(h: v_outCast[i])
+    vx_ret[i] = gen_qgraphicsitem_types.QGraphicsItem(h: v_outCast[i], owned: false)
   c_free(v_ma.data)
   vx_ret
 
@@ -838,7 +837,7 @@ proc collidingItems*(self: gen_qgraphicsscene_types.QGraphicsScene, item: gen_qg
   var vx_ret = newSeq[gen_qgraphicsitem_types.QGraphicsItem](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
-    vx_ret[i] = gen_qgraphicsitem_types.QGraphicsItem(h: v_outCast[i])
+    vx_ret[i] = gen_qgraphicsitem_types.QGraphicsItem(h: v_outCast[i], owned: false)
   c_free(v_ma.data)
   vx_ret
 
@@ -847,7 +846,7 @@ proc items*(self: gen_qgraphicsscene_types.QGraphicsScene, x: float64, y: float6
   var vx_ret = newSeq[gen_qgraphicsitem_types.QGraphicsItem](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
-    vx_ret[i] = gen_qgraphicsitem_types.QGraphicsItem(h: v_outCast[i])
+    vx_ret[i] = gen_qgraphicsitem_types.QGraphicsItem(h: v_outCast[i], owned: false)
   c_free(v_ma.data)
   vx_ret
 
@@ -864,49 +863,49 @@ proc setSelectionArea*(self: gen_qgraphicsscene_types.QGraphicsScene, path: gen_
   fcQGraphicsScene_setSelectionArea4(self.h, path.h, cint(selectionOperation), cint(mode), deviceTransform.h)
 
 proc addEllipse*(self: gen_qgraphicsscene_types.QGraphicsScene, rect: gen_qrect_types.QRectF, pen: gen_qpen_types.QPen): gen_qgraphicsitem_types.QGraphicsEllipseItem =
-  gen_qgraphicsitem_types.QGraphicsEllipseItem(h: fcQGraphicsScene_addEllipse22(self.h, rect.h, pen.h))
+  gen_qgraphicsitem_types.QGraphicsEllipseItem(h: fcQGraphicsScene_addEllipse22(self.h, rect.h, pen.h), owned: false)
 
 proc addEllipse*(self: gen_qgraphicsscene_types.QGraphicsScene, rect: gen_qrect_types.QRectF, pen: gen_qpen_types.QPen, brush: gen_qbrush_types.QBrush): gen_qgraphicsitem_types.QGraphicsEllipseItem =
-  gen_qgraphicsitem_types.QGraphicsEllipseItem(h: fcQGraphicsScene_addEllipse3(self.h, rect.h, pen.h, brush.h))
+  gen_qgraphicsitem_types.QGraphicsEllipseItem(h: fcQGraphicsScene_addEllipse3(self.h, rect.h, pen.h, brush.h), owned: false)
 
 proc addLine*(self: gen_qgraphicsscene_types.QGraphicsScene, line: gen_qline_types.QLineF, pen: gen_qpen_types.QPen): gen_qgraphicsitem_types.QGraphicsLineItem =
-  gen_qgraphicsitem_types.QGraphicsLineItem(h: fcQGraphicsScene_addLine22(self.h, line.h, pen.h))
+  gen_qgraphicsitem_types.QGraphicsLineItem(h: fcQGraphicsScene_addLine22(self.h, line.h, pen.h), owned: false)
 
 proc addPath*(self: gen_qgraphicsscene_types.QGraphicsScene, path: gen_qpainterpath_types.QPainterPath, pen: gen_qpen_types.QPen): gen_qgraphicsitem_types.QGraphicsPathItem =
-  gen_qgraphicsitem_types.QGraphicsPathItem(h: fcQGraphicsScene_addPath2(self.h, path.h, pen.h))
+  gen_qgraphicsitem_types.QGraphicsPathItem(h: fcQGraphicsScene_addPath2(self.h, path.h, pen.h), owned: false)
 
 proc addPath*(self: gen_qgraphicsscene_types.QGraphicsScene, path: gen_qpainterpath_types.QPainterPath, pen: gen_qpen_types.QPen, brush: gen_qbrush_types.QBrush): gen_qgraphicsitem_types.QGraphicsPathItem =
-  gen_qgraphicsitem_types.QGraphicsPathItem(h: fcQGraphicsScene_addPath3(self.h, path.h, pen.h, brush.h))
+  gen_qgraphicsitem_types.QGraphicsPathItem(h: fcQGraphicsScene_addPath3(self.h, path.h, pen.h, brush.h), owned: false)
 
 proc addRect*(self: gen_qgraphicsscene_types.QGraphicsScene, rect: gen_qrect_types.QRectF, pen: gen_qpen_types.QPen): gen_qgraphicsitem_types.QGraphicsRectItem =
-  gen_qgraphicsitem_types.QGraphicsRectItem(h: fcQGraphicsScene_addRect22(self.h, rect.h, pen.h))
+  gen_qgraphicsitem_types.QGraphicsRectItem(h: fcQGraphicsScene_addRect22(self.h, rect.h, pen.h), owned: false)
 
 proc addRect*(self: gen_qgraphicsscene_types.QGraphicsScene, rect: gen_qrect_types.QRectF, pen: gen_qpen_types.QPen, brush: gen_qbrush_types.QBrush): gen_qgraphicsitem_types.QGraphicsRectItem =
-  gen_qgraphicsitem_types.QGraphicsRectItem(h: fcQGraphicsScene_addRect3(self.h, rect.h, pen.h, brush.h))
+  gen_qgraphicsitem_types.QGraphicsRectItem(h: fcQGraphicsScene_addRect3(self.h, rect.h, pen.h, brush.h), owned: false)
 
 proc addText*(self: gen_qgraphicsscene_types.QGraphicsScene, text: string, font: gen_qfont_types.QFont): gen_qgraphicsitem_types.QGraphicsTextItem =
-  gen_qgraphicsitem_types.QGraphicsTextItem(h: fcQGraphicsScene_addText2(self.h, struct_miqt_string(data: text, len: csize_t(len(text))), font.h))
+  gen_qgraphicsitem_types.QGraphicsTextItem(h: fcQGraphicsScene_addText2(self.h, struct_miqt_string(data: text, len: csize_t(len(text))), font.h), owned: false)
 
 proc addSimpleText*(self: gen_qgraphicsscene_types.QGraphicsScene, text: string, font: gen_qfont_types.QFont): gen_qgraphicsitem_types.QGraphicsSimpleTextItem =
-  gen_qgraphicsitem_types.QGraphicsSimpleTextItem(h: fcQGraphicsScene_addSimpleText2(self.h, struct_miqt_string(data: text, len: csize_t(len(text))), font.h))
+  gen_qgraphicsitem_types.QGraphicsSimpleTextItem(h: fcQGraphicsScene_addSimpleText2(self.h, struct_miqt_string(data: text, len: csize_t(len(text))), font.h), owned: false)
 
 proc addWidget*(self: gen_qgraphicsscene_types.QGraphicsScene, widget: gen_qwidget_types.QWidget, wFlags: cint): gen_qgraphicsproxywidget_types.QGraphicsProxyWidget =
-  gen_qgraphicsproxywidget_types.QGraphicsProxyWidget(h: fcQGraphicsScene_addWidget2(self.h, widget.h, cint(wFlags)))
+  gen_qgraphicsproxywidget_types.QGraphicsProxyWidget(h: fcQGraphicsScene_addWidget2(self.h, widget.h, cint(wFlags)), owned: false)
 
 proc addEllipse*(self: gen_qgraphicsscene_types.QGraphicsScene, x: float64, y: float64, w: float64, h: float64, pen: gen_qpen_types.QPen): gen_qgraphicsitem_types.QGraphicsEllipseItem =
-  gen_qgraphicsitem_types.QGraphicsEllipseItem(h: fcQGraphicsScene_addEllipse5(self.h, x, y, w, h, pen.h))
+  gen_qgraphicsitem_types.QGraphicsEllipseItem(h: fcQGraphicsScene_addEllipse5(self.h, x, y, w, h, pen.h), owned: false)
 
 proc addEllipse*(self: gen_qgraphicsscene_types.QGraphicsScene, x: float64, y: float64, w: float64, h: float64, pen: gen_qpen_types.QPen, brush: gen_qbrush_types.QBrush): gen_qgraphicsitem_types.QGraphicsEllipseItem =
-  gen_qgraphicsitem_types.QGraphicsEllipseItem(h: fcQGraphicsScene_addEllipse6(self.h, x, y, w, h, pen.h, brush.h))
+  gen_qgraphicsitem_types.QGraphicsEllipseItem(h: fcQGraphicsScene_addEllipse6(self.h, x, y, w, h, pen.h, brush.h), owned: false)
 
 proc addLine*(self: gen_qgraphicsscene_types.QGraphicsScene, x1: float64, y1: float64, x2: float64, y2: float64, pen: gen_qpen_types.QPen): gen_qgraphicsitem_types.QGraphicsLineItem =
-  gen_qgraphicsitem_types.QGraphicsLineItem(h: fcQGraphicsScene_addLine5(self.h, x1, y1, x2, y2, pen.h))
+  gen_qgraphicsitem_types.QGraphicsLineItem(h: fcQGraphicsScene_addLine5(self.h, x1, y1, x2, y2, pen.h), owned: false)
 
 proc addRect*(self: gen_qgraphicsscene_types.QGraphicsScene, x: float64, y: float64, w: float64, h: float64, pen: gen_qpen_types.QPen): gen_qgraphicsitem_types.QGraphicsRectItem =
-  gen_qgraphicsitem_types.QGraphicsRectItem(h: fcQGraphicsScene_addRect5(self.h, x, y, w, h, pen.h))
+  gen_qgraphicsitem_types.QGraphicsRectItem(h: fcQGraphicsScene_addRect5(self.h, x, y, w, h, pen.h), owned: false)
 
 proc addRect*(self: gen_qgraphicsscene_types.QGraphicsScene, x: float64, y: float64, w: float64, h: float64, pen: gen_qpen_types.QPen, brush: gen_qbrush_types.QBrush): gen_qgraphicsitem_types.QGraphicsRectItem =
-  gen_qgraphicsitem_types.QGraphicsRectItem(h: fcQGraphicsScene_addRect6(self.h, x, y, w, h, pen.h, brush.h))
+  gen_qgraphicsitem_types.QGraphicsRectItem(h: fcQGraphicsScene_addRect6(self.h, x, y, w, h, pen.h, brush.h), owned: false)
 
 proc setFocusItem*(self: gen_qgraphicsscene_types.QGraphicsScene, item: gen_qgraphicsitem_types.QGraphicsItem, focusReason: cint): void =
   fcQGraphicsScene_setFocusItem2(self.h, item.h, cint(focusReason))
@@ -955,7 +954,7 @@ type QGraphicsScenechildEventProc* = proc(self: QGraphicsScene, event: gen_qcore
 type QGraphicsScenecustomEventProc* = proc(self: QGraphicsScene, event: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
 type QGraphicsSceneconnectNotifyProc* = proc(self: QGraphicsScene, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
 type QGraphicsScenedisconnectNotifyProc* = proc(self: QGraphicsScene, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
-type QGraphicsSceneVTable* = object
+type QGraphicsSceneVTable* {.inheritable, pure.} = object
   vtbl: cQGraphicsSceneVTable
   metaObject*: QGraphicsScenemetaObjectProc
   metacast*: QGraphicsScenemetacastProc
@@ -987,13 +986,16 @@ type QGraphicsSceneVTable* = object
   connectNotify*: QGraphicsSceneconnectNotifyProc
   disconnectNotify*: QGraphicsScenedisconnectNotifyProc
 proc QGraphicsScenemetaObject*(self: gen_qgraphicsscene_types.QGraphicsScene, ): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQGraphicsScene_virtualbase_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQGraphicsScene_virtualbase_metaObject(self.h), owned: false)
 
 proc miqt_exec_callback_cQGraphicsScene_metaObject(vtbl: pointer, self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QGraphicsSceneVTable](vtbl)
   let self = QGraphicsScene(h: self)
   var virtualReturn = vtbl[].metaObject(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QGraphicsScenemetacast*(self: gen_qgraphicsscene_types.QGraphicsScene, param1: cstring): pointer =
   fcQGraphicsScene_virtualbase_metacast(self.h, param1)
@@ -1018,14 +1020,17 @@ proc miqt_exec_callback_cQGraphicsScene_metacall(vtbl: pointer, self: pointer, p
   virtualReturn
 
 proc QGraphicsSceneinputMethodQuery*(self: gen_qgraphicsscene_types.QGraphicsScene, query: cint): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQGraphicsScene_virtualbase_inputMethodQuery(self.h, cint(query)))
+  gen_qvariant_types.QVariant(h: fcQGraphicsScene_virtualbase_inputMethodQuery(self.h, cint(query)), owned: true)
 
 proc miqt_exec_callback_cQGraphicsScene_inputMethodQuery(vtbl: pointer, self: pointer, query: cint): pointer {.cdecl.} =
   let vtbl = cast[ptr QGraphicsSceneVTable](vtbl)
   let self = QGraphicsScene(h: self)
   let slotval1 = cint(query)
   var virtualReturn = vtbl[].inputMethodQuery(self, slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QGraphicsSceneevent*(self: gen_qgraphicsscene_types.QGraphicsScene, event: gen_qcoreevent_types.QEvent): bool =
   fcQGraphicsScene_virtualbase_event(self.h, event.h)
@@ -1033,7 +1038,7 @@ proc QGraphicsSceneevent*(self: gen_qgraphicsscene_types.QGraphicsScene, event: 
 proc miqt_exec_callback_cQGraphicsScene_event(vtbl: pointer, self: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QGraphicsSceneVTable](vtbl)
   let self = QGraphicsScene(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].event(self, slotval1)
   virtualReturn
 
@@ -1043,8 +1048,8 @@ proc QGraphicsSceneeventFilter*(self: gen_qgraphicsscene_types.QGraphicsScene, w
 proc miqt_exec_callback_cQGraphicsScene_eventFilter(vtbl: pointer, self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QGraphicsSceneVTable](vtbl)
   let self = QGraphicsScene(h: self)
-  let slotval1 = gen_qobject_types.QObject(h: watched)
-  let slotval2 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].eventFilter(self, slotval1, slotval2)
   virtualReturn
 
@@ -1054,7 +1059,7 @@ proc QGraphicsScenecontextMenuEvent*(self: gen_qgraphicsscene_types.QGraphicsSce
 proc miqt_exec_callback_cQGraphicsScene_contextMenuEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsSceneVTable](vtbl)
   let self = QGraphicsScene(h: self)
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneContextMenuEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneContextMenuEvent(h: event, owned: false)
   vtbl[].contextMenuEvent(self, slotval1)
 
 proc QGraphicsScenedragEnterEvent*(self: gen_qgraphicsscene_types.QGraphicsScene, event: gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent): void =
@@ -1063,7 +1068,7 @@ proc QGraphicsScenedragEnterEvent*(self: gen_qgraphicsscene_types.QGraphicsScene
 proc miqt_exec_callback_cQGraphicsScene_dragEnterEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsSceneVTable](vtbl)
   let self = QGraphicsScene(h: self)
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent(h: event, owned: false)
   vtbl[].dragEnterEvent(self, slotval1)
 
 proc QGraphicsScenedragMoveEvent*(self: gen_qgraphicsscene_types.QGraphicsScene, event: gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent): void =
@@ -1072,7 +1077,7 @@ proc QGraphicsScenedragMoveEvent*(self: gen_qgraphicsscene_types.QGraphicsScene,
 proc miqt_exec_callback_cQGraphicsScene_dragMoveEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsSceneVTable](vtbl)
   let self = QGraphicsScene(h: self)
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent(h: event, owned: false)
   vtbl[].dragMoveEvent(self, slotval1)
 
 proc QGraphicsScenedragLeaveEvent*(self: gen_qgraphicsscene_types.QGraphicsScene, event: gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent): void =
@@ -1081,7 +1086,7 @@ proc QGraphicsScenedragLeaveEvent*(self: gen_qgraphicsscene_types.QGraphicsScene
 proc miqt_exec_callback_cQGraphicsScene_dragLeaveEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsSceneVTable](vtbl)
   let self = QGraphicsScene(h: self)
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent(h: event, owned: false)
   vtbl[].dragLeaveEvent(self, slotval1)
 
 proc QGraphicsScenedropEvent*(self: gen_qgraphicsscene_types.QGraphicsScene, event: gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent): void =
@@ -1090,7 +1095,7 @@ proc QGraphicsScenedropEvent*(self: gen_qgraphicsscene_types.QGraphicsScene, eve
 proc miqt_exec_callback_cQGraphicsScene_dropEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsSceneVTable](vtbl)
   let self = QGraphicsScene(h: self)
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent(h: event, owned: false)
   vtbl[].dropEvent(self, slotval1)
 
 proc QGraphicsScenefocusInEvent*(self: gen_qgraphicsscene_types.QGraphicsScene, event: gen_qevent_types.QFocusEvent): void =
@@ -1099,7 +1104,7 @@ proc QGraphicsScenefocusInEvent*(self: gen_qgraphicsscene_types.QGraphicsScene, 
 proc miqt_exec_callback_cQGraphicsScene_focusInEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsSceneVTable](vtbl)
   let self = QGraphicsScene(h: self)
-  let slotval1 = gen_qevent_types.QFocusEvent(h: event)
+  let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
   vtbl[].focusInEvent(self, slotval1)
 
 proc QGraphicsScenefocusOutEvent*(self: gen_qgraphicsscene_types.QGraphicsScene, event: gen_qevent_types.QFocusEvent): void =
@@ -1108,7 +1113,7 @@ proc QGraphicsScenefocusOutEvent*(self: gen_qgraphicsscene_types.QGraphicsScene,
 proc miqt_exec_callback_cQGraphicsScene_focusOutEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsSceneVTable](vtbl)
   let self = QGraphicsScene(h: self)
-  let slotval1 = gen_qevent_types.QFocusEvent(h: event)
+  let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
   vtbl[].focusOutEvent(self, slotval1)
 
 proc QGraphicsScenehelpEvent*(self: gen_qgraphicsscene_types.QGraphicsScene, event: gen_qgraphicssceneevent_types.QGraphicsSceneHelpEvent): void =
@@ -1117,7 +1122,7 @@ proc QGraphicsScenehelpEvent*(self: gen_qgraphicsscene_types.QGraphicsScene, eve
 proc miqt_exec_callback_cQGraphicsScene_helpEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsSceneVTable](vtbl)
   let self = QGraphicsScene(h: self)
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneHelpEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneHelpEvent(h: event, owned: false)
   vtbl[].helpEvent(self, slotval1)
 
 proc QGraphicsScenekeyPressEvent*(self: gen_qgraphicsscene_types.QGraphicsScene, event: gen_qevent_types.QKeyEvent): void =
@@ -1126,7 +1131,7 @@ proc QGraphicsScenekeyPressEvent*(self: gen_qgraphicsscene_types.QGraphicsScene,
 proc miqt_exec_callback_cQGraphicsScene_keyPressEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsSceneVTable](vtbl)
   let self = QGraphicsScene(h: self)
-  let slotval1 = gen_qevent_types.QKeyEvent(h: event)
+  let slotval1 = gen_qevent_types.QKeyEvent(h: event, owned: false)
   vtbl[].keyPressEvent(self, slotval1)
 
 proc QGraphicsScenekeyReleaseEvent*(self: gen_qgraphicsscene_types.QGraphicsScene, event: gen_qevent_types.QKeyEvent): void =
@@ -1135,7 +1140,7 @@ proc QGraphicsScenekeyReleaseEvent*(self: gen_qgraphicsscene_types.QGraphicsScen
 proc miqt_exec_callback_cQGraphicsScene_keyReleaseEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsSceneVTable](vtbl)
   let self = QGraphicsScene(h: self)
-  let slotval1 = gen_qevent_types.QKeyEvent(h: event)
+  let slotval1 = gen_qevent_types.QKeyEvent(h: event, owned: false)
   vtbl[].keyReleaseEvent(self, slotval1)
 
 proc QGraphicsScenemousePressEvent*(self: gen_qgraphicsscene_types.QGraphicsScene, event: gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent): void =
@@ -1144,7 +1149,7 @@ proc QGraphicsScenemousePressEvent*(self: gen_qgraphicsscene_types.QGraphicsScen
 proc miqt_exec_callback_cQGraphicsScene_mousePressEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsSceneVTable](vtbl)
   let self = QGraphicsScene(h: self)
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent(h: event, owned: false)
   vtbl[].mousePressEvent(self, slotval1)
 
 proc QGraphicsScenemouseMoveEvent*(self: gen_qgraphicsscene_types.QGraphicsScene, event: gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent): void =
@@ -1153,7 +1158,7 @@ proc QGraphicsScenemouseMoveEvent*(self: gen_qgraphicsscene_types.QGraphicsScene
 proc miqt_exec_callback_cQGraphicsScene_mouseMoveEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsSceneVTable](vtbl)
   let self = QGraphicsScene(h: self)
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent(h: event, owned: false)
   vtbl[].mouseMoveEvent(self, slotval1)
 
 proc QGraphicsScenemouseReleaseEvent*(self: gen_qgraphicsscene_types.QGraphicsScene, event: gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent): void =
@@ -1162,7 +1167,7 @@ proc QGraphicsScenemouseReleaseEvent*(self: gen_qgraphicsscene_types.QGraphicsSc
 proc miqt_exec_callback_cQGraphicsScene_mouseReleaseEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsSceneVTable](vtbl)
   let self = QGraphicsScene(h: self)
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent(h: event, owned: false)
   vtbl[].mouseReleaseEvent(self, slotval1)
 
 proc QGraphicsScenemouseDoubleClickEvent*(self: gen_qgraphicsscene_types.QGraphicsScene, event: gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent): void =
@@ -1171,7 +1176,7 @@ proc QGraphicsScenemouseDoubleClickEvent*(self: gen_qgraphicsscene_types.QGraphi
 proc miqt_exec_callback_cQGraphicsScene_mouseDoubleClickEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsSceneVTable](vtbl)
   let self = QGraphicsScene(h: self)
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent(h: event, owned: false)
   vtbl[].mouseDoubleClickEvent(self, slotval1)
 
 proc QGraphicsScenewheelEvent*(self: gen_qgraphicsscene_types.QGraphicsScene, event: gen_qgraphicssceneevent_types.QGraphicsSceneWheelEvent): void =
@@ -1180,7 +1185,7 @@ proc QGraphicsScenewheelEvent*(self: gen_qgraphicsscene_types.QGraphicsScene, ev
 proc miqt_exec_callback_cQGraphicsScene_wheelEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsSceneVTable](vtbl)
   let self = QGraphicsScene(h: self)
-  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneWheelEvent(h: event)
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneWheelEvent(h: event, owned: false)
   vtbl[].wheelEvent(self, slotval1)
 
 proc QGraphicsSceneinputMethodEvent*(self: gen_qgraphicsscene_types.QGraphicsScene, event: gen_qevent_types.QInputMethodEvent): void =
@@ -1189,7 +1194,7 @@ proc QGraphicsSceneinputMethodEvent*(self: gen_qgraphicsscene_types.QGraphicsSce
 proc miqt_exec_callback_cQGraphicsScene_inputMethodEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsSceneVTable](vtbl)
   let self = QGraphicsScene(h: self)
-  let slotval1 = gen_qevent_types.QInputMethodEvent(h: event)
+  let slotval1 = gen_qevent_types.QInputMethodEvent(h: event, owned: false)
   vtbl[].inputMethodEvent(self, slotval1)
 
 proc QGraphicsScenedrawBackground*(self: gen_qgraphicsscene_types.QGraphicsScene, painter: gen_qpainter_types.QPainter, rect: gen_qrect_types.QRectF): void =
@@ -1198,8 +1203,8 @@ proc QGraphicsScenedrawBackground*(self: gen_qgraphicsscene_types.QGraphicsScene
 proc miqt_exec_callback_cQGraphicsScene_drawBackground(vtbl: pointer, self: pointer, painter: pointer, rect: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsSceneVTable](vtbl)
   let self = QGraphicsScene(h: self)
-  let slotval1 = gen_qpainter_types.QPainter(h: painter)
-  let slotval2 = gen_qrect_types.QRectF(h: rect)
+  let slotval1 = gen_qpainter_types.QPainter(h: painter, owned: false)
+  let slotval2 = gen_qrect_types.QRectF(h: rect, owned: false)
   vtbl[].drawBackground(self, slotval1, slotval2)
 
 proc QGraphicsScenedrawForeground*(self: gen_qgraphicsscene_types.QGraphicsScene, painter: gen_qpainter_types.QPainter, rect: gen_qrect_types.QRectF): void =
@@ -1208,8 +1213,8 @@ proc QGraphicsScenedrawForeground*(self: gen_qgraphicsscene_types.QGraphicsScene
 proc miqt_exec_callback_cQGraphicsScene_drawForeground(vtbl: pointer, self: pointer, painter: pointer, rect: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsSceneVTable](vtbl)
   let self = QGraphicsScene(h: self)
-  let slotval1 = gen_qpainter_types.QPainter(h: painter)
-  let slotval2 = gen_qrect_types.QRectF(h: rect)
+  let slotval1 = gen_qpainter_types.QPainter(h: painter, owned: false)
+  let slotval2 = gen_qrect_types.QRectF(h: rect, owned: false)
   vtbl[].drawForeground(self, slotval1, slotval2)
 
 proc QGraphicsScenetimerEvent*(self: gen_qgraphicsscene_types.QGraphicsScene, event: gen_qcoreevent_types.QTimerEvent): void =
@@ -1218,7 +1223,7 @@ proc QGraphicsScenetimerEvent*(self: gen_qgraphicsscene_types.QGraphicsScene, ev
 proc miqt_exec_callback_cQGraphicsScene_timerEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsSceneVTable](vtbl)
   let self = QGraphicsScene(h: self)
-  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   vtbl[].timerEvent(self, slotval1)
 
 proc QGraphicsScenechildEvent*(self: gen_qgraphicsscene_types.QGraphicsScene, event: gen_qcoreevent_types.QChildEvent): void =
@@ -1227,7 +1232,7 @@ proc QGraphicsScenechildEvent*(self: gen_qgraphicsscene_types.QGraphicsScene, ev
 proc miqt_exec_callback_cQGraphicsScene_childEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsSceneVTable](vtbl)
   let self = QGraphicsScene(h: self)
-  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   vtbl[].childEvent(self, slotval1)
 
 proc QGraphicsScenecustomEvent*(self: gen_qgraphicsscene_types.QGraphicsScene, event: gen_qcoreevent_types.QEvent): void =
@@ -1236,7 +1241,7 @@ proc QGraphicsScenecustomEvent*(self: gen_qgraphicsscene_types.QGraphicsScene, e
 proc miqt_exec_callback_cQGraphicsScene_customEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsSceneVTable](vtbl)
   let self = QGraphicsScene(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].customEvent(self, slotval1)
 
 proc QGraphicsSceneconnectNotify*(self: gen_qgraphicsscene_types.QGraphicsScene, signal: gen_qmetaobject_types.QMetaMethod): void =
@@ -1245,7 +1250,7 @@ proc QGraphicsSceneconnectNotify*(self: gen_qgraphicsscene_types.QGraphicsScene,
 proc miqt_exec_callback_cQGraphicsScene_connectNotify(vtbl: pointer, self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsSceneVTable](vtbl)
   let self = QGraphicsScene(h: self)
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].connectNotify(self, slotval1)
 
 proc QGraphicsScenedisconnectNotify*(self: gen_qgraphicsscene_types.QGraphicsScene, signal: gen_qmetaobject_types.QMetaMethod): void =
@@ -1254,14 +1259,235 @@ proc QGraphicsScenedisconnectNotify*(self: gen_qgraphicsscene_types.QGraphicsSce
 proc miqt_exec_callback_cQGraphicsScene_disconnectNotify(vtbl: pointer, self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsSceneVTable](vtbl)
   let self = QGraphicsScene(h: self)
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].disconnectNotify(self, slotval1)
+
+type VirtualQGraphicsScene* {.inheritable.} = ref object of QGraphicsScene
+  vtbl*: cQGraphicsSceneVTable
+method metaObject*(self: VirtualQGraphicsScene, ): gen_qobjectdefs_types.QMetaObject {.base.} =
+  QGraphicsScenemetaObject(self[])
+proc miqt_exec_method_cQGraphicsScene_metaObject(vtbl: pointer, inst: pointer): pointer {.cdecl.} =
+  let vtbl = cast[VirtualQGraphicsScene](cast[uint](vtbl) - uint(offsetOf(VirtualQGraphicsScene, vtbl)))
+  var virtualReturn = vtbl.metaObject()
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
+
+method metacast*(self: VirtualQGraphicsScene, param1: cstring): pointer {.base.} =
+  QGraphicsScenemetacast(self[], param1)
+proc miqt_exec_method_cQGraphicsScene_metacast(vtbl: pointer, inst: pointer, param1: cstring): pointer {.cdecl.} =
+  let vtbl = cast[VirtualQGraphicsScene](cast[uint](vtbl) - uint(offsetOf(VirtualQGraphicsScene, vtbl)))
+  let slotval1 = (param1)
+  var virtualReturn = vtbl.metacast(slotval1)
+  virtualReturn
+
+method metacall*(self: VirtualQGraphicsScene, param1: cint, param2: cint, param3: pointer): cint {.base.} =
+  QGraphicsScenemetacall(self[], param1, param2, param3)
+proc miqt_exec_method_cQGraphicsScene_metacall(vtbl: pointer, inst: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
+  let vtbl = cast[VirtualQGraphicsScene](cast[uint](vtbl) - uint(offsetOf(VirtualQGraphicsScene, vtbl)))
+  let slotval1 = cint(param1)
+  let slotval2 = param2
+  let slotval3 = param3
+  var virtualReturn = vtbl.metacall(slotval1, slotval2, slotval3)
+  virtualReturn
+
+method inputMethodQuery*(self: VirtualQGraphicsScene, query: cint): gen_qvariant_types.QVariant {.base.} =
+  QGraphicsSceneinputMethodQuery(self[], query)
+proc miqt_exec_method_cQGraphicsScene_inputMethodQuery(vtbl: pointer, inst: pointer, query: cint): pointer {.cdecl.} =
+  let vtbl = cast[VirtualQGraphicsScene](cast[uint](vtbl) - uint(offsetOf(VirtualQGraphicsScene, vtbl)))
+  let slotval1 = cint(query)
+  var virtualReturn = vtbl.inputMethodQuery(slotval1)
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
+
+method event*(self: VirtualQGraphicsScene, event: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QGraphicsSceneevent(self[], event)
+proc miqt_exec_method_cQGraphicsScene_event(vtbl: pointer, inst: pointer, event: pointer): bool {.cdecl.} =
+  let vtbl = cast[VirtualQGraphicsScene](cast[uint](vtbl) - uint(offsetOf(VirtualQGraphicsScene, vtbl)))
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
+  var virtualReturn = vtbl.event(slotval1)
+  virtualReturn
+
+method eventFilter*(self: VirtualQGraphicsScene, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QGraphicsSceneeventFilter(self[], watched, event)
+proc miqt_exec_method_cQGraphicsScene_eventFilter(vtbl: pointer, inst: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
+  let vtbl = cast[VirtualQGraphicsScene](cast[uint](vtbl) - uint(offsetOf(VirtualQGraphicsScene, vtbl)))
+  let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
+  var virtualReturn = vtbl.eventFilter(slotval1, slotval2)
+  virtualReturn
+
+method contextMenuEvent*(self: VirtualQGraphicsScene, event: gen_qgraphicssceneevent_types.QGraphicsSceneContextMenuEvent): void {.base.} =
+  QGraphicsScenecontextMenuEvent(self[], event)
+proc miqt_exec_method_cQGraphicsScene_contextMenuEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQGraphicsScene](cast[uint](vtbl) - uint(offsetOf(VirtualQGraphicsScene, vtbl)))
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneContextMenuEvent(h: event, owned: false)
+  vtbl.contextMenuEvent(slotval1)
+
+method dragEnterEvent*(self: VirtualQGraphicsScene, event: gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent): void {.base.} =
+  QGraphicsScenedragEnterEvent(self[], event)
+proc miqt_exec_method_cQGraphicsScene_dragEnterEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQGraphicsScene](cast[uint](vtbl) - uint(offsetOf(VirtualQGraphicsScene, vtbl)))
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent(h: event, owned: false)
+  vtbl.dragEnterEvent(slotval1)
+
+method dragMoveEvent*(self: VirtualQGraphicsScene, event: gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent): void {.base.} =
+  QGraphicsScenedragMoveEvent(self[], event)
+proc miqt_exec_method_cQGraphicsScene_dragMoveEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQGraphicsScene](cast[uint](vtbl) - uint(offsetOf(VirtualQGraphicsScene, vtbl)))
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent(h: event, owned: false)
+  vtbl.dragMoveEvent(slotval1)
+
+method dragLeaveEvent*(self: VirtualQGraphicsScene, event: gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent): void {.base.} =
+  QGraphicsScenedragLeaveEvent(self[], event)
+proc miqt_exec_method_cQGraphicsScene_dragLeaveEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQGraphicsScene](cast[uint](vtbl) - uint(offsetOf(VirtualQGraphicsScene, vtbl)))
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent(h: event, owned: false)
+  vtbl.dragLeaveEvent(slotval1)
+
+method dropEvent*(self: VirtualQGraphicsScene, event: gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent): void {.base.} =
+  QGraphicsScenedropEvent(self[], event)
+proc miqt_exec_method_cQGraphicsScene_dropEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQGraphicsScene](cast[uint](vtbl) - uint(offsetOf(VirtualQGraphicsScene, vtbl)))
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent(h: event, owned: false)
+  vtbl.dropEvent(slotval1)
+
+method focusInEvent*(self: VirtualQGraphicsScene, event: gen_qevent_types.QFocusEvent): void {.base.} =
+  QGraphicsScenefocusInEvent(self[], event)
+proc miqt_exec_method_cQGraphicsScene_focusInEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQGraphicsScene](cast[uint](vtbl) - uint(offsetOf(VirtualQGraphicsScene, vtbl)))
+  let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
+  vtbl.focusInEvent(slotval1)
+
+method focusOutEvent*(self: VirtualQGraphicsScene, event: gen_qevent_types.QFocusEvent): void {.base.} =
+  QGraphicsScenefocusOutEvent(self[], event)
+proc miqt_exec_method_cQGraphicsScene_focusOutEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQGraphicsScene](cast[uint](vtbl) - uint(offsetOf(VirtualQGraphicsScene, vtbl)))
+  let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
+  vtbl.focusOutEvent(slotval1)
+
+method helpEvent*(self: VirtualQGraphicsScene, event: gen_qgraphicssceneevent_types.QGraphicsSceneHelpEvent): void {.base.} =
+  QGraphicsScenehelpEvent(self[], event)
+proc miqt_exec_method_cQGraphicsScene_helpEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQGraphicsScene](cast[uint](vtbl) - uint(offsetOf(VirtualQGraphicsScene, vtbl)))
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneHelpEvent(h: event, owned: false)
+  vtbl.helpEvent(slotval1)
+
+method keyPressEvent*(self: VirtualQGraphicsScene, event: gen_qevent_types.QKeyEvent): void {.base.} =
+  QGraphicsScenekeyPressEvent(self[], event)
+proc miqt_exec_method_cQGraphicsScene_keyPressEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQGraphicsScene](cast[uint](vtbl) - uint(offsetOf(VirtualQGraphicsScene, vtbl)))
+  let slotval1 = gen_qevent_types.QKeyEvent(h: event, owned: false)
+  vtbl.keyPressEvent(slotval1)
+
+method keyReleaseEvent*(self: VirtualQGraphicsScene, event: gen_qevent_types.QKeyEvent): void {.base.} =
+  QGraphicsScenekeyReleaseEvent(self[], event)
+proc miqt_exec_method_cQGraphicsScene_keyReleaseEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQGraphicsScene](cast[uint](vtbl) - uint(offsetOf(VirtualQGraphicsScene, vtbl)))
+  let slotval1 = gen_qevent_types.QKeyEvent(h: event, owned: false)
+  vtbl.keyReleaseEvent(slotval1)
+
+method mousePressEvent*(self: VirtualQGraphicsScene, event: gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent): void {.base.} =
+  QGraphicsScenemousePressEvent(self[], event)
+proc miqt_exec_method_cQGraphicsScene_mousePressEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQGraphicsScene](cast[uint](vtbl) - uint(offsetOf(VirtualQGraphicsScene, vtbl)))
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent(h: event, owned: false)
+  vtbl.mousePressEvent(slotval1)
+
+method mouseMoveEvent*(self: VirtualQGraphicsScene, event: gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent): void {.base.} =
+  QGraphicsScenemouseMoveEvent(self[], event)
+proc miqt_exec_method_cQGraphicsScene_mouseMoveEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQGraphicsScene](cast[uint](vtbl) - uint(offsetOf(VirtualQGraphicsScene, vtbl)))
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent(h: event, owned: false)
+  vtbl.mouseMoveEvent(slotval1)
+
+method mouseReleaseEvent*(self: VirtualQGraphicsScene, event: gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent): void {.base.} =
+  QGraphicsScenemouseReleaseEvent(self[], event)
+proc miqt_exec_method_cQGraphicsScene_mouseReleaseEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQGraphicsScene](cast[uint](vtbl) - uint(offsetOf(VirtualQGraphicsScene, vtbl)))
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent(h: event, owned: false)
+  vtbl.mouseReleaseEvent(slotval1)
+
+method mouseDoubleClickEvent*(self: VirtualQGraphicsScene, event: gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent): void {.base.} =
+  QGraphicsScenemouseDoubleClickEvent(self[], event)
+proc miqt_exec_method_cQGraphicsScene_mouseDoubleClickEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQGraphicsScene](cast[uint](vtbl) - uint(offsetOf(VirtualQGraphicsScene, vtbl)))
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent(h: event, owned: false)
+  vtbl.mouseDoubleClickEvent(slotval1)
+
+method wheelEvent*(self: VirtualQGraphicsScene, event: gen_qgraphicssceneevent_types.QGraphicsSceneWheelEvent): void {.base.} =
+  QGraphicsScenewheelEvent(self[], event)
+proc miqt_exec_method_cQGraphicsScene_wheelEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQGraphicsScene](cast[uint](vtbl) - uint(offsetOf(VirtualQGraphicsScene, vtbl)))
+  let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneWheelEvent(h: event, owned: false)
+  vtbl.wheelEvent(slotval1)
+
+method inputMethodEvent*(self: VirtualQGraphicsScene, event: gen_qevent_types.QInputMethodEvent): void {.base.} =
+  QGraphicsSceneinputMethodEvent(self[], event)
+proc miqt_exec_method_cQGraphicsScene_inputMethodEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQGraphicsScene](cast[uint](vtbl) - uint(offsetOf(VirtualQGraphicsScene, vtbl)))
+  let slotval1 = gen_qevent_types.QInputMethodEvent(h: event, owned: false)
+  vtbl.inputMethodEvent(slotval1)
+
+method drawBackground*(self: VirtualQGraphicsScene, painter: gen_qpainter_types.QPainter, rect: gen_qrect_types.QRectF): void {.base.} =
+  QGraphicsScenedrawBackground(self[], painter, rect)
+proc miqt_exec_method_cQGraphicsScene_drawBackground(vtbl: pointer, inst: pointer, painter: pointer, rect: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQGraphicsScene](cast[uint](vtbl) - uint(offsetOf(VirtualQGraphicsScene, vtbl)))
+  let slotval1 = gen_qpainter_types.QPainter(h: painter, owned: false)
+  let slotval2 = gen_qrect_types.QRectF(h: rect, owned: false)
+  vtbl.drawBackground(slotval1, slotval2)
+
+method drawForeground*(self: VirtualQGraphicsScene, painter: gen_qpainter_types.QPainter, rect: gen_qrect_types.QRectF): void {.base.} =
+  QGraphicsScenedrawForeground(self[], painter, rect)
+proc miqt_exec_method_cQGraphicsScene_drawForeground(vtbl: pointer, inst: pointer, painter: pointer, rect: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQGraphicsScene](cast[uint](vtbl) - uint(offsetOf(VirtualQGraphicsScene, vtbl)))
+  let slotval1 = gen_qpainter_types.QPainter(h: painter, owned: false)
+  let slotval2 = gen_qrect_types.QRectF(h: rect, owned: false)
+  vtbl.drawForeground(slotval1, slotval2)
+
+method timerEvent*(self: VirtualQGraphicsScene, event: gen_qcoreevent_types.QTimerEvent): void {.base.} =
+  QGraphicsScenetimerEvent(self[], event)
+proc miqt_exec_method_cQGraphicsScene_timerEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQGraphicsScene](cast[uint](vtbl) - uint(offsetOf(VirtualQGraphicsScene, vtbl)))
+  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
+  vtbl.timerEvent(slotval1)
+
+method childEvent*(self: VirtualQGraphicsScene, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
+  QGraphicsScenechildEvent(self[], event)
+proc miqt_exec_method_cQGraphicsScene_childEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQGraphicsScene](cast[uint](vtbl) - uint(offsetOf(VirtualQGraphicsScene, vtbl)))
+  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
+  vtbl.childEvent(slotval1)
+
+method customEvent*(self: VirtualQGraphicsScene, event: gen_qcoreevent_types.QEvent): void {.base.} =
+  QGraphicsScenecustomEvent(self[], event)
+proc miqt_exec_method_cQGraphicsScene_customEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQGraphicsScene](cast[uint](vtbl) - uint(offsetOf(VirtualQGraphicsScene, vtbl)))
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
+  vtbl.customEvent(slotval1)
+
+method connectNotify*(self: VirtualQGraphicsScene, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QGraphicsSceneconnectNotify(self[], signal)
+proc miqt_exec_method_cQGraphicsScene_connectNotify(vtbl: pointer, inst: pointer, signal: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQGraphicsScene](cast[uint](vtbl) - uint(offsetOf(VirtualQGraphicsScene, vtbl)))
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
+  vtbl.connectNotify(slotval1)
+
+method disconnectNotify*(self: VirtualQGraphicsScene, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QGraphicsScenedisconnectNotify(self[], signal)
+proc miqt_exec_method_cQGraphicsScene_disconnectNotify(vtbl: pointer, inst: pointer, signal: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQGraphicsScene](cast[uint](vtbl) - uint(offsetOf(VirtualQGraphicsScene, vtbl)))
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
+  vtbl.disconnectNotify(slotval1)
 
 proc focusNextPrevChild*(self: gen_qgraphicsscene_types.QGraphicsScene, next: bool): bool =
   fcQGraphicsScene_protectedbase_focusNextPrevChild(self.h, next)
 
 proc sender*(self: gen_qgraphicsscene_types.QGraphicsScene, ): gen_qobject_types.QObject =
-  gen_qobject_types.QObject(h: fcQGraphicsScene_protectedbase_sender(self.h))
+  gen_qobject_types.QObject(h: fcQGraphicsScene_protectedbase_sender(self.h), owned: false)
 
 proc senderSignalIndex*(self: gen_qgraphicsscene_types.QGraphicsScene, ): cint =
   fcQGraphicsScene_protectedbase_senderSignalIndex(self.h)
@@ -1276,410 +1502,653 @@ proc create*(T: type gen_qgraphicsscene_types.QGraphicsScene,
     vtbl: ref QGraphicsSceneVTable = nil): gen_qgraphicsscene_types.QGraphicsScene =
   let vtbl = if vtbl == nil: new QGraphicsSceneVTable else: vtbl
   GC_ref(vtbl)
-  vtbl.vtbl.destructor = proc(vtbl: ptr cQGraphicsSceneVTable, _: ptr cQGraphicsScene) {.cdecl.} =
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQGraphicsSceneVTable, _: ptr cQGraphicsScene) {.cdecl.} =
     let vtbl = cast[ref QGraphicsSceneVTable](vtbl)
     GC_unref(vtbl)
-  if not isNil(vtbl.metaObject):
+  if not isNil(vtbl[].metaObject):
     vtbl[].vtbl.metaObject = miqt_exec_callback_cQGraphicsScene_metaObject
-  if not isNil(vtbl.metacast):
+  if not isNil(vtbl[].metacast):
     vtbl[].vtbl.metacast = miqt_exec_callback_cQGraphicsScene_metacast
-  if not isNil(vtbl.metacall):
+  if not isNil(vtbl[].metacall):
     vtbl[].vtbl.metacall = miqt_exec_callback_cQGraphicsScene_metacall
-  if not isNil(vtbl.inputMethodQuery):
+  if not isNil(vtbl[].inputMethodQuery):
     vtbl[].vtbl.inputMethodQuery = miqt_exec_callback_cQGraphicsScene_inputMethodQuery
-  if not isNil(vtbl.event):
+  if not isNil(vtbl[].event):
     vtbl[].vtbl.event = miqt_exec_callback_cQGraphicsScene_event
-  if not isNil(vtbl.eventFilter):
+  if not isNil(vtbl[].eventFilter):
     vtbl[].vtbl.eventFilter = miqt_exec_callback_cQGraphicsScene_eventFilter
-  if not isNil(vtbl.contextMenuEvent):
+  if not isNil(vtbl[].contextMenuEvent):
     vtbl[].vtbl.contextMenuEvent = miqt_exec_callback_cQGraphicsScene_contextMenuEvent
-  if not isNil(vtbl.dragEnterEvent):
+  if not isNil(vtbl[].dragEnterEvent):
     vtbl[].vtbl.dragEnterEvent = miqt_exec_callback_cQGraphicsScene_dragEnterEvent
-  if not isNil(vtbl.dragMoveEvent):
+  if not isNil(vtbl[].dragMoveEvent):
     vtbl[].vtbl.dragMoveEvent = miqt_exec_callback_cQGraphicsScene_dragMoveEvent
-  if not isNil(vtbl.dragLeaveEvent):
+  if not isNil(vtbl[].dragLeaveEvent):
     vtbl[].vtbl.dragLeaveEvent = miqt_exec_callback_cQGraphicsScene_dragLeaveEvent
-  if not isNil(vtbl.dropEvent):
+  if not isNil(vtbl[].dropEvent):
     vtbl[].vtbl.dropEvent = miqt_exec_callback_cQGraphicsScene_dropEvent
-  if not isNil(vtbl.focusInEvent):
+  if not isNil(vtbl[].focusInEvent):
     vtbl[].vtbl.focusInEvent = miqt_exec_callback_cQGraphicsScene_focusInEvent
-  if not isNil(vtbl.focusOutEvent):
+  if not isNil(vtbl[].focusOutEvent):
     vtbl[].vtbl.focusOutEvent = miqt_exec_callback_cQGraphicsScene_focusOutEvent
-  if not isNil(vtbl.helpEvent):
+  if not isNil(vtbl[].helpEvent):
     vtbl[].vtbl.helpEvent = miqt_exec_callback_cQGraphicsScene_helpEvent
-  if not isNil(vtbl.keyPressEvent):
+  if not isNil(vtbl[].keyPressEvent):
     vtbl[].vtbl.keyPressEvent = miqt_exec_callback_cQGraphicsScene_keyPressEvent
-  if not isNil(vtbl.keyReleaseEvent):
+  if not isNil(vtbl[].keyReleaseEvent):
     vtbl[].vtbl.keyReleaseEvent = miqt_exec_callback_cQGraphicsScene_keyReleaseEvent
-  if not isNil(vtbl.mousePressEvent):
+  if not isNil(vtbl[].mousePressEvent):
     vtbl[].vtbl.mousePressEvent = miqt_exec_callback_cQGraphicsScene_mousePressEvent
-  if not isNil(vtbl.mouseMoveEvent):
+  if not isNil(vtbl[].mouseMoveEvent):
     vtbl[].vtbl.mouseMoveEvent = miqt_exec_callback_cQGraphicsScene_mouseMoveEvent
-  if not isNil(vtbl.mouseReleaseEvent):
+  if not isNil(vtbl[].mouseReleaseEvent):
     vtbl[].vtbl.mouseReleaseEvent = miqt_exec_callback_cQGraphicsScene_mouseReleaseEvent
-  if not isNil(vtbl.mouseDoubleClickEvent):
+  if not isNil(vtbl[].mouseDoubleClickEvent):
     vtbl[].vtbl.mouseDoubleClickEvent = miqt_exec_callback_cQGraphicsScene_mouseDoubleClickEvent
-  if not isNil(vtbl.wheelEvent):
+  if not isNil(vtbl[].wheelEvent):
     vtbl[].vtbl.wheelEvent = miqt_exec_callback_cQGraphicsScene_wheelEvent
-  if not isNil(vtbl.inputMethodEvent):
+  if not isNil(vtbl[].inputMethodEvent):
     vtbl[].vtbl.inputMethodEvent = miqt_exec_callback_cQGraphicsScene_inputMethodEvent
-  if not isNil(vtbl.drawBackground):
+  if not isNil(vtbl[].drawBackground):
     vtbl[].vtbl.drawBackground = miqt_exec_callback_cQGraphicsScene_drawBackground
-  if not isNil(vtbl.drawForeground):
+  if not isNil(vtbl[].drawForeground):
     vtbl[].vtbl.drawForeground = miqt_exec_callback_cQGraphicsScene_drawForeground
-  if not isNil(vtbl.timerEvent):
+  if not isNil(vtbl[].timerEvent):
     vtbl[].vtbl.timerEvent = miqt_exec_callback_cQGraphicsScene_timerEvent
-  if not isNil(vtbl.childEvent):
+  if not isNil(vtbl[].childEvent):
     vtbl[].vtbl.childEvent = miqt_exec_callback_cQGraphicsScene_childEvent
-  if not isNil(vtbl.customEvent):
+  if not isNil(vtbl[].customEvent):
     vtbl[].vtbl.customEvent = miqt_exec_callback_cQGraphicsScene_customEvent
-  if not isNil(vtbl.connectNotify):
+  if not isNil(vtbl[].connectNotify):
     vtbl[].vtbl.connectNotify = miqt_exec_callback_cQGraphicsScene_connectNotify
-  if not isNil(vtbl.disconnectNotify):
+  if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQGraphicsScene_disconnectNotify
-  gen_qgraphicsscene_types.QGraphicsScene(h: fcQGraphicsScene_new(addr(vtbl[]), ))
+  gen_qgraphicsscene_types.QGraphicsScene(h: fcQGraphicsScene_new(addr(vtbl[].vtbl), ), owned: true)
 
 proc create*(T: type gen_qgraphicsscene_types.QGraphicsScene,
     sceneRect: gen_qrect_types.QRectF,
     vtbl: ref QGraphicsSceneVTable = nil): gen_qgraphicsscene_types.QGraphicsScene =
   let vtbl = if vtbl == nil: new QGraphicsSceneVTable else: vtbl
   GC_ref(vtbl)
-  vtbl.vtbl.destructor = proc(vtbl: ptr cQGraphicsSceneVTable, _: ptr cQGraphicsScene) {.cdecl.} =
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQGraphicsSceneVTable, _: ptr cQGraphicsScene) {.cdecl.} =
     let vtbl = cast[ref QGraphicsSceneVTable](vtbl)
     GC_unref(vtbl)
-  if not isNil(vtbl.metaObject):
+  if not isNil(vtbl[].metaObject):
     vtbl[].vtbl.metaObject = miqt_exec_callback_cQGraphicsScene_metaObject
-  if not isNil(vtbl.metacast):
+  if not isNil(vtbl[].metacast):
     vtbl[].vtbl.metacast = miqt_exec_callback_cQGraphicsScene_metacast
-  if not isNil(vtbl.metacall):
+  if not isNil(vtbl[].metacall):
     vtbl[].vtbl.metacall = miqt_exec_callback_cQGraphicsScene_metacall
-  if not isNil(vtbl.inputMethodQuery):
+  if not isNil(vtbl[].inputMethodQuery):
     vtbl[].vtbl.inputMethodQuery = miqt_exec_callback_cQGraphicsScene_inputMethodQuery
-  if not isNil(vtbl.event):
+  if not isNil(vtbl[].event):
     vtbl[].vtbl.event = miqt_exec_callback_cQGraphicsScene_event
-  if not isNil(vtbl.eventFilter):
+  if not isNil(vtbl[].eventFilter):
     vtbl[].vtbl.eventFilter = miqt_exec_callback_cQGraphicsScene_eventFilter
-  if not isNil(vtbl.contextMenuEvent):
+  if not isNil(vtbl[].contextMenuEvent):
     vtbl[].vtbl.contextMenuEvent = miqt_exec_callback_cQGraphicsScene_contextMenuEvent
-  if not isNil(vtbl.dragEnterEvent):
+  if not isNil(vtbl[].dragEnterEvent):
     vtbl[].vtbl.dragEnterEvent = miqt_exec_callback_cQGraphicsScene_dragEnterEvent
-  if not isNil(vtbl.dragMoveEvent):
+  if not isNil(vtbl[].dragMoveEvent):
     vtbl[].vtbl.dragMoveEvent = miqt_exec_callback_cQGraphicsScene_dragMoveEvent
-  if not isNil(vtbl.dragLeaveEvent):
+  if not isNil(vtbl[].dragLeaveEvent):
     vtbl[].vtbl.dragLeaveEvent = miqt_exec_callback_cQGraphicsScene_dragLeaveEvent
-  if not isNil(vtbl.dropEvent):
+  if not isNil(vtbl[].dropEvent):
     vtbl[].vtbl.dropEvent = miqt_exec_callback_cQGraphicsScene_dropEvent
-  if not isNil(vtbl.focusInEvent):
+  if not isNil(vtbl[].focusInEvent):
     vtbl[].vtbl.focusInEvent = miqt_exec_callback_cQGraphicsScene_focusInEvent
-  if not isNil(vtbl.focusOutEvent):
+  if not isNil(vtbl[].focusOutEvent):
     vtbl[].vtbl.focusOutEvent = miqt_exec_callback_cQGraphicsScene_focusOutEvent
-  if not isNil(vtbl.helpEvent):
+  if not isNil(vtbl[].helpEvent):
     vtbl[].vtbl.helpEvent = miqt_exec_callback_cQGraphicsScene_helpEvent
-  if not isNil(vtbl.keyPressEvent):
+  if not isNil(vtbl[].keyPressEvent):
     vtbl[].vtbl.keyPressEvent = miqt_exec_callback_cQGraphicsScene_keyPressEvent
-  if not isNil(vtbl.keyReleaseEvent):
+  if not isNil(vtbl[].keyReleaseEvent):
     vtbl[].vtbl.keyReleaseEvent = miqt_exec_callback_cQGraphicsScene_keyReleaseEvent
-  if not isNil(vtbl.mousePressEvent):
+  if not isNil(vtbl[].mousePressEvent):
     vtbl[].vtbl.mousePressEvent = miqt_exec_callback_cQGraphicsScene_mousePressEvent
-  if not isNil(vtbl.mouseMoveEvent):
+  if not isNil(vtbl[].mouseMoveEvent):
     vtbl[].vtbl.mouseMoveEvent = miqt_exec_callback_cQGraphicsScene_mouseMoveEvent
-  if not isNil(vtbl.mouseReleaseEvent):
+  if not isNil(vtbl[].mouseReleaseEvent):
     vtbl[].vtbl.mouseReleaseEvent = miqt_exec_callback_cQGraphicsScene_mouseReleaseEvent
-  if not isNil(vtbl.mouseDoubleClickEvent):
+  if not isNil(vtbl[].mouseDoubleClickEvent):
     vtbl[].vtbl.mouseDoubleClickEvent = miqt_exec_callback_cQGraphicsScene_mouseDoubleClickEvent
-  if not isNil(vtbl.wheelEvent):
+  if not isNil(vtbl[].wheelEvent):
     vtbl[].vtbl.wheelEvent = miqt_exec_callback_cQGraphicsScene_wheelEvent
-  if not isNil(vtbl.inputMethodEvent):
+  if not isNil(vtbl[].inputMethodEvent):
     vtbl[].vtbl.inputMethodEvent = miqt_exec_callback_cQGraphicsScene_inputMethodEvent
-  if not isNil(vtbl.drawBackground):
+  if not isNil(vtbl[].drawBackground):
     vtbl[].vtbl.drawBackground = miqt_exec_callback_cQGraphicsScene_drawBackground
-  if not isNil(vtbl.drawForeground):
+  if not isNil(vtbl[].drawForeground):
     vtbl[].vtbl.drawForeground = miqt_exec_callback_cQGraphicsScene_drawForeground
-  if not isNil(vtbl.timerEvent):
+  if not isNil(vtbl[].timerEvent):
     vtbl[].vtbl.timerEvent = miqt_exec_callback_cQGraphicsScene_timerEvent
-  if not isNil(vtbl.childEvent):
+  if not isNil(vtbl[].childEvent):
     vtbl[].vtbl.childEvent = miqt_exec_callback_cQGraphicsScene_childEvent
-  if not isNil(vtbl.customEvent):
+  if not isNil(vtbl[].customEvent):
     vtbl[].vtbl.customEvent = miqt_exec_callback_cQGraphicsScene_customEvent
-  if not isNil(vtbl.connectNotify):
+  if not isNil(vtbl[].connectNotify):
     vtbl[].vtbl.connectNotify = miqt_exec_callback_cQGraphicsScene_connectNotify
-  if not isNil(vtbl.disconnectNotify):
+  if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQGraphicsScene_disconnectNotify
-  gen_qgraphicsscene_types.QGraphicsScene(h: fcQGraphicsScene_new2(addr(vtbl[]), sceneRect.h))
+  gen_qgraphicsscene_types.QGraphicsScene(h: fcQGraphicsScene_new2(addr(vtbl[].vtbl), sceneRect.h), owned: true)
 
 proc create*(T: type gen_qgraphicsscene_types.QGraphicsScene,
     x: float64, y: float64, width: float64, height: float64,
     vtbl: ref QGraphicsSceneVTable = nil): gen_qgraphicsscene_types.QGraphicsScene =
   let vtbl = if vtbl == nil: new QGraphicsSceneVTable else: vtbl
   GC_ref(vtbl)
-  vtbl.vtbl.destructor = proc(vtbl: ptr cQGraphicsSceneVTable, _: ptr cQGraphicsScene) {.cdecl.} =
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQGraphicsSceneVTable, _: ptr cQGraphicsScene) {.cdecl.} =
     let vtbl = cast[ref QGraphicsSceneVTable](vtbl)
     GC_unref(vtbl)
-  if not isNil(vtbl.metaObject):
+  if not isNil(vtbl[].metaObject):
     vtbl[].vtbl.metaObject = miqt_exec_callback_cQGraphicsScene_metaObject
-  if not isNil(vtbl.metacast):
+  if not isNil(vtbl[].metacast):
     vtbl[].vtbl.metacast = miqt_exec_callback_cQGraphicsScene_metacast
-  if not isNil(vtbl.metacall):
+  if not isNil(vtbl[].metacall):
     vtbl[].vtbl.metacall = miqt_exec_callback_cQGraphicsScene_metacall
-  if not isNil(vtbl.inputMethodQuery):
+  if not isNil(vtbl[].inputMethodQuery):
     vtbl[].vtbl.inputMethodQuery = miqt_exec_callback_cQGraphicsScene_inputMethodQuery
-  if not isNil(vtbl.event):
+  if not isNil(vtbl[].event):
     vtbl[].vtbl.event = miqt_exec_callback_cQGraphicsScene_event
-  if not isNil(vtbl.eventFilter):
+  if not isNil(vtbl[].eventFilter):
     vtbl[].vtbl.eventFilter = miqt_exec_callback_cQGraphicsScene_eventFilter
-  if not isNil(vtbl.contextMenuEvent):
+  if not isNil(vtbl[].contextMenuEvent):
     vtbl[].vtbl.contextMenuEvent = miqt_exec_callback_cQGraphicsScene_contextMenuEvent
-  if not isNil(vtbl.dragEnterEvent):
+  if not isNil(vtbl[].dragEnterEvent):
     vtbl[].vtbl.dragEnterEvent = miqt_exec_callback_cQGraphicsScene_dragEnterEvent
-  if not isNil(vtbl.dragMoveEvent):
+  if not isNil(vtbl[].dragMoveEvent):
     vtbl[].vtbl.dragMoveEvent = miqt_exec_callback_cQGraphicsScene_dragMoveEvent
-  if not isNil(vtbl.dragLeaveEvent):
+  if not isNil(vtbl[].dragLeaveEvent):
     vtbl[].vtbl.dragLeaveEvent = miqt_exec_callback_cQGraphicsScene_dragLeaveEvent
-  if not isNil(vtbl.dropEvent):
+  if not isNil(vtbl[].dropEvent):
     vtbl[].vtbl.dropEvent = miqt_exec_callback_cQGraphicsScene_dropEvent
-  if not isNil(vtbl.focusInEvent):
+  if not isNil(vtbl[].focusInEvent):
     vtbl[].vtbl.focusInEvent = miqt_exec_callback_cQGraphicsScene_focusInEvent
-  if not isNil(vtbl.focusOutEvent):
+  if not isNil(vtbl[].focusOutEvent):
     vtbl[].vtbl.focusOutEvent = miqt_exec_callback_cQGraphicsScene_focusOutEvent
-  if not isNil(vtbl.helpEvent):
+  if not isNil(vtbl[].helpEvent):
     vtbl[].vtbl.helpEvent = miqt_exec_callback_cQGraphicsScene_helpEvent
-  if not isNil(vtbl.keyPressEvent):
+  if not isNil(vtbl[].keyPressEvent):
     vtbl[].vtbl.keyPressEvent = miqt_exec_callback_cQGraphicsScene_keyPressEvent
-  if not isNil(vtbl.keyReleaseEvent):
+  if not isNil(vtbl[].keyReleaseEvent):
     vtbl[].vtbl.keyReleaseEvent = miqt_exec_callback_cQGraphicsScene_keyReleaseEvent
-  if not isNil(vtbl.mousePressEvent):
+  if not isNil(vtbl[].mousePressEvent):
     vtbl[].vtbl.mousePressEvent = miqt_exec_callback_cQGraphicsScene_mousePressEvent
-  if not isNil(vtbl.mouseMoveEvent):
+  if not isNil(vtbl[].mouseMoveEvent):
     vtbl[].vtbl.mouseMoveEvent = miqt_exec_callback_cQGraphicsScene_mouseMoveEvent
-  if not isNil(vtbl.mouseReleaseEvent):
+  if not isNil(vtbl[].mouseReleaseEvent):
     vtbl[].vtbl.mouseReleaseEvent = miqt_exec_callback_cQGraphicsScene_mouseReleaseEvent
-  if not isNil(vtbl.mouseDoubleClickEvent):
+  if not isNil(vtbl[].mouseDoubleClickEvent):
     vtbl[].vtbl.mouseDoubleClickEvent = miqt_exec_callback_cQGraphicsScene_mouseDoubleClickEvent
-  if not isNil(vtbl.wheelEvent):
+  if not isNil(vtbl[].wheelEvent):
     vtbl[].vtbl.wheelEvent = miqt_exec_callback_cQGraphicsScene_wheelEvent
-  if not isNil(vtbl.inputMethodEvent):
+  if not isNil(vtbl[].inputMethodEvent):
     vtbl[].vtbl.inputMethodEvent = miqt_exec_callback_cQGraphicsScene_inputMethodEvent
-  if not isNil(vtbl.drawBackground):
+  if not isNil(vtbl[].drawBackground):
     vtbl[].vtbl.drawBackground = miqt_exec_callback_cQGraphicsScene_drawBackground
-  if not isNil(vtbl.drawForeground):
+  if not isNil(vtbl[].drawForeground):
     vtbl[].vtbl.drawForeground = miqt_exec_callback_cQGraphicsScene_drawForeground
-  if not isNil(vtbl.timerEvent):
+  if not isNil(vtbl[].timerEvent):
     vtbl[].vtbl.timerEvent = miqt_exec_callback_cQGraphicsScene_timerEvent
-  if not isNil(vtbl.childEvent):
+  if not isNil(vtbl[].childEvent):
     vtbl[].vtbl.childEvent = miqt_exec_callback_cQGraphicsScene_childEvent
-  if not isNil(vtbl.customEvent):
+  if not isNil(vtbl[].customEvent):
     vtbl[].vtbl.customEvent = miqt_exec_callback_cQGraphicsScene_customEvent
-  if not isNil(vtbl.connectNotify):
+  if not isNil(vtbl[].connectNotify):
     vtbl[].vtbl.connectNotify = miqt_exec_callback_cQGraphicsScene_connectNotify
-  if not isNil(vtbl.disconnectNotify):
+  if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQGraphicsScene_disconnectNotify
-  gen_qgraphicsscene_types.QGraphicsScene(h: fcQGraphicsScene_new3(addr(vtbl[]), x, y, width, height))
+  gen_qgraphicsscene_types.QGraphicsScene(h: fcQGraphicsScene_new3(addr(vtbl[].vtbl), x, y, width, height), owned: true)
 
 proc create*(T: type gen_qgraphicsscene_types.QGraphicsScene,
     parent: gen_qobject_types.QObject,
     vtbl: ref QGraphicsSceneVTable = nil): gen_qgraphicsscene_types.QGraphicsScene =
   let vtbl = if vtbl == nil: new QGraphicsSceneVTable else: vtbl
   GC_ref(vtbl)
-  vtbl.vtbl.destructor = proc(vtbl: ptr cQGraphicsSceneVTable, _: ptr cQGraphicsScene) {.cdecl.} =
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQGraphicsSceneVTable, _: ptr cQGraphicsScene) {.cdecl.} =
     let vtbl = cast[ref QGraphicsSceneVTable](vtbl)
     GC_unref(vtbl)
-  if not isNil(vtbl.metaObject):
+  if not isNil(vtbl[].metaObject):
     vtbl[].vtbl.metaObject = miqt_exec_callback_cQGraphicsScene_metaObject
-  if not isNil(vtbl.metacast):
+  if not isNil(vtbl[].metacast):
     vtbl[].vtbl.metacast = miqt_exec_callback_cQGraphicsScene_metacast
-  if not isNil(vtbl.metacall):
+  if not isNil(vtbl[].metacall):
     vtbl[].vtbl.metacall = miqt_exec_callback_cQGraphicsScene_metacall
-  if not isNil(vtbl.inputMethodQuery):
+  if not isNil(vtbl[].inputMethodQuery):
     vtbl[].vtbl.inputMethodQuery = miqt_exec_callback_cQGraphicsScene_inputMethodQuery
-  if not isNil(vtbl.event):
+  if not isNil(vtbl[].event):
     vtbl[].vtbl.event = miqt_exec_callback_cQGraphicsScene_event
-  if not isNil(vtbl.eventFilter):
+  if not isNil(vtbl[].eventFilter):
     vtbl[].vtbl.eventFilter = miqt_exec_callback_cQGraphicsScene_eventFilter
-  if not isNil(vtbl.contextMenuEvent):
+  if not isNil(vtbl[].contextMenuEvent):
     vtbl[].vtbl.contextMenuEvent = miqt_exec_callback_cQGraphicsScene_contextMenuEvent
-  if not isNil(vtbl.dragEnterEvent):
+  if not isNil(vtbl[].dragEnterEvent):
     vtbl[].vtbl.dragEnterEvent = miqt_exec_callback_cQGraphicsScene_dragEnterEvent
-  if not isNil(vtbl.dragMoveEvent):
+  if not isNil(vtbl[].dragMoveEvent):
     vtbl[].vtbl.dragMoveEvent = miqt_exec_callback_cQGraphicsScene_dragMoveEvent
-  if not isNil(vtbl.dragLeaveEvent):
+  if not isNil(vtbl[].dragLeaveEvent):
     vtbl[].vtbl.dragLeaveEvent = miqt_exec_callback_cQGraphicsScene_dragLeaveEvent
-  if not isNil(vtbl.dropEvent):
+  if not isNil(vtbl[].dropEvent):
     vtbl[].vtbl.dropEvent = miqt_exec_callback_cQGraphicsScene_dropEvent
-  if not isNil(vtbl.focusInEvent):
+  if not isNil(vtbl[].focusInEvent):
     vtbl[].vtbl.focusInEvent = miqt_exec_callback_cQGraphicsScene_focusInEvent
-  if not isNil(vtbl.focusOutEvent):
+  if not isNil(vtbl[].focusOutEvent):
     vtbl[].vtbl.focusOutEvent = miqt_exec_callback_cQGraphicsScene_focusOutEvent
-  if not isNil(vtbl.helpEvent):
+  if not isNil(vtbl[].helpEvent):
     vtbl[].vtbl.helpEvent = miqt_exec_callback_cQGraphicsScene_helpEvent
-  if not isNil(vtbl.keyPressEvent):
+  if not isNil(vtbl[].keyPressEvent):
     vtbl[].vtbl.keyPressEvent = miqt_exec_callback_cQGraphicsScene_keyPressEvent
-  if not isNil(vtbl.keyReleaseEvent):
+  if not isNil(vtbl[].keyReleaseEvent):
     vtbl[].vtbl.keyReleaseEvent = miqt_exec_callback_cQGraphicsScene_keyReleaseEvent
-  if not isNil(vtbl.mousePressEvent):
+  if not isNil(vtbl[].mousePressEvent):
     vtbl[].vtbl.mousePressEvent = miqt_exec_callback_cQGraphicsScene_mousePressEvent
-  if not isNil(vtbl.mouseMoveEvent):
+  if not isNil(vtbl[].mouseMoveEvent):
     vtbl[].vtbl.mouseMoveEvent = miqt_exec_callback_cQGraphicsScene_mouseMoveEvent
-  if not isNil(vtbl.mouseReleaseEvent):
+  if not isNil(vtbl[].mouseReleaseEvent):
     vtbl[].vtbl.mouseReleaseEvent = miqt_exec_callback_cQGraphicsScene_mouseReleaseEvent
-  if not isNil(vtbl.mouseDoubleClickEvent):
+  if not isNil(vtbl[].mouseDoubleClickEvent):
     vtbl[].vtbl.mouseDoubleClickEvent = miqt_exec_callback_cQGraphicsScene_mouseDoubleClickEvent
-  if not isNil(vtbl.wheelEvent):
+  if not isNil(vtbl[].wheelEvent):
     vtbl[].vtbl.wheelEvent = miqt_exec_callback_cQGraphicsScene_wheelEvent
-  if not isNil(vtbl.inputMethodEvent):
+  if not isNil(vtbl[].inputMethodEvent):
     vtbl[].vtbl.inputMethodEvent = miqt_exec_callback_cQGraphicsScene_inputMethodEvent
-  if not isNil(vtbl.drawBackground):
+  if not isNil(vtbl[].drawBackground):
     vtbl[].vtbl.drawBackground = miqt_exec_callback_cQGraphicsScene_drawBackground
-  if not isNil(vtbl.drawForeground):
+  if not isNil(vtbl[].drawForeground):
     vtbl[].vtbl.drawForeground = miqt_exec_callback_cQGraphicsScene_drawForeground
-  if not isNil(vtbl.timerEvent):
+  if not isNil(vtbl[].timerEvent):
     vtbl[].vtbl.timerEvent = miqt_exec_callback_cQGraphicsScene_timerEvent
-  if not isNil(vtbl.childEvent):
+  if not isNil(vtbl[].childEvent):
     vtbl[].vtbl.childEvent = miqt_exec_callback_cQGraphicsScene_childEvent
-  if not isNil(vtbl.customEvent):
+  if not isNil(vtbl[].customEvent):
     vtbl[].vtbl.customEvent = miqt_exec_callback_cQGraphicsScene_customEvent
-  if not isNil(vtbl.connectNotify):
+  if not isNil(vtbl[].connectNotify):
     vtbl[].vtbl.connectNotify = miqt_exec_callback_cQGraphicsScene_connectNotify
-  if not isNil(vtbl.disconnectNotify):
+  if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQGraphicsScene_disconnectNotify
-  gen_qgraphicsscene_types.QGraphicsScene(h: fcQGraphicsScene_new4(addr(vtbl[]), parent.h))
+  gen_qgraphicsscene_types.QGraphicsScene(h: fcQGraphicsScene_new4(addr(vtbl[].vtbl), parent.h), owned: true)
 
 proc create*(T: type gen_qgraphicsscene_types.QGraphicsScene,
     sceneRect: gen_qrect_types.QRectF, parent: gen_qobject_types.QObject,
     vtbl: ref QGraphicsSceneVTable = nil): gen_qgraphicsscene_types.QGraphicsScene =
   let vtbl = if vtbl == nil: new QGraphicsSceneVTable else: vtbl
   GC_ref(vtbl)
-  vtbl.vtbl.destructor = proc(vtbl: ptr cQGraphicsSceneVTable, _: ptr cQGraphicsScene) {.cdecl.} =
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQGraphicsSceneVTable, _: ptr cQGraphicsScene) {.cdecl.} =
     let vtbl = cast[ref QGraphicsSceneVTable](vtbl)
     GC_unref(vtbl)
-  if not isNil(vtbl.metaObject):
+  if not isNil(vtbl[].metaObject):
     vtbl[].vtbl.metaObject = miqt_exec_callback_cQGraphicsScene_metaObject
-  if not isNil(vtbl.metacast):
+  if not isNil(vtbl[].metacast):
     vtbl[].vtbl.metacast = miqt_exec_callback_cQGraphicsScene_metacast
-  if not isNil(vtbl.metacall):
+  if not isNil(vtbl[].metacall):
     vtbl[].vtbl.metacall = miqt_exec_callback_cQGraphicsScene_metacall
-  if not isNil(vtbl.inputMethodQuery):
+  if not isNil(vtbl[].inputMethodQuery):
     vtbl[].vtbl.inputMethodQuery = miqt_exec_callback_cQGraphicsScene_inputMethodQuery
-  if not isNil(vtbl.event):
+  if not isNil(vtbl[].event):
     vtbl[].vtbl.event = miqt_exec_callback_cQGraphicsScene_event
-  if not isNil(vtbl.eventFilter):
+  if not isNil(vtbl[].eventFilter):
     vtbl[].vtbl.eventFilter = miqt_exec_callback_cQGraphicsScene_eventFilter
-  if not isNil(vtbl.contextMenuEvent):
+  if not isNil(vtbl[].contextMenuEvent):
     vtbl[].vtbl.contextMenuEvent = miqt_exec_callback_cQGraphicsScene_contextMenuEvent
-  if not isNil(vtbl.dragEnterEvent):
+  if not isNil(vtbl[].dragEnterEvent):
     vtbl[].vtbl.dragEnterEvent = miqt_exec_callback_cQGraphicsScene_dragEnterEvent
-  if not isNil(vtbl.dragMoveEvent):
+  if not isNil(vtbl[].dragMoveEvent):
     vtbl[].vtbl.dragMoveEvent = miqt_exec_callback_cQGraphicsScene_dragMoveEvent
-  if not isNil(vtbl.dragLeaveEvent):
+  if not isNil(vtbl[].dragLeaveEvent):
     vtbl[].vtbl.dragLeaveEvent = miqt_exec_callback_cQGraphicsScene_dragLeaveEvent
-  if not isNil(vtbl.dropEvent):
+  if not isNil(vtbl[].dropEvent):
     vtbl[].vtbl.dropEvent = miqt_exec_callback_cQGraphicsScene_dropEvent
-  if not isNil(vtbl.focusInEvent):
+  if not isNil(vtbl[].focusInEvent):
     vtbl[].vtbl.focusInEvent = miqt_exec_callback_cQGraphicsScene_focusInEvent
-  if not isNil(vtbl.focusOutEvent):
+  if not isNil(vtbl[].focusOutEvent):
     vtbl[].vtbl.focusOutEvent = miqt_exec_callback_cQGraphicsScene_focusOutEvent
-  if not isNil(vtbl.helpEvent):
+  if not isNil(vtbl[].helpEvent):
     vtbl[].vtbl.helpEvent = miqt_exec_callback_cQGraphicsScene_helpEvent
-  if not isNil(vtbl.keyPressEvent):
+  if not isNil(vtbl[].keyPressEvent):
     vtbl[].vtbl.keyPressEvent = miqt_exec_callback_cQGraphicsScene_keyPressEvent
-  if not isNil(vtbl.keyReleaseEvent):
+  if not isNil(vtbl[].keyReleaseEvent):
     vtbl[].vtbl.keyReleaseEvent = miqt_exec_callback_cQGraphicsScene_keyReleaseEvent
-  if not isNil(vtbl.mousePressEvent):
+  if not isNil(vtbl[].mousePressEvent):
     vtbl[].vtbl.mousePressEvent = miqt_exec_callback_cQGraphicsScene_mousePressEvent
-  if not isNil(vtbl.mouseMoveEvent):
+  if not isNil(vtbl[].mouseMoveEvent):
     vtbl[].vtbl.mouseMoveEvent = miqt_exec_callback_cQGraphicsScene_mouseMoveEvent
-  if not isNil(vtbl.mouseReleaseEvent):
+  if not isNil(vtbl[].mouseReleaseEvent):
     vtbl[].vtbl.mouseReleaseEvent = miqt_exec_callback_cQGraphicsScene_mouseReleaseEvent
-  if not isNil(vtbl.mouseDoubleClickEvent):
+  if not isNil(vtbl[].mouseDoubleClickEvent):
     vtbl[].vtbl.mouseDoubleClickEvent = miqt_exec_callback_cQGraphicsScene_mouseDoubleClickEvent
-  if not isNil(vtbl.wheelEvent):
+  if not isNil(vtbl[].wheelEvent):
     vtbl[].vtbl.wheelEvent = miqt_exec_callback_cQGraphicsScene_wheelEvent
-  if not isNil(vtbl.inputMethodEvent):
+  if not isNil(vtbl[].inputMethodEvent):
     vtbl[].vtbl.inputMethodEvent = miqt_exec_callback_cQGraphicsScene_inputMethodEvent
-  if not isNil(vtbl.drawBackground):
+  if not isNil(vtbl[].drawBackground):
     vtbl[].vtbl.drawBackground = miqt_exec_callback_cQGraphicsScene_drawBackground
-  if not isNil(vtbl.drawForeground):
+  if not isNil(vtbl[].drawForeground):
     vtbl[].vtbl.drawForeground = miqt_exec_callback_cQGraphicsScene_drawForeground
-  if not isNil(vtbl.timerEvent):
+  if not isNil(vtbl[].timerEvent):
     vtbl[].vtbl.timerEvent = miqt_exec_callback_cQGraphicsScene_timerEvent
-  if not isNil(vtbl.childEvent):
+  if not isNil(vtbl[].childEvent):
     vtbl[].vtbl.childEvent = miqt_exec_callback_cQGraphicsScene_childEvent
-  if not isNil(vtbl.customEvent):
+  if not isNil(vtbl[].customEvent):
     vtbl[].vtbl.customEvent = miqt_exec_callback_cQGraphicsScene_customEvent
-  if not isNil(vtbl.connectNotify):
+  if not isNil(vtbl[].connectNotify):
     vtbl[].vtbl.connectNotify = miqt_exec_callback_cQGraphicsScene_connectNotify
-  if not isNil(vtbl.disconnectNotify):
+  if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQGraphicsScene_disconnectNotify
-  gen_qgraphicsscene_types.QGraphicsScene(h: fcQGraphicsScene_new5(addr(vtbl[]), sceneRect.h, parent.h))
+  gen_qgraphicsscene_types.QGraphicsScene(h: fcQGraphicsScene_new5(addr(vtbl[].vtbl), sceneRect.h, parent.h), owned: true)
 
 proc create*(T: type gen_qgraphicsscene_types.QGraphicsScene,
     x: float64, y: float64, width: float64, height: float64, parent: gen_qobject_types.QObject,
     vtbl: ref QGraphicsSceneVTable = nil): gen_qgraphicsscene_types.QGraphicsScene =
   let vtbl = if vtbl == nil: new QGraphicsSceneVTable else: vtbl
   GC_ref(vtbl)
-  vtbl.vtbl.destructor = proc(vtbl: ptr cQGraphicsSceneVTable, _: ptr cQGraphicsScene) {.cdecl.} =
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQGraphicsSceneVTable, _: ptr cQGraphicsScene) {.cdecl.} =
     let vtbl = cast[ref QGraphicsSceneVTable](vtbl)
     GC_unref(vtbl)
-  if not isNil(vtbl.metaObject):
+  if not isNil(vtbl[].metaObject):
     vtbl[].vtbl.metaObject = miqt_exec_callback_cQGraphicsScene_metaObject
-  if not isNil(vtbl.metacast):
+  if not isNil(vtbl[].metacast):
     vtbl[].vtbl.metacast = miqt_exec_callback_cQGraphicsScene_metacast
-  if not isNil(vtbl.metacall):
+  if not isNil(vtbl[].metacall):
     vtbl[].vtbl.metacall = miqt_exec_callback_cQGraphicsScene_metacall
-  if not isNil(vtbl.inputMethodQuery):
+  if not isNil(vtbl[].inputMethodQuery):
     vtbl[].vtbl.inputMethodQuery = miqt_exec_callback_cQGraphicsScene_inputMethodQuery
-  if not isNil(vtbl.event):
+  if not isNil(vtbl[].event):
     vtbl[].vtbl.event = miqt_exec_callback_cQGraphicsScene_event
-  if not isNil(vtbl.eventFilter):
+  if not isNil(vtbl[].eventFilter):
     vtbl[].vtbl.eventFilter = miqt_exec_callback_cQGraphicsScene_eventFilter
-  if not isNil(vtbl.contextMenuEvent):
+  if not isNil(vtbl[].contextMenuEvent):
     vtbl[].vtbl.contextMenuEvent = miqt_exec_callback_cQGraphicsScene_contextMenuEvent
-  if not isNil(vtbl.dragEnterEvent):
+  if not isNil(vtbl[].dragEnterEvent):
     vtbl[].vtbl.dragEnterEvent = miqt_exec_callback_cQGraphicsScene_dragEnterEvent
-  if not isNil(vtbl.dragMoveEvent):
+  if not isNil(vtbl[].dragMoveEvent):
     vtbl[].vtbl.dragMoveEvent = miqt_exec_callback_cQGraphicsScene_dragMoveEvent
-  if not isNil(vtbl.dragLeaveEvent):
+  if not isNil(vtbl[].dragLeaveEvent):
     vtbl[].vtbl.dragLeaveEvent = miqt_exec_callback_cQGraphicsScene_dragLeaveEvent
-  if not isNil(vtbl.dropEvent):
+  if not isNil(vtbl[].dropEvent):
     vtbl[].vtbl.dropEvent = miqt_exec_callback_cQGraphicsScene_dropEvent
-  if not isNil(vtbl.focusInEvent):
+  if not isNil(vtbl[].focusInEvent):
     vtbl[].vtbl.focusInEvent = miqt_exec_callback_cQGraphicsScene_focusInEvent
-  if not isNil(vtbl.focusOutEvent):
+  if not isNil(vtbl[].focusOutEvent):
     vtbl[].vtbl.focusOutEvent = miqt_exec_callback_cQGraphicsScene_focusOutEvent
-  if not isNil(vtbl.helpEvent):
+  if not isNil(vtbl[].helpEvent):
     vtbl[].vtbl.helpEvent = miqt_exec_callback_cQGraphicsScene_helpEvent
-  if not isNil(vtbl.keyPressEvent):
+  if not isNil(vtbl[].keyPressEvent):
     vtbl[].vtbl.keyPressEvent = miqt_exec_callback_cQGraphicsScene_keyPressEvent
-  if not isNil(vtbl.keyReleaseEvent):
+  if not isNil(vtbl[].keyReleaseEvent):
     vtbl[].vtbl.keyReleaseEvent = miqt_exec_callback_cQGraphicsScene_keyReleaseEvent
-  if not isNil(vtbl.mousePressEvent):
+  if not isNil(vtbl[].mousePressEvent):
     vtbl[].vtbl.mousePressEvent = miqt_exec_callback_cQGraphicsScene_mousePressEvent
-  if not isNil(vtbl.mouseMoveEvent):
+  if not isNil(vtbl[].mouseMoveEvent):
     vtbl[].vtbl.mouseMoveEvent = miqt_exec_callback_cQGraphicsScene_mouseMoveEvent
-  if not isNil(vtbl.mouseReleaseEvent):
+  if not isNil(vtbl[].mouseReleaseEvent):
     vtbl[].vtbl.mouseReleaseEvent = miqt_exec_callback_cQGraphicsScene_mouseReleaseEvent
-  if not isNil(vtbl.mouseDoubleClickEvent):
+  if not isNil(vtbl[].mouseDoubleClickEvent):
     vtbl[].vtbl.mouseDoubleClickEvent = miqt_exec_callback_cQGraphicsScene_mouseDoubleClickEvent
-  if not isNil(vtbl.wheelEvent):
+  if not isNil(vtbl[].wheelEvent):
     vtbl[].vtbl.wheelEvent = miqt_exec_callback_cQGraphicsScene_wheelEvent
-  if not isNil(vtbl.inputMethodEvent):
+  if not isNil(vtbl[].inputMethodEvent):
     vtbl[].vtbl.inputMethodEvent = miqt_exec_callback_cQGraphicsScene_inputMethodEvent
-  if not isNil(vtbl.drawBackground):
+  if not isNil(vtbl[].drawBackground):
     vtbl[].vtbl.drawBackground = miqt_exec_callback_cQGraphicsScene_drawBackground
-  if not isNil(vtbl.drawForeground):
+  if not isNil(vtbl[].drawForeground):
     vtbl[].vtbl.drawForeground = miqt_exec_callback_cQGraphicsScene_drawForeground
-  if not isNil(vtbl.timerEvent):
+  if not isNil(vtbl[].timerEvent):
     vtbl[].vtbl.timerEvent = miqt_exec_callback_cQGraphicsScene_timerEvent
-  if not isNil(vtbl.childEvent):
+  if not isNil(vtbl[].childEvent):
     vtbl[].vtbl.childEvent = miqt_exec_callback_cQGraphicsScene_childEvent
-  if not isNil(vtbl.customEvent):
+  if not isNil(vtbl[].customEvent):
     vtbl[].vtbl.customEvent = miqt_exec_callback_cQGraphicsScene_customEvent
-  if not isNil(vtbl.connectNotify):
+  if not isNil(vtbl[].connectNotify):
     vtbl[].vtbl.connectNotify = miqt_exec_callback_cQGraphicsScene_connectNotify
-  if not isNil(vtbl.disconnectNotify):
+  if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQGraphicsScene_disconnectNotify
-  gen_qgraphicsscene_types.QGraphicsScene(h: fcQGraphicsScene_new6(addr(vtbl[]), x, y, width, height, parent.h))
+  gen_qgraphicsscene_types.QGraphicsScene(h: fcQGraphicsScene_new6(addr(vtbl[].vtbl), x, y, width, height, parent.h), owned: true)
+
+proc create*(T: type gen_qgraphicsscene_types.QGraphicsScene,
+    vtbl: VirtualQGraphicsScene) =
+
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQGraphicsSceneVTable, _: ptr cQGraphicsScene) {.cdecl.} =
+    let vtbl = cast[ptr typeof(VirtualQGraphicsScene()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQGraphicsScene, vtbl)))
+    vtbl[].h = nil
+    vtbl[].owned = false
+  vtbl[].vtbl.metaObject = miqt_exec_method_cQGraphicsScene_metaObject
+  vtbl[].vtbl.metacast = miqt_exec_method_cQGraphicsScene_metacast
+  vtbl[].vtbl.metacall = miqt_exec_method_cQGraphicsScene_metacall
+  vtbl[].vtbl.inputMethodQuery = miqt_exec_method_cQGraphicsScene_inputMethodQuery
+  vtbl[].vtbl.event = miqt_exec_method_cQGraphicsScene_event
+  vtbl[].vtbl.eventFilter = miqt_exec_method_cQGraphicsScene_eventFilter
+  vtbl[].vtbl.contextMenuEvent = miqt_exec_method_cQGraphicsScene_contextMenuEvent
+  vtbl[].vtbl.dragEnterEvent = miqt_exec_method_cQGraphicsScene_dragEnterEvent
+  vtbl[].vtbl.dragMoveEvent = miqt_exec_method_cQGraphicsScene_dragMoveEvent
+  vtbl[].vtbl.dragLeaveEvent = miqt_exec_method_cQGraphicsScene_dragLeaveEvent
+  vtbl[].vtbl.dropEvent = miqt_exec_method_cQGraphicsScene_dropEvent
+  vtbl[].vtbl.focusInEvent = miqt_exec_method_cQGraphicsScene_focusInEvent
+  vtbl[].vtbl.focusOutEvent = miqt_exec_method_cQGraphicsScene_focusOutEvent
+  vtbl[].vtbl.helpEvent = miqt_exec_method_cQGraphicsScene_helpEvent
+  vtbl[].vtbl.keyPressEvent = miqt_exec_method_cQGraphicsScene_keyPressEvent
+  vtbl[].vtbl.keyReleaseEvent = miqt_exec_method_cQGraphicsScene_keyReleaseEvent
+  vtbl[].vtbl.mousePressEvent = miqt_exec_method_cQGraphicsScene_mousePressEvent
+  vtbl[].vtbl.mouseMoveEvent = miqt_exec_method_cQGraphicsScene_mouseMoveEvent
+  vtbl[].vtbl.mouseReleaseEvent = miqt_exec_method_cQGraphicsScene_mouseReleaseEvent
+  vtbl[].vtbl.mouseDoubleClickEvent = miqt_exec_method_cQGraphicsScene_mouseDoubleClickEvent
+  vtbl[].vtbl.wheelEvent = miqt_exec_method_cQGraphicsScene_wheelEvent
+  vtbl[].vtbl.inputMethodEvent = miqt_exec_method_cQGraphicsScene_inputMethodEvent
+  vtbl[].vtbl.drawBackground = miqt_exec_method_cQGraphicsScene_drawBackground
+  vtbl[].vtbl.drawForeground = miqt_exec_method_cQGraphicsScene_drawForeground
+  vtbl[].vtbl.timerEvent = miqt_exec_method_cQGraphicsScene_timerEvent
+  vtbl[].vtbl.childEvent = miqt_exec_method_cQGraphicsScene_childEvent
+  vtbl[].vtbl.customEvent = miqt_exec_method_cQGraphicsScene_customEvent
+  vtbl[].vtbl.connectNotify = miqt_exec_method_cQGraphicsScene_connectNotify
+  vtbl[].vtbl.disconnectNotify = miqt_exec_method_cQGraphicsScene_disconnectNotify
+  if vtbl[].h != nil: delete(move(vtbl[]))
+  vtbl[].h = fcQGraphicsScene_new(addr(vtbl[].vtbl), )
+  vtbl[].owned = true
+
+proc create*(T: type gen_qgraphicsscene_types.QGraphicsScene,
+    sceneRect: gen_qrect_types.QRectF,
+    vtbl: VirtualQGraphicsScene) =
+
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQGraphicsSceneVTable, _: ptr cQGraphicsScene) {.cdecl.} =
+    let vtbl = cast[ptr typeof(VirtualQGraphicsScene()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQGraphicsScene, vtbl)))
+    vtbl[].h = nil
+    vtbl[].owned = false
+  vtbl[].vtbl.metaObject = miqt_exec_method_cQGraphicsScene_metaObject
+  vtbl[].vtbl.metacast = miqt_exec_method_cQGraphicsScene_metacast
+  vtbl[].vtbl.metacall = miqt_exec_method_cQGraphicsScene_metacall
+  vtbl[].vtbl.inputMethodQuery = miqt_exec_method_cQGraphicsScene_inputMethodQuery
+  vtbl[].vtbl.event = miqt_exec_method_cQGraphicsScene_event
+  vtbl[].vtbl.eventFilter = miqt_exec_method_cQGraphicsScene_eventFilter
+  vtbl[].vtbl.contextMenuEvent = miqt_exec_method_cQGraphicsScene_contextMenuEvent
+  vtbl[].vtbl.dragEnterEvent = miqt_exec_method_cQGraphicsScene_dragEnterEvent
+  vtbl[].vtbl.dragMoveEvent = miqt_exec_method_cQGraphicsScene_dragMoveEvent
+  vtbl[].vtbl.dragLeaveEvent = miqt_exec_method_cQGraphicsScene_dragLeaveEvent
+  vtbl[].vtbl.dropEvent = miqt_exec_method_cQGraphicsScene_dropEvent
+  vtbl[].vtbl.focusInEvent = miqt_exec_method_cQGraphicsScene_focusInEvent
+  vtbl[].vtbl.focusOutEvent = miqt_exec_method_cQGraphicsScene_focusOutEvent
+  vtbl[].vtbl.helpEvent = miqt_exec_method_cQGraphicsScene_helpEvent
+  vtbl[].vtbl.keyPressEvent = miqt_exec_method_cQGraphicsScene_keyPressEvent
+  vtbl[].vtbl.keyReleaseEvent = miqt_exec_method_cQGraphicsScene_keyReleaseEvent
+  vtbl[].vtbl.mousePressEvent = miqt_exec_method_cQGraphicsScene_mousePressEvent
+  vtbl[].vtbl.mouseMoveEvent = miqt_exec_method_cQGraphicsScene_mouseMoveEvent
+  vtbl[].vtbl.mouseReleaseEvent = miqt_exec_method_cQGraphicsScene_mouseReleaseEvent
+  vtbl[].vtbl.mouseDoubleClickEvent = miqt_exec_method_cQGraphicsScene_mouseDoubleClickEvent
+  vtbl[].vtbl.wheelEvent = miqt_exec_method_cQGraphicsScene_wheelEvent
+  vtbl[].vtbl.inputMethodEvent = miqt_exec_method_cQGraphicsScene_inputMethodEvent
+  vtbl[].vtbl.drawBackground = miqt_exec_method_cQGraphicsScene_drawBackground
+  vtbl[].vtbl.drawForeground = miqt_exec_method_cQGraphicsScene_drawForeground
+  vtbl[].vtbl.timerEvent = miqt_exec_method_cQGraphicsScene_timerEvent
+  vtbl[].vtbl.childEvent = miqt_exec_method_cQGraphicsScene_childEvent
+  vtbl[].vtbl.customEvent = miqt_exec_method_cQGraphicsScene_customEvent
+  vtbl[].vtbl.connectNotify = miqt_exec_method_cQGraphicsScene_connectNotify
+  vtbl[].vtbl.disconnectNotify = miqt_exec_method_cQGraphicsScene_disconnectNotify
+  if vtbl[].h != nil: delete(move(vtbl[]))
+  vtbl[].h = fcQGraphicsScene_new2(addr(vtbl[].vtbl), sceneRect.h)
+  vtbl[].owned = true
+
+proc create*(T: type gen_qgraphicsscene_types.QGraphicsScene,
+    x: float64, y: float64, width: float64, height: float64,
+    vtbl: VirtualQGraphicsScene) =
+
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQGraphicsSceneVTable, _: ptr cQGraphicsScene) {.cdecl.} =
+    let vtbl = cast[ptr typeof(VirtualQGraphicsScene()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQGraphicsScene, vtbl)))
+    vtbl[].h = nil
+    vtbl[].owned = false
+  vtbl[].vtbl.metaObject = miqt_exec_method_cQGraphicsScene_metaObject
+  vtbl[].vtbl.metacast = miqt_exec_method_cQGraphicsScene_metacast
+  vtbl[].vtbl.metacall = miqt_exec_method_cQGraphicsScene_metacall
+  vtbl[].vtbl.inputMethodQuery = miqt_exec_method_cQGraphicsScene_inputMethodQuery
+  vtbl[].vtbl.event = miqt_exec_method_cQGraphicsScene_event
+  vtbl[].vtbl.eventFilter = miqt_exec_method_cQGraphicsScene_eventFilter
+  vtbl[].vtbl.contextMenuEvent = miqt_exec_method_cQGraphicsScene_contextMenuEvent
+  vtbl[].vtbl.dragEnterEvent = miqt_exec_method_cQGraphicsScene_dragEnterEvent
+  vtbl[].vtbl.dragMoveEvent = miqt_exec_method_cQGraphicsScene_dragMoveEvent
+  vtbl[].vtbl.dragLeaveEvent = miqt_exec_method_cQGraphicsScene_dragLeaveEvent
+  vtbl[].vtbl.dropEvent = miqt_exec_method_cQGraphicsScene_dropEvent
+  vtbl[].vtbl.focusInEvent = miqt_exec_method_cQGraphicsScene_focusInEvent
+  vtbl[].vtbl.focusOutEvent = miqt_exec_method_cQGraphicsScene_focusOutEvent
+  vtbl[].vtbl.helpEvent = miqt_exec_method_cQGraphicsScene_helpEvent
+  vtbl[].vtbl.keyPressEvent = miqt_exec_method_cQGraphicsScene_keyPressEvent
+  vtbl[].vtbl.keyReleaseEvent = miqt_exec_method_cQGraphicsScene_keyReleaseEvent
+  vtbl[].vtbl.mousePressEvent = miqt_exec_method_cQGraphicsScene_mousePressEvent
+  vtbl[].vtbl.mouseMoveEvent = miqt_exec_method_cQGraphicsScene_mouseMoveEvent
+  vtbl[].vtbl.mouseReleaseEvent = miqt_exec_method_cQGraphicsScene_mouseReleaseEvent
+  vtbl[].vtbl.mouseDoubleClickEvent = miqt_exec_method_cQGraphicsScene_mouseDoubleClickEvent
+  vtbl[].vtbl.wheelEvent = miqt_exec_method_cQGraphicsScene_wheelEvent
+  vtbl[].vtbl.inputMethodEvent = miqt_exec_method_cQGraphicsScene_inputMethodEvent
+  vtbl[].vtbl.drawBackground = miqt_exec_method_cQGraphicsScene_drawBackground
+  vtbl[].vtbl.drawForeground = miqt_exec_method_cQGraphicsScene_drawForeground
+  vtbl[].vtbl.timerEvent = miqt_exec_method_cQGraphicsScene_timerEvent
+  vtbl[].vtbl.childEvent = miqt_exec_method_cQGraphicsScene_childEvent
+  vtbl[].vtbl.customEvent = miqt_exec_method_cQGraphicsScene_customEvent
+  vtbl[].vtbl.connectNotify = miqt_exec_method_cQGraphicsScene_connectNotify
+  vtbl[].vtbl.disconnectNotify = miqt_exec_method_cQGraphicsScene_disconnectNotify
+  if vtbl[].h != nil: delete(move(vtbl[]))
+  vtbl[].h = fcQGraphicsScene_new3(addr(vtbl[].vtbl), x, y, width, height)
+  vtbl[].owned = true
+
+proc create*(T: type gen_qgraphicsscene_types.QGraphicsScene,
+    parent: gen_qobject_types.QObject,
+    vtbl: VirtualQGraphicsScene) =
+
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQGraphicsSceneVTable, _: ptr cQGraphicsScene) {.cdecl.} =
+    let vtbl = cast[ptr typeof(VirtualQGraphicsScene()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQGraphicsScene, vtbl)))
+    vtbl[].h = nil
+    vtbl[].owned = false
+  vtbl[].vtbl.metaObject = miqt_exec_method_cQGraphicsScene_metaObject
+  vtbl[].vtbl.metacast = miqt_exec_method_cQGraphicsScene_metacast
+  vtbl[].vtbl.metacall = miqt_exec_method_cQGraphicsScene_metacall
+  vtbl[].vtbl.inputMethodQuery = miqt_exec_method_cQGraphicsScene_inputMethodQuery
+  vtbl[].vtbl.event = miqt_exec_method_cQGraphicsScene_event
+  vtbl[].vtbl.eventFilter = miqt_exec_method_cQGraphicsScene_eventFilter
+  vtbl[].vtbl.contextMenuEvent = miqt_exec_method_cQGraphicsScene_contextMenuEvent
+  vtbl[].vtbl.dragEnterEvent = miqt_exec_method_cQGraphicsScene_dragEnterEvent
+  vtbl[].vtbl.dragMoveEvent = miqt_exec_method_cQGraphicsScene_dragMoveEvent
+  vtbl[].vtbl.dragLeaveEvent = miqt_exec_method_cQGraphicsScene_dragLeaveEvent
+  vtbl[].vtbl.dropEvent = miqt_exec_method_cQGraphicsScene_dropEvent
+  vtbl[].vtbl.focusInEvent = miqt_exec_method_cQGraphicsScene_focusInEvent
+  vtbl[].vtbl.focusOutEvent = miqt_exec_method_cQGraphicsScene_focusOutEvent
+  vtbl[].vtbl.helpEvent = miqt_exec_method_cQGraphicsScene_helpEvent
+  vtbl[].vtbl.keyPressEvent = miqt_exec_method_cQGraphicsScene_keyPressEvent
+  vtbl[].vtbl.keyReleaseEvent = miqt_exec_method_cQGraphicsScene_keyReleaseEvent
+  vtbl[].vtbl.mousePressEvent = miqt_exec_method_cQGraphicsScene_mousePressEvent
+  vtbl[].vtbl.mouseMoveEvent = miqt_exec_method_cQGraphicsScene_mouseMoveEvent
+  vtbl[].vtbl.mouseReleaseEvent = miqt_exec_method_cQGraphicsScene_mouseReleaseEvent
+  vtbl[].vtbl.mouseDoubleClickEvent = miqt_exec_method_cQGraphicsScene_mouseDoubleClickEvent
+  vtbl[].vtbl.wheelEvent = miqt_exec_method_cQGraphicsScene_wheelEvent
+  vtbl[].vtbl.inputMethodEvent = miqt_exec_method_cQGraphicsScene_inputMethodEvent
+  vtbl[].vtbl.drawBackground = miqt_exec_method_cQGraphicsScene_drawBackground
+  vtbl[].vtbl.drawForeground = miqt_exec_method_cQGraphicsScene_drawForeground
+  vtbl[].vtbl.timerEvent = miqt_exec_method_cQGraphicsScene_timerEvent
+  vtbl[].vtbl.childEvent = miqt_exec_method_cQGraphicsScene_childEvent
+  vtbl[].vtbl.customEvent = miqt_exec_method_cQGraphicsScene_customEvent
+  vtbl[].vtbl.connectNotify = miqt_exec_method_cQGraphicsScene_connectNotify
+  vtbl[].vtbl.disconnectNotify = miqt_exec_method_cQGraphicsScene_disconnectNotify
+  if vtbl[].h != nil: delete(move(vtbl[]))
+  vtbl[].h = fcQGraphicsScene_new4(addr(vtbl[].vtbl), parent.h)
+  vtbl[].owned = true
+
+proc create*(T: type gen_qgraphicsscene_types.QGraphicsScene,
+    sceneRect: gen_qrect_types.QRectF, parent: gen_qobject_types.QObject,
+    vtbl: VirtualQGraphicsScene) =
+
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQGraphicsSceneVTable, _: ptr cQGraphicsScene) {.cdecl.} =
+    let vtbl = cast[ptr typeof(VirtualQGraphicsScene()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQGraphicsScene, vtbl)))
+    vtbl[].h = nil
+    vtbl[].owned = false
+  vtbl[].vtbl.metaObject = miqt_exec_method_cQGraphicsScene_metaObject
+  vtbl[].vtbl.metacast = miqt_exec_method_cQGraphicsScene_metacast
+  vtbl[].vtbl.metacall = miqt_exec_method_cQGraphicsScene_metacall
+  vtbl[].vtbl.inputMethodQuery = miqt_exec_method_cQGraphicsScene_inputMethodQuery
+  vtbl[].vtbl.event = miqt_exec_method_cQGraphicsScene_event
+  vtbl[].vtbl.eventFilter = miqt_exec_method_cQGraphicsScene_eventFilter
+  vtbl[].vtbl.contextMenuEvent = miqt_exec_method_cQGraphicsScene_contextMenuEvent
+  vtbl[].vtbl.dragEnterEvent = miqt_exec_method_cQGraphicsScene_dragEnterEvent
+  vtbl[].vtbl.dragMoveEvent = miqt_exec_method_cQGraphicsScene_dragMoveEvent
+  vtbl[].vtbl.dragLeaveEvent = miqt_exec_method_cQGraphicsScene_dragLeaveEvent
+  vtbl[].vtbl.dropEvent = miqt_exec_method_cQGraphicsScene_dropEvent
+  vtbl[].vtbl.focusInEvent = miqt_exec_method_cQGraphicsScene_focusInEvent
+  vtbl[].vtbl.focusOutEvent = miqt_exec_method_cQGraphicsScene_focusOutEvent
+  vtbl[].vtbl.helpEvent = miqt_exec_method_cQGraphicsScene_helpEvent
+  vtbl[].vtbl.keyPressEvent = miqt_exec_method_cQGraphicsScene_keyPressEvent
+  vtbl[].vtbl.keyReleaseEvent = miqt_exec_method_cQGraphicsScene_keyReleaseEvent
+  vtbl[].vtbl.mousePressEvent = miqt_exec_method_cQGraphicsScene_mousePressEvent
+  vtbl[].vtbl.mouseMoveEvent = miqt_exec_method_cQGraphicsScene_mouseMoveEvent
+  vtbl[].vtbl.mouseReleaseEvent = miqt_exec_method_cQGraphicsScene_mouseReleaseEvent
+  vtbl[].vtbl.mouseDoubleClickEvent = miqt_exec_method_cQGraphicsScene_mouseDoubleClickEvent
+  vtbl[].vtbl.wheelEvent = miqt_exec_method_cQGraphicsScene_wheelEvent
+  vtbl[].vtbl.inputMethodEvent = miqt_exec_method_cQGraphicsScene_inputMethodEvent
+  vtbl[].vtbl.drawBackground = miqt_exec_method_cQGraphicsScene_drawBackground
+  vtbl[].vtbl.drawForeground = miqt_exec_method_cQGraphicsScene_drawForeground
+  vtbl[].vtbl.timerEvent = miqt_exec_method_cQGraphicsScene_timerEvent
+  vtbl[].vtbl.childEvent = miqt_exec_method_cQGraphicsScene_childEvent
+  vtbl[].vtbl.customEvent = miqt_exec_method_cQGraphicsScene_customEvent
+  vtbl[].vtbl.connectNotify = miqt_exec_method_cQGraphicsScene_connectNotify
+  vtbl[].vtbl.disconnectNotify = miqt_exec_method_cQGraphicsScene_disconnectNotify
+  if vtbl[].h != nil: delete(move(vtbl[]))
+  vtbl[].h = fcQGraphicsScene_new5(addr(vtbl[].vtbl), sceneRect.h, parent.h)
+  vtbl[].owned = true
+
+proc create*(T: type gen_qgraphicsscene_types.QGraphicsScene,
+    x: float64, y: float64, width: float64, height: float64, parent: gen_qobject_types.QObject,
+    vtbl: VirtualQGraphicsScene) =
+
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQGraphicsSceneVTable, _: ptr cQGraphicsScene) {.cdecl.} =
+    let vtbl = cast[ptr typeof(VirtualQGraphicsScene()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQGraphicsScene, vtbl)))
+    vtbl[].h = nil
+    vtbl[].owned = false
+  vtbl[].vtbl.metaObject = miqt_exec_method_cQGraphicsScene_metaObject
+  vtbl[].vtbl.metacast = miqt_exec_method_cQGraphicsScene_metacast
+  vtbl[].vtbl.metacall = miqt_exec_method_cQGraphicsScene_metacall
+  vtbl[].vtbl.inputMethodQuery = miqt_exec_method_cQGraphicsScene_inputMethodQuery
+  vtbl[].vtbl.event = miqt_exec_method_cQGraphicsScene_event
+  vtbl[].vtbl.eventFilter = miqt_exec_method_cQGraphicsScene_eventFilter
+  vtbl[].vtbl.contextMenuEvent = miqt_exec_method_cQGraphicsScene_contextMenuEvent
+  vtbl[].vtbl.dragEnterEvent = miqt_exec_method_cQGraphicsScene_dragEnterEvent
+  vtbl[].vtbl.dragMoveEvent = miqt_exec_method_cQGraphicsScene_dragMoveEvent
+  vtbl[].vtbl.dragLeaveEvent = miqt_exec_method_cQGraphicsScene_dragLeaveEvent
+  vtbl[].vtbl.dropEvent = miqt_exec_method_cQGraphicsScene_dropEvent
+  vtbl[].vtbl.focusInEvent = miqt_exec_method_cQGraphicsScene_focusInEvent
+  vtbl[].vtbl.focusOutEvent = miqt_exec_method_cQGraphicsScene_focusOutEvent
+  vtbl[].vtbl.helpEvent = miqt_exec_method_cQGraphicsScene_helpEvent
+  vtbl[].vtbl.keyPressEvent = miqt_exec_method_cQGraphicsScene_keyPressEvent
+  vtbl[].vtbl.keyReleaseEvent = miqt_exec_method_cQGraphicsScene_keyReleaseEvent
+  vtbl[].vtbl.mousePressEvent = miqt_exec_method_cQGraphicsScene_mousePressEvent
+  vtbl[].vtbl.mouseMoveEvent = miqt_exec_method_cQGraphicsScene_mouseMoveEvent
+  vtbl[].vtbl.mouseReleaseEvent = miqt_exec_method_cQGraphicsScene_mouseReleaseEvent
+  vtbl[].vtbl.mouseDoubleClickEvent = miqt_exec_method_cQGraphicsScene_mouseDoubleClickEvent
+  vtbl[].vtbl.wheelEvent = miqt_exec_method_cQGraphicsScene_wheelEvent
+  vtbl[].vtbl.inputMethodEvent = miqt_exec_method_cQGraphicsScene_inputMethodEvent
+  vtbl[].vtbl.drawBackground = miqt_exec_method_cQGraphicsScene_drawBackground
+  vtbl[].vtbl.drawForeground = miqt_exec_method_cQGraphicsScene_drawForeground
+  vtbl[].vtbl.timerEvent = miqt_exec_method_cQGraphicsScene_timerEvent
+  vtbl[].vtbl.childEvent = miqt_exec_method_cQGraphicsScene_childEvent
+  vtbl[].vtbl.customEvent = miqt_exec_method_cQGraphicsScene_customEvent
+  vtbl[].vtbl.connectNotify = miqt_exec_method_cQGraphicsScene_connectNotify
+  vtbl[].vtbl.disconnectNotify = miqt_exec_method_cQGraphicsScene_disconnectNotify
+  if vtbl[].h != nil: delete(move(vtbl[]))
+  vtbl[].h = fcQGraphicsScene_new6(addr(vtbl[].vtbl), x, y, width, height, parent.h)
+  vtbl[].owned = true
 
 proc staticMetaObject*(_: type gen_qgraphicsscene_types.QGraphicsScene): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQGraphicsScene_staticMetaObject())
-proc delete*(self: gen_qgraphicsscene_types.QGraphicsScene) =
-  fcQGraphicsScene_delete(self.h)

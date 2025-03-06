@@ -30,7 +30,7 @@ func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
     else:
       copyMem(addr result[0], unsafeAddr v[0], v.len)
 
-const cflags = gorge("pkg-config --cflags Qt5WebKit")  & " -fPIC"
+const cflags = gorge("pkg-config --cflags Qt5WebKit") & " -fPIC"
 {.compile("gen_qwebsettings.cpp", cflags).}
 
 
@@ -169,7 +169,7 @@ proc fcQWebSettings_cssMediaType(self: pointer, ): struct_miqt_string {.importc:
 proc fcQWebSettings_enablePersistentStorage1(path: struct_miqt_string): void {.importc: "QWebSettings_enablePersistentStorage1".}
 
 proc globalSettings*(_: type gen_qwebsettings_types.QWebSettings, ): gen_qwebsettings_types.QWebSettings =
-  gen_qwebsettings_types.QWebSettings(h: fcQWebSettings_globalSettings())
+  gen_qwebsettings_types.QWebSettings(h: fcQWebSettings_globalSettings(), owned: false)
 
 proc setFontFamily*(self: gen_qwebsettings_types.QWebSettings, which: cint, family: string): void =
   fcQWebSettings_setFontFamily(self.h, cint(which), struct_miqt_string(data: family, len: csize_t(len(family))))
@@ -205,7 +205,7 @@ proc setUserStyleSheetUrl*(self: gen_qwebsettings_types.QWebSettings, location: 
   fcQWebSettings_setUserStyleSheetUrl(self.h, location.h)
 
 proc userStyleSheetUrl*(self: gen_qwebsettings_types.QWebSettings, ): gen_qurl_types.QUrl =
-  gen_qurl_types.QUrl(h: fcQWebSettings_userStyleSheetUrl(self.h))
+  gen_qurl_types.QUrl(h: fcQWebSettings_userStyleSheetUrl(self.h), owned: true)
 
 proc setDefaultTextEncoding*(self: gen_qwebsettings_types.QWebSettings, encoding: string): void =
   fcQWebSettings_setDefaultTextEncoding(self.h, struct_miqt_string(data: encoding, len: csize_t(len(encoding))))
@@ -229,7 +229,7 @@ proc clearIconDatabase*(_: type gen_qwebsettings_types.QWebSettings, ): void =
   fcQWebSettings_clearIconDatabase()
 
 proc iconForUrl*(_: type gen_qwebsettings_types.QWebSettings, url: gen_qurl_types.QUrl): gen_qicon_types.QIcon =
-  gen_qicon_types.QIcon(h: fcQWebSettings_iconForUrl(url.h))
+  gen_qicon_types.QIcon(h: fcQWebSettings_iconForUrl(url.h), owned: true)
 
 proc setPluginSearchPaths*(_: type gen_qwebsettings_types.QWebSettings, paths: seq[string]): void =
   var paths_CArray = newSeq[struct_miqt_string](len(paths))
@@ -254,7 +254,7 @@ proc setWebGraphic*(_: type gen_qwebsettings_types.QWebSettings, typeVal: cint, 
   fcQWebSettings_setWebGraphic(cint(typeVal), graphic.h)
 
 proc webGraphic*(_: type gen_qwebsettings_types.QWebSettings, typeVal: cint): gen_qpixmap_types.QPixmap =
-  gen_qpixmap_types.QPixmap(h: fcQWebSettings_webGraphic(cint(typeVal)))
+  gen_qpixmap_types.QPixmap(h: fcQWebSettings_webGraphic(cint(typeVal)), owned: true)
 
 proc setMaximumPagesInCache*(_: type gen_qwebsettings_types.QWebSettings, pages: cint): void =
   fcQWebSettings_setMaximumPagesInCache(pages)

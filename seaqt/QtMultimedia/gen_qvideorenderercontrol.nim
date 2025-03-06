@@ -30,7 +30,7 @@ func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
     else:
       copyMem(addr result[0], unsafeAddr v[0], v.len)
 
-const cflags = gorge("pkg-config --cflags Qt5Multimedia")  & " -fPIC"
+const cflags = gorge("pkg-config --cflags Qt5Multimedia") & " -fPIC"
 {.compile("gen_qvideorenderercontrol.cpp", cflags).}
 
 
@@ -68,10 +68,9 @@ proc fcQVideoRendererControl_protectedbase_senderSignalIndex(self: pointer, ): c
 proc fcQVideoRendererControl_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QVideoRendererControl_protectedbase_receivers".}
 proc fcQVideoRendererControl_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QVideoRendererControl_protectedbase_isSignalConnected".}
 proc fcQVideoRendererControl_staticMetaObject(): pointer {.importc: "QVideoRendererControl_staticMetaObject".}
-proc fcQVideoRendererControl_delete(self: pointer) {.importc: "QVideoRendererControl_delete".}
 
 proc metaObject*(self: gen_qvideorenderercontrol_types.QVideoRendererControl, ): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQVideoRendererControl_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQVideoRendererControl_metaObject(self.h), owned: false)
 
 proc metacast*(self: gen_qvideorenderercontrol_types.QVideoRendererControl, param1: cstring): pointer =
   fcQVideoRendererControl_metacast(self.h, param1)
@@ -92,7 +91,7 @@ proc trUtf8*(_: type gen_qvideorenderercontrol_types.QVideoRendererControl, s: c
   vx_ret
 
 proc surface*(self: gen_qvideorenderercontrol_types.QVideoRendererControl, ): gen_qabstractvideosurface_types.QAbstractVideoSurface =
-  gen_qabstractvideosurface_types.QAbstractVideoSurface(h: fcQVideoRendererControl_surface(self.h))
+  gen_qabstractvideosurface_types.QAbstractVideoSurface(h: fcQVideoRendererControl_surface(self.h), owned: false)
 
 proc setSurface*(self: gen_qvideorenderercontrol_types.QVideoRendererControl, surface: gen_qabstractvideosurface_types.QAbstractVideoSurface): void =
   fcQVideoRendererControl_setSurface(self.h, surface.h)
@@ -122,7 +121,7 @@ proc trUtf8*(_: type gen_qvideorenderercontrol_types.QVideoRendererControl, s: c
   vx_ret
 
 proc sender*(self: gen_qvideorenderercontrol_types.QVideoRendererControl, ): gen_qobject_types.QObject =
-  gen_qobject_types.QObject(h: fcQVideoRendererControl_protectedbase_sender(self.h))
+  gen_qobject_types.QObject(h: fcQVideoRendererControl_protectedbase_sender(self.h), owned: false)
 
 proc senderSignalIndex*(self: gen_qvideorenderercontrol_types.QVideoRendererControl, ): cint =
   fcQVideoRendererControl_protectedbase_senderSignalIndex(self.h)
@@ -135,5 +134,3 @@ proc isSignalConnected*(self: gen_qvideorenderercontrol_types.QVideoRendererCont
 
 proc staticMetaObject*(_: type gen_qvideorenderercontrol_types.QVideoRendererControl): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQVideoRendererControl_staticMetaObject())
-proc delete*(self: gen_qvideorenderercontrol_types.QVideoRendererControl) =
-  fcQVideoRendererControl_delete(self.h)

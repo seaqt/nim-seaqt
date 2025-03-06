@@ -30,9 +30,6 @@ func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
     else:
       copyMem(addr result[0], unsafeAddr v[0], v.len)
 
-const cflags = gorge("pkg-config --cflags Qt5Network")  & " -fPIC"
-{.compile("gen_qhostaddress.cpp", cflags).}
-
 
 type QHostAddressSpecialAddressEnum* = distinct cint
 template Null*(_: type QHostAddressSpecialAddressEnum): untyped = 0
@@ -61,7 +58,6 @@ type cQIPv6Address*{.exportc: "QIPv6Address", incompleteStruct.} = object
 type cQHostAddress*{.exportc: "QHostAddress", incompleteStruct.} = object
 
 proc fcQIPv6Address_operatorSubscript(self: pointer, index: cint): uint8 {.importc: "QIPv6Address_operatorSubscript".}
-proc fcQIPv6Address_delete(self: pointer) {.importc: "QIPv6Address_delete".}
 proc fcQHostAddress_operatorAssign(self: pointer, other: pointer): void {.importc: "QHostAddress_operatorAssign".}
 proc fcQHostAddress_operatorAssignWithAddress(self: pointer, address: struct_miqt_string): void {.importc: "QHostAddress_operatorAssignWithAddress".}
 proc fcQHostAddress_operatorAssign2(self: pointer, address: cint): void {.importc: "QHostAddress_operatorAssign2".}
@@ -105,13 +101,10 @@ proc fcQHostAddress_new5(ip6Addr: pointer): ptr cQHostAddress {.importc: "QHostA
 proc fcQHostAddress_new6(address: struct_miqt_string): ptr cQHostAddress {.importc: "QHostAddress_new6".}
 proc fcQHostAddress_new7(copy: pointer): ptr cQHostAddress {.importc: "QHostAddress_new7".}
 proc fcQHostAddress_new8(address: cint): ptr cQHostAddress {.importc: "QHostAddress_new8".}
-proc fcQHostAddress_delete(self: pointer) {.importc: "QHostAddress_delete".}
 
 proc operatorSubscript*(self: gen_qhostaddress_types.QIPv6Address, index: cint): uint8 =
   fcQIPv6Address_operatorSubscript(self.h, index)
 
-proc delete*(self: gen_qhostaddress_types.QIPv6Address) =
-  fcQIPv6Address_delete(self.h)
 proc operatorAssign*(self: gen_qhostaddress_types.QHostAddress, other: gen_qhostaddress_types.QHostAddress): void =
   fcQHostAddress_operatorAssign(self.h, other.h)
 
@@ -152,7 +145,7 @@ proc toIPv4Address*(self: gen_qhostaddress_types.QHostAddress, ok: ptr bool): cu
   fcQHostAddress_toIPv4AddressWithOk(self.h, ok)
 
 proc toIPv6Address*(self: gen_qhostaddress_types.QHostAddress, ): gen_qhostaddress_types.QIPv6Address =
-  gen_qhostaddress_types.QIPv6Address(h: fcQHostAddress_toIPv6Address(self.h))
+  gen_qhostaddress_types.QIPv6Address(h: fcQHostAddress_toIPv6Address(self.h), owned: true)
 
 proc toString*(self: gen_qhostaddress_types.QHostAddress, ): string =
   let v_ms = fcQHostAddress_toString(self.h)
@@ -225,7 +218,7 @@ proc parseSubnet*(_: type gen_qhostaddress_types.QHostAddress, subnet: string): 
   var v_mm = fcQHostAddress_parseSubnet(struct_miqt_string(data: subnet, len: csize_t(len(subnet))))
   var v_First_CArray = cast[ptr UncheckedArray[pointer]](v_mm.keys)
   var v_Second_CArray = cast[ptr UncheckedArray[cint]](v_mm.values)
-  var v_entry_First = gen_qhostaddress_types.QHostAddress(h: v_First_CArray[0])
+  var v_entry_First = gen_qhostaddress_types.QHostAddress(h: v_First_CArray[0], owned: true)
 
   var v_entry_Second = v_Second_CArray[0]
 
@@ -237,35 +230,33 @@ proc isEqual*(self: gen_qhostaddress_types.QHostAddress, address: gen_qhostaddre
   fcQHostAddress_isEqual2(self.h, address.h, cint(mode))
 
 proc create*(T: type gen_qhostaddress_types.QHostAddress): gen_qhostaddress_types.QHostAddress =
-  gen_qhostaddress_types.QHostAddress(h: fcQHostAddress_new())
+  gen_qhostaddress_types.QHostAddress(h: fcQHostAddress_new(), owned: true)
 
 proc create*(T: type gen_qhostaddress_types.QHostAddress,
     ip4Addr: cuint): gen_qhostaddress_types.QHostAddress =
-  gen_qhostaddress_types.QHostAddress(h: fcQHostAddress_new2(ip4Addr))
+  gen_qhostaddress_types.QHostAddress(h: fcQHostAddress_new2(ip4Addr), owned: true)
 
 proc create*(T: type gen_qhostaddress_types.QHostAddress,
     ip6Addr: ptr uint8): gen_qhostaddress_types.QHostAddress =
-  gen_qhostaddress_types.QHostAddress(h: fcQHostAddress_new3(ip6Addr))
+  gen_qhostaddress_types.QHostAddress(h: fcQHostAddress_new3(ip6Addr), owned: true)
 
 proc create2*(T: type gen_qhostaddress_types.QHostAddress,
     ip6Addr: ptr uint8): gen_qhostaddress_types.QHostAddress =
-  gen_qhostaddress_types.QHostAddress(h: fcQHostAddress_new4(ip6Addr))
+  gen_qhostaddress_types.QHostAddress(h: fcQHostAddress_new4(ip6Addr), owned: true)
 
 proc create*(T: type gen_qhostaddress_types.QHostAddress,
     ip6Addr: gen_qhostaddress_types.QIPv6Address): gen_qhostaddress_types.QHostAddress =
-  gen_qhostaddress_types.QHostAddress(h: fcQHostAddress_new5(ip6Addr.h))
+  gen_qhostaddress_types.QHostAddress(h: fcQHostAddress_new5(ip6Addr.h), owned: true)
 
 proc create*(T: type gen_qhostaddress_types.QHostAddress,
     address: string): gen_qhostaddress_types.QHostAddress =
-  gen_qhostaddress_types.QHostAddress(h: fcQHostAddress_new6(struct_miqt_string(data: address, len: csize_t(len(address)))))
+  gen_qhostaddress_types.QHostAddress(h: fcQHostAddress_new6(struct_miqt_string(data: address, len: csize_t(len(address)))), owned: true)
 
 proc create*(T: type gen_qhostaddress_types.QHostAddress,
     copy: gen_qhostaddress_types.QHostAddress): gen_qhostaddress_types.QHostAddress =
-  gen_qhostaddress_types.QHostAddress(h: fcQHostAddress_new7(copy.h))
+  gen_qhostaddress_types.QHostAddress(h: fcQHostAddress_new7(copy.h), owned: true)
 
 proc create*(T: type gen_qhostaddress_types.QHostAddress,
     address: cint): gen_qhostaddress_types.QHostAddress =
-  gen_qhostaddress_types.QHostAddress(h: fcQHostAddress_new8(cint(address)))
+  gen_qhostaddress_types.QHostAddress(h: fcQHostAddress_new8(cint(address)), owned: true)
 
-proc delete*(self: gen_qhostaddress_types.QHostAddress) =
-  fcQHostAddress_delete(self.h)

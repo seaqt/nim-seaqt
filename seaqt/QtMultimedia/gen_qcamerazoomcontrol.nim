@@ -30,7 +30,7 @@ func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
     else:
       copyMem(addr result[0], unsafeAddr v[0], v.len)
 
-const cflags = gorge("pkg-config --cflags Qt5Multimedia")  & " -fPIC"
+const cflags = gorge("pkg-config --cflags Qt5Multimedia") & " -fPIC"
 {.compile("gen_qcamerazoomcontrol.cpp", cflags).}
 
 
@@ -83,10 +83,9 @@ proc fcQCameraZoomControl_protectedbase_senderSignalIndex(self: pointer, ): cint
 proc fcQCameraZoomControl_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QCameraZoomControl_protectedbase_receivers".}
 proc fcQCameraZoomControl_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QCameraZoomControl_protectedbase_isSignalConnected".}
 proc fcQCameraZoomControl_staticMetaObject(): pointer {.importc: "QCameraZoomControl_staticMetaObject".}
-proc fcQCameraZoomControl_delete(self: pointer) {.importc: "QCameraZoomControl_delete".}
 
 proc metaObject*(self: gen_qcamerazoomcontrol_types.QCameraZoomControl, ): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQCameraZoomControl_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQCameraZoomControl_metaObject(self.h), owned: false)
 
 proc metacast*(self: gen_qcamerazoomcontrol_types.QCameraZoomControl, param1: cstring): pointer =
   fcQCameraZoomControl_metacast(self.h, param1)
@@ -272,7 +271,7 @@ proc trUtf8*(_: type gen_qcamerazoomcontrol_types.QCameraZoomControl, s: cstring
   vx_ret
 
 proc sender*(self: gen_qcamerazoomcontrol_types.QCameraZoomControl, ): gen_qobject_types.QObject =
-  gen_qobject_types.QObject(h: fcQCameraZoomControl_protectedbase_sender(self.h))
+  gen_qobject_types.QObject(h: fcQCameraZoomControl_protectedbase_sender(self.h), owned: false)
 
 proc senderSignalIndex*(self: gen_qcamerazoomcontrol_types.QCameraZoomControl, ): cint =
   fcQCameraZoomControl_protectedbase_senderSignalIndex(self.h)
@@ -285,5 +284,3 @@ proc isSignalConnected*(self: gen_qcamerazoomcontrol_types.QCameraZoomControl, s
 
 proc staticMetaObject*(_: type gen_qcamerazoomcontrol_types.QCameraZoomControl): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQCameraZoomControl_staticMetaObject())
-proc delete*(self: gen_qcamerazoomcontrol_types.QCameraZoomControl) =
-  fcQCameraZoomControl_delete(self.h)

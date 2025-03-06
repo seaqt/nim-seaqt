@@ -30,9 +30,6 @@ func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
     else:
       copyMem(addr result[0], unsafeAddr v[0], v.len)
 
-const cflags = gorge("pkg-config --cflags Qt5WebEngineCore")  & " -fPIC"
-{.compile("gen_qwebengineurlscheme.cpp", cflags).}
-
 
 type QWebEngineUrlSchemeSyntaxEnum* = distinct cint
 template HostPortAndUserInformation*(_: type QWebEngineUrlSchemeSyntaxEnum): untyped = 0
@@ -83,7 +80,6 @@ proc fcQWebEngineUrlScheme_new(): ptr cQWebEngineUrlScheme {.importc: "QWebEngin
 proc fcQWebEngineUrlScheme_new2(name: struct_miqt_string): ptr cQWebEngineUrlScheme {.importc: "QWebEngineUrlScheme_new2".}
 proc fcQWebEngineUrlScheme_new3(that: pointer): ptr cQWebEngineUrlScheme {.importc: "QWebEngineUrlScheme_new3".}
 proc fcQWebEngineUrlScheme_staticMetaObject(): pointer {.importc: "QWebEngineUrlScheme_staticMetaObject".}
-proc fcQWebEngineUrlScheme_delete(self: pointer) {.importc: "QWebEngineUrlScheme_delete".}
 
 proc operatorAssign*(self: gen_qwebengineurlscheme_types.QWebEngineUrlScheme, that: gen_qwebengineurlscheme_types.QWebEngineUrlScheme): void =
   fcQWebEngineUrlScheme_operatorAssign(self.h, that.h)
@@ -125,20 +121,18 @@ proc registerScheme*(_: type gen_qwebengineurlscheme_types.QWebEngineUrlScheme, 
   fcQWebEngineUrlScheme_registerScheme(scheme.h)
 
 proc schemeByName*(_: type gen_qwebengineurlscheme_types.QWebEngineUrlScheme, name: seq[byte]): gen_qwebengineurlscheme_types.QWebEngineUrlScheme =
-  gen_qwebengineurlscheme_types.QWebEngineUrlScheme(h: fcQWebEngineUrlScheme_schemeByName(struct_miqt_string(data: cast[cstring](if len(name) == 0: nil else: unsafeAddr name[0]), len: csize_t(len(name)))))
+  gen_qwebengineurlscheme_types.QWebEngineUrlScheme(h: fcQWebEngineUrlScheme_schemeByName(struct_miqt_string(data: cast[cstring](if len(name) == 0: nil else: unsafeAddr name[0]), len: csize_t(len(name)))), owned: true)
 
 proc create*(T: type gen_qwebengineurlscheme_types.QWebEngineUrlScheme): gen_qwebengineurlscheme_types.QWebEngineUrlScheme =
-  gen_qwebengineurlscheme_types.QWebEngineUrlScheme(h: fcQWebEngineUrlScheme_new())
+  gen_qwebengineurlscheme_types.QWebEngineUrlScheme(h: fcQWebEngineUrlScheme_new(), owned: true)
 
 proc create*(T: type gen_qwebengineurlscheme_types.QWebEngineUrlScheme,
     name: seq[byte]): gen_qwebengineurlscheme_types.QWebEngineUrlScheme =
-  gen_qwebengineurlscheme_types.QWebEngineUrlScheme(h: fcQWebEngineUrlScheme_new2(struct_miqt_string(data: cast[cstring](if len(name) == 0: nil else: unsafeAddr name[0]), len: csize_t(len(name)))))
+  gen_qwebengineurlscheme_types.QWebEngineUrlScheme(h: fcQWebEngineUrlScheme_new2(struct_miqt_string(data: cast[cstring](if len(name) == 0: nil else: unsafeAddr name[0]), len: csize_t(len(name)))), owned: true)
 
 proc create*(T: type gen_qwebengineurlscheme_types.QWebEngineUrlScheme,
     that: gen_qwebengineurlscheme_types.QWebEngineUrlScheme): gen_qwebengineurlscheme_types.QWebEngineUrlScheme =
-  gen_qwebengineurlscheme_types.QWebEngineUrlScheme(h: fcQWebEngineUrlScheme_new3(that.h))
+  gen_qwebengineurlscheme_types.QWebEngineUrlScheme(h: fcQWebEngineUrlScheme_new3(that.h), owned: true)
 
 proc staticMetaObject*(_: type gen_qwebengineurlscheme_types.QWebEngineUrlScheme): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQWebEngineUrlScheme_staticMetaObject())
-proc delete*(self: gen_qwebengineurlscheme_types.QWebEngineUrlScheme) =
-  fcQWebEngineUrlScheme_delete(self.h)

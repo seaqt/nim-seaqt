@@ -30,7 +30,7 @@ func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
     else:
       copyMem(addr result[0], unsafeAddr v[0], v.len)
 
-const cflags = gorge("pkg-config --cflags Qt5Multimedia")  & " -fPIC"
+const cflags = gorge("pkg-config --cflags Qt5Multimedia") & " -fPIC"
 {.compile("gen_qmediavideoprobecontrol.cpp", cflags).}
 
 
@@ -70,10 +70,9 @@ proc fcQMediaVideoProbeControl_protectedbase_senderSignalIndex(self: pointer, ):
 proc fcQMediaVideoProbeControl_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QMediaVideoProbeControl_protectedbase_receivers".}
 proc fcQMediaVideoProbeControl_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QMediaVideoProbeControl_protectedbase_isSignalConnected".}
 proc fcQMediaVideoProbeControl_staticMetaObject(): pointer {.importc: "QMediaVideoProbeControl_staticMetaObject".}
-proc fcQMediaVideoProbeControl_delete(self: pointer) {.importc: "QMediaVideoProbeControl_delete".}
 
 proc metaObject*(self: gen_qmediavideoprobecontrol_types.QMediaVideoProbeControl, ): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQMediaVideoProbeControl_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQMediaVideoProbeControl_metaObject(self.h), owned: false)
 
 proc metacast*(self: gen_qmediavideoprobecontrol_types.QMediaVideoProbeControl, param1: cstring): pointer =
   fcQMediaVideoProbeControl_metacast(self.h, param1)
@@ -99,7 +98,7 @@ proc videoFrameProbed*(self: gen_qmediavideoprobecontrol_types.QMediaVideoProbeC
 type QMediaVideoProbeControlvideoFrameProbedSlot* = proc(frame: gen_qvideoframe_types.QVideoFrame)
 proc miqt_exec_callback_cQMediaVideoProbeControl_videoFrameProbed(slot: int, frame: pointer) {.cdecl.} =
   let nimfunc = cast[ptr QMediaVideoProbeControlvideoFrameProbedSlot](cast[pointer](slot))
-  let slotval1 = gen_qvideoframe_types.QVideoFrame(h: frame)
+  let slotval1 = gen_qvideoframe_types.QVideoFrame(h: frame, owned: false)
 
   nimfunc[](slotval1)
 
@@ -156,7 +155,7 @@ proc trUtf8*(_: type gen_qmediavideoprobecontrol_types.QMediaVideoProbeControl, 
   vx_ret
 
 proc sender*(self: gen_qmediavideoprobecontrol_types.QMediaVideoProbeControl, ): gen_qobject_types.QObject =
-  gen_qobject_types.QObject(h: fcQMediaVideoProbeControl_protectedbase_sender(self.h))
+  gen_qobject_types.QObject(h: fcQMediaVideoProbeControl_protectedbase_sender(self.h), owned: false)
 
 proc senderSignalIndex*(self: gen_qmediavideoprobecontrol_types.QMediaVideoProbeControl, ): cint =
   fcQMediaVideoProbeControl_protectedbase_senderSignalIndex(self.h)
@@ -169,5 +168,3 @@ proc isSignalConnected*(self: gen_qmediavideoprobecontrol_types.QMediaVideoProbe
 
 proc staticMetaObject*(_: type gen_qmediavideoprobecontrol_types.QMediaVideoProbeControl): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQMediaVideoProbeControl_staticMetaObject())
-proc delete*(self: gen_qmediavideoprobecontrol_types.QMediaVideoProbeControl) =
-  fcQMediaVideoProbeControl_delete(self.h)

@@ -30,7 +30,7 @@ func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
     else:
       copyMem(addr result[0], unsafeAddr v[0], v.len)
 
-const cflags = gorge("pkg-config --cflags Qt5Multimedia")  & " -fPIC"
+const cflags = gorge("pkg-config --cflags Qt5Multimedia") & " -fPIC"
 {.compile("gen_qradiotunercontrol.cpp", cflags).}
 
 
@@ -112,10 +112,9 @@ proc fcQRadioTunerControl_protectedbase_senderSignalIndex(self: pointer, ): cint
 proc fcQRadioTunerControl_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QRadioTunerControl_protectedbase_receivers".}
 proc fcQRadioTunerControl_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QRadioTunerControl_protectedbase_isSignalConnected".}
 proc fcQRadioTunerControl_staticMetaObject(): pointer {.importc: "QRadioTunerControl_staticMetaObject".}
-proc fcQRadioTunerControl_delete(self: pointer) {.importc: "QRadioTunerControl_delete".}
 
 proc metaObject*(self: gen_qradiotunercontrol_types.QRadioTunerControl, ): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQRadioTunerControl_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQRadioTunerControl_metaObject(self.h), owned: false)
 
 proc metacast*(self: gen_qradiotunercontrol_types.QRadioTunerControl, param1: cstring): pointer =
   fcQRadioTunerControl_metacast(self.h, param1)
@@ -475,7 +474,7 @@ proc trUtf8*(_: type gen_qradiotunercontrol_types.QRadioTunerControl, s: cstring
   vx_ret
 
 proc sender*(self: gen_qradiotunercontrol_types.QRadioTunerControl, ): gen_qobject_types.QObject =
-  gen_qobject_types.QObject(h: fcQRadioTunerControl_protectedbase_sender(self.h))
+  gen_qobject_types.QObject(h: fcQRadioTunerControl_protectedbase_sender(self.h), owned: false)
 
 proc senderSignalIndex*(self: gen_qradiotunercontrol_types.QRadioTunerControl, ): cint =
   fcQRadioTunerControl_protectedbase_senderSignalIndex(self.h)
@@ -488,5 +487,3 @@ proc isSignalConnected*(self: gen_qradiotunercontrol_types.QRadioTunerControl, s
 
 proc staticMetaObject*(_: type gen_qradiotunercontrol_types.QRadioTunerControl): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQRadioTunerControl_staticMetaObject())
-proc delete*(self: gen_qradiotunercontrol_types.QRadioTunerControl) =
-  fcQRadioTunerControl_delete(self.h)

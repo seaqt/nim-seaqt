@@ -30,9 +30,6 @@ func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
     else:
       copyMem(addr result[0], unsafeAddr v[0], v.len)
 
-const cflags = gorge("pkg-config --cflags Qt5Core")  & " -fPIC"
-{.compile("gen_qelapsedtimer.cpp", cflags).}
-
 
 type QElapsedTimerClockTypeEnum* = distinct cint
 template SystemTime*(_: type QElapsedTimerClockTypeEnum): untyped = 0
@@ -63,7 +60,6 @@ proc fcQElapsedTimer_secsTo(self: pointer, other: pointer): clonglong {.importc:
 proc fcQElapsedTimer_operatorEqual(self: pointer, other: pointer): bool {.importc: "QElapsedTimer_operatorEqual".}
 proc fcQElapsedTimer_operatorNotEqual(self: pointer, other: pointer): bool {.importc: "QElapsedTimer_operatorNotEqual".}
 proc fcQElapsedTimer_new(): ptr cQElapsedTimer {.importc: "QElapsedTimer_new".}
-proc fcQElapsedTimer_delete(self: pointer) {.importc: "QElapsedTimer_delete".}
 
 proc clockType*(_: type gen_qelapsedtimer_types.QElapsedTimer, ): cint =
   cint(fcQElapsedTimer_clockType())
@@ -108,7 +104,5 @@ proc operatorNotEqual*(self: gen_qelapsedtimer_types.QElapsedTimer, other: gen_q
   fcQElapsedTimer_operatorNotEqual(self.h, other.h)
 
 proc create*(T: type gen_qelapsedtimer_types.QElapsedTimer): gen_qelapsedtimer_types.QElapsedTimer =
-  gen_qelapsedtimer_types.QElapsedTimer(h: fcQElapsedTimer_new())
+  gen_qelapsedtimer_types.QElapsedTimer(h: fcQElapsedTimer_new(), owned: true)
 
-proc delete*(self: gen_qelapsedtimer_types.QElapsedTimer) =
-  fcQElapsedTimer_delete(self.h)

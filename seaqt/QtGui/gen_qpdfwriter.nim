@@ -30,7 +30,7 @@ func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
     else:
       copyMem(addr result[0], unsafeAddr v[0], v.len)
 
-const cflags = gorge("pkg-config --cflags Qt5Gui")  & " -fPIC"
+const cflags = gorge("pkg-config --cflags Qt5Gui") & " -fPIC"
 {.compile("gen_qpdfwriter.cpp", cflags).}
 
 
@@ -91,7 +91,7 @@ proc fcQPdfWriter_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.imp
 proc fcQPdfWriter_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QPdfWriter_trUtf82".}
 proc fcQPdfWriter_trUtf83(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QPdfWriter_trUtf83".}
 proc fcQPdfWriter_addFileAttachment3(self: pointer, fileName: struct_miqt_string, data: struct_miqt_string, mimeType: struct_miqt_string): void {.importc: "QPdfWriter_addFileAttachment3".}
-type cQPdfWriterVTable = object
+type cQPdfWriterVTable {.pure.} = object
   destructor*: proc(vtbl: ptr cQPdfWriterVTable, self: ptr cQPdfWriter) {.cdecl, raises:[], gcsafe.}
   metaObject*: proc(vtbl, self: pointer, ): pointer {.cdecl, raises: [], gcsafe.}
   metacast*: proc(vtbl, self: pointer, param1: cstring): pointer {.cdecl, raises: [], gcsafe.}
@@ -141,10 +141,9 @@ proc fcQPdfWriter_protectedbase_devicePageLayout(self: pointer, ): pointer {.imp
 proc fcQPdfWriter_new(vtbl: pointer, filename: struct_miqt_string): ptr cQPdfWriter {.importc: "QPdfWriter_new".}
 proc fcQPdfWriter_new2(vtbl: pointer, device: pointer): ptr cQPdfWriter {.importc: "QPdfWriter_new2".}
 proc fcQPdfWriter_staticMetaObject(): pointer {.importc: "QPdfWriter_staticMetaObject".}
-proc fcQPdfWriter_delete(self: pointer) {.importc: "QPdfWriter_delete".}
 
 proc metaObject*(self: gen_qpdfwriter_types.QPdfWriter, ): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQPdfWriter_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQPdfWriter_metaObject(self.h), owned: false)
 
 proc metacast*(self: gen_qpdfwriter_types.QPdfWriter, param1: cstring): pointer =
   fcQPdfWriter_metacast(self.h, param1)
@@ -265,7 +264,7 @@ type QPdfWriterdevTypeProc* = proc(self: QPdfWriter): cint {.raises: [], gcsafe.
 type QPdfWriterinitPainterProc* = proc(self: QPdfWriter, painter: gen_qpainter_types.QPainter): void {.raises: [], gcsafe.}
 type QPdfWriterredirectedProc* = proc(self: QPdfWriter, offset: gen_qpoint_types.QPoint): gen_qpaintdevice_types.QPaintDevice {.raises: [], gcsafe.}
 type QPdfWritersharedPainterProc* = proc(self: QPdfWriter): gen_qpainter_types.QPainter {.raises: [], gcsafe.}
-type QPdfWriterVTable* = object
+type QPdfWriterVTable* {.inheritable, pure.} = object
   vtbl: cQPdfWriterVTable
   metaObject*: QPdfWritermetaObjectProc
   metacast*: QPdfWritermetacastProc
@@ -288,13 +287,16 @@ type QPdfWriterVTable* = object
   redirected*: QPdfWriterredirectedProc
   sharedPainter*: QPdfWritersharedPainterProc
 proc QPdfWritermetaObject*(self: gen_qpdfwriter_types.QPdfWriter, ): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQPdfWriter_virtualbase_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQPdfWriter_virtualbase_metaObject(self.h), owned: false)
 
 proc miqt_exec_callback_cQPdfWriter_metaObject(vtbl: pointer, self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QPdfWriterVTable](vtbl)
   let self = QPdfWriter(h: self)
   var virtualReturn = vtbl[].metaObject(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QPdfWritermetacast*(self: gen_qpdfwriter_types.QPdfWriter, param1: cstring): pointer =
   fcQPdfWriter_virtualbase_metacast(self.h, param1)
@@ -342,7 +344,7 @@ proc QPdfWritersetPageSizeMM*(self: gen_qpdfwriter_types.QPdfWriter, size: gen_q
 proc miqt_exec_callback_cQPdfWriter_setPageSizeMM(vtbl: pointer, self: pointer, size: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QPdfWriterVTable](vtbl)
   let self = QPdfWriter(h: self)
-  let slotval1 = gen_qsize_types.QSizeF(h: size)
+  let slotval1 = gen_qsize_types.QSizeF(h: size, owned: false)
   vtbl[].setPageSizeMM(self, slotval1)
 
 proc QPdfWritersetMargins*(self: gen_qpdfwriter_types.QPdfWriter, m: gen_qpagedpaintdevice_types.QPagedPaintDeviceMargins): void =
@@ -351,17 +353,20 @@ proc QPdfWritersetMargins*(self: gen_qpdfwriter_types.QPdfWriter, m: gen_qpagedp
 proc miqt_exec_callback_cQPdfWriter_setMargins(vtbl: pointer, self: pointer, m: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QPdfWriterVTable](vtbl)
   let self = QPdfWriter(h: self)
-  let slotval1 = gen_qpagedpaintdevice_types.QPagedPaintDeviceMargins(h: m)
+  let slotval1 = gen_qpagedpaintdevice_types.QPagedPaintDeviceMargins(h: m, owned: false)
   vtbl[].setMargins(self, slotval1)
 
 proc QPdfWriterpaintEngine*(self: gen_qpdfwriter_types.QPdfWriter, ): gen_qpaintengine_types.QPaintEngine =
-  gen_qpaintengine_types.QPaintEngine(h: fcQPdfWriter_virtualbase_paintEngine(self.h))
+  gen_qpaintengine_types.QPaintEngine(h: fcQPdfWriter_virtualbase_paintEngine(self.h), owned: false)
 
 proc miqt_exec_callback_cQPdfWriter_paintEngine(vtbl: pointer, self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QPdfWriterVTable](vtbl)
   let self = QPdfWriter(h: self)
   var virtualReturn = vtbl[].paintEngine(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QPdfWritermetric*(self: gen_qpdfwriter_types.QPdfWriter, id: cint): cint =
   fcQPdfWriter_virtualbase_metric(self.h, cint(id))
@@ -379,7 +384,7 @@ proc QPdfWriterevent*(self: gen_qpdfwriter_types.QPdfWriter, event: gen_qcoreeve
 proc miqt_exec_callback_cQPdfWriter_event(vtbl: pointer, self: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QPdfWriterVTable](vtbl)
   let self = QPdfWriter(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].event(self, slotval1)
   virtualReturn
 
@@ -389,8 +394,8 @@ proc QPdfWritereventFilter*(self: gen_qpdfwriter_types.QPdfWriter, watched: gen_
 proc miqt_exec_callback_cQPdfWriter_eventFilter(vtbl: pointer, self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QPdfWriterVTable](vtbl)
   let self = QPdfWriter(h: self)
-  let slotval1 = gen_qobject_types.QObject(h: watched)
-  let slotval2 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].eventFilter(self, slotval1, slotval2)
   virtualReturn
 
@@ -400,7 +405,7 @@ proc QPdfWritertimerEvent*(self: gen_qpdfwriter_types.QPdfWriter, event: gen_qco
 proc miqt_exec_callback_cQPdfWriter_timerEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QPdfWriterVTable](vtbl)
   let self = QPdfWriter(h: self)
-  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   vtbl[].timerEvent(self, slotval1)
 
 proc QPdfWriterchildEvent*(self: gen_qpdfwriter_types.QPdfWriter, event: gen_qcoreevent_types.QChildEvent): void =
@@ -409,7 +414,7 @@ proc QPdfWriterchildEvent*(self: gen_qpdfwriter_types.QPdfWriter, event: gen_qco
 proc miqt_exec_callback_cQPdfWriter_childEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QPdfWriterVTable](vtbl)
   let self = QPdfWriter(h: self)
-  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   vtbl[].childEvent(self, slotval1)
 
 proc QPdfWritercustomEvent*(self: gen_qpdfwriter_types.QPdfWriter, event: gen_qcoreevent_types.QEvent): void =
@@ -418,7 +423,7 @@ proc QPdfWritercustomEvent*(self: gen_qpdfwriter_types.QPdfWriter, event: gen_qc
 proc miqt_exec_callback_cQPdfWriter_customEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QPdfWriterVTable](vtbl)
   let self = QPdfWriter(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].customEvent(self, slotval1)
 
 proc QPdfWriterconnectNotify*(self: gen_qpdfwriter_types.QPdfWriter, signal: gen_qmetaobject_types.QMetaMethod): void =
@@ -427,7 +432,7 @@ proc QPdfWriterconnectNotify*(self: gen_qpdfwriter_types.QPdfWriter, signal: gen
 proc miqt_exec_callback_cQPdfWriter_connectNotify(vtbl: pointer, self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QPdfWriterVTable](vtbl)
   let self = QPdfWriter(h: self)
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].connectNotify(self, slotval1)
 
 proc QPdfWriterdisconnectNotify*(self: gen_qpdfwriter_types.QPdfWriter, signal: gen_qmetaobject_types.QMetaMethod): void =
@@ -436,7 +441,7 @@ proc QPdfWriterdisconnectNotify*(self: gen_qpdfwriter_types.QPdfWriter, signal: 
 proc miqt_exec_callback_cQPdfWriter_disconnectNotify(vtbl: pointer, self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QPdfWriterVTable](vtbl)
   let self = QPdfWriter(h: self)
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].disconnectNotify(self, slotval1)
 
 proc QPdfWriterdevType*(self: gen_qpdfwriter_types.QPdfWriter, ): cint =
@@ -454,30 +459,199 @@ proc QPdfWriterinitPainter*(self: gen_qpdfwriter_types.QPdfWriter, painter: gen_
 proc miqt_exec_callback_cQPdfWriter_initPainter(vtbl: pointer, self: pointer, painter: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QPdfWriterVTable](vtbl)
   let self = QPdfWriter(h: self)
-  let slotval1 = gen_qpainter_types.QPainter(h: painter)
+  let slotval1 = gen_qpainter_types.QPainter(h: painter, owned: false)
   vtbl[].initPainter(self, slotval1)
 
 proc QPdfWriterredirected*(self: gen_qpdfwriter_types.QPdfWriter, offset: gen_qpoint_types.QPoint): gen_qpaintdevice_types.QPaintDevice =
-  gen_qpaintdevice_types.QPaintDevice(h: fcQPdfWriter_virtualbase_redirected(self.h, offset.h))
+  gen_qpaintdevice_types.QPaintDevice(h: fcQPdfWriter_virtualbase_redirected(self.h, offset.h), owned: false)
 
 proc miqt_exec_callback_cQPdfWriter_redirected(vtbl: pointer, self: pointer, offset: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QPdfWriterVTable](vtbl)
   let self = QPdfWriter(h: self)
-  let slotval1 = gen_qpoint_types.QPoint(h: offset)
+  let slotval1 = gen_qpoint_types.QPoint(h: offset, owned: false)
   var virtualReturn = vtbl[].redirected(self, slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QPdfWritersharedPainter*(self: gen_qpdfwriter_types.QPdfWriter, ): gen_qpainter_types.QPainter =
-  gen_qpainter_types.QPainter(h: fcQPdfWriter_virtualbase_sharedPainter(self.h))
+  gen_qpainter_types.QPainter(h: fcQPdfWriter_virtualbase_sharedPainter(self.h), owned: false)
 
 proc miqt_exec_callback_cQPdfWriter_sharedPainter(vtbl: pointer, self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QPdfWriterVTable](vtbl)
   let self = QPdfWriter(h: self)
   var virtualReturn = vtbl[].sharedPainter(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
+
+type VirtualQPdfWriter* {.inheritable.} = ref object of QPdfWriter
+  vtbl*: cQPdfWriterVTable
+method metaObject*(self: VirtualQPdfWriter, ): gen_qobjectdefs_types.QMetaObject {.base.} =
+  QPdfWritermetaObject(self[])
+proc miqt_exec_method_cQPdfWriter_metaObject(vtbl: pointer, inst: pointer): pointer {.cdecl.} =
+  let vtbl = cast[VirtualQPdfWriter](cast[uint](vtbl) - uint(offsetOf(VirtualQPdfWriter, vtbl)))
+  var virtualReturn = vtbl.metaObject()
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
+
+method metacast*(self: VirtualQPdfWriter, param1: cstring): pointer {.base.} =
+  QPdfWritermetacast(self[], param1)
+proc miqt_exec_method_cQPdfWriter_metacast(vtbl: pointer, inst: pointer, param1: cstring): pointer {.cdecl.} =
+  let vtbl = cast[VirtualQPdfWriter](cast[uint](vtbl) - uint(offsetOf(VirtualQPdfWriter, vtbl)))
+  let slotval1 = (param1)
+  var virtualReturn = vtbl.metacast(slotval1)
+  virtualReturn
+
+method metacall*(self: VirtualQPdfWriter, param1: cint, param2: cint, param3: pointer): cint {.base.} =
+  QPdfWritermetacall(self[], param1, param2, param3)
+proc miqt_exec_method_cQPdfWriter_metacall(vtbl: pointer, inst: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
+  let vtbl = cast[VirtualQPdfWriter](cast[uint](vtbl) - uint(offsetOf(VirtualQPdfWriter, vtbl)))
+  let slotval1 = cint(param1)
+  let slotval2 = param2
+  let slotval3 = param3
+  var virtualReturn = vtbl.metacall(slotval1, slotval2, slotval3)
+  virtualReturn
+
+method newPage*(self: VirtualQPdfWriter, ): bool {.base.} =
+  QPdfWriternewPage(self[])
+proc miqt_exec_method_cQPdfWriter_newPage(vtbl: pointer, inst: pointer): bool {.cdecl.} =
+  let vtbl = cast[VirtualQPdfWriter](cast[uint](vtbl) - uint(offsetOf(VirtualQPdfWriter, vtbl)))
+  var virtualReturn = vtbl.newPage()
+  virtualReturn
+
+method setPageSize*(self: VirtualQPdfWriter, size: cint): void {.base.} =
+  QPdfWritersetPageSize(self[], size)
+proc miqt_exec_method_cQPdfWriter_setPageSize(vtbl: pointer, inst: pointer, size: cint): void {.cdecl.} =
+  let vtbl = cast[VirtualQPdfWriter](cast[uint](vtbl) - uint(offsetOf(VirtualQPdfWriter, vtbl)))
+  let slotval1 = cint(size)
+  vtbl.setPageSize(slotval1)
+
+method setPageSizeMM*(self: VirtualQPdfWriter, size: gen_qsize_types.QSizeF): void {.base.} =
+  QPdfWritersetPageSizeMM(self[], size)
+proc miqt_exec_method_cQPdfWriter_setPageSizeMM(vtbl: pointer, inst: pointer, size: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQPdfWriter](cast[uint](vtbl) - uint(offsetOf(VirtualQPdfWriter, vtbl)))
+  let slotval1 = gen_qsize_types.QSizeF(h: size, owned: false)
+  vtbl.setPageSizeMM(slotval1)
+
+method setMargins*(self: VirtualQPdfWriter, m: gen_qpagedpaintdevice_types.QPagedPaintDeviceMargins): void {.base.} =
+  QPdfWritersetMargins(self[], m)
+proc miqt_exec_method_cQPdfWriter_setMargins(vtbl: pointer, inst: pointer, m: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQPdfWriter](cast[uint](vtbl) - uint(offsetOf(VirtualQPdfWriter, vtbl)))
+  let slotval1 = gen_qpagedpaintdevice_types.QPagedPaintDeviceMargins(h: m, owned: false)
+  vtbl.setMargins(slotval1)
+
+method paintEngine*(self: VirtualQPdfWriter, ): gen_qpaintengine_types.QPaintEngine {.base.} =
+  QPdfWriterpaintEngine(self[])
+proc miqt_exec_method_cQPdfWriter_paintEngine(vtbl: pointer, inst: pointer): pointer {.cdecl.} =
+  let vtbl = cast[VirtualQPdfWriter](cast[uint](vtbl) - uint(offsetOf(VirtualQPdfWriter, vtbl)))
+  var virtualReturn = vtbl.paintEngine()
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
+
+method metric*(self: VirtualQPdfWriter, id: cint): cint {.base.} =
+  QPdfWritermetric(self[], id)
+proc miqt_exec_method_cQPdfWriter_metric(vtbl: pointer, inst: pointer, id: cint): cint {.cdecl.} =
+  let vtbl = cast[VirtualQPdfWriter](cast[uint](vtbl) - uint(offsetOf(VirtualQPdfWriter, vtbl)))
+  let slotval1 = cint(id)
+  var virtualReturn = vtbl.metric(slotval1)
+  virtualReturn
+
+method event*(self: VirtualQPdfWriter, event: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QPdfWriterevent(self[], event)
+proc miqt_exec_method_cQPdfWriter_event(vtbl: pointer, inst: pointer, event: pointer): bool {.cdecl.} =
+  let vtbl = cast[VirtualQPdfWriter](cast[uint](vtbl) - uint(offsetOf(VirtualQPdfWriter, vtbl)))
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
+  var virtualReturn = vtbl.event(slotval1)
+  virtualReturn
+
+method eventFilter*(self: VirtualQPdfWriter, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QPdfWritereventFilter(self[], watched, event)
+proc miqt_exec_method_cQPdfWriter_eventFilter(vtbl: pointer, inst: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
+  let vtbl = cast[VirtualQPdfWriter](cast[uint](vtbl) - uint(offsetOf(VirtualQPdfWriter, vtbl)))
+  let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
+  var virtualReturn = vtbl.eventFilter(slotval1, slotval2)
+  virtualReturn
+
+method timerEvent*(self: VirtualQPdfWriter, event: gen_qcoreevent_types.QTimerEvent): void {.base.} =
+  QPdfWritertimerEvent(self[], event)
+proc miqt_exec_method_cQPdfWriter_timerEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQPdfWriter](cast[uint](vtbl) - uint(offsetOf(VirtualQPdfWriter, vtbl)))
+  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
+  vtbl.timerEvent(slotval1)
+
+method childEvent*(self: VirtualQPdfWriter, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
+  QPdfWriterchildEvent(self[], event)
+proc miqt_exec_method_cQPdfWriter_childEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQPdfWriter](cast[uint](vtbl) - uint(offsetOf(VirtualQPdfWriter, vtbl)))
+  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
+  vtbl.childEvent(slotval1)
+
+method customEvent*(self: VirtualQPdfWriter, event: gen_qcoreevent_types.QEvent): void {.base.} =
+  QPdfWritercustomEvent(self[], event)
+proc miqt_exec_method_cQPdfWriter_customEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQPdfWriter](cast[uint](vtbl) - uint(offsetOf(VirtualQPdfWriter, vtbl)))
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
+  vtbl.customEvent(slotval1)
+
+method connectNotify*(self: VirtualQPdfWriter, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QPdfWriterconnectNotify(self[], signal)
+proc miqt_exec_method_cQPdfWriter_connectNotify(vtbl: pointer, inst: pointer, signal: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQPdfWriter](cast[uint](vtbl) - uint(offsetOf(VirtualQPdfWriter, vtbl)))
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
+  vtbl.connectNotify(slotval1)
+
+method disconnectNotify*(self: VirtualQPdfWriter, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QPdfWriterdisconnectNotify(self[], signal)
+proc miqt_exec_method_cQPdfWriter_disconnectNotify(vtbl: pointer, inst: pointer, signal: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQPdfWriter](cast[uint](vtbl) - uint(offsetOf(VirtualQPdfWriter, vtbl)))
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
+  vtbl.disconnectNotify(slotval1)
+
+method devType*(self: VirtualQPdfWriter, ): cint {.base.} =
+  QPdfWriterdevType(self[])
+proc miqt_exec_method_cQPdfWriter_devType(vtbl: pointer, inst: pointer): cint {.cdecl.} =
+  let vtbl = cast[VirtualQPdfWriter](cast[uint](vtbl) - uint(offsetOf(VirtualQPdfWriter, vtbl)))
+  var virtualReturn = vtbl.devType()
+  virtualReturn
+
+method initPainter*(self: VirtualQPdfWriter, painter: gen_qpainter_types.QPainter): void {.base.} =
+  QPdfWriterinitPainter(self[], painter)
+proc miqt_exec_method_cQPdfWriter_initPainter(vtbl: pointer, inst: pointer, painter: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQPdfWriter](cast[uint](vtbl) - uint(offsetOf(VirtualQPdfWriter, vtbl)))
+  let slotval1 = gen_qpainter_types.QPainter(h: painter, owned: false)
+  vtbl.initPainter(slotval1)
+
+method redirected*(self: VirtualQPdfWriter, offset: gen_qpoint_types.QPoint): gen_qpaintdevice_types.QPaintDevice {.base.} =
+  QPdfWriterredirected(self[], offset)
+proc miqt_exec_method_cQPdfWriter_redirected(vtbl: pointer, inst: pointer, offset: pointer): pointer {.cdecl.} =
+  let vtbl = cast[VirtualQPdfWriter](cast[uint](vtbl) - uint(offsetOf(VirtualQPdfWriter, vtbl)))
+  let slotval1 = gen_qpoint_types.QPoint(h: offset, owned: false)
+  var virtualReturn = vtbl.redirected(slotval1)
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
+
+method sharedPainter*(self: VirtualQPdfWriter, ): gen_qpainter_types.QPainter {.base.} =
+  QPdfWritersharedPainter(self[])
+proc miqt_exec_method_cQPdfWriter_sharedPainter(vtbl: pointer, inst: pointer): pointer {.cdecl.} =
+  let vtbl = cast[VirtualQPdfWriter](cast[uint](vtbl) - uint(offsetOf(VirtualQPdfWriter, vtbl)))
+  var virtualReturn = vtbl.sharedPainter()
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc sender*(self: gen_qpdfwriter_types.QPdfWriter, ): gen_qobject_types.QObject =
-  gen_qobject_types.QObject(h: fcQPdfWriter_protectedbase_sender(self.h))
+  gen_qobject_types.QObject(h: fcQPdfWriter_protectedbase_sender(self.h), owned: false)
 
 proc senderSignalIndex*(self: gen_qpdfwriter_types.QPdfWriter, ): cint =
   fcQPdfWriter_protectedbase_senderSignalIndex(self.h)
@@ -489,109 +663,171 @@ proc isSignalConnected*(self: gen_qpdfwriter_types.QPdfWriter, signal: gen_qmeta
   fcQPdfWriter_protectedbase_isSignalConnected(self.h, signal.h)
 
 proc devicePageLayout*(self: gen_qpdfwriter_types.QPdfWriter, ): gen_qpagelayout_types.QPageLayout =
-  gen_qpagelayout_types.QPageLayout(h: fcQPdfWriter_protectedbase_devicePageLayout(self.h))
+  gen_qpagelayout_types.QPageLayout(h: fcQPdfWriter_protectedbase_devicePageLayout(self.h), owned: true)
 
 proc create*(T: type gen_qpdfwriter_types.QPdfWriter,
     filename: string,
     vtbl: ref QPdfWriterVTable = nil): gen_qpdfwriter_types.QPdfWriter =
   let vtbl = if vtbl == nil: new QPdfWriterVTable else: vtbl
   GC_ref(vtbl)
-  vtbl.vtbl.destructor = proc(vtbl: ptr cQPdfWriterVTable, _: ptr cQPdfWriter) {.cdecl.} =
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQPdfWriterVTable, _: ptr cQPdfWriter) {.cdecl.} =
     let vtbl = cast[ref QPdfWriterVTable](vtbl)
     GC_unref(vtbl)
-  if not isNil(vtbl.metaObject):
+  if not isNil(vtbl[].metaObject):
     vtbl[].vtbl.metaObject = miqt_exec_callback_cQPdfWriter_metaObject
-  if not isNil(vtbl.metacast):
+  if not isNil(vtbl[].metacast):
     vtbl[].vtbl.metacast = miqt_exec_callback_cQPdfWriter_metacast
-  if not isNil(vtbl.metacall):
+  if not isNil(vtbl[].metacall):
     vtbl[].vtbl.metacall = miqt_exec_callback_cQPdfWriter_metacall
-  if not isNil(vtbl.newPage):
+  if not isNil(vtbl[].newPage):
     vtbl[].vtbl.newPage = miqt_exec_callback_cQPdfWriter_newPage
-  if not isNil(vtbl.setPageSize):
+  if not isNil(vtbl[].setPageSize):
     vtbl[].vtbl.setPageSize = miqt_exec_callback_cQPdfWriter_setPageSize
-  if not isNil(vtbl.setPageSizeMM):
+  if not isNil(vtbl[].setPageSizeMM):
     vtbl[].vtbl.setPageSizeMM = miqt_exec_callback_cQPdfWriter_setPageSizeMM
-  if not isNil(vtbl.setMargins):
+  if not isNil(vtbl[].setMargins):
     vtbl[].vtbl.setMargins = miqt_exec_callback_cQPdfWriter_setMargins
-  if not isNil(vtbl.paintEngine):
+  if not isNil(vtbl[].paintEngine):
     vtbl[].vtbl.paintEngine = miqt_exec_callback_cQPdfWriter_paintEngine
-  if not isNil(vtbl.metric):
+  if not isNil(vtbl[].metric):
     vtbl[].vtbl.metric = miqt_exec_callback_cQPdfWriter_metric
-  if not isNil(vtbl.event):
+  if not isNil(vtbl[].event):
     vtbl[].vtbl.event = miqt_exec_callback_cQPdfWriter_event
-  if not isNil(vtbl.eventFilter):
+  if not isNil(vtbl[].eventFilter):
     vtbl[].vtbl.eventFilter = miqt_exec_callback_cQPdfWriter_eventFilter
-  if not isNil(vtbl.timerEvent):
+  if not isNil(vtbl[].timerEvent):
     vtbl[].vtbl.timerEvent = miqt_exec_callback_cQPdfWriter_timerEvent
-  if not isNil(vtbl.childEvent):
+  if not isNil(vtbl[].childEvent):
     vtbl[].vtbl.childEvent = miqt_exec_callback_cQPdfWriter_childEvent
-  if not isNil(vtbl.customEvent):
+  if not isNil(vtbl[].customEvent):
     vtbl[].vtbl.customEvent = miqt_exec_callback_cQPdfWriter_customEvent
-  if not isNil(vtbl.connectNotify):
+  if not isNil(vtbl[].connectNotify):
     vtbl[].vtbl.connectNotify = miqt_exec_callback_cQPdfWriter_connectNotify
-  if not isNil(vtbl.disconnectNotify):
+  if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQPdfWriter_disconnectNotify
-  if not isNil(vtbl.devType):
+  if not isNil(vtbl[].devType):
     vtbl[].vtbl.devType = miqt_exec_callback_cQPdfWriter_devType
-  if not isNil(vtbl.initPainter):
+  if not isNil(vtbl[].initPainter):
     vtbl[].vtbl.initPainter = miqt_exec_callback_cQPdfWriter_initPainter
-  if not isNil(vtbl.redirected):
+  if not isNil(vtbl[].redirected):
     vtbl[].vtbl.redirected = miqt_exec_callback_cQPdfWriter_redirected
-  if not isNil(vtbl.sharedPainter):
+  if not isNil(vtbl[].sharedPainter):
     vtbl[].vtbl.sharedPainter = miqt_exec_callback_cQPdfWriter_sharedPainter
-  gen_qpdfwriter_types.QPdfWriter(h: fcQPdfWriter_new(addr(vtbl[]), struct_miqt_string(data: filename, len: csize_t(len(filename)))))
+  gen_qpdfwriter_types.QPdfWriter(h: fcQPdfWriter_new(addr(vtbl[].vtbl), struct_miqt_string(data: filename, len: csize_t(len(filename)))), owned: true)
 
 proc create*(T: type gen_qpdfwriter_types.QPdfWriter,
     device: gen_qiodevice_types.QIODevice,
     vtbl: ref QPdfWriterVTable = nil): gen_qpdfwriter_types.QPdfWriter =
   let vtbl = if vtbl == nil: new QPdfWriterVTable else: vtbl
   GC_ref(vtbl)
-  vtbl.vtbl.destructor = proc(vtbl: ptr cQPdfWriterVTable, _: ptr cQPdfWriter) {.cdecl.} =
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQPdfWriterVTable, _: ptr cQPdfWriter) {.cdecl.} =
     let vtbl = cast[ref QPdfWriterVTable](vtbl)
     GC_unref(vtbl)
-  if not isNil(vtbl.metaObject):
+  if not isNil(vtbl[].metaObject):
     vtbl[].vtbl.metaObject = miqt_exec_callback_cQPdfWriter_metaObject
-  if not isNil(vtbl.metacast):
+  if not isNil(vtbl[].metacast):
     vtbl[].vtbl.metacast = miqt_exec_callback_cQPdfWriter_metacast
-  if not isNil(vtbl.metacall):
+  if not isNil(vtbl[].metacall):
     vtbl[].vtbl.metacall = miqt_exec_callback_cQPdfWriter_metacall
-  if not isNil(vtbl.newPage):
+  if not isNil(vtbl[].newPage):
     vtbl[].vtbl.newPage = miqt_exec_callback_cQPdfWriter_newPage
-  if not isNil(vtbl.setPageSize):
+  if not isNil(vtbl[].setPageSize):
     vtbl[].vtbl.setPageSize = miqt_exec_callback_cQPdfWriter_setPageSize
-  if not isNil(vtbl.setPageSizeMM):
+  if not isNil(vtbl[].setPageSizeMM):
     vtbl[].vtbl.setPageSizeMM = miqt_exec_callback_cQPdfWriter_setPageSizeMM
-  if not isNil(vtbl.setMargins):
+  if not isNil(vtbl[].setMargins):
     vtbl[].vtbl.setMargins = miqt_exec_callback_cQPdfWriter_setMargins
-  if not isNil(vtbl.paintEngine):
+  if not isNil(vtbl[].paintEngine):
     vtbl[].vtbl.paintEngine = miqt_exec_callback_cQPdfWriter_paintEngine
-  if not isNil(vtbl.metric):
+  if not isNil(vtbl[].metric):
     vtbl[].vtbl.metric = miqt_exec_callback_cQPdfWriter_metric
-  if not isNil(vtbl.event):
+  if not isNil(vtbl[].event):
     vtbl[].vtbl.event = miqt_exec_callback_cQPdfWriter_event
-  if not isNil(vtbl.eventFilter):
+  if not isNil(vtbl[].eventFilter):
     vtbl[].vtbl.eventFilter = miqt_exec_callback_cQPdfWriter_eventFilter
-  if not isNil(vtbl.timerEvent):
+  if not isNil(vtbl[].timerEvent):
     vtbl[].vtbl.timerEvent = miqt_exec_callback_cQPdfWriter_timerEvent
-  if not isNil(vtbl.childEvent):
+  if not isNil(vtbl[].childEvent):
     vtbl[].vtbl.childEvent = miqt_exec_callback_cQPdfWriter_childEvent
-  if not isNil(vtbl.customEvent):
+  if not isNil(vtbl[].customEvent):
     vtbl[].vtbl.customEvent = miqt_exec_callback_cQPdfWriter_customEvent
-  if not isNil(vtbl.connectNotify):
+  if not isNil(vtbl[].connectNotify):
     vtbl[].vtbl.connectNotify = miqt_exec_callback_cQPdfWriter_connectNotify
-  if not isNil(vtbl.disconnectNotify):
+  if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQPdfWriter_disconnectNotify
-  if not isNil(vtbl.devType):
+  if not isNil(vtbl[].devType):
     vtbl[].vtbl.devType = miqt_exec_callback_cQPdfWriter_devType
-  if not isNil(vtbl.initPainter):
+  if not isNil(vtbl[].initPainter):
     vtbl[].vtbl.initPainter = miqt_exec_callback_cQPdfWriter_initPainter
-  if not isNil(vtbl.redirected):
+  if not isNil(vtbl[].redirected):
     vtbl[].vtbl.redirected = miqt_exec_callback_cQPdfWriter_redirected
-  if not isNil(vtbl.sharedPainter):
+  if not isNil(vtbl[].sharedPainter):
     vtbl[].vtbl.sharedPainter = miqt_exec_callback_cQPdfWriter_sharedPainter
-  gen_qpdfwriter_types.QPdfWriter(h: fcQPdfWriter_new2(addr(vtbl[]), device.h))
+  gen_qpdfwriter_types.QPdfWriter(h: fcQPdfWriter_new2(addr(vtbl[].vtbl), device.h), owned: true)
+
+proc create*(T: type gen_qpdfwriter_types.QPdfWriter,
+    filename: string,
+    vtbl: VirtualQPdfWriter) =
+
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQPdfWriterVTable, _: ptr cQPdfWriter) {.cdecl.} =
+    let vtbl = cast[ptr typeof(VirtualQPdfWriter()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQPdfWriter, vtbl)))
+    vtbl[].h = nil
+    vtbl[].owned = false
+  vtbl[].vtbl.metaObject = miqt_exec_method_cQPdfWriter_metaObject
+  vtbl[].vtbl.metacast = miqt_exec_method_cQPdfWriter_metacast
+  vtbl[].vtbl.metacall = miqt_exec_method_cQPdfWriter_metacall
+  vtbl[].vtbl.newPage = miqt_exec_method_cQPdfWriter_newPage
+  vtbl[].vtbl.setPageSize = miqt_exec_method_cQPdfWriter_setPageSize
+  vtbl[].vtbl.setPageSizeMM = miqt_exec_method_cQPdfWriter_setPageSizeMM
+  vtbl[].vtbl.setMargins = miqt_exec_method_cQPdfWriter_setMargins
+  vtbl[].vtbl.paintEngine = miqt_exec_method_cQPdfWriter_paintEngine
+  vtbl[].vtbl.metric = miqt_exec_method_cQPdfWriter_metric
+  vtbl[].vtbl.event = miqt_exec_method_cQPdfWriter_event
+  vtbl[].vtbl.eventFilter = miqt_exec_method_cQPdfWriter_eventFilter
+  vtbl[].vtbl.timerEvent = miqt_exec_method_cQPdfWriter_timerEvent
+  vtbl[].vtbl.childEvent = miqt_exec_method_cQPdfWriter_childEvent
+  vtbl[].vtbl.customEvent = miqt_exec_method_cQPdfWriter_customEvent
+  vtbl[].vtbl.connectNotify = miqt_exec_method_cQPdfWriter_connectNotify
+  vtbl[].vtbl.disconnectNotify = miqt_exec_method_cQPdfWriter_disconnectNotify
+  vtbl[].vtbl.devType = miqt_exec_method_cQPdfWriter_devType
+  vtbl[].vtbl.initPainter = miqt_exec_method_cQPdfWriter_initPainter
+  vtbl[].vtbl.redirected = miqt_exec_method_cQPdfWriter_redirected
+  vtbl[].vtbl.sharedPainter = miqt_exec_method_cQPdfWriter_sharedPainter
+  if vtbl[].h != nil: delete(move(vtbl[]))
+  vtbl[].h = fcQPdfWriter_new(addr(vtbl[].vtbl), struct_miqt_string(data: filename, len: csize_t(len(filename))))
+  vtbl[].owned = true
+
+proc create*(T: type gen_qpdfwriter_types.QPdfWriter,
+    device: gen_qiodevice_types.QIODevice,
+    vtbl: VirtualQPdfWriter) =
+
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQPdfWriterVTable, _: ptr cQPdfWriter) {.cdecl.} =
+    let vtbl = cast[ptr typeof(VirtualQPdfWriter()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQPdfWriter, vtbl)))
+    vtbl[].h = nil
+    vtbl[].owned = false
+  vtbl[].vtbl.metaObject = miqt_exec_method_cQPdfWriter_metaObject
+  vtbl[].vtbl.metacast = miqt_exec_method_cQPdfWriter_metacast
+  vtbl[].vtbl.metacall = miqt_exec_method_cQPdfWriter_metacall
+  vtbl[].vtbl.newPage = miqt_exec_method_cQPdfWriter_newPage
+  vtbl[].vtbl.setPageSize = miqt_exec_method_cQPdfWriter_setPageSize
+  vtbl[].vtbl.setPageSizeMM = miqt_exec_method_cQPdfWriter_setPageSizeMM
+  vtbl[].vtbl.setMargins = miqt_exec_method_cQPdfWriter_setMargins
+  vtbl[].vtbl.paintEngine = miqt_exec_method_cQPdfWriter_paintEngine
+  vtbl[].vtbl.metric = miqt_exec_method_cQPdfWriter_metric
+  vtbl[].vtbl.event = miqt_exec_method_cQPdfWriter_event
+  vtbl[].vtbl.eventFilter = miqt_exec_method_cQPdfWriter_eventFilter
+  vtbl[].vtbl.timerEvent = miqt_exec_method_cQPdfWriter_timerEvent
+  vtbl[].vtbl.childEvent = miqt_exec_method_cQPdfWriter_childEvent
+  vtbl[].vtbl.customEvent = miqt_exec_method_cQPdfWriter_customEvent
+  vtbl[].vtbl.connectNotify = miqt_exec_method_cQPdfWriter_connectNotify
+  vtbl[].vtbl.disconnectNotify = miqt_exec_method_cQPdfWriter_disconnectNotify
+  vtbl[].vtbl.devType = miqt_exec_method_cQPdfWriter_devType
+  vtbl[].vtbl.initPainter = miqt_exec_method_cQPdfWriter_initPainter
+  vtbl[].vtbl.redirected = miqt_exec_method_cQPdfWriter_redirected
+  vtbl[].vtbl.sharedPainter = miqt_exec_method_cQPdfWriter_sharedPainter
+  if vtbl[].h != nil: delete(move(vtbl[]))
+  vtbl[].h = fcQPdfWriter_new2(addr(vtbl[].vtbl), device.h)
+  vtbl[].owned = true
 
 proc staticMetaObject*(_: type gen_qpdfwriter_types.QPdfWriter): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQPdfWriter_staticMetaObject())
-proc delete*(self: gen_qpdfwriter_types.QPdfWriter) =
-  fcQPdfWriter_delete(self.h)

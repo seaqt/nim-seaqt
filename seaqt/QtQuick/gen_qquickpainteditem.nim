@@ -30,7 +30,7 @@ func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
     else:
       copyMem(addr result[0], unsafeAddr v[0], v.len)
 
-const cflags = gorge("pkg-config --cflags Qt5Quick")  & " -fPIC"
+const cflags = gorge("pkg-config --cflags Qt5Quick") & " -fPIC"
 {.compile("gen_qquickpainteditem.cpp", cflags).}
 
 
@@ -126,7 +126,7 @@ proc fcQQuickPaintedItem_trUtf82(s: cstring, c: cstring): struct_miqt_string {.i
 proc fcQQuickPaintedItem_trUtf83(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QQuickPaintedItem_trUtf83".}
 proc fcQQuickPaintedItem_update1(self: pointer, rect: pointer): void {.importc: "QQuickPaintedItem_update1".}
 proc fcQQuickPaintedItem_setPerformanceHint2(self: pointer, hint: cint, enabled: bool): void {.importc: "QQuickPaintedItem_setPerformanceHint2".}
-type cQQuickPaintedItemVTable = object
+type cQQuickPaintedItemVTable {.pure.} = object
   destructor*: proc(vtbl: ptr cQQuickPaintedItemVTable, self: ptr cQQuickPaintedItem) {.cdecl, raises:[], gcsafe.}
   metaObject*: proc(vtbl, self: pointer, ): pointer {.cdecl, raises: [], gcsafe.}
   metacast*: proc(vtbl, self: pointer, param1: cstring): pointer {.cdecl, raises: [], gcsafe.}
@@ -231,10 +231,9 @@ proc fcQQuickPaintedItem_protectedbase_isSignalConnected(self: pointer, signal: 
 proc fcQQuickPaintedItem_new(vtbl: pointer, ): ptr cQQuickPaintedItem {.importc: "QQuickPaintedItem_new".}
 proc fcQQuickPaintedItem_new2(vtbl: pointer, parent: pointer): ptr cQQuickPaintedItem {.importc: "QQuickPaintedItem_new2".}
 proc fcQQuickPaintedItem_staticMetaObject(): pointer {.importc: "QQuickPaintedItem_staticMetaObject".}
-proc fcQQuickPaintedItem_delete(self: pointer) {.importc: "QQuickPaintedItem_delete".}
 
 proc metaObject*(self: gen_qquickpainteditem_types.QQuickPaintedItem, ): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQQuickPaintedItem_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQQuickPaintedItem_metaObject(self.h), owned: false)
 
 proc metacast*(self: gen_qquickpainteditem_types.QQuickPaintedItem, param1: cstring): pointer =
   fcQQuickPaintedItem_metacast(self.h, param1)
@@ -285,10 +284,10 @@ proc setPerformanceHints*(self: gen_qquickpainteditem_types.QQuickPaintedItem, h
   fcQQuickPaintedItem_setPerformanceHints(self.h, cint(hints))
 
 proc contentsBoundingRect*(self: gen_qquickpainteditem_types.QQuickPaintedItem, ): gen_qrect_types.QRectF =
-  gen_qrect_types.QRectF(h: fcQQuickPaintedItem_contentsBoundingRect(self.h))
+  gen_qrect_types.QRectF(h: fcQQuickPaintedItem_contentsBoundingRect(self.h), owned: true)
 
 proc contentsSize*(self: gen_qquickpainteditem_types.QQuickPaintedItem, ): gen_qsize_types.QSize =
-  gen_qsize_types.QSize(h: fcQQuickPaintedItem_contentsSize(self.h))
+  gen_qsize_types.QSize(h: fcQQuickPaintedItem_contentsSize(self.h), owned: true)
 
 proc setContentsSize*(self: gen_qquickpainteditem_types.QQuickPaintedItem, contentsSize: gen_qsize_types.QSize): void =
   fcQQuickPaintedItem_setContentsSize(self.h, contentsSize.h)
@@ -303,13 +302,13 @@ proc setContentsScale*(self: gen_qquickpainteditem_types.QQuickPaintedItem, cont
   fcQQuickPaintedItem_setContentsScale(self.h, contentsScale)
 
 proc textureSize*(self: gen_qquickpainteditem_types.QQuickPaintedItem, ): gen_qsize_types.QSize =
-  gen_qsize_types.QSize(h: fcQQuickPaintedItem_textureSize(self.h))
+  gen_qsize_types.QSize(h: fcQQuickPaintedItem_textureSize(self.h), owned: true)
 
 proc setTextureSize*(self: gen_qquickpainteditem_types.QQuickPaintedItem, size: gen_qsize_types.QSize): void =
   fcQQuickPaintedItem_setTextureSize(self.h, size.h)
 
 proc fillColor*(self: gen_qquickpainteditem_types.QQuickPaintedItem, ): gen_qcolor_types.QColor =
-  gen_qcolor_types.QColor(h: fcQQuickPaintedItem_fillColor(self.h))
+  gen_qcolor_types.QColor(h: fcQQuickPaintedItem_fillColor(self.h), owned: true)
 
 proc setFillColor*(self: gen_qquickpainteditem_types.QQuickPaintedItem, fillColor: gen_qcolor_types.QColor): void =
   fcQQuickPaintedItem_setFillColor(self.h, fillColor.h)
@@ -327,7 +326,7 @@ proc isTextureProvider*(self: gen_qquickpainteditem_types.QQuickPaintedItem, ): 
   fcQQuickPaintedItem_isTextureProvider(self.h)
 
 proc textureProvider*(self: gen_qquickpainteditem_types.QQuickPaintedItem, ): gen_qsgtextureprovider_types.QSGTextureProvider =
-  gen_qsgtextureprovider_types.QSGTextureProvider(h: fcQQuickPaintedItem_textureProvider(self.h))
+  gen_qsgtextureprovider_types.QSGTextureProvider(h: fcQQuickPaintedItem_textureProvider(self.h), owned: false)
 
 proc fillColorChanged*(self: gen_qquickpainteditem_types.QQuickPaintedItem, ): void =
   fcQQuickPaintedItem_fillColorChanged(self.h)
@@ -495,7 +494,7 @@ type QQuickPaintedItemchildEventProc* = proc(self: QQuickPaintedItem, event: gen
 type QQuickPaintedItemcustomEventProc* = proc(self: QQuickPaintedItem, event: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
 type QQuickPaintedItemconnectNotifyProc* = proc(self: QQuickPaintedItem, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
 type QQuickPaintedItemdisconnectNotifyProc* = proc(self: QQuickPaintedItem, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
-type QQuickPaintedItemVTable* = object
+type QQuickPaintedItemVTable* {.inheritable, pure.} = object
   vtbl: cQQuickPaintedItemVTable
   metaObject*: QQuickPaintedItemmetaObjectProc
   metacast*: QQuickPaintedItemmetacastProc
@@ -544,13 +543,16 @@ type QQuickPaintedItemVTable* = object
   connectNotify*: QQuickPaintedItemconnectNotifyProc
   disconnectNotify*: QQuickPaintedItemdisconnectNotifyProc
 proc QQuickPaintedItemmetaObject*(self: gen_qquickpainteditem_types.QQuickPaintedItem, ): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQQuickPaintedItem_virtualbase_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQQuickPaintedItem_virtualbase_metaObject(self.h), owned: false)
 
 proc miqt_exec_callback_cQQuickPaintedItem_metaObject(vtbl: pointer, self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QQuickPaintedItemVTable](vtbl)
   let self = QQuickPaintedItem(h: self)
   var virtualReturn = vtbl[].metaObject(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QQuickPaintedItemmetacast*(self: gen_qquickpainteditem_types.QQuickPaintedItem, param1: cstring): pointer =
   fcQQuickPaintedItem_virtualbase_metacast(self.h, param1)
@@ -577,7 +579,7 @@ proc miqt_exec_callback_cQQuickPaintedItem_metacall(vtbl: pointer, self: pointer
 proc miqt_exec_callback_cQQuickPaintedItem_paint(vtbl: pointer, self: pointer, painter: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QQuickPaintedItemVTable](vtbl)
   let self = QQuickPaintedItem(h: self)
-  let slotval1 = gen_qpainter_types.QPainter(h: painter)
+  let slotval1 = gen_qpainter_types.QPainter(h: painter, owned: false)
   vtbl[].paint(self, slotval1)
 
 proc QQuickPaintedItemisTextureProvider*(self: gen_qquickpainteditem_types.QQuickPaintedItem, ): bool =
@@ -590,24 +592,30 @@ proc miqt_exec_callback_cQQuickPaintedItem_isTextureProvider(vtbl: pointer, self
   virtualReturn
 
 proc QQuickPaintedItemtextureProvider*(self: gen_qquickpainteditem_types.QQuickPaintedItem, ): gen_qsgtextureprovider_types.QSGTextureProvider =
-  gen_qsgtextureprovider_types.QSGTextureProvider(h: fcQQuickPaintedItem_virtualbase_textureProvider(self.h))
+  gen_qsgtextureprovider_types.QSGTextureProvider(h: fcQQuickPaintedItem_virtualbase_textureProvider(self.h), owned: false)
 
 proc miqt_exec_callback_cQQuickPaintedItem_textureProvider(vtbl: pointer, self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QQuickPaintedItemVTable](vtbl)
   let self = QQuickPaintedItem(h: self)
   var virtualReturn = vtbl[].textureProvider(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QQuickPaintedItemupdatePaintNode*(self: gen_qquickpainteditem_types.QQuickPaintedItem, param1: gen_qsgnode_types.QSGNode, param2: gen_qquickitem_types.QQuickItemUpdatePaintNodeData): gen_qsgnode_types.QSGNode =
-  gen_qsgnode_types.QSGNode(h: fcQQuickPaintedItem_virtualbase_updatePaintNode(self.h, param1.h, param2.h))
+  gen_qsgnode_types.QSGNode(h: fcQQuickPaintedItem_virtualbase_updatePaintNode(self.h, param1.h, param2.h), owned: false)
 
 proc miqt_exec_callback_cQQuickPaintedItem_updatePaintNode(vtbl: pointer, self: pointer, param1: pointer, param2: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QQuickPaintedItemVTable](vtbl)
   let self = QQuickPaintedItem(h: self)
-  let slotval1 = gen_qsgnode_types.QSGNode(h: param1)
-  let slotval2 = gen_qquickitem_types.QQuickItemUpdatePaintNodeData(h: param2)
+  let slotval1 = gen_qsgnode_types.QSGNode(h: param1, owned: false)
+  let slotval2 = gen_qquickitem_types.QQuickItemUpdatePaintNodeData(h: param2, owned: false)
   var virtualReturn = vtbl[].updatePaintNode(self, slotval1, slotval2)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QQuickPaintedItemreleaseResources*(self: gen_qquickpainteditem_types.QQuickPaintedItem, ): void =
   fcQQuickPaintedItem_virtualbase_releaseResources(self.h)
@@ -624,26 +632,32 @@ proc miqt_exec_callback_cQQuickPaintedItem_itemChange(vtbl: pointer, self: point
   let vtbl = cast[ptr QQuickPaintedItemVTable](vtbl)
   let self = QQuickPaintedItem(h: self)
   let slotval1 = cint(param1)
-  let slotval2 = gen_qquickitem_types.QQuickItemItemChangeData(h: param2)
+  let slotval2 = gen_qquickitem_types.QQuickItemItemChangeData(h: param2, owned: false)
   vtbl[].itemChange(self, slotval1, slotval2)
 
 proc QQuickPaintedItemboundingRect*(self: gen_qquickpainteditem_types.QQuickPaintedItem, ): gen_qrect_types.QRectF =
-  gen_qrect_types.QRectF(h: fcQQuickPaintedItem_virtualbase_boundingRect(self.h))
+  gen_qrect_types.QRectF(h: fcQQuickPaintedItem_virtualbase_boundingRect(self.h), owned: true)
 
 proc miqt_exec_callback_cQQuickPaintedItem_boundingRect(vtbl: pointer, self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QQuickPaintedItemVTable](vtbl)
   let self = QQuickPaintedItem(h: self)
   var virtualReturn = vtbl[].boundingRect(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QQuickPaintedItemclipRect*(self: gen_qquickpainteditem_types.QQuickPaintedItem, ): gen_qrect_types.QRectF =
-  gen_qrect_types.QRectF(h: fcQQuickPaintedItem_virtualbase_clipRect(self.h))
+  gen_qrect_types.QRectF(h: fcQQuickPaintedItem_virtualbase_clipRect(self.h), owned: true)
 
 proc miqt_exec_callback_cQQuickPaintedItem_clipRect(vtbl: pointer, self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QQuickPaintedItemVTable](vtbl)
   let self = QQuickPaintedItem(h: self)
   var virtualReturn = vtbl[].clipRect(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QQuickPaintedItemcontains*(self: gen_qquickpainteditem_types.QQuickPaintedItem, point: gen_qpoint_types.QPointF): bool =
   fcQQuickPaintedItem_virtualbase_contains(self.h, point.h)
@@ -651,19 +665,22 @@ proc QQuickPaintedItemcontains*(self: gen_qquickpainteditem_types.QQuickPaintedI
 proc miqt_exec_callback_cQQuickPaintedItem_contains(vtbl: pointer, self: pointer, point: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QQuickPaintedItemVTable](vtbl)
   let self = QQuickPaintedItem(h: self)
-  let slotval1 = gen_qpoint_types.QPointF(h: point)
+  let slotval1 = gen_qpoint_types.QPointF(h: point, owned: false)
   var virtualReturn = vtbl[].contains(self, slotval1)
   virtualReturn
 
 proc QQuickPaintedIteminputMethodQuery*(self: gen_qquickpainteditem_types.QQuickPaintedItem, query: cint): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQQuickPaintedItem_virtualbase_inputMethodQuery(self.h, cint(query)))
+  gen_qvariant_types.QVariant(h: fcQQuickPaintedItem_virtualbase_inputMethodQuery(self.h, cint(query)), owned: true)
 
 proc miqt_exec_callback_cQQuickPaintedItem_inputMethodQuery(vtbl: pointer, self: pointer, query: cint): pointer {.cdecl.} =
   let vtbl = cast[ptr QQuickPaintedItemVTable](vtbl)
   let self = QQuickPaintedItem(h: self)
   let slotval1 = cint(query)
   var virtualReturn = vtbl[].inputMethodQuery(self, slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QQuickPaintedItemevent*(self: gen_qquickpainteditem_types.QQuickPaintedItem, param1: gen_qcoreevent_types.QEvent): bool =
   fcQQuickPaintedItem_virtualbase_event(self.h, param1.h)
@@ -671,7 +688,7 @@ proc QQuickPaintedItemevent*(self: gen_qquickpainteditem_types.QQuickPaintedItem
 proc miqt_exec_callback_cQQuickPaintedItem_event(vtbl: pointer, self: pointer, param1: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QQuickPaintedItemVTable](vtbl)
   let self = QQuickPaintedItem(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: param1)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: param1, owned: false)
   var virtualReturn = vtbl[].event(self, slotval1)
   virtualReturn
 
@@ -697,7 +714,7 @@ proc QQuickPaintedItemkeyPressEvent*(self: gen_qquickpainteditem_types.QQuickPai
 proc miqt_exec_callback_cQQuickPaintedItem_keyPressEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QQuickPaintedItemVTable](vtbl)
   let self = QQuickPaintedItem(h: self)
-  let slotval1 = gen_qevent_types.QKeyEvent(h: event)
+  let slotval1 = gen_qevent_types.QKeyEvent(h: event, owned: false)
   vtbl[].keyPressEvent(self, slotval1)
 
 proc QQuickPaintedItemkeyReleaseEvent*(self: gen_qquickpainteditem_types.QQuickPaintedItem, event: gen_qevent_types.QKeyEvent): void =
@@ -706,7 +723,7 @@ proc QQuickPaintedItemkeyReleaseEvent*(self: gen_qquickpainteditem_types.QQuickP
 proc miqt_exec_callback_cQQuickPaintedItem_keyReleaseEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QQuickPaintedItemVTable](vtbl)
   let self = QQuickPaintedItem(h: self)
-  let slotval1 = gen_qevent_types.QKeyEvent(h: event)
+  let slotval1 = gen_qevent_types.QKeyEvent(h: event, owned: false)
   vtbl[].keyReleaseEvent(self, slotval1)
 
 proc QQuickPaintedIteminputMethodEvent*(self: gen_qquickpainteditem_types.QQuickPaintedItem, param1: gen_qevent_types.QInputMethodEvent): void =
@@ -715,7 +732,7 @@ proc QQuickPaintedIteminputMethodEvent*(self: gen_qquickpainteditem_types.QQuick
 proc miqt_exec_callback_cQQuickPaintedItem_inputMethodEvent(vtbl: pointer, self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QQuickPaintedItemVTable](vtbl)
   let self = QQuickPaintedItem(h: self)
-  let slotval1 = gen_qevent_types.QInputMethodEvent(h: param1)
+  let slotval1 = gen_qevent_types.QInputMethodEvent(h: param1, owned: false)
   vtbl[].inputMethodEvent(self, slotval1)
 
 proc QQuickPaintedItemfocusInEvent*(self: gen_qquickpainteditem_types.QQuickPaintedItem, param1: gen_qevent_types.QFocusEvent): void =
@@ -724,7 +741,7 @@ proc QQuickPaintedItemfocusInEvent*(self: gen_qquickpainteditem_types.QQuickPain
 proc miqt_exec_callback_cQQuickPaintedItem_focusInEvent(vtbl: pointer, self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QQuickPaintedItemVTable](vtbl)
   let self = QQuickPaintedItem(h: self)
-  let slotval1 = gen_qevent_types.QFocusEvent(h: param1)
+  let slotval1 = gen_qevent_types.QFocusEvent(h: param1, owned: false)
   vtbl[].focusInEvent(self, slotval1)
 
 proc QQuickPaintedItemfocusOutEvent*(self: gen_qquickpainteditem_types.QQuickPaintedItem, param1: gen_qevent_types.QFocusEvent): void =
@@ -733,7 +750,7 @@ proc QQuickPaintedItemfocusOutEvent*(self: gen_qquickpainteditem_types.QQuickPai
 proc miqt_exec_callback_cQQuickPaintedItem_focusOutEvent(vtbl: pointer, self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QQuickPaintedItemVTable](vtbl)
   let self = QQuickPaintedItem(h: self)
-  let slotval1 = gen_qevent_types.QFocusEvent(h: param1)
+  let slotval1 = gen_qevent_types.QFocusEvent(h: param1, owned: false)
   vtbl[].focusOutEvent(self, slotval1)
 
 proc QQuickPaintedItemmousePressEvent*(self: gen_qquickpainteditem_types.QQuickPaintedItem, event: gen_qevent_types.QMouseEvent): void =
@@ -742,7 +759,7 @@ proc QQuickPaintedItemmousePressEvent*(self: gen_qquickpainteditem_types.QQuickP
 proc miqt_exec_callback_cQQuickPaintedItem_mousePressEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QQuickPaintedItemVTable](vtbl)
   let self = QQuickPaintedItem(h: self)
-  let slotval1 = gen_qevent_types.QMouseEvent(h: event)
+  let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   vtbl[].mousePressEvent(self, slotval1)
 
 proc QQuickPaintedItemmouseMoveEvent*(self: gen_qquickpainteditem_types.QQuickPaintedItem, event: gen_qevent_types.QMouseEvent): void =
@@ -751,7 +768,7 @@ proc QQuickPaintedItemmouseMoveEvent*(self: gen_qquickpainteditem_types.QQuickPa
 proc miqt_exec_callback_cQQuickPaintedItem_mouseMoveEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QQuickPaintedItemVTable](vtbl)
   let self = QQuickPaintedItem(h: self)
-  let slotval1 = gen_qevent_types.QMouseEvent(h: event)
+  let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   vtbl[].mouseMoveEvent(self, slotval1)
 
 proc QQuickPaintedItemmouseReleaseEvent*(self: gen_qquickpainteditem_types.QQuickPaintedItem, event: gen_qevent_types.QMouseEvent): void =
@@ -760,7 +777,7 @@ proc QQuickPaintedItemmouseReleaseEvent*(self: gen_qquickpainteditem_types.QQuic
 proc miqt_exec_callback_cQQuickPaintedItem_mouseReleaseEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QQuickPaintedItemVTable](vtbl)
   let self = QQuickPaintedItem(h: self)
-  let slotval1 = gen_qevent_types.QMouseEvent(h: event)
+  let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   vtbl[].mouseReleaseEvent(self, slotval1)
 
 proc QQuickPaintedItemmouseDoubleClickEvent*(self: gen_qquickpainteditem_types.QQuickPaintedItem, event: gen_qevent_types.QMouseEvent): void =
@@ -769,7 +786,7 @@ proc QQuickPaintedItemmouseDoubleClickEvent*(self: gen_qquickpainteditem_types.Q
 proc miqt_exec_callback_cQQuickPaintedItem_mouseDoubleClickEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QQuickPaintedItemVTable](vtbl)
   let self = QQuickPaintedItem(h: self)
-  let slotval1 = gen_qevent_types.QMouseEvent(h: event)
+  let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   vtbl[].mouseDoubleClickEvent(self, slotval1)
 
 proc QQuickPaintedItemmouseUngrabEvent*(self: gen_qquickpainteditem_types.QQuickPaintedItem, ): void =
@@ -794,7 +811,7 @@ proc QQuickPaintedItemwheelEvent*(self: gen_qquickpainteditem_types.QQuickPainte
 proc miqt_exec_callback_cQQuickPaintedItem_wheelEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QQuickPaintedItemVTable](vtbl)
   let self = QQuickPaintedItem(h: self)
-  let slotval1 = gen_qevent_types.QWheelEvent(h: event)
+  let slotval1 = gen_qevent_types.QWheelEvent(h: event, owned: false)
   vtbl[].wheelEvent(self, slotval1)
 
 proc QQuickPaintedItemtouchEvent*(self: gen_qquickpainteditem_types.QQuickPaintedItem, event: gen_qevent_types.QTouchEvent): void =
@@ -803,7 +820,7 @@ proc QQuickPaintedItemtouchEvent*(self: gen_qquickpainteditem_types.QQuickPainte
 proc miqt_exec_callback_cQQuickPaintedItem_touchEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QQuickPaintedItemVTable](vtbl)
   let self = QQuickPaintedItem(h: self)
-  let slotval1 = gen_qevent_types.QTouchEvent(h: event)
+  let slotval1 = gen_qevent_types.QTouchEvent(h: event, owned: false)
   vtbl[].touchEvent(self, slotval1)
 
 proc QQuickPaintedItemhoverEnterEvent*(self: gen_qquickpainteditem_types.QQuickPaintedItem, event: gen_qevent_types.QHoverEvent): void =
@@ -812,7 +829,7 @@ proc QQuickPaintedItemhoverEnterEvent*(self: gen_qquickpainteditem_types.QQuickP
 proc miqt_exec_callback_cQQuickPaintedItem_hoverEnterEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QQuickPaintedItemVTable](vtbl)
   let self = QQuickPaintedItem(h: self)
-  let slotval1 = gen_qevent_types.QHoverEvent(h: event)
+  let slotval1 = gen_qevent_types.QHoverEvent(h: event, owned: false)
   vtbl[].hoverEnterEvent(self, slotval1)
 
 proc QQuickPaintedItemhoverMoveEvent*(self: gen_qquickpainteditem_types.QQuickPaintedItem, event: gen_qevent_types.QHoverEvent): void =
@@ -821,7 +838,7 @@ proc QQuickPaintedItemhoverMoveEvent*(self: gen_qquickpainteditem_types.QQuickPa
 proc miqt_exec_callback_cQQuickPaintedItem_hoverMoveEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QQuickPaintedItemVTable](vtbl)
   let self = QQuickPaintedItem(h: self)
-  let slotval1 = gen_qevent_types.QHoverEvent(h: event)
+  let slotval1 = gen_qevent_types.QHoverEvent(h: event, owned: false)
   vtbl[].hoverMoveEvent(self, slotval1)
 
 proc QQuickPaintedItemhoverLeaveEvent*(self: gen_qquickpainteditem_types.QQuickPaintedItem, event: gen_qevent_types.QHoverEvent): void =
@@ -830,7 +847,7 @@ proc QQuickPaintedItemhoverLeaveEvent*(self: gen_qquickpainteditem_types.QQuickP
 proc miqt_exec_callback_cQQuickPaintedItem_hoverLeaveEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QQuickPaintedItemVTable](vtbl)
   let self = QQuickPaintedItem(h: self)
-  let slotval1 = gen_qevent_types.QHoverEvent(h: event)
+  let slotval1 = gen_qevent_types.QHoverEvent(h: event, owned: false)
   vtbl[].hoverLeaveEvent(self, slotval1)
 
 proc QQuickPaintedItemdragEnterEvent*(self: gen_qquickpainteditem_types.QQuickPaintedItem, param1: gen_qevent_types.QDragEnterEvent): void =
@@ -839,7 +856,7 @@ proc QQuickPaintedItemdragEnterEvent*(self: gen_qquickpainteditem_types.QQuickPa
 proc miqt_exec_callback_cQQuickPaintedItem_dragEnterEvent(vtbl: pointer, self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QQuickPaintedItemVTable](vtbl)
   let self = QQuickPaintedItem(h: self)
-  let slotval1 = gen_qevent_types.QDragEnterEvent(h: param1)
+  let slotval1 = gen_qevent_types.QDragEnterEvent(h: param1, owned: false)
   vtbl[].dragEnterEvent(self, slotval1)
 
 proc QQuickPaintedItemdragMoveEvent*(self: gen_qquickpainteditem_types.QQuickPaintedItem, param1: gen_qevent_types.QDragMoveEvent): void =
@@ -848,7 +865,7 @@ proc QQuickPaintedItemdragMoveEvent*(self: gen_qquickpainteditem_types.QQuickPai
 proc miqt_exec_callback_cQQuickPaintedItem_dragMoveEvent(vtbl: pointer, self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QQuickPaintedItemVTable](vtbl)
   let self = QQuickPaintedItem(h: self)
-  let slotval1 = gen_qevent_types.QDragMoveEvent(h: param1)
+  let slotval1 = gen_qevent_types.QDragMoveEvent(h: param1, owned: false)
   vtbl[].dragMoveEvent(self, slotval1)
 
 proc QQuickPaintedItemdragLeaveEvent*(self: gen_qquickpainteditem_types.QQuickPaintedItem, param1: gen_qevent_types.QDragLeaveEvent): void =
@@ -857,7 +874,7 @@ proc QQuickPaintedItemdragLeaveEvent*(self: gen_qquickpainteditem_types.QQuickPa
 proc miqt_exec_callback_cQQuickPaintedItem_dragLeaveEvent(vtbl: pointer, self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QQuickPaintedItemVTable](vtbl)
   let self = QQuickPaintedItem(h: self)
-  let slotval1 = gen_qevent_types.QDragLeaveEvent(h: param1)
+  let slotval1 = gen_qevent_types.QDragLeaveEvent(h: param1, owned: false)
   vtbl[].dragLeaveEvent(self, slotval1)
 
 proc QQuickPaintedItemdropEvent*(self: gen_qquickpainteditem_types.QQuickPaintedItem, param1: gen_qevent_types.QDropEvent): void =
@@ -866,7 +883,7 @@ proc QQuickPaintedItemdropEvent*(self: gen_qquickpainteditem_types.QQuickPainted
 proc miqt_exec_callback_cQQuickPaintedItem_dropEvent(vtbl: pointer, self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QQuickPaintedItemVTable](vtbl)
   let self = QQuickPaintedItem(h: self)
-  let slotval1 = gen_qevent_types.QDropEvent(h: param1)
+  let slotval1 = gen_qevent_types.QDropEvent(h: param1, owned: false)
   vtbl[].dropEvent(self, slotval1)
 
 proc QQuickPaintedItemchildMouseEventFilter*(self: gen_qquickpainteditem_types.QQuickPaintedItem, param1: gen_qquickitem_types.QQuickItem, param2: gen_qcoreevent_types.QEvent): bool =
@@ -875,8 +892,8 @@ proc QQuickPaintedItemchildMouseEventFilter*(self: gen_qquickpainteditem_types.Q
 proc miqt_exec_callback_cQQuickPaintedItem_childMouseEventFilter(vtbl: pointer, self: pointer, param1: pointer, param2: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QQuickPaintedItemVTable](vtbl)
   let self = QQuickPaintedItem(h: self)
-  let slotval1 = gen_qquickitem_types.QQuickItem(h: param1)
-  let slotval2 = gen_qcoreevent_types.QEvent(h: param2)
+  let slotval1 = gen_qquickitem_types.QQuickItem(h: param1, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: param2, owned: false)
   var virtualReturn = vtbl[].childMouseEventFilter(self, slotval1, slotval2)
   virtualReturn
 
@@ -894,8 +911,8 @@ proc QQuickPaintedItemgeometryChanged*(self: gen_qquickpainteditem_types.QQuickP
 proc miqt_exec_callback_cQQuickPaintedItem_geometryChanged(vtbl: pointer, self: pointer, newGeometry: pointer, oldGeometry: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QQuickPaintedItemVTable](vtbl)
   let self = QQuickPaintedItem(h: self)
-  let slotval1 = gen_qrect_types.QRectF(h: newGeometry)
-  let slotval2 = gen_qrect_types.QRectF(h: oldGeometry)
+  let slotval1 = gen_qrect_types.QRectF(h: newGeometry, owned: false)
+  let slotval2 = gen_qrect_types.QRectF(h: oldGeometry, owned: false)
   vtbl[].geometryChanged(self, slotval1, slotval2)
 
 proc QQuickPaintedItemupdatePolish*(self: gen_qquickpainteditem_types.QQuickPaintedItem, ): void =
@@ -912,8 +929,8 @@ proc QQuickPaintedItemeventFilter*(self: gen_qquickpainteditem_types.QQuickPaint
 proc miqt_exec_callback_cQQuickPaintedItem_eventFilter(vtbl: pointer, self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QQuickPaintedItemVTable](vtbl)
   let self = QQuickPaintedItem(h: self)
-  let slotval1 = gen_qobject_types.QObject(h: watched)
-  let slotval2 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].eventFilter(self, slotval1, slotval2)
   virtualReturn
 
@@ -923,7 +940,7 @@ proc QQuickPaintedItemtimerEvent*(self: gen_qquickpainteditem_types.QQuickPainte
 proc miqt_exec_callback_cQQuickPaintedItem_timerEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QQuickPaintedItemVTable](vtbl)
   let self = QQuickPaintedItem(h: self)
-  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   vtbl[].timerEvent(self, slotval1)
 
 proc QQuickPaintedItemchildEvent*(self: gen_qquickpainteditem_types.QQuickPaintedItem, event: gen_qcoreevent_types.QChildEvent): void =
@@ -932,7 +949,7 @@ proc QQuickPaintedItemchildEvent*(self: gen_qquickpainteditem_types.QQuickPainte
 proc miqt_exec_callback_cQQuickPaintedItem_childEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QQuickPaintedItemVTable](vtbl)
   let self = QQuickPaintedItem(h: self)
-  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   vtbl[].childEvent(self, slotval1)
 
 proc QQuickPaintedItemcustomEvent*(self: gen_qquickpainteditem_types.QQuickPaintedItem, event: gen_qcoreevent_types.QEvent): void =
@@ -941,7 +958,7 @@ proc QQuickPaintedItemcustomEvent*(self: gen_qquickpainteditem_types.QQuickPaint
 proc miqt_exec_callback_cQQuickPaintedItem_customEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QQuickPaintedItemVTable](vtbl)
   let self = QQuickPaintedItem(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].customEvent(self, slotval1)
 
 proc QQuickPaintedItemconnectNotify*(self: gen_qquickpainteditem_types.QQuickPaintedItem, signal: gen_qmetaobject_types.QMetaMethod): void =
@@ -950,7 +967,7 @@ proc QQuickPaintedItemconnectNotify*(self: gen_qquickpainteditem_types.QQuickPai
 proc miqt_exec_callback_cQQuickPaintedItem_connectNotify(vtbl: pointer, self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QQuickPaintedItemVTable](vtbl)
   let self = QQuickPaintedItem(h: self)
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].connectNotify(self, slotval1)
 
 proc QQuickPaintedItemdisconnectNotify*(self: gen_qquickpainteditem_types.QQuickPaintedItem, signal: gen_qmetaobject_types.QMetaMethod): void =
@@ -959,8 +976,358 @@ proc QQuickPaintedItemdisconnectNotify*(self: gen_qquickpainteditem_types.QQuick
 proc miqt_exec_callback_cQQuickPaintedItem_disconnectNotify(vtbl: pointer, self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QQuickPaintedItemVTable](vtbl)
   let self = QQuickPaintedItem(h: self)
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].disconnectNotify(self, slotval1)
+
+type VirtualQQuickPaintedItem* {.inheritable.} = ref object of QQuickPaintedItem
+  vtbl*: cQQuickPaintedItemVTable
+method metaObject*(self: VirtualQQuickPaintedItem, ): gen_qobjectdefs_types.QMetaObject {.base.} =
+  QQuickPaintedItemmetaObject(self[])
+proc miqt_exec_method_cQQuickPaintedItem_metaObject(vtbl: pointer, inst: pointer): pointer {.cdecl.} =
+  let vtbl = cast[VirtualQQuickPaintedItem](cast[uint](vtbl) - uint(offsetOf(VirtualQQuickPaintedItem, vtbl)))
+  var virtualReturn = vtbl.metaObject()
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
+
+method metacast*(self: VirtualQQuickPaintedItem, param1: cstring): pointer {.base.} =
+  QQuickPaintedItemmetacast(self[], param1)
+proc miqt_exec_method_cQQuickPaintedItem_metacast(vtbl: pointer, inst: pointer, param1: cstring): pointer {.cdecl.} =
+  let vtbl = cast[VirtualQQuickPaintedItem](cast[uint](vtbl) - uint(offsetOf(VirtualQQuickPaintedItem, vtbl)))
+  let slotval1 = (param1)
+  var virtualReturn = vtbl.metacast(slotval1)
+  virtualReturn
+
+method metacall*(self: VirtualQQuickPaintedItem, param1: cint, param2: cint, param3: pointer): cint {.base.} =
+  QQuickPaintedItemmetacall(self[], param1, param2, param3)
+proc miqt_exec_method_cQQuickPaintedItem_metacall(vtbl: pointer, inst: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
+  let vtbl = cast[VirtualQQuickPaintedItem](cast[uint](vtbl) - uint(offsetOf(VirtualQQuickPaintedItem, vtbl)))
+  let slotval1 = cint(param1)
+  let slotval2 = param2
+  let slotval3 = param3
+  var virtualReturn = vtbl.metacall(slotval1, slotval2, slotval3)
+  virtualReturn
+
+method paint*(self: VirtualQQuickPaintedItem, painter: gen_qpainter_types.QPainter): void {.base.} =
+  raiseAssert("missing implementation of QQuickPaintedItem_virtualbase_paint")
+proc miqt_exec_method_cQQuickPaintedItem_paint(vtbl: pointer, inst: pointer, painter: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQQuickPaintedItem](cast[uint](vtbl) - uint(offsetOf(VirtualQQuickPaintedItem, vtbl)))
+  let slotval1 = gen_qpainter_types.QPainter(h: painter, owned: false)
+  vtbl.paint(slotval1)
+
+method isTextureProvider*(self: VirtualQQuickPaintedItem, ): bool {.base.} =
+  QQuickPaintedItemisTextureProvider(self[])
+proc miqt_exec_method_cQQuickPaintedItem_isTextureProvider(vtbl: pointer, inst: pointer): bool {.cdecl.} =
+  let vtbl = cast[VirtualQQuickPaintedItem](cast[uint](vtbl) - uint(offsetOf(VirtualQQuickPaintedItem, vtbl)))
+  var virtualReturn = vtbl.isTextureProvider()
+  virtualReturn
+
+method textureProvider*(self: VirtualQQuickPaintedItem, ): gen_qsgtextureprovider_types.QSGTextureProvider {.base.} =
+  QQuickPaintedItemtextureProvider(self[])
+proc miqt_exec_method_cQQuickPaintedItem_textureProvider(vtbl: pointer, inst: pointer): pointer {.cdecl.} =
+  let vtbl = cast[VirtualQQuickPaintedItem](cast[uint](vtbl) - uint(offsetOf(VirtualQQuickPaintedItem, vtbl)))
+  var virtualReturn = vtbl.textureProvider()
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
+
+method updatePaintNode*(self: VirtualQQuickPaintedItem, param1: gen_qsgnode_types.QSGNode, param2: gen_qquickitem_types.QQuickItemUpdatePaintNodeData): gen_qsgnode_types.QSGNode {.base.} =
+  QQuickPaintedItemupdatePaintNode(self[], param1, param2)
+proc miqt_exec_method_cQQuickPaintedItem_updatePaintNode(vtbl: pointer, inst: pointer, param1: pointer, param2: pointer): pointer {.cdecl.} =
+  let vtbl = cast[VirtualQQuickPaintedItem](cast[uint](vtbl) - uint(offsetOf(VirtualQQuickPaintedItem, vtbl)))
+  let slotval1 = gen_qsgnode_types.QSGNode(h: param1, owned: false)
+  let slotval2 = gen_qquickitem_types.QQuickItemUpdatePaintNodeData(h: param2, owned: false)
+  var virtualReturn = vtbl.updatePaintNode(slotval1, slotval2)
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
+
+method releaseResources*(self: VirtualQQuickPaintedItem, ): void {.base.} =
+  QQuickPaintedItemreleaseResources(self[])
+proc miqt_exec_method_cQQuickPaintedItem_releaseResources(vtbl: pointer, inst: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQQuickPaintedItem](cast[uint](vtbl) - uint(offsetOf(VirtualQQuickPaintedItem, vtbl)))
+  vtbl.releaseResources()
+
+method itemChange*(self: VirtualQQuickPaintedItem, param1: cint, param2: gen_qquickitem_types.QQuickItemItemChangeData): void {.base.} =
+  QQuickPaintedItemitemChange(self[], param1, param2)
+proc miqt_exec_method_cQQuickPaintedItem_itemChange(vtbl: pointer, inst: pointer, param1: cint, param2: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQQuickPaintedItem](cast[uint](vtbl) - uint(offsetOf(VirtualQQuickPaintedItem, vtbl)))
+  let slotval1 = cint(param1)
+  let slotval2 = gen_qquickitem_types.QQuickItemItemChangeData(h: param2, owned: false)
+  vtbl.itemChange(slotval1, slotval2)
+
+method boundingRect*(self: VirtualQQuickPaintedItem, ): gen_qrect_types.QRectF {.base.} =
+  QQuickPaintedItemboundingRect(self[])
+proc miqt_exec_method_cQQuickPaintedItem_boundingRect(vtbl: pointer, inst: pointer): pointer {.cdecl.} =
+  let vtbl = cast[VirtualQQuickPaintedItem](cast[uint](vtbl) - uint(offsetOf(VirtualQQuickPaintedItem, vtbl)))
+  var virtualReturn = vtbl.boundingRect()
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
+
+method clipRect*(self: VirtualQQuickPaintedItem, ): gen_qrect_types.QRectF {.base.} =
+  QQuickPaintedItemclipRect(self[])
+proc miqt_exec_method_cQQuickPaintedItem_clipRect(vtbl: pointer, inst: pointer): pointer {.cdecl.} =
+  let vtbl = cast[VirtualQQuickPaintedItem](cast[uint](vtbl) - uint(offsetOf(VirtualQQuickPaintedItem, vtbl)))
+  var virtualReturn = vtbl.clipRect()
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
+
+method contains*(self: VirtualQQuickPaintedItem, point: gen_qpoint_types.QPointF): bool {.base.} =
+  QQuickPaintedItemcontains(self[], point)
+proc miqt_exec_method_cQQuickPaintedItem_contains(vtbl: pointer, inst: pointer, point: pointer): bool {.cdecl.} =
+  let vtbl = cast[VirtualQQuickPaintedItem](cast[uint](vtbl) - uint(offsetOf(VirtualQQuickPaintedItem, vtbl)))
+  let slotval1 = gen_qpoint_types.QPointF(h: point, owned: false)
+  var virtualReturn = vtbl.contains(slotval1)
+  virtualReturn
+
+method inputMethodQuery*(self: VirtualQQuickPaintedItem, query: cint): gen_qvariant_types.QVariant {.base.} =
+  QQuickPaintedIteminputMethodQuery(self[], query)
+proc miqt_exec_method_cQQuickPaintedItem_inputMethodQuery(vtbl: pointer, inst: pointer, query: cint): pointer {.cdecl.} =
+  let vtbl = cast[VirtualQQuickPaintedItem](cast[uint](vtbl) - uint(offsetOf(VirtualQQuickPaintedItem, vtbl)))
+  let slotval1 = cint(query)
+  var virtualReturn = vtbl.inputMethodQuery(slotval1)
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
+
+method event*(self: VirtualQQuickPaintedItem, param1: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QQuickPaintedItemevent(self[], param1)
+proc miqt_exec_method_cQQuickPaintedItem_event(vtbl: pointer, inst: pointer, param1: pointer): bool {.cdecl.} =
+  let vtbl = cast[VirtualQQuickPaintedItem](cast[uint](vtbl) - uint(offsetOf(VirtualQQuickPaintedItem, vtbl)))
+  let slotval1 = gen_qcoreevent_types.QEvent(h: param1, owned: false)
+  var virtualReturn = vtbl.event(slotval1)
+  virtualReturn
+
+method classBegin*(self: VirtualQQuickPaintedItem, ): void {.base.} =
+  QQuickPaintedItemclassBegin(self[])
+proc miqt_exec_method_cQQuickPaintedItem_classBegin(vtbl: pointer, inst: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQQuickPaintedItem](cast[uint](vtbl) - uint(offsetOf(VirtualQQuickPaintedItem, vtbl)))
+  vtbl.classBegin()
+
+method componentComplete*(self: VirtualQQuickPaintedItem, ): void {.base.} =
+  QQuickPaintedItemcomponentComplete(self[])
+proc miqt_exec_method_cQQuickPaintedItem_componentComplete(vtbl: pointer, inst: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQQuickPaintedItem](cast[uint](vtbl) - uint(offsetOf(VirtualQQuickPaintedItem, vtbl)))
+  vtbl.componentComplete()
+
+method keyPressEvent*(self: VirtualQQuickPaintedItem, event: gen_qevent_types.QKeyEvent): void {.base.} =
+  QQuickPaintedItemkeyPressEvent(self[], event)
+proc miqt_exec_method_cQQuickPaintedItem_keyPressEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQQuickPaintedItem](cast[uint](vtbl) - uint(offsetOf(VirtualQQuickPaintedItem, vtbl)))
+  let slotval1 = gen_qevent_types.QKeyEvent(h: event, owned: false)
+  vtbl.keyPressEvent(slotval1)
+
+method keyReleaseEvent*(self: VirtualQQuickPaintedItem, event: gen_qevent_types.QKeyEvent): void {.base.} =
+  QQuickPaintedItemkeyReleaseEvent(self[], event)
+proc miqt_exec_method_cQQuickPaintedItem_keyReleaseEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQQuickPaintedItem](cast[uint](vtbl) - uint(offsetOf(VirtualQQuickPaintedItem, vtbl)))
+  let slotval1 = gen_qevent_types.QKeyEvent(h: event, owned: false)
+  vtbl.keyReleaseEvent(slotval1)
+
+method inputMethodEvent*(self: VirtualQQuickPaintedItem, param1: gen_qevent_types.QInputMethodEvent): void {.base.} =
+  QQuickPaintedIteminputMethodEvent(self[], param1)
+proc miqt_exec_method_cQQuickPaintedItem_inputMethodEvent(vtbl: pointer, inst: pointer, param1: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQQuickPaintedItem](cast[uint](vtbl) - uint(offsetOf(VirtualQQuickPaintedItem, vtbl)))
+  let slotval1 = gen_qevent_types.QInputMethodEvent(h: param1, owned: false)
+  vtbl.inputMethodEvent(slotval1)
+
+method focusInEvent*(self: VirtualQQuickPaintedItem, param1: gen_qevent_types.QFocusEvent): void {.base.} =
+  QQuickPaintedItemfocusInEvent(self[], param1)
+proc miqt_exec_method_cQQuickPaintedItem_focusInEvent(vtbl: pointer, inst: pointer, param1: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQQuickPaintedItem](cast[uint](vtbl) - uint(offsetOf(VirtualQQuickPaintedItem, vtbl)))
+  let slotval1 = gen_qevent_types.QFocusEvent(h: param1, owned: false)
+  vtbl.focusInEvent(slotval1)
+
+method focusOutEvent*(self: VirtualQQuickPaintedItem, param1: gen_qevent_types.QFocusEvent): void {.base.} =
+  QQuickPaintedItemfocusOutEvent(self[], param1)
+proc miqt_exec_method_cQQuickPaintedItem_focusOutEvent(vtbl: pointer, inst: pointer, param1: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQQuickPaintedItem](cast[uint](vtbl) - uint(offsetOf(VirtualQQuickPaintedItem, vtbl)))
+  let slotval1 = gen_qevent_types.QFocusEvent(h: param1, owned: false)
+  vtbl.focusOutEvent(slotval1)
+
+method mousePressEvent*(self: VirtualQQuickPaintedItem, event: gen_qevent_types.QMouseEvent): void {.base.} =
+  QQuickPaintedItemmousePressEvent(self[], event)
+proc miqt_exec_method_cQQuickPaintedItem_mousePressEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQQuickPaintedItem](cast[uint](vtbl) - uint(offsetOf(VirtualQQuickPaintedItem, vtbl)))
+  let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
+  vtbl.mousePressEvent(slotval1)
+
+method mouseMoveEvent*(self: VirtualQQuickPaintedItem, event: gen_qevent_types.QMouseEvent): void {.base.} =
+  QQuickPaintedItemmouseMoveEvent(self[], event)
+proc miqt_exec_method_cQQuickPaintedItem_mouseMoveEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQQuickPaintedItem](cast[uint](vtbl) - uint(offsetOf(VirtualQQuickPaintedItem, vtbl)))
+  let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
+  vtbl.mouseMoveEvent(slotval1)
+
+method mouseReleaseEvent*(self: VirtualQQuickPaintedItem, event: gen_qevent_types.QMouseEvent): void {.base.} =
+  QQuickPaintedItemmouseReleaseEvent(self[], event)
+proc miqt_exec_method_cQQuickPaintedItem_mouseReleaseEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQQuickPaintedItem](cast[uint](vtbl) - uint(offsetOf(VirtualQQuickPaintedItem, vtbl)))
+  let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
+  vtbl.mouseReleaseEvent(slotval1)
+
+method mouseDoubleClickEvent*(self: VirtualQQuickPaintedItem, event: gen_qevent_types.QMouseEvent): void {.base.} =
+  QQuickPaintedItemmouseDoubleClickEvent(self[], event)
+proc miqt_exec_method_cQQuickPaintedItem_mouseDoubleClickEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQQuickPaintedItem](cast[uint](vtbl) - uint(offsetOf(VirtualQQuickPaintedItem, vtbl)))
+  let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
+  vtbl.mouseDoubleClickEvent(slotval1)
+
+method mouseUngrabEvent*(self: VirtualQQuickPaintedItem, ): void {.base.} =
+  QQuickPaintedItemmouseUngrabEvent(self[])
+proc miqt_exec_method_cQQuickPaintedItem_mouseUngrabEvent(vtbl: pointer, inst: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQQuickPaintedItem](cast[uint](vtbl) - uint(offsetOf(VirtualQQuickPaintedItem, vtbl)))
+  vtbl.mouseUngrabEvent()
+
+method touchUngrabEvent*(self: VirtualQQuickPaintedItem, ): void {.base.} =
+  QQuickPaintedItemtouchUngrabEvent(self[])
+proc miqt_exec_method_cQQuickPaintedItem_touchUngrabEvent(vtbl: pointer, inst: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQQuickPaintedItem](cast[uint](vtbl) - uint(offsetOf(VirtualQQuickPaintedItem, vtbl)))
+  vtbl.touchUngrabEvent()
+
+method wheelEvent*(self: VirtualQQuickPaintedItem, event: gen_qevent_types.QWheelEvent): void {.base.} =
+  QQuickPaintedItemwheelEvent(self[], event)
+proc miqt_exec_method_cQQuickPaintedItem_wheelEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQQuickPaintedItem](cast[uint](vtbl) - uint(offsetOf(VirtualQQuickPaintedItem, vtbl)))
+  let slotval1 = gen_qevent_types.QWheelEvent(h: event, owned: false)
+  vtbl.wheelEvent(slotval1)
+
+method touchEvent*(self: VirtualQQuickPaintedItem, event: gen_qevent_types.QTouchEvent): void {.base.} =
+  QQuickPaintedItemtouchEvent(self[], event)
+proc miqt_exec_method_cQQuickPaintedItem_touchEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQQuickPaintedItem](cast[uint](vtbl) - uint(offsetOf(VirtualQQuickPaintedItem, vtbl)))
+  let slotval1 = gen_qevent_types.QTouchEvent(h: event, owned: false)
+  vtbl.touchEvent(slotval1)
+
+method hoverEnterEvent*(self: VirtualQQuickPaintedItem, event: gen_qevent_types.QHoverEvent): void {.base.} =
+  QQuickPaintedItemhoverEnterEvent(self[], event)
+proc miqt_exec_method_cQQuickPaintedItem_hoverEnterEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQQuickPaintedItem](cast[uint](vtbl) - uint(offsetOf(VirtualQQuickPaintedItem, vtbl)))
+  let slotval1 = gen_qevent_types.QHoverEvent(h: event, owned: false)
+  vtbl.hoverEnterEvent(slotval1)
+
+method hoverMoveEvent*(self: VirtualQQuickPaintedItem, event: gen_qevent_types.QHoverEvent): void {.base.} =
+  QQuickPaintedItemhoverMoveEvent(self[], event)
+proc miqt_exec_method_cQQuickPaintedItem_hoverMoveEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQQuickPaintedItem](cast[uint](vtbl) - uint(offsetOf(VirtualQQuickPaintedItem, vtbl)))
+  let slotval1 = gen_qevent_types.QHoverEvent(h: event, owned: false)
+  vtbl.hoverMoveEvent(slotval1)
+
+method hoverLeaveEvent*(self: VirtualQQuickPaintedItem, event: gen_qevent_types.QHoverEvent): void {.base.} =
+  QQuickPaintedItemhoverLeaveEvent(self[], event)
+proc miqt_exec_method_cQQuickPaintedItem_hoverLeaveEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQQuickPaintedItem](cast[uint](vtbl) - uint(offsetOf(VirtualQQuickPaintedItem, vtbl)))
+  let slotval1 = gen_qevent_types.QHoverEvent(h: event, owned: false)
+  vtbl.hoverLeaveEvent(slotval1)
+
+method dragEnterEvent*(self: VirtualQQuickPaintedItem, param1: gen_qevent_types.QDragEnterEvent): void {.base.} =
+  QQuickPaintedItemdragEnterEvent(self[], param1)
+proc miqt_exec_method_cQQuickPaintedItem_dragEnterEvent(vtbl: pointer, inst: pointer, param1: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQQuickPaintedItem](cast[uint](vtbl) - uint(offsetOf(VirtualQQuickPaintedItem, vtbl)))
+  let slotval1 = gen_qevent_types.QDragEnterEvent(h: param1, owned: false)
+  vtbl.dragEnterEvent(slotval1)
+
+method dragMoveEvent*(self: VirtualQQuickPaintedItem, param1: gen_qevent_types.QDragMoveEvent): void {.base.} =
+  QQuickPaintedItemdragMoveEvent(self[], param1)
+proc miqt_exec_method_cQQuickPaintedItem_dragMoveEvent(vtbl: pointer, inst: pointer, param1: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQQuickPaintedItem](cast[uint](vtbl) - uint(offsetOf(VirtualQQuickPaintedItem, vtbl)))
+  let slotval1 = gen_qevent_types.QDragMoveEvent(h: param1, owned: false)
+  vtbl.dragMoveEvent(slotval1)
+
+method dragLeaveEvent*(self: VirtualQQuickPaintedItem, param1: gen_qevent_types.QDragLeaveEvent): void {.base.} =
+  QQuickPaintedItemdragLeaveEvent(self[], param1)
+proc miqt_exec_method_cQQuickPaintedItem_dragLeaveEvent(vtbl: pointer, inst: pointer, param1: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQQuickPaintedItem](cast[uint](vtbl) - uint(offsetOf(VirtualQQuickPaintedItem, vtbl)))
+  let slotval1 = gen_qevent_types.QDragLeaveEvent(h: param1, owned: false)
+  vtbl.dragLeaveEvent(slotval1)
+
+method dropEvent*(self: VirtualQQuickPaintedItem, param1: gen_qevent_types.QDropEvent): void {.base.} =
+  QQuickPaintedItemdropEvent(self[], param1)
+proc miqt_exec_method_cQQuickPaintedItem_dropEvent(vtbl: pointer, inst: pointer, param1: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQQuickPaintedItem](cast[uint](vtbl) - uint(offsetOf(VirtualQQuickPaintedItem, vtbl)))
+  let slotval1 = gen_qevent_types.QDropEvent(h: param1, owned: false)
+  vtbl.dropEvent(slotval1)
+
+method childMouseEventFilter*(self: VirtualQQuickPaintedItem, param1: gen_qquickitem_types.QQuickItem, param2: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QQuickPaintedItemchildMouseEventFilter(self[], param1, param2)
+proc miqt_exec_method_cQQuickPaintedItem_childMouseEventFilter(vtbl: pointer, inst: pointer, param1: pointer, param2: pointer): bool {.cdecl.} =
+  let vtbl = cast[VirtualQQuickPaintedItem](cast[uint](vtbl) - uint(offsetOf(VirtualQQuickPaintedItem, vtbl)))
+  let slotval1 = gen_qquickitem_types.QQuickItem(h: param1, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: param2, owned: false)
+  var virtualReturn = vtbl.childMouseEventFilter(slotval1, slotval2)
+  virtualReturn
+
+method windowDeactivateEvent*(self: VirtualQQuickPaintedItem, ): void {.base.} =
+  QQuickPaintedItemwindowDeactivateEvent(self[])
+proc miqt_exec_method_cQQuickPaintedItem_windowDeactivateEvent(vtbl: pointer, inst: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQQuickPaintedItem](cast[uint](vtbl) - uint(offsetOf(VirtualQQuickPaintedItem, vtbl)))
+  vtbl.windowDeactivateEvent()
+
+method geometryChanged*(self: VirtualQQuickPaintedItem, newGeometry: gen_qrect_types.QRectF, oldGeometry: gen_qrect_types.QRectF): void {.base.} =
+  QQuickPaintedItemgeometryChanged(self[], newGeometry, oldGeometry)
+proc miqt_exec_method_cQQuickPaintedItem_geometryChanged(vtbl: pointer, inst: pointer, newGeometry: pointer, oldGeometry: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQQuickPaintedItem](cast[uint](vtbl) - uint(offsetOf(VirtualQQuickPaintedItem, vtbl)))
+  let slotval1 = gen_qrect_types.QRectF(h: newGeometry, owned: false)
+  let slotval2 = gen_qrect_types.QRectF(h: oldGeometry, owned: false)
+  vtbl.geometryChanged(slotval1, slotval2)
+
+method updatePolish*(self: VirtualQQuickPaintedItem, ): void {.base.} =
+  QQuickPaintedItemupdatePolish(self[])
+proc miqt_exec_method_cQQuickPaintedItem_updatePolish(vtbl: pointer, inst: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQQuickPaintedItem](cast[uint](vtbl) - uint(offsetOf(VirtualQQuickPaintedItem, vtbl)))
+  vtbl.updatePolish()
+
+method eventFilter*(self: VirtualQQuickPaintedItem, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QQuickPaintedItemeventFilter(self[], watched, event)
+proc miqt_exec_method_cQQuickPaintedItem_eventFilter(vtbl: pointer, inst: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
+  let vtbl = cast[VirtualQQuickPaintedItem](cast[uint](vtbl) - uint(offsetOf(VirtualQQuickPaintedItem, vtbl)))
+  let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
+  var virtualReturn = vtbl.eventFilter(slotval1, slotval2)
+  virtualReturn
+
+method timerEvent*(self: VirtualQQuickPaintedItem, event: gen_qcoreevent_types.QTimerEvent): void {.base.} =
+  QQuickPaintedItemtimerEvent(self[], event)
+proc miqt_exec_method_cQQuickPaintedItem_timerEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQQuickPaintedItem](cast[uint](vtbl) - uint(offsetOf(VirtualQQuickPaintedItem, vtbl)))
+  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
+  vtbl.timerEvent(slotval1)
+
+method childEvent*(self: VirtualQQuickPaintedItem, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
+  QQuickPaintedItemchildEvent(self[], event)
+proc miqt_exec_method_cQQuickPaintedItem_childEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQQuickPaintedItem](cast[uint](vtbl) - uint(offsetOf(VirtualQQuickPaintedItem, vtbl)))
+  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
+  vtbl.childEvent(slotval1)
+
+method customEvent*(self: VirtualQQuickPaintedItem, event: gen_qcoreevent_types.QEvent): void {.base.} =
+  QQuickPaintedItemcustomEvent(self[], event)
+proc miqt_exec_method_cQQuickPaintedItem_customEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQQuickPaintedItem](cast[uint](vtbl) - uint(offsetOf(VirtualQQuickPaintedItem, vtbl)))
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
+  vtbl.customEvent(slotval1)
+
+method connectNotify*(self: VirtualQQuickPaintedItem, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QQuickPaintedItemconnectNotify(self[], signal)
+proc miqt_exec_method_cQQuickPaintedItem_connectNotify(vtbl: pointer, inst: pointer, signal: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQQuickPaintedItem](cast[uint](vtbl) - uint(offsetOf(VirtualQQuickPaintedItem, vtbl)))
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
+  vtbl.connectNotify(slotval1)
+
+method disconnectNotify*(self: VirtualQQuickPaintedItem, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QQuickPaintedItemdisconnectNotify(self[], signal)
+proc miqt_exec_method_cQQuickPaintedItem_disconnectNotify(vtbl: pointer, inst: pointer, signal: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQQuickPaintedItem](cast[uint](vtbl) - uint(offsetOf(VirtualQQuickPaintedItem, vtbl)))
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
+  vtbl.disconnectNotify(slotval1)
 
 proc isComponentComplete*(self: gen_qquickpainteditem_types.QQuickPaintedItem, ): bool =
   fcQQuickPaintedItem_protectedbase_isComponentComplete(self.h)
@@ -978,7 +1345,7 @@ proc setImplicitSize*(self: gen_qquickpainteditem_types.QQuickPaintedItem, param
   fcQQuickPaintedItem_protectedbase_setImplicitSize(self.h, param1, param2)
 
 proc sender*(self: gen_qquickpainteditem_types.QQuickPaintedItem, ): gen_qobject_types.QObject =
-  gen_qobject_types.QObject(h: fcQQuickPaintedItem_protectedbase_sender(self.h))
+  gen_qobject_types.QObject(h: fcQQuickPaintedItem_protectedbase_sender(self.h), owned: false)
 
 proc senderSignalIndex*(self: gen_qquickpainteditem_types.QQuickPaintedItem, ): cint =
   fcQQuickPaintedItem_protectedbase_senderSignalIndex(self.h)
@@ -993,206 +1360,319 @@ proc create*(T: type gen_qquickpainteditem_types.QQuickPaintedItem,
     vtbl: ref QQuickPaintedItemVTable = nil): gen_qquickpainteditem_types.QQuickPaintedItem =
   let vtbl = if vtbl == nil: new QQuickPaintedItemVTable else: vtbl
   GC_ref(vtbl)
-  vtbl.vtbl.destructor = proc(vtbl: ptr cQQuickPaintedItemVTable, _: ptr cQQuickPaintedItem) {.cdecl.} =
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQQuickPaintedItemVTable, _: ptr cQQuickPaintedItem) {.cdecl.} =
     let vtbl = cast[ref QQuickPaintedItemVTable](vtbl)
     GC_unref(vtbl)
-  if not isNil(vtbl.metaObject):
+  if not isNil(vtbl[].metaObject):
     vtbl[].vtbl.metaObject = miqt_exec_callback_cQQuickPaintedItem_metaObject
-  if not isNil(vtbl.metacast):
+  if not isNil(vtbl[].metacast):
     vtbl[].vtbl.metacast = miqt_exec_callback_cQQuickPaintedItem_metacast
-  if not isNil(vtbl.metacall):
+  if not isNil(vtbl[].metacall):
     vtbl[].vtbl.metacall = miqt_exec_callback_cQQuickPaintedItem_metacall
-  if not isNil(vtbl.paint):
+  if not isNil(vtbl[].paint):
     vtbl[].vtbl.paint = miqt_exec_callback_cQQuickPaintedItem_paint
-  if not isNil(vtbl.isTextureProvider):
+  if not isNil(vtbl[].isTextureProvider):
     vtbl[].vtbl.isTextureProvider = miqt_exec_callback_cQQuickPaintedItem_isTextureProvider
-  if not isNil(vtbl.textureProvider):
+  if not isNil(vtbl[].textureProvider):
     vtbl[].vtbl.textureProvider = miqt_exec_callback_cQQuickPaintedItem_textureProvider
-  if not isNil(vtbl.updatePaintNode):
+  if not isNil(vtbl[].updatePaintNode):
     vtbl[].vtbl.updatePaintNode = miqt_exec_callback_cQQuickPaintedItem_updatePaintNode
-  if not isNil(vtbl.releaseResources):
+  if not isNil(vtbl[].releaseResources):
     vtbl[].vtbl.releaseResources = miqt_exec_callback_cQQuickPaintedItem_releaseResources
-  if not isNil(vtbl.itemChange):
+  if not isNil(vtbl[].itemChange):
     vtbl[].vtbl.itemChange = miqt_exec_callback_cQQuickPaintedItem_itemChange
-  if not isNil(vtbl.boundingRect):
+  if not isNil(vtbl[].boundingRect):
     vtbl[].vtbl.boundingRect = miqt_exec_callback_cQQuickPaintedItem_boundingRect
-  if not isNil(vtbl.clipRect):
+  if not isNil(vtbl[].clipRect):
     vtbl[].vtbl.clipRect = miqt_exec_callback_cQQuickPaintedItem_clipRect
-  if not isNil(vtbl.contains):
+  if not isNil(vtbl[].contains):
     vtbl[].vtbl.contains = miqt_exec_callback_cQQuickPaintedItem_contains
-  if not isNil(vtbl.inputMethodQuery):
+  if not isNil(vtbl[].inputMethodQuery):
     vtbl[].vtbl.inputMethodQuery = miqt_exec_callback_cQQuickPaintedItem_inputMethodQuery
-  if not isNil(vtbl.event):
+  if not isNil(vtbl[].event):
     vtbl[].vtbl.event = miqt_exec_callback_cQQuickPaintedItem_event
-  if not isNil(vtbl.classBegin):
+  if not isNil(vtbl[].classBegin):
     vtbl[].vtbl.classBegin = miqt_exec_callback_cQQuickPaintedItem_classBegin
-  if not isNil(vtbl.componentComplete):
+  if not isNil(vtbl[].componentComplete):
     vtbl[].vtbl.componentComplete = miqt_exec_callback_cQQuickPaintedItem_componentComplete
-  if not isNil(vtbl.keyPressEvent):
+  if not isNil(vtbl[].keyPressEvent):
     vtbl[].vtbl.keyPressEvent = miqt_exec_callback_cQQuickPaintedItem_keyPressEvent
-  if not isNil(vtbl.keyReleaseEvent):
+  if not isNil(vtbl[].keyReleaseEvent):
     vtbl[].vtbl.keyReleaseEvent = miqt_exec_callback_cQQuickPaintedItem_keyReleaseEvent
-  if not isNil(vtbl.inputMethodEvent):
+  if not isNil(vtbl[].inputMethodEvent):
     vtbl[].vtbl.inputMethodEvent = miqt_exec_callback_cQQuickPaintedItem_inputMethodEvent
-  if not isNil(vtbl.focusInEvent):
+  if not isNil(vtbl[].focusInEvent):
     vtbl[].vtbl.focusInEvent = miqt_exec_callback_cQQuickPaintedItem_focusInEvent
-  if not isNil(vtbl.focusOutEvent):
+  if not isNil(vtbl[].focusOutEvent):
     vtbl[].vtbl.focusOutEvent = miqt_exec_callback_cQQuickPaintedItem_focusOutEvent
-  if not isNil(vtbl.mousePressEvent):
+  if not isNil(vtbl[].mousePressEvent):
     vtbl[].vtbl.mousePressEvent = miqt_exec_callback_cQQuickPaintedItem_mousePressEvent
-  if not isNil(vtbl.mouseMoveEvent):
+  if not isNil(vtbl[].mouseMoveEvent):
     vtbl[].vtbl.mouseMoveEvent = miqt_exec_callback_cQQuickPaintedItem_mouseMoveEvent
-  if not isNil(vtbl.mouseReleaseEvent):
+  if not isNil(vtbl[].mouseReleaseEvent):
     vtbl[].vtbl.mouseReleaseEvent = miqt_exec_callback_cQQuickPaintedItem_mouseReleaseEvent
-  if not isNil(vtbl.mouseDoubleClickEvent):
+  if not isNil(vtbl[].mouseDoubleClickEvent):
     vtbl[].vtbl.mouseDoubleClickEvent = miqt_exec_callback_cQQuickPaintedItem_mouseDoubleClickEvent
-  if not isNil(vtbl.mouseUngrabEvent):
+  if not isNil(vtbl[].mouseUngrabEvent):
     vtbl[].vtbl.mouseUngrabEvent = miqt_exec_callback_cQQuickPaintedItem_mouseUngrabEvent
-  if not isNil(vtbl.touchUngrabEvent):
+  if not isNil(vtbl[].touchUngrabEvent):
     vtbl[].vtbl.touchUngrabEvent = miqt_exec_callback_cQQuickPaintedItem_touchUngrabEvent
-  if not isNil(vtbl.wheelEvent):
+  if not isNil(vtbl[].wheelEvent):
     vtbl[].vtbl.wheelEvent = miqt_exec_callback_cQQuickPaintedItem_wheelEvent
-  if not isNil(vtbl.touchEvent):
+  if not isNil(vtbl[].touchEvent):
     vtbl[].vtbl.touchEvent = miqt_exec_callback_cQQuickPaintedItem_touchEvent
-  if not isNil(vtbl.hoverEnterEvent):
+  if not isNil(vtbl[].hoverEnterEvent):
     vtbl[].vtbl.hoverEnterEvent = miqt_exec_callback_cQQuickPaintedItem_hoverEnterEvent
-  if not isNil(vtbl.hoverMoveEvent):
+  if not isNil(vtbl[].hoverMoveEvent):
     vtbl[].vtbl.hoverMoveEvent = miqt_exec_callback_cQQuickPaintedItem_hoverMoveEvent
-  if not isNil(vtbl.hoverLeaveEvent):
+  if not isNil(vtbl[].hoverLeaveEvent):
     vtbl[].vtbl.hoverLeaveEvent = miqt_exec_callback_cQQuickPaintedItem_hoverLeaveEvent
-  if not isNil(vtbl.dragEnterEvent):
+  if not isNil(vtbl[].dragEnterEvent):
     vtbl[].vtbl.dragEnterEvent = miqt_exec_callback_cQQuickPaintedItem_dragEnterEvent
-  if not isNil(vtbl.dragMoveEvent):
+  if not isNil(vtbl[].dragMoveEvent):
     vtbl[].vtbl.dragMoveEvent = miqt_exec_callback_cQQuickPaintedItem_dragMoveEvent
-  if not isNil(vtbl.dragLeaveEvent):
+  if not isNil(vtbl[].dragLeaveEvent):
     vtbl[].vtbl.dragLeaveEvent = miqt_exec_callback_cQQuickPaintedItem_dragLeaveEvent
-  if not isNil(vtbl.dropEvent):
+  if not isNil(vtbl[].dropEvent):
     vtbl[].vtbl.dropEvent = miqt_exec_callback_cQQuickPaintedItem_dropEvent
-  if not isNil(vtbl.childMouseEventFilter):
+  if not isNil(vtbl[].childMouseEventFilter):
     vtbl[].vtbl.childMouseEventFilter = miqt_exec_callback_cQQuickPaintedItem_childMouseEventFilter
-  if not isNil(vtbl.windowDeactivateEvent):
+  if not isNil(vtbl[].windowDeactivateEvent):
     vtbl[].vtbl.windowDeactivateEvent = miqt_exec_callback_cQQuickPaintedItem_windowDeactivateEvent
-  if not isNil(vtbl.geometryChanged):
+  if not isNil(vtbl[].geometryChanged):
     vtbl[].vtbl.geometryChanged = miqt_exec_callback_cQQuickPaintedItem_geometryChanged
-  if not isNil(vtbl.updatePolish):
+  if not isNil(vtbl[].updatePolish):
     vtbl[].vtbl.updatePolish = miqt_exec_callback_cQQuickPaintedItem_updatePolish
-  if not isNil(vtbl.eventFilter):
+  if not isNil(vtbl[].eventFilter):
     vtbl[].vtbl.eventFilter = miqt_exec_callback_cQQuickPaintedItem_eventFilter
-  if not isNil(vtbl.timerEvent):
+  if not isNil(vtbl[].timerEvent):
     vtbl[].vtbl.timerEvent = miqt_exec_callback_cQQuickPaintedItem_timerEvent
-  if not isNil(vtbl.childEvent):
+  if not isNil(vtbl[].childEvent):
     vtbl[].vtbl.childEvent = miqt_exec_callback_cQQuickPaintedItem_childEvent
-  if not isNil(vtbl.customEvent):
+  if not isNil(vtbl[].customEvent):
     vtbl[].vtbl.customEvent = miqt_exec_callback_cQQuickPaintedItem_customEvent
-  if not isNil(vtbl.connectNotify):
+  if not isNil(vtbl[].connectNotify):
     vtbl[].vtbl.connectNotify = miqt_exec_callback_cQQuickPaintedItem_connectNotify
-  if not isNil(vtbl.disconnectNotify):
+  if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQQuickPaintedItem_disconnectNotify
-  gen_qquickpainteditem_types.QQuickPaintedItem(h: fcQQuickPaintedItem_new(addr(vtbl[]), ))
+  gen_qquickpainteditem_types.QQuickPaintedItem(h: fcQQuickPaintedItem_new(addr(vtbl[].vtbl), ), owned: true)
 
 proc create*(T: type gen_qquickpainteditem_types.QQuickPaintedItem,
     parent: gen_qquickitem_types.QQuickItem,
     vtbl: ref QQuickPaintedItemVTable = nil): gen_qquickpainteditem_types.QQuickPaintedItem =
   let vtbl = if vtbl == nil: new QQuickPaintedItemVTable else: vtbl
   GC_ref(vtbl)
-  vtbl.vtbl.destructor = proc(vtbl: ptr cQQuickPaintedItemVTable, _: ptr cQQuickPaintedItem) {.cdecl.} =
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQQuickPaintedItemVTable, _: ptr cQQuickPaintedItem) {.cdecl.} =
     let vtbl = cast[ref QQuickPaintedItemVTable](vtbl)
     GC_unref(vtbl)
-  if not isNil(vtbl.metaObject):
+  if not isNil(vtbl[].metaObject):
     vtbl[].vtbl.metaObject = miqt_exec_callback_cQQuickPaintedItem_metaObject
-  if not isNil(vtbl.metacast):
+  if not isNil(vtbl[].metacast):
     vtbl[].vtbl.metacast = miqt_exec_callback_cQQuickPaintedItem_metacast
-  if not isNil(vtbl.metacall):
+  if not isNil(vtbl[].metacall):
     vtbl[].vtbl.metacall = miqt_exec_callback_cQQuickPaintedItem_metacall
-  if not isNil(vtbl.paint):
+  if not isNil(vtbl[].paint):
     vtbl[].vtbl.paint = miqt_exec_callback_cQQuickPaintedItem_paint
-  if not isNil(vtbl.isTextureProvider):
+  if not isNil(vtbl[].isTextureProvider):
     vtbl[].vtbl.isTextureProvider = miqt_exec_callback_cQQuickPaintedItem_isTextureProvider
-  if not isNil(vtbl.textureProvider):
+  if not isNil(vtbl[].textureProvider):
     vtbl[].vtbl.textureProvider = miqt_exec_callback_cQQuickPaintedItem_textureProvider
-  if not isNil(vtbl.updatePaintNode):
+  if not isNil(vtbl[].updatePaintNode):
     vtbl[].vtbl.updatePaintNode = miqt_exec_callback_cQQuickPaintedItem_updatePaintNode
-  if not isNil(vtbl.releaseResources):
+  if not isNil(vtbl[].releaseResources):
     vtbl[].vtbl.releaseResources = miqt_exec_callback_cQQuickPaintedItem_releaseResources
-  if not isNil(vtbl.itemChange):
+  if not isNil(vtbl[].itemChange):
     vtbl[].vtbl.itemChange = miqt_exec_callback_cQQuickPaintedItem_itemChange
-  if not isNil(vtbl.boundingRect):
+  if not isNil(vtbl[].boundingRect):
     vtbl[].vtbl.boundingRect = miqt_exec_callback_cQQuickPaintedItem_boundingRect
-  if not isNil(vtbl.clipRect):
+  if not isNil(vtbl[].clipRect):
     vtbl[].vtbl.clipRect = miqt_exec_callback_cQQuickPaintedItem_clipRect
-  if not isNil(vtbl.contains):
+  if not isNil(vtbl[].contains):
     vtbl[].vtbl.contains = miqt_exec_callback_cQQuickPaintedItem_contains
-  if not isNil(vtbl.inputMethodQuery):
+  if not isNil(vtbl[].inputMethodQuery):
     vtbl[].vtbl.inputMethodQuery = miqt_exec_callback_cQQuickPaintedItem_inputMethodQuery
-  if not isNil(vtbl.event):
+  if not isNil(vtbl[].event):
     vtbl[].vtbl.event = miqt_exec_callback_cQQuickPaintedItem_event
-  if not isNil(vtbl.classBegin):
+  if not isNil(vtbl[].classBegin):
     vtbl[].vtbl.classBegin = miqt_exec_callback_cQQuickPaintedItem_classBegin
-  if not isNil(vtbl.componentComplete):
+  if not isNil(vtbl[].componentComplete):
     vtbl[].vtbl.componentComplete = miqt_exec_callback_cQQuickPaintedItem_componentComplete
-  if not isNil(vtbl.keyPressEvent):
+  if not isNil(vtbl[].keyPressEvent):
     vtbl[].vtbl.keyPressEvent = miqt_exec_callback_cQQuickPaintedItem_keyPressEvent
-  if not isNil(vtbl.keyReleaseEvent):
+  if not isNil(vtbl[].keyReleaseEvent):
     vtbl[].vtbl.keyReleaseEvent = miqt_exec_callback_cQQuickPaintedItem_keyReleaseEvent
-  if not isNil(vtbl.inputMethodEvent):
+  if not isNil(vtbl[].inputMethodEvent):
     vtbl[].vtbl.inputMethodEvent = miqt_exec_callback_cQQuickPaintedItem_inputMethodEvent
-  if not isNil(vtbl.focusInEvent):
+  if not isNil(vtbl[].focusInEvent):
     vtbl[].vtbl.focusInEvent = miqt_exec_callback_cQQuickPaintedItem_focusInEvent
-  if not isNil(vtbl.focusOutEvent):
+  if not isNil(vtbl[].focusOutEvent):
     vtbl[].vtbl.focusOutEvent = miqt_exec_callback_cQQuickPaintedItem_focusOutEvent
-  if not isNil(vtbl.mousePressEvent):
+  if not isNil(vtbl[].mousePressEvent):
     vtbl[].vtbl.mousePressEvent = miqt_exec_callback_cQQuickPaintedItem_mousePressEvent
-  if not isNil(vtbl.mouseMoveEvent):
+  if not isNil(vtbl[].mouseMoveEvent):
     vtbl[].vtbl.mouseMoveEvent = miqt_exec_callback_cQQuickPaintedItem_mouseMoveEvent
-  if not isNil(vtbl.mouseReleaseEvent):
+  if not isNil(vtbl[].mouseReleaseEvent):
     vtbl[].vtbl.mouseReleaseEvent = miqt_exec_callback_cQQuickPaintedItem_mouseReleaseEvent
-  if not isNil(vtbl.mouseDoubleClickEvent):
+  if not isNil(vtbl[].mouseDoubleClickEvent):
     vtbl[].vtbl.mouseDoubleClickEvent = miqt_exec_callback_cQQuickPaintedItem_mouseDoubleClickEvent
-  if not isNil(vtbl.mouseUngrabEvent):
+  if not isNil(vtbl[].mouseUngrabEvent):
     vtbl[].vtbl.mouseUngrabEvent = miqt_exec_callback_cQQuickPaintedItem_mouseUngrabEvent
-  if not isNil(vtbl.touchUngrabEvent):
+  if not isNil(vtbl[].touchUngrabEvent):
     vtbl[].vtbl.touchUngrabEvent = miqt_exec_callback_cQQuickPaintedItem_touchUngrabEvent
-  if not isNil(vtbl.wheelEvent):
+  if not isNil(vtbl[].wheelEvent):
     vtbl[].vtbl.wheelEvent = miqt_exec_callback_cQQuickPaintedItem_wheelEvent
-  if not isNil(vtbl.touchEvent):
+  if not isNil(vtbl[].touchEvent):
     vtbl[].vtbl.touchEvent = miqt_exec_callback_cQQuickPaintedItem_touchEvent
-  if not isNil(vtbl.hoverEnterEvent):
+  if not isNil(vtbl[].hoverEnterEvent):
     vtbl[].vtbl.hoverEnterEvent = miqt_exec_callback_cQQuickPaintedItem_hoverEnterEvent
-  if not isNil(vtbl.hoverMoveEvent):
+  if not isNil(vtbl[].hoverMoveEvent):
     vtbl[].vtbl.hoverMoveEvent = miqt_exec_callback_cQQuickPaintedItem_hoverMoveEvent
-  if not isNil(vtbl.hoverLeaveEvent):
+  if not isNil(vtbl[].hoverLeaveEvent):
     vtbl[].vtbl.hoverLeaveEvent = miqt_exec_callback_cQQuickPaintedItem_hoverLeaveEvent
-  if not isNil(vtbl.dragEnterEvent):
+  if not isNil(vtbl[].dragEnterEvent):
     vtbl[].vtbl.dragEnterEvent = miqt_exec_callback_cQQuickPaintedItem_dragEnterEvent
-  if not isNil(vtbl.dragMoveEvent):
+  if not isNil(vtbl[].dragMoveEvent):
     vtbl[].vtbl.dragMoveEvent = miqt_exec_callback_cQQuickPaintedItem_dragMoveEvent
-  if not isNil(vtbl.dragLeaveEvent):
+  if not isNil(vtbl[].dragLeaveEvent):
     vtbl[].vtbl.dragLeaveEvent = miqt_exec_callback_cQQuickPaintedItem_dragLeaveEvent
-  if not isNil(vtbl.dropEvent):
+  if not isNil(vtbl[].dropEvent):
     vtbl[].vtbl.dropEvent = miqt_exec_callback_cQQuickPaintedItem_dropEvent
-  if not isNil(vtbl.childMouseEventFilter):
+  if not isNil(vtbl[].childMouseEventFilter):
     vtbl[].vtbl.childMouseEventFilter = miqt_exec_callback_cQQuickPaintedItem_childMouseEventFilter
-  if not isNil(vtbl.windowDeactivateEvent):
+  if not isNil(vtbl[].windowDeactivateEvent):
     vtbl[].vtbl.windowDeactivateEvent = miqt_exec_callback_cQQuickPaintedItem_windowDeactivateEvent
-  if not isNil(vtbl.geometryChanged):
+  if not isNil(vtbl[].geometryChanged):
     vtbl[].vtbl.geometryChanged = miqt_exec_callback_cQQuickPaintedItem_geometryChanged
-  if not isNil(vtbl.updatePolish):
+  if not isNil(vtbl[].updatePolish):
     vtbl[].vtbl.updatePolish = miqt_exec_callback_cQQuickPaintedItem_updatePolish
-  if not isNil(vtbl.eventFilter):
+  if not isNil(vtbl[].eventFilter):
     vtbl[].vtbl.eventFilter = miqt_exec_callback_cQQuickPaintedItem_eventFilter
-  if not isNil(vtbl.timerEvent):
+  if not isNil(vtbl[].timerEvent):
     vtbl[].vtbl.timerEvent = miqt_exec_callback_cQQuickPaintedItem_timerEvent
-  if not isNil(vtbl.childEvent):
+  if not isNil(vtbl[].childEvent):
     vtbl[].vtbl.childEvent = miqt_exec_callback_cQQuickPaintedItem_childEvent
-  if not isNil(vtbl.customEvent):
+  if not isNil(vtbl[].customEvent):
     vtbl[].vtbl.customEvent = miqt_exec_callback_cQQuickPaintedItem_customEvent
-  if not isNil(vtbl.connectNotify):
+  if not isNil(vtbl[].connectNotify):
     vtbl[].vtbl.connectNotify = miqt_exec_callback_cQQuickPaintedItem_connectNotify
-  if not isNil(vtbl.disconnectNotify):
+  if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQQuickPaintedItem_disconnectNotify
-  gen_qquickpainteditem_types.QQuickPaintedItem(h: fcQQuickPaintedItem_new2(addr(vtbl[]), parent.h))
+  gen_qquickpainteditem_types.QQuickPaintedItem(h: fcQQuickPaintedItem_new2(addr(vtbl[].vtbl), parent.h), owned: true)
+
+proc create*(T: type gen_qquickpainteditem_types.QQuickPaintedItem,
+    vtbl: VirtualQQuickPaintedItem) =
+
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQQuickPaintedItemVTable, _: ptr cQQuickPaintedItem) {.cdecl.} =
+    let vtbl = cast[ptr typeof(VirtualQQuickPaintedItem()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQQuickPaintedItem, vtbl)))
+    vtbl[].h = nil
+    vtbl[].owned = false
+  vtbl[].vtbl.metaObject = miqt_exec_method_cQQuickPaintedItem_metaObject
+  vtbl[].vtbl.metacast = miqt_exec_method_cQQuickPaintedItem_metacast
+  vtbl[].vtbl.metacall = miqt_exec_method_cQQuickPaintedItem_metacall
+  vtbl[].vtbl.paint = miqt_exec_method_cQQuickPaintedItem_paint
+  vtbl[].vtbl.isTextureProvider = miqt_exec_method_cQQuickPaintedItem_isTextureProvider
+  vtbl[].vtbl.textureProvider = miqt_exec_method_cQQuickPaintedItem_textureProvider
+  vtbl[].vtbl.updatePaintNode = miqt_exec_method_cQQuickPaintedItem_updatePaintNode
+  vtbl[].vtbl.releaseResources = miqt_exec_method_cQQuickPaintedItem_releaseResources
+  vtbl[].vtbl.itemChange = miqt_exec_method_cQQuickPaintedItem_itemChange
+  vtbl[].vtbl.boundingRect = miqt_exec_method_cQQuickPaintedItem_boundingRect
+  vtbl[].vtbl.clipRect = miqt_exec_method_cQQuickPaintedItem_clipRect
+  vtbl[].vtbl.contains = miqt_exec_method_cQQuickPaintedItem_contains
+  vtbl[].vtbl.inputMethodQuery = miqt_exec_method_cQQuickPaintedItem_inputMethodQuery
+  vtbl[].vtbl.event = miqt_exec_method_cQQuickPaintedItem_event
+  vtbl[].vtbl.classBegin = miqt_exec_method_cQQuickPaintedItem_classBegin
+  vtbl[].vtbl.componentComplete = miqt_exec_method_cQQuickPaintedItem_componentComplete
+  vtbl[].vtbl.keyPressEvent = miqt_exec_method_cQQuickPaintedItem_keyPressEvent
+  vtbl[].vtbl.keyReleaseEvent = miqt_exec_method_cQQuickPaintedItem_keyReleaseEvent
+  vtbl[].vtbl.inputMethodEvent = miqt_exec_method_cQQuickPaintedItem_inputMethodEvent
+  vtbl[].vtbl.focusInEvent = miqt_exec_method_cQQuickPaintedItem_focusInEvent
+  vtbl[].vtbl.focusOutEvent = miqt_exec_method_cQQuickPaintedItem_focusOutEvent
+  vtbl[].vtbl.mousePressEvent = miqt_exec_method_cQQuickPaintedItem_mousePressEvent
+  vtbl[].vtbl.mouseMoveEvent = miqt_exec_method_cQQuickPaintedItem_mouseMoveEvent
+  vtbl[].vtbl.mouseReleaseEvent = miqt_exec_method_cQQuickPaintedItem_mouseReleaseEvent
+  vtbl[].vtbl.mouseDoubleClickEvent = miqt_exec_method_cQQuickPaintedItem_mouseDoubleClickEvent
+  vtbl[].vtbl.mouseUngrabEvent = miqt_exec_method_cQQuickPaintedItem_mouseUngrabEvent
+  vtbl[].vtbl.touchUngrabEvent = miqt_exec_method_cQQuickPaintedItem_touchUngrabEvent
+  vtbl[].vtbl.wheelEvent = miqt_exec_method_cQQuickPaintedItem_wheelEvent
+  vtbl[].vtbl.touchEvent = miqt_exec_method_cQQuickPaintedItem_touchEvent
+  vtbl[].vtbl.hoverEnterEvent = miqt_exec_method_cQQuickPaintedItem_hoverEnterEvent
+  vtbl[].vtbl.hoverMoveEvent = miqt_exec_method_cQQuickPaintedItem_hoverMoveEvent
+  vtbl[].vtbl.hoverLeaveEvent = miqt_exec_method_cQQuickPaintedItem_hoverLeaveEvent
+  vtbl[].vtbl.dragEnterEvent = miqt_exec_method_cQQuickPaintedItem_dragEnterEvent
+  vtbl[].vtbl.dragMoveEvent = miqt_exec_method_cQQuickPaintedItem_dragMoveEvent
+  vtbl[].vtbl.dragLeaveEvent = miqt_exec_method_cQQuickPaintedItem_dragLeaveEvent
+  vtbl[].vtbl.dropEvent = miqt_exec_method_cQQuickPaintedItem_dropEvent
+  vtbl[].vtbl.childMouseEventFilter = miqt_exec_method_cQQuickPaintedItem_childMouseEventFilter
+  vtbl[].vtbl.windowDeactivateEvent = miqt_exec_method_cQQuickPaintedItem_windowDeactivateEvent
+  vtbl[].vtbl.geometryChanged = miqt_exec_method_cQQuickPaintedItem_geometryChanged
+  vtbl[].vtbl.updatePolish = miqt_exec_method_cQQuickPaintedItem_updatePolish
+  vtbl[].vtbl.eventFilter = miqt_exec_method_cQQuickPaintedItem_eventFilter
+  vtbl[].vtbl.timerEvent = miqt_exec_method_cQQuickPaintedItem_timerEvent
+  vtbl[].vtbl.childEvent = miqt_exec_method_cQQuickPaintedItem_childEvent
+  vtbl[].vtbl.customEvent = miqt_exec_method_cQQuickPaintedItem_customEvent
+  vtbl[].vtbl.connectNotify = miqt_exec_method_cQQuickPaintedItem_connectNotify
+  vtbl[].vtbl.disconnectNotify = miqt_exec_method_cQQuickPaintedItem_disconnectNotify
+  if vtbl[].h != nil: delete(move(vtbl[]))
+  vtbl[].h = fcQQuickPaintedItem_new(addr(vtbl[].vtbl), )
+  vtbl[].owned = true
+
+proc create*(T: type gen_qquickpainteditem_types.QQuickPaintedItem,
+    parent: gen_qquickitem_types.QQuickItem,
+    vtbl: VirtualQQuickPaintedItem) =
+
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQQuickPaintedItemVTable, _: ptr cQQuickPaintedItem) {.cdecl.} =
+    let vtbl = cast[ptr typeof(VirtualQQuickPaintedItem()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQQuickPaintedItem, vtbl)))
+    vtbl[].h = nil
+    vtbl[].owned = false
+  vtbl[].vtbl.metaObject = miqt_exec_method_cQQuickPaintedItem_metaObject
+  vtbl[].vtbl.metacast = miqt_exec_method_cQQuickPaintedItem_metacast
+  vtbl[].vtbl.metacall = miqt_exec_method_cQQuickPaintedItem_metacall
+  vtbl[].vtbl.paint = miqt_exec_method_cQQuickPaintedItem_paint
+  vtbl[].vtbl.isTextureProvider = miqt_exec_method_cQQuickPaintedItem_isTextureProvider
+  vtbl[].vtbl.textureProvider = miqt_exec_method_cQQuickPaintedItem_textureProvider
+  vtbl[].vtbl.updatePaintNode = miqt_exec_method_cQQuickPaintedItem_updatePaintNode
+  vtbl[].vtbl.releaseResources = miqt_exec_method_cQQuickPaintedItem_releaseResources
+  vtbl[].vtbl.itemChange = miqt_exec_method_cQQuickPaintedItem_itemChange
+  vtbl[].vtbl.boundingRect = miqt_exec_method_cQQuickPaintedItem_boundingRect
+  vtbl[].vtbl.clipRect = miqt_exec_method_cQQuickPaintedItem_clipRect
+  vtbl[].vtbl.contains = miqt_exec_method_cQQuickPaintedItem_contains
+  vtbl[].vtbl.inputMethodQuery = miqt_exec_method_cQQuickPaintedItem_inputMethodQuery
+  vtbl[].vtbl.event = miqt_exec_method_cQQuickPaintedItem_event
+  vtbl[].vtbl.classBegin = miqt_exec_method_cQQuickPaintedItem_classBegin
+  vtbl[].vtbl.componentComplete = miqt_exec_method_cQQuickPaintedItem_componentComplete
+  vtbl[].vtbl.keyPressEvent = miqt_exec_method_cQQuickPaintedItem_keyPressEvent
+  vtbl[].vtbl.keyReleaseEvent = miqt_exec_method_cQQuickPaintedItem_keyReleaseEvent
+  vtbl[].vtbl.inputMethodEvent = miqt_exec_method_cQQuickPaintedItem_inputMethodEvent
+  vtbl[].vtbl.focusInEvent = miqt_exec_method_cQQuickPaintedItem_focusInEvent
+  vtbl[].vtbl.focusOutEvent = miqt_exec_method_cQQuickPaintedItem_focusOutEvent
+  vtbl[].vtbl.mousePressEvent = miqt_exec_method_cQQuickPaintedItem_mousePressEvent
+  vtbl[].vtbl.mouseMoveEvent = miqt_exec_method_cQQuickPaintedItem_mouseMoveEvent
+  vtbl[].vtbl.mouseReleaseEvent = miqt_exec_method_cQQuickPaintedItem_mouseReleaseEvent
+  vtbl[].vtbl.mouseDoubleClickEvent = miqt_exec_method_cQQuickPaintedItem_mouseDoubleClickEvent
+  vtbl[].vtbl.mouseUngrabEvent = miqt_exec_method_cQQuickPaintedItem_mouseUngrabEvent
+  vtbl[].vtbl.touchUngrabEvent = miqt_exec_method_cQQuickPaintedItem_touchUngrabEvent
+  vtbl[].vtbl.wheelEvent = miqt_exec_method_cQQuickPaintedItem_wheelEvent
+  vtbl[].vtbl.touchEvent = miqt_exec_method_cQQuickPaintedItem_touchEvent
+  vtbl[].vtbl.hoverEnterEvent = miqt_exec_method_cQQuickPaintedItem_hoverEnterEvent
+  vtbl[].vtbl.hoverMoveEvent = miqt_exec_method_cQQuickPaintedItem_hoverMoveEvent
+  vtbl[].vtbl.hoverLeaveEvent = miqt_exec_method_cQQuickPaintedItem_hoverLeaveEvent
+  vtbl[].vtbl.dragEnterEvent = miqt_exec_method_cQQuickPaintedItem_dragEnterEvent
+  vtbl[].vtbl.dragMoveEvent = miqt_exec_method_cQQuickPaintedItem_dragMoveEvent
+  vtbl[].vtbl.dragLeaveEvent = miqt_exec_method_cQQuickPaintedItem_dragLeaveEvent
+  vtbl[].vtbl.dropEvent = miqt_exec_method_cQQuickPaintedItem_dropEvent
+  vtbl[].vtbl.childMouseEventFilter = miqt_exec_method_cQQuickPaintedItem_childMouseEventFilter
+  vtbl[].vtbl.windowDeactivateEvent = miqt_exec_method_cQQuickPaintedItem_windowDeactivateEvent
+  vtbl[].vtbl.geometryChanged = miqt_exec_method_cQQuickPaintedItem_geometryChanged
+  vtbl[].vtbl.updatePolish = miqt_exec_method_cQQuickPaintedItem_updatePolish
+  vtbl[].vtbl.eventFilter = miqt_exec_method_cQQuickPaintedItem_eventFilter
+  vtbl[].vtbl.timerEvent = miqt_exec_method_cQQuickPaintedItem_timerEvent
+  vtbl[].vtbl.childEvent = miqt_exec_method_cQQuickPaintedItem_childEvent
+  vtbl[].vtbl.customEvent = miqt_exec_method_cQQuickPaintedItem_customEvent
+  vtbl[].vtbl.connectNotify = miqt_exec_method_cQQuickPaintedItem_connectNotify
+  vtbl[].vtbl.disconnectNotify = miqt_exec_method_cQQuickPaintedItem_disconnectNotify
+  if vtbl[].h != nil: delete(move(vtbl[]))
+  vtbl[].h = fcQQuickPaintedItem_new2(addr(vtbl[].vtbl), parent.h)
+  vtbl[].owned = true
 
 proc staticMetaObject*(_: type gen_qquickpainteditem_types.QQuickPaintedItem): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQQuickPaintedItem_staticMetaObject())
-proc delete*(self: gen_qquickpainteditem_types.QQuickPaintedItem) =
-  fcQQuickPaintedItem_delete(self.h)

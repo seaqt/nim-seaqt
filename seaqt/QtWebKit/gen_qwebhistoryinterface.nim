@@ -30,7 +30,7 @@ func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
     else:
       copyMem(addr result[0], unsafeAddr v[0], v.len)
 
-const cflags = gorge("pkg-config --cflags Qt5WebKit")  & " -fPIC"
+const cflags = gorge("pkg-config --cflags Qt5WebKit") & " -fPIC"
 {.compile("gen_qwebhistoryinterface.cpp", cflags).}
 
 
@@ -63,7 +63,7 @@ proc fcQWebHistoryInterface_tr2(s: cstring, c: cstring): struct_miqt_string {.im
 proc fcQWebHistoryInterface_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QWebHistoryInterface_tr3".}
 proc fcQWebHistoryInterface_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QWebHistoryInterface_trUtf82".}
 proc fcQWebHistoryInterface_trUtf83(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QWebHistoryInterface_trUtf83".}
-type cQWebHistoryInterfaceVTable = object
+type cQWebHistoryInterfaceVTable {.pure.} = object
   destructor*: proc(vtbl: ptr cQWebHistoryInterfaceVTable, self: ptr cQWebHistoryInterface) {.cdecl, raises:[], gcsafe.}
   metaObject*: proc(vtbl, self: pointer, ): pointer {.cdecl, raises: [], gcsafe.}
   metacast*: proc(vtbl, self: pointer, param1: cstring): pointer {.cdecl, raises: [], gcsafe.}
@@ -94,10 +94,9 @@ proc fcQWebHistoryInterface_protectedbase_isSignalConnected(self: pointer, signa
 proc fcQWebHistoryInterface_new(vtbl: pointer, ): ptr cQWebHistoryInterface {.importc: "QWebHistoryInterface_new".}
 proc fcQWebHistoryInterface_new2(vtbl: pointer, parent: pointer): ptr cQWebHistoryInterface {.importc: "QWebHistoryInterface_new2".}
 proc fcQWebHistoryInterface_staticMetaObject(): pointer {.importc: "QWebHistoryInterface_staticMetaObject".}
-proc fcQWebHistoryInterface_delete(self: pointer) {.importc: "QWebHistoryInterface_delete".}
 
 proc metaObject*(self: gen_qwebhistoryinterface_types.QWebHistoryInterface, ): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQWebHistoryInterface_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQWebHistoryInterface_metaObject(self.h), owned: false)
 
 proc metacast*(self: gen_qwebhistoryinterface_types.QWebHistoryInterface, param1: cstring): pointer =
   fcQWebHistoryInterface_metacast(self.h, param1)
@@ -121,7 +120,7 @@ proc setDefaultInterface*(_: type gen_qwebhistoryinterface_types.QWebHistoryInte
   fcQWebHistoryInterface_setDefaultInterface(defaultInterface.h)
 
 proc defaultInterface*(_: type gen_qwebhistoryinterface_types.QWebHistoryInterface, ): gen_qwebhistoryinterface_types.QWebHistoryInterface =
-  gen_qwebhistoryinterface_types.QWebHistoryInterface(h: fcQWebHistoryInterface_defaultInterface())
+  gen_qwebhistoryinterface_types.QWebHistoryInterface(h: fcQWebHistoryInterface_defaultInterface(), owned: false)
 
 proc historyContains*(self: gen_qwebhistoryinterface_types.QWebHistoryInterface, url: string): bool =
   fcQWebHistoryInterface_historyContains(self.h, struct_miqt_string(data: url, len: csize_t(len(url))))
@@ -165,7 +164,7 @@ type QWebHistoryInterfacechildEventProc* = proc(self: QWebHistoryInterface, even
 type QWebHistoryInterfacecustomEventProc* = proc(self: QWebHistoryInterface, event: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
 type QWebHistoryInterfaceconnectNotifyProc* = proc(self: QWebHistoryInterface, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
 type QWebHistoryInterfacedisconnectNotifyProc* = proc(self: QWebHistoryInterface, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
-type QWebHistoryInterfaceVTable* = object
+type QWebHistoryInterfaceVTable* {.inheritable, pure.} = object
   vtbl: cQWebHistoryInterfaceVTable
   metaObject*: QWebHistoryInterfacemetaObjectProc
   metacast*: QWebHistoryInterfacemetacastProc
@@ -180,13 +179,16 @@ type QWebHistoryInterfaceVTable* = object
   connectNotify*: QWebHistoryInterfaceconnectNotifyProc
   disconnectNotify*: QWebHistoryInterfacedisconnectNotifyProc
 proc QWebHistoryInterfacemetaObject*(self: gen_qwebhistoryinterface_types.QWebHistoryInterface, ): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQWebHistoryInterface_virtualbase_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQWebHistoryInterface_virtualbase_metaObject(self.h), owned: false)
 
 proc miqt_exec_callback_cQWebHistoryInterface_metaObject(vtbl: pointer, self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QWebHistoryInterfaceVTable](vtbl)
   let self = QWebHistoryInterface(h: self)
   var virtualReturn = vtbl[].metaObject(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QWebHistoryInterfacemetacast*(self: gen_qwebhistoryinterface_types.QWebHistoryInterface, param1: cstring): pointer =
   fcQWebHistoryInterface_virtualbase_metacast(self.h, param1)
@@ -235,7 +237,7 @@ proc QWebHistoryInterfaceevent*(self: gen_qwebhistoryinterface_types.QWebHistory
 proc miqt_exec_callback_cQWebHistoryInterface_event(vtbl: pointer, self: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QWebHistoryInterfaceVTable](vtbl)
   let self = QWebHistoryInterface(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].event(self, slotval1)
   virtualReturn
 
@@ -245,8 +247,8 @@ proc QWebHistoryInterfaceeventFilter*(self: gen_qwebhistoryinterface_types.QWebH
 proc miqt_exec_callback_cQWebHistoryInterface_eventFilter(vtbl: pointer, self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QWebHistoryInterfaceVTable](vtbl)
   let self = QWebHistoryInterface(h: self)
-  let slotval1 = gen_qobject_types.QObject(h: watched)
-  let slotval2 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].eventFilter(self, slotval1, slotval2)
   virtualReturn
 
@@ -256,7 +258,7 @@ proc QWebHistoryInterfacetimerEvent*(self: gen_qwebhistoryinterface_types.QWebHi
 proc miqt_exec_callback_cQWebHistoryInterface_timerEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QWebHistoryInterfaceVTable](vtbl)
   let self = QWebHistoryInterface(h: self)
-  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   vtbl[].timerEvent(self, slotval1)
 
 proc QWebHistoryInterfacechildEvent*(self: gen_qwebhistoryinterface_types.QWebHistoryInterface, event: gen_qcoreevent_types.QChildEvent): void =
@@ -265,7 +267,7 @@ proc QWebHistoryInterfacechildEvent*(self: gen_qwebhistoryinterface_types.QWebHi
 proc miqt_exec_callback_cQWebHistoryInterface_childEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QWebHistoryInterfaceVTable](vtbl)
   let self = QWebHistoryInterface(h: self)
-  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   vtbl[].childEvent(self, slotval1)
 
 proc QWebHistoryInterfacecustomEvent*(self: gen_qwebhistoryinterface_types.QWebHistoryInterface, event: gen_qcoreevent_types.QEvent): void =
@@ -274,7 +276,7 @@ proc QWebHistoryInterfacecustomEvent*(self: gen_qwebhistoryinterface_types.QWebH
 proc miqt_exec_callback_cQWebHistoryInterface_customEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QWebHistoryInterfaceVTable](vtbl)
   let self = QWebHistoryInterface(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].customEvent(self, slotval1)
 
 proc QWebHistoryInterfaceconnectNotify*(self: gen_qwebhistoryinterface_types.QWebHistoryInterface, signal: gen_qmetaobject_types.QMetaMethod): void =
@@ -283,7 +285,7 @@ proc QWebHistoryInterfaceconnectNotify*(self: gen_qwebhistoryinterface_types.QWe
 proc miqt_exec_callback_cQWebHistoryInterface_connectNotify(vtbl: pointer, self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QWebHistoryInterfaceVTable](vtbl)
   let self = QWebHistoryInterface(h: self)
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].connectNotify(self, slotval1)
 
 proc QWebHistoryInterfacedisconnectNotify*(self: gen_qwebhistoryinterface_types.QWebHistoryInterface, signal: gen_qmetaobject_types.QMetaMethod): void =
@@ -292,11 +294,114 @@ proc QWebHistoryInterfacedisconnectNotify*(self: gen_qwebhistoryinterface_types.
 proc miqt_exec_callback_cQWebHistoryInterface_disconnectNotify(vtbl: pointer, self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QWebHistoryInterfaceVTable](vtbl)
   let self = QWebHistoryInterface(h: self)
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].disconnectNotify(self, slotval1)
 
+type VirtualQWebHistoryInterface* {.inheritable.} = ref object of QWebHistoryInterface
+  vtbl*: cQWebHistoryInterfaceVTable
+method metaObject*(self: VirtualQWebHistoryInterface, ): gen_qobjectdefs_types.QMetaObject {.base.} =
+  QWebHistoryInterfacemetaObject(self[])
+proc miqt_exec_method_cQWebHistoryInterface_metaObject(vtbl: pointer, inst: pointer): pointer {.cdecl.} =
+  let vtbl = cast[VirtualQWebHistoryInterface](cast[uint](vtbl) - uint(offsetOf(VirtualQWebHistoryInterface, vtbl)))
+  var virtualReturn = vtbl.metaObject()
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
+
+method metacast*(self: VirtualQWebHistoryInterface, param1: cstring): pointer {.base.} =
+  QWebHistoryInterfacemetacast(self[], param1)
+proc miqt_exec_method_cQWebHistoryInterface_metacast(vtbl: pointer, inst: pointer, param1: cstring): pointer {.cdecl.} =
+  let vtbl = cast[VirtualQWebHistoryInterface](cast[uint](vtbl) - uint(offsetOf(VirtualQWebHistoryInterface, vtbl)))
+  let slotval1 = (param1)
+  var virtualReturn = vtbl.metacast(slotval1)
+  virtualReturn
+
+method metacall*(self: VirtualQWebHistoryInterface, param1: cint, param2: cint, param3: pointer): cint {.base.} =
+  QWebHistoryInterfacemetacall(self[], param1, param2, param3)
+proc miqt_exec_method_cQWebHistoryInterface_metacall(vtbl: pointer, inst: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
+  let vtbl = cast[VirtualQWebHistoryInterface](cast[uint](vtbl) - uint(offsetOf(VirtualQWebHistoryInterface, vtbl)))
+  let slotval1 = cint(param1)
+  let slotval2 = param2
+  let slotval3 = param3
+  var virtualReturn = vtbl.metacall(slotval1, slotval2, slotval3)
+  virtualReturn
+
+method historyContains*(self: VirtualQWebHistoryInterface, url: string): bool {.base.} =
+  raiseAssert("missing implementation of QWebHistoryInterface_virtualbase_historyContains")
+proc miqt_exec_method_cQWebHistoryInterface_historyContains(vtbl: pointer, inst: pointer, url: struct_miqt_string): bool {.cdecl.} =
+  let vtbl = cast[VirtualQWebHistoryInterface](cast[uint](vtbl) - uint(offsetOf(VirtualQWebHistoryInterface, vtbl)))
+  let vurl_ms = url
+  let vurlx_ret = string.fromBytes(toOpenArrayByte(vurl_ms.data, 0, int(vurl_ms.len)-1))
+  c_free(vurl_ms.data)
+  let slotval1 = vurlx_ret
+  var virtualReturn = vtbl.historyContains(slotval1)
+  virtualReturn
+
+method addHistoryEntry*(self: VirtualQWebHistoryInterface, url: string): void {.base.} =
+  raiseAssert("missing implementation of QWebHistoryInterface_virtualbase_addHistoryEntry")
+proc miqt_exec_method_cQWebHistoryInterface_addHistoryEntry(vtbl: pointer, inst: pointer, url: struct_miqt_string): void {.cdecl.} =
+  let vtbl = cast[VirtualQWebHistoryInterface](cast[uint](vtbl) - uint(offsetOf(VirtualQWebHistoryInterface, vtbl)))
+  let vurl_ms = url
+  let vurlx_ret = string.fromBytes(toOpenArrayByte(vurl_ms.data, 0, int(vurl_ms.len)-1))
+  c_free(vurl_ms.data)
+  let slotval1 = vurlx_ret
+  vtbl.addHistoryEntry(slotval1)
+
+method event*(self: VirtualQWebHistoryInterface, event: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QWebHistoryInterfaceevent(self[], event)
+proc miqt_exec_method_cQWebHistoryInterface_event(vtbl: pointer, inst: pointer, event: pointer): bool {.cdecl.} =
+  let vtbl = cast[VirtualQWebHistoryInterface](cast[uint](vtbl) - uint(offsetOf(VirtualQWebHistoryInterface, vtbl)))
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
+  var virtualReturn = vtbl.event(slotval1)
+  virtualReturn
+
+method eventFilter*(self: VirtualQWebHistoryInterface, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QWebHistoryInterfaceeventFilter(self[], watched, event)
+proc miqt_exec_method_cQWebHistoryInterface_eventFilter(vtbl: pointer, inst: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
+  let vtbl = cast[VirtualQWebHistoryInterface](cast[uint](vtbl) - uint(offsetOf(VirtualQWebHistoryInterface, vtbl)))
+  let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
+  var virtualReturn = vtbl.eventFilter(slotval1, slotval2)
+  virtualReturn
+
+method timerEvent*(self: VirtualQWebHistoryInterface, event: gen_qcoreevent_types.QTimerEvent): void {.base.} =
+  QWebHistoryInterfacetimerEvent(self[], event)
+proc miqt_exec_method_cQWebHistoryInterface_timerEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQWebHistoryInterface](cast[uint](vtbl) - uint(offsetOf(VirtualQWebHistoryInterface, vtbl)))
+  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
+  vtbl.timerEvent(slotval1)
+
+method childEvent*(self: VirtualQWebHistoryInterface, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
+  QWebHistoryInterfacechildEvent(self[], event)
+proc miqt_exec_method_cQWebHistoryInterface_childEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQWebHistoryInterface](cast[uint](vtbl) - uint(offsetOf(VirtualQWebHistoryInterface, vtbl)))
+  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
+  vtbl.childEvent(slotval1)
+
+method customEvent*(self: VirtualQWebHistoryInterface, event: gen_qcoreevent_types.QEvent): void {.base.} =
+  QWebHistoryInterfacecustomEvent(self[], event)
+proc miqt_exec_method_cQWebHistoryInterface_customEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQWebHistoryInterface](cast[uint](vtbl) - uint(offsetOf(VirtualQWebHistoryInterface, vtbl)))
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
+  vtbl.customEvent(slotval1)
+
+method connectNotify*(self: VirtualQWebHistoryInterface, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QWebHistoryInterfaceconnectNotify(self[], signal)
+proc miqt_exec_method_cQWebHistoryInterface_connectNotify(vtbl: pointer, inst: pointer, signal: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQWebHistoryInterface](cast[uint](vtbl) - uint(offsetOf(VirtualQWebHistoryInterface, vtbl)))
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
+  vtbl.connectNotify(slotval1)
+
+method disconnectNotify*(self: VirtualQWebHistoryInterface, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QWebHistoryInterfacedisconnectNotify(self[], signal)
+proc miqt_exec_method_cQWebHistoryInterface_disconnectNotify(vtbl: pointer, inst: pointer, signal: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQWebHistoryInterface](cast[uint](vtbl) - uint(offsetOf(VirtualQWebHistoryInterface, vtbl)))
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
+  vtbl.disconnectNotify(slotval1)
+
 proc sender*(self: gen_qwebhistoryinterface_types.QWebHistoryInterface, ): gen_qobject_types.QObject =
-  gen_qobject_types.QObject(h: fcQWebHistoryInterface_protectedbase_sender(self.h))
+  gen_qobject_types.QObject(h: fcQWebHistoryInterface_protectedbase_sender(self.h), owned: false)
 
 proc senderSignalIndex*(self: gen_qwebhistoryinterface_types.QWebHistoryInterface, ): cint =
   fcQWebHistoryInterface_protectedbase_senderSignalIndex(self.h)
@@ -311,70 +416,115 @@ proc create*(T: type gen_qwebhistoryinterface_types.QWebHistoryInterface,
     vtbl: ref QWebHistoryInterfaceVTable = nil): gen_qwebhistoryinterface_types.QWebHistoryInterface =
   let vtbl = if vtbl == nil: new QWebHistoryInterfaceVTable else: vtbl
   GC_ref(vtbl)
-  vtbl.vtbl.destructor = proc(vtbl: ptr cQWebHistoryInterfaceVTable, _: ptr cQWebHistoryInterface) {.cdecl.} =
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQWebHistoryInterfaceVTable, _: ptr cQWebHistoryInterface) {.cdecl.} =
     let vtbl = cast[ref QWebHistoryInterfaceVTable](vtbl)
     GC_unref(vtbl)
-  if not isNil(vtbl.metaObject):
+  if not isNil(vtbl[].metaObject):
     vtbl[].vtbl.metaObject = miqt_exec_callback_cQWebHistoryInterface_metaObject
-  if not isNil(vtbl.metacast):
+  if not isNil(vtbl[].metacast):
     vtbl[].vtbl.metacast = miqt_exec_callback_cQWebHistoryInterface_metacast
-  if not isNil(vtbl.metacall):
+  if not isNil(vtbl[].metacall):
     vtbl[].vtbl.metacall = miqt_exec_callback_cQWebHistoryInterface_metacall
-  if not isNil(vtbl.historyContains):
+  if not isNil(vtbl[].historyContains):
     vtbl[].vtbl.historyContains = miqt_exec_callback_cQWebHistoryInterface_historyContains
-  if not isNil(vtbl.addHistoryEntry):
+  if not isNil(vtbl[].addHistoryEntry):
     vtbl[].vtbl.addHistoryEntry = miqt_exec_callback_cQWebHistoryInterface_addHistoryEntry
-  if not isNil(vtbl.event):
+  if not isNil(vtbl[].event):
     vtbl[].vtbl.event = miqt_exec_callback_cQWebHistoryInterface_event
-  if not isNil(vtbl.eventFilter):
+  if not isNil(vtbl[].eventFilter):
     vtbl[].vtbl.eventFilter = miqt_exec_callback_cQWebHistoryInterface_eventFilter
-  if not isNil(vtbl.timerEvent):
+  if not isNil(vtbl[].timerEvent):
     vtbl[].vtbl.timerEvent = miqt_exec_callback_cQWebHistoryInterface_timerEvent
-  if not isNil(vtbl.childEvent):
+  if not isNil(vtbl[].childEvent):
     vtbl[].vtbl.childEvent = miqt_exec_callback_cQWebHistoryInterface_childEvent
-  if not isNil(vtbl.customEvent):
+  if not isNil(vtbl[].customEvent):
     vtbl[].vtbl.customEvent = miqt_exec_callback_cQWebHistoryInterface_customEvent
-  if not isNil(vtbl.connectNotify):
+  if not isNil(vtbl[].connectNotify):
     vtbl[].vtbl.connectNotify = miqt_exec_callback_cQWebHistoryInterface_connectNotify
-  if not isNil(vtbl.disconnectNotify):
+  if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQWebHistoryInterface_disconnectNotify
-  gen_qwebhistoryinterface_types.QWebHistoryInterface(h: fcQWebHistoryInterface_new(addr(vtbl[]), ))
+  gen_qwebhistoryinterface_types.QWebHistoryInterface(h: fcQWebHistoryInterface_new(addr(vtbl[].vtbl), ), owned: true)
 
 proc create*(T: type gen_qwebhistoryinterface_types.QWebHistoryInterface,
     parent: gen_qobject_types.QObject,
     vtbl: ref QWebHistoryInterfaceVTable = nil): gen_qwebhistoryinterface_types.QWebHistoryInterface =
   let vtbl = if vtbl == nil: new QWebHistoryInterfaceVTable else: vtbl
   GC_ref(vtbl)
-  vtbl.vtbl.destructor = proc(vtbl: ptr cQWebHistoryInterfaceVTable, _: ptr cQWebHistoryInterface) {.cdecl.} =
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQWebHistoryInterfaceVTable, _: ptr cQWebHistoryInterface) {.cdecl.} =
     let vtbl = cast[ref QWebHistoryInterfaceVTable](vtbl)
     GC_unref(vtbl)
-  if not isNil(vtbl.metaObject):
+  if not isNil(vtbl[].metaObject):
     vtbl[].vtbl.metaObject = miqt_exec_callback_cQWebHistoryInterface_metaObject
-  if not isNil(vtbl.metacast):
+  if not isNil(vtbl[].metacast):
     vtbl[].vtbl.metacast = miqt_exec_callback_cQWebHistoryInterface_metacast
-  if not isNil(vtbl.metacall):
+  if not isNil(vtbl[].metacall):
     vtbl[].vtbl.metacall = miqt_exec_callback_cQWebHistoryInterface_metacall
-  if not isNil(vtbl.historyContains):
+  if not isNil(vtbl[].historyContains):
     vtbl[].vtbl.historyContains = miqt_exec_callback_cQWebHistoryInterface_historyContains
-  if not isNil(vtbl.addHistoryEntry):
+  if not isNil(vtbl[].addHistoryEntry):
     vtbl[].vtbl.addHistoryEntry = miqt_exec_callback_cQWebHistoryInterface_addHistoryEntry
-  if not isNil(vtbl.event):
+  if not isNil(vtbl[].event):
     vtbl[].vtbl.event = miqt_exec_callback_cQWebHistoryInterface_event
-  if not isNil(vtbl.eventFilter):
+  if not isNil(vtbl[].eventFilter):
     vtbl[].vtbl.eventFilter = miqt_exec_callback_cQWebHistoryInterface_eventFilter
-  if not isNil(vtbl.timerEvent):
+  if not isNil(vtbl[].timerEvent):
     vtbl[].vtbl.timerEvent = miqt_exec_callback_cQWebHistoryInterface_timerEvent
-  if not isNil(vtbl.childEvent):
+  if not isNil(vtbl[].childEvent):
     vtbl[].vtbl.childEvent = miqt_exec_callback_cQWebHistoryInterface_childEvent
-  if not isNil(vtbl.customEvent):
+  if not isNil(vtbl[].customEvent):
     vtbl[].vtbl.customEvent = miqt_exec_callback_cQWebHistoryInterface_customEvent
-  if not isNil(vtbl.connectNotify):
+  if not isNil(vtbl[].connectNotify):
     vtbl[].vtbl.connectNotify = miqt_exec_callback_cQWebHistoryInterface_connectNotify
-  if not isNil(vtbl.disconnectNotify):
+  if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQWebHistoryInterface_disconnectNotify
-  gen_qwebhistoryinterface_types.QWebHistoryInterface(h: fcQWebHistoryInterface_new2(addr(vtbl[]), parent.h))
+  gen_qwebhistoryinterface_types.QWebHistoryInterface(h: fcQWebHistoryInterface_new2(addr(vtbl[].vtbl), parent.h), owned: true)
+
+proc create*(T: type gen_qwebhistoryinterface_types.QWebHistoryInterface,
+    vtbl: VirtualQWebHistoryInterface) =
+
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQWebHistoryInterfaceVTable, _: ptr cQWebHistoryInterface) {.cdecl.} =
+    let vtbl = cast[ptr typeof(VirtualQWebHistoryInterface()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQWebHistoryInterface, vtbl)))
+    vtbl[].h = nil
+    vtbl[].owned = false
+  vtbl[].vtbl.metaObject = miqt_exec_method_cQWebHistoryInterface_metaObject
+  vtbl[].vtbl.metacast = miqt_exec_method_cQWebHistoryInterface_metacast
+  vtbl[].vtbl.metacall = miqt_exec_method_cQWebHistoryInterface_metacall
+  vtbl[].vtbl.historyContains = miqt_exec_method_cQWebHistoryInterface_historyContains
+  vtbl[].vtbl.addHistoryEntry = miqt_exec_method_cQWebHistoryInterface_addHistoryEntry
+  vtbl[].vtbl.event = miqt_exec_method_cQWebHistoryInterface_event
+  vtbl[].vtbl.eventFilter = miqt_exec_method_cQWebHistoryInterface_eventFilter
+  vtbl[].vtbl.timerEvent = miqt_exec_method_cQWebHistoryInterface_timerEvent
+  vtbl[].vtbl.childEvent = miqt_exec_method_cQWebHistoryInterface_childEvent
+  vtbl[].vtbl.customEvent = miqt_exec_method_cQWebHistoryInterface_customEvent
+  vtbl[].vtbl.connectNotify = miqt_exec_method_cQWebHistoryInterface_connectNotify
+  vtbl[].vtbl.disconnectNotify = miqt_exec_method_cQWebHistoryInterface_disconnectNotify
+  if vtbl[].h != nil: delete(move(vtbl[]))
+  vtbl[].h = fcQWebHistoryInterface_new(addr(vtbl[].vtbl), )
+  vtbl[].owned = true
+
+proc create*(T: type gen_qwebhistoryinterface_types.QWebHistoryInterface,
+    parent: gen_qobject_types.QObject,
+    vtbl: VirtualQWebHistoryInterface) =
+
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQWebHistoryInterfaceVTable, _: ptr cQWebHistoryInterface) {.cdecl.} =
+    let vtbl = cast[ptr typeof(VirtualQWebHistoryInterface()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQWebHistoryInterface, vtbl)))
+    vtbl[].h = nil
+    vtbl[].owned = false
+  vtbl[].vtbl.metaObject = miqt_exec_method_cQWebHistoryInterface_metaObject
+  vtbl[].vtbl.metacast = miqt_exec_method_cQWebHistoryInterface_metacast
+  vtbl[].vtbl.metacall = miqt_exec_method_cQWebHistoryInterface_metacall
+  vtbl[].vtbl.historyContains = miqt_exec_method_cQWebHistoryInterface_historyContains
+  vtbl[].vtbl.addHistoryEntry = miqt_exec_method_cQWebHistoryInterface_addHistoryEntry
+  vtbl[].vtbl.event = miqt_exec_method_cQWebHistoryInterface_event
+  vtbl[].vtbl.eventFilter = miqt_exec_method_cQWebHistoryInterface_eventFilter
+  vtbl[].vtbl.timerEvent = miqt_exec_method_cQWebHistoryInterface_timerEvent
+  vtbl[].vtbl.childEvent = miqt_exec_method_cQWebHistoryInterface_childEvent
+  vtbl[].vtbl.customEvent = miqt_exec_method_cQWebHistoryInterface_customEvent
+  vtbl[].vtbl.connectNotify = miqt_exec_method_cQWebHistoryInterface_connectNotify
+  vtbl[].vtbl.disconnectNotify = miqt_exec_method_cQWebHistoryInterface_disconnectNotify
+  if vtbl[].h != nil: delete(move(vtbl[]))
+  vtbl[].h = fcQWebHistoryInterface_new2(addr(vtbl[].vtbl), parent.h)
+  vtbl[].owned = true
 
 proc staticMetaObject*(_: type gen_qwebhistoryinterface_types.QWebHistoryInterface): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQWebHistoryInterface_staticMetaObject())
-proc delete*(self: gen_qwebhistoryinterface_types.QWebHistoryInterface) =
-  fcQWebHistoryInterface_delete(self.h)

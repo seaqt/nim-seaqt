@@ -30,7 +30,7 @@ func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
     else:
       copyMem(addr result[0], unsafeAddr v[0], v.len)
 
-const cflags = gorge("pkg-config --cflags Qt5MultimediaWidgets")  & " -fPIC"
+const cflags = gorge("pkg-config --cflags Qt5MultimediaWidgets") & " -fPIC"
 {.compile("gen_qcameraviewfinder.cpp", cflags).}
 
 
@@ -80,7 +80,7 @@ proc fcQCameraViewfinder_tr2(s: cstring, c: cstring): struct_miqt_string {.impor
 proc fcQCameraViewfinder_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QCameraViewfinder_tr3".}
 proc fcQCameraViewfinder_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QCameraViewfinder_trUtf82".}
 proc fcQCameraViewfinder_trUtf83(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QCameraViewfinder_trUtf83".}
-type cQCameraViewfinderVTable = object
+type cQCameraViewfinderVTable {.pure.} = object
   destructor*: proc(vtbl: ptr cQCameraViewfinderVTable, self: ptr cQCameraViewfinder) {.cdecl, raises:[], gcsafe.}
   metaObject*: proc(vtbl, self: pointer, ): pointer {.cdecl, raises: [], gcsafe.}
   metacast*: proc(vtbl, self: pointer, param1: cstring): pointer {.cdecl, raises: [], gcsafe.}
@@ -198,10 +198,9 @@ proc fcQCameraViewfinder_protectedbase_isSignalConnected(self: pointer, signal: 
 proc fcQCameraViewfinder_new(vtbl: pointer, parent: pointer): ptr cQCameraViewfinder {.importc: "QCameraViewfinder_new".}
 proc fcQCameraViewfinder_new2(vtbl: pointer, ): ptr cQCameraViewfinder {.importc: "QCameraViewfinder_new2".}
 proc fcQCameraViewfinder_staticMetaObject(): pointer {.importc: "QCameraViewfinder_staticMetaObject".}
-proc fcQCameraViewfinder_delete(self: pointer) {.importc: "QCameraViewfinder_delete".}
 
 proc metaObject*(self: gen_qcameraviewfinder_types.QCameraViewfinder, ): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQCameraViewfinder_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQCameraViewfinder_metaObject(self.h), owned: false)
 
 proc metacast*(self: gen_qcameraviewfinder_types.QCameraViewfinder, param1: cstring): pointer =
   fcQCameraViewfinder_metacast(self.h, param1)
@@ -222,7 +221,7 @@ proc trUtf8*(_: type gen_qcameraviewfinder_types.QCameraViewfinder, s: cstring):
   vx_ret
 
 proc mediaObject*(self: gen_qcameraviewfinder_types.QCameraViewfinder, ): gen_qmediaobject_types.QMediaObject =
-  gen_qmediaobject_types.QMediaObject(h: fcQCameraViewfinder_mediaObject(self.h))
+  gen_qmediaobject_types.QMediaObject(h: fcQCameraViewfinder_mediaObject(self.h), owned: false)
 
 proc tr*(_: type gen_qcameraviewfinder_types.QCameraViewfinder, s: cstring, c: cstring): string =
   let v_ms = fcQCameraViewfinder_tr2(s, c)
@@ -300,7 +299,7 @@ type QCameraViewfinderchildEventProc* = proc(self: QCameraViewfinder, event: gen
 type QCameraViewfindercustomEventProc* = proc(self: QCameraViewfinder, event: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
 type QCameraViewfinderconnectNotifyProc* = proc(self: QCameraViewfinder, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
 type QCameraViewfinderdisconnectNotifyProc* = proc(self: QCameraViewfinder, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
-type QCameraViewfinderVTable* = object
+type QCameraViewfinderVTable* {.inheritable, pure.} = object
   vtbl: cQCameraViewfinderVTable
   metaObject*: QCameraViewfindermetaObjectProc
   metacast*: QCameraViewfindermetacastProc
@@ -355,13 +354,16 @@ type QCameraViewfinderVTable* = object
   connectNotify*: QCameraViewfinderconnectNotifyProc
   disconnectNotify*: QCameraViewfinderdisconnectNotifyProc
 proc QCameraViewfindermetaObject*(self: gen_qcameraviewfinder_types.QCameraViewfinder, ): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQCameraViewfinder_virtualbase_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQCameraViewfinder_virtualbase_metaObject(self.h), owned: false)
 
 proc miqt_exec_callback_cQCameraViewfinder_metaObject(vtbl: pointer, self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QCameraViewfinderVTable](vtbl)
   let self = QCameraViewfinder(h: self)
   var virtualReturn = vtbl[].metaObject(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QCameraViewfindermetacast*(self: gen_qcameraviewfinder_types.QCameraViewfinder, param1: cstring): pointer =
   fcQCameraViewfinder_virtualbase_metacast(self.h, param1)
@@ -386,13 +388,16 @@ proc miqt_exec_callback_cQCameraViewfinder_metacall(vtbl: pointer, self: pointer
   virtualReturn
 
 proc QCameraViewfindermediaObject*(self: gen_qcameraviewfinder_types.QCameraViewfinder, ): gen_qmediaobject_types.QMediaObject =
-  gen_qmediaobject_types.QMediaObject(h: fcQCameraViewfinder_virtualbase_mediaObject(self.h))
+  gen_qmediaobject_types.QMediaObject(h: fcQCameraViewfinder_virtualbase_mediaObject(self.h), owned: false)
 
 proc miqt_exec_callback_cQCameraViewfinder_mediaObject(vtbl: pointer, self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QCameraViewfinderVTable](vtbl)
   let self = QCameraViewfinder(h: self)
   var virtualReturn = vtbl[].mediaObject(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QCameraViewfindersetMediaObject*(self: gen_qcameraviewfinder_types.QCameraViewfinder, objectVal: gen_qmediaobject_types.QMediaObject): bool =
   fcQCameraViewfinder_virtualbase_setMediaObject(self.h, objectVal.h)
@@ -400,18 +405,21 @@ proc QCameraViewfindersetMediaObject*(self: gen_qcameraviewfinder_types.QCameraV
 proc miqt_exec_callback_cQCameraViewfinder_setMediaObject(vtbl: pointer, self: pointer, objectVal: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QCameraViewfinderVTable](vtbl)
   let self = QCameraViewfinder(h: self)
-  let slotval1 = gen_qmediaobject_types.QMediaObject(h: objectVal)
+  let slotval1 = gen_qmediaobject_types.QMediaObject(h: objectVal, owned: false)
   var virtualReturn = vtbl[].setMediaObject(self, slotval1)
   virtualReturn
 
 proc QCameraViewfindersizeHint*(self: gen_qcameraviewfinder_types.QCameraViewfinder, ): gen_qsize_types.QSize =
-  gen_qsize_types.QSize(h: fcQCameraViewfinder_virtualbase_sizeHint(self.h))
+  gen_qsize_types.QSize(h: fcQCameraViewfinder_virtualbase_sizeHint(self.h), owned: true)
 
 proc miqt_exec_callback_cQCameraViewfinder_sizeHint(vtbl: pointer, self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QCameraViewfinderVTable](vtbl)
   let self = QCameraViewfinder(h: self)
   var virtualReturn = vtbl[].sizeHint(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QCameraViewfinderevent*(self: gen_qcameraviewfinder_types.QCameraViewfinder, event: gen_qcoreevent_types.QEvent): bool =
   fcQCameraViewfinder_virtualbase_event(self.h, event.h)
@@ -419,7 +427,7 @@ proc QCameraViewfinderevent*(self: gen_qcameraviewfinder_types.QCameraViewfinder
 proc miqt_exec_callback_cQCameraViewfinder_event(vtbl: pointer, self: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QCameraViewfinderVTable](vtbl)
   let self = QCameraViewfinder(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].event(self, slotval1)
   virtualReturn
 
@@ -429,7 +437,7 @@ proc QCameraViewfindershowEvent*(self: gen_qcameraviewfinder_types.QCameraViewfi
 proc miqt_exec_callback_cQCameraViewfinder_showEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QCameraViewfinderVTable](vtbl)
   let self = QCameraViewfinder(h: self)
-  let slotval1 = gen_qevent_types.QShowEvent(h: event)
+  let slotval1 = gen_qevent_types.QShowEvent(h: event, owned: false)
   vtbl[].showEvent(self, slotval1)
 
 proc QCameraViewfinderhideEvent*(self: gen_qcameraviewfinder_types.QCameraViewfinder, event: gen_qevent_types.QHideEvent): void =
@@ -438,7 +446,7 @@ proc QCameraViewfinderhideEvent*(self: gen_qcameraviewfinder_types.QCameraViewfi
 proc miqt_exec_callback_cQCameraViewfinder_hideEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QCameraViewfinderVTable](vtbl)
   let self = QCameraViewfinder(h: self)
-  let slotval1 = gen_qevent_types.QHideEvent(h: event)
+  let slotval1 = gen_qevent_types.QHideEvent(h: event, owned: false)
   vtbl[].hideEvent(self, slotval1)
 
 proc QCameraViewfinderresizeEvent*(self: gen_qcameraviewfinder_types.QCameraViewfinder, event: gen_qevent_types.QResizeEvent): void =
@@ -447,7 +455,7 @@ proc QCameraViewfinderresizeEvent*(self: gen_qcameraviewfinder_types.QCameraView
 proc miqt_exec_callback_cQCameraViewfinder_resizeEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QCameraViewfinderVTable](vtbl)
   let self = QCameraViewfinder(h: self)
-  let slotval1 = gen_qevent_types.QResizeEvent(h: event)
+  let slotval1 = gen_qevent_types.QResizeEvent(h: event, owned: false)
   vtbl[].resizeEvent(self, slotval1)
 
 proc QCameraViewfindermoveEvent*(self: gen_qcameraviewfinder_types.QCameraViewfinder, event: gen_qevent_types.QMoveEvent): void =
@@ -456,7 +464,7 @@ proc QCameraViewfindermoveEvent*(self: gen_qcameraviewfinder_types.QCameraViewfi
 proc miqt_exec_callback_cQCameraViewfinder_moveEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QCameraViewfinderVTable](vtbl)
   let self = QCameraViewfinder(h: self)
-  let slotval1 = gen_qevent_types.QMoveEvent(h: event)
+  let slotval1 = gen_qevent_types.QMoveEvent(h: event, owned: false)
   vtbl[].moveEvent(self, slotval1)
 
 proc QCameraViewfinderpaintEvent*(self: gen_qcameraviewfinder_types.QCameraViewfinder, event: gen_qevent_types.QPaintEvent): void =
@@ -465,7 +473,7 @@ proc QCameraViewfinderpaintEvent*(self: gen_qcameraviewfinder_types.QCameraViewf
 proc miqt_exec_callback_cQCameraViewfinder_paintEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QCameraViewfinderVTable](vtbl)
   let self = QCameraViewfinder(h: self)
-  let slotval1 = gen_qevent_types.QPaintEvent(h: event)
+  let slotval1 = gen_qevent_types.QPaintEvent(h: event, owned: false)
   vtbl[].paintEvent(self, slotval1)
 
 proc QCameraViewfinderdevType*(self: gen_qcameraviewfinder_types.QCameraViewfinder, ): cint =
@@ -487,13 +495,16 @@ proc miqt_exec_callback_cQCameraViewfinder_setVisible(vtbl: pointer, self: point
   vtbl[].setVisible(self, slotval1)
 
 proc QCameraViewfinderminimumSizeHint*(self: gen_qcameraviewfinder_types.QCameraViewfinder, ): gen_qsize_types.QSize =
-  gen_qsize_types.QSize(h: fcQCameraViewfinder_virtualbase_minimumSizeHint(self.h))
+  gen_qsize_types.QSize(h: fcQCameraViewfinder_virtualbase_minimumSizeHint(self.h), owned: true)
 
 proc miqt_exec_callback_cQCameraViewfinder_minimumSizeHint(vtbl: pointer, self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QCameraViewfinderVTable](vtbl)
   let self = QCameraViewfinder(h: self)
   var virtualReturn = vtbl[].minimumSizeHint(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QCameraViewfinderheightForWidth*(self: gen_qcameraviewfinder_types.QCameraViewfinder, param1: cint): cint =
   fcQCameraViewfinder_virtualbase_heightForWidth(self.h, param1)
@@ -515,13 +526,16 @@ proc miqt_exec_callback_cQCameraViewfinder_hasHeightForWidth(vtbl: pointer, self
   virtualReturn
 
 proc QCameraViewfinderpaintEngine*(self: gen_qcameraviewfinder_types.QCameraViewfinder, ): gen_qpaintengine_types.QPaintEngine =
-  gen_qpaintengine_types.QPaintEngine(h: fcQCameraViewfinder_virtualbase_paintEngine(self.h))
+  gen_qpaintengine_types.QPaintEngine(h: fcQCameraViewfinder_virtualbase_paintEngine(self.h), owned: false)
 
 proc miqt_exec_callback_cQCameraViewfinder_paintEngine(vtbl: pointer, self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QCameraViewfinderVTable](vtbl)
   let self = QCameraViewfinder(h: self)
   var virtualReturn = vtbl[].paintEngine(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QCameraViewfindermousePressEvent*(self: gen_qcameraviewfinder_types.QCameraViewfinder, event: gen_qevent_types.QMouseEvent): void =
   fcQCameraViewfinder_virtualbase_mousePressEvent(self.h, event.h)
@@ -529,7 +543,7 @@ proc QCameraViewfindermousePressEvent*(self: gen_qcameraviewfinder_types.QCamera
 proc miqt_exec_callback_cQCameraViewfinder_mousePressEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QCameraViewfinderVTable](vtbl)
   let self = QCameraViewfinder(h: self)
-  let slotval1 = gen_qevent_types.QMouseEvent(h: event)
+  let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   vtbl[].mousePressEvent(self, slotval1)
 
 proc QCameraViewfindermouseReleaseEvent*(self: gen_qcameraviewfinder_types.QCameraViewfinder, event: gen_qevent_types.QMouseEvent): void =
@@ -538,7 +552,7 @@ proc QCameraViewfindermouseReleaseEvent*(self: gen_qcameraviewfinder_types.QCame
 proc miqt_exec_callback_cQCameraViewfinder_mouseReleaseEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QCameraViewfinderVTable](vtbl)
   let self = QCameraViewfinder(h: self)
-  let slotval1 = gen_qevent_types.QMouseEvent(h: event)
+  let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   vtbl[].mouseReleaseEvent(self, slotval1)
 
 proc QCameraViewfindermouseDoubleClickEvent*(self: gen_qcameraviewfinder_types.QCameraViewfinder, event: gen_qevent_types.QMouseEvent): void =
@@ -547,7 +561,7 @@ proc QCameraViewfindermouseDoubleClickEvent*(self: gen_qcameraviewfinder_types.Q
 proc miqt_exec_callback_cQCameraViewfinder_mouseDoubleClickEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QCameraViewfinderVTable](vtbl)
   let self = QCameraViewfinder(h: self)
-  let slotval1 = gen_qevent_types.QMouseEvent(h: event)
+  let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   vtbl[].mouseDoubleClickEvent(self, slotval1)
 
 proc QCameraViewfindermouseMoveEvent*(self: gen_qcameraviewfinder_types.QCameraViewfinder, event: gen_qevent_types.QMouseEvent): void =
@@ -556,7 +570,7 @@ proc QCameraViewfindermouseMoveEvent*(self: gen_qcameraviewfinder_types.QCameraV
 proc miqt_exec_callback_cQCameraViewfinder_mouseMoveEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QCameraViewfinderVTable](vtbl)
   let self = QCameraViewfinder(h: self)
-  let slotval1 = gen_qevent_types.QMouseEvent(h: event)
+  let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   vtbl[].mouseMoveEvent(self, slotval1)
 
 proc QCameraViewfinderwheelEvent*(self: gen_qcameraviewfinder_types.QCameraViewfinder, event: gen_qevent_types.QWheelEvent): void =
@@ -565,7 +579,7 @@ proc QCameraViewfinderwheelEvent*(self: gen_qcameraviewfinder_types.QCameraViewf
 proc miqt_exec_callback_cQCameraViewfinder_wheelEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QCameraViewfinderVTable](vtbl)
   let self = QCameraViewfinder(h: self)
-  let slotval1 = gen_qevent_types.QWheelEvent(h: event)
+  let slotval1 = gen_qevent_types.QWheelEvent(h: event, owned: false)
   vtbl[].wheelEvent(self, slotval1)
 
 proc QCameraViewfinderkeyPressEvent*(self: gen_qcameraviewfinder_types.QCameraViewfinder, event: gen_qevent_types.QKeyEvent): void =
@@ -574,7 +588,7 @@ proc QCameraViewfinderkeyPressEvent*(self: gen_qcameraviewfinder_types.QCameraVi
 proc miqt_exec_callback_cQCameraViewfinder_keyPressEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QCameraViewfinderVTable](vtbl)
   let self = QCameraViewfinder(h: self)
-  let slotval1 = gen_qevent_types.QKeyEvent(h: event)
+  let slotval1 = gen_qevent_types.QKeyEvent(h: event, owned: false)
   vtbl[].keyPressEvent(self, slotval1)
 
 proc QCameraViewfinderkeyReleaseEvent*(self: gen_qcameraviewfinder_types.QCameraViewfinder, event: gen_qevent_types.QKeyEvent): void =
@@ -583,7 +597,7 @@ proc QCameraViewfinderkeyReleaseEvent*(self: gen_qcameraviewfinder_types.QCamera
 proc miqt_exec_callback_cQCameraViewfinder_keyReleaseEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QCameraViewfinderVTable](vtbl)
   let self = QCameraViewfinder(h: self)
-  let slotval1 = gen_qevent_types.QKeyEvent(h: event)
+  let slotval1 = gen_qevent_types.QKeyEvent(h: event, owned: false)
   vtbl[].keyReleaseEvent(self, slotval1)
 
 proc QCameraViewfinderfocusInEvent*(self: gen_qcameraviewfinder_types.QCameraViewfinder, event: gen_qevent_types.QFocusEvent): void =
@@ -592,7 +606,7 @@ proc QCameraViewfinderfocusInEvent*(self: gen_qcameraviewfinder_types.QCameraVie
 proc miqt_exec_callback_cQCameraViewfinder_focusInEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QCameraViewfinderVTable](vtbl)
   let self = QCameraViewfinder(h: self)
-  let slotval1 = gen_qevent_types.QFocusEvent(h: event)
+  let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
   vtbl[].focusInEvent(self, slotval1)
 
 proc QCameraViewfinderfocusOutEvent*(self: gen_qcameraviewfinder_types.QCameraViewfinder, event: gen_qevent_types.QFocusEvent): void =
@@ -601,7 +615,7 @@ proc QCameraViewfinderfocusOutEvent*(self: gen_qcameraviewfinder_types.QCameraVi
 proc miqt_exec_callback_cQCameraViewfinder_focusOutEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QCameraViewfinderVTable](vtbl)
   let self = QCameraViewfinder(h: self)
-  let slotval1 = gen_qevent_types.QFocusEvent(h: event)
+  let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
   vtbl[].focusOutEvent(self, slotval1)
 
 proc QCameraViewfinderenterEvent*(self: gen_qcameraviewfinder_types.QCameraViewfinder, event: gen_qcoreevent_types.QEvent): void =
@@ -610,7 +624,7 @@ proc QCameraViewfinderenterEvent*(self: gen_qcameraviewfinder_types.QCameraViewf
 proc miqt_exec_callback_cQCameraViewfinder_enterEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QCameraViewfinderVTable](vtbl)
   let self = QCameraViewfinder(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].enterEvent(self, slotval1)
 
 proc QCameraViewfinderleaveEvent*(self: gen_qcameraviewfinder_types.QCameraViewfinder, event: gen_qcoreevent_types.QEvent): void =
@@ -619,7 +633,7 @@ proc QCameraViewfinderleaveEvent*(self: gen_qcameraviewfinder_types.QCameraViewf
 proc miqt_exec_callback_cQCameraViewfinder_leaveEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QCameraViewfinderVTable](vtbl)
   let self = QCameraViewfinder(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].leaveEvent(self, slotval1)
 
 proc QCameraViewfindercloseEvent*(self: gen_qcameraviewfinder_types.QCameraViewfinder, event: gen_qevent_types.QCloseEvent): void =
@@ -628,7 +642,7 @@ proc QCameraViewfindercloseEvent*(self: gen_qcameraviewfinder_types.QCameraViewf
 proc miqt_exec_callback_cQCameraViewfinder_closeEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QCameraViewfinderVTable](vtbl)
   let self = QCameraViewfinder(h: self)
-  let slotval1 = gen_qevent_types.QCloseEvent(h: event)
+  let slotval1 = gen_qevent_types.QCloseEvent(h: event, owned: false)
   vtbl[].closeEvent(self, slotval1)
 
 proc QCameraViewfindercontextMenuEvent*(self: gen_qcameraviewfinder_types.QCameraViewfinder, event: gen_qevent_types.QContextMenuEvent): void =
@@ -637,7 +651,7 @@ proc QCameraViewfindercontextMenuEvent*(self: gen_qcameraviewfinder_types.QCamer
 proc miqt_exec_callback_cQCameraViewfinder_contextMenuEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QCameraViewfinderVTable](vtbl)
   let self = QCameraViewfinder(h: self)
-  let slotval1 = gen_qevent_types.QContextMenuEvent(h: event)
+  let slotval1 = gen_qevent_types.QContextMenuEvent(h: event, owned: false)
   vtbl[].contextMenuEvent(self, slotval1)
 
 proc QCameraViewfindertabletEvent*(self: gen_qcameraviewfinder_types.QCameraViewfinder, event: gen_qevent_types.QTabletEvent): void =
@@ -646,7 +660,7 @@ proc QCameraViewfindertabletEvent*(self: gen_qcameraviewfinder_types.QCameraView
 proc miqt_exec_callback_cQCameraViewfinder_tabletEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QCameraViewfinderVTable](vtbl)
   let self = QCameraViewfinder(h: self)
-  let slotval1 = gen_qevent_types.QTabletEvent(h: event)
+  let slotval1 = gen_qevent_types.QTabletEvent(h: event, owned: false)
   vtbl[].tabletEvent(self, slotval1)
 
 proc QCameraViewfinderactionEvent*(self: gen_qcameraviewfinder_types.QCameraViewfinder, event: gen_qevent_types.QActionEvent): void =
@@ -655,7 +669,7 @@ proc QCameraViewfinderactionEvent*(self: gen_qcameraviewfinder_types.QCameraView
 proc miqt_exec_callback_cQCameraViewfinder_actionEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QCameraViewfinderVTable](vtbl)
   let self = QCameraViewfinder(h: self)
-  let slotval1 = gen_qevent_types.QActionEvent(h: event)
+  let slotval1 = gen_qevent_types.QActionEvent(h: event, owned: false)
   vtbl[].actionEvent(self, slotval1)
 
 proc QCameraViewfinderdragEnterEvent*(self: gen_qcameraviewfinder_types.QCameraViewfinder, event: gen_qevent_types.QDragEnterEvent): void =
@@ -664,7 +678,7 @@ proc QCameraViewfinderdragEnterEvent*(self: gen_qcameraviewfinder_types.QCameraV
 proc miqt_exec_callback_cQCameraViewfinder_dragEnterEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QCameraViewfinderVTable](vtbl)
   let self = QCameraViewfinder(h: self)
-  let slotval1 = gen_qevent_types.QDragEnterEvent(h: event)
+  let slotval1 = gen_qevent_types.QDragEnterEvent(h: event, owned: false)
   vtbl[].dragEnterEvent(self, slotval1)
 
 proc QCameraViewfinderdragMoveEvent*(self: gen_qcameraviewfinder_types.QCameraViewfinder, event: gen_qevent_types.QDragMoveEvent): void =
@@ -673,7 +687,7 @@ proc QCameraViewfinderdragMoveEvent*(self: gen_qcameraviewfinder_types.QCameraVi
 proc miqt_exec_callback_cQCameraViewfinder_dragMoveEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QCameraViewfinderVTable](vtbl)
   let self = QCameraViewfinder(h: self)
-  let slotval1 = gen_qevent_types.QDragMoveEvent(h: event)
+  let slotval1 = gen_qevent_types.QDragMoveEvent(h: event, owned: false)
   vtbl[].dragMoveEvent(self, slotval1)
 
 proc QCameraViewfinderdragLeaveEvent*(self: gen_qcameraviewfinder_types.QCameraViewfinder, event: gen_qevent_types.QDragLeaveEvent): void =
@@ -682,7 +696,7 @@ proc QCameraViewfinderdragLeaveEvent*(self: gen_qcameraviewfinder_types.QCameraV
 proc miqt_exec_callback_cQCameraViewfinder_dragLeaveEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QCameraViewfinderVTable](vtbl)
   let self = QCameraViewfinder(h: self)
-  let slotval1 = gen_qevent_types.QDragLeaveEvent(h: event)
+  let slotval1 = gen_qevent_types.QDragLeaveEvent(h: event, owned: false)
   vtbl[].dragLeaveEvent(self, slotval1)
 
 proc QCameraViewfinderdropEvent*(self: gen_qcameraviewfinder_types.QCameraViewfinder, event: gen_qevent_types.QDropEvent): void =
@@ -691,7 +705,7 @@ proc QCameraViewfinderdropEvent*(self: gen_qcameraviewfinder_types.QCameraViewfi
 proc miqt_exec_callback_cQCameraViewfinder_dropEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QCameraViewfinderVTable](vtbl)
   let self = QCameraViewfinder(h: self)
-  let slotval1 = gen_qevent_types.QDropEvent(h: event)
+  let slotval1 = gen_qevent_types.QDropEvent(h: event, owned: false)
   vtbl[].dropEvent(self, slotval1)
 
 proc QCameraViewfindernativeEvent*(self: gen_qcameraviewfinder_types.QCameraViewfinder, eventType: seq[byte], message: pointer, resultVal: ptr clong): bool =
@@ -715,7 +729,7 @@ proc QCameraViewfinderchangeEvent*(self: gen_qcameraviewfinder_types.QCameraView
 proc miqt_exec_callback_cQCameraViewfinder_changeEvent(vtbl: pointer, self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QCameraViewfinderVTable](vtbl)
   let self = QCameraViewfinder(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: param1)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: param1, owned: false)
   vtbl[].changeEvent(self, slotval1)
 
 proc QCameraViewfindermetric*(self: gen_qcameraviewfinder_types.QCameraViewfinder, param1: cint): cint =
@@ -734,27 +748,33 @@ proc QCameraViewfinderinitPainter*(self: gen_qcameraviewfinder_types.QCameraView
 proc miqt_exec_callback_cQCameraViewfinder_initPainter(vtbl: pointer, self: pointer, painter: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QCameraViewfinderVTable](vtbl)
   let self = QCameraViewfinder(h: self)
-  let slotval1 = gen_qpainter_types.QPainter(h: painter)
+  let slotval1 = gen_qpainter_types.QPainter(h: painter, owned: false)
   vtbl[].initPainter(self, slotval1)
 
 proc QCameraViewfinderredirected*(self: gen_qcameraviewfinder_types.QCameraViewfinder, offset: gen_qpoint_types.QPoint): gen_qpaintdevice_types.QPaintDevice =
-  gen_qpaintdevice_types.QPaintDevice(h: fcQCameraViewfinder_virtualbase_redirected(self.h, offset.h))
+  gen_qpaintdevice_types.QPaintDevice(h: fcQCameraViewfinder_virtualbase_redirected(self.h, offset.h), owned: false)
 
 proc miqt_exec_callback_cQCameraViewfinder_redirected(vtbl: pointer, self: pointer, offset: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QCameraViewfinderVTable](vtbl)
   let self = QCameraViewfinder(h: self)
-  let slotval1 = gen_qpoint_types.QPoint(h: offset)
+  let slotval1 = gen_qpoint_types.QPoint(h: offset, owned: false)
   var virtualReturn = vtbl[].redirected(self, slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QCameraViewfindersharedPainter*(self: gen_qcameraviewfinder_types.QCameraViewfinder, ): gen_qpainter_types.QPainter =
-  gen_qpainter_types.QPainter(h: fcQCameraViewfinder_virtualbase_sharedPainter(self.h))
+  gen_qpainter_types.QPainter(h: fcQCameraViewfinder_virtualbase_sharedPainter(self.h), owned: false)
 
 proc miqt_exec_callback_cQCameraViewfinder_sharedPainter(vtbl: pointer, self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QCameraViewfinderVTable](vtbl)
   let self = QCameraViewfinder(h: self)
   var virtualReturn = vtbl[].sharedPainter(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QCameraViewfinderinputMethodEvent*(self: gen_qcameraviewfinder_types.QCameraViewfinder, param1: gen_qevent_types.QInputMethodEvent): void =
   fcQCameraViewfinder_virtualbase_inputMethodEvent(self.h, param1.h)
@@ -762,18 +782,21 @@ proc QCameraViewfinderinputMethodEvent*(self: gen_qcameraviewfinder_types.QCamer
 proc miqt_exec_callback_cQCameraViewfinder_inputMethodEvent(vtbl: pointer, self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QCameraViewfinderVTable](vtbl)
   let self = QCameraViewfinder(h: self)
-  let slotval1 = gen_qevent_types.QInputMethodEvent(h: param1)
+  let slotval1 = gen_qevent_types.QInputMethodEvent(h: param1, owned: false)
   vtbl[].inputMethodEvent(self, slotval1)
 
 proc QCameraViewfinderinputMethodQuery*(self: gen_qcameraviewfinder_types.QCameraViewfinder, param1: cint): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQCameraViewfinder_virtualbase_inputMethodQuery(self.h, cint(param1)))
+  gen_qvariant_types.QVariant(h: fcQCameraViewfinder_virtualbase_inputMethodQuery(self.h, cint(param1)), owned: true)
 
 proc miqt_exec_callback_cQCameraViewfinder_inputMethodQuery(vtbl: pointer, self: pointer, param1: cint): pointer {.cdecl.} =
   let vtbl = cast[ptr QCameraViewfinderVTable](vtbl)
   let self = QCameraViewfinder(h: self)
   let slotval1 = cint(param1)
   var virtualReturn = vtbl[].inputMethodQuery(self, slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QCameraViewfinderfocusNextPrevChild*(self: gen_qcameraviewfinder_types.QCameraViewfinder, next: bool): bool =
   fcQCameraViewfinder_virtualbase_focusNextPrevChild(self.h, next)
@@ -791,8 +814,8 @@ proc QCameraViewfindereventFilter*(self: gen_qcameraviewfinder_types.QCameraView
 proc miqt_exec_callback_cQCameraViewfinder_eventFilter(vtbl: pointer, self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QCameraViewfinderVTable](vtbl)
   let self = QCameraViewfinder(h: self)
-  let slotval1 = gen_qobject_types.QObject(h: watched)
-  let slotval2 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].eventFilter(self, slotval1, slotval2)
   virtualReturn
 
@@ -802,7 +825,7 @@ proc QCameraViewfindertimerEvent*(self: gen_qcameraviewfinder_types.QCameraViewf
 proc miqt_exec_callback_cQCameraViewfinder_timerEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QCameraViewfinderVTable](vtbl)
   let self = QCameraViewfinder(h: self)
-  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   vtbl[].timerEvent(self, slotval1)
 
 proc QCameraViewfinderchildEvent*(self: gen_qcameraviewfinder_types.QCameraViewfinder, event: gen_qcoreevent_types.QChildEvent): void =
@@ -811,7 +834,7 @@ proc QCameraViewfinderchildEvent*(self: gen_qcameraviewfinder_types.QCameraViewf
 proc miqt_exec_callback_cQCameraViewfinder_childEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QCameraViewfinderVTable](vtbl)
   let self = QCameraViewfinder(h: self)
-  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   vtbl[].childEvent(self, slotval1)
 
 proc QCameraViewfindercustomEvent*(self: gen_qcameraviewfinder_types.QCameraViewfinder, event: gen_qcoreevent_types.QEvent): void =
@@ -820,7 +843,7 @@ proc QCameraViewfindercustomEvent*(self: gen_qcameraviewfinder_types.QCameraView
 proc miqt_exec_callback_cQCameraViewfinder_customEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QCameraViewfinderVTable](vtbl)
   let self = QCameraViewfinder(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].customEvent(self, slotval1)
 
 proc QCameraViewfinderconnectNotify*(self: gen_qcameraviewfinder_types.QCameraViewfinder, signal: gen_qmetaobject_types.QMetaMethod): void =
@@ -829,7 +852,7 @@ proc QCameraViewfinderconnectNotify*(self: gen_qcameraviewfinder_types.QCameraVi
 proc miqt_exec_callback_cQCameraViewfinder_connectNotify(vtbl: pointer, self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QCameraViewfinderVTable](vtbl)
   let self = QCameraViewfinder(h: self)
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].connectNotify(self, slotval1)
 
 proc QCameraViewfinderdisconnectNotify*(self: gen_qcameraviewfinder_types.QCameraViewfinder, signal: gen_qmetaobject_types.QMetaMethod): void =
@@ -838,8 +861,417 @@ proc QCameraViewfinderdisconnectNotify*(self: gen_qcameraviewfinder_types.QCamer
 proc miqt_exec_callback_cQCameraViewfinder_disconnectNotify(vtbl: pointer, self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QCameraViewfinderVTable](vtbl)
   let self = QCameraViewfinder(h: self)
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].disconnectNotify(self, slotval1)
+
+type VirtualQCameraViewfinder* {.inheritable.} = ref object of QCameraViewfinder
+  vtbl*: cQCameraViewfinderVTable
+method metaObject*(self: VirtualQCameraViewfinder, ): gen_qobjectdefs_types.QMetaObject {.base.} =
+  QCameraViewfindermetaObject(self[])
+proc miqt_exec_method_cQCameraViewfinder_metaObject(vtbl: pointer, inst: pointer): pointer {.cdecl.} =
+  let vtbl = cast[VirtualQCameraViewfinder](cast[uint](vtbl) - uint(offsetOf(VirtualQCameraViewfinder, vtbl)))
+  var virtualReturn = vtbl.metaObject()
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
+
+method metacast*(self: VirtualQCameraViewfinder, param1: cstring): pointer {.base.} =
+  QCameraViewfindermetacast(self[], param1)
+proc miqt_exec_method_cQCameraViewfinder_metacast(vtbl: pointer, inst: pointer, param1: cstring): pointer {.cdecl.} =
+  let vtbl = cast[VirtualQCameraViewfinder](cast[uint](vtbl) - uint(offsetOf(VirtualQCameraViewfinder, vtbl)))
+  let slotval1 = (param1)
+  var virtualReturn = vtbl.metacast(slotval1)
+  virtualReturn
+
+method metacall*(self: VirtualQCameraViewfinder, param1: cint, param2: cint, param3: pointer): cint {.base.} =
+  QCameraViewfindermetacall(self[], param1, param2, param3)
+proc miqt_exec_method_cQCameraViewfinder_metacall(vtbl: pointer, inst: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
+  let vtbl = cast[VirtualQCameraViewfinder](cast[uint](vtbl) - uint(offsetOf(VirtualQCameraViewfinder, vtbl)))
+  let slotval1 = cint(param1)
+  let slotval2 = param2
+  let slotval3 = param3
+  var virtualReturn = vtbl.metacall(slotval1, slotval2, slotval3)
+  virtualReturn
+
+method mediaObject*(self: VirtualQCameraViewfinder, ): gen_qmediaobject_types.QMediaObject {.base.} =
+  QCameraViewfindermediaObject(self[])
+proc miqt_exec_method_cQCameraViewfinder_mediaObject(vtbl: pointer, inst: pointer): pointer {.cdecl.} =
+  let vtbl = cast[VirtualQCameraViewfinder](cast[uint](vtbl) - uint(offsetOf(VirtualQCameraViewfinder, vtbl)))
+  var virtualReturn = vtbl.mediaObject()
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
+
+method setMediaObject*(self: VirtualQCameraViewfinder, objectVal: gen_qmediaobject_types.QMediaObject): bool {.base.} =
+  QCameraViewfindersetMediaObject(self[], objectVal)
+proc miqt_exec_method_cQCameraViewfinder_setMediaObject(vtbl: pointer, inst: pointer, objectVal: pointer): bool {.cdecl.} =
+  let vtbl = cast[VirtualQCameraViewfinder](cast[uint](vtbl) - uint(offsetOf(VirtualQCameraViewfinder, vtbl)))
+  let slotval1 = gen_qmediaobject_types.QMediaObject(h: objectVal, owned: false)
+  var virtualReturn = vtbl.setMediaObject(slotval1)
+  virtualReturn
+
+method sizeHint*(self: VirtualQCameraViewfinder, ): gen_qsize_types.QSize {.base.} =
+  QCameraViewfindersizeHint(self[])
+proc miqt_exec_method_cQCameraViewfinder_sizeHint(vtbl: pointer, inst: pointer): pointer {.cdecl.} =
+  let vtbl = cast[VirtualQCameraViewfinder](cast[uint](vtbl) - uint(offsetOf(VirtualQCameraViewfinder, vtbl)))
+  var virtualReturn = vtbl.sizeHint()
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
+
+method event*(self: VirtualQCameraViewfinder, event: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QCameraViewfinderevent(self[], event)
+proc miqt_exec_method_cQCameraViewfinder_event(vtbl: pointer, inst: pointer, event: pointer): bool {.cdecl.} =
+  let vtbl = cast[VirtualQCameraViewfinder](cast[uint](vtbl) - uint(offsetOf(VirtualQCameraViewfinder, vtbl)))
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
+  var virtualReturn = vtbl.event(slotval1)
+  virtualReturn
+
+method showEvent*(self: VirtualQCameraViewfinder, event: gen_qevent_types.QShowEvent): void {.base.} =
+  QCameraViewfindershowEvent(self[], event)
+proc miqt_exec_method_cQCameraViewfinder_showEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQCameraViewfinder](cast[uint](vtbl) - uint(offsetOf(VirtualQCameraViewfinder, vtbl)))
+  let slotval1 = gen_qevent_types.QShowEvent(h: event, owned: false)
+  vtbl.showEvent(slotval1)
+
+method hideEvent*(self: VirtualQCameraViewfinder, event: gen_qevent_types.QHideEvent): void {.base.} =
+  QCameraViewfinderhideEvent(self[], event)
+proc miqt_exec_method_cQCameraViewfinder_hideEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQCameraViewfinder](cast[uint](vtbl) - uint(offsetOf(VirtualQCameraViewfinder, vtbl)))
+  let slotval1 = gen_qevent_types.QHideEvent(h: event, owned: false)
+  vtbl.hideEvent(slotval1)
+
+method resizeEvent*(self: VirtualQCameraViewfinder, event: gen_qevent_types.QResizeEvent): void {.base.} =
+  QCameraViewfinderresizeEvent(self[], event)
+proc miqt_exec_method_cQCameraViewfinder_resizeEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQCameraViewfinder](cast[uint](vtbl) - uint(offsetOf(VirtualQCameraViewfinder, vtbl)))
+  let slotval1 = gen_qevent_types.QResizeEvent(h: event, owned: false)
+  vtbl.resizeEvent(slotval1)
+
+method moveEvent*(self: VirtualQCameraViewfinder, event: gen_qevent_types.QMoveEvent): void {.base.} =
+  QCameraViewfindermoveEvent(self[], event)
+proc miqt_exec_method_cQCameraViewfinder_moveEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQCameraViewfinder](cast[uint](vtbl) - uint(offsetOf(VirtualQCameraViewfinder, vtbl)))
+  let slotval1 = gen_qevent_types.QMoveEvent(h: event, owned: false)
+  vtbl.moveEvent(slotval1)
+
+method paintEvent*(self: VirtualQCameraViewfinder, event: gen_qevent_types.QPaintEvent): void {.base.} =
+  QCameraViewfinderpaintEvent(self[], event)
+proc miqt_exec_method_cQCameraViewfinder_paintEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQCameraViewfinder](cast[uint](vtbl) - uint(offsetOf(VirtualQCameraViewfinder, vtbl)))
+  let slotval1 = gen_qevent_types.QPaintEvent(h: event, owned: false)
+  vtbl.paintEvent(slotval1)
+
+method devType*(self: VirtualQCameraViewfinder, ): cint {.base.} =
+  QCameraViewfinderdevType(self[])
+proc miqt_exec_method_cQCameraViewfinder_devType(vtbl: pointer, inst: pointer): cint {.cdecl.} =
+  let vtbl = cast[VirtualQCameraViewfinder](cast[uint](vtbl) - uint(offsetOf(VirtualQCameraViewfinder, vtbl)))
+  var virtualReturn = vtbl.devType()
+  virtualReturn
+
+method setVisible*(self: VirtualQCameraViewfinder, visible: bool): void {.base.} =
+  QCameraViewfindersetVisible(self[], visible)
+proc miqt_exec_method_cQCameraViewfinder_setVisible(vtbl: pointer, inst: pointer, visible: bool): void {.cdecl.} =
+  let vtbl = cast[VirtualQCameraViewfinder](cast[uint](vtbl) - uint(offsetOf(VirtualQCameraViewfinder, vtbl)))
+  let slotval1 = visible
+  vtbl.setVisible(slotval1)
+
+method minimumSizeHint*(self: VirtualQCameraViewfinder, ): gen_qsize_types.QSize {.base.} =
+  QCameraViewfinderminimumSizeHint(self[])
+proc miqt_exec_method_cQCameraViewfinder_minimumSizeHint(vtbl: pointer, inst: pointer): pointer {.cdecl.} =
+  let vtbl = cast[VirtualQCameraViewfinder](cast[uint](vtbl) - uint(offsetOf(VirtualQCameraViewfinder, vtbl)))
+  var virtualReturn = vtbl.minimumSizeHint()
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
+
+method heightForWidth*(self: VirtualQCameraViewfinder, param1: cint): cint {.base.} =
+  QCameraViewfinderheightForWidth(self[], param1)
+proc miqt_exec_method_cQCameraViewfinder_heightForWidth(vtbl: pointer, inst: pointer, param1: cint): cint {.cdecl.} =
+  let vtbl = cast[VirtualQCameraViewfinder](cast[uint](vtbl) - uint(offsetOf(VirtualQCameraViewfinder, vtbl)))
+  let slotval1 = param1
+  var virtualReturn = vtbl.heightForWidth(slotval1)
+  virtualReturn
+
+method hasHeightForWidth*(self: VirtualQCameraViewfinder, ): bool {.base.} =
+  QCameraViewfinderhasHeightForWidth(self[])
+proc miqt_exec_method_cQCameraViewfinder_hasHeightForWidth(vtbl: pointer, inst: pointer): bool {.cdecl.} =
+  let vtbl = cast[VirtualQCameraViewfinder](cast[uint](vtbl) - uint(offsetOf(VirtualQCameraViewfinder, vtbl)))
+  var virtualReturn = vtbl.hasHeightForWidth()
+  virtualReturn
+
+method paintEngine*(self: VirtualQCameraViewfinder, ): gen_qpaintengine_types.QPaintEngine {.base.} =
+  QCameraViewfinderpaintEngine(self[])
+proc miqt_exec_method_cQCameraViewfinder_paintEngine(vtbl: pointer, inst: pointer): pointer {.cdecl.} =
+  let vtbl = cast[VirtualQCameraViewfinder](cast[uint](vtbl) - uint(offsetOf(VirtualQCameraViewfinder, vtbl)))
+  var virtualReturn = vtbl.paintEngine()
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
+
+method mousePressEvent*(self: VirtualQCameraViewfinder, event: gen_qevent_types.QMouseEvent): void {.base.} =
+  QCameraViewfindermousePressEvent(self[], event)
+proc miqt_exec_method_cQCameraViewfinder_mousePressEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQCameraViewfinder](cast[uint](vtbl) - uint(offsetOf(VirtualQCameraViewfinder, vtbl)))
+  let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
+  vtbl.mousePressEvent(slotval1)
+
+method mouseReleaseEvent*(self: VirtualQCameraViewfinder, event: gen_qevent_types.QMouseEvent): void {.base.} =
+  QCameraViewfindermouseReleaseEvent(self[], event)
+proc miqt_exec_method_cQCameraViewfinder_mouseReleaseEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQCameraViewfinder](cast[uint](vtbl) - uint(offsetOf(VirtualQCameraViewfinder, vtbl)))
+  let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
+  vtbl.mouseReleaseEvent(slotval1)
+
+method mouseDoubleClickEvent*(self: VirtualQCameraViewfinder, event: gen_qevent_types.QMouseEvent): void {.base.} =
+  QCameraViewfindermouseDoubleClickEvent(self[], event)
+proc miqt_exec_method_cQCameraViewfinder_mouseDoubleClickEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQCameraViewfinder](cast[uint](vtbl) - uint(offsetOf(VirtualQCameraViewfinder, vtbl)))
+  let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
+  vtbl.mouseDoubleClickEvent(slotval1)
+
+method mouseMoveEvent*(self: VirtualQCameraViewfinder, event: gen_qevent_types.QMouseEvent): void {.base.} =
+  QCameraViewfindermouseMoveEvent(self[], event)
+proc miqt_exec_method_cQCameraViewfinder_mouseMoveEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQCameraViewfinder](cast[uint](vtbl) - uint(offsetOf(VirtualQCameraViewfinder, vtbl)))
+  let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
+  vtbl.mouseMoveEvent(slotval1)
+
+method wheelEvent*(self: VirtualQCameraViewfinder, event: gen_qevent_types.QWheelEvent): void {.base.} =
+  QCameraViewfinderwheelEvent(self[], event)
+proc miqt_exec_method_cQCameraViewfinder_wheelEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQCameraViewfinder](cast[uint](vtbl) - uint(offsetOf(VirtualQCameraViewfinder, vtbl)))
+  let slotval1 = gen_qevent_types.QWheelEvent(h: event, owned: false)
+  vtbl.wheelEvent(slotval1)
+
+method keyPressEvent*(self: VirtualQCameraViewfinder, event: gen_qevent_types.QKeyEvent): void {.base.} =
+  QCameraViewfinderkeyPressEvent(self[], event)
+proc miqt_exec_method_cQCameraViewfinder_keyPressEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQCameraViewfinder](cast[uint](vtbl) - uint(offsetOf(VirtualQCameraViewfinder, vtbl)))
+  let slotval1 = gen_qevent_types.QKeyEvent(h: event, owned: false)
+  vtbl.keyPressEvent(slotval1)
+
+method keyReleaseEvent*(self: VirtualQCameraViewfinder, event: gen_qevent_types.QKeyEvent): void {.base.} =
+  QCameraViewfinderkeyReleaseEvent(self[], event)
+proc miqt_exec_method_cQCameraViewfinder_keyReleaseEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQCameraViewfinder](cast[uint](vtbl) - uint(offsetOf(VirtualQCameraViewfinder, vtbl)))
+  let slotval1 = gen_qevent_types.QKeyEvent(h: event, owned: false)
+  vtbl.keyReleaseEvent(slotval1)
+
+method focusInEvent*(self: VirtualQCameraViewfinder, event: gen_qevent_types.QFocusEvent): void {.base.} =
+  QCameraViewfinderfocusInEvent(self[], event)
+proc miqt_exec_method_cQCameraViewfinder_focusInEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQCameraViewfinder](cast[uint](vtbl) - uint(offsetOf(VirtualQCameraViewfinder, vtbl)))
+  let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
+  vtbl.focusInEvent(slotval1)
+
+method focusOutEvent*(self: VirtualQCameraViewfinder, event: gen_qevent_types.QFocusEvent): void {.base.} =
+  QCameraViewfinderfocusOutEvent(self[], event)
+proc miqt_exec_method_cQCameraViewfinder_focusOutEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQCameraViewfinder](cast[uint](vtbl) - uint(offsetOf(VirtualQCameraViewfinder, vtbl)))
+  let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
+  vtbl.focusOutEvent(slotval1)
+
+method enterEvent*(self: VirtualQCameraViewfinder, event: gen_qcoreevent_types.QEvent): void {.base.} =
+  QCameraViewfinderenterEvent(self[], event)
+proc miqt_exec_method_cQCameraViewfinder_enterEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQCameraViewfinder](cast[uint](vtbl) - uint(offsetOf(VirtualQCameraViewfinder, vtbl)))
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
+  vtbl.enterEvent(slotval1)
+
+method leaveEvent*(self: VirtualQCameraViewfinder, event: gen_qcoreevent_types.QEvent): void {.base.} =
+  QCameraViewfinderleaveEvent(self[], event)
+proc miqt_exec_method_cQCameraViewfinder_leaveEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQCameraViewfinder](cast[uint](vtbl) - uint(offsetOf(VirtualQCameraViewfinder, vtbl)))
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
+  vtbl.leaveEvent(slotval1)
+
+method closeEvent*(self: VirtualQCameraViewfinder, event: gen_qevent_types.QCloseEvent): void {.base.} =
+  QCameraViewfindercloseEvent(self[], event)
+proc miqt_exec_method_cQCameraViewfinder_closeEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQCameraViewfinder](cast[uint](vtbl) - uint(offsetOf(VirtualQCameraViewfinder, vtbl)))
+  let slotval1 = gen_qevent_types.QCloseEvent(h: event, owned: false)
+  vtbl.closeEvent(slotval1)
+
+method contextMenuEvent*(self: VirtualQCameraViewfinder, event: gen_qevent_types.QContextMenuEvent): void {.base.} =
+  QCameraViewfindercontextMenuEvent(self[], event)
+proc miqt_exec_method_cQCameraViewfinder_contextMenuEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQCameraViewfinder](cast[uint](vtbl) - uint(offsetOf(VirtualQCameraViewfinder, vtbl)))
+  let slotval1 = gen_qevent_types.QContextMenuEvent(h: event, owned: false)
+  vtbl.contextMenuEvent(slotval1)
+
+method tabletEvent*(self: VirtualQCameraViewfinder, event: gen_qevent_types.QTabletEvent): void {.base.} =
+  QCameraViewfindertabletEvent(self[], event)
+proc miqt_exec_method_cQCameraViewfinder_tabletEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQCameraViewfinder](cast[uint](vtbl) - uint(offsetOf(VirtualQCameraViewfinder, vtbl)))
+  let slotval1 = gen_qevent_types.QTabletEvent(h: event, owned: false)
+  vtbl.tabletEvent(slotval1)
+
+method actionEvent*(self: VirtualQCameraViewfinder, event: gen_qevent_types.QActionEvent): void {.base.} =
+  QCameraViewfinderactionEvent(self[], event)
+proc miqt_exec_method_cQCameraViewfinder_actionEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQCameraViewfinder](cast[uint](vtbl) - uint(offsetOf(VirtualQCameraViewfinder, vtbl)))
+  let slotval1 = gen_qevent_types.QActionEvent(h: event, owned: false)
+  vtbl.actionEvent(slotval1)
+
+method dragEnterEvent*(self: VirtualQCameraViewfinder, event: gen_qevent_types.QDragEnterEvent): void {.base.} =
+  QCameraViewfinderdragEnterEvent(self[], event)
+proc miqt_exec_method_cQCameraViewfinder_dragEnterEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQCameraViewfinder](cast[uint](vtbl) - uint(offsetOf(VirtualQCameraViewfinder, vtbl)))
+  let slotval1 = gen_qevent_types.QDragEnterEvent(h: event, owned: false)
+  vtbl.dragEnterEvent(slotval1)
+
+method dragMoveEvent*(self: VirtualQCameraViewfinder, event: gen_qevent_types.QDragMoveEvent): void {.base.} =
+  QCameraViewfinderdragMoveEvent(self[], event)
+proc miqt_exec_method_cQCameraViewfinder_dragMoveEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQCameraViewfinder](cast[uint](vtbl) - uint(offsetOf(VirtualQCameraViewfinder, vtbl)))
+  let slotval1 = gen_qevent_types.QDragMoveEvent(h: event, owned: false)
+  vtbl.dragMoveEvent(slotval1)
+
+method dragLeaveEvent*(self: VirtualQCameraViewfinder, event: gen_qevent_types.QDragLeaveEvent): void {.base.} =
+  QCameraViewfinderdragLeaveEvent(self[], event)
+proc miqt_exec_method_cQCameraViewfinder_dragLeaveEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQCameraViewfinder](cast[uint](vtbl) - uint(offsetOf(VirtualQCameraViewfinder, vtbl)))
+  let slotval1 = gen_qevent_types.QDragLeaveEvent(h: event, owned: false)
+  vtbl.dragLeaveEvent(slotval1)
+
+method dropEvent*(self: VirtualQCameraViewfinder, event: gen_qevent_types.QDropEvent): void {.base.} =
+  QCameraViewfinderdropEvent(self[], event)
+proc miqt_exec_method_cQCameraViewfinder_dropEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQCameraViewfinder](cast[uint](vtbl) - uint(offsetOf(VirtualQCameraViewfinder, vtbl)))
+  let slotval1 = gen_qevent_types.QDropEvent(h: event, owned: false)
+  vtbl.dropEvent(slotval1)
+
+method nativeEvent*(self: VirtualQCameraViewfinder, eventType: seq[byte], message: pointer, resultVal: ptr clong): bool {.base.} =
+  QCameraViewfindernativeEvent(self[], eventType, message, resultVal)
+proc miqt_exec_method_cQCameraViewfinder_nativeEvent(vtbl: pointer, inst: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr clong): bool {.cdecl.} =
+  let vtbl = cast[VirtualQCameraViewfinder](cast[uint](vtbl) - uint(offsetOf(VirtualQCameraViewfinder, vtbl)))
+  var veventType_bytearray = eventType
+  var veventTypex_ret = @(toOpenArrayByte(veventType_bytearray.data, 0, int(veventType_bytearray.len)-1))
+  c_free(veventType_bytearray.data)
+  let slotval1 = veventTypex_ret
+  let slotval2 = message
+  let slotval3 = resultVal
+  var virtualReturn = vtbl.nativeEvent(slotval1, slotval2, slotval3)
+  virtualReturn
+
+method changeEvent*(self: VirtualQCameraViewfinder, param1: gen_qcoreevent_types.QEvent): void {.base.} =
+  QCameraViewfinderchangeEvent(self[], param1)
+proc miqt_exec_method_cQCameraViewfinder_changeEvent(vtbl: pointer, inst: pointer, param1: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQCameraViewfinder](cast[uint](vtbl) - uint(offsetOf(VirtualQCameraViewfinder, vtbl)))
+  let slotval1 = gen_qcoreevent_types.QEvent(h: param1, owned: false)
+  vtbl.changeEvent(slotval1)
+
+method metric*(self: VirtualQCameraViewfinder, param1: cint): cint {.base.} =
+  QCameraViewfindermetric(self[], param1)
+proc miqt_exec_method_cQCameraViewfinder_metric(vtbl: pointer, inst: pointer, param1: cint): cint {.cdecl.} =
+  let vtbl = cast[VirtualQCameraViewfinder](cast[uint](vtbl) - uint(offsetOf(VirtualQCameraViewfinder, vtbl)))
+  let slotval1 = cint(param1)
+  var virtualReturn = vtbl.metric(slotval1)
+  virtualReturn
+
+method initPainter*(self: VirtualQCameraViewfinder, painter: gen_qpainter_types.QPainter): void {.base.} =
+  QCameraViewfinderinitPainter(self[], painter)
+proc miqt_exec_method_cQCameraViewfinder_initPainter(vtbl: pointer, inst: pointer, painter: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQCameraViewfinder](cast[uint](vtbl) - uint(offsetOf(VirtualQCameraViewfinder, vtbl)))
+  let slotval1 = gen_qpainter_types.QPainter(h: painter, owned: false)
+  vtbl.initPainter(slotval1)
+
+method redirected*(self: VirtualQCameraViewfinder, offset: gen_qpoint_types.QPoint): gen_qpaintdevice_types.QPaintDevice {.base.} =
+  QCameraViewfinderredirected(self[], offset)
+proc miqt_exec_method_cQCameraViewfinder_redirected(vtbl: pointer, inst: pointer, offset: pointer): pointer {.cdecl.} =
+  let vtbl = cast[VirtualQCameraViewfinder](cast[uint](vtbl) - uint(offsetOf(VirtualQCameraViewfinder, vtbl)))
+  let slotval1 = gen_qpoint_types.QPoint(h: offset, owned: false)
+  var virtualReturn = vtbl.redirected(slotval1)
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
+
+method sharedPainter*(self: VirtualQCameraViewfinder, ): gen_qpainter_types.QPainter {.base.} =
+  QCameraViewfindersharedPainter(self[])
+proc miqt_exec_method_cQCameraViewfinder_sharedPainter(vtbl: pointer, inst: pointer): pointer {.cdecl.} =
+  let vtbl = cast[VirtualQCameraViewfinder](cast[uint](vtbl) - uint(offsetOf(VirtualQCameraViewfinder, vtbl)))
+  var virtualReturn = vtbl.sharedPainter()
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
+
+method inputMethodEvent*(self: VirtualQCameraViewfinder, param1: gen_qevent_types.QInputMethodEvent): void {.base.} =
+  QCameraViewfinderinputMethodEvent(self[], param1)
+proc miqt_exec_method_cQCameraViewfinder_inputMethodEvent(vtbl: pointer, inst: pointer, param1: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQCameraViewfinder](cast[uint](vtbl) - uint(offsetOf(VirtualQCameraViewfinder, vtbl)))
+  let slotval1 = gen_qevent_types.QInputMethodEvent(h: param1, owned: false)
+  vtbl.inputMethodEvent(slotval1)
+
+method inputMethodQuery*(self: VirtualQCameraViewfinder, param1: cint): gen_qvariant_types.QVariant {.base.} =
+  QCameraViewfinderinputMethodQuery(self[], param1)
+proc miqt_exec_method_cQCameraViewfinder_inputMethodQuery(vtbl: pointer, inst: pointer, param1: cint): pointer {.cdecl.} =
+  let vtbl = cast[VirtualQCameraViewfinder](cast[uint](vtbl) - uint(offsetOf(VirtualQCameraViewfinder, vtbl)))
+  let slotval1 = cint(param1)
+  var virtualReturn = vtbl.inputMethodQuery(slotval1)
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
+
+method focusNextPrevChild*(self: VirtualQCameraViewfinder, next: bool): bool {.base.} =
+  QCameraViewfinderfocusNextPrevChild(self[], next)
+proc miqt_exec_method_cQCameraViewfinder_focusNextPrevChild(vtbl: pointer, inst: pointer, next: bool): bool {.cdecl.} =
+  let vtbl = cast[VirtualQCameraViewfinder](cast[uint](vtbl) - uint(offsetOf(VirtualQCameraViewfinder, vtbl)))
+  let slotval1 = next
+  var virtualReturn = vtbl.focusNextPrevChild(slotval1)
+  virtualReturn
+
+method eventFilter*(self: VirtualQCameraViewfinder, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QCameraViewfindereventFilter(self[], watched, event)
+proc miqt_exec_method_cQCameraViewfinder_eventFilter(vtbl: pointer, inst: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
+  let vtbl = cast[VirtualQCameraViewfinder](cast[uint](vtbl) - uint(offsetOf(VirtualQCameraViewfinder, vtbl)))
+  let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
+  var virtualReturn = vtbl.eventFilter(slotval1, slotval2)
+  virtualReturn
+
+method timerEvent*(self: VirtualQCameraViewfinder, event: gen_qcoreevent_types.QTimerEvent): void {.base.} =
+  QCameraViewfindertimerEvent(self[], event)
+proc miqt_exec_method_cQCameraViewfinder_timerEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQCameraViewfinder](cast[uint](vtbl) - uint(offsetOf(VirtualQCameraViewfinder, vtbl)))
+  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
+  vtbl.timerEvent(slotval1)
+
+method childEvent*(self: VirtualQCameraViewfinder, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
+  QCameraViewfinderchildEvent(self[], event)
+proc miqt_exec_method_cQCameraViewfinder_childEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQCameraViewfinder](cast[uint](vtbl) - uint(offsetOf(VirtualQCameraViewfinder, vtbl)))
+  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
+  vtbl.childEvent(slotval1)
+
+method customEvent*(self: VirtualQCameraViewfinder, event: gen_qcoreevent_types.QEvent): void {.base.} =
+  QCameraViewfindercustomEvent(self[], event)
+proc miqt_exec_method_cQCameraViewfinder_customEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQCameraViewfinder](cast[uint](vtbl) - uint(offsetOf(VirtualQCameraViewfinder, vtbl)))
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
+  vtbl.customEvent(slotval1)
+
+method connectNotify*(self: VirtualQCameraViewfinder, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QCameraViewfinderconnectNotify(self[], signal)
+proc miqt_exec_method_cQCameraViewfinder_connectNotify(vtbl: pointer, inst: pointer, signal: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQCameraViewfinder](cast[uint](vtbl) - uint(offsetOf(VirtualQCameraViewfinder, vtbl)))
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
+  vtbl.connectNotify(slotval1)
+
+method disconnectNotify*(self: VirtualQCameraViewfinder, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QCameraViewfinderdisconnectNotify(self[], signal)
+proc miqt_exec_method_cQCameraViewfinder_disconnectNotify(vtbl: pointer, inst: pointer, signal: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQCameraViewfinder](cast[uint](vtbl) - uint(offsetOf(VirtualQCameraViewfinder, vtbl)))
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
+  vtbl.disconnectNotify(slotval1)
 
 proc updateMicroFocus*(self: gen_qcameraviewfinder_types.QCameraViewfinder, ): void =
   fcQCameraViewfinder_protectedbase_updateMicroFocus(self.h)
@@ -857,7 +1289,7 @@ proc focusPreviousChild*(self: gen_qcameraviewfinder_types.QCameraViewfinder, ):
   fcQCameraViewfinder_protectedbase_focusPreviousChild(self.h)
 
 proc sender*(self: gen_qcameraviewfinder_types.QCameraViewfinder, ): gen_qobject_types.QObject =
-  gen_qobject_types.QObject(h: fcQCameraViewfinder_protectedbase_sender(self.h))
+  gen_qobject_types.QObject(h: fcQCameraViewfinder_protectedbase_sender(self.h), owned: false)
 
 proc senderSignalIndex*(self: gen_qcameraviewfinder_types.QCameraViewfinder, ): cint =
   fcQCameraViewfinder_protectedbase_senderSignalIndex(self.h)
@@ -873,229 +1305,354 @@ proc create*(T: type gen_qcameraviewfinder_types.QCameraViewfinder,
     vtbl: ref QCameraViewfinderVTable = nil): gen_qcameraviewfinder_types.QCameraViewfinder =
   let vtbl = if vtbl == nil: new QCameraViewfinderVTable else: vtbl
   GC_ref(vtbl)
-  vtbl.vtbl.destructor = proc(vtbl: ptr cQCameraViewfinderVTable, _: ptr cQCameraViewfinder) {.cdecl.} =
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQCameraViewfinderVTable, _: ptr cQCameraViewfinder) {.cdecl.} =
     let vtbl = cast[ref QCameraViewfinderVTable](vtbl)
     GC_unref(vtbl)
-  if not isNil(vtbl.metaObject):
+  if not isNil(vtbl[].metaObject):
     vtbl[].vtbl.metaObject = miqt_exec_callback_cQCameraViewfinder_metaObject
-  if not isNil(vtbl.metacast):
+  if not isNil(vtbl[].metacast):
     vtbl[].vtbl.metacast = miqt_exec_callback_cQCameraViewfinder_metacast
-  if not isNil(vtbl.metacall):
+  if not isNil(vtbl[].metacall):
     vtbl[].vtbl.metacall = miqt_exec_callback_cQCameraViewfinder_metacall
-  if not isNil(vtbl.mediaObject):
+  if not isNil(vtbl[].mediaObject):
     vtbl[].vtbl.mediaObject = miqt_exec_callback_cQCameraViewfinder_mediaObject
-  if not isNil(vtbl.setMediaObject):
+  if not isNil(vtbl[].setMediaObject):
     vtbl[].vtbl.setMediaObject = miqt_exec_callback_cQCameraViewfinder_setMediaObject
-  if not isNil(vtbl.sizeHint):
+  if not isNil(vtbl[].sizeHint):
     vtbl[].vtbl.sizeHint = miqt_exec_callback_cQCameraViewfinder_sizeHint
-  if not isNil(vtbl.event):
+  if not isNil(vtbl[].event):
     vtbl[].vtbl.event = miqt_exec_callback_cQCameraViewfinder_event
-  if not isNil(vtbl.showEvent):
+  if not isNil(vtbl[].showEvent):
     vtbl[].vtbl.showEvent = miqt_exec_callback_cQCameraViewfinder_showEvent
-  if not isNil(vtbl.hideEvent):
+  if not isNil(vtbl[].hideEvent):
     vtbl[].vtbl.hideEvent = miqt_exec_callback_cQCameraViewfinder_hideEvent
-  if not isNil(vtbl.resizeEvent):
+  if not isNil(vtbl[].resizeEvent):
     vtbl[].vtbl.resizeEvent = miqt_exec_callback_cQCameraViewfinder_resizeEvent
-  if not isNil(vtbl.moveEvent):
+  if not isNil(vtbl[].moveEvent):
     vtbl[].vtbl.moveEvent = miqt_exec_callback_cQCameraViewfinder_moveEvent
-  if not isNil(vtbl.paintEvent):
+  if not isNil(vtbl[].paintEvent):
     vtbl[].vtbl.paintEvent = miqt_exec_callback_cQCameraViewfinder_paintEvent
-  if not isNil(vtbl.devType):
+  if not isNil(vtbl[].devType):
     vtbl[].vtbl.devType = miqt_exec_callback_cQCameraViewfinder_devType
-  if not isNil(vtbl.setVisible):
+  if not isNil(vtbl[].setVisible):
     vtbl[].vtbl.setVisible = miqt_exec_callback_cQCameraViewfinder_setVisible
-  if not isNil(vtbl.minimumSizeHint):
+  if not isNil(vtbl[].minimumSizeHint):
     vtbl[].vtbl.minimumSizeHint = miqt_exec_callback_cQCameraViewfinder_minimumSizeHint
-  if not isNil(vtbl.heightForWidth):
+  if not isNil(vtbl[].heightForWidth):
     vtbl[].vtbl.heightForWidth = miqt_exec_callback_cQCameraViewfinder_heightForWidth
-  if not isNil(vtbl.hasHeightForWidth):
+  if not isNil(vtbl[].hasHeightForWidth):
     vtbl[].vtbl.hasHeightForWidth = miqt_exec_callback_cQCameraViewfinder_hasHeightForWidth
-  if not isNil(vtbl.paintEngine):
+  if not isNil(vtbl[].paintEngine):
     vtbl[].vtbl.paintEngine = miqt_exec_callback_cQCameraViewfinder_paintEngine
-  if not isNil(vtbl.mousePressEvent):
+  if not isNil(vtbl[].mousePressEvent):
     vtbl[].vtbl.mousePressEvent = miqt_exec_callback_cQCameraViewfinder_mousePressEvent
-  if not isNil(vtbl.mouseReleaseEvent):
+  if not isNil(vtbl[].mouseReleaseEvent):
     vtbl[].vtbl.mouseReleaseEvent = miqt_exec_callback_cQCameraViewfinder_mouseReleaseEvent
-  if not isNil(vtbl.mouseDoubleClickEvent):
+  if not isNil(vtbl[].mouseDoubleClickEvent):
     vtbl[].vtbl.mouseDoubleClickEvent = miqt_exec_callback_cQCameraViewfinder_mouseDoubleClickEvent
-  if not isNil(vtbl.mouseMoveEvent):
+  if not isNil(vtbl[].mouseMoveEvent):
     vtbl[].vtbl.mouseMoveEvent = miqt_exec_callback_cQCameraViewfinder_mouseMoveEvent
-  if not isNil(vtbl.wheelEvent):
+  if not isNil(vtbl[].wheelEvent):
     vtbl[].vtbl.wheelEvent = miqt_exec_callback_cQCameraViewfinder_wheelEvent
-  if not isNil(vtbl.keyPressEvent):
+  if not isNil(vtbl[].keyPressEvent):
     vtbl[].vtbl.keyPressEvent = miqt_exec_callback_cQCameraViewfinder_keyPressEvent
-  if not isNil(vtbl.keyReleaseEvent):
+  if not isNil(vtbl[].keyReleaseEvent):
     vtbl[].vtbl.keyReleaseEvent = miqt_exec_callback_cQCameraViewfinder_keyReleaseEvent
-  if not isNil(vtbl.focusInEvent):
+  if not isNil(vtbl[].focusInEvent):
     vtbl[].vtbl.focusInEvent = miqt_exec_callback_cQCameraViewfinder_focusInEvent
-  if not isNil(vtbl.focusOutEvent):
+  if not isNil(vtbl[].focusOutEvent):
     vtbl[].vtbl.focusOutEvent = miqt_exec_callback_cQCameraViewfinder_focusOutEvent
-  if not isNil(vtbl.enterEvent):
+  if not isNil(vtbl[].enterEvent):
     vtbl[].vtbl.enterEvent = miqt_exec_callback_cQCameraViewfinder_enterEvent
-  if not isNil(vtbl.leaveEvent):
+  if not isNil(vtbl[].leaveEvent):
     vtbl[].vtbl.leaveEvent = miqt_exec_callback_cQCameraViewfinder_leaveEvent
-  if not isNil(vtbl.closeEvent):
+  if not isNil(vtbl[].closeEvent):
     vtbl[].vtbl.closeEvent = miqt_exec_callback_cQCameraViewfinder_closeEvent
-  if not isNil(vtbl.contextMenuEvent):
+  if not isNil(vtbl[].contextMenuEvent):
     vtbl[].vtbl.contextMenuEvent = miqt_exec_callback_cQCameraViewfinder_contextMenuEvent
-  if not isNil(vtbl.tabletEvent):
+  if not isNil(vtbl[].tabletEvent):
     vtbl[].vtbl.tabletEvent = miqt_exec_callback_cQCameraViewfinder_tabletEvent
-  if not isNil(vtbl.actionEvent):
+  if not isNil(vtbl[].actionEvent):
     vtbl[].vtbl.actionEvent = miqt_exec_callback_cQCameraViewfinder_actionEvent
-  if not isNil(vtbl.dragEnterEvent):
+  if not isNil(vtbl[].dragEnterEvent):
     vtbl[].vtbl.dragEnterEvent = miqt_exec_callback_cQCameraViewfinder_dragEnterEvent
-  if not isNil(vtbl.dragMoveEvent):
+  if not isNil(vtbl[].dragMoveEvent):
     vtbl[].vtbl.dragMoveEvent = miqt_exec_callback_cQCameraViewfinder_dragMoveEvent
-  if not isNil(vtbl.dragLeaveEvent):
+  if not isNil(vtbl[].dragLeaveEvent):
     vtbl[].vtbl.dragLeaveEvent = miqt_exec_callback_cQCameraViewfinder_dragLeaveEvent
-  if not isNil(vtbl.dropEvent):
+  if not isNil(vtbl[].dropEvent):
     vtbl[].vtbl.dropEvent = miqt_exec_callback_cQCameraViewfinder_dropEvent
-  if not isNil(vtbl.nativeEvent):
+  if not isNil(vtbl[].nativeEvent):
     vtbl[].vtbl.nativeEvent = miqt_exec_callback_cQCameraViewfinder_nativeEvent
-  if not isNil(vtbl.changeEvent):
+  if not isNil(vtbl[].changeEvent):
     vtbl[].vtbl.changeEvent = miqt_exec_callback_cQCameraViewfinder_changeEvent
-  if not isNil(vtbl.metric):
+  if not isNil(vtbl[].metric):
     vtbl[].vtbl.metric = miqt_exec_callback_cQCameraViewfinder_metric
-  if not isNil(vtbl.initPainter):
+  if not isNil(vtbl[].initPainter):
     vtbl[].vtbl.initPainter = miqt_exec_callback_cQCameraViewfinder_initPainter
-  if not isNil(vtbl.redirected):
+  if not isNil(vtbl[].redirected):
     vtbl[].vtbl.redirected = miqt_exec_callback_cQCameraViewfinder_redirected
-  if not isNil(vtbl.sharedPainter):
+  if not isNil(vtbl[].sharedPainter):
     vtbl[].vtbl.sharedPainter = miqt_exec_callback_cQCameraViewfinder_sharedPainter
-  if not isNil(vtbl.inputMethodEvent):
+  if not isNil(vtbl[].inputMethodEvent):
     vtbl[].vtbl.inputMethodEvent = miqt_exec_callback_cQCameraViewfinder_inputMethodEvent
-  if not isNil(vtbl.inputMethodQuery):
+  if not isNil(vtbl[].inputMethodQuery):
     vtbl[].vtbl.inputMethodQuery = miqt_exec_callback_cQCameraViewfinder_inputMethodQuery
-  if not isNil(vtbl.focusNextPrevChild):
+  if not isNil(vtbl[].focusNextPrevChild):
     vtbl[].vtbl.focusNextPrevChild = miqt_exec_callback_cQCameraViewfinder_focusNextPrevChild
-  if not isNil(vtbl.eventFilter):
+  if not isNil(vtbl[].eventFilter):
     vtbl[].vtbl.eventFilter = miqt_exec_callback_cQCameraViewfinder_eventFilter
-  if not isNil(vtbl.timerEvent):
+  if not isNil(vtbl[].timerEvent):
     vtbl[].vtbl.timerEvent = miqt_exec_callback_cQCameraViewfinder_timerEvent
-  if not isNil(vtbl.childEvent):
+  if not isNil(vtbl[].childEvent):
     vtbl[].vtbl.childEvent = miqt_exec_callback_cQCameraViewfinder_childEvent
-  if not isNil(vtbl.customEvent):
+  if not isNil(vtbl[].customEvent):
     vtbl[].vtbl.customEvent = miqt_exec_callback_cQCameraViewfinder_customEvent
-  if not isNil(vtbl.connectNotify):
+  if not isNil(vtbl[].connectNotify):
     vtbl[].vtbl.connectNotify = miqt_exec_callback_cQCameraViewfinder_connectNotify
-  if not isNil(vtbl.disconnectNotify):
+  if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQCameraViewfinder_disconnectNotify
-  gen_qcameraviewfinder_types.QCameraViewfinder(h: fcQCameraViewfinder_new(addr(vtbl[]), parent.h))
+  gen_qcameraviewfinder_types.QCameraViewfinder(h: fcQCameraViewfinder_new(addr(vtbl[].vtbl), parent.h), owned: true)
 
 proc create*(T: type gen_qcameraviewfinder_types.QCameraViewfinder,
     vtbl: ref QCameraViewfinderVTable = nil): gen_qcameraviewfinder_types.QCameraViewfinder =
   let vtbl = if vtbl == nil: new QCameraViewfinderVTable else: vtbl
   GC_ref(vtbl)
-  vtbl.vtbl.destructor = proc(vtbl: ptr cQCameraViewfinderVTable, _: ptr cQCameraViewfinder) {.cdecl.} =
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQCameraViewfinderVTable, _: ptr cQCameraViewfinder) {.cdecl.} =
     let vtbl = cast[ref QCameraViewfinderVTable](vtbl)
     GC_unref(vtbl)
-  if not isNil(vtbl.metaObject):
+  if not isNil(vtbl[].metaObject):
     vtbl[].vtbl.metaObject = miqt_exec_callback_cQCameraViewfinder_metaObject
-  if not isNil(vtbl.metacast):
+  if not isNil(vtbl[].metacast):
     vtbl[].vtbl.metacast = miqt_exec_callback_cQCameraViewfinder_metacast
-  if not isNil(vtbl.metacall):
+  if not isNil(vtbl[].metacall):
     vtbl[].vtbl.metacall = miqt_exec_callback_cQCameraViewfinder_metacall
-  if not isNil(vtbl.mediaObject):
+  if not isNil(vtbl[].mediaObject):
     vtbl[].vtbl.mediaObject = miqt_exec_callback_cQCameraViewfinder_mediaObject
-  if not isNil(vtbl.setMediaObject):
+  if not isNil(vtbl[].setMediaObject):
     vtbl[].vtbl.setMediaObject = miqt_exec_callback_cQCameraViewfinder_setMediaObject
-  if not isNil(vtbl.sizeHint):
+  if not isNil(vtbl[].sizeHint):
     vtbl[].vtbl.sizeHint = miqt_exec_callback_cQCameraViewfinder_sizeHint
-  if not isNil(vtbl.event):
+  if not isNil(vtbl[].event):
     vtbl[].vtbl.event = miqt_exec_callback_cQCameraViewfinder_event
-  if not isNil(vtbl.showEvent):
+  if not isNil(vtbl[].showEvent):
     vtbl[].vtbl.showEvent = miqt_exec_callback_cQCameraViewfinder_showEvent
-  if not isNil(vtbl.hideEvent):
+  if not isNil(vtbl[].hideEvent):
     vtbl[].vtbl.hideEvent = miqt_exec_callback_cQCameraViewfinder_hideEvent
-  if not isNil(vtbl.resizeEvent):
+  if not isNil(vtbl[].resizeEvent):
     vtbl[].vtbl.resizeEvent = miqt_exec_callback_cQCameraViewfinder_resizeEvent
-  if not isNil(vtbl.moveEvent):
+  if not isNil(vtbl[].moveEvent):
     vtbl[].vtbl.moveEvent = miqt_exec_callback_cQCameraViewfinder_moveEvent
-  if not isNil(vtbl.paintEvent):
+  if not isNil(vtbl[].paintEvent):
     vtbl[].vtbl.paintEvent = miqt_exec_callback_cQCameraViewfinder_paintEvent
-  if not isNil(vtbl.devType):
+  if not isNil(vtbl[].devType):
     vtbl[].vtbl.devType = miqt_exec_callback_cQCameraViewfinder_devType
-  if not isNil(vtbl.setVisible):
+  if not isNil(vtbl[].setVisible):
     vtbl[].vtbl.setVisible = miqt_exec_callback_cQCameraViewfinder_setVisible
-  if not isNil(vtbl.minimumSizeHint):
+  if not isNil(vtbl[].minimumSizeHint):
     vtbl[].vtbl.minimumSizeHint = miqt_exec_callback_cQCameraViewfinder_minimumSizeHint
-  if not isNil(vtbl.heightForWidth):
+  if not isNil(vtbl[].heightForWidth):
     vtbl[].vtbl.heightForWidth = miqt_exec_callback_cQCameraViewfinder_heightForWidth
-  if not isNil(vtbl.hasHeightForWidth):
+  if not isNil(vtbl[].hasHeightForWidth):
     vtbl[].vtbl.hasHeightForWidth = miqt_exec_callback_cQCameraViewfinder_hasHeightForWidth
-  if not isNil(vtbl.paintEngine):
+  if not isNil(vtbl[].paintEngine):
     vtbl[].vtbl.paintEngine = miqt_exec_callback_cQCameraViewfinder_paintEngine
-  if not isNil(vtbl.mousePressEvent):
+  if not isNil(vtbl[].mousePressEvent):
     vtbl[].vtbl.mousePressEvent = miqt_exec_callback_cQCameraViewfinder_mousePressEvent
-  if not isNil(vtbl.mouseReleaseEvent):
+  if not isNil(vtbl[].mouseReleaseEvent):
     vtbl[].vtbl.mouseReleaseEvent = miqt_exec_callback_cQCameraViewfinder_mouseReleaseEvent
-  if not isNil(vtbl.mouseDoubleClickEvent):
+  if not isNil(vtbl[].mouseDoubleClickEvent):
     vtbl[].vtbl.mouseDoubleClickEvent = miqt_exec_callback_cQCameraViewfinder_mouseDoubleClickEvent
-  if not isNil(vtbl.mouseMoveEvent):
+  if not isNil(vtbl[].mouseMoveEvent):
     vtbl[].vtbl.mouseMoveEvent = miqt_exec_callback_cQCameraViewfinder_mouseMoveEvent
-  if not isNil(vtbl.wheelEvent):
+  if not isNil(vtbl[].wheelEvent):
     vtbl[].vtbl.wheelEvent = miqt_exec_callback_cQCameraViewfinder_wheelEvent
-  if not isNil(vtbl.keyPressEvent):
+  if not isNil(vtbl[].keyPressEvent):
     vtbl[].vtbl.keyPressEvent = miqt_exec_callback_cQCameraViewfinder_keyPressEvent
-  if not isNil(vtbl.keyReleaseEvent):
+  if not isNil(vtbl[].keyReleaseEvent):
     vtbl[].vtbl.keyReleaseEvent = miqt_exec_callback_cQCameraViewfinder_keyReleaseEvent
-  if not isNil(vtbl.focusInEvent):
+  if not isNil(vtbl[].focusInEvent):
     vtbl[].vtbl.focusInEvent = miqt_exec_callback_cQCameraViewfinder_focusInEvent
-  if not isNil(vtbl.focusOutEvent):
+  if not isNil(vtbl[].focusOutEvent):
     vtbl[].vtbl.focusOutEvent = miqt_exec_callback_cQCameraViewfinder_focusOutEvent
-  if not isNil(vtbl.enterEvent):
+  if not isNil(vtbl[].enterEvent):
     vtbl[].vtbl.enterEvent = miqt_exec_callback_cQCameraViewfinder_enterEvent
-  if not isNil(vtbl.leaveEvent):
+  if not isNil(vtbl[].leaveEvent):
     vtbl[].vtbl.leaveEvent = miqt_exec_callback_cQCameraViewfinder_leaveEvent
-  if not isNil(vtbl.closeEvent):
+  if not isNil(vtbl[].closeEvent):
     vtbl[].vtbl.closeEvent = miqt_exec_callback_cQCameraViewfinder_closeEvent
-  if not isNil(vtbl.contextMenuEvent):
+  if not isNil(vtbl[].contextMenuEvent):
     vtbl[].vtbl.contextMenuEvent = miqt_exec_callback_cQCameraViewfinder_contextMenuEvent
-  if not isNil(vtbl.tabletEvent):
+  if not isNil(vtbl[].tabletEvent):
     vtbl[].vtbl.tabletEvent = miqt_exec_callback_cQCameraViewfinder_tabletEvent
-  if not isNil(vtbl.actionEvent):
+  if not isNil(vtbl[].actionEvent):
     vtbl[].vtbl.actionEvent = miqt_exec_callback_cQCameraViewfinder_actionEvent
-  if not isNil(vtbl.dragEnterEvent):
+  if not isNil(vtbl[].dragEnterEvent):
     vtbl[].vtbl.dragEnterEvent = miqt_exec_callback_cQCameraViewfinder_dragEnterEvent
-  if not isNil(vtbl.dragMoveEvent):
+  if not isNil(vtbl[].dragMoveEvent):
     vtbl[].vtbl.dragMoveEvent = miqt_exec_callback_cQCameraViewfinder_dragMoveEvent
-  if not isNil(vtbl.dragLeaveEvent):
+  if not isNil(vtbl[].dragLeaveEvent):
     vtbl[].vtbl.dragLeaveEvent = miqt_exec_callback_cQCameraViewfinder_dragLeaveEvent
-  if not isNil(vtbl.dropEvent):
+  if not isNil(vtbl[].dropEvent):
     vtbl[].vtbl.dropEvent = miqt_exec_callback_cQCameraViewfinder_dropEvent
-  if not isNil(vtbl.nativeEvent):
+  if not isNil(vtbl[].nativeEvent):
     vtbl[].vtbl.nativeEvent = miqt_exec_callback_cQCameraViewfinder_nativeEvent
-  if not isNil(vtbl.changeEvent):
+  if not isNil(vtbl[].changeEvent):
     vtbl[].vtbl.changeEvent = miqt_exec_callback_cQCameraViewfinder_changeEvent
-  if not isNil(vtbl.metric):
+  if not isNil(vtbl[].metric):
     vtbl[].vtbl.metric = miqt_exec_callback_cQCameraViewfinder_metric
-  if not isNil(vtbl.initPainter):
+  if not isNil(vtbl[].initPainter):
     vtbl[].vtbl.initPainter = miqt_exec_callback_cQCameraViewfinder_initPainter
-  if not isNil(vtbl.redirected):
+  if not isNil(vtbl[].redirected):
     vtbl[].vtbl.redirected = miqt_exec_callback_cQCameraViewfinder_redirected
-  if not isNil(vtbl.sharedPainter):
+  if not isNil(vtbl[].sharedPainter):
     vtbl[].vtbl.sharedPainter = miqt_exec_callback_cQCameraViewfinder_sharedPainter
-  if not isNil(vtbl.inputMethodEvent):
+  if not isNil(vtbl[].inputMethodEvent):
     vtbl[].vtbl.inputMethodEvent = miqt_exec_callback_cQCameraViewfinder_inputMethodEvent
-  if not isNil(vtbl.inputMethodQuery):
+  if not isNil(vtbl[].inputMethodQuery):
     vtbl[].vtbl.inputMethodQuery = miqt_exec_callback_cQCameraViewfinder_inputMethodQuery
-  if not isNil(vtbl.focusNextPrevChild):
+  if not isNil(vtbl[].focusNextPrevChild):
     vtbl[].vtbl.focusNextPrevChild = miqt_exec_callback_cQCameraViewfinder_focusNextPrevChild
-  if not isNil(vtbl.eventFilter):
+  if not isNil(vtbl[].eventFilter):
     vtbl[].vtbl.eventFilter = miqt_exec_callback_cQCameraViewfinder_eventFilter
-  if not isNil(vtbl.timerEvent):
+  if not isNil(vtbl[].timerEvent):
     vtbl[].vtbl.timerEvent = miqt_exec_callback_cQCameraViewfinder_timerEvent
-  if not isNil(vtbl.childEvent):
+  if not isNil(vtbl[].childEvent):
     vtbl[].vtbl.childEvent = miqt_exec_callback_cQCameraViewfinder_childEvent
-  if not isNil(vtbl.customEvent):
+  if not isNil(vtbl[].customEvent):
     vtbl[].vtbl.customEvent = miqt_exec_callback_cQCameraViewfinder_customEvent
-  if not isNil(vtbl.connectNotify):
+  if not isNil(vtbl[].connectNotify):
     vtbl[].vtbl.connectNotify = miqt_exec_callback_cQCameraViewfinder_connectNotify
-  if not isNil(vtbl.disconnectNotify):
+  if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQCameraViewfinder_disconnectNotify
-  gen_qcameraviewfinder_types.QCameraViewfinder(h: fcQCameraViewfinder_new2(addr(vtbl[]), ))
+  gen_qcameraviewfinder_types.QCameraViewfinder(h: fcQCameraViewfinder_new2(addr(vtbl[].vtbl), ), owned: true)
+
+proc create*(T: type gen_qcameraviewfinder_types.QCameraViewfinder,
+    parent: gen_qwidget_types.QWidget,
+    vtbl: VirtualQCameraViewfinder) =
+
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQCameraViewfinderVTable, _: ptr cQCameraViewfinder) {.cdecl.} =
+    let vtbl = cast[ptr typeof(VirtualQCameraViewfinder()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQCameraViewfinder, vtbl)))
+    vtbl[].h = nil
+    vtbl[].owned = false
+  vtbl[].vtbl.metaObject = miqt_exec_method_cQCameraViewfinder_metaObject
+  vtbl[].vtbl.metacast = miqt_exec_method_cQCameraViewfinder_metacast
+  vtbl[].vtbl.metacall = miqt_exec_method_cQCameraViewfinder_metacall
+  vtbl[].vtbl.mediaObject = miqt_exec_method_cQCameraViewfinder_mediaObject
+  vtbl[].vtbl.setMediaObject = miqt_exec_method_cQCameraViewfinder_setMediaObject
+  vtbl[].vtbl.sizeHint = miqt_exec_method_cQCameraViewfinder_sizeHint
+  vtbl[].vtbl.event = miqt_exec_method_cQCameraViewfinder_event
+  vtbl[].vtbl.showEvent = miqt_exec_method_cQCameraViewfinder_showEvent
+  vtbl[].vtbl.hideEvent = miqt_exec_method_cQCameraViewfinder_hideEvent
+  vtbl[].vtbl.resizeEvent = miqt_exec_method_cQCameraViewfinder_resizeEvent
+  vtbl[].vtbl.moveEvent = miqt_exec_method_cQCameraViewfinder_moveEvent
+  vtbl[].vtbl.paintEvent = miqt_exec_method_cQCameraViewfinder_paintEvent
+  vtbl[].vtbl.devType = miqt_exec_method_cQCameraViewfinder_devType
+  vtbl[].vtbl.setVisible = miqt_exec_method_cQCameraViewfinder_setVisible
+  vtbl[].vtbl.minimumSizeHint = miqt_exec_method_cQCameraViewfinder_minimumSizeHint
+  vtbl[].vtbl.heightForWidth = miqt_exec_method_cQCameraViewfinder_heightForWidth
+  vtbl[].vtbl.hasHeightForWidth = miqt_exec_method_cQCameraViewfinder_hasHeightForWidth
+  vtbl[].vtbl.paintEngine = miqt_exec_method_cQCameraViewfinder_paintEngine
+  vtbl[].vtbl.mousePressEvent = miqt_exec_method_cQCameraViewfinder_mousePressEvent
+  vtbl[].vtbl.mouseReleaseEvent = miqt_exec_method_cQCameraViewfinder_mouseReleaseEvent
+  vtbl[].vtbl.mouseDoubleClickEvent = miqt_exec_method_cQCameraViewfinder_mouseDoubleClickEvent
+  vtbl[].vtbl.mouseMoveEvent = miqt_exec_method_cQCameraViewfinder_mouseMoveEvent
+  vtbl[].vtbl.wheelEvent = miqt_exec_method_cQCameraViewfinder_wheelEvent
+  vtbl[].vtbl.keyPressEvent = miqt_exec_method_cQCameraViewfinder_keyPressEvent
+  vtbl[].vtbl.keyReleaseEvent = miqt_exec_method_cQCameraViewfinder_keyReleaseEvent
+  vtbl[].vtbl.focusInEvent = miqt_exec_method_cQCameraViewfinder_focusInEvent
+  vtbl[].vtbl.focusOutEvent = miqt_exec_method_cQCameraViewfinder_focusOutEvent
+  vtbl[].vtbl.enterEvent = miqt_exec_method_cQCameraViewfinder_enterEvent
+  vtbl[].vtbl.leaveEvent = miqt_exec_method_cQCameraViewfinder_leaveEvent
+  vtbl[].vtbl.closeEvent = miqt_exec_method_cQCameraViewfinder_closeEvent
+  vtbl[].vtbl.contextMenuEvent = miqt_exec_method_cQCameraViewfinder_contextMenuEvent
+  vtbl[].vtbl.tabletEvent = miqt_exec_method_cQCameraViewfinder_tabletEvent
+  vtbl[].vtbl.actionEvent = miqt_exec_method_cQCameraViewfinder_actionEvent
+  vtbl[].vtbl.dragEnterEvent = miqt_exec_method_cQCameraViewfinder_dragEnterEvent
+  vtbl[].vtbl.dragMoveEvent = miqt_exec_method_cQCameraViewfinder_dragMoveEvent
+  vtbl[].vtbl.dragLeaveEvent = miqt_exec_method_cQCameraViewfinder_dragLeaveEvent
+  vtbl[].vtbl.dropEvent = miqt_exec_method_cQCameraViewfinder_dropEvent
+  vtbl[].vtbl.nativeEvent = miqt_exec_method_cQCameraViewfinder_nativeEvent
+  vtbl[].vtbl.changeEvent = miqt_exec_method_cQCameraViewfinder_changeEvent
+  vtbl[].vtbl.metric = miqt_exec_method_cQCameraViewfinder_metric
+  vtbl[].vtbl.initPainter = miqt_exec_method_cQCameraViewfinder_initPainter
+  vtbl[].vtbl.redirected = miqt_exec_method_cQCameraViewfinder_redirected
+  vtbl[].vtbl.sharedPainter = miqt_exec_method_cQCameraViewfinder_sharedPainter
+  vtbl[].vtbl.inputMethodEvent = miqt_exec_method_cQCameraViewfinder_inputMethodEvent
+  vtbl[].vtbl.inputMethodQuery = miqt_exec_method_cQCameraViewfinder_inputMethodQuery
+  vtbl[].vtbl.focusNextPrevChild = miqt_exec_method_cQCameraViewfinder_focusNextPrevChild
+  vtbl[].vtbl.eventFilter = miqt_exec_method_cQCameraViewfinder_eventFilter
+  vtbl[].vtbl.timerEvent = miqt_exec_method_cQCameraViewfinder_timerEvent
+  vtbl[].vtbl.childEvent = miqt_exec_method_cQCameraViewfinder_childEvent
+  vtbl[].vtbl.customEvent = miqt_exec_method_cQCameraViewfinder_customEvent
+  vtbl[].vtbl.connectNotify = miqt_exec_method_cQCameraViewfinder_connectNotify
+  vtbl[].vtbl.disconnectNotify = miqt_exec_method_cQCameraViewfinder_disconnectNotify
+  if vtbl[].h != nil: delete(move(vtbl[]))
+  vtbl[].h = fcQCameraViewfinder_new(addr(vtbl[].vtbl), parent.h)
+  vtbl[].owned = true
+
+proc create*(T: type gen_qcameraviewfinder_types.QCameraViewfinder,
+    vtbl: VirtualQCameraViewfinder) =
+
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQCameraViewfinderVTable, _: ptr cQCameraViewfinder) {.cdecl.} =
+    let vtbl = cast[ptr typeof(VirtualQCameraViewfinder()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQCameraViewfinder, vtbl)))
+    vtbl[].h = nil
+    vtbl[].owned = false
+  vtbl[].vtbl.metaObject = miqt_exec_method_cQCameraViewfinder_metaObject
+  vtbl[].vtbl.metacast = miqt_exec_method_cQCameraViewfinder_metacast
+  vtbl[].vtbl.metacall = miqt_exec_method_cQCameraViewfinder_metacall
+  vtbl[].vtbl.mediaObject = miqt_exec_method_cQCameraViewfinder_mediaObject
+  vtbl[].vtbl.setMediaObject = miqt_exec_method_cQCameraViewfinder_setMediaObject
+  vtbl[].vtbl.sizeHint = miqt_exec_method_cQCameraViewfinder_sizeHint
+  vtbl[].vtbl.event = miqt_exec_method_cQCameraViewfinder_event
+  vtbl[].vtbl.showEvent = miqt_exec_method_cQCameraViewfinder_showEvent
+  vtbl[].vtbl.hideEvent = miqt_exec_method_cQCameraViewfinder_hideEvent
+  vtbl[].vtbl.resizeEvent = miqt_exec_method_cQCameraViewfinder_resizeEvent
+  vtbl[].vtbl.moveEvent = miqt_exec_method_cQCameraViewfinder_moveEvent
+  vtbl[].vtbl.paintEvent = miqt_exec_method_cQCameraViewfinder_paintEvent
+  vtbl[].vtbl.devType = miqt_exec_method_cQCameraViewfinder_devType
+  vtbl[].vtbl.setVisible = miqt_exec_method_cQCameraViewfinder_setVisible
+  vtbl[].vtbl.minimumSizeHint = miqt_exec_method_cQCameraViewfinder_minimumSizeHint
+  vtbl[].vtbl.heightForWidth = miqt_exec_method_cQCameraViewfinder_heightForWidth
+  vtbl[].vtbl.hasHeightForWidth = miqt_exec_method_cQCameraViewfinder_hasHeightForWidth
+  vtbl[].vtbl.paintEngine = miqt_exec_method_cQCameraViewfinder_paintEngine
+  vtbl[].vtbl.mousePressEvent = miqt_exec_method_cQCameraViewfinder_mousePressEvent
+  vtbl[].vtbl.mouseReleaseEvent = miqt_exec_method_cQCameraViewfinder_mouseReleaseEvent
+  vtbl[].vtbl.mouseDoubleClickEvent = miqt_exec_method_cQCameraViewfinder_mouseDoubleClickEvent
+  vtbl[].vtbl.mouseMoveEvent = miqt_exec_method_cQCameraViewfinder_mouseMoveEvent
+  vtbl[].vtbl.wheelEvent = miqt_exec_method_cQCameraViewfinder_wheelEvent
+  vtbl[].vtbl.keyPressEvent = miqt_exec_method_cQCameraViewfinder_keyPressEvent
+  vtbl[].vtbl.keyReleaseEvent = miqt_exec_method_cQCameraViewfinder_keyReleaseEvent
+  vtbl[].vtbl.focusInEvent = miqt_exec_method_cQCameraViewfinder_focusInEvent
+  vtbl[].vtbl.focusOutEvent = miqt_exec_method_cQCameraViewfinder_focusOutEvent
+  vtbl[].vtbl.enterEvent = miqt_exec_method_cQCameraViewfinder_enterEvent
+  vtbl[].vtbl.leaveEvent = miqt_exec_method_cQCameraViewfinder_leaveEvent
+  vtbl[].vtbl.closeEvent = miqt_exec_method_cQCameraViewfinder_closeEvent
+  vtbl[].vtbl.contextMenuEvent = miqt_exec_method_cQCameraViewfinder_contextMenuEvent
+  vtbl[].vtbl.tabletEvent = miqt_exec_method_cQCameraViewfinder_tabletEvent
+  vtbl[].vtbl.actionEvent = miqt_exec_method_cQCameraViewfinder_actionEvent
+  vtbl[].vtbl.dragEnterEvent = miqt_exec_method_cQCameraViewfinder_dragEnterEvent
+  vtbl[].vtbl.dragMoveEvent = miqt_exec_method_cQCameraViewfinder_dragMoveEvent
+  vtbl[].vtbl.dragLeaveEvent = miqt_exec_method_cQCameraViewfinder_dragLeaveEvent
+  vtbl[].vtbl.dropEvent = miqt_exec_method_cQCameraViewfinder_dropEvent
+  vtbl[].vtbl.nativeEvent = miqt_exec_method_cQCameraViewfinder_nativeEvent
+  vtbl[].vtbl.changeEvent = miqt_exec_method_cQCameraViewfinder_changeEvent
+  vtbl[].vtbl.metric = miqt_exec_method_cQCameraViewfinder_metric
+  vtbl[].vtbl.initPainter = miqt_exec_method_cQCameraViewfinder_initPainter
+  vtbl[].vtbl.redirected = miqt_exec_method_cQCameraViewfinder_redirected
+  vtbl[].vtbl.sharedPainter = miqt_exec_method_cQCameraViewfinder_sharedPainter
+  vtbl[].vtbl.inputMethodEvent = miqt_exec_method_cQCameraViewfinder_inputMethodEvent
+  vtbl[].vtbl.inputMethodQuery = miqt_exec_method_cQCameraViewfinder_inputMethodQuery
+  vtbl[].vtbl.focusNextPrevChild = miqt_exec_method_cQCameraViewfinder_focusNextPrevChild
+  vtbl[].vtbl.eventFilter = miqt_exec_method_cQCameraViewfinder_eventFilter
+  vtbl[].vtbl.timerEvent = miqt_exec_method_cQCameraViewfinder_timerEvent
+  vtbl[].vtbl.childEvent = miqt_exec_method_cQCameraViewfinder_childEvent
+  vtbl[].vtbl.customEvent = miqt_exec_method_cQCameraViewfinder_customEvent
+  vtbl[].vtbl.connectNotify = miqt_exec_method_cQCameraViewfinder_connectNotify
+  vtbl[].vtbl.disconnectNotify = miqt_exec_method_cQCameraViewfinder_disconnectNotify
+  if vtbl[].h != nil: delete(move(vtbl[]))
+  vtbl[].h = fcQCameraViewfinder_new2(addr(vtbl[].vtbl), )
+  vtbl[].owned = true
 
 proc staticMetaObject*(_: type gen_qcameraviewfinder_types.QCameraViewfinder): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQCameraViewfinder_staticMetaObject())
-proc delete*(self: gen_qcameraviewfinder_types.QCameraViewfinder) =
-  fcQCameraViewfinder_delete(self.h)

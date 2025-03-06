@@ -30,7 +30,7 @@ func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
     else:
       copyMem(addr result[0], unsafeAddr v[0], v.len)
 
-const cflags = gorge("pkg-config --cflags Qt5Core")  & " -fPIC"
+const cflags = gorge("pkg-config --cflags Qt5Core") & " -fPIC"
 {.compile("gen_qstatemachine.cpp", cflags).}
 
 
@@ -105,7 +105,7 @@ proc fcQStateMachine_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.
 proc fcQStateMachine_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QStateMachine_trUtf82".}
 proc fcQStateMachine_trUtf83(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QStateMachine_trUtf83".}
 proc fcQStateMachine_postEvent2(self: pointer, event: pointer, priority: cint): void {.importc: "QStateMachine_postEvent2".}
-type cQStateMachineVTable = object
+type cQStateMachineVTable {.pure.} = object
   destructor*: proc(vtbl: ptr cQStateMachineVTable, self: ptr cQStateMachine) {.cdecl, raises:[], gcsafe.}
   metaObject*: proc(vtbl, self: pointer, ): pointer {.cdecl, raises: [], gcsafe.}
   metacast*: proc(vtbl, self: pointer, param1: cstring): pointer {.cdecl, raises: [], gcsafe.}
@@ -148,19 +148,16 @@ proc fcQStateMachine_new2(vtbl: pointer, childMode: cint): ptr cQStateMachine {.
 proc fcQStateMachine_new3(vtbl: pointer, parent: pointer): ptr cQStateMachine {.importc: "QStateMachine_new3".}
 proc fcQStateMachine_new4(vtbl: pointer, childMode: cint, parent: pointer): ptr cQStateMachine {.importc: "QStateMachine_new4".}
 proc fcQStateMachine_staticMetaObject(): pointer {.importc: "QStateMachine_staticMetaObject".}
-proc fcQStateMachine_delete(self: pointer) {.importc: "QStateMachine_delete".}
 proc fcQStateMachineSignalEvent_sender(self: pointer, ): pointer {.importc: "QStateMachine__SignalEvent_sender".}
 proc fcQStateMachineSignalEvent_signalIndex(self: pointer, ): cint {.importc: "QStateMachine__SignalEvent_signalIndex".}
 proc fcQStateMachineSignalEvent_new(param1: pointer): ptr cQStateMachineSignalEvent {.importc: "QStateMachine__SignalEvent_new".}
-proc fcQStateMachineSignalEvent_delete(self: pointer) {.importc: "QStateMachine__SignalEvent_delete".}
 proc fcQStateMachineWrappedEvent_objectX(self: pointer, ): pointer {.importc: "QStateMachine__WrappedEvent_object".}
 proc fcQStateMachineWrappedEvent_event(self: pointer, ): pointer {.importc: "QStateMachine__WrappedEvent_event".}
 proc fcQStateMachineWrappedEvent_new(objectVal: pointer, event: pointer): ptr cQStateMachineWrappedEvent {.importc: "QStateMachine__WrappedEvent_new".}
 proc fcQStateMachineWrappedEvent_new2(param1: pointer): ptr cQStateMachineWrappedEvent {.importc: "QStateMachine__WrappedEvent_new2".}
-proc fcQStateMachineWrappedEvent_delete(self: pointer) {.importc: "QStateMachine__WrappedEvent_delete".}
 
 proc metaObject*(self: gen_qstatemachine_types.QStateMachine, ): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQStateMachine_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQStateMachine_metaObject(self.h), owned: false)
 
 proc metacast*(self: gen_qstatemachine_types.QStateMachine, param1: cstring): pointer =
   fcQStateMachine_metacast(self.h, param1)
@@ -215,7 +212,7 @@ proc defaultAnimations*(self: gen_qstatemachine_types.QStateMachine, ): seq[gen_
   var vx_ret = newSeq[gen_qabstractanimation_types.QAbstractAnimation](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
-    vx_ret[i] = gen_qabstractanimation_types.QAbstractAnimation(h: v_outCast[i])
+    vx_ret[i] = gen_qabstractanimation_types.QAbstractAnimation(h: v_outCast[i], owned: false)
   c_free(v_ma.data)
   vx_ret
 
@@ -242,7 +239,7 @@ proc configuration*(self: gen_qstatemachine_types.QStateMachine, ): HashSet[gen_
   vx_ret: HashSet[gen_qabstractstate_types.QAbstractState])
   v_outCast = cast[ptr UncheckedArray[pointer](v_ma.data))
   for i in 0..<v_ma.len:
-    vx_ret.incl gen_qabstractstate_types.QAbstractState(h: v_outCast[i])
+    vx_ret.incl gen_qabstractstate_types.QAbstractState(h: v_outCast[i], owned: false)
   vx_ret
 
 proc eventFilter*(self: gen_qstatemachine_types.QStateMachine, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool =
@@ -320,7 +317,7 @@ type QStateMachinechildEventProc* = proc(self: QStateMachine, event: gen_qcoreev
 type QStateMachinecustomEventProc* = proc(self: QStateMachine, event: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
 type QStateMachineconnectNotifyProc* = proc(self: QStateMachine, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
 type QStateMachinedisconnectNotifyProc* = proc(self: QStateMachine, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
-type QStateMachineVTable* = object
+type QStateMachineVTable* {.inheritable, pure.} = object
   vtbl: cQStateMachineVTable
   metaObject*: QStateMachinemetaObjectProc
   metacast*: QStateMachinemetacastProc
@@ -339,13 +336,16 @@ type QStateMachineVTable* = object
   connectNotify*: QStateMachineconnectNotifyProc
   disconnectNotify*: QStateMachinedisconnectNotifyProc
 proc QStateMachinemetaObject*(self: gen_qstatemachine_types.QStateMachine, ): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQStateMachine_virtualbase_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQStateMachine_virtualbase_metaObject(self.h), owned: false)
 
 proc miqt_exec_callback_cQStateMachine_metaObject(vtbl: pointer, self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QStateMachineVTable](vtbl)
   let self = QStateMachine(h: self)
   var virtualReturn = vtbl[].metaObject(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QStateMachinemetacast*(self: gen_qstatemachine_types.QStateMachine, param1: cstring): pointer =
   fcQStateMachine_virtualbase_metacast(self.h, param1)
@@ -375,8 +375,8 @@ proc QStateMachineeventFilter*(self: gen_qstatemachine_types.QStateMachine, watc
 proc miqt_exec_callback_cQStateMachine_eventFilter(vtbl: pointer, self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QStateMachineVTable](vtbl)
   let self = QStateMachine(h: self)
-  let slotval1 = gen_qobject_types.QObject(h: watched)
-  let slotval2 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].eventFilter(self, slotval1, slotval2)
   virtualReturn
 
@@ -386,7 +386,7 @@ proc QStateMachineonEntry*(self: gen_qstatemachine_types.QStateMachine, event: g
 proc miqt_exec_callback_cQStateMachine_onEntry(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QStateMachineVTable](vtbl)
   let self = QStateMachine(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].onEntry(self, slotval1)
 
 proc QStateMachineonExit*(self: gen_qstatemachine_types.QStateMachine, event: gen_qcoreevent_types.QEvent): void =
@@ -395,7 +395,7 @@ proc QStateMachineonExit*(self: gen_qstatemachine_types.QStateMachine, event: ge
 proc miqt_exec_callback_cQStateMachine_onExit(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QStateMachineVTable](vtbl)
   let self = QStateMachine(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].onExit(self, slotval1)
 
 proc QStateMachinebeginSelectTransitions*(self: gen_qstatemachine_types.QStateMachine, event: gen_qcoreevent_types.QEvent): void =
@@ -404,7 +404,7 @@ proc QStateMachinebeginSelectTransitions*(self: gen_qstatemachine_types.QStateMa
 proc miqt_exec_callback_cQStateMachine_beginSelectTransitions(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QStateMachineVTable](vtbl)
   let self = QStateMachine(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].beginSelectTransitions(self, slotval1)
 
 proc QStateMachineendSelectTransitions*(self: gen_qstatemachine_types.QStateMachine, event: gen_qcoreevent_types.QEvent): void =
@@ -413,7 +413,7 @@ proc QStateMachineendSelectTransitions*(self: gen_qstatemachine_types.QStateMach
 proc miqt_exec_callback_cQStateMachine_endSelectTransitions(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QStateMachineVTable](vtbl)
   let self = QStateMachine(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].endSelectTransitions(self, slotval1)
 
 proc QStateMachinebeginMicrostep*(self: gen_qstatemachine_types.QStateMachine, event: gen_qcoreevent_types.QEvent): void =
@@ -422,7 +422,7 @@ proc QStateMachinebeginMicrostep*(self: gen_qstatemachine_types.QStateMachine, e
 proc miqt_exec_callback_cQStateMachine_beginMicrostep(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QStateMachineVTable](vtbl)
   let self = QStateMachine(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].beginMicrostep(self, slotval1)
 
 proc QStateMachineendMicrostep*(self: gen_qstatemachine_types.QStateMachine, event: gen_qcoreevent_types.QEvent): void =
@@ -431,7 +431,7 @@ proc QStateMachineendMicrostep*(self: gen_qstatemachine_types.QStateMachine, eve
 proc miqt_exec_callback_cQStateMachine_endMicrostep(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QStateMachineVTable](vtbl)
   let self = QStateMachine(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].endMicrostep(self, slotval1)
 
 proc QStateMachineevent*(self: gen_qstatemachine_types.QStateMachine, e: gen_qcoreevent_types.QEvent): bool =
@@ -440,7 +440,7 @@ proc QStateMachineevent*(self: gen_qstatemachine_types.QStateMachine, e: gen_qco
 proc miqt_exec_callback_cQStateMachine_event(vtbl: pointer, self: pointer, e: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QStateMachineVTable](vtbl)
   let self = QStateMachine(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: e)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: e, owned: false)
   var virtualReturn = vtbl[].event(self, slotval1)
   virtualReturn
 
@@ -450,7 +450,7 @@ proc QStateMachinetimerEvent*(self: gen_qstatemachine_types.QStateMachine, event
 proc miqt_exec_callback_cQStateMachine_timerEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QStateMachineVTable](vtbl)
   let self = QStateMachine(h: self)
-  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   vtbl[].timerEvent(self, slotval1)
 
 proc QStateMachinechildEvent*(self: gen_qstatemachine_types.QStateMachine, event: gen_qcoreevent_types.QChildEvent): void =
@@ -459,7 +459,7 @@ proc QStateMachinechildEvent*(self: gen_qstatemachine_types.QStateMachine, event
 proc miqt_exec_callback_cQStateMachine_childEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QStateMachineVTable](vtbl)
   let self = QStateMachine(h: self)
-  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   vtbl[].childEvent(self, slotval1)
 
 proc QStateMachinecustomEvent*(self: gen_qstatemachine_types.QStateMachine, event: gen_qcoreevent_types.QEvent): void =
@@ -468,7 +468,7 @@ proc QStateMachinecustomEvent*(self: gen_qstatemachine_types.QStateMachine, even
 proc miqt_exec_callback_cQStateMachine_customEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QStateMachineVTable](vtbl)
   let self = QStateMachine(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].customEvent(self, slotval1)
 
 proc QStateMachineconnectNotify*(self: gen_qstatemachine_types.QStateMachine, signal: gen_qmetaobject_types.QMetaMethod): void =
@@ -477,7 +477,7 @@ proc QStateMachineconnectNotify*(self: gen_qstatemachine_types.QStateMachine, si
 proc miqt_exec_callback_cQStateMachine_connectNotify(vtbl: pointer, self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QStateMachineVTable](vtbl)
   let self = QStateMachine(h: self)
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].connectNotify(self, slotval1)
 
 proc QStateMachinedisconnectNotify*(self: gen_qstatemachine_types.QStateMachine, signal: gen_qmetaobject_types.QMetaMethod): void =
@@ -486,11 +486,135 @@ proc QStateMachinedisconnectNotify*(self: gen_qstatemachine_types.QStateMachine,
 proc miqt_exec_callback_cQStateMachine_disconnectNotify(vtbl: pointer, self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QStateMachineVTable](vtbl)
   let self = QStateMachine(h: self)
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].disconnectNotify(self, slotval1)
 
+type VirtualQStateMachine* {.inheritable.} = ref object of QStateMachine
+  vtbl*: cQStateMachineVTable
+method metaObject*(self: VirtualQStateMachine, ): gen_qobjectdefs_types.QMetaObject {.base.} =
+  QStateMachinemetaObject(self[])
+proc miqt_exec_method_cQStateMachine_metaObject(vtbl: pointer, inst: pointer): pointer {.cdecl.} =
+  let vtbl = cast[VirtualQStateMachine](cast[uint](vtbl) - uint(offsetOf(VirtualQStateMachine, vtbl)))
+  var virtualReturn = vtbl.metaObject()
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
+
+method metacast*(self: VirtualQStateMachine, param1: cstring): pointer {.base.} =
+  QStateMachinemetacast(self[], param1)
+proc miqt_exec_method_cQStateMachine_metacast(vtbl: pointer, inst: pointer, param1: cstring): pointer {.cdecl.} =
+  let vtbl = cast[VirtualQStateMachine](cast[uint](vtbl) - uint(offsetOf(VirtualQStateMachine, vtbl)))
+  let slotval1 = (param1)
+  var virtualReturn = vtbl.metacast(slotval1)
+  virtualReturn
+
+method metacall*(self: VirtualQStateMachine, param1: cint, param2: cint, param3: pointer): cint {.base.} =
+  QStateMachinemetacall(self[], param1, param2, param3)
+proc miqt_exec_method_cQStateMachine_metacall(vtbl: pointer, inst: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
+  let vtbl = cast[VirtualQStateMachine](cast[uint](vtbl) - uint(offsetOf(VirtualQStateMachine, vtbl)))
+  let slotval1 = cint(param1)
+  let slotval2 = param2
+  let slotval3 = param3
+  var virtualReturn = vtbl.metacall(slotval1, slotval2, slotval3)
+  virtualReturn
+
+method eventFilter*(self: VirtualQStateMachine, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QStateMachineeventFilter(self[], watched, event)
+proc miqt_exec_method_cQStateMachine_eventFilter(vtbl: pointer, inst: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
+  let vtbl = cast[VirtualQStateMachine](cast[uint](vtbl) - uint(offsetOf(VirtualQStateMachine, vtbl)))
+  let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
+  var virtualReturn = vtbl.eventFilter(slotval1, slotval2)
+  virtualReturn
+
+method onEntry*(self: VirtualQStateMachine, event: gen_qcoreevent_types.QEvent): void {.base.} =
+  QStateMachineonEntry(self[], event)
+proc miqt_exec_method_cQStateMachine_onEntry(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQStateMachine](cast[uint](vtbl) - uint(offsetOf(VirtualQStateMachine, vtbl)))
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
+  vtbl.onEntry(slotval1)
+
+method onExit*(self: VirtualQStateMachine, event: gen_qcoreevent_types.QEvent): void {.base.} =
+  QStateMachineonExit(self[], event)
+proc miqt_exec_method_cQStateMachine_onExit(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQStateMachine](cast[uint](vtbl) - uint(offsetOf(VirtualQStateMachine, vtbl)))
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
+  vtbl.onExit(slotval1)
+
+method beginSelectTransitions*(self: VirtualQStateMachine, event: gen_qcoreevent_types.QEvent): void {.base.} =
+  QStateMachinebeginSelectTransitions(self[], event)
+proc miqt_exec_method_cQStateMachine_beginSelectTransitions(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQStateMachine](cast[uint](vtbl) - uint(offsetOf(VirtualQStateMachine, vtbl)))
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
+  vtbl.beginSelectTransitions(slotval1)
+
+method endSelectTransitions*(self: VirtualQStateMachine, event: gen_qcoreevent_types.QEvent): void {.base.} =
+  QStateMachineendSelectTransitions(self[], event)
+proc miqt_exec_method_cQStateMachine_endSelectTransitions(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQStateMachine](cast[uint](vtbl) - uint(offsetOf(VirtualQStateMachine, vtbl)))
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
+  vtbl.endSelectTransitions(slotval1)
+
+method beginMicrostep*(self: VirtualQStateMachine, event: gen_qcoreevent_types.QEvent): void {.base.} =
+  QStateMachinebeginMicrostep(self[], event)
+proc miqt_exec_method_cQStateMachine_beginMicrostep(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQStateMachine](cast[uint](vtbl) - uint(offsetOf(VirtualQStateMachine, vtbl)))
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
+  vtbl.beginMicrostep(slotval1)
+
+method endMicrostep*(self: VirtualQStateMachine, event: gen_qcoreevent_types.QEvent): void {.base.} =
+  QStateMachineendMicrostep(self[], event)
+proc miqt_exec_method_cQStateMachine_endMicrostep(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQStateMachine](cast[uint](vtbl) - uint(offsetOf(VirtualQStateMachine, vtbl)))
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
+  vtbl.endMicrostep(slotval1)
+
+method event*(self: VirtualQStateMachine, e: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QStateMachineevent(self[], e)
+proc miqt_exec_method_cQStateMachine_event(vtbl: pointer, inst: pointer, e: pointer): bool {.cdecl.} =
+  let vtbl = cast[VirtualQStateMachine](cast[uint](vtbl) - uint(offsetOf(VirtualQStateMachine, vtbl)))
+  let slotval1 = gen_qcoreevent_types.QEvent(h: e, owned: false)
+  var virtualReturn = vtbl.event(slotval1)
+  virtualReturn
+
+method timerEvent*(self: VirtualQStateMachine, event: gen_qcoreevent_types.QTimerEvent): void {.base.} =
+  QStateMachinetimerEvent(self[], event)
+proc miqt_exec_method_cQStateMachine_timerEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQStateMachine](cast[uint](vtbl) - uint(offsetOf(VirtualQStateMachine, vtbl)))
+  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
+  vtbl.timerEvent(slotval1)
+
+method childEvent*(self: VirtualQStateMachine, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
+  QStateMachinechildEvent(self[], event)
+proc miqt_exec_method_cQStateMachine_childEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQStateMachine](cast[uint](vtbl) - uint(offsetOf(VirtualQStateMachine, vtbl)))
+  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
+  vtbl.childEvent(slotval1)
+
+method customEvent*(self: VirtualQStateMachine, event: gen_qcoreevent_types.QEvent): void {.base.} =
+  QStateMachinecustomEvent(self[], event)
+proc miqt_exec_method_cQStateMachine_customEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQStateMachine](cast[uint](vtbl) - uint(offsetOf(VirtualQStateMachine, vtbl)))
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
+  vtbl.customEvent(slotval1)
+
+method connectNotify*(self: VirtualQStateMachine, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QStateMachineconnectNotify(self[], signal)
+proc miqt_exec_method_cQStateMachine_connectNotify(vtbl: pointer, inst: pointer, signal: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQStateMachine](cast[uint](vtbl) - uint(offsetOf(VirtualQStateMachine, vtbl)))
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
+  vtbl.connectNotify(slotval1)
+
+method disconnectNotify*(self: VirtualQStateMachine, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QStateMachinedisconnectNotify(self[], signal)
+proc miqt_exec_method_cQStateMachine_disconnectNotify(vtbl: pointer, inst: pointer, signal: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQStateMachine](cast[uint](vtbl) - uint(offsetOf(VirtualQStateMachine, vtbl)))
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
+  vtbl.disconnectNotify(slotval1)
+
 proc sender*(self: gen_qstatemachine_types.QStateMachine, ): gen_qobject_types.QObject =
-  gen_qobject_types.QObject(h: fcQStateMachine_protectedbase_sender(self.h))
+  gen_qobject_types.QObject(h: fcQStateMachine_protectedbase_sender(self.h), owned: false)
 
 proc senderSignalIndex*(self: gen_qstatemachine_types.QStateMachine, ): cint =
   fcQStateMachine_protectedbase_senderSignalIndex(self.h)
@@ -505,198 +629,303 @@ proc create*(T: type gen_qstatemachine_types.QStateMachine,
     vtbl: ref QStateMachineVTable = nil): gen_qstatemachine_types.QStateMachine =
   let vtbl = if vtbl == nil: new QStateMachineVTable else: vtbl
   GC_ref(vtbl)
-  vtbl.vtbl.destructor = proc(vtbl: ptr cQStateMachineVTable, _: ptr cQStateMachine) {.cdecl.} =
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQStateMachineVTable, _: ptr cQStateMachine) {.cdecl.} =
     let vtbl = cast[ref QStateMachineVTable](vtbl)
     GC_unref(vtbl)
-  if not isNil(vtbl.metaObject):
+  if not isNil(vtbl[].metaObject):
     vtbl[].vtbl.metaObject = miqt_exec_callback_cQStateMachine_metaObject
-  if not isNil(vtbl.metacast):
+  if not isNil(vtbl[].metacast):
     vtbl[].vtbl.metacast = miqt_exec_callback_cQStateMachine_metacast
-  if not isNil(vtbl.metacall):
+  if not isNil(vtbl[].metacall):
     vtbl[].vtbl.metacall = miqt_exec_callback_cQStateMachine_metacall
-  if not isNil(vtbl.eventFilter):
+  if not isNil(vtbl[].eventFilter):
     vtbl[].vtbl.eventFilter = miqt_exec_callback_cQStateMachine_eventFilter
-  if not isNil(vtbl.onEntry):
+  if not isNil(vtbl[].onEntry):
     vtbl[].vtbl.onEntry = miqt_exec_callback_cQStateMachine_onEntry
-  if not isNil(vtbl.onExit):
+  if not isNil(vtbl[].onExit):
     vtbl[].vtbl.onExit = miqt_exec_callback_cQStateMachine_onExit
-  if not isNil(vtbl.beginSelectTransitions):
+  if not isNil(vtbl[].beginSelectTransitions):
     vtbl[].vtbl.beginSelectTransitions = miqt_exec_callback_cQStateMachine_beginSelectTransitions
-  if not isNil(vtbl.endSelectTransitions):
+  if not isNil(vtbl[].endSelectTransitions):
     vtbl[].vtbl.endSelectTransitions = miqt_exec_callback_cQStateMachine_endSelectTransitions
-  if not isNil(vtbl.beginMicrostep):
+  if not isNil(vtbl[].beginMicrostep):
     vtbl[].vtbl.beginMicrostep = miqt_exec_callback_cQStateMachine_beginMicrostep
-  if not isNil(vtbl.endMicrostep):
+  if not isNil(vtbl[].endMicrostep):
     vtbl[].vtbl.endMicrostep = miqt_exec_callback_cQStateMachine_endMicrostep
-  if not isNil(vtbl.event):
+  if not isNil(vtbl[].event):
     vtbl[].vtbl.event = miqt_exec_callback_cQStateMachine_event
-  if not isNil(vtbl.timerEvent):
+  if not isNil(vtbl[].timerEvent):
     vtbl[].vtbl.timerEvent = miqt_exec_callback_cQStateMachine_timerEvent
-  if not isNil(vtbl.childEvent):
+  if not isNil(vtbl[].childEvent):
     vtbl[].vtbl.childEvent = miqt_exec_callback_cQStateMachine_childEvent
-  if not isNil(vtbl.customEvent):
+  if not isNil(vtbl[].customEvent):
     vtbl[].vtbl.customEvent = miqt_exec_callback_cQStateMachine_customEvent
-  if not isNil(vtbl.connectNotify):
+  if not isNil(vtbl[].connectNotify):
     vtbl[].vtbl.connectNotify = miqt_exec_callback_cQStateMachine_connectNotify
-  if not isNil(vtbl.disconnectNotify):
+  if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQStateMachine_disconnectNotify
-  gen_qstatemachine_types.QStateMachine(h: fcQStateMachine_new(addr(vtbl[]), ))
+  gen_qstatemachine_types.QStateMachine(h: fcQStateMachine_new(addr(vtbl[].vtbl), ), owned: true)
 
 proc create*(T: type gen_qstatemachine_types.QStateMachine,
     childMode: cint,
     vtbl: ref QStateMachineVTable = nil): gen_qstatemachine_types.QStateMachine =
   let vtbl = if vtbl == nil: new QStateMachineVTable else: vtbl
   GC_ref(vtbl)
-  vtbl.vtbl.destructor = proc(vtbl: ptr cQStateMachineVTable, _: ptr cQStateMachine) {.cdecl.} =
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQStateMachineVTable, _: ptr cQStateMachine) {.cdecl.} =
     let vtbl = cast[ref QStateMachineVTable](vtbl)
     GC_unref(vtbl)
-  if not isNil(vtbl.metaObject):
+  if not isNil(vtbl[].metaObject):
     vtbl[].vtbl.metaObject = miqt_exec_callback_cQStateMachine_metaObject
-  if not isNil(vtbl.metacast):
+  if not isNil(vtbl[].metacast):
     vtbl[].vtbl.metacast = miqt_exec_callback_cQStateMachine_metacast
-  if not isNil(vtbl.metacall):
+  if not isNil(vtbl[].metacall):
     vtbl[].vtbl.metacall = miqt_exec_callback_cQStateMachine_metacall
-  if not isNil(vtbl.eventFilter):
+  if not isNil(vtbl[].eventFilter):
     vtbl[].vtbl.eventFilter = miqt_exec_callback_cQStateMachine_eventFilter
-  if not isNil(vtbl.onEntry):
+  if not isNil(vtbl[].onEntry):
     vtbl[].vtbl.onEntry = miqt_exec_callback_cQStateMachine_onEntry
-  if not isNil(vtbl.onExit):
+  if not isNil(vtbl[].onExit):
     vtbl[].vtbl.onExit = miqt_exec_callback_cQStateMachine_onExit
-  if not isNil(vtbl.beginSelectTransitions):
+  if not isNil(vtbl[].beginSelectTransitions):
     vtbl[].vtbl.beginSelectTransitions = miqt_exec_callback_cQStateMachine_beginSelectTransitions
-  if not isNil(vtbl.endSelectTransitions):
+  if not isNil(vtbl[].endSelectTransitions):
     vtbl[].vtbl.endSelectTransitions = miqt_exec_callback_cQStateMachine_endSelectTransitions
-  if not isNil(vtbl.beginMicrostep):
+  if not isNil(vtbl[].beginMicrostep):
     vtbl[].vtbl.beginMicrostep = miqt_exec_callback_cQStateMachine_beginMicrostep
-  if not isNil(vtbl.endMicrostep):
+  if not isNil(vtbl[].endMicrostep):
     vtbl[].vtbl.endMicrostep = miqt_exec_callback_cQStateMachine_endMicrostep
-  if not isNil(vtbl.event):
+  if not isNil(vtbl[].event):
     vtbl[].vtbl.event = miqt_exec_callback_cQStateMachine_event
-  if not isNil(vtbl.timerEvent):
+  if not isNil(vtbl[].timerEvent):
     vtbl[].vtbl.timerEvent = miqt_exec_callback_cQStateMachine_timerEvent
-  if not isNil(vtbl.childEvent):
+  if not isNil(vtbl[].childEvent):
     vtbl[].vtbl.childEvent = miqt_exec_callback_cQStateMachine_childEvent
-  if not isNil(vtbl.customEvent):
+  if not isNil(vtbl[].customEvent):
     vtbl[].vtbl.customEvent = miqt_exec_callback_cQStateMachine_customEvent
-  if not isNil(vtbl.connectNotify):
+  if not isNil(vtbl[].connectNotify):
     vtbl[].vtbl.connectNotify = miqt_exec_callback_cQStateMachine_connectNotify
-  if not isNil(vtbl.disconnectNotify):
+  if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQStateMachine_disconnectNotify
-  gen_qstatemachine_types.QStateMachine(h: fcQStateMachine_new2(addr(vtbl[]), cint(childMode)))
+  gen_qstatemachine_types.QStateMachine(h: fcQStateMachine_new2(addr(vtbl[].vtbl), cint(childMode)), owned: true)
 
 proc create*(T: type gen_qstatemachine_types.QStateMachine,
     parent: gen_qobject_types.QObject,
     vtbl: ref QStateMachineVTable = nil): gen_qstatemachine_types.QStateMachine =
   let vtbl = if vtbl == nil: new QStateMachineVTable else: vtbl
   GC_ref(vtbl)
-  vtbl.vtbl.destructor = proc(vtbl: ptr cQStateMachineVTable, _: ptr cQStateMachine) {.cdecl.} =
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQStateMachineVTable, _: ptr cQStateMachine) {.cdecl.} =
     let vtbl = cast[ref QStateMachineVTable](vtbl)
     GC_unref(vtbl)
-  if not isNil(vtbl.metaObject):
+  if not isNil(vtbl[].metaObject):
     vtbl[].vtbl.metaObject = miqt_exec_callback_cQStateMachine_metaObject
-  if not isNil(vtbl.metacast):
+  if not isNil(vtbl[].metacast):
     vtbl[].vtbl.metacast = miqt_exec_callback_cQStateMachine_metacast
-  if not isNil(vtbl.metacall):
+  if not isNil(vtbl[].metacall):
     vtbl[].vtbl.metacall = miqt_exec_callback_cQStateMachine_metacall
-  if not isNil(vtbl.eventFilter):
+  if not isNil(vtbl[].eventFilter):
     vtbl[].vtbl.eventFilter = miqt_exec_callback_cQStateMachine_eventFilter
-  if not isNil(vtbl.onEntry):
+  if not isNil(vtbl[].onEntry):
     vtbl[].vtbl.onEntry = miqt_exec_callback_cQStateMachine_onEntry
-  if not isNil(vtbl.onExit):
+  if not isNil(vtbl[].onExit):
     vtbl[].vtbl.onExit = miqt_exec_callback_cQStateMachine_onExit
-  if not isNil(vtbl.beginSelectTransitions):
+  if not isNil(vtbl[].beginSelectTransitions):
     vtbl[].vtbl.beginSelectTransitions = miqt_exec_callback_cQStateMachine_beginSelectTransitions
-  if not isNil(vtbl.endSelectTransitions):
+  if not isNil(vtbl[].endSelectTransitions):
     vtbl[].vtbl.endSelectTransitions = miqt_exec_callback_cQStateMachine_endSelectTransitions
-  if not isNil(vtbl.beginMicrostep):
+  if not isNil(vtbl[].beginMicrostep):
     vtbl[].vtbl.beginMicrostep = miqt_exec_callback_cQStateMachine_beginMicrostep
-  if not isNil(vtbl.endMicrostep):
+  if not isNil(vtbl[].endMicrostep):
     vtbl[].vtbl.endMicrostep = miqt_exec_callback_cQStateMachine_endMicrostep
-  if not isNil(vtbl.event):
+  if not isNil(vtbl[].event):
     vtbl[].vtbl.event = miqt_exec_callback_cQStateMachine_event
-  if not isNil(vtbl.timerEvent):
+  if not isNil(vtbl[].timerEvent):
     vtbl[].vtbl.timerEvent = miqt_exec_callback_cQStateMachine_timerEvent
-  if not isNil(vtbl.childEvent):
+  if not isNil(vtbl[].childEvent):
     vtbl[].vtbl.childEvent = miqt_exec_callback_cQStateMachine_childEvent
-  if not isNil(vtbl.customEvent):
+  if not isNil(vtbl[].customEvent):
     vtbl[].vtbl.customEvent = miqt_exec_callback_cQStateMachine_customEvent
-  if not isNil(vtbl.connectNotify):
+  if not isNil(vtbl[].connectNotify):
     vtbl[].vtbl.connectNotify = miqt_exec_callback_cQStateMachine_connectNotify
-  if not isNil(vtbl.disconnectNotify):
+  if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQStateMachine_disconnectNotify
-  gen_qstatemachine_types.QStateMachine(h: fcQStateMachine_new3(addr(vtbl[]), parent.h))
+  gen_qstatemachine_types.QStateMachine(h: fcQStateMachine_new3(addr(vtbl[].vtbl), parent.h), owned: true)
 
 proc create*(T: type gen_qstatemachine_types.QStateMachine,
     childMode: cint, parent: gen_qobject_types.QObject,
     vtbl: ref QStateMachineVTable = nil): gen_qstatemachine_types.QStateMachine =
   let vtbl = if vtbl == nil: new QStateMachineVTable else: vtbl
   GC_ref(vtbl)
-  vtbl.vtbl.destructor = proc(vtbl: ptr cQStateMachineVTable, _: ptr cQStateMachine) {.cdecl.} =
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQStateMachineVTable, _: ptr cQStateMachine) {.cdecl.} =
     let vtbl = cast[ref QStateMachineVTable](vtbl)
     GC_unref(vtbl)
-  if not isNil(vtbl.metaObject):
+  if not isNil(vtbl[].metaObject):
     vtbl[].vtbl.metaObject = miqt_exec_callback_cQStateMachine_metaObject
-  if not isNil(vtbl.metacast):
+  if not isNil(vtbl[].metacast):
     vtbl[].vtbl.metacast = miqt_exec_callback_cQStateMachine_metacast
-  if not isNil(vtbl.metacall):
+  if not isNil(vtbl[].metacall):
     vtbl[].vtbl.metacall = miqt_exec_callback_cQStateMachine_metacall
-  if not isNil(vtbl.eventFilter):
+  if not isNil(vtbl[].eventFilter):
     vtbl[].vtbl.eventFilter = miqt_exec_callback_cQStateMachine_eventFilter
-  if not isNil(vtbl.onEntry):
+  if not isNil(vtbl[].onEntry):
     vtbl[].vtbl.onEntry = miqt_exec_callback_cQStateMachine_onEntry
-  if not isNil(vtbl.onExit):
+  if not isNil(vtbl[].onExit):
     vtbl[].vtbl.onExit = miqt_exec_callback_cQStateMachine_onExit
-  if not isNil(vtbl.beginSelectTransitions):
+  if not isNil(vtbl[].beginSelectTransitions):
     vtbl[].vtbl.beginSelectTransitions = miqt_exec_callback_cQStateMachine_beginSelectTransitions
-  if not isNil(vtbl.endSelectTransitions):
+  if not isNil(vtbl[].endSelectTransitions):
     vtbl[].vtbl.endSelectTransitions = miqt_exec_callback_cQStateMachine_endSelectTransitions
-  if not isNil(vtbl.beginMicrostep):
+  if not isNil(vtbl[].beginMicrostep):
     vtbl[].vtbl.beginMicrostep = miqt_exec_callback_cQStateMachine_beginMicrostep
-  if not isNil(vtbl.endMicrostep):
+  if not isNil(vtbl[].endMicrostep):
     vtbl[].vtbl.endMicrostep = miqt_exec_callback_cQStateMachine_endMicrostep
-  if not isNil(vtbl.event):
+  if not isNil(vtbl[].event):
     vtbl[].vtbl.event = miqt_exec_callback_cQStateMachine_event
-  if not isNil(vtbl.timerEvent):
+  if not isNil(vtbl[].timerEvent):
     vtbl[].vtbl.timerEvent = miqt_exec_callback_cQStateMachine_timerEvent
-  if not isNil(vtbl.childEvent):
+  if not isNil(vtbl[].childEvent):
     vtbl[].vtbl.childEvent = miqt_exec_callback_cQStateMachine_childEvent
-  if not isNil(vtbl.customEvent):
+  if not isNil(vtbl[].customEvent):
     vtbl[].vtbl.customEvent = miqt_exec_callback_cQStateMachine_customEvent
-  if not isNil(vtbl.connectNotify):
+  if not isNil(vtbl[].connectNotify):
     vtbl[].vtbl.connectNotify = miqt_exec_callback_cQStateMachine_connectNotify
-  if not isNil(vtbl.disconnectNotify):
+  if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQStateMachine_disconnectNotify
-  gen_qstatemachine_types.QStateMachine(h: fcQStateMachine_new4(addr(vtbl[]), cint(childMode), parent.h))
+  gen_qstatemachine_types.QStateMachine(h: fcQStateMachine_new4(addr(vtbl[].vtbl), cint(childMode), parent.h), owned: true)
+
+proc create*(T: type gen_qstatemachine_types.QStateMachine,
+    vtbl: VirtualQStateMachine) =
+
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQStateMachineVTable, _: ptr cQStateMachine) {.cdecl.} =
+    let vtbl = cast[ptr typeof(VirtualQStateMachine()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQStateMachine, vtbl)))
+    vtbl[].h = nil
+    vtbl[].owned = false
+  vtbl[].vtbl.metaObject = miqt_exec_method_cQStateMachine_metaObject
+  vtbl[].vtbl.metacast = miqt_exec_method_cQStateMachine_metacast
+  vtbl[].vtbl.metacall = miqt_exec_method_cQStateMachine_metacall
+  vtbl[].vtbl.eventFilter = miqt_exec_method_cQStateMachine_eventFilter
+  vtbl[].vtbl.onEntry = miqt_exec_method_cQStateMachine_onEntry
+  vtbl[].vtbl.onExit = miqt_exec_method_cQStateMachine_onExit
+  vtbl[].vtbl.beginSelectTransitions = miqt_exec_method_cQStateMachine_beginSelectTransitions
+  vtbl[].vtbl.endSelectTransitions = miqt_exec_method_cQStateMachine_endSelectTransitions
+  vtbl[].vtbl.beginMicrostep = miqt_exec_method_cQStateMachine_beginMicrostep
+  vtbl[].vtbl.endMicrostep = miqt_exec_method_cQStateMachine_endMicrostep
+  vtbl[].vtbl.event = miqt_exec_method_cQStateMachine_event
+  vtbl[].vtbl.timerEvent = miqt_exec_method_cQStateMachine_timerEvent
+  vtbl[].vtbl.childEvent = miqt_exec_method_cQStateMachine_childEvent
+  vtbl[].vtbl.customEvent = miqt_exec_method_cQStateMachine_customEvent
+  vtbl[].vtbl.connectNotify = miqt_exec_method_cQStateMachine_connectNotify
+  vtbl[].vtbl.disconnectNotify = miqt_exec_method_cQStateMachine_disconnectNotify
+  if vtbl[].h != nil: delete(move(vtbl[]))
+  vtbl[].h = fcQStateMachine_new(addr(vtbl[].vtbl), )
+  vtbl[].owned = true
+
+proc create*(T: type gen_qstatemachine_types.QStateMachine,
+    childMode: cint,
+    vtbl: VirtualQStateMachine) =
+
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQStateMachineVTable, _: ptr cQStateMachine) {.cdecl.} =
+    let vtbl = cast[ptr typeof(VirtualQStateMachine()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQStateMachine, vtbl)))
+    vtbl[].h = nil
+    vtbl[].owned = false
+  vtbl[].vtbl.metaObject = miqt_exec_method_cQStateMachine_metaObject
+  vtbl[].vtbl.metacast = miqt_exec_method_cQStateMachine_metacast
+  vtbl[].vtbl.metacall = miqt_exec_method_cQStateMachine_metacall
+  vtbl[].vtbl.eventFilter = miqt_exec_method_cQStateMachine_eventFilter
+  vtbl[].vtbl.onEntry = miqt_exec_method_cQStateMachine_onEntry
+  vtbl[].vtbl.onExit = miqt_exec_method_cQStateMachine_onExit
+  vtbl[].vtbl.beginSelectTransitions = miqt_exec_method_cQStateMachine_beginSelectTransitions
+  vtbl[].vtbl.endSelectTransitions = miqt_exec_method_cQStateMachine_endSelectTransitions
+  vtbl[].vtbl.beginMicrostep = miqt_exec_method_cQStateMachine_beginMicrostep
+  vtbl[].vtbl.endMicrostep = miqt_exec_method_cQStateMachine_endMicrostep
+  vtbl[].vtbl.event = miqt_exec_method_cQStateMachine_event
+  vtbl[].vtbl.timerEvent = miqt_exec_method_cQStateMachine_timerEvent
+  vtbl[].vtbl.childEvent = miqt_exec_method_cQStateMachine_childEvent
+  vtbl[].vtbl.customEvent = miqt_exec_method_cQStateMachine_customEvent
+  vtbl[].vtbl.connectNotify = miqt_exec_method_cQStateMachine_connectNotify
+  vtbl[].vtbl.disconnectNotify = miqt_exec_method_cQStateMachine_disconnectNotify
+  if vtbl[].h != nil: delete(move(vtbl[]))
+  vtbl[].h = fcQStateMachine_new2(addr(vtbl[].vtbl), cint(childMode))
+  vtbl[].owned = true
+
+proc create*(T: type gen_qstatemachine_types.QStateMachine,
+    parent: gen_qobject_types.QObject,
+    vtbl: VirtualQStateMachine) =
+
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQStateMachineVTable, _: ptr cQStateMachine) {.cdecl.} =
+    let vtbl = cast[ptr typeof(VirtualQStateMachine()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQStateMachine, vtbl)))
+    vtbl[].h = nil
+    vtbl[].owned = false
+  vtbl[].vtbl.metaObject = miqt_exec_method_cQStateMachine_metaObject
+  vtbl[].vtbl.metacast = miqt_exec_method_cQStateMachine_metacast
+  vtbl[].vtbl.metacall = miqt_exec_method_cQStateMachine_metacall
+  vtbl[].vtbl.eventFilter = miqt_exec_method_cQStateMachine_eventFilter
+  vtbl[].vtbl.onEntry = miqt_exec_method_cQStateMachine_onEntry
+  vtbl[].vtbl.onExit = miqt_exec_method_cQStateMachine_onExit
+  vtbl[].vtbl.beginSelectTransitions = miqt_exec_method_cQStateMachine_beginSelectTransitions
+  vtbl[].vtbl.endSelectTransitions = miqt_exec_method_cQStateMachine_endSelectTransitions
+  vtbl[].vtbl.beginMicrostep = miqt_exec_method_cQStateMachine_beginMicrostep
+  vtbl[].vtbl.endMicrostep = miqt_exec_method_cQStateMachine_endMicrostep
+  vtbl[].vtbl.event = miqt_exec_method_cQStateMachine_event
+  vtbl[].vtbl.timerEvent = miqt_exec_method_cQStateMachine_timerEvent
+  vtbl[].vtbl.childEvent = miqt_exec_method_cQStateMachine_childEvent
+  vtbl[].vtbl.customEvent = miqt_exec_method_cQStateMachine_customEvent
+  vtbl[].vtbl.connectNotify = miqt_exec_method_cQStateMachine_connectNotify
+  vtbl[].vtbl.disconnectNotify = miqt_exec_method_cQStateMachine_disconnectNotify
+  if vtbl[].h != nil: delete(move(vtbl[]))
+  vtbl[].h = fcQStateMachine_new3(addr(vtbl[].vtbl), parent.h)
+  vtbl[].owned = true
+
+proc create*(T: type gen_qstatemachine_types.QStateMachine,
+    childMode: cint, parent: gen_qobject_types.QObject,
+    vtbl: VirtualQStateMachine) =
+
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQStateMachineVTable, _: ptr cQStateMachine) {.cdecl.} =
+    let vtbl = cast[ptr typeof(VirtualQStateMachine()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQStateMachine, vtbl)))
+    vtbl[].h = nil
+    vtbl[].owned = false
+  vtbl[].vtbl.metaObject = miqt_exec_method_cQStateMachine_metaObject
+  vtbl[].vtbl.metacast = miqt_exec_method_cQStateMachine_metacast
+  vtbl[].vtbl.metacall = miqt_exec_method_cQStateMachine_metacall
+  vtbl[].vtbl.eventFilter = miqt_exec_method_cQStateMachine_eventFilter
+  vtbl[].vtbl.onEntry = miqt_exec_method_cQStateMachine_onEntry
+  vtbl[].vtbl.onExit = miqt_exec_method_cQStateMachine_onExit
+  vtbl[].vtbl.beginSelectTransitions = miqt_exec_method_cQStateMachine_beginSelectTransitions
+  vtbl[].vtbl.endSelectTransitions = miqt_exec_method_cQStateMachine_endSelectTransitions
+  vtbl[].vtbl.beginMicrostep = miqt_exec_method_cQStateMachine_beginMicrostep
+  vtbl[].vtbl.endMicrostep = miqt_exec_method_cQStateMachine_endMicrostep
+  vtbl[].vtbl.event = miqt_exec_method_cQStateMachine_event
+  vtbl[].vtbl.timerEvent = miqt_exec_method_cQStateMachine_timerEvent
+  vtbl[].vtbl.childEvent = miqt_exec_method_cQStateMachine_childEvent
+  vtbl[].vtbl.customEvent = miqt_exec_method_cQStateMachine_customEvent
+  vtbl[].vtbl.connectNotify = miqt_exec_method_cQStateMachine_connectNotify
+  vtbl[].vtbl.disconnectNotify = miqt_exec_method_cQStateMachine_disconnectNotify
+  if vtbl[].h != nil: delete(move(vtbl[]))
+  vtbl[].h = fcQStateMachine_new4(addr(vtbl[].vtbl), cint(childMode), parent.h)
+  vtbl[].owned = true
 
 proc staticMetaObject*(_: type gen_qstatemachine_types.QStateMachine): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQStateMachine_staticMetaObject())
-proc delete*(self: gen_qstatemachine_types.QStateMachine) =
-  fcQStateMachine_delete(self.h)
 proc sender*(self: gen_qstatemachine_types.QStateMachineSignalEvent, ): gen_qobject_types.QObject =
-  gen_qobject_types.QObject(h: fcQStateMachineSignalEvent_sender(self.h))
+  gen_qobject_types.QObject(h: fcQStateMachineSignalEvent_sender(self.h), owned: false)
 
 proc signalIndex*(self: gen_qstatemachine_types.QStateMachineSignalEvent, ): cint =
   fcQStateMachineSignalEvent_signalIndex(self.h)
 
 proc create*(T: type gen_qstatemachine_types.QStateMachineSignalEvent,
     param1: gen_qstatemachine_types.QStateMachineSignalEvent): gen_qstatemachine_types.QStateMachineSignalEvent =
-  gen_qstatemachine_types.QStateMachineSignalEvent(h: fcQStateMachineSignalEvent_new(param1.h))
+  gen_qstatemachine_types.QStateMachineSignalEvent(h: fcQStateMachineSignalEvent_new(param1.h), owned: true)
 
-proc delete*(self: gen_qstatemachine_types.QStateMachineSignalEvent) =
-  fcQStateMachineSignalEvent_delete(self.h)
 proc objectX*(self: gen_qstatemachine_types.QStateMachineWrappedEvent, ): gen_qobject_types.QObject =
-  gen_qobject_types.QObject(h: fcQStateMachineWrappedEvent_objectX(self.h))
+  gen_qobject_types.QObject(h: fcQStateMachineWrappedEvent_objectX(self.h), owned: false)
 
 proc event*(self: gen_qstatemachine_types.QStateMachineWrappedEvent, ): gen_qcoreevent_types.QEvent =
-  gen_qcoreevent_types.QEvent(h: fcQStateMachineWrappedEvent_event(self.h))
+  gen_qcoreevent_types.QEvent(h: fcQStateMachineWrappedEvent_event(self.h), owned: false)
 
 proc create*(T: type gen_qstatemachine_types.QStateMachineWrappedEvent,
     objectVal: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): gen_qstatemachine_types.QStateMachineWrappedEvent =
-  gen_qstatemachine_types.QStateMachineWrappedEvent(h: fcQStateMachineWrappedEvent_new(objectVal.h, event.h))
+  gen_qstatemachine_types.QStateMachineWrappedEvent(h: fcQStateMachineWrappedEvent_new(objectVal.h, event.h), owned: true)
 
 proc create*(T: type gen_qstatemachine_types.QStateMachineWrappedEvent,
     param1: gen_qstatemachine_types.QStateMachineWrappedEvent): gen_qstatemachine_types.QStateMachineWrappedEvent =
-  gen_qstatemachine_types.QStateMachineWrappedEvent(h: fcQStateMachineWrappedEvent_new2(param1.h))
+  gen_qstatemachine_types.QStateMachineWrappedEvent(h: fcQStateMachineWrappedEvent_new2(param1.h), owned: true)
 
-proc delete*(self: gen_qstatemachine_types.QStateMachineWrappedEvent) =
-  fcQStateMachineWrappedEvent_delete(self.h)

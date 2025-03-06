@@ -30,9 +30,6 @@ func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
     else:
       copyMem(addr result[0], unsafeAddr v[0], v.len)
 
-const cflags = gorge("pkg-config --cflags Qt5Qml")  & " -fPIC"
-{.compile("gen_qqmlabstracturlinterceptor.cpp", cflags).}
-
 
 type QQmlAbstractUrlInterceptorDataTypeEnum* = distinct cint
 template QmlFile*(_: type QQmlAbstractUrlInterceptorDataTypeEnum): untyped = 0
@@ -53,40 +50,66 @@ type cQQmlAbstractUrlInterceptor*{.exportc: "QQmlAbstractUrlInterceptor", incomp
 
 proc fcQQmlAbstractUrlInterceptor_intercept(self: pointer, path: pointer, typeVal: cint): pointer {.importc: "QQmlAbstractUrlInterceptor_intercept".}
 proc fcQQmlAbstractUrlInterceptor_operatorAssign(self: pointer, param1: pointer): void {.importc: "QQmlAbstractUrlInterceptor_operatorAssign".}
-type cQQmlAbstractUrlInterceptorVTable = object
+type cQQmlAbstractUrlInterceptorVTable {.pure.} = object
   destructor*: proc(vtbl: ptr cQQmlAbstractUrlInterceptorVTable, self: ptr cQQmlAbstractUrlInterceptor) {.cdecl, raises:[], gcsafe.}
   intercept*: proc(vtbl, self: pointer, path: pointer, typeVal: cint): pointer {.cdecl, raises: [], gcsafe.}
 proc fcQQmlAbstractUrlInterceptor_new(vtbl: pointer, ): ptr cQQmlAbstractUrlInterceptor {.importc: "QQmlAbstractUrlInterceptor_new".}
-proc fcQQmlAbstractUrlInterceptor_delete(self: pointer) {.importc: "QQmlAbstractUrlInterceptor_delete".}
 
 proc intercept*(self: gen_qqmlabstracturlinterceptor_types.QQmlAbstractUrlInterceptor, path: gen_qurl_types.QUrl, typeVal: cint): gen_qurl_types.QUrl =
-  gen_qurl_types.QUrl(h: fcQQmlAbstractUrlInterceptor_intercept(self.h, path.h, cint(typeVal)))
+  gen_qurl_types.QUrl(h: fcQQmlAbstractUrlInterceptor_intercept(self.h, path.h, cint(typeVal)), owned: true)
 
 proc operatorAssign*(self: gen_qqmlabstracturlinterceptor_types.QQmlAbstractUrlInterceptor, param1: gen_qqmlabstracturlinterceptor_types.QQmlAbstractUrlInterceptor): void =
   fcQQmlAbstractUrlInterceptor_operatorAssign(self.h, param1.h)
 
 type QQmlAbstractUrlInterceptorinterceptProc* = proc(self: QQmlAbstractUrlInterceptor, path: gen_qurl_types.QUrl, typeVal: cint): gen_qurl_types.QUrl {.raises: [], gcsafe.}
-type QQmlAbstractUrlInterceptorVTable* = object
+type QQmlAbstractUrlInterceptorVTable* {.inheritable, pure.} = object
   vtbl: cQQmlAbstractUrlInterceptorVTable
   intercept*: QQmlAbstractUrlInterceptorinterceptProc
 proc miqt_exec_callback_cQQmlAbstractUrlInterceptor_intercept(vtbl: pointer, self: pointer, path: pointer, typeVal: cint): pointer {.cdecl.} =
   let vtbl = cast[ptr QQmlAbstractUrlInterceptorVTable](vtbl)
   let self = QQmlAbstractUrlInterceptor(h: self)
-  let slotval1 = gen_qurl_types.QUrl(h: path)
+  let slotval1 = gen_qurl_types.QUrl(h: path, owned: false)
   let slotval2 = cint(typeVal)
   var virtualReturn = vtbl[].intercept(self, slotval1, slotval2)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
+
+type VirtualQQmlAbstractUrlInterceptor* {.inheritable.} = ref object of QQmlAbstractUrlInterceptor
+  vtbl*: cQQmlAbstractUrlInterceptorVTable
+method intercept*(self: VirtualQQmlAbstractUrlInterceptor, path: gen_qurl_types.QUrl, typeVal: cint): gen_qurl_types.QUrl {.base.} =
+  raiseAssert("missing implementation of QQmlAbstractUrlInterceptor_virtualbase_intercept")
+proc miqt_exec_method_cQQmlAbstractUrlInterceptor_intercept(vtbl: pointer, inst: pointer, path: pointer, typeVal: cint): pointer {.cdecl.} =
+  let vtbl = cast[VirtualQQmlAbstractUrlInterceptor](cast[uint](vtbl) - uint(offsetOf(VirtualQQmlAbstractUrlInterceptor, vtbl)))
+  let slotval1 = gen_qurl_types.QUrl(h: path, owned: false)
+  let slotval2 = cint(typeVal)
+  var virtualReturn = vtbl.intercept(slotval1, slotval2)
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc create*(T: type gen_qqmlabstracturlinterceptor_types.QQmlAbstractUrlInterceptor,
     vtbl: ref QQmlAbstractUrlInterceptorVTable = nil): gen_qqmlabstracturlinterceptor_types.QQmlAbstractUrlInterceptor =
   let vtbl = if vtbl == nil: new QQmlAbstractUrlInterceptorVTable else: vtbl
   GC_ref(vtbl)
-  vtbl.vtbl.destructor = proc(vtbl: ptr cQQmlAbstractUrlInterceptorVTable, _: ptr cQQmlAbstractUrlInterceptor) {.cdecl.} =
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQQmlAbstractUrlInterceptorVTable, _: ptr cQQmlAbstractUrlInterceptor) {.cdecl.} =
     let vtbl = cast[ref QQmlAbstractUrlInterceptorVTable](vtbl)
     GC_unref(vtbl)
-  if not isNil(vtbl.intercept):
+  if not isNil(vtbl[].intercept):
     vtbl[].vtbl.intercept = miqt_exec_callback_cQQmlAbstractUrlInterceptor_intercept
-  gen_qqmlabstracturlinterceptor_types.QQmlAbstractUrlInterceptor(h: fcQQmlAbstractUrlInterceptor_new(addr(vtbl[]), ))
+  gen_qqmlabstracturlinterceptor_types.QQmlAbstractUrlInterceptor(h: fcQQmlAbstractUrlInterceptor_new(addr(vtbl[].vtbl), ), owned: true)
 
-proc delete*(self: gen_qqmlabstracturlinterceptor_types.QQmlAbstractUrlInterceptor) =
-  fcQQmlAbstractUrlInterceptor_delete(self.h)
+proc create*(T: type gen_qqmlabstracturlinterceptor_types.QQmlAbstractUrlInterceptor,
+    vtbl: VirtualQQmlAbstractUrlInterceptor) =
+
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQQmlAbstractUrlInterceptorVTable, _: ptr cQQmlAbstractUrlInterceptor) {.cdecl.} =
+    let vtbl = cast[ptr typeof(VirtualQQmlAbstractUrlInterceptor()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQQmlAbstractUrlInterceptor, vtbl)))
+    vtbl[].h = nil
+    vtbl[].owned = false
+  vtbl[].vtbl.intercept = miqt_exec_method_cQQmlAbstractUrlInterceptor_intercept
+  if vtbl[].h != nil: delete(move(vtbl[]))
+  vtbl[].h = fcQQmlAbstractUrlInterceptor_new(addr(vtbl[].vtbl), )
+  vtbl[].owned = true
+

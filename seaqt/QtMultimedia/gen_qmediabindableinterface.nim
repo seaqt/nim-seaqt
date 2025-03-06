@@ -30,9 +30,6 @@ func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
     else:
       copyMem(addr result[0], unsafeAddr v[0], v.len)
 
-const cflags = gorge("pkg-config --cflags Qt5Multimedia")  & " -fPIC"
-{.compile("gen_qmediabindableinterface.cpp", cflags).}
-
 
 import ./gen_qmediabindableinterface_types
 export gen_qmediabindableinterface_types
@@ -45,10 +42,7 @@ export
 type cQMediaBindableInterface*{.exportc: "QMediaBindableInterface", incompleteStruct.} = object
 
 proc fcQMediaBindableInterface_mediaObject(self: pointer, ): pointer {.importc: "QMediaBindableInterface_mediaObject".}
-proc fcQMediaBindableInterface_delete(self: pointer) {.importc: "QMediaBindableInterface_delete".}
 
 proc mediaObject*(self: gen_qmediabindableinterface_types.QMediaBindableInterface, ): gen_qmediaobject_types.QMediaObject =
-  gen_qmediaobject_types.QMediaObject(h: fcQMediaBindableInterface_mediaObject(self.h))
+  gen_qmediaobject_types.QMediaObject(h: fcQMediaBindableInterface_mediaObject(self.h), owned: false)
 
-proc delete*(self: gen_qmediabindableinterface_types.QMediaBindableInterface) =
-  fcQMediaBindableInterface_delete(self.h)

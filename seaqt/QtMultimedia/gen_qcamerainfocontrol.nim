@@ -30,7 +30,7 @@ func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
     else:
       copyMem(addr result[0], unsafeAddr v[0], v.len)
 
-const cflags = gorge("pkg-config --cflags Qt5Multimedia")  & " -fPIC"
+const cflags = gorge("pkg-config --cflags Qt5Multimedia") & " -fPIC"
 {.compile("gen_qcamerainfocontrol.cpp", cflags).}
 
 
@@ -66,10 +66,9 @@ proc fcQCameraInfoControl_protectedbase_senderSignalIndex(self: pointer, ): cint
 proc fcQCameraInfoControl_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QCameraInfoControl_protectedbase_receivers".}
 proc fcQCameraInfoControl_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QCameraInfoControl_protectedbase_isSignalConnected".}
 proc fcQCameraInfoControl_staticMetaObject(): pointer {.importc: "QCameraInfoControl_staticMetaObject".}
-proc fcQCameraInfoControl_delete(self: pointer) {.importc: "QCameraInfoControl_delete".}
 
 proc metaObject*(self: gen_qcamerainfocontrol_types.QCameraInfoControl, ): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQCameraInfoControl_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQCameraInfoControl_metaObject(self.h), owned: false)
 
 proc metacast*(self: gen_qcamerainfocontrol_types.QCameraInfoControl, param1: cstring): pointer =
   fcQCameraInfoControl_metacast(self.h, param1)
@@ -120,7 +119,7 @@ proc trUtf8*(_: type gen_qcamerainfocontrol_types.QCameraInfoControl, s: cstring
   vx_ret
 
 proc sender*(self: gen_qcamerainfocontrol_types.QCameraInfoControl, ): gen_qobject_types.QObject =
-  gen_qobject_types.QObject(h: fcQCameraInfoControl_protectedbase_sender(self.h))
+  gen_qobject_types.QObject(h: fcQCameraInfoControl_protectedbase_sender(self.h), owned: false)
 
 proc senderSignalIndex*(self: gen_qcamerainfocontrol_types.QCameraInfoControl, ): cint =
   fcQCameraInfoControl_protectedbase_senderSignalIndex(self.h)
@@ -133,5 +132,3 @@ proc isSignalConnected*(self: gen_qcamerainfocontrol_types.QCameraInfoControl, s
 
 proc staticMetaObject*(_: type gen_qcamerainfocontrol_types.QCameraInfoControl): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQCameraInfoControl_staticMetaObject())
-proc delete*(self: gen_qcamerainfocontrol_types.QCameraInfoControl) =
-  fcQCameraInfoControl_delete(self.h)

@@ -30,9 +30,6 @@ func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
     else:
       copyMem(addr result[0], unsafeAddr v[0], v.len)
 
-const cflags = gorge("pkg-config --cflags Qt5Core")  & " -fPIC"
-{.compile("gen_qcalendar.cpp", cflags).}
-
 
 type QCalendarEnumEnum* = distinct cint
 template Unspecified*(_: type QCalendarEnumEnum): untyped = -2147483648
@@ -98,13 +95,11 @@ proc fcQCalendar_standaloneWeekDayName3(self: pointer, locale: pointer, day: cin
 proc fcQCalendar_new(): ptr cQCalendar {.importc: "QCalendar_new".}
 proc fcQCalendar_new2(system: cint): ptr cQCalendar {.importc: "QCalendar_new2".}
 proc fcQCalendar_staticMetaObject(): pointer {.importc: "QCalendar_staticMetaObject".}
-proc fcQCalendar_delete(self: pointer) {.importc: "QCalendar_delete".}
 proc fcQCalendarYearMonthDay_isValid(self: pointer, ): bool {.importc: "QCalendar__YearMonthDay_isValid".}
 proc fcQCalendarYearMonthDay_new(): ptr cQCalendarYearMonthDay {.importc: "QCalendar__YearMonthDay_new".}
 proc fcQCalendarYearMonthDay_new2(y: cint): ptr cQCalendarYearMonthDay {.importc: "QCalendar__YearMonthDay_new2".}
 proc fcQCalendarYearMonthDay_new3(y: cint, m: cint): ptr cQCalendarYearMonthDay {.importc: "QCalendar__YearMonthDay_new3".}
 proc fcQCalendarYearMonthDay_new4(y: cint, m: cint, d: cint): ptr cQCalendarYearMonthDay {.importc: "QCalendar__YearMonthDay_new4".}
-proc fcQCalendarYearMonthDay_delete(self: pointer) {.importc: "QCalendar__YearMonthDay_delete".}
 
 proc isValid*(self: gen_qcalendar_types.QCalendar, ): bool =
   fcQCalendar_isValid(self.h)
@@ -158,13 +153,13 @@ proc name*(self: gen_qcalendar_types.QCalendar, ): string =
   vx_ret
 
 proc dateFromParts*(self: gen_qcalendar_types.QCalendar, year: cint, month: cint, day: cint): gen_qdatetime_types.QDate =
-  gen_qdatetime_types.QDate(h: fcQCalendar_dateFromParts(self.h, year, month, day))
+  gen_qdatetime_types.QDate(h: fcQCalendar_dateFromParts(self.h, year, month, day), owned: true)
 
 proc dateFromParts*(self: gen_qcalendar_types.QCalendar, parts: gen_qcalendar_types.QCalendarYearMonthDay): gen_qdatetime_types.QDate =
-  gen_qdatetime_types.QDate(h: fcQCalendar_dateFromPartsWithParts(self.h, parts.h))
+  gen_qdatetime_types.QDate(h: fcQCalendar_dateFromPartsWithParts(self.h, parts.h), owned: true)
 
 proc partsFromDate*(self: gen_qcalendar_types.QCalendar, date: gen_qdatetime_types.QDate): gen_qcalendar_types.QCalendarYearMonthDay =
-  gen_qcalendar_types.QCalendarYearMonthDay(h: fcQCalendar_partsFromDate(self.h, date.h))
+  gen_qcalendar_types.QCalendarYearMonthDay(h: fcQCalendar_partsFromDate(self.h, date.h), owned: true)
 
 proc dayOfWeek*(self: gen_qcalendar_types.QCalendar, date: gen_qdatetime_types.QDate): cint =
   fcQCalendar_dayOfWeek(self.h, date.h)
@@ -245,33 +240,29 @@ proc standaloneWeekDayName*(self: gen_qcalendar_types.QCalendar, locale: gen_qlo
   vx_ret
 
 proc create*(T: type gen_qcalendar_types.QCalendar): gen_qcalendar_types.QCalendar =
-  gen_qcalendar_types.QCalendar(h: fcQCalendar_new())
+  gen_qcalendar_types.QCalendar(h: fcQCalendar_new(), owned: true)
 
 proc create*(T: type gen_qcalendar_types.QCalendar,
     system: cint): gen_qcalendar_types.QCalendar =
-  gen_qcalendar_types.QCalendar(h: fcQCalendar_new2(cint(system)))
+  gen_qcalendar_types.QCalendar(h: fcQCalendar_new2(cint(system)), owned: true)
 
 proc staticMetaObject*(_: type gen_qcalendar_types.QCalendar): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQCalendar_staticMetaObject())
-proc delete*(self: gen_qcalendar_types.QCalendar) =
-  fcQCalendar_delete(self.h)
 proc isValid*(self: gen_qcalendar_types.QCalendarYearMonthDay, ): bool =
   fcQCalendarYearMonthDay_isValid(self.h)
 
 proc create*(T: type gen_qcalendar_types.QCalendarYearMonthDay): gen_qcalendar_types.QCalendarYearMonthDay =
-  gen_qcalendar_types.QCalendarYearMonthDay(h: fcQCalendarYearMonthDay_new())
+  gen_qcalendar_types.QCalendarYearMonthDay(h: fcQCalendarYearMonthDay_new(), owned: true)
 
 proc create*(T: type gen_qcalendar_types.QCalendarYearMonthDay,
     y: cint): gen_qcalendar_types.QCalendarYearMonthDay =
-  gen_qcalendar_types.QCalendarYearMonthDay(h: fcQCalendarYearMonthDay_new2(y))
+  gen_qcalendar_types.QCalendarYearMonthDay(h: fcQCalendarYearMonthDay_new2(y), owned: true)
 
 proc create*(T: type gen_qcalendar_types.QCalendarYearMonthDay,
     y: cint, m: cint): gen_qcalendar_types.QCalendarYearMonthDay =
-  gen_qcalendar_types.QCalendarYearMonthDay(h: fcQCalendarYearMonthDay_new3(y, m))
+  gen_qcalendar_types.QCalendarYearMonthDay(h: fcQCalendarYearMonthDay_new3(y, m), owned: true)
 
 proc create*(T: type gen_qcalendar_types.QCalendarYearMonthDay,
     y: cint, m: cint, d: cint): gen_qcalendar_types.QCalendarYearMonthDay =
-  gen_qcalendar_types.QCalendarYearMonthDay(h: fcQCalendarYearMonthDay_new4(y, m, d))
+  gen_qcalendar_types.QCalendarYearMonthDay(h: fcQCalendarYearMonthDay_new4(y, m, d), owned: true)
 
-proc delete*(self: gen_qcalendar_types.QCalendarYearMonthDay) =
-  fcQCalendarYearMonthDay_delete(self.h)

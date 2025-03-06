@@ -30,7 +30,7 @@ func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
     else:
       copyMem(addr result[0], unsafeAddr v[0], v.len)
 
-const cflags = gorge("pkg-config --cflags Qt5Multimedia")  & " -fPIC"
+const cflags = gorge("pkg-config --cflags Qt5Multimedia") & " -fPIC"
 {.compile("gen_qaudiooutputselectorcontrol.cpp", cflags).}
 
 
@@ -73,10 +73,9 @@ proc fcQAudioOutputSelectorControl_protectedbase_senderSignalIndex(self: pointer
 proc fcQAudioOutputSelectorControl_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QAudioOutputSelectorControl_protectedbase_receivers".}
 proc fcQAudioOutputSelectorControl_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QAudioOutputSelectorControl_protectedbase_isSignalConnected".}
 proc fcQAudioOutputSelectorControl_staticMetaObject(): pointer {.importc: "QAudioOutputSelectorControl_staticMetaObject".}
-proc fcQAudioOutputSelectorControl_delete(self: pointer) {.importc: "QAudioOutputSelectorControl_delete".}
 
 proc metaObject*(self: gen_qaudiooutputselectorcontrol_types.QAudioOutputSelectorControl, ): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQAudioOutputSelectorControl_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQAudioOutputSelectorControl_metaObject(self.h), owned: false)
 
 proc metacast*(self: gen_qaudiooutputselectorcontrol_types.QAudioOutputSelectorControl, param1: cstring): pointer =
   fcQAudioOutputSelectorControl_metacast(self.h, param1)
@@ -195,7 +194,7 @@ proc trUtf8*(_: type gen_qaudiooutputselectorcontrol_types.QAudioOutputSelectorC
   vx_ret
 
 proc sender*(self: gen_qaudiooutputselectorcontrol_types.QAudioOutputSelectorControl, ): gen_qobject_types.QObject =
-  gen_qobject_types.QObject(h: fcQAudioOutputSelectorControl_protectedbase_sender(self.h))
+  gen_qobject_types.QObject(h: fcQAudioOutputSelectorControl_protectedbase_sender(self.h), owned: false)
 
 proc senderSignalIndex*(self: gen_qaudiooutputselectorcontrol_types.QAudioOutputSelectorControl, ): cint =
   fcQAudioOutputSelectorControl_protectedbase_senderSignalIndex(self.h)
@@ -208,5 +207,3 @@ proc isSignalConnected*(self: gen_qaudiooutputselectorcontrol_types.QAudioOutput
 
 proc staticMetaObject*(_: type gen_qaudiooutputselectorcontrol_types.QAudioOutputSelectorControl): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQAudioOutputSelectorControl_staticMetaObject())
-proc delete*(self: gen_qaudiooutputselectorcontrol_types.QAudioOutputSelectorControl) =
-  fcQAudioOutputSelectorControl_delete(self.h)

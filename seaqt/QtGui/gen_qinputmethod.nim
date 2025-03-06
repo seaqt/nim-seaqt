@@ -30,7 +30,7 @@ func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
     else:
       copyMem(addr result[0], unsafeAddr v[0], v.len)
 
-const cflags = gorge("pkg-config --cflags Qt5Gui")  & " -fPIC"
+const cflags = gorge("pkg-config --cflags Qt5Gui") & " -fPIC"
 {.compile("gen_qinputmethod.cpp", cflags).}
 
 
@@ -113,7 +113,7 @@ proc fcQInputMethod_protectedbase_isSignalConnected(self: pointer, signal: point
 proc fcQInputMethod_staticMetaObject(): pointer {.importc: "QInputMethod_staticMetaObject".}
 
 proc metaObject*(self: gen_qinputmethod_types.QInputMethod, ): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQInputMethod_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQInputMethod_metaObject(self.h), owned: false)
 
 proc metacast*(self: gen_qinputmethod_types.QInputMethod, param1: cstring): pointer =
   fcQInputMethod_metacast(self.h, param1)
@@ -134,28 +134,28 @@ proc trUtf8*(_: type gen_qinputmethod_types.QInputMethod, s: cstring): string =
   vx_ret
 
 proc inputItemTransform*(self: gen_qinputmethod_types.QInputMethod, ): gen_qtransform_types.QTransform =
-  gen_qtransform_types.QTransform(h: fcQInputMethod_inputItemTransform(self.h))
+  gen_qtransform_types.QTransform(h: fcQInputMethod_inputItemTransform(self.h), owned: true)
 
 proc setInputItemTransform*(self: gen_qinputmethod_types.QInputMethod, transform: gen_qtransform_types.QTransform): void =
   fcQInputMethod_setInputItemTransform(self.h, transform.h)
 
 proc inputItemRectangle*(self: gen_qinputmethod_types.QInputMethod, ): gen_qrect_types.QRectF =
-  gen_qrect_types.QRectF(h: fcQInputMethod_inputItemRectangle(self.h))
+  gen_qrect_types.QRectF(h: fcQInputMethod_inputItemRectangle(self.h), owned: true)
 
 proc setInputItemRectangle*(self: gen_qinputmethod_types.QInputMethod, rect: gen_qrect_types.QRectF): void =
   fcQInputMethod_setInputItemRectangle(self.h, rect.h)
 
 proc cursorRectangle*(self: gen_qinputmethod_types.QInputMethod, ): gen_qrect_types.QRectF =
-  gen_qrect_types.QRectF(h: fcQInputMethod_cursorRectangle(self.h))
+  gen_qrect_types.QRectF(h: fcQInputMethod_cursorRectangle(self.h), owned: true)
 
 proc anchorRectangle*(self: gen_qinputmethod_types.QInputMethod, ): gen_qrect_types.QRectF =
-  gen_qrect_types.QRectF(h: fcQInputMethod_anchorRectangle(self.h))
+  gen_qrect_types.QRectF(h: fcQInputMethod_anchorRectangle(self.h), owned: true)
 
 proc keyboardRectangle*(self: gen_qinputmethod_types.QInputMethod, ): gen_qrect_types.QRectF =
-  gen_qrect_types.QRectF(h: fcQInputMethod_keyboardRectangle(self.h))
+  gen_qrect_types.QRectF(h: fcQInputMethod_keyboardRectangle(self.h), owned: true)
 
 proc inputItemClipRectangle*(self: gen_qinputmethod_types.QInputMethod, ): gen_qrect_types.QRectF =
-  gen_qrect_types.QRectF(h: fcQInputMethod_inputItemClipRectangle(self.h))
+  gen_qrect_types.QRectF(h: fcQInputMethod_inputItemClipRectangle(self.h), owned: true)
 
 proc isVisible*(self: gen_qinputmethod_types.QInputMethod, ): bool =
   fcQInputMethod_isVisible(self.h)
@@ -167,13 +167,13 @@ proc isAnimating*(self: gen_qinputmethod_types.QInputMethod, ): bool =
   fcQInputMethod_isAnimating(self.h)
 
 proc locale*(self: gen_qinputmethod_types.QInputMethod, ): gen_qlocale_types.QLocale =
-  gen_qlocale_types.QLocale(h: fcQInputMethod_locale(self.h))
+  gen_qlocale_types.QLocale(h: fcQInputMethod_locale(self.h), owned: true)
 
 proc inputDirection*(self: gen_qinputmethod_types.QInputMethod, ): cint =
   cint(fcQInputMethod_inputDirection(self.h))
 
 proc queryFocusObject*(_: type gen_qinputmethod_types.QInputMethod, query: cint, argument: gen_qvariant_types.QVariant): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQInputMethod_queryFocusObject(cint(query), argument.h))
+  gen_qvariant_types.QVariant(h: fcQInputMethod_queryFocusObject(cint(query), argument.h), owned: true)
 
 proc show*(self: gen_qinputmethod_types.QInputMethod, ): void =
   fcQInputMethod_show(self.h)
@@ -364,7 +364,7 @@ proc trUtf8*(_: type gen_qinputmethod_types.QInputMethod, s: cstring, c: cstring
   vx_ret
 
 proc sender*(self: gen_qinputmethod_types.QInputMethod, ): gen_qobject_types.QObject =
-  gen_qobject_types.QObject(h: fcQInputMethod_protectedbase_sender(self.h))
+  gen_qobject_types.QObject(h: fcQInputMethod_protectedbase_sender(self.h), owned: false)
 
 proc senderSignalIndex*(self: gen_qinputmethod_types.QInputMethod, ): cint =
   fcQInputMethod_protectedbase_senderSignalIndex(self.h)

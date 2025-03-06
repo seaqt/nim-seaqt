@@ -30,9 +30,6 @@ func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
     else:
       copyMem(addr result[0], unsafeAddr v[0], v.len)
 
-const cflags = gorge("pkg-config --cflags Qt5Multimedia")  & " -fPIC"
-{.compile("gen_qmediaresource.cpp", cflags).}
-
 
 import ./gen_qmediaresource_types
 export gen_qmediaresource_types
@@ -80,7 +77,6 @@ proc fcQMediaResource_new3(request: pointer): ptr cQMediaResource {.importc: "QM
 proc fcQMediaResource_new4(other: pointer): ptr cQMediaResource {.importc: "QMediaResource_new4".}
 proc fcQMediaResource_new5(url: pointer, mimeType: struct_miqt_string): ptr cQMediaResource {.importc: "QMediaResource_new5".}
 proc fcQMediaResource_new6(request: pointer, mimeType: struct_miqt_string): ptr cQMediaResource {.importc: "QMediaResource_new6".}
-proc fcQMediaResource_delete(self: pointer) {.importc: "QMediaResource_delete".}
 
 proc operatorAssign*(self: gen_qmediaresource_types.QMediaResource, other: gen_qmediaresource_types.QMediaResource): void =
   fcQMediaResource_operatorAssign(self.h, other.h)
@@ -95,10 +91,10 @@ proc operatorNotEqual*(self: gen_qmediaresource_types.QMediaResource, other: gen
   fcQMediaResource_operatorNotEqual(self.h, other.h)
 
 proc url*(self: gen_qmediaresource_types.QMediaResource, ): gen_qurl_types.QUrl =
-  gen_qurl_types.QUrl(h: fcQMediaResource_url(self.h))
+  gen_qurl_types.QUrl(h: fcQMediaResource_url(self.h), owned: true)
 
 proc request*(self: gen_qmediaresource_types.QMediaResource, ): gen_qnetworkrequest_types.QNetworkRequest =
-  gen_qnetworkrequest_types.QNetworkRequest(h: fcQMediaResource_request(self.h))
+  gen_qnetworkrequest_types.QNetworkRequest(h: fcQMediaResource_request(self.h), owned: true)
 
 proc mimeType*(self: gen_qmediaresource_types.QMediaResource, ): string =
   let v_ms = fcQMediaResource_mimeType(self.h)
@@ -164,7 +160,7 @@ proc setVideoBitRate*(self: gen_qmediaresource_types.QMediaResource, rate: cint)
   fcQMediaResource_setVideoBitRate(self.h, rate)
 
 proc resolution*(self: gen_qmediaresource_types.QMediaResource, ): gen_qsize_types.QSize =
-  gen_qsize_types.QSize(h: fcQMediaResource_resolution(self.h))
+  gen_qsize_types.QSize(h: fcQMediaResource_resolution(self.h), owned: true)
 
 proc setResolution*(self: gen_qmediaresource_types.QMediaResource, resolution: gen_qsize_types.QSize): void =
   fcQMediaResource_setResolution(self.h, resolution.h)
@@ -173,27 +169,25 @@ proc setResolution*(self: gen_qmediaresource_types.QMediaResource, width: cint, 
   fcQMediaResource_setResolution2(self.h, width, height)
 
 proc create*(T: type gen_qmediaresource_types.QMediaResource): gen_qmediaresource_types.QMediaResource =
-  gen_qmediaresource_types.QMediaResource(h: fcQMediaResource_new())
+  gen_qmediaresource_types.QMediaResource(h: fcQMediaResource_new(), owned: true)
 
 proc create*(T: type gen_qmediaresource_types.QMediaResource,
     url: gen_qurl_types.QUrl): gen_qmediaresource_types.QMediaResource =
-  gen_qmediaresource_types.QMediaResource(h: fcQMediaResource_new2(url.h))
+  gen_qmediaresource_types.QMediaResource(h: fcQMediaResource_new2(url.h), owned: true)
 
 proc create*(T: type gen_qmediaresource_types.QMediaResource,
     request: gen_qnetworkrequest_types.QNetworkRequest): gen_qmediaresource_types.QMediaResource =
-  gen_qmediaresource_types.QMediaResource(h: fcQMediaResource_new3(request.h))
+  gen_qmediaresource_types.QMediaResource(h: fcQMediaResource_new3(request.h), owned: true)
 
 proc create*(T: type gen_qmediaresource_types.QMediaResource,
     other: gen_qmediaresource_types.QMediaResource): gen_qmediaresource_types.QMediaResource =
-  gen_qmediaresource_types.QMediaResource(h: fcQMediaResource_new4(other.h))
+  gen_qmediaresource_types.QMediaResource(h: fcQMediaResource_new4(other.h), owned: true)
 
 proc create*(T: type gen_qmediaresource_types.QMediaResource,
     url: gen_qurl_types.QUrl, mimeType: string): gen_qmediaresource_types.QMediaResource =
-  gen_qmediaresource_types.QMediaResource(h: fcQMediaResource_new5(url.h, struct_miqt_string(data: mimeType, len: csize_t(len(mimeType)))))
+  gen_qmediaresource_types.QMediaResource(h: fcQMediaResource_new5(url.h, struct_miqt_string(data: mimeType, len: csize_t(len(mimeType)))), owned: true)
 
 proc create*(T: type gen_qmediaresource_types.QMediaResource,
     request: gen_qnetworkrequest_types.QNetworkRequest, mimeType: string): gen_qmediaresource_types.QMediaResource =
-  gen_qmediaresource_types.QMediaResource(h: fcQMediaResource_new6(request.h, struct_miqt_string(data: mimeType, len: csize_t(len(mimeType)))))
+  gen_qmediaresource_types.QMediaResource(h: fcQMediaResource_new6(request.h, struct_miqt_string(data: mimeType, len: csize_t(len(mimeType)))), owned: true)
 
-proc delete*(self: gen_qmediaresource_types.QMediaResource) =
-  fcQMediaResource_delete(self.h)

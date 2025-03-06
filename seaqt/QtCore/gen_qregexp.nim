@@ -30,9 +30,6 @@ func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
     else:
       copyMem(addr result[0], unsafeAddr v[0], v.len)
 
-const cflags = gorge("pkg-config --cflags Qt5Core")  & " -fPIC"
-{.compile("gen_qregexp.cpp", cflags).}
-
 
 type QRegExpPatternSyntaxEnum* = distinct cint
 template RegExp*(_: type QRegExpPatternSyntaxEnum): untyped = 0
@@ -96,7 +93,6 @@ proc fcQRegExp_new2(pattern: struct_miqt_string): ptr cQRegExp {.importc: "QRegE
 proc fcQRegExp_new3(rx: pointer): ptr cQRegExp {.importc: "QRegExp_new3".}
 proc fcQRegExp_new4(pattern: struct_miqt_string, cs: cint): ptr cQRegExp {.importc: "QRegExp_new4".}
 proc fcQRegExp_new5(pattern: struct_miqt_string, cs: cint, syntax: cint): ptr cQRegExp {.importc: "QRegExp_new5".}
-proc fcQRegExp_delete(self: pointer) {.importc: "QRegExp_delete".}
 
 proc operatorAssign*(self: gen_qregexp_types.QRegExp, rx: gen_qregexp_types.QRegExp): void =
   fcQRegExp_operatorAssign(self.h, rx.h)
@@ -249,23 +245,21 @@ proc pos2*(self: gen_qregexp_types.QRegExp, nth: cint): cint =
   fcQRegExp_pos1WithNth(self.h, nth)
 
 proc create*(T: type gen_qregexp_types.QRegExp): gen_qregexp_types.QRegExp =
-  gen_qregexp_types.QRegExp(h: fcQRegExp_new())
+  gen_qregexp_types.QRegExp(h: fcQRegExp_new(), owned: true)
 
 proc create*(T: type gen_qregexp_types.QRegExp,
     pattern: string): gen_qregexp_types.QRegExp =
-  gen_qregexp_types.QRegExp(h: fcQRegExp_new2(struct_miqt_string(data: pattern, len: csize_t(len(pattern)))))
+  gen_qregexp_types.QRegExp(h: fcQRegExp_new2(struct_miqt_string(data: pattern, len: csize_t(len(pattern)))), owned: true)
 
 proc create*(T: type gen_qregexp_types.QRegExp,
     rx: gen_qregexp_types.QRegExp): gen_qregexp_types.QRegExp =
-  gen_qregexp_types.QRegExp(h: fcQRegExp_new3(rx.h))
+  gen_qregexp_types.QRegExp(h: fcQRegExp_new3(rx.h), owned: true)
 
 proc create*(T: type gen_qregexp_types.QRegExp,
     pattern: string, cs: cint): gen_qregexp_types.QRegExp =
-  gen_qregexp_types.QRegExp(h: fcQRegExp_new4(struct_miqt_string(data: pattern, len: csize_t(len(pattern))), cint(cs)))
+  gen_qregexp_types.QRegExp(h: fcQRegExp_new4(struct_miqt_string(data: pattern, len: csize_t(len(pattern))), cint(cs)), owned: true)
 
 proc create*(T: type gen_qregexp_types.QRegExp,
     pattern: string, cs: cint, syntax: cint): gen_qregexp_types.QRegExp =
-  gen_qregexp_types.QRegExp(h: fcQRegExp_new5(struct_miqt_string(data: pattern, len: csize_t(len(pattern))), cint(cs), cint(syntax)))
+  gen_qregexp_types.QRegExp(h: fcQRegExp_new5(struct_miqt_string(data: pattern, len: csize_t(len(pattern))), cint(cs), cint(syntax)), owned: true)
 
-proc delete*(self: gen_qregexp_types.QRegExp) =
-  fcQRegExp_delete(self.h)

@@ -30,9 +30,6 @@ func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
     else:
       copyMem(addr result[0], unsafeAddr v[0], v.len)
 
-const cflags = gorge("pkg-config --cflags Qt5Quick")  & " -fPIC"
-{.compile("gen_qsgrendernode.cpp", cflags).}
-
 
 type QSGRenderNodeStateFlagEnum* = distinct cint
 template DepthState*(_: type QSGRenderNodeStateFlagEnum): untyped = 1
@@ -76,7 +73,7 @@ proc fcQSGRenderNode_rect(self: pointer, ): pointer {.importc: "QSGRenderNode_re
 proc fcQSGRenderNode_matrix(self: pointer, ): pointer {.importc: "QSGRenderNode_matrix".}
 proc fcQSGRenderNode_clipList(self: pointer, ): pointer {.importc: "QSGRenderNode_clipList".}
 proc fcQSGRenderNode_inheritedOpacity(self: pointer, ): float64 {.importc: "QSGRenderNode_inheritedOpacity".}
-type cQSGRenderNodeVTable = object
+type cQSGRenderNodeVTable {.pure.} = object
   destructor*: proc(vtbl: ptr cQSGRenderNodeVTable, self: ptr cQSGRenderNode) {.cdecl, raises:[], gcsafe.}
   changedStates*: proc(vtbl, self: pointer, ): cint {.cdecl, raises: [], gcsafe.}
   render*: proc(vtbl, self: pointer, state: pointer): void {.cdecl, raises: [], gcsafe.}
@@ -92,7 +89,6 @@ proc fcQSGRenderNode_virtualbase_rect(self: pointer, ): pointer {.importc: "QSGR
 proc fcQSGRenderNode_virtualbase_isSubtreeBlocked(self: pointer, ): bool {.importc: "QSGRenderNode_virtualbase_isSubtreeBlocked".}
 proc fcQSGRenderNode_virtualbase_preprocess(self: pointer, ): void {.importc: "QSGRenderNode_virtualbase_preprocess".}
 proc fcQSGRenderNode_new(vtbl: pointer, ): ptr cQSGRenderNode {.importc: "QSGRenderNode_new".}
-proc fcQSGRenderNode_delete(self: pointer) {.importc: "QSGRenderNode_delete".}
 proc fcQSGRenderNodeRenderState_projectionMatrix(self: pointer, ): pointer {.importc: "QSGRenderNode__RenderState_projectionMatrix".}
 proc fcQSGRenderNodeRenderState_scissorRect(self: pointer, ): pointer {.importc: "QSGRenderNode__RenderState_scissorRect".}
 proc fcQSGRenderNodeRenderState_scissorEnabled(self: pointer, ): bool {.importc: "QSGRenderNode__RenderState_scissorEnabled".}
@@ -101,7 +97,6 @@ proc fcQSGRenderNodeRenderState_stencilEnabled(self: pointer, ): bool {.importc:
 proc fcQSGRenderNodeRenderState_clipRegion(self: pointer, ): pointer {.importc: "QSGRenderNode__RenderState_clipRegion".}
 proc fcQSGRenderNodeRenderState_get(self: pointer, state: cstring): pointer {.importc: "QSGRenderNode__RenderState_get".}
 proc fcQSGRenderNodeRenderState_operatorAssign(self: pointer, param1: pointer): void {.importc: "QSGRenderNode__RenderState_operatorAssign".}
-proc fcQSGRenderNodeRenderState_delete(self: pointer) {.importc: "QSGRenderNode__RenderState_delete".}
 
 proc changedStates*(self: gen_qsgrendernode_types.QSGRenderNode, ): cint =
   cint(fcQSGRenderNode_changedStates(self.h))
@@ -116,13 +111,13 @@ proc flags*(self: gen_qsgrendernode_types.QSGRenderNode, ): cint =
   cint(fcQSGRenderNode_flags(self.h))
 
 proc rect*(self: gen_qsgrendernode_types.QSGRenderNode, ): gen_qrect_types.QRectF =
-  gen_qrect_types.QRectF(h: fcQSGRenderNode_rect(self.h))
+  gen_qrect_types.QRectF(h: fcQSGRenderNode_rect(self.h), owned: true)
 
 proc matrix*(self: gen_qsgrendernode_types.QSGRenderNode, ): gen_qmatrix4x4_types.QMatrix4x4 =
-  gen_qmatrix4x4_types.QMatrix4x4(h: fcQSGRenderNode_matrix(self.h))
+  gen_qmatrix4x4_types.QMatrix4x4(h: fcQSGRenderNode_matrix(self.h), owned: false)
 
 proc clipList*(self: gen_qsgrendernode_types.QSGRenderNode, ): gen_qsgnode_types.QSGClipNode =
-  gen_qsgnode_types.QSGClipNode(h: fcQSGRenderNode_clipList(self.h))
+  gen_qsgnode_types.QSGClipNode(h: fcQSGRenderNode_clipList(self.h), owned: false)
 
 proc inheritedOpacity*(self: gen_qsgrendernode_types.QSGRenderNode, ): float64 =
   fcQSGRenderNode_inheritedOpacity(self.h)
@@ -134,7 +129,7 @@ type QSGRenderNodeflagsProc* = proc(self: QSGRenderNode): cint {.raises: [], gcs
 type QSGRenderNoderectProc* = proc(self: QSGRenderNode): gen_qrect_types.QRectF {.raises: [], gcsafe.}
 type QSGRenderNodeisSubtreeBlockedProc* = proc(self: QSGRenderNode): bool {.raises: [], gcsafe.}
 type QSGRenderNodepreprocessProc* = proc(self: QSGRenderNode): void {.raises: [], gcsafe.}
-type QSGRenderNodeVTable* = object
+type QSGRenderNodeVTable* {.inheritable, pure.} = object
   vtbl: cQSGRenderNodeVTable
   changedStates*: QSGRenderNodechangedStatesProc
   render*: QSGRenderNoderenderProc
@@ -155,7 +150,7 @@ proc miqt_exec_callback_cQSGRenderNode_changedStates(vtbl: pointer, self: pointe
 proc miqt_exec_callback_cQSGRenderNode_render(vtbl: pointer, self: pointer, state: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSGRenderNodeVTable](vtbl)
   let self = QSGRenderNode(h: self)
-  let slotval1 = gen_qsgrendernode_types.QSGRenderNodeRenderState(h: state)
+  let slotval1 = gen_qsgrendernode_types.QSGRenderNodeRenderState(h: state, owned: false)
   vtbl[].render(self, slotval1)
 
 proc QSGRenderNodereleaseResources*(self: gen_qsgrendernode_types.QSGRenderNode, ): void =
@@ -176,13 +171,16 @@ proc miqt_exec_callback_cQSGRenderNode_flags(vtbl: pointer, self: pointer): cint
   cint(virtualReturn)
 
 proc QSGRenderNoderect*(self: gen_qsgrendernode_types.QSGRenderNode, ): gen_qrect_types.QRectF =
-  gen_qrect_types.QRectF(h: fcQSGRenderNode_virtualbase_rect(self.h))
+  gen_qrect_types.QRectF(h: fcQSGRenderNode_virtualbase_rect(self.h), owned: true)
 
 proc miqt_exec_callback_cQSGRenderNode_rect(vtbl: pointer, self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QSGRenderNodeVTable](vtbl)
   let self = QSGRenderNode(h: self)
   var virtualReturn = vtbl[].rect(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QSGRenderNodeisSubtreeBlocked*(self: gen_qsgrendernode_types.QSGRenderNode, ): bool =
   fcQSGRenderNode_virtualbase_isSubtreeBlocked(self.h)
@@ -201,36 +199,104 @@ proc miqt_exec_callback_cQSGRenderNode_preprocess(vtbl: pointer, self: pointer):
   let self = QSGRenderNode(h: self)
   vtbl[].preprocess(self)
 
+type VirtualQSGRenderNode* {.inheritable.} = ref object of QSGRenderNode
+  vtbl*: cQSGRenderNodeVTable
+method changedStates*(self: VirtualQSGRenderNode, ): cint {.base.} =
+  QSGRenderNodechangedStates(self[])
+proc miqt_exec_method_cQSGRenderNode_changedStates(vtbl: pointer, inst: pointer): cint {.cdecl.} =
+  let vtbl = cast[VirtualQSGRenderNode](cast[uint](vtbl) - uint(offsetOf(VirtualQSGRenderNode, vtbl)))
+  var virtualReturn = vtbl.changedStates()
+  cint(virtualReturn)
+
+method render*(self: VirtualQSGRenderNode, state: gen_qsgrendernode_types.QSGRenderNodeRenderState): void {.base.} =
+  raiseAssert("missing implementation of QSGRenderNode_virtualbase_render")
+proc miqt_exec_method_cQSGRenderNode_render(vtbl: pointer, inst: pointer, state: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQSGRenderNode](cast[uint](vtbl) - uint(offsetOf(VirtualQSGRenderNode, vtbl)))
+  let slotval1 = gen_qsgrendernode_types.QSGRenderNodeRenderState(h: state, owned: false)
+  vtbl.render(slotval1)
+
+method releaseResources*(self: VirtualQSGRenderNode, ): void {.base.} =
+  QSGRenderNodereleaseResources(self[])
+proc miqt_exec_method_cQSGRenderNode_releaseResources(vtbl: pointer, inst: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQSGRenderNode](cast[uint](vtbl) - uint(offsetOf(VirtualQSGRenderNode, vtbl)))
+  vtbl.releaseResources()
+
+method flags*(self: VirtualQSGRenderNode, ): cint {.base.} =
+  QSGRenderNodeflags(self[])
+proc miqt_exec_method_cQSGRenderNode_flags(vtbl: pointer, inst: pointer): cint {.cdecl.} =
+  let vtbl = cast[VirtualQSGRenderNode](cast[uint](vtbl) - uint(offsetOf(VirtualQSGRenderNode, vtbl)))
+  var virtualReturn = vtbl.flags()
+  cint(virtualReturn)
+
+method rect*(self: VirtualQSGRenderNode, ): gen_qrect_types.QRectF {.base.} =
+  QSGRenderNoderect(self[])
+proc miqt_exec_method_cQSGRenderNode_rect(vtbl: pointer, inst: pointer): pointer {.cdecl.} =
+  let vtbl = cast[VirtualQSGRenderNode](cast[uint](vtbl) - uint(offsetOf(VirtualQSGRenderNode, vtbl)))
+  var virtualReturn = vtbl.rect()
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
+
+method isSubtreeBlocked*(self: VirtualQSGRenderNode, ): bool {.base.} =
+  QSGRenderNodeisSubtreeBlocked(self[])
+proc miqt_exec_method_cQSGRenderNode_isSubtreeBlocked(vtbl: pointer, inst: pointer): bool {.cdecl.} =
+  let vtbl = cast[VirtualQSGRenderNode](cast[uint](vtbl) - uint(offsetOf(VirtualQSGRenderNode, vtbl)))
+  var virtualReturn = vtbl.isSubtreeBlocked()
+  virtualReturn
+
+method preprocess*(self: VirtualQSGRenderNode, ): void {.base.} =
+  QSGRenderNodepreprocess(self[])
+proc miqt_exec_method_cQSGRenderNode_preprocess(vtbl: pointer, inst: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQSGRenderNode](cast[uint](vtbl) - uint(offsetOf(VirtualQSGRenderNode, vtbl)))
+  vtbl.preprocess()
+
 proc create*(T: type gen_qsgrendernode_types.QSGRenderNode,
     vtbl: ref QSGRenderNodeVTable = nil): gen_qsgrendernode_types.QSGRenderNode =
   let vtbl = if vtbl == nil: new QSGRenderNodeVTable else: vtbl
   GC_ref(vtbl)
-  vtbl.vtbl.destructor = proc(vtbl: ptr cQSGRenderNodeVTable, _: ptr cQSGRenderNode) {.cdecl.} =
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQSGRenderNodeVTable, _: ptr cQSGRenderNode) {.cdecl.} =
     let vtbl = cast[ref QSGRenderNodeVTable](vtbl)
     GC_unref(vtbl)
-  if not isNil(vtbl.changedStates):
+  if not isNil(vtbl[].changedStates):
     vtbl[].vtbl.changedStates = miqt_exec_callback_cQSGRenderNode_changedStates
-  if not isNil(vtbl.render):
+  if not isNil(vtbl[].render):
     vtbl[].vtbl.render = miqt_exec_callback_cQSGRenderNode_render
-  if not isNil(vtbl.releaseResources):
+  if not isNil(vtbl[].releaseResources):
     vtbl[].vtbl.releaseResources = miqt_exec_callback_cQSGRenderNode_releaseResources
-  if not isNil(vtbl.flags):
+  if not isNil(vtbl[].flags):
     vtbl[].vtbl.flags = miqt_exec_callback_cQSGRenderNode_flags
-  if not isNil(vtbl.rect):
+  if not isNil(vtbl[].rect):
     vtbl[].vtbl.rect = miqt_exec_callback_cQSGRenderNode_rect
-  if not isNil(vtbl.isSubtreeBlocked):
+  if not isNil(vtbl[].isSubtreeBlocked):
     vtbl[].vtbl.isSubtreeBlocked = miqt_exec_callback_cQSGRenderNode_isSubtreeBlocked
-  if not isNil(vtbl.preprocess):
+  if not isNil(vtbl[].preprocess):
     vtbl[].vtbl.preprocess = miqt_exec_callback_cQSGRenderNode_preprocess
-  gen_qsgrendernode_types.QSGRenderNode(h: fcQSGRenderNode_new(addr(vtbl[]), ))
+  gen_qsgrendernode_types.QSGRenderNode(h: fcQSGRenderNode_new(addr(vtbl[].vtbl), ), owned: true)
 
-proc delete*(self: gen_qsgrendernode_types.QSGRenderNode) =
-  fcQSGRenderNode_delete(self.h)
+proc create*(T: type gen_qsgrendernode_types.QSGRenderNode,
+    vtbl: VirtualQSGRenderNode) =
+
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQSGRenderNodeVTable, _: ptr cQSGRenderNode) {.cdecl.} =
+    let vtbl = cast[ptr typeof(VirtualQSGRenderNode()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQSGRenderNode, vtbl)))
+    vtbl[].h = nil
+    vtbl[].owned = false
+  vtbl[].vtbl.changedStates = miqt_exec_method_cQSGRenderNode_changedStates
+  vtbl[].vtbl.render = miqt_exec_method_cQSGRenderNode_render
+  vtbl[].vtbl.releaseResources = miqt_exec_method_cQSGRenderNode_releaseResources
+  vtbl[].vtbl.flags = miqt_exec_method_cQSGRenderNode_flags
+  vtbl[].vtbl.rect = miqt_exec_method_cQSGRenderNode_rect
+  vtbl[].vtbl.isSubtreeBlocked = miqt_exec_method_cQSGRenderNode_isSubtreeBlocked
+  vtbl[].vtbl.preprocess = miqt_exec_method_cQSGRenderNode_preprocess
+  if vtbl[].h != nil: delete(move(vtbl[]))
+  vtbl[].h = fcQSGRenderNode_new(addr(vtbl[].vtbl), )
+  vtbl[].owned = true
+
 proc projectionMatrix*(self: gen_qsgrendernode_types.QSGRenderNodeRenderState, ): gen_qmatrix4x4_types.QMatrix4x4 =
-  gen_qmatrix4x4_types.QMatrix4x4(h: fcQSGRenderNodeRenderState_projectionMatrix(self.h))
+  gen_qmatrix4x4_types.QMatrix4x4(h: fcQSGRenderNodeRenderState_projectionMatrix(self.h), owned: false)
 
 proc scissorRect*(self: gen_qsgrendernode_types.QSGRenderNodeRenderState, ): gen_qrect_types.QRect =
-  gen_qrect_types.QRect(h: fcQSGRenderNodeRenderState_scissorRect(self.h))
+  gen_qrect_types.QRect(h: fcQSGRenderNodeRenderState_scissorRect(self.h), owned: true)
 
 proc scissorEnabled*(self: gen_qsgrendernode_types.QSGRenderNodeRenderState, ): bool =
   fcQSGRenderNodeRenderState_scissorEnabled(self.h)
@@ -242,7 +308,7 @@ proc stencilEnabled*(self: gen_qsgrendernode_types.QSGRenderNodeRenderState, ): 
   fcQSGRenderNodeRenderState_stencilEnabled(self.h)
 
 proc clipRegion*(self: gen_qsgrendernode_types.QSGRenderNodeRenderState, ): gen_qregion_types.QRegion =
-  gen_qregion_types.QRegion(h: fcQSGRenderNodeRenderState_clipRegion(self.h))
+  gen_qregion_types.QRegion(h: fcQSGRenderNodeRenderState_clipRegion(self.h), owned: false)
 
 proc get*(self: gen_qsgrendernode_types.QSGRenderNodeRenderState, state: cstring): pointer =
   fcQSGRenderNodeRenderState_get(self.h, state)
@@ -250,5 +316,3 @@ proc get*(self: gen_qsgrendernode_types.QSGRenderNodeRenderState, state: cstring
 proc operatorAssign*(self: gen_qsgrendernode_types.QSGRenderNodeRenderState, param1: gen_qsgrendernode_types.QSGRenderNodeRenderState): void =
   fcQSGRenderNodeRenderState_operatorAssign(self.h, param1.h)
 
-proc delete*(self: gen_qsgrendernode_types.QSGRenderNodeRenderState) =
-  fcQSGRenderNodeRenderState_delete(self.h)

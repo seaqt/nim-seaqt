@@ -30,9 +30,6 @@ func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
     else:
       copyMem(addr result[0], unsafeAddr v[0], v.len)
 
-const cflags = gorge("pkg-config --cflags Qt5Core")  & " -fPIC"
-{.compile("gen_qarraydata.cpp", cflags).}
-
 
 type QArrayDataAllocationOptionEnum* = distinct cint
 template CapacityReserved*(_: type QArrayDataAllocationOptionEnum): untyped = 1
@@ -67,7 +64,6 @@ proc fcQArrayData_deallocate(data: pointer, objectSize: csize_t, alignment: csiz
 proc fcQArrayData_sharedNull(): pointer {.importc: "QArrayData_sharedNull".}
 proc fcQArrayData_allocate4(objectSize: csize_t, alignment: csize_t, capacity: csize_t, options: cint): pointer {.importc: "QArrayData_allocate4".}
 proc fcQArrayData_reallocateUnaligned4(data: pointer, objectSize: csize_t, newCapacity: csize_t, newOptions: cint): pointer {.importc: "QArrayData_reallocateUnaligned4".}
-proc fcQArrayData_delete(self: pointer) {.importc: "QArrayData_delete".}
 
 proc data*(self: gen_qarraydata_types.QArrayData, ): pointer =
   fcQArrayData_data(self.h)
@@ -88,22 +84,20 @@ proc cloneFlags*(self: gen_qarraydata_types.QArrayData, ): cint =
   cint(fcQArrayData_cloneFlags(self.h))
 
 proc allocate*(_: type gen_qarraydata_types.QArrayData, objectSize: csize_t, alignment: csize_t, capacity: csize_t): gen_qarraydata_types.QArrayData =
-  gen_qarraydata_types.QArrayData(h: fcQArrayData_allocate(objectSize, alignment, capacity))
+  gen_qarraydata_types.QArrayData(h: fcQArrayData_allocate(objectSize, alignment, capacity), owned: false)
 
 proc reallocateUnaligned*(_: type gen_qarraydata_types.QArrayData, data: gen_qarraydata_types.QArrayData, objectSize: csize_t, newCapacity: csize_t): gen_qarraydata_types.QArrayData =
-  gen_qarraydata_types.QArrayData(h: fcQArrayData_reallocateUnaligned(data.h, objectSize, newCapacity))
+  gen_qarraydata_types.QArrayData(h: fcQArrayData_reallocateUnaligned(data.h, objectSize, newCapacity), owned: false)
 
 proc deallocate*(_: type gen_qarraydata_types.QArrayData, data: gen_qarraydata_types.QArrayData, objectSize: csize_t, alignment: csize_t): void =
   fcQArrayData_deallocate(data.h, objectSize, alignment)
 
 proc sharedNull*(_: type gen_qarraydata_types.QArrayData, ): gen_qarraydata_types.QArrayData =
-  gen_qarraydata_types.QArrayData(h: fcQArrayData_sharedNull())
+  gen_qarraydata_types.QArrayData(h: fcQArrayData_sharedNull(), owned: false)
 
 proc allocate*(_: type gen_qarraydata_types.QArrayData, objectSize: csize_t, alignment: csize_t, capacity: csize_t, options: cint): gen_qarraydata_types.QArrayData =
-  gen_qarraydata_types.QArrayData(h: fcQArrayData_allocate4(objectSize, alignment, capacity, cint(options)))
+  gen_qarraydata_types.QArrayData(h: fcQArrayData_allocate4(objectSize, alignment, capacity, cint(options)), owned: false)
 
 proc reallocateUnaligned*(_: type gen_qarraydata_types.QArrayData, data: gen_qarraydata_types.QArrayData, objectSize: csize_t, newCapacity: csize_t, newOptions: cint): gen_qarraydata_types.QArrayData =
-  gen_qarraydata_types.QArrayData(h: fcQArrayData_reallocateUnaligned4(data.h, objectSize, newCapacity, cint(newOptions)))
+  gen_qarraydata_types.QArrayData(h: fcQArrayData_reallocateUnaligned4(data.h, objectSize, newCapacity, cint(newOptions)), owned: false)
 
-proc delete*(self: gen_qarraydata_types.QArrayData) =
-  fcQArrayData_delete(self.h)

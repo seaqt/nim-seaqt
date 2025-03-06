@@ -30,9 +30,6 @@ func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
     else:
       copyMem(addr result[0], unsafeAddr v[0], v.len)
 
-const cflags = gorge("pkg-config --cflags Qt5Network")  & " -fPIC"
-{.compile("gen_qsslcertificateextension.cpp", cflags).}
-
 
 import ./gen_qsslcertificateextension_types
 export gen_qsslcertificateextension_types
@@ -53,7 +50,6 @@ proc fcQSslCertificateExtension_isCritical(self: pointer, ): bool {.importc: "QS
 proc fcQSslCertificateExtension_isSupported(self: pointer, ): bool {.importc: "QSslCertificateExtension_isSupported".}
 proc fcQSslCertificateExtension_new(): ptr cQSslCertificateExtension {.importc: "QSslCertificateExtension_new".}
 proc fcQSslCertificateExtension_new2(other: pointer): ptr cQSslCertificateExtension {.importc: "QSslCertificateExtension_new2".}
-proc fcQSslCertificateExtension_delete(self: pointer) {.importc: "QSslCertificateExtension_delete".}
 
 proc operatorAssign*(self: gen_qsslcertificateextension_types.QSslCertificateExtension, other: gen_qsslcertificateextension_types.QSslCertificateExtension): void =
   fcQSslCertificateExtension_operatorAssign(self.h, other.h)
@@ -74,7 +70,7 @@ proc name*(self: gen_qsslcertificateextension_types.QSslCertificateExtension, ):
   vx_ret
 
 proc value*(self: gen_qsslcertificateextension_types.QSslCertificateExtension, ): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQSslCertificateExtension_value(self.h))
+  gen_qvariant_types.QVariant(h: fcQSslCertificateExtension_value(self.h), owned: true)
 
 proc isCritical*(self: gen_qsslcertificateextension_types.QSslCertificateExtension, ): bool =
   fcQSslCertificateExtension_isCritical(self.h)
@@ -83,11 +79,9 @@ proc isSupported*(self: gen_qsslcertificateextension_types.QSslCertificateExtens
   fcQSslCertificateExtension_isSupported(self.h)
 
 proc create*(T: type gen_qsslcertificateextension_types.QSslCertificateExtension): gen_qsslcertificateextension_types.QSslCertificateExtension =
-  gen_qsslcertificateextension_types.QSslCertificateExtension(h: fcQSslCertificateExtension_new())
+  gen_qsslcertificateextension_types.QSslCertificateExtension(h: fcQSslCertificateExtension_new(), owned: true)
 
 proc create*(T: type gen_qsslcertificateextension_types.QSslCertificateExtension,
     other: gen_qsslcertificateextension_types.QSslCertificateExtension): gen_qsslcertificateextension_types.QSslCertificateExtension =
-  gen_qsslcertificateextension_types.QSslCertificateExtension(h: fcQSslCertificateExtension_new2(other.h))
+  gen_qsslcertificateextension_types.QSslCertificateExtension(h: fcQSslCertificateExtension_new2(other.h), owned: true)
 
-proc delete*(self: gen_qsslcertificateextension_types.QSslCertificateExtension) =
-  fcQSslCertificateExtension_delete(self.h)

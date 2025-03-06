@@ -30,9 +30,6 @@ func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
     else:
       copyMem(addr result[0], unsafeAddr v[0], v.len)
 
-const cflags = gorge("pkg-config --cflags Qt5Multimedia")  & " -fPIC"
-{.compile("gen_qmediacontent.cpp", cflags).}
-
 
 import ./gen_qmediacontent_types
 export gen_qmediacontent_types
@@ -69,7 +66,6 @@ proc fcQMediaContent_new6(other: pointer): ptr cQMediaContent {.importc: "QMedia
 proc fcQMediaContent_new7(playlist: pointer): ptr cQMediaContent {.importc: "QMediaContent_new7".}
 proc fcQMediaContent_new8(playlist: pointer, contentUrl: pointer): ptr cQMediaContent {.importc: "QMediaContent_new8".}
 proc fcQMediaContent_new9(playlist: pointer, contentUrl: pointer, takeOwnership: bool): ptr cQMediaContent {.importc: "QMediaContent_new9".}
-proc fcQMediaContent_delete(self: pointer) {.importc: "QMediaContent_delete".}
 
 proc operatorAssign*(self: gen_qmediacontent_types.QMediaContent, other: gen_qmediacontent_types.QMediaContent): void =
   fcQMediaContent_operatorAssign(self.h, other.h)
@@ -84,43 +80,43 @@ proc isNull*(self: gen_qmediacontent_types.QMediaContent, ): bool =
   fcQMediaContent_isNull(self.h)
 
 proc request*(self: gen_qmediacontent_types.QMediaContent, ): gen_qnetworkrequest_types.QNetworkRequest =
-  gen_qnetworkrequest_types.QNetworkRequest(h: fcQMediaContent_request(self.h))
+  gen_qnetworkrequest_types.QNetworkRequest(h: fcQMediaContent_request(self.h), owned: true)
 
 proc canonicalUrl*(self: gen_qmediacontent_types.QMediaContent, ): gen_qurl_types.QUrl =
-  gen_qurl_types.QUrl(h: fcQMediaContent_canonicalUrl(self.h))
+  gen_qurl_types.QUrl(h: fcQMediaContent_canonicalUrl(self.h), owned: true)
 
 proc canonicalRequest*(self: gen_qmediacontent_types.QMediaContent, ): gen_qnetworkrequest_types.QNetworkRequest =
-  gen_qnetworkrequest_types.QNetworkRequest(h: fcQMediaContent_canonicalRequest(self.h))
+  gen_qnetworkrequest_types.QNetworkRequest(h: fcQMediaContent_canonicalRequest(self.h), owned: true)
 
 proc canonicalResource*(self: gen_qmediacontent_types.QMediaContent, ): gen_qmediaresource_types.QMediaResource =
-  gen_qmediaresource_types.QMediaResource(h: fcQMediaContent_canonicalResource(self.h))
+  gen_qmediaresource_types.QMediaResource(h: fcQMediaContent_canonicalResource(self.h), owned: true)
 
 proc resources*(self: gen_qmediacontent_types.QMediaContent, ): seq[gen_qmediaresource_types.QMediaResource] =
   var v_ma = fcQMediaContent_resources(self.h)
   var vx_ret = newSeq[gen_qmediaresource_types.QMediaResource](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
-    vx_ret[i] = gen_qmediaresource_types.QMediaResource(h: v_outCast[i])
+    vx_ret[i] = gen_qmediaresource_types.QMediaResource(h: v_outCast[i], owned: true)
   c_free(v_ma.data)
   vx_ret
 
 proc playlist*(self: gen_qmediacontent_types.QMediaContent, ): gen_qmediaplaylist_types.QMediaPlaylist =
-  gen_qmediaplaylist_types.QMediaPlaylist(h: fcQMediaContent_playlist(self.h))
+  gen_qmediaplaylist_types.QMediaPlaylist(h: fcQMediaContent_playlist(self.h), owned: false)
 
 proc create*(T: type gen_qmediacontent_types.QMediaContent): gen_qmediacontent_types.QMediaContent =
-  gen_qmediacontent_types.QMediaContent(h: fcQMediaContent_new())
+  gen_qmediacontent_types.QMediaContent(h: fcQMediaContent_new(), owned: true)
 
 proc create*(T: type gen_qmediacontent_types.QMediaContent,
     contentUrl: gen_qurl_types.QUrl): gen_qmediacontent_types.QMediaContent =
-  gen_qmediacontent_types.QMediaContent(h: fcQMediaContent_new2(contentUrl.h))
+  gen_qmediacontent_types.QMediaContent(h: fcQMediaContent_new2(contentUrl.h), owned: true)
 
 proc create*(T: type gen_qmediacontent_types.QMediaContent,
     contentRequest: gen_qnetworkrequest_types.QNetworkRequest): gen_qmediacontent_types.QMediaContent =
-  gen_qmediacontent_types.QMediaContent(h: fcQMediaContent_new3(contentRequest.h))
+  gen_qmediacontent_types.QMediaContent(h: fcQMediaContent_new3(contentRequest.h), owned: true)
 
 proc create*(T: type gen_qmediacontent_types.QMediaContent,
     contentResource: gen_qmediaresource_types.QMediaResource): gen_qmediacontent_types.QMediaContent =
-  gen_qmediacontent_types.QMediaContent(h: fcQMediaContent_new4(contentResource.h))
+  gen_qmediacontent_types.QMediaContent(h: fcQMediaContent_new4(contentResource.h), owned: true)
 
 proc create*(T: type gen_qmediacontent_types.QMediaContent,
     resources: seq[gen_qmediaresource_types.QMediaResource]): gen_qmediacontent_types.QMediaContent =
@@ -128,23 +124,21 @@ proc create*(T: type gen_qmediacontent_types.QMediaContent,
   for i in 0..<len(resources):
     resources_CArray[i] = resources[i].h
 
-  gen_qmediacontent_types.QMediaContent(h: fcQMediaContent_new5(struct_miqt_array(len: csize_t(len(resources)), data: if len(resources) == 0: nil else: addr(resources_CArray[0]))))
+  gen_qmediacontent_types.QMediaContent(h: fcQMediaContent_new5(struct_miqt_array(len: csize_t(len(resources)), data: if len(resources) == 0: nil else: addr(resources_CArray[0]))), owned: true)
 
 proc create*(T: type gen_qmediacontent_types.QMediaContent,
     other: gen_qmediacontent_types.QMediaContent): gen_qmediacontent_types.QMediaContent =
-  gen_qmediacontent_types.QMediaContent(h: fcQMediaContent_new6(other.h))
+  gen_qmediacontent_types.QMediaContent(h: fcQMediaContent_new6(other.h), owned: true)
 
 proc create*(T: type gen_qmediacontent_types.QMediaContent,
     playlist: gen_qmediaplaylist_types.QMediaPlaylist): gen_qmediacontent_types.QMediaContent =
-  gen_qmediacontent_types.QMediaContent(h: fcQMediaContent_new7(playlist.h))
+  gen_qmediacontent_types.QMediaContent(h: fcQMediaContent_new7(playlist.h), owned: true)
 
 proc create*(T: type gen_qmediacontent_types.QMediaContent,
     playlist: gen_qmediaplaylist_types.QMediaPlaylist, contentUrl: gen_qurl_types.QUrl): gen_qmediacontent_types.QMediaContent =
-  gen_qmediacontent_types.QMediaContent(h: fcQMediaContent_new8(playlist.h, contentUrl.h))
+  gen_qmediacontent_types.QMediaContent(h: fcQMediaContent_new8(playlist.h, contentUrl.h), owned: true)
 
 proc create*(T: type gen_qmediacontent_types.QMediaContent,
     playlist: gen_qmediaplaylist_types.QMediaPlaylist, contentUrl: gen_qurl_types.QUrl, takeOwnership: bool): gen_qmediacontent_types.QMediaContent =
-  gen_qmediacontent_types.QMediaContent(h: fcQMediaContent_new9(playlist.h, contentUrl.h, takeOwnership))
+  gen_qmediacontent_types.QMediaContent(h: fcQMediaContent_new9(playlist.h, contentUrl.h, takeOwnership), owned: true)
 
-proc delete*(self: gen_qmediacontent_types.QMediaContent) =
-  fcQMediaContent_delete(self.h)

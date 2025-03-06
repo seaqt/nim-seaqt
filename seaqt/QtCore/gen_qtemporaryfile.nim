@@ -30,7 +30,7 @@ func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
     else:
       copyMem(addr result[0], unsafeAddr v[0], v.len)
 
-const cflags = gorge("pkg-config --cflags Qt5Core")  & " -fPIC"
+const cflags = gorge("pkg-config --cflags Qt5Core") & " -fPIC"
 {.compile("gen_qtemporaryfile.cpp", cflags).}
 
 
@@ -72,7 +72,7 @@ proc fcQTemporaryFile_tr2(s: cstring, c: cstring): struct_miqt_string {.importc:
 proc fcQTemporaryFile_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QTemporaryFile_tr3".}
 proc fcQTemporaryFile_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QTemporaryFile_trUtf82".}
 proc fcQTemporaryFile_trUtf83(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QTemporaryFile_trUtf83".}
-type cQTemporaryFileVTable = object
+type cQTemporaryFileVTable {.pure.} = object
   destructor*: proc(vtbl: ptr cQTemporaryFileVTable, self: ptr cQTemporaryFile) {.cdecl, raises:[], gcsafe.}
   metaObject*: proc(vtbl, self: pointer, ): pointer {.cdecl, raises: [], gcsafe.}
   metacast*: proc(vtbl, self: pointer, param1: cstring): pointer {.cdecl, raises: [], gcsafe.}
@@ -145,10 +145,9 @@ proc fcQTemporaryFile_new2(vtbl: pointer, templateName: struct_miqt_string): ptr
 proc fcQTemporaryFile_new3(vtbl: pointer, parent: pointer): ptr cQTemporaryFile {.importc: "QTemporaryFile_new3".}
 proc fcQTemporaryFile_new4(vtbl: pointer, templateName: struct_miqt_string, parent: pointer): ptr cQTemporaryFile {.importc: "QTemporaryFile_new4".}
 proc fcQTemporaryFile_staticMetaObject(): pointer {.importc: "QTemporaryFile_staticMetaObject".}
-proc fcQTemporaryFile_delete(self: pointer) {.importc: "QTemporaryFile_delete".}
 
 proc metaObject*(self: gen_qtemporaryfile_types.QTemporaryFile, ): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQTemporaryFile_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQTemporaryFile_metaObject(self.h), owned: false)
 
 proc metacast*(self: gen_qtemporaryfile_types.QTemporaryFile, param1: cstring): pointer =
   fcQTemporaryFile_metacast(self.h, param1)
@@ -196,16 +195,16 @@ proc rename*(self: gen_qtemporaryfile_types.QTemporaryFile, newName: string): bo
   fcQTemporaryFile_rename(self.h, struct_miqt_string(data: newName, len: csize_t(len(newName))))
 
 proc createLocalFile*(_: type gen_qtemporaryfile_types.QTemporaryFile, fileName: string): gen_qtemporaryfile_types.QTemporaryFile =
-  gen_qtemporaryfile_types.QTemporaryFile(h: fcQTemporaryFile_createLocalFile(struct_miqt_string(data: fileName, len: csize_t(len(fileName)))))
+  gen_qtemporaryfile_types.QTemporaryFile(h: fcQTemporaryFile_createLocalFile(struct_miqt_string(data: fileName, len: csize_t(len(fileName)))), owned: false)
 
 proc createLocalFile*(_: type gen_qtemporaryfile_types.QTemporaryFile, file: gen_qfile_types.QFile): gen_qtemporaryfile_types.QTemporaryFile =
-  gen_qtemporaryfile_types.QTemporaryFile(h: fcQTemporaryFile_createLocalFileWithFile(file.h))
+  gen_qtemporaryfile_types.QTemporaryFile(h: fcQTemporaryFile_createLocalFileWithFile(file.h), owned: false)
 
 proc createNativeFile*(_: type gen_qtemporaryfile_types.QTemporaryFile, fileName: string): gen_qtemporaryfile_types.QTemporaryFile =
-  gen_qtemporaryfile_types.QTemporaryFile(h: fcQTemporaryFile_createNativeFile(struct_miqt_string(data: fileName, len: csize_t(len(fileName)))))
+  gen_qtemporaryfile_types.QTemporaryFile(h: fcQTemporaryFile_createNativeFile(struct_miqt_string(data: fileName, len: csize_t(len(fileName)))), owned: false)
 
 proc createNativeFile*(_: type gen_qtemporaryfile_types.QTemporaryFile, file: gen_qfile_types.QFile): gen_qtemporaryfile_types.QTemporaryFile =
-  gen_qtemporaryfile_types.QTemporaryFile(h: fcQTemporaryFile_createNativeFileWithFile(file.h))
+  gen_qtemporaryfile_types.QTemporaryFile(h: fcQTemporaryFile_createNativeFileWithFile(file.h), owned: false)
 
 proc tr*(_: type gen_qtemporaryfile_types.QTemporaryFile, s: cstring, c: cstring): string =
   let v_ms = fcQTemporaryFile_tr2(s, c)
@@ -261,7 +260,7 @@ type QTemporaryFilechildEventProc* = proc(self: QTemporaryFile, event: gen_qcore
 type QTemporaryFilecustomEventProc* = proc(self: QTemporaryFile, event: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
 type QTemporaryFileconnectNotifyProc* = proc(self: QTemporaryFile, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
 type QTemporaryFiledisconnectNotifyProc* = proc(self: QTemporaryFile, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
-type QTemporaryFileVTable* = object
+type QTemporaryFileVTable* {.inheritable, pure.} = object
   vtbl: cQTemporaryFileVTable
   metaObject*: QTemporaryFilemetaObjectProc
   metacast*: QTemporaryFilemetacastProc
@@ -294,13 +293,16 @@ type QTemporaryFileVTable* = object
   connectNotify*: QTemporaryFileconnectNotifyProc
   disconnectNotify*: QTemporaryFiledisconnectNotifyProc
 proc QTemporaryFilemetaObject*(self: gen_qtemporaryfile_types.QTemporaryFile, ): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQTemporaryFile_virtualbase_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQTemporaryFile_virtualbase_metaObject(self.h), owned: false)
 
 proc miqt_exec_callback_cQTemporaryFile_metaObject(vtbl: pointer, self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QTemporaryFileVTable](vtbl)
   let self = QTemporaryFile(h: self)
   var virtualReturn = vtbl[].metaObject(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QTemporaryFilemetacast*(self: gen_qtemporaryfile_types.QTemporaryFile, param1: cstring): pointer =
   fcQTemporaryFile_virtualbase_metacast(self.h, param1)
@@ -526,7 +528,7 @@ proc QTemporaryFileevent*(self: gen_qtemporaryfile_types.QTemporaryFile, event: 
 proc miqt_exec_callback_cQTemporaryFile_event(vtbl: pointer, self: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QTemporaryFileVTable](vtbl)
   let self = QTemporaryFile(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].event(self, slotval1)
   virtualReturn
 
@@ -536,8 +538,8 @@ proc QTemporaryFileeventFilter*(self: gen_qtemporaryfile_types.QTemporaryFile, w
 proc miqt_exec_callback_cQTemporaryFile_eventFilter(vtbl: pointer, self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QTemporaryFileVTable](vtbl)
   let self = QTemporaryFile(h: self)
-  let slotval1 = gen_qobject_types.QObject(h: watched)
-  let slotval2 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].eventFilter(self, slotval1, slotval2)
   virtualReturn
 
@@ -547,7 +549,7 @@ proc QTemporaryFiletimerEvent*(self: gen_qtemporaryfile_types.QTemporaryFile, ev
 proc miqt_exec_callback_cQTemporaryFile_timerEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QTemporaryFileVTable](vtbl)
   let self = QTemporaryFile(h: self)
-  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   vtbl[].timerEvent(self, slotval1)
 
 proc QTemporaryFilechildEvent*(self: gen_qtemporaryfile_types.QTemporaryFile, event: gen_qcoreevent_types.QChildEvent): void =
@@ -556,7 +558,7 @@ proc QTemporaryFilechildEvent*(self: gen_qtemporaryfile_types.QTemporaryFile, ev
 proc miqt_exec_callback_cQTemporaryFile_childEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QTemporaryFileVTable](vtbl)
   let self = QTemporaryFile(h: self)
-  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   vtbl[].childEvent(self, slotval1)
 
 proc QTemporaryFilecustomEvent*(self: gen_qtemporaryfile_types.QTemporaryFile, event: gen_qcoreevent_types.QEvent): void =
@@ -565,7 +567,7 @@ proc QTemporaryFilecustomEvent*(self: gen_qtemporaryfile_types.QTemporaryFile, e
 proc miqt_exec_callback_cQTemporaryFile_customEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QTemporaryFileVTable](vtbl)
   let self = QTemporaryFile(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].customEvent(self, slotval1)
 
 proc QTemporaryFileconnectNotify*(self: gen_qtemporaryfile_types.QTemporaryFile, signal: gen_qmetaobject_types.QMetaMethod): void =
@@ -574,7 +576,7 @@ proc QTemporaryFileconnectNotify*(self: gen_qtemporaryfile_types.QTemporaryFile,
 proc miqt_exec_callback_cQTemporaryFile_connectNotify(vtbl: pointer, self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QTemporaryFileVTable](vtbl)
   let self = QTemporaryFile(h: self)
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].connectNotify(self, slotval1)
 
 proc QTemporaryFiledisconnectNotify*(self: gen_qtemporaryfile_types.QTemporaryFile, signal: gen_qmetaobject_types.QMetaMethod): void =
@@ -583,8 +585,243 @@ proc QTemporaryFiledisconnectNotify*(self: gen_qtemporaryfile_types.QTemporaryFi
 proc miqt_exec_callback_cQTemporaryFile_disconnectNotify(vtbl: pointer, self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QTemporaryFileVTable](vtbl)
   let self = QTemporaryFile(h: self)
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].disconnectNotify(self, slotval1)
+
+type VirtualQTemporaryFile* {.inheritable.} = ref object of QTemporaryFile
+  vtbl*: cQTemporaryFileVTable
+method metaObject*(self: VirtualQTemporaryFile, ): gen_qobjectdefs_types.QMetaObject {.base.} =
+  QTemporaryFilemetaObject(self[])
+proc miqt_exec_method_cQTemporaryFile_metaObject(vtbl: pointer, inst: pointer): pointer {.cdecl.} =
+  let vtbl = cast[VirtualQTemporaryFile](cast[uint](vtbl) - uint(offsetOf(VirtualQTemporaryFile, vtbl)))
+  var virtualReturn = vtbl.metaObject()
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
+
+method metacast*(self: VirtualQTemporaryFile, param1: cstring): pointer {.base.} =
+  QTemporaryFilemetacast(self[], param1)
+proc miqt_exec_method_cQTemporaryFile_metacast(vtbl: pointer, inst: pointer, param1: cstring): pointer {.cdecl.} =
+  let vtbl = cast[VirtualQTemporaryFile](cast[uint](vtbl) - uint(offsetOf(VirtualQTemporaryFile, vtbl)))
+  let slotval1 = (param1)
+  var virtualReturn = vtbl.metacast(slotval1)
+  virtualReturn
+
+method metacall*(self: VirtualQTemporaryFile, param1: cint, param2: cint, param3: pointer): cint {.base.} =
+  QTemporaryFilemetacall(self[], param1, param2, param3)
+proc miqt_exec_method_cQTemporaryFile_metacall(vtbl: pointer, inst: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
+  let vtbl = cast[VirtualQTemporaryFile](cast[uint](vtbl) - uint(offsetOf(VirtualQTemporaryFile, vtbl)))
+  let slotval1 = cint(param1)
+  let slotval2 = param2
+  let slotval3 = param3
+  var virtualReturn = vtbl.metacall(slotval1, slotval2, slotval3)
+  virtualReturn
+
+method fileName*(self: VirtualQTemporaryFile, ): string {.base.} =
+  QTemporaryFilefileName(self[])
+proc miqt_exec_method_cQTemporaryFile_fileName(vtbl: pointer, inst: pointer): struct_miqt_string {.cdecl.} =
+  let vtbl = cast[VirtualQTemporaryFile](cast[uint](vtbl) - uint(offsetOf(VirtualQTemporaryFile, vtbl)))
+  var virtualReturn = vtbl.fileName()
+  var virtualReturn_copy = cast[cstring](if len(virtualReturn) > 0: c_malloc(csize_t(len(virtualReturn))) else: nil)
+  if len(virtualReturn) > 0: copyMem(cast[pointer](virtualReturn_copy), addr virtualReturn[0], csize_t(len(virtualReturn)))
+  struct_miqt_string(data: virtualReturn_copy, len: csize_t(len(virtualReturn)))
+
+method open*(self: VirtualQTemporaryFile, flags: cint): bool {.base.} =
+  QTemporaryFileopen(self[], flags)
+proc miqt_exec_method_cQTemporaryFile_openWithFlags(vtbl: pointer, inst: pointer, flags: cint): bool {.cdecl.} =
+  let vtbl = cast[VirtualQTemporaryFile](cast[uint](vtbl) - uint(offsetOf(VirtualQTemporaryFile, vtbl)))
+  let slotval1 = cint(flags)
+  var virtualReturn = vtbl.open(slotval1)
+  virtualReturn
+
+method size*(self: VirtualQTemporaryFile, ): clonglong {.base.} =
+  QTemporaryFilesize(self[])
+proc miqt_exec_method_cQTemporaryFile_size(vtbl: pointer, inst: pointer): clonglong {.cdecl.} =
+  let vtbl = cast[VirtualQTemporaryFile](cast[uint](vtbl) - uint(offsetOf(VirtualQTemporaryFile, vtbl)))
+  var virtualReturn = vtbl.size()
+  virtualReturn
+
+method resize*(self: VirtualQTemporaryFile, sz: clonglong): bool {.base.} =
+  QTemporaryFileresize(self[], sz)
+proc miqt_exec_method_cQTemporaryFile_resize(vtbl: pointer, inst: pointer, sz: clonglong): bool {.cdecl.} =
+  let vtbl = cast[VirtualQTemporaryFile](cast[uint](vtbl) - uint(offsetOf(VirtualQTemporaryFile, vtbl)))
+  let slotval1 = sz
+  var virtualReturn = vtbl.resize(slotval1)
+  virtualReturn
+
+method permissions*(self: VirtualQTemporaryFile, ): cint {.base.} =
+  QTemporaryFilepermissions(self[])
+proc miqt_exec_method_cQTemporaryFile_permissions(vtbl: pointer, inst: pointer): cint {.cdecl.} =
+  let vtbl = cast[VirtualQTemporaryFile](cast[uint](vtbl) - uint(offsetOf(VirtualQTemporaryFile, vtbl)))
+  var virtualReturn = vtbl.permissions()
+  cint(virtualReturn)
+
+method setPermissions*(self: VirtualQTemporaryFile, permissionSpec: cint): bool {.base.} =
+  QTemporaryFilesetPermissions(self[], permissionSpec)
+proc miqt_exec_method_cQTemporaryFile_setPermissions(vtbl: pointer, inst: pointer, permissionSpec: cint): bool {.cdecl.} =
+  let vtbl = cast[VirtualQTemporaryFile](cast[uint](vtbl) - uint(offsetOf(VirtualQTemporaryFile, vtbl)))
+  let slotval1 = cint(permissionSpec)
+  var virtualReturn = vtbl.setPermissions(slotval1)
+  virtualReturn
+
+method close*(self: VirtualQTemporaryFile, ): void {.base.} =
+  QTemporaryFileclose(self[])
+proc miqt_exec_method_cQTemporaryFile_close(vtbl: pointer, inst: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQTemporaryFile](cast[uint](vtbl) - uint(offsetOf(VirtualQTemporaryFile, vtbl)))
+  vtbl.close()
+
+method isSequential*(self: VirtualQTemporaryFile, ): bool {.base.} =
+  QTemporaryFileisSequential(self[])
+proc miqt_exec_method_cQTemporaryFile_isSequential(vtbl: pointer, inst: pointer): bool {.cdecl.} =
+  let vtbl = cast[VirtualQTemporaryFile](cast[uint](vtbl) - uint(offsetOf(VirtualQTemporaryFile, vtbl)))
+  var virtualReturn = vtbl.isSequential()
+  virtualReturn
+
+method pos*(self: VirtualQTemporaryFile, ): clonglong {.base.} =
+  QTemporaryFilepos(self[])
+proc miqt_exec_method_cQTemporaryFile_pos(vtbl: pointer, inst: pointer): clonglong {.cdecl.} =
+  let vtbl = cast[VirtualQTemporaryFile](cast[uint](vtbl) - uint(offsetOf(VirtualQTemporaryFile, vtbl)))
+  var virtualReturn = vtbl.pos()
+  virtualReturn
+
+method seek*(self: VirtualQTemporaryFile, offset: clonglong): bool {.base.} =
+  QTemporaryFileseek(self[], offset)
+proc miqt_exec_method_cQTemporaryFile_seek(vtbl: pointer, inst: pointer, offset: clonglong): bool {.cdecl.} =
+  let vtbl = cast[VirtualQTemporaryFile](cast[uint](vtbl) - uint(offsetOf(VirtualQTemporaryFile, vtbl)))
+  let slotval1 = offset
+  var virtualReturn = vtbl.seek(slotval1)
+  virtualReturn
+
+method atEnd*(self: VirtualQTemporaryFile, ): bool {.base.} =
+  QTemporaryFileatEnd(self[])
+proc miqt_exec_method_cQTemporaryFile_atEnd(vtbl: pointer, inst: pointer): bool {.cdecl.} =
+  let vtbl = cast[VirtualQTemporaryFile](cast[uint](vtbl) - uint(offsetOf(VirtualQTemporaryFile, vtbl)))
+  var virtualReturn = vtbl.atEnd()
+  virtualReturn
+
+method readData*(self: VirtualQTemporaryFile, data: cstring, maxlen: clonglong): clonglong {.base.} =
+  QTemporaryFilereadData(self[], data, maxlen)
+proc miqt_exec_method_cQTemporaryFile_readData(vtbl: pointer, inst: pointer, data: cstring, maxlen: clonglong): clonglong {.cdecl.} =
+  let vtbl = cast[VirtualQTemporaryFile](cast[uint](vtbl) - uint(offsetOf(VirtualQTemporaryFile, vtbl)))
+  let slotval1 = (data)
+  let slotval2 = maxlen
+  var virtualReturn = vtbl.readData(slotval1, slotval2)
+  virtualReturn
+
+method writeData*(self: VirtualQTemporaryFile, data: cstring, len: clonglong): clonglong {.base.} =
+  QTemporaryFilewriteData(self[], data, len)
+proc miqt_exec_method_cQTemporaryFile_writeData(vtbl: pointer, inst: pointer, data: cstring, len: clonglong): clonglong {.cdecl.} =
+  let vtbl = cast[VirtualQTemporaryFile](cast[uint](vtbl) - uint(offsetOf(VirtualQTemporaryFile, vtbl)))
+  let slotval1 = (data)
+  let slotval2 = len
+  var virtualReturn = vtbl.writeData(slotval1, slotval2)
+  virtualReturn
+
+method readLineData*(self: VirtualQTemporaryFile, data: cstring, maxlen: clonglong): clonglong {.base.} =
+  QTemporaryFilereadLineData(self[], data, maxlen)
+proc miqt_exec_method_cQTemporaryFile_readLineData(vtbl: pointer, inst: pointer, data: cstring, maxlen: clonglong): clonglong {.cdecl.} =
+  let vtbl = cast[VirtualQTemporaryFile](cast[uint](vtbl) - uint(offsetOf(VirtualQTemporaryFile, vtbl)))
+  let slotval1 = (data)
+  let slotval2 = maxlen
+  var virtualReturn = vtbl.readLineData(slotval1, slotval2)
+  virtualReturn
+
+method reset*(self: VirtualQTemporaryFile, ): bool {.base.} =
+  QTemporaryFilereset(self[])
+proc miqt_exec_method_cQTemporaryFile_reset(vtbl: pointer, inst: pointer): bool {.cdecl.} =
+  let vtbl = cast[VirtualQTemporaryFile](cast[uint](vtbl) - uint(offsetOf(VirtualQTemporaryFile, vtbl)))
+  var virtualReturn = vtbl.reset()
+  virtualReturn
+
+method bytesAvailable*(self: VirtualQTemporaryFile, ): clonglong {.base.} =
+  QTemporaryFilebytesAvailable(self[])
+proc miqt_exec_method_cQTemporaryFile_bytesAvailable(vtbl: pointer, inst: pointer): clonglong {.cdecl.} =
+  let vtbl = cast[VirtualQTemporaryFile](cast[uint](vtbl) - uint(offsetOf(VirtualQTemporaryFile, vtbl)))
+  var virtualReturn = vtbl.bytesAvailable()
+  virtualReturn
+
+method bytesToWrite*(self: VirtualQTemporaryFile, ): clonglong {.base.} =
+  QTemporaryFilebytesToWrite(self[])
+proc miqt_exec_method_cQTemporaryFile_bytesToWrite(vtbl: pointer, inst: pointer): clonglong {.cdecl.} =
+  let vtbl = cast[VirtualQTemporaryFile](cast[uint](vtbl) - uint(offsetOf(VirtualQTemporaryFile, vtbl)))
+  var virtualReturn = vtbl.bytesToWrite()
+  virtualReturn
+
+method canReadLine*(self: VirtualQTemporaryFile, ): bool {.base.} =
+  QTemporaryFilecanReadLine(self[])
+proc miqt_exec_method_cQTemporaryFile_canReadLine(vtbl: pointer, inst: pointer): bool {.cdecl.} =
+  let vtbl = cast[VirtualQTemporaryFile](cast[uint](vtbl) - uint(offsetOf(VirtualQTemporaryFile, vtbl)))
+  var virtualReturn = vtbl.canReadLine()
+  virtualReturn
+
+method waitForReadyRead*(self: VirtualQTemporaryFile, msecs: cint): bool {.base.} =
+  QTemporaryFilewaitForReadyRead(self[], msecs)
+proc miqt_exec_method_cQTemporaryFile_waitForReadyRead(vtbl: pointer, inst: pointer, msecs: cint): bool {.cdecl.} =
+  let vtbl = cast[VirtualQTemporaryFile](cast[uint](vtbl) - uint(offsetOf(VirtualQTemporaryFile, vtbl)))
+  let slotval1 = msecs
+  var virtualReturn = vtbl.waitForReadyRead(slotval1)
+  virtualReturn
+
+method waitForBytesWritten*(self: VirtualQTemporaryFile, msecs: cint): bool {.base.} =
+  QTemporaryFilewaitForBytesWritten(self[], msecs)
+proc miqt_exec_method_cQTemporaryFile_waitForBytesWritten(vtbl: pointer, inst: pointer, msecs: cint): bool {.cdecl.} =
+  let vtbl = cast[VirtualQTemporaryFile](cast[uint](vtbl) - uint(offsetOf(VirtualQTemporaryFile, vtbl)))
+  let slotval1 = msecs
+  var virtualReturn = vtbl.waitForBytesWritten(slotval1)
+  virtualReturn
+
+method event*(self: VirtualQTemporaryFile, event: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QTemporaryFileevent(self[], event)
+proc miqt_exec_method_cQTemporaryFile_event(vtbl: pointer, inst: pointer, event: pointer): bool {.cdecl.} =
+  let vtbl = cast[VirtualQTemporaryFile](cast[uint](vtbl) - uint(offsetOf(VirtualQTemporaryFile, vtbl)))
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
+  var virtualReturn = vtbl.event(slotval1)
+  virtualReturn
+
+method eventFilter*(self: VirtualQTemporaryFile, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QTemporaryFileeventFilter(self[], watched, event)
+proc miqt_exec_method_cQTemporaryFile_eventFilter(vtbl: pointer, inst: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
+  let vtbl = cast[VirtualQTemporaryFile](cast[uint](vtbl) - uint(offsetOf(VirtualQTemporaryFile, vtbl)))
+  let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
+  var virtualReturn = vtbl.eventFilter(slotval1, slotval2)
+  virtualReturn
+
+method timerEvent*(self: VirtualQTemporaryFile, event: gen_qcoreevent_types.QTimerEvent): void {.base.} =
+  QTemporaryFiletimerEvent(self[], event)
+proc miqt_exec_method_cQTemporaryFile_timerEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQTemporaryFile](cast[uint](vtbl) - uint(offsetOf(VirtualQTemporaryFile, vtbl)))
+  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
+  vtbl.timerEvent(slotval1)
+
+method childEvent*(self: VirtualQTemporaryFile, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
+  QTemporaryFilechildEvent(self[], event)
+proc miqt_exec_method_cQTemporaryFile_childEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQTemporaryFile](cast[uint](vtbl) - uint(offsetOf(VirtualQTemporaryFile, vtbl)))
+  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
+  vtbl.childEvent(slotval1)
+
+method customEvent*(self: VirtualQTemporaryFile, event: gen_qcoreevent_types.QEvent): void {.base.} =
+  QTemporaryFilecustomEvent(self[], event)
+proc miqt_exec_method_cQTemporaryFile_customEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQTemporaryFile](cast[uint](vtbl) - uint(offsetOf(VirtualQTemporaryFile, vtbl)))
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
+  vtbl.customEvent(slotval1)
+
+method connectNotify*(self: VirtualQTemporaryFile, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QTemporaryFileconnectNotify(self[], signal)
+proc miqt_exec_method_cQTemporaryFile_connectNotify(vtbl: pointer, inst: pointer, signal: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQTemporaryFile](cast[uint](vtbl) - uint(offsetOf(VirtualQTemporaryFile, vtbl)))
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
+  vtbl.connectNotify(slotval1)
+
+method disconnectNotify*(self: VirtualQTemporaryFile, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QTemporaryFiledisconnectNotify(self[], signal)
+proc miqt_exec_method_cQTemporaryFile_disconnectNotify(vtbl: pointer, inst: pointer, signal: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQTemporaryFile](cast[uint](vtbl) - uint(offsetOf(VirtualQTemporaryFile, vtbl)))
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
+  vtbl.disconnectNotify(slotval1)
 
 proc setOpenMode*(self: gen_qtemporaryfile_types.QTemporaryFile, openMode: cint): void =
   fcQTemporaryFile_protectedbase_setOpenMode(self.h, cint(openMode))
@@ -593,7 +830,7 @@ proc setErrorString*(self: gen_qtemporaryfile_types.QTemporaryFile, errorString:
   fcQTemporaryFile_protectedbase_setErrorString(self.h, struct_miqt_string(data: errorString, len: csize_t(len(errorString))))
 
 proc sender*(self: gen_qtemporaryfile_types.QTemporaryFile, ): gen_qobject_types.QObject =
-  gen_qobject_types.QObject(h: fcQTemporaryFile_protectedbase_sender(self.h))
+  gen_qobject_types.QObject(h: fcQTemporaryFile_protectedbase_sender(self.h), owned: false)
 
 proc senderSignalIndex*(self: gen_qtemporaryfile_types.QTemporaryFile, ): cint =
   fcQTemporaryFile_protectedbase_senderSignalIndex(self.h)
@@ -608,282 +845,447 @@ proc create*(T: type gen_qtemporaryfile_types.QTemporaryFile,
     vtbl: ref QTemporaryFileVTable = nil): gen_qtemporaryfile_types.QTemporaryFile =
   let vtbl = if vtbl == nil: new QTemporaryFileVTable else: vtbl
   GC_ref(vtbl)
-  vtbl.vtbl.destructor = proc(vtbl: ptr cQTemporaryFileVTable, _: ptr cQTemporaryFile) {.cdecl.} =
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQTemporaryFileVTable, _: ptr cQTemporaryFile) {.cdecl.} =
     let vtbl = cast[ref QTemporaryFileVTable](vtbl)
     GC_unref(vtbl)
-  if not isNil(vtbl.metaObject):
+  if not isNil(vtbl[].metaObject):
     vtbl[].vtbl.metaObject = miqt_exec_callback_cQTemporaryFile_metaObject
-  if not isNil(vtbl.metacast):
+  if not isNil(vtbl[].metacast):
     vtbl[].vtbl.metacast = miqt_exec_callback_cQTemporaryFile_metacast
-  if not isNil(vtbl.metacall):
+  if not isNil(vtbl[].metacall):
     vtbl[].vtbl.metacall = miqt_exec_callback_cQTemporaryFile_metacall
-  if not isNil(vtbl.fileName):
+  if not isNil(vtbl[].fileName):
     vtbl[].vtbl.fileName = miqt_exec_callback_cQTemporaryFile_fileName
-  if not isNil(vtbl.openWithFlags):
+  if not isNil(vtbl[].openWithFlags):
     vtbl[].vtbl.openWithFlags = miqt_exec_callback_cQTemporaryFile_openWithFlags
-  if not isNil(vtbl.size):
+  if not isNil(vtbl[].size):
     vtbl[].vtbl.size = miqt_exec_callback_cQTemporaryFile_size
-  if not isNil(vtbl.resize):
+  if not isNil(vtbl[].resize):
     vtbl[].vtbl.resize = miqt_exec_callback_cQTemporaryFile_resize
-  if not isNil(vtbl.permissions):
+  if not isNil(vtbl[].permissions):
     vtbl[].vtbl.permissions = miqt_exec_callback_cQTemporaryFile_permissions
-  if not isNil(vtbl.setPermissions):
+  if not isNil(vtbl[].setPermissions):
     vtbl[].vtbl.setPermissions = miqt_exec_callback_cQTemporaryFile_setPermissions
-  if not isNil(vtbl.close):
+  if not isNil(vtbl[].close):
     vtbl[].vtbl.close = miqt_exec_callback_cQTemporaryFile_close
-  if not isNil(vtbl.isSequential):
+  if not isNil(vtbl[].isSequential):
     vtbl[].vtbl.isSequential = miqt_exec_callback_cQTemporaryFile_isSequential
-  if not isNil(vtbl.pos):
+  if not isNil(vtbl[].pos):
     vtbl[].vtbl.pos = miqt_exec_callback_cQTemporaryFile_pos
-  if not isNil(vtbl.seek):
+  if not isNil(vtbl[].seek):
     vtbl[].vtbl.seek = miqt_exec_callback_cQTemporaryFile_seek
-  if not isNil(vtbl.atEnd):
+  if not isNil(vtbl[].atEnd):
     vtbl[].vtbl.atEnd = miqt_exec_callback_cQTemporaryFile_atEnd
-  if not isNil(vtbl.readData):
+  if not isNil(vtbl[].readData):
     vtbl[].vtbl.readData = miqt_exec_callback_cQTemporaryFile_readData
-  if not isNil(vtbl.writeData):
+  if not isNil(vtbl[].writeData):
     vtbl[].vtbl.writeData = miqt_exec_callback_cQTemporaryFile_writeData
-  if not isNil(vtbl.readLineData):
+  if not isNil(vtbl[].readLineData):
     vtbl[].vtbl.readLineData = miqt_exec_callback_cQTemporaryFile_readLineData
-  if not isNil(vtbl.reset):
+  if not isNil(vtbl[].reset):
     vtbl[].vtbl.reset = miqt_exec_callback_cQTemporaryFile_reset
-  if not isNil(vtbl.bytesAvailable):
+  if not isNil(vtbl[].bytesAvailable):
     vtbl[].vtbl.bytesAvailable = miqt_exec_callback_cQTemporaryFile_bytesAvailable
-  if not isNil(vtbl.bytesToWrite):
+  if not isNil(vtbl[].bytesToWrite):
     vtbl[].vtbl.bytesToWrite = miqt_exec_callback_cQTemporaryFile_bytesToWrite
-  if not isNil(vtbl.canReadLine):
+  if not isNil(vtbl[].canReadLine):
     vtbl[].vtbl.canReadLine = miqt_exec_callback_cQTemporaryFile_canReadLine
-  if not isNil(vtbl.waitForReadyRead):
+  if not isNil(vtbl[].waitForReadyRead):
     vtbl[].vtbl.waitForReadyRead = miqt_exec_callback_cQTemporaryFile_waitForReadyRead
-  if not isNil(vtbl.waitForBytesWritten):
+  if not isNil(vtbl[].waitForBytesWritten):
     vtbl[].vtbl.waitForBytesWritten = miqt_exec_callback_cQTemporaryFile_waitForBytesWritten
-  if not isNil(vtbl.event):
+  if not isNil(vtbl[].event):
     vtbl[].vtbl.event = miqt_exec_callback_cQTemporaryFile_event
-  if not isNil(vtbl.eventFilter):
+  if not isNil(vtbl[].eventFilter):
     vtbl[].vtbl.eventFilter = miqt_exec_callback_cQTemporaryFile_eventFilter
-  if not isNil(vtbl.timerEvent):
+  if not isNil(vtbl[].timerEvent):
     vtbl[].vtbl.timerEvent = miqt_exec_callback_cQTemporaryFile_timerEvent
-  if not isNil(vtbl.childEvent):
+  if not isNil(vtbl[].childEvent):
     vtbl[].vtbl.childEvent = miqt_exec_callback_cQTemporaryFile_childEvent
-  if not isNil(vtbl.customEvent):
+  if not isNil(vtbl[].customEvent):
     vtbl[].vtbl.customEvent = miqt_exec_callback_cQTemporaryFile_customEvent
-  if not isNil(vtbl.connectNotify):
+  if not isNil(vtbl[].connectNotify):
     vtbl[].vtbl.connectNotify = miqt_exec_callback_cQTemporaryFile_connectNotify
-  if not isNil(vtbl.disconnectNotify):
+  if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQTemporaryFile_disconnectNotify
-  gen_qtemporaryfile_types.QTemporaryFile(h: fcQTemporaryFile_new(addr(vtbl[]), ))
+  gen_qtemporaryfile_types.QTemporaryFile(h: fcQTemporaryFile_new(addr(vtbl[].vtbl), ), owned: true)
 
 proc create*(T: type gen_qtemporaryfile_types.QTemporaryFile,
     templateName: string,
     vtbl: ref QTemporaryFileVTable = nil): gen_qtemporaryfile_types.QTemporaryFile =
   let vtbl = if vtbl == nil: new QTemporaryFileVTable else: vtbl
   GC_ref(vtbl)
-  vtbl.vtbl.destructor = proc(vtbl: ptr cQTemporaryFileVTable, _: ptr cQTemporaryFile) {.cdecl.} =
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQTemporaryFileVTable, _: ptr cQTemporaryFile) {.cdecl.} =
     let vtbl = cast[ref QTemporaryFileVTable](vtbl)
     GC_unref(vtbl)
-  if not isNil(vtbl.metaObject):
+  if not isNil(vtbl[].metaObject):
     vtbl[].vtbl.metaObject = miqt_exec_callback_cQTemporaryFile_metaObject
-  if not isNil(vtbl.metacast):
+  if not isNil(vtbl[].metacast):
     vtbl[].vtbl.metacast = miqt_exec_callback_cQTemporaryFile_metacast
-  if not isNil(vtbl.metacall):
+  if not isNil(vtbl[].metacall):
     vtbl[].vtbl.metacall = miqt_exec_callback_cQTemporaryFile_metacall
-  if not isNil(vtbl.fileName):
+  if not isNil(vtbl[].fileName):
     vtbl[].vtbl.fileName = miqt_exec_callback_cQTemporaryFile_fileName
-  if not isNil(vtbl.openWithFlags):
+  if not isNil(vtbl[].openWithFlags):
     vtbl[].vtbl.openWithFlags = miqt_exec_callback_cQTemporaryFile_openWithFlags
-  if not isNil(vtbl.size):
+  if not isNil(vtbl[].size):
     vtbl[].vtbl.size = miqt_exec_callback_cQTemporaryFile_size
-  if not isNil(vtbl.resize):
+  if not isNil(vtbl[].resize):
     vtbl[].vtbl.resize = miqt_exec_callback_cQTemporaryFile_resize
-  if not isNil(vtbl.permissions):
+  if not isNil(vtbl[].permissions):
     vtbl[].vtbl.permissions = miqt_exec_callback_cQTemporaryFile_permissions
-  if not isNil(vtbl.setPermissions):
+  if not isNil(vtbl[].setPermissions):
     vtbl[].vtbl.setPermissions = miqt_exec_callback_cQTemporaryFile_setPermissions
-  if not isNil(vtbl.close):
+  if not isNil(vtbl[].close):
     vtbl[].vtbl.close = miqt_exec_callback_cQTemporaryFile_close
-  if not isNil(vtbl.isSequential):
+  if not isNil(vtbl[].isSequential):
     vtbl[].vtbl.isSequential = miqt_exec_callback_cQTemporaryFile_isSequential
-  if not isNil(vtbl.pos):
+  if not isNil(vtbl[].pos):
     vtbl[].vtbl.pos = miqt_exec_callback_cQTemporaryFile_pos
-  if not isNil(vtbl.seek):
+  if not isNil(vtbl[].seek):
     vtbl[].vtbl.seek = miqt_exec_callback_cQTemporaryFile_seek
-  if not isNil(vtbl.atEnd):
+  if not isNil(vtbl[].atEnd):
     vtbl[].vtbl.atEnd = miqt_exec_callback_cQTemporaryFile_atEnd
-  if not isNil(vtbl.readData):
+  if not isNil(vtbl[].readData):
     vtbl[].vtbl.readData = miqt_exec_callback_cQTemporaryFile_readData
-  if not isNil(vtbl.writeData):
+  if not isNil(vtbl[].writeData):
     vtbl[].vtbl.writeData = miqt_exec_callback_cQTemporaryFile_writeData
-  if not isNil(vtbl.readLineData):
+  if not isNil(vtbl[].readLineData):
     vtbl[].vtbl.readLineData = miqt_exec_callback_cQTemporaryFile_readLineData
-  if not isNil(vtbl.reset):
+  if not isNil(vtbl[].reset):
     vtbl[].vtbl.reset = miqt_exec_callback_cQTemporaryFile_reset
-  if not isNil(vtbl.bytesAvailable):
+  if not isNil(vtbl[].bytesAvailable):
     vtbl[].vtbl.bytesAvailable = miqt_exec_callback_cQTemporaryFile_bytesAvailable
-  if not isNil(vtbl.bytesToWrite):
+  if not isNil(vtbl[].bytesToWrite):
     vtbl[].vtbl.bytesToWrite = miqt_exec_callback_cQTemporaryFile_bytesToWrite
-  if not isNil(vtbl.canReadLine):
+  if not isNil(vtbl[].canReadLine):
     vtbl[].vtbl.canReadLine = miqt_exec_callback_cQTemporaryFile_canReadLine
-  if not isNil(vtbl.waitForReadyRead):
+  if not isNil(vtbl[].waitForReadyRead):
     vtbl[].vtbl.waitForReadyRead = miqt_exec_callback_cQTemporaryFile_waitForReadyRead
-  if not isNil(vtbl.waitForBytesWritten):
+  if not isNil(vtbl[].waitForBytesWritten):
     vtbl[].vtbl.waitForBytesWritten = miqt_exec_callback_cQTemporaryFile_waitForBytesWritten
-  if not isNil(vtbl.event):
+  if not isNil(vtbl[].event):
     vtbl[].vtbl.event = miqt_exec_callback_cQTemporaryFile_event
-  if not isNil(vtbl.eventFilter):
+  if not isNil(vtbl[].eventFilter):
     vtbl[].vtbl.eventFilter = miqt_exec_callback_cQTemporaryFile_eventFilter
-  if not isNil(vtbl.timerEvent):
+  if not isNil(vtbl[].timerEvent):
     vtbl[].vtbl.timerEvent = miqt_exec_callback_cQTemporaryFile_timerEvent
-  if not isNil(vtbl.childEvent):
+  if not isNil(vtbl[].childEvent):
     vtbl[].vtbl.childEvent = miqt_exec_callback_cQTemporaryFile_childEvent
-  if not isNil(vtbl.customEvent):
+  if not isNil(vtbl[].customEvent):
     vtbl[].vtbl.customEvent = miqt_exec_callback_cQTemporaryFile_customEvent
-  if not isNil(vtbl.connectNotify):
+  if not isNil(vtbl[].connectNotify):
     vtbl[].vtbl.connectNotify = miqt_exec_callback_cQTemporaryFile_connectNotify
-  if not isNil(vtbl.disconnectNotify):
+  if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQTemporaryFile_disconnectNotify
-  gen_qtemporaryfile_types.QTemporaryFile(h: fcQTemporaryFile_new2(addr(vtbl[]), struct_miqt_string(data: templateName, len: csize_t(len(templateName)))))
+  gen_qtemporaryfile_types.QTemporaryFile(h: fcQTemporaryFile_new2(addr(vtbl[].vtbl), struct_miqt_string(data: templateName, len: csize_t(len(templateName)))), owned: true)
 
 proc create*(T: type gen_qtemporaryfile_types.QTemporaryFile,
     parent: gen_qobject_types.QObject,
     vtbl: ref QTemporaryFileVTable = nil): gen_qtemporaryfile_types.QTemporaryFile =
   let vtbl = if vtbl == nil: new QTemporaryFileVTable else: vtbl
   GC_ref(vtbl)
-  vtbl.vtbl.destructor = proc(vtbl: ptr cQTemporaryFileVTable, _: ptr cQTemporaryFile) {.cdecl.} =
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQTemporaryFileVTable, _: ptr cQTemporaryFile) {.cdecl.} =
     let vtbl = cast[ref QTemporaryFileVTable](vtbl)
     GC_unref(vtbl)
-  if not isNil(vtbl.metaObject):
+  if not isNil(vtbl[].metaObject):
     vtbl[].vtbl.metaObject = miqt_exec_callback_cQTemporaryFile_metaObject
-  if not isNil(vtbl.metacast):
+  if not isNil(vtbl[].metacast):
     vtbl[].vtbl.metacast = miqt_exec_callback_cQTemporaryFile_metacast
-  if not isNil(vtbl.metacall):
+  if not isNil(vtbl[].metacall):
     vtbl[].vtbl.metacall = miqt_exec_callback_cQTemporaryFile_metacall
-  if not isNil(vtbl.fileName):
+  if not isNil(vtbl[].fileName):
     vtbl[].vtbl.fileName = miqt_exec_callback_cQTemporaryFile_fileName
-  if not isNil(vtbl.openWithFlags):
+  if not isNil(vtbl[].openWithFlags):
     vtbl[].vtbl.openWithFlags = miqt_exec_callback_cQTemporaryFile_openWithFlags
-  if not isNil(vtbl.size):
+  if not isNil(vtbl[].size):
     vtbl[].vtbl.size = miqt_exec_callback_cQTemporaryFile_size
-  if not isNil(vtbl.resize):
+  if not isNil(vtbl[].resize):
     vtbl[].vtbl.resize = miqt_exec_callback_cQTemporaryFile_resize
-  if not isNil(vtbl.permissions):
+  if not isNil(vtbl[].permissions):
     vtbl[].vtbl.permissions = miqt_exec_callback_cQTemporaryFile_permissions
-  if not isNil(vtbl.setPermissions):
+  if not isNil(vtbl[].setPermissions):
     vtbl[].vtbl.setPermissions = miqt_exec_callback_cQTemporaryFile_setPermissions
-  if not isNil(vtbl.close):
+  if not isNil(vtbl[].close):
     vtbl[].vtbl.close = miqt_exec_callback_cQTemporaryFile_close
-  if not isNil(vtbl.isSequential):
+  if not isNil(vtbl[].isSequential):
     vtbl[].vtbl.isSequential = miqt_exec_callback_cQTemporaryFile_isSequential
-  if not isNil(vtbl.pos):
+  if not isNil(vtbl[].pos):
     vtbl[].vtbl.pos = miqt_exec_callback_cQTemporaryFile_pos
-  if not isNil(vtbl.seek):
+  if not isNil(vtbl[].seek):
     vtbl[].vtbl.seek = miqt_exec_callback_cQTemporaryFile_seek
-  if not isNil(vtbl.atEnd):
+  if not isNil(vtbl[].atEnd):
     vtbl[].vtbl.atEnd = miqt_exec_callback_cQTemporaryFile_atEnd
-  if not isNil(vtbl.readData):
+  if not isNil(vtbl[].readData):
     vtbl[].vtbl.readData = miqt_exec_callback_cQTemporaryFile_readData
-  if not isNil(vtbl.writeData):
+  if not isNil(vtbl[].writeData):
     vtbl[].vtbl.writeData = miqt_exec_callback_cQTemporaryFile_writeData
-  if not isNil(vtbl.readLineData):
+  if not isNil(vtbl[].readLineData):
     vtbl[].vtbl.readLineData = miqt_exec_callback_cQTemporaryFile_readLineData
-  if not isNil(vtbl.reset):
+  if not isNil(vtbl[].reset):
     vtbl[].vtbl.reset = miqt_exec_callback_cQTemporaryFile_reset
-  if not isNil(vtbl.bytesAvailable):
+  if not isNil(vtbl[].bytesAvailable):
     vtbl[].vtbl.bytesAvailable = miqt_exec_callback_cQTemporaryFile_bytesAvailable
-  if not isNil(vtbl.bytesToWrite):
+  if not isNil(vtbl[].bytesToWrite):
     vtbl[].vtbl.bytesToWrite = miqt_exec_callback_cQTemporaryFile_bytesToWrite
-  if not isNil(vtbl.canReadLine):
+  if not isNil(vtbl[].canReadLine):
     vtbl[].vtbl.canReadLine = miqt_exec_callback_cQTemporaryFile_canReadLine
-  if not isNil(vtbl.waitForReadyRead):
+  if not isNil(vtbl[].waitForReadyRead):
     vtbl[].vtbl.waitForReadyRead = miqt_exec_callback_cQTemporaryFile_waitForReadyRead
-  if not isNil(vtbl.waitForBytesWritten):
+  if not isNil(vtbl[].waitForBytesWritten):
     vtbl[].vtbl.waitForBytesWritten = miqt_exec_callback_cQTemporaryFile_waitForBytesWritten
-  if not isNil(vtbl.event):
+  if not isNil(vtbl[].event):
     vtbl[].vtbl.event = miqt_exec_callback_cQTemporaryFile_event
-  if not isNil(vtbl.eventFilter):
+  if not isNil(vtbl[].eventFilter):
     vtbl[].vtbl.eventFilter = miqt_exec_callback_cQTemporaryFile_eventFilter
-  if not isNil(vtbl.timerEvent):
+  if not isNil(vtbl[].timerEvent):
     vtbl[].vtbl.timerEvent = miqt_exec_callback_cQTemporaryFile_timerEvent
-  if not isNil(vtbl.childEvent):
+  if not isNil(vtbl[].childEvent):
     vtbl[].vtbl.childEvent = miqt_exec_callback_cQTemporaryFile_childEvent
-  if not isNil(vtbl.customEvent):
+  if not isNil(vtbl[].customEvent):
     vtbl[].vtbl.customEvent = miqt_exec_callback_cQTemporaryFile_customEvent
-  if not isNil(vtbl.connectNotify):
+  if not isNil(vtbl[].connectNotify):
     vtbl[].vtbl.connectNotify = miqt_exec_callback_cQTemporaryFile_connectNotify
-  if not isNil(vtbl.disconnectNotify):
+  if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQTemporaryFile_disconnectNotify
-  gen_qtemporaryfile_types.QTemporaryFile(h: fcQTemporaryFile_new3(addr(vtbl[]), parent.h))
+  gen_qtemporaryfile_types.QTemporaryFile(h: fcQTemporaryFile_new3(addr(vtbl[].vtbl), parent.h), owned: true)
 
 proc create*(T: type gen_qtemporaryfile_types.QTemporaryFile,
     templateName: string, parent: gen_qobject_types.QObject,
     vtbl: ref QTemporaryFileVTable = nil): gen_qtemporaryfile_types.QTemporaryFile =
   let vtbl = if vtbl == nil: new QTemporaryFileVTable else: vtbl
   GC_ref(vtbl)
-  vtbl.vtbl.destructor = proc(vtbl: ptr cQTemporaryFileVTable, _: ptr cQTemporaryFile) {.cdecl.} =
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQTemporaryFileVTable, _: ptr cQTemporaryFile) {.cdecl.} =
     let vtbl = cast[ref QTemporaryFileVTable](vtbl)
     GC_unref(vtbl)
-  if not isNil(vtbl.metaObject):
+  if not isNil(vtbl[].metaObject):
     vtbl[].vtbl.metaObject = miqt_exec_callback_cQTemporaryFile_metaObject
-  if not isNil(vtbl.metacast):
+  if not isNil(vtbl[].metacast):
     vtbl[].vtbl.metacast = miqt_exec_callback_cQTemporaryFile_metacast
-  if not isNil(vtbl.metacall):
+  if not isNil(vtbl[].metacall):
     vtbl[].vtbl.metacall = miqt_exec_callback_cQTemporaryFile_metacall
-  if not isNil(vtbl.fileName):
+  if not isNil(vtbl[].fileName):
     vtbl[].vtbl.fileName = miqt_exec_callback_cQTemporaryFile_fileName
-  if not isNil(vtbl.openWithFlags):
+  if not isNil(vtbl[].openWithFlags):
     vtbl[].vtbl.openWithFlags = miqt_exec_callback_cQTemporaryFile_openWithFlags
-  if not isNil(vtbl.size):
+  if not isNil(vtbl[].size):
     vtbl[].vtbl.size = miqt_exec_callback_cQTemporaryFile_size
-  if not isNil(vtbl.resize):
+  if not isNil(vtbl[].resize):
     vtbl[].vtbl.resize = miqt_exec_callback_cQTemporaryFile_resize
-  if not isNil(vtbl.permissions):
+  if not isNil(vtbl[].permissions):
     vtbl[].vtbl.permissions = miqt_exec_callback_cQTemporaryFile_permissions
-  if not isNil(vtbl.setPermissions):
+  if not isNil(vtbl[].setPermissions):
     vtbl[].vtbl.setPermissions = miqt_exec_callback_cQTemporaryFile_setPermissions
-  if not isNil(vtbl.close):
+  if not isNil(vtbl[].close):
     vtbl[].vtbl.close = miqt_exec_callback_cQTemporaryFile_close
-  if not isNil(vtbl.isSequential):
+  if not isNil(vtbl[].isSequential):
     vtbl[].vtbl.isSequential = miqt_exec_callback_cQTemporaryFile_isSequential
-  if not isNil(vtbl.pos):
+  if not isNil(vtbl[].pos):
     vtbl[].vtbl.pos = miqt_exec_callback_cQTemporaryFile_pos
-  if not isNil(vtbl.seek):
+  if not isNil(vtbl[].seek):
     vtbl[].vtbl.seek = miqt_exec_callback_cQTemporaryFile_seek
-  if not isNil(vtbl.atEnd):
+  if not isNil(vtbl[].atEnd):
     vtbl[].vtbl.atEnd = miqt_exec_callback_cQTemporaryFile_atEnd
-  if not isNil(vtbl.readData):
+  if not isNil(vtbl[].readData):
     vtbl[].vtbl.readData = miqt_exec_callback_cQTemporaryFile_readData
-  if not isNil(vtbl.writeData):
+  if not isNil(vtbl[].writeData):
     vtbl[].vtbl.writeData = miqt_exec_callback_cQTemporaryFile_writeData
-  if not isNil(vtbl.readLineData):
+  if not isNil(vtbl[].readLineData):
     vtbl[].vtbl.readLineData = miqt_exec_callback_cQTemporaryFile_readLineData
-  if not isNil(vtbl.reset):
+  if not isNil(vtbl[].reset):
     vtbl[].vtbl.reset = miqt_exec_callback_cQTemporaryFile_reset
-  if not isNil(vtbl.bytesAvailable):
+  if not isNil(vtbl[].bytesAvailable):
     vtbl[].vtbl.bytesAvailable = miqt_exec_callback_cQTemporaryFile_bytesAvailable
-  if not isNil(vtbl.bytesToWrite):
+  if not isNil(vtbl[].bytesToWrite):
     vtbl[].vtbl.bytesToWrite = miqt_exec_callback_cQTemporaryFile_bytesToWrite
-  if not isNil(vtbl.canReadLine):
+  if not isNil(vtbl[].canReadLine):
     vtbl[].vtbl.canReadLine = miqt_exec_callback_cQTemporaryFile_canReadLine
-  if not isNil(vtbl.waitForReadyRead):
+  if not isNil(vtbl[].waitForReadyRead):
     vtbl[].vtbl.waitForReadyRead = miqt_exec_callback_cQTemporaryFile_waitForReadyRead
-  if not isNil(vtbl.waitForBytesWritten):
+  if not isNil(vtbl[].waitForBytesWritten):
     vtbl[].vtbl.waitForBytesWritten = miqt_exec_callback_cQTemporaryFile_waitForBytesWritten
-  if not isNil(vtbl.event):
+  if not isNil(vtbl[].event):
     vtbl[].vtbl.event = miqt_exec_callback_cQTemporaryFile_event
-  if not isNil(vtbl.eventFilter):
+  if not isNil(vtbl[].eventFilter):
     vtbl[].vtbl.eventFilter = miqt_exec_callback_cQTemporaryFile_eventFilter
-  if not isNil(vtbl.timerEvent):
+  if not isNil(vtbl[].timerEvent):
     vtbl[].vtbl.timerEvent = miqt_exec_callback_cQTemporaryFile_timerEvent
-  if not isNil(vtbl.childEvent):
+  if not isNil(vtbl[].childEvent):
     vtbl[].vtbl.childEvent = miqt_exec_callback_cQTemporaryFile_childEvent
-  if not isNil(vtbl.customEvent):
+  if not isNil(vtbl[].customEvent):
     vtbl[].vtbl.customEvent = miqt_exec_callback_cQTemporaryFile_customEvent
-  if not isNil(vtbl.connectNotify):
+  if not isNil(vtbl[].connectNotify):
     vtbl[].vtbl.connectNotify = miqt_exec_callback_cQTemporaryFile_connectNotify
-  if not isNil(vtbl.disconnectNotify):
+  if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQTemporaryFile_disconnectNotify
-  gen_qtemporaryfile_types.QTemporaryFile(h: fcQTemporaryFile_new4(addr(vtbl[]), struct_miqt_string(data: templateName, len: csize_t(len(templateName))), parent.h))
+  gen_qtemporaryfile_types.QTemporaryFile(h: fcQTemporaryFile_new4(addr(vtbl[].vtbl), struct_miqt_string(data: templateName, len: csize_t(len(templateName))), parent.h), owned: true)
+
+proc create*(T: type gen_qtemporaryfile_types.QTemporaryFile,
+    vtbl: VirtualQTemporaryFile) =
+
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQTemporaryFileVTable, _: ptr cQTemporaryFile) {.cdecl.} =
+    let vtbl = cast[ptr typeof(VirtualQTemporaryFile()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQTemporaryFile, vtbl)))
+    vtbl[].h = nil
+    vtbl[].owned = false
+  vtbl[].vtbl.metaObject = miqt_exec_method_cQTemporaryFile_metaObject
+  vtbl[].vtbl.metacast = miqt_exec_method_cQTemporaryFile_metacast
+  vtbl[].vtbl.metacall = miqt_exec_method_cQTemporaryFile_metacall
+  vtbl[].vtbl.fileName = miqt_exec_method_cQTemporaryFile_fileName
+  vtbl[].vtbl.open = miqt_exec_method_cQTemporaryFile_openWithFlags
+  vtbl[].vtbl.size = miqt_exec_method_cQTemporaryFile_size
+  vtbl[].vtbl.resize = miqt_exec_method_cQTemporaryFile_resize
+  vtbl[].vtbl.permissions = miqt_exec_method_cQTemporaryFile_permissions
+  vtbl[].vtbl.setPermissions = miqt_exec_method_cQTemporaryFile_setPermissions
+  vtbl[].vtbl.close = miqt_exec_method_cQTemporaryFile_close
+  vtbl[].vtbl.isSequential = miqt_exec_method_cQTemporaryFile_isSequential
+  vtbl[].vtbl.pos = miqt_exec_method_cQTemporaryFile_pos
+  vtbl[].vtbl.seek = miqt_exec_method_cQTemporaryFile_seek
+  vtbl[].vtbl.atEnd = miqt_exec_method_cQTemporaryFile_atEnd
+  vtbl[].vtbl.readData = miqt_exec_method_cQTemporaryFile_readData
+  vtbl[].vtbl.writeData = miqt_exec_method_cQTemporaryFile_writeData
+  vtbl[].vtbl.readLineData = miqt_exec_method_cQTemporaryFile_readLineData
+  vtbl[].vtbl.reset = miqt_exec_method_cQTemporaryFile_reset
+  vtbl[].vtbl.bytesAvailable = miqt_exec_method_cQTemporaryFile_bytesAvailable
+  vtbl[].vtbl.bytesToWrite = miqt_exec_method_cQTemporaryFile_bytesToWrite
+  vtbl[].vtbl.canReadLine = miqt_exec_method_cQTemporaryFile_canReadLine
+  vtbl[].vtbl.waitForReadyRead = miqt_exec_method_cQTemporaryFile_waitForReadyRead
+  vtbl[].vtbl.waitForBytesWritten = miqt_exec_method_cQTemporaryFile_waitForBytesWritten
+  vtbl[].vtbl.event = miqt_exec_method_cQTemporaryFile_event
+  vtbl[].vtbl.eventFilter = miqt_exec_method_cQTemporaryFile_eventFilter
+  vtbl[].vtbl.timerEvent = miqt_exec_method_cQTemporaryFile_timerEvent
+  vtbl[].vtbl.childEvent = miqt_exec_method_cQTemporaryFile_childEvent
+  vtbl[].vtbl.customEvent = miqt_exec_method_cQTemporaryFile_customEvent
+  vtbl[].vtbl.connectNotify = miqt_exec_method_cQTemporaryFile_connectNotify
+  vtbl[].vtbl.disconnectNotify = miqt_exec_method_cQTemporaryFile_disconnectNotify
+  if vtbl[].h != nil: delete(move(vtbl[]))
+  vtbl[].h = fcQTemporaryFile_new(addr(vtbl[].vtbl), )
+  vtbl[].owned = true
+
+proc create*(T: type gen_qtemporaryfile_types.QTemporaryFile,
+    templateName: string,
+    vtbl: VirtualQTemporaryFile) =
+
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQTemporaryFileVTable, _: ptr cQTemporaryFile) {.cdecl.} =
+    let vtbl = cast[ptr typeof(VirtualQTemporaryFile()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQTemporaryFile, vtbl)))
+    vtbl[].h = nil
+    vtbl[].owned = false
+  vtbl[].vtbl.metaObject = miqt_exec_method_cQTemporaryFile_metaObject
+  vtbl[].vtbl.metacast = miqt_exec_method_cQTemporaryFile_metacast
+  vtbl[].vtbl.metacall = miqt_exec_method_cQTemporaryFile_metacall
+  vtbl[].vtbl.fileName = miqt_exec_method_cQTemporaryFile_fileName
+  vtbl[].vtbl.open = miqt_exec_method_cQTemporaryFile_openWithFlags
+  vtbl[].vtbl.size = miqt_exec_method_cQTemporaryFile_size
+  vtbl[].vtbl.resize = miqt_exec_method_cQTemporaryFile_resize
+  vtbl[].vtbl.permissions = miqt_exec_method_cQTemporaryFile_permissions
+  vtbl[].vtbl.setPermissions = miqt_exec_method_cQTemporaryFile_setPermissions
+  vtbl[].vtbl.close = miqt_exec_method_cQTemporaryFile_close
+  vtbl[].vtbl.isSequential = miqt_exec_method_cQTemporaryFile_isSequential
+  vtbl[].vtbl.pos = miqt_exec_method_cQTemporaryFile_pos
+  vtbl[].vtbl.seek = miqt_exec_method_cQTemporaryFile_seek
+  vtbl[].vtbl.atEnd = miqt_exec_method_cQTemporaryFile_atEnd
+  vtbl[].vtbl.readData = miqt_exec_method_cQTemporaryFile_readData
+  vtbl[].vtbl.writeData = miqt_exec_method_cQTemporaryFile_writeData
+  vtbl[].vtbl.readLineData = miqt_exec_method_cQTemporaryFile_readLineData
+  vtbl[].vtbl.reset = miqt_exec_method_cQTemporaryFile_reset
+  vtbl[].vtbl.bytesAvailable = miqt_exec_method_cQTemporaryFile_bytesAvailable
+  vtbl[].vtbl.bytesToWrite = miqt_exec_method_cQTemporaryFile_bytesToWrite
+  vtbl[].vtbl.canReadLine = miqt_exec_method_cQTemporaryFile_canReadLine
+  vtbl[].vtbl.waitForReadyRead = miqt_exec_method_cQTemporaryFile_waitForReadyRead
+  vtbl[].vtbl.waitForBytesWritten = miqt_exec_method_cQTemporaryFile_waitForBytesWritten
+  vtbl[].vtbl.event = miqt_exec_method_cQTemporaryFile_event
+  vtbl[].vtbl.eventFilter = miqt_exec_method_cQTemporaryFile_eventFilter
+  vtbl[].vtbl.timerEvent = miqt_exec_method_cQTemporaryFile_timerEvent
+  vtbl[].vtbl.childEvent = miqt_exec_method_cQTemporaryFile_childEvent
+  vtbl[].vtbl.customEvent = miqt_exec_method_cQTemporaryFile_customEvent
+  vtbl[].vtbl.connectNotify = miqt_exec_method_cQTemporaryFile_connectNotify
+  vtbl[].vtbl.disconnectNotify = miqt_exec_method_cQTemporaryFile_disconnectNotify
+  if vtbl[].h != nil: delete(move(vtbl[]))
+  vtbl[].h = fcQTemporaryFile_new2(addr(vtbl[].vtbl), struct_miqt_string(data: templateName, len: csize_t(len(templateName))))
+  vtbl[].owned = true
+
+proc create*(T: type gen_qtemporaryfile_types.QTemporaryFile,
+    parent: gen_qobject_types.QObject,
+    vtbl: VirtualQTemporaryFile) =
+
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQTemporaryFileVTable, _: ptr cQTemporaryFile) {.cdecl.} =
+    let vtbl = cast[ptr typeof(VirtualQTemporaryFile()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQTemporaryFile, vtbl)))
+    vtbl[].h = nil
+    vtbl[].owned = false
+  vtbl[].vtbl.metaObject = miqt_exec_method_cQTemporaryFile_metaObject
+  vtbl[].vtbl.metacast = miqt_exec_method_cQTemporaryFile_metacast
+  vtbl[].vtbl.metacall = miqt_exec_method_cQTemporaryFile_metacall
+  vtbl[].vtbl.fileName = miqt_exec_method_cQTemporaryFile_fileName
+  vtbl[].vtbl.open = miqt_exec_method_cQTemporaryFile_openWithFlags
+  vtbl[].vtbl.size = miqt_exec_method_cQTemporaryFile_size
+  vtbl[].vtbl.resize = miqt_exec_method_cQTemporaryFile_resize
+  vtbl[].vtbl.permissions = miqt_exec_method_cQTemporaryFile_permissions
+  vtbl[].vtbl.setPermissions = miqt_exec_method_cQTemporaryFile_setPermissions
+  vtbl[].vtbl.close = miqt_exec_method_cQTemporaryFile_close
+  vtbl[].vtbl.isSequential = miqt_exec_method_cQTemporaryFile_isSequential
+  vtbl[].vtbl.pos = miqt_exec_method_cQTemporaryFile_pos
+  vtbl[].vtbl.seek = miqt_exec_method_cQTemporaryFile_seek
+  vtbl[].vtbl.atEnd = miqt_exec_method_cQTemporaryFile_atEnd
+  vtbl[].vtbl.readData = miqt_exec_method_cQTemporaryFile_readData
+  vtbl[].vtbl.writeData = miqt_exec_method_cQTemporaryFile_writeData
+  vtbl[].vtbl.readLineData = miqt_exec_method_cQTemporaryFile_readLineData
+  vtbl[].vtbl.reset = miqt_exec_method_cQTemporaryFile_reset
+  vtbl[].vtbl.bytesAvailable = miqt_exec_method_cQTemporaryFile_bytesAvailable
+  vtbl[].vtbl.bytesToWrite = miqt_exec_method_cQTemporaryFile_bytesToWrite
+  vtbl[].vtbl.canReadLine = miqt_exec_method_cQTemporaryFile_canReadLine
+  vtbl[].vtbl.waitForReadyRead = miqt_exec_method_cQTemporaryFile_waitForReadyRead
+  vtbl[].vtbl.waitForBytesWritten = miqt_exec_method_cQTemporaryFile_waitForBytesWritten
+  vtbl[].vtbl.event = miqt_exec_method_cQTemporaryFile_event
+  vtbl[].vtbl.eventFilter = miqt_exec_method_cQTemporaryFile_eventFilter
+  vtbl[].vtbl.timerEvent = miqt_exec_method_cQTemporaryFile_timerEvent
+  vtbl[].vtbl.childEvent = miqt_exec_method_cQTemporaryFile_childEvent
+  vtbl[].vtbl.customEvent = miqt_exec_method_cQTemporaryFile_customEvent
+  vtbl[].vtbl.connectNotify = miqt_exec_method_cQTemporaryFile_connectNotify
+  vtbl[].vtbl.disconnectNotify = miqt_exec_method_cQTemporaryFile_disconnectNotify
+  if vtbl[].h != nil: delete(move(vtbl[]))
+  vtbl[].h = fcQTemporaryFile_new3(addr(vtbl[].vtbl), parent.h)
+  vtbl[].owned = true
+
+proc create*(T: type gen_qtemporaryfile_types.QTemporaryFile,
+    templateName: string, parent: gen_qobject_types.QObject,
+    vtbl: VirtualQTemporaryFile) =
+
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQTemporaryFileVTable, _: ptr cQTemporaryFile) {.cdecl.} =
+    let vtbl = cast[ptr typeof(VirtualQTemporaryFile()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQTemporaryFile, vtbl)))
+    vtbl[].h = nil
+    vtbl[].owned = false
+  vtbl[].vtbl.metaObject = miqt_exec_method_cQTemporaryFile_metaObject
+  vtbl[].vtbl.metacast = miqt_exec_method_cQTemporaryFile_metacast
+  vtbl[].vtbl.metacall = miqt_exec_method_cQTemporaryFile_metacall
+  vtbl[].vtbl.fileName = miqt_exec_method_cQTemporaryFile_fileName
+  vtbl[].vtbl.open = miqt_exec_method_cQTemporaryFile_openWithFlags
+  vtbl[].vtbl.size = miqt_exec_method_cQTemporaryFile_size
+  vtbl[].vtbl.resize = miqt_exec_method_cQTemporaryFile_resize
+  vtbl[].vtbl.permissions = miqt_exec_method_cQTemporaryFile_permissions
+  vtbl[].vtbl.setPermissions = miqt_exec_method_cQTemporaryFile_setPermissions
+  vtbl[].vtbl.close = miqt_exec_method_cQTemporaryFile_close
+  vtbl[].vtbl.isSequential = miqt_exec_method_cQTemporaryFile_isSequential
+  vtbl[].vtbl.pos = miqt_exec_method_cQTemporaryFile_pos
+  vtbl[].vtbl.seek = miqt_exec_method_cQTemporaryFile_seek
+  vtbl[].vtbl.atEnd = miqt_exec_method_cQTemporaryFile_atEnd
+  vtbl[].vtbl.readData = miqt_exec_method_cQTemporaryFile_readData
+  vtbl[].vtbl.writeData = miqt_exec_method_cQTemporaryFile_writeData
+  vtbl[].vtbl.readLineData = miqt_exec_method_cQTemporaryFile_readLineData
+  vtbl[].vtbl.reset = miqt_exec_method_cQTemporaryFile_reset
+  vtbl[].vtbl.bytesAvailable = miqt_exec_method_cQTemporaryFile_bytesAvailable
+  vtbl[].vtbl.bytesToWrite = miqt_exec_method_cQTemporaryFile_bytesToWrite
+  vtbl[].vtbl.canReadLine = miqt_exec_method_cQTemporaryFile_canReadLine
+  vtbl[].vtbl.waitForReadyRead = miqt_exec_method_cQTemporaryFile_waitForReadyRead
+  vtbl[].vtbl.waitForBytesWritten = miqt_exec_method_cQTemporaryFile_waitForBytesWritten
+  vtbl[].vtbl.event = miqt_exec_method_cQTemporaryFile_event
+  vtbl[].vtbl.eventFilter = miqt_exec_method_cQTemporaryFile_eventFilter
+  vtbl[].vtbl.timerEvent = miqt_exec_method_cQTemporaryFile_timerEvent
+  vtbl[].vtbl.childEvent = miqt_exec_method_cQTemporaryFile_childEvent
+  vtbl[].vtbl.customEvent = miqt_exec_method_cQTemporaryFile_customEvent
+  vtbl[].vtbl.connectNotify = miqt_exec_method_cQTemporaryFile_connectNotify
+  vtbl[].vtbl.disconnectNotify = miqt_exec_method_cQTemporaryFile_disconnectNotify
+  if vtbl[].h != nil: delete(move(vtbl[]))
+  vtbl[].h = fcQTemporaryFile_new4(addr(vtbl[].vtbl), struct_miqt_string(data: templateName, len: csize_t(len(templateName))), parent.h)
+  vtbl[].owned = true
 
 proc staticMetaObject*(_: type gen_qtemporaryfile_types.QTemporaryFile): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQTemporaryFile_staticMetaObject())
-proc delete*(self: gen_qtemporaryfile_types.QTemporaryFile) =
-  fcQTemporaryFile_delete(self.h)

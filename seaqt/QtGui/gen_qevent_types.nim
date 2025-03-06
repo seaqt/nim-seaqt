@@ -34,14 +34,71 @@ type QFileOpenEvent* = object of gen_qcoreevent_types.QEvent
 type QToolBarChangeEvent* = object of gen_qcoreevent_types.QEvent
 type QShortcutEvent* = object of gen_qcoreevent_types.QEvent
 type QWindowStateChangeEvent* = object of gen_qcoreevent_types.QEvent
-type QPointingDeviceUniqueId* {.inheritable, pure.} = object
+type QPointingDeviceUniqueId* {.inheritable.} = object
   h*: pointer
+  owned*: bool
+
+const cflags = gorge("pkg-config --cflags Qt5Gui") & " -fPIC"
+{.compile("gen_qevent.cpp", cflags).}
+
+proc fcQPointingDeviceUniqueId_delete(self: pointer) {.importc: "QPointingDeviceUniqueId_delete".}
+proc `=destroy`(self: var QPointingDeviceUniqueId) =
+  if self.owned: fcQPointingDeviceUniqueId_delete(self.h)
+
+proc `=sink`(dest: var QPointingDeviceUniqueId, source: QPointingDeviceUniqueId) =
+  `=destroy`(dest)
+  wasMoved(dest)
+  dest.h = source.h
+  dest.owned = source.owned
+
+proc `=copy`(dest: var QPointingDeviceUniqueId, source: QPointingDeviceUniqueId) {.error.}
+proc delete*(self: sink QPointingDeviceUniqueId) =
+  let h = self.h
+  wasMoved(self)
+  fcQPointingDeviceUniqueId_delete(h)
+
 type QTouchEvent* = object of QInputEvent
 type QScrollPrepareEvent* = object of gen_qcoreevent_types.QEvent
 type QScrollEvent* = object of gen_qcoreevent_types.QEvent
 type QScreenOrientationChangeEvent* = object of gen_qcoreevent_types.QEvent
 type QApplicationStateChangeEvent* = object of gen_qcoreevent_types.QEvent
-type QInputMethodEventAttribute* {.inheritable, pure.} = object
+type QInputMethodEventAttribute* {.inheritable.} = object
   h*: pointer
-type QTouchEventTouchPoint* {.inheritable, pure.} = object
+  owned*: bool
+
+proc fcQInputMethodEventAttribute_delete(self: pointer) {.importc: "QInputMethodEvent__Attribute_delete".}
+proc `=destroy`(self: var QInputMethodEventAttribute) =
+  if self.owned: fcQInputMethodEventAttribute_delete(self.h)
+
+proc `=sink`(dest: var QInputMethodEventAttribute, source: QInputMethodEventAttribute) =
+  `=destroy`(dest)
+  wasMoved(dest)
+  dest.h = source.h
+  dest.owned = source.owned
+
+proc `=copy`(dest: var QInputMethodEventAttribute, source: QInputMethodEventAttribute) {.error.}
+proc delete*(self: sink QInputMethodEventAttribute) =
+  let h = self.h
+  wasMoved(self)
+  fcQInputMethodEventAttribute_delete(h)
+
+type QTouchEventTouchPoint* {.inheritable.} = object
   h*: pointer
+  owned*: bool
+
+proc fcQTouchEventTouchPoint_delete(self: pointer) {.importc: "QTouchEvent__TouchPoint_delete".}
+proc `=destroy`(self: var QTouchEventTouchPoint) =
+  if self.owned: fcQTouchEventTouchPoint_delete(self.h)
+
+proc `=sink`(dest: var QTouchEventTouchPoint, source: QTouchEventTouchPoint) =
+  `=destroy`(dest)
+  wasMoved(dest)
+  dest.h = source.h
+  dest.owned = source.owned
+
+proc `=copy`(dest: var QTouchEventTouchPoint, source: QTouchEventTouchPoint) {.error.}
+proc delete*(self: sink QTouchEventTouchPoint) =
+  let h = self.h
+  wasMoved(self)
+  fcQTouchEventTouchPoint_delete(h)
+

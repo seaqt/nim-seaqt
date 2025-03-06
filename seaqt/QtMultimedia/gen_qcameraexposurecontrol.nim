@@ -30,7 +30,7 @@ func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
     else:
       copyMem(addr result[0], unsafeAddr v[0], v.len)
 
-const cflags = gorge("pkg-config --cflags Qt5Multimedia")  & " -fPIC"
+const cflags = gorge("pkg-config --cflags Qt5Multimedia") & " -fPIC"
 {.compile("gen_qcameraexposurecontrol.cpp", cflags).}
 
 
@@ -90,10 +90,9 @@ proc fcQCameraExposureControl_protectedbase_senderSignalIndex(self: pointer, ): 
 proc fcQCameraExposureControl_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QCameraExposureControl_protectedbase_receivers".}
 proc fcQCameraExposureControl_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QCameraExposureControl_protectedbase_isSignalConnected".}
 proc fcQCameraExposureControl_staticMetaObject(): pointer {.importc: "QCameraExposureControl_staticMetaObject".}
-proc fcQCameraExposureControl_delete(self: pointer) {.importc: "QCameraExposureControl_delete".}
 
 proc metaObject*(self: gen_qcameraexposurecontrol_types.QCameraExposureControl, ): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQCameraExposureControl_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQCameraExposureControl_metaObject(self.h), owned: false)
 
 proc metacast*(self: gen_qcameraexposurecontrol_types.QCameraExposureControl, param1: cstring): pointer =
   fcQCameraExposureControl_metacast(self.h, param1)
@@ -117,10 +116,10 @@ proc isParameterSupported*(self: gen_qcameraexposurecontrol_types.QCameraExposur
   fcQCameraExposureControl_isParameterSupported(self.h, cint(parameter))
 
 proc requestedValue*(self: gen_qcameraexposurecontrol_types.QCameraExposureControl, parameter: cint): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQCameraExposureControl_requestedValue(self.h, cint(parameter)))
+  gen_qvariant_types.QVariant(h: fcQCameraExposureControl_requestedValue(self.h, cint(parameter)), owned: true)
 
 proc actualValue*(self: gen_qcameraexposurecontrol_types.QCameraExposureControl, parameter: cint): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQCameraExposureControl_actualValue(self.h, cint(parameter)))
+  gen_qvariant_types.QVariant(h: fcQCameraExposureControl_actualValue(self.h, cint(parameter)), owned: true)
 
 proc setValue*(self: gen_qcameraexposurecontrol_types.QCameraExposureControl, parameter: cint, value: gen_qvariant_types.QVariant): bool =
   fcQCameraExposureControl_setValue(self.h, cint(parameter), value.h)
@@ -210,7 +209,7 @@ proc trUtf8*(_: type gen_qcameraexposurecontrol_types.QCameraExposureControl, s:
   vx_ret
 
 proc sender*(self: gen_qcameraexposurecontrol_types.QCameraExposureControl, ): gen_qobject_types.QObject =
-  gen_qobject_types.QObject(h: fcQCameraExposureControl_protectedbase_sender(self.h))
+  gen_qobject_types.QObject(h: fcQCameraExposureControl_protectedbase_sender(self.h), owned: false)
 
 proc senderSignalIndex*(self: gen_qcameraexposurecontrol_types.QCameraExposureControl, ): cint =
   fcQCameraExposureControl_protectedbase_senderSignalIndex(self.h)
@@ -223,5 +222,3 @@ proc isSignalConnected*(self: gen_qcameraexposurecontrol_types.QCameraExposureCo
 
 proc staticMetaObject*(_: type gen_qcameraexposurecontrol_types.QCameraExposureControl): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQCameraExposureControl_staticMetaObject())
-proc delete*(self: gen_qcameraexposurecontrol_types.QCameraExposureControl) =
-  fcQCameraExposureControl_delete(self.h)

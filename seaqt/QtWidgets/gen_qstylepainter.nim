@@ -30,7 +30,7 @@ func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
     else:
       copyMem(addr result[0], unsafeAddr v[0], v.len)
 
-const cflags = gorge("pkg-config --cflags Qt5Widgets")  & " -fPIC"
+const cflags = gorge("pkg-config --cflags Qt5Widgets") & " -fPIC"
 {.compile("gen_qstylepainter.cpp", cflags).}
 
 
@@ -70,7 +70,6 @@ proc fcQStylePainter_drawItemText6(self: pointer, r: pointer, flags: cint, pal: 
 proc fcQStylePainter_new(w: pointer): ptr cQStylePainter {.importc: "QStylePainter_new".}
 proc fcQStylePainter_new2(): ptr cQStylePainter {.importc: "QStylePainter_new2".}
 proc fcQStylePainter_new3(pd: pointer, w: pointer): ptr cQStylePainter {.importc: "QStylePainter_new3".}
-proc fcQStylePainter_delete(self: pointer) {.importc: "QStylePainter_delete".}
 
 proc begin*(self: gen_qstylepainter_types.QStylePainter, w: gen_qwidget_types.QWidget): bool =
   fcQStylePainter_begin(self.h, w.h)
@@ -94,21 +93,19 @@ proc drawItemPixmap*(self: gen_qstylepainter_types.QStylePainter, r: gen_qrect_t
   fcQStylePainter_drawItemPixmap(self.h, r.h, flags, pixmap.h)
 
 proc style*(self: gen_qstylepainter_types.QStylePainter, ): gen_qstyle_types.QStyle =
-  gen_qstyle_types.QStyle(h: fcQStylePainter_style(self.h))
+  gen_qstyle_types.QStyle(h: fcQStylePainter_style(self.h), owned: false)
 
 proc drawItemText*(self: gen_qstylepainter_types.QStylePainter, r: gen_qrect_types.QRect, flags: cint, pal: gen_qpalette_types.QPalette, enabled: bool, text: string, textRole: cint): void =
   fcQStylePainter_drawItemText6(self.h, r.h, flags, pal.h, enabled, struct_miqt_string(data: text, len: csize_t(len(text))), cint(textRole))
 
 proc create*(T: type gen_qstylepainter_types.QStylePainter,
     w: gen_qwidget_types.QWidget): gen_qstylepainter_types.QStylePainter =
-  gen_qstylepainter_types.QStylePainter(h: fcQStylePainter_new(w.h))
+  gen_qstylepainter_types.QStylePainter(h: fcQStylePainter_new(w.h), owned: true)
 
 proc create*(T: type gen_qstylepainter_types.QStylePainter): gen_qstylepainter_types.QStylePainter =
-  gen_qstylepainter_types.QStylePainter(h: fcQStylePainter_new2())
+  gen_qstylepainter_types.QStylePainter(h: fcQStylePainter_new2(), owned: true)
 
 proc create*(T: type gen_qstylepainter_types.QStylePainter,
     pd: gen_qpaintdevice_types.QPaintDevice, w: gen_qwidget_types.QWidget): gen_qstylepainter_types.QStylePainter =
-  gen_qstylepainter_types.QStylePainter(h: fcQStylePainter_new3(pd.h, w.h))
+  gen_qstylepainter_types.QStylePainter(h: fcQStylePainter_new3(pd.h, w.h), owned: true)
 
-proc delete*(self: gen_qstylepainter_types.QStylePainter) =
-  fcQStylePainter_delete(self.h)

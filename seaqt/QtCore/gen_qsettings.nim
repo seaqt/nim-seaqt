@@ -30,7 +30,7 @@ func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
     else:
       copyMem(addr result[0], unsafeAddr v[0], v.len)
 
-const cflags = gorge("pkg-config --cflags Qt5Core")  & " -fPIC"
+const cflags = gorge("pkg-config --cflags Qt5Core") & " -fPIC"
 {.compile("gen_qsettings.cpp", cflags).}
 
 
@@ -133,7 +133,7 @@ proc fcQSettings_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: 
 proc fcQSettings_trUtf83(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QSettings_trUtf83".}
 proc fcQSettings_beginWriteArray2(self: pointer, prefix: struct_miqt_string, size: cint): void {.importc: "QSettings_beginWriteArray2".}
 proc fcQSettings_value2(self: pointer, key: struct_miqt_string, defaultValue: pointer): pointer {.importc: "QSettings_value2".}
-type cQSettingsVTable = object
+type cQSettingsVTable {.pure.} = object
   destructor*: proc(vtbl: ptr cQSettingsVTable, self: ptr cQSettings) {.cdecl, raises:[], gcsafe.}
   metaObject*: proc(vtbl, self: pointer, ): pointer {.cdecl, raises: [], gcsafe.}
   metacast*: proc(vtbl, self: pointer, param1: cstring): pointer {.cdecl, raises: [], gcsafe.}
@@ -175,10 +175,9 @@ proc fcQSettings_new13(vtbl: pointer, fileName: struct_miqt_string, format: cint
 proc fcQSettings_new14(vtbl: pointer, parent: pointer): ptr cQSettings {.importc: "QSettings_new14".}
 proc fcQSettings_new15(vtbl: pointer, scope: cint, parent: pointer): ptr cQSettings {.importc: "QSettings_new15".}
 proc fcQSettings_staticMetaObject(): pointer {.importc: "QSettings_staticMetaObject".}
-proc fcQSettings_delete(self: pointer) {.importc: "QSettings_delete".}
 
 proc metaObject*(self: gen_qsettings_types.QSettings, ): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQSettings_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQSettings_metaObject(self.h), owned: false)
 
 proc metacast*(self: gen_qsettings_types.QSettings, param1: cstring): pointer =
   fcQSettings_metacast(self.h, param1)
@@ -280,7 +279,7 @@ proc setValue*(self: gen_qsettings_types.QSettings, key: string, value: gen_qvar
   fcQSettings_setValue(self.h, struct_miqt_string(data: key, len: csize_t(len(key))), value.h)
 
 proc value*(self: gen_qsettings_types.QSettings, key: string): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQSettings_value(self.h, struct_miqt_string(data: key, len: csize_t(len(key)))))
+  gen_qvariant_types.QVariant(h: fcQSettings_value(self.h, struct_miqt_string(data: key, len: csize_t(len(key)))), owned: true)
 
 proc remove*(self: gen_qsettings_types.QSettings, key: string): void =
   fcQSettings_remove(self.h, struct_miqt_string(data: key, len: csize_t(len(key))))
@@ -325,7 +324,7 @@ proc setIniCodec*(self: gen_qsettings_types.QSettings, codecName: cstring): void
   fcQSettings_setIniCodecWithCodecName(self.h, codecName)
 
 proc iniCodec*(self: gen_qsettings_types.QSettings, ): gen_qtextcodec_types.QTextCodec =
-  gen_qtextcodec_types.QTextCodec(h: fcQSettings_iniCodec(self.h))
+  gen_qtextcodec_types.QTextCodec(h: fcQSettings_iniCodec(self.h), owned: false)
 
 proc setDefaultFormat*(_: type gen_qsettings_types.QSettings, format: cint): void =
   fcQSettings_setDefaultFormat(cint(format))
@@ -370,7 +369,7 @@ proc beginWriteArray*(self: gen_qsettings_types.QSettings, prefix: string, size:
   fcQSettings_beginWriteArray2(self.h, struct_miqt_string(data: prefix, len: csize_t(len(prefix))), size)
 
 proc value*(self: gen_qsettings_types.QSettings, key: string, defaultValue: gen_qvariant_types.QVariant): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQSettings_value2(self.h, struct_miqt_string(data: key, len: csize_t(len(key))), defaultValue.h))
+  gen_qvariant_types.QVariant(h: fcQSettings_value2(self.h, struct_miqt_string(data: key, len: csize_t(len(key))), defaultValue.h), owned: true)
 
 type QSettingsmetaObjectProc* = proc(self: QSettings): gen_qobjectdefs_types.QMetaObject {.raises: [], gcsafe.}
 type QSettingsmetacastProc* = proc(self: QSettings, param1: cstring): pointer {.raises: [], gcsafe.}
@@ -382,7 +381,7 @@ type QSettingschildEventProc* = proc(self: QSettings, event: gen_qcoreevent_type
 type QSettingscustomEventProc* = proc(self: QSettings, event: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
 type QSettingsconnectNotifyProc* = proc(self: QSettings, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
 type QSettingsdisconnectNotifyProc* = proc(self: QSettings, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
-type QSettingsVTable* = object
+type QSettingsVTable* {.inheritable, pure.} = object
   vtbl: cQSettingsVTable
   metaObject*: QSettingsmetaObjectProc
   metacast*: QSettingsmetacastProc
@@ -395,13 +394,16 @@ type QSettingsVTable* = object
   connectNotify*: QSettingsconnectNotifyProc
   disconnectNotify*: QSettingsdisconnectNotifyProc
 proc QSettingsmetaObject*(self: gen_qsettings_types.QSettings, ): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQSettings_virtualbase_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQSettings_virtualbase_metaObject(self.h), owned: false)
 
 proc miqt_exec_callback_cQSettings_metaObject(vtbl: pointer, self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QSettingsVTable](vtbl)
   let self = QSettings(h: self)
   var virtualReturn = vtbl[].metaObject(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QSettingsmetacast*(self: gen_qsettings_types.QSettings, param1: cstring): pointer =
   fcQSettings_virtualbase_metacast(self.h, param1)
@@ -431,7 +433,7 @@ proc QSettingsevent*(self: gen_qsettings_types.QSettings, event: gen_qcoreevent_
 proc miqt_exec_callback_cQSettings_event(vtbl: pointer, self: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QSettingsVTable](vtbl)
   let self = QSettings(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].event(self, slotval1)
   virtualReturn
 
@@ -441,8 +443,8 @@ proc QSettingseventFilter*(self: gen_qsettings_types.QSettings, watched: gen_qob
 proc miqt_exec_callback_cQSettings_eventFilter(vtbl: pointer, self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QSettingsVTable](vtbl)
   let self = QSettings(h: self)
-  let slotval1 = gen_qobject_types.QObject(h: watched)
-  let slotval2 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].eventFilter(self, slotval1, slotval2)
   virtualReturn
 
@@ -452,7 +454,7 @@ proc QSettingstimerEvent*(self: gen_qsettings_types.QSettings, event: gen_qcoree
 proc miqt_exec_callback_cQSettings_timerEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSettingsVTable](vtbl)
   let self = QSettings(h: self)
-  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   vtbl[].timerEvent(self, slotval1)
 
 proc QSettingschildEvent*(self: gen_qsettings_types.QSettings, event: gen_qcoreevent_types.QChildEvent): void =
@@ -461,7 +463,7 @@ proc QSettingschildEvent*(self: gen_qsettings_types.QSettings, event: gen_qcoree
 proc miqt_exec_callback_cQSettings_childEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSettingsVTable](vtbl)
   let self = QSettings(h: self)
-  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   vtbl[].childEvent(self, slotval1)
 
 proc QSettingscustomEvent*(self: gen_qsettings_types.QSettings, event: gen_qcoreevent_types.QEvent): void =
@@ -470,7 +472,7 @@ proc QSettingscustomEvent*(self: gen_qsettings_types.QSettings, event: gen_qcore
 proc miqt_exec_callback_cQSettings_customEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSettingsVTable](vtbl)
   let self = QSettings(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].customEvent(self, slotval1)
 
 proc QSettingsconnectNotify*(self: gen_qsettings_types.QSettings, signal: gen_qmetaobject_types.QMetaMethod): void =
@@ -479,7 +481,7 @@ proc QSettingsconnectNotify*(self: gen_qsettings_types.QSettings, signal: gen_qm
 proc miqt_exec_callback_cQSettings_connectNotify(vtbl: pointer, self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSettingsVTable](vtbl)
   let self = QSettings(h: self)
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].connectNotify(self, slotval1)
 
 proc QSettingsdisconnectNotify*(self: gen_qsettings_types.QSettings, signal: gen_qmetaobject_types.QMetaMethod): void =
@@ -488,11 +490,93 @@ proc QSettingsdisconnectNotify*(self: gen_qsettings_types.QSettings, signal: gen
 proc miqt_exec_callback_cQSettings_disconnectNotify(vtbl: pointer, self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSettingsVTable](vtbl)
   let self = QSettings(h: self)
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].disconnectNotify(self, slotval1)
 
+type VirtualQSettings* {.inheritable.} = ref object of QSettings
+  vtbl*: cQSettingsVTable
+method metaObject*(self: VirtualQSettings, ): gen_qobjectdefs_types.QMetaObject {.base.} =
+  QSettingsmetaObject(self[])
+proc miqt_exec_method_cQSettings_metaObject(vtbl: pointer, inst: pointer): pointer {.cdecl.} =
+  let vtbl = cast[VirtualQSettings](cast[uint](vtbl) - uint(offsetOf(VirtualQSettings, vtbl)))
+  var virtualReturn = vtbl.metaObject()
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
+
+method metacast*(self: VirtualQSettings, param1: cstring): pointer {.base.} =
+  QSettingsmetacast(self[], param1)
+proc miqt_exec_method_cQSettings_metacast(vtbl: pointer, inst: pointer, param1: cstring): pointer {.cdecl.} =
+  let vtbl = cast[VirtualQSettings](cast[uint](vtbl) - uint(offsetOf(VirtualQSettings, vtbl)))
+  let slotval1 = (param1)
+  var virtualReturn = vtbl.metacast(slotval1)
+  virtualReturn
+
+method metacall*(self: VirtualQSettings, param1: cint, param2: cint, param3: pointer): cint {.base.} =
+  QSettingsmetacall(self[], param1, param2, param3)
+proc miqt_exec_method_cQSettings_metacall(vtbl: pointer, inst: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
+  let vtbl = cast[VirtualQSettings](cast[uint](vtbl) - uint(offsetOf(VirtualQSettings, vtbl)))
+  let slotval1 = cint(param1)
+  let slotval2 = param2
+  let slotval3 = param3
+  var virtualReturn = vtbl.metacall(slotval1, slotval2, slotval3)
+  virtualReturn
+
+method event*(self: VirtualQSettings, event: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QSettingsevent(self[], event)
+proc miqt_exec_method_cQSettings_event(vtbl: pointer, inst: pointer, event: pointer): bool {.cdecl.} =
+  let vtbl = cast[VirtualQSettings](cast[uint](vtbl) - uint(offsetOf(VirtualQSettings, vtbl)))
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
+  var virtualReturn = vtbl.event(slotval1)
+  virtualReturn
+
+method eventFilter*(self: VirtualQSettings, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QSettingseventFilter(self[], watched, event)
+proc miqt_exec_method_cQSettings_eventFilter(vtbl: pointer, inst: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
+  let vtbl = cast[VirtualQSettings](cast[uint](vtbl) - uint(offsetOf(VirtualQSettings, vtbl)))
+  let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
+  var virtualReturn = vtbl.eventFilter(slotval1, slotval2)
+  virtualReturn
+
+method timerEvent*(self: VirtualQSettings, event: gen_qcoreevent_types.QTimerEvent): void {.base.} =
+  QSettingstimerEvent(self[], event)
+proc miqt_exec_method_cQSettings_timerEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQSettings](cast[uint](vtbl) - uint(offsetOf(VirtualQSettings, vtbl)))
+  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
+  vtbl.timerEvent(slotval1)
+
+method childEvent*(self: VirtualQSettings, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
+  QSettingschildEvent(self[], event)
+proc miqt_exec_method_cQSettings_childEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQSettings](cast[uint](vtbl) - uint(offsetOf(VirtualQSettings, vtbl)))
+  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
+  vtbl.childEvent(slotval1)
+
+method customEvent*(self: VirtualQSettings, event: gen_qcoreevent_types.QEvent): void {.base.} =
+  QSettingscustomEvent(self[], event)
+proc miqt_exec_method_cQSettings_customEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQSettings](cast[uint](vtbl) - uint(offsetOf(VirtualQSettings, vtbl)))
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
+  vtbl.customEvent(slotval1)
+
+method connectNotify*(self: VirtualQSettings, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QSettingsconnectNotify(self[], signal)
+proc miqt_exec_method_cQSettings_connectNotify(vtbl: pointer, inst: pointer, signal: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQSettings](cast[uint](vtbl) - uint(offsetOf(VirtualQSettings, vtbl)))
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
+  vtbl.connectNotify(slotval1)
+
+method disconnectNotify*(self: VirtualQSettings, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QSettingsdisconnectNotify(self[], signal)
+proc miqt_exec_method_cQSettings_disconnectNotify(vtbl: pointer, inst: pointer, signal: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQSettings](cast[uint](vtbl) - uint(offsetOf(VirtualQSettings, vtbl)))
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
+  vtbl.disconnectNotify(slotval1)
+
 proc sender*(self: gen_qsettings_types.QSettings, ): gen_qobject_types.QObject =
-  gen_qobject_types.QObject(h: fcQSettings_protectedbase_sender(self.h))
+  gen_qobject_types.QObject(h: fcQSettings_protectedbase_sender(self.h), owned: false)
 
 proc senderSignalIndex*(self: gen_qsettings_types.QSettings, ): cint =
   fcQSettings_protectedbase_senderSignalIndex(self.h)
@@ -508,451 +592,778 @@ proc create*(T: type gen_qsettings_types.QSettings,
     vtbl: ref QSettingsVTable = nil): gen_qsettings_types.QSettings =
   let vtbl = if vtbl == nil: new QSettingsVTable else: vtbl
   GC_ref(vtbl)
-  vtbl.vtbl.destructor = proc(vtbl: ptr cQSettingsVTable, _: ptr cQSettings) {.cdecl.} =
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQSettingsVTable, _: ptr cQSettings) {.cdecl.} =
     let vtbl = cast[ref QSettingsVTable](vtbl)
     GC_unref(vtbl)
-  if not isNil(vtbl.metaObject):
+  if not isNil(vtbl[].metaObject):
     vtbl[].vtbl.metaObject = miqt_exec_callback_cQSettings_metaObject
-  if not isNil(vtbl.metacast):
+  if not isNil(vtbl[].metacast):
     vtbl[].vtbl.metacast = miqt_exec_callback_cQSettings_metacast
-  if not isNil(vtbl.metacall):
+  if not isNil(vtbl[].metacall):
     vtbl[].vtbl.metacall = miqt_exec_callback_cQSettings_metacall
-  if not isNil(vtbl.event):
+  if not isNil(vtbl[].event):
     vtbl[].vtbl.event = miqt_exec_callback_cQSettings_event
-  if not isNil(vtbl.eventFilter):
+  if not isNil(vtbl[].eventFilter):
     vtbl[].vtbl.eventFilter = miqt_exec_callback_cQSettings_eventFilter
-  if not isNil(vtbl.timerEvent):
+  if not isNil(vtbl[].timerEvent):
     vtbl[].vtbl.timerEvent = miqt_exec_callback_cQSettings_timerEvent
-  if not isNil(vtbl.childEvent):
+  if not isNil(vtbl[].childEvent):
     vtbl[].vtbl.childEvent = miqt_exec_callback_cQSettings_childEvent
-  if not isNil(vtbl.customEvent):
+  if not isNil(vtbl[].customEvent):
     vtbl[].vtbl.customEvent = miqt_exec_callback_cQSettings_customEvent
-  if not isNil(vtbl.connectNotify):
+  if not isNil(vtbl[].connectNotify):
     vtbl[].vtbl.connectNotify = miqt_exec_callback_cQSettings_connectNotify
-  if not isNil(vtbl.disconnectNotify):
+  if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQSettings_disconnectNotify
-  gen_qsettings_types.QSettings(h: fcQSettings_new(addr(vtbl[]), struct_miqt_string(data: organization, len: csize_t(len(organization)))))
+  gen_qsettings_types.QSettings(h: fcQSettings_new(addr(vtbl[].vtbl), struct_miqt_string(data: organization, len: csize_t(len(organization)))), owned: true)
 
 proc create*(T: type gen_qsettings_types.QSettings,
     scope: cint, organization: string,
     vtbl: ref QSettingsVTable = nil): gen_qsettings_types.QSettings =
   let vtbl = if vtbl == nil: new QSettingsVTable else: vtbl
   GC_ref(vtbl)
-  vtbl.vtbl.destructor = proc(vtbl: ptr cQSettingsVTable, _: ptr cQSettings) {.cdecl.} =
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQSettingsVTable, _: ptr cQSettings) {.cdecl.} =
     let vtbl = cast[ref QSettingsVTable](vtbl)
     GC_unref(vtbl)
-  if not isNil(vtbl.metaObject):
+  if not isNil(vtbl[].metaObject):
     vtbl[].vtbl.metaObject = miqt_exec_callback_cQSettings_metaObject
-  if not isNil(vtbl.metacast):
+  if not isNil(vtbl[].metacast):
     vtbl[].vtbl.metacast = miqt_exec_callback_cQSettings_metacast
-  if not isNil(vtbl.metacall):
+  if not isNil(vtbl[].metacall):
     vtbl[].vtbl.metacall = miqt_exec_callback_cQSettings_metacall
-  if not isNil(vtbl.event):
+  if not isNil(vtbl[].event):
     vtbl[].vtbl.event = miqt_exec_callback_cQSettings_event
-  if not isNil(vtbl.eventFilter):
+  if not isNil(vtbl[].eventFilter):
     vtbl[].vtbl.eventFilter = miqt_exec_callback_cQSettings_eventFilter
-  if not isNil(vtbl.timerEvent):
+  if not isNil(vtbl[].timerEvent):
     vtbl[].vtbl.timerEvent = miqt_exec_callback_cQSettings_timerEvent
-  if not isNil(vtbl.childEvent):
+  if not isNil(vtbl[].childEvent):
     vtbl[].vtbl.childEvent = miqt_exec_callback_cQSettings_childEvent
-  if not isNil(vtbl.customEvent):
+  if not isNil(vtbl[].customEvent):
     vtbl[].vtbl.customEvent = miqt_exec_callback_cQSettings_customEvent
-  if not isNil(vtbl.connectNotify):
+  if not isNil(vtbl[].connectNotify):
     vtbl[].vtbl.connectNotify = miqt_exec_callback_cQSettings_connectNotify
-  if not isNil(vtbl.disconnectNotify):
+  if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQSettings_disconnectNotify
-  gen_qsettings_types.QSettings(h: fcQSettings_new2(addr(vtbl[]), cint(scope), struct_miqt_string(data: organization, len: csize_t(len(organization)))))
+  gen_qsettings_types.QSettings(h: fcQSettings_new2(addr(vtbl[].vtbl), cint(scope), struct_miqt_string(data: organization, len: csize_t(len(organization)))), owned: true)
 
 proc create*(T: type gen_qsettings_types.QSettings,
     format: cint, scope: cint, organization: string,
     vtbl: ref QSettingsVTable = nil): gen_qsettings_types.QSettings =
   let vtbl = if vtbl == nil: new QSettingsVTable else: vtbl
   GC_ref(vtbl)
-  vtbl.vtbl.destructor = proc(vtbl: ptr cQSettingsVTable, _: ptr cQSettings) {.cdecl.} =
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQSettingsVTable, _: ptr cQSettings) {.cdecl.} =
     let vtbl = cast[ref QSettingsVTable](vtbl)
     GC_unref(vtbl)
-  if not isNil(vtbl.metaObject):
+  if not isNil(vtbl[].metaObject):
     vtbl[].vtbl.metaObject = miqt_exec_callback_cQSettings_metaObject
-  if not isNil(vtbl.metacast):
+  if not isNil(vtbl[].metacast):
     vtbl[].vtbl.metacast = miqt_exec_callback_cQSettings_metacast
-  if not isNil(vtbl.metacall):
+  if not isNil(vtbl[].metacall):
     vtbl[].vtbl.metacall = miqt_exec_callback_cQSettings_metacall
-  if not isNil(vtbl.event):
+  if not isNil(vtbl[].event):
     vtbl[].vtbl.event = miqt_exec_callback_cQSettings_event
-  if not isNil(vtbl.eventFilter):
+  if not isNil(vtbl[].eventFilter):
     vtbl[].vtbl.eventFilter = miqt_exec_callback_cQSettings_eventFilter
-  if not isNil(vtbl.timerEvent):
+  if not isNil(vtbl[].timerEvent):
     vtbl[].vtbl.timerEvent = miqt_exec_callback_cQSettings_timerEvent
-  if not isNil(vtbl.childEvent):
+  if not isNil(vtbl[].childEvent):
     vtbl[].vtbl.childEvent = miqt_exec_callback_cQSettings_childEvent
-  if not isNil(vtbl.customEvent):
+  if not isNil(vtbl[].customEvent):
     vtbl[].vtbl.customEvent = miqt_exec_callback_cQSettings_customEvent
-  if not isNil(vtbl.connectNotify):
+  if not isNil(vtbl[].connectNotify):
     vtbl[].vtbl.connectNotify = miqt_exec_callback_cQSettings_connectNotify
-  if not isNil(vtbl.disconnectNotify):
+  if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQSettings_disconnectNotify
-  gen_qsettings_types.QSettings(h: fcQSettings_new3(addr(vtbl[]), cint(format), cint(scope), struct_miqt_string(data: organization, len: csize_t(len(organization)))))
+  gen_qsettings_types.QSettings(h: fcQSettings_new3(addr(vtbl[].vtbl), cint(format), cint(scope), struct_miqt_string(data: organization, len: csize_t(len(organization)))), owned: true)
 
 proc create*(T: type gen_qsettings_types.QSettings,
     fileName: string, format: cint,
     vtbl: ref QSettingsVTable = nil): gen_qsettings_types.QSettings =
   let vtbl = if vtbl == nil: new QSettingsVTable else: vtbl
   GC_ref(vtbl)
-  vtbl.vtbl.destructor = proc(vtbl: ptr cQSettingsVTable, _: ptr cQSettings) {.cdecl.} =
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQSettingsVTable, _: ptr cQSettings) {.cdecl.} =
     let vtbl = cast[ref QSettingsVTable](vtbl)
     GC_unref(vtbl)
-  if not isNil(vtbl.metaObject):
+  if not isNil(vtbl[].metaObject):
     vtbl[].vtbl.metaObject = miqt_exec_callback_cQSettings_metaObject
-  if not isNil(vtbl.metacast):
+  if not isNil(vtbl[].metacast):
     vtbl[].vtbl.metacast = miqt_exec_callback_cQSettings_metacast
-  if not isNil(vtbl.metacall):
+  if not isNil(vtbl[].metacall):
     vtbl[].vtbl.metacall = miqt_exec_callback_cQSettings_metacall
-  if not isNil(vtbl.event):
+  if not isNil(vtbl[].event):
     vtbl[].vtbl.event = miqt_exec_callback_cQSettings_event
-  if not isNil(vtbl.eventFilter):
+  if not isNil(vtbl[].eventFilter):
     vtbl[].vtbl.eventFilter = miqt_exec_callback_cQSettings_eventFilter
-  if not isNil(vtbl.timerEvent):
+  if not isNil(vtbl[].timerEvent):
     vtbl[].vtbl.timerEvent = miqt_exec_callback_cQSettings_timerEvent
-  if not isNil(vtbl.childEvent):
+  if not isNil(vtbl[].childEvent):
     vtbl[].vtbl.childEvent = miqt_exec_callback_cQSettings_childEvent
-  if not isNil(vtbl.customEvent):
+  if not isNil(vtbl[].customEvent):
     vtbl[].vtbl.customEvent = miqt_exec_callback_cQSettings_customEvent
-  if not isNil(vtbl.connectNotify):
+  if not isNil(vtbl[].connectNotify):
     vtbl[].vtbl.connectNotify = miqt_exec_callback_cQSettings_connectNotify
-  if not isNil(vtbl.disconnectNotify):
+  if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQSettings_disconnectNotify
-  gen_qsettings_types.QSettings(h: fcQSettings_new4(addr(vtbl[]), struct_miqt_string(data: fileName, len: csize_t(len(fileName))), cint(format)))
+  gen_qsettings_types.QSettings(h: fcQSettings_new4(addr(vtbl[].vtbl), struct_miqt_string(data: fileName, len: csize_t(len(fileName))), cint(format)), owned: true)
 
 proc create*(T: type gen_qsettings_types.QSettings,
     vtbl: ref QSettingsVTable = nil): gen_qsettings_types.QSettings =
   let vtbl = if vtbl == nil: new QSettingsVTable else: vtbl
   GC_ref(vtbl)
-  vtbl.vtbl.destructor = proc(vtbl: ptr cQSettingsVTable, _: ptr cQSettings) {.cdecl.} =
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQSettingsVTable, _: ptr cQSettings) {.cdecl.} =
     let vtbl = cast[ref QSettingsVTable](vtbl)
     GC_unref(vtbl)
-  if not isNil(vtbl.metaObject):
+  if not isNil(vtbl[].metaObject):
     vtbl[].vtbl.metaObject = miqt_exec_callback_cQSettings_metaObject
-  if not isNil(vtbl.metacast):
+  if not isNil(vtbl[].metacast):
     vtbl[].vtbl.metacast = miqt_exec_callback_cQSettings_metacast
-  if not isNil(vtbl.metacall):
+  if not isNil(vtbl[].metacall):
     vtbl[].vtbl.metacall = miqt_exec_callback_cQSettings_metacall
-  if not isNil(vtbl.event):
+  if not isNil(vtbl[].event):
     vtbl[].vtbl.event = miqt_exec_callback_cQSettings_event
-  if not isNil(vtbl.eventFilter):
+  if not isNil(vtbl[].eventFilter):
     vtbl[].vtbl.eventFilter = miqt_exec_callback_cQSettings_eventFilter
-  if not isNil(vtbl.timerEvent):
+  if not isNil(vtbl[].timerEvent):
     vtbl[].vtbl.timerEvent = miqt_exec_callback_cQSettings_timerEvent
-  if not isNil(vtbl.childEvent):
+  if not isNil(vtbl[].childEvent):
     vtbl[].vtbl.childEvent = miqt_exec_callback_cQSettings_childEvent
-  if not isNil(vtbl.customEvent):
+  if not isNil(vtbl[].customEvent):
     vtbl[].vtbl.customEvent = miqt_exec_callback_cQSettings_customEvent
-  if not isNil(vtbl.connectNotify):
+  if not isNil(vtbl[].connectNotify):
     vtbl[].vtbl.connectNotify = miqt_exec_callback_cQSettings_connectNotify
-  if not isNil(vtbl.disconnectNotify):
+  if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQSettings_disconnectNotify
-  gen_qsettings_types.QSettings(h: fcQSettings_new5(addr(vtbl[]), ))
+  gen_qsettings_types.QSettings(h: fcQSettings_new5(addr(vtbl[].vtbl), ), owned: true)
 
 proc create*(T: type gen_qsettings_types.QSettings,
     scope: cint,
     vtbl: ref QSettingsVTable = nil): gen_qsettings_types.QSettings =
   let vtbl = if vtbl == nil: new QSettingsVTable else: vtbl
   GC_ref(vtbl)
-  vtbl.vtbl.destructor = proc(vtbl: ptr cQSettingsVTable, _: ptr cQSettings) {.cdecl.} =
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQSettingsVTable, _: ptr cQSettings) {.cdecl.} =
     let vtbl = cast[ref QSettingsVTable](vtbl)
     GC_unref(vtbl)
-  if not isNil(vtbl.metaObject):
+  if not isNil(vtbl[].metaObject):
     vtbl[].vtbl.metaObject = miqt_exec_callback_cQSettings_metaObject
-  if not isNil(vtbl.metacast):
+  if not isNil(vtbl[].metacast):
     vtbl[].vtbl.metacast = miqt_exec_callback_cQSettings_metacast
-  if not isNil(vtbl.metacall):
+  if not isNil(vtbl[].metacall):
     vtbl[].vtbl.metacall = miqt_exec_callback_cQSettings_metacall
-  if not isNil(vtbl.event):
+  if not isNil(vtbl[].event):
     vtbl[].vtbl.event = miqt_exec_callback_cQSettings_event
-  if not isNil(vtbl.eventFilter):
+  if not isNil(vtbl[].eventFilter):
     vtbl[].vtbl.eventFilter = miqt_exec_callback_cQSettings_eventFilter
-  if not isNil(vtbl.timerEvent):
+  if not isNil(vtbl[].timerEvent):
     vtbl[].vtbl.timerEvent = miqt_exec_callback_cQSettings_timerEvent
-  if not isNil(vtbl.childEvent):
+  if not isNil(vtbl[].childEvent):
     vtbl[].vtbl.childEvent = miqt_exec_callback_cQSettings_childEvent
-  if not isNil(vtbl.customEvent):
+  if not isNil(vtbl[].customEvent):
     vtbl[].vtbl.customEvent = miqt_exec_callback_cQSettings_customEvent
-  if not isNil(vtbl.connectNotify):
+  if not isNil(vtbl[].connectNotify):
     vtbl[].vtbl.connectNotify = miqt_exec_callback_cQSettings_connectNotify
-  if not isNil(vtbl.disconnectNotify):
+  if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQSettings_disconnectNotify
-  gen_qsettings_types.QSettings(h: fcQSettings_new6(addr(vtbl[]), cint(scope)))
+  gen_qsettings_types.QSettings(h: fcQSettings_new6(addr(vtbl[].vtbl), cint(scope)), owned: true)
 
 proc create*(T: type gen_qsettings_types.QSettings,
     organization: string, application: string,
     vtbl: ref QSettingsVTable = nil): gen_qsettings_types.QSettings =
   let vtbl = if vtbl == nil: new QSettingsVTable else: vtbl
   GC_ref(vtbl)
-  vtbl.vtbl.destructor = proc(vtbl: ptr cQSettingsVTable, _: ptr cQSettings) {.cdecl.} =
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQSettingsVTable, _: ptr cQSettings) {.cdecl.} =
     let vtbl = cast[ref QSettingsVTable](vtbl)
     GC_unref(vtbl)
-  if not isNil(vtbl.metaObject):
+  if not isNil(vtbl[].metaObject):
     vtbl[].vtbl.metaObject = miqt_exec_callback_cQSettings_metaObject
-  if not isNil(vtbl.metacast):
+  if not isNil(vtbl[].metacast):
     vtbl[].vtbl.metacast = miqt_exec_callback_cQSettings_metacast
-  if not isNil(vtbl.metacall):
+  if not isNil(vtbl[].metacall):
     vtbl[].vtbl.metacall = miqt_exec_callback_cQSettings_metacall
-  if not isNil(vtbl.event):
+  if not isNil(vtbl[].event):
     vtbl[].vtbl.event = miqt_exec_callback_cQSettings_event
-  if not isNil(vtbl.eventFilter):
+  if not isNil(vtbl[].eventFilter):
     vtbl[].vtbl.eventFilter = miqt_exec_callback_cQSettings_eventFilter
-  if not isNil(vtbl.timerEvent):
+  if not isNil(vtbl[].timerEvent):
     vtbl[].vtbl.timerEvent = miqt_exec_callback_cQSettings_timerEvent
-  if not isNil(vtbl.childEvent):
+  if not isNil(vtbl[].childEvent):
     vtbl[].vtbl.childEvent = miqt_exec_callback_cQSettings_childEvent
-  if not isNil(vtbl.customEvent):
+  if not isNil(vtbl[].customEvent):
     vtbl[].vtbl.customEvent = miqt_exec_callback_cQSettings_customEvent
-  if not isNil(vtbl.connectNotify):
+  if not isNil(vtbl[].connectNotify):
     vtbl[].vtbl.connectNotify = miqt_exec_callback_cQSettings_connectNotify
-  if not isNil(vtbl.disconnectNotify):
+  if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQSettings_disconnectNotify
-  gen_qsettings_types.QSettings(h: fcQSettings_new7(addr(vtbl[]), struct_miqt_string(data: organization, len: csize_t(len(organization))), struct_miqt_string(data: application, len: csize_t(len(application)))))
+  gen_qsettings_types.QSettings(h: fcQSettings_new7(addr(vtbl[].vtbl), struct_miqt_string(data: organization, len: csize_t(len(organization))), struct_miqt_string(data: application, len: csize_t(len(application)))), owned: true)
 
 proc create*(T: type gen_qsettings_types.QSettings,
     organization: string, application: string, parent: gen_qobject_types.QObject,
     vtbl: ref QSettingsVTable = nil): gen_qsettings_types.QSettings =
   let vtbl = if vtbl == nil: new QSettingsVTable else: vtbl
   GC_ref(vtbl)
-  vtbl.vtbl.destructor = proc(vtbl: ptr cQSettingsVTable, _: ptr cQSettings) {.cdecl.} =
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQSettingsVTable, _: ptr cQSettings) {.cdecl.} =
     let vtbl = cast[ref QSettingsVTable](vtbl)
     GC_unref(vtbl)
-  if not isNil(vtbl.metaObject):
+  if not isNil(vtbl[].metaObject):
     vtbl[].vtbl.metaObject = miqt_exec_callback_cQSettings_metaObject
-  if not isNil(vtbl.metacast):
+  if not isNil(vtbl[].metacast):
     vtbl[].vtbl.metacast = miqt_exec_callback_cQSettings_metacast
-  if not isNil(vtbl.metacall):
+  if not isNil(vtbl[].metacall):
     vtbl[].vtbl.metacall = miqt_exec_callback_cQSettings_metacall
-  if not isNil(vtbl.event):
+  if not isNil(vtbl[].event):
     vtbl[].vtbl.event = miqt_exec_callback_cQSettings_event
-  if not isNil(vtbl.eventFilter):
+  if not isNil(vtbl[].eventFilter):
     vtbl[].vtbl.eventFilter = miqt_exec_callback_cQSettings_eventFilter
-  if not isNil(vtbl.timerEvent):
+  if not isNil(vtbl[].timerEvent):
     vtbl[].vtbl.timerEvent = miqt_exec_callback_cQSettings_timerEvent
-  if not isNil(vtbl.childEvent):
+  if not isNil(vtbl[].childEvent):
     vtbl[].vtbl.childEvent = miqt_exec_callback_cQSettings_childEvent
-  if not isNil(vtbl.customEvent):
+  if not isNil(vtbl[].customEvent):
     vtbl[].vtbl.customEvent = miqt_exec_callback_cQSettings_customEvent
-  if not isNil(vtbl.connectNotify):
+  if not isNil(vtbl[].connectNotify):
     vtbl[].vtbl.connectNotify = miqt_exec_callback_cQSettings_connectNotify
-  if not isNil(vtbl.disconnectNotify):
+  if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQSettings_disconnectNotify
-  gen_qsettings_types.QSettings(h: fcQSettings_new8(addr(vtbl[]), struct_miqt_string(data: organization, len: csize_t(len(organization))), struct_miqt_string(data: application, len: csize_t(len(application))), parent.h))
+  gen_qsettings_types.QSettings(h: fcQSettings_new8(addr(vtbl[].vtbl), struct_miqt_string(data: organization, len: csize_t(len(organization))), struct_miqt_string(data: application, len: csize_t(len(application))), parent.h), owned: true)
 
 proc create*(T: type gen_qsettings_types.QSettings,
     scope: cint, organization: string, application: string,
     vtbl: ref QSettingsVTable = nil): gen_qsettings_types.QSettings =
   let vtbl = if vtbl == nil: new QSettingsVTable else: vtbl
   GC_ref(vtbl)
-  vtbl.vtbl.destructor = proc(vtbl: ptr cQSettingsVTable, _: ptr cQSettings) {.cdecl.} =
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQSettingsVTable, _: ptr cQSettings) {.cdecl.} =
     let vtbl = cast[ref QSettingsVTable](vtbl)
     GC_unref(vtbl)
-  if not isNil(vtbl.metaObject):
+  if not isNil(vtbl[].metaObject):
     vtbl[].vtbl.metaObject = miqt_exec_callback_cQSettings_metaObject
-  if not isNil(vtbl.metacast):
+  if not isNil(vtbl[].metacast):
     vtbl[].vtbl.metacast = miqt_exec_callback_cQSettings_metacast
-  if not isNil(vtbl.metacall):
+  if not isNil(vtbl[].metacall):
     vtbl[].vtbl.metacall = miqt_exec_callback_cQSettings_metacall
-  if not isNil(vtbl.event):
+  if not isNil(vtbl[].event):
     vtbl[].vtbl.event = miqt_exec_callback_cQSettings_event
-  if not isNil(vtbl.eventFilter):
+  if not isNil(vtbl[].eventFilter):
     vtbl[].vtbl.eventFilter = miqt_exec_callback_cQSettings_eventFilter
-  if not isNil(vtbl.timerEvent):
+  if not isNil(vtbl[].timerEvent):
     vtbl[].vtbl.timerEvent = miqt_exec_callback_cQSettings_timerEvent
-  if not isNil(vtbl.childEvent):
+  if not isNil(vtbl[].childEvent):
     vtbl[].vtbl.childEvent = miqt_exec_callback_cQSettings_childEvent
-  if not isNil(vtbl.customEvent):
+  if not isNil(vtbl[].customEvent):
     vtbl[].vtbl.customEvent = miqt_exec_callback_cQSettings_customEvent
-  if not isNil(vtbl.connectNotify):
+  if not isNil(vtbl[].connectNotify):
     vtbl[].vtbl.connectNotify = miqt_exec_callback_cQSettings_connectNotify
-  if not isNil(vtbl.disconnectNotify):
+  if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQSettings_disconnectNotify
-  gen_qsettings_types.QSettings(h: fcQSettings_new9(addr(vtbl[]), cint(scope), struct_miqt_string(data: organization, len: csize_t(len(organization))), struct_miqt_string(data: application, len: csize_t(len(application)))))
+  gen_qsettings_types.QSettings(h: fcQSettings_new9(addr(vtbl[].vtbl), cint(scope), struct_miqt_string(data: organization, len: csize_t(len(organization))), struct_miqt_string(data: application, len: csize_t(len(application)))), owned: true)
 
 proc create*(T: type gen_qsettings_types.QSettings,
     scope: cint, organization: string, application: string, parent: gen_qobject_types.QObject,
     vtbl: ref QSettingsVTable = nil): gen_qsettings_types.QSettings =
   let vtbl = if vtbl == nil: new QSettingsVTable else: vtbl
   GC_ref(vtbl)
-  vtbl.vtbl.destructor = proc(vtbl: ptr cQSettingsVTable, _: ptr cQSettings) {.cdecl.} =
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQSettingsVTable, _: ptr cQSettings) {.cdecl.} =
     let vtbl = cast[ref QSettingsVTable](vtbl)
     GC_unref(vtbl)
-  if not isNil(vtbl.metaObject):
+  if not isNil(vtbl[].metaObject):
     vtbl[].vtbl.metaObject = miqt_exec_callback_cQSettings_metaObject
-  if not isNil(vtbl.metacast):
+  if not isNil(vtbl[].metacast):
     vtbl[].vtbl.metacast = miqt_exec_callback_cQSettings_metacast
-  if not isNil(vtbl.metacall):
+  if not isNil(vtbl[].metacall):
     vtbl[].vtbl.metacall = miqt_exec_callback_cQSettings_metacall
-  if not isNil(vtbl.event):
+  if not isNil(vtbl[].event):
     vtbl[].vtbl.event = miqt_exec_callback_cQSettings_event
-  if not isNil(vtbl.eventFilter):
+  if not isNil(vtbl[].eventFilter):
     vtbl[].vtbl.eventFilter = miqt_exec_callback_cQSettings_eventFilter
-  if not isNil(vtbl.timerEvent):
+  if not isNil(vtbl[].timerEvent):
     vtbl[].vtbl.timerEvent = miqt_exec_callback_cQSettings_timerEvent
-  if not isNil(vtbl.childEvent):
+  if not isNil(vtbl[].childEvent):
     vtbl[].vtbl.childEvent = miqt_exec_callback_cQSettings_childEvent
-  if not isNil(vtbl.customEvent):
+  if not isNil(vtbl[].customEvent):
     vtbl[].vtbl.customEvent = miqt_exec_callback_cQSettings_customEvent
-  if not isNil(vtbl.connectNotify):
+  if not isNil(vtbl[].connectNotify):
     vtbl[].vtbl.connectNotify = miqt_exec_callback_cQSettings_connectNotify
-  if not isNil(vtbl.disconnectNotify):
+  if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQSettings_disconnectNotify
-  gen_qsettings_types.QSettings(h: fcQSettings_new10(addr(vtbl[]), cint(scope), struct_miqt_string(data: organization, len: csize_t(len(organization))), struct_miqt_string(data: application, len: csize_t(len(application))), parent.h))
+  gen_qsettings_types.QSettings(h: fcQSettings_new10(addr(vtbl[].vtbl), cint(scope), struct_miqt_string(data: organization, len: csize_t(len(organization))), struct_miqt_string(data: application, len: csize_t(len(application))), parent.h), owned: true)
 
 proc create*(T: type gen_qsettings_types.QSettings,
     format: cint, scope: cint, organization: string, application: string,
     vtbl: ref QSettingsVTable = nil): gen_qsettings_types.QSettings =
   let vtbl = if vtbl == nil: new QSettingsVTable else: vtbl
   GC_ref(vtbl)
-  vtbl.vtbl.destructor = proc(vtbl: ptr cQSettingsVTable, _: ptr cQSettings) {.cdecl.} =
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQSettingsVTable, _: ptr cQSettings) {.cdecl.} =
     let vtbl = cast[ref QSettingsVTable](vtbl)
     GC_unref(vtbl)
-  if not isNil(vtbl.metaObject):
+  if not isNil(vtbl[].metaObject):
     vtbl[].vtbl.metaObject = miqt_exec_callback_cQSettings_metaObject
-  if not isNil(vtbl.metacast):
+  if not isNil(vtbl[].metacast):
     vtbl[].vtbl.metacast = miqt_exec_callback_cQSettings_metacast
-  if not isNil(vtbl.metacall):
+  if not isNil(vtbl[].metacall):
     vtbl[].vtbl.metacall = miqt_exec_callback_cQSettings_metacall
-  if not isNil(vtbl.event):
+  if not isNil(vtbl[].event):
     vtbl[].vtbl.event = miqt_exec_callback_cQSettings_event
-  if not isNil(vtbl.eventFilter):
+  if not isNil(vtbl[].eventFilter):
     vtbl[].vtbl.eventFilter = miqt_exec_callback_cQSettings_eventFilter
-  if not isNil(vtbl.timerEvent):
+  if not isNil(vtbl[].timerEvent):
     vtbl[].vtbl.timerEvent = miqt_exec_callback_cQSettings_timerEvent
-  if not isNil(vtbl.childEvent):
+  if not isNil(vtbl[].childEvent):
     vtbl[].vtbl.childEvent = miqt_exec_callback_cQSettings_childEvent
-  if not isNil(vtbl.customEvent):
+  if not isNil(vtbl[].customEvent):
     vtbl[].vtbl.customEvent = miqt_exec_callback_cQSettings_customEvent
-  if not isNil(vtbl.connectNotify):
+  if not isNil(vtbl[].connectNotify):
     vtbl[].vtbl.connectNotify = miqt_exec_callback_cQSettings_connectNotify
-  if not isNil(vtbl.disconnectNotify):
+  if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQSettings_disconnectNotify
-  gen_qsettings_types.QSettings(h: fcQSettings_new11(addr(vtbl[]), cint(format), cint(scope), struct_miqt_string(data: organization, len: csize_t(len(organization))), struct_miqt_string(data: application, len: csize_t(len(application)))))
+  gen_qsettings_types.QSettings(h: fcQSettings_new11(addr(vtbl[].vtbl), cint(format), cint(scope), struct_miqt_string(data: organization, len: csize_t(len(organization))), struct_miqt_string(data: application, len: csize_t(len(application)))), owned: true)
 
 proc create*(T: type gen_qsettings_types.QSettings,
     format: cint, scope: cint, organization: string, application: string, parent: gen_qobject_types.QObject,
     vtbl: ref QSettingsVTable = nil): gen_qsettings_types.QSettings =
   let vtbl = if vtbl == nil: new QSettingsVTable else: vtbl
   GC_ref(vtbl)
-  vtbl.vtbl.destructor = proc(vtbl: ptr cQSettingsVTable, _: ptr cQSettings) {.cdecl.} =
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQSettingsVTable, _: ptr cQSettings) {.cdecl.} =
     let vtbl = cast[ref QSettingsVTable](vtbl)
     GC_unref(vtbl)
-  if not isNil(vtbl.metaObject):
+  if not isNil(vtbl[].metaObject):
     vtbl[].vtbl.metaObject = miqt_exec_callback_cQSettings_metaObject
-  if not isNil(vtbl.metacast):
+  if not isNil(vtbl[].metacast):
     vtbl[].vtbl.metacast = miqt_exec_callback_cQSettings_metacast
-  if not isNil(vtbl.metacall):
+  if not isNil(vtbl[].metacall):
     vtbl[].vtbl.metacall = miqt_exec_callback_cQSettings_metacall
-  if not isNil(vtbl.event):
+  if not isNil(vtbl[].event):
     vtbl[].vtbl.event = miqt_exec_callback_cQSettings_event
-  if not isNil(vtbl.eventFilter):
+  if not isNil(vtbl[].eventFilter):
     vtbl[].vtbl.eventFilter = miqt_exec_callback_cQSettings_eventFilter
-  if not isNil(vtbl.timerEvent):
+  if not isNil(vtbl[].timerEvent):
     vtbl[].vtbl.timerEvent = miqt_exec_callback_cQSettings_timerEvent
-  if not isNil(vtbl.childEvent):
+  if not isNil(vtbl[].childEvent):
     vtbl[].vtbl.childEvent = miqt_exec_callback_cQSettings_childEvent
-  if not isNil(vtbl.customEvent):
+  if not isNil(vtbl[].customEvent):
     vtbl[].vtbl.customEvent = miqt_exec_callback_cQSettings_customEvent
-  if not isNil(vtbl.connectNotify):
+  if not isNil(vtbl[].connectNotify):
     vtbl[].vtbl.connectNotify = miqt_exec_callback_cQSettings_connectNotify
-  if not isNil(vtbl.disconnectNotify):
+  if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQSettings_disconnectNotify
-  gen_qsettings_types.QSettings(h: fcQSettings_new12(addr(vtbl[]), cint(format), cint(scope), struct_miqt_string(data: organization, len: csize_t(len(organization))), struct_miqt_string(data: application, len: csize_t(len(application))), parent.h))
+  gen_qsettings_types.QSettings(h: fcQSettings_new12(addr(vtbl[].vtbl), cint(format), cint(scope), struct_miqt_string(data: organization, len: csize_t(len(organization))), struct_miqt_string(data: application, len: csize_t(len(application))), parent.h), owned: true)
 
 proc create*(T: type gen_qsettings_types.QSettings,
     fileName: string, format: cint, parent: gen_qobject_types.QObject,
     vtbl: ref QSettingsVTable = nil): gen_qsettings_types.QSettings =
   let vtbl = if vtbl == nil: new QSettingsVTable else: vtbl
   GC_ref(vtbl)
-  vtbl.vtbl.destructor = proc(vtbl: ptr cQSettingsVTable, _: ptr cQSettings) {.cdecl.} =
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQSettingsVTable, _: ptr cQSettings) {.cdecl.} =
     let vtbl = cast[ref QSettingsVTable](vtbl)
     GC_unref(vtbl)
-  if not isNil(vtbl.metaObject):
+  if not isNil(vtbl[].metaObject):
     vtbl[].vtbl.metaObject = miqt_exec_callback_cQSettings_metaObject
-  if not isNil(vtbl.metacast):
+  if not isNil(vtbl[].metacast):
     vtbl[].vtbl.metacast = miqt_exec_callback_cQSettings_metacast
-  if not isNil(vtbl.metacall):
+  if not isNil(vtbl[].metacall):
     vtbl[].vtbl.metacall = miqt_exec_callback_cQSettings_metacall
-  if not isNil(vtbl.event):
+  if not isNil(vtbl[].event):
     vtbl[].vtbl.event = miqt_exec_callback_cQSettings_event
-  if not isNil(vtbl.eventFilter):
+  if not isNil(vtbl[].eventFilter):
     vtbl[].vtbl.eventFilter = miqt_exec_callback_cQSettings_eventFilter
-  if not isNil(vtbl.timerEvent):
+  if not isNil(vtbl[].timerEvent):
     vtbl[].vtbl.timerEvent = miqt_exec_callback_cQSettings_timerEvent
-  if not isNil(vtbl.childEvent):
+  if not isNil(vtbl[].childEvent):
     vtbl[].vtbl.childEvent = miqt_exec_callback_cQSettings_childEvent
-  if not isNil(vtbl.customEvent):
+  if not isNil(vtbl[].customEvent):
     vtbl[].vtbl.customEvent = miqt_exec_callback_cQSettings_customEvent
-  if not isNil(vtbl.connectNotify):
+  if not isNil(vtbl[].connectNotify):
     vtbl[].vtbl.connectNotify = miqt_exec_callback_cQSettings_connectNotify
-  if not isNil(vtbl.disconnectNotify):
+  if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQSettings_disconnectNotify
-  gen_qsettings_types.QSettings(h: fcQSettings_new13(addr(vtbl[]), struct_miqt_string(data: fileName, len: csize_t(len(fileName))), cint(format), parent.h))
+  gen_qsettings_types.QSettings(h: fcQSettings_new13(addr(vtbl[].vtbl), struct_miqt_string(data: fileName, len: csize_t(len(fileName))), cint(format), parent.h), owned: true)
 
 proc create*(T: type gen_qsettings_types.QSettings,
     parent: gen_qobject_types.QObject,
     vtbl: ref QSettingsVTable = nil): gen_qsettings_types.QSettings =
   let vtbl = if vtbl == nil: new QSettingsVTable else: vtbl
   GC_ref(vtbl)
-  vtbl.vtbl.destructor = proc(vtbl: ptr cQSettingsVTable, _: ptr cQSettings) {.cdecl.} =
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQSettingsVTable, _: ptr cQSettings) {.cdecl.} =
     let vtbl = cast[ref QSettingsVTable](vtbl)
     GC_unref(vtbl)
-  if not isNil(vtbl.metaObject):
+  if not isNil(vtbl[].metaObject):
     vtbl[].vtbl.metaObject = miqt_exec_callback_cQSettings_metaObject
-  if not isNil(vtbl.metacast):
+  if not isNil(vtbl[].metacast):
     vtbl[].vtbl.metacast = miqt_exec_callback_cQSettings_metacast
-  if not isNil(vtbl.metacall):
+  if not isNil(vtbl[].metacall):
     vtbl[].vtbl.metacall = miqt_exec_callback_cQSettings_metacall
-  if not isNil(vtbl.event):
+  if not isNil(vtbl[].event):
     vtbl[].vtbl.event = miqt_exec_callback_cQSettings_event
-  if not isNil(vtbl.eventFilter):
+  if not isNil(vtbl[].eventFilter):
     vtbl[].vtbl.eventFilter = miqt_exec_callback_cQSettings_eventFilter
-  if not isNil(vtbl.timerEvent):
+  if not isNil(vtbl[].timerEvent):
     vtbl[].vtbl.timerEvent = miqt_exec_callback_cQSettings_timerEvent
-  if not isNil(vtbl.childEvent):
+  if not isNil(vtbl[].childEvent):
     vtbl[].vtbl.childEvent = miqt_exec_callback_cQSettings_childEvent
-  if not isNil(vtbl.customEvent):
+  if not isNil(vtbl[].customEvent):
     vtbl[].vtbl.customEvent = miqt_exec_callback_cQSettings_customEvent
-  if not isNil(vtbl.connectNotify):
+  if not isNil(vtbl[].connectNotify):
     vtbl[].vtbl.connectNotify = miqt_exec_callback_cQSettings_connectNotify
-  if not isNil(vtbl.disconnectNotify):
+  if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQSettings_disconnectNotify
-  gen_qsettings_types.QSettings(h: fcQSettings_new14(addr(vtbl[]), parent.h))
+  gen_qsettings_types.QSettings(h: fcQSettings_new14(addr(vtbl[].vtbl), parent.h), owned: true)
 
 proc create*(T: type gen_qsettings_types.QSettings,
     scope: cint, parent: gen_qobject_types.QObject,
     vtbl: ref QSettingsVTable = nil): gen_qsettings_types.QSettings =
   let vtbl = if vtbl == nil: new QSettingsVTable else: vtbl
   GC_ref(vtbl)
-  vtbl.vtbl.destructor = proc(vtbl: ptr cQSettingsVTable, _: ptr cQSettings) {.cdecl.} =
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQSettingsVTable, _: ptr cQSettings) {.cdecl.} =
     let vtbl = cast[ref QSettingsVTable](vtbl)
     GC_unref(vtbl)
-  if not isNil(vtbl.metaObject):
+  if not isNil(vtbl[].metaObject):
     vtbl[].vtbl.metaObject = miqt_exec_callback_cQSettings_metaObject
-  if not isNil(vtbl.metacast):
+  if not isNil(vtbl[].metacast):
     vtbl[].vtbl.metacast = miqt_exec_callback_cQSettings_metacast
-  if not isNil(vtbl.metacall):
+  if not isNil(vtbl[].metacall):
     vtbl[].vtbl.metacall = miqt_exec_callback_cQSettings_metacall
-  if not isNil(vtbl.event):
+  if not isNil(vtbl[].event):
     vtbl[].vtbl.event = miqt_exec_callback_cQSettings_event
-  if not isNil(vtbl.eventFilter):
+  if not isNil(vtbl[].eventFilter):
     vtbl[].vtbl.eventFilter = miqt_exec_callback_cQSettings_eventFilter
-  if not isNil(vtbl.timerEvent):
+  if not isNil(vtbl[].timerEvent):
     vtbl[].vtbl.timerEvent = miqt_exec_callback_cQSettings_timerEvent
-  if not isNil(vtbl.childEvent):
+  if not isNil(vtbl[].childEvent):
     vtbl[].vtbl.childEvent = miqt_exec_callback_cQSettings_childEvent
-  if not isNil(vtbl.customEvent):
+  if not isNil(vtbl[].customEvent):
     vtbl[].vtbl.customEvent = miqt_exec_callback_cQSettings_customEvent
-  if not isNil(vtbl.connectNotify):
+  if not isNil(vtbl[].connectNotify):
     vtbl[].vtbl.connectNotify = miqt_exec_callback_cQSettings_connectNotify
-  if not isNil(vtbl.disconnectNotify):
+  if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQSettings_disconnectNotify
-  gen_qsettings_types.QSettings(h: fcQSettings_new15(addr(vtbl[]), cint(scope), parent.h))
+  gen_qsettings_types.QSettings(h: fcQSettings_new15(addr(vtbl[].vtbl), cint(scope), parent.h), owned: true)
+
+proc create*(T: type gen_qsettings_types.QSettings,
+    organization: string,
+    vtbl: VirtualQSettings) =
+
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQSettingsVTable, _: ptr cQSettings) {.cdecl.} =
+    let vtbl = cast[ptr typeof(VirtualQSettings()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQSettings, vtbl)))
+    vtbl[].h = nil
+    vtbl[].owned = false
+  vtbl[].vtbl.metaObject = miqt_exec_method_cQSettings_metaObject
+  vtbl[].vtbl.metacast = miqt_exec_method_cQSettings_metacast
+  vtbl[].vtbl.metacall = miqt_exec_method_cQSettings_metacall
+  vtbl[].vtbl.event = miqt_exec_method_cQSettings_event
+  vtbl[].vtbl.eventFilter = miqt_exec_method_cQSettings_eventFilter
+  vtbl[].vtbl.timerEvent = miqt_exec_method_cQSettings_timerEvent
+  vtbl[].vtbl.childEvent = miqt_exec_method_cQSettings_childEvent
+  vtbl[].vtbl.customEvent = miqt_exec_method_cQSettings_customEvent
+  vtbl[].vtbl.connectNotify = miqt_exec_method_cQSettings_connectNotify
+  vtbl[].vtbl.disconnectNotify = miqt_exec_method_cQSettings_disconnectNotify
+  if vtbl[].h != nil: delete(move(vtbl[]))
+  vtbl[].h = fcQSettings_new(addr(vtbl[].vtbl), struct_miqt_string(data: organization, len: csize_t(len(organization))))
+  vtbl[].owned = true
+
+proc create*(T: type gen_qsettings_types.QSettings,
+    scope: cint, organization: string,
+    vtbl: VirtualQSettings) =
+
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQSettingsVTable, _: ptr cQSettings) {.cdecl.} =
+    let vtbl = cast[ptr typeof(VirtualQSettings()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQSettings, vtbl)))
+    vtbl[].h = nil
+    vtbl[].owned = false
+  vtbl[].vtbl.metaObject = miqt_exec_method_cQSettings_metaObject
+  vtbl[].vtbl.metacast = miqt_exec_method_cQSettings_metacast
+  vtbl[].vtbl.metacall = miqt_exec_method_cQSettings_metacall
+  vtbl[].vtbl.event = miqt_exec_method_cQSettings_event
+  vtbl[].vtbl.eventFilter = miqt_exec_method_cQSettings_eventFilter
+  vtbl[].vtbl.timerEvent = miqt_exec_method_cQSettings_timerEvent
+  vtbl[].vtbl.childEvent = miqt_exec_method_cQSettings_childEvent
+  vtbl[].vtbl.customEvent = miqt_exec_method_cQSettings_customEvent
+  vtbl[].vtbl.connectNotify = miqt_exec_method_cQSettings_connectNotify
+  vtbl[].vtbl.disconnectNotify = miqt_exec_method_cQSettings_disconnectNotify
+  if vtbl[].h != nil: delete(move(vtbl[]))
+  vtbl[].h = fcQSettings_new2(addr(vtbl[].vtbl), cint(scope), struct_miqt_string(data: organization, len: csize_t(len(organization))))
+  vtbl[].owned = true
+
+proc create*(T: type gen_qsettings_types.QSettings,
+    format: cint, scope: cint, organization: string,
+    vtbl: VirtualQSettings) =
+
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQSettingsVTable, _: ptr cQSettings) {.cdecl.} =
+    let vtbl = cast[ptr typeof(VirtualQSettings()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQSettings, vtbl)))
+    vtbl[].h = nil
+    vtbl[].owned = false
+  vtbl[].vtbl.metaObject = miqt_exec_method_cQSettings_metaObject
+  vtbl[].vtbl.metacast = miqt_exec_method_cQSettings_metacast
+  vtbl[].vtbl.metacall = miqt_exec_method_cQSettings_metacall
+  vtbl[].vtbl.event = miqt_exec_method_cQSettings_event
+  vtbl[].vtbl.eventFilter = miqt_exec_method_cQSettings_eventFilter
+  vtbl[].vtbl.timerEvent = miqt_exec_method_cQSettings_timerEvent
+  vtbl[].vtbl.childEvent = miqt_exec_method_cQSettings_childEvent
+  vtbl[].vtbl.customEvent = miqt_exec_method_cQSettings_customEvent
+  vtbl[].vtbl.connectNotify = miqt_exec_method_cQSettings_connectNotify
+  vtbl[].vtbl.disconnectNotify = miqt_exec_method_cQSettings_disconnectNotify
+  if vtbl[].h != nil: delete(move(vtbl[]))
+  vtbl[].h = fcQSettings_new3(addr(vtbl[].vtbl), cint(format), cint(scope), struct_miqt_string(data: organization, len: csize_t(len(organization))))
+  vtbl[].owned = true
+
+proc create*(T: type gen_qsettings_types.QSettings,
+    fileName: string, format: cint,
+    vtbl: VirtualQSettings) =
+
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQSettingsVTable, _: ptr cQSettings) {.cdecl.} =
+    let vtbl = cast[ptr typeof(VirtualQSettings()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQSettings, vtbl)))
+    vtbl[].h = nil
+    vtbl[].owned = false
+  vtbl[].vtbl.metaObject = miqt_exec_method_cQSettings_metaObject
+  vtbl[].vtbl.metacast = miqt_exec_method_cQSettings_metacast
+  vtbl[].vtbl.metacall = miqt_exec_method_cQSettings_metacall
+  vtbl[].vtbl.event = miqt_exec_method_cQSettings_event
+  vtbl[].vtbl.eventFilter = miqt_exec_method_cQSettings_eventFilter
+  vtbl[].vtbl.timerEvent = miqt_exec_method_cQSettings_timerEvent
+  vtbl[].vtbl.childEvent = miqt_exec_method_cQSettings_childEvent
+  vtbl[].vtbl.customEvent = miqt_exec_method_cQSettings_customEvent
+  vtbl[].vtbl.connectNotify = miqt_exec_method_cQSettings_connectNotify
+  vtbl[].vtbl.disconnectNotify = miqt_exec_method_cQSettings_disconnectNotify
+  if vtbl[].h != nil: delete(move(vtbl[]))
+  vtbl[].h = fcQSettings_new4(addr(vtbl[].vtbl), struct_miqt_string(data: fileName, len: csize_t(len(fileName))), cint(format))
+  vtbl[].owned = true
+
+proc create*(T: type gen_qsettings_types.QSettings,
+    vtbl: VirtualQSettings) =
+
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQSettingsVTable, _: ptr cQSettings) {.cdecl.} =
+    let vtbl = cast[ptr typeof(VirtualQSettings()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQSettings, vtbl)))
+    vtbl[].h = nil
+    vtbl[].owned = false
+  vtbl[].vtbl.metaObject = miqt_exec_method_cQSettings_metaObject
+  vtbl[].vtbl.metacast = miqt_exec_method_cQSettings_metacast
+  vtbl[].vtbl.metacall = miqt_exec_method_cQSettings_metacall
+  vtbl[].vtbl.event = miqt_exec_method_cQSettings_event
+  vtbl[].vtbl.eventFilter = miqt_exec_method_cQSettings_eventFilter
+  vtbl[].vtbl.timerEvent = miqt_exec_method_cQSettings_timerEvent
+  vtbl[].vtbl.childEvent = miqt_exec_method_cQSettings_childEvent
+  vtbl[].vtbl.customEvent = miqt_exec_method_cQSettings_customEvent
+  vtbl[].vtbl.connectNotify = miqt_exec_method_cQSettings_connectNotify
+  vtbl[].vtbl.disconnectNotify = miqt_exec_method_cQSettings_disconnectNotify
+  if vtbl[].h != nil: delete(move(vtbl[]))
+  vtbl[].h = fcQSettings_new5(addr(vtbl[].vtbl), )
+  vtbl[].owned = true
+
+proc create*(T: type gen_qsettings_types.QSettings,
+    scope: cint,
+    vtbl: VirtualQSettings) =
+
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQSettingsVTable, _: ptr cQSettings) {.cdecl.} =
+    let vtbl = cast[ptr typeof(VirtualQSettings()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQSettings, vtbl)))
+    vtbl[].h = nil
+    vtbl[].owned = false
+  vtbl[].vtbl.metaObject = miqt_exec_method_cQSettings_metaObject
+  vtbl[].vtbl.metacast = miqt_exec_method_cQSettings_metacast
+  vtbl[].vtbl.metacall = miqt_exec_method_cQSettings_metacall
+  vtbl[].vtbl.event = miqt_exec_method_cQSettings_event
+  vtbl[].vtbl.eventFilter = miqt_exec_method_cQSettings_eventFilter
+  vtbl[].vtbl.timerEvent = miqt_exec_method_cQSettings_timerEvent
+  vtbl[].vtbl.childEvent = miqt_exec_method_cQSettings_childEvent
+  vtbl[].vtbl.customEvent = miqt_exec_method_cQSettings_customEvent
+  vtbl[].vtbl.connectNotify = miqt_exec_method_cQSettings_connectNotify
+  vtbl[].vtbl.disconnectNotify = miqt_exec_method_cQSettings_disconnectNotify
+  if vtbl[].h != nil: delete(move(vtbl[]))
+  vtbl[].h = fcQSettings_new6(addr(vtbl[].vtbl), cint(scope))
+  vtbl[].owned = true
+
+proc create*(T: type gen_qsettings_types.QSettings,
+    organization: string, application: string,
+    vtbl: VirtualQSettings) =
+
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQSettingsVTable, _: ptr cQSettings) {.cdecl.} =
+    let vtbl = cast[ptr typeof(VirtualQSettings()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQSettings, vtbl)))
+    vtbl[].h = nil
+    vtbl[].owned = false
+  vtbl[].vtbl.metaObject = miqt_exec_method_cQSettings_metaObject
+  vtbl[].vtbl.metacast = miqt_exec_method_cQSettings_metacast
+  vtbl[].vtbl.metacall = miqt_exec_method_cQSettings_metacall
+  vtbl[].vtbl.event = miqt_exec_method_cQSettings_event
+  vtbl[].vtbl.eventFilter = miqt_exec_method_cQSettings_eventFilter
+  vtbl[].vtbl.timerEvent = miqt_exec_method_cQSettings_timerEvent
+  vtbl[].vtbl.childEvent = miqt_exec_method_cQSettings_childEvent
+  vtbl[].vtbl.customEvent = miqt_exec_method_cQSettings_customEvent
+  vtbl[].vtbl.connectNotify = miqt_exec_method_cQSettings_connectNotify
+  vtbl[].vtbl.disconnectNotify = miqt_exec_method_cQSettings_disconnectNotify
+  if vtbl[].h != nil: delete(move(vtbl[]))
+  vtbl[].h = fcQSettings_new7(addr(vtbl[].vtbl), struct_miqt_string(data: organization, len: csize_t(len(organization))), struct_miqt_string(data: application, len: csize_t(len(application))))
+  vtbl[].owned = true
+
+proc create*(T: type gen_qsettings_types.QSettings,
+    organization: string, application: string, parent: gen_qobject_types.QObject,
+    vtbl: VirtualQSettings) =
+
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQSettingsVTable, _: ptr cQSettings) {.cdecl.} =
+    let vtbl = cast[ptr typeof(VirtualQSettings()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQSettings, vtbl)))
+    vtbl[].h = nil
+    vtbl[].owned = false
+  vtbl[].vtbl.metaObject = miqt_exec_method_cQSettings_metaObject
+  vtbl[].vtbl.metacast = miqt_exec_method_cQSettings_metacast
+  vtbl[].vtbl.metacall = miqt_exec_method_cQSettings_metacall
+  vtbl[].vtbl.event = miqt_exec_method_cQSettings_event
+  vtbl[].vtbl.eventFilter = miqt_exec_method_cQSettings_eventFilter
+  vtbl[].vtbl.timerEvent = miqt_exec_method_cQSettings_timerEvent
+  vtbl[].vtbl.childEvent = miqt_exec_method_cQSettings_childEvent
+  vtbl[].vtbl.customEvent = miqt_exec_method_cQSettings_customEvent
+  vtbl[].vtbl.connectNotify = miqt_exec_method_cQSettings_connectNotify
+  vtbl[].vtbl.disconnectNotify = miqt_exec_method_cQSettings_disconnectNotify
+  if vtbl[].h != nil: delete(move(vtbl[]))
+  vtbl[].h = fcQSettings_new8(addr(vtbl[].vtbl), struct_miqt_string(data: organization, len: csize_t(len(organization))), struct_miqt_string(data: application, len: csize_t(len(application))), parent.h)
+  vtbl[].owned = true
+
+proc create*(T: type gen_qsettings_types.QSettings,
+    scope: cint, organization: string, application: string,
+    vtbl: VirtualQSettings) =
+
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQSettingsVTable, _: ptr cQSettings) {.cdecl.} =
+    let vtbl = cast[ptr typeof(VirtualQSettings()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQSettings, vtbl)))
+    vtbl[].h = nil
+    vtbl[].owned = false
+  vtbl[].vtbl.metaObject = miqt_exec_method_cQSettings_metaObject
+  vtbl[].vtbl.metacast = miqt_exec_method_cQSettings_metacast
+  vtbl[].vtbl.metacall = miqt_exec_method_cQSettings_metacall
+  vtbl[].vtbl.event = miqt_exec_method_cQSettings_event
+  vtbl[].vtbl.eventFilter = miqt_exec_method_cQSettings_eventFilter
+  vtbl[].vtbl.timerEvent = miqt_exec_method_cQSettings_timerEvent
+  vtbl[].vtbl.childEvent = miqt_exec_method_cQSettings_childEvent
+  vtbl[].vtbl.customEvent = miqt_exec_method_cQSettings_customEvent
+  vtbl[].vtbl.connectNotify = miqt_exec_method_cQSettings_connectNotify
+  vtbl[].vtbl.disconnectNotify = miqt_exec_method_cQSettings_disconnectNotify
+  if vtbl[].h != nil: delete(move(vtbl[]))
+  vtbl[].h = fcQSettings_new9(addr(vtbl[].vtbl), cint(scope), struct_miqt_string(data: organization, len: csize_t(len(organization))), struct_miqt_string(data: application, len: csize_t(len(application))))
+  vtbl[].owned = true
+
+proc create*(T: type gen_qsettings_types.QSettings,
+    scope: cint, organization: string, application: string, parent: gen_qobject_types.QObject,
+    vtbl: VirtualQSettings) =
+
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQSettingsVTable, _: ptr cQSettings) {.cdecl.} =
+    let vtbl = cast[ptr typeof(VirtualQSettings()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQSettings, vtbl)))
+    vtbl[].h = nil
+    vtbl[].owned = false
+  vtbl[].vtbl.metaObject = miqt_exec_method_cQSettings_metaObject
+  vtbl[].vtbl.metacast = miqt_exec_method_cQSettings_metacast
+  vtbl[].vtbl.metacall = miqt_exec_method_cQSettings_metacall
+  vtbl[].vtbl.event = miqt_exec_method_cQSettings_event
+  vtbl[].vtbl.eventFilter = miqt_exec_method_cQSettings_eventFilter
+  vtbl[].vtbl.timerEvent = miqt_exec_method_cQSettings_timerEvent
+  vtbl[].vtbl.childEvent = miqt_exec_method_cQSettings_childEvent
+  vtbl[].vtbl.customEvent = miqt_exec_method_cQSettings_customEvent
+  vtbl[].vtbl.connectNotify = miqt_exec_method_cQSettings_connectNotify
+  vtbl[].vtbl.disconnectNotify = miqt_exec_method_cQSettings_disconnectNotify
+  if vtbl[].h != nil: delete(move(vtbl[]))
+  vtbl[].h = fcQSettings_new10(addr(vtbl[].vtbl), cint(scope), struct_miqt_string(data: organization, len: csize_t(len(organization))), struct_miqt_string(data: application, len: csize_t(len(application))), parent.h)
+  vtbl[].owned = true
+
+proc create*(T: type gen_qsettings_types.QSettings,
+    format: cint, scope: cint, organization: string, application: string,
+    vtbl: VirtualQSettings) =
+
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQSettingsVTable, _: ptr cQSettings) {.cdecl.} =
+    let vtbl = cast[ptr typeof(VirtualQSettings()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQSettings, vtbl)))
+    vtbl[].h = nil
+    vtbl[].owned = false
+  vtbl[].vtbl.metaObject = miqt_exec_method_cQSettings_metaObject
+  vtbl[].vtbl.metacast = miqt_exec_method_cQSettings_metacast
+  vtbl[].vtbl.metacall = miqt_exec_method_cQSettings_metacall
+  vtbl[].vtbl.event = miqt_exec_method_cQSettings_event
+  vtbl[].vtbl.eventFilter = miqt_exec_method_cQSettings_eventFilter
+  vtbl[].vtbl.timerEvent = miqt_exec_method_cQSettings_timerEvent
+  vtbl[].vtbl.childEvent = miqt_exec_method_cQSettings_childEvent
+  vtbl[].vtbl.customEvent = miqt_exec_method_cQSettings_customEvent
+  vtbl[].vtbl.connectNotify = miqt_exec_method_cQSettings_connectNotify
+  vtbl[].vtbl.disconnectNotify = miqt_exec_method_cQSettings_disconnectNotify
+  if vtbl[].h != nil: delete(move(vtbl[]))
+  vtbl[].h = fcQSettings_new11(addr(vtbl[].vtbl), cint(format), cint(scope), struct_miqt_string(data: organization, len: csize_t(len(organization))), struct_miqt_string(data: application, len: csize_t(len(application))))
+  vtbl[].owned = true
+
+proc create*(T: type gen_qsettings_types.QSettings,
+    format: cint, scope: cint, organization: string, application: string, parent: gen_qobject_types.QObject,
+    vtbl: VirtualQSettings) =
+
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQSettingsVTable, _: ptr cQSettings) {.cdecl.} =
+    let vtbl = cast[ptr typeof(VirtualQSettings()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQSettings, vtbl)))
+    vtbl[].h = nil
+    vtbl[].owned = false
+  vtbl[].vtbl.metaObject = miqt_exec_method_cQSettings_metaObject
+  vtbl[].vtbl.metacast = miqt_exec_method_cQSettings_metacast
+  vtbl[].vtbl.metacall = miqt_exec_method_cQSettings_metacall
+  vtbl[].vtbl.event = miqt_exec_method_cQSettings_event
+  vtbl[].vtbl.eventFilter = miqt_exec_method_cQSettings_eventFilter
+  vtbl[].vtbl.timerEvent = miqt_exec_method_cQSettings_timerEvent
+  vtbl[].vtbl.childEvent = miqt_exec_method_cQSettings_childEvent
+  vtbl[].vtbl.customEvent = miqt_exec_method_cQSettings_customEvent
+  vtbl[].vtbl.connectNotify = miqt_exec_method_cQSettings_connectNotify
+  vtbl[].vtbl.disconnectNotify = miqt_exec_method_cQSettings_disconnectNotify
+  if vtbl[].h != nil: delete(move(vtbl[]))
+  vtbl[].h = fcQSettings_new12(addr(vtbl[].vtbl), cint(format), cint(scope), struct_miqt_string(data: organization, len: csize_t(len(organization))), struct_miqt_string(data: application, len: csize_t(len(application))), parent.h)
+  vtbl[].owned = true
+
+proc create*(T: type gen_qsettings_types.QSettings,
+    fileName: string, format: cint, parent: gen_qobject_types.QObject,
+    vtbl: VirtualQSettings) =
+
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQSettingsVTable, _: ptr cQSettings) {.cdecl.} =
+    let vtbl = cast[ptr typeof(VirtualQSettings()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQSettings, vtbl)))
+    vtbl[].h = nil
+    vtbl[].owned = false
+  vtbl[].vtbl.metaObject = miqt_exec_method_cQSettings_metaObject
+  vtbl[].vtbl.metacast = miqt_exec_method_cQSettings_metacast
+  vtbl[].vtbl.metacall = miqt_exec_method_cQSettings_metacall
+  vtbl[].vtbl.event = miqt_exec_method_cQSettings_event
+  vtbl[].vtbl.eventFilter = miqt_exec_method_cQSettings_eventFilter
+  vtbl[].vtbl.timerEvent = miqt_exec_method_cQSettings_timerEvent
+  vtbl[].vtbl.childEvent = miqt_exec_method_cQSettings_childEvent
+  vtbl[].vtbl.customEvent = miqt_exec_method_cQSettings_customEvent
+  vtbl[].vtbl.connectNotify = miqt_exec_method_cQSettings_connectNotify
+  vtbl[].vtbl.disconnectNotify = miqt_exec_method_cQSettings_disconnectNotify
+  if vtbl[].h != nil: delete(move(vtbl[]))
+  vtbl[].h = fcQSettings_new13(addr(vtbl[].vtbl), struct_miqt_string(data: fileName, len: csize_t(len(fileName))), cint(format), parent.h)
+  vtbl[].owned = true
+
+proc create*(T: type gen_qsettings_types.QSettings,
+    parent: gen_qobject_types.QObject,
+    vtbl: VirtualQSettings) =
+
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQSettingsVTable, _: ptr cQSettings) {.cdecl.} =
+    let vtbl = cast[ptr typeof(VirtualQSettings()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQSettings, vtbl)))
+    vtbl[].h = nil
+    vtbl[].owned = false
+  vtbl[].vtbl.metaObject = miqt_exec_method_cQSettings_metaObject
+  vtbl[].vtbl.metacast = miqt_exec_method_cQSettings_metacast
+  vtbl[].vtbl.metacall = miqt_exec_method_cQSettings_metacall
+  vtbl[].vtbl.event = miqt_exec_method_cQSettings_event
+  vtbl[].vtbl.eventFilter = miqt_exec_method_cQSettings_eventFilter
+  vtbl[].vtbl.timerEvent = miqt_exec_method_cQSettings_timerEvent
+  vtbl[].vtbl.childEvent = miqt_exec_method_cQSettings_childEvent
+  vtbl[].vtbl.customEvent = miqt_exec_method_cQSettings_customEvent
+  vtbl[].vtbl.connectNotify = miqt_exec_method_cQSettings_connectNotify
+  vtbl[].vtbl.disconnectNotify = miqt_exec_method_cQSettings_disconnectNotify
+  if vtbl[].h != nil: delete(move(vtbl[]))
+  vtbl[].h = fcQSettings_new14(addr(vtbl[].vtbl), parent.h)
+  vtbl[].owned = true
+
+proc create*(T: type gen_qsettings_types.QSettings,
+    scope: cint, parent: gen_qobject_types.QObject,
+    vtbl: VirtualQSettings) =
+
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQSettingsVTable, _: ptr cQSettings) {.cdecl.} =
+    let vtbl = cast[ptr typeof(VirtualQSettings()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQSettings, vtbl)))
+    vtbl[].h = nil
+    vtbl[].owned = false
+  vtbl[].vtbl.metaObject = miqt_exec_method_cQSettings_metaObject
+  vtbl[].vtbl.metacast = miqt_exec_method_cQSettings_metacast
+  vtbl[].vtbl.metacall = miqt_exec_method_cQSettings_metacall
+  vtbl[].vtbl.event = miqt_exec_method_cQSettings_event
+  vtbl[].vtbl.eventFilter = miqt_exec_method_cQSettings_eventFilter
+  vtbl[].vtbl.timerEvent = miqt_exec_method_cQSettings_timerEvent
+  vtbl[].vtbl.childEvent = miqt_exec_method_cQSettings_childEvent
+  vtbl[].vtbl.customEvent = miqt_exec_method_cQSettings_customEvent
+  vtbl[].vtbl.connectNotify = miqt_exec_method_cQSettings_connectNotify
+  vtbl[].vtbl.disconnectNotify = miqt_exec_method_cQSettings_disconnectNotify
+  if vtbl[].h != nil: delete(move(vtbl[]))
+  vtbl[].h = fcQSettings_new15(addr(vtbl[].vtbl), cint(scope), parent.h)
+  vtbl[].owned = true
 
 proc staticMetaObject*(_: type gen_qsettings_types.QSettings): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQSettings_staticMetaObject())
-proc delete*(self: gen_qsettings_types.QSettings) =
-  fcQSettings_delete(self.h)

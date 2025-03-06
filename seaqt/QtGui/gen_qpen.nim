@@ -30,9 +30,6 @@ func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
     else:
       copyMem(addr result[0], unsafeAddr v[0], v.len)
 
-const cflags = gorge("pkg-config --cflags Qt5Gui")  & " -fPIC"
-{.compile("gen_qpen.cpp", cflags).}
-
 
 import ./gen_qpen_types
 export gen_qpen_types
@@ -85,7 +82,6 @@ proc fcQPen_new5(pen: pointer): ptr cQPen {.importc: "QPen_new5".}
 proc fcQPen_new6(brush: pointer, width: float64, s: cint): ptr cQPen {.importc: "QPen_new6".}
 proc fcQPen_new7(brush: pointer, width: float64, s: cint, c: cint): ptr cQPen {.importc: "QPen_new7".}
 proc fcQPen_new8(brush: pointer, width: float64, s: cint, c: cint, j: cint): ptr cQPen {.importc: "QPen_new8".}
-proc fcQPen_delete(self: pointer) {.importc: "QPen_delete".}
 
 proc operatorAssign*(self: gen_qpen_types.QPen, pen: gen_qpen_types.QPen): void =
   fcQPen_operatorAssign(self.h, pen.h)
@@ -140,13 +136,13 @@ proc setWidth*(self: gen_qpen_types.QPen, width: cint): void =
   fcQPen_setWidth(self.h, width)
 
 proc color*(self: gen_qpen_types.QPen, ): gen_qcolor_types.QColor =
-  gen_qcolor_types.QColor(h: fcQPen_color(self.h))
+  gen_qcolor_types.QColor(h: fcQPen_color(self.h), owned: true)
 
 proc setColor*(self: gen_qpen_types.QPen, color: gen_qcolor_types.QColor): void =
   fcQPen_setColor(self.h, color.h)
 
 proc brush*(self: gen_qpen_types.QPen, ): gen_qbrush_types.QBrush =
-  gen_qbrush_types.QBrush(h: fcQPen_brush(self.h))
+  gen_qbrush_types.QBrush(h: fcQPen_brush(self.h), owned: true)
 
 proc setBrush*(self: gen_qpen_types.QPen, brush: gen_qbrush_types.QBrush): void =
   fcQPen_setBrush(self.h, brush.h)
@@ -179,41 +175,39 @@ proc operatorNotEqual*(self: gen_qpen_types.QPen, p: gen_qpen_types.QPen): bool 
   fcQPen_operatorNotEqual(self.h, p.h)
 
 proc ToQVariant*(self: gen_qpen_types.QPen, ): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQPen_ToQVariant(self.h))
+  gen_qvariant_types.QVariant(h: fcQPen_ToQVariant(self.h), owned: true)
 
 proc isDetached*(self: gen_qpen_types.QPen, ): bool =
   fcQPen_isDetached(self.h)
 
 proc create*(T: type gen_qpen_types.QPen): gen_qpen_types.QPen =
-  gen_qpen_types.QPen(h: fcQPen_new())
+  gen_qpen_types.QPen(h: fcQPen_new(), owned: true)
 
 proc create*(T: type gen_qpen_types.QPen,
     param1: cint): gen_qpen_types.QPen =
-  gen_qpen_types.QPen(h: fcQPen_new2(cint(param1)))
+  gen_qpen_types.QPen(h: fcQPen_new2(cint(param1)), owned: true)
 
 proc create*(T: type gen_qpen_types.QPen,
     color: gen_qcolor_types.QColor): gen_qpen_types.QPen =
-  gen_qpen_types.QPen(h: fcQPen_new3(color.h))
+  gen_qpen_types.QPen(h: fcQPen_new3(color.h), owned: true)
 
 proc create*(T: type gen_qpen_types.QPen,
     brush: gen_qbrush_types.QBrush, width: float64): gen_qpen_types.QPen =
-  gen_qpen_types.QPen(h: fcQPen_new4(brush.h, width))
+  gen_qpen_types.QPen(h: fcQPen_new4(brush.h, width), owned: true)
 
 proc create*(T: type gen_qpen_types.QPen,
     pen: gen_qpen_types.QPen): gen_qpen_types.QPen =
-  gen_qpen_types.QPen(h: fcQPen_new5(pen.h))
+  gen_qpen_types.QPen(h: fcQPen_new5(pen.h), owned: true)
 
 proc create*(T: type gen_qpen_types.QPen,
     brush: gen_qbrush_types.QBrush, width: float64, s: cint): gen_qpen_types.QPen =
-  gen_qpen_types.QPen(h: fcQPen_new6(brush.h, width, cint(s)))
+  gen_qpen_types.QPen(h: fcQPen_new6(brush.h, width, cint(s)), owned: true)
 
 proc create*(T: type gen_qpen_types.QPen,
     brush: gen_qbrush_types.QBrush, width: float64, s: cint, c: cint): gen_qpen_types.QPen =
-  gen_qpen_types.QPen(h: fcQPen_new7(brush.h, width, cint(s), cint(c)))
+  gen_qpen_types.QPen(h: fcQPen_new7(brush.h, width, cint(s), cint(c)), owned: true)
 
 proc create*(T: type gen_qpen_types.QPen,
     brush: gen_qbrush_types.QBrush, width: float64, s: cint, c: cint, j: cint): gen_qpen_types.QPen =
-  gen_qpen_types.QPen(h: fcQPen_new8(brush.h, width, cint(s), cint(c), cint(j)))
+  gen_qpen_types.QPen(h: fcQPen_new8(brush.h, width, cint(s), cint(c), cint(j)), owned: true)
 
-proc delete*(self: gen_qpen_types.QPen) =
-  fcQPen_delete(self.h)

@@ -30,9 +30,6 @@ func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
     else:
       copyMem(addr result[0], unsafeAddr v[0], v.len)
 
-const cflags = gorge("pkg-config --cflags Qt5Gui")  & " -fPIC"
-{.compile("gen_qicon.cpp", cflags).}
-
 
 type QIconModeEnum* = distinct cint
 template Normal*(_: type QIconModeEnum): untyped = 0
@@ -130,7 +127,6 @@ proc fcQIcon_new2(pixmap: pointer): ptr cQIcon {.importc: "QIcon_new2".}
 proc fcQIcon_new3(other: pointer): ptr cQIcon {.importc: "QIcon_new3".}
 proc fcQIcon_new4(fileName: struct_miqt_string): ptr cQIcon {.importc: "QIcon_new4".}
 proc fcQIcon_new5(engine: pointer): ptr cQIcon {.importc: "QIcon_new5".}
-proc fcQIcon_delete(self: pointer) {.importc: "QIcon_delete".}
 
 proc operatorAssign*(self: gen_qicon_types.QIcon, other: gen_qicon_types.QIcon): void =
   fcQIcon_operatorAssign(self.h, other.h)
@@ -139,25 +135,25 @@ proc swap*(self: gen_qicon_types.QIcon, other: gen_qicon_types.QIcon): void =
   fcQIcon_swap(self.h, other.h)
 
 proc ToQVariant*(self: gen_qicon_types.QIcon, ): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQIcon_ToQVariant(self.h))
+  gen_qvariant_types.QVariant(h: fcQIcon_ToQVariant(self.h), owned: true)
 
 proc pixmap*(self: gen_qicon_types.QIcon, size: gen_qsize_types.QSize): gen_qpixmap_types.QPixmap =
-  gen_qpixmap_types.QPixmap(h: fcQIcon_pixmap(self.h, size.h))
+  gen_qpixmap_types.QPixmap(h: fcQIcon_pixmap(self.h, size.h), owned: true)
 
 proc pixmap*(self: gen_qicon_types.QIcon, w: cint, h: cint): gen_qpixmap_types.QPixmap =
-  gen_qpixmap_types.QPixmap(h: fcQIcon_pixmap2(self.h, w, h))
+  gen_qpixmap_types.QPixmap(h: fcQIcon_pixmap2(self.h, w, h), owned: true)
 
 proc pixmap*(self: gen_qicon_types.QIcon, extent: cint): gen_qpixmap_types.QPixmap =
-  gen_qpixmap_types.QPixmap(h: fcQIcon_pixmapWithExtent(self.h, extent))
+  gen_qpixmap_types.QPixmap(h: fcQIcon_pixmapWithExtent(self.h, extent), owned: true)
 
 proc pixmap*(self: gen_qicon_types.QIcon, window: gen_qwindow_types.QWindow, size: gen_qsize_types.QSize): gen_qpixmap_types.QPixmap =
-  gen_qpixmap_types.QPixmap(h: fcQIcon_pixmap3(self.h, window.h, size.h))
+  gen_qpixmap_types.QPixmap(h: fcQIcon_pixmap3(self.h, window.h, size.h), owned: true)
 
 proc actualSize*(self: gen_qicon_types.QIcon, size: gen_qsize_types.QSize): gen_qsize_types.QSize =
-  gen_qsize_types.QSize(h: fcQIcon_actualSize(self.h, size.h))
+  gen_qsize_types.QSize(h: fcQIcon_actualSize(self.h, size.h), owned: true)
 
 proc actualSize*(self: gen_qicon_types.QIcon, window: gen_qwindow_types.QWindow, size: gen_qsize_types.QSize): gen_qsize_types.QSize =
-  gen_qsize_types.QSize(h: fcQIcon_actualSize2(self.h, window.h, size.h))
+  gen_qsize_types.QSize(h: fcQIcon_actualSize2(self.h, window.h, size.h), owned: true)
 
 proc name*(self: gen_qicon_types.QIcon, ): string =
   let v_ms = fcQIcon_name(self.h)
@@ -194,7 +190,7 @@ proc availableSizes*(self: gen_qicon_types.QIcon, ): seq[gen_qsize_types.QSize] 
   var vx_ret = newSeq[gen_qsize_types.QSize](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
-    vx_ret[i] = gen_qsize_types.QSize(h: v_outCast[i])
+    vx_ret[i] = gen_qsize_types.QSize(h: v_outCast[i], owned: true)
   c_free(v_ma.data)
   vx_ret
 
@@ -205,10 +201,10 @@ proc isMask*(self: gen_qicon_types.QIcon, ): bool =
   fcQIcon_isMask(self.h)
 
 proc fromTheme*(_: type gen_qicon_types.QIcon, name: string): gen_qicon_types.QIcon =
-  gen_qicon_types.QIcon(h: fcQIcon_fromTheme(struct_miqt_string(data: name, len: csize_t(len(name)))))
+  gen_qicon_types.QIcon(h: fcQIcon_fromTheme(struct_miqt_string(data: name, len: csize_t(len(name)))), owned: true)
 
 proc fromTheme*(_: type gen_qicon_types.QIcon, name: string, fallback: gen_qicon_types.QIcon): gen_qicon_types.QIcon =
-  gen_qicon_types.QIcon(h: fcQIcon_fromTheme2(struct_miqt_string(data: name, len: csize_t(len(name))), fallback.h))
+  gen_qicon_types.QIcon(h: fcQIcon_fromTheme2(struct_miqt_string(data: name, len: csize_t(len(name))), fallback.h), owned: true)
 
 proc hasThemeIcon*(_: type gen_qicon_types.QIcon, name: string): bool =
   fcQIcon_hasThemeIcon(struct_miqt_string(data: name, len: csize_t(len(name))))
@@ -270,40 +266,40 @@ proc setFallbackThemeName*(_: type gen_qicon_types.QIcon, name: string): void =
   fcQIcon_setFallbackThemeName(struct_miqt_string(data: name, len: csize_t(len(name))))
 
 proc pixmap*(self: gen_qicon_types.QIcon, size: gen_qsize_types.QSize, mode: cint): gen_qpixmap_types.QPixmap =
-  gen_qpixmap_types.QPixmap(h: fcQIcon_pixmap22(self.h, size.h, cint(mode)))
+  gen_qpixmap_types.QPixmap(h: fcQIcon_pixmap22(self.h, size.h, cint(mode)), owned: true)
 
 proc pixmap*(self: gen_qicon_types.QIcon, size: gen_qsize_types.QSize, mode: cint, state: cint): gen_qpixmap_types.QPixmap =
-  gen_qpixmap_types.QPixmap(h: fcQIcon_pixmap32(self.h, size.h, cint(mode), cint(state)))
+  gen_qpixmap_types.QPixmap(h: fcQIcon_pixmap32(self.h, size.h, cint(mode), cint(state)), owned: true)
 
 proc pixmap*(self: gen_qicon_types.QIcon, w: cint, h: cint, mode: cint): gen_qpixmap_types.QPixmap =
-  gen_qpixmap_types.QPixmap(h: fcQIcon_pixmap33(self.h, w, h, cint(mode)))
+  gen_qpixmap_types.QPixmap(h: fcQIcon_pixmap33(self.h, w, h, cint(mode)), owned: true)
 
 proc pixmap*(self: gen_qicon_types.QIcon, w: cint, h: cint, mode: cint, state: cint): gen_qpixmap_types.QPixmap =
-  gen_qpixmap_types.QPixmap(h: fcQIcon_pixmap4(self.h, w, h, cint(mode), cint(state)))
+  gen_qpixmap_types.QPixmap(h: fcQIcon_pixmap4(self.h, w, h, cint(mode), cint(state)), owned: true)
 
 proc pixmap2*(self: gen_qicon_types.QIcon, extent: cint, mode: cint): gen_qpixmap_types.QPixmap =
-  gen_qpixmap_types.QPixmap(h: fcQIcon_pixmap23(self.h, extent, cint(mode)))
+  gen_qpixmap_types.QPixmap(h: fcQIcon_pixmap23(self.h, extent, cint(mode)), owned: true)
 
 proc pixmap2*(self: gen_qicon_types.QIcon, extent: cint, mode: cint, state: cint): gen_qpixmap_types.QPixmap =
-  gen_qpixmap_types.QPixmap(h: fcQIcon_pixmap34(self.h, extent, cint(mode), cint(state)))
+  gen_qpixmap_types.QPixmap(h: fcQIcon_pixmap34(self.h, extent, cint(mode), cint(state)), owned: true)
 
 proc pixmap*(self: gen_qicon_types.QIcon, window: gen_qwindow_types.QWindow, size: gen_qsize_types.QSize, mode: cint): gen_qpixmap_types.QPixmap =
-  gen_qpixmap_types.QPixmap(h: fcQIcon_pixmap35(self.h, window.h, size.h, cint(mode)))
+  gen_qpixmap_types.QPixmap(h: fcQIcon_pixmap35(self.h, window.h, size.h, cint(mode)), owned: true)
 
 proc pixmap*(self: gen_qicon_types.QIcon, window: gen_qwindow_types.QWindow, size: gen_qsize_types.QSize, mode: cint, state: cint): gen_qpixmap_types.QPixmap =
-  gen_qpixmap_types.QPixmap(h: fcQIcon_pixmap42(self.h, window.h, size.h, cint(mode), cint(state)))
+  gen_qpixmap_types.QPixmap(h: fcQIcon_pixmap42(self.h, window.h, size.h, cint(mode), cint(state)), owned: true)
 
 proc actualSize*(self: gen_qicon_types.QIcon, size: gen_qsize_types.QSize, mode: cint): gen_qsize_types.QSize =
-  gen_qsize_types.QSize(h: fcQIcon_actualSize22(self.h, size.h, cint(mode)))
+  gen_qsize_types.QSize(h: fcQIcon_actualSize22(self.h, size.h, cint(mode)), owned: true)
 
 proc actualSize*(self: gen_qicon_types.QIcon, size: gen_qsize_types.QSize, mode: cint, state: cint): gen_qsize_types.QSize =
-  gen_qsize_types.QSize(h: fcQIcon_actualSize3(self.h, size.h, cint(mode), cint(state)))
+  gen_qsize_types.QSize(h: fcQIcon_actualSize3(self.h, size.h, cint(mode), cint(state)), owned: true)
 
 proc actualSize*(self: gen_qicon_types.QIcon, window: gen_qwindow_types.QWindow, size: gen_qsize_types.QSize, mode: cint): gen_qsize_types.QSize =
-  gen_qsize_types.QSize(h: fcQIcon_actualSize32(self.h, window.h, size.h, cint(mode)))
+  gen_qsize_types.QSize(h: fcQIcon_actualSize32(self.h, window.h, size.h, cint(mode)), owned: true)
 
 proc actualSize*(self: gen_qicon_types.QIcon, window: gen_qwindow_types.QWindow, size: gen_qsize_types.QSize, mode: cint, state: cint): gen_qsize_types.QSize =
-  gen_qsize_types.QSize(h: fcQIcon_actualSize4(self.h, window.h, size.h, cint(mode), cint(state)))
+  gen_qsize_types.QSize(h: fcQIcon_actualSize4(self.h, window.h, size.h, cint(mode), cint(state)), owned: true)
 
 proc paint*(self: gen_qicon_types.QIcon, painter: gen_qpainter_types.QPainter, rect: gen_qrect_types.QRect, alignment: cint): void =
   fcQIcon_paint3(self.h, painter.h, rect.h, cint(alignment))
@@ -343,7 +339,7 @@ proc availableSizes*(self: gen_qicon_types.QIcon, mode: cint): seq[gen_qsize_typ
   var vx_ret = newSeq[gen_qsize_types.QSize](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
-    vx_ret[i] = gen_qsize_types.QSize(h: v_outCast[i])
+    vx_ret[i] = gen_qsize_types.QSize(h: v_outCast[i], owned: true)
   c_free(v_ma.data)
   vx_ret
 
@@ -352,28 +348,26 @@ proc availableSizes*(self: gen_qicon_types.QIcon, mode: cint, state: cint): seq[
   var vx_ret = newSeq[gen_qsize_types.QSize](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
-    vx_ret[i] = gen_qsize_types.QSize(h: v_outCast[i])
+    vx_ret[i] = gen_qsize_types.QSize(h: v_outCast[i], owned: true)
   c_free(v_ma.data)
   vx_ret
 
 proc create*(T: type gen_qicon_types.QIcon): gen_qicon_types.QIcon =
-  gen_qicon_types.QIcon(h: fcQIcon_new())
+  gen_qicon_types.QIcon(h: fcQIcon_new(), owned: true)
 
 proc create*(T: type gen_qicon_types.QIcon,
     pixmap: gen_qpixmap_types.QPixmap): gen_qicon_types.QIcon =
-  gen_qicon_types.QIcon(h: fcQIcon_new2(pixmap.h))
+  gen_qicon_types.QIcon(h: fcQIcon_new2(pixmap.h), owned: true)
 
 proc create*(T: type gen_qicon_types.QIcon,
     other: gen_qicon_types.QIcon): gen_qicon_types.QIcon =
-  gen_qicon_types.QIcon(h: fcQIcon_new3(other.h))
+  gen_qicon_types.QIcon(h: fcQIcon_new3(other.h), owned: true)
 
 proc create*(T: type gen_qicon_types.QIcon,
     fileName: string): gen_qicon_types.QIcon =
-  gen_qicon_types.QIcon(h: fcQIcon_new4(struct_miqt_string(data: fileName, len: csize_t(len(fileName)))))
+  gen_qicon_types.QIcon(h: fcQIcon_new4(struct_miqt_string(data: fileName, len: csize_t(len(fileName)))), owned: true)
 
 proc create*(T: type gen_qicon_types.QIcon,
     engine: gen_qiconengine_types.QIconEngine): gen_qicon_types.QIcon =
-  gen_qicon_types.QIcon(h: fcQIcon_new5(engine.h))
+  gen_qicon_types.QIcon(h: fcQIcon_new5(engine.h), owned: true)
 
-proc delete*(self: gen_qicon_types.QIcon) =
-  fcQIcon_delete(self.h)

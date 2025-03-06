@@ -30,9 +30,6 @@ func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
     else:
       copyMem(addr result[0], unsafeAddr v[0], v.len)
 
-const cflags = gorge("pkg-config --cflags Qt5Network")  & " -fPIC"
-{.compile("gen_qnetworkcookie.cpp", cflags).}
-
 
 type QNetworkCookieRawFormEnum* = distinct cint
 template NameAndValueOnly*(_: type QNetworkCookieRawFormEnum): untyped = 0
@@ -79,7 +76,6 @@ proc fcQNetworkCookie_new(): ptr cQNetworkCookie {.importc: "QNetworkCookie_new"
 proc fcQNetworkCookie_new2(other: pointer): ptr cQNetworkCookie {.importc: "QNetworkCookie_new2".}
 proc fcQNetworkCookie_new3(name: struct_miqt_string): ptr cQNetworkCookie {.importc: "QNetworkCookie_new3".}
 proc fcQNetworkCookie_new4(name: struct_miqt_string, value: struct_miqt_string): ptr cQNetworkCookie {.importc: "QNetworkCookie_new4".}
-proc fcQNetworkCookie_delete(self: pointer) {.importc: "QNetworkCookie_delete".}
 
 proc operatorAssign*(self: gen_qnetworkcookie_types.QNetworkCookie, other: gen_qnetworkcookie_types.QNetworkCookie): void =
   fcQNetworkCookie_operatorAssign(self.h, other.h)
@@ -109,7 +105,7 @@ proc isSessionCookie*(self: gen_qnetworkcookie_types.QNetworkCookie, ): bool =
   fcQNetworkCookie_isSessionCookie(self.h)
 
 proc expirationDate*(self: gen_qnetworkcookie_types.QNetworkCookie, ): gen_qdatetime_types.QDateTime =
-  gen_qdatetime_types.QDateTime(h: fcQNetworkCookie_expirationDate(self.h))
+  gen_qdatetime_types.QDateTime(h: fcQNetworkCookie_expirationDate(self.h), owned: true)
 
 proc setExpirationDate*(self: gen_qnetworkcookie_types.QNetworkCookie, date: gen_qdatetime_types.QDateTime): void =
   fcQNetworkCookie_setExpirationDate(self.h, date.h)
@@ -167,7 +163,7 @@ proc parseCookies*(_: type gen_qnetworkcookie_types.QNetworkCookie, cookieString
   var vx_ret = newSeq[gen_qnetworkcookie_types.QNetworkCookie](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
-    vx_ret[i] = gen_qnetworkcookie_types.QNetworkCookie(h: v_outCast[i])
+    vx_ret[i] = gen_qnetworkcookie_types.QNetworkCookie(h: v_outCast[i], owned: true)
   c_free(v_ma.data)
   vx_ret
 
@@ -178,19 +174,17 @@ proc toRawForm*(self: gen_qnetworkcookie_types.QNetworkCookie, form: cint): seq[
   vx_ret
 
 proc create*(T: type gen_qnetworkcookie_types.QNetworkCookie): gen_qnetworkcookie_types.QNetworkCookie =
-  gen_qnetworkcookie_types.QNetworkCookie(h: fcQNetworkCookie_new())
+  gen_qnetworkcookie_types.QNetworkCookie(h: fcQNetworkCookie_new(), owned: true)
 
 proc create*(T: type gen_qnetworkcookie_types.QNetworkCookie,
     other: gen_qnetworkcookie_types.QNetworkCookie): gen_qnetworkcookie_types.QNetworkCookie =
-  gen_qnetworkcookie_types.QNetworkCookie(h: fcQNetworkCookie_new2(other.h))
+  gen_qnetworkcookie_types.QNetworkCookie(h: fcQNetworkCookie_new2(other.h), owned: true)
 
 proc create*(T: type gen_qnetworkcookie_types.QNetworkCookie,
     name: seq[byte]): gen_qnetworkcookie_types.QNetworkCookie =
-  gen_qnetworkcookie_types.QNetworkCookie(h: fcQNetworkCookie_new3(struct_miqt_string(data: cast[cstring](if len(name) == 0: nil else: unsafeAddr name[0]), len: csize_t(len(name)))))
+  gen_qnetworkcookie_types.QNetworkCookie(h: fcQNetworkCookie_new3(struct_miqt_string(data: cast[cstring](if len(name) == 0: nil else: unsafeAddr name[0]), len: csize_t(len(name)))), owned: true)
 
 proc create*(T: type gen_qnetworkcookie_types.QNetworkCookie,
     name: seq[byte], value: seq[byte]): gen_qnetworkcookie_types.QNetworkCookie =
-  gen_qnetworkcookie_types.QNetworkCookie(h: fcQNetworkCookie_new4(struct_miqt_string(data: cast[cstring](if len(name) == 0: nil else: unsafeAddr name[0]), len: csize_t(len(name))), struct_miqt_string(data: cast[cstring](if len(value) == 0: nil else: unsafeAddr value[0]), len: csize_t(len(value)))))
+  gen_qnetworkcookie_types.QNetworkCookie(h: fcQNetworkCookie_new4(struct_miqt_string(data: cast[cstring](if len(name) == 0: nil else: unsafeAddr name[0]), len: csize_t(len(name))), struct_miqt_string(data: cast[cstring](if len(value) == 0: nil else: unsafeAddr value[0]), len: csize_t(len(value)))), owned: true)
 
-proc delete*(self: gen_qnetworkcookie_types.QNetworkCookie) =
-  fcQNetworkCookie_delete(self.h)

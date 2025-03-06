@@ -30,9 +30,6 @@ func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
     else:
       copyMem(addr result[0], unsafeAddr v[0], v.len)
 
-const cflags = gorge("pkg-config --cflags Qt5Network")  & " -fPIC"
-{.compile("gen_qhstspolicy.cpp", cflags).}
-
 
 type QHstsPolicyPolicyFlagEnum* = distinct cint
 template IncludeSubDomains*(_: type QHstsPolicyPolicyFlagEnum): untyped = 1
@@ -63,7 +60,6 @@ proc fcQHstsPolicy_new(): ptr cQHstsPolicy {.importc: "QHstsPolicy_new".}
 proc fcQHstsPolicy_new2(expiry: pointer, flags: cint, host: struct_miqt_string): ptr cQHstsPolicy {.importc: "QHstsPolicy_new2".}
 proc fcQHstsPolicy_new3(rhs: pointer): ptr cQHstsPolicy {.importc: "QHstsPolicy_new3".}
 proc fcQHstsPolicy_new4(expiry: pointer, flags: cint, host: struct_miqt_string, mode: cint): ptr cQHstsPolicy {.importc: "QHstsPolicy_new4".}
-proc fcQHstsPolicy_delete(self: pointer) {.importc: "QHstsPolicy_delete".}
 
 proc operatorAssign*(self: gen_qhstspolicy_types.QHstsPolicy, rhs: gen_qhstspolicy_types.QHstsPolicy): void =
   fcQHstsPolicy_operatorAssign(self.h, rhs.h)
@@ -84,7 +80,7 @@ proc setExpiry*(self: gen_qhstspolicy_types.QHstsPolicy, expiry: gen_qdatetime_t
   fcQHstsPolicy_setExpiry(self.h, expiry.h)
 
 proc expiry*(self: gen_qhstspolicy_types.QHstsPolicy, ): gen_qdatetime_types.QDateTime =
-  gen_qdatetime_types.QDateTime(h: fcQHstsPolicy_expiry(self.h))
+  gen_qdatetime_types.QDateTime(h: fcQHstsPolicy_expiry(self.h), owned: true)
 
 proc setIncludesSubDomains*(self: gen_qhstspolicy_types.QHstsPolicy, includeVal: bool): void =
   fcQHstsPolicy_setIncludesSubDomains(self.h, includeVal)
@@ -105,19 +101,17 @@ proc host*(self: gen_qhstspolicy_types.QHstsPolicy, options: cint): string =
   vx_ret
 
 proc create*(T: type gen_qhstspolicy_types.QHstsPolicy): gen_qhstspolicy_types.QHstsPolicy =
-  gen_qhstspolicy_types.QHstsPolicy(h: fcQHstsPolicy_new())
+  gen_qhstspolicy_types.QHstsPolicy(h: fcQHstsPolicy_new(), owned: true)
 
 proc create*(T: type gen_qhstspolicy_types.QHstsPolicy,
     expiry: gen_qdatetime_types.QDateTime, flags: cint, host: string): gen_qhstspolicy_types.QHstsPolicy =
-  gen_qhstspolicy_types.QHstsPolicy(h: fcQHstsPolicy_new2(expiry.h, cint(flags), struct_miqt_string(data: host, len: csize_t(len(host)))))
+  gen_qhstspolicy_types.QHstsPolicy(h: fcQHstsPolicy_new2(expiry.h, cint(flags), struct_miqt_string(data: host, len: csize_t(len(host)))), owned: true)
 
 proc create*(T: type gen_qhstspolicy_types.QHstsPolicy,
     rhs: gen_qhstspolicy_types.QHstsPolicy): gen_qhstspolicy_types.QHstsPolicy =
-  gen_qhstspolicy_types.QHstsPolicy(h: fcQHstsPolicy_new3(rhs.h))
+  gen_qhstspolicy_types.QHstsPolicy(h: fcQHstsPolicy_new3(rhs.h), owned: true)
 
 proc create*(T: type gen_qhstspolicy_types.QHstsPolicy,
     expiry: gen_qdatetime_types.QDateTime, flags: cint, host: string, mode: cint): gen_qhstspolicy_types.QHstsPolicy =
-  gen_qhstspolicy_types.QHstsPolicy(h: fcQHstsPolicy_new4(expiry.h, cint(flags), struct_miqt_string(data: host, len: csize_t(len(host))), cint(mode)))
+  gen_qhstspolicy_types.QHstsPolicy(h: fcQHstsPolicy_new4(expiry.h, cint(flags), struct_miqt_string(data: host, len: csize_t(len(host))), cint(mode)), owned: true)
 
-proc delete*(self: gen_qhstspolicy_types.QHstsPolicy) =
-  fcQHstsPolicy_delete(self.h)

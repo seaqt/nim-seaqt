@@ -30,9 +30,6 @@ func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
     else:
       copyMem(addr result[0], unsafeAddr v[0], v.len)
 
-const cflags = gorge("pkg-config --cflags Qt5Core")  & " -fPIC"
-{.compile("gen_qlinkedlist.cpp", cflags).}
-
 
 import ./gen_qlinkedlist_types
 export gen_qlinkedlist_types
@@ -41,10 +38,7 @@ export gen_qlinkedlist_types
 type cQLinkedListData*{.exportc: "QLinkedListData", incompleteStruct.} = object
 
 proc fcQLinkedListData_new(): ptr cQLinkedListData {.importc: "QLinkedListData_new".}
-proc fcQLinkedListData_delete(self: pointer) {.importc: "QLinkedListData_delete".}
 
 proc create*(T: type gen_qlinkedlist_types.QLinkedListData): gen_qlinkedlist_types.QLinkedListData =
-  gen_qlinkedlist_types.QLinkedListData(h: fcQLinkedListData_new())
+  gen_qlinkedlist_types.QLinkedListData(h: fcQLinkedListData_new(), owned: true)
 
-proc delete*(self: gen_qlinkedlist_types.QLinkedListData) =
-  fcQLinkedListData_delete(self.h)

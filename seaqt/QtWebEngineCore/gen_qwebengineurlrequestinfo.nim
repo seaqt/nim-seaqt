@@ -30,7 +30,7 @@ func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
     else:
       copyMem(addr result[0], unsafeAddr v[0], v.len)
 
-const cflags = gorge("pkg-config --cflags Qt5WebEngineCore")  & " -fPIC"
+const cflags = gorge("pkg-config --cflags Qt5WebEngineCore") & " -fPIC"
 {.compile("gen_qwebengineurlrequestinfo.cpp", cflags).}
 
 
@@ -97,13 +97,13 @@ proc navigationType*(self: gen_qwebengineurlrequestinfo_types.QWebEngineUrlReque
   cint(fcQWebEngineUrlRequestInfo_navigationType(self.h))
 
 proc requestUrl*(self: gen_qwebengineurlrequestinfo_types.QWebEngineUrlRequestInfo, ): gen_qurl_types.QUrl =
-  gen_qurl_types.QUrl(h: fcQWebEngineUrlRequestInfo_requestUrl(self.h))
+  gen_qurl_types.QUrl(h: fcQWebEngineUrlRequestInfo_requestUrl(self.h), owned: true)
 
 proc firstPartyUrl*(self: gen_qwebengineurlrequestinfo_types.QWebEngineUrlRequestInfo, ): gen_qurl_types.QUrl =
-  gen_qurl_types.QUrl(h: fcQWebEngineUrlRequestInfo_firstPartyUrl(self.h))
+  gen_qurl_types.QUrl(h: fcQWebEngineUrlRequestInfo_firstPartyUrl(self.h), owned: true)
 
 proc initiator*(self: gen_qwebengineurlrequestinfo_types.QWebEngineUrlRequestInfo, ): gen_qurl_types.QUrl =
-  gen_qurl_types.QUrl(h: fcQWebEngineUrlRequestInfo_initiator(self.h))
+  gen_qurl_types.QUrl(h: fcQWebEngineUrlRequestInfo_initiator(self.h), owned: true)
 
 proc requestMethod*(self: gen_qwebengineurlrequestinfo_types.QWebEngineUrlRequestInfo, ): seq[byte] =
   var v_bytearray = fcQWebEngineUrlRequestInfo_requestMethod(self.h)

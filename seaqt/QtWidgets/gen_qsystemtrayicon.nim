@@ -30,7 +30,7 @@ func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
     else:
       copyMem(addr result[0], unsafeAddr v[0], v.len)
 
-const cflags = gorge("pkg-config --cflags Qt5Widgets")  & " -fPIC"
+const cflags = gorge("pkg-config --cflags Qt5Widgets") & " -fPIC"
 {.compile("gen_qsystemtrayicon.cpp", cflags).}
 
 
@@ -102,7 +102,7 @@ proc fcQSystemTrayIcon_trUtf83(s: cstring, c: cstring, n: cint): struct_miqt_str
 proc fcQSystemTrayIcon_showMessage4(self: pointer, title: struct_miqt_string, msg: struct_miqt_string, icon: pointer, msecs: cint): void {.importc: "QSystemTrayIcon_showMessage4".}
 proc fcQSystemTrayIcon_showMessage3(self: pointer, title: struct_miqt_string, msg: struct_miqt_string, icon: cint): void {.importc: "QSystemTrayIcon_showMessage3".}
 proc fcQSystemTrayIcon_showMessage42(self: pointer, title: struct_miqt_string, msg: struct_miqt_string, icon: cint, msecs: cint): void {.importc: "QSystemTrayIcon_showMessage42".}
-type cQSystemTrayIconVTable = object
+type cQSystemTrayIconVTable {.pure.} = object
   destructor*: proc(vtbl: ptr cQSystemTrayIconVTable, self: ptr cQSystemTrayIcon) {.cdecl, raises:[], gcsafe.}
   metaObject*: proc(vtbl, self: pointer, ): pointer {.cdecl, raises: [], gcsafe.}
   metacast*: proc(vtbl, self: pointer, param1: cstring): pointer {.cdecl, raises: [], gcsafe.}
@@ -133,10 +133,9 @@ proc fcQSystemTrayIcon_new2(vtbl: pointer, icon: pointer): ptr cQSystemTrayIcon 
 proc fcQSystemTrayIcon_new3(vtbl: pointer, parent: pointer): ptr cQSystemTrayIcon {.importc: "QSystemTrayIcon_new3".}
 proc fcQSystemTrayIcon_new4(vtbl: pointer, icon: pointer, parent: pointer): ptr cQSystemTrayIcon {.importc: "QSystemTrayIcon_new4".}
 proc fcQSystemTrayIcon_staticMetaObject(): pointer {.importc: "QSystemTrayIcon_staticMetaObject".}
-proc fcQSystemTrayIcon_delete(self: pointer) {.importc: "QSystemTrayIcon_delete".}
 
 proc metaObject*(self: gen_qsystemtrayicon_types.QSystemTrayIcon, ): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQSystemTrayIcon_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQSystemTrayIcon_metaObject(self.h), owned: false)
 
 proc metacast*(self: gen_qsystemtrayicon_types.QSystemTrayIcon, param1: cstring): pointer =
   fcQSystemTrayIcon_metacast(self.h, param1)
@@ -160,10 +159,10 @@ proc setContextMenu*(self: gen_qsystemtrayicon_types.QSystemTrayIcon, menu: gen_
   fcQSystemTrayIcon_setContextMenu(self.h, menu.h)
 
 proc contextMenu*(self: gen_qsystemtrayicon_types.QSystemTrayIcon, ): gen_qmenu_types.QMenu =
-  gen_qmenu_types.QMenu(h: fcQSystemTrayIcon_contextMenu(self.h))
+  gen_qmenu_types.QMenu(h: fcQSystemTrayIcon_contextMenu(self.h), owned: false)
 
 proc icon*(self: gen_qsystemtrayicon_types.QSystemTrayIcon, ): gen_qicon_types.QIcon =
-  gen_qicon_types.QIcon(h: fcQSystemTrayIcon_icon(self.h))
+  gen_qicon_types.QIcon(h: fcQSystemTrayIcon_icon(self.h), owned: true)
 
 proc setIcon*(self: gen_qsystemtrayicon_types.QSystemTrayIcon, icon: gen_qicon_types.QIcon): void =
   fcQSystemTrayIcon_setIcon(self.h, icon.h)
@@ -184,7 +183,7 @@ proc supportsMessages*(_: type gen_qsystemtrayicon_types.QSystemTrayIcon, ): boo
   fcQSystemTrayIcon_supportsMessages()
 
 proc geometry*(self: gen_qsystemtrayicon_types.QSystemTrayIcon, ): gen_qrect_types.QRect =
-  gen_qrect_types.QRect(h: fcQSystemTrayIcon_geometry(self.h))
+  gen_qrect_types.QRect(h: fcQSystemTrayIcon_geometry(self.h), owned: true)
 
 proc isVisible*(self: gen_qsystemtrayicon_types.QSystemTrayIcon, ): bool =
   fcQSystemTrayIcon_isVisible(self.h)
@@ -285,7 +284,7 @@ type QSystemTrayIconchildEventProc* = proc(self: QSystemTrayIcon, event: gen_qco
 type QSystemTrayIconcustomEventProc* = proc(self: QSystemTrayIcon, event: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
 type QSystemTrayIconconnectNotifyProc* = proc(self: QSystemTrayIcon, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
 type QSystemTrayIcondisconnectNotifyProc* = proc(self: QSystemTrayIcon, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
-type QSystemTrayIconVTable* = object
+type QSystemTrayIconVTable* {.inheritable, pure.} = object
   vtbl: cQSystemTrayIconVTable
   metaObject*: QSystemTrayIconmetaObjectProc
   metacast*: QSystemTrayIconmetacastProc
@@ -298,13 +297,16 @@ type QSystemTrayIconVTable* = object
   connectNotify*: QSystemTrayIconconnectNotifyProc
   disconnectNotify*: QSystemTrayIcondisconnectNotifyProc
 proc QSystemTrayIconmetaObject*(self: gen_qsystemtrayicon_types.QSystemTrayIcon, ): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQSystemTrayIcon_virtualbase_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQSystemTrayIcon_virtualbase_metaObject(self.h), owned: false)
 
 proc miqt_exec_callback_cQSystemTrayIcon_metaObject(vtbl: pointer, self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QSystemTrayIconVTable](vtbl)
   let self = QSystemTrayIcon(h: self)
   var virtualReturn = vtbl[].metaObject(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QSystemTrayIconmetacast*(self: gen_qsystemtrayicon_types.QSystemTrayIcon, param1: cstring): pointer =
   fcQSystemTrayIcon_virtualbase_metacast(self.h, param1)
@@ -334,7 +336,7 @@ proc QSystemTrayIconevent*(self: gen_qsystemtrayicon_types.QSystemTrayIcon, even
 proc miqt_exec_callback_cQSystemTrayIcon_event(vtbl: pointer, self: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QSystemTrayIconVTable](vtbl)
   let self = QSystemTrayIcon(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].event(self, slotval1)
   virtualReturn
 
@@ -344,8 +346,8 @@ proc QSystemTrayIconeventFilter*(self: gen_qsystemtrayicon_types.QSystemTrayIcon
 proc miqt_exec_callback_cQSystemTrayIcon_eventFilter(vtbl: pointer, self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QSystemTrayIconVTable](vtbl)
   let self = QSystemTrayIcon(h: self)
-  let slotval1 = gen_qobject_types.QObject(h: watched)
-  let slotval2 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].eventFilter(self, slotval1, slotval2)
   virtualReturn
 
@@ -355,7 +357,7 @@ proc QSystemTrayIcontimerEvent*(self: gen_qsystemtrayicon_types.QSystemTrayIcon,
 proc miqt_exec_callback_cQSystemTrayIcon_timerEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSystemTrayIconVTable](vtbl)
   let self = QSystemTrayIcon(h: self)
-  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   vtbl[].timerEvent(self, slotval1)
 
 proc QSystemTrayIconchildEvent*(self: gen_qsystemtrayicon_types.QSystemTrayIcon, event: gen_qcoreevent_types.QChildEvent): void =
@@ -364,7 +366,7 @@ proc QSystemTrayIconchildEvent*(self: gen_qsystemtrayicon_types.QSystemTrayIcon,
 proc miqt_exec_callback_cQSystemTrayIcon_childEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSystemTrayIconVTable](vtbl)
   let self = QSystemTrayIcon(h: self)
-  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   vtbl[].childEvent(self, slotval1)
 
 proc QSystemTrayIconcustomEvent*(self: gen_qsystemtrayicon_types.QSystemTrayIcon, event: gen_qcoreevent_types.QEvent): void =
@@ -373,7 +375,7 @@ proc QSystemTrayIconcustomEvent*(self: gen_qsystemtrayicon_types.QSystemTrayIcon
 proc miqt_exec_callback_cQSystemTrayIcon_customEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSystemTrayIconVTable](vtbl)
   let self = QSystemTrayIcon(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].customEvent(self, slotval1)
 
 proc QSystemTrayIconconnectNotify*(self: gen_qsystemtrayicon_types.QSystemTrayIcon, signal: gen_qmetaobject_types.QMetaMethod): void =
@@ -382,7 +384,7 @@ proc QSystemTrayIconconnectNotify*(self: gen_qsystemtrayicon_types.QSystemTrayIc
 proc miqt_exec_callback_cQSystemTrayIcon_connectNotify(vtbl: pointer, self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSystemTrayIconVTable](vtbl)
   let self = QSystemTrayIcon(h: self)
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].connectNotify(self, slotval1)
 
 proc QSystemTrayIcondisconnectNotify*(self: gen_qsystemtrayicon_types.QSystemTrayIcon, signal: gen_qmetaobject_types.QMetaMethod): void =
@@ -391,11 +393,93 @@ proc QSystemTrayIcondisconnectNotify*(self: gen_qsystemtrayicon_types.QSystemTra
 proc miqt_exec_callback_cQSystemTrayIcon_disconnectNotify(vtbl: pointer, self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSystemTrayIconVTable](vtbl)
   let self = QSystemTrayIcon(h: self)
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].disconnectNotify(self, slotval1)
 
+type VirtualQSystemTrayIcon* {.inheritable.} = ref object of QSystemTrayIcon
+  vtbl*: cQSystemTrayIconVTable
+method metaObject*(self: VirtualQSystemTrayIcon, ): gen_qobjectdefs_types.QMetaObject {.base.} =
+  QSystemTrayIconmetaObject(self[])
+proc miqt_exec_method_cQSystemTrayIcon_metaObject(vtbl: pointer, inst: pointer): pointer {.cdecl.} =
+  let vtbl = cast[VirtualQSystemTrayIcon](cast[uint](vtbl) - uint(offsetOf(VirtualQSystemTrayIcon, vtbl)))
+  var virtualReturn = vtbl.metaObject()
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
+
+method metacast*(self: VirtualQSystemTrayIcon, param1: cstring): pointer {.base.} =
+  QSystemTrayIconmetacast(self[], param1)
+proc miqt_exec_method_cQSystemTrayIcon_metacast(vtbl: pointer, inst: pointer, param1: cstring): pointer {.cdecl.} =
+  let vtbl = cast[VirtualQSystemTrayIcon](cast[uint](vtbl) - uint(offsetOf(VirtualQSystemTrayIcon, vtbl)))
+  let slotval1 = (param1)
+  var virtualReturn = vtbl.metacast(slotval1)
+  virtualReturn
+
+method metacall*(self: VirtualQSystemTrayIcon, param1: cint, param2: cint, param3: pointer): cint {.base.} =
+  QSystemTrayIconmetacall(self[], param1, param2, param3)
+proc miqt_exec_method_cQSystemTrayIcon_metacall(vtbl: pointer, inst: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
+  let vtbl = cast[VirtualQSystemTrayIcon](cast[uint](vtbl) - uint(offsetOf(VirtualQSystemTrayIcon, vtbl)))
+  let slotval1 = cint(param1)
+  let slotval2 = param2
+  let slotval3 = param3
+  var virtualReturn = vtbl.metacall(slotval1, slotval2, slotval3)
+  virtualReturn
+
+method event*(self: VirtualQSystemTrayIcon, event: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QSystemTrayIconevent(self[], event)
+proc miqt_exec_method_cQSystemTrayIcon_event(vtbl: pointer, inst: pointer, event: pointer): bool {.cdecl.} =
+  let vtbl = cast[VirtualQSystemTrayIcon](cast[uint](vtbl) - uint(offsetOf(VirtualQSystemTrayIcon, vtbl)))
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
+  var virtualReturn = vtbl.event(slotval1)
+  virtualReturn
+
+method eventFilter*(self: VirtualQSystemTrayIcon, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QSystemTrayIconeventFilter(self[], watched, event)
+proc miqt_exec_method_cQSystemTrayIcon_eventFilter(vtbl: pointer, inst: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
+  let vtbl = cast[VirtualQSystemTrayIcon](cast[uint](vtbl) - uint(offsetOf(VirtualQSystemTrayIcon, vtbl)))
+  let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
+  var virtualReturn = vtbl.eventFilter(slotval1, slotval2)
+  virtualReturn
+
+method timerEvent*(self: VirtualQSystemTrayIcon, event: gen_qcoreevent_types.QTimerEvent): void {.base.} =
+  QSystemTrayIcontimerEvent(self[], event)
+proc miqt_exec_method_cQSystemTrayIcon_timerEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQSystemTrayIcon](cast[uint](vtbl) - uint(offsetOf(VirtualQSystemTrayIcon, vtbl)))
+  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
+  vtbl.timerEvent(slotval1)
+
+method childEvent*(self: VirtualQSystemTrayIcon, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
+  QSystemTrayIconchildEvent(self[], event)
+proc miqt_exec_method_cQSystemTrayIcon_childEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQSystemTrayIcon](cast[uint](vtbl) - uint(offsetOf(VirtualQSystemTrayIcon, vtbl)))
+  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
+  vtbl.childEvent(slotval1)
+
+method customEvent*(self: VirtualQSystemTrayIcon, event: gen_qcoreevent_types.QEvent): void {.base.} =
+  QSystemTrayIconcustomEvent(self[], event)
+proc miqt_exec_method_cQSystemTrayIcon_customEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQSystemTrayIcon](cast[uint](vtbl) - uint(offsetOf(VirtualQSystemTrayIcon, vtbl)))
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
+  vtbl.customEvent(slotval1)
+
+method connectNotify*(self: VirtualQSystemTrayIcon, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QSystemTrayIconconnectNotify(self[], signal)
+proc miqt_exec_method_cQSystemTrayIcon_connectNotify(vtbl: pointer, inst: pointer, signal: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQSystemTrayIcon](cast[uint](vtbl) - uint(offsetOf(VirtualQSystemTrayIcon, vtbl)))
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
+  vtbl.connectNotify(slotval1)
+
+method disconnectNotify*(self: VirtualQSystemTrayIcon, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QSystemTrayIcondisconnectNotify(self[], signal)
+proc miqt_exec_method_cQSystemTrayIcon_disconnectNotify(vtbl: pointer, inst: pointer, signal: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQSystemTrayIcon](cast[uint](vtbl) - uint(offsetOf(VirtualQSystemTrayIcon, vtbl)))
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
+  vtbl.disconnectNotify(slotval1)
+
 proc sender*(self: gen_qsystemtrayicon_types.QSystemTrayIcon, ): gen_qobject_types.QObject =
-  gen_qobject_types.QObject(h: fcQSystemTrayIcon_protectedbase_sender(self.h))
+  gen_qobject_types.QObject(h: fcQSystemTrayIcon_protectedbase_sender(self.h), owned: false)
 
 proc senderSignalIndex*(self: gen_qsystemtrayicon_types.QSystemTrayIcon, ): cint =
   fcQSystemTrayIcon_protectedbase_senderSignalIndex(self.h)
@@ -410,122 +494,207 @@ proc create*(T: type gen_qsystemtrayicon_types.QSystemTrayIcon,
     vtbl: ref QSystemTrayIconVTable = nil): gen_qsystemtrayicon_types.QSystemTrayIcon =
   let vtbl = if vtbl == nil: new QSystemTrayIconVTable else: vtbl
   GC_ref(vtbl)
-  vtbl.vtbl.destructor = proc(vtbl: ptr cQSystemTrayIconVTable, _: ptr cQSystemTrayIcon) {.cdecl.} =
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQSystemTrayIconVTable, _: ptr cQSystemTrayIcon) {.cdecl.} =
     let vtbl = cast[ref QSystemTrayIconVTable](vtbl)
     GC_unref(vtbl)
-  if not isNil(vtbl.metaObject):
+  if not isNil(vtbl[].metaObject):
     vtbl[].vtbl.metaObject = miqt_exec_callback_cQSystemTrayIcon_metaObject
-  if not isNil(vtbl.metacast):
+  if not isNil(vtbl[].metacast):
     vtbl[].vtbl.metacast = miqt_exec_callback_cQSystemTrayIcon_metacast
-  if not isNil(vtbl.metacall):
+  if not isNil(vtbl[].metacall):
     vtbl[].vtbl.metacall = miqt_exec_callback_cQSystemTrayIcon_metacall
-  if not isNil(vtbl.event):
+  if not isNil(vtbl[].event):
     vtbl[].vtbl.event = miqt_exec_callback_cQSystemTrayIcon_event
-  if not isNil(vtbl.eventFilter):
+  if not isNil(vtbl[].eventFilter):
     vtbl[].vtbl.eventFilter = miqt_exec_callback_cQSystemTrayIcon_eventFilter
-  if not isNil(vtbl.timerEvent):
+  if not isNil(vtbl[].timerEvent):
     vtbl[].vtbl.timerEvent = miqt_exec_callback_cQSystemTrayIcon_timerEvent
-  if not isNil(vtbl.childEvent):
+  if not isNil(vtbl[].childEvent):
     vtbl[].vtbl.childEvent = miqt_exec_callback_cQSystemTrayIcon_childEvent
-  if not isNil(vtbl.customEvent):
+  if not isNil(vtbl[].customEvent):
     vtbl[].vtbl.customEvent = miqt_exec_callback_cQSystemTrayIcon_customEvent
-  if not isNil(vtbl.connectNotify):
+  if not isNil(vtbl[].connectNotify):
     vtbl[].vtbl.connectNotify = miqt_exec_callback_cQSystemTrayIcon_connectNotify
-  if not isNil(vtbl.disconnectNotify):
+  if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQSystemTrayIcon_disconnectNotify
-  gen_qsystemtrayicon_types.QSystemTrayIcon(h: fcQSystemTrayIcon_new(addr(vtbl[]), ))
+  gen_qsystemtrayicon_types.QSystemTrayIcon(h: fcQSystemTrayIcon_new(addr(vtbl[].vtbl), ), owned: true)
 
 proc create*(T: type gen_qsystemtrayicon_types.QSystemTrayIcon,
     icon: gen_qicon_types.QIcon,
     vtbl: ref QSystemTrayIconVTable = nil): gen_qsystemtrayicon_types.QSystemTrayIcon =
   let vtbl = if vtbl == nil: new QSystemTrayIconVTable else: vtbl
   GC_ref(vtbl)
-  vtbl.vtbl.destructor = proc(vtbl: ptr cQSystemTrayIconVTable, _: ptr cQSystemTrayIcon) {.cdecl.} =
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQSystemTrayIconVTable, _: ptr cQSystemTrayIcon) {.cdecl.} =
     let vtbl = cast[ref QSystemTrayIconVTable](vtbl)
     GC_unref(vtbl)
-  if not isNil(vtbl.metaObject):
+  if not isNil(vtbl[].metaObject):
     vtbl[].vtbl.metaObject = miqt_exec_callback_cQSystemTrayIcon_metaObject
-  if not isNil(vtbl.metacast):
+  if not isNil(vtbl[].metacast):
     vtbl[].vtbl.metacast = miqt_exec_callback_cQSystemTrayIcon_metacast
-  if not isNil(vtbl.metacall):
+  if not isNil(vtbl[].metacall):
     vtbl[].vtbl.metacall = miqt_exec_callback_cQSystemTrayIcon_metacall
-  if not isNil(vtbl.event):
+  if not isNil(vtbl[].event):
     vtbl[].vtbl.event = miqt_exec_callback_cQSystemTrayIcon_event
-  if not isNil(vtbl.eventFilter):
+  if not isNil(vtbl[].eventFilter):
     vtbl[].vtbl.eventFilter = miqt_exec_callback_cQSystemTrayIcon_eventFilter
-  if not isNil(vtbl.timerEvent):
+  if not isNil(vtbl[].timerEvent):
     vtbl[].vtbl.timerEvent = miqt_exec_callback_cQSystemTrayIcon_timerEvent
-  if not isNil(vtbl.childEvent):
+  if not isNil(vtbl[].childEvent):
     vtbl[].vtbl.childEvent = miqt_exec_callback_cQSystemTrayIcon_childEvent
-  if not isNil(vtbl.customEvent):
+  if not isNil(vtbl[].customEvent):
     vtbl[].vtbl.customEvent = miqt_exec_callback_cQSystemTrayIcon_customEvent
-  if not isNil(vtbl.connectNotify):
+  if not isNil(vtbl[].connectNotify):
     vtbl[].vtbl.connectNotify = miqt_exec_callback_cQSystemTrayIcon_connectNotify
-  if not isNil(vtbl.disconnectNotify):
+  if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQSystemTrayIcon_disconnectNotify
-  gen_qsystemtrayicon_types.QSystemTrayIcon(h: fcQSystemTrayIcon_new2(addr(vtbl[]), icon.h))
+  gen_qsystemtrayicon_types.QSystemTrayIcon(h: fcQSystemTrayIcon_new2(addr(vtbl[].vtbl), icon.h), owned: true)
 
 proc create*(T: type gen_qsystemtrayicon_types.QSystemTrayIcon,
     parent: gen_qobject_types.QObject,
     vtbl: ref QSystemTrayIconVTable = nil): gen_qsystemtrayicon_types.QSystemTrayIcon =
   let vtbl = if vtbl == nil: new QSystemTrayIconVTable else: vtbl
   GC_ref(vtbl)
-  vtbl.vtbl.destructor = proc(vtbl: ptr cQSystemTrayIconVTable, _: ptr cQSystemTrayIcon) {.cdecl.} =
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQSystemTrayIconVTable, _: ptr cQSystemTrayIcon) {.cdecl.} =
     let vtbl = cast[ref QSystemTrayIconVTable](vtbl)
     GC_unref(vtbl)
-  if not isNil(vtbl.metaObject):
+  if not isNil(vtbl[].metaObject):
     vtbl[].vtbl.metaObject = miqt_exec_callback_cQSystemTrayIcon_metaObject
-  if not isNil(vtbl.metacast):
+  if not isNil(vtbl[].metacast):
     vtbl[].vtbl.metacast = miqt_exec_callback_cQSystemTrayIcon_metacast
-  if not isNil(vtbl.metacall):
+  if not isNil(vtbl[].metacall):
     vtbl[].vtbl.metacall = miqt_exec_callback_cQSystemTrayIcon_metacall
-  if not isNil(vtbl.event):
+  if not isNil(vtbl[].event):
     vtbl[].vtbl.event = miqt_exec_callback_cQSystemTrayIcon_event
-  if not isNil(vtbl.eventFilter):
+  if not isNil(vtbl[].eventFilter):
     vtbl[].vtbl.eventFilter = miqt_exec_callback_cQSystemTrayIcon_eventFilter
-  if not isNil(vtbl.timerEvent):
+  if not isNil(vtbl[].timerEvent):
     vtbl[].vtbl.timerEvent = miqt_exec_callback_cQSystemTrayIcon_timerEvent
-  if not isNil(vtbl.childEvent):
+  if not isNil(vtbl[].childEvent):
     vtbl[].vtbl.childEvent = miqt_exec_callback_cQSystemTrayIcon_childEvent
-  if not isNil(vtbl.customEvent):
+  if not isNil(vtbl[].customEvent):
     vtbl[].vtbl.customEvent = miqt_exec_callback_cQSystemTrayIcon_customEvent
-  if not isNil(vtbl.connectNotify):
+  if not isNil(vtbl[].connectNotify):
     vtbl[].vtbl.connectNotify = miqt_exec_callback_cQSystemTrayIcon_connectNotify
-  if not isNil(vtbl.disconnectNotify):
+  if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQSystemTrayIcon_disconnectNotify
-  gen_qsystemtrayicon_types.QSystemTrayIcon(h: fcQSystemTrayIcon_new3(addr(vtbl[]), parent.h))
+  gen_qsystemtrayicon_types.QSystemTrayIcon(h: fcQSystemTrayIcon_new3(addr(vtbl[].vtbl), parent.h), owned: true)
 
 proc create*(T: type gen_qsystemtrayicon_types.QSystemTrayIcon,
     icon: gen_qicon_types.QIcon, parent: gen_qobject_types.QObject,
     vtbl: ref QSystemTrayIconVTable = nil): gen_qsystemtrayicon_types.QSystemTrayIcon =
   let vtbl = if vtbl == nil: new QSystemTrayIconVTable else: vtbl
   GC_ref(vtbl)
-  vtbl.vtbl.destructor = proc(vtbl: ptr cQSystemTrayIconVTable, _: ptr cQSystemTrayIcon) {.cdecl.} =
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQSystemTrayIconVTable, _: ptr cQSystemTrayIcon) {.cdecl.} =
     let vtbl = cast[ref QSystemTrayIconVTable](vtbl)
     GC_unref(vtbl)
-  if not isNil(vtbl.metaObject):
+  if not isNil(vtbl[].metaObject):
     vtbl[].vtbl.metaObject = miqt_exec_callback_cQSystemTrayIcon_metaObject
-  if not isNil(vtbl.metacast):
+  if not isNil(vtbl[].metacast):
     vtbl[].vtbl.metacast = miqt_exec_callback_cQSystemTrayIcon_metacast
-  if not isNil(vtbl.metacall):
+  if not isNil(vtbl[].metacall):
     vtbl[].vtbl.metacall = miqt_exec_callback_cQSystemTrayIcon_metacall
-  if not isNil(vtbl.event):
+  if not isNil(vtbl[].event):
     vtbl[].vtbl.event = miqt_exec_callback_cQSystemTrayIcon_event
-  if not isNil(vtbl.eventFilter):
+  if not isNil(vtbl[].eventFilter):
     vtbl[].vtbl.eventFilter = miqt_exec_callback_cQSystemTrayIcon_eventFilter
-  if not isNil(vtbl.timerEvent):
+  if not isNil(vtbl[].timerEvent):
     vtbl[].vtbl.timerEvent = miqt_exec_callback_cQSystemTrayIcon_timerEvent
-  if not isNil(vtbl.childEvent):
+  if not isNil(vtbl[].childEvent):
     vtbl[].vtbl.childEvent = miqt_exec_callback_cQSystemTrayIcon_childEvent
-  if not isNil(vtbl.customEvent):
+  if not isNil(vtbl[].customEvent):
     vtbl[].vtbl.customEvent = miqt_exec_callback_cQSystemTrayIcon_customEvent
-  if not isNil(vtbl.connectNotify):
+  if not isNil(vtbl[].connectNotify):
     vtbl[].vtbl.connectNotify = miqt_exec_callback_cQSystemTrayIcon_connectNotify
-  if not isNil(vtbl.disconnectNotify):
+  if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQSystemTrayIcon_disconnectNotify
-  gen_qsystemtrayicon_types.QSystemTrayIcon(h: fcQSystemTrayIcon_new4(addr(vtbl[]), icon.h, parent.h))
+  gen_qsystemtrayicon_types.QSystemTrayIcon(h: fcQSystemTrayIcon_new4(addr(vtbl[].vtbl), icon.h, parent.h), owned: true)
+
+proc create*(T: type gen_qsystemtrayicon_types.QSystemTrayIcon,
+    vtbl: VirtualQSystemTrayIcon) =
+
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQSystemTrayIconVTable, _: ptr cQSystemTrayIcon) {.cdecl.} =
+    let vtbl = cast[ptr typeof(VirtualQSystemTrayIcon()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQSystemTrayIcon, vtbl)))
+    vtbl[].h = nil
+    vtbl[].owned = false
+  vtbl[].vtbl.metaObject = miqt_exec_method_cQSystemTrayIcon_metaObject
+  vtbl[].vtbl.metacast = miqt_exec_method_cQSystemTrayIcon_metacast
+  vtbl[].vtbl.metacall = miqt_exec_method_cQSystemTrayIcon_metacall
+  vtbl[].vtbl.event = miqt_exec_method_cQSystemTrayIcon_event
+  vtbl[].vtbl.eventFilter = miqt_exec_method_cQSystemTrayIcon_eventFilter
+  vtbl[].vtbl.timerEvent = miqt_exec_method_cQSystemTrayIcon_timerEvent
+  vtbl[].vtbl.childEvent = miqt_exec_method_cQSystemTrayIcon_childEvent
+  vtbl[].vtbl.customEvent = miqt_exec_method_cQSystemTrayIcon_customEvent
+  vtbl[].vtbl.connectNotify = miqt_exec_method_cQSystemTrayIcon_connectNotify
+  vtbl[].vtbl.disconnectNotify = miqt_exec_method_cQSystemTrayIcon_disconnectNotify
+  if vtbl[].h != nil: delete(move(vtbl[]))
+  vtbl[].h = fcQSystemTrayIcon_new(addr(vtbl[].vtbl), )
+  vtbl[].owned = true
+
+proc create*(T: type gen_qsystemtrayicon_types.QSystemTrayIcon,
+    icon: gen_qicon_types.QIcon,
+    vtbl: VirtualQSystemTrayIcon) =
+
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQSystemTrayIconVTable, _: ptr cQSystemTrayIcon) {.cdecl.} =
+    let vtbl = cast[ptr typeof(VirtualQSystemTrayIcon()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQSystemTrayIcon, vtbl)))
+    vtbl[].h = nil
+    vtbl[].owned = false
+  vtbl[].vtbl.metaObject = miqt_exec_method_cQSystemTrayIcon_metaObject
+  vtbl[].vtbl.metacast = miqt_exec_method_cQSystemTrayIcon_metacast
+  vtbl[].vtbl.metacall = miqt_exec_method_cQSystemTrayIcon_metacall
+  vtbl[].vtbl.event = miqt_exec_method_cQSystemTrayIcon_event
+  vtbl[].vtbl.eventFilter = miqt_exec_method_cQSystemTrayIcon_eventFilter
+  vtbl[].vtbl.timerEvent = miqt_exec_method_cQSystemTrayIcon_timerEvent
+  vtbl[].vtbl.childEvent = miqt_exec_method_cQSystemTrayIcon_childEvent
+  vtbl[].vtbl.customEvent = miqt_exec_method_cQSystemTrayIcon_customEvent
+  vtbl[].vtbl.connectNotify = miqt_exec_method_cQSystemTrayIcon_connectNotify
+  vtbl[].vtbl.disconnectNotify = miqt_exec_method_cQSystemTrayIcon_disconnectNotify
+  if vtbl[].h != nil: delete(move(vtbl[]))
+  vtbl[].h = fcQSystemTrayIcon_new2(addr(vtbl[].vtbl), icon.h)
+  vtbl[].owned = true
+
+proc create*(T: type gen_qsystemtrayicon_types.QSystemTrayIcon,
+    parent: gen_qobject_types.QObject,
+    vtbl: VirtualQSystemTrayIcon) =
+
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQSystemTrayIconVTable, _: ptr cQSystemTrayIcon) {.cdecl.} =
+    let vtbl = cast[ptr typeof(VirtualQSystemTrayIcon()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQSystemTrayIcon, vtbl)))
+    vtbl[].h = nil
+    vtbl[].owned = false
+  vtbl[].vtbl.metaObject = miqt_exec_method_cQSystemTrayIcon_metaObject
+  vtbl[].vtbl.metacast = miqt_exec_method_cQSystemTrayIcon_metacast
+  vtbl[].vtbl.metacall = miqt_exec_method_cQSystemTrayIcon_metacall
+  vtbl[].vtbl.event = miqt_exec_method_cQSystemTrayIcon_event
+  vtbl[].vtbl.eventFilter = miqt_exec_method_cQSystemTrayIcon_eventFilter
+  vtbl[].vtbl.timerEvent = miqt_exec_method_cQSystemTrayIcon_timerEvent
+  vtbl[].vtbl.childEvent = miqt_exec_method_cQSystemTrayIcon_childEvent
+  vtbl[].vtbl.customEvent = miqt_exec_method_cQSystemTrayIcon_customEvent
+  vtbl[].vtbl.connectNotify = miqt_exec_method_cQSystemTrayIcon_connectNotify
+  vtbl[].vtbl.disconnectNotify = miqt_exec_method_cQSystemTrayIcon_disconnectNotify
+  if vtbl[].h != nil: delete(move(vtbl[]))
+  vtbl[].h = fcQSystemTrayIcon_new3(addr(vtbl[].vtbl), parent.h)
+  vtbl[].owned = true
+
+proc create*(T: type gen_qsystemtrayicon_types.QSystemTrayIcon,
+    icon: gen_qicon_types.QIcon, parent: gen_qobject_types.QObject,
+    vtbl: VirtualQSystemTrayIcon) =
+
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQSystemTrayIconVTable, _: ptr cQSystemTrayIcon) {.cdecl.} =
+    let vtbl = cast[ptr typeof(VirtualQSystemTrayIcon()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQSystemTrayIcon, vtbl)))
+    vtbl[].h = nil
+    vtbl[].owned = false
+  vtbl[].vtbl.metaObject = miqt_exec_method_cQSystemTrayIcon_metaObject
+  vtbl[].vtbl.metacast = miqt_exec_method_cQSystemTrayIcon_metacast
+  vtbl[].vtbl.metacall = miqt_exec_method_cQSystemTrayIcon_metacall
+  vtbl[].vtbl.event = miqt_exec_method_cQSystemTrayIcon_event
+  vtbl[].vtbl.eventFilter = miqt_exec_method_cQSystemTrayIcon_eventFilter
+  vtbl[].vtbl.timerEvent = miqt_exec_method_cQSystemTrayIcon_timerEvent
+  vtbl[].vtbl.childEvent = miqt_exec_method_cQSystemTrayIcon_childEvent
+  vtbl[].vtbl.customEvent = miqt_exec_method_cQSystemTrayIcon_customEvent
+  vtbl[].vtbl.connectNotify = miqt_exec_method_cQSystemTrayIcon_connectNotify
+  vtbl[].vtbl.disconnectNotify = miqt_exec_method_cQSystemTrayIcon_disconnectNotify
+  if vtbl[].h != nil: delete(move(vtbl[]))
+  vtbl[].h = fcQSystemTrayIcon_new4(addr(vtbl[].vtbl), icon.h, parent.h)
+  vtbl[].owned = true
 
 proc staticMetaObject*(_: type gen_qsystemtrayicon_types.QSystemTrayIcon): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQSystemTrayIcon_staticMetaObject())
-proc delete*(self: gen_qsystemtrayicon_types.QSystemTrayIcon) =
-  fcQSystemTrayIcon_delete(self.h)

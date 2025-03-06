@@ -30,7 +30,7 @@ func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
     else:
       copyMem(addr result[0], unsafeAddr v[0], v.len)
 
-const cflags = gorge("pkg-config --cflags Qt5PrintSupport")  & " -fPIC"
+const cflags = gorge("pkg-config --cflags Qt5PrintSupport") & " -fPIC"
 {.compile("gen_qprintpreviewwidget.cpp", cflags).}
 
 
@@ -118,7 +118,7 @@ proc fcQPrintPreviewWidget_trUtf82(s: cstring, c: cstring): struct_miqt_string {
 proc fcQPrintPreviewWidget_trUtf83(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QPrintPreviewWidget_trUtf83".}
 proc fcQPrintPreviewWidget_zoomIn1(self: pointer, zoom: float64): void {.importc: "QPrintPreviewWidget_zoomIn1".}
 proc fcQPrintPreviewWidget_zoomOut1(self: pointer, zoom: float64): void {.importc: "QPrintPreviewWidget_zoomOut1".}
-type cQPrintPreviewWidgetVTable = object
+type cQPrintPreviewWidgetVTable {.pure.} = object
   destructor*: proc(vtbl: ptr cQPrintPreviewWidgetVTable, self: ptr cQPrintPreviewWidget) {.cdecl, raises:[], gcsafe.}
   metaObject*: proc(vtbl, self: pointer, ): pointer {.cdecl, raises: [], gcsafe.}
   metacast*: proc(vtbl, self: pointer, param1: cstring): pointer {.cdecl, raises: [], gcsafe.}
@@ -236,10 +236,9 @@ proc fcQPrintPreviewWidget_new4(vtbl: pointer, printer: pointer, parent: pointer
 proc fcQPrintPreviewWidget_new5(vtbl: pointer, printer: pointer, parent: pointer, flags: cint): ptr cQPrintPreviewWidget {.importc: "QPrintPreviewWidget_new5".}
 proc fcQPrintPreviewWidget_new6(vtbl: pointer, parent: pointer, flags: cint): ptr cQPrintPreviewWidget {.importc: "QPrintPreviewWidget_new6".}
 proc fcQPrintPreviewWidget_staticMetaObject(): pointer {.importc: "QPrintPreviewWidget_staticMetaObject".}
-proc fcQPrintPreviewWidget_delete(self: pointer) {.importc: "QPrintPreviewWidget_delete".}
 
 proc metaObject*(self: gen_qprintpreviewwidget_types.QPrintPreviewWidget, ): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQPrintPreviewWidget_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQPrintPreviewWidget_metaObject(self.h), owned: false)
 
 proc metacast*(self: gen_qprintpreviewwidget_types.QPrintPreviewWidget, param1: cstring): pointer =
   fcQPrintPreviewWidget_metacast(self.h, param1)
@@ -334,7 +333,7 @@ proc paintRequested*(self: gen_qprintpreviewwidget_types.QPrintPreviewWidget, pr
 type QPrintPreviewWidgetpaintRequestedSlot* = proc(printer: gen_qprinter_types.QPrinter)
 proc miqt_exec_callback_cQPrintPreviewWidget_paintRequested(slot: int, printer: pointer) {.cdecl.} =
   let nimfunc = cast[ptr QPrintPreviewWidgetpaintRequestedSlot](cast[pointer](slot))
-  let slotval1 = gen_qprinter_types.QPrinter(h: printer)
+  let slotval1 = gen_qprinter_types.QPrinter(h: printer, owned: false)
 
   nimfunc[](slotval1)
 
@@ -446,7 +445,7 @@ type QPrintPreviewWidgetchildEventProc* = proc(self: QPrintPreviewWidget, event:
 type QPrintPreviewWidgetcustomEventProc* = proc(self: QPrintPreviewWidget, event: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
 type QPrintPreviewWidgetconnectNotifyProc* = proc(self: QPrintPreviewWidget, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
 type QPrintPreviewWidgetdisconnectNotifyProc* = proc(self: QPrintPreviewWidget, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
-type QPrintPreviewWidgetVTable* = object
+type QPrintPreviewWidgetVTable* {.inheritable, pure.} = object
   vtbl: cQPrintPreviewWidgetVTable
   metaObject*: QPrintPreviewWidgetmetaObjectProc
   metacast*: QPrintPreviewWidgetmetacastProc
@@ -499,13 +498,16 @@ type QPrintPreviewWidgetVTable* = object
   connectNotify*: QPrintPreviewWidgetconnectNotifyProc
   disconnectNotify*: QPrintPreviewWidgetdisconnectNotifyProc
 proc QPrintPreviewWidgetmetaObject*(self: gen_qprintpreviewwidget_types.QPrintPreviewWidget, ): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQPrintPreviewWidget_virtualbase_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQPrintPreviewWidget_virtualbase_metaObject(self.h), owned: false)
 
 proc miqt_exec_callback_cQPrintPreviewWidget_metaObject(vtbl: pointer, self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QPrintPreviewWidgetVTable](vtbl)
   let self = QPrintPreviewWidget(h: self)
   var virtualReturn = vtbl[].metaObject(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QPrintPreviewWidgetmetacast*(self: gen_qprintpreviewwidget_types.QPrintPreviewWidget, param1: cstring): pointer =
   fcQPrintPreviewWidget_virtualbase_metacast(self.h, param1)
@@ -548,22 +550,28 @@ proc miqt_exec_callback_cQPrintPreviewWidget_devType(vtbl: pointer, self: pointe
   virtualReturn
 
 proc QPrintPreviewWidgetsizeHint*(self: gen_qprintpreviewwidget_types.QPrintPreviewWidget, ): gen_qsize_types.QSize =
-  gen_qsize_types.QSize(h: fcQPrintPreviewWidget_virtualbase_sizeHint(self.h))
+  gen_qsize_types.QSize(h: fcQPrintPreviewWidget_virtualbase_sizeHint(self.h), owned: true)
 
 proc miqt_exec_callback_cQPrintPreviewWidget_sizeHint(vtbl: pointer, self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QPrintPreviewWidgetVTable](vtbl)
   let self = QPrintPreviewWidget(h: self)
   var virtualReturn = vtbl[].sizeHint(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QPrintPreviewWidgetminimumSizeHint*(self: gen_qprintpreviewwidget_types.QPrintPreviewWidget, ): gen_qsize_types.QSize =
-  gen_qsize_types.QSize(h: fcQPrintPreviewWidget_virtualbase_minimumSizeHint(self.h))
+  gen_qsize_types.QSize(h: fcQPrintPreviewWidget_virtualbase_minimumSizeHint(self.h), owned: true)
 
 proc miqt_exec_callback_cQPrintPreviewWidget_minimumSizeHint(vtbl: pointer, self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QPrintPreviewWidgetVTable](vtbl)
   let self = QPrintPreviewWidget(h: self)
   var virtualReturn = vtbl[].minimumSizeHint(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QPrintPreviewWidgetheightForWidth*(self: gen_qprintpreviewwidget_types.QPrintPreviewWidget, param1: cint): cint =
   fcQPrintPreviewWidget_virtualbase_heightForWidth(self.h, param1)
@@ -585,13 +593,16 @@ proc miqt_exec_callback_cQPrintPreviewWidget_hasHeightForWidth(vtbl: pointer, se
   virtualReturn
 
 proc QPrintPreviewWidgetpaintEngine*(self: gen_qprintpreviewwidget_types.QPrintPreviewWidget, ): gen_qpaintengine_types.QPaintEngine =
-  gen_qpaintengine_types.QPaintEngine(h: fcQPrintPreviewWidget_virtualbase_paintEngine(self.h))
+  gen_qpaintengine_types.QPaintEngine(h: fcQPrintPreviewWidget_virtualbase_paintEngine(self.h), owned: false)
 
 proc miqt_exec_callback_cQPrintPreviewWidget_paintEngine(vtbl: pointer, self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QPrintPreviewWidgetVTable](vtbl)
   let self = QPrintPreviewWidget(h: self)
   var virtualReturn = vtbl[].paintEngine(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QPrintPreviewWidgetevent*(self: gen_qprintpreviewwidget_types.QPrintPreviewWidget, event: gen_qcoreevent_types.QEvent): bool =
   fcQPrintPreviewWidget_virtualbase_event(self.h, event.h)
@@ -599,7 +610,7 @@ proc QPrintPreviewWidgetevent*(self: gen_qprintpreviewwidget_types.QPrintPreview
 proc miqt_exec_callback_cQPrintPreviewWidget_event(vtbl: pointer, self: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QPrintPreviewWidgetVTable](vtbl)
   let self = QPrintPreviewWidget(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].event(self, slotval1)
   virtualReturn
 
@@ -609,7 +620,7 @@ proc QPrintPreviewWidgetmousePressEvent*(self: gen_qprintpreviewwidget_types.QPr
 proc miqt_exec_callback_cQPrintPreviewWidget_mousePressEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QPrintPreviewWidgetVTable](vtbl)
   let self = QPrintPreviewWidget(h: self)
-  let slotval1 = gen_qevent_types.QMouseEvent(h: event)
+  let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   vtbl[].mousePressEvent(self, slotval1)
 
 proc QPrintPreviewWidgetmouseReleaseEvent*(self: gen_qprintpreviewwidget_types.QPrintPreviewWidget, event: gen_qevent_types.QMouseEvent): void =
@@ -618,7 +629,7 @@ proc QPrintPreviewWidgetmouseReleaseEvent*(self: gen_qprintpreviewwidget_types.Q
 proc miqt_exec_callback_cQPrintPreviewWidget_mouseReleaseEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QPrintPreviewWidgetVTable](vtbl)
   let self = QPrintPreviewWidget(h: self)
-  let slotval1 = gen_qevent_types.QMouseEvent(h: event)
+  let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   vtbl[].mouseReleaseEvent(self, slotval1)
 
 proc QPrintPreviewWidgetmouseDoubleClickEvent*(self: gen_qprintpreviewwidget_types.QPrintPreviewWidget, event: gen_qevent_types.QMouseEvent): void =
@@ -627,7 +638,7 @@ proc QPrintPreviewWidgetmouseDoubleClickEvent*(self: gen_qprintpreviewwidget_typ
 proc miqt_exec_callback_cQPrintPreviewWidget_mouseDoubleClickEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QPrintPreviewWidgetVTable](vtbl)
   let self = QPrintPreviewWidget(h: self)
-  let slotval1 = gen_qevent_types.QMouseEvent(h: event)
+  let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   vtbl[].mouseDoubleClickEvent(self, slotval1)
 
 proc QPrintPreviewWidgetmouseMoveEvent*(self: gen_qprintpreviewwidget_types.QPrintPreviewWidget, event: gen_qevent_types.QMouseEvent): void =
@@ -636,7 +647,7 @@ proc QPrintPreviewWidgetmouseMoveEvent*(self: gen_qprintpreviewwidget_types.QPri
 proc miqt_exec_callback_cQPrintPreviewWidget_mouseMoveEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QPrintPreviewWidgetVTable](vtbl)
   let self = QPrintPreviewWidget(h: self)
-  let slotval1 = gen_qevent_types.QMouseEvent(h: event)
+  let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   vtbl[].mouseMoveEvent(self, slotval1)
 
 proc QPrintPreviewWidgetwheelEvent*(self: gen_qprintpreviewwidget_types.QPrintPreviewWidget, event: gen_qevent_types.QWheelEvent): void =
@@ -645,7 +656,7 @@ proc QPrintPreviewWidgetwheelEvent*(self: gen_qprintpreviewwidget_types.QPrintPr
 proc miqt_exec_callback_cQPrintPreviewWidget_wheelEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QPrintPreviewWidgetVTable](vtbl)
   let self = QPrintPreviewWidget(h: self)
-  let slotval1 = gen_qevent_types.QWheelEvent(h: event)
+  let slotval1 = gen_qevent_types.QWheelEvent(h: event, owned: false)
   vtbl[].wheelEvent(self, slotval1)
 
 proc QPrintPreviewWidgetkeyPressEvent*(self: gen_qprintpreviewwidget_types.QPrintPreviewWidget, event: gen_qevent_types.QKeyEvent): void =
@@ -654,7 +665,7 @@ proc QPrintPreviewWidgetkeyPressEvent*(self: gen_qprintpreviewwidget_types.QPrin
 proc miqt_exec_callback_cQPrintPreviewWidget_keyPressEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QPrintPreviewWidgetVTable](vtbl)
   let self = QPrintPreviewWidget(h: self)
-  let slotval1 = gen_qevent_types.QKeyEvent(h: event)
+  let slotval1 = gen_qevent_types.QKeyEvent(h: event, owned: false)
   vtbl[].keyPressEvent(self, slotval1)
 
 proc QPrintPreviewWidgetkeyReleaseEvent*(self: gen_qprintpreviewwidget_types.QPrintPreviewWidget, event: gen_qevent_types.QKeyEvent): void =
@@ -663,7 +674,7 @@ proc QPrintPreviewWidgetkeyReleaseEvent*(self: gen_qprintpreviewwidget_types.QPr
 proc miqt_exec_callback_cQPrintPreviewWidget_keyReleaseEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QPrintPreviewWidgetVTable](vtbl)
   let self = QPrintPreviewWidget(h: self)
-  let slotval1 = gen_qevent_types.QKeyEvent(h: event)
+  let slotval1 = gen_qevent_types.QKeyEvent(h: event, owned: false)
   vtbl[].keyReleaseEvent(self, slotval1)
 
 proc QPrintPreviewWidgetfocusInEvent*(self: gen_qprintpreviewwidget_types.QPrintPreviewWidget, event: gen_qevent_types.QFocusEvent): void =
@@ -672,7 +683,7 @@ proc QPrintPreviewWidgetfocusInEvent*(self: gen_qprintpreviewwidget_types.QPrint
 proc miqt_exec_callback_cQPrintPreviewWidget_focusInEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QPrintPreviewWidgetVTable](vtbl)
   let self = QPrintPreviewWidget(h: self)
-  let slotval1 = gen_qevent_types.QFocusEvent(h: event)
+  let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
   vtbl[].focusInEvent(self, slotval1)
 
 proc QPrintPreviewWidgetfocusOutEvent*(self: gen_qprintpreviewwidget_types.QPrintPreviewWidget, event: gen_qevent_types.QFocusEvent): void =
@@ -681,7 +692,7 @@ proc QPrintPreviewWidgetfocusOutEvent*(self: gen_qprintpreviewwidget_types.QPrin
 proc miqt_exec_callback_cQPrintPreviewWidget_focusOutEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QPrintPreviewWidgetVTable](vtbl)
   let self = QPrintPreviewWidget(h: self)
-  let slotval1 = gen_qevent_types.QFocusEvent(h: event)
+  let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
   vtbl[].focusOutEvent(self, slotval1)
 
 proc QPrintPreviewWidgetenterEvent*(self: gen_qprintpreviewwidget_types.QPrintPreviewWidget, event: gen_qcoreevent_types.QEvent): void =
@@ -690,7 +701,7 @@ proc QPrintPreviewWidgetenterEvent*(self: gen_qprintpreviewwidget_types.QPrintPr
 proc miqt_exec_callback_cQPrintPreviewWidget_enterEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QPrintPreviewWidgetVTable](vtbl)
   let self = QPrintPreviewWidget(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].enterEvent(self, slotval1)
 
 proc QPrintPreviewWidgetleaveEvent*(self: gen_qprintpreviewwidget_types.QPrintPreviewWidget, event: gen_qcoreevent_types.QEvent): void =
@@ -699,7 +710,7 @@ proc QPrintPreviewWidgetleaveEvent*(self: gen_qprintpreviewwidget_types.QPrintPr
 proc miqt_exec_callback_cQPrintPreviewWidget_leaveEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QPrintPreviewWidgetVTable](vtbl)
   let self = QPrintPreviewWidget(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].leaveEvent(self, slotval1)
 
 proc QPrintPreviewWidgetpaintEvent*(self: gen_qprintpreviewwidget_types.QPrintPreviewWidget, event: gen_qevent_types.QPaintEvent): void =
@@ -708,7 +719,7 @@ proc QPrintPreviewWidgetpaintEvent*(self: gen_qprintpreviewwidget_types.QPrintPr
 proc miqt_exec_callback_cQPrintPreviewWidget_paintEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QPrintPreviewWidgetVTable](vtbl)
   let self = QPrintPreviewWidget(h: self)
-  let slotval1 = gen_qevent_types.QPaintEvent(h: event)
+  let slotval1 = gen_qevent_types.QPaintEvent(h: event, owned: false)
   vtbl[].paintEvent(self, slotval1)
 
 proc QPrintPreviewWidgetmoveEvent*(self: gen_qprintpreviewwidget_types.QPrintPreviewWidget, event: gen_qevent_types.QMoveEvent): void =
@@ -717,7 +728,7 @@ proc QPrintPreviewWidgetmoveEvent*(self: gen_qprintpreviewwidget_types.QPrintPre
 proc miqt_exec_callback_cQPrintPreviewWidget_moveEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QPrintPreviewWidgetVTable](vtbl)
   let self = QPrintPreviewWidget(h: self)
-  let slotval1 = gen_qevent_types.QMoveEvent(h: event)
+  let slotval1 = gen_qevent_types.QMoveEvent(h: event, owned: false)
   vtbl[].moveEvent(self, slotval1)
 
 proc QPrintPreviewWidgetresizeEvent*(self: gen_qprintpreviewwidget_types.QPrintPreviewWidget, event: gen_qevent_types.QResizeEvent): void =
@@ -726,7 +737,7 @@ proc QPrintPreviewWidgetresizeEvent*(self: gen_qprintpreviewwidget_types.QPrintP
 proc miqt_exec_callback_cQPrintPreviewWidget_resizeEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QPrintPreviewWidgetVTable](vtbl)
   let self = QPrintPreviewWidget(h: self)
-  let slotval1 = gen_qevent_types.QResizeEvent(h: event)
+  let slotval1 = gen_qevent_types.QResizeEvent(h: event, owned: false)
   vtbl[].resizeEvent(self, slotval1)
 
 proc QPrintPreviewWidgetcloseEvent*(self: gen_qprintpreviewwidget_types.QPrintPreviewWidget, event: gen_qevent_types.QCloseEvent): void =
@@ -735,7 +746,7 @@ proc QPrintPreviewWidgetcloseEvent*(self: gen_qprintpreviewwidget_types.QPrintPr
 proc miqt_exec_callback_cQPrintPreviewWidget_closeEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QPrintPreviewWidgetVTable](vtbl)
   let self = QPrintPreviewWidget(h: self)
-  let slotval1 = gen_qevent_types.QCloseEvent(h: event)
+  let slotval1 = gen_qevent_types.QCloseEvent(h: event, owned: false)
   vtbl[].closeEvent(self, slotval1)
 
 proc QPrintPreviewWidgetcontextMenuEvent*(self: gen_qprintpreviewwidget_types.QPrintPreviewWidget, event: gen_qevent_types.QContextMenuEvent): void =
@@ -744,7 +755,7 @@ proc QPrintPreviewWidgetcontextMenuEvent*(self: gen_qprintpreviewwidget_types.QP
 proc miqt_exec_callback_cQPrintPreviewWidget_contextMenuEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QPrintPreviewWidgetVTable](vtbl)
   let self = QPrintPreviewWidget(h: self)
-  let slotval1 = gen_qevent_types.QContextMenuEvent(h: event)
+  let slotval1 = gen_qevent_types.QContextMenuEvent(h: event, owned: false)
   vtbl[].contextMenuEvent(self, slotval1)
 
 proc QPrintPreviewWidgettabletEvent*(self: gen_qprintpreviewwidget_types.QPrintPreviewWidget, event: gen_qevent_types.QTabletEvent): void =
@@ -753,7 +764,7 @@ proc QPrintPreviewWidgettabletEvent*(self: gen_qprintpreviewwidget_types.QPrintP
 proc miqt_exec_callback_cQPrintPreviewWidget_tabletEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QPrintPreviewWidgetVTable](vtbl)
   let self = QPrintPreviewWidget(h: self)
-  let slotval1 = gen_qevent_types.QTabletEvent(h: event)
+  let slotval1 = gen_qevent_types.QTabletEvent(h: event, owned: false)
   vtbl[].tabletEvent(self, slotval1)
 
 proc QPrintPreviewWidgetactionEvent*(self: gen_qprintpreviewwidget_types.QPrintPreviewWidget, event: gen_qevent_types.QActionEvent): void =
@@ -762,7 +773,7 @@ proc QPrintPreviewWidgetactionEvent*(self: gen_qprintpreviewwidget_types.QPrintP
 proc miqt_exec_callback_cQPrintPreviewWidget_actionEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QPrintPreviewWidgetVTable](vtbl)
   let self = QPrintPreviewWidget(h: self)
-  let slotval1 = gen_qevent_types.QActionEvent(h: event)
+  let slotval1 = gen_qevent_types.QActionEvent(h: event, owned: false)
   vtbl[].actionEvent(self, slotval1)
 
 proc QPrintPreviewWidgetdragEnterEvent*(self: gen_qprintpreviewwidget_types.QPrintPreviewWidget, event: gen_qevent_types.QDragEnterEvent): void =
@@ -771,7 +782,7 @@ proc QPrintPreviewWidgetdragEnterEvent*(self: gen_qprintpreviewwidget_types.QPri
 proc miqt_exec_callback_cQPrintPreviewWidget_dragEnterEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QPrintPreviewWidgetVTable](vtbl)
   let self = QPrintPreviewWidget(h: self)
-  let slotval1 = gen_qevent_types.QDragEnterEvent(h: event)
+  let slotval1 = gen_qevent_types.QDragEnterEvent(h: event, owned: false)
   vtbl[].dragEnterEvent(self, slotval1)
 
 proc QPrintPreviewWidgetdragMoveEvent*(self: gen_qprintpreviewwidget_types.QPrintPreviewWidget, event: gen_qevent_types.QDragMoveEvent): void =
@@ -780,7 +791,7 @@ proc QPrintPreviewWidgetdragMoveEvent*(self: gen_qprintpreviewwidget_types.QPrin
 proc miqt_exec_callback_cQPrintPreviewWidget_dragMoveEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QPrintPreviewWidgetVTable](vtbl)
   let self = QPrintPreviewWidget(h: self)
-  let slotval1 = gen_qevent_types.QDragMoveEvent(h: event)
+  let slotval1 = gen_qevent_types.QDragMoveEvent(h: event, owned: false)
   vtbl[].dragMoveEvent(self, slotval1)
 
 proc QPrintPreviewWidgetdragLeaveEvent*(self: gen_qprintpreviewwidget_types.QPrintPreviewWidget, event: gen_qevent_types.QDragLeaveEvent): void =
@@ -789,7 +800,7 @@ proc QPrintPreviewWidgetdragLeaveEvent*(self: gen_qprintpreviewwidget_types.QPri
 proc miqt_exec_callback_cQPrintPreviewWidget_dragLeaveEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QPrintPreviewWidgetVTable](vtbl)
   let self = QPrintPreviewWidget(h: self)
-  let slotval1 = gen_qevent_types.QDragLeaveEvent(h: event)
+  let slotval1 = gen_qevent_types.QDragLeaveEvent(h: event, owned: false)
   vtbl[].dragLeaveEvent(self, slotval1)
 
 proc QPrintPreviewWidgetdropEvent*(self: gen_qprintpreviewwidget_types.QPrintPreviewWidget, event: gen_qevent_types.QDropEvent): void =
@@ -798,7 +809,7 @@ proc QPrintPreviewWidgetdropEvent*(self: gen_qprintpreviewwidget_types.QPrintPre
 proc miqt_exec_callback_cQPrintPreviewWidget_dropEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QPrintPreviewWidgetVTable](vtbl)
   let self = QPrintPreviewWidget(h: self)
-  let slotval1 = gen_qevent_types.QDropEvent(h: event)
+  let slotval1 = gen_qevent_types.QDropEvent(h: event, owned: false)
   vtbl[].dropEvent(self, slotval1)
 
 proc QPrintPreviewWidgetshowEvent*(self: gen_qprintpreviewwidget_types.QPrintPreviewWidget, event: gen_qevent_types.QShowEvent): void =
@@ -807,7 +818,7 @@ proc QPrintPreviewWidgetshowEvent*(self: gen_qprintpreviewwidget_types.QPrintPre
 proc miqt_exec_callback_cQPrintPreviewWidget_showEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QPrintPreviewWidgetVTable](vtbl)
   let self = QPrintPreviewWidget(h: self)
-  let slotval1 = gen_qevent_types.QShowEvent(h: event)
+  let slotval1 = gen_qevent_types.QShowEvent(h: event, owned: false)
   vtbl[].showEvent(self, slotval1)
 
 proc QPrintPreviewWidgethideEvent*(self: gen_qprintpreviewwidget_types.QPrintPreviewWidget, event: gen_qevent_types.QHideEvent): void =
@@ -816,7 +827,7 @@ proc QPrintPreviewWidgethideEvent*(self: gen_qprintpreviewwidget_types.QPrintPre
 proc miqt_exec_callback_cQPrintPreviewWidget_hideEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QPrintPreviewWidgetVTable](vtbl)
   let self = QPrintPreviewWidget(h: self)
-  let slotval1 = gen_qevent_types.QHideEvent(h: event)
+  let slotval1 = gen_qevent_types.QHideEvent(h: event, owned: false)
   vtbl[].hideEvent(self, slotval1)
 
 proc QPrintPreviewWidgetnativeEvent*(self: gen_qprintpreviewwidget_types.QPrintPreviewWidget, eventType: seq[byte], message: pointer, resultVal: ptr clong): bool =
@@ -840,7 +851,7 @@ proc QPrintPreviewWidgetchangeEvent*(self: gen_qprintpreviewwidget_types.QPrintP
 proc miqt_exec_callback_cQPrintPreviewWidget_changeEvent(vtbl: pointer, self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QPrintPreviewWidgetVTable](vtbl)
   let self = QPrintPreviewWidget(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: param1)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: param1, owned: false)
   vtbl[].changeEvent(self, slotval1)
 
 proc QPrintPreviewWidgetmetric*(self: gen_qprintpreviewwidget_types.QPrintPreviewWidget, param1: cint): cint =
@@ -859,27 +870,33 @@ proc QPrintPreviewWidgetinitPainter*(self: gen_qprintpreviewwidget_types.QPrintP
 proc miqt_exec_callback_cQPrintPreviewWidget_initPainter(vtbl: pointer, self: pointer, painter: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QPrintPreviewWidgetVTable](vtbl)
   let self = QPrintPreviewWidget(h: self)
-  let slotval1 = gen_qpainter_types.QPainter(h: painter)
+  let slotval1 = gen_qpainter_types.QPainter(h: painter, owned: false)
   vtbl[].initPainter(self, slotval1)
 
 proc QPrintPreviewWidgetredirected*(self: gen_qprintpreviewwidget_types.QPrintPreviewWidget, offset: gen_qpoint_types.QPoint): gen_qpaintdevice_types.QPaintDevice =
-  gen_qpaintdevice_types.QPaintDevice(h: fcQPrintPreviewWidget_virtualbase_redirected(self.h, offset.h))
+  gen_qpaintdevice_types.QPaintDevice(h: fcQPrintPreviewWidget_virtualbase_redirected(self.h, offset.h), owned: false)
 
 proc miqt_exec_callback_cQPrintPreviewWidget_redirected(vtbl: pointer, self: pointer, offset: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QPrintPreviewWidgetVTable](vtbl)
   let self = QPrintPreviewWidget(h: self)
-  let slotval1 = gen_qpoint_types.QPoint(h: offset)
+  let slotval1 = gen_qpoint_types.QPoint(h: offset, owned: false)
   var virtualReturn = vtbl[].redirected(self, slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QPrintPreviewWidgetsharedPainter*(self: gen_qprintpreviewwidget_types.QPrintPreviewWidget, ): gen_qpainter_types.QPainter =
-  gen_qpainter_types.QPainter(h: fcQPrintPreviewWidget_virtualbase_sharedPainter(self.h))
+  gen_qpainter_types.QPainter(h: fcQPrintPreviewWidget_virtualbase_sharedPainter(self.h), owned: false)
 
 proc miqt_exec_callback_cQPrintPreviewWidget_sharedPainter(vtbl: pointer, self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QPrintPreviewWidgetVTable](vtbl)
   let self = QPrintPreviewWidget(h: self)
   var virtualReturn = vtbl[].sharedPainter(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QPrintPreviewWidgetinputMethodEvent*(self: gen_qprintpreviewwidget_types.QPrintPreviewWidget, param1: gen_qevent_types.QInputMethodEvent): void =
   fcQPrintPreviewWidget_virtualbase_inputMethodEvent(self.h, param1.h)
@@ -887,18 +904,21 @@ proc QPrintPreviewWidgetinputMethodEvent*(self: gen_qprintpreviewwidget_types.QP
 proc miqt_exec_callback_cQPrintPreviewWidget_inputMethodEvent(vtbl: pointer, self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QPrintPreviewWidgetVTable](vtbl)
   let self = QPrintPreviewWidget(h: self)
-  let slotval1 = gen_qevent_types.QInputMethodEvent(h: param1)
+  let slotval1 = gen_qevent_types.QInputMethodEvent(h: param1, owned: false)
   vtbl[].inputMethodEvent(self, slotval1)
 
 proc QPrintPreviewWidgetinputMethodQuery*(self: gen_qprintpreviewwidget_types.QPrintPreviewWidget, param1: cint): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQPrintPreviewWidget_virtualbase_inputMethodQuery(self.h, cint(param1)))
+  gen_qvariant_types.QVariant(h: fcQPrintPreviewWidget_virtualbase_inputMethodQuery(self.h, cint(param1)), owned: true)
 
 proc miqt_exec_callback_cQPrintPreviewWidget_inputMethodQuery(vtbl: pointer, self: pointer, param1: cint): pointer {.cdecl.} =
   let vtbl = cast[ptr QPrintPreviewWidgetVTable](vtbl)
   let self = QPrintPreviewWidget(h: self)
   let slotval1 = cint(param1)
   var virtualReturn = vtbl[].inputMethodQuery(self, slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QPrintPreviewWidgetfocusNextPrevChild*(self: gen_qprintpreviewwidget_types.QPrintPreviewWidget, next: bool): bool =
   fcQPrintPreviewWidget_virtualbase_focusNextPrevChild(self.h, next)
@@ -916,8 +936,8 @@ proc QPrintPreviewWidgeteventFilter*(self: gen_qprintpreviewwidget_types.QPrintP
 proc miqt_exec_callback_cQPrintPreviewWidget_eventFilter(vtbl: pointer, self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QPrintPreviewWidgetVTable](vtbl)
   let self = QPrintPreviewWidget(h: self)
-  let slotval1 = gen_qobject_types.QObject(h: watched)
-  let slotval2 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].eventFilter(self, slotval1, slotval2)
   virtualReturn
 
@@ -927,7 +947,7 @@ proc QPrintPreviewWidgettimerEvent*(self: gen_qprintpreviewwidget_types.QPrintPr
 proc miqt_exec_callback_cQPrintPreviewWidget_timerEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QPrintPreviewWidgetVTable](vtbl)
   let self = QPrintPreviewWidget(h: self)
-  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   vtbl[].timerEvent(self, slotval1)
 
 proc QPrintPreviewWidgetchildEvent*(self: gen_qprintpreviewwidget_types.QPrintPreviewWidget, event: gen_qcoreevent_types.QChildEvent): void =
@@ -936,7 +956,7 @@ proc QPrintPreviewWidgetchildEvent*(self: gen_qprintpreviewwidget_types.QPrintPr
 proc miqt_exec_callback_cQPrintPreviewWidget_childEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QPrintPreviewWidgetVTable](vtbl)
   let self = QPrintPreviewWidget(h: self)
-  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   vtbl[].childEvent(self, slotval1)
 
 proc QPrintPreviewWidgetcustomEvent*(self: gen_qprintpreviewwidget_types.QPrintPreviewWidget, event: gen_qcoreevent_types.QEvent): void =
@@ -945,7 +965,7 @@ proc QPrintPreviewWidgetcustomEvent*(self: gen_qprintpreviewwidget_types.QPrintP
 proc miqt_exec_callback_cQPrintPreviewWidget_customEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QPrintPreviewWidgetVTable](vtbl)
   let self = QPrintPreviewWidget(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].customEvent(self, slotval1)
 
 proc QPrintPreviewWidgetconnectNotify*(self: gen_qprintpreviewwidget_types.QPrintPreviewWidget, signal: gen_qmetaobject_types.QMetaMethod): void =
@@ -954,7 +974,7 @@ proc QPrintPreviewWidgetconnectNotify*(self: gen_qprintpreviewwidget_types.QPrin
 proc miqt_exec_callback_cQPrintPreviewWidget_connectNotify(vtbl: pointer, self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QPrintPreviewWidgetVTable](vtbl)
   let self = QPrintPreviewWidget(h: self)
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].connectNotify(self, slotval1)
 
 proc QPrintPreviewWidgetdisconnectNotify*(self: gen_qprintpreviewwidget_types.QPrintPreviewWidget, signal: gen_qmetaobject_types.QMetaMethod): void =
@@ -963,8 +983,399 @@ proc QPrintPreviewWidgetdisconnectNotify*(self: gen_qprintpreviewwidget_types.QP
 proc miqt_exec_callback_cQPrintPreviewWidget_disconnectNotify(vtbl: pointer, self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QPrintPreviewWidgetVTable](vtbl)
   let self = QPrintPreviewWidget(h: self)
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].disconnectNotify(self, slotval1)
+
+type VirtualQPrintPreviewWidget* {.inheritable.} = ref object of QPrintPreviewWidget
+  vtbl*: cQPrintPreviewWidgetVTable
+method metaObject*(self: VirtualQPrintPreviewWidget, ): gen_qobjectdefs_types.QMetaObject {.base.} =
+  QPrintPreviewWidgetmetaObject(self[])
+proc miqt_exec_method_cQPrintPreviewWidget_metaObject(vtbl: pointer, inst: pointer): pointer {.cdecl.} =
+  let vtbl = cast[VirtualQPrintPreviewWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQPrintPreviewWidget, vtbl)))
+  var virtualReturn = vtbl.metaObject()
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
+
+method metacast*(self: VirtualQPrintPreviewWidget, param1: cstring): pointer {.base.} =
+  QPrintPreviewWidgetmetacast(self[], param1)
+proc miqt_exec_method_cQPrintPreviewWidget_metacast(vtbl: pointer, inst: pointer, param1: cstring): pointer {.cdecl.} =
+  let vtbl = cast[VirtualQPrintPreviewWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQPrintPreviewWidget, vtbl)))
+  let slotval1 = (param1)
+  var virtualReturn = vtbl.metacast(slotval1)
+  virtualReturn
+
+method metacall*(self: VirtualQPrintPreviewWidget, param1: cint, param2: cint, param3: pointer): cint {.base.} =
+  QPrintPreviewWidgetmetacall(self[], param1, param2, param3)
+proc miqt_exec_method_cQPrintPreviewWidget_metacall(vtbl: pointer, inst: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
+  let vtbl = cast[VirtualQPrintPreviewWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQPrintPreviewWidget, vtbl)))
+  let slotval1 = cint(param1)
+  let slotval2 = param2
+  let slotval3 = param3
+  var virtualReturn = vtbl.metacall(slotval1, slotval2, slotval3)
+  virtualReturn
+
+method setVisible*(self: VirtualQPrintPreviewWidget, visible: bool): void {.base.} =
+  QPrintPreviewWidgetsetVisible(self[], visible)
+proc miqt_exec_method_cQPrintPreviewWidget_setVisible(vtbl: pointer, inst: pointer, visible: bool): void {.cdecl.} =
+  let vtbl = cast[VirtualQPrintPreviewWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQPrintPreviewWidget, vtbl)))
+  let slotval1 = visible
+  vtbl.setVisible(slotval1)
+
+method devType*(self: VirtualQPrintPreviewWidget, ): cint {.base.} =
+  QPrintPreviewWidgetdevType(self[])
+proc miqt_exec_method_cQPrintPreviewWidget_devType(vtbl: pointer, inst: pointer): cint {.cdecl.} =
+  let vtbl = cast[VirtualQPrintPreviewWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQPrintPreviewWidget, vtbl)))
+  var virtualReturn = vtbl.devType()
+  virtualReturn
+
+method sizeHint*(self: VirtualQPrintPreviewWidget, ): gen_qsize_types.QSize {.base.} =
+  QPrintPreviewWidgetsizeHint(self[])
+proc miqt_exec_method_cQPrintPreviewWidget_sizeHint(vtbl: pointer, inst: pointer): pointer {.cdecl.} =
+  let vtbl = cast[VirtualQPrintPreviewWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQPrintPreviewWidget, vtbl)))
+  var virtualReturn = vtbl.sizeHint()
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
+
+method minimumSizeHint*(self: VirtualQPrintPreviewWidget, ): gen_qsize_types.QSize {.base.} =
+  QPrintPreviewWidgetminimumSizeHint(self[])
+proc miqt_exec_method_cQPrintPreviewWidget_minimumSizeHint(vtbl: pointer, inst: pointer): pointer {.cdecl.} =
+  let vtbl = cast[VirtualQPrintPreviewWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQPrintPreviewWidget, vtbl)))
+  var virtualReturn = vtbl.minimumSizeHint()
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
+
+method heightForWidth*(self: VirtualQPrintPreviewWidget, param1: cint): cint {.base.} =
+  QPrintPreviewWidgetheightForWidth(self[], param1)
+proc miqt_exec_method_cQPrintPreviewWidget_heightForWidth(vtbl: pointer, inst: pointer, param1: cint): cint {.cdecl.} =
+  let vtbl = cast[VirtualQPrintPreviewWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQPrintPreviewWidget, vtbl)))
+  let slotval1 = param1
+  var virtualReturn = vtbl.heightForWidth(slotval1)
+  virtualReturn
+
+method hasHeightForWidth*(self: VirtualQPrintPreviewWidget, ): bool {.base.} =
+  QPrintPreviewWidgethasHeightForWidth(self[])
+proc miqt_exec_method_cQPrintPreviewWidget_hasHeightForWidth(vtbl: pointer, inst: pointer): bool {.cdecl.} =
+  let vtbl = cast[VirtualQPrintPreviewWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQPrintPreviewWidget, vtbl)))
+  var virtualReturn = vtbl.hasHeightForWidth()
+  virtualReturn
+
+method paintEngine*(self: VirtualQPrintPreviewWidget, ): gen_qpaintengine_types.QPaintEngine {.base.} =
+  QPrintPreviewWidgetpaintEngine(self[])
+proc miqt_exec_method_cQPrintPreviewWidget_paintEngine(vtbl: pointer, inst: pointer): pointer {.cdecl.} =
+  let vtbl = cast[VirtualQPrintPreviewWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQPrintPreviewWidget, vtbl)))
+  var virtualReturn = vtbl.paintEngine()
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
+
+method event*(self: VirtualQPrintPreviewWidget, event: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QPrintPreviewWidgetevent(self[], event)
+proc miqt_exec_method_cQPrintPreviewWidget_event(vtbl: pointer, inst: pointer, event: pointer): bool {.cdecl.} =
+  let vtbl = cast[VirtualQPrintPreviewWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQPrintPreviewWidget, vtbl)))
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
+  var virtualReturn = vtbl.event(slotval1)
+  virtualReturn
+
+method mousePressEvent*(self: VirtualQPrintPreviewWidget, event: gen_qevent_types.QMouseEvent): void {.base.} =
+  QPrintPreviewWidgetmousePressEvent(self[], event)
+proc miqt_exec_method_cQPrintPreviewWidget_mousePressEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQPrintPreviewWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQPrintPreviewWidget, vtbl)))
+  let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
+  vtbl.mousePressEvent(slotval1)
+
+method mouseReleaseEvent*(self: VirtualQPrintPreviewWidget, event: gen_qevent_types.QMouseEvent): void {.base.} =
+  QPrintPreviewWidgetmouseReleaseEvent(self[], event)
+proc miqt_exec_method_cQPrintPreviewWidget_mouseReleaseEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQPrintPreviewWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQPrintPreviewWidget, vtbl)))
+  let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
+  vtbl.mouseReleaseEvent(slotval1)
+
+method mouseDoubleClickEvent*(self: VirtualQPrintPreviewWidget, event: gen_qevent_types.QMouseEvent): void {.base.} =
+  QPrintPreviewWidgetmouseDoubleClickEvent(self[], event)
+proc miqt_exec_method_cQPrintPreviewWidget_mouseDoubleClickEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQPrintPreviewWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQPrintPreviewWidget, vtbl)))
+  let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
+  vtbl.mouseDoubleClickEvent(slotval1)
+
+method mouseMoveEvent*(self: VirtualQPrintPreviewWidget, event: gen_qevent_types.QMouseEvent): void {.base.} =
+  QPrintPreviewWidgetmouseMoveEvent(self[], event)
+proc miqt_exec_method_cQPrintPreviewWidget_mouseMoveEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQPrintPreviewWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQPrintPreviewWidget, vtbl)))
+  let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
+  vtbl.mouseMoveEvent(slotval1)
+
+method wheelEvent*(self: VirtualQPrintPreviewWidget, event: gen_qevent_types.QWheelEvent): void {.base.} =
+  QPrintPreviewWidgetwheelEvent(self[], event)
+proc miqt_exec_method_cQPrintPreviewWidget_wheelEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQPrintPreviewWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQPrintPreviewWidget, vtbl)))
+  let slotval1 = gen_qevent_types.QWheelEvent(h: event, owned: false)
+  vtbl.wheelEvent(slotval1)
+
+method keyPressEvent*(self: VirtualQPrintPreviewWidget, event: gen_qevent_types.QKeyEvent): void {.base.} =
+  QPrintPreviewWidgetkeyPressEvent(self[], event)
+proc miqt_exec_method_cQPrintPreviewWidget_keyPressEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQPrintPreviewWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQPrintPreviewWidget, vtbl)))
+  let slotval1 = gen_qevent_types.QKeyEvent(h: event, owned: false)
+  vtbl.keyPressEvent(slotval1)
+
+method keyReleaseEvent*(self: VirtualQPrintPreviewWidget, event: gen_qevent_types.QKeyEvent): void {.base.} =
+  QPrintPreviewWidgetkeyReleaseEvent(self[], event)
+proc miqt_exec_method_cQPrintPreviewWidget_keyReleaseEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQPrintPreviewWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQPrintPreviewWidget, vtbl)))
+  let slotval1 = gen_qevent_types.QKeyEvent(h: event, owned: false)
+  vtbl.keyReleaseEvent(slotval1)
+
+method focusInEvent*(self: VirtualQPrintPreviewWidget, event: gen_qevent_types.QFocusEvent): void {.base.} =
+  QPrintPreviewWidgetfocusInEvent(self[], event)
+proc miqt_exec_method_cQPrintPreviewWidget_focusInEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQPrintPreviewWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQPrintPreviewWidget, vtbl)))
+  let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
+  vtbl.focusInEvent(slotval1)
+
+method focusOutEvent*(self: VirtualQPrintPreviewWidget, event: gen_qevent_types.QFocusEvent): void {.base.} =
+  QPrintPreviewWidgetfocusOutEvent(self[], event)
+proc miqt_exec_method_cQPrintPreviewWidget_focusOutEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQPrintPreviewWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQPrintPreviewWidget, vtbl)))
+  let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
+  vtbl.focusOutEvent(slotval1)
+
+method enterEvent*(self: VirtualQPrintPreviewWidget, event: gen_qcoreevent_types.QEvent): void {.base.} =
+  QPrintPreviewWidgetenterEvent(self[], event)
+proc miqt_exec_method_cQPrintPreviewWidget_enterEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQPrintPreviewWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQPrintPreviewWidget, vtbl)))
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
+  vtbl.enterEvent(slotval1)
+
+method leaveEvent*(self: VirtualQPrintPreviewWidget, event: gen_qcoreevent_types.QEvent): void {.base.} =
+  QPrintPreviewWidgetleaveEvent(self[], event)
+proc miqt_exec_method_cQPrintPreviewWidget_leaveEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQPrintPreviewWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQPrintPreviewWidget, vtbl)))
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
+  vtbl.leaveEvent(slotval1)
+
+method paintEvent*(self: VirtualQPrintPreviewWidget, event: gen_qevent_types.QPaintEvent): void {.base.} =
+  QPrintPreviewWidgetpaintEvent(self[], event)
+proc miqt_exec_method_cQPrintPreviewWidget_paintEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQPrintPreviewWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQPrintPreviewWidget, vtbl)))
+  let slotval1 = gen_qevent_types.QPaintEvent(h: event, owned: false)
+  vtbl.paintEvent(slotval1)
+
+method moveEvent*(self: VirtualQPrintPreviewWidget, event: gen_qevent_types.QMoveEvent): void {.base.} =
+  QPrintPreviewWidgetmoveEvent(self[], event)
+proc miqt_exec_method_cQPrintPreviewWidget_moveEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQPrintPreviewWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQPrintPreviewWidget, vtbl)))
+  let slotval1 = gen_qevent_types.QMoveEvent(h: event, owned: false)
+  vtbl.moveEvent(slotval1)
+
+method resizeEvent*(self: VirtualQPrintPreviewWidget, event: gen_qevent_types.QResizeEvent): void {.base.} =
+  QPrintPreviewWidgetresizeEvent(self[], event)
+proc miqt_exec_method_cQPrintPreviewWidget_resizeEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQPrintPreviewWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQPrintPreviewWidget, vtbl)))
+  let slotval1 = gen_qevent_types.QResizeEvent(h: event, owned: false)
+  vtbl.resizeEvent(slotval1)
+
+method closeEvent*(self: VirtualQPrintPreviewWidget, event: gen_qevent_types.QCloseEvent): void {.base.} =
+  QPrintPreviewWidgetcloseEvent(self[], event)
+proc miqt_exec_method_cQPrintPreviewWidget_closeEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQPrintPreviewWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQPrintPreviewWidget, vtbl)))
+  let slotval1 = gen_qevent_types.QCloseEvent(h: event, owned: false)
+  vtbl.closeEvent(slotval1)
+
+method contextMenuEvent*(self: VirtualQPrintPreviewWidget, event: gen_qevent_types.QContextMenuEvent): void {.base.} =
+  QPrintPreviewWidgetcontextMenuEvent(self[], event)
+proc miqt_exec_method_cQPrintPreviewWidget_contextMenuEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQPrintPreviewWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQPrintPreviewWidget, vtbl)))
+  let slotval1 = gen_qevent_types.QContextMenuEvent(h: event, owned: false)
+  vtbl.contextMenuEvent(slotval1)
+
+method tabletEvent*(self: VirtualQPrintPreviewWidget, event: gen_qevent_types.QTabletEvent): void {.base.} =
+  QPrintPreviewWidgettabletEvent(self[], event)
+proc miqt_exec_method_cQPrintPreviewWidget_tabletEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQPrintPreviewWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQPrintPreviewWidget, vtbl)))
+  let slotval1 = gen_qevent_types.QTabletEvent(h: event, owned: false)
+  vtbl.tabletEvent(slotval1)
+
+method actionEvent*(self: VirtualQPrintPreviewWidget, event: gen_qevent_types.QActionEvent): void {.base.} =
+  QPrintPreviewWidgetactionEvent(self[], event)
+proc miqt_exec_method_cQPrintPreviewWidget_actionEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQPrintPreviewWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQPrintPreviewWidget, vtbl)))
+  let slotval1 = gen_qevent_types.QActionEvent(h: event, owned: false)
+  vtbl.actionEvent(slotval1)
+
+method dragEnterEvent*(self: VirtualQPrintPreviewWidget, event: gen_qevent_types.QDragEnterEvent): void {.base.} =
+  QPrintPreviewWidgetdragEnterEvent(self[], event)
+proc miqt_exec_method_cQPrintPreviewWidget_dragEnterEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQPrintPreviewWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQPrintPreviewWidget, vtbl)))
+  let slotval1 = gen_qevent_types.QDragEnterEvent(h: event, owned: false)
+  vtbl.dragEnterEvent(slotval1)
+
+method dragMoveEvent*(self: VirtualQPrintPreviewWidget, event: gen_qevent_types.QDragMoveEvent): void {.base.} =
+  QPrintPreviewWidgetdragMoveEvent(self[], event)
+proc miqt_exec_method_cQPrintPreviewWidget_dragMoveEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQPrintPreviewWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQPrintPreviewWidget, vtbl)))
+  let slotval1 = gen_qevent_types.QDragMoveEvent(h: event, owned: false)
+  vtbl.dragMoveEvent(slotval1)
+
+method dragLeaveEvent*(self: VirtualQPrintPreviewWidget, event: gen_qevent_types.QDragLeaveEvent): void {.base.} =
+  QPrintPreviewWidgetdragLeaveEvent(self[], event)
+proc miqt_exec_method_cQPrintPreviewWidget_dragLeaveEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQPrintPreviewWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQPrintPreviewWidget, vtbl)))
+  let slotval1 = gen_qevent_types.QDragLeaveEvent(h: event, owned: false)
+  vtbl.dragLeaveEvent(slotval1)
+
+method dropEvent*(self: VirtualQPrintPreviewWidget, event: gen_qevent_types.QDropEvent): void {.base.} =
+  QPrintPreviewWidgetdropEvent(self[], event)
+proc miqt_exec_method_cQPrintPreviewWidget_dropEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQPrintPreviewWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQPrintPreviewWidget, vtbl)))
+  let slotval1 = gen_qevent_types.QDropEvent(h: event, owned: false)
+  vtbl.dropEvent(slotval1)
+
+method showEvent*(self: VirtualQPrintPreviewWidget, event: gen_qevent_types.QShowEvent): void {.base.} =
+  QPrintPreviewWidgetshowEvent(self[], event)
+proc miqt_exec_method_cQPrintPreviewWidget_showEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQPrintPreviewWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQPrintPreviewWidget, vtbl)))
+  let slotval1 = gen_qevent_types.QShowEvent(h: event, owned: false)
+  vtbl.showEvent(slotval1)
+
+method hideEvent*(self: VirtualQPrintPreviewWidget, event: gen_qevent_types.QHideEvent): void {.base.} =
+  QPrintPreviewWidgethideEvent(self[], event)
+proc miqt_exec_method_cQPrintPreviewWidget_hideEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQPrintPreviewWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQPrintPreviewWidget, vtbl)))
+  let slotval1 = gen_qevent_types.QHideEvent(h: event, owned: false)
+  vtbl.hideEvent(slotval1)
+
+method nativeEvent*(self: VirtualQPrintPreviewWidget, eventType: seq[byte], message: pointer, resultVal: ptr clong): bool {.base.} =
+  QPrintPreviewWidgetnativeEvent(self[], eventType, message, resultVal)
+proc miqt_exec_method_cQPrintPreviewWidget_nativeEvent(vtbl: pointer, inst: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr clong): bool {.cdecl.} =
+  let vtbl = cast[VirtualQPrintPreviewWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQPrintPreviewWidget, vtbl)))
+  var veventType_bytearray = eventType
+  var veventTypex_ret = @(toOpenArrayByte(veventType_bytearray.data, 0, int(veventType_bytearray.len)-1))
+  c_free(veventType_bytearray.data)
+  let slotval1 = veventTypex_ret
+  let slotval2 = message
+  let slotval3 = resultVal
+  var virtualReturn = vtbl.nativeEvent(slotval1, slotval2, slotval3)
+  virtualReturn
+
+method changeEvent*(self: VirtualQPrintPreviewWidget, param1: gen_qcoreevent_types.QEvent): void {.base.} =
+  QPrintPreviewWidgetchangeEvent(self[], param1)
+proc miqt_exec_method_cQPrintPreviewWidget_changeEvent(vtbl: pointer, inst: pointer, param1: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQPrintPreviewWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQPrintPreviewWidget, vtbl)))
+  let slotval1 = gen_qcoreevent_types.QEvent(h: param1, owned: false)
+  vtbl.changeEvent(slotval1)
+
+method metric*(self: VirtualQPrintPreviewWidget, param1: cint): cint {.base.} =
+  QPrintPreviewWidgetmetric(self[], param1)
+proc miqt_exec_method_cQPrintPreviewWidget_metric(vtbl: pointer, inst: pointer, param1: cint): cint {.cdecl.} =
+  let vtbl = cast[VirtualQPrintPreviewWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQPrintPreviewWidget, vtbl)))
+  let slotval1 = cint(param1)
+  var virtualReturn = vtbl.metric(slotval1)
+  virtualReturn
+
+method initPainter*(self: VirtualQPrintPreviewWidget, painter: gen_qpainter_types.QPainter): void {.base.} =
+  QPrintPreviewWidgetinitPainter(self[], painter)
+proc miqt_exec_method_cQPrintPreviewWidget_initPainter(vtbl: pointer, inst: pointer, painter: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQPrintPreviewWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQPrintPreviewWidget, vtbl)))
+  let slotval1 = gen_qpainter_types.QPainter(h: painter, owned: false)
+  vtbl.initPainter(slotval1)
+
+method redirected*(self: VirtualQPrintPreviewWidget, offset: gen_qpoint_types.QPoint): gen_qpaintdevice_types.QPaintDevice {.base.} =
+  QPrintPreviewWidgetredirected(self[], offset)
+proc miqt_exec_method_cQPrintPreviewWidget_redirected(vtbl: pointer, inst: pointer, offset: pointer): pointer {.cdecl.} =
+  let vtbl = cast[VirtualQPrintPreviewWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQPrintPreviewWidget, vtbl)))
+  let slotval1 = gen_qpoint_types.QPoint(h: offset, owned: false)
+  var virtualReturn = vtbl.redirected(slotval1)
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
+
+method sharedPainter*(self: VirtualQPrintPreviewWidget, ): gen_qpainter_types.QPainter {.base.} =
+  QPrintPreviewWidgetsharedPainter(self[])
+proc miqt_exec_method_cQPrintPreviewWidget_sharedPainter(vtbl: pointer, inst: pointer): pointer {.cdecl.} =
+  let vtbl = cast[VirtualQPrintPreviewWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQPrintPreviewWidget, vtbl)))
+  var virtualReturn = vtbl.sharedPainter()
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
+
+method inputMethodEvent*(self: VirtualQPrintPreviewWidget, param1: gen_qevent_types.QInputMethodEvent): void {.base.} =
+  QPrintPreviewWidgetinputMethodEvent(self[], param1)
+proc miqt_exec_method_cQPrintPreviewWidget_inputMethodEvent(vtbl: pointer, inst: pointer, param1: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQPrintPreviewWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQPrintPreviewWidget, vtbl)))
+  let slotval1 = gen_qevent_types.QInputMethodEvent(h: param1, owned: false)
+  vtbl.inputMethodEvent(slotval1)
+
+method inputMethodQuery*(self: VirtualQPrintPreviewWidget, param1: cint): gen_qvariant_types.QVariant {.base.} =
+  QPrintPreviewWidgetinputMethodQuery(self[], param1)
+proc miqt_exec_method_cQPrintPreviewWidget_inputMethodQuery(vtbl: pointer, inst: pointer, param1: cint): pointer {.cdecl.} =
+  let vtbl = cast[VirtualQPrintPreviewWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQPrintPreviewWidget, vtbl)))
+  let slotval1 = cint(param1)
+  var virtualReturn = vtbl.inputMethodQuery(slotval1)
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
+
+method focusNextPrevChild*(self: VirtualQPrintPreviewWidget, next: bool): bool {.base.} =
+  QPrintPreviewWidgetfocusNextPrevChild(self[], next)
+proc miqt_exec_method_cQPrintPreviewWidget_focusNextPrevChild(vtbl: pointer, inst: pointer, next: bool): bool {.cdecl.} =
+  let vtbl = cast[VirtualQPrintPreviewWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQPrintPreviewWidget, vtbl)))
+  let slotval1 = next
+  var virtualReturn = vtbl.focusNextPrevChild(slotval1)
+  virtualReturn
+
+method eventFilter*(self: VirtualQPrintPreviewWidget, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QPrintPreviewWidgeteventFilter(self[], watched, event)
+proc miqt_exec_method_cQPrintPreviewWidget_eventFilter(vtbl: pointer, inst: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
+  let vtbl = cast[VirtualQPrintPreviewWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQPrintPreviewWidget, vtbl)))
+  let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
+  var virtualReturn = vtbl.eventFilter(slotval1, slotval2)
+  virtualReturn
+
+method timerEvent*(self: VirtualQPrintPreviewWidget, event: gen_qcoreevent_types.QTimerEvent): void {.base.} =
+  QPrintPreviewWidgettimerEvent(self[], event)
+proc miqt_exec_method_cQPrintPreviewWidget_timerEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQPrintPreviewWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQPrintPreviewWidget, vtbl)))
+  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
+  vtbl.timerEvent(slotval1)
+
+method childEvent*(self: VirtualQPrintPreviewWidget, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
+  QPrintPreviewWidgetchildEvent(self[], event)
+proc miqt_exec_method_cQPrintPreviewWidget_childEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQPrintPreviewWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQPrintPreviewWidget, vtbl)))
+  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
+  vtbl.childEvent(slotval1)
+
+method customEvent*(self: VirtualQPrintPreviewWidget, event: gen_qcoreevent_types.QEvent): void {.base.} =
+  QPrintPreviewWidgetcustomEvent(self[], event)
+proc miqt_exec_method_cQPrintPreviewWidget_customEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQPrintPreviewWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQPrintPreviewWidget, vtbl)))
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
+  vtbl.customEvent(slotval1)
+
+method connectNotify*(self: VirtualQPrintPreviewWidget, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QPrintPreviewWidgetconnectNotify(self[], signal)
+proc miqt_exec_method_cQPrintPreviewWidget_connectNotify(vtbl: pointer, inst: pointer, signal: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQPrintPreviewWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQPrintPreviewWidget, vtbl)))
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
+  vtbl.connectNotify(slotval1)
+
+method disconnectNotify*(self: VirtualQPrintPreviewWidget, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QPrintPreviewWidgetdisconnectNotify(self[], signal)
+proc miqt_exec_method_cQPrintPreviewWidget_disconnectNotify(vtbl: pointer, inst: pointer, signal: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQPrintPreviewWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQPrintPreviewWidget, vtbl)))
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
+  vtbl.disconnectNotify(slotval1)
 
 proc updateMicroFocus*(self: gen_qprintpreviewwidget_types.QPrintPreviewWidget, ): void =
   fcQPrintPreviewWidget_protectedbase_updateMicroFocus(self.h)
@@ -982,7 +1393,7 @@ proc focusPreviousChild*(self: gen_qprintpreviewwidget_types.QPrintPreviewWidget
   fcQPrintPreviewWidget_protectedbase_focusPreviousChild(self.h)
 
 proc sender*(self: gen_qprintpreviewwidget_types.QPrintPreviewWidget, ): gen_qobject_types.QObject =
-  gen_qobject_types.QObject(h: fcQPrintPreviewWidget_protectedbase_sender(self.h))
+  gen_qobject_types.QObject(h: fcQPrintPreviewWidget_protectedbase_sender(self.h), owned: false)
 
 proc senderSignalIndex*(self: gen_qprintpreviewwidget_types.QPrintPreviewWidget, ): cint =
   fcQPrintPreviewWidget_protectedbase_senderSignalIndex(self.h)
@@ -998,661 +1409,1030 @@ proc create*(T: type gen_qprintpreviewwidget_types.QPrintPreviewWidget,
     vtbl: ref QPrintPreviewWidgetVTable = nil): gen_qprintpreviewwidget_types.QPrintPreviewWidget =
   let vtbl = if vtbl == nil: new QPrintPreviewWidgetVTable else: vtbl
   GC_ref(vtbl)
-  vtbl.vtbl.destructor = proc(vtbl: ptr cQPrintPreviewWidgetVTable, _: ptr cQPrintPreviewWidget) {.cdecl.} =
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQPrintPreviewWidgetVTable, _: ptr cQPrintPreviewWidget) {.cdecl.} =
     let vtbl = cast[ref QPrintPreviewWidgetVTable](vtbl)
     GC_unref(vtbl)
-  if not isNil(vtbl.metaObject):
+  if not isNil(vtbl[].metaObject):
     vtbl[].vtbl.metaObject = miqt_exec_callback_cQPrintPreviewWidget_metaObject
-  if not isNil(vtbl.metacast):
+  if not isNil(vtbl[].metacast):
     vtbl[].vtbl.metacast = miqt_exec_callback_cQPrintPreviewWidget_metacast
-  if not isNil(vtbl.metacall):
+  if not isNil(vtbl[].metacall):
     vtbl[].vtbl.metacall = miqt_exec_callback_cQPrintPreviewWidget_metacall
-  if not isNil(vtbl.setVisible):
+  if not isNil(vtbl[].setVisible):
     vtbl[].vtbl.setVisible = miqt_exec_callback_cQPrintPreviewWidget_setVisible
-  if not isNil(vtbl.devType):
+  if not isNil(vtbl[].devType):
     vtbl[].vtbl.devType = miqt_exec_callback_cQPrintPreviewWidget_devType
-  if not isNil(vtbl.sizeHint):
+  if not isNil(vtbl[].sizeHint):
     vtbl[].vtbl.sizeHint = miqt_exec_callback_cQPrintPreviewWidget_sizeHint
-  if not isNil(vtbl.minimumSizeHint):
+  if not isNil(vtbl[].minimumSizeHint):
     vtbl[].vtbl.minimumSizeHint = miqt_exec_callback_cQPrintPreviewWidget_minimumSizeHint
-  if not isNil(vtbl.heightForWidth):
+  if not isNil(vtbl[].heightForWidth):
     vtbl[].vtbl.heightForWidth = miqt_exec_callback_cQPrintPreviewWidget_heightForWidth
-  if not isNil(vtbl.hasHeightForWidth):
+  if not isNil(vtbl[].hasHeightForWidth):
     vtbl[].vtbl.hasHeightForWidth = miqt_exec_callback_cQPrintPreviewWidget_hasHeightForWidth
-  if not isNil(vtbl.paintEngine):
+  if not isNil(vtbl[].paintEngine):
     vtbl[].vtbl.paintEngine = miqt_exec_callback_cQPrintPreviewWidget_paintEngine
-  if not isNil(vtbl.event):
+  if not isNil(vtbl[].event):
     vtbl[].vtbl.event = miqt_exec_callback_cQPrintPreviewWidget_event
-  if not isNil(vtbl.mousePressEvent):
+  if not isNil(vtbl[].mousePressEvent):
     vtbl[].vtbl.mousePressEvent = miqt_exec_callback_cQPrintPreviewWidget_mousePressEvent
-  if not isNil(vtbl.mouseReleaseEvent):
+  if not isNil(vtbl[].mouseReleaseEvent):
     vtbl[].vtbl.mouseReleaseEvent = miqt_exec_callback_cQPrintPreviewWidget_mouseReleaseEvent
-  if not isNil(vtbl.mouseDoubleClickEvent):
+  if not isNil(vtbl[].mouseDoubleClickEvent):
     vtbl[].vtbl.mouseDoubleClickEvent = miqt_exec_callback_cQPrintPreviewWidget_mouseDoubleClickEvent
-  if not isNil(vtbl.mouseMoveEvent):
+  if not isNil(vtbl[].mouseMoveEvent):
     vtbl[].vtbl.mouseMoveEvent = miqt_exec_callback_cQPrintPreviewWidget_mouseMoveEvent
-  if not isNil(vtbl.wheelEvent):
+  if not isNil(vtbl[].wheelEvent):
     vtbl[].vtbl.wheelEvent = miqt_exec_callback_cQPrintPreviewWidget_wheelEvent
-  if not isNil(vtbl.keyPressEvent):
+  if not isNil(vtbl[].keyPressEvent):
     vtbl[].vtbl.keyPressEvent = miqt_exec_callback_cQPrintPreviewWidget_keyPressEvent
-  if not isNil(vtbl.keyReleaseEvent):
+  if not isNil(vtbl[].keyReleaseEvent):
     vtbl[].vtbl.keyReleaseEvent = miqt_exec_callback_cQPrintPreviewWidget_keyReleaseEvent
-  if not isNil(vtbl.focusInEvent):
+  if not isNil(vtbl[].focusInEvent):
     vtbl[].vtbl.focusInEvent = miqt_exec_callback_cQPrintPreviewWidget_focusInEvent
-  if not isNil(vtbl.focusOutEvent):
+  if not isNil(vtbl[].focusOutEvent):
     vtbl[].vtbl.focusOutEvent = miqt_exec_callback_cQPrintPreviewWidget_focusOutEvent
-  if not isNil(vtbl.enterEvent):
+  if not isNil(vtbl[].enterEvent):
     vtbl[].vtbl.enterEvent = miqt_exec_callback_cQPrintPreviewWidget_enterEvent
-  if not isNil(vtbl.leaveEvent):
+  if not isNil(vtbl[].leaveEvent):
     vtbl[].vtbl.leaveEvent = miqt_exec_callback_cQPrintPreviewWidget_leaveEvent
-  if not isNil(vtbl.paintEvent):
+  if not isNil(vtbl[].paintEvent):
     vtbl[].vtbl.paintEvent = miqt_exec_callback_cQPrintPreviewWidget_paintEvent
-  if not isNil(vtbl.moveEvent):
+  if not isNil(vtbl[].moveEvent):
     vtbl[].vtbl.moveEvent = miqt_exec_callback_cQPrintPreviewWidget_moveEvent
-  if not isNil(vtbl.resizeEvent):
+  if not isNil(vtbl[].resizeEvent):
     vtbl[].vtbl.resizeEvent = miqt_exec_callback_cQPrintPreviewWidget_resizeEvent
-  if not isNil(vtbl.closeEvent):
+  if not isNil(vtbl[].closeEvent):
     vtbl[].vtbl.closeEvent = miqt_exec_callback_cQPrintPreviewWidget_closeEvent
-  if not isNil(vtbl.contextMenuEvent):
+  if not isNil(vtbl[].contextMenuEvent):
     vtbl[].vtbl.contextMenuEvent = miqt_exec_callback_cQPrintPreviewWidget_contextMenuEvent
-  if not isNil(vtbl.tabletEvent):
+  if not isNil(vtbl[].tabletEvent):
     vtbl[].vtbl.tabletEvent = miqt_exec_callback_cQPrintPreviewWidget_tabletEvent
-  if not isNil(vtbl.actionEvent):
+  if not isNil(vtbl[].actionEvent):
     vtbl[].vtbl.actionEvent = miqt_exec_callback_cQPrintPreviewWidget_actionEvent
-  if not isNil(vtbl.dragEnterEvent):
+  if not isNil(vtbl[].dragEnterEvent):
     vtbl[].vtbl.dragEnterEvent = miqt_exec_callback_cQPrintPreviewWidget_dragEnterEvent
-  if not isNil(vtbl.dragMoveEvent):
+  if not isNil(vtbl[].dragMoveEvent):
     vtbl[].vtbl.dragMoveEvent = miqt_exec_callback_cQPrintPreviewWidget_dragMoveEvent
-  if not isNil(vtbl.dragLeaveEvent):
+  if not isNil(vtbl[].dragLeaveEvent):
     vtbl[].vtbl.dragLeaveEvent = miqt_exec_callback_cQPrintPreviewWidget_dragLeaveEvent
-  if not isNil(vtbl.dropEvent):
+  if not isNil(vtbl[].dropEvent):
     vtbl[].vtbl.dropEvent = miqt_exec_callback_cQPrintPreviewWidget_dropEvent
-  if not isNil(vtbl.showEvent):
+  if not isNil(vtbl[].showEvent):
     vtbl[].vtbl.showEvent = miqt_exec_callback_cQPrintPreviewWidget_showEvent
-  if not isNil(vtbl.hideEvent):
+  if not isNil(vtbl[].hideEvent):
     vtbl[].vtbl.hideEvent = miqt_exec_callback_cQPrintPreviewWidget_hideEvent
-  if not isNil(vtbl.nativeEvent):
+  if not isNil(vtbl[].nativeEvent):
     vtbl[].vtbl.nativeEvent = miqt_exec_callback_cQPrintPreviewWidget_nativeEvent
-  if not isNil(vtbl.changeEvent):
+  if not isNil(vtbl[].changeEvent):
     vtbl[].vtbl.changeEvent = miqt_exec_callback_cQPrintPreviewWidget_changeEvent
-  if not isNil(vtbl.metric):
+  if not isNil(vtbl[].metric):
     vtbl[].vtbl.metric = miqt_exec_callback_cQPrintPreviewWidget_metric
-  if not isNil(vtbl.initPainter):
+  if not isNil(vtbl[].initPainter):
     vtbl[].vtbl.initPainter = miqt_exec_callback_cQPrintPreviewWidget_initPainter
-  if not isNil(vtbl.redirected):
+  if not isNil(vtbl[].redirected):
     vtbl[].vtbl.redirected = miqt_exec_callback_cQPrintPreviewWidget_redirected
-  if not isNil(vtbl.sharedPainter):
+  if not isNil(vtbl[].sharedPainter):
     vtbl[].vtbl.sharedPainter = miqt_exec_callback_cQPrintPreviewWidget_sharedPainter
-  if not isNil(vtbl.inputMethodEvent):
+  if not isNil(vtbl[].inputMethodEvent):
     vtbl[].vtbl.inputMethodEvent = miqt_exec_callback_cQPrintPreviewWidget_inputMethodEvent
-  if not isNil(vtbl.inputMethodQuery):
+  if not isNil(vtbl[].inputMethodQuery):
     vtbl[].vtbl.inputMethodQuery = miqt_exec_callback_cQPrintPreviewWidget_inputMethodQuery
-  if not isNil(vtbl.focusNextPrevChild):
+  if not isNil(vtbl[].focusNextPrevChild):
     vtbl[].vtbl.focusNextPrevChild = miqt_exec_callback_cQPrintPreviewWidget_focusNextPrevChild
-  if not isNil(vtbl.eventFilter):
+  if not isNil(vtbl[].eventFilter):
     vtbl[].vtbl.eventFilter = miqt_exec_callback_cQPrintPreviewWidget_eventFilter
-  if not isNil(vtbl.timerEvent):
+  if not isNil(vtbl[].timerEvent):
     vtbl[].vtbl.timerEvent = miqt_exec_callback_cQPrintPreviewWidget_timerEvent
-  if not isNil(vtbl.childEvent):
+  if not isNil(vtbl[].childEvent):
     vtbl[].vtbl.childEvent = miqt_exec_callback_cQPrintPreviewWidget_childEvent
-  if not isNil(vtbl.customEvent):
+  if not isNil(vtbl[].customEvent):
     vtbl[].vtbl.customEvent = miqt_exec_callback_cQPrintPreviewWidget_customEvent
-  if not isNil(vtbl.connectNotify):
+  if not isNil(vtbl[].connectNotify):
     vtbl[].vtbl.connectNotify = miqt_exec_callback_cQPrintPreviewWidget_connectNotify
-  if not isNil(vtbl.disconnectNotify):
+  if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQPrintPreviewWidget_disconnectNotify
-  gen_qprintpreviewwidget_types.QPrintPreviewWidget(h: fcQPrintPreviewWidget_new(addr(vtbl[]), parent.h))
+  gen_qprintpreviewwidget_types.QPrintPreviewWidget(h: fcQPrintPreviewWidget_new(addr(vtbl[].vtbl), parent.h), owned: true)
 
 proc create*(T: type gen_qprintpreviewwidget_types.QPrintPreviewWidget,
     printer: gen_qprinter_types.QPrinter,
     vtbl: ref QPrintPreviewWidgetVTable = nil): gen_qprintpreviewwidget_types.QPrintPreviewWidget =
   let vtbl = if vtbl == nil: new QPrintPreviewWidgetVTable else: vtbl
   GC_ref(vtbl)
-  vtbl.vtbl.destructor = proc(vtbl: ptr cQPrintPreviewWidgetVTable, _: ptr cQPrintPreviewWidget) {.cdecl.} =
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQPrintPreviewWidgetVTable, _: ptr cQPrintPreviewWidget) {.cdecl.} =
     let vtbl = cast[ref QPrintPreviewWidgetVTable](vtbl)
     GC_unref(vtbl)
-  if not isNil(vtbl.metaObject):
+  if not isNil(vtbl[].metaObject):
     vtbl[].vtbl.metaObject = miqt_exec_callback_cQPrintPreviewWidget_metaObject
-  if not isNil(vtbl.metacast):
+  if not isNil(vtbl[].metacast):
     vtbl[].vtbl.metacast = miqt_exec_callback_cQPrintPreviewWidget_metacast
-  if not isNil(vtbl.metacall):
+  if not isNil(vtbl[].metacall):
     vtbl[].vtbl.metacall = miqt_exec_callback_cQPrintPreviewWidget_metacall
-  if not isNil(vtbl.setVisible):
+  if not isNil(vtbl[].setVisible):
     vtbl[].vtbl.setVisible = miqt_exec_callback_cQPrintPreviewWidget_setVisible
-  if not isNil(vtbl.devType):
+  if not isNil(vtbl[].devType):
     vtbl[].vtbl.devType = miqt_exec_callback_cQPrintPreviewWidget_devType
-  if not isNil(vtbl.sizeHint):
+  if not isNil(vtbl[].sizeHint):
     vtbl[].vtbl.sizeHint = miqt_exec_callback_cQPrintPreviewWidget_sizeHint
-  if not isNil(vtbl.minimumSizeHint):
+  if not isNil(vtbl[].minimumSizeHint):
     vtbl[].vtbl.minimumSizeHint = miqt_exec_callback_cQPrintPreviewWidget_minimumSizeHint
-  if not isNil(vtbl.heightForWidth):
+  if not isNil(vtbl[].heightForWidth):
     vtbl[].vtbl.heightForWidth = miqt_exec_callback_cQPrintPreviewWidget_heightForWidth
-  if not isNil(vtbl.hasHeightForWidth):
+  if not isNil(vtbl[].hasHeightForWidth):
     vtbl[].vtbl.hasHeightForWidth = miqt_exec_callback_cQPrintPreviewWidget_hasHeightForWidth
-  if not isNil(vtbl.paintEngine):
+  if not isNil(vtbl[].paintEngine):
     vtbl[].vtbl.paintEngine = miqt_exec_callback_cQPrintPreviewWidget_paintEngine
-  if not isNil(vtbl.event):
+  if not isNil(vtbl[].event):
     vtbl[].vtbl.event = miqt_exec_callback_cQPrintPreviewWidget_event
-  if not isNil(vtbl.mousePressEvent):
+  if not isNil(vtbl[].mousePressEvent):
     vtbl[].vtbl.mousePressEvent = miqt_exec_callback_cQPrintPreviewWidget_mousePressEvent
-  if not isNil(vtbl.mouseReleaseEvent):
+  if not isNil(vtbl[].mouseReleaseEvent):
     vtbl[].vtbl.mouseReleaseEvent = miqt_exec_callback_cQPrintPreviewWidget_mouseReleaseEvent
-  if not isNil(vtbl.mouseDoubleClickEvent):
+  if not isNil(vtbl[].mouseDoubleClickEvent):
     vtbl[].vtbl.mouseDoubleClickEvent = miqt_exec_callback_cQPrintPreviewWidget_mouseDoubleClickEvent
-  if not isNil(vtbl.mouseMoveEvent):
+  if not isNil(vtbl[].mouseMoveEvent):
     vtbl[].vtbl.mouseMoveEvent = miqt_exec_callback_cQPrintPreviewWidget_mouseMoveEvent
-  if not isNil(vtbl.wheelEvent):
+  if not isNil(vtbl[].wheelEvent):
     vtbl[].vtbl.wheelEvent = miqt_exec_callback_cQPrintPreviewWidget_wheelEvent
-  if not isNil(vtbl.keyPressEvent):
+  if not isNil(vtbl[].keyPressEvent):
     vtbl[].vtbl.keyPressEvent = miqt_exec_callback_cQPrintPreviewWidget_keyPressEvent
-  if not isNil(vtbl.keyReleaseEvent):
+  if not isNil(vtbl[].keyReleaseEvent):
     vtbl[].vtbl.keyReleaseEvent = miqt_exec_callback_cQPrintPreviewWidget_keyReleaseEvent
-  if not isNil(vtbl.focusInEvent):
+  if not isNil(vtbl[].focusInEvent):
     vtbl[].vtbl.focusInEvent = miqt_exec_callback_cQPrintPreviewWidget_focusInEvent
-  if not isNil(vtbl.focusOutEvent):
+  if not isNil(vtbl[].focusOutEvent):
     vtbl[].vtbl.focusOutEvent = miqt_exec_callback_cQPrintPreviewWidget_focusOutEvent
-  if not isNil(vtbl.enterEvent):
+  if not isNil(vtbl[].enterEvent):
     vtbl[].vtbl.enterEvent = miqt_exec_callback_cQPrintPreviewWidget_enterEvent
-  if not isNil(vtbl.leaveEvent):
+  if not isNil(vtbl[].leaveEvent):
     vtbl[].vtbl.leaveEvent = miqt_exec_callback_cQPrintPreviewWidget_leaveEvent
-  if not isNil(vtbl.paintEvent):
+  if not isNil(vtbl[].paintEvent):
     vtbl[].vtbl.paintEvent = miqt_exec_callback_cQPrintPreviewWidget_paintEvent
-  if not isNil(vtbl.moveEvent):
+  if not isNil(vtbl[].moveEvent):
     vtbl[].vtbl.moveEvent = miqt_exec_callback_cQPrintPreviewWidget_moveEvent
-  if not isNil(vtbl.resizeEvent):
+  if not isNil(vtbl[].resizeEvent):
     vtbl[].vtbl.resizeEvent = miqt_exec_callback_cQPrintPreviewWidget_resizeEvent
-  if not isNil(vtbl.closeEvent):
+  if not isNil(vtbl[].closeEvent):
     vtbl[].vtbl.closeEvent = miqt_exec_callback_cQPrintPreviewWidget_closeEvent
-  if not isNil(vtbl.contextMenuEvent):
+  if not isNil(vtbl[].contextMenuEvent):
     vtbl[].vtbl.contextMenuEvent = miqt_exec_callback_cQPrintPreviewWidget_contextMenuEvent
-  if not isNil(vtbl.tabletEvent):
+  if not isNil(vtbl[].tabletEvent):
     vtbl[].vtbl.tabletEvent = miqt_exec_callback_cQPrintPreviewWidget_tabletEvent
-  if not isNil(vtbl.actionEvent):
+  if not isNil(vtbl[].actionEvent):
     vtbl[].vtbl.actionEvent = miqt_exec_callback_cQPrintPreviewWidget_actionEvent
-  if not isNil(vtbl.dragEnterEvent):
+  if not isNil(vtbl[].dragEnterEvent):
     vtbl[].vtbl.dragEnterEvent = miqt_exec_callback_cQPrintPreviewWidget_dragEnterEvent
-  if not isNil(vtbl.dragMoveEvent):
+  if not isNil(vtbl[].dragMoveEvent):
     vtbl[].vtbl.dragMoveEvent = miqt_exec_callback_cQPrintPreviewWidget_dragMoveEvent
-  if not isNil(vtbl.dragLeaveEvent):
+  if not isNil(vtbl[].dragLeaveEvent):
     vtbl[].vtbl.dragLeaveEvent = miqt_exec_callback_cQPrintPreviewWidget_dragLeaveEvent
-  if not isNil(vtbl.dropEvent):
+  if not isNil(vtbl[].dropEvent):
     vtbl[].vtbl.dropEvent = miqt_exec_callback_cQPrintPreviewWidget_dropEvent
-  if not isNil(vtbl.showEvent):
+  if not isNil(vtbl[].showEvent):
     vtbl[].vtbl.showEvent = miqt_exec_callback_cQPrintPreviewWidget_showEvent
-  if not isNil(vtbl.hideEvent):
+  if not isNil(vtbl[].hideEvent):
     vtbl[].vtbl.hideEvent = miqt_exec_callback_cQPrintPreviewWidget_hideEvent
-  if not isNil(vtbl.nativeEvent):
+  if not isNil(vtbl[].nativeEvent):
     vtbl[].vtbl.nativeEvent = miqt_exec_callback_cQPrintPreviewWidget_nativeEvent
-  if not isNil(vtbl.changeEvent):
+  if not isNil(vtbl[].changeEvent):
     vtbl[].vtbl.changeEvent = miqt_exec_callback_cQPrintPreviewWidget_changeEvent
-  if not isNil(vtbl.metric):
+  if not isNil(vtbl[].metric):
     vtbl[].vtbl.metric = miqt_exec_callback_cQPrintPreviewWidget_metric
-  if not isNil(vtbl.initPainter):
+  if not isNil(vtbl[].initPainter):
     vtbl[].vtbl.initPainter = miqt_exec_callback_cQPrintPreviewWidget_initPainter
-  if not isNil(vtbl.redirected):
+  if not isNil(vtbl[].redirected):
     vtbl[].vtbl.redirected = miqt_exec_callback_cQPrintPreviewWidget_redirected
-  if not isNil(vtbl.sharedPainter):
+  if not isNil(vtbl[].sharedPainter):
     vtbl[].vtbl.sharedPainter = miqt_exec_callback_cQPrintPreviewWidget_sharedPainter
-  if not isNil(vtbl.inputMethodEvent):
+  if not isNil(vtbl[].inputMethodEvent):
     vtbl[].vtbl.inputMethodEvent = miqt_exec_callback_cQPrintPreviewWidget_inputMethodEvent
-  if not isNil(vtbl.inputMethodQuery):
+  if not isNil(vtbl[].inputMethodQuery):
     vtbl[].vtbl.inputMethodQuery = miqt_exec_callback_cQPrintPreviewWidget_inputMethodQuery
-  if not isNil(vtbl.focusNextPrevChild):
+  if not isNil(vtbl[].focusNextPrevChild):
     vtbl[].vtbl.focusNextPrevChild = miqt_exec_callback_cQPrintPreviewWidget_focusNextPrevChild
-  if not isNil(vtbl.eventFilter):
+  if not isNil(vtbl[].eventFilter):
     vtbl[].vtbl.eventFilter = miqt_exec_callback_cQPrintPreviewWidget_eventFilter
-  if not isNil(vtbl.timerEvent):
+  if not isNil(vtbl[].timerEvent):
     vtbl[].vtbl.timerEvent = miqt_exec_callback_cQPrintPreviewWidget_timerEvent
-  if not isNil(vtbl.childEvent):
+  if not isNil(vtbl[].childEvent):
     vtbl[].vtbl.childEvent = miqt_exec_callback_cQPrintPreviewWidget_childEvent
-  if not isNil(vtbl.customEvent):
+  if not isNil(vtbl[].customEvent):
     vtbl[].vtbl.customEvent = miqt_exec_callback_cQPrintPreviewWidget_customEvent
-  if not isNil(vtbl.connectNotify):
+  if not isNil(vtbl[].connectNotify):
     vtbl[].vtbl.connectNotify = miqt_exec_callback_cQPrintPreviewWidget_connectNotify
-  if not isNil(vtbl.disconnectNotify):
+  if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQPrintPreviewWidget_disconnectNotify
-  gen_qprintpreviewwidget_types.QPrintPreviewWidget(h: fcQPrintPreviewWidget_new2(addr(vtbl[]), printer.h))
+  gen_qprintpreviewwidget_types.QPrintPreviewWidget(h: fcQPrintPreviewWidget_new2(addr(vtbl[].vtbl), printer.h), owned: true)
 
 proc create*(T: type gen_qprintpreviewwidget_types.QPrintPreviewWidget,
     vtbl: ref QPrintPreviewWidgetVTable = nil): gen_qprintpreviewwidget_types.QPrintPreviewWidget =
   let vtbl = if vtbl == nil: new QPrintPreviewWidgetVTable else: vtbl
   GC_ref(vtbl)
-  vtbl.vtbl.destructor = proc(vtbl: ptr cQPrintPreviewWidgetVTable, _: ptr cQPrintPreviewWidget) {.cdecl.} =
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQPrintPreviewWidgetVTable, _: ptr cQPrintPreviewWidget) {.cdecl.} =
     let vtbl = cast[ref QPrintPreviewWidgetVTable](vtbl)
     GC_unref(vtbl)
-  if not isNil(vtbl.metaObject):
+  if not isNil(vtbl[].metaObject):
     vtbl[].vtbl.metaObject = miqt_exec_callback_cQPrintPreviewWidget_metaObject
-  if not isNil(vtbl.metacast):
+  if not isNil(vtbl[].metacast):
     vtbl[].vtbl.metacast = miqt_exec_callback_cQPrintPreviewWidget_metacast
-  if not isNil(vtbl.metacall):
+  if not isNil(vtbl[].metacall):
     vtbl[].vtbl.metacall = miqt_exec_callback_cQPrintPreviewWidget_metacall
-  if not isNil(vtbl.setVisible):
+  if not isNil(vtbl[].setVisible):
     vtbl[].vtbl.setVisible = miqt_exec_callback_cQPrintPreviewWidget_setVisible
-  if not isNil(vtbl.devType):
+  if not isNil(vtbl[].devType):
     vtbl[].vtbl.devType = miqt_exec_callback_cQPrintPreviewWidget_devType
-  if not isNil(vtbl.sizeHint):
+  if not isNil(vtbl[].sizeHint):
     vtbl[].vtbl.sizeHint = miqt_exec_callback_cQPrintPreviewWidget_sizeHint
-  if not isNil(vtbl.minimumSizeHint):
+  if not isNil(vtbl[].minimumSizeHint):
     vtbl[].vtbl.minimumSizeHint = miqt_exec_callback_cQPrintPreviewWidget_minimumSizeHint
-  if not isNil(vtbl.heightForWidth):
+  if not isNil(vtbl[].heightForWidth):
     vtbl[].vtbl.heightForWidth = miqt_exec_callback_cQPrintPreviewWidget_heightForWidth
-  if not isNil(vtbl.hasHeightForWidth):
+  if not isNil(vtbl[].hasHeightForWidth):
     vtbl[].vtbl.hasHeightForWidth = miqt_exec_callback_cQPrintPreviewWidget_hasHeightForWidth
-  if not isNil(vtbl.paintEngine):
+  if not isNil(vtbl[].paintEngine):
     vtbl[].vtbl.paintEngine = miqt_exec_callback_cQPrintPreviewWidget_paintEngine
-  if not isNil(vtbl.event):
+  if not isNil(vtbl[].event):
     vtbl[].vtbl.event = miqt_exec_callback_cQPrintPreviewWidget_event
-  if not isNil(vtbl.mousePressEvent):
+  if not isNil(vtbl[].mousePressEvent):
     vtbl[].vtbl.mousePressEvent = miqt_exec_callback_cQPrintPreviewWidget_mousePressEvent
-  if not isNil(vtbl.mouseReleaseEvent):
+  if not isNil(vtbl[].mouseReleaseEvent):
     vtbl[].vtbl.mouseReleaseEvent = miqt_exec_callback_cQPrintPreviewWidget_mouseReleaseEvent
-  if not isNil(vtbl.mouseDoubleClickEvent):
+  if not isNil(vtbl[].mouseDoubleClickEvent):
     vtbl[].vtbl.mouseDoubleClickEvent = miqt_exec_callback_cQPrintPreviewWidget_mouseDoubleClickEvent
-  if not isNil(vtbl.mouseMoveEvent):
+  if not isNil(vtbl[].mouseMoveEvent):
     vtbl[].vtbl.mouseMoveEvent = miqt_exec_callback_cQPrintPreviewWidget_mouseMoveEvent
-  if not isNil(vtbl.wheelEvent):
+  if not isNil(vtbl[].wheelEvent):
     vtbl[].vtbl.wheelEvent = miqt_exec_callback_cQPrintPreviewWidget_wheelEvent
-  if not isNil(vtbl.keyPressEvent):
+  if not isNil(vtbl[].keyPressEvent):
     vtbl[].vtbl.keyPressEvent = miqt_exec_callback_cQPrintPreviewWidget_keyPressEvent
-  if not isNil(vtbl.keyReleaseEvent):
+  if not isNil(vtbl[].keyReleaseEvent):
     vtbl[].vtbl.keyReleaseEvent = miqt_exec_callback_cQPrintPreviewWidget_keyReleaseEvent
-  if not isNil(vtbl.focusInEvent):
+  if not isNil(vtbl[].focusInEvent):
     vtbl[].vtbl.focusInEvent = miqt_exec_callback_cQPrintPreviewWidget_focusInEvent
-  if not isNil(vtbl.focusOutEvent):
+  if not isNil(vtbl[].focusOutEvent):
     vtbl[].vtbl.focusOutEvent = miqt_exec_callback_cQPrintPreviewWidget_focusOutEvent
-  if not isNil(vtbl.enterEvent):
+  if not isNil(vtbl[].enterEvent):
     vtbl[].vtbl.enterEvent = miqt_exec_callback_cQPrintPreviewWidget_enterEvent
-  if not isNil(vtbl.leaveEvent):
+  if not isNil(vtbl[].leaveEvent):
     vtbl[].vtbl.leaveEvent = miqt_exec_callback_cQPrintPreviewWidget_leaveEvent
-  if not isNil(vtbl.paintEvent):
+  if not isNil(vtbl[].paintEvent):
     vtbl[].vtbl.paintEvent = miqt_exec_callback_cQPrintPreviewWidget_paintEvent
-  if not isNil(vtbl.moveEvent):
+  if not isNil(vtbl[].moveEvent):
     vtbl[].vtbl.moveEvent = miqt_exec_callback_cQPrintPreviewWidget_moveEvent
-  if not isNil(vtbl.resizeEvent):
+  if not isNil(vtbl[].resizeEvent):
     vtbl[].vtbl.resizeEvent = miqt_exec_callback_cQPrintPreviewWidget_resizeEvent
-  if not isNil(vtbl.closeEvent):
+  if not isNil(vtbl[].closeEvent):
     vtbl[].vtbl.closeEvent = miqt_exec_callback_cQPrintPreviewWidget_closeEvent
-  if not isNil(vtbl.contextMenuEvent):
+  if not isNil(vtbl[].contextMenuEvent):
     vtbl[].vtbl.contextMenuEvent = miqt_exec_callback_cQPrintPreviewWidget_contextMenuEvent
-  if not isNil(vtbl.tabletEvent):
+  if not isNil(vtbl[].tabletEvent):
     vtbl[].vtbl.tabletEvent = miqt_exec_callback_cQPrintPreviewWidget_tabletEvent
-  if not isNil(vtbl.actionEvent):
+  if not isNil(vtbl[].actionEvent):
     vtbl[].vtbl.actionEvent = miqt_exec_callback_cQPrintPreviewWidget_actionEvent
-  if not isNil(vtbl.dragEnterEvent):
+  if not isNil(vtbl[].dragEnterEvent):
     vtbl[].vtbl.dragEnterEvent = miqt_exec_callback_cQPrintPreviewWidget_dragEnterEvent
-  if not isNil(vtbl.dragMoveEvent):
+  if not isNil(vtbl[].dragMoveEvent):
     vtbl[].vtbl.dragMoveEvent = miqt_exec_callback_cQPrintPreviewWidget_dragMoveEvent
-  if not isNil(vtbl.dragLeaveEvent):
+  if not isNil(vtbl[].dragLeaveEvent):
     vtbl[].vtbl.dragLeaveEvent = miqt_exec_callback_cQPrintPreviewWidget_dragLeaveEvent
-  if not isNil(vtbl.dropEvent):
+  if not isNil(vtbl[].dropEvent):
     vtbl[].vtbl.dropEvent = miqt_exec_callback_cQPrintPreviewWidget_dropEvent
-  if not isNil(vtbl.showEvent):
+  if not isNil(vtbl[].showEvent):
     vtbl[].vtbl.showEvent = miqt_exec_callback_cQPrintPreviewWidget_showEvent
-  if not isNil(vtbl.hideEvent):
+  if not isNil(vtbl[].hideEvent):
     vtbl[].vtbl.hideEvent = miqt_exec_callback_cQPrintPreviewWidget_hideEvent
-  if not isNil(vtbl.nativeEvent):
+  if not isNil(vtbl[].nativeEvent):
     vtbl[].vtbl.nativeEvent = miqt_exec_callback_cQPrintPreviewWidget_nativeEvent
-  if not isNil(vtbl.changeEvent):
+  if not isNil(vtbl[].changeEvent):
     vtbl[].vtbl.changeEvent = miqt_exec_callback_cQPrintPreviewWidget_changeEvent
-  if not isNil(vtbl.metric):
+  if not isNil(vtbl[].metric):
     vtbl[].vtbl.metric = miqt_exec_callback_cQPrintPreviewWidget_metric
-  if not isNil(vtbl.initPainter):
+  if not isNil(vtbl[].initPainter):
     vtbl[].vtbl.initPainter = miqt_exec_callback_cQPrintPreviewWidget_initPainter
-  if not isNil(vtbl.redirected):
+  if not isNil(vtbl[].redirected):
     vtbl[].vtbl.redirected = miqt_exec_callback_cQPrintPreviewWidget_redirected
-  if not isNil(vtbl.sharedPainter):
+  if not isNil(vtbl[].sharedPainter):
     vtbl[].vtbl.sharedPainter = miqt_exec_callback_cQPrintPreviewWidget_sharedPainter
-  if not isNil(vtbl.inputMethodEvent):
+  if not isNil(vtbl[].inputMethodEvent):
     vtbl[].vtbl.inputMethodEvent = miqt_exec_callback_cQPrintPreviewWidget_inputMethodEvent
-  if not isNil(vtbl.inputMethodQuery):
+  if not isNil(vtbl[].inputMethodQuery):
     vtbl[].vtbl.inputMethodQuery = miqt_exec_callback_cQPrintPreviewWidget_inputMethodQuery
-  if not isNil(vtbl.focusNextPrevChild):
+  if not isNil(vtbl[].focusNextPrevChild):
     vtbl[].vtbl.focusNextPrevChild = miqt_exec_callback_cQPrintPreviewWidget_focusNextPrevChild
-  if not isNil(vtbl.eventFilter):
+  if not isNil(vtbl[].eventFilter):
     vtbl[].vtbl.eventFilter = miqt_exec_callback_cQPrintPreviewWidget_eventFilter
-  if not isNil(vtbl.timerEvent):
+  if not isNil(vtbl[].timerEvent):
     vtbl[].vtbl.timerEvent = miqt_exec_callback_cQPrintPreviewWidget_timerEvent
-  if not isNil(vtbl.childEvent):
+  if not isNil(vtbl[].childEvent):
     vtbl[].vtbl.childEvent = miqt_exec_callback_cQPrintPreviewWidget_childEvent
-  if not isNil(vtbl.customEvent):
+  if not isNil(vtbl[].customEvent):
     vtbl[].vtbl.customEvent = miqt_exec_callback_cQPrintPreviewWidget_customEvent
-  if not isNil(vtbl.connectNotify):
+  if not isNil(vtbl[].connectNotify):
     vtbl[].vtbl.connectNotify = miqt_exec_callback_cQPrintPreviewWidget_connectNotify
-  if not isNil(vtbl.disconnectNotify):
+  if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQPrintPreviewWidget_disconnectNotify
-  gen_qprintpreviewwidget_types.QPrintPreviewWidget(h: fcQPrintPreviewWidget_new3(addr(vtbl[]), ))
+  gen_qprintpreviewwidget_types.QPrintPreviewWidget(h: fcQPrintPreviewWidget_new3(addr(vtbl[].vtbl), ), owned: true)
 
 proc create*(T: type gen_qprintpreviewwidget_types.QPrintPreviewWidget,
     printer: gen_qprinter_types.QPrinter, parent: gen_qwidget_types.QWidget,
     vtbl: ref QPrintPreviewWidgetVTable = nil): gen_qprintpreviewwidget_types.QPrintPreviewWidget =
   let vtbl = if vtbl == nil: new QPrintPreviewWidgetVTable else: vtbl
   GC_ref(vtbl)
-  vtbl.vtbl.destructor = proc(vtbl: ptr cQPrintPreviewWidgetVTable, _: ptr cQPrintPreviewWidget) {.cdecl.} =
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQPrintPreviewWidgetVTable, _: ptr cQPrintPreviewWidget) {.cdecl.} =
     let vtbl = cast[ref QPrintPreviewWidgetVTable](vtbl)
     GC_unref(vtbl)
-  if not isNil(vtbl.metaObject):
+  if not isNil(vtbl[].metaObject):
     vtbl[].vtbl.metaObject = miqt_exec_callback_cQPrintPreviewWidget_metaObject
-  if not isNil(vtbl.metacast):
+  if not isNil(vtbl[].metacast):
     vtbl[].vtbl.metacast = miqt_exec_callback_cQPrintPreviewWidget_metacast
-  if not isNil(vtbl.metacall):
+  if not isNil(vtbl[].metacall):
     vtbl[].vtbl.metacall = miqt_exec_callback_cQPrintPreviewWidget_metacall
-  if not isNil(vtbl.setVisible):
+  if not isNil(vtbl[].setVisible):
     vtbl[].vtbl.setVisible = miqt_exec_callback_cQPrintPreviewWidget_setVisible
-  if not isNil(vtbl.devType):
+  if not isNil(vtbl[].devType):
     vtbl[].vtbl.devType = miqt_exec_callback_cQPrintPreviewWidget_devType
-  if not isNil(vtbl.sizeHint):
+  if not isNil(vtbl[].sizeHint):
     vtbl[].vtbl.sizeHint = miqt_exec_callback_cQPrintPreviewWidget_sizeHint
-  if not isNil(vtbl.minimumSizeHint):
+  if not isNil(vtbl[].minimumSizeHint):
     vtbl[].vtbl.minimumSizeHint = miqt_exec_callback_cQPrintPreviewWidget_minimumSizeHint
-  if not isNil(vtbl.heightForWidth):
+  if not isNil(vtbl[].heightForWidth):
     vtbl[].vtbl.heightForWidth = miqt_exec_callback_cQPrintPreviewWidget_heightForWidth
-  if not isNil(vtbl.hasHeightForWidth):
+  if not isNil(vtbl[].hasHeightForWidth):
     vtbl[].vtbl.hasHeightForWidth = miqt_exec_callback_cQPrintPreviewWidget_hasHeightForWidth
-  if not isNil(vtbl.paintEngine):
+  if not isNil(vtbl[].paintEngine):
     vtbl[].vtbl.paintEngine = miqt_exec_callback_cQPrintPreviewWidget_paintEngine
-  if not isNil(vtbl.event):
+  if not isNil(vtbl[].event):
     vtbl[].vtbl.event = miqt_exec_callback_cQPrintPreviewWidget_event
-  if not isNil(vtbl.mousePressEvent):
+  if not isNil(vtbl[].mousePressEvent):
     vtbl[].vtbl.mousePressEvent = miqt_exec_callback_cQPrintPreviewWidget_mousePressEvent
-  if not isNil(vtbl.mouseReleaseEvent):
+  if not isNil(vtbl[].mouseReleaseEvent):
     vtbl[].vtbl.mouseReleaseEvent = miqt_exec_callback_cQPrintPreviewWidget_mouseReleaseEvent
-  if not isNil(vtbl.mouseDoubleClickEvent):
+  if not isNil(vtbl[].mouseDoubleClickEvent):
     vtbl[].vtbl.mouseDoubleClickEvent = miqt_exec_callback_cQPrintPreviewWidget_mouseDoubleClickEvent
-  if not isNil(vtbl.mouseMoveEvent):
+  if not isNil(vtbl[].mouseMoveEvent):
     vtbl[].vtbl.mouseMoveEvent = miqt_exec_callback_cQPrintPreviewWidget_mouseMoveEvent
-  if not isNil(vtbl.wheelEvent):
+  if not isNil(vtbl[].wheelEvent):
     vtbl[].vtbl.wheelEvent = miqt_exec_callback_cQPrintPreviewWidget_wheelEvent
-  if not isNil(vtbl.keyPressEvent):
+  if not isNil(vtbl[].keyPressEvent):
     vtbl[].vtbl.keyPressEvent = miqt_exec_callback_cQPrintPreviewWidget_keyPressEvent
-  if not isNil(vtbl.keyReleaseEvent):
+  if not isNil(vtbl[].keyReleaseEvent):
     vtbl[].vtbl.keyReleaseEvent = miqt_exec_callback_cQPrintPreviewWidget_keyReleaseEvent
-  if not isNil(vtbl.focusInEvent):
+  if not isNil(vtbl[].focusInEvent):
     vtbl[].vtbl.focusInEvent = miqt_exec_callback_cQPrintPreviewWidget_focusInEvent
-  if not isNil(vtbl.focusOutEvent):
+  if not isNil(vtbl[].focusOutEvent):
     vtbl[].vtbl.focusOutEvent = miqt_exec_callback_cQPrintPreviewWidget_focusOutEvent
-  if not isNil(vtbl.enterEvent):
+  if not isNil(vtbl[].enterEvent):
     vtbl[].vtbl.enterEvent = miqt_exec_callback_cQPrintPreviewWidget_enterEvent
-  if not isNil(vtbl.leaveEvent):
+  if not isNil(vtbl[].leaveEvent):
     vtbl[].vtbl.leaveEvent = miqt_exec_callback_cQPrintPreviewWidget_leaveEvent
-  if not isNil(vtbl.paintEvent):
+  if not isNil(vtbl[].paintEvent):
     vtbl[].vtbl.paintEvent = miqt_exec_callback_cQPrintPreviewWidget_paintEvent
-  if not isNil(vtbl.moveEvent):
+  if not isNil(vtbl[].moveEvent):
     vtbl[].vtbl.moveEvent = miqt_exec_callback_cQPrintPreviewWidget_moveEvent
-  if not isNil(vtbl.resizeEvent):
+  if not isNil(vtbl[].resizeEvent):
     vtbl[].vtbl.resizeEvent = miqt_exec_callback_cQPrintPreviewWidget_resizeEvent
-  if not isNil(vtbl.closeEvent):
+  if not isNil(vtbl[].closeEvent):
     vtbl[].vtbl.closeEvent = miqt_exec_callback_cQPrintPreviewWidget_closeEvent
-  if not isNil(vtbl.contextMenuEvent):
+  if not isNil(vtbl[].contextMenuEvent):
     vtbl[].vtbl.contextMenuEvent = miqt_exec_callback_cQPrintPreviewWidget_contextMenuEvent
-  if not isNil(vtbl.tabletEvent):
+  if not isNil(vtbl[].tabletEvent):
     vtbl[].vtbl.tabletEvent = miqt_exec_callback_cQPrintPreviewWidget_tabletEvent
-  if not isNil(vtbl.actionEvent):
+  if not isNil(vtbl[].actionEvent):
     vtbl[].vtbl.actionEvent = miqt_exec_callback_cQPrintPreviewWidget_actionEvent
-  if not isNil(vtbl.dragEnterEvent):
+  if not isNil(vtbl[].dragEnterEvent):
     vtbl[].vtbl.dragEnterEvent = miqt_exec_callback_cQPrintPreviewWidget_dragEnterEvent
-  if not isNil(vtbl.dragMoveEvent):
+  if not isNil(vtbl[].dragMoveEvent):
     vtbl[].vtbl.dragMoveEvent = miqt_exec_callback_cQPrintPreviewWidget_dragMoveEvent
-  if not isNil(vtbl.dragLeaveEvent):
+  if not isNil(vtbl[].dragLeaveEvent):
     vtbl[].vtbl.dragLeaveEvent = miqt_exec_callback_cQPrintPreviewWidget_dragLeaveEvent
-  if not isNil(vtbl.dropEvent):
+  if not isNil(vtbl[].dropEvent):
     vtbl[].vtbl.dropEvent = miqt_exec_callback_cQPrintPreviewWidget_dropEvent
-  if not isNil(vtbl.showEvent):
+  if not isNil(vtbl[].showEvent):
     vtbl[].vtbl.showEvent = miqt_exec_callback_cQPrintPreviewWidget_showEvent
-  if not isNil(vtbl.hideEvent):
+  if not isNil(vtbl[].hideEvent):
     vtbl[].vtbl.hideEvent = miqt_exec_callback_cQPrintPreviewWidget_hideEvent
-  if not isNil(vtbl.nativeEvent):
+  if not isNil(vtbl[].nativeEvent):
     vtbl[].vtbl.nativeEvent = miqt_exec_callback_cQPrintPreviewWidget_nativeEvent
-  if not isNil(vtbl.changeEvent):
+  if not isNil(vtbl[].changeEvent):
     vtbl[].vtbl.changeEvent = miqt_exec_callback_cQPrintPreviewWidget_changeEvent
-  if not isNil(vtbl.metric):
+  if not isNil(vtbl[].metric):
     vtbl[].vtbl.metric = miqt_exec_callback_cQPrintPreviewWidget_metric
-  if not isNil(vtbl.initPainter):
+  if not isNil(vtbl[].initPainter):
     vtbl[].vtbl.initPainter = miqt_exec_callback_cQPrintPreviewWidget_initPainter
-  if not isNil(vtbl.redirected):
+  if not isNil(vtbl[].redirected):
     vtbl[].vtbl.redirected = miqt_exec_callback_cQPrintPreviewWidget_redirected
-  if not isNil(vtbl.sharedPainter):
+  if not isNil(vtbl[].sharedPainter):
     vtbl[].vtbl.sharedPainter = miqt_exec_callback_cQPrintPreviewWidget_sharedPainter
-  if not isNil(vtbl.inputMethodEvent):
+  if not isNil(vtbl[].inputMethodEvent):
     vtbl[].vtbl.inputMethodEvent = miqt_exec_callback_cQPrintPreviewWidget_inputMethodEvent
-  if not isNil(vtbl.inputMethodQuery):
+  if not isNil(vtbl[].inputMethodQuery):
     vtbl[].vtbl.inputMethodQuery = miqt_exec_callback_cQPrintPreviewWidget_inputMethodQuery
-  if not isNil(vtbl.focusNextPrevChild):
+  if not isNil(vtbl[].focusNextPrevChild):
     vtbl[].vtbl.focusNextPrevChild = miqt_exec_callback_cQPrintPreviewWidget_focusNextPrevChild
-  if not isNil(vtbl.eventFilter):
+  if not isNil(vtbl[].eventFilter):
     vtbl[].vtbl.eventFilter = miqt_exec_callback_cQPrintPreviewWidget_eventFilter
-  if not isNil(vtbl.timerEvent):
+  if not isNil(vtbl[].timerEvent):
     vtbl[].vtbl.timerEvent = miqt_exec_callback_cQPrintPreviewWidget_timerEvent
-  if not isNil(vtbl.childEvent):
+  if not isNil(vtbl[].childEvent):
     vtbl[].vtbl.childEvent = miqt_exec_callback_cQPrintPreviewWidget_childEvent
-  if not isNil(vtbl.customEvent):
+  if not isNil(vtbl[].customEvent):
     vtbl[].vtbl.customEvent = miqt_exec_callback_cQPrintPreviewWidget_customEvent
-  if not isNil(vtbl.connectNotify):
+  if not isNil(vtbl[].connectNotify):
     vtbl[].vtbl.connectNotify = miqt_exec_callback_cQPrintPreviewWidget_connectNotify
-  if not isNil(vtbl.disconnectNotify):
+  if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQPrintPreviewWidget_disconnectNotify
-  gen_qprintpreviewwidget_types.QPrintPreviewWidget(h: fcQPrintPreviewWidget_new4(addr(vtbl[]), printer.h, parent.h))
+  gen_qprintpreviewwidget_types.QPrintPreviewWidget(h: fcQPrintPreviewWidget_new4(addr(vtbl[].vtbl), printer.h, parent.h), owned: true)
 
 proc create*(T: type gen_qprintpreviewwidget_types.QPrintPreviewWidget,
     printer: gen_qprinter_types.QPrinter, parent: gen_qwidget_types.QWidget, flags: cint,
     vtbl: ref QPrintPreviewWidgetVTable = nil): gen_qprintpreviewwidget_types.QPrintPreviewWidget =
   let vtbl = if vtbl == nil: new QPrintPreviewWidgetVTable else: vtbl
   GC_ref(vtbl)
-  vtbl.vtbl.destructor = proc(vtbl: ptr cQPrintPreviewWidgetVTable, _: ptr cQPrintPreviewWidget) {.cdecl.} =
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQPrintPreviewWidgetVTable, _: ptr cQPrintPreviewWidget) {.cdecl.} =
     let vtbl = cast[ref QPrintPreviewWidgetVTable](vtbl)
     GC_unref(vtbl)
-  if not isNil(vtbl.metaObject):
+  if not isNil(vtbl[].metaObject):
     vtbl[].vtbl.metaObject = miqt_exec_callback_cQPrintPreviewWidget_metaObject
-  if not isNil(vtbl.metacast):
+  if not isNil(vtbl[].metacast):
     vtbl[].vtbl.metacast = miqt_exec_callback_cQPrintPreviewWidget_metacast
-  if not isNil(vtbl.metacall):
+  if not isNil(vtbl[].metacall):
     vtbl[].vtbl.metacall = miqt_exec_callback_cQPrintPreviewWidget_metacall
-  if not isNil(vtbl.setVisible):
+  if not isNil(vtbl[].setVisible):
     vtbl[].vtbl.setVisible = miqt_exec_callback_cQPrintPreviewWidget_setVisible
-  if not isNil(vtbl.devType):
+  if not isNil(vtbl[].devType):
     vtbl[].vtbl.devType = miqt_exec_callback_cQPrintPreviewWidget_devType
-  if not isNil(vtbl.sizeHint):
+  if not isNil(vtbl[].sizeHint):
     vtbl[].vtbl.sizeHint = miqt_exec_callback_cQPrintPreviewWidget_sizeHint
-  if not isNil(vtbl.minimumSizeHint):
+  if not isNil(vtbl[].minimumSizeHint):
     vtbl[].vtbl.minimumSizeHint = miqt_exec_callback_cQPrintPreviewWidget_minimumSizeHint
-  if not isNil(vtbl.heightForWidth):
+  if not isNil(vtbl[].heightForWidth):
     vtbl[].vtbl.heightForWidth = miqt_exec_callback_cQPrintPreviewWidget_heightForWidth
-  if not isNil(vtbl.hasHeightForWidth):
+  if not isNil(vtbl[].hasHeightForWidth):
     vtbl[].vtbl.hasHeightForWidth = miqt_exec_callback_cQPrintPreviewWidget_hasHeightForWidth
-  if not isNil(vtbl.paintEngine):
+  if not isNil(vtbl[].paintEngine):
     vtbl[].vtbl.paintEngine = miqt_exec_callback_cQPrintPreviewWidget_paintEngine
-  if not isNil(vtbl.event):
+  if not isNil(vtbl[].event):
     vtbl[].vtbl.event = miqt_exec_callback_cQPrintPreviewWidget_event
-  if not isNil(vtbl.mousePressEvent):
+  if not isNil(vtbl[].mousePressEvent):
     vtbl[].vtbl.mousePressEvent = miqt_exec_callback_cQPrintPreviewWidget_mousePressEvent
-  if not isNil(vtbl.mouseReleaseEvent):
+  if not isNil(vtbl[].mouseReleaseEvent):
     vtbl[].vtbl.mouseReleaseEvent = miqt_exec_callback_cQPrintPreviewWidget_mouseReleaseEvent
-  if not isNil(vtbl.mouseDoubleClickEvent):
+  if not isNil(vtbl[].mouseDoubleClickEvent):
     vtbl[].vtbl.mouseDoubleClickEvent = miqt_exec_callback_cQPrintPreviewWidget_mouseDoubleClickEvent
-  if not isNil(vtbl.mouseMoveEvent):
+  if not isNil(vtbl[].mouseMoveEvent):
     vtbl[].vtbl.mouseMoveEvent = miqt_exec_callback_cQPrintPreviewWidget_mouseMoveEvent
-  if not isNil(vtbl.wheelEvent):
+  if not isNil(vtbl[].wheelEvent):
     vtbl[].vtbl.wheelEvent = miqt_exec_callback_cQPrintPreviewWidget_wheelEvent
-  if not isNil(vtbl.keyPressEvent):
+  if not isNil(vtbl[].keyPressEvent):
     vtbl[].vtbl.keyPressEvent = miqt_exec_callback_cQPrintPreviewWidget_keyPressEvent
-  if not isNil(vtbl.keyReleaseEvent):
+  if not isNil(vtbl[].keyReleaseEvent):
     vtbl[].vtbl.keyReleaseEvent = miqt_exec_callback_cQPrintPreviewWidget_keyReleaseEvent
-  if not isNil(vtbl.focusInEvent):
+  if not isNil(vtbl[].focusInEvent):
     vtbl[].vtbl.focusInEvent = miqt_exec_callback_cQPrintPreviewWidget_focusInEvent
-  if not isNil(vtbl.focusOutEvent):
+  if not isNil(vtbl[].focusOutEvent):
     vtbl[].vtbl.focusOutEvent = miqt_exec_callback_cQPrintPreviewWidget_focusOutEvent
-  if not isNil(vtbl.enterEvent):
+  if not isNil(vtbl[].enterEvent):
     vtbl[].vtbl.enterEvent = miqt_exec_callback_cQPrintPreviewWidget_enterEvent
-  if not isNil(vtbl.leaveEvent):
+  if not isNil(vtbl[].leaveEvent):
     vtbl[].vtbl.leaveEvent = miqt_exec_callback_cQPrintPreviewWidget_leaveEvent
-  if not isNil(vtbl.paintEvent):
+  if not isNil(vtbl[].paintEvent):
     vtbl[].vtbl.paintEvent = miqt_exec_callback_cQPrintPreviewWidget_paintEvent
-  if not isNil(vtbl.moveEvent):
+  if not isNil(vtbl[].moveEvent):
     vtbl[].vtbl.moveEvent = miqt_exec_callback_cQPrintPreviewWidget_moveEvent
-  if not isNil(vtbl.resizeEvent):
+  if not isNil(vtbl[].resizeEvent):
     vtbl[].vtbl.resizeEvent = miqt_exec_callback_cQPrintPreviewWidget_resizeEvent
-  if not isNil(vtbl.closeEvent):
+  if not isNil(vtbl[].closeEvent):
     vtbl[].vtbl.closeEvent = miqt_exec_callback_cQPrintPreviewWidget_closeEvent
-  if not isNil(vtbl.contextMenuEvent):
+  if not isNil(vtbl[].contextMenuEvent):
     vtbl[].vtbl.contextMenuEvent = miqt_exec_callback_cQPrintPreviewWidget_contextMenuEvent
-  if not isNil(vtbl.tabletEvent):
+  if not isNil(vtbl[].tabletEvent):
     vtbl[].vtbl.tabletEvent = miqt_exec_callback_cQPrintPreviewWidget_tabletEvent
-  if not isNil(vtbl.actionEvent):
+  if not isNil(vtbl[].actionEvent):
     vtbl[].vtbl.actionEvent = miqt_exec_callback_cQPrintPreviewWidget_actionEvent
-  if not isNil(vtbl.dragEnterEvent):
+  if not isNil(vtbl[].dragEnterEvent):
     vtbl[].vtbl.dragEnterEvent = miqt_exec_callback_cQPrintPreviewWidget_dragEnterEvent
-  if not isNil(vtbl.dragMoveEvent):
+  if not isNil(vtbl[].dragMoveEvent):
     vtbl[].vtbl.dragMoveEvent = miqt_exec_callback_cQPrintPreviewWidget_dragMoveEvent
-  if not isNil(vtbl.dragLeaveEvent):
+  if not isNil(vtbl[].dragLeaveEvent):
     vtbl[].vtbl.dragLeaveEvent = miqt_exec_callback_cQPrintPreviewWidget_dragLeaveEvent
-  if not isNil(vtbl.dropEvent):
+  if not isNil(vtbl[].dropEvent):
     vtbl[].vtbl.dropEvent = miqt_exec_callback_cQPrintPreviewWidget_dropEvent
-  if not isNil(vtbl.showEvent):
+  if not isNil(vtbl[].showEvent):
     vtbl[].vtbl.showEvent = miqt_exec_callback_cQPrintPreviewWidget_showEvent
-  if not isNil(vtbl.hideEvent):
+  if not isNil(vtbl[].hideEvent):
     vtbl[].vtbl.hideEvent = miqt_exec_callback_cQPrintPreviewWidget_hideEvent
-  if not isNil(vtbl.nativeEvent):
+  if not isNil(vtbl[].nativeEvent):
     vtbl[].vtbl.nativeEvent = miqt_exec_callback_cQPrintPreviewWidget_nativeEvent
-  if not isNil(vtbl.changeEvent):
+  if not isNil(vtbl[].changeEvent):
     vtbl[].vtbl.changeEvent = miqt_exec_callback_cQPrintPreviewWidget_changeEvent
-  if not isNil(vtbl.metric):
+  if not isNil(vtbl[].metric):
     vtbl[].vtbl.metric = miqt_exec_callback_cQPrintPreviewWidget_metric
-  if not isNil(vtbl.initPainter):
+  if not isNil(vtbl[].initPainter):
     vtbl[].vtbl.initPainter = miqt_exec_callback_cQPrintPreviewWidget_initPainter
-  if not isNil(vtbl.redirected):
+  if not isNil(vtbl[].redirected):
     vtbl[].vtbl.redirected = miqt_exec_callback_cQPrintPreviewWidget_redirected
-  if not isNil(vtbl.sharedPainter):
+  if not isNil(vtbl[].sharedPainter):
     vtbl[].vtbl.sharedPainter = miqt_exec_callback_cQPrintPreviewWidget_sharedPainter
-  if not isNil(vtbl.inputMethodEvent):
+  if not isNil(vtbl[].inputMethodEvent):
     vtbl[].vtbl.inputMethodEvent = miqt_exec_callback_cQPrintPreviewWidget_inputMethodEvent
-  if not isNil(vtbl.inputMethodQuery):
+  if not isNil(vtbl[].inputMethodQuery):
     vtbl[].vtbl.inputMethodQuery = miqt_exec_callback_cQPrintPreviewWidget_inputMethodQuery
-  if not isNil(vtbl.focusNextPrevChild):
+  if not isNil(vtbl[].focusNextPrevChild):
     vtbl[].vtbl.focusNextPrevChild = miqt_exec_callback_cQPrintPreviewWidget_focusNextPrevChild
-  if not isNil(vtbl.eventFilter):
+  if not isNil(vtbl[].eventFilter):
     vtbl[].vtbl.eventFilter = miqt_exec_callback_cQPrintPreviewWidget_eventFilter
-  if not isNil(vtbl.timerEvent):
+  if not isNil(vtbl[].timerEvent):
     vtbl[].vtbl.timerEvent = miqt_exec_callback_cQPrintPreviewWidget_timerEvent
-  if not isNil(vtbl.childEvent):
+  if not isNil(vtbl[].childEvent):
     vtbl[].vtbl.childEvent = miqt_exec_callback_cQPrintPreviewWidget_childEvent
-  if not isNil(vtbl.customEvent):
+  if not isNil(vtbl[].customEvent):
     vtbl[].vtbl.customEvent = miqt_exec_callback_cQPrintPreviewWidget_customEvent
-  if not isNil(vtbl.connectNotify):
+  if not isNil(vtbl[].connectNotify):
     vtbl[].vtbl.connectNotify = miqt_exec_callback_cQPrintPreviewWidget_connectNotify
-  if not isNil(vtbl.disconnectNotify):
+  if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQPrintPreviewWidget_disconnectNotify
-  gen_qprintpreviewwidget_types.QPrintPreviewWidget(h: fcQPrintPreviewWidget_new5(addr(vtbl[]), printer.h, parent.h, cint(flags)))
+  gen_qprintpreviewwidget_types.QPrintPreviewWidget(h: fcQPrintPreviewWidget_new5(addr(vtbl[].vtbl), printer.h, parent.h, cint(flags)), owned: true)
 
 proc create*(T: type gen_qprintpreviewwidget_types.QPrintPreviewWidget,
     parent: gen_qwidget_types.QWidget, flags: cint,
     vtbl: ref QPrintPreviewWidgetVTable = nil): gen_qprintpreviewwidget_types.QPrintPreviewWidget =
   let vtbl = if vtbl == nil: new QPrintPreviewWidgetVTable else: vtbl
   GC_ref(vtbl)
-  vtbl.vtbl.destructor = proc(vtbl: ptr cQPrintPreviewWidgetVTable, _: ptr cQPrintPreviewWidget) {.cdecl.} =
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQPrintPreviewWidgetVTable, _: ptr cQPrintPreviewWidget) {.cdecl.} =
     let vtbl = cast[ref QPrintPreviewWidgetVTable](vtbl)
     GC_unref(vtbl)
-  if not isNil(vtbl.metaObject):
+  if not isNil(vtbl[].metaObject):
     vtbl[].vtbl.metaObject = miqt_exec_callback_cQPrintPreviewWidget_metaObject
-  if not isNil(vtbl.metacast):
+  if not isNil(vtbl[].metacast):
     vtbl[].vtbl.metacast = miqt_exec_callback_cQPrintPreviewWidget_metacast
-  if not isNil(vtbl.metacall):
+  if not isNil(vtbl[].metacall):
     vtbl[].vtbl.metacall = miqt_exec_callback_cQPrintPreviewWidget_metacall
-  if not isNil(vtbl.setVisible):
+  if not isNil(vtbl[].setVisible):
     vtbl[].vtbl.setVisible = miqt_exec_callback_cQPrintPreviewWidget_setVisible
-  if not isNil(vtbl.devType):
+  if not isNil(vtbl[].devType):
     vtbl[].vtbl.devType = miqt_exec_callback_cQPrintPreviewWidget_devType
-  if not isNil(vtbl.sizeHint):
+  if not isNil(vtbl[].sizeHint):
     vtbl[].vtbl.sizeHint = miqt_exec_callback_cQPrintPreviewWidget_sizeHint
-  if not isNil(vtbl.minimumSizeHint):
+  if not isNil(vtbl[].minimumSizeHint):
     vtbl[].vtbl.minimumSizeHint = miqt_exec_callback_cQPrintPreviewWidget_minimumSizeHint
-  if not isNil(vtbl.heightForWidth):
+  if not isNil(vtbl[].heightForWidth):
     vtbl[].vtbl.heightForWidth = miqt_exec_callback_cQPrintPreviewWidget_heightForWidth
-  if not isNil(vtbl.hasHeightForWidth):
+  if not isNil(vtbl[].hasHeightForWidth):
     vtbl[].vtbl.hasHeightForWidth = miqt_exec_callback_cQPrintPreviewWidget_hasHeightForWidth
-  if not isNil(vtbl.paintEngine):
+  if not isNil(vtbl[].paintEngine):
     vtbl[].vtbl.paintEngine = miqt_exec_callback_cQPrintPreviewWidget_paintEngine
-  if not isNil(vtbl.event):
+  if not isNil(vtbl[].event):
     vtbl[].vtbl.event = miqt_exec_callback_cQPrintPreviewWidget_event
-  if not isNil(vtbl.mousePressEvent):
+  if not isNil(vtbl[].mousePressEvent):
     vtbl[].vtbl.mousePressEvent = miqt_exec_callback_cQPrintPreviewWidget_mousePressEvent
-  if not isNil(vtbl.mouseReleaseEvent):
+  if not isNil(vtbl[].mouseReleaseEvent):
     vtbl[].vtbl.mouseReleaseEvent = miqt_exec_callback_cQPrintPreviewWidget_mouseReleaseEvent
-  if not isNil(vtbl.mouseDoubleClickEvent):
+  if not isNil(vtbl[].mouseDoubleClickEvent):
     vtbl[].vtbl.mouseDoubleClickEvent = miqt_exec_callback_cQPrintPreviewWidget_mouseDoubleClickEvent
-  if not isNil(vtbl.mouseMoveEvent):
+  if not isNil(vtbl[].mouseMoveEvent):
     vtbl[].vtbl.mouseMoveEvent = miqt_exec_callback_cQPrintPreviewWidget_mouseMoveEvent
-  if not isNil(vtbl.wheelEvent):
+  if not isNil(vtbl[].wheelEvent):
     vtbl[].vtbl.wheelEvent = miqt_exec_callback_cQPrintPreviewWidget_wheelEvent
-  if not isNil(vtbl.keyPressEvent):
+  if not isNil(vtbl[].keyPressEvent):
     vtbl[].vtbl.keyPressEvent = miqt_exec_callback_cQPrintPreviewWidget_keyPressEvent
-  if not isNil(vtbl.keyReleaseEvent):
+  if not isNil(vtbl[].keyReleaseEvent):
     vtbl[].vtbl.keyReleaseEvent = miqt_exec_callback_cQPrintPreviewWidget_keyReleaseEvent
-  if not isNil(vtbl.focusInEvent):
+  if not isNil(vtbl[].focusInEvent):
     vtbl[].vtbl.focusInEvent = miqt_exec_callback_cQPrintPreviewWidget_focusInEvent
-  if not isNil(vtbl.focusOutEvent):
+  if not isNil(vtbl[].focusOutEvent):
     vtbl[].vtbl.focusOutEvent = miqt_exec_callback_cQPrintPreviewWidget_focusOutEvent
-  if not isNil(vtbl.enterEvent):
+  if not isNil(vtbl[].enterEvent):
     vtbl[].vtbl.enterEvent = miqt_exec_callback_cQPrintPreviewWidget_enterEvent
-  if not isNil(vtbl.leaveEvent):
+  if not isNil(vtbl[].leaveEvent):
     vtbl[].vtbl.leaveEvent = miqt_exec_callback_cQPrintPreviewWidget_leaveEvent
-  if not isNil(vtbl.paintEvent):
+  if not isNil(vtbl[].paintEvent):
     vtbl[].vtbl.paintEvent = miqt_exec_callback_cQPrintPreviewWidget_paintEvent
-  if not isNil(vtbl.moveEvent):
+  if not isNil(vtbl[].moveEvent):
     vtbl[].vtbl.moveEvent = miqt_exec_callback_cQPrintPreviewWidget_moveEvent
-  if not isNil(vtbl.resizeEvent):
+  if not isNil(vtbl[].resizeEvent):
     vtbl[].vtbl.resizeEvent = miqt_exec_callback_cQPrintPreviewWidget_resizeEvent
-  if not isNil(vtbl.closeEvent):
+  if not isNil(vtbl[].closeEvent):
     vtbl[].vtbl.closeEvent = miqt_exec_callback_cQPrintPreviewWidget_closeEvent
-  if not isNil(vtbl.contextMenuEvent):
+  if not isNil(vtbl[].contextMenuEvent):
     vtbl[].vtbl.contextMenuEvent = miqt_exec_callback_cQPrintPreviewWidget_contextMenuEvent
-  if not isNil(vtbl.tabletEvent):
+  if not isNil(vtbl[].tabletEvent):
     vtbl[].vtbl.tabletEvent = miqt_exec_callback_cQPrintPreviewWidget_tabletEvent
-  if not isNil(vtbl.actionEvent):
+  if not isNil(vtbl[].actionEvent):
     vtbl[].vtbl.actionEvent = miqt_exec_callback_cQPrintPreviewWidget_actionEvent
-  if not isNil(vtbl.dragEnterEvent):
+  if not isNil(vtbl[].dragEnterEvent):
     vtbl[].vtbl.dragEnterEvent = miqt_exec_callback_cQPrintPreviewWidget_dragEnterEvent
-  if not isNil(vtbl.dragMoveEvent):
+  if not isNil(vtbl[].dragMoveEvent):
     vtbl[].vtbl.dragMoveEvent = miqt_exec_callback_cQPrintPreviewWidget_dragMoveEvent
-  if not isNil(vtbl.dragLeaveEvent):
+  if not isNil(vtbl[].dragLeaveEvent):
     vtbl[].vtbl.dragLeaveEvent = miqt_exec_callback_cQPrintPreviewWidget_dragLeaveEvent
-  if not isNil(vtbl.dropEvent):
+  if not isNil(vtbl[].dropEvent):
     vtbl[].vtbl.dropEvent = miqt_exec_callback_cQPrintPreviewWidget_dropEvent
-  if not isNil(vtbl.showEvent):
+  if not isNil(vtbl[].showEvent):
     vtbl[].vtbl.showEvent = miqt_exec_callback_cQPrintPreviewWidget_showEvent
-  if not isNil(vtbl.hideEvent):
+  if not isNil(vtbl[].hideEvent):
     vtbl[].vtbl.hideEvent = miqt_exec_callback_cQPrintPreviewWidget_hideEvent
-  if not isNil(vtbl.nativeEvent):
+  if not isNil(vtbl[].nativeEvent):
     vtbl[].vtbl.nativeEvent = miqt_exec_callback_cQPrintPreviewWidget_nativeEvent
-  if not isNil(vtbl.changeEvent):
+  if not isNil(vtbl[].changeEvent):
     vtbl[].vtbl.changeEvent = miqt_exec_callback_cQPrintPreviewWidget_changeEvent
-  if not isNil(vtbl.metric):
+  if not isNil(vtbl[].metric):
     vtbl[].vtbl.metric = miqt_exec_callback_cQPrintPreviewWidget_metric
-  if not isNil(vtbl.initPainter):
+  if not isNil(vtbl[].initPainter):
     vtbl[].vtbl.initPainter = miqt_exec_callback_cQPrintPreviewWidget_initPainter
-  if not isNil(vtbl.redirected):
+  if not isNil(vtbl[].redirected):
     vtbl[].vtbl.redirected = miqt_exec_callback_cQPrintPreviewWidget_redirected
-  if not isNil(vtbl.sharedPainter):
+  if not isNil(vtbl[].sharedPainter):
     vtbl[].vtbl.sharedPainter = miqt_exec_callback_cQPrintPreviewWidget_sharedPainter
-  if not isNil(vtbl.inputMethodEvent):
+  if not isNil(vtbl[].inputMethodEvent):
     vtbl[].vtbl.inputMethodEvent = miqt_exec_callback_cQPrintPreviewWidget_inputMethodEvent
-  if not isNil(vtbl.inputMethodQuery):
+  if not isNil(vtbl[].inputMethodQuery):
     vtbl[].vtbl.inputMethodQuery = miqt_exec_callback_cQPrintPreviewWidget_inputMethodQuery
-  if not isNil(vtbl.focusNextPrevChild):
+  if not isNil(vtbl[].focusNextPrevChild):
     vtbl[].vtbl.focusNextPrevChild = miqt_exec_callback_cQPrintPreviewWidget_focusNextPrevChild
-  if not isNil(vtbl.eventFilter):
+  if not isNil(vtbl[].eventFilter):
     vtbl[].vtbl.eventFilter = miqt_exec_callback_cQPrintPreviewWidget_eventFilter
-  if not isNil(vtbl.timerEvent):
+  if not isNil(vtbl[].timerEvent):
     vtbl[].vtbl.timerEvent = miqt_exec_callback_cQPrintPreviewWidget_timerEvent
-  if not isNil(vtbl.childEvent):
+  if not isNil(vtbl[].childEvent):
     vtbl[].vtbl.childEvent = miqt_exec_callback_cQPrintPreviewWidget_childEvent
-  if not isNil(vtbl.customEvent):
+  if not isNil(vtbl[].customEvent):
     vtbl[].vtbl.customEvent = miqt_exec_callback_cQPrintPreviewWidget_customEvent
-  if not isNil(vtbl.connectNotify):
+  if not isNil(vtbl[].connectNotify):
     vtbl[].vtbl.connectNotify = miqt_exec_callback_cQPrintPreviewWidget_connectNotify
-  if not isNil(vtbl.disconnectNotify):
+  if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQPrintPreviewWidget_disconnectNotify
-  gen_qprintpreviewwidget_types.QPrintPreviewWidget(h: fcQPrintPreviewWidget_new6(addr(vtbl[]), parent.h, cint(flags)))
+  gen_qprintpreviewwidget_types.QPrintPreviewWidget(h: fcQPrintPreviewWidget_new6(addr(vtbl[].vtbl), parent.h, cint(flags)), owned: true)
+
+proc create*(T: type gen_qprintpreviewwidget_types.QPrintPreviewWidget,
+    parent: gen_qwidget_types.QWidget,
+    vtbl: VirtualQPrintPreviewWidget) =
+
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQPrintPreviewWidgetVTable, _: ptr cQPrintPreviewWidget) {.cdecl.} =
+    let vtbl = cast[ptr typeof(VirtualQPrintPreviewWidget()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQPrintPreviewWidget, vtbl)))
+    vtbl[].h = nil
+    vtbl[].owned = false
+  vtbl[].vtbl.metaObject = miqt_exec_method_cQPrintPreviewWidget_metaObject
+  vtbl[].vtbl.metacast = miqt_exec_method_cQPrintPreviewWidget_metacast
+  vtbl[].vtbl.metacall = miqt_exec_method_cQPrintPreviewWidget_metacall
+  vtbl[].vtbl.setVisible = miqt_exec_method_cQPrintPreviewWidget_setVisible
+  vtbl[].vtbl.devType = miqt_exec_method_cQPrintPreviewWidget_devType
+  vtbl[].vtbl.sizeHint = miqt_exec_method_cQPrintPreviewWidget_sizeHint
+  vtbl[].vtbl.minimumSizeHint = miqt_exec_method_cQPrintPreviewWidget_minimumSizeHint
+  vtbl[].vtbl.heightForWidth = miqt_exec_method_cQPrintPreviewWidget_heightForWidth
+  vtbl[].vtbl.hasHeightForWidth = miqt_exec_method_cQPrintPreviewWidget_hasHeightForWidth
+  vtbl[].vtbl.paintEngine = miqt_exec_method_cQPrintPreviewWidget_paintEngine
+  vtbl[].vtbl.event = miqt_exec_method_cQPrintPreviewWidget_event
+  vtbl[].vtbl.mousePressEvent = miqt_exec_method_cQPrintPreviewWidget_mousePressEvent
+  vtbl[].vtbl.mouseReleaseEvent = miqt_exec_method_cQPrintPreviewWidget_mouseReleaseEvent
+  vtbl[].vtbl.mouseDoubleClickEvent = miqt_exec_method_cQPrintPreviewWidget_mouseDoubleClickEvent
+  vtbl[].vtbl.mouseMoveEvent = miqt_exec_method_cQPrintPreviewWidget_mouseMoveEvent
+  vtbl[].vtbl.wheelEvent = miqt_exec_method_cQPrintPreviewWidget_wheelEvent
+  vtbl[].vtbl.keyPressEvent = miqt_exec_method_cQPrintPreviewWidget_keyPressEvent
+  vtbl[].vtbl.keyReleaseEvent = miqt_exec_method_cQPrintPreviewWidget_keyReleaseEvent
+  vtbl[].vtbl.focusInEvent = miqt_exec_method_cQPrintPreviewWidget_focusInEvent
+  vtbl[].vtbl.focusOutEvent = miqt_exec_method_cQPrintPreviewWidget_focusOutEvent
+  vtbl[].vtbl.enterEvent = miqt_exec_method_cQPrintPreviewWidget_enterEvent
+  vtbl[].vtbl.leaveEvent = miqt_exec_method_cQPrintPreviewWidget_leaveEvent
+  vtbl[].vtbl.paintEvent = miqt_exec_method_cQPrintPreviewWidget_paintEvent
+  vtbl[].vtbl.moveEvent = miqt_exec_method_cQPrintPreviewWidget_moveEvent
+  vtbl[].vtbl.resizeEvent = miqt_exec_method_cQPrintPreviewWidget_resizeEvent
+  vtbl[].vtbl.closeEvent = miqt_exec_method_cQPrintPreviewWidget_closeEvent
+  vtbl[].vtbl.contextMenuEvent = miqt_exec_method_cQPrintPreviewWidget_contextMenuEvent
+  vtbl[].vtbl.tabletEvent = miqt_exec_method_cQPrintPreviewWidget_tabletEvent
+  vtbl[].vtbl.actionEvent = miqt_exec_method_cQPrintPreviewWidget_actionEvent
+  vtbl[].vtbl.dragEnterEvent = miqt_exec_method_cQPrintPreviewWidget_dragEnterEvent
+  vtbl[].vtbl.dragMoveEvent = miqt_exec_method_cQPrintPreviewWidget_dragMoveEvent
+  vtbl[].vtbl.dragLeaveEvent = miqt_exec_method_cQPrintPreviewWidget_dragLeaveEvent
+  vtbl[].vtbl.dropEvent = miqt_exec_method_cQPrintPreviewWidget_dropEvent
+  vtbl[].vtbl.showEvent = miqt_exec_method_cQPrintPreviewWidget_showEvent
+  vtbl[].vtbl.hideEvent = miqt_exec_method_cQPrintPreviewWidget_hideEvent
+  vtbl[].vtbl.nativeEvent = miqt_exec_method_cQPrintPreviewWidget_nativeEvent
+  vtbl[].vtbl.changeEvent = miqt_exec_method_cQPrintPreviewWidget_changeEvent
+  vtbl[].vtbl.metric = miqt_exec_method_cQPrintPreviewWidget_metric
+  vtbl[].vtbl.initPainter = miqt_exec_method_cQPrintPreviewWidget_initPainter
+  vtbl[].vtbl.redirected = miqt_exec_method_cQPrintPreviewWidget_redirected
+  vtbl[].vtbl.sharedPainter = miqt_exec_method_cQPrintPreviewWidget_sharedPainter
+  vtbl[].vtbl.inputMethodEvent = miqt_exec_method_cQPrintPreviewWidget_inputMethodEvent
+  vtbl[].vtbl.inputMethodQuery = miqt_exec_method_cQPrintPreviewWidget_inputMethodQuery
+  vtbl[].vtbl.focusNextPrevChild = miqt_exec_method_cQPrintPreviewWidget_focusNextPrevChild
+  vtbl[].vtbl.eventFilter = miqt_exec_method_cQPrintPreviewWidget_eventFilter
+  vtbl[].vtbl.timerEvent = miqt_exec_method_cQPrintPreviewWidget_timerEvent
+  vtbl[].vtbl.childEvent = miqt_exec_method_cQPrintPreviewWidget_childEvent
+  vtbl[].vtbl.customEvent = miqt_exec_method_cQPrintPreviewWidget_customEvent
+  vtbl[].vtbl.connectNotify = miqt_exec_method_cQPrintPreviewWidget_connectNotify
+  vtbl[].vtbl.disconnectNotify = miqt_exec_method_cQPrintPreviewWidget_disconnectNotify
+  if vtbl[].h != nil: delete(move(vtbl[]))
+  vtbl[].h = fcQPrintPreviewWidget_new(addr(vtbl[].vtbl), parent.h)
+  vtbl[].owned = true
+
+proc create*(T: type gen_qprintpreviewwidget_types.QPrintPreviewWidget,
+    printer: gen_qprinter_types.QPrinter,
+    vtbl: VirtualQPrintPreviewWidget) =
+
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQPrintPreviewWidgetVTable, _: ptr cQPrintPreviewWidget) {.cdecl.} =
+    let vtbl = cast[ptr typeof(VirtualQPrintPreviewWidget()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQPrintPreviewWidget, vtbl)))
+    vtbl[].h = nil
+    vtbl[].owned = false
+  vtbl[].vtbl.metaObject = miqt_exec_method_cQPrintPreviewWidget_metaObject
+  vtbl[].vtbl.metacast = miqt_exec_method_cQPrintPreviewWidget_metacast
+  vtbl[].vtbl.metacall = miqt_exec_method_cQPrintPreviewWidget_metacall
+  vtbl[].vtbl.setVisible = miqt_exec_method_cQPrintPreviewWidget_setVisible
+  vtbl[].vtbl.devType = miqt_exec_method_cQPrintPreviewWidget_devType
+  vtbl[].vtbl.sizeHint = miqt_exec_method_cQPrintPreviewWidget_sizeHint
+  vtbl[].vtbl.minimumSizeHint = miqt_exec_method_cQPrintPreviewWidget_minimumSizeHint
+  vtbl[].vtbl.heightForWidth = miqt_exec_method_cQPrintPreviewWidget_heightForWidth
+  vtbl[].vtbl.hasHeightForWidth = miqt_exec_method_cQPrintPreviewWidget_hasHeightForWidth
+  vtbl[].vtbl.paintEngine = miqt_exec_method_cQPrintPreviewWidget_paintEngine
+  vtbl[].vtbl.event = miqt_exec_method_cQPrintPreviewWidget_event
+  vtbl[].vtbl.mousePressEvent = miqt_exec_method_cQPrintPreviewWidget_mousePressEvent
+  vtbl[].vtbl.mouseReleaseEvent = miqt_exec_method_cQPrintPreviewWidget_mouseReleaseEvent
+  vtbl[].vtbl.mouseDoubleClickEvent = miqt_exec_method_cQPrintPreviewWidget_mouseDoubleClickEvent
+  vtbl[].vtbl.mouseMoveEvent = miqt_exec_method_cQPrintPreviewWidget_mouseMoveEvent
+  vtbl[].vtbl.wheelEvent = miqt_exec_method_cQPrintPreviewWidget_wheelEvent
+  vtbl[].vtbl.keyPressEvent = miqt_exec_method_cQPrintPreviewWidget_keyPressEvent
+  vtbl[].vtbl.keyReleaseEvent = miqt_exec_method_cQPrintPreviewWidget_keyReleaseEvent
+  vtbl[].vtbl.focusInEvent = miqt_exec_method_cQPrintPreviewWidget_focusInEvent
+  vtbl[].vtbl.focusOutEvent = miqt_exec_method_cQPrintPreviewWidget_focusOutEvent
+  vtbl[].vtbl.enterEvent = miqt_exec_method_cQPrintPreviewWidget_enterEvent
+  vtbl[].vtbl.leaveEvent = miqt_exec_method_cQPrintPreviewWidget_leaveEvent
+  vtbl[].vtbl.paintEvent = miqt_exec_method_cQPrintPreviewWidget_paintEvent
+  vtbl[].vtbl.moveEvent = miqt_exec_method_cQPrintPreviewWidget_moveEvent
+  vtbl[].vtbl.resizeEvent = miqt_exec_method_cQPrintPreviewWidget_resizeEvent
+  vtbl[].vtbl.closeEvent = miqt_exec_method_cQPrintPreviewWidget_closeEvent
+  vtbl[].vtbl.contextMenuEvent = miqt_exec_method_cQPrintPreviewWidget_contextMenuEvent
+  vtbl[].vtbl.tabletEvent = miqt_exec_method_cQPrintPreviewWidget_tabletEvent
+  vtbl[].vtbl.actionEvent = miqt_exec_method_cQPrintPreviewWidget_actionEvent
+  vtbl[].vtbl.dragEnterEvent = miqt_exec_method_cQPrintPreviewWidget_dragEnterEvent
+  vtbl[].vtbl.dragMoveEvent = miqt_exec_method_cQPrintPreviewWidget_dragMoveEvent
+  vtbl[].vtbl.dragLeaveEvent = miqt_exec_method_cQPrintPreviewWidget_dragLeaveEvent
+  vtbl[].vtbl.dropEvent = miqt_exec_method_cQPrintPreviewWidget_dropEvent
+  vtbl[].vtbl.showEvent = miqt_exec_method_cQPrintPreviewWidget_showEvent
+  vtbl[].vtbl.hideEvent = miqt_exec_method_cQPrintPreviewWidget_hideEvent
+  vtbl[].vtbl.nativeEvent = miqt_exec_method_cQPrintPreviewWidget_nativeEvent
+  vtbl[].vtbl.changeEvent = miqt_exec_method_cQPrintPreviewWidget_changeEvent
+  vtbl[].vtbl.metric = miqt_exec_method_cQPrintPreviewWidget_metric
+  vtbl[].vtbl.initPainter = miqt_exec_method_cQPrintPreviewWidget_initPainter
+  vtbl[].vtbl.redirected = miqt_exec_method_cQPrintPreviewWidget_redirected
+  vtbl[].vtbl.sharedPainter = miqt_exec_method_cQPrintPreviewWidget_sharedPainter
+  vtbl[].vtbl.inputMethodEvent = miqt_exec_method_cQPrintPreviewWidget_inputMethodEvent
+  vtbl[].vtbl.inputMethodQuery = miqt_exec_method_cQPrintPreviewWidget_inputMethodQuery
+  vtbl[].vtbl.focusNextPrevChild = miqt_exec_method_cQPrintPreviewWidget_focusNextPrevChild
+  vtbl[].vtbl.eventFilter = miqt_exec_method_cQPrintPreviewWidget_eventFilter
+  vtbl[].vtbl.timerEvent = miqt_exec_method_cQPrintPreviewWidget_timerEvent
+  vtbl[].vtbl.childEvent = miqt_exec_method_cQPrintPreviewWidget_childEvent
+  vtbl[].vtbl.customEvent = miqt_exec_method_cQPrintPreviewWidget_customEvent
+  vtbl[].vtbl.connectNotify = miqt_exec_method_cQPrintPreviewWidget_connectNotify
+  vtbl[].vtbl.disconnectNotify = miqt_exec_method_cQPrintPreviewWidget_disconnectNotify
+  if vtbl[].h != nil: delete(move(vtbl[]))
+  vtbl[].h = fcQPrintPreviewWidget_new2(addr(vtbl[].vtbl), printer.h)
+  vtbl[].owned = true
+
+proc create*(T: type gen_qprintpreviewwidget_types.QPrintPreviewWidget,
+    vtbl: VirtualQPrintPreviewWidget) =
+
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQPrintPreviewWidgetVTable, _: ptr cQPrintPreviewWidget) {.cdecl.} =
+    let vtbl = cast[ptr typeof(VirtualQPrintPreviewWidget()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQPrintPreviewWidget, vtbl)))
+    vtbl[].h = nil
+    vtbl[].owned = false
+  vtbl[].vtbl.metaObject = miqt_exec_method_cQPrintPreviewWidget_metaObject
+  vtbl[].vtbl.metacast = miqt_exec_method_cQPrintPreviewWidget_metacast
+  vtbl[].vtbl.metacall = miqt_exec_method_cQPrintPreviewWidget_metacall
+  vtbl[].vtbl.setVisible = miqt_exec_method_cQPrintPreviewWidget_setVisible
+  vtbl[].vtbl.devType = miqt_exec_method_cQPrintPreviewWidget_devType
+  vtbl[].vtbl.sizeHint = miqt_exec_method_cQPrintPreviewWidget_sizeHint
+  vtbl[].vtbl.minimumSizeHint = miqt_exec_method_cQPrintPreviewWidget_minimumSizeHint
+  vtbl[].vtbl.heightForWidth = miqt_exec_method_cQPrintPreviewWidget_heightForWidth
+  vtbl[].vtbl.hasHeightForWidth = miqt_exec_method_cQPrintPreviewWidget_hasHeightForWidth
+  vtbl[].vtbl.paintEngine = miqt_exec_method_cQPrintPreviewWidget_paintEngine
+  vtbl[].vtbl.event = miqt_exec_method_cQPrintPreviewWidget_event
+  vtbl[].vtbl.mousePressEvent = miqt_exec_method_cQPrintPreviewWidget_mousePressEvent
+  vtbl[].vtbl.mouseReleaseEvent = miqt_exec_method_cQPrintPreviewWidget_mouseReleaseEvent
+  vtbl[].vtbl.mouseDoubleClickEvent = miqt_exec_method_cQPrintPreviewWidget_mouseDoubleClickEvent
+  vtbl[].vtbl.mouseMoveEvent = miqt_exec_method_cQPrintPreviewWidget_mouseMoveEvent
+  vtbl[].vtbl.wheelEvent = miqt_exec_method_cQPrintPreviewWidget_wheelEvent
+  vtbl[].vtbl.keyPressEvent = miqt_exec_method_cQPrintPreviewWidget_keyPressEvent
+  vtbl[].vtbl.keyReleaseEvent = miqt_exec_method_cQPrintPreviewWidget_keyReleaseEvent
+  vtbl[].vtbl.focusInEvent = miqt_exec_method_cQPrintPreviewWidget_focusInEvent
+  vtbl[].vtbl.focusOutEvent = miqt_exec_method_cQPrintPreviewWidget_focusOutEvent
+  vtbl[].vtbl.enterEvent = miqt_exec_method_cQPrintPreviewWidget_enterEvent
+  vtbl[].vtbl.leaveEvent = miqt_exec_method_cQPrintPreviewWidget_leaveEvent
+  vtbl[].vtbl.paintEvent = miqt_exec_method_cQPrintPreviewWidget_paintEvent
+  vtbl[].vtbl.moveEvent = miqt_exec_method_cQPrintPreviewWidget_moveEvent
+  vtbl[].vtbl.resizeEvent = miqt_exec_method_cQPrintPreviewWidget_resizeEvent
+  vtbl[].vtbl.closeEvent = miqt_exec_method_cQPrintPreviewWidget_closeEvent
+  vtbl[].vtbl.contextMenuEvent = miqt_exec_method_cQPrintPreviewWidget_contextMenuEvent
+  vtbl[].vtbl.tabletEvent = miqt_exec_method_cQPrintPreviewWidget_tabletEvent
+  vtbl[].vtbl.actionEvent = miqt_exec_method_cQPrintPreviewWidget_actionEvent
+  vtbl[].vtbl.dragEnterEvent = miqt_exec_method_cQPrintPreviewWidget_dragEnterEvent
+  vtbl[].vtbl.dragMoveEvent = miqt_exec_method_cQPrintPreviewWidget_dragMoveEvent
+  vtbl[].vtbl.dragLeaveEvent = miqt_exec_method_cQPrintPreviewWidget_dragLeaveEvent
+  vtbl[].vtbl.dropEvent = miqt_exec_method_cQPrintPreviewWidget_dropEvent
+  vtbl[].vtbl.showEvent = miqt_exec_method_cQPrintPreviewWidget_showEvent
+  vtbl[].vtbl.hideEvent = miqt_exec_method_cQPrintPreviewWidget_hideEvent
+  vtbl[].vtbl.nativeEvent = miqt_exec_method_cQPrintPreviewWidget_nativeEvent
+  vtbl[].vtbl.changeEvent = miqt_exec_method_cQPrintPreviewWidget_changeEvent
+  vtbl[].vtbl.metric = miqt_exec_method_cQPrintPreviewWidget_metric
+  vtbl[].vtbl.initPainter = miqt_exec_method_cQPrintPreviewWidget_initPainter
+  vtbl[].vtbl.redirected = miqt_exec_method_cQPrintPreviewWidget_redirected
+  vtbl[].vtbl.sharedPainter = miqt_exec_method_cQPrintPreviewWidget_sharedPainter
+  vtbl[].vtbl.inputMethodEvent = miqt_exec_method_cQPrintPreviewWidget_inputMethodEvent
+  vtbl[].vtbl.inputMethodQuery = miqt_exec_method_cQPrintPreviewWidget_inputMethodQuery
+  vtbl[].vtbl.focusNextPrevChild = miqt_exec_method_cQPrintPreviewWidget_focusNextPrevChild
+  vtbl[].vtbl.eventFilter = miqt_exec_method_cQPrintPreviewWidget_eventFilter
+  vtbl[].vtbl.timerEvent = miqt_exec_method_cQPrintPreviewWidget_timerEvent
+  vtbl[].vtbl.childEvent = miqt_exec_method_cQPrintPreviewWidget_childEvent
+  vtbl[].vtbl.customEvent = miqt_exec_method_cQPrintPreviewWidget_customEvent
+  vtbl[].vtbl.connectNotify = miqt_exec_method_cQPrintPreviewWidget_connectNotify
+  vtbl[].vtbl.disconnectNotify = miqt_exec_method_cQPrintPreviewWidget_disconnectNotify
+  if vtbl[].h != nil: delete(move(vtbl[]))
+  vtbl[].h = fcQPrintPreviewWidget_new3(addr(vtbl[].vtbl), )
+  vtbl[].owned = true
+
+proc create*(T: type gen_qprintpreviewwidget_types.QPrintPreviewWidget,
+    printer: gen_qprinter_types.QPrinter, parent: gen_qwidget_types.QWidget,
+    vtbl: VirtualQPrintPreviewWidget) =
+
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQPrintPreviewWidgetVTable, _: ptr cQPrintPreviewWidget) {.cdecl.} =
+    let vtbl = cast[ptr typeof(VirtualQPrintPreviewWidget()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQPrintPreviewWidget, vtbl)))
+    vtbl[].h = nil
+    vtbl[].owned = false
+  vtbl[].vtbl.metaObject = miqt_exec_method_cQPrintPreviewWidget_metaObject
+  vtbl[].vtbl.metacast = miqt_exec_method_cQPrintPreviewWidget_metacast
+  vtbl[].vtbl.metacall = miqt_exec_method_cQPrintPreviewWidget_metacall
+  vtbl[].vtbl.setVisible = miqt_exec_method_cQPrintPreviewWidget_setVisible
+  vtbl[].vtbl.devType = miqt_exec_method_cQPrintPreviewWidget_devType
+  vtbl[].vtbl.sizeHint = miqt_exec_method_cQPrintPreviewWidget_sizeHint
+  vtbl[].vtbl.minimumSizeHint = miqt_exec_method_cQPrintPreviewWidget_minimumSizeHint
+  vtbl[].vtbl.heightForWidth = miqt_exec_method_cQPrintPreviewWidget_heightForWidth
+  vtbl[].vtbl.hasHeightForWidth = miqt_exec_method_cQPrintPreviewWidget_hasHeightForWidth
+  vtbl[].vtbl.paintEngine = miqt_exec_method_cQPrintPreviewWidget_paintEngine
+  vtbl[].vtbl.event = miqt_exec_method_cQPrintPreviewWidget_event
+  vtbl[].vtbl.mousePressEvent = miqt_exec_method_cQPrintPreviewWidget_mousePressEvent
+  vtbl[].vtbl.mouseReleaseEvent = miqt_exec_method_cQPrintPreviewWidget_mouseReleaseEvent
+  vtbl[].vtbl.mouseDoubleClickEvent = miqt_exec_method_cQPrintPreviewWidget_mouseDoubleClickEvent
+  vtbl[].vtbl.mouseMoveEvent = miqt_exec_method_cQPrintPreviewWidget_mouseMoveEvent
+  vtbl[].vtbl.wheelEvent = miqt_exec_method_cQPrintPreviewWidget_wheelEvent
+  vtbl[].vtbl.keyPressEvent = miqt_exec_method_cQPrintPreviewWidget_keyPressEvent
+  vtbl[].vtbl.keyReleaseEvent = miqt_exec_method_cQPrintPreviewWidget_keyReleaseEvent
+  vtbl[].vtbl.focusInEvent = miqt_exec_method_cQPrintPreviewWidget_focusInEvent
+  vtbl[].vtbl.focusOutEvent = miqt_exec_method_cQPrintPreviewWidget_focusOutEvent
+  vtbl[].vtbl.enterEvent = miqt_exec_method_cQPrintPreviewWidget_enterEvent
+  vtbl[].vtbl.leaveEvent = miqt_exec_method_cQPrintPreviewWidget_leaveEvent
+  vtbl[].vtbl.paintEvent = miqt_exec_method_cQPrintPreviewWidget_paintEvent
+  vtbl[].vtbl.moveEvent = miqt_exec_method_cQPrintPreviewWidget_moveEvent
+  vtbl[].vtbl.resizeEvent = miqt_exec_method_cQPrintPreviewWidget_resizeEvent
+  vtbl[].vtbl.closeEvent = miqt_exec_method_cQPrintPreviewWidget_closeEvent
+  vtbl[].vtbl.contextMenuEvent = miqt_exec_method_cQPrintPreviewWidget_contextMenuEvent
+  vtbl[].vtbl.tabletEvent = miqt_exec_method_cQPrintPreviewWidget_tabletEvent
+  vtbl[].vtbl.actionEvent = miqt_exec_method_cQPrintPreviewWidget_actionEvent
+  vtbl[].vtbl.dragEnterEvent = miqt_exec_method_cQPrintPreviewWidget_dragEnterEvent
+  vtbl[].vtbl.dragMoveEvent = miqt_exec_method_cQPrintPreviewWidget_dragMoveEvent
+  vtbl[].vtbl.dragLeaveEvent = miqt_exec_method_cQPrintPreviewWidget_dragLeaveEvent
+  vtbl[].vtbl.dropEvent = miqt_exec_method_cQPrintPreviewWidget_dropEvent
+  vtbl[].vtbl.showEvent = miqt_exec_method_cQPrintPreviewWidget_showEvent
+  vtbl[].vtbl.hideEvent = miqt_exec_method_cQPrintPreviewWidget_hideEvent
+  vtbl[].vtbl.nativeEvent = miqt_exec_method_cQPrintPreviewWidget_nativeEvent
+  vtbl[].vtbl.changeEvent = miqt_exec_method_cQPrintPreviewWidget_changeEvent
+  vtbl[].vtbl.metric = miqt_exec_method_cQPrintPreviewWidget_metric
+  vtbl[].vtbl.initPainter = miqt_exec_method_cQPrintPreviewWidget_initPainter
+  vtbl[].vtbl.redirected = miqt_exec_method_cQPrintPreviewWidget_redirected
+  vtbl[].vtbl.sharedPainter = miqt_exec_method_cQPrintPreviewWidget_sharedPainter
+  vtbl[].vtbl.inputMethodEvent = miqt_exec_method_cQPrintPreviewWidget_inputMethodEvent
+  vtbl[].vtbl.inputMethodQuery = miqt_exec_method_cQPrintPreviewWidget_inputMethodQuery
+  vtbl[].vtbl.focusNextPrevChild = miqt_exec_method_cQPrintPreviewWidget_focusNextPrevChild
+  vtbl[].vtbl.eventFilter = miqt_exec_method_cQPrintPreviewWidget_eventFilter
+  vtbl[].vtbl.timerEvent = miqt_exec_method_cQPrintPreviewWidget_timerEvent
+  vtbl[].vtbl.childEvent = miqt_exec_method_cQPrintPreviewWidget_childEvent
+  vtbl[].vtbl.customEvent = miqt_exec_method_cQPrintPreviewWidget_customEvent
+  vtbl[].vtbl.connectNotify = miqt_exec_method_cQPrintPreviewWidget_connectNotify
+  vtbl[].vtbl.disconnectNotify = miqt_exec_method_cQPrintPreviewWidget_disconnectNotify
+  if vtbl[].h != nil: delete(move(vtbl[]))
+  vtbl[].h = fcQPrintPreviewWidget_new4(addr(vtbl[].vtbl), printer.h, parent.h)
+  vtbl[].owned = true
+
+proc create*(T: type gen_qprintpreviewwidget_types.QPrintPreviewWidget,
+    printer: gen_qprinter_types.QPrinter, parent: gen_qwidget_types.QWidget, flags: cint,
+    vtbl: VirtualQPrintPreviewWidget) =
+
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQPrintPreviewWidgetVTable, _: ptr cQPrintPreviewWidget) {.cdecl.} =
+    let vtbl = cast[ptr typeof(VirtualQPrintPreviewWidget()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQPrintPreviewWidget, vtbl)))
+    vtbl[].h = nil
+    vtbl[].owned = false
+  vtbl[].vtbl.metaObject = miqt_exec_method_cQPrintPreviewWidget_metaObject
+  vtbl[].vtbl.metacast = miqt_exec_method_cQPrintPreviewWidget_metacast
+  vtbl[].vtbl.metacall = miqt_exec_method_cQPrintPreviewWidget_metacall
+  vtbl[].vtbl.setVisible = miqt_exec_method_cQPrintPreviewWidget_setVisible
+  vtbl[].vtbl.devType = miqt_exec_method_cQPrintPreviewWidget_devType
+  vtbl[].vtbl.sizeHint = miqt_exec_method_cQPrintPreviewWidget_sizeHint
+  vtbl[].vtbl.minimumSizeHint = miqt_exec_method_cQPrintPreviewWidget_minimumSizeHint
+  vtbl[].vtbl.heightForWidth = miqt_exec_method_cQPrintPreviewWidget_heightForWidth
+  vtbl[].vtbl.hasHeightForWidth = miqt_exec_method_cQPrintPreviewWidget_hasHeightForWidth
+  vtbl[].vtbl.paintEngine = miqt_exec_method_cQPrintPreviewWidget_paintEngine
+  vtbl[].vtbl.event = miqt_exec_method_cQPrintPreviewWidget_event
+  vtbl[].vtbl.mousePressEvent = miqt_exec_method_cQPrintPreviewWidget_mousePressEvent
+  vtbl[].vtbl.mouseReleaseEvent = miqt_exec_method_cQPrintPreviewWidget_mouseReleaseEvent
+  vtbl[].vtbl.mouseDoubleClickEvent = miqt_exec_method_cQPrintPreviewWidget_mouseDoubleClickEvent
+  vtbl[].vtbl.mouseMoveEvent = miqt_exec_method_cQPrintPreviewWidget_mouseMoveEvent
+  vtbl[].vtbl.wheelEvent = miqt_exec_method_cQPrintPreviewWidget_wheelEvent
+  vtbl[].vtbl.keyPressEvent = miqt_exec_method_cQPrintPreviewWidget_keyPressEvent
+  vtbl[].vtbl.keyReleaseEvent = miqt_exec_method_cQPrintPreviewWidget_keyReleaseEvent
+  vtbl[].vtbl.focusInEvent = miqt_exec_method_cQPrintPreviewWidget_focusInEvent
+  vtbl[].vtbl.focusOutEvent = miqt_exec_method_cQPrintPreviewWidget_focusOutEvent
+  vtbl[].vtbl.enterEvent = miqt_exec_method_cQPrintPreviewWidget_enterEvent
+  vtbl[].vtbl.leaveEvent = miqt_exec_method_cQPrintPreviewWidget_leaveEvent
+  vtbl[].vtbl.paintEvent = miqt_exec_method_cQPrintPreviewWidget_paintEvent
+  vtbl[].vtbl.moveEvent = miqt_exec_method_cQPrintPreviewWidget_moveEvent
+  vtbl[].vtbl.resizeEvent = miqt_exec_method_cQPrintPreviewWidget_resizeEvent
+  vtbl[].vtbl.closeEvent = miqt_exec_method_cQPrintPreviewWidget_closeEvent
+  vtbl[].vtbl.contextMenuEvent = miqt_exec_method_cQPrintPreviewWidget_contextMenuEvent
+  vtbl[].vtbl.tabletEvent = miqt_exec_method_cQPrintPreviewWidget_tabletEvent
+  vtbl[].vtbl.actionEvent = miqt_exec_method_cQPrintPreviewWidget_actionEvent
+  vtbl[].vtbl.dragEnterEvent = miqt_exec_method_cQPrintPreviewWidget_dragEnterEvent
+  vtbl[].vtbl.dragMoveEvent = miqt_exec_method_cQPrintPreviewWidget_dragMoveEvent
+  vtbl[].vtbl.dragLeaveEvent = miqt_exec_method_cQPrintPreviewWidget_dragLeaveEvent
+  vtbl[].vtbl.dropEvent = miqt_exec_method_cQPrintPreviewWidget_dropEvent
+  vtbl[].vtbl.showEvent = miqt_exec_method_cQPrintPreviewWidget_showEvent
+  vtbl[].vtbl.hideEvent = miqt_exec_method_cQPrintPreviewWidget_hideEvent
+  vtbl[].vtbl.nativeEvent = miqt_exec_method_cQPrintPreviewWidget_nativeEvent
+  vtbl[].vtbl.changeEvent = miqt_exec_method_cQPrintPreviewWidget_changeEvent
+  vtbl[].vtbl.metric = miqt_exec_method_cQPrintPreviewWidget_metric
+  vtbl[].vtbl.initPainter = miqt_exec_method_cQPrintPreviewWidget_initPainter
+  vtbl[].vtbl.redirected = miqt_exec_method_cQPrintPreviewWidget_redirected
+  vtbl[].vtbl.sharedPainter = miqt_exec_method_cQPrintPreviewWidget_sharedPainter
+  vtbl[].vtbl.inputMethodEvent = miqt_exec_method_cQPrintPreviewWidget_inputMethodEvent
+  vtbl[].vtbl.inputMethodQuery = miqt_exec_method_cQPrintPreviewWidget_inputMethodQuery
+  vtbl[].vtbl.focusNextPrevChild = miqt_exec_method_cQPrintPreviewWidget_focusNextPrevChild
+  vtbl[].vtbl.eventFilter = miqt_exec_method_cQPrintPreviewWidget_eventFilter
+  vtbl[].vtbl.timerEvent = miqt_exec_method_cQPrintPreviewWidget_timerEvent
+  vtbl[].vtbl.childEvent = miqt_exec_method_cQPrintPreviewWidget_childEvent
+  vtbl[].vtbl.customEvent = miqt_exec_method_cQPrintPreviewWidget_customEvent
+  vtbl[].vtbl.connectNotify = miqt_exec_method_cQPrintPreviewWidget_connectNotify
+  vtbl[].vtbl.disconnectNotify = miqt_exec_method_cQPrintPreviewWidget_disconnectNotify
+  if vtbl[].h != nil: delete(move(vtbl[]))
+  vtbl[].h = fcQPrintPreviewWidget_new5(addr(vtbl[].vtbl), printer.h, parent.h, cint(flags))
+  vtbl[].owned = true
+
+proc create*(T: type gen_qprintpreviewwidget_types.QPrintPreviewWidget,
+    parent: gen_qwidget_types.QWidget, flags: cint,
+    vtbl: VirtualQPrintPreviewWidget) =
+
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQPrintPreviewWidgetVTable, _: ptr cQPrintPreviewWidget) {.cdecl.} =
+    let vtbl = cast[ptr typeof(VirtualQPrintPreviewWidget()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQPrintPreviewWidget, vtbl)))
+    vtbl[].h = nil
+    vtbl[].owned = false
+  vtbl[].vtbl.metaObject = miqt_exec_method_cQPrintPreviewWidget_metaObject
+  vtbl[].vtbl.metacast = miqt_exec_method_cQPrintPreviewWidget_metacast
+  vtbl[].vtbl.metacall = miqt_exec_method_cQPrintPreviewWidget_metacall
+  vtbl[].vtbl.setVisible = miqt_exec_method_cQPrintPreviewWidget_setVisible
+  vtbl[].vtbl.devType = miqt_exec_method_cQPrintPreviewWidget_devType
+  vtbl[].vtbl.sizeHint = miqt_exec_method_cQPrintPreviewWidget_sizeHint
+  vtbl[].vtbl.minimumSizeHint = miqt_exec_method_cQPrintPreviewWidget_minimumSizeHint
+  vtbl[].vtbl.heightForWidth = miqt_exec_method_cQPrintPreviewWidget_heightForWidth
+  vtbl[].vtbl.hasHeightForWidth = miqt_exec_method_cQPrintPreviewWidget_hasHeightForWidth
+  vtbl[].vtbl.paintEngine = miqt_exec_method_cQPrintPreviewWidget_paintEngine
+  vtbl[].vtbl.event = miqt_exec_method_cQPrintPreviewWidget_event
+  vtbl[].vtbl.mousePressEvent = miqt_exec_method_cQPrintPreviewWidget_mousePressEvent
+  vtbl[].vtbl.mouseReleaseEvent = miqt_exec_method_cQPrintPreviewWidget_mouseReleaseEvent
+  vtbl[].vtbl.mouseDoubleClickEvent = miqt_exec_method_cQPrintPreviewWidget_mouseDoubleClickEvent
+  vtbl[].vtbl.mouseMoveEvent = miqt_exec_method_cQPrintPreviewWidget_mouseMoveEvent
+  vtbl[].vtbl.wheelEvent = miqt_exec_method_cQPrintPreviewWidget_wheelEvent
+  vtbl[].vtbl.keyPressEvent = miqt_exec_method_cQPrintPreviewWidget_keyPressEvent
+  vtbl[].vtbl.keyReleaseEvent = miqt_exec_method_cQPrintPreviewWidget_keyReleaseEvent
+  vtbl[].vtbl.focusInEvent = miqt_exec_method_cQPrintPreviewWidget_focusInEvent
+  vtbl[].vtbl.focusOutEvent = miqt_exec_method_cQPrintPreviewWidget_focusOutEvent
+  vtbl[].vtbl.enterEvent = miqt_exec_method_cQPrintPreviewWidget_enterEvent
+  vtbl[].vtbl.leaveEvent = miqt_exec_method_cQPrintPreviewWidget_leaveEvent
+  vtbl[].vtbl.paintEvent = miqt_exec_method_cQPrintPreviewWidget_paintEvent
+  vtbl[].vtbl.moveEvent = miqt_exec_method_cQPrintPreviewWidget_moveEvent
+  vtbl[].vtbl.resizeEvent = miqt_exec_method_cQPrintPreviewWidget_resizeEvent
+  vtbl[].vtbl.closeEvent = miqt_exec_method_cQPrintPreviewWidget_closeEvent
+  vtbl[].vtbl.contextMenuEvent = miqt_exec_method_cQPrintPreviewWidget_contextMenuEvent
+  vtbl[].vtbl.tabletEvent = miqt_exec_method_cQPrintPreviewWidget_tabletEvent
+  vtbl[].vtbl.actionEvent = miqt_exec_method_cQPrintPreviewWidget_actionEvent
+  vtbl[].vtbl.dragEnterEvent = miqt_exec_method_cQPrintPreviewWidget_dragEnterEvent
+  vtbl[].vtbl.dragMoveEvent = miqt_exec_method_cQPrintPreviewWidget_dragMoveEvent
+  vtbl[].vtbl.dragLeaveEvent = miqt_exec_method_cQPrintPreviewWidget_dragLeaveEvent
+  vtbl[].vtbl.dropEvent = miqt_exec_method_cQPrintPreviewWidget_dropEvent
+  vtbl[].vtbl.showEvent = miqt_exec_method_cQPrintPreviewWidget_showEvent
+  vtbl[].vtbl.hideEvent = miqt_exec_method_cQPrintPreviewWidget_hideEvent
+  vtbl[].vtbl.nativeEvent = miqt_exec_method_cQPrintPreviewWidget_nativeEvent
+  vtbl[].vtbl.changeEvent = miqt_exec_method_cQPrintPreviewWidget_changeEvent
+  vtbl[].vtbl.metric = miqt_exec_method_cQPrintPreviewWidget_metric
+  vtbl[].vtbl.initPainter = miqt_exec_method_cQPrintPreviewWidget_initPainter
+  vtbl[].vtbl.redirected = miqt_exec_method_cQPrintPreviewWidget_redirected
+  vtbl[].vtbl.sharedPainter = miqt_exec_method_cQPrintPreviewWidget_sharedPainter
+  vtbl[].vtbl.inputMethodEvent = miqt_exec_method_cQPrintPreviewWidget_inputMethodEvent
+  vtbl[].vtbl.inputMethodQuery = miqt_exec_method_cQPrintPreviewWidget_inputMethodQuery
+  vtbl[].vtbl.focusNextPrevChild = miqt_exec_method_cQPrintPreviewWidget_focusNextPrevChild
+  vtbl[].vtbl.eventFilter = miqt_exec_method_cQPrintPreviewWidget_eventFilter
+  vtbl[].vtbl.timerEvent = miqt_exec_method_cQPrintPreviewWidget_timerEvent
+  vtbl[].vtbl.childEvent = miqt_exec_method_cQPrintPreviewWidget_childEvent
+  vtbl[].vtbl.customEvent = miqt_exec_method_cQPrintPreviewWidget_customEvent
+  vtbl[].vtbl.connectNotify = miqt_exec_method_cQPrintPreviewWidget_connectNotify
+  vtbl[].vtbl.disconnectNotify = miqt_exec_method_cQPrintPreviewWidget_disconnectNotify
+  if vtbl[].h != nil: delete(move(vtbl[]))
+  vtbl[].h = fcQPrintPreviewWidget_new6(addr(vtbl[].vtbl), parent.h, cint(flags))
+  vtbl[].owned = true
 
 proc staticMetaObject*(_: type gen_qprintpreviewwidget_types.QPrintPreviewWidget): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQPrintPreviewWidget_staticMetaObject())
-proc delete*(self: gen_qprintpreviewwidget_types.QPrintPreviewWidget) =
-  fcQPrintPreviewWidget_delete(self.h)

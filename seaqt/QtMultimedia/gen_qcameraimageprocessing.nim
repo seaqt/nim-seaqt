@@ -30,7 +30,7 @@ func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
     else:
       copyMem(addr result[0], unsafeAddr v[0], v.len)
 
-const cflags = gorge("pkg-config --cflags Qt5Multimedia")  & " -fPIC"
+const cflags = gorge("pkg-config --cflags Qt5Multimedia") & " -fPIC"
 {.compile("gen_qcameraimageprocessing.cpp", cflags).}
 
 
@@ -109,7 +109,7 @@ proc fcQCameraImageProcessing_protectedbase_isSignalConnected(self: pointer, sig
 proc fcQCameraImageProcessing_staticMetaObject(): pointer {.importc: "QCameraImageProcessing_staticMetaObject".}
 
 proc metaObject*(self: gen_qcameraimageprocessing_types.QCameraImageProcessing, ): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQCameraImageProcessing_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQCameraImageProcessing_metaObject(self.h), owned: false)
 
 proc metacast*(self: gen_qcameraimageprocessing_types.QCameraImageProcessing, param1: cstring): pointer =
   fcQCameraImageProcessing_metacast(self.h, param1)
@@ -211,7 +211,7 @@ proc trUtf8*(_: type gen_qcameraimageprocessing_types.QCameraImageProcessing, s:
   vx_ret
 
 proc sender*(self: gen_qcameraimageprocessing_types.QCameraImageProcessing, ): gen_qobject_types.QObject =
-  gen_qobject_types.QObject(h: fcQCameraImageProcessing_protectedbase_sender(self.h))
+  gen_qobject_types.QObject(h: fcQCameraImageProcessing_protectedbase_sender(self.h), owned: false)
 
 proc senderSignalIndex*(self: gen_qcameraimageprocessing_types.QCameraImageProcessing, ): cint =
   fcQCameraImageProcessing_protectedbase_senderSignalIndex(self.h)

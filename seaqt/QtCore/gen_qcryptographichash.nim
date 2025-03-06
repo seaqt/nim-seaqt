@@ -30,9 +30,6 @@ func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
     else:
       copyMem(addr result[0], unsafeAddr v[0], v.len)
 
-const cflags = gorge("pkg-config --cflags Qt5Core")  & " -fPIC"
-{.compile("gen_qcryptographichash.cpp", cflags).}
-
 
 type QCryptographicHashAlgorithmEnum* = distinct cint
 template Md4*(_: type QCryptographicHashAlgorithmEnum): untyped = 0
@@ -77,7 +74,6 @@ proc fcQCryptographicHash_hash(data: struct_miqt_string, methodVal: cint): struc
 proc fcQCryptographicHash_hashLength(methodVal: cint): cint {.importc: "QCryptographicHash_hashLength".}
 proc fcQCryptographicHash_new(methodVal: cint): ptr cQCryptographicHash {.importc: "QCryptographicHash_new".}
 proc fcQCryptographicHash_staticMetaObject(): pointer {.importc: "QCryptographicHash_staticMetaObject".}
-proc fcQCryptographicHash_delete(self: pointer) {.importc: "QCryptographicHash_delete".}
 
 proc reset*(self: gen_qcryptographichash_types.QCryptographicHash, ): void =
   fcQCryptographicHash_reset(self.h)
@@ -108,9 +104,7 @@ proc hashLength*(_: type gen_qcryptographichash_types.QCryptographicHash, method
 
 proc create*(T: type gen_qcryptographichash_types.QCryptographicHash,
     methodVal: cint): gen_qcryptographichash_types.QCryptographicHash =
-  gen_qcryptographichash_types.QCryptographicHash(h: fcQCryptographicHash_new(cint(methodVal)))
+  gen_qcryptographichash_types.QCryptographicHash(h: fcQCryptographicHash_new(cint(methodVal)), owned: true)
 
 proc staticMetaObject*(_: type gen_qcryptographichash_types.QCryptographicHash): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQCryptographicHash_staticMetaObject())
-proc delete*(self: gen_qcryptographichash_types.QCryptographicHash) =
-  fcQCryptographicHash_delete(self.h)

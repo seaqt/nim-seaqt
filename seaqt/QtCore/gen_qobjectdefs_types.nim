@@ -1,9 +1,84 @@
-type QGenericArgument* {.inheritable, pure.} = object
+type QGenericArgument* {.inheritable.} = object
   h*: pointer
+  owned*: bool
+
+const cflags = gorge("pkg-config --cflags Qt5Core") & " -fPIC"
+{.compile("gen_qobjectdefs.cpp", cflags).}
+
+proc fcQGenericArgument_delete(self: pointer) {.importc: "QGenericArgument_delete".}
+proc `=destroy`(self: var QGenericArgument) =
+  if self.owned: fcQGenericArgument_delete(self.h)
+
+proc `=sink`(dest: var QGenericArgument, source: QGenericArgument) =
+  `=destroy`(dest)
+  wasMoved(dest)
+  dest.h = source.h
+  dest.owned = source.owned
+
+proc `=copy`(dest: var QGenericArgument, source: QGenericArgument) {.error.}
+proc delete*(self: sink QGenericArgument) =
+  let h = self.h
+  wasMoved(self)
+  fcQGenericArgument_delete(h)
+
 type QGenericReturnArgument* = object of QGenericArgument
-type QMetaObject* {.inheritable, pure.} = object
+type QMetaObject* {.inheritable.} = object
   h*: pointer
-type QMetaObjectConnection* {.inheritable, pure.} = object
+  owned*: bool
+
+proc fcQMetaObject_delete(self: pointer) {.importc: "QMetaObject_delete".}
+proc `=destroy`(self: var QMetaObject) =
+  if self.owned: fcQMetaObject_delete(self.h)
+
+proc `=sink`(dest: var QMetaObject, source: QMetaObject) =
+  `=destroy`(dest)
+  wasMoved(dest)
+  dest.h = source.h
+  dest.owned = source.owned
+
+proc `=copy`(dest: var QMetaObject, source: QMetaObject) {.error.}
+proc delete*(self: sink QMetaObject) =
+  let h = self.h
+  wasMoved(self)
+  fcQMetaObject_delete(h)
+
+type QMetaObjectConnection* {.inheritable.} = object
   h*: pointer
-type QMetaObjectSuperData* {.inheritable, pure.} = object
+  owned*: bool
+
+proc fcQMetaObjectConnection_delete(self: pointer) {.importc: "QMetaObject__Connection_delete".}
+proc `=destroy`(self: var QMetaObjectConnection) =
+  if self.owned: fcQMetaObjectConnection_delete(self.h)
+
+proc `=sink`(dest: var QMetaObjectConnection, source: QMetaObjectConnection) =
+  `=destroy`(dest)
+  wasMoved(dest)
+  dest.h = source.h
+  dest.owned = source.owned
+
+proc `=copy`(dest: var QMetaObjectConnection, source: QMetaObjectConnection) {.error.}
+proc delete*(self: sink QMetaObjectConnection) =
+  let h = self.h
+  wasMoved(self)
+  fcQMetaObjectConnection_delete(h)
+
+type QMetaObjectSuperData* {.inheritable.} = object
   h*: pointer
+  owned*: bool
+
+proc fcQMetaObjectSuperData_delete(self: pointer) {.importc: "QMetaObject__SuperData_delete".}
+proc `=destroy`(self: var QMetaObjectSuperData) =
+  if self.owned: fcQMetaObjectSuperData_delete(self.h)
+
+proc `=sink`(dest: var QMetaObjectSuperData, source: QMetaObjectSuperData) =
+  `=destroy`(dest)
+  wasMoved(dest)
+  dest.h = source.h
+  dest.owned = source.owned
+
+proc `=copy`(dest: var QMetaObjectSuperData, source: QMetaObjectSuperData) {.error.}
+proc delete*(self: sink QMetaObjectSuperData) =
+  let h = self.h
+  wasMoved(self)
+  fcQMetaObjectSuperData_delete(h)
+

@@ -30,7 +30,7 @@ func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
     else:
       copyMem(addr result[0], unsafeAddr v[0], v.len)
 
-const cflags = gorge("pkg-config --cflags Qt5Multimedia")  & " -fPIC"
+const cflags = gorge("pkg-config --cflags Qt5Multimedia") & " -fPIC"
 {.compile("gen_qmediaservice.cpp", cflags).}
 
 
@@ -66,10 +66,9 @@ proc fcQMediaService_protectedbase_senderSignalIndex(self: pointer, ): cint {.im
 proc fcQMediaService_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QMediaService_protectedbase_receivers".}
 proc fcQMediaService_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QMediaService_protectedbase_isSignalConnected".}
 proc fcQMediaService_staticMetaObject(): pointer {.importc: "QMediaService_staticMetaObject".}
-proc fcQMediaService_delete(self: pointer) {.importc: "QMediaService_delete".}
 
 proc metaObject*(self: gen_qmediaservice_types.QMediaService, ): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQMediaService_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQMediaService_metaObject(self.h), owned: false)
 
 proc metacast*(self: gen_qmediaservice_types.QMediaService, param1: cstring): pointer =
   fcQMediaService_metacast(self.h, param1)
@@ -90,7 +89,7 @@ proc trUtf8*(_: type gen_qmediaservice_types.QMediaService, s: cstring): string 
   vx_ret
 
 proc requestControl*(self: gen_qmediaservice_types.QMediaService, name: cstring): gen_qmediacontrol_types.QMediaControl =
-  gen_qmediacontrol_types.QMediaControl(h: fcQMediaService_requestControl(self.h, name))
+  gen_qmediacontrol_types.QMediaControl(h: fcQMediaService_requestControl(self.h, name), owned: false)
 
 proc releaseControl*(self: gen_qmediaservice_types.QMediaService, control: gen_qmediacontrol_types.QMediaControl): void =
   fcQMediaService_releaseControl(self.h, control.h)
@@ -120,7 +119,7 @@ proc trUtf8*(_: type gen_qmediaservice_types.QMediaService, s: cstring, c: cstri
   vx_ret
 
 proc sender*(self: gen_qmediaservice_types.QMediaService, ): gen_qobject_types.QObject =
-  gen_qobject_types.QObject(h: fcQMediaService_protectedbase_sender(self.h))
+  gen_qobject_types.QObject(h: fcQMediaService_protectedbase_sender(self.h), owned: false)
 
 proc senderSignalIndex*(self: gen_qmediaservice_types.QMediaService, ): cint =
   fcQMediaService_protectedbase_senderSignalIndex(self.h)
@@ -133,5 +132,3 @@ proc isSignalConnected*(self: gen_qmediaservice_types.QMediaService, signal: gen
 
 proc staticMetaObject*(_: type gen_qmediaservice_types.QMediaService): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQMediaService_staticMetaObject())
-proc delete*(self: gen_qmediaservice_types.QMediaService) =
-  fcQMediaService_delete(self.h)

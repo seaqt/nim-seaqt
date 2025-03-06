@@ -30,7 +30,7 @@ func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
     else:
       copyMem(addr result[0], unsafeAddr v[0], v.len)
 
-const cflags = gorge("pkg-config --cflags Qt5Gui")  & " -fPIC"
+const cflags = gorge("pkg-config --cflags Qt5Gui") & " -fPIC"
 {.compile("gen_qstylehints.cpp", cflags).}
 
 
@@ -120,10 +120,9 @@ proc fcQStyleHints_protectedbase_senderSignalIndex(self: pointer, ): cint {.impo
 proc fcQStyleHints_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QStyleHints_protectedbase_receivers".}
 proc fcQStyleHints_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QStyleHints_protectedbase_isSignalConnected".}
 proc fcQStyleHints_staticMetaObject(): pointer {.importc: "QStyleHints_staticMetaObject".}
-proc fcQStyleHints_delete(self: pointer) {.importc: "QStyleHints_delete".}
 
 proc metaObject*(self: gen_qstylehints_types.QStyleHints, ): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQStyleHints_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQStyleHints_metaObject(self.h), owned: false)
 
 proc metacast*(self: gen_qstylehints_types.QStyleHints, param1: cstring): pointer =
   fcQStyleHints_metacast(self.h, param1)
@@ -207,7 +206,7 @@ proc passwordMaskDelay*(self: gen_qstylehints_types.QStyleHints, ): cint =
   fcQStyleHints_passwordMaskDelay(self.h)
 
 proc passwordMaskCharacter*(self: gen_qstylehints_types.QStyleHints, ): gen_qchar_types.QChar =
-  gen_qchar_types.QChar(h: fcQStyleHints_passwordMaskCharacter(self.h))
+  gen_qchar_types.QChar(h: fcQStyleHints_passwordMaskCharacter(self.h), owned: true)
 
 proc fontSmoothingGamma*(self: gen_qstylehints_types.QStyleHints, ): float64 =
   fcQStyleHints_fontSmoothingGamma(self.h)
@@ -490,7 +489,7 @@ proc trUtf8*(_: type gen_qstylehints_types.QStyleHints, s: cstring, c: cstring, 
   vx_ret
 
 proc sender*(self: gen_qstylehints_types.QStyleHints, ): gen_qobject_types.QObject =
-  gen_qobject_types.QObject(h: fcQStyleHints_protectedbase_sender(self.h))
+  gen_qobject_types.QObject(h: fcQStyleHints_protectedbase_sender(self.h), owned: false)
 
 proc senderSignalIndex*(self: gen_qstylehints_types.QStyleHints, ): cint =
   fcQStyleHints_protectedbase_senderSignalIndex(self.h)
@@ -503,5 +502,3 @@ proc isSignalConnected*(self: gen_qstylehints_types.QStyleHints, signal: gen_qme
 
 proc staticMetaObject*(_: type gen_qstylehints_types.QStyleHints): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQStyleHints_staticMetaObject())
-proc delete*(self: gen_qstylehints_types.QStyleHints) =
-  fcQStyleHints_delete(self.h)

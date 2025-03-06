@@ -30,9 +30,6 @@ func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
     else:
       copyMem(addr result[0], unsafeAddr v[0], v.len)
 
-const cflags = gorge("pkg-config --cflags Qt5Gui")  & " -fPIC"
-{.compile("gen_qpainter.cpp", cflags).}
-
 
 type QPainterRenderHintEnum* = distinct cint
 template Antialiasing*(_: type QPainterRenderHintEnum): untyped = 1
@@ -390,16 +387,14 @@ proc fcQPainter_redirected2(device: pointer, offset: pointer): pointer {.importc
 proc fcQPainter_new(): ptr cQPainter {.importc: "QPainter_new".}
 proc fcQPainter_new2(param1: pointer): ptr cQPainter {.importc: "QPainter_new2".}
 proc fcQPainter_staticMetaObject(): pointer {.importc: "QPainter_staticMetaObject".}
-proc fcQPainter_delete(self: pointer) {.importc: "QPainter_delete".}
 proc fcQPainterPixmapFragment_create(pos: pointer, sourceRect: pointer): pointer {.importc: "QPainter__PixmapFragment_create".}
 proc fcQPainterPixmapFragment_create3(pos: pointer, sourceRect: pointer, scaleX: float64): pointer {.importc: "QPainter__PixmapFragment_create3".}
 proc fcQPainterPixmapFragment_create4(pos: pointer, sourceRect: pointer, scaleX: float64, scaleY: float64): pointer {.importc: "QPainter__PixmapFragment_create4".}
 proc fcQPainterPixmapFragment_create5(pos: pointer, sourceRect: pointer, scaleX: float64, scaleY: float64, rotation: float64): pointer {.importc: "QPainter__PixmapFragment_create5".}
 proc fcQPainterPixmapFragment_create6(pos: pointer, sourceRect: pointer, scaleX: float64, scaleY: float64, rotation: float64, opacity: float64): pointer {.importc: "QPainter__PixmapFragment_create6".}
-proc fcQPainterPixmapFragment_delete(self: pointer) {.importc: "QPainter__PixmapFragment_delete".}
 
 proc device*(self: gen_qpainter_types.QPainter, ): gen_qpaintdevice_types.QPaintDevice =
-  gen_qpaintdevice_types.QPaintDevice(h: fcQPainter_device(self.h))
+  gen_qpaintdevice_types.QPaintDevice(h: fcQPainter_device(self.h), owned: false)
 
 proc begin*(self: gen_qpainter_types.QPainter, param1: gen_qpaintdevice_types.QPaintDevice): bool =
   fcQPainter_begin(self.h, param1.h)
@@ -420,16 +415,16 @@ proc compositionMode*(self: gen_qpainter_types.QPainter, ): cint =
   cint(fcQPainter_compositionMode(self.h))
 
 proc font*(self: gen_qpainter_types.QPainter, ): gen_qfont_types.QFont =
-  gen_qfont_types.QFont(h: fcQPainter_font(self.h))
+  gen_qfont_types.QFont(h: fcQPainter_font(self.h), owned: false)
 
 proc setFont*(self: gen_qpainter_types.QPainter, f: gen_qfont_types.QFont): void =
   fcQPainter_setFont(self.h, f.h)
 
 proc fontMetrics*(self: gen_qpainter_types.QPainter, ): gen_qfontmetrics_types.QFontMetrics =
-  gen_qfontmetrics_types.QFontMetrics(h: fcQPainter_fontMetrics(self.h))
+  gen_qfontmetrics_types.QFontMetrics(h: fcQPainter_fontMetrics(self.h), owned: true)
 
 proc fontInfo*(self: gen_qpainter_types.QPainter, ): gen_qfontinfo_types.QFontInfo =
-  gen_qfontinfo_types.QFontInfo(h: fcQPainter_fontInfo(self.h))
+  gen_qfontinfo_types.QFontInfo(h: fcQPainter_fontInfo(self.h), owned: true)
 
 proc setPen*(self: gen_qpainter_types.QPainter, color: gen_qcolor_types.QColor): void =
   fcQPainter_setPen(self.h, color.h)
@@ -441,7 +436,7 @@ proc setPen*(self: gen_qpainter_types.QPainter, style: cint): void =
   fcQPainter_setPenWithStyle(self.h, cint(style))
 
 proc pen*(self: gen_qpainter_types.QPainter, ): gen_qpen_types.QPen =
-  gen_qpen_types.QPen(h: fcQPainter_pen(self.h))
+  gen_qpen_types.QPen(h: fcQPainter_pen(self.h), owned: false)
 
 proc setBrush*(self: gen_qpainter_types.QPainter, brush: gen_qbrush_types.QBrush): void =
   fcQPainter_setBrush(self.h, brush.h)
@@ -450,7 +445,7 @@ proc setBrush*(self: gen_qpainter_types.QPainter, style: cint): void =
   fcQPainter_setBrushWithStyle(self.h, cint(style))
 
 proc brush*(self: gen_qpainter_types.QPainter, ): gen_qbrush_types.QBrush =
-  gen_qbrush_types.QBrush(h: fcQPainter_brush(self.h))
+  gen_qbrush_types.QBrush(h: fcQPainter_brush(self.h), owned: false)
 
 proc setBackgroundMode*(self: gen_qpainter_types.QPainter, mode: cint): void =
   fcQPainter_setBackgroundMode(self.h, cint(mode))
@@ -459,7 +454,7 @@ proc backgroundMode*(self: gen_qpainter_types.QPainter, ): cint =
   cint(fcQPainter_backgroundMode(self.h))
 
 proc brushOrigin*(self: gen_qpainter_types.QPainter, ): gen_qpoint_types.QPoint =
-  gen_qpoint_types.QPoint(h: fcQPainter_brushOrigin(self.h))
+  gen_qpoint_types.QPoint(h: fcQPainter_brushOrigin(self.h), owned: true)
 
 proc setBrushOrigin*(self: gen_qpainter_types.QPainter, x: cint, y: cint): void =
   fcQPainter_setBrushOrigin(self.h, x, y)
@@ -474,7 +469,7 @@ proc setBackground*(self: gen_qpainter_types.QPainter, bg: gen_qbrush_types.QBru
   fcQPainter_setBackground(self.h, bg.h)
 
 proc background*(self: gen_qpainter_types.QPainter, ): gen_qbrush_types.QBrush =
-  gen_qbrush_types.QBrush(h: fcQPainter_background(self.h))
+  gen_qbrush_types.QBrush(h: fcQPainter_background(self.h), owned: false)
 
 proc opacity*(self: gen_qpainter_types.QPainter, ): float64 =
   fcQPainter_opacity(self.h)
@@ -483,10 +478,10 @@ proc setOpacity*(self: gen_qpainter_types.QPainter, opacity: float64): void =
   fcQPainter_setOpacity(self.h, opacity)
 
 proc clipRegion*(self: gen_qpainter_types.QPainter, ): gen_qregion_types.QRegion =
-  gen_qregion_types.QRegion(h: fcQPainter_clipRegion(self.h))
+  gen_qregion_types.QRegion(h: fcQPainter_clipRegion(self.h), owned: true)
 
 proc clipPath*(self: gen_qpainter_types.QPainter, ): gen_qpainterpath_types.QPainterPath =
-  gen_qpainterpath_types.QPainterPath(h: fcQPainter_clipPath(self.h))
+  gen_qpainterpath_types.QPainterPath(h: fcQPainter_clipPath(self.h), owned: true)
 
 proc setClipRect*(self: gen_qpainter_types.QPainter, param1: gen_qrect_types.QRectF): void =
   fcQPainter_setClipRect(self.h, param1.h)
@@ -510,7 +505,7 @@ proc hasClipping*(self: gen_qpainter_types.QPainter, ): bool =
   fcQPainter_hasClipping(self.h)
 
 proc clipBoundingRect*(self: gen_qpainter_types.QPainter, ): gen_qrect_types.QRectF =
-  gen_qrect_types.QRectF(h: fcQPainter_clipBoundingRect(self.h))
+  gen_qrect_types.QRectF(h: fcQPainter_clipBoundingRect(self.h), owned: true)
 
 proc save*(self: gen_qpainter_types.QPainter, ): void =
   fcQPainter_save(self.h)
@@ -522,10 +517,10 @@ proc setMatrix*(self: gen_qpainter_types.QPainter, matrix: gen_qmatrix_types.QMa
   fcQPainter_setMatrix(self.h, matrix.h)
 
 proc matrix*(self: gen_qpainter_types.QPainter, ): gen_qmatrix_types.QMatrix =
-  gen_qmatrix_types.QMatrix(h: fcQPainter_matrix(self.h))
+  gen_qmatrix_types.QMatrix(h: fcQPainter_matrix(self.h), owned: false)
 
 proc deviceMatrix*(self: gen_qpainter_types.QPainter, ): gen_qmatrix_types.QMatrix =
-  gen_qmatrix_types.QMatrix(h: fcQPainter_deviceMatrix(self.h))
+  gen_qmatrix_types.QMatrix(h: fcQPainter_deviceMatrix(self.h), owned: false)
 
 proc resetMatrix*(self: gen_qpainter_types.QPainter, ): void =
   fcQPainter_resetMatrix(self.h)
@@ -534,10 +529,10 @@ proc setTransform*(self: gen_qpainter_types.QPainter, transform: gen_qtransform_
   fcQPainter_setTransform(self.h, transform.h)
 
 proc transform*(self: gen_qpainter_types.QPainter, ): gen_qtransform_types.QTransform =
-  gen_qtransform_types.QTransform(h: fcQPainter_transform(self.h))
+  gen_qtransform_types.QTransform(h: fcQPainter_transform(self.h), owned: false)
 
 proc deviceTransform*(self: gen_qpainter_types.QPainter, ): gen_qtransform_types.QTransform =
-  gen_qtransform_types.QTransform(h: fcQPainter_deviceTransform(self.h))
+  gen_qtransform_types.QTransform(h: fcQPainter_deviceTransform(self.h), owned: false)
 
 proc resetTransform*(self: gen_qpainter_types.QPainter, ): void =
   fcQPainter_resetTransform(self.h)
@@ -546,10 +541,10 @@ proc setWorldMatrix*(self: gen_qpainter_types.QPainter, matrix: gen_qmatrix_type
   fcQPainter_setWorldMatrix(self.h, matrix.h)
 
 proc worldMatrix*(self: gen_qpainter_types.QPainter, ): gen_qmatrix_types.QMatrix =
-  gen_qmatrix_types.QMatrix(h: fcQPainter_worldMatrix(self.h))
+  gen_qmatrix_types.QMatrix(h: fcQPainter_worldMatrix(self.h), owned: false)
 
 proc combinedMatrix*(self: gen_qpainter_types.QPainter, ): gen_qmatrix_types.QMatrix =
-  gen_qmatrix_types.QMatrix(h: fcQPainter_combinedMatrix(self.h))
+  gen_qmatrix_types.QMatrix(h: fcQPainter_combinedMatrix(self.h), owned: true)
 
 proc setMatrixEnabled*(self: gen_qpainter_types.QPainter, enabled: bool): void =
   fcQPainter_setMatrixEnabled(self.h, enabled)
@@ -561,10 +556,10 @@ proc setWorldTransform*(self: gen_qpainter_types.QPainter, matrix: gen_qtransfor
   fcQPainter_setWorldTransform(self.h, matrix.h)
 
 proc worldTransform*(self: gen_qpainter_types.QPainter, ): gen_qtransform_types.QTransform =
-  gen_qtransform_types.QTransform(h: fcQPainter_worldTransform(self.h))
+  gen_qtransform_types.QTransform(h: fcQPainter_worldTransform(self.h), owned: false)
 
 proc combinedTransform*(self: gen_qpainter_types.QPainter, ): gen_qtransform_types.QTransform =
-  gen_qtransform_types.QTransform(h: fcQPainter_combinedTransform(self.h))
+  gen_qtransform_types.QTransform(h: fcQPainter_combinedTransform(self.h), owned: true)
 
 proc setWorldMatrixEnabled*(self: gen_qpainter_types.QPainter, enabled: bool): void =
   fcQPainter_setWorldMatrixEnabled(self.h, enabled)
@@ -591,7 +586,7 @@ proc translate*(self: gen_qpainter_types.QPainter, dx: float64, dy: float64): vo
   fcQPainter_translate2(self.h, dx, dy)
 
 proc window*(self: gen_qpainter_types.QPainter, ): gen_qrect_types.QRect =
-  gen_qrect_types.QRect(h: fcQPainter_window(self.h))
+  gen_qrect_types.QRect(h: fcQPainter_window(self.h), owned: true)
 
 proc setWindow*(self: gen_qpainter_types.QPainter, window: gen_qrect_types.QRect): void =
   fcQPainter_setWindow(self.h, window.h)
@@ -600,7 +595,7 @@ proc setWindow*(self: gen_qpainter_types.QPainter, x: cint, y: cint, w: cint, h:
   fcQPainter_setWindow2(self.h, x, y, w, h)
 
 proc viewport*(self: gen_qpainter_types.QPainter, ): gen_qrect_types.QRect =
-  gen_qrect_types.QRect(h: fcQPainter_viewport(self.h))
+  gen_qrect_types.QRect(h: fcQPainter_viewport(self.h), owned: true)
 
 proc setViewport*(self: gen_qpainter_types.QPainter, viewport: gen_qrect_types.QRect): void =
   fcQPainter_setViewport(self.h, viewport.h)
@@ -924,16 +919,16 @@ proc drawText*(self: gen_qpainter_types.QPainter, r: gen_qrect_types.QRectF, tex
   fcQPainter_drawText8(self.h, r.h, struct_miqt_string(data: text, len: csize_t(len(text))))
 
 proc boundingRect*(self: gen_qpainter_types.QPainter, rect: gen_qrect_types.QRectF, flags: cint, text: string): gen_qrect_types.QRectF =
-  gen_qrect_types.QRectF(h: fcQPainter_boundingRect(self.h, rect.h, flags, struct_miqt_string(data: text, len: csize_t(len(text)))))
+  gen_qrect_types.QRectF(h: fcQPainter_boundingRect(self.h, rect.h, flags, struct_miqt_string(data: text, len: csize_t(len(text)))), owned: true)
 
 proc boundingRect*(self: gen_qpainter_types.QPainter, rect: gen_qrect_types.QRect, flags: cint, text: string): gen_qrect_types.QRect =
-  gen_qrect_types.QRect(h: fcQPainter_boundingRect2(self.h, rect.h, flags, struct_miqt_string(data: text, len: csize_t(len(text)))))
+  gen_qrect_types.QRect(h: fcQPainter_boundingRect2(self.h, rect.h, flags, struct_miqt_string(data: text, len: csize_t(len(text)))), owned: true)
 
 proc boundingRect*(self: gen_qpainter_types.QPainter, x: cint, y: cint, w: cint, h: cint, flags: cint, text: string): gen_qrect_types.QRect =
-  gen_qrect_types.QRect(h: fcQPainter_boundingRect3(self.h, x, y, w, h, flags, struct_miqt_string(data: text, len: csize_t(len(text)))))
+  gen_qrect_types.QRect(h: fcQPainter_boundingRect3(self.h, x, y, w, h, flags, struct_miqt_string(data: text, len: csize_t(len(text)))), owned: true)
 
 proc boundingRect*(self: gen_qpainter_types.QPainter, rect: gen_qrect_types.QRectF, text: string): gen_qrect_types.QRectF =
-  gen_qrect_types.QRectF(h: fcQPainter_boundingRect4(self.h, rect.h, struct_miqt_string(data: text, len: csize_t(len(text)))))
+  gen_qrect_types.QRectF(h: fcQPainter_boundingRect4(self.h, rect.h, struct_miqt_string(data: text, len: csize_t(len(text)))), owned: true)
 
 proc drawTextItem*(self: gen_qpainter_types.QPainter, p: gen_qpoint_types.QPointF, ti: gen_qpaintengine_types.QTextItem): void =
   fcQPainter_drawTextItem(self.h, p.h, ti.h)
@@ -1011,13 +1006,13 @@ proc testRenderHint*(self: gen_qpainter_types.QPainter, hint: cint): bool =
   fcQPainter_testRenderHint(self.h, cint(hint))
 
 proc paintEngine*(self: gen_qpainter_types.QPainter, ): gen_qpaintengine_types.QPaintEngine =
-  gen_qpaintengine_types.QPaintEngine(h: fcQPainter_paintEngine(self.h))
+  gen_qpaintengine_types.QPaintEngine(h: fcQPainter_paintEngine(self.h), owned: false)
 
 proc setRedirected*(_: type gen_qpainter_types.QPainter, device: gen_qpaintdevice_types.QPaintDevice, replacement: gen_qpaintdevice_types.QPaintDevice): void =
   fcQPainter_setRedirected(device.h, replacement.h)
 
 proc redirected*(_: type gen_qpainter_types.QPainter, device: gen_qpaintdevice_types.QPaintDevice): gen_qpaintdevice_types.QPaintDevice =
-  gen_qpaintdevice_types.QPaintDevice(h: fcQPainter_redirected(device.h))
+  gen_qpaintdevice_types.QPaintDevice(h: fcQPainter_redirected(device.h), owned: false)
 
 proc restoreRedirected*(_: type gen_qpainter_types.QPainter, device: gen_qpaintdevice_types.QPaintDevice): void =
   fcQPainter_restoreRedirected(device.h)
@@ -1143,7 +1138,7 @@ proc drawText*(self: gen_qpainter_types.QPainter, r: gen_qrect_types.QRectF, tex
   fcQPainter_drawText32(self.h, r.h, struct_miqt_string(data: text, len: csize_t(len(text))), o.h)
 
 proc boundingRect*(self: gen_qpainter_types.QPainter, rect: gen_qrect_types.QRectF, text: string, o: gen_qtextoption_types.QTextOption): gen_qrect_types.QRectF =
-  gen_qrect_types.QRectF(h: fcQPainter_boundingRect32(self.h, rect.h, struct_miqt_string(data: text, len: csize_t(len(text))), o.h))
+  gen_qrect_types.QRectF(h: fcQPainter_boundingRect32(self.h, rect.h, struct_miqt_string(data: text, len: csize_t(len(text))), o.h), owned: true)
 
 proc setRenderHint*(self: gen_qpainter_types.QPainter, hint: cint, on: bool): void =
   fcQPainter_setRenderHint2(self.h, cint(hint), on)
@@ -1155,33 +1150,29 @@ proc setRedirected*(_: type gen_qpainter_types.QPainter, device: gen_qpaintdevic
   fcQPainter_setRedirected3(device.h, replacement.h, offset.h)
 
 proc redirected*(_: type gen_qpainter_types.QPainter, device: gen_qpaintdevice_types.QPaintDevice, offset: gen_qpoint_types.QPoint): gen_qpaintdevice_types.QPaintDevice =
-  gen_qpaintdevice_types.QPaintDevice(h: fcQPainter_redirected2(device.h, offset.h))
+  gen_qpaintdevice_types.QPaintDevice(h: fcQPainter_redirected2(device.h, offset.h), owned: false)
 
 proc create*(T: type gen_qpainter_types.QPainter): gen_qpainter_types.QPainter =
-  gen_qpainter_types.QPainter(h: fcQPainter_new())
+  gen_qpainter_types.QPainter(h: fcQPainter_new(), owned: true)
 
 proc create*(T: type gen_qpainter_types.QPainter,
     param1: gen_qpaintdevice_types.QPaintDevice): gen_qpainter_types.QPainter =
-  gen_qpainter_types.QPainter(h: fcQPainter_new2(param1.h))
+  gen_qpainter_types.QPainter(h: fcQPainter_new2(param1.h), owned: true)
 
 proc staticMetaObject*(_: type gen_qpainter_types.QPainter): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQPainter_staticMetaObject())
-proc delete*(self: gen_qpainter_types.QPainter) =
-  fcQPainter_delete(self.h)
 proc create*(_: type gen_qpainter_types.QPainterPixmapFragment, pos: gen_qpoint_types.QPointF, sourceRect: gen_qrect_types.QRectF): gen_qpainter_types.QPainterPixmapFragment =
-  gen_qpainter_types.QPainterPixmapFragment(h: fcQPainterPixmapFragment_create(pos.h, sourceRect.h))
+  gen_qpainter_types.QPainterPixmapFragment(h: fcQPainterPixmapFragment_create(pos.h, sourceRect.h), owned: true)
 
 proc create*(_: type gen_qpainter_types.QPainterPixmapFragment, pos: gen_qpoint_types.QPointF, sourceRect: gen_qrect_types.QRectF, scaleX: float64): gen_qpainter_types.QPainterPixmapFragment =
-  gen_qpainter_types.QPainterPixmapFragment(h: fcQPainterPixmapFragment_create3(pos.h, sourceRect.h, scaleX))
+  gen_qpainter_types.QPainterPixmapFragment(h: fcQPainterPixmapFragment_create3(pos.h, sourceRect.h, scaleX), owned: true)
 
 proc create*(_: type gen_qpainter_types.QPainterPixmapFragment, pos: gen_qpoint_types.QPointF, sourceRect: gen_qrect_types.QRectF, scaleX: float64, scaleY: float64): gen_qpainter_types.QPainterPixmapFragment =
-  gen_qpainter_types.QPainterPixmapFragment(h: fcQPainterPixmapFragment_create4(pos.h, sourceRect.h, scaleX, scaleY))
+  gen_qpainter_types.QPainterPixmapFragment(h: fcQPainterPixmapFragment_create4(pos.h, sourceRect.h, scaleX, scaleY), owned: true)
 
 proc create*(_: type gen_qpainter_types.QPainterPixmapFragment, pos: gen_qpoint_types.QPointF, sourceRect: gen_qrect_types.QRectF, scaleX: float64, scaleY: float64, rotation: float64): gen_qpainter_types.QPainterPixmapFragment =
-  gen_qpainter_types.QPainterPixmapFragment(h: fcQPainterPixmapFragment_create5(pos.h, sourceRect.h, scaleX, scaleY, rotation))
+  gen_qpainter_types.QPainterPixmapFragment(h: fcQPainterPixmapFragment_create5(pos.h, sourceRect.h, scaleX, scaleY, rotation), owned: true)
 
 proc create*(_: type gen_qpainter_types.QPainterPixmapFragment, pos: gen_qpoint_types.QPointF, sourceRect: gen_qrect_types.QRectF, scaleX: float64, scaleY: float64, rotation: float64, opacity: float64): gen_qpainter_types.QPainterPixmapFragment =
-  gen_qpainter_types.QPainterPixmapFragment(h: fcQPainterPixmapFragment_create6(pos.h, sourceRect.h, scaleX, scaleY, rotation, opacity))
+  gen_qpainter_types.QPainterPixmapFragment(h: fcQPainterPixmapFragment_create6(pos.h, sourceRect.h, scaleX, scaleY, rotation, opacity), owned: true)
 
-proc delete*(self: gen_qpainter_types.QPainterPixmapFragment) =
-  fcQPainterPixmapFragment_delete(self.h)

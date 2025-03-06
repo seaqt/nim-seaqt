@@ -30,9 +30,6 @@ func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
     else:
       copyMem(addr result[0], unsafeAddr v[0], v.len)
 
-const cflags = gorge("pkg-config --cflags Qt5Core")  & " -fPIC"
-{.compile("gen_qnamespace.cpp", cflags).}
-
 
 type GlobalColorEnum* = distinct cint
 template color0*(_: type GlobalColorEnum): untyped = 0
@@ -1543,10 +1540,7 @@ export gen_qnamespace_types
 type cQInternal*{.exportc: "QInternal", incompleteStruct.} = object
 
 proc fcQInternal_activateCallbacks(param1: cint, param2: pointer): bool {.importc: "QInternal_activateCallbacks".}
-proc fcQInternal_delete(self: pointer) {.importc: "QInternal_delete".}
 
 proc activateCallbacks*(_: type gen_qnamespace_types.QInternal, param1: cint, param2: pointer): bool =
   fcQInternal_activateCallbacks(cint(param1), param2)
 
-proc delete*(self: gen_qnamespace_types.QInternal) =
-  fcQInternal_delete(self.h)

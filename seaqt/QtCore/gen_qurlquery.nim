@@ -30,9 +30,6 @@ func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
     else:
       copyMem(addr result[0], unsafeAddr v[0], v.len)
 
-const cflags = gorge("pkg-config --cflags Qt5Core")  & " -fPIC"
-{.compile("gen_qurlquery.cpp", cflags).}
-
 
 import ./gen_qurlquery_types
 export gen_qurlquery_types
@@ -78,7 +75,6 @@ proc fcQUrlQuery_new(): ptr cQUrlQuery {.importc: "QUrlQuery_new".}
 proc fcQUrlQuery_new2(url: pointer): ptr cQUrlQuery {.importc: "QUrlQuery_new2".}
 proc fcQUrlQuery_new3(queryString: struct_miqt_string): ptr cQUrlQuery {.importc: "QUrlQuery_new3".}
 proc fcQUrlQuery_new4(other: pointer): ptr cQUrlQuery {.importc: "QUrlQuery_new4".}
-proc fcQUrlQuery_delete(self: pointer) {.importc: "QUrlQuery_delete".}
 
 proc operatorAssign*(self: gen_qurlquery_types.QUrlQuery, other: gen_qurlquery_types.QUrlQuery): void =
   fcQUrlQuery_operatorAssign(self.h, other.h)
@@ -120,10 +116,10 @@ proc setQueryDelimiters*(self: gen_qurlquery_types.QUrlQuery, valueDelimiter: ge
   fcQUrlQuery_setQueryDelimiters(self.h, valueDelimiter.h, pairDelimiter.h)
 
 proc queryValueDelimiter*(self: gen_qurlquery_types.QUrlQuery, ): gen_qchar_types.QChar =
-  gen_qchar_types.QChar(h: fcQUrlQuery_queryValueDelimiter(self.h))
+  gen_qchar_types.QChar(h: fcQUrlQuery_queryValueDelimiter(self.h), owned: true)
 
 proc queryPairDelimiter*(self: gen_qurlquery_types.QUrlQuery, ): gen_qchar_types.QChar =
-  gen_qchar_types.QChar(h: fcQUrlQuery_queryPairDelimiter(self.h))
+  gen_qchar_types.QChar(h: fcQUrlQuery_queryPairDelimiter(self.h), owned: true)
 
 proc setQueryItems*(self: gen_qurlquery_types.QUrlQuery, query: seq[tuple[first: string, second: string]]): void =
   var query_CArray = newSeq[struct_miqt_map](len(query))
@@ -191,10 +187,10 @@ proc removeAllQueryItems*(self: gen_qurlquery_types.QUrlQuery, key: string): voi
   fcQUrlQuery_removeAllQueryItems(self.h, struct_miqt_string(data: key, len: csize_t(len(key))))
 
 proc defaultQueryValueDelimiter*(_: type gen_qurlquery_types.QUrlQuery, ): gen_qchar_types.QChar =
-  gen_qchar_types.QChar(h: fcQUrlQuery_defaultQueryValueDelimiter())
+  gen_qchar_types.QChar(h: fcQUrlQuery_defaultQueryValueDelimiter(), owned: true)
 
 proc defaultQueryPairDelimiter*(_: type gen_qurlquery_types.QUrlQuery, ): gen_qchar_types.QChar =
-  gen_qchar_types.QChar(h: fcQUrlQuery_defaultQueryPairDelimiter())
+  gen_qchar_types.QChar(h: fcQUrlQuery_defaultQueryPairDelimiter(), owned: true)
 
 proc query*(self: gen_qurlquery_types.QUrlQuery, encoding: cint): string =
   let v_ms = fcQUrlQuery_query1(self.h, cint(encoding))
@@ -251,19 +247,17 @@ proc allQueryItemValues*(self: gen_qurlquery_types.QUrlQuery, key: string, encod
   vx_ret
 
 proc create*(T: type gen_qurlquery_types.QUrlQuery): gen_qurlquery_types.QUrlQuery =
-  gen_qurlquery_types.QUrlQuery(h: fcQUrlQuery_new())
+  gen_qurlquery_types.QUrlQuery(h: fcQUrlQuery_new(), owned: true)
 
 proc create*(T: type gen_qurlquery_types.QUrlQuery,
     url: gen_qurl_types.QUrl): gen_qurlquery_types.QUrlQuery =
-  gen_qurlquery_types.QUrlQuery(h: fcQUrlQuery_new2(url.h))
+  gen_qurlquery_types.QUrlQuery(h: fcQUrlQuery_new2(url.h), owned: true)
 
 proc create*(T: type gen_qurlquery_types.QUrlQuery,
     queryString: string): gen_qurlquery_types.QUrlQuery =
-  gen_qurlquery_types.QUrlQuery(h: fcQUrlQuery_new3(struct_miqt_string(data: queryString, len: csize_t(len(queryString)))))
+  gen_qurlquery_types.QUrlQuery(h: fcQUrlQuery_new3(struct_miqt_string(data: queryString, len: csize_t(len(queryString)))), owned: true)
 
 proc create*(T: type gen_qurlquery_types.QUrlQuery,
     other: gen_qurlquery_types.QUrlQuery): gen_qurlquery_types.QUrlQuery =
-  gen_qurlquery_types.QUrlQuery(h: fcQUrlQuery_new4(other.h))
+  gen_qurlquery_types.QUrlQuery(h: fcQUrlQuery_new4(other.h), owned: true)
 
-proc delete*(self: gen_qurlquery_types.QUrlQuery) =
-  fcQUrlQuery_delete(self.h)

@@ -30,7 +30,7 @@ func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
     else:
       copyMem(addr result[0], unsafeAddr v[0], v.len)
 
-const cflags = gorge("pkg-config --cflags Qt5Multimedia")  & " -fPIC"
+const cflags = gorge("pkg-config --cflags Qt5Multimedia") & " -fPIC"
 {.compile("gen_qaudiorecorder.cpp", cflags).}
 
 
@@ -72,7 +72,7 @@ proc fcQAudioRecorder_tr2(s: cstring, c: cstring): struct_miqt_string {.importc:
 proc fcQAudioRecorder_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QAudioRecorder_tr3".}
 proc fcQAudioRecorder_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QAudioRecorder_trUtf82".}
 proc fcQAudioRecorder_trUtf83(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QAudioRecorder_trUtf83".}
-type cQAudioRecorderVTable = object
+type cQAudioRecorderVTable {.pure.} = object
   destructor*: proc(vtbl: ptr cQAudioRecorderVTable, self: ptr cQAudioRecorder) {.cdecl, raises:[], gcsafe.}
   metaObject*: proc(vtbl, self: pointer, ): pointer {.cdecl, raises: [], gcsafe.}
   metacast*: proc(vtbl, self: pointer, param1: cstring): pointer {.cdecl, raises: [], gcsafe.}
@@ -105,10 +105,9 @@ proc fcQAudioRecorder_protectedbase_isSignalConnected(self: pointer, signal: poi
 proc fcQAudioRecorder_new(vtbl: pointer, ): ptr cQAudioRecorder {.importc: "QAudioRecorder_new".}
 proc fcQAudioRecorder_new2(vtbl: pointer, parent: pointer): ptr cQAudioRecorder {.importc: "QAudioRecorder_new2".}
 proc fcQAudioRecorder_staticMetaObject(): pointer {.importc: "QAudioRecorder_staticMetaObject".}
-proc fcQAudioRecorder_delete(self: pointer) {.importc: "QAudioRecorder_delete".}
 
 proc metaObject*(self: gen_qaudiorecorder_types.QAudioRecorder, ): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQAudioRecorder_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQAudioRecorder_metaObject(self.h), owned: false)
 
 proc metacast*(self: gen_qaudiorecorder_types.QAudioRecorder, param1: cstring): pointer =
   fcQAudioRecorder_metacast(self.h, param1)
@@ -238,7 +237,7 @@ type QAudioRecorderchildEventProc* = proc(self: QAudioRecorder, event: gen_qcore
 type QAudioRecordercustomEventProc* = proc(self: QAudioRecorder, event: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
 type QAudioRecorderconnectNotifyProc* = proc(self: QAudioRecorder, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
 type QAudioRecorderdisconnectNotifyProc* = proc(self: QAudioRecorder, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
-type QAudioRecorderVTable* = object
+type QAudioRecorderVTable* {.inheritable, pure.} = object
   vtbl: cQAudioRecorderVTable
   metaObject*: QAudioRecordermetaObjectProc
   metacast*: QAudioRecordermetacastProc
@@ -253,13 +252,16 @@ type QAudioRecorderVTable* = object
   connectNotify*: QAudioRecorderconnectNotifyProc
   disconnectNotify*: QAudioRecorderdisconnectNotifyProc
 proc QAudioRecordermetaObject*(self: gen_qaudiorecorder_types.QAudioRecorder, ): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQAudioRecorder_virtualbase_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQAudioRecorder_virtualbase_metaObject(self.h), owned: false)
 
 proc miqt_exec_callback_cQAudioRecorder_metaObject(vtbl: pointer, self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QAudioRecorderVTable](vtbl)
   let self = QAudioRecorder(h: self)
   var virtualReturn = vtbl[].metaObject(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QAudioRecordermetacast*(self: gen_qaudiorecorder_types.QAudioRecorder, param1: cstring): pointer =
   fcQAudioRecorder_virtualbase_metacast(self.h, param1)
@@ -284,13 +286,16 @@ proc miqt_exec_callback_cQAudioRecorder_metacall(vtbl: pointer, self: pointer, p
   virtualReturn
 
 proc QAudioRecordermediaObject*(self: gen_qaudiorecorder_types.QAudioRecorder, ): gen_qmediaobject_types.QMediaObject =
-  gen_qmediaobject_types.QMediaObject(h: fcQAudioRecorder_virtualbase_mediaObject(self.h))
+  gen_qmediaobject_types.QMediaObject(h: fcQAudioRecorder_virtualbase_mediaObject(self.h), owned: false)
 
 proc miqt_exec_callback_cQAudioRecorder_mediaObject(vtbl: pointer, self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QAudioRecorderVTable](vtbl)
   let self = QAudioRecorder(h: self)
   var virtualReturn = vtbl[].mediaObject(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QAudioRecordersetMediaObject*(self: gen_qaudiorecorder_types.QAudioRecorder, objectVal: gen_qmediaobject_types.QMediaObject): bool =
   fcQAudioRecorder_virtualbase_setMediaObject(self.h, objectVal.h)
@@ -298,7 +303,7 @@ proc QAudioRecordersetMediaObject*(self: gen_qaudiorecorder_types.QAudioRecorder
 proc miqt_exec_callback_cQAudioRecorder_setMediaObject(vtbl: pointer, self: pointer, objectVal: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QAudioRecorderVTable](vtbl)
   let self = QAudioRecorder(h: self)
-  let slotval1 = gen_qmediaobject_types.QMediaObject(h: objectVal)
+  let slotval1 = gen_qmediaobject_types.QMediaObject(h: objectVal, owned: false)
   var virtualReturn = vtbl[].setMediaObject(self, slotval1)
   virtualReturn
 
@@ -308,7 +313,7 @@ proc QAudioRecorderevent*(self: gen_qaudiorecorder_types.QAudioRecorder, event: 
 proc miqt_exec_callback_cQAudioRecorder_event(vtbl: pointer, self: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QAudioRecorderVTable](vtbl)
   let self = QAudioRecorder(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].event(self, slotval1)
   virtualReturn
 
@@ -318,8 +323,8 @@ proc QAudioRecordereventFilter*(self: gen_qaudiorecorder_types.QAudioRecorder, w
 proc miqt_exec_callback_cQAudioRecorder_eventFilter(vtbl: pointer, self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QAudioRecorderVTable](vtbl)
   let self = QAudioRecorder(h: self)
-  let slotval1 = gen_qobject_types.QObject(h: watched)
-  let slotval2 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].eventFilter(self, slotval1, slotval2)
   virtualReturn
 
@@ -329,7 +334,7 @@ proc QAudioRecordertimerEvent*(self: gen_qaudiorecorder_types.QAudioRecorder, ev
 proc miqt_exec_callback_cQAudioRecorder_timerEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QAudioRecorderVTable](vtbl)
   let self = QAudioRecorder(h: self)
-  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   vtbl[].timerEvent(self, slotval1)
 
 proc QAudioRecorderchildEvent*(self: gen_qaudiorecorder_types.QAudioRecorder, event: gen_qcoreevent_types.QChildEvent): void =
@@ -338,7 +343,7 @@ proc QAudioRecorderchildEvent*(self: gen_qaudiorecorder_types.QAudioRecorder, ev
 proc miqt_exec_callback_cQAudioRecorder_childEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QAudioRecorderVTable](vtbl)
   let self = QAudioRecorder(h: self)
-  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   vtbl[].childEvent(self, slotval1)
 
 proc QAudioRecordercustomEvent*(self: gen_qaudiorecorder_types.QAudioRecorder, event: gen_qcoreevent_types.QEvent): void =
@@ -347,7 +352,7 @@ proc QAudioRecordercustomEvent*(self: gen_qaudiorecorder_types.QAudioRecorder, e
 proc miqt_exec_callback_cQAudioRecorder_customEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QAudioRecorderVTable](vtbl)
   let self = QAudioRecorder(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].customEvent(self, slotval1)
 
 proc QAudioRecorderconnectNotify*(self: gen_qaudiorecorder_types.QAudioRecorder, signal: gen_qmetaobject_types.QMetaMethod): void =
@@ -356,7 +361,7 @@ proc QAudioRecorderconnectNotify*(self: gen_qaudiorecorder_types.QAudioRecorder,
 proc miqt_exec_callback_cQAudioRecorder_connectNotify(vtbl: pointer, self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QAudioRecorderVTable](vtbl)
   let self = QAudioRecorder(h: self)
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].connectNotify(self, slotval1)
 
 proc QAudioRecorderdisconnectNotify*(self: gen_qaudiorecorder_types.QAudioRecorder, signal: gen_qmetaobject_types.QMetaMethod): void =
@@ -365,11 +370,111 @@ proc QAudioRecorderdisconnectNotify*(self: gen_qaudiorecorder_types.QAudioRecord
 proc miqt_exec_callback_cQAudioRecorder_disconnectNotify(vtbl: pointer, self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QAudioRecorderVTable](vtbl)
   let self = QAudioRecorder(h: self)
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].disconnectNotify(self, slotval1)
 
+type VirtualQAudioRecorder* {.inheritable.} = ref object of QAudioRecorder
+  vtbl*: cQAudioRecorderVTable
+method metaObject*(self: VirtualQAudioRecorder, ): gen_qobjectdefs_types.QMetaObject {.base.} =
+  QAudioRecordermetaObject(self[])
+proc miqt_exec_method_cQAudioRecorder_metaObject(vtbl: pointer, inst: pointer): pointer {.cdecl.} =
+  let vtbl = cast[VirtualQAudioRecorder](cast[uint](vtbl) - uint(offsetOf(VirtualQAudioRecorder, vtbl)))
+  var virtualReturn = vtbl.metaObject()
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
+
+method metacast*(self: VirtualQAudioRecorder, param1: cstring): pointer {.base.} =
+  QAudioRecordermetacast(self[], param1)
+proc miqt_exec_method_cQAudioRecorder_metacast(vtbl: pointer, inst: pointer, param1: cstring): pointer {.cdecl.} =
+  let vtbl = cast[VirtualQAudioRecorder](cast[uint](vtbl) - uint(offsetOf(VirtualQAudioRecorder, vtbl)))
+  let slotval1 = (param1)
+  var virtualReturn = vtbl.metacast(slotval1)
+  virtualReturn
+
+method metacall*(self: VirtualQAudioRecorder, param1: cint, param2: cint, param3: pointer): cint {.base.} =
+  QAudioRecordermetacall(self[], param1, param2, param3)
+proc miqt_exec_method_cQAudioRecorder_metacall(vtbl: pointer, inst: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
+  let vtbl = cast[VirtualQAudioRecorder](cast[uint](vtbl) - uint(offsetOf(VirtualQAudioRecorder, vtbl)))
+  let slotval1 = cint(param1)
+  let slotval2 = param2
+  let slotval3 = param3
+  var virtualReturn = vtbl.metacall(slotval1, slotval2, slotval3)
+  virtualReturn
+
+method mediaObject*(self: VirtualQAudioRecorder, ): gen_qmediaobject_types.QMediaObject {.base.} =
+  QAudioRecordermediaObject(self[])
+proc miqt_exec_method_cQAudioRecorder_mediaObject(vtbl: pointer, inst: pointer): pointer {.cdecl.} =
+  let vtbl = cast[VirtualQAudioRecorder](cast[uint](vtbl) - uint(offsetOf(VirtualQAudioRecorder, vtbl)))
+  var virtualReturn = vtbl.mediaObject()
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
+
+method setMediaObject*(self: VirtualQAudioRecorder, objectVal: gen_qmediaobject_types.QMediaObject): bool {.base.} =
+  QAudioRecordersetMediaObject(self[], objectVal)
+proc miqt_exec_method_cQAudioRecorder_setMediaObject(vtbl: pointer, inst: pointer, objectVal: pointer): bool {.cdecl.} =
+  let vtbl = cast[VirtualQAudioRecorder](cast[uint](vtbl) - uint(offsetOf(VirtualQAudioRecorder, vtbl)))
+  let slotval1 = gen_qmediaobject_types.QMediaObject(h: objectVal, owned: false)
+  var virtualReturn = vtbl.setMediaObject(slotval1)
+  virtualReturn
+
+method event*(self: VirtualQAudioRecorder, event: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QAudioRecorderevent(self[], event)
+proc miqt_exec_method_cQAudioRecorder_event(vtbl: pointer, inst: pointer, event: pointer): bool {.cdecl.} =
+  let vtbl = cast[VirtualQAudioRecorder](cast[uint](vtbl) - uint(offsetOf(VirtualQAudioRecorder, vtbl)))
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
+  var virtualReturn = vtbl.event(slotval1)
+  virtualReturn
+
+method eventFilter*(self: VirtualQAudioRecorder, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QAudioRecordereventFilter(self[], watched, event)
+proc miqt_exec_method_cQAudioRecorder_eventFilter(vtbl: pointer, inst: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
+  let vtbl = cast[VirtualQAudioRecorder](cast[uint](vtbl) - uint(offsetOf(VirtualQAudioRecorder, vtbl)))
+  let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
+  var virtualReturn = vtbl.eventFilter(slotval1, slotval2)
+  virtualReturn
+
+method timerEvent*(self: VirtualQAudioRecorder, event: gen_qcoreevent_types.QTimerEvent): void {.base.} =
+  QAudioRecordertimerEvent(self[], event)
+proc miqt_exec_method_cQAudioRecorder_timerEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQAudioRecorder](cast[uint](vtbl) - uint(offsetOf(VirtualQAudioRecorder, vtbl)))
+  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
+  vtbl.timerEvent(slotval1)
+
+method childEvent*(self: VirtualQAudioRecorder, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
+  QAudioRecorderchildEvent(self[], event)
+proc miqt_exec_method_cQAudioRecorder_childEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQAudioRecorder](cast[uint](vtbl) - uint(offsetOf(VirtualQAudioRecorder, vtbl)))
+  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
+  vtbl.childEvent(slotval1)
+
+method customEvent*(self: VirtualQAudioRecorder, event: gen_qcoreevent_types.QEvent): void {.base.} =
+  QAudioRecordercustomEvent(self[], event)
+proc miqt_exec_method_cQAudioRecorder_customEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQAudioRecorder](cast[uint](vtbl) - uint(offsetOf(VirtualQAudioRecorder, vtbl)))
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
+  vtbl.customEvent(slotval1)
+
+method connectNotify*(self: VirtualQAudioRecorder, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QAudioRecorderconnectNotify(self[], signal)
+proc miqt_exec_method_cQAudioRecorder_connectNotify(vtbl: pointer, inst: pointer, signal: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQAudioRecorder](cast[uint](vtbl) - uint(offsetOf(VirtualQAudioRecorder, vtbl)))
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
+  vtbl.connectNotify(slotval1)
+
+method disconnectNotify*(self: VirtualQAudioRecorder, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QAudioRecorderdisconnectNotify(self[], signal)
+proc miqt_exec_method_cQAudioRecorder_disconnectNotify(vtbl: pointer, inst: pointer, signal: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQAudioRecorder](cast[uint](vtbl) - uint(offsetOf(VirtualQAudioRecorder, vtbl)))
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
+  vtbl.disconnectNotify(slotval1)
+
 proc sender*(self: gen_qaudiorecorder_types.QAudioRecorder, ): gen_qobject_types.QObject =
-  gen_qobject_types.QObject(h: fcQAudioRecorder_protectedbase_sender(self.h))
+  gen_qobject_types.QObject(h: fcQAudioRecorder_protectedbase_sender(self.h), owned: false)
 
 proc senderSignalIndex*(self: gen_qaudiorecorder_types.QAudioRecorder, ): cint =
   fcQAudioRecorder_protectedbase_senderSignalIndex(self.h)
@@ -384,70 +489,115 @@ proc create*(T: type gen_qaudiorecorder_types.QAudioRecorder,
     vtbl: ref QAudioRecorderVTable = nil): gen_qaudiorecorder_types.QAudioRecorder =
   let vtbl = if vtbl == nil: new QAudioRecorderVTable else: vtbl
   GC_ref(vtbl)
-  vtbl.vtbl.destructor = proc(vtbl: ptr cQAudioRecorderVTable, _: ptr cQAudioRecorder) {.cdecl.} =
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQAudioRecorderVTable, _: ptr cQAudioRecorder) {.cdecl.} =
     let vtbl = cast[ref QAudioRecorderVTable](vtbl)
     GC_unref(vtbl)
-  if not isNil(vtbl.metaObject):
+  if not isNil(vtbl[].metaObject):
     vtbl[].vtbl.metaObject = miqt_exec_callback_cQAudioRecorder_metaObject
-  if not isNil(vtbl.metacast):
+  if not isNil(vtbl[].metacast):
     vtbl[].vtbl.metacast = miqt_exec_callback_cQAudioRecorder_metacast
-  if not isNil(vtbl.metacall):
+  if not isNil(vtbl[].metacall):
     vtbl[].vtbl.metacall = miqt_exec_callback_cQAudioRecorder_metacall
-  if not isNil(vtbl.mediaObject):
+  if not isNil(vtbl[].mediaObject):
     vtbl[].vtbl.mediaObject = miqt_exec_callback_cQAudioRecorder_mediaObject
-  if not isNil(vtbl.setMediaObject):
+  if not isNil(vtbl[].setMediaObject):
     vtbl[].vtbl.setMediaObject = miqt_exec_callback_cQAudioRecorder_setMediaObject
-  if not isNil(vtbl.event):
+  if not isNil(vtbl[].event):
     vtbl[].vtbl.event = miqt_exec_callback_cQAudioRecorder_event
-  if not isNil(vtbl.eventFilter):
+  if not isNil(vtbl[].eventFilter):
     vtbl[].vtbl.eventFilter = miqt_exec_callback_cQAudioRecorder_eventFilter
-  if not isNil(vtbl.timerEvent):
+  if not isNil(vtbl[].timerEvent):
     vtbl[].vtbl.timerEvent = miqt_exec_callback_cQAudioRecorder_timerEvent
-  if not isNil(vtbl.childEvent):
+  if not isNil(vtbl[].childEvent):
     vtbl[].vtbl.childEvent = miqt_exec_callback_cQAudioRecorder_childEvent
-  if not isNil(vtbl.customEvent):
+  if not isNil(vtbl[].customEvent):
     vtbl[].vtbl.customEvent = miqt_exec_callback_cQAudioRecorder_customEvent
-  if not isNil(vtbl.connectNotify):
+  if not isNil(vtbl[].connectNotify):
     vtbl[].vtbl.connectNotify = miqt_exec_callback_cQAudioRecorder_connectNotify
-  if not isNil(vtbl.disconnectNotify):
+  if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQAudioRecorder_disconnectNotify
-  gen_qaudiorecorder_types.QAudioRecorder(h: fcQAudioRecorder_new(addr(vtbl[]), ))
+  gen_qaudiorecorder_types.QAudioRecorder(h: fcQAudioRecorder_new(addr(vtbl[].vtbl), ), owned: true)
 
 proc create*(T: type gen_qaudiorecorder_types.QAudioRecorder,
     parent: gen_qobject_types.QObject,
     vtbl: ref QAudioRecorderVTable = nil): gen_qaudiorecorder_types.QAudioRecorder =
   let vtbl = if vtbl == nil: new QAudioRecorderVTable else: vtbl
   GC_ref(vtbl)
-  vtbl.vtbl.destructor = proc(vtbl: ptr cQAudioRecorderVTable, _: ptr cQAudioRecorder) {.cdecl.} =
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQAudioRecorderVTable, _: ptr cQAudioRecorder) {.cdecl.} =
     let vtbl = cast[ref QAudioRecorderVTable](vtbl)
     GC_unref(vtbl)
-  if not isNil(vtbl.metaObject):
+  if not isNil(vtbl[].metaObject):
     vtbl[].vtbl.metaObject = miqt_exec_callback_cQAudioRecorder_metaObject
-  if not isNil(vtbl.metacast):
+  if not isNil(vtbl[].metacast):
     vtbl[].vtbl.metacast = miqt_exec_callback_cQAudioRecorder_metacast
-  if not isNil(vtbl.metacall):
+  if not isNil(vtbl[].metacall):
     vtbl[].vtbl.metacall = miqt_exec_callback_cQAudioRecorder_metacall
-  if not isNil(vtbl.mediaObject):
+  if not isNil(vtbl[].mediaObject):
     vtbl[].vtbl.mediaObject = miqt_exec_callback_cQAudioRecorder_mediaObject
-  if not isNil(vtbl.setMediaObject):
+  if not isNil(vtbl[].setMediaObject):
     vtbl[].vtbl.setMediaObject = miqt_exec_callback_cQAudioRecorder_setMediaObject
-  if not isNil(vtbl.event):
+  if not isNil(vtbl[].event):
     vtbl[].vtbl.event = miqt_exec_callback_cQAudioRecorder_event
-  if not isNil(vtbl.eventFilter):
+  if not isNil(vtbl[].eventFilter):
     vtbl[].vtbl.eventFilter = miqt_exec_callback_cQAudioRecorder_eventFilter
-  if not isNil(vtbl.timerEvent):
+  if not isNil(vtbl[].timerEvent):
     vtbl[].vtbl.timerEvent = miqt_exec_callback_cQAudioRecorder_timerEvent
-  if not isNil(vtbl.childEvent):
+  if not isNil(vtbl[].childEvent):
     vtbl[].vtbl.childEvent = miqt_exec_callback_cQAudioRecorder_childEvent
-  if not isNil(vtbl.customEvent):
+  if not isNil(vtbl[].customEvent):
     vtbl[].vtbl.customEvent = miqt_exec_callback_cQAudioRecorder_customEvent
-  if not isNil(vtbl.connectNotify):
+  if not isNil(vtbl[].connectNotify):
     vtbl[].vtbl.connectNotify = miqt_exec_callback_cQAudioRecorder_connectNotify
-  if not isNil(vtbl.disconnectNotify):
+  if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQAudioRecorder_disconnectNotify
-  gen_qaudiorecorder_types.QAudioRecorder(h: fcQAudioRecorder_new2(addr(vtbl[]), parent.h))
+  gen_qaudiorecorder_types.QAudioRecorder(h: fcQAudioRecorder_new2(addr(vtbl[].vtbl), parent.h), owned: true)
+
+proc create*(T: type gen_qaudiorecorder_types.QAudioRecorder,
+    vtbl: VirtualQAudioRecorder) =
+
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQAudioRecorderVTable, _: ptr cQAudioRecorder) {.cdecl.} =
+    let vtbl = cast[ptr typeof(VirtualQAudioRecorder()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQAudioRecorder, vtbl)))
+    vtbl[].h = nil
+    vtbl[].owned = false
+  vtbl[].vtbl.metaObject = miqt_exec_method_cQAudioRecorder_metaObject
+  vtbl[].vtbl.metacast = miqt_exec_method_cQAudioRecorder_metacast
+  vtbl[].vtbl.metacall = miqt_exec_method_cQAudioRecorder_metacall
+  vtbl[].vtbl.mediaObject = miqt_exec_method_cQAudioRecorder_mediaObject
+  vtbl[].vtbl.setMediaObject = miqt_exec_method_cQAudioRecorder_setMediaObject
+  vtbl[].vtbl.event = miqt_exec_method_cQAudioRecorder_event
+  vtbl[].vtbl.eventFilter = miqt_exec_method_cQAudioRecorder_eventFilter
+  vtbl[].vtbl.timerEvent = miqt_exec_method_cQAudioRecorder_timerEvent
+  vtbl[].vtbl.childEvent = miqt_exec_method_cQAudioRecorder_childEvent
+  vtbl[].vtbl.customEvent = miqt_exec_method_cQAudioRecorder_customEvent
+  vtbl[].vtbl.connectNotify = miqt_exec_method_cQAudioRecorder_connectNotify
+  vtbl[].vtbl.disconnectNotify = miqt_exec_method_cQAudioRecorder_disconnectNotify
+  if vtbl[].h != nil: delete(move(vtbl[]))
+  vtbl[].h = fcQAudioRecorder_new(addr(vtbl[].vtbl), )
+  vtbl[].owned = true
+
+proc create*(T: type gen_qaudiorecorder_types.QAudioRecorder,
+    parent: gen_qobject_types.QObject,
+    vtbl: VirtualQAudioRecorder) =
+
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQAudioRecorderVTable, _: ptr cQAudioRecorder) {.cdecl.} =
+    let vtbl = cast[ptr typeof(VirtualQAudioRecorder()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQAudioRecorder, vtbl)))
+    vtbl[].h = nil
+    vtbl[].owned = false
+  vtbl[].vtbl.metaObject = miqt_exec_method_cQAudioRecorder_metaObject
+  vtbl[].vtbl.metacast = miqt_exec_method_cQAudioRecorder_metacast
+  vtbl[].vtbl.metacall = miqt_exec_method_cQAudioRecorder_metacall
+  vtbl[].vtbl.mediaObject = miqt_exec_method_cQAudioRecorder_mediaObject
+  vtbl[].vtbl.setMediaObject = miqt_exec_method_cQAudioRecorder_setMediaObject
+  vtbl[].vtbl.event = miqt_exec_method_cQAudioRecorder_event
+  vtbl[].vtbl.eventFilter = miqt_exec_method_cQAudioRecorder_eventFilter
+  vtbl[].vtbl.timerEvent = miqt_exec_method_cQAudioRecorder_timerEvent
+  vtbl[].vtbl.childEvent = miqt_exec_method_cQAudioRecorder_childEvent
+  vtbl[].vtbl.customEvent = miqt_exec_method_cQAudioRecorder_customEvent
+  vtbl[].vtbl.connectNotify = miqt_exec_method_cQAudioRecorder_connectNotify
+  vtbl[].vtbl.disconnectNotify = miqt_exec_method_cQAudioRecorder_disconnectNotify
+  if vtbl[].h != nil: delete(move(vtbl[]))
+  vtbl[].h = fcQAudioRecorder_new2(addr(vtbl[].vtbl), parent.h)
+  vtbl[].owned = true
 
 proc staticMetaObject*(_: type gen_qaudiorecorder_types.QAudioRecorder): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQAudioRecorder_staticMetaObject())
-proc delete*(self: gen_qaudiorecorder_types.QAudioRecorder) =
-  fcQAudioRecorder_delete(self.h)

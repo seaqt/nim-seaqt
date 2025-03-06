@@ -30,7 +30,7 @@ func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
     else:
       copyMem(addr result[0], unsafeAddr v[0], v.len)
 
-const cflags = gorge("pkg-config --cflags Qt5Multimedia")  & " -fPIC"
+const cflags = gorge("pkg-config --cflags Qt5Multimedia") & " -fPIC"
 {.compile("gen_qimageencodercontrol.cpp", cflags).}
 
 
@@ -73,10 +73,9 @@ proc fcQImageEncoderControl_protectedbase_senderSignalIndex(self: pointer, ): ci
 proc fcQImageEncoderControl_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QImageEncoderControl_protectedbase_receivers".}
 proc fcQImageEncoderControl_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QImageEncoderControl_protectedbase_isSignalConnected".}
 proc fcQImageEncoderControl_staticMetaObject(): pointer {.importc: "QImageEncoderControl_staticMetaObject".}
-proc fcQImageEncoderControl_delete(self: pointer) {.importc: "QImageEncoderControl_delete".}
 
 proc metaObject*(self: gen_qimageencodercontrol_types.QImageEncoderControl, ): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQImageEncoderControl_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQImageEncoderControl_metaObject(self.h), owned: false)
 
 proc metacast*(self: gen_qimageencodercontrol_types.QImageEncoderControl, param1: cstring): pointer =
   fcQImageEncoderControl_metacast(self.h, param1)
@@ -119,12 +118,12 @@ proc supportedResolutions*(self: gen_qimageencodercontrol_types.QImageEncoderCon
   var vx_ret = newSeq[gen_qsize_types.QSize](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
-    vx_ret[i] = gen_qsize_types.QSize(h: v_outCast[i])
+    vx_ret[i] = gen_qsize_types.QSize(h: v_outCast[i], owned: true)
   c_free(v_ma.data)
   vx_ret
 
 proc imageSettings*(self: gen_qimageencodercontrol_types.QImageEncoderControl, ): gen_qmediaencodersettings_types.QImageEncoderSettings =
-  gen_qmediaencodersettings_types.QImageEncoderSettings(h: fcQImageEncoderControl_imageSettings(self.h))
+  gen_qmediaencodersettings_types.QImageEncoderSettings(h: fcQImageEncoderControl_imageSettings(self.h), owned: true)
 
 proc setImageSettings*(self: gen_qimageencodercontrol_types.QImageEncoderControl, settings: gen_qmediaencodersettings_types.QImageEncoderSettings): void =
   fcQImageEncoderControl_setImageSettings(self.h, settings.h)
@@ -154,7 +153,7 @@ proc trUtf8*(_: type gen_qimageencodercontrol_types.QImageEncoderControl, s: cst
   vx_ret
 
 proc sender*(self: gen_qimageencodercontrol_types.QImageEncoderControl, ): gen_qobject_types.QObject =
-  gen_qobject_types.QObject(h: fcQImageEncoderControl_protectedbase_sender(self.h))
+  gen_qobject_types.QObject(h: fcQImageEncoderControl_protectedbase_sender(self.h), owned: false)
 
 proc senderSignalIndex*(self: gen_qimageencodercontrol_types.QImageEncoderControl, ): cint =
   fcQImageEncoderControl_protectedbase_senderSignalIndex(self.h)
@@ -167,5 +166,3 @@ proc isSignalConnected*(self: gen_qimageencodercontrol_types.QImageEncoderContro
 
 proc staticMetaObject*(_: type gen_qimageencodercontrol_types.QImageEncoderControl): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQImageEncoderControl_staticMetaObject())
-proc delete*(self: gen_qimageencodercontrol_types.QImageEncoderControl) =
-  fcQImageEncoderControl_delete(self.h)

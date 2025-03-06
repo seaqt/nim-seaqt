@@ -30,7 +30,7 @@ func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
     else:
       copyMem(addr result[0], unsafeAddr v[0], v.len)
 
-const cflags = gorge("pkg-config --cflags Qt5Core")  & " -fPIC"
+const cflags = gorge("pkg-config --cflags Qt5Core") & " -fPIC"
 {.compile("gen_qfiledevice.cpp", cflags).}
 
 
@@ -137,10 +137,9 @@ proc fcQFileDevice_protectedbase_senderSignalIndex(self: pointer, ): cint {.impo
 proc fcQFileDevice_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QFileDevice_protectedbase_receivers".}
 proc fcQFileDevice_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QFileDevice_protectedbase_isSignalConnected".}
 proc fcQFileDevice_staticMetaObject(): pointer {.importc: "QFileDevice_staticMetaObject".}
-proc fcQFileDevice_delete(self: pointer) {.importc: "QFileDevice_delete".}
 
 proc metaObject*(self: gen_qfiledevice_types.QFileDevice, ): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQFileDevice_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQFileDevice_metaObject(self.h), owned: false)
 
 proc metacast*(self: gen_qfiledevice_types.QFileDevice, param1: cstring): pointer =
   fcQFileDevice_metacast(self.h, param1)
@@ -212,7 +211,7 @@ proc unmap*(self: gen_qfiledevice_types.QFileDevice, address: ptr uint8): bool =
   fcQFileDevice_unmap(self.h, address)
 
 proc fileTime*(self: gen_qfiledevice_types.QFileDevice, time: cint): gen_qdatetime_types.QDateTime =
-  gen_qdatetime_types.QDateTime(h: fcQFileDevice_fileTime(self.h, cint(time)))
+  gen_qdatetime_types.QDateTime(h: fcQFileDevice_fileTime(self.h, cint(time)), owned: true)
 
 proc setFileTime*(self: gen_qfiledevice_types.QFileDevice, newDate: gen_qdatetime_types.QDateTime, fileTime: cint): bool =
   fcQFileDevice_setFileTime(self.h, newDate.h, cint(fileTime))
@@ -251,7 +250,7 @@ proc setErrorString*(self: gen_qfiledevice_types.QFileDevice, errorString: strin
   fcQFileDevice_protectedbase_setErrorString(self.h, struct_miqt_string(data: errorString, len: csize_t(len(errorString))))
 
 proc sender*(self: gen_qfiledevice_types.QFileDevice, ): gen_qobject_types.QObject =
-  gen_qobject_types.QObject(h: fcQFileDevice_protectedbase_sender(self.h))
+  gen_qobject_types.QObject(h: fcQFileDevice_protectedbase_sender(self.h), owned: false)
 
 proc senderSignalIndex*(self: gen_qfiledevice_types.QFileDevice, ): cint =
   fcQFileDevice_protectedbase_senderSignalIndex(self.h)
@@ -264,5 +263,3 @@ proc isSignalConnected*(self: gen_qfiledevice_types.QFileDevice, signal: gen_qme
 
 proc staticMetaObject*(_: type gen_qfiledevice_types.QFileDevice): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQFileDevice_staticMetaObject())
-proc delete*(self: gen_qfiledevice_types.QFileDevice) =
-  fcQFileDevice_delete(self.h)

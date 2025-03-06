@@ -30,7 +30,7 @@ func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
     else:
       copyMem(addr result[0], unsafeAddr v[0], v.len)
 
-const cflags = gorge("pkg-config --cflags Qt5Widgets")  & " -fPIC"
+const cflags = gorge("pkg-config --cflags Qt5Widgets") & " -fPIC"
 {.compile("gen_qabstractslider.cpp", cflags).}
 
 
@@ -129,7 +129,7 @@ proc fcQAbstractSlider_tr2(s: cstring, c: cstring): struct_miqt_string {.importc
 proc fcQAbstractSlider_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QAbstractSlider_tr3".}
 proc fcQAbstractSlider_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QAbstractSlider_trUtf82".}
 proc fcQAbstractSlider_trUtf83(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QAbstractSlider_trUtf83".}
-type cQAbstractSliderVTable = object
+type cQAbstractSliderVTable {.pure.} = object
   destructor*: proc(vtbl: ptr cQAbstractSliderVTable, self: ptr cQAbstractSlider) {.cdecl, raises:[], gcsafe.}
   metaObject*: proc(vtbl, self: pointer, ): pointer {.cdecl, raises: [], gcsafe.}
   metacast*: proc(vtbl, self: pointer, param1: cstring): pointer {.cdecl, raises: [], gcsafe.}
@@ -249,10 +249,9 @@ proc fcQAbstractSlider_protectedbase_isSignalConnected(self: pointer, signal: po
 proc fcQAbstractSlider_new(vtbl: pointer, parent: pointer): ptr cQAbstractSlider {.importc: "QAbstractSlider_new".}
 proc fcQAbstractSlider_new2(vtbl: pointer, ): ptr cQAbstractSlider {.importc: "QAbstractSlider_new2".}
 proc fcQAbstractSlider_staticMetaObject(): pointer {.importc: "QAbstractSlider_staticMetaObject".}
-proc fcQAbstractSlider_delete(self: pointer) {.importc: "QAbstractSlider_delete".}
 
 proc metaObject*(self: gen_qabstractslider_types.QAbstractSlider, ): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQAbstractSlider_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQAbstractSlider_metaObject(self.h), owned: false)
 
 proc metacast*(self: gen_qabstractslider_types.QAbstractSlider, param1: cstring): pointer =
   fcQAbstractSlider_metacast(self.h, param1)
@@ -537,7 +536,7 @@ type QAbstractSliderchildEventProc* = proc(self: QAbstractSlider, event: gen_qco
 type QAbstractSlidercustomEventProc* = proc(self: QAbstractSlider, event: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
 type QAbstractSliderconnectNotifyProc* = proc(self: QAbstractSlider, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
 type QAbstractSliderdisconnectNotifyProc* = proc(self: QAbstractSlider, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
-type QAbstractSliderVTable* = object
+type QAbstractSliderVTable* {.inheritable, pure.} = object
   vtbl: cQAbstractSliderVTable
   metaObject*: QAbstractSlidermetaObjectProc
   metacast*: QAbstractSlidermetacastProc
@@ -591,13 +590,16 @@ type QAbstractSliderVTable* = object
   connectNotify*: QAbstractSliderconnectNotifyProc
   disconnectNotify*: QAbstractSliderdisconnectNotifyProc
 proc QAbstractSlidermetaObject*(self: gen_qabstractslider_types.QAbstractSlider, ): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQAbstractSlider_virtualbase_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQAbstractSlider_virtualbase_metaObject(self.h), owned: false)
 
 proc miqt_exec_callback_cQAbstractSlider_metaObject(vtbl: pointer, self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QAbstractSliderVTable](vtbl)
   let self = QAbstractSlider(h: self)
   var virtualReturn = vtbl[].metaObject(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QAbstractSlidermetacast*(self: gen_qabstractslider_types.QAbstractSlider, param1: cstring): pointer =
   fcQAbstractSlider_virtualbase_metacast(self.h, param1)
@@ -627,7 +629,7 @@ proc QAbstractSliderevent*(self: gen_qabstractslider_types.QAbstractSlider, e: g
 proc miqt_exec_callback_cQAbstractSlider_event(vtbl: pointer, self: pointer, e: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QAbstractSliderVTable](vtbl)
   let self = QAbstractSlider(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: e)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: e, owned: false)
   var virtualReturn = vtbl[].event(self, slotval1)
   virtualReturn
 
@@ -646,7 +648,7 @@ proc QAbstractSliderkeyPressEvent*(self: gen_qabstractslider_types.QAbstractSlid
 proc miqt_exec_callback_cQAbstractSlider_keyPressEvent(vtbl: pointer, self: pointer, ev: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QAbstractSliderVTable](vtbl)
   let self = QAbstractSlider(h: self)
-  let slotval1 = gen_qevent_types.QKeyEvent(h: ev)
+  let slotval1 = gen_qevent_types.QKeyEvent(h: ev, owned: false)
   vtbl[].keyPressEvent(self, slotval1)
 
 proc QAbstractSlidertimerEvent*(self: gen_qabstractslider_types.QAbstractSlider, param1: gen_qcoreevent_types.QTimerEvent): void =
@@ -655,7 +657,7 @@ proc QAbstractSlidertimerEvent*(self: gen_qabstractslider_types.QAbstractSlider,
 proc miqt_exec_callback_cQAbstractSlider_timerEvent(vtbl: pointer, self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QAbstractSliderVTable](vtbl)
   let self = QAbstractSlider(h: self)
-  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: param1)
+  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: param1, owned: false)
   vtbl[].timerEvent(self, slotval1)
 
 proc QAbstractSliderwheelEvent*(self: gen_qabstractslider_types.QAbstractSlider, e: gen_qevent_types.QWheelEvent): void =
@@ -664,7 +666,7 @@ proc QAbstractSliderwheelEvent*(self: gen_qabstractslider_types.QAbstractSlider,
 proc miqt_exec_callback_cQAbstractSlider_wheelEvent(vtbl: pointer, self: pointer, e: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QAbstractSliderVTable](vtbl)
   let self = QAbstractSlider(h: self)
-  let slotval1 = gen_qevent_types.QWheelEvent(h: e)
+  let slotval1 = gen_qevent_types.QWheelEvent(h: e, owned: false)
   vtbl[].wheelEvent(self, slotval1)
 
 proc QAbstractSliderchangeEvent*(self: gen_qabstractslider_types.QAbstractSlider, e: gen_qcoreevent_types.QEvent): void =
@@ -673,7 +675,7 @@ proc QAbstractSliderchangeEvent*(self: gen_qabstractslider_types.QAbstractSlider
 proc miqt_exec_callback_cQAbstractSlider_changeEvent(vtbl: pointer, self: pointer, e: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QAbstractSliderVTable](vtbl)
   let self = QAbstractSlider(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: e)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: e, owned: false)
   vtbl[].changeEvent(self, slotval1)
 
 proc QAbstractSliderdevType*(self: gen_qabstractslider_types.QAbstractSlider, ): cint =
@@ -695,22 +697,28 @@ proc miqt_exec_callback_cQAbstractSlider_setVisible(vtbl: pointer, self: pointer
   vtbl[].setVisible(self, slotval1)
 
 proc QAbstractSlidersizeHint*(self: gen_qabstractslider_types.QAbstractSlider, ): gen_qsize_types.QSize =
-  gen_qsize_types.QSize(h: fcQAbstractSlider_virtualbase_sizeHint(self.h))
+  gen_qsize_types.QSize(h: fcQAbstractSlider_virtualbase_sizeHint(self.h), owned: true)
 
 proc miqt_exec_callback_cQAbstractSlider_sizeHint(vtbl: pointer, self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QAbstractSliderVTable](vtbl)
   let self = QAbstractSlider(h: self)
   var virtualReturn = vtbl[].sizeHint(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QAbstractSliderminimumSizeHint*(self: gen_qabstractslider_types.QAbstractSlider, ): gen_qsize_types.QSize =
-  gen_qsize_types.QSize(h: fcQAbstractSlider_virtualbase_minimumSizeHint(self.h))
+  gen_qsize_types.QSize(h: fcQAbstractSlider_virtualbase_minimumSizeHint(self.h), owned: true)
 
 proc miqt_exec_callback_cQAbstractSlider_minimumSizeHint(vtbl: pointer, self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QAbstractSliderVTable](vtbl)
   let self = QAbstractSlider(h: self)
   var virtualReturn = vtbl[].minimumSizeHint(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QAbstractSliderheightForWidth*(self: gen_qabstractslider_types.QAbstractSlider, param1: cint): cint =
   fcQAbstractSlider_virtualbase_heightForWidth(self.h, param1)
@@ -732,13 +740,16 @@ proc miqt_exec_callback_cQAbstractSlider_hasHeightForWidth(vtbl: pointer, self: 
   virtualReturn
 
 proc QAbstractSliderpaintEngine*(self: gen_qabstractslider_types.QAbstractSlider, ): gen_qpaintengine_types.QPaintEngine =
-  gen_qpaintengine_types.QPaintEngine(h: fcQAbstractSlider_virtualbase_paintEngine(self.h))
+  gen_qpaintengine_types.QPaintEngine(h: fcQAbstractSlider_virtualbase_paintEngine(self.h), owned: false)
 
 proc miqt_exec_callback_cQAbstractSlider_paintEngine(vtbl: pointer, self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QAbstractSliderVTable](vtbl)
   let self = QAbstractSlider(h: self)
   var virtualReturn = vtbl[].paintEngine(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QAbstractSlidermousePressEvent*(self: gen_qabstractslider_types.QAbstractSlider, event: gen_qevent_types.QMouseEvent): void =
   fcQAbstractSlider_virtualbase_mousePressEvent(self.h, event.h)
@@ -746,7 +757,7 @@ proc QAbstractSlidermousePressEvent*(self: gen_qabstractslider_types.QAbstractSl
 proc miqt_exec_callback_cQAbstractSlider_mousePressEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QAbstractSliderVTable](vtbl)
   let self = QAbstractSlider(h: self)
-  let slotval1 = gen_qevent_types.QMouseEvent(h: event)
+  let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   vtbl[].mousePressEvent(self, slotval1)
 
 proc QAbstractSlidermouseReleaseEvent*(self: gen_qabstractslider_types.QAbstractSlider, event: gen_qevent_types.QMouseEvent): void =
@@ -755,7 +766,7 @@ proc QAbstractSlidermouseReleaseEvent*(self: gen_qabstractslider_types.QAbstract
 proc miqt_exec_callback_cQAbstractSlider_mouseReleaseEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QAbstractSliderVTable](vtbl)
   let self = QAbstractSlider(h: self)
-  let slotval1 = gen_qevent_types.QMouseEvent(h: event)
+  let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   vtbl[].mouseReleaseEvent(self, slotval1)
 
 proc QAbstractSlidermouseDoubleClickEvent*(self: gen_qabstractslider_types.QAbstractSlider, event: gen_qevent_types.QMouseEvent): void =
@@ -764,7 +775,7 @@ proc QAbstractSlidermouseDoubleClickEvent*(self: gen_qabstractslider_types.QAbst
 proc miqt_exec_callback_cQAbstractSlider_mouseDoubleClickEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QAbstractSliderVTable](vtbl)
   let self = QAbstractSlider(h: self)
-  let slotval1 = gen_qevent_types.QMouseEvent(h: event)
+  let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   vtbl[].mouseDoubleClickEvent(self, slotval1)
 
 proc QAbstractSlidermouseMoveEvent*(self: gen_qabstractslider_types.QAbstractSlider, event: gen_qevent_types.QMouseEvent): void =
@@ -773,7 +784,7 @@ proc QAbstractSlidermouseMoveEvent*(self: gen_qabstractslider_types.QAbstractSli
 proc miqt_exec_callback_cQAbstractSlider_mouseMoveEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QAbstractSliderVTable](vtbl)
   let self = QAbstractSlider(h: self)
-  let slotval1 = gen_qevent_types.QMouseEvent(h: event)
+  let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   vtbl[].mouseMoveEvent(self, slotval1)
 
 proc QAbstractSliderkeyReleaseEvent*(self: gen_qabstractslider_types.QAbstractSlider, event: gen_qevent_types.QKeyEvent): void =
@@ -782,7 +793,7 @@ proc QAbstractSliderkeyReleaseEvent*(self: gen_qabstractslider_types.QAbstractSl
 proc miqt_exec_callback_cQAbstractSlider_keyReleaseEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QAbstractSliderVTable](vtbl)
   let self = QAbstractSlider(h: self)
-  let slotval1 = gen_qevent_types.QKeyEvent(h: event)
+  let slotval1 = gen_qevent_types.QKeyEvent(h: event, owned: false)
   vtbl[].keyReleaseEvent(self, slotval1)
 
 proc QAbstractSliderfocusInEvent*(self: gen_qabstractslider_types.QAbstractSlider, event: gen_qevent_types.QFocusEvent): void =
@@ -791,7 +802,7 @@ proc QAbstractSliderfocusInEvent*(self: gen_qabstractslider_types.QAbstractSlide
 proc miqt_exec_callback_cQAbstractSlider_focusInEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QAbstractSliderVTable](vtbl)
   let self = QAbstractSlider(h: self)
-  let slotval1 = gen_qevent_types.QFocusEvent(h: event)
+  let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
   vtbl[].focusInEvent(self, slotval1)
 
 proc QAbstractSliderfocusOutEvent*(self: gen_qabstractslider_types.QAbstractSlider, event: gen_qevent_types.QFocusEvent): void =
@@ -800,7 +811,7 @@ proc QAbstractSliderfocusOutEvent*(self: gen_qabstractslider_types.QAbstractSlid
 proc miqt_exec_callback_cQAbstractSlider_focusOutEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QAbstractSliderVTable](vtbl)
   let self = QAbstractSlider(h: self)
-  let slotval1 = gen_qevent_types.QFocusEvent(h: event)
+  let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
   vtbl[].focusOutEvent(self, slotval1)
 
 proc QAbstractSliderenterEvent*(self: gen_qabstractslider_types.QAbstractSlider, event: gen_qcoreevent_types.QEvent): void =
@@ -809,7 +820,7 @@ proc QAbstractSliderenterEvent*(self: gen_qabstractslider_types.QAbstractSlider,
 proc miqt_exec_callback_cQAbstractSlider_enterEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QAbstractSliderVTable](vtbl)
   let self = QAbstractSlider(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].enterEvent(self, slotval1)
 
 proc QAbstractSliderleaveEvent*(self: gen_qabstractslider_types.QAbstractSlider, event: gen_qcoreevent_types.QEvent): void =
@@ -818,7 +829,7 @@ proc QAbstractSliderleaveEvent*(self: gen_qabstractslider_types.QAbstractSlider,
 proc miqt_exec_callback_cQAbstractSlider_leaveEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QAbstractSliderVTable](vtbl)
   let self = QAbstractSlider(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].leaveEvent(self, slotval1)
 
 proc QAbstractSliderpaintEvent*(self: gen_qabstractslider_types.QAbstractSlider, event: gen_qevent_types.QPaintEvent): void =
@@ -827,7 +838,7 @@ proc QAbstractSliderpaintEvent*(self: gen_qabstractslider_types.QAbstractSlider,
 proc miqt_exec_callback_cQAbstractSlider_paintEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QAbstractSliderVTable](vtbl)
   let self = QAbstractSlider(h: self)
-  let slotval1 = gen_qevent_types.QPaintEvent(h: event)
+  let slotval1 = gen_qevent_types.QPaintEvent(h: event, owned: false)
   vtbl[].paintEvent(self, slotval1)
 
 proc QAbstractSlidermoveEvent*(self: gen_qabstractslider_types.QAbstractSlider, event: gen_qevent_types.QMoveEvent): void =
@@ -836,7 +847,7 @@ proc QAbstractSlidermoveEvent*(self: gen_qabstractslider_types.QAbstractSlider, 
 proc miqt_exec_callback_cQAbstractSlider_moveEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QAbstractSliderVTable](vtbl)
   let self = QAbstractSlider(h: self)
-  let slotval1 = gen_qevent_types.QMoveEvent(h: event)
+  let slotval1 = gen_qevent_types.QMoveEvent(h: event, owned: false)
   vtbl[].moveEvent(self, slotval1)
 
 proc QAbstractSliderresizeEvent*(self: gen_qabstractslider_types.QAbstractSlider, event: gen_qevent_types.QResizeEvent): void =
@@ -845,7 +856,7 @@ proc QAbstractSliderresizeEvent*(self: gen_qabstractslider_types.QAbstractSlider
 proc miqt_exec_callback_cQAbstractSlider_resizeEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QAbstractSliderVTable](vtbl)
   let self = QAbstractSlider(h: self)
-  let slotval1 = gen_qevent_types.QResizeEvent(h: event)
+  let slotval1 = gen_qevent_types.QResizeEvent(h: event, owned: false)
   vtbl[].resizeEvent(self, slotval1)
 
 proc QAbstractSlidercloseEvent*(self: gen_qabstractslider_types.QAbstractSlider, event: gen_qevent_types.QCloseEvent): void =
@@ -854,7 +865,7 @@ proc QAbstractSlidercloseEvent*(self: gen_qabstractslider_types.QAbstractSlider,
 proc miqt_exec_callback_cQAbstractSlider_closeEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QAbstractSliderVTable](vtbl)
   let self = QAbstractSlider(h: self)
-  let slotval1 = gen_qevent_types.QCloseEvent(h: event)
+  let slotval1 = gen_qevent_types.QCloseEvent(h: event, owned: false)
   vtbl[].closeEvent(self, slotval1)
 
 proc QAbstractSlidercontextMenuEvent*(self: gen_qabstractslider_types.QAbstractSlider, event: gen_qevent_types.QContextMenuEvent): void =
@@ -863,7 +874,7 @@ proc QAbstractSlidercontextMenuEvent*(self: gen_qabstractslider_types.QAbstractS
 proc miqt_exec_callback_cQAbstractSlider_contextMenuEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QAbstractSliderVTable](vtbl)
   let self = QAbstractSlider(h: self)
-  let slotval1 = gen_qevent_types.QContextMenuEvent(h: event)
+  let slotval1 = gen_qevent_types.QContextMenuEvent(h: event, owned: false)
   vtbl[].contextMenuEvent(self, slotval1)
 
 proc QAbstractSlidertabletEvent*(self: gen_qabstractslider_types.QAbstractSlider, event: gen_qevent_types.QTabletEvent): void =
@@ -872,7 +883,7 @@ proc QAbstractSlidertabletEvent*(self: gen_qabstractslider_types.QAbstractSlider
 proc miqt_exec_callback_cQAbstractSlider_tabletEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QAbstractSliderVTable](vtbl)
   let self = QAbstractSlider(h: self)
-  let slotval1 = gen_qevent_types.QTabletEvent(h: event)
+  let slotval1 = gen_qevent_types.QTabletEvent(h: event, owned: false)
   vtbl[].tabletEvent(self, slotval1)
 
 proc QAbstractSlideractionEvent*(self: gen_qabstractslider_types.QAbstractSlider, event: gen_qevent_types.QActionEvent): void =
@@ -881,7 +892,7 @@ proc QAbstractSlideractionEvent*(self: gen_qabstractslider_types.QAbstractSlider
 proc miqt_exec_callback_cQAbstractSlider_actionEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QAbstractSliderVTable](vtbl)
   let self = QAbstractSlider(h: self)
-  let slotval1 = gen_qevent_types.QActionEvent(h: event)
+  let slotval1 = gen_qevent_types.QActionEvent(h: event, owned: false)
   vtbl[].actionEvent(self, slotval1)
 
 proc QAbstractSliderdragEnterEvent*(self: gen_qabstractslider_types.QAbstractSlider, event: gen_qevent_types.QDragEnterEvent): void =
@@ -890,7 +901,7 @@ proc QAbstractSliderdragEnterEvent*(self: gen_qabstractslider_types.QAbstractSli
 proc miqt_exec_callback_cQAbstractSlider_dragEnterEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QAbstractSliderVTable](vtbl)
   let self = QAbstractSlider(h: self)
-  let slotval1 = gen_qevent_types.QDragEnterEvent(h: event)
+  let slotval1 = gen_qevent_types.QDragEnterEvent(h: event, owned: false)
   vtbl[].dragEnterEvent(self, slotval1)
 
 proc QAbstractSliderdragMoveEvent*(self: gen_qabstractslider_types.QAbstractSlider, event: gen_qevent_types.QDragMoveEvent): void =
@@ -899,7 +910,7 @@ proc QAbstractSliderdragMoveEvent*(self: gen_qabstractslider_types.QAbstractSlid
 proc miqt_exec_callback_cQAbstractSlider_dragMoveEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QAbstractSliderVTable](vtbl)
   let self = QAbstractSlider(h: self)
-  let slotval1 = gen_qevent_types.QDragMoveEvent(h: event)
+  let slotval1 = gen_qevent_types.QDragMoveEvent(h: event, owned: false)
   vtbl[].dragMoveEvent(self, slotval1)
 
 proc QAbstractSliderdragLeaveEvent*(self: gen_qabstractslider_types.QAbstractSlider, event: gen_qevent_types.QDragLeaveEvent): void =
@@ -908,7 +919,7 @@ proc QAbstractSliderdragLeaveEvent*(self: gen_qabstractslider_types.QAbstractSli
 proc miqt_exec_callback_cQAbstractSlider_dragLeaveEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QAbstractSliderVTable](vtbl)
   let self = QAbstractSlider(h: self)
-  let slotval1 = gen_qevent_types.QDragLeaveEvent(h: event)
+  let slotval1 = gen_qevent_types.QDragLeaveEvent(h: event, owned: false)
   vtbl[].dragLeaveEvent(self, slotval1)
 
 proc QAbstractSliderdropEvent*(self: gen_qabstractslider_types.QAbstractSlider, event: gen_qevent_types.QDropEvent): void =
@@ -917,7 +928,7 @@ proc QAbstractSliderdropEvent*(self: gen_qabstractslider_types.QAbstractSlider, 
 proc miqt_exec_callback_cQAbstractSlider_dropEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QAbstractSliderVTable](vtbl)
   let self = QAbstractSlider(h: self)
-  let slotval1 = gen_qevent_types.QDropEvent(h: event)
+  let slotval1 = gen_qevent_types.QDropEvent(h: event, owned: false)
   vtbl[].dropEvent(self, slotval1)
 
 proc QAbstractSlidershowEvent*(self: gen_qabstractslider_types.QAbstractSlider, event: gen_qevent_types.QShowEvent): void =
@@ -926,7 +937,7 @@ proc QAbstractSlidershowEvent*(self: gen_qabstractslider_types.QAbstractSlider, 
 proc miqt_exec_callback_cQAbstractSlider_showEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QAbstractSliderVTable](vtbl)
   let self = QAbstractSlider(h: self)
-  let slotval1 = gen_qevent_types.QShowEvent(h: event)
+  let slotval1 = gen_qevent_types.QShowEvent(h: event, owned: false)
   vtbl[].showEvent(self, slotval1)
 
 proc QAbstractSliderhideEvent*(self: gen_qabstractslider_types.QAbstractSlider, event: gen_qevent_types.QHideEvent): void =
@@ -935,7 +946,7 @@ proc QAbstractSliderhideEvent*(self: gen_qabstractslider_types.QAbstractSlider, 
 proc miqt_exec_callback_cQAbstractSlider_hideEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QAbstractSliderVTable](vtbl)
   let self = QAbstractSlider(h: self)
-  let slotval1 = gen_qevent_types.QHideEvent(h: event)
+  let slotval1 = gen_qevent_types.QHideEvent(h: event, owned: false)
   vtbl[].hideEvent(self, slotval1)
 
 proc QAbstractSlidernativeEvent*(self: gen_qabstractslider_types.QAbstractSlider, eventType: seq[byte], message: pointer, resultVal: ptr clong): bool =
@@ -969,27 +980,33 @@ proc QAbstractSliderinitPainter*(self: gen_qabstractslider_types.QAbstractSlider
 proc miqt_exec_callback_cQAbstractSlider_initPainter(vtbl: pointer, self: pointer, painter: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QAbstractSliderVTable](vtbl)
   let self = QAbstractSlider(h: self)
-  let slotval1 = gen_qpainter_types.QPainter(h: painter)
+  let slotval1 = gen_qpainter_types.QPainter(h: painter, owned: false)
   vtbl[].initPainter(self, slotval1)
 
 proc QAbstractSliderredirected*(self: gen_qabstractslider_types.QAbstractSlider, offset: gen_qpoint_types.QPoint): gen_qpaintdevice_types.QPaintDevice =
-  gen_qpaintdevice_types.QPaintDevice(h: fcQAbstractSlider_virtualbase_redirected(self.h, offset.h))
+  gen_qpaintdevice_types.QPaintDevice(h: fcQAbstractSlider_virtualbase_redirected(self.h, offset.h), owned: false)
 
 proc miqt_exec_callback_cQAbstractSlider_redirected(vtbl: pointer, self: pointer, offset: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QAbstractSliderVTable](vtbl)
   let self = QAbstractSlider(h: self)
-  let slotval1 = gen_qpoint_types.QPoint(h: offset)
+  let slotval1 = gen_qpoint_types.QPoint(h: offset, owned: false)
   var virtualReturn = vtbl[].redirected(self, slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QAbstractSlidersharedPainter*(self: gen_qabstractslider_types.QAbstractSlider, ): gen_qpainter_types.QPainter =
-  gen_qpainter_types.QPainter(h: fcQAbstractSlider_virtualbase_sharedPainter(self.h))
+  gen_qpainter_types.QPainter(h: fcQAbstractSlider_virtualbase_sharedPainter(self.h), owned: false)
 
 proc miqt_exec_callback_cQAbstractSlider_sharedPainter(vtbl: pointer, self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QAbstractSliderVTable](vtbl)
   let self = QAbstractSlider(h: self)
   var virtualReturn = vtbl[].sharedPainter(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QAbstractSliderinputMethodEvent*(self: gen_qabstractslider_types.QAbstractSlider, param1: gen_qevent_types.QInputMethodEvent): void =
   fcQAbstractSlider_virtualbase_inputMethodEvent(self.h, param1.h)
@@ -997,18 +1014,21 @@ proc QAbstractSliderinputMethodEvent*(self: gen_qabstractslider_types.QAbstractS
 proc miqt_exec_callback_cQAbstractSlider_inputMethodEvent(vtbl: pointer, self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QAbstractSliderVTable](vtbl)
   let self = QAbstractSlider(h: self)
-  let slotval1 = gen_qevent_types.QInputMethodEvent(h: param1)
+  let slotval1 = gen_qevent_types.QInputMethodEvent(h: param1, owned: false)
   vtbl[].inputMethodEvent(self, slotval1)
 
 proc QAbstractSliderinputMethodQuery*(self: gen_qabstractslider_types.QAbstractSlider, param1: cint): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQAbstractSlider_virtualbase_inputMethodQuery(self.h, cint(param1)))
+  gen_qvariant_types.QVariant(h: fcQAbstractSlider_virtualbase_inputMethodQuery(self.h, cint(param1)), owned: true)
 
 proc miqt_exec_callback_cQAbstractSlider_inputMethodQuery(vtbl: pointer, self: pointer, param1: cint): pointer {.cdecl.} =
   let vtbl = cast[ptr QAbstractSliderVTable](vtbl)
   let self = QAbstractSlider(h: self)
   let slotval1 = cint(param1)
   var virtualReturn = vtbl[].inputMethodQuery(self, slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QAbstractSliderfocusNextPrevChild*(self: gen_qabstractslider_types.QAbstractSlider, next: bool): bool =
   fcQAbstractSlider_virtualbase_focusNextPrevChild(self.h, next)
@@ -1026,8 +1046,8 @@ proc QAbstractSlidereventFilter*(self: gen_qabstractslider_types.QAbstractSlider
 proc miqt_exec_callback_cQAbstractSlider_eventFilter(vtbl: pointer, self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QAbstractSliderVTable](vtbl)
   let self = QAbstractSlider(h: self)
-  let slotval1 = gen_qobject_types.QObject(h: watched)
-  let slotval2 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].eventFilter(self, slotval1, slotval2)
   virtualReturn
 
@@ -1037,7 +1057,7 @@ proc QAbstractSliderchildEvent*(self: gen_qabstractslider_types.QAbstractSlider,
 proc miqt_exec_callback_cQAbstractSlider_childEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QAbstractSliderVTable](vtbl)
   let self = QAbstractSlider(h: self)
-  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   vtbl[].childEvent(self, slotval1)
 
 proc QAbstractSlidercustomEvent*(self: gen_qabstractslider_types.QAbstractSlider, event: gen_qcoreevent_types.QEvent): void =
@@ -1046,7 +1066,7 @@ proc QAbstractSlidercustomEvent*(self: gen_qabstractslider_types.QAbstractSlider
 proc miqt_exec_callback_cQAbstractSlider_customEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QAbstractSliderVTable](vtbl)
   let self = QAbstractSlider(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].customEvent(self, slotval1)
 
 proc QAbstractSliderconnectNotify*(self: gen_qabstractslider_types.QAbstractSlider, signal: gen_qmetaobject_types.QMetaMethod): void =
@@ -1055,7 +1075,7 @@ proc QAbstractSliderconnectNotify*(self: gen_qabstractslider_types.QAbstractSlid
 proc miqt_exec_callback_cQAbstractSlider_connectNotify(vtbl: pointer, self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QAbstractSliderVTable](vtbl)
   let self = QAbstractSlider(h: self)
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].connectNotify(self, slotval1)
 
 proc QAbstractSliderdisconnectNotify*(self: gen_qabstractslider_types.QAbstractSlider, signal: gen_qmetaobject_types.QMetaMethod): void =
@@ -1064,8 +1084,406 @@ proc QAbstractSliderdisconnectNotify*(self: gen_qabstractslider_types.QAbstractS
 proc miqt_exec_callback_cQAbstractSlider_disconnectNotify(vtbl: pointer, self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QAbstractSliderVTable](vtbl)
   let self = QAbstractSlider(h: self)
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].disconnectNotify(self, slotval1)
+
+type VirtualQAbstractSlider* {.inheritable.} = ref object of QAbstractSlider
+  vtbl*: cQAbstractSliderVTable
+method metaObject*(self: VirtualQAbstractSlider, ): gen_qobjectdefs_types.QMetaObject {.base.} =
+  QAbstractSlidermetaObject(self[])
+proc miqt_exec_method_cQAbstractSlider_metaObject(vtbl: pointer, inst: pointer): pointer {.cdecl.} =
+  let vtbl = cast[VirtualQAbstractSlider](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractSlider, vtbl)))
+  var virtualReturn = vtbl.metaObject()
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
+
+method metacast*(self: VirtualQAbstractSlider, param1: cstring): pointer {.base.} =
+  QAbstractSlidermetacast(self[], param1)
+proc miqt_exec_method_cQAbstractSlider_metacast(vtbl: pointer, inst: pointer, param1: cstring): pointer {.cdecl.} =
+  let vtbl = cast[VirtualQAbstractSlider](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractSlider, vtbl)))
+  let slotval1 = (param1)
+  var virtualReturn = vtbl.metacast(slotval1)
+  virtualReturn
+
+method metacall*(self: VirtualQAbstractSlider, param1: cint, param2: cint, param3: pointer): cint {.base.} =
+  QAbstractSlidermetacall(self[], param1, param2, param3)
+proc miqt_exec_method_cQAbstractSlider_metacall(vtbl: pointer, inst: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
+  let vtbl = cast[VirtualQAbstractSlider](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractSlider, vtbl)))
+  let slotval1 = cint(param1)
+  let slotval2 = param2
+  let slotval3 = param3
+  var virtualReturn = vtbl.metacall(slotval1, slotval2, slotval3)
+  virtualReturn
+
+method event*(self: VirtualQAbstractSlider, e: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QAbstractSliderevent(self[], e)
+proc miqt_exec_method_cQAbstractSlider_event(vtbl: pointer, inst: pointer, e: pointer): bool {.cdecl.} =
+  let vtbl = cast[VirtualQAbstractSlider](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractSlider, vtbl)))
+  let slotval1 = gen_qcoreevent_types.QEvent(h: e, owned: false)
+  var virtualReturn = vtbl.event(slotval1)
+  virtualReturn
+
+method sliderChange*(self: VirtualQAbstractSlider, change: cint): void {.base.} =
+  QAbstractSlidersliderChange(self[], change)
+proc miqt_exec_method_cQAbstractSlider_sliderChange(vtbl: pointer, inst: pointer, change: cint): void {.cdecl.} =
+  let vtbl = cast[VirtualQAbstractSlider](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractSlider, vtbl)))
+  let slotval1 = cint(change)
+  vtbl.sliderChange(slotval1)
+
+method keyPressEvent*(self: VirtualQAbstractSlider, ev: gen_qevent_types.QKeyEvent): void {.base.} =
+  QAbstractSliderkeyPressEvent(self[], ev)
+proc miqt_exec_method_cQAbstractSlider_keyPressEvent(vtbl: pointer, inst: pointer, ev: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQAbstractSlider](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractSlider, vtbl)))
+  let slotval1 = gen_qevent_types.QKeyEvent(h: ev, owned: false)
+  vtbl.keyPressEvent(slotval1)
+
+method timerEvent*(self: VirtualQAbstractSlider, param1: gen_qcoreevent_types.QTimerEvent): void {.base.} =
+  QAbstractSlidertimerEvent(self[], param1)
+proc miqt_exec_method_cQAbstractSlider_timerEvent(vtbl: pointer, inst: pointer, param1: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQAbstractSlider](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractSlider, vtbl)))
+  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: param1, owned: false)
+  vtbl.timerEvent(slotval1)
+
+method wheelEvent*(self: VirtualQAbstractSlider, e: gen_qevent_types.QWheelEvent): void {.base.} =
+  QAbstractSliderwheelEvent(self[], e)
+proc miqt_exec_method_cQAbstractSlider_wheelEvent(vtbl: pointer, inst: pointer, e: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQAbstractSlider](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractSlider, vtbl)))
+  let slotval1 = gen_qevent_types.QWheelEvent(h: e, owned: false)
+  vtbl.wheelEvent(slotval1)
+
+method changeEvent*(self: VirtualQAbstractSlider, e: gen_qcoreevent_types.QEvent): void {.base.} =
+  QAbstractSliderchangeEvent(self[], e)
+proc miqt_exec_method_cQAbstractSlider_changeEvent(vtbl: pointer, inst: pointer, e: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQAbstractSlider](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractSlider, vtbl)))
+  let slotval1 = gen_qcoreevent_types.QEvent(h: e, owned: false)
+  vtbl.changeEvent(slotval1)
+
+method devType*(self: VirtualQAbstractSlider, ): cint {.base.} =
+  QAbstractSliderdevType(self[])
+proc miqt_exec_method_cQAbstractSlider_devType(vtbl: pointer, inst: pointer): cint {.cdecl.} =
+  let vtbl = cast[VirtualQAbstractSlider](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractSlider, vtbl)))
+  var virtualReturn = vtbl.devType()
+  virtualReturn
+
+method setVisible*(self: VirtualQAbstractSlider, visible: bool): void {.base.} =
+  QAbstractSlidersetVisible(self[], visible)
+proc miqt_exec_method_cQAbstractSlider_setVisible(vtbl: pointer, inst: pointer, visible: bool): void {.cdecl.} =
+  let vtbl = cast[VirtualQAbstractSlider](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractSlider, vtbl)))
+  let slotval1 = visible
+  vtbl.setVisible(slotval1)
+
+method sizeHint*(self: VirtualQAbstractSlider, ): gen_qsize_types.QSize {.base.} =
+  QAbstractSlidersizeHint(self[])
+proc miqt_exec_method_cQAbstractSlider_sizeHint(vtbl: pointer, inst: pointer): pointer {.cdecl.} =
+  let vtbl = cast[VirtualQAbstractSlider](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractSlider, vtbl)))
+  var virtualReturn = vtbl.sizeHint()
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
+
+method minimumSizeHint*(self: VirtualQAbstractSlider, ): gen_qsize_types.QSize {.base.} =
+  QAbstractSliderminimumSizeHint(self[])
+proc miqt_exec_method_cQAbstractSlider_minimumSizeHint(vtbl: pointer, inst: pointer): pointer {.cdecl.} =
+  let vtbl = cast[VirtualQAbstractSlider](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractSlider, vtbl)))
+  var virtualReturn = vtbl.minimumSizeHint()
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
+
+method heightForWidth*(self: VirtualQAbstractSlider, param1: cint): cint {.base.} =
+  QAbstractSliderheightForWidth(self[], param1)
+proc miqt_exec_method_cQAbstractSlider_heightForWidth(vtbl: pointer, inst: pointer, param1: cint): cint {.cdecl.} =
+  let vtbl = cast[VirtualQAbstractSlider](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractSlider, vtbl)))
+  let slotval1 = param1
+  var virtualReturn = vtbl.heightForWidth(slotval1)
+  virtualReturn
+
+method hasHeightForWidth*(self: VirtualQAbstractSlider, ): bool {.base.} =
+  QAbstractSliderhasHeightForWidth(self[])
+proc miqt_exec_method_cQAbstractSlider_hasHeightForWidth(vtbl: pointer, inst: pointer): bool {.cdecl.} =
+  let vtbl = cast[VirtualQAbstractSlider](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractSlider, vtbl)))
+  var virtualReturn = vtbl.hasHeightForWidth()
+  virtualReturn
+
+method paintEngine*(self: VirtualQAbstractSlider, ): gen_qpaintengine_types.QPaintEngine {.base.} =
+  QAbstractSliderpaintEngine(self[])
+proc miqt_exec_method_cQAbstractSlider_paintEngine(vtbl: pointer, inst: pointer): pointer {.cdecl.} =
+  let vtbl = cast[VirtualQAbstractSlider](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractSlider, vtbl)))
+  var virtualReturn = vtbl.paintEngine()
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
+
+method mousePressEvent*(self: VirtualQAbstractSlider, event: gen_qevent_types.QMouseEvent): void {.base.} =
+  QAbstractSlidermousePressEvent(self[], event)
+proc miqt_exec_method_cQAbstractSlider_mousePressEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQAbstractSlider](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractSlider, vtbl)))
+  let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
+  vtbl.mousePressEvent(slotval1)
+
+method mouseReleaseEvent*(self: VirtualQAbstractSlider, event: gen_qevent_types.QMouseEvent): void {.base.} =
+  QAbstractSlidermouseReleaseEvent(self[], event)
+proc miqt_exec_method_cQAbstractSlider_mouseReleaseEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQAbstractSlider](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractSlider, vtbl)))
+  let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
+  vtbl.mouseReleaseEvent(slotval1)
+
+method mouseDoubleClickEvent*(self: VirtualQAbstractSlider, event: gen_qevent_types.QMouseEvent): void {.base.} =
+  QAbstractSlidermouseDoubleClickEvent(self[], event)
+proc miqt_exec_method_cQAbstractSlider_mouseDoubleClickEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQAbstractSlider](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractSlider, vtbl)))
+  let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
+  vtbl.mouseDoubleClickEvent(slotval1)
+
+method mouseMoveEvent*(self: VirtualQAbstractSlider, event: gen_qevent_types.QMouseEvent): void {.base.} =
+  QAbstractSlidermouseMoveEvent(self[], event)
+proc miqt_exec_method_cQAbstractSlider_mouseMoveEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQAbstractSlider](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractSlider, vtbl)))
+  let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
+  vtbl.mouseMoveEvent(slotval1)
+
+method keyReleaseEvent*(self: VirtualQAbstractSlider, event: gen_qevent_types.QKeyEvent): void {.base.} =
+  QAbstractSliderkeyReleaseEvent(self[], event)
+proc miqt_exec_method_cQAbstractSlider_keyReleaseEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQAbstractSlider](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractSlider, vtbl)))
+  let slotval1 = gen_qevent_types.QKeyEvent(h: event, owned: false)
+  vtbl.keyReleaseEvent(slotval1)
+
+method focusInEvent*(self: VirtualQAbstractSlider, event: gen_qevent_types.QFocusEvent): void {.base.} =
+  QAbstractSliderfocusInEvent(self[], event)
+proc miqt_exec_method_cQAbstractSlider_focusInEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQAbstractSlider](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractSlider, vtbl)))
+  let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
+  vtbl.focusInEvent(slotval1)
+
+method focusOutEvent*(self: VirtualQAbstractSlider, event: gen_qevent_types.QFocusEvent): void {.base.} =
+  QAbstractSliderfocusOutEvent(self[], event)
+proc miqt_exec_method_cQAbstractSlider_focusOutEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQAbstractSlider](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractSlider, vtbl)))
+  let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
+  vtbl.focusOutEvent(slotval1)
+
+method enterEvent*(self: VirtualQAbstractSlider, event: gen_qcoreevent_types.QEvent): void {.base.} =
+  QAbstractSliderenterEvent(self[], event)
+proc miqt_exec_method_cQAbstractSlider_enterEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQAbstractSlider](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractSlider, vtbl)))
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
+  vtbl.enterEvent(slotval1)
+
+method leaveEvent*(self: VirtualQAbstractSlider, event: gen_qcoreevent_types.QEvent): void {.base.} =
+  QAbstractSliderleaveEvent(self[], event)
+proc miqt_exec_method_cQAbstractSlider_leaveEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQAbstractSlider](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractSlider, vtbl)))
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
+  vtbl.leaveEvent(slotval1)
+
+method paintEvent*(self: VirtualQAbstractSlider, event: gen_qevent_types.QPaintEvent): void {.base.} =
+  QAbstractSliderpaintEvent(self[], event)
+proc miqt_exec_method_cQAbstractSlider_paintEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQAbstractSlider](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractSlider, vtbl)))
+  let slotval1 = gen_qevent_types.QPaintEvent(h: event, owned: false)
+  vtbl.paintEvent(slotval1)
+
+method moveEvent*(self: VirtualQAbstractSlider, event: gen_qevent_types.QMoveEvent): void {.base.} =
+  QAbstractSlidermoveEvent(self[], event)
+proc miqt_exec_method_cQAbstractSlider_moveEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQAbstractSlider](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractSlider, vtbl)))
+  let slotval1 = gen_qevent_types.QMoveEvent(h: event, owned: false)
+  vtbl.moveEvent(slotval1)
+
+method resizeEvent*(self: VirtualQAbstractSlider, event: gen_qevent_types.QResizeEvent): void {.base.} =
+  QAbstractSliderresizeEvent(self[], event)
+proc miqt_exec_method_cQAbstractSlider_resizeEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQAbstractSlider](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractSlider, vtbl)))
+  let slotval1 = gen_qevent_types.QResizeEvent(h: event, owned: false)
+  vtbl.resizeEvent(slotval1)
+
+method closeEvent*(self: VirtualQAbstractSlider, event: gen_qevent_types.QCloseEvent): void {.base.} =
+  QAbstractSlidercloseEvent(self[], event)
+proc miqt_exec_method_cQAbstractSlider_closeEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQAbstractSlider](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractSlider, vtbl)))
+  let slotval1 = gen_qevent_types.QCloseEvent(h: event, owned: false)
+  vtbl.closeEvent(slotval1)
+
+method contextMenuEvent*(self: VirtualQAbstractSlider, event: gen_qevent_types.QContextMenuEvent): void {.base.} =
+  QAbstractSlidercontextMenuEvent(self[], event)
+proc miqt_exec_method_cQAbstractSlider_contextMenuEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQAbstractSlider](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractSlider, vtbl)))
+  let slotval1 = gen_qevent_types.QContextMenuEvent(h: event, owned: false)
+  vtbl.contextMenuEvent(slotval1)
+
+method tabletEvent*(self: VirtualQAbstractSlider, event: gen_qevent_types.QTabletEvent): void {.base.} =
+  QAbstractSlidertabletEvent(self[], event)
+proc miqt_exec_method_cQAbstractSlider_tabletEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQAbstractSlider](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractSlider, vtbl)))
+  let slotval1 = gen_qevent_types.QTabletEvent(h: event, owned: false)
+  vtbl.tabletEvent(slotval1)
+
+method actionEvent*(self: VirtualQAbstractSlider, event: gen_qevent_types.QActionEvent): void {.base.} =
+  QAbstractSlideractionEvent(self[], event)
+proc miqt_exec_method_cQAbstractSlider_actionEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQAbstractSlider](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractSlider, vtbl)))
+  let slotval1 = gen_qevent_types.QActionEvent(h: event, owned: false)
+  vtbl.actionEvent(slotval1)
+
+method dragEnterEvent*(self: VirtualQAbstractSlider, event: gen_qevent_types.QDragEnterEvent): void {.base.} =
+  QAbstractSliderdragEnterEvent(self[], event)
+proc miqt_exec_method_cQAbstractSlider_dragEnterEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQAbstractSlider](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractSlider, vtbl)))
+  let slotval1 = gen_qevent_types.QDragEnterEvent(h: event, owned: false)
+  vtbl.dragEnterEvent(slotval1)
+
+method dragMoveEvent*(self: VirtualQAbstractSlider, event: gen_qevent_types.QDragMoveEvent): void {.base.} =
+  QAbstractSliderdragMoveEvent(self[], event)
+proc miqt_exec_method_cQAbstractSlider_dragMoveEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQAbstractSlider](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractSlider, vtbl)))
+  let slotval1 = gen_qevent_types.QDragMoveEvent(h: event, owned: false)
+  vtbl.dragMoveEvent(slotval1)
+
+method dragLeaveEvent*(self: VirtualQAbstractSlider, event: gen_qevent_types.QDragLeaveEvent): void {.base.} =
+  QAbstractSliderdragLeaveEvent(self[], event)
+proc miqt_exec_method_cQAbstractSlider_dragLeaveEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQAbstractSlider](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractSlider, vtbl)))
+  let slotval1 = gen_qevent_types.QDragLeaveEvent(h: event, owned: false)
+  vtbl.dragLeaveEvent(slotval1)
+
+method dropEvent*(self: VirtualQAbstractSlider, event: gen_qevent_types.QDropEvent): void {.base.} =
+  QAbstractSliderdropEvent(self[], event)
+proc miqt_exec_method_cQAbstractSlider_dropEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQAbstractSlider](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractSlider, vtbl)))
+  let slotval1 = gen_qevent_types.QDropEvent(h: event, owned: false)
+  vtbl.dropEvent(slotval1)
+
+method showEvent*(self: VirtualQAbstractSlider, event: gen_qevent_types.QShowEvent): void {.base.} =
+  QAbstractSlidershowEvent(self[], event)
+proc miqt_exec_method_cQAbstractSlider_showEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQAbstractSlider](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractSlider, vtbl)))
+  let slotval1 = gen_qevent_types.QShowEvent(h: event, owned: false)
+  vtbl.showEvent(slotval1)
+
+method hideEvent*(self: VirtualQAbstractSlider, event: gen_qevent_types.QHideEvent): void {.base.} =
+  QAbstractSliderhideEvent(self[], event)
+proc miqt_exec_method_cQAbstractSlider_hideEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQAbstractSlider](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractSlider, vtbl)))
+  let slotval1 = gen_qevent_types.QHideEvent(h: event, owned: false)
+  vtbl.hideEvent(slotval1)
+
+method nativeEvent*(self: VirtualQAbstractSlider, eventType: seq[byte], message: pointer, resultVal: ptr clong): bool {.base.} =
+  QAbstractSlidernativeEvent(self[], eventType, message, resultVal)
+proc miqt_exec_method_cQAbstractSlider_nativeEvent(vtbl: pointer, inst: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr clong): bool {.cdecl.} =
+  let vtbl = cast[VirtualQAbstractSlider](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractSlider, vtbl)))
+  var veventType_bytearray = eventType
+  var veventTypex_ret = @(toOpenArrayByte(veventType_bytearray.data, 0, int(veventType_bytearray.len)-1))
+  c_free(veventType_bytearray.data)
+  let slotval1 = veventTypex_ret
+  let slotval2 = message
+  let slotval3 = resultVal
+  var virtualReturn = vtbl.nativeEvent(slotval1, slotval2, slotval3)
+  virtualReturn
+
+method metric*(self: VirtualQAbstractSlider, param1: cint): cint {.base.} =
+  QAbstractSlidermetric(self[], param1)
+proc miqt_exec_method_cQAbstractSlider_metric(vtbl: pointer, inst: pointer, param1: cint): cint {.cdecl.} =
+  let vtbl = cast[VirtualQAbstractSlider](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractSlider, vtbl)))
+  let slotval1 = cint(param1)
+  var virtualReturn = vtbl.metric(slotval1)
+  virtualReturn
+
+method initPainter*(self: VirtualQAbstractSlider, painter: gen_qpainter_types.QPainter): void {.base.} =
+  QAbstractSliderinitPainter(self[], painter)
+proc miqt_exec_method_cQAbstractSlider_initPainter(vtbl: pointer, inst: pointer, painter: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQAbstractSlider](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractSlider, vtbl)))
+  let slotval1 = gen_qpainter_types.QPainter(h: painter, owned: false)
+  vtbl.initPainter(slotval1)
+
+method redirected*(self: VirtualQAbstractSlider, offset: gen_qpoint_types.QPoint): gen_qpaintdevice_types.QPaintDevice {.base.} =
+  QAbstractSliderredirected(self[], offset)
+proc miqt_exec_method_cQAbstractSlider_redirected(vtbl: pointer, inst: pointer, offset: pointer): pointer {.cdecl.} =
+  let vtbl = cast[VirtualQAbstractSlider](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractSlider, vtbl)))
+  let slotval1 = gen_qpoint_types.QPoint(h: offset, owned: false)
+  var virtualReturn = vtbl.redirected(slotval1)
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
+
+method sharedPainter*(self: VirtualQAbstractSlider, ): gen_qpainter_types.QPainter {.base.} =
+  QAbstractSlidersharedPainter(self[])
+proc miqt_exec_method_cQAbstractSlider_sharedPainter(vtbl: pointer, inst: pointer): pointer {.cdecl.} =
+  let vtbl = cast[VirtualQAbstractSlider](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractSlider, vtbl)))
+  var virtualReturn = vtbl.sharedPainter()
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
+
+method inputMethodEvent*(self: VirtualQAbstractSlider, param1: gen_qevent_types.QInputMethodEvent): void {.base.} =
+  QAbstractSliderinputMethodEvent(self[], param1)
+proc miqt_exec_method_cQAbstractSlider_inputMethodEvent(vtbl: pointer, inst: pointer, param1: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQAbstractSlider](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractSlider, vtbl)))
+  let slotval1 = gen_qevent_types.QInputMethodEvent(h: param1, owned: false)
+  vtbl.inputMethodEvent(slotval1)
+
+method inputMethodQuery*(self: VirtualQAbstractSlider, param1: cint): gen_qvariant_types.QVariant {.base.} =
+  QAbstractSliderinputMethodQuery(self[], param1)
+proc miqt_exec_method_cQAbstractSlider_inputMethodQuery(vtbl: pointer, inst: pointer, param1: cint): pointer {.cdecl.} =
+  let vtbl = cast[VirtualQAbstractSlider](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractSlider, vtbl)))
+  let slotval1 = cint(param1)
+  var virtualReturn = vtbl.inputMethodQuery(slotval1)
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
+
+method focusNextPrevChild*(self: VirtualQAbstractSlider, next: bool): bool {.base.} =
+  QAbstractSliderfocusNextPrevChild(self[], next)
+proc miqt_exec_method_cQAbstractSlider_focusNextPrevChild(vtbl: pointer, inst: pointer, next: bool): bool {.cdecl.} =
+  let vtbl = cast[VirtualQAbstractSlider](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractSlider, vtbl)))
+  let slotval1 = next
+  var virtualReturn = vtbl.focusNextPrevChild(slotval1)
+  virtualReturn
+
+method eventFilter*(self: VirtualQAbstractSlider, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QAbstractSlidereventFilter(self[], watched, event)
+proc miqt_exec_method_cQAbstractSlider_eventFilter(vtbl: pointer, inst: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
+  let vtbl = cast[VirtualQAbstractSlider](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractSlider, vtbl)))
+  let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
+  var virtualReturn = vtbl.eventFilter(slotval1, slotval2)
+  virtualReturn
+
+method childEvent*(self: VirtualQAbstractSlider, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
+  QAbstractSliderchildEvent(self[], event)
+proc miqt_exec_method_cQAbstractSlider_childEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQAbstractSlider](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractSlider, vtbl)))
+  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
+  vtbl.childEvent(slotval1)
+
+method customEvent*(self: VirtualQAbstractSlider, event: gen_qcoreevent_types.QEvent): void {.base.} =
+  QAbstractSlidercustomEvent(self[], event)
+proc miqt_exec_method_cQAbstractSlider_customEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQAbstractSlider](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractSlider, vtbl)))
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
+  vtbl.customEvent(slotval1)
+
+method connectNotify*(self: VirtualQAbstractSlider, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QAbstractSliderconnectNotify(self[], signal)
+proc miqt_exec_method_cQAbstractSlider_connectNotify(vtbl: pointer, inst: pointer, signal: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQAbstractSlider](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractSlider, vtbl)))
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
+  vtbl.connectNotify(slotval1)
+
+method disconnectNotify*(self: VirtualQAbstractSlider, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QAbstractSliderdisconnectNotify(self[], signal)
+proc miqt_exec_method_cQAbstractSlider_disconnectNotify(vtbl: pointer, inst: pointer, signal: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQAbstractSlider](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractSlider, vtbl)))
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
+  vtbl.disconnectNotify(slotval1)
 
 proc setRepeatAction*(self: gen_qabstractslider_types.QAbstractSlider, action: cint): void =
   fcQAbstractSlider_protectedbase_setRepeatAction(self.h, cint(action))
@@ -1095,7 +1513,7 @@ proc focusPreviousChild*(self: gen_qabstractslider_types.QAbstractSlider, ): boo
   fcQAbstractSlider_protectedbase_focusPreviousChild(self.h)
 
 proc sender*(self: gen_qabstractslider_types.QAbstractSlider, ): gen_qobject_types.QObject =
-  gen_qobject_types.QObject(h: fcQAbstractSlider_protectedbase_sender(self.h))
+  gen_qobject_types.QObject(h: fcQAbstractSlider_protectedbase_sender(self.h), owned: false)
 
 proc senderSignalIndex*(self: gen_qabstractslider_types.QAbstractSlider, ): cint =
   fcQAbstractSlider_protectedbase_senderSignalIndex(self.h)
@@ -1111,225 +1529,348 @@ proc create*(T: type gen_qabstractslider_types.QAbstractSlider,
     vtbl: ref QAbstractSliderVTable = nil): gen_qabstractslider_types.QAbstractSlider =
   let vtbl = if vtbl == nil: new QAbstractSliderVTable else: vtbl
   GC_ref(vtbl)
-  vtbl.vtbl.destructor = proc(vtbl: ptr cQAbstractSliderVTable, _: ptr cQAbstractSlider) {.cdecl.} =
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQAbstractSliderVTable, _: ptr cQAbstractSlider) {.cdecl.} =
     let vtbl = cast[ref QAbstractSliderVTable](vtbl)
     GC_unref(vtbl)
-  if not isNil(vtbl.metaObject):
+  if not isNil(vtbl[].metaObject):
     vtbl[].vtbl.metaObject = miqt_exec_callback_cQAbstractSlider_metaObject
-  if not isNil(vtbl.metacast):
+  if not isNil(vtbl[].metacast):
     vtbl[].vtbl.metacast = miqt_exec_callback_cQAbstractSlider_metacast
-  if not isNil(vtbl.metacall):
+  if not isNil(vtbl[].metacall):
     vtbl[].vtbl.metacall = miqt_exec_callback_cQAbstractSlider_metacall
-  if not isNil(vtbl.event):
+  if not isNil(vtbl[].event):
     vtbl[].vtbl.event = miqt_exec_callback_cQAbstractSlider_event
-  if not isNil(vtbl.sliderChange):
+  if not isNil(vtbl[].sliderChange):
     vtbl[].vtbl.sliderChange = miqt_exec_callback_cQAbstractSlider_sliderChange
-  if not isNil(vtbl.keyPressEvent):
+  if not isNil(vtbl[].keyPressEvent):
     vtbl[].vtbl.keyPressEvent = miqt_exec_callback_cQAbstractSlider_keyPressEvent
-  if not isNil(vtbl.timerEvent):
+  if not isNil(vtbl[].timerEvent):
     vtbl[].vtbl.timerEvent = miqt_exec_callback_cQAbstractSlider_timerEvent
-  if not isNil(vtbl.wheelEvent):
+  if not isNil(vtbl[].wheelEvent):
     vtbl[].vtbl.wheelEvent = miqt_exec_callback_cQAbstractSlider_wheelEvent
-  if not isNil(vtbl.changeEvent):
+  if not isNil(vtbl[].changeEvent):
     vtbl[].vtbl.changeEvent = miqt_exec_callback_cQAbstractSlider_changeEvent
-  if not isNil(vtbl.devType):
+  if not isNil(vtbl[].devType):
     vtbl[].vtbl.devType = miqt_exec_callback_cQAbstractSlider_devType
-  if not isNil(vtbl.setVisible):
+  if not isNil(vtbl[].setVisible):
     vtbl[].vtbl.setVisible = miqt_exec_callback_cQAbstractSlider_setVisible
-  if not isNil(vtbl.sizeHint):
+  if not isNil(vtbl[].sizeHint):
     vtbl[].vtbl.sizeHint = miqt_exec_callback_cQAbstractSlider_sizeHint
-  if not isNil(vtbl.minimumSizeHint):
+  if not isNil(vtbl[].minimumSizeHint):
     vtbl[].vtbl.minimumSizeHint = miqt_exec_callback_cQAbstractSlider_minimumSizeHint
-  if not isNil(vtbl.heightForWidth):
+  if not isNil(vtbl[].heightForWidth):
     vtbl[].vtbl.heightForWidth = miqt_exec_callback_cQAbstractSlider_heightForWidth
-  if not isNil(vtbl.hasHeightForWidth):
+  if not isNil(vtbl[].hasHeightForWidth):
     vtbl[].vtbl.hasHeightForWidth = miqt_exec_callback_cQAbstractSlider_hasHeightForWidth
-  if not isNil(vtbl.paintEngine):
+  if not isNil(vtbl[].paintEngine):
     vtbl[].vtbl.paintEngine = miqt_exec_callback_cQAbstractSlider_paintEngine
-  if not isNil(vtbl.mousePressEvent):
+  if not isNil(vtbl[].mousePressEvent):
     vtbl[].vtbl.mousePressEvent = miqt_exec_callback_cQAbstractSlider_mousePressEvent
-  if not isNil(vtbl.mouseReleaseEvent):
+  if not isNil(vtbl[].mouseReleaseEvent):
     vtbl[].vtbl.mouseReleaseEvent = miqt_exec_callback_cQAbstractSlider_mouseReleaseEvent
-  if not isNil(vtbl.mouseDoubleClickEvent):
+  if not isNil(vtbl[].mouseDoubleClickEvent):
     vtbl[].vtbl.mouseDoubleClickEvent = miqt_exec_callback_cQAbstractSlider_mouseDoubleClickEvent
-  if not isNil(vtbl.mouseMoveEvent):
+  if not isNil(vtbl[].mouseMoveEvent):
     vtbl[].vtbl.mouseMoveEvent = miqt_exec_callback_cQAbstractSlider_mouseMoveEvent
-  if not isNil(vtbl.keyReleaseEvent):
+  if not isNil(vtbl[].keyReleaseEvent):
     vtbl[].vtbl.keyReleaseEvent = miqt_exec_callback_cQAbstractSlider_keyReleaseEvent
-  if not isNil(vtbl.focusInEvent):
+  if not isNil(vtbl[].focusInEvent):
     vtbl[].vtbl.focusInEvent = miqt_exec_callback_cQAbstractSlider_focusInEvent
-  if not isNil(vtbl.focusOutEvent):
+  if not isNil(vtbl[].focusOutEvent):
     vtbl[].vtbl.focusOutEvent = miqt_exec_callback_cQAbstractSlider_focusOutEvent
-  if not isNil(vtbl.enterEvent):
+  if not isNil(vtbl[].enterEvent):
     vtbl[].vtbl.enterEvent = miqt_exec_callback_cQAbstractSlider_enterEvent
-  if not isNil(vtbl.leaveEvent):
+  if not isNil(vtbl[].leaveEvent):
     vtbl[].vtbl.leaveEvent = miqt_exec_callback_cQAbstractSlider_leaveEvent
-  if not isNil(vtbl.paintEvent):
+  if not isNil(vtbl[].paintEvent):
     vtbl[].vtbl.paintEvent = miqt_exec_callback_cQAbstractSlider_paintEvent
-  if not isNil(vtbl.moveEvent):
+  if not isNil(vtbl[].moveEvent):
     vtbl[].vtbl.moveEvent = miqt_exec_callback_cQAbstractSlider_moveEvent
-  if not isNil(vtbl.resizeEvent):
+  if not isNil(vtbl[].resizeEvent):
     vtbl[].vtbl.resizeEvent = miqt_exec_callback_cQAbstractSlider_resizeEvent
-  if not isNil(vtbl.closeEvent):
+  if not isNil(vtbl[].closeEvent):
     vtbl[].vtbl.closeEvent = miqt_exec_callback_cQAbstractSlider_closeEvent
-  if not isNil(vtbl.contextMenuEvent):
+  if not isNil(vtbl[].contextMenuEvent):
     vtbl[].vtbl.contextMenuEvent = miqt_exec_callback_cQAbstractSlider_contextMenuEvent
-  if not isNil(vtbl.tabletEvent):
+  if not isNil(vtbl[].tabletEvent):
     vtbl[].vtbl.tabletEvent = miqt_exec_callback_cQAbstractSlider_tabletEvent
-  if not isNil(vtbl.actionEvent):
+  if not isNil(vtbl[].actionEvent):
     vtbl[].vtbl.actionEvent = miqt_exec_callback_cQAbstractSlider_actionEvent
-  if not isNil(vtbl.dragEnterEvent):
+  if not isNil(vtbl[].dragEnterEvent):
     vtbl[].vtbl.dragEnterEvent = miqt_exec_callback_cQAbstractSlider_dragEnterEvent
-  if not isNil(vtbl.dragMoveEvent):
+  if not isNil(vtbl[].dragMoveEvent):
     vtbl[].vtbl.dragMoveEvent = miqt_exec_callback_cQAbstractSlider_dragMoveEvent
-  if not isNil(vtbl.dragLeaveEvent):
+  if not isNil(vtbl[].dragLeaveEvent):
     vtbl[].vtbl.dragLeaveEvent = miqt_exec_callback_cQAbstractSlider_dragLeaveEvent
-  if not isNil(vtbl.dropEvent):
+  if not isNil(vtbl[].dropEvent):
     vtbl[].vtbl.dropEvent = miqt_exec_callback_cQAbstractSlider_dropEvent
-  if not isNil(vtbl.showEvent):
+  if not isNil(vtbl[].showEvent):
     vtbl[].vtbl.showEvent = miqt_exec_callback_cQAbstractSlider_showEvent
-  if not isNil(vtbl.hideEvent):
+  if not isNil(vtbl[].hideEvent):
     vtbl[].vtbl.hideEvent = miqt_exec_callback_cQAbstractSlider_hideEvent
-  if not isNil(vtbl.nativeEvent):
+  if not isNil(vtbl[].nativeEvent):
     vtbl[].vtbl.nativeEvent = miqt_exec_callback_cQAbstractSlider_nativeEvent
-  if not isNil(vtbl.metric):
+  if not isNil(vtbl[].metric):
     vtbl[].vtbl.metric = miqt_exec_callback_cQAbstractSlider_metric
-  if not isNil(vtbl.initPainter):
+  if not isNil(vtbl[].initPainter):
     vtbl[].vtbl.initPainter = miqt_exec_callback_cQAbstractSlider_initPainter
-  if not isNil(vtbl.redirected):
+  if not isNil(vtbl[].redirected):
     vtbl[].vtbl.redirected = miqt_exec_callback_cQAbstractSlider_redirected
-  if not isNil(vtbl.sharedPainter):
+  if not isNil(vtbl[].sharedPainter):
     vtbl[].vtbl.sharedPainter = miqt_exec_callback_cQAbstractSlider_sharedPainter
-  if not isNil(vtbl.inputMethodEvent):
+  if not isNil(vtbl[].inputMethodEvent):
     vtbl[].vtbl.inputMethodEvent = miqt_exec_callback_cQAbstractSlider_inputMethodEvent
-  if not isNil(vtbl.inputMethodQuery):
+  if not isNil(vtbl[].inputMethodQuery):
     vtbl[].vtbl.inputMethodQuery = miqt_exec_callback_cQAbstractSlider_inputMethodQuery
-  if not isNil(vtbl.focusNextPrevChild):
+  if not isNil(vtbl[].focusNextPrevChild):
     vtbl[].vtbl.focusNextPrevChild = miqt_exec_callback_cQAbstractSlider_focusNextPrevChild
-  if not isNil(vtbl.eventFilter):
+  if not isNil(vtbl[].eventFilter):
     vtbl[].vtbl.eventFilter = miqt_exec_callback_cQAbstractSlider_eventFilter
-  if not isNil(vtbl.childEvent):
+  if not isNil(vtbl[].childEvent):
     vtbl[].vtbl.childEvent = miqt_exec_callback_cQAbstractSlider_childEvent
-  if not isNil(vtbl.customEvent):
+  if not isNil(vtbl[].customEvent):
     vtbl[].vtbl.customEvent = miqt_exec_callback_cQAbstractSlider_customEvent
-  if not isNil(vtbl.connectNotify):
+  if not isNil(vtbl[].connectNotify):
     vtbl[].vtbl.connectNotify = miqt_exec_callback_cQAbstractSlider_connectNotify
-  if not isNil(vtbl.disconnectNotify):
+  if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQAbstractSlider_disconnectNotify
-  gen_qabstractslider_types.QAbstractSlider(h: fcQAbstractSlider_new(addr(vtbl[]), parent.h))
+  gen_qabstractslider_types.QAbstractSlider(h: fcQAbstractSlider_new(addr(vtbl[].vtbl), parent.h), owned: true)
 
 proc create*(T: type gen_qabstractslider_types.QAbstractSlider,
     vtbl: ref QAbstractSliderVTable = nil): gen_qabstractslider_types.QAbstractSlider =
   let vtbl = if vtbl == nil: new QAbstractSliderVTable else: vtbl
   GC_ref(vtbl)
-  vtbl.vtbl.destructor = proc(vtbl: ptr cQAbstractSliderVTable, _: ptr cQAbstractSlider) {.cdecl.} =
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQAbstractSliderVTable, _: ptr cQAbstractSlider) {.cdecl.} =
     let vtbl = cast[ref QAbstractSliderVTable](vtbl)
     GC_unref(vtbl)
-  if not isNil(vtbl.metaObject):
+  if not isNil(vtbl[].metaObject):
     vtbl[].vtbl.metaObject = miqt_exec_callback_cQAbstractSlider_metaObject
-  if not isNil(vtbl.metacast):
+  if not isNil(vtbl[].metacast):
     vtbl[].vtbl.metacast = miqt_exec_callback_cQAbstractSlider_metacast
-  if not isNil(vtbl.metacall):
+  if not isNil(vtbl[].metacall):
     vtbl[].vtbl.metacall = miqt_exec_callback_cQAbstractSlider_metacall
-  if not isNil(vtbl.event):
+  if not isNil(vtbl[].event):
     vtbl[].vtbl.event = miqt_exec_callback_cQAbstractSlider_event
-  if not isNil(vtbl.sliderChange):
+  if not isNil(vtbl[].sliderChange):
     vtbl[].vtbl.sliderChange = miqt_exec_callback_cQAbstractSlider_sliderChange
-  if not isNil(vtbl.keyPressEvent):
+  if not isNil(vtbl[].keyPressEvent):
     vtbl[].vtbl.keyPressEvent = miqt_exec_callback_cQAbstractSlider_keyPressEvent
-  if not isNil(vtbl.timerEvent):
+  if not isNil(vtbl[].timerEvent):
     vtbl[].vtbl.timerEvent = miqt_exec_callback_cQAbstractSlider_timerEvent
-  if not isNil(vtbl.wheelEvent):
+  if not isNil(vtbl[].wheelEvent):
     vtbl[].vtbl.wheelEvent = miqt_exec_callback_cQAbstractSlider_wheelEvent
-  if not isNil(vtbl.changeEvent):
+  if not isNil(vtbl[].changeEvent):
     vtbl[].vtbl.changeEvent = miqt_exec_callback_cQAbstractSlider_changeEvent
-  if not isNil(vtbl.devType):
+  if not isNil(vtbl[].devType):
     vtbl[].vtbl.devType = miqt_exec_callback_cQAbstractSlider_devType
-  if not isNil(vtbl.setVisible):
+  if not isNil(vtbl[].setVisible):
     vtbl[].vtbl.setVisible = miqt_exec_callback_cQAbstractSlider_setVisible
-  if not isNil(vtbl.sizeHint):
+  if not isNil(vtbl[].sizeHint):
     vtbl[].vtbl.sizeHint = miqt_exec_callback_cQAbstractSlider_sizeHint
-  if not isNil(vtbl.minimumSizeHint):
+  if not isNil(vtbl[].minimumSizeHint):
     vtbl[].vtbl.minimumSizeHint = miqt_exec_callback_cQAbstractSlider_minimumSizeHint
-  if not isNil(vtbl.heightForWidth):
+  if not isNil(vtbl[].heightForWidth):
     vtbl[].vtbl.heightForWidth = miqt_exec_callback_cQAbstractSlider_heightForWidth
-  if not isNil(vtbl.hasHeightForWidth):
+  if not isNil(vtbl[].hasHeightForWidth):
     vtbl[].vtbl.hasHeightForWidth = miqt_exec_callback_cQAbstractSlider_hasHeightForWidth
-  if not isNil(vtbl.paintEngine):
+  if not isNil(vtbl[].paintEngine):
     vtbl[].vtbl.paintEngine = miqt_exec_callback_cQAbstractSlider_paintEngine
-  if not isNil(vtbl.mousePressEvent):
+  if not isNil(vtbl[].mousePressEvent):
     vtbl[].vtbl.mousePressEvent = miqt_exec_callback_cQAbstractSlider_mousePressEvent
-  if not isNil(vtbl.mouseReleaseEvent):
+  if not isNil(vtbl[].mouseReleaseEvent):
     vtbl[].vtbl.mouseReleaseEvent = miqt_exec_callback_cQAbstractSlider_mouseReleaseEvent
-  if not isNil(vtbl.mouseDoubleClickEvent):
+  if not isNil(vtbl[].mouseDoubleClickEvent):
     vtbl[].vtbl.mouseDoubleClickEvent = miqt_exec_callback_cQAbstractSlider_mouseDoubleClickEvent
-  if not isNil(vtbl.mouseMoveEvent):
+  if not isNil(vtbl[].mouseMoveEvent):
     vtbl[].vtbl.mouseMoveEvent = miqt_exec_callback_cQAbstractSlider_mouseMoveEvent
-  if not isNil(vtbl.keyReleaseEvent):
+  if not isNil(vtbl[].keyReleaseEvent):
     vtbl[].vtbl.keyReleaseEvent = miqt_exec_callback_cQAbstractSlider_keyReleaseEvent
-  if not isNil(vtbl.focusInEvent):
+  if not isNil(vtbl[].focusInEvent):
     vtbl[].vtbl.focusInEvent = miqt_exec_callback_cQAbstractSlider_focusInEvent
-  if not isNil(vtbl.focusOutEvent):
+  if not isNil(vtbl[].focusOutEvent):
     vtbl[].vtbl.focusOutEvent = miqt_exec_callback_cQAbstractSlider_focusOutEvent
-  if not isNil(vtbl.enterEvent):
+  if not isNil(vtbl[].enterEvent):
     vtbl[].vtbl.enterEvent = miqt_exec_callback_cQAbstractSlider_enterEvent
-  if not isNil(vtbl.leaveEvent):
+  if not isNil(vtbl[].leaveEvent):
     vtbl[].vtbl.leaveEvent = miqt_exec_callback_cQAbstractSlider_leaveEvent
-  if not isNil(vtbl.paintEvent):
+  if not isNil(vtbl[].paintEvent):
     vtbl[].vtbl.paintEvent = miqt_exec_callback_cQAbstractSlider_paintEvent
-  if not isNil(vtbl.moveEvent):
+  if not isNil(vtbl[].moveEvent):
     vtbl[].vtbl.moveEvent = miqt_exec_callback_cQAbstractSlider_moveEvent
-  if not isNil(vtbl.resizeEvent):
+  if not isNil(vtbl[].resizeEvent):
     vtbl[].vtbl.resizeEvent = miqt_exec_callback_cQAbstractSlider_resizeEvent
-  if not isNil(vtbl.closeEvent):
+  if not isNil(vtbl[].closeEvent):
     vtbl[].vtbl.closeEvent = miqt_exec_callback_cQAbstractSlider_closeEvent
-  if not isNil(vtbl.contextMenuEvent):
+  if not isNil(vtbl[].contextMenuEvent):
     vtbl[].vtbl.contextMenuEvent = miqt_exec_callback_cQAbstractSlider_contextMenuEvent
-  if not isNil(vtbl.tabletEvent):
+  if not isNil(vtbl[].tabletEvent):
     vtbl[].vtbl.tabletEvent = miqt_exec_callback_cQAbstractSlider_tabletEvent
-  if not isNil(vtbl.actionEvent):
+  if not isNil(vtbl[].actionEvent):
     vtbl[].vtbl.actionEvent = miqt_exec_callback_cQAbstractSlider_actionEvent
-  if not isNil(vtbl.dragEnterEvent):
+  if not isNil(vtbl[].dragEnterEvent):
     vtbl[].vtbl.dragEnterEvent = miqt_exec_callback_cQAbstractSlider_dragEnterEvent
-  if not isNil(vtbl.dragMoveEvent):
+  if not isNil(vtbl[].dragMoveEvent):
     vtbl[].vtbl.dragMoveEvent = miqt_exec_callback_cQAbstractSlider_dragMoveEvent
-  if not isNil(vtbl.dragLeaveEvent):
+  if not isNil(vtbl[].dragLeaveEvent):
     vtbl[].vtbl.dragLeaveEvent = miqt_exec_callback_cQAbstractSlider_dragLeaveEvent
-  if not isNil(vtbl.dropEvent):
+  if not isNil(vtbl[].dropEvent):
     vtbl[].vtbl.dropEvent = miqt_exec_callback_cQAbstractSlider_dropEvent
-  if not isNil(vtbl.showEvent):
+  if not isNil(vtbl[].showEvent):
     vtbl[].vtbl.showEvent = miqt_exec_callback_cQAbstractSlider_showEvent
-  if not isNil(vtbl.hideEvent):
+  if not isNil(vtbl[].hideEvent):
     vtbl[].vtbl.hideEvent = miqt_exec_callback_cQAbstractSlider_hideEvent
-  if not isNil(vtbl.nativeEvent):
+  if not isNil(vtbl[].nativeEvent):
     vtbl[].vtbl.nativeEvent = miqt_exec_callback_cQAbstractSlider_nativeEvent
-  if not isNil(vtbl.metric):
+  if not isNil(vtbl[].metric):
     vtbl[].vtbl.metric = miqt_exec_callback_cQAbstractSlider_metric
-  if not isNil(vtbl.initPainter):
+  if not isNil(vtbl[].initPainter):
     vtbl[].vtbl.initPainter = miqt_exec_callback_cQAbstractSlider_initPainter
-  if not isNil(vtbl.redirected):
+  if not isNil(vtbl[].redirected):
     vtbl[].vtbl.redirected = miqt_exec_callback_cQAbstractSlider_redirected
-  if not isNil(vtbl.sharedPainter):
+  if not isNil(vtbl[].sharedPainter):
     vtbl[].vtbl.sharedPainter = miqt_exec_callback_cQAbstractSlider_sharedPainter
-  if not isNil(vtbl.inputMethodEvent):
+  if not isNil(vtbl[].inputMethodEvent):
     vtbl[].vtbl.inputMethodEvent = miqt_exec_callback_cQAbstractSlider_inputMethodEvent
-  if not isNil(vtbl.inputMethodQuery):
+  if not isNil(vtbl[].inputMethodQuery):
     vtbl[].vtbl.inputMethodQuery = miqt_exec_callback_cQAbstractSlider_inputMethodQuery
-  if not isNil(vtbl.focusNextPrevChild):
+  if not isNil(vtbl[].focusNextPrevChild):
     vtbl[].vtbl.focusNextPrevChild = miqt_exec_callback_cQAbstractSlider_focusNextPrevChild
-  if not isNil(vtbl.eventFilter):
+  if not isNil(vtbl[].eventFilter):
     vtbl[].vtbl.eventFilter = miqt_exec_callback_cQAbstractSlider_eventFilter
-  if not isNil(vtbl.childEvent):
+  if not isNil(vtbl[].childEvent):
     vtbl[].vtbl.childEvent = miqt_exec_callback_cQAbstractSlider_childEvent
-  if not isNil(vtbl.customEvent):
+  if not isNil(vtbl[].customEvent):
     vtbl[].vtbl.customEvent = miqt_exec_callback_cQAbstractSlider_customEvent
-  if not isNil(vtbl.connectNotify):
+  if not isNil(vtbl[].connectNotify):
     vtbl[].vtbl.connectNotify = miqt_exec_callback_cQAbstractSlider_connectNotify
-  if not isNil(vtbl.disconnectNotify):
+  if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQAbstractSlider_disconnectNotify
-  gen_qabstractslider_types.QAbstractSlider(h: fcQAbstractSlider_new2(addr(vtbl[]), ))
+  gen_qabstractslider_types.QAbstractSlider(h: fcQAbstractSlider_new2(addr(vtbl[].vtbl), ), owned: true)
+
+proc create*(T: type gen_qabstractslider_types.QAbstractSlider,
+    parent: gen_qwidget_types.QWidget,
+    vtbl: VirtualQAbstractSlider) =
+
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQAbstractSliderVTable, _: ptr cQAbstractSlider) {.cdecl.} =
+    let vtbl = cast[ptr typeof(VirtualQAbstractSlider()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractSlider, vtbl)))
+    vtbl[].h = nil
+    vtbl[].owned = false
+  vtbl[].vtbl.metaObject = miqt_exec_method_cQAbstractSlider_metaObject
+  vtbl[].vtbl.metacast = miqt_exec_method_cQAbstractSlider_metacast
+  vtbl[].vtbl.metacall = miqt_exec_method_cQAbstractSlider_metacall
+  vtbl[].vtbl.event = miqt_exec_method_cQAbstractSlider_event
+  vtbl[].vtbl.sliderChange = miqt_exec_method_cQAbstractSlider_sliderChange
+  vtbl[].vtbl.keyPressEvent = miqt_exec_method_cQAbstractSlider_keyPressEvent
+  vtbl[].vtbl.timerEvent = miqt_exec_method_cQAbstractSlider_timerEvent
+  vtbl[].vtbl.wheelEvent = miqt_exec_method_cQAbstractSlider_wheelEvent
+  vtbl[].vtbl.changeEvent = miqt_exec_method_cQAbstractSlider_changeEvent
+  vtbl[].vtbl.devType = miqt_exec_method_cQAbstractSlider_devType
+  vtbl[].vtbl.setVisible = miqt_exec_method_cQAbstractSlider_setVisible
+  vtbl[].vtbl.sizeHint = miqt_exec_method_cQAbstractSlider_sizeHint
+  vtbl[].vtbl.minimumSizeHint = miqt_exec_method_cQAbstractSlider_minimumSizeHint
+  vtbl[].vtbl.heightForWidth = miqt_exec_method_cQAbstractSlider_heightForWidth
+  vtbl[].vtbl.hasHeightForWidth = miqt_exec_method_cQAbstractSlider_hasHeightForWidth
+  vtbl[].vtbl.paintEngine = miqt_exec_method_cQAbstractSlider_paintEngine
+  vtbl[].vtbl.mousePressEvent = miqt_exec_method_cQAbstractSlider_mousePressEvent
+  vtbl[].vtbl.mouseReleaseEvent = miqt_exec_method_cQAbstractSlider_mouseReleaseEvent
+  vtbl[].vtbl.mouseDoubleClickEvent = miqt_exec_method_cQAbstractSlider_mouseDoubleClickEvent
+  vtbl[].vtbl.mouseMoveEvent = miqt_exec_method_cQAbstractSlider_mouseMoveEvent
+  vtbl[].vtbl.keyReleaseEvent = miqt_exec_method_cQAbstractSlider_keyReleaseEvent
+  vtbl[].vtbl.focusInEvent = miqt_exec_method_cQAbstractSlider_focusInEvent
+  vtbl[].vtbl.focusOutEvent = miqt_exec_method_cQAbstractSlider_focusOutEvent
+  vtbl[].vtbl.enterEvent = miqt_exec_method_cQAbstractSlider_enterEvent
+  vtbl[].vtbl.leaveEvent = miqt_exec_method_cQAbstractSlider_leaveEvent
+  vtbl[].vtbl.paintEvent = miqt_exec_method_cQAbstractSlider_paintEvent
+  vtbl[].vtbl.moveEvent = miqt_exec_method_cQAbstractSlider_moveEvent
+  vtbl[].vtbl.resizeEvent = miqt_exec_method_cQAbstractSlider_resizeEvent
+  vtbl[].vtbl.closeEvent = miqt_exec_method_cQAbstractSlider_closeEvent
+  vtbl[].vtbl.contextMenuEvent = miqt_exec_method_cQAbstractSlider_contextMenuEvent
+  vtbl[].vtbl.tabletEvent = miqt_exec_method_cQAbstractSlider_tabletEvent
+  vtbl[].vtbl.actionEvent = miqt_exec_method_cQAbstractSlider_actionEvent
+  vtbl[].vtbl.dragEnterEvent = miqt_exec_method_cQAbstractSlider_dragEnterEvent
+  vtbl[].vtbl.dragMoveEvent = miqt_exec_method_cQAbstractSlider_dragMoveEvent
+  vtbl[].vtbl.dragLeaveEvent = miqt_exec_method_cQAbstractSlider_dragLeaveEvent
+  vtbl[].vtbl.dropEvent = miqt_exec_method_cQAbstractSlider_dropEvent
+  vtbl[].vtbl.showEvent = miqt_exec_method_cQAbstractSlider_showEvent
+  vtbl[].vtbl.hideEvent = miqt_exec_method_cQAbstractSlider_hideEvent
+  vtbl[].vtbl.nativeEvent = miqt_exec_method_cQAbstractSlider_nativeEvent
+  vtbl[].vtbl.metric = miqt_exec_method_cQAbstractSlider_metric
+  vtbl[].vtbl.initPainter = miqt_exec_method_cQAbstractSlider_initPainter
+  vtbl[].vtbl.redirected = miqt_exec_method_cQAbstractSlider_redirected
+  vtbl[].vtbl.sharedPainter = miqt_exec_method_cQAbstractSlider_sharedPainter
+  vtbl[].vtbl.inputMethodEvent = miqt_exec_method_cQAbstractSlider_inputMethodEvent
+  vtbl[].vtbl.inputMethodQuery = miqt_exec_method_cQAbstractSlider_inputMethodQuery
+  vtbl[].vtbl.focusNextPrevChild = miqt_exec_method_cQAbstractSlider_focusNextPrevChild
+  vtbl[].vtbl.eventFilter = miqt_exec_method_cQAbstractSlider_eventFilter
+  vtbl[].vtbl.childEvent = miqt_exec_method_cQAbstractSlider_childEvent
+  vtbl[].vtbl.customEvent = miqt_exec_method_cQAbstractSlider_customEvent
+  vtbl[].vtbl.connectNotify = miqt_exec_method_cQAbstractSlider_connectNotify
+  vtbl[].vtbl.disconnectNotify = miqt_exec_method_cQAbstractSlider_disconnectNotify
+  if vtbl[].h != nil: delete(move(vtbl[]))
+  vtbl[].h = fcQAbstractSlider_new(addr(vtbl[].vtbl), parent.h)
+  vtbl[].owned = true
+
+proc create*(T: type gen_qabstractslider_types.QAbstractSlider,
+    vtbl: VirtualQAbstractSlider) =
+
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQAbstractSliderVTable, _: ptr cQAbstractSlider) {.cdecl.} =
+    let vtbl = cast[ptr typeof(VirtualQAbstractSlider()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractSlider, vtbl)))
+    vtbl[].h = nil
+    vtbl[].owned = false
+  vtbl[].vtbl.metaObject = miqt_exec_method_cQAbstractSlider_metaObject
+  vtbl[].vtbl.metacast = miqt_exec_method_cQAbstractSlider_metacast
+  vtbl[].vtbl.metacall = miqt_exec_method_cQAbstractSlider_metacall
+  vtbl[].vtbl.event = miqt_exec_method_cQAbstractSlider_event
+  vtbl[].vtbl.sliderChange = miqt_exec_method_cQAbstractSlider_sliderChange
+  vtbl[].vtbl.keyPressEvent = miqt_exec_method_cQAbstractSlider_keyPressEvent
+  vtbl[].vtbl.timerEvent = miqt_exec_method_cQAbstractSlider_timerEvent
+  vtbl[].vtbl.wheelEvent = miqt_exec_method_cQAbstractSlider_wheelEvent
+  vtbl[].vtbl.changeEvent = miqt_exec_method_cQAbstractSlider_changeEvent
+  vtbl[].vtbl.devType = miqt_exec_method_cQAbstractSlider_devType
+  vtbl[].vtbl.setVisible = miqt_exec_method_cQAbstractSlider_setVisible
+  vtbl[].vtbl.sizeHint = miqt_exec_method_cQAbstractSlider_sizeHint
+  vtbl[].vtbl.minimumSizeHint = miqt_exec_method_cQAbstractSlider_minimumSizeHint
+  vtbl[].vtbl.heightForWidth = miqt_exec_method_cQAbstractSlider_heightForWidth
+  vtbl[].vtbl.hasHeightForWidth = miqt_exec_method_cQAbstractSlider_hasHeightForWidth
+  vtbl[].vtbl.paintEngine = miqt_exec_method_cQAbstractSlider_paintEngine
+  vtbl[].vtbl.mousePressEvent = miqt_exec_method_cQAbstractSlider_mousePressEvent
+  vtbl[].vtbl.mouseReleaseEvent = miqt_exec_method_cQAbstractSlider_mouseReleaseEvent
+  vtbl[].vtbl.mouseDoubleClickEvent = miqt_exec_method_cQAbstractSlider_mouseDoubleClickEvent
+  vtbl[].vtbl.mouseMoveEvent = miqt_exec_method_cQAbstractSlider_mouseMoveEvent
+  vtbl[].vtbl.keyReleaseEvent = miqt_exec_method_cQAbstractSlider_keyReleaseEvent
+  vtbl[].vtbl.focusInEvent = miqt_exec_method_cQAbstractSlider_focusInEvent
+  vtbl[].vtbl.focusOutEvent = miqt_exec_method_cQAbstractSlider_focusOutEvent
+  vtbl[].vtbl.enterEvent = miqt_exec_method_cQAbstractSlider_enterEvent
+  vtbl[].vtbl.leaveEvent = miqt_exec_method_cQAbstractSlider_leaveEvent
+  vtbl[].vtbl.paintEvent = miqt_exec_method_cQAbstractSlider_paintEvent
+  vtbl[].vtbl.moveEvent = miqt_exec_method_cQAbstractSlider_moveEvent
+  vtbl[].vtbl.resizeEvent = miqt_exec_method_cQAbstractSlider_resizeEvent
+  vtbl[].vtbl.closeEvent = miqt_exec_method_cQAbstractSlider_closeEvent
+  vtbl[].vtbl.contextMenuEvent = miqt_exec_method_cQAbstractSlider_contextMenuEvent
+  vtbl[].vtbl.tabletEvent = miqt_exec_method_cQAbstractSlider_tabletEvent
+  vtbl[].vtbl.actionEvent = miqt_exec_method_cQAbstractSlider_actionEvent
+  vtbl[].vtbl.dragEnterEvent = miqt_exec_method_cQAbstractSlider_dragEnterEvent
+  vtbl[].vtbl.dragMoveEvent = miqt_exec_method_cQAbstractSlider_dragMoveEvent
+  vtbl[].vtbl.dragLeaveEvent = miqt_exec_method_cQAbstractSlider_dragLeaveEvent
+  vtbl[].vtbl.dropEvent = miqt_exec_method_cQAbstractSlider_dropEvent
+  vtbl[].vtbl.showEvent = miqt_exec_method_cQAbstractSlider_showEvent
+  vtbl[].vtbl.hideEvent = miqt_exec_method_cQAbstractSlider_hideEvent
+  vtbl[].vtbl.nativeEvent = miqt_exec_method_cQAbstractSlider_nativeEvent
+  vtbl[].vtbl.metric = miqt_exec_method_cQAbstractSlider_metric
+  vtbl[].vtbl.initPainter = miqt_exec_method_cQAbstractSlider_initPainter
+  vtbl[].vtbl.redirected = miqt_exec_method_cQAbstractSlider_redirected
+  vtbl[].vtbl.sharedPainter = miqt_exec_method_cQAbstractSlider_sharedPainter
+  vtbl[].vtbl.inputMethodEvent = miqt_exec_method_cQAbstractSlider_inputMethodEvent
+  vtbl[].vtbl.inputMethodQuery = miqt_exec_method_cQAbstractSlider_inputMethodQuery
+  vtbl[].vtbl.focusNextPrevChild = miqt_exec_method_cQAbstractSlider_focusNextPrevChild
+  vtbl[].vtbl.eventFilter = miqt_exec_method_cQAbstractSlider_eventFilter
+  vtbl[].vtbl.childEvent = miqt_exec_method_cQAbstractSlider_childEvent
+  vtbl[].vtbl.customEvent = miqt_exec_method_cQAbstractSlider_customEvent
+  vtbl[].vtbl.connectNotify = miqt_exec_method_cQAbstractSlider_connectNotify
+  vtbl[].vtbl.disconnectNotify = miqt_exec_method_cQAbstractSlider_disconnectNotify
+  if vtbl[].h != nil: delete(move(vtbl[]))
+  vtbl[].h = fcQAbstractSlider_new2(addr(vtbl[].vtbl), )
+  vtbl[].owned = true
 
 proc staticMetaObject*(_: type gen_qabstractslider_types.QAbstractSlider): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQAbstractSlider_staticMetaObject())
-proc delete*(self: gen_qabstractslider_types.QAbstractSlider) =
-  fcQAbstractSlider_delete(self.h)

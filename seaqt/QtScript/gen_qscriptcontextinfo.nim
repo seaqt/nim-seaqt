@@ -30,9 +30,6 @@ func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
     else:
       copyMem(addr result[0], unsafeAddr v[0], v.len)
 
-const cflags = gorge("pkg-config --cflags Qt5Script")  & " -fPIC"
-{.compile("gen_qscriptcontextinfo.cpp", cflags).}
-
 
 type QScriptContextInfoFunctionTypeEnum* = distinct cint
 template ScriptFunction*(_: type QScriptContextInfoFunctionTypeEnum): untyped = 0
@@ -68,7 +65,6 @@ proc fcQScriptContextInfo_operatorNotEqual(self: pointer, other: pointer): bool 
 proc fcQScriptContextInfo_new(context: pointer): ptr cQScriptContextInfo {.importc: "QScriptContextInfo_new".}
 proc fcQScriptContextInfo_new2(other: pointer): ptr cQScriptContextInfo {.importc: "QScriptContextInfo_new2".}
 proc fcQScriptContextInfo_new3(): ptr cQScriptContextInfo {.importc: "QScriptContextInfo_new3".}
-proc fcQScriptContextInfo_delete(self: pointer) {.importc: "QScriptContextInfo_delete".}
 
 proc operatorAssign*(self: gen_qscriptcontextinfo_types.QScriptContextInfo, other: gen_qscriptcontextinfo_types.QScriptContextInfo): void =
   fcQScriptContextInfo_operatorAssign(self.h, other.h)
@@ -129,14 +125,12 @@ proc operatorNotEqual*(self: gen_qscriptcontextinfo_types.QScriptContextInfo, ot
 
 proc create*(T: type gen_qscriptcontextinfo_types.QScriptContextInfo,
     context: gen_qscriptcontext_types.QScriptContext): gen_qscriptcontextinfo_types.QScriptContextInfo =
-  gen_qscriptcontextinfo_types.QScriptContextInfo(h: fcQScriptContextInfo_new(context.h))
+  gen_qscriptcontextinfo_types.QScriptContextInfo(h: fcQScriptContextInfo_new(context.h), owned: true)
 
 proc create*(T: type gen_qscriptcontextinfo_types.QScriptContextInfo,
     other: gen_qscriptcontextinfo_types.QScriptContextInfo): gen_qscriptcontextinfo_types.QScriptContextInfo =
-  gen_qscriptcontextinfo_types.QScriptContextInfo(h: fcQScriptContextInfo_new2(other.h))
+  gen_qscriptcontextinfo_types.QScriptContextInfo(h: fcQScriptContextInfo_new2(other.h), owned: true)
 
 proc create*(T: type gen_qscriptcontextinfo_types.QScriptContextInfo): gen_qscriptcontextinfo_types.QScriptContextInfo =
-  gen_qscriptcontextinfo_types.QScriptContextInfo(h: fcQScriptContextInfo_new3())
+  gen_qscriptcontextinfo_types.QScriptContextInfo(h: fcQScriptContextInfo_new3(), owned: true)
 
-proc delete*(self: gen_qscriptcontextinfo_types.QScriptContextInfo) =
-  fcQScriptContextInfo_delete(self.h)

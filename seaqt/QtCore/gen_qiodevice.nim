@@ -30,7 +30,7 @@ func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
     else:
       copyMem(addr result[0], unsafeAddr v[0], v.len)
 
-const cflags = gorge("pkg-config --cflags Qt5Core")  & " -fPIC"
+const cflags = gorge("pkg-config --cflags Qt5Core") & " -fPIC"
 {.compile("gen_qiodevice.cpp", cflags).}
 
 
@@ -129,7 +129,7 @@ proc fcQIODevice_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.impo
 proc fcQIODevice_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QIODevice_trUtf82".}
 proc fcQIODevice_trUtf83(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QIODevice_trUtf83".}
 proc fcQIODevice_readLine1(self: pointer, maxlen: clonglong): struct_miqt_string {.importc: "QIODevice_readLine1".}
-type cQIODeviceVTable = object
+type cQIODeviceVTable {.pure.} = object
   destructor*: proc(vtbl: ptr cQIODeviceVTable, self: ptr cQIODevice) {.cdecl, raises:[], gcsafe.}
   metaObject*: proc(vtbl, self: pointer, ): pointer {.cdecl, raises: [], gcsafe.}
   metacast*: proc(vtbl, self: pointer, param1: cstring): pointer {.cdecl, raises: [], gcsafe.}
@@ -190,10 +190,9 @@ proc fcQIODevice_protectedbase_isSignalConnected(self: pointer, signal: pointer)
 proc fcQIODevice_new(vtbl: pointer, ): ptr cQIODevice {.importc: "QIODevice_new".}
 proc fcQIODevice_new2(vtbl: pointer, parent: pointer): ptr cQIODevice {.importc: "QIODevice_new2".}
 proc fcQIODevice_staticMetaObject(): pointer {.importc: "QIODevice_staticMetaObject".}
-proc fcQIODevice_delete(self: pointer) {.importc: "QIODevice_delete".}
 
 proc metaObject*(self: gen_qiodevice_types.QIODevice, ): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQIODevice_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQIODevice_metaObject(self.h), owned: false)
 
 proc metacast*(self: gen_qiodevice_types.QIODevice, param1: cstring): pointer =
   fcQIODevice_metacast(self.h, param1)
@@ -532,7 +531,7 @@ type QIODevicechildEventProc* = proc(self: QIODevice, event: gen_qcoreevent_type
 type QIODevicecustomEventProc* = proc(self: QIODevice, event: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
 type QIODeviceconnectNotifyProc* = proc(self: QIODevice, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
 type QIODevicedisconnectNotifyProc* = proc(self: QIODevice, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
-type QIODeviceVTable* = object
+type QIODeviceVTable* {.inheritable, pure.} = object
   vtbl: cQIODeviceVTable
   metaObject*: QIODevicemetaObjectProc
   metacast*: QIODevicemetacastProc
@@ -561,13 +560,16 @@ type QIODeviceVTable* = object
   connectNotify*: QIODeviceconnectNotifyProc
   disconnectNotify*: QIODevicedisconnectNotifyProc
 proc QIODevicemetaObject*(self: gen_qiodevice_types.QIODevice, ): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQIODevice_virtualbase_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQIODevice_virtualbase_metaObject(self.h), owned: false)
 
 proc miqt_exec_callback_cQIODevice_metaObject(vtbl: pointer, self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QIODeviceVTable](vtbl)
   let self = QIODevice(h: self)
   var virtualReturn = vtbl[].metaObject(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QIODevicemetacast*(self: gen_qiodevice_types.QIODevice, param1: cstring): pointer =
   fcQIODevice_virtualbase_metacast(self.h, param1)
@@ -744,7 +746,7 @@ proc QIODeviceevent*(self: gen_qiodevice_types.QIODevice, event: gen_qcoreevent_
 proc miqt_exec_callback_cQIODevice_event(vtbl: pointer, self: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QIODeviceVTable](vtbl)
   let self = QIODevice(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].event(self, slotval1)
   virtualReturn
 
@@ -754,8 +756,8 @@ proc QIODeviceeventFilter*(self: gen_qiodevice_types.QIODevice, watched: gen_qob
 proc miqt_exec_callback_cQIODevice_eventFilter(vtbl: pointer, self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QIODeviceVTable](vtbl)
   let self = QIODevice(h: self)
-  let slotval1 = gen_qobject_types.QObject(h: watched)
-  let slotval2 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].eventFilter(self, slotval1, slotval2)
   virtualReturn
 
@@ -765,7 +767,7 @@ proc QIODevicetimerEvent*(self: gen_qiodevice_types.QIODevice, event: gen_qcoree
 proc miqt_exec_callback_cQIODevice_timerEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QIODeviceVTable](vtbl)
   let self = QIODevice(h: self)
-  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   vtbl[].timerEvent(self, slotval1)
 
 proc QIODevicechildEvent*(self: gen_qiodevice_types.QIODevice, event: gen_qcoreevent_types.QChildEvent): void =
@@ -774,7 +776,7 @@ proc QIODevicechildEvent*(self: gen_qiodevice_types.QIODevice, event: gen_qcoree
 proc miqt_exec_callback_cQIODevice_childEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QIODeviceVTable](vtbl)
   let self = QIODevice(h: self)
-  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   vtbl[].childEvent(self, slotval1)
 
 proc QIODevicecustomEvent*(self: gen_qiodevice_types.QIODevice, event: gen_qcoreevent_types.QEvent): void =
@@ -783,7 +785,7 @@ proc QIODevicecustomEvent*(self: gen_qiodevice_types.QIODevice, event: gen_qcore
 proc miqt_exec_callback_cQIODevice_customEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QIODeviceVTable](vtbl)
   let self = QIODevice(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].customEvent(self, slotval1)
 
 proc QIODeviceconnectNotify*(self: gen_qiodevice_types.QIODevice, signal: gen_qmetaobject_types.QMetaMethod): void =
@@ -792,7 +794,7 @@ proc QIODeviceconnectNotify*(self: gen_qiodevice_types.QIODevice, signal: gen_qm
 proc miqt_exec_callback_cQIODevice_connectNotify(vtbl: pointer, self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QIODeviceVTable](vtbl)
   let self = QIODevice(h: self)
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].connectNotify(self, slotval1)
 
 proc QIODevicedisconnectNotify*(self: gen_qiodevice_types.QIODevice, signal: gen_qmetaobject_types.QMetaMethod): void =
@@ -801,8 +803,211 @@ proc QIODevicedisconnectNotify*(self: gen_qiodevice_types.QIODevice, signal: gen
 proc miqt_exec_callback_cQIODevice_disconnectNotify(vtbl: pointer, self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QIODeviceVTable](vtbl)
   let self = QIODevice(h: self)
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].disconnectNotify(self, slotval1)
+
+type VirtualQIODevice* {.inheritable.} = ref object of QIODevice
+  vtbl*: cQIODeviceVTable
+method metaObject*(self: VirtualQIODevice, ): gen_qobjectdefs_types.QMetaObject {.base.} =
+  QIODevicemetaObject(self[])
+proc miqt_exec_method_cQIODevice_metaObject(vtbl: pointer, inst: pointer): pointer {.cdecl.} =
+  let vtbl = cast[VirtualQIODevice](cast[uint](vtbl) - uint(offsetOf(VirtualQIODevice, vtbl)))
+  var virtualReturn = vtbl.metaObject()
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
+
+method metacast*(self: VirtualQIODevice, param1: cstring): pointer {.base.} =
+  QIODevicemetacast(self[], param1)
+proc miqt_exec_method_cQIODevice_metacast(vtbl: pointer, inst: pointer, param1: cstring): pointer {.cdecl.} =
+  let vtbl = cast[VirtualQIODevice](cast[uint](vtbl) - uint(offsetOf(VirtualQIODevice, vtbl)))
+  let slotval1 = (param1)
+  var virtualReturn = vtbl.metacast(slotval1)
+  virtualReturn
+
+method metacall*(self: VirtualQIODevice, param1: cint, param2: cint, param3: pointer): cint {.base.} =
+  QIODevicemetacall(self[], param1, param2, param3)
+proc miqt_exec_method_cQIODevice_metacall(vtbl: pointer, inst: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
+  let vtbl = cast[VirtualQIODevice](cast[uint](vtbl) - uint(offsetOf(VirtualQIODevice, vtbl)))
+  let slotval1 = cint(param1)
+  let slotval2 = param2
+  let slotval3 = param3
+  var virtualReturn = vtbl.metacall(slotval1, slotval2, slotval3)
+  virtualReturn
+
+method isSequential*(self: VirtualQIODevice, ): bool {.base.} =
+  QIODeviceisSequential(self[])
+proc miqt_exec_method_cQIODevice_isSequential(vtbl: pointer, inst: pointer): bool {.cdecl.} =
+  let vtbl = cast[VirtualQIODevice](cast[uint](vtbl) - uint(offsetOf(VirtualQIODevice, vtbl)))
+  var virtualReturn = vtbl.isSequential()
+  virtualReturn
+
+method open*(self: VirtualQIODevice, mode: cint): bool {.base.} =
+  QIODeviceopen(self[], mode)
+proc miqt_exec_method_cQIODevice_open(vtbl: pointer, inst: pointer, mode: cint): bool {.cdecl.} =
+  let vtbl = cast[VirtualQIODevice](cast[uint](vtbl) - uint(offsetOf(VirtualQIODevice, vtbl)))
+  let slotval1 = cint(mode)
+  var virtualReturn = vtbl.open(slotval1)
+  virtualReturn
+
+method close*(self: VirtualQIODevice, ): void {.base.} =
+  QIODeviceclose(self[])
+proc miqt_exec_method_cQIODevice_close(vtbl: pointer, inst: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQIODevice](cast[uint](vtbl) - uint(offsetOf(VirtualQIODevice, vtbl)))
+  vtbl.close()
+
+method pos*(self: VirtualQIODevice, ): clonglong {.base.} =
+  QIODevicepos(self[])
+proc miqt_exec_method_cQIODevice_pos(vtbl: pointer, inst: pointer): clonglong {.cdecl.} =
+  let vtbl = cast[VirtualQIODevice](cast[uint](vtbl) - uint(offsetOf(VirtualQIODevice, vtbl)))
+  var virtualReturn = vtbl.pos()
+  virtualReturn
+
+method size*(self: VirtualQIODevice, ): clonglong {.base.} =
+  QIODevicesize(self[])
+proc miqt_exec_method_cQIODevice_size(vtbl: pointer, inst: pointer): clonglong {.cdecl.} =
+  let vtbl = cast[VirtualQIODevice](cast[uint](vtbl) - uint(offsetOf(VirtualQIODevice, vtbl)))
+  var virtualReturn = vtbl.size()
+  virtualReturn
+
+method seek*(self: VirtualQIODevice, pos: clonglong): bool {.base.} =
+  QIODeviceseek(self[], pos)
+proc miqt_exec_method_cQIODevice_seek(vtbl: pointer, inst: pointer, pos: clonglong): bool {.cdecl.} =
+  let vtbl = cast[VirtualQIODevice](cast[uint](vtbl) - uint(offsetOf(VirtualQIODevice, vtbl)))
+  let slotval1 = pos
+  var virtualReturn = vtbl.seek(slotval1)
+  virtualReturn
+
+method atEnd*(self: VirtualQIODevice, ): bool {.base.} =
+  QIODeviceatEnd(self[])
+proc miqt_exec_method_cQIODevice_atEnd(vtbl: pointer, inst: pointer): bool {.cdecl.} =
+  let vtbl = cast[VirtualQIODevice](cast[uint](vtbl) - uint(offsetOf(VirtualQIODevice, vtbl)))
+  var virtualReturn = vtbl.atEnd()
+  virtualReturn
+
+method reset*(self: VirtualQIODevice, ): bool {.base.} =
+  QIODevicereset(self[])
+proc miqt_exec_method_cQIODevice_reset(vtbl: pointer, inst: pointer): bool {.cdecl.} =
+  let vtbl = cast[VirtualQIODevice](cast[uint](vtbl) - uint(offsetOf(VirtualQIODevice, vtbl)))
+  var virtualReturn = vtbl.reset()
+  virtualReturn
+
+method bytesAvailable*(self: VirtualQIODevice, ): clonglong {.base.} =
+  QIODevicebytesAvailable(self[])
+proc miqt_exec_method_cQIODevice_bytesAvailable(vtbl: pointer, inst: pointer): clonglong {.cdecl.} =
+  let vtbl = cast[VirtualQIODevice](cast[uint](vtbl) - uint(offsetOf(VirtualQIODevice, vtbl)))
+  var virtualReturn = vtbl.bytesAvailable()
+  virtualReturn
+
+method bytesToWrite*(self: VirtualQIODevice, ): clonglong {.base.} =
+  QIODevicebytesToWrite(self[])
+proc miqt_exec_method_cQIODevice_bytesToWrite(vtbl: pointer, inst: pointer): clonglong {.cdecl.} =
+  let vtbl = cast[VirtualQIODevice](cast[uint](vtbl) - uint(offsetOf(VirtualQIODevice, vtbl)))
+  var virtualReturn = vtbl.bytesToWrite()
+  virtualReturn
+
+method canReadLine*(self: VirtualQIODevice, ): bool {.base.} =
+  QIODevicecanReadLine(self[])
+proc miqt_exec_method_cQIODevice_canReadLine(vtbl: pointer, inst: pointer): bool {.cdecl.} =
+  let vtbl = cast[VirtualQIODevice](cast[uint](vtbl) - uint(offsetOf(VirtualQIODevice, vtbl)))
+  var virtualReturn = vtbl.canReadLine()
+  virtualReturn
+
+method waitForReadyRead*(self: VirtualQIODevice, msecs: cint): bool {.base.} =
+  QIODevicewaitForReadyRead(self[], msecs)
+proc miqt_exec_method_cQIODevice_waitForReadyRead(vtbl: pointer, inst: pointer, msecs: cint): bool {.cdecl.} =
+  let vtbl = cast[VirtualQIODevice](cast[uint](vtbl) - uint(offsetOf(VirtualQIODevice, vtbl)))
+  let slotval1 = msecs
+  var virtualReturn = vtbl.waitForReadyRead(slotval1)
+  virtualReturn
+
+method waitForBytesWritten*(self: VirtualQIODevice, msecs: cint): bool {.base.} =
+  QIODevicewaitForBytesWritten(self[], msecs)
+proc miqt_exec_method_cQIODevice_waitForBytesWritten(vtbl: pointer, inst: pointer, msecs: cint): bool {.cdecl.} =
+  let vtbl = cast[VirtualQIODevice](cast[uint](vtbl) - uint(offsetOf(VirtualQIODevice, vtbl)))
+  let slotval1 = msecs
+  var virtualReturn = vtbl.waitForBytesWritten(slotval1)
+  virtualReturn
+
+method readData*(self: VirtualQIODevice, data: cstring, maxlen: clonglong): clonglong {.base.} =
+  raiseAssert("missing implementation of QIODevice_virtualbase_readData")
+proc miqt_exec_method_cQIODevice_readData(vtbl: pointer, inst: pointer, data: cstring, maxlen: clonglong): clonglong {.cdecl.} =
+  let vtbl = cast[VirtualQIODevice](cast[uint](vtbl) - uint(offsetOf(VirtualQIODevice, vtbl)))
+  let slotval1 = (data)
+  let slotval2 = maxlen
+  var virtualReturn = vtbl.readData(slotval1, slotval2)
+  virtualReturn
+
+method readLineData*(self: VirtualQIODevice, data: cstring, maxlen: clonglong): clonglong {.base.} =
+  QIODevicereadLineData(self[], data, maxlen)
+proc miqt_exec_method_cQIODevice_readLineData(vtbl: pointer, inst: pointer, data: cstring, maxlen: clonglong): clonglong {.cdecl.} =
+  let vtbl = cast[VirtualQIODevice](cast[uint](vtbl) - uint(offsetOf(VirtualQIODevice, vtbl)))
+  let slotval1 = (data)
+  let slotval2 = maxlen
+  var virtualReturn = vtbl.readLineData(slotval1, slotval2)
+  virtualReturn
+
+method writeData*(self: VirtualQIODevice, data: cstring, len: clonglong): clonglong {.base.} =
+  raiseAssert("missing implementation of QIODevice_virtualbase_writeData")
+proc miqt_exec_method_cQIODevice_writeData(vtbl: pointer, inst: pointer, data: cstring, len: clonglong): clonglong {.cdecl.} =
+  let vtbl = cast[VirtualQIODevice](cast[uint](vtbl) - uint(offsetOf(VirtualQIODevice, vtbl)))
+  let slotval1 = (data)
+  let slotval2 = len
+  var virtualReturn = vtbl.writeData(slotval1, slotval2)
+  virtualReturn
+
+method event*(self: VirtualQIODevice, event: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QIODeviceevent(self[], event)
+proc miqt_exec_method_cQIODevice_event(vtbl: pointer, inst: pointer, event: pointer): bool {.cdecl.} =
+  let vtbl = cast[VirtualQIODevice](cast[uint](vtbl) - uint(offsetOf(VirtualQIODevice, vtbl)))
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
+  var virtualReturn = vtbl.event(slotval1)
+  virtualReturn
+
+method eventFilter*(self: VirtualQIODevice, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QIODeviceeventFilter(self[], watched, event)
+proc miqt_exec_method_cQIODevice_eventFilter(vtbl: pointer, inst: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
+  let vtbl = cast[VirtualQIODevice](cast[uint](vtbl) - uint(offsetOf(VirtualQIODevice, vtbl)))
+  let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
+  var virtualReturn = vtbl.eventFilter(slotval1, slotval2)
+  virtualReturn
+
+method timerEvent*(self: VirtualQIODevice, event: gen_qcoreevent_types.QTimerEvent): void {.base.} =
+  QIODevicetimerEvent(self[], event)
+proc miqt_exec_method_cQIODevice_timerEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQIODevice](cast[uint](vtbl) - uint(offsetOf(VirtualQIODevice, vtbl)))
+  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
+  vtbl.timerEvent(slotval1)
+
+method childEvent*(self: VirtualQIODevice, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
+  QIODevicechildEvent(self[], event)
+proc miqt_exec_method_cQIODevice_childEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQIODevice](cast[uint](vtbl) - uint(offsetOf(VirtualQIODevice, vtbl)))
+  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
+  vtbl.childEvent(slotval1)
+
+method customEvent*(self: VirtualQIODevice, event: gen_qcoreevent_types.QEvent): void {.base.} =
+  QIODevicecustomEvent(self[], event)
+proc miqt_exec_method_cQIODevice_customEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQIODevice](cast[uint](vtbl) - uint(offsetOf(VirtualQIODevice, vtbl)))
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
+  vtbl.customEvent(slotval1)
+
+method connectNotify*(self: VirtualQIODevice, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QIODeviceconnectNotify(self[], signal)
+proc miqt_exec_method_cQIODevice_connectNotify(vtbl: pointer, inst: pointer, signal: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQIODevice](cast[uint](vtbl) - uint(offsetOf(VirtualQIODevice, vtbl)))
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
+  vtbl.connectNotify(slotval1)
+
+method disconnectNotify*(self: VirtualQIODevice, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QIODevicedisconnectNotify(self[], signal)
+proc miqt_exec_method_cQIODevice_disconnectNotify(vtbl: pointer, inst: pointer, signal: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQIODevice](cast[uint](vtbl) - uint(offsetOf(VirtualQIODevice, vtbl)))
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
+  vtbl.disconnectNotify(slotval1)
 
 proc setOpenMode*(self: gen_qiodevice_types.QIODevice, openMode: cint): void =
   fcQIODevice_protectedbase_setOpenMode(self.h, cint(openMode))
@@ -811,7 +1016,7 @@ proc setErrorString*(self: gen_qiodevice_types.QIODevice, errorString: string): 
   fcQIODevice_protectedbase_setErrorString(self.h, struct_miqt_string(data: errorString, len: csize_t(len(errorString))))
 
 proc sender*(self: gen_qiodevice_types.QIODevice, ): gen_qobject_types.QObject =
-  gen_qobject_types.QObject(h: fcQIODevice_protectedbase_sender(self.h))
+  gen_qobject_types.QObject(h: fcQIODevice_protectedbase_sender(self.h), owned: false)
 
 proc senderSignalIndex*(self: gen_qiodevice_types.QIODevice, ): cint =
   fcQIODevice_protectedbase_senderSignalIndex(self.h)
@@ -826,126 +1031,199 @@ proc create*(T: type gen_qiodevice_types.QIODevice,
     vtbl: ref QIODeviceVTable = nil): gen_qiodevice_types.QIODevice =
   let vtbl = if vtbl == nil: new QIODeviceVTable else: vtbl
   GC_ref(vtbl)
-  vtbl.vtbl.destructor = proc(vtbl: ptr cQIODeviceVTable, _: ptr cQIODevice) {.cdecl.} =
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQIODeviceVTable, _: ptr cQIODevice) {.cdecl.} =
     let vtbl = cast[ref QIODeviceVTable](vtbl)
     GC_unref(vtbl)
-  if not isNil(vtbl.metaObject):
+  if not isNil(vtbl[].metaObject):
     vtbl[].vtbl.metaObject = miqt_exec_callback_cQIODevice_metaObject
-  if not isNil(vtbl.metacast):
+  if not isNil(vtbl[].metacast):
     vtbl[].vtbl.metacast = miqt_exec_callback_cQIODevice_metacast
-  if not isNil(vtbl.metacall):
+  if not isNil(vtbl[].metacall):
     vtbl[].vtbl.metacall = miqt_exec_callback_cQIODevice_metacall
-  if not isNil(vtbl.isSequential):
+  if not isNil(vtbl[].isSequential):
     vtbl[].vtbl.isSequential = miqt_exec_callback_cQIODevice_isSequential
-  if not isNil(vtbl.open):
+  if not isNil(vtbl[].open):
     vtbl[].vtbl.open = miqt_exec_callback_cQIODevice_open
-  if not isNil(vtbl.close):
+  if not isNil(vtbl[].close):
     vtbl[].vtbl.close = miqt_exec_callback_cQIODevice_close
-  if not isNil(vtbl.pos):
+  if not isNil(vtbl[].pos):
     vtbl[].vtbl.pos = miqt_exec_callback_cQIODevice_pos
-  if not isNil(vtbl.size):
+  if not isNil(vtbl[].size):
     vtbl[].vtbl.size = miqt_exec_callback_cQIODevice_size
-  if not isNil(vtbl.seek):
+  if not isNil(vtbl[].seek):
     vtbl[].vtbl.seek = miqt_exec_callback_cQIODevice_seek
-  if not isNil(vtbl.atEnd):
+  if not isNil(vtbl[].atEnd):
     vtbl[].vtbl.atEnd = miqt_exec_callback_cQIODevice_atEnd
-  if not isNil(vtbl.reset):
+  if not isNil(vtbl[].reset):
     vtbl[].vtbl.reset = miqt_exec_callback_cQIODevice_reset
-  if not isNil(vtbl.bytesAvailable):
+  if not isNil(vtbl[].bytesAvailable):
     vtbl[].vtbl.bytesAvailable = miqt_exec_callback_cQIODevice_bytesAvailable
-  if not isNil(vtbl.bytesToWrite):
+  if not isNil(vtbl[].bytesToWrite):
     vtbl[].vtbl.bytesToWrite = miqt_exec_callback_cQIODevice_bytesToWrite
-  if not isNil(vtbl.canReadLine):
+  if not isNil(vtbl[].canReadLine):
     vtbl[].vtbl.canReadLine = miqt_exec_callback_cQIODevice_canReadLine
-  if not isNil(vtbl.waitForReadyRead):
+  if not isNil(vtbl[].waitForReadyRead):
     vtbl[].vtbl.waitForReadyRead = miqt_exec_callback_cQIODevice_waitForReadyRead
-  if not isNil(vtbl.waitForBytesWritten):
+  if not isNil(vtbl[].waitForBytesWritten):
     vtbl[].vtbl.waitForBytesWritten = miqt_exec_callback_cQIODevice_waitForBytesWritten
-  if not isNil(vtbl.readData):
+  if not isNil(vtbl[].readData):
     vtbl[].vtbl.readData = miqt_exec_callback_cQIODevice_readData
-  if not isNil(vtbl.readLineData):
+  if not isNil(vtbl[].readLineData):
     vtbl[].vtbl.readLineData = miqt_exec_callback_cQIODevice_readLineData
-  if not isNil(vtbl.writeData):
+  if not isNil(vtbl[].writeData):
     vtbl[].vtbl.writeData = miqt_exec_callback_cQIODevice_writeData
-  if not isNil(vtbl.event):
+  if not isNil(vtbl[].event):
     vtbl[].vtbl.event = miqt_exec_callback_cQIODevice_event
-  if not isNil(vtbl.eventFilter):
+  if not isNil(vtbl[].eventFilter):
     vtbl[].vtbl.eventFilter = miqt_exec_callback_cQIODevice_eventFilter
-  if not isNil(vtbl.timerEvent):
+  if not isNil(vtbl[].timerEvent):
     vtbl[].vtbl.timerEvent = miqt_exec_callback_cQIODevice_timerEvent
-  if not isNil(vtbl.childEvent):
+  if not isNil(vtbl[].childEvent):
     vtbl[].vtbl.childEvent = miqt_exec_callback_cQIODevice_childEvent
-  if not isNil(vtbl.customEvent):
+  if not isNil(vtbl[].customEvent):
     vtbl[].vtbl.customEvent = miqt_exec_callback_cQIODevice_customEvent
-  if not isNil(vtbl.connectNotify):
+  if not isNil(vtbl[].connectNotify):
     vtbl[].vtbl.connectNotify = miqt_exec_callback_cQIODevice_connectNotify
-  if not isNil(vtbl.disconnectNotify):
+  if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQIODevice_disconnectNotify
-  gen_qiodevice_types.QIODevice(h: fcQIODevice_new(addr(vtbl[]), ))
+  gen_qiodevice_types.QIODevice(h: fcQIODevice_new(addr(vtbl[].vtbl), ), owned: true)
 
 proc create*(T: type gen_qiodevice_types.QIODevice,
     parent: gen_qobject_types.QObject,
     vtbl: ref QIODeviceVTable = nil): gen_qiodevice_types.QIODevice =
   let vtbl = if vtbl == nil: new QIODeviceVTable else: vtbl
   GC_ref(vtbl)
-  vtbl.vtbl.destructor = proc(vtbl: ptr cQIODeviceVTable, _: ptr cQIODevice) {.cdecl.} =
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQIODeviceVTable, _: ptr cQIODevice) {.cdecl.} =
     let vtbl = cast[ref QIODeviceVTable](vtbl)
     GC_unref(vtbl)
-  if not isNil(vtbl.metaObject):
+  if not isNil(vtbl[].metaObject):
     vtbl[].vtbl.metaObject = miqt_exec_callback_cQIODevice_metaObject
-  if not isNil(vtbl.metacast):
+  if not isNil(vtbl[].metacast):
     vtbl[].vtbl.metacast = miqt_exec_callback_cQIODevice_metacast
-  if not isNil(vtbl.metacall):
+  if not isNil(vtbl[].metacall):
     vtbl[].vtbl.metacall = miqt_exec_callback_cQIODevice_metacall
-  if not isNil(vtbl.isSequential):
+  if not isNil(vtbl[].isSequential):
     vtbl[].vtbl.isSequential = miqt_exec_callback_cQIODevice_isSequential
-  if not isNil(vtbl.open):
+  if not isNil(vtbl[].open):
     vtbl[].vtbl.open = miqt_exec_callback_cQIODevice_open
-  if not isNil(vtbl.close):
+  if not isNil(vtbl[].close):
     vtbl[].vtbl.close = miqt_exec_callback_cQIODevice_close
-  if not isNil(vtbl.pos):
+  if not isNil(vtbl[].pos):
     vtbl[].vtbl.pos = miqt_exec_callback_cQIODevice_pos
-  if not isNil(vtbl.size):
+  if not isNil(vtbl[].size):
     vtbl[].vtbl.size = miqt_exec_callback_cQIODevice_size
-  if not isNil(vtbl.seek):
+  if not isNil(vtbl[].seek):
     vtbl[].vtbl.seek = miqt_exec_callback_cQIODevice_seek
-  if not isNil(vtbl.atEnd):
+  if not isNil(vtbl[].atEnd):
     vtbl[].vtbl.atEnd = miqt_exec_callback_cQIODevice_atEnd
-  if not isNil(vtbl.reset):
+  if not isNil(vtbl[].reset):
     vtbl[].vtbl.reset = miqt_exec_callback_cQIODevice_reset
-  if not isNil(vtbl.bytesAvailable):
+  if not isNil(vtbl[].bytesAvailable):
     vtbl[].vtbl.bytesAvailable = miqt_exec_callback_cQIODevice_bytesAvailable
-  if not isNil(vtbl.bytesToWrite):
+  if not isNil(vtbl[].bytesToWrite):
     vtbl[].vtbl.bytesToWrite = miqt_exec_callback_cQIODevice_bytesToWrite
-  if not isNil(vtbl.canReadLine):
+  if not isNil(vtbl[].canReadLine):
     vtbl[].vtbl.canReadLine = miqt_exec_callback_cQIODevice_canReadLine
-  if not isNil(vtbl.waitForReadyRead):
+  if not isNil(vtbl[].waitForReadyRead):
     vtbl[].vtbl.waitForReadyRead = miqt_exec_callback_cQIODevice_waitForReadyRead
-  if not isNil(vtbl.waitForBytesWritten):
+  if not isNil(vtbl[].waitForBytesWritten):
     vtbl[].vtbl.waitForBytesWritten = miqt_exec_callback_cQIODevice_waitForBytesWritten
-  if not isNil(vtbl.readData):
+  if not isNil(vtbl[].readData):
     vtbl[].vtbl.readData = miqt_exec_callback_cQIODevice_readData
-  if not isNil(vtbl.readLineData):
+  if not isNil(vtbl[].readLineData):
     vtbl[].vtbl.readLineData = miqt_exec_callback_cQIODevice_readLineData
-  if not isNil(vtbl.writeData):
+  if not isNil(vtbl[].writeData):
     vtbl[].vtbl.writeData = miqt_exec_callback_cQIODevice_writeData
-  if not isNil(vtbl.event):
+  if not isNil(vtbl[].event):
     vtbl[].vtbl.event = miqt_exec_callback_cQIODevice_event
-  if not isNil(vtbl.eventFilter):
+  if not isNil(vtbl[].eventFilter):
     vtbl[].vtbl.eventFilter = miqt_exec_callback_cQIODevice_eventFilter
-  if not isNil(vtbl.timerEvent):
+  if not isNil(vtbl[].timerEvent):
     vtbl[].vtbl.timerEvent = miqt_exec_callback_cQIODevice_timerEvent
-  if not isNil(vtbl.childEvent):
+  if not isNil(vtbl[].childEvent):
     vtbl[].vtbl.childEvent = miqt_exec_callback_cQIODevice_childEvent
-  if not isNil(vtbl.customEvent):
+  if not isNil(vtbl[].customEvent):
     vtbl[].vtbl.customEvent = miqt_exec_callback_cQIODevice_customEvent
-  if not isNil(vtbl.connectNotify):
+  if not isNil(vtbl[].connectNotify):
     vtbl[].vtbl.connectNotify = miqt_exec_callback_cQIODevice_connectNotify
-  if not isNil(vtbl.disconnectNotify):
+  if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQIODevice_disconnectNotify
-  gen_qiodevice_types.QIODevice(h: fcQIODevice_new2(addr(vtbl[]), parent.h))
+  gen_qiodevice_types.QIODevice(h: fcQIODevice_new2(addr(vtbl[].vtbl), parent.h), owned: true)
+
+proc create*(T: type gen_qiodevice_types.QIODevice,
+    vtbl: VirtualQIODevice) =
+
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQIODeviceVTable, _: ptr cQIODevice) {.cdecl.} =
+    let vtbl = cast[ptr typeof(VirtualQIODevice()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQIODevice, vtbl)))
+    vtbl[].h = nil
+    vtbl[].owned = false
+  vtbl[].vtbl.metaObject = miqt_exec_method_cQIODevice_metaObject
+  vtbl[].vtbl.metacast = miqt_exec_method_cQIODevice_metacast
+  vtbl[].vtbl.metacall = miqt_exec_method_cQIODevice_metacall
+  vtbl[].vtbl.isSequential = miqt_exec_method_cQIODevice_isSequential
+  vtbl[].vtbl.open = miqt_exec_method_cQIODevice_open
+  vtbl[].vtbl.close = miqt_exec_method_cQIODevice_close
+  vtbl[].vtbl.pos = miqt_exec_method_cQIODevice_pos
+  vtbl[].vtbl.size = miqt_exec_method_cQIODevice_size
+  vtbl[].vtbl.seek = miqt_exec_method_cQIODevice_seek
+  vtbl[].vtbl.atEnd = miqt_exec_method_cQIODevice_atEnd
+  vtbl[].vtbl.reset = miqt_exec_method_cQIODevice_reset
+  vtbl[].vtbl.bytesAvailable = miqt_exec_method_cQIODevice_bytesAvailable
+  vtbl[].vtbl.bytesToWrite = miqt_exec_method_cQIODevice_bytesToWrite
+  vtbl[].vtbl.canReadLine = miqt_exec_method_cQIODevice_canReadLine
+  vtbl[].vtbl.waitForReadyRead = miqt_exec_method_cQIODevice_waitForReadyRead
+  vtbl[].vtbl.waitForBytesWritten = miqt_exec_method_cQIODevice_waitForBytesWritten
+  vtbl[].vtbl.readData = miqt_exec_method_cQIODevice_readData
+  vtbl[].vtbl.readLineData = miqt_exec_method_cQIODevice_readLineData
+  vtbl[].vtbl.writeData = miqt_exec_method_cQIODevice_writeData
+  vtbl[].vtbl.event = miqt_exec_method_cQIODevice_event
+  vtbl[].vtbl.eventFilter = miqt_exec_method_cQIODevice_eventFilter
+  vtbl[].vtbl.timerEvent = miqt_exec_method_cQIODevice_timerEvent
+  vtbl[].vtbl.childEvent = miqt_exec_method_cQIODevice_childEvent
+  vtbl[].vtbl.customEvent = miqt_exec_method_cQIODevice_customEvent
+  vtbl[].vtbl.connectNotify = miqt_exec_method_cQIODevice_connectNotify
+  vtbl[].vtbl.disconnectNotify = miqt_exec_method_cQIODevice_disconnectNotify
+  if vtbl[].h != nil: delete(move(vtbl[]))
+  vtbl[].h = fcQIODevice_new(addr(vtbl[].vtbl), )
+  vtbl[].owned = true
+
+proc create*(T: type gen_qiodevice_types.QIODevice,
+    parent: gen_qobject_types.QObject,
+    vtbl: VirtualQIODevice) =
+
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQIODeviceVTable, _: ptr cQIODevice) {.cdecl.} =
+    let vtbl = cast[ptr typeof(VirtualQIODevice()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQIODevice, vtbl)))
+    vtbl[].h = nil
+    vtbl[].owned = false
+  vtbl[].vtbl.metaObject = miqt_exec_method_cQIODevice_metaObject
+  vtbl[].vtbl.metacast = miqt_exec_method_cQIODevice_metacast
+  vtbl[].vtbl.metacall = miqt_exec_method_cQIODevice_metacall
+  vtbl[].vtbl.isSequential = miqt_exec_method_cQIODevice_isSequential
+  vtbl[].vtbl.open = miqt_exec_method_cQIODevice_open
+  vtbl[].vtbl.close = miqt_exec_method_cQIODevice_close
+  vtbl[].vtbl.pos = miqt_exec_method_cQIODevice_pos
+  vtbl[].vtbl.size = miqt_exec_method_cQIODevice_size
+  vtbl[].vtbl.seek = miqt_exec_method_cQIODevice_seek
+  vtbl[].vtbl.atEnd = miqt_exec_method_cQIODevice_atEnd
+  vtbl[].vtbl.reset = miqt_exec_method_cQIODevice_reset
+  vtbl[].vtbl.bytesAvailable = miqt_exec_method_cQIODevice_bytesAvailable
+  vtbl[].vtbl.bytesToWrite = miqt_exec_method_cQIODevice_bytesToWrite
+  vtbl[].vtbl.canReadLine = miqt_exec_method_cQIODevice_canReadLine
+  vtbl[].vtbl.waitForReadyRead = miqt_exec_method_cQIODevice_waitForReadyRead
+  vtbl[].vtbl.waitForBytesWritten = miqt_exec_method_cQIODevice_waitForBytesWritten
+  vtbl[].vtbl.readData = miqt_exec_method_cQIODevice_readData
+  vtbl[].vtbl.readLineData = miqt_exec_method_cQIODevice_readLineData
+  vtbl[].vtbl.writeData = miqt_exec_method_cQIODevice_writeData
+  vtbl[].vtbl.event = miqt_exec_method_cQIODevice_event
+  vtbl[].vtbl.eventFilter = miqt_exec_method_cQIODevice_eventFilter
+  vtbl[].vtbl.timerEvent = miqt_exec_method_cQIODevice_timerEvent
+  vtbl[].vtbl.childEvent = miqt_exec_method_cQIODevice_childEvent
+  vtbl[].vtbl.customEvent = miqt_exec_method_cQIODevice_customEvent
+  vtbl[].vtbl.connectNotify = miqt_exec_method_cQIODevice_connectNotify
+  vtbl[].vtbl.disconnectNotify = miqt_exec_method_cQIODevice_disconnectNotify
+  if vtbl[].h != nil: delete(move(vtbl[]))
+  vtbl[].h = fcQIODevice_new2(addr(vtbl[].vtbl), parent.h)
+  vtbl[].owned = true
 
 proc staticMetaObject*(_: type gen_qiodevice_types.QIODevice): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQIODevice_staticMetaObject())
-proc delete*(self: gen_qiodevice_types.QIODevice) =
-  fcQIODevice_delete(self.h)

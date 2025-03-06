@@ -30,7 +30,7 @@ func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
     else:
       copyMem(addr result[0], unsafeAddr v[0], v.len)
 
-const cflags = gorge("pkg-config --cflags Qt5Widgets")  & " -fPIC"
+const cflags = gorge("pkg-config --cflags Qt5Widgets") & " -fPIC"
 {.compile("gen_qgraphicslinearlayout.cpp", cflags).}
 
 
@@ -79,7 +79,7 @@ proc fcQGraphicsLinearLayout_dump(self: pointer, ): void {.importc: "QGraphicsLi
 proc fcQGraphicsLinearLayout_addStretch1(self: pointer, stretch: cint): void {.importc: "QGraphicsLinearLayout_addStretch1".}
 proc fcQGraphicsLinearLayout_insertStretch2(self: pointer, index: cint, stretch: cint): void {.importc: "QGraphicsLinearLayout_insertStretch2".}
 proc fcQGraphicsLinearLayout_dump1(self: pointer, indent: cint): void {.importc: "QGraphicsLinearLayout_dump1".}
-type cQGraphicsLinearLayoutVTable = object
+type cQGraphicsLinearLayoutVTable {.pure.} = object
   destructor*: proc(vtbl: ptr cQGraphicsLinearLayoutVTable, self: ptr cQGraphicsLinearLayout) {.cdecl, raises:[], gcsafe.}
   removeAt*: proc(vtbl, self: pointer, index: cint): void {.cdecl, raises: [], gcsafe.}
   setGeometry*: proc(vtbl, self: pointer, rect: pointer): void {.cdecl, raises: [], gcsafe.}
@@ -106,7 +106,6 @@ proc fcQGraphicsLinearLayout_new(vtbl: pointer, ): ptr cQGraphicsLinearLayout {.
 proc fcQGraphicsLinearLayout_new2(vtbl: pointer, orientation: cint): ptr cQGraphicsLinearLayout {.importc: "QGraphicsLinearLayout_new2".}
 proc fcQGraphicsLinearLayout_new3(vtbl: pointer, parent: pointer): ptr cQGraphicsLinearLayout {.importc: "QGraphicsLinearLayout_new3".}
 proc fcQGraphicsLinearLayout_new4(vtbl: pointer, orientation: cint, parent: pointer): ptr cQGraphicsLinearLayout {.importc: "QGraphicsLinearLayout_new4".}
-proc fcQGraphicsLinearLayout_delete(self: pointer) {.importc: "QGraphicsLinearLayout_delete".}
 
 proc setOrientation*(self: gen_qgraphicslinearlayout_types.QGraphicsLinearLayout, orientation: cint): void =
   fcQGraphicsLinearLayout_setOrientation(self.h, cint(orientation))
@@ -163,13 +162,13 @@ proc count*(self: gen_qgraphicslinearlayout_types.QGraphicsLinearLayout, ): cint
   fcQGraphicsLinearLayout_count(self.h)
 
 proc itemAt*(self: gen_qgraphicslinearlayout_types.QGraphicsLinearLayout, index: cint): gen_qgraphicslayoutitem_types.QGraphicsLayoutItem =
-  gen_qgraphicslayoutitem_types.QGraphicsLayoutItem(h: fcQGraphicsLinearLayout_itemAt(self.h, index))
+  gen_qgraphicslayoutitem_types.QGraphicsLayoutItem(h: fcQGraphicsLinearLayout_itemAt(self.h, index), owned: false)
 
 proc invalidate*(self: gen_qgraphicslinearlayout_types.QGraphicsLinearLayout, ): void =
   fcQGraphicsLinearLayout_invalidate(self.h)
 
 proc sizeHint*(self: gen_qgraphicslinearlayout_types.QGraphicsLinearLayout, which: cint, constraint: gen_qsize_types.QSizeF): gen_qsize_types.QSizeF =
-  gen_qsize_types.QSizeF(h: fcQGraphicsLinearLayout_sizeHint(self.h, cint(which), constraint.h))
+  gen_qsize_types.QSizeF(h: fcQGraphicsLinearLayout_sizeHint(self.h, cint(which), constraint.h), owned: true)
 
 proc dump*(self: gen_qgraphicslinearlayout_types.QGraphicsLinearLayout, ): void =
   fcQGraphicsLinearLayout_dump(self.h)
@@ -192,7 +191,7 @@ type QGraphicsLinearLayoutsizeHintProc* = proc(self: QGraphicsLinearLayout, whic
 type QGraphicsLinearLayoutgetContentsMarginsProc* = proc(self: QGraphicsLinearLayout, left: ptr float64, top: ptr float64, right: ptr float64, bottom: ptr float64): void {.raises: [], gcsafe.}
 type QGraphicsLinearLayoutupdateGeometryProc* = proc(self: QGraphicsLinearLayout): void {.raises: [], gcsafe.}
 type QGraphicsLinearLayoutwidgetEventProc* = proc(self: QGraphicsLinearLayout, e: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
-type QGraphicsLinearLayoutVTable* = object
+type QGraphicsLinearLayoutVTable* {.inheritable, pure.} = object
   vtbl: cQGraphicsLinearLayoutVTable
   removeAt*: QGraphicsLinearLayoutremoveAtProc
   setGeometry*: QGraphicsLinearLayoutsetGeometryProc
@@ -218,7 +217,7 @@ proc QGraphicsLinearLayoutsetGeometry*(self: gen_qgraphicslinearlayout_types.QGr
 proc miqt_exec_callback_cQGraphicsLinearLayout_setGeometry(vtbl: pointer, self: pointer, rect: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsLinearLayoutVTable](vtbl)
   let self = QGraphicsLinearLayout(h: self)
-  let slotval1 = gen_qrect_types.QRectF(h: rect)
+  let slotval1 = gen_qrect_types.QRectF(h: rect, owned: false)
   vtbl[].setGeometry(self, slotval1)
 
 proc QGraphicsLinearLayoutcount*(self: gen_qgraphicslinearlayout_types.QGraphicsLinearLayout, ): cint =
@@ -231,14 +230,17 @@ proc miqt_exec_callback_cQGraphicsLinearLayout_count(vtbl: pointer, self: pointe
   virtualReturn
 
 proc QGraphicsLinearLayoutitemAt*(self: gen_qgraphicslinearlayout_types.QGraphicsLinearLayout, index: cint): gen_qgraphicslayoutitem_types.QGraphicsLayoutItem =
-  gen_qgraphicslayoutitem_types.QGraphicsLayoutItem(h: fcQGraphicsLinearLayout_virtualbase_itemAt(self.h, index))
+  gen_qgraphicslayoutitem_types.QGraphicsLayoutItem(h: fcQGraphicsLinearLayout_virtualbase_itemAt(self.h, index), owned: false)
 
 proc miqt_exec_callback_cQGraphicsLinearLayout_itemAt(vtbl: pointer, self: pointer, index: cint): pointer {.cdecl.} =
   let vtbl = cast[ptr QGraphicsLinearLayoutVTable](vtbl)
   let self = QGraphicsLinearLayout(h: self)
   let slotval1 = index
   var virtualReturn = vtbl[].itemAt(self, slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QGraphicsLinearLayoutinvalidate*(self: gen_qgraphicslinearlayout_types.QGraphicsLinearLayout, ): void =
   fcQGraphicsLinearLayout_virtualbase_invalidate(self.h)
@@ -249,15 +251,18 @@ proc miqt_exec_callback_cQGraphicsLinearLayout_invalidate(vtbl: pointer, self: p
   vtbl[].invalidate(self)
 
 proc QGraphicsLinearLayoutsizeHint*(self: gen_qgraphicslinearlayout_types.QGraphicsLinearLayout, which: cint, constraint: gen_qsize_types.QSizeF): gen_qsize_types.QSizeF =
-  gen_qsize_types.QSizeF(h: fcQGraphicsLinearLayout_virtualbase_sizeHint(self.h, cint(which), constraint.h))
+  gen_qsize_types.QSizeF(h: fcQGraphicsLinearLayout_virtualbase_sizeHint(self.h, cint(which), constraint.h), owned: true)
 
 proc miqt_exec_callback_cQGraphicsLinearLayout_sizeHint(vtbl: pointer, self: pointer, which: cint, constraint: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QGraphicsLinearLayoutVTable](vtbl)
   let self = QGraphicsLinearLayout(h: self)
   let slotval1 = cint(which)
-  let slotval2 = gen_qsize_types.QSizeF(h: constraint)
+  let slotval2 = gen_qsize_types.QSizeF(h: constraint, owned: false)
   var virtualReturn = vtbl[].sizeHint(self, slotval1, slotval2)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QGraphicsLinearLayoutgetContentsMargins*(self: gen_qgraphicslinearlayout_types.QGraphicsLinearLayout, left: ptr float64, top: ptr float64, right: ptr float64, bottom: ptr float64): void =
   fcQGraphicsLinearLayout_virtualbase_getContentsMargins(self.h, left, top, right, bottom)
@@ -285,8 +290,83 @@ proc QGraphicsLinearLayoutwidgetEvent*(self: gen_qgraphicslinearlayout_types.QGr
 proc miqt_exec_callback_cQGraphicsLinearLayout_widgetEvent(vtbl: pointer, self: pointer, e: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsLinearLayoutVTable](vtbl)
   let self = QGraphicsLinearLayout(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: e)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: e, owned: false)
   vtbl[].widgetEvent(self, slotval1)
+
+type VirtualQGraphicsLinearLayout* {.inheritable.} = ref object of QGraphicsLinearLayout
+  vtbl*: cQGraphicsLinearLayoutVTable
+method removeAt*(self: VirtualQGraphicsLinearLayout, index: cint): void {.base.} =
+  QGraphicsLinearLayoutremoveAt(self[], index)
+proc miqt_exec_method_cQGraphicsLinearLayout_removeAt(vtbl: pointer, inst: pointer, index: cint): void {.cdecl.} =
+  let vtbl = cast[VirtualQGraphicsLinearLayout](cast[uint](vtbl) - uint(offsetOf(VirtualQGraphicsLinearLayout, vtbl)))
+  let slotval1 = index
+  vtbl.removeAt(slotval1)
+
+method setGeometry*(self: VirtualQGraphicsLinearLayout, rect: gen_qrect_types.QRectF): void {.base.} =
+  QGraphicsLinearLayoutsetGeometry(self[], rect)
+proc miqt_exec_method_cQGraphicsLinearLayout_setGeometry(vtbl: pointer, inst: pointer, rect: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQGraphicsLinearLayout](cast[uint](vtbl) - uint(offsetOf(VirtualQGraphicsLinearLayout, vtbl)))
+  let slotval1 = gen_qrect_types.QRectF(h: rect, owned: false)
+  vtbl.setGeometry(slotval1)
+
+method count*(self: VirtualQGraphicsLinearLayout, ): cint {.base.} =
+  QGraphicsLinearLayoutcount(self[])
+proc miqt_exec_method_cQGraphicsLinearLayout_count(vtbl: pointer, inst: pointer): cint {.cdecl.} =
+  let vtbl = cast[VirtualQGraphicsLinearLayout](cast[uint](vtbl) - uint(offsetOf(VirtualQGraphicsLinearLayout, vtbl)))
+  var virtualReturn = vtbl.count()
+  virtualReturn
+
+method itemAt*(self: VirtualQGraphicsLinearLayout, index: cint): gen_qgraphicslayoutitem_types.QGraphicsLayoutItem {.base.} =
+  QGraphicsLinearLayoutitemAt(self[], index)
+proc miqt_exec_method_cQGraphicsLinearLayout_itemAt(vtbl: pointer, inst: pointer, index: cint): pointer {.cdecl.} =
+  let vtbl = cast[VirtualQGraphicsLinearLayout](cast[uint](vtbl) - uint(offsetOf(VirtualQGraphicsLinearLayout, vtbl)))
+  let slotval1 = index
+  var virtualReturn = vtbl.itemAt(slotval1)
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
+
+method invalidate*(self: VirtualQGraphicsLinearLayout, ): void {.base.} =
+  QGraphicsLinearLayoutinvalidate(self[])
+proc miqt_exec_method_cQGraphicsLinearLayout_invalidate(vtbl: pointer, inst: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQGraphicsLinearLayout](cast[uint](vtbl) - uint(offsetOf(VirtualQGraphicsLinearLayout, vtbl)))
+  vtbl.invalidate()
+
+method sizeHint*(self: VirtualQGraphicsLinearLayout, which: cint, constraint: gen_qsize_types.QSizeF): gen_qsize_types.QSizeF {.base.} =
+  QGraphicsLinearLayoutsizeHint(self[], which, constraint)
+proc miqt_exec_method_cQGraphicsLinearLayout_sizeHint(vtbl: pointer, inst: pointer, which: cint, constraint: pointer): pointer {.cdecl.} =
+  let vtbl = cast[VirtualQGraphicsLinearLayout](cast[uint](vtbl) - uint(offsetOf(VirtualQGraphicsLinearLayout, vtbl)))
+  let slotval1 = cint(which)
+  let slotval2 = gen_qsize_types.QSizeF(h: constraint, owned: false)
+  var virtualReturn = vtbl.sizeHint(slotval1, slotval2)
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
+
+method getContentsMargins*(self: VirtualQGraphicsLinearLayout, left: ptr float64, top: ptr float64, right: ptr float64, bottom: ptr float64): void {.base.} =
+  QGraphicsLinearLayoutgetContentsMargins(self[], left, top, right, bottom)
+proc miqt_exec_method_cQGraphicsLinearLayout_getContentsMargins(vtbl: pointer, inst: pointer, left: ptr float64, top: ptr float64, right: ptr float64, bottom: ptr float64): void {.cdecl.} =
+  let vtbl = cast[VirtualQGraphicsLinearLayout](cast[uint](vtbl) - uint(offsetOf(VirtualQGraphicsLinearLayout, vtbl)))
+  let slotval1 = left
+  let slotval2 = top
+  let slotval3 = right
+  let slotval4 = bottom
+  vtbl.getContentsMargins(slotval1, slotval2, slotval3, slotval4)
+
+method updateGeometry*(self: VirtualQGraphicsLinearLayout, ): void {.base.} =
+  QGraphicsLinearLayoutupdateGeometry(self[])
+proc miqt_exec_method_cQGraphicsLinearLayout_updateGeometry(vtbl: pointer, inst: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQGraphicsLinearLayout](cast[uint](vtbl) - uint(offsetOf(VirtualQGraphicsLinearLayout, vtbl)))
+  vtbl.updateGeometry()
+
+method widgetEvent*(self: VirtualQGraphicsLinearLayout, e: gen_qcoreevent_types.QEvent): void {.base.} =
+  QGraphicsLinearLayoutwidgetEvent(self[], e)
+proc miqt_exec_method_cQGraphicsLinearLayout_widgetEvent(vtbl: pointer, inst: pointer, e: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQGraphicsLinearLayout](cast[uint](vtbl) - uint(offsetOf(VirtualQGraphicsLinearLayout, vtbl)))
+  let slotval1 = gen_qcoreevent_types.QEvent(h: e, owned: false)
+  vtbl.widgetEvent(slotval1)
 
 proc addChildLayoutItem*(self: gen_qgraphicslinearlayout_types.QGraphicsLinearLayout, layoutItem: gen_qgraphicslayoutitem_types.QGraphicsLayoutItem): void =
   fcQGraphicsLinearLayout_protectedbase_addChildLayoutItem(self.h, layoutItem.h)
@@ -301,112 +381,193 @@ proc create*(T: type gen_qgraphicslinearlayout_types.QGraphicsLinearLayout,
     vtbl: ref QGraphicsLinearLayoutVTable = nil): gen_qgraphicslinearlayout_types.QGraphicsLinearLayout =
   let vtbl = if vtbl == nil: new QGraphicsLinearLayoutVTable else: vtbl
   GC_ref(vtbl)
-  vtbl.vtbl.destructor = proc(vtbl: ptr cQGraphicsLinearLayoutVTable, _: ptr cQGraphicsLinearLayout) {.cdecl.} =
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQGraphicsLinearLayoutVTable, _: ptr cQGraphicsLinearLayout) {.cdecl.} =
     let vtbl = cast[ref QGraphicsLinearLayoutVTable](vtbl)
     GC_unref(vtbl)
-  if not isNil(vtbl.removeAt):
+  if not isNil(vtbl[].removeAt):
     vtbl[].vtbl.removeAt = miqt_exec_callback_cQGraphicsLinearLayout_removeAt
-  if not isNil(vtbl.setGeometry):
+  if not isNil(vtbl[].setGeometry):
     vtbl[].vtbl.setGeometry = miqt_exec_callback_cQGraphicsLinearLayout_setGeometry
-  if not isNil(vtbl.count):
+  if not isNil(vtbl[].count):
     vtbl[].vtbl.count = miqt_exec_callback_cQGraphicsLinearLayout_count
-  if not isNil(vtbl.itemAt):
+  if not isNil(vtbl[].itemAt):
     vtbl[].vtbl.itemAt = miqt_exec_callback_cQGraphicsLinearLayout_itemAt
-  if not isNil(vtbl.invalidate):
+  if not isNil(vtbl[].invalidate):
     vtbl[].vtbl.invalidate = miqt_exec_callback_cQGraphicsLinearLayout_invalidate
-  if not isNil(vtbl.sizeHint):
+  if not isNil(vtbl[].sizeHint):
     vtbl[].vtbl.sizeHint = miqt_exec_callback_cQGraphicsLinearLayout_sizeHint
-  if not isNil(vtbl.getContentsMargins):
+  if not isNil(vtbl[].getContentsMargins):
     vtbl[].vtbl.getContentsMargins = miqt_exec_callback_cQGraphicsLinearLayout_getContentsMargins
-  if not isNil(vtbl.updateGeometry):
+  if not isNil(vtbl[].updateGeometry):
     vtbl[].vtbl.updateGeometry = miqt_exec_callback_cQGraphicsLinearLayout_updateGeometry
-  if not isNil(vtbl.widgetEvent):
+  if not isNil(vtbl[].widgetEvent):
     vtbl[].vtbl.widgetEvent = miqt_exec_callback_cQGraphicsLinearLayout_widgetEvent
-  gen_qgraphicslinearlayout_types.QGraphicsLinearLayout(h: fcQGraphicsLinearLayout_new(addr(vtbl[]), ))
+  gen_qgraphicslinearlayout_types.QGraphicsLinearLayout(h: fcQGraphicsLinearLayout_new(addr(vtbl[].vtbl), ), owned: true)
 
 proc create*(T: type gen_qgraphicslinearlayout_types.QGraphicsLinearLayout,
     orientation: cint,
     vtbl: ref QGraphicsLinearLayoutVTable = nil): gen_qgraphicslinearlayout_types.QGraphicsLinearLayout =
   let vtbl = if vtbl == nil: new QGraphicsLinearLayoutVTable else: vtbl
   GC_ref(vtbl)
-  vtbl.vtbl.destructor = proc(vtbl: ptr cQGraphicsLinearLayoutVTable, _: ptr cQGraphicsLinearLayout) {.cdecl.} =
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQGraphicsLinearLayoutVTable, _: ptr cQGraphicsLinearLayout) {.cdecl.} =
     let vtbl = cast[ref QGraphicsLinearLayoutVTable](vtbl)
     GC_unref(vtbl)
-  if not isNil(vtbl.removeAt):
+  if not isNil(vtbl[].removeAt):
     vtbl[].vtbl.removeAt = miqt_exec_callback_cQGraphicsLinearLayout_removeAt
-  if not isNil(vtbl.setGeometry):
+  if not isNil(vtbl[].setGeometry):
     vtbl[].vtbl.setGeometry = miqt_exec_callback_cQGraphicsLinearLayout_setGeometry
-  if not isNil(vtbl.count):
+  if not isNil(vtbl[].count):
     vtbl[].vtbl.count = miqt_exec_callback_cQGraphicsLinearLayout_count
-  if not isNil(vtbl.itemAt):
+  if not isNil(vtbl[].itemAt):
     vtbl[].vtbl.itemAt = miqt_exec_callback_cQGraphicsLinearLayout_itemAt
-  if not isNil(vtbl.invalidate):
+  if not isNil(vtbl[].invalidate):
     vtbl[].vtbl.invalidate = miqt_exec_callback_cQGraphicsLinearLayout_invalidate
-  if not isNil(vtbl.sizeHint):
+  if not isNil(vtbl[].sizeHint):
     vtbl[].vtbl.sizeHint = miqt_exec_callback_cQGraphicsLinearLayout_sizeHint
-  if not isNil(vtbl.getContentsMargins):
+  if not isNil(vtbl[].getContentsMargins):
     vtbl[].vtbl.getContentsMargins = miqt_exec_callback_cQGraphicsLinearLayout_getContentsMargins
-  if not isNil(vtbl.updateGeometry):
+  if not isNil(vtbl[].updateGeometry):
     vtbl[].vtbl.updateGeometry = miqt_exec_callback_cQGraphicsLinearLayout_updateGeometry
-  if not isNil(vtbl.widgetEvent):
+  if not isNil(vtbl[].widgetEvent):
     vtbl[].vtbl.widgetEvent = miqt_exec_callback_cQGraphicsLinearLayout_widgetEvent
-  gen_qgraphicslinearlayout_types.QGraphicsLinearLayout(h: fcQGraphicsLinearLayout_new2(addr(vtbl[]), cint(orientation)))
+  gen_qgraphicslinearlayout_types.QGraphicsLinearLayout(h: fcQGraphicsLinearLayout_new2(addr(vtbl[].vtbl), cint(orientation)), owned: true)
 
 proc create*(T: type gen_qgraphicslinearlayout_types.QGraphicsLinearLayout,
     parent: gen_qgraphicslayoutitem_types.QGraphicsLayoutItem,
     vtbl: ref QGraphicsLinearLayoutVTable = nil): gen_qgraphicslinearlayout_types.QGraphicsLinearLayout =
   let vtbl = if vtbl == nil: new QGraphicsLinearLayoutVTable else: vtbl
   GC_ref(vtbl)
-  vtbl.vtbl.destructor = proc(vtbl: ptr cQGraphicsLinearLayoutVTable, _: ptr cQGraphicsLinearLayout) {.cdecl.} =
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQGraphicsLinearLayoutVTable, _: ptr cQGraphicsLinearLayout) {.cdecl.} =
     let vtbl = cast[ref QGraphicsLinearLayoutVTable](vtbl)
     GC_unref(vtbl)
-  if not isNil(vtbl.removeAt):
+  if not isNil(vtbl[].removeAt):
     vtbl[].vtbl.removeAt = miqt_exec_callback_cQGraphicsLinearLayout_removeAt
-  if not isNil(vtbl.setGeometry):
+  if not isNil(vtbl[].setGeometry):
     vtbl[].vtbl.setGeometry = miqt_exec_callback_cQGraphicsLinearLayout_setGeometry
-  if not isNil(vtbl.count):
+  if not isNil(vtbl[].count):
     vtbl[].vtbl.count = miqt_exec_callback_cQGraphicsLinearLayout_count
-  if not isNil(vtbl.itemAt):
+  if not isNil(vtbl[].itemAt):
     vtbl[].vtbl.itemAt = miqt_exec_callback_cQGraphicsLinearLayout_itemAt
-  if not isNil(vtbl.invalidate):
+  if not isNil(vtbl[].invalidate):
     vtbl[].vtbl.invalidate = miqt_exec_callback_cQGraphicsLinearLayout_invalidate
-  if not isNil(vtbl.sizeHint):
+  if not isNil(vtbl[].sizeHint):
     vtbl[].vtbl.sizeHint = miqt_exec_callback_cQGraphicsLinearLayout_sizeHint
-  if not isNil(vtbl.getContentsMargins):
+  if not isNil(vtbl[].getContentsMargins):
     vtbl[].vtbl.getContentsMargins = miqt_exec_callback_cQGraphicsLinearLayout_getContentsMargins
-  if not isNil(vtbl.updateGeometry):
+  if not isNil(vtbl[].updateGeometry):
     vtbl[].vtbl.updateGeometry = miqt_exec_callback_cQGraphicsLinearLayout_updateGeometry
-  if not isNil(vtbl.widgetEvent):
+  if not isNil(vtbl[].widgetEvent):
     vtbl[].vtbl.widgetEvent = miqt_exec_callback_cQGraphicsLinearLayout_widgetEvent
-  gen_qgraphicslinearlayout_types.QGraphicsLinearLayout(h: fcQGraphicsLinearLayout_new3(addr(vtbl[]), parent.h))
+  gen_qgraphicslinearlayout_types.QGraphicsLinearLayout(h: fcQGraphicsLinearLayout_new3(addr(vtbl[].vtbl), parent.h), owned: true)
 
 proc create*(T: type gen_qgraphicslinearlayout_types.QGraphicsLinearLayout,
     orientation: cint, parent: gen_qgraphicslayoutitem_types.QGraphicsLayoutItem,
     vtbl: ref QGraphicsLinearLayoutVTable = nil): gen_qgraphicslinearlayout_types.QGraphicsLinearLayout =
   let vtbl = if vtbl == nil: new QGraphicsLinearLayoutVTable else: vtbl
   GC_ref(vtbl)
-  vtbl.vtbl.destructor = proc(vtbl: ptr cQGraphicsLinearLayoutVTable, _: ptr cQGraphicsLinearLayout) {.cdecl.} =
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQGraphicsLinearLayoutVTable, _: ptr cQGraphicsLinearLayout) {.cdecl.} =
     let vtbl = cast[ref QGraphicsLinearLayoutVTable](vtbl)
     GC_unref(vtbl)
-  if not isNil(vtbl.removeAt):
+  if not isNil(vtbl[].removeAt):
     vtbl[].vtbl.removeAt = miqt_exec_callback_cQGraphicsLinearLayout_removeAt
-  if not isNil(vtbl.setGeometry):
+  if not isNil(vtbl[].setGeometry):
     vtbl[].vtbl.setGeometry = miqt_exec_callback_cQGraphicsLinearLayout_setGeometry
-  if not isNil(vtbl.count):
+  if not isNil(vtbl[].count):
     vtbl[].vtbl.count = miqt_exec_callback_cQGraphicsLinearLayout_count
-  if not isNil(vtbl.itemAt):
+  if not isNil(vtbl[].itemAt):
     vtbl[].vtbl.itemAt = miqt_exec_callback_cQGraphicsLinearLayout_itemAt
-  if not isNil(vtbl.invalidate):
+  if not isNil(vtbl[].invalidate):
     vtbl[].vtbl.invalidate = miqt_exec_callback_cQGraphicsLinearLayout_invalidate
-  if not isNil(vtbl.sizeHint):
+  if not isNil(vtbl[].sizeHint):
     vtbl[].vtbl.sizeHint = miqt_exec_callback_cQGraphicsLinearLayout_sizeHint
-  if not isNil(vtbl.getContentsMargins):
+  if not isNil(vtbl[].getContentsMargins):
     vtbl[].vtbl.getContentsMargins = miqt_exec_callback_cQGraphicsLinearLayout_getContentsMargins
-  if not isNil(vtbl.updateGeometry):
+  if not isNil(vtbl[].updateGeometry):
     vtbl[].vtbl.updateGeometry = miqt_exec_callback_cQGraphicsLinearLayout_updateGeometry
-  if not isNil(vtbl.widgetEvent):
+  if not isNil(vtbl[].widgetEvent):
     vtbl[].vtbl.widgetEvent = miqt_exec_callback_cQGraphicsLinearLayout_widgetEvent
-  gen_qgraphicslinearlayout_types.QGraphicsLinearLayout(h: fcQGraphicsLinearLayout_new4(addr(vtbl[]), cint(orientation), parent.h))
+  gen_qgraphicslinearlayout_types.QGraphicsLinearLayout(h: fcQGraphicsLinearLayout_new4(addr(vtbl[].vtbl), cint(orientation), parent.h), owned: true)
 
-proc delete*(self: gen_qgraphicslinearlayout_types.QGraphicsLinearLayout) =
-  fcQGraphicsLinearLayout_delete(self.h)
+proc create*(T: type gen_qgraphicslinearlayout_types.QGraphicsLinearLayout,
+    vtbl: VirtualQGraphicsLinearLayout) =
+
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQGraphicsLinearLayoutVTable, _: ptr cQGraphicsLinearLayout) {.cdecl.} =
+    let vtbl = cast[ptr typeof(VirtualQGraphicsLinearLayout()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQGraphicsLinearLayout, vtbl)))
+    vtbl[].h = nil
+    vtbl[].owned = false
+  vtbl[].vtbl.removeAt = miqt_exec_method_cQGraphicsLinearLayout_removeAt
+  vtbl[].vtbl.setGeometry = miqt_exec_method_cQGraphicsLinearLayout_setGeometry
+  vtbl[].vtbl.count = miqt_exec_method_cQGraphicsLinearLayout_count
+  vtbl[].vtbl.itemAt = miqt_exec_method_cQGraphicsLinearLayout_itemAt
+  vtbl[].vtbl.invalidate = miqt_exec_method_cQGraphicsLinearLayout_invalidate
+  vtbl[].vtbl.sizeHint = miqt_exec_method_cQGraphicsLinearLayout_sizeHint
+  vtbl[].vtbl.getContentsMargins = miqt_exec_method_cQGraphicsLinearLayout_getContentsMargins
+  vtbl[].vtbl.updateGeometry = miqt_exec_method_cQGraphicsLinearLayout_updateGeometry
+  vtbl[].vtbl.widgetEvent = miqt_exec_method_cQGraphicsLinearLayout_widgetEvent
+  if vtbl[].h != nil: delete(move(vtbl[]))
+  vtbl[].h = fcQGraphicsLinearLayout_new(addr(vtbl[].vtbl), )
+  vtbl[].owned = true
+
+proc create*(T: type gen_qgraphicslinearlayout_types.QGraphicsLinearLayout,
+    orientation: cint,
+    vtbl: VirtualQGraphicsLinearLayout) =
+
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQGraphicsLinearLayoutVTable, _: ptr cQGraphicsLinearLayout) {.cdecl.} =
+    let vtbl = cast[ptr typeof(VirtualQGraphicsLinearLayout()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQGraphicsLinearLayout, vtbl)))
+    vtbl[].h = nil
+    vtbl[].owned = false
+  vtbl[].vtbl.removeAt = miqt_exec_method_cQGraphicsLinearLayout_removeAt
+  vtbl[].vtbl.setGeometry = miqt_exec_method_cQGraphicsLinearLayout_setGeometry
+  vtbl[].vtbl.count = miqt_exec_method_cQGraphicsLinearLayout_count
+  vtbl[].vtbl.itemAt = miqt_exec_method_cQGraphicsLinearLayout_itemAt
+  vtbl[].vtbl.invalidate = miqt_exec_method_cQGraphicsLinearLayout_invalidate
+  vtbl[].vtbl.sizeHint = miqt_exec_method_cQGraphicsLinearLayout_sizeHint
+  vtbl[].vtbl.getContentsMargins = miqt_exec_method_cQGraphicsLinearLayout_getContentsMargins
+  vtbl[].vtbl.updateGeometry = miqt_exec_method_cQGraphicsLinearLayout_updateGeometry
+  vtbl[].vtbl.widgetEvent = miqt_exec_method_cQGraphicsLinearLayout_widgetEvent
+  if vtbl[].h != nil: delete(move(vtbl[]))
+  vtbl[].h = fcQGraphicsLinearLayout_new2(addr(vtbl[].vtbl), cint(orientation))
+  vtbl[].owned = true
+
+proc create*(T: type gen_qgraphicslinearlayout_types.QGraphicsLinearLayout,
+    parent: gen_qgraphicslayoutitem_types.QGraphicsLayoutItem,
+    vtbl: VirtualQGraphicsLinearLayout) =
+
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQGraphicsLinearLayoutVTable, _: ptr cQGraphicsLinearLayout) {.cdecl.} =
+    let vtbl = cast[ptr typeof(VirtualQGraphicsLinearLayout()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQGraphicsLinearLayout, vtbl)))
+    vtbl[].h = nil
+    vtbl[].owned = false
+  vtbl[].vtbl.removeAt = miqt_exec_method_cQGraphicsLinearLayout_removeAt
+  vtbl[].vtbl.setGeometry = miqt_exec_method_cQGraphicsLinearLayout_setGeometry
+  vtbl[].vtbl.count = miqt_exec_method_cQGraphicsLinearLayout_count
+  vtbl[].vtbl.itemAt = miqt_exec_method_cQGraphicsLinearLayout_itemAt
+  vtbl[].vtbl.invalidate = miqt_exec_method_cQGraphicsLinearLayout_invalidate
+  vtbl[].vtbl.sizeHint = miqt_exec_method_cQGraphicsLinearLayout_sizeHint
+  vtbl[].vtbl.getContentsMargins = miqt_exec_method_cQGraphicsLinearLayout_getContentsMargins
+  vtbl[].vtbl.updateGeometry = miqt_exec_method_cQGraphicsLinearLayout_updateGeometry
+  vtbl[].vtbl.widgetEvent = miqt_exec_method_cQGraphicsLinearLayout_widgetEvent
+  if vtbl[].h != nil: delete(move(vtbl[]))
+  vtbl[].h = fcQGraphicsLinearLayout_new3(addr(vtbl[].vtbl), parent.h)
+  vtbl[].owned = true
+
+proc create*(T: type gen_qgraphicslinearlayout_types.QGraphicsLinearLayout,
+    orientation: cint, parent: gen_qgraphicslayoutitem_types.QGraphicsLayoutItem,
+    vtbl: VirtualQGraphicsLinearLayout) =
+
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQGraphicsLinearLayoutVTable, _: ptr cQGraphicsLinearLayout) {.cdecl.} =
+    let vtbl = cast[ptr typeof(VirtualQGraphicsLinearLayout()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQGraphicsLinearLayout, vtbl)))
+    vtbl[].h = nil
+    vtbl[].owned = false
+  vtbl[].vtbl.removeAt = miqt_exec_method_cQGraphicsLinearLayout_removeAt
+  vtbl[].vtbl.setGeometry = miqt_exec_method_cQGraphicsLinearLayout_setGeometry
+  vtbl[].vtbl.count = miqt_exec_method_cQGraphicsLinearLayout_count
+  vtbl[].vtbl.itemAt = miqt_exec_method_cQGraphicsLinearLayout_itemAt
+  vtbl[].vtbl.invalidate = miqt_exec_method_cQGraphicsLinearLayout_invalidate
+  vtbl[].vtbl.sizeHint = miqt_exec_method_cQGraphicsLinearLayout_sizeHint
+  vtbl[].vtbl.getContentsMargins = miqt_exec_method_cQGraphicsLinearLayout_getContentsMargins
+  vtbl[].vtbl.updateGeometry = miqt_exec_method_cQGraphicsLinearLayout_updateGeometry
+  vtbl[].vtbl.widgetEvent = miqt_exec_method_cQGraphicsLinearLayout_widgetEvent
+  if vtbl[].h != nil: delete(move(vtbl[]))
+  vtbl[].h = fcQGraphicsLinearLayout_new4(addr(vtbl[].vtbl), cint(orientation), parent.h)
+  vtbl[].owned = true
+

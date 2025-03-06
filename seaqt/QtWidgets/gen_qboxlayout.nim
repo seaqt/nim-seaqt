@@ -30,7 +30,7 @@ func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
     else:
       copyMem(addr result[0], unsafeAddr v[0], v.len)
 
-const cflags = gorge("pkg-config --cflags Qt5Widgets")  & " -fPIC"
+const cflags = gorge("pkg-config --cflags Qt5Widgets") & " -fPIC"
 {.compile("gen_qboxlayout.cpp", cflags).}
 
 
@@ -121,7 +121,7 @@ proc fcQBoxLayout_insertStretch2(self: pointer, index: cint, stretch: cint): voi
 proc fcQBoxLayout_insertWidget3(self: pointer, index: cint, widget: pointer, stretch: cint): void {.importc: "QBoxLayout_insertWidget3".}
 proc fcQBoxLayout_insertWidget4(self: pointer, index: cint, widget: pointer, stretch: cint, alignment: cint): void {.importc: "QBoxLayout_insertWidget4".}
 proc fcQBoxLayout_insertLayout3(self: pointer, index: cint, layout: pointer, stretch: cint): void {.importc: "QBoxLayout_insertLayout3".}
-type cQBoxLayoutVTable = object
+type cQBoxLayoutVTable {.pure.} = object
   destructor*: proc(vtbl: ptr cQBoxLayoutVTable, self: ptr cQBoxLayout) {.cdecl, raises:[], gcsafe.}
   metaObject*: proc(vtbl, self: pointer, ): pointer {.cdecl, raises: [], gcsafe.}
   metacast*: proc(vtbl, self: pointer, param1: cstring): pointer {.cdecl, raises: [], gcsafe.}
@@ -195,7 +195,6 @@ proc fcQBoxLayout_protectedbase_isSignalConnected(self: pointer, signal: pointer
 proc fcQBoxLayout_new(vtbl: pointer, param1: cint): ptr cQBoxLayout {.importc: "QBoxLayout_new".}
 proc fcQBoxLayout_new2(vtbl: pointer, param1: cint, parent: pointer): ptr cQBoxLayout {.importc: "QBoxLayout_new2".}
 proc fcQBoxLayout_staticMetaObject(): pointer {.importc: "QBoxLayout_staticMetaObject".}
-proc fcQBoxLayout_delete(self: pointer) {.importc: "QBoxLayout_delete".}
 proc fcQHBoxLayout_metaObject(self: pointer, ): pointer {.importc: "QHBoxLayout_metaObject".}
 proc fcQHBoxLayout_metacast(self: pointer, param1: cstring): pointer {.importc: "QHBoxLayout_metacast".}
 proc fcQHBoxLayout_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QHBoxLayout_metacall".}
@@ -205,7 +204,7 @@ proc fcQHBoxLayout_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "Q
 proc fcQHBoxLayout_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QHBoxLayout_tr3".}
 proc fcQHBoxLayout_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QHBoxLayout_trUtf82".}
 proc fcQHBoxLayout_trUtf83(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QHBoxLayout_trUtf83".}
-type cQHBoxLayoutVTable = object
+type cQHBoxLayoutVTable {.pure.} = object
   destructor*: proc(vtbl: ptr cQHBoxLayoutVTable, self: ptr cQHBoxLayout) {.cdecl, raises:[], gcsafe.}
   metaObject*: proc(vtbl, self: pointer, ): pointer {.cdecl, raises: [], gcsafe.}
   metacast*: proc(vtbl, self: pointer, param1: cstring): pointer {.cdecl, raises: [], gcsafe.}
@@ -279,7 +278,6 @@ proc fcQHBoxLayout_protectedbase_isSignalConnected(self: pointer, signal: pointe
 proc fcQHBoxLayout_new(vtbl: pointer, parent: pointer): ptr cQHBoxLayout {.importc: "QHBoxLayout_new".}
 proc fcQHBoxLayout_new2(vtbl: pointer, ): ptr cQHBoxLayout {.importc: "QHBoxLayout_new2".}
 proc fcQHBoxLayout_staticMetaObject(): pointer {.importc: "QHBoxLayout_staticMetaObject".}
-proc fcQHBoxLayout_delete(self: pointer) {.importc: "QHBoxLayout_delete".}
 proc fcQVBoxLayout_metaObject(self: pointer, ): pointer {.importc: "QVBoxLayout_metaObject".}
 proc fcQVBoxLayout_metacast(self: pointer, param1: cstring): pointer {.importc: "QVBoxLayout_metacast".}
 proc fcQVBoxLayout_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QVBoxLayout_metacall".}
@@ -289,7 +287,7 @@ proc fcQVBoxLayout_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "Q
 proc fcQVBoxLayout_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QVBoxLayout_tr3".}
 proc fcQVBoxLayout_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QVBoxLayout_trUtf82".}
 proc fcQVBoxLayout_trUtf83(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QVBoxLayout_trUtf83".}
-type cQVBoxLayoutVTable = object
+type cQVBoxLayoutVTable {.pure.} = object
   destructor*: proc(vtbl: ptr cQVBoxLayoutVTable, self: ptr cQVBoxLayout) {.cdecl, raises:[], gcsafe.}
   metaObject*: proc(vtbl, self: pointer, ): pointer {.cdecl, raises: [], gcsafe.}
   metacast*: proc(vtbl, self: pointer, param1: cstring): pointer {.cdecl, raises: [], gcsafe.}
@@ -363,10 +361,9 @@ proc fcQVBoxLayout_protectedbase_isSignalConnected(self: pointer, signal: pointe
 proc fcQVBoxLayout_new(vtbl: pointer, parent: pointer): ptr cQVBoxLayout {.importc: "QVBoxLayout_new".}
 proc fcQVBoxLayout_new2(vtbl: pointer, ): ptr cQVBoxLayout {.importc: "QVBoxLayout_new2".}
 proc fcQVBoxLayout_staticMetaObject(): pointer {.importc: "QVBoxLayout_staticMetaObject".}
-proc fcQVBoxLayout_delete(self: pointer) {.importc: "QVBoxLayout_delete".}
 
 proc metaObject*(self: gen_qboxlayout_types.QBoxLayout, ): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQBoxLayout_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQBoxLayout_metaObject(self.h), owned: false)
 
 proc metacast*(self: gen_qboxlayout_types.QBoxLayout, param1: cstring): pointer =
   fcQBoxLayout_metacast(self.h, param1)
@@ -450,13 +447,13 @@ proc stretch*(self: gen_qboxlayout_types.QBoxLayout, index: cint): cint =
   fcQBoxLayout_stretch(self.h, index)
 
 proc sizeHint*(self: gen_qboxlayout_types.QBoxLayout, ): gen_qsize_types.QSize =
-  gen_qsize_types.QSize(h: fcQBoxLayout_sizeHint(self.h))
+  gen_qsize_types.QSize(h: fcQBoxLayout_sizeHint(self.h), owned: true)
 
 proc minimumSize*(self: gen_qboxlayout_types.QBoxLayout, ): gen_qsize_types.QSize =
-  gen_qsize_types.QSize(h: fcQBoxLayout_minimumSize(self.h))
+  gen_qsize_types.QSize(h: fcQBoxLayout_minimumSize(self.h), owned: true)
 
 proc maximumSize*(self: gen_qboxlayout_types.QBoxLayout, ): gen_qsize_types.QSize =
-  gen_qsize_types.QSize(h: fcQBoxLayout_maximumSize(self.h))
+  gen_qsize_types.QSize(h: fcQBoxLayout_maximumSize(self.h), owned: true)
 
 proc hasHeightForWidth*(self: gen_qboxlayout_types.QBoxLayout, ): bool =
   fcQBoxLayout_hasHeightForWidth(self.h)
@@ -474,10 +471,10 @@ proc invalidate*(self: gen_qboxlayout_types.QBoxLayout, ): void =
   fcQBoxLayout_invalidate(self.h)
 
 proc itemAt*(self: gen_qboxlayout_types.QBoxLayout, param1: cint): gen_qlayoutitem_types.QLayoutItem =
-  gen_qlayoutitem_types.QLayoutItem(h: fcQBoxLayout_itemAt(self.h, param1))
+  gen_qlayoutitem_types.QLayoutItem(h: fcQBoxLayout_itemAt(self.h, param1), owned: false)
 
 proc takeAt*(self: gen_qboxlayout_types.QBoxLayout, param1: cint): gen_qlayoutitem_types.QLayoutItem =
-  gen_qlayoutitem_types.QLayoutItem(h: fcQBoxLayout_takeAt(self.h, param1))
+  gen_qlayoutitem_types.QLayoutItem(h: fcQBoxLayout_takeAt(self.h, param1), owned: false)
 
 proc count*(self: gen_qboxlayout_types.QBoxLayout, ): cint =
   fcQBoxLayout_count(self.h)
@@ -563,7 +560,7 @@ type QBoxLayoutconnectNotifyProc* = proc(self: QBoxLayout, signal: gen_qmetaobje
 type QBoxLayoutdisconnectNotifyProc* = proc(self: QBoxLayout, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
 type QBoxLayoutwidgetProc* = proc(self: QBoxLayout): gen_qwidget_types.QWidget {.raises: [], gcsafe.}
 type QBoxLayoutspacerItemProc* = proc(self: QBoxLayout): gen_qlayoutitem_types.QSpacerItem {.raises: [], gcsafe.}
-type QBoxLayoutVTable* = object
+type QBoxLayoutVTable* {.inheritable, pure.} = object
   vtbl: cQBoxLayoutVTable
   metaObject*: QBoxLayoutmetaObjectProc
   metacast*: QBoxLayoutmetacastProc
@@ -596,13 +593,16 @@ type QBoxLayoutVTable* = object
   widget*: QBoxLayoutwidgetProc
   spacerItem*: QBoxLayoutspacerItemProc
 proc QBoxLayoutmetaObject*(self: gen_qboxlayout_types.QBoxLayout, ): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQBoxLayout_virtualbase_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQBoxLayout_virtualbase_metaObject(self.h), owned: false)
 
 proc miqt_exec_callback_cQBoxLayout_metaObject(vtbl: pointer, self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QBoxLayoutVTable](vtbl)
   let self = QBoxLayout(h: self)
   var virtualReturn = vtbl[].metaObject(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QBoxLayoutmetacast*(self: gen_qboxlayout_types.QBoxLayout, param1: cstring): pointer =
   fcQBoxLayout_virtualbase_metacast(self.h, param1)
@@ -632,35 +632,44 @@ proc QBoxLayoutaddItem*(self: gen_qboxlayout_types.QBoxLayout, param1: gen_qlayo
 proc miqt_exec_callback_cQBoxLayout_addItem(vtbl: pointer, self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QBoxLayoutVTable](vtbl)
   let self = QBoxLayout(h: self)
-  let slotval1 = gen_qlayoutitem_types.QLayoutItem(h: param1)
+  let slotval1 = gen_qlayoutitem_types.QLayoutItem(h: param1, owned: false)
   vtbl[].addItem(self, slotval1)
 
 proc QBoxLayoutsizeHint*(self: gen_qboxlayout_types.QBoxLayout, ): gen_qsize_types.QSize =
-  gen_qsize_types.QSize(h: fcQBoxLayout_virtualbase_sizeHint(self.h))
+  gen_qsize_types.QSize(h: fcQBoxLayout_virtualbase_sizeHint(self.h), owned: true)
 
 proc miqt_exec_callback_cQBoxLayout_sizeHint(vtbl: pointer, self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QBoxLayoutVTable](vtbl)
   let self = QBoxLayout(h: self)
   var virtualReturn = vtbl[].sizeHint(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QBoxLayoutminimumSize*(self: gen_qboxlayout_types.QBoxLayout, ): gen_qsize_types.QSize =
-  gen_qsize_types.QSize(h: fcQBoxLayout_virtualbase_minimumSize(self.h))
+  gen_qsize_types.QSize(h: fcQBoxLayout_virtualbase_minimumSize(self.h), owned: true)
 
 proc miqt_exec_callback_cQBoxLayout_minimumSize(vtbl: pointer, self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QBoxLayoutVTable](vtbl)
   let self = QBoxLayout(h: self)
   var virtualReturn = vtbl[].minimumSize(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QBoxLayoutmaximumSize*(self: gen_qboxlayout_types.QBoxLayout, ): gen_qsize_types.QSize =
-  gen_qsize_types.QSize(h: fcQBoxLayout_virtualbase_maximumSize(self.h))
+  gen_qsize_types.QSize(h: fcQBoxLayout_virtualbase_maximumSize(self.h), owned: true)
 
 proc miqt_exec_callback_cQBoxLayout_maximumSize(vtbl: pointer, self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QBoxLayoutVTable](vtbl)
   let self = QBoxLayout(h: self)
   var virtualReturn = vtbl[].maximumSize(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QBoxLayouthasHeightForWidth*(self: gen_qboxlayout_types.QBoxLayout, ): bool =
   fcQBoxLayout_virtualbase_hasHeightForWidth(self.h)
@@ -709,24 +718,30 @@ proc miqt_exec_callback_cQBoxLayout_invalidate(vtbl: pointer, self: pointer): vo
   vtbl[].invalidate(self)
 
 proc QBoxLayoutitemAt*(self: gen_qboxlayout_types.QBoxLayout, param1: cint): gen_qlayoutitem_types.QLayoutItem =
-  gen_qlayoutitem_types.QLayoutItem(h: fcQBoxLayout_virtualbase_itemAt(self.h, param1))
+  gen_qlayoutitem_types.QLayoutItem(h: fcQBoxLayout_virtualbase_itemAt(self.h, param1), owned: false)
 
 proc miqt_exec_callback_cQBoxLayout_itemAt(vtbl: pointer, self: pointer, param1: cint): pointer {.cdecl.} =
   let vtbl = cast[ptr QBoxLayoutVTable](vtbl)
   let self = QBoxLayout(h: self)
   let slotval1 = param1
   var virtualReturn = vtbl[].itemAt(self, slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QBoxLayouttakeAt*(self: gen_qboxlayout_types.QBoxLayout, param1: cint): gen_qlayoutitem_types.QLayoutItem =
-  gen_qlayoutitem_types.QLayoutItem(h: fcQBoxLayout_virtualbase_takeAt(self.h, param1))
+  gen_qlayoutitem_types.QLayoutItem(h: fcQBoxLayout_virtualbase_takeAt(self.h, param1), owned: false)
 
 proc miqt_exec_callback_cQBoxLayout_takeAt(vtbl: pointer, self: pointer, param1: cint): pointer {.cdecl.} =
   let vtbl = cast[ptr QBoxLayoutVTable](vtbl)
   let self = QBoxLayout(h: self)
   let slotval1 = param1
   var virtualReturn = vtbl[].takeAt(self, slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QBoxLayoutcount*(self: gen_qboxlayout_types.QBoxLayout, ): cint =
   fcQBoxLayout_virtualbase_count(self.h)
@@ -743,17 +758,20 @@ proc QBoxLayoutsetGeometry*(self: gen_qboxlayout_types.QBoxLayout, geometry: gen
 proc miqt_exec_callback_cQBoxLayout_setGeometry(vtbl: pointer, self: pointer, geometry: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QBoxLayoutVTable](vtbl)
   let self = QBoxLayout(h: self)
-  let slotval1 = gen_qrect_types.QRect(h: geometry)
+  let slotval1 = gen_qrect_types.QRect(h: geometry, owned: false)
   vtbl[].setGeometry(self, slotval1)
 
 proc QBoxLayoutgeometry*(self: gen_qboxlayout_types.QBoxLayout, ): gen_qrect_types.QRect =
-  gen_qrect_types.QRect(h: fcQBoxLayout_virtualbase_geometry(self.h))
+  gen_qrect_types.QRect(h: fcQBoxLayout_virtualbase_geometry(self.h), owned: true)
 
 proc miqt_exec_callback_cQBoxLayout_geometry(vtbl: pointer, self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QBoxLayoutVTable](vtbl)
   let self = QBoxLayout(h: self)
   var virtualReturn = vtbl[].geometry(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QBoxLayoutindexOf*(self: gen_qboxlayout_types.QBoxLayout, param1: gen_qwidget_types.QWidget): cint =
   fcQBoxLayout_virtualbase_indexOf(self.h, param1.h)
@@ -761,7 +779,7 @@ proc QBoxLayoutindexOf*(self: gen_qboxlayout_types.QBoxLayout, param1: gen_qwidg
 proc miqt_exec_callback_cQBoxLayout_indexOf(vtbl: pointer, self: pointer, param1: pointer): cint {.cdecl.} =
   let vtbl = cast[ptr QBoxLayoutVTable](vtbl)
   let self = QBoxLayout(h: self)
-  let slotval1 = gen_qwidget_types.QWidget(h: param1)
+  let slotval1 = gen_qwidget_types.QWidget(h: param1, owned: false)
   var virtualReturn = vtbl[].indexOf(self, slotval1)
   virtualReturn
 
@@ -784,13 +802,16 @@ proc miqt_exec_callback_cQBoxLayout_controlTypes(vtbl: pointer, self: pointer): 
   cint(virtualReturn)
 
 proc QBoxLayoutlayout*(self: gen_qboxlayout_types.QBoxLayout, ): gen_qlayout_types.QLayout =
-  gen_qlayout_types.QLayout(h: fcQBoxLayout_virtualbase_layout(self.h))
+  gen_qlayout_types.QLayout(h: fcQBoxLayout_virtualbase_layout(self.h), owned: false)
 
 proc miqt_exec_callback_cQBoxLayout_layout(vtbl: pointer, self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QBoxLayoutVTable](vtbl)
   let self = QBoxLayout(h: self)
   var virtualReturn = vtbl[].layout(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QBoxLayoutchildEvent*(self: gen_qboxlayout_types.QBoxLayout, e: gen_qcoreevent_types.QChildEvent): void =
   fcQBoxLayout_virtualbase_childEvent(self.h, e.h)
@@ -798,7 +819,7 @@ proc QBoxLayoutchildEvent*(self: gen_qboxlayout_types.QBoxLayout, e: gen_qcoreev
 proc miqt_exec_callback_cQBoxLayout_childEvent(vtbl: pointer, self: pointer, e: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QBoxLayoutVTable](vtbl)
   let self = QBoxLayout(h: self)
-  let slotval1 = gen_qcoreevent_types.QChildEvent(h: e)
+  let slotval1 = gen_qcoreevent_types.QChildEvent(h: e, owned: false)
   vtbl[].childEvent(self, slotval1)
 
 proc QBoxLayoutevent*(self: gen_qboxlayout_types.QBoxLayout, event: gen_qcoreevent_types.QEvent): bool =
@@ -807,7 +828,7 @@ proc QBoxLayoutevent*(self: gen_qboxlayout_types.QBoxLayout, event: gen_qcoreeve
 proc miqt_exec_callback_cQBoxLayout_event(vtbl: pointer, self: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QBoxLayoutVTable](vtbl)
   let self = QBoxLayout(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].event(self, slotval1)
   virtualReturn
 
@@ -817,8 +838,8 @@ proc QBoxLayouteventFilter*(self: gen_qboxlayout_types.QBoxLayout, watched: gen_
 proc miqt_exec_callback_cQBoxLayout_eventFilter(vtbl: pointer, self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QBoxLayoutVTable](vtbl)
   let self = QBoxLayout(h: self)
-  let slotval1 = gen_qobject_types.QObject(h: watched)
-  let slotval2 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].eventFilter(self, slotval1, slotval2)
   virtualReturn
 
@@ -828,7 +849,7 @@ proc QBoxLayouttimerEvent*(self: gen_qboxlayout_types.QBoxLayout, event: gen_qco
 proc miqt_exec_callback_cQBoxLayout_timerEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QBoxLayoutVTable](vtbl)
   let self = QBoxLayout(h: self)
-  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   vtbl[].timerEvent(self, slotval1)
 
 proc QBoxLayoutcustomEvent*(self: gen_qboxlayout_types.QBoxLayout, event: gen_qcoreevent_types.QEvent): void =
@@ -837,7 +858,7 @@ proc QBoxLayoutcustomEvent*(self: gen_qboxlayout_types.QBoxLayout, event: gen_qc
 proc miqt_exec_callback_cQBoxLayout_customEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QBoxLayoutVTable](vtbl)
   let self = QBoxLayout(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].customEvent(self, slotval1)
 
 proc QBoxLayoutconnectNotify*(self: gen_qboxlayout_types.QBoxLayout, signal: gen_qmetaobject_types.QMetaMethod): void =
@@ -846,7 +867,7 @@ proc QBoxLayoutconnectNotify*(self: gen_qboxlayout_types.QBoxLayout, signal: gen
 proc miqt_exec_callback_cQBoxLayout_connectNotify(vtbl: pointer, self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QBoxLayoutVTable](vtbl)
   let self = QBoxLayout(h: self)
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].connectNotify(self, slotval1)
 
 proc QBoxLayoutdisconnectNotify*(self: gen_qboxlayout_types.QBoxLayout, signal: gen_qmetaobject_types.QMetaMethod): void =
@@ -855,26 +876,285 @@ proc QBoxLayoutdisconnectNotify*(self: gen_qboxlayout_types.QBoxLayout, signal: 
 proc miqt_exec_callback_cQBoxLayout_disconnectNotify(vtbl: pointer, self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QBoxLayoutVTable](vtbl)
   let self = QBoxLayout(h: self)
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].disconnectNotify(self, slotval1)
 
 proc QBoxLayoutwidget*(self: gen_qboxlayout_types.QBoxLayout, ): gen_qwidget_types.QWidget =
-  gen_qwidget_types.QWidget(h: fcQBoxLayout_virtualbase_widget(self.h))
+  gen_qwidget_types.QWidget(h: fcQBoxLayout_virtualbase_widget(self.h), owned: false)
 
 proc miqt_exec_callback_cQBoxLayout_widget(vtbl: pointer, self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QBoxLayoutVTable](vtbl)
   let self = QBoxLayout(h: self)
   var virtualReturn = vtbl[].widget(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QBoxLayoutspacerItem*(self: gen_qboxlayout_types.QBoxLayout, ): gen_qlayoutitem_types.QSpacerItem =
-  gen_qlayoutitem_types.QSpacerItem(h: fcQBoxLayout_virtualbase_spacerItem(self.h))
+  gen_qlayoutitem_types.QSpacerItem(h: fcQBoxLayout_virtualbase_spacerItem(self.h), owned: false)
 
 proc miqt_exec_callback_cQBoxLayout_spacerItem(vtbl: pointer, self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QBoxLayoutVTable](vtbl)
   let self = QBoxLayout(h: self)
   var virtualReturn = vtbl[].spacerItem(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
+
+type VirtualQBoxLayout* {.inheritable.} = ref object of QBoxLayout
+  vtbl*: cQBoxLayoutVTable
+method metaObject*(self: VirtualQBoxLayout, ): gen_qobjectdefs_types.QMetaObject {.base.} =
+  QBoxLayoutmetaObject(self[])
+proc miqt_exec_method_cQBoxLayout_metaObject(vtbl: pointer, inst: pointer): pointer {.cdecl.} =
+  let vtbl = cast[VirtualQBoxLayout](cast[uint](vtbl) - uint(offsetOf(VirtualQBoxLayout, vtbl)))
+  var virtualReturn = vtbl.metaObject()
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
+
+method metacast*(self: VirtualQBoxLayout, param1: cstring): pointer {.base.} =
+  QBoxLayoutmetacast(self[], param1)
+proc miqt_exec_method_cQBoxLayout_metacast(vtbl: pointer, inst: pointer, param1: cstring): pointer {.cdecl.} =
+  let vtbl = cast[VirtualQBoxLayout](cast[uint](vtbl) - uint(offsetOf(VirtualQBoxLayout, vtbl)))
+  let slotval1 = (param1)
+  var virtualReturn = vtbl.metacast(slotval1)
+  virtualReturn
+
+method metacall*(self: VirtualQBoxLayout, param1: cint, param2: cint, param3: pointer): cint {.base.} =
+  QBoxLayoutmetacall(self[], param1, param2, param3)
+proc miqt_exec_method_cQBoxLayout_metacall(vtbl: pointer, inst: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
+  let vtbl = cast[VirtualQBoxLayout](cast[uint](vtbl) - uint(offsetOf(VirtualQBoxLayout, vtbl)))
+  let slotval1 = cint(param1)
+  let slotval2 = param2
+  let slotval3 = param3
+  var virtualReturn = vtbl.metacall(slotval1, slotval2, slotval3)
+  virtualReturn
+
+method addItem*(self: VirtualQBoxLayout, param1: gen_qlayoutitem_types.QLayoutItem): void {.base.} =
+  QBoxLayoutaddItem(self[], param1)
+proc miqt_exec_method_cQBoxLayout_addItem(vtbl: pointer, inst: pointer, param1: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQBoxLayout](cast[uint](vtbl) - uint(offsetOf(VirtualQBoxLayout, vtbl)))
+  let slotval1 = gen_qlayoutitem_types.QLayoutItem(h: param1, owned: false)
+  vtbl.addItem(slotval1)
+
+method sizeHint*(self: VirtualQBoxLayout, ): gen_qsize_types.QSize {.base.} =
+  QBoxLayoutsizeHint(self[])
+proc miqt_exec_method_cQBoxLayout_sizeHint(vtbl: pointer, inst: pointer): pointer {.cdecl.} =
+  let vtbl = cast[VirtualQBoxLayout](cast[uint](vtbl) - uint(offsetOf(VirtualQBoxLayout, vtbl)))
+  var virtualReturn = vtbl.sizeHint()
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
+
+method minimumSize*(self: VirtualQBoxLayout, ): gen_qsize_types.QSize {.base.} =
+  QBoxLayoutminimumSize(self[])
+proc miqt_exec_method_cQBoxLayout_minimumSize(vtbl: pointer, inst: pointer): pointer {.cdecl.} =
+  let vtbl = cast[VirtualQBoxLayout](cast[uint](vtbl) - uint(offsetOf(VirtualQBoxLayout, vtbl)))
+  var virtualReturn = vtbl.minimumSize()
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
+
+method maximumSize*(self: VirtualQBoxLayout, ): gen_qsize_types.QSize {.base.} =
+  QBoxLayoutmaximumSize(self[])
+proc miqt_exec_method_cQBoxLayout_maximumSize(vtbl: pointer, inst: pointer): pointer {.cdecl.} =
+  let vtbl = cast[VirtualQBoxLayout](cast[uint](vtbl) - uint(offsetOf(VirtualQBoxLayout, vtbl)))
+  var virtualReturn = vtbl.maximumSize()
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
+
+method hasHeightForWidth*(self: VirtualQBoxLayout, ): bool {.base.} =
+  QBoxLayouthasHeightForWidth(self[])
+proc miqt_exec_method_cQBoxLayout_hasHeightForWidth(vtbl: pointer, inst: pointer): bool {.cdecl.} =
+  let vtbl = cast[VirtualQBoxLayout](cast[uint](vtbl) - uint(offsetOf(VirtualQBoxLayout, vtbl)))
+  var virtualReturn = vtbl.hasHeightForWidth()
+  virtualReturn
+
+method heightForWidth*(self: VirtualQBoxLayout, param1: cint): cint {.base.} =
+  QBoxLayoutheightForWidth(self[], param1)
+proc miqt_exec_method_cQBoxLayout_heightForWidth(vtbl: pointer, inst: pointer, param1: cint): cint {.cdecl.} =
+  let vtbl = cast[VirtualQBoxLayout](cast[uint](vtbl) - uint(offsetOf(VirtualQBoxLayout, vtbl)))
+  let slotval1 = param1
+  var virtualReturn = vtbl.heightForWidth(slotval1)
+  virtualReturn
+
+method minimumHeightForWidth*(self: VirtualQBoxLayout, param1: cint): cint {.base.} =
+  QBoxLayoutminimumHeightForWidth(self[], param1)
+proc miqt_exec_method_cQBoxLayout_minimumHeightForWidth(vtbl: pointer, inst: pointer, param1: cint): cint {.cdecl.} =
+  let vtbl = cast[VirtualQBoxLayout](cast[uint](vtbl) - uint(offsetOf(VirtualQBoxLayout, vtbl)))
+  let slotval1 = param1
+  var virtualReturn = vtbl.minimumHeightForWidth(slotval1)
+  virtualReturn
+
+method expandingDirections*(self: VirtualQBoxLayout, ): cint {.base.} =
+  QBoxLayoutexpandingDirections(self[])
+proc miqt_exec_method_cQBoxLayout_expandingDirections(vtbl: pointer, inst: pointer): cint {.cdecl.} =
+  let vtbl = cast[VirtualQBoxLayout](cast[uint](vtbl) - uint(offsetOf(VirtualQBoxLayout, vtbl)))
+  var virtualReturn = vtbl.expandingDirections()
+  cint(virtualReturn)
+
+method invalidate*(self: VirtualQBoxLayout, ): void {.base.} =
+  QBoxLayoutinvalidate(self[])
+proc miqt_exec_method_cQBoxLayout_invalidate(vtbl: pointer, inst: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQBoxLayout](cast[uint](vtbl) - uint(offsetOf(VirtualQBoxLayout, vtbl)))
+  vtbl.invalidate()
+
+method itemAt*(self: VirtualQBoxLayout, param1: cint): gen_qlayoutitem_types.QLayoutItem {.base.} =
+  QBoxLayoutitemAt(self[], param1)
+proc miqt_exec_method_cQBoxLayout_itemAt(vtbl: pointer, inst: pointer, param1: cint): pointer {.cdecl.} =
+  let vtbl = cast[VirtualQBoxLayout](cast[uint](vtbl) - uint(offsetOf(VirtualQBoxLayout, vtbl)))
+  let slotval1 = param1
+  var virtualReturn = vtbl.itemAt(slotval1)
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
+
+method takeAt*(self: VirtualQBoxLayout, param1: cint): gen_qlayoutitem_types.QLayoutItem {.base.} =
+  QBoxLayouttakeAt(self[], param1)
+proc miqt_exec_method_cQBoxLayout_takeAt(vtbl: pointer, inst: pointer, param1: cint): pointer {.cdecl.} =
+  let vtbl = cast[VirtualQBoxLayout](cast[uint](vtbl) - uint(offsetOf(VirtualQBoxLayout, vtbl)))
+  let slotval1 = param1
+  var virtualReturn = vtbl.takeAt(slotval1)
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
+
+method count*(self: VirtualQBoxLayout, ): cint {.base.} =
+  QBoxLayoutcount(self[])
+proc miqt_exec_method_cQBoxLayout_count(vtbl: pointer, inst: pointer): cint {.cdecl.} =
+  let vtbl = cast[VirtualQBoxLayout](cast[uint](vtbl) - uint(offsetOf(VirtualQBoxLayout, vtbl)))
+  var virtualReturn = vtbl.count()
+  virtualReturn
+
+method setGeometry*(self: VirtualQBoxLayout, geometry: gen_qrect_types.QRect): void {.base.} =
+  QBoxLayoutsetGeometry(self[], geometry)
+proc miqt_exec_method_cQBoxLayout_setGeometry(vtbl: pointer, inst: pointer, geometry: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQBoxLayout](cast[uint](vtbl) - uint(offsetOf(VirtualQBoxLayout, vtbl)))
+  let slotval1 = gen_qrect_types.QRect(h: geometry, owned: false)
+  vtbl.setGeometry(slotval1)
+
+method geometry*(self: VirtualQBoxLayout, ): gen_qrect_types.QRect {.base.} =
+  QBoxLayoutgeometry(self[])
+proc miqt_exec_method_cQBoxLayout_geometry(vtbl: pointer, inst: pointer): pointer {.cdecl.} =
+  let vtbl = cast[VirtualQBoxLayout](cast[uint](vtbl) - uint(offsetOf(VirtualQBoxLayout, vtbl)))
+  var virtualReturn = vtbl.geometry()
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
+
+method indexOf*(self: VirtualQBoxLayout, param1: gen_qwidget_types.QWidget): cint {.base.} =
+  QBoxLayoutindexOf(self[], param1)
+proc miqt_exec_method_cQBoxLayout_indexOf(vtbl: pointer, inst: pointer, param1: pointer): cint {.cdecl.} =
+  let vtbl = cast[VirtualQBoxLayout](cast[uint](vtbl) - uint(offsetOf(VirtualQBoxLayout, vtbl)))
+  let slotval1 = gen_qwidget_types.QWidget(h: param1, owned: false)
+  var virtualReturn = vtbl.indexOf(slotval1)
+  virtualReturn
+
+method isEmpty*(self: VirtualQBoxLayout, ): bool {.base.} =
+  QBoxLayoutisEmpty(self[])
+proc miqt_exec_method_cQBoxLayout_isEmpty(vtbl: pointer, inst: pointer): bool {.cdecl.} =
+  let vtbl = cast[VirtualQBoxLayout](cast[uint](vtbl) - uint(offsetOf(VirtualQBoxLayout, vtbl)))
+  var virtualReturn = vtbl.isEmpty()
+  virtualReturn
+
+method controlTypes*(self: VirtualQBoxLayout, ): cint {.base.} =
+  QBoxLayoutcontrolTypes(self[])
+proc miqt_exec_method_cQBoxLayout_controlTypes(vtbl: pointer, inst: pointer): cint {.cdecl.} =
+  let vtbl = cast[VirtualQBoxLayout](cast[uint](vtbl) - uint(offsetOf(VirtualQBoxLayout, vtbl)))
+  var virtualReturn = vtbl.controlTypes()
+  cint(virtualReturn)
+
+method layout*(self: VirtualQBoxLayout, ): gen_qlayout_types.QLayout {.base.} =
+  QBoxLayoutlayout(self[])
+proc miqt_exec_method_cQBoxLayout_layout(vtbl: pointer, inst: pointer): pointer {.cdecl.} =
+  let vtbl = cast[VirtualQBoxLayout](cast[uint](vtbl) - uint(offsetOf(VirtualQBoxLayout, vtbl)))
+  var virtualReturn = vtbl.layout()
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
+
+method childEvent*(self: VirtualQBoxLayout, e: gen_qcoreevent_types.QChildEvent): void {.base.} =
+  QBoxLayoutchildEvent(self[], e)
+proc miqt_exec_method_cQBoxLayout_childEvent(vtbl: pointer, inst: pointer, e: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQBoxLayout](cast[uint](vtbl) - uint(offsetOf(VirtualQBoxLayout, vtbl)))
+  let slotval1 = gen_qcoreevent_types.QChildEvent(h: e, owned: false)
+  vtbl.childEvent(slotval1)
+
+method event*(self: VirtualQBoxLayout, event: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QBoxLayoutevent(self[], event)
+proc miqt_exec_method_cQBoxLayout_event(vtbl: pointer, inst: pointer, event: pointer): bool {.cdecl.} =
+  let vtbl = cast[VirtualQBoxLayout](cast[uint](vtbl) - uint(offsetOf(VirtualQBoxLayout, vtbl)))
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
+  var virtualReturn = vtbl.event(slotval1)
+  virtualReturn
+
+method eventFilter*(self: VirtualQBoxLayout, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QBoxLayouteventFilter(self[], watched, event)
+proc miqt_exec_method_cQBoxLayout_eventFilter(vtbl: pointer, inst: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
+  let vtbl = cast[VirtualQBoxLayout](cast[uint](vtbl) - uint(offsetOf(VirtualQBoxLayout, vtbl)))
+  let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
+  var virtualReturn = vtbl.eventFilter(slotval1, slotval2)
+  virtualReturn
+
+method timerEvent*(self: VirtualQBoxLayout, event: gen_qcoreevent_types.QTimerEvent): void {.base.} =
+  QBoxLayouttimerEvent(self[], event)
+proc miqt_exec_method_cQBoxLayout_timerEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQBoxLayout](cast[uint](vtbl) - uint(offsetOf(VirtualQBoxLayout, vtbl)))
+  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
+  vtbl.timerEvent(slotval1)
+
+method customEvent*(self: VirtualQBoxLayout, event: gen_qcoreevent_types.QEvent): void {.base.} =
+  QBoxLayoutcustomEvent(self[], event)
+proc miqt_exec_method_cQBoxLayout_customEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQBoxLayout](cast[uint](vtbl) - uint(offsetOf(VirtualQBoxLayout, vtbl)))
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
+  vtbl.customEvent(slotval1)
+
+method connectNotify*(self: VirtualQBoxLayout, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QBoxLayoutconnectNotify(self[], signal)
+proc miqt_exec_method_cQBoxLayout_connectNotify(vtbl: pointer, inst: pointer, signal: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQBoxLayout](cast[uint](vtbl) - uint(offsetOf(VirtualQBoxLayout, vtbl)))
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
+  vtbl.connectNotify(slotval1)
+
+method disconnectNotify*(self: VirtualQBoxLayout, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QBoxLayoutdisconnectNotify(self[], signal)
+proc miqt_exec_method_cQBoxLayout_disconnectNotify(vtbl: pointer, inst: pointer, signal: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQBoxLayout](cast[uint](vtbl) - uint(offsetOf(VirtualQBoxLayout, vtbl)))
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
+  vtbl.disconnectNotify(slotval1)
+
+method widget*(self: VirtualQBoxLayout, ): gen_qwidget_types.QWidget {.base.} =
+  QBoxLayoutwidget(self[])
+proc miqt_exec_method_cQBoxLayout_widget(vtbl: pointer, inst: pointer): pointer {.cdecl.} =
+  let vtbl = cast[VirtualQBoxLayout](cast[uint](vtbl) - uint(offsetOf(VirtualQBoxLayout, vtbl)))
+  var virtualReturn = vtbl.widget()
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
+
+method spacerItem*(self: VirtualQBoxLayout, ): gen_qlayoutitem_types.QSpacerItem {.base.} =
+  QBoxLayoutspacerItem(self[])
+proc miqt_exec_method_cQBoxLayout_spacerItem(vtbl: pointer, inst: pointer): pointer {.cdecl.} =
+  let vtbl = cast[VirtualQBoxLayout](cast[uint](vtbl) - uint(offsetOf(VirtualQBoxLayout, vtbl)))
+  var virtualReturn = vtbl.spacerItem()
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc widgetEvent*(self: gen_qboxlayout_types.QBoxLayout, param1: gen_qcoreevent_types.QEvent): void =
   fcQBoxLayout_protectedbase_widgetEvent(self.h, param1.h)
@@ -889,10 +1169,10 @@ proc adoptLayout*(self: gen_qboxlayout_types.QBoxLayout, layout: gen_qlayout_typ
   fcQBoxLayout_protectedbase_adoptLayout(self.h, layout.h)
 
 proc alignmentRect*(self: gen_qboxlayout_types.QBoxLayout, param1: gen_qrect_types.QRect): gen_qrect_types.QRect =
-  gen_qrect_types.QRect(h: fcQBoxLayout_protectedbase_alignmentRect(self.h, param1.h))
+  gen_qrect_types.QRect(h: fcQBoxLayout_protectedbase_alignmentRect(self.h, param1.h), owned: true)
 
 proc sender*(self: gen_qboxlayout_types.QBoxLayout, ): gen_qobject_types.QObject =
-  gen_qobject_types.QObject(h: fcQBoxLayout_protectedbase_sender(self.h))
+  gen_qobject_types.QObject(h: fcQBoxLayout_protectedbase_sender(self.h), owned: false)
 
 proc senderSignalIndex*(self: gen_qboxlayout_types.QBoxLayout, ): cint =
   fcQBoxLayout_protectedbase_senderSignalIndex(self.h)
@@ -908,147 +1188,229 @@ proc create*(T: type gen_qboxlayout_types.QBoxLayout,
     vtbl: ref QBoxLayoutVTable = nil): gen_qboxlayout_types.QBoxLayout =
   let vtbl = if vtbl == nil: new QBoxLayoutVTable else: vtbl
   GC_ref(vtbl)
-  vtbl.vtbl.destructor = proc(vtbl: ptr cQBoxLayoutVTable, _: ptr cQBoxLayout) {.cdecl.} =
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQBoxLayoutVTable, _: ptr cQBoxLayout) {.cdecl.} =
     let vtbl = cast[ref QBoxLayoutVTable](vtbl)
     GC_unref(vtbl)
-  if not isNil(vtbl.metaObject):
+  if not isNil(vtbl[].metaObject):
     vtbl[].vtbl.metaObject = miqt_exec_callback_cQBoxLayout_metaObject
-  if not isNil(vtbl.metacast):
+  if not isNil(vtbl[].metacast):
     vtbl[].vtbl.metacast = miqt_exec_callback_cQBoxLayout_metacast
-  if not isNil(vtbl.metacall):
+  if not isNil(vtbl[].metacall):
     vtbl[].vtbl.metacall = miqt_exec_callback_cQBoxLayout_metacall
-  if not isNil(vtbl.addItem):
+  if not isNil(vtbl[].addItem):
     vtbl[].vtbl.addItem = miqt_exec_callback_cQBoxLayout_addItem
-  if not isNil(vtbl.sizeHint):
+  if not isNil(vtbl[].sizeHint):
     vtbl[].vtbl.sizeHint = miqt_exec_callback_cQBoxLayout_sizeHint
-  if not isNil(vtbl.minimumSize):
+  if not isNil(vtbl[].minimumSize):
     vtbl[].vtbl.minimumSize = miqt_exec_callback_cQBoxLayout_minimumSize
-  if not isNil(vtbl.maximumSize):
+  if not isNil(vtbl[].maximumSize):
     vtbl[].vtbl.maximumSize = miqt_exec_callback_cQBoxLayout_maximumSize
-  if not isNil(vtbl.hasHeightForWidth):
+  if not isNil(vtbl[].hasHeightForWidth):
     vtbl[].vtbl.hasHeightForWidth = miqt_exec_callback_cQBoxLayout_hasHeightForWidth
-  if not isNil(vtbl.heightForWidth):
+  if not isNil(vtbl[].heightForWidth):
     vtbl[].vtbl.heightForWidth = miqt_exec_callback_cQBoxLayout_heightForWidth
-  if not isNil(vtbl.minimumHeightForWidth):
+  if not isNil(vtbl[].minimumHeightForWidth):
     vtbl[].vtbl.minimumHeightForWidth = miqt_exec_callback_cQBoxLayout_minimumHeightForWidth
-  if not isNil(vtbl.expandingDirections):
+  if not isNil(vtbl[].expandingDirections):
     vtbl[].vtbl.expandingDirections = miqt_exec_callback_cQBoxLayout_expandingDirections
-  if not isNil(vtbl.invalidate):
+  if not isNil(vtbl[].invalidate):
     vtbl[].vtbl.invalidate = miqt_exec_callback_cQBoxLayout_invalidate
-  if not isNil(vtbl.itemAt):
+  if not isNil(vtbl[].itemAt):
     vtbl[].vtbl.itemAt = miqt_exec_callback_cQBoxLayout_itemAt
-  if not isNil(vtbl.takeAt):
+  if not isNil(vtbl[].takeAt):
     vtbl[].vtbl.takeAt = miqt_exec_callback_cQBoxLayout_takeAt
-  if not isNil(vtbl.count):
+  if not isNil(vtbl[].count):
     vtbl[].vtbl.count = miqt_exec_callback_cQBoxLayout_count
-  if not isNil(vtbl.setGeometry):
+  if not isNil(vtbl[].setGeometry):
     vtbl[].vtbl.setGeometry = miqt_exec_callback_cQBoxLayout_setGeometry
-  if not isNil(vtbl.geometry):
+  if not isNil(vtbl[].geometry):
     vtbl[].vtbl.geometry = miqt_exec_callback_cQBoxLayout_geometry
-  if not isNil(vtbl.indexOf):
+  if not isNil(vtbl[].indexOf):
     vtbl[].vtbl.indexOf = miqt_exec_callback_cQBoxLayout_indexOf
-  if not isNil(vtbl.isEmpty):
+  if not isNil(vtbl[].isEmpty):
     vtbl[].vtbl.isEmpty = miqt_exec_callback_cQBoxLayout_isEmpty
-  if not isNil(vtbl.controlTypes):
+  if not isNil(vtbl[].controlTypes):
     vtbl[].vtbl.controlTypes = miqt_exec_callback_cQBoxLayout_controlTypes
-  if not isNil(vtbl.layout):
+  if not isNil(vtbl[].layout):
     vtbl[].vtbl.layout = miqt_exec_callback_cQBoxLayout_layout
-  if not isNil(vtbl.childEvent):
+  if not isNil(vtbl[].childEvent):
     vtbl[].vtbl.childEvent = miqt_exec_callback_cQBoxLayout_childEvent
-  if not isNil(vtbl.event):
+  if not isNil(vtbl[].event):
     vtbl[].vtbl.event = miqt_exec_callback_cQBoxLayout_event
-  if not isNil(vtbl.eventFilter):
+  if not isNil(vtbl[].eventFilter):
     vtbl[].vtbl.eventFilter = miqt_exec_callback_cQBoxLayout_eventFilter
-  if not isNil(vtbl.timerEvent):
+  if not isNil(vtbl[].timerEvent):
     vtbl[].vtbl.timerEvent = miqt_exec_callback_cQBoxLayout_timerEvent
-  if not isNil(vtbl.customEvent):
+  if not isNil(vtbl[].customEvent):
     vtbl[].vtbl.customEvent = miqt_exec_callback_cQBoxLayout_customEvent
-  if not isNil(vtbl.connectNotify):
+  if not isNil(vtbl[].connectNotify):
     vtbl[].vtbl.connectNotify = miqt_exec_callback_cQBoxLayout_connectNotify
-  if not isNil(vtbl.disconnectNotify):
+  if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQBoxLayout_disconnectNotify
-  if not isNil(vtbl.widget):
+  if not isNil(vtbl[].widget):
     vtbl[].vtbl.widget = miqt_exec_callback_cQBoxLayout_widget
-  if not isNil(vtbl.spacerItem):
+  if not isNil(vtbl[].spacerItem):
     vtbl[].vtbl.spacerItem = miqt_exec_callback_cQBoxLayout_spacerItem
-  gen_qboxlayout_types.QBoxLayout(h: fcQBoxLayout_new(addr(vtbl[]), cint(param1)))
+  gen_qboxlayout_types.QBoxLayout(h: fcQBoxLayout_new(addr(vtbl[].vtbl), cint(param1)), owned: true)
 
 proc create*(T: type gen_qboxlayout_types.QBoxLayout,
     param1: cint, parent: gen_qwidget_types.QWidget,
     vtbl: ref QBoxLayoutVTable = nil): gen_qboxlayout_types.QBoxLayout =
   let vtbl = if vtbl == nil: new QBoxLayoutVTable else: vtbl
   GC_ref(vtbl)
-  vtbl.vtbl.destructor = proc(vtbl: ptr cQBoxLayoutVTable, _: ptr cQBoxLayout) {.cdecl.} =
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQBoxLayoutVTable, _: ptr cQBoxLayout) {.cdecl.} =
     let vtbl = cast[ref QBoxLayoutVTable](vtbl)
     GC_unref(vtbl)
-  if not isNil(vtbl.metaObject):
+  if not isNil(vtbl[].metaObject):
     vtbl[].vtbl.metaObject = miqt_exec_callback_cQBoxLayout_metaObject
-  if not isNil(vtbl.metacast):
+  if not isNil(vtbl[].metacast):
     vtbl[].vtbl.metacast = miqt_exec_callback_cQBoxLayout_metacast
-  if not isNil(vtbl.metacall):
+  if not isNil(vtbl[].metacall):
     vtbl[].vtbl.metacall = miqt_exec_callback_cQBoxLayout_metacall
-  if not isNil(vtbl.addItem):
+  if not isNil(vtbl[].addItem):
     vtbl[].vtbl.addItem = miqt_exec_callback_cQBoxLayout_addItem
-  if not isNil(vtbl.sizeHint):
+  if not isNil(vtbl[].sizeHint):
     vtbl[].vtbl.sizeHint = miqt_exec_callback_cQBoxLayout_sizeHint
-  if not isNil(vtbl.minimumSize):
+  if not isNil(vtbl[].minimumSize):
     vtbl[].vtbl.minimumSize = miqt_exec_callback_cQBoxLayout_minimumSize
-  if not isNil(vtbl.maximumSize):
+  if not isNil(vtbl[].maximumSize):
     vtbl[].vtbl.maximumSize = miqt_exec_callback_cQBoxLayout_maximumSize
-  if not isNil(vtbl.hasHeightForWidth):
+  if not isNil(vtbl[].hasHeightForWidth):
     vtbl[].vtbl.hasHeightForWidth = miqt_exec_callback_cQBoxLayout_hasHeightForWidth
-  if not isNil(vtbl.heightForWidth):
+  if not isNil(vtbl[].heightForWidth):
     vtbl[].vtbl.heightForWidth = miqt_exec_callback_cQBoxLayout_heightForWidth
-  if not isNil(vtbl.minimumHeightForWidth):
+  if not isNil(vtbl[].minimumHeightForWidth):
     vtbl[].vtbl.minimumHeightForWidth = miqt_exec_callback_cQBoxLayout_minimumHeightForWidth
-  if not isNil(vtbl.expandingDirections):
+  if not isNil(vtbl[].expandingDirections):
     vtbl[].vtbl.expandingDirections = miqt_exec_callback_cQBoxLayout_expandingDirections
-  if not isNil(vtbl.invalidate):
+  if not isNil(vtbl[].invalidate):
     vtbl[].vtbl.invalidate = miqt_exec_callback_cQBoxLayout_invalidate
-  if not isNil(vtbl.itemAt):
+  if not isNil(vtbl[].itemAt):
     vtbl[].vtbl.itemAt = miqt_exec_callback_cQBoxLayout_itemAt
-  if not isNil(vtbl.takeAt):
+  if not isNil(vtbl[].takeAt):
     vtbl[].vtbl.takeAt = miqt_exec_callback_cQBoxLayout_takeAt
-  if not isNil(vtbl.count):
+  if not isNil(vtbl[].count):
     vtbl[].vtbl.count = miqt_exec_callback_cQBoxLayout_count
-  if not isNil(vtbl.setGeometry):
+  if not isNil(vtbl[].setGeometry):
     vtbl[].vtbl.setGeometry = miqt_exec_callback_cQBoxLayout_setGeometry
-  if not isNil(vtbl.geometry):
+  if not isNil(vtbl[].geometry):
     vtbl[].vtbl.geometry = miqt_exec_callback_cQBoxLayout_geometry
-  if not isNil(vtbl.indexOf):
+  if not isNil(vtbl[].indexOf):
     vtbl[].vtbl.indexOf = miqt_exec_callback_cQBoxLayout_indexOf
-  if not isNil(vtbl.isEmpty):
+  if not isNil(vtbl[].isEmpty):
     vtbl[].vtbl.isEmpty = miqt_exec_callback_cQBoxLayout_isEmpty
-  if not isNil(vtbl.controlTypes):
+  if not isNil(vtbl[].controlTypes):
     vtbl[].vtbl.controlTypes = miqt_exec_callback_cQBoxLayout_controlTypes
-  if not isNil(vtbl.layout):
+  if not isNil(vtbl[].layout):
     vtbl[].vtbl.layout = miqt_exec_callback_cQBoxLayout_layout
-  if not isNil(vtbl.childEvent):
+  if not isNil(vtbl[].childEvent):
     vtbl[].vtbl.childEvent = miqt_exec_callback_cQBoxLayout_childEvent
-  if not isNil(vtbl.event):
+  if not isNil(vtbl[].event):
     vtbl[].vtbl.event = miqt_exec_callback_cQBoxLayout_event
-  if not isNil(vtbl.eventFilter):
+  if not isNil(vtbl[].eventFilter):
     vtbl[].vtbl.eventFilter = miqt_exec_callback_cQBoxLayout_eventFilter
-  if not isNil(vtbl.timerEvent):
+  if not isNil(vtbl[].timerEvent):
     vtbl[].vtbl.timerEvent = miqt_exec_callback_cQBoxLayout_timerEvent
-  if not isNil(vtbl.customEvent):
+  if not isNil(vtbl[].customEvent):
     vtbl[].vtbl.customEvent = miqt_exec_callback_cQBoxLayout_customEvent
-  if not isNil(vtbl.connectNotify):
+  if not isNil(vtbl[].connectNotify):
     vtbl[].vtbl.connectNotify = miqt_exec_callback_cQBoxLayout_connectNotify
-  if not isNil(vtbl.disconnectNotify):
+  if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQBoxLayout_disconnectNotify
-  if not isNil(vtbl.widget):
+  if not isNil(vtbl[].widget):
     vtbl[].vtbl.widget = miqt_exec_callback_cQBoxLayout_widget
-  if not isNil(vtbl.spacerItem):
+  if not isNil(vtbl[].spacerItem):
     vtbl[].vtbl.spacerItem = miqt_exec_callback_cQBoxLayout_spacerItem
-  gen_qboxlayout_types.QBoxLayout(h: fcQBoxLayout_new2(addr(vtbl[]), cint(param1), parent.h))
+  gen_qboxlayout_types.QBoxLayout(h: fcQBoxLayout_new2(addr(vtbl[].vtbl), cint(param1), parent.h), owned: true)
+
+proc create*(T: type gen_qboxlayout_types.QBoxLayout,
+    param1: cint,
+    vtbl: VirtualQBoxLayout) =
+
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQBoxLayoutVTable, _: ptr cQBoxLayout) {.cdecl.} =
+    let vtbl = cast[ptr typeof(VirtualQBoxLayout()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQBoxLayout, vtbl)))
+    vtbl[].h = nil
+    vtbl[].owned = false
+  vtbl[].vtbl.metaObject = miqt_exec_method_cQBoxLayout_metaObject
+  vtbl[].vtbl.metacast = miqt_exec_method_cQBoxLayout_metacast
+  vtbl[].vtbl.metacall = miqt_exec_method_cQBoxLayout_metacall
+  vtbl[].vtbl.addItem = miqt_exec_method_cQBoxLayout_addItem
+  vtbl[].vtbl.sizeHint = miqt_exec_method_cQBoxLayout_sizeHint
+  vtbl[].vtbl.minimumSize = miqt_exec_method_cQBoxLayout_minimumSize
+  vtbl[].vtbl.maximumSize = miqt_exec_method_cQBoxLayout_maximumSize
+  vtbl[].vtbl.hasHeightForWidth = miqt_exec_method_cQBoxLayout_hasHeightForWidth
+  vtbl[].vtbl.heightForWidth = miqt_exec_method_cQBoxLayout_heightForWidth
+  vtbl[].vtbl.minimumHeightForWidth = miqt_exec_method_cQBoxLayout_minimumHeightForWidth
+  vtbl[].vtbl.expandingDirections = miqt_exec_method_cQBoxLayout_expandingDirections
+  vtbl[].vtbl.invalidate = miqt_exec_method_cQBoxLayout_invalidate
+  vtbl[].vtbl.itemAt = miqt_exec_method_cQBoxLayout_itemAt
+  vtbl[].vtbl.takeAt = miqt_exec_method_cQBoxLayout_takeAt
+  vtbl[].vtbl.count = miqt_exec_method_cQBoxLayout_count
+  vtbl[].vtbl.setGeometry = miqt_exec_method_cQBoxLayout_setGeometry
+  vtbl[].vtbl.geometry = miqt_exec_method_cQBoxLayout_geometry
+  vtbl[].vtbl.indexOf = miqt_exec_method_cQBoxLayout_indexOf
+  vtbl[].vtbl.isEmpty = miqt_exec_method_cQBoxLayout_isEmpty
+  vtbl[].vtbl.controlTypes = miqt_exec_method_cQBoxLayout_controlTypes
+  vtbl[].vtbl.layout = miqt_exec_method_cQBoxLayout_layout
+  vtbl[].vtbl.childEvent = miqt_exec_method_cQBoxLayout_childEvent
+  vtbl[].vtbl.event = miqt_exec_method_cQBoxLayout_event
+  vtbl[].vtbl.eventFilter = miqt_exec_method_cQBoxLayout_eventFilter
+  vtbl[].vtbl.timerEvent = miqt_exec_method_cQBoxLayout_timerEvent
+  vtbl[].vtbl.customEvent = miqt_exec_method_cQBoxLayout_customEvent
+  vtbl[].vtbl.connectNotify = miqt_exec_method_cQBoxLayout_connectNotify
+  vtbl[].vtbl.disconnectNotify = miqt_exec_method_cQBoxLayout_disconnectNotify
+  vtbl[].vtbl.widget = miqt_exec_method_cQBoxLayout_widget
+  vtbl[].vtbl.spacerItem = miqt_exec_method_cQBoxLayout_spacerItem
+  if vtbl[].h != nil: delete(move(vtbl[]))
+  vtbl[].h = fcQBoxLayout_new(addr(vtbl[].vtbl), cint(param1))
+  vtbl[].owned = true
+
+proc create*(T: type gen_qboxlayout_types.QBoxLayout,
+    param1: cint, parent: gen_qwidget_types.QWidget,
+    vtbl: VirtualQBoxLayout) =
+
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQBoxLayoutVTable, _: ptr cQBoxLayout) {.cdecl.} =
+    let vtbl = cast[ptr typeof(VirtualQBoxLayout()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQBoxLayout, vtbl)))
+    vtbl[].h = nil
+    vtbl[].owned = false
+  vtbl[].vtbl.metaObject = miqt_exec_method_cQBoxLayout_metaObject
+  vtbl[].vtbl.metacast = miqt_exec_method_cQBoxLayout_metacast
+  vtbl[].vtbl.metacall = miqt_exec_method_cQBoxLayout_metacall
+  vtbl[].vtbl.addItem = miqt_exec_method_cQBoxLayout_addItem
+  vtbl[].vtbl.sizeHint = miqt_exec_method_cQBoxLayout_sizeHint
+  vtbl[].vtbl.minimumSize = miqt_exec_method_cQBoxLayout_minimumSize
+  vtbl[].vtbl.maximumSize = miqt_exec_method_cQBoxLayout_maximumSize
+  vtbl[].vtbl.hasHeightForWidth = miqt_exec_method_cQBoxLayout_hasHeightForWidth
+  vtbl[].vtbl.heightForWidth = miqt_exec_method_cQBoxLayout_heightForWidth
+  vtbl[].vtbl.minimumHeightForWidth = miqt_exec_method_cQBoxLayout_minimumHeightForWidth
+  vtbl[].vtbl.expandingDirections = miqt_exec_method_cQBoxLayout_expandingDirections
+  vtbl[].vtbl.invalidate = miqt_exec_method_cQBoxLayout_invalidate
+  vtbl[].vtbl.itemAt = miqt_exec_method_cQBoxLayout_itemAt
+  vtbl[].vtbl.takeAt = miqt_exec_method_cQBoxLayout_takeAt
+  vtbl[].vtbl.count = miqt_exec_method_cQBoxLayout_count
+  vtbl[].vtbl.setGeometry = miqt_exec_method_cQBoxLayout_setGeometry
+  vtbl[].vtbl.geometry = miqt_exec_method_cQBoxLayout_geometry
+  vtbl[].vtbl.indexOf = miqt_exec_method_cQBoxLayout_indexOf
+  vtbl[].vtbl.isEmpty = miqt_exec_method_cQBoxLayout_isEmpty
+  vtbl[].vtbl.controlTypes = miqt_exec_method_cQBoxLayout_controlTypes
+  vtbl[].vtbl.layout = miqt_exec_method_cQBoxLayout_layout
+  vtbl[].vtbl.childEvent = miqt_exec_method_cQBoxLayout_childEvent
+  vtbl[].vtbl.event = miqt_exec_method_cQBoxLayout_event
+  vtbl[].vtbl.eventFilter = miqt_exec_method_cQBoxLayout_eventFilter
+  vtbl[].vtbl.timerEvent = miqt_exec_method_cQBoxLayout_timerEvent
+  vtbl[].vtbl.customEvent = miqt_exec_method_cQBoxLayout_customEvent
+  vtbl[].vtbl.connectNotify = miqt_exec_method_cQBoxLayout_connectNotify
+  vtbl[].vtbl.disconnectNotify = miqt_exec_method_cQBoxLayout_disconnectNotify
+  vtbl[].vtbl.widget = miqt_exec_method_cQBoxLayout_widget
+  vtbl[].vtbl.spacerItem = miqt_exec_method_cQBoxLayout_spacerItem
+  if vtbl[].h != nil: delete(move(vtbl[]))
+  vtbl[].h = fcQBoxLayout_new2(addr(vtbl[].vtbl), cint(param1), parent.h)
+  vtbl[].owned = true
 
 proc staticMetaObject*(_: type gen_qboxlayout_types.QBoxLayout): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQBoxLayout_staticMetaObject())
-proc delete*(self: gen_qboxlayout_types.QBoxLayout) =
-  fcQBoxLayout_delete(self.h)
 proc metaObject*(self: gen_qboxlayout_types.QHBoxLayout, ): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQHBoxLayout_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQHBoxLayout_metaObject(self.h), owned: false)
 
 proc metacast*(self: gen_qboxlayout_types.QHBoxLayout, param1: cstring): pointer =
   fcQHBoxLayout_metacast(self.h, param1)
@@ -1122,7 +1484,7 @@ type QHBoxLayoutconnectNotifyProc* = proc(self: QHBoxLayout, signal: gen_qmetaob
 type QHBoxLayoutdisconnectNotifyProc* = proc(self: QHBoxLayout, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
 type QHBoxLayoutwidgetProc* = proc(self: QHBoxLayout): gen_qwidget_types.QWidget {.raises: [], gcsafe.}
 type QHBoxLayoutspacerItemProc* = proc(self: QHBoxLayout): gen_qlayoutitem_types.QSpacerItem {.raises: [], gcsafe.}
-type QHBoxLayoutVTable* = object
+type QHBoxLayoutVTable* {.inheritable, pure.} = object
   vtbl: cQHBoxLayoutVTable
   metaObject*: QHBoxLayoutmetaObjectProc
   metacast*: QHBoxLayoutmetacastProc
@@ -1155,13 +1517,16 @@ type QHBoxLayoutVTable* = object
   widget*: QHBoxLayoutwidgetProc
   spacerItem*: QHBoxLayoutspacerItemProc
 proc QHBoxLayoutmetaObject*(self: gen_qboxlayout_types.QHBoxLayout, ): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQHBoxLayout_virtualbase_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQHBoxLayout_virtualbase_metaObject(self.h), owned: false)
 
 proc miqt_exec_callback_cQHBoxLayout_metaObject(vtbl: pointer, self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QHBoxLayoutVTable](vtbl)
   let self = QHBoxLayout(h: self)
   var virtualReturn = vtbl[].metaObject(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QHBoxLayoutmetacast*(self: gen_qboxlayout_types.QHBoxLayout, param1: cstring): pointer =
   fcQHBoxLayout_virtualbase_metacast(self.h, param1)
@@ -1191,35 +1556,44 @@ proc QHBoxLayoutaddItem*(self: gen_qboxlayout_types.QHBoxLayout, param1: gen_qla
 proc miqt_exec_callback_cQHBoxLayout_addItem(vtbl: pointer, self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QHBoxLayoutVTable](vtbl)
   let self = QHBoxLayout(h: self)
-  let slotval1 = gen_qlayoutitem_types.QLayoutItem(h: param1)
+  let slotval1 = gen_qlayoutitem_types.QLayoutItem(h: param1, owned: false)
   vtbl[].addItem(self, slotval1)
 
 proc QHBoxLayoutsizeHint*(self: gen_qboxlayout_types.QHBoxLayout, ): gen_qsize_types.QSize =
-  gen_qsize_types.QSize(h: fcQHBoxLayout_virtualbase_sizeHint(self.h))
+  gen_qsize_types.QSize(h: fcQHBoxLayout_virtualbase_sizeHint(self.h), owned: true)
 
 proc miqt_exec_callback_cQHBoxLayout_sizeHint(vtbl: pointer, self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QHBoxLayoutVTable](vtbl)
   let self = QHBoxLayout(h: self)
   var virtualReturn = vtbl[].sizeHint(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QHBoxLayoutminimumSize*(self: gen_qboxlayout_types.QHBoxLayout, ): gen_qsize_types.QSize =
-  gen_qsize_types.QSize(h: fcQHBoxLayout_virtualbase_minimumSize(self.h))
+  gen_qsize_types.QSize(h: fcQHBoxLayout_virtualbase_minimumSize(self.h), owned: true)
 
 proc miqt_exec_callback_cQHBoxLayout_minimumSize(vtbl: pointer, self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QHBoxLayoutVTable](vtbl)
   let self = QHBoxLayout(h: self)
   var virtualReturn = vtbl[].minimumSize(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QHBoxLayoutmaximumSize*(self: gen_qboxlayout_types.QHBoxLayout, ): gen_qsize_types.QSize =
-  gen_qsize_types.QSize(h: fcQHBoxLayout_virtualbase_maximumSize(self.h))
+  gen_qsize_types.QSize(h: fcQHBoxLayout_virtualbase_maximumSize(self.h), owned: true)
 
 proc miqt_exec_callback_cQHBoxLayout_maximumSize(vtbl: pointer, self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QHBoxLayoutVTable](vtbl)
   let self = QHBoxLayout(h: self)
   var virtualReturn = vtbl[].maximumSize(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QHBoxLayouthasHeightForWidth*(self: gen_qboxlayout_types.QHBoxLayout, ): bool =
   fcQHBoxLayout_virtualbase_hasHeightForWidth(self.h)
@@ -1268,24 +1642,30 @@ proc miqt_exec_callback_cQHBoxLayout_invalidate(vtbl: pointer, self: pointer): v
   vtbl[].invalidate(self)
 
 proc QHBoxLayoutitemAt*(self: gen_qboxlayout_types.QHBoxLayout, param1: cint): gen_qlayoutitem_types.QLayoutItem =
-  gen_qlayoutitem_types.QLayoutItem(h: fcQHBoxLayout_virtualbase_itemAt(self.h, param1))
+  gen_qlayoutitem_types.QLayoutItem(h: fcQHBoxLayout_virtualbase_itemAt(self.h, param1), owned: false)
 
 proc miqt_exec_callback_cQHBoxLayout_itemAt(vtbl: pointer, self: pointer, param1: cint): pointer {.cdecl.} =
   let vtbl = cast[ptr QHBoxLayoutVTable](vtbl)
   let self = QHBoxLayout(h: self)
   let slotval1 = param1
   var virtualReturn = vtbl[].itemAt(self, slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QHBoxLayouttakeAt*(self: gen_qboxlayout_types.QHBoxLayout, param1: cint): gen_qlayoutitem_types.QLayoutItem =
-  gen_qlayoutitem_types.QLayoutItem(h: fcQHBoxLayout_virtualbase_takeAt(self.h, param1))
+  gen_qlayoutitem_types.QLayoutItem(h: fcQHBoxLayout_virtualbase_takeAt(self.h, param1), owned: false)
 
 proc miqt_exec_callback_cQHBoxLayout_takeAt(vtbl: pointer, self: pointer, param1: cint): pointer {.cdecl.} =
   let vtbl = cast[ptr QHBoxLayoutVTable](vtbl)
   let self = QHBoxLayout(h: self)
   let slotval1 = param1
   var virtualReturn = vtbl[].takeAt(self, slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QHBoxLayoutcount*(self: gen_qboxlayout_types.QHBoxLayout, ): cint =
   fcQHBoxLayout_virtualbase_count(self.h)
@@ -1302,17 +1682,20 @@ proc QHBoxLayoutsetGeometry*(self: gen_qboxlayout_types.QHBoxLayout, geometry: g
 proc miqt_exec_callback_cQHBoxLayout_setGeometry(vtbl: pointer, self: pointer, geometry: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QHBoxLayoutVTable](vtbl)
   let self = QHBoxLayout(h: self)
-  let slotval1 = gen_qrect_types.QRect(h: geometry)
+  let slotval1 = gen_qrect_types.QRect(h: geometry, owned: false)
   vtbl[].setGeometry(self, slotval1)
 
 proc QHBoxLayoutgeometry*(self: gen_qboxlayout_types.QHBoxLayout, ): gen_qrect_types.QRect =
-  gen_qrect_types.QRect(h: fcQHBoxLayout_virtualbase_geometry(self.h))
+  gen_qrect_types.QRect(h: fcQHBoxLayout_virtualbase_geometry(self.h), owned: true)
 
 proc miqt_exec_callback_cQHBoxLayout_geometry(vtbl: pointer, self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QHBoxLayoutVTable](vtbl)
   let self = QHBoxLayout(h: self)
   var virtualReturn = vtbl[].geometry(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QHBoxLayoutindexOf*(self: gen_qboxlayout_types.QHBoxLayout, param1: gen_qwidget_types.QWidget): cint =
   fcQHBoxLayout_virtualbase_indexOf(self.h, param1.h)
@@ -1320,7 +1703,7 @@ proc QHBoxLayoutindexOf*(self: gen_qboxlayout_types.QHBoxLayout, param1: gen_qwi
 proc miqt_exec_callback_cQHBoxLayout_indexOf(vtbl: pointer, self: pointer, param1: pointer): cint {.cdecl.} =
   let vtbl = cast[ptr QHBoxLayoutVTable](vtbl)
   let self = QHBoxLayout(h: self)
-  let slotval1 = gen_qwidget_types.QWidget(h: param1)
+  let slotval1 = gen_qwidget_types.QWidget(h: param1, owned: false)
   var virtualReturn = vtbl[].indexOf(self, slotval1)
   virtualReturn
 
@@ -1343,13 +1726,16 @@ proc miqt_exec_callback_cQHBoxLayout_controlTypes(vtbl: pointer, self: pointer):
   cint(virtualReturn)
 
 proc QHBoxLayoutlayout*(self: gen_qboxlayout_types.QHBoxLayout, ): gen_qlayout_types.QLayout =
-  gen_qlayout_types.QLayout(h: fcQHBoxLayout_virtualbase_layout(self.h))
+  gen_qlayout_types.QLayout(h: fcQHBoxLayout_virtualbase_layout(self.h), owned: false)
 
 proc miqt_exec_callback_cQHBoxLayout_layout(vtbl: pointer, self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QHBoxLayoutVTable](vtbl)
   let self = QHBoxLayout(h: self)
   var virtualReturn = vtbl[].layout(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QHBoxLayoutchildEvent*(self: gen_qboxlayout_types.QHBoxLayout, e: gen_qcoreevent_types.QChildEvent): void =
   fcQHBoxLayout_virtualbase_childEvent(self.h, e.h)
@@ -1357,7 +1743,7 @@ proc QHBoxLayoutchildEvent*(self: gen_qboxlayout_types.QHBoxLayout, e: gen_qcore
 proc miqt_exec_callback_cQHBoxLayout_childEvent(vtbl: pointer, self: pointer, e: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QHBoxLayoutVTable](vtbl)
   let self = QHBoxLayout(h: self)
-  let slotval1 = gen_qcoreevent_types.QChildEvent(h: e)
+  let slotval1 = gen_qcoreevent_types.QChildEvent(h: e, owned: false)
   vtbl[].childEvent(self, slotval1)
 
 proc QHBoxLayoutevent*(self: gen_qboxlayout_types.QHBoxLayout, event: gen_qcoreevent_types.QEvent): bool =
@@ -1366,7 +1752,7 @@ proc QHBoxLayoutevent*(self: gen_qboxlayout_types.QHBoxLayout, event: gen_qcoree
 proc miqt_exec_callback_cQHBoxLayout_event(vtbl: pointer, self: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QHBoxLayoutVTable](vtbl)
   let self = QHBoxLayout(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].event(self, slotval1)
   virtualReturn
 
@@ -1376,8 +1762,8 @@ proc QHBoxLayouteventFilter*(self: gen_qboxlayout_types.QHBoxLayout, watched: ge
 proc miqt_exec_callback_cQHBoxLayout_eventFilter(vtbl: pointer, self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QHBoxLayoutVTable](vtbl)
   let self = QHBoxLayout(h: self)
-  let slotval1 = gen_qobject_types.QObject(h: watched)
-  let slotval2 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].eventFilter(self, slotval1, slotval2)
   virtualReturn
 
@@ -1387,7 +1773,7 @@ proc QHBoxLayouttimerEvent*(self: gen_qboxlayout_types.QHBoxLayout, event: gen_q
 proc miqt_exec_callback_cQHBoxLayout_timerEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QHBoxLayoutVTable](vtbl)
   let self = QHBoxLayout(h: self)
-  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   vtbl[].timerEvent(self, slotval1)
 
 proc QHBoxLayoutcustomEvent*(self: gen_qboxlayout_types.QHBoxLayout, event: gen_qcoreevent_types.QEvent): void =
@@ -1396,7 +1782,7 @@ proc QHBoxLayoutcustomEvent*(self: gen_qboxlayout_types.QHBoxLayout, event: gen_
 proc miqt_exec_callback_cQHBoxLayout_customEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QHBoxLayoutVTable](vtbl)
   let self = QHBoxLayout(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].customEvent(self, slotval1)
 
 proc QHBoxLayoutconnectNotify*(self: gen_qboxlayout_types.QHBoxLayout, signal: gen_qmetaobject_types.QMetaMethod): void =
@@ -1405,7 +1791,7 @@ proc QHBoxLayoutconnectNotify*(self: gen_qboxlayout_types.QHBoxLayout, signal: g
 proc miqt_exec_callback_cQHBoxLayout_connectNotify(vtbl: pointer, self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QHBoxLayoutVTable](vtbl)
   let self = QHBoxLayout(h: self)
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].connectNotify(self, slotval1)
 
 proc QHBoxLayoutdisconnectNotify*(self: gen_qboxlayout_types.QHBoxLayout, signal: gen_qmetaobject_types.QMetaMethod): void =
@@ -1414,26 +1800,285 @@ proc QHBoxLayoutdisconnectNotify*(self: gen_qboxlayout_types.QHBoxLayout, signal
 proc miqt_exec_callback_cQHBoxLayout_disconnectNotify(vtbl: pointer, self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QHBoxLayoutVTable](vtbl)
   let self = QHBoxLayout(h: self)
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].disconnectNotify(self, slotval1)
 
 proc QHBoxLayoutwidget*(self: gen_qboxlayout_types.QHBoxLayout, ): gen_qwidget_types.QWidget =
-  gen_qwidget_types.QWidget(h: fcQHBoxLayout_virtualbase_widget(self.h))
+  gen_qwidget_types.QWidget(h: fcQHBoxLayout_virtualbase_widget(self.h), owned: false)
 
 proc miqt_exec_callback_cQHBoxLayout_widget(vtbl: pointer, self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QHBoxLayoutVTable](vtbl)
   let self = QHBoxLayout(h: self)
   var virtualReturn = vtbl[].widget(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QHBoxLayoutspacerItem*(self: gen_qboxlayout_types.QHBoxLayout, ): gen_qlayoutitem_types.QSpacerItem =
-  gen_qlayoutitem_types.QSpacerItem(h: fcQHBoxLayout_virtualbase_spacerItem(self.h))
+  gen_qlayoutitem_types.QSpacerItem(h: fcQHBoxLayout_virtualbase_spacerItem(self.h), owned: false)
 
 proc miqt_exec_callback_cQHBoxLayout_spacerItem(vtbl: pointer, self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QHBoxLayoutVTable](vtbl)
   let self = QHBoxLayout(h: self)
   var virtualReturn = vtbl[].spacerItem(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
+
+type VirtualQHBoxLayout* {.inheritable.} = ref object of QHBoxLayout
+  vtbl*: cQHBoxLayoutVTable
+method metaObject*(self: VirtualQHBoxLayout, ): gen_qobjectdefs_types.QMetaObject {.base.} =
+  QHBoxLayoutmetaObject(self[])
+proc miqt_exec_method_cQHBoxLayout_metaObject(vtbl: pointer, inst: pointer): pointer {.cdecl.} =
+  let vtbl = cast[VirtualQHBoxLayout](cast[uint](vtbl) - uint(offsetOf(VirtualQHBoxLayout, vtbl)))
+  var virtualReturn = vtbl.metaObject()
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
+
+method metacast*(self: VirtualQHBoxLayout, param1: cstring): pointer {.base.} =
+  QHBoxLayoutmetacast(self[], param1)
+proc miqt_exec_method_cQHBoxLayout_metacast(vtbl: pointer, inst: pointer, param1: cstring): pointer {.cdecl.} =
+  let vtbl = cast[VirtualQHBoxLayout](cast[uint](vtbl) - uint(offsetOf(VirtualQHBoxLayout, vtbl)))
+  let slotval1 = (param1)
+  var virtualReturn = vtbl.metacast(slotval1)
+  virtualReturn
+
+method metacall*(self: VirtualQHBoxLayout, param1: cint, param2: cint, param3: pointer): cint {.base.} =
+  QHBoxLayoutmetacall(self[], param1, param2, param3)
+proc miqt_exec_method_cQHBoxLayout_metacall(vtbl: pointer, inst: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
+  let vtbl = cast[VirtualQHBoxLayout](cast[uint](vtbl) - uint(offsetOf(VirtualQHBoxLayout, vtbl)))
+  let slotval1 = cint(param1)
+  let slotval2 = param2
+  let slotval3 = param3
+  var virtualReturn = vtbl.metacall(slotval1, slotval2, slotval3)
+  virtualReturn
+
+method addItem*(self: VirtualQHBoxLayout, param1: gen_qlayoutitem_types.QLayoutItem): void {.base.} =
+  QHBoxLayoutaddItem(self[], param1)
+proc miqt_exec_method_cQHBoxLayout_addItem(vtbl: pointer, inst: pointer, param1: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQHBoxLayout](cast[uint](vtbl) - uint(offsetOf(VirtualQHBoxLayout, vtbl)))
+  let slotval1 = gen_qlayoutitem_types.QLayoutItem(h: param1, owned: false)
+  vtbl.addItem(slotval1)
+
+method sizeHint*(self: VirtualQHBoxLayout, ): gen_qsize_types.QSize {.base.} =
+  QHBoxLayoutsizeHint(self[])
+proc miqt_exec_method_cQHBoxLayout_sizeHint(vtbl: pointer, inst: pointer): pointer {.cdecl.} =
+  let vtbl = cast[VirtualQHBoxLayout](cast[uint](vtbl) - uint(offsetOf(VirtualQHBoxLayout, vtbl)))
+  var virtualReturn = vtbl.sizeHint()
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
+
+method minimumSize*(self: VirtualQHBoxLayout, ): gen_qsize_types.QSize {.base.} =
+  QHBoxLayoutminimumSize(self[])
+proc miqt_exec_method_cQHBoxLayout_minimumSize(vtbl: pointer, inst: pointer): pointer {.cdecl.} =
+  let vtbl = cast[VirtualQHBoxLayout](cast[uint](vtbl) - uint(offsetOf(VirtualQHBoxLayout, vtbl)))
+  var virtualReturn = vtbl.minimumSize()
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
+
+method maximumSize*(self: VirtualQHBoxLayout, ): gen_qsize_types.QSize {.base.} =
+  QHBoxLayoutmaximumSize(self[])
+proc miqt_exec_method_cQHBoxLayout_maximumSize(vtbl: pointer, inst: pointer): pointer {.cdecl.} =
+  let vtbl = cast[VirtualQHBoxLayout](cast[uint](vtbl) - uint(offsetOf(VirtualQHBoxLayout, vtbl)))
+  var virtualReturn = vtbl.maximumSize()
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
+
+method hasHeightForWidth*(self: VirtualQHBoxLayout, ): bool {.base.} =
+  QHBoxLayouthasHeightForWidth(self[])
+proc miqt_exec_method_cQHBoxLayout_hasHeightForWidth(vtbl: pointer, inst: pointer): bool {.cdecl.} =
+  let vtbl = cast[VirtualQHBoxLayout](cast[uint](vtbl) - uint(offsetOf(VirtualQHBoxLayout, vtbl)))
+  var virtualReturn = vtbl.hasHeightForWidth()
+  virtualReturn
+
+method heightForWidth*(self: VirtualQHBoxLayout, param1: cint): cint {.base.} =
+  QHBoxLayoutheightForWidth(self[], param1)
+proc miqt_exec_method_cQHBoxLayout_heightForWidth(vtbl: pointer, inst: pointer, param1: cint): cint {.cdecl.} =
+  let vtbl = cast[VirtualQHBoxLayout](cast[uint](vtbl) - uint(offsetOf(VirtualQHBoxLayout, vtbl)))
+  let slotval1 = param1
+  var virtualReturn = vtbl.heightForWidth(slotval1)
+  virtualReturn
+
+method minimumHeightForWidth*(self: VirtualQHBoxLayout, param1: cint): cint {.base.} =
+  QHBoxLayoutminimumHeightForWidth(self[], param1)
+proc miqt_exec_method_cQHBoxLayout_minimumHeightForWidth(vtbl: pointer, inst: pointer, param1: cint): cint {.cdecl.} =
+  let vtbl = cast[VirtualQHBoxLayout](cast[uint](vtbl) - uint(offsetOf(VirtualQHBoxLayout, vtbl)))
+  let slotval1 = param1
+  var virtualReturn = vtbl.minimumHeightForWidth(slotval1)
+  virtualReturn
+
+method expandingDirections*(self: VirtualQHBoxLayout, ): cint {.base.} =
+  QHBoxLayoutexpandingDirections(self[])
+proc miqt_exec_method_cQHBoxLayout_expandingDirections(vtbl: pointer, inst: pointer): cint {.cdecl.} =
+  let vtbl = cast[VirtualQHBoxLayout](cast[uint](vtbl) - uint(offsetOf(VirtualQHBoxLayout, vtbl)))
+  var virtualReturn = vtbl.expandingDirections()
+  cint(virtualReturn)
+
+method invalidate*(self: VirtualQHBoxLayout, ): void {.base.} =
+  QHBoxLayoutinvalidate(self[])
+proc miqt_exec_method_cQHBoxLayout_invalidate(vtbl: pointer, inst: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQHBoxLayout](cast[uint](vtbl) - uint(offsetOf(VirtualQHBoxLayout, vtbl)))
+  vtbl.invalidate()
+
+method itemAt*(self: VirtualQHBoxLayout, param1: cint): gen_qlayoutitem_types.QLayoutItem {.base.} =
+  QHBoxLayoutitemAt(self[], param1)
+proc miqt_exec_method_cQHBoxLayout_itemAt(vtbl: pointer, inst: pointer, param1: cint): pointer {.cdecl.} =
+  let vtbl = cast[VirtualQHBoxLayout](cast[uint](vtbl) - uint(offsetOf(VirtualQHBoxLayout, vtbl)))
+  let slotval1 = param1
+  var virtualReturn = vtbl.itemAt(slotval1)
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
+
+method takeAt*(self: VirtualQHBoxLayout, param1: cint): gen_qlayoutitem_types.QLayoutItem {.base.} =
+  QHBoxLayouttakeAt(self[], param1)
+proc miqt_exec_method_cQHBoxLayout_takeAt(vtbl: pointer, inst: pointer, param1: cint): pointer {.cdecl.} =
+  let vtbl = cast[VirtualQHBoxLayout](cast[uint](vtbl) - uint(offsetOf(VirtualQHBoxLayout, vtbl)))
+  let slotval1 = param1
+  var virtualReturn = vtbl.takeAt(slotval1)
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
+
+method count*(self: VirtualQHBoxLayout, ): cint {.base.} =
+  QHBoxLayoutcount(self[])
+proc miqt_exec_method_cQHBoxLayout_count(vtbl: pointer, inst: pointer): cint {.cdecl.} =
+  let vtbl = cast[VirtualQHBoxLayout](cast[uint](vtbl) - uint(offsetOf(VirtualQHBoxLayout, vtbl)))
+  var virtualReturn = vtbl.count()
+  virtualReturn
+
+method setGeometry*(self: VirtualQHBoxLayout, geometry: gen_qrect_types.QRect): void {.base.} =
+  QHBoxLayoutsetGeometry(self[], geometry)
+proc miqt_exec_method_cQHBoxLayout_setGeometry(vtbl: pointer, inst: pointer, geometry: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQHBoxLayout](cast[uint](vtbl) - uint(offsetOf(VirtualQHBoxLayout, vtbl)))
+  let slotval1 = gen_qrect_types.QRect(h: geometry, owned: false)
+  vtbl.setGeometry(slotval1)
+
+method geometry*(self: VirtualQHBoxLayout, ): gen_qrect_types.QRect {.base.} =
+  QHBoxLayoutgeometry(self[])
+proc miqt_exec_method_cQHBoxLayout_geometry(vtbl: pointer, inst: pointer): pointer {.cdecl.} =
+  let vtbl = cast[VirtualQHBoxLayout](cast[uint](vtbl) - uint(offsetOf(VirtualQHBoxLayout, vtbl)))
+  var virtualReturn = vtbl.geometry()
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
+
+method indexOf*(self: VirtualQHBoxLayout, param1: gen_qwidget_types.QWidget): cint {.base.} =
+  QHBoxLayoutindexOf(self[], param1)
+proc miqt_exec_method_cQHBoxLayout_indexOf(vtbl: pointer, inst: pointer, param1: pointer): cint {.cdecl.} =
+  let vtbl = cast[VirtualQHBoxLayout](cast[uint](vtbl) - uint(offsetOf(VirtualQHBoxLayout, vtbl)))
+  let slotval1 = gen_qwidget_types.QWidget(h: param1, owned: false)
+  var virtualReturn = vtbl.indexOf(slotval1)
+  virtualReturn
+
+method isEmpty*(self: VirtualQHBoxLayout, ): bool {.base.} =
+  QHBoxLayoutisEmpty(self[])
+proc miqt_exec_method_cQHBoxLayout_isEmpty(vtbl: pointer, inst: pointer): bool {.cdecl.} =
+  let vtbl = cast[VirtualQHBoxLayout](cast[uint](vtbl) - uint(offsetOf(VirtualQHBoxLayout, vtbl)))
+  var virtualReturn = vtbl.isEmpty()
+  virtualReturn
+
+method controlTypes*(self: VirtualQHBoxLayout, ): cint {.base.} =
+  QHBoxLayoutcontrolTypes(self[])
+proc miqt_exec_method_cQHBoxLayout_controlTypes(vtbl: pointer, inst: pointer): cint {.cdecl.} =
+  let vtbl = cast[VirtualQHBoxLayout](cast[uint](vtbl) - uint(offsetOf(VirtualQHBoxLayout, vtbl)))
+  var virtualReturn = vtbl.controlTypes()
+  cint(virtualReturn)
+
+method layout*(self: VirtualQHBoxLayout, ): gen_qlayout_types.QLayout {.base.} =
+  QHBoxLayoutlayout(self[])
+proc miqt_exec_method_cQHBoxLayout_layout(vtbl: pointer, inst: pointer): pointer {.cdecl.} =
+  let vtbl = cast[VirtualQHBoxLayout](cast[uint](vtbl) - uint(offsetOf(VirtualQHBoxLayout, vtbl)))
+  var virtualReturn = vtbl.layout()
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
+
+method childEvent*(self: VirtualQHBoxLayout, e: gen_qcoreevent_types.QChildEvent): void {.base.} =
+  QHBoxLayoutchildEvent(self[], e)
+proc miqt_exec_method_cQHBoxLayout_childEvent(vtbl: pointer, inst: pointer, e: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQHBoxLayout](cast[uint](vtbl) - uint(offsetOf(VirtualQHBoxLayout, vtbl)))
+  let slotval1 = gen_qcoreevent_types.QChildEvent(h: e, owned: false)
+  vtbl.childEvent(slotval1)
+
+method event*(self: VirtualQHBoxLayout, event: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QHBoxLayoutevent(self[], event)
+proc miqt_exec_method_cQHBoxLayout_event(vtbl: pointer, inst: pointer, event: pointer): bool {.cdecl.} =
+  let vtbl = cast[VirtualQHBoxLayout](cast[uint](vtbl) - uint(offsetOf(VirtualQHBoxLayout, vtbl)))
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
+  var virtualReturn = vtbl.event(slotval1)
+  virtualReturn
+
+method eventFilter*(self: VirtualQHBoxLayout, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QHBoxLayouteventFilter(self[], watched, event)
+proc miqt_exec_method_cQHBoxLayout_eventFilter(vtbl: pointer, inst: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
+  let vtbl = cast[VirtualQHBoxLayout](cast[uint](vtbl) - uint(offsetOf(VirtualQHBoxLayout, vtbl)))
+  let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
+  var virtualReturn = vtbl.eventFilter(slotval1, slotval2)
+  virtualReturn
+
+method timerEvent*(self: VirtualQHBoxLayout, event: gen_qcoreevent_types.QTimerEvent): void {.base.} =
+  QHBoxLayouttimerEvent(self[], event)
+proc miqt_exec_method_cQHBoxLayout_timerEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQHBoxLayout](cast[uint](vtbl) - uint(offsetOf(VirtualQHBoxLayout, vtbl)))
+  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
+  vtbl.timerEvent(slotval1)
+
+method customEvent*(self: VirtualQHBoxLayout, event: gen_qcoreevent_types.QEvent): void {.base.} =
+  QHBoxLayoutcustomEvent(self[], event)
+proc miqt_exec_method_cQHBoxLayout_customEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQHBoxLayout](cast[uint](vtbl) - uint(offsetOf(VirtualQHBoxLayout, vtbl)))
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
+  vtbl.customEvent(slotval1)
+
+method connectNotify*(self: VirtualQHBoxLayout, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QHBoxLayoutconnectNotify(self[], signal)
+proc miqt_exec_method_cQHBoxLayout_connectNotify(vtbl: pointer, inst: pointer, signal: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQHBoxLayout](cast[uint](vtbl) - uint(offsetOf(VirtualQHBoxLayout, vtbl)))
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
+  vtbl.connectNotify(slotval1)
+
+method disconnectNotify*(self: VirtualQHBoxLayout, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QHBoxLayoutdisconnectNotify(self[], signal)
+proc miqt_exec_method_cQHBoxLayout_disconnectNotify(vtbl: pointer, inst: pointer, signal: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQHBoxLayout](cast[uint](vtbl) - uint(offsetOf(VirtualQHBoxLayout, vtbl)))
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
+  vtbl.disconnectNotify(slotval1)
+
+method widget*(self: VirtualQHBoxLayout, ): gen_qwidget_types.QWidget {.base.} =
+  QHBoxLayoutwidget(self[])
+proc miqt_exec_method_cQHBoxLayout_widget(vtbl: pointer, inst: pointer): pointer {.cdecl.} =
+  let vtbl = cast[VirtualQHBoxLayout](cast[uint](vtbl) - uint(offsetOf(VirtualQHBoxLayout, vtbl)))
+  var virtualReturn = vtbl.widget()
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
+
+method spacerItem*(self: VirtualQHBoxLayout, ): gen_qlayoutitem_types.QSpacerItem {.base.} =
+  QHBoxLayoutspacerItem(self[])
+proc miqt_exec_method_cQHBoxLayout_spacerItem(vtbl: pointer, inst: pointer): pointer {.cdecl.} =
+  let vtbl = cast[VirtualQHBoxLayout](cast[uint](vtbl) - uint(offsetOf(VirtualQHBoxLayout, vtbl)))
+  var virtualReturn = vtbl.spacerItem()
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc widgetEvent*(self: gen_qboxlayout_types.QHBoxLayout, param1: gen_qcoreevent_types.QEvent): void =
   fcQHBoxLayout_protectedbase_widgetEvent(self.h, param1.h)
@@ -1448,10 +2093,10 @@ proc adoptLayout*(self: gen_qboxlayout_types.QHBoxLayout, layout: gen_qlayout_ty
   fcQHBoxLayout_protectedbase_adoptLayout(self.h, layout.h)
 
 proc alignmentRect*(self: gen_qboxlayout_types.QHBoxLayout, param1: gen_qrect_types.QRect): gen_qrect_types.QRect =
-  gen_qrect_types.QRect(h: fcQHBoxLayout_protectedbase_alignmentRect(self.h, param1.h))
+  gen_qrect_types.QRect(h: fcQHBoxLayout_protectedbase_alignmentRect(self.h, param1.h), owned: true)
 
 proc sender*(self: gen_qboxlayout_types.QHBoxLayout, ): gen_qobject_types.QObject =
-  gen_qobject_types.QObject(h: fcQHBoxLayout_protectedbase_sender(self.h))
+  gen_qobject_types.QObject(h: fcQHBoxLayout_protectedbase_sender(self.h), owned: false)
 
 proc senderSignalIndex*(self: gen_qboxlayout_types.QHBoxLayout, ): cint =
   fcQHBoxLayout_protectedbase_senderSignalIndex(self.h)
@@ -1467,146 +2112,227 @@ proc create*(T: type gen_qboxlayout_types.QHBoxLayout,
     vtbl: ref QHBoxLayoutVTable = nil): gen_qboxlayout_types.QHBoxLayout =
   let vtbl = if vtbl == nil: new QHBoxLayoutVTable else: vtbl
   GC_ref(vtbl)
-  vtbl.vtbl.destructor = proc(vtbl: ptr cQHBoxLayoutVTable, _: ptr cQHBoxLayout) {.cdecl.} =
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQHBoxLayoutVTable, _: ptr cQHBoxLayout) {.cdecl.} =
     let vtbl = cast[ref QHBoxLayoutVTable](vtbl)
     GC_unref(vtbl)
-  if not isNil(vtbl.metaObject):
+  if not isNil(vtbl[].metaObject):
     vtbl[].vtbl.metaObject = miqt_exec_callback_cQHBoxLayout_metaObject
-  if not isNil(vtbl.metacast):
+  if not isNil(vtbl[].metacast):
     vtbl[].vtbl.metacast = miqt_exec_callback_cQHBoxLayout_metacast
-  if not isNil(vtbl.metacall):
+  if not isNil(vtbl[].metacall):
     vtbl[].vtbl.metacall = miqt_exec_callback_cQHBoxLayout_metacall
-  if not isNil(vtbl.addItem):
+  if not isNil(vtbl[].addItem):
     vtbl[].vtbl.addItem = miqt_exec_callback_cQHBoxLayout_addItem
-  if not isNil(vtbl.sizeHint):
+  if not isNil(vtbl[].sizeHint):
     vtbl[].vtbl.sizeHint = miqt_exec_callback_cQHBoxLayout_sizeHint
-  if not isNil(vtbl.minimumSize):
+  if not isNil(vtbl[].minimumSize):
     vtbl[].vtbl.minimumSize = miqt_exec_callback_cQHBoxLayout_minimumSize
-  if not isNil(vtbl.maximumSize):
+  if not isNil(vtbl[].maximumSize):
     vtbl[].vtbl.maximumSize = miqt_exec_callback_cQHBoxLayout_maximumSize
-  if not isNil(vtbl.hasHeightForWidth):
+  if not isNil(vtbl[].hasHeightForWidth):
     vtbl[].vtbl.hasHeightForWidth = miqt_exec_callback_cQHBoxLayout_hasHeightForWidth
-  if not isNil(vtbl.heightForWidth):
+  if not isNil(vtbl[].heightForWidth):
     vtbl[].vtbl.heightForWidth = miqt_exec_callback_cQHBoxLayout_heightForWidth
-  if not isNil(vtbl.minimumHeightForWidth):
+  if not isNil(vtbl[].minimumHeightForWidth):
     vtbl[].vtbl.minimumHeightForWidth = miqt_exec_callback_cQHBoxLayout_minimumHeightForWidth
-  if not isNil(vtbl.expandingDirections):
+  if not isNil(vtbl[].expandingDirections):
     vtbl[].vtbl.expandingDirections = miqt_exec_callback_cQHBoxLayout_expandingDirections
-  if not isNil(vtbl.invalidate):
+  if not isNil(vtbl[].invalidate):
     vtbl[].vtbl.invalidate = miqt_exec_callback_cQHBoxLayout_invalidate
-  if not isNil(vtbl.itemAt):
+  if not isNil(vtbl[].itemAt):
     vtbl[].vtbl.itemAt = miqt_exec_callback_cQHBoxLayout_itemAt
-  if not isNil(vtbl.takeAt):
+  if not isNil(vtbl[].takeAt):
     vtbl[].vtbl.takeAt = miqt_exec_callback_cQHBoxLayout_takeAt
-  if not isNil(vtbl.count):
+  if not isNil(vtbl[].count):
     vtbl[].vtbl.count = miqt_exec_callback_cQHBoxLayout_count
-  if not isNil(vtbl.setGeometry):
+  if not isNil(vtbl[].setGeometry):
     vtbl[].vtbl.setGeometry = miqt_exec_callback_cQHBoxLayout_setGeometry
-  if not isNil(vtbl.geometry):
+  if not isNil(vtbl[].geometry):
     vtbl[].vtbl.geometry = miqt_exec_callback_cQHBoxLayout_geometry
-  if not isNil(vtbl.indexOf):
+  if not isNil(vtbl[].indexOf):
     vtbl[].vtbl.indexOf = miqt_exec_callback_cQHBoxLayout_indexOf
-  if not isNil(vtbl.isEmpty):
+  if not isNil(vtbl[].isEmpty):
     vtbl[].vtbl.isEmpty = miqt_exec_callback_cQHBoxLayout_isEmpty
-  if not isNil(vtbl.controlTypes):
+  if not isNil(vtbl[].controlTypes):
     vtbl[].vtbl.controlTypes = miqt_exec_callback_cQHBoxLayout_controlTypes
-  if not isNil(vtbl.layout):
+  if not isNil(vtbl[].layout):
     vtbl[].vtbl.layout = miqt_exec_callback_cQHBoxLayout_layout
-  if not isNil(vtbl.childEvent):
+  if not isNil(vtbl[].childEvent):
     vtbl[].vtbl.childEvent = miqt_exec_callback_cQHBoxLayout_childEvent
-  if not isNil(vtbl.event):
+  if not isNil(vtbl[].event):
     vtbl[].vtbl.event = miqt_exec_callback_cQHBoxLayout_event
-  if not isNil(vtbl.eventFilter):
+  if not isNil(vtbl[].eventFilter):
     vtbl[].vtbl.eventFilter = miqt_exec_callback_cQHBoxLayout_eventFilter
-  if not isNil(vtbl.timerEvent):
+  if not isNil(vtbl[].timerEvent):
     vtbl[].vtbl.timerEvent = miqt_exec_callback_cQHBoxLayout_timerEvent
-  if not isNil(vtbl.customEvent):
+  if not isNil(vtbl[].customEvent):
     vtbl[].vtbl.customEvent = miqt_exec_callback_cQHBoxLayout_customEvent
-  if not isNil(vtbl.connectNotify):
+  if not isNil(vtbl[].connectNotify):
     vtbl[].vtbl.connectNotify = miqt_exec_callback_cQHBoxLayout_connectNotify
-  if not isNil(vtbl.disconnectNotify):
+  if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQHBoxLayout_disconnectNotify
-  if not isNil(vtbl.widget):
+  if not isNil(vtbl[].widget):
     vtbl[].vtbl.widget = miqt_exec_callback_cQHBoxLayout_widget
-  if not isNil(vtbl.spacerItem):
+  if not isNil(vtbl[].spacerItem):
     vtbl[].vtbl.spacerItem = miqt_exec_callback_cQHBoxLayout_spacerItem
-  gen_qboxlayout_types.QHBoxLayout(h: fcQHBoxLayout_new(addr(vtbl[]), parent.h))
+  gen_qboxlayout_types.QHBoxLayout(h: fcQHBoxLayout_new(addr(vtbl[].vtbl), parent.h), owned: true)
 
 proc create*(T: type gen_qboxlayout_types.QHBoxLayout,
     vtbl: ref QHBoxLayoutVTable = nil): gen_qboxlayout_types.QHBoxLayout =
   let vtbl = if vtbl == nil: new QHBoxLayoutVTable else: vtbl
   GC_ref(vtbl)
-  vtbl.vtbl.destructor = proc(vtbl: ptr cQHBoxLayoutVTable, _: ptr cQHBoxLayout) {.cdecl.} =
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQHBoxLayoutVTable, _: ptr cQHBoxLayout) {.cdecl.} =
     let vtbl = cast[ref QHBoxLayoutVTable](vtbl)
     GC_unref(vtbl)
-  if not isNil(vtbl.metaObject):
+  if not isNil(vtbl[].metaObject):
     vtbl[].vtbl.metaObject = miqt_exec_callback_cQHBoxLayout_metaObject
-  if not isNil(vtbl.metacast):
+  if not isNil(vtbl[].metacast):
     vtbl[].vtbl.metacast = miqt_exec_callback_cQHBoxLayout_metacast
-  if not isNil(vtbl.metacall):
+  if not isNil(vtbl[].metacall):
     vtbl[].vtbl.metacall = miqt_exec_callback_cQHBoxLayout_metacall
-  if not isNil(vtbl.addItem):
+  if not isNil(vtbl[].addItem):
     vtbl[].vtbl.addItem = miqt_exec_callback_cQHBoxLayout_addItem
-  if not isNil(vtbl.sizeHint):
+  if not isNil(vtbl[].sizeHint):
     vtbl[].vtbl.sizeHint = miqt_exec_callback_cQHBoxLayout_sizeHint
-  if not isNil(vtbl.minimumSize):
+  if not isNil(vtbl[].minimumSize):
     vtbl[].vtbl.minimumSize = miqt_exec_callback_cQHBoxLayout_minimumSize
-  if not isNil(vtbl.maximumSize):
+  if not isNil(vtbl[].maximumSize):
     vtbl[].vtbl.maximumSize = miqt_exec_callback_cQHBoxLayout_maximumSize
-  if not isNil(vtbl.hasHeightForWidth):
+  if not isNil(vtbl[].hasHeightForWidth):
     vtbl[].vtbl.hasHeightForWidth = miqt_exec_callback_cQHBoxLayout_hasHeightForWidth
-  if not isNil(vtbl.heightForWidth):
+  if not isNil(vtbl[].heightForWidth):
     vtbl[].vtbl.heightForWidth = miqt_exec_callback_cQHBoxLayout_heightForWidth
-  if not isNil(vtbl.minimumHeightForWidth):
+  if not isNil(vtbl[].minimumHeightForWidth):
     vtbl[].vtbl.minimumHeightForWidth = miqt_exec_callback_cQHBoxLayout_minimumHeightForWidth
-  if not isNil(vtbl.expandingDirections):
+  if not isNil(vtbl[].expandingDirections):
     vtbl[].vtbl.expandingDirections = miqt_exec_callback_cQHBoxLayout_expandingDirections
-  if not isNil(vtbl.invalidate):
+  if not isNil(vtbl[].invalidate):
     vtbl[].vtbl.invalidate = miqt_exec_callback_cQHBoxLayout_invalidate
-  if not isNil(vtbl.itemAt):
+  if not isNil(vtbl[].itemAt):
     vtbl[].vtbl.itemAt = miqt_exec_callback_cQHBoxLayout_itemAt
-  if not isNil(vtbl.takeAt):
+  if not isNil(vtbl[].takeAt):
     vtbl[].vtbl.takeAt = miqt_exec_callback_cQHBoxLayout_takeAt
-  if not isNil(vtbl.count):
+  if not isNil(vtbl[].count):
     vtbl[].vtbl.count = miqt_exec_callback_cQHBoxLayout_count
-  if not isNil(vtbl.setGeometry):
+  if not isNil(vtbl[].setGeometry):
     vtbl[].vtbl.setGeometry = miqt_exec_callback_cQHBoxLayout_setGeometry
-  if not isNil(vtbl.geometry):
+  if not isNil(vtbl[].geometry):
     vtbl[].vtbl.geometry = miqt_exec_callback_cQHBoxLayout_geometry
-  if not isNil(vtbl.indexOf):
+  if not isNil(vtbl[].indexOf):
     vtbl[].vtbl.indexOf = miqt_exec_callback_cQHBoxLayout_indexOf
-  if not isNil(vtbl.isEmpty):
+  if not isNil(vtbl[].isEmpty):
     vtbl[].vtbl.isEmpty = miqt_exec_callback_cQHBoxLayout_isEmpty
-  if not isNil(vtbl.controlTypes):
+  if not isNil(vtbl[].controlTypes):
     vtbl[].vtbl.controlTypes = miqt_exec_callback_cQHBoxLayout_controlTypes
-  if not isNil(vtbl.layout):
+  if not isNil(vtbl[].layout):
     vtbl[].vtbl.layout = miqt_exec_callback_cQHBoxLayout_layout
-  if not isNil(vtbl.childEvent):
+  if not isNil(vtbl[].childEvent):
     vtbl[].vtbl.childEvent = miqt_exec_callback_cQHBoxLayout_childEvent
-  if not isNil(vtbl.event):
+  if not isNil(vtbl[].event):
     vtbl[].vtbl.event = miqt_exec_callback_cQHBoxLayout_event
-  if not isNil(vtbl.eventFilter):
+  if not isNil(vtbl[].eventFilter):
     vtbl[].vtbl.eventFilter = miqt_exec_callback_cQHBoxLayout_eventFilter
-  if not isNil(vtbl.timerEvent):
+  if not isNil(vtbl[].timerEvent):
     vtbl[].vtbl.timerEvent = miqt_exec_callback_cQHBoxLayout_timerEvent
-  if not isNil(vtbl.customEvent):
+  if not isNil(vtbl[].customEvent):
     vtbl[].vtbl.customEvent = miqt_exec_callback_cQHBoxLayout_customEvent
-  if not isNil(vtbl.connectNotify):
+  if not isNil(vtbl[].connectNotify):
     vtbl[].vtbl.connectNotify = miqt_exec_callback_cQHBoxLayout_connectNotify
-  if not isNil(vtbl.disconnectNotify):
+  if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQHBoxLayout_disconnectNotify
-  if not isNil(vtbl.widget):
+  if not isNil(vtbl[].widget):
     vtbl[].vtbl.widget = miqt_exec_callback_cQHBoxLayout_widget
-  if not isNil(vtbl.spacerItem):
+  if not isNil(vtbl[].spacerItem):
     vtbl[].vtbl.spacerItem = miqt_exec_callback_cQHBoxLayout_spacerItem
-  gen_qboxlayout_types.QHBoxLayout(h: fcQHBoxLayout_new2(addr(vtbl[]), ))
+  gen_qboxlayout_types.QHBoxLayout(h: fcQHBoxLayout_new2(addr(vtbl[].vtbl), ), owned: true)
+
+proc create*(T: type gen_qboxlayout_types.QHBoxLayout,
+    parent: gen_qwidget_types.QWidget,
+    vtbl: VirtualQHBoxLayout) =
+
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQHBoxLayoutVTable, _: ptr cQHBoxLayout) {.cdecl.} =
+    let vtbl = cast[ptr typeof(VirtualQHBoxLayout()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQHBoxLayout, vtbl)))
+    vtbl[].h = nil
+    vtbl[].owned = false
+  vtbl[].vtbl.metaObject = miqt_exec_method_cQHBoxLayout_metaObject
+  vtbl[].vtbl.metacast = miqt_exec_method_cQHBoxLayout_metacast
+  vtbl[].vtbl.metacall = miqt_exec_method_cQHBoxLayout_metacall
+  vtbl[].vtbl.addItem = miqt_exec_method_cQHBoxLayout_addItem
+  vtbl[].vtbl.sizeHint = miqt_exec_method_cQHBoxLayout_sizeHint
+  vtbl[].vtbl.minimumSize = miqt_exec_method_cQHBoxLayout_minimumSize
+  vtbl[].vtbl.maximumSize = miqt_exec_method_cQHBoxLayout_maximumSize
+  vtbl[].vtbl.hasHeightForWidth = miqt_exec_method_cQHBoxLayout_hasHeightForWidth
+  vtbl[].vtbl.heightForWidth = miqt_exec_method_cQHBoxLayout_heightForWidth
+  vtbl[].vtbl.minimumHeightForWidth = miqt_exec_method_cQHBoxLayout_minimumHeightForWidth
+  vtbl[].vtbl.expandingDirections = miqt_exec_method_cQHBoxLayout_expandingDirections
+  vtbl[].vtbl.invalidate = miqt_exec_method_cQHBoxLayout_invalidate
+  vtbl[].vtbl.itemAt = miqt_exec_method_cQHBoxLayout_itemAt
+  vtbl[].vtbl.takeAt = miqt_exec_method_cQHBoxLayout_takeAt
+  vtbl[].vtbl.count = miqt_exec_method_cQHBoxLayout_count
+  vtbl[].vtbl.setGeometry = miqt_exec_method_cQHBoxLayout_setGeometry
+  vtbl[].vtbl.geometry = miqt_exec_method_cQHBoxLayout_geometry
+  vtbl[].vtbl.indexOf = miqt_exec_method_cQHBoxLayout_indexOf
+  vtbl[].vtbl.isEmpty = miqt_exec_method_cQHBoxLayout_isEmpty
+  vtbl[].vtbl.controlTypes = miqt_exec_method_cQHBoxLayout_controlTypes
+  vtbl[].vtbl.layout = miqt_exec_method_cQHBoxLayout_layout
+  vtbl[].vtbl.childEvent = miqt_exec_method_cQHBoxLayout_childEvent
+  vtbl[].vtbl.event = miqt_exec_method_cQHBoxLayout_event
+  vtbl[].vtbl.eventFilter = miqt_exec_method_cQHBoxLayout_eventFilter
+  vtbl[].vtbl.timerEvent = miqt_exec_method_cQHBoxLayout_timerEvent
+  vtbl[].vtbl.customEvent = miqt_exec_method_cQHBoxLayout_customEvent
+  vtbl[].vtbl.connectNotify = miqt_exec_method_cQHBoxLayout_connectNotify
+  vtbl[].vtbl.disconnectNotify = miqt_exec_method_cQHBoxLayout_disconnectNotify
+  vtbl[].vtbl.widget = miqt_exec_method_cQHBoxLayout_widget
+  vtbl[].vtbl.spacerItem = miqt_exec_method_cQHBoxLayout_spacerItem
+  if vtbl[].h != nil: delete(move(vtbl[]))
+  vtbl[].h = fcQHBoxLayout_new(addr(vtbl[].vtbl), parent.h)
+  vtbl[].owned = true
+
+proc create*(T: type gen_qboxlayout_types.QHBoxLayout,
+    vtbl: VirtualQHBoxLayout) =
+
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQHBoxLayoutVTable, _: ptr cQHBoxLayout) {.cdecl.} =
+    let vtbl = cast[ptr typeof(VirtualQHBoxLayout()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQHBoxLayout, vtbl)))
+    vtbl[].h = nil
+    vtbl[].owned = false
+  vtbl[].vtbl.metaObject = miqt_exec_method_cQHBoxLayout_metaObject
+  vtbl[].vtbl.metacast = miqt_exec_method_cQHBoxLayout_metacast
+  vtbl[].vtbl.metacall = miqt_exec_method_cQHBoxLayout_metacall
+  vtbl[].vtbl.addItem = miqt_exec_method_cQHBoxLayout_addItem
+  vtbl[].vtbl.sizeHint = miqt_exec_method_cQHBoxLayout_sizeHint
+  vtbl[].vtbl.minimumSize = miqt_exec_method_cQHBoxLayout_minimumSize
+  vtbl[].vtbl.maximumSize = miqt_exec_method_cQHBoxLayout_maximumSize
+  vtbl[].vtbl.hasHeightForWidth = miqt_exec_method_cQHBoxLayout_hasHeightForWidth
+  vtbl[].vtbl.heightForWidth = miqt_exec_method_cQHBoxLayout_heightForWidth
+  vtbl[].vtbl.minimumHeightForWidth = miqt_exec_method_cQHBoxLayout_minimumHeightForWidth
+  vtbl[].vtbl.expandingDirections = miqt_exec_method_cQHBoxLayout_expandingDirections
+  vtbl[].vtbl.invalidate = miqt_exec_method_cQHBoxLayout_invalidate
+  vtbl[].vtbl.itemAt = miqt_exec_method_cQHBoxLayout_itemAt
+  vtbl[].vtbl.takeAt = miqt_exec_method_cQHBoxLayout_takeAt
+  vtbl[].vtbl.count = miqt_exec_method_cQHBoxLayout_count
+  vtbl[].vtbl.setGeometry = miqt_exec_method_cQHBoxLayout_setGeometry
+  vtbl[].vtbl.geometry = miqt_exec_method_cQHBoxLayout_geometry
+  vtbl[].vtbl.indexOf = miqt_exec_method_cQHBoxLayout_indexOf
+  vtbl[].vtbl.isEmpty = miqt_exec_method_cQHBoxLayout_isEmpty
+  vtbl[].vtbl.controlTypes = miqt_exec_method_cQHBoxLayout_controlTypes
+  vtbl[].vtbl.layout = miqt_exec_method_cQHBoxLayout_layout
+  vtbl[].vtbl.childEvent = miqt_exec_method_cQHBoxLayout_childEvent
+  vtbl[].vtbl.event = miqt_exec_method_cQHBoxLayout_event
+  vtbl[].vtbl.eventFilter = miqt_exec_method_cQHBoxLayout_eventFilter
+  vtbl[].vtbl.timerEvent = miqt_exec_method_cQHBoxLayout_timerEvent
+  vtbl[].vtbl.customEvent = miqt_exec_method_cQHBoxLayout_customEvent
+  vtbl[].vtbl.connectNotify = miqt_exec_method_cQHBoxLayout_connectNotify
+  vtbl[].vtbl.disconnectNotify = miqt_exec_method_cQHBoxLayout_disconnectNotify
+  vtbl[].vtbl.widget = miqt_exec_method_cQHBoxLayout_widget
+  vtbl[].vtbl.spacerItem = miqt_exec_method_cQHBoxLayout_spacerItem
+  if vtbl[].h != nil: delete(move(vtbl[]))
+  vtbl[].h = fcQHBoxLayout_new2(addr(vtbl[].vtbl), )
+  vtbl[].owned = true
 
 proc staticMetaObject*(_: type gen_qboxlayout_types.QHBoxLayout): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQHBoxLayout_staticMetaObject())
-proc delete*(self: gen_qboxlayout_types.QHBoxLayout) =
-  fcQHBoxLayout_delete(self.h)
 proc metaObject*(self: gen_qboxlayout_types.QVBoxLayout, ): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQVBoxLayout_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQVBoxLayout_metaObject(self.h), owned: false)
 
 proc metacast*(self: gen_qboxlayout_types.QVBoxLayout, param1: cstring): pointer =
   fcQVBoxLayout_metacast(self.h, param1)
@@ -1680,7 +2406,7 @@ type QVBoxLayoutconnectNotifyProc* = proc(self: QVBoxLayout, signal: gen_qmetaob
 type QVBoxLayoutdisconnectNotifyProc* = proc(self: QVBoxLayout, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
 type QVBoxLayoutwidgetProc* = proc(self: QVBoxLayout): gen_qwidget_types.QWidget {.raises: [], gcsafe.}
 type QVBoxLayoutspacerItemProc* = proc(self: QVBoxLayout): gen_qlayoutitem_types.QSpacerItem {.raises: [], gcsafe.}
-type QVBoxLayoutVTable* = object
+type QVBoxLayoutVTable* {.inheritable, pure.} = object
   vtbl: cQVBoxLayoutVTable
   metaObject*: QVBoxLayoutmetaObjectProc
   metacast*: QVBoxLayoutmetacastProc
@@ -1713,13 +2439,16 @@ type QVBoxLayoutVTable* = object
   widget*: QVBoxLayoutwidgetProc
   spacerItem*: QVBoxLayoutspacerItemProc
 proc QVBoxLayoutmetaObject*(self: gen_qboxlayout_types.QVBoxLayout, ): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQVBoxLayout_virtualbase_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQVBoxLayout_virtualbase_metaObject(self.h), owned: false)
 
 proc miqt_exec_callback_cQVBoxLayout_metaObject(vtbl: pointer, self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QVBoxLayoutVTable](vtbl)
   let self = QVBoxLayout(h: self)
   var virtualReturn = vtbl[].metaObject(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QVBoxLayoutmetacast*(self: gen_qboxlayout_types.QVBoxLayout, param1: cstring): pointer =
   fcQVBoxLayout_virtualbase_metacast(self.h, param1)
@@ -1749,35 +2478,44 @@ proc QVBoxLayoutaddItem*(self: gen_qboxlayout_types.QVBoxLayout, param1: gen_qla
 proc miqt_exec_callback_cQVBoxLayout_addItem(vtbl: pointer, self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QVBoxLayoutVTable](vtbl)
   let self = QVBoxLayout(h: self)
-  let slotval1 = gen_qlayoutitem_types.QLayoutItem(h: param1)
+  let slotval1 = gen_qlayoutitem_types.QLayoutItem(h: param1, owned: false)
   vtbl[].addItem(self, slotval1)
 
 proc QVBoxLayoutsizeHint*(self: gen_qboxlayout_types.QVBoxLayout, ): gen_qsize_types.QSize =
-  gen_qsize_types.QSize(h: fcQVBoxLayout_virtualbase_sizeHint(self.h))
+  gen_qsize_types.QSize(h: fcQVBoxLayout_virtualbase_sizeHint(self.h), owned: true)
 
 proc miqt_exec_callback_cQVBoxLayout_sizeHint(vtbl: pointer, self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QVBoxLayoutVTable](vtbl)
   let self = QVBoxLayout(h: self)
   var virtualReturn = vtbl[].sizeHint(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QVBoxLayoutminimumSize*(self: gen_qboxlayout_types.QVBoxLayout, ): gen_qsize_types.QSize =
-  gen_qsize_types.QSize(h: fcQVBoxLayout_virtualbase_minimumSize(self.h))
+  gen_qsize_types.QSize(h: fcQVBoxLayout_virtualbase_minimumSize(self.h), owned: true)
 
 proc miqt_exec_callback_cQVBoxLayout_minimumSize(vtbl: pointer, self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QVBoxLayoutVTable](vtbl)
   let self = QVBoxLayout(h: self)
   var virtualReturn = vtbl[].minimumSize(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QVBoxLayoutmaximumSize*(self: gen_qboxlayout_types.QVBoxLayout, ): gen_qsize_types.QSize =
-  gen_qsize_types.QSize(h: fcQVBoxLayout_virtualbase_maximumSize(self.h))
+  gen_qsize_types.QSize(h: fcQVBoxLayout_virtualbase_maximumSize(self.h), owned: true)
 
 proc miqt_exec_callback_cQVBoxLayout_maximumSize(vtbl: pointer, self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QVBoxLayoutVTable](vtbl)
   let self = QVBoxLayout(h: self)
   var virtualReturn = vtbl[].maximumSize(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QVBoxLayouthasHeightForWidth*(self: gen_qboxlayout_types.QVBoxLayout, ): bool =
   fcQVBoxLayout_virtualbase_hasHeightForWidth(self.h)
@@ -1826,24 +2564,30 @@ proc miqt_exec_callback_cQVBoxLayout_invalidate(vtbl: pointer, self: pointer): v
   vtbl[].invalidate(self)
 
 proc QVBoxLayoutitemAt*(self: gen_qboxlayout_types.QVBoxLayout, param1: cint): gen_qlayoutitem_types.QLayoutItem =
-  gen_qlayoutitem_types.QLayoutItem(h: fcQVBoxLayout_virtualbase_itemAt(self.h, param1))
+  gen_qlayoutitem_types.QLayoutItem(h: fcQVBoxLayout_virtualbase_itemAt(self.h, param1), owned: false)
 
 proc miqt_exec_callback_cQVBoxLayout_itemAt(vtbl: pointer, self: pointer, param1: cint): pointer {.cdecl.} =
   let vtbl = cast[ptr QVBoxLayoutVTable](vtbl)
   let self = QVBoxLayout(h: self)
   let slotval1 = param1
   var virtualReturn = vtbl[].itemAt(self, slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QVBoxLayouttakeAt*(self: gen_qboxlayout_types.QVBoxLayout, param1: cint): gen_qlayoutitem_types.QLayoutItem =
-  gen_qlayoutitem_types.QLayoutItem(h: fcQVBoxLayout_virtualbase_takeAt(self.h, param1))
+  gen_qlayoutitem_types.QLayoutItem(h: fcQVBoxLayout_virtualbase_takeAt(self.h, param1), owned: false)
 
 proc miqt_exec_callback_cQVBoxLayout_takeAt(vtbl: pointer, self: pointer, param1: cint): pointer {.cdecl.} =
   let vtbl = cast[ptr QVBoxLayoutVTable](vtbl)
   let self = QVBoxLayout(h: self)
   let slotval1 = param1
   var virtualReturn = vtbl[].takeAt(self, slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QVBoxLayoutcount*(self: gen_qboxlayout_types.QVBoxLayout, ): cint =
   fcQVBoxLayout_virtualbase_count(self.h)
@@ -1860,17 +2604,20 @@ proc QVBoxLayoutsetGeometry*(self: gen_qboxlayout_types.QVBoxLayout, geometry: g
 proc miqt_exec_callback_cQVBoxLayout_setGeometry(vtbl: pointer, self: pointer, geometry: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QVBoxLayoutVTable](vtbl)
   let self = QVBoxLayout(h: self)
-  let slotval1 = gen_qrect_types.QRect(h: geometry)
+  let slotval1 = gen_qrect_types.QRect(h: geometry, owned: false)
   vtbl[].setGeometry(self, slotval1)
 
 proc QVBoxLayoutgeometry*(self: gen_qboxlayout_types.QVBoxLayout, ): gen_qrect_types.QRect =
-  gen_qrect_types.QRect(h: fcQVBoxLayout_virtualbase_geometry(self.h))
+  gen_qrect_types.QRect(h: fcQVBoxLayout_virtualbase_geometry(self.h), owned: true)
 
 proc miqt_exec_callback_cQVBoxLayout_geometry(vtbl: pointer, self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QVBoxLayoutVTable](vtbl)
   let self = QVBoxLayout(h: self)
   var virtualReturn = vtbl[].geometry(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QVBoxLayoutindexOf*(self: gen_qboxlayout_types.QVBoxLayout, param1: gen_qwidget_types.QWidget): cint =
   fcQVBoxLayout_virtualbase_indexOf(self.h, param1.h)
@@ -1878,7 +2625,7 @@ proc QVBoxLayoutindexOf*(self: gen_qboxlayout_types.QVBoxLayout, param1: gen_qwi
 proc miqt_exec_callback_cQVBoxLayout_indexOf(vtbl: pointer, self: pointer, param1: pointer): cint {.cdecl.} =
   let vtbl = cast[ptr QVBoxLayoutVTable](vtbl)
   let self = QVBoxLayout(h: self)
-  let slotval1 = gen_qwidget_types.QWidget(h: param1)
+  let slotval1 = gen_qwidget_types.QWidget(h: param1, owned: false)
   var virtualReturn = vtbl[].indexOf(self, slotval1)
   virtualReturn
 
@@ -1901,13 +2648,16 @@ proc miqt_exec_callback_cQVBoxLayout_controlTypes(vtbl: pointer, self: pointer):
   cint(virtualReturn)
 
 proc QVBoxLayoutlayout*(self: gen_qboxlayout_types.QVBoxLayout, ): gen_qlayout_types.QLayout =
-  gen_qlayout_types.QLayout(h: fcQVBoxLayout_virtualbase_layout(self.h))
+  gen_qlayout_types.QLayout(h: fcQVBoxLayout_virtualbase_layout(self.h), owned: false)
 
 proc miqt_exec_callback_cQVBoxLayout_layout(vtbl: pointer, self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QVBoxLayoutVTable](vtbl)
   let self = QVBoxLayout(h: self)
   var virtualReturn = vtbl[].layout(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QVBoxLayoutchildEvent*(self: gen_qboxlayout_types.QVBoxLayout, e: gen_qcoreevent_types.QChildEvent): void =
   fcQVBoxLayout_virtualbase_childEvent(self.h, e.h)
@@ -1915,7 +2665,7 @@ proc QVBoxLayoutchildEvent*(self: gen_qboxlayout_types.QVBoxLayout, e: gen_qcore
 proc miqt_exec_callback_cQVBoxLayout_childEvent(vtbl: pointer, self: pointer, e: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QVBoxLayoutVTable](vtbl)
   let self = QVBoxLayout(h: self)
-  let slotval1 = gen_qcoreevent_types.QChildEvent(h: e)
+  let slotval1 = gen_qcoreevent_types.QChildEvent(h: e, owned: false)
   vtbl[].childEvent(self, slotval1)
 
 proc QVBoxLayoutevent*(self: gen_qboxlayout_types.QVBoxLayout, event: gen_qcoreevent_types.QEvent): bool =
@@ -1924,7 +2674,7 @@ proc QVBoxLayoutevent*(self: gen_qboxlayout_types.QVBoxLayout, event: gen_qcoree
 proc miqt_exec_callback_cQVBoxLayout_event(vtbl: pointer, self: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QVBoxLayoutVTable](vtbl)
   let self = QVBoxLayout(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].event(self, slotval1)
   virtualReturn
 
@@ -1934,8 +2684,8 @@ proc QVBoxLayouteventFilter*(self: gen_qboxlayout_types.QVBoxLayout, watched: ge
 proc miqt_exec_callback_cQVBoxLayout_eventFilter(vtbl: pointer, self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QVBoxLayoutVTable](vtbl)
   let self = QVBoxLayout(h: self)
-  let slotval1 = gen_qobject_types.QObject(h: watched)
-  let slotval2 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].eventFilter(self, slotval1, slotval2)
   virtualReturn
 
@@ -1945,7 +2695,7 @@ proc QVBoxLayouttimerEvent*(self: gen_qboxlayout_types.QVBoxLayout, event: gen_q
 proc miqt_exec_callback_cQVBoxLayout_timerEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QVBoxLayoutVTable](vtbl)
   let self = QVBoxLayout(h: self)
-  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   vtbl[].timerEvent(self, slotval1)
 
 proc QVBoxLayoutcustomEvent*(self: gen_qboxlayout_types.QVBoxLayout, event: gen_qcoreevent_types.QEvent): void =
@@ -1954,7 +2704,7 @@ proc QVBoxLayoutcustomEvent*(self: gen_qboxlayout_types.QVBoxLayout, event: gen_
 proc miqt_exec_callback_cQVBoxLayout_customEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QVBoxLayoutVTable](vtbl)
   let self = QVBoxLayout(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].customEvent(self, slotval1)
 
 proc QVBoxLayoutconnectNotify*(self: gen_qboxlayout_types.QVBoxLayout, signal: gen_qmetaobject_types.QMetaMethod): void =
@@ -1963,7 +2713,7 @@ proc QVBoxLayoutconnectNotify*(self: gen_qboxlayout_types.QVBoxLayout, signal: g
 proc miqt_exec_callback_cQVBoxLayout_connectNotify(vtbl: pointer, self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QVBoxLayoutVTable](vtbl)
   let self = QVBoxLayout(h: self)
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].connectNotify(self, slotval1)
 
 proc QVBoxLayoutdisconnectNotify*(self: gen_qboxlayout_types.QVBoxLayout, signal: gen_qmetaobject_types.QMetaMethod): void =
@@ -1972,26 +2722,285 @@ proc QVBoxLayoutdisconnectNotify*(self: gen_qboxlayout_types.QVBoxLayout, signal
 proc miqt_exec_callback_cQVBoxLayout_disconnectNotify(vtbl: pointer, self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QVBoxLayoutVTable](vtbl)
   let self = QVBoxLayout(h: self)
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].disconnectNotify(self, slotval1)
 
 proc QVBoxLayoutwidget*(self: gen_qboxlayout_types.QVBoxLayout, ): gen_qwidget_types.QWidget =
-  gen_qwidget_types.QWidget(h: fcQVBoxLayout_virtualbase_widget(self.h))
+  gen_qwidget_types.QWidget(h: fcQVBoxLayout_virtualbase_widget(self.h), owned: false)
 
 proc miqt_exec_callback_cQVBoxLayout_widget(vtbl: pointer, self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QVBoxLayoutVTable](vtbl)
   let self = QVBoxLayout(h: self)
   var virtualReturn = vtbl[].widget(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QVBoxLayoutspacerItem*(self: gen_qboxlayout_types.QVBoxLayout, ): gen_qlayoutitem_types.QSpacerItem =
-  gen_qlayoutitem_types.QSpacerItem(h: fcQVBoxLayout_virtualbase_spacerItem(self.h))
+  gen_qlayoutitem_types.QSpacerItem(h: fcQVBoxLayout_virtualbase_spacerItem(self.h), owned: false)
 
 proc miqt_exec_callback_cQVBoxLayout_spacerItem(vtbl: pointer, self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QVBoxLayoutVTable](vtbl)
   let self = QVBoxLayout(h: self)
   var virtualReturn = vtbl[].spacerItem(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
+
+type VirtualQVBoxLayout* {.inheritable.} = ref object of QVBoxLayout
+  vtbl*: cQVBoxLayoutVTable
+method metaObject*(self: VirtualQVBoxLayout, ): gen_qobjectdefs_types.QMetaObject {.base.} =
+  QVBoxLayoutmetaObject(self[])
+proc miqt_exec_method_cQVBoxLayout_metaObject(vtbl: pointer, inst: pointer): pointer {.cdecl.} =
+  let vtbl = cast[VirtualQVBoxLayout](cast[uint](vtbl) - uint(offsetOf(VirtualQVBoxLayout, vtbl)))
+  var virtualReturn = vtbl.metaObject()
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
+
+method metacast*(self: VirtualQVBoxLayout, param1: cstring): pointer {.base.} =
+  QVBoxLayoutmetacast(self[], param1)
+proc miqt_exec_method_cQVBoxLayout_metacast(vtbl: pointer, inst: pointer, param1: cstring): pointer {.cdecl.} =
+  let vtbl = cast[VirtualQVBoxLayout](cast[uint](vtbl) - uint(offsetOf(VirtualQVBoxLayout, vtbl)))
+  let slotval1 = (param1)
+  var virtualReturn = vtbl.metacast(slotval1)
+  virtualReturn
+
+method metacall*(self: VirtualQVBoxLayout, param1: cint, param2: cint, param3: pointer): cint {.base.} =
+  QVBoxLayoutmetacall(self[], param1, param2, param3)
+proc miqt_exec_method_cQVBoxLayout_metacall(vtbl: pointer, inst: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
+  let vtbl = cast[VirtualQVBoxLayout](cast[uint](vtbl) - uint(offsetOf(VirtualQVBoxLayout, vtbl)))
+  let slotval1 = cint(param1)
+  let slotval2 = param2
+  let slotval3 = param3
+  var virtualReturn = vtbl.metacall(slotval1, slotval2, slotval3)
+  virtualReturn
+
+method addItem*(self: VirtualQVBoxLayout, param1: gen_qlayoutitem_types.QLayoutItem): void {.base.} =
+  QVBoxLayoutaddItem(self[], param1)
+proc miqt_exec_method_cQVBoxLayout_addItem(vtbl: pointer, inst: pointer, param1: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQVBoxLayout](cast[uint](vtbl) - uint(offsetOf(VirtualQVBoxLayout, vtbl)))
+  let slotval1 = gen_qlayoutitem_types.QLayoutItem(h: param1, owned: false)
+  vtbl.addItem(slotval1)
+
+method sizeHint*(self: VirtualQVBoxLayout, ): gen_qsize_types.QSize {.base.} =
+  QVBoxLayoutsizeHint(self[])
+proc miqt_exec_method_cQVBoxLayout_sizeHint(vtbl: pointer, inst: pointer): pointer {.cdecl.} =
+  let vtbl = cast[VirtualQVBoxLayout](cast[uint](vtbl) - uint(offsetOf(VirtualQVBoxLayout, vtbl)))
+  var virtualReturn = vtbl.sizeHint()
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
+
+method minimumSize*(self: VirtualQVBoxLayout, ): gen_qsize_types.QSize {.base.} =
+  QVBoxLayoutminimumSize(self[])
+proc miqt_exec_method_cQVBoxLayout_minimumSize(vtbl: pointer, inst: pointer): pointer {.cdecl.} =
+  let vtbl = cast[VirtualQVBoxLayout](cast[uint](vtbl) - uint(offsetOf(VirtualQVBoxLayout, vtbl)))
+  var virtualReturn = vtbl.minimumSize()
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
+
+method maximumSize*(self: VirtualQVBoxLayout, ): gen_qsize_types.QSize {.base.} =
+  QVBoxLayoutmaximumSize(self[])
+proc miqt_exec_method_cQVBoxLayout_maximumSize(vtbl: pointer, inst: pointer): pointer {.cdecl.} =
+  let vtbl = cast[VirtualQVBoxLayout](cast[uint](vtbl) - uint(offsetOf(VirtualQVBoxLayout, vtbl)))
+  var virtualReturn = vtbl.maximumSize()
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
+
+method hasHeightForWidth*(self: VirtualQVBoxLayout, ): bool {.base.} =
+  QVBoxLayouthasHeightForWidth(self[])
+proc miqt_exec_method_cQVBoxLayout_hasHeightForWidth(vtbl: pointer, inst: pointer): bool {.cdecl.} =
+  let vtbl = cast[VirtualQVBoxLayout](cast[uint](vtbl) - uint(offsetOf(VirtualQVBoxLayout, vtbl)))
+  var virtualReturn = vtbl.hasHeightForWidth()
+  virtualReturn
+
+method heightForWidth*(self: VirtualQVBoxLayout, param1: cint): cint {.base.} =
+  QVBoxLayoutheightForWidth(self[], param1)
+proc miqt_exec_method_cQVBoxLayout_heightForWidth(vtbl: pointer, inst: pointer, param1: cint): cint {.cdecl.} =
+  let vtbl = cast[VirtualQVBoxLayout](cast[uint](vtbl) - uint(offsetOf(VirtualQVBoxLayout, vtbl)))
+  let slotval1 = param1
+  var virtualReturn = vtbl.heightForWidth(slotval1)
+  virtualReturn
+
+method minimumHeightForWidth*(self: VirtualQVBoxLayout, param1: cint): cint {.base.} =
+  QVBoxLayoutminimumHeightForWidth(self[], param1)
+proc miqt_exec_method_cQVBoxLayout_minimumHeightForWidth(vtbl: pointer, inst: pointer, param1: cint): cint {.cdecl.} =
+  let vtbl = cast[VirtualQVBoxLayout](cast[uint](vtbl) - uint(offsetOf(VirtualQVBoxLayout, vtbl)))
+  let slotval1 = param1
+  var virtualReturn = vtbl.minimumHeightForWidth(slotval1)
+  virtualReturn
+
+method expandingDirections*(self: VirtualQVBoxLayout, ): cint {.base.} =
+  QVBoxLayoutexpandingDirections(self[])
+proc miqt_exec_method_cQVBoxLayout_expandingDirections(vtbl: pointer, inst: pointer): cint {.cdecl.} =
+  let vtbl = cast[VirtualQVBoxLayout](cast[uint](vtbl) - uint(offsetOf(VirtualQVBoxLayout, vtbl)))
+  var virtualReturn = vtbl.expandingDirections()
+  cint(virtualReturn)
+
+method invalidate*(self: VirtualQVBoxLayout, ): void {.base.} =
+  QVBoxLayoutinvalidate(self[])
+proc miqt_exec_method_cQVBoxLayout_invalidate(vtbl: pointer, inst: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQVBoxLayout](cast[uint](vtbl) - uint(offsetOf(VirtualQVBoxLayout, vtbl)))
+  vtbl.invalidate()
+
+method itemAt*(self: VirtualQVBoxLayout, param1: cint): gen_qlayoutitem_types.QLayoutItem {.base.} =
+  QVBoxLayoutitemAt(self[], param1)
+proc miqt_exec_method_cQVBoxLayout_itemAt(vtbl: pointer, inst: pointer, param1: cint): pointer {.cdecl.} =
+  let vtbl = cast[VirtualQVBoxLayout](cast[uint](vtbl) - uint(offsetOf(VirtualQVBoxLayout, vtbl)))
+  let slotval1 = param1
+  var virtualReturn = vtbl.itemAt(slotval1)
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
+
+method takeAt*(self: VirtualQVBoxLayout, param1: cint): gen_qlayoutitem_types.QLayoutItem {.base.} =
+  QVBoxLayouttakeAt(self[], param1)
+proc miqt_exec_method_cQVBoxLayout_takeAt(vtbl: pointer, inst: pointer, param1: cint): pointer {.cdecl.} =
+  let vtbl = cast[VirtualQVBoxLayout](cast[uint](vtbl) - uint(offsetOf(VirtualQVBoxLayout, vtbl)))
+  let slotval1 = param1
+  var virtualReturn = vtbl.takeAt(slotval1)
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
+
+method count*(self: VirtualQVBoxLayout, ): cint {.base.} =
+  QVBoxLayoutcount(self[])
+proc miqt_exec_method_cQVBoxLayout_count(vtbl: pointer, inst: pointer): cint {.cdecl.} =
+  let vtbl = cast[VirtualQVBoxLayout](cast[uint](vtbl) - uint(offsetOf(VirtualQVBoxLayout, vtbl)))
+  var virtualReturn = vtbl.count()
+  virtualReturn
+
+method setGeometry*(self: VirtualQVBoxLayout, geometry: gen_qrect_types.QRect): void {.base.} =
+  QVBoxLayoutsetGeometry(self[], geometry)
+proc miqt_exec_method_cQVBoxLayout_setGeometry(vtbl: pointer, inst: pointer, geometry: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQVBoxLayout](cast[uint](vtbl) - uint(offsetOf(VirtualQVBoxLayout, vtbl)))
+  let slotval1 = gen_qrect_types.QRect(h: geometry, owned: false)
+  vtbl.setGeometry(slotval1)
+
+method geometry*(self: VirtualQVBoxLayout, ): gen_qrect_types.QRect {.base.} =
+  QVBoxLayoutgeometry(self[])
+proc miqt_exec_method_cQVBoxLayout_geometry(vtbl: pointer, inst: pointer): pointer {.cdecl.} =
+  let vtbl = cast[VirtualQVBoxLayout](cast[uint](vtbl) - uint(offsetOf(VirtualQVBoxLayout, vtbl)))
+  var virtualReturn = vtbl.geometry()
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
+
+method indexOf*(self: VirtualQVBoxLayout, param1: gen_qwidget_types.QWidget): cint {.base.} =
+  QVBoxLayoutindexOf(self[], param1)
+proc miqt_exec_method_cQVBoxLayout_indexOf(vtbl: pointer, inst: pointer, param1: pointer): cint {.cdecl.} =
+  let vtbl = cast[VirtualQVBoxLayout](cast[uint](vtbl) - uint(offsetOf(VirtualQVBoxLayout, vtbl)))
+  let slotval1 = gen_qwidget_types.QWidget(h: param1, owned: false)
+  var virtualReturn = vtbl.indexOf(slotval1)
+  virtualReturn
+
+method isEmpty*(self: VirtualQVBoxLayout, ): bool {.base.} =
+  QVBoxLayoutisEmpty(self[])
+proc miqt_exec_method_cQVBoxLayout_isEmpty(vtbl: pointer, inst: pointer): bool {.cdecl.} =
+  let vtbl = cast[VirtualQVBoxLayout](cast[uint](vtbl) - uint(offsetOf(VirtualQVBoxLayout, vtbl)))
+  var virtualReturn = vtbl.isEmpty()
+  virtualReturn
+
+method controlTypes*(self: VirtualQVBoxLayout, ): cint {.base.} =
+  QVBoxLayoutcontrolTypes(self[])
+proc miqt_exec_method_cQVBoxLayout_controlTypes(vtbl: pointer, inst: pointer): cint {.cdecl.} =
+  let vtbl = cast[VirtualQVBoxLayout](cast[uint](vtbl) - uint(offsetOf(VirtualQVBoxLayout, vtbl)))
+  var virtualReturn = vtbl.controlTypes()
+  cint(virtualReturn)
+
+method layout*(self: VirtualQVBoxLayout, ): gen_qlayout_types.QLayout {.base.} =
+  QVBoxLayoutlayout(self[])
+proc miqt_exec_method_cQVBoxLayout_layout(vtbl: pointer, inst: pointer): pointer {.cdecl.} =
+  let vtbl = cast[VirtualQVBoxLayout](cast[uint](vtbl) - uint(offsetOf(VirtualQVBoxLayout, vtbl)))
+  var virtualReturn = vtbl.layout()
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
+
+method childEvent*(self: VirtualQVBoxLayout, e: gen_qcoreevent_types.QChildEvent): void {.base.} =
+  QVBoxLayoutchildEvent(self[], e)
+proc miqt_exec_method_cQVBoxLayout_childEvent(vtbl: pointer, inst: pointer, e: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQVBoxLayout](cast[uint](vtbl) - uint(offsetOf(VirtualQVBoxLayout, vtbl)))
+  let slotval1 = gen_qcoreevent_types.QChildEvent(h: e, owned: false)
+  vtbl.childEvent(slotval1)
+
+method event*(self: VirtualQVBoxLayout, event: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QVBoxLayoutevent(self[], event)
+proc miqt_exec_method_cQVBoxLayout_event(vtbl: pointer, inst: pointer, event: pointer): bool {.cdecl.} =
+  let vtbl = cast[VirtualQVBoxLayout](cast[uint](vtbl) - uint(offsetOf(VirtualQVBoxLayout, vtbl)))
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
+  var virtualReturn = vtbl.event(slotval1)
+  virtualReturn
+
+method eventFilter*(self: VirtualQVBoxLayout, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QVBoxLayouteventFilter(self[], watched, event)
+proc miqt_exec_method_cQVBoxLayout_eventFilter(vtbl: pointer, inst: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
+  let vtbl = cast[VirtualQVBoxLayout](cast[uint](vtbl) - uint(offsetOf(VirtualQVBoxLayout, vtbl)))
+  let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
+  var virtualReturn = vtbl.eventFilter(slotval1, slotval2)
+  virtualReturn
+
+method timerEvent*(self: VirtualQVBoxLayout, event: gen_qcoreevent_types.QTimerEvent): void {.base.} =
+  QVBoxLayouttimerEvent(self[], event)
+proc miqt_exec_method_cQVBoxLayout_timerEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQVBoxLayout](cast[uint](vtbl) - uint(offsetOf(VirtualQVBoxLayout, vtbl)))
+  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
+  vtbl.timerEvent(slotval1)
+
+method customEvent*(self: VirtualQVBoxLayout, event: gen_qcoreevent_types.QEvent): void {.base.} =
+  QVBoxLayoutcustomEvent(self[], event)
+proc miqt_exec_method_cQVBoxLayout_customEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQVBoxLayout](cast[uint](vtbl) - uint(offsetOf(VirtualQVBoxLayout, vtbl)))
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
+  vtbl.customEvent(slotval1)
+
+method connectNotify*(self: VirtualQVBoxLayout, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QVBoxLayoutconnectNotify(self[], signal)
+proc miqt_exec_method_cQVBoxLayout_connectNotify(vtbl: pointer, inst: pointer, signal: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQVBoxLayout](cast[uint](vtbl) - uint(offsetOf(VirtualQVBoxLayout, vtbl)))
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
+  vtbl.connectNotify(slotval1)
+
+method disconnectNotify*(self: VirtualQVBoxLayout, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QVBoxLayoutdisconnectNotify(self[], signal)
+proc miqt_exec_method_cQVBoxLayout_disconnectNotify(vtbl: pointer, inst: pointer, signal: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQVBoxLayout](cast[uint](vtbl) - uint(offsetOf(VirtualQVBoxLayout, vtbl)))
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
+  vtbl.disconnectNotify(slotval1)
+
+method widget*(self: VirtualQVBoxLayout, ): gen_qwidget_types.QWidget {.base.} =
+  QVBoxLayoutwidget(self[])
+proc miqt_exec_method_cQVBoxLayout_widget(vtbl: pointer, inst: pointer): pointer {.cdecl.} =
+  let vtbl = cast[VirtualQVBoxLayout](cast[uint](vtbl) - uint(offsetOf(VirtualQVBoxLayout, vtbl)))
+  var virtualReturn = vtbl.widget()
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
+
+method spacerItem*(self: VirtualQVBoxLayout, ): gen_qlayoutitem_types.QSpacerItem {.base.} =
+  QVBoxLayoutspacerItem(self[])
+proc miqt_exec_method_cQVBoxLayout_spacerItem(vtbl: pointer, inst: pointer): pointer {.cdecl.} =
+  let vtbl = cast[VirtualQVBoxLayout](cast[uint](vtbl) - uint(offsetOf(VirtualQVBoxLayout, vtbl)))
+  var virtualReturn = vtbl.spacerItem()
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc widgetEvent*(self: gen_qboxlayout_types.QVBoxLayout, param1: gen_qcoreevent_types.QEvent): void =
   fcQVBoxLayout_protectedbase_widgetEvent(self.h, param1.h)
@@ -2006,10 +3015,10 @@ proc adoptLayout*(self: gen_qboxlayout_types.QVBoxLayout, layout: gen_qlayout_ty
   fcQVBoxLayout_protectedbase_adoptLayout(self.h, layout.h)
 
 proc alignmentRect*(self: gen_qboxlayout_types.QVBoxLayout, param1: gen_qrect_types.QRect): gen_qrect_types.QRect =
-  gen_qrect_types.QRect(h: fcQVBoxLayout_protectedbase_alignmentRect(self.h, param1.h))
+  gen_qrect_types.QRect(h: fcQVBoxLayout_protectedbase_alignmentRect(self.h, param1.h), owned: true)
 
 proc sender*(self: gen_qboxlayout_types.QVBoxLayout, ): gen_qobject_types.QObject =
-  gen_qobject_types.QObject(h: fcQVBoxLayout_protectedbase_sender(self.h))
+  gen_qobject_types.QObject(h: fcQVBoxLayout_protectedbase_sender(self.h), owned: false)
 
 proc senderSignalIndex*(self: gen_qboxlayout_types.QVBoxLayout, ): cint =
   fcQVBoxLayout_protectedbase_senderSignalIndex(self.h)
@@ -2025,141 +3034,222 @@ proc create*(T: type gen_qboxlayout_types.QVBoxLayout,
     vtbl: ref QVBoxLayoutVTable = nil): gen_qboxlayout_types.QVBoxLayout =
   let vtbl = if vtbl == nil: new QVBoxLayoutVTable else: vtbl
   GC_ref(vtbl)
-  vtbl.vtbl.destructor = proc(vtbl: ptr cQVBoxLayoutVTable, _: ptr cQVBoxLayout) {.cdecl.} =
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQVBoxLayoutVTable, _: ptr cQVBoxLayout) {.cdecl.} =
     let vtbl = cast[ref QVBoxLayoutVTable](vtbl)
     GC_unref(vtbl)
-  if not isNil(vtbl.metaObject):
+  if not isNil(vtbl[].metaObject):
     vtbl[].vtbl.metaObject = miqt_exec_callback_cQVBoxLayout_metaObject
-  if not isNil(vtbl.metacast):
+  if not isNil(vtbl[].metacast):
     vtbl[].vtbl.metacast = miqt_exec_callback_cQVBoxLayout_metacast
-  if not isNil(vtbl.metacall):
+  if not isNil(vtbl[].metacall):
     vtbl[].vtbl.metacall = miqt_exec_callback_cQVBoxLayout_metacall
-  if not isNil(vtbl.addItem):
+  if not isNil(vtbl[].addItem):
     vtbl[].vtbl.addItem = miqt_exec_callback_cQVBoxLayout_addItem
-  if not isNil(vtbl.sizeHint):
+  if not isNil(vtbl[].sizeHint):
     vtbl[].vtbl.sizeHint = miqt_exec_callback_cQVBoxLayout_sizeHint
-  if not isNil(vtbl.minimumSize):
+  if not isNil(vtbl[].minimumSize):
     vtbl[].vtbl.minimumSize = miqt_exec_callback_cQVBoxLayout_minimumSize
-  if not isNil(vtbl.maximumSize):
+  if not isNil(vtbl[].maximumSize):
     vtbl[].vtbl.maximumSize = miqt_exec_callback_cQVBoxLayout_maximumSize
-  if not isNil(vtbl.hasHeightForWidth):
+  if not isNil(vtbl[].hasHeightForWidth):
     vtbl[].vtbl.hasHeightForWidth = miqt_exec_callback_cQVBoxLayout_hasHeightForWidth
-  if not isNil(vtbl.heightForWidth):
+  if not isNil(vtbl[].heightForWidth):
     vtbl[].vtbl.heightForWidth = miqt_exec_callback_cQVBoxLayout_heightForWidth
-  if not isNil(vtbl.minimumHeightForWidth):
+  if not isNil(vtbl[].minimumHeightForWidth):
     vtbl[].vtbl.minimumHeightForWidth = miqt_exec_callback_cQVBoxLayout_minimumHeightForWidth
-  if not isNil(vtbl.expandingDirections):
+  if not isNil(vtbl[].expandingDirections):
     vtbl[].vtbl.expandingDirections = miqt_exec_callback_cQVBoxLayout_expandingDirections
-  if not isNil(vtbl.invalidate):
+  if not isNil(vtbl[].invalidate):
     vtbl[].vtbl.invalidate = miqt_exec_callback_cQVBoxLayout_invalidate
-  if not isNil(vtbl.itemAt):
+  if not isNil(vtbl[].itemAt):
     vtbl[].vtbl.itemAt = miqt_exec_callback_cQVBoxLayout_itemAt
-  if not isNil(vtbl.takeAt):
+  if not isNil(vtbl[].takeAt):
     vtbl[].vtbl.takeAt = miqt_exec_callback_cQVBoxLayout_takeAt
-  if not isNil(vtbl.count):
+  if not isNil(vtbl[].count):
     vtbl[].vtbl.count = miqt_exec_callback_cQVBoxLayout_count
-  if not isNil(vtbl.setGeometry):
+  if not isNil(vtbl[].setGeometry):
     vtbl[].vtbl.setGeometry = miqt_exec_callback_cQVBoxLayout_setGeometry
-  if not isNil(vtbl.geometry):
+  if not isNil(vtbl[].geometry):
     vtbl[].vtbl.geometry = miqt_exec_callback_cQVBoxLayout_geometry
-  if not isNil(vtbl.indexOf):
+  if not isNil(vtbl[].indexOf):
     vtbl[].vtbl.indexOf = miqt_exec_callback_cQVBoxLayout_indexOf
-  if not isNil(vtbl.isEmpty):
+  if not isNil(vtbl[].isEmpty):
     vtbl[].vtbl.isEmpty = miqt_exec_callback_cQVBoxLayout_isEmpty
-  if not isNil(vtbl.controlTypes):
+  if not isNil(vtbl[].controlTypes):
     vtbl[].vtbl.controlTypes = miqt_exec_callback_cQVBoxLayout_controlTypes
-  if not isNil(vtbl.layout):
+  if not isNil(vtbl[].layout):
     vtbl[].vtbl.layout = miqt_exec_callback_cQVBoxLayout_layout
-  if not isNil(vtbl.childEvent):
+  if not isNil(vtbl[].childEvent):
     vtbl[].vtbl.childEvent = miqt_exec_callback_cQVBoxLayout_childEvent
-  if not isNil(vtbl.event):
+  if not isNil(vtbl[].event):
     vtbl[].vtbl.event = miqt_exec_callback_cQVBoxLayout_event
-  if not isNil(vtbl.eventFilter):
+  if not isNil(vtbl[].eventFilter):
     vtbl[].vtbl.eventFilter = miqt_exec_callback_cQVBoxLayout_eventFilter
-  if not isNil(vtbl.timerEvent):
+  if not isNil(vtbl[].timerEvent):
     vtbl[].vtbl.timerEvent = miqt_exec_callback_cQVBoxLayout_timerEvent
-  if not isNil(vtbl.customEvent):
+  if not isNil(vtbl[].customEvent):
     vtbl[].vtbl.customEvent = miqt_exec_callback_cQVBoxLayout_customEvent
-  if not isNil(vtbl.connectNotify):
+  if not isNil(vtbl[].connectNotify):
     vtbl[].vtbl.connectNotify = miqt_exec_callback_cQVBoxLayout_connectNotify
-  if not isNil(vtbl.disconnectNotify):
+  if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQVBoxLayout_disconnectNotify
-  if not isNil(vtbl.widget):
+  if not isNil(vtbl[].widget):
     vtbl[].vtbl.widget = miqt_exec_callback_cQVBoxLayout_widget
-  if not isNil(vtbl.spacerItem):
+  if not isNil(vtbl[].spacerItem):
     vtbl[].vtbl.spacerItem = miqt_exec_callback_cQVBoxLayout_spacerItem
-  gen_qboxlayout_types.QVBoxLayout(h: fcQVBoxLayout_new(addr(vtbl[]), parent.h))
+  gen_qboxlayout_types.QVBoxLayout(h: fcQVBoxLayout_new(addr(vtbl[].vtbl), parent.h), owned: true)
 
 proc create*(T: type gen_qboxlayout_types.QVBoxLayout,
     vtbl: ref QVBoxLayoutVTable = nil): gen_qboxlayout_types.QVBoxLayout =
   let vtbl = if vtbl == nil: new QVBoxLayoutVTable else: vtbl
   GC_ref(vtbl)
-  vtbl.vtbl.destructor = proc(vtbl: ptr cQVBoxLayoutVTable, _: ptr cQVBoxLayout) {.cdecl.} =
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQVBoxLayoutVTable, _: ptr cQVBoxLayout) {.cdecl.} =
     let vtbl = cast[ref QVBoxLayoutVTable](vtbl)
     GC_unref(vtbl)
-  if not isNil(vtbl.metaObject):
+  if not isNil(vtbl[].metaObject):
     vtbl[].vtbl.metaObject = miqt_exec_callback_cQVBoxLayout_metaObject
-  if not isNil(vtbl.metacast):
+  if not isNil(vtbl[].metacast):
     vtbl[].vtbl.metacast = miqt_exec_callback_cQVBoxLayout_metacast
-  if not isNil(vtbl.metacall):
+  if not isNil(vtbl[].metacall):
     vtbl[].vtbl.metacall = miqt_exec_callback_cQVBoxLayout_metacall
-  if not isNil(vtbl.addItem):
+  if not isNil(vtbl[].addItem):
     vtbl[].vtbl.addItem = miqt_exec_callback_cQVBoxLayout_addItem
-  if not isNil(vtbl.sizeHint):
+  if not isNil(vtbl[].sizeHint):
     vtbl[].vtbl.sizeHint = miqt_exec_callback_cQVBoxLayout_sizeHint
-  if not isNil(vtbl.minimumSize):
+  if not isNil(vtbl[].minimumSize):
     vtbl[].vtbl.minimumSize = miqt_exec_callback_cQVBoxLayout_minimumSize
-  if not isNil(vtbl.maximumSize):
+  if not isNil(vtbl[].maximumSize):
     vtbl[].vtbl.maximumSize = miqt_exec_callback_cQVBoxLayout_maximumSize
-  if not isNil(vtbl.hasHeightForWidth):
+  if not isNil(vtbl[].hasHeightForWidth):
     vtbl[].vtbl.hasHeightForWidth = miqt_exec_callback_cQVBoxLayout_hasHeightForWidth
-  if not isNil(vtbl.heightForWidth):
+  if not isNil(vtbl[].heightForWidth):
     vtbl[].vtbl.heightForWidth = miqt_exec_callback_cQVBoxLayout_heightForWidth
-  if not isNil(vtbl.minimumHeightForWidth):
+  if not isNil(vtbl[].minimumHeightForWidth):
     vtbl[].vtbl.minimumHeightForWidth = miqt_exec_callback_cQVBoxLayout_minimumHeightForWidth
-  if not isNil(vtbl.expandingDirections):
+  if not isNil(vtbl[].expandingDirections):
     vtbl[].vtbl.expandingDirections = miqt_exec_callback_cQVBoxLayout_expandingDirections
-  if not isNil(vtbl.invalidate):
+  if not isNil(vtbl[].invalidate):
     vtbl[].vtbl.invalidate = miqt_exec_callback_cQVBoxLayout_invalidate
-  if not isNil(vtbl.itemAt):
+  if not isNil(vtbl[].itemAt):
     vtbl[].vtbl.itemAt = miqt_exec_callback_cQVBoxLayout_itemAt
-  if not isNil(vtbl.takeAt):
+  if not isNil(vtbl[].takeAt):
     vtbl[].vtbl.takeAt = miqt_exec_callback_cQVBoxLayout_takeAt
-  if not isNil(vtbl.count):
+  if not isNil(vtbl[].count):
     vtbl[].vtbl.count = miqt_exec_callback_cQVBoxLayout_count
-  if not isNil(vtbl.setGeometry):
+  if not isNil(vtbl[].setGeometry):
     vtbl[].vtbl.setGeometry = miqt_exec_callback_cQVBoxLayout_setGeometry
-  if not isNil(vtbl.geometry):
+  if not isNil(vtbl[].geometry):
     vtbl[].vtbl.geometry = miqt_exec_callback_cQVBoxLayout_geometry
-  if not isNil(vtbl.indexOf):
+  if not isNil(vtbl[].indexOf):
     vtbl[].vtbl.indexOf = miqt_exec_callback_cQVBoxLayout_indexOf
-  if not isNil(vtbl.isEmpty):
+  if not isNil(vtbl[].isEmpty):
     vtbl[].vtbl.isEmpty = miqt_exec_callback_cQVBoxLayout_isEmpty
-  if not isNil(vtbl.controlTypes):
+  if not isNil(vtbl[].controlTypes):
     vtbl[].vtbl.controlTypes = miqt_exec_callback_cQVBoxLayout_controlTypes
-  if not isNil(vtbl.layout):
+  if not isNil(vtbl[].layout):
     vtbl[].vtbl.layout = miqt_exec_callback_cQVBoxLayout_layout
-  if not isNil(vtbl.childEvent):
+  if not isNil(vtbl[].childEvent):
     vtbl[].vtbl.childEvent = miqt_exec_callback_cQVBoxLayout_childEvent
-  if not isNil(vtbl.event):
+  if not isNil(vtbl[].event):
     vtbl[].vtbl.event = miqt_exec_callback_cQVBoxLayout_event
-  if not isNil(vtbl.eventFilter):
+  if not isNil(vtbl[].eventFilter):
     vtbl[].vtbl.eventFilter = miqt_exec_callback_cQVBoxLayout_eventFilter
-  if not isNil(vtbl.timerEvent):
+  if not isNil(vtbl[].timerEvent):
     vtbl[].vtbl.timerEvent = miqt_exec_callback_cQVBoxLayout_timerEvent
-  if not isNil(vtbl.customEvent):
+  if not isNil(vtbl[].customEvent):
     vtbl[].vtbl.customEvent = miqt_exec_callback_cQVBoxLayout_customEvent
-  if not isNil(vtbl.connectNotify):
+  if not isNil(vtbl[].connectNotify):
     vtbl[].vtbl.connectNotify = miqt_exec_callback_cQVBoxLayout_connectNotify
-  if not isNil(vtbl.disconnectNotify):
+  if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQVBoxLayout_disconnectNotify
-  if not isNil(vtbl.widget):
+  if not isNil(vtbl[].widget):
     vtbl[].vtbl.widget = miqt_exec_callback_cQVBoxLayout_widget
-  if not isNil(vtbl.spacerItem):
+  if not isNil(vtbl[].spacerItem):
     vtbl[].vtbl.spacerItem = miqt_exec_callback_cQVBoxLayout_spacerItem
-  gen_qboxlayout_types.QVBoxLayout(h: fcQVBoxLayout_new2(addr(vtbl[]), ))
+  gen_qboxlayout_types.QVBoxLayout(h: fcQVBoxLayout_new2(addr(vtbl[].vtbl), ), owned: true)
+
+proc create*(T: type gen_qboxlayout_types.QVBoxLayout,
+    parent: gen_qwidget_types.QWidget,
+    vtbl: VirtualQVBoxLayout) =
+
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQVBoxLayoutVTable, _: ptr cQVBoxLayout) {.cdecl.} =
+    let vtbl = cast[ptr typeof(VirtualQVBoxLayout()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQVBoxLayout, vtbl)))
+    vtbl[].h = nil
+    vtbl[].owned = false
+  vtbl[].vtbl.metaObject = miqt_exec_method_cQVBoxLayout_metaObject
+  vtbl[].vtbl.metacast = miqt_exec_method_cQVBoxLayout_metacast
+  vtbl[].vtbl.metacall = miqt_exec_method_cQVBoxLayout_metacall
+  vtbl[].vtbl.addItem = miqt_exec_method_cQVBoxLayout_addItem
+  vtbl[].vtbl.sizeHint = miqt_exec_method_cQVBoxLayout_sizeHint
+  vtbl[].vtbl.minimumSize = miqt_exec_method_cQVBoxLayout_minimumSize
+  vtbl[].vtbl.maximumSize = miqt_exec_method_cQVBoxLayout_maximumSize
+  vtbl[].vtbl.hasHeightForWidth = miqt_exec_method_cQVBoxLayout_hasHeightForWidth
+  vtbl[].vtbl.heightForWidth = miqt_exec_method_cQVBoxLayout_heightForWidth
+  vtbl[].vtbl.minimumHeightForWidth = miqt_exec_method_cQVBoxLayout_minimumHeightForWidth
+  vtbl[].vtbl.expandingDirections = miqt_exec_method_cQVBoxLayout_expandingDirections
+  vtbl[].vtbl.invalidate = miqt_exec_method_cQVBoxLayout_invalidate
+  vtbl[].vtbl.itemAt = miqt_exec_method_cQVBoxLayout_itemAt
+  vtbl[].vtbl.takeAt = miqt_exec_method_cQVBoxLayout_takeAt
+  vtbl[].vtbl.count = miqt_exec_method_cQVBoxLayout_count
+  vtbl[].vtbl.setGeometry = miqt_exec_method_cQVBoxLayout_setGeometry
+  vtbl[].vtbl.geometry = miqt_exec_method_cQVBoxLayout_geometry
+  vtbl[].vtbl.indexOf = miqt_exec_method_cQVBoxLayout_indexOf
+  vtbl[].vtbl.isEmpty = miqt_exec_method_cQVBoxLayout_isEmpty
+  vtbl[].vtbl.controlTypes = miqt_exec_method_cQVBoxLayout_controlTypes
+  vtbl[].vtbl.layout = miqt_exec_method_cQVBoxLayout_layout
+  vtbl[].vtbl.childEvent = miqt_exec_method_cQVBoxLayout_childEvent
+  vtbl[].vtbl.event = miqt_exec_method_cQVBoxLayout_event
+  vtbl[].vtbl.eventFilter = miqt_exec_method_cQVBoxLayout_eventFilter
+  vtbl[].vtbl.timerEvent = miqt_exec_method_cQVBoxLayout_timerEvent
+  vtbl[].vtbl.customEvent = miqt_exec_method_cQVBoxLayout_customEvent
+  vtbl[].vtbl.connectNotify = miqt_exec_method_cQVBoxLayout_connectNotify
+  vtbl[].vtbl.disconnectNotify = miqt_exec_method_cQVBoxLayout_disconnectNotify
+  vtbl[].vtbl.widget = miqt_exec_method_cQVBoxLayout_widget
+  vtbl[].vtbl.spacerItem = miqt_exec_method_cQVBoxLayout_spacerItem
+  if vtbl[].h != nil: delete(move(vtbl[]))
+  vtbl[].h = fcQVBoxLayout_new(addr(vtbl[].vtbl), parent.h)
+  vtbl[].owned = true
+
+proc create*(T: type gen_qboxlayout_types.QVBoxLayout,
+    vtbl: VirtualQVBoxLayout) =
+
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQVBoxLayoutVTable, _: ptr cQVBoxLayout) {.cdecl.} =
+    let vtbl = cast[ptr typeof(VirtualQVBoxLayout()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQVBoxLayout, vtbl)))
+    vtbl[].h = nil
+    vtbl[].owned = false
+  vtbl[].vtbl.metaObject = miqt_exec_method_cQVBoxLayout_metaObject
+  vtbl[].vtbl.metacast = miqt_exec_method_cQVBoxLayout_metacast
+  vtbl[].vtbl.metacall = miqt_exec_method_cQVBoxLayout_metacall
+  vtbl[].vtbl.addItem = miqt_exec_method_cQVBoxLayout_addItem
+  vtbl[].vtbl.sizeHint = miqt_exec_method_cQVBoxLayout_sizeHint
+  vtbl[].vtbl.minimumSize = miqt_exec_method_cQVBoxLayout_minimumSize
+  vtbl[].vtbl.maximumSize = miqt_exec_method_cQVBoxLayout_maximumSize
+  vtbl[].vtbl.hasHeightForWidth = miqt_exec_method_cQVBoxLayout_hasHeightForWidth
+  vtbl[].vtbl.heightForWidth = miqt_exec_method_cQVBoxLayout_heightForWidth
+  vtbl[].vtbl.minimumHeightForWidth = miqt_exec_method_cQVBoxLayout_minimumHeightForWidth
+  vtbl[].vtbl.expandingDirections = miqt_exec_method_cQVBoxLayout_expandingDirections
+  vtbl[].vtbl.invalidate = miqt_exec_method_cQVBoxLayout_invalidate
+  vtbl[].vtbl.itemAt = miqt_exec_method_cQVBoxLayout_itemAt
+  vtbl[].vtbl.takeAt = miqt_exec_method_cQVBoxLayout_takeAt
+  vtbl[].vtbl.count = miqt_exec_method_cQVBoxLayout_count
+  vtbl[].vtbl.setGeometry = miqt_exec_method_cQVBoxLayout_setGeometry
+  vtbl[].vtbl.geometry = miqt_exec_method_cQVBoxLayout_geometry
+  vtbl[].vtbl.indexOf = miqt_exec_method_cQVBoxLayout_indexOf
+  vtbl[].vtbl.isEmpty = miqt_exec_method_cQVBoxLayout_isEmpty
+  vtbl[].vtbl.controlTypes = miqt_exec_method_cQVBoxLayout_controlTypes
+  vtbl[].vtbl.layout = miqt_exec_method_cQVBoxLayout_layout
+  vtbl[].vtbl.childEvent = miqt_exec_method_cQVBoxLayout_childEvent
+  vtbl[].vtbl.event = miqt_exec_method_cQVBoxLayout_event
+  vtbl[].vtbl.eventFilter = miqt_exec_method_cQVBoxLayout_eventFilter
+  vtbl[].vtbl.timerEvent = miqt_exec_method_cQVBoxLayout_timerEvent
+  vtbl[].vtbl.customEvent = miqt_exec_method_cQVBoxLayout_customEvent
+  vtbl[].vtbl.connectNotify = miqt_exec_method_cQVBoxLayout_connectNotify
+  vtbl[].vtbl.disconnectNotify = miqt_exec_method_cQVBoxLayout_disconnectNotify
+  vtbl[].vtbl.widget = miqt_exec_method_cQVBoxLayout_widget
+  vtbl[].vtbl.spacerItem = miqt_exec_method_cQVBoxLayout_spacerItem
+  if vtbl[].h != nil: delete(move(vtbl[]))
+  vtbl[].h = fcQVBoxLayout_new2(addr(vtbl[].vtbl), )
+  vtbl[].owned = true
 
 proc staticMetaObject*(_: type gen_qboxlayout_types.QVBoxLayout): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQVBoxLayout_staticMetaObject())
-proc delete*(self: gen_qboxlayout_types.QVBoxLayout) =
-  fcQVBoxLayout_delete(self.h)

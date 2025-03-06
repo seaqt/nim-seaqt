@@ -30,7 +30,7 @@ func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
     else:
       copyMem(addr result[0], unsafeAddr v[0], v.len)
 
-const cflags = gorge("pkg-config --cflags Qt5Quick")  & " -fPIC"
+const cflags = gorge("pkg-config --cflags Qt5Quick") & " -fPIC"
 {.compile("gen_qquickitemgrabresult.cpp", cflags).}
 
 
@@ -72,10 +72,9 @@ proc fcQQuickItemGrabResult_protectedbase_senderSignalIndex(self: pointer, ): ci
 proc fcQQuickItemGrabResult_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QQuickItemGrabResult_protectedbase_receivers".}
 proc fcQQuickItemGrabResult_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QQuickItemGrabResult_protectedbase_isSignalConnected".}
 proc fcQQuickItemGrabResult_staticMetaObject(): pointer {.importc: "QQuickItemGrabResult_staticMetaObject".}
-proc fcQQuickItemGrabResult_delete(self: pointer) {.importc: "QQuickItemGrabResult_delete".}
 
 proc metaObject*(self: gen_qquickitemgrabresult_types.QQuickItemGrabResult, ): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQQuickItemGrabResult_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQQuickItemGrabResult_metaObject(self.h), owned: false)
 
 proc metacast*(self: gen_qquickitemgrabresult_types.QQuickItemGrabResult, param1: cstring): pointer =
   fcQQuickItemGrabResult_metacast(self.h, param1)
@@ -96,10 +95,10 @@ proc trUtf8*(_: type gen_qquickitemgrabresult_types.QQuickItemGrabResult, s: cst
   vx_ret
 
 proc image*(self: gen_qquickitemgrabresult_types.QQuickItemGrabResult, ): gen_qimage_types.QImage =
-  gen_qimage_types.QImage(h: fcQQuickItemGrabResult_image(self.h))
+  gen_qimage_types.QImage(h: fcQQuickItemGrabResult_image(self.h), owned: true)
 
 proc url*(self: gen_qquickitemgrabresult_types.QQuickItemGrabResult, ): gen_qurl_types.QUrl =
-  gen_qurl_types.QUrl(h: fcQQuickItemGrabResult_url(self.h))
+  gen_qurl_types.QUrl(h: fcQQuickItemGrabResult_url(self.h), owned: true)
 
 proc saveToFile*(self: gen_qquickitemgrabresult_types.QQuickItemGrabResult, fileName: string): bool =
   fcQQuickItemGrabResult_saveToFile(self.h, struct_miqt_string(data: fileName, len: csize_t(len(fileName))))
@@ -150,7 +149,7 @@ proc trUtf8*(_: type gen_qquickitemgrabresult_types.QQuickItemGrabResult, s: cst
   vx_ret
 
 proc sender*(self: gen_qquickitemgrabresult_types.QQuickItemGrabResult, ): gen_qobject_types.QObject =
-  gen_qobject_types.QObject(h: fcQQuickItemGrabResult_protectedbase_sender(self.h))
+  gen_qobject_types.QObject(h: fcQQuickItemGrabResult_protectedbase_sender(self.h), owned: false)
 
 proc senderSignalIndex*(self: gen_qquickitemgrabresult_types.QQuickItemGrabResult, ): cint =
   fcQQuickItemGrabResult_protectedbase_senderSignalIndex(self.h)
@@ -163,5 +162,3 @@ proc isSignalConnected*(self: gen_qquickitemgrabresult_types.QQuickItemGrabResul
 
 proc staticMetaObject*(_: type gen_qquickitemgrabresult_types.QQuickItemGrabResult): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQQuickItemGrabResult_staticMetaObject())
-proc delete*(self: gen_qquickitemgrabresult_types.QQuickItemGrabResult) =
-  fcQQuickItemGrabResult_delete(self.h)

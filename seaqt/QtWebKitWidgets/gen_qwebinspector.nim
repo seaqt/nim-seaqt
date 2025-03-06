@@ -30,7 +30,7 @@ func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
     else:
       copyMem(addr result[0], unsafeAddr v[0], v.len)
 
-const cflags = gorge("pkg-config --cflags Qt5WebKitWidgets")  & " -fPIC"
+const cflags = gorge("pkg-config --cflags Qt5WebKitWidgets") & " -fPIC"
 {.compile("gen_qwebinspector.cpp", cflags).}
 
 
@@ -81,7 +81,7 @@ proc fcQWebInspector_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: 
 proc fcQWebInspector_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QWebInspector_tr3".}
 proc fcQWebInspector_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QWebInspector_trUtf82".}
 proc fcQWebInspector_trUtf83(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QWebInspector_trUtf83".}
-type cQWebInspectorVTable = object
+type cQWebInspectorVTable {.pure.} = object
   destructor*: proc(vtbl: ptr cQWebInspectorVTable, self: ptr cQWebInspector) {.cdecl, raises:[], gcsafe.}
   metaObject*: proc(vtbl, self: pointer, ): pointer {.cdecl, raises: [], gcsafe.}
   metacast*: proc(vtbl, self: pointer, param1: cstring): pointer {.cdecl, raises: [], gcsafe.}
@@ -195,10 +195,9 @@ proc fcQWebInspector_protectedbase_isSignalConnected(self: pointer, signal: poin
 proc fcQWebInspector_new(vtbl: pointer, parent: pointer): ptr cQWebInspector {.importc: "QWebInspector_new".}
 proc fcQWebInspector_new2(vtbl: pointer, ): ptr cQWebInspector {.importc: "QWebInspector_new2".}
 proc fcQWebInspector_staticMetaObject(): pointer {.importc: "QWebInspector_staticMetaObject".}
-proc fcQWebInspector_delete(self: pointer) {.importc: "QWebInspector_delete".}
 
 proc metaObject*(self: gen_qwebinspector_types.QWebInspector, ): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQWebInspector_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQWebInspector_metaObject(self.h), owned: false)
 
 proc metacast*(self: gen_qwebinspector_types.QWebInspector, param1: cstring): pointer =
   fcQWebInspector_metacast(self.h, param1)
@@ -222,10 +221,10 @@ proc setPage*(self: gen_qwebinspector_types.QWebInspector, page: gen_qwebpage_ty
   fcQWebInspector_setPage(self.h, page.h)
 
 proc page*(self: gen_qwebinspector_types.QWebInspector, ): gen_qwebpage_types.QWebPage =
-  gen_qwebpage_types.QWebPage(h: fcQWebInspector_page(self.h))
+  gen_qwebpage_types.QWebPage(h: fcQWebInspector_page(self.h), owned: false)
 
 proc sizeHint*(self: gen_qwebinspector_types.QWebInspector, ): gen_qsize_types.QSize =
-  gen_qsize_types.QSize(h: fcQWebInspector_sizeHint(self.h))
+  gen_qsize_types.QSize(h: fcQWebInspector_sizeHint(self.h), owned: true)
 
 proc event*(self: gen_qwebinspector_types.QWebInspector, param1: gen_qcoreevent_types.QEvent): bool =
   fcQWebInspector_event(self.h, param1.h)
@@ -304,7 +303,7 @@ type QWebInspectorchildEventProc* = proc(self: QWebInspector, event: gen_qcoreev
 type QWebInspectorcustomEventProc* = proc(self: QWebInspector, event: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
 type QWebInspectorconnectNotifyProc* = proc(self: QWebInspector, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
 type QWebInspectordisconnectNotifyProc* = proc(self: QWebInspector, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
-type QWebInspectorVTable* = object
+type QWebInspectorVTable* {.inheritable, pure.} = object
   vtbl: cQWebInspectorVTable
   metaObject*: QWebInspectormetaObjectProc
   metacast*: QWebInspectormetacastProc
@@ -357,13 +356,16 @@ type QWebInspectorVTable* = object
   connectNotify*: QWebInspectorconnectNotifyProc
   disconnectNotify*: QWebInspectordisconnectNotifyProc
 proc QWebInspectormetaObject*(self: gen_qwebinspector_types.QWebInspector, ): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQWebInspector_virtualbase_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQWebInspector_virtualbase_metaObject(self.h), owned: false)
 
 proc miqt_exec_callback_cQWebInspector_metaObject(vtbl: pointer, self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QWebInspectorVTable](vtbl)
   let self = QWebInspector(h: self)
   var virtualReturn = vtbl[].metaObject(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QWebInspectormetacast*(self: gen_qwebinspector_types.QWebInspector, param1: cstring): pointer =
   fcQWebInspector_virtualbase_metacast(self.h, param1)
@@ -388,13 +390,16 @@ proc miqt_exec_callback_cQWebInspector_metacall(vtbl: pointer, self: pointer, pa
   virtualReturn
 
 proc QWebInspectorsizeHint*(self: gen_qwebinspector_types.QWebInspector, ): gen_qsize_types.QSize =
-  gen_qsize_types.QSize(h: fcQWebInspector_virtualbase_sizeHint(self.h))
+  gen_qsize_types.QSize(h: fcQWebInspector_virtualbase_sizeHint(self.h), owned: true)
 
 proc miqt_exec_callback_cQWebInspector_sizeHint(vtbl: pointer, self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QWebInspectorVTable](vtbl)
   let self = QWebInspector(h: self)
   var virtualReturn = vtbl[].sizeHint(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QWebInspectorevent*(self: gen_qwebinspector_types.QWebInspector, param1: gen_qcoreevent_types.QEvent): bool =
   fcQWebInspector_virtualbase_event(self.h, param1.h)
@@ -402,7 +407,7 @@ proc QWebInspectorevent*(self: gen_qwebinspector_types.QWebInspector, param1: ge
 proc miqt_exec_callback_cQWebInspector_event(vtbl: pointer, self: pointer, param1: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QWebInspectorVTable](vtbl)
   let self = QWebInspector(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: param1)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: param1, owned: false)
   var virtualReturn = vtbl[].event(self, slotval1)
   virtualReturn
 
@@ -412,7 +417,7 @@ proc QWebInspectorresizeEvent*(self: gen_qwebinspector_types.QWebInspector, even
 proc miqt_exec_callback_cQWebInspector_resizeEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QWebInspectorVTable](vtbl)
   let self = QWebInspector(h: self)
-  let slotval1 = gen_qevent_types.QResizeEvent(h: event)
+  let slotval1 = gen_qevent_types.QResizeEvent(h: event, owned: false)
   vtbl[].resizeEvent(self, slotval1)
 
 proc QWebInspectorshowEvent*(self: gen_qwebinspector_types.QWebInspector, event: gen_qevent_types.QShowEvent): void =
@@ -421,7 +426,7 @@ proc QWebInspectorshowEvent*(self: gen_qwebinspector_types.QWebInspector, event:
 proc miqt_exec_callback_cQWebInspector_showEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QWebInspectorVTable](vtbl)
   let self = QWebInspector(h: self)
-  let slotval1 = gen_qevent_types.QShowEvent(h: event)
+  let slotval1 = gen_qevent_types.QShowEvent(h: event, owned: false)
   vtbl[].showEvent(self, slotval1)
 
 proc QWebInspectorhideEvent*(self: gen_qwebinspector_types.QWebInspector, event: gen_qevent_types.QHideEvent): void =
@@ -430,7 +435,7 @@ proc QWebInspectorhideEvent*(self: gen_qwebinspector_types.QWebInspector, event:
 proc miqt_exec_callback_cQWebInspector_hideEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QWebInspectorVTable](vtbl)
   let self = QWebInspector(h: self)
-  let slotval1 = gen_qevent_types.QHideEvent(h: event)
+  let slotval1 = gen_qevent_types.QHideEvent(h: event, owned: false)
   vtbl[].hideEvent(self, slotval1)
 
 proc QWebInspectorcloseEvent*(self: gen_qwebinspector_types.QWebInspector, event: gen_qevent_types.QCloseEvent): void =
@@ -439,7 +444,7 @@ proc QWebInspectorcloseEvent*(self: gen_qwebinspector_types.QWebInspector, event
 proc miqt_exec_callback_cQWebInspector_closeEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QWebInspectorVTable](vtbl)
   let self = QWebInspector(h: self)
-  let slotval1 = gen_qevent_types.QCloseEvent(h: event)
+  let slotval1 = gen_qevent_types.QCloseEvent(h: event, owned: false)
   vtbl[].closeEvent(self, slotval1)
 
 proc QWebInspectordevType*(self: gen_qwebinspector_types.QWebInspector, ): cint =
@@ -461,13 +466,16 @@ proc miqt_exec_callback_cQWebInspector_setVisible(vtbl: pointer, self: pointer, 
   vtbl[].setVisible(self, slotval1)
 
 proc QWebInspectorminimumSizeHint*(self: gen_qwebinspector_types.QWebInspector, ): gen_qsize_types.QSize =
-  gen_qsize_types.QSize(h: fcQWebInspector_virtualbase_minimumSizeHint(self.h))
+  gen_qsize_types.QSize(h: fcQWebInspector_virtualbase_minimumSizeHint(self.h), owned: true)
 
 proc miqt_exec_callback_cQWebInspector_minimumSizeHint(vtbl: pointer, self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QWebInspectorVTable](vtbl)
   let self = QWebInspector(h: self)
   var virtualReturn = vtbl[].minimumSizeHint(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QWebInspectorheightForWidth*(self: gen_qwebinspector_types.QWebInspector, param1: cint): cint =
   fcQWebInspector_virtualbase_heightForWidth(self.h, param1)
@@ -489,13 +497,16 @@ proc miqt_exec_callback_cQWebInspector_hasHeightForWidth(vtbl: pointer, self: po
   virtualReturn
 
 proc QWebInspectorpaintEngine*(self: gen_qwebinspector_types.QWebInspector, ): gen_qpaintengine_types.QPaintEngine =
-  gen_qpaintengine_types.QPaintEngine(h: fcQWebInspector_virtualbase_paintEngine(self.h))
+  gen_qpaintengine_types.QPaintEngine(h: fcQWebInspector_virtualbase_paintEngine(self.h), owned: false)
 
 proc miqt_exec_callback_cQWebInspector_paintEngine(vtbl: pointer, self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QWebInspectorVTable](vtbl)
   let self = QWebInspector(h: self)
   var virtualReturn = vtbl[].paintEngine(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QWebInspectormousePressEvent*(self: gen_qwebinspector_types.QWebInspector, event: gen_qevent_types.QMouseEvent): void =
   fcQWebInspector_virtualbase_mousePressEvent(self.h, event.h)
@@ -503,7 +514,7 @@ proc QWebInspectormousePressEvent*(self: gen_qwebinspector_types.QWebInspector, 
 proc miqt_exec_callback_cQWebInspector_mousePressEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QWebInspectorVTable](vtbl)
   let self = QWebInspector(h: self)
-  let slotval1 = gen_qevent_types.QMouseEvent(h: event)
+  let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   vtbl[].mousePressEvent(self, slotval1)
 
 proc QWebInspectormouseReleaseEvent*(self: gen_qwebinspector_types.QWebInspector, event: gen_qevent_types.QMouseEvent): void =
@@ -512,7 +523,7 @@ proc QWebInspectormouseReleaseEvent*(self: gen_qwebinspector_types.QWebInspector
 proc miqt_exec_callback_cQWebInspector_mouseReleaseEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QWebInspectorVTable](vtbl)
   let self = QWebInspector(h: self)
-  let slotval1 = gen_qevent_types.QMouseEvent(h: event)
+  let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   vtbl[].mouseReleaseEvent(self, slotval1)
 
 proc QWebInspectormouseDoubleClickEvent*(self: gen_qwebinspector_types.QWebInspector, event: gen_qevent_types.QMouseEvent): void =
@@ -521,7 +532,7 @@ proc QWebInspectormouseDoubleClickEvent*(self: gen_qwebinspector_types.QWebInspe
 proc miqt_exec_callback_cQWebInspector_mouseDoubleClickEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QWebInspectorVTable](vtbl)
   let self = QWebInspector(h: self)
-  let slotval1 = gen_qevent_types.QMouseEvent(h: event)
+  let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   vtbl[].mouseDoubleClickEvent(self, slotval1)
 
 proc QWebInspectormouseMoveEvent*(self: gen_qwebinspector_types.QWebInspector, event: gen_qevent_types.QMouseEvent): void =
@@ -530,7 +541,7 @@ proc QWebInspectormouseMoveEvent*(self: gen_qwebinspector_types.QWebInspector, e
 proc miqt_exec_callback_cQWebInspector_mouseMoveEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QWebInspectorVTable](vtbl)
   let self = QWebInspector(h: self)
-  let slotval1 = gen_qevent_types.QMouseEvent(h: event)
+  let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   vtbl[].mouseMoveEvent(self, slotval1)
 
 proc QWebInspectorwheelEvent*(self: gen_qwebinspector_types.QWebInspector, event: gen_qevent_types.QWheelEvent): void =
@@ -539,7 +550,7 @@ proc QWebInspectorwheelEvent*(self: gen_qwebinspector_types.QWebInspector, event
 proc miqt_exec_callback_cQWebInspector_wheelEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QWebInspectorVTable](vtbl)
   let self = QWebInspector(h: self)
-  let slotval1 = gen_qevent_types.QWheelEvent(h: event)
+  let slotval1 = gen_qevent_types.QWheelEvent(h: event, owned: false)
   vtbl[].wheelEvent(self, slotval1)
 
 proc QWebInspectorkeyPressEvent*(self: gen_qwebinspector_types.QWebInspector, event: gen_qevent_types.QKeyEvent): void =
@@ -548,7 +559,7 @@ proc QWebInspectorkeyPressEvent*(self: gen_qwebinspector_types.QWebInspector, ev
 proc miqt_exec_callback_cQWebInspector_keyPressEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QWebInspectorVTable](vtbl)
   let self = QWebInspector(h: self)
-  let slotval1 = gen_qevent_types.QKeyEvent(h: event)
+  let slotval1 = gen_qevent_types.QKeyEvent(h: event, owned: false)
   vtbl[].keyPressEvent(self, slotval1)
 
 proc QWebInspectorkeyReleaseEvent*(self: gen_qwebinspector_types.QWebInspector, event: gen_qevent_types.QKeyEvent): void =
@@ -557,7 +568,7 @@ proc QWebInspectorkeyReleaseEvent*(self: gen_qwebinspector_types.QWebInspector, 
 proc miqt_exec_callback_cQWebInspector_keyReleaseEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QWebInspectorVTable](vtbl)
   let self = QWebInspector(h: self)
-  let slotval1 = gen_qevent_types.QKeyEvent(h: event)
+  let slotval1 = gen_qevent_types.QKeyEvent(h: event, owned: false)
   vtbl[].keyReleaseEvent(self, slotval1)
 
 proc QWebInspectorfocusInEvent*(self: gen_qwebinspector_types.QWebInspector, event: gen_qevent_types.QFocusEvent): void =
@@ -566,7 +577,7 @@ proc QWebInspectorfocusInEvent*(self: gen_qwebinspector_types.QWebInspector, eve
 proc miqt_exec_callback_cQWebInspector_focusInEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QWebInspectorVTable](vtbl)
   let self = QWebInspector(h: self)
-  let slotval1 = gen_qevent_types.QFocusEvent(h: event)
+  let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
   vtbl[].focusInEvent(self, slotval1)
 
 proc QWebInspectorfocusOutEvent*(self: gen_qwebinspector_types.QWebInspector, event: gen_qevent_types.QFocusEvent): void =
@@ -575,7 +586,7 @@ proc QWebInspectorfocusOutEvent*(self: gen_qwebinspector_types.QWebInspector, ev
 proc miqt_exec_callback_cQWebInspector_focusOutEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QWebInspectorVTable](vtbl)
   let self = QWebInspector(h: self)
-  let slotval1 = gen_qevent_types.QFocusEvent(h: event)
+  let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
   vtbl[].focusOutEvent(self, slotval1)
 
 proc QWebInspectorenterEvent*(self: gen_qwebinspector_types.QWebInspector, event: gen_qcoreevent_types.QEvent): void =
@@ -584,7 +595,7 @@ proc QWebInspectorenterEvent*(self: gen_qwebinspector_types.QWebInspector, event
 proc miqt_exec_callback_cQWebInspector_enterEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QWebInspectorVTable](vtbl)
   let self = QWebInspector(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].enterEvent(self, slotval1)
 
 proc QWebInspectorleaveEvent*(self: gen_qwebinspector_types.QWebInspector, event: gen_qcoreevent_types.QEvent): void =
@@ -593,7 +604,7 @@ proc QWebInspectorleaveEvent*(self: gen_qwebinspector_types.QWebInspector, event
 proc miqt_exec_callback_cQWebInspector_leaveEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QWebInspectorVTable](vtbl)
   let self = QWebInspector(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].leaveEvent(self, slotval1)
 
 proc QWebInspectorpaintEvent*(self: gen_qwebinspector_types.QWebInspector, event: gen_qevent_types.QPaintEvent): void =
@@ -602,7 +613,7 @@ proc QWebInspectorpaintEvent*(self: gen_qwebinspector_types.QWebInspector, event
 proc miqt_exec_callback_cQWebInspector_paintEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QWebInspectorVTable](vtbl)
   let self = QWebInspector(h: self)
-  let slotval1 = gen_qevent_types.QPaintEvent(h: event)
+  let slotval1 = gen_qevent_types.QPaintEvent(h: event, owned: false)
   vtbl[].paintEvent(self, slotval1)
 
 proc QWebInspectormoveEvent*(self: gen_qwebinspector_types.QWebInspector, event: gen_qevent_types.QMoveEvent): void =
@@ -611,7 +622,7 @@ proc QWebInspectormoveEvent*(self: gen_qwebinspector_types.QWebInspector, event:
 proc miqt_exec_callback_cQWebInspector_moveEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QWebInspectorVTable](vtbl)
   let self = QWebInspector(h: self)
-  let slotval1 = gen_qevent_types.QMoveEvent(h: event)
+  let slotval1 = gen_qevent_types.QMoveEvent(h: event, owned: false)
   vtbl[].moveEvent(self, slotval1)
 
 proc QWebInspectorcontextMenuEvent*(self: gen_qwebinspector_types.QWebInspector, event: gen_qevent_types.QContextMenuEvent): void =
@@ -620,7 +631,7 @@ proc QWebInspectorcontextMenuEvent*(self: gen_qwebinspector_types.QWebInspector,
 proc miqt_exec_callback_cQWebInspector_contextMenuEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QWebInspectorVTable](vtbl)
   let self = QWebInspector(h: self)
-  let slotval1 = gen_qevent_types.QContextMenuEvent(h: event)
+  let slotval1 = gen_qevent_types.QContextMenuEvent(h: event, owned: false)
   vtbl[].contextMenuEvent(self, slotval1)
 
 proc QWebInspectortabletEvent*(self: gen_qwebinspector_types.QWebInspector, event: gen_qevent_types.QTabletEvent): void =
@@ -629,7 +640,7 @@ proc QWebInspectortabletEvent*(self: gen_qwebinspector_types.QWebInspector, even
 proc miqt_exec_callback_cQWebInspector_tabletEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QWebInspectorVTable](vtbl)
   let self = QWebInspector(h: self)
-  let slotval1 = gen_qevent_types.QTabletEvent(h: event)
+  let slotval1 = gen_qevent_types.QTabletEvent(h: event, owned: false)
   vtbl[].tabletEvent(self, slotval1)
 
 proc QWebInspectoractionEvent*(self: gen_qwebinspector_types.QWebInspector, event: gen_qevent_types.QActionEvent): void =
@@ -638,7 +649,7 @@ proc QWebInspectoractionEvent*(self: gen_qwebinspector_types.QWebInspector, even
 proc miqt_exec_callback_cQWebInspector_actionEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QWebInspectorVTable](vtbl)
   let self = QWebInspector(h: self)
-  let slotval1 = gen_qevent_types.QActionEvent(h: event)
+  let slotval1 = gen_qevent_types.QActionEvent(h: event, owned: false)
   vtbl[].actionEvent(self, slotval1)
 
 proc QWebInspectordragEnterEvent*(self: gen_qwebinspector_types.QWebInspector, event: gen_qevent_types.QDragEnterEvent): void =
@@ -647,7 +658,7 @@ proc QWebInspectordragEnterEvent*(self: gen_qwebinspector_types.QWebInspector, e
 proc miqt_exec_callback_cQWebInspector_dragEnterEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QWebInspectorVTable](vtbl)
   let self = QWebInspector(h: self)
-  let slotval1 = gen_qevent_types.QDragEnterEvent(h: event)
+  let slotval1 = gen_qevent_types.QDragEnterEvent(h: event, owned: false)
   vtbl[].dragEnterEvent(self, slotval1)
 
 proc QWebInspectordragMoveEvent*(self: gen_qwebinspector_types.QWebInspector, event: gen_qevent_types.QDragMoveEvent): void =
@@ -656,7 +667,7 @@ proc QWebInspectordragMoveEvent*(self: gen_qwebinspector_types.QWebInspector, ev
 proc miqt_exec_callback_cQWebInspector_dragMoveEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QWebInspectorVTable](vtbl)
   let self = QWebInspector(h: self)
-  let slotval1 = gen_qevent_types.QDragMoveEvent(h: event)
+  let slotval1 = gen_qevent_types.QDragMoveEvent(h: event, owned: false)
   vtbl[].dragMoveEvent(self, slotval1)
 
 proc QWebInspectordragLeaveEvent*(self: gen_qwebinspector_types.QWebInspector, event: gen_qevent_types.QDragLeaveEvent): void =
@@ -665,7 +676,7 @@ proc QWebInspectordragLeaveEvent*(self: gen_qwebinspector_types.QWebInspector, e
 proc miqt_exec_callback_cQWebInspector_dragLeaveEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QWebInspectorVTable](vtbl)
   let self = QWebInspector(h: self)
-  let slotval1 = gen_qevent_types.QDragLeaveEvent(h: event)
+  let slotval1 = gen_qevent_types.QDragLeaveEvent(h: event, owned: false)
   vtbl[].dragLeaveEvent(self, slotval1)
 
 proc QWebInspectordropEvent*(self: gen_qwebinspector_types.QWebInspector, event: gen_qevent_types.QDropEvent): void =
@@ -674,7 +685,7 @@ proc QWebInspectordropEvent*(self: gen_qwebinspector_types.QWebInspector, event:
 proc miqt_exec_callback_cQWebInspector_dropEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QWebInspectorVTable](vtbl)
   let self = QWebInspector(h: self)
-  let slotval1 = gen_qevent_types.QDropEvent(h: event)
+  let slotval1 = gen_qevent_types.QDropEvent(h: event, owned: false)
   vtbl[].dropEvent(self, slotval1)
 
 proc QWebInspectornativeEvent*(self: gen_qwebinspector_types.QWebInspector, eventType: seq[byte], message: pointer, resultVal: ptr clong): bool =
@@ -698,7 +709,7 @@ proc QWebInspectorchangeEvent*(self: gen_qwebinspector_types.QWebInspector, para
 proc miqt_exec_callback_cQWebInspector_changeEvent(vtbl: pointer, self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QWebInspectorVTable](vtbl)
   let self = QWebInspector(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: param1)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: param1, owned: false)
   vtbl[].changeEvent(self, slotval1)
 
 proc QWebInspectormetric*(self: gen_qwebinspector_types.QWebInspector, param1: cint): cint =
@@ -717,27 +728,33 @@ proc QWebInspectorinitPainter*(self: gen_qwebinspector_types.QWebInspector, pain
 proc miqt_exec_callback_cQWebInspector_initPainter(vtbl: pointer, self: pointer, painter: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QWebInspectorVTable](vtbl)
   let self = QWebInspector(h: self)
-  let slotval1 = gen_qpainter_types.QPainter(h: painter)
+  let slotval1 = gen_qpainter_types.QPainter(h: painter, owned: false)
   vtbl[].initPainter(self, slotval1)
 
 proc QWebInspectorredirected*(self: gen_qwebinspector_types.QWebInspector, offset: gen_qpoint_types.QPoint): gen_qpaintdevice_types.QPaintDevice =
-  gen_qpaintdevice_types.QPaintDevice(h: fcQWebInspector_virtualbase_redirected(self.h, offset.h))
+  gen_qpaintdevice_types.QPaintDevice(h: fcQWebInspector_virtualbase_redirected(self.h, offset.h), owned: false)
 
 proc miqt_exec_callback_cQWebInspector_redirected(vtbl: pointer, self: pointer, offset: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QWebInspectorVTable](vtbl)
   let self = QWebInspector(h: self)
-  let slotval1 = gen_qpoint_types.QPoint(h: offset)
+  let slotval1 = gen_qpoint_types.QPoint(h: offset, owned: false)
   var virtualReturn = vtbl[].redirected(self, slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QWebInspectorsharedPainter*(self: gen_qwebinspector_types.QWebInspector, ): gen_qpainter_types.QPainter =
-  gen_qpainter_types.QPainter(h: fcQWebInspector_virtualbase_sharedPainter(self.h))
+  gen_qpainter_types.QPainter(h: fcQWebInspector_virtualbase_sharedPainter(self.h), owned: false)
 
 proc miqt_exec_callback_cQWebInspector_sharedPainter(vtbl: pointer, self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QWebInspectorVTable](vtbl)
   let self = QWebInspector(h: self)
   var virtualReturn = vtbl[].sharedPainter(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QWebInspectorinputMethodEvent*(self: gen_qwebinspector_types.QWebInspector, param1: gen_qevent_types.QInputMethodEvent): void =
   fcQWebInspector_virtualbase_inputMethodEvent(self.h, param1.h)
@@ -745,18 +762,21 @@ proc QWebInspectorinputMethodEvent*(self: gen_qwebinspector_types.QWebInspector,
 proc miqt_exec_callback_cQWebInspector_inputMethodEvent(vtbl: pointer, self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QWebInspectorVTable](vtbl)
   let self = QWebInspector(h: self)
-  let slotval1 = gen_qevent_types.QInputMethodEvent(h: param1)
+  let slotval1 = gen_qevent_types.QInputMethodEvent(h: param1, owned: false)
   vtbl[].inputMethodEvent(self, slotval1)
 
 proc QWebInspectorinputMethodQuery*(self: gen_qwebinspector_types.QWebInspector, param1: cint): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQWebInspector_virtualbase_inputMethodQuery(self.h, cint(param1)))
+  gen_qvariant_types.QVariant(h: fcQWebInspector_virtualbase_inputMethodQuery(self.h, cint(param1)), owned: true)
 
 proc miqt_exec_callback_cQWebInspector_inputMethodQuery(vtbl: pointer, self: pointer, param1: cint): pointer {.cdecl.} =
   let vtbl = cast[ptr QWebInspectorVTable](vtbl)
   let self = QWebInspector(h: self)
   let slotval1 = cint(param1)
   var virtualReturn = vtbl[].inputMethodQuery(self, slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QWebInspectorfocusNextPrevChild*(self: gen_qwebinspector_types.QWebInspector, next: bool): bool =
   fcQWebInspector_virtualbase_focusNextPrevChild(self.h, next)
@@ -774,8 +794,8 @@ proc QWebInspectoreventFilter*(self: gen_qwebinspector_types.QWebInspector, watc
 proc miqt_exec_callback_cQWebInspector_eventFilter(vtbl: pointer, self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QWebInspectorVTable](vtbl)
   let self = QWebInspector(h: self)
-  let slotval1 = gen_qobject_types.QObject(h: watched)
-  let slotval2 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].eventFilter(self, slotval1, slotval2)
   virtualReturn
 
@@ -785,7 +805,7 @@ proc QWebInspectortimerEvent*(self: gen_qwebinspector_types.QWebInspector, event
 proc miqt_exec_callback_cQWebInspector_timerEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QWebInspectorVTable](vtbl)
   let self = QWebInspector(h: self)
-  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   vtbl[].timerEvent(self, slotval1)
 
 proc QWebInspectorchildEvent*(self: gen_qwebinspector_types.QWebInspector, event: gen_qcoreevent_types.QChildEvent): void =
@@ -794,7 +814,7 @@ proc QWebInspectorchildEvent*(self: gen_qwebinspector_types.QWebInspector, event
 proc miqt_exec_callback_cQWebInspector_childEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QWebInspectorVTable](vtbl)
   let self = QWebInspector(h: self)
-  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   vtbl[].childEvent(self, slotval1)
 
 proc QWebInspectorcustomEvent*(self: gen_qwebinspector_types.QWebInspector, event: gen_qcoreevent_types.QEvent): void =
@@ -803,7 +823,7 @@ proc QWebInspectorcustomEvent*(self: gen_qwebinspector_types.QWebInspector, even
 proc miqt_exec_callback_cQWebInspector_customEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QWebInspectorVTable](vtbl)
   let self = QWebInspector(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].customEvent(self, slotval1)
 
 proc QWebInspectorconnectNotify*(self: gen_qwebinspector_types.QWebInspector, signal: gen_qmetaobject_types.QMetaMethod): void =
@@ -812,7 +832,7 @@ proc QWebInspectorconnectNotify*(self: gen_qwebinspector_types.QWebInspector, si
 proc miqt_exec_callback_cQWebInspector_connectNotify(vtbl: pointer, self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QWebInspectorVTable](vtbl)
   let self = QWebInspector(h: self)
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].connectNotify(self, slotval1)
 
 proc QWebInspectordisconnectNotify*(self: gen_qwebinspector_types.QWebInspector, signal: gen_qmetaobject_types.QMetaMethod): void =
@@ -821,8 +841,399 @@ proc QWebInspectordisconnectNotify*(self: gen_qwebinspector_types.QWebInspector,
 proc miqt_exec_callback_cQWebInspector_disconnectNotify(vtbl: pointer, self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QWebInspectorVTable](vtbl)
   let self = QWebInspector(h: self)
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].disconnectNotify(self, slotval1)
+
+type VirtualQWebInspector* {.inheritable.} = ref object of QWebInspector
+  vtbl*: cQWebInspectorVTable
+method metaObject*(self: VirtualQWebInspector, ): gen_qobjectdefs_types.QMetaObject {.base.} =
+  QWebInspectormetaObject(self[])
+proc miqt_exec_method_cQWebInspector_metaObject(vtbl: pointer, inst: pointer): pointer {.cdecl.} =
+  let vtbl = cast[VirtualQWebInspector](cast[uint](vtbl) - uint(offsetOf(VirtualQWebInspector, vtbl)))
+  var virtualReturn = vtbl.metaObject()
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
+
+method metacast*(self: VirtualQWebInspector, param1: cstring): pointer {.base.} =
+  QWebInspectormetacast(self[], param1)
+proc miqt_exec_method_cQWebInspector_metacast(vtbl: pointer, inst: pointer, param1: cstring): pointer {.cdecl.} =
+  let vtbl = cast[VirtualQWebInspector](cast[uint](vtbl) - uint(offsetOf(VirtualQWebInspector, vtbl)))
+  let slotval1 = (param1)
+  var virtualReturn = vtbl.metacast(slotval1)
+  virtualReturn
+
+method metacall*(self: VirtualQWebInspector, param1: cint, param2: cint, param3: pointer): cint {.base.} =
+  QWebInspectormetacall(self[], param1, param2, param3)
+proc miqt_exec_method_cQWebInspector_metacall(vtbl: pointer, inst: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
+  let vtbl = cast[VirtualQWebInspector](cast[uint](vtbl) - uint(offsetOf(VirtualQWebInspector, vtbl)))
+  let slotval1 = cint(param1)
+  let slotval2 = param2
+  let slotval3 = param3
+  var virtualReturn = vtbl.metacall(slotval1, slotval2, slotval3)
+  virtualReturn
+
+method sizeHint*(self: VirtualQWebInspector, ): gen_qsize_types.QSize {.base.} =
+  QWebInspectorsizeHint(self[])
+proc miqt_exec_method_cQWebInspector_sizeHint(vtbl: pointer, inst: pointer): pointer {.cdecl.} =
+  let vtbl = cast[VirtualQWebInspector](cast[uint](vtbl) - uint(offsetOf(VirtualQWebInspector, vtbl)))
+  var virtualReturn = vtbl.sizeHint()
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
+
+method event*(self: VirtualQWebInspector, param1: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QWebInspectorevent(self[], param1)
+proc miqt_exec_method_cQWebInspector_event(vtbl: pointer, inst: pointer, param1: pointer): bool {.cdecl.} =
+  let vtbl = cast[VirtualQWebInspector](cast[uint](vtbl) - uint(offsetOf(VirtualQWebInspector, vtbl)))
+  let slotval1 = gen_qcoreevent_types.QEvent(h: param1, owned: false)
+  var virtualReturn = vtbl.event(slotval1)
+  virtualReturn
+
+method resizeEvent*(self: VirtualQWebInspector, event: gen_qevent_types.QResizeEvent): void {.base.} =
+  QWebInspectorresizeEvent(self[], event)
+proc miqt_exec_method_cQWebInspector_resizeEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQWebInspector](cast[uint](vtbl) - uint(offsetOf(VirtualQWebInspector, vtbl)))
+  let slotval1 = gen_qevent_types.QResizeEvent(h: event, owned: false)
+  vtbl.resizeEvent(slotval1)
+
+method showEvent*(self: VirtualQWebInspector, event: gen_qevent_types.QShowEvent): void {.base.} =
+  QWebInspectorshowEvent(self[], event)
+proc miqt_exec_method_cQWebInspector_showEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQWebInspector](cast[uint](vtbl) - uint(offsetOf(VirtualQWebInspector, vtbl)))
+  let slotval1 = gen_qevent_types.QShowEvent(h: event, owned: false)
+  vtbl.showEvent(slotval1)
+
+method hideEvent*(self: VirtualQWebInspector, event: gen_qevent_types.QHideEvent): void {.base.} =
+  QWebInspectorhideEvent(self[], event)
+proc miqt_exec_method_cQWebInspector_hideEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQWebInspector](cast[uint](vtbl) - uint(offsetOf(VirtualQWebInspector, vtbl)))
+  let slotval1 = gen_qevent_types.QHideEvent(h: event, owned: false)
+  vtbl.hideEvent(slotval1)
+
+method closeEvent*(self: VirtualQWebInspector, event: gen_qevent_types.QCloseEvent): void {.base.} =
+  QWebInspectorcloseEvent(self[], event)
+proc miqt_exec_method_cQWebInspector_closeEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQWebInspector](cast[uint](vtbl) - uint(offsetOf(VirtualQWebInspector, vtbl)))
+  let slotval1 = gen_qevent_types.QCloseEvent(h: event, owned: false)
+  vtbl.closeEvent(slotval1)
+
+method devType*(self: VirtualQWebInspector, ): cint {.base.} =
+  QWebInspectordevType(self[])
+proc miqt_exec_method_cQWebInspector_devType(vtbl: pointer, inst: pointer): cint {.cdecl.} =
+  let vtbl = cast[VirtualQWebInspector](cast[uint](vtbl) - uint(offsetOf(VirtualQWebInspector, vtbl)))
+  var virtualReturn = vtbl.devType()
+  virtualReturn
+
+method setVisible*(self: VirtualQWebInspector, visible: bool): void {.base.} =
+  QWebInspectorsetVisible(self[], visible)
+proc miqt_exec_method_cQWebInspector_setVisible(vtbl: pointer, inst: pointer, visible: bool): void {.cdecl.} =
+  let vtbl = cast[VirtualQWebInspector](cast[uint](vtbl) - uint(offsetOf(VirtualQWebInspector, vtbl)))
+  let slotval1 = visible
+  vtbl.setVisible(slotval1)
+
+method minimumSizeHint*(self: VirtualQWebInspector, ): gen_qsize_types.QSize {.base.} =
+  QWebInspectorminimumSizeHint(self[])
+proc miqt_exec_method_cQWebInspector_minimumSizeHint(vtbl: pointer, inst: pointer): pointer {.cdecl.} =
+  let vtbl = cast[VirtualQWebInspector](cast[uint](vtbl) - uint(offsetOf(VirtualQWebInspector, vtbl)))
+  var virtualReturn = vtbl.minimumSizeHint()
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
+
+method heightForWidth*(self: VirtualQWebInspector, param1: cint): cint {.base.} =
+  QWebInspectorheightForWidth(self[], param1)
+proc miqt_exec_method_cQWebInspector_heightForWidth(vtbl: pointer, inst: pointer, param1: cint): cint {.cdecl.} =
+  let vtbl = cast[VirtualQWebInspector](cast[uint](vtbl) - uint(offsetOf(VirtualQWebInspector, vtbl)))
+  let slotval1 = param1
+  var virtualReturn = vtbl.heightForWidth(slotval1)
+  virtualReturn
+
+method hasHeightForWidth*(self: VirtualQWebInspector, ): bool {.base.} =
+  QWebInspectorhasHeightForWidth(self[])
+proc miqt_exec_method_cQWebInspector_hasHeightForWidth(vtbl: pointer, inst: pointer): bool {.cdecl.} =
+  let vtbl = cast[VirtualQWebInspector](cast[uint](vtbl) - uint(offsetOf(VirtualQWebInspector, vtbl)))
+  var virtualReturn = vtbl.hasHeightForWidth()
+  virtualReturn
+
+method paintEngine*(self: VirtualQWebInspector, ): gen_qpaintengine_types.QPaintEngine {.base.} =
+  QWebInspectorpaintEngine(self[])
+proc miqt_exec_method_cQWebInspector_paintEngine(vtbl: pointer, inst: pointer): pointer {.cdecl.} =
+  let vtbl = cast[VirtualQWebInspector](cast[uint](vtbl) - uint(offsetOf(VirtualQWebInspector, vtbl)))
+  var virtualReturn = vtbl.paintEngine()
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
+
+method mousePressEvent*(self: VirtualQWebInspector, event: gen_qevent_types.QMouseEvent): void {.base.} =
+  QWebInspectormousePressEvent(self[], event)
+proc miqt_exec_method_cQWebInspector_mousePressEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQWebInspector](cast[uint](vtbl) - uint(offsetOf(VirtualQWebInspector, vtbl)))
+  let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
+  vtbl.mousePressEvent(slotval1)
+
+method mouseReleaseEvent*(self: VirtualQWebInspector, event: gen_qevent_types.QMouseEvent): void {.base.} =
+  QWebInspectormouseReleaseEvent(self[], event)
+proc miqt_exec_method_cQWebInspector_mouseReleaseEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQWebInspector](cast[uint](vtbl) - uint(offsetOf(VirtualQWebInspector, vtbl)))
+  let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
+  vtbl.mouseReleaseEvent(slotval1)
+
+method mouseDoubleClickEvent*(self: VirtualQWebInspector, event: gen_qevent_types.QMouseEvent): void {.base.} =
+  QWebInspectormouseDoubleClickEvent(self[], event)
+proc miqt_exec_method_cQWebInspector_mouseDoubleClickEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQWebInspector](cast[uint](vtbl) - uint(offsetOf(VirtualQWebInspector, vtbl)))
+  let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
+  vtbl.mouseDoubleClickEvent(slotval1)
+
+method mouseMoveEvent*(self: VirtualQWebInspector, event: gen_qevent_types.QMouseEvent): void {.base.} =
+  QWebInspectormouseMoveEvent(self[], event)
+proc miqt_exec_method_cQWebInspector_mouseMoveEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQWebInspector](cast[uint](vtbl) - uint(offsetOf(VirtualQWebInspector, vtbl)))
+  let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
+  vtbl.mouseMoveEvent(slotval1)
+
+method wheelEvent*(self: VirtualQWebInspector, event: gen_qevent_types.QWheelEvent): void {.base.} =
+  QWebInspectorwheelEvent(self[], event)
+proc miqt_exec_method_cQWebInspector_wheelEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQWebInspector](cast[uint](vtbl) - uint(offsetOf(VirtualQWebInspector, vtbl)))
+  let slotval1 = gen_qevent_types.QWheelEvent(h: event, owned: false)
+  vtbl.wheelEvent(slotval1)
+
+method keyPressEvent*(self: VirtualQWebInspector, event: gen_qevent_types.QKeyEvent): void {.base.} =
+  QWebInspectorkeyPressEvent(self[], event)
+proc miqt_exec_method_cQWebInspector_keyPressEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQWebInspector](cast[uint](vtbl) - uint(offsetOf(VirtualQWebInspector, vtbl)))
+  let slotval1 = gen_qevent_types.QKeyEvent(h: event, owned: false)
+  vtbl.keyPressEvent(slotval1)
+
+method keyReleaseEvent*(self: VirtualQWebInspector, event: gen_qevent_types.QKeyEvent): void {.base.} =
+  QWebInspectorkeyReleaseEvent(self[], event)
+proc miqt_exec_method_cQWebInspector_keyReleaseEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQWebInspector](cast[uint](vtbl) - uint(offsetOf(VirtualQWebInspector, vtbl)))
+  let slotval1 = gen_qevent_types.QKeyEvent(h: event, owned: false)
+  vtbl.keyReleaseEvent(slotval1)
+
+method focusInEvent*(self: VirtualQWebInspector, event: gen_qevent_types.QFocusEvent): void {.base.} =
+  QWebInspectorfocusInEvent(self[], event)
+proc miqt_exec_method_cQWebInspector_focusInEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQWebInspector](cast[uint](vtbl) - uint(offsetOf(VirtualQWebInspector, vtbl)))
+  let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
+  vtbl.focusInEvent(slotval1)
+
+method focusOutEvent*(self: VirtualQWebInspector, event: gen_qevent_types.QFocusEvent): void {.base.} =
+  QWebInspectorfocusOutEvent(self[], event)
+proc miqt_exec_method_cQWebInspector_focusOutEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQWebInspector](cast[uint](vtbl) - uint(offsetOf(VirtualQWebInspector, vtbl)))
+  let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
+  vtbl.focusOutEvent(slotval1)
+
+method enterEvent*(self: VirtualQWebInspector, event: gen_qcoreevent_types.QEvent): void {.base.} =
+  QWebInspectorenterEvent(self[], event)
+proc miqt_exec_method_cQWebInspector_enterEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQWebInspector](cast[uint](vtbl) - uint(offsetOf(VirtualQWebInspector, vtbl)))
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
+  vtbl.enterEvent(slotval1)
+
+method leaveEvent*(self: VirtualQWebInspector, event: gen_qcoreevent_types.QEvent): void {.base.} =
+  QWebInspectorleaveEvent(self[], event)
+proc miqt_exec_method_cQWebInspector_leaveEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQWebInspector](cast[uint](vtbl) - uint(offsetOf(VirtualQWebInspector, vtbl)))
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
+  vtbl.leaveEvent(slotval1)
+
+method paintEvent*(self: VirtualQWebInspector, event: gen_qevent_types.QPaintEvent): void {.base.} =
+  QWebInspectorpaintEvent(self[], event)
+proc miqt_exec_method_cQWebInspector_paintEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQWebInspector](cast[uint](vtbl) - uint(offsetOf(VirtualQWebInspector, vtbl)))
+  let slotval1 = gen_qevent_types.QPaintEvent(h: event, owned: false)
+  vtbl.paintEvent(slotval1)
+
+method moveEvent*(self: VirtualQWebInspector, event: gen_qevent_types.QMoveEvent): void {.base.} =
+  QWebInspectormoveEvent(self[], event)
+proc miqt_exec_method_cQWebInspector_moveEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQWebInspector](cast[uint](vtbl) - uint(offsetOf(VirtualQWebInspector, vtbl)))
+  let slotval1 = gen_qevent_types.QMoveEvent(h: event, owned: false)
+  vtbl.moveEvent(slotval1)
+
+method contextMenuEvent*(self: VirtualQWebInspector, event: gen_qevent_types.QContextMenuEvent): void {.base.} =
+  QWebInspectorcontextMenuEvent(self[], event)
+proc miqt_exec_method_cQWebInspector_contextMenuEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQWebInspector](cast[uint](vtbl) - uint(offsetOf(VirtualQWebInspector, vtbl)))
+  let slotval1 = gen_qevent_types.QContextMenuEvent(h: event, owned: false)
+  vtbl.contextMenuEvent(slotval1)
+
+method tabletEvent*(self: VirtualQWebInspector, event: gen_qevent_types.QTabletEvent): void {.base.} =
+  QWebInspectortabletEvent(self[], event)
+proc miqt_exec_method_cQWebInspector_tabletEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQWebInspector](cast[uint](vtbl) - uint(offsetOf(VirtualQWebInspector, vtbl)))
+  let slotval1 = gen_qevent_types.QTabletEvent(h: event, owned: false)
+  vtbl.tabletEvent(slotval1)
+
+method actionEvent*(self: VirtualQWebInspector, event: gen_qevent_types.QActionEvent): void {.base.} =
+  QWebInspectoractionEvent(self[], event)
+proc miqt_exec_method_cQWebInspector_actionEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQWebInspector](cast[uint](vtbl) - uint(offsetOf(VirtualQWebInspector, vtbl)))
+  let slotval1 = gen_qevent_types.QActionEvent(h: event, owned: false)
+  vtbl.actionEvent(slotval1)
+
+method dragEnterEvent*(self: VirtualQWebInspector, event: gen_qevent_types.QDragEnterEvent): void {.base.} =
+  QWebInspectordragEnterEvent(self[], event)
+proc miqt_exec_method_cQWebInspector_dragEnterEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQWebInspector](cast[uint](vtbl) - uint(offsetOf(VirtualQWebInspector, vtbl)))
+  let slotval1 = gen_qevent_types.QDragEnterEvent(h: event, owned: false)
+  vtbl.dragEnterEvent(slotval1)
+
+method dragMoveEvent*(self: VirtualQWebInspector, event: gen_qevent_types.QDragMoveEvent): void {.base.} =
+  QWebInspectordragMoveEvent(self[], event)
+proc miqt_exec_method_cQWebInspector_dragMoveEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQWebInspector](cast[uint](vtbl) - uint(offsetOf(VirtualQWebInspector, vtbl)))
+  let slotval1 = gen_qevent_types.QDragMoveEvent(h: event, owned: false)
+  vtbl.dragMoveEvent(slotval1)
+
+method dragLeaveEvent*(self: VirtualQWebInspector, event: gen_qevent_types.QDragLeaveEvent): void {.base.} =
+  QWebInspectordragLeaveEvent(self[], event)
+proc miqt_exec_method_cQWebInspector_dragLeaveEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQWebInspector](cast[uint](vtbl) - uint(offsetOf(VirtualQWebInspector, vtbl)))
+  let slotval1 = gen_qevent_types.QDragLeaveEvent(h: event, owned: false)
+  vtbl.dragLeaveEvent(slotval1)
+
+method dropEvent*(self: VirtualQWebInspector, event: gen_qevent_types.QDropEvent): void {.base.} =
+  QWebInspectordropEvent(self[], event)
+proc miqt_exec_method_cQWebInspector_dropEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQWebInspector](cast[uint](vtbl) - uint(offsetOf(VirtualQWebInspector, vtbl)))
+  let slotval1 = gen_qevent_types.QDropEvent(h: event, owned: false)
+  vtbl.dropEvent(slotval1)
+
+method nativeEvent*(self: VirtualQWebInspector, eventType: seq[byte], message: pointer, resultVal: ptr clong): bool {.base.} =
+  QWebInspectornativeEvent(self[], eventType, message, resultVal)
+proc miqt_exec_method_cQWebInspector_nativeEvent(vtbl: pointer, inst: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr clong): bool {.cdecl.} =
+  let vtbl = cast[VirtualQWebInspector](cast[uint](vtbl) - uint(offsetOf(VirtualQWebInspector, vtbl)))
+  var veventType_bytearray = eventType
+  var veventTypex_ret = @(toOpenArrayByte(veventType_bytearray.data, 0, int(veventType_bytearray.len)-1))
+  c_free(veventType_bytearray.data)
+  let slotval1 = veventTypex_ret
+  let slotval2 = message
+  let slotval3 = resultVal
+  var virtualReturn = vtbl.nativeEvent(slotval1, slotval2, slotval3)
+  virtualReturn
+
+method changeEvent*(self: VirtualQWebInspector, param1: gen_qcoreevent_types.QEvent): void {.base.} =
+  QWebInspectorchangeEvent(self[], param1)
+proc miqt_exec_method_cQWebInspector_changeEvent(vtbl: pointer, inst: pointer, param1: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQWebInspector](cast[uint](vtbl) - uint(offsetOf(VirtualQWebInspector, vtbl)))
+  let slotval1 = gen_qcoreevent_types.QEvent(h: param1, owned: false)
+  vtbl.changeEvent(slotval1)
+
+method metric*(self: VirtualQWebInspector, param1: cint): cint {.base.} =
+  QWebInspectormetric(self[], param1)
+proc miqt_exec_method_cQWebInspector_metric(vtbl: pointer, inst: pointer, param1: cint): cint {.cdecl.} =
+  let vtbl = cast[VirtualQWebInspector](cast[uint](vtbl) - uint(offsetOf(VirtualQWebInspector, vtbl)))
+  let slotval1 = cint(param1)
+  var virtualReturn = vtbl.metric(slotval1)
+  virtualReturn
+
+method initPainter*(self: VirtualQWebInspector, painter: gen_qpainter_types.QPainter): void {.base.} =
+  QWebInspectorinitPainter(self[], painter)
+proc miqt_exec_method_cQWebInspector_initPainter(vtbl: pointer, inst: pointer, painter: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQWebInspector](cast[uint](vtbl) - uint(offsetOf(VirtualQWebInspector, vtbl)))
+  let slotval1 = gen_qpainter_types.QPainter(h: painter, owned: false)
+  vtbl.initPainter(slotval1)
+
+method redirected*(self: VirtualQWebInspector, offset: gen_qpoint_types.QPoint): gen_qpaintdevice_types.QPaintDevice {.base.} =
+  QWebInspectorredirected(self[], offset)
+proc miqt_exec_method_cQWebInspector_redirected(vtbl: pointer, inst: pointer, offset: pointer): pointer {.cdecl.} =
+  let vtbl = cast[VirtualQWebInspector](cast[uint](vtbl) - uint(offsetOf(VirtualQWebInspector, vtbl)))
+  let slotval1 = gen_qpoint_types.QPoint(h: offset, owned: false)
+  var virtualReturn = vtbl.redirected(slotval1)
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
+
+method sharedPainter*(self: VirtualQWebInspector, ): gen_qpainter_types.QPainter {.base.} =
+  QWebInspectorsharedPainter(self[])
+proc miqt_exec_method_cQWebInspector_sharedPainter(vtbl: pointer, inst: pointer): pointer {.cdecl.} =
+  let vtbl = cast[VirtualQWebInspector](cast[uint](vtbl) - uint(offsetOf(VirtualQWebInspector, vtbl)))
+  var virtualReturn = vtbl.sharedPainter()
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
+
+method inputMethodEvent*(self: VirtualQWebInspector, param1: gen_qevent_types.QInputMethodEvent): void {.base.} =
+  QWebInspectorinputMethodEvent(self[], param1)
+proc miqt_exec_method_cQWebInspector_inputMethodEvent(vtbl: pointer, inst: pointer, param1: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQWebInspector](cast[uint](vtbl) - uint(offsetOf(VirtualQWebInspector, vtbl)))
+  let slotval1 = gen_qevent_types.QInputMethodEvent(h: param1, owned: false)
+  vtbl.inputMethodEvent(slotval1)
+
+method inputMethodQuery*(self: VirtualQWebInspector, param1: cint): gen_qvariant_types.QVariant {.base.} =
+  QWebInspectorinputMethodQuery(self[], param1)
+proc miqt_exec_method_cQWebInspector_inputMethodQuery(vtbl: pointer, inst: pointer, param1: cint): pointer {.cdecl.} =
+  let vtbl = cast[VirtualQWebInspector](cast[uint](vtbl) - uint(offsetOf(VirtualQWebInspector, vtbl)))
+  let slotval1 = cint(param1)
+  var virtualReturn = vtbl.inputMethodQuery(slotval1)
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
+
+method focusNextPrevChild*(self: VirtualQWebInspector, next: bool): bool {.base.} =
+  QWebInspectorfocusNextPrevChild(self[], next)
+proc miqt_exec_method_cQWebInspector_focusNextPrevChild(vtbl: pointer, inst: pointer, next: bool): bool {.cdecl.} =
+  let vtbl = cast[VirtualQWebInspector](cast[uint](vtbl) - uint(offsetOf(VirtualQWebInspector, vtbl)))
+  let slotval1 = next
+  var virtualReturn = vtbl.focusNextPrevChild(slotval1)
+  virtualReturn
+
+method eventFilter*(self: VirtualQWebInspector, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QWebInspectoreventFilter(self[], watched, event)
+proc miqt_exec_method_cQWebInspector_eventFilter(vtbl: pointer, inst: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
+  let vtbl = cast[VirtualQWebInspector](cast[uint](vtbl) - uint(offsetOf(VirtualQWebInspector, vtbl)))
+  let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
+  var virtualReturn = vtbl.eventFilter(slotval1, slotval2)
+  virtualReturn
+
+method timerEvent*(self: VirtualQWebInspector, event: gen_qcoreevent_types.QTimerEvent): void {.base.} =
+  QWebInspectortimerEvent(self[], event)
+proc miqt_exec_method_cQWebInspector_timerEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQWebInspector](cast[uint](vtbl) - uint(offsetOf(VirtualQWebInspector, vtbl)))
+  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
+  vtbl.timerEvent(slotval1)
+
+method childEvent*(self: VirtualQWebInspector, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
+  QWebInspectorchildEvent(self[], event)
+proc miqt_exec_method_cQWebInspector_childEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQWebInspector](cast[uint](vtbl) - uint(offsetOf(VirtualQWebInspector, vtbl)))
+  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
+  vtbl.childEvent(slotval1)
+
+method customEvent*(self: VirtualQWebInspector, event: gen_qcoreevent_types.QEvent): void {.base.} =
+  QWebInspectorcustomEvent(self[], event)
+proc miqt_exec_method_cQWebInspector_customEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQWebInspector](cast[uint](vtbl) - uint(offsetOf(VirtualQWebInspector, vtbl)))
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
+  vtbl.customEvent(slotval1)
+
+method connectNotify*(self: VirtualQWebInspector, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QWebInspectorconnectNotify(self[], signal)
+proc miqt_exec_method_cQWebInspector_connectNotify(vtbl: pointer, inst: pointer, signal: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQWebInspector](cast[uint](vtbl) - uint(offsetOf(VirtualQWebInspector, vtbl)))
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
+  vtbl.connectNotify(slotval1)
+
+method disconnectNotify*(self: VirtualQWebInspector, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QWebInspectordisconnectNotify(self[], signal)
+proc miqt_exec_method_cQWebInspector_disconnectNotify(vtbl: pointer, inst: pointer, signal: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQWebInspector](cast[uint](vtbl) - uint(offsetOf(VirtualQWebInspector, vtbl)))
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
+  vtbl.disconnectNotify(slotval1)
 
 proc updateMicroFocus*(self: gen_qwebinspector_types.QWebInspector, ): void =
   fcQWebInspector_protectedbase_updateMicroFocus(self.h)
@@ -840,7 +1251,7 @@ proc focusPreviousChild*(self: gen_qwebinspector_types.QWebInspector, ): bool =
   fcQWebInspector_protectedbase_focusPreviousChild(self.h)
 
 proc sender*(self: gen_qwebinspector_types.QWebInspector, ): gen_qobject_types.QObject =
-  gen_qobject_types.QObject(h: fcQWebInspector_protectedbase_sender(self.h))
+  gen_qobject_types.QObject(h: fcQWebInspector_protectedbase_sender(self.h), owned: false)
 
 proc senderSignalIndex*(self: gen_qwebinspector_types.QWebInspector, ): cint =
   fcQWebInspector_protectedbase_senderSignalIndex(self.h)
@@ -856,221 +1267,342 @@ proc create*(T: type gen_qwebinspector_types.QWebInspector,
     vtbl: ref QWebInspectorVTable = nil): gen_qwebinspector_types.QWebInspector =
   let vtbl = if vtbl == nil: new QWebInspectorVTable else: vtbl
   GC_ref(vtbl)
-  vtbl.vtbl.destructor = proc(vtbl: ptr cQWebInspectorVTable, _: ptr cQWebInspector) {.cdecl.} =
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQWebInspectorVTable, _: ptr cQWebInspector) {.cdecl.} =
     let vtbl = cast[ref QWebInspectorVTable](vtbl)
     GC_unref(vtbl)
-  if not isNil(vtbl.metaObject):
+  if not isNil(vtbl[].metaObject):
     vtbl[].vtbl.metaObject = miqt_exec_callback_cQWebInspector_metaObject
-  if not isNil(vtbl.metacast):
+  if not isNil(vtbl[].metacast):
     vtbl[].vtbl.metacast = miqt_exec_callback_cQWebInspector_metacast
-  if not isNil(vtbl.metacall):
+  if not isNil(vtbl[].metacall):
     vtbl[].vtbl.metacall = miqt_exec_callback_cQWebInspector_metacall
-  if not isNil(vtbl.sizeHint):
+  if not isNil(vtbl[].sizeHint):
     vtbl[].vtbl.sizeHint = miqt_exec_callback_cQWebInspector_sizeHint
-  if not isNil(vtbl.event):
+  if not isNil(vtbl[].event):
     vtbl[].vtbl.event = miqt_exec_callback_cQWebInspector_event
-  if not isNil(vtbl.resizeEvent):
+  if not isNil(vtbl[].resizeEvent):
     vtbl[].vtbl.resizeEvent = miqt_exec_callback_cQWebInspector_resizeEvent
-  if not isNil(vtbl.showEvent):
+  if not isNil(vtbl[].showEvent):
     vtbl[].vtbl.showEvent = miqt_exec_callback_cQWebInspector_showEvent
-  if not isNil(vtbl.hideEvent):
+  if not isNil(vtbl[].hideEvent):
     vtbl[].vtbl.hideEvent = miqt_exec_callback_cQWebInspector_hideEvent
-  if not isNil(vtbl.closeEvent):
+  if not isNil(vtbl[].closeEvent):
     vtbl[].vtbl.closeEvent = miqt_exec_callback_cQWebInspector_closeEvent
-  if not isNil(vtbl.devType):
+  if not isNil(vtbl[].devType):
     vtbl[].vtbl.devType = miqt_exec_callback_cQWebInspector_devType
-  if not isNil(vtbl.setVisible):
+  if not isNil(vtbl[].setVisible):
     vtbl[].vtbl.setVisible = miqt_exec_callback_cQWebInspector_setVisible
-  if not isNil(vtbl.minimumSizeHint):
+  if not isNil(vtbl[].minimumSizeHint):
     vtbl[].vtbl.minimumSizeHint = miqt_exec_callback_cQWebInspector_minimumSizeHint
-  if not isNil(vtbl.heightForWidth):
+  if not isNil(vtbl[].heightForWidth):
     vtbl[].vtbl.heightForWidth = miqt_exec_callback_cQWebInspector_heightForWidth
-  if not isNil(vtbl.hasHeightForWidth):
+  if not isNil(vtbl[].hasHeightForWidth):
     vtbl[].vtbl.hasHeightForWidth = miqt_exec_callback_cQWebInspector_hasHeightForWidth
-  if not isNil(vtbl.paintEngine):
+  if not isNil(vtbl[].paintEngine):
     vtbl[].vtbl.paintEngine = miqt_exec_callback_cQWebInspector_paintEngine
-  if not isNil(vtbl.mousePressEvent):
+  if not isNil(vtbl[].mousePressEvent):
     vtbl[].vtbl.mousePressEvent = miqt_exec_callback_cQWebInspector_mousePressEvent
-  if not isNil(vtbl.mouseReleaseEvent):
+  if not isNil(vtbl[].mouseReleaseEvent):
     vtbl[].vtbl.mouseReleaseEvent = miqt_exec_callback_cQWebInspector_mouseReleaseEvent
-  if not isNil(vtbl.mouseDoubleClickEvent):
+  if not isNil(vtbl[].mouseDoubleClickEvent):
     vtbl[].vtbl.mouseDoubleClickEvent = miqt_exec_callback_cQWebInspector_mouseDoubleClickEvent
-  if not isNil(vtbl.mouseMoveEvent):
+  if not isNil(vtbl[].mouseMoveEvent):
     vtbl[].vtbl.mouseMoveEvent = miqt_exec_callback_cQWebInspector_mouseMoveEvent
-  if not isNil(vtbl.wheelEvent):
+  if not isNil(vtbl[].wheelEvent):
     vtbl[].vtbl.wheelEvent = miqt_exec_callback_cQWebInspector_wheelEvent
-  if not isNil(vtbl.keyPressEvent):
+  if not isNil(vtbl[].keyPressEvent):
     vtbl[].vtbl.keyPressEvent = miqt_exec_callback_cQWebInspector_keyPressEvent
-  if not isNil(vtbl.keyReleaseEvent):
+  if not isNil(vtbl[].keyReleaseEvent):
     vtbl[].vtbl.keyReleaseEvent = miqt_exec_callback_cQWebInspector_keyReleaseEvent
-  if not isNil(vtbl.focusInEvent):
+  if not isNil(vtbl[].focusInEvent):
     vtbl[].vtbl.focusInEvent = miqt_exec_callback_cQWebInspector_focusInEvent
-  if not isNil(vtbl.focusOutEvent):
+  if not isNil(vtbl[].focusOutEvent):
     vtbl[].vtbl.focusOutEvent = miqt_exec_callback_cQWebInspector_focusOutEvent
-  if not isNil(vtbl.enterEvent):
+  if not isNil(vtbl[].enterEvent):
     vtbl[].vtbl.enterEvent = miqt_exec_callback_cQWebInspector_enterEvent
-  if not isNil(vtbl.leaveEvent):
+  if not isNil(vtbl[].leaveEvent):
     vtbl[].vtbl.leaveEvent = miqt_exec_callback_cQWebInspector_leaveEvent
-  if not isNil(vtbl.paintEvent):
+  if not isNil(vtbl[].paintEvent):
     vtbl[].vtbl.paintEvent = miqt_exec_callback_cQWebInspector_paintEvent
-  if not isNil(vtbl.moveEvent):
+  if not isNil(vtbl[].moveEvent):
     vtbl[].vtbl.moveEvent = miqt_exec_callback_cQWebInspector_moveEvent
-  if not isNil(vtbl.contextMenuEvent):
+  if not isNil(vtbl[].contextMenuEvent):
     vtbl[].vtbl.contextMenuEvent = miqt_exec_callback_cQWebInspector_contextMenuEvent
-  if not isNil(vtbl.tabletEvent):
+  if not isNil(vtbl[].tabletEvent):
     vtbl[].vtbl.tabletEvent = miqt_exec_callback_cQWebInspector_tabletEvent
-  if not isNil(vtbl.actionEvent):
+  if not isNil(vtbl[].actionEvent):
     vtbl[].vtbl.actionEvent = miqt_exec_callback_cQWebInspector_actionEvent
-  if not isNil(vtbl.dragEnterEvent):
+  if not isNil(vtbl[].dragEnterEvent):
     vtbl[].vtbl.dragEnterEvent = miqt_exec_callback_cQWebInspector_dragEnterEvent
-  if not isNil(vtbl.dragMoveEvent):
+  if not isNil(vtbl[].dragMoveEvent):
     vtbl[].vtbl.dragMoveEvent = miqt_exec_callback_cQWebInspector_dragMoveEvent
-  if not isNil(vtbl.dragLeaveEvent):
+  if not isNil(vtbl[].dragLeaveEvent):
     vtbl[].vtbl.dragLeaveEvent = miqt_exec_callback_cQWebInspector_dragLeaveEvent
-  if not isNil(vtbl.dropEvent):
+  if not isNil(vtbl[].dropEvent):
     vtbl[].vtbl.dropEvent = miqt_exec_callback_cQWebInspector_dropEvent
-  if not isNil(vtbl.nativeEvent):
+  if not isNil(vtbl[].nativeEvent):
     vtbl[].vtbl.nativeEvent = miqt_exec_callback_cQWebInspector_nativeEvent
-  if not isNil(vtbl.changeEvent):
+  if not isNil(vtbl[].changeEvent):
     vtbl[].vtbl.changeEvent = miqt_exec_callback_cQWebInspector_changeEvent
-  if not isNil(vtbl.metric):
+  if not isNil(vtbl[].metric):
     vtbl[].vtbl.metric = miqt_exec_callback_cQWebInspector_metric
-  if not isNil(vtbl.initPainter):
+  if not isNil(vtbl[].initPainter):
     vtbl[].vtbl.initPainter = miqt_exec_callback_cQWebInspector_initPainter
-  if not isNil(vtbl.redirected):
+  if not isNil(vtbl[].redirected):
     vtbl[].vtbl.redirected = miqt_exec_callback_cQWebInspector_redirected
-  if not isNil(vtbl.sharedPainter):
+  if not isNil(vtbl[].sharedPainter):
     vtbl[].vtbl.sharedPainter = miqt_exec_callback_cQWebInspector_sharedPainter
-  if not isNil(vtbl.inputMethodEvent):
+  if not isNil(vtbl[].inputMethodEvent):
     vtbl[].vtbl.inputMethodEvent = miqt_exec_callback_cQWebInspector_inputMethodEvent
-  if not isNil(vtbl.inputMethodQuery):
+  if not isNil(vtbl[].inputMethodQuery):
     vtbl[].vtbl.inputMethodQuery = miqt_exec_callback_cQWebInspector_inputMethodQuery
-  if not isNil(vtbl.focusNextPrevChild):
+  if not isNil(vtbl[].focusNextPrevChild):
     vtbl[].vtbl.focusNextPrevChild = miqt_exec_callback_cQWebInspector_focusNextPrevChild
-  if not isNil(vtbl.eventFilter):
+  if not isNil(vtbl[].eventFilter):
     vtbl[].vtbl.eventFilter = miqt_exec_callback_cQWebInspector_eventFilter
-  if not isNil(vtbl.timerEvent):
+  if not isNil(vtbl[].timerEvent):
     vtbl[].vtbl.timerEvent = miqt_exec_callback_cQWebInspector_timerEvent
-  if not isNil(vtbl.childEvent):
+  if not isNil(vtbl[].childEvent):
     vtbl[].vtbl.childEvent = miqt_exec_callback_cQWebInspector_childEvent
-  if not isNil(vtbl.customEvent):
+  if not isNil(vtbl[].customEvent):
     vtbl[].vtbl.customEvent = miqt_exec_callback_cQWebInspector_customEvent
-  if not isNil(vtbl.connectNotify):
+  if not isNil(vtbl[].connectNotify):
     vtbl[].vtbl.connectNotify = miqt_exec_callback_cQWebInspector_connectNotify
-  if not isNil(vtbl.disconnectNotify):
+  if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQWebInspector_disconnectNotify
-  gen_qwebinspector_types.QWebInspector(h: fcQWebInspector_new(addr(vtbl[]), parent.h))
+  gen_qwebinspector_types.QWebInspector(h: fcQWebInspector_new(addr(vtbl[].vtbl), parent.h), owned: true)
 
 proc create*(T: type gen_qwebinspector_types.QWebInspector,
     vtbl: ref QWebInspectorVTable = nil): gen_qwebinspector_types.QWebInspector =
   let vtbl = if vtbl == nil: new QWebInspectorVTable else: vtbl
   GC_ref(vtbl)
-  vtbl.vtbl.destructor = proc(vtbl: ptr cQWebInspectorVTable, _: ptr cQWebInspector) {.cdecl.} =
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQWebInspectorVTable, _: ptr cQWebInspector) {.cdecl.} =
     let vtbl = cast[ref QWebInspectorVTable](vtbl)
     GC_unref(vtbl)
-  if not isNil(vtbl.metaObject):
+  if not isNil(vtbl[].metaObject):
     vtbl[].vtbl.metaObject = miqt_exec_callback_cQWebInspector_metaObject
-  if not isNil(vtbl.metacast):
+  if not isNil(vtbl[].metacast):
     vtbl[].vtbl.metacast = miqt_exec_callback_cQWebInspector_metacast
-  if not isNil(vtbl.metacall):
+  if not isNil(vtbl[].metacall):
     vtbl[].vtbl.metacall = miqt_exec_callback_cQWebInspector_metacall
-  if not isNil(vtbl.sizeHint):
+  if not isNil(vtbl[].sizeHint):
     vtbl[].vtbl.sizeHint = miqt_exec_callback_cQWebInspector_sizeHint
-  if not isNil(vtbl.event):
+  if not isNil(vtbl[].event):
     vtbl[].vtbl.event = miqt_exec_callback_cQWebInspector_event
-  if not isNil(vtbl.resizeEvent):
+  if not isNil(vtbl[].resizeEvent):
     vtbl[].vtbl.resizeEvent = miqt_exec_callback_cQWebInspector_resizeEvent
-  if not isNil(vtbl.showEvent):
+  if not isNil(vtbl[].showEvent):
     vtbl[].vtbl.showEvent = miqt_exec_callback_cQWebInspector_showEvent
-  if not isNil(vtbl.hideEvent):
+  if not isNil(vtbl[].hideEvent):
     vtbl[].vtbl.hideEvent = miqt_exec_callback_cQWebInspector_hideEvent
-  if not isNil(vtbl.closeEvent):
+  if not isNil(vtbl[].closeEvent):
     vtbl[].vtbl.closeEvent = miqt_exec_callback_cQWebInspector_closeEvent
-  if not isNil(vtbl.devType):
+  if not isNil(vtbl[].devType):
     vtbl[].vtbl.devType = miqt_exec_callback_cQWebInspector_devType
-  if not isNil(vtbl.setVisible):
+  if not isNil(vtbl[].setVisible):
     vtbl[].vtbl.setVisible = miqt_exec_callback_cQWebInspector_setVisible
-  if not isNil(vtbl.minimumSizeHint):
+  if not isNil(vtbl[].minimumSizeHint):
     vtbl[].vtbl.minimumSizeHint = miqt_exec_callback_cQWebInspector_minimumSizeHint
-  if not isNil(vtbl.heightForWidth):
+  if not isNil(vtbl[].heightForWidth):
     vtbl[].vtbl.heightForWidth = miqt_exec_callback_cQWebInspector_heightForWidth
-  if not isNil(vtbl.hasHeightForWidth):
+  if not isNil(vtbl[].hasHeightForWidth):
     vtbl[].vtbl.hasHeightForWidth = miqt_exec_callback_cQWebInspector_hasHeightForWidth
-  if not isNil(vtbl.paintEngine):
+  if not isNil(vtbl[].paintEngine):
     vtbl[].vtbl.paintEngine = miqt_exec_callback_cQWebInspector_paintEngine
-  if not isNil(vtbl.mousePressEvent):
+  if not isNil(vtbl[].mousePressEvent):
     vtbl[].vtbl.mousePressEvent = miqt_exec_callback_cQWebInspector_mousePressEvent
-  if not isNil(vtbl.mouseReleaseEvent):
+  if not isNil(vtbl[].mouseReleaseEvent):
     vtbl[].vtbl.mouseReleaseEvent = miqt_exec_callback_cQWebInspector_mouseReleaseEvent
-  if not isNil(vtbl.mouseDoubleClickEvent):
+  if not isNil(vtbl[].mouseDoubleClickEvent):
     vtbl[].vtbl.mouseDoubleClickEvent = miqt_exec_callback_cQWebInspector_mouseDoubleClickEvent
-  if not isNil(vtbl.mouseMoveEvent):
+  if not isNil(vtbl[].mouseMoveEvent):
     vtbl[].vtbl.mouseMoveEvent = miqt_exec_callback_cQWebInspector_mouseMoveEvent
-  if not isNil(vtbl.wheelEvent):
+  if not isNil(vtbl[].wheelEvent):
     vtbl[].vtbl.wheelEvent = miqt_exec_callback_cQWebInspector_wheelEvent
-  if not isNil(vtbl.keyPressEvent):
+  if not isNil(vtbl[].keyPressEvent):
     vtbl[].vtbl.keyPressEvent = miqt_exec_callback_cQWebInspector_keyPressEvent
-  if not isNil(vtbl.keyReleaseEvent):
+  if not isNil(vtbl[].keyReleaseEvent):
     vtbl[].vtbl.keyReleaseEvent = miqt_exec_callback_cQWebInspector_keyReleaseEvent
-  if not isNil(vtbl.focusInEvent):
+  if not isNil(vtbl[].focusInEvent):
     vtbl[].vtbl.focusInEvent = miqt_exec_callback_cQWebInspector_focusInEvent
-  if not isNil(vtbl.focusOutEvent):
+  if not isNil(vtbl[].focusOutEvent):
     vtbl[].vtbl.focusOutEvent = miqt_exec_callback_cQWebInspector_focusOutEvent
-  if not isNil(vtbl.enterEvent):
+  if not isNil(vtbl[].enterEvent):
     vtbl[].vtbl.enterEvent = miqt_exec_callback_cQWebInspector_enterEvent
-  if not isNil(vtbl.leaveEvent):
+  if not isNil(vtbl[].leaveEvent):
     vtbl[].vtbl.leaveEvent = miqt_exec_callback_cQWebInspector_leaveEvent
-  if not isNil(vtbl.paintEvent):
+  if not isNil(vtbl[].paintEvent):
     vtbl[].vtbl.paintEvent = miqt_exec_callback_cQWebInspector_paintEvent
-  if not isNil(vtbl.moveEvent):
+  if not isNil(vtbl[].moveEvent):
     vtbl[].vtbl.moveEvent = miqt_exec_callback_cQWebInspector_moveEvent
-  if not isNil(vtbl.contextMenuEvent):
+  if not isNil(vtbl[].contextMenuEvent):
     vtbl[].vtbl.contextMenuEvent = miqt_exec_callback_cQWebInspector_contextMenuEvent
-  if not isNil(vtbl.tabletEvent):
+  if not isNil(vtbl[].tabletEvent):
     vtbl[].vtbl.tabletEvent = miqt_exec_callback_cQWebInspector_tabletEvent
-  if not isNil(vtbl.actionEvent):
+  if not isNil(vtbl[].actionEvent):
     vtbl[].vtbl.actionEvent = miqt_exec_callback_cQWebInspector_actionEvent
-  if not isNil(vtbl.dragEnterEvent):
+  if not isNil(vtbl[].dragEnterEvent):
     vtbl[].vtbl.dragEnterEvent = miqt_exec_callback_cQWebInspector_dragEnterEvent
-  if not isNil(vtbl.dragMoveEvent):
+  if not isNil(vtbl[].dragMoveEvent):
     vtbl[].vtbl.dragMoveEvent = miqt_exec_callback_cQWebInspector_dragMoveEvent
-  if not isNil(vtbl.dragLeaveEvent):
+  if not isNil(vtbl[].dragLeaveEvent):
     vtbl[].vtbl.dragLeaveEvent = miqt_exec_callback_cQWebInspector_dragLeaveEvent
-  if not isNil(vtbl.dropEvent):
+  if not isNil(vtbl[].dropEvent):
     vtbl[].vtbl.dropEvent = miqt_exec_callback_cQWebInspector_dropEvent
-  if not isNil(vtbl.nativeEvent):
+  if not isNil(vtbl[].nativeEvent):
     vtbl[].vtbl.nativeEvent = miqt_exec_callback_cQWebInspector_nativeEvent
-  if not isNil(vtbl.changeEvent):
+  if not isNil(vtbl[].changeEvent):
     vtbl[].vtbl.changeEvent = miqt_exec_callback_cQWebInspector_changeEvent
-  if not isNil(vtbl.metric):
+  if not isNil(vtbl[].metric):
     vtbl[].vtbl.metric = miqt_exec_callback_cQWebInspector_metric
-  if not isNil(vtbl.initPainter):
+  if not isNil(vtbl[].initPainter):
     vtbl[].vtbl.initPainter = miqt_exec_callback_cQWebInspector_initPainter
-  if not isNil(vtbl.redirected):
+  if not isNil(vtbl[].redirected):
     vtbl[].vtbl.redirected = miqt_exec_callback_cQWebInspector_redirected
-  if not isNil(vtbl.sharedPainter):
+  if not isNil(vtbl[].sharedPainter):
     vtbl[].vtbl.sharedPainter = miqt_exec_callback_cQWebInspector_sharedPainter
-  if not isNil(vtbl.inputMethodEvent):
+  if not isNil(vtbl[].inputMethodEvent):
     vtbl[].vtbl.inputMethodEvent = miqt_exec_callback_cQWebInspector_inputMethodEvent
-  if not isNil(vtbl.inputMethodQuery):
+  if not isNil(vtbl[].inputMethodQuery):
     vtbl[].vtbl.inputMethodQuery = miqt_exec_callback_cQWebInspector_inputMethodQuery
-  if not isNil(vtbl.focusNextPrevChild):
+  if not isNil(vtbl[].focusNextPrevChild):
     vtbl[].vtbl.focusNextPrevChild = miqt_exec_callback_cQWebInspector_focusNextPrevChild
-  if not isNil(vtbl.eventFilter):
+  if not isNil(vtbl[].eventFilter):
     vtbl[].vtbl.eventFilter = miqt_exec_callback_cQWebInspector_eventFilter
-  if not isNil(vtbl.timerEvent):
+  if not isNil(vtbl[].timerEvent):
     vtbl[].vtbl.timerEvent = miqt_exec_callback_cQWebInspector_timerEvent
-  if not isNil(vtbl.childEvent):
+  if not isNil(vtbl[].childEvent):
     vtbl[].vtbl.childEvent = miqt_exec_callback_cQWebInspector_childEvent
-  if not isNil(vtbl.customEvent):
+  if not isNil(vtbl[].customEvent):
     vtbl[].vtbl.customEvent = miqt_exec_callback_cQWebInspector_customEvent
-  if not isNil(vtbl.connectNotify):
+  if not isNil(vtbl[].connectNotify):
     vtbl[].vtbl.connectNotify = miqt_exec_callback_cQWebInspector_connectNotify
-  if not isNil(vtbl.disconnectNotify):
+  if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQWebInspector_disconnectNotify
-  gen_qwebinspector_types.QWebInspector(h: fcQWebInspector_new2(addr(vtbl[]), ))
+  gen_qwebinspector_types.QWebInspector(h: fcQWebInspector_new2(addr(vtbl[].vtbl), ), owned: true)
+
+proc create*(T: type gen_qwebinspector_types.QWebInspector,
+    parent: gen_qwidget_types.QWidget,
+    vtbl: VirtualQWebInspector) =
+
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQWebInspectorVTable, _: ptr cQWebInspector) {.cdecl.} =
+    let vtbl = cast[ptr typeof(VirtualQWebInspector()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQWebInspector, vtbl)))
+    vtbl[].h = nil
+    vtbl[].owned = false
+  vtbl[].vtbl.metaObject = miqt_exec_method_cQWebInspector_metaObject
+  vtbl[].vtbl.metacast = miqt_exec_method_cQWebInspector_metacast
+  vtbl[].vtbl.metacall = miqt_exec_method_cQWebInspector_metacall
+  vtbl[].vtbl.sizeHint = miqt_exec_method_cQWebInspector_sizeHint
+  vtbl[].vtbl.event = miqt_exec_method_cQWebInspector_event
+  vtbl[].vtbl.resizeEvent = miqt_exec_method_cQWebInspector_resizeEvent
+  vtbl[].vtbl.showEvent = miqt_exec_method_cQWebInspector_showEvent
+  vtbl[].vtbl.hideEvent = miqt_exec_method_cQWebInspector_hideEvent
+  vtbl[].vtbl.closeEvent = miqt_exec_method_cQWebInspector_closeEvent
+  vtbl[].vtbl.devType = miqt_exec_method_cQWebInspector_devType
+  vtbl[].vtbl.setVisible = miqt_exec_method_cQWebInspector_setVisible
+  vtbl[].vtbl.minimumSizeHint = miqt_exec_method_cQWebInspector_minimumSizeHint
+  vtbl[].vtbl.heightForWidth = miqt_exec_method_cQWebInspector_heightForWidth
+  vtbl[].vtbl.hasHeightForWidth = miqt_exec_method_cQWebInspector_hasHeightForWidth
+  vtbl[].vtbl.paintEngine = miqt_exec_method_cQWebInspector_paintEngine
+  vtbl[].vtbl.mousePressEvent = miqt_exec_method_cQWebInspector_mousePressEvent
+  vtbl[].vtbl.mouseReleaseEvent = miqt_exec_method_cQWebInspector_mouseReleaseEvent
+  vtbl[].vtbl.mouseDoubleClickEvent = miqt_exec_method_cQWebInspector_mouseDoubleClickEvent
+  vtbl[].vtbl.mouseMoveEvent = miqt_exec_method_cQWebInspector_mouseMoveEvent
+  vtbl[].vtbl.wheelEvent = miqt_exec_method_cQWebInspector_wheelEvent
+  vtbl[].vtbl.keyPressEvent = miqt_exec_method_cQWebInspector_keyPressEvent
+  vtbl[].vtbl.keyReleaseEvent = miqt_exec_method_cQWebInspector_keyReleaseEvent
+  vtbl[].vtbl.focusInEvent = miqt_exec_method_cQWebInspector_focusInEvent
+  vtbl[].vtbl.focusOutEvent = miqt_exec_method_cQWebInspector_focusOutEvent
+  vtbl[].vtbl.enterEvent = miqt_exec_method_cQWebInspector_enterEvent
+  vtbl[].vtbl.leaveEvent = miqt_exec_method_cQWebInspector_leaveEvent
+  vtbl[].vtbl.paintEvent = miqt_exec_method_cQWebInspector_paintEvent
+  vtbl[].vtbl.moveEvent = miqt_exec_method_cQWebInspector_moveEvent
+  vtbl[].vtbl.contextMenuEvent = miqt_exec_method_cQWebInspector_contextMenuEvent
+  vtbl[].vtbl.tabletEvent = miqt_exec_method_cQWebInspector_tabletEvent
+  vtbl[].vtbl.actionEvent = miqt_exec_method_cQWebInspector_actionEvent
+  vtbl[].vtbl.dragEnterEvent = miqt_exec_method_cQWebInspector_dragEnterEvent
+  vtbl[].vtbl.dragMoveEvent = miqt_exec_method_cQWebInspector_dragMoveEvent
+  vtbl[].vtbl.dragLeaveEvent = miqt_exec_method_cQWebInspector_dragLeaveEvent
+  vtbl[].vtbl.dropEvent = miqt_exec_method_cQWebInspector_dropEvent
+  vtbl[].vtbl.nativeEvent = miqt_exec_method_cQWebInspector_nativeEvent
+  vtbl[].vtbl.changeEvent = miqt_exec_method_cQWebInspector_changeEvent
+  vtbl[].vtbl.metric = miqt_exec_method_cQWebInspector_metric
+  vtbl[].vtbl.initPainter = miqt_exec_method_cQWebInspector_initPainter
+  vtbl[].vtbl.redirected = miqt_exec_method_cQWebInspector_redirected
+  vtbl[].vtbl.sharedPainter = miqt_exec_method_cQWebInspector_sharedPainter
+  vtbl[].vtbl.inputMethodEvent = miqt_exec_method_cQWebInspector_inputMethodEvent
+  vtbl[].vtbl.inputMethodQuery = miqt_exec_method_cQWebInspector_inputMethodQuery
+  vtbl[].vtbl.focusNextPrevChild = miqt_exec_method_cQWebInspector_focusNextPrevChild
+  vtbl[].vtbl.eventFilter = miqt_exec_method_cQWebInspector_eventFilter
+  vtbl[].vtbl.timerEvent = miqt_exec_method_cQWebInspector_timerEvent
+  vtbl[].vtbl.childEvent = miqt_exec_method_cQWebInspector_childEvent
+  vtbl[].vtbl.customEvent = miqt_exec_method_cQWebInspector_customEvent
+  vtbl[].vtbl.connectNotify = miqt_exec_method_cQWebInspector_connectNotify
+  vtbl[].vtbl.disconnectNotify = miqt_exec_method_cQWebInspector_disconnectNotify
+  if vtbl[].h != nil: delete(move(vtbl[]))
+  vtbl[].h = fcQWebInspector_new(addr(vtbl[].vtbl), parent.h)
+  vtbl[].owned = true
+
+proc create*(T: type gen_qwebinspector_types.QWebInspector,
+    vtbl: VirtualQWebInspector) =
+
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQWebInspectorVTable, _: ptr cQWebInspector) {.cdecl.} =
+    let vtbl = cast[ptr typeof(VirtualQWebInspector()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQWebInspector, vtbl)))
+    vtbl[].h = nil
+    vtbl[].owned = false
+  vtbl[].vtbl.metaObject = miqt_exec_method_cQWebInspector_metaObject
+  vtbl[].vtbl.metacast = miqt_exec_method_cQWebInspector_metacast
+  vtbl[].vtbl.metacall = miqt_exec_method_cQWebInspector_metacall
+  vtbl[].vtbl.sizeHint = miqt_exec_method_cQWebInspector_sizeHint
+  vtbl[].vtbl.event = miqt_exec_method_cQWebInspector_event
+  vtbl[].vtbl.resizeEvent = miqt_exec_method_cQWebInspector_resizeEvent
+  vtbl[].vtbl.showEvent = miqt_exec_method_cQWebInspector_showEvent
+  vtbl[].vtbl.hideEvent = miqt_exec_method_cQWebInspector_hideEvent
+  vtbl[].vtbl.closeEvent = miqt_exec_method_cQWebInspector_closeEvent
+  vtbl[].vtbl.devType = miqt_exec_method_cQWebInspector_devType
+  vtbl[].vtbl.setVisible = miqt_exec_method_cQWebInspector_setVisible
+  vtbl[].vtbl.minimumSizeHint = miqt_exec_method_cQWebInspector_minimumSizeHint
+  vtbl[].vtbl.heightForWidth = miqt_exec_method_cQWebInspector_heightForWidth
+  vtbl[].vtbl.hasHeightForWidth = miqt_exec_method_cQWebInspector_hasHeightForWidth
+  vtbl[].vtbl.paintEngine = miqt_exec_method_cQWebInspector_paintEngine
+  vtbl[].vtbl.mousePressEvent = miqt_exec_method_cQWebInspector_mousePressEvent
+  vtbl[].vtbl.mouseReleaseEvent = miqt_exec_method_cQWebInspector_mouseReleaseEvent
+  vtbl[].vtbl.mouseDoubleClickEvent = miqt_exec_method_cQWebInspector_mouseDoubleClickEvent
+  vtbl[].vtbl.mouseMoveEvent = miqt_exec_method_cQWebInspector_mouseMoveEvent
+  vtbl[].vtbl.wheelEvent = miqt_exec_method_cQWebInspector_wheelEvent
+  vtbl[].vtbl.keyPressEvent = miqt_exec_method_cQWebInspector_keyPressEvent
+  vtbl[].vtbl.keyReleaseEvent = miqt_exec_method_cQWebInspector_keyReleaseEvent
+  vtbl[].vtbl.focusInEvent = miqt_exec_method_cQWebInspector_focusInEvent
+  vtbl[].vtbl.focusOutEvent = miqt_exec_method_cQWebInspector_focusOutEvent
+  vtbl[].vtbl.enterEvent = miqt_exec_method_cQWebInspector_enterEvent
+  vtbl[].vtbl.leaveEvent = miqt_exec_method_cQWebInspector_leaveEvent
+  vtbl[].vtbl.paintEvent = miqt_exec_method_cQWebInspector_paintEvent
+  vtbl[].vtbl.moveEvent = miqt_exec_method_cQWebInspector_moveEvent
+  vtbl[].vtbl.contextMenuEvent = miqt_exec_method_cQWebInspector_contextMenuEvent
+  vtbl[].vtbl.tabletEvent = miqt_exec_method_cQWebInspector_tabletEvent
+  vtbl[].vtbl.actionEvent = miqt_exec_method_cQWebInspector_actionEvent
+  vtbl[].vtbl.dragEnterEvent = miqt_exec_method_cQWebInspector_dragEnterEvent
+  vtbl[].vtbl.dragMoveEvent = miqt_exec_method_cQWebInspector_dragMoveEvent
+  vtbl[].vtbl.dragLeaveEvent = miqt_exec_method_cQWebInspector_dragLeaveEvent
+  vtbl[].vtbl.dropEvent = miqt_exec_method_cQWebInspector_dropEvent
+  vtbl[].vtbl.nativeEvent = miqt_exec_method_cQWebInspector_nativeEvent
+  vtbl[].vtbl.changeEvent = miqt_exec_method_cQWebInspector_changeEvent
+  vtbl[].vtbl.metric = miqt_exec_method_cQWebInspector_metric
+  vtbl[].vtbl.initPainter = miqt_exec_method_cQWebInspector_initPainter
+  vtbl[].vtbl.redirected = miqt_exec_method_cQWebInspector_redirected
+  vtbl[].vtbl.sharedPainter = miqt_exec_method_cQWebInspector_sharedPainter
+  vtbl[].vtbl.inputMethodEvent = miqt_exec_method_cQWebInspector_inputMethodEvent
+  vtbl[].vtbl.inputMethodQuery = miqt_exec_method_cQWebInspector_inputMethodQuery
+  vtbl[].vtbl.focusNextPrevChild = miqt_exec_method_cQWebInspector_focusNextPrevChild
+  vtbl[].vtbl.eventFilter = miqt_exec_method_cQWebInspector_eventFilter
+  vtbl[].vtbl.timerEvent = miqt_exec_method_cQWebInspector_timerEvent
+  vtbl[].vtbl.childEvent = miqt_exec_method_cQWebInspector_childEvent
+  vtbl[].vtbl.customEvent = miqt_exec_method_cQWebInspector_customEvent
+  vtbl[].vtbl.connectNotify = miqt_exec_method_cQWebInspector_connectNotify
+  vtbl[].vtbl.disconnectNotify = miqt_exec_method_cQWebInspector_disconnectNotify
+  if vtbl[].h != nil: delete(move(vtbl[]))
+  vtbl[].h = fcQWebInspector_new2(addr(vtbl[].vtbl), )
+  vtbl[].owned = true
 
 proc staticMetaObject*(_: type gen_qwebinspector_types.QWebInspector): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQWebInspector_staticMetaObject())
-proc delete*(self: gen_qwebinspector_types.QWebInspector) =
-  fcQWebInspector_delete(self.h)

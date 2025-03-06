@@ -30,9 +30,6 @@ func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
     else:
       copyMem(addr result[0], unsafeAddr v[0], v.len)
 
-const cflags = gorge("pkg-config --cflags Qt5Core")  & " -fPIC"
-{.compile("gen_qrect.cpp", cflags).}
-
 
 import ./gen_qrect_types
 export gen_qrect_types
@@ -124,7 +121,6 @@ proc fcQRect_new2(topleft: pointer, bottomright: pointer): ptr cQRect {.importc:
 proc fcQRect_new3(topleft: pointer, size: pointer): ptr cQRect {.importc: "QRect_new3".}
 proc fcQRect_new4(left: cint, top: cint, width: cint, height: cint): ptr cQRect {.importc: "QRect_new4".}
 proc fcQRect_new5(param1: pointer): ptr cQRect {.importc: "QRect_new5".}
-proc fcQRect_delete(self: pointer) {.importc: "QRect_delete".}
 proc fcQRectF_isNull(self: pointer, ): bool {.importc: "QRectF_isNull".}
 proc fcQRectF_isEmpty(self: pointer, ): bool {.importc: "QRectF_isEmpty".}
 proc fcQRectF_isValid(self: pointer, ): bool {.importc: "QRectF_isValid".}
@@ -200,7 +196,6 @@ proc fcQRectF_new3(topleft: pointer, bottomRight: pointer): ptr cQRectF {.import
 proc fcQRectF_new4(left: float64, top: float64, width: float64, height: float64): ptr cQRectF {.importc: "QRectF_new4".}
 proc fcQRectF_new5(rect: pointer): ptr cQRectF {.importc: "QRectF_new5".}
 proc fcQRectF_new6(param1: pointer): ptr cQRectF {.importc: "QRectF_new6".}
-proc fcQRectF_delete(self: pointer) {.importc: "QRectF_delete".}
 
 proc isNull*(self: gen_qrect_types.QRect, ): bool =
   fcQRect_isNull(self.h)
@@ -224,7 +219,7 @@ proc bottom*(self: gen_qrect_types.QRect, ): cint =
   fcQRect_bottom(self.h)
 
 proc normalized*(self: gen_qrect_types.QRect, ): gen_qrect_types.QRect =
-  gen_qrect_types.QRect(h: fcQRect_normalized(self.h))
+  gen_qrect_types.QRect(h: fcQRect_normalized(self.h), owned: true)
 
 proc x*(self: gen_qrect_types.QRect, ): cint =
   fcQRect_x(self.h)
@@ -263,19 +258,19 @@ proc setBottomLeft*(self: gen_qrect_types.QRect, p: gen_qpoint_types.QPoint): vo
   fcQRect_setBottomLeft(self.h, p.h)
 
 proc topLeft*(self: gen_qrect_types.QRect, ): gen_qpoint_types.QPoint =
-  gen_qpoint_types.QPoint(h: fcQRect_topLeft(self.h))
+  gen_qpoint_types.QPoint(h: fcQRect_topLeft(self.h), owned: true)
 
 proc bottomRight*(self: gen_qrect_types.QRect, ): gen_qpoint_types.QPoint =
-  gen_qpoint_types.QPoint(h: fcQRect_bottomRight(self.h))
+  gen_qpoint_types.QPoint(h: fcQRect_bottomRight(self.h), owned: true)
 
 proc topRight*(self: gen_qrect_types.QRect, ): gen_qpoint_types.QPoint =
-  gen_qpoint_types.QPoint(h: fcQRect_topRight(self.h))
+  gen_qpoint_types.QPoint(h: fcQRect_topRight(self.h), owned: true)
 
 proc bottomLeft*(self: gen_qrect_types.QRect, ): gen_qpoint_types.QPoint =
-  gen_qpoint_types.QPoint(h: fcQRect_bottomLeft(self.h))
+  gen_qpoint_types.QPoint(h: fcQRect_bottomLeft(self.h), owned: true)
 
 proc center*(self: gen_qrect_types.QRect, ): gen_qpoint_types.QPoint =
-  gen_qpoint_types.QPoint(h: fcQRect_center(self.h))
+  gen_qpoint_types.QPoint(h: fcQRect_center(self.h), owned: true)
 
 proc moveLeft*(self: gen_qrect_types.QRect, pos: cint): void =
   fcQRect_moveLeft(self.h, pos)
@@ -311,13 +306,13 @@ proc translate*(self: gen_qrect_types.QRect, p: gen_qpoint_types.QPoint): void =
   fcQRect_translateWithQPoint(self.h, p.h)
 
 proc translated*(self: gen_qrect_types.QRect, dx: cint, dy: cint): gen_qrect_types.QRect =
-  gen_qrect_types.QRect(h: fcQRect_translated(self.h, dx, dy))
+  gen_qrect_types.QRect(h: fcQRect_translated(self.h, dx, dy), owned: true)
 
 proc translated*(self: gen_qrect_types.QRect, p: gen_qpoint_types.QPoint): gen_qrect_types.QRect =
-  gen_qrect_types.QRect(h: fcQRect_translatedWithQPoint(self.h, p.h))
+  gen_qrect_types.QRect(h: fcQRect_translatedWithQPoint(self.h, p.h), owned: true)
 
 proc transposed*(self: gen_qrect_types.QRect, ): gen_qrect_types.QRect =
-  gen_qrect_types.QRect(h: fcQRect_transposed(self.h))
+  gen_qrect_types.QRect(h: fcQRect_transposed(self.h), owned: true)
 
 proc moveTo*(self: gen_qrect_types.QRect, x: cint, t: cint): void =
   fcQRect_moveTo(self.h, x, t)
@@ -341,10 +336,10 @@ proc adjust*(self: gen_qrect_types.QRect, x1: cint, y1: cint, x2: cint, y2: cint
   fcQRect_adjust(self.h, x1, y1, x2, y2)
 
 proc adjusted*(self: gen_qrect_types.QRect, x1: cint, y1: cint, x2: cint, y2: cint): gen_qrect_types.QRect =
-  gen_qrect_types.QRect(h: fcQRect_adjusted(self.h, x1, y1, x2, y2))
+  gen_qrect_types.QRect(h: fcQRect_adjusted(self.h, x1, y1, x2, y2), owned: true)
 
 proc size*(self: gen_qrect_types.QRect, ): gen_qsize_types.QSize =
-  gen_qsize_types.QSize(h: fcQRect_size(self.h))
+  gen_qsize_types.QSize(h: fcQRect_size(self.h), owned: true)
 
 proc width*(self: gen_qrect_types.QRect, ): cint =
   fcQRect_width(self.h)
@@ -362,10 +357,10 @@ proc setSize*(self: gen_qrect_types.QRect, s: gen_qsize_types.QSize): void =
   fcQRect_setSize(self.h, s.h)
 
 proc operatorBitwiseOr*(self: gen_qrect_types.QRect, r: gen_qrect_types.QRect): gen_qrect_types.QRect =
-  gen_qrect_types.QRect(h: fcQRect_operatorBitwiseOr(self.h, r.h))
+  gen_qrect_types.QRect(h: fcQRect_operatorBitwiseOr(self.h, r.h), owned: true)
 
 proc operatorBitwiseAnd*(self: gen_qrect_types.QRect, r: gen_qrect_types.QRect): gen_qrect_types.QRect =
-  gen_qrect_types.QRect(h: fcQRect_operatorBitwiseAnd(self.h, r.h))
+  gen_qrect_types.QRect(h: fcQRect_operatorBitwiseAnd(self.h, r.h), owned: true)
 
 proc operatorBitwiseOrAssign*(self: gen_qrect_types.QRect, r: gen_qrect_types.QRect): void =
   fcQRect_operatorBitwiseOrAssign(self.h, r.h)
@@ -386,25 +381,25 @@ proc contains*(self: gen_qrect_types.QRect, x: cint, y: cint, proper: bool): boo
   fcQRect_contains3(self.h, x, y, proper)
 
 proc united*(self: gen_qrect_types.QRect, other: gen_qrect_types.QRect): gen_qrect_types.QRect =
-  gen_qrect_types.QRect(h: fcQRect_united(self.h, other.h))
+  gen_qrect_types.QRect(h: fcQRect_united(self.h, other.h), owned: true)
 
 proc intersected*(self: gen_qrect_types.QRect, other: gen_qrect_types.QRect): gen_qrect_types.QRect =
-  gen_qrect_types.QRect(h: fcQRect_intersected(self.h, other.h))
+  gen_qrect_types.QRect(h: fcQRect_intersected(self.h, other.h), owned: true)
 
 proc intersects*(self: gen_qrect_types.QRect, r: gen_qrect_types.QRect): bool =
   fcQRect_intersects(self.h, r.h)
 
 proc marginsAdded*(self: gen_qrect_types.QRect, margins: gen_qmargins_types.QMargins): gen_qrect_types.QRect =
-  gen_qrect_types.QRect(h: fcQRect_marginsAdded(self.h, margins.h))
+  gen_qrect_types.QRect(h: fcQRect_marginsAdded(self.h, margins.h), owned: true)
 
 proc marginsRemoved*(self: gen_qrect_types.QRect, margins: gen_qmargins_types.QMargins): gen_qrect_types.QRect =
-  gen_qrect_types.QRect(h: fcQRect_marginsRemoved(self.h, margins.h))
+  gen_qrect_types.QRect(h: fcQRect_marginsRemoved(self.h, margins.h), owned: true)
 
 proc operatorPlusAssign*(self: gen_qrect_types.QRect, margins: gen_qmargins_types.QMargins): gen_qrect_types.QRect =
-  gen_qrect_types.QRect(h: fcQRect_operatorPlusAssign(self.h, margins.h))
+  gen_qrect_types.QRect(h: fcQRect_operatorPlusAssign(self.h, margins.h), owned: false)
 
 proc operatorMinusAssign*(self: gen_qrect_types.QRect, margins: gen_qmargins_types.QMargins): gen_qrect_types.QRect =
-  gen_qrect_types.QRect(h: fcQRect_operatorMinusAssign(self.h, margins.h))
+  gen_qrect_types.QRect(h: fcQRect_operatorMinusAssign(self.h, margins.h), owned: false)
 
 proc contains*(self: gen_qrect_types.QRect, r: gen_qrect_types.QRect, proper: bool): bool =
   fcQRect_contains22(self.h, r.h, proper)
@@ -413,26 +408,24 @@ proc contains*(self: gen_qrect_types.QRect, p: gen_qpoint_types.QPoint, proper: 
   fcQRect_contains23(self.h, p.h, proper)
 
 proc create*(T: type gen_qrect_types.QRect): gen_qrect_types.QRect =
-  gen_qrect_types.QRect(h: fcQRect_new())
+  gen_qrect_types.QRect(h: fcQRect_new(), owned: true)
 
 proc create*(T: type gen_qrect_types.QRect,
     topleft: gen_qpoint_types.QPoint, bottomright: gen_qpoint_types.QPoint): gen_qrect_types.QRect =
-  gen_qrect_types.QRect(h: fcQRect_new2(topleft.h, bottomright.h))
+  gen_qrect_types.QRect(h: fcQRect_new2(topleft.h, bottomright.h), owned: true)
 
 proc create*(T: type gen_qrect_types.QRect,
     topleft: gen_qpoint_types.QPoint, size: gen_qsize_types.QSize): gen_qrect_types.QRect =
-  gen_qrect_types.QRect(h: fcQRect_new3(topleft.h, size.h))
+  gen_qrect_types.QRect(h: fcQRect_new3(topleft.h, size.h), owned: true)
 
 proc create*(T: type gen_qrect_types.QRect,
     left: cint, top: cint, width: cint, height: cint): gen_qrect_types.QRect =
-  gen_qrect_types.QRect(h: fcQRect_new4(left, top, width, height))
+  gen_qrect_types.QRect(h: fcQRect_new4(left, top, width, height), owned: true)
 
 proc create*(T: type gen_qrect_types.QRect,
     param1: gen_qrect_types.QRect): gen_qrect_types.QRect =
-  gen_qrect_types.QRect(h: fcQRect_new5(param1.h))
+  gen_qrect_types.QRect(h: fcQRect_new5(param1.h), owned: true)
 
-proc delete*(self: gen_qrect_types.QRect) =
-  fcQRect_delete(self.h)
 proc isNull*(self: gen_qrect_types.QRectF, ): bool =
   fcQRectF_isNull(self.h)
 
@@ -443,7 +436,7 @@ proc isValid*(self: gen_qrect_types.QRectF, ): bool =
   fcQRectF_isValid(self.h)
 
 proc normalized*(self: gen_qrect_types.QRectF, ): gen_qrect_types.QRectF =
-  gen_qrect_types.QRectF(h: fcQRectF_normalized(self.h))
+  gen_qrect_types.QRectF(h: fcQRectF_normalized(self.h), owned: true)
 
 proc left*(self: gen_qrect_types.QRectF, ): float64 =
   fcQRectF_left(self.h)
@@ -482,19 +475,19 @@ proc setY*(self: gen_qrect_types.QRectF, pos: float64): void =
   fcQRectF_setY(self.h, pos)
 
 proc topLeft*(self: gen_qrect_types.QRectF, ): gen_qpoint_types.QPointF =
-  gen_qpoint_types.QPointF(h: fcQRectF_topLeft(self.h))
+  gen_qpoint_types.QPointF(h: fcQRectF_topLeft(self.h), owned: true)
 
 proc bottomRight*(self: gen_qrect_types.QRectF, ): gen_qpoint_types.QPointF =
-  gen_qpoint_types.QPointF(h: fcQRectF_bottomRight(self.h))
+  gen_qpoint_types.QPointF(h: fcQRectF_bottomRight(self.h), owned: true)
 
 proc topRight*(self: gen_qrect_types.QRectF, ): gen_qpoint_types.QPointF =
-  gen_qpoint_types.QPointF(h: fcQRectF_topRight(self.h))
+  gen_qpoint_types.QPointF(h: fcQRectF_topRight(self.h), owned: true)
 
 proc bottomLeft*(self: gen_qrect_types.QRectF, ): gen_qpoint_types.QPointF =
-  gen_qpoint_types.QPointF(h: fcQRectF_bottomLeft(self.h))
+  gen_qpoint_types.QPointF(h: fcQRectF_bottomLeft(self.h), owned: true)
 
 proc center*(self: gen_qrect_types.QRectF, ): gen_qpoint_types.QPointF =
-  gen_qpoint_types.QPointF(h: fcQRectF_center(self.h))
+  gen_qpoint_types.QPointF(h: fcQRectF_center(self.h), owned: true)
 
 proc setTopLeft*(self: gen_qrect_types.QRectF, p: gen_qpoint_types.QPointF): void =
   fcQRectF_setTopLeft(self.h, p.h)
@@ -542,13 +535,13 @@ proc translate*(self: gen_qrect_types.QRectF, p: gen_qpoint_types.QPointF): void
   fcQRectF_translateWithQPointF(self.h, p.h)
 
 proc translated*(self: gen_qrect_types.QRectF, dx: float64, dy: float64): gen_qrect_types.QRectF =
-  gen_qrect_types.QRectF(h: fcQRectF_translated(self.h, dx, dy))
+  gen_qrect_types.QRectF(h: fcQRectF_translated(self.h, dx, dy), owned: true)
 
 proc translated*(self: gen_qrect_types.QRectF, p: gen_qpoint_types.QPointF): gen_qrect_types.QRectF =
-  gen_qrect_types.QRectF(h: fcQRectF_translatedWithQPointF(self.h, p.h))
+  gen_qrect_types.QRectF(h: fcQRectF_translatedWithQPointF(self.h, p.h), owned: true)
 
 proc transposed*(self: gen_qrect_types.QRectF, ): gen_qrect_types.QRectF =
-  gen_qrect_types.QRectF(h: fcQRectF_transposed(self.h))
+  gen_qrect_types.QRectF(h: fcQRectF_transposed(self.h), owned: true)
 
 proc moveTo*(self: gen_qrect_types.QRectF, x: float64, y: float64): void =
   fcQRectF_moveTo(self.h, x, y)
@@ -572,10 +565,10 @@ proc adjust*(self: gen_qrect_types.QRectF, x1: float64, y1: float64, x2: float64
   fcQRectF_adjust(self.h, x1, y1, x2, y2)
 
 proc adjusted*(self: gen_qrect_types.QRectF, x1: float64, y1: float64, x2: float64, y2: float64): gen_qrect_types.QRectF =
-  gen_qrect_types.QRectF(h: fcQRectF_adjusted(self.h, x1, y1, x2, y2))
+  gen_qrect_types.QRectF(h: fcQRectF_adjusted(self.h, x1, y1, x2, y2), owned: true)
 
 proc size*(self: gen_qrect_types.QRectF, ): gen_qsize_types.QSizeF =
-  gen_qsize_types.QSizeF(h: fcQRectF_size(self.h))
+  gen_qsize_types.QSizeF(h: fcQRectF_size(self.h), owned: true)
 
 proc width*(self: gen_qrect_types.QRectF, ): float64 =
   fcQRectF_width(self.h)
@@ -593,10 +586,10 @@ proc setSize*(self: gen_qrect_types.QRectF, s: gen_qsize_types.QSizeF): void =
   fcQRectF_setSize(self.h, s.h)
 
 proc operatorBitwiseOr*(self: gen_qrect_types.QRectF, r: gen_qrect_types.QRectF): gen_qrect_types.QRectF =
-  gen_qrect_types.QRectF(h: fcQRectF_operatorBitwiseOr(self.h, r.h))
+  gen_qrect_types.QRectF(h: fcQRectF_operatorBitwiseOr(self.h, r.h), owned: true)
 
 proc operatorBitwiseAnd*(self: gen_qrect_types.QRectF, r: gen_qrect_types.QRectF): gen_qrect_types.QRectF =
-  gen_qrect_types.QRectF(h: fcQRectF_operatorBitwiseAnd(self.h, r.h))
+  gen_qrect_types.QRectF(h: fcQRectF_operatorBitwiseAnd(self.h, r.h), owned: true)
 
 proc operatorBitwiseOrAssign*(self: gen_qrect_types.QRectF, r: gen_qrect_types.QRectF): void =
   fcQRectF_operatorBitwiseOrAssign(self.h, r.h)
@@ -614,54 +607,52 @@ proc contains*(self: gen_qrect_types.QRectF, x: float64, y: float64): bool =
   fcQRectF_contains2(self.h, x, y)
 
 proc united*(self: gen_qrect_types.QRectF, other: gen_qrect_types.QRectF): gen_qrect_types.QRectF =
-  gen_qrect_types.QRectF(h: fcQRectF_united(self.h, other.h))
+  gen_qrect_types.QRectF(h: fcQRectF_united(self.h, other.h), owned: true)
 
 proc intersected*(self: gen_qrect_types.QRectF, other: gen_qrect_types.QRectF): gen_qrect_types.QRectF =
-  gen_qrect_types.QRectF(h: fcQRectF_intersected(self.h, other.h))
+  gen_qrect_types.QRectF(h: fcQRectF_intersected(self.h, other.h), owned: true)
 
 proc intersects*(self: gen_qrect_types.QRectF, r: gen_qrect_types.QRectF): bool =
   fcQRectF_intersects(self.h, r.h)
 
 proc marginsAdded*(self: gen_qrect_types.QRectF, margins: gen_qmargins_types.QMarginsF): gen_qrect_types.QRectF =
-  gen_qrect_types.QRectF(h: fcQRectF_marginsAdded(self.h, margins.h))
+  gen_qrect_types.QRectF(h: fcQRectF_marginsAdded(self.h, margins.h), owned: true)
 
 proc marginsRemoved*(self: gen_qrect_types.QRectF, margins: gen_qmargins_types.QMarginsF): gen_qrect_types.QRectF =
-  gen_qrect_types.QRectF(h: fcQRectF_marginsRemoved(self.h, margins.h))
+  gen_qrect_types.QRectF(h: fcQRectF_marginsRemoved(self.h, margins.h), owned: true)
 
 proc operatorPlusAssign*(self: gen_qrect_types.QRectF, margins: gen_qmargins_types.QMarginsF): gen_qrect_types.QRectF =
-  gen_qrect_types.QRectF(h: fcQRectF_operatorPlusAssign(self.h, margins.h))
+  gen_qrect_types.QRectF(h: fcQRectF_operatorPlusAssign(self.h, margins.h), owned: false)
 
 proc operatorMinusAssign*(self: gen_qrect_types.QRectF, margins: gen_qmargins_types.QMarginsF): gen_qrect_types.QRectF =
-  gen_qrect_types.QRectF(h: fcQRectF_operatorMinusAssign(self.h, margins.h))
+  gen_qrect_types.QRectF(h: fcQRectF_operatorMinusAssign(self.h, margins.h), owned: false)
 
 proc toRect*(self: gen_qrect_types.QRectF, ): gen_qrect_types.QRect =
-  gen_qrect_types.QRect(h: fcQRectF_toRect(self.h))
+  gen_qrect_types.QRect(h: fcQRectF_toRect(self.h), owned: true)
 
 proc toAlignedRect*(self: gen_qrect_types.QRectF, ): gen_qrect_types.QRect =
-  gen_qrect_types.QRect(h: fcQRectF_toAlignedRect(self.h))
+  gen_qrect_types.QRect(h: fcQRectF_toAlignedRect(self.h), owned: true)
 
 proc create*(T: type gen_qrect_types.QRectF): gen_qrect_types.QRectF =
-  gen_qrect_types.QRectF(h: fcQRectF_new())
+  gen_qrect_types.QRectF(h: fcQRectF_new(), owned: true)
 
 proc create*(T: type gen_qrect_types.QRectF,
     topleft: gen_qpoint_types.QPointF, size: gen_qsize_types.QSizeF): gen_qrect_types.QRectF =
-  gen_qrect_types.QRectF(h: fcQRectF_new2(topleft.h, size.h))
+  gen_qrect_types.QRectF(h: fcQRectF_new2(topleft.h, size.h), owned: true)
 
 proc create*(T: type gen_qrect_types.QRectF,
     topleft: gen_qpoint_types.QPointF, bottomRight: gen_qpoint_types.QPointF): gen_qrect_types.QRectF =
-  gen_qrect_types.QRectF(h: fcQRectF_new3(topleft.h, bottomRight.h))
+  gen_qrect_types.QRectF(h: fcQRectF_new3(topleft.h, bottomRight.h), owned: true)
 
 proc create*(T: type gen_qrect_types.QRectF,
     left: float64, top: float64, width: float64, height: float64): gen_qrect_types.QRectF =
-  gen_qrect_types.QRectF(h: fcQRectF_new4(left, top, width, height))
+  gen_qrect_types.QRectF(h: fcQRectF_new4(left, top, width, height), owned: true)
 
 proc create*(T: type gen_qrect_types.QRectF,
     rect: gen_qrect_types.QRect): gen_qrect_types.QRectF =
-  gen_qrect_types.QRectF(h: fcQRectF_new5(rect.h))
+  gen_qrect_types.QRectF(h: fcQRectF_new5(rect.h), owned: true)
 
 proc create*(T: type gen_qrect_types.QRectF,
     param1: gen_qrect_types.QRectF): gen_qrect_types.QRectF =
-  gen_qrect_types.QRectF(h: fcQRectF_new6(param1.h))
+  gen_qrect_types.QRectF(h: fcQRectF_new6(param1.h), owned: true)
 
-proc delete*(self: gen_qrect_types.QRectF) =
-  fcQRectF_delete(self.h)

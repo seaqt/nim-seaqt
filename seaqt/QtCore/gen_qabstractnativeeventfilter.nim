@@ -30,9 +30,6 @@ func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
     else:
       copyMem(addr result[0], unsafeAddr v[0], v.len)
 
-const cflags = gorge("pkg-config --cflags Qt5Core")  & " -fPIC"
-{.compile("gen_qabstractnativeeventfilter.cpp", cflags).}
-
 
 import ./gen_qabstractnativeeventfilter_types
 export gen_qabstractnativeeventfilter_types
@@ -41,17 +38,16 @@ export gen_qabstractnativeeventfilter_types
 type cQAbstractNativeEventFilter*{.exportc: "QAbstractNativeEventFilter", incompleteStruct.} = object
 
 proc fcQAbstractNativeEventFilter_nativeEventFilter(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr clong): bool {.importc: "QAbstractNativeEventFilter_nativeEventFilter".}
-type cQAbstractNativeEventFilterVTable = object
+type cQAbstractNativeEventFilterVTable {.pure.} = object
   destructor*: proc(vtbl: ptr cQAbstractNativeEventFilterVTable, self: ptr cQAbstractNativeEventFilter) {.cdecl, raises:[], gcsafe.}
   nativeEventFilter*: proc(vtbl, self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr clong): bool {.cdecl, raises: [], gcsafe.}
 proc fcQAbstractNativeEventFilter_new(vtbl: pointer, ): ptr cQAbstractNativeEventFilter {.importc: "QAbstractNativeEventFilter_new".}
-proc fcQAbstractNativeEventFilter_delete(self: pointer) {.importc: "QAbstractNativeEventFilter_delete".}
 
 proc nativeEventFilter*(self: gen_qabstractnativeeventfilter_types.QAbstractNativeEventFilter, eventType: seq[byte], message: pointer, resultVal: ptr clong): bool =
   fcQAbstractNativeEventFilter_nativeEventFilter(self.h, struct_miqt_string(data: cast[cstring](if len(eventType) == 0: nil else: unsafeAddr eventType[0]), len: csize_t(len(eventType))), message, resultVal)
 
 type QAbstractNativeEventFilternativeEventFilterProc* = proc(self: QAbstractNativeEventFilter, eventType: seq[byte], message: pointer, resultVal: ptr clong): bool {.raises: [], gcsafe.}
-type QAbstractNativeEventFilterVTable* = object
+type QAbstractNativeEventFilterVTable* {.inheritable, pure.} = object
   vtbl: cQAbstractNativeEventFilterVTable
   nativeEventFilter*: QAbstractNativeEventFilternativeEventFilterProc
 proc miqt_exec_callback_cQAbstractNativeEventFilter_nativeEventFilter(vtbl: pointer, self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr clong): bool {.cdecl.} =
@@ -66,16 +62,41 @@ proc miqt_exec_callback_cQAbstractNativeEventFilter_nativeEventFilter(vtbl: poin
   var virtualReturn = vtbl[].nativeEventFilter(self, slotval1, slotval2, slotval3)
   virtualReturn
 
+type VirtualQAbstractNativeEventFilter* {.inheritable.} = ref object of QAbstractNativeEventFilter
+  vtbl*: cQAbstractNativeEventFilterVTable
+method nativeEventFilter*(self: VirtualQAbstractNativeEventFilter, eventType: seq[byte], message: pointer, resultVal: ptr clong): bool {.base.} =
+  raiseAssert("missing implementation of QAbstractNativeEventFilter_virtualbase_nativeEventFilter")
+proc miqt_exec_method_cQAbstractNativeEventFilter_nativeEventFilter(vtbl: pointer, inst: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr clong): bool {.cdecl.} =
+  let vtbl = cast[VirtualQAbstractNativeEventFilter](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractNativeEventFilter, vtbl)))
+  var veventType_bytearray = eventType
+  var veventTypex_ret = @(toOpenArrayByte(veventType_bytearray.data, 0, int(veventType_bytearray.len)-1))
+  c_free(veventType_bytearray.data)
+  let slotval1 = veventTypex_ret
+  let slotval2 = message
+  let slotval3 = resultVal
+  var virtualReturn = vtbl.nativeEventFilter(slotval1, slotval2, slotval3)
+  virtualReturn
+
 proc create*(T: type gen_qabstractnativeeventfilter_types.QAbstractNativeEventFilter,
     vtbl: ref QAbstractNativeEventFilterVTable = nil): gen_qabstractnativeeventfilter_types.QAbstractNativeEventFilter =
   let vtbl = if vtbl == nil: new QAbstractNativeEventFilterVTable else: vtbl
   GC_ref(vtbl)
-  vtbl.vtbl.destructor = proc(vtbl: ptr cQAbstractNativeEventFilterVTable, _: ptr cQAbstractNativeEventFilter) {.cdecl.} =
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQAbstractNativeEventFilterVTable, _: ptr cQAbstractNativeEventFilter) {.cdecl.} =
     let vtbl = cast[ref QAbstractNativeEventFilterVTable](vtbl)
     GC_unref(vtbl)
-  if not isNil(vtbl.nativeEventFilter):
+  if not isNil(vtbl[].nativeEventFilter):
     vtbl[].vtbl.nativeEventFilter = miqt_exec_callback_cQAbstractNativeEventFilter_nativeEventFilter
-  gen_qabstractnativeeventfilter_types.QAbstractNativeEventFilter(h: fcQAbstractNativeEventFilter_new(addr(vtbl[]), ))
+  gen_qabstractnativeeventfilter_types.QAbstractNativeEventFilter(h: fcQAbstractNativeEventFilter_new(addr(vtbl[].vtbl), ), owned: true)
 
-proc delete*(self: gen_qabstractnativeeventfilter_types.QAbstractNativeEventFilter) =
-  fcQAbstractNativeEventFilter_delete(self.h)
+proc create*(T: type gen_qabstractnativeeventfilter_types.QAbstractNativeEventFilter,
+    vtbl: VirtualQAbstractNativeEventFilter) =
+
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQAbstractNativeEventFilterVTable, _: ptr cQAbstractNativeEventFilter) {.cdecl.} =
+    let vtbl = cast[ptr typeof(VirtualQAbstractNativeEventFilter()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractNativeEventFilter, vtbl)))
+    vtbl[].h = nil
+    vtbl[].owned = false
+  vtbl[].vtbl.nativeEventFilter = miqt_exec_method_cQAbstractNativeEventFilter_nativeEventFilter
+  if vtbl[].h != nil: delete(move(vtbl[]))
+  vtbl[].h = fcQAbstractNativeEventFilter_new(addr(vtbl[].vtbl), )
+  vtbl[].owned = true
+

@@ -30,7 +30,7 @@ func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
     else:
       copyMem(addr result[0], unsafeAddr v[0], v.len)
 
-const cflags = gorge("pkg-config --cflags Qt5Multimedia")  & " -fPIC"
+const cflags = gorge("pkg-config --cflags Qt5Multimedia") & " -fPIC"
 {.compile("gen_qcamerafeedbackcontrol.cpp", cflags).}
 
 
@@ -83,10 +83,9 @@ proc fcQCameraFeedbackControl_protectedbase_senderSignalIndex(self: pointer, ): 
 proc fcQCameraFeedbackControl_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QCameraFeedbackControl_protectedbase_receivers".}
 proc fcQCameraFeedbackControl_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QCameraFeedbackControl_protectedbase_isSignalConnected".}
 proc fcQCameraFeedbackControl_staticMetaObject(): pointer {.importc: "QCameraFeedbackControl_staticMetaObject".}
-proc fcQCameraFeedbackControl_delete(self: pointer) {.importc: "QCameraFeedbackControl_delete".}
 
 proc metaObject*(self: gen_qcamerafeedbackcontrol_types.QCameraFeedbackControl, ): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQCameraFeedbackControl_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQCameraFeedbackControl_metaObject(self.h), owned: false)
 
 proc metacast*(self: gen_qcamerafeedbackcontrol_types.QCameraFeedbackControl, param1: cstring): pointer =
   fcQCameraFeedbackControl_metacast(self.h, param1)
@@ -146,7 +145,7 @@ proc trUtf8*(_: type gen_qcamerafeedbackcontrol_types.QCameraFeedbackControl, s:
   vx_ret
 
 proc sender*(self: gen_qcamerafeedbackcontrol_types.QCameraFeedbackControl, ): gen_qobject_types.QObject =
-  gen_qobject_types.QObject(h: fcQCameraFeedbackControl_protectedbase_sender(self.h))
+  gen_qobject_types.QObject(h: fcQCameraFeedbackControl_protectedbase_sender(self.h), owned: false)
 
 proc senderSignalIndex*(self: gen_qcamerafeedbackcontrol_types.QCameraFeedbackControl, ): cint =
   fcQCameraFeedbackControl_protectedbase_senderSignalIndex(self.h)
@@ -159,5 +158,3 @@ proc isSignalConnected*(self: gen_qcamerafeedbackcontrol_types.QCameraFeedbackCo
 
 proc staticMetaObject*(_: type gen_qcamerafeedbackcontrol_types.QCameraFeedbackControl): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQCameraFeedbackControl_staticMetaObject())
-proc delete*(self: gen_qcamerafeedbackcontrol_types.QCameraFeedbackControl) =
-  fcQCameraFeedbackControl_delete(self.h)

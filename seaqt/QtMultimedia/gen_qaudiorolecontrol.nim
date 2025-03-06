@@ -30,7 +30,7 @@ func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
     else:
       copyMem(addr result[0], unsafeAddr v[0], v.len)
 
-const cflags = gorge("pkg-config --cflags Qt5Multimedia")  & " -fPIC"
+const cflags = gorge("pkg-config --cflags Qt5Multimedia") & " -fPIC"
 {.compile("gen_qaudiorolecontrol.cpp", cflags).}
 
 
@@ -69,10 +69,9 @@ proc fcQAudioRoleControl_protectedbase_senderSignalIndex(self: pointer, ): cint 
 proc fcQAudioRoleControl_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QAudioRoleControl_protectedbase_receivers".}
 proc fcQAudioRoleControl_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QAudioRoleControl_protectedbase_isSignalConnected".}
 proc fcQAudioRoleControl_staticMetaObject(): pointer {.importc: "QAudioRoleControl_staticMetaObject".}
-proc fcQAudioRoleControl_delete(self: pointer) {.importc: "QAudioRoleControl_delete".}
 
 proc metaObject*(self: gen_qaudiorolecontrol_types.QAudioRoleControl, ): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQAudioRoleControl_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQAudioRoleControl_metaObject(self.h), owned: false)
 
 proc metacast*(self: gen_qaudiorolecontrol_types.QAudioRoleControl, param1: cstring): pointer =
   fcQAudioRoleControl_metacast(self.h, param1)
@@ -152,7 +151,7 @@ proc trUtf8*(_: type gen_qaudiorolecontrol_types.QAudioRoleControl, s: cstring, 
   vx_ret
 
 proc sender*(self: gen_qaudiorolecontrol_types.QAudioRoleControl, ): gen_qobject_types.QObject =
-  gen_qobject_types.QObject(h: fcQAudioRoleControl_protectedbase_sender(self.h))
+  gen_qobject_types.QObject(h: fcQAudioRoleControl_protectedbase_sender(self.h), owned: false)
 
 proc senderSignalIndex*(self: gen_qaudiorolecontrol_types.QAudioRoleControl, ): cint =
   fcQAudioRoleControl_protectedbase_senderSignalIndex(self.h)
@@ -165,5 +164,3 @@ proc isSignalConnected*(self: gen_qaudiorolecontrol_types.QAudioRoleControl, sig
 
 proc staticMetaObject*(_: type gen_qaudiorolecontrol_types.QAudioRoleControl): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQAudioRoleControl_staticMetaObject())
-proc delete*(self: gen_qaudiorolecontrol_types.QAudioRoleControl) =
-  fcQAudioRoleControl_delete(self.h)

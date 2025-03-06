@@ -30,7 +30,7 @@ func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
     else:
       copyMem(addr result[0], unsafeAddr v[0], v.len)
 
-const cflags = gorge("pkg-config --cflags Qt5Widgets")  & " -fPIC"
+const cflags = gorge("pkg-config --cflags Qt5Widgets") & " -fPIC"
 {.compile("gen_qgraphicslayout.cpp", cflags).}
 
 
@@ -64,7 +64,7 @@ proc fcQGraphicsLayout_itemAt(self: pointer, i: cint): pointer {.importc: "QGrap
 proc fcQGraphicsLayout_removeAt(self: pointer, index: cint): void {.importc: "QGraphicsLayout_removeAt".}
 proc fcQGraphicsLayout_setInstantInvalidatePropagation(enable: bool): void {.importc: "QGraphicsLayout_setInstantInvalidatePropagation".}
 proc fcQGraphicsLayout_instantInvalidatePropagation(): bool {.importc: "QGraphicsLayout_instantInvalidatePropagation".}
-type cQGraphicsLayoutVTable = object
+type cQGraphicsLayoutVTable {.pure.} = object
   destructor*: proc(vtbl: ptr cQGraphicsLayoutVTable, self: ptr cQGraphicsLayout) {.cdecl, raises:[], gcsafe.}
   getContentsMargins*: proc(vtbl, self: pointer, left: ptr float64, top: ptr float64, right: ptr float64, bottom: ptr float64): void {.cdecl, raises: [], gcsafe.}
   invalidate*: proc(vtbl, self: pointer, ): void {.cdecl, raises: [], gcsafe.}
@@ -85,7 +85,6 @@ proc fcQGraphicsLayout_protectedbase_setGraphicsItem(self: pointer, item: pointe
 proc fcQGraphicsLayout_protectedbase_setOwnedByLayout(self: pointer, ownedByLayout: bool): void {.importc: "QGraphicsLayout_protectedbase_setOwnedByLayout".}
 proc fcQGraphicsLayout_new(vtbl: pointer, ): ptr cQGraphicsLayout {.importc: "QGraphicsLayout_new".}
 proc fcQGraphicsLayout_new2(vtbl: pointer, parent: pointer): ptr cQGraphicsLayout {.importc: "QGraphicsLayout_new2".}
-proc fcQGraphicsLayout_delete(self: pointer) {.importc: "QGraphicsLayout_delete".}
 
 proc setContentsMargins*(self: gen_qgraphicslayout_types.QGraphicsLayout, left: float64, top: float64, right: float64, bottom: float64): void =
   fcQGraphicsLayout_setContentsMargins(self.h, left, top, right, bottom)
@@ -112,7 +111,7 @@ proc count*(self: gen_qgraphicslayout_types.QGraphicsLayout, ): cint =
   fcQGraphicsLayout_count(self.h)
 
 proc itemAt*(self: gen_qgraphicslayout_types.QGraphicsLayout, i: cint): gen_qgraphicslayoutitem_types.QGraphicsLayoutItem =
-  gen_qgraphicslayoutitem_types.QGraphicsLayoutItem(h: fcQGraphicsLayout_itemAt(self.h, i))
+  gen_qgraphicslayoutitem_types.QGraphicsLayoutItem(h: fcQGraphicsLayout_itemAt(self.h, i), owned: false)
 
 proc removeAt*(self: gen_qgraphicslayout_types.QGraphicsLayout, index: cint): void =
   fcQGraphicsLayout_removeAt(self.h, index)
@@ -132,7 +131,7 @@ type QGraphicsLayoutitemAtProc* = proc(self: QGraphicsLayout, i: cint): gen_qgra
 type QGraphicsLayoutremoveAtProc* = proc(self: QGraphicsLayout, index: cint): void {.raises: [], gcsafe.}
 type QGraphicsLayoutsetGeometryProc* = proc(self: QGraphicsLayout, rect: gen_qrect_types.QRectF): void {.raises: [], gcsafe.}
 type QGraphicsLayoutsizeHintProc* = proc(self: QGraphicsLayout, which: cint, constraint: gen_qsize_types.QSizeF): gen_qsize_types.QSizeF {.raises: [], gcsafe.}
-type QGraphicsLayoutVTable* = object
+type QGraphicsLayoutVTable* {.inheritable, pure.} = object
   vtbl: cQGraphicsLayoutVTable
   getContentsMargins*: QGraphicsLayoutgetContentsMarginsProc
   invalidate*: QGraphicsLayoutinvalidateProc
@@ -177,7 +176,7 @@ proc QGraphicsLayoutwidgetEvent*(self: gen_qgraphicslayout_types.QGraphicsLayout
 proc miqt_exec_callback_cQGraphicsLayout_widgetEvent(vtbl: pointer, self: pointer, e: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsLayoutVTable](vtbl)
   let self = QGraphicsLayout(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: e)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: e, owned: false)
   vtbl[].widgetEvent(self, slotval1)
 
 proc miqt_exec_callback_cQGraphicsLayout_count(vtbl: pointer, self: pointer): cint {.cdecl.} =
@@ -191,7 +190,10 @@ proc miqt_exec_callback_cQGraphicsLayout_itemAt(vtbl: pointer, self: pointer, i:
   let self = QGraphicsLayout(h: self)
   let slotval1 = i
   var virtualReturn = vtbl[].itemAt(self, slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc miqt_exec_callback_cQGraphicsLayout_removeAt(vtbl: pointer, self: pointer, index: cint): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsLayoutVTable](vtbl)
@@ -205,16 +207,94 @@ proc QGraphicsLayoutsetGeometry*(self: gen_qgraphicslayout_types.QGraphicsLayout
 proc miqt_exec_callback_cQGraphicsLayout_setGeometry(vtbl: pointer, self: pointer, rect: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsLayoutVTable](vtbl)
   let self = QGraphicsLayout(h: self)
-  let slotval1 = gen_qrect_types.QRectF(h: rect)
+  let slotval1 = gen_qrect_types.QRectF(h: rect, owned: false)
   vtbl[].setGeometry(self, slotval1)
 
 proc miqt_exec_callback_cQGraphicsLayout_sizeHint(vtbl: pointer, self: pointer, which: cint, constraint: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QGraphicsLayoutVTable](vtbl)
   let self = QGraphicsLayout(h: self)
   let slotval1 = cint(which)
-  let slotval2 = gen_qsize_types.QSizeF(h: constraint)
+  let slotval2 = gen_qsize_types.QSizeF(h: constraint, owned: false)
   var virtualReturn = vtbl[].sizeHint(self, slotval1, slotval2)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
+
+type VirtualQGraphicsLayout* {.inheritable.} = ref object of QGraphicsLayout
+  vtbl*: cQGraphicsLayoutVTable
+method getContentsMargins*(self: VirtualQGraphicsLayout, left: ptr float64, top: ptr float64, right: ptr float64, bottom: ptr float64): void {.base.} =
+  QGraphicsLayoutgetContentsMargins(self[], left, top, right, bottom)
+proc miqt_exec_method_cQGraphicsLayout_getContentsMargins(vtbl: pointer, inst: pointer, left: ptr float64, top: ptr float64, right: ptr float64, bottom: ptr float64): void {.cdecl.} =
+  let vtbl = cast[VirtualQGraphicsLayout](cast[uint](vtbl) - uint(offsetOf(VirtualQGraphicsLayout, vtbl)))
+  let slotval1 = left
+  let slotval2 = top
+  let slotval3 = right
+  let slotval4 = bottom
+  vtbl.getContentsMargins(slotval1, slotval2, slotval3, slotval4)
+
+method invalidate*(self: VirtualQGraphicsLayout, ): void {.base.} =
+  QGraphicsLayoutinvalidate(self[])
+proc miqt_exec_method_cQGraphicsLayout_invalidate(vtbl: pointer, inst: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQGraphicsLayout](cast[uint](vtbl) - uint(offsetOf(VirtualQGraphicsLayout, vtbl)))
+  vtbl.invalidate()
+
+method updateGeometry*(self: VirtualQGraphicsLayout, ): void {.base.} =
+  QGraphicsLayoutupdateGeometry(self[])
+proc miqt_exec_method_cQGraphicsLayout_updateGeometry(vtbl: pointer, inst: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQGraphicsLayout](cast[uint](vtbl) - uint(offsetOf(VirtualQGraphicsLayout, vtbl)))
+  vtbl.updateGeometry()
+
+method widgetEvent*(self: VirtualQGraphicsLayout, e: gen_qcoreevent_types.QEvent): void {.base.} =
+  QGraphicsLayoutwidgetEvent(self[], e)
+proc miqt_exec_method_cQGraphicsLayout_widgetEvent(vtbl: pointer, inst: pointer, e: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQGraphicsLayout](cast[uint](vtbl) - uint(offsetOf(VirtualQGraphicsLayout, vtbl)))
+  let slotval1 = gen_qcoreevent_types.QEvent(h: e, owned: false)
+  vtbl.widgetEvent(slotval1)
+
+method count*(self: VirtualQGraphicsLayout, ): cint {.base.} =
+  raiseAssert("missing implementation of QGraphicsLayout_virtualbase_count")
+proc miqt_exec_method_cQGraphicsLayout_count(vtbl: pointer, inst: pointer): cint {.cdecl.} =
+  let vtbl = cast[VirtualQGraphicsLayout](cast[uint](vtbl) - uint(offsetOf(VirtualQGraphicsLayout, vtbl)))
+  var virtualReturn = vtbl.count()
+  virtualReturn
+
+method itemAt*(self: VirtualQGraphicsLayout, i: cint): gen_qgraphicslayoutitem_types.QGraphicsLayoutItem {.base.} =
+  raiseAssert("missing implementation of QGraphicsLayout_virtualbase_itemAt")
+proc miqt_exec_method_cQGraphicsLayout_itemAt(vtbl: pointer, inst: pointer, i: cint): pointer {.cdecl.} =
+  let vtbl = cast[VirtualQGraphicsLayout](cast[uint](vtbl) - uint(offsetOf(VirtualQGraphicsLayout, vtbl)))
+  let slotval1 = i
+  var virtualReturn = vtbl.itemAt(slotval1)
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
+
+method removeAt*(self: VirtualQGraphicsLayout, index: cint): void {.base.} =
+  raiseAssert("missing implementation of QGraphicsLayout_virtualbase_removeAt")
+proc miqt_exec_method_cQGraphicsLayout_removeAt(vtbl: pointer, inst: pointer, index: cint): void {.cdecl.} =
+  let vtbl = cast[VirtualQGraphicsLayout](cast[uint](vtbl) - uint(offsetOf(VirtualQGraphicsLayout, vtbl)))
+  let slotval1 = index
+  vtbl.removeAt(slotval1)
+
+method setGeometry*(self: VirtualQGraphicsLayout, rect: gen_qrect_types.QRectF): void {.base.} =
+  QGraphicsLayoutsetGeometry(self[], rect)
+proc miqt_exec_method_cQGraphicsLayout_setGeometry(vtbl: pointer, inst: pointer, rect: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQGraphicsLayout](cast[uint](vtbl) - uint(offsetOf(VirtualQGraphicsLayout, vtbl)))
+  let slotval1 = gen_qrect_types.QRectF(h: rect, owned: false)
+  vtbl.setGeometry(slotval1)
+
+method sizeHint*(self: VirtualQGraphicsLayout, which: cint, constraint: gen_qsize_types.QSizeF): gen_qsize_types.QSizeF {.base.} =
+  raiseAssert("missing implementation of QGraphicsLayout_virtualbase_sizeHint")
+proc miqt_exec_method_cQGraphicsLayout_sizeHint(vtbl: pointer, inst: pointer, which: cint, constraint: pointer): pointer {.cdecl.} =
+  let vtbl = cast[VirtualQGraphicsLayout](cast[uint](vtbl) - uint(offsetOf(VirtualQGraphicsLayout, vtbl)))
+  let slotval1 = cint(which)
+  let slotval2 = gen_qsize_types.QSizeF(h: constraint, owned: false)
+  var virtualReturn = vtbl.sizeHint(slotval1, slotval2)
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc addChildLayoutItem*(self: gen_qgraphicslayout_types.QGraphicsLayout, layoutItem: gen_qgraphicslayoutitem_types.QGraphicsLayoutItem): void =
   fcQGraphicsLayout_protectedbase_addChildLayoutItem(self.h, layoutItem.h)
@@ -229,56 +309,95 @@ proc create*(T: type gen_qgraphicslayout_types.QGraphicsLayout,
     vtbl: ref QGraphicsLayoutVTable = nil): gen_qgraphicslayout_types.QGraphicsLayout =
   let vtbl = if vtbl == nil: new QGraphicsLayoutVTable else: vtbl
   GC_ref(vtbl)
-  vtbl.vtbl.destructor = proc(vtbl: ptr cQGraphicsLayoutVTable, _: ptr cQGraphicsLayout) {.cdecl.} =
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQGraphicsLayoutVTable, _: ptr cQGraphicsLayout) {.cdecl.} =
     let vtbl = cast[ref QGraphicsLayoutVTable](vtbl)
     GC_unref(vtbl)
-  if not isNil(vtbl.getContentsMargins):
+  if not isNil(vtbl[].getContentsMargins):
     vtbl[].vtbl.getContentsMargins = miqt_exec_callback_cQGraphicsLayout_getContentsMargins
-  if not isNil(vtbl.invalidate):
+  if not isNil(vtbl[].invalidate):
     vtbl[].vtbl.invalidate = miqt_exec_callback_cQGraphicsLayout_invalidate
-  if not isNil(vtbl.updateGeometry):
+  if not isNil(vtbl[].updateGeometry):
     vtbl[].vtbl.updateGeometry = miqt_exec_callback_cQGraphicsLayout_updateGeometry
-  if not isNil(vtbl.widgetEvent):
+  if not isNil(vtbl[].widgetEvent):
     vtbl[].vtbl.widgetEvent = miqt_exec_callback_cQGraphicsLayout_widgetEvent
-  if not isNil(vtbl.count):
+  if not isNil(vtbl[].count):
     vtbl[].vtbl.count = miqt_exec_callback_cQGraphicsLayout_count
-  if not isNil(vtbl.itemAt):
+  if not isNil(vtbl[].itemAt):
     vtbl[].vtbl.itemAt = miqt_exec_callback_cQGraphicsLayout_itemAt
-  if not isNil(vtbl.removeAt):
+  if not isNil(vtbl[].removeAt):
     vtbl[].vtbl.removeAt = miqt_exec_callback_cQGraphicsLayout_removeAt
-  if not isNil(vtbl.setGeometry):
+  if not isNil(vtbl[].setGeometry):
     vtbl[].vtbl.setGeometry = miqt_exec_callback_cQGraphicsLayout_setGeometry
-  if not isNil(vtbl.sizeHint):
+  if not isNil(vtbl[].sizeHint):
     vtbl[].vtbl.sizeHint = miqt_exec_callback_cQGraphicsLayout_sizeHint
-  gen_qgraphicslayout_types.QGraphicsLayout(h: fcQGraphicsLayout_new(addr(vtbl[]), ))
+  gen_qgraphicslayout_types.QGraphicsLayout(h: fcQGraphicsLayout_new(addr(vtbl[].vtbl), ), owned: true)
 
 proc create*(T: type gen_qgraphicslayout_types.QGraphicsLayout,
     parent: gen_qgraphicslayoutitem_types.QGraphicsLayoutItem,
     vtbl: ref QGraphicsLayoutVTable = nil): gen_qgraphicslayout_types.QGraphicsLayout =
   let vtbl = if vtbl == nil: new QGraphicsLayoutVTable else: vtbl
   GC_ref(vtbl)
-  vtbl.vtbl.destructor = proc(vtbl: ptr cQGraphicsLayoutVTable, _: ptr cQGraphicsLayout) {.cdecl.} =
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQGraphicsLayoutVTable, _: ptr cQGraphicsLayout) {.cdecl.} =
     let vtbl = cast[ref QGraphicsLayoutVTable](vtbl)
     GC_unref(vtbl)
-  if not isNil(vtbl.getContentsMargins):
+  if not isNil(vtbl[].getContentsMargins):
     vtbl[].vtbl.getContentsMargins = miqt_exec_callback_cQGraphicsLayout_getContentsMargins
-  if not isNil(vtbl.invalidate):
+  if not isNil(vtbl[].invalidate):
     vtbl[].vtbl.invalidate = miqt_exec_callback_cQGraphicsLayout_invalidate
-  if not isNil(vtbl.updateGeometry):
+  if not isNil(vtbl[].updateGeometry):
     vtbl[].vtbl.updateGeometry = miqt_exec_callback_cQGraphicsLayout_updateGeometry
-  if not isNil(vtbl.widgetEvent):
+  if not isNil(vtbl[].widgetEvent):
     vtbl[].vtbl.widgetEvent = miqt_exec_callback_cQGraphicsLayout_widgetEvent
-  if not isNil(vtbl.count):
+  if not isNil(vtbl[].count):
     vtbl[].vtbl.count = miqt_exec_callback_cQGraphicsLayout_count
-  if not isNil(vtbl.itemAt):
+  if not isNil(vtbl[].itemAt):
     vtbl[].vtbl.itemAt = miqt_exec_callback_cQGraphicsLayout_itemAt
-  if not isNil(vtbl.removeAt):
+  if not isNil(vtbl[].removeAt):
     vtbl[].vtbl.removeAt = miqt_exec_callback_cQGraphicsLayout_removeAt
-  if not isNil(vtbl.setGeometry):
+  if not isNil(vtbl[].setGeometry):
     vtbl[].vtbl.setGeometry = miqt_exec_callback_cQGraphicsLayout_setGeometry
-  if not isNil(vtbl.sizeHint):
+  if not isNil(vtbl[].sizeHint):
     vtbl[].vtbl.sizeHint = miqt_exec_callback_cQGraphicsLayout_sizeHint
-  gen_qgraphicslayout_types.QGraphicsLayout(h: fcQGraphicsLayout_new2(addr(vtbl[]), parent.h))
+  gen_qgraphicslayout_types.QGraphicsLayout(h: fcQGraphicsLayout_new2(addr(vtbl[].vtbl), parent.h), owned: true)
 
-proc delete*(self: gen_qgraphicslayout_types.QGraphicsLayout) =
-  fcQGraphicsLayout_delete(self.h)
+proc create*(T: type gen_qgraphicslayout_types.QGraphicsLayout,
+    vtbl: VirtualQGraphicsLayout) =
+
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQGraphicsLayoutVTable, _: ptr cQGraphicsLayout) {.cdecl.} =
+    let vtbl = cast[ptr typeof(VirtualQGraphicsLayout()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQGraphicsLayout, vtbl)))
+    vtbl[].h = nil
+    vtbl[].owned = false
+  vtbl[].vtbl.getContentsMargins = miqt_exec_method_cQGraphicsLayout_getContentsMargins
+  vtbl[].vtbl.invalidate = miqt_exec_method_cQGraphicsLayout_invalidate
+  vtbl[].vtbl.updateGeometry = miqt_exec_method_cQGraphicsLayout_updateGeometry
+  vtbl[].vtbl.widgetEvent = miqt_exec_method_cQGraphicsLayout_widgetEvent
+  vtbl[].vtbl.count = miqt_exec_method_cQGraphicsLayout_count
+  vtbl[].vtbl.itemAt = miqt_exec_method_cQGraphicsLayout_itemAt
+  vtbl[].vtbl.removeAt = miqt_exec_method_cQGraphicsLayout_removeAt
+  vtbl[].vtbl.setGeometry = miqt_exec_method_cQGraphicsLayout_setGeometry
+  vtbl[].vtbl.sizeHint = miqt_exec_method_cQGraphicsLayout_sizeHint
+  if vtbl[].h != nil: delete(move(vtbl[]))
+  vtbl[].h = fcQGraphicsLayout_new(addr(vtbl[].vtbl), )
+  vtbl[].owned = true
+
+proc create*(T: type gen_qgraphicslayout_types.QGraphicsLayout,
+    parent: gen_qgraphicslayoutitem_types.QGraphicsLayoutItem,
+    vtbl: VirtualQGraphicsLayout) =
+
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQGraphicsLayoutVTable, _: ptr cQGraphicsLayout) {.cdecl.} =
+    let vtbl = cast[ptr typeof(VirtualQGraphicsLayout()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQGraphicsLayout, vtbl)))
+    vtbl[].h = nil
+    vtbl[].owned = false
+  vtbl[].vtbl.getContentsMargins = miqt_exec_method_cQGraphicsLayout_getContentsMargins
+  vtbl[].vtbl.invalidate = miqt_exec_method_cQGraphicsLayout_invalidate
+  vtbl[].vtbl.updateGeometry = miqt_exec_method_cQGraphicsLayout_updateGeometry
+  vtbl[].vtbl.widgetEvent = miqt_exec_method_cQGraphicsLayout_widgetEvent
+  vtbl[].vtbl.count = miqt_exec_method_cQGraphicsLayout_count
+  vtbl[].vtbl.itemAt = miqt_exec_method_cQGraphicsLayout_itemAt
+  vtbl[].vtbl.removeAt = miqt_exec_method_cQGraphicsLayout_removeAt
+  vtbl[].vtbl.setGeometry = miqt_exec_method_cQGraphicsLayout_setGeometry
+  vtbl[].vtbl.sizeHint = miqt_exec_method_cQGraphicsLayout_sizeHint
+  if vtbl[].h != nil: delete(move(vtbl[]))
+  vtbl[].h = fcQGraphicsLayout_new2(addr(vtbl[].vtbl), parent.h)
+  vtbl[].owned = true
+

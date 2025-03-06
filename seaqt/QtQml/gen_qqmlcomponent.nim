@@ -30,7 +30,7 @@ func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
     else:
       copyMem(addr result[0], unsafeAddr v[0], v.len)
 
-const cflags = gorge("pkg-config --cflags Qt5Qml")  & " -fPIC"
+const cflags = gorge("pkg-config --cflags Qt5Qml") & " -fPIC"
 {.compile("gen_qqmlcomponent.cpp", cflags).}
 
 
@@ -111,7 +111,7 @@ proc fcQQmlComponent_trUtf83(s: cstring, c: cstring, n: cint): struct_miqt_strin
 proc fcQQmlComponent_createWithInitialProperties2(self: pointer, initialProperties: struct_miqt_map, context: pointer): pointer {.importc: "QQmlComponent_createWithInitialProperties2".}
 proc fcQQmlComponent_create2(self: pointer, param1: pointer, context: pointer): void {.importc: "QQmlComponent_create2".}
 proc fcQQmlComponent_create3(self: pointer, param1: pointer, context: pointer, forContext: pointer): void {.importc: "QQmlComponent_create3".}
-type cQQmlComponentVTable = object
+type cQQmlComponentVTable {.pure.} = object
   destructor*: proc(vtbl: ptr cQQmlComponentVTable, self: ptr cQQmlComponent) {.cdecl, raises:[], gcsafe.}
   metaObject*: proc(vtbl, self: pointer, ): pointer {.cdecl, raises: [], gcsafe.}
   metacast*: proc(vtbl, self: pointer, param1: cstring): pointer {.cdecl, raises: [], gcsafe.}
@@ -156,10 +156,9 @@ proc fcQQmlComponent_new10(vtbl: pointer, param1: pointer, fileName: struct_miqt
 proc fcQQmlComponent_new11(vtbl: pointer, param1: pointer, url: pointer, parent: pointer): ptr cQQmlComponent {.importc: "QQmlComponent_new11".}
 proc fcQQmlComponent_new12(vtbl: pointer, param1: pointer, url: pointer, mode: cint, parent: pointer): ptr cQQmlComponent {.importc: "QQmlComponent_new12".}
 proc fcQQmlComponent_staticMetaObject(): pointer {.importc: "QQmlComponent_staticMetaObject".}
-proc fcQQmlComponent_delete(self: pointer) {.importc: "QQmlComponent_delete".}
 
 proc metaObject*(self: gen_qqmlcomponent_types.QQmlComponent, ): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQQmlComponent_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQQmlComponent_metaObject(self.h), owned: false)
 
 proc metacast*(self: gen_qqmlcomponent_types.QQmlComponent, param1: cstring): pointer =
   fcQQmlComponent_metacast(self.h, param1)
@@ -199,7 +198,7 @@ proc errors*(self: gen_qqmlcomponent_types.QQmlComponent, ): seq[gen_qqmlerror_t
   var vx_ret = newSeq[gen_qqmlerror_types.QQmlError](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
-    vx_ret[i] = gen_qqmlerror_types.QQmlError(h: v_outCast[i])
+    vx_ret[i] = gen_qqmlerror_types.QQmlError(h: v_outCast[i], owned: true)
   c_free(v_ma.data)
   vx_ret
 
@@ -213,35 +212,41 @@ proc progress*(self: gen_qqmlcomponent_types.QQmlComponent, ): float64 =
   fcQQmlComponent_progress(self.h)
 
 proc url*(self: gen_qqmlcomponent_types.QQmlComponent, ): gen_qurl_types.QUrl =
-  gen_qurl_types.QUrl(h: fcQQmlComponent_url(self.h))
+  gen_qurl_types.QUrl(h: fcQQmlComponent_url(self.h), owned: true)
 
 proc create*(self: gen_qqmlcomponent_types.QQmlComponent, context: gen_qqmlcontext_types.QQmlContext): gen_qobject_types.QObject =
-  gen_qobject_types.QObject(h: fcQQmlComponent_create(self.h, context.h))
+  gen_qobject_types.QObject(h: fcQQmlComponent_create(self.h, context.h), owned: false)
 
 proc createWithInitialProperties*(self: gen_qqmlcomponent_types.QQmlComponent, initialProperties: Table[string,gen_qvariant_types.QVariant]): gen_qobject_types.QObject =
   var initialProperties_Keys_CArray = newSeq[struct_miqt_string](len(initialProperties))
   var initialProperties_Values_CArray = newSeq[pointer](len(initialProperties))
   var initialProperties_ctr = 0
-  for initialProperties_k, initialProperties_v in initialProperties:
+  for initialProperties_k in initialProperties.keys():
     initialProperties_Keys_CArray[initialProperties_ctr] = struct_miqt_string(data: initialProperties_k, len: csize_t(len(initialProperties_k)))
+    initialProperties_ctr += 1
+  initialProperties_ctr = 0
+  for initialProperties_v in initialProperties.values():
     initialProperties_Values_CArray[initialProperties_ctr] = initialProperties_v.h
     initialProperties_ctr += 1
 
-  gen_qobject_types.QObject(h: fcQQmlComponent_createWithInitialProperties(self.h, struct_miqt_map(len: csize_t(len(initialProperties)),keys: if len(initialProperties) == 0: nil else: addr(initialProperties_Keys_CArray[0]), values: if len(initialProperties) == 0: nil else: addr(initialProperties_Values_CArray[0]),)))
+  gen_qobject_types.QObject(h: fcQQmlComponent_createWithInitialProperties(self.h, struct_miqt_map(len: csize_t(len(initialProperties)),keys: if len(initialProperties) == 0: nil else: addr(initialProperties_Keys_CArray[0]), values: if len(initialProperties) == 0: nil else: addr(initialProperties_Values_CArray[0]),)), owned: false)
 
 proc setInitialProperties*(self: gen_qqmlcomponent_types.QQmlComponent, component: gen_qobject_types.QObject, properties: Table[string,gen_qvariant_types.QVariant]): void =
   var properties_Keys_CArray = newSeq[struct_miqt_string](len(properties))
   var properties_Values_CArray = newSeq[pointer](len(properties))
   var properties_ctr = 0
-  for properties_k, properties_v in properties:
+  for properties_k in properties.keys():
     properties_Keys_CArray[properties_ctr] = struct_miqt_string(data: properties_k, len: csize_t(len(properties_k)))
+    properties_ctr += 1
+  properties_ctr = 0
+  for properties_v in properties.values():
     properties_Values_CArray[properties_ctr] = properties_v.h
     properties_ctr += 1
 
   fcQQmlComponent_setInitialProperties(self.h, component.h, struct_miqt_map(len: csize_t(len(properties)),keys: if len(properties) == 0: nil else: addr(properties_Keys_CArray[0]), values: if len(properties) == 0: nil else: addr(properties_Values_CArray[0]),))
 
 proc beginCreate*(self: gen_qqmlcomponent_types.QQmlComponent, param1: gen_qqmlcontext_types.QQmlContext): gen_qobject_types.QObject =
-  gen_qobject_types.QObject(h: fcQQmlComponent_beginCreate(self.h, param1.h))
+  gen_qobject_types.QObject(h: fcQQmlComponent_beginCreate(self.h, param1.h), owned: false)
 
 proc completeCreate*(self: gen_qqmlcomponent_types.QQmlComponent, ): void =
   fcQQmlComponent_completeCreate(self.h)
@@ -250,10 +255,10 @@ proc create*(self: gen_qqmlcomponent_types.QQmlComponent, param1: gen_qqmlincuba
   fcQQmlComponent_createWithQQmlIncubator(self.h, param1.h)
 
 proc creationContext*(self: gen_qqmlcomponent_types.QQmlComponent, ): gen_qqmlcontext_types.QQmlContext =
-  gen_qqmlcontext_types.QQmlContext(h: fcQQmlComponent_creationContext(self.h))
+  gen_qqmlcontext_types.QQmlContext(h: fcQQmlComponent_creationContext(self.h), owned: false)
 
 proc engine*(self: gen_qqmlcomponent_types.QQmlComponent, ): gen_qqmlengine_types.QQmlEngine =
-  gen_qqmlengine_types.QQmlEngine(h: fcQQmlComponent_engine(self.h))
+  gen_qqmlengine_types.QQmlEngine(h: fcQQmlComponent_engine(self.h), owned: false)
 
 proc loadUrl*(self: gen_qqmlcomponent_types.QQmlComponent, url: gen_qurl_types.QUrl): void =
   fcQQmlComponent_loadUrl(self.h, url.h)
@@ -332,12 +337,15 @@ proc createWithInitialProperties*(self: gen_qqmlcomponent_types.QQmlComponent, i
   var initialProperties_Keys_CArray = newSeq[struct_miqt_string](len(initialProperties))
   var initialProperties_Values_CArray = newSeq[pointer](len(initialProperties))
   var initialProperties_ctr = 0
-  for initialProperties_k, initialProperties_v in initialProperties:
+  for initialProperties_k in initialProperties.keys():
     initialProperties_Keys_CArray[initialProperties_ctr] = struct_miqt_string(data: initialProperties_k, len: csize_t(len(initialProperties_k)))
+    initialProperties_ctr += 1
+  initialProperties_ctr = 0
+  for initialProperties_v in initialProperties.values():
     initialProperties_Values_CArray[initialProperties_ctr] = initialProperties_v.h
     initialProperties_ctr += 1
 
-  gen_qobject_types.QObject(h: fcQQmlComponent_createWithInitialProperties2(self.h, struct_miqt_map(len: csize_t(len(initialProperties)),keys: if len(initialProperties) == 0: nil else: addr(initialProperties_Keys_CArray[0]), values: if len(initialProperties) == 0: nil else: addr(initialProperties_Values_CArray[0]),), context.h))
+  gen_qobject_types.QObject(h: fcQQmlComponent_createWithInitialProperties2(self.h, struct_miqt_map(len: csize_t(len(initialProperties)),keys: if len(initialProperties) == 0: nil else: addr(initialProperties_Keys_CArray[0]), values: if len(initialProperties) == 0: nil else: addr(initialProperties_Values_CArray[0]),), context.h), owned: false)
 
 proc create*(self: gen_qqmlcomponent_types.QQmlComponent, param1: gen_qqmlincubator_types.QQmlIncubator, context: gen_qqmlcontext_types.QQmlContext): void =
   fcQQmlComponent_create2(self.h, param1.h, context.h)
@@ -358,7 +366,7 @@ type QQmlComponentchildEventProc* = proc(self: QQmlComponent, event: gen_qcoreev
 type QQmlComponentcustomEventProc* = proc(self: QQmlComponent, event: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
 type QQmlComponentconnectNotifyProc* = proc(self: QQmlComponent, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
 type QQmlComponentdisconnectNotifyProc* = proc(self: QQmlComponent, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
-type QQmlComponentVTable* = object
+type QQmlComponentVTable* {.inheritable, pure.} = object
   vtbl: cQQmlComponentVTable
   metaObject*: QQmlComponentmetaObjectProc
   metacast*: QQmlComponentmetacastProc
@@ -374,13 +382,16 @@ type QQmlComponentVTable* = object
   connectNotify*: QQmlComponentconnectNotifyProc
   disconnectNotify*: QQmlComponentdisconnectNotifyProc
 proc QQmlComponentmetaObject*(self: gen_qqmlcomponent_types.QQmlComponent, ): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQQmlComponent_virtualbase_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQQmlComponent_virtualbase_metaObject(self.h), owned: false)
 
 proc miqt_exec_callback_cQQmlComponent_metaObject(vtbl: pointer, self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QQmlComponentVTable](vtbl)
   let self = QQmlComponent(h: self)
   var virtualReturn = vtbl[].metaObject(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QQmlComponentmetacast*(self: gen_qqmlcomponent_types.QQmlComponent, param1: cstring): pointer =
   fcQQmlComponent_virtualbase_metacast(self.h, param1)
@@ -405,24 +416,30 @@ proc miqt_exec_callback_cQQmlComponent_metacall(vtbl: pointer, self: pointer, pa
   virtualReturn
 
 proc QQmlComponentcreate*(self: gen_qqmlcomponent_types.QQmlComponent, context: gen_qqmlcontext_types.QQmlContext): gen_qobject_types.QObject =
-  gen_qobject_types.QObject(h: fcQQmlComponent_virtualbase_create(self.h, context.h))
+  gen_qobject_types.QObject(h: fcQQmlComponent_virtualbase_create(self.h, context.h), owned: false)
 
 proc miqt_exec_callback_cQQmlComponent_create(vtbl: pointer, self: pointer, context: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QQmlComponentVTable](vtbl)
   let self = QQmlComponent(h: self)
-  let slotval1 = gen_qqmlcontext_types.QQmlContext(h: context)
+  let slotval1 = gen_qqmlcontext_types.QQmlContext(h: context, owned: false)
   var virtualReturn = vtbl[].create(self, slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QQmlComponentbeginCreate*(self: gen_qqmlcomponent_types.QQmlComponent, param1: gen_qqmlcontext_types.QQmlContext): gen_qobject_types.QObject =
-  gen_qobject_types.QObject(h: fcQQmlComponent_virtualbase_beginCreate(self.h, param1.h))
+  gen_qobject_types.QObject(h: fcQQmlComponent_virtualbase_beginCreate(self.h, param1.h), owned: false)
 
 proc miqt_exec_callback_cQQmlComponent_beginCreate(vtbl: pointer, self: pointer, param1: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QQmlComponentVTable](vtbl)
   let self = QQmlComponent(h: self)
-  let slotval1 = gen_qqmlcontext_types.QQmlContext(h: param1)
+  let slotval1 = gen_qqmlcontext_types.QQmlContext(h: param1, owned: false)
   var virtualReturn = vtbl[].beginCreate(self, slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QQmlComponentcompleteCreate*(self: gen_qqmlcomponent_types.QQmlComponent, ): void =
   fcQQmlComponent_virtualbase_completeCreate(self.h)
@@ -438,7 +455,7 @@ proc QQmlComponentevent*(self: gen_qqmlcomponent_types.QQmlComponent, event: gen
 proc miqt_exec_callback_cQQmlComponent_event(vtbl: pointer, self: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QQmlComponentVTable](vtbl)
   let self = QQmlComponent(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].event(self, slotval1)
   virtualReturn
 
@@ -448,8 +465,8 @@ proc QQmlComponenteventFilter*(self: gen_qqmlcomponent_types.QQmlComponent, watc
 proc miqt_exec_callback_cQQmlComponent_eventFilter(vtbl: pointer, self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QQmlComponentVTable](vtbl)
   let self = QQmlComponent(h: self)
-  let slotval1 = gen_qobject_types.QObject(h: watched)
-  let slotval2 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].eventFilter(self, slotval1, slotval2)
   virtualReturn
 
@@ -459,7 +476,7 @@ proc QQmlComponenttimerEvent*(self: gen_qqmlcomponent_types.QQmlComponent, event
 proc miqt_exec_callback_cQQmlComponent_timerEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QQmlComponentVTable](vtbl)
   let self = QQmlComponent(h: self)
-  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   vtbl[].timerEvent(self, slotval1)
 
 proc QQmlComponentchildEvent*(self: gen_qqmlcomponent_types.QQmlComponent, event: gen_qcoreevent_types.QChildEvent): void =
@@ -468,7 +485,7 @@ proc QQmlComponentchildEvent*(self: gen_qqmlcomponent_types.QQmlComponent, event
 proc miqt_exec_callback_cQQmlComponent_childEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QQmlComponentVTable](vtbl)
   let self = QQmlComponent(h: self)
-  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   vtbl[].childEvent(self, slotval1)
 
 proc QQmlComponentcustomEvent*(self: gen_qqmlcomponent_types.QQmlComponent, event: gen_qcoreevent_types.QEvent): void =
@@ -477,7 +494,7 @@ proc QQmlComponentcustomEvent*(self: gen_qqmlcomponent_types.QQmlComponent, even
 proc miqt_exec_callback_cQQmlComponent_customEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QQmlComponentVTable](vtbl)
   let self = QQmlComponent(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].customEvent(self, slotval1)
 
 proc QQmlComponentconnectNotify*(self: gen_qqmlcomponent_types.QQmlComponent, signal: gen_qmetaobject_types.QMetaMethod): void =
@@ -486,7 +503,7 @@ proc QQmlComponentconnectNotify*(self: gen_qqmlcomponent_types.QQmlComponent, si
 proc miqt_exec_callback_cQQmlComponent_connectNotify(vtbl: pointer, self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QQmlComponentVTable](vtbl)
   let self = QQmlComponent(h: self)
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].connectNotify(self, slotval1)
 
 proc QQmlComponentdisconnectNotify*(self: gen_qqmlcomponent_types.QQmlComponent, signal: gen_qmetaobject_types.QMetaMethod): void =
@@ -495,11 +512,121 @@ proc QQmlComponentdisconnectNotify*(self: gen_qqmlcomponent_types.QQmlComponent,
 proc miqt_exec_callback_cQQmlComponent_disconnectNotify(vtbl: pointer, self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QQmlComponentVTable](vtbl)
   let self = QQmlComponent(h: self)
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].disconnectNotify(self, slotval1)
 
+type VirtualQQmlComponent* {.inheritable.} = ref object of QQmlComponent
+  vtbl*: cQQmlComponentVTable
+method metaObject*(self: VirtualQQmlComponent, ): gen_qobjectdefs_types.QMetaObject {.base.} =
+  QQmlComponentmetaObject(self[])
+proc miqt_exec_method_cQQmlComponent_metaObject(vtbl: pointer, inst: pointer): pointer {.cdecl.} =
+  let vtbl = cast[VirtualQQmlComponent](cast[uint](vtbl) - uint(offsetOf(VirtualQQmlComponent, vtbl)))
+  var virtualReturn = vtbl.metaObject()
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
+
+method metacast*(self: VirtualQQmlComponent, param1: cstring): pointer {.base.} =
+  QQmlComponentmetacast(self[], param1)
+proc miqt_exec_method_cQQmlComponent_metacast(vtbl: pointer, inst: pointer, param1: cstring): pointer {.cdecl.} =
+  let vtbl = cast[VirtualQQmlComponent](cast[uint](vtbl) - uint(offsetOf(VirtualQQmlComponent, vtbl)))
+  let slotval1 = (param1)
+  var virtualReturn = vtbl.metacast(slotval1)
+  virtualReturn
+
+method metacall*(self: VirtualQQmlComponent, param1: cint, param2: cint, param3: pointer): cint {.base.} =
+  QQmlComponentmetacall(self[], param1, param2, param3)
+proc miqt_exec_method_cQQmlComponent_metacall(vtbl: pointer, inst: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
+  let vtbl = cast[VirtualQQmlComponent](cast[uint](vtbl) - uint(offsetOf(VirtualQQmlComponent, vtbl)))
+  let slotval1 = cint(param1)
+  let slotval2 = param2
+  let slotval3 = param3
+  var virtualReturn = vtbl.metacall(slotval1, slotval2, slotval3)
+  virtualReturn
+
+method create*(self: VirtualQQmlComponent, context: gen_qqmlcontext_types.QQmlContext): gen_qobject_types.QObject {.base.} =
+  QQmlComponentcreate(self[], context)
+proc miqt_exec_method_cQQmlComponent_create(vtbl: pointer, inst: pointer, context: pointer): pointer {.cdecl.} =
+  let vtbl = cast[VirtualQQmlComponent](cast[uint](vtbl) - uint(offsetOf(VirtualQQmlComponent, vtbl)))
+  let slotval1 = gen_qqmlcontext_types.QQmlContext(h: context, owned: false)
+  var virtualReturn = vtbl.create(slotval1)
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
+
+method beginCreate*(self: VirtualQQmlComponent, param1: gen_qqmlcontext_types.QQmlContext): gen_qobject_types.QObject {.base.} =
+  QQmlComponentbeginCreate(self[], param1)
+proc miqt_exec_method_cQQmlComponent_beginCreate(vtbl: pointer, inst: pointer, param1: pointer): pointer {.cdecl.} =
+  let vtbl = cast[VirtualQQmlComponent](cast[uint](vtbl) - uint(offsetOf(VirtualQQmlComponent, vtbl)))
+  let slotval1 = gen_qqmlcontext_types.QQmlContext(h: param1, owned: false)
+  var virtualReturn = vtbl.beginCreate(slotval1)
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
+
+method completeCreate*(self: VirtualQQmlComponent, ): void {.base.} =
+  QQmlComponentcompleteCreate(self[])
+proc miqt_exec_method_cQQmlComponent_completeCreate(vtbl: pointer, inst: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQQmlComponent](cast[uint](vtbl) - uint(offsetOf(VirtualQQmlComponent, vtbl)))
+  vtbl.completeCreate()
+
+method event*(self: VirtualQQmlComponent, event: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QQmlComponentevent(self[], event)
+proc miqt_exec_method_cQQmlComponent_event(vtbl: pointer, inst: pointer, event: pointer): bool {.cdecl.} =
+  let vtbl = cast[VirtualQQmlComponent](cast[uint](vtbl) - uint(offsetOf(VirtualQQmlComponent, vtbl)))
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
+  var virtualReturn = vtbl.event(slotval1)
+  virtualReturn
+
+method eventFilter*(self: VirtualQQmlComponent, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QQmlComponenteventFilter(self[], watched, event)
+proc miqt_exec_method_cQQmlComponent_eventFilter(vtbl: pointer, inst: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
+  let vtbl = cast[VirtualQQmlComponent](cast[uint](vtbl) - uint(offsetOf(VirtualQQmlComponent, vtbl)))
+  let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
+  var virtualReturn = vtbl.eventFilter(slotval1, slotval2)
+  virtualReturn
+
+method timerEvent*(self: VirtualQQmlComponent, event: gen_qcoreevent_types.QTimerEvent): void {.base.} =
+  QQmlComponenttimerEvent(self[], event)
+proc miqt_exec_method_cQQmlComponent_timerEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQQmlComponent](cast[uint](vtbl) - uint(offsetOf(VirtualQQmlComponent, vtbl)))
+  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
+  vtbl.timerEvent(slotval1)
+
+method childEvent*(self: VirtualQQmlComponent, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
+  QQmlComponentchildEvent(self[], event)
+proc miqt_exec_method_cQQmlComponent_childEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQQmlComponent](cast[uint](vtbl) - uint(offsetOf(VirtualQQmlComponent, vtbl)))
+  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
+  vtbl.childEvent(slotval1)
+
+method customEvent*(self: VirtualQQmlComponent, event: gen_qcoreevent_types.QEvent): void {.base.} =
+  QQmlComponentcustomEvent(self[], event)
+proc miqt_exec_method_cQQmlComponent_customEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQQmlComponent](cast[uint](vtbl) - uint(offsetOf(VirtualQQmlComponent, vtbl)))
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
+  vtbl.customEvent(slotval1)
+
+method connectNotify*(self: VirtualQQmlComponent, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QQmlComponentconnectNotify(self[], signal)
+proc miqt_exec_method_cQQmlComponent_connectNotify(vtbl: pointer, inst: pointer, signal: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQQmlComponent](cast[uint](vtbl) - uint(offsetOf(VirtualQQmlComponent, vtbl)))
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
+  vtbl.connectNotify(slotval1)
+
+method disconnectNotify*(self: VirtualQQmlComponent, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QQmlComponentdisconnectNotify(self[], signal)
+proc miqt_exec_method_cQQmlComponent_disconnectNotify(vtbl: pointer, inst: pointer, signal: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQQmlComponent](cast[uint](vtbl) - uint(offsetOf(VirtualQQmlComponent, vtbl)))
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
+  vtbl.disconnectNotify(slotval1)
+
 proc sender*(self: gen_qqmlcomponent_types.QQmlComponent, ): gen_qobject_types.QObject =
-  gen_qobject_types.QObject(h: fcQQmlComponent_protectedbase_sender(self.h))
+  gen_qobject_types.QObject(h: fcQQmlComponent_protectedbase_sender(self.h), owned: false)
 
 proc senderSignalIndex*(self: gen_qqmlcomponent_types.QQmlComponent, ): cint =
   fcQQmlComponent_protectedbase_senderSignalIndex(self.h)
@@ -514,434 +641,731 @@ proc create*(T: type gen_qqmlcomponent_types.QQmlComponent,
     vtbl: ref QQmlComponentVTable = nil): gen_qqmlcomponent_types.QQmlComponent =
   let vtbl = if vtbl == nil: new QQmlComponentVTable else: vtbl
   GC_ref(vtbl)
-  vtbl.vtbl.destructor = proc(vtbl: ptr cQQmlComponentVTable, _: ptr cQQmlComponent) {.cdecl.} =
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQQmlComponentVTable, _: ptr cQQmlComponent) {.cdecl.} =
     let vtbl = cast[ref QQmlComponentVTable](vtbl)
     GC_unref(vtbl)
-  if not isNil(vtbl.metaObject):
+  if not isNil(vtbl[].metaObject):
     vtbl[].vtbl.metaObject = miqt_exec_callback_cQQmlComponent_metaObject
-  if not isNil(vtbl.metacast):
+  if not isNil(vtbl[].metacast):
     vtbl[].vtbl.metacast = miqt_exec_callback_cQQmlComponent_metacast
-  if not isNil(vtbl.metacall):
+  if not isNil(vtbl[].metacall):
     vtbl[].vtbl.metacall = miqt_exec_callback_cQQmlComponent_metacall
-  if not isNil(vtbl.create):
+  if not isNil(vtbl[].create):
     vtbl[].vtbl.create = miqt_exec_callback_cQQmlComponent_create
-  if not isNil(vtbl.beginCreate):
+  if not isNil(vtbl[].beginCreate):
     vtbl[].vtbl.beginCreate = miqt_exec_callback_cQQmlComponent_beginCreate
-  if not isNil(vtbl.completeCreate):
+  if not isNil(vtbl[].completeCreate):
     vtbl[].vtbl.completeCreate = miqt_exec_callback_cQQmlComponent_completeCreate
-  if not isNil(vtbl.event):
+  if not isNil(vtbl[].event):
     vtbl[].vtbl.event = miqt_exec_callback_cQQmlComponent_event
-  if not isNil(vtbl.eventFilter):
+  if not isNil(vtbl[].eventFilter):
     vtbl[].vtbl.eventFilter = miqt_exec_callback_cQQmlComponent_eventFilter
-  if not isNil(vtbl.timerEvent):
+  if not isNil(vtbl[].timerEvent):
     vtbl[].vtbl.timerEvent = miqt_exec_callback_cQQmlComponent_timerEvent
-  if not isNil(vtbl.childEvent):
+  if not isNil(vtbl[].childEvent):
     vtbl[].vtbl.childEvent = miqt_exec_callback_cQQmlComponent_childEvent
-  if not isNil(vtbl.customEvent):
+  if not isNil(vtbl[].customEvent):
     vtbl[].vtbl.customEvent = miqt_exec_callback_cQQmlComponent_customEvent
-  if not isNil(vtbl.connectNotify):
+  if not isNil(vtbl[].connectNotify):
     vtbl[].vtbl.connectNotify = miqt_exec_callback_cQQmlComponent_connectNotify
-  if not isNil(vtbl.disconnectNotify):
+  if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQQmlComponent_disconnectNotify
-  gen_qqmlcomponent_types.QQmlComponent(h: fcQQmlComponent_new(addr(vtbl[]), ))
+  gen_qqmlcomponent_types.QQmlComponent(h: fcQQmlComponent_new(addr(vtbl[].vtbl), ), owned: true)
 
 proc create*(T: type gen_qqmlcomponent_types.QQmlComponent,
     param1: gen_qqmlengine_types.QQmlEngine,
     vtbl: ref QQmlComponentVTable = nil): gen_qqmlcomponent_types.QQmlComponent =
   let vtbl = if vtbl == nil: new QQmlComponentVTable else: vtbl
   GC_ref(vtbl)
-  vtbl.vtbl.destructor = proc(vtbl: ptr cQQmlComponentVTable, _: ptr cQQmlComponent) {.cdecl.} =
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQQmlComponentVTable, _: ptr cQQmlComponent) {.cdecl.} =
     let vtbl = cast[ref QQmlComponentVTable](vtbl)
     GC_unref(vtbl)
-  if not isNil(vtbl.metaObject):
+  if not isNil(vtbl[].metaObject):
     vtbl[].vtbl.metaObject = miqt_exec_callback_cQQmlComponent_metaObject
-  if not isNil(vtbl.metacast):
+  if not isNil(vtbl[].metacast):
     vtbl[].vtbl.metacast = miqt_exec_callback_cQQmlComponent_metacast
-  if not isNil(vtbl.metacall):
+  if not isNil(vtbl[].metacall):
     vtbl[].vtbl.metacall = miqt_exec_callback_cQQmlComponent_metacall
-  if not isNil(vtbl.create):
+  if not isNil(vtbl[].create):
     vtbl[].vtbl.create = miqt_exec_callback_cQQmlComponent_create
-  if not isNil(vtbl.beginCreate):
+  if not isNil(vtbl[].beginCreate):
     vtbl[].vtbl.beginCreate = miqt_exec_callback_cQQmlComponent_beginCreate
-  if not isNil(vtbl.completeCreate):
+  if not isNil(vtbl[].completeCreate):
     vtbl[].vtbl.completeCreate = miqt_exec_callback_cQQmlComponent_completeCreate
-  if not isNil(vtbl.event):
+  if not isNil(vtbl[].event):
     vtbl[].vtbl.event = miqt_exec_callback_cQQmlComponent_event
-  if not isNil(vtbl.eventFilter):
+  if not isNil(vtbl[].eventFilter):
     vtbl[].vtbl.eventFilter = miqt_exec_callback_cQQmlComponent_eventFilter
-  if not isNil(vtbl.timerEvent):
+  if not isNil(vtbl[].timerEvent):
     vtbl[].vtbl.timerEvent = miqt_exec_callback_cQQmlComponent_timerEvent
-  if not isNil(vtbl.childEvent):
+  if not isNil(vtbl[].childEvent):
     vtbl[].vtbl.childEvent = miqt_exec_callback_cQQmlComponent_childEvent
-  if not isNil(vtbl.customEvent):
+  if not isNil(vtbl[].customEvent):
     vtbl[].vtbl.customEvent = miqt_exec_callback_cQQmlComponent_customEvent
-  if not isNil(vtbl.connectNotify):
+  if not isNil(vtbl[].connectNotify):
     vtbl[].vtbl.connectNotify = miqt_exec_callback_cQQmlComponent_connectNotify
-  if not isNil(vtbl.disconnectNotify):
+  if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQQmlComponent_disconnectNotify
-  gen_qqmlcomponent_types.QQmlComponent(h: fcQQmlComponent_new2(addr(vtbl[]), param1.h))
+  gen_qqmlcomponent_types.QQmlComponent(h: fcQQmlComponent_new2(addr(vtbl[].vtbl), param1.h), owned: true)
 
 proc create*(T: type gen_qqmlcomponent_types.QQmlComponent,
     param1: gen_qqmlengine_types.QQmlEngine, fileName: string,
     vtbl: ref QQmlComponentVTable = nil): gen_qqmlcomponent_types.QQmlComponent =
   let vtbl = if vtbl == nil: new QQmlComponentVTable else: vtbl
   GC_ref(vtbl)
-  vtbl.vtbl.destructor = proc(vtbl: ptr cQQmlComponentVTable, _: ptr cQQmlComponent) {.cdecl.} =
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQQmlComponentVTable, _: ptr cQQmlComponent) {.cdecl.} =
     let vtbl = cast[ref QQmlComponentVTable](vtbl)
     GC_unref(vtbl)
-  if not isNil(vtbl.metaObject):
+  if not isNil(vtbl[].metaObject):
     vtbl[].vtbl.metaObject = miqt_exec_callback_cQQmlComponent_metaObject
-  if not isNil(vtbl.metacast):
+  if not isNil(vtbl[].metacast):
     vtbl[].vtbl.metacast = miqt_exec_callback_cQQmlComponent_metacast
-  if not isNil(vtbl.metacall):
+  if not isNil(vtbl[].metacall):
     vtbl[].vtbl.metacall = miqt_exec_callback_cQQmlComponent_metacall
-  if not isNil(vtbl.create):
+  if not isNil(vtbl[].create):
     vtbl[].vtbl.create = miqt_exec_callback_cQQmlComponent_create
-  if not isNil(vtbl.beginCreate):
+  if not isNil(vtbl[].beginCreate):
     vtbl[].vtbl.beginCreate = miqt_exec_callback_cQQmlComponent_beginCreate
-  if not isNil(vtbl.completeCreate):
+  if not isNil(vtbl[].completeCreate):
     vtbl[].vtbl.completeCreate = miqt_exec_callback_cQQmlComponent_completeCreate
-  if not isNil(vtbl.event):
+  if not isNil(vtbl[].event):
     vtbl[].vtbl.event = miqt_exec_callback_cQQmlComponent_event
-  if not isNil(vtbl.eventFilter):
+  if not isNil(vtbl[].eventFilter):
     vtbl[].vtbl.eventFilter = miqt_exec_callback_cQQmlComponent_eventFilter
-  if not isNil(vtbl.timerEvent):
+  if not isNil(vtbl[].timerEvent):
     vtbl[].vtbl.timerEvent = miqt_exec_callback_cQQmlComponent_timerEvent
-  if not isNil(vtbl.childEvent):
+  if not isNil(vtbl[].childEvent):
     vtbl[].vtbl.childEvent = miqt_exec_callback_cQQmlComponent_childEvent
-  if not isNil(vtbl.customEvent):
+  if not isNil(vtbl[].customEvent):
     vtbl[].vtbl.customEvent = miqt_exec_callback_cQQmlComponent_customEvent
-  if not isNil(vtbl.connectNotify):
+  if not isNil(vtbl[].connectNotify):
     vtbl[].vtbl.connectNotify = miqt_exec_callback_cQQmlComponent_connectNotify
-  if not isNil(vtbl.disconnectNotify):
+  if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQQmlComponent_disconnectNotify
-  gen_qqmlcomponent_types.QQmlComponent(h: fcQQmlComponent_new3(addr(vtbl[]), param1.h, struct_miqt_string(data: fileName, len: csize_t(len(fileName)))))
+  gen_qqmlcomponent_types.QQmlComponent(h: fcQQmlComponent_new3(addr(vtbl[].vtbl), param1.h, struct_miqt_string(data: fileName, len: csize_t(len(fileName)))), owned: true)
 
 proc create*(T: type gen_qqmlcomponent_types.QQmlComponent,
     param1: gen_qqmlengine_types.QQmlEngine, fileName: string, mode: cint,
     vtbl: ref QQmlComponentVTable = nil): gen_qqmlcomponent_types.QQmlComponent =
   let vtbl = if vtbl == nil: new QQmlComponentVTable else: vtbl
   GC_ref(vtbl)
-  vtbl.vtbl.destructor = proc(vtbl: ptr cQQmlComponentVTable, _: ptr cQQmlComponent) {.cdecl.} =
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQQmlComponentVTable, _: ptr cQQmlComponent) {.cdecl.} =
     let vtbl = cast[ref QQmlComponentVTable](vtbl)
     GC_unref(vtbl)
-  if not isNil(vtbl.metaObject):
+  if not isNil(vtbl[].metaObject):
     vtbl[].vtbl.metaObject = miqt_exec_callback_cQQmlComponent_metaObject
-  if not isNil(vtbl.metacast):
+  if not isNil(vtbl[].metacast):
     vtbl[].vtbl.metacast = miqt_exec_callback_cQQmlComponent_metacast
-  if not isNil(vtbl.metacall):
+  if not isNil(vtbl[].metacall):
     vtbl[].vtbl.metacall = miqt_exec_callback_cQQmlComponent_metacall
-  if not isNil(vtbl.create):
+  if not isNil(vtbl[].create):
     vtbl[].vtbl.create = miqt_exec_callback_cQQmlComponent_create
-  if not isNil(vtbl.beginCreate):
+  if not isNil(vtbl[].beginCreate):
     vtbl[].vtbl.beginCreate = miqt_exec_callback_cQQmlComponent_beginCreate
-  if not isNil(vtbl.completeCreate):
+  if not isNil(vtbl[].completeCreate):
     vtbl[].vtbl.completeCreate = miqt_exec_callback_cQQmlComponent_completeCreate
-  if not isNil(vtbl.event):
+  if not isNil(vtbl[].event):
     vtbl[].vtbl.event = miqt_exec_callback_cQQmlComponent_event
-  if not isNil(vtbl.eventFilter):
+  if not isNil(vtbl[].eventFilter):
     vtbl[].vtbl.eventFilter = miqt_exec_callback_cQQmlComponent_eventFilter
-  if not isNil(vtbl.timerEvent):
+  if not isNil(vtbl[].timerEvent):
     vtbl[].vtbl.timerEvent = miqt_exec_callback_cQQmlComponent_timerEvent
-  if not isNil(vtbl.childEvent):
+  if not isNil(vtbl[].childEvent):
     vtbl[].vtbl.childEvent = miqt_exec_callback_cQQmlComponent_childEvent
-  if not isNil(vtbl.customEvent):
+  if not isNil(vtbl[].customEvent):
     vtbl[].vtbl.customEvent = miqt_exec_callback_cQQmlComponent_customEvent
-  if not isNil(vtbl.connectNotify):
+  if not isNil(vtbl[].connectNotify):
     vtbl[].vtbl.connectNotify = miqt_exec_callback_cQQmlComponent_connectNotify
-  if not isNil(vtbl.disconnectNotify):
+  if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQQmlComponent_disconnectNotify
-  gen_qqmlcomponent_types.QQmlComponent(h: fcQQmlComponent_new4(addr(vtbl[]), param1.h, struct_miqt_string(data: fileName, len: csize_t(len(fileName))), cint(mode)))
+  gen_qqmlcomponent_types.QQmlComponent(h: fcQQmlComponent_new4(addr(vtbl[].vtbl), param1.h, struct_miqt_string(data: fileName, len: csize_t(len(fileName))), cint(mode)), owned: true)
 
 proc create*(T: type gen_qqmlcomponent_types.QQmlComponent,
     param1: gen_qqmlengine_types.QQmlEngine, url: gen_qurl_types.QUrl,
     vtbl: ref QQmlComponentVTable = nil): gen_qqmlcomponent_types.QQmlComponent =
   let vtbl = if vtbl == nil: new QQmlComponentVTable else: vtbl
   GC_ref(vtbl)
-  vtbl.vtbl.destructor = proc(vtbl: ptr cQQmlComponentVTable, _: ptr cQQmlComponent) {.cdecl.} =
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQQmlComponentVTable, _: ptr cQQmlComponent) {.cdecl.} =
     let vtbl = cast[ref QQmlComponentVTable](vtbl)
     GC_unref(vtbl)
-  if not isNil(vtbl.metaObject):
+  if not isNil(vtbl[].metaObject):
     vtbl[].vtbl.metaObject = miqt_exec_callback_cQQmlComponent_metaObject
-  if not isNil(vtbl.metacast):
+  if not isNil(vtbl[].metacast):
     vtbl[].vtbl.metacast = miqt_exec_callback_cQQmlComponent_metacast
-  if not isNil(vtbl.metacall):
+  if not isNil(vtbl[].metacall):
     vtbl[].vtbl.metacall = miqt_exec_callback_cQQmlComponent_metacall
-  if not isNil(vtbl.create):
+  if not isNil(vtbl[].create):
     vtbl[].vtbl.create = miqt_exec_callback_cQQmlComponent_create
-  if not isNil(vtbl.beginCreate):
+  if not isNil(vtbl[].beginCreate):
     vtbl[].vtbl.beginCreate = miqt_exec_callback_cQQmlComponent_beginCreate
-  if not isNil(vtbl.completeCreate):
+  if not isNil(vtbl[].completeCreate):
     vtbl[].vtbl.completeCreate = miqt_exec_callback_cQQmlComponent_completeCreate
-  if not isNil(vtbl.event):
+  if not isNil(vtbl[].event):
     vtbl[].vtbl.event = miqt_exec_callback_cQQmlComponent_event
-  if not isNil(vtbl.eventFilter):
+  if not isNil(vtbl[].eventFilter):
     vtbl[].vtbl.eventFilter = miqt_exec_callback_cQQmlComponent_eventFilter
-  if not isNil(vtbl.timerEvent):
+  if not isNil(vtbl[].timerEvent):
     vtbl[].vtbl.timerEvent = miqt_exec_callback_cQQmlComponent_timerEvent
-  if not isNil(vtbl.childEvent):
+  if not isNil(vtbl[].childEvent):
     vtbl[].vtbl.childEvent = miqt_exec_callback_cQQmlComponent_childEvent
-  if not isNil(vtbl.customEvent):
+  if not isNil(vtbl[].customEvent):
     vtbl[].vtbl.customEvent = miqt_exec_callback_cQQmlComponent_customEvent
-  if not isNil(vtbl.connectNotify):
+  if not isNil(vtbl[].connectNotify):
     vtbl[].vtbl.connectNotify = miqt_exec_callback_cQQmlComponent_connectNotify
-  if not isNil(vtbl.disconnectNotify):
+  if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQQmlComponent_disconnectNotify
-  gen_qqmlcomponent_types.QQmlComponent(h: fcQQmlComponent_new5(addr(vtbl[]), param1.h, url.h))
+  gen_qqmlcomponent_types.QQmlComponent(h: fcQQmlComponent_new5(addr(vtbl[].vtbl), param1.h, url.h), owned: true)
 
 proc create*(T: type gen_qqmlcomponent_types.QQmlComponent,
     param1: gen_qqmlengine_types.QQmlEngine, url: gen_qurl_types.QUrl, mode: cint,
     vtbl: ref QQmlComponentVTable = nil): gen_qqmlcomponent_types.QQmlComponent =
   let vtbl = if vtbl == nil: new QQmlComponentVTable else: vtbl
   GC_ref(vtbl)
-  vtbl.vtbl.destructor = proc(vtbl: ptr cQQmlComponentVTable, _: ptr cQQmlComponent) {.cdecl.} =
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQQmlComponentVTable, _: ptr cQQmlComponent) {.cdecl.} =
     let vtbl = cast[ref QQmlComponentVTable](vtbl)
     GC_unref(vtbl)
-  if not isNil(vtbl.metaObject):
+  if not isNil(vtbl[].metaObject):
     vtbl[].vtbl.metaObject = miqt_exec_callback_cQQmlComponent_metaObject
-  if not isNil(vtbl.metacast):
+  if not isNil(vtbl[].metacast):
     vtbl[].vtbl.metacast = miqt_exec_callback_cQQmlComponent_metacast
-  if not isNil(vtbl.metacall):
+  if not isNil(vtbl[].metacall):
     vtbl[].vtbl.metacall = miqt_exec_callback_cQQmlComponent_metacall
-  if not isNil(vtbl.create):
+  if not isNil(vtbl[].create):
     vtbl[].vtbl.create = miqt_exec_callback_cQQmlComponent_create
-  if not isNil(vtbl.beginCreate):
+  if not isNil(vtbl[].beginCreate):
     vtbl[].vtbl.beginCreate = miqt_exec_callback_cQQmlComponent_beginCreate
-  if not isNil(vtbl.completeCreate):
+  if not isNil(vtbl[].completeCreate):
     vtbl[].vtbl.completeCreate = miqt_exec_callback_cQQmlComponent_completeCreate
-  if not isNil(vtbl.event):
+  if not isNil(vtbl[].event):
     vtbl[].vtbl.event = miqt_exec_callback_cQQmlComponent_event
-  if not isNil(vtbl.eventFilter):
+  if not isNil(vtbl[].eventFilter):
     vtbl[].vtbl.eventFilter = miqt_exec_callback_cQQmlComponent_eventFilter
-  if not isNil(vtbl.timerEvent):
+  if not isNil(vtbl[].timerEvent):
     vtbl[].vtbl.timerEvent = miqt_exec_callback_cQQmlComponent_timerEvent
-  if not isNil(vtbl.childEvent):
+  if not isNil(vtbl[].childEvent):
     vtbl[].vtbl.childEvent = miqt_exec_callback_cQQmlComponent_childEvent
-  if not isNil(vtbl.customEvent):
+  if not isNil(vtbl[].customEvent):
     vtbl[].vtbl.customEvent = miqt_exec_callback_cQQmlComponent_customEvent
-  if not isNil(vtbl.connectNotify):
+  if not isNil(vtbl[].connectNotify):
     vtbl[].vtbl.connectNotify = miqt_exec_callback_cQQmlComponent_connectNotify
-  if not isNil(vtbl.disconnectNotify):
+  if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQQmlComponent_disconnectNotify
-  gen_qqmlcomponent_types.QQmlComponent(h: fcQQmlComponent_new6(addr(vtbl[]), param1.h, url.h, cint(mode)))
+  gen_qqmlcomponent_types.QQmlComponent(h: fcQQmlComponent_new6(addr(vtbl[].vtbl), param1.h, url.h, cint(mode)), owned: true)
 
 proc create*(T: type gen_qqmlcomponent_types.QQmlComponent,
     parent: gen_qobject_types.QObject,
     vtbl: ref QQmlComponentVTable = nil): gen_qqmlcomponent_types.QQmlComponent =
   let vtbl = if vtbl == nil: new QQmlComponentVTable else: vtbl
   GC_ref(vtbl)
-  vtbl.vtbl.destructor = proc(vtbl: ptr cQQmlComponentVTable, _: ptr cQQmlComponent) {.cdecl.} =
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQQmlComponentVTable, _: ptr cQQmlComponent) {.cdecl.} =
     let vtbl = cast[ref QQmlComponentVTable](vtbl)
     GC_unref(vtbl)
-  if not isNil(vtbl.metaObject):
+  if not isNil(vtbl[].metaObject):
     vtbl[].vtbl.metaObject = miqt_exec_callback_cQQmlComponent_metaObject
-  if not isNil(vtbl.metacast):
+  if not isNil(vtbl[].metacast):
     vtbl[].vtbl.metacast = miqt_exec_callback_cQQmlComponent_metacast
-  if not isNil(vtbl.metacall):
+  if not isNil(vtbl[].metacall):
     vtbl[].vtbl.metacall = miqt_exec_callback_cQQmlComponent_metacall
-  if not isNil(vtbl.create):
+  if not isNil(vtbl[].create):
     vtbl[].vtbl.create = miqt_exec_callback_cQQmlComponent_create
-  if not isNil(vtbl.beginCreate):
+  if not isNil(vtbl[].beginCreate):
     vtbl[].vtbl.beginCreate = miqt_exec_callback_cQQmlComponent_beginCreate
-  if not isNil(vtbl.completeCreate):
+  if not isNil(vtbl[].completeCreate):
     vtbl[].vtbl.completeCreate = miqt_exec_callback_cQQmlComponent_completeCreate
-  if not isNil(vtbl.event):
+  if not isNil(vtbl[].event):
     vtbl[].vtbl.event = miqt_exec_callback_cQQmlComponent_event
-  if not isNil(vtbl.eventFilter):
+  if not isNil(vtbl[].eventFilter):
     vtbl[].vtbl.eventFilter = miqt_exec_callback_cQQmlComponent_eventFilter
-  if not isNil(vtbl.timerEvent):
+  if not isNil(vtbl[].timerEvent):
     vtbl[].vtbl.timerEvent = miqt_exec_callback_cQQmlComponent_timerEvent
-  if not isNil(vtbl.childEvent):
+  if not isNil(vtbl[].childEvent):
     vtbl[].vtbl.childEvent = miqt_exec_callback_cQQmlComponent_childEvent
-  if not isNil(vtbl.customEvent):
+  if not isNil(vtbl[].customEvent):
     vtbl[].vtbl.customEvent = miqt_exec_callback_cQQmlComponent_customEvent
-  if not isNil(vtbl.connectNotify):
+  if not isNil(vtbl[].connectNotify):
     vtbl[].vtbl.connectNotify = miqt_exec_callback_cQQmlComponent_connectNotify
-  if not isNil(vtbl.disconnectNotify):
+  if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQQmlComponent_disconnectNotify
-  gen_qqmlcomponent_types.QQmlComponent(h: fcQQmlComponent_new7(addr(vtbl[]), parent.h))
+  gen_qqmlcomponent_types.QQmlComponent(h: fcQQmlComponent_new7(addr(vtbl[].vtbl), parent.h), owned: true)
 
 proc create*(T: type gen_qqmlcomponent_types.QQmlComponent,
     param1: gen_qqmlengine_types.QQmlEngine, parent: gen_qobject_types.QObject,
     vtbl: ref QQmlComponentVTable = nil): gen_qqmlcomponent_types.QQmlComponent =
   let vtbl = if vtbl == nil: new QQmlComponentVTable else: vtbl
   GC_ref(vtbl)
-  vtbl.vtbl.destructor = proc(vtbl: ptr cQQmlComponentVTable, _: ptr cQQmlComponent) {.cdecl.} =
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQQmlComponentVTable, _: ptr cQQmlComponent) {.cdecl.} =
     let vtbl = cast[ref QQmlComponentVTable](vtbl)
     GC_unref(vtbl)
-  if not isNil(vtbl.metaObject):
+  if not isNil(vtbl[].metaObject):
     vtbl[].vtbl.metaObject = miqt_exec_callback_cQQmlComponent_metaObject
-  if not isNil(vtbl.metacast):
+  if not isNil(vtbl[].metacast):
     vtbl[].vtbl.metacast = miqt_exec_callback_cQQmlComponent_metacast
-  if not isNil(vtbl.metacall):
+  if not isNil(vtbl[].metacall):
     vtbl[].vtbl.metacall = miqt_exec_callback_cQQmlComponent_metacall
-  if not isNil(vtbl.create):
+  if not isNil(vtbl[].create):
     vtbl[].vtbl.create = miqt_exec_callback_cQQmlComponent_create
-  if not isNil(vtbl.beginCreate):
+  if not isNil(vtbl[].beginCreate):
     vtbl[].vtbl.beginCreate = miqt_exec_callback_cQQmlComponent_beginCreate
-  if not isNil(vtbl.completeCreate):
+  if not isNil(vtbl[].completeCreate):
     vtbl[].vtbl.completeCreate = miqt_exec_callback_cQQmlComponent_completeCreate
-  if not isNil(vtbl.event):
+  if not isNil(vtbl[].event):
     vtbl[].vtbl.event = miqt_exec_callback_cQQmlComponent_event
-  if not isNil(vtbl.eventFilter):
+  if not isNil(vtbl[].eventFilter):
     vtbl[].vtbl.eventFilter = miqt_exec_callback_cQQmlComponent_eventFilter
-  if not isNil(vtbl.timerEvent):
+  if not isNil(vtbl[].timerEvent):
     vtbl[].vtbl.timerEvent = miqt_exec_callback_cQQmlComponent_timerEvent
-  if not isNil(vtbl.childEvent):
+  if not isNil(vtbl[].childEvent):
     vtbl[].vtbl.childEvent = miqt_exec_callback_cQQmlComponent_childEvent
-  if not isNil(vtbl.customEvent):
+  if not isNil(vtbl[].customEvent):
     vtbl[].vtbl.customEvent = miqt_exec_callback_cQQmlComponent_customEvent
-  if not isNil(vtbl.connectNotify):
+  if not isNil(vtbl[].connectNotify):
     vtbl[].vtbl.connectNotify = miqt_exec_callback_cQQmlComponent_connectNotify
-  if not isNil(vtbl.disconnectNotify):
+  if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQQmlComponent_disconnectNotify
-  gen_qqmlcomponent_types.QQmlComponent(h: fcQQmlComponent_new8(addr(vtbl[]), param1.h, parent.h))
+  gen_qqmlcomponent_types.QQmlComponent(h: fcQQmlComponent_new8(addr(vtbl[].vtbl), param1.h, parent.h), owned: true)
 
 proc create*(T: type gen_qqmlcomponent_types.QQmlComponent,
     param1: gen_qqmlengine_types.QQmlEngine, fileName: string, parent: gen_qobject_types.QObject,
     vtbl: ref QQmlComponentVTable = nil): gen_qqmlcomponent_types.QQmlComponent =
   let vtbl = if vtbl == nil: new QQmlComponentVTable else: vtbl
   GC_ref(vtbl)
-  vtbl.vtbl.destructor = proc(vtbl: ptr cQQmlComponentVTable, _: ptr cQQmlComponent) {.cdecl.} =
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQQmlComponentVTable, _: ptr cQQmlComponent) {.cdecl.} =
     let vtbl = cast[ref QQmlComponentVTable](vtbl)
     GC_unref(vtbl)
-  if not isNil(vtbl.metaObject):
+  if not isNil(vtbl[].metaObject):
     vtbl[].vtbl.metaObject = miqt_exec_callback_cQQmlComponent_metaObject
-  if not isNil(vtbl.metacast):
+  if not isNil(vtbl[].metacast):
     vtbl[].vtbl.metacast = miqt_exec_callback_cQQmlComponent_metacast
-  if not isNil(vtbl.metacall):
+  if not isNil(vtbl[].metacall):
     vtbl[].vtbl.metacall = miqt_exec_callback_cQQmlComponent_metacall
-  if not isNil(vtbl.create):
+  if not isNil(vtbl[].create):
     vtbl[].vtbl.create = miqt_exec_callback_cQQmlComponent_create
-  if not isNil(vtbl.beginCreate):
+  if not isNil(vtbl[].beginCreate):
     vtbl[].vtbl.beginCreate = miqt_exec_callback_cQQmlComponent_beginCreate
-  if not isNil(vtbl.completeCreate):
+  if not isNil(vtbl[].completeCreate):
     vtbl[].vtbl.completeCreate = miqt_exec_callback_cQQmlComponent_completeCreate
-  if not isNil(vtbl.event):
+  if not isNil(vtbl[].event):
     vtbl[].vtbl.event = miqt_exec_callback_cQQmlComponent_event
-  if not isNil(vtbl.eventFilter):
+  if not isNil(vtbl[].eventFilter):
     vtbl[].vtbl.eventFilter = miqt_exec_callback_cQQmlComponent_eventFilter
-  if not isNil(vtbl.timerEvent):
+  if not isNil(vtbl[].timerEvent):
     vtbl[].vtbl.timerEvent = miqt_exec_callback_cQQmlComponent_timerEvent
-  if not isNil(vtbl.childEvent):
+  if not isNil(vtbl[].childEvent):
     vtbl[].vtbl.childEvent = miqt_exec_callback_cQQmlComponent_childEvent
-  if not isNil(vtbl.customEvent):
+  if not isNil(vtbl[].customEvent):
     vtbl[].vtbl.customEvent = miqt_exec_callback_cQQmlComponent_customEvent
-  if not isNil(vtbl.connectNotify):
+  if not isNil(vtbl[].connectNotify):
     vtbl[].vtbl.connectNotify = miqt_exec_callback_cQQmlComponent_connectNotify
-  if not isNil(vtbl.disconnectNotify):
+  if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQQmlComponent_disconnectNotify
-  gen_qqmlcomponent_types.QQmlComponent(h: fcQQmlComponent_new9(addr(vtbl[]), param1.h, struct_miqt_string(data: fileName, len: csize_t(len(fileName))), parent.h))
+  gen_qqmlcomponent_types.QQmlComponent(h: fcQQmlComponent_new9(addr(vtbl[].vtbl), param1.h, struct_miqt_string(data: fileName, len: csize_t(len(fileName))), parent.h), owned: true)
 
 proc create*(T: type gen_qqmlcomponent_types.QQmlComponent,
     param1: gen_qqmlengine_types.QQmlEngine, fileName: string, mode: cint, parent: gen_qobject_types.QObject,
     vtbl: ref QQmlComponentVTable = nil): gen_qqmlcomponent_types.QQmlComponent =
   let vtbl = if vtbl == nil: new QQmlComponentVTable else: vtbl
   GC_ref(vtbl)
-  vtbl.vtbl.destructor = proc(vtbl: ptr cQQmlComponentVTable, _: ptr cQQmlComponent) {.cdecl.} =
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQQmlComponentVTable, _: ptr cQQmlComponent) {.cdecl.} =
     let vtbl = cast[ref QQmlComponentVTable](vtbl)
     GC_unref(vtbl)
-  if not isNil(vtbl.metaObject):
+  if not isNil(vtbl[].metaObject):
     vtbl[].vtbl.metaObject = miqt_exec_callback_cQQmlComponent_metaObject
-  if not isNil(vtbl.metacast):
+  if not isNil(vtbl[].metacast):
     vtbl[].vtbl.metacast = miqt_exec_callback_cQQmlComponent_metacast
-  if not isNil(vtbl.metacall):
+  if not isNil(vtbl[].metacall):
     vtbl[].vtbl.metacall = miqt_exec_callback_cQQmlComponent_metacall
-  if not isNil(vtbl.create):
+  if not isNil(vtbl[].create):
     vtbl[].vtbl.create = miqt_exec_callback_cQQmlComponent_create
-  if not isNil(vtbl.beginCreate):
+  if not isNil(vtbl[].beginCreate):
     vtbl[].vtbl.beginCreate = miqt_exec_callback_cQQmlComponent_beginCreate
-  if not isNil(vtbl.completeCreate):
+  if not isNil(vtbl[].completeCreate):
     vtbl[].vtbl.completeCreate = miqt_exec_callback_cQQmlComponent_completeCreate
-  if not isNil(vtbl.event):
+  if not isNil(vtbl[].event):
     vtbl[].vtbl.event = miqt_exec_callback_cQQmlComponent_event
-  if not isNil(vtbl.eventFilter):
+  if not isNil(vtbl[].eventFilter):
     vtbl[].vtbl.eventFilter = miqt_exec_callback_cQQmlComponent_eventFilter
-  if not isNil(vtbl.timerEvent):
+  if not isNil(vtbl[].timerEvent):
     vtbl[].vtbl.timerEvent = miqt_exec_callback_cQQmlComponent_timerEvent
-  if not isNil(vtbl.childEvent):
+  if not isNil(vtbl[].childEvent):
     vtbl[].vtbl.childEvent = miqt_exec_callback_cQQmlComponent_childEvent
-  if not isNil(vtbl.customEvent):
+  if not isNil(vtbl[].customEvent):
     vtbl[].vtbl.customEvent = miqt_exec_callback_cQQmlComponent_customEvent
-  if not isNil(vtbl.connectNotify):
+  if not isNil(vtbl[].connectNotify):
     vtbl[].vtbl.connectNotify = miqt_exec_callback_cQQmlComponent_connectNotify
-  if not isNil(vtbl.disconnectNotify):
+  if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQQmlComponent_disconnectNotify
-  gen_qqmlcomponent_types.QQmlComponent(h: fcQQmlComponent_new10(addr(vtbl[]), param1.h, struct_miqt_string(data: fileName, len: csize_t(len(fileName))), cint(mode), parent.h))
+  gen_qqmlcomponent_types.QQmlComponent(h: fcQQmlComponent_new10(addr(vtbl[].vtbl), param1.h, struct_miqt_string(data: fileName, len: csize_t(len(fileName))), cint(mode), parent.h), owned: true)
 
 proc create*(T: type gen_qqmlcomponent_types.QQmlComponent,
     param1: gen_qqmlengine_types.QQmlEngine, url: gen_qurl_types.QUrl, parent: gen_qobject_types.QObject,
     vtbl: ref QQmlComponentVTable = nil): gen_qqmlcomponent_types.QQmlComponent =
   let vtbl = if vtbl == nil: new QQmlComponentVTable else: vtbl
   GC_ref(vtbl)
-  vtbl.vtbl.destructor = proc(vtbl: ptr cQQmlComponentVTable, _: ptr cQQmlComponent) {.cdecl.} =
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQQmlComponentVTable, _: ptr cQQmlComponent) {.cdecl.} =
     let vtbl = cast[ref QQmlComponentVTable](vtbl)
     GC_unref(vtbl)
-  if not isNil(vtbl.metaObject):
+  if not isNil(vtbl[].metaObject):
     vtbl[].vtbl.metaObject = miqt_exec_callback_cQQmlComponent_metaObject
-  if not isNil(vtbl.metacast):
+  if not isNil(vtbl[].metacast):
     vtbl[].vtbl.metacast = miqt_exec_callback_cQQmlComponent_metacast
-  if not isNil(vtbl.metacall):
+  if not isNil(vtbl[].metacall):
     vtbl[].vtbl.metacall = miqt_exec_callback_cQQmlComponent_metacall
-  if not isNil(vtbl.create):
+  if not isNil(vtbl[].create):
     vtbl[].vtbl.create = miqt_exec_callback_cQQmlComponent_create
-  if not isNil(vtbl.beginCreate):
+  if not isNil(vtbl[].beginCreate):
     vtbl[].vtbl.beginCreate = miqt_exec_callback_cQQmlComponent_beginCreate
-  if not isNil(vtbl.completeCreate):
+  if not isNil(vtbl[].completeCreate):
     vtbl[].vtbl.completeCreate = miqt_exec_callback_cQQmlComponent_completeCreate
-  if not isNil(vtbl.event):
+  if not isNil(vtbl[].event):
     vtbl[].vtbl.event = miqt_exec_callback_cQQmlComponent_event
-  if not isNil(vtbl.eventFilter):
+  if not isNil(vtbl[].eventFilter):
     vtbl[].vtbl.eventFilter = miqt_exec_callback_cQQmlComponent_eventFilter
-  if not isNil(vtbl.timerEvent):
+  if not isNil(vtbl[].timerEvent):
     vtbl[].vtbl.timerEvent = miqt_exec_callback_cQQmlComponent_timerEvent
-  if not isNil(vtbl.childEvent):
+  if not isNil(vtbl[].childEvent):
     vtbl[].vtbl.childEvent = miqt_exec_callback_cQQmlComponent_childEvent
-  if not isNil(vtbl.customEvent):
+  if not isNil(vtbl[].customEvent):
     vtbl[].vtbl.customEvent = miqt_exec_callback_cQQmlComponent_customEvent
-  if not isNil(vtbl.connectNotify):
+  if not isNil(vtbl[].connectNotify):
     vtbl[].vtbl.connectNotify = miqt_exec_callback_cQQmlComponent_connectNotify
-  if not isNil(vtbl.disconnectNotify):
+  if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQQmlComponent_disconnectNotify
-  gen_qqmlcomponent_types.QQmlComponent(h: fcQQmlComponent_new11(addr(vtbl[]), param1.h, url.h, parent.h))
+  gen_qqmlcomponent_types.QQmlComponent(h: fcQQmlComponent_new11(addr(vtbl[].vtbl), param1.h, url.h, parent.h), owned: true)
 
 proc create*(T: type gen_qqmlcomponent_types.QQmlComponent,
     param1: gen_qqmlengine_types.QQmlEngine, url: gen_qurl_types.QUrl, mode: cint, parent: gen_qobject_types.QObject,
     vtbl: ref QQmlComponentVTable = nil): gen_qqmlcomponent_types.QQmlComponent =
   let vtbl = if vtbl == nil: new QQmlComponentVTable else: vtbl
   GC_ref(vtbl)
-  vtbl.vtbl.destructor = proc(vtbl: ptr cQQmlComponentVTable, _: ptr cQQmlComponent) {.cdecl.} =
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQQmlComponentVTable, _: ptr cQQmlComponent) {.cdecl.} =
     let vtbl = cast[ref QQmlComponentVTable](vtbl)
     GC_unref(vtbl)
-  if not isNil(vtbl.metaObject):
+  if not isNil(vtbl[].metaObject):
     vtbl[].vtbl.metaObject = miqt_exec_callback_cQQmlComponent_metaObject
-  if not isNil(vtbl.metacast):
+  if not isNil(vtbl[].metacast):
     vtbl[].vtbl.metacast = miqt_exec_callback_cQQmlComponent_metacast
-  if not isNil(vtbl.metacall):
+  if not isNil(vtbl[].metacall):
     vtbl[].vtbl.metacall = miqt_exec_callback_cQQmlComponent_metacall
-  if not isNil(vtbl.create):
+  if not isNil(vtbl[].create):
     vtbl[].vtbl.create = miqt_exec_callback_cQQmlComponent_create
-  if not isNil(vtbl.beginCreate):
+  if not isNil(vtbl[].beginCreate):
     vtbl[].vtbl.beginCreate = miqt_exec_callback_cQQmlComponent_beginCreate
-  if not isNil(vtbl.completeCreate):
+  if not isNil(vtbl[].completeCreate):
     vtbl[].vtbl.completeCreate = miqt_exec_callback_cQQmlComponent_completeCreate
-  if not isNil(vtbl.event):
+  if not isNil(vtbl[].event):
     vtbl[].vtbl.event = miqt_exec_callback_cQQmlComponent_event
-  if not isNil(vtbl.eventFilter):
+  if not isNil(vtbl[].eventFilter):
     vtbl[].vtbl.eventFilter = miqt_exec_callback_cQQmlComponent_eventFilter
-  if not isNil(vtbl.timerEvent):
+  if not isNil(vtbl[].timerEvent):
     vtbl[].vtbl.timerEvent = miqt_exec_callback_cQQmlComponent_timerEvent
-  if not isNil(vtbl.childEvent):
+  if not isNil(vtbl[].childEvent):
     vtbl[].vtbl.childEvent = miqt_exec_callback_cQQmlComponent_childEvent
-  if not isNil(vtbl.customEvent):
+  if not isNil(vtbl[].customEvent):
     vtbl[].vtbl.customEvent = miqt_exec_callback_cQQmlComponent_customEvent
-  if not isNil(vtbl.connectNotify):
+  if not isNil(vtbl[].connectNotify):
     vtbl[].vtbl.connectNotify = miqt_exec_callback_cQQmlComponent_connectNotify
-  if not isNil(vtbl.disconnectNotify):
+  if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQQmlComponent_disconnectNotify
-  gen_qqmlcomponent_types.QQmlComponent(h: fcQQmlComponent_new12(addr(vtbl[]), param1.h, url.h, cint(mode), parent.h))
+  gen_qqmlcomponent_types.QQmlComponent(h: fcQQmlComponent_new12(addr(vtbl[].vtbl), param1.h, url.h, cint(mode), parent.h), owned: true)
+
+proc create*(T: type gen_qqmlcomponent_types.QQmlComponent,
+    vtbl: VirtualQQmlComponent) =
+
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQQmlComponentVTable, _: ptr cQQmlComponent) {.cdecl.} =
+    let vtbl = cast[ptr typeof(VirtualQQmlComponent()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQQmlComponent, vtbl)))
+    vtbl[].h = nil
+    vtbl[].owned = false
+  vtbl[].vtbl.metaObject = miqt_exec_method_cQQmlComponent_metaObject
+  vtbl[].vtbl.metacast = miqt_exec_method_cQQmlComponent_metacast
+  vtbl[].vtbl.metacall = miqt_exec_method_cQQmlComponent_metacall
+  vtbl[].vtbl.create = miqt_exec_method_cQQmlComponent_create
+  vtbl[].vtbl.beginCreate = miqt_exec_method_cQQmlComponent_beginCreate
+  vtbl[].vtbl.completeCreate = miqt_exec_method_cQQmlComponent_completeCreate
+  vtbl[].vtbl.event = miqt_exec_method_cQQmlComponent_event
+  vtbl[].vtbl.eventFilter = miqt_exec_method_cQQmlComponent_eventFilter
+  vtbl[].vtbl.timerEvent = miqt_exec_method_cQQmlComponent_timerEvent
+  vtbl[].vtbl.childEvent = miqt_exec_method_cQQmlComponent_childEvent
+  vtbl[].vtbl.customEvent = miqt_exec_method_cQQmlComponent_customEvent
+  vtbl[].vtbl.connectNotify = miqt_exec_method_cQQmlComponent_connectNotify
+  vtbl[].vtbl.disconnectNotify = miqt_exec_method_cQQmlComponent_disconnectNotify
+  if vtbl[].h != nil: delete(move(vtbl[]))
+  vtbl[].h = fcQQmlComponent_new(addr(vtbl[].vtbl), )
+  vtbl[].owned = true
+
+proc create*(T: type gen_qqmlcomponent_types.QQmlComponent,
+    param1: gen_qqmlengine_types.QQmlEngine,
+    vtbl: VirtualQQmlComponent) =
+
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQQmlComponentVTable, _: ptr cQQmlComponent) {.cdecl.} =
+    let vtbl = cast[ptr typeof(VirtualQQmlComponent()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQQmlComponent, vtbl)))
+    vtbl[].h = nil
+    vtbl[].owned = false
+  vtbl[].vtbl.metaObject = miqt_exec_method_cQQmlComponent_metaObject
+  vtbl[].vtbl.metacast = miqt_exec_method_cQQmlComponent_metacast
+  vtbl[].vtbl.metacall = miqt_exec_method_cQQmlComponent_metacall
+  vtbl[].vtbl.create = miqt_exec_method_cQQmlComponent_create
+  vtbl[].vtbl.beginCreate = miqt_exec_method_cQQmlComponent_beginCreate
+  vtbl[].vtbl.completeCreate = miqt_exec_method_cQQmlComponent_completeCreate
+  vtbl[].vtbl.event = miqt_exec_method_cQQmlComponent_event
+  vtbl[].vtbl.eventFilter = miqt_exec_method_cQQmlComponent_eventFilter
+  vtbl[].vtbl.timerEvent = miqt_exec_method_cQQmlComponent_timerEvent
+  vtbl[].vtbl.childEvent = miqt_exec_method_cQQmlComponent_childEvent
+  vtbl[].vtbl.customEvent = miqt_exec_method_cQQmlComponent_customEvent
+  vtbl[].vtbl.connectNotify = miqt_exec_method_cQQmlComponent_connectNotify
+  vtbl[].vtbl.disconnectNotify = miqt_exec_method_cQQmlComponent_disconnectNotify
+  if vtbl[].h != nil: delete(move(vtbl[]))
+  vtbl[].h = fcQQmlComponent_new2(addr(vtbl[].vtbl), param1.h)
+  vtbl[].owned = true
+
+proc create*(T: type gen_qqmlcomponent_types.QQmlComponent,
+    param1: gen_qqmlengine_types.QQmlEngine, fileName: string,
+    vtbl: VirtualQQmlComponent) =
+
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQQmlComponentVTable, _: ptr cQQmlComponent) {.cdecl.} =
+    let vtbl = cast[ptr typeof(VirtualQQmlComponent()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQQmlComponent, vtbl)))
+    vtbl[].h = nil
+    vtbl[].owned = false
+  vtbl[].vtbl.metaObject = miqt_exec_method_cQQmlComponent_metaObject
+  vtbl[].vtbl.metacast = miqt_exec_method_cQQmlComponent_metacast
+  vtbl[].vtbl.metacall = miqt_exec_method_cQQmlComponent_metacall
+  vtbl[].vtbl.create = miqt_exec_method_cQQmlComponent_create
+  vtbl[].vtbl.beginCreate = miqt_exec_method_cQQmlComponent_beginCreate
+  vtbl[].vtbl.completeCreate = miqt_exec_method_cQQmlComponent_completeCreate
+  vtbl[].vtbl.event = miqt_exec_method_cQQmlComponent_event
+  vtbl[].vtbl.eventFilter = miqt_exec_method_cQQmlComponent_eventFilter
+  vtbl[].vtbl.timerEvent = miqt_exec_method_cQQmlComponent_timerEvent
+  vtbl[].vtbl.childEvent = miqt_exec_method_cQQmlComponent_childEvent
+  vtbl[].vtbl.customEvent = miqt_exec_method_cQQmlComponent_customEvent
+  vtbl[].vtbl.connectNotify = miqt_exec_method_cQQmlComponent_connectNotify
+  vtbl[].vtbl.disconnectNotify = miqt_exec_method_cQQmlComponent_disconnectNotify
+  if vtbl[].h != nil: delete(move(vtbl[]))
+  vtbl[].h = fcQQmlComponent_new3(addr(vtbl[].vtbl), param1.h, struct_miqt_string(data: fileName, len: csize_t(len(fileName))))
+  vtbl[].owned = true
+
+proc create*(T: type gen_qqmlcomponent_types.QQmlComponent,
+    param1: gen_qqmlengine_types.QQmlEngine, fileName: string, mode: cint,
+    vtbl: VirtualQQmlComponent) =
+
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQQmlComponentVTable, _: ptr cQQmlComponent) {.cdecl.} =
+    let vtbl = cast[ptr typeof(VirtualQQmlComponent()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQQmlComponent, vtbl)))
+    vtbl[].h = nil
+    vtbl[].owned = false
+  vtbl[].vtbl.metaObject = miqt_exec_method_cQQmlComponent_metaObject
+  vtbl[].vtbl.metacast = miqt_exec_method_cQQmlComponent_metacast
+  vtbl[].vtbl.metacall = miqt_exec_method_cQQmlComponent_metacall
+  vtbl[].vtbl.create = miqt_exec_method_cQQmlComponent_create
+  vtbl[].vtbl.beginCreate = miqt_exec_method_cQQmlComponent_beginCreate
+  vtbl[].vtbl.completeCreate = miqt_exec_method_cQQmlComponent_completeCreate
+  vtbl[].vtbl.event = miqt_exec_method_cQQmlComponent_event
+  vtbl[].vtbl.eventFilter = miqt_exec_method_cQQmlComponent_eventFilter
+  vtbl[].vtbl.timerEvent = miqt_exec_method_cQQmlComponent_timerEvent
+  vtbl[].vtbl.childEvent = miqt_exec_method_cQQmlComponent_childEvent
+  vtbl[].vtbl.customEvent = miqt_exec_method_cQQmlComponent_customEvent
+  vtbl[].vtbl.connectNotify = miqt_exec_method_cQQmlComponent_connectNotify
+  vtbl[].vtbl.disconnectNotify = miqt_exec_method_cQQmlComponent_disconnectNotify
+  if vtbl[].h != nil: delete(move(vtbl[]))
+  vtbl[].h = fcQQmlComponent_new4(addr(vtbl[].vtbl), param1.h, struct_miqt_string(data: fileName, len: csize_t(len(fileName))), cint(mode))
+  vtbl[].owned = true
+
+proc create*(T: type gen_qqmlcomponent_types.QQmlComponent,
+    param1: gen_qqmlengine_types.QQmlEngine, url: gen_qurl_types.QUrl,
+    vtbl: VirtualQQmlComponent) =
+
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQQmlComponentVTable, _: ptr cQQmlComponent) {.cdecl.} =
+    let vtbl = cast[ptr typeof(VirtualQQmlComponent()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQQmlComponent, vtbl)))
+    vtbl[].h = nil
+    vtbl[].owned = false
+  vtbl[].vtbl.metaObject = miqt_exec_method_cQQmlComponent_metaObject
+  vtbl[].vtbl.metacast = miqt_exec_method_cQQmlComponent_metacast
+  vtbl[].vtbl.metacall = miqt_exec_method_cQQmlComponent_metacall
+  vtbl[].vtbl.create = miqt_exec_method_cQQmlComponent_create
+  vtbl[].vtbl.beginCreate = miqt_exec_method_cQQmlComponent_beginCreate
+  vtbl[].vtbl.completeCreate = miqt_exec_method_cQQmlComponent_completeCreate
+  vtbl[].vtbl.event = miqt_exec_method_cQQmlComponent_event
+  vtbl[].vtbl.eventFilter = miqt_exec_method_cQQmlComponent_eventFilter
+  vtbl[].vtbl.timerEvent = miqt_exec_method_cQQmlComponent_timerEvent
+  vtbl[].vtbl.childEvent = miqt_exec_method_cQQmlComponent_childEvent
+  vtbl[].vtbl.customEvent = miqt_exec_method_cQQmlComponent_customEvent
+  vtbl[].vtbl.connectNotify = miqt_exec_method_cQQmlComponent_connectNotify
+  vtbl[].vtbl.disconnectNotify = miqt_exec_method_cQQmlComponent_disconnectNotify
+  if vtbl[].h != nil: delete(move(vtbl[]))
+  vtbl[].h = fcQQmlComponent_new5(addr(vtbl[].vtbl), param1.h, url.h)
+  vtbl[].owned = true
+
+proc create*(T: type gen_qqmlcomponent_types.QQmlComponent,
+    param1: gen_qqmlengine_types.QQmlEngine, url: gen_qurl_types.QUrl, mode: cint,
+    vtbl: VirtualQQmlComponent) =
+
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQQmlComponentVTable, _: ptr cQQmlComponent) {.cdecl.} =
+    let vtbl = cast[ptr typeof(VirtualQQmlComponent()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQQmlComponent, vtbl)))
+    vtbl[].h = nil
+    vtbl[].owned = false
+  vtbl[].vtbl.metaObject = miqt_exec_method_cQQmlComponent_metaObject
+  vtbl[].vtbl.metacast = miqt_exec_method_cQQmlComponent_metacast
+  vtbl[].vtbl.metacall = miqt_exec_method_cQQmlComponent_metacall
+  vtbl[].vtbl.create = miqt_exec_method_cQQmlComponent_create
+  vtbl[].vtbl.beginCreate = miqt_exec_method_cQQmlComponent_beginCreate
+  vtbl[].vtbl.completeCreate = miqt_exec_method_cQQmlComponent_completeCreate
+  vtbl[].vtbl.event = miqt_exec_method_cQQmlComponent_event
+  vtbl[].vtbl.eventFilter = miqt_exec_method_cQQmlComponent_eventFilter
+  vtbl[].vtbl.timerEvent = miqt_exec_method_cQQmlComponent_timerEvent
+  vtbl[].vtbl.childEvent = miqt_exec_method_cQQmlComponent_childEvent
+  vtbl[].vtbl.customEvent = miqt_exec_method_cQQmlComponent_customEvent
+  vtbl[].vtbl.connectNotify = miqt_exec_method_cQQmlComponent_connectNotify
+  vtbl[].vtbl.disconnectNotify = miqt_exec_method_cQQmlComponent_disconnectNotify
+  if vtbl[].h != nil: delete(move(vtbl[]))
+  vtbl[].h = fcQQmlComponent_new6(addr(vtbl[].vtbl), param1.h, url.h, cint(mode))
+  vtbl[].owned = true
+
+proc create*(T: type gen_qqmlcomponent_types.QQmlComponent,
+    parent: gen_qobject_types.QObject,
+    vtbl: VirtualQQmlComponent) =
+
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQQmlComponentVTable, _: ptr cQQmlComponent) {.cdecl.} =
+    let vtbl = cast[ptr typeof(VirtualQQmlComponent()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQQmlComponent, vtbl)))
+    vtbl[].h = nil
+    vtbl[].owned = false
+  vtbl[].vtbl.metaObject = miqt_exec_method_cQQmlComponent_metaObject
+  vtbl[].vtbl.metacast = miqt_exec_method_cQQmlComponent_metacast
+  vtbl[].vtbl.metacall = miqt_exec_method_cQQmlComponent_metacall
+  vtbl[].vtbl.create = miqt_exec_method_cQQmlComponent_create
+  vtbl[].vtbl.beginCreate = miqt_exec_method_cQQmlComponent_beginCreate
+  vtbl[].vtbl.completeCreate = miqt_exec_method_cQQmlComponent_completeCreate
+  vtbl[].vtbl.event = miqt_exec_method_cQQmlComponent_event
+  vtbl[].vtbl.eventFilter = miqt_exec_method_cQQmlComponent_eventFilter
+  vtbl[].vtbl.timerEvent = miqt_exec_method_cQQmlComponent_timerEvent
+  vtbl[].vtbl.childEvent = miqt_exec_method_cQQmlComponent_childEvent
+  vtbl[].vtbl.customEvent = miqt_exec_method_cQQmlComponent_customEvent
+  vtbl[].vtbl.connectNotify = miqt_exec_method_cQQmlComponent_connectNotify
+  vtbl[].vtbl.disconnectNotify = miqt_exec_method_cQQmlComponent_disconnectNotify
+  if vtbl[].h != nil: delete(move(vtbl[]))
+  vtbl[].h = fcQQmlComponent_new7(addr(vtbl[].vtbl), parent.h)
+  vtbl[].owned = true
+
+proc create*(T: type gen_qqmlcomponent_types.QQmlComponent,
+    param1: gen_qqmlengine_types.QQmlEngine, parent: gen_qobject_types.QObject,
+    vtbl: VirtualQQmlComponent) =
+
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQQmlComponentVTable, _: ptr cQQmlComponent) {.cdecl.} =
+    let vtbl = cast[ptr typeof(VirtualQQmlComponent()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQQmlComponent, vtbl)))
+    vtbl[].h = nil
+    vtbl[].owned = false
+  vtbl[].vtbl.metaObject = miqt_exec_method_cQQmlComponent_metaObject
+  vtbl[].vtbl.metacast = miqt_exec_method_cQQmlComponent_metacast
+  vtbl[].vtbl.metacall = miqt_exec_method_cQQmlComponent_metacall
+  vtbl[].vtbl.create = miqt_exec_method_cQQmlComponent_create
+  vtbl[].vtbl.beginCreate = miqt_exec_method_cQQmlComponent_beginCreate
+  vtbl[].vtbl.completeCreate = miqt_exec_method_cQQmlComponent_completeCreate
+  vtbl[].vtbl.event = miqt_exec_method_cQQmlComponent_event
+  vtbl[].vtbl.eventFilter = miqt_exec_method_cQQmlComponent_eventFilter
+  vtbl[].vtbl.timerEvent = miqt_exec_method_cQQmlComponent_timerEvent
+  vtbl[].vtbl.childEvent = miqt_exec_method_cQQmlComponent_childEvent
+  vtbl[].vtbl.customEvent = miqt_exec_method_cQQmlComponent_customEvent
+  vtbl[].vtbl.connectNotify = miqt_exec_method_cQQmlComponent_connectNotify
+  vtbl[].vtbl.disconnectNotify = miqt_exec_method_cQQmlComponent_disconnectNotify
+  if vtbl[].h != nil: delete(move(vtbl[]))
+  vtbl[].h = fcQQmlComponent_new8(addr(vtbl[].vtbl), param1.h, parent.h)
+  vtbl[].owned = true
+
+proc create*(T: type gen_qqmlcomponent_types.QQmlComponent,
+    param1: gen_qqmlengine_types.QQmlEngine, fileName: string, parent: gen_qobject_types.QObject,
+    vtbl: VirtualQQmlComponent) =
+
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQQmlComponentVTable, _: ptr cQQmlComponent) {.cdecl.} =
+    let vtbl = cast[ptr typeof(VirtualQQmlComponent()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQQmlComponent, vtbl)))
+    vtbl[].h = nil
+    vtbl[].owned = false
+  vtbl[].vtbl.metaObject = miqt_exec_method_cQQmlComponent_metaObject
+  vtbl[].vtbl.metacast = miqt_exec_method_cQQmlComponent_metacast
+  vtbl[].vtbl.metacall = miqt_exec_method_cQQmlComponent_metacall
+  vtbl[].vtbl.create = miqt_exec_method_cQQmlComponent_create
+  vtbl[].vtbl.beginCreate = miqt_exec_method_cQQmlComponent_beginCreate
+  vtbl[].vtbl.completeCreate = miqt_exec_method_cQQmlComponent_completeCreate
+  vtbl[].vtbl.event = miqt_exec_method_cQQmlComponent_event
+  vtbl[].vtbl.eventFilter = miqt_exec_method_cQQmlComponent_eventFilter
+  vtbl[].vtbl.timerEvent = miqt_exec_method_cQQmlComponent_timerEvent
+  vtbl[].vtbl.childEvent = miqt_exec_method_cQQmlComponent_childEvent
+  vtbl[].vtbl.customEvent = miqt_exec_method_cQQmlComponent_customEvent
+  vtbl[].vtbl.connectNotify = miqt_exec_method_cQQmlComponent_connectNotify
+  vtbl[].vtbl.disconnectNotify = miqt_exec_method_cQQmlComponent_disconnectNotify
+  if vtbl[].h != nil: delete(move(vtbl[]))
+  vtbl[].h = fcQQmlComponent_new9(addr(vtbl[].vtbl), param1.h, struct_miqt_string(data: fileName, len: csize_t(len(fileName))), parent.h)
+  vtbl[].owned = true
+
+proc create*(T: type gen_qqmlcomponent_types.QQmlComponent,
+    param1: gen_qqmlengine_types.QQmlEngine, fileName: string, mode: cint, parent: gen_qobject_types.QObject,
+    vtbl: VirtualQQmlComponent) =
+
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQQmlComponentVTable, _: ptr cQQmlComponent) {.cdecl.} =
+    let vtbl = cast[ptr typeof(VirtualQQmlComponent()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQQmlComponent, vtbl)))
+    vtbl[].h = nil
+    vtbl[].owned = false
+  vtbl[].vtbl.metaObject = miqt_exec_method_cQQmlComponent_metaObject
+  vtbl[].vtbl.metacast = miqt_exec_method_cQQmlComponent_metacast
+  vtbl[].vtbl.metacall = miqt_exec_method_cQQmlComponent_metacall
+  vtbl[].vtbl.create = miqt_exec_method_cQQmlComponent_create
+  vtbl[].vtbl.beginCreate = miqt_exec_method_cQQmlComponent_beginCreate
+  vtbl[].vtbl.completeCreate = miqt_exec_method_cQQmlComponent_completeCreate
+  vtbl[].vtbl.event = miqt_exec_method_cQQmlComponent_event
+  vtbl[].vtbl.eventFilter = miqt_exec_method_cQQmlComponent_eventFilter
+  vtbl[].vtbl.timerEvent = miqt_exec_method_cQQmlComponent_timerEvent
+  vtbl[].vtbl.childEvent = miqt_exec_method_cQQmlComponent_childEvent
+  vtbl[].vtbl.customEvent = miqt_exec_method_cQQmlComponent_customEvent
+  vtbl[].vtbl.connectNotify = miqt_exec_method_cQQmlComponent_connectNotify
+  vtbl[].vtbl.disconnectNotify = miqt_exec_method_cQQmlComponent_disconnectNotify
+  if vtbl[].h != nil: delete(move(vtbl[]))
+  vtbl[].h = fcQQmlComponent_new10(addr(vtbl[].vtbl), param1.h, struct_miqt_string(data: fileName, len: csize_t(len(fileName))), cint(mode), parent.h)
+  vtbl[].owned = true
+
+proc create*(T: type gen_qqmlcomponent_types.QQmlComponent,
+    param1: gen_qqmlengine_types.QQmlEngine, url: gen_qurl_types.QUrl, parent: gen_qobject_types.QObject,
+    vtbl: VirtualQQmlComponent) =
+
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQQmlComponentVTable, _: ptr cQQmlComponent) {.cdecl.} =
+    let vtbl = cast[ptr typeof(VirtualQQmlComponent()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQQmlComponent, vtbl)))
+    vtbl[].h = nil
+    vtbl[].owned = false
+  vtbl[].vtbl.metaObject = miqt_exec_method_cQQmlComponent_metaObject
+  vtbl[].vtbl.metacast = miqt_exec_method_cQQmlComponent_metacast
+  vtbl[].vtbl.metacall = miqt_exec_method_cQQmlComponent_metacall
+  vtbl[].vtbl.create = miqt_exec_method_cQQmlComponent_create
+  vtbl[].vtbl.beginCreate = miqt_exec_method_cQQmlComponent_beginCreate
+  vtbl[].vtbl.completeCreate = miqt_exec_method_cQQmlComponent_completeCreate
+  vtbl[].vtbl.event = miqt_exec_method_cQQmlComponent_event
+  vtbl[].vtbl.eventFilter = miqt_exec_method_cQQmlComponent_eventFilter
+  vtbl[].vtbl.timerEvent = miqt_exec_method_cQQmlComponent_timerEvent
+  vtbl[].vtbl.childEvent = miqt_exec_method_cQQmlComponent_childEvent
+  vtbl[].vtbl.customEvent = miqt_exec_method_cQQmlComponent_customEvent
+  vtbl[].vtbl.connectNotify = miqt_exec_method_cQQmlComponent_connectNotify
+  vtbl[].vtbl.disconnectNotify = miqt_exec_method_cQQmlComponent_disconnectNotify
+  if vtbl[].h != nil: delete(move(vtbl[]))
+  vtbl[].h = fcQQmlComponent_new11(addr(vtbl[].vtbl), param1.h, url.h, parent.h)
+  vtbl[].owned = true
+
+proc create*(T: type gen_qqmlcomponent_types.QQmlComponent,
+    param1: gen_qqmlengine_types.QQmlEngine, url: gen_qurl_types.QUrl, mode: cint, parent: gen_qobject_types.QObject,
+    vtbl: VirtualQQmlComponent) =
+
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQQmlComponentVTable, _: ptr cQQmlComponent) {.cdecl.} =
+    let vtbl = cast[ptr typeof(VirtualQQmlComponent()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQQmlComponent, vtbl)))
+    vtbl[].h = nil
+    vtbl[].owned = false
+  vtbl[].vtbl.metaObject = miqt_exec_method_cQQmlComponent_metaObject
+  vtbl[].vtbl.metacast = miqt_exec_method_cQQmlComponent_metacast
+  vtbl[].vtbl.metacall = miqt_exec_method_cQQmlComponent_metacall
+  vtbl[].vtbl.create = miqt_exec_method_cQQmlComponent_create
+  vtbl[].vtbl.beginCreate = miqt_exec_method_cQQmlComponent_beginCreate
+  vtbl[].vtbl.completeCreate = miqt_exec_method_cQQmlComponent_completeCreate
+  vtbl[].vtbl.event = miqt_exec_method_cQQmlComponent_event
+  vtbl[].vtbl.eventFilter = miqt_exec_method_cQQmlComponent_eventFilter
+  vtbl[].vtbl.timerEvent = miqt_exec_method_cQQmlComponent_timerEvent
+  vtbl[].vtbl.childEvent = miqt_exec_method_cQQmlComponent_childEvent
+  vtbl[].vtbl.customEvent = miqt_exec_method_cQQmlComponent_customEvent
+  vtbl[].vtbl.connectNotify = miqt_exec_method_cQQmlComponent_connectNotify
+  vtbl[].vtbl.disconnectNotify = miqt_exec_method_cQQmlComponent_disconnectNotify
+  if vtbl[].h != nil: delete(move(vtbl[]))
+  vtbl[].h = fcQQmlComponent_new12(addr(vtbl[].vtbl), param1.h, url.h, cint(mode), parent.h)
+  vtbl[].owned = true
 
 proc staticMetaObject*(_: type gen_qqmlcomponent_types.QQmlComponent): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQQmlComponent_staticMetaObject())
-proc delete*(self: gen_qqmlcomponent_types.QQmlComponent) =
-  fcQQmlComponent_delete(self.h)

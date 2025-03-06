@@ -30,7 +30,7 @@ func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
     else:
       copyMem(addr result[0], unsafeAddr v[0], v.len)
 
-const cflags = gorge("pkg-config --cflags Qt5WebEngineCore")  & " -fPIC"
+const cflags = gorge("pkg-config --cflags Qt5WebEngineCore") & " -fPIC"
 {.compile("gen_qwebengineurlrequestjob.cpp", cflags).}
 
 
@@ -81,10 +81,9 @@ proc fcQWebEngineUrlRequestJob_protectedbase_senderSignalIndex(self: pointer, ):
 proc fcQWebEngineUrlRequestJob_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QWebEngineUrlRequestJob_protectedbase_receivers".}
 proc fcQWebEngineUrlRequestJob_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QWebEngineUrlRequestJob_protectedbase_isSignalConnected".}
 proc fcQWebEngineUrlRequestJob_staticMetaObject(): pointer {.importc: "QWebEngineUrlRequestJob_staticMetaObject".}
-proc fcQWebEngineUrlRequestJob_delete(self: pointer) {.importc: "QWebEngineUrlRequestJob_delete".}
 
 proc metaObject*(self: gen_qwebengineurlrequestjob_types.QWebEngineUrlRequestJob, ): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQWebEngineUrlRequestJob_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQWebEngineUrlRequestJob_metaObject(self.h), owned: false)
 
 proc metacast*(self: gen_qwebengineurlrequestjob_types.QWebEngineUrlRequestJob, param1: cstring): pointer =
   fcQWebEngineUrlRequestJob_metacast(self.h, param1)
@@ -105,7 +104,7 @@ proc trUtf8*(_: type gen_qwebengineurlrequestjob_types.QWebEngineUrlRequestJob, 
   vx_ret
 
 proc requestUrl*(self: gen_qwebengineurlrequestjob_types.QWebEngineUrlRequestJob, ): gen_qurl_types.QUrl =
-  gen_qurl_types.QUrl(h: fcQWebEngineUrlRequestJob_requestUrl(self.h))
+  gen_qurl_types.QUrl(h: fcQWebEngineUrlRequestJob_requestUrl(self.h), owned: true)
 
 proc requestMethod*(self: gen_qwebengineurlrequestjob_types.QWebEngineUrlRequestJob, ): seq[byte] =
   var v_bytearray = fcQWebEngineUrlRequestJob_requestMethod(self.h)
@@ -114,7 +113,7 @@ proc requestMethod*(self: gen_qwebengineurlrequestjob_types.QWebEngineUrlRequest
   vx_ret
 
 proc initiator*(self: gen_qwebengineurlrequestjob_types.QWebEngineUrlRequestJob, ): gen_qurl_types.QUrl =
-  gen_qurl_types.QUrl(h: fcQWebEngineUrlRequestJob_initiator(self.h))
+  gen_qurl_types.QUrl(h: fcQWebEngineUrlRequestJob_initiator(self.h), owned: true)
 
 proc reply*(self: gen_qwebengineurlrequestjob_types.QWebEngineUrlRequestJob, contentType: seq[byte], device: gen_qiodevice_types.QIODevice): void =
   fcQWebEngineUrlRequestJob_reply(self.h, struct_miqt_string(data: cast[cstring](if len(contentType) == 0: nil else: unsafeAddr contentType[0]), len: csize_t(len(contentType))), device.h)
@@ -150,7 +149,7 @@ proc trUtf8*(_: type gen_qwebengineurlrequestjob_types.QWebEngineUrlRequestJob, 
   vx_ret
 
 proc sender*(self: gen_qwebengineurlrequestjob_types.QWebEngineUrlRequestJob, ): gen_qobject_types.QObject =
-  gen_qobject_types.QObject(h: fcQWebEngineUrlRequestJob_protectedbase_sender(self.h))
+  gen_qobject_types.QObject(h: fcQWebEngineUrlRequestJob_protectedbase_sender(self.h), owned: false)
 
 proc senderSignalIndex*(self: gen_qwebengineurlrequestjob_types.QWebEngineUrlRequestJob, ): cint =
   fcQWebEngineUrlRequestJob_protectedbase_senderSignalIndex(self.h)
@@ -163,5 +162,3 @@ proc isSignalConnected*(self: gen_qwebengineurlrequestjob_types.QWebEngineUrlReq
 
 proc staticMetaObject*(_: type gen_qwebengineurlrequestjob_types.QWebEngineUrlRequestJob): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQWebEngineUrlRequestJob_staticMetaObject())
-proc delete*(self: gen_qwebengineurlrequestjob_types.QWebEngineUrlRequestJob) =
-  fcQWebEngineUrlRequestJob_delete(self.h)

@@ -30,9 +30,6 @@ func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
     else:
       copyMem(addr result[0], unsafeAddr v[0], v.len)
 
-const cflags = gorge("pkg-config --cflags Qt5Network")  & " -fPIC"
-{.compile("gen_qauthenticator.cpp", cflags).}
-
 
 import ./gen_qauthenticator_types
 export gen_qauthenticator_types
@@ -61,7 +58,6 @@ proc fcQAuthenticator_isNull(self: pointer, ): bool {.importc: "QAuthenticator_i
 proc fcQAuthenticator_detach(self: pointer, ): void {.importc: "QAuthenticator_detach".}
 proc fcQAuthenticator_new(): ptr cQAuthenticator {.importc: "QAuthenticator_new".}
 proc fcQAuthenticator_new2(other: pointer): ptr cQAuthenticator {.importc: "QAuthenticator_new2".}
-proc fcQAuthenticator_delete(self: pointer) {.importc: "QAuthenticator_delete".}
 
 proc operatorAssign*(self: gen_qauthenticator_types.QAuthenticator, other: gen_qauthenticator_types.QAuthenticator): void =
   fcQAuthenticator_operatorAssign(self.h, other.h)
@@ -100,7 +96,7 @@ proc setRealm*(self: gen_qauthenticator_types.QAuthenticator, realm: string): vo
   fcQAuthenticator_setRealm(self.h, struct_miqt_string(data: realm, len: csize_t(len(realm))))
 
 proc option*(self: gen_qauthenticator_types.QAuthenticator, opt: string): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQAuthenticator_option(self.h, struct_miqt_string(data: opt, len: csize_t(len(opt)))))
+  gen_qvariant_types.QVariant(h: fcQAuthenticator_option(self.h, struct_miqt_string(data: opt, len: csize_t(len(opt)))), owned: true)
 
 proc options*(self: gen_qauthenticator_types.QAuthenticator, ): Table[string,gen_qvariant_types.QVariant] =
   var v_mm = fcQAuthenticator_options(self.h)
@@ -113,7 +109,7 @@ proc options*(self: gen_qauthenticator_types.QAuthenticator, ): Table[string,gen
     c_free(vx_hashkey_ms.data)
     var v_entry_Key = vx_hashkeyx_ret
 
-    var v_entry_Value = gen_qvariant_types.QVariant(h: v_Values[i])
+    var v_entry_Value = gen_qvariant_types.QVariant(h: v_Values[i], owned: true)
 
     vx_ret[v_entry_Key] = v_entry_Value
   c_free(v_mm.keys)
@@ -130,11 +126,9 @@ proc detach*(self: gen_qauthenticator_types.QAuthenticator, ): void =
   fcQAuthenticator_detach(self.h)
 
 proc create*(T: type gen_qauthenticator_types.QAuthenticator): gen_qauthenticator_types.QAuthenticator =
-  gen_qauthenticator_types.QAuthenticator(h: fcQAuthenticator_new())
+  gen_qauthenticator_types.QAuthenticator(h: fcQAuthenticator_new(), owned: true)
 
 proc create*(T: type gen_qauthenticator_types.QAuthenticator,
     other: gen_qauthenticator_types.QAuthenticator): gen_qauthenticator_types.QAuthenticator =
-  gen_qauthenticator_types.QAuthenticator(h: fcQAuthenticator_new2(other.h))
+  gen_qauthenticator_types.QAuthenticator(h: fcQAuthenticator_new2(other.h), owned: true)
 
-proc delete*(self: gen_qauthenticator_types.QAuthenticator) =
-  fcQAuthenticator_delete(self.h)

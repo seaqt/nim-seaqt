@@ -30,9 +30,6 @@ func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
     else:
       copyMem(addr result[0], unsafeAddr v[0], v.len)
 
-const cflags = gorge("pkg-config --cflags Qt5Gui")  & " -fPIC"
-{.compile("gen_qpagesize.cpp", cflags).}
-
 
 type QPageSizePageSizeIdEnum* = distinct cint
 template A4*(_: type QPageSizePageSizeIdEnum): untyped = 0
@@ -229,7 +226,6 @@ proc fcQPageSize_new6(pointSize: pointer, name: struct_miqt_string): ptr cQPageS
 proc fcQPageSize_new7(pointSize: pointer, name: struct_miqt_string, matchPolicy: cint): ptr cQPageSize {.importc: "QPageSize_new7".}
 proc fcQPageSize_new8(size: pointer, units: cint, name: struct_miqt_string): ptr cQPageSize {.importc: "QPageSize_new8".}
 proc fcQPageSize_new9(size: pointer, units: cint, name: struct_miqt_string, matchPolicy: cint): ptr cQPageSize {.importc: "QPageSize_new9".}
-proc fcQPageSize_delete(self: pointer) {.importc: "QPageSize_delete".}
 
 proc operatorAssign*(self: gen_qpagesize_types.QPageSize, other: gen_qpagesize_types.QPageSize): void =
   fcQPageSize_operatorAssign(self.h, other.h)
@@ -262,28 +258,28 @@ proc windowsId*(self: gen_qpagesize_types.QPageSize, ): cint =
   fcQPageSize_windowsId(self.h)
 
 proc definitionSize*(self: gen_qpagesize_types.QPageSize, ): gen_qsize_types.QSizeF =
-  gen_qsize_types.QSizeF(h: fcQPageSize_definitionSize(self.h))
+  gen_qsize_types.QSizeF(h: fcQPageSize_definitionSize(self.h), owned: true)
 
 proc definitionUnits*(self: gen_qpagesize_types.QPageSize, ): cint =
   cint(fcQPageSize_definitionUnits(self.h))
 
 proc size*(self: gen_qpagesize_types.QPageSize, units: cint): gen_qsize_types.QSizeF =
-  gen_qsize_types.QSizeF(h: fcQPageSize_size(self.h, cint(units)))
+  gen_qsize_types.QSizeF(h: fcQPageSize_size(self.h, cint(units)), owned: true)
 
 proc sizePoints*(self: gen_qpagesize_types.QPageSize, ): gen_qsize_types.QSize =
-  gen_qsize_types.QSize(h: fcQPageSize_sizePoints(self.h))
+  gen_qsize_types.QSize(h: fcQPageSize_sizePoints(self.h), owned: true)
 
 proc sizePixels*(self: gen_qpagesize_types.QPageSize, resolution: cint): gen_qsize_types.QSize =
-  gen_qsize_types.QSize(h: fcQPageSize_sizePixels(self.h, resolution))
+  gen_qsize_types.QSize(h: fcQPageSize_sizePixels(self.h, resolution), owned: true)
 
 proc rect*(self: gen_qpagesize_types.QPageSize, units: cint): gen_qrect_types.QRectF =
-  gen_qrect_types.QRectF(h: fcQPageSize_rect(self.h, cint(units)))
+  gen_qrect_types.QRectF(h: fcQPageSize_rect(self.h, cint(units)), owned: true)
 
 proc rectPoints*(self: gen_qpagesize_types.QPageSize, ): gen_qrect_types.QRect =
-  gen_qrect_types.QRect(h: fcQPageSize_rectPoints(self.h))
+  gen_qrect_types.QRect(h: fcQPageSize_rectPoints(self.h), owned: true)
 
 proc rectPixels*(self: gen_qpagesize_types.QPageSize, resolution: cint): gen_qrect_types.QRect =
-  gen_qrect_types.QRect(h: fcQPageSize_rectPixels(self.h, resolution))
+  gen_qrect_types.QRect(h: fcQPageSize_rectPixels(self.h, resolution), owned: true)
 
 proc key*(_: type gen_qpagesize_types.QPageSize, pageSizeId: cint): string =
   let v_ms = fcQPageSize_keyWithPageSizeId(cint(pageSizeId))
@@ -310,19 +306,19 @@ proc windowsId*(_: type gen_qpagesize_types.QPageSize, pageSizeId: cint): cint =
   fcQPageSize_windowsIdWithPageSizeId(cint(pageSizeId))
 
 proc definitionSize*(_: type gen_qpagesize_types.QPageSize, pageSizeId: cint): gen_qsize_types.QSizeF =
-  gen_qsize_types.QSizeF(h: fcQPageSize_definitionSizeWithPageSizeId(cint(pageSizeId)))
+  gen_qsize_types.QSizeF(h: fcQPageSize_definitionSizeWithPageSizeId(cint(pageSizeId)), owned: true)
 
 proc definitionUnits*(_: type gen_qpagesize_types.QPageSize, pageSizeId: cint): cint =
   cint(fcQPageSize_definitionUnitsWithPageSizeId(cint(pageSizeId)))
 
 proc size*(_: type gen_qpagesize_types.QPageSize, pageSizeId: cint, units: cint): gen_qsize_types.QSizeF =
-  gen_qsize_types.QSizeF(h: fcQPageSize_size2(cint(pageSizeId), cint(units)))
+  gen_qsize_types.QSizeF(h: fcQPageSize_size2(cint(pageSizeId), cint(units)), owned: true)
 
 proc sizePoints*(_: type gen_qpagesize_types.QPageSize, pageSizeId: cint): gen_qsize_types.QSize =
-  gen_qsize_types.QSize(h: fcQPageSize_sizePointsWithPageSizeId(cint(pageSizeId)))
+  gen_qsize_types.QSize(h: fcQPageSize_sizePointsWithPageSizeId(cint(pageSizeId)), owned: true)
 
 proc sizePixels*(_: type gen_qpagesize_types.QPageSize, pageSizeId: cint, resolution: cint): gen_qsize_types.QSize =
-  gen_qsize_types.QSize(h: fcQPageSize_sizePixels2(cint(pageSizeId), resolution))
+  gen_qsize_types.QSize(h: fcQPageSize_sizePixels2(cint(pageSizeId), resolution), owned: true)
 
 proc id*(_: type gen_qpagesize_types.QPageSize, pointSize: gen_qsize_types.QSize, matchPolicy: cint): cint =
   cint(fcQPageSize_id22(pointSize.h, cint(matchPolicy)))
@@ -331,39 +327,37 @@ proc id*(_: type gen_qpagesize_types.QPageSize, size: gen_qsize_types.QSizeF, un
   cint(fcQPageSize_id3(size.h, cint(units), cint(matchPolicy)))
 
 proc create*(T: type gen_qpagesize_types.QPageSize): gen_qpagesize_types.QPageSize =
-  gen_qpagesize_types.QPageSize(h: fcQPageSize_new())
+  gen_qpagesize_types.QPageSize(h: fcQPageSize_new(), owned: true)
 
 proc create*(T: type gen_qpagesize_types.QPageSize,
     pageSizeId: cint): gen_qpagesize_types.QPageSize =
-  gen_qpagesize_types.QPageSize(h: fcQPageSize_new2(cint(pageSizeId)))
+  gen_qpagesize_types.QPageSize(h: fcQPageSize_new2(cint(pageSizeId)), owned: true)
 
 proc create*(T: type gen_qpagesize_types.QPageSize,
     pointSize: gen_qsize_types.QSize): gen_qpagesize_types.QPageSize =
-  gen_qpagesize_types.QPageSize(h: fcQPageSize_new3(pointSize.h))
+  gen_qpagesize_types.QPageSize(h: fcQPageSize_new3(pointSize.h), owned: true)
 
 proc create*(T: type gen_qpagesize_types.QPageSize,
     size: gen_qsize_types.QSizeF, units: cint): gen_qpagesize_types.QPageSize =
-  gen_qpagesize_types.QPageSize(h: fcQPageSize_new4(size.h, cint(units)))
+  gen_qpagesize_types.QPageSize(h: fcQPageSize_new4(size.h, cint(units)), owned: true)
 
 proc create*(T: type gen_qpagesize_types.QPageSize,
     other: gen_qpagesize_types.QPageSize): gen_qpagesize_types.QPageSize =
-  gen_qpagesize_types.QPageSize(h: fcQPageSize_new5(other.h))
+  gen_qpagesize_types.QPageSize(h: fcQPageSize_new5(other.h), owned: true)
 
 proc create*(T: type gen_qpagesize_types.QPageSize,
     pointSize: gen_qsize_types.QSize, name: string): gen_qpagesize_types.QPageSize =
-  gen_qpagesize_types.QPageSize(h: fcQPageSize_new6(pointSize.h, struct_miqt_string(data: name, len: csize_t(len(name)))))
+  gen_qpagesize_types.QPageSize(h: fcQPageSize_new6(pointSize.h, struct_miqt_string(data: name, len: csize_t(len(name)))), owned: true)
 
 proc create*(T: type gen_qpagesize_types.QPageSize,
     pointSize: gen_qsize_types.QSize, name: string, matchPolicy: cint): gen_qpagesize_types.QPageSize =
-  gen_qpagesize_types.QPageSize(h: fcQPageSize_new7(pointSize.h, struct_miqt_string(data: name, len: csize_t(len(name))), cint(matchPolicy)))
+  gen_qpagesize_types.QPageSize(h: fcQPageSize_new7(pointSize.h, struct_miqt_string(data: name, len: csize_t(len(name))), cint(matchPolicy)), owned: true)
 
 proc create*(T: type gen_qpagesize_types.QPageSize,
     size: gen_qsize_types.QSizeF, units: cint, name: string): gen_qpagesize_types.QPageSize =
-  gen_qpagesize_types.QPageSize(h: fcQPageSize_new8(size.h, cint(units), struct_miqt_string(data: name, len: csize_t(len(name)))))
+  gen_qpagesize_types.QPageSize(h: fcQPageSize_new8(size.h, cint(units), struct_miqt_string(data: name, len: csize_t(len(name)))), owned: true)
 
 proc create*(T: type gen_qpagesize_types.QPageSize,
     size: gen_qsize_types.QSizeF, units: cint, name: string, matchPolicy: cint): gen_qpagesize_types.QPageSize =
-  gen_qpagesize_types.QPageSize(h: fcQPageSize_new9(size.h, cint(units), struct_miqt_string(data: name, len: csize_t(len(name))), cint(matchPolicy)))
+  gen_qpagesize_types.QPageSize(h: fcQPageSize_new9(size.h, cint(units), struct_miqt_string(data: name, len: csize_t(len(name))), cint(matchPolicy)), owned: true)
 
-proc delete*(self: gen_qpagesize_types.QPageSize) =
-  fcQPageSize_delete(self.h)

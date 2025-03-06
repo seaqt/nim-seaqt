@@ -30,7 +30,7 @@ func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
     else:
       copyMem(addr result[0], unsafeAddr v[0], v.len)
 
-const cflags = gorge("pkg-config --cflags Qt5Widgets")  & " -fPIC"
+const cflags = gorge("pkg-config --cflags Qt5Widgets") & " -fPIC"
 {.compile("gen_qgraphicsanchorlayout.cpp", cflags).}
 
 
@@ -80,7 +80,6 @@ proc fcQGraphicsAnchor_protectedbase_senderSignalIndex(self: pointer, ): cint {.
 proc fcQGraphicsAnchor_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QGraphicsAnchor_protectedbase_receivers".}
 proc fcQGraphicsAnchor_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QGraphicsAnchor_protectedbase_isSignalConnected".}
 proc fcQGraphicsAnchor_staticMetaObject(): pointer {.importc: "QGraphicsAnchor_staticMetaObject".}
-proc fcQGraphicsAnchor_delete(self: pointer) {.importc: "QGraphicsAnchor_delete".}
 proc fcQGraphicsAnchorLayout_addAnchor(self: pointer, firstItem: pointer, firstEdge: cint, secondItem: pointer, secondEdge: cint): pointer {.importc: "QGraphicsAnchorLayout_addAnchor".}
 proc fcQGraphicsAnchorLayout_anchor(self: pointer, firstItem: pointer, firstEdge: cint, secondItem: pointer, secondEdge: cint): pointer {.importc: "QGraphicsAnchorLayout_anchor".}
 proc fcQGraphicsAnchorLayout_addCornerAnchors(self: pointer, firstItem: pointer, firstCorner: cint, secondItem: pointer, secondCorner: cint): void {.importc: "QGraphicsAnchorLayout_addCornerAnchors".}
@@ -96,7 +95,7 @@ proc fcQGraphicsAnchorLayout_count(self: pointer, ): cint {.importc: "QGraphicsA
 proc fcQGraphicsAnchorLayout_itemAt(self: pointer, index: cint): pointer {.importc: "QGraphicsAnchorLayout_itemAt".}
 proc fcQGraphicsAnchorLayout_invalidate(self: pointer, ): void {.importc: "QGraphicsAnchorLayout_invalidate".}
 proc fcQGraphicsAnchorLayout_addAnchors3(self: pointer, firstItem: pointer, secondItem: pointer, orientations: cint): void {.importc: "QGraphicsAnchorLayout_addAnchors3".}
-type cQGraphicsAnchorLayoutVTable = object
+type cQGraphicsAnchorLayoutVTable {.pure.} = object
   destructor*: proc(vtbl: ptr cQGraphicsAnchorLayoutVTable, self: ptr cQGraphicsAnchorLayout) {.cdecl, raises:[], gcsafe.}
   removeAt*: proc(vtbl, self: pointer, index: cint): void {.cdecl, raises: [], gcsafe.}
   setGeometry*: proc(vtbl, self: pointer, rect: pointer): void {.cdecl, raises: [], gcsafe.}
@@ -121,10 +120,9 @@ proc fcQGraphicsAnchorLayout_protectedbase_setGraphicsItem(self: pointer, item: 
 proc fcQGraphicsAnchorLayout_protectedbase_setOwnedByLayout(self: pointer, ownedByLayout: bool): void {.importc: "QGraphicsAnchorLayout_protectedbase_setOwnedByLayout".}
 proc fcQGraphicsAnchorLayout_new(vtbl: pointer, ): ptr cQGraphicsAnchorLayout {.importc: "QGraphicsAnchorLayout_new".}
 proc fcQGraphicsAnchorLayout_new2(vtbl: pointer, parent: pointer): ptr cQGraphicsAnchorLayout {.importc: "QGraphicsAnchorLayout_new2".}
-proc fcQGraphicsAnchorLayout_delete(self: pointer) {.importc: "QGraphicsAnchorLayout_delete".}
 
 proc metaObject*(self: gen_qgraphicsanchorlayout_types.QGraphicsAnchor, ): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQGraphicsAnchor_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQGraphicsAnchor_metaObject(self.h), owned: false)
 
 proc metacast*(self: gen_qgraphicsanchorlayout_types.QGraphicsAnchor, param1: cstring): pointer =
   fcQGraphicsAnchor_metacast(self.h, param1)
@@ -184,7 +182,7 @@ proc trUtf8*(_: type gen_qgraphicsanchorlayout_types.QGraphicsAnchor, s: cstring
   vx_ret
 
 proc sender*(self: gen_qgraphicsanchorlayout_types.QGraphicsAnchor, ): gen_qobject_types.QObject =
-  gen_qobject_types.QObject(h: fcQGraphicsAnchor_protectedbase_sender(self.h))
+  gen_qobject_types.QObject(h: fcQGraphicsAnchor_protectedbase_sender(self.h), owned: false)
 
 proc senderSignalIndex*(self: gen_qgraphicsanchorlayout_types.QGraphicsAnchor, ): cint =
   fcQGraphicsAnchor_protectedbase_senderSignalIndex(self.h)
@@ -197,13 +195,11 @@ proc isSignalConnected*(self: gen_qgraphicsanchorlayout_types.QGraphicsAnchor, s
 
 proc staticMetaObject*(_: type gen_qgraphicsanchorlayout_types.QGraphicsAnchor): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQGraphicsAnchor_staticMetaObject())
-proc delete*(self: gen_qgraphicsanchorlayout_types.QGraphicsAnchor) =
-  fcQGraphicsAnchor_delete(self.h)
 proc addAnchor*(self: gen_qgraphicsanchorlayout_types.QGraphicsAnchorLayout, firstItem: gen_qgraphicslayoutitem_types.QGraphicsLayoutItem, firstEdge: cint, secondItem: gen_qgraphicslayoutitem_types.QGraphicsLayoutItem, secondEdge: cint): gen_qgraphicsanchorlayout_types.QGraphicsAnchor =
-  gen_qgraphicsanchorlayout_types.QGraphicsAnchor(h: fcQGraphicsAnchorLayout_addAnchor(self.h, firstItem.h, cint(firstEdge), secondItem.h, cint(secondEdge)))
+  gen_qgraphicsanchorlayout_types.QGraphicsAnchor(h: fcQGraphicsAnchorLayout_addAnchor(self.h, firstItem.h, cint(firstEdge), secondItem.h, cint(secondEdge)), owned: false)
 
 proc anchor*(self: gen_qgraphicsanchorlayout_types.QGraphicsAnchorLayout, firstItem: gen_qgraphicslayoutitem_types.QGraphicsLayoutItem, firstEdge: cint, secondItem: gen_qgraphicslayoutitem_types.QGraphicsLayoutItem, secondEdge: cint): gen_qgraphicsanchorlayout_types.QGraphicsAnchor =
-  gen_qgraphicsanchorlayout_types.QGraphicsAnchor(h: fcQGraphicsAnchorLayout_anchor(self.h, firstItem.h, cint(firstEdge), secondItem.h, cint(secondEdge)))
+  gen_qgraphicsanchorlayout_types.QGraphicsAnchor(h: fcQGraphicsAnchorLayout_anchor(self.h, firstItem.h, cint(firstEdge), secondItem.h, cint(secondEdge)), owned: false)
 
 proc addCornerAnchors*(self: gen_qgraphicsanchorlayout_types.QGraphicsAnchorLayout, firstItem: gen_qgraphicslayoutitem_types.QGraphicsLayoutItem, firstCorner: cint, secondItem: gen_qgraphicslayoutitem_types.QGraphicsLayoutItem, secondCorner: cint): void =
   fcQGraphicsAnchorLayout_addCornerAnchors(self.h, firstItem.h, cint(firstCorner), secondItem.h, cint(secondCorner))
@@ -236,7 +232,7 @@ proc count*(self: gen_qgraphicsanchorlayout_types.QGraphicsAnchorLayout, ): cint
   fcQGraphicsAnchorLayout_count(self.h)
 
 proc itemAt*(self: gen_qgraphicsanchorlayout_types.QGraphicsAnchorLayout, index: cint): gen_qgraphicslayoutitem_types.QGraphicsLayoutItem =
-  gen_qgraphicslayoutitem_types.QGraphicsLayoutItem(h: fcQGraphicsAnchorLayout_itemAt(self.h, index))
+  gen_qgraphicslayoutitem_types.QGraphicsLayoutItem(h: fcQGraphicsAnchorLayout_itemAt(self.h, index), owned: false)
 
 proc invalidate*(self: gen_qgraphicsanchorlayout_types.QGraphicsAnchorLayout, ): void =
   fcQGraphicsAnchorLayout_invalidate(self.h)
@@ -253,7 +249,7 @@ type QGraphicsAnchorLayoutsizeHintProc* = proc(self: QGraphicsAnchorLayout, whic
 type QGraphicsAnchorLayoutgetContentsMarginsProc* = proc(self: QGraphicsAnchorLayout, left: ptr float64, top: ptr float64, right: ptr float64, bottom: ptr float64): void {.raises: [], gcsafe.}
 type QGraphicsAnchorLayoutupdateGeometryProc* = proc(self: QGraphicsAnchorLayout): void {.raises: [], gcsafe.}
 type QGraphicsAnchorLayoutwidgetEventProc* = proc(self: QGraphicsAnchorLayout, e: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
-type QGraphicsAnchorLayoutVTable* = object
+type QGraphicsAnchorLayoutVTable* {.inheritable, pure.} = object
   vtbl: cQGraphicsAnchorLayoutVTable
   removeAt*: QGraphicsAnchorLayoutremoveAtProc
   setGeometry*: QGraphicsAnchorLayoutsetGeometryProc
@@ -279,7 +275,7 @@ proc QGraphicsAnchorLayoutsetGeometry*(self: gen_qgraphicsanchorlayout_types.QGr
 proc miqt_exec_callback_cQGraphicsAnchorLayout_setGeometry(vtbl: pointer, self: pointer, rect: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsAnchorLayoutVTable](vtbl)
   let self = QGraphicsAnchorLayout(h: self)
-  let slotval1 = gen_qrect_types.QRectF(h: rect)
+  let slotval1 = gen_qrect_types.QRectF(h: rect, owned: false)
   vtbl[].setGeometry(self, slotval1)
 
 proc QGraphicsAnchorLayoutcount*(self: gen_qgraphicsanchorlayout_types.QGraphicsAnchorLayout, ): cint =
@@ -292,14 +288,17 @@ proc miqt_exec_callback_cQGraphicsAnchorLayout_count(vtbl: pointer, self: pointe
   virtualReturn
 
 proc QGraphicsAnchorLayoutitemAt*(self: gen_qgraphicsanchorlayout_types.QGraphicsAnchorLayout, index: cint): gen_qgraphicslayoutitem_types.QGraphicsLayoutItem =
-  gen_qgraphicslayoutitem_types.QGraphicsLayoutItem(h: fcQGraphicsAnchorLayout_virtualbase_itemAt(self.h, index))
+  gen_qgraphicslayoutitem_types.QGraphicsLayoutItem(h: fcQGraphicsAnchorLayout_virtualbase_itemAt(self.h, index), owned: false)
 
 proc miqt_exec_callback_cQGraphicsAnchorLayout_itemAt(vtbl: pointer, self: pointer, index: cint): pointer {.cdecl.} =
   let vtbl = cast[ptr QGraphicsAnchorLayoutVTable](vtbl)
   let self = QGraphicsAnchorLayout(h: self)
   let slotval1 = index
   var virtualReturn = vtbl[].itemAt(self, slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QGraphicsAnchorLayoutinvalidate*(self: gen_qgraphicsanchorlayout_types.QGraphicsAnchorLayout, ): void =
   fcQGraphicsAnchorLayout_virtualbase_invalidate(self.h)
@@ -310,15 +309,18 @@ proc miqt_exec_callback_cQGraphicsAnchorLayout_invalidate(vtbl: pointer, self: p
   vtbl[].invalidate(self)
 
 proc QGraphicsAnchorLayoutsizeHint*(self: gen_qgraphicsanchorlayout_types.QGraphicsAnchorLayout, which: cint, constraint: gen_qsize_types.QSizeF): gen_qsize_types.QSizeF =
-  gen_qsize_types.QSizeF(h: fcQGraphicsAnchorLayout_virtualbase_sizeHint(self.h, cint(which), constraint.h))
+  gen_qsize_types.QSizeF(h: fcQGraphicsAnchorLayout_virtualbase_sizeHint(self.h, cint(which), constraint.h), owned: true)
 
 proc miqt_exec_callback_cQGraphicsAnchorLayout_sizeHint(vtbl: pointer, self: pointer, which: cint, constraint: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QGraphicsAnchorLayoutVTable](vtbl)
   let self = QGraphicsAnchorLayout(h: self)
   let slotval1 = cint(which)
-  let slotval2 = gen_qsize_types.QSizeF(h: constraint)
+  let slotval2 = gen_qsize_types.QSizeF(h: constraint, owned: false)
   var virtualReturn = vtbl[].sizeHint(self, slotval1, slotval2)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QGraphicsAnchorLayoutgetContentsMargins*(self: gen_qgraphicsanchorlayout_types.QGraphicsAnchorLayout, left: ptr float64, top: ptr float64, right: ptr float64, bottom: ptr float64): void =
   fcQGraphicsAnchorLayout_virtualbase_getContentsMargins(self.h, left, top, right, bottom)
@@ -346,8 +348,83 @@ proc QGraphicsAnchorLayoutwidgetEvent*(self: gen_qgraphicsanchorlayout_types.QGr
 proc miqt_exec_callback_cQGraphicsAnchorLayout_widgetEvent(vtbl: pointer, self: pointer, e: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsAnchorLayoutVTable](vtbl)
   let self = QGraphicsAnchorLayout(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: e)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: e, owned: false)
   vtbl[].widgetEvent(self, slotval1)
+
+type VirtualQGraphicsAnchorLayout* {.inheritable.} = ref object of QGraphicsAnchorLayout
+  vtbl*: cQGraphicsAnchorLayoutVTable
+method removeAt*(self: VirtualQGraphicsAnchorLayout, index: cint): void {.base.} =
+  QGraphicsAnchorLayoutremoveAt(self[], index)
+proc miqt_exec_method_cQGraphicsAnchorLayout_removeAt(vtbl: pointer, inst: pointer, index: cint): void {.cdecl.} =
+  let vtbl = cast[VirtualQGraphicsAnchorLayout](cast[uint](vtbl) - uint(offsetOf(VirtualQGraphicsAnchorLayout, vtbl)))
+  let slotval1 = index
+  vtbl.removeAt(slotval1)
+
+method setGeometry*(self: VirtualQGraphicsAnchorLayout, rect: gen_qrect_types.QRectF): void {.base.} =
+  QGraphicsAnchorLayoutsetGeometry(self[], rect)
+proc miqt_exec_method_cQGraphicsAnchorLayout_setGeometry(vtbl: pointer, inst: pointer, rect: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQGraphicsAnchorLayout](cast[uint](vtbl) - uint(offsetOf(VirtualQGraphicsAnchorLayout, vtbl)))
+  let slotval1 = gen_qrect_types.QRectF(h: rect, owned: false)
+  vtbl.setGeometry(slotval1)
+
+method count*(self: VirtualQGraphicsAnchorLayout, ): cint {.base.} =
+  QGraphicsAnchorLayoutcount(self[])
+proc miqt_exec_method_cQGraphicsAnchorLayout_count(vtbl: pointer, inst: pointer): cint {.cdecl.} =
+  let vtbl = cast[VirtualQGraphicsAnchorLayout](cast[uint](vtbl) - uint(offsetOf(VirtualQGraphicsAnchorLayout, vtbl)))
+  var virtualReturn = vtbl.count()
+  virtualReturn
+
+method itemAt*(self: VirtualQGraphicsAnchorLayout, index: cint): gen_qgraphicslayoutitem_types.QGraphicsLayoutItem {.base.} =
+  QGraphicsAnchorLayoutitemAt(self[], index)
+proc miqt_exec_method_cQGraphicsAnchorLayout_itemAt(vtbl: pointer, inst: pointer, index: cint): pointer {.cdecl.} =
+  let vtbl = cast[VirtualQGraphicsAnchorLayout](cast[uint](vtbl) - uint(offsetOf(VirtualQGraphicsAnchorLayout, vtbl)))
+  let slotval1 = index
+  var virtualReturn = vtbl.itemAt(slotval1)
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
+
+method invalidate*(self: VirtualQGraphicsAnchorLayout, ): void {.base.} =
+  QGraphicsAnchorLayoutinvalidate(self[])
+proc miqt_exec_method_cQGraphicsAnchorLayout_invalidate(vtbl: pointer, inst: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQGraphicsAnchorLayout](cast[uint](vtbl) - uint(offsetOf(VirtualQGraphicsAnchorLayout, vtbl)))
+  vtbl.invalidate()
+
+method sizeHint*(self: VirtualQGraphicsAnchorLayout, which: cint, constraint: gen_qsize_types.QSizeF): gen_qsize_types.QSizeF {.base.} =
+  QGraphicsAnchorLayoutsizeHint(self[], which, constraint)
+proc miqt_exec_method_cQGraphicsAnchorLayout_sizeHint(vtbl: pointer, inst: pointer, which: cint, constraint: pointer): pointer {.cdecl.} =
+  let vtbl = cast[VirtualQGraphicsAnchorLayout](cast[uint](vtbl) - uint(offsetOf(VirtualQGraphicsAnchorLayout, vtbl)))
+  let slotval1 = cint(which)
+  let slotval2 = gen_qsize_types.QSizeF(h: constraint, owned: false)
+  var virtualReturn = vtbl.sizeHint(slotval1, slotval2)
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
+
+method getContentsMargins*(self: VirtualQGraphicsAnchorLayout, left: ptr float64, top: ptr float64, right: ptr float64, bottom: ptr float64): void {.base.} =
+  QGraphicsAnchorLayoutgetContentsMargins(self[], left, top, right, bottom)
+proc miqt_exec_method_cQGraphicsAnchorLayout_getContentsMargins(vtbl: pointer, inst: pointer, left: ptr float64, top: ptr float64, right: ptr float64, bottom: ptr float64): void {.cdecl.} =
+  let vtbl = cast[VirtualQGraphicsAnchorLayout](cast[uint](vtbl) - uint(offsetOf(VirtualQGraphicsAnchorLayout, vtbl)))
+  let slotval1 = left
+  let slotval2 = top
+  let slotval3 = right
+  let slotval4 = bottom
+  vtbl.getContentsMargins(slotval1, slotval2, slotval3, slotval4)
+
+method updateGeometry*(self: VirtualQGraphicsAnchorLayout, ): void {.base.} =
+  QGraphicsAnchorLayoutupdateGeometry(self[])
+proc miqt_exec_method_cQGraphicsAnchorLayout_updateGeometry(vtbl: pointer, inst: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQGraphicsAnchorLayout](cast[uint](vtbl) - uint(offsetOf(VirtualQGraphicsAnchorLayout, vtbl)))
+  vtbl.updateGeometry()
+
+method widgetEvent*(self: VirtualQGraphicsAnchorLayout, e: gen_qcoreevent_types.QEvent): void {.base.} =
+  QGraphicsAnchorLayoutwidgetEvent(self[], e)
+proc miqt_exec_method_cQGraphicsAnchorLayout_widgetEvent(vtbl: pointer, inst: pointer, e: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQGraphicsAnchorLayout](cast[uint](vtbl) - uint(offsetOf(VirtualQGraphicsAnchorLayout, vtbl)))
+  let slotval1 = gen_qcoreevent_types.QEvent(h: e, owned: false)
+  vtbl.widgetEvent(slotval1)
 
 proc addChildLayoutItem*(self: gen_qgraphicsanchorlayout_types.QGraphicsAnchorLayout, layoutItem: gen_qgraphicslayoutitem_types.QGraphicsLayoutItem): void =
   fcQGraphicsAnchorLayout_protectedbase_addChildLayoutItem(self.h, layoutItem.h)
@@ -362,56 +439,95 @@ proc create*(T: type gen_qgraphicsanchorlayout_types.QGraphicsAnchorLayout,
     vtbl: ref QGraphicsAnchorLayoutVTable = nil): gen_qgraphicsanchorlayout_types.QGraphicsAnchorLayout =
   let vtbl = if vtbl == nil: new QGraphicsAnchorLayoutVTable else: vtbl
   GC_ref(vtbl)
-  vtbl.vtbl.destructor = proc(vtbl: ptr cQGraphicsAnchorLayoutVTable, _: ptr cQGraphicsAnchorLayout) {.cdecl.} =
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQGraphicsAnchorLayoutVTable, _: ptr cQGraphicsAnchorLayout) {.cdecl.} =
     let vtbl = cast[ref QGraphicsAnchorLayoutVTable](vtbl)
     GC_unref(vtbl)
-  if not isNil(vtbl.removeAt):
+  if not isNil(vtbl[].removeAt):
     vtbl[].vtbl.removeAt = miqt_exec_callback_cQGraphicsAnchorLayout_removeAt
-  if not isNil(vtbl.setGeometry):
+  if not isNil(vtbl[].setGeometry):
     vtbl[].vtbl.setGeometry = miqt_exec_callback_cQGraphicsAnchorLayout_setGeometry
-  if not isNil(vtbl.count):
+  if not isNil(vtbl[].count):
     vtbl[].vtbl.count = miqt_exec_callback_cQGraphicsAnchorLayout_count
-  if not isNil(vtbl.itemAt):
+  if not isNil(vtbl[].itemAt):
     vtbl[].vtbl.itemAt = miqt_exec_callback_cQGraphicsAnchorLayout_itemAt
-  if not isNil(vtbl.invalidate):
+  if not isNil(vtbl[].invalidate):
     vtbl[].vtbl.invalidate = miqt_exec_callback_cQGraphicsAnchorLayout_invalidate
-  if not isNil(vtbl.sizeHint):
+  if not isNil(vtbl[].sizeHint):
     vtbl[].vtbl.sizeHint = miqt_exec_callback_cQGraphicsAnchorLayout_sizeHint
-  if not isNil(vtbl.getContentsMargins):
+  if not isNil(vtbl[].getContentsMargins):
     vtbl[].vtbl.getContentsMargins = miqt_exec_callback_cQGraphicsAnchorLayout_getContentsMargins
-  if not isNil(vtbl.updateGeometry):
+  if not isNil(vtbl[].updateGeometry):
     vtbl[].vtbl.updateGeometry = miqt_exec_callback_cQGraphicsAnchorLayout_updateGeometry
-  if not isNil(vtbl.widgetEvent):
+  if not isNil(vtbl[].widgetEvent):
     vtbl[].vtbl.widgetEvent = miqt_exec_callback_cQGraphicsAnchorLayout_widgetEvent
-  gen_qgraphicsanchorlayout_types.QGraphicsAnchorLayout(h: fcQGraphicsAnchorLayout_new(addr(vtbl[]), ))
+  gen_qgraphicsanchorlayout_types.QGraphicsAnchorLayout(h: fcQGraphicsAnchorLayout_new(addr(vtbl[].vtbl), ), owned: true)
 
 proc create*(T: type gen_qgraphicsanchorlayout_types.QGraphicsAnchorLayout,
     parent: gen_qgraphicslayoutitem_types.QGraphicsLayoutItem,
     vtbl: ref QGraphicsAnchorLayoutVTable = nil): gen_qgraphicsanchorlayout_types.QGraphicsAnchorLayout =
   let vtbl = if vtbl == nil: new QGraphicsAnchorLayoutVTable else: vtbl
   GC_ref(vtbl)
-  vtbl.vtbl.destructor = proc(vtbl: ptr cQGraphicsAnchorLayoutVTable, _: ptr cQGraphicsAnchorLayout) {.cdecl.} =
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQGraphicsAnchorLayoutVTable, _: ptr cQGraphicsAnchorLayout) {.cdecl.} =
     let vtbl = cast[ref QGraphicsAnchorLayoutVTable](vtbl)
     GC_unref(vtbl)
-  if not isNil(vtbl.removeAt):
+  if not isNil(vtbl[].removeAt):
     vtbl[].vtbl.removeAt = miqt_exec_callback_cQGraphicsAnchorLayout_removeAt
-  if not isNil(vtbl.setGeometry):
+  if not isNil(vtbl[].setGeometry):
     vtbl[].vtbl.setGeometry = miqt_exec_callback_cQGraphicsAnchorLayout_setGeometry
-  if not isNil(vtbl.count):
+  if not isNil(vtbl[].count):
     vtbl[].vtbl.count = miqt_exec_callback_cQGraphicsAnchorLayout_count
-  if not isNil(vtbl.itemAt):
+  if not isNil(vtbl[].itemAt):
     vtbl[].vtbl.itemAt = miqt_exec_callback_cQGraphicsAnchorLayout_itemAt
-  if not isNil(vtbl.invalidate):
+  if not isNil(vtbl[].invalidate):
     vtbl[].vtbl.invalidate = miqt_exec_callback_cQGraphicsAnchorLayout_invalidate
-  if not isNil(vtbl.sizeHint):
+  if not isNil(vtbl[].sizeHint):
     vtbl[].vtbl.sizeHint = miqt_exec_callback_cQGraphicsAnchorLayout_sizeHint
-  if not isNil(vtbl.getContentsMargins):
+  if not isNil(vtbl[].getContentsMargins):
     vtbl[].vtbl.getContentsMargins = miqt_exec_callback_cQGraphicsAnchorLayout_getContentsMargins
-  if not isNil(vtbl.updateGeometry):
+  if not isNil(vtbl[].updateGeometry):
     vtbl[].vtbl.updateGeometry = miqt_exec_callback_cQGraphicsAnchorLayout_updateGeometry
-  if not isNil(vtbl.widgetEvent):
+  if not isNil(vtbl[].widgetEvent):
     vtbl[].vtbl.widgetEvent = miqt_exec_callback_cQGraphicsAnchorLayout_widgetEvent
-  gen_qgraphicsanchorlayout_types.QGraphicsAnchorLayout(h: fcQGraphicsAnchorLayout_new2(addr(vtbl[]), parent.h))
+  gen_qgraphicsanchorlayout_types.QGraphicsAnchorLayout(h: fcQGraphicsAnchorLayout_new2(addr(vtbl[].vtbl), parent.h), owned: true)
 
-proc delete*(self: gen_qgraphicsanchorlayout_types.QGraphicsAnchorLayout) =
-  fcQGraphicsAnchorLayout_delete(self.h)
+proc create*(T: type gen_qgraphicsanchorlayout_types.QGraphicsAnchorLayout,
+    vtbl: VirtualQGraphicsAnchorLayout) =
+
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQGraphicsAnchorLayoutVTable, _: ptr cQGraphicsAnchorLayout) {.cdecl.} =
+    let vtbl = cast[ptr typeof(VirtualQGraphicsAnchorLayout()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQGraphicsAnchorLayout, vtbl)))
+    vtbl[].h = nil
+    vtbl[].owned = false
+  vtbl[].vtbl.removeAt = miqt_exec_method_cQGraphicsAnchorLayout_removeAt
+  vtbl[].vtbl.setGeometry = miqt_exec_method_cQGraphicsAnchorLayout_setGeometry
+  vtbl[].vtbl.count = miqt_exec_method_cQGraphicsAnchorLayout_count
+  vtbl[].vtbl.itemAt = miqt_exec_method_cQGraphicsAnchorLayout_itemAt
+  vtbl[].vtbl.invalidate = miqt_exec_method_cQGraphicsAnchorLayout_invalidate
+  vtbl[].vtbl.sizeHint = miqt_exec_method_cQGraphicsAnchorLayout_sizeHint
+  vtbl[].vtbl.getContentsMargins = miqt_exec_method_cQGraphicsAnchorLayout_getContentsMargins
+  vtbl[].vtbl.updateGeometry = miqt_exec_method_cQGraphicsAnchorLayout_updateGeometry
+  vtbl[].vtbl.widgetEvent = miqt_exec_method_cQGraphicsAnchorLayout_widgetEvent
+  if vtbl[].h != nil: delete(move(vtbl[]))
+  vtbl[].h = fcQGraphicsAnchorLayout_new(addr(vtbl[].vtbl), )
+  vtbl[].owned = true
+
+proc create*(T: type gen_qgraphicsanchorlayout_types.QGraphicsAnchorLayout,
+    parent: gen_qgraphicslayoutitem_types.QGraphicsLayoutItem,
+    vtbl: VirtualQGraphicsAnchorLayout) =
+
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQGraphicsAnchorLayoutVTable, _: ptr cQGraphicsAnchorLayout) {.cdecl.} =
+    let vtbl = cast[ptr typeof(VirtualQGraphicsAnchorLayout()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQGraphicsAnchorLayout, vtbl)))
+    vtbl[].h = nil
+    vtbl[].owned = false
+  vtbl[].vtbl.removeAt = miqt_exec_method_cQGraphicsAnchorLayout_removeAt
+  vtbl[].vtbl.setGeometry = miqt_exec_method_cQGraphicsAnchorLayout_setGeometry
+  vtbl[].vtbl.count = miqt_exec_method_cQGraphicsAnchorLayout_count
+  vtbl[].vtbl.itemAt = miqt_exec_method_cQGraphicsAnchorLayout_itemAt
+  vtbl[].vtbl.invalidate = miqt_exec_method_cQGraphicsAnchorLayout_invalidate
+  vtbl[].vtbl.sizeHint = miqt_exec_method_cQGraphicsAnchorLayout_sizeHint
+  vtbl[].vtbl.getContentsMargins = miqt_exec_method_cQGraphicsAnchorLayout_getContentsMargins
+  vtbl[].vtbl.updateGeometry = miqt_exec_method_cQGraphicsAnchorLayout_updateGeometry
+  vtbl[].vtbl.widgetEvent = miqt_exec_method_cQGraphicsAnchorLayout_widgetEvent
+  if vtbl[].h != nil: delete(move(vtbl[]))
+  vtbl[].h = fcQGraphicsAnchorLayout_new2(addr(vtbl[].vtbl), parent.h)
+  vtbl[].owned = true
+

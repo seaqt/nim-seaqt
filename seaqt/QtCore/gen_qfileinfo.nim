@@ -30,9 +30,6 @@ func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
     else:
       copyMem(addr result[0], unsafeAddr v[0], v.len)
 
-const cflags = gorge("pkg-config --cflags Qt5Core")  & " -fPIC"
-{.compile("gen_qfileinfo.cpp", cflags).}
-
 
 import ./gen_qfileinfo_types
 export gen_qfileinfo_types
@@ -110,7 +107,6 @@ proc fcQFileInfo_new2(file: struct_miqt_string): ptr cQFileInfo {.importc: "QFil
 proc fcQFileInfo_new3(file: pointer): ptr cQFileInfo {.importc: "QFileInfo_new3".}
 proc fcQFileInfo_new4(dir: pointer, file: struct_miqt_string): ptr cQFileInfo {.importc: "QFileInfo_new4".}
 proc fcQFileInfo_new5(fileinfo: pointer): ptr cQFileInfo {.importc: "QFileInfo_new5".}
-proc fcQFileInfo_delete(self: pointer) {.importc: "QFileInfo_delete".}
 
 proc operatorAssign*(self: gen_qfileinfo_types.QFileInfo, fileinfo: gen_qfileinfo_types.QFileInfo): void =
   fcQFileInfo_operatorAssign(self.h, fileinfo.h)
@@ -215,10 +211,10 @@ proc canonicalPath*(self: gen_qfileinfo_types.QFileInfo, ): string =
   vx_ret
 
 proc dir*(self: gen_qfileinfo_types.QFileInfo, ): gen_qdir_types.QDir =
-  gen_qdir_types.QDir(h: fcQFileInfo_dir(self.h))
+  gen_qdir_types.QDir(h: fcQFileInfo_dir(self.h), owned: true)
 
 proc absoluteDir*(self: gen_qfileinfo_types.QFileInfo, ): gen_qdir_types.QDir =
-  gen_qdir_types.QDir(h: fcQFileInfo_absoluteDir(self.h))
+  gen_qdir_types.QDir(h: fcQFileInfo_absoluteDir(self.h), owned: true)
 
 proc isReadable*(self: gen_qfileinfo_types.QFileInfo, ): bool =
   fcQFileInfo_isReadable(self.h)
@@ -308,22 +304,22 @@ proc size*(self: gen_qfileinfo_types.QFileInfo, ): clonglong =
   fcQFileInfo_size(self.h)
 
 proc created*(self: gen_qfileinfo_types.QFileInfo, ): gen_qdatetime_types.QDateTime =
-  gen_qdatetime_types.QDateTime(h: fcQFileInfo_created(self.h))
+  gen_qdatetime_types.QDateTime(h: fcQFileInfo_created(self.h), owned: true)
 
 proc birthTime*(self: gen_qfileinfo_types.QFileInfo, ): gen_qdatetime_types.QDateTime =
-  gen_qdatetime_types.QDateTime(h: fcQFileInfo_birthTime(self.h))
+  gen_qdatetime_types.QDateTime(h: fcQFileInfo_birthTime(self.h), owned: true)
 
 proc metadataChangeTime*(self: gen_qfileinfo_types.QFileInfo, ): gen_qdatetime_types.QDateTime =
-  gen_qdatetime_types.QDateTime(h: fcQFileInfo_metadataChangeTime(self.h))
+  gen_qdatetime_types.QDateTime(h: fcQFileInfo_metadataChangeTime(self.h), owned: true)
 
 proc lastModified*(self: gen_qfileinfo_types.QFileInfo, ): gen_qdatetime_types.QDateTime =
-  gen_qdatetime_types.QDateTime(h: fcQFileInfo_lastModified(self.h))
+  gen_qdatetime_types.QDateTime(h: fcQFileInfo_lastModified(self.h), owned: true)
 
 proc lastRead*(self: gen_qfileinfo_types.QFileInfo, ): gen_qdatetime_types.QDateTime =
-  gen_qdatetime_types.QDateTime(h: fcQFileInfo_lastRead(self.h))
+  gen_qdatetime_types.QDateTime(h: fcQFileInfo_lastRead(self.h), owned: true)
 
 proc fileTime*(self: gen_qfileinfo_types.QFileInfo, time: cint): gen_qdatetime_types.QDateTime =
-  gen_qdatetime_types.QDateTime(h: fcQFileInfo_fileTime(self.h, cint(time)))
+  gen_qdatetime_types.QDateTime(h: fcQFileInfo_fileTime(self.h, cint(time)), owned: true)
 
 proc caching*(self: gen_qfileinfo_types.QFileInfo, ): bool =
   fcQFileInfo_caching(self.h)
@@ -332,23 +328,21 @@ proc setCaching*(self: gen_qfileinfo_types.QFileInfo, on: bool): void =
   fcQFileInfo_setCaching(self.h, on)
 
 proc create*(T: type gen_qfileinfo_types.QFileInfo): gen_qfileinfo_types.QFileInfo =
-  gen_qfileinfo_types.QFileInfo(h: fcQFileInfo_new())
+  gen_qfileinfo_types.QFileInfo(h: fcQFileInfo_new(), owned: true)
 
 proc create*(T: type gen_qfileinfo_types.QFileInfo,
     file: string): gen_qfileinfo_types.QFileInfo =
-  gen_qfileinfo_types.QFileInfo(h: fcQFileInfo_new2(struct_miqt_string(data: file, len: csize_t(len(file)))))
+  gen_qfileinfo_types.QFileInfo(h: fcQFileInfo_new2(struct_miqt_string(data: file, len: csize_t(len(file)))), owned: true)
 
 proc create*(T: type gen_qfileinfo_types.QFileInfo,
     file: gen_qfile_types.QFile): gen_qfileinfo_types.QFileInfo =
-  gen_qfileinfo_types.QFileInfo(h: fcQFileInfo_new3(file.h))
+  gen_qfileinfo_types.QFileInfo(h: fcQFileInfo_new3(file.h), owned: true)
 
 proc create*(T: type gen_qfileinfo_types.QFileInfo,
     dir: gen_qdir_types.QDir, file: string): gen_qfileinfo_types.QFileInfo =
-  gen_qfileinfo_types.QFileInfo(h: fcQFileInfo_new4(dir.h, struct_miqt_string(data: file, len: csize_t(len(file)))))
+  gen_qfileinfo_types.QFileInfo(h: fcQFileInfo_new4(dir.h, struct_miqt_string(data: file, len: csize_t(len(file)))), owned: true)
 
 proc create*(T: type gen_qfileinfo_types.QFileInfo,
     fileinfo: gen_qfileinfo_types.QFileInfo): gen_qfileinfo_types.QFileInfo =
-  gen_qfileinfo_types.QFileInfo(h: fcQFileInfo_new5(fileinfo.h))
+  gen_qfileinfo_types.QFileInfo(h: fcQFileInfo_new5(fileinfo.h), owned: true)
 
-proc delete*(self: gen_qfileinfo_types.QFileInfo) =
-  fcQFileInfo_delete(self.h)

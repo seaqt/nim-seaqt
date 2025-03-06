@@ -30,9 +30,6 @@ func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
     else:
       copyMem(addr result[0], unsafeAddr v[0], v.len)
 
-const cflags = gorge("pkg-config --cflags Qt5Multimedia")  & " -fPIC"
-{.compile("gen_qmediaserviceproviderplugin.cpp", cflags).}
-
 
 type QMediaServiceProviderHintTypeEnum* = distinct cint
 template Null*(_: type QMediaServiceProviderHintTypeEnum): untyped = 0
@@ -88,29 +85,22 @@ proc fcQMediaServiceProviderHint_new3(device: struct_miqt_string): ptr cQMediaSe
 proc fcQMediaServiceProviderHint_new4(position: cint): ptr cQMediaServiceProviderHint {.importc: "QMediaServiceProviderHint_new4".}
 proc fcQMediaServiceProviderHint_new5(features: cint): ptr cQMediaServiceProviderHint {.importc: "QMediaServiceProviderHint_new5".}
 proc fcQMediaServiceProviderHint_new6(other: pointer): ptr cQMediaServiceProviderHint {.importc: "QMediaServiceProviderHint_new6".}
-proc fcQMediaServiceProviderHint_delete(self: pointer) {.importc: "QMediaServiceProviderHint_delete".}
 proc fcQMediaServiceProviderFactoryInterface_create(self: pointer, key: struct_miqt_string): pointer {.importc: "QMediaServiceProviderFactoryInterface_create".}
 proc fcQMediaServiceProviderFactoryInterface_release(self: pointer, service: pointer): void {.importc: "QMediaServiceProviderFactoryInterface_release".}
 proc fcQMediaServiceProviderFactoryInterface_operatorAssign(self: pointer, param1: pointer): void {.importc: "QMediaServiceProviderFactoryInterface_operatorAssign".}
-proc fcQMediaServiceProviderFactoryInterface_delete(self: pointer) {.importc: "QMediaServiceProviderFactoryInterface_delete".}
 proc fcQMediaServiceSupportedFormatsInterface_hasSupport(self: pointer, mimeType: struct_miqt_string, codecs: struct_miqt_array): cint {.importc: "QMediaServiceSupportedFormatsInterface_hasSupport".}
 proc fcQMediaServiceSupportedFormatsInterface_supportedMimeTypes(self: pointer, ): struct_miqt_array {.importc: "QMediaServiceSupportedFormatsInterface_supportedMimeTypes".}
 proc fcQMediaServiceSupportedFormatsInterface_operatorAssign(self: pointer, param1: pointer): void {.importc: "QMediaServiceSupportedFormatsInterface_operatorAssign".}
-proc fcQMediaServiceSupportedFormatsInterface_delete(self: pointer) {.importc: "QMediaServiceSupportedFormatsInterface_delete".}
 proc fcQMediaServiceSupportedDevicesInterface_devices(self: pointer, service: struct_miqt_string): struct_miqt_array {.importc: "QMediaServiceSupportedDevicesInterface_devices".}
 proc fcQMediaServiceSupportedDevicesInterface_deviceDescription(self: pointer, service: struct_miqt_string, device: struct_miqt_string): struct_miqt_string {.importc: "QMediaServiceSupportedDevicesInterface_deviceDescription".}
 proc fcQMediaServiceSupportedDevicesInterface_operatorAssign(self: pointer, param1: pointer): void {.importc: "QMediaServiceSupportedDevicesInterface_operatorAssign".}
-proc fcQMediaServiceSupportedDevicesInterface_delete(self: pointer) {.importc: "QMediaServiceSupportedDevicesInterface_delete".}
 proc fcQMediaServiceDefaultDeviceInterface_defaultDevice(self: pointer, service: struct_miqt_string): struct_miqt_string {.importc: "QMediaServiceDefaultDeviceInterface_defaultDevice".}
 proc fcQMediaServiceDefaultDeviceInterface_operatorAssign(self: pointer, param1: pointer): void {.importc: "QMediaServiceDefaultDeviceInterface_operatorAssign".}
-proc fcQMediaServiceDefaultDeviceInterface_delete(self: pointer) {.importc: "QMediaServiceDefaultDeviceInterface_delete".}
 proc fcQMediaServiceCameraInfoInterface_cameraPosition(self: pointer, device: struct_miqt_string): cint {.importc: "QMediaServiceCameraInfoInterface_cameraPosition".}
 proc fcQMediaServiceCameraInfoInterface_cameraOrientation(self: pointer, device: struct_miqt_string): cint {.importc: "QMediaServiceCameraInfoInterface_cameraOrientation".}
 proc fcQMediaServiceCameraInfoInterface_operatorAssign(self: pointer, param1: pointer): void {.importc: "QMediaServiceCameraInfoInterface_operatorAssign".}
-proc fcQMediaServiceCameraInfoInterface_delete(self: pointer) {.importc: "QMediaServiceCameraInfoInterface_delete".}
 proc fcQMediaServiceFeaturesInterface_supportedFeatures(self: pointer, service: struct_miqt_string): cint {.importc: "QMediaServiceFeaturesInterface_supportedFeatures".}
 proc fcQMediaServiceFeaturesInterface_operatorAssign(self: pointer, param1: pointer): void {.importc: "QMediaServiceFeaturesInterface_operatorAssign".}
-proc fcQMediaServiceFeaturesInterface_delete(self: pointer) {.importc: "QMediaServiceFeaturesInterface_delete".}
 proc fcQMediaServiceProviderPlugin_metaObject(self: pointer, ): pointer {.importc: "QMediaServiceProviderPlugin_metaObject".}
 proc fcQMediaServiceProviderPlugin_metacast(self: pointer, param1: cstring): pointer {.importc: "QMediaServiceProviderPlugin_metacast".}
 proc fcQMediaServiceProviderPlugin_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QMediaServiceProviderPlugin_metacall".}
@@ -127,7 +117,6 @@ proc fcQMediaServiceProviderPlugin_protectedbase_senderSignalIndex(self: pointer
 proc fcQMediaServiceProviderPlugin_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QMediaServiceProviderPlugin_protectedbase_receivers".}
 proc fcQMediaServiceProviderPlugin_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QMediaServiceProviderPlugin_protectedbase_isSignalConnected".}
 proc fcQMediaServiceProviderPlugin_staticMetaObject(): pointer {.importc: "QMediaServiceProviderPlugin_staticMetaObject".}
-proc fcQMediaServiceProviderPlugin_delete(self: pointer) {.importc: "QMediaServiceProviderPlugin_delete".}
 
 proc operatorAssign*(self: gen_qmediaserviceproviderplugin_types.QMediaServiceProviderHint, other: gen_qmediaserviceproviderplugin_types.QMediaServiceProviderHint): void =
   fcQMediaServiceProviderHint_operatorAssign(self.h, other.h)
@@ -175,7 +164,7 @@ proc features*(self: gen_qmediaserviceproviderplugin_types.QMediaServiceProvider
   cint(fcQMediaServiceProviderHint_features(self.h))
 
 proc create*(T: type gen_qmediaserviceproviderplugin_types.QMediaServiceProviderHint): gen_qmediaserviceproviderplugin_types.QMediaServiceProviderHint =
-  gen_qmediaserviceproviderplugin_types.QMediaServiceProviderHint(h: fcQMediaServiceProviderHint_new())
+  gen_qmediaserviceproviderplugin_types.QMediaServiceProviderHint(h: fcQMediaServiceProviderHint_new(), owned: true)
 
 proc create*(T: type gen_qmediaserviceproviderplugin_types.QMediaServiceProviderHint,
     mimeType: string, codecs: seq[string]): gen_qmediaserviceproviderplugin_types.QMediaServiceProviderHint =
@@ -183,28 +172,26 @@ proc create*(T: type gen_qmediaserviceproviderplugin_types.QMediaServiceProvider
   for i in 0..<len(codecs):
     codecs_CArray[i] = struct_miqt_string(data: codecs[i], len: csize_t(len(codecs[i])))
 
-  gen_qmediaserviceproviderplugin_types.QMediaServiceProviderHint(h: fcQMediaServiceProviderHint_new2(struct_miqt_string(data: mimeType, len: csize_t(len(mimeType))), struct_miqt_array(len: csize_t(len(codecs)), data: if len(codecs) == 0: nil else: addr(codecs_CArray[0]))))
+  gen_qmediaserviceproviderplugin_types.QMediaServiceProviderHint(h: fcQMediaServiceProviderHint_new2(struct_miqt_string(data: mimeType, len: csize_t(len(mimeType))), struct_miqt_array(len: csize_t(len(codecs)), data: if len(codecs) == 0: nil else: addr(codecs_CArray[0]))), owned: true)
 
 proc create*(T: type gen_qmediaserviceproviderplugin_types.QMediaServiceProviderHint,
     device: seq[byte]): gen_qmediaserviceproviderplugin_types.QMediaServiceProviderHint =
-  gen_qmediaserviceproviderplugin_types.QMediaServiceProviderHint(h: fcQMediaServiceProviderHint_new3(struct_miqt_string(data: cast[cstring](if len(device) == 0: nil else: unsafeAddr device[0]), len: csize_t(len(device)))))
+  gen_qmediaserviceproviderplugin_types.QMediaServiceProviderHint(h: fcQMediaServiceProviderHint_new3(struct_miqt_string(data: cast[cstring](if len(device) == 0: nil else: unsafeAddr device[0]), len: csize_t(len(device)))), owned: true)
 
 proc create*(T: type gen_qmediaserviceproviderplugin_types.QMediaServiceProviderHint,
     position: cint): gen_qmediaserviceproviderplugin_types.QMediaServiceProviderHint =
-  gen_qmediaserviceproviderplugin_types.QMediaServiceProviderHint(h: fcQMediaServiceProviderHint_new4(cint(position)))
+  gen_qmediaserviceproviderplugin_types.QMediaServiceProviderHint(h: fcQMediaServiceProviderHint_new4(cint(position)), owned: true)
 
 proc create2*(T: type gen_qmediaserviceproviderplugin_types.QMediaServiceProviderHint,
     features: cint): gen_qmediaserviceproviderplugin_types.QMediaServiceProviderHint =
-  gen_qmediaserviceproviderplugin_types.QMediaServiceProviderHint(h: fcQMediaServiceProviderHint_new5(cint(features)))
+  gen_qmediaserviceproviderplugin_types.QMediaServiceProviderHint(h: fcQMediaServiceProviderHint_new5(cint(features)), owned: true)
 
 proc create*(T: type gen_qmediaserviceproviderplugin_types.QMediaServiceProviderHint,
     other: gen_qmediaserviceproviderplugin_types.QMediaServiceProviderHint): gen_qmediaserviceproviderplugin_types.QMediaServiceProviderHint =
-  gen_qmediaserviceproviderplugin_types.QMediaServiceProviderHint(h: fcQMediaServiceProviderHint_new6(other.h))
+  gen_qmediaserviceproviderplugin_types.QMediaServiceProviderHint(h: fcQMediaServiceProviderHint_new6(other.h), owned: true)
 
-proc delete*(self: gen_qmediaserviceproviderplugin_types.QMediaServiceProviderHint) =
-  fcQMediaServiceProviderHint_delete(self.h)
 proc create*(self: gen_qmediaserviceproviderplugin_types.QMediaServiceProviderFactoryInterface, key: string): gen_qmediaservice_types.QMediaService =
-  gen_qmediaservice_types.QMediaService(h: fcQMediaServiceProviderFactoryInterface_create(self.h, struct_miqt_string(data: key, len: csize_t(len(key)))))
+  gen_qmediaservice_types.QMediaService(h: fcQMediaServiceProviderFactoryInterface_create(self.h, struct_miqt_string(data: key, len: csize_t(len(key)))), owned: false)
 
 proc release*(self: gen_qmediaserviceproviderplugin_types.QMediaServiceProviderFactoryInterface, service: gen_qmediaservice_types.QMediaService): void =
   fcQMediaServiceProviderFactoryInterface_release(self.h, service.h)
@@ -212,8 +199,6 @@ proc release*(self: gen_qmediaserviceproviderplugin_types.QMediaServiceProviderF
 proc operatorAssign*(self: gen_qmediaserviceproviderplugin_types.QMediaServiceProviderFactoryInterface, param1: gen_qmediaserviceproviderplugin_types.QMediaServiceProviderFactoryInterface): void =
   fcQMediaServiceProviderFactoryInterface_operatorAssign(self.h, param1.h)
 
-proc delete*(self: gen_qmediaserviceproviderplugin_types.QMediaServiceProviderFactoryInterface) =
-  fcQMediaServiceProviderFactoryInterface_delete(self.h)
 proc hasSupport*(self: gen_qmediaserviceproviderplugin_types.QMediaServiceSupportedFormatsInterface, mimeType: string, codecs: seq[string]): cint =
   var codecs_CArray = newSeq[struct_miqt_string](len(codecs))
   for i in 0..<len(codecs):
@@ -236,8 +221,6 @@ proc supportedMimeTypes*(self: gen_qmediaserviceproviderplugin_types.QMediaServi
 proc operatorAssign*(self: gen_qmediaserviceproviderplugin_types.QMediaServiceSupportedFormatsInterface, param1: gen_qmediaserviceproviderplugin_types.QMediaServiceSupportedFormatsInterface): void =
   fcQMediaServiceSupportedFormatsInterface_operatorAssign(self.h, param1.h)
 
-proc delete*(self: gen_qmediaserviceproviderplugin_types.QMediaServiceSupportedFormatsInterface) =
-  fcQMediaServiceSupportedFormatsInterface_delete(self.h)
 proc devices*(self: gen_qmediaserviceproviderplugin_types.QMediaServiceSupportedDevicesInterface, service: seq[byte]): seq[seq[byte]] =
   var v_ma = fcQMediaServiceSupportedDevicesInterface_devices(self.h, struct_miqt_string(data: cast[cstring](if len(service) == 0: nil else: unsafeAddr service[0]), len: csize_t(len(service))))
   var vx_ret = newSeq[seq[byte]](int(v_ma.len))
@@ -259,8 +242,6 @@ proc deviceDescription*(self: gen_qmediaserviceproviderplugin_types.QMediaServic
 proc operatorAssign*(self: gen_qmediaserviceproviderplugin_types.QMediaServiceSupportedDevicesInterface, param1: gen_qmediaserviceproviderplugin_types.QMediaServiceSupportedDevicesInterface): void =
   fcQMediaServiceSupportedDevicesInterface_operatorAssign(self.h, param1.h)
 
-proc delete*(self: gen_qmediaserviceproviderplugin_types.QMediaServiceSupportedDevicesInterface) =
-  fcQMediaServiceSupportedDevicesInterface_delete(self.h)
 proc defaultDevice*(self: gen_qmediaserviceproviderplugin_types.QMediaServiceDefaultDeviceInterface, service: seq[byte]): seq[byte] =
   var v_bytearray = fcQMediaServiceDefaultDeviceInterface_defaultDevice(self.h, struct_miqt_string(data: cast[cstring](if len(service) == 0: nil else: unsafeAddr service[0]), len: csize_t(len(service))))
   var vx_ret = @(toOpenArrayByte(v_bytearray.data, 0, int(v_bytearray.len)-1))
@@ -270,8 +251,6 @@ proc defaultDevice*(self: gen_qmediaserviceproviderplugin_types.QMediaServiceDef
 proc operatorAssign*(self: gen_qmediaserviceproviderplugin_types.QMediaServiceDefaultDeviceInterface, param1: gen_qmediaserviceproviderplugin_types.QMediaServiceDefaultDeviceInterface): void =
   fcQMediaServiceDefaultDeviceInterface_operatorAssign(self.h, param1.h)
 
-proc delete*(self: gen_qmediaserviceproviderplugin_types.QMediaServiceDefaultDeviceInterface) =
-  fcQMediaServiceDefaultDeviceInterface_delete(self.h)
 proc cameraPosition*(self: gen_qmediaserviceproviderplugin_types.QMediaServiceCameraInfoInterface, device: seq[byte]): cint =
   cint(fcQMediaServiceCameraInfoInterface_cameraPosition(self.h, struct_miqt_string(data: cast[cstring](if len(device) == 0: nil else: unsafeAddr device[0]), len: csize_t(len(device)))))
 
@@ -281,18 +260,14 @@ proc cameraOrientation*(self: gen_qmediaserviceproviderplugin_types.QMediaServic
 proc operatorAssign*(self: gen_qmediaserviceproviderplugin_types.QMediaServiceCameraInfoInterface, param1: gen_qmediaserviceproviderplugin_types.QMediaServiceCameraInfoInterface): void =
   fcQMediaServiceCameraInfoInterface_operatorAssign(self.h, param1.h)
 
-proc delete*(self: gen_qmediaserviceproviderplugin_types.QMediaServiceCameraInfoInterface) =
-  fcQMediaServiceCameraInfoInterface_delete(self.h)
 proc supportedFeatures*(self: gen_qmediaserviceproviderplugin_types.QMediaServiceFeaturesInterface, service: seq[byte]): cint =
   cint(fcQMediaServiceFeaturesInterface_supportedFeatures(self.h, struct_miqt_string(data: cast[cstring](if len(service) == 0: nil else: unsafeAddr service[0]), len: csize_t(len(service)))))
 
 proc operatorAssign*(self: gen_qmediaserviceproviderplugin_types.QMediaServiceFeaturesInterface, param1: gen_qmediaserviceproviderplugin_types.QMediaServiceFeaturesInterface): void =
   fcQMediaServiceFeaturesInterface_operatorAssign(self.h, param1.h)
 
-proc delete*(self: gen_qmediaserviceproviderplugin_types.QMediaServiceFeaturesInterface) =
-  fcQMediaServiceFeaturesInterface_delete(self.h)
 proc metaObject*(self: gen_qmediaserviceproviderplugin_types.QMediaServiceProviderPlugin, ): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQMediaServiceProviderPlugin_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQMediaServiceProviderPlugin_metaObject(self.h), owned: false)
 
 proc metacast*(self: gen_qmediaserviceproviderplugin_types.QMediaServiceProviderPlugin, param1: cstring): pointer =
   fcQMediaServiceProviderPlugin_metacast(self.h, param1)
@@ -313,7 +288,7 @@ proc trUtf8*(_: type gen_qmediaserviceproviderplugin_types.QMediaServiceProvider
   vx_ret
 
 proc create*(self: gen_qmediaserviceproviderplugin_types.QMediaServiceProviderPlugin, key: string): gen_qmediaservice_types.QMediaService =
-  gen_qmediaservice_types.QMediaService(h: fcQMediaServiceProviderPlugin_create(self.h, struct_miqt_string(data: key, len: csize_t(len(key)))))
+  gen_qmediaservice_types.QMediaService(h: fcQMediaServiceProviderPlugin_create(self.h, struct_miqt_string(data: key, len: csize_t(len(key)))), owned: false)
 
 proc release*(self: gen_qmediaserviceproviderplugin_types.QMediaServiceProviderPlugin, service: gen_qmediaservice_types.QMediaService): void =
   fcQMediaServiceProviderPlugin_release(self.h, service.h)
@@ -343,7 +318,7 @@ proc trUtf8*(_: type gen_qmediaserviceproviderplugin_types.QMediaServiceProvider
   vx_ret
 
 proc sender*(self: gen_qmediaserviceproviderplugin_types.QMediaServiceProviderPlugin, ): gen_qobject_types.QObject =
-  gen_qobject_types.QObject(h: fcQMediaServiceProviderPlugin_protectedbase_sender(self.h))
+  gen_qobject_types.QObject(h: fcQMediaServiceProviderPlugin_protectedbase_sender(self.h), owned: false)
 
 proc senderSignalIndex*(self: gen_qmediaserviceproviderplugin_types.QMediaServiceProviderPlugin, ): cint =
   fcQMediaServiceProviderPlugin_protectedbase_senderSignalIndex(self.h)
@@ -356,5 +331,3 @@ proc isSignalConnected*(self: gen_qmediaserviceproviderplugin_types.QMediaServic
 
 proc staticMetaObject*(_: type gen_qmediaserviceproviderplugin_types.QMediaServiceProviderPlugin): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQMediaServiceProviderPlugin_staticMetaObject())
-proc delete*(self: gen_qmediaserviceproviderplugin_types.QMediaServiceProviderPlugin) =
-  fcQMediaServiceProviderPlugin_delete(self.h)

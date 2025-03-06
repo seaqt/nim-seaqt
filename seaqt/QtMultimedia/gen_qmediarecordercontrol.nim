@@ -30,7 +30,7 @@ func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
     else:
       copyMem(addr result[0], unsafeAddr v[0], v.len)
 
-const cflags = gorge("pkg-config --cflags Qt5Multimedia")  & " -fPIC"
+const cflags = gorge("pkg-config --cflags Qt5Multimedia") & " -fPIC"
 {.compile("gen_qmediarecordercontrol.cpp", cflags).}
 
 
@@ -91,10 +91,9 @@ proc fcQMediaRecorderControl_protectedbase_senderSignalIndex(self: pointer, ): c
 proc fcQMediaRecorderControl_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QMediaRecorderControl_protectedbase_receivers".}
 proc fcQMediaRecorderControl_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QMediaRecorderControl_protectedbase_isSignalConnected".}
 proc fcQMediaRecorderControl_staticMetaObject(): pointer {.importc: "QMediaRecorderControl_staticMetaObject".}
-proc fcQMediaRecorderControl_delete(self: pointer) {.importc: "QMediaRecorderControl_delete".}
 
 proc metaObject*(self: gen_qmediarecordercontrol_types.QMediaRecorderControl, ): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQMediaRecorderControl_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQMediaRecorderControl_metaObject(self.h), owned: false)
 
 proc metacast*(self: gen_qmediarecordercontrol_types.QMediaRecorderControl, param1: cstring): pointer =
   fcQMediaRecorderControl_metacast(self.h, param1)
@@ -115,7 +114,7 @@ proc trUtf8*(_: type gen_qmediarecordercontrol_types.QMediaRecorderControl, s: c
   vx_ret
 
 proc outputLocation*(self: gen_qmediarecordercontrol_types.QMediaRecorderControl, ): gen_qurl_types.QUrl =
-  gen_qurl_types.QUrl(h: fcQMediaRecorderControl_outputLocation(self.h))
+  gen_qurl_types.QUrl(h: fcQMediaRecorderControl_outputLocation(self.h), owned: true)
 
 proc setOutputLocation*(self: gen_qmediarecordercontrol_types.QMediaRecorderControl, location: gen_qurl_types.QUrl): bool =
   fcQMediaRecorderControl_setOutputLocation(self.h, location.h)
@@ -244,7 +243,7 @@ proc actualLocationChanged*(self: gen_qmediarecordercontrol_types.QMediaRecorder
 type QMediaRecorderControlactualLocationChangedSlot* = proc(location: gen_qurl_types.QUrl)
 proc miqt_exec_callback_cQMediaRecorderControl_actualLocationChanged(slot: int, location: pointer) {.cdecl.} =
   let nimfunc = cast[ptr QMediaRecorderControlactualLocationChangedSlot](cast[pointer](slot))
-  let slotval1 = gen_qurl_types.QUrl(h: location)
+  let slotval1 = gen_qurl_types.QUrl(h: location, owned: false)
 
   nimfunc[](slotval1)
 
@@ -317,7 +316,7 @@ proc trUtf8*(_: type gen_qmediarecordercontrol_types.QMediaRecorderControl, s: c
   vx_ret
 
 proc sender*(self: gen_qmediarecordercontrol_types.QMediaRecorderControl, ): gen_qobject_types.QObject =
-  gen_qobject_types.QObject(h: fcQMediaRecorderControl_protectedbase_sender(self.h))
+  gen_qobject_types.QObject(h: fcQMediaRecorderControl_protectedbase_sender(self.h), owned: false)
 
 proc senderSignalIndex*(self: gen_qmediarecordercontrol_types.QMediaRecorderControl, ): cint =
   fcQMediaRecorderControl_protectedbase_senderSignalIndex(self.h)
@@ -330,5 +329,3 @@ proc isSignalConnected*(self: gen_qmediarecordercontrol_types.QMediaRecorderCont
 
 proc staticMetaObject*(_: type gen_qmediarecordercontrol_types.QMediaRecorderControl): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQMediaRecorderControl_staticMetaObject())
-proc delete*(self: gen_qmediarecordercontrol_types.QMediaRecorderControl) =
-  fcQMediaRecorderControl_delete(self.h)

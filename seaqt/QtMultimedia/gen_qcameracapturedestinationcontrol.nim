@@ -30,7 +30,7 @@ func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
     else:
       copyMem(addr result[0], unsafeAddr v[0], v.len)
 
-const cflags = gorge("pkg-config --cflags Qt5Multimedia")  & " -fPIC"
+const cflags = gorge("pkg-config --cflags Qt5Multimedia") & " -fPIC"
 {.compile("gen_qcameracapturedestinationcontrol.cpp", cflags).}
 
 
@@ -69,10 +69,9 @@ proc fcQCameraCaptureDestinationControl_protectedbase_senderSignalIndex(self: po
 proc fcQCameraCaptureDestinationControl_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QCameraCaptureDestinationControl_protectedbase_receivers".}
 proc fcQCameraCaptureDestinationControl_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QCameraCaptureDestinationControl_protectedbase_isSignalConnected".}
 proc fcQCameraCaptureDestinationControl_staticMetaObject(): pointer {.importc: "QCameraCaptureDestinationControl_staticMetaObject".}
-proc fcQCameraCaptureDestinationControl_delete(self: pointer) {.importc: "QCameraCaptureDestinationControl_delete".}
 
 proc metaObject*(self: gen_qcameracapturedestinationcontrol_types.QCameraCaptureDestinationControl, ): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQCameraCaptureDestinationControl_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQCameraCaptureDestinationControl_metaObject(self.h), owned: false)
 
 proc metacast*(self: gen_qcameracapturedestinationcontrol_types.QCameraCaptureDestinationControl, param1: cstring): pointer =
   fcQCameraCaptureDestinationControl_metacast(self.h, param1)
@@ -146,7 +145,7 @@ proc trUtf8*(_: type gen_qcameracapturedestinationcontrol_types.QCameraCaptureDe
   vx_ret
 
 proc sender*(self: gen_qcameracapturedestinationcontrol_types.QCameraCaptureDestinationControl, ): gen_qobject_types.QObject =
-  gen_qobject_types.QObject(h: fcQCameraCaptureDestinationControl_protectedbase_sender(self.h))
+  gen_qobject_types.QObject(h: fcQCameraCaptureDestinationControl_protectedbase_sender(self.h), owned: false)
 
 proc senderSignalIndex*(self: gen_qcameracapturedestinationcontrol_types.QCameraCaptureDestinationControl, ): cint =
   fcQCameraCaptureDestinationControl_protectedbase_senderSignalIndex(self.h)
@@ -159,5 +158,3 @@ proc isSignalConnected*(self: gen_qcameracapturedestinationcontrol_types.QCamera
 
 proc staticMetaObject*(_: type gen_qcameracapturedestinationcontrol_types.QCameraCaptureDestinationControl): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQCameraCaptureDestinationControl_staticMetaObject())
-proc delete*(self: gen_qcameracapturedestinationcontrol_types.QCameraCaptureDestinationControl) =
-  fcQCameraCaptureDestinationControl_delete(self.h)

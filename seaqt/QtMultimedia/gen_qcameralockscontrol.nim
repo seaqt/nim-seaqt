@@ -30,7 +30,7 @@ func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
     else:
       copyMem(addr result[0], unsafeAddr v[0], v.len)
 
-const cflags = gorge("pkg-config --cflags Qt5Multimedia")  & " -fPIC"
+const cflags = gorge("pkg-config --cflags Qt5Multimedia") & " -fPIC"
 {.compile("gen_qcameralockscontrol.cpp", cflags).}
 
 
@@ -70,10 +70,9 @@ proc fcQCameraLocksControl_protectedbase_senderSignalIndex(self: pointer, ): cin
 proc fcQCameraLocksControl_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QCameraLocksControl_protectedbase_receivers".}
 proc fcQCameraLocksControl_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QCameraLocksControl_protectedbase_isSignalConnected".}
 proc fcQCameraLocksControl_staticMetaObject(): pointer {.importc: "QCameraLocksControl_staticMetaObject".}
-proc fcQCameraLocksControl_delete(self: pointer) {.importc: "QCameraLocksControl_delete".}
 
 proc metaObject*(self: gen_qcameralockscontrol_types.QCameraLocksControl, ): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQCameraLocksControl_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQCameraLocksControl_metaObject(self.h), owned: false)
 
 proc metacast*(self: gen_qcameralockscontrol_types.QCameraLocksControl, param1: cstring): pointer =
   fcQCameraLocksControl_metacast(self.h, param1)
@@ -154,7 +153,7 @@ proc trUtf8*(_: type gen_qcameralockscontrol_types.QCameraLocksControl, s: cstri
   vx_ret
 
 proc sender*(self: gen_qcameralockscontrol_types.QCameraLocksControl, ): gen_qobject_types.QObject =
-  gen_qobject_types.QObject(h: fcQCameraLocksControl_protectedbase_sender(self.h))
+  gen_qobject_types.QObject(h: fcQCameraLocksControl_protectedbase_sender(self.h), owned: false)
 
 proc senderSignalIndex*(self: gen_qcameralockscontrol_types.QCameraLocksControl, ): cint =
   fcQCameraLocksControl_protectedbase_senderSignalIndex(self.h)
@@ -167,5 +166,3 @@ proc isSignalConnected*(self: gen_qcameralockscontrol_types.QCameraLocksControl,
 
 proc staticMetaObject*(_: type gen_qcameralockscontrol_types.QCameraLocksControl): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQCameraLocksControl_staticMetaObject())
-proc delete*(self: gen_qcameralockscontrol_types.QCameraLocksControl) =
-  fcQCameraLocksControl_delete(self.h)

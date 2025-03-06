@@ -30,9 +30,6 @@ func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
     else:
       copyMem(addr result[0], unsafeAddr v[0], v.len)
 
-const cflags = gorge("pkg-config --cflags Qt5Network")  & " -fPIC"
-{.compile("gen_qsslpresharedkeyauthenticator.cpp", cflags).}
-
 
 import ./gen_qsslpresharedkeyauthenticator_types
 export gen_qsslpresharedkeyauthenticator_types
@@ -51,7 +48,6 @@ proc fcQSslPreSharedKeyAuthenticator_preSharedKey(self: pointer, ): struct_miqt_
 proc fcQSslPreSharedKeyAuthenticator_maximumPreSharedKeyLength(self: pointer, ): cint {.importc: "QSslPreSharedKeyAuthenticator_maximumPreSharedKeyLength".}
 proc fcQSslPreSharedKeyAuthenticator_new(): ptr cQSslPreSharedKeyAuthenticator {.importc: "QSslPreSharedKeyAuthenticator_new".}
 proc fcQSslPreSharedKeyAuthenticator_new2(authenticator: pointer): ptr cQSslPreSharedKeyAuthenticator {.importc: "QSslPreSharedKeyAuthenticator_new2".}
-proc fcQSslPreSharedKeyAuthenticator_delete(self: pointer) {.importc: "QSslPreSharedKeyAuthenticator_delete".}
 
 proc operatorAssign*(self: gen_qsslpresharedkeyauthenticator_types.QSslPreSharedKeyAuthenticator, authenticator: gen_qsslpresharedkeyauthenticator_types.QSslPreSharedKeyAuthenticator): void =
   fcQSslPreSharedKeyAuthenticator_operatorAssign(self.h, authenticator.h)
@@ -90,11 +86,9 @@ proc maximumPreSharedKeyLength*(self: gen_qsslpresharedkeyauthenticator_types.QS
   fcQSslPreSharedKeyAuthenticator_maximumPreSharedKeyLength(self.h)
 
 proc create*(T: type gen_qsslpresharedkeyauthenticator_types.QSslPreSharedKeyAuthenticator): gen_qsslpresharedkeyauthenticator_types.QSslPreSharedKeyAuthenticator =
-  gen_qsslpresharedkeyauthenticator_types.QSslPreSharedKeyAuthenticator(h: fcQSslPreSharedKeyAuthenticator_new())
+  gen_qsslpresharedkeyauthenticator_types.QSslPreSharedKeyAuthenticator(h: fcQSslPreSharedKeyAuthenticator_new(), owned: true)
 
 proc create*(T: type gen_qsslpresharedkeyauthenticator_types.QSslPreSharedKeyAuthenticator,
     authenticator: gen_qsslpresharedkeyauthenticator_types.QSslPreSharedKeyAuthenticator): gen_qsslpresharedkeyauthenticator_types.QSslPreSharedKeyAuthenticator =
-  gen_qsslpresharedkeyauthenticator_types.QSslPreSharedKeyAuthenticator(h: fcQSslPreSharedKeyAuthenticator_new2(authenticator.h))
+  gen_qsslpresharedkeyauthenticator_types.QSslPreSharedKeyAuthenticator(h: fcQSslPreSharedKeyAuthenticator_new2(authenticator.h), owned: true)
 
-proc delete*(self: gen_qsslpresharedkeyauthenticator_types.QSslPreSharedKeyAuthenticator) =
-  fcQSslPreSharedKeyAuthenticator_delete(self.h)

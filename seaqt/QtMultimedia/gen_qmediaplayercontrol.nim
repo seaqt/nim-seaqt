@@ -30,7 +30,7 @@ func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
     else:
       copyMem(addr result[0], unsafeAddr v[0], v.len)
 
-const cflags = gorge("pkg-config --cflags Qt5Multimedia")  & " -fPIC"
+const cflags = gorge("pkg-config --cflags Qt5Multimedia") & " -fPIC"
 {.compile("gen_qmediaplayercontrol.cpp", cflags).}
 
 
@@ -120,10 +120,9 @@ proc fcQMediaPlayerControl_protectedbase_senderSignalIndex(self: pointer, ): cin
 proc fcQMediaPlayerControl_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QMediaPlayerControl_protectedbase_receivers".}
 proc fcQMediaPlayerControl_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QMediaPlayerControl_protectedbase_isSignalConnected".}
 proc fcQMediaPlayerControl_staticMetaObject(): pointer {.importc: "QMediaPlayerControl_staticMetaObject".}
-proc fcQMediaPlayerControl_delete(self: pointer) {.importc: "QMediaPlayerControl_delete".}
 
 proc metaObject*(self: gen_qmediaplayercontrol_types.QMediaPlayerControl, ): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQMediaPlayerControl_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQMediaPlayerControl_metaObject(self.h), owned: false)
 
 proc metacast*(self: gen_qmediaplayercontrol_types.QMediaPlayerControl, param1: cstring): pointer =
   fcQMediaPlayerControl_metacast(self.h, param1)
@@ -183,7 +182,7 @@ proc isSeekable*(self: gen_qmediaplayercontrol_types.QMediaPlayerControl, ): boo
   fcQMediaPlayerControl_isSeekable(self.h)
 
 proc availablePlaybackRanges*(self: gen_qmediaplayercontrol_types.QMediaPlayerControl, ): gen_qmediatimerange_types.QMediaTimeRange =
-  gen_qmediatimerange_types.QMediaTimeRange(h: fcQMediaPlayerControl_availablePlaybackRanges(self.h))
+  gen_qmediatimerange_types.QMediaTimeRange(h: fcQMediaPlayerControl_availablePlaybackRanges(self.h), owned: true)
 
 proc playbackRate*(self: gen_qmediaplayercontrol_types.QMediaPlayerControl, ): float64 =
   fcQMediaPlayerControl_playbackRate(self.h)
@@ -192,10 +191,10 @@ proc setPlaybackRate*(self: gen_qmediaplayercontrol_types.QMediaPlayerControl, r
   fcQMediaPlayerControl_setPlaybackRate(self.h, rate)
 
 proc media*(self: gen_qmediaplayercontrol_types.QMediaPlayerControl, ): gen_qmediacontent_types.QMediaContent =
-  gen_qmediacontent_types.QMediaContent(h: fcQMediaPlayerControl_media(self.h))
+  gen_qmediacontent_types.QMediaContent(h: fcQMediaPlayerControl_media(self.h), owned: true)
 
 proc mediaStream*(self: gen_qmediaplayercontrol_types.QMediaPlayerControl, ): gen_qiodevice_types.QIODevice =
-  gen_qiodevice_types.QIODevice(h: fcQMediaPlayerControl_mediaStream(self.h))
+  gen_qiodevice_types.QIODevice(h: fcQMediaPlayerControl_mediaStream(self.h), owned: false)
 
 proc setMedia*(self: gen_qmediaplayercontrol_types.QMediaPlayerControl, media: gen_qmediacontent_types.QMediaContent, stream: gen_qiodevice_types.QIODevice): void =
   fcQMediaPlayerControl_setMedia(self.h, media.h, stream.h)
@@ -215,7 +214,7 @@ proc mediaChanged*(self: gen_qmediaplayercontrol_types.QMediaPlayerControl, cont
 type QMediaPlayerControlmediaChangedSlot* = proc(content: gen_qmediacontent_types.QMediaContent)
 proc miqt_exec_callback_cQMediaPlayerControl_mediaChanged(slot: int, content: pointer) {.cdecl.} =
   let nimfunc = cast[ptr QMediaPlayerControlmediaChangedSlot](cast[pointer](slot))
-  let slotval1 = gen_qmediacontent_types.QMediaContent(h: content)
+  let slotval1 = gen_qmediacontent_types.QMediaContent(h: content, owned: false)
 
   nimfunc[](slotval1)
 
@@ -435,7 +434,7 @@ proc availablePlaybackRangesChanged*(self: gen_qmediaplayercontrol_types.QMediaP
 type QMediaPlayerControlavailablePlaybackRangesChangedSlot* = proc(ranges: gen_qmediatimerange_types.QMediaTimeRange)
 proc miqt_exec_callback_cQMediaPlayerControl_availablePlaybackRangesChanged(slot: int, ranges: pointer) {.cdecl.} =
   let nimfunc = cast[ptr QMediaPlayerControlavailablePlaybackRangesChangedSlot](cast[pointer](slot))
-  let slotval1 = gen_qmediatimerange_types.QMediaTimeRange(h: ranges)
+  let slotval1 = gen_qmediatimerange_types.QMediaTimeRange(h: ranges, owned: false)
 
   nimfunc[](slotval1)
 
@@ -519,7 +518,7 @@ proc trUtf8*(_: type gen_qmediaplayercontrol_types.QMediaPlayerControl, s: cstri
   vx_ret
 
 proc sender*(self: gen_qmediaplayercontrol_types.QMediaPlayerControl, ): gen_qobject_types.QObject =
-  gen_qobject_types.QObject(h: fcQMediaPlayerControl_protectedbase_sender(self.h))
+  gen_qobject_types.QObject(h: fcQMediaPlayerControl_protectedbase_sender(self.h), owned: false)
 
 proc senderSignalIndex*(self: gen_qmediaplayercontrol_types.QMediaPlayerControl, ): cint =
   fcQMediaPlayerControl_protectedbase_senderSignalIndex(self.h)
@@ -532,5 +531,3 @@ proc isSignalConnected*(self: gen_qmediaplayercontrol_types.QMediaPlayerControl,
 
 proc staticMetaObject*(_: type gen_qmediaplayercontrol_types.QMediaPlayerControl): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQMediaPlayerControl_staticMetaObject())
-proc delete*(self: gen_qmediaplayercontrol_types.QMediaPlayerControl) =
-  fcQMediaPlayerControl_delete(self.h)

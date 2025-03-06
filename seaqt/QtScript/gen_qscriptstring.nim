@@ -30,9 +30,6 @@ func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
     else:
       copyMem(addr result[0], unsafeAddr v[0], v.len)
 
-const cflags = gorge("pkg-config --cflags Qt5Script")  & " -fPIC"
-{.compile("gen_qscriptstring.cpp", cflags).}
-
 
 import ./gen_qscriptstring_types
 export gen_qscriptstring_types
@@ -50,7 +47,6 @@ proc fcQScriptString_ToQString(self: pointer, ): struct_miqt_string {.importc: "
 proc fcQScriptString_toArrayIndex1(self: pointer, ok: ptr bool): cuint {.importc: "QScriptString_toArrayIndex1".}
 proc fcQScriptString_new(): ptr cQScriptString {.importc: "QScriptString_new".}
 proc fcQScriptString_new2(other: pointer): ptr cQScriptString {.importc: "QScriptString_new2".}
-proc fcQScriptString_delete(self: pointer) {.importc: "QScriptString_delete".}
 
 proc operatorAssign*(self: gen_qscriptstring_types.QScriptString, other: gen_qscriptstring_types.QScriptString): void =
   fcQScriptString_operatorAssign(self.h, other.h)
@@ -83,11 +79,9 @@ proc toArrayIndex*(self: gen_qscriptstring_types.QScriptString, ok: ptr bool): c
   fcQScriptString_toArrayIndex1(self.h, ok)
 
 proc create*(T: type gen_qscriptstring_types.QScriptString): gen_qscriptstring_types.QScriptString =
-  gen_qscriptstring_types.QScriptString(h: fcQScriptString_new())
+  gen_qscriptstring_types.QScriptString(h: fcQScriptString_new(), owned: true)
 
 proc create*(T: type gen_qscriptstring_types.QScriptString,
     other: gen_qscriptstring_types.QScriptString): gen_qscriptstring_types.QScriptString =
-  gen_qscriptstring_types.QScriptString(h: fcQScriptString_new2(other.h))
+  gen_qscriptstring_types.QScriptString(h: fcQScriptString_new2(other.h), owned: true)
 
-proc delete*(self: gen_qscriptstring_types.QScriptString) =
-  fcQScriptString_delete(self.h)

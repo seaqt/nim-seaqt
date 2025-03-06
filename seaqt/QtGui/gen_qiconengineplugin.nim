@@ -30,7 +30,7 @@ func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
     else:
       copyMem(addr result[0], unsafeAddr v[0], v.len)
 
-const cflags = gorge("pkg-config --cflags Qt5Gui")  & " -fPIC"
+const cflags = gorge("pkg-config --cflags Qt5Gui") & " -fPIC"
 {.compile("gen_qiconengineplugin.cpp", cflags).}
 
 
@@ -62,7 +62,7 @@ proc fcQIconEnginePlugin_tr2(s: cstring, c: cstring): struct_miqt_string {.impor
 proc fcQIconEnginePlugin_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QIconEnginePlugin_tr3".}
 proc fcQIconEnginePlugin_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QIconEnginePlugin_trUtf82".}
 proc fcQIconEnginePlugin_trUtf83(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QIconEnginePlugin_trUtf83".}
-type cQIconEnginePluginVTable = object
+type cQIconEnginePluginVTable {.pure.} = object
   destructor*: proc(vtbl: ptr cQIconEnginePluginVTable, self: ptr cQIconEnginePlugin) {.cdecl, raises:[], gcsafe.}
   metaObject*: proc(vtbl, self: pointer, ): pointer {.cdecl, raises: [], gcsafe.}
   metacast*: proc(vtbl, self: pointer, param1: cstring): pointer {.cdecl, raises: [], gcsafe.}
@@ -92,10 +92,9 @@ proc fcQIconEnginePlugin_protectedbase_isSignalConnected(self: pointer, signal: 
 proc fcQIconEnginePlugin_new(vtbl: pointer, ): ptr cQIconEnginePlugin {.importc: "QIconEnginePlugin_new".}
 proc fcQIconEnginePlugin_new2(vtbl: pointer, parent: pointer): ptr cQIconEnginePlugin {.importc: "QIconEnginePlugin_new2".}
 proc fcQIconEnginePlugin_staticMetaObject(): pointer {.importc: "QIconEnginePlugin_staticMetaObject".}
-proc fcQIconEnginePlugin_delete(self: pointer) {.importc: "QIconEnginePlugin_delete".}
 
 proc metaObject*(self: gen_qiconengineplugin_types.QIconEnginePlugin, ): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQIconEnginePlugin_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQIconEnginePlugin_metaObject(self.h), owned: false)
 
 proc metacast*(self: gen_qiconengineplugin_types.QIconEnginePlugin, param1: cstring): pointer =
   fcQIconEnginePlugin_metacast(self.h, param1)
@@ -116,7 +115,7 @@ proc trUtf8*(_: type gen_qiconengineplugin_types.QIconEnginePlugin, s: cstring):
   vx_ret
 
 proc create*(self: gen_qiconengineplugin_types.QIconEnginePlugin, filename: string): gen_qiconengine_types.QIconEngine =
-  gen_qiconengine_types.QIconEngine(h: fcQIconEnginePlugin_create(self.h, struct_miqt_string(data: filename, len: csize_t(len(filename)))))
+  gen_qiconengine_types.QIconEngine(h: fcQIconEnginePlugin_create(self.h, struct_miqt_string(data: filename, len: csize_t(len(filename)))), owned: false)
 
 proc tr*(_: type gen_qiconengineplugin_types.QIconEnginePlugin, s: cstring, c: cstring): string =
   let v_ms = fcQIconEnginePlugin_tr2(s, c)
@@ -153,7 +152,7 @@ type QIconEnginePluginchildEventProc* = proc(self: QIconEnginePlugin, event: gen
 type QIconEnginePlugincustomEventProc* = proc(self: QIconEnginePlugin, event: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
 type QIconEnginePluginconnectNotifyProc* = proc(self: QIconEnginePlugin, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
 type QIconEnginePlugindisconnectNotifyProc* = proc(self: QIconEnginePlugin, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
-type QIconEnginePluginVTable* = object
+type QIconEnginePluginVTable* {.inheritable, pure.} = object
   vtbl: cQIconEnginePluginVTable
   metaObject*: QIconEnginePluginmetaObjectProc
   metacast*: QIconEnginePluginmetacastProc
@@ -167,13 +166,16 @@ type QIconEnginePluginVTable* = object
   connectNotify*: QIconEnginePluginconnectNotifyProc
   disconnectNotify*: QIconEnginePlugindisconnectNotifyProc
 proc QIconEnginePluginmetaObject*(self: gen_qiconengineplugin_types.QIconEnginePlugin, ): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQIconEnginePlugin_virtualbase_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQIconEnginePlugin_virtualbase_metaObject(self.h), owned: false)
 
 proc miqt_exec_callback_cQIconEnginePlugin_metaObject(vtbl: pointer, self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QIconEnginePluginVTable](vtbl)
   let self = QIconEnginePlugin(h: self)
   var virtualReturn = vtbl[].metaObject(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QIconEnginePluginmetacast*(self: gen_qiconengineplugin_types.QIconEnginePlugin, param1: cstring): pointer =
   fcQIconEnginePlugin_virtualbase_metacast(self.h, param1)
@@ -205,7 +207,10 @@ proc miqt_exec_callback_cQIconEnginePlugin_create(vtbl: pointer, self: pointer, 
   c_free(vfilename_ms.data)
   let slotval1 = vfilenamex_ret
   var virtualReturn = vtbl[].create(self, slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QIconEnginePluginevent*(self: gen_qiconengineplugin_types.QIconEnginePlugin, event: gen_qcoreevent_types.QEvent): bool =
   fcQIconEnginePlugin_virtualbase_event(self.h, event.h)
@@ -213,7 +218,7 @@ proc QIconEnginePluginevent*(self: gen_qiconengineplugin_types.QIconEnginePlugin
 proc miqt_exec_callback_cQIconEnginePlugin_event(vtbl: pointer, self: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QIconEnginePluginVTable](vtbl)
   let self = QIconEnginePlugin(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].event(self, slotval1)
   virtualReturn
 
@@ -223,8 +228,8 @@ proc QIconEnginePlugineventFilter*(self: gen_qiconengineplugin_types.QIconEngine
 proc miqt_exec_callback_cQIconEnginePlugin_eventFilter(vtbl: pointer, self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QIconEnginePluginVTable](vtbl)
   let self = QIconEnginePlugin(h: self)
-  let slotval1 = gen_qobject_types.QObject(h: watched)
-  let slotval2 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].eventFilter(self, slotval1, slotval2)
   virtualReturn
 
@@ -234,7 +239,7 @@ proc QIconEnginePlugintimerEvent*(self: gen_qiconengineplugin_types.QIconEngineP
 proc miqt_exec_callback_cQIconEnginePlugin_timerEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QIconEnginePluginVTable](vtbl)
   let self = QIconEnginePlugin(h: self)
-  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   vtbl[].timerEvent(self, slotval1)
 
 proc QIconEnginePluginchildEvent*(self: gen_qiconengineplugin_types.QIconEnginePlugin, event: gen_qcoreevent_types.QChildEvent): void =
@@ -243,7 +248,7 @@ proc QIconEnginePluginchildEvent*(self: gen_qiconengineplugin_types.QIconEngineP
 proc miqt_exec_callback_cQIconEnginePlugin_childEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QIconEnginePluginVTable](vtbl)
   let self = QIconEnginePlugin(h: self)
-  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   vtbl[].childEvent(self, slotval1)
 
 proc QIconEnginePlugincustomEvent*(self: gen_qiconengineplugin_types.QIconEnginePlugin, event: gen_qcoreevent_types.QEvent): void =
@@ -252,7 +257,7 @@ proc QIconEnginePlugincustomEvent*(self: gen_qiconengineplugin_types.QIconEngine
 proc miqt_exec_callback_cQIconEnginePlugin_customEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QIconEnginePluginVTable](vtbl)
   let self = QIconEnginePlugin(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].customEvent(self, slotval1)
 
 proc QIconEnginePluginconnectNotify*(self: gen_qiconengineplugin_types.QIconEnginePlugin, signal: gen_qmetaobject_types.QMetaMethod): void =
@@ -261,7 +266,7 @@ proc QIconEnginePluginconnectNotify*(self: gen_qiconengineplugin_types.QIconEngi
 proc miqt_exec_callback_cQIconEnginePlugin_connectNotify(vtbl: pointer, self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QIconEnginePluginVTable](vtbl)
   let self = QIconEnginePlugin(h: self)
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].connectNotify(self, slotval1)
 
 proc QIconEnginePlugindisconnectNotify*(self: gen_qiconengineplugin_types.QIconEnginePlugin, signal: gen_qmetaobject_types.QMetaMethod): void =
@@ -270,11 +275,107 @@ proc QIconEnginePlugindisconnectNotify*(self: gen_qiconengineplugin_types.QIconE
 proc miqt_exec_callback_cQIconEnginePlugin_disconnectNotify(vtbl: pointer, self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QIconEnginePluginVTable](vtbl)
   let self = QIconEnginePlugin(h: self)
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].disconnectNotify(self, slotval1)
 
+type VirtualQIconEnginePlugin* {.inheritable.} = ref object of QIconEnginePlugin
+  vtbl*: cQIconEnginePluginVTable
+method metaObject*(self: VirtualQIconEnginePlugin, ): gen_qobjectdefs_types.QMetaObject {.base.} =
+  QIconEnginePluginmetaObject(self[])
+proc miqt_exec_method_cQIconEnginePlugin_metaObject(vtbl: pointer, inst: pointer): pointer {.cdecl.} =
+  let vtbl = cast[VirtualQIconEnginePlugin](cast[uint](vtbl) - uint(offsetOf(VirtualQIconEnginePlugin, vtbl)))
+  var virtualReturn = vtbl.metaObject()
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
+
+method metacast*(self: VirtualQIconEnginePlugin, param1: cstring): pointer {.base.} =
+  QIconEnginePluginmetacast(self[], param1)
+proc miqt_exec_method_cQIconEnginePlugin_metacast(vtbl: pointer, inst: pointer, param1: cstring): pointer {.cdecl.} =
+  let vtbl = cast[VirtualQIconEnginePlugin](cast[uint](vtbl) - uint(offsetOf(VirtualQIconEnginePlugin, vtbl)))
+  let slotval1 = (param1)
+  var virtualReturn = vtbl.metacast(slotval1)
+  virtualReturn
+
+method metacall*(self: VirtualQIconEnginePlugin, param1: cint, param2: cint, param3: pointer): cint {.base.} =
+  QIconEnginePluginmetacall(self[], param1, param2, param3)
+proc miqt_exec_method_cQIconEnginePlugin_metacall(vtbl: pointer, inst: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
+  let vtbl = cast[VirtualQIconEnginePlugin](cast[uint](vtbl) - uint(offsetOf(VirtualQIconEnginePlugin, vtbl)))
+  let slotval1 = cint(param1)
+  let slotval2 = param2
+  let slotval3 = param3
+  var virtualReturn = vtbl.metacall(slotval1, slotval2, slotval3)
+  virtualReturn
+
+method create*(self: VirtualQIconEnginePlugin, filename: string): gen_qiconengine_types.QIconEngine {.base.} =
+  raiseAssert("missing implementation of QIconEnginePlugin_virtualbase_create")
+proc miqt_exec_method_cQIconEnginePlugin_create(vtbl: pointer, inst: pointer, filename: struct_miqt_string): pointer {.cdecl.} =
+  let vtbl = cast[VirtualQIconEnginePlugin](cast[uint](vtbl) - uint(offsetOf(VirtualQIconEnginePlugin, vtbl)))
+  let vfilename_ms = filename
+  let vfilenamex_ret = string.fromBytes(toOpenArrayByte(vfilename_ms.data, 0, int(vfilename_ms.len)-1))
+  c_free(vfilename_ms.data)
+  let slotval1 = vfilenamex_ret
+  var virtualReturn = vtbl.create(slotval1)
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
+
+method event*(self: VirtualQIconEnginePlugin, event: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QIconEnginePluginevent(self[], event)
+proc miqt_exec_method_cQIconEnginePlugin_event(vtbl: pointer, inst: pointer, event: pointer): bool {.cdecl.} =
+  let vtbl = cast[VirtualQIconEnginePlugin](cast[uint](vtbl) - uint(offsetOf(VirtualQIconEnginePlugin, vtbl)))
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
+  var virtualReturn = vtbl.event(slotval1)
+  virtualReturn
+
+method eventFilter*(self: VirtualQIconEnginePlugin, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QIconEnginePlugineventFilter(self[], watched, event)
+proc miqt_exec_method_cQIconEnginePlugin_eventFilter(vtbl: pointer, inst: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
+  let vtbl = cast[VirtualQIconEnginePlugin](cast[uint](vtbl) - uint(offsetOf(VirtualQIconEnginePlugin, vtbl)))
+  let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
+  var virtualReturn = vtbl.eventFilter(slotval1, slotval2)
+  virtualReturn
+
+method timerEvent*(self: VirtualQIconEnginePlugin, event: gen_qcoreevent_types.QTimerEvent): void {.base.} =
+  QIconEnginePlugintimerEvent(self[], event)
+proc miqt_exec_method_cQIconEnginePlugin_timerEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQIconEnginePlugin](cast[uint](vtbl) - uint(offsetOf(VirtualQIconEnginePlugin, vtbl)))
+  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
+  vtbl.timerEvent(slotval1)
+
+method childEvent*(self: VirtualQIconEnginePlugin, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
+  QIconEnginePluginchildEvent(self[], event)
+proc miqt_exec_method_cQIconEnginePlugin_childEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQIconEnginePlugin](cast[uint](vtbl) - uint(offsetOf(VirtualQIconEnginePlugin, vtbl)))
+  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
+  vtbl.childEvent(slotval1)
+
+method customEvent*(self: VirtualQIconEnginePlugin, event: gen_qcoreevent_types.QEvent): void {.base.} =
+  QIconEnginePlugincustomEvent(self[], event)
+proc miqt_exec_method_cQIconEnginePlugin_customEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQIconEnginePlugin](cast[uint](vtbl) - uint(offsetOf(VirtualQIconEnginePlugin, vtbl)))
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
+  vtbl.customEvent(slotval1)
+
+method connectNotify*(self: VirtualQIconEnginePlugin, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QIconEnginePluginconnectNotify(self[], signal)
+proc miqt_exec_method_cQIconEnginePlugin_connectNotify(vtbl: pointer, inst: pointer, signal: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQIconEnginePlugin](cast[uint](vtbl) - uint(offsetOf(VirtualQIconEnginePlugin, vtbl)))
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
+  vtbl.connectNotify(slotval1)
+
+method disconnectNotify*(self: VirtualQIconEnginePlugin, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QIconEnginePlugindisconnectNotify(self[], signal)
+proc miqt_exec_method_cQIconEnginePlugin_disconnectNotify(vtbl: pointer, inst: pointer, signal: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQIconEnginePlugin](cast[uint](vtbl) - uint(offsetOf(VirtualQIconEnginePlugin, vtbl)))
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
+  vtbl.disconnectNotify(slotval1)
+
 proc sender*(self: gen_qiconengineplugin_types.QIconEnginePlugin, ): gen_qobject_types.QObject =
-  gen_qobject_types.QObject(h: fcQIconEnginePlugin_protectedbase_sender(self.h))
+  gen_qobject_types.QObject(h: fcQIconEnginePlugin_protectedbase_sender(self.h), owned: false)
 
 proc senderSignalIndex*(self: gen_qiconengineplugin_types.QIconEnginePlugin, ): cint =
   fcQIconEnginePlugin_protectedbase_senderSignalIndex(self.h)
@@ -289,66 +390,109 @@ proc create*(T: type gen_qiconengineplugin_types.QIconEnginePlugin,
     vtbl: ref QIconEnginePluginVTable = nil): gen_qiconengineplugin_types.QIconEnginePlugin =
   let vtbl = if vtbl == nil: new QIconEnginePluginVTable else: vtbl
   GC_ref(vtbl)
-  vtbl.vtbl.destructor = proc(vtbl: ptr cQIconEnginePluginVTable, _: ptr cQIconEnginePlugin) {.cdecl.} =
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQIconEnginePluginVTable, _: ptr cQIconEnginePlugin) {.cdecl.} =
     let vtbl = cast[ref QIconEnginePluginVTable](vtbl)
     GC_unref(vtbl)
-  if not isNil(vtbl.metaObject):
+  if not isNil(vtbl[].metaObject):
     vtbl[].vtbl.metaObject = miqt_exec_callback_cQIconEnginePlugin_metaObject
-  if not isNil(vtbl.metacast):
+  if not isNil(vtbl[].metacast):
     vtbl[].vtbl.metacast = miqt_exec_callback_cQIconEnginePlugin_metacast
-  if not isNil(vtbl.metacall):
+  if not isNil(vtbl[].metacall):
     vtbl[].vtbl.metacall = miqt_exec_callback_cQIconEnginePlugin_metacall
-  if not isNil(vtbl.create):
+  if not isNil(vtbl[].create):
     vtbl[].vtbl.create = miqt_exec_callback_cQIconEnginePlugin_create
-  if not isNil(vtbl.event):
+  if not isNil(vtbl[].event):
     vtbl[].vtbl.event = miqt_exec_callback_cQIconEnginePlugin_event
-  if not isNil(vtbl.eventFilter):
+  if not isNil(vtbl[].eventFilter):
     vtbl[].vtbl.eventFilter = miqt_exec_callback_cQIconEnginePlugin_eventFilter
-  if not isNil(vtbl.timerEvent):
+  if not isNil(vtbl[].timerEvent):
     vtbl[].vtbl.timerEvent = miqt_exec_callback_cQIconEnginePlugin_timerEvent
-  if not isNil(vtbl.childEvent):
+  if not isNil(vtbl[].childEvent):
     vtbl[].vtbl.childEvent = miqt_exec_callback_cQIconEnginePlugin_childEvent
-  if not isNil(vtbl.customEvent):
+  if not isNil(vtbl[].customEvent):
     vtbl[].vtbl.customEvent = miqt_exec_callback_cQIconEnginePlugin_customEvent
-  if not isNil(vtbl.connectNotify):
+  if not isNil(vtbl[].connectNotify):
     vtbl[].vtbl.connectNotify = miqt_exec_callback_cQIconEnginePlugin_connectNotify
-  if not isNil(vtbl.disconnectNotify):
+  if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQIconEnginePlugin_disconnectNotify
-  gen_qiconengineplugin_types.QIconEnginePlugin(h: fcQIconEnginePlugin_new(addr(vtbl[]), ))
+  gen_qiconengineplugin_types.QIconEnginePlugin(h: fcQIconEnginePlugin_new(addr(vtbl[].vtbl), ), owned: true)
 
 proc create*(T: type gen_qiconengineplugin_types.QIconEnginePlugin,
     parent: gen_qobject_types.QObject,
     vtbl: ref QIconEnginePluginVTable = nil): gen_qiconengineplugin_types.QIconEnginePlugin =
   let vtbl = if vtbl == nil: new QIconEnginePluginVTable else: vtbl
   GC_ref(vtbl)
-  vtbl.vtbl.destructor = proc(vtbl: ptr cQIconEnginePluginVTable, _: ptr cQIconEnginePlugin) {.cdecl.} =
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQIconEnginePluginVTable, _: ptr cQIconEnginePlugin) {.cdecl.} =
     let vtbl = cast[ref QIconEnginePluginVTable](vtbl)
     GC_unref(vtbl)
-  if not isNil(vtbl.metaObject):
+  if not isNil(vtbl[].metaObject):
     vtbl[].vtbl.metaObject = miqt_exec_callback_cQIconEnginePlugin_metaObject
-  if not isNil(vtbl.metacast):
+  if not isNil(vtbl[].metacast):
     vtbl[].vtbl.metacast = miqt_exec_callback_cQIconEnginePlugin_metacast
-  if not isNil(vtbl.metacall):
+  if not isNil(vtbl[].metacall):
     vtbl[].vtbl.metacall = miqt_exec_callback_cQIconEnginePlugin_metacall
-  if not isNil(vtbl.create):
+  if not isNil(vtbl[].create):
     vtbl[].vtbl.create = miqt_exec_callback_cQIconEnginePlugin_create
-  if not isNil(vtbl.event):
+  if not isNil(vtbl[].event):
     vtbl[].vtbl.event = miqt_exec_callback_cQIconEnginePlugin_event
-  if not isNil(vtbl.eventFilter):
+  if not isNil(vtbl[].eventFilter):
     vtbl[].vtbl.eventFilter = miqt_exec_callback_cQIconEnginePlugin_eventFilter
-  if not isNil(vtbl.timerEvent):
+  if not isNil(vtbl[].timerEvent):
     vtbl[].vtbl.timerEvent = miqt_exec_callback_cQIconEnginePlugin_timerEvent
-  if not isNil(vtbl.childEvent):
+  if not isNil(vtbl[].childEvent):
     vtbl[].vtbl.childEvent = miqt_exec_callback_cQIconEnginePlugin_childEvent
-  if not isNil(vtbl.customEvent):
+  if not isNil(vtbl[].customEvent):
     vtbl[].vtbl.customEvent = miqt_exec_callback_cQIconEnginePlugin_customEvent
-  if not isNil(vtbl.connectNotify):
+  if not isNil(vtbl[].connectNotify):
     vtbl[].vtbl.connectNotify = miqt_exec_callback_cQIconEnginePlugin_connectNotify
-  if not isNil(vtbl.disconnectNotify):
+  if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQIconEnginePlugin_disconnectNotify
-  gen_qiconengineplugin_types.QIconEnginePlugin(h: fcQIconEnginePlugin_new2(addr(vtbl[]), parent.h))
+  gen_qiconengineplugin_types.QIconEnginePlugin(h: fcQIconEnginePlugin_new2(addr(vtbl[].vtbl), parent.h), owned: true)
+
+proc create*(T: type gen_qiconengineplugin_types.QIconEnginePlugin,
+    vtbl: VirtualQIconEnginePlugin) =
+
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQIconEnginePluginVTable, _: ptr cQIconEnginePlugin) {.cdecl.} =
+    let vtbl = cast[ptr typeof(VirtualQIconEnginePlugin()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQIconEnginePlugin, vtbl)))
+    vtbl[].h = nil
+    vtbl[].owned = false
+  vtbl[].vtbl.metaObject = miqt_exec_method_cQIconEnginePlugin_metaObject
+  vtbl[].vtbl.metacast = miqt_exec_method_cQIconEnginePlugin_metacast
+  vtbl[].vtbl.metacall = miqt_exec_method_cQIconEnginePlugin_metacall
+  vtbl[].vtbl.create = miqt_exec_method_cQIconEnginePlugin_create
+  vtbl[].vtbl.event = miqt_exec_method_cQIconEnginePlugin_event
+  vtbl[].vtbl.eventFilter = miqt_exec_method_cQIconEnginePlugin_eventFilter
+  vtbl[].vtbl.timerEvent = miqt_exec_method_cQIconEnginePlugin_timerEvent
+  vtbl[].vtbl.childEvent = miqt_exec_method_cQIconEnginePlugin_childEvent
+  vtbl[].vtbl.customEvent = miqt_exec_method_cQIconEnginePlugin_customEvent
+  vtbl[].vtbl.connectNotify = miqt_exec_method_cQIconEnginePlugin_connectNotify
+  vtbl[].vtbl.disconnectNotify = miqt_exec_method_cQIconEnginePlugin_disconnectNotify
+  if vtbl[].h != nil: delete(move(vtbl[]))
+  vtbl[].h = fcQIconEnginePlugin_new(addr(vtbl[].vtbl), )
+  vtbl[].owned = true
+
+proc create*(T: type gen_qiconengineplugin_types.QIconEnginePlugin,
+    parent: gen_qobject_types.QObject,
+    vtbl: VirtualQIconEnginePlugin) =
+
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQIconEnginePluginVTable, _: ptr cQIconEnginePlugin) {.cdecl.} =
+    let vtbl = cast[ptr typeof(VirtualQIconEnginePlugin()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQIconEnginePlugin, vtbl)))
+    vtbl[].h = nil
+    vtbl[].owned = false
+  vtbl[].vtbl.metaObject = miqt_exec_method_cQIconEnginePlugin_metaObject
+  vtbl[].vtbl.metacast = miqt_exec_method_cQIconEnginePlugin_metacast
+  vtbl[].vtbl.metacall = miqt_exec_method_cQIconEnginePlugin_metacall
+  vtbl[].vtbl.create = miqt_exec_method_cQIconEnginePlugin_create
+  vtbl[].vtbl.event = miqt_exec_method_cQIconEnginePlugin_event
+  vtbl[].vtbl.eventFilter = miqt_exec_method_cQIconEnginePlugin_eventFilter
+  vtbl[].vtbl.timerEvent = miqt_exec_method_cQIconEnginePlugin_timerEvent
+  vtbl[].vtbl.childEvent = miqt_exec_method_cQIconEnginePlugin_childEvent
+  vtbl[].vtbl.customEvent = miqt_exec_method_cQIconEnginePlugin_customEvent
+  vtbl[].vtbl.connectNotify = miqt_exec_method_cQIconEnginePlugin_connectNotify
+  vtbl[].vtbl.disconnectNotify = miqt_exec_method_cQIconEnginePlugin_disconnectNotify
+  if vtbl[].h != nil: delete(move(vtbl[]))
+  vtbl[].h = fcQIconEnginePlugin_new2(addr(vtbl[].vtbl), parent.h)
+  vtbl[].owned = true
 
 proc staticMetaObject*(_: type gen_qiconengineplugin_types.QIconEnginePlugin): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQIconEnginePlugin_staticMetaObject())
-proc delete*(self: gen_qiconengineplugin_types.QIconEnginePlugin) =
-  fcQIconEnginePlugin_delete(self.h)

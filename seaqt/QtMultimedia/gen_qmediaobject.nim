@@ -30,7 +30,7 @@ func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
     else:
       copyMem(addr result[0], unsafeAddr v[0], v.len)
 
-const cflags = gorge("pkg-config --cflags Qt5Multimedia")  & " -fPIC"
+const cflags = gorge("pkg-config --cflags Qt5Multimedia") & " -fPIC"
 {.compile("gen_qmediaobject.cpp", cflags).}
 
 
@@ -90,10 +90,9 @@ proc fcQMediaObject_protectedbase_senderSignalIndex(self: pointer, ): cint {.imp
 proc fcQMediaObject_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QMediaObject_protectedbase_receivers".}
 proc fcQMediaObject_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QMediaObject_protectedbase_isSignalConnected".}
 proc fcQMediaObject_staticMetaObject(): pointer {.importc: "QMediaObject_staticMetaObject".}
-proc fcQMediaObject_delete(self: pointer) {.importc: "QMediaObject_delete".}
 
 proc metaObject*(self: gen_qmediaobject_types.QMediaObject, ): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQMediaObject_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQMediaObject_metaObject(self.h), owned: false)
 
 proc metacast*(self: gen_qmediaobject_types.QMediaObject, param1: cstring): pointer =
   fcQMediaObject_metacast(self.h, param1)
@@ -120,7 +119,7 @@ proc availability*(self: gen_qmediaobject_types.QMediaObject, ): cint =
   cint(fcQMediaObject_availability(self.h))
 
 proc service*(self: gen_qmediaobject_types.QMediaObject, ): gen_qmediaservice_types.QMediaService =
-  gen_qmediaservice_types.QMediaService(h: fcQMediaObject_service(self.h))
+  gen_qmediaservice_types.QMediaService(h: fcQMediaObject_service(self.h), owned: false)
 
 proc notifyInterval*(self: gen_qmediaobject_types.QMediaObject, ): cint =
   fcQMediaObject_notifyInterval(self.h)
@@ -138,7 +137,7 @@ proc isMetaDataAvailable*(self: gen_qmediaobject_types.QMediaObject, ): bool =
   fcQMediaObject_isMetaDataAvailable(self.h)
 
 proc metaData*(self: gen_qmediaobject_types.QMediaObject, key: string): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQMediaObject_metaData(self.h, struct_miqt_string(data: key, len: csize_t(len(key)))))
+  gen_qvariant_types.QVariant(h: fcQMediaObject_metaData(self.h, struct_miqt_string(data: key, len: csize_t(len(key)))), owned: true)
 
 proc availableMetaData*(self: gen_qmediaobject_types.QMediaObject, ): seq[string] =
   var v_ma = fcQMediaObject_availableMetaData(self.h)
@@ -221,7 +220,7 @@ proc miqt_exec_callback_cQMediaObject_metaDataChanged2(slot: int, key: struct_mi
   c_free(vkey_ms.data)
   let slotval1 = vkeyx_ret
 
-  let slotval2 = gen_qvariant_types.QVariant(h: value)
+  let slotval2 = gen_qvariant_types.QVariant(h: value, owned: false)
 
   nimfunc[](slotval1, slotval2)
 
@@ -306,7 +305,7 @@ proc removePropertyWatch*(self: gen_qmediaobject_types.QMediaObject, name: seq[b
   fcQMediaObject_protectedbase_removePropertyWatch(self.h, struct_miqt_string(data: cast[cstring](if len(name) == 0: nil else: unsafeAddr name[0]), len: csize_t(len(name))))
 
 proc sender*(self: gen_qmediaobject_types.QMediaObject, ): gen_qobject_types.QObject =
-  gen_qobject_types.QObject(h: fcQMediaObject_protectedbase_sender(self.h))
+  gen_qobject_types.QObject(h: fcQMediaObject_protectedbase_sender(self.h), owned: false)
 
 proc senderSignalIndex*(self: gen_qmediaobject_types.QMediaObject, ): cint =
   fcQMediaObject_protectedbase_senderSignalIndex(self.h)
@@ -319,5 +318,3 @@ proc isSignalConnected*(self: gen_qmediaobject_types.QMediaObject, signal: gen_q
 
 proc staticMetaObject*(_: type gen_qmediaobject_types.QMediaObject): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQMediaObject_staticMetaObject())
-proc delete*(self: gen_qmediaobject_types.QMediaObject) =
-  fcQMediaObject_delete(self.h)

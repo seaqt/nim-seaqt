@@ -30,7 +30,7 @@ func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
     else:
       copyMem(addr result[0], unsafeAddr v[0], v.len)
 
-const cflags = gorge("pkg-config --cflags Qt5Widgets")  & " -fPIC"
+const cflags = gorge("pkg-config --cflags Qt5Widgets") & " -fPIC"
 {.compile("gen_qitemdelegate.cpp", cflags).}
 
 
@@ -97,7 +97,7 @@ proc fcQItemDelegate_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: 
 proc fcQItemDelegate_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QItemDelegate_tr3".}
 proc fcQItemDelegate_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QItemDelegate_trUtf82".}
 proc fcQItemDelegate_trUtf83(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QItemDelegate_trUtf83".}
-type cQItemDelegateVTable = object
+type cQItemDelegateVTable {.pure.} = object
   destructor*: proc(vtbl: ptr cQItemDelegateVTable, self: ptr cQItemDelegate) {.cdecl, raises:[], gcsafe.}
   metaObject*: proc(vtbl, self: pointer, ): pointer {.cdecl, raises: [], gcsafe.}
   metacast*: proc(vtbl, self: pointer, param1: cstring): pointer {.cdecl, raises: [], gcsafe.}
@@ -162,10 +162,9 @@ proc fcQItemDelegate_protectedbase_isSignalConnected(self: pointer, signal: poin
 proc fcQItemDelegate_new(vtbl: pointer, ): ptr cQItemDelegate {.importc: "QItemDelegate_new".}
 proc fcQItemDelegate_new2(vtbl: pointer, parent: pointer): ptr cQItemDelegate {.importc: "QItemDelegate_new2".}
 proc fcQItemDelegate_staticMetaObject(): pointer {.importc: "QItemDelegate_staticMetaObject".}
-proc fcQItemDelegate_delete(self: pointer) {.importc: "QItemDelegate_delete".}
 
 proc metaObject*(self: gen_qitemdelegate_types.QItemDelegate, ): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQItemDelegate_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQItemDelegate_metaObject(self.h), owned: false)
 
 proc metacast*(self: gen_qitemdelegate_types.QItemDelegate, param1: cstring): pointer =
   fcQItemDelegate_metacast(self.h, param1)
@@ -195,10 +194,10 @@ proc paint*(self: gen_qitemdelegate_types.QItemDelegate, painter: gen_qpainter_t
   fcQItemDelegate_paint(self.h, painter.h, option.h, index.h)
 
 proc sizeHint*(self: gen_qitemdelegate_types.QItemDelegate, option: gen_qstyleoption_types.QStyleOptionViewItem, index: gen_qabstractitemmodel_types.QModelIndex): gen_qsize_types.QSize =
-  gen_qsize_types.QSize(h: fcQItemDelegate_sizeHint(self.h, option.h, index.h))
+  gen_qsize_types.QSize(h: fcQItemDelegate_sizeHint(self.h, option.h, index.h), owned: true)
 
 proc createEditor*(self: gen_qitemdelegate_types.QItemDelegate, parent: gen_qwidget_types.QWidget, option: gen_qstyleoption_types.QStyleOptionViewItem, index: gen_qabstractitemmodel_types.QModelIndex): gen_qwidget_types.QWidget =
-  gen_qwidget_types.QWidget(h: fcQItemDelegate_createEditor(self.h, parent.h, option.h, index.h))
+  gen_qwidget_types.QWidget(h: fcQItemDelegate_createEditor(self.h, parent.h, option.h, index.h), owned: false)
 
 proc setEditorData*(self: gen_qitemdelegate_types.QItemDelegate, editor: gen_qwidget_types.QWidget, index: gen_qabstractitemmodel_types.QModelIndex): void =
   fcQItemDelegate_setEditorData(self.h, editor.h, index.h)
@@ -210,7 +209,7 @@ proc updateEditorGeometry*(self: gen_qitemdelegate_types.QItemDelegate, editor: 
   fcQItemDelegate_updateEditorGeometry(self.h, editor.h, option.h, index.h)
 
 proc itemEditorFactory*(self: gen_qitemdelegate_types.QItemDelegate, ): gen_qitemeditorfactory_types.QItemEditorFactory =
-  gen_qitemeditorfactory_types.QItemEditorFactory(h: fcQItemDelegate_itemEditorFactory(self.h))
+  gen_qitemeditorfactory_types.QItemEditorFactory(h: fcQItemDelegate_itemEditorFactory(self.h), owned: false)
 
 proc setItemEditorFactory*(self: gen_qitemdelegate_types.QItemDelegate, factory: gen_qitemeditorfactory_types.QItemEditorFactory): void =
   fcQItemDelegate_setItemEditorFactory(self.h, factory.h)
@@ -263,7 +262,7 @@ type QItemDelegatechildEventProc* = proc(self: QItemDelegate, event: gen_qcoreev
 type QItemDelegatecustomEventProc* = proc(self: QItemDelegate, event: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
 type QItemDelegateconnectNotifyProc* = proc(self: QItemDelegate, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
 type QItemDelegatedisconnectNotifyProc* = proc(self: QItemDelegate, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
-type QItemDelegateVTable* = object
+type QItemDelegateVTable* {.inheritable, pure.} = object
   vtbl: cQItemDelegateVTable
   metaObject*: QItemDelegatemetaObjectProc
   metacast*: QItemDelegatemetacastProc
@@ -290,13 +289,16 @@ type QItemDelegateVTable* = object
   connectNotify*: QItemDelegateconnectNotifyProc
   disconnectNotify*: QItemDelegatedisconnectNotifyProc
 proc QItemDelegatemetaObject*(self: gen_qitemdelegate_types.QItemDelegate, ): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQItemDelegate_virtualbase_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQItemDelegate_virtualbase_metaObject(self.h), owned: false)
 
 proc miqt_exec_callback_cQItemDelegate_metaObject(vtbl: pointer, self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QItemDelegateVTable](vtbl)
   let self = QItemDelegate(h: self)
   var virtualReturn = vtbl[].metaObject(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QItemDelegatemetacast*(self: gen_qitemdelegate_types.QItemDelegate, param1: cstring): pointer =
   fcQItemDelegate_virtualbase_metacast(self.h, param1)
@@ -326,33 +328,39 @@ proc QItemDelegatepaint*(self: gen_qitemdelegate_types.QItemDelegate, painter: g
 proc miqt_exec_callback_cQItemDelegate_paint(vtbl: pointer, self: pointer, painter: pointer, option: pointer, index: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QItemDelegateVTable](vtbl)
   let self = QItemDelegate(h: self)
-  let slotval1 = gen_qpainter_types.QPainter(h: painter)
-  let slotval2 = gen_qstyleoption_types.QStyleOptionViewItem(h: option)
-  let slotval3 = gen_qabstractitemmodel_types.QModelIndex(h: index)
+  let slotval1 = gen_qpainter_types.QPainter(h: painter, owned: false)
+  let slotval2 = gen_qstyleoption_types.QStyleOptionViewItem(h: option, owned: false)
+  let slotval3 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
   vtbl[].paint(self, slotval1, slotval2, slotval3)
 
 proc QItemDelegatesizeHint*(self: gen_qitemdelegate_types.QItemDelegate, option: gen_qstyleoption_types.QStyleOptionViewItem, index: gen_qabstractitemmodel_types.QModelIndex): gen_qsize_types.QSize =
-  gen_qsize_types.QSize(h: fcQItemDelegate_virtualbase_sizeHint(self.h, option.h, index.h))
+  gen_qsize_types.QSize(h: fcQItemDelegate_virtualbase_sizeHint(self.h, option.h, index.h), owned: true)
 
 proc miqt_exec_callback_cQItemDelegate_sizeHint(vtbl: pointer, self: pointer, option: pointer, index: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QItemDelegateVTable](vtbl)
   let self = QItemDelegate(h: self)
-  let slotval1 = gen_qstyleoption_types.QStyleOptionViewItem(h: option)
-  let slotval2 = gen_qabstractitemmodel_types.QModelIndex(h: index)
+  let slotval1 = gen_qstyleoption_types.QStyleOptionViewItem(h: option, owned: false)
+  let slotval2 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
   var virtualReturn = vtbl[].sizeHint(self, slotval1, slotval2)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QItemDelegatecreateEditor*(self: gen_qitemdelegate_types.QItemDelegate, parent: gen_qwidget_types.QWidget, option: gen_qstyleoption_types.QStyleOptionViewItem, index: gen_qabstractitemmodel_types.QModelIndex): gen_qwidget_types.QWidget =
-  gen_qwidget_types.QWidget(h: fcQItemDelegate_virtualbase_createEditor(self.h, parent.h, option.h, index.h))
+  gen_qwidget_types.QWidget(h: fcQItemDelegate_virtualbase_createEditor(self.h, parent.h, option.h, index.h), owned: false)
 
 proc miqt_exec_callback_cQItemDelegate_createEditor(vtbl: pointer, self: pointer, parent: pointer, option: pointer, index: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QItemDelegateVTable](vtbl)
   let self = QItemDelegate(h: self)
-  let slotval1 = gen_qwidget_types.QWidget(h: parent)
-  let slotval2 = gen_qstyleoption_types.QStyleOptionViewItem(h: option)
-  let slotval3 = gen_qabstractitemmodel_types.QModelIndex(h: index)
+  let slotval1 = gen_qwidget_types.QWidget(h: parent, owned: false)
+  let slotval2 = gen_qstyleoption_types.QStyleOptionViewItem(h: option, owned: false)
+  let slotval3 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
   var virtualReturn = vtbl[].createEditor(self, slotval1, slotval2, slotval3)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QItemDelegatesetEditorData*(self: gen_qitemdelegate_types.QItemDelegate, editor: gen_qwidget_types.QWidget, index: gen_qabstractitemmodel_types.QModelIndex): void =
   fcQItemDelegate_virtualbase_setEditorData(self.h, editor.h, index.h)
@@ -360,8 +368,8 @@ proc QItemDelegatesetEditorData*(self: gen_qitemdelegate_types.QItemDelegate, ed
 proc miqt_exec_callback_cQItemDelegate_setEditorData(vtbl: pointer, self: pointer, editor: pointer, index: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QItemDelegateVTable](vtbl)
   let self = QItemDelegate(h: self)
-  let slotval1 = gen_qwidget_types.QWidget(h: editor)
-  let slotval2 = gen_qabstractitemmodel_types.QModelIndex(h: index)
+  let slotval1 = gen_qwidget_types.QWidget(h: editor, owned: false)
+  let slotval2 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
   vtbl[].setEditorData(self, slotval1, slotval2)
 
 proc QItemDelegatesetModelData*(self: gen_qitemdelegate_types.QItemDelegate, editor: gen_qwidget_types.QWidget, model: gen_qabstractitemmodel_types.QAbstractItemModel, index: gen_qabstractitemmodel_types.QModelIndex): void =
@@ -370,9 +378,9 @@ proc QItemDelegatesetModelData*(self: gen_qitemdelegate_types.QItemDelegate, edi
 proc miqt_exec_callback_cQItemDelegate_setModelData(vtbl: pointer, self: pointer, editor: pointer, model: pointer, index: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QItemDelegateVTable](vtbl)
   let self = QItemDelegate(h: self)
-  let slotval1 = gen_qwidget_types.QWidget(h: editor)
-  let slotval2 = gen_qabstractitemmodel_types.QAbstractItemModel(h: model)
-  let slotval3 = gen_qabstractitemmodel_types.QModelIndex(h: index)
+  let slotval1 = gen_qwidget_types.QWidget(h: editor, owned: false)
+  let slotval2 = gen_qabstractitemmodel_types.QAbstractItemModel(h: model, owned: false)
+  let slotval3 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
   vtbl[].setModelData(self, slotval1, slotval2, slotval3)
 
 proc QItemDelegateupdateEditorGeometry*(self: gen_qitemdelegate_types.QItemDelegate, editor: gen_qwidget_types.QWidget, option: gen_qstyleoption_types.QStyleOptionViewItem, index: gen_qabstractitemmodel_types.QModelIndex): void =
@@ -381,9 +389,9 @@ proc QItemDelegateupdateEditorGeometry*(self: gen_qitemdelegate_types.QItemDeleg
 proc miqt_exec_callback_cQItemDelegate_updateEditorGeometry(vtbl: pointer, self: pointer, editor: pointer, option: pointer, index: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QItemDelegateVTable](vtbl)
   let self = QItemDelegate(h: self)
-  let slotval1 = gen_qwidget_types.QWidget(h: editor)
-  let slotval2 = gen_qstyleoption_types.QStyleOptionViewItem(h: option)
-  let slotval3 = gen_qabstractitemmodel_types.QModelIndex(h: index)
+  let slotval1 = gen_qwidget_types.QWidget(h: editor, owned: false)
+  let slotval2 = gen_qstyleoption_types.QStyleOptionViewItem(h: option, owned: false)
+  let slotval3 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
   vtbl[].updateEditorGeometry(self, slotval1, slotval2, slotval3)
 
 proc QItemDelegatedrawDisplay*(self: gen_qitemdelegate_types.QItemDelegate, painter: gen_qpainter_types.QPainter, option: gen_qstyleoption_types.QStyleOptionViewItem, rect: gen_qrect_types.QRect, text: string): void =
@@ -392,9 +400,9 @@ proc QItemDelegatedrawDisplay*(self: gen_qitemdelegate_types.QItemDelegate, pain
 proc miqt_exec_callback_cQItemDelegate_drawDisplay(vtbl: pointer, self: pointer, painter: pointer, option: pointer, rect: pointer, text: struct_miqt_string): void {.cdecl.} =
   let vtbl = cast[ptr QItemDelegateVTable](vtbl)
   let self = QItemDelegate(h: self)
-  let slotval1 = gen_qpainter_types.QPainter(h: painter)
-  let slotval2 = gen_qstyleoption_types.QStyleOptionViewItem(h: option)
-  let slotval3 = gen_qrect_types.QRect(h: rect)
+  let slotval1 = gen_qpainter_types.QPainter(h: painter, owned: false)
+  let slotval2 = gen_qstyleoption_types.QStyleOptionViewItem(h: option, owned: false)
+  let slotval3 = gen_qrect_types.QRect(h: rect, owned: false)
   let vtext_ms = text
   let vtextx_ret = string.fromBytes(toOpenArrayByte(vtext_ms.data, 0, int(vtext_ms.len)-1))
   c_free(vtext_ms.data)
@@ -407,10 +415,10 @@ proc QItemDelegatedrawDecoration*(self: gen_qitemdelegate_types.QItemDelegate, p
 proc miqt_exec_callback_cQItemDelegate_drawDecoration(vtbl: pointer, self: pointer, painter: pointer, option: pointer, rect: pointer, pixmap: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QItemDelegateVTable](vtbl)
   let self = QItemDelegate(h: self)
-  let slotval1 = gen_qpainter_types.QPainter(h: painter)
-  let slotval2 = gen_qstyleoption_types.QStyleOptionViewItem(h: option)
-  let slotval3 = gen_qrect_types.QRect(h: rect)
-  let slotval4 = gen_qpixmap_types.QPixmap(h: pixmap)
+  let slotval1 = gen_qpainter_types.QPainter(h: painter, owned: false)
+  let slotval2 = gen_qstyleoption_types.QStyleOptionViewItem(h: option, owned: false)
+  let slotval3 = gen_qrect_types.QRect(h: rect, owned: false)
+  let slotval4 = gen_qpixmap_types.QPixmap(h: pixmap, owned: false)
   vtbl[].drawDecoration(self, slotval1, slotval2, slotval3, slotval4)
 
 proc QItemDelegatedrawFocus*(self: gen_qitemdelegate_types.QItemDelegate, painter: gen_qpainter_types.QPainter, option: gen_qstyleoption_types.QStyleOptionViewItem, rect: gen_qrect_types.QRect): void =
@@ -419,9 +427,9 @@ proc QItemDelegatedrawFocus*(self: gen_qitemdelegate_types.QItemDelegate, painte
 proc miqt_exec_callback_cQItemDelegate_drawFocus(vtbl: pointer, self: pointer, painter: pointer, option: pointer, rect: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QItemDelegateVTable](vtbl)
   let self = QItemDelegate(h: self)
-  let slotval1 = gen_qpainter_types.QPainter(h: painter)
-  let slotval2 = gen_qstyleoption_types.QStyleOptionViewItem(h: option)
-  let slotval3 = gen_qrect_types.QRect(h: rect)
+  let slotval1 = gen_qpainter_types.QPainter(h: painter, owned: false)
+  let slotval2 = gen_qstyleoption_types.QStyleOptionViewItem(h: option, owned: false)
+  let slotval3 = gen_qrect_types.QRect(h: rect, owned: false)
   vtbl[].drawFocus(self, slotval1, slotval2, slotval3)
 
 proc QItemDelegatedrawCheck*(self: gen_qitemdelegate_types.QItemDelegate, painter: gen_qpainter_types.QPainter, option: gen_qstyleoption_types.QStyleOptionViewItem, rect: gen_qrect_types.QRect, state: cint): void =
@@ -430,9 +438,9 @@ proc QItemDelegatedrawCheck*(self: gen_qitemdelegate_types.QItemDelegate, painte
 proc miqt_exec_callback_cQItemDelegate_drawCheck(vtbl: pointer, self: pointer, painter: pointer, option: pointer, rect: pointer, state: cint): void {.cdecl.} =
   let vtbl = cast[ptr QItemDelegateVTable](vtbl)
   let self = QItemDelegate(h: self)
-  let slotval1 = gen_qpainter_types.QPainter(h: painter)
-  let slotval2 = gen_qstyleoption_types.QStyleOptionViewItem(h: option)
-  let slotval3 = gen_qrect_types.QRect(h: rect)
+  let slotval1 = gen_qpainter_types.QPainter(h: painter, owned: false)
+  let slotval2 = gen_qstyleoption_types.QStyleOptionViewItem(h: option, owned: false)
+  let slotval3 = gen_qrect_types.QRect(h: rect, owned: false)
   let slotval4 = cint(state)
   vtbl[].drawCheck(self, slotval1, slotval2, slotval3, slotval4)
 
@@ -442,8 +450,8 @@ proc QItemDelegateeventFilter*(self: gen_qitemdelegate_types.QItemDelegate, obje
 proc miqt_exec_callback_cQItemDelegate_eventFilter(vtbl: pointer, self: pointer, objectVal: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QItemDelegateVTable](vtbl)
   let self = QItemDelegate(h: self)
-  let slotval1 = gen_qobject_types.QObject(h: objectVal)
-  let slotval2 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qobject_types.QObject(h: objectVal, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].eventFilter(self, slotval1, slotval2)
   virtualReturn
 
@@ -453,10 +461,10 @@ proc QItemDelegateeditorEvent*(self: gen_qitemdelegate_types.QItemDelegate, even
 proc miqt_exec_callback_cQItemDelegate_editorEvent(vtbl: pointer, self: pointer, event: pointer, model: pointer, option: pointer, index: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QItemDelegateVTable](vtbl)
   let self = QItemDelegate(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
-  let slotval2 = gen_qabstractitemmodel_types.QAbstractItemModel(h: model)
-  let slotval3 = gen_qstyleoption_types.QStyleOptionViewItem(h: option)
-  let slotval4 = gen_qabstractitemmodel_types.QModelIndex(h: index)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
+  let slotval2 = gen_qabstractitemmodel_types.QAbstractItemModel(h: model, owned: false)
+  let slotval3 = gen_qstyleoption_types.QStyleOptionViewItem(h: option, owned: false)
+  let slotval4 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
   var virtualReturn = vtbl[].editorEvent(self, slotval1, slotval2, slotval3, slotval4)
   virtualReturn
 
@@ -466,8 +474,8 @@ proc QItemDelegatedestroyEditor*(self: gen_qitemdelegate_types.QItemDelegate, ed
 proc miqt_exec_callback_cQItemDelegate_destroyEditor(vtbl: pointer, self: pointer, editor: pointer, index: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QItemDelegateVTable](vtbl)
   let self = QItemDelegate(h: self)
-  let slotval1 = gen_qwidget_types.QWidget(h: editor)
-  let slotval2 = gen_qabstractitemmodel_types.QModelIndex(h: index)
+  let slotval1 = gen_qwidget_types.QWidget(h: editor, owned: false)
+  let slotval2 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
   vtbl[].destroyEditor(self, slotval1, slotval2)
 
 proc QItemDelegatehelpEvent*(self: gen_qitemdelegate_types.QItemDelegate, event: gen_qevent_types.QHelpEvent, view: gen_qabstractitemview_types.QAbstractItemView, option: gen_qstyleoption_types.QStyleOptionViewItem, index: gen_qabstractitemmodel_types.QModelIndex): bool =
@@ -476,10 +484,10 @@ proc QItemDelegatehelpEvent*(self: gen_qitemdelegate_types.QItemDelegate, event:
 proc miqt_exec_callback_cQItemDelegate_helpEvent(vtbl: pointer, self: pointer, event: pointer, view: pointer, option: pointer, index: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QItemDelegateVTable](vtbl)
   let self = QItemDelegate(h: self)
-  let slotval1 = gen_qevent_types.QHelpEvent(h: event)
-  let slotval2 = gen_qabstractitemview_types.QAbstractItemView(h: view)
-  let slotval3 = gen_qstyleoption_types.QStyleOptionViewItem(h: option)
-  let slotval4 = gen_qabstractitemmodel_types.QModelIndex(h: index)
+  let slotval1 = gen_qevent_types.QHelpEvent(h: event, owned: false)
+  let slotval2 = gen_qabstractitemview_types.QAbstractItemView(h: view, owned: false)
+  let slotval3 = gen_qstyleoption_types.QStyleOptionViewItem(h: option, owned: false)
+  let slotval4 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
   var virtualReturn = vtbl[].helpEvent(self, slotval1, slotval2, slotval3, slotval4)
   virtualReturn
 
@@ -508,7 +516,7 @@ proc QItemDelegateevent*(self: gen_qitemdelegate_types.QItemDelegate, event: gen
 proc miqt_exec_callback_cQItemDelegate_event(vtbl: pointer, self: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QItemDelegateVTable](vtbl)
   let self = QItemDelegate(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].event(self, slotval1)
   virtualReturn
 
@@ -518,7 +526,7 @@ proc QItemDelegatetimerEvent*(self: gen_qitemdelegate_types.QItemDelegate, event
 proc miqt_exec_callback_cQItemDelegate_timerEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QItemDelegateVTable](vtbl)
   let self = QItemDelegate(h: self)
-  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   vtbl[].timerEvent(self, slotval1)
 
 proc QItemDelegatechildEvent*(self: gen_qitemdelegate_types.QItemDelegate, event: gen_qcoreevent_types.QChildEvent): void =
@@ -527,7 +535,7 @@ proc QItemDelegatechildEvent*(self: gen_qitemdelegate_types.QItemDelegate, event
 proc miqt_exec_callback_cQItemDelegate_childEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QItemDelegateVTable](vtbl)
   let self = QItemDelegate(h: self)
-  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   vtbl[].childEvent(self, slotval1)
 
 proc QItemDelegatecustomEvent*(self: gen_qitemdelegate_types.QItemDelegate, event: gen_qcoreevent_types.QEvent): void =
@@ -536,7 +544,7 @@ proc QItemDelegatecustomEvent*(self: gen_qitemdelegate_types.QItemDelegate, even
 proc miqt_exec_callback_cQItemDelegate_customEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QItemDelegateVTable](vtbl)
   let self = QItemDelegate(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].customEvent(self, slotval1)
 
 proc QItemDelegateconnectNotify*(self: gen_qitemdelegate_types.QItemDelegate, signal: gen_qmetaobject_types.QMetaMethod): void =
@@ -545,7 +553,7 @@ proc QItemDelegateconnectNotify*(self: gen_qitemdelegate_types.QItemDelegate, si
 proc miqt_exec_callback_cQItemDelegate_connectNotify(vtbl: pointer, self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QItemDelegateVTable](vtbl)
   let self = QItemDelegate(h: self)
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].connectNotify(self, slotval1)
 
 proc QItemDelegatedisconnectNotify*(self: gen_qitemdelegate_types.QItemDelegate, signal: gen_qmetaobject_types.QMetaMethod): void =
@@ -554,8 +562,233 @@ proc QItemDelegatedisconnectNotify*(self: gen_qitemdelegate_types.QItemDelegate,
 proc miqt_exec_callback_cQItemDelegate_disconnectNotify(vtbl: pointer, self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QItemDelegateVTable](vtbl)
   let self = QItemDelegate(h: self)
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].disconnectNotify(self, slotval1)
+
+type VirtualQItemDelegate* {.inheritable.} = ref object of QItemDelegate
+  vtbl*: cQItemDelegateVTable
+method metaObject*(self: VirtualQItemDelegate, ): gen_qobjectdefs_types.QMetaObject {.base.} =
+  QItemDelegatemetaObject(self[])
+proc miqt_exec_method_cQItemDelegate_metaObject(vtbl: pointer, inst: pointer): pointer {.cdecl.} =
+  let vtbl = cast[VirtualQItemDelegate](cast[uint](vtbl) - uint(offsetOf(VirtualQItemDelegate, vtbl)))
+  var virtualReturn = vtbl.metaObject()
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
+
+method metacast*(self: VirtualQItemDelegate, param1: cstring): pointer {.base.} =
+  QItemDelegatemetacast(self[], param1)
+proc miqt_exec_method_cQItemDelegate_metacast(vtbl: pointer, inst: pointer, param1: cstring): pointer {.cdecl.} =
+  let vtbl = cast[VirtualQItemDelegate](cast[uint](vtbl) - uint(offsetOf(VirtualQItemDelegate, vtbl)))
+  let slotval1 = (param1)
+  var virtualReturn = vtbl.metacast(slotval1)
+  virtualReturn
+
+method metacall*(self: VirtualQItemDelegate, param1: cint, param2: cint, param3: pointer): cint {.base.} =
+  QItemDelegatemetacall(self[], param1, param2, param3)
+proc miqt_exec_method_cQItemDelegate_metacall(vtbl: pointer, inst: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
+  let vtbl = cast[VirtualQItemDelegate](cast[uint](vtbl) - uint(offsetOf(VirtualQItemDelegate, vtbl)))
+  let slotval1 = cint(param1)
+  let slotval2 = param2
+  let slotval3 = param3
+  var virtualReturn = vtbl.metacall(slotval1, slotval2, slotval3)
+  virtualReturn
+
+method paint*(self: VirtualQItemDelegate, painter: gen_qpainter_types.QPainter, option: gen_qstyleoption_types.QStyleOptionViewItem, index: gen_qabstractitemmodel_types.QModelIndex): void {.base.} =
+  QItemDelegatepaint(self[], painter, option, index)
+proc miqt_exec_method_cQItemDelegate_paint(vtbl: pointer, inst: pointer, painter: pointer, option: pointer, index: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQItemDelegate](cast[uint](vtbl) - uint(offsetOf(VirtualQItemDelegate, vtbl)))
+  let slotval1 = gen_qpainter_types.QPainter(h: painter, owned: false)
+  let slotval2 = gen_qstyleoption_types.QStyleOptionViewItem(h: option, owned: false)
+  let slotval3 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
+  vtbl.paint(slotval1, slotval2, slotval3)
+
+method sizeHint*(self: VirtualQItemDelegate, option: gen_qstyleoption_types.QStyleOptionViewItem, index: gen_qabstractitemmodel_types.QModelIndex): gen_qsize_types.QSize {.base.} =
+  QItemDelegatesizeHint(self[], option, index)
+proc miqt_exec_method_cQItemDelegate_sizeHint(vtbl: pointer, inst: pointer, option: pointer, index: pointer): pointer {.cdecl.} =
+  let vtbl = cast[VirtualQItemDelegate](cast[uint](vtbl) - uint(offsetOf(VirtualQItemDelegate, vtbl)))
+  let slotval1 = gen_qstyleoption_types.QStyleOptionViewItem(h: option, owned: false)
+  let slotval2 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
+  var virtualReturn = vtbl.sizeHint(slotval1, slotval2)
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
+
+method createEditor*(self: VirtualQItemDelegate, parent: gen_qwidget_types.QWidget, option: gen_qstyleoption_types.QStyleOptionViewItem, index: gen_qabstractitemmodel_types.QModelIndex): gen_qwidget_types.QWidget {.base.} =
+  QItemDelegatecreateEditor(self[], parent, option, index)
+proc miqt_exec_method_cQItemDelegate_createEditor(vtbl: pointer, inst: pointer, parent: pointer, option: pointer, index: pointer): pointer {.cdecl.} =
+  let vtbl = cast[VirtualQItemDelegate](cast[uint](vtbl) - uint(offsetOf(VirtualQItemDelegate, vtbl)))
+  let slotval1 = gen_qwidget_types.QWidget(h: parent, owned: false)
+  let slotval2 = gen_qstyleoption_types.QStyleOptionViewItem(h: option, owned: false)
+  let slotval3 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
+  var virtualReturn = vtbl.createEditor(slotval1, slotval2, slotval3)
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
+
+method setEditorData*(self: VirtualQItemDelegate, editor: gen_qwidget_types.QWidget, index: gen_qabstractitemmodel_types.QModelIndex): void {.base.} =
+  QItemDelegatesetEditorData(self[], editor, index)
+proc miqt_exec_method_cQItemDelegate_setEditorData(vtbl: pointer, inst: pointer, editor: pointer, index: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQItemDelegate](cast[uint](vtbl) - uint(offsetOf(VirtualQItemDelegate, vtbl)))
+  let slotval1 = gen_qwidget_types.QWidget(h: editor, owned: false)
+  let slotval2 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
+  vtbl.setEditorData(slotval1, slotval2)
+
+method setModelData*(self: VirtualQItemDelegate, editor: gen_qwidget_types.QWidget, model: gen_qabstractitemmodel_types.QAbstractItemModel, index: gen_qabstractitemmodel_types.QModelIndex): void {.base.} =
+  QItemDelegatesetModelData(self[], editor, model, index)
+proc miqt_exec_method_cQItemDelegate_setModelData(vtbl: pointer, inst: pointer, editor: pointer, model: pointer, index: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQItemDelegate](cast[uint](vtbl) - uint(offsetOf(VirtualQItemDelegate, vtbl)))
+  let slotval1 = gen_qwidget_types.QWidget(h: editor, owned: false)
+  let slotval2 = gen_qabstractitemmodel_types.QAbstractItemModel(h: model, owned: false)
+  let slotval3 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
+  vtbl.setModelData(slotval1, slotval2, slotval3)
+
+method updateEditorGeometry*(self: VirtualQItemDelegate, editor: gen_qwidget_types.QWidget, option: gen_qstyleoption_types.QStyleOptionViewItem, index: gen_qabstractitemmodel_types.QModelIndex): void {.base.} =
+  QItemDelegateupdateEditorGeometry(self[], editor, option, index)
+proc miqt_exec_method_cQItemDelegate_updateEditorGeometry(vtbl: pointer, inst: pointer, editor: pointer, option: pointer, index: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQItemDelegate](cast[uint](vtbl) - uint(offsetOf(VirtualQItemDelegate, vtbl)))
+  let slotval1 = gen_qwidget_types.QWidget(h: editor, owned: false)
+  let slotval2 = gen_qstyleoption_types.QStyleOptionViewItem(h: option, owned: false)
+  let slotval3 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
+  vtbl.updateEditorGeometry(slotval1, slotval2, slotval3)
+
+method drawDisplay*(self: VirtualQItemDelegate, painter: gen_qpainter_types.QPainter, option: gen_qstyleoption_types.QStyleOptionViewItem, rect: gen_qrect_types.QRect, text: string): void {.base.} =
+  QItemDelegatedrawDisplay(self[], painter, option, rect, text)
+proc miqt_exec_method_cQItemDelegate_drawDisplay(vtbl: pointer, inst: pointer, painter: pointer, option: pointer, rect: pointer, text: struct_miqt_string): void {.cdecl.} =
+  let vtbl = cast[VirtualQItemDelegate](cast[uint](vtbl) - uint(offsetOf(VirtualQItemDelegate, vtbl)))
+  let slotval1 = gen_qpainter_types.QPainter(h: painter, owned: false)
+  let slotval2 = gen_qstyleoption_types.QStyleOptionViewItem(h: option, owned: false)
+  let slotval3 = gen_qrect_types.QRect(h: rect, owned: false)
+  let vtext_ms = text
+  let vtextx_ret = string.fromBytes(toOpenArrayByte(vtext_ms.data, 0, int(vtext_ms.len)-1))
+  c_free(vtext_ms.data)
+  let slotval4 = vtextx_ret
+  vtbl.drawDisplay(slotval1, slotval2, slotval3, slotval4)
+
+method drawDecoration*(self: VirtualQItemDelegate, painter: gen_qpainter_types.QPainter, option: gen_qstyleoption_types.QStyleOptionViewItem, rect: gen_qrect_types.QRect, pixmap: gen_qpixmap_types.QPixmap): void {.base.} =
+  QItemDelegatedrawDecoration(self[], painter, option, rect, pixmap)
+proc miqt_exec_method_cQItemDelegate_drawDecoration(vtbl: pointer, inst: pointer, painter: pointer, option: pointer, rect: pointer, pixmap: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQItemDelegate](cast[uint](vtbl) - uint(offsetOf(VirtualQItemDelegate, vtbl)))
+  let slotval1 = gen_qpainter_types.QPainter(h: painter, owned: false)
+  let slotval2 = gen_qstyleoption_types.QStyleOptionViewItem(h: option, owned: false)
+  let slotval3 = gen_qrect_types.QRect(h: rect, owned: false)
+  let slotval4 = gen_qpixmap_types.QPixmap(h: pixmap, owned: false)
+  vtbl.drawDecoration(slotval1, slotval2, slotval3, slotval4)
+
+method drawFocus*(self: VirtualQItemDelegate, painter: gen_qpainter_types.QPainter, option: gen_qstyleoption_types.QStyleOptionViewItem, rect: gen_qrect_types.QRect): void {.base.} =
+  QItemDelegatedrawFocus(self[], painter, option, rect)
+proc miqt_exec_method_cQItemDelegate_drawFocus(vtbl: pointer, inst: pointer, painter: pointer, option: pointer, rect: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQItemDelegate](cast[uint](vtbl) - uint(offsetOf(VirtualQItemDelegate, vtbl)))
+  let slotval1 = gen_qpainter_types.QPainter(h: painter, owned: false)
+  let slotval2 = gen_qstyleoption_types.QStyleOptionViewItem(h: option, owned: false)
+  let slotval3 = gen_qrect_types.QRect(h: rect, owned: false)
+  vtbl.drawFocus(slotval1, slotval2, slotval3)
+
+method drawCheck*(self: VirtualQItemDelegate, painter: gen_qpainter_types.QPainter, option: gen_qstyleoption_types.QStyleOptionViewItem, rect: gen_qrect_types.QRect, state: cint): void {.base.} =
+  QItemDelegatedrawCheck(self[], painter, option, rect, state)
+proc miqt_exec_method_cQItemDelegate_drawCheck(vtbl: pointer, inst: pointer, painter: pointer, option: pointer, rect: pointer, state: cint): void {.cdecl.} =
+  let vtbl = cast[VirtualQItemDelegate](cast[uint](vtbl) - uint(offsetOf(VirtualQItemDelegate, vtbl)))
+  let slotval1 = gen_qpainter_types.QPainter(h: painter, owned: false)
+  let slotval2 = gen_qstyleoption_types.QStyleOptionViewItem(h: option, owned: false)
+  let slotval3 = gen_qrect_types.QRect(h: rect, owned: false)
+  let slotval4 = cint(state)
+  vtbl.drawCheck(slotval1, slotval2, slotval3, slotval4)
+
+method eventFilter*(self: VirtualQItemDelegate, objectVal: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QItemDelegateeventFilter(self[], objectVal, event)
+proc miqt_exec_method_cQItemDelegate_eventFilter(vtbl: pointer, inst: pointer, objectVal: pointer, event: pointer): bool {.cdecl.} =
+  let vtbl = cast[VirtualQItemDelegate](cast[uint](vtbl) - uint(offsetOf(VirtualQItemDelegate, vtbl)))
+  let slotval1 = gen_qobject_types.QObject(h: objectVal, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
+  var virtualReturn = vtbl.eventFilter(slotval1, slotval2)
+  virtualReturn
+
+method editorEvent*(self: VirtualQItemDelegate, event: gen_qcoreevent_types.QEvent, model: gen_qabstractitemmodel_types.QAbstractItemModel, option: gen_qstyleoption_types.QStyleOptionViewItem, index: gen_qabstractitemmodel_types.QModelIndex): bool {.base.} =
+  QItemDelegateeditorEvent(self[], event, model, option, index)
+proc miqt_exec_method_cQItemDelegate_editorEvent(vtbl: pointer, inst: pointer, event: pointer, model: pointer, option: pointer, index: pointer): bool {.cdecl.} =
+  let vtbl = cast[VirtualQItemDelegate](cast[uint](vtbl) - uint(offsetOf(VirtualQItemDelegate, vtbl)))
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
+  let slotval2 = gen_qabstractitemmodel_types.QAbstractItemModel(h: model, owned: false)
+  let slotval3 = gen_qstyleoption_types.QStyleOptionViewItem(h: option, owned: false)
+  let slotval4 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
+  var virtualReturn = vtbl.editorEvent(slotval1, slotval2, slotval3, slotval4)
+  virtualReturn
+
+method destroyEditor*(self: VirtualQItemDelegate, editor: gen_qwidget_types.QWidget, index: gen_qabstractitemmodel_types.QModelIndex): void {.base.} =
+  QItemDelegatedestroyEditor(self[], editor, index)
+proc miqt_exec_method_cQItemDelegate_destroyEditor(vtbl: pointer, inst: pointer, editor: pointer, index: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQItemDelegate](cast[uint](vtbl) - uint(offsetOf(VirtualQItemDelegate, vtbl)))
+  let slotval1 = gen_qwidget_types.QWidget(h: editor, owned: false)
+  let slotval2 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
+  vtbl.destroyEditor(slotval1, slotval2)
+
+method helpEvent*(self: VirtualQItemDelegate, event: gen_qevent_types.QHelpEvent, view: gen_qabstractitemview_types.QAbstractItemView, option: gen_qstyleoption_types.QStyleOptionViewItem, index: gen_qabstractitemmodel_types.QModelIndex): bool {.base.} =
+  QItemDelegatehelpEvent(self[], event, view, option, index)
+proc miqt_exec_method_cQItemDelegate_helpEvent(vtbl: pointer, inst: pointer, event: pointer, view: pointer, option: pointer, index: pointer): bool {.cdecl.} =
+  let vtbl = cast[VirtualQItemDelegate](cast[uint](vtbl) - uint(offsetOf(VirtualQItemDelegate, vtbl)))
+  let slotval1 = gen_qevent_types.QHelpEvent(h: event, owned: false)
+  let slotval2 = gen_qabstractitemview_types.QAbstractItemView(h: view, owned: false)
+  let slotval3 = gen_qstyleoption_types.QStyleOptionViewItem(h: option, owned: false)
+  let slotval4 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
+  var virtualReturn = vtbl.helpEvent(slotval1, slotval2, slotval3, slotval4)
+  virtualReturn
+
+method paintingRoles*(self: VirtualQItemDelegate, ): seq[cint] {.base.} =
+  QItemDelegatepaintingRoles(self[])
+proc miqt_exec_method_cQItemDelegate_paintingRoles(vtbl: pointer, inst: pointer): struct_miqt_array {.cdecl.} =
+  let vtbl = cast[VirtualQItemDelegate](cast[uint](vtbl) - uint(offsetOf(VirtualQItemDelegate, vtbl)))
+  var virtualReturn = vtbl.paintingRoles()
+  var virtualReturn_CArray = cast[ptr UncheckedArray[cint]](if len(virtualReturn) > 0: c_malloc(c_sizet(sizeof(cint) * len(virtualReturn))) else: nil)
+  for i in 0..<len(virtualReturn):
+    virtualReturn_CArray[i] = virtualReturn[i]
+
+  struct_miqt_array(len: csize_t(len(virtualReturn)), data: if len(virtualReturn) == 0: nil else: addr(virtualReturn_CArray[0]))
+
+method event*(self: VirtualQItemDelegate, event: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QItemDelegateevent(self[], event)
+proc miqt_exec_method_cQItemDelegate_event(vtbl: pointer, inst: pointer, event: pointer): bool {.cdecl.} =
+  let vtbl = cast[VirtualQItemDelegate](cast[uint](vtbl) - uint(offsetOf(VirtualQItemDelegate, vtbl)))
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
+  var virtualReturn = vtbl.event(slotval1)
+  virtualReturn
+
+method timerEvent*(self: VirtualQItemDelegate, event: gen_qcoreevent_types.QTimerEvent): void {.base.} =
+  QItemDelegatetimerEvent(self[], event)
+proc miqt_exec_method_cQItemDelegate_timerEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQItemDelegate](cast[uint](vtbl) - uint(offsetOf(VirtualQItemDelegate, vtbl)))
+  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
+  vtbl.timerEvent(slotval1)
+
+method childEvent*(self: VirtualQItemDelegate, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
+  QItemDelegatechildEvent(self[], event)
+proc miqt_exec_method_cQItemDelegate_childEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQItemDelegate](cast[uint](vtbl) - uint(offsetOf(VirtualQItemDelegate, vtbl)))
+  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
+  vtbl.childEvent(slotval1)
+
+method customEvent*(self: VirtualQItemDelegate, event: gen_qcoreevent_types.QEvent): void {.base.} =
+  QItemDelegatecustomEvent(self[], event)
+proc miqt_exec_method_cQItemDelegate_customEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQItemDelegate](cast[uint](vtbl) - uint(offsetOf(VirtualQItemDelegate, vtbl)))
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
+  vtbl.customEvent(slotval1)
+
+method connectNotify*(self: VirtualQItemDelegate, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QItemDelegateconnectNotify(self[], signal)
+proc miqt_exec_method_cQItemDelegate_connectNotify(vtbl: pointer, inst: pointer, signal: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQItemDelegate](cast[uint](vtbl) - uint(offsetOf(VirtualQItemDelegate, vtbl)))
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
+  vtbl.connectNotify(slotval1)
+
+method disconnectNotify*(self: VirtualQItemDelegate, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QItemDelegatedisconnectNotify(self[], signal)
+proc miqt_exec_method_cQItemDelegate_disconnectNotify(vtbl: pointer, inst: pointer, signal: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQItemDelegate](cast[uint](vtbl) - uint(offsetOf(VirtualQItemDelegate, vtbl)))
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
+  vtbl.disconnectNotify(slotval1)
 
 proc drawBackground*(self: gen_qitemdelegate_types.QItemDelegate, painter: gen_qpainter_types.QPainter, option: gen_qstyleoption_types.QStyleOptionViewItem, index: gen_qabstractitemmodel_types.QModelIndex): void =
   fcQItemDelegate_protectedbase_drawBackground(self.h, painter.h, option.h, index.h)
@@ -564,25 +797,25 @@ proc doLayout*(self: gen_qitemdelegate_types.QItemDelegate, option: gen_qstyleop
   fcQItemDelegate_protectedbase_doLayout(self.h, option.h, checkRect.h, iconRect.h, textRect.h, hint)
 
 proc rect*(self: gen_qitemdelegate_types.QItemDelegate, option: gen_qstyleoption_types.QStyleOptionViewItem, index: gen_qabstractitemmodel_types.QModelIndex, role: cint): gen_qrect_types.QRect =
-  gen_qrect_types.QRect(h: fcQItemDelegate_protectedbase_rect(self.h, option.h, index.h, role))
+  gen_qrect_types.QRect(h: fcQItemDelegate_protectedbase_rect(self.h, option.h, index.h, role), owned: true)
 
 proc setOptions*(self: gen_qitemdelegate_types.QItemDelegate, index: gen_qabstractitemmodel_types.QModelIndex, option: gen_qstyleoption_types.QStyleOptionViewItem): gen_qstyleoption_types.QStyleOptionViewItem =
-  gen_qstyleoption_types.QStyleOptionViewItem(h: fcQItemDelegate_protectedbase_setOptions(self.h, index.h, option.h))
+  gen_qstyleoption_types.QStyleOptionViewItem(h: fcQItemDelegate_protectedbase_setOptions(self.h, index.h, option.h), owned: true)
 
 proc decoration*(self: gen_qitemdelegate_types.QItemDelegate, option: gen_qstyleoption_types.QStyleOptionViewItem, variant: gen_qvariant_types.QVariant): gen_qpixmap_types.QPixmap =
-  gen_qpixmap_types.QPixmap(h: fcQItemDelegate_protectedbase_decoration(self.h, option.h, variant.h))
+  gen_qpixmap_types.QPixmap(h: fcQItemDelegate_protectedbase_decoration(self.h, option.h, variant.h), owned: true)
 
 proc selected*(self: gen_qitemdelegate_types.QItemDelegate, pixmap: gen_qpixmap_types.QPixmap, palette: gen_qpalette_types.QPalette, enabled: bool): gen_qpixmap_types.QPixmap =
-  gen_qpixmap_types.QPixmap(h: fcQItemDelegate_protectedbase_selected(self.h, pixmap.h, palette.h, enabled))
+  gen_qpixmap_types.QPixmap(h: fcQItemDelegate_protectedbase_selected(self.h, pixmap.h, palette.h, enabled), owned: false)
 
 proc doCheck*(self: gen_qitemdelegate_types.QItemDelegate, option: gen_qstyleoption_types.QStyleOptionViewItem, bounding: gen_qrect_types.QRect, variant: gen_qvariant_types.QVariant): gen_qrect_types.QRect =
-  gen_qrect_types.QRect(h: fcQItemDelegate_protectedbase_doCheck(self.h, option.h, bounding.h, variant.h))
+  gen_qrect_types.QRect(h: fcQItemDelegate_protectedbase_doCheck(self.h, option.h, bounding.h, variant.h), owned: true)
 
 proc textRectangle*(self: gen_qitemdelegate_types.QItemDelegate, painter: gen_qpainter_types.QPainter, rect: gen_qrect_types.QRect, font: gen_qfont_types.QFont, text: string): gen_qrect_types.QRect =
-  gen_qrect_types.QRect(h: fcQItemDelegate_protectedbase_textRectangle(self.h, painter.h, rect.h, font.h, struct_miqt_string(data: text, len: csize_t(len(text)))))
+  gen_qrect_types.QRect(h: fcQItemDelegate_protectedbase_textRectangle(self.h, painter.h, rect.h, font.h, struct_miqt_string(data: text, len: csize_t(len(text)))), owned: true)
 
 proc sender*(self: gen_qitemdelegate_types.QItemDelegate, ): gen_qobject_types.QObject =
-  gen_qobject_types.QObject(h: fcQItemDelegate_protectedbase_sender(self.h))
+  gen_qobject_types.QObject(h: fcQItemDelegate_protectedbase_sender(self.h), owned: false)
 
 proc senderSignalIndex*(self: gen_qitemdelegate_types.QItemDelegate, ): cint =
   fcQItemDelegate_protectedbase_senderSignalIndex(self.h)
@@ -597,118 +830,187 @@ proc create*(T: type gen_qitemdelegate_types.QItemDelegate,
     vtbl: ref QItemDelegateVTable = nil): gen_qitemdelegate_types.QItemDelegate =
   let vtbl = if vtbl == nil: new QItemDelegateVTable else: vtbl
   GC_ref(vtbl)
-  vtbl.vtbl.destructor = proc(vtbl: ptr cQItemDelegateVTable, _: ptr cQItemDelegate) {.cdecl.} =
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQItemDelegateVTable, _: ptr cQItemDelegate) {.cdecl.} =
     let vtbl = cast[ref QItemDelegateVTable](vtbl)
     GC_unref(vtbl)
-  if not isNil(vtbl.metaObject):
+  if not isNil(vtbl[].metaObject):
     vtbl[].vtbl.metaObject = miqt_exec_callback_cQItemDelegate_metaObject
-  if not isNil(vtbl.metacast):
+  if not isNil(vtbl[].metacast):
     vtbl[].vtbl.metacast = miqt_exec_callback_cQItemDelegate_metacast
-  if not isNil(vtbl.metacall):
+  if not isNil(vtbl[].metacall):
     vtbl[].vtbl.metacall = miqt_exec_callback_cQItemDelegate_metacall
-  if not isNil(vtbl.paint):
+  if not isNil(vtbl[].paint):
     vtbl[].vtbl.paint = miqt_exec_callback_cQItemDelegate_paint
-  if not isNil(vtbl.sizeHint):
+  if not isNil(vtbl[].sizeHint):
     vtbl[].vtbl.sizeHint = miqt_exec_callback_cQItemDelegate_sizeHint
-  if not isNil(vtbl.createEditor):
+  if not isNil(vtbl[].createEditor):
     vtbl[].vtbl.createEditor = miqt_exec_callback_cQItemDelegate_createEditor
-  if not isNil(vtbl.setEditorData):
+  if not isNil(vtbl[].setEditorData):
     vtbl[].vtbl.setEditorData = miqt_exec_callback_cQItemDelegate_setEditorData
-  if not isNil(vtbl.setModelData):
+  if not isNil(vtbl[].setModelData):
     vtbl[].vtbl.setModelData = miqt_exec_callback_cQItemDelegate_setModelData
-  if not isNil(vtbl.updateEditorGeometry):
+  if not isNil(vtbl[].updateEditorGeometry):
     vtbl[].vtbl.updateEditorGeometry = miqt_exec_callback_cQItemDelegate_updateEditorGeometry
-  if not isNil(vtbl.drawDisplay):
+  if not isNil(vtbl[].drawDisplay):
     vtbl[].vtbl.drawDisplay = miqt_exec_callback_cQItemDelegate_drawDisplay
-  if not isNil(vtbl.drawDecoration):
+  if not isNil(vtbl[].drawDecoration):
     vtbl[].vtbl.drawDecoration = miqt_exec_callback_cQItemDelegate_drawDecoration
-  if not isNil(vtbl.drawFocus):
+  if not isNil(vtbl[].drawFocus):
     vtbl[].vtbl.drawFocus = miqt_exec_callback_cQItemDelegate_drawFocus
-  if not isNil(vtbl.drawCheck):
+  if not isNil(vtbl[].drawCheck):
     vtbl[].vtbl.drawCheck = miqt_exec_callback_cQItemDelegate_drawCheck
-  if not isNil(vtbl.eventFilter):
+  if not isNil(vtbl[].eventFilter):
     vtbl[].vtbl.eventFilter = miqt_exec_callback_cQItemDelegate_eventFilter
-  if not isNil(vtbl.editorEvent):
+  if not isNil(vtbl[].editorEvent):
     vtbl[].vtbl.editorEvent = miqt_exec_callback_cQItemDelegate_editorEvent
-  if not isNil(vtbl.destroyEditor):
+  if not isNil(vtbl[].destroyEditor):
     vtbl[].vtbl.destroyEditor = miqt_exec_callback_cQItemDelegate_destroyEditor
-  if not isNil(vtbl.helpEvent):
+  if not isNil(vtbl[].helpEvent):
     vtbl[].vtbl.helpEvent = miqt_exec_callback_cQItemDelegate_helpEvent
-  if not isNil(vtbl.paintingRoles):
+  if not isNil(vtbl[].paintingRoles):
     vtbl[].vtbl.paintingRoles = miqt_exec_callback_cQItemDelegate_paintingRoles
-  if not isNil(vtbl.event):
+  if not isNil(vtbl[].event):
     vtbl[].vtbl.event = miqt_exec_callback_cQItemDelegate_event
-  if not isNil(vtbl.timerEvent):
+  if not isNil(vtbl[].timerEvent):
     vtbl[].vtbl.timerEvent = miqt_exec_callback_cQItemDelegate_timerEvent
-  if not isNil(vtbl.childEvent):
+  if not isNil(vtbl[].childEvent):
     vtbl[].vtbl.childEvent = miqt_exec_callback_cQItemDelegate_childEvent
-  if not isNil(vtbl.customEvent):
+  if not isNil(vtbl[].customEvent):
     vtbl[].vtbl.customEvent = miqt_exec_callback_cQItemDelegate_customEvent
-  if not isNil(vtbl.connectNotify):
+  if not isNil(vtbl[].connectNotify):
     vtbl[].vtbl.connectNotify = miqt_exec_callback_cQItemDelegate_connectNotify
-  if not isNil(vtbl.disconnectNotify):
+  if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQItemDelegate_disconnectNotify
-  gen_qitemdelegate_types.QItemDelegate(h: fcQItemDelegate_new(addr(vtbl[]), ))
+  gen_qitemdelegate_types.QItemDelegate(h: fcQItemDelegate_new(addr(vtbl[].vtbl), ), owned: true)
 
 proc create*(T: type gen_qitemdelegate_types.QItemDelegate,
     parent: gen_qobject_types.QObject,
     vtbl: ref QItemDelegateVTable = nil): gen_qitemdelegate_types.QItemDelegate =
   let vtbl = if vtbl == nil: new QItemDelegateVTable else: vtbl
   GC_ref(vtbl)
-  vtbl.vtbl.destructor = proc(vtbl: ptr cQItemDelegateVTable, _: ptr cQItemDelegate) {.cdecl.} =
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQItemDelegateVTable, _: ptr cQItemDelegate) {.cdecl.} =
     let vtbl = cast[ref QItemDelegateVTable](vtbl)
     GC_unref(vtbl)
-  if not isNil(vtbl.metaObject):
+  if not isNil(vtbl[].metaObject):
     vtbl[].vtbl.metaObject = miqt_exec_callback_cQItemDelegate_metaObject
-  if not isNil(vtbl.metacast):
+  if not isNil(vtbl[].metacast):
     vtbl[].vtbl.metacast = miqt_exec_callback_cQItemDelegate_metacast
-  if not isNil(vtbl.metacall):
+  if not isNil(vtbl[].metacall):
     vtbl[].vtbl.metacall = miqt_exec_callback_cQItemDelegate_metacall
-  if not isNil(vtbl.paint):
+  if not isNil(vtbl[].paint):
     vtbl[].vtbl.paint = miqt_exec_callback_cQItemDelegate_paint
-  if not isNil(vtbl.sizeHint):
+  if not isNil(vtbl[].sizeHint):
     vtbl[].vtbl.sizeHint = miqt_exec_callback_cQItemDelegate_sizeHint
-  if not isNil(vtbl.createEditor):
+  if not isNil(vtbl[].createEditor):
     vtbl[].vtbl.createEditor = miqt_exec_callback_cQItemDelegate_createEditor
-  if not isNil(vtbl.setEditorData):
+  if not isNil(vtbl[].setEditorData):
     vtbl[].vtbl.setEditorData = miqt_exec_callback_cQItemDelegate_setEditorData
-  if not isNil(vtbl.setModelData):
+  if not isNil(vtbl[].setModelData):
     vtbl[].vtbl.setModelData = miqt_exec_callback_cQItemDelegate_setModelData
-  if not isNil(vtbl.updateEditorGeometry):
+  if not isNil(vtbl[].updateEditorGeometry):
     vtbl[].vtbl.updateEditorGeometry = miqt_exec_callback_cQItemDelegate_updateEditorGeometry
-  if not isNil(vtbl.drawDisplay):
+  if not isNil(vtbl[].drawDisplay):
     vtbl[].vtbl.drawDisplay = miqt_exec_callback_cQItemDelegate_drawDisplay
-  if not isNil(vtbl.drawDecoration):
+  if not isNil(vtbl[].drawDecoration):
     vtbl[].vtbl.drawDecoration = miqt_exec_callback_cQItemDelegate_drawDecoration
-  if not isNil(vtbl.drawFocus):
+  if not isNil(vtbl[].drawFocus):
     vtbl[].vtbl.drawFocus = miqt_exec_callback_cQItemDelegate_drawFocus
-  if not isNil(vtbl.drawCheck):
+  if not isNil(vtbl[].drawCheck):
     vtbl[].vtbl.drawCheck = miqt_exec_callback_cQItemDelegate_drawCheck
-  if not isNil(vtbl.eventFilter):
+  if not isNil(vtbl[].eventFilter):
     vtbl[].vtbl.eventFilter = miqt_exec_callback_cQItemDelegate_eventFilter
-  if not isNil(vtbl.editorEvent):
+  if not isNil(vtbl[].editorEvent):
     vtbl[].vtbl.editorEvent = miqt_exec_callback_cQItemDelegate_editorEvent
-  if not isNil(vtbl.destroyEditor):
+  if not isNil(vtbl[].destroyEditor):
     vtbl[].vtbl.destroyEditor = miqt_exec_callback_cQItemDelegate_destroyEditor
-  if not isNil(vtbl.helpEvent):
+  if not isNil(vtbl[].helpEvent):
     vtbl[].vtbl.helpEvent = miqt_exec_callback_cQItemDelegate_helpEvent
-  if not isNil(vtbl.paintingRoles):
+  if not isNil(vtbl[].paintingRoles):
     vtbl[].vtbl.paintingRoles = miqt_exec_callback_cQItemDelegate_paintingRoles
-  if not isNil(vtbl.event):
+  if not isNil(vtbl[].event):
     vtbl[].vtbl.event = miqt_exec_callback_cQItemDelegate_event
-  if not isNil(vtbl.timerEvent):
+  if not isNil(vtbl[].timerEvent):
     vtbl[].vtbl.timerEvent = miqt_exec_callback_cQItemDelegate_timerEvent
-  if not isNil(vtbl.childEvent):
+  if not isNil(vtbl[].childEvent):
     vtbl[].vtbl.childEvent = miqt_exec_callback_cQItemDelegate_childEvent
-  if not isNil(vtbl.customEvent):
+  if not isNil(vtbl[].customEvent):
     vtbl[].vtbl.customEvent = miqt_exec_callback_cQItemDelegate_customEvent
-  if not isNil(vtbl.connectNotify):
+  if not isNil(vtbl[].connectNotify):
     vtbl[].vtbl.connectNotify = miqt_exec_callback_cQItemDelegate_connectNotify
-  if not isNil(vtbl.disconnectNotify):
+  if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQItemDelegate_disconnectNotify
-  gen_qitemdelegate_types.QItemDelegate(h: fcQItemDelegate_new2(addr(vtbl[]), parent.h))
+  gen_qitemdelegate_types.QItemDelegate(h: fcQItemDelegate_new2(addr(vtbl[].vtbl), parent.h), owned: true)
+
+proc create*(T: type gen_qitemdelegate_types.QItemDelegate,
+    vtbl: VirtualQItemDelegate) =
+
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQItemDelegateVTable, _: ptr cQItemDelegate) {.cdecl.} =
+    let vtbl = cast[ptr typeof(VirtualQItemDelegate()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQItemDelegate, vtbl)))
+    vtbl[].h = nil
+    vtbl[].owned = false
+  vtbl[].vtbl.metaObject = miqt_exec_method_cQItemDelegate_metaObject
+  vtbl[].vtbl.metacast = miqt_exec_method_cQItemDelegate_metacast
+  vtbl[].vtbl.metacall = miqt_exec_method_cQItemDelegate_metacall
+  vtbl[].vtbl.paint = miqt_exec_method_cQItemDelegate_paint
+  vtbl[].vtbl.sizeHint = miqt_exec_method_cQItemDelegate_sizeHint
+  vtbl[].vtbl.createEditor = miqt_exec_method_cQItemDelegate_createEditor
+  vtbl[].vtbl.setEditorData = miqt_exec_method_cQItemDelegate_setEditorData
+  vtbl[].vtbl.setModelData = miqt_exec_method_cQItemDelegate_setModelData
+  vtbl[].vtbl.updateEditorGeometry = miqt_exec_method_cQItemDelegate_updateEditorGeometry
+  vtbl[].vtbl.drawDisplay = miqt_exec_method_cQItemDelegate_drawDisplay
+  vtbl[].vtbl.drawDecoration = miqt_exec_method_cQItemDelegate_drawDecoration
+  vtbl[].vtbl.drawFocus = miqt_exec_method_cQItemDelegate_drawFocus
+  vtbl[].vtbl.drawCheck = miqt_exec_method_cQItemDelegate_drawCheck
+  vtbl[].vtbl.eventFilter = miqt_exec_method_cQItemDelegate_eventFilter
+  vtbl[].vtbl.editorEvent = miqt_exec_method_cQItemDelegate_editorEvent
+  vtbl[].vtbl.destroyEditor = miqt_exec_method_cQItemDelegate_destroyEditor
+  vtbl[].vtbl.helpEvent = miqt_exec_method_cQItemDelegate_helpEvent
+  vtbl[].vtbl.paintingRoles = miqt_exec_method_cQItemDelegate_paintingRoles
+  vtbl[].vtbl.event = miqt_exec_method_cQItemDelegate_event
+  vtbl[].vtbl.timerEvent = miqt_exec_method_cQItemDelegate_timerEvent
+  vtbl[].vtbl.childEvent = miqt_exec_method_cQItemDelegate_childEvent
+  vtbl[].vtbl.customEvent = miqt_exec_method_cQItemDelegate_customEvent
+  vtbl[].vtbl.connectNotify = miqt_exec_method_cQItemDelegate_connectNotify
+  vtbl[].vtbl.disconnectNotify = miqt_exec_method_cQItemDelegate_disconnectNotify
+  if vtbl[].h != nil: delete(move(vtbl[]))
+  vtbl[].h = fcQItemDelegate_new(addr(vtbl[].vtbl), )
+  vtbl[].owned = true
+
+proc create*(T: type gen_qitemdelegate_types.QItemDelegate,
+    parent: gen_qobject_types.QObject,
+    vtbl: VirtualQItemDelegate) =
+
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQItemDelegateVTable, _: ptr cQItemDelegate) {.cdecl.} =
+    let vtbl = cast[ptr typeof(VirtualQItemDelegate()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQItemDelegate, vtbl)))
+    vtbl[].h = nil
+    vtbl[].owned = false
+  vtbl[].vtbl.metaObject = miqt_exec_method_cQItemDelegate_metaObject
+  vtbl[].vtbl.metacast = miqt_exec_method_cQItemDelegate_metacast
+  vtbl[].vtbl.metacall = miqt_exec_method_cQItemDelegate_metacall
+  vtbl[].vtbl.paint = miqt_exec_method_cQItemDelegate_paint
+  vtbl[].vtbl.sizeHint = miqt_exec_method_cQItemDelegate_sizeHint
+  vtbl[].vtbl.createEditor = miqt_exec_method_cQItemDelegate_createEditor
+  vtbl[].vtbl.setEditorData = miqt_exec_method_cQItemDelegate_setEditorData
+  vtbl[].vtbl.setModelData = miqt_exec_method_cQItemDelegate_setModelData
+  vtbl[].vtbl.updateEditorGeometry = miqt_exec_method_cQItemDelegate_updateEditorGeometry
+  vtbl[].vtbl.drawDisplay = miqt_exec_method_cQItemDelegate_drawDisplay
+  vtbl[].vtbl.drawDecoration = miqt_exec_method_cQItemDelegate_drawDecoration
+  vtbl[].vtbl.drawFocus = miqt_exec_method_cQItemDelegate_drawFocus
+  vtbl[].vtbl.drawCheck = miqt_exec_method_cQItemDelegate_drawCheck
+  vtbl[].vtbl.eventFilter = miqt_exec_method_cQItemDelegate_eventFilter
+  vtbl[].vtbl.editorEvent = miqt_exec_method_cQItemDelegate_editorEvent
+  vtbl[].vtbl.destroyEditor = miqt_exec_method_cQItemDelegate_destroyEditor
+  vtbl[].vtbl.helpEvent = miqt_exec_method_cQItemDelegate_helpEvent
+  vtbl[].vtbl.paintingRoles = miqt_exec_method_cQItemDelegate_paintingRoles
+  vtbl[].vtbl.event = miqt_exec_method_cQItemDelegate_event
+  vtbl[].vtbl.timerEvent = miqt_exec_method_cQItemDelegate_timerEvent
+  vtbl[].vtbl.childEvent = miqt_exec_method_cQItemDelegate_childEvent
+  vtbl[].vtbl.customEvent = miqt_exec_method_cQItemDelegate_customEvent
+  vtbl[].vtbl.connectNotify = miqt_exec_method_cQItemDelegate_connectNotify
+  vtbl[].vtbl.disconnectNotify = miqt_exec_method_cQItemDelegate_disconnectNotify
+  if vtbl[].h != nil: delete(move(vtbl[]))
+  vtbl[].h = fcQItemDelegate_new2(addr(vtbl[].vtbl), parent.h)
+  vtbl[].owned = true
 
 proc staticMetaObject*(_: type gen_qitemdelegate_types.QItemDelegate): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQItemDelegate_staticMetaObject())
-proc delete*(self: gen_qitemdelegate_types.QItemDelegate) =
-  fcQItemDelegate_delete(self.h)

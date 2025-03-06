@@ -30,9 +30,6 @@ func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
     else:
       copyMem(addr result[0], unsafeAddr v[0], v.len)
 
-const cflags = gorge("pkg-config --cflags Qt5Gui")  & " -fPIC"
-{.compile("gen_qdesktopservices.cpp", cflags).}
-
 
 import ./gen_qdesktopservices_types
 export gen_qdesktopservices_types
@@ -49,7 +46,6 @@ type cQDesktopServices*{.exportc: "QDesktopServices", incompleteStruct.} = objec
 proc fcQDesktopServices_openUrl(url: pointer): bool {.importc: "QDesktopServices_openUrl".}
 proc fcQDesktopServices_setUrlHandler(scheme: struct_miqt_string, receiver: pointer, methodVal: cstring): void {.importc: "QDesktopServices_setUrlHandler".}
 proc fcQDesktopServices_unsetUrlHandler(scheme: struct_miqt_string): void {.importc: "QDesktopServices_unsetUrlHandler".}
-proc fcQDesktopServices_delete(self: pointer) {.importc: "QDesktopServices_delete".}
 
 proc openUrl*(_: type gen_qdesktopservices_types.QDesktopServices, url: gen_qurl_types.QUrl): bool =
   fcQDesktopServices_openUrl(url.h)
@@ -60,5 +56,3 @@ proc setUrlHandler*(_: type gen_qdesktopservices_types.QDesktopServices, scheme:
 proc unsetUrlHandler*(_: type gen_qdesktopservices_types.QDesktopServices, scheme: string): void =
   fcQDesktopServices_unsetUrlHandler(struct_miqt_string(data: scheme, len: csize_t(len(scheme))))
 
-proc delete*(self: gen_qdesktopservices_types.QDesktopServices) =
-  fcQDesktopServices_delete(self.h)

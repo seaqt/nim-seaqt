@@ -30,9 +30,6 @@ func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
     else:
       copyMem(addr result[0], unsafeAddr v[0], v.len)
 
-const cflags = gorge("pkg-config --cflags Qt5Script")  & " -fPIC"
-{.compile("gen_qscriptable.cpp", cflags).}
-
 
 import ./gen_qscriptable_types
 export gen_qscriptable_types
@@ -54,25 +51,22 @@ proc fcQScriptable_thisObject(self: pointer, ): pointer {.importc: "QScriptable_
 proc fcQScriptable_argumentCount(self: pointer, ): cint {.importc: "QScriptable_argumentCount".}
 proc fcQScriptable_argument(self: pointer, index: cint): pointer {.importc: "QScriptable_argument".}
 proc fcQScriptable_new(): ptr cQScriptable {.importc: "QScriptable_new".}
-proc fcQScriptable_delete(self: pointer) {.importc: "QScriptable_delete".}
 
 proc engine*(self: gen_qscriptable_types.QScriptable, ): gen_qscriptengine_types.QScriptEngine =
-  gen_qscriptengine_types.QScriptEngine(h: fcQScriptable_engine(self.h))
+  gen_qscriptengine_types.QScriptEngine(h: fcQScriptable_engine(self.h), owned: false)
 
 proc context*(self: gen_qscriptable_types.QScriptable, ): gen_qscriptcontext_types.QScriptContext =
-  gen_qscriptcontext_types.QScriptContext(h: fcQScriptable_context(self.h))
+  gen_qscriptcontext_types.QScriptContext(h: fcQScriptable_context(self.h), owned: false)
 
 proc thisObject*(self: gen_qscriptable_types.QScriptable, ): gen_qscriptvalue_types.QScriptValue =
-  gen_qscriptvalue_types.QScriptValue(h: fcQScriptable_thisObject(self.h))
+  gen_qscriptvalue_types.QScriptValue(h: fcQScriptable_thisObject(self.h), owned: true)
 
 proc argumentCount*(self: gen_qscriptable_types.QScriptable, ): cint =
   fcQScriptable_argumentCount(self.h)
 
 proc argument*(self: gen_qscriptable_types.QScriptable, index: cint): gen_qscriptvalue_types.QScriptValue =
-  gen_qscriptvalue_types.QScriptValue(h: fcQScriptable_argument(self.h, index))
+  gen_qscriptvalue_types.QScriptValue(h: fcQScriptable_argument(self.h, index), owned: true)
 
 proc create*(T: type gen_qscriptable_types.QScriptable): gen_qscriptable_types.QScriptable =
-  gen_qscriptable_types.QScriptable(h: fcQScriptable_new())
+  gen_qscriptable_types.QScriptable(h: fcQScriptable_new(), owned: true)
 
-proc delete*(self: gen_qscriptable_types.QScriptable) =
-  fcQScriptable_delete(self.h)

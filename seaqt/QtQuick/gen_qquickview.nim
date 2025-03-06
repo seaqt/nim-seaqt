@@ -30,7 +30,7 @@ func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
     else:
       copyMem(addr result[0], unsafeAddr v[0], v.len)
 
-const cflags = gorge("pkg-config --cflags Qt5Quick")  & " -fPIC"
+const cflags = gorge("pkg-config --cflags Qt5Quick") & " -fPIC"
 {.compile("gen_qquickview.cpp", cflags).}
 
 
@@ -115,7 +115,7 @@ proc fcQQuickView_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QQ
 proc fcQQuickView_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QQuickView_tr3".}
 proc fcQQuickView_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QQuickView_trUtf82".}
 proc fcQQuickView_trUtf83(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QQuickView_trUtf83".}
-type cQQuickViewVTable = object
+type cQQuickViewVTable {.pure.} = object
   destructor*: proc(vtbl: ptr cQQuickViewVTable, self: ptr cQQuickView) {.cdecl, raises:[], gcsafe.}
   metaObject*: proc(vtbl, self: pointer, ): pointer {.cdecl, raises: [], gcsafe.}
   metacast*: proc(vtbl, self: pointer, param1: cstring): pointer {.cdecl, raises: [], gcsafe.}
@@ -192,10 +192,9 @@ proc fcQQuickView_new4(vtbl: pointer, source: pointer, renderControl: pointer): 
 proc fcQQuickView_new5(vtbl: pointer, parent: pointer): ptr cQQuickView {.importc: "QQuickView_new5".}
 proc fcQQuickView_new6(vtbl: pointer, source: pointer, parent: pointer): ptr cQQuickView {.importc: "QQuickView_new6".}
 proc fcQQuickView_staticMetaObject(): pointer {.importc: "QQuickView_staticMetaObject".}
-proc fcQQuickView_delete(self: pointer) {.importc: "QQuickView_delete".}
 
 proc metaObject*(self: gen_qquickview_types.QQuickView, ): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQQuickView_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQQuickView_metaObject(self.h), owned: false)
 
 proc metacast*(self: gen_qquickview_types.QQuickView, param1: cstring): pointer =
   fcQQuickView_metacast(self.h, param1)
@@ -216,16 +215,16 @@ proc trUtf8*(_: type gen_qquickview_types.QQuickView, s: cstring): string =
   vx_ret
 
 proc source*(self: gen_qquickview_types.QQuickView, ): gen_qurl_types.QUrl =
-  gen_qurl_types.QUrl(h: fcQQuickView_source(self.h))
+  gen_qurl_types.QUrl(h: fcQQuickView_source(self.h), owned: true)
 
 proc engine*(self: gen_qquickview_types.QQuickView, ): gen_qqmlengine_types.QQmlEngine =
-  gen_qqmlengine_types.QQmlEngine(h: fcQQuickView_engine(self.h))
+  gen_qqmlengine_types.QQmlEngine(h: fcQQuickView_engine(self.h), owned: false)
 
 proc rootContext*(self: gen_qquickview_types.QQuickView, ): gen_qqmlcontext_types.QQmlContext =
-  gen_qqmlcontext_types.QQmlContext(h: fcQQuickView_rootContext(self.h))
+  gen_qqmlcontext_types.QQmlContext(h: fcQQuickView_rootContext(self.h), owned: false)
 
 proc rootObject*(self: gen_qquickview_types.QQuickView, ): gen_qquickitem_types.QQuickItem =
-  gen_qquickitem_types.QQuickItem(h: fcQQuickView_rootObject(self.h))
+  gen_qquickitem_types.QQuickItem(h: fcQQuickView_rootObject(self.h), owned: false)
 
 proc resizeMode*(self: gen_qquickview_types.QQuickView, ): cint =
   cint(fcQQuickView_resizeMode(self.h))
@@ -241,15 +240,15 @@ proc errors*(self: gen_qquickview_types.QQuickView, ): seq[gen_qqmlerror_types.Q
   var vx_ret = newSeq[gen_qqmlerror_types.QQmlError](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
-    vx_ret[i] = gen_qqmlerror_types.QQmlError(h: v_outCast[i])
+    vx_ret[i] = gen_qqmlerror_types.QQmlError(h: v_outCast[i], owned: true)
   c_free(v_ma.data)
   vx_ret
 
 proc sizeHint*(self: gen_qquickview_types.QQuickView, ): gen_qsize_types.QSize =
-  gen_qsize_types.QSize(h: fcQQuickView_sizeHint(self.h))
+  gen_qsize_types.QSize(h: fcQQuickView_sizeHint(self.h), owned: true)
 
 proc initialSize*(self: gen_qquickview_types.QQuickView, ): gen_qsize_types.QSize =
-  gen_qsize_types.QSize(h: fcQQuickView_initialSize(self.h))
+  gen_qsize_types.QSize(h: fcQQuickView_initialSize(self.h), owned: true)
 
 proc setSource*(self: gen_qquickview_types.QQuickView, source: gen_qurl_types.QUrl): void =
   fcQQuickView_setSource(self.h, source.h)
@@ -258,8 +257,11 @@ proc setInitialProperties*(self: gen_qquickview_types.QQuickView, initialPropert
   var initialProperties_Keys_CArray = newSeq[struct_miqt_string](len(initialProperties))
   var initialProperties_Values_CArray = newSeq[pointer](len(initialProperties))
   var initialProperties_ctr = 0
-  for initialProperties_k, initialProperties_v in initialProperties:
+  for initialProperties_k in initialProperties.keys():
     initialProperties_Keys_CArray[initialProperties_ctr] = struct_miqt_string(data: initialProperties_k, len: csize_t(len(initialProperties_k)))
+    initialProperties_ctr += 1
+  initialProperties_ctr = 0
+  for initialProperties_v in initialProperties.values():
     initialProperties_Values_CArray[initialProperties_ctr] = initialProperties_v.h
     initialProperties_ctr += 1
 
@@ -344,7 +346,7 @@ type QQuickViewchildEventProc* = proc(self: QQuickView, event: gen_qcoreevent_ty
 type QQuickViewcustomEventProc* = proc(self: QQuickView, event: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
 type QQuickViewconnectNotifyProc* = proc(self: QQuickView, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
 type QQuickViewdisconnectNotifyProc* = proc(self: QQuickView, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
-type QQuickViewVTable* = object
+type QQuickViewVTable* {.inheritable, pure.} = object
   vtbl: cQQuickViewVTable
   metaObject*: QQuickViewmetaObjectProc
   metacast*: QQuickViewmetacastProc
@@ -379,13 +381,16 @@ type QQuickViewVTable* = object
   connectNotify*: QQuickViewconnectNotifyProc
   disconnectNotify*: QQuickViewdisconnectNotifyProc
 proc QQuickViewmetaObject*(self: gen_qquickview_types.QQuickView, ): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQQuickView_virtualbase_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQQuickView_virtualbase_metaObject(self.h), owned: false)
 
 proc miqt_exec_callback_cQQuickView_metaObject(vtbl: pointer, self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QQuickViewVTable](vtbl)
   let self = QQuickView(h: self)
   var virtualReturn = vtbl[].metaObject(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QQuickViewmetacast*(self: gen_qquickview_types.QQuickView, param1: cstring): pointer =
   fcQQuickView_virtualbase_metacast(self.h, param1)
@@ -415,7 +420,7 @@ proc QQuickViewresizeEvent*(self: gen_qquickview_types.QQuickView, param1: gen_q
 proc miqt_exec_callback_cQQuickView_resizeEvent(vtbl: pointer, self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QQuickViewVTable](vtbl)
   let self = QQuickView(h: self)
-  let slotval1 = gen_qevent_types.QResizeEvent(h: param1)
+  let slotval1 = gen_qevent_types.QResizeEvent(h: param1, owned: false)
   vtbl[].resizeEvent(self, slotval1)
 
 proc QQuickViewtimerEvent*(self: gen_qquickview_types.QQuickView, param1: gen_qcoreevent_types.QTimerEvent): void =
@@ -424,7 +429,7 @@ proc QQuickViewtimerEvent*(self: gen_qquickview_types.QQuickView, param1: gen_qc
 proc miqt_exec_callback_cQQuickView_timerEvent(vtbl: pointer, self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QQuickViewVTable](vtbl)
   let self = QQuickView(h: self)
-  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: param1)
+  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: param1, owned: false)
   vtbl[].timerEvent(self, slotval1)
 
 proc QQuickViewkeyPressEvent*(self: gen_qquickview_types.QQuickView, param1: gen_qevent_types.QKeyEvent): void =
@@ -433,7 +438,7 @@ proc QQuickViewkeyPressEvent*(self: gen_qquickview_types.QQuickView, param1: gen
 proc miqt_exec_callback_cQQuickView_keyPressEvent(vtbl: pointer, self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QQuickViewVTable](vtbl)
   let self = QQuickView(h: self)
-  let slotval1 = gen_qevent_types.QKeyEvent(h: param1)
+  let slotval1 = gen_qevent_types.QKeyEvent(h: param1, owned: false)
   vtbl[].keyPressEvent(self, slotval1)
 
 proc QQuickViewkeyReleaseEvent*(self: gen_qquickview_types.QQuickView, param1: gen_qevent_types.QKeyEvent): void =
@@ -442,7 +447,7 @@ proc QQuickViewkeyReleaseEvent*(self: gen_qquickview_types.QQuickView, param1: g
 proc miqt_exec_callback_cQQuickView_keyReleaseEvent(vtbl: pointer, self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QQuickViewVTable](vtbl)
   let self = QQuickView(h: self)
-  let slotval1 = gen_qevent_types.QKeyEvent(h: param1)
+  let slotval1 = gen_qevent_types.QKeyEvent(h: param1, owned: false)
   vtbl[].keyReleaseEvent(self, slotval1)
 
 proc QQuickViewmousePressEvent*(self: gen_qquickview_types.QQuickView, param1: gen_qevent_types.QMouseEvent): void =
@@ -451,7 +456,7 @@ proc QQuickViewmousePressEvent*(self: gen_qquickview_types.QQuickView, param1: g
 proc miqt_exec_callback_cQQuickView_mousePressEvent(vtbl: pointer, self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QQuickViewVTable](vtbl)
   let self = QQuickView(h: self)
-  let slotval1 = gen_qevent_types.QMouseEvent(h: param1)
+  let slotval1 = gen_qevent_types.QMouseEvent(h: param1, owned: false)
   vtbl[].mousePressEvent(self, slotval1)
 
 proc QQuickViewmouseReleaseEvent*(self: gen_qquickview_types.QQuickView, param1: gen_qevent_types.QMouseEvent): void =
@@ -460,7 +465,7 @@ proc QQuickViewmouseReleaseEvent*(self: gen_qquickview_types.QQuickView, param1:
 proc miqt_exec_callback_cQQuickView_mouseReleaseEvent(vtbl: pointer, self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QQuickViewVTable](vtbl)
   let self = QQuickView(h: self)
-  let slotval1 = gen_qevent_types.QMouseEvent(h: param1)
+  let slotval1 = gen_qevent_types.QMouseEvent(h: param1, owned: false)
   vtbl[].mouseReleaseEvent(self, slotval1)
 
 proc QQuickViewmouseMoveEvent*(self: gen_qquickview_types.QQuickView, param1: gen_qevent_types.QMouseEvent): void =
@@ -469,26 +474,32 @@ proc QQuickViewmouseMoveEvent*(self: gen_qquickview_types.QQuickView, param1: ge
 proc miqt_exec_callback_cQQuickView_mouseMoveEvent(vtbl: pointer, self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QQuickViewVTable](vtbl)
   let self = QQuickView(h: self)
-  let slotval1 = gen_qevent_types.QMouseEvent(h: param1)
+  let slotval1 = gen_qevent_types.QMouseEvent(h: param1, owned: false)
   vtbl[].mouseMoveEvent(self, slotval1)
 
 proc QQuickViewfocusObject*(self: gen_qquickview_types.QQuickView, ): gen_qobject_types.QObject =
-  gen_qobject_types.QObject(h: fcQQuickView_virtualbase_focusObject(self.h))
+  gen_qobject_types.QObject(h: fcQQuickView_virtualbase_focusObject(self.h), owned: false)
 
 proc miqt_exec_callback_cQQuickView_focusObject(vtbl: pointer, self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QQuickViewVTable](vtbl)
   let self = QQuickView(h: self)
   var virtualReturn = vtbl[].focusObject(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QQuickViewaccessibleRoot*(self: gen_qquickview_types.QQuickView, ): gen_qaccessible_types.QAccessibleInterface =
-  gen_qaccessible_types.QAccessibleInterface(h: fcQQuickView_virtualbase_accessibleRoot(self.h))
+  gen_qaccessible_types.QAccessibleInterface(h: fcQQuickView_virtualbase_accessibleRoot(self.h), owned: false)
 
 proc miqt_exec_callback_cQQuickView_accessibleRoot(vtbl: pointer, self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QQuickViewVTable](vtbl)
   let self = QQuickView(h: self)
   var virtualReturn = vtbl[].accessibleRoot(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QQuickViewexposeEvent*(self: gen_qquickview_types.QQuickView, param1: gen_qevent_types.QExposeEvent): void =
   fcQQuickView_virtualbase_exposeEvent(self.h, param1.h)
@@ -496,7 +507,7 @@ proc QQuickViewexposeEvent*(self: gen_qquickview_types.QQuickView, param1: gen_q
 proc miqt_exec_callback_cQQuickView_exposeEvent(vtbl: pointer, self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QQuickViewVTable](vtbl)
   let self = QQuickView(h: self)
-  let slotval1 = gen_qevent_types.QExposeEvent(h: param1)
+  let slotval1 = gen_qevent_types.QExposeEvent(h: param1, owned: false)
   vtbl[].exposeEvent(self, slotval1)
 
 proc QQuickViewshowEvent*(self: gen_qquickview_types.QQuickView, param1: gen_qevent_types.QShowEvent): void =
@@ -505,7 +516,7 @@ proc QQuickViewshowEvent*(self: gen_qquickview_types.QQuickView, param1: gen_qev
 proc miqt_exec_callback_cQQuickView_showEvent(vtbl: pointer, self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QQuickViewVTable](vtbl)
   let self = QQuickView(h: self)
-  let slotval1 = gen_qevent_types.QShowEvent(h: param1)
+  let slotval1 = gen_qevent_types.QShowEvent(h: param1, owned: false)
   vtbl[].showEvent(self, slotval1)
 
 proc QQuickViewhideEvent*(self: gen_qquickview_types.QQuickView, param1: gen_qevent_types.QHideEvent): void =
@@ -514,7 +525,7 @@ proc QQuickViewhideEvent*(self: gen_qquickview_types.QQuickView, param1: gen_qev
 proc miqt_exec_callback_cQQuickView_hideEvent(vtbl: pointer, self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QQuickViewVTable](vtbl)
   let self = QQuickView(h: self)
-  let slotval1 = gen_qevent_types.QHideEvent(h: param1)
+  let slotval1 = gen_qevent_types.QHideEvent(h: param1, owned: false)
   vtbl[].hideEvent(self, slotval1)
 
 proc QQuickViewfocusInEvent*(self: gen_qquickview_types.QQuickView, param1: gen_qevent_types.QFocusEvent): void =
@@ -523,7 +534,7 @@ proc QQuickViewfocusInEvent*(self: gen_qquickview_types.QQuickView, param1: gen_
 proc miqt_exec_callback_cQQuickView_focusInEvent(vtbl: pointer, self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QQuickViewVTable](vtbl)
   let self = QQuickView(h: self)
-  let slotval1 = gen_qevent_types.QFocusEvent(h: param1)
+  let slotval1 = gen_qevent_types.QFocusEvent(h: param1, owned: false)
   vtbl[].focusInEvent(self, slotval1)
 
 proc QQuickViewfocusOutEvent*(self: gen_qquickview_types.QQuickView, param1: gen_qevent_types.QFocusEvent): void =
@@ -532,7 +543,7 @@ proc QQuickViewfocusOutEvent*(self: gen_qquickview_types.QQuickView, param1: gen
 proc miqt_exec_callback_cQQuickView_focusOutEvent(vtbl: pointer, self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QQuickViewVTable](vtbl)
   let self = QQuickView(h: self)
-  let slotval1 = gen_qevent_types.QFocusEvent(h: param1)
+  let slotval1 = gen_qevent_types.QFocusEvent(h: param1, owned: false)
   vtbl[].focusOutEvent(self, slotval1)
 
 proc QQuickViewevent*(self: gen_qquickview_types.QQuickView, param1: gen_qcoreevent_types.QEvent): bool =
@@ -541,7 +552,7 @@ proc QQuickViewevent*(self: gen_qquickview_types.QQuickView, param1: gen_qcoreev
 proc miqt_exec_callback_cQQuickView_event(vtbl: pointer, self: pointer, param1: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QQuickViewVTable](vtbl)
   let self = QQuickView(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: param1)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: param1, owned: false)
   var virtualReturn = vtbl[].event(self, slotval1)
   virtualReturn
 
@@ -551,7 +562,7 @@ proc QQuickViewmouseDoubleClickEvent*(self: gen_qquickview_types.QQuickView, par
 proc miqt_exec_callback_cQQuickView_mouseDoubleClickEvent(vtbl: pointer, self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QQuickViewVTable](vtbl)
   let self = QQuickView(h: self)
-  let slotval1 = gen_qevent_types.QMouseEvent(h: param1)
+  let slotval1 = gen_qevent_types.QMouseEvent(h: param1, owned: false)
   vtbl[].mouseDoubleClickEvent(self, slotval1)
 
 proc QQuickViewwheelEvent*(self: gen_qquickview_types.QQuickView, param1: gen_qevent_types.QWheelEvent): void =
@@ -560,7 +571,7 @@ proc QQuickViewwheelEvent*(self: gen_qquickview_types.QQuickView, param1: gen_qe
 proc miqt_exec_callback_cQQuickView_wheelEvent(vtbl: pointer, self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QQuickViewVTable](vtbl)
   let self = QQuickView(h: self)
-  let slotval1 = gen_qevent_types.QWheelEvent(h: param1)
+  let slotval1 = gen_qevent_types.QWheelEvent(h: param1, owned: false)
   vtbl[].wheelEvent(self, slotval1)
 
 proc QQuickViewtabletEvent*(self: gen_qquickview_types.QQuickView, param1: gen_qevent_types.QTabletEvent): void =
@@ -569,7 +580,7 @@ proc QQuickViewtabletEvent*(self: gen_qquickview_types.QQuickView, param1: gen_q
 proc miqt_exec_callback_cQQuickView_tabletEvent(vtbl: pointer, self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QQuickViewVTable](vtbl)
   let self = QQuickView(h: self)
-  let slotval1 = gen_qevent_types.QTabletEvent(h: param1)
+  let slotval1 = gen_qevent_types.QTabletEvent(h: param1, owned: false)
   vtbl[].tabletEvent(self, slotval1)
 
 proc QQuickViewsurfaceType*(self: gen_qquickview_types.QQuickView, ): cint =
@@ -582,22 +593,28 @@ proc miqt_exec_callback_cQQuickView_surfaceType(vtbl: pointer, self: pointer): c
   cint(virtualReturn)
 
 proc QQuickViewformat*(self: gen_qquickview_types.QQuickView, ): gen_qsurfaceformat_types.QSurfaceFormat =
-  gen_qsurfaceformat_types.QSurfaceFormat(h: fcQQuickView_virtualbase_format(self.h))
+  gen_qsurfaceformat_types.QSurfaceFormat(h: fcQQuickView_virtualbase_format(self.h), owned: true)
 
 proc miqt_exec_callback_cQQuickView_format(vtbl: pointer, self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QQuickViewVTable](vtbl)
   let self = QQuickView(h: self)
   var virtualReturn = vtbl[].format(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QQuickViewsize*(self: gen_qquickview_types.QQuickView, ): gen_qsize_types.QSize =
-  gen_qsize_types.QSize(h: fcQQuickView_virtualbase_size(self.h))
+  gen_qsize_types.QSize(h: fcQQuickView_virtualbase_size(self.h), owned: true)
 
 proc miqt_exec_callback_cQQuickView_size(vtbl: pointer, self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QQuickViewVTable](vtbl)
   let self = QQuickView(h: self)
   var virtualReturn = vtbl[].size(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QQuickViewmoveEvent*(self: gen_qquickview_types.QQuickView, param1: gen_qevent_types.QMoveEvent): void =
   fcQQuickView_virtualbase_moveEvent(self.h, param1.h)
@@ -605,7 +622,7 @@ proc QQuickViewmoveEvent*(self: gen_qquickview_types.QQuickView, param1: gen_qev
 proc miqt_exec_callback_cQQuickView_moveEvent(vtbl: pointer, self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QQuickViewVTable](vtbl)
   let self = QQuickView(h: self)
-  let slotval1 = gen_qevent_types.QMoveEvent(h: param1)
+  let slotval1 = gen_qevent_types.QMoveEvent(h: param1, owned: false)
   vtbl[].moveEvent(self, slotval1)
 
 proc QQuickViewtouchEvent*(self: gen_qquickview_types.QQuickView, param1: gen_qevent_types.QTouchEvent): void =
@@ -614,7 +631,7 @@ proc QQuickViewtouchEvent*(self: gen_qquickview_types.QQuickView, param1: gen_qe
 proc miqt_exec_callback_cQQuickView_touchEvent(vtbl: pointer, self: pointer, param1: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QQuickViewVTable](vtbl)
   let self = QQuickView(h: self)
-  let slotval1 = gen_qevent_types.QTouchEvent(h: param1)
+  let slotval1 = gen_qevent_types.QTouchEvent(h: param1, owned: false)
   vtbl[].touchEvent(self, slotval1)
 
 proc QQuickViewnativeEvent*(self: gen_qquickview_types.QQuickView, eventType: seq[byte], message: pointer, resultVal: ptr clong): bool =
@@ -638,8 +655,8 @@ proc QQuickVieweventFilter*(self: gen_qquickview_types.QQuickView, watched: gen_
 proc miqt_exec_callback_cQQuickView_eventFilter(vtbl: pointer, self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QQuickViewVTable](vtbl)
   let self = QQuickView(h: self)
-  let slotval1 = gen_qobject_types.QObject(h: watched)
-  let slotval2 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].eventFilter(self, slotval1, slotval2)
   virtualReturn
 
@@ -649,7 +666,7 @@ proc QQuickViewchildEvent*(self: gen_qquickview_types.QQuickView, event: gen_qco
 proc miqt_exec_callback_cQQuickView_childEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QQuickViewVTable](vtbl)
   let self = QQuickView(h: self)
-  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   vtbl[].childEvent(self, slotval1)
 
 proc QQuickViewcustomEvent*(self: gen_qquickview_types.QQuickView, event: gen_qcoreevent_types.QEvent): void =
@@ -658,7 +675,7 @@ proc QQuickViewcustomEvent*(self: gen_qquickview_types.QQuickView, event: gen_qc
 proc miqt_exec_callback_cQQuickView_customEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QQuickViewVTable](vtbl)
   let self = QQuickView(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].customEvent(self, slotval1)
 
 proc QQuickViewconnectNotify*(self: gen_qquickview_types.QQuickView, signal: gen_qmetaobject_types.QMetaMethod): void =
@@ -667,7 +684,7 @@ proc QQuickViewconnectNotify*(self: gen_qquickview_types.QQuickView, signal: gen
 proc miqt_exec_callback_cQQuickView_connectNotify(vtbl: pointer, self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QQuickViewVTable](vtbl)
   let self = QQuickView(h: self)
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].connectNotify(self, slotval1)
 
 proc QQuickViewdisconnectNotify*(self: gen_qquickview_types.QQuickView, signal: gen_qmetaobject_types.QMetaMethod): void =
@@ -676,11 +693,265 @@ proc QQuickViewdisconnectNotify*(self: gen_qquickview_types.QQuickView, signal: 
 proc miqt_exec_callback_cQQuickView_disconnectNotify(vtbl: pointer, self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QQuickViewVTable](vtbl)
   let self = QQuickView(h: self)
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].disconnectNotify(self, slotval1)
 
+type VirtualQQuickView* {.inheritable.} = ref object of QQuickView
+  vtbl*: cQQuickViewVTable
+method metaObject*(self: VirtualQQuickView, ): gen_qobjectdefs_types.QMetaObject {.base.} =
+  QQuickViewmetaObject(self[])
+proc miqt_exec_method_cQQuickView_metaObject(vtbl: pointer, inst: pointer): pointer {.cdecl.} =
+  let vtbl = cast[VirtualQQuickView](cast[uint](vtbl) - uint(offsetOf(VirtualQQuickView, vtbl)))
+  var virtualReturn = vtbl.metaObject()
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
+
+method metacast*(self: VirtualQQuickView, param1: cstring): pointer {.base.} =
+  QQuickViewmetacast(self[], param1)
+proc miqt_exec_method_cQQuickView_metacast(vtbl: pointer, inst: pointer, param1: cstring): pointer {.cdecl.} =
+  let vtbl = cast[VirtualQQuickView](cast[uint](vtbl) - uint(offsetOf(VirtualQQuickView, vtbl)))
+  let slotval1 = (param1)
+  var virtualReturn = vtbl.metacast(slotval1)
+  virtualReturn
+
+method metacall*(self: VirtualQQuickView, param1: cint, param2: cint, param3: pointer): cint {.base.} =
+  QQuickViewmetacall(self[], param1, param2, param3)
+proc miqt_exec_method_cQQuickView_metacall(vtbl: pointer, inst: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
+  let vtbl = cast[VirtualQQuickView](cast[uint](vtbl) - uint(offsetOf(VirtualQQuickView, vtbl)))
+  let slotval1 = cint(param1)
+  let slotval2 = param2
+  let slotval3 = param3
+  var virtualReturn = vtbl.metacall(slotval1, slotval2, slotval3)
+  virtualReturn
+
+method resizeEvent*(self: VirtualQQuickView, param1: gen_qevent_types.QResizeEvent): void {.base.} =
+  QQuickViewresizeEvent(self[], param1)
+proc miqt_exec_method_cQQuickView_resizeEvent(vtbl: pointer, inst: pointer, param1: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQQuickView](cast[uint](vtbl) - uint(offsetOf(VirtualQQuickView, vtbl)))
+  let slotval1 = gen_qevent_types.QResizeEvent(h: param1, owned: false)
+  vtbl.resizeEvent(slotval1)
+
+method timerEvent*(self: VirtualQQuickView, param1: gen_qcoreevent_types.QTimerEvent): void {.base.} =
+  QQuickViewtimerEvent(self[], param1)
+proc miqt_exec_method_cQQuickView_timerEvent(vtbl: pointer, inst: pointer, param1: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQQuickView](cast[uint](vtbl) - uint(offsetOf(VirtualQQuickView, vtbl)))
+  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: param1, owned: false)
+  vtbl.timerEvent(slotval1)
+
+method keyPressEvent*(self: VirtualQQuickView, param1: gen_qevent_types.QKeyEvent): void {.base.} =
+  QQuickViewkeyPressEvent(self[], param1)
+proc miqt_exec_method_cQQuickView_keyPressEvent(vtbl: pointer, inst: pointer, param1: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQQuickView](cast[uint](vtbl) - uint(offsetOf(VirtualQQuickView, vtbl)))
+  let slotval1 = gen_qevent_types.QKeyEvent(h: param1, owned: false)
+  vtbl.keyPressEvent(slotval1)
+
+method keyReleaseEvent*(self: VirtualQQuickView, param1: gen_qevent_types.QKeyEvent): void {.base.} =
+  QQuickViewkeyReleaseEvent(self[], param1)
+proc miqt_exec_method_cQQuickView_keyReleaseEvent(vtbl: pointer, inst: pointer, param1: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQQuickView](cast[uint](vtbl) - uint(offsetOf(VirtualQQuickView, vtbl)))
+  let slotval1 = gen_qevent_types.QKeyEvent(h: param1, owned: false)
+  vtbl.keyReleaseEvent(slotval1)
+
+method mousePressEvent*(self: VirtualQQuickView, param1: gen_qevent_types.QMouseEvent): void {.base.} =
+  QQuickViewmousePressEvent(self[], param1)
+proc miqt_exec_method_cQQuickView_mousePressEvent(vtbl: pointer, inst: pointer, param1: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQQuickView](cast[uint](vtbl) - uint(offsetOf(VirtualQQuickView, vtbl)))
+  let slotval1 = gen_qevent_types.QMouseEvent(h: param1, owned: false)
+  vtbl.mousePressEvent(slotval1)
+
+method mouseReleaseEvent*(self: VirtualQQuickView, param1: gen_qevent_types.QMouseEvent): void {.base.} =
+  QQuickViewmouseReleaseEvent(self[], param1)
+proc miqt_exec_method_cQQuickView_mouseReleaseEvent(vtbl: pointer, inst: pointer, param1: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQQuickView](cast[uint](vtbl) - uint(offsetOf(VirtualQQuickView, vtbl)))
+  let slotval1 = gen_qevent_types.QMouseEvent(h: param1, owned: false)
+  vtbl.mouseReleaseEvent(slotval1)
+
+method mouseMoveEvent*(self: VirtualQQuickView, param1: gen_qevent_types.QMouseEvent): void {.base.} =
+  QQuickViewmouseMoveEvent(self[], param1)
+proc miqt_exec_method_cQQuickView_mouseMoveEvent(vtbl: pointer, inst: pointer, param1: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQQuickView](cast[uint](vtbl) - uint(offsetOf(VirtualQQuickView, vtbl)))
+  let slotval1 = gen_qevent_types.QMouseEvent(h: param1, owned: false)
+  vtbl.mouseMoveEvent(slotval1)
+
+method focusObject*(self: VirtualQQuickView, ): gen_qobject_types.QObject {.base.} =
+  QQuickViewfocusObject(self[])
+proc miqt_exec_method_cQQuickView_focusObject(vtbl: pointer, inst: pointer): pointer {.cdecl.} =
+  let vtbl = cast[VirtualQQuickView](cast[uint](vtbl) - uint(offsetOf(VirtualQQuickView, vtbl)))
+  var virtualReturn = vtbl.focusObject()
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
+
+method accessibleRoot*(self: VirtualQQuickView, ): gen_qaccessible_types.QAccessibleInterface {.base.} =
+  QQuickViewaccessibleRoot(self[])
+proc miqt_exec_method_cQQuickView_accessibleRoot(vtbl: pointer, inst: pointer): pointer {.cdecl.} =
+  let vtbl = cast[VirtualQQuickView](cast[uint](vtbl) - uint(offsetOf(VirtualQQuickView, vtbl)))
+  var virtualReturn = vtbl.accessibleRoot()
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
+
+method exposeEvent*(self: VirtualQQuickView, param1: gen_qevent_types.QExposeEvent): void {.base.} =
+  QQuickViewexposeEvent(self[], param1)
+proc miqt_exec_method_cQQuickView_exposeEvent(vtbl: pointer, inst: pointer, param1: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQQuickView](cast[uint](vtbl) - uint(offsetOf(VirtualQQuickView, vtbl)))
+  let slotval1 = gen_qevent_types.QExposeEvent(h: param1, owned: false)
+  vtbl.exposeEvent(slotval1)
+
+method showEvent*(self: VirtualQQuickView, param1: gen_qevent_types.QShowEvent): void {.base.} =
+  QQuickViewshowEvent(self[], param1)
+proc miqt_exec_method_cQQuickView_showEvent(vtbl: pointer, inst: pointer, param1: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQQuickView](cast[uint](vtbl) - uint(offsetOf(VirtualQQuickView, vtbl)))
+  let slotval1 = gen_qevent_types.QShowEvent(h: param1, owned: false)
+  vtbl.showEvent(slotval1)
+
+method hideEvent*(self: VirtualQQuickView, param1: gen_qevent_types.QHideEvent): void {.base.} =
+  QQuickViewhideEvent(self[], param1)
+proc miqt_exec_method_cQQuickView_hideEvent(vtbl: pointer, inst: pointer, param1: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQQuickView](cast[uint](vtbl) - uint(offsetOf(VirtualQQuickView, vtbl)))
+  let slotval1 = gen_qevent_types.QHideEvent(h: param1, owned: false)
+  vtbl.hideEvent(slotval1)
+
+method focusInEvent*(self: VirtualQQuickView, param1: gen_qevent_types.QFocusEvent): void {.base.} =
+  QQuickViewfocusInEvent(self[], param1)
+proc miqt_exec_method_cQQuickView_focusInEvent(vtbl: pointer, inst: pointer, param1: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQQuickView](cast[uint](vtbl) - uint(offsetOf(VirtualQQuickView, vtbl)))
+  let slotval1 = gen_qevent_types.QFocusEvent(h: param1, owned: false)
+  vtbl.focusInEvent(slotval1)
+
+method focusOutEvent*(self: VirtualQQuickView, param1: gen_qevent_types.QFocusEvent): void {.base.} =
+  QQuickViewfocusOutEvent(self[], param1)
+proc miqt_exec_method_cQQuickView_focusOutEvent(vtbl: pointer, inst: pointer, param1: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQQuickView](cast[uint](vtbl) - uint(offsetOf(VirtualQQuickView, vtbl)))
+  let slotval1 = gen_qevent_types.QFocusEvent(h: param1, owned: false)
+  vtbl.focusOutEvent(slotval1)
+
+method event*(self: VirtualQQuickView, param1: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QQuickViewevent(self[], param1)
+proc miqt_exec_method_cQQuickView_event(vtbl: pointer, inst: pointer, param1: pointer): bool {.cdecl.} =
+  let vtbl = cast[VirtualQQuickView](cast[uint](vtbl) - uint(offsetOf(VirtualQQuickView, vtbl)))
+  let slotval1 = gen_qcoreevent_types.QEvent(h: param1, owned: false)
+  var virtualReturn = vtbl.event(slotval1)
+  virtualReturn
+
+method mouseDoubleClickEvent*(self: VirtualQQuickView, param1: gen_qevent_types.QMouseEvent): void {.base.} =
+  QQuickViewmouseDoubleClickEvent(self[], param1)
+proc miqt_exec_method_cQQuickView_mouseDoubleClickEvent(vtbl: pointer, inst: pointer, param1: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQQuickView](cast[uint](vtbl) - uint(offsetOf(VirtualQQuickView, vtbl)))
+  let slotval1 = gen_qevent_types.QMouseEvent(h: param1, owned: false)
+  vtbl.mouseDoubleClickEvent(slotval1)
+
+method wheelEvent*(self: VirtualQQuickView, param1: gen_qevent_types.QWheelEvent): void {.base.} =
+  QQuickViewwheelEvent(self[], param1)
+proc miqt_exec_method_cQQuickView_wheelEvent(vtbl: pointer, inst: pointer, param1: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQQuickView](cast[uint](vtbl) - uint(offsetOf(VirtualQQuickView, vtbl)))
+  let slotval1 = gen_qevent_types.QWheelEvent(h: param1, owned: false)
+  vtbl.wheelEvent(slotval1)
+
+method tabletEvent*(self: VirtualQQuickView, param1: gen_qevent_types.QTabletEvent): void {.base.} =
+  QQuickViewtabletEvent(self[], param1)
+proc miqt_exec_method_cQQuickView_tabletEvent(vtbl: pointer, inst: pointer, param1: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQQuickView](cast[uint](vtbl) - uint(offsetOf(VirtualQQuickView, vtbl)))
+  let slotval1 = gen_qevent_types.QTabletEvent(h: param1, owned: false)
+  vtbl.tabletEvent(slotval1)
+
+method surfaceType*(self: VirtualQQuickView, ): cint {.base.} =
+  QQuickViewsurfaceType(self[])
+proc miqt_exec_method_cQQuickView_surfaceType(vtbl: pointer, inst: pointer): cint {.cdecl.} =
+  let vtbl = cast[VirtualQQuickView](cast[uint](vtbl) - uint(offsetOf(VirtualQQuickView, vtbl)))
+  var virtualReturn = vtbl.surfaceType()
+  cint(virtualReturn)
+
+method format*(self: VirtualQQuickView, ): gen_qsurfaceformat_types.QSurfaceFormat {.base.} =
+  QQuickViewformat(self[])
+proc miqt_exec_method_cQQuickView_format(vtbl: pointer, inst: pointer): pointer {.cdecl.} =
+  let vtbl = cast[VirtualQQuickView](cast[uint](vtbl) - uint(offsetOf(VirtualQQuickView, vtbl)))
+  var virtualReturn = vtbl.format()
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
+
+method size*(self: VirtualQQuickView, ): gen_qsize_types.QSize {.base.} =
+  QQuickViewsize(self[])
+proc miqt_exec_method_cQQuickView_size(vtbl: pointer, inst: pointer): pointer {.cdecl.} =
+  let vtbl = cast[VirtualQQuickView](cast[uint](vtbl) - uint(offsetOf(VirtualQQuickView, vtbl)))
+  var virtualReturn = vtbl.size()
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
+
+method moveEvent*(self: VirtualQQuickView, param1: gen_qevent_types.QMoveEvent): void {.base.} =
+  QQuickViewmoveEvent(self[], param1)
+proc miqt_exec_method_cQQuickView_moveEvent(vtbl: pointer, inst: pointer, param1: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQQuickView](cast[uint](vtbl) - uint(offsetOf(VirtualQQuickView, vtbl)))
+  let slotval1 = gen_qevent_types.QMoveEvent(h: param1, owned: false)
+  vtbl.moveEvent(slotval1)
+
+method touchEvent*(self: VirtualQQuickView, param1: gen_qevent_types.QTouchEvent): void {.base.} =
+  QQuickViewtouchEvent(self[], param1)
+proc miqt_exec_method_cQQuickView_touchEvent(vtbl: pointer, inst: pointer, param1: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQQuickView](cast[uint](vtbl) - uint(offsetOf(VirtualQQuickView, vtbl)))
+  let slotval1 = gen_qevent_types.QTouchEvent(h: param1, owned: false)
+  vtbl.touchEvent(slotval1)
+
+method nativeEvent*(self: VirtualQQuickView, eventType: seq[byte], message: pointer, resultVal: ptr clong): bool {.base.} =
+  QQuickViewnativeEvent(self[], eventType, message, resultVal)
+proc miqt_exec_method_cQQuickView_nativeEvent(vtbl: pointer, inst: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr clong): bool {.cdecl.} =
+  let vtbl = cast[VirtualQQuickView](cast[uint](vtbl) - uint(offsetOf(VirtualQQuickView, vtbl)))
+  var veventType_bytearray = eventType
+  var veventTypex_ret = @(toOpenArrayByte(veventType_bytearray.data, 0, int(veventType_bytearray.len)-1))
+  c_free(veventType_bytearray.data)
+  let slotval1 = veventTypex_ret
+  let slotval2 = message
+  let slotval3 = resultVal
+  var virtualReturn = vtbl.nativeEvent(slotval1, slotval2, slotval3)
+  virtualReturn
+
+method eventFilter*(self: VirtualQQuickView, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QQuickVieweventFilter(self[], watched, event)
+proc miqt_exec_method_cQQuickView_eventFilter(vtbl: pointer, inst: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
+  let vtbl = cast[VirtualQQuickView](cast[uint](vtbl) - uint(offsetOf(VirtualQQuickView, vtbl)))
+  let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
+  var virtualReturn = vtbl.eventFilter(slotval1, slotval2)
+  virtualReturn
+
+method childEvent*(self: VirtualQQuickView, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
+  QQuickViewchildEvent(self[], event)
+proc miqt_exec_method_cQQuickView_childEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQQuickView](cast[uint](vtbl) - uint(offsetOf(VirtualQQuickView, vtbl)))
+  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
+  vtbl.childEvent(slotval1)
+
+method customEvent*(self: VirtualQQuickView, event: gen_qcoreevent_types.QEvent): void {.base.} =
+  QQuickViewcustomEvent(self[], event)
+proc miqt_exec_method_cQQuickView_customEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQQuickView](cast[uint](vtbl) - uint(offsetOf(VirtualQQuickView, vtbl)))
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
+  vtbl.customEvent(slotval1)
+
+method connectNotify*(self: VirtualQQuickView, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QQuickViewconnectNotify(self[], signal)
+proc miqt_exec_method_cQQuickView_connectNotify(vtbl: pointer, inst: pointer, signal: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQQuickView](cast[uint](vtbl) - uint(offsetOf(VirtualQQuickView, vtbl)))
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
+  vtbl.connectNotify(slotval1)
+
+method disconnectNotify*(self: VirtualQQuickView, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QQuickViewdisconnectNotify(self[], signal)
+proc miqt_exec_method_cQQuickView_disconnectNotify(vtbl: pointer, inst: pointer, signal: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQQuickView](cast[uint](vtbl) - uint(offsetOf(VirtualQQuickView, vtbl)))
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
+  vtbl.disconnectNotify(slotval1)
+
 proc sender*(self: gen_qquickview_types.QQuickView, ): gen_qobject_types.QObject =
-  gen_qobject_types.QObject(h: fcQQuickView_protectedbase_sender(self.h))
+  gen_qobject_types.QObject(h: fcQQuickView_protectedbase_sender(self.h), owned: false)
 
 proc senderSignalIndex*(self: gen_qquickview_types.QQuickView, ): cint =
   fcQQuickView_protectedbase_senderSignalIndex(self.h)
@@ -695,446 +966,707 @@ proc create*(T: type gen_qquickview_types.QQuickView,
     vtbl: ref QQuickViewVTable = nil): gen_qquickview_types.QQuickView =
   let vtbl = if vtbl == nil: new QQuickViewVTable else: vtbl
   GC_ref(vtbl)
-  vtbl.vtbl.destructor = proc(vtbl: ptr cQQuickViewVTable, _: ptr cQQuickView) {.cdecl.} =
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQQuickViewVTable, _: ptr cQQuickView) {.cdecl.} =
     let vtbl = cast[ref QQuickViewVTable](vtbl)
     GC_unref(vtbl)
-  if not isNil(vtbl.metaObject):
+  if not isNil(vtbl[].metaObject):
     vtbl[].vtbl.metaObject = miqt_exec_callback_cQQuickView_metaObject
-  if not isNil(vtbl.metacast):
+  if not isNil(vtbl[].metacast):
     vtbl[].vtbl.metacast = miqt_exec_callback_cQQuickView_metacast
-  if not isNil(vtbl.metacall):
+  if not isNil(vtbl[].metacall):
     vtbl[].vtbl.metacall = miqt_exec_callback_cQQuickView_metacall
-  if not isNil(vtbl.resizeEvent):
+  if not isNil(vtbl[].resizeEvent):
     vtbl[].vtbl.resizeEvent = miqt_exec_callback_cQQuickView_resizeEvent
-  if not isNil(vtbl.timerEvent):
+  if not isNil(vtbl[].timerEvent):
     vtbl[].vtbl.timerEvent = miqt_exec_callback_cQQuickView_timerEvent
-  if not isNil(vtbl.keyPressEvent):
+  if not isNil(vtbl[].keyPressEvent):
     vtbl[].vtbl.keyPressEvent = miqt_exec_callback_cQQuickView_keyPressEvent
-  if not isNil(vtbl.keyReleaseEvent):
+  if not isNil(vtbl[].keyReleaseEvent):
     vtbl[].vtbl.keyReleaseEvent = miqt_exec_callback_cQQuickView_keyReleaseEvent
-  if not isNil(vtbl.mousePressEvent):
+  if not isNil(vtbl[].mousePressEvent):
     vtbl[].vtbl.mousePressEvent = miqt_exec_callback_cQQuickView_mousePressEvent
-  if not isNil(vtbl.mouseReleaseEvent):
+  if not isNil(vtbl[].mouseReleaseEvent):
     vtbl[].vtbl.mouseReleaseEvent = miqt_exec_callback_cQQuickView_mouseReleaseEvent
-  if not isNil(vtbl.mouseMoveEvent):
+  if not isNil(vtbl[].mouseMoveEvent):
     vtbl[].vtbl.mouseMoveEvent = miqt_exec_callback_cQQuickView_mouseMoveEvent
-  if not isNil(vtbl.focusObject):
+  if not isNil(vtbl[].focusObject):
     vtbl[].vtbl.focusObject = miqt_exec_callback_cQQuickView_focusObject
-  if not isNil(vtbl.accessibleRoot):
+  if not isNil(vtbl[].accessibleRoot):
     vtbl[].vtbl.accessibleRoot = miqt_exec_callback_cQQuickView_accessibleRoot
-  if not isNil(vtbl.exposeEvent):
+  if not isNil(vtbl[].exposeEvent):
     vtbl[].vtbl.exposeEvent = miqt_exec_callback_cQQuickView_exposeEvent
-  if not isNil(vtbl.showEvent):
+  if not isNil(vtbl[].showEvent):
     vtbl[].vtbl.showEvent = miqt_exec_callback_cQQuickView_showEvent
-  if not isNil(vtbl.hideEvent):
+  if not isNil(vtbl[].hideEvent):
     vtbl[].vtbl.hideEvent = miqt_exec_callback_cQQuickView_hideEvent
-  if not isNil(vtbl.focusInEvent):
+  if not isNil(vtbl[].focusInEvent):
     vtbl[].vtbl.focusInEvent = miqt_exec_callback_cQQuickView_focusInEvent
-  if not isNil(vtbl.focusOutEvent):
+  if not isNil(vtbl[].focusOutEvent):
     vtbl[].vtbl.focusOutEvent = miqt_exec_callback_cQQuickView_focusOutEvent
-  if not isNil(vtbl.event):
+  if not isNil(vtbl[].event):
     vtbl[].vtbl.event = miqt_exec_callback_cQQuickView_event
-  if not isNil(vtbl.mouseDoubleClickEvent):
+  if not isNil(vtbl[].mouseDoubleClickEvent):
     vtbl[].vtbl.mouseDoubleClickEvent = miqt_exec_callback_cQQuickView_mouseDoubleClickEvent
-  if not isNil(vtbl.wheelEvent):
+  if not isNil(vtbl[].wheelEvent):
     vtbl[].vtbl.wheelEvent = miqt_exec_callback_cQQuickView_wheelEvent
-  if not isNil(vtbl.tabletEvent):
+  if not isNil(vtbl[].tabletEvent):
     vtbl[].vtbl.tabletEvent = miqt_exec_callback_cQQuickView_tabletEvent
-  if not isNil(vtbl.surfaceType):
+  if not isNil(vtbl[].surfaceType):
     vtbl[].vtbl.surfaceType = miqt_exec_callback_cQQuickView_surfaceType
-  if not isNil(vtbl.format):
+  if not isNil(vtbl[].format):
     vtbl[].vtbl.format = miqt_exec_callback_cQQuickView_format
-  if not isNil(vtbl.size):
+  if not isNil(vtbl[].size):
     vtbl[].vtbl.size = miqt_exec_callback_cQQuickView_size
-  if not isNil(vtbl.moveEvent):
+  if not isNil(vtbl[].moveEvent):
     vtbl[].vtbl.moveEvent = miqt_exec_callback_cQQuickView_moveEvent
-  if not isNil(vtbl.touchEvent):
+  if not isNil(vtbl[].touchEvent):
     vtbl[].vtbl.touchEvent = miqt_exec_callback_cQQuickView_touchEvent
-  if not isNil(vtbl.nativeEvent):
+  if not isNil(vtbl[].nativeEvent):
     vtbl[].vtbl.nativeEvent = miqt_exec_callback_cQQuickView_nativeEvent
-  if not isNil(vtbl.eventFilter):
+  if not isNil(vtbl[].eventFilter):
     vtbl[].vtbl.eventFilter = miqt_exec_callback_cQQuickView_eventFilter
-  if not isNil(vtbl.childEvent):
+  if not isNil(vtbl[].childEvent):
     vtbl[].vtbl.childEvent = miqt_exec_callback_cQQuickView_childEvent
-  if not isNil(vtbl.customEvent):
+  if not isNil(vtbl[].customEvent):
     vtbl[].vtbl.customEvent = miqt_exec_callback_cQQuickView_customEvent
-  if not isNil(vtbl.connectNotify):
+  if not isNil(vtbl[].connectNotify):
     vtbl[].vtbl.connectNotify = miqt_exec_callback_cQQuickView_connectNotify
-  if not isNil(vtbl.disconnectNotify):
+  if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQQuickView_disconnectNotify
-  gen_qquickview_types.QQuickView(h: fcQQuickView_new(addr(vtbl[]), ))
+  gen_qquickview_types.QQuickView(h: fcQQuickView_new(addr(vtbl[].vtbl), ), owned: true)
 
 proc create*(T: type gen_qquickview_types.QQuickView,
     engine: gen_qqmlengine_types.QQmlEngine, parent: gen_qwindow_types.QWindow,
     vtbl: ref QQuickViewVTable = nil): gen_qquickview_types.QQuickView =
   let vtbl = if vtbl == nil: new QQuickViewVTable else: vtbl
   GC_ref(vtbl)
-  vtbl.vtbl.destructor = proc(vtbl: ptr cQQuickViewVTable, _: ptr cQQuickView) {.cdecl.} =
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQQuickViewVTable, _: ptr cQQuickView) {.cdecl.} =
     let vtbl = cast[ref QQuickViewVTable](vtbl)
     GC_unref(vtbl)
-  if not isNil(vtbl.metaObject):
+  if not isNil(vtbl[].metaObject):
     vtbl[].vtbl.metaObject = miqt_exec_callback_cQQuickView_metaObject
-  if not isNil(vtbl.metacast):
+  if not isNil(vtbl[].metacast):
     vtbl[].vtbl.metacast = miqt_exec_callback_cQQuickView_metacast
-  if not isNil(vtbl.metacall):
+  if not isNil(vtbl[].metacall):
     vtbl[].vtbl.metacall = miqt_exec_callback_cQQuickView_metacall
-  if not isNil(vtbl.resizeEvent):
+  if not isNil(vtbl[].resizeEvent):
     vtbl[].vtbl.resizeEvent = miqt_exec_callback_cQQuickView_resizeEvent
-  if not isNil(vtbl.timerEvent):
+  if not isNil(vtbl[].timerEvent):
     vtbl[].vtbl.timerEvent = miqt_exec_callback_cQQuickView_timerEvent
-  if not isNil(vtbl.keyPressEvent):
+  if not isNil(vtbl[].keyPressEvent):
     vtbl[].vtbl.keyPressEvent = miqt_exec_callback_cQQuickView_keyPressEvent
-  if not isNil(vtbl.keyReleaseEvent):
+  if not isNil(vtbl[].keyReleaseEvent):
     vtbl[].vtbl.keyReleaseEvent = miqt_exec_callback_cQQuickView_keyReleaseEvent
-  if not isNil(vtbl.mousePressEvent):
+  if not isNil(vtbl[].mousePressEvent):
     vtbl[].vtbl.mousePressEvent = miqt_exec_callback_cQQuickView_mousePressEvent
-  if not isNil(vtbl.mouseReleaseEvent):
+  if not isNil(vtbl[].mouseReleaseEvent):
     vtbl[].vtbl.mouseReleaseEvent = miqt_exec_callback_cQQuickView_mouseReleaseEvent
-  if not isNil(vtbl.mouseMoveEvent):
+  if not isNil(vtbl[].mouseMoveEvent):
     vtbl[].vtbl.mouseMoveEvent = miqt_exec_callback_cQQuickView_mouseMoveEvent
-  if not isNil(vtbl.focusObject):
+  if not isNil(vtbl[].focusObject):
     vtbl[].vtbl.focusObject = miqt_exec_callback_cQQuickView_focusObject
-  if not isNil(vtbl.accessibleRoot):
+  if not isNil(vtbl[].accessibleRoot):
     vtbl[].vtbl.accessibleRoot = miqt_exec_callback_cQQuickView_accessibleRoot
-  if not isNil(vtbl.exposeEvent):
+  if not isNil(vtbl[].exposeEvent):
     vtbl[].vtbl.exposeEvent = miqt_exec_callback_cQQuickView_exposeEvent
-  if not isNil(vtbl.showEvent):
+  if not isNil(vtbl[].showEvent):
     vtbl[].vtbl.showEvent = miqt_exec_callback_cQQuickView_showEvent
-  if not isNil(vtbl.hideEvent):
+  if not isNil(vtbl[].hideEvent):
     vtbl[].vtbl.hideEvent = miqt_exec_callback_cQQuickView_hideEvent
-  if not isNil(vtbl.focusInEvent):
+  if not isNil(vtbl[].focusInEvent):
     vtbl[].vtbl.focusInEvent = miqt_exec_callback_cQQuickView_focusInEvent
-  if not isNil(vtbl.focusOutEvent):
+  if not isNil(vtbl[].focusOutEvent):
     vtbl[].vtbl.focusOutEvent = miqt_exec_callback_cQQuickView_focusOutEvent
-  if not isNil(vtbl.event):
+  if not isNil(vtbl[].event):
     vtbl[].vtbl.event = miqt_exec_callback_cQQuickView_event
-  if not isNil(vtbl.mouseDoubleClickEvent):
+  if not isNil(vtbl[].mouseDoubleClickEvent):
     vtbl[].vtbl.mouseDoubleClickEvent = miqt_exec_callback_cQQuickView_mouseDoubleClickEvent
-  if not isNil(vtbl.wheelEvent):
+  if not isNil(vtbl[].wheelEvent):
     vtbl[].vtbl.wheelEvent = miqt_exec_callback_cQQuickView_wheelEvent
-  if not isNil(vtbl.tabletEvent):
+  if not isNil(vtbl[].tabletEvent):
     vtbl[].vtbl.tabletEvent = miqt_exec_callback_cQQuickView_tabletEvent
-  if not isNil(vtbl.surfaceType):
+  if not isNil(vtbl[].surfaceType):
     vtbl[].vtbl.surfaceType = miqt_exec_callback_cQQuickView_surfaceType
-  if not isNil(vtbl.format):
+  if not isNil(vtbl[].format):
     vtbl[].vtbl.format = miqt_exec_callback_cQQuickView_format
-  if not isNil(vtbl.size):
+  if not isNil(vtbl[].size):
     vtbl[].vtbl.size = miqt_exec_callback_cQQuickView_size
-  if not isNil(vtbl.moveEvent):
+  if not isNil(vtbl[].moveEvent):
     vtbl[].vtbl.moveEvent = miqt_exec_callback_cQQuickView_moveEvent
-  if not isNil(vtbl.touchEvent):
+  if not isNil(vtbl[].touchEvent):
     vtbl[].vtbl.touchEvent = miqt_exec_callback_cQQuickView_touchEvent
-  if not isNil(vtbl.nativeEvent):
+  if not isNil(vtbl[].nativeEvent):
     vtbl[].vtbl.nativeEvent = miqt_exec_callback_cQQuickView_nativeEvent
-  if not isNil(vtbl.eventFilter):
+  if not isNil(vtbl[].eventFilter):
     vtbl[].vtbl.eventFilter = miqt_exec_callback_cQQuickView_eventFilter
-  if not isNil(vtbl.childEvent):
+  if not isNil(vtbl[].childEvent):
     vtbl[].vtbl.childEvent = miqt_exec_callback_cQQuickView_childEvent
-  if not isNil(vtbl.customEvent):
+  if not isNil(vtbl[].customEvent):
     vtbl[].vtbl.customEvent = miqt_exec_callback_cQQuickView_customEvent
-  if not isNil(vtbl.connectNotify):
+  if not isNil(vtbl[].connectNotify):
     vtbl[].vtbl.connectNotify = miqt_exec_callback_cQQuickView_connectNotify
-  if not isNil(vtbl.disconnectNotify):
+  if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQQuickView_disconnectNotify
-  gen_qquickview_types.QQuickView(h: fcQQuickView_new2(addr(vtbl[]), engine.h, parent.h))
+  gen_qquickview_types.QQuickView(h: fcQQuickView_new2(addr(vtbl[].vtbl), engine.h, parent.h), owned: true)
 
 proc create*(T: type gen_qquickview_types.QQuickView,
     source: gen_qurl_types.QUrl,
     vtbl: ref QQuickViewVTable = nil): gen_qquickview_types.QQuickView =
   let vtbl = if vtbl == nil: new QQuickViewVTable else: vtbl
   GC_ref(vtbl)
-  vtbl.vtbl.destructor = proc(vtbl: ptr cQQuickViewVTable, _: ptr cQQuickView) {.cdecl.} =
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQQuickViewVTable, _: ptr cQQuickView) {.cdecl.} =
     let vtbl = cast[ref QQuickViewVTable](vtbl)
     GC_unref(vtbl)
-  if not isNil(vtbl.metaObject):
+  if not isNil(vtbl[].metaObject):
     vtbl[].vtbl.metaObject = miqt_exec_callback_cQQuickView_metaObject
-  if not isNil(vtbl.metacast):
+  if not isNil(vtbl[].metacast):
     vtbl[].vtbl.metacast = miqt_exec_callback_cQQuickView_metacast
-  if not isNil(vtbl.metacall):
+  if not isNil(vtbl[].metacall):
     vtbl[].vtbl.metacall = miqt_exec_callback_cQQuickView_metacall
-  if not isNil(vtbl.resizeEvent):
+  if not isNil(vtbl[].resizeEvent):
     vtbl[].vtbl.resizeEvent = miqt_exec_callback_cQQuickView_resizeEvent
-  if not isNil(vtbl.timerEvent):
+  if not isNil(vtbl[].timerEvent):
     vtbl[].vtbl.timerEvent = miqt_exec_callback_cQQuickView_timerEvent
-  if not isNil(vtbl.keyPressEvent):
+  if not isNil(vtbl[].keyPressEvent):
     vtbl[].vtbl.keyPressEvent = miqt_exec_callback_cQQuickView_keyPressEvent
-  if not isNil(vtbl.keyReleaseEvent):
+  if not isNil(vtbl[].keyReleaseEvent):
     vtbl[].vtbl.keyReleaseEvent = miqt_exec_callback_cQQuickView_keyReleaseEvent
-  if not isNil(vtbl.mousePressEvent):
+  if not isNil(vtbl[].mousePressEvent):
     vtbl[].vtbl.mousePressEvent = miqt_exec_callback_cQQuickView_mousePressEvent
-  if not isNil(vtbl.mouseReleaseEvent):
+  if not isNil(vtbl[].mouseReleaseEvent):
     vtbl[].vtbl.mouseReleaseEvent = miqt_exec_callback_cQQuickView_mouseReleaseEvent
-  if not isNil(vtbl.mouseMoveEvent):
+  if not isNil(vtbl[].mouseMoveEvent):
     vtbl[].vtbl.mouseMoveEvent = miqt_exec_callback_cQQuickView_mouseMoveEvent
-  if not isNil(vtbl.focusObject):
+  if not isNil(vtbl[].focusObject):
     vtbl[].vtbl.focusObject = miqt_exec_callback_cQQuickView_focusObject
-  if not isNil(vtbl.accessibleRoot):
+  if not isNil(vtbl[].accessibleRoot):
     vtbl[].vtbl.accessibleRoot = miqt_exec_callback_cQQuickView_accessibleRoot
-  if not isNil(vtbl.exposeEvent):
+  if not isNil(vtbl[].exposeEvent):
     vtbl[].vtbl.exposeEvent = miqt_exec_callback_cQQuickView_exposeEvent
-  if not isNil(vtbl.showEvent):
+  if not isNil(vtbl[].showEvent):
     vtbl[].vtbl.showEvent = miqt_exec_callback_cQQuickView_showEvent
-  if not isNil(vtbl.hideEvent):
+  if not isNil(vtbl[].hideEvent):
     vtbl[].vtbl.hideEvent = miqt_exec_callback_cQQuickView_hideEvent
-  if not isNil(vtbl.focusInEvent):
+  if not isNil(vtbl[].focusInEvent):
     vtbl[].vtbl.focusInEvent = miqt_exec_callback_cQQuickView_focusInEvent
-  if not isNil(vtbl.focusOutEvent):
+  if not isNil(vtbl[].focusOutEvent):
     vtbl[].vtbl.focusOutEvent = miqt_exec_callback_cQQuickView_focusOutEvent
-  if not isNil(vtbl.event):
+  if not isNil(vtbl[].event):
     vtbl[].vtbl.event = miqt_exec_callback_cQQuickView_event
-  if not isNil(vtbl.mouseDoubleClickEvent):
+  if not isNil(vtbl[].mouseDoubleClickEvent):
     vtbl[].vtbl.mouseDoubleClickEvent = miqt_exec_callback_cQQuickView_mouseDoubleClickEvent
-  if not isNil(vtbl.wheelEvent):
+  if not isNil(vtbl[].wheelEvent):
     vtbl[].vtbl.wheelEvent = miqt_exec_callback_cQQuickView_wheelEvent
-  if not isNil(vtbl.tabletEvent):
+  if not isNil(vtbl[].tabletEvent):
     vtbl[].vtbl.tabletEvent = miqt_exec_callback_cQQuickView_tabletEvent
-  if not isNil(vtbl.surfaceType):
+  if not isNil(vtbl[].surfaceType):
     vtbl[].vtbl.surfaceType = miqt_exec_callback_cQQuickView_surfaceType
-  if not isNil(vtbl.format):
+  if not isNil(vtbl[].format):
     vtbl[].vtbl.format = miqt_exec_callback_cQQuickView_format
-  if not isNil(vtbl.size):
+  if not isNil(vtbl[].size):
     vtbl[].vtbl.size = miqt_exec_callback_cQQuickView_size
-  if not isNil(vtbl.moveEvent):
+  if not isNil(vtbl[].moveEvent):
     vtbl[].vtbl.moveEvent = miqt_exec_callback_cQQuickView_moveEvent
-  if not isNil(vtbl.touchEvent):
+  if not isNil(vtbl[].touchEvent):
     vtbl[].vtbl.touchEvent = miqt_exec_callback_cQQuickView_touchEvent
-  if not isNil(vtbl.nativeEvent):
+  if not isNil(vtbl[].nativeEvent):
     vtbl[].vtbl.nativeEvent = miqt_exec_callback_cQQuickView_nativeEvent
-  if not isNil(vtbl.eventFilter):
+  if not isNil(vtbl[].eventFilter):
     vtbl[].vtbl.eventFilter = miqt_exec_callback_cQQuickView_eventFilter
-  if not isNil(vtbl.childEvent):
+  if not isNil(vtbl[].childEvent):
     vtbl[].vtbl.childEvent = miqt_exec_callback_cQQuickView_childEvent
-  if not isNil(vtbl.customEvent):
+  if not isNil(vtbl[].customEvent):
     vtbl[].vtbl.customEvent = miqt_exec_callback_cQQuickView_customEvent
-  if not isNil(vtbl.connectNotify):
+  if not isNil(vtbl[].connectNotify):
     vtbl[].vtbl.connectNotify = miqt_exec_callback_cQQuickView_connectNotify
-  if not isNil(vtbl.disconnectNotify):
+  if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQQuickView_disconnectNotify
-  gen_qquickview_types.QQuickView(h: fcQQuickView_new3(addr(vtbl[]), source.h))
+  gen_qquickview_types.QQuickView(h: fcQQuickView_new3(addr(vtbl[].vtbl), source.h), owned: true)
 
 proc create*(T: type gen_qquickview_types.QQuickView,
     source: gen_qurl_types.QUrl, renderControl: gen_qquickrendercontrol_types.QQuickRenderControl,
     vtbl: ref QQuickViewVTable = nil): gen_qquickview_types.QQuickView =
   let vtbl = if vtbl == nil: new QQuickViewVTable else: vtbl
   GC_ref(vtbl)
-  vtbl.vtbl.destructor = proc(vtbl: ptr cQQuickViewVTable, _: ptr cQQuickView) {.cdecl.} =
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQQuickViewVTable, _: ptr cQQuickView) {.cdecl.} =
     let vtbl = cast[ref QQuickViewVTable](vtbl)
     GC_unref(vtbl)
-  if not isNil(vtbl.metaObject):
+  if not isNil(vtbl[].metaObject):
     vtbl[].vtbl.metaObject = miqt_exec_callback_cQQuickView_metaObject
-  if not isNil(vtbl.metacast):
+  if not isNil(vtbl[].metacast):
     vtbl[].vtbl.metacast = miqt_exec_callback_cQQuickView_metacast
-  if not isNil(vtbl.metacall):
+  if not isNil(vtbl[].metacall):
     vtbl[].vtbl.metacall = miqt_exec_callback_cQQuickView_metacall
-  if not isNil(vtbl.resizeEvent):
+  if not isNil(vtbl[].resizeEvent):
     vtbl[].vtbl.resizeEvent = miqt_exec_callback_cQQuickView_resizeEvent
-  if not isNil(vtbl.timerEvent):
+  if not isNil(vtbl[].timerEvent):
     vtbl[].vtbl.timerEvent = miqt_exec_callback_cQQuickView_timerEvent
-  if not isNil(vtbl.keyPressEvent):
+  if not isNil(vtbl[].keyPressEvent):
     vtbl[].vtbl.keyPressEvent = miqt_exec_callback_cQQuickView_keyPressEvent
-  if not isNil(vtbl.keyReleaseEvent):
+  if not isNil(vtbl[].keyReleaseEvent):
     vtbl[].vtbl.keyReleaseEvent = miqt_exec_callback_cQQuickView_keyReleaseEvent
-  if not isNil(vtbl.mousePressEvent):
+  if not isNil(vtbl[].mousePressEvent):
     vtbl[].vtbl.mousePressEvent = miqt_exec_callback_cQQuickView_mousePressEvent
-  if not isNil(vtbl.mouseReleaseEvent):
+  if not isNil(vtbl[].mouseReleaseEvent):
     vtbl[].vtbl.mouseReleaseEvent = miqt_exec_callback_cQQuickView_mouseReleaseEvent
-  if not isNil(vtbl.mouseMoveEvent):
+  if not isNil(vtbl[].mouseMoveEvent):
     vtbl[].vtbl.mouseMoveEvent = miqt_exec_callback_cQQuickView_mouseMoveEvent
-  if not isNil(vtbl.focusObject):
+  if not isNil(vtbl[].focusObject):
     vtbl[].vtbl.focusObject = miqt_exec_callback_cQQuickView_focusObject
-  if not isNil(vtbl.accessibleRoot):
+  if not isNil(vtbl[].accessibleRoot):
     vtbl[].vtbl.accessibleRoot = miqt_exec_callback_cQQuickView_accessibleRoot
-  if not isNil(vtbl.exposeEvent):
+  if not isNil(vtbl[].exposeEvent):
     vtbl[].vtbl.exposeEvent = miqt_exec_callback_cQQuickView_exposeEvent
-  if not isNil(vtbl.showEvent):
+  if not isNil(vtbl[].showEvent):
     vtbl[].vtbl.showEvent = miqt_exec_callback_cQQuickView_showEvent
-  if not isNil(vtbl.hideEvent):
+  if not isNil(vtbl[].hideEvent):
     vtbl[].vtbl.hideEvent = miqt_exec_callback_cQQuickView_hideEvent
-  if not isNil(vtbl.focusInEvent):
+  if not isNil(vtbl[].focusInEvent):
     vtbl[].vtbl.focusInEvent = miqt_exec_callback_cQQuickView_focusInEvent
-  if not isNil(vtbl.focusOutEvent):
+  if not isNil(vtbl[].focusOutEvent):
     vtbl[].vtbl.focusOutEvent = miqt_exec_callback_cQQuickView_focusOutEvent
-  if not isNil(vtbl.event):
+  if not isNil(vtbl[].event):
     vtbl[].vtbl.event = miqt_exec_callback_cQQuickView_event
-  if not isNil(vtbl.mouseDoubleClickEvent):
+  if not isNil(vtbl[].mouseDoubleClickEvent):
     vtbl[].vtbl.mouseDoubleClickEvent = miqt_exec_callback_cQQuickView_mouseDoubleClickEvent
-  if not isNil(vtbl.wheelEvent):
+  if not isNil(vtbl[].wheelEvent):
     vtbl[].vtbl.wheelEvent = miqt_exec_callback_cQQuickView_wheelEvent
-  if not isNil(vtbl.tabletEvent):
+  if not isNil(vtbl[].tabletEvent):
     vtbl[].vtbl.tabletEvent = miqt_exec_callback_cQQuickView_tabletEvent
-  if not isNil(vtbl.surfaceType):
+  if not isNil(vtbl[].surfaceType):
     vtbl[].vtbl.surfaceType = miqt_exec_callback_cQQuickView_surfaceType
-  if not isNil(vtbl.format):
+  if not isNil(vtbl[].format):
     vtbl[].vtbl.format = miqt_exec_callback_cQQuickView_format
-  if not isNil(vtbl.size):
+  if not isNil(vtbl[].size):
     vtbl[].vtbl.size = miqt_exec_callback_cQQuickView_size
-  if not isNil(vtbl.moveEvent):
+  if not isNil(vtbl[].moveEvent):
     vtbl[].vtbl.moveEvent = miqt_exec_callback_cQQuickView_moveEvent
-  if not isNil(vtbl.touchEvent):
+  if not isNil(vtbl[].touchEvent):
     vtbl[].vtbl.touchEvent = miqt_exec_callback_cQQuickView_touchEvent
-  if not isNil(vtbl.nativeEvent):
+  if not isNil(vtbl[].nativeEvent):
     vtbl[].vtbl.nativeEvent = miqt_exec_callback_cQQuickView_nativeEvent
-  if not isNil(vtbl.eventFilter):
+  if not isNil(vtbl[].eventFilter):
     vtbl[].vtbl.eventFilter = miqt_exec_callback_cQQuickView_eventFilter
-  if not isNil(vtbl.childEvent):
+  if not isNil(vtbl[].childEvent):
     vtbl[].vtbl.childEvent = miqt_exec_callback_cQQuickView_childEvent
-  if not isNil(vtbl.customEvent):
+  if not isNil(vtbl[].customEvent):
     vtbl[].vtbl.customEvent = miqt_exec_callback_cQQuickView_customEvent
-  if not isNil(vtbl.connectNotify):
+  if not isNil(vtbl[].connectNotify):
     vtbl[].vtbl.connectNotify = miqt_exec_callback_cQQuickView_connectNotify
-  if not isNil(vtbl.disconnectNotify):
+  if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQQuickView_disconnectNotify
-  gen_qquickview_types.QQuickView(h: fcQQuickView_new4(addr(vtbl[]), source.h, renderControl.h))
+  gen_qquickview_types.QQuickView(h: fcQQuickView_new4(addr(vtbl[].vtbl), source.h, renderControl.h), owned: true)
 
 proc create*(T: type gen_qquickview_types.QQuickView,
     parent: gen_qwindow_types.QWindow,
     vtbl: ref QQuickViewVTable = nil): gen_qquickview_types.QQuickView =
   let vtbl = if vtbl == nil: new QQuickViewVTable else: vtbl
   GC_ref(vtbl)
-  vtbl.vtbl.destructor = proc(vtbl: ptr cQQuickViewVTable, _: ptr cQQuickView) {.cdecl.} =
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQQuickViewVTable, _: ptr cQQuickView) {.cdecl.} =
     let vtbl = cast[ref QQuickViewVTable](vtbl)
     GC_unref(vtbl)
-  if not isNil(vtbl.metaObject):
+  if not isNil(vtbl[].metaObject):
     vtbl[].vtbl.metaObject = miqt_exec_callback_cQQuickView_metaObject
-  if not isNil(vtbl.metacast):
+  if not isNil(vtbl[].metacast):
     vtbl[].vtbl.metacast = miqt_exec_callback_cQQuickView_metacast
-  if not isNil(vtbl.metacall):
+  if not isNil(vtbl[].metacall):
     vtbl[].vtbl.metacall = miqt_exec_callback_cQQuickView_metacall
-  if not isNil(vtbl.resizeEvent):
+  if not isNil(vtbl[].resizeEvent):
     vtbl[].vtbl.resizeEvent = miqt_exec_callback_cQQuickView_resizeEvent
-  if not isNil(vtbl.timerEvent):
+  if not isNil(vtbl[].timerEvent):
     vtbl[].vtbl.timerEvent = miqt_exec_callback_cQQuickView_timerEvent
-  if not isNil(vtbl.keyPressEvent):
+  if not isNil(vtbl[].keyPressEvent):
     vtbl[].vtbl.keyPressEvent = miqt_exec_callback_cQQuickView_keyPressEvent
-  if not isNil(vtbl.keyReleaseEvent):
+  if not isNil(vtbl[].keyReleaseEvent):
     vtbl[].vtbl.keyReleaseEvent = miqt_exec_callback_cQQuickView_keyReleaseEvent
-  if not isNil(vtbl.mousePressEvent):
+  if not isNil(vtbl[].mousePressEvent):
     vtbl[].vtbl.mousePressEvent = miqt_exec_callback_cQQuickView_mousePressEvent
-  if not isNil(vtbl.mouseReleaseEvent):
+  if not isNil(vtbl[].mouseReleaseEvent):
     vtbl[].vtbl.mouseReleaseEvent = miqt_exec_callback_cQQuickView_mouseReleaseEvent
-  if not isNil(vtbl.mouseMoveEvent):
+  if not isNil(vtbl[].mouseMoveEvent):
     vtbl[].vtbl.mouseMoveEvent = miqt_exec_callback_cQQuickView_mouseMoveEvent
-  if not isNil(vtbl.focusObject):
+  if not isNil(vtbl[].focusObject):
     vtbl[].vtbl.focusObject = miqt_exec_callback_cQQuickView_focusObject
-  if not isNil(vtbl.accessibleRoot):
+  if not isNil(vtbl[].accessibleRoot):
     vtbl[].vtbl.accessibleRoot = miqt_exec_callback_cQQuickView_accessibleRoot
-  if not isNil(vtbl.exposeEvent):
+  if not isNil(vtbl[].exposeEvent):
     vtbl[].vtbl.exposeEvent = miqt_exec_callback_cQQuickView_exposeEvent
-  if not isNil(vtbl.showEvent):
+  if not isNil(vtbl[].showEvent):
     vtbl[].vtbl.showEvent = miqt_exec_callback_cQQuickView_showEvent
-  if not isNil(vtbl.hideEvent):
+  if not isNil(vtbl[].hideEvent):
     vtbl[].vtbl.hideEvent = miqt_exec_callback_cQQuickView_hideEvent
-  if not isNil(vtbl.focusInEvent):
+  if not isNil(vtbl[].focusInEvent):
     vtbl[].vtbl.focusInEvent = miqt_exec_callback_cQQuickView_focusInEvent
-  if not isNil(vtbl.focusOutEvent):
+  if not isNil(vtbl[].focusOutEvent):
     vtbl[].vtbl.focusOutEvent = miqt_exec_callback_cQQuickView_focusOutEvent
-  if not isNil(vtbl.event):
+  if not isNil(vtbl[].event):
     vtbl[].vtbl.event = miqt_exec_callback_cQQuickView_event
-  if not isNil(vtbl.mouseDoubleClickEvent):
+  if not isNil(vtbl[].mouseDoubleClickEvent):
     vtbl[].vtbl.mouseDoubleClickEvent = miqt_exec_callback_cQQuickView_mouseDoubleClickEvent
-  if not isNil(vtbl.wheelEvent):
+  if not isNil(vtbl[].wheelEvent):
     vtbl[].vtbl.wheelEvent = miqt_exec_callback_cQQuickView_wheelEvent
-  if not isNil(vtbl.tabletEvent):
+  if not isNil(vtbl[].tabletEvent):
     vtbl[].vtbl.tabletEvent = miqt_exec_callback_cQQuickView_tabletEvent
-  if not isNil(vtbl.surfaceType):
+  if not isNil(vtbl[].surfaceType):
     vtbl[].vtbl.surfaceType = miqt_exec_callback_cQQuickView_surfaceType
-  if not isNil(vtbl.format):
+  if not isNil(vtbl[].format):
     vtbl[].vtbl.format = miqt_exec_callback_cQQuickView_format
-  if not isNil(vtbl.size):
+  if not isNil(vtbl[].size):
     vtbl[].vtbl.size = miqt_exec_callback_cQQuickView_size
-  if not isNil(vtbl.moveEvent):
+  if not isNil(vtbl[].moveEvent):
     vtbl[].vtbl.moveEvent = miqt_exec_callback_cQQuickView_moveEvent
-  if not isNil(vtbl.touchEvent):
+  if not isNil(vtbl[].touchEvent):
     vtbl[].vtbl.touchEvent = miqt_exec_callback_cQQuickView_touchEvent
-  if not isNil(vtbl.nativeEvent):
+  if not isNil(vtbl[].nativeEvent):
     vtbl[].vtbl.nativeEvent = miqt_exec_callback_cQQuickView_nativeEvent
-  if not isNil(vtbl.eventFilter):
+  if not isNil(vtbl[].eventFilter):
     vtbl[].vtbl.eventFilter = miqt_exec_callback_cQQuickView_eventFilter
-  if not isNil(vtbl.childEvent):
+  if not isNil(vtbl[].childEvent):
     vtbl[].vtbl.childEvent = miqt_exec_callback_cQQuickView_childEvent
-  if not isNil(vtbl.customEvent):
+  if not isNil(vtbl[].customEvent):
     vtbl[].vtbl.customEvent = miqt_exec_callback_cQQuickView_customEvent
-  if not isNil(vtbl.connectNotify):
+  if not isNil(vtbl[].connectNotify):
     vtbl[].vtbl.connectNotify = miqt_exec_callback_cQQuickView_connectNotify
-  if not isNil(vtbl.disconnectNotify):
+  if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQQuickView_disconnectNotify
-  gen_qquickview_types.QQuickView(h: fcQQuickView_new5(addr(vtbl[]), parent.h))
+  gen_qquickview_types.QQuickView(h: fcQQuickView_new5(addr(vtbl[].vtbl), parent.h), owned: true)
 
 proc create*(T: type gen_qquickview_types.QQuickView,
     source: gen_qurl_types.QUrl, parent: gen_qwindow_types.QWindow,
     vtbl: ref QQuickViewVTable = nil): gen_qquickview_types.QQuickView =
   let vtbl = if vtbl == nil: new QQuickViewVTable else: vtbl
   GC_ref(vtbl)
-  vtbl.vtbl.destructor = proc(vtbl: ptr cQQuickViewVTable, _: ptr cQQuickView) {.cdecl.} =
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQQuickViewVTable, _: ptr cQQuickView) {.cdecl.} =
     let vtbl = cast[ref QQuickViewVTable](vtbl)
     GC_unref(vtbl)
-  if not isNil(vtbl.metaObject):
+  if not isNil(vtbl[].metaObject):
     vtbl[].vtbl.metaObject = miqt_exec_callback_cQQuickView_metaObject
-  if not isNil(vtbl.metacast):
+  if not isNil(vtbl[].metacast):
     vtbl[].vtbl.metacast = miqt_exec_callback_cQQuickView_metacast
-  if not isNil(vtbl.metacall):
+  if not isNil(vtbl[].metacall):
     vtbl[].vtbl.metacall = miqt_exec_callback_cQQuickView_metacall
-  if not isNil(vtbl.resizeEvent):
+  if not isNil(vtbl[].resizeEvent):
     vtbl[].vtbl.resizeEvent = miqt_exec_callback_cQQuickView_resizeEvent
-  if not isNil(vtbl.timerEvent):
+  if not isNil(vtbl[].timerEvent):
     vtbl[].vtbl.timerEvent = miqt_exec_callback_cQQuickView_timerEvent
-  if not isNil(vtbl.keyPressEvent):
+  if not isNil(vtbl[].keyPressEvent):
     vtbl[].vtbl.keyPressEvent = miqt_exec_callback_cQQuickView_keyPressEvent
-  if not isNil(vtbl.keyReleaseEvent):
+  if not isNil(vtbl[].keyReleaseEvent):
     vtbl[].vtbl.keyReleaseEvent = miqt_exec_callback_cQQuickView_keyReleaseEvent
-  if not isNil(vtbl.mousePressEvent):
+  if not isNil(vtbl[].mousePressEvent):
     vtbl[].vtbl.mousePressEvent = miqt_exec_callback_cQQuickView_mousePressEvent
-  if not isNil(vtbl.mouseReleaseEvent):
+  if not isNil(vtbl[].mouseReleaseEvent):
     vtbl[].vtbl.mouseReleaseEvent = miqt_exec_callback_cQQuickView_mouseReleaseEvent
-  if not isNil(vtbl.mouseMoveEvent):
+  if not isNil(vtbl[].mouseMoveEvent):
     vtbl[].vtbl.mouseMoveEvent = miqt_exec_callback_cQQuickView_mouseMoveEvent
-  if not isNil(vtbl.focusObject):
+  if not isNil(vtbl[].focusObject):
     vtbl[].vtbl.focusObject = miqt_exec_callback_cQQuickView_focusObject
-  if not isNil(vtbl.accessibleRoot):
+  if not isNil(vtbl[].accessibleRoot):
     vtbl[].vtbl.accessibleRoot = miqt_exec_callback_cQQuickView_accessibleRoot
-  if not isNil(vtbl.exposeEvent):
+  if not isNil(vtbl[].exposeEvent):
     vtbl[].vtbl.exposeEvent = miqt_exec_callback_cQQuickView_exposeEvent
-  if not isNil(vtbl.showEvent):
+  if not isNil(vtbl[].showEvent):
     vtbl[].vtbl.showEvent = miqt_exec_callback_cQQuickView_showEvent
-  if not isNil(vtbl.hideEvent):
+  if not isNil(vtbl[].hideEvent):
     vtbl[].vtbl.hideEvent = miqt_exec_callback_cQQuickView_hideEvent
-  if not isNil(vtbl.focusInEvent):
+  if not isNil(vtbl[].focusInEvent):
     vtbl[].vtbl.focusInEvent = miqt_exec_callback_cQQuickView_focusInEvent
-  if not isNil(vtbl.focusOutEvent):
+  if not isNil(vtbl[].focusOutEvent):
     vtbl[].vtbl.focusOutEvent = miqt_exec_callback_cQQuickView_focusOutEvent
-  if not isNil(vtbl.event):
+  if not isNil(vtbl[].event):
     vtbl[].vtbl.event = miqt_exec_callback_cQQuickView_event
-  if not isNil(vtbl.mouseDoubleClickEvent):
+  if not isNil(vtbl[].mouseDoubleClickEvent):
     vtbl[].vtbl.mouseDoubleClickEvent = miqt_exec_callback_cQQuickView_mouseDoubleClickEvent
-  if not isNil(vtbl.wheelEvent):
+  if not isNil(vtbl[].wheelEvent):
     vtbl[].vtbl.wheelEvent = miqt_exec_callback_cQQuickView_wheelEvent
-  if not isNil(vtbl.tabletEvent):
+  if not isNil(vtbl[].tabletEvent):
     vtbl[].vtbl.tabletEvent = miqt_exec_callback_cQQuickView_tabletEvent
-  if not isNil(vtbl.surfaceType):
+  if not isNil(vtbl[].surfaceType):
     vtbl[].vtbl.surfaceType = miqt_exec_callback_cQQuickView_surfaceType
-  if not isNil(vtbl.format):
+  if not isNil(vtbl[].format):
     vtbl[].vtbl.format = miqt_exec_callback_cQQuickView_format
-  if not isNil(vtbl.size):
+  if not isNil(vtbl[].size):
     vtbl[].vtbl.size = miqt_exec_callback_cQQuickView_size
-  if not isNil(vtbl.moveEvent):
+  if not isNil(vtbl[].moveEvent):
     vtbl[].vtbl.moveEvent = miqt_exec_callback_cQQuickView_moveEvent
-  if not isNil(vtbl.touchEvent):
+  if not isNil(vtbl[].touchEvent):
     vtbl[].vtbl.touchEvent = miqt_exec_callback_cQQuickView_touchEvent
-  if not isNil(vtbl.nativeEvent):
+  if not isNil(vtbl[].nativeEvent):
     vtbl[].vtbl.nativeEvent = miqt_exec_callback_cQQuickView_nativeEvent
-  if not isNil(vtbl.eventFilter):
+  if not isNil(vtbl[].eventFilter):
     vtbl[].vtbl.eventFilter = miqt_exec_callback_cQQuickView_eventFilter
-  if not isNil(vtbl.childEvent):
+  if not isNil(vtbl[].childEvent):
     vtbl[].vtbl.childEvent = miqt_exec_callback_cQQuickView_childEvent
-  if not isNil(vtbl.customEvent):
+  if not isNil(vtbl[].customEvent):
     vtbl[].vtbl.customEvent = miqt_exec_callback_cQQuickView_customEvent
-  if not isNil(vtbl.connectNotify):
+  if not isNil(vtbl[].connectNotify):
     vtbl[].vtbl.connectNotify = miqt_exec_callback_cQQuickView_connectNotify
-  if not isNil(vtbl.disconnectNotify):
+  if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQQuickView_disconnectNotify
-  gen_qquickview_types.QQuickView(h: fcQQuickView_new6(addr(vtbl[]), source.h, parent.h))
+  gen_qquickview_types.QQuickView(h: fcQQuickView_new6(addr(vtbl[].vtbl), source.h, parent.h), owned: true)
+
+proc create*(T: type gen_qquickview_types.QQuickView,
+    vtbl: VirtualQQuickView) =
+
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQQuickViewVTable, _: ptr cQQuickView) {.cdecl.} =
+    let vtbl = cast[ptr typeof(VirtualQQuickView()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQQuickView, vtbl)))
+    vtbl[].h = nil
+    vtbl[].owned = false
+  vtbl[].vtbl.metaObject = miqt_exec_method_cQQuickView_metaObject
+  vtbl[].vtbl.metacast = miqt_exec_method_cQQuickView_metacast
+  vtbl[].vtbl.metacall = miqt_exec_method_cQQuickView_metacall
+  vtbl[].vtbl.resizeEvent = miqt_exec_method_cQQuickView_resizeEvent
+  vtbl[].vtbl.timerEvent = miqt_exec_method_cQQuickView_timerEvent
+  vtbl[].vtbl.keyPressEvent = miqt_exec_method_cQQuickView_keyPressEvent
+  vtbl[].vtbl.keyReleaseEvent = miqt_exec_method_cQQuickView_keyReleaseEvent
+  vtbl[].vtbl.mousePressEvent = miqt_exec_method_cQQuickView_mousePressEvent
+  vtbl[].vtbl.mouseReleaseEvent = miqt_exec_method_cQQuickView_mouseReleaseEvent
+  vtbl[].vtbl.mouseMoveEvent = miqt_exec_method_cQQuickView_mouseMoveEvent
+  vtbl[].vtbl.focusObject = miqt_exec_method_cQQuickView_focusObject
+  vtbl[].vtbl.accessibleRoot = miqt_exec_method_cQQuickView_accessibleRoot
+  vtbl[].vtbl.exposeEvent = miqt_exec_method_cQQuickView_exposeEvent
+  vtbl[].vtbl.showEvent = miqt_exec_method_cQQuickView_showEvent
+  vtbl[].vtbl.hideEvent = miqt_exec_method_cQQuickView_hideEvent
+  vtbl[].vtbl.focusInEvent = miqt_exec_method_cQQuickView_focusInEvent
+  vtbl[].vtbl.focusOutEvent = miqt_exec_method_cQQuickView_focusOutEvent
+  vtbl[].vtbl.event = miqt_exec_method_cQQuickView_event
+  vtbl[].vtbl.mouseDoubleClickEvent = miqt_exec_method_cQQuickView_mouseDoubleClickEvent
+  vtbl[].vtbl.wheelEvent = miqt_exec_method_cQQuickView_wheelEvent
+  vtbl[].vtbl.tabletEvent = miqt_exec_method_cQQuickView_tabletEvent
+  vtbl[].vtbl.surfaceType = miqt_exec_method_cQQuickView_surfaceType
+  vtbl[].vtbl.format = miqt_exec_method_cQQuickView_format
+  vtbl[].vtbl.size = miqt_exec_method_cQQuickView_size
+  vtbl[].vtbl.moveEvent = miqt_exec_method_cQQuickView_moveEvent
+  vtbl[].vtbl.touchEvent = miqt_exec_method_cQQuickView_touchEvent
+  vtbl[].vtbl.nativeEvent = miqt_exec_method_cQQuickView_nativeEvent
+  vtbl[].vtbl.eventFilter = miqt_exec_method_cQQuickView_eventFilter
+  vtbl[].vtbl.childEvent = miqt_exec_method_cQQuickView_childEvent
+  vtbl[].vtbl.customEvent = miqt_exec_method_cQQuickView_customEvent
+  vtbl[].vtbl.connectNotify = miqt_exec_method_cQQuickView_connectNotify
+  vtbl[].vtbl.disconnectNotify = miqt_exec_method_cQQuickView_disconnectNotify
+  if vtbl[].h != nil: delete(move(vtbl[]))
+  vtbl[].h = fcQQuickView_new(addr(vtbl[].vtbl), )
+  vtbl[].owned = true
+
+proc create*(T: type gen_qquickview_types.QQuickView,
+    engine: gen_qqmlengine_types.QQmlEngine, parent: gen_qwindow_types.QWindow,
+    vtbl: VirtualQQuickView) =
+
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQQuickViewVTable, _: ptr cQQuickView) {.cdecl.} =
+    let vtbl = cast[ptr typeof(VirtualQQuickView()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQQuickView, vtbl)))
+    vtbl[].h = nil
+    vtbl[].owned = false
+  vtbl[].vtbl.metaObject = miqt_exec_method_cQQuickView_metaObject
+  vtbl[].vtbl.metacast = miqt_exec_method_cQQuickView_metacast
+  vtbl[].vtbl.metacall = miqt_exec_method_cQQuickView_metacall
+  vtbl[].vtbl.resizeEvent = miqt_exec_method_cQQuickView_resizeEvent
+  vtbl[].vtbl.timerEvent = miqt_exec_method_cQQuickView_timerEvent
+  vtbl[].vtbl.keyPressEvent = miqt_exec_method_cQQuickView_keyPressEvent
+  vtbl[].vtbl.keyReleaseEvent = miqt_exec_method_cQQuickView_keyReleaseEvent
+  vtbl[].vtbl.mousePressEvent = miqt_exec_method_cQQuickView_mousePressEvent
+  vtbl[].vtbl.mouseReleaseEvent = miqt_exec_method_cQQuickView_mouseReleaseEvent
+  vtbl[].vtbl.mouseMoveEvent = miqt_exec_method_cQQuickView_mouseMoveEvent
+  vtbl[].vtbl.focusObject = miqt_exec_method_cQQuickView_focusObject
+  vtbl[].vtbl.accessibleRoot = miqt_exec_method_cQQuickView_accessibleRoot
+  vtbl[].vtbl.exposeEvent = miqt_exec_method_cQQuickView_exposeEvent
+  vtbl[].vtbl.showEvent = miqt_exec_method_cQQuickView_showEvent
+  vtbl[].vtbl.hideEvent = miqt_exec_method_cQQuickView_hideEvent
+  vtbl[].vtbl.focusInEvent = miqt_exec_method_cQQuickView_focusInEvent
+  vtbl[].vtbl.focusOutEvent = miqt_exec_method_cQQuickView_focusOutEvent
+  vtbl[].vtbl.event = miqt_exec_method_cQQuickView_event
+  vtbl[].vtbl.mouseDoubleClickEvent = miqt_exec_method_cQQuickView_mouseDoubleClickEvent
+  vtbl[].vtbl.wheelEvent = miqt_exec_method_cQQuickView_wheelEvent
+  vtbl[].vtbl.tabletEvent = miqt_exec_method_cQQuickView_tabletEvent
+  vtbl[].vtbl.surfaceType = miqt_exec_method_cQQuickView_surfaceType
+  vtbl[].vtbl.format = miqt_exec_method_cQQuickView_format
+  vtbl[].vtbl.size = miqt_exec_method_cQQuickView_size
+  vtbl[].vtbl.moveEvent = miqt_exec_method_cQQuickView_moveEvent
+  vtbl[].vtbl.touchEvent = miqt_exec_method_cQQuickView_touchEvent
+  vtbl[].vtbl.nativeEvent = miqt_exec_method_cQQuickView_nativeEvent
+  vtbl[].vtbl.eventFilter = miqt_exec_method_cQQuickView_eventFilter
+  vtbl[].vtbl.childEvent = miqt_exec_method_cQQuickView_childEvent
+  vtbl[].vtbl.customEvent = miqt_exec_method_cQQuickView_customEvent
+  vtbl[].vtbl.connectNotify = miqt_exec_method_cQQuickView_connectNotify
+  vtbl[].vtbl.disconnectNotify = miqt_exec_method_cQQuickView_disconnectNotify
+  if vtbl[].h != nil: delete(move(vtbl[]))
+  vtbl[].h = fcQQuickView_new2(addr(vtbl[].vtbl), engine.h, parent.h)
+  vtbl[].owned = true
+
+proc create*(T: type gen_qquickview_types.QQuickView,
+    source: gen_qurl_types.QUrl,
+    vtbl: VirtualQQuickView) =
+
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQQuickViewVTable, _: ptr cQQuickView) {.cdecl.} =
+    let vtbl = cast[ptr typeof(VirtualQQuickView()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQQuickView, vtbl)))
+    vtbl[].h = nil
+    vtbl[].owned = false
+  vtbl[].vtbl.metaObject = miqt_exec_method_cQQuickView_metaObject
+  vtbl[].vtbl.metacast = miqt_exec_method_cQQuickView_metacast
+  vtbl[].vtbl.metacall = miqt_exec_method_cQQuickView_metacall
+  vtbl[].vtbl.resizeEvent = miqt_exec_method_cQQuickView_resizeEvent
+  vtbl[].vtbl.timerEvent = miqt_exec_method_cQQuickView_timerEvent
+  vtbl[].vtbl.keyPressEvent = miqt_exec_method_cQQuickView_keyPressEvent
+  vtbl[].vtbl.keyReleaseEvent = miqt_exec_method_cQQuickView_keyReleaseEvent
+  vtbl[].vtbl.mousePressEvent = miqt_exec_method_cQQuickView_mousePressEvent
+  vtbl[].vtbl.mouseReleaseEvent = miqt_exec_method_cQQuickView_mouseReleaseEvent
+  vtbl[].vtbl.mouseMoveEvent = miqt_exec_method_cQQuickView_mouseMoveEvent
+  vtbl[].vtbl.focusObject = miqt_exec_method_cQQuickView_focusObject
+  vtbl[].vtbl.accessibleRoot = miqt_exec_method_cQQuickView_accessibleRoot
+  vtbl[].vtbl.exposeEvent = miqt_exec_method_cQQuickView_exposeEvent
+  vtbl[].vtbl.showEvent = miqt_exec_method_cQQuickView_showEvent
+  vtbl[].vtbl.hideEvent = miqt_exec_method_cQQuickView_hideEvent
+  vtbl[].vtbl.focusInEvent = miqt_exec_method_cQQuickView_focusInEvent
+  vtbl[].vtbl.focusOutEvent = miqt_exec_method_cQQuickView_focusOutEvent
+  vtbl[].vtbl.event = miqt_exec_method_cQQuickView_event
+  vtbl[].vtbl.mouseDoubleClickEvent = miqt_exec_method_cQQuickView_mouseDoubleClickEvent
+  vtbl[].vtbl.wheelEvent = miqt_exec_method_cQQuickView_wheelEvent
+  vtbl[].vtbl.tabletEvent = miqt_exec_method_cQQuickView_tabletEvent
+  vtbl[].vtbl.surfaceType = miqt_exec_method_cQQuickView_surfaceType
+  vtbl[].vtbl.format = miqt_exec_method_cQQuickView_format
+  vtbl[].vtbl.size = miqt_exec_method_cQQuickView_size
+  vtbl[].vtbl.moveEvent = miqt_exec_method_cQQuickView_moveEvent
+  vtbl[].vtbl.touchEvent = miqt_exec_method_cQQuickView_touchEvent
+  vtbl[].vtbl.nativeEvent = miqt_exec_method_cQQuickView_nativeEvent
+  vtbl[].vtbl.eventFilter = miqt_exec_method_cQQuickView_eventFilter
+  vtbl[].vtbl.childEvent = miqt_exec_method_cQQuickView_childEvent
+  vtbl[].vtbl.customEvent = miqt_exec_method_cQQuickView_customEvent
+  vtbl[].vtbl.connectNotify = miqt_exec_method_cQQuickView_connectNotify
+  vtbl[].vtbl.disconnectNotify = miqt_exec_method_cQQuickView_disconnectNotify
+  if vtbl[].h != nil: delete(move(vtbl[]))
+  vtbl[].h = fcQQuickView_new3(addr(vtbl[].vtbl), source.h)
+  vtbl[].owned = true
+
+proc create*(T: type gen_qquickview_types.QQuickView,
+    source: gen_qurl_types.QUrl, renderControl: gen_qquickrendercontrol_types.QQuickRenderControl,
+    vtbl: VirtualQQuickView) =
+
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQQuickViewVTable, _: ptr cQQuickView) {.cdecl.} =
+    let vtbl = cast[ptr typeof(VirtualQQuickView()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQQuickView, vtbl)))
+    vtbl[].h = nil
+    vtbl[].owned = false
+  vtbl[].vtbl.metaObject = miqt_exec_method_cQQuickView_metaObject
+  vtbl[].vtbl.metacast = miqt_exec_method_cQQuickView_metacast
+  vtbl[].vtbl.metacall = miqt_exec_method_cQQuickView_metacall
+  vtbl[].vtbl.resizeEvent = miqt_exec_method_cQQuickView_resizeEvent
+  vtbl[].vtbl.timerEvent = miqt_exec_method_cQQuickView_timerEvent
+  vtbl[].vtbl.keyPressEvent = miqt_exec_method_cQQuickView_keyPressEvent
+  vtbl[].vtbl.keyReleaseEvent = miqt_exec_method_cQQuickView_keyReleaseEvent
+  vtbl[].vtbl.mousePressEvent = miqt_exec_method_cQQuickView_mousePressEvent
+  vtbl[].vtbl.mouseReleaseEvent = miqt_exec_method_cQQuickView_mouseReleaseEvent
+  vtbl[].vtbl.mouseMoveEvent = miqt_exec_method_cQQuickView_mouseMoveEvent
+  vtbl[].vtbl.focusObject = miqt_exec_method_cQQuickView_focusObject
+  vtbl[].vtbl.accessibleRoot = miqt_exec_method_cQQuickView_accessibleRoot
+  vtbl[].vtbl.exposeEvent = miqt_exec_method_cQQuickView_exposeEvent
+  vtbl[].vtbl.showEvent = miqt_exec_method_cQQuickView_showEvent
+  vtbl[].vtbl.hideEvent = miqt_exec_method_cQQuickView_hideEvent
+  vtbl[].vtbl.focusInEvent = miqt_exec_method_cQQuickView_focusInEvent
+  vtbl[].vtbl.focusOutEvent = miqt_exec_method_cQQuickView_focusOutEvent
+  vtbl[].vtbl.event = miqt_exec_method_cQQuickView_event
+  vtbl[].vtbl.mouseDoubleClickEvent = miqt_exec_method_cQQuickView_mouseDoubleClickEvent
+  vtbl[].vtbl.wheelEvent = miqt_exec_method_cQQuickView_wheelEvent
+  vtbl[].vtbl.tabletEvent = miqt_exec_method_cQQuickView_tabletEvent
+  vtbl[].vtbl.surfaceType = miqt_exec_method_cQQuickView_surfaceType
+  vtbl[].vtbl.format = miqt_exec_method_cQQuickView_format
+  vtbl[].vtbl.size = miqt_exec_method_cQQuickView_size
+  vtbl[].vtbl.moveEvent = miqt_exec_method_cQQuickView_moveEvent
+  vtbl[].vtbl.touchEvent = miqt_exec_method_cQQuickView_touchEvent
+  vtbl[].vtbl.nativeEvent = miqt_exec_method_cQQuickView_nativeEvent
+  vtbl[].vtbl.eventFilter = miqt_exec_method_cQQuickView_eventFilter
+  vtbl[].vtbl.childEvent = miqt_exec_method_cQQuickView_childEvent
+  vtbl[].vtbl.customEvent = miqt_exec_method_cQQuickView_customEvent
+  vtbl[].vtbl.connectNotify = miqt_exec_method_cQQuickView_connectNotify
+  vtbl[].vtbl.disconnectNotify = miqt_exec_method_cQQuickView_disconnectNotify
+  if vtbl[].h != nil: delete(move(vtbl[]))
+  vtbl[].h = fcQQuickView_new4(addr(vtbl[].vtbl), source.h, renderControl.h)
+  vtbl[].owned = true
+
+proc create*(T: type gen_qquickview_types.QQuickView,
+    parent: gen_qwindow_types.QWindow,
+    vtbl: VirtualQQuickView) =
+
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQQuickViewVTable, _: ptr cQQuickView) {.cdecl.} =
+    let vtbl = cast[ptr typeof(VirtualQQuickView()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQQuickView, vtbl)))
+    vtbl[].h = nil
+    vtbl[].owned = false
+  vtbl[].vtbl.metaObject = miqt_exec_method_cQQuickView_metaObject
+  vtbl[].vtbl.metacast = miqt_exec_method_cQQuickView_metacast
+  vtbl[].vtbl.metacall = miqt_exec_method_cQQuickView_metacall
+  vtbl[].vtbl.resizeEvent = miqt_exec_method_cQQuickView_resizeEvent
+  vtbl[].vtbl.timerEvent = miqt_exec_method_cQQuickView_timerEvent
+  vtbl[].vtbl.keyPressEvent = miqt_exec_method_cQQuickView_keyPressEvent
+  vtbl[].vtbl.keyReleaseEvent = miqt_exec_method_cQQuickView_keyReleaseEvent
+  vtbl[].vtbl.mousePressEvent = miqt_exec_method_cQQuickView_mousePressEvent
+  vtbl[].vtbl.mouseReleaseEvent = miqt_exec_method_cQQuickView_mouseReleaseEvent
+  vtbl[].vtbl.mouseMoveEvent = miqt_exec_method_cQQuickView_mouseMoveEvent
+  vtbl[].vtbl.focusObject = miqt_exec_method_cQQuickView_focusObject
+  vtbl[].vtbl.accessibleRoot = miqt_exec_method_cQQuickView_accessibleRoot
+  vtbl[].vtbl.exposeEvent = miqt_exec_method_cQQuickView_exposeEvent
+  vtbl[].vtbl.showEvent = miqt_exec_method_cQQuickView_showEvent
+  vtbl[].vtbl.hideEvent = miqt_exec_method_cQQuickView_hideEvent
+  vtbl[].vtbl.focusInEvent = miqt_exec_method_cQQuickView_focusInEvent
+  vtbl[].vtbl.focusOutEvent = miqt_exec_method_cQQuickView_focusOutEvent
+  vtbl[].vtbl.event = miqt_exec_method_cQQuickView_event
+  vtbl[].vtbl.mouseDoubleClickEvent = miqt_exec_method_cQQuickView_mouseDoubleClickEvent
+  vtbl[].vtbl.wheelEvent = miqt_exec_method_cQQuickView_wheelEvent
+  vtbl[].vtbl.tabletEvent = miqt_exec_method_cQQuickView_tabletEvent
+  vtbl[].vtbl.surfaceType = miqt_exec_method_cQQuickView_surfaceType
+  vtbl[].vtbl.format = miqt_exec_method_cQQuickView_format
+  vtbl[].vtbl.size = miqt_exec_method_cQQuickView_size
+  vtbl[].vtbl.moveEvent = miqt_exec_method_cQQuickView_moveEvent
+  vtbl[].vtbl.touchEvent = miqt_exec_method_cQQuickView_touchEvent
+  vtbl[].vtbl.nativeEvent = miqt_exec_method_cQQuickView_nativeEvent
+  vtbl[].vtbl.eventFilter = miqt_exec_method_cQQuickView_eventFilter
+  vtbl[].vtbl.childEvent = miqt_exec_method_cQQuickView_childEvent
+  vtbl[].vtbl.customEvent = miqt_exec_method_cQQuickView_customEvent
+  vtbl[].vtbl.connectNotify = miqt_exec_method_cQQuickView_connectNotify
+  vtbl[].vtbl.disconnectNotify = miqt_exec_method_cQQuickView_disconnectNotify
+  if vtbl[].h != nil: delete(move(vtbl[]))
+  vtbl[].h = fcQQuickView_new5(addr(vtbl[].vtbl), parent.h)
+  vtbl[].owned = true
+
+proc create*(T: type gen_qquickview_types.QQuickView,
+    source: gen_qurl_types.QUrl, parent: gen_qwindow_types.QWindow,
+    vtbl: VirtualQQuickView) =
+
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQQuickViewVTable, _: ptr cQQuickView) {.cdecl.} =
+    let vtbl = cast[ptr typeof(VirtualQQuickView()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQQuickView, vtbl)))
+    vtbl[].h = nil
+    vtbl[].owned = false
+  vtbl[].vtbl.metaObject = miqt_exec_method_cQQuickView_metaObject
+  vtbl[].vtbl.metacast = miqt_exec_method_cQQuickView_metacast
+  vtbl[].vtbl.metacall = miqt_exec_method_cQQuickView_metacall
+  vtbl[].vtbl.resizeEvent = miqt_exec_method_cQQuickView_resizeEvent
+  vtbl[].vtbl.timerEvent = miqt_exec_method_cQQuickView_timerEvent
+  vtbl[].vtbl.keyPressEvent = miqt_exec_method_cQQuickView_keyPressEvent
+  vtbl[].vtbl.keyReleaseEvent = miqt_exec_method_cQQuickView_keyReleaseEvent
+  vtbl[].vtbl.mousePressEvent = miqt_exec_method_cQQuickView_mousePressEvent
+  vtbl[].vtbl.mouseReleaseEvent = miqt_exec_method_cQQuickView_mouseReleaseEvent
+  vtbl[].vtbl.mouseMoveEvent = miqt_exec_method_cQQuickView_mouseMoveEvent
+  vtbl[].vtbl.focusObject = miqt_exec_method_cQQuickView_focusObject
+  vtbl[].vtbl.accessibleRoot = miqt_exec_method_cQQuickView_accessibleRoot
+  vtbl[].vtbl.exposeEvent = miqt_exec_method_cQQuickView_exposeEvent
+  vtbl[].vtbl.showEvent = miqt_exec_method_cQQuickView_showEvent
+  vtbl[].vtbl.hideEvent = miqt_exec_method_cQQuickView_hideEvent
+  vtbl[].vtbl.focusInEvent = miqt_exec_method_cQQuickView_focusInEvent
+  vtbl[].vtbl.focusOutEvent = miqt_exec_method_cQQuickView_focusOutEvent
+  vtbl[].vtbl.event = miqt_exec_method_cQQuickView_event
+  vtbl[].vtbl.mouseDoubleClickEvent = miqt_exec_method_cQQuickView_mouseDoubleClickEvent
+  vtbl[].vtbl.wheelEvent = miqt_exec_method_cQQuickView_wheelEvent
+  vtbl[].vtbl.tabletEvent = miqt_exec_method_cQQuickView_tabletEvent
+  vtbl[].vtbl.surfaceType = miqt_exec_method_cQQuickView_surfaceType
+  vtbl[].vtbl.format = miqt_exec_method_cQQuickView_format
+  vtbl[].vtbl.size = miqt_exec_method_cQQuickView_size
+  vtbl[].vtbl.moveEvent = miqt_exec_method_cQQuickView_moveEvent
+  vtbl[].vtbl.touchEvent = miqt_exec_method_cQQuickView_touchEvent
+  vtbl[].vtbl.nativeEvent = miqt_exec_method_cQQuickView_nativeEvent
+  vtbl[].vtbl.eventFilter = miqt_exec_method_cQQuickView_eventFilter
+  vtbl[].vtbl.childEvent = miqt_exec_method_cQQuickView_childEvent
+  vtbl[].vtbl.customEvent = miqt_exec_method_cQQuickView_customEvent
+  vtbl[].vtbl.connectNotify = miqt_exec_method_cQQuickView_connectNotify
+  vtbl[].vtbl.disconnectNotify = miqt_exec_method_cQQuickView_disconnectNotify
+  if vtbl[].h != nil: delete(move(vtbl[]))
+  vtbl[].h = fcQQuickView_new6(addr(vtbl[].vtbl), source.h, parent.h)
+  vtbl[].owned = true
 
 proc staticMetaObject*(_: type gen_qquickview_types.QQuickView): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQQuickView_staticMetaObject())
-proc delete*(self: gen_qquickview_types.QQuickView) =
-  fcQQuickView_delete(self.h)

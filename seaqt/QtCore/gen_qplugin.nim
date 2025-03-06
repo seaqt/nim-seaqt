@@ -30,9 +30,6 @@ func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
     else:
       copyMem(addr result[0], unsafeAddr v[0], v.len)
 
-const cflags = gorge("pkg-config --cflags Qt5Core")  & " -fPIC"
-{.compile("gen_qplugin.cpp", cflags).}
-
 
 import ./gen_qplugin_types
 export gen_qplugin_types
@@ -45,10 +42,7 @@ export
 type cQStaticPlugin*{.exportc: "QStaticPlugin", incompleteStruct.} = object
 
 proc fcQStaticPlugin_metaData(self: pointer, ): pointer {.importc: "QStaticPlugin_metaData".}
-proc fcQStaticPlugin_delete(self: pointer) {.importc: "QStaticPlugin_delete".}
 
 proc metaData*(self: gen_qplugin_types.QStaticPlugin, ): gen_qjsonobject_types.QJsonObject =
-  gen_qjsonobject_types.QJsonObject(h: fcQStaticPlugin_metaData(self.h))
+  gen_qjsonobject_types.QJsonObject(h: fcQStaticPlugin_metaData(self.h), owned: true)
 
-proc delete*(self: gen_qplugin_types.QStaticPlugin) =
-  fcQStaticPlugin_delete(self.h)

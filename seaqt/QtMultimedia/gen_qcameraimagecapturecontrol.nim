@@ -30,7 +30,7 @@ func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
     else:
       copyMem(addr result[0], unsafeAddr v[0], v.len)
 
-const cflags = gorge("pkg-config --cflags Qt5Multimedia")  & " -fPIC"
+const cflags = gorge("pkg-config --cflags Qt5Multimedia") & " -fPIC"
 {.compile("gen_qcameraimagecapturecontrol.cpp", cflags).}
 
 
@@ -89,10 +89,9 @@ proc fcQCameraImageCaptureControl_protectedbase_senderSignalIndex(self: pointer,
 proc fcQCameraImageCaptureControl_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QCameraImageCaptureControl_protectedbase_receivers".}
 proc fcQCameraImageCaptureControl_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QCameraImageCaptureControl_protectedbase_isSignalConnected".}
 proc fcQCameraImageCaptureControl_staticMetaObject(): pointer {.importc: "QCameraImageCaptureControl_staticMetaObject".}
-proc fcQCameraImageCaptureControl_delete(self: pointer) {.importc: "QCameraImageCaptureControl_delete".}
 
 proc metaObject*(self: gen_qcameraimagecapturecontrol_types.QCameraImageCaptureControl, ): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQCameraImageCaptureControl_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQCameraImageCaptureControl_metaObject(self.h), owned: false)
 
 proc metacast*(self: gen_qcameraimagecapturecontrol_types.QCameraImageCaptureControl, param1: cstring): pointer =
   fcQCameraImageCaptureControl_metacast(self.h, param1)
@@ -175,7 +174,7 @@ proc miqt_exec_callback_cQCameraImageCaptureControl_imageCaptured(slot: int, req
   let nimfunc = cast[ptr QCameraImageCaptureControlimageCapturedSlot](cast[pointer](slot))
   let slotval1 = requestId
 
-  let slotval2 = gen_qimage_types.QImage(h: preview)
+  let slotval2 = gen_qimage_types.QImage(h: preview, owned: false)
 
   nimfunc[](slotval1, slotval2)
 
@@ -202,7 +201,7 @@ proc miqt_exec_callback_cQCameraImageCaptureControl_imageMetadataAvailable(slot:
   c_free(vkey_ms.data)
   let slotval2 = vkeyx_ret
 
-  let slotval3 = gen_qvariant_types.QVariant(h: value)
+  let slotval3 = gen_qvariant_types.QVariant(h: value, owned: false)
 
   nimfunc[](slotval1, slotval2, slotval3)
 
@@ -224,7 +223,7 @@ proc miqt_exec_callback_cQCameraImageCaptureControl_imageAvailable(slot: int, re
   let nimfunc = cast[ptr QCameraImageCaptureControlimageAvailableSlot](cast[pointer](slot))
   let slotval1 = requestId
 
-  let slotval2 = gen_qvideoframe_types.QVideoFrame(h: buffer)
+  let slotval2 = gen_qvideoframe_types.QVideoFrame(h: buffer, owned: false)
 
   nimfunc[](slotval1, slotval2)
 
@@ -315,7 +314,7 @@ proc trUtf8*(_: type gen_qcameraimagecapturecontrol_types.QCameraImageCaptureCon
   vx_ret
 
 proc sender*(self: gen_qcameraimagecapturecontrol_types.QCameraImageCaptureControl, ): gen_qobject_types.QObject =
-  gen_qobject_types.QObject(h: fcQCameraImageCaptureControl_protectedbase_sender(self.h))
+  gen_qobject_types.QObject(h: fcQCameraImageCaptureControl_protectedbase_sender(self.h), owned: false)
 
 proc senderSignalIndex*(self: gen_qcameraimagecapturecontrol_types.QCameraImageCaptureControl, ): cint =
   fcQCameraImageCaptureControl_protectedbase_senderSignalIndex(self.h)
@@ -328,5 +327,3 @@ proc isSignalConnected*(self: gen_qcameraimagecapturecontrol_types.QCameraImageC
 
 proc staticMetaObject*(_: type gen_qcameraimagecapturecontrol_types.QCameraImageCaptureControl): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQCameraImageCaptureControl_staticMetaObject())
-proc delete*(self: gen_qcameraimagecapturecontrol_types.QCameraImageCaptureControl) =
-  fcQCameraImageCaptureControl_delete(self.h)

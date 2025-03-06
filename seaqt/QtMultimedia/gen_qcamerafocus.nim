@@ -30,9 +30,6 @@ func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
     else:
       copyMem(addr result[0], unsafeAddr v[0], v.len)
 
-const cflags = gorge("pkg-config --cflags Qt5Multimedia")  & " -fPIC"
-{.compile("gen_qcamerafocus.cpp", cflags).}
-
 
 type QCameraFocusZoneFocusZoneStatusEnum* = distinct cint
 template Invalid*(_: type QCameraFocusZoneFocusZoneStatusEnum): untyped = 0
@@ -87,7 +84,6 @@ proc fcQCameraFocusZone_new(): ptr cQCameraFocusZone {.importc: "QCameraFocusZon
 proc fcQCameraFocusZone_new2(area: pointer): ptr cQCameraFocusZone {.importc: "QCameraFocusZone_new2".}
 proc fcQCameraFocusZone_new3(other: pointer): ptr cQCameraFocusZone {.importc: "QCameraFocusZone_new3".}
 proc fcQCameraFocusZone_new4(area: pointer, status: cint): ptr cQCameraFocusZone {.importc: "QCameraFocusZone_new4".}
-proc fcQCameraFocusZone_delete(self: pointer) {.importc: "QCameraFocusZone_delete".}
 proc fcQCameraFocus_metaObject(self: pointer, ): pointer {.importc: "QCameraFocus_metaObject".}
 proc fcQCameraFocus_metacast(self: pointer, param1: cstring): pointer {.importc: "QCameraFocus_metacast".}
 proc fcQCameraFocus_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QCameraFocus_metacall".}
@@ -141,7 +137,7 @@ proc isValid*(self: gen_qcamerafocus_types.QCameraFocusZone, ): bool =
   fcQCameraFocusZone_isValid(self.h)
 
 proc area*(self: gen_qcamerafocus_types.QCameraFocusZone, ): gen_qrect_types.QRectF =
-  gen_qrect_types.QRectF(h: fcQCameraFocusZone_area(self.h))
+  gen_qrect_types.QRectF(h: fcQCameraFocusZone_area(self.h), owned: true)
 
 proc status*(self: gen_qcamerafocus_types.QCameraFocusZone, ): cint =
   cint(fcQCameraFocusZone_status(self.h))
@@ -150,24 +146,22 @@ proc setStatus*(self: gen_qcamerafocus_types.QCameraFocusZone, status: cint): vo
   fcQCameraFocusZone_setStatus(self.h, cint(status))
 
 proc create*(T: type gen_qcamerafocus_types.QCameraFocusZone): gen_qcamerafocus_types.QCameraFocusZone =
-  gen_qcamerafocus_types.QCameraFocusZone(h: fcQCameraFocusZone_new())
+  gen_qcamerafocus_types.QCameraFocusZone(h: fcQCameraFocusZone_new(), owned: true)
 
 proc create*(T: type gen_qcamerafocus_types.QCameraFocusZone,
     area: gen_qrect_types.QRectF): gen_qcamerafocus_types.QCameraFocusZone =
-  gen_qcamerafocus_types.QCameraFocusZone(h: fcQCameraFocusZone_new2(area.h))
+  gen_qcamerafocus_types.QCameraFocusZone(h: fcQCameraFocusZone_new2(area.h), owned: true)
 
 proc create*(T: type gen_qcamerafocus_types.QCameraFocusZone,
     other: gen_qcamerafocus_types.QCameraFocusZone): gen_qcamerafocus_types.QCameraFocusZone =
-  gen_qcamerafocus_types.QCameraFocusZone(h: fcQCameraFocusZone_new3(other.h))
+  gen_qcamerafocus_types.QCameraFocusZone(h: fcQCameraFocusZone_new3(other.h), owned: true)
 
 proc create*(T: type gen_qcamerafocus_types.QCameraFocusZone,
     area: gen_qrect_types.QRectF, status: cint): gen_qcamerafocus_types.QCameraFocusZone =
-  gen_qcamerafocus_types.QCameraFocusZone(h: fcQCameraFocusZone_new4(area.h, cint(status)))
+  gen_qcamerafocus_types.QCameraFocusZone(h: fcQCameraFocusZone_new4(area.h, cint(status)), owned: true)
 
-proc delete*(self: gen_qcamerafocus_types.QCameraFocusZone) =
-  fcQCameraFocusZone_delete(self.h)
 proc metaObject*(self: gen_qcamerafocus_types.QCameraFocus, ): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQCameraFocus_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQCameraFocus_metaObject(self.h), owned: false)
 
 proc metacast*(self: gen_qcamerafocus_types.QCameraFocus, param1: cstring): pointer =
   fcQCameraFocus_metacast(self.h, param1)
@@ -209,7 +203,7 @@ proc isFocusPointModeSupported*(self: gen_qcamerafocus_types.QCameraFocus, param
   fcQCameraFocus_isFocusPointModeSupported(self.h, cint(param1))
 
 proc customFocusPoint*(self: gen_qcamerafocus_types.QCameraFocus, ): gen_qpoint_types.QPointF =
-  gen_qpoint_types.QPointF(h: fcQCameraFocus_customFocusPoint(self.h))
+  gen_qpoint_types.QPointF(h: fcQCameraFocus_customFocusPoint(self.h), owned: true)
 
 proc setCustomFocusPoint*(self: gen_qcamerafocus_types.QCameraFocus, point: gen_qpoint_types.QPointF): void =
   fcQCameraFocus_setCustomFocusPoint(self.h, point.h)
@@ -219,7 +213,7 @@ proc focusZones*(self: gen_qcamerafocus_types.QCameraFocus, ): seq[gen_qcamerafo
   var vx_ret = newSeq[gen_qcamerafocus_types.QCameraFocusZone](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
-    vx_ret[i] = gen_qcamerafocus_types.QCameraFocusZone(h: v_outCast[i])
+    vx_ret[i] = gen_qcamerafocus_types.QCameraFocusZone(h: v_outCast[i], owned: true)
   c_free(v_ma.data)
   vx_ret
 
@@ -361,7 +355,7 @@ proc trUtf8*(_: type gen_qcamerafocus_types.QCameraFocus, s: cstring, c: cstring
   vx_ret
 
 proc sender*(self: gen_qcamerafocus_types.QCameraFocus, ): gen_qobject_types.QObject =
-  gen_qobject_types.QObject(h: fcQCameraFocus_protectedbase_sender(self.h))
+  gen_qobject_types.QObject(h: fcQCameraFocus_protectedbase_sender(self.h), owned: false)
 
 proc senderSignalIndex*(self: gen_qcamerafocus_types.QCameraFocus, ): cint =
   fcQCameraFocus_protectedbase_senderSignalIndex(self.h)

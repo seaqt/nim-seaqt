@@ -30,7 +30,7 @@ func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
     else:
       copyMem(addr result[0], unsafeAddr v[0], v.len)
 
-const cflags = gorge("pkg-config --cflags Qt5Gui")  & " -fPIC"
+const cflags = gorge("pkg-config --cflags Qt5Gui") & " -fPIC"
 {.compile("gen_qdrag.cpp", cflags).}
 
 
@@ -87,7 +87,7 @@ proc fcQDrag_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QDr
 proc fcQDrag_trUtf83(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QDrag_trUtf83".}
 proc fcQDrag_start1(self: pointer, supportedActions: cint): cint {.importc: "QDrag_start1".}
 proc fcQDrag_exec1(self: pointer, supportedActions: cint): cint {.importc: "QDrag_exec1".}
-type cQDragVTable = object
+type cQDragVTable {.pure.} = object
   destructor*: proc(vtbl: ptr cQDragVTable, self: ptr cQDrag) {.cdecl, raises:[], gcsafe.}
   metaObject*: proc(vtbl, self: pointer, ): pointer {.cdecl, raises: [], gcsafe.}
   metacast*: proc(vtbl, self: pointer, param1: cstring): pointer {.cdecl, raises: [], gcsafe.}
@@ -115,10 +115,9 @@ proc fcQDrag_protectedbase_receivers(self: pointer, signal: cstring): cint {.imp
 proc fcQDrag_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QDrag_protectedbase_isSignalConnected".}
 proc fcQDrag_new(vtbl: pointer, dragSource: pointer): ptr cQDrag {.importc: "QDrag_new".}
 proc fcQDrag_staticMetaObject(): pointer {.importc: "QDrag_staticMetaObject".}
-proc fcQDrag_delete(self: pointer) {.importc: "QDrag_delete".}
 
 proc metaObject*(self: gen_qdrag_types.QDrag, ): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQDrag_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQDrag_metaObject(self.h), owned: false)
 
 proc metacast*(self: gen_qdrag_types.QDrag, param1: cstring): pointer =
   fcQDrag_metacast(self.h, param1)
@@ -142,25 +141,25 @@ proc setMimeData*(self: gen_qdrag_types.QDrag, data: gen_qmimedata_types.QMimeDa
   fcQDrag_setMimeData(self.h, data.h)
 
 proc mimeData*(self: gen_qdrag_types.QDrag, ): gen_qmimedata_types.QMimeData =
-  gen_qmimedata_types.QMimeData(h: fcQDrag_mimeData(self.h))
+  gen_qmimedata_types.QMimeData(h: fcQDrag_mimeData(self.h), owned: false)
 
 proc setPixmap*(self: gen_qdrag_types.QDrag, pixmap: gen_qpixmap_types.QPixmap): void =
   fcQDrag_setPixmap(self.h, pixmap.h)
 
 proc pixmap*(self: gen_qdrag_types.QDrag, ): gen_qpixmap_types.QPixmap =
-  gen_qpixmap_types.QPixmap(h: fcQDrag_pixmap(self.h))
+  gen_qpixmap_types.QPixmap(h: fcQDrag_pixmap(self.h), owned: true)
 
 proc setHotSpot*(self: gen_qdrag_types.QDrag, hotspot: gen_qpoint_types.QPoint): void =
   fcQDrag_setHotSpot(self.h, hotspot.h)
 
 proc hotSpot*(self: gen_qdrag_types.QDrag, ): gen_qpoint_types.QPoint =
-  gen_qpoint_types.QPoint(h: fcQDrag_hotSpot(self.h))
+  gen_qpoint_types.QPoint(h: fcQDrag_hotSpot(self.h), owned: true)
 
 proc source*(self: gen_qdrag_types.QDrag, ): gen_qobject_types.QObject =
-  gen_qobject_types.QObject(h: fcQDrag_source(self.h))
+  gen_qobject_types.QObject(h: fcQDrag_source(self.h), owned: false)
 
 proc target*(self: gen_qdrag_types.QDrag, ): gen_qobject_types.QObject =
-  gen_qobject_types.QObject(h: fcQDrag_target(self.h))
+  gen_qobject_types.QObject(h: fcQDrag_target(self.h), owned: false)
 
 proc start*(self: gen_qdrag_types.QDrag, ): cint =
   cint(fcQDrag_start(self.h))
@@ -175,7 +174,7 @@ proc setDragCursor*(self: gen_qdrag_types.QDrag, cursor: gen_qpixmap_types.QPixm
   fcQDrag_setDragCursor(self.h, cursor.h, cint(action))
 
 proc dragCursor*(self: gen_qdrag_types.QDrag, action: cint): gen_qpixmap_types.QPixmap =
-  gen_qpixmap_types.QPixmap(h: fcQDrag_dragCursor(self.h, cint(action)))
+  gen_qpixmap_types.QPixmap(h: fcQDrag_dragCursor(self.h, cint(action)), owned: true)
 
 proc supportedActions*(self: gen_qdrag_types.QDrag, ): cint =
   cint(fcQDrag_supportedActions(self.h))
@@ -212,7 +211,7 @@ proc targetChanged*(self: gen_qdrag_types.QDrag, newTarget: gen_qobject_types.QO
 type QDragtargetChangedSlot* = proc(newTarget: gen_qobject_types.QObject)
 proc miqt_exec_callback_cQDrag_targetChanged(slot: int, newTarget: pointer) {.cdecl.} =
   let nimfunc = cast[ptr QDragtargetChangedSlot](cast[pointer](slot))
-  let slotval1 = gen_qobject_types.QObject(h: newTarget)
+  let slotval1 = gen_qobject_types.QObject(h: newTarget, owned: false)
 
   nimfunc[](slotval1)
 
@@ -266,7 +265,7 @@ type QDragchildEventProc* = proc(self: QDrag, event: gen_qcoreevent_types.QChild
 type QDragcustomEventProc* = proc(self: QDrag, event: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
 type QDragconnectNotifyProc* = proc(self: QDrag, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
 type QDragdisconnectNotifyProc* = proc(self: QDrag, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
-type QDragVTable* = object
+type QDragVTable* {.inheritable, pure.} = object
   vtbl: cQDragVTable
   metaObject*: QDragmetaObjectProc
   metacast*: QDragmetacastProc
@@ -279,13 +278,16 @@ type QDragVTable* = object
   connectNotify*: QDragconnectNotifyProc
   disconnectNotify*: QDragdisconnectNotifyProc
 proc QDragmetaObject*(self: gen_qdrag_types.QDrag, ): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQDrag_virtualbase_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQDrag_virtualbase_metaObject(self.h), owned: false)
 
 proc miqt_exec_callback_cQDrag_metaObject(vtbl: pointer, self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QDragVTable](vtbl)
   let self = QDrag(h: self)
   var virtualReturn = vtbl[].metaObject(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QDragmetacast*(self: gen_qdrag_types.QDrag, param1: cstring): pointer =
   fcQDrag_virtualbase_metacast(self.h, param1)
@@ -315,7 +317,7 @@ proc QDragevent*(self: gen_qdrag_types.QDrag, event: gen_qcoreevent_types.QEvent
 proc miqt_exec_callback_cQDrag_event(vtbl: pointer, self: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QDragVTable](vtbl)
   let self = QDrag(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].event(self, slotval1)
   virtualReturn
 
@@ -325,8 +327,8 @@ proc QDrageventFilter*(self: gen_qdrag_types.QDrag, watched: gen_qobject_types.Q
 proc miqt_exec_callback_cQDrag_eventFilter(vtbl: pointer, self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QDragVTable](vtbl)
   let self = QDrag(h: self)
-  let slotval1 = gen_qobject_types.QObject(h: watched)
-  let slotval2 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].eventFilter(self, slotval1, slotval2)
   virtualReturn
 
@@ -336,7 +338,7 @@ proc QDragtimerEvent*(self: gen_qdrag_types.QDrag, event: gen_qcoreevent_types.Q
 proc miqt_exec_callback_cQDrag_timerEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDragVTable](vtbl)
   let self = QDrag(h: self)
-  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   vtbl[].timerEvent(self, slotval1)
 
 proc QDragchildEvent*(self: gen_qdrag_types.QDrag, event: gen_qcoreevent_types.QChildEvent): void =
@@ -345,7 +347,7 @@ proc QDragchildEvent*(self: gen_qdrag_types.QDrag, event: gen_qcoreevent_types.Q
 proc miqt_exec_callback_cQDrag_childEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDragVTable](vtbl)
   let self = QDrag(h: self)
-  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   vtbl[].childEvent(self, slotval1)
 
 proc QDragcustomEvent*(self: gen_qdrag_types.QDrag, event: gen_qcoreevent_types.QEvent): void =
@@ -354,7 +356,7 @@ proc QDragcustomEvent*(self: gen_qdrag_types.QDrag, event: gen_qcoreevent_types.
 proc miqt_exec_callback_cQDrag_customEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDragVTable](vtbl)
   let self = QDrag(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].customEvent(self, slotval1)
 
 proc QDragconnectNotify*(self: gen_qdrag_types.QDrag, signal: gen_qmetaobject_types.QMetaMethod): void =
@@ -363,7 +365,7 @@ proc QDragconnectNotify*(self: gen_qdrag_types.QDrag, signal: gen_qmetaobject_ty
 proc miqt_exec_callback_cQDrag_connectNotify(vtbl: pointer, self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDragVTable](vtbl)
   let self = QDrag(h: self)
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].connectNotify(self, slotval1)
 
 proc QDragdisconnectNotify*(self: gen_qdrag_types.QDrag, signal: gen_qmetaobject_types.QMetaMethod): void =
@@ -372,11 +374,93 @@ proc QDragdisconnectNotify*(self: gen_qdrag_types.QDrag, signal: gen_qmetaobject
 proc miqt_exec_callback_cQDrag_disconnectNotify(vtbl: pointer, self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QDragVTable](vtbl)
   let self = QDrag(h: self)
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].disconnectNotify(self, slotval1)
 
+type VirtualQDrag* {.inheritable.} = ref object of QDrag
+  vtbl*: cQDragVTable
+method metaObject*(self: VirtualQDrag, ): gen_qobjectdefs_types.QMetaObject {.base.} =
+  QDragmetaObject(self[])
+proc miqt_exec_method_cQDrag_metaObject(vtbl: pointer, inst: pointer): pointer {.cdecl.} =
+  let vtbl = cast[VirtualQDrag](cast[uint](vtbl) - uint(offsetOf(VirtualQDrag, vtbl)))
+  var virtualReturn = vtbl.metaObject()
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
+
+method metacast*(self: VirtualQDrag, param1: cstring): pointer {.base.} =
+  QDragmetacast(self[], param1)
+proc miqt_exec_method_cQDrag_metacast(vtbl: pointer, inst: pointer, param1: cstring): pointer {.cdecl.} =
+  let vtbl = cast[VirtualQDrag](cast[uint](vtbl) - uint(offsetOf(VirtualQDrag, vtbl)))
+  let slotval1 = (param1)
+  var virtualReturn = vtbl.metacast(slotval1)
+  virtualReturn
+
+method metacall*(self: VirtualQDrag, param1: cint, param2: cint, param3: pointer): cint {.base.} =
+  QDragmetacall(self[], param1, param2, param3)
+proc miqt_exec_method_cQDrag_metacall(vtbl: pointer, inst: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
+  let vtbl = cast[VirtualQDrag](cast[uint](vtbl) - uint(offsetOf(VirtualQDrag, vtbl)))
+  let slotval1 = cint(param1)
+  let slotval2 = param2
+  let slotval3 = param3
+  var virtualReturn = vtbl.metacall(slotval1, slotval2, slotval3)
+  virtualReturn
+
+method event*(self: VirtualQDrag, event: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QDragevent(self[], event)
+proc miqt_exec_method_cQDrag_event(vtbl: pointer, inst: pointer, event: pointer): bool {.cdecl.} =
+  let vtbl = cast[VirtualQDrag](cast[uint](vtbl) - uint(offsetOf(VirtualQDrag, vtbl)))
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
+  var virtualReturn = vtbl.event(slotval1)
+  virtualReturn
+
+method eventFilter*(self: VirtualQDrag, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QDrageventFilter(self[], watched, event)
+proc miqt_exec_method_cQDrag_eventFilter(vtbl: pointer, inst: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
+  let vtbl = cast[VirtualQDrag](cast[uint](vtbl) - uint(offsetOf(VirtualQDrag, vtbl)))
+  let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
+  var virtualReturn = vtbl.eventFilter(slotval1, slotval2)
+  virtualReturn
+
+method timerEvent*(self: VirtualQDrag, event: gen_qcoreevent_types.QTimerEvent): void {.base.} =
+  QDragtimerEvent(self[], event)
+proc miqt_exec_method_cQDrag_timerEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQDrag](cast[uint](vtbl) - uint(offsetOf(VirtualQDrag, vtbl)))
+  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
+  vtbl.timerEvent(slotval1)
+
+method childEvent*(self: VirtualQDrag, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
+  QDragchildEvent(self[], event)
+proc miqt_exec_method_cQDrag_childEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQDrag](cast[uint](vtbl) - uint(offsetOf(VirtualQDrag, vtbl)))
+  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
+  vtbl.childEvent(slotval1)
+
+method customEvent*(self: VirtualQDrag, event: gen_qcoreevent_types.QEvent): void {.base.} =
+  QDragcustomEvent(self[], event)
+proc miqt_exec_method_cQDrag_customEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQDrag](cast[uint](vtbl) - uint(offsetOf(VirtualQDrag, vtbl)))
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
+  vtbl.customEvent(slotval1)
+
+method connectNotify*(self: VirtualQDrag, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QDragconnectNotify(self[], signal)
+proc miqt_exec_method_cQDrag_connectNotify(vtbl: pointer, inst: pointer, signal: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQDrag](cast[uint](vtbl) - uint(offsetOf(VirtualQDrag, vtbl)))
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
+  vtbl.connectNotify(slotval1)
+
+method disconnectNotify*(self: VirtualQDrag, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QDragdisconnectNotify(self[], signal)
+proc miqt_exec_method_cQDrag_disconnectNotify(vtbl: pointer, inst: pointer, signal: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQDrag](cast[uint](vtbl) - uint(offsetOf(VirtualQDrag, vtbl)))
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
+  vtbl.disconnectNotify(slotval1)
+
 proc sender*(self: gen_qdrag_types.QDrag, ): gen_qobject_types.QObject =
-  gen_qobject_types.QObject(h: fcQDrag_protectedbase_sender(self.h))
+  gen_qobject_types.QObject(h: fcQDrag_protectedbase_sender(self.h), owned: false)
 
 proc senderSignalIndex*(self: gen_qdrag_types.QDrag, ): cint =
   fcQDrag_protectedbase_senderSignalIndex(self.h)
@@ -392,32 +476,52 @@ proc create*(T: type gen_qdrag_types.QDrag,
     vtbl: ref QDragVTable = nil): gen_qdrag_types.QDrag =
   let vtbl = if vtbl == nil: new QDragVTable else: vtbl
   GC_ref(vtbl)
-  vtbl.vtbl.destructor = proc(vtbl: ptr cQDragVTable, _: ptr cQDrag) {.cdecl.} =
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQDragVTable, _: ptr cQDrag) {.cdecl.} =
     let vtbl = cast[ref QDragVTable](vtbl)
     GC_unref(vtbl)
-  if not isNil(vtbl.metaObject):
+  if not isNil(vtbl[].metaObject):
     vtbl[].vtbl.metaObject = miqt_exec_callback_cQDrag_metaObject
-  if not isNil(vtbl.metacast):
+  if not isNil(vtbl[].metacast):
     vtbl[].vtbl.metacast = miqt_exec_callback_cQDrag_metacast
-  if not isNil(vtbl.metacall):
+  if not isNil(vtbl[].metacall):
     vtbl[].vtbl.metacall = miqt_exec_callback_cQDrag_metacall
-  if not isNil(vtbl.event):
+  if not isNil(vtbl[].event):
     vtbl[].vtbl.event = miqt_exec_callback_cQDrag_event
-  if not isNil(vtbl.eventFilter):
+  if not isNil(vtbl[].eventFilter):
     vtbl[].vtbl.eventFilter = miqt_exec_callback_cQDrag_eventFilter
-  if not isNil(vtbl.timerEvent):
+  if not isNil(vtbl[].timerEvent):
     vtbl[].vtbl.timerEvent = miqt_exec_callback_cQDrag_timerEvent
-  if not isNil(vtbl.childEvent):
+  if not isNil(vtbl[].childEvent):
     vtbl[].vtbl.childEvent = miqt_exec_callback_cQDrag_childEvent
-  if not isNil(vtbl.customEvent):
+  if not isNil(vtbl[].customEvent):
     vtbl[].vtbl.customEvent = miqt_exec_callback_cQDrag_customEvent
-  if not isNil(vtbl.connectNotify):
+  if not isNil(vtbl[].connectNotify):
     vtbl[].vtbl.connectNotify = miqt_exec_callback_cQDrag_connectNotify
-  if not isNil(vtbl.disconnectNotify):
+  if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQDrag_disconnectNotify
-  gen_qdrag_types.QDrag(h: fcQDrag_new(addr(vtbl[]), dragSource.h))
+  gen_qdrag_types.QDrag(h: fcQDrag_new(addr(vtbl[].vtbl), dragSource.h), owned: true)
+
+proc create*(T: type gen_qdrag_types.QDrag,
+    dragSource: gen_qobject_types.QObject,
+    vtbl: VirtualQDrag) =
+
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQDragVTable, _: ptr cQDrag) {.cdecl.} =
+    let vtbl = cast[ptr typeof(VirtualQDrag()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQDrag, vtbl)))
+    vtbl[].h = nil
+    vtbl[].owned = false
+  vtbl[].vtbl.metaObject = miqt_exec_method_cQDrag_metaObject
+  vtbl[].vtbl.metacast = miqt_exec_method_cQDrag_metacast
+  vtbl[].vtbl.metacall = miqt_exec_method_cQDrag_metacall
+  vtbl[].vtbl.event = miqt_exec_method_cQDrag_event
+  vtbl[].vtbl.eventFilter = miqt_exec_method_cQDrag_eventFilter
+  vtbl[].vtbl.timerEvent = miqt_exec_method_cQDrag_timerEvent
+  vtbl[].vtbl.childEvent = miqt_exec_method_cQDrag_childEvent
+  vtbl[].vtbl.customEvent = miqt_exec_method_cQDrag_customEvent
+  vtbl[].vtbl.connectNotify = miqt_exec_method_cQDrag_connectNotify
+  vtbl[].vtbl.disconnectNotify = miqt_exec_method_cQDrag_disconnectNotify
+  if vtbl[].h != nil: delete(move(vtbl[]))
+  vtbl[].h = fcQDrag_new(addr(vtbl[].vtbl), dragSource.h)
+  vtbl[].owned = true
 
 proc staticMetaObject*(_: type gen_qdrag_types.QDrag): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQDrag_staticMetaObject())
-proc delete*(self: gen_qdrag_types.QDrag) =
-  fcQDrag_delete(self.h)

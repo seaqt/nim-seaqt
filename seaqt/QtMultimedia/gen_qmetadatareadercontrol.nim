@@ -30,7 +30,7 @@ func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
     else:
       copyMem(addr result[0], unsafeAddr v[0], v.len)
 
-const cflags = gorge("pkg-config --cflags Qt5Multimedia")  & " -fPIC"
+const cflags = gorge("pkg-config --cflags Qt5Multimedia") & " -fPIC"
 {.compile("gen_qmetadatareadercontrol.cpp", cflags).}
 
 
@@ -75,10 +75,9 @@ proc fcQMetaDataReaderControl_protectedbase_senderSignalIndex(self: pointer, ): 
 proc fcQMetaDataReaderControl_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QMetaDataReaderControl_protectedbase_receivers".}
 proc fcQMetaDataReaderControl_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QMetaDataReaderControl_protectedbase_isSignalConnected".}
 proc fcQMetaDataReaderControl_staticMetaObject(): pointer {.importc: "QMetaDataReaderControl_staticMetaObject".}
-proc fcQMetaDataReaderControl_delete(self: pointer) {.importc: "QMetaDataReaderControl_delete".}
 
 proc metaObject*(self: gen_qmetadatareadercontrol_types.QMetaDataReaderControl, ): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQMetaDataReaderControl_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQMetaDataReaderControl_metaObject(self.h), owned: false)
 
 proc metacast*(self: gen_qmetadatareadercontrol_types.QMetaDataReaderControl, param1: cstring): pointer =
   fcQMetaDataReaderControl_metacast(self.h, param1)
@@ -102,7 +101,7 @@ proc isMetaDataAvailable*(self: gen_qmetadatareadercontrol_types.QMetaDataReader
   fcQMetaDataReaderControl_isMetaDataAvailable(self.h)
 
 proc metaData*(self: gen_qmetadatareadercontrol_types.QMetaDataReaderControl, key: string): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQMetaDataReaderControl_metaData(self.h, struct_miqt_string(data: key, len: csize_t(len(key)))))
+  gen_qvariant_types.QVariant(h: fcQMetaDataReaderControl_metaData(self.h, struct_miqt_string(data: key, len: csize_t(len(key)))), owned: true)
 
 proc availableMetaData*(self: gen_qmetadatareadercontrol_types.QMetaDataReaderControl, ): seq[string] =
   var v_ma = fcQMetaDataReaderControl_availableMetaData(self.h)
@@ -145,7 +144,7 @@ proc miqt_exec_callback_cQMetaDataReaderControl_metaDataChanged2(slot: int, key:
   c_free(vkey_ms.data)
   let slotval1 = vkeyx_ret
 
-  let slotval2 = gen_qvariant_types.QVariant(h: value)
+  let slotval2 = gen_qvariant_types.QVariant(h: value, owned: false)
 
   nimfunc[](slotval1, slotval2)
 
@@ -204,7 +203,7 @@ proc trUtf8*(_: type gen_qmetadatareadercontrol_types.QMetaDataReaderControl, s:
   vx_ret
 
 proc sender*(self: gen_qmetadatareadercontrol_types.QMetaDataReaderControl, ): gen_qobject_types.QObject =
-  gen_qobject_types.QObject(h: fcQMetaDataReaderControl_protectedbase_sender(self.h))
+  gen_qobject_types.QObject(h: fcQMetaDataReaderControl_protectedbase_sender(self.h), owned: false)
 
 proc senderSignalIndex*(self: gen_qmetadatareadercontrol_types.QMetaDataReaderControl, ): cint =
   fcQMetaDataReaderControl_protectedbase_senderSignalIndex(self.h)
@@ -217,5 +216,3 @@ proc isSignalConnected*(self: gen_qmetadatareadercontrol_types.QMetaDataReaderCo
 
 proc staticMetaObject*(_: type gen_qmetadatareadercontrol_types.QMetaDataReaderControl): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQMetaDataReaderControl_staticMetaObject())
-proc delete*(self: gen_qmetadatareadercontrol_types.QMetaDataReaderControl) =
-  fcQMetaDataReaderControl_delete(self.h)

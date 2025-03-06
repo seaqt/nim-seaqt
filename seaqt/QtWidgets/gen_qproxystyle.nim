@@ -30,7 +30,7 @@ func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
     else:
       copyMem(addr result[0], unsafeAddr v[0], v.len)
 
-const cflags = gorge("pkg-config --cflags Qt5Widgets")  & " -fPIC"
+const cflags = gorge("pkg-config --cflags Qt5Widgets") & " -fPIC"
 {.compile("gen_qproxystyle.cpp", cflags).}
 
 
@@ -110,7 +110,7 @@ proc fcQProxyStyle_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "Q
 proc fcQProxyStyle_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QProxyStyle_tr3".}
 proc fcQProxyStyle_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QProxyStyle_trUtf82".}
 proc fcQProxyStyle_trUtf83(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QProxyStyle_trUtf83".}
-type cQProxyStyleVTable = object
+type cQProxyStyleVTable {.pure.} = object
   destructor*: proc(vtbl: ptr cQProxyStyleVTable, self: ptr cQProxyStyle) {.cdecl, raises:[], gcsafe.}
   metaObject*: proc(vtbl, self: pointer, ): pointer {.cdecl, raises: [], gcsafe.}
   metacast*: proc(vtbl, self: pointer, param1: cstring): pointer {.cdecl, raises: [], gcsafe.}
@@ -186,10 +186,9 @@ proc fcQProxyStyle_new(vtbl: pointer, ): ptr cQProxyStyle {.importc: "QProxyStyl
 proc fcQProxyStyle_new2(vtbl: pointer, key: struct_miqt_string): ptr cQProxyStyle {.importc: "QProxyStyle_new2".}
 proc fcQProxyStyle_new3(vtbl: pointer, style: pointer): ptr cQProxyStyle {.importc: "QProxyStyle_new3".}
 proc fcQProxyStyle_staticMetaObject(): pointer {.importc: "QProxyStyle_staticMetaObject".}
-proc fcQProxyStyle_delete(self: pointer) {.importc: "QProxyStyle_delete".}
 
 proc metaObject*(self: gen_qproxystyle_types.QProxyStyle, ): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQProxyStyle_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQProxyStyle_metaObject(self.h), owned: false)
 
 proc metacast*(self: gen_qproxystyle_types.QProxyStyle, param1: cstring): pointer =
   fcQProxyStyle_metacast(self.h, param1)
@@ -210,7 +209,7 @@ proc trUtf8*(_: type gen_qproxystyle_types.QProxyStyle, s: cstring): string =
   vx_ret
 
 proc baseStyle*(self: gen_qproxystyle_types.QProxyStyle, ): gen_qstyle_types.QStyle =
-  gen_qstyle_types.QStyle(h: fcQProxyStyle_baseStyle(self.h))
+  gen_qstyle_types.QStyle(h: fcQProxyStyle_baseStyle(self.h), owned: false)
 
 proc setBaseStyle*(self: gen_qproxystyle_types.QProxyStyle, style: gen_qstyle_types.QStyle): void =
   fcQProxyStyle_setBaseStyle(self.h, style.h)
@@ -231,19 +230,19 @@ proc drawItemPixmap*(self: gen_qproxystyle_types.QProxyStyle, painter: gen_qpain
   fcQProxyStyle_drawItemPixmap(self.h, painter.h, rect.h, alignment, pixmap.h)
 
 proc sizeFromContents*(self: gen_qproxystyle_types.QProxyStyle, typeVal: cint, option: gen_qstyleoption_types.QStyleOption, size: gen_qsize_types.QSize, widget: gen_qwidget_types.QWidget): gen_qsize_types.QSize =
-  gen_qsize_types.QSize(h: fcQProxyStyle_sizeFromContents(self.h, cint(typeVal), option.h, size.h, widget.h))
+  gen_qsize_types.QSize(h: fcQProxyStyle_sizeFromContents(self.h, cint(typeVal), option.h, size.h, widget.h), owned: true)
 
 proc subElementRect*(self: gen_qproxystyle_types.QProxyStyle, element: cint, option: gen_qstyleoption_types.QStyleOption, widget: gen_qwidget_types.QWidget): gen_qrect_types.QRect =
-  gen_qrect_types.QRect(h: fcQProxyStyle_subElementRect(self.h, cint(element), option.h, widget.h))
+  gen_qrect_types.QRect(h: fcQProxyStyle_subElementRect(self.h, cint(element), option.h, widget.h), owned: true)
 
 proc subControlRect*(self: gen_qproxystyle_types.QProxyStyle, cc: cint, opt: gen_qstyleoption_types.QStyleOptionComplex, sc: cint, widget: gen_qwidget_types.QWidget): gen_qrect_types.QRect =
-  gen_qrect_types.QRect(h: fcQProxyStyle_subControlRect(self.h, cint(cc), opt.h, cint(sc), widget.h))
+  gen_qrect_types.QRect(h: fcQProxyStyle_subControlRect(self.h, cint(cc), opt.h, cint(sc), widget.h), owned: true)
 
 proc itemTextRect*(self: gen_qproxystyle_types.QProxyStyle, fm: gen_qfontmetrics_types.QFontMetrics, r: gen_qrect_types.QRect, flags: cint, enabled: bool, text: string): gen_qrect_types.QRect =
-  gen_qrect_types.QRect(h: fcQProxyStyle_itemTextRect(self.h, fm.h, r.h, flags, enabled, struct_miqt_string(data: text, len: csize_t(len(text)))))
+  gen_qrect_types.QRect(h: fcQProxyStyle_itemTextRect(self.h, fm.h, r.h, flags, enabled, struct_miqt_string(data: text, len: csize_t(len(text)))), owned: true)
 
 proc itemPixmapRect*(self: gen_qproxystyle_types.QProxyStyle, r: gen_qrect_types.QRect, flags: cint, pixmap: gen_qpixmap_types.QPixmap): gen_qrect_types.QRect =
-  gen_qrect_types.QRect(h: fcQProxyStyle_itemPixmapRect(self.h, r.h, flags, pixmap.h))
+  gen_qrect_types.QRect(h: fcQProxyStyle_itemPixmapRect(self.h, r.h, flags, pixmap.h), owned: true)
 
 proc hitTestComplexControl*(self: gen_qproxystyle_types.QProxyStyle, control: cint, option: gen_qstyleoption_types.QStyleOptionComplex, pos: gen_qpoint_types.QPoint, widget: gen_qwidget_types.QWidget): cint =
   cint(fcQProxyStyle_hitTestComplexControl(self.h, cint(control), option.h, pos.h, widget.h))
@@ -258,16 +257,16 @@ proc layoutSpacing*(self: gen_qproxystyle_types.QProxyStyle, control1: cint, con
   fcQProxyStyle_layoutSpacing(self.h, cint(control1), cint(control2), cint(orientation), option.h, widget.h)
 
 proc standardIcon*(self: gen_qproxystyle_types.QProxyStyle, standardIcon: cint, option: gen_qstyleoption_types.QStyleOption, widget: gen_qwidget_types.QWidget): gen_qicon_types.QIcon =
-  gen_qicon_types.QIcon(h: fcQProxyStyle_standardIcon(self.h, cint(standardIcon), option.h, widget.h))
+  gen_qicon_types.QIcon(h: fcQProxyStyle_standardIcon(self.h, cint(standardIcon), option.h, widget.h), owned: true)
 
 proc standardPixmap*(self: gen_qproxystyle_types.QProxyStyle, standardPixmap: cint, opt: gen_qstyleoption_types.QStyleOption, widget: gen_qwidget_types.QWidget): gen_qpixmap_types.QPixmap =
-  gen_qpixmap_types.QPixmap(h: fcQProxyStyle_standardPixmap(self.h, cint(standardPixmap), opt.h, widget.h))
+  gen_qpixmap_types.QPixmap(h: fcQProxyStyle_standardPixmap(self.h, cint(standardPixmap), opt.h, widget.h), owned: true)
 
 proc generatedIconPixmap*(self: gen_qproxystyle_types.QProxyStyle, iconMode: cint, pixmap: gen_qpixmap_types.QPixmap, opt: gen_qstyleoption_types.QStyleOption): gen_qpixmap_types.QPixmap =
-  gen_qpixmap_types.QPixmap(h: fcQProxyStyle_generatedIconPixmap(self.h, cint(iconMode), pixmap.h, opt.h))
+  gen_qpixmap_types.QPixmap(h: fcQProxyStyle_generatedIconPixmap(self.h, cint(iconMode), pixmap.h, opt.h), owned: true)
 
 proc standardPalette*(self: gen_qproxystyle_types.QProxyStyle, ): gen_qpalette_types.QPalette =
-  gen_qpalette_types.QPalette(h: fcQProxyStyle_standardPalette(self.h))
+  gen_qpalette_types.QPalette(h: fcQProxyStyle_standardPalette(self.h), owned: true)
 
 proc polish*(self: gen_qproxystyle_types.QProxyStyle, widget: gen_qwidget_types.QWidget): void =
   fcQProxyStyle_polish(self.h, widget.h)
@@ -341,7 +340,7 @@ type QProxyStylechildEventProc* = proc(self: QProxyStyle, event: gen_qcoreevent_
 type QProxyStylecustomEventProc* = proc(self: QProxyStyle, event: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
 type QProxyStyleconnectNotifyProc* = proc(self: QProxyStyle, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
 type QProxyStyledisconnectNotifyProc* = proc(self: QProxyStyle, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
-type QProxyStyleVTable* = object
+type QProxyStyleVTable* {.inheritable, pure.} = object
   vtbl: cQProxyStyleVTable
   metaObject*: QProxyStylemetaObjectProc
   metacast*: QProxyStylemetacastProc
@@ -377,13 +376,16 @@ type QProxyStyleVTable* = object
   connectNotify*: QProxyStyleconnectNotifyProc
   disconnectNotify*: QProxyStyledisconnectNotifyProc
 proc QProxyStylemetaObject*(self: gen_qproxystyle_types.QProxyStyle, ): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQProxyStyle_virtualbase_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQProxyStyle_virtualbase_metaObject(self.h), owned: false)
 
 proc miqt_exec_callback_cQProxyStyle_metaObject(vtbl: pointer, self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QProxyStyleVTable](vtbl)
   let self = QProxyStyle(h: self)
   var virtualReturn = vtbl[].metaObject(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QProxyStylemetacast*(self: gen_qproxystyle_types.QProxyStyle, param1: cstring): pointer =
   fcQProxyStyle_virtualbase_metacast(self.h, param1)
@@ -414,9 +416,9 @@ proc miqt_exec_callback_cQProxyStyle_drawPrimitive(vtbl: pointer, self: pointer,
   let vtbl = cast[ptr QProxyStyleVTable](vtbl)
   let self = QProxyStyle(h: self)
   let slotval1 = cint(element)
-  let slotval2 = gen_qstyleoption_types.QStyleOption(h: option)
-  let slotval3 = gen_qpainter_types.QPainter(h: painter)
-  let slotval4 = gen_qwidget_types.QWidget(h: widget)
+  let slotval2 = gen_qstyleoption_types.QStyleOption(h: option, owned: false)
+  let slotval3 = gen_qpainter_types.QPainter(h: painter, owned: false)
+  let slotval4 = gen_qwidget_types.QWidget(h: widget, owned: false)
   vtbl[].drawPrimitive(self, slotval1, slotval2, slotval3, slotval4)
 
 proc QProxyStyledrawControl*(self: gen_qproxystyle_types.QProxyStyle, element: cint, option: gen_qstyleoption_types.QStyleOption, painter: gen_qpainter_types.QPainter, widget: gen_qwidget_types.QWidget): void =
@@ -426,9 +428,9 @@ proc miqt_exec_callback_cQProxyStyle_drawControl(vtbl: pointer, self: pointer, e
   let vtbl = cast[ptr QProxyStyleVTable](vtbl)
   let self = QProxyStyle(h: self)
   let slotval1 = cint(element)
-  let slotval2 = gen_qstyleoption_types.QStyleOption(h: option)
-  let slotval3 = gen_qpainter_types.QPainter(h: painter)
-  let slotval4 = gen_qwidget_types.QWidget(h: widget)
+  let slotval2 = gen_qstyleoption_types.QStyleOption(h: option, owned: false)
+  let slotval3 = gen_qpainter_types.QPainter(h: painter, owned: false)
+  let slotval4 = gen_qwidget_types.QWidget(h: widget, owned: false)
   vtbl[].drawControl(self, slotval1, slotval2, slotval3, slotval4)
 
 proc QProxyStyledrawComplexControl*(self: gen_qproxystyle_types.QProxyStyle, control: cint, option: gen_qstyleoption_types.QStyleOptionComplex, painter: gen_qpainter_types.QPainter, widget: gen_qwidget_types.QWidget): void =
@@ -438,9 +440,9 @@ proc miqt_exec_callback_cQProxyStyle_drawComplexControl(vtbl: pointer, self: poi
   let vtbl = cast[ptr QProxyStyleVTable](vtbl)
   let self = QProxyStyle(h: self)
   let slotval1 = cint(control)
-  let slotval2 = gen_qstyleoption_types.QStyleOptionComplex(h: option)
-  let slotval3 = gen_qpainter_types.QPainter(h: painter)
-  let slotval4 = gen_qwidget_types.QWidget(h: widget)
+  let slotval2 = gen_qstyleoption_types.QStyleOptionComplex(h: option, owned: false)
+  let slotval3 = gen_qpainter_types.QPainter(h: painter, owned: false)
+  let slotval4 = gen_qwidget_types.QWidget(h: widget, owned: false)
   vtbl[].drawComplexControl(self, slotval1, slotval2, slotval3, slotval4)
 
 proc QProxyStyledrawItemText*(self: gen_qproxystyle_types.QProxyStyle, painter: gen_qpainter_types.QPainter, rect: gen_qrect_types.QRect, flags: cint, pal: gen_qpalette_types.QPalette, enabled: bool, text: string, textRole: cint): void =
@@ -449,10 +451,10 @@ proc QProxyStyledrawItemText*(self: gen_qproxystyle_types.QProxyStyle, painter: 
 proc miqt_exec_callback_cQProxyStyle_drawItemText(vtbl: pointer, self: pointer, painter: pointer, rect: pointer, flags: cint, pal: pointer, enabled: bool, text: struct_miqt_string, textRole: cint): void {.cdecl.} =
   let vtbl = cast[ptr QProxyStyleVTable](vtbl)
   let self = QProxyStyle(h: self)
-  let slotval1 = gen_qpainter_types.QPainter(h: painter)
-  let slotval2 = gen_qrect_types.QRect(h: rect)
+  let slotval1 = gen_qpainter_types.QPainter(h: painter, owned: false)
+  let slotval2 = gen_qrect_types.QRect(h: rect, owned: false)
   let slotval3 = flags
-  let slotval4 = gen_qpalette_types.QPalette(h: pal)
+  let slotval4 = gen_qpalette_types.QPalette(h: pal, owned: false)
   let slotval5 = enabled
   let vtext_ms = text
   let vtextx_ret = string.fromBytes(toOpenArrayByte(vtext_ms.data, 0, int(vtext_ms.len)-1))
@@ -467,58 +469,67 @@ proc QProxyStyledrawItemPixmap*(self: gen_qproxystyle_types.QProxyStyle, painter
 proc miqt_exec_callback_cQProxyStyle_drawItemPixmap(vtbl: pointer, self: pointer, painter: pointer, rect: pointer, alignment: cint, pixmap: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QProxyStyleVTable](vtbl)
   let self = QProxyStyle(h: self)
-  let slotval1 = gen_qpainter_types.QPainter(h: painter)
-  let slotval2 = gen_qrect_types.QRect(h: rect)
+  let slotval1 = gen_qpainter_types.QPainter(h: painter, owned: false)
+  let slotval2 = gen_qrect_types.QRect(h: rect, owned: false)
   let slotval3 = alignment
-  let slotval4 = gen_qpixmap_types.QPixmap(h: pixmap)
+  let slotval4 = gen_qpixmap_types.QPixmap(h: pixmap, owned: false)
   vtbl[].drawItemPixmap(self, slotval1, slotval2, slotval3, slotval4)
 
 proc QProxyStylesizeFromContents*(self: gen_qproxystyle_types.QProxyStyle, typeVal: cint, option: gen_qstyleoption_types.QStyleOption, size: gen_qsize_types.QSize, widget: gen_qwidget_types.QWidget): gen_qsize_types.QSize =
-  gen_qsize_types.QSize(h: fcQProxyStyle_virtualbase_sizeFromContents(self.h, cint(typeVal), option.h, size.h, widget.h))
+  gen_qsize_types.QSize(h: fcQProxyStyle_virtualbase_sizeFromContents(self.h, cint(typeVal), option.h, size.h, widget.h), owned: true)
 
 proc miqt_exec_callback_cQProxyStyle_sizeFromContents(vtbl: pointer, self: pointer, typeVal: cint, option: pointer, size: pointer, widget: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QProxyStyleVTable](vtbl)
   let self = QProxyStyle(h: self)
   let slotval1 = cint(typeVal)
-  let slotval2 = gen_qstyleoption_types.QStyleOption(h: option)
-  let slotval3 = gen_qsize_types.QSize(h: size)
-  let slotval4 = gen_qwidget_types.QWidget(h: widget)
+  let slotval2 = gen_qstyleoption_types.QStyleOption(h: option, owned: false)
+  let slotval3 = gen_qsize_types.QSize(h: size, owned: false)
+  let slotval4 = gen_qwidget_types.QWidget(h: widget, owned: false)
   var virtualReturn = vtbl[].sizeFromContents(self, slotval1, slotval2, slotval3, slotval4)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QProxyStylesubElementRect*(self: gen_qproxystyle_types.QProxyStyle, element: cint, option: gen_qstyleoption_types.QStyleOption, widget: gen_qwidget_types.QWidget): gen_qrect_types.QRect =
-  gen_qrect_types.QRect(h: fcQProxyStyle_virtualbase_subElementRect(self.h, cint(element), option.h, widget.h))
+  gen_qrect_types.QRect(h: fcQProxyStyle_virtualbase_subElementRect(self.h, cint(element), option.h, widget.h), owned: true)
 
 proc miqt_exec_callback_cQProxyStyle_subElementRect(vtbl: pointer, self: pointer, element: cint, option: pointer, widget: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QProxyStyleVTable](vtbl)
   let self = QProxyStyle(h: self)
   let slotval1 = cint(element)
-  let slotval2 = gen_qstyleoption_types.QStyleOption(h: option)
-  let slotval3 = gen_qwidget_types.QWidget(h: widget)
+  let slotval2 = gen_qstyleoption_types.QStyleOption(h: option, owned: false)
+  let slotval3 = gen_qwidget_types.QWidget(h: widget, owned: false)
   var virtualReturn = vtbl[].subElementRect(self, slotval1, slotval2, slotval3)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QProxyStylesubControlRect*(self: gen_qproxystyle_types.QProxyStyle, cc: cint, opt: gen_qstyleoption_types.QStyleOptionComplex, sc: cint, widget: gen_qwidget_types.QWidget): gen_qrect_types.QRect =
-  gen_qrect_types.QRect(h: fcQProxyStyle_virtualbase_subControlRect(self.h, cint(cc), opt.h, cint(sc), widget.h))
+  gen_qrect_types.QRect(h: fcQProxyStyle_virtualbase_subControlRect(self.h, cint(cc), opt.h, cint(sc), widget.h), owned: true)
 
 proc miqt_exec_callback_cQProxyStyle_subControlRect(vtbl: pointer, self: pointer, cc: cint, opt: pointer, sc: cint, widget: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QProxyStyleVTable](vtbl)
   let self = QProxyStyle(h: self)
   let slotval1 = cint(cc)
-  let slotval2 = gen_qstyleoption_types.QStyleOptionComplex(h: opt)
+  let slotval2 = gen_qstyleoption_types.QStyleOptionComplex(h: opt, owned: false)
   let slotval3 = cint(sc)
-  let slotval4 = gen_qwidget_types.QWidget(h: widget)
+  let slotval4 = gen_qwidget_types.QWidget(h: widget, owned: false)
   var virtualReturn = vtbl[].subControlRect(self, slotval1, slotval2, slotval3, slotval4)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QProxyStyleitemTextRect*(self: gen_qproxystyle_types.QProxyStyle, fm: gen_qfontmetrics_types.QFontMetrics, r: gen_qrect_types.QRect, flags: cint, enabled: bool, text: string): gen_qrect_types.QRect =
-  gen_qrect_types.QRect(h: fcQProxyStyle_virtualbase_itemTextRect(self.h, fm.h, r.h, flags, enabled, struct_miqt_string(data: text, len: csize_t(len(text)))))
+  gen_qrect_types.QRect(h: fcQProxyStyle_virtualbase_itemTextRect(self.h, fm.h, r.h, flags, enabled, struct_miqt_string(data: text, len: csize_t(len(text)))), owned: true)
 
 proc miqt_exec_callback_cQProxyStyle_itemTextRect(vtbl: pointer, self: pointer, fm: pointer, r: pointer, flags: cint, enabled: bool, text: struct_miqt_string): pointer {.cdecl.} =
   let vtbl = cast[ptr QProxyStyleVTable](vtbl)
   let self = QProxyStyle(h: self)
-  let slotval1 = gen_qfontmetrics_types.QFontMetrics(h: fm)
-  let slotval2 = gen_qrect_types.QRect(h: r)
+  let slotval1 = gen_qfontmetrics_types.QFontMetrics(h: fm, owned: false)
+  let slotval2 = gen_qrect_types.QRect(h: r, owned: false)
   let slotval3 = flags
   let slotval4 = enabled
   let vtext_ms = text
@@ -526,19 +537,25 @@ proc miqt_exec_callback_cQProxyStyle_itemTextRect(vtbl: pointer, self: pointer, 
   c_free(vtext_ms.data)
   let slotval5 = vtextx_ret
   var virtualReturn = vtbl[].itemTextRect(self, slotval1, slotval2, slotval3, slotval4, slotval5)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QProxyStyleitemPixmapRect*(self: gen_qproxystyle_types.QProxyStyle, r: gen_qrect_types.QRect, flags: cint, pixmap: gen_qpixmap_types.QPixmap): gen_qrect_types.QRect =
-  gen_qrect_types.QRect(h: fcQProxyStyle_virtualbase_itemPixmapRect(self.h, r.h, flags, pixmap.h))
+  gen_qrect_types.QRect(h: fcQProxyStyle_virtualbase_itemPixmapRect(self.h, r.h, flags, pixmap.h), owned: true)
 
 proc miqt_exec_callback_cQProxyStyle_itemPixmapRect(vtbl: pointer, self: pointer, r: pointer, flags: cint, pixmap: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QProxyStyleVTable](vtbl)
   let self = QProxyStyle(h: self)
-  let slotval1 = gen_qrect_types.QRect(h: r)
+  let slotval1 = gen_qrect_types.QRect(h: r, owned: false)
   let slotval2 = flags
-  let slotval3 = gen_qpixmap_types.QPixmap(h: pixmap)
+  let slotval3 = gen_qpixmap_types.QPixmap(h: pixmap, owned: false)
   var virtualReturn = vtbl[].itemPixmapRect(self, slotval1, slotval2, slotval3)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QProxyStylehitTestComplexControl*(self: gen_qproxystyle_types.QProxyStyle, control: cint, option: gen_qstyleoption_types.QStyleOptionComplex, pos: gen_qpoint_types.QPoint, widget: gen_qwidget_types.QWidget): cint =
   cint(fcQProxyStyle_virtualbase_hitTestComplexControl(self.h, cint(control), option.h, pos.h, widget.h))
@@ -547,9 +564,9 @@ proc miqt_exec_callback_cQProxyStyle_hitTestComplexControl(vtbl: pointer, self: 
   let vtbl = cast[ptr QProxyStyleVTable](vtbl)
   let self = QProxyStyle(h: self)
   let slotval1 = cint(control)
-  let slotval2 = gen_qstyleoption_types.QStyleOptionComplex(h: option)
-  let slotval3 = gen_qpoint_types.QPoint(h: pos)
-  let slotval4 = gen_qwidget_types.QWidget(h: widget)
+  let slotval2 = gen_qstyleoption_types.QStyleOptionComplex(h: option, owned: false)
+  let slotval3 = gen_qpoint_types.QPoint(h: pos, owned: false)
+  let slotval4 = gen_qwidget_types.QWidget(h: widget, owned: false)
   var virtualReturn = vtbl[].hitTestComplexControl(self, slotval1, slotval2, slotval3, slotval4)
   cint(virtualReturn)
 
@@ -560,9 +577,9 @@ proc miqt_exec_callback_cQProxyStyle_styleHint(vtbl: pointer, self: pointer, hin
   let vtbl = cast[ptr QProxyStyleVTable](vtbl)
   let self = QProxyStyle(h: self)
   let slotval1 = cint(hint)
-  let slotval2 = gen_qstyleoption_types.QStyleOption(h: option)
-  let slotval3 = gen_qwidget_types.QWidget(h: widget)
-  let slotval4 = gen_qstyleoption_types.QStyleHintReturn(h: returnData)
+  let slotval2 = gen_qstyleoption_types.QStyleOption(h: option, owned: false)
+  let slotval3 = gen_qwidget_types.QWidget(h: widget, owned: false)
+  let slotval4 = gen_qstyleoption_types.QStyleHintReturn(h: returnData, owned: false)
   var virtualReturn = vtbl[].styleHint(self, slotval1, slotval2, slotval3, slotval4)
   virtualReturn
 
@@ -573,8 +590,8 @@ proc miqt_exec_callback_cQProxyStyle_pixelMetric(vtbl: pointer, self: pointer, m
   let vtbl = cast[ptr QProxyStyleVTable](vtbl)
   let self = QProxyStyle(h: self)
   let slotval1 = cint(metric)
-  let slotval2 = gen_qstyleoption_types.QStyleOption(h: option)
-  let slotval3 = gen_qwidget_types.QWidget(h: widget)
+  let slotval2 = gen_qstyleoption_types.QStyleOption(h: option, owned: false)
+  let slotval3 = gen_qwidget_types.QWidget(h: widget, owned: false)
   var virtualReturn = vtbl[].pixelMetric(self, slotval1, slotval2, slotval3)
   virtualReturn
 
@@ -587,55 +604,67 @@ proc miqt_exec_callback_cQProxyStyle_layoutSpacing(vtbl: pointer, self: pointer,
   let slotval1 = cint(control1)
   let slotval2 = cint(control2)
   let slotval3 = cint(orientation)
-  let slotval4 = gen_qstyleoption_types.QStyleOption(h: option)
-  let slotval5 = gen_qwidget_types.QWidget(h: widget)
+  let slotval4 = gen_qstyleoption_types.QStyleOption(h: option, owned: false)
+  let slotval5 = gen_qwidget_types.QWidget(h: widget, owned: false)
   var virtualReturn = vtbl[].layoutSpacing(self, slotval1, slotval2, slotval3, slotval4, slotval5)
   virtualReturn
 
 proc QProxyStylestandardIcon*(self: gen_qproxystyle_types.QProxyStyle, standardIcon: cint, option: gen_qstyleoption_types.QStyleOption, widget: gen_qwidget_types.QWidget): gen_qicon_types.QIcon =
-  gen_qicon_types.QIcon(h: fcQProxyStyle_virtualbase_standardIcon(self.h, cint(standardIcon), option.h, widget.h))
+  gen_qicon_types.QIcon(h: fcQProxyStyle_virtualbase_standardIcon(self.h, cint(standardIcon), option.h, widget.h), owned: true)
 
 proc miqt_exec_callback_cQProxyStyle_standardIcon(vtbl: pointer, self: pointer, standardIcon: cint, option: pointer, widget: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QProxyStyleVTable](vtbl)
   let self = QProxyStyle(h: self)
   let slotval1 = cint(standardIcon)
-  let slotval2 = gen_qstyleoption_types.QStyleOption(h: option)
-  let slotval3 = gen_qwidget_types.QWidget(h: widget)
+  let slotval2 = gen_qstyleoption_types.QStyleOption(h: option, owned: false)
+  let slotval3 = gen_qwidget_types.QWidget(h: widget, owned: false)
   var virtualReturn = vtbl[].standardIcon(self, slotval1, slotval2, slotval3)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QProxyStylestandardPixmap*(self: gen_qproxystyle_types.QProxyStyle, standardPixmap: cint, opt: gen_qstyleoption_types.QStyleOption, widget: gen_qwidget_types.QWidget): gen_qpixmap_types.QPixmap =
-  gen_qpixmap_types.QPixmap(h: fcQProxyStyle_virtualbase_standardPixmap(self.h, cint(standardPixmap), opt.h, widget.h))
+  gen_qpixmap_types.QPixmap(h: fcQProxyStyle_virtualbase_standardPixmap(self.h, cint(standardPixmap), opt.h, widget.h), owned: true)
 
 proc miqt_exec_callback_cQProxyStyle_standardPixmap(vtbl: pointer, self: pointer, standardPixmap: cint, opt: pointer, widget: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QProxyStyleVTable](vtbl)
   let self = QProxyStyle(h: self)
   let slotval1 = cint(standardPixmap)
-  let slotval2 = gen_qstyleoption_types.QStyleOption(h: opt)
-  let slotval3 = gen_qwidget_types.QWidget(h: widget)
+  let slotval2 = gen_qstyleoption_types.QStyleOption(h: opt, owned: false)
+  let slotval3 = gen_qwidget_types.QWidget(h: widget, owned: false)
   var virtualReturn = vtbl[].standardPixmap(self, slotval1, slotval2, slotval3)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QProxyStylegeneratedIconPixmap*(self: gen_qproxystyle_types.QProxyStyle, iconMode: cint, pixmap: gen_qpixmap_types.QPixmap, opt: gen_qstyleoption_types.QStyleOption): gen_qpixmap_types.QPixmap =
-  gen_qpixmap_types.QPixmap(h: fcQProxyStyle_virtualbase_generatedIconPixmap(self.h, cint(iconMode), pixmap.h, opt.h))
+  gen_qpixmap_types.QPixmap(h: fcQProxyStyle_virtualbase_generatedIconPixmap(self.h, cint(iconMode), pixmap.h, opt.h), owned: true)
 
 proc miqt_exec_callback_cQProxyStyle_generatedIconPixmap(vtbl: pointer, self: pointer, iconMode: cint, pixmap: pointer, opt: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QProxyStyleVTable](vtbl)
   let self = QProxyStyle(h: self)
   let slotval1 = cint(iconMode)
-  let slotval2 = gen_qpixmap_types.QPixmap(h: pixmap)
-  let slotval3 = gen_qstyleoption_types.QStyleOption(h: opt)
+  let slotval2 = gen_qpixmap_types.QPixmap(h: pixmap, owned: false)
+  let slotval3 = gen_qstyleoption_types.QStyleOption(h: opt, owned: false)
   var virtualReturn = vtbl[].generatedIconPixmap(self, slotval1, slotval2, slotval3)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QProxyStylestandardPalette*(self: gen_qproxystyle_types.QProxyStyle, ): gen_qpalette_types.QPalette =
-  gen_qpalette_types.QPalette(h: fcQProxyStyle_virtualbase_standardPalette(self.h))
+  gen_qpalette_types.QPalette(h: fcQProxyStyle_virtualbase_standardPalette(self.h), owned: true)
 
 proc miqt_exec_callback_cQProxyStyle_standardPalette(vtbl: pointer, self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QProxyStyleVTable](vtbl)
   let self = QProxyStyle(h: self)
   var virtualReturn = vtbl[].standardPalette(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QProxyStylepolish*(self: gen_qproxystyle_types.QProxyStyle, widget: gen_qwidget_types.QWidget): void =
   fcQProxyStyle_virtualbase_polish(self.h, widget.h)
@@ -643,7 +672,7 @@ proc QProxyStylepolish*(self: gen_qproxystyle_types.QProxyStyle, widget: gen_qwi
 proc miqt_exec_callback_cQProxyStyle_polish(vtbl: pointer, self: pointer, widget: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QProxyStyleVTable](vtbl)
   let self = QProxyStyle(h: self)
-  let slotval1 = gen_qwidget_types.QWidget(h: widget)
+  let slotval1 = gen_qwidget_types.QWidget(h: widget, owned: false)
   vtbl[].polish(self, slotval1)
 
 proc QProxyStylepolish*(self: gen_qproxystyle_types.QProxyStyle, pal: gen_qpalette_types.QPalette): void =
@@ -652,7 +681,7 @@ proc QProxyStylepolish*(self: gen_qproxystyle_types.QProxyStyle, pal: gen_qpalet
 proc miqt_exec_callback_cQProxyStyle_polishWithPal(vtbl: pointer, self: pointer, pal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QProxyStyleVTable](vtbl)
   let self = QProxyStyle(h: self)
-  let slotval1 = gen_qpalette_types.QPalette(h: pal)
+  let slotval1 = gen_qpalette_types.QPalette(h: pal, owned: false)
   vtbl[].polishWithPal(self, slotval1)
 
 proc QProxyStylepolish*(self: gen_qproxystyle_types.QProxyStyle, app: gen_qapplication_types.QApplication): void =
@@ -661,7 +690,7 @@ proc QProxyStylepolish*(self: gen_qproxystyle_types.QProxyStyle, app: gen_qappli
 proc miqt_exec_callback_cQProxyStyle_polishWithApp(vtbl: pointer, self: pointer, app: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QProxyStyleVTable](vtbl)
   let self = QProxyStyle(h: self)
-  let slotval1 = gen_qapplication_types.QApplication(h: app)
+  let slotval1 = gen_qapplication_types.QApplication(h: app, owned: false)
   vtbl[].polishWithApp(self, slotval1)
 
 proc QProxyStyleunpolish*(self: gen_qproxystyle_types.QProxyStyle, widget: gen_qwidget_types.QWidget): void =
@@ -670,7 +699,7 @@ proc QProxyStyleunpolish*(self: gen_qproxystyle_types.QProxyStyle, widget: gen_q
 proc miqt_exec_callback_cQProxyStyle_unpolish(vtbl: pointer, self: pointer, widget: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QProxyStyleVTable](vtbl)
   let self = QProxyStyle(h: self)
-  let slotval1 = gen_qwidget_types.QWidget(h: widget)
+  let slotval1 = gen_qwidget_types.QWidget(h: widget, owned: false)
   vtbl[].unpolish(self, slotval1)
 
 proc QProxyStyleunpolish*(self: gen_qproxystyle_types.QProxyStyle, app: gen_qapplication_types.QApplication): void =
@@ -679,7 +708,7 @@ proc QProxyStyleunpolish*(self: gen_qproxystyle_types.QProxyStyle, app: gen_qapp
 proc miqt_exec_callback_cQProxyStyle_unpolishWithApp(vtbl: pointer, self: pointer, app: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QProxyStyleVTable](vtbl)
   let self = QProxyStyle(h: self)
-  let slotval1 = gen_qapplication_types.QApplication(h: app)
+  let slotval1 = gen_qapplication_types.QApplication(h: app, owned: false)
   vtbl[].unpolishWithApp(self, slotval1)
 
 proc QProxyStyleevent*(self: gen_qproxystyle_types.QProxyStyle, e: gen_qcoreevent_types.QEvent): bool =
@@ -688,7 +717,7 @@ proc QProxyStyleevent*(self: gen_qproxystyle_types.QProxyStyle, e: gen_qcoreeven
 proc miqt_exec_callback_cQProxyStyle_event(vtbl: pointer, self: pointer, e: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QProxyStyleVTable](vtbl)
   let self = QProxyStyle(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: e)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: e, owned: false)
   var virtualReturn = vtbl[].event(self, slotval1)
   virtualReturn
 
@@ -698,8 +727,8 @@ proc QProxyStyleeventFilter*(self: gen_qproxystyle_types.QProxyStyle, watched: g
 proc miqt_exec_callback_cQProxyStyle_eventFilter(vtbl: pointer, self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QProxyStyleVTable](vtbl)
   let self = QProxyStyle(h: self)
-  let slotval1 = gen_qobject_types.QObject(h: watched)
-  let slotval2 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].eventFilter(self, slotval1, slotval2)
   virtualReturn
 
@@ -709,7 +738,7 @@ proc QProxyStyletimerEvent*(self: gen_qproxystyle_types.QProxyStyle, event: gen_
 proc miqt_exec_callback_cQProxyStyle_timerEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QProxyStyleVTable](vtbl)
   let self = QProxyStyle(h: self)
-  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   vtbl[].timerEvent(self, slotval1)
 
 proc QProxyStylechildEvent*(self: gen_qproxystyle_types.QProxyStyle, event: gen_qcoreevent_types.QChildEvent): void =
@@ -718,7 +747,7 @@ proc QProxyStylechildEvent*(self: gen_qproxystyle_types.QProxyStyle, event: gen_
 proc miqt_exec_callback_cQProxyStyle_childEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QProxyStyleVTable](vtbl)
   let self = QProxyStyle(h: self)
-  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   vtbl[].childEvent(self, slotval1)
 
 proc QProxyStylecustomEvent*(self: gen_qproxystyle_types.QProxyStyle, event: gen_qcoreevent_types.QEvent): void =
@@ -727,7 +756,7 @@ proc QProxyStylecustomEvent*(self: gen_qproxystyle_types.QProxyStyle, event: gen
 proc miqt_exec_callback_cQProxyStyle_customEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QProxyStyleVTable](vtbl)
   let self = QProxyStyle(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].customEvent(self, slotval1)
 
 proc QProxyStyleconnectNotify*(self: gen_qproxystyle_types.QProxyStyle, signal: gen_qmetaobject_types.QMetaMethod): void =
@@ -736,7 +765,7 @@ proc QProxyStyleconnectNotify*(self: gen_qproxystyle_types.QProxyStyle, signal: 
 proc miqt_exec_callback_cQProxyStyle_connectNotify(vtbl: pointer, self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QProxyStyleVTable](vtbl)
   let self = QProxyStyle(h: self)
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].connectNotify(self, slotval1)
 
 proc QProxyStyledisconnectNotify*(self: gen_qproxystyle_types.QProxyStyle, signal: gen_qmetaobject_types.QMetaMethod): void =
@@ -745,11 +774,349 @@ proc QProxyStyledisconnectNotify*(self: gen_qproxystyle_types.QProxyStyle, signa
 proc miqt_exec_callback_cQProxyStyle_disconnectNotify(vtbl: pointer, self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QProxyStyleVTable](vtbl)
   let self = QProxyStyle(h: self)
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].disconnectNotify(self, slotval1)
 
+type VirtualQProxyStyle* {.inheritable.} = ref object of QProxyStyle
+  vtbl*: cQProxyStyleVTable
+method metaObject*(self: VirtualQProxyStyle, ): gen_qobjectdefs_types.QMetaObject {.base.} =
+  QProxyStylemetaObject(self[])
+proc miqt_exec_method_cQProxyStyle_metaObject(vtbl: pointer, inst: pointer): pointer {.cdecl.} =
+  let vtbl = cast[VirtualQProxyStyle](cast[uint](vtbl) - uint(offsetOf(VirtualQProxyStyle, vtbl)))
+  var virtualReturn = vtbl.metaObject()
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
+
+method metacast*(self: VirtualQProxyStyle, param1: cstring): pointer {.base.} =
+  QProxyStylemetacast(self[], param1)
+proc miqt_exec_method_cQProxyStyle_metacast(vtbl: pointer, inst: pointer, param1: cstring): pointer {.cdecl.} =
+  let vtbl = cast[VirtualQProxyStyle](cast[uint](vtbl) - uint(offsetOf(VirtualQProxyStyle, vtbl)))
+  let slotval1 = (param1)
+  var virtualReturn = vtbl.metacast(slotval1)
+  virtualReturn
+
+method metacall*(self: VirtualQProxyStyle, param1: cint, param2: cint, param3: pointer): cint {.base.} =
+  QProxyStylemetacall(self[], param1, param2, param3)
+proc miqt_exec_method_cQProxyStyle_metacall(vtbl: pointer, inst: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
+  let vtbl = cast[VirtualQProxyStyle](cast[uint](vtbl) - uint(offsetOf(VirtualQProxyStyle, vtbl)))
+  let slotval1 = cint(param1)
+  let slotval2 = param2
+  let slotval3 = param3
+  var virtualReturn = vtbl.metacall(slotval1, slotval2, slotval3)
+  virtualReturn
+
+method drawPrimitive*(self: VirtualQProxyStyle, element: cint, option: gen_qstyleoption_types.QStyleOption, painter: gen_qpainter_types.QPainter, widget: gen_qwidget_types.QWidget): void {.base.} =
+  QProxyStyledrawPrimitive(self[], element, option, painter, widget)
+proc miqt_exec_method_cQProxyStyle_drawPrimitive(vtbl: pointer, inst: pointer, element: cint, option: pointer, painter: pointer, widget: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQProxyStyle](cast[uint](vtbl) - uint(offsetOf(VirtualQProxyStyle, vtbl)))
+  let slotval1 = cint(element)
+  let slotval2 = gen_qstyleoption_types.QStyleOption(h: option, owned: false)
+  let slotval3 = gen_qpainter_types.QPainter(h: painter, owned: false)
+  let slotval4 = gen_qwidget_types.QWidget(h: widget, owned: false)
+  vtbl.drawPrimitive(slotval1, slotval2, slotval3, slotval4)
+
+method drawControl*(self: VirtualQProxyStyle, element: cint, option: gen_qstyleoption_types.QStyleOption, painter: gen_qpainter_types.QPainter, widget: gen_qwidget_types.QWidget): void {.base.} =
+  QProxyStyledrawControl(self[], element, option, painter, widget)
+proc miqt_exec_method_cQProxyStyle_drawControl(vtbl: pointer, inst: pointer, element: cint, option: pointer, painter: pointer, widget: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQProxyStyle](cast[uint](vtbl) - uint(offsetOf(VirtualQProxyStyle, vtbl)))
+  let slotval1 = cint(element)
+  let slotval2 = gen_qstyleoption_types.QStyleOption(h: option, owned: false)
+  let slotval3 = gen_qpainter_types.QPainter(h: painter, owned: false)
+  let slotval4 = gen_qwidget_types.QWidget(h: widget, owned: false)
+  vtbl.drawControl(slotval1, slotval2, slotval3, slotval4)
+
+method drawComplexControl*(self: VirtualQProxyStyle, control: cint, option: gen_qstyleoption_types.QStyleOptionComplex, painter: gen_qpainter_types.QPainter, widget: gen_qwidget_types.QWidget): void {.base.} =
+  QProxyStyledrawComplexControl(self[], control, option, painter, widget)
+proc miqt_exec_method_cQProxyStyle_drawComplexControl(vtbl: pointer, inst: pointer, control: cint, option: pointer, painter: pointer, widget: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQProxyStyle](cast[uint](vtbl) - uint(offsetOf(VirtualQProxyStyle, vtbl)))
+  let slotval1 = cint(control)
+  let slotval2 = gen_qstyleoption_types.QStyleOptionComplex(h: option, owned: false)
+  let slotval3 = gen_qpainter_types.QPainter(h: painter, owned: false)
+  let slotval4 = gen_qwidget_types.QWidget(h: widget, owned: false)
+  vtbl.drawComplexControl(slotval1, slotval2, slotval3, slotval4)
+
+method drawItemText*(self: VirtualQProxyStyle, painter: gen_qpainter_types.QPainter, rect: gen_qrect_types.QRect, flags: cint, pal: gen_qpalette_types.QPalette, enabled: bool, text: string, textRole: cint): void {.base.} =
+  QProxyStyledrawItemText(self[], painter, rect, flags, pal, enabled, text, textRole)
+proc miqt_exec_method_cQProxyStyle_drawItemText(vtbl: pointer, inst: pointer, painter: pointer, rect: pointer, flags: cint, pal: pointer, enabled: bool, text: struct_miqt_string, textRole: cint): void {.cdecl.} =
+  let vtbl = cast[VirtualQProxyStyle](cast[uint](vtbl) - uint(offsetOf(VirtualQProxyStyle, vtbl)))
+  let slotval1 = gen_qpainter_types.QPainter(h: painter, owned: false)
+  let slotval2 = gen_qrect_types.QRect(h: rect, owned: false)
+  let slotval3 = flags
+  let slotval4 = gen_qpalette_types.QPalette(h: pal, owned: false)
+  let slotval5 = enabled
+  let vtext_ms = text
+  let vtextx_ret = string.fromBytes(toOpenArrayByte(vtext_ms.data, 0, int(vtext_ms.len)-1))
+  c_free(vtext_ms.data)
+  let slotval6 = vtextx_ret
+  let slotval7 = cint(textRole)
+  vtbl.drawItemText(slotval1, slotval2, slotval3, slotval4, slotval5, slotval6, slotval7)
+
+method drawItemPixmap*(self: VirtualQProxyStyle, painter: gen_qpainter_types.QPainter, rect: gen_qrect_types.QRect, alignment: cint, pixmap: gen_qpixmap_types.QPixmap): void {.base.} =
+  QProxyStyledrawItemPixmap(self[], painter, rect, alignment, pixmap)
+proc miqt_exec_method_cQProxyStyle_drawItemPixmap(vtbl: pointer, inst: pointer, painter: pointer, rect: pointer, alignment: cint, pixmap: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQProxyStyle](cast[uint](vtbl) - uint(offsetOf(VirtualQProxyStyle, vtbl)))
+  let slotval1 = gen_qpainter_types.QPainter(h: painter, owned: false)
+  let slotval2 = gen_qrect_types.QRect(h: rect, owned: false)
+  let slotval3 = alignment
+  let slotval4 = gen_qpixmap_types.QPixmap(h: pixmap, owned: false)
+  vtbl.drawItemPixmap(slotval1, slotval2, slotval3, slotval4)
+
+method sizeFromContents*(self: VirtualQProxyStyle, typeVal: cint, option: gen_qstyleoption_types.QStyleOption, size: gen_qsize_types.QSize, widget: gen_qwidget_types.QWidget): gen_qsize_types.QSize {.base.} =
+  QProxyStylesizeFromContents(self[], typeVal, option, size, widget)
+proc miqt_exec_method_cQProxyStyle_sizeFromContents(vtbl: pointer, inst: pointer, typeVal: cint, option: pointer, size: pointer, widget: pointer): pointer {.cdecl.} =
+  let vtbl = cast[VirtualQProxyStyle](cast[uint](vtbl) - uint(offsetOf(VirtualQProxyStyle, vtbl)))
+  let slotval1 = cint(typeVal)
+  let slotval2 = gen_qstyleoption_types.QStyleOption(h: option, owned: false)
+  let slotval3 = gen_qsize_types.QSize(h: size, owned: false)
+  let slotval4 = gen_qwidget_types.QWidget(h: widget, owned: false)
+  var virtualReturn = vtbl.sizeFromContents(slotval1, slotval2, slotval3, slotval4)
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
+
+method subElementRect*(self: VirtualQProxyStyle, element: cint, option: gen_qstyleoption_types.QStyleOption, widget: gen_qwidget_types.QWidget): gen_qrect_types.QRect {.base.} =
+  QProxyStylesubElementRect(self[], element, option, widget)
+proc miqt_exec_method_cQProxyStyle_subElementRect(vtbl: pointer, inst: pointer, element: cint, option: pointer, widget: pointer): pointer {.cdecl.} =
+  let vtbl = cast[VirtualQProxyStyle](cast[uint](vtbl) - uint(offsetOf(VirtualQProxyStyle, vtbl)))
+  let slotval1 = cint(element)
+  let slotval2 = gen_qstyleoption_types.QStyleOption(h: option, owned: false)
+  let slotval3 = gen_qwidget_types.QWidget(h: widget, owned: false)
+  var virtualReturn = vtbl.subElementRect(slotval1, slotval2, slotval3)
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
+
+method subControlRect*(self: VirtualQProxyStyle, cc: cint, opt: gen_qstyleoption_types.QStyleOptionComplex, sc: cint, widget: gen_qwidget_types.QWidget): gen_qrect_types.QRect {.base.} =
+  QProxyStylesubControlRect(self[], cc, opt, sc, widget)
+proc miqt_exec_method_cQProxyStyle_subControlRect(vtbl: pointer, inst: pointer, cc: cint, opt: pointer, sc: cint, widget: pointer): pointer {.cdecl.} =
+  let vtbl = cast[VirtualQProxyStyle](cast[uint](vtbl) - uint(offsetOf(VirtualQProxyStyle, vtbl)))
+  let slotval1 = cint(cc)
+  let slotval2 = gen_qstyleoption_types.QStyleOptionComplex(h: opt, owned: false)
+  let slotval3 = cint(sc)
+  let slotval4 = gen_qwidget_types.QWidget(h: widget, owned: false)
+  var virtualReturn = vtbl.subControlRect(slotval1, slotval2, slotval3, slotval4)
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
+
+method itemTextRect*(self: VirtualQProxyStyle, fm: gen_qfontmetrics_types.QFontMetrics, r: gen_qrect_types.QRect, flags: cint, enabled: bool, text: string): gen_qrect_types.QRect {.base.} =
+  QProxyStyleitemTextRect(self[], fm, r, flags, enabled, text)
+proc miqt_exec_method_cQProxyStyle_itemTextRect(vtbl: pointer, inst: pointer, fm: pointer, r: pointer, flags: cint, enabled: bool, text: struct_miqt_string): pointer {.cdecl.} =
+  let vtbl = cast[VirtualQProxyStyle](cast[uint](vtbl) - uint(offsetOf(VirtualQProxyStyle, vtbl)))
+  let slotval1 = gen_qfontmetrics_types.QFontMetrics(h: fm, owned: false)
+  let slotval2 = gen_qrect_types.QRect(h: r, owned: false)
+  let slotval3 = flags
+  let slotval4 = enabled
+  let vtext_ms = text
+  let vtextx_ret = string.fromBytes(toOpenArrayByte(vtext_ms.data, 0, int(vtext_ms.len)-1))
+  c_free(vtext_ms.data)
+  let slotval5 = vtextx_ret
+  var virtualReturn = vtbl.itemTextRect(slotval1, slotval2, slotval3, slotval4, slotval5)
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
+
+method itemPixmapRect*(self: VirtualQProxyStyle, r: gen_qrect_types.QRect, flags: cint, pixmap: gen_qpixmap_types.QPixmap): gen_qrect_types.QRect {.base.} =
+  QProxyStyleitemPixmapRect(self[], r, flags, pixmap)
+proc miqt_exec_method_cQProxyStyle_itemPixmapRect(vtbl: pointer, inst: pointer, r: pointer, flags: cint, pixmap: pointer): pointer {.cdecl.} =
+  let vtbl = cast[VirtualQProxyStyle](cast[uint](vtbl) - uint(offsetOf(VirtualQProxyStyle, vtbl)))
+  let slotval1 = gen_qrect_types.QRect(h: r, owned: false)
+  let slotval2 = flags
+  let slotval3 = gen_qpixmap_types.QPixmap(h: pixmap, owned: false)
+  var virtualReturn = vtbl.itemPixmapRect(slotval1, slotval2, slotval3)
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
+
+method hitTestComplexControl*(self: VirtualQProxyStyle, control: cint, option: gen_qstyleoption_types.QStyleOptionComplex, pos: gen_qpoint_types.QPoint, widget: gen_qwidget_types.QWidget): cint {.base.} =
+  QProxyStylehitTestComplexControl(self[], control, option, pos, widget)
+proc miqt_exec_method_cQProxyStyle_hitTestComplexControl(vtbl: pointer, inst: pointer, control: cint, option: pointer, pos: pointer, widget: pointer): cint {.cdecl.} =
+  let vtbl = cast[VirtualQProxyStyle](cast[uint](vtbl) - uint(offsetOf(VirtualQProxyStyle, vtbl)))
+  let slotval1 = cint(control)
+  let slotval2 = gen_qstyleoption_types.QStyleOptionComplex(h: option, owned: false)
+  let slotval3 = gen_qpoint_types.QPoint(h: pos, owned: false)
+  let slotval4 = gen_qwidget_types.QWidget(h: widget, owned: false)
+  var virtualReturn = vtbl.hitTestComplexControl(slotval1, slotval2, slotval3, slotval4)
+  cint(virtualReturn)
+
+method styleHint*(self: VirtualQProxyStyle, hint: cint, option: gen_qstyleoption_types.QStyleOption, widget: gen_qwidget_types.QWidget, returnData: gen_qstyleoption_types.QStyleHintReturn): cint {.base.} =
+  QProxyStylestyleHint(self[], hint, option, widget, returnData)
+proc miqt_exec_method_cQProxyStyle_styleHint(vtbl: pointer, inst: pointer, hint: cint, option: pointer, widget: pointer, returnData: pointer): cint {.cdecl.} =
+  let vtbl = cast[VirtualQProxyStyle](cast[uint](vtbl) - uint(offsetOf(VirtualQProxyStyle, vtbl)))
+  let slotval1 = cint(hint)
+  let slotval2 = gen_qstyleoption_types.QStyleOption(h: option, owned: false)
+  let slotval3 = gen_qwidget_types.QWidget(h: widget, owned: false)
+  let slotval4 = gen_qstyleoption_types.QStyleHintReturn(h: returnData, owned: false)
+  var virtualReturn = vtbl.styleHint(slotval1, slotval2, slotval3, slotval4)
+  virtualReturn
+
+method pixelMetric*(self: VirtualQProxyStyle, metric: cint, option: gen_qstyleoption_types.QStyleOption, widget: gen_qwidget_types.QWidget): cint {.base.} =
+  QProxyStylepixelMetric(self[], metric, option, widget)
+proc miqt_exec_method_cQProxyStyle_pixelMetric(vtbl: pointer, inst: pointer, metric: cint, option: pointer, widget: pointer): cint {.cdecl.} =
+  let vtbl = cast[VirtualQProxyStyle](cast[uint](vtbl) - uint(offsetOf(VirtualQProxyStyle, vtbl)))
+  let slotval1 = cint(metric)
+  let slotval2 = gen_qstyleoption_types.QStyleOption(h: option, owned: false)
+  let slotval3 = gen_qwidget_types.QWidget(h: widget, owned: false)
+  var virtualReturn = vtbl.pixelMetric(slotval1, slotval2, slotval3)
+  virtualReturn
+
+method layoutSpacing*(self: VirtualQProxyStyle, control1: cint, control2: cint, orientation: cint, option: gen_qstyleoption_types.QStyleOption, widget: gen_qwidget_types.QWidget): cint {.base.} =
+  QProxyStylelayoutSpacing(self[], control1, control2, orientation, option, widget)
+proc miqt_exec_method_cQProxyStyle_layoutSpacing(vtbl: pointer, inst: pointer, control1: cint, control2: cint, orientation: cint, option: pointer, widget: pointer): cint {.cdecl.} =
+  let vtbl = cast[VirtualQProxyStyle](cast[uint](vtbl) - uint(offsetOf(VirtualQProxyStyle, vtbl)))
+  let slotval1 = cint(control1)
+  let slotval2 = cint(control2)
+  let slotval3 = cint(orientation)
+  let slotval4 = gen_qstyleoption_types.QStyleOption(h: option, owned: false)
+  let slotval5 = gen_qwidget_types.QWidget(h: widget, owned: false)
+  var virtualReturn = vtbl.layoutSpacing(slotval1, slotval2, slotval3, slotval4, slotval5)
+  virtualReturn
+
+method standardIcon*(self: VirtualQProxyStyle, standardIcon: cint, option: gen_qstyleoption_types.QStyleOption, widget: gen_qwidget_types.QWidget): gen_qicon_types.QIcon {.base.} =
+  QProxyStylestandardIcon(self[], standardIcon, option, widget)
+proc miqt_exec_method_cQProxyStyle_standardIcon(vtbl: pointer, inst: pointer, standardIcon: cint, option: pointer, widget: pointer): pointer {.cdecl.} =
+  let vtbl = cast[VirtualQProxyStyle](cast[uint](vtbl) - uint(offsetOf(VirtualQProxyStyle, vtbl)))
+  let slotval1 = cint(standardIcon)
+  let slotval2 = gen_qstyleoption_types.QStyleOption(h: option, owned: false)
+  let slotval3 = gen_qwidget_types.QWidget(h: widget, owned: false)
+  var virtualReturn = vtbl.standardIcon(slotval1, slotval2, slotval3)
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
+
+method standardPixmap*(self: VirtualQProxyStyle, standardPixmap: cint, opt: gen_qstyleoption_types.QStyleOption, widget: gen_qwidget_types.QWidget): gen_qpixmap_types.QPixmap {.base.} =
+  QProxyStylestandardPixmap(self[], standardPixmap, opt, widget)
+proc miqt_exec_method_cQProxyStyle_standardPixmap(vtbl: pointer, inst: pointer, standardPixmap: cint, opt: pointer, widget: pointer): pointer {.cdecl.} =
+  let vtbl = cast[VirtualQProxyStyle](cast[uint](vtbl) - uint(offsetOf(VirtualQProxyStyle, vtbl)))
+  let slotval1 = cint(standardPixmap)
+  let slotval2 = gen_qstyleoption_types.QStyleOption(h: opt, owned: false)
+  let slotval3 = gen_qwidget_types.QWidget(h: widget, owned: false)
+  var virtualReturn = vtbl.standardPixmap(slotval1, slotval2, slotval3)
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
+
+method generatedIconPixmap*(self: VirtualQProxyStyle, iconMode: cint, pixmap: gen_qpixmap_types.QPixmap, opt: gen_qstyleoption_types.QStyleOption): gen_qpixmap_types.QPixmap {.base.} =
+  QProxyStylegeneratedIconPixmap(self[], iconMode, pixmap, opt)
+proc miqt_exec_method_cQProxyStyle_generatedIconPixmap(vtbl: pointer, inst: pointer, iconMode: cint, pixmap: pointer, opt: pointer): pointer {.cdecl.} =
+  let vtbl = cast[VirtualQProxyStyle](cast[uint](vtbl) - uint(offsetOf(VirtualQProxyStyle, vtbl)))
+  let slotval1 = cint(iconMode)
+  let slotval2 = gen_qpixmap_types.QPixmap(h: pixmap, owned: false)
+  let slotval3 = gen_qstyleoption_types.QStyleOption(h: opt, owned: false)
+  var virtualReturn = vtbl.generatedIconPixmap(slotval1, slotval2, slotval3)
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
+
+method standardPalette*(self: VirtualQProxyStyle, ): gen_qpalette_types.QPalette {.base.} =
+  QProxyStylestandardPalette(self[])
+proc miqt_exec_method_cQProxyStyle_standardPalette(vtbl: pointer, inst: pointer): pointer {.cdecl.} =
+  let vtbl = cast[VirtualQProxyStyle](cast[uint](vtbl) - uint(offsetOf(VirtualQProxyStyle, vtbl)))
+  var virtualReturn = vtbl.standardPalette()
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
+
+method polish*(self: VirtualQProxyStyle, widget: gen_qwidget_types.QWidget): void {.base.} =
+  QProxyStylepolish(self[], widget)
+proc miqt_exec_method_cQProxyStyle_polish(vtbl: pointer, inst: pointer, widget: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQProxyStyle](cast[uint](vtbl) - uint(offsetOf(VirtualQProxyStyle, vtbl)))
+  let slotval1 = gen_qwidget_types.QWidget(h: widget, owned: false)
+  vtbl.polish(slotval1)
+
+method polish*(self: VirtualQProxyStyle, pal: gen_qpalette_types.QPalette): void {.base.} =
+  QProxyStylepolish(self[], pal)
+proc miqt_exec_method_cQProxyStyle_polishWithPal(vtbl: pointer, inst: pointer, pal: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQProxyStyle](cast[uint](vtbl) - uint(offsetOf(VirtualQProxyStyle, vtbl)))
+  let slotval1 = gen_qpalette_types.QPalette(h: pal, owned: false)
+  vtbl.polish(slotval1)
+
+method polish*(self: VirtualQProxyStyle, app: gen_qapplication_types.QApplication): void {.base.} =
+  QProxyStylepolish(self[], app)
+proc miqt_exec_method_cQProxyStyle_polishWithApp(vtbl: pointer, inst: pointer, app: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQProxyStyle](cast[uint](vtbl) - uint(offsetOf(VirtualQProxyStyle, vtbl)))
+  let slotval1 = gen_qapplication_types.QApplication(h: app, owned: false)
+  vtbl.polish(slotval1)
+
+method unpolish*(self: VirtualQProxyStyle, widget: gen_qwidget_types.QWidget): void {.base.} =
+  QProxyStyleunpolish(self[], widget)
+proc miqt_exec_method_cQProxyStyle_unpolish(vtbl: pointer, inst: pointer, widget: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQProxyStyle](cast[uint](vtbl) - uint(offsetOf(VirtualQProxyStyle, vtbl)))
+  let slotval1 = gen_qwidget_types.QWidget(h: widget, owned: false)
+  vtbl.unpolish(slotval1)
+
+method unpolish*(self: VirtualQProxyStyle, app: gen_qapplication_types.QApplication): void {.base.} =
+  QProxyStyleunpolish(self[], app)
+proc miqt_exec_method_cQProxyStyle_unpolishWithApp(vtbl: pointer, inst: pointer, app: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQProxyStyle](cast[uint](vtbl) - uint(offsetOf(VirtualQProxyStyle, vtbl)))
+  let slotval1 = gen_qapplication_types.QApplication(h: app, owned: false)
+  vtbl.unpolish(slotval1)
+
+method event*(self: VirtualQProxyStyle, e: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QProxyStyleevent(self[], e)
+proc miqt_exec_method_cQProxyStyle_event(vtbl: pointer, inst: pointer, e: pointer): bool {.cdecl.} =
+  let vtbl = cast[VirtualQProxyStyle](cast[uint](vtbl) - uint(offsetOf(VirtualQProxyStyle, vtbl)))
+  let slotval1 = gen_qcoreevent_types.QEvent(h: e, owned: false)
+  var virtualReturn = vtbl.event(slotval1)
+  virtualReturn
+
+method eventFilter*(self: VirtualQProxyStyle, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QProxyStyleeventFilter(self[], watched, event)
+proc miqt_exec_method_cQProxyStyle_eventFilter(vtbl: pointer, inst: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
+  let vtbl = cast[VirtualQProxyStyle](cast[uint](vtbl) - uint(offsetOf(VirtualQProxyStyle, vtbl)))
+  let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
+  var virtualReturn = vtbl.eventFilter(slotval1, slotval2)
+  virtualReturn
+
+method timerEvent*(self: VirtualQProxyStyle, event: gen_qcoreevent_types.QTimerEvent): void {.base.} =
+  QProxyStyletimerEvent(self[], event)
+proc miqt_exec_method_cQProxyStyle_timerEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQProxyStyle](cast[uint](vtbl) - uint(offsetOf(VirtualQProxyStyle, vtbl)))
+  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
+  vtbl.timerEvent(slotval1)
+
+method childEvent*(self: VirtualQProxyStyle, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
+  QProxyStylechildEvent(self[], event)
+proc miqt_exec_method_cQProxyStyle_childEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQProxyStyle](cast[uint](vtbl) - uint(offsetOf(VirtualQProxyStyle, vtbl)))
+  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
+  vtbl.childEvent(slotval1)
+
+method customEvent*(self: VirtualQProxyStyle, event: gen_qcoreevent_types.QEvent): void {.base.} =
+  QProxyStylecustomEvent(self[], event)
+proc miqt_exec_method_cQProxyStyle_customEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQProxyStyle](cast[uint](vtbl) - uint(offsetOf(VirtualQProxyStyle, vtbl)))
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
+  vtbl.customEvent(slotval1)
+
+method connectNotify*(self: VirtualQProxyStyle, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QProxyStyleconnectNotify(self[], signal)
+proc miqt_exec_method_cQProxyStyle_connectNotify(vtbl: pointer, inst: pointer, signal: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQProxyStyle](cast[uint](vtbl) - uint(offsetOf(VirtualQProxyStyle, vtbl)))
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
+  vtbl.connectNotify(slotval1)
+
+method disconnectNotify*(self: VirtualQProxyStyle, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QProxyStyledisconnectNotify(self[], signal)
+proc miqt_exec_method_cQProxyStyle_disconnectNotify(vtbl: pointer, inst: pointer, signal: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQProxyStyle](cast[uint](vtbl) - uint(offsetOf(VirtualQProxyStyle, vtbl)))
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
+  vtbl.disconnectNotify(slotval1)
+
 proc sender*(self: gen_qproxystyle_types.QProxyStyle, ): gen_qobject_types.QObject =
-  gen_qobject_types.QObject(h: fcQProxyStyle_protectedbase_sender(self.h))
+  gen_qobject_types.QObject(h: fcQProxyStyle_protectedbase_sender(self.h), owned: false)
 
 proc senderSignalIndex*(self: gen_qproxystyle_types.QProxyStyle, ): cint =
   fcQProxyStyle_protectedbase_senderSignalIndex(self.h)
@@ -764,230 +1131,362 @@ proc create*(T: type gen_qproxystyle_types.QProxyStyle,
     vtbl: ref QProxyStyleVTable = nil): gen_qproxystyle_types.QProxyStyle =
   let vtbl = if vtbl == nil: new QProxyStyleVTable else: vtbl
   GC_ref(vtbl)
-  vtbl.vtbl.destructor = proc(vtbl: ptr cQProxyStyleVTable, _: ptr cQProxyStyle) {.cdecl.} =
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQProxyStyleVTable, _: ptr cQProxyStyle) {.cdecl.} =
     let vtbl = cast[ref QProxyStyleVTable](vtbl)
     GC_unref(vtbl)
-  if not isNil(vtbl.metaObject):
+  if not isNil(vtbl[].metaObject):
     vtbl[].vtbl.metaObject = miqt_exec_callback_cQProxyStyle_metaObject
-  if not isNil(vtbl.metacast):
+  if not isNil(vtbl[].metacast):
     vtbl[].vtbl.metacast = miqt_exec_callback_cQProxyStyle_metacast
-  if not isNil(vtbl.metacall):
+  if not isNil(vtbl[].metacall):
     vtbl[].vtbl.metacall = miqt_exec_callback_cQProxyStyle_metacall
-  if not isNil(vtbl.drawPrimitive):
+  if not isNil(vtbl[].drawPrimitive):
     vtbl[].vtbl.drawPrimitive = miqt_exec_callback_cQProxyStyle_drawPrimitive
-  if not isNil(vtbl.drawControl):
+  if not isNil(vtbl[].drawControl):
     vtbl[].vtbl.drawControl = miqt_exec_callback_cQProxyStyle_drawControl
-  if not isNil(vtbl.drawComplexControl):
+  if not isNil(vtbl[].drawComplexControl):
     vtbl[].vtbl.drawComplexControl = miqt_exec_callback_cQProxyStyle_drawComplexControl
-  if not isNil(vtbl.drawItemText):
+  if not isNil(vtbl[].drawItemText):
     vtbl[].vtbl.drawItemText = miqt_exec_callback_cQProxyStyle_drawItemText
-  if not isNil(vtbl.drawItemPixmap):
+  if not isNil(vtbl[].drawItemPixmap):
     vtbl[].vtbl.drawItemPixmap = miqt_exec_callback_cQProxyStyle_drawItemPixmap
-  if not isNil(vtbl.sizeFromContents):
+  if not isNil(vtbl[].sizeFromContents):
     vtbl[].vtbl.sizeFromContents = miqt_exec_callback_cQProxyStyle_sizeFromContents
-  if not isNil(vtbl.subElementRect):
+  if not isNil(vtbl[].subElementRect):
     vtbl[].vtbl.subElementRect = miqt_exec_callback_cQProxyStyle_subElementRect
-  if not isNil(vtbl.subControlRect):
+  if not isNil(vtbl[].subControlRect):
     vtbl[].vtbl.subControlRect = miqt_exec_callback_cQProxyStyle_subControlRect
-  if not isNil(vtbl.itemTextRect):
+  if not isNil(vtbl[].itemTextRect):
     vtbl[].vtbl.itemTextRect = miqt_exec_callback_cQProxyStyle_itemTextRect
-  if not isNil(vtbl.itemPixmapRect):
+  if not isNil(vtbl[].itemPixmapRect):
     vtbl[].vtbl.itemPixmapRect = miqt_exec_callback_cQProxyStyle_itemPixmapRect
-  if not isNil(vtbl.hitTestComplexControl):
+  if not isNil(vtbl[].hitTestComplexControl):
     vtbl[].vtbl.hitTestComplexControl = miqt_exec_callback_cQProxyStyle_hitTestComplexControl
-  if not isNil(vtbl.styleHint):
+  if not isNil(vtbl[].styleHint):
     vtbl[].vtbl.styleHint = miqt_exec_callback_cQProxyStyle_styleHint
-  if not isNil(vtbl.pixelMetric):
+  if not isNil(vtbl[].pixelMetric):
     vtbl[].vtbl.pixelMetric = miqt_exec_callback_cQProxyStyle_pixelMetric
-  if not isNil(vtbl.layoutSpacing):
+  if not isNil(vtbl[].layoutSpacing):
     vtbl[].vtbl.layoutSpacing = miqt_exec_callback_cQProxyStyle_layoutSpacing
-  if not isNil(vtbl.standardIcon):
+  if not isNil(vtbl[].standardIcon):
     vtbl[].vtbl.standardIcon = miqt_exec_callback_cQProxyStyle_standardIcon
-  if not isNil(vtbl.standardPixmap):
+  if not isNil(vtbl[].standardPixmap):
     vtbl[].vtbl.standardPixmap = miqt_exec_callback_cQProxyStyle_standardPixmap
-  if not isNil(vtbl.generatedIconPixmap):
+  if not isNil(vtbl[].generatedIconPixmap):
     vtbl[].vtbl.generatedIconPixmap = miqt_exec_callback_cQProxyStyle_generatedIconPixmap
-  if not isNil(vtbl.standardPalette):
+  if not isNil(vtbl[].standardPalette):
     vtbl[].vtbl.standardPalette = miqt_exec_callback_cQProxyStyle_standardPalette
-  if not isNil(vtbl.polish):
+  if not isNil(vtbl[].polish):
     vtbl[].vtbl.polish = miqt_exec_callback_cQProxyStyle_polish
-  if not isNil(vtbl.polishWithPal):
+  if not isNil(vtbl[].polishWithPal):
     vtbl[].vtbl.polishWithPal = miqt_exec_callback_cQProxyStyle_polishWithPal
-  if not isNil(vtbl.polishWithApp):
+  if not isNil(vtbl[].polishWithApp):
     vtbl[].vtbl.polishWithApp = miqt_exec_callback_cQProxyStyle_polishWithApp
-  if not isNil(vtbl.unpolish):
+  if not isNil(vtbl[].unpolish):
     vtbl[].vtbl.unpolish = miqt_exec_callback_cQProxyStyle_unpolish
-  if not isNil(vtbl.unpolishWithApp):
+  if not isNil(vtbl[].unpolishWithApp):
     vtbl[].vtbl.unpolishWithApp = miqt_exec_callback_cQProxyStyle_unpolishWithApp
-  if not isNil(vtbl.event):
+  if not isNil(vtbl[].event):
     vtbl[].vtbl.event = miqt_exec_callback_cQProxyStyle_event
-  if not isNil(vtbl.eventFilter):
+  if not isNil(vtbl[].eventFilter):
     vtbl[].vtbl.eventFilter = miqt_exec_callback_cQProxyStyle_eventFilter
-  if not isNil(vtbl.timerEvent):
+  if not isNil(vtbl[].timerEvent):
     vtbl[].vtbl.timerEvent = miqt_exec_callback_cQProxyStyle_timerEvent
-  if not isNil(vtbl.childEvent):
+  if not isNil(vtbl[].childEvent):
     vtbl[].vtbl.childEvent = miqt_exec_callback_cQProxyStyle_childEvent
-  if not isNil(vtbl.customEvent):
+  if not isNil(vtbl[].customEvent):
     vtbl[].vtbl.customEvent = miqt_exec_callback_cQProxyStyle_customEvent
-  if not isNil(vtbl.connectNotify):
+  if not isNil(vtbl[].connectNotify):
     vtbl[].vtbl.connectNotify = miqt_exec_callback_cQProxyStyle_connectNotify
-  if not isNil(vtbl.disconnectNotify):
+  if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQProxyStyle_disconnectNotify
-  gen_qproxystyle_types.QProxyStyle(h: fcQProxyStyle_new(addr(vtbl[]), ))
+  gen_qproxystyle_types.QProxyStyle(h: fcQProxyStyle_new(addr(vtbl[].vtbl), ), owned: true)
 
 proc create*(T: type gen_qproxystyle_types.QProxyStyle,
     key: string,
     vtbl: ref QProxyStyleVTable = nil): gen_qproxystyle_types.QProxyStyle =
   let vtbl = if vtbl == nil: new QProxyStyleVTable else: vtbl
   GC_ref(vtbl)
-  vtbl.vtbl.destructor = proc(vtbl: ptr cQProxyStyleVTable, _: ptr cQProxyStyle) {.cdecl.} =
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQProxyStyleVTable, _: ptr cQProxyStyle) {.cdecl.} =
     let vtbl = cast[ref QProxyStyleVTable](vtbl)
     GC_unref(vtbl)
-  if not isNil(vtbl.metaObject):
+  if not isNil(vtbl[].metaObject):
     vtbl[].vtbl.metaObject = miqt_exec_callback_cQProxyStyle_metaObject
-  if not isNil(vtbl.metacast):
+  if not isNil(vtbl[].metacast):
     vtbl[].vtbl.metacast = miqt_exec_callback_cQProxyStyle_metacast
-  if not isNil(vtbl.metacall):
+  if not isNil(vtbl[].metacall):
     vtbl[].vtbl.metacall = miqt_exec_callback_cQProxyStyle_metacall
-  if not isNil(vtbl.drawPrimitive):
+  if not isNil(vtbl[].drawPrimitive):
     vtbl[].vtbl.drawPrimitive = miqt_exec_callback_cQProxyStyle_drawPrimitive
-  if not isNil(vtbl.drawControl):
+  if not isNil(vtbl[].drawControl):
     vtbl[].vtbl.drawControl = miqt_exec_callback_cQProxyStyle_drawControl
-  if not isNil(vtbl.drawComplexControl):
+  if not isNil(vtbl[].drawComplexControl):
     vtbl[].vtbl.drawComplexControl = miqt_exec_callback_cQProxyStyle_drawComplexControl
-  if not isNil(vtbl.drawItemText):
+  if not isNil(vtbl[].drawItemText):
     vtbl[].vtbl.drawItemText = miqt_exec_callback_cQProxyStyle_drawItemText
-  if not isNil(vtbl.drawItemPixmap):
+  if not isNil(vtbl[].drawItemPixmap):
     vtbl[].vtbl.drawItemPixmap = miqt_exec_callback_cQProxyStyle_drawItemPixmap
-  if not isNil(vtbl.sizeFromContents):
+  if not isNil(vtbl[].sizeFromContents):
     vtbl[].vtbl.sizeFromContents = miqt_exec_callback_cQProxyStyle_sizeFromContents
-  if not isNil(vtbl.subElementRect):
+  if not isNil(vtbl[].subElementRect):
     vtbl[].vtbl.subElementRect = miqt_exec_callback_cQProxyStyle_subElementRect
-  if not isNil(vtbl.subControlRect):
+  if not isNil(vtbl[].subControlRect):
     vtbl[].vtbl.subControlRect = miqt_exec_callback_cQProxyStyle_subControlRect
-  if not isNil(vtbl.itemTextRect):
+  if not isNil(vtbl[].itemTextRect):
     vtbl[].vtbl.itemTextRect = miqt_exec_callback_cQProxyStyle_itemTextRect
-  if not isNil(vtbl.itemPixmapRect):
+  if not isNil(vtbl[].itemPixmapRect):
     vtbl[].vtbl.itemPixmapRect = miqt_exec_callback_cQProxyStyle_itemPixmapRect
-  if not isNil(vtbl.hitTestComplexControl):
+  if not isNil(vtbl[].hitTestComplexControl):
     vtbl[].vtbl.hitTestComplexControl = miqt_exec_callback_cQProxyStyle_hitTestComplexControl
-  if not isNil(vtbl.styleHint):
+  if not isNil(vtbl[].styleHint):
     vtbl[].vtbl.styleHint = miqt_exec_callback_cQProxyStyle_styleHint
-  if not isNil(vtbl.pixelMetric):
+  if not isNil(vtbl[].pixelMetric):
     vtbl[].vtbl.pixelMetric = miqt_exec_callback_cQProxyStyle_pixelMetric
-  if not isNil(vtbl.layoutSpacing):
+  if not isNil(vtbl[].layoutSpacing):
     vtbl[].vtbl.layoutSpacing = miqt_exec_callback_cQProxyStyle_layoutSpacing
-  if not isNil(vtbl.standardIcon):
+  if not isNil(vtbl[].standardIcon):
     vtbl[].vtbl.standardIcon = miqt_exec_callback_cQProxyStyle_standardIcon
-  if not isNil(vtbl.standardPixmap):
+  if not isNil(vtbl[].standardPixmap):
     vtbl[].vtbl.standardPixmap = miqt_exec_callback_cQProxyStyle_standardPixmap
-  if not isNil(vtbl.generatedIconPixmap):
+  if not isNil(vtbl[].generatedIconPixmap):
     vtbl[].vtbl.generatedIconPixmap = miqt_exec_callback_cQProxyStyle_generatedIconPixmap
-  if not isNil(vtbl.standardPalette):
+  if not isNil(vtbl[].standardPalette):
     vtbl[].vtbl.standardPalette = miqt_exec_callback_cQProxyStyle_standardPalette
-  if not isNil(vtbl.polish):
+  if not isNil(vtbl[].polish):
     vtbl[].vtbl.polish = miqt_exec_callback_cQProxyStyle_polish
-  if not isNil(vtbl.polishWithPal):
+  if not isNil(vtbl[].polishWithPal):
     vtbl[].vtbl.polishWithPal = miqt_exec_callback_cQProxyStyle_polishWithPal
-  if not isNil(vtbl.polishWithApp):
+  if not isNil(vtbl[].polishWithApp):
     vtbl[].vtbl.polishWithApp = miqt_exec_callback_cQProxyStyle_polishWithApp
-  if not isNil(vtbl.unpolish):
+  if not isNil(vtbl[].unpolish):
     vtbl[].vtbl.unpolish = miqt_exec_callback_cQProxyStyle_unpolish
-  if not isNil(vtbl.unpolishWithApp):
+  if not isNil(vtbl[].unpolishWithApp):
     vtbl[].vtbl.unpolishWithApp = miqt_exec_callback_cQProxyStyle_unpolishWithApp
-  if not isNil(vtbl.event):
+  if not isNil(vtbl[].event):
     vtbl[].vtbl.event = miqt_exec_callback_cQProxyStyle_event
-  if not isNil(vtbl.eventFilter):
+  if not isNil(vtbl[].eventFilter):
     vtbl[].vtbl.eventFilter = miqt_exec_callback_cQProxyStyle_eventFilter
-  if not isNil(vtbl.timerEvent):
+  if not isNil(vtbl[].timerEvent):
     vtbl[].vtbl.timerEvent = miqt_exec_callback_cQProxyStyle_timerEvent
-  if not isNil(vtbl.childEvent):
+  if not isNil(vtbl[].childEvent):
     vtbl[].vtbl.childEvent = miqt_exec_callback_cQProxyStyle_childEvent
-  if not isNil(vtbl.customEvent):
+  if not isNil(vtbl[].customEvent):
     vtbl[].vtbl.customEvent = miqt_exec_callback_cQProxyStyle_customEvent
-  if not isNil(vtbl.connectNotify):
+  if not isNil(vtbl[].connectNotify):
     vtbl[].vtbl.connectNotify = miqt_exec_callback_cQProxyStyle_connectNotify
-  if not isNil(vtbl.disconnectNotify):
+  if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQProxyStyle_disconnectNotify
-  gen_qproxystyle_types.QProxyStyle(h: fcQProxyStyle_new2(addr(vtbl[]), struct_miqt_string(data: key, len: csize_t(len(key)))))
+  gen_qproxystyle_types.QProxyStyle(h: fcQProxyStyle_new2(addr(vtbl[].vtbl), struct_miqt_string(data: key, len: csize_t(len(key)))), owned: true)
 
 proc create*(T: type gen_qproxystyle_types.QProxyStyle,
     style: gen_qstyle_types.QStyle,
     vtbl: ref QProxyStyleVTable = nil): gen_qproxystyle_types.QProxyStyle =
   let vtbl = if vtbl == nil: new QProxyStyleVTable else: vtbl
   GC_ref(vtbl)
-  vtbl.vtbl.destructor = proc(vtbl: ptr cQProxyStyleVTable, _: ptr cQProxyStyle) {.cdecl.} =
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQProxyStyleVTable, _: ptr cQProxyStyle) {.cdecl.} =
     let vtbl = cast[ref QProxyStyleVTable](vtbl)
     GC_unref(vtbl)
-  if not isNil(vtbl.metaObject):
+  if not isNil(vtbl[].metaObject):
     vtbl[].vtbl.metaObject = miqt_exec_callback_cQProxyStyle_metaObject
-  if not isNil(vtbl.metacast):
+  if not isNil(vtbl[].metacast):
     vtbl[].vtbl.metacast = miqt_exec_callback_cQProxyStyle_metacast
-  if not isNil(vtbl.metacall):
+  if not isNil(vtbl[].metacall):
     vtbl[].vtbl.metacall = miqt_exec_callback_cQProxyStyle_metacall
-  if not isNil(vtbl.drawPrimitive):
+  if not isNil(vtbl[].drawPrimitive):
     vtbl[].vtbl.drawPrimitive = miqt_exec_callback_cQProxyStyle_drawPrimitive
-  if not isNil(vtbl.drawControl):
+  if not isNil(vtbl[].drawControl):
     vtbl[].vtbl.drawControl = miqt_exec_callback_cQProxyStyle_drawControl
-  if not isNil(vtbl.drawComplexControl):
+  if not isNil(vtbl[].drawComplexControl):
     vtbl[].vtbl.drawComplexControl = miqt_exec_callback_cQProxyStyle_drawComplexControl
-  if not isNil(vtbl.drawItemText):
+  if not isNil(vtbl[].drawItemText):
     vtbl[].vtbl.drawItemText = miqt_exec_callback_cQProxyStyle_drawItemText
-  if not isNil(vtbl.drawItemPixmap):
+  if not isNil(vtbl[].drawItemPixmap):
     vtbl[].vtbl.drawItemPixmap = miqt_exec_callback_cQProxyStyle_drawItemPixmap
-  if not isNil(vtbl.sizeFromContents):
+  if not isNil(vtbl[].sizeFromContents):
     vtbl[].vtbl.sizeFromContents = miqt_exec_callback_cQProxyStyle_sizeFromContents
-  if not isNil(vtbl.subElementRect):
+  if not isNil(vtbl[].subElementRect):
     vtbl[].vtbl.subElementRect = miqt_exec_callback_cQProxyStyle_subElementRect
-  if not isNil(vtbl.subControlRect):
+  if not isNil(vtbl[].subControlRect):
     vtbl[].vtbl.subControlRect = miqt_exec_callback_cQProxyStyle_subControlRect
-  if not isNil(vtbl.itemTextRect):
+  if not isNil(vtbl[].itemTextRect):
     vtbl[].vtbl.itemTextRect = miqt_exec_callback_cQProxyStyle_itemTextRect
-  if not isNil(vtbl.itemPixmapRect):
+  if not isNil(vtbl[].itemPixmapRect):
     vtbl[].vtbl.itemPixmapRect = miqt_exec_callback_cQProxyStyle_itemPixmapRect
-  if not isNil(vtbl.hitTestComplexControl):
+  if not isNil(vtbl[].hitTestComplexControl):
     vtbl[].vtbl.hitTestComplexControl = miqt_exec_callback_cQProxyStyle_hitTestComplexControl
-  if not isNil(vtbl.styleHint):
+  if not isNil(vtbl[].styleHint):
     vtbl[].vtbl.styleHint = miqt_exec_callback_cQProxyStyle_styleHint
-  if not isNil(vtbl.pixelMetric):
+  if not isNil(vtbl[].pixelMetric):
     vtbl[].vtbl.pixelMetric = miqt_exec_callback_cQProxyStyle_pixelMetric
-  if not isNil(vtbl.layoutSpacing):
+  if not isNil(vtbl[].layoutSpacing):
     vtbl[].vtbl.layoutSpacing = miqt_exec_callback_cQProxyStyle_layoutSpacing
-  if not isNil(vtbl.standardIcon):
+  if not isNil(vtbl[].standardIcon):
     vtbl[].vtbl.standardIcon = miqt_exec_callback_cQProxyStyle_standardIcon
-  if not isNil(vtbl.standardPixmap):
+  if not isNil(vtbl[].standardPixmap):
     vtbl[].vtbl.standardPixmap = miqt_exec_callback_cQProxyStyle_standardPixmap
-  if not isNil(vtbl.generatedIconPixmap):
+  if not isNil(vtbl[].generatedIconPixmap):
     vtbl[].vtbl.generatedIconPixmap = miqt_exec_callback_cQProxyStyle_generatedIconPixmap
-  if not isNil(vtbl.standardPalette):
+  if not isNil(vtbl[].standardPalette):
     vtbl[].vtbl.standardPalette = miqt_exec_callback_cQProxyStyle_standardPalette
-  if not isNil(vtbl.polish):
+  if not isNil(vtbl[].polish):
     vtbl[].vtbl.polish = miqt_exec_callback_cQProxyStyle_polish
-  if not isNil(vtbl.polishWithPal):
+  if not isNil(vtbl[].polishWithPal):
     vtbl[].vtbl.polishWithPal = miqt_exec_callback_cQProxyStyle_polishWithPal
-  if not isNil(vtbl.polishWithApp):
+  if not isNil(vtbl[].polishWithApp):
     vtbl[].vtbl.polishWithApp = miqt_exec_callback_cQProxyStyle_polishWithApp
-  if not isNil(vtbl.unpolish):
+  if not isNil(vtbl[].unpolish):
     vtbl[].vtbl.unpolish = miqt_exec_callback_cQProxyStyle_unpolish
-  if not isNil(vtbl.unpolishWithApp):
+  if not isNil(vtbl[].unpolishWithApp):
     vtbl[].vtbl.unpolishWithApp = miqt_exec_callback_cQProxyStyle_unpolishWithApp
-  if not isNil(vtbl.event):
+  if not isNil(vtbl[].event):
     vtbl[].vtbl.event = miqt_exec_callback_cQProxyStyle_event
-  if not isNil(vtbl.eventFilter):
+  if not isNil(vtbl[].eventFilter):
     vtbl[].vtbl.eventFilter = miqt_exec_callback_cQProxyStyle_eventFilter
-  if not isNil(vtbl.timerEvent):
+  if not isNil(vtbl[].timerEvent):
     vtbl[].vtbl.timerEvent = miqt_exec_callback_cQProxyStyle_timerEvent
-  if not isNil(vtbl.childEvent):
+  if not isNil(vtbl[].childEvent):
     vtbl[].vtbl.childEvent = miqt_exec_callback_cQProxyStyle_childEvent
-  if not isNil(vtbl.customEvent):
+  if not isNil(vtbl[].customEvent):
     vtbl[].vtbl.customEvent = miqt_exec_callback_cQProxyStyle_customEvent
-  if not isNil(vtbl.connectNotify):
+  if not isNil(vtbl[].connectNotify):
     vtbl[].vtbl.connectNotify = miqt_exec_callback_cQProxyStyle_connectNotify
-  if not isNil(vtbl.disconnectNotify):
+  if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQProxyStyle_disconnectNotify
-  gen_qproxystyle_types.QProxyStyle(h: fcQProxyStyle_new3(addr(vtbl[]), style.h))
+  gen_qproxystyle_types.QProxyStyle(h: fcQProxyStyle_new3(addr(vtbl[].vtbl), style.h), owned: true)
+
+proc create*(T: type gen_qproxystyle_types.QProxyStyle,
+    vtbl: VirtualQProxyStyle) =
+
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQProxyStyleVTable, _: ptr cQProxyStyle) {.cdecl.} =
+    let vtbl = cast[ptr typeof(VirtualQProxyStyle()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQProxyStyle, vtbl)))
+    vtbl[].h = nil
+    vtbl[].owned = false
+  vtbl[].vtbl.metaObject = miqt_exec_method_cQProxyStyle_metaObject
+  vtbl[].vtbl.metacast = miqt_exec_method_cQProxyStyle_metacast
+  vtbl[].vtbl.metacall = miqt_exec_method_cQProxyStyle_metacall
+  vtbl[].vtbl.drawPrimitive = miqt_exec_method_cQProxyStyle_drawPrimitive
+  vtbl[].vtbl.drawControl = miqt_exec_method_cQProxyStyle_drawControl
+  vtbl[].vtbl.drawComplexControl = miqt_exec_method_cQProxyStyle_drawComplexControl
+  vtbl[].vtbl.drawItemText = miqt_exec_method_cQProxyStyle_drawItemText
+  vtbl[].vtbl.drawItemPixmap = miqt_exec_method_cQProxyStyle_drawItemPixmap
+  vtbl[].vtbl.sizeFromContents = miqt_exec_method_cQProxyStyle_sizeFromContents
+  vtbl[].vtbl.subElementRect = miqt_exec_method_cQProxyStyle_subElementRect
+  vtbl[].vtbl.subControlRect = miqt_exec_method_cQProxyStyle_subControlRect
+  vtbl[].vtbl.itemTextRect = miqt_exec_method_cQProxyStyle_itemTextRect
+  vtbl[].vtbl.itemPixmapRect = miqt_exec_method_cQProxyStyle_itemPixmapRect
+  vtbl[].vtbl.hitTestComplexControl = miqt_exec_method_cQProxyStyle_hitTestComplexControl
+  vtbl[].vtbl.styleHint = miqt_exec_method_cQProxyStyle_styleHint
+  vtbl[].vtbl.pixelMetric = miqt_exec_method_cQProxyStyle_pixelMetric
+  vtbl[].vtbl.layoutSpacing = miqt_exec_method_cQProxyStyle_layoutSpacing
+  vtbl[].vtbl.standardIcon = miqt_exec_method_cQProxyStyle_standardIcon
+  vtbl[].vtbl.standardPixmap = miqt_exec_method_cQProxyStyle_standardPixmap
+  vtbl[].vtbl.generatedIconPixmap = miqt_exec_method_cQProxyStyle_generatedIconPixmap
+  vtbl[].vtbl.standardPalette = miqt_exec_method_cQProxyStyle_standardPalette
+  vtbl[].vtbl.polish = miqt_exec_method_cQProxyStyle_polish
+  vtbl[].vtbl.polish = miqt_exec_method_cQProxyStyle_polishWithPal
+  vtbl[].vtbl.polish = miqt_exec_method_cQProxyStyle_polishWithApp
+  vtbl[].vtbl.unpolish = miqt_exec_method_cQProxyStyle_unpolish
+  vtbl[].vtbl.unpolish = miqt_exec_method_cQProxyStyle_unpolishWithApp
+  vtbl[].vtbl.event = miqt_exec_method_cQProxyStyle_event
+  vtbl[].vtbl.eventFilter = miqt_exec_method_cQProxyStyle_eventFilter
+  vtbl[].vtbl.timerEvent = miqt_exec_method_cQProxyStyle_timerEvent
+  vtbl[].vtbl.childEvent = miqt_exec_method_cQProxyStyle_childEvent
+  vtbl[].vtbl.customEvent = miqt_exec_method_cQProxyStyle_customEvent
+  vtbl[].vtbl.connectNotify = miqt_exec_method_cQProxyStyle_connectNotify
+  vtbl[].vtbl.disconnectNotify = miqt_exec_method_cQProxyStyle_disconnectNotify
+  if vtbl[].h != nil: delete(move(vtbl[]))
+  vtbl[].h = fcQProxyStyle_new(addr(vtbl[].vtbl), )
+  vtbl[].owned = true
+
+proc create*(T: type gen_qproxystyle_types.QProxyStyle,
+    key: string,
+    vtbl: VirtualQProxyStyle) =
+
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQProxyStyleVTable, _: ptr cQProxyStyle) {.cdecl.} =
+    let vtbl = cast[ptr typeof(VirtualQProxyStyle()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQProxyStyle, vtbl)))
+    vtbl[].h = nil
+    vtbl[].owned = false
+  vtbl[].vtbl.metaObject = miqt_exec_method_cQProxyStyle_metaObject
+  vtbl[].vtbl.metacast = miqt_exec_method_cQProxyStyle_metacast
+  vtbl[].vtbl.metacall = miqt_exec_method_cQProxyStyle_metacall
+  vtbl[].vtbl.drawPrimitive = miqt_exec_method_cQProxyStyle_drawPrimitive
+  vtbl[].vtbl.drawControl = miqt_exec_method_cQProxyStyle_drawControl
+  vtbl[].vtbl.drawComplexControl = miqt_exec_method_cQProxyStyle_drawComplexControl
+  vtbl[].vtbl.drawItemText = miqt_exec_method_cQProxyStyle_drawItemText
+  vtbl[].vtbl.drawItemPixmap = miqt_exec_method_cQProxyStyle_drawItemPixmap
+  vtbl[].vtbl.sizeFromContents = miqt_exec_method_cQProxyStyle_sizeFromContents
+  vtbl[].vtbl.subElementRect = miqt_exec_method_cQProxyStyle_subElementRect
+  vtbl[].vtbl.subControlRect = miqt_exec_method_cQProxyStyle_subControlRect
+  vtbl[].vtbl.itemTextRect = miqt_exec_method_cQProxyStyle_itemTextRect
+  vtbl[].vtbl.itemPixmapRect = miqt_exec_method_cQProxyStyle_itemPixmapRect
+  vtbl[].vtbl.hitTestComplexControl = miqt_exec_method_cQProxyStyle_hitTestComplexControl
+  vtbl[].vtbl.styleHint = miqt_exec_method_cQProxyStyle_styleHint
+  vtbl[].vtbl.pixelMetric = miqt_exec_method_cQProxyStyle_pixelMetric
+  vtbl[].vtbl.layoutSpacing = miqt_exec_method_cQProxyStyle_layoutSpacing
+  vtbl[].vtbl.standardIcon = miqt_exec_method_cQProxyStyle_standardIcon
+  vtbl[].vtbl.standardPixmap = miqt_exec_method_cQProxyStyle_standardPixmap
+  vtbl[].vtbl.generatedIconPixmap = miqt_exec_method_cQProxyStyle_generatedIconPixmap
+  vtbl[].vtbl.standardPalette = miqt_exec_method_cQProxyStyle_standardPalette
+  vtbl[].vtbl.polish = miqt_exec_method_cQProxyStyle_polish
+  vtbl[].vtbl.polish = miqt_exec_method_cQProxyStyle_polishWithPal
+  vtbl[].vtbl.polish = miqt_exec_method_cQProxyStyle_polishWithApp
+  vtbl[].vtbl.unpolish = miqt_exec_method_cQProxyStyle_unpolish
+  vtbl[].vtbl.unpolish = miqt_exec_method_cQProxyStyle_unpolishWithApp
+  vtbl[].vtbl.event = miqt_exec_method_cQProxyStyle_event
+  vtbl[].vtbl.eventFilter = miqt_exec_method_cQProxyStyle_eventFilter
+  vtbl[].vtbl.timerEvent = miqt_exec_method_cQProxyStyle_timerEvent
+  vtbl[].vtbl.childEvent = miqt_exec_method_cQProxyStyle_childEvent
+  vtbl[].vtbl.customEvent = miqt_exec_method_cQProxyStyle_customEvent
+  vtbl[].vtbl.connectNotify = miqt_exec_method_cQProxyStyle_connectNotify
+  vtbl[].vtbl.disconnectNotify = miqt_exec_method_cQProxyStyle_disconnectNotify
+  if vtbl[].h != nil: delete(move(vtbl[]))
+  vtbl[].h = fcQProxyStyle_new2(addr(vtbl[].vtbl), struct_miqt_string(data: key, len: csize_t(len(key))))
+  vtbl[].owned = true
+
+proc create*(T: type gen_qproxystyle_types.QProxyStyle,
+    style: gen_qstyle_types.QStyle,
+    vtbl: VirtualQProxyStyle) =
+
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQProxyStyleVTable, _: ptr cQProxyStyle) {.cdecl.} =
+    let vtbl = cast[ptr typeof(VirtualQProxyStyle()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQProxyStyle, vtbl)))
+    vtbl[].h = nil
+    vtbl[].owned = false
+  vtbl[].vtbl.metaObject = miqt_exec_method_cQProxyStyle_metaObject
+  vtbl[].vtbl.metacast = miqt_exec_method_cQProxyStyle_metacast
+  vtbl[].vtbl.metacall = miqt_exec_method_cQProxyStyle_metacall
+  vtbl[].vtbl.drawPrimitive = miqt_exec_method_cQProxyStyle_drawPrimitive
+  vtbl[].vtbl.drawControl = miqt_exec_method_cQProxyStyle_drawControl
+  vtbl[].vtbl.drawComplexControl = miqt_exec_method_cQProxyStyle_drawComplexControl
+  vtbl[].vtbl.drawItemText = miqt_exec_method_cQProxyStyle_drawItemText
+  vtbl[].vtbl.drawItemPixmap = miqt_exec_method_cQProxyStyle_drawItemPixmap
+  vtbl[].vtbl.sizeFromContents = miqt_exec_method_cQProxyStyle_sizeFromContents
+  vtbl[].vtbl.subElementRect = miqt_exec_method_cQProxyStyle_subElementRect
+  vtbl[].vtbl.subControlRect = miqt_exec_method_cQProxyStyle_subControlRect
+  vtbl[].vtbl.itemTextRect = miqt_exec_method_cQProxyStyle_itemTextRect
+  vtbl[].vtbl.itemPixmapRect = miqt_exec_method_cQProxyStyle_itemPixmapRect
+  vtbl[].vtbl.hitTestComplexControl = miqt_exec_method_cQProxyStyle_hitTestComplexControl
+  vtbl[].vtbl.styleHint = miqt_exec_method_cQProxyStyle_styleHint
+  vtbl[].vtbl.pixelMetric = miqt_exec_method_cQProxyStyle_pixelMetric
+  vtbl[].vtbl.layoutSpacing = miqt_exec_method_cQProxyStyle_layoutSpacing
+  vtbl[].vtbl.standardIcon = miqt_exec_method_cQProxyStyle_standardIcon
+  vtbl[].vtbl.standardPixmap = miqt_exec_method_cQProxyStyle_standardPixmap
+  vtbl[].vtbl.generatedIconPixmap = miqt_exec_method_cQProxyStyle_generatedIconPixmap
+  vtbl[].vtbl.standardPalette = miqt_exec_method_cQProxyStyle_standardPalette
+  vtbl[].vtbl.polish = miqt_exec_method_cQProxyStyle_polish
+  vtbl[].vtbl.polish = miqt_exec_method_cQProxyStyle_polishWithPal
+  vtbl[].vtbl.polish = miqt_exec_method_cQProxyStyle_polishWithApp
+  vtbl[].vtbl.unpolish = miqt_exec_method_cQProxyStyle_unpolish
+  vtbl[].vtbl.unpolish = miqt_exec_method_cQProxyStyle_unpolishWithApp
+  vtbl[].vtbl.event = miqt_exec_method_cQProxyStyle_event
+  vtbl[].vtbl.eventFilter = miqt_exec_method_cQProxyStyle_eventFilter
+  vtbl[].vtbl.timerEvent = miqt_exec_method_cQProxyStyle_timerEvent
+  vtbl[].vtbl.childEvent = miqt_exec_method_cQProxyStyle_childEvent
+  vtbl[].vtbl.customEvent = miqt_exec_method_cQProxyStyle_customEvent
+  vtbl[].vtbl.connectNotify = miqt_exec_method_cQProxyStyle_connectNotify
+  vtbl[].vtbl.disconnectNotify = miqt_exec_method_cQProxyStyle_disconnectNotify
+  if vtbl[].h != nil: delete(move(vtbl[]))
+  vtbl[].h = fcQProxyStyle_new3(addr(vtbl[].vtbl), style.h)
+  vtbl[].owned = true
 
 proc staticMetaObject*(_: type gen_qproxystyle_types.QProxyStyle): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQProxyStyle_staticMetaObject())
-proc delete*(self: gen_qproxystyle_types.QProxyStyle) =
-  fcQProxyStyle_delete(self.h)

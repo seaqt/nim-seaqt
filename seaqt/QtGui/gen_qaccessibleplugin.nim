@@ -30,7 +30,7 @@ func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
     else:
       copyMem(addr result[0], unsafeAddr v[0], v.len)
 
-const cflags = gorge("pkg-config --cflags Qt5Gui")  & " -fPIC"
+const cflags = gorge("pkg-config --cflags Qt5Gui") & " -fPIC"
 {.compile("gen_qaccessibleplugin.cpp", cflags).}
 
 
@@ -62,7 +62,7 @@ proc fcQAccessiblePlugin_tr2(s: cstring, c: cstring): struct_miqt_string {.impor
 proc fcQAccessiblePlugin_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QAccessiblePlugin_tr3".}
 proc fcQAccessiblePlugin_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QAccessiblePlugin_trUtf82".}
 proc fcQAccessiblePlugin_trUtf83(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QAccessiblePlugin_trUtf83".}
-type cQAccessiblePluginVTable = object
+type cQAccessiblePluginVTable {.pure.} = object
   destructor*: proc(vtbl: ptr cQAccessiblePluginVTable, self: ptr cQAccessiblePlugin) {.cdecl, raises:[], gcsafe.}
   metaObject*: proc(vtbl, self: pointer, ): pointer {.cdecl, raises: [], gcsafe.}
   metacast*: proc(vtbl, self: pointer, param1: cstring): pointer {.cdecl, raises: [], gcsafe.}
@@ -92,10 +92,9 @@ proc fcQAccessiblePlugin_protectedbase_isSignalConnected(self: pointer, signal: 
 proc fcQAccessiblePlugin_new(vtbl: pointer, ): ptr cQAccessiblePlugin {.importc: "QAccessiblePlugin_new".}
 proc fcQAccessiblePlugin_new2(vtbl: pointer, parent: pointer): ptr cQAccessiblePlugin {.importc: "QAccessiblePlugin_new2".}
 proc fcQAccessiblePlugin_staticMetaObject(): pointer {.importc: "QAccessiblePlugin_staticMetaObject".}
-proc fcQAccessiblePlugin_delete(self: pointer) {.importc: "QAccessiblePlugin_delete".}
 
 proc metaObject*(self: gen_qaccessibleplugin_types.QAccessiblePlugin, ): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQAccessiblePlugin_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQAccessiblePlugin_metaObject(self.h), owned: false)
 
 proc metacast*(self: gen_qaccessibleplugin_types.QAccessiblePlugin, param1: cstring): pointer =
   fcQAccessiblePlugin_metacast(self.h, param1)
@@ -116,7 +115,7 @@ proc trUtf8*(_: type gen_qaccessibleplugin_types.QAccessiblePlugin, s: cstring):
   vx_ret
 
 proc create*(self: gen_qaccessibleplugin_types.QAccessiblePlugin, key: string, objectVal: gen_qobject_types.QObject): gen_qaccessible_types.QAccessibleInterface =
-  gen_qaccessible_types.QAccessibleInterface(h: fcQAccessiblePlugin_create(self.h, struct_miqt_string(data: key, len: csize_t(len(key))), objectVal.h))
+  gen_qaccessible_types.QAccessibleInterface(h: fcQAccessiblePlugin_create(self.h, struct_miqt_string(data: key, len: csize_t(len(key))), objectVal.h), owned: false)
 
 proc tr*(_: type gen_qaccessibleplugin_types.QAccessiblePlugin, s: cstring, c: cstring): string =
   let v_ms = fcQAccessiblePlugin_tr2(s, c)
@@ -153,7 +152,7 @@ type QAccessiblePluginchildEventProc* = proc(self: QAccessiblePlugin, event: gen
 type QAccessiblePlugincustomEventProc* = proc(self: QAccessiblePlugin, event: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
 type QAccessiblePluginconnectNotifyProc* = proc(self: QAccessiblePlugin, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
 type QAccessiblePlugindisconnectNotifyProc* = proc(self: QAccessiblePlugin, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
-type QAccessiblePluginVTable* = object
+type QAccessiblePluginVTable* {.inheritable, pure.} = object
   vtbl: cQAccessiblePluginVTable
   metaObject*: QAccessiblePluginmetaObjectProc
   metacast*: QAccessiblePluginmetacastProc
@@ -167,13 +166,16 @@ type QAccessiblePluginVTable* = object
   connectNotify*: QAccessiblePluginconnectNotifyProc
   disconnectNotify*: QAccessiblePlugindisconnectNotifyProc
 proc QAccessiblePluginmetaObject*(self: gen_qaccessibleplugin_types.QAccessiblePlugin, ): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQAccessiblePlugin_virtualbase_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQAccessiblePlugin_virtualbase_metaObject(self.h), owned: false)
 
 proc miqt_exec_callback_cQAccessiblePlugin_metaObject(vtbl: pointer, self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QAccessiblePluginVTable](vtbl)
   let self = QAccessiblePlugin(h: self)
   var virtualReturn = vtbl[].metaObject(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QAccessiblePluginmetacast*(self: gen_qaccessibleplugin_types.QAccessiblePlugin, param1: cstring): pointer =
   fcQAccessiblePlugin_virtualbase_metacast(self.h, param1)
@@ -204,9 +206,12 @@ proc miqt_exec_callback_cQAccessiblePlugin_create(vtbl: pointer, self: pointer, 
   let vkeyx_ret = string.fromBytes(toOpenArrayByte(vkey_ms.data, 0, int(vkey_ms.len)-1))
   c_free(vkey_ms.data)
   let slotval1 = vkeyx_ret
-  let slotval2 = gen_qobject_types.QObject(h: objectVal)
+  let slotval2 = gen_qobject_types.QObject(h: objectVal, owned: false)
   var virtualReturn = vtbl[].create(self, slotval1, slotval2)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QAccessiblePluginevent*(self: gen_qaccessibleplugin_types.QAccessiblePlugin, event: gen_qcoreevent_types.QEvent): bool =
   fcQAccessiblePlugin_virtualbase_event(self.h, event.h)
@@ -214,7 +219,7 @@ proc QAccessiblePluginevent*(self: gen_qaccessibleplugin_types.QAccessiblePlugin
 proc miqt_exec_callback_cQAccessiblePlugin_event(vtbl: pointer, self: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QAccessiblePluginVTable](vtbl)
   let self = QAccessiblePlugin(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].event(self, slotval1)
   virtualReturn
 
@@ -224,8 +229,8 @@ proc QAccessiblePlugineventFilter*(self: gen_qaccessibleplugin_types.QAccessible
 proc miqt_exec_callback_cQAccessiblePlugin_eventFilter(vtbl: pointer, self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QAccessiblePluginVTable](vtbl)
   let self = QAccessiblePlugin(h: self)
-  let slotval1 = gen_qobject_types.QObject(h: watched)
-  let slotval2 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].eventFilter(self, slotval1, slotval2)
   virtualReturn
 
@@ -235,7 +240,7 @@ proc QAccessiblePlugintimerEvent*(self: gen_qaccessibleplugin_types.QAccessibleP
 proc miqt_exec_callback_cQAccessiblePlugin_timerEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QAccessiblePluginVTable](vtbl)
   let self = QAccessiblePlugin(h: self)
-  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   vtbl[].timerEvent(self, slotval1)
 
 proc QAccessiblePluginchildEvent*(self: gen_qaccessibleplugin_types.QAccessiblePlugin, event: gen_qcoreevent_types.QChildEvent): void =
@@ -244,7 +249,7 @@ proc QAccessiblePluginchildEvent*(self: gen_qaccessibleplugin_types.QAccessibleP
 proc miqt_exec_callback_cQAccessiblePlugin_childEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QAccessiblePluginVTable](vtbl)
   let self = QAccessiblePlugin(h: self)
-  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   vtbl[].childEvent(self, slotval1)
 
 proc QAccessiblePlugincustomEvent*(self: gen_qaccessibleplugin_types.QAccessiblePlugin, event: gen_qcoreevent_types.QEvent): void =
@@ -253,7 +258,7 @@ proc QAccessiblePlugincustomEvent*(self: gen_qaccessibleplugin_types.QAccessible
 proc miqt_exec_callback_cQAccessiblePlugin_customEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QAccessiblePluginVTable](vtbl)
   let self = QAccessiblePlugin(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].customEvent(self, slotval1)
 
 proc QAccessiblePluginconnectNotify*(self: gen_qaccessibleplugin_types.QAccessiblePlugin, signal: gen_qmetaobject_types.QMetaMethod): void =
@@ -262,7 +267,7 @@ proc QAccessiblePluginconnectNotify*(self: gen_qaccessibleplugin_types.QAccessib
 proc miqt_exec_callback_cQAccessiblePlugin_connectNotify(vtbl: pointer, self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QAccessiblePluginVTable](vtbl)
   let self = QAccessiblePlugin(h: self)
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].connectNotify(self, slotval1)
 
 proc QAccessiblePlugindisconnectNotify*(self: gen_qaccessibleplugin_types.QAccessiblePlugin, signal: gen_qmetaobject_types.QMetaMethod): void =
@@ -271,11 +276,108 @@ proc QAccessiblePlugindisconnectNotify*(self: gen_qaccessibleplugin_types.QAcces
 proc miqt_exec_callback_cQAccessiblePlugin_disconnectNotify(vtbl: pointer, self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QAccessiblePluginVTable](vtbl)
   let self = QAccessiblePlugin(h: self)
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].disconnectNotify(self, slotval1)
 
+type VirtualQAccessiblePlugin* {.inheritable.} = ref object of QAccessiblePlugin
+  vtbl*: cQAccessiblePluginVTable
+method metaObject*(self: VirtualQAccessiblePlugin, ): gen_qobjectdefs_types.QMetaObject {.base.} =
+  QAccessiblePluginmetaObject(self[])
+proc miqt_exec_method_cQAccessiblePlugin_metaObject(vtbl: pointer, inst: pointer): pointer {.cdecl.} =
+  let vtbl = cast[VirtualQAccessiblePlugin](cast[uint](vtbl) - uint(offsetOf(VirtualQAccessiblePlugin, vtbl)))
+  var virtualReturn = vtbl.metaObject()
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
+
+method metacast*(self: VirtualQAccessiblePlugin, param1: cstring): pointer {.base.} =
+  QAccessiblePluginmetacast(self[], param1)
+proc miqt_exec_method_cQAccessiblePlugin_metacast(vtbl: pointer, inst: pointer, param1: cstring): pointer {.cdecl.} =
+  let vtbl = cast[VirtualQAccessiblePlugin](cast[uint](vtbl) - uint(offsetOf(VirtualQAccessiblePlugin, vtbl)))
+  let slotval1 = (param1)
+  var virtualReturn = vtbl.metacast(slotval1)
+  virtualReturn
+
+method metacall*(self: VirtualQAccessiblePlugin, param1: cint, param2: cint, param3: pointer): cint {.base.} =
+  QAccessiblePluginmetacall(self[], param1, param2, param3)
+proc miqt_exec_method_cQAccessiblePlugin_metacall(vtbl: pointer, inst: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
+  let vtbl = cast[VirtualQAccessiblePlugin](cast[uint](vtbl) - uint(offsetOf(VirtualQAccessiblePlugin, vtbl)))
+  let slotval1 = cint(param1)
+  let slotval2 = param2
+  let slotval3 = param3
+  var virtualReturn = vtbl.metacall(slotval1, slotval2, slotval3)
+  virtualReturn
+
+method create*(self: VirtualQAccessiblePlugin, key: string, objectVal: gen_qobject_types.QObject): gen_qaccessible_types.QAccessibleInterface {.base.} =
+  raiseAssert("missing implementation of QAccessiblePlugin_virtualbase_create")
+proc miqt_exec_method_cQAccessiblePlugin_create(vtbl: pointer, inst: pointer, key: struct_miqt_string, objectVal: pointer): pointer {.cdecl.} =
+  let vtbl = cast[VirtualQAccessiblePlugin](cast[uint](vtbl) - uint(offsetOf(VirtualQAccessiblePlugin, vtbl)))
+  let vkey_ms = key
+  let vkeyx_ret = string.fromBytes(toOpenArrayByte(vkey_ms.data, 0, int(vkey_ms.len)-1))
+  c_free(vkey_ms.data)
+  let slotval1 = vkeyx_ret
+  let slotval2 = gen_qobject_types.QObject(h: objectVal, owned: false)
+  var virtualReturn = vtbl.create(slotval1, slotval2)
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
+
+method event*(self: VirtualQAccessiblePlugin, event: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QAccessiblePluginevent(self[], event)
+proc miqt_exec_method_cQAccessiblePlugin_event(vtbl: pointer, inst: pointer, event: pointer): bool {.cdecl.} =
+  let vtbl = cast[VirtualQAccessiblePlugin](cast[uint](vtbl) - uint(offsetOf(VirtualQAccessiblePlugin, vtbl)))
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
+  var virtualReturn = vtbl.event(slotval1)
+  virtualReturn
+
+method eventFilter*(self: VirtualQAccessiblePlugin, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QAccessiblePlugineventFilter(self[], watched, event)
+proc miqt_exec_method_cQAccessiblePlugin_eventFilter(vtbl: pointer, inst: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
+  let vtbl = cast[VirtualQAccessiblePlugin](cast[uint](vtbl) - uint(offsetOf(VirtualQAccessiblePlugin, vtbl)))
+  let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
+  var virtualReturn = vtbl.eventFilter(slotval1, slotval2)
+  virtualReturn
+
+method timerEvent*(self: VirtualQAccessiblePlugin, event: gen_qcoreevent_types.QTimerEvent): void {.base.} =
+  QAccessiblePlugintimerEvent(self[], event)
+proc miqt_exec_method_cQAccessiblePlugin_timerEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQAccessiblePlugin](cast[uint](vtbl) - uint(offsetOf(VirtualQAccessiblePlugin, vtbl)))
+  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
+  vtbl.timerEvent(slotval1)
+
+method childEvent*(self: VirtualQAccessiblePlugin, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
+  QAccessiblePluginchildEvent(self[], event)
+proc miqt_exec_method_cQAccessiblePlugin_childEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQAccessiblePlugin](cast[uint](vtbl) - uint(offsetOf(VirtualQAccessiblePlugin, vtbl)))
+  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
+  vtbl.childEvent(slotval1)
+
+method customEvent*(self: VirtualQAccessiblePlugin, event: gen_qcoreevent_types.QEvent): void {.base.} =
+  QAccessiblePlugincustomEvent(self[], event)
+proc miqt_exec_method_cQAccessiblePlugin_customEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQAccessiblePlugin](cast[uint](vtbl) - uint(offsetOf(VirtualQAccessiblePlugin, vtbl)))
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
+  vtbl.customEvent(slotval1)
+
+method connectNotify*(self: VirtualQAccessiblePlugin, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QAccessiblePluginconnectNotify(self[], signal)
+proc miqt_exec_method_cQAccessiblePlugin_connectNotify(vtbl: pointer, inst: pointer, signal: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQAccessiblePlugin](cast[uint](vtbl) - uint(offsetOf(VirtualQAccessiblePlugin, vtbl)))
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
+  vtbl.connectNotify(slotval1)
+
+method disconnectNotify*(self: VirtualQAccessiblePlugin, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QAccessiblePlugindisconnectNotify(self[], signal)
+proc miqt_exec_method_cQAccessiblePlugin_disconnectNotify(vtbl: pointer, inst: pointer, signal: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQAccessiblePlugin](cast[uint](vtbl) - uint(offsetOf(VirtualQAccessiblePlugin, vtbl)))
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
+  vtbl.disconnectNotify(slotval1)
+
 proc sender*(self: gen_qaccessibleplugin_types.QAccessiblePlugin, ): gen_qobject_types.QObject =
-  gen_qobject_types.QObject(h: fcQAccessiblePlugin_protectedbase_sender(self.h))
+  gen_qobject_types.QObject(h: fcQAccessiblePlugin_protectedbase_sender(self.h), owned: false)
 
 proc senderSignalIndex*(self: gen_qaccessibleplugin_types.QAccessiblePlugin, ): cint =
   fcQAccessiblePlugin_protectedbase_senderSignalIndex(self.h)
@@ -290,66 +392,109 @@ proc create*(T: type gen_qaccessibleplugin_types.QAccessiblePlugin,
     vtbl: ref QAccessiblePluginVTable = nil): gen_qaccessibleplugin_types.QAccessiblePlugin =
   let vtbl = if vtbl == nil: new QAccessiblePluginVTable else: vtbl
   GC_ref(vtbl)
-  vtbl.vtbl.destructor = proc(vtbl: ptr cQAccessiblePluginVTable, _: ptr cQAccessiblePlugin) {.cdecl.} =
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQAccessiblePluginVTable, _: ptr cQAccessiblePlugin) {.cdecl.} =
     let vtbl = cast[ref QAccessiblePluginVTable](vtbl)
     GC_unref(vtbl)
-  if not isNil(vtbl.metaObject):
+  if not isNil(vtbl[].metaObject):
     vtbl[].vtbl.metaObject = miqt_exec_callback_cQAccessiblePlugin_metaObject
-  if not isNil(vtbl.metacast):
+  if not isNil(vtbl[].metacast):
     vtbl[].vtbl.metacast = miqt_exec_callback_cQAccessiblePlugin_metacast
-  if not isNil(vtbl.metacall):
+  if not isNil(vtbl[].metacall):
     vtbl[].vtbl.metacall = miqt_exec_callback_cQAccessiblePlugin_metacall
-  if not isNil(vtbl.create):
+  if not isNil(vtbl[].create):
     vtbl[].vtbl.create = miqt_exec_callback_cQAccessiblePlugin_create
-  if not isNil(vtbl.event):
+  if not isNil(vtbl[].event):
     vtbl[].vtbl.event = miqt_exec_callback_cQAccessiblePlugin_event
-  if not isNil(vtbl.eventFilter):
+  if not isNil(vtbl[].eventFilter):
     vtbl[].vtbl.eventFilter = miqt_exec_callback_cQAccessiblePlugin_eventFilter
-  if not isNil(vtbl.timerEvent):
+  if not isNil(vtbl[].timerEvent):
     vtbl[].vtbl.timerEvent = miqt_exec_callback_cQAccessiblePlugin_timerEvent
-  if not isNil(vtbl.childEvent):
+  if not isNil(vtbl[].childEvent):
     vtbl[].vtbl.childEvent = miqt_exec_callback_cQAccessiblePlugin_childEvent
-  if not isNil(vtbl.customEvent):
+  if not isNil(vtbl[].customEvent):
     vtbl[].vtbl.customEvent = miqt_exec_callback_cQAccessiblePlugin_customEvent
-  if not isNil(vtbl.connectNotify):
+  if not isNil(vtbl[].connectNotify):
     vtbl[].vtbl.connectNotify = miqt_exec_callback_cQAccessiblePlugin_connectNotify
-  if not isNil(vtbl.disconnectNotify):
+  if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQAccessiblePlugin_disconnectNotify
-  gen_qaccessibleplugin_types.QAccessiblePlugin(h: fcQAccessiblePlugin_new(addr(vtbl[]), ))
+  gen_qaccessibleplugin_types.QAccessiblePlugin(h: fcQAccessiblePlugin_new(addr(vtbl[].vtbl), ), owned: true)
 
 proc create*(T: type gen_qaccessibleplugin_types.QAccessiblePlugin,
     parent: gen_qobject_types.QObject,
     vtbl: ref QAccessiblePluginVTable = nil): gen_qaccessibleplugin_types.QAccessiblePlugin =
   let vtbl = if vtbl == nil: new QAccessiblePluginVTable else: vtbl
   GC_ref(vtbl)
-  vtbl.vtbl.destructor = proc(vtbl: ptr cQAccessiblePluginVTable, _: ptr cQAccessiblePlugin) {.cdecl.} =
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQAccessiblePluginVTable, _: ptr cQAccessiblePlugin) {.cdecl.} =
     let vtbl = cast[ref QAccessiblePluginVTable](vtbl)
     GC_unref(vtbl)
-  if not isNil(vtbl.metaObject):
+  if not isNil(vtbl[].metaObject):
     vtbl[].vtbl.metaObject = miqt_exec_callback_cQAccessiblePlugin_metaObject
-  if not isNil(vtbl.metacast):
+  if not isNil(vtbl[].metacast):
     vtbl[].vtbl.metacast = miqt_exec_callback_cQAccessiblePlugin_metacast
-  if not isNil(vtbl.metacall):
+  if not isNil(vtbl[].metacall):
     vtbl[].vtbl.metacall = miqt_exec_callback_cQAccessiblePlugin_metacall
-  if not isNil(vtbl.create):
+  if not isNil(vtbl[].create):
     vtbl[].vtbl.create = miqt_exec_callback_cQAccessiblePlugin_create
-  if not isNil(vtbl.event):
+  if not isNil(vtbl[].event):
     vtbl[].vtbl.event = miqt_exec_callback_cQAccessiblePlugin_event
-  if not isNil(vtbl.eventFilter):
+  if not isNil(vtbl[].eventFilter):
     vtbl[].vtbl.eventFilter = miqt_exec_callback_cQAccessiblePlugin_eventFilter
-  if not isNil(vtbl.timerEvent):
+  if not isNil(vtbl[].timerEvent):
     vtbl[].vtbl.timerEvent = miqt_exec_callback_cQAccessiblePlugin_timerEvent
-  if not isNil(vtbl.childEvent):
+  if not isNil(vtbl[].childEvent):
     vtbl[].vtbl.childEvent = miqt_exec_callback_cQAccessiblePlugin_childEvent
-  if not isNil(vtbl.customEvent):
+  if not isNil(vtbl[].customEvent):
     vtbl[].vtbl.customEvent = miqt_exec_callback_cQAccessiblePlugin_customEvent
-  if not isNil(vtbl.connectNotify):
+  if not isNil(vtbl[].connectNotify):
     vtbl[].vtbl.connectNotify = miqt_exec_callback_cQAccessiblePlugin_connectNotify
-  if not isNil(vtbl.disconnectNotify):
+  if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQAccessiblePlugin_disconnectNotify
-  gen_qaccessibleplugin_types.QAccessiblePlugin(h: fcQAccessiblePlugin_new2(addr(vtbl[]), parent.h))
+  gen_qaccessibleplugin_types.QAccessiblePlugin(h: fcQAccessiblePlugin_new2(addr(vtbl[].vtbl), parent.h), owned: true)
+
+proc create*(T: type gen_qaccessibleplugin_types.QAccessiblePlugin,
+    vtbl: VirtualQAccessiblePlugin) =
+
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQAccessiblePluginVTable, _: ptr cQAccessiblePlugin) {.cdecl.} =
+    let vtbl = cast[ptr typeof(VirtualQAccessiblePlugin()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQAccessiblePlugin, vtbl)))
+    vtbl[].h = nil
+    vtbl[].owned = false
+  vtbl[].vtbl.metaObject = miqt_exec_method_cQAccessiblePlugin_metaObject
+  vtbl[].vtbl.metacast = miqt_exec_method_cQAccessiblePlugin_metacast
+  vtbl[].vtbl.metacall = miqt_exec_method_cQAccessiblePlugin_metacall
+  vtbl[].vtbl.create = miqt_exec_method_cQAccessiblePlugin_create
+  vtbl[].vtbl.event = miqt_exec_method_cQAccessiblePlugin_event
+  vtbl[].vtbl.eventFilter = miqt_exec_method_cQAccessiblePlugin_eventFilter
+  vtbl[].vtbl.timerEvent = miqt_exec_method_cQAccessiblePlugin_timerEvent
+  vtbl[].vtbl.childEvent = miqt_exec_method_cQAccessiblePlugin_childEvent
+  vtbl[].vtbl.customEvent = miqt_exec_method_cQAccessiblePlugin_customEvent
+  vtbl[].vtbl.connectNotify = miqt_exec_method_cQAccessiblePlugin_connectNotify
+  vtbl[].vtbl.disconnectNotify = miqt_exec_method_cQAccessiblePlugin_disconnectNotify
+  if vtbl[].h != nil: delete(move(vtbl[]))
+  vtbl[].h = fcQAccessiblePlugin_new(addr(vtbl[].vtbl), )
+  vtbl[].owned = true
+
+proc create*(T: type gen_qaccessibleplugin_types.QAccessiblePlugin,
+    parent: gen_qobject_types.QObject,
+    vtbl: VirtualQAccessiblePlugin) =
+
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQAccessiblePluginVTable, _: ptr cQAccessiblePlugin) {.cdecl.} =
+    let vtbl = cast[ptr typeof(VirtualQAccessiblePlugin()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQAccessiblePlugin, vtbl)))
+    vtbl[].h = nil
+    vtbl[].owned = false
+  vtbl[].vtbl.metaObject = miqt_exec_method_cQAccessiblePlugin_metaObject
+  vtbl[].vtbl.metacast = miqt_exec_method_cQAccessiblePlugin_metacast
+  vtbl[].vtbl.metacall = miqt_exec_method_cQAccessiblePlugin_metacall
+  vtbl[].vtbl.create = miqt_exec_method_cQAccessiblePlugin_create
+  vtbl[].vtbl.event = miqt_exec_method_cQAccessiblePlugin_event
+  vtbl[].vtbl.eventFilter = miqt_exec_method_cQAccessiblePlugin_eventFilter
+  vtbl[].vtbl.timerEvent = miqt_exec_method_cQAccessiblePlugin_timerEvent
+  vtbl[].vtbl.childEvent = miqt_exec_method_cQAccessiblePlugin_childEvent
+  vtbl[].vtbl.customEvent = miqt_exec_method_cQAccessiblePlugin_customEvent
+  vtbl[].vtbl.connectNotify = miqt_exec_method_cQAccessiblePlugin_connectNotify
+  vtbl[].vtbl.disconnectNotify = miqt_exec_method_cQAccessiblePlugin_disconnectNotify
+  if vtbl[].h != nil: delete(move(vtbl[]))
+  vtbl[].h = fcQAccessiblePlugin_new2(addr(vtbl[].vtbl), parent.h)
+  vtbl[].owned = true
 
 proc staticMetaObject*(_: type gen_qaccessibleplugin_types.QAccessiblePlugin): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQAccessiblePlugin_staticMetaObject())
-proc delete*(self: gen_qaccessibleplugin_types.QAccessiblePlugin) =
-  fcQAccessiblePlugin_delete(self.h)

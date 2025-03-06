@@ -30,7 +30,7 @@ func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
     else:
       copyMem(addr result[0], unsafeAddr v[0], v.len)
 
-const cflags = gorge("pkg-config --cflags Qt5Multimedia")  & " -fPIC"
+const cflags = gorge("pkg-config --cflags Qt5Multimedia") & " -fPIC"
 {.compile("gen_qaudioencodersettingscontrol.cpp", cflags).}
 
 
@@ -71,10 +71,9 @@ proc fcQAudioEncoderSettingsControl_protectedbase_senderSignalIndex(self: pointe
 proc fcQAudioEncoderSettingsControl_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QAudioEncoderSettingsControl_protectedbase_receivers".}
 proc fcQAudioEncoderSettingsControl_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QAudioEncoderSettingsControl_protectedbase_isSignalConnected".}
 proc fcQAudioEncoderSettingsControl_staticMetaObject(): pointer {.importc: "QAudioEncoderSettingsControl_staticMetaObject".}
-proc fcQAudioEncoderSettingsControl_delete(self: pointer) {.importc: "QAudioEncoderSettingsControl_delete".}
 
 proc metaObject*(self: gen_qaudioencodersettingscontrol_types.QAudioEncoderSettingsControl, ): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQAudioEncoderSettingsControl_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQAudioEncoderSettingsControl_metaObject(self.h), owned: false)
 
 proc metacast*(self: gen_qaudioencodersettingscontrol_types.QAudioEncoderSettingsControl, param1: cstring): pointer =
   fcQAudioEncoderSettingsControl_metacast(self.h, param1)
@@ -122,7 +121,7 @@ proc supportedSampleRates*(self: gen_qaudioencodersettingscontrol_types.QAudioEn
   vx_ret
 
 proc audioSettings*(self: gen_qaudioencodersettingscontrol_types.QAudioEncoderSettingsControl, ): gen_qmediaencodersettings_types.QAudioEncoderSettings =
-  gen_qmediaencodersettings_types.QAudioEncoderSettings(h: fcQAudioEncoderSettingsControl_audioSettings(self.h))
+  gen_qmediaencodersettings_types.QAudioEncoderSettings(h: fcQAudioEncoderSettingsControl_audioSettings(self.h), owned: true)
 
 proc setAudioSettings*(self: gen_qaudioencodersettingscontrol_types.QAudioEncoderSettingsControl, settings: gen_qmediaencodersettings_types.QAudioEncoderSettings): void =
   fcQAudioEncoderSettingsControl_setAudioSettings(self.h, settings.h)
@@ -152,7 +151,7 @@ proc trUtf8*(_: type gen_qaudioencodersettingscontrol_types.QAudioEncoderSetting
   vx_ret
 
 proc sender*(self: gen_qaudioencodersettingscontrol_types.QAudioEncoderSettingsControl, ): gen_qobject_types.QObject =
-  gen_qobject_types.QObject(h: fcQAudioEncoderSettingsControl_protectedbase_sender(self.h))
+  gen_qobject_types.QObject(h: fcQAudioEncoderSettingsControl_protectedbase_sender(self.h), owned: false)
 
 proc senderSignalIndex*(self: gen_qaudioencodersettingscontrol_types.QAudioEncoderSettingsControl, ): cint =
   fcQAudioEncoderSettingsControl_protectedbase_senderSignalIndex(self.h)
@@ -165,5 +164,3 @@ proc isSignalConnected*(self: gen_qaudioencodersettingscontrol_types.QAudioEncod
 
 proc staticMetaObject*(_: type gen_qaudioencodersettingscontrol_types.QAudioEncoderSettingsControl): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQAudioEncoderSettingsControl_staticMetaObject())
-proc delete*(self: gen_qaudioencodersettingscontrol_types.QAudioEncoderSettingsControl) =
-  fcQAudioEncoderSettingsControl_delete(self.h)

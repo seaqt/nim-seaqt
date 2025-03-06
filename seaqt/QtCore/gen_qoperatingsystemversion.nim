@@ -30,9 +30,6 @@ func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
     else:
       copyMem(addr result[0], unsafeAddr v[0], v.len)
 
-const cflags = gorge("pkg-config --cflags Qt5Core")  & " -fPIC"
-{.compile("gen_qoperatingsystemversion.cpp", cflags).}
-
 
 type QOperatingSystemVersionOSTypeEnum* = distinct cint
 template Unknown*(_: type QOperatingSystemVersionOSTypeEnum): untyped = 0
@@ -61,10 +58,9 @@ proc fcQOperatingSystemVersion_name(self: pointer, ): struct_miqt_string {.impor
 proc fcQOperatingSystemVersion_new(osType: cint, vmajor: cint): ptr cQOperatingSystemVersion {.importc: "QOperatingSystemVersion_new".}
 proc fcQOperatingSystemVersion_new2(osType: cint, vmajor: cint, vminor: cint): ptr cQOperatingSystemVersion {.importc: "QOperatingSystemVersion_new2".}
 proc fcQOperatingSystemVersion_new3(osType: cint, vmajor: cint, vminor: cint, vmicro: cint): ptr cQOperatingSystemVersion {.importc: "QOperatingSystemVersion_new3".}
-proc fcQOperatingSystemVersion_delete(self: pointer) {.importc: "QOperatingSystemVersion_delete".}
 
 proc current*(_: type gen_qoperatingsystemversion_types.QOperatingSystemVersion, ): gen_qoperatingsystemversion_types.QOperatingSystemVersion =
-  gen_qoperatingsystemversion_types.QOperatingSystemVersion(h: fcQOperatingSystemVersion_current())
+  gen_qoperatingsystemversion_types.QOperatingSystemVersion(h: fcQOperatingSystemVersion_current(), owned: true)
 
 proc currentType*(_: type gen_qoperatingsystemversion_types.QOperatingSystemVersion, ): cint =
   cint(fcQOperatingSystemVersion_currentType())
@@ -92,15 +88,13 @@ proc name*(self: gen_qoperatingsystemversion_types.QOperatingSystemVersion, ): s
 
 proc create*(T: type gen_qoperatingsystemversion_types.QOperatingSystemVersion,
     osType: cint, vmajor: cint): gen_qoperatingsystemversion_types.QOperatingSystemVersion =
-  gen_qoperatingsystemversion_types.QOperatingSystemVersion(h: fcQOperatingSystemVersion_new(cint(osType), vmajor))
+  gen_qoperatingsystemversion_types.QOperatingSystemVersion(h: fcQOperatingSystemVersion_new(cint(osType), vmajor), owned: true)
 
 proc create*(T: type gen_qoperatingsystemversion_types.QOperatingSystemVersion,
     osType: cint, vmajor: cint, vminor: cint): gen_qoperatingsystemversion_types.QOperatingSystemVersion =
-  gen_qoperatingsystemversion_types.QOperatingSystemVersion(h: fcQOperatingSystemVersion_new2(cint(osType), vmajor, vminor))
+  gen_qoperatingsystemversion_types.QOperatingSystemVersion(h: fcQOperatingSystemVersion_new2(cint(osType), vmajor, vminor), owned: true)
 
 proc create*(T: type gen_qoperatingsystemversion_types.QOperatingSystemVersion,
     osType: cint, vmajor: cint, vminor: cint, vmicro: cint): gen_qoperatingsystemversion_types.QOperatingSystemVersion =
-  gen_qoperatingsystemversion_types.QOperatingSystemVersion(h: fcQOperatingSystemVersion_new3(cint(osType), vmajor, vminor, vmicro))
+  gen_qoperatingsystemversion_types.QOperatingSystemVersion(h: fcQOperatingSystemVersion_new3(cint(osType), vmajor, vminor, vmicro), owned: true)
 
-proc delete*(self: gen_qoperatingsystemversion_types.QOperatingSystemVersion) =
-  fcQOperatingSystemVersion_delete(self.h)

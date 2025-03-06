@@ -30,9 +30,6 @@ func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
     else:
       copyMem(addr result[0], unsafeAddr v[0], v.len)
 
-const cflags = gorge("pkg-config --cflags Qt5Qml")  & " -fPIC"
-{.compile("gen_qqmlnetworkaccessmanagerfactory.cpp", cflags).}
-
 
 import ./gen_qqmlnetworkaccessmanagerfactory_types
 export gen_qqmlnetworkaccessmanagerfactory_types
@@ -48,13 +45,10 @@ type cQQmlNetworkAccessManagerFactory*{.exportc: "QQmlNetworkAccessManagerFactor
 
 proc fcQQmlNetworkAccessManagerFactory_create(self: pointer, parent: pointer): pointer {.importc: "QQmlNetworkAccessManagerFactory_create".}
 proc fcQQmlNetworkAccessManagerFactory_operatorAssign(self: pointer, param1: pointer): void {.importc: "QQmlNetworkAccessManagerFactory_operatorAssign".}
-proc fcQQmlNetworkAccessManagerFactory_delete(self: pointer) {.importc: "QQmlNetworkAccessManagerFactory_delete".}
 
 proc create*(self: gen_qqmlnetworkaccessmanagerfactory_types.QQmlNetworkAccessManagerFactory, parent: gen_qobject_types.QObject): gen_qnetworkaccessmanager_types.QNetworkAccessManager =
-  gen_qnetworkaccessmanager_types.QNetworkAccessManager(h: fcQQmlNetworkAccessManagerFactory_create(self.h, parent.h))
+  gen_qnetworkaccessmanager_types.QNetworkAccessManager(h: fcQQmlNetworkAccessManagerFactory_create(self.h, parent.h), owned: false)
 
 proc operatorAssign*(self: gen_qqmlnetworkaccessmanagerfactory_types.QQmlNetworkAccessManagerFactory, param1: gen_qqmlnetworkaccessmanagerfactory_types.QQmlNetworkAccessManagerFactory): void =
   fcQQmlNetworkAccessManagerFactory_operatorAssign(self.h, param1.h)
 
-proc delete*(self: gen_qqmlnetworkaccessmanagerfactory_types.QQmlNetworkAccessManagerFactory) =
-  fcQQmlNetworkAccessManagerFactory_delete(self.h)

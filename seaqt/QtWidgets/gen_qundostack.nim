@@ -30,9 +30,6 @@ func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
     else:
       copyMem(addr result[0], unsafeAddr v[0], v.len)
 
-const cflags = gorge("pkg-config --cflags Qt5Widgets")  & " -fPIC"
-{.compile("gen_qundostack.cpp", cflags).}
-
 
 import ./gen_qundostack_types
 export gen_qundostack_types
@@ -64,7 +61,7 @@ proc fcQUndoCommand_id(self: pointer, ): cint {.importc: "QUndoCommand_id".}
 proc fcQUndoCommand_mergeWith(self: pointer, other: pointer): bool {.importc: "QUndoCommand_mergeWith".}
 proc fcQUndoCommand_childCount(self: pointer, ): cint {.importc: "QUndoCommand_childCount".}
 proc fcQUndoCommand_child(self: pointer, index: cint): pointer {.importc: "QUndoCommand_child".}
-type cQUndoCommandVTable = object
+type cQUndoCommandVTable {.pure.} = object
   destructor*: proc(vtbl: ptr cQUndoCommandVTable, self: ptr cQUndoCommand) {.cdecl, raises:[], gcsafe.}
   undo*: proc(vtbl, self: pointer, ): void {.cdecl, raises: [], gcsafe.}
   redo*: proc(vtbl, self: pointer, ): void {.cdecl, raises: [], gcsafe.}
@@ -78,7 +75,6 @@ proc fcQUndoCommand_new(vtbl: pointer, ): ptr cQUndoCommand {.importc: "QUndoCom
 proc fcQUndoCommand_new2(vtbl: pointer, text: struct_miqt_string): ptr cQUndoCommand {.importc: "QUndoCommand_new2".}
 proc fcQUndoCommand_new3(vtbl: pointer, parent: pointer): ptr cQUndoCommand {.importc: "QUndoCommand_new3".}
 proc fcQUndoCommand_new4(vtbl: pointer, text: struct_miqt_string, parent: pointer): ptr cQUndoCommand {.importc: "QUndoCommand_new4".}
-proc fcQUndoCommand_delete(self: pointer) {.importc: "QUndoCommand_delete".}
 proc fcQUndoStack_metaObject(self: pointer, ): pointer {.importc: "QUndoStack_metaObject".}
 proc fcQUndoStack_metacast(self: pointer, param1: cstring): pointer {.importc: "QUndoStack_metacast".}
 proc fcQUndoStack_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QUndoStack_metacall".}
@@ -128,7 +124,7 @@ proc fcQUndoStack_trUtf83(s: cstring, c: cstring, n: cint): struct_miqt_string {
 proc fcQUndoStack_createUndoAction2(self: pointer, parent: pointer, prefix: struct_miqt_string): pointer {.importc: "QUndoStack_createUndoAction2".}
 proc fcQUndoStack_createRedoAction2(self: pointer, parent: pointer, prefix: struct_miqt_string): pointer {.importc: "QUndoStack_createRedoAction2".}
 proc fcQUndoStack_setActive1(self: pointer, active: bool): void {.importc: "QUndoStack_setActive1".}
-type cQUndoStackVTable = object
+type cQUndoStackVTable {.pure.} = object
   destructor*: proc(vtbl: ptr cQUndoStackVTable, self: ptr cQUndoStack) {.cdecl, raises:[], gcsafe.}
   metaObject*: proc(vtbl, self: pointer, ): pointer {.cdecl, raises: [], gcsafe.}
   metacast*: proc(vtbl, self: pointer, param1: cstring): pointer {.cdecl, raises: [], gcsafe.}
@@ -157,7 +153,6 @@ proc fcQUndoStack_protectedbase_isSignalConnected(self: pointer, signal: pointer
 proc fcQUndoStack_new(vtbl: pointer, ): ptr cQUndoStack {.importc: "QUndoStack_new".}
 proc fcQUndoStack_new2(vtbl: pointer, parent: pointer): ptr cQUndoStack {.importc: "QUndoStack_new2".}
 proc fcQUndoStack_staticMetaObject(): pointer {.importc: "QUndoStack_staticMetaObject".}
-proc fcQUndoStack_delete(self: pointer) {.importc: "QUndoStack_delete".}
 
 proc undo*(self: gen_qundostack_types.QUndoCommand, ): void =
   fcQUndoCommand_undo(self.h)
@@ -196,13 +191,13 @@ proc childCount*(self: gen_qundostack_types.QUndoCommand, ): cint =
   fcQUndoCommand_childCount(self.h)
 
 proc child*(self: gen_qundostack_types.QUndoCommand, index: cint): gen_qundostack_types.QUndoCommand =
-  gen_qundostack_types.QUndoCommand(h: fcQUndoCommand_child(self.h, index))
+  gen_qundostack_types.QUndoCommand(h: fcQUndoCommand_child(self.h, index), owned: false)
 
 type QUndoCommandundoProc* = proc(self: QUndoCommand): void {.raises: [], gcsafe.}
 type QUndoCommandredoProc* = proc(self: QUndoCommand): void {.raises: [], gcsafe.}
 type QUndoCommandidProc* = proc(self: QUndoCommand): cint {.raises: [], gcsafe.}
 type QUndoCommandmergeWithProc* = proc(self: QUndoCommand, other: gen_qundostack_types.QUndoCommand): bool {.raises: [], gcsafe.}
-type QUndoCommandVTable* = object
+type QUndoCommandVTable* {.inheritable, pure.} = object
   vtbl: cQUndoCommandVTable
   undo*: QUndoCommandundoProc
   redo*: QUndoCommandredoProc
@@ -239,85 +234,175 @@ proc QUndoCommandmergeWith*(self: gen_qundostack_types.QUndoCommand, other: gen_
 proc miqt_exec_callback_cQUndoCommand_mergeWith(vtbl: pointer, self: pointer, other: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QUndoCommandVTable](vtbl)
   let self = QUndoCommand(h: self)
-  let slotval1 = gen_qundostack_types.QUndoCommand(h: other)
+  let slotval1 = gen_qundostack_types.QUndoCommand(h: other, owned: false)
   var virtualReturn = vtbl[].mergeWith(self, slotval1)
+  virtualReturn
+
+type VirtualQUndoCommand* {.inheritable.} = ref object of QUndoCommand
+  vtbl*: cQUndoCommandVTable
+method undo*(self: VirtualQUndoCommand, ): void {.base.} =
+  QUndoCommandundo(self[])
+proc miqt_exec_method_cQUndoCommand_undo(vtbl: pointer, inst: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQUndoCommand](cast[uint](vtbl) - uint(offsetOf(VirtualQUndoCommand, vtbl)))
+  vtbl.undo()
+
+method redo*(self: VirtualQUndoCommand, ): void {.base.} =
+  QUndoCommandredo(self[])
+proc miqt_exec_method_cQUndoCommand_redo(vtbl: pointer, inst: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQUndoCommand](cast[uint](vtbl) - uint(offsetOf(VirtualQUndoCommand, vtbl)))
+  vtbl.redo()
+
+method id*(self: VirtualQUndoCommand, ): cint {.base.} =
+  QUndoCommandid(self[])
+proc miqt_exec_method_cQUndoCommand_id(vtbl: pointer, inst: pointer): cint {.cdecl.} =
+  let vtbl = cast[VirtualQUndoCommand](cast[uint](vtbl) - uint(offsetOf(VirtualQUndoCommand, vtbl)))
+  var virtualReturn = vtbl.id()
+  virtualReturn
+
+method mergeWith*(self: VirtualQUndoCommand, other: gen_qundostack_types.QUndoCommand): bool {.base.} =
+  QUndoCommandmergeWith(self[], other)
+proc miqt_exec_method_cQUndoCommand_mergeWith(vtbl: pointer, inst: pointer, other: pointer): bool {.cdecl.} =
+  let vtbl = cast[VirtualQUndoCommand](cast[uint](vtbl) - uint(offsetOf(VirtualQUndoCommand, vtbl)))
+  let slotval1 = gen_qundostack_types.QUndoCommand(h: other, owned: false)
+  var virtualReturn = vtbl.mergeWith(slotval1)
   virtualReturn
 
 proc create*(T: type gen_qundostack_types.QUndoCommand,
     vtbl: ref QUndoCommandVTable = nil): gen_qundostack_types.QUndoCommand =
   let vtbl = if vtbl == nil: new QUndoCommandVTable else: vtbl
   GC_ref(vtbl)
-  vtbl.vtbl.destructor = proc(vtbl: ptr cQUndoCommandVTable, _: ptr cQUndoCommand) {.cdecl.} =
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQUndoCommandVTable, _: ptr cQUndoCommand) {.cdecl.} =
     let vtbl = cast[ref QUndoCommandVTable](vtbl)
     GC_unref(vtbl)
-  if not isNil(vtbl.undo):
+  if not isNil(vtbl[].undo):
     vtbl[].vtbl.undo = miqt_exec_callback_cQUndoCommand_undo
-  if not isNil(vtbl.redo):
+  if not isNil(vtbl[].redo):
     vtbl[].vtbl.redo = miqt_exec_callback_cQUndoCommand_redo
-  if not isNil(vtbl.id):
+  if not isNil(vtbl[].id):
     vtbl[].vtbl.id = miqt_exec_callback_cQUndoCommand_id
-  if not isNil(vtbl.mergeWith):
+  if not isNil(vtbl[].mergeWith):
     vtbl[].vtbl.mergeWith = miqt_exec_callback_cQUndoCommand_mergeWith
-  gen_qundostack_types.QUndoCommand(h: fcQUndoCommand_new(addr(vtbl[]), ))
+  gen_qundostack_types.QUndoCommand(h: fcQUndoCommand_new(addr(vtbl[].vtbl), ), owned: true)
 
 proc create*(T: type gen_qundostack_types.QUndoCommand,
     text: string,
     vtbl: ref QUndoCommandVTable = nil): gen_qundostack_types.QUndoCommand =
   let vtbl = if vtbl == nil: new QUndoCommandVTable else: vtbl
   GC_ref(vtbl)
-  vtbl.vtbl.destructor = proc(vtbl: ptr cQUndoCommandVTable, _: ptr cQUndoCommand) {.cdecl.} =
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQUndoCommandVTable, _: ptr cQUndoCommand) {.cdecl.} =
     let vtbl = cast[ref QUndoCommandVTable](vtbl)
     GC_unref(vtbl)
-  if not isNil(vtbl.undo):
+  if not isNil(vtbl[].undo):
     vtbl[].vtbl.undo = miqt_exec_callback_cQUndoCommand_undo
-  if not isNil(vtbl.redo):
+  if not isNil(vtbl[].redo):
     vtbl[].vtbl.redo = miqt_exec_callback_cQUndoCommand_redo
-  if not isNil(vtbl.id):
+  if not isNil(vtbl[].id):
     vtbl[].vtbl.id = miqt_exec_callback_cQUndoCommand_id
-  if not isNil(vtbl.mergeWith):
+  if not isNil(vtbl[].mergeWith):
     vtbl[].vtbl.mergeWith = miqt_exec_callback_cQUndoCommand_mergeWith
-  gen_qundostack_types.QUndoCommand(h: fcQUndoCommand_new2(addr(vtbl[]), struct_miqt_string(data: text, len: csize_t(len(text)))))
+  gen_qundostack_types.QUndoCommand(h: fcQUndoCommand_new2(addr(vtbl[].vtbl), struct_miqt_string(data: text, len: csize_t(len(text)))), owned: true)
 
 proc create*(T: type gen_qundostack_types.QUndoCommand,
     parent: gen_qundostack_types.QUndoCommand,
     vtbl: ref QUndoCommandVTable = nil): gen_qundostack_types.QUndoCommand =
   let vtbl = if vtbl == nil: new QUndoCommandVTable else: vtbl
   GC_ref(vtbl)
-  vtbl.vtbl.destructor = proc(vtbl: ptr cQUndoCommandVTable, _: ptr cQUndoCommand) {.cdecl.} =
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQUndoCommandVTable, _: ptr cQUndoCommand) {.cdecl.} =
     let vtbl = cast[ref QUndoCommandVTable](vtbl)
     GC_unref(vtbl)
-  if not isNil(vtbl.undo):
+  if not isNil(vtbl[].undo):
     vtbl[].vtbl.undo = miqt_exec_callback_cQUndoCommand_undo
-  if not isNil(vtbl.redo):
+  if not isNil(vtbl[].redo):
     vtbl[].vtbl.redo = miqt_exec_callback_cQUndoCommand_redo
-  if not isNil(vtbl.id):
+  if not isNil(vtbl[].id):
     vtbl[].vtbl.id = miqt_exec_callback_cQUndoCommand_id
-  if not isNil(vtbl.mergeWith):
+  if not isNil(vtbl[].mergeWith):
     vtbl[].vtbl.mergeWith = miqt_exec_callback_cQUndoCommand_mergeWith
-  gen_qundostack_types.QUndoCommand(h: fcQUndoCommand_new3(addr(vtbl[]), parent.h))
+  gen_qundostack_types.QUndoCommand(h: fcQUndoCommand_new3(addr(vtbl[].vtbl), parent.h), owned: true)
 
 proc create*(T: type gen_qundostack_types.QUndoCommand,
     text: string, parent: gen_qundostack_types.QUndoCommand,
     vtbl: ref QUndoCommandVTable = nil): gen_qundostack_types.QUndoCommand =
   let vtbl = if vtbl == nil: new QUndoCommandVTable else: vtbl
   GC_ref(vtbl)
-  vtbl.vtbl.destructor = proc(vtbl: ptr cQUndoCommandVTable, _: ptr cQUndoCommand) {.cdecl.} =
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQUndoCommandVTable, _: ptr cQUndoCommand) {.cdecl.} =
     let vtbl = cast[ref QUndoCommandVTable](vtbl)
     GC_unref(vtbl)
-  if not isNil(vtbl.undo):
+  if not isNil(vtbl[].undo):
     vtbl[].vtbl.undo = miqt_exec_callback_cQUndoCommand_undo
-  if not isNil(vtbl.redo):
+  if not isNil(vtbl[].redo):
     vtbl[].vtbl.redo = miqt_exec_callback_cQUndoCommand_redo
-  if not isNil(vtbl.id):
+  if not isNil(vtbl[].id):
     vtbl[].vtbl.id = miqt_exec_callback_cQUndoCommand_id
-  if not isNil(vtbl.mergeWith):
+  if not isNil(vtbl[].mergeWith):
     vtbl[].vtbl.mergeWith = miqt_exec_callback_cQUndoCommand_mergeWith
-  gen_qundostack_types.QUndoCommand(h: fcQUndoCommand_new4(addr(vtbl[]), struct_miqt_string(data: text, len: csize_t(len(text))), parent.h))
+  gen_qundostack_types.QUndoCommand(h: fcQUndoCommand_new4(addr(vtbl[].vtbl), struct_miqt_string(data: text, len: csize_t(len(text))), parent.h), owned: true)
 
-proc delete*(self: gen_qundostack_types.QUndoCommand) =
-  fcQUndoCommand_delete(self.h)
+proc create*(T: type gen_qundostack_types.QUndoCommand,
+    vtbl: VirtualQUndoCommand) =
+
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQUndoCommandVTable, _: ptr cQUndoCommand) {.cdecl.} =
+    let vtbl = cast[ptr typeof(VirtualQUndoCommand()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQUndoCommand, vtbl)))
+    vtbl[].h = nil
+    vtbl[].owned = false
+  vtbl[].vtbl.undo = miqt_exec_method_cQUndoCommand_undo
+  vtbl[].vtbl.redo = miqt_exec_method_cQUndoCommand_redo
+  vtbl[].vtbl.id = miqt_exec_method_cQUndoCommand_id
+  vtbl[].vtbl.mergeWith = miqt_exec_method_cQUndoCommand_mergeWith
+  if vtbl[].h != nil: delete(move(vtbl[]))
+  vtbl[].h = fcQUndoCommand_new(addr(vtbl[].vtbl), )
+  vtbl[].owned = true
+
+proc create*(T: type gen_qundostack_types.QUndoCommand,
+    text: string,
+    vtbl: VirtualQUndoCommand) =
+
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQUndoCommandVTable, _: ptr cQUndoCommand) {.cdecl.} =
+    let vtbl = cast[ptr typeof(VirtualQUndoCommand()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQUndoCommand, vtbl)))
+    vtbl[].h = nil
+    vtbl[].owned = false
+  vtbl[].vtbl.undo = miqt_exec_method_cQUndoCommand_undo
+  vtbl[].vtbl.redo = miqt_exec_method_cQUndoCommand_redo
+  vtbl[].vtbl.id = miqt_exec_method_cQUndoCommand_id
+  vtbl[].vtbl.mergeWith = miqt_exec_method_cQUndoCommand_mergeWith
+  if vtbl[].h != nil: delete(move(vtbl[]))
+  vtbl[].h = fcQUndoCommand_new2(addr(vtbl[].vtbl), struct_miqt_string(data: text, len: csize_t(len(text))))
+  vtbl[].owned = true
+
+proc create*(T: type gen_qundostack_types.QUndoCommand,
+    parent: gen_qundostack_types.QUndoCommand,
+    vtbl: VirtualQUndoCommand) =
+
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQUndoCommandVTable, _: ptr cQUndoCommand) {.cdecl.} =
+    let vtbl = cast[ptr typeof(VirtualQUndoCommand()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQUndoCommand, vtbl)))
+    vtbl[].h = nil
+    vtbl[].owned = false
+  vtbl[].vtbl.undo = miqt_exec_method_cQUndoCommand_undo
+  vtbl[].vtbl.redo = miqt_exec_method_cQUndoCommand_redo
+  vtbl[].vtbl.id = miqt_exec_method_cQUndoCommand_id
+  vtbl[].vtbl.mergeWith = miqt_exec_method_cQUndoCommand_mergeWith
+  if vtbl[].h != nil: delete(move(vtbl[]))
+  vtbl[].h = fcQUndoCommand_new3(addr(vtbl[].vtbl), parent.h)
+  vtbl[].owned = true
+
+proc create*(T: type gen_qundostack_types.QUndoCommand,
+    text: string, parent: gen_qundostack_types.QUndoCommand,
+    vtbl: VirtualQUndoCommand) =
+
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQUndoCommandVTable, _: ptr cQUndoCommand) {.cdecl.} =
+    let vtbl = cast[ptr typeof(VirtualQUndoCommand()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQUndoCommand, vtbl)))
+    vtbl[].h = nil
+    vtbl[].owned = false
+  vtbl[].vtbl.undo = miqt_exec_method_cQUndoCommand_undo
+  vtbl[].vtbl.redo = miqt_exec_method_cQUndoCommand_redo
+  vtbl[].vtbl.id = miqt_exec_method_cQUndoCommand_id
+  vtbl[].vtbl.mergeWith = miqt_exec_method_cQUndoCommand_mergeWith
+  if vtbl[].h != nil: delete(move(vtbl[]))
+  vtbl[].h = fcQUndoCommand_new4(addr(vtbl[].vtbl), struct_miqt_string(data: text, len: csize_t(len(text))), parent.h)
+  vtbl[].owned = true
+
 proc metaObject*(self: gen_qundostack_types.QUndoStack, ): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQUndoStack_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQUndoStack_metaObject(self.h), owned: false)
 
 proc metacast*(self: gen_qundostack_types.QUndoStack, param1: cstring): pointer =
   fcQUndoStack_metacast(self.h, param1)
@@ -374,10 +459,10 @@ proc text*(self: gen_qundostack_types.QUndoStack, idx: cint): string =
   vx_ret
 
 proc createUndoAction*(self: gen_qundostack_types.QUndoStack, parent: gen_qobject_types.QObject): gen_qaction_types.QAction =
-  gen_qaction_types.QAction(h: fcQUndoStack_createUndoAction(self.h, parent.h))
+  gen_qaction_types.QAction(h: fcQUndoStack_createUndoAction(self.h, parent.h), owned: false)
 
 proc createRedoAction*(self: gen_qundostack_types.QUndoStack, parent: gen_qobject_types.QObject): gen_qaction_types.QAction =
-  gen_qaction_types.QAction(h: fcQUndoStack_createRedoAction(self.h, parent.h))
+  gen_qaction_types.QAction(h: fcQUndoStack_createRedoAction(self.h, parent.h), owned: false)
 
 proc isActive*(self: gen_qundostack_types.QUndoStack, ): bool =
   fcQUndoStack_isActive(self.h)
@@ -401,7 +486,7 @@ proc undoLimit*(self: gen_qundostack_types.QUndoStack, ): cint =
   fcQUndoStack_undoLimit(self.h)
 
 proc command*(self: gen_qundostack_types.QUndoStack, index: cint): gen_qundostack_types.QUndoCommand =
-  gen_qundostack_types.QUndoCommand(h: fcQUndoStack_command(self.h, index))
+  gen_qundostack_types.QUndoCommand(h: fcQUndoStack_command(self.h, index), owned: false)
 
 proc setClean*(self: gen_qundostack_types.QUndoStack, ): void =
   fcQUndoStack_setClean(self.h)
@@ -572,10 +657,10 @@ proc trUtf8*(_: type gen_qundostack_types.QUndoStack, s: cstring, c: cstring, n:
   vx_ret
 
 proc createUndoAction*(self: gen_qundostack_types.QUndoStack, parent: gen_qobject_types.QObject, prefix: string): gen_qaction_types.QAction =
-  gen_qaction_types.QAction(h: fcQUndoStack_createUndoAction2(self.h, parent.h, struct_miqt_string(data: prefix, len: csize_t(len(prefix)))))
+  gen_qaction_types.QAction(h: fcQUndoStack_createUndoAction2(self.h, parent.h, struct_miqt_string(data: prefix, len: csize_t(len(prefix)))), owned: false)
 
 proc createRedoAction*(self: gen_qundostack_types.QUndoStack, parent: gen_qobject_types.QObject, prefix: string): gen_qaction_types.QAction =
-  gen_qaction_types.QAction(h: fcQUndoStack_createRedoAction2(self.h, parent.h, struct_miqt_string(data: prefix, len: csize_t(len(prefix)))))
+  gen_qaction_types.QAction(h: fcQUndoStack_createRedoAction2(self.h, parent.h, struct_miqt_string(data: prefix, len: csize_t(len(prefix)))), owned: false)
 
 proc setActive*(self: gen_qundostack_types.QUndoStack, active: bool): void =
   fcQUndoStack_setActive1(self.h, active)
@@ -590,7 +675,7 @@ type QUndoStackchildEventProc* = proc(self: QUndoStack, event: gen_qcoreevent_ty
 type QUndoStackcustomEventProc* = proc(self: QUndoStack, event: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
 type QUndoStackconnectNotifyProc* = proc(self: QUndoStack, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
 type QUndoStackdisconnectNotifyProc* = proc(self: QUndoStack, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
-type QUndoStackVTable* = object
+type QUndoStackVTable* {.inheritable, pure.} = object
   vtbl: cQUndoStackVTable
   metaObject*: QUndoStackmetaObjectProc
   metacast*: QUndoStackmetacastProc
@@ -603,13 +688,16 @@ type QUndoStackVTable* = object
   connectNotify*: QUndoStackconnectNotifyProc
   disconnectNotify*: QUndoStackdisconnectNotifyProc
 proc QUndoStackmetaObject*(self: gen_qundostack_types.QUndoStack, ): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQUndoStack_virtualbase_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQUndoStack_virtualbase_metaObject(self.h), owned: false)
 
 proc miqt_exec_callback_cQUndoStack_metaObject(vtbl: pointer, self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QUndoStackVTable](vtbl)
   let self = QUndoStack(h: self)
   var virtualReturn = vtbl[].metaObject(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QUndoStackmetacast*(self: gen_qundostack_types.QUndoStack, param1: cstring): pointer =
   fcQUndoStack_virtualbase_metacast(self.h, param1)
@@ -639,7 +727,7 @@ proc QUndoStackevent*(self: gen_qundostack_types.QUndoStack, event: gen_qcoreeve
 proc miqt_exec_callback_cQUndoStack_event(vtbl: pointer, self: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QUndoStackVTable](vtbl)
   let self = QUndoStack(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].event(self, slotval1)
   virtualReturn
 
@@ -649,8 +737,8 @@ proc QUndoStackeventFilter*(self: gen_qundostack_types.QUndoStack, watched: gen_
 proc miqt_exec_callback_cQUndoStack_eventFilter(vtbl: pointer, self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QUndoStackVTable](vtbl)
   let self = QUndoStack(h: self)
-  let slotval1 = gen_qobject_types.QObject(h: watched)
-  let slotval2 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].eventFilter(self, slotval1, slotval2)
   virtualReturn
 
@@ -660,7 +748,7 @@ proc QUndoStacktimerEvent*(self: gen_qundostack_types.QUndoStack, event: gen_qco
 proc miqt_exec_callback_cQUndoStack_timerEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QUndoStackVTable](vtbl)
   let self = QUndoStack(h: self)
-  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   vtbl[].timerEvent(self, slotval1)
 
 proc QUndoStackchildEvent*(self: gen_qundostack_types.QUndoStack, event: gen_qcoreevent_types.QChildEvent): void =
@@ -669,7 +757,7 @@ proc QUndoStackchildEvent*(self: gen_qundostack_types.QUndoStack, event: gen_qco
 proc miqt_exec_callback_cQUndoStack_childEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QUndoStackVTable](vtbl)
   let self = QUndoStack(h: self)
-  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   vtbl[].childEvent(self, slotval1)
 
 proc QUndoStackcustomEvent*(self: gen_qundostack_types.QUndoStack, event: gen_qcoreevent_types.QEvent): void =
@@ -678,7 +766,7 @@ proc QUndoStackcustomEvent*(self: gen_qundostack_types.QUndoStack, event: gen_qc
 proc miqt_exec_callback_cQUndoStack_customEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QUndoStackVTable](vtbl)
   let self = QUndoStack(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].customEvent(self, slotval1)
 
 proc QUndoStackconnectNotify*(self: gen_qundostack_types.QUndoStack, signal: gen_qmetaobject_types.QMetaMethod): void =
@@ -687,7 +775,7 @@ proc QUndoStackconnectNotify*(self: gen_qundostack_types.QUndoStack, signal: gen
 proc miqt_exec_callback_cQUndoStack_connectNotify(vtbl: pointer, self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QUndoStackVTable](vtbl)
   let self = QUndoStack(h: self)
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].connectNotify(self, slotval1)
 
 proc QUndoStackdisconnectNotify*(self: gen_qundostack_types.QUndoStack, signal: gen_qmetaobject_types.QMetaMethod): void =
@@ -696,11 +784,93 @@ proc QUndoStackdisconnectNotify*(self: gen_qundostack_types.QUndoStack, signal: 
 proc miqt_exec_callback_cQUndoStack_disconnectNotify(vtbl: pointer, self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QUndoStackVTable](vtbl)
   let self = QUndoStack(h: self)
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].disconnectNotify(self, slotval1)
 
+type VirtualQUndoStack* {.inheritable.} = ref object of QUndoStack
+  vtbl*: cQUndoStackVTable
+method metaObject*(self: VirtualQUndoStack, ): gen_qobjectdefs_types.QMetaObject {.base.} =
+  QUndoStackmetaObject(self[])
+proc miqt_exec_method_cQUndoStack_metaObject(vtbl: pointer, inst: pointer): pointer {.cdecl.} =
+  let vtbl = cast[VirtualQUndoStack](cast[uint](vtbl) - uint(offsetOf(VirtualQUndoStack, vtbl)))
+  var virtualReturn = vtbl.metaObject()
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
+
+method metacast*(self: VirtualQUndoStack, param1: cstring): pointer {.base.} =
+  QUndoStackmetacast(self[], param1)
+proc miqt_exec_method_cQUndoStack_metacast(vtbl: pointer, inst: pointer, param1: cstring): pointer {.cdecl.} =
+  let vtbl = cast[VirtualQUndoStack](cast[uint](vtbl) - uint(offsetOf(VirtualQUndoStack, vtbl)))
+  let slotval1 = (param1)
+  var virtualReturn = vtbl.metacast(slotval1)
+  virtualReturn
+
+method metacall*(self: VirtualQUndoStack, param1: cint, param2: cint, param3: pointer): cint {.base.} =
+  QUndoStackmetacall(self[], param1, param2, param3)
+proc miqt_exec_method_cQUndoStack_metacall(vtbl: pointer, inst: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
+  let vtbl = cast[VirtualQUndoStack](cast[uint](vtbl) - uint(offsetOf(VirtualQUndoStack, vtbl)))
+  let slotval1 = cint(param1)
+  let slotval2 = param2
+  let slotval3 = param3
+  var virtualReturn = vtbl.metacall(slotval1, slotval2, slotval3)
+  virtualReturn
+
+method event*(self: VirtualQUndoStack, event: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QUndoStackevent(self[], event)
+proc miqt_exec_method_cQUndoStack_event(vtbl: pointer, inst: pointer, event: pointer): bool {.cdecl.} =
+  let vtbl = cast[VirtualQUndoStack](cast[uint](vtbl) - uint(offsetOf(VirtualQUndoStack, vtbl)))
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
+  var virtualReturn = vtbl.event(slotval1)
+  virtualReturn
+
+method eventFilter*(self: VirtualQUndoStack, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QUndoStackeventFilter(self[], watched, event)
+proc miqt_exec_method_cQUndoStack_eventFilter(vtbl: pointer, inst: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
+  let vtbl = cast[VirtualQUndoStack](cast[uint](vtbl) - uint(offsetOf(VirtualQUndoStack, vtbl)))
+  let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
+  var virtualReturn = vtbl.eventFilter(slotval1, slotval2)
+  virtualReturn
+
+method timerEvent*(self: VirtualQUndoStack, event: gen_qcoreevent_types.QTimerEvent): void {.base.} =
+  QUndoStacktimerEvent(self[], event)
+proc miqt_exec_method_cQUndoStack_timerEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQUndoStack](cast[uint](vtbl) - uint(offsetOf(VirtualQUndoStack, vtbl)))
+  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
+  vtbl.timerEvent(slotval1)
+
+method childEvent*(self: VirtualQUndoStack, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
+  QUndoStackchildEvent(self[], event)
+proc miqt_exec_method_cQUndoStack_childEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQUndoStack](cast[uint](vtbl) - uint(offsetOf(VirtualQUndoStack, vtbl)))
+  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
+  vtbl.childEvent(slotval1)
+
+method customEvent*(self: VirtualQUndoStack, event: gen_qcoreevent_types.QEvent): void {.base.} =
+  QUndoStackcustomEvent(self[], event)
+proc miqt_exec_method_cQUndoStack_customEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQUndoStack](cast[uint](vtbl) - uint(offsetOf(VirtualQUndoStack, vtbl)))
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
+  vtbl.customEvent(slotval1)
+
+method connectNotify*(self: VirtualQUndoStack, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QUndoStackconnectNotify(self[], signal)
+proc miqt_exec_method_cQUndoStack_connectNotify(vtbl: pointer, inst: pointer, signal: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQUndoStack](cast[uint](vtbl) - uint(offsetOf(VirtualQUndoStack, vtbl)))
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
+  vtbl.connectNotify(slotval1)
+
+method disconnectNotify*(self: VirtualQUndoStack, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QUndoStackdisconnectNotify(self[], signal)
+proc miqt_exec_method_cQUndoStack_disconnectNotify(vtbl: pointer, inst: pointer, signal: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQUndoStack](cast[uint](vtbl) - uint(offsetOf(VirtualQUndoStack, vtbl)))
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
+  vtbl.disconnectNotify(slotval1)
+
 proc sender*(self: gen_qundostack_types.QUndoStack, ): gen_qobject_types.QObject =
-  gen_qobject_types.QObject(h: fcQUndoStack_protectedbase_sender(self.h))
+  gen_qobject_types.QObject(h: fcQUndoStack_protectedbase_sender(self.h), owned: false)
 
 proc senderSignalIndex*(self: gen_qundostack_types.QUndoStack, ): cint =
   fcQUndoStack_protectedbase_senderSignalIndex(self.h)
@@ -715,62 +885,103 @@ proc create*(T: type gen_qundostack_types.QUndoStack,
     vtbl: ref QUndoStackVTable = nil): gen_qundostack_types.QUndoStack =
   let vtbl = if vtbl == nil: new QUndoStackVTable else: vtbl
   GC_ref(vtbl)
-  vtbl.vtbl.destructor = proc(vtbl: ptr cQUndoStackVTable, _: ptr cQUndoStack) {.cdecl.} =
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQUndoStackVTable, _: ptr cQUndoStack) {.cdecl.} =
     let vtbl = cast[ref QUndoStackVTable](vtbl)
     GC_unref(vtbl)
-  if not isNil(vtbl.metaObject):
+  if not isNil(vtbl[].metaObject):
     vtbl[].vtbl.metaObject = miqt_exec_callback_cQUndoStack_metaObject
-  if not isNil(vtbl.metacast):
+  if not isNil(vtbl[].metacast):
     vtbl[].vtbl.metacast = miqt_exec_callback_cQUndoStack_metacast
-  if not isNil(vtbl.metacall):
+  if not isNil(vtbl[].metacall):
     vtbl[].vtbl.metacall = miqt_exec_callback_cQUndoStack_metacall
-  if not isNil(vtbl.event):
+  if not isNil(vtbl[].event):
     vtbl[].vtbl.event = miqt_exec_callback_cQUndoStack_event
-  if not isNil(vtbl.eventFilter):
+  if not isNil(vtbl[].eventFilter):
     vtbl[].vtbl.eventFilter = miqt_exec_callback_cQUndoStack_eventFilter
-  if not isNil(vtbl.timerEvent):
+  if not isNil(vtbl[].timerEvent):
     vtbl[].vtbl.timerEvent = miqt_exec_callback_cQUndoStack_timerEvent
-  if not isNil(vtbl.childEvent):
+  if not isNil(vtbl[].childEvent):
     vtbl[].vtbl.childEvent = miqt_exec_callback_cQUndoStack_childEvent
-  if not isNil(vtbl.customEvent):
+  if not isNil(vtbl[].customEvent):
     vtbl[].vtbl.customEvent = miqt_exec_callback_cQUndoStack_customEvent
-  if not isNil(vtbl.connectNotify):
+  if not isNil(vtbl[].connectNotify):
     vtbl[].vtbl.connectNotify = miqt_exec_callback_cQUndoStack_connectNotify
-  if not isNil(vtbl.disconnectNotify):
+  if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQUndoStack_disconnectNotify
-  gen_qundostack_types.QUndoStack(h: fcQUndoStack_new(addr(vtbl[]), ))
+  gen_qundostack_types.QUndoStack(h: fcQUndoStack_new(addr(vtbl[].vtbl), ), owned: true)
 
 proc create*(T: type gen_qundostack_types.QUndoStack,
     parent: gen_qobject_types.QObject,
     vtbl: ref QUndoStackVTable = nil): gen_qundostack_types.QUndoStack =
   let vtbl = if vtbl == nil: new QUndoStackVTable else: vtbl
   GC_ref(vtbl)
-  vtbl.vtbl.destructor = proc(vtbl: ptr cQUndoStackVTable, _: ptr cQUndoStack) {.cdecl.} =
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQUndoStackVTable, _: ptr cQUndoStack) {.cdecl.} =
     let vtbl = cast[ref QUndoStackVTable](vtbl)
     GC_unref(vtbl)
-  if not isNil(vtbl.metaObject):
+  if not isNil(vtbl[].metaObject):
     vtbl[].vtbl.metaObject = miqt_exec_callback_cQUndoStack_metaObject
-  if not isNil(vtbl.metacast):
+  if not isNil(vtbl[].metacast):
     vtbl[].vtbl.metacast = miqt_exec_callback_cQUndoStack_metacast
-  if not isNil(vtbl.metacall):
+  if not isNil(vtbl[].metacall):
     vtbl[].vtbl.metacall = miqt_exec_callback_cQUndoStack_metacall
-  if not isNil(vtbl.event):
+  if not isNil(vtbl[].event):
     vtbl[].vtbl.event = miqt_exec_callback_cQUndoStack_event
-  if not isNil(vtbl.eventFilter):
+  if not isNil(vtbl[].eventFilter):
     vtbl[].vtbl.eventFilter = miqt_exec_callback_cQUndoStack_eventFilter
-  if not isNil(vtbl.timerEvent):
+  if not isNil(vtbl[].timerEvent):
     vtbl[].vtbl.timerEvent = miqt_exec_callback_cQUndoStack_timerEvent
-  if not isNil(vtbl.childEvent):
+  if not isNil(vtbl[].childEvent):
     vtbl[].vtbl.childEvent = miqt_exec_callback_cQUndoStack_childEvent
-  if not isNil(vtbl.customEvent):
+  if not isNil(vtbl[].customEvent):
     vtbl[].vtbl.customEvent = miqt_exec_callback_cQUndoStack_customEvent
-  if not isNil(vtbl.connectNotify):
+  if not isNil(vtbl[].connectNotify):
     vtbl[].vtbl.connectNotify = miqt_exec_callback_cQUndoStack_connectNotify
-  if not isNil(vtbl.disconnectNotify):
+  if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQUndoStack_disconnectNotify
-  gen_qundostack_types.QUndoStack(h: fcQUndoStack_new2(addr(vtbl[]), parent.h))
+  gen_qundostack_types.QUndoStack(h: fcQUndoStack_new2(addr(vtbl[].vtbl), parent.h), owned: true)
+
+proc create*(T: type gen_qundostack_types.QUndoStack,
+    vtbl: VirtualQUndoStack) =
+
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQUndoStackVTable, _: ptr cQUndoStack) {.cdecl.} =
+    let vtbl = cast[ptr typeof(VirtualQUndoStack()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQUndoStack, vtbl)))
+    vtbl[].h = nil
+    vtbl[].owned = false
+  vtbl[].vtbl.metaObject = miqt_exec_method_cQUndoStack_metaObject
+  vtbl[].vtbl.metacast = miqt_exec_method_cQUndoStack_metacast
+  vtbl[].vtbl.metacall = miqt_exec_method_cQUndoStack_metacall
+  vtbl[].vtbl.event = miqt_exec_method_cQUndoStack_event
+  vtbl[].vtbl.eventFilter = miqt_exec_method_cQUndoStack_eventFilter
+  vtbl[].vtbl.timerEvent = miqt_exec_method_cQUndoStack_timerEvent
+  vtbl[].vtbl.childEvent = miqt_exec_method_cQUndoStack_childEvent
+  vtbl[].vtbl.customEvent = miqt_exec_method_cQUndoStack_customEvent
+  vtbl[].vtbl.connectNotify = miqt_exec_method_cQUndoStack_connectNotify
+  vtbl[].vtbl.disconnectNotify = miqt_exec_method_cQUndoStack_disconnectNotify
+  if vtbl[].h != nil: delete(move(vtbl[]))
+  vtbl[].h = fcQUndoStack_new(addr(vtbl[].vtbl), )
+  vtbl[].owned = true
+
+proc create*(T: type gen_qundostack_types.QUndoStack,
+    parent: gen_qobject_types.QObject,
+    vtbl: VirtualQUndoStack) =
+
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQUndoStackVTable, _: ptr cQUndoStack) {.cdecl.} =
+    let vtbl = cast[ptr typeof(VirtualQUndoStack()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQUndoStack, vtbl)))
+    vtbl[].h = nil
+    vtbl[].owned = false
+  vtbl[].vtbl.metaObject = miqt_exec_method_cQUndoStack_metaObject
+  vtbl[].vtbl.metacast = miqt_exec_method_cQUndoStack_metacast
+  vtbl[].vtbl.metacall = miqt_exec_method_cQUndoStack_metacall
+  vtbl[].vtbl.event = miqt_exec_method_cQUndoStack_event
+  vtbl[].vtbl.eventFilter = miqt_exec_method_cQUndoStack_eventFilter
+  vtbl[].vtbl.timerEvent = miqt_exec_method_cQUndoStack_timerEvent
+  vtbl[].vtbl.childEvent = miqt_exec_method_cQUndoStack_childEvent
+  vtbl[].vtbl.customEvent = miqt_exec_method_cQUndoStack_customEvent
+  vtbl[].vtbl.connectNotify = miqt_exec_method_cQUndoStack_connectNotify
+  vtbl[].vtbl.disconnectNotify = miqt_exec_method_cQUndoStack_disconnectNotify
+  if vtbl[].h != nil: delete(move(vtbl[]))
+  vtbl[].h = fcQUndoStack_new2(addr(vtbl[].vtbl), parent.h)
+  vtbl[].owned = true
 
 proc staticMetaObject*(_: type gen_qundostack_types.QUndoStack): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQUndoStack_staticMetaObject())
-proc delete*(self: gen_qundostack_types.QUndoStack) =
-  fcQUndoStack_delete(self.h)

@@ -30,9 +30,6 @@ func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
     else:
       copyMem(addr result[0], unsafeAddr v[0], v.len)
 
-const cflags = gorge("pkg-config --cflags Qt5Script")  & " -fPIC"
-{.compile("gen_qscriptclasspropertyiterator.cpp", cflags).}
-
 
 import ./gen_qscriptclasspropertyiterator_types
 export gen_qscriptclasspropertyiterator_types
@@ -56,10 +53,9 @@ proc fcQScriptClassPropertyIterator_toBack(self: pointer, ): void {.importc: "QS
 proc fcQScriptClassPropertyIterator_name(self: pointer, ): pointer {.importc: "QScriptClassPropertyIterator_name".}
 proc fcQScriptClassPropertyIterator_id(self: pointer, ): cuint {.importc: "QScriptClassPropertyIterator_id".}
 proc fcQScriptClassPropertyIterator_flags(self: pointer, ): cint {.importc: "QScriptClassPropertyIterator_flags".}
-proc fcQScriptClassPropertyIterator_delete(self: pointer) {.importc: "QScriptClassPropertyIterator_delete".}
 
 proc objectX*(self: gen_qscriptclasspropertyiterator_types.QScriptClassPropertyIterator, ): gen_qscriptvalue_types.QScriptValue =
-  gen_qscriptvalue_types.QScriptValue(h: fcQScriptClassPropertyIterator_objectX(self.h))
+  gen_qscriptvalue_types.QScriptValue(h: fcQScriptClassPropertyIterator_objectX(self.h), owned: true)
 
 proc hasNext*(self: gen_qscriptclasspropertyiterator_types.QScriptClassPropertyIterator, ): bool =
   fcQScriptClassPropertyIterator_hasNext(self.h)
@@ -80,7 +76,7 @@ proc toBack*(self: gen_qscriptclasspropertyiterator_types.QScriptClassPropertyIt
   fcQScriptClassPropertyIterator_toBack(self.h)
 
 proc name*(self: gen_qscriptclasspropertyiterator_types.QScriptClassPropertyIterator, ): gen_qscriptstring_types.QScriptString =
-  gen_qscriptstring_types.QScriptString(h: fcQScriptClassPropertyIterator_name(self.h))
+  gen_qscriptstring_types.QScriptString(h: fcQScriptClassPropertyIterator_name(self.h), owned: true)
 
 proc id*(self: gen_qscriptclasspropertyiterator_types.QScriptClassPropertyIterator, ): cuint =
   fcQScriptClassPropertyIterator_id(self.h)
@@ -88,5 +84,3 @@ proc id*(self: gen_qscriptclasspropertyiterator_types.QScriptClassPropertyIterat
 proc flags*(self: gen_qscriptclasspropertyiterator_types.QScriptClassPropertyIterator, ): cint =
   cint(fcQScriptClassPropertyIterator_flags(self.h))
 
-proc delete*(self: gen_qscriptclasspropertyiterator_types.QScriptClassPropertyIterator) =
-  fcQScriptClassPropertyIterator_delete(self.h)

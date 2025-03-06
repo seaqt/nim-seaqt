@@ -30,9 +30,6 @@ func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
     else:
       copyMem(addr result[0], unsafeAddr v[0], v.len)
 
-const cflags = gorge("pkg-config --cflags Qt5WebEngineCore")  & " -fPIC"
-{.compile("gen_qwebenginehttprequest.cpp", cflags).}
-
 
 type QWebEngineHttpRequestMethodEnum* = distinct cint
 template Get*(_: type QWebEngineHttpRequestMethodEnum): untyped = 0
@@ -70,7 +67,6 @@ proc fcQWebEngineHttpRequest_new(): ptr cQWebEngineHttpRequest {.importc: "QWebE
 proc fcQWebEngineHttpRequest_new2(other: pointer): ptr cQWebEngineHttpRequest {.importc: "QWebEngineHttpRequest_new2".}
 proc fcQWebEngineHttpRequest_new3(url: pointer): ptr cQWebEngineHttpRequest {.importc: "QWebEngineHttpRequest_new3".}
 proc fcQWebEngineHttpRequest_new4(url: pointer, methodVal: ptr cint): ptr cQWebEngineHttpRequest {.importc: "QWebEngineHttpRequest_new4".}
-proc fcQWebEngineHttpRequest_delete(self: pointer) {.importc: "QWebEngineHttpRequest_delete".}
 
 proc operatorAssign*(self: gen_qwebenginehttprequest_types.QWebEngineHttpRequest, other: gen_qwebenginehttprequest_types.QWebEngineHttpRequest): void =
   fcQWebEngineHttpRequest_operatorAssign(self.h, other.h)
@@ -79,12 +75,15 @@ proc postRequest*(_: type gen_qwebenginehttprequest_types.QWebEngineHttpRequest,
   var postData_Keys_CArray = newSeq[struct_miqt_string](len(postData))
   var postData_Values_CArray = newSeq[struct_miqt_string](len(postData))
   var postData_ctr = 0
-  for postData_k, postData_v in postData:
+  for postData_k in postData.keys():
     postData_Keys_CArray[postData_ctr] = struct_miqt_string(data: postData_k, len: csize_t(len(postData_k)))
+    postData_ctr += 1
+  postData_ctr = 0
+  for postData_v in postData.values():
     postData_Values_CArray[postData_ctr] = struct_miqt_string(data: postData_v, len: csize_t(len(postData_v)))
     postData_ctr += 1
 
-  gen_qwebenginehttprequest_types.QWebEngineHttpRequest(h: fcQWebEngineHttpRequest_postRequest(url.h, struct_miqt_map(len: csize_t(len(postData)),keys: if len(postData) == 0: nil else: addr(postData_Keys_CArray[0]), values: if len(postData) == 0: nil else: addr(postData_Values_CArray[0]),)))
+  gen_qwebenginehttprequest_types.QWebEngineHttpRequest(h: fcQWebEngineHttpRequest_postRequest(url.h, struct_miqt_map(len: csize_t(len(postData)),keys: if len(postData) == 0: nil else: addr(postData_Keys_CArray[0]), values: if len(postData) == 0: nil else: addr(postData_Values_CArray[0]),)), owned: true)
 
 proc swap*(self: gen_qwebenginehttprequest_types.QWebEngineHttpRequest, other: gen_qwebenginehttprequest_types.QWebEngineHttpRequest): void =
   fcQWebEngineHttpRequest_swap(self.h, other.h)
@@ -102,7 +101,7 @@ proc setMethod*(self: gen_qwebenginehttprequest_types.QWebEngineHttpRequest, met
   fcQWebEngineHttpRequest_setMethod(self.h, cint(methodVal))
 
 proc url*(self: gen_qwebenginehttprequest_types.QWebEngineHttpRequest, ): gen_qurl_types.QUrl =
-  gen_qurl_types.QUrl(h: fcQWebEngineHttpRequest_url(self.h))
+  gen_qurl_types.QUrl(h: fcQWebEngineHttpRequest_url(self.h), owned: true)
 
 proc setUrl*(self: gen_qwebenginehttprequest_types.QWebEngineHttpRequest, url: gen_qurl_types.QUrl): void =
   fcQWebEngineHttpRequest_setUrl(self.h, url.h)
@@ -144,19 +143,17 @@ proc unsetHeader*(self: gen_qwebenginehttprequest_types.QWebEngineHttpRequest, h
   fcQWebEngineHttpRequest_unsetHeader(self.h, struct_miqt_string(data: cast[cstring](if len(headerName) == 0: nil else: unsafeAddr headerName[0]), len: csize_t(len(headerName))))
 
 proc create*(T: type gen_qwebenginehttprequest_types.QWebEngineHttpRequest): gen_qwebenginehttprequest_types.QWebEngineHttpRequest =
-  gen_qwebenginehttprequest_types.QWebEngineHttpRequest(h: fcQWebEngineHttpRequest_new())
+  gen_qwebenginehttprequest_types.QWebEngineHttpRequest(h: fcQWebEngineHttpRequest_new(), owned: true)
 
 proc create*(T: type gen_qwebenginehttprequest_types.QWebEngineHttpRequest,
     other: gen_qwebenginehttprequest_types.QWebEngineHttpRequest): gen_qwebenginehttprequest_types.QWebEngineHttpRequest =
-  gen_qwebenginehttprequest_types.QWebEngineHttpRequest(h: fcQWebEngineHttpRequest_new2(other.h))
+  gen_qwebenginehttprequest_types.QWebEngineHttpRequest(h: fcQWebEngineHttpRequest_new2(other.h), owned: true)
 
 proc create*(T: type gen_qwebenginehttprequest_types.QWebEngineHttpRequest,
     url: gen_qurl_types.QUrl): gen_qwebenginehttprequest_types.QWebEngineHttpRequest =
-  gen_qwebenginehttprequest_types.QWebEngineHttpRequest(h: fcQWebEngineHttpRequest_new3(url.h))
+  gen_qwebenginehttprequest_types.QWebEngineHttpRequest(h: fcQWebEngineHttpRequest_new3(url.h), owned: true)
 
 proc create*(T: type gen_qwebenginehttprequest_types.QWebEngineHttpRequest,
     url: gen_qurl_types.QUrl, methodVal: ptr cint): gen_qwebenginehttprequest_types.QWebEngineHttpRequest =
-  gen_qwebenginehttprequest_types.QWebEngineHttpRequest(h: fcQWebEngineHttpRequest_new4(url.h, methodVal))
+  gen_qwebenginehttprequest_types.QWebEngineHttpRequest(h: fcQWebEngineHttpRequest_new4(url.h, methodVal), owned: true)
 
-proc delete*(self: gen_qwebenginehttprequest_types.QWebEngineHttpRequest) =
-  fcQWebEngineHttpRequest_delete(self.h)

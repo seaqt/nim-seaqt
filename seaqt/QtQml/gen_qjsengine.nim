@@ -30,7 +30,7 @@ func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
     else:
       copyMem(addr result[0], unsafeAddr v[0], v.len)
 
-const cflags = gorge("pkg-config --cflags Qt5Qml")  & " -fPIC"
+const cflags = gorge("pkg-config --cflags Qt5Qml") & " -fPIC"
 {.compile("gen_qjsengine.cpp", cflags).}
 
 
@@ -94,7 +94,7 @@ proc fcQJSEngine_newErrorObject2(self: pointer, errorType: cint, message: struct
 proc fcQJSEngine_installTranslatorFunctions1(self: pointer, objectVal: pointer): void {.importc: "QJSEngine_installTranslatorFunctions1".}
 proc fcQJSEngine_installExtensions2(self: pointer, extensions: cint, objectVal: pointer): void {.importc: "QJSEngine_installExtensions2".}
 proc fcQJSEngine_throwError2(self: pointer, errorType: cint, message: struct_miqt_string): void {.importc: "QJSEngine_throwError2".}
-type cQJSEngineVTable = object
+type cQJSEngineVTable {.pure.} = object
   destructor*: proc(vtbl: ptr cQJSEngineVTable, self: ptr cQJSEngine) {.cdecl, raises:[], gcsafe.}
   metaObject*: proc(vtbl, self: pointer, ): pointer {.cdecl, raises: [], gcsafe.}
   metacast*: proc(vtbl, self: pointer, param1: cstring): pointer {.cdecl, raises: [], gcsafe.}
@@ -123,10 +123,9 @@ proc fcQJSEngine_protectedbase_isSignalConnected(self: pointer, signal: pointer)
 proc fcQJSEngine_new(vtbl: pointer, ): ptr cQJSEngine {.importc: "QJSEngine_new".}
 proc fcQJSEngine_new2(vtbl: pointer, parent: pointer): ptr cQJSEngine {.importc: "QJSEngine_new2".}
 proc fcQJSEngine_staticMetaObject(): pointer {.importc: "QJSEngine_staticMetaObject".}
-proc fcQJSEngine_delete(self: pointer) {.importc: "QJSEngine_delete".}
 
 proc metaObject*(self: gen_qjsengine_types.QJSEngine, ): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQJSEngine_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQJSEngine_metaObject(self.h), owned: false)
 
 proc metacast*(self: gen_qjsengine_types.QJSEngine, param1: cstring): pointer =
   fcQJSEngine_metacast(self.h, param1)
@@ -147,28 +146,28 @@ proc trUtf8*(_: type gen_qjsengine_types.QJSEngine, s: cstring): string =
   vx_ret
 
 proc globalObject*(self: gen_qjsengine_types.QJSEngine, ): gen_qjsvalue_types.QJSValue =
-  gen_qjsvalue_types.QJSValue(h: fcQJSEngine_globalObject(self.h))
+  gen_qjsvalue_types.QJSValue(h: fcQJSEngine_globalObject(self.h), owned: true)
 
 proc evaluate*(self: gen_qjsengine_types.QJSEngine, program: string): gen_qjsvalue_types.QJSValue =
-  gen_qjsvalue_types.QJSValue(h: fcQJSEngine_evaluate(self.h, struct_miqt_string(data: program, len: csize_t(len(program)))))
+  gen_qjsvalue_types.QJSValue(h: fcQJSEngine_evaluate(self.h, struct_miqt_string(data: program, len: csize_t(len(program)))), owned: true)
 
 proc importModule*(self: gen_qjsengine_types.QJSEngine, fileName: string): gen_qjsvalue_types.QJSValue =
-  gen_qjsvalue_types.QJSValue(h: fcQJSEngine_importModule(self.h, struct_miqt_string(data: fileName, len: csize_t(len(fileName)))))
+  gen_qjsvalue_types.QJSValue(h: fcQJSEngine_importModule(self.h, struct_miqt_string(data: fileName, len: csize_t(len(fileName)))), owned: true)
 
 proc newObject*(self: gen_qjsengine_types.QJSEngine, ): gen_qjsvalue_types.QJSValue =
-  gen_qjsvalue_types.QJSValue(h: fcQJSEngine_newObject(self.h))
+  gen_qjsvalue_types.QJSValue(h: fcQJSEngine_newObject(self.h), owned: true)
 
 proc newArray*(self: gen_qjsengine_types.QJSEngine, ): gen_qjsvalue_types.QJSValue =
-  gen_qjsvalue_types.QJSValue(h: fcQJSEngine_newArray(self.h))
+  gen_qjsvalue_types.QJSValue(h: fcQJSEngine_newArray(self.h), owned: true)
 
 proc newQObject*(self: gen_qjsengine_types.QJSEngine, objectVal: gen_qobject_types.QObject): gen_qjsvalue_types.QJSValue =
-  gen_qjsvalue_types.QJSValue(h: fcQJSEngine_newQObject(self.h, objectVal.h))
+  gen_qjsvalue_types.QJSValue(h: fcQJSEngine_newQObject(self.h, objectVal.h), owned: true)
 
 proc newQMetaObject*(self: gen_qjsengine_types.QJSEngine, metaObject: gen_qobjectdefs_types.QMetaObject): gen_qjsvalue_types.QJSValue =
-  gen_qjsvalue_types.QJSValue(h: fcQJSEngine_newQMetaObject(self.h, metaObject.h))
+  gen_qjsvalue_types.QJSValue(h: fcQJSEngine_newQMetaObject(self.h, metaObject.h), owned: true)
 
 proc newErrorObject*(self: gen_qjsengine_types.QJSEngine, errorType: cint): gen_qjsvalue_types.QJSValue =
-  gen_qjsvalue_types.QJSValue(h: fcQJSEngine_newErrorObject(self.h, cint(errorType)))
+  gen_qjsvalue_types.QJSValue(h: fcQJSEngine_newErrorObject(self.h, cint(errorType)), owned: true)
 
 proc collectGarbage*(self: gen_qjsengine_types.QJSEngine, ): void =
   fcQJSEngine_collectGarbage(self.h)
@@ -243,16 +242,16 @@ proc trUtf8*(_: type gen_qjsengine_types.QJSEngine, s: cstring, c: cstring, n: c
   vx_ret
 
 proc evaluate*(self: gen_qjsengine_types.QJSEngine, program: string, fileName: string): gen_qjsvalue_types.QJSValue =
-  gen_qjsvalue_types.QJSValue(h: fcQJSEngine_evaluate2(self.h, struct_miqt_string(data: program, len: csize_t(len(program))), struct_miqt_string(data: fileName, len: csize_t(len(fileName)))))
+  gen_qjsvalue_types.QJSValue(h: fcQJSEngine_evaluate2(self.h, struct_miqt_string(data: program, len: csize_t(len(program))), struct_miqt_string(data: fileName, len: csize_t(len(fileName)))), owned: true)
 
 proc evaluate*(self: gen_qjsengine_types.QJSEngine, program: string, fileName: string, lineNumber: cint): gen_qjsvalue_types.QJSValue =
-  gen_qjsvalue_types.QJSValue(h: fcQJSEngine_evaluate3(self.h, struct_miqt_string(data: program, len: csize_t(len(program))), struct_miqt_string(data: fileName, len: csize_t(len(fileName))), lineNumber))
+  gen_qjsvalue_types.QJSValue(h: fcQJSEngine_evaluate3(self.h, struct_miqt_string(data: program, len: csize_t(len(program))), struct_miqt_string(data: fileName, len: csize_t(len(fileName))), lineNumber), owned: true)
 
 proc newArray*(self: gen_qjsengine_types.QJSEngine, length: cuint): gen_qjsvalue_types.QJSValue =
-  gen_qjsvalue_types.QJSValue(h: fcQJSEngine_newArray1(self.h, length))
+  gen_qjsvalue_types.QJSValue(h: fcQJSEngine_newArray1(self.h, length), owned: true)
 
 proc newErrorObject*(self: gen_qjsengine_types.QJSEngine, errorType: cint, message: string): gen_qjsvalue_types.QJSValue =
-  gen_qjsvalue_types.QJSValue(h: fcQJSEngine_newErrorObject2(self.h, cint(errorType), struct_miqt_string(data: message, len: csize_t(len(message)))))
+  gen_qjsvalue_types.QJSValue(h: fcQJSEngine_newErrorObject2(self.h, cint(errorType), struct_miqt_string(data: message, len: csize_t(len(message)))), owned: true)
 
 proc installTranslatorFunctions*(self: gen_qjsengine_types.QJSEngine, objectVal: gen_qjsvalue_types.QJSValue): void =
   fcQJSEngine_installTranslatorFunctions1(self.h, objectVal.h)
@@ -273,7 +272,7 @@ type QJSEnginechildEventProc* = proc(self: QJSEngine, event: gen_qcoreevent_type
 type QJSEnginecustomEventProc* = proc(self: QJSEngine, event: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
 type QJSEngineconnectNotifyProc* = proc(self: QJSEngine, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
 type QJSEnginedisconnectNotifyProc* = proc(self: QJSEngine, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
-type QJSEngineVTable* = object
+type QJSEngineVTable* {.inheritable, pure.} = object
   vtbl: cQJSEngineVTable
   metaObject*: QJSEnginemetaObjectProc
   metacast*: QJSEnginemetacastProc
@@ -286,13 +285,16 @@ type QJSEngineVTable* = object
   connectNotify*: QJSEngineconnectNotifyProc
   disconnectNotify*: QJSEnginedisconnectNotifyProc
 proc QJSEnginemetaObject*(self: gen_qjsengine_types.QJSEngine, ): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQJSEngine_virtualbase_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQJSEngine_virtualbase_metaObject(self.h), owned: false)
 
 proc miqt_exec_callback_cQJSEngine_metaObject(vtbl: pointer, self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QJSEngineVTable](vtbl)
   let self = QJSEngine(h: self)
   var virtualReturn = vtbl[].metaObject(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QJSEnginemetacast*(self: gen_qjsengine_types.QJSEngine, param1: cstring): pointer =
   fcQJSEngine_virtualbase_metacast(self.h, param1)
@@ -322,7 +324,7 @@ proc QJSEngineevent*(self: gen_qjsengine_types.QJSEngine, event: gen_qcoreevent_
 proc miqt_exec_callback_cQJSEngine_event(vtbl: pointer, self: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QJSEngineVTable](vtbl)
   let self = QJSEngine(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].event(self, slotval1)
   virtualReturn
 
@@ -332,8 +334,8 @@ proc QJSEngineeventFilter*(self: gen_qjsengine_types.QJSEngine, watched: gen_qob
 proc miqt_exec_callback_cQJSEngine_eventFilter(vtbl: pointer, self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QJSEngineVTable](vtbl)
   let self = QJSEngine(h: self)
-  let slotval1 = gen_qobject_types.QObject(h: watched)
-  let slotval2 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].eventFilter(self, slotval1, slotval2)
   virtualReturn
 
@@ -343,7 +345,7 @@ proc QJSEnginetimerEvent*(self: gen_qjsengine_types.QJSEngine, event: gen_qcoree
 proc miqt_exec_callback_cQJSEngine_timerEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QJSEngineVTable](vtbl)
   let self = QJSEngine(h: self)
-  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   vtbl[].timerEvent(self, slotval1)
 
 proc QJSEnginechildEvent*(self: gen_qjsengine_types.QJSEngine, event: gen_qcoreevent_types.QChildEvent): void =
@@ -352,7 +354,7 @@ proc QJSEnginechildEvent*(self: gen_qjsengine_types.QJSEngine, event: gen_qcoree
 proc miqt_exec_callback_cQJSEngine_childEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QJSEngineVTable](vtbl)
   let self = QJSEngine(h: self)
-  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   vtbl[].childEvent(self, slotval1)
 
 proc QJSEnginecustomEvent*(self: gen_qjsengine_types.QJSEngine, event: gen_qcoreevent_types.QEvent): void =
@@ -361,7 +363,7 @@ proc QJSEnginecustomEvent*(self: gen_qjsengine_types.QJSEngine, event: gen_qcore
 proc miqt_exec_callback_cQJSEngine_customEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QJSEngineVTable](vtbl)
   let self = QJSEngine(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].customEvent(self, slotval1)
 
 proc QJSEngineconnectNotify*(self: gen_qjsengine_types.QJSEngine, signal: gen_qmetaobject_types.QMetaMethod): void =
@@ -370,7 +372,7 @@ proc QJSEngineconnectNotify*(self: gen_qjsengine_types.QJSEngine, signal: gen_qm
 proc miqt_exec_callback_cQJSEngine_connectNotify(vtbl: pointer, self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QJSEngineVTable](vtbl)
   let self = QJSEngine(h: self)
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].connectNotify(self, slotval1)
 
 proc QJSEnginedisconnectNotify*(self: gen_qjsengine_types.QJSEngine, signal: gen_qmetaobject_types.QMetaMethod): void =
@@ -379,11 +381,93 @@ proc QJSEnginedisconnectNotify*(self: gen_qjsengine_types.QJSEngine, signal: gen
 proc miqt_exec_callback_cQJSEngine_disconnectNotify(vtbl: pointer, self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QJSEngineVTable](vtbl)
   let self = QJSEngine(h: self)
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].disconnectNotify(self, slotval1)
 
+type VirtualQJSEngine* {.inheritable.} = ref object of QJSEngine
+  vtbl*: cQJSEngineVTable
+method metaObject*(self: VirtualQJSEngine, ): gen_qobjectdefs_types.QMetaObject {.base.} =
+  QJSEnginemetaObject(self[])
+proc miqt_exec_method_cQJSEngine_metaObject(vtbl: pointer, inst: pointer): pointer {.cdecl.} =
+  let vtbl = cast[VirtualQJSEngine](cast[uint](vtbl) - uint(offsetOf(VirtualQJSEngine, vtbl)))
+  var virtualReturn = vtbl.metaObject()
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
+
+method metacast*(self: VirtualQJSEngine, param1: cstring): pointer {.base.} =
+  QJSEnginemetacast(self[], param1)
+proc miqt_exec_method_cQJSEngine_metacast(vtbl: pointer, inst: pointer, param1: cstring): pointer {.cdecl.} =
+  let vtbl = cast[VirtualQJSEngine](cast[uint](vtbl) - uint(offsetOf(VirtualQJSEngine, vtbl)))
+  let slotval1 = (param1)
+  var virtualReturn = vtbl.metacast(slotval1)
+  virtualReturn
+
+method metacall*(self: VirtualQJSEngine, param1: cint, param2: cint, param3: pointer): cint {.base.} =
+  QJSEnginemetacall(self[], param1, param2, param3)
+proc miqt_exec_method_cQJSEngine_metacall(vtbl: pointer, inst: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
+  let vtbl = cast[VirtualQJSEngine](cast[uint](vtbl) - uint(offsetOf(VirtualQJSEngine, vtbl)))
+  let slotval1 = cint(param1)
+  let slotval2 = param2
+  let slotval3 = param3
+  var virtualReturn = vtbl.metacall(slotval1, slotval2, slotval3)
+  virtualReturn
+
+method event*(self: VirtualQJSEngine, event: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QJSEngineevent(self[], event)
+proc miqt_exec_method_cQJSEngine_event(vtbl: pointer, inst: pointer, event: pointer): bool {.cdecl.} =
+  let vtbl = cast[VirtualQJSEngine](cast[uint](vtbl) - uint(offsetOf(VirtualQJSEngine, vtbl)))
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
+  var virtualReturn = vtbl.event(slotval1)
+  virtualReturn
+
+method eventFilter*(self: VirtualQJSEngine, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QJSEngineeventFilter(self[], watched, event)
+proc miqt_exec_method_cQJSEngine_eventFilter(vtbl: pointer, inst: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
+  let vtbl = cast[VirtualQJSEngine](cast[uint](vtbl) - uint(offsetOf(VirtualQJSEngine, vtbl)))
+  let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
+  var virtualReturn = vtbl.eventFilter(slotval1, slotval2)
+  virtualReturn
+
+method timerEvent*(self: VirtualQJSEngine, event: gen_qcoreevent_types.QTimerEvent): void {.base.} =
+  QJSEnginetimerEvent(self[], event)
+proc miqt_exec_method_cQJSEngine_timerEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQJSEngine](cast[uint](vtbl) - uint(offsetOf(VirtualQJSEngine, vtbl)))
+  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
+  vtbl.timerEvent(slotval1)
+
+method childEvent*(self: VirtualQJSEngine, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
+  QJSEnginechildEvent(self[], event)
+proc miqt_exec_method_cQJSEngine_childEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQJSEngine](cast[uint](vtbl) - uint(offsetOf(VirtualQJSEngine, vtbl)))
+  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
+  vtbl.childEvent(slotval1)
+
+method customEvent*(self: VirtualQJSEngine, event: gen_qcoreevent_types.QEvent): void {.base.} =
+  QJSEnginecustomEvent(self[], event)
+proc miqt_exec_method_cQJSEngine_customEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQJSEngine](cast[uint](vtbl) - uint(offsetOf(VirtualQJSEngine, vtbl)))
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
+  vtbl.customEvent(slotval1)
+
+method connectNotify*(self: VirtualQJSEngine, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QJSEngineconnectNotify(self[], signal)
+proc miqt_exec_method_cQJSEngine_connectNotify(vtbl: pointer, inst: pointer, signal: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQJSEngine](cast[uint](vtbl) - uint(offsetOf(VirtualQJSEngine, vtbl)))
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
+  vtbl.connectNotify(slotval1)
+
+method disconnectNotify*(self: VirtualQJSEngine, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QJSEnginedisconnectNotify(self[], signal)
+proc miqt_exec_method_cQJSEngine_disconnectNotify(vtbl: pointer, inst: pointer, signal: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQJSEngine](cast[uint](vtbl) - uint(offsetOf(VirtualQJSEngine, vtbl)))
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
+  vtbl.disconnectNotify(slotval1)
+
 proc sender*(self: gen_qjsengine_types.QJSEngine, ): gen_qobject_types.QObject =
-  gen_qobject_types.QObject(h: fcQJSEngine_protectedbase_sender(self.h))
+  gen_qobject_types.QObject(h: fcQJSEngine_protectedbase_sender(self.h), owned: false)
 
 proc senderSignalIndex*(self: gen_qjsengine_types.QJSEngine, ): cint =
   fcQJSEngine_protectedbase_senderSignalIndex(self.h)
@@ -398,62 +482,103 @@ proc create*(T: type gen_qjsengine_types.QJSEngine,
     vtbl: ref QJSEngineVTable = nil): gen_qjsengine_types.QJSEngine =
   let vtbl = if vtbl == nil: new QJSEngineVTable else: vtbl
   GC_ref(vtbl)
-  vtbl.vtbl.destructor = proc(vtbl: ptr cQJSEngineVTable, _: ptr cQJSEngine) {.cdecl.} =
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQJSEngineVTable, _: ptr cQJSEngine) {.cdecl.} =
     let vtbl = cast[ref QJSEngineVTable](vtbl)
     GC_unref(vtbl)
-  if not isNil(vtbl.metaObject):
+  if not isNil(vtbl[].metaObject):
     vtbl[].vtbl.metaObject = miqt_exec_callback_cQJSEngine_metaObject
-  if not isNil(vtbl.metacast):
+  if not isNil(vtbl[].metacast):
     vtbl[].vtbl.metacast = miqt_exec_callback_cQJSEngine_metacast
-  if not isNil(vtbl.metacall):
+  if not isNil(vtbl[].metacall):
     vtbl[].vtbl.metacall = miqt_exec_callback_cQJSEngine_metacall
-  if not isNil(vtbl.event):
+  if not isNil(vtbl[].event):
     vtbl[].vtbl.event = miqt_exec_callback_cQJSEngine_event
-  if not isNil(vtbl.eventFilter):
+  if not isNil(vtbl[].eventFilter):
     vtbl[].vtbl.eventFilter = miqt_exec_callback_cQJSEngine_eventFilter
-  if not isNil(vtbl.timerEvent):
+  if not isNil(vtbl[].timerEvent):
     vtbl[].vtbl.timerEvent = miqt_exec_callback_cQJSEngine_timerEvent
-  if not isNil(vtbl.childEvent):
+  if not isNil(vtbl[].childEvent):
     vtbl[].vtbl.childEvent = miqt_exec_callback_cQJSEngine_childEvent
-  if not isNil(vtbl.customEvent):
+  if not isNil(vtbl[].customEvent):
     vtbl[].vtbl.customEvent = miqt_exec_callback_cQJSEngine_customEvent
-  if not isNil(vtbl.connectNotify):
+  if not isNil(vtbl[].connectNotify):
     vtbl[].vtbl.connectNotify = miqt_exec_callback_cQJSEngine_connectNotify
-  if not isNil(vtbl.disconnectNotify):
+  if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQJSEngine_disconnectNotify
-  gen_qjsengine_types.QJSEngine(h: fcQJSEngine_new(addr(vtbl[]), ))
+  gen_qjsengine_types.QJSEngine(h: fcQJSEngine_new(addr(vtbl[].vtbl), ), owned: true)
 
 proc create*(T: type gen_qjsengine_types.QJSEngine,
     parent: gen_qobject_types.QObject,
     vtbl: ref QJSEngineVTable = nil): gen_qjsengine_types.QJSEngine =
   let vtbl = if vtbl == nil: new QJSEngineVTable else: vtbl
   GC_ref(vtbl)
-  vtbl.vtbl.destructor = proc(vtbl: ptr cQJSEngineVTable, _: ptr cQJSEngine) {.cdecl.} =
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQJSEngineVTable, _: ptr cQJSEngine) {.cdecl.} =
     let vtbl = cast[ref QJSEngineVTable](vtbl)
     GC_unref(vtbl)
-  if not isNil(vtbl.metaObject):
+  if not isNil(vtbl[].metaObject):
     vtbl[].vtbl.metaObject = miqt_exec_callback_cQJSEngine_metaObject
-  if not isNil(vtbl.metacast):
+  if not isNil(vtbl[].metacast):
     vtbl[].vtbl.metacast = miqt_exec_callback_cQJSEngine_metacast
-  if not isNil(vtbl.metacall):
+  if not isNil(vtbl[].metacall):
     vtbl[].vtbl.metacall = miqt_exec_callback_cQJSEngine_metacall
-  if not isNil(vtbl.event):
+  if not isNil(vtbl[].event):
     vtbl[].vtbl.event = miqt_exec_callback_cQJSEngine_event
-  if not isNil(vtbl.eventFilter):
+  if not isNil(vtbl[].eventFilter):
     vtbl[].vtbl.eventFilter = miqt_exec_callback_cQJSEngine_eventFilter
-  if not isNil(vtbl.timerEvent):
+  if not isNil(vtbl[].timerEvent):
     vtbl[].vtbl.timerEvent = miqt_exec_callback_cQJSEngine_timerEvent
-  if not isNil(vtbl.childEvent):
+  if not isNil(vtbl[].childEvent):
     vtbl[].vtbl.childEvent = miqt_exec_callback_cQJSEngine_childEvent
-  if not isNil(vtbl.customEvent):
+  if not isNil(vtbl[].customEvent):
     vtbl[].vtbl.customEvent = miqt_exec_callback_cQJSEngine_customEvent
-  if not isNil(vtbl.connectNotify):
+  if not isNil(vtbl[].connectNotify):
     vtbl[].vtbl.connectNotify = miqt_exec_callback_cQJSEngine_connectNotify
-  if not isNil(vtbl.disconnectNotify):
+  if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQJSEngine_disconnectNotify
-  gen_qjsengine_types.QJSEngine(h: fcQJSEngine_new2(addr(vtbl[]), parent.h))
+  gen_qjsengine_types.QJSEngine(h: fcQJSEngine_new2(addr(vtbl[].vtbl), parent.h), owned: true)
+
+proc create*(T: type gen_qjsengine_types.QJSEngine,
+    vtbl: VirtualQJSEngine) =
+
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQJSEngineVTable, _: ptr cQJSEngine) {.cdecl.} =
+    let vtbl = cast[ptr typeof(VirtualQJSEngine()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQJSEngine, vtbl)))
+    vtbl[].h = nil
+    vtbl[].owned = false
+  vtbl[].vtbl.metaObject = miqt_exec_method_cQJSEngine_metaObject
+  vtbl[].vtbl.metacast = miqt_exec_method_cQJSEngine_metacast
+  vtbl[].vtbl.metacall = miqt_exec_method_cQJSEngine_metacall
+  vtbl[].vtbl.event = miqt_exec_method_cQJSEngine_event
+  vtbl[].vtbl.eventFilter = miqt_exec_method_cQJSEngine_eventFilter
+  vtbl[].vtbl.timerEvent = miqt_exec_method_cQJSEngine_timerEvent
+  vtbl[].vtbl.childEvent = miqt_exec_method_cQJSEngine_childEvent
+  vtbl[].vtbl.customEvent = miqt_exec_method_cQJSEngine_customEvent
+  vtbl[].vtbl.connectNotify = miqt_exec_method_cQJSEngine_connectNotify
+  vtbl[].vtbl.disconnectNotify = miqt_exec_method_cQJSEngine_disconnectNotify
+  if vtbl[].h != nil: delete(move(vtbl[]))
+  vtbl[].h = fcQJSEngine_new(addr(vtbl[].vtbl), )
+  vtbl[].owned = true
+
+proc create*(T: type gen_qjsengine_types.QJSEngine,
+    parent: gen_qobject_types.QObject,
+    vtbl: VirtualQJSEngine) =
+
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQJSEngineVTable, _: ptr cQJSEngine) {.cdecl.} =
+    let vtbl = cast[ptr typeof(VirtualQJSEngine()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQJSEngine, vtbl)))
+    vtbl[].h = nil
+    vtbl[].owned = false
+  vtbl[].vtbl.metaObject = miqt_exec_method_cQJSEngine_metaObject
+  vtbl[].vtbl.metacast = miqt_exec_method_cQJSEngine_metacast
+  vtbl[].vtbl.metacall = miqt_exec_method_cQJSEngine_metacall
+  vtbl[].vtbl.event = miqt_exec_method_cQJSEngine_event
+  vtbl[].vtbl.eventFilter = miqt_exec_method_cQJSEngine_eventFilter
+  vtbl[].vtbl.timerEvent = miqt_exec_method_cQJSEngine_timerEvent
+  vtbl[].vtbl.childEvent = miqt_exec_method_cQJSEngine_childEvent
+  vtbl[].vtbl.customEvent = miqt_exec_method_cQJSEngine_customEvent
+  vtbl[].vtbl.connectNotify = miqt_exec_method_cQJSEngine_connectNotify
+  vtbl[].vtbl.disconnectNotify = miqt_exec_method_cQJSEngine_disconnectNotify
+  if vtbl[].h != nil: delete(move(vtbl[]))
+  vtbl[].h = fcQJSEngine_new2(addr(vtbl[].vtbl), parent.h)
+  vtbl[].owned = true
 
 proc staticMetaObject*(_: type gen_qjsengine_types.QJSEngine): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQJSEngine_staticMetaObject())
-proc delete*(self: gen_qjsengine_types.QJSEngine) =
-  fcQJSEngine_delete(self.h)

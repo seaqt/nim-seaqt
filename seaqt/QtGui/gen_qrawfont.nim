@@ -30,9 +30,6 @@ func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
     else:
       copyMem(addr result[0], unsafeAddr v[0], v.len)
 
-const cflags = gorge("pkg-config --cflags Qt5Gui")  & " -fPIC"
-{.compile("gen_qrawfont.cpp", cflags).}
-
 
 type QRawFontAntialiasingTypeEnum* = distinct cint
 template PixelAntialiasing*(_: type QRawFontAntialiasingTypeEnum): untyped = 0
@@ -114,7 +111,6 @@ proc fcQRawFont_new3(fontData: struct_miqt_string, pixelSize: float64): ptr cQRa
 proc fcQRawFont_new4(other: pointer): ptr cQRawFont {.importc: "QRawFont_new4".}
 proc fcQRawFont_new5(fileName: struct_miqt_string, pixelSize: float64, hintingPreference: cint): ptr cQRawFont {.importc: "QRawFont_new5".}
 proc fcQRawFont_new6(fontData: struct_miqt_string, pixelSize: float64, hintingPreference: cint): ptr cQRawFont {.importc: "QRawFont_new6".}
-proc fcQRawFont_delete(self: pointer) {.importc: "QRawFont_delete".}
 
 proc operatorAssign*(self: gen_qrawfont_types.QRawFont, other: gen_qrawfont_types.QRawFont): void =
   fcQRawFont_operatorAssign(self.h, other.h)
@@ -167,7 +163,7 @@ proc advancesForGlyphIndexes*(self: gen_qrawfont_types.QRawFont, glyphIndexes: s
   var vx_ret = newSeq[gen_qpoint_types.QPointF](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
-    vx_ret[i] = gen_qpoint_types.QPointF(h: v_outCast[i])
+    vx_ret[i] = gen_qpoint_types.QPointF(h: v_outCast[i], owned: true)
   c_free(v_ma.data)
   vx_ret
 
@@ -180,7 +176,7 @@ proc advancesForGlyphIndexes*(self: gen_qrawfont_types.QRawFont, glyphIndexes: s
   var vx_ret = newSeq[gen_qpoint_types.QPointF](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
-    vx_ret[i] = gen_qpoint_types.QPointF(h: v_outCast[i])
+    vx_ret[i] = gen_qpoint_types.QPointF(h: v_outCast[i], owned: true)
   c_free(v_ma.data)
   vx_ret
 
@@ -194,13 +190,13 @@ proc advancesForGlyphIndexes*(self: gen_qrawfont_types.QRawFont, glyphIndexes: p
   fcQRawFont_advancesForGlyphIndexes4(self.h, glyphIndexes, advances.h, numGlyphs, cint(layoutFlags))
 
 proc alphaMapForGlyph*(self: gen_qrawfont_types.QRawFont, glyphIndex: cuint): gen_qimage_types.QImage =
-  gen_qimage_types.QImage(h: fcQRawFont_alphaMapForGlyph(self.h, glyphIndex))
+  gen_qimage_types.QImage(h: fcQRawFont_alphaMapForGlyph(self.h, glyphIndex), owned: true)
 
 proc pathForGlyph*(self: gen_qrawfont_types.QRawFont, glyphIndex: cuint): gen_qpainterpath_types.QPainterPath =
-  gen_qpainterpath_types.QPainterPath(h: fcQRawFont_pathForGlyph(self.h, glyphIndex))
+  gen_qpainterpath_types.QPainterPath(h: fcQRawFont_pathForGlyph(self.h, glyphIndex), owned: true)
 
 proc boundingRect*(self: gen_qrawfont_types.QRawFont, glyphIndex: cuint): gen_qrect_types.QRectF =
-  gen_qrect_types.QRectF(h: fcQRawFont_boundingRect(self.h, glyphIndex))
+  gen_qrect_types.QRectF(h: fcQRawFont_boundingRect(self.h, glyphIndex), owned: true)
 
 proc setPixelSize*(self: gen_qrawfont_types.QRawFont, pixelSize: float64): void =
   fcQRawFont_setPixelSize(self.h, pixelSize)
@@ -269,39 +265,37 @@ proc fontTable*(self: gen_qrawfont_types.QRawFont, tagName: cstring): seq[byte] 
   vx_ret
 
 proc fromFont*(_: type gen_qrawfont_types.QRawFont, font: gen_qfont_types.QFont): gen_qrawfont_types.QRawFont =
-  gen_qrawfont_types.QRawFont(h: fcQRawFont_fromFont(font.h))
+  gen_qrawfont_types.QRawFont(h: fcQRawFont_fromFont(font.h), owned: true)
 
 proc alphaMapForGlyph*(self: gen_qrawfont_types.QRawFont, glyphIndex: cuint, antialiasingType: cint): gen_qimage_types.QImage =
-  gen_qimage_types.QImage(h: fcQRawFont_alphaMapForGlyph2(self.h, glyphIndex, cint(antialiasingType)))
+  gen_qimage_types.QImage(h: fcQRawFont_alphaMapForGlyph2(self.h, glyphIndex, cint(antialiasingType)), owned: true)
 
 proc alphaMapForGlyph*(self: gen_qrawfont_types.QRawFont, glyphIndex: cuint, antialiasingType: cint, transform: gen_qtransform_types.QTransform): gen_qimage_types.QImage =
-  gen_qimage_types.QImage(h: fcQRawFont_alphaMapForGlyph3(self.h, glyphIndex, cint(antialiasingType), transform.h))
+  gen_qimage_types.QImage(h: fcQRawFont_alphaMapForGlyph3(self.h, glyphIndex, cint(antialiasingType), transform.h), owned: true)
 
 proc fromFont*(_: type gen_qrawfont_types.QRawFont, font: gen_qfont_types.QFont, writingSystem: cint): gen_qrawfont_types.QRawFont =
-  gen_qrawfont_types.QRawFont(h: fcQRawFont_fromFont2(font.h, cint(writingSystem)))
+  gen_qrawfont_types.QRawFont(h: fcQRawFont_fromFont2(font.h, cint(writingSystem)), owned: true)
 
 proc create*(T: type gen_qrawfont_types.QRawFont): gen_qrawfont_types.QRawFont =
-  gen_qrawfont_types.QRawFont(h: fcQRawFont_new())
+  gen_qrawfont_types.QRawFont(h: fcQRawFont_new(), owned: true)
 
 proc create*(T: type gen_qrawfont_types.QRawFont,
     fileName: string, pixelSize: float64): gen_qrawfont_types.QRawFont =
-  gen_qrawfont_types.QRawFont(h: fcQRawFont_new2(struct_miqt_string(data: fileName, len: csize_t(len(fileName))), pixelSize))
+  gen_qrawfont_types.QRawFont(h: fcQRawFont_new2(struct_miqt_string(data: fileName, len: csize_t(len(fileName))), pixelSize), owned: true)
 
 proc create*(T: type gen_qrawfont_types.QRawFont,
     fontData: seq[byte], pixelSize: float64): gen_qrawfont_types.QRawFont =
-  gen_qrawfont_types.QRawFont(h: fcQRawFont_new3(struct_miqt_string(data: cast[cstring](if len(fontData) == 0: nil else: unsafeAddr fontData[0]), len: csize_t(len(fontData))), pixelSize))
+  gen_qrawfont_types.QRawFont(h: fcQRawFont_new3(struct_miqt_string(data: cast[cstring](if len(fontData) == 0: nil else: unsafeAddr fontData[0]), len: csize_t(len(fontData))), pixelSize), owned: true)
 
 proc create*(T: type gen_qrawfont_types.QRawFont,
     other: gen_qrawfont_types.QRawFont): gen_qrawfont_types.QRawFont =
-  gen_qrawfont_types.QRawFont(h: fcQRawFont_new4(other.h))
+  gen_qrawfont_types.QRawFont(h: fcQRawFont_new4(other.h), owned: true)
 
 proc create*(T: type gen_qrawfont_types.QRawFont,
     fileName: string, pixelSize: float64, hintingPreference: cint): gen_qrawfont_types.QRawFont =
-  gen_qrawfont_types.QRawFont(h: fcQRawFont_new5(struct_miqt_string(data: fileName, len: csize_t(len(fileName))), pixelSize, cint(hintingPreference)))
+  gen_qrawfont_types.QRawFont(h: fcQRawFont_new5(struct_miqt_string(data: fileName, len: csize_t(len(fileName))), pixelSize, cint(hintingPreference)), owned: true)
 
 proc create*(T: type gen_qrawfont_types.QRawFont,
     fontData: seq[byte], pixelSize: float64, hintingPreference: cint): gen_qrawfont_types.QRawFont =
-  gen_qrawfont_types.QRawFont(h: fcQRawFont_new6(struct_miqt_string(data: cast[cstring](if len(fontData) == 0: nil else: unsafeAddr fontData[0]), len: csize_t(len(fontData))), pixelSize, cint(hintingPreference)))
+  gen_qrawfont_types.QRawFont(h: fcQRawFont_new6(struct_miqt_string(data: cast[cstring](if len(fontData) == 0: nil else: unsafeAddr fontData[0]), len: csize_t(len(fontData))), pixelSize, cint(hintingPreference)), owned: true)
 
-proc delete*(self: gen_qrawfont_types.QRawFont) =
-  fcQRawFont_delete(self.h)

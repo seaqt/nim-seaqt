@@ -30,9 +30,6 @@ func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
     else:
       copyMem(addr result[0], unsafeAddr v[0], v.len)
 
-const cflags = gorge("pkg-config --cflags Qt5Script")  & " -fPIC"
-{.compile("gen_qscriptprogram.cpp", cflags).}
-
 
 import ./gen_qscriptprogram_types
 export gen_qscriptprogram_types
@@ -52,7 +49,6 @@ proc fcQScriptProgram_new2(sourceCode: struct_miqt_string): ptr cQScriptProgram 
 proc fcQScriptProgram_new3(other: pointer): ptr cQScriptProgram {.importc: "QScriptProgram_new3".}
 proc fcQScriptProgram_new4(sourceCode: struct_miqt_string, fileName: struct_miqt_string): ptr cQScriptProgram {.importc: "QScriptProgram_new4".}
 proc fcQScriptProgram_new5(sourceCode: struct_miqt_string, fileName: struct_miqt_string, firstLineNumber: cint): ptr cQScriptProgram {.importc: "QScriptProgram_new5".}
-proc fcQScriptProgram_delete(self: pointer) {.importc: "QScriptProgram_delete".}
 
 proc operatorAssign*(self: gen_qscriptprogram_types.QScriptProgram, other: gen_qscriptprogram_types.QScriptProgram): void =
   fcQScriptProgram_operatorAssign(self.h, other.h)
@@ -82,23 +78,21 @@ proc operatorNotEqual*(self: gen_qscriptprogram_types.QScriptProgram, other: gen
   fcQScriptProgram_operatorNotEqual(self.h, other.h)
 
 proc create*(T: type gen_qscriptprogram_types.QScriptProgram): gen_qscriptprogram_types.QScriptProgram =
-  gen_qscriptprogram_types.QScriptProgram(h: fcQScriptProgram_new())
+  gen_qscriptprogram_types.QScriptProgram(h: fcQScriptProgram_new(), owned: true)
 
 proc create*(T: type gen_qscriptprogram_types.QScriptProgram,
     sourceCode: string): gen_qscriptprogram_types.QScriptProgram =
-  gen_qscriptprogram_types.QScriptProgram(h: fcQScriptProgram_new2(struct_miqt_string(data: sourceCode, len: csize_t(len(sourceCode)))))
+  gen_qscriptprogram_types.QScriptProgram(h: fcQScriptProgram_new2(struct_miqt_string(data: sourceCode, len: csize_t(len(sourceCode)))), owned: true)
 
 proc create*(T: type gen_qscriptprogram_types.QScriptProgram,
     other: gen_qscriptprogram_types.QScriptProgram): gen_qscriptprogram_types.QScriptProgram =
-  gen_qscriptprogram_types.QScriptProgram(h: fcQScriptProgram_new3(other.h))
+  gen_qscriptprogram_types.QScriptProgram(h: fcQScriptProgram_new3(other.h), owned: true)
 
 proc create*(T: type gen_qscriptprogram_types.QScriptProgram,
     sourceCode: string, fileName: string): gen_qscriptprogram_types.QScriptProgram =
-  gen_qscriptprogram_types.QScriptProgram(h: fcQScriptProgram_new4(struct_miqt_string(data: sourceCode, len: csize_t(len(sourceCode))), struct_miqt_string(data: fileName, len: csize_t(len(fileName)))))
+  gen_qscriptprogram_types.QScriptProgram(h: fcQScriptProgram_new4(struct_miqt_string(data: sourceCode, len: csize_t(len(sourceCode))), struct_miqt_string(data: fileName, len: csize_t(len(fileName)))), owned: true)
 
 proc create*(T: type gen_qscriptprogram_types.QScriptProgram,
     sourceCode: string, fileName: string, firstLineNumber: cint): gen_qscriptprogram_types.QScriptProgram =
-  gen_qscriptprogram_types.QScriptProgram(h: fcQScriptProgram_new5(struct_miqt_string(data: sourceCode, len: csize_t(len(sourceCode))), struct_miqt_string(data: fileName, len: csize_t(len(fileName))), firstLineNumber))
+  gen_qscriptprogram_types.QScriptProgram(h: fcQScriptProgram_new5(struct_miqt_string(data: sourceCode, len: csize_t(len(sourceCode))), struct_miqt_string(data: fileName, len: csize_t(len(fileName))), firstLineNumber), owned: true)
 
-proc delete*(self: gen_qscriptprogram_types.QScriptProgram) =
-  fcQScriptProgram_delete(self.h)

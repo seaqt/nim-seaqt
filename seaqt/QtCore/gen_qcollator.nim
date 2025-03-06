@@ -30,9 +30,6 @@ func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
     else:
       copyMem(addr result[0], unsafeAddr v[0], v.len)
 
-const cflags = gorge("pkg-config --cflags Qt5Core")  & " -fPIC"
-{.compile("gen_qcollator.cpp", cflags).}
-
 
 import ./gen_qcollator_types
 export gen_qcollator_types
@@ -51,7 +48,6 @@ proc fcQCollatorSortKey_operatorAssign(self: pointer, other: pointer): void {.im
 proc fcQCollatorSortKey_swap(self: pointer, other: pointer): void {.importc: "QCollatorSortKey_swap".}
 proc fcQCollatorSortKey_compare(self: pointer, key: pointer): cint {.importc: "QCollatorSortKey_compare".}
 proc fcQCollatorSortKey_new(other: pointer): ptr cQCollatorSortKey {.importc: "QCollatorSortKey_new".}
-proc fcQCollatorSortKey_delete(self: pointer) {.importc: "QCollatorSortKey_delete".}
 proc fcQCollator_operatorAssign(self: pointer, param1: pointer): void {.importc: "QCollator_operatorAssign".}
 proc fcQCollator_swap(self: pointer, other: pointer): void {.importc: "QCollator_swap".}
 proc fcQCollator_setLocale(self: pointer, locale: pointer): void {.importc: "QCollator_setLocale".}
@@ -69,7 +65,6 @@ proc fcQCollator_sortKey(self: pointer, string: struct_miqt_string): pointer {.i
 proc fcQCollator_new(): ptr cQCollator {.importc: "QCollator_new".}
 proc fcQCollator_new2(locale: pointer): ptr cQCollator {.importc: "QCollator_new2".}
 proc fcQCollator_new3(param1: pointer): ptr cQCollator {.importc: "QCollator_new3".}
-proc fcQCollator_delete(self: pointer) {.importc: "QCollator_delete".}
 
 proc operatorAssign*(self: gen_qcollator_types.QCollatorSortKey, other: gen_qcollator_types.QCollatorSortKey): void =
   fcQCollatorSortKey_operatorAssign(self.h, other.h)
@@ -82,10 +77,8 @@ proc compare*(self: gen_qcollator_types.QCollatorSortKey, key: gen_qcollator_typ
 
 proc create*(T: type gen_qcollator_types.QCollatorSortKey,
     other: gen_qcollator_types.QCollatorSortKey): gen_qcollator_types.QCollatorSortKey =
-  gen_qcollator_types.QCollatorSortKey(h: fcQCollatorSortKey_new(other.h))
+  gen_qcollator_types.QCollatorSortKey(h: fcQCollatorSortKey_new(other.h), owned: true)
 
-proc delete*(self: gen_qcollator_types.QCollatorSortKey) =
-  fcQCollatorSortKey_delete(self.h)
 proc operatorAssign*(self: gen_qcollator_types.QCollator, param1: gen_qcollator_types.QCollator): void =
   fcQCollator_operatorAssign(self.h, param1.h)
 
@@ -96,7 +89,7 @@ proc setLocale*(self: gen_qcollator_types.QCollator, locale: gen_qlocale_types.Q
   fcQCollator_setLocale(self.h, locale.h)
 
 proc locale*(self: gen_qcollator_types.QCollator, ): gen_qlocale_types.QLocale =
-  gen_qlocale_types.QLocale(h: fcQCollator_locale(self.h))
+  gen_qlocale_types.QLocale(h: fcQCollator_locale(self.h), owned: true)
 
 proc caseSensitivity*(self: gen_qcollator_types.QCollator, ): cint =
   cint(fcQCollator_caseSensitivity(self.h))
@@ -126,18 +119,16 @@ proc operatorCall*(self: gen_qcollator_types.QCollator, s1: string, s2: string):
   fcQCollator_operatorCall(self.h, struct_miqt_string(data: s1, len: csize_t(len(s1))), struct_miqt_string(data: s2, len: csize_t(len(s2))))
 
 proc sortKey*(self: gen_qcollator_types.QCollator, string: string): gen_qcollator_types.QCollatorSortKey =
-  gen_qcollator_types.QCollatorSortKey(h: fcQCollator_sortKey(self.h, struct_miqt_string(data: string, len: csize_t(len(string)))))
+  gen_qcollator_types.QCollatorSortKey(h: fcQCollator_sortKey(self.h, struct_miqt_string(data: string, len: csize_t(len(string)))), owned: true)
 
 proc create*(T: type gen_qcollator_types.QCollator): gen_qcollator_types.QCollator =
-  gen_qcollator_types.QCollator(h: fcQCollator_new())
+  gen_qcollator_types.QCollator(h: fcQCollator_new(), owned: true)
 
 proc create*(T: type gen_qcollator_types.QCollator,
     locale: gen_qlocale_types.QLocale): gen_qcollator_types.QCollator =
-  gen_qcollator_types.QCollator(h: fcQCollator_new2(locale.h))
+  gen_qcollator_types.QCollator(h: fcQCollator_new2(locale.h), owned: true)
 
 proc create*(T: type gen_qcollator_types.QCollator,
     param1: gen_qcollator_types.QCollator): gen_qcollator_types.QCollator =
-  gen_qcollator_types.QCollator(h: fcQCollator_new3(param1.h))
+  gen_qcollator_types.QCollator(h: fcQCollator_new3(param1.h), owned: true)
 
-proc delete*(self: gen_qcollator_types.QCollator) =
-  fcQCollator_delete(self.h)

@@ -30,7 +30,7 @@ func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
     else:
       copyMem(addr result[0], unsafeAddr v[0], v.len)
 
-const cflags = gorge("pkg-config --cflags Qt5Widgets")  & " -fPIC"
+const cflags = gorge("pkg-config --cflags Qt5Widgets") & " -fPIC"
 {.compile("gen_qwidgetaction.cpp", cflags).}
 
 
@@ -67,7 +67,7 @@ proc fcQWidgetAction_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: 
 proc fcQWidgetAction_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QWidgetAction_tr3".}
 proc fcQWidgetAction_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QWidgetAction_trUtf82".}
 proc fcQWidgetAction_trUtf83(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QWidgetAction_trUtf83".}
-type cQWidgetActionVTable = object
+type cQWidgetActionVTable {.pure.} = object
   destructor*: proc(vtbl: ptr cQWidgetActionVTable, self: ptr cQWidgetAction) {.cdecl, raises:[], gcsafe.}
   metaObject*: proc(vtbl, self: pointer, ): pointer {.cdecl, raises: [], gcsafe.}
   metacast*: proc(vtbl, self: pointer, param1: cstring): pointer {.cdecl, raises: [], gcsafe.}
@@ -100,10 +100,9 @@ proc fcQWidgetAction_protectedbase_receivers(self: pointer, signal: cstring): ci
 proc fcQWidgetAction_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QWidgetAction_protectedbase_isSignalConnected".}
 proc fcQWidgetAction_new(vtbl: pointer, parent: pointer): ptr cQWidgetAction {.importc: "QWidgetAction_new".}
 proc fcQWidgetAction_staticMetaObject(): pointer {.importc: "QWidgetAction_staticMetaObject".}
-proc fcQWidgetAction_delete(self: pointer) {.importc: "QWidgetAction_delete".}
 
 proc metaObject*(self: gen_qwidgetaction_types.QWidgetAction, ): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQWidgetAction_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQWidgetAction_metaObject(self.h), owned: false)
 
 proc metacast*(self: gen_qwidgetaction_types.QWidgetAction, param1: cstring): pointer =
   fcQWidgetAction_metacast(self.h, param1)
@@ -127,10 +126,10 @@ proc setDefaultWidget*(self: gen_qwidgetaction_types.QWidgetAction, w: gen_qwidg
   fcQWidgetAction_setDefaultWidget(self.h, w.h)
 
 proc defaultWidget*(self: gen_qwidgetaction_types.QWidgetAction, ): gen_qwidget_types.QWidget =
-  gen_qwidget_types.QWidget(h: fcQWidgetAction_defaultWidget(self.h))
+  gen_qwidget_types.QWidget(h: fcQWidgetAction_defaultWidget(self.h), owned: false)
 
 proc requestWidget*(self: gen_qwidgetaction_types.QWidgetAction, parent: gen_qwidget_types.QWidget): gen_qwidget_types.QWidget =
-  gen_qwidget_types.QWidget(h: fcQWidgetAction_requestWidget(self.h, parent.h))
+  gen_qwidget_types.QWidget(h: fcQWidgetAction_requestWidget(self.h, parent.h), owned: false)
 
 proc releaseWidget*(self: gen_qwidgetaction_types.QWidgetAction, widget: gen_qwidget_types.QWidget): void =
   fcQWidgetAction_releaseWidget(self.h, widget.h)
@@ -171,7 +170,7 @@ type QWidgetActionchildEventProc* = proc(self: QWidgetAction, event: gen_qcoreev
 type QWidgetActioncustomEventProc* = proc(self: QWidgetAction, event: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
 type QWidgetActionconnectNotifyProc* = proc(self: QWidgetAction, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
 type QWidgetActiondisconnectNotifyProc* = proc(self: QWidgetAction, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
-type QWidgetActionVTable* = object
+type QWidgetActionVTable* {.inheritable, pure.} = object
   vtbl: cQWidgetActionVTable
   metaObject*: QWidgetActionmetaObjectProc
   metacast*: QWidgetActionmetacastProc
@@ -186,13 +185,16 @@ type QWidgetActionVTable* = object
   connectNotify*: QWidgetActionconnectNotifyProc
   disconnectNotify*: QWidgetActiondisconnectNotifyProc
 proc QWidgetActionmetaObject*(self: gen_qwidgetaction_types.QWidgetAction, ): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQWidgetAction_virtualbase_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQWidgetAction_virtualbase_metaObject(self.h), owned: false)
 
 proc miqt_exec_callback_cQWidgetAction_metaObject(vtbl: pointer, self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QWidgetActionVTable](vtbl)
   let self = QWidgetAction(h: self)
   var virtualReturn = vtbl[].metaObject(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QWidgetActionmetacast*(self: gen_qwidgetaction_types.QWidgetAction, param1: cstring): pointer =
   fcQWidgetAction_virtualbase_metacast(self.h, param1)
@@ -222,7 +224,7 @@ proc QWidgetActionevent*(self: gen_qwidgetaction_types.QWidgetAction, param1: ge
 proc miqt_exec_callback_cQWidgetAction_event(vtbl: pointer, self: pointer, param1: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QWidgetActionVTable](vtbl)
   let self = QWidgetAction(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: param1)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: param1, owned: false)
   var virtualReturn = vtbl[].event(self, slotval1)
   virtualReturn
 
@@ -232,20 +234,23 @@ proc QWidgetActioneventFilter*(self: gen_qwidgetaction_types.QWidgetAction, para
 proc miqt_exec_callback_cQWidgetAction_eventFilter(vtbl: pointer, self: pointer, param1: pointer, param2: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QWidgetActionVTable](vtbl)
   let self = QWidgetAction(h: self)
-  let slotval1 = gen_qobject_types.QObject(h: param1)
-  let slotval2 = gen_qcoreevent_types.QEvent(h: param2)
+  let slotval1 = gen_qobject_types.QObject(h: param1, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: param2, owned: false)
   var virtualReturn = vtbl[].eventFilter(self, slotval1, slotval2)
   virtualReturn
 
 proc QWidgetActioncreateWidget*(self: gen_qwidgetaction_types.QWidgetAction, parent: gen_qwidget_types.QWidget): gen_qwidget_types.QWidget =
-  gen_qwidget_types.QWidget(h: fcQWidgetAction_virtualbase_createWidget(self.h, parent.h))
+  gen_qwidget_types.QWidget(h: fcQWidgetAction_virtualbase_createWidget(self.h, parent.h), owned: false)
 
 proc miqt_exec_callback_cQWidgetAction_createWidget(vtbl: pointer, self: pointer, parent: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QWidgetActionVTable](vtbl)
   let self = QWidgetAction(h: self)
-  let slotval1 = gen_qwidget_types.QWidget(h: parent)
+  let slotval1 = gen_qwidget_types.QWidget(h: parent, owned: false)
   var virtualReturn = vtbl[].createWidget(self, slotval1)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QWidgetActiondeleteWidget*(self: gen_qwidgetaction_types.QWidgetAction, widget: gen_qwidget_types.QWidget): void =
   fcQWidgetAction_virtualbase_deleteWidget(self.h, widget.h)
@@ -253,7 +258,7 @@ proc QWidgetActiondeleteWidget*(self: gen_qwidgetaction_types.QWidgetAction, wid
 proc miqt_exec_callback_cQWidgetAction_deleteWidget(vtbl: pointer, self: pointer, widget: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QWidgetActionVTable](vtbl)
   let self = QWidgetAction(h: self)
-  let slotval1 = gen_qwidget_types.QWidget(h: widget)
+  let slotval1 = gen_qwidget_types.QWidget(h: widget, owned: false)
   vtbl[].deleteWidget(self, slotval1)
 
 proc QWidgetActiontimerEvent*(self: gen_qwidgetaction_types.QWidgetAction, event: gen_qcoreevent_types.QTimerEvent): void =
@@ -262,7 +267,7 @@ proc QWidgetActiontimerEvent*(self: gen_qwidgetaction_types.QWidgetAction, event
 proc miqt_exec_callback_cQWidgetAction_timerEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QWidgetActionVTable](vtbl)
   let self = QWidgetAction(h: self)
-  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   vtbl[].timerEvent(self, slotval1)
 
 proc QWidgetActionchildEvent*(self: gen_qwidgetaction_types.QWidgetAction, event: gen_qcoreevent_types.QChildEvent): void =
@@ -271,7 +276,7 @@ proc QWidgetActionchildEvent*(self: gen_qwidgetaction_types.QWidgetAction, event
 proc miqt_exec_callback_cQWidgetAction_childEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QWidgetActionVTable](vtbl)
   let self = QWidgetAction(h: self)
-  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   vtbl[].childEvent(self, slotval1)
 
 proc QWidgetActioncustomEvent*(self: gen_qwidgetaction_types.QWidgetAction, event: gen_qcoreevent_types.QEvent): void =
@@ -280,7 +285,7 @@ proc QWidgetActioncustomEvent*(self: gen_qwidgetaction_types.QWidgetAction, even
 proc miqt_exec_callback_cQWidgetAction_customEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QWidgetActionVTable](vtbl)
   let self = QWidgetAction(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].customEvent(self, slotval1)
 
 proc QWidgetActionconnectNotify*(self: gen_qwidgetaction_types.QWidgetAction, signal: gen_qmetaobject_types.QMetaMethod): void =
@@ -289,7 +294,7 @@ proc QWidgetActionconnectNotify*(self: gen_qwidgetaction_types.QWidgetAction, si
 proc miqt_exec_callback_cQWidgetAction_connectNotify(vtbl: pointer, self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QWidgetActionVTable](vtbl)
   let self = QWidgetAction(h: self)
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].connectNotify(self, slotval1)
 
 proc QWidgetActiondisconnectNotify*(self: gen_qwidgetaction_types.QWidgetAction, signal: gen_qmetaobject_types.QMetaMethod): void =
@@ -298,20 +303,120 @@ proc QWidgetActiondisconnectNotify*(self: gen_qwidgetaction_types.QWidgetAction,
 proc miqt_exec_callback_cQWidgetAction_disconnectNotify(vtbl: pointer, self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QWidgetActionVTable](vtbl)
   let self = QWidgetAction(h: self)
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].disconnectNotify(self, slotval1)
+
+type VirtualQWidgetAction* {.inheritable.} = ref object of QWidgetAction
+  vtbl*: cQWidgetActionVTable
+method metaObject*(self: VirtualQWidgetAction, ): gen_qobjectdefs_types.QMetaObject {.base.} =
+  QWidgetActionmetaObject(self[])
+proc miqt_exec_method_cQWidgetAction_metaObject(vtbl: pointer, inst: pointer): pointer {.cdecl.} =
+  let vtbl = cast[VirtualQWidgetAction](cast[uint](vtbl) - uint(offsetOf(VirtualQWidgetAction, vtbl)))
+  var virtualReturn = vtbl.metaObject()
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
+
+method metacast*(self: VirtualQWidgetAction, param1: cstring): pointer {.base.} =
+  QWidgetActionmetacast(self[], param1)
+proc miqt_exec_method_cQWidgetAction_metacast(vtbl: pointer, inst: pointer, param1: cstring): pointer {.cdecl.} =
+  let vtbl = cast[VirtualQWidgetAction](cast[uint](vtbl) - uint(offsetOf(VirtualQWidgetAction, vtbl)))
+  let slotval1 = (param1)
+  var virtualReturn = vtbl.metacast(slotval1)
+  virtualReturn
+
+method metacall*(self: VirtualQWidgetAction, param1: cint, param2: cint, param3: pointer): cint {.base.} =
+  QWidgetActionmetacall(self[], param1, param2, param3)
+proc miqt_exec_method_cQWidgetAction_metacall(vtbl: pointer, inst: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
+  let vtbl = cast[VirtualQWidgetAction](cast[uint](vtbl) - uint(offsetOf(VirtualQWidgetAction, vtbl)))
+  let slotval1 = cint(param1)
+  let slotval2 = param2
+  let slotval3 = param3
+  var virtualReturn = vtbl.metacall(slotval1, slotval2, slotval3)
+  virtualReturn
+
+method event*(self: VirtualQWidgetAction, param1: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QWidgetActionevent(self[], param1)
+proc miqt_exec_method_cQWidgetAction_event(vtbl: pointer, inst: pointer, param1: pointer): bool {.cdecl.} =
+  let vtbl = cast[VirtualQWidgetAction](cast[uint](vtbl) - uint(offsetOf(VirtualQWidgetAction, vtbl)))
+  let slotval1 = gen_qcoreevent_types.QEvent(h: param1, owned: false)
+  var virtualReturn = vtbl.event(slotval1)
+  virtualReturn
+
+method eventFilter*(self: VirtualQWidgetAction, param1: gen_qobject_types.QObject, param2: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QWidgetActioneventFilter(self[], param1, param2)
+proc miqt_exec_method_cQWidgetAction_eventFilter(vtbl: pointer, inst: pointer, param1: pointer, param2: pointer): bool {.cdecl.} =
+  let vtbl = cast[VirtualQWidgetAction](cast[uint](vtbl) - uint(offsetOf(VirtualQWidgetAction, vtbl)))
+  let slotval1 = gen_qobject_types.QObject(h: param1, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: param2, owned: false)
+  var virtualReturn = vtbl.eventFilter(slotval1, slotval2)
+  virtualReturn
+
+method createWidget*(self: VirtualQWidgetAction, parent: gen_qwidget_types.QWidget): gen_qwidget_types.QWidget {.base.} =
+  QWidgetActioncreateWidget(self[], parent)
+proc miqt_exec_method_cQWidgetAction_createWidget(vtbl: pointer, inst: pointer, parent: pointer): pointer {.cdecl.} =
+  let vtbl = cast[VirtualQWidgetAction](cast[uint](vtbl) - uint(offsetOf(VirtualQWidgetAction, vtbl)))
+  let slotval1 = gen_qwidget_types.QWidget(h: parent, owned: false)
+  var virtualReturn = vtbl.createWidget(slotval1)
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
+
+method deleteWidget*(self: VirtualQWidgetAction, widget: gen_qwidget_types.QWidget): void {.base.} =
+  QWidgetActiondeleteWidget(self[], widget)
+proc miqt_exec_method_cQWidgetAction_deleteWidget(vtbl: pointer, inst: pointer, widget: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQWidgetAction](cast[uint](vtbl) - uint(offsetOf(VirtualQWidgetAction, vtbl)))
+  let slotval1 = gen_qwidget_types.QWidget(h: widget, owned: false)
+  vtbl.deleteWidget(slotval1)
+
+method timerEvent*(self: VirtualQWidgetAction, event: gen_qcoreevent_types.QTimerEvent): void {.base.} =
+  QWidgetActiontimerEvent(self[], event)
+proc miqt_exec_method_cQWidgetAction_timerEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQWidgetAction](cast[uint](vtbl) - uint(offsetOf(VirtualQWidgetAction, vtbl)))
+  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
+  vtbl.timerEvent(slotval1)
+
+method childEvent*(self: VirtualQWidgetAction, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
+  QWidgetActionchildEvent(self[], event)
+proc miqt_exec_method_cQWidgetAction_childEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQWidgetAction](cast[uint](vtbl) - uint(offsetOf(VirtualQWidgetAction, vtbl)))
+  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
+  vtbl.childEvent(slotval1)
+
+method customEvent*(self: VirtualQWidgetAction, event: gen_qcoreevent_types.QEvent): void {.base.} =
+  QWidgetActioncustomEvent(self[], event)
+proc miqt_exec_method_cQWidgetAction_customEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQWidgetAction](cast[uint](vtbl) - uint(offsetOf(VirtualQWidgetAction, vtbl)))
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
+  vtbl.customEvent(slotval1)
+
+method connectNotify*(self: VirtualQWidgetAction, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QWidgetActionconnectNotify(self[], signal)
+proc miqt_exec_method_cQWidgetAction_connectNotify(vtbl: pointer, inst: pointer, signal: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQWidgetAction](cast[uint](vtbl) - uint(offsetOf(VirtualQWidgetAction, vtbl)))
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
+  vtbl.connectNotify(slotval1)
+
+method disconnectNotify*(self: VirtualQWidgetAction, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QWidgetActiondisconnectNotify(self[], signal)
+proc miqt_exec_method_cQWidgetAction_disconnectNotify(vtbl: pointer, inst: pointer, signal: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQWidgetAction](cast[uint](vtbl) - uint(offsetOf(VirtualQWidgetAction, vtbl)))
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
+  vtbl.disconnectNotify(slotval1)
 
 proc createdWidgets*(self: gen_qwidgetaction_types.QWidgetAction, ): seq[gen_qwidget_types.QWidget] =
   var v_ma = fcQWidgetAction_protectedbase_createdWidgets(self.h)
   var vx_ret = newSeq[gen_qwidget_types.QWidget](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
-    vx_ret[i] = gen_qwidget_types.QWidget(h: v_outCast[i])
+    vx_ret[i] = gen_qwidget_types.QWidget(h: v_outCast[i], owned: false)
   c_free(v_ma.data)
   vx_ret
 
 proc sender*(self: gen_qwidgetaction_types.QWidgetAction, ): gen_qobject_types.QObject =
-  gen_qobject_types.QObject(h: fcQWidgetAction_protectedbase_sender(self.h))
+  gen_qobject_types.QObject(h: fcQWidgetAction_protectedbase_sender(self.h), owned: false)
 
 proc senderSignalIndex*(self: gen_qwidgetaction_types.QWidgetAction, ): cint =
   fcQWidgetAction_protectedbase_senderSignalIndex(self.h)
@@ -327,36 +432,58 @@ proc create*(T: type gen_qwidgetaction_types.QWidgetAction,
     vtbl: ref QWidgetActionVTable = nil): gen_qwidgetaction_types.QWidgetAction =
   let vtbl = if vtbl == nil: new QWidgetActionVTable else: vtbl
   GC_ref(vtbl)
-  vtbl.vtbl.destructor = proc(vtbl: ptr cQWidgetActionVTable, _: ptr cQWidgetAction) {.cdecl.} =
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQWidgetActionVTable, _: ptr cQWidgetAction) {.cdecl.} =
     let vtbl = cast[ref QWidgetActionVTable](vtbl)
     GC_unref(vtbl)
-  if not isNil(vtbl.metaObject):
+  if not isNil(vtbl[].metaObject):
     vtbl[].vtbl.metaObject = miqt_exec_callback_cQWidgetAction_metaObject
-  if not isNil(vtbl.metacast):
+  if not isNil(vtbl[].metacast):
     vtbl[].vtbl.metacast = miqt_exec_callback_cQWidgetAction_metacast
-  if not isNil(vtbl.metacall):
+  if not isNil(vtbl[].metacall):
     vtbl[].vtbl.metacall = miqt_exec_callback_cQWidgetAction_metacall
-  if not isNil(vtbl.event):
+  if not isNil(vtbl[].event):
     vtbl[].vtbl.event = miqt_exec_callback_cQWidgetAction_event
-  if not isNil(vtbl.eventFilter):
+  if not isNil(vtbl[].eventFilter):
     vtbl[].vtbl.eventFilter = miqt_exec_callback_cQWidgetAction_eventFilter
-  if not isNil(vtbl.createWidget):
+  if not isNil(vtbl[].createWidget):
     vtbl[].vtbl.createWidget = miqt_exec_callback_cQWidgetAction_createWidget
-  if not isNil(vtbl.deleteWidget):
+  if not isNil(vtbl[].deleteWidget):
     vtbl[].vtbl.deleteWidget = miqt_exec_callback_cQWidgetAction_deleteWidget
-  if not isNil(vtbl.timerEvent):
+  if not isNil(vtbl[].timerEvent):
     vtbl[].vtbl.timerEvent = miqt_exec_callback_cQWidgetAction_timerEvent
-  if not isNil(vtbl.childEvent):
+  if not isNil(vtbl[].childEvent):
     vtbl[].vtbl.childEvent = miqt_exec_callback_cQWidgetAction_childEvent
-  if not isNil(vtbl.customEvent):
+  if not isNil(vtbl[].customEvent):
     vtbl[].vtbl.customEvent = miqt_exec_callback_cQWidgetAction_customEvent
-  if not isNil(vtbl.connectNotify):
+  if not isNil(vtbl[].connectNotify):
     vtbl[].vtbl.connectNotify = miqt_exec_callback_cQWidgetAction_connectNotify
-  if not isNil(vtbl.disconnectNotify):
+  if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQWidgetAction_disconnectNotify
-  gen_qwidgetaction_types.QWidgetAction(h: fcQWidgetAction_new(addr(vtbl[]), parent.h))
+  gen_qwidgetaction_types.QWidgetAction(h: fcQWidgetAction_new(addr(vtbl[].vtbl), parent.h), owned: true)
+
+proc create*(T: type gen_qwidgetaction_types.QWidgetAction,
+    parent: gen_qobject_types.QObject,
+    vtbl: VirtualQWidgetAction) =
+
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQWidgetActionVTable, _: ptr cQWidgetAction) {.cdecl.} =
+    let vtbl = cast[ptr typeof(VirtualQWidgetAction()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQWidgetAction, vtbl)))
+    vtbl[].h = nil
+    vtbl[].owned = false
+  vtbl[].vtbl.metaObject = miqt_exec_method_cQWidgetAction_metaObject
+  vtbl[].vtbl.metacast = miqt_exec_method_cQWidgetAction_metacast
+  vtbl[].vtbl.metacall = miqt_exec_method_cQWidgetAction_metacall
+  vtbl[].vtbl.event = miqt_exec_method_cQWidgetAction_event
+  vtbl[].vtbl.eventFilter = miqt_exec_method_cQWidgetAction_eventFilter
+  vtbl[].vtbl.createWidget = miqt_exec_method_cQWidgetAction_createWidget
+  vtbl[].vtbl.deleteWidget = miqt_exec_method_cQWidgetAction_deleteWidget
+  vtbl[].vtbl.timerEvent = miqt_exec_method_cQWidgetAction_timerEvent
+  vtbl[].vtbl.childEvent = miqt_exec_method_cQWidgetAction_childEvent
+  vtbl[].vtbl.customEvent = miqt_exec_method_cQWidgetAction_customEvent
+  vtbl[].vtbl.connectNotify = miqt_exec_method_cQWidgetAction_connectNotify
+  vtbl[].vtbl.disconnectNotify = miqt_exec_method_cQWidgetAction_disconnectNotify
+  if vtbl[].h != nil: delete(move(vtbl[]))
+  vtbl[].h = fcQWidgetAction_new(addr(vtbl[].vtbl), parent.h)
+  vtbl[].owned = true
 
 proc staticMetaObject*(_: type gen_qwidgetaction_types.QWidgetAction): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQWidgetAction_staticMetaObject())
-proc delete*(self: gen_qwidgetaction_types.QWidgetAction) =
-  fcQWidgetAction_delete(self.h)

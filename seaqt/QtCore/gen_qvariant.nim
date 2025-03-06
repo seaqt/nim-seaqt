@@ -30,9 +30,6 @@ func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
     else:
       copyMem(addr result[0], unsafeAddr v[0], v.len)
 
-const cflags = gorge("pkg-config --cflags Qt5Core")  & " -fPIC"
-{.compile("gen_qvariant.cpp", cflags).}
-
 
 type QVariantTypeEnum* = distinct cint
 template Invalid*(_: type QVariantTypeEnum): untyped = 0
@@ -271,11 +268,8 @@ proc fcQVariant_new41(jsonArray: pointer): ptr cQVariant {.importc: "QVariant_ne
 proc fcQVariant_new42(jsonDocument: pointer): ptr cQVariant {.importc: "QVariant_new42".}
 proc fcQVariant_new43(modelIndex: pointer): ptr cQVariant {.importc: "QVariant_new43".}
 proc fcQVariant_new44(modelIndex: pointer): ptr cQVariant {.importc: "QVariant_new44".}
-proc fcQVariant_delete(self: pointer) {.importc: "QVariant_delete".}
 proc fcQVariantComparisonHelper_new(varVal: pointer): ptr cQVariantComparisonHelper {.importc: "QVariantComparisonHelper_new".}
 proc fcQVariantComparisonHelper_new2(param1: pointer): ptr cQVariantComparisonHelper {.importc: "QVariantComparisonHelper_new2".}
-proc fcQVariantComparisonHelper_delete(self: pointer) {.importc: "QVariantComparisonHelper_delete".}
-proc fcQVariantHandler_delete(self: pointer) {.importc: "QVariant__Handler_delete".}
 proc fcQSequentialIterableconst_iterator_operatorAssign(self: pointer, other: pointer): void {.importc: "QSequentialIterable__const_iterator_operatorAssign".}
 proc fcQSequentialIterableconst_iterator_operatorMultiply(self: pointer, ): pointer {.importc: "QSequentialIterable__const_iterator_operatorMultiply".}
 proc fcQSequentialIterableconst_iterator_operatorEqual(self: pointer, o: pointer): bool {.importc: "QSequentialIterable__const_iterator_operatorEqual".}
@@ -289,7 +283,6 @@ proc fcQSequentialIterableconst_iterator_operatorMinusAssign(self: pointer, j: c
 proc fcQSequentialIterableconst_iterator_operatorPlus(self: pointer, j: cint): pointer {.importc: "QSequentialIterable__const_iterator_operatorPlus".}
 proc fcQSequentialIterableconst_iterator_operatorMinus(self: pointer, j: cint): pointer {.importc: "QSequentialIterable__const_iterator_operatorMinus".}
 proc fcQSequentialIterableconst_iterator_new(other: pointer): ptr cQSequentialIterableconst_iterator {.importc: "QSequentialIterable__const_iterator_new".}
-proc fcQSequentialIterableconst_iterator_delete(self: pointer) {.importc: "QSequentialIterable__const_iterator_delete".}
 proc fcQAssociativeIterableconst_iterator_operatorAssign(self: pointer, other: pointer): void {.importc: "QAssociativeIterable__const_iterator_operatorAssign".}
 proc fcQAssociativeIterableconst_iterator_key(self: pointer, ): pointer {.importc: "QAssociativeIterable__const_iterator_key".}
 proc fcQAssociativeIterableconst_iterator_value(self: pointer, ): pointer {.importc: "QAssociativeIterable__const_iterator_value".}
@@ -305,7 +298,6 @@ proc fcQAssociativeIterableconst_iterator_operatorMinusAssign(self: pointer, j: 
 proc fcQAssociativeIterableconst_iterator_operatorPlus(self: pointer, j: cint): pointer {.importc: "QAssociativeIterable__const_iterator_operatorPlus".}
 proc fcQAssociativeIterableconst_iterator_operatorMinus(self: pointer, j: cint): pointer {.importc: "QAssociativeIterable__const_iterator_operatorMinus".}
 proc fcQAssociativeIterableconst_iterator_new(other: pointer): ptr cQAssociativeIterableconst_iterator {.importc: "QAssociativeIterable__const_iterator_new".}
-proc fcQAssociativeIterableconst_iterator_delete(self: pointer) {.importc: "QAssociativeIterable__const_iterator_delete".}
 
 proc operatorAssign*(self: gen_qvariant_types.QVariant, other: gen_qvariant_types.QVariant): void =
   fcQVariant_operatorAssign(self.h, other.h)
@@ -374,7 +366,7 @@ proc toByteArray*(self: gen_qvariant_types.QVariant, ): seq[byte] =
   vx_ret
 
 proc toBitArray*(self: gen_qvariant_types.QVariant, ): gen_qbitarray_types.QBitArray =
-  gen_qbitarray_types.QBitArray(h: fcQVariant_toBitArray(self.h))
+  gen_qbitarray_types.QBitArray(h: fcQVariant_toBitArray(self.h), owned: true)
 
 proc toString*(self: gen_qvariant_types.QVariant, ): string =
   let v_ms = fcQVariant_toString(self.h)
@@ -395,16 +387,16 @@ proc toStringList*(self: gen_qvariant_types.QVariant, ): seq[string] =
   vx_ret
 
 proc toChar*(self: gen_qvariant_types.QVariant, ): gen_qchar_types.QChar =
-  gen_qchar_types.QChar(h: fcQVariant_toChar(self.h))
+  gen_qchar_types.QChar(h: fcQVariant_toChar(self.h), owned: true)
 
 proc toDate*(self: gen_qvariant_types.QVariant, ): gen_qdatetime_types.QDate =
-  gen_qdatetime_types.QDate(h: fcQVariant_toDate(self.h))
+  gen_qdatetime_types.QDate(h: fcQVariant_toDate(self.h), owned: true)
 
 proc toTime*(self: gen_qvariant_types.QVariant, ): gen_qdatetime_types.QTime =
-  gen_qdatetime_types.QTime(h: fcQVariant_toTime(self.h))
+  gen_qdatetime_types.QTime(h: fcQVariant_toTime(self.h), owned: true)
 
 proc toDateTime*(self: gen_qvariant_types.QVariant, ): gen_qdatetime_types.QDateTime =
-  gen_qdatetime_types.QDateTime(h: fcQVariant_toDateTime(self.h))
+  gen_qdatetime_types.QDateTime(h: fcQVariant_toDateTime(self.h), owned: true)
 
 proc toMap*(self: gen_qvariant_types.QVariant, ): Table[string,gen_qvariant_types.QVariant] =
   var v_mm = fcQVariant_toMap(self.h)
@@ -417,7 +409,7 @@ proc toMap*(self: gen_qvariant_types.QVariant, ): Table[string,gen_qvariant_type
     c_free(vx_mapkey_ms.data)
     var v_entry_Key = vx_mapkeyx_ret
 
-    var v_entry_Value = gen_qvariant_types.QVariant(h: v_Values[i])
+    var v_entry_Value = gen_qvariant_types.QVariant(h: v_Values[i], owned: true)
 
     vx_ret[v_entry_Key] = v_entry_Value
   c_free(v_mm.keys)
@@ -435,7 +427,7 @@ proc toHash*(self: gen_qvariant_types.QVariant, ): Table[string,gen_qvariant_typ
     c_free(vx_hashkey_ms.data)
     var v_entry_Key = vx_hashkeyx_ret
 
-    var v_entry_Value = gen_qvariant_types.QVariant(h: v_Values[i])
+    var v_entry_Value = gen_qvariant_types.QVariant(h: v_Values[i], owned: true)
 
     vx_ret[v_entry_Key] = v_entry_Value
   c_free(v_mm.keys)
@@ -443,64 +435,64 @@ proc toHash*(self: gen_qvariant_types.QVariant, ): Table[string,gen_qvariant_typ
   vx_ret
 
 proc toPoint*(self: gen_qvariant_types.QVariant, ): gen_qpoint_types.QPoint =
-  gen_qpoint_types.QPoint(h: fcQVariant_toPoint(self.h))
+  gen_qpoint_types.QPoint(h: fcQVariant_toPoint(self.h), owned: true)
 
 proc toPointF*(self: gen_qvariant_types.QVariant, ): gen_qpoint_types.QPointF =
-  gen_qpoint_types.QPointF(h: fcQVariant_toPointF(self.h))
+  gen_qpoint_types.QPointF(h: fcQVariant_toPointF(self.h), owned: true)
 
 proc toRect*(self: gen_qvariant_types.QVariant, ): gen_qrect_types.QRect =
-  gen_qrect_types.QRect(h: fcQVariant_toRect(self.h))
+  gen_qrect_types.QRect(h: fcQVariant_toRect(self.h), owned: true)
 
 proc toSize*(self: gen_qvariant_types.QVariant, ): gen_qsize_types.QSize =
-  gen_qsize_types.QSize(h: fcQVariant_toSize(self.h))
+  gen_qsize_types.QSize(h: fcQVariant_toSize(self.h), owned: true)
 
 proc toSizeF*(self: gen_qvariant_types.QVariant, ): gen_qsize_types.QSizeF =
-  gen_qsize_types.QSizeF(h: fcQVariant_toSizeF(self.h))
+  gen_qsize_types.QSizeF(h: fcQVariant_toSizeF(self.h), owned: true)
 
 proc toLine*(self: gen_qvariant_types.QVariant, ): gen_qline_types.QLine =
-  gen_qline_types.QLine(h: fcQVariant_toLine(self.h))
+  gen_qline_types.QLine(h: fcQVariant_toLine(self.h), owned: true)
 
 proc toLineF*(self: gen_qvariant_types.QVariant, ): gen_qline_types.QLineF =
-  gen_qline_types.QLineF(h: fcQVariant_toLineF(self.h))
+  gen_qline_types.QLineF(h: fcQVariant_toLineF(self.h), owned: true)
 
 proc toRectF*(self: gen_qvariant_types.QVariant, ): gen_qrect_types.QRectF =
-  gen_qrect_types.QRectF(h: fcQVariant_toRectF(self.h))
+  gen_qrect_types.QRectF(h: fcQVariant_toRectF(self.h), owned: true)
 
 proc toLocale*(self: gen_qvariant_types.QVariant, ): gen_qlocale_types.QLocale =
-  gen_qlocale_types.QLocale(h: fcQVariant_toLocale(self.h))
+  gen_qlocale_types.QLocale(h: fcQVariant_toLocale(self.h), owned: true)
 
 proc toRegExp*(self: gen_qvariant_types.QVariant, ): gen_qregexp_types.QRegExp =
-  gen_qregexp_types.QRegExp(h: fcQVariant_toRegExp(self.h))
+  gen_qregexp_types.QRegExp(h: fcQVariant_toRegExp(self.h), owned: true)
 
 proc toRegularExpression*(self: gen_qvariant_types.QVariant, ): gen_qregularexpression_types.QRegularExpression =
-  gen_qregularexpression_types.QRegularExpression(h: fcQVariant_toRegularExpression(self.h))
+  gen_qregularexpression_types.QRegularExpression(h: fcQVariant_toRegularExpression(self.h), owned: true)
 
 proc toEasingCurve*(self: gen_qvariant_types.QVariant, ): gen_qeasingcurve_types.QEasingCurve =
-  gen_qeasingcurve_types.QEasingCurve(h: fcQVariant_toEasingCurve(self.h))
+  gen_qeasingcurve_types.QEasingCurve(h: fcQVariant_toEasingCurve(self.h), owned: true)
 
 proc toUuid*(self: gen_qvariant_types.QVariant, ): gen_quuid_types.QUuid =
-  gen_quuid_types.QUuid(h: fcQVariant_toUuid(self.h))
+  gen_quuid_types.QUuid(h: fcQVariant_toUuid(self.h), owned: true)
 
 proc toUrl*(self: gen_qvariant_types.QVariant, ): gen_qurl_types.QUrl =
-  gen_qurl_types.QUrl(h: fcQVariant_toUrl(self.h))
+  gen_qurl_types.QUrl(h: fcQVariant_toUrl(self.h), owned: true)
 
 proc toJsonValue*(self: gen_qvariant_types.QVariant, ): gen_qjsonvalue_types.QJsonValue =
-  gen_qjsonvalue_types.QJsonValue(h: fcQVariant_toJsonValue(self.h))
+  gen_qjsonvalue_types.QJsonValue(h: fcQVariant_toJsonValue(self.h), owned: true)
 
 proc toJsonObject*(self: gen_qvariant_types.QVariant, ): gen_qjsonobject_types.QJsonObject =
-  gen_qjsonobject_types.QJsonObject(h: fcQVariant_toJsonObject(self.h))
+  gen_qjsonobject_types.QJsonObject(h: fcQVariant_toJsonObject(self.h), owned: true)
 
 proc toJsonArray*(self: gen_qvariant_types.QVariant, ): gen_qjsonarray_types.QJsonArray =
-  gen_qjsonarray_types.QJsonArray(h: fcQVariant_toJsonArray(self.h))
+  gen_qjsonarray_types.QJsonArray(h: fcQVariant_toJsonArray(self.h), owned: true)
 
 proc toJsonDocument*(self: gen_qvariant_types.QVariant, ): gen_qjsondocument_types.QJsonDocument =
-  gen_qjsondocument_types.QJsonDocument(h: fcQVariant_toJsonDocument(self.h))
+  gen_qjsondocument_types.QJsonDocument(h: fcQVariant_toJsonDocument(self.h), owned: true)
 
 proc toModelIndex*(self: gen_qvariant_types.QVariant, ): gen_qabstractitemmodel_types.QModelIndex =
-  gen_qabstractitemmodel_types.QModelIndex(h: fcQVariant_toModelIndex(self.h))
+  gen_qabstractitemmodel_types.QModelIndex(h: fcQVariant_toModelIndex(self.h), owned: true)
 
 proc toPersistentModelIndex*(self: gen_qvariant_types.QVariant, ): gen_qabstractitemmodel_types.QPersistentModelIndex =
-  gen_qabstractitemmodel_types.QPersistentModelIndex(h: fcQVariant_toPersistentModelIndex(self.h))
+  gen_qabstractitemmodel_types.QPersistentModelIndex(h: fcQVariant_toPersistentModelIndex(self.h), owned: true)
 
 proc load*(self: gen_qvariant_types.QVariant, ds: gen_qdatastream_types.QDataStream): void =
   fcQVariant_load(self.h, ds.h)
@@ -563,7 +555,7 @@ proc toReal*(self: gen_qvariant_types.QVariant, ok: ptr bool): float64 =
   fcQVariant_toReal1(self.h, ok)
 
 proc fromValue*(_: type gen_qvariant_types.QVariant, value: gen_qobject_types.QObject): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQVariant_fromValue(value.h))
+  gen_qvariant_types.QVariant(h: fcQVariant_fromValue(value.h), owned: true)
 
 proc create*(self: gen_qvariant_types.QVariant, typeVal: cint, copy: pointer): void =
   fcQVariant_protectedbase_create(self.h, typeVal, copy)
@@ -578,71 +570,71 @@ proc convert*(self: gen_qvariant_types.QVariant, t: cint, ptrVal: pointer): bool
   fcQVariant_protectedbase_convert2(self.h, t, ptrVal)
 
 proc create*(T: type gen_qvariant_types.QVariant): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQVariant_new())
+  gen_qvariant_types.QVariant(h: fcQVariant_new(), owned: true)
 
 proc create*(T: type gen_qvariant_types.QVariant,
     typeVal: cint): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQVariant_new2(cint(typeVal)))
+  gen_qvariant_types.QVariant(h: fcQVariant_new2(cint(typeVal)), owned: true)
 
 proc create*(T: type gen_qvariant_types.QVariant,
     typeId: cint, copy: pointer): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQVariant_new3(typeId, copy))
+  gen_qvariant_types.QVariant(h: fcQVariant_new3(typeId, copy), owned: true)
 
 proc create*(T: type gen_qvariant_types.QVariant,
     typeId: cint, copy: pointer, flags: cuint): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQVariant_new4(typeId, copy, flags))
+  gen_qvariant_types.QVariant(h: fcQVariant_new4(typeId, copy, flags), owned: true)
 
 proc create*(T: type gen_qvariant_types.QVariant,
     other: gen_qvariant_types.QVariant): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQVariant_new5(other.h))
+  gen_qvariant_types.QVariant(h: fcQVariant_new5(other.h), owned: true)
 
 proc create*(T: type gen_qvariant_types.QVariant,
     s: gen_qdatastream_types.QDataStream): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQVariant_new6(s.h))
+  gen_qvariant_types.QVariant(h: fcQVariant_new6(s.h), owned: true)
 
 proc create2*(T: type gen_qvariant_types.QVariant,
     i: cint): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQVariant_new7(i))
+  gen_qvariant_types.QVariant(h: fcQVariant_new7(i), owned: true)
 
 proc create*(T: type gen_qvariant_types.QVariant,
     ui: cuint): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQVariant_new8(ui))
+  gen_qvariant_types.QVariant(h: fcQVariant_new8(ui), owned: true)
 
 proc create*(T: type gen_qvariant_types.QVariant,
     ll: clonglong): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQVariant_new9(ll))
+  gen_qvariant_types.QVariant(h: fcQVariant_new9(ll), owned: true)
 
 proc create*(T: type gen_qvariant_types.QVariant,
     ull: culonglong): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQVariant_new10(ull))
+  gen_qvariant_types.QVariant(h: fcQVariant_new10(ull), owned: true)
 
 proc create*(T: type gen_qvariant_types.QVariant,
     b: bool): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQVariant_new11(b))
+  gen_qvariant_types.QVariant(h: fcQVariant_new11(b), owned: true)
 
 proc create*(T: type gen_qvariant_types.QVariant,
     d: float64): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQVariant_new12(d))
+  gen_qvariant_types.QVariant(h: fcQVariant_new12(d), owned: true)
 
 proc create*(T: type gen_qvariant_types.QVariant,
     f: float32): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQVariant_new13(f))
+  gen_qvariant_types.QVariant(h: fcQVariant_new13(f), owned: true)
 
 proc create*(T: type gen_qvariant_types.QVariant,
     str: cstring): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQVariant_new14(str))
+  gen_qvariant_types.QVariant(h: fcQVariant_new14(str), owned: true)
 
 proc create*(T: type gen_qvariant_types.QVariant,
     bytearray: seq[byte]): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQVariant_new15(struct_miqt_string(data: cast[cstring](if len(bytearray) == 0: nil else: unsafeAddr bytearray[0]), len: csize_t(len(bytearray)))))
+  gen_qvariant_types.QVariant(h: fcQVariant_new15(struct_miqt_string(data: cast[cstring](if len(bytearray) == 0: nil else: unsafeAddr bytearray[0]), len: csize_t(len(bytearray)))), owned: true)
 
 proc create*(T: type gen_qvariant_types.QVariant,
     bitarray: gen_qbitarray_types.QBitArray): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQVariant_new16(bitarray.h))
+  gen_qvariant_types.QVariant(h: fcQVariant_new16(bitarray.h), owned: true)
 
 proc create*(T: type gen_qvariant_types.QVariant,
     string: string): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQVariant_new17(struct_miqt_string(data: string, len: csize_t(len(string)))))
+  gen_qvariant_types.QVariant(h: fcQVariant_new17(struct_miqt_string(data: string, len: csize_t(len(string)))), owned: true)
 
 proc create*(T: type gen_qvariant_types.QVariant,
     stringlist: seq[string]): gen_qvariant_types.QVariant =
@@ -650,147 +642,147 @@ proc create*(T: type gen_qvariant_types.QVariant,
   for i in 0..<len(stringlist):
     stringlist_CArray[i] = struct_miqt_string(data: stringlist[i], len: csize_t(len(stringlist[i])))
 
-  gen_qvariant_types.QVariant(h: fcQVariant_new18(struct_miqt_array(len: csize_t(len(stringlist)), data: if len(stringlist) == 0: nil else: addr(stringlist_CArray[0]))))
+  gen_qvariant_types.QVariant(h: fcQVariant_new18(struct_miqt_array(len: csize_t(len(stringlist)), data: if len(stringlist) == 0: nil else: addr(stringlist_CArray[0]))), owned: true)
 
 proc create*(T: type gen_qvariant_types.QVariant,
     qchar: gen_qchar_types.QChar): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQVariant_new19(qchar.h))
+  gen_qvariant_types.QVariant(h: fcQVariant_new19(qchar.h), owned: true)
 
 proc create*(T: type gen_qvariant_types.QVariant,
     date: gen_qdatetime_types.QDate): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQVariant_new20(date.h))
+  gen_qvariant_types.QVariant(h: fcQVariant_new20(date.h), owned: true)
 
 proc create*(T: type gen_qvariant_types.QVariant,
     time: gen_qdatetime_types.QTime): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQVariant_new21(time.h))
+  gen_qvariant_types.QVariant(h: fcQVariant_new21(time.h), owned: true)
 
 proc create*(T: type gen_qvariant_types.QVariant,
     datetime: gen_qdatetime_types.QDateTime): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQVariant_new22(datetime.h))
+  gen_qvariant_types.QVariant(h: fcQVariant_new22(datetime.h), owned: true)
 
 proc create*(T: type gen_qvariant_types.QVariant,
     map: Table[string,gen_qvariant_types.QVariant]): gen_qvariant_types.QVariant =
   var map_Keys_CArray = newSeq[struct_miqt_string](len(map))
   var map_Values_CArray = newSeq[pointer](len(map))
   var map_ctr = 0
-  for map_k, map_v in map:
+  for map_k in map.keys():
     map_Keys_CArray[map_ctr] = struct_miqt_string(data: map_k, len: csize_t(len(map_k)))
+    map_ctr += 1
+  map_ctr = 0
+  for map_v in map.values():
     map_Values_CArray[map_ctr] = map_v.h
     map_ctr += 1
 
-  gen_qvariant_types.QVariant(h: fcQVariant_new23(struct_miqt_map(len: csize_t(len(map)),keys: if len(map) == 0: nil else: addr(map_Keys_CArray[0]), values: if len(map) == 0: nil else: addr(map_Values_CArray[0]),)))
+  gen_qvariant_types.QVariant(h: fcQVariant_new23(struct_miqt_map(len: csize_t(len(map)),keys: if len(map) == 0: nil else: addr(map_Keys_CArray[0]), values: if len(map) == 0: nil else: addr(map_Values_CArray[0]),)), owned: true)
 
 proc create2*(T: type gen_qvariant_types.QVariant,
     hash: Table[string,gen_qvariant_types.QVariant]): gen_qvariant_types.QVariant =
   var hash_Keys_CArray = newSeq[struct_miqt_string](len(hash))
   var hash_Values_CArray = newSeq[pointer](len(hash))
   var hash_ctr = 0
-  for hash_k, hash_v in hash:
+  for hash_k in hash.keys():
     hash_Keys_CArray[hash_ctr] = struct_miqt_string(data: hash_k, len: csize_t(len(hash_k)))
+    hash_ctr += 1
+  hash_ctr = 0
+  for hash_v in hash.values():
     hash_Values_CArray[hash_ctr] = hash_v.h
     hash_ctr += 1
 
-  gen_qvariant_types.QVariant(h: fcQVariant_new24(struct_miqt_map(len: csize_t(len(hash)),keys: if len(hash) == 0: nil else: addr(hash_Keys_CArray[0]), values: if len(hash) == 0: nil else: addr(hash_Values_CArray[0]),)))
+  gen_qvariant_types.QVariant(h: fcQVariant_new24(struct_miqt_map(len: csize_t(len(hash)),keys: if len(hash) == 0: nil else: addr(hash_Keys_CArray[0]), values: if len(hash) == 0: nil else: addr(hash_Values_CArray[0]),)), owned: true)
 
 proc create*(T: type gen_qvariant_types.QVariant,
     size: gen_qsize_types.QSize): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQVariant_new25(size.h))
+  gen_qvariant_types.QVariant(h: fcQVariant_new25(size.h), owned: true)
 
 proc create*(T: type gen_qvariant_types.QVariant,
     size: gen_qsize_types.QSizeF): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQVariant_new26(size.h))
+  gen_qvariant_types.QVariant(h: fcQVariant_new26(size.h), owned: true)
 
 proc create*(T: type gen_qvariant_types.QVariant,
     pt: gen_qpoint_types.QPoint): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQVariant_new27(pt.h))
+  gen_qvariant_types.QVariant(h: fcQVariant_new27(pt.h), owned: true)
 
 proc create*(T: type gen_qvariant_types.QVariant,
     pt: gen_qpoint_types.QPointF): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQVariant_new28(pt.h))
+  gen_qvariant_types.QVariant(h: fcQVariant_new28(pt.h), owned: true)
 
 proc create*(T: type gen_qvariant_types.QVariant,
     line: gen_qline_types.QLine): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQVariant_new29(line.h))
+  gen_qvariant_types.QVariant(h: fcQVariant_new29(line.h), owned: true)
 
 proc create*(T: type gen_qvariant_types.QVariant,
     line: gen_qline_types.QLineF): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQVariant_new30(line.h))
+  gen_qvariant_types.QVariant(h: fcQVariant_new30(line.h), owned: true)
 
 proc create*(T: type gen_qvariant_types.QVariant,
     rect: gen_qrect_types.QRect): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQVariant_new31(rect.h))
+  gen_qvariant_types.QVariant(h: fcQVariant_new31(rect.h), owned: true)
 
 proc create*(T: type gen_qvariant_types.QVariant,
     rect: gen_qrect_types.QRectF): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQVariant_new32(rect.h))
+  gen_qvariant_types.QVariant(h: fcQVariant_new32(rect.h), owned: true)
 
 proc create*(T: type gen_qvariant_types.QVariant,
     locale: gen_qlocale_types.QLocale): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQVariant_new33(locale.h))
+  gen_qvariant_types.QVariant(h: fcQVariant_new33(locale.h), owned: true)
 
 proc create*(T: type gen_qvariant_types.QVariant,
     regExp: gen_qregexp_types.QRegExp): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQVariant_new34(regExp.h))
+  gen_qvariant_types.QVariant(h: fcQVariant_new34(regExp.h), owned: true)
 
 proc create*(T: type gen_qvariant_types.QVariant,
     re: gen_qregularexpression_types.QRegularExpression): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQVariant_new35(re.h))
+  gen_qvariant_types.QVariant(h: fcQVariant_new35(re.h), owned: true)
 
 proc create*(T: type gen_qvariant_types.QVariant,
     easing: gen_qeasingcurve_types.QEasingCurve): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQVariant_new36(easing.h))
+  gen_qvariant_types.QVariant(h: fcQVariant_new36(easing.h), owned: true)
 
 proc create*(T: type gen_qvariant_types.QVariant,
     uuid: gen_quuid_types.QUuid): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQVariant_new37(uuid.h))
+  gen_qvariant_types.QVariant(h: fcQVariant_new37(uuid.h), owned: true)
 
 proc create*(T: type gen_qvariant_types.QVariant,
     url: gen_qurl_types.QUrl): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQVariant_new38(url.h))
+  gen_qvariant_types.QVariant(h: fcQVariant_new38(url.h), owned: true)
 
 proc create*(T: type gen_qvariant_types.QVariant,
     jsonValue: gen_qjsonvalue_types.QJsonValue): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQVariant_new39(jsonValue.h))
+  gen_qvariant_types.QVariant(h: fcQVariant_new39(jsonValue.h), owned: true)
 
 proc create*(T: type gen_qvariant_types.QVariant,
     jsonObject: gen_qjsonobject_types.QJsonObject): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQVariant_new40(jsonObject.h))
+  gen_qvariant_types.QVariant(h: fcQVariant_new40(jsonObject.h), owned: true)
 
 proc create*(T: type gen_qvariant_types.QVariant,
     jsonArray: gen_qjsonarray_types.QJsonArray): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQVariant_new41(jsonArray.h))
+  gen_qvariant_types.QVariant(h: fcQVariant_new41(jsonArray.h), owned: true)
 
 proc create*(T: type gen_qvariant_types.QVariant,
     jsonDocument: gen_qjsondocument_types.QJsonDocument): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQVariant_new42(jsonDocument.h))
+  gen_qvariant_types.QVariant(h: fcQVariant_new42(jsonDocument.h), owned: true)
 
 proc create*(T: type gen_qvariant_types.QVariant,
     modelIndex: gen_qabstractitemmodel_types.QModelIndex): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQVariant_new43(modelIndex.h))
+  gen_qvariant_types.QVariant(h: fcQVariant_new43(modelIndex.h), owned: true)
 
 proc create*(T: type gen_qvariant_types.QVariant,
     modelIndex: gen_qabstractitemmodel_types.QPersistentModelIndex): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQVariant_new44(modelIndex.h))
+  gen_qvariant_types.QVariant(h: fcQVariant_new44(modelIndex.h), owned: true)
 
-proc delete*(self: gen_qvariant_types.QVariant) =
-  fcQVariant_delete(self.h)
 proc create*(T: type gen_qvariant_types.QVariantComparisonHelper,
     varVal: gen_qvariant_types.QVariant): gen_qvariant_types.QVariantComparisonHelper =
-  gen_qvariant_types.QVariantComparisonHelper(h: fcQVariantComparisonHelper_new(varVal.h))
+  gen_qvariant_types.QVariantComparisonHelper(h: fcQVariantComparisonHelper_new(varVal.h), owned: true)
 
 proc create*(T: type gen_qvariant_types.QVariantComparisonHelper,
     param1: gen_qvariant_types.QVariantComparisonHelper): gen_qvariant_types.QVariantComparisonHelper =
-  gen_qvariant_types.QVariantComparisonHelper(h: fcQVariantComparisonHelper_new2(param1.h))
+  gen_qvariant_types.QVariantComparisonHelper(h: fcQVariantComparisonHelper_new2(param1.h), owned: true)
 
-proc delete*(self: gen_qvariant_types.QVariantComparisonHelper) =
-  fcQVariantComparisonHelper_delete(self.h)
-proc delete*(self: gen_qvariant_types.QVariantHandler) =
-  fcQVariantHandler_delete(self.h)
 proc operatorAssign*(self: gen_qvariant_types.QSequentialIterableconst_iterator, other: gen_qvariant_types.QSequentialIterableconst_iterator): void =
   fcQSequentialIterableconst_iterator_operatorAssign(self.h, other.h)
 
 proc operatorMultiply*(self: gen_qvariant_types.QSequentialIterableconst_iterator, ): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQSequentialIterableconst_iterator_operatorMultiply(self.h))
+  gen_qvariant_types.QVariant(h: fcQSequentialIterableconst_iterator_operatorMultiply(self.h), owned: true)
 
 proc operatorEqual*(self: gen_qvariant_types.QSequentialIterableconst_iterator, o: gen_qvariant_types.QSequentialIterableconst_iterator): bool =
   fcQSequentialIterableconst_iterator_operatorEqual(self.h, o.h)
@@ -799,46 +791,44 @@ proc operatorNotEqual*(self: gen_qvariant_types.QSequentialIterableconst_iterato
   fcQSequentialIterableconst_iterator_operatorNotEqual(self.h, o.h)
 
 proc operatorPlusPlus*(self: gen_qvariant_types.QSequentialIterableconst_iterator, ): gen_qvariant_types.QSequentialIterableconst_iterator =
-  gen_qvariant_types.QSequentialIterableconst_iterator(h: fcQSequentialIterableconst_iterator_operatorPlusPlus(self.h))
+  gen_qvariant_types.QSequentialIterableconst_iterator(h: fcQSequentialIterableconst_iterator_operatorPlusPlus(self.h), owned: false)
 
 proc operatorPlusPlus*(self: gen_qvariant_types.QSequentialIterableconst_iterator, param1: cint): gen_qvariant_types.QSequentialIterableconst_iterator =
-  gen_qvariant_types.QSequentialIterableconst_iterator(h: fcQSequentialIterableconst_iterator_operatorPlusPlusWithInt(self.h, param1))
+  gen_qvariant_types.QSequentialIterableconst_iterator(h: fcQSequentialIterableconst_iterator_operatorPlusPlusWithInt(self.h, param1), owned: true)
 
 proc operatorMinusMinus*(self: gen_qvariant_types.QSequentialIterableconst_iterator, ): gen_qvariant_types.QSequentialIterableconst_iterator =
-  gen_qvariant_types.QSequentialIterableconst_iterator(h: fcQSequentialIterableconst_iterator_operatorMinusMinus(self.h))
+  gen_qvariant_types.QSequentialIterableconst_iterator(h: fcQSequentialIterableconst_iterator_operatorMinusMinus(self.h), owned: false)
 
 proc operatorMinusMinus*(self: gen_qvariant_types.QSequentialIterableconst_iterator, param1: cint): gen_qvariant_types.QSequentialIterableconst_iterator =
-  gen_qvariant_types.QSequentialIterableconst_iterator(h: fcQSequentialIterableconst_iterator_operatorMinusMinusWithInt(self.h, param1))
+  gen_qvariant_types.QSequentialIterableconst_iterator(h: fcQSequentialIterableconst_iterator_operatorMinusMinusWithInt(self.h, param1), owned: true)
 
 proc operatorPlusAssign*(self: gen_qvariant_types.QSequentialIterableconst_iterator, j: cint): gen_qvariant_types.QSequentialIterableconst_iterator =
-  gen_qvariant_types.QSequentialIterableconst_iterator(h: fcQSequentialIterableconst_iterator_operatorPlusAssign(self.h, j))
+  gen_qvariant_types.QSequentialIterableconst_iterator(h: fcQSequentialIterableconst_iterator_operatorPlusAssign(self.h, j), owned: false)
 
 proc operatorMinusAssign*(self: gen_qvariant_types.QSequentialIterableconst_iterator, j: cint): gen_qvariant_types.QSequentialIterableconst_iterator =
-  gen_qvariant_types.QSequentialIterableconst_iterator(h: fcQSequentialIterableconst_iterator_operatorMinusAssign(self.h, j))
+  gen_qvariant_types.QSequentialIterableconst_iterator(h: fcQSequentialIterableconst_iterator_operatorMinusAssign(self.h, j), owned: false)
 
 proc operatorPlus*(self: gen_qvariant_types.QSequentialIterableconst_iterator, j: cint): gen_qvariant_types.QSequentialIterableconst_iterator =
-  gen_qvariant_types.QSequentialIterableconst_iterator(h: fcQSequentialIterableconst_iterator_operatorPlus(self.h, j))
+  gen_qvariant_types.QSequentialIterableconst_iterator(h: fcQSequentialIterableconst_iterator_operatorPlus(self.h, j), owned: true)
 
 proc operatorMinus*(self: gen_qvariant_types.QSequentialIterableconst_iterator, j: cint): gen_qvariant_types.QSequentialIterableconst_iterator =
-  gen_qvariant_types.QSequentialIterableconst_iterator(h: fcQSequentialIterableconst_iterator_operatorMinus(self.h, j))
+  gen_qvariant_types.QSequentialIterableconst_iterator(h: fcQSequentialIterableconst_iterator_operatorMinus(self.h, j), owned: true)
 
 proc create*(T: type gen_qvariant_types.QSequentialIterableconst_iterator,
     other: gen_qvariant_types.QSequentialIterableconst_iterator): gen_qvariant_types.QSequentialIterableconst_iterator =
-  gen_qvariant_types.QSequentialIterableconst_iterator(h: fcQSequentialIterableconst_iterator_new(other.h))
+  gen_qvariant_types.QSequentialIterableconst_iterator(h: fcQSequentialIterableconst_iterator_new(other.h), owned: true)
 
-proc delete*(self: gen_qvariant_types.QSequentialIterableconst_iterator) =
-  fcQSequentialIterableconst_iterator_delete(self.h)
 proc operatorAssign*(self: gen_qvariant_types.QAssociativeIterableconst_iterator, other: gen_qvariant_types.QAssociativeIterableconst_iterator): void =
   fcQAssociativeIterableconst_iterator_operatorAssign(self.h, other.h)
 
 proc key*(self: gen_qvariant_types.QAssociativeIterableconst_iterator, ): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQAssociativeIterableconst_iterator_key(self.h))
+  gen_qvariant_types.QVariant(h: fcQAssociativeIterableconst_iterator_key(self.h), owned: true)
 
 proc value*(self: gen_qvariant_types.QAssociativeIterableconst_iterator, ): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQAssociativeIterableconst_iterator_value(self.h))
+  gen_qvariant_types.QVariant(h: fcQAssociativeIterableconst_iterator_value(self.h), owned: true)
 
 proc operatorMultiply*(self: gen_qvariant_types.QAssociativeIterableconst_iterator, ): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQAssociativeIterableconst_iterator_operatorMultiply(self.h))
+  gen_qvariant_types.QVariant(h: fcQAssociativeIterableconst_iterator_operatorMultiply(self.h), owned: true)
 
 proc operatorEqual*(self: gen_qvariant_types.QAssociativeIterableconst_iterator, o: gen_qvariant_types.QAssociativeIterableconst_iterator): bool =
   fcQAssociativeIterableconst_iterator_operatorEqual(self.h, o.h)
@@ -847,32 +837,30 @@ proc operatorNotEqual*(self: gen_qvariant_types.QAssociativeIterableconst_iterat
   fcQAssociativeIterableconst_iterator_operatorNotEqual(self.h, o.h)
 
 proc operatorPlusPlus*(self: gen_qvariant_types.QAssociativeIterableconst_iterator, ): gen_qvariant_types.QAssociativeIterableconst_iterator =
-  gen_qvariant_types.QAssociativeIterableconst_iterator(h: fcQAssociativeIterableconst_iterator_operatorPlusPlus(self.h))
+  gen_qvariant_types.QAssociativeIterableconst_iterator(h: fcQAssociativeIterableconst_iterator_operatorPlusPlus(self.h), owned: false)
 
 proc operatorPlusPlus*(self: gen_qvariant_types.QAssociativeIterableconst_iterator, param1: cint): gen_qvariant_types.QAssociativeIterableconst_iterator =
-  gen_qvariant_types.QAssociativeIterableconst_iterator(h: fcQAssociativeIterableconst_iterator_operatorPlusPlusWithInt(self.h, param1))
+  gen_qvariant_types.QAssociativeIterableconst_iterator(h: fcQAssociativeIterableconst_iterator_operatorPlusPlusWithInt(self.h, param1), owned: true)
 
 proc operatorMinusMinus*(self: gen_qvariant_types.QAssociativeIterableconst_iterator, ): gen_qvariant_types.QAssociativeIterableconst_iterator =
-  gen_qvariant_types.QAssociativeIterableconst_iterator(h: fcQAssociativeIterableconst_iterator_operatorMinusMinus(self.h))
+  gen_qvariant_types.QAssociativeIterableconst_iterator(h: fcQAssociativeIterableconst_iterator_operatorMinusMinus(self.h), owned: false)
 
 proc operatorMinusMinus*(self: gen_qvariant_types.QAssociativeIterableconst_iterator, param1: cint): gen_qvariant_types.QAssociativeIterableconst_iterator =
-  gen_qvariant_types.QAssociativeIterableconst_iterator(h: fcQAssociativeIterableconst_iterator_operatorMinusMinusWithInt(self.h, param1))
+  gen_qvariant_types.QAssociativeIterableconst_iterator(h: fcQAssociativeIterableconst_iterator_operatorMinusMinusWithInt(self.h, param1), owned: true)
 
 proc operatorPlusAssign*(self: gen_qvariant_types.QAssociativeIterableconst_iterator, j: cint): gen_qvariant_types.QAssociativeIterableconst_iterator =
-  gen_qvariant_types.QAssociativeIterableconst_iterator(h: fcQAssociativeIterableconst_iterator_operatorPlusAssign(self.h, j))
+  gen_qvariant_types.QAssociativeIterableconst_iterator(h: fcQAssociativeIterableconst_iterator_operatorPlusAssign(self.h, j), owned: false)
 
 proc operatorMinusAssign*(self: gen_qvariant_types.QAssociativeIterableconst_iterator, j: cint): gen_qvariant_types.QAssociativeIterableconst_iterator =
-  gen_qvariant_types.QAssociativeIterableconst_iterator(h: fcQAssociativeIterableconst_iterator_operatorMinusAssign(self.h, j))
+  gen_qvariant_types.QAssociativeIterableconst_iterator(h: fcQAssociativeIterableconst_iterator_operatorMinusAssign(self.h, j), owned: false)
 
 proc operatorPlus*(self: gen_qvariant_types.QAssociativeIterableconst_iterator, j: cint): gen_qvariant_types.QAssociativeIterableconst_iterator =
-  gen_qvariant_types.QAssociativeIterableconst_iterator(h: fcQAssociativeIterableconst_iterator_operatorPlus(self.h, j))
+  gen_qvariant_types.QAssociativeIterableconst_iterator(h: fcQAssociativeIterableconst_iterator_operatorPlus(self.h, j), owned: true)
 
 proc operatorMinus*(self: gen_qvariant_types.QAssociativeIterableconst_iterator, j: cint): gen_qvariant_types.QAssociativeIterableconst_iterator =
-  gen_qvariant_types.QAssociativeIterableconst_iterator(h: fcQAssociativeIterableconst_iterator_operatorMinus(self.h, j))
+  gen_qvariant_types.QAssociativeIterableconst_iterator(h: fcQAssociativeIterableconst_iterator_operatorMinus(self.h, j), owned: true)
 
 proc create*(T: type gen_qvariant_types.QAssociativeIterableconst_iterator,
     other: gen_qvariant_types.QAssociativeIterableconst_iterator): gen_qvariant_types.QAssociativeIterableconst_iterator =
-  gen_qvariant_types.QAssociativeIterableconst_iterator(h: fcQAssociativeIterableconst_iterator_new(other.h))
+  gen_qvariant_types.QAssociativeIterableconst_iterator(h: fcQAssociativeIterableconst_iterator_new(other.h), owned: true)
 
-proc delete*(self: gen_qvariant_types.QAssociativeIterableconst_iterator) =
-  fcQAssociativeIterableconst_iterator_delete(self.h)

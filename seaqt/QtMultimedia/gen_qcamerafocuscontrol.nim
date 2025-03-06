@@ -30,7 +30,7 @@ func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
     else:
       copyMem(addr result[0], unsafeAddr v[0], v.len)
 
-const cflags = gorge("pkg-config --cflags Qt5Multimedia")  & " -fPIC"
+const cflags = gorge("pkg-config --cflags Qt5Multimedia") & " -fPIC"
 {.compile("gen_qcamerafocuscontrol.cpp", cflags).}
 
 
@@ -85,10 +85,9 @@ proc fcQCameraFocusControl_protectedbase_senderSignalIndex(self: pointer, ): cin
 proc fcQCameraFocusControl_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QCameraFocusControl_protectedbase_receivers".}
 proc fcQCameraFocusControl_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QCameraFocusControl_protectedbase_isSignalConnected".}
 proc fcQCameraFocusControl_staticMetaObject(): pointer {.importc: "QCameraFocusControl_staticMetaObject".}
-proc fcQCameraFocusControl_delete(self: pointer) {.importc: "QCameraFocusControl_delete".}
 
 proc metaObject*(self: gen_qcamerafocuscontrol_types.QCameraFocusControl, ): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQCameraFocusControl_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQCameraFocusControl_metaObject(self.h), owned: false)
 
 proc metacast*(self: gen_qcamerafocuscontrol_types.QCameraFocusControl, param1: cstring): pointer =
   fcQCameraFocusControl_metacast(self.h, param1)
@@ -127,7 +126,7 @@ proc isFocusPointModeSupported*(self: gen_qcamerafocuscontrol_types.QCameraFocus
   fcQCameraFocusControl_isFocusPointModeSupported(self.h, cint(mode))
 
 proc customFocusPoint*(self: gen_qcamerafocuscontrol_types.QCameraFocusControl, ): gen_qpoint_types.QPointF =
-  gen_qpoint_types.QPointF(h: fcQCameraFocusControl_customFocusPoint(self.h))
+  gen_qpoint_types.QPointF(h: fcQCameraFocusControl_customFocusPoint(self.h), owned: true)
 
 proc setCustomFocusPoint*(self: gen_qcamerafocuscontrol_types.QCameraFocusControl, point: gen_qpoint_types.QPointF): void =
   fcQCameraFocusControl_setCustomFocusPoint(self.h, point.h)
@@ -137,7 +136,7 @@ proc focusZones*(self: gen_qcamerafocuscontrol_types.QCameraFocusControl, ): seq
   var vx_ret = newSeq[gen_qcamerafocus_types.QCameraFocusZone](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
-    vx_ret[i] = gen_qcamerafocus_types.QCameraFocusZone(h: v_outCast[i])
+    vx_ret[i] = gen_qcamerafocus_types.QCameraFocusZone(h: v_outCast[i], owned: true)
   c_free(v_ma.data)
   vx_ret
 
@@ -187,7 +186,7 @@ proc customFocusPointChanged*(self: gen_qcamerafocuscontrol_types.QCameraFocusCo
 type QCameraFocusControlcustomFocusPointChangedSlot* = proc(point: gen_qpoint_types.QPointF)
 proc miqt_exec_callback_cQCameraFocusControl_customFocusPointChanged(slot: int, point: pointer) {.cdecl.} =
   let nimfunc = cast[ptr QCameraFocusControlcustomFocusPointChangedSlot](cast[pointer](slot))
-  let slotval1 = gen_qpoint_types.QPointF(h: point)
+  let slotval1 = gen_qpoint_types.QPointF(h: point, owned: false)
 
   nimfunc[](slotval1)
 
@@ -244,7 +243,7 @@ proc trUtf8*(_: type gen_qcamerafocuscontrol_types.QCameraFocusControl, s: cstri
   vx_ret
 
 proc sender*(self: gen_qcamerafocuscontrol_types.QCameraFocusControl, ): gen_qobject_types.QObject =
-  gen_qobject_types.QObject(h: fcQCameraFocusControl_protectedbase_sender(self.h))
+  gen_qobject_types.QObject(h: fcQCameraFocusControl_protectedbase_sender(self.h), owned: false)
 
 proc senderSignalIndex*(self: gen_qcamerafocuscontrol_types.QCameraFocusControl, ): cint =
   fcQCameraFocusControl_protectedbase_senderSignalIndex(self.h)
@@ -257,5 +256,3 @@ proc isSignalConnected*(self: gen_qcamerafocuscontrol_types.QCameraFocusControl,
 
 proc staticMetaObject*(_: type gen_qcamerafocuscontrol_types.QCameraFocusControl): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQCameraFocusControl_staticMetaObject())
-proc delete*(self: gen_qcamerafocuscontrol_types.QCameraFocusControl) =
-  fcQCameraFocusControl_delete(self.h)

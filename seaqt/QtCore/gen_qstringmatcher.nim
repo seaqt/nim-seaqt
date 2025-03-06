@@ -30,9 +30,6 @@ func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
     else:
       copyMem(addr result[0], unsafeAddr v[0], v.len)
 
-const cflags = gorge("pkg-config --cflags Qt5Core")  & " -fPIC"
-{.compile("gen_qstringmatcher.cpp", cflags).}
-
 
 import ./gen_qstringmatcher_types
 export gen_qstringmatcher_types
@@ -59,7 +56,6 @@ proc fcQStringMatcher_new3(uc: pointer, len: cint): ptr cQStringMatcher {.import
 proc fcQStringMatcher_new4(other: pointer): ptr cQStringMatcher {.importc: "QStringMatcher_new4".}
 proc fcQStringMatcher_new5(pattern: struct_miqt_string, cs: cint): ptr cQStringMatcher {.importc: "QStringMatcher_new5".}
 proc fcQStringMatcher_new6(uc: pointer, len: cint, cs: cint): ptr cQStringMatcher {.importc: "QStringMatcher_new6".}
-proc fcQStringMatcher_delete(self: pointer) {.importc: "QStringMatcher_delete".}
 
 proc operatorAssign*(self: gen_qstringmatcher_types.QStringMatcher, other: gen_qstringmatcher_types.QStringMatcher): void =
   fcQStringMatcher_operatorAssign(self.h, other.h)
@@ -92,27 +88,25 @@ proc indexIn*(self: gen_qstringmatcher_types.QStringMatcher, str: gen_qchar_type
   fcQStringMatcher_indexIn3(self.h, str.h, length, fromVal)
 
 proc create*(T: type gen_qstringmatcher_types.QStringMatcher): gen_qstringmatcher_types.QStringMatcher =
-  gen_qstringmatcher_types.QStringMatcher(h: fcQStringMatcher_new())
+  gen_qstringmatcher_types.QStringMatcher(h: fcQStringMatcher_new(), owned: true)
 
 proc create*(T: type gen_qstringmatcher_types.QStringMatcher,
     pattern: string): gen_qstringmatcher_types.QStringMatcher =
-  gen_qstringmatcher_types.QStringMatcher(h: fcQStringMatcher_new2(struct_miqt_string(data: pattern, len: csize_t(len(pattern)))))
+  gen_qstringmatcher_types.QStringMatcher(h: fcQStringMatcher_new2(struct_miqt_string(data: pattern, len: csize_t(len(pattern)))), owned: true)
 
 proc create*(T: type gen_qstringmatcher_types.QStringMatcher,
     uc: gen_qchar_types.QChar, len: cint): gen_qstringmatcher_types.QStringMatcher =
-  gen_qstringmatcher_types.QStringMatcher(h: fcQStringMatcher_new3(uc.h, len))
+  gen_qstringmatcher_types.QStringMatcher(h: fcQStringMatcher_new3(uc.h, len), owned: true)
 
 proc create*(T: type gen_qstringmatcher_types.QStringMatcher,
     other: gen_qstringmatcher_types.QStringMatcher): gen_qstringmatcher_types.QStringMatcher =
-  gen_qstringmatcher_types.QStringMatcher(h: fcQStringMatcher_new4(other.h))
+  gen_qstringmatcher_types.QStringMatcher(h: fcQStringMatcher_new4(other.h), owned: true)
 
 proc create*(T: type gen_qstringmatcher_types.QStringMatcher,
     pattern: string, cs: cint): gen_qstringmatcher_types.QStringMatcher =
-  gen_qstringmatcher_types.QStringMatcher(h: fcQStringMatcher_new5(struct_miqt_string(data: pattern, len: csize_t(len(pattern))), cint(cs)))
+  gen_qstringmatcher_types.QStringMatcher(h: fcQStringMatcher_new5(struct_miqt_string(data: pattern, len: csize_t(len(pattern))), cint(cs)), owned: true)
 
 proc create*(T: type gen_qstringmatcher_types.QStringMatcher,
     uc: gen_qchar_types.QChar, len: cint, cs: cint): gen_qstringmatcher_types.QStringMatcher =
-  gen_qstringmatcher_types.QStringMatcher(h: fcQStringMatcher_new6(uc.h, len, cint(cs)))
+  gen_qstringmatcher_types.QStringMatcher(h: fcQStringMatcher_new6(uc.h, len, cint(cs)), owned: true)
 
-proc delete*(self: gen_qstringmatcher_types.QStringMatcher) =
-  fcQStringMatcher_delete(self.h)

@@ -30,7 +30,7 @@ func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
     else:
       copyMem(addr result[0], unsafeAddr v[0], v.len)
 
-const cflags = gorge("pkg-config --cflags Qt5Core")  & " -fPIC"
+const cflags = gorge("pkg-config --cflags Qt5Core") & " -fPIC"
 {.compile("gen_qfileselector.cpp", cflags).}
 
 
@@ -66,7 +66,7 @@ proc fcQFileSelector_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: 
 proc fcQFileSelector_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QFileSelector_tr3".}
 proc fcQFileSelector_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QFileSelector_trUtf82".}
 proc fcQFileSelector_trUtf83(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QFileSelector_trUtf83".}
-type cQFileSelectorVTable = object
+type cQFileSelectorVTable {.pure.} = object
   destructor*: proc(vtbl: ptr cQFileSelectorVTable, self: ptr cQFileSelector) {.cdecl, raises:[], gcsafe.}
   metaObject*: proc(vtbl, self: pointer, ): pointer {.cdecl, raises: [], gcsafe.}
   metacast*: proc(vtbl, self: pointer, param1: cstring): pointer {.cdecl, raises: [], gcsafe.}
@@ -95,10 +95,9 @@ proc fcQFileSelector_protectedbase_isSignalConnected(self: pointer, signal: poin
 proc fcQFileSelector_new(vtbl: pointer, ): ptr cQFileSelector {.importc: "QFileSelector_new".}
 proc fcQFileSelector_new2(vtbl: pointer, parent: pointer): ptr cQFileSelector {.importc: "QFileSelector_new2".}
 proc fcQFileSelector_staticMetaObject(): pointer {.importc: "QFileSelector_staticMetaObject".}
-proc fcQFileSelector_delete(self: pointer) {.importc: "QFileSelector_delete".}
 
 proc metaObject*(self: gen_qfileselector_types.QFileSelector, ): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQFileSelector_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQFileSelector_metaObject(self.h), owned: false)
 
 proc metacast*(self: gen_qfileselector_types.QFileSelector, param1: cstring): pointer =
   fcQFileSelector_metacast(self.h, param1)
@@ -125,7 +124,7 @@ proc select*(self: gen_qfileselector_types.QFileSelector, filePath: string): str
   vx_ret
 
 proc select*(self: gen_qfileselector_types.QFileSelector, filePath: gen_qurl_types.QUrl): gen_qurl_types.QUrl =
-  gen_qurl_types.QUrl(h: fcQFileSelector_selectWithFilePath(self.h, filePath.h))
+  gen_qurl_types.QUrl(h: fcQFileSelector_selectWithFilePath(self.h, filePath.h), owned: true)
 
 proc extraSelectors*(self: gen_qfileselector_types.QFileSelector, ): seq[string] =
   var v_ma = fcQFileSelector_extraSelectors(self.h)
@@ -192,7 +191,7 @@ type QFileSelectorchildEventProc* = proc(self: QFileSelector, event: gen_qcoreev
 type QFileSelectorcustomEventProc* = proc(self: QFileSelector, event: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
 type QFileSelectorconnectNotifyProc* = proc(self: QFileSelector, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
 type QFileSelectordisconnectNotifyProc* = proc(self: QFileSelector, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
-type QFileSelectorVTable* = object
+type QFileSelectorVTable* {.inheritable, pure.} = object
   vtbl: cQFileSelectorVTable
   metaObject*: QFileSelectormetaObjectProc
   metacast*: QFileSelectormetacastProc
@@ -205,13 +204,16 @@ type QFileSelectorVTable* = object
   connectNotify*: QFileSelectorconnectNotifyProc
   disconnectNotify*: QFileSelectordisconnectNotifyProc
 proc QFileSelectormetaObject*(self: gen_qfileselector_types.QFileSelector, ): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQFileSelector_virtualbase_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQFileSelector_virtualbase_metaObject(self.h), owned: false)
 
 proc miqt_exec_callback_cQFileSelector_metaObject(vtbl: pointer, self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QFileSelectorVTable](vtbl)
   let self = QFileSelector(h: self)
   var virtualReturn = vtbl[].metaObject(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QFileSelectormetacast*(self: gen_qfileselector_types.QFileSelector, param1: cstring): pointer =
   fcQFileSelector_virtualbase_metacast(self.h, param1)
@@ -241,7 +243,7 @@ proc QFileSelectorevent*(self: gen_qfileselector_types.QFileSelector, event: gen
 proc miqt_exec_callback_cQFileSelector_event(vtbl: pointer, self: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QFileSelectorVTable](vtbl)
   let self = QFileSelector(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].event(self, slotval1)
   virtualReturn
 
@@ -251,8 +253,8 @@ proc QFileSelectoreventFilter*(self: gen_qfileselector_types.QFileSelector, watc
 proc miqt_exec_callback_cQFileSelector_eventFilter(vtbl: pointer, self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QFileSelectorVTable](vtbl)
   let self = QFileSelector(h: self)
-  let slotval1 = gen_qobject_types.QObject(h: watched)
-  let slotval2 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].eventFilter(self, slotval1, slotval2)
   virtualReturn
 
@@ -262,7 +264,7 @@ proc QFileSelectortimerEvent*(self: gen_qfileselector_types.QFileSelector, event
 proc miqt_exec_callback_cQFileSelector_timerEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QFileSelectorVTable](vtbl)
   let self = QFileSelector(h: self)
-  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   vtbl[].timerEvent(self, slotval1)
 
 proc QFileSelectorchildEvent*(self: gen_qfileselector_types.QFileSelector, event: gen_qcoreevent_types.QChildEvent): void =
@@ -271,7 +273,7 @@ proc QFileSelectorchildEvent*(self: gen_qfileselector_types.QFileSelector, event
 proc miqt_exec_callback_cQFileSelector_childEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QFileSelectorVTable](vtbl)
   let self = QFileSelector(h: self)
-  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   vtbl[].childEvent(self, slotval1)
 
 proc QFileSelectorcustomEvent*(self: gen_qfileselector_types.QFileSelector, event: gen_qcoreevent_types.QEvent): void =
@@ -280,7 +282,7 @@ proc QFileSelectorcustomEvent*(self: gen_qfileselector_types.QFileSelector, even
 proc miqt_exec_callback_cQFileSelector_customEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QFileSelectorVTable](vtbl)
   let self = QFileSelector(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].customEvent(self, slotval1)
 
 proc QFileSelectorconnectNotify*(self: gen_qfileselector_types.QFileSelector, signal: gen_qmetaobject_types.QMetaMethod): void =
@@ -289,7 +291,7 @@ proc QFileSelectorconnectNotify*(self: gen_qfileselector_types.QFileSelector, si
 proc miqt_exec_callback_cQFileSelector_connectNotify(vtbl: pointer, self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QFileSelectorVTable](vtbl)
   let self = QFileSelector(h: self)
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].connectNotify(self, slotval1)
 
 proc QFileSelectordisconnectNotify*(self: gen_qfileselector_types.QFileSelector, signal: gen_qmetaobject_types.QMetaMethod): void =
@@ -298,11 +300,93 @@ proc QFileSelectordisconnectNotify*(self: gen_qfileselector_types.QFileSelector,
 proc miqt_exec_callback_cQFileSelector_disconnectNotify(vtbl: pointer, self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QFileSelectorVTable](vtbl)
   let self = QFileSelector(h: self)
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].disconnectNotify(self, slotval1)
 
+type VirtualQFileSelector* {.inheritable.} = ref object of QFileSelector
+  vtbl*: cQFileSelectorVTable
+method metaObject*(self: VirtualQFileSelector, ): gen_qobjectdefs_types.QMetaObject {.base.} =
+  QFileSelectormetaObject(self[])
+proc miqt_exec_method_cQFileSelector_metaObject(vtbl: pointer, inst: pointer): pointer {.cdecl.} =
+  let vtbl = cast[VirtualQFileSelector](cast[uint](vtbl) - uint(offsetOf(VirtualQFileSelector, vtbl)))
+  var virtualReturn = vtbl.metaObject()
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
+
+method metacast*(self: VirtualQFileSelector, param1: cstring): pointer {.base.} =
+  QFileSelectormetacast(self[], param1)
+proc miqt_exec_method_cQFileSelector_metacast(vtbl: pointer, inst: pointer, param1: cstring): pointer {.cdecl.} =
+  let vtbl = cast[VirtualQFileSelector](cast[uint](vtbl) - uint(offsetOf(VirtualQFileSelector, vtbl)))
+  let slotval1 = (param1)
+  var virtualReturn = vtbl.metacast(slotval1)
+  virtualReturn
+
+method metacall*(self: VirtualQFileSelector, param1: cint, param2: cint, param3: pointer): cint {.base.} =
+  QFileSelectormetacall(self[], param1, param2, param3)
+proc miqt_exec_method_cQFileSelector_metacall(vtbl: pointer, inst: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
+  let vtbl = cast[VirtualQFileSelector](cast[uint](vtbl) - uint(offsetOf(VirtualQFileSelector, vtbl)))
+  let slotval1 = cint(param1)
+  let slotval2 = param2
+  let slotval3 = param3
+  var virtualReturn = vtbl.metacall(slotval1, slotval2, slotval3)
+  virtualReturn
+
+method event*(self: VirtualQFileSelector, event: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QFileSelectorevent(self[], event)
+proc miqt_exec_method_cQFileSelector_event(vtbl: pointer, inst: pointer, event: pointer): bool {.cdecl.} =
+  let vtbl = cast[VirtualQFileSelector](cast[uint](vtbl) - uint(offsetOf(VirtualQFileSelector, vtbl)))
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
+  var virtualReturn = vtbl.event(slotval1)
+  virtualReturn
+
+method eventFilter*(self: VirtualQFileSelector, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QFileSelectoreventFilter(self[], watched, event)
+proc miqt_exec_method_cQFileSelector_eventFilter(vtbl: pointer, inst: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
+  let vtbl = cast[VirtualQFileSelector](cast[uint](vtbl) - uint(offsetOf(VirtualQFileSelector, vtbl)))
+  let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
+  var virtualReturn = vtbl.eventFilter(slotval1, slotval2)
+  virtualReturn
+
+method timerEvent*(self: VirtualQFileSelector, event: gen_qcoreevent_types.QTimerEvent): void {.base.} =
+  QFileSelectortimerEvent(self[], event)
+proc miqt_exec_method_cQFileSelector_timerEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQFileSelector](cast[uint](vtbl) - uint(offsetOf(VirtualQFileSelector, vtbl)))
+  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
+  vtbl.timerEvent(slotval1)
+
+method childEvent*(self: VirtualQFileSelector, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
+  QFileSelectorchildEvent(self[], event)
+proc miqt_exec_method_cQFileSelector_childEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQFileSelector](cast[uint](vtbl) - uint(offsetOf(VirtualQFileSelector, vtbl)))
+  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
+  vtbl.childEvent(slotval1)
+
+method customEvent*(self: VirtualQFileSelector, event: gen_qcoreevent_types.QEvent): void {.base.} =
+  QFileSelectorcustomEvent(self[], event)
+proc miqt_exec_method_cQFileSelector_customEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQFileSelector](cast[uint](vtbl) - uint(offsetOf(VirtualQFileSelector, vtbl)))
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
+  vtbl.customEvent(slotval1)
+
+method connectNotify*(self: VirtualQFileSelector, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QFileSelectorconnectNotify(self[], signal)
+proc miqt_exec_method_cQFileSelector_connectNotify(vtbl: pointer, inst: pointer, signal: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQFileSelector](cast[uint](vtbl) - uint(offsetOf(VirtualQFileSelector, vtbl)))
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
+  vtbl.connectNotify(slotval1)
+
+method disconnectNotify*(self: VirtualQFileSelector, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QFileSelectordisconnectNotify(self[], signal)
+proc miqt_exec_method_cQFileSelector_disconnectNotify(vtbl: pointer, inst: pointer, signal: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQFileSelector](cast[uint](vtbl) - uint(offsetOf(VirtualQFileSelector, vtbl)))
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
+  vtbl.disconnectNotify(slotval1)
+
 proc sender*(self: gen_qfileselector_types.QFileSelector, ): gen_qobject_types.QObject =
-  gen_qobject_types.QObject(h: fcQFileSelector_protectedbase_sender(self.h))
+  gen_qobject_types.QObject(h: fcQFileSelector_protectedbase_sender(self.h), owned: false)
 
 proc senderSignalIndex*(self: gen_qfileselector_types.QFileSelector, ): cint =
   fcQFileSelector_protectedbase_senderSignalIndex(self.h)
@@ -317,62 +401,103 @@ proc create*(T: type gen_qfileselector_types.QFileSelector,
     vtbl: ref QFileSelectorVTable = nil): gen_qfileselector_types.QFileSelector =
   let vtbl = if vtbl == nil: new QFileSelectorVTable else: vtbl
   GC_ref(vtbl)
-  vtbl.vtbl.destructor = proc(vtbl: ptr cQFileSelectorVTable, _: ptr cQFileSelector) {.cdecl.} =
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQFileSelectorVTable, _: ptr cQFileSelector) {.cdecl.} =
     let vtbl = cast[ref QFileSelectorVTable](vtbl)
     GC_unref(vtbl)
-  if not isNil(vtbl.metaObject):
+  if not isNil(vtbl[].metaObject):
     vtbl[].vtbl.metaObject = miqt_exec_callback_cQFileSelector_metaObject
-  if not isNil(vtbl.metacast):
+  if not isNil(vtbl[].metacast):
     vtbl[].vtbl.metacast = miqt_exec_callback_cQFileSelector_metacast
-  if not isNil(vtbl.metacall):
+  if not isNil(vtbl[].metacall):
     vtbl[].vtbl.metacall = miqt_exec_callback_cQFileSelector_metacall
-  if not isNil(vtbl.event):
+  if not isNil(vtbl[].event):
     vtbl[].vtbl.event = miqt_exec_callback_cQFileSelector_event
-  if not isNil(vtbl.eventFilter):
+  if not isNil(vtbl[].eventFilter):
     vtbl[].vtbl.eventFilter = miqt_exec_callback_cQFileSelector_eventFilter
-  if not isNil(vtbl.timerEvent):
+  if not isNil(vtbl[].timerEvent):
     vtbl[].vtbl.timerEvent = miqt_exec_callback_cQFileSelector_timerEvent
-  if not isNil(vtbl.childEvent):
+  if not isNil(vtbl[].childEvent):
     vtbl[].vtbl.childEvent = miqt_exec_callback_cQFileSelector_childEvent
-  if not isNil(vtbl.customEvent):
+  if not isNil(vtbl[].customEvent):
     vtbl[].vtbl.customEvent = miqt_exec_callback_cQFileSelector_customEvent
-  if not isNil(vtbl.connectNotify):
+  if not isNil(vtbl[].connectNotify):
     vtbl[].vtbl.connectNotify = miqt_exec_callback_cQFileSelector_connectNotify
-  if not isNil(vtbl.disconnectNotify):
+  if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQFileSelector_disconnectNotify
-  gen_qfileselector_types.QFileSelector(h: fcQFileSelector_new(addr(vtbl[]), ))
+  gen_qfileselector_types.QFileSelector(h: fcQFileSelector_new(addr(vtbl[].vtbl), ), owned: true)
 
 proc create*(T: type gen_qfileselector_types.QFileSelector,
     parent: gen_qobject_types.QObject,
     vtbl: ref QFileSelectorVTable = nil): gen_qfileselector_types.QFileSelector =
   let vtbl = if vtbl == nil: new QFileSelectorVTable else: vtbl
   GC_ref(vtbl)
-  vtbl.vtbl.destructor = proc(vtbl: ptr cQFileSelectorVTable, _: ptr cQFileSelector) {.cdecl.} =
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQFileSelectorVTable, _: ptr cQFileSelector) {.cdecl.} =
     let vtbl = cast[ref QFileSelectorVTable](vtbl)
     GC_unref(vtbl)
-  if not isNil(vtbl.metaObject):
+  if not isNil(vtbl[].metaObject):
     vtbl[].vtbl.metaObject = miqt_exec_callback_cQFileSelector_metaObject
-  if not isNil(vtbl.metacast):
+  if not isNil(vtbl[].metacast):
     vtbl[].vtbl.metacast = miqt_exec_callback_cQFileSelector_metacast
-  if not isNil(vtbl.metacall):
+  if not isNil(vtbl[].metacall):
     vtbl[].vtbl.metacall = miqt_exec_callback_cQFileSelector_metacall
-  if not isNil(vtbl.event):
+  if not isNil(vtbl[].event):
     vtbl[].vtbl.event = miqt_exec_callback_cQFileSelector_event
-  if not isNil(vtbl.eventFilter):
+  if not isNil(vtbl[].eventFilter):
     vtbl[].vtbl.eventFilter = miqt_exec_callback_cQFileSelector_eventFilter
-  if not isNil(vtbl.timerEvent):
+  if not isNil(vtbl[].timerEvent):
     vtbl[].vtbl.timerEvent = miqt_exec_callback_cQFileSelector_timerEvent
-  if not isNil(vtbl.childEvent):
+  if not isNil(vtbl[].childEvent):
     vtbl[].vtbl.childEvent = miqt_exec_callback_cQFileSelector_childEvent
-  if not isNil(vtbl.customEvent):
+  if not isNil(vtbl[].customEvent):
     vtbl[].vtbl.customEvent = miqt_exec_callback_cQFileSelector_customEvent
-  if not isNil(vtbl.connectNotify):
+  if not isNil(vtbl[].connectNotify):
     vtbl[].vtbl.connectNotify = miqt_exec_callback_cQFileSelector_connectNotify
-  if not isNil(vtbl.disconnectNotify):
+  if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQFileSelector_disconnectNotify
-  gen_qfileselector_types.QFileSelector(h: fcQFileSelector_new2(addr(vtbl[]), parent.h))
+  gen_qfileselector_types.QFileSelector(h: fcQFileSelector_new2(addr(vtbl[].vtbl), parent.h), owned: true)
+
+proc create*(T: type gen_qfileselector_types.QFileSelector,
+    vtbl: VirtualQFileSelector) =
+
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQFileSelectorVTable, _: ptr cQFileSelector) {.cdecl.} =
+    let vtbl = cast[ptr typeof(VirtualQFileSelector()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQFileSelector, vtbl)))
+    vtbl[].h = nil
+    vtbl[].owned = false
+  vtbl[].vtbl.metaObject = miqt_exec_method_cQFileSelector_metaObject
+  vtbl[].vtbl.metacast = miqt_exec_method_cQFileSelector_metacast
+  vtbl[].vtbl.metacall = miqt_exec_method_cQFileSelector_metacall
+  vtbl[].vtbl.event = miqt_exec_method_cQFileSelector_event
+  vtbl[].vtbl.eventFilter = miqt_exec_method_cQFileSelector_eventFilter
+  vtbl[].vtbl.timerEvent = miqt_exec_method_cQFileSelector_timerEvent
+  vtbl[].vtbl.childEvent = miqt_exec_method_cQFileSelector_childEvent
+  vtbl[].vtbl.customEvent = miqt_exec_method_cQFileSelector_customEvent
+  vtbl[].vtbl.connectNotify = miqt_exec_method_cQFileSelector_connectNotify
+  vtbl[].vtbl.disconnectNotify = miqt_exec_method_cQFileSelector_disconnectNotify
+  if vtbl[].h != nil: delete(move(vtbl[]))
+  vtbl[].h = fcQFileSelector_new(addr(vtbl[].vtbl), )
+  vtbl[].owned = true
+
+proc create*(T: type gen_qfileselector_types.QFileSelector,
+    parent: gen_qobject_types.QObject,
+    vtbl: VirtualQFileSelector) =
+
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQFileSelectorVTable, _: ptr cQFileSelector) {.cdecl.} =
+    let vtbl = cast[ptr typeof(VirtualQFileSelector()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQFileSelector, vtbl)))
+    vtbl[].h = nil
+    vtbl[].owned = false
+  vtbl[].vtbl.metaObject = miqt_exec_method_cQFileSelector_metaObject
+  vtbl[].vtbl.metacast = miqt_exec_method_cQFileSelector_metacast
+  vtbl[].vtbl.metacall = miqt_exec_method_cQFileSelector_metacall
+  vtbl[].vtbl.event = miqt_exec_method_cQFileSelector_event
+  vtbl[].vtbl.eventFilter = miqt_exec_method_cQFileSelector_eventFilter
+  vtbl[].vtbl.timerEvent = miqt_exec_method_cQFileSelector_timerEvent
+  vtbl[].vtbl.childEvent = miqt_exec_method_cQFileSelector_childEvent
+  vtbl[].vtbl.customEvent = miqt_exec_method_cQFileSelector_customEvent
+  vtbl[].vtbl.connectNotify = miqt_exec_method_cQFileSelector_connectNotify
+  vtbl[].vtbl.disconnectNotify = miqt_exec_method_cQFileSelector_disconnectNotify
+  if vtbl[].h != nil: delete(move(vtbl[]))
+  vtbl[].h = fcQFileSelector_new2(addr(vtbl[].vtbl), parent.h)
+  vtbl[].owned = true
 
 proc staticMetaObject*(_: type gen_qfileselector_types.QFileSelector): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQFileSelector_staticMetaObject())
-proc delete*(self: gen_qfileselector_types.QFileSelector) =
-  fcQFileSelector_delete(self.h)

@@ -30,7 +30,7 @@ func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
     else:
       copyMem(addr result[0], unsafeAddr v[0], v.len)
 
-const cflags = gorge("pkg-config --cflags Qt5Core")  & " -fPIC"
+const cflags = gorge("pkg-config --cflags Qt5Core") & " -fPIC"
 {.compile("gen_qabstracttransition.cpp", cflags).}
 
 
@@ -83,7 +83,7 @@ proc fcQAbstractTransition_tr2(s: cstring, c: cstring): struct_miqt_string {.imp
 proc fcQAbstractTransition_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QAbstractTransition_tr3".}
 proc fcQAbstractTransition_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QAbstractTransition_trUtf82".}
 proc fcQAbstractTransition_trUtf83(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QAbstractTransition_trUtf83".}
-type cQAbstractTransitionVTable = object
+type cQAbstractTransitionVTable {.pure.} = object
   destructor*: proc(vtbl: ptr cQAbstractTransitionVTable, self: ptr cQAbstractTransition) {.cdecl, raises:[], gcsafe.}
   metaObject*: proc(vtbl, self: pointer, ): pointer {.cdecl, raises: [], gcsafe.}
   metacast*: proc(vtbl, self: pointer, param1: cstring): pointer {.cdecl, raises: [], gcsafe.}
@@ -114,10 +114,9 @@ proc fcQAbstractTransition_protectedbase_isSignalConnected(self: pointer, signal
 proc fcQAbstractTransition_new(vtbl: pointer, ): ptr cQAbstractTransition {.importc: "QAbstractTransition_new".}
 proc fcQAbstractTransition_new2(vtbl: pointer, sourceState: pointer): ptr cQAbstractTransition {.importc: "QAbstractTransition_new2".}
 proc fcQAbstractTransition_staticMetaObject(): pointer {.importc: "QAbstractTransition_staticMetaObject".}
-proc fcQAbstractTransition_delete(self: pointer) {.importc: "QAbstractTransition_delete".}
 
 proc metaObject*(self: gen_qabstracttransition_types.QAbstractTransition, ): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQAbstractTransition_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQAbstractTransition_metaObject(self.h), owned: false)
 
 proc metacast*(self: gen_qabstracttransition_types.QAbstractTransition, param1: cstring): pointer =
   fcQAbstractTransition_metacast(self.h, param1)
@@ -138,10 +137,10 @@ proc trUtf8*(_: type gen_qabstracttransition_types.QAbstractTransition, s: cstri
   vx_ret
 
 proc sourceState*(self: gen_qabstracttransition_types.QAbstractTransition, ): gen_qstate_types.QState =
-  gen_qstate_types.QState(h: fcQAbstractTransition_sourceState(self.h))
+  gen_qstate_types.QState(h: fcQAbstractTransition_sourceState(self.h), owned: false)
 
 proc targetState*(self: gen_qabstracttransition_types.QAbstractTransition, ): gen_qabstractstate_types.QAbstractState =
-  gen_qabstractstate_types.QAbstractState(h: fcQAbstractTransition_targetState(self.h))
+  gen_qabstractstate_types.QAbstractState(h: fcQAbstractTransition_targetState(self.h), owned: false)
 
 proc setTargetState*(self: gen_qabstracttransition_types.QAbstractTransition, target: gen_qabstractstate_types.QAbstractState): void =
   fcQAbstractTransition_setTargetState(self.h, target.h)
@@ -151,7 +150,7 @@ proc targetStates*(self: gen_qabstracttransition_types.QAbstractTransition, ): s
   var vx_ret = newSeq[gen_qabstractstate_types.QAbstractState](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
-    vx_ret[i] = gen_qabstractstate_types.QAbstractState(h: v_outCast[i])
+    vx_ret[i] = gen_qabstractstate_types.QAbstractState(h: v_outCast[i], owned: false)
   c_free(v_ma.data)
   vx_ret
 
@@ -169,7 +168,7 @@ proc setTransitionType*(self: gen_qabstracttransition_types.QAbstractTransition,
   fcQAbstractTransition_setTransitionType(self.h, cint(typeVal))
 
 proc machine*(self: gen_qabstracttransition_types.QAbstractTransition, ): gen_qstatemachine_types.QStateMachine =
-  gen_qstatemachine_types.QStateMachine(h: fcQAbstractTransition_machine(self.h))
+  gen_qstatemachine_types.QStateMachine(h: fcQAbstractTransition_machine(self.h), owned: false)
 
 proc addAnimation*(self: gen_qabstracttransition_types.QAbstractTransition, animation: gen_qabstractanimation_types.QAbstractAnimation): void =
   fcQAbstractTransition_addAnimation(self.h, animation.h)
@@ -182,7 +181,7 @@ proc animations*(self: gen_qabstracttransition_types.QAbstractTransition, ): seq
   var vx_ret = newSeq[gen_qabstractanimation_types.QAbstractAnimation](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
-    vx_ret[i] = gen_qabstractanimation_types.QAbstractAnimation(h: v_outCast[i])
+    vx_ret[i] = gen_qabstractanimation_types.QAbstractAnimation(h: v_outCast[i], owned: false)
   c_free(v_ma.data)
   vx_ret
 
@@ -222,7 +221,7 @@ type QAbstractTransitionchildEventProc* = proc(self: QAbstractTransition, event:
 type QAbstractTransitioncustomEventProc* = proc(self: QAbstractTransition, event: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
 type QAbstractTransitionconnectNotifyProc* = proc(self: QAbstractTransition, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
 type QAbstractTransitiondisconnectNotifyProc* = proc(self: QAbstractTransition, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
-type QAbstractTransitionVTable* = object
+type QAbstractTransitionVTable* {.inheritable, pure.} = object
   vtbl: cQAbstractTransitionVTable
   metaObject*: QAbstractTransitionmetaObjectProc
   metacast*: QAbstractTransitionmetacastProc
@@ -237,13 +236,16 @@ type QAbstractTransitionVTable* = object
   connectNotify*: QAbstractTransitionconnectNotifyProc
   disconnectNotify*: QAbstractTransitiondisconnectNotifyProc
 proc QAbstractTransitionmetaObject*(self: gen_qabstracttransition_types.QAbstractTransition, ): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQAbstractTransition_virtualbase_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQAbstractTransition_virtualbase_metaObject(self.h), owned: false)
 
 proc miqt_exec_callback_cQAbstractTransition_metaObject(vtbl: pointer, self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QAbstractTransitionVTable](vtbl)
   let self = QAbstractTransition(h: self)
   var virtualReturn = vtbl[].metaObject(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QAbstractTransitionmetacast*(self: gen_qabstracttransition_types.QAbstractTransition, param1: cstring): pointer =
   fcQAbstractTransition_virtualbase_metacast(self.h, param1)
@@ -270,14 +272,14 @@ proc miqt_exec_callback_cQAbstractTransition_metacall(vtbl: pointer, self: point
 proc miqt_exec_callback_cQAbstractTransition_eventTest(vtbl: pointer, self: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QAbstractTransitionVTable](vtbl)
   let self = QAbstractTransition(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].eventTest(self, slotval1)
   virtualReturn
 
 proc miqt_exec_callback_cQAbstractTransition_onTransition(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QAbstractTransitionVTable](vtbl)
   let self = QAbstractTransition(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].onTransition(self, slotval1)
 
 proc QAbstractTransitionevent*(self: gen_qabstracttransition_types.QAbstractTransition, e: gen_qcoreevent_types.QEvent): bool =
@@ -286,7 +288,7 @@ proc QAbstractTransitionevent*(self: gen_qabstracttransition_types.QAbstractTran
 proc miqt_exec_callback_cQAbstractTransition_event(vtbl: pointer, self: pointer, e: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QAbstractTransitionVTable](vtbl)
   let self = QAbstractTransition(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: e)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: e, owned: false)
   var virtualReturn = vtbl[].event(self, slotval1)
   virtualReturn
 
@@ -296,8 +298,8 @@ proc QAbstractTransitioneventFilter*(self: gen_qabstracttransition_types.QAbstra
 proc miqt_exec_callback_cQAbstractTransition_eventFilter(vtbl: pointer, self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QAbstractTransitionVTable](vtbl)
   let self = QAbstractTransition(h: self)
-  let slotval1 = gen_qobject_types.QObject(h: watched)
-  let slotval2 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].eventFilter(self, slotval1, slotval2)
   virtualReturn
 
@@ -307,7 +309,7 @@ proc QAbstractTransitiontimerEvent*(self: gen_qabstracttransition_types.QAbstrac
 proc miqt_exec_callback_cQAbstractTransition_timerEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QAbstractTransitionVTable](vtbl)
   let self = QAbstractTransition(h: self)
-  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   vtbl[].timerEvent(self, slotval1)
 
 proc QAbstractTransitionchildEvent*(self: gen_qabstracttransition_types.QAbstractTransition, event: gen_qcoreevent_types.QChildEvent): void =
@@ -316,7 +318,7 @@ proc QAbstractTransitionchildEvent*(self: gen_qabstracttransition_types.QAbstrac
 proc miqt_exec_callback_cQAbstractTransition_childEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QAbstractTransitionVTable](vtbl)
   let self = QAbstractTransition(h: self)
-  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   vtbl[].childEvent(self, slotval1)
 
 proc QAbstractTransitioncustomEvent*(self: gen_qabstracttransition_types.QAbstractTransition, event: gen_qcoreevent_types.QEvent): void =
@@ -325,7 +327,7 @@ proc QAbstractTransitioncustomEvent*(self: gen_qabstracttransition_types.QAbstra
 proc miqt_exec_callback_cQAbstractTransition_customEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QAbstractTransitionVTable](vtbl)
   let self = QAbstractTransition(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].customEvent(self, slotval1)
 
 proc QAbstractTransitionconnectNotify*(self: gen_qabstracttransition_types.QAbstractTransition, signal: gen_qmetaobject_types.QMetaMethod): void =
@@ -334,7 +336,7 @@ proc QAbstractTransitionconnectNotify*(self: gen_qabstracttransition_types.QAbst
 proc miqt_exec_callback_cQAbstractTransition_connectNotify(vtbl: pointer, self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QAbstractTransitionVTable](vtbl)
   let self = QAbstractTransition(h: self)
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].connectNotify(self, slotval1)
 
 proc QAbstractTransitiondisconnectNotify*(self: gen_qabstracttransition_types.QAbstractTransition, signal: gen_qmetaobject_types.QMetaMethod): void =
@@ -343,11 +345,108 @@ proc QAbstractTransitiondisconnectNotify*(self: gen_qabstracttransition_types.QA
 proc miqt_exec_callback_cQAbstractTransition_disconnectNotify(vtbl: pointer, self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QAbstractTransitionVTable](vtbl)
   let self = QAbstractTransition(h: self)
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].disconnectNotify(self, slotval1)
 
+type VirtualQAbstractTransition* {.inheritable.} = ref object of QAbstractTransition
+  vtbl*: cQAbstractTransitionVTable
+method metaObject*(self: VirtualQAbstractTransition, ): gen_qobjectdefs_types.QMetaObject {.base.} =
+  QAbstractTransitionmetaObject(self[])
+proc miqt_exec_method_cQAbstractTransition_metaObject(vtbl: pointer, inst: pointer): pointer {.cdecl.} =
+  let vtbl = cast[VirtualQAbstractTransition](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractTransition, vtbl)))
+  var virtualReturn = vtbl.metaObject()
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
+
+method metacast*(self: VirtualQAbstractTransition, param1: cstring): pointer {.base.} =
+  QAbstractTransitionmetacast(self[], param1)
+proc miqt_exec_method_cQAbstractTransition_metacast(vtbl: pointer, inst: pointer, param1: cstring): pointer {.cdecl.} =
+  let vtbl = cast[VirtualQAbstractTransition](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractTransition, vtbl)))
+  let slotval1 = (param1)
+  var virtualReturn = vtbl.metacast(slotval1)
+  virtualReturn
+
+method metacall*(self: VirtualQAbstractTransition, param1: cint, param2: cint, param3: pointer): cint {.base.} =
+  QAbstractTransitionmetacall(self[], param1, param2, param3)
+proc miqt_exec_method_cQAbstractTransition_metacall(vtbl: pointer, inst: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
+  let vtbl = cast[VirtualQAbstractTransition](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractTransition, vtbl)))
+  let slotval1 = cint(param1)
+  let slotval2 = param2
+  let slotval3 = param3
+  var virtualReturn = vtbl.metacall(slotval1, slotval2, slotval3)
+  virtualReturn
+
+method eventTest*(self: VirtualQAbstractTransition, event: gen_qcoreevent_types.QEvent): bool {.base.} =
+  raiseAssert("missing implementation of QAbstractTransition_virtualbase_eventTest")
+proc miqt_exec_method_cQAbstractTransition_eventTest(vtbl: pointer, inst: pointer, event: pointer): bool {.cdecl.} =
+  let vtbl = cast[VirtualQAbstractTransition](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractTransition, vtbl)))
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
+  var virtualReturn = vtbl.eventTest(slotval1)
+  virtualReturn
+
+method onTransition*(self: VirtualQAbstractTransition, event: gen_qcoreevent_types.QEvent): void {.base.} =
+  raiseAssert("missing implementation of QAbstractTransition_virtualbase_onTransition")
+proc miqt_exec_method_cQAbstractTransition_onTransition(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQAbstractTransition](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractTransition, vtbl)))
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
+  vtbl.onTransition(slotval1)
+
+method event*(self: VirtualQAbstractTransition, e: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QAbstractTransitionevent(self[], e)
+proc miqt_exec_method_cQAbstractTransition_event(vtbl: pointer, inst: pointer, e: pointer): bool {.cdecl.} =
+  let vtbl = cast[VirtualQAbstractTransition](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractTransition, vtbl)))
+  let slotval1 = gen_qcoreevent_types.QEvent(h: e, owned: false)
+  var virtualReturn = vtbl.event(slotval1)
+  virtualReturn
+
+method eventFilter*(self: VirtualQAbstractTransition, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QAbstractTransitioneventFilter(self[], watched, event)
+proc miqt_exec_method_cQAbstractTransition_eventFilter(vtbl: pointer, inst: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
+  let vtbl = cast[VirtualQAbstractTransition](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractTransition, vtbl)))
+  let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
+  var virtualReturn = vtbl.eventFilter(slotval1, slotval2)
+  virtualReturn
+
+method timerEvent*(self: VirtualQAbstractTransition, event: gen_qcoreevent_types.QTimerEvent): void {.base.} =
+  QAbstractTransitiontimerEvent(self[], event)
+proc miqt_exec_method_cQAbstractTransition_timerEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQAbstractTransition](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractTransition, vtbl)))
+  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
+  vtbl.timerEvent(slotval1)
+
+method childEvent*(self: VirtualQAbstractTransition, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
+  QAbstractTransitionchildEvent(self[], event)
+proc miqt_exec_method_cQAbstractTransition_childEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQAbstractTransition](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractTransition, vtbl)))
+  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
+  vtbl.childEvent(slotval1)
+
+method customEvent*(self: VirtualQAbstractTransition, event: gen_qcoreevent_types.QEvent): void {.base.} =
+  QAbstractTransitioncustomEvent(self[], event)
+proc miqt_exec_method_cQAbstractTransition_customEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQAbstractTransition](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractTransition, vtbl)))
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
+  vtbl.customEvent(slotval1)
+
+method connectNotify*(self: VirtualQAbstractTransition, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QAbstractTransitionconnectNotify(self[], signal)
+proc miqt_exec_method_cQAbstractTransition_connectNotify(vtbl: pointer, inst: pointer, signal: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQAbstractTransition](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractTransition, vtbl)))
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
+  vtbl.connectNotify(slotval1)
+
+method disconnectNotify*(self: VirtualQAbstractTransition, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QAbstractTransitiondisconnectNotify(self[], signal)
+proc miqt_exec_method_cQAbstractTransition_disconnectNotify(vtbl: pointer, inst: pointer, signal: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQAbstractTransition](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractTransition, vtbl)))
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
+  vtbl.disconnectNotify(slotval1)
+
 proc sender*(self: gen_qabstracttransition_types.QAbstractTransition, ): gen_qobject_types.QObject =
-  gen_qobject_types.QObject(h: fcQAbstractTransition_protectedbase_sender(self.h))
+  gen_qobject_types.QObject(h: fcQAbstractTransition_protectedbase_sender(self.h), owned: false)
 
 proc senderSignalIndex*(self: gen_qabstracttransition_types.QAbstractTransition, ): cint =
   fcQAbstractTransition_protectedbase_senderSignalIndex(self.h)
@@ -362,70 +461,115 @@ proc create*(T: type gen_qabstracttransition_types.QAbstractTransition,
     vtbl: ref QAbstractTransitionVTable = nil): gen_qabstracttransition_types.QAbstractTransition =
   let vtbl = if vtbl == nil: new QAbstractTransitionVTable else: vtbl
   GC_ref(vtbl)
-  vtbl.vtbl.destructor = proc(vtbl: ptr cQAbstractTransitionVTable, _: ptr cQAbstractTransition) {.cdecl.} =
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQAbstractTransitionVTable, _: ptr cQAbstractTransition) {.cdecl.} =
     let vtbl = cast[ref QAbstractTransitionVTable](vtbl)
     GC_unref(vtbl)
-  if not isNil(vtbl.metaObject):
+  if not isNil(vtbl[].metaObject):
     vtbl[].vtbl.metaObject = miqt_exec_callback_cQAbstractTransition_metaObject
-  if not isNil(vtbl.metacast):
+  if not isNil(vtbl[].metacast):
     vtbl[].vtbl.metacast = miqt_exec_callback_cQAbstractTransition_metacast
-  if not isNil(vtbl.metacall):
+  if not isNil(vtbl[].metacall):
     vtbl[].vtbl.metacall = miqt_exec_callback_cQAbstractTransition_metacall
-  if not isNil(vtbl.eventTest):
+  if not isNil(vtbl[].eventTest):
     vtbl[].vtbl.eventTest = miqt_exec_callback_cQAbstractTransition_eventTest
-  if not isNil(vtbl.onTransition):
+  if not isNil(vtbl[].onTransition):
     vtbl[].vtbl.onTransition = miqt_exec_callback_cQAbstractTransition_onTransition
-  if not isNil(vtbl.event):
+  if not isNil(vtbl[].event):
     vtbl[].vtbl.event = miqt_exec_callback_cQAbstractTransition_event
-  if not isNil(vtbl.eventFilter):
+  if not isNil(vtbl[].eventFilter):
     vtbl[].vtbl.eventFilter = miqt_exec_callback_cQAbstractTransition_eventFilter
-  if not isNil(vtbl.timerEvent):
+  if not isNil(vtbl[].timerEvent):
     vtbl[].vtbl.timerEvent = miqt_exec_callback_cQAbstractTransition_timerEvent
-  if not isNil(vtbl.childEvent):
+  if not isNil(vtbl[].childEvent):
     vtbl[].vtbl.childEvent = miqt_exec_callback_cQAbstractTransition_childEvent
-  if not isNil(vtbl.customEvent):
+  if not isNil(vtbl[].customEvent):
     vtbl[].vtbl.customEvent = miqt_exec_callback_cQAbstractTransition_customEvent
-  if not isNil(vtbl.connectNotify):
+  if not isNil(vtbl[].connectNotify):
     vtbl[].vtbl.connectNotify = miqt_exec_callback_cQAbstractTransition_connectNotify
-  if not isNil(vtbl.disconnectNotify):
+  if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQAbstractTransition_disconnectNotify
-  gen_qabstracttransition_types.QAbstractTransition(h: fcQAbstractTransition_new(addr(vtbl[]), ))
+  gen_qabstracttransition_types.QAbstractTransition(h: fcQAbstractTransition_new(addr(vtbl[].vtbl), ), owned: true)
 
 proc create*(T: type gen_qabstracttransition_types.QAbstractTransition,
     sourceState: gen_qstate_types.QState,
     vtbl: ref QAbstractTransitionVTable = nil): gen_qabstracttransition_types.QAbstractTransition =
   let vtbl = if vtbl == nil: new QAbstractTransitionVTable else: vtbl
   GC_ref(vtbl)
-  vtbl.vtbl.destructor = proc(vtbl: ptr cQAbstractTransitionVTable, _: ptr cQAbstractTransition) {.cdecl.} =
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQAbstractTransitionVTable, _: ptr cQAbstractTransition) {.cdecl.} =
     let vtbl = cast[ref QAbstractTransitionVTable](vtbl)
     GC_unref(vtbl)
-  if not isNil(vtbl.metaObject):
+  if not isNil(vtbl[].metaObject):
     vtbl[].vtbl.metaObject = miqt_exec_callback_cQAbstractTransition_metaObject
-  if not isNil(vtbl.metacast):
+  if not isNil(vtbl[].metacast):
     vtbl[].vtbl.metacast = miqt_exec_callback_cQAbstractTransition_metacast
-  if not isNil(vtbl.metacall):
+  if not isNil(vtbl[].metacall):
     vtbl[].vtbl.metacall = miqt_exec_callback_cQAbstractTransition_metacall
-  if not isNil(vtbl.eventTest):
+  if not isNil(vtbl[].eventTest):
     vtbl[].vtbl.eventTest = miqt_exec_callback_cQAbstractTransition_eventTest
-  if not isNil(vtbl.onTransition):
+  if not isNil(vtbl[].onTransition):
     vtbl[].vtbl.onTransition = miqt_exec_callback_cQAbstractTransition_onTransition
-  if not isNil(vtbl.event):
+  if not isNil(vtbl[].event):
     vtbl[].vtbl.event = miqt_exec_callback_cQAbstractTransition_event
-  if not isNil(vtbl.eventFilter):
+  if not isNil(vtbl[].eventFilter):
     vtbl[].vtbl.eventFilter = miqt_exec_callback_cQAbstractTransition_eventFilter
-  if not isNil(vtbl.timerEvent):
+  if not isNil(vtbl[].timerEvent):
     vtbl[].vtbl.timerEvent = miqt_exec_callback_cQAbstractTransition_timerEvent
-  if not isNil(vtbl.childEvent):
+  if not isNil(vtbl[].childEvent):
     vtbl[].vtbl.childEvent = miqt_exec_callback_cQAbstractTransition_childEvent
-  if not isNil(vtbl.customEvent):
+  if not isNil(vtbl[].customEvent):
     vtbl[].vtbl.customEvent = miqt_exec_callback_cQAbstractTransition_customEvent
-  if not isNil(vtbl.connectNotify):
+  if not isNil(vtbl[].connectNotify):
     vtbl[].vtbl.connectNotify = miqt_exec_callback_cQAbstractTransition_connectNotify
-  if not isNil(vtbl.disconnectNotify):
+  if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQAbstractTransition_disconnectNotify
-  gen_qabstracttransition_types.QAbstractTransition(h: fcQAbstractTransition_new2(addr(vtbl[]), sourceState.h))
+  gen_qabstracttransition_types.QAbstractTransition(h: fcQAbstractTransition_new2(addr(vtbl[].vtbl), sourceState.h), owned: true)
+
+proc create*(T: type gen_qabstracttransition_types.QAbstractTransition,
+    vtbl: VirtualQAbstractTransition) =
+
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQAbstractTransitionVTable, _: ptr cQAbstractTransition) {.cdecl.} =
+    let vtbl = cast[ptr typeof(VirtualQAbstractTransition()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractTransition, vtbl)))
+    vtbl[].h = nil
+    vtbl[].owned = false
+  vtbl[].vtbl.metaObject = miqt_exec_method_cQAbstractTransition_metaObject
+  vtbl[].vtbl.metacast = miqt_exec_method_cQAbstractTransition_metacast
+  vtbl[].vtbl.metacall = miqt_exec_method_cQAbstractTransition_metacall
+  vtbl[].vtbl.eventTest = miqt_exec_method_cQAbstractTransition_eventTest
+  vtbl[].vtbl.onTransition = miqt_exec_method_cQAbstractTransition_onTransition
+  vtbl[].vtbl.event = miqt_exec_method_cQAbstractTransition_event
+  vtbl[].vtbl.eventFilter = miqt_exec_method_cQAbstractTransition_eventFilter
+  vtbl[].vtbl.timerEvent = miqt_exec_method_cQAbstractTransition_timerEvent
+  vtbl[].vtbl.childEvent = miqt_exec_method_cQAbstractTransition_childEvent
+  vtbl[].vtbl.customEvent = miqt_exec_method_cQAbstractTransition_customEvent
+  vtbl[].vtbl.connectNotify = miqt_exec_method_cQAbstractTransition_connectNotify
+  vtbl[].vtbl.disconnectNotify = miqt_exec_method_cQAbstractTransition_disconnectNotify
+  if vtbl[].h != nil: delete(move(vtbl[]))
+  vtbl[].h = fcQAbstractTransition_new(addr(vtbl[].vtbl), )
+  vtbl[].owned = true
+
+proc create*(T: type gen_qabstracttransition_types.QAbstractTransition,
+    sourceState: gen_qstate_types.QState,
+    vtbl: VirtualQAbstractTransition) =
+
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQAbstractTransitionVTable, _: ptr cQAbstractTransition) {.cdecl.} =
+    let vtbl = cast[ptr typeof(VirtualQAbstractTransition()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractTransition, vtbl)))
+    vtbl[].h = nil
+    vtbl[].owned = false
+  vtbl[].vtbl.metaObject = miqt_exec_method_cQAbstractTransition_metaObject
+  vtbl[].vtbl.metacast = miqt_exec_method_cQAbstractTransition_metacast
+  vtbl[].vtbl.metacall = miqt_exec_method_cQAbstractTransition_metacall
+  vtbl[].vtbl.eventTest = miqt_exec_method_cQAbstractTransition_eventTest
+  vtbl[].vtbl.onTransition = miqt_exec_method_cQAbstractTransition_onTransition
+  vtbl[].vtbl.event = miqt_exec_method_cQAbstractTransition_event
+  vtbl[].vtbl.eventFilter = miqt_exec_method_cQAbstractTransition_eventFilter
+  vtbl[].vtbl.timerEvent = miqt_exec_method_cQAbstractTransition_timerEvent
+  vtbl[].vtbl.childEvent = miqt_exec_method_cQAbstractTransition_childEvent
+  vtbl[].vtbl.customEvent = miqt_exec_method_cQAbstractTransition_customEvent
+  vtbl[].vtbl.connectNotify = miqt_exec_method_cQAbstractTransition_connectNotify
+  vtbl[].vtbl.disconnectNotify = miqt_exec_method_cQAbstractTransition_disconnectNotify
+  if vtbl[].h != nil: delete(move(vtbl[]))
+  vtbl[].h = fcQAbstractTransition_new2(addr(vtbl[].vtbl), sourceState.h)
+  vtbl[].owned = true
 
 proc staticMetaObject*(_: type gen_qabstracttransition_types.QAbstractTransition): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQAbstractTransition_staticMetaObject())
-proc delete*(self: gen_qabstracttransition_types.QAbstractTransition) =
-  fcQAbstractTransition_delete(self.h)

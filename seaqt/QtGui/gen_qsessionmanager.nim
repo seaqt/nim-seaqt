@@ -30,7 +30,7 @@ func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
     else:
       copyMem(addr result[0], unsafeAddr v[0], v.len)
 
-const cflags = gorge("pkg-config --cflags Qt5Gui")  & " -fPIC"
+const cflags = gorge("pkg-config --cflags Qt5Gui") & " -fPIC"
 {.compile("gen_qsessionmanager.cpp", cflags).}
 
 
@@ -87,7 +87,7 @@ proc fcQSessionManager_protectedbase_isSignalConnected(self: pointer, signal: po
 proc fcQSessionManager_staticMetaObject(): pointer {.importc: "QSessionManager_staticMetaObject".}
 
 proc metaObject*(self: gen_qsessionmanager_types.QSessionManager, ): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQSessionManager_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQSessionManager_metaObject(self.h), owned: false)
 
 proc metacast*(self: gen_qsessionmanager_types.QSessionManager, param1: cstring): pointer =
   fcQSessionManager_metacast(self.h, param1)
@@ -216,7 +216,7 @@ proc trUtf8*(_: type gen_qsessionmanager_types.QSessionManager, s: cstring, c: c
   vx_ret
 
 proc sender*(self: gen_qsessionmanager_types.QSessionManager, ): gen_qobject_types.QObject =
-  gen_qobject_types.QObject(h: fcQSessionManager_protectedbase_sender(self.h))
+  gen_qobject_types.QObject(h: fcQSessionManager_protectedbase_sender(self.h), owned: false)
 
 proc senderSignalIndex*(self: gen_qsessionmanager_types.QSessionManager, ): cint =
   fcQSessionManager_protectedbase_senderSignalIndex(self.h)

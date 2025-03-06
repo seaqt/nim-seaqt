@@ -30,9 +30,6 @@ func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
     else:
       copyMem(addr result[0], unsafeAddr v[0], v.len)
 
-const cflags = gorge("pkg-config --cflags Qt5Gui")  & " -fPIC"
-{.compile("gen_qtouchdevice.cpp", cflags).}
-
 
 type QTouchDeviceDeviceTypeEnum* = distinct cint
 template TouchScreen*(_: type QTouchDeviceDeviceTypeEnum): untyped = 0
@@ -70,14 +67,13 @@ proc fcQTouchDevice_setCapabilities(self: pointer, caps: cint): void {.importc: 
 proc fcQTouchDevice_setMaximumTouchPoints(self: pointer, max: cint): void {.importc: "QTouchDevice_setMaximumTouchPoints".}
 proc fcQTouchDevice_new(): ptr cQTouchDevice {.importc: "QTouchDevice_new".}
 proc fcQTouchDevice_staticMetaObject(): pointer {.importc: "QTouchDevice_staticMetaObject".}
-proc fcQTouchDevice_delete(self: pointer) {.importc: "QTouchDevice_delete".}
 
 proc devices*(_: type gen_qtouchdevice_types.QTouchDevice, ): seq[gen_qtouchdevice_types.QTouchDevice] =
   var v_ma = fcQTouchDevice_devices()
   var vx_ret = newSeq[gen_qtouchdevice_types.QTouchDevice](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
-    vx_ret[i] = gen_qtouchdevice_types.QTouchDevice(h: v_outCast[i])
+    vx_ret[i] = gen_qtouchdevice_types.QTouchDevice(h: v_outCast[i], owned: false)
   c_free(v_ma.data)
   vx_ret
 
@@ -109,9 +105,7 @@ proc setMaximumTouchPoints*(self: gen_qtouchdevice_types.QTouchDevice, max: cint
   fcQTouchDevice_setMaximumTouchPoints(self.h, max)
 
 proc create*(T: type gen_qtouchdevice_types.QTouchDevice): gen_qtouchdevice_types.QTouchDevice =
-  gen_qtouchdevice_types.QTouchDevice(h: fcQTouchDevice_new())
+  gen_qtouchdevice_types.QTouchDevice(h: fcQTouchDevice_new(), owned: true)
 
 proc staticMetaObject*(_: type gen_qtouchdevice_types.QTouchDevice): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQTouchDevice_staticMetaObject())
-proc delete*(self: gen_qtouchdevice_types.QTouchDevice) =
-  fcQTouchDevice_delete(self.h)

@@ -30,7 +30,7 @@ func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
     else:
       copyMem(addr result[0], unsafeAddr v[0], v.len)
 
-const cflags = gorge("pkg-config --cflags Qt5Network")  & " -fPIC"
+const cflags = gorge("pkg-config --cflags Qt5Network") & " -fPIC"
 {.compile("gen_qnetworkreply.cpp", cflags).}
 
 
@@ -169,10 +169,9 @@ proc fcQNetworkReply_protectedbase_senderSignalIndex(self: pointer, ): cint {.im
 proc fcQNetworkReply_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QNetworkReply_protectedbase_receivers".}
 proc fcQNetworkReply_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QNetworkReply_protectedbase_isSignalConnected".}
 proc fcQNetworkReply_staticMetaObject(): pointer {.importc: "QNetworkReply_staticMetaObject".}
-proc fcQNetworkReply_delete(self: pointer) {.importc: "QNetworkReply_delete".}
 
 proc metaObject*(self: gen_qnetworkreply_types.QNetworkReply, ): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQNetworkReply_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQNetworkReply_metaObject(self.h), owned: false)
 
 proc metacast*(self: gen_qnetworkreply_types.QNetworkReply, param1: cstring): pointer =
   fcQNetworkReply_metacast(self.h, param1)
@@ -205,13 +204,13 @@ proc setReadBufferSize*(self: gen_qnetworkreply_types.QNetworkReply, size: clong
   fcQNetworkReply_setReadBufferSize(self.h, size)
 
 proc manager*(self: gen_qnetworkreply_types.QNetworkReply, ): gen_qnetworkaccessmanager_types.QNetworkAccessManager =
-  gen_qnetworkaccessmanager_types.QNetworkAccessManager(h: fcQNetworkReply_manager(self.h))
+  gen_qnetworkaccessmanager_types.QNetworkAccessManager(h: fcQNetworkReply_manager(self.h), owned: false)
 
 proc operation*(self: gen_qnetworkreply_types.QNetworkReply, ): cint =
   cint(fcQNetworkReply_operation(self.h))
 
 proc request*(self: gen_qnetworkreply_types.QNetworkReply, ): gen_qnetworkrequest_types.QNetworkRequest =
-  gen_qnetworkrequest_types.QNetworkRequest(h: fcQNetworkReply_request(self.h))
+  gen_qnetworkrequest_types.QNetworkRequest(h: fcQNetworkReply_request(self.h), owned: true)
 
 proc error*(self: gen_qnetworkreply_types.QNetworkReply, ): cint =
   cint(fcQNetworkReply_error(self.h))
@@ -223,10 +222,10 @@ proc isRunning*(self: gen_qnetworkreply_types.QNetworkReply, ): bool =
   fcQNetworkReply_isRunning(self.h)
 
 proc url*(self: gen_qnetworkreply_types.QNetworkReply, ): gen_qurl_types.QUrl =
-  gen_qurl_types.QUrl(h: fcQNetworkReply_url(self.h))
+  gen_qurl_types.QUrl(h: fcQNetworkReply_url(self.h), owned: true)
 
 proc header*(self: gen_qnetworkreply_types.QNetworkReply, header: cint): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQNetworkReply_header(self.h, cint(header)))
+  gen_qvariant_types.QVariant(h: fcQNetworkReply_header(self.h, cint(header)), owned: true)
 
 proc hasRawHeader*(self: gen_qnetworkreply_types.QNetworkReply, headerName: seq[byte]): bool =
   fcQNetworkReply_hasRawHeader(self.h, struct_miqt_string(data: cast[cstring](if len(headerName) == 0: nil else: unsafeAddr headerName[0]), len: csize_t(len(headerName))))
@@ -274,10 +273,10 @@ proc rawHeaderPairs*(self: gen_qnetworkreply_types.QNetworkReply, ): seq[tuple[f
   vx_ret
 
 proc attribute*(self: gen_qnetworkreply_types.QNetworkReply, code: cint): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQNetworkReply_attribute(self.h, cint(code)))
+  gen_qvariant_types.QVariant(h: fcQNetworkReply_attribute(self.h, cint(code)), owned: true)
 
 proc sslConfiguration*(self: gen_qnetworkreply_types.QNetworkReply, ): gen_qsslconfiguration_types.QSslConfiguration =
-  gen_qsslconfiguration_types.QSslConfiguration(h: fcQNetworkReply_sslConfiguration(self.h))
+  gen_qsslconfiguration_types.QSslConfiguration(h: fcQNetworkReply_sslConfiguration(self.h), owned: true)
 
 proc setSslConfiguration*(self: gen_qnetworkreply_types.QNetworkReply, configuration: gen_qsslconfiguration_types.QSslConfiguration): void =
   fcQNetworkReply_setSslConfiguration(self.h, configuration.h)
@@ -403,7 +402,7 @@ proc miqt_exec_callback_cQNetworkReply_sslErrors(slot: int, errors: struct_miqt_
   var verrorsx_ret = newSeq[gen_qsslerror_types.QSslError](int(verrors_ma.len))
   let verrors_outCast = cast[ptr UncheckedArray[pointer]](verrors_ma.data)
   for i in 0 ..< verrors_ma.len:
-    verrorsx_ret[i] = gen_qsslerror_types.QSslError(h: verrors_outCast[i])
+    verrorsx_ret[i] = gen_qsslerror_types.QSslError(h: verrors_outCast[i], owned: true)
   c_free(verrors_ma.data)
   let slotval1 = verrorsx_ret
 
@@ -425,7 +424,7 @@ proc preSharedKeyAuthenticationRequired*(self: gen_qnetworkreply_types.QNetworkR
 type QNetworkReplypreSharedKeyAuthenticationRequiredSlot* = proc(authenticator: gen_qsslpresharedkeyauthenticator_types.QSslPreSharedKeyAuthenticator)
 proc miqt_exec_callback_cQNetworkReply_preSharedKeyAuthenticationRequired(slot: int, authenticator: pointer) {.cdecl.} =
   let nimfunc = cast[ptr QNetworkReplypreSharedKeyAuthenticationRequiredSlot](cast[pointer](slot))
-  let slotval1 = gen_qsslpresharedkeyauthenticator_types.QSslPreSharedKeyAuthenticator(h: authenticator)
+  let slotval1 = gen_qsslpresharedkeyauthenticator_types.QSslPreSharedKeyAuthenticator(h: authenticator, owned: false)
 
   nimfunc[](slotval1)
 
@@ -445,7 +444,7 @@ proc redirected*(self: gen_qnetworkreply_types.QNetworkReply, url: gen_qurl_type
 type QNetworkReplyredirectedSlot* = proc(url: gen_qurl_types.QUrl)
 proc miqt_exec_callback_cQNetworkReply_redirected(slot: int, url: pointer) {.cdecl.} =
   let nimfunc = cast[ptr QNetworkReplyredirectedSlot](cast[pointer](slot))
-  let slotval1 = gen_qurl_types.QUrl(h: url)
+  let slotval1 = gen_qurl_types.QUrl(h: url, owned: false)
 
   nimfunc[](slotval1)
 
@@ -576,7 +575,7 @@ proc setErrorString*(self: gen_qnetworkreply_types.QNetworkReply, errorString: s
   fcQNetworkReply_protectedbase_setErrorString(self.h, struct_miqt_string(data: errorString, len: csize_t(len(errorString))))
 
 proc sender*(self: gen_qnetworkreply_types.QNetworkReply, ): gen_qobject_types.QObject =
-  gen_qobject_types.QObject(h: fcQNetworkReply_protectedbase_sender(self.h))
+  gen_qobject_types.QObject(h: fcQNetworkReply_protectedbase_sender(self.h), owned: false)
 
 proc senderSignalIndex*(self: gen_qnetworkreply_types.QNetworkReply, ): cint =
   fcQNetworkReply_protectedbase_senderSignalIndex(self.h)
@@ -589,5 +588,3 @@ proc isSignalConnected*(self: gen_qnetworkreply_types.QNetworkReply, signal: gen
 
 proc staticMetaObject*(_: type gen_qnetworkreply_types.QNetworkReply): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQNetworkReply_staticMetaObject())
-proc delete*(self: gen_qnetworkreply_types.QNetworkReply) =
-  fcQNetworkReply_delete(self.h)

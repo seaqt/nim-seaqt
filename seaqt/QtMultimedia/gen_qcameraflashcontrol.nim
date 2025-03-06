@@ -30,7 +30,7 @@ func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
     else:
       copyMem(addr result[0], unsafeAddr v[0], v.len)
 
-const cflags = gorge("pkg-config --cflags Qt5Multimedia")  & " -fPIC"
+const cflags = gorge("pkg-config --cflags Qt5Multimedia") & " -fPIC"
 {.compile("gen_qcameraflashcontrol.cpp", cflags).}
 
 
@@ -70,10 +70,9 @@ proc fcQCameraFlashControl_protectedbase_senderSignalIndex(self: pointer, ): cin
 proc fcQCameraFlashControl_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QCameraFlashControl_protectedbase_receivers".}
 proc fcQCameraFlashControl_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QCameraFlashControl_protectedbase_isSignalConnected".}
 proc fcQCameraFlashControl_staticMetaObject(): pointer {.importc: "QCameraFlashControl_staticMetaObject".}
-proc fcQCameraFlashControl_delete(self: pointer) {.importc: "QCameraFlashControl_delete".}
 
 proc metaObject*(self: gen_qcameraflashcontrol_types.QCameraFlashControl, ): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQCameraFlashControl_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQCameraFlashControl_metaObject(self.h), owned: false)
 
 proc metacast*(self: gen_qcameraflashcontrol_types.QCameraFlashControl, param1: cstring): pointer =
   fcQCameraFlashControl_metacast(self.h, param1)
@@ -150,7 +149,7 @@ proc trUtf8*(_: type gen_qcameraflashcontrol_types.QCameraFlashControl, s: cstri
   vx_ret
 
 proc sender*(self: gen_qcameraflashcontrol_types.QCameraFlashControl, ): gen_qobject_types.QObject =
-  gen_qobject_types.QObject(h: fcQCameraFlashControl_protectedbase_sender(self.h))
+  gen_qobject_types.QObject(h: fcQCameraFlashControl_protectedbase_sender(self.h), owned: false)
 
 proc senderSignalIndex*(self: gen_qcameraflashcontrol_types.QCameraFlashControl, ): cint =
   fcQCameraFlashControl_protectedbase_senderSignalIndex(self.h)
@@ -163,5 +162,3 @@ proc isSignalConnected*(self: gen_qcameraflashcontrol_types.QCameraFlashControl,
 
 proc staticMetaObject*(_: type gen_qcameraflashcontrol_types.QCameraFlashControl): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQCameraFlashControl_staticMetaObject())
-proc delete*(self: gen_qcameraflashcontrol_types.QCameraFlashControl) =
-  fcQCameraFlashControl_delete(self.h)

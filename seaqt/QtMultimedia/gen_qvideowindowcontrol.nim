@@ -30,7 +30,7 @@ func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
     else:
       copyMem(addr result[0], unsafeAddr v[0], v.len)
 
-const cflags = gorge("pkg-config --cflags Qt5Multimedia")  & " -fPIC"
+const cflags = gorge("pkg-config --cflags Qt5Multimedia") & " -fPIC"
 {.compile("gen_qvideowindowcontrol.cpp", cflags).}
 
 
@@ -98,10 +98,9 @@ proc fcQVideoWindowControl_protectedbase_senderSignalIndex(self: pointer, ): cin
 proc fcQVideoWindowControl_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QVideoWindowControl_protectedbase_receivers".}
 proc fcQVideoWindowControl_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QVideoWindowControl_protectedbase_isSignalConnected".}
 proc fcQVideoWindowControl_staticMetaObject(): pointer {.importc: "QVideoWindowControl_staticMetaObject".}
-proc fcQVideoWindowControl_delete(self: pointer) {.importc: "QVideoWindowControl_delete".}
 
 proc metaObject*(self: gen_qvideowindowcontrol_types.QVideoWindowControl, ): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQVideoWindowControl_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQVideoWindowControl_metaObject(self.h), owned: false)
 
 proc metacast*(self: gen_qvideowindowcontrol_types.QVideoWindowControl, param1: cstring): pointer =
   fcQVideoWindowControl_metacast(self.h, param1)
@@ -128,7 +127,7 @@ proc setWinId*(self: gen_qvideowindowcontrol_types.QVideoWindowControl, id: uint
   fcQVideoWindowControl_setWinId(self.h, id)
 
 proc displayRect*(self: gen_qvideowindowcontrol_types.QVideoWindowControl, ): gen_qrect_types.QRect =
-  gen_qrect_types.QRect(h: fcQVideoWindowControl_displayRect(self.h))
+  gen_qrect_types.QRect(h: fcQVideoWindowControl_displayRect(self.h), owned: true)
 
 proc setDisplayRect*(self: gen_qvideowindowcontrol_types.QVideoWindowControl, rect: gen_qrect_types.QRect): void =
   fcQVideoWindowControl_setDisplayRect(self.h, rect.h)
@@ -143,7 +142,7 @@ proc repaint*(self: gen_qvideowindowcontrol_types.QVideoWindowControl, ): void =
   fcQVideoWindowControl_repaint(self.h)
 
 proc nativeSize*(self: gen_qvideowindowcontrol_types.QVideoWindowControl, ): gen_qsize_types.QSize =
-  gen_qsize_types.QSize(h: fcQVideoWindowControl_nativeSize(self.h))
+  gen_qsize_types.QSize(h: fcQVideoWindowControl_nativeSize(self.h), owned: true)
 
 proc aspectRatioMode*(self: gen_qvideowindowcontrol_types.QVideoWindowControl, ): cint =
   cint(fcQVideoWindowControl_aspectRatioMode(self.h))
@@ -318,7 +317,7 @@ proc trUtf8*(_: type gen_qvideowindowcontrol_types.QVideoWindowControl, s: cstri
   vx_ret
 
 proc sender*(self: gen_qvideowindowcontrol_types.QVideoWindowControl, ): gen_qobject_types.QObject =
-  gen_qobject_types.QObject(h: fcQVideoWindowControl_protectedbase_sender(self.h))
+  gen_qobject_types.QObject(h: fcQVideoWindowControl_protectedbase_sender(self.h), owned: false)
 
 proc senderSignalIndex*(self: gen_qvideowindowcontrol_types.QVideoWindowControl, ): cint =
   fcQVideoWindowControl_protectedbase_senderSignalIndex(self.h)
@@ -331,5 +330,3 @@ proc isSignalConnected*(self: gen_qvideowindowcontrol_types.QVideoWindowControl,
 
 proc staticMetaObject*(_: type gen_qvideowindowcontrol_types.QVideoWindowControl): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQVideoWindowControl_staticMetaObject())
-proc delete*(self: gen_qvideowindowcontrol_types.QVideoWindowControl) =
-  fcQVideoWindowControl_delete(self.h)

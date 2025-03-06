@@ -30,9 +30,6 @@ func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
     else:
       copyMem(addr result[0], unsafeAddr v[0], v.len)
 
-const cflags = gorge("pkg-config --cflags Qt5Core")  & " -fPIC"
-{.compile("gen_qbasictimer.cpp", cflags).}
-
 
 import ./gen_qbasictimer_types
 export gen_qbasictimer_types
@@ -53,7 +50,6 @@ proc fcQBasicTimer_start2(self: pointer, msec: cint, timerType: cint, obj: point
 proc fcQBasicTimer_stop(self: pointer, ): void {.importc: "QBasicTimer_stop".}
 proc fcQBasicTimer_new(param1: pointer): ptr cQBasicTimer {.importc: "QBasicTimer_new".}
 proc fcQBasicTimer_new2(): ptr cQBasicTimer {.importc: "QBasicTimer_new2".}
-proc fcQBasicTimer_delete(self: pointer) {.importc: "QBasicTimer_delete".}
 
 proc operatorAssign*(self: gen_qbasictimer_types.QBasicTimer, param1: gen_qbasictimer_types.QBasicTimer): void =
   fcQBasicTimer_operatorAssign(self.h, param1.h)
@@ -78,10 +74,8 @@ proc stop*(self: gen_qbasictimer_types.QBasicTimer, ): void =
 
 proc create*(T: type gen_qbasictimer_types.QBasicTimer,
     param1: gen_qbasictimer_types.QBasicTimer): gen_qbasictimer_types.QBasicTimer =
-  gen_qbasictimer_types.QBasicTimer(h: fcQBasicTimer_new(param1.h))
+  gen_qbasictimer_types.QBasicTimer(h: fcQBasicTimer_new(param1.h), owned: true)
 
 proc create*(T: type gen_qbasictimer_types.QBasicTimer): gen_qbasictimer_types.QBasicTimer =
-  gen_qbasictimer_types.QBasicTimer(h: fcQBasicTimer_new2())
+  gen_qbasictimer_types.QBasicTimer(h: fcQBasicTimer_new2(), owned: true)
 
-proc delete*(self: gen_qbasictimer_types.QBasicTimer) =
-  fcQBasicTimer_delete(self.h)

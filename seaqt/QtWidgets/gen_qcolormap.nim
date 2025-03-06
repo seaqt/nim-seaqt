@@ -30,9 +30,6 @@ func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
     else:
       copyMem(addr result[0], unsafeAddr v[0], v.len)
 
-const cflags = gorge("pkg-config --cflags Qt5Widgets")  & " -fPIC"
-{.compile("gen_qcolormap.cpp", cflags).}
-
 
 type QColormapModeEnum* = distinct cint
 template Direct*(_: type QColormapModeEnum): untyped = 0
@@ -62,7 +59,6 @@ proc fcQColormap_colorAt(self: pointer, pixel: cuint): pointer {.importc: "QColo
 proc fcQColormap_colormap(self: pointer, ): struct_miqt_array {.importc: "QColormap_colormap".}
 proc fcQColormap_instance1(screen: cint): pointer {.importc: "QColormap_instance1".}
 proc fcQColormap_new(colormap: pointer): ptr cQColormap {.importc: "QColormap_new".}
-proc fcQColormap_delete(self: pointer) {.importc: "QColormap_delete".}
 
 proc initialize*(_: type gen_qcolormap_types.QColormap, ): void =
   fcQColormap_initialize()
@@ -71,7 +67,7 @@ proc cleanup*(_: type gen_qcolormap_types.QColormap, ): void =
   fcQColormap_cleanup()
 
 proc instance*(_: type gen_qcolormap_types.QColormap, ): gen_qcolormap_types.QColormap =
-  gen_qcolormap_types.QColormap(h: fcQColormap_instance())
+  gen_qcolormap_types.QColormap(h: fcQColormap_instance(), owned: true)
 
 proc operatorAssign*(self: gen_qcolormap_types.QColormap, colormap: gen_qcolormap_types.QColormap): void =
   fcQColormap_operatorAssign(self.h, colormap.h)
@@ -89,23 +85,21 @@ proc pixel*(self: gen_qcolormap_types.QColormap, color: gen_qcolor_types.QColor)
   fcQColormap_pixel(self.h, color.h)
 
 proc colorAt*(self: gen_qcolormap_types.QColormap, pixel: cuint): gen_qcolor_types.QColor =
-  gen_qcolor_types.QColor(h: fcQColormap_colorAt(self.h, pixel))
+  gen_qcolor_types.QColor(h: fcQColormap_colorAt(self.h, pixel), owned: true)
 
 proc colormap*(self: gen_qcolormap_types.QColormap, ): seq[gen_qcolor_types.QColor] =
   var v_ma = fcQColormap_colormap(self.h)
   var vx_ret = newSeq[gen_qcolor_types.QColor](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
-    vx_ret[i] = gen_qcolor_types.QColor(h: v_outCast[i])
+    vx_ret[i] = gen_qcolor_types.QColor(h: v_outCast[i], owned: true)
   c_free(v_ma.data)
   vx_ret
 
 proc instance*(_: type gen_qcolormap_types.QColormap, screen: cint): gen_qcolormap_types.QColormap =
-  gen_qcolormap_types.QColormap(h: fcQColormap_instance1(screen))
+  gen_qcolormap_types.QColormap(h: fcQColormap_instance1(screen), owned: true)
 
 proc create*(T: type gen_qcolormap_types.QColormap,
     colormap: gen_qcolormap_types.QColormap): gen_qcolormap_types.QColormap =
-  gen_qcolormap_types.QColormap(h: fcQColormap_new(colormap.h))
+  gen_qcolormap_types.QColormap(h: fcQColormap_new(colormap.h), owned: true)
 
-proc delete*(self: gen_qcolormap_types.QColormap) =
-  fcQColormap_delete(self.h)

@@ -30,9 +30,6 @@ func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
     else:
       copyMem(addr result[0], unsafeAddr v[0], v.len)
 
-const cflags = gorge("pkg-config --cflags Qt5Qml")  & " -fPIC"
-{.compile("gen_qqmlfile.cpp", cflags).}
-
 
 type QQmlFileStatusEnum* = distinct cint
 template Null*(_: type QQmlFileStatusEnum): untyped = 0
@@ -82,7 +79,6 @@ proc fcQQmlFile_urlToLocalFileOrQrcWithQUrl(param1: pointer): struct_miqt_string
 proc fcQQmlFile_new(): ptr cQQmlFile {.importc: "QQmlFile_new".}
 proc fcQQmlFile_new2(param1: pointer, param2: pointer): ptr cQQmlFile {.importc: "QQmlFile_new2".}
 proc fcQQmlFile_new3(param1: pointer, param2: struct_miqt_string): ptr cQQmlFile {.importc: "QQmlFile_new3".}
-proc fcQQmlFile_delete(self: pointer) {.importc: "QQmlFile_delete".}
 
 proc isNull*(self: gen_qqmlfile_types.QQmlFile, ): bool =
   fcQQmlFile_isNull(self.h)
@@ -97,7 +93,7 @@ proc isLoading*(self: gen_qqmlfile_types.QQmlFile, ): bool =
   fcQQmlFile_isLoading(self.h)
 
 proc url*(self: gen_qqmlfile_types.QQmlFile, ): gen_qurl_types.QUrl =
-  gen_qurl_types.QUrl(h: fcQQmlFile_url(self.h))
+  gen_qurl_types.QUrl(h: fcQQmlFile_url(self.h), owned: true)
 
 proc status*(self: gen_qqmlfile_types.QQmlFile, ): cint =
   cint(fcQQmlFile_status(self.h))
@@ -169,15 +165,13 @@ proc urlToLocalFileOrQrc*(_: type gen_qqmlfile_types.QQmlFile, param1: gen_qurl_
   vx_ret
 
 proc create*(T: type gen_qqmlfile_types.QQmlFile): gen_qqmlfile_types.QQmlFile =
-  gen_qqmlfile_types.QQmlFile(h: fcQQmlFile_new())
+  gen_qqmlfile_types.QQmlFile(h: fcQQmlFile_new(), owned: true)
 
 proc create*(T: type gen_qqmlfile_types.QQmlFile,
     param1: gen_qqmlengine_types.QQmlEngine, param2: gen_qurl_types.QUrl): gen_qqmlfile_types.QQmlFile =
-  gen_qqmlfile_types.QQmlFile(h: fcQQmlFile_new2(param1.h, param2.h))
+  gen_qqmlfile_types.QQmlFile(h: fcQQmlFile_new2(param1.h, param2.h), owned: true)
 
 proc create*(T: type gen_qqmlfile_types.QQmlFile,
     param1: gen_qqmlengine_types.QQmlEngine, param2: string): gen_qqmlfile_types.QQmlFile =
-  gen_qqmlfile_types.QQmlFile(h: fcQQmlFile_new3(param1.h, struct_miqt_string(data: param2, len: csize_t(len(param2)))))
+  gen_qqmlfile_types.QQmlFile(h: fcQQmlFile_new3(param1.h, struct_miqt_string(data: param2, len: csize_t(len(param2)))), owned: true)
 
-proc delete*(self: gen_qqmlfile_types.QQmlFile) =
-  fcQQmlFile_delete(self.h)

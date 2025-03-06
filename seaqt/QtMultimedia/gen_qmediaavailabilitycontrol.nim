@@ -30,7 +30,7 @@ func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
     else:
       copyMem(addr result[0], unsafeAddr v[0], v.len)
 
-const cflags = gorge("pkg-config --cflags Qt5Multimedia")  & " -fPIC"
+const cflags = gorge("pkg-config --cflags Qt5Multimedia") & " -fPIC"
 {.compile("gen_qmediaavailabilitycontrol.cpp", cflags).}
 
 
@@ -67,10 +67,9 @@ proc fcQMediaAvailabilityControl_protectedbase_senderSignalIndex(self: pointer, 
 proc fcQMediaAvailabilityControl_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QMediaAvailabilityControl_protectedbase_receivers".}
 proc fcQMediaAvailabilityControl_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QMediaAvailabilityControl_protectedbase_isSignalConnected".}
 proc fcQMediaAvailabilityControl_staticMetaObject(): pointer {.importc: "QMediaAvailabilityControl_staticMetaObject".}
-proc fcQMediaAvailabilityControl_delete(self: pointer) {.importc: "QMediaAvailabilityControl_delete".}
 
 proc metaObject*(self: gen_qmediaavailabilitycontrol_types.QMediaAvailabilityControl, ): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQMediaAvailabilityControl_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQMediaAvailabilityControl_metaObject(self.h), owned: false)
 
 proc metacast*(self: gen_qmediaavailabilitycontrol_types.QMediaAvailabilityControl, param1: cstring): pointer =
   fcQMediaAvailabilityControl_metacast(self.h, param1)
@@ -138,7 +137,7 @@ proc trUtf8*(_: type gen_qmediaavailabilitycontrol_types.QMediaAvailabilityContr
   vx_ret
 
 proc sender*(self: gen_qmediaavailabilitycontrol_types.QMediaAvailabilityControl, ): gen_qobject_types.QObject =
-  gen_qobject_types.QObject(h: fcQMediaAvailabilityControl_protectedbase_sender(self.h))
+  gen_qobject_types.QObject(h: fcQMediaAvailabilityControl_protectedbase_sender(self.h), owned: false)
 
 proc senderSignalIndex*(self: gen_qmediaavailabilitycontrol_types.QMediaAvailabilityControl, ): cint =
   fcQMediaAvailabilityControl_protectedbase_senderSignalIndex(self.h)
@@ -151,5 +150,3 @@ proc isSignalConnected*(self: gen_qmediaavailabilitycontrol_types.QMediaAvailabi
 
 proc staticMetaObject*(_: type gen_qmediaavailabilitycontrol_types.QMediaAvailabilityControl): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQMediaAvailabilityControl_staticMetaObject())
-proc delete*(self: gen_qmediaavailabilitycontrol_types.QMediaAvailabilityControl) =
-  fcQMediaAvailabilityControl_delete(self.h)

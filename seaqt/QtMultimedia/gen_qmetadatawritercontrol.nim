@@ -30,7 +30,7 @@ func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
     else:
       copyMem(addr result[0], unsafeAddr v[0], v.len)
 
-const cflags = gorge("pkg-config --cflags Qt5Multimedia")  & " -fPIC"
+const cflags = gorge("pkg-config --cflags Qt5Multimedia") & " -fPIC"
 {.compile("gen_qmetadatawritercontrol.cpp", cflags).}
 
 
@@ -79,10 +79,9 @@ proc fcQMetaDataWriterControl_protectedbase_senderSignalIndex(self: pointer, ): 
 proc fcQMetaDataWriterControl_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QMetaDataWriterControl_protectedbase_receivers".}
 proc fcQMetaDataWriterControl_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QMetaDataWriterControl_protectedbase_isSignalConnected".}
 proc fcQMetaDataWriterControl_staticMetaObject(): pointer {.importc: "QMetaDataWriterControl_staticMetaObject".}
-proc fcQMetaDataWriterControl_delete(self: pointer) {.importc: "QMetaDataWriterControl_delete".}
 
 proc metaObject*(self: gen_qmetadatawritercontrol_types.QMetaDataWriterControl, ): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQMetaDataWriterControl_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQMetaDataWriterControl_metaObject(self.h), owned: false)
 
 proc metacast*(self: gen_qmetadatawritercontrol_types.QMetaDataWriterControl, param1: cstring): pointer =
   fcQMetaDataWriterControl_metacast(self.h, param1)
@@ -109,7 +108,7 @@ proc isMetaDataAvailable*(self: gen_qmetadatawritercontrol_types.QMetaDataWriter
   fcQMetaDataWriterControl_isMetaDataAvailable(self.h)
 
 proc metaData*(self: gen_qmetadatawritercontrol_types.QMetaDataWriterControl, key: string): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQMetaDataWriterControl_metaData(self.h, struct_miqt_string(data: key, len: csize_t(len(key)))))
+  gen_qvariant_types.QVariant(h: fcQMetaDataWriterControl_metaData(self.h, struct_miqt_string(data: key, len: csize_t(len(key)))), owned: true)
 
 proc setMetaData*(self: gen_qmetadatawritercontrol_types.QMetaDataWriterControl, key: string, value: gen_qvariant_types.QVariant): void =
   fcQMetaDataWriterControl_setMetaData(self.h, struct_miqt_string(data: key, len: csize_t(len(key))), value.h)
@@ -155,7 +154,7 @@ proc miqt_exec_callback_cQMetaDataWriterControl_metaDataChanged2(slot: int, key:
   c_free(vkey_ms.data)
   let slotval1 = vkeyx_ret
 
-  let slotval2 = gen_qvariant_types.QVariant(h: value)
+  let slotval2 = gen_qvariant_types.QVariant(h: value, owned: false)
 
   nimfunc[](slotval1, slotval2)
 
@@ -234,7 +233,7 @@ proc trUtf8*(_: type gen_qmetadatawritercontrol_types.QMetaDataWriterControl, s:
   vx_ret
 
 proc sender*(self: gen_qmetadatawritercontrol_types.QMetaDataWriterControl, ): gen_qobject_types.QObject =
-  gen_qobject_types.QObject(h: fcQMetaDataWriterControl_protectedbase_sender(self.h))
+  gen_qobject_types.QObject(h: fcQMetaDataWriterControl_protectedbase_sender(self.h), owned: false)
 
 proc senderSignalIndex*(self: gen_qmetadatawritercontrol_types.QMetaDataWriterControl, ): cint =
   fcQMetaDataWriterControl_protectedbase_senderSignalIndex(self.h)
@@ -247,5 +246,3 @@ proc isSignalConnected*(self: gen_qmetadatawritercontrol_types.QMetaDataWriterCo
 
 proc staticMetaObject*(_: type gen_qmetadatawritercontrol_types.QMetaDataWriterControl): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQMetaDataWriterControl_staticMetaObject())
-proc delete*(self: gen_qmetadatawritercontrol_types.QMetaDataWriterControl) =
-  fcQMetaDataWriterControl_delete(self.h)

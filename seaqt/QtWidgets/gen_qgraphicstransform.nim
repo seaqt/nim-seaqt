@@ -30,7 +30,7 @@ func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
     else:
       copyMem(addr result[0], unsafeAddr v[0], v.len)
 
-const cflags = gorge("pkg-config --cflags Qt5Widgets")  & " -fPIC"
+const cflags = gorge("pkg-config --cflags Qt5Widgets") & " -fPIC"
 {.compile("gen_qgraphicstransform.cpp", cflags).}
 
 
@@ -66,7 +66,7 @@ proc fcQGraphicsTransform_tr2(s: cstring, c: cstring): struct_miqt_string {.impo
 proc fcQGraphicsTransform_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QGraphicsTransform_tr3".}
 proc fcQGraphicsTransform_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QGraphicsTransform_trUtf82".}
 proc fcQGraphicsTransform_trUtf83(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QGraphicsTransform_trUtf83".}
-type cQGraphicsTransformVTable = object
+type cQGraphicsTransformVTable {.pure.} = object
   destructor*: proc(vtbl: ptr cQGraphicsTransformVTable, self: ptr cQGraphicsTransform) {.cdecl, raises:[], gcsafe.}
   metaObject*: proc(vtbl, self: pointer, ): pointer {.cdecl, raises: [], gcsafe.}
   metacast*: proc(vtbl, self: pointer, param1: cstring): pointer {.cdecl, raises: [], gcsafe.}
@@ -97,7 +97,6 @@ proc fcQGraphicsTransform_protectedbase_isSignalConnected(self: pointer, signal:
 proc fcQGraphicsTransform_new(vtbl: pointer, ): ptr cQGraphicsTransform {.importc: "QGraphicsTransform_new".}
 proc fcQGraphicsTransform_new2(vtbl: pointer, parent: pointer): ptr cQGraphicsTransform {.importc: "QGraphicsTransform_new2".}
 proc fcQGraphicsTransform_staticMetaObject(): pointer {.importc: "QGraphicsTransform_staticMetaObject".}
-proc fcQGraphicsTransform_delete(self: pointer) {.importc: "QGraphicsTransform_delete".}
 proc fcQGraphicsScale_metaObject(self: pointer, ): pointer {.importc: "QGraphicsScale_metaObject".}
 proc fcQGraphicsScale_metacast(self: pointer, param1: cstring): pointer {.importc: "QGraphicsScale_metacast".}
 proc fcQGraphicsScale_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QGraphicsScale_metacall".}
@@ -126,7 +125,7 @@ proc fcQGraphicsScale_tr2(s: cstring, c: cstring): struct_miqt_string {.importc:
 proc fcQGraphicsScale_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QGraphicsScale_tr3".}
 proc fcQGraphicsScale_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QGraphicsScale_trUtf82".}
 proc fcQGraphicsScale_trUtf83(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QGraphicsScale_trUtf83".}
-type cQGraphicsScaleVTable = object
+type cQGraphicsScaleVTable {.pure.} = object
   destructor*: proc(vtbl: ptr cQGraphicsScaleVTable, self: ptr cQGraphicsScale) {.cdecl, raises:[], gcsafe.}
   metaObject*: proc(vtbl, self: pointer, ): pointer {.cdecl, raises: [], gcsafe.}
   metacast*: proc(vtbl, self: pointer, param1: cstring): pointer {.cdecl, raises: [], gcsafe.}
@@ -158,7 +157,6 @@ proc fcQGraphicsScale_protectedbase_isSignalConnected(self: pointer, signal: poi
 proc fcQGraphicsScale_new(vtbl: pointer, ): ptr cQGraphicsScale {.importc: "QGraphicsScale_new".}
 proc fcQGraphicsScale_new2(vtbl: pointer, parent: pointer): ptr cQGraphicsScale {.importc: "QGraphicsScale_new2".}
 proc fcQGraphicsScale_staticMetaObject(): pointer {.importc: "QGraphicsScale_staticMetaObject".}
-proc fcQGraphicsScale_delete(self: pointer) {.importc: "QGraphicsScale_delete".}
 proc fcQGraphicsRotation_metaObject(self: pointer, ): pointer {.importc: "QGraphicsRotation_metaObject".}
 proc fcQGraphicsRotation_metacast(self: pointer, param1: cstring): pointer {.importc: "QGraphicsRotation_metacast".}
 proc fcQGraphicsRotation_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QGraphicsRotation_metacall".}
@@ -182,7 +180,7 @@ proc fcQGraphicsRotation_tr2(s: cstring, c: cstring): struct_miqt_string {.impor
 proc fcQGraphicsRotation_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QGraphicsRotation_tr3".}
 proc fcQGraphicsRotation_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QGraphicsRotation_trUtf82".}
 proc fcQGraphicsRotation_trUtf83(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QGraphicsRotation_trUtf83".}
-type cQGraphicsRotationVTable = object
+type cQGraphicsRotationVTable {.pure.} = object
   destructor*: proc(vtbl: ptr cQGraphicsRotationVTable, self: ptr cQGraphicsRotation) {.cdecl, raises:[], gcsafe.}
   metaObject*: proc(vtbl, self: pointer, ): pointer {.cdecl, raises: [], gcsafe.}
   metacast*: proc(vtbl, self: pointer, param1: cstring): pointer {.cdecl, raises: [], gcsafe.}
@@ -214,10 +212,9 @@ proc fcQGraphicsRotation_protectedbase_isSignalConnected(self: pointer, signal: 
 proc fcQGraphicsRotation_new(vtbl: pointer, ): ptr cQGraphicsRotation {.importc: "QGraphicsRotation_new".}
 proc fcQGraphicsRotation_new2(vtbl: pointer, parent: pointer): ptr cQGraphicsRotation {.importc: "QGraphicsRotation_new2".}
 proc fcQGraphicsRotation_staticMetaObject(): pointer {.importc: "QGraphicsRotation_staticMetaObject".}
-proc fcQGraphicsRotation_delete(self: pointer) {.importc: "QGraphicsRotation_delete".}
 
 proc metaObject*(self: gen_qgraphicstransform_types.QGraphicsTransform, ): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQGraphicsTransform_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQGraphicsTransform_metaObject(self.h), owned: false)
 
 proc metacast*(self: gen_qgraphicstransform_types.QGraphicsTransform, param1: cstring): pointer =
   fcQGraphicsTransform_metacast(self.h, param1)
@@ -275,7 +272,7 @@ type QGraphicsTransformchildEventProc* = proc(self: QGraphicsTransform, event: g
 type QGraphicsTransformcustomEventProc* = proc(self: QGraphicsTransform, event: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
 type QGraphicsTransformconnectNotifyProc* = proc(self: QGraphicsTransform, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
 type QGraphicsTransformdisconnectNotifyProc* = proc(self: QGraphicsTransform, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
-type QGraphicsTransformVTable* = object
+type QGraphicsTransformVTable* {.inheritable, pure.} = object
   vtbl: cQGraphicsTransformVTable
   metaObject*: QGraphicsTransformmetaObjectProc
   metacast*: QGraphicsTransformmetacastProc
@@ -289,13 +286,16 @@ type QGraphicsTransformVTable* = object
   connectNotify*: QGraphicsTransformconnectNotifyProc
   disconnectNotify*: QGraphicsTransformdisconnectNotifyProc
 proc QGraphicsTransformmetaObject*(self: gen_qgraphicstransform_types.QGraphicsTransform, ): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQGraphicsTransform_virtualbase_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQGraphicsTransform_virtualbase_metaObject(self.h), owned: false)
 
 proc miqt_exec_callback_cQGraphicsTransform_metaObject(vtbl: pointer, self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QGraphicsTransformVTable](vtbl)
   let self = QGraphicsTransform(h: self)
   var virtualReturn = vtbl[].metaObject(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QGraphicsTransformmetacast*(self: gen_qgraphicstransform_types.QGraphicsTransform, param1: cstring): pointer =
   fcQGraphicsTransform_virtualbase_metacast(self.h, param1)
@@ -322,7 +322,7 @@ proc miqt_exec_callback_cQGraphicsTransform_metacall(vtbl: pointer, self: pointe
 proc miqt_exec_callback_cQGraphicsTransform_applyTo(vtbl: pointer, self: pointer, matrix: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsTransformVTable](vtbl)
   let self = QGraphicsTransform(h: self)
-  let slotval1 = gen_qmatrix4x4_types.QMatrix4x4(h: matrix)
+  let slotval1 = gen_qmatrix4x4_types.QMatrix4x4(h: matrix, owned: false)
   vtbl[].applyTo(self, slotval1)
 
 proc QGraphicsTransformevent*(self: gen_qgraphicstransform_types.QGraphicsTransform, event: gen_qcoreevent_types.QEvent): bool =
@@ -331,7 +331,7 @@ proc QGraphicsTransformevent*(self: gen_qgraphicstransform_types.QGraphicsTransf
 proc miqt_exec_callback_cQGraphicsTransform_event(vtbl: pointer, self: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QGraphicsTransformVTable](vtbl)
   let self = QGraphicsTransform(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].event(self, slotval1)
   virtualReturn
 
@@ -341,8 +341,8 @@ proc QGraphicsTransformeventFilter*(self: gen_qgraphicstransform_types.QGraphics
 proc miqt_exec_callback_cQGraphicsTransform_eventFilter(vtbl: pointer, self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QGraphicsTransformVTable](vtbl)
   let self = QGraphicsTransform(h: self)
-  let slotval1 = gen_qobject_types.QObject(h: watched)
-  let slotval2 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].eventFilter(self, slotval1, slotval2)
   virtualReturn
 
@@ -352,7 +352,7 @@ proc QGraphicsTransformtimerEvent*(self: gen_qgraphicstransform_types.QGraphicsT
 proc miqt_exec_callback_cQGraphicsTransform_timerEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsTransformVTable](vtbl)
   let self = QGraphicsTransform(h: self)
-  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   vtbl[].timerEvent(self, slotval1)
 
 proc QGraphicsTransformchildEvent*(self: gen_qgraphicstransform_types.QGraphicsTransform, event: gen_qcoreevent_types.QChildEvent): void =
@@ -361,7 +361,7 @@ proc QGraphicsTransformchildEvent*(self: gen_qgraphicstransform_types.QGraphicsT
 proc miqt_exec_callback_cQGraphicsTransform_childEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsTransformVTable](vtbl)
   let self = QGraphicsTransform(h: self)
-  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   vtbl[].childEvent(self, slotval1)
 
 proc QGraphicsTransformcustomEvent*(self: gen_qgraphicstransform_types.QGraphicsTransform, event: gen_qcoreevent_types.QEvent): void =
@@ -370,7 +370,7 @@ proc QGraphicsTransformcustomEvent*(self: gen_qgraphicstransform_types.QGraphics
 proc miqt_exec_callback_cQGraphicsTransform_customEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsTransformVTable](vtbl)
   let self = QGraphicsTransform(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].customEvent(self, slotval1)
 
 proc QGraphicsTransformconnectNotify*(self: gen_qgraphicstransform_types.QGraphicsTransform, signal: gen_qmetaobject_types.QMetaMethod): void =
@@ -379,7 +379,7 @@ proc QGraphicsTransformconnectNotify*(self: gen_qgraphicstransform_types.QGraphi
 proc miqt_exec_callback_cQGraphicsTransform_connectNotify(vtbl: pointer, self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsTransformVTable](vtbl)
   let self = QGraphicsTransform(h: self)
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].connectNotify(self, slotval1)
 
 proc QGraphicsTransformdisconnectNotify*(self: gen_qgraphicstransform_types.QGraphicsTransform, signal: gen_qmetaobject_types.QMetaMethod): void =
@@ -388,14 +388,103 @@ proc QGraphicsTransformdisconnectNotify*(self: gen_qgraphicstransform_types.QGra
 proc miqt_exec_callback_cQGraphicsTransform_disconnectNotify(vtbl: pointer, self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsTransformVTable](vtbl)
   let self = QGraphicsTransform(h: self)
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].disconnectNotify(self, slotval1)
+
+type VirtualQGraphicsTransform* {.inheritable.} = ref object of QGraphicsTransform
+  vtbl*: cQGraphicsTransformVTable
+method metaObject*(self: VirtualQGraphicsTransform, ): gen_qobjectdefs_types.QMetaObject {.base.} =
+  QGraphicsTransformmetaObject(self[])
+proc miqt_exec_method_cQGraphicsTransform_metaObject(vtbl: pointer, inst: pointer): pointer {.cdecl.} =
+  let vtbl = cast[VirtualQGraphicsTransform](cast[uint](vtbl) - uint(offsetOf(VirtualQGraphicsTransform, vtbl)))
+  var virtualReturn = vtbl.metaObject()
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
+
+method metacast*(self: VirtualQGraphicsTransform, param1: cstring): pointer {.base.} =
+  QGraphicsTransformmetacast(self[], param1)
+proc miqt_exec_method_cQGraphicsTransform_metacast(vtbl: pointer, inst: pointer, param1: cstring): pointer {.cdecl.} =
+  let vtbl = cast[VirtualQGraphicsTransform](cast[uint](vtbl) - uint(offsetOf(VirtualQGraphicsTransform, vtbl)))
+  let slotval1 = (param1)
+  var virtualReturn = vtbl.metacast(slotval1)
+  virtualReturn
+
+method metacall*(self: VirtualQGraphicsTransform, param1: cint, param2: cint, param3: pointer): cint {.base.} =
+  QGraphicsTransformmetacall(self[], param1, param2, param3)
+proc miqt_exec_method_cQGraphicsTransform_metacall(vtbl: pointer, inst: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
+  let vtbl = cast[VirtualQGraphicsTransform](cast[uint](vtbl) - uint(offsetOf(VirtualQGraphicsTransform, vtbl)))
+  let slotval1 = cint(param1)
+  let slotval2 = param2
+  let slotval3 = param3
+  var virtualReturn = vtbl.metacall(slotval1, slotval2, slotval3)
+  virtualReturn
+
+method applyTo*(self: VirtualQGraphicsTransform, matrix: gen_qmatrix4x4_types.QMatrix4x4): void {.base.} =
+  raiseAssert("missing implementation of QGraphicsTransform_virtualbase_applyTo")
+proc miqt_exec_method_cQGraphicsTransform_applyTo(vtbl: pointer, inst: pointer, matrix: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQGraphicsTransform](cast[uint](vtbl) - uint(offsetOf(VirtualQGraphicsTransform, vtbl)))
+  let slotval1 = gen_qmatrix4x4_types.QMatrix4x4(h: matrix, owned: false)
+  vtbl.applyTo(slotval1)
+
+method event*(self: VirtualQGraphicsTransform, event: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QGraphicsTransformevent(self[], event)
+proc miqt_exec_method_cQGraphicsTransform_event(vtbl: pointer, inst: pointer, event: pointer): bool {.cdecl.} =
+  let vtbl = cast[VirtualQGraphicsTransform](cast[uint](vtbl) - uint(offsetOf(VirtualQGraphicsTransform, vtbl)))
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
+  var virtualReturn = vtbl.event(slotval1)
+  virtualReturn
+
+method eventFilter*(self: VirtualQGraphicsTransform, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QGraphicsTransformeventFilter(self[], watched, event)
+proc miqt_exec_method_cQGraphicsTransform_eventFilter(vtbl: pointer, inst: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
+  let vtbl = cast[VirtualQGraphicsTransform](cast[uint](vtbl) - uint(offsetOf(VirtualQGraphicsTransform, vtbl)))
+  let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
+  var virtualReturn = vtbl.eventFilter(slotval1, slotval2)
+  virtualReturn
+
+method timerEvent*(self: VirtualQGraphicsTransform, event: gen_qcoreevent_types.QTimerEvent): void {.base.} =
+  QGraphicsTransformtimerEvent(self[], event)
+proc miqt_exec_method_cQGraphicsTransform_timerEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQGraphicsTransform](cast[uint](vtbl) - uint(offsetOf(VirtualQGraphicsTransform, vtbl)))
+  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
+  vtbl.timerEvent(slotval1)
+
+method childEvent*(self: VirtualQGraphicsTransform, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
+  QGraphicsTransformchildEvent(self[], event)
+proc miqt_exec_method_cQGraphicsTransform_childEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQGraphicsTransform](cast[uint](vtbl) - uint(offsetOf(VirtualQGraphicsTransform, vtbl)))
+  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
+  vtbl.childEvent(slotval1)
+
+method customEvent*(self: VirtualQGraphicsTransform, event: gen_qcoreevent_types.QEvent): void {.base.} =
+  QGraphicsTransformcustomEvent(self[], event)
+proc miqt_exec_method_cQGraphicsTransform_customEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQGraphicsTransform](cast[uint](vtbl) - uint(offsetOf(VirtualQGraphicsTransform, vtbl)))
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
+  vtbl.customEvent(slotval1)
+
+method connectNotify*(self: VirtualQGraphicsTransform, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QGraphicsTransformconnectNotify(self[], signal)
+proc miqt_exec_method_cQGraphicsTransform_connectNotify(vtbl: pointer, inst: pointer, signal: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQGraphicsTransform](cast[uint](vtbl) - uint(offsetOf(VirtualQGraphicsTransform, vtbl)))
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
+  vtbl.connectNotify(slotval1)
+
+method disconnectNotify*(self: VirtualQGraphicsTransform, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QGraphicsTransformdisconnectNotify(self[], signal)
+proc miqt_exec_method_cQGraphicsTransform_disconnectNotify(vtbl: pointer, inst: pointer, signal: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQGraphicsTransform](cast[uint](vtbl) - uint(offsetOf(VirtualQGraphicsTransform, vtbl)))
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
+  vtbl.disconnectNotify(slotval1)
 
 proc update*(self: gen_qgraphicstransform_types.QGraphicsTransform, ): void =
   fcQGraphicsTransform_protectedbase_update(self.h)
 
 proc sender*(self: gen_qgraphicstransform_types.QGraphicsTransform, ): gen_qobject_types.QObject =
-  gen_qobject_types.QObject(h: fcQGraphicsTransform_protectedbase_sender(self.h))
+  gen_qobject_types.QObject(h: fcQGraphicsTransform_protectedbase_sender(self.h), owned: false)
 
 proc senderSignalIndex*(self: gen_qgraphicstransform_types.QGraphicsTransform, ): cint =
   fcQGraphicsTransform_protectedbase_senderSignalIndex(self.h)
@@ -410,71 +499,114 @@ proc create*(T: type gen_qgraphicstransform_types.QGraphicsTransform,
     vtbl: ref QGraphicsTransformVTable = nil): gen_qgraphicstransform_types.QGraphicsTransform =
   let vtbl = if vtbl == nil: new QGraphicsTransformVTable else: vtbl
   GC_ref(vtbl)
-  vtbl.vtbl.destructor = proc(vtbl: ptr cQGraphicsTransformVTable, _: ptr cQGraphicsTransform) {.cdecl.} =
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQGraphicsTransformVTable, _: ptr cQGraphicsTransform) {.cdecl.} =
     let vtbl = cast[ref QGraphicsTransformVTable](vtbl)
     GC_unref(vtbl)
-  if not isNil(vtbl.metaObject):
+  if not isNil(vtbl[].metaObject):
     vtbl[].vtbl.metaObject = miqt_exec_callback_cQGraphicsTransform_metaObject
-  if not isNil(vtbl.metacast):
+  if not isNil(vtbl[].metacast):
     vtbl[].vtbl.metacast = miqt_exec_callback_cQGraphicsTransform_metacast
-  if not isNil(vtbl.metacall):
+  if not isNil(vtbl[].metacall):
     vtbl[].vtbl.metacall = miqt_exec_callback_cQGraphicsTransform_metacall
-  if not isNil(vtbl.applyTo):
+  if not isNil(vtbl[].applyTo):
     vtbl[].vtbl.applyTo = miqt_exec_callback_cQGraphicsTransform_applyTo
-  if not isNil(vtbl.event):
+  if not isNil(vtbl[].event):
     vtbl[].vtbl.event = miqt_exec_callback_cQGraphicsTransform_event
-  if not isNil(vtbl.eventFilter):
+  if not isNil(vtbl[].eventFilter):
     vtbl[].vtbl.eventFilter = miqt_exec_callback_cQGraphicsTransform_eventFilter
-  if not isNil(vtbl.timerEvent):
+  if not isNil(vtbl[].timerEvent):
     vtbl[].vtbl.timerEvent = miqt_exec_callback_cQGraphicsTransform_timerEvent
-  if not isNil(vtbl.childEvent):
+  if not isNil(vtbl[].childEvent):
     vtbl[].vtbl.childEvent = miqt_exec_callback_cQGraphicsTransform_childEvent
-  if not isNil(vtbl.customEvent):
+  if not isNil(vtbl[].customEvent):
     vtbl[].vtbl.customEvent = miqt_exec_callback_cQGraphicsTransform_customEvent
-  if not isNil(vtbl.connectNotify):
+  if not isNil(vtbl[].connectNotify):
     vtbl[].vtbl.connectNotify = miqt_exec_callback_cQGraphicsTransform_connectNotify
-  if not isNil(vtbl.disconnectNotify):
+  if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQGraphicsTransform_disconnectNotify
-  gen_qgraphicstransform_types.QGraphicsTransform(h: fcQGraphicsTransform_new(addr(vtbl[]), ))
+  gen_qgraphicstransform_types.QGraphicsTransform(h: fcQGraphicsTransform_new(addr(vtbl[].vtbl), ), owned: true)
 
 proc create*(T: type gen_qgraphicstransform_types.QGraphicsTransform,
     parent: gen_qobject_types.QObject,
     vtbl: ref QGraphicsTransformVTable = nil): gen_qgraphicstransform_types.QGraphicsTransform =
   let vtbl = if vtbl == nil: new QGraphicsTransformVTable else: vtbl
   GC_ref(vtbl)
-  vtbl.vtbl.destructor = proc(vtbl: ptr cQGraphicsTransformVTable, _: ptr cQGraphicsTransform) {.cdecl.} =
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQGraphicsTransformVTable, _: ptr cQGraphicsTransform) {.cdecl.} =
     let vtbl = cast[ref QGraphicsTransformVTable](vtbl)
     GC_unref(vtbl)
-  if not isNil(vtbl.metaObject):
+  if not isNil(vtbl[].metaObject):
     vtbl[].vtbl.metaObject = miqt_exec_callback_cQGraphicsTransform_metaObject
-  if not isNil(vtbl.metacast):
+  if not isNil(vtbl[].metacast):
     vtbl[].vtbl.metacast = miqt_exec_callback_cQGraphicsTransform_metacast
-  if not isNil(vtbl.metacall):
+  if not isNil(vtbl[].metacall):
     vtbl[].vtbl.metacall = miqt_exec_callback_cQGraphicsTransform_metacall
-  if not isNil(vtbl.applyTo):
+  if not isNil(vtbl[].applyTo):
     vtbl[].vtbl.applyTo = miqt_exec_callback_cQGraphicsTransform_applyTo
-  if not isNil(vtbl.event):
+  if not isNil(vtbl[].event):
     vtbl[].vtbl.event = miqt_exec_callback_cQGraphicsTransform_event
-  if not isNil(vtbl.eventFilter):
+  if not isNil(vtbl[].eventFilter):
     vtbl[].vtbl.eventFilter = miqt_exec_callback_cQGraphicsTransform_eventFilter
-  if not isNil(vtbl.timerEvent):
+  if not isNil(vtbl[].timerEvent):
     vtbl[].vtbl.timerEvent = miqt_exec_callback_cQGraphicsTransform_timerEvent
-  if not isNil(vtbl.childEvent):
+  if not isNil(vtbl[].childEvent):
     vtbl[].vtbl.childEvent = miqt_exec_callback_cQGraphicsTransform_childEvent
-  if not isNil(vtbl.customEvent):
+  if not isNil(vtbl[].customEvent):
     vtbl[].vtbl.customEvent = miqt_exec_callback_cQGraphicsTransform_customEvent
-  if not isNil(vtbl.connectNotify):
+  if not isNil(vtbl[].connectNotify):
     vtbl[].vtbl.connectNotify = miqt_exec_callback_cQGraphicsTransform_connectNotify
-  if not isNil(vtbl.disconnectNotify):
+  if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQGraphicsTransform_disconnectNotify
-  gen_qgraphicstransform_types.QGraphicsTransform(h: fcQGraphicsTransform_new2(addr(vtbl[]), parent.h))
+  gen_qgraphicstransform_types.QGraphicsTransform(h: fcQGraphicsTransform_new2(addr(vtbl[].vtbl), parent.h), owned: true)
+
+proc create*(T: type gen_qgraphicstransform_types.QGraphicsTransform,
+    vtbl: VirtualQGraphicsTransform) =
+
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQGraphicsTransformVTable, _: ptr cQGraphicsTransform) {.cdecl.} =
+    let vtbl = cast[ptr typeof(VirtualQGraphicsTransform()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQGraphicsTransform, vtbl)))
+    vtbl[].h = nil
+    vtbl[].owned = false
+  vtbl[].vtbl.metaObject = miqt_exec_method_cQGraphicsTransform_metaObject
+  vtbl[].vtbl.metacast = miqt_exec_method_cQGraphicsTransform_metacast
+  vtbl[].vtbl.metacall = miqt_exec_method_cQGraphicsTransform_metacall
+  vtbl[].vtbl.applyTo = miqt_exec_method_cQGraphicsTransform_applyTo
+  vtbl[].vtbl.event = miqt_exec_method_cQGraphicsTransform_event
+  vtbl[].vtbl.eventFilter = miqt_exec_method_cQGraphicsTransform_eventFilter
+  vtbl[].vtbl.timerEvent = miqt_exec_method_cQGraphicsTransform_timerEvent
+  vtbl[].vtbl.childEvent = miqt_exec_method_cQGraphicsTransform_childEvent
+  vtbl[].vtbl.customEvent = miqt_exec_method_cQGraphicsTransform_customEvent
+  vtbl[].vtbl.connectNotify = miqt_exec_method_cQGraphicsTransform_connectNotify
+  vtbl[].vtbl.disconnectNotify = miqt_exec_method_cQGraphicsTransform_disconnectNotify
+  if vtbl[].h != nil: delete(move(vtbl[]))
+  vtbl[].h = fcQGraphicsTransform_new(addr(vtbl[].vtbl), )
+  vtbl[].owned = true
+
+proc create*(T: type gen_qgraphicstransform_types.QGraphicsTransform,
+    parent: gen_qobject_types.QObject,
+    vtbl: VirtualQGraphicsTransform) =
+
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQGraphicsTransformVTable, _: ptr cQGraphicsTransform) {.cdecl.} =
+    let vtbl = cast[ptr typeof(VirtualQGraphicsTransform()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQGraphicsTransform, vtbl)))
+    vtbl[].h = nil
+    vtbl[].owned = false
+  vtbl[].vtbl.metaObject = miqt_exec_method_cQGraphicsTransform_metaObject
+  vtbl[].vtbl.metacast = miqt_exec_method_cQGraphicsTransform_metacast
+  vtbl[].vtbl.metacall = miqt_exec_method_cQGraphicsTransform_metacall
+  vtbl[].vtbl.applyTo = miqt_exec_method_cQGraphicsTransform_applyTo
+  vtbl[].vtbl.event = miqt_exec_method_cQGraphicsTransform_event
+  vtbl[].vtbl.eventFilter = miqt_exec_method_cQGraphicsTransform_eventFilter
+  vtbl[].vtbl.timerEvent = miqt_exec_method_cQGraphicsTransform_timerEvent
+  vtbl[].vtbl.childEvent = miqt_exec_method_cQGraphicsTransform_childEvent
+  vtbl[].vtbl.customEvent = miqt_exec_method_cQGraphicsTransform_customEvent
+  vtbl[].vtbl.connectNotify = miqt_exec_method_cQGraphicsTransform_connectNotify
+  vtbl[].vtbl.disconnectNotify = miqt_exec_method_cQGraphicsTransform_disconnectNotify
+  if vtbl[].h != nil: delete(move(vtbl[]))
+  vtbl[].h = fcQGraphicsTransform_new2(addr(vtbl[].vtbl), parent.h)
+  vtbl[].owned = true
 
 proc staticMetaObject*(_: type gen_qgraphicstransform_types.QGraphicsTransform): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQGraphicsTransform_staticMetaObject())
-proc delete*(self: gen_qgraphicstransform_types.QGraphicsTransform) =
-  fcQGraphicsTransform_delete(self.h)
 proc metaObject*(self: gen_qgraphicstransform_types.QGraphicsScale, ): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQGraphicsScale_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQGraphicsScale_metaObject(self.h), owned: false)
 
 proc metacast*(self: gen_qgraphicstransform_types.QGraphicsScale, param1: cstring): pointer =
   fcQGraphicsScale_metacast(self.h, param1)
@@ -495,7 +627,7 @@ proc trUtf8*(_: type gen_qgraphicstransform_types.QGraphicsScale, s: cstring): s
   vx_ret
 
 proc origin*(self: gen_qgraphicstransform_types.QGraphicsScale, ): gen_qvector3d_types.QVector3D =
-  gen_qvector3d_types.QVector3D(h: fcQGraphicsScale_origin(self.h))
+  gen_qvector3d_types.QVector3D(h: fcQGraphicsScale_origin(self.h), owned: true)
 
 proc setOrigin*(self: gen_qgraphicstransform_types.QGraphicsScale, point: gen_qvector3d_types.QVector3D): void =
   fcQGraphicsScale_setOrigin(self.h, point.h)
@@ -646,7 +778,7 @@ type QGraphicsScalechildEventProc* = proc(self: QGraphicsScale, event: gen_qcore
 type QGraphicsScalecustomEventProc* = proc(self: QGraphicsScale, event: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
 type QGraphicsScaleconnectNotifyProc* = proc(self: QGraphicsScale, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
 type QGraphicsScaledisconnectNotifyProc* = proc(self: QGraphicsScale, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
-type QGraphicsScaleVTable* = object
+type QGraphicsScaleVTable* {.inheritable, pure.} = object
   vtbl: cQGraphicsScaleVTable
   metaObject*: QGraphicsScalemetaObjectProc
   metacast*: QGraphicsScalemetacastProc
@@ -660,13 +792,16 @@ type QGraphicsScaleVTable* = object
   connectNotify*: QGraphicsScaleconnectNotifyProc
   disconnectNotify*: QGraphicsScaledisconnectNotifyProc
 proc QGraphicsScalemetaObject*(self: gen_qgraphicstransform_types.QGraphicsScale, ): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQGraphicsScale_virtualbase_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQGraphicsScale_virtualbase_metaObject(self.h), owned: false)
 
 proc miqt_exec_callback_cQGraphicsScale_metaObject(vtbl: pointer, self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QGraphicsScaleVTable](vtbl)
   let self = QGraphicsScale(h: self)
   var virtualReturn = vtbl[].metaObject(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QGraphicsScalemetacast*(self: gen_qgraphicstransform_types.QGraphicsScale, param1: cstring): pointer =
   fcQGraphicsScale_virtualbase_metacast(self.h, param1)
@@ -696,7 +831,7 @@ proc QGraphicsScaleapplyTo*(self: gen_qgraphicstransform_types.QGraphicsScale, m
 proc miqt_exec_callback_cQGraphicsScale_applyTo(vtbl: pointer, self: pointer, matrix: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsScaleVTable](vtbl)
   let self = QGraphicsScale(h: self)
-  let slotval1 = gen_qmatrix4x4_types.QMatrix4x4(h: matrix)
+  let slotval1 = gen_qmatrix4x4_types.QMatrix4x4(h: matrix, owned: false)
   vtbl[].applyTo(self, slotval1)
 
 proc QGraphicsScaleevent*(self: gen_qgraphicstransform_types.QGraphicsScale, event: gen_qcoreevent_types.QEvent): bool =
@@ -705,7 +840,7 @@ proc QGraphicsScaleevent*(self: gen_qgraphicstransform_types.QGraphicsScale, eve
 proc miqt_exec_callback_cQGraphicsScale_event(vtbl: pointer, self: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QGraphicsScaleVTable](vtbl)
   let self = QGraphicsScale(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].event(self, slotval1)
   virtualReturn
 
@@ -715,8 +850,8 @@ proc QGraphicsScaleeventFilter*(self: gen_qgraphicstransform_types.QGraphicsScal
 proc miqt_exec_callback_cQGraphicsScale_eventFilter(vtbl: pointer, self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QGraphicsScaleVTable](vtbl)
   let self = QGraphicsScale(h: self)
-  let slotval1 = gen_qobject_types.QObject(h: watched)
-  let slotval2 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].eventFilter(self, slotval1, slotval2)
   virtualReturn
 
@@ -726,7 +861,7 @@ proc QGraphicsScaletimerEvent*(self: gen_qgraphicstransform_types.QGraphicsScale
 proc miqt_exec_callback_cQGraphicsScale_timerEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsScaleVTable](vtbl)
   let self = QGraphicsScale(h: self)
-  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   vtbl[].timerEvent(self, slotval1)
 
 proc QGraphicsScalechildEvent*(self: gen_qgraphicstransform_types.QGraphicsScale, event: gen_qcoreevent_types.QChildEvent): void =
@@ -735,7 +870,7 @@ proc QGraphicsScalechildEvent*(self: gen_qgraphicstransform_types.QGraphicsScale
 proc miqt_exec_callback_cQGraphicsScale_childEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsScaleVTable](vtbl)
   let self = QGraphicsScale(h: self)
-  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   vtbl[].childEvent(self, slotval1)
 
 proc QGraphicsScalecustomEvent*(self: gen_qgraphicstransform_types.QGraphicsScale, event: gen_qcoreevent_types.QEvent): void =
@@ -744,7 +879,7 @@ proc QGraphicsScalecustomEvent*(self: gen_qgraphicstransform_types.QGraphicsScal
 proc miqt_exec_callback_cQGraphicsScale_customEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsScaleVTable](vtbl)
   let self = QGraphicsScale(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].customEvent(self, slotval1)
 
 proc QGraphicsScaleconnectNotify*(self: gen_qgraphicstransform_types.QGraphicsScale, signal: gen_qmetaobject_types.QMetaMethod): void =
@@ -753,7 +888,7 @@ proc QGraphicsScaleconnectNotify*(self: gen_qgraphicstransform_types.QGraphicsSc
 proc miqt_exec_callback_cQGraphicsScale_connectNotify(vtbl: pointer, self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsScaleVTable](vtbl)
   let self = QGraphicsScale(h: self)
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].connectNotify(self, slotval1)
 
 proc QGraphicsScaledisconnectNotify*(self: gen_qgraphicstransform_types.QGraphicsScale, signal: gen_qmetaobject_types.QMetaMethod): void =
@@ -762,14 +897,103 @@ proc QGraphicsScaledisconnectNotify*(self: gen_qgraphicstransform_types.QGraphic
 proc miqt_exec_callback_cQGraphicsScale_disconnectNotify(vtbl: pointer, self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsScaleVTable](vtbl)
   let self = QGraphicsScale(h: self)
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].disconnectNotify(self, slotval1)
+
+type VirtualQGraphicsScale* {.inheritable.} = ref object of QGraphicsScale
+  vtbl*: cQGraphicsScaleVTable
+method metaObject*(self: VirtualQGraphicsScale, ): gen_qobjectdefs_types.QMetaObject {.base.} =
+  QGraphicsScalemetaObject(self[])
+proc miqt_exec_method_cQGraphicsScale_metaObject(vtbl: pointer, inst: pointer): pointer {.cdecl.} =
+  let vtbl = cast[VirtualQGraphicsScale](cast[uint](vtbl) - uint(offsetOf(VirtualQGraphicsScale, vtbl)))
+  var virtualReturn = vtbl.metaObject()
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
+
+method metacast*(self: VirtualQGraphicsScale, param1: cstring): pointer {.base.} =
+  QGraphicsScalemetacast(self[], param1)
+proc miqt_exec_method_cQGraphicsScale_metacast(vtbl: pointer, inst: pointer, param1: cstring): pointer {.cdecl.} =
+  let vtbl = cast[VirtualQGraphicsScale](cast[uint](vtbl) - uint(offsetOf(VirtualQGraphicsScale, vtbl)))
+  let slotval1 = (param1)
+  var virtualReturn = vtbl.metacast(slotval1)
+  virtualReturn
+
+method metacall*(self: VirtualQGraphicsScale, param1: cint, param2: cint, param3: pointer): cint {.base.} =
+  QGraphicsScalemetacall(self[], param1, param2, param3)
+proc miqt_exec_method_cQGraphicsScale_metacall(vtbl: pointer, inst: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
+  let vtbl = cast[VirtualQGraphicsScale](cast[uint](vtbl) - uint(offsetOf(VirtualQGraphicsScale, vtbl)))
+  let slotval1 = cint(param1)
+  let slotval2 = param2
+  let slotval3 = param3
+  var virtualReturn = vtbl.metacall(slotval1, slotval2, slotval3)
+  virtualReturn
+
+method applyTo*(self: VirtualQGraphicsScale, matrix: gen_qmatrix4x4_types.QMatrix4x4): void {.base.} =
+  QGraphicsScaleapplyTo(self[], matrix)
+proc miqt_exec_method_cQGraphicsScale_applyTo(vtbl: pointer, inst: pointer, matrix: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQGraphicsScale](cast[uint](vtbl) - uint(offsetOf(VirtualQGraphicsScale, vtbl)))
+  let slotval1 = gen_qmatrix4x4_types.QMatrix4x4(h: matrix, owned: false)
+  vtbl.applyTo(slotval1)
+
+method event*(self: VirtualQGraphicsScale, event: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QGraphicsScaleevent(self[], event)
+proc miqt_exec_method_cQGraphicsScale_event(vtbl: pointer, inst: pointer, event: pointer): bool {.cdecl.} =
+  let vtbl = cast[VirtualQGraphicsScale](cast[uint](vtbl) - uint(offsetOf(VirtualQGraphicsScale, vtbl)))
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
+  var virtualReturn = vtbl.event(slotval1)
+  virtualReturn
+
+method eventFilter*(self: VirtualQGraphicsScale, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QGraphicsScaleeventFilter(self[], watched, event)
+proc miqt_exec_method_cQGraphicsScale_eventFilter(vtbl: pointer, inst: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
+  let vtbl = cast[VirtualQGraphicsScale](cast[uint](vtbl) - uint(offsetOf(VirtualQGraphicsScale, vtbl)))
+  let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
+  var virtualReturn = vtbl.eventFilter(slotval1, slotval2)
+  virtualReturn
+
+method timerEvent*(self: VirtualQGraphicsScale, event: gen_qcoreevent_types.QTimerEvent): void {.base.} =
+  QGraphicsScaletimerEvent(self[], event)
+proc miqt_exec_method_cQGraphicsScale_timerEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQGraphicsScale](cast[uint](vtbl) - uint(offsetOf(VirtualQGraphicsScale, vtbl)))
+  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
+  vtbl.timerEvent(slotval1)
+
+method childEvent*(self: VirtualQGraphicsScale, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
+  QGraphicsScalechildEvent(self[], event)
+proc miqt_exec_method_cQGraphicsScale_childEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQGraphicsScale](cast[uint](vtbl) - uint(offsetOf(VirtualQGraphicsScale, vtbl)))
+  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
+  vtbl.childEvent(slotval1)
+
+method customEvent*(self: VirtualQGraphicsScale, event: gen_qcoreevent_types.QEvent): void {.base.} =
+  QGraphicsScalecustomEvent(self[], event)
+proc miqt_exec_method_cQGraphicsScale_customEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQGraphicsScale](cast[uint](vtbl) - uint(offsetOf(VirtualQGraphicsScale, vtbl)))
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
+  vtbl.customEvent(slotval1)
+
+method connectNotify*(self: VirtualQGraphicsScale, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QGraphicsScaleconnectNotify(self[], signal)
+proc miqt_exec_method_cQGraphicsScale_connectNotify(vtbl: pointer, inst: pointer, signal: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQGraphicsScale](cast[uint](vtbl) - uint(offsetOf(VirtualQGraphicsScale, vtbl)))
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
+  vtbl.connectNotify(slotval1)
+
+method disconnectNotify*(self: VirtualQGraphicsScale, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QGraphicsScaledisconnectNotify(self[], signal)
+proc miqt_exec_method_cQGraphicsScale_disconnectNotify(vtbl: pointer, inst: pointer, signal: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQGraphicsScale](cast[uint](vtbl) - uint(offsetOf(VirtualQGraphicsScale, vtbl)))
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
+  vtbl.disconnectNotify(slotval1)
 
 proc update*(self: gen_qgraphicstransform_types.QGraphicsScale, ): void =
   fcQGraphicsScale_protectedbase_update(self.h)
 
 proc sender*(self: gen_qgraphicstransform_types.QGraphicsScale, ): gen_qobject_types.QObject =
-  gen_qobject_types.QObject(h: fcQGraphicsScale_protectedbase_sender(self.h))
+  gen_qobject_types.QObject(h: fcQGraphicsScale_protectedbase_sender(self.h), owned: false)
 
 proc senderSignalIndex*(self: gen_qgraphicstransform_types.QGraphicsScale, ): cint =
   fcQGraphicsScale_protectedbase_senderSignalIndex(self.h)
@@ -784,71 +1008,114 @@ proc create*(T: type gen_qgraphicstransform_types.QGraphicsScale,
     vtbl: ref QGraphicsScaleVTable = nil): gen_qgraphicstransform_types.QGraphicsScale =
   let vtbl = if vtbl == nil: new QGraphicsScaleVTable else: vtbl
   GC_ref(vtbl)
-  vtbl.vtbl.destructor = proc(vtbl: ptr cQGraphicsScaleVTable, _: ptr cQGraphicsScale) {.cdecl.} =
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQGraphicsScaleVTable, _: ptr cQGraphicsScale) {.cdecl.} =
     let vtbl = cast[ref QGraphicsScaleVTable](vtbl)
     GC_unref(vtbl)
-  if not isNil(vtbl.metaObject):
+  if not isNil(vtbl[].metaObject):
     vtbl[].vtbl.metaObject = miqt_exec_callback_cQGraphicsScale_metaObject
-  if not isNil(vtbl.metacast):
+  if not isNil(vtbl[].metacast):
     vtbl[].vtbl.metacast = miqt_exec_callback_cQGraphicsScale_metacast
-  if not isNil(vtbl.metacall):
+  if not isNil(vtbl[].metacall):
     vtbl[].vtbl.metacall = miqt_exec_callback_cQGraphicsScale_metacall
-  if not isNil(vtbl.applyTo):
+  if not isNil(vtbl[].applyTo):
     vtbl[].vtbl.applyTo = miqt_exec_callback_cQGraphicsScale_applyTo
-  if not isNil(vtbl.event):
+  if not isNil(vtbl[].event):
     vtbl[].vtbl.event = miqt_exec_callback_cQGraphicsScale_event
-  if not isNil(vtbl.eventFilter):
+  if not isNil(vtbl[].eventFilter):
     vtbl[].vtbl.eventFilter = miqt_exec_callback_cQGraphicsScale_eventFilter
-  if not isNil(vtbl.timerEvent):
+  if not isNil(vtbl[].timerEvent):
     vtbl[].vtbl.timerEvent = miqt_exec_callback_cQGraphicsScale_timerEvent
-  if not isNil(vtbl.childEvent):
+  if not isNil(vtbl[].childEvent):
     vtbl[].vtbl.childEvent = miqt_exec_callback_cQGraphicsScale_childEvent
-  if not isNil(vtbl.customEvent):
+  if not isNil(vtbl[].customEvent):
     vtbl[].vtbl.customEvent = miqt_exec_callback_cQGraphicsScale_customEvent
-  if not isNil(vtbl.connectNotify):
+  if not isNil(vtbl[].connectNotify):
     vtbl[].vtbl.connectNotify = miqt_exec_callback_cQGraphicsScale_connectNotify
-  if not isNil(vtbl.disconnectNotify):
+  if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQGraphicsScale_disconnectNotify
-  gen_qgraphicstransform_types.QGraphicsScale(h: fcQGraphicsScale_new(addr(vtbl[]), ))
+  gen_qgraphicstransform_types.QGraphicsScale(h: fcQGraphicsScale_new(addr(vtbl[].vtbl), ), owned: true)
 
 proc create*(T: type gen_qgraphicstransform_types.QGraphicsScale,
     parent: gen_qobject_types.QObject,
     vtbl: ref QGraphicsScaleVTable = nil): gen_qgraphicstransform_types.QGraphicsScale =
   let vtbl = if vtbl == nil: new QGraphicsScaleVTable else: vtbl
   GC_ref(vtbl)
-  vtbl.vtbl.destructor = proc(vtbl: ptr cQGraphicsScaleVTable, _: ptr cQGraphicsScale) {.cdecl.} =
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQGraphicsScaleVTable, _: ptr cQGraphicsScale) {.cdecl.} =
     let vtbl = cast[ref QGraphicsScaleVTable](vtbl)
     GC_unref(vtbl)
-  if not isNil(vtbl.metaObject):
+  if not isNil(vtbl[].metaObject):
     vtbl[].vtbl.metaObject = miqt_exec_callback_cQGraphicsScale_metaObject
-  if not isNil(vtbl.metacast):
+  if not isNil(vtbl[].metacast):
     vtbl[].vtbl.metacast = miqt_exec_callback_cQGraphicsScale_metacast
-  if not isNil(vtbl.metacall):
+  if not isNil(vtbl[].metacall):
     vtbl[].vtbl.metacall = miqt_exec_callback_cQGraphicsScale_metacall
-  if not isNil(vtbl.applyTo):
+  if not isNil(vtbl[].applyTo):
     vtbl[].vtbl.applyTo = miqt_exec_callback_cQGraphicsScale_applyTo
-  if not isNil(vtbl.event):
+  if not isNil(vtbl[].event):
     vtbl[].vtbl.event = miqt_exec_callback_cQGraphicsScale_event
-  if not isNil(vtbl.eventFilter):
+  if not isNil(vtbl[].eventFilter):
     vtbl[].vtbl.eventFilter = miqt_exec_callback_cQGraphicsScale_eventFilter
-  if not isNil(vtbl.timerEvent):
+  if not isNil(vtbl[].timerEvent):
     vtbl[].vtbl.timerEvent = miqt_exec_callback_cQGraphicsScale_timerEvent
-  if not isNil(vtbl.childEvent):
+  if not isNil(vtbl[].childEvent):
     vtbl[].vtbl.childEvent = miqt_exec_callback_cQGraphicsScale_childEvent
-  if not isNil(vtbl.customEvent):
+  if not isNil(vtbl[].customEvent):
     vtbl[].vtbl.customEvent = miqt_exec_callback_cQGraphicsScale_customEvent
-  if not isNil(vtbl.connectNotify):
+  if not isNil(vtbl[].connectNotify):
     vtbl[].vtbl.connectNotify = miqt_exec_callback_cQGraphicsScale_connectNotify
-  if not isNil(vtbl.disconnectNotify):
+  if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQGraphicsScale_disconnectNotify
-  gen_qgraphicstransform_types.QGraphicsScale(h: fcQGraphicsScale_new2(addr(vtbl[]), parent.h))
+  gen_qgraphicstransform_types.QGraphicsScale(h: fcQGraphicsScale_new2(addr(vtbl[].vtbl), parent.h), owned: true)
+
+proc create*(T: type gen_qgraphicstransform_types.QGraphicsScale,
+    vtbl: VirtualQGraphicsScale) =
+
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQGraphicsScaleVTable, _: ptr cQGraphicsScale) {.cdecl.} =
+    let vtbl = cast[ptr typeof(VirtualQGraphicsScale()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQGraphicsScale, vtbl)))
+    vtbl[].h = nil
+    vtbl[].owned = false
+  vtbl[].vtbl.metaObject = miqt_exec_method_cQGraphicsScale_metaObject
+  vtbl[].vtbl.metacast = miqt_exec_method_cQGraphicsScale_metacast
+  vtbl[].vtbl.metacall = miqt_exec_method_cQGraphicsScale_metacall
+  vtbl[].vtbl.applyTo = miqt_exec_method_cQGraphicsScale_applyTo
+  vtbl[].vtbl.event = miqt_exec_method_cQGraphicsScale_event
+  vtbl[].vtbl.eventFilter = miqt_exec_method_cQGraphicsScale_eventFilter
+  vtbl[].vtbl.timerEvent = miqt_exec_method_cQGraphicsScale_timerEvent
+  vtbl[].vtbl.childEvent = miqt_exec_method_cQGraphicsScale_childEvent
+  vtbl[].vtbl.customEvent = miqt_exec_method_cQGraphicsScale_customEvent
+  vtbl[].vtbl.connectNotify = miqt_exec_method_cQGraphicsScale_connectNotify
+  vtbl[].vtbl.disconnectNotify = miqt_exec_method_cQGraphicsScale_disconnectNotify
+  if vtbl[].h != nil: delete(move(vtbl[]))
+  vtbl[].h = fcQGraphicsScale_new(addr(vtbl[].vtbl), )
+  vtbl[].owned = true
+
+proc create*(T: type gen_qgraphicstransform_types.QGraphicsScale,
+    parent: gen_qobject_types.QObject,
+    vtbl: VirtualQGraphicsScale) =
+
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQGraphicsScaleVTable, _: ptr cQGraphicsScale) {.cdecl.} =
+    let vtbl = cast[ptr typeof(VirtualQGraphicsScale()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQGraphicsScale, vtbl)))
+    vtbl[].h = nil
+    vtbl[].owned = false
+  vtbl[].vtbl.metaObject = miqt_exec_method_cQGraphicsScale_metaObject
+  vtbl[].vtbl.metacast = miqt_exec_method_cQGraphicsScale_metacast
+  vtbl[].vtbl.metacall = miqt_exec_method_cQGraphicsScale_metacall
+  vtbl[].vtbl.applyTo = miqt_exec_method_cQGraphicsScale_applyTo
+  vtbl[].vtbl.event = miqt_exec_method_cQGraphicsScale_event
+  vtbl[].vtbl.eventFilter = miqt_exec_method_cQGraphicsScale_eventFilter
+  vtbl[].vtbl.timerEvent = miqt_exec_method_cQGraphicsScale_timerEvent
+  vtbl[].vtbl.childEvent = miqt_exec_method_cQGraphicsScale_childEvent
+  vtbl[].vtbl.customEvent = miqt_exec_method_cQGraphicsScale_customEvent
+  vtbl[].vtbl.connectNotify = miqt_exec_method_cQGraphicsScale_connectNotify
+  vtbl[].vtbl.disconnectNotify = miqt_exec_method_cQGraphicsScale_disconnectNotify
+  if vtbl[].h != nil: delete(move(vtbl[]))
+  vtbl[].h = fcQGraphicsScale_new2(addr(vtbl[].vtbl), parent.h)
+  vtbl[].owned = true
 
 proc staticMetaObject*(_: type gen_qgraphicstransform_types.QGraphicsScale): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQGraphicsScale_staticMetaObject())
-proc delete*(self: gen_qgraphicstransform_types.QGraphicsScale) =
-  fcQGraphicsScale_delete(self.h)
 proc metaObject*(self: gen_qgraphicstransform_types.QGraphicsRotation, ): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQGraphicsRotation_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQGraphicsRotation_metaObject(self.h), owned: false)
 
 proc metacast*(self: gen_qgraphicstransform_types.QGraphicsRotation, param1: cstring): pointer =
   fcQGraphicsRotation_metacast(self.h, param1)
@@ -869,7 +1136,7 @@ proc trUtf8*(_: type gen_qgraphicstransform_types.QGraphicsRotation, s: cstring)
   vx_ret
 
 proc origin*(self: gen_qgraphicstransform_types.QGraphicsRotation, ): gen_qvector3d_types.QVector3D =
-  gen_qvector3d_types.QVector3D(h: fcQGraphicsRotation_origin(self.h))
+  gen_qvector3d_types.QVector3D(h: fcQGraphicsRotation_origin(self.h), owned: true)
 
 proc setOrigin*(self: gen_qgraphicstransform_types.QGraphicsRotation, point: gen_qvector3d_types.QVector3D): void =
   fcQGraphicsRotation_setOrigin(self.h, point.h)
@@ -881,7 +1148,7 @@ proc setAngle*(self: gen_qgraphicstransform_types.QGraphicsRotation, angle: floa
   fcQGraphicsRotation_setAngle(self.h, angle)
 
 proc axis*(self: gen_qgraphicstransform_types.QGraphicsRotation, ): gen_qvector3d_types.QVector3D =
-  gen_qvector3d_types.QVector3D(h: fcQGraphicsRotation_axis(self.h))
+  gen_qvector3d_types.QVector3D(h: fcQGraphicsRotation_axis(self.h), owned: true)
 
 proc setAxis*(self: gen_qgraphicstransform_types.QGraphicsRotation, axis: gen_qvector3d_types.QVector3D): void =
   fcQGraphicsRotation_setAxis(self.h, axis.h)
@@ -981,7 +1248,7 @@ type QGraphicsRotationchildEventProc* = proc(self: QGraphicsRotation, event: gen
 type QGraphicsRotationcustomEventProc* = proc(self: QGraphicsRotation, event: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
 type QGraphicsRotationconnectNotifyProc* = proc(self: QGraphicsRotation, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
 type QGraphicsRotationdisconnectNotifyProc* = proc(self: QGraphicsRotation, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
-type QGraphicsRotationVTable* = object
+type QGraphicsRotationVTable* {.inheritable, pure.} = object
   vtbl: cQGraphicsRotationVTable
   metaObject*: QGraphicsRotationmetaObjectProc
   metacast*: QGraphicsRotationmetacastProc
@@ -995,13 +1262,16 @@ type QGraphicsRotationVTable* = object
   connectNotify*: QGraphicsRotationconnectNotifyProc
   disconnectNotify*: QGraphicsRotationdisconnectNotifyProc
 proc QGraphicsRotationmetaObject*(self: gen_qgraphicstransform_types.QGraphicsRotation, ): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fcQGraphicsRotation_virtualbase_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQGraphicsRotation_virtualbase_metaObject(self.h), owned: false)
 
 proc miqt_exec_callback_cQGraphicsRotation_metaObject(vtbl: pointer, self: pointer): pointer {.cdecl.} =
   let vtbl = cast[ptr QGraphicsRotationVTable](vtbl)
   let self = QGraphicsRotation(h: self)
   var virtualReturn = vtbl[].metaObject(self)
-  virtualReturn.h
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
 
 proc QGraphicsRotationmetacast*(self: gen_qgraphicstransform_types.QGraphicsRotation, param1: cstring): pointer =
   fcQGraphicsRotation_virtualbase_metacast(self.h, param1)
@@ -1031,7 +1301,7 @@ proc QGraphicsRotationapplyTo*(self: gen_qgraphicstransform_types.QGraphicsRotat
 proc miqt_exec_callback_cQGraphicsRotation_applyTo(vtbl: pointer, self: pointer, matrix: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsRotationVTable](vtbl)
   let self = QGraphicsRotation(h: self)
-  let slotval1 = gen_qmatrix4x4_types.QMatrix4x4(h: matrix)
+  let slotval1 = gen_qmatrix4x4_types.QMatrix4x4(h: matrix, owned: false)
   vtbl[].applyTo(self, slotval1)
 
 proc QGraphicsRotationevent*(self: gen_qgraphicstransform_types.QGraphicsRotation, event: gen_qcoreevent_types.QEvent): bool =
@@ -1040,7 +1310,7 @@ proc QGraphicsRotationevent*(self: gen_qgraphicstransform_types.QGraphicsRotatio
 proc miqt_exec_callback_cQGraphicsRotation_event(vtbl: pointer, self: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QGraphicsRotationVTable](vtbl)
   let self = QGraphicsRotation(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].event(self, slotval1)
   virtualReturn
 
@@ -1050,8 +1320,8 @@ proc QGraphicsRotationeventFilter*(self: gen_qgraphicstransform_types.QGraphicsR
 proc miqt_exec_callback_cQGraphicsRotation_eventFilter(vtbl: pointer, self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QGraphicsRotationVTable](vtbl)
   let self = QGraphicsRotation(h: self)
-  let slotval1 = gen_qobject_types.QObject(h: watched)
-  let slotval2 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].eventFilter(self, slotval1, slotval2)
   virtualReturn
 
@@ -1061,7 +1331,7 @@ proc QGraphicsRotationtimerEvent*(self: gen_qgraphicstransform_types.QGraphicsRo
 proc miqt_exec_callback_cQGraphicsRotation_timerEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsRotationVTable](vtbl)
   let self = QGraphicsRotation(h: self)
-  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   vtbl[].timerEvent(self, slotval1)
 
 proc QGraphicsRotationchildEvent*(self: gen_qgraphicstransform_types.QGraphicsRotation, event: gen_qcoreevent_types.QChildEvent): void =
@@ -1070,7 +1340,7 @@ proc QGraphicsRotationchildEvent*(self: gen_qgraphicstransform_types.QGraphicsRo
 proc miqt_exec_callback_cQGraphicsRotation_childEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsRotationVTable](vtbl)
   let self = QGraphicsRotation(h: self)
-  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   vtbl[].childEvent(self, slotval1)
 
 proc QGraphicsRotationcustomEvent*(self: gen_qgraphicstransform_types.QGraphicsRotation, event: gen_qcoreevent_types.QEvent): void =
@@ -1079,7 +1349,7 @@ proc QGraphicsRotationcustomEvent*(self: gen_qgraphicstransform_types.QGraphicsR
 proc miqt_exec_callback_cQGraphicsRotation_customEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsRotationVTable](vtbl)
   let self = QGraphicsRotation(h: self)
-  let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].customEvent(self, slotval1)
 
 proc QGraphicsRotationconnectNotify*(self: gen_qgraphicstransform_types.QGraphicsRotation, signal: gen_qmetaobject_types.QMetaMethod): void =
@@ -1088,7 +1358,7 @@ proc QGraphicsRotationconnectNotify*(self: gen_qgraphicstransform_types.QGraphic
 proc miqt_exec_callback_cQGraphicsRotation_connectNotify(vtbl: pointer, self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsRotationVTable](vtbl)
   let self = QGraphicsRotation(h: self)
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].connectNotify(self, slotval1)
 
 proc QGraphicsRotationdisconnectNotify*(self: gen_qgraphicstransform_types.QGraphicsRotation, signal: gen_qmetaobject_types.QMetaMethod): void =
@@ -1097,14 +1367,103 @@ proc QGraphicsRotationdisconnectNotify*(self: gen_qgraphicstransform_types.QGrap
 proc miqt_exec_callback_cQGraphicsRotation_disconnectNotify(vtbl: pointer, self: pointer, signal: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QGraphicsRotationVTable](vtbl)
   let self = QGraphicsRotation(h: self)
-  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].disconnectNotify(self, slotval1)
+
+type VirtualQGraphicsRotation* {.inheritable.} = ref object of QGraphicsRotation
+  vtbl*: cQGraphicsRotationVTable
+method metaObject*(self: VirtualQGraphicsRotation, ): gen_qobjectdefs_types.QMetaObject {.base.} =
+  QGraphicsRotationmetaObject(self[])
+proc miqt_exec_method_cQGraphicsRotation_metaObject(vtbl: pointer, inst: pointer): pointer {.cdecl.} =
+  let vtbl = cast[VirtualQGraphicsRotation](cast[uint](vtbl) - uint(offsetOf(VirtualQGraphicsRotation, vtbl)))
+  var virtualReturn = vtbl.metaObject()
+  virtualReturn.owned = false # TODO move?
+  let virtualReturn_h = virtualReturn.h
+  virtualReturn.h = nil
+  virtualReturn_h
+
+method metacast*(self: VirtualQGraphicsRotation, param1: cstring): pointer {.base.} =
+  QGraphicsRotationmetacast(self[], param1)
+proc miqt_exec_method_cQGraphicsRotation_metacast(vtbl: pointer, inst: pointer, param1: cstring): pointer {.cdecl.} =
+  let vtbl = cast[VirtualQGraphicsRotation](cast[uint](vtbl) - uint(offsetOf(VirtualQGraphicsRotation, vtbl)))
+  let slotval1 = (param1)
+  var virtualReturn = vtbl.metacast(slotval1)
+  virtualReturn
+
+method metacall*(self: VirtualQGraphicsRotation, param1: cint, param2: cint, param3: pointer): cint {.base.} =
+  QGraphicsRotationmetacall(self[], param1, param2, param3)
+proc miqt_exec_method_cQGraphicsRotation_metacall(vtbl: pointer, inst: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
+  let vtbl = cast[VirtualQGraphicsRotation](cast[uint](vtbl) - uint(offsetOf(VirtualQGraphicsRotation, vtbl)))
+  let slotval1 = cint(param1)
+  let slotval2 = param2
+  let slotval3 = param3
+  var virtualReturn = vtbl.metacall(slotval1, slotval2, slotval3)
+  virtualReturn
+
+method applyTo*(self: VirtualQGraphicsRotation, matrix: gen_qmatrix4x4_types.QMatrix4x4): void {.base.} =
+  QGraphicsRotationapplyTo(self[], matrix)
+proc miqt_exec_method_cQGraphicsRotation_applyTo(vtbl: pointer, inst: pointer, matrix: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQGraphicsRotation](cast[uint](vtbl) - uint(offsetOf(VirtualQGraphicsRotation, vtbl)))
+  let slotval1 = gen_qmatrix4x4_types.QMatrix4x4(h: matrix, owned: false)
+  vtbl.applyTo(slotval1)
+
+method event*(self: VirtualQGraphicsRotation, event: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QGraphicsRotationevent(self[], event)
+proc miqt_exec_method_cQGraphicsRotation_event(vtbl: pointer, inst: pointer, event: pointer): bool {.cdecl.} =
+  let vtbl = cast[VirtualQGraphicsRotation](cast[uint](vtbl) - uint(offsetOf(VirtualQGraphicsRotation, vtbl)))
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
+  var virtualReturn = vtbl.event(slotval1)
+  virtualReturn
+
+method eventFilter*(self: VirtualQGraphicsRotation, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.base.} =
+  QGraphicsRotationeventFilter(self[], watched, event)
+proc miqt_exec_method_cQGraphicsRotation_eventFilter(vtbl: pointer, inst: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
+  let vtbl = cast[VirtualQGraphicsRotation](cast[uint](vtbl) - uint(offsetOf(VirtualQGraphicsRotation, vtbl)))
+  let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
+  let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
+  var virtualReturn = vtbl.eventFilter(slotval1, slotval2)
+  virtualReturn
+
+method timerEvent*(self: VirtualQGraphicsRotation, event: gen_qcoreevent_types.QTimerEvent): void {.base.} =
+  QGraphicsRotationtimerEvent(self[], event)
+proc miqt_exec_method_cQGraphicsRotation_timerEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQGraphicsRotation](cast[uint](vtbl) - uint(offsetOf(VirtualQGraphicsRotation, vtbl)))
+  let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
+  vtbl.timerEvent(slotval1)
+
+method childEvent*(self: VirtualQGraphicsRotation, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
+  QGraphicsRotationchildEvent(self[], event)
+proc miqt_exec_method_cQGraphicsRotation_childEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQGraphicsRotation](cast[uint](vtbl) - uint(offsetOf(VirtualQGraphicsRotation, vtbl)))
+  let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
+  vtbl.childEvent(slotval1)
+
+method customEvent*(self: VirtualQGraphicsRotation, event: gen_qcoreevent_types.QEvent): void {.base.} =
+  QGraphicsRotationcustomEvent(self[], event)
+proc miqt_exec_method_cQGraphicsRotation_customEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQGraphicsRotation](cast[uint](vtbl) - uint(offsetOf(VirtualQGraphicsRotation, vtbl)))
+  let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
+  vtbl.customEvent(slotval1)
+
+method connectNotify*(self: VirtualQGraphicsRotation, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QGraphicsRotationconnectNotify(self[], signal)
+proc miqt_exec_method_cQGraphicsRotation_connectNotify(vtbl: pointer, inst: pointer, signal: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQGraphicsRotation](cast[uint](vtbl) - uint(offsetOf(VirtualQGraphicsRotation, vtbl)))
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
+  vtbl.connectNotify(slotval1)
+
+method disconnectNotify*(self: VirtualQGraphicsRotation, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
+  QGraphicsRotationdisconnectNotify(self[], signal)
+proc miqt_exec_method_cQGraphicsRotation_disconnectNotify(vtbl: pointer, inst: pointer, signal: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQGraphicsRotation](cast[uint](vtbl) - uint(offsetOf(VirtualQGraphicsRotation, vtbl)))
+  let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
+  vtbl.disconnectNotify(slotval1)
 
 proc update*(self: gen_qgraphicstransform_types.QGraphicsRotation, ): void =
   fcQGraphicsRotation_protectedbase_update(self.h)
 
 proc sender*(self: gen_qgraphicstransform_types.QGraphicsRotation, ): gen_qobject_types.QObject =
-  gen_qobject_types.QObject(h: fcQGraphicsRotation_protectedbase_sender(self.h))
+  gen_qobject_types.QObject(h: fcQGraphicsRotation_protectedbase_sender(self.h), owned: false)
 
 proc senderSignalIndex*(self: gen_qgraphicstransform_types.QGraphicsRotation, ): cint =
   fcQGraphicsRotation_protectedbase_senderSignalIndex(self.h)
@@ -1119,66 +1478,109 @@ proc create*(T: type gen_qgraphicstransform_types.QGraphicsRotation,
     vtbl: ref QGraphicsRotationVTable = nil): gen_qgraphicstransform_types.QGraphicsRotation =
   let vtbl = if vtbl == nil: new QGraphicsRotationVTable else: vtbl
   GC_ref(vtbl)
-  vtbl.vtbl.destructor = proc(vtbl: ptr cQGraphicsRotationVTable, _: ptr cQGraphicsRotation) {.cdecl.} =
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQGraphicsRotationVTable, _: ptr cQGraphicsRotation) {.cdecl.} =
     let vtbl = cast[ref QGraphicsRotationVTable](vtbl)
     GC_unref(vtbl)
-  if not isNil(vtbl.metaObject):
+  if not isNil(vtbl[].metaObject):
     vtbl[].vtbl.metaObject = miqt_exec_callback_cQGraphicsRotation_metaObject
-  if not isNil(vtbl.metacast):
+  if not isNil(vtbl[].metacast):
     vtbl[].vtbl.metacast = miqt_exec_callback_cQGraphicsRotation_metacast
-  if not isNil(vtbl.metacall):
+  if not isNil(vtbl[].metacall):
     vtbl[].vtbl.metacall = miqt_exec_callback_cQGraphicsRotation_metacall
-  if not isNil(vtbl.applyTo):
+  if not isNil(vtbl[].applyTo):
     vtbl[].vtbl.applyTo = miqt_exec_callback_cQGraphicsRotation_applyTo
-  if not isNil(vtbl.event):
+  if not isNil(vtbl[].event):
     vtbl[].vtbl.event = miqt_exec_callback_cQGraphicsRotation_event
-  if not isNil(vtbl.eventFilter):
+  if not isNil(vtbl[].eventFilter):
     vtbl[].vtbl.eventFilter = miqt_exec_callback_cQGraphicsRotation_eventFilter
-  if not isNil(vtbl.timerEvent):
+  if not isNil(vtbl[].timerEvent):
     vtbl[].vtbl.timerEvent = miqt_exec_callback_cQGraphicsRotation_timerEvent
-  if not isNil(vtbl.childEvent):
+  if not isNil(vtbl[].childEvent):
     vtbl[].vtbl.childEvent = miqt_exec_callback_cQGraphicsRotation_childEvent
-  if not isNil(vtbl.customEvent):
+  if not isNil(vtbl[].customEvent):
     vtbl[].vtbl.customEvent = miqt_exec_callback_cQGraphicsRotation_customEvent
-  if not isNil(vtbl.connectNotify):
+  if not isNil(vtbl[].connectNotify):
     vtbl[].vtbl.connectNotify = miqt_exec_callback_cQGraphicsRotation_connectNotify
-  if not isNil(vtbl.disconnectNotify):
+  if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQGraphicsRotation_disconnectNotify
-  gen_qgraphicstransform_types.QGraphicsRotation(h: fcQGraphicsRotation_new(addr(vtbl[]), ))
+  gen_qgraphicstransform_types.QGraphicsRotation(h: fcQGraphicsRotation_new(addr(vtbl[].vtbl), ), owned: true)
 
 proc create*(T: type gen_qgraphicstransform_types.QGraphicsRotation,
     parent: gen_qobject_types.QObject,
     vtbl: ref QGraphicsRotationVTable = nil): gen_qgraphicstransform_types.QGraphicsRotation =
   let vtbl = if vtbl == nil: new QGraphicsRotationVTable else: vtbl
   GC_ref(vtbl)
-  vtbl.vtbl.destructor = proc(vtbl: ptr cQGraphicsRotationVTable, _: ptr cQGraphicsRotation) {.cdecl.} =
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQGraphicsRotationVTable, _: ptr cQGraphicsRotation) {.cdecl.} =
     let vtbl = cast[ref QGraphicsRotationVTable](vtbl)
     GC_unref(vtbl)
-  if not isNil(vtbl.metaObject):
+  if not isNil(vtbl[].metaObject):
     vtbl[].vtbl.metaObject = miqt_exec_callback_cQGraphicsRotation_metaObject
-  if not isNil(vtbl.metacast):
+  if not isNil(vtbl[].metacast):
     vtbl[].vtbl.metacast = miqt_exec_callback_cQGraphicsRotation_metacast
-  if not isNil(vtbl.metacall):
+  if not isNil(vtbl[].metacall):
     vtbl[].vtbl.metacall = miqt_exec_callback_cQGraphicsRotation_metacall
-  if not isNil(vtbl.applyTo):
+  if not isNil(vtbl[].applyTo):
     vtbl[].vtbl.applyTo = miqt_exec_callback_cQGraphicsRotation_applyTo
-  if not isNil(vtbl.event):
+  if not isNil(vtbl[].event):
     vtbl[].vtbl.event = miqt_exec_callback_cQGraphicsRotation_event
-  if not isNil(vtbl.eventFilter):
+  if not isNil(vtbl[].eventFilter):
     vtbl[].vtbl.eventFilter = miqt_exec_callback_cQGraphicsRotation_eventFilter
-  if not isNil(vtbl.timerEvent):
+  if not isNil(vtbl[].timerEvent):
     vtbl[].vtbl.timerEvent = miqt_exec_callback_cQGraphicsRotation_timerEvent
-  if not isNil(vtbl.childEvent):
+  if not isNil(vtbl[].childEvent):
     vtbl[].vtbl.childEvent = miqt_exec_callback_cQGraphicsRotation_childEvent
-  if not isNil(vtbl.customEvent):
+  if not isNil(vtbl[].customEvent):
     vtbl[].vtbl.customEvent = miqt_exec_callback_cQGraphicsRotation_customEvent
-  if not isNil(vtbl.connectNotify):
+  if not isNil(vtbl[].connectNotify):
     vtbl[].vtbl.connectNotify = miqt_exec_callback_cQGraphicsRotation_connectNotify
-  if not isNil(vtbl.disconnectNotify):
+  if not isNil(vtbl[].disconnectNotify):
     vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQGraphicsRotation_disconnectNotify
-  gen_qgraphicstransform_types.QGraphicsRotation(h: fcQGraphicsRotation_new2(addr(vtbl[]), parent.h))
+  gen_qgraphicstransform_types.QGraphicsRotation(h: fcQGraphicsRotation_new2(addr(vtbl[].vtbl), parent.h), owned: true)
+
+proc create*(T: type gen_qgraphicstransform_types.QGraphicsRotation,
+    vtbl: VirtualQGraphicsRotation) =
+
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQGraphicsRotationVTable, _: ptr cQGraphicsRotation) {.cdecl.} =
+    let vtbl = cast[ptr typeof(VirtualQGraphicsRotation()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQGraphicsRotation, vtbl)))
+    vtbl[].h = nil
+    vtbl[].owned = false
+  vtbl[].vtbl.metaObject = miqt_exec_method_cQGraphicsRotation_metaObject
+  vtbl[].vtbl.metacast = miqt_exec_method_cQGraphicsRotation_metacast
+  vtbl[].vtbl.metacall = miqt_exec_method_cQGraphicsRotation_metacall
+  vtbl[].vtbl.applyTo = miqt_exec_method_cQGraphicsRotation_applyTo
+  vtbl[].vtbl.event = miqt_exec_method_cQGraphicsRotation_event
+  vtbl[].vtbl.eventFilter = miqt_exec_method_cQGraphicsRotation_eventFilter
+  vtbl[].vtbl.timerEvent = miqt_exec_method_cQGraphicsRotation_timerEvent
+  vtbl[].vtbl.childEvent = miqt_exec_method_cQGraphicsRotation_childEvent
+  vtbl[].vtbl.customEvent = miqt_exec_method_cQGraphicsRotation_customEvent
+  vtbl[].vtbl.connectNotify = miqt_exec_method_cQGraphicsRotation_connectNotify
+  vtbl[].vtbl.disconnectNotify = miqt_exec_method_cQGraphicsRotation_disconnectNotify
+  if vtbl[].h != nil: delete(move(vtbl[]))
+  vtbl[].h = fcQGraphicsRotation_new(addr(vtbl[].vtbl), )
+  vtbl[].owned = true
+
+proc create*(T: type gen_qgraphicstransform_types.QGraphicsRotation,
+    parent: gen_qobject_types.QObject,
+    vtbl: VirtualQGraphicsRotation) =
+
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQGraphicsRotationVTable, _: ptr cQGraphicsRotation) {.cdecl.} =
+    let vtbl = cast[ptr typeof(VirtualQGraphicsRotation()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQGraphicsRotation, vtbl)))
+    vtbl[].h = nil
+    vtbl[].owned = false
+  vtbl[].vtbl.metaObject = miqt_exec_method_cQGraphicsRotation_metaObject
+  vtbl[].vtbl.metacast = miqt_exec_method_cQGraphicsRotation_metacast
+  vtbl[].vtbl.metacall = miqt_exec_method_cQGraphicsRotation_metacall
+  vtbl[].vtbl.applyTo = miqt_exec_method_cQGraphicsRotation_applyTo
+  vtbl[].vtbl.event = miqt_exec_method_cQGraphicsRotation_event
+  vtbl[].vtbl.eventFilter = miqt_exec_method_cQGraphicsRotation_eventFilter
+  vtbl[].vtbl.timerEvent = miqt_exec_method_cQGraphicsRotation_timerEvent
+  vtbl[].vtbl.childEvent = miqt_exec_method_cQGraphicsRotation_childEvent
+  vtbl[].vtbl.customEvent = miqt_exec_method_cQGraphicsRotation_customEvent
+  vtbl[].vtbl.connectNotify = miqt_exec_method_cQGraphicsRotation_connectNotify
+  vtbl[].vtbl.disconnectNotify = miqt_exec_method_cQGraphicsRotation_disconnectNotify
+  if vtbl[].h != nil: delete(move(vtbl[]))
+  vtbl[].h = fcQGraphicsRotation_new2(addr(vtbl[].vtbl), parent.h)
+  vtbl[].owned = true
 
 proc staticMetaObject*(_: type gen_qgraphicstransform_types.QGraphicsRotation): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQGraphicsRotation_staticMetaObject())
-proc delete*(self: gen_qgraphicstransform_types.QGraphicsRotation) =
-  fcQGraphicsRotation_delete(self.h)

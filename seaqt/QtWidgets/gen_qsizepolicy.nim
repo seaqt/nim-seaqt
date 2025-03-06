@@ -30,9 +30,6 @@ func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
     else:
       copyMem(addr result[0], unsafeAddr v[0], v.len)
 
-const cflags = gorge("pkg-config --cflags Qt5Widgets")  & " -fPIC"
-{.compile("gen_qsizepolicy.cpp", cflags).}
-
 
 type QSizePolicyPolicyFlagEnum* = distinct cint
 template GrowFlag*(_: type QSizePolicyPolicyFlagEnum): untyped = 1
@@ -108,7 +105,6 @@ proc fcQSizePolicy_new2(horizontal: cint, vertical: cint): ptr cQSizePolicy {.im
 proc fcQSizePolicy_new3(param1: pointer): ptr cQSizePolicy {.importc: "QSizePolicy_new3".}
 proc fcQSizePolicy_new4(horizontal: cint, vertical: cint, typeVal: cint): ptr cQSizePolicy {.importc: "QSizePolicy_new4".}
 proc fcQSizePolicy_staticMetaObject(): pointer {.importc: "QSizePolicy_staticMetaObject".}
-proc fcQSizePolicy_delete(self: pointer) {.importc: "QSizePolicy_delete".}
 
 proc horizontalPolicy*(self: gen_qsizepolicy_types.QSizePolicy, ): cint =
   cint(fcQSizePolicy_horizontalPolicy(self.h))
@@ -150,7 +146,7 @@ proc operatorNotEqual*(self: gen_qsizepolicy_types.QSizePolicy, s: gen_qsizepoli
   fcQSizePolicy_operatorNotEqual(self.h, s.h)
 
 proc ToQVariant*(self: gen_qsizepolicy_types.QSizePolicy, ): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fcQSizePolicy_ToQVariant(self.h))
+  gen_qvariant_types.QVariant(h: fcQSizePolicy_ToQVariant(self.h), owned: true)
 
 proc horizontalStretch*(self: gen_qsizepolicy_types.QSizePolicy, ): cint =
   fcQSizePolicy_horizontalStretch(self.h)
@@ -174,24 +170,22 @@ proc transpose*(self: gen_qsizepolicy_types.QSizePolicy, ): void =
   fcQSizePolicy_transpose(self.h)
 
 proc transposed*(self: gen_qsizepolicy_types.QSizePolicy, ): gen_qsizepolicy_types.QSizePolicy =
-  gen_qsizepolicy_types.QSizePolicy(h: fcQSizePolicy_transposed(self.h))
+  gen_qsizepolicy_types.QSizePolicy(h: fcQSizePolicy_transposed(self.h), owned: true)
 
 proc create*(T: type gen_qsizepolicy_types.QSizePolicy): gen_qsizepolicy_types.QSizePolicy =
-  gen_qsizepolicy_types.QSizePolicy(h: fcQSizePolicy_new())
+  gen_qsizepolicy_types.QSizePolicy(h: fcQSizePolicy_new(), owned: true)
 
 proc create*(T: type gen_qsizepolicy_types.QSizePolicy,
     horizontal: cint, vertical: cint): gen_qsizepolicy_types.QSizePolicy =
-  gen_qsizepolicy_types.QSizePolicy(h: fcQSizePolicy_new2(cint(horizontal), cint(vertical)))
+  gen_qsizepolicy_types.QSizePolicy(h: fcQSizePolicy_new2(cint(horizontal), cint(vertical)), owned: true)
 
 proc create*(T: type gen_qsizepolicy_types.QSizePolicy,
     param1: gen_qsizepolicy_types.QSizePolicy): gen_qsizepolicy_types.QSizePolicy =
-  gen_qsizepolicy_types.QSizePolicy(h: fcQSizePolicy_new3(param1.h))
+  gen_qsizepolicy_types.QSizePolicy(h: fcQSizePolicy_new3(param1.h), owned: true)
 
 proc create*(T: type gen_qsizepolicy_types.QSizePolicy,
     horizontal: cint, vertical: cint, typeVal: cint): gen_qsizepolicy_types.QSizePolicy =
-  gen_qsizepolicy_types.QSizePolicy(h: fcQSizePolicy_new4(cint(horizontal), cint(vertical), cint(typeVal)))
+  gen_qsizepolicy_types.QSizePolicy(h: fcQSizePolicy_new4(cint(horizontal), cint(vertical), cint(typeVal)), owned: true)
 
 proc staticMetaObject*(_: type gen_qsizepolicy_types.QSizePolicy): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQSizePolicy_staticMetaObject())
-proc delete*(self: gen_qsizepolicy_types.QSizePolicy) =
-  fcQSizePolicy_delete(self.h)

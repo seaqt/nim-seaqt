@@ -30,9 +30,6 @@ func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
     else:
       copyMem(addr result[0], unsafeAddr v[0], v.len)
 
-const cflags = gorge("pkg-config --cflags Qt5Quick")  & " -fPIC"
-{.compile("gen_qsgmaterialrhishader.cpp", cflags).}
-
 
 type QSGMaterialRhiShaderFlagEnum* = distinct cint
 template UpdatesGraphicsPipelineState*(_: type QSGMaterialRhiShaderFlagEnum): untyped = 1
@@ -102,7 +99,7 @@ proc fcQSGMaterialRhiShader_flags(self: pointer, ): cint {.importc: "QSGMaterial
 proc fcQSGMaterialRhiShader_setFlag(self: pointer, flags: cint): void {.importc: "QSGMaterialRhiShader_setFlag".}
 proc fcQSGMaterialRhiShader_attributeNames(self: pointer, ): cstring {.importc: "QSGMaterialRhiShader_attributeNames".}
 proc fcQSGMaterialRhiShader_setFlag2(self: pointer, flags: cint, on: bool): void {.importc: "QSGMaterialRhiShader_setFlag2".}
-type cQSGMaterialRhiShaderVTable = object
+type cQSGMaterialRhiShaderVTable {.pure.} = object
   destructor*: proc(vtbl: ptr cQSGMaterialRhiShaderVTable, self: ptr cQSGMaterialRhiShader) {.cdecl, raises:[], gcsafe.}
   updateUniformData*: proc(vtbl, self: pointer, state: pointer, newMaterial: pointer, oldMaterial: pointer): bool {.cdecl, raises: [], gcsafe.}
   updateGraphicsPipelineState*: proc(vtbl, self: pointer, state: pointer, ps: pointer, newMaterial: pointer, oldMaterial: pointer): bool {.cdecl, raises: [], gcsafe.}
@@ -129,7 +126,6 @@ proc fcQSGMaterialRhiShader_protectedbase_setShader(self: pointer, stage: cint, 
 proc fcQSGMaterialRhiShader_protectedbase_setShaderSourceFile(self: pointer, typeVal: cQOpenGLShaderShaderType, sourceFile: struct_miqt_string): void {.importc: "QSGMaterialRhiShader_protectedbase_setShaderSourceFile".}
 proc fcQSGMaterialRhiShader_protectedbase_setShaderSourceFiles(self: pointer, typeVal: cQOpenGLShaderShaderType, sourceFiles: struct_miqt_array): void {.importc: "QSGMaterialRhiShader_protectedbase_setShaderSourceFiles".}
 proc fcQSGMaterialRhiShader_new(vtbl: pointer, ): ptr cQSGMaterialRhiShader {.importc: "QSGMaterialRhiShader_new".}
-proc fcQSGMaterialRhiShader_delete(self: pointer) {.importc: "QSGMaterialRhiShader_delete".}
 proc fcQSGMaterialRhiShaderRenderState_dirtyStates(self: pointer, ): cint {.importc: "QSGMaterialRhiShader__RenderState_dirtyStates".}
 proc fcQSGMaterialRhiShaderRenderState_isMatrixDirty(self: pointer, ): bool {.importc: "QSGMaterialRhiShader__RenderState_isMatrixDirty".}
 proc fcQSGMaterialRhiShaderRenderState_isOpacityDirty(self: pointer, ): bool {.importc: "QSGMaterialRhiShader__RenderState_isOpacityDirty".}
@@ -142,10 +138,8 @@ proc fcQSGMaterialRhiShaderRenderState_deviceRect(self: pointer, ): pointer {.im
 proc fcQSGMaterialRhiShaderRenderState_determinant(self: pointer, ): float32 {.importc: "QSGMaterialRhiShader__RenderState_determinant".}
 proc fcQSGMaterialRhiShaderRenderState_devicePixelRatio(self: pointer, ): float32 {.importc: "QSGMaterialRhiShader__RenderState_devicePixelRatio".}
 proc fcQSGMaterialRhiShaderRenderState_uniformData(self: pointer, ): struct_miqt_string {.importc: "QSGMaterialRhiShader__RenderState_uniformData".}
-proc fcQSGMaterialRhiShaderRenderState_delete(self: pointer) {.importc: "QSGMaterialRhiShader__RenderState_delete".}
 proc fcQSGMaterialRhiShaderGraphicsPipelineState_operatorAssign(self: pointer, param1: pointer): void {.importc: "QSGMaterialRhiShader__GraphicsPipelineState_operatorAssign".}
 proc fcQSGMaterialRhiShaderGraphicsPipelineState_new(param1: pointer): ptr cQSGMaterialRhiShaderGraphicsPipelineState {.importc: "QSGMaterialRhiShader__GraphicsPipelineState_new".}
-proc fcQSGMaterialRhiShaderGraphicsPipelineState_delete(self: pointer) {.importc: "QSGMaterialRhiShader__GraphicsPipelineState_delete".}
 
 proc updateUniformData*(self: gen_qsgmaterialrhishader_types.QSGMaterialRhiShader, state: gen_qsgmaterialrhishader_types.QSGMaterialRhiShaderRenderState, newMaterial: gen_qsgmaterial_types.QSGMaterial, oldMaterial: gen_qsgmaterial_types.QSGMaterial): bool =
   fcQSGMaterialRhiShader_updateUniformData(self.h, state.h, newMaterial.h, oldMaterial.h)
@@ -175,7 +169,7 @@ type QSGMaterialRhiShadercompileProc* = proc(self: QSGMaterialRhiShader): void {
 type QSGMaterialRhiShaderinitializeProc* = proc(self: QSGMaterialRhiShader): void {.raises: [], gcsafe.}
 type QSGMaterialRhiShadervertexShaderProc* = proc(self: QSGMaterialRhiShader): cstring {.raises: [], gcsafe.}
 type QSGMaterialRhiShaderfragmentShaderProc* = proc(self: QSGMaterialRhiShader): cstring {.raises: [], gcsafe.}
-type QSGMaterialRhiShaderVTable* = object
+type QSGMaterialRhiShaderVTable* {.inheritable, pure.} = object
   vtbl: cQSGMaterialRhiShaderVTable
   updateUniformData*: QSGMaterialRhiShaderupdateUniformDataProc
   updateGraphicsPipelineState*: QSGMaterialRhiShaderupdateGraphicsPipelineStateProc
@@ -193,9 +187,9 @@ proc QSGMaterialRhiShaderupdateUniformData*(self: gen_qsgmaterialrhishader_types
 proc miqt_exec_callback_cQSGMaterialRhiShader_updateUniformData(vtbl: pointer, self: pointer, state: pointer, newMaterial: pointer, oldMaterial: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QSGMaterialRhiShaderVTable](vtbl)
   let self = QSGMaterialRhiShader(h: self)
-  let slotval1 = gen_qsgmaterialrhishader_types.QSGMaterialRhiShaderRenderState(h: state)
-  let slotval2 = gen_qsgmaterial_types.QSGMaterial(h: newMaterial)
-  let slotval3 = gen_qsgmaterial_types.QSGMaterial(h: oldMaterial)
+  let slotval1 = gen_qsgmaterialrhishader_types.QSGMaterialRhiShaderRenderState(h: state, owned: false)
+  let slotval2 = gen_qsgmaterial_types.QSGMaterial(h: newMaterial, owned: false)
+  let slotval3 = gen_qsgmaterial_types.QSGMaterial(h: oldMaterial, owned: false)
   var virtualReturn = vtbl[].updateUniformData(self, slotval1, slotval2, slotval3)
   virtualReturn
 
@@ -205,10 +199,10 @@ proc QSGMaterialRhiShaderupdateGraphicsPipelineState*(self: gen_qsgmaterialrhish
 proc miqt_exec_callback_cQSGMaterialRhiShader_updateGraphicsPipelineState(vtbl: pointer, self: pointer, state: pointer, ps: pointer, newMaterial: pointer, oldMaterial: pointer): bool {.cdecl.} =
   let vtbl = cast[ptr QSGMaterialRhiShaderVTable](vtbl)
   let self = QSGMaterialRhiShader(h: self)
-  let slotval1 = gen_qsgmaterialrhishader_types.QSGMaterialRhiShaderRenderState(h: state)
-  let slotval2 = gen_qsgmaterialrhishader_types.QSGMaterialRhiShaderGraphicsPipelineState(h: ps)
-  let slotval3 = gen_qsgmaterial_types.QSGMaterial(h: newMaterial)
-  let slotval4 = gen_qsgmaterial_types.QSGMaterial(h: oldMaterial)
+  let slotval1 = gen_qsgmaterialrhishader_types.QSGMaterialRhiShaderRenderState(h: state, owned: false)
+  let slotval2 = gen_qsgmaterialrhishader_types.QSGMaterialRhiShaderGraphicsPipelineState(h: ps, owned: false)
+  let slotval3 = gen_qsgmaterial_types.QSGMaterial(h: newMaterial, owned: false)
+  let slotval4 = gen_qsgmaterial_types.QSGMaterial(h: oldMaterial, owned: false)
   var virtualReturn = vtbl[].updateGraphicsPipelineState(self, slotval1, slotval2, slotval3, slotval4)
   virtualReturn
 
@@ -243,9 +237,9 @@ proc QSGMaterialRhiShaderupdateState*(self: gen_qsgmaterialrhishader_types.QSGMa
 proc miqt_exec_callback_cQSGMaterialRhiShader_updateState(vtbl: pointer, self: pointer, state: pointer, newMaterial: pointer, oldMaterial: pointer): void {.cdecl.} =
   let vtbl = cast[ptr QSGMaterialRhiShaderVTable](vtbl)
   let self = QSGMaterialRhiShader(h: self)
-  let slotval1 = gen_qsgmaterialshader_types.QSGMaterialShaderRenderState(h: state)
-  let slotval2 = gen_qsgmaterial_types.QSGMaterial(h: newMaterial)
-  let slotval3 = gen_qsgmaterial_types.QSGMaterial(h: oldMaterial)
+  let slotval1 = gen_qsgmaterialshader_types.QSGMaterialShaderRenderState(h: state, owned: false)
+  let slotval2 = gen_qsgmaterial_types.QSGMaterial(h: newMaterial, owned: false)
+  let slotval3 = gen_qsgmaterial_types.QSGMaterial(h: oldMaterial, owned: false)
   vtbl[].updateState(self, slotval1, slotval2, slotval3)
 
 proc QSGMaterialRhiShadercompile*(self: gen_qsgmaterialrhishader_types.QSGMaterialRhiShader, ): void =
@@ -282,6 +276,83 @@ proc miqt_exec_callback_cQSGMaterialRhiShader_fragmentShader(vtbl: pointer, self
   var virtualReturn = vtbl[].fragmentShader(self)
   virtualReturn
 
+type VirtualQSGMaterialRhiShader* {.inheritable.} = ref object of QSGMaterialRhiShader
+  vtbl*: cQSGMaterialRhiShaderVTable
+method updateUniformData*(self: VirtualQSGMaterialRhiShader, state: gen_qsgmaterialrhishader_types.QSGMaterialRhiShaderRenderState, newMaterial: gen_qsgmaterial_types.QSGMaterial, oldMaterial: gen_qsgmaterial_types.QSGMaterial): bool {.base.} =
+  QSGMaterialRhiShaderupdateUniformData(self[], state, newMaterial, oldMaterial)
+proc miqt_exec_method_cQSGMaterialRhiShader_updateUniformData(vtbl: pointer, inst: pointer, state: pointer, newMaterial: pointer, oldMaterial: pointer): bool {.cdecl.} =
+  let vtbl = cast[VirtualQSGMaterialRhiShader](cast[uint](vtbl) - uint(offsetOf(VirtualQSGMaterialRhiShader, vtbl)))
+  let slotval1 = gen_qsgmaterialrhishader_types.QSGMaterialRhiShaderRenderState(h: state, owned: false)
+  let slotval2 = gen_qsgmaterial_types.QSGMaterial(h: newMaterial, owned: false)
+  let slotval3 = gen_qsgmaterial_types.QSGMaterial(h: oldMaterial, owned: false)
+  var virtualReturn = vtbl.updateUniformData(slotval1, slotval2, slotval3)
+  virtualReturn
+
+method updateGraphicsPipelineState*(self: VirtualQSGMaterialRhiShader, state: gen_qsgmaterialrhishader_types.QSGMaterialRhiShaderRenderState, ps: gen_qsgmaterialrhishader_types.QSGMaterialRhiShaderGraphicsPipelineState, newMaterial: gen_qsgmaterial_types.QSGMaterial, oldMaterial: gen_qsgmaterial_types.QSGMaterial): bool {.base.} =
+  QSGMaterialRhiShaderupdateGraphicsPipelineState(self[], state, ps, newMaterial, oldMaterial)
+proc miqt_exec_method_cQSGMaterialRhiShader_updateGraphicsPipelineState(vtbl: pointer, inst: pointer, state: pointer, ps: pointer, newMaterial: pointer, oldMaterial: pointer): bool {.cdecl.} =
+  let vtbl = cast[VirtualQSGMaterialRhiShader](cast[uint](vtbl) - uint(offsetOf(VirtualQSGMaterialRhiShader, vtbl)))
+  let slotval1 = gen_qsgmaterialrhishader_types.QSGMaterialRhiShaderRenderState(h: state, owned: false)
+  let slotval2 = gen_qsgmaterialrhishader_types.QSGMaterialRhiShaderGraphicsPipelineState(h: ps, owned: false)
+  let slotval3 = gen_qsgmaterial_types.QSGMaterial(h: newMaterial, owned: false)
+  let slotval4 = gen_qsgmaterial_types.QSGMaterial(h: oldMaterial, owned: false)
+  var virtualReturn = vtbl.updateGraphicsPipelineState(slotval1, slotval2, slotval3, slotval4)
+  virtualReturn
+
+method attributeNames*(self: VirtualQSGMaterialRhiShader, ): cstring {.base.} =
+  QSGMaterialRhiShaderattributeNames(self[])
+proc miqt_exec_method_cQSGMaterialRhiShader_attributeNames(vtbl: pointer, inst: pointer): cstring {.cdecl.} =
+  let vtbl = cast[VirtualQSGMaterialRhiShader](cast[uint](vtbl) - uint(offsetOf(VirtualQSGMaterialRhiShader, vtbl)))
+  var virtualReturn = vtbl.attributeNames()
+  virtualReturn
+
+method activate*(self: VirtualQSGMaterialRhiShader, ): void {.base.} =
+  QSGMaterialRhiShaderactivate(self[])
+proc miqt_exec_method_cQSGMaterialRhiShader_activate(vtbl: pointer, inst: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQSGMaterialRhiShader](cast[uint](vtbl) - uint(offsetOf(VirtualQSGMaterialRhiShader, vtbl)))
+  vtbl.activate()
+
+method deactivate*(self: VirtualQSGMaterialRhiShader, ): void {.base.} =
+  QSGMaterialRhiShaderdeactivate(self[])
+proc miqt_exec_method_cQSGMaterialRhiShader_deactivate(vtbl: pointer, inst: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQSGMaterialRhiShader](cast[uint](vtbl) - uint(offsetOf(VirtualQSGMaterialRhiShader, vtbl)))
+  vtbl.deactivate()
+
+method updateState*(self: VirtualQSGMaterialRhiShader, state: gen_qsgmaterialshader_types.QSGMaterialShaderRenderState, newMaterial: gen_qsgmaterial_types.QSGMaterial, oldMaterial: gen_qsgmaterial_types.QSGMaterial): void {.base.} =
+  QSGMaterialRhiShaderupdateState(self[], state, newMaterial, oldMaterial)
+proc miqt_exec_method_cQSGMaterialRhiShader_updateState(vtbl: pointer, inst: pointer, state: pointer, newMaterial: pointer, oldMaterial: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQSGMaterialRhiShader](cast[uint](vtbl) - uint(offsetOf(VirtualQSGMaterialRhiShader, vtbl)))
+  let slotval1 = gen_qsgmaterialshader_types.QSGMaterialShaderRenderState(h: state, owned: false)
+  let slotval2 = gen_qsgmaterial_types.QSGMaterial(h: newMaterial, owned: false)
+  let slotval3 = gen_qsgmaterial_types.QSGMaterial(h: oldMaterial, owned: false)
+  vtbl.updateState(slotval1, slotval2, slotval3)
+
+method compile*(self: VirtualQSGMaterialRhiShader, ): void {.base.} =
+  QSGMaterialRhiShadercompile(self[])
+proc miqt_exec_method_cQSGMaterialRhiShader_compile(vtbl: pointer, inst: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQSGMaterialRhiShader](cast[uint](vtbl) - uint(offsetOf(VirtualQSGMaterialRhiShader, vtbl)))
+  vtbl.compile()
+
+method initialize*(self: VirtualQSGMaterialRhiShader, ): void {.base.} =
+  QSGMaterialRhiShaderinitialize(self[])
+proc miqt_exec_method_cQSGMaterialRhiShader_initialize(vtbl: pointer, inst: pointer): void {.cdecl.} =
+  let vtbl = cast[VirtualQSGMaterialRhiShader](cast[uint](vtbl) - uint(offsetOf(VirtualQSGMaterialRhiShader, vtbl)))
+  vtbl.initialize()
+
+method vertexShader*(self: VirtualQSGMaterialRhiShader, ): cstring {.base.} =
+  QSGMaterialRhiShadervertexShader(self[])
+proc miqt_exec_method_cQSGMaterialRhiShader_vertexShader(vtbl: pointer, inst: pointer): cstring {.cdecl.} =
+  let vtbl = cast[VirtualQSGMaterialRhiShader](cast[uint](vtbl) - uint(offsetOf(VirtualQSGMaterialRhiShader, vtbl)))
+  var virtualReturn = vtbl.vertexShader()
+  virtualReturn
+
+method fragmentShader*(self: VirtualQSGMaterialRhiShader, ): cstring {.base.} =
+  QSGMaterialRhiShaderfragmentShader(self[])
+proc miqt_exec_method_cQSGMaterialRhiShader_fragmentShader(vtbl: pointer, inst: pointer): cstring {.cdecl.} =
+  let vtbl = cast[VirtualQSGMaterialRhiShader](cast[uint](vtbl) - uint(offsetOf(VirtualQSGMaterialRhiShader, vtbl)))
+  var virtualReturn = vtbl.fragmentShader()
+  virtualReturn
+
 proc setShaderFileName*(self: gen_qsgmaterialrhishader_types.QSGMaterialRhiShader, stage: cint, filename: string): void =
   fcQSGMaterialRhiShader_protectedbase_setShaderFileName(self.h, cint(stage), struct_miqt_string(data: filename, len: csize_t(len(filename))))
 
@@ -302,33 +373,52 @@ proc create*(T: type gen_qsgmaterialrhishader_types.QSGMaterialRhiShader,
     vtbl: ref QSGMaterialRhiShaderVTable = nil): gen_qsgmaterialrhishader_types.QSGMaterialRhiShader =
   let vtbl = if vtbl == nil: new QSGMaterialRhiShaderVTable else: vtbl
   GC_ref(vtbl)
-  vtbl.vtbl.destructor = proc(vtbl: ptr cQSGMaterialRhiShaderVTable, _: ptr cQSGMaterialRhiShader) {.cdecl.} =
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQSGMaterialRhiShaderVTable, _: ptr cQSGMaterialRhiShader) {.cdecl.} =
     let vtbl = cast[ref QSGMaterialRhiShaderVTable](vtbl)
     GC_unref(vtbl)
-  if not isNil(vtbl.updateUniformData):
+  if not isNil(vtbl[].updateUniformData):
     vtbl[].vtbl.updateUniformData = miqt_exec_callback_cQSGMaterialRhiShader_updateUniformData
-  if not isNil(vtbl.updateGraphicsPipelineState):
+  if not isNil(vtbl[].updateGraphicsPipelineState):
     vtbl[].vtbl.updateGraphicsPipelineState = miqt_exec_callback_cQSGMaterialRhiShader_updateGraphicsPipelineState
-  if not isNil(vtbl.attributeNames):
+  if not isNil(vtbl[].attributeNames):
     vtbl[].vtbl.attributeNames = miqt_exec_callback_cQSGMaterialRhiShader_attributeNames
-  if not isNil(vtbl.activate):
+  if not isNil(vtbl[].activate):
     vtbl[].vtbl.activate = miqt_exec_callback_cQSGMaterialRhiShader_activate
-  if not isNil(vtbl.deactivate):
+  if not isNil(vtbl[].deactivate):
     vtbl[].vtbl.deactivate = miqt_exec_callback_cQSGMaterialRhiShader_deactivate
-  if not isNil(vtbl.updateState):
+  if not isNil(vtbl[].updateState):
     vtbl[].vtbl.updateState = miqt_exec_callback_cQSGMaterialRhiShader_updateState
-  if not isNil(vtbl.compile):
+  if not isNil(vtbl[].compile):
     vtbl[].vtbl.compile = miqt_exec_callback_cQSGMaterialRhiShader_compile
-  if not isNil(vtbl.initialize):
+  if not isNil(vtbl[].initialize):
     vtbl[].vtbl.initialize = miqt_exec_callback_cQSGMaterialRhiShader_initialize
-  if not isNil(vtbl.vertexShader):
+  if not isNil(vtbl[].vertexShader):
     vtbl[].vtbl.vertexShader = miqt_exec_callback_cQSGMaterialRhiShader_vertexShader
-  if not isNil(vtbl.fragmentShader):
+  if not isNil(vtbl[].fragmentShader):
     vtbl[].vtbl.fragmentShader = miqt_exec_callback_cQSGMaterialRhiShader_fragmentShader
-  gen_qsgmaterialrhishader_types.QSGMaterialRhiShader(h: fcQSGMaterialRhiShader_new(addr(vtbl[]), ))
+  gen_qsgmaterialrhishader_types.QSGMaterialRhiShader(h: fcQSGMaterialRhiShader_new(addr(vtbl[].vtbl), ), owned: true)
 
-proc delete*(self: gen_qsgmaterialrhishader_types.QSGMaterialRhiShader) =
-  fcQSGMaterialRhiShader_delete(self.h)
+proc create*(T: type gen_qsgmaterialrhishader_types.QSGMaterialRhiShader,
+    vtbl: VirtualQSGMaterialRhiShader) =
+
+  vtbl[].vtbl.destructor = proc(vtbl: ptr cQSGMaterialRhiShaderVTable, _: ptr cQSGMaterialRhiShader) {.cdecl.} =
+    let vtbl = cast[ptr typeof(VirtualQSGMaterialRhiShader()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQSGMaterialRhiShader, vtbl)))
+    vtbl[].h = nil
+    vtbl[].owned = false
+  vtbl[].vtbl.updateUniformData = miqt_exec_method_cQSGMaterialRhiShader_updateUniformData
+  vtbl[].vtbl.updateGraphicsPipelineState = miqt_exec_method_cQSGMaterialRhiShader_updateGraphicsPipelineState
+  vtbl[].vtbl.attributeNames = miqt_exec_method_cQSGMaterialRhiShader_attributeNames
+  vtbl[].vtbl.activate = miqt_exec_method_cQSGMaterialRhiShader_activate
+  vtbl[].vtbl.deactivate = miqt_exec_method_cQSGMaterialRhiShader_deactivate
+  vtbl[].vtbl.updateState = miqt_exec_method_cQSGMaterialRhiShader_updateState
+  vtbl[].vtbl.compile = miqt_exec_method_cQSGMaterialRhiShader_compile
+  vtbl[].vtbl.initialize = miqt_exec_method_cQSGMaterialRhiShader_initialize
+  vtbl[].vtbl.vertexShader = miqt_exec_method_cQSGMaterialRhiShader_vertexShader
+  vtbl[].vtbl.fragmentShader = miqt_exec_method_cQSGMaterialRhiShader_fragmentShader
+  if vtbl[].h != nil: delete(move(vtbl[]))
+  vtbl[].h = fcQSGMaterialRhiShader_new(addr(vtbl[].vtbl), )
+  vtbl[].owned = true
+
 proc dirtyStates*(self: gen_qsgmaterialrhishader_types.QSGMaterialRhiShaderRenderState, ): cint =
   cint(fcQSGMaterialRhiShaderRenderState_dirtyStates(self.h))
 
@@ -342,19 +432,19 @@ proc opacity*(self: gen_qsgmaterialrhishader_types.QSGMaterialRhiShaderRenderSta
   fcQSGMaterialRhiShaderRenderState_opacity(self.h)
 
 proc combinedMatrix*(self: gen_qsgmaterialrhishader_types.QSGMaterialRhiShaderRenderState, ): gen_qmatrix4x4_types.QMatrix4x4 =
-  gen_qmatrix4x4_types.QMatrix4x4(h: fcQSGMaterialRhiShaderRenderState_combinedMatrix(self.h))
+  gen_qmatrix4x4_types.QMatrix4x4(h: fcQSGMaterialRhiShaderRenderState_combinedMatrix(self.h), owned: true)
 
 proc modelViewMatrix*(self: gen_qsgmaterialrhishader_types.QSGMaterialRhiShaderRenderState, ): gen_qmatrix4x4_types.QMatrix4x4 =
-  gen_qmatrix4x4_types.QMatrix4x4(h: fcQSGMaterialRhiShaderRenderState_modelViewMatrix(self.h))
+  gen_qmatrix4x4_types.QMatrix4x4(h: fcQSGMaterialRhiShaderRenderState_modelViewMatrix(self.h), owned: true)
 
 proc projectionMatrix*(self: gen_qsgmaterialrhishader_types.QSGMaterialRhiShaderRenderState, ): gen_qmatrix4x4_types.QMatrix4x4 =
-  gen_qmatrix4x4_types.QMatrix4x4(h: fcQSGMaterialRhiShaderRenderState_projectionMatrix(self.h))
+  gen_qmatrix4x4_types.QMatrix4x4(h: fcQSGMaterialRhiShaderRenderState_projectionMatrix(self.h), owned: true)
 
 proc viewportRect*(self: gen_qsgmaterialrhishader_types.QSGMaterialRhiShaderRenderState, ): gen_qrect_types.QRect =
-  gen_qrect_types.QRect(h: fcQSGMaterialRhiShaderRenderState_viewportRect(self.h))
+  gen_qrect_types.QRect(h: fcQSGMaterialRhiShaderRenderState_viewportRect(self.h), owned: true)
 
 proc deviceRect*(self: gen_qsgmaterialrhishader_types.QSGMaterialRhiShaderRenderState, ): gen_qrect_types.QRect =
-  gen_qrect_types.QRect(h: fcQSGMaterialRhiShaderRenderState_deviceRect(self.h))
+  gen_qrect_types.QRect(h: fcQSGMaterialRhiShaderRenderState_deviceRect(self.h), owned: true)
 
 proc determinant*(self: gen_qsgmaterialrhishader_types.QSGMaterialRhiShaderRenderState, ): float32 =
   fcQSGMaterialRhiShaderRenderState_determinant(self.h)
@@ -368,14 +458,10 @@ proc uniformData*(self: gen_qsgmaterialrhishader_types.QSGMaterialRhiShaderRende
   c_free(v_bytearray.data)
   vx_ret
 
-proc delete*(self: gen_qsgmaterialrhishader_types.QSGMaterialRhiShaderRenderState) =
-  fcQSGMaterialRhiShaderRenderState_delete(self.h)
 proc operatorAssign*(self: gen_qsgmaterialrhishader_types.QSGMaterialRhiShaderGraphicsPipelineState, param1: gen_qsgmaterialrhishader_types.QSGMaterialRhiShaderGraphicsPipelineState): void =
   fcQSGMaterialRhiShaderGraphicsPipelineState_operatorAssign(self.h, param1.h)
 
 proc create*(T: type gen_qsgmaterialrhishader_types.QSGMaterialRhiShaderGraphicsPipelineState,
     param1: gen_qsgmaterialrhishader_types.QSGMaterialRhiShaderGraphicsPipelineState): gen_qsgmaterialrhishader_types.QSGMaterialRhiShaderGraphicsPipelineState =
-  gen_qsgmaterialrhishader_types.QSGMaterialRhiShaderGraphicsPipelineState(h: fcQSGMaterialRhiShaderGraphicsPipelineState_new(param1.h))
+  gen_qsgmaterialrhishader_types.QSGMaterialRhiShaderGraphicsPipelineState(h: fcQSGMaterialRhiShaderGraphicsPipelineState_new(param1.h), owned: true)
 
-proc delete*(self: gen_qsgmaterialrhishader_types.QSGMaterialRhiShaderGraphicsPipelineState) =
-  fcQSGMaterialRhiShaderGraphicsPipelineState_delete(self.h)

@@ -30,9 +30,6 @@ func fromBytes(T: type string, v: openArray[byte]): string {.used.} =
     else:
       copyMem(addr result[0], unsafeAddr v[0], v.len)
 
-const cflags = gorge("pkg-config --cflags Qt5Core")  & " -fPIC"
-{.compile("gen_qfloat16.cpp", cflags).}
-
 
 import ./gen_qfloat16_types
 export gen_qfloat16_types
@@ -47,7 +44,6 @@ proc fcqfloat16_fpClassify(self: pointer, ): cint {.importc: "qfloat16_fpClassif
 proc fcqfloat16_isNormal(self: pointer, ): bool {.importc: "qfloat16_isNormal".}
 proc fcqfloat16_new(): ptr cqfloat16 {.importc: "qfloat16_new".}
 proc fcqfloat16_new2(f: float32): ptr cqfloat16 {.importc: "qfloat16_new2".}
-proc fcqfloat16_delete(self: pointer) {.importc: "qfloat16_delete".}
 
 proc isInf*(self: gen_qfloat16_types.qfloat16, ): bool =
   fcqfloat16_isInf(self.h)
@@ -65,11 +61,9 @@ proc isNormal*(self: gen_qfloat16_types.qfloat16, ): bool =
   fcqfloat16_isNormal(self.h)
 
 proc create*(T: type gen_qfloat16_types.qfloat16): gen_qfloat16_types.qfloat16 =
-  gen_qfloat16_types.qfloat16(h: fcqfloat16_new())
+  gen_qfloat16_types.qfloat16(h: fcqfloat16_new(), owned: true)
 
 proc create*(T: type gen_qfloat16_types.qfloat16,
     f: float32): gen_qfloat16_types.qfloat16 =
-  gen_qfloat16_types.qfloat16(h: fcqfloat16_new2(f))
+  gen_qfloat16_types.qfloat16(h: fcqfloat16_new2(f), owned: true)
 
-proc delete*(self: gen_qfloat16_types.qfloat16) =
-  fcqfloat16_delete(self.h)
