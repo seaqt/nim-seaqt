@@ -67,10 +67,6 @@ export
 
 type cQSharedMemory*{.exportc: "QSharedMemory", incompleteStruct.} = object
 
-proc fcQSharedMemory_new(): ptr cQSharedMemory {.importc: "QSharedMemory_new".}
-proc fcQSharedMemory_new2(key: struct_miqt_string): ptr cQSharedMemory {.importc: "QSharedMemory_new2".}
-proc fcQSharedMemory_new3(parent: pointer): ptr cQSharedMemory {.importc: "QSharedMemory_new3".}
-proc fcQSharedMemory_new4(key: struct_miqt_string, parent: pointer): ptr cQSharedMemory {.importc: "QSharedMemory_new4".}
 proc fcQSharedMemory_metaObject(self: pointer, ): pointer {.importc: "QSharedMemory_metaObject".}
 proc fcQSharedMemory_metacast(self: pointer, param1: cstring): pointer {.importc: "QSharedMemory_metacast".}
 proc fcQSharedMemory_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QSharedMemory_metacall".}
@@ -95,43 +91,34 @@ proc fcQSharedMemory_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: 
 proc fcQSharedMemory_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QSharedMemory_tr3".}
 proc fcQSharedMemory_create2(self: pointer, size: int64, mode: cint): bool {.importc: "QSharedMemory_create2".}
 proc fcQSharedMemory_attach1(self: pointer, mode: cint): bool {.importc: "QSharedMemory_attach1".}
-proc fQSharedMemory_virtualbase_metaObject(self: pointer, ): pointer{.importc: "QSharedMemory_virtualbase_metaObject".}
-proc fcQSharedMemory_override_virtual_metaObject(self: pointer, slot: int) {.importc: "QSharedMemory_override_virtual_metaObject".}
-proc fQSharedMemory_virtualbase_metacast(self: pointer, param1: cstring): pointer{.importc: "QSharedMemory_virtualbase_metacast".}
-proc fcQSharedMemory_override_virtual_metacast(self: pointer, slot: int) {.importc: "QSharedMemory_override_virtual_metacast".}
-proc fQSharedMemory_virtualbase_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint{.importc: "QSharedMemory_virtualbase_metacall".}
-proc fcQSharedMemory_override_virtual_metacall(self: pointer, slot: int) {.importc: "QSharedMemory_override_virtual_metacall".}
-proc fQSharedMemory_virtualbase_event(self: pointer, event: pointer): bool{.importc: "QSharedMemory_virtualbase_event".}
-proc fcQSharedMemory_override_virtual_event(self: pointer, slot: int) {.importc: "QSharedMemory_override_virtual_event".}
-proc fQSharedMemory_virtualbase_eventFilter(self: pointer, watched: pointer, event: pointer): bool{.importc: "QSharedMemory_virtualbase_eventFilter".}
-proc fcQSharedMemory_override_virtual_eventFilter(self: pointer, slot: int) {.importc: "QSharedMemory_override_virtual_eventFilter".}
-proc fQSharedMemory_virtualbase_timerEvent(self: pointer, event: pointer): void{.importc: "QSharedMemory_virtualbase_timerEvent".}
-proc fcQSharedMemory_override_virtual_timerEvent(self: pointer, slot: int) {.importc: "QSharedMemory_override_virtual_timerEvent".}
-proc fQSharedMemory_virtualbase_childEvent(self: pointer, event: pointer): void{.importc: "QSharedMemory_virtualbase_childEvent".}
-proc fcQSharedMemory_override_virtual_childEvent(self: pointer, slot: int) {.importc: "QSharedMemory_override_virtual_childEvent".}
-proc fQSharedMemory_virtualbase_customEvent(self: pointer, event: pointer): void{.importc: "QSharedMemory_virtualbase_customEvent".}
-proc fcQSharedMemory_override_virtual_customEvent(self: pointer, slot: int) {.importc: "QSharedMemory_override_virtual_customEvent".}
-proc fQSharedMemory_virtualbase_connectNotify(self: pointer, signal: pointer): void{.importc: "QSharedMemory_virtualbase_connectNotify".}
-proc fcQSharedMemory_override_virtual_connectNotify(self: pointer, slot: int) {.importc: "QSharedMemory_override_virtual_connectNotify".}
-proc fQSharedMemory_virtualbase_disconnectNotify(self: pointer, signal: pointer): void{.importc: "QSharedMemory_virtualbase_disconnectNotify".}
-proc fcQSharedMemory_override_virtual_disconnectNotify(self: pointer, slot: int) {.importc: "QSharedMemory_override_virtual_disconnectNotify".}
+type cQSharedMemoryVTable = object
+  destructor*: proc(vtbl: ptr cQSharedMemoryVTable, self: ptr cQSharedMemory) {.cdecl, raises:[], gcsafe.}
+  metaObject*: proc(vtbl, self: pointer, ): pointer {.cdecl, raises: [], gcsafe.}
+  metacast*: proc(vtbl, self: pointer, param1: cstring): pointer {.cdecl, raises: [], gcsafe.}
+  metacall*: proc(vtbl, self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl, raises: [], gcsafe.}
+  event*: proc(vtbl, self: pointer, event: pointer): bool {.cdecl, raises: [], gcsafe.}
+  eventFilter*: proc(vtbl, self: pointer, watched: pointer, event: pointer): bool {.cdecl, raises: [], gcsafe.}
+  timerEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  childEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  customEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  connectNotify*: proc(vtbl, self: pointer, signal: pointer): void {.cdecl, raises: [], gcsafe.}
+  disconnectNotify*: proc(vtbl, self: pointer, signal: pointer): void {.cdecl, raises: [], gcsafe.}
+proc fcQSharedMemory_virtualbase_metaObject(self: pointer, ): pointer {.importc: "QSharedMemory_virtualbase_metaObject".}
+proc fcQSharedMemory_virtualbase_metacast(self: pointer, param1: cstring): pointer {.importc: "QSharedMemory_virtualbase_metacast".}
+proc fcQSharedMemory_virtualbase_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QSharedMemory_virtualbase_metacall".}
+proc fcQSharedMemory_virtualbase_event(self: pointer, event: pointer): bool {.importc: "QSharedMemory_virtualbase_event".}
+proc fcQSharedMemory_virtualbase_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.importc: "QSharedMemory_virtualbase_eventFilter".}
+proc fcQSharedMemory_virtualbase_timerEvent(self: pointer, event: pointer): void {.importc: "QSharedMemory_virtualbase_timerEvent".}
+proc fcQSharedMemory_virtualbase_childEvent(self: pointer, event: pointer): void {.importc: "QSharedMemory_virtualbase_childEvent".}
+proc fcQSharedMemory_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QSharedMemory_virtualbase_customEvent".}
+proc fcQSharedMemory_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QSharedMemory_virtualbase_connectNotify".}
+proc fcQSharedMemory_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QSharedMemory_virtualbase_disconnectNotify".}
+proc fcQSharedMemory_new(vtbl: pointer, ): ptr cQSharedMemory {.importc: "QSharedMemory_new".}
+proc fcQSharedMemory_new2(vtbl: pointer, key: struct_miqt_string): ptr cQSharedMemory {.importc: "QSharedMemory_new2".}
+proc fcQSharedMemory_new3(vtbl: pointer, parent: pointer): ptr cQSharedMemory {.importc: "QSharedMemory_new3".}
+proc fcQSharedMemory_new4(vtbl: pointer, key: struct_miqt_string, parent: pointer): ptr cQSharedMemory {.importc: "QSharedMemory_new4".}
 proc fcQSharedMemory_staticMetaObject(): pointer {.importc: "QSharedMemory_staticMetaObject".}
 proc fcQSharedMemory_delete(self: pointer) {.importc: "QSharedMemory_delete".}
-
-
-func init*(T: type gen_qsharedmemory_types.QSharedMemory, h: ptr cQSharedMemory): gen_qsharedmemory_types.QSharedMemory =
-  T(h: h)
-proc create*(T: type gen_qsharedmemory_types.QSharedMemory, ): gen_qsharedmemory_types.QSharedMemory =
-  gen_qsharedmemory_types.QSharedMemory.init(fcQSharedMemory_new())
-
-proc create*(T: type gen_qsharedmemory_types.QSharedMemory, key: string): gen_qsharedmemory_types.QSharedMemory =
-  gen_qsharedmemory_types.QSharedMemory.init(fcQSharedMemory_new2(struct_miqt_string(data: key, len: csize_t(len(key)))))
-
-proc create*(T: type gen_qsharedmemory_types.QSharedMemory, parent: gen_qobject_types.QObject): gen_qsharedmemory_types.QSharedMemory =
-  gen_qsharedmemory_types.QSharedMemory.init(fcQSharedMemory_new3(parent.h))
-
-proc create*(T: type gen_qsharedmemory_types.QSharedMemory, key: string, parent: gen_qobject_types.QObject): gen_qsharedmemory_types.QSharedMemory =
-  gen_qsharedmemory_types.QSharedMemory.init(fcQSharedMemory_new4(struct_miqt_string(data: key, len: csize_t(len(key))), parent.h))
 
 proc metaObject*(self: gen_qsharedmemory_types.QSharedMemory, ): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQSharedMemory_metaObject(self.h))
@@ -223,190 +210,244 @@ proc create*(self: gen_qsharedmemory_types.QSharedMemory, size: int64, mode: cin
 proc attach*(self: gen_qsharedmemory_types.QSharedMemory, mode: cint): bool =
   fcQSharedMemory_attach1(self.h, cint(mode))
 
+type QSharedMemorymetaObjectProc* = proc(self: QSharedMemory): gen_qobjectdefs_types.QMetaObject {.raises: [], gcsafe.}
+type QSharedMemorymetacastProc* = proc(self: QSharedMemory, param1: cstring): pointer {.raises: [], gcsafe.}
+type QSharedMemorymetacallProc* = proc(self: QSharedMemory, param1: cint, param2: cint, param3: pointer): cint {.raises: [], gcsafe.}
+type QSharedMemoryeventProc* = proc(self: QSharedMemory, event: gen_qcoreevent_types.QEvent): bool {.raises: [], gcsafe.}
+type QSharedMemoryeventFilterProc* = proc(self: QSharedMemory, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.raises: [], gcsafe.}
+type QSharedMemorytimerEventProc* = proc(self: QSharedMemory, event: gen_qcoreevent_types.QTimerEvent): void {.raises: [], gcsafe.}
+type QSharedMemorychildEventProc* = proc(self: QSharedMemory, event: gen_qcoreevent_types.QChildEvent): void {.raises: [], gcsafe.}
+type QSharedMemorycustomEventProc* = proc(self: QSharedMemory, event: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
+type QSharedMemoryconnectNotifyProc* = proc(self: QSharedMemory, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
+type QSharedMemorydisconnectNotifyProc* = proc(self: QSharedMemory, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
+type QSharedMemoryVTable* = object
+  vtbl: cQSharedMemoryVTable
+  metaObject*: QSharedMemorymetaObjectProc
+  metacast*: QSharedMemorymetacastProc
+  metacall*: QSharedMemorymetacallProc
+  event*: QSharedMemoryeventProc
+  eventFilter*: QSharedMemoryeventFilterProc
+  timerEvent*: QSharedMemorytimerEventProc
+  childEvent*: QSharedMemorychildEventProc
+  customEvent*: QSharedMemorycustomEventProc
+  connectNotify*: QSharedMemoryconnectNotifyProc
+  disconnectNotify*: QSharedMemorydisconnectNotifyProc
 proc QSharedMemorymetaObject*(self: gen_qsharedmemory_types.QSharedMemory, ): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fQSharedMemory_virtualbase_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQSharedMemory_virtualbase_metaObject(self.h))
 
-type QSharedMemorymetaObjectProc* = proc(): gen_qobjectdefs_types.QMetaObject
-proc onmetaObject*(self: gen_qsharedmemory_types.QSharedMemory, slot: QSharedMemorymetaObjectProc) =
-  # TODO check subclass
-  var tmp = new QSharedMemorymetaObjectProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQSharedMemory_override_virtual_metaObject(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QSharedMemory_metaObject(self: ptr cQSharedMemory, slot: int): pointer {.exportc: "miqt_exec_callback_QSharedMemory_metaObject ".} =
-  var nimfunc = cast[ptr QSharedMemorymetaObjectProc](cast[pointer](slot))
-
-  let virtualReturn = nimfunc[]( )
-
+proc miqt_exec_callback_cQSharedMemory_metaObject(vtbl: pointer, self: pointer): pointer {.cdecl.} =
+  let vtbl = cast[ptr QSharedMemoryVTable](vtbl)
+  let self = QSharedMemory(h: self)
+  var virtualReturn = vtbl[].metaObject(self)
   virtualReturn.h
+
 proc QSharedMemorymetacast*(self: gen_qsharedmemory_types.QSharedMemory, param1: cstring): pointer =
-  fQSharedMemory_virtualbase_metacast(self.h, param1)
+  fcQSharedMemory_virtualbase_metacast(self.h, param1)
 
-type QSharedMemorymetacastProc* = proc(param1: cstring): pointer
-proc onmetacast*(self: gen_qsharedmemory_types.QSharedMemory, slot: QSharedMemorymetacastProc) =
-  # TODO check subclass
-  var tmp = new QSharedMemorymetacastProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQSharedMemory_override_virtual_metacast(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QSharedMemory_metacast(self: ptr cQSharedMemory, slot: int, param1: cstring): pointer {.exportc: "miqt_exec_callback_QSharedMemory_metacast ".} =
-  var nimfunc = cast[ptr QSharedMemorymetacastProc](cast[pointer](slot))
+proc miqt_exec_callback_cQSharedMemory_metacast(vtbl: pointer, self: pointer, param1: cstring): pointer {.cdecl.} =
+  let vtbl = cast[ptr QSharedMemoryVTable](vtbl)
+  let self = QSharedMemory(h: self)
   let slotval1 = (param1)
-
-
-  let virtualReturn = nimfunc[](slotval1 )
-
+  var virtualReturn = vtbl[].metacast(self, slotval1)
   virtualReturn
+
 proc QSharedMemorymetacall*(self: gen_qsharedmemory_types.QSharedMemory, param1: cint, param2: cint, param3: pointer): cint =
-  fQSharedMemory_virtualbase_metacall(self.h, cint(param1), param2, param3)
+  fcQSharedMemory_virtualbase_metacall(self.h, cint(param1), param2, param3)
 
-type QSharedMemorymetacallProc* = proc(param1: cint, param2: cint, param3: pointer): cint
-proc onmetacall*(self: gen_qsharedmemory_types.QSharedMemory, slot: QSharedMemorymetacallProc) =
-  # TODO check subclass
-  var tmp = new QSharedMemorymetacallProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQSharedMemory_override_virtual_metacall(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QSharedMemory_metacall(self: ptr cQSharedMemory, slot: int, param1: cint, param2: cint, param3: pointer): cint {.exportc: "miqt_exec_callback_QSharedMemory_metacall ".} =
-  var nimfunc = cast[ptr QSharedMemorymetacallProc](cast[pointer](slot))
+proc miqt_exec_callback_cQSharedMemory_metacall(vtbl: pointer, self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
+  let vtbl = cast[ptr QSharedMemoryVTable](vtbl)
+  let self = QSharedMemory(h: self)
   let slotval1 = cint(param1)
-
   let slotval2 = param2
-
   let slotval3 = param3
-
-
-  let virtualReturn = nimfunc[](slotval1, slotval2, slotval3 )
-
+  var virtualReturn = vtbl[].metacall(self, slotval1, slotval2, slotval3)
   virtualReturn
+
 proc QSharedMemoryevent*(self: gen_qsharedmemory_types.QSharedMemory, event: gen_qcoreevent_types.QEvent): bool =
-  fQSharedMemory_virtualbase_event(self.h, event.h)
+  fcQSharedMemory_virtualbase_event(self.h, event.h)
 
-type QSharedMemoryeventProc* = proc(event: gen_qcoreevent_types.QEvent): bool
-proc onevent*(self: gen_qsharedmemory_types.QSharedMemory, slot: QSharedMemoryeventProc) =
-  # TODO check subclass
-  var tmp = new QSharedMemoryeventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQSharedMemory_override_virtual_event(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QSharedMemory_event(self: ptr cQSharedMemory, slot: int, event: pointer): bool {.exportc: "miqt_exec_callback_QSharedMemory_event ".} =
-  var nimfunc = cast[ptr QSharedMemoryeventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQSharedMemory_event(vtbl: pointer, self: pointer, event: pointer): bool {.cdecl.} =
+  let vtbl = cast[ptr QSharedMemoryVTable](vtbl)
+  let self = QSharedMemory(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event)
-
-
-  let virtualReturn = nimfunc[](slotval1 )
-
+  var virtualReturn = vtbl[].event(self, slotval1)
   virtualReturn
+
 proc QSharedMemoryeventFilter*(self: gen_qsharedmemory_types.QSharedMemory, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool =
-  fQSharedMemory_virtualbase_eventFilter(self.h, watched.h, event.h)
+  fcQSharedMemory_virtualbase_eventFilter(self.h, watched.h, event.h)
 
-type QSharedMemoryeventFilterProc* = proc(watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool
-proc oneventFilter*(self: gen_qsharedmemory_types.QSharedMemory, slot: QSharedMemoryeventFilterProc) =
-  # TODO check subclass
-  var tmp = new QSharedMemoryeventFilterProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQSharedMemory_override_virtual_eventFilter(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QSharedMemory_eventFilter(self: ptr cQSharedMemory, slot: int, watched: pointer, event: pointer): bool {.exportc: "miqt_exec_callback_QSharedMemory_eventFilter ".} =
-  var nimfunc = cast[ptr QSharedMemoryeventFilterProc](cast[pointer](slot))
+proc miqt_exec_callback_cQSharedMemory_eventFilter(vtbl: pointer, self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
+  let vtbl = cast[ptr QSharedMemoryVTable](vtbl)
+  let self = QSharedMemory(h: self)
   let slotval1 = gen_qobject_types.QObject(h: watched)
-
   let slotval2 = gen_qcoreevent_types.QEvent(h: event)
-
-
-  let virtualReturn = nimfunc[](slotval1, slotval2 )
-
+  var virtualReturn = vtbl[].eventFilter(self, slotval1, slotval2)
   virtualReturn
+
 proc QSharedMemorytimerEvent*(self: gen_qsharedmemory_types.QSharedMemory, event: gen_qcoreevent_types.QTimerEvent): void =
-  fQSharedMemory_virtualbase_timerEvent(self.h, event.h)
+  fcQSharedMemory_virtualbase_timerEvent(self.h, event.h)
 
-type QSharedMemorytimerEventProc* = proc(event: gen_qcoreevent_types.QTimerEvent): void
-proc ontimerEvent*(self: gen_qsharedmemory_types.QSharedMemory, slot: QSharedMemorytimerEventProc) =
-  # TODO check subclass
-  var tmp = new QSharedMemorytimerEventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQSharedMemory_override_virtual_timerEvent(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QSharedMemory_timerEvent(self: ptr cQSharedMemory, slot: int, event: pointer): void {.exportc: "miqt_exec_callback_QSharedMemory_timerEvent ".} =
-  var nimfunc = cast[ptr QSharedMemorytimerEventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQSharedMemory_timerEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QSharedMemoryVTable](vtbl)
+  let self = QSharedMemory(h: self)
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event)
+  vtbl[].timerEvent(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QSharedMemorychildEvent*(self: gen_qsharedmemory_types.QSharedMemory, event: gen_qcoreevent_types.QChildEvent): void =
-  fQSharedMemory_virtualbase_childEvent(self.h, event.h)
+  fcQSharedMemory_virtualbase_childEvent(self.h, event.h)
 
-type QSharedMemorychildEventProc* = proc(event: gen_qcoreevent_types.QChildEvent): void
-proc onchildEvent*(self: gen_qsharedmemory_types.QSharedMemory, slot: QSharedMemorychildEventProc) =
-  # TODO check subclass
-  var tmp = new QSharedMemorychildEventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQSharedMemory_override_virtual_childEvent(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QSharedMemory_childEvent(self: ptr cQSharedMemory, slot: int, event: pointer): void {.exportc: "miqt_exec_callback_QSharedMemory_childEvent ".} =
-  var nimfunc = cast[ptr QSharedMemorychildEventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQSharedMemory_childEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QSharedMemoryVTable](vtbl)
+  let self = QSharedMemory(h: self)
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: event)
+  vtbl[].childEvent(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QSharedMemorycustomEvent*(self: gen_qsharedmemory_types.QSharedMemory, event: gen_qcoreevent_types.QEvent): void =
-  fQSharedMemory_virtualbase_customEvent(self.h, event.h)
+  fcQSharedMemory_virtualbase_customEvent(self.h, event.h)
 
-type QSharedMemorycustomEventProc* = proc(event: gen_qcoreevent_types.QEvent): void
-proc oncustomEvent*(self: gen_qsharedmemory_types.QSharedMemory, slot: QSharedMemorycustomEventProc) =
-  # TODO check subclass
-  var tmp = new QSharedMemorycustomEventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQSharedMemory_override_virtual_customEvent(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QSharedMemory_customEvent(self: ptr cQSharedMemory, slot: int, event: pointer): void {.exportc: "miqt_exec_callback_QSharedMemory_customEvent ".} =
-  var nimfunc = cast[ptr QSharedMemorycustomEventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQSharedMemory_customEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QSharedMemoryVTable](vtbl)
+  let self = QSharedMemory(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  vtbl[].customEvent(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QSharedMemoryconnectNotify*(self: gen_qsharedmemory_types.QSharedMemory, signal: gen_qmetaobject_types.QMetaMethod): void =
-  fQSharedMemory_virtualbase_connectNotify(self.h, signal.h)
+  fcQSharedMemory_virtualbase_connectNotify(self.h, signal.h)
 
-type QSharedMemoryconnectNotifyProc* = proc(signal: gen_qmetaobject_types.QMetaMethod): void
-proc onconnectNotify*(self: gen_qsharedmemory_types.QSharedMemory, slot: QSharedMemoryconnectNotifyProc) =
-  # TODO check subclass
-  var tmp = new QSharedMemoryconnectNotifyProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQSharedMemory_override_virtual_connectNotify(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QSharedMemory_connectNotify(self: ptr cQSharedMemory, slot: int, signal: pointer): void {.exportc: "miqt_exec_callback_QSharedMemory_connectNotify ".} =
-  var nimfunc = cast[ptr QSharedMemoryconnectNotifyProc](cast[pointer](slot))
+proc miqt_exec_callback_cQSharedMemory_connectNotify(vtbl: pointer, self: pointer, signal: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QSharedMemoryVTable](vtbl)
+  let self = QSharedMemory(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  vtbl[].connectNotify(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QSharedMemorydisconnectNotify*(self: gen_qsharedmemory_types.QSharedMemory, signal: gen_qmetaobject_types.QMetaMethod): void =
-  fQSharedMemory_virtualbase_disconnectNotify(self.h, signal.h)
+  fcQSharedMemory_virtualbase_disconnectNotify(self.h, signal.h)
 
-type QSharedMemorydisconnectNotifyProc* = proc(signal: gen_qmetaobject_types.QMetaMethod): void
-proc ondisconnectNotify*(self: gen_qsharedmemory_types.QSharedMemory, slot: QSharedMemorydisconnectNotifyProc) =
-  # TODO check subclass
-  var tmp = new QSharedMemorydisconnectNotifyProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQSharedMemory_override_virtual_disconnectNotify(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QSharedMemory_disconnectNotify(self: ptr cQSharedMemory, slot: int, signal: pointer): void {.exportc: "miqt_exec_callback_QSharedMemory_disconnectNotify ".} =
-  var nimfunc = cast[ptr QSharedMemorydisconnectNotifyProc](cast[pointer](slot))
+proc miqt_exec_callback_cQSharedMemory_disconnectNotify(vtbl: pointer, self: pointer, signal: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QSharedMemoryVTable](vtbl)
+  let self = QSharedMemory(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  vtbl[].disconnectNotify(self, slotval1)
 
+proc create*(T: type gen_qsharedmemory_types.QSharedMemory,
+    vtbl: ref QSharedMemoryVTable = nil): gen_qsharedmemory_types.QSharedMemory =
+  let vtbl = if vtbl == nil: new QSharedMemoryVTable else: vtbl
+  GC_ref(vtbl)
+  vtbl.vtbl.destructor = proc(vtbl: ptr cQSharedMemoryVTable, _: ptr cQSharedMemory) {.cdecl.} =
+    let vtbl = cast[ref QSharedMemoryVTable](vtbl)
+    GC_unref(vtbl)
+  if not isNil(vtbl.metaObject):
+    vtbl[].vtbl.metaObject = miqt_exec_callback_cQSharedMemory_metaObject
+  if not isNil(vtbl.metacast):
+    vtbl[].vtbl.metacast = miqt_exec_callback_cQSharedMemory_metacast
+  if not isNil(vtbl.metacall):
+    vtbl[].vtbl.metacall = miqt_exec_callback_cQSharedMemory_metacall
+  if not isNil(vtbl.event):
+    vtbl[].vtbl.event = miqt_exec_callback_cQSharedMemory_event
+  if not isNil(vtbl.eventFilter):
+    vtbl[].vtbl.eventFilter = miqt_exec_callback_cQSharedMemory_eventFilter
+  if not isNil(vtbl.timerEvent):
+    vtbl[].vtbl.timerEvent = miqt_exec_callback_cQSharedMemory_timerEvent
+  if not isNil(vtbl.childEvent):
+    vtbl[].vtbl.childEvent = miqt_exec_callback_cQSharedMemory_childEvent
+  if not isNil(vtbl.customEvent):
+    vtbl[].vtbl.customEvent = miqt_exec_callback_cQSharedMemory_customEvent
+  if not isNil(vtbl.connectNotify):
+    vtbl[].vtbl.connectNotify = miqt_exec_callback_cQSharedMemory_connectNotify
+  if not isNil(vtbl.disconnectNotify):
+    vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQSharedMemory_disconnectNotify
+  gen_qsharedmemory_types.QSharedMemory(h: fcQSharedMemory_new(addr(vtbl[]), ))
 
-  nimfunc[](slotval1)
+proc create*(T: type gen_qsharedmemory_types.QSharedMemory,
+    key: string,
+    vtbl: ref QSharedMemoryVTable = nil): gen_qsharedmemory_types.QSharedMemory =
+  let vtbl = if vtbl == nil: new QSharedMemoryVTable else: vtbl
+  GC_ref(vtbl)
+  vtbl.vtbl.destructor = proc(vtbl: ptr cQSharedMemoryVTable, _: ptr cQSharedMemory) {.cdecl.} =
+    let vtbl = cast[ref QSharedMemoryVTable](vtbl)
+    GC_unref(vtbl)
+  if not isNil(vtbl.metaObject):
+    vtbl[].vtbl.metaObject = miqt_exec_callback_cQSharedMemory_metaObject
+  if not isNil(vtbl.metacast):
+    vtbl[].vtbl.metacast = miqt_exec_callback_cQSharedMemory_metacast
+  if not isNil(vtbl.metacall):
+    vtbl[].vtbl.metacall = miqt_exec_callback_cQSharedMemory_metacall
+  if not isNil(vtbl.event):
+    vtbl[].vtbl.event = miqt_exec_callback_cQSharedMemory_event
+  if not isNil(vtbl.eventFilter):
+    vtbl[].vtbl.eventFilter = miqt_exec_callback_cQSharedMemory_eventFilter
+  if not isNil(vtbl.timerEvent):
+    vtbl[].vtbl.timerEvent = miqt_exec_callback_cQSharedMemory_timerEvent
+  if not isNil(vtbl.childEvent):
+    vtbl[].vtbl.childEvent = miqt_exec_callback_cQSharedMemory_childEvent
+  if not isNil(vtbl.customEvent):
+    vtbl[].vtbl.customEvent = miqt_exec_callback_cQSharedMemory_customEvent
+  if not isNil(vtbl.connectNotify):
+    vtbl[].vtbl.connectNotify = miqt_exec_callback_cQSharedMemory_connectNotify
+  if not isNil(vtbl.disconnectNotify):
+    vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQSharedMemory_disconnectNotify
+  gen_qsharedmemory_types.QSharedMemory(h: fcQSharedMemory_new2(addr(vtbl[]), struct_miqt_string(data: key, len: csize_t(len(key)))))
+
+proc create*(T: type gen_qsharedmemory_types.QSharedMemory,
+    parent: gen_qobject_types.QObject,
+    vtbl: ref QSharedMemoryVTable = nil): gen_qsharedmemory_types.QSharedMemory =
+  let vtbl = if vtbl == nil: new QSharedMemoryVTable else: vtbl
+  GC_ref(vtbl)
+  vtbl.vtbl.destructor = proc(vtbl: ptr cQSharedMemoryVTable, _: ptr cQSharedMemory) {.cdecl.} =
+    let vtbl = cast[ref QSharedMemoryVTable](vtbl)
+    GC_unref(vtbl)
+  if not isNil(vtbl.metaObject):
+    vtbl[].vtbl.metaObject = miqt_exec_callback_cQSharedMemory_metaObject
+  if not isNil(vtbl.metacast):
+    vtbl[].vtbl.metacast = miqt_exec_callback_cQSharedMemory_metacast
+  if not isNil(vtbl.metacall):
+    vtbl[].vtbl.metacall = miqt_exec_callback_cQSharedMemory_metacall
+  if not isNil(vtbl.event):
+    vtbl[].vtbl.event = miqt_exec_callback_cQSharedMemory_event
+  if not isNil(vtbl.eventFilter):
+    vtbl[].vtbl.eventFilter = miqt_exec_callback_cQSharedMemory_eventFilter
+  if not isNil(vtbl.timerEvent):
+    vtbl[].vtbl.timerEvent = miqt_exec_callback_cQSharedMemory_timerEvent
+  if not isNil(vtbl.childEvent):
+    vtbl[].vtbl.childEvent = miqt_exec_callback_cQSharedMemory_childEvent
+  if not isNil(vtbl.customEvent):
+    vtbl[].vtbl.customEvent = miqt_exec_callback_cQSharedMemory_customEvent
+  if not isNil(vtbl.connectNotify):
+    vtbl[].vtbl.connectNotify = miqt_exec_callback_cQSharedMemory_connectNotify
+  if not isNil(vtbl.disconnectNotify):
+    vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQSharedMemory_disconnectNotify
+  gen_qsharedmemory_types.QSharedMemory(h: fcQSharedMemory_new3(addr(vtbl[]), parent.h))
+
+proc create*(T: type gen_qsharedmemory_types.QSharedMemory,
+    key: string, parent: gen_qobject_types.QObject,
+    vtbl: ref QSharedMemoryVTable = nil): gen_qsharedmemory_types.QSharedMemory =
+  let vtbl = if vtbl == nil: new QSharedMemoryVTable else: vtbl
+  GC_ref(vtbl)
+  vtbl.vtbl.destructor = proc(vtbl: ptr cQSharedMemoryVTable, _: ptr cQSharedMemory) {.cdecl.} =
+    let vtbl = cast[ref QSharedMemoryVTable](vtbl)
+    GC_unref(vtbl)
+  if not isNil(vtbl.metaObject):
+    vtbl[].vtbl.metaObject = miqt_exec_callback_cQSharedMemory_metaObject
+  if not isNil(vtbl.metacast):
+    vtbl[].vtbl.metacast = miqt_exec_callback_cQSharedMemory_metacast
+  if not isNil(vtbl.metacall):
+    vtbl[].vtbl.metacall = miqt_exec_callback_cQSharedMemory_metacall
+  if not isNil(vtbl.event):
+    vtbl[].vtbl.event = miqt_exec_callback_cQSharedMemory_event
+  if not isNil(vtbl.eventFilter):
+    vtbl[].vtbl.eventFilter = miqt_exec_callback_cQSharedMemory_eventFilter
+  if not isNil(vtbl.timerEvent):
+    vtbl[].vtbl.timerEvent = miqt_exec_callback_cQSharedMemory_timerEvent
+  if not isNil(vtbl.childEvent):
+    vtbl[].vtbl.childEvent = miqt_exec_callback_cQSharedMemory_childEvent
+  if not isNil(vtbl.customEvent):
+    vtbl[].vtbl.customEvent = miqt_exec_callback_cQSharedMemory_customEvent
+  if not isNil(vtbl.connectNotify):
+    vtbl[].vtbl.connectNotify = miqt_exec_callback_cQSharedMemory_connectNotify
+  if not isNil(vtbl.disconnectNotify):
+    vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQSharedMemory_disconnectNotify
+  gen_qsharedmemory_types.QSharedMemory(h: fcQSharedMemory_new4(addr(vtbl[]), struct_miqt_string(data: key, len: csize_t(len(key))), parent.h))
+
 proc staticMetaObject*(_: type gen_qsharedmemory_types.QSharedMemory): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQSharedMemory_staticMetaObject())
 proc delete*(self: gen_qsharedmemory_types.QSharedMemory) =

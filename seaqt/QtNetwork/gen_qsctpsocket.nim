@@ -58,8 +58,6 @@ export
 
 type cQSctpSocket*{.exportc: "QSctpSocket", incompleteStruct.} = object
 
-proc fcQSctpSocket_new(): ptr cQSctpSocket {.importc: "QSctpSocket_new".}
-proc fcQSctpSocket_new2(parent: pointer): ptr cQSctpSocket {.importc: "QSctpSocket_new2".}
 proc fcQSctpSocket_metaObject(self: pointer, ): pointer {.importc: "QSctpSocket_metaObject".}
 proc fcQSctpSocket_metacast(self: pointer, param1: cstring): pointer {.importc: "QSctpSocket_metacast".}
 proc fcQSctpSocket_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QSctpSocket_metacall".}
@@ -73,93 +71,88 @@ proc fcQSctpSocket_readDatagram(self: pointer, ): pointer {.importc: "QSctpSocke
 proc fcQSctpSocket_writeDatagram(self: pointer, datagram: pointer): bool {.importc: "QSctpSocket_writeDatagram".}
 proc fcQSctpSocket_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QSctpSocket_tr2".}
 proc fcQSctpSocket_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QSctpSocket_tr3".}
-proc fQSctpSocket_virtualbase_metaObject(self: pointer, ): pointer{.importc: "QSctpSocket_virtualbase_metaObject".}
-proc fcQSctpSocket_override_virtual_metaObject(self: pointer, slot: int) {.importc: "QSctpSocket_override_virtual_metaObject".}
-proc fQSctpSocket_virtualbase_metacast(self: pointer, param1: cstring): pointer{.importc: "QSctpSocket_virtualbase_metacast".}
-proc fcQSctpSocket_override_virtual_metacast(self: pointer, slot: int) {.importc: "QSctpSocket_override_virtual_metacast".}
-proc fQSctpSocket_virtualbase_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint{.importc: "QSctpSocket_virtualbase_metacall".}
-proc fcQSctpSocket_override_virtual_metacall(self: pointer, slot: int) {.importc: "QSctpSocket_override_virtual_metacall".}
-proc fQSctpSocket_virtualbase_close(self: pointer, ): void{.importc: "QSctpSocket_virtualbase_close".}
-proc fcQSctpSocket_override_virtual_close(self: pointer, slot: int) {.importc: "QSctpSocket_override_virtual_close".}
-proc fQSctpSocket_virtualbase_disconnectFromHost(self: pointer, ): void{.importc: "QSctpSocket_virtualbase_disconnectFromHost".}
-proc fcQSctpSocket_override_virtual_disconnectFromHost(self: pointer, slot: int) {.importc: "QSctpSocket_override_virtual_disconnectFromHost".}
-proc fQSctpSocket_virtualbase_readData(self: pointer, data: cstring, maxlen: clonglong): clonglong{.importc: "QSctpSocket_virtualbase_readData".}
-proc fcQSctpSocket_override_virtual_readData(self: pointer, slot: int) {.importc: "QSctpSocket_override_virtual_readData".}
-proc fQSctpSocket_virtualbase_readLineData(self: pointer, data: cstring, maxlen: clonglong): clonglong{.importc: "QSctpSocket_virtualbase_readLineData".}
-proc fcQSctpSocket_override_virtual_readLineData(self: pointer, slot: int) {.importc: "QSctpSocket_override_virtual_readLineData".}
-proc fQSctpSocket_virtualbase_resume(self: pointer, ): void{.importc: "QSctpSocket_virtualbase_resume".}
-proc fcQSctpSocket_override_virtual_resume(self: pointer, slot: int) {.importc: "QSctpSocket_override_virtual_resume".}
-proc fQSctpSocket_virtualbase_bind(self: pointer, address: pointer, port: cushort, mode: cint): bool{.importc: "QSctpSocket_virtualbase_bind".}
-proc fcQSctpSocket_override_virtual_bindX(self: pointer, slot: int) {.importc: "QSctpSocket_override_virtual_bind".}
-proc fQSctpSocket_virtualbase_connectToHost(self: pointer, hostName: struct_miqt_string, port: cushort, mode: cint, protocol: cint): void{.importc: "QSctpSocket_virtualbase_connectToHost".}
-proc fcQSctpSocket_override_virtual_connectToHost(self: pointer, slot: int) {.importc: "QSctpSocket_override_virtual_connectToHost".}
-proc fQSctpSocket_virtualbase_bytesAvailable(self: pointer, ): clonglong{.importc: "QSctpSocket_virtualbase_bytesAvailable".}
-proc fcQSctpSocket_override_virtual_bytesAvailable(self: pointer, slot: int) {.importc: "QSctpSocket_override_virtual_bytesAvailable".}
-proc fQSctpSocket_virtualbase_bytesToWrite(self: pointer, ): clonglong{.importc: "QSctpSocket_virtualbase_bytesToWrite".}
-proc fcQSctpSocket_override_virtual_bytesToWrite(self: pointer, slot: int) {.importc: "QSctpSocket_override_virtual_bytesToWrite".}
-proc fQSctpSocket_virtualbase_setReadBufferSize(self: pointer, size: clonglong): void{.importc: "QSctpSocket_virtualbase_setReadBufferSize".}
-proc fcQSctpSocket_override_virtual_setReadBufferSize(self: pointer, slot: int) {.importc: "QSctpSocket_override_virtual_setReadBufferSize".}
-proc fQSctpSocket_virtualbase_socketDescriptor(self: pointer, ): uint{.importc: "QSctpSocket_virtualbase_socketDescriptor".}
-proc fcQSctpSocket_override_virtual_socketDescriptor(self: pointer, slot: int) {.importc: "QSctpSocket_override_virtual_socketDescriptor".}
-proc fQSctpSocket_virtualbase_setSocketDescriptor(self: pointer, socketDescriptor: uint, state: cint, openMode: cint): bool{.importc: "QSctpSocket_virtualbase_setSocketDescriptor".}
-proc fcQSctpSocket_override_virtual_setSocketDescriptor(self: pointer, slot: int) {.importc: "QSctpSocket_override_virtual_setSocketDescriptor".}
-proc fQSctpSocket_virtualbase_setSocketOption(self: pointer, option: cint, value: pointer): void{.importc: "QSctpSocket_virtualbase_setSocketOption".}
-proc fcQSctpSocket_override_virtual_setSocketOption(self: pointer, slot: int) {.importc: "QSctpSocket_override_virtual_setSocketOption".}
-proc fQSctpSocket_virtualbase_socketOption(self: pointer, option: cint): pointer{.importc: "QSctpSocket_virtualbase_socketOption".}
-proc fcQSctpSocket_override_virtual_socketOption(self: pointer, slot: int) {.importc: "QSctpSocket_override_virtual_socketOption".}
-proc fQSctpSocket_virtualbase_isSequential(self: pointer, ): bool{.importc: "QSctpSocket_virtualbase_isSequential".}
-proc fcQSctpSocket_override_virtual_isSequential(self: pointer, slot: int) {.importc: "QSctpSocket_override_virtual_isSequential".}
-proc fQSctpSocket_virtualbase_waitForConnected(self: pointer, msecs: cint): bool{.importc: "QSctpSocket_virtualbase_waitForConnected".}
-proc fcQSctpSocket_override_virtual_waitForConnected(self: pointer, slot: int) {.importc: "QSctpSocket_override_virtual_waitForConnected".}
-proc fQSctpSocket_virtualbase_waitForReadyRead(self: pointer, msecs: cint): bool{.importc: "QSctpSocket_virtualbase_waitForReadyRead".}
-proc fcQSctpSocket_override_virtual_waitForReadyRead(self: pointer, slot: int) {.importc: "QSctpSocket_override_virtual_waitForReadyRead".}
-proc fQSctpSocket_virtualbase_waitForBytesWritten(self: pointer, msecs: cint): bool{.importc: "QSctpSocket_virtualbase_waitForBytesWritten".}
-proc fcQSctpSocket_override_virtual_waitForBytesWritten(self: pointer, slot: int) {.importc: "QSctpSocket_override_virtual_waitForBytesWritten".}
-proc fQSctpSocket_virtualbase_waitForDisconnected(self: pointer, msecs: cint): bool{.importc: "QSctpSocket_virtualbase_waitForDisconnected".}
-proc fcQSctpSocket_override_virtual_waitForDisconnected(self: pointer, slot: int) {.importc: "QSctpSocket_override_virtual_waitForDisconnected".}
-proc fQSctpSocket_virtualbase_skipData(self: pointer, maxSize: clonglong): clonglong{.importc: "QSctpSocket_virtualbase_skipData".}
-proc fcQSctpSocket_override_virtual_skipData(self: pointer, slot: int) {.importc: "QSctpSocket_override_virtual_skipData".}
-proc fQSctpSocket_virtualbase_writeData(self: pointer, data: cstring, len: clonglong): clonglong{.importc: "QSctpSocket_virtualbase_writeData".}
-proc fcQSctpSocket_override_virtual_writeData(self: pointer, slot: int) {.importc: "QSctpSocket_override_virtual_writeData".}
-proc fQSctpSocket_virtualbase_open(self: pointer, mode: cint): bool{.importc: "QSctpSocket_virtualbase_open".}
-proc fcQSctpSocket_override_virtual_open(self: pointer, slot: int) {.importc: "QSctpSocket_override_virtual_open".}
-proc fQSctpSocket_virtualbase_pos(self: pointer, ): clonglong{.importc: "QSctpSocket_virtualbase_pos".}
-proc fcQSctpSocket_override_virtual_pos(self: pointer, slot: int) {.importc: "QSctpSocket_override_virtual_pos".}
-proc fQSctpSocket_virtualbase_size(self: pointer, ): clonglong{.importc: "QSctpSocket_virtualbase_size".}
-proc fcQSctpSocket_override_virtual_size(self: pointer, slot: int) {.importc: "QSctpSocket_override_virtual_size".}
-proc fQSctpSocket_virtualbase_seek(self: pointer, pos: clonglong): bool{.importc: "QSctpSocket_virtualbase_seek".}
-proc fcQSctpSocket_override_virtual_seek(self: pointer, slot: int) {.importc: "QSctpSocket_override_virtual_seek".}
-proc fQSctpSocket_virtualbase_atEnd(self: pointer, ): bool{.importc: "QSctpSocket_virtualbase_atEnd".}
-proc fcQSctpSocket_override_virtual_atEnd(self: pointer, slot: int) {.importc: "QSctpSocket_override_virtual_atEnd".}
-proc fQSctpSocket_virtualbase_reset(self: pointer, ): bool{.importc: "QSctpSocket_virtualbase_reset".}
-proc fcQSctpSocket_override_virtual_reset(self: pointer, slot: int) {.importc: "QSctpSocket_override_virtual_reset".}
-proc fQSctpSocket_virtualbase_canReadLine(self: pointer, ): bool{.importc: "QSctpSocket_virtualbase_canReadLine".}
-proc fcQSctpSocket_override_virtual_canReadLine(self: pointer, slot: int) {.importc: "QSctpSocket_override_virtual_canReadLine".}
-proc fQSctpSocket_virtualbase_event(self: pointer, event: pointer): bool{.importc: "QSctpSocket_virtualbase_event".}
-proc fcQSctpSocket_override_virtual_event(self: pointer, slot: int) {.importc: "QSctpSocket_override_virtual_event".}
-proc fQSctpSocket_virtualbase_eventFilter(self: pointer, watched: pointer, event: pointer): bool{.importc: "QSctpSocket_virtualbase_eventFilter".}
-proc fcQSctpSocket_override_virtual_eventFilter(self: pointer, slot: int) {.importc: "QSctpSocket_override_virtual_eventFilter".}
-proc fQSctpSocket_virtualbase_timerEvent(self: pointer, event: pointer): void{.importc: "QSctpSocket_virtualbase_timerEvent".}
-proc fcQSctpSocket_override_virtual_timerEvent(self: pointer, slot: int) {.importc: "QSctpSocket_override_virtual_timerEvent".}
-proc fQSctpSocket_virtualbase_childEvent(self: pointer, event: pointer): void{.importc: "QSctpSocket_virtualbase_childEvent".}
-proc fcQSctpSocket_override_virtual_childEvent(self: pointer, slot: int) {.importc: "QSctpSocket_override_virtual_childEvent".}
-proc fQSctpSocket_virtualbase_customEvent(self: pointer, event: pointer): void{.importc: "QSctpSocket_virtualbase_customEvent".}
-proc fcQSctpSocket_override_virtual_customEvent(self: pointer, slot: int) {.importc: "QSctpSocket_override_virtual_customEvent".}
-proc fQSctpSocket_virtualbase_connectNotify(self: pointer, signal: pointer): void{.importc: "QSctpSocket_virtualbase_connectNotify".}
-proc fcQSctpSocket_override_virtual_connectNotify(self: pointer, slot: int) {.importc: "QSctpSocket_override_virtual_connectNotify".}
-proc fQSctpSocket_virtualbase_disconnectNotify(self: pointer, signal: pointer): void{.importc: "QSctpSocket_virtualbase_disconnectNotify".}
-proc fcQSctpSocket_override_virtual_disconnectNotify(self: pointer, slot: int) {.importc: "QSctpSocket_override_virtual_disconnectNotify".}
+type cQSctpSocketVTable = object
+  destructor*: proc(vtbl: ptr cQSctpSocketVTable, self: ptr cQSctpSocket) {.cdecl, raises:[], gcsafe.}
+  metaObject*: proc(vtbl, self: pointer, ): pointer {.cdecl, raises: [], gcsafe.}
+  metacast*: proc(vtbl, self: pointer, param1: cstring): pointer {.cdecl, raises: [], gcsafe.}
+  metacall*: proc(vtbl, self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl, raises: [], gcsafe.}
+  close*: proc(vtbl, self: pointer, ): void {.cdecl, raises: [], gcsafe.}
+  disconnectFromHost*: proc(vtbl, self: pointer, ): void {.cdecl, raises: [], gcsafe.}
+  readData*: proc(vtbl, self: pointer, data: cstring, maxlen: clonglong): clonglong {.cdecl, raises: [], gcsafe.}
+  readLineData*: proc(vtbl, self: pointer, data: cstring, maxlen: clonglong): clonglong {.cdecl, raises: [], gcsafe.}
+  resume*: proc(vtbl, self: pointer, ): void {.cdecl, raises: [], gcsafe.}
+  bindX*: proc(vtbl, self: pointer, address: pointer, port: cushort, mode: cint): bool {.cdecl, raises: [], gcsafe.}
+  connectToHost*: proc(vtbl, self: pointer, hostName: struct_miqt_string, port: cushort, mode: cint, protocol: cint): void {.cdecl, raises: [], gcsafe.}
+  bytesAvailable*: proc(vtbl, self: pointer, ): clonglong {.cdecl, raises: [], gcsafe.}
+  bytesToWrite*: proc(vtbl, self: pointer, ): clonglong {.cdecl, raises: [], gcsafe.}
+  setReadBufferSize*: proc(vtbl, self: pointer, size: clonglong): void {.cdecl, raises: [], gcsafe.}
+  socketDescriptor*: proc(vtbl, self: pointer, ): uint {.cdecl, raises: [], gcsafe.}
+  setSocketDescriptor*: proc(vtbl, self: pointer, socketDescriptor: uint, state: cint, openMode: cint): bool {.cdecl, raises: [], gcsafe.}
+  setSocketOption*: proc(vtbl, self: pointer, option: cint, value: pointer): void {.cdecl, raises: [], gcsafe.}
+  socketOption*: proc(vtbl, self: pointer, option: cint): pointer {.cdecl, raises: [], gcsafe.}
+  isSequential*: proc(vtbl, self: pointer, ): bool {.cdecl, raises: [], gcsafe.}
+  waitForConnected*: proc(vtbl, self: pointer, msecs: cint): bool {.cdecl, raises: [], gcsafe.}
+  waitForReadyRead*: proc(vtbl, self: pointer, msecs: cint): bool {.cdecl, raises: [], gcsafe.}
+  waitForBytesWritten*: proc(vtbl, self: pointer, msecs: cint): bool {.cdecl, raises: [], gcsafe.}
+  waitForDisconnected*: proc(vtbl, self: pointer, msecs: cint): bool {.cdecl, raises: [], gcsafe.}
+  skipData*: proc(vtbl, self: pointer, maxSize: clonglong): clonglong {.cdecl, raises: [], gcsafe.}
+  writeData*: proc(vtbl, self: pointer, data: cstring, len: clonglong): clonglong {.cdecl, raises: [], gcsafe.}
+  open*: proc(vtbl, self: pointer, mode: cint): bool {.cdecl, raises: [], gcsafe.}
+  pos*: proc(vtbl, self: pointer, ): clonglong {.cdecl, raises: [], gcsafe.}
+  size*: proc(vtbl, self: pointer, ): clonglong {.cdecl, raises: [], gcsafe.}
+  seek*: proc(vtbl, self: pointer, pos: clonglong): bool {.cdecl, raises: [], gcsafe.}
+  atEnd*: proc(vtbl, self: pointer, ): bool {.cdecl, raises: [], gcsafe.}
+  reset*: proc(vtbl, self: pointer, ): bool {.cdecl, raises: [], gcsafe.}
+  canReadLine*: proc(vtbl, self: pointer, ): bool {.cdecl, raises: [], gcsafe.}
+  event*: proc(vtbl, self: pointer, event: pointer): bool {.cdecl, raises: [], gcsafe.}
+  eventFilter*: proc(vtbl, self: pointer, watched: pointer, event: pointer): bool {.cdecl, raises: [], gcsafe.}
+  timerEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  childEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  customEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  connectNotify*: proc(vtbl, self: pointer, signal: pointer): void {.cdecl, raises: [], gcsafe.}
+  disconnectNotify*: proc(vtbl, self: pointer, signal: pointer): void {.cdecl, raises: [], gcsafe.}
+proc fcQSctpSocket_virtualbase_metaObject(self: pointer, ): pointer {.importc: "QSctpSocket_virtualbase_metaObject".}
+proc fcQSctpSocket_virtualbase_metacast(self: pointer, param1: cstring): pointer {.importc: "QSctpSocket_virtualbase_metacast".}
+proc fcQSctpSocket_virtualbase_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QSctpSocket_virtualbase_metacall".}
+proc fcQSctpSocket_virtualbase_close(self: pointer, ): void {.importc: "QSctpSocket_virtualbase_close".}
+proc fcQSctpSocket_virtualbase_disconnectFromHost(self: pointer, ): void {.importc: "QSctpSocket_virtualbase_disconnectFromHost".}
+proc fcQSctpSocket_virtualbase_readData(self: pointer, data: cstring, maxlen: clonglong): clonglong {.importc: "QSctpSocket_virtualbase_readData".}
+proc fcQSctpSocket_virtualbase_readLineData(self: pointer, data: cstring, maxlen: clonglong): clonglong {.importc: "QSctpSocket_virtualbase_readLineData".}
+proc fcQSctpSocket_virtualbase_resume(self: pointer, ): void {.importc: "QSctpSocket_virtualbase_resume".}
+proc fcQSctpSocket_virtualbase_bindX(self: pointer, address: pointer, port: cushort, mode: cint): bool {.importc: "QSctpSocket_virtualbase_bind".}
+proc fcQSctpSocket_virtualbase_connectToHost(self: pointer, hostName: struct_miqt_string, port: cushort, mode: cint, protocol: cint): void {.importc: "QSctpSocket_virtualbase_connectToHost".}
+proc fcQSctpSocket_virtualbase_bytesAvailable(self: pointer, ): clonglong {.importc: "QSctpSocket_virtualbase_bytesAvailable".}
+proc fcQSctpSocket_virtualbase_bytesToWrite(self: pointer, ): clonglong {.importc: "QSctpSocket_virtualbase_bytesToWrite".}
+proc fcQSctpSocket_virtualbase_setReadBufferSize(self: pointer, size: clonglong): void {.importc: "QSctpSocket_virtualbase_setReadBufferSize".}
+proc fcQSctpSocket_virtualbase_socketDescriptor(self: pointer, ): uint {.importc: "QSctpSocket_virtualbase_socketDescriptor".}
+proc fcQSctpSocket_virtualbase_setSocketDescriptor(self: pointer, socketDescriptor: uint, state: cint, openMode: cint): bool {.importc: "QSctpSocket_virtualbase_setSocketDescriptor".}
+proc fcQSctpSocket_virtualbase_setSocketOption(self: pointer, option: cint, value: pointer): void {.importc: "QSctpSocket_virtualbase_setSocketOption".}
+proc fcQSctpSocket_virtualbase_socketOption(self: pointer, option: cint): pointer {.importc: "QSctpSocket_virtualbase_socketOption".}
+proc fcQSctpSocket_virtualbase_isSequential(self: pointer, ): bool {.importc: "QSctpSocket_virtualbase_isSequential".}
+proc fcQSctpSocket_virtualbase_waitForConnected(self: pointer, msecs: cint): bool {.importc: "QSctpSocket_virtualbase_waitForConnected".}
+proc fcQSctpSocket_virtualbase_waitForReadyRead(self: pointer, msecs: cint): bool {.importc: "QSctpSocket_virtualbase_waitForReadyRead".}
+proc fcQSctpSocket_virtualbase_waitForBytesWritten(self: pointer, msecs: cint): bool {.importc: "QSctpSocket_virtualbase_waitForBytesWritten".}
+proc fcQSctpSocket_virtualbase_waitForDisconnected(self: pointer, msecs: cint): bool {.importc: "QSctpSocket_virtualbase_waitForDisconnected".}
+proc fcQSctpSocket_virtualbase_skipData(self: pointer, maxSize: clonglong): clonglong {.importc: "QSctpSocket_virtualbase_skipData".}
+proc fcQSctpSocket_virtualbase_writeData(self: pointer, data: cstring, len: clonglong): clonglong {.importc: "QSctpSocket_virtualbase_writeData".}
+proc fcQSctpSocket_virtualbase_open(self: pointer, mode: cint): bool {.importc: "QSctpSocket_virtualbase_open".}
+proc fcQSctpSocket_virtualbase_pos(self: pointer, ): clonglong {.importc: "QSctpSocket_virtualbase_pos".}
+proc fcQSctpSocket_virtualbase_size(self: pointer, ): clonglong {.importc: "QSctpSocket_virtualbase_size".}
+proc fcQSctpSocket_virtualbase_seek(self: pointer, pos: clonglong): bool {.importc: "QSctpSocket_virtualbase_seek".}
+proc fcQSctpSocket_virtualbase_atEnd(self: pointer, ): bool {.importc: "QSctpSocket_virtualbase_atEnd".}
+proc fcQSctpSocket_virtualbase_reset(self: pointer, ): bool {.importc: "QSctpSocket_virtualbase_reset".}
+proc fcQSctpSocket_virtualbase_canReadLine(self: pointer, ): bool {.importc: "QSctpSocket_virtualbase_canReadLine".}
+proc fcQSctpSocket_virtualbase_event(self: pointer, event: pointer): bool {.importc: "QSctpSocket_virtualbase_event".}
+proc fcQSctpSocket_virtualbase_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.importc: "QSctpSocket_virtualbase_eventFilter".}
+proc fcQSctpSocket_virtualbase_timerEvent(self: pointer, event: pointer): void {.importc: "QSctpSocket_virtualbase_timerEvent".}
+proc fcQSctpSocket_virtualbase_childEvent(self: pointer, event: pointer): void {.importc: "QSctpSocket_virtualbase_childEvent".}
+proc fcQSctpSocket_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QSctpSocket_virtualbase_customEvent".}
+proc fcQSctpSocket_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QSctpSocket_virtualbase_connectNotify".}
+proc fcQSctpSocket_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QSctpSocket_virtualbase_disconnectNotify".}
+proc fcQSctpSocket_new(vtbl: pointer, ): ptr cQSctpSocket {.importc: "QSctpSocket_new".}
+proc fcQSctpSocket_new2(vtbl: pointer, parent: pointer): ptr cQSctpSocket {.importc: "QSctpSocket_new2".}
 proc fcQSctpSocket_staticMetaObject(): pointer {.importc: "QSctpSocket_staticMetaObject".}
 proc fcQSctpSocket_delete(self: pointer) {.importc: "QSctpSocket_delete".}
-
-
-func init*(T: type gen_qsctpsocket_types.QSctpSocket, h: ptr cQSctpSocket): gen_qsctpsocket_types.QSctpSocket =
-  T(h: h)
-proc create*(T: type gen_qsctpsocket_types.QSctpSocket, ): gen_qsctpsocket_types.QSctpSocket =
-  gen_qsctpsocket_types.QSctpSocket.init(fcQSctpSocket_new())
-
-proc create*(T: type gen_qsctpsocket_types.QSctpSocket, parent: gen_qobject_types.QObject): gen_qsctpsocket_types.QSctpSocket =
-  gen_qsctpsocket_types.QSctpSocket.init(fcQSctpSocket_new2(parent.h))
 
 proc metaObject*(self: gen_qsctpsocket_types.QSctpSocket, ): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQSctpSocket_metaObject(self.h))
@@ -209,711 +202,628 @@ proc tr*(_: type gen_qsctpsocket_types.QSctpSocket, s: cstring, c: cstring, n: c
   c_free(v_ms.data)
   vx_ret
 
+type QSctpSocketmetaObjectProc* = proc(self: QSctpSocket): gen_qobjectdefs_types.QMetaObject {.raises: [], gcsafe.}
+type QSctpSocketmetacastProc* = proc(self: QSctpSocket, param1: cstring): pointer {.raises: [], gcsafe.}
+type QSctpSocketmetacallProc* = proc(self: QSctpSocket, param1: cint, param2: cint, param3: pointer): cint {.raises: [], gcsafe.}
+type QSctpSocketcloseProc* = proc(self: QSctpSocket): void {.raises: [], gcsafe.}
+type QSctpSocketdisconnectFromHostProc* = proc(self: QSctpSocket): void {.raises: [], gcsafe.}
+type QSctpSocketreadDataProc* = proc(self: QSctpSocket, data: cstring, maxlen: clonglong): clonglong {.raises: [], gcsafe.}
+type QSctpSocketreadLineDataProc* = proc(self: QSctpSocket, data: cstring, maxlen: clonglong): clonglong {.raises: [], gcsafe.}
+type QSctpSocketresumeProc* = proc(self: QSctpSocket): void {.raises: [], gcsafe.}
+type QSctpSocketbindXProc* = proc(self: QSctpSocket, address: gen_qhostaddress_types.QHostAddress, port: cushort, mode: cint): bool {.raises: [], gcsafe.}
+type QSctpSocketconnectToHostProc* = proc(self: QSctpSocket, hostName: string, port: cushort, mode: cint, protocol: cint): void {.raises: [], gcsafe.}
+type QSctpSocketbytesAvailableProc* = proc(self: QSctpSocket): clonglong {.raises: [], gcsafe.}
+type QSctpSocketbytesToWriteProc* = proc(self: QSctpSocket): clonglong {.raises: [], gcsafe.}
+type QSctpSocketsetReadBufferSizeProc* = proc(self: QSctpSocket, size: clonglong): void {.raises: [], gcsafe.}
+type QSctpSocketsocketDescriptorProc* = proc(self: QSctpSocket): uint {.raises: [], gcsafe.}
+type QSctpSocketsetSocketDescriptorProc* = proc(self: QSctpSocket, socketDescriptor: uint, state: cint, openMode: cint): bool {.raises: [], gcsafe.}
+type QSctpSocketsetSocketOptionProc* = proc(self: QSctpSocket, option: cint, value: gen_qvariant_types.QVariant): void {.raises: [], gcsafe.}
+type QSctpSocketsocketOptionProc* = proc(self: QSctpSocket, option: cint): gen_qvariant_types.QVariant {.raises: [], gcsafe.}
+type QSctpSocketisSequentialProc* = proc(self: QSctpSocket): bool {.raises: [], gcsafe.}
+type QSctpSocketwaitForConnectedProc* = proc(self: QSctpSocket, msecs: cint): bool {.raises: [], gcsafe.}
+type QSctpSocketwaitForReadyReadProc* = proc(self: QSctpSocket, msecs: cint): bool {.raises: [], gcsafe.}
+type QSctpSocketwaitForBytesWrittenProc* = proc(self: QSctpSocket, msecs: cint): bool {.raises: [], gcsafe.}
+type QSctpSocketwaitForDisconnectedProc* = proc(self: QSctpSocket, msecs: cint): bool {.raises: [], gcsafe.}
+type QSctpSocketskipDataProc* = proc(self: QSctpSocket, maxSize: clonglong): clonglong {.raises: [], gcsafe.}
+type QSctpSocketwriteDataProc* = proc(self: QSctpSocket, data: cstring, len: clonglong): clonglong {.raises: [], gcsafe.}
+type QSctpSocketopenProc* = proc(self: QSctpSocket, mode: cint): bool {.raises: [], gcsafe.}
+type QSctpSocketposProc* = proc(self: QSctpSocket): clonglong {.raises: [], gcsafe.}
+type QSctpSocketsizeProc* = proc(self: QSctpSocket): clonglong {.raises: [], gcsafe.}
+type QSctpSocketseekProc* = proc(self: QSctpSocket, pos: clonglong): bool {.raises: [], gcsafe.}
+type QSctpSocketatEndProc* = proc(self: QSctpSocket): bool {.raises: [], gcsafe.}
+type QSctpSocketresetProc* = proc(self: QSctpSocket): bool {.raises: [], gcsafe.}
+type QSctpSocketcanReadLineProc* = proc(self: QSctpSocket): bool {.raises: [], gcsafe.}
+type QSctpSocketeventProc* = proc(self: QSctpSocket, event: gen_qcoreevent_types.QEvent): bool {.raises: [], gcsafe.}
+type QSctpSocketeventFilterProc* = proc(self: QSctpSocket, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.raises: [], gcsafe.}
+type QSctpSockettimerEventProc* = proc(self: QSctpSocket, event: gen_qcoreevent_types.QTimerEvent): void {.raises: [], gcsafe.}
+type QSctpSocketchildEventProc* = proc(self: QSctpSocket, event: gen_qcoreevent_types.QChildEvent): void {.raises: [], gcsafe.}
+type QSctpSocketcustomEventProc* = proc(self: QSctpSocket, event: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
+type QSctpSocketconnectNotifyProc* = proc(self: QSctpSocket, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
+type QSctpSocketdisconnectNotifyProc* = proc(self: QSctpSocket, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
+type QSctpSocketVTable* = object
+  vtbl: cQSctpSocketVTable
+  metaObject*: QSctpSocketmetaObjectProc
+  metacast*: QSctpSocketmetacastProc
+  metacall*: QSctpSocketmetacallProc
+  close*: QSctpSocketcloseProc
+  disconnectFromHost*: QSctpSocketdisconnectFromHostProc
+  readData*: QSctpSocketreadDataProc
+  readLineData*: QSctpSocketreadLineDataProc
+  resume*: QSctpSocketresumeProc
+  bindX*: QSctpSocketbindXProc
+  connectToHost*: QSctpSocketconnectToHostProc
+  bytesAvailable*: QSctpSocketbytesAvailableProc
+  bytesToWrite*: QSctpSocketbytesToWriteProc
+  setReadBufferSize*: QSctpSocketsetReadBufferSizeProc
+  socketDescriptor*: QSctpSocketsocketDescriptorProc
+  setSocketDescriptor*: QSctpSocketsetSocketDescriptorProc
+  setSocketOption*: QSctpSocketsetSocketOptionProc
+  socketOption*: QSctpSocketsocketOptionProc
+  isSequential*: QSctpSocketisSequentialProc
+  waitForConnected*: QSctpSocketwaitForConnectedProc
+  waitForReadyRead*: QSctpSocketwaitForReadyReadProc
+  waitForBytesWritten*: QSctpSocketwaitForBytesWrittenProc
+  waitForDisconnected*: QSctpSocketwaitForDisconnectedProc
+  skipData*: QSctpSocketskipDataProc
+  writeData*: QSctpSocketwriteDataProc
+  open*: QSctpSocketopenProc
+  pos*: QSctpSocketposProc
+  size*: QSctpSocketsizeProc
+  seek*: QSctpSocketseekProc
+  atEnd*: QSctpSocketatEndProc
+  reset*: QSctpSocketresetProc
+  canReadLine*: QSctpSocketcanReadLineProc
+  event*: QSctpSocketeventProc
+  eventFilter*: QSctpSocketeventFilterProc
+  timerEvent*: QSctpSockettimerEventProc
+  childEvent*: QSctpSocketchildEventProc
+  customEvent*: QSctpSocketcustomEventProc
+  connectNotify*: QSctpSocketconnectNotifyProc
+  disconnectNotify*: QSctpSocketdisconnectNotifyProc
 proc QSctpSocketmetaObject*(self: gen_qsctpsocket_types.QSctpSocket, ): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fQSctpSocket_virtualbase_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQSctpSocket_virtualbase_metaObject(self.h))
 
-type QSctpSocketmetaObjectProc* = proc(): gen_qobjectdefs_types.QMetaObject
-proc onmetaObject*(self: gen_qsctpsocket_types.QSctpSocket, slot: QSctpSocketmetaObjectProc) =
-  # TODO check subclass
-  var tmp = new QSctpSocketmetaObjectProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQSctpSocket_override_virtual_metaObject(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QSctpSocket_metaObject(self: ptr cQSctpSocket, slot: int): pointer {.exportc: "miqt_exec_callback_QSctpSocket_metaObject ".} =
-  var nimfunc = cast[ptr QSctpSocketmetaObjectProc](cast[pointer](slot))
-
-  let virtualReturn = nimfunc[]( )
-
+proc miqt_exec_callback_cQSctpSocket_metaObject(vtbl: pointer, self: pointer): pointer {.cdecl.} =
+  let vtbl = cast[ptr QSctpSocketVTable](vtbl)
+  let self = QSctpSocket(h: self)
+  var virtualReturn = vtbl[].metaObject(self)
   virtualReturn.h
+
 proc QSctpSocketmetacast*(self: gen_qsctpsocket_types.QSctpSocket, param1: cstring): pointer =
-  fQSctpSocket_virtualbase_metacast(self.h, param1)
+  fcQSctpSocket_virtualbase_metacast(self.h, param1)
 
-type QSctpSocketmetacastProc* = proc(param1: cstring): pointer
-proc onmetacast*(self: gen_qsctpsocket_types.QSctpSocket, slot: QSctpSocketmetacastProc) =
-  # TODO check subclass
-  var tmp = new QSctpSocketmetacastProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQSctpSocket_override_virtual_metacast(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QSctpSocket_metacast(self: ptr cQSctpSocket, slot: int, param1: cstring): pointer {.exportc: "miqt_exec_callback_QSctpSocket_metacast ".} =
-  var nimfunc = cast[ptr QSctpSocketmetacastProc](cast[pointer](slot))
+proc miqt_exec_callback_cQSctpSocket_metacast(vtbl: pointer, self: pointer, param1: cstring): pointer {.cdecl.} =
+  let vtbl = cast[ptr QSctpSocketVTable](vtbl)
+  let self = QSctpSocket(h: self)
   let slotval1 = (param1)
-
-
-  let virtualReturn = nimfunc[](slotval1 )
-
+  var virtualReturn = vtbl[].metacast(self, slotval1)
   virtualReturn
+
 proc QSctpSocketmetacall*(self: gen_qsctpsocket_types.QSctpSocket, param1: cint, param2: cint, param3: pointer): cint =
-  fQSctpSocket_virtualbase_metacall(self.h, cint(param1), param2, param3)
+  fcQSctpSocket_virtualbase_metacall(self.h, cint(param1), param2, param3)
 
-type QSctpSocketmetacallProc* = proc(param1: cint, param2: cint, param3: pointer): cint
-proc onmetacall*(self: gen_qsctpsocket_types.QSctpSocket, slot: QSctpSocketmetacallProc) =
-  # TODO check subclass
-  var tmp = new QSctpSocketmetacallProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQSctpSocket_override_virtual_metacall(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QSctpSocket_metacall(self: ptr cQSctpSocket, slot: int, param1: cint, param2: cint, param3: pointer): cint {.exportc: "miqt_exec_callback_QSctpSocket_metacall ".} =
-  var nimfunc = cast[ptr QSctpSocketmetacallProc](cast[pointer](slot))
+proc miqt_exec_callback_cQSctpSocket_metacall(vtbl: pointer, self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
+  let vtbl = cast[ptr QSctpSocketVTable](vtbl)
+  let self = QSctpSocket(h: self)
   let slotval1 = cint(param1)
-
   let slotval2 = param2
-
   let slotval3 = param3
-
-
-  let virtualReturn = nimfunc[](slotval1, slotval2, slotval3 )
-
+  var virtualReturn = vtbl[].metacall(self, slotval1, slotval2, slotval3)
   virtualReturn
+
 proc QSctpSocketclose*(self: gen_qsctpsocket_types.QSctpSocket, ): void =
-  fQSctpSocket_virtualbase_close(self.h)
+  fcQSctpSocket_virtualbase_close(self.h)
 
-type QSctpSocketcloseProc* = proc(): void
-proc onclose*(self: gen_qsctpsocket_types.QSctpSocket, slot: QSctpSocketcloseProc) =
-  # TODO check subclass
-  var tmp = new QSctpSocketcloseProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQSctpSocket_override_virtual_close(self.h, cast[int](addr tmp[]))
+proc miqt_exec_callback_cQSctpSocket_close(vtbl: pointer, self: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QSctpSocketVTable](vtbl)
+  let self = QSctpSocket(h: self)
+  vtbl[].close(self)
 
-proc miqt_exec_callback_QSctpSocket_close(self: ptr cQSctpSocket, slot: int): void {.exportc: "miqt_exec_callback_QSctpSocket_close ".} =
-  var nimfunc = cast[ptr QSctpSocketcloseProc](cast[pointer](slot))
-
-  nimfunc[]()
 proc QSctpSocketdisconnectFromHost*(self: gen_qsctpsocket_types.QSctpSocket, ): void =
-  fQSctpSocket_virtualbase_disconnectFromHost(self.h)
+  fcQSctpSocket_virtualbase_disconnectFromHost(self.h)
 
-type QSctpSocketdisconnectFromHostProc* = proc(): void
-proc ondisconnectFromHost*(self: gen_qsctpsocket_types.QSctpSocket, slot: QSctpSocketdisconnectFromHostProc) =
-  # TODO check subclass
-  var tmp = new QSctpSocketdisconnectFromHostProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQSctpSocket_override_virtual_disconnectFromHost(self.h, cast[int](addr tmp[]))
+proc miqt_exec_callback_cQSctpSocket_disconnectFromHost(vtbl: pointer, self: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QSctpSocketVTable](vtbl)
+  let self = QSctpSocket(h: self)
+  vtbl[].disconnectFromHost(self)
 
-proc miqt_exec_callback_QSctpSocket_disconnectFromHost(self: ptr cQSctpSocket, slot: int): void {.exportc: "miqt_exec_callback_QSctpSocket_disconnectFromHost ".} =
-  var nimfunc = cast[ptr QSctpSocketdisconnectFromHostProc](cast[pointer](slot))
-
-  nimfunc[]()
 proc QSctpSocketreadData*(self: gen_qsctpsocket_types.QSctpSocket, data: cstring, maxlen: clonglong): clonglong =
-  fQSctpSocket_virtualbase_readData(self.h, data, maxlen)
+  fcQSctpSocket_virtualbase_readData(self.h, data, maxlen)
 
-type QSctpSocketreadDataProc* = proc(data: cstring, maxlen: clonglong): clonglong
-proc onreadData*(self: gen_qsctpsocket_types.QSctpSocket, slot: QSctpSocketreadDataProc) =
-  # TODO check subclass
-  var tmp = new QSctpSocketreadDataProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQSctpSocket_override_virtual_readData(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QSctpSocket_readData(self: ptr cQSctpSocket, slot: int, data: cstring, maxlen: clonglong): clonglong {.exportc: "miqt_exec_callback_QSctpSocket_readData ".} =
-  var nimfunc = cast[ptr QSctpSocketreadDataProc](cast[pointer](slot))
+proc miqt_exec_callback_cQSctpSocket_readData(vtbl: pointer, self: pointer, data: cstring, maxlen: clonglong): clonglong {.cdecl.} =
+  let vtbl = cast[ptr QSctpSocketVTable](vtbl)
+  let self = QSctpSocket(h: self)
   let slotval1 = (data)
-
   let slotval2 = maxlen
-
-
-  let virtualReturn = nimfunc[](slotval1, slotval2 )
-
+  var virtualReturn = vtbl[].readData(self, slotval1, slotval2)
   virtualReturn
+
 proc QSctpSocketreadLineData*(self: gen_qsctpsocket_types.QSctpSocket, data: cstring, maxlen: clonglong): clonglong =
-  fQSctpSocket_virtualbase_readLineData(self.h, data, maxlen)
+  fcQSctpSocket_virtualbase_readLineData(self.h, data, maxlen)
 
-type QSctpSocketreadLineDataProc* = proc(data: cstring, maxlen: clonglong): clonglong
-proc onreadLineData*(self: gen_qsctpsocket_types.QSctpSocket, slot: QSctpSocketreadLineDataProc) =
-  # TODO check subclass
-  var tmp = new QSctpSocketreadLineDataProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQSctpSocket_override_virtual_readLineData(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QSctpSocket_readLineData(self: ptr cQSctpSocket, slot: int, data: cstring, maxlen: clonglong): clonglong {.exportc: "miqt_exec_callback_QSctpSocket_readLineData ".} =
-  var nimfunc = cast[ptr QSctpSocketreadLineDataProc](cast[pointer](slot))
+proc miqt_exec_callback_cQSctpSocket_readLineData(vtbl: pointer, self: pointer, data: cstring, maxlen: clonglong): clonglong {.cdecl.} =
+  let vtbl = cast[ptr QSctpSocketVTable](vtbl)
+  let self = QSctpSocket(h: self)
   let slotval1 = (data)
-
   let slotval2 = maxlen
-
-
-  let virtualReturn = nimfunc[](slotval1, slotval2 )
-
+  var virtualReturn = vtbl[].readLineData(self, slotval1, slotval2)
   virtualReturn
+
 proc QSctpSocketresume*(self: gen_qsctpsocket_types.QSctpSocket, ): void =
-  fQSctpSocket_virtualbase_resume(self.h)
+  fcQSctpSocket_virtualbase_resume(self.h)
 
-type QSctpSocketresumeProc* = proc(): void
-proc onresume*(self: gen_qsctpsocket_types.QSctpSocket, slot: QSctpSocketresumeProc) =
-  # TODO check subclass
-  var tmp = new QSctpSocketresumeProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQSctpSocket_override_virtual_resume(self.h, cast[int](addr tmp[]))
+proc miqt_exec_callback_cQSctpSocket_resume(vtbl: pointer, self: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QSctpSocketVTable](vtbl)
+  let self = QSctpSocket(h: self)
+  vtbl[].resume(self)
 
-proc miqt_exec_callback_QSctpSocket_resume(self: ptr cQSctpSocket, slot: int): void {.exportc: "miqt_exec_callback_QSctpSocket_resume ".} =
-  var nimfunc = cast[ptr QSctpSocketresumeProc](cast[pointer](slot))
-
-  nimfunc[]()
 proc QSctpSocketbindX*(self: gen_qsctpsocket_types.QSctpSocket, address: gen_qhostaddress_types.QHostAddress, port: cushort, mode: cint): bool =
-  fQSctpSocket_virtualbase_bind(self.h, address.h, port, cint(mode))
+  fcQSctpSocket_virtualbase_bindX(self.h, address.h, port, cint(mode))
 
-type QSctpSocketbindXProc* = proc(address: gen_qhostaddress_types.QHostAddress, port: cushort, mode: cint): bool
-proc onbindX*(self: gen_qsctpsocket_types.QSctpSocket, slot: QSctpSocketbindXProc) =
-  # TODO check subclass
-  var tmp = new QSctpSocketbindXProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQSctpSocket_override_virtual_bindX(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QSctpSocket_bind(self: ptr cQSctpSocket, slot: int, address: pointer, port: cushort, mode: cint): bool {.exportc: "miqt_exec_callback_QSctpSocket_bind ".} =
-  var nimfunc = cast[ptr QSctpSocketbindXProc](cast[pointer](slot))
+proc miqt_exec_callback_cQSctpSocket_bindX(vtbl: pointer, self: pointer, address: pointer, port: cushort, mode: cint): bool {.cdecl.} =
+  let vtbl = cast[ptr QSctpSocketVTable](vtbl)
+  let self = QSctpSocket(h: self)
   let slotval1 = gen_qhostaddress_types.QHostAddress(h: address)
-
   let slotval2 = port
-
   let slotval3 = cint(mode)
-
-
-  let virtualReturn = nimfunc[](slotval1, slotval2, slotval3 )
-
+  var virtualReturn = vtbl[].bindX(self, slotval1, slotval2, slotval3)
   virtualReturn
+
 proc QSctpSocketconnectToHost*(self: gen_qsctpsocket_types.QSctpSocket, hostName: string, port: cushort, mode: cint, protocol: cint): void =
-  fQSctpSocket_virtualbase_connectToHost(self.h, struct_miqt_string(data: hostName, len: csize_t(len(hostName))), port, cint(mode), cint(protocol))
+  fcQSctpSocket_virtualbase_connectToHost(self.h, struct_miqt_string(data: hostName, len: csize_t(len(hostName))), port, cint(mode), cint(protocol))
 
-type QSctpSocketconnectToHostProc* = proc(hostName: string, port: cushort, mode: cint, protocol: cint): void
-proc onconnectToHost*(self: gen_qsctpsocket_types.QSctpSocket, slot: QSctpSocketconnectToHostProc) =
-  # TODO check subclass
-  var tmp = new QSctpSocketconnectToHostProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQSctpSocket_override_virtual_connectToHost(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QSctpSocket_connectToHost(self: ptr cQSctpSocket, slot: int, hostName: struct_miqt_string, port: cushort, mode: cint, protocol: cint): void {.exportc: "miqt_exec_callback_QSctpSocket_connectToHost ".} =
-  var nimfunc = cast[ptr QSctpSocketconnectToHostProc](cast[pointer](slot))
+proc miqt_exec_callback_cQSctpSocket_connectToHost(vtbl: pointer, self: pointer, hostName: struct_miqt_string, port: cushort, mode: cint, protocol: cint): void {.cdecl.} =
+  let vtbl = cast[ptr QSctpSocketVTable](vtbl)
+  let self = QSctpSocket(h: self)
   let vhostName_ms = hostName
   let vhostNamex_ret = string.fromBytes(toOpenArrayByte(vhostName_ms.data, 0, int(vhostName_ms.len)-1))
   c_free(vhostName_ms.data)
   let slotval1 = vhostNamex_ret
-
   let slotval2 = port
-
   let slotval3 = cint(mode)
-
   let slotval4 = cint(protocol)
+  vtbl[].connectToHost(self, slotval1, slotval2, slotval3, slotval4)
 
-
-  nimfunc[](slotval1, slotval2, slotval3, slotval4)
 proc QSctpSocketbytesAvailable*(self: gen_qsctpsocket_types.QSctpSocket, ): clonglong =
-  fQSctpSocket_virtualbase_bytesAvailable(self.h)
+  fcQSctpSocket_virtualbase_bytesAvailable(self.h)
 
-type QSctpSocketbytesAvailableProc* = proc(): clonglong
-proc onbytesAvailable*(self: gen_qsctpsocket_types.QSctpSocket, slot: QSctpSocketbytesAvailableProc) =
-  # TODO check subclass
-  var tmp = new QSctpSocketbytesAvailableProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQSctpSocket_override_virtual_bytesAvailable(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QSctpSocket_bytesAvailable(self: ptr cQSctpSocket, slot: int): clonglong {.exportc: "miqt_exec_callback_QSctpSocket_bytesAvailable ".} =
-  var nimfunc = cast[ptr QSctpSocketbytesAvailableProc](cast[pointer](slot))
-
-  let virtualReturn = nimfunc[]( )
-
+proc miqt_exec_callback_cQSctpSocket_bytesAvailable(vtbl: pointer, self: pointer): clonglong {.cdecl.} =
+  let vtbl = cast[ptr QSctpSocketVTable](vtbl)
+  let self = QSctpSocket(h: self)
+  var virtualReturn = vtbl[].bytesAvailable(self)
   virtualReturn
+
 proc QSctpSocketbytesToWrite*(self: gen_qsctpsocket_types.QSctpSocket, ): clonglong =
-  fQSctpSocket_virtualbase_bytesToWrite(self.h)
+  fcQSctpSocket_virtualbase_bytesToWrite(self.h)
 
-type QSctpSocketbytesToWriteProc* = proc(): clonglong
-proc onbytesToWrite*(self: gen_qsctpsocket_types.QSctpSocket, slot: QSctpSocketbytesToWriteProc) =
-  # TODO check subclass
-  var tmp = new QSctpSocketbytesToWriteProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQSctpSocket_override_virtual_bytesToWrite(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QSctpSocket_bytesToWrite(self: ptr cQSctpSocket, slot: int): clonglong {.exportc: "miqt_exec_callback_QSctpSocket_bytesToWrite ".} =
-  var nimfunc = cast[ptr QSctpSocketbytesToWriteProc](cast[pointer](slot))
-
-  let virtualReturn = nimfunc[]( )
-
+proc miqt_exec_callback_cQSctpSocket_bytesToWrite(vtbl: pointer, self: pointer): clonglong {.cdecl.} =
+  let vtbl = cast[ptr QSctpSocketVTable](vtbl)
+  let self = QSctpSocket(h: self)
+  var virtualReturn = vtbl[].bytesToWrite(self)
   virtualReturn
+
 proc QSctpSocketsetReadBufferSize*(self: gen_qsctpsocket_types.QSctpSocket, size: clonglong): void =
-  fQSctpSocket_virtualbase_setReadBufferSize(self.h, size)
+  fcQSctpSocket_virtualbase_setReadBufferSize(self.h, size)
 
-type QSctpSocketsetReadBufferSizeProc* = proc(size: clonglong): void
-proc onsetReadBufferSize*(self: gen_qsctpsocket_types.QSctpSocket, slot: QSctpSocketsetReadBufferSizeProc) =
-  # TODO check subclass
-  var tmp = new QSctpSocketsetReadBufferSizeProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQSctpSocket_override_virtual_setReadBufferSize(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QSctpSocket_setReadBufferSize(self: ptr cQSctpSocket, slot: int, size: clonglong): void {.exportc: "miqt_exec_callback_QSctpSocket_setReadBufferSize ".} =
-  var nimfunc = cast[ptr QSctpSocketsetReadBufferSizeProc](cast[pointer](slot))
+proc miqt_exec_callback_cQSctpSocket_setReadBufferSize(vtbl: pointer, self: pointer, size: clonglong): void {.cdecl.} =
+  let vtbl = cast[ptr QSctpSocketVTable](vtbl)
+  let self = QSctpSocket(h: self)
   let slotval1 = size
+  vtbl[].setReadBufferSize(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QSctpSocketsocketDescriptor*(self: gen_qsctpsocket_types.QSctpSocket, ): uint =
-  fQSctpSocket_virtualbase_socketDescriptor(self.h)
+  fcQSctpSocket_virtualbase_socketDescriptor(self.h)
 
-type QSctpSocketsocketDescriptorProc* = proc(): uint
-proc onsocketDescriptor*(self: gen_qsctpsocket_types.QSctpSocket, slot: QSctpSocketsocketDescriptorProc) =
-  # TODO check subclass
-  var tmp = new QSctpSocketsocketDescriptorProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQSctpSocket_override_virtual_socketDescriptor(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QSctpSocket_socketDescriptor(self: ptr cQSctpSocket, slot: int): uint {.exportc: "miqt_exec_callback_QSctpSocket_socketDescriptor ".} =
-  var nimfunc = cast[ptr QSctpSocketsocketDescriptorProc](cast[pointer](slot))
-
-  let virtualReturn = nimfunc[]( )
-
+proc miqt_exec_callback_cQSctpSocket_socketDescriptor(vtbl: pointer, self: pointer): uint {.cdecl.} =
+  let vtbl = cast[ptr QSctpSocketVTable](vtbl)
+  let self = QSctpSocket(h: self)
+  var virtualReturn = vtbl[].socketDescriptor(self)
   virtualReturn
+
 proc QSctpSocketsetSocketDescriptor*(self: gen_qsctpsocket_types.QSctpSocket, socketDescriptor: uint, state: cint, openMode: cint): bool =
-  fQSctpSocket_virtualbase_setSocketDescriptor(self.h, socketDescriptor, cint(state), cint(openMode))
+  fcQSctpSocket_virtualbase_setSocketDescriptor(self.h, socketDescriptor, cint(state), cint(openMode))
 
-type QSctpSocketsetSocketDescriptorProc* = proc(socketDescriptor: uint, state: cint, openMode: cint): bool
-proc onsetSocketDescriptor*(self: gen_qsctpsocket_types.QSctpSocket, slot: QSctpSocketsetSocketDescriptorProc) =
-  # TODO check subclass
-  var tmp = new QSctpSocketsetSocketDescriptorProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQSctpSocket_override_virtual_setSocketDescriptor(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QSctpSocket_setSocketDescriptor(self: ptr cQSctpSocket, slot: int, socketDescriptor: uint, state: cint, openMode: cint): bool {.exportc: "miqt_exec_callback_QSctpSocket_setSocketDescriptor ".} =
-  var nimfunc = cast[ptr QSctpSocketsetSocketDescriptorProc](cast[pointer](slot))
+proc miqt_exec_callback_cQSctpSocket_setSocketDescriptor(vtbl: pointer, self: pointer, socketDescriptor: uint, state: cint, openMode: cint): bool {.cdecl.} =
+  let vtbl = cast[ptr QSctpSocketVTable](vtbl)
+  let self = QSctpSocket(h: self)
   let slotval1 = socketDescriptor
-
   let slotval2 = cint(state)
-
   let slotval3 = cint(openMode)
-
-
-  let virtualReturn = nimfunc[](slotval1, slotval2, slotval3 )
-
+  var virtualReturn = vtbl[].setSocketDescriptor(self, slotval1, slotval2, slotval3)
   virtualReturn
+
 proc QSctpSocketsetSocketOption*(self: gen_qsctpsocket_types.QSctpSocket, option: cint, value: gen_qvariant_types.QVariant): void =
-  fQSctpSocket_virtualbase_setSocketOption(self.h, cint(option), value.h)
+  fcQSctpSocket_virtualbase_setSocketOption(self.h, cint(option), value.h)
 
-type QSctpSocketsetSocketOptionProc* = proc(option: cint, value: gen_qvariant_types.QVariant): void
-proc onsetSocketOption*(self: gen_qsctpsocket_types.QSctpSocket, slot: QSctpSocketsetSocketOptionProc) =
-  # TODO check subclass
-  var tmp = new QSctpSocketsetSocketOptionProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQSctpSocket_override_virtual_setSocketOption(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QSctpSocket_setSocketOption(self: ptr cQSctpSocket, slot: int, option: cint, value: pointer): void {.exportc: "miqt_exec_callback_QSctpSocket_setSocketOption ".} =
-  var nimfunc = cast[ptr QSctpSocketsetSocketOptionProc](cast[pointer](slot))
+proc miqt_exec_callback_cQSctpSocket_setSocketOption(vtbl: pointer, self: pointer, option: cint, value: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QSctpSocketVTable](vtbl)
+  let self = QSctpSocket(h: self)
   let slotval1 = cint(option)
-
   let slotval2 = gen_qvariant_types.QVariant(h: value)
+  vtbl[].setSocketOption(self, slotval1, slotval2)
 
-
-  nimfunc[](slotval1, slotval2)
 proc QSctpSocketsocketOption*(self: gen_qsctpsocket_types.QSctpSocket, option: cint): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fQSctpSocket_virtualbase_socketOption(self.h, cint(option)))
+  gen_qvariant_types.QVariant(h: fcQSctpSocket_virtualbase_socketOption(self.h, cint(option)))
 
-type QSctpSocketsocketOptionProc* = proc(option: cint): gen_qvariant_types.QVariant
-proc onsocketOption*(self: gen_qsctpsocket_types.QSctpSocket, slot: QSctpSocketsocketOptionProc) =
-  # TODO check subclass
-  var tmp = new QSctpSocketsocketOptionProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQSctpSocket_override_virtual_socketOption(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QSctpSocket_socketOption(self: ptr cQSctpSocket, slot: int, option: cint): pointer {.exportc: "miqt_exec_callback_QSctpSocket_socketOption ".} =
-  var nimfunc = cast[ptr QSctpSocketsocketOptionProc](cast[pointer](slot))
+proc miqt_exec_callback_cQSctpSocket_socketOption(vtbl: pointer, self: pointer, option: cint): pointer {.cdecl.} =
+  let vtbl = cast[ptr QSctpSocketVTable](vtbl)
+  let self = QSctpSocket(h: self)
   let slotval1 = cint(option)
-
-
-  let virtualReturn = nimfunc[](slotval1 )
-
+  var virtualReturn = vtbl[].socketOption(self, slotval1)
   virtualReturn.h
+
 proc QSctpSocketisSequential*(self: gen_qsctpsocket_types.QSctpSocket, ): bool =
-  fQSctpSocket_virtualbase_isSequential(self.h)
+  fcQSctpSocket_virtualbase_isSequential(self.h)
 
-type QSctpSocketisSequentialProc* = proc(): bool
-proc onisSequential*(self: gen_qsctpsocket_types.QSctpSocket, slot: QSctpSocketisSequentialProc) =
-  # TODO check subclass
-  var tmp = new QSctpSocketisSequentialProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQSctpSocket_override_virtual_isSequential(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QSctpSocket_isSequential(self: ptr cQSctpSocket, slot: int): bool {.exportc: "miqt_exec_callback_QSctpSocket_isSequential ".} =
-  var nimfunc = cast[ptr QSctpSocketisSequentialProc](cast[pointer](slot))
-
-  let virtualReturn = nimfunc[]( )
-
+proc miqt_exec_callback_cQSctpSocket_isSequential(vtbl: pointer, self: pointer): bool {.cdecl.} =
+  let vtbl = cast[ptr QSctpSocketVTable](vtbl)
+  let self = QSctpSocket(h: self)
+  var virtualReturn = vtbl[].isSequential(self)
   virtualReturn
+
 proc QSctpSocketwaitForConnected*(self: gen_qsctpsocket_types.QSctpSocket, msecs: cint): bool =
-  fQSctpSocket_virtualbase_waitForConnected(self.h, msecs)
+  fcQSctpSocket_virtualbase_waitForConnected(self.h, msecs)
 
-type QSctpSocketwaitForConnectedProc* = proc(msecs: cint): bool
-proc onwaitForConnected*(self: gen_qsctpsocket_types.QSctpSocket, slot: QSctpSocketwaitForConnectedProc) =
-  # TODO check subclass
-  var tmp = new QSctpSocketwaitForConnectedProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQSctpSocket_override_virtual_waitForConnected(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QSctpSocket_waitForConnected(self: ptr cQSctpSocket, slot: int, msecs: cint): bool {.exportc: "miqt_exec_callback_QSctpSocket_waitForConnected ".} =
-  var nimfunc = cast[ptr QSctpSocketwaitForConnectedProc](cast[pointer](slot))
+proc miqt_exec_callback_cQSctpSocket_waitForConnected(vtbl: pointer, self: pointer, msecs: cint): bool {.cdecl.} =
+  let vtbl = cast[ptr QSctpSocketVTable](vtbl)
+  let self = QSctpSocket(h: self)
   let slotval1 = msecs
-
-
-  let virtualReturn = nimfunc[](slotval1 )
-
+  var virtualReturn = vtbl[].waitForConnected(self, slotval1)
   virtualReturn
+
 proc QSctpSocketwaitForReadyRead*(self: gen_qsctpsocket_types.QSctpSocket, msecs: cint): bool =
-  fQSctpSocket_virtualbase_waitForReadyRead(self.h, msecs)
+  fcQSctpSocket_virtualbase_waitForReadyRead(self.h, msecs)
 
-type QSctpSocketwaitForReadyReadProc* = proc(msecs: cint): bool
-proc onwaitForReadyRead*(self: gen_qsctpsocket_types.QSctpSocket, slot: QSctpSocketwaitForReadyReadProc) =
-  # TODO check subclass
-  var tmp = new QSctpSocketwaitForReadyReadProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQSctpSocket_override_virtual_waitForReadyRead(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QSctpSocket_waitForReadyRead(self: ptr cQSctpSocket, slot: int, msecs: cint): bool {.exportc: "miqt_exec_callback_QSctpSocket_waitForReadyRead ".} =
-  var nimfunc = cast[ptr QSctpSocketwaitForReadyReadProc](cast[pointer](slot))
+proc miqt_exec_callback_cQSctpSocket_waitForReadyRead(vtbl: pointer, self: pointer, msecs: cint): bool {.cdecl.} =
+  let vtbl = cast[ptr QSctpSocketVTable](vtbl)
+  let self = QSctpSocket(h: self)
   let slotval1 = msecs
-
-
-  let virtualReturn = nimfunc[](slotval1 )
-
+  var virtualReturn = vtbl[].waitForReadyRead(self, slotval1)
   virtualReturn
+
 proc QSctpSocketwaitForBytesWritten*(self: gen_qsctpsocket_types.QSctpSocket, msecs: cint): bool =
-  fQSctpSocket_virtualbase_waitForBytesWritten(self.h, msecs)
+  fcQSctpSocket_virtualbase_waitForBytesWritten(self.h, msecs)
 
-type QSctpSocketwaitForBytesWrittenProc* = proc(msecs: cint): bool
-proc onwaitForBytesWritten*(self: gen_qsctpsocket_types.QSctpSocket, slot: QSctpSocketwaitForBytesWrittenProc) =
-  # TODO check subclass
-  var tmp = new QSctpSocketwaitForBytesWrittenProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQSctpSocket_override_virtual_waitForBytesWritten(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QSctpSocket_waitForBytesWritten(self: ptr cQSctpSocket, slot: int, msecs: cint): bool {.exportc: "miqt_exec_callback_QSctpSocket_waitForBytesWritten ".} =
-  var nimfunc = cast[ptr QSctpSocketwaitForBytesWrittenProc](cast[pointer](slot))
+proc miqt_exec_callback_cQSctpSocket_waitForBytesWritten(vtbl: pointer, self: pointer, msecs: cint): bool {.cdecl.} =
+  let vtbl = cast[ptr QSctpSocketVTable](vtbl)
+  let self = QSctpSocket(h: self)
   let slotval1 = msecs
-
-
-  let virtualReturn = nimfunc[](slotval1 )
-
+  var virtualReturn = vtbl[].waitForBytesWritten(self, slotval1)
   virtualReturn
+
 proc QSctpSocketwaitForDisconnected*(self: gen_qsctpsocket_types.QSctpSocket, msecs: cint): bool =
-  fQSctpSocket_virtualbase_waitForDisconnected(self.h, msecs)
+  fcQSctpSocket_virtualbase_waitForDisconnected(self.h, msecs)
 
-type QSctpSocketwaitForDisconnectedProc* = proc(msecs: cint): bool
-proc onwaitForDisconnected*(self: gen_qsctpsocket_types.QSctpSocket, slot: QSctpSocketwaitForDisconnectedProc) =
-  # TODO check subclass
-  var tmp = new QSctpSocketwaitForDisconnectedProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQSctpSocket_override_virtual_waitForDisconnected(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QSctpSocket_waitForDisconnected(self: ptr cQSctpSocket, slot: int, msecs: cint): bool {.exportc: "miqt_exec_callback_QSctpSocket_waitForDisconnected ".} =
-  var nimfunc = cast[ptr QSctpSocketwaitForDisconnectedProc](cast[pointer](slot))
+proc miqt_exec_callback_cQSctpSocket_waitForDisconnected(vtbl: pointer, self: pointer, msecs: cint): bool {.cdecl.} =
+  let vtbl = cast[ptr QSctpSocketVTable](vtbl)
+  let self = QSctpSocket(h: self)
   let slotval1 = msecs
-
-
-  let virtualReturn = nimfunc[](slotval1 )
-
+  var virtualReturn = vtbl[].waitForDisconnected(self, slotval1)
   virtualReturn
+
 proc QSctpSocketskipData*(self: gen_qsctpsocket_types.QSctpSocket, maxSize: clonglong): clonglong =
-  fQSctpSocket_virtualbase_skipData(self.h, maxSize)
+  fcQSctpSocket_virtualbase_skipData(self.h, maxSize)
 
-type QSctpSocketskipDataProc* = proc(maxSize: clonglong): clonglong
-proc onskipData*(self: gen_qsctpsocket_types.QSctpSocket, slot: QSctpSocketskipDataProc) =
-  # TODO check subclass
-  var tmp = new QSctpSocketskipDataProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQSctpSocket_override_virtual_skipData(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QSctpSocket_skipData(self: ptr cQSctpSocket, slot: int, maxSize: clonglong): clonglong {.exportc: "miqt_exec_callback_QSctpSocket_skipData ".} =
-  var nimfunc = cast[ptr QSctpSocketskipDataProc](cast[pointer](slot))
+proc miqt_exec_callback_cQSctpSocket_skipData(vtbl: pointer, self: pointer, maxSize: clonglong): clonglong {.cdecl.} =
+  let vtbl = cast[ptr QSctpSocketVTable](vtbl)
+  let self = QSctpSocket(h: self)
   let slotval1 = maxSize
-
-
-  let virtualReturn = nimfunc[](slotval1 )
-
+  var virtualReturn = vtbl[].skipData(self, slotval1)
   virtualReturn
+
 proc QSctpSocketwriteData*(self: gen_qsctpsocket_types.QSctpSocket, data: cstring, len: clonglong): clonglong =
-  fQSctpSocket_virtualbase_writeData(self.h, data, len)
+  fcQSctpSocket_virtualbase_writeData(self.h, data, len)
 
-type QSctpSocketwriteDataProc* = proc(data: cstring, len: clonglong): clonglong
-proc onwriteData*(self: gen_qsctpsocket_types.QSctpSocket, slot: QSctpSocketwriteDataProc) =
-  # TODO check subclass
-  var tmp = new QSctpSocketwriteDataProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQSctpSocket_override_virtual_writeData(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QSctpSocket_writeData(self: ptr cQSctpSocket, slot: int, data: cstring, len: clonglong): clonglong {.exportc: "miqt_exec_callback_QSctpSocket_writeData ".} =
-  var nimfunc = cast[ptr QSctpSocketwriteDataProc](cast[pointer](slot))
+proc miqt_exec_callback_cQSctpSocket_writeData(vtbl: pointer, self: pointer, data: cstring, len: clonglong): clonglong {.cdecl.} =
+  let vtbl = cast[ptr QSctpSocketVTable](vtbl)
+  let self = QSctpSocket(h: self)
   let slotval1 = (data)
-
   let slotval2 = len
-
-
-  let virtualReturn = nimfunc[](slotval1, slotval2 )
-
+  var virtualReturn = vtbl[].writeData(self, slotval1, slotval2)
   virtualReturn
+
 proc QSctpSocketopen*(self: gen_qsctpsocket_types.QSctpSocket, mode: cint): bool =
-  fQSctpSocket_virtualbase_open(self.h, cint(mode))
+  fcQSctpSocket_virtualbase_open(self.h, cint(mode))
 
-type QSctpSocketopenProc* = proc(mode: cint): bool
-proc onopen*(self: gen_qsctpsocket_types.QSctpSocket, slot: QSctpSocketopenProc) =
-  # TODO check subclass
-  var tmp = new QSctpSocketopenProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQSctpSocket_override_virtual_open(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QSctpSocket_open(self: ptr cQSctpSocket, slot: int, mode: cint): bool {.exportc: "miqt_exec_callback_QSctpSocket_open ".} =
-  var nimfunc = cast[ptr QSctpSocketopenProc](cast[pointer](slot))
+proc miqt_exec_callback_cQSctpSocket_open(vtbl: pointer, self: pointer, mode: cint): bool {.cdecl.} =
+  let vtbl = cast[ptr QSctpSocketVTable](vtbl)
+  let self = QSctpSocket(h: self)
   let slotval1 = cint(mode)
-
-
-  let virtualReturn = nimfunc[](slotval1 )
-
+  var virtualReturn = vtbl[].open(self, slotval1)
   virtualReturn
+
 proc QSctpSocketpos*(self: gen_qsctpsocket_types.QSctpSocket, ): clonglong =
-  fQSctpSocket_virtualbase_pos(self.h)
+  fcQSctpSocket_virtualbase_pos(self.h)
 
-type QSctpSocketposProc* = proc(): clonglong
-proc onpos*(self: gen_qsctpsocket_types.QSctpSocket, slot: QSctpSocketposProc) =
-  # TODO check subclass
-  var tmp = new QSctpSocketposProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQSctpSocket_override_virtual_pos(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QSctpSocket_pos(self: ptr cQSctpSocket, slot: int): clonglong {.exportc: "miqt_exec_callback_QSctpSocket_pos ".} =
-  var nimfunc = cast[ptr QSctpSocketposProc](cast[pointer](slot))
-
-  let virtualReturn = nimfunc[]( )
-
+proc miqt_exec_callback_cQSctpSocket_pos(vtbl: pointer, self: pointer): clonglong {.cdecl.} =
+  let vtbl = cast[ptr QSctpSocketVTable](vtbl)
+  let self = QSctpSocket(h: self)
+  var virtualReturn = vtbl[].pos(self)
   virtualReturn
+
 proc QSctpSocketsize*(self: gen_qsctpsocket_types.QSctpSocket, ): clonglong =
-  fQSctpSocket_virtualbase_size(self.h)
+  fcQSctpSocket_virtualbase_size(self.h)
 
-type QSctpSocketsizeProc* = proc(): clonglong
-proc onsize*(self: gen_qsctpsocket_types.QSctpSocket, slot: QSctpSocketsizeProc) =
-  # TODO check subclass
-  var tmp = new QSctpSocketsizeProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQSctpSocket_override_virtual_size(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QSctpSocket_size(self: ptr cQSctpSocket, slot: int): clonglong {.exportc: "miqt_exec_callback_QSctpSocket_size ".} =
-  var nimfunc = cast[ptr QSctpSocketsizeProc](cast[pointer](slot))
-
-  let virtualReturn = nimfunc[]( )
-
+proc miqt_exec_callback_cQSctpSocket_size(vtbl: pointer, self: pointer): clonglong {.cdecl.} =
+  let vtbl = cast[ptr QSctpSocketVTable](vtbl)
+  let self = QSctpSocket(h: self)
+  var virtualReturn = vtbl[].size(self)
   virtualReturn
+
 proc QSctpSocketseek*(self: gen_qsctpsocket_types.QSctpSocket, pos: clonglong): bool =
-  fQSctpSocket_virtualbase_seek(self.h, pos)
+  fcQSctpSocket_virtualbase_seek(self.h, pos)
 
-type QSctpSocketseekProc* = proc(pos: clonglong): bool
-proc onseek*(self: gen_qsctpsocket_types.QSctpSocket, slot: QSctpSocketseekProc) =
-  # TODO check subclass
-  var tmp = new QSctpSocketseekProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQSctpSocket_override_virtual_seek(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QSctpSocket_seek(self: ptr cQSctpSocket, slot: int, pos: clonglong): bool {.exportc: "miqt_exec_callback_QSctpSocket_seek ".} =
-  var nimfunc = cast[ptr QSctpSocketseekProc](cast[pointer](slot))
+proc miqt_exec_callback_cQSctpSocket_seek(vtbl: pointer, self: pointer, pos: clonglong): bool {.cdecl.} =
+  let vtbl = cast[ptr QSctpSocketVTable](vtbl)
+  let self = QSctpSocket(h: self)
   let slotval1 = pos
-
-
-  let virtualReturn = nimfunc[](slotval1 )
-
+  var virtualReturn = vtbl[].seek(self, slotval1)
   virtualReturn
+
 proc QSctpSocketatEnd*(self: gen_qsctpsocket_types.QSctpSocket, ): bool =
-  fQSctpSocket_virtualbase_atEnd(self.h)
+  fcQSctpSocket_virtualbase_atEnd(self.h)
 
-type QSctpSocketatEndProc* = proc(): bool
-proc onatEnd*(self: gen_qsctpsocket_types.QSctpSocket, slot: QSctpSocketatEndProc) =
-  # TODO check subclass
-  var tmp = new QSctpSocketatEndProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQSctpSocket_override_virtual_atEnd(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QSctpSocket_atEnd(self: ptr cQSctpSocket, slot: int): bool {.exportc: "miqt_exec_callback_QSctpSocket_atEnd ".} =
-  var nimfunc = cast[ptr QSctpSocketatEndProc](cast[pointer](slot))
-
-  let virtualReturn = nimfunc[]( )
-
+proc miqt_exec_callback_cQSctpSocket_atEnd(vtbl: pointer, self: pointer): bool {.cdecl.} =
+  let vtbl = cast[ptr QSctpSocketVTable](vtbl)
+  let self = QSctpSocket(h: self)
+  var virtualReturn = vtbl[].atEnd(self)
   virtualReturn
+
 proc QSctpSocketreset*(self: gen_qsctpsocket_types.QSctpSocket, ): bool =
-  fQSctpSocket_virtualbase_reset(self.h)
+  fcQSctpSocket_virtualbase_reset(self.h)
 
-type QSctpSocketresetProc* = proc(): bool
-proc onreset*(self: gen_qsctpsocket_types.QSctpSocket, slot: QSctpSocketresetProc) =
-  # TODO check subclass
-  var tmp = new QSctpSocketresetProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQSctpSocket_override_virtual_reset(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QSctpSocket_reset(self: ptr cQSctpSocket, slot: int): bool {.exportc: "miqt_exec_callback_QSctpSocket_reset ".} =
-  var nimfunc = cast[ptr QSctpSocketresetProc](cast[pointer](slot))
-
-  let virtualReturn = nimfunc[]( )
-
+proc miqt_exec_callback_cQSctpSocket_reset(vtbl: pointer, self: pointer): bool {.cdecl.} =
+  let vtbl = cast[ptr QSctpSocketVTable](vtbl)
+  let self = QSctpSocket(h: self)
+  var virtualReturn = vtbl[].reset(self)
   virtualReturn
+
 proc QSctpSocketcanReadLine*(self: gen_qsctpsocket_types.QSctpSocket, ): bool =
-  fQSctpSocket_virtualbase_canReadLine(self.h)
+  fcQSctpSocket_virtualbase_canReadLine(self.h)
 
-type QSctpSocketcanReadLineProc* = proc(): bool
-proc oncanReadLine*(self: gen_qsctpsocket_types.QSctpSocket, slot: QSctpSocketcanReadLineProc) =
-  # TODO check subclass
-  var tmp = new QSctpSocketcanReadLineProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQSctpSocket_override_virtual_canReadLine(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QSctpSocket_canReadLine(self: ptr cQSctpSocket, slot: int): bool {.exportc: "miqt_exec_callback_QSctpSocket_canReadLine ".} =
-  var nimfunc = cast[ptr QSctpSocketcanReadLineProc](cast[pointer](slot))
-
-  let virtualReturn = nimfunc[]( )
-
+proc miqt_exec_callback_cQSctpSocket_canReadLine(vtbl: pointer, self: pointer): bool {.cdecl.} =
+  let vtbl = cast[ptr QSctpSocketVTable](vtbl)
+  let self = QSctpSocket(h: self)
+  var virtualReturn = vtbl[].canReadLine(self)
   virtualReturn
+
 proc QSctpSocketevent*(self: gen_qsctpsocket_types.QSctpSocket, event: gen_qcoreevent_types.QEvent): bool =
-  fQSctpSocket_virtualbase_event(self.h, event.h)
+  fcQSctpSocket_virtualbase_event(self.h, event.h)
 
-type QSctpSocketeventProc* = proc(event: gen_qcoreevent_types.QEvent): bool
-proc onevent*(self: gen_qsctpsocket_types.QSctpSocket, slot: QSctpSocketeventProc) =
-  # TODO check subclass
-  var tmp = new QSctpSocketeventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQSctpSocket_override_virtual_event(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QSctpSocket_event(self: ptr cQSctpSocket, slot: int, event: pointer): bool {.exportc: "miqt_exec_callback_QSctpSocket_event ".} =
-  var nimfunc = cast[ptr QSctpSocketeventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQSctpSocket_event(vtbl: pointer, self: pointer, event: pointer): bool {.cdecl.} =
+  let vtbl = cast[ptr QSctpSocketVTable](vtbl)
+  let self = QSctpSocket(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event)
-
-
-  let virtualReturn = nimfunc[](slotval1 )
-
+  var virtualReturn = vtbl[].event(self, slotval1)
   virtualReturn
+
 proc QSctpSocketeventFilter*(self: gen_qsctpsocket_types.QSctpSocket, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool =
-  fQSctpSocket_virtualbase_eventFilter(self.h, watched.h, event.h)
+  fcQSctpSocket_virtualbase_eventFilter(self.h, watched.h, event.h)
 
-type QSctpSocketeventFilterProc* = proc(watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool
-proc oneventFilter*(self: gen_qsctpsocket_types.QSctpSocket, slot: QSctpSocketeventFilterProc) =
-  # TODO check subclass
-  var tmp = new QSctpSocketeventFilterProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQSctpSocket_override_virtual_eventFilter(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QSctpSocket_eventFilter(self: ptr cQSctpSocket, slot: int, watched: pointer, event: pointer): bool {.exportc: "miqt_exec_callback_QSctpSocket_eventFilter ".} =
-  var nimfunc = cast[ptr QSctpSocketeventFilterProc](cast[pointer](slot))
+proc miqt_exec_callback_cQSctpSocket_eventFilter(vtbl: pointer, self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
+  let vtbl = cast[ptr QSctpSocketVTable](vtbl)
+  let self = QSctpSocket(h: self)
   let slotval1 = gen_qobject_types.QObject(h: watched)
-
   let slotval2 = gen_qcoreevent_types.QEvent(h: event)
-
-
-  let virtualReturn = nimfunc[](slotval1, slotval2 )
-
+  var virtualReturn = vtbl[].eventFilter(self, slotval1, slotval2)
   virtualReturn
+
 proc QSctpSockettimerEvent*(self: gen_qsctpsocket_types.QSctpSocket, event: gen_qcoreevent_types.QTimerEvent): void =
-  fQSctpSocket_virtualbase_timerEvent(self.h, event.h)
+  fcQSctpSocket_virtualbase_timerEvent(self.h, event.h)
 
-type QSctpSockettimerEventProc* = proc(event: gen_qcoreevent_types.QTimerEvent): void
-proc ontimerEvent*(self: gen_qsctpsocket_types.QSctpSocket, slot: QSctpSockettimerEventProc) =
-  # TODO check subclass
-  var tmp = new QSctpSockettimerEventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQSctpSocket_override_virtual_timerEvent(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QSctpSocket_timerEvent(self: ptr cQSctpSocket, slot: int, event: pointer): void {.exportc: "miqt_exec_callback_QSctpSocket_timerEvent ".} =
-  var nimfunc = cast[ptr QSctpSockettimerEventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQSctpSocket_timerEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QSctpSocketVTable](vtbl)
+  let self = QSctpSocket(h: self)
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event)
+  vtbl[].timerEvent(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QSctpSocketchildEvent*(self: gen_qsctpsocket_types.QSctpSocket, event: gen_qcoreevent_types.QChildEvent): void =
-  fQSctpSocket_virtualbase_childEvent(self.h, event.h)
+  fcQSctpSocket_virtualbase_childEvent(self.h, event.h)
 
-type QSctpSocketchildEventProc* = proc(event: gen_qcoreevent_types.QChildEvent): void
-proc onchildEvent*(self: gen_qsctpsocket_types.QSctpSocket, slot: QSctpSocketchildEventProc) =
-  # TODO check subclass
-  var tmp = new QSctpSocketchildEventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQSctpSocket_override_virtual_childEvent(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QSctpSocket_childEvent(self: ptr cQSctpSocket, slot: int, event: pointer): void {.exportc: "miqt_exec_callback_QSctpSocket_childEvent ".} =
-  var nimfunc = cast[ptr QSctpSocketchildEventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQSctpSocket_childEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QSctpSocketVTable](vtbl)
+  let self = QSctpSocket(h: self)
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: event)
+  vtbl[].childEvent(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QSctpSocketcustomEvent*(self: gen_qsctpsocket_types.QSctpSocket, event: gen_qcoreevent_types.QEvent): void =
-  fQSctpSocket_virtualbase_customEvent(self.h, event.h)
+  fcQSctpSocket_virtualbase_customEvent(self.h, event.h)
 
-type QSctpSocketcustomEventProc* = proc(event: gen_qcoreevent_types.QEvent): void
-proc oncustomEvent*(self: gen_qsctpsocket_types.QSctpSocket, slot: QSctpSocketcustomEventProc) =
-  # TODO check subclass
-  var tmp = new QSctpSocketcustomEventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQSctpSocket_override_virtual_customEvent(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QSctpSocket_customEvent(self: ptr cQSctpSocket, slot: int, event: pointer): void {.exportc: "miqt_exec_callback_QSctpSocket_customEvent ".} =
-  var nimfunc = cast[ptr QSctpSocketcustomEventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQSctpSocket_customEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QSctpSocketVTable](vtbl)
+  let self = QSctpSocket(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  vtbl[].customEvent(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QSctpSocketconnectNotify*(self: gen_qsctpsocket_types.QSctpSocket, signal: gen_qmetaobject_types.QMetaMethod): void =
-  fQSctpSocket_virtualbase_connectNotify(self.h, signal.h)
+  fcQSctpSocket_virtualbase_connectNotify(self.h, signal.h)
 
-type QSctpSocketconnectNotifyProc* = proc(signal: gen_qmetaobject_types.QMetaMethod): void
-proc onconnectNotify*(self: gen_qsctpsocket_types.QSctpSocket, slot: QSctpSocketconnectNotifyProc) =
-  # TODO check subclass
-  var tmp = new QSctpSocketconnectNotifyProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQSctpSocket_override_virtual_connectNotify(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QSctpSocket_connectNotify(self: ptr cQSctpSocket, slot: int, signal: pointer): void {.exportc: "miqt_exec_callback_QSctpSocket_connectNotify ".} =
-  var nimfunc = cast[ptr QSctpSocketconnectNotifyProc](cast[pointer](slot))
+proc miqt_exec_callback_cQSctpSocket_connectNotify(vtbl: pointer, self: pointer, signal: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QSctpSocketVTable](vtbl)
+  let self = QSctpSocket(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  vtbl[].connectNotify(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QSctpSocketdisconnectNotify*(self: gen_qsctpsocket_types.QSctpSocket, signal: gen_qmetaobject_types.QMetaMethod): void =
-  fQSctpSocket_virtualbase_disconnectNotify(self.h, signal.h)
+  fcQSctpSocket_virtualbase_disconnectNotify(self.h, signal.h)
 
-type QSctpSocketdisconnectNotifyProc* = proc(signal: gen_qmetaobject_types.QMetaMethod): void
-proc ondisconnectNotify*(self: gen_qsctpsocket_types.QSctpSocket, slot: QSctpSocketdisconnectNotifyProc) =
-  # TODO check subclass
-  var tmp = new QSctpSocketdisconnectNotifyProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQSctpSocket_override_virtual_disconnectNotify(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QSctpSocket_disconnectNotify(self: ptr cQSctpSocket, slot: int, signal: pointer): void {.exportc: "miqt_exec_callback_QSctpSocket_disconnectNotify ".} =
-  var nimfunc = cast[ptr QSctpSocketdisconnectNotifyProc](cast[pointer](slot))
+proc miqt_exec_callback_cQSctpSocket_disconnectNotify(vtbl: pointer, self: pointer, signal: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QSctpSocketVTable](vtbl)
+  let self = QSctpSocket(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  vtbl[].disconnectNotify(self, slotval1)
 
+proc create*(T: type gen_qsctpsocket_types.QSctpSocket,
+    vtbl: ref QSctpSocketVTable = nil): gen_qsctpsocket_types.QSctpSocket =
+  let vtbl = if vtbl == nil: new QSctpSocketVTable else: vtbl
+  GC_ref(vtbl)
+  vtbl.vtbl.destructor = proc(vtbl: ptr cQSctpSocketVTable, _: ptr cQSctpSocket) {.cdecl.} =
+    let vtbl = cast[ref QSctpSocketVTable](vtbl)
+    GC_unref(vtbl)
+  if not isNil(vtbl.metaObject):
+    vtbl[].vtbl.metaObject = miqt_exec_callback_cQSctpSocket_metaObject
+  if not isNil(vtbl.metacast):
+    vtbl[].vtbl.metacast = miqt_exec_callback_cQSctpSocket_metacast
+  if not isNil(vtbl.metacall):
+    vtbl[].vtbl.metacall = miqt_exec_callback_cQSctpSocket_metacall
+  if not isNil(vtbl.close):
+    vtbl[].vtbl.close = miqt_exec_callback_cQSctpSocket_close
+  if not isNil(vtbl.disconnectFromHost):
+    vtbl[].vtbl.disconnectFromHost = miqt_exec_callback_cQSctpSocket_disconnectFromHost
+  if not isNil(vtbl.readData):
+    vtbl[].vtbl.readData = miqt_exec_callback_cQSctpSocket_readData
+  if not isNil(vtbl.readLineData):
+    vtbl[].vtbl.readLineData = miqt_exec_callback_cQSctpSocket_readLineData
+  if not isNil(vtbl.resume):
+    vtbl[].vtbl.resume = miqt_exec_callback_cQSctpSocket_resume
+  if not isNil(vtbl.bindX):
+    vtbl[].vtbl.bindX = miqt_exec_callback_cQSctpSocket_bindX
+  if not isNil(vtbl.connectToHost):
+    vtbl[].vtbl.connectToHost = miqt_exec_callback_cQSctpSocket_connectToHost
+  if not isNil(vtbl.bytesAvailable):
+    vtbl[].vtbl.bytesAvailable = miqt_exec_callback_cQSctpSocket_bytesAvailable
+  if not isNil(vtbl.bytesToWrite):
+    vtbl[].vtbl.bytesToWrite = miqt_exec_callback_cQSctpSocket_bytesToWrite
+  if not isNil(vtbl.setReadBufferSize):
+    vtbl[].vtbl.setReadBufferSize = miqt_exec_callback_cQSctpSocket_setReadBufferSize
+  if not isNil(vtbl.socketDescriptor):
+    vtbl[].vtbl.socketDescriptor = miqt_exec_callback_cQSctpSocket_socketDescriptor
+  if not isNil(vtbl.setSocketDescriptor):
+    vtbl[].vtbl.setSocketDescriptor = miqt_exec_callback_cQSctpSocket_setSocketDescriptor
+  if not isNil(vtbl.setSocketOption):
+    vtbl[].vtbl.setSocketOption = miqt_exec_callback_cQSctpSocket_setSocketOption
+  if not isNil(vtbl.socketOption):
+    vtbl[].vtbl.socketOption = miqt_exec_callback_cQSctpSocket_socketOption
+  if not isNil(vtbl.isSequential):
+    vtbl[].vtbl.isSequential = miqt_exec_callback_cQSctpSocket_isSequential
+  if not isNil(vtbl.waitForConnected):
+    vtbl[].vtbl.waitForConnected = miqt_exec_callback_cQSctpSocket_waitForConnected
+  if not isNil(vtbl.waitForReadyRead):
+    vtbl[].vtbl.waitForReadyRead = miqt_exec_callback_cQSctpSocket_waitForReadyRead
+  if not isNil(vtbl.waitForBytesWritten):
+    vtbl[].vtbl.waitForBytesWritten = miqt_exec_callback_cQSctpSocket_waitForBytesWritten
+  if not isNil(vtbl.waitForDisconnected):
+    vtbl[].vtbl.waitForDisconnected = miqt_exec_callback_cQSctpSocket_waitForDisconnected
+  if not isNil(vtbl.skipData):
+    vtbl[].vtbl.skipData = miqt_exec_callback_cQSctpSocket_skipData
+  if not isNil(vtbl.writeData):
+    vtbl[].vtbl.writeData = miqt_exec_callback_cQSctpSocket_writeData
+  if not isNil(vtbl.open):
+    vtbl[].vtbl.open = miqt_exec_callback_cQSctpSocket_open
+  if not isNil(vtbl.pos):
+    vtbl[].vtbl.pos = miqt_exec_callback_cQSctpSocket_pos
+  if not isNil(vtbl.size):
+    vtbl[].vtbl.size = miqt_exec_callback_cQSctpSocket_size
+  if not isNil(vtbl.seek):
+    vtbl[].vtbl.seek = miqt_exec_callback_cQSctpSocket_seek
+  if not isNil(vtbl.atEnd):
+    vtbl[].vtbl.atEnd = miqt_exec_callback_cQSctpSocket_atEnd
+  if not isNil(vtbl.reset):
+    vtbl[].vtbl.reset = miqt_exec_callback_cQSctpSocket_reset
+  if not isNil(vtbl.canReadLine):
+    vtbl[].vtbl.canReadLine = miqt_exec_callback_cQSctpSocket_canReadLine
+  if not isNil(vtbl.event):
+    vtbl[].vtbl.event = miqt_exec_callback_cQSctpSocket_event
+  if not isNil(vtbl.eventFilter):
+    vtbl[].vtbl.eventFilter = miqt_exec_callback_cQSctpSocket_eventFilter
+  if not isNil(vtbl.timerEvent):
+    vtbl[].vtbl.timerEvent = miqt_exec_callback_cQSctpSocket_timerEvent
+  if not isNil(vtbl.childEvent):
+    vtbl[].vtbl.childEvent = miqt_exec_callback_cQSctpSocket_childEvent
+  if not isNil(vtbl.customEvent):
+    vtbl[].vtbl.customEvent = miqt_exec_callback_cQSctpSocket_customEvent
+  if not isNil(vtbl.connectNotify):
+    vtbl[].vtbl.connectNotify = miqt_exec_callback_cQSctpSocket_connectNotify
+  if not isNil(vtbl.disconnectNotify):
+    vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQSctpSocket_disconnectNotify
+  gen_qsctpsocket_types.QSctpSocket(h: fcQSctpSocket_new(addr(vtbl[]), ))
 
-  nimfunc[](slotval1)
+proc create*(T: type gen_qsctpsocket_types.QSctpSocket,
+    parent: gen_qobject_types.QObject,
+    vtbl: ref QSctpSocketVTable = nil): gen_qsctpsocket_types.QSctpSocket =
+  let vtbl = if vtbl == nil: new QSctpSocketVTable else: vtbl
+  GC_ref(vtbl)
+  vtbl.vtbl.destructor = proc(vtbl: ptr cQSctpSocketVTable, _: ptr cQSctpSocket) {.cdecl.} =
+    let vtbl = cast[ref QSctpSocketVTable](vtbl)
+    GC_unref(vtbl)
+  if not isNil(vtbl.metaObject):
+    vtbl[].vtbl.metaObject = miqt_exec_callback_cQSctpSocket_metaObject
+  if not isNil(vtbl.metacast):
+    vtbl[].vtbl.metacast = miqt_exec_callback_cQSctpSocket_metacast
+  if not isNil(vtbl.metacall):
+    vtbl[].vtbl.metacall = miqt_exec_callback_cQSctpSocket_metacall
+  if not isNil(vtbl.close):
+    vtbl[].vtbl.close = miqt_exec_callback_cQSctpSocket_close
+  if not isNil(vtbl.disconnectFromHost):
+    vtbl[].vtbl.disconnectFromHost = miqt_exec_callback_cQSctpSocket_disconnectFromHost
+  if not isNil(vtbl.readData):
+    vtbl[].vtbl.readData = miqt_exec_callback_cQSctpSocket_readData
+  if not isNil(vtbl.readLineData):
+    vtbl[].vtbl.readLineData = miqt_exec_callback_cQSctpSocket_readLineData
+  if not isNil(vtbl.resume):
+    vtbl[].vtbl.resume = miqt_exec_callback_cQSctpSocket_resume
+  if not isNil(vtbl.bindX):
+    vtbl[].vtbl.bindX = miqt_exec_callback_cQSctpSocket_bindX
+  if not isNil(vtbl.connectToHost):
+    vtbl[].vtbl.connectToHost = miqt_exec_callback_cQSctpSocket_connectToHost
+  if not isNil(vtbl.bytesAvailable):
+    vtbl[].vtbl.bytesAvailable = miqt_exec_callback_cQSctpSocket_bytesAvailable
+  if not isNil(vtbl.bytesToWrite):
+    vtbl[].vtbl.bytesToWrite = miqt_exec_callback_cQSctpSocket_bytesToWrite
+  if not isNil(vtbl.setReadBufferSize):
+    vtbl[].vtbl.setReadBufferSize = miqt_exec_callback_cQSctpSocket_setReadBufferSize
+  if not isNil(vtbl.socketDescriptor):
+    vtbl[].vtbl.socketDescriptor = miqt_exec_callback_cQSctpSocket_socketDescriptor
+  if not isNil(vtbl.setSocketDescriptor):
+    vtbl[].vtbl.setSocketDescriptor = miqt_exec_callback_cQSctpSocket_setSocketDescriptor
+  if not isNil(vtbl.setSocketOption):
+    vtbl[].vtbl.setSocketOption = miqt_exec_callback_cQSctpSocket_setSocketOption
+  if not isNil(vtbl.socketOption):
+    vtbl[].vtbl.socketOption = miqt_exec_callback_cQSctpSocket_socketOption
+  if not isNil(vtbl.isSequential):
+    vtbl[].vtbl.isSequential = miqt_exec_callback_cQSctpSocket_isSequential
+  if not isNil(vtbl.waitForConnected):
+    vtbl[].vtbl.waitForConnected = miqt_exec_callback_cQSctpSocket_waitForConnected
+  if not isNil(vtbl.waitForReadyRead):
+    vtbl[].vtbl.waitForReadyRead = miqt_exec_callback_cQSctpSocket_waitForReadyRead
+  if not isNil(vtbl.waitForBytesWritten):
+    vtbl[].vtbl.waitForBytesWritten = miqt_exec_callback_cQSctpSocket_waitForBytesWritten
+  if not isNil(vtbl.waitForDisconnected):
+    vtbl[].vtbl.waitForDisconnected = miqt_exec_callback_cQSctpSocket_waitForDisconnected
+  if not isNil(vtbl.skipData):
+    vtbl[].vtbl.skipData = miqt_exec_callback_cQSctpSocket_skipData
+  if not isNil(vtbl.writeData):
+    vtbl[].vtbl.writeData = miqt_exec_callback_cQSctpSocket_writeData
+  if not isNil(vtbl.open):
+    vtbl[].vtbl.open = miqt_exec_callback_cQSctpSocket_open
+  if not isNil(vtbl.pos):
+    vtbl[].vtbl.pos = miqt_exec_callback_cQSctpSocket_pos
+  if not isNil(vtbl.size):
+    vtbl[].vtbl.size = miqt_exec_callback_cQSctpSocket_size
+  if not isNil(vtbl.seek):
+    vtbl[].vtbl.seek = miqt_exec_callback_cQSctpSocket_seek
+  if not isNil(vtbl.atEnd):
+    vtbl[].vtbl.atEnd = miqt_exec_callback_cQSctpSocket_atEnd
+  if not isNil(vtbl.reset):
+    vtbl[].vtbl.reset = miqt_exec_callback_cQSctpSocket_reset
+  if not isNil(vtbl.canReadLine):
+    vtbl[].vtbl.canReadLine = miqt_exec_callback_cQSctpSocket_canReadLine
+  if not isNil(vtbl.event):
+    vtbl[].vtbl.event = miqt_exec_callback_cQSctpSocket_event
+  if not isNil(vtbl.eventFilter):
+    vtbl[].vtbl.eventFilter = miqt_exec_callback_cQSctpSocket_eventFilter
+  if not isNil(vtbl.timerEvent):
+    vtbl[].vtbl.timerEvent = miqt_exec_callback_cQSctpSocket_timerEvent
+  if not isNil(vtbl.childEvent):
+    vtbl[].vtbl.childEvent = miqt_exec_callback_cQSctpSocket_childEvent
+  if not isNil(vtbl.customEvent):
+    vtbl[].vtbl.customEvent = miqt_exec_callback_cQSctpSocket_customEvent
+  if not isNil(vtbl.connectNotify):
+    vtbl[].vtbl.connectNotify = miqt_exec_callback_cQSctpSocket_connectNotify
+  if not isNil(vtbl.disconnectNotify):
+    vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQSctpSocket_disconnectNotify
+  gen_qsctpsocket_types.QSctpSocket(h: fcQSctpSocket_new2(addr(vtbl[]), parent.h))
+
 proc staticMetaObject*(_: type gen_qsctpsocket_types.QSctpSocket): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQSctpSocket_staticMetaObject())
 proc delete*(self: gen_qsctpsocket_types.QSctpSocket) =

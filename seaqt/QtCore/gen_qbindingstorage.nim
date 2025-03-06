@@ -46,23 +46,14 @@ type cQBindingStatus*{.exportc: "QBindingStatus", incompleteStruct.} = object
 type cQBindingStorage*{.exportc: "QBindingStorage", incompleteStruct.} = object
 
 proc fcQBindingStatus_delete(self: pointer) {.importc: "QBindingStatus_delete".}
-proc fcQBindingStorage_new(): ptr cQBindingStorage {.importc: "QBindingStorage_new".}
 proc fcQBindingStorage_isEmpty(self: pointer, ): bool {.importc: "QBindingStorage_isEmpty".}
 proc fcQBindingStorage_isValid(self: pointer, ): bool {.importc: "QBindingStorage_isValid".}
 proc fcQBindingStorage_registerDependency(self: pointer, data: pointer): void {.importc: "QBindingStorage_registerDependency".}
+proc fcQBindingStorage_new(): ptr cQBindingStorage {.importc: "QBindingStorage_new".}
 proc fcQBindingStorage_delete(self: pointer) {.importc: "QBindingStorage_delete".}
 
-
-func init*(T: type gen_qbindingstorage_types.QBindingStatus, h: ptr cQBindingStatus): gen_qbindingstorage_types.QBindingStatus =
-  T(h: h)
 proc delete*(self: gen_qbindingstorage_types.QBindingStatus) =
   fcQBindingStatus_delete(self.h)
-
-func init*(T: type gen_qbindingstorage_types.QBindingStorage, h: ptr cQBindingStorage): gen_qbindingstorage_types.QBindingStorage =
-  T(h: h)
-proc create*(T: type gen_qbindingstorage_types.QBindingStorage, ): gen_qbindingstorage_types.QBindingStorage =
-  gen_qbindingstorage_types.QBindingStorage.init(fcQBindingStorage_new())
-
 proc isEmpty*(self: gen_qbindingstorage_types.QBindingStorage, ): bool =
   fcQBindingStorage_isEmpty(self.h)
 
@@ -71,6 +62,9 @@ proc isValid*(self: gen_qbindingstorage_types.QBindingStorage, ): bool =
 
 proc registerDependency*(self: gen_qbindingstorage_types.QBindingStorage, data: gen_qpropertyprivate_types.QUntypedPropertyData): void =
   fcQBindingStorage_registerDependency(self.h, data.h)
+
+proc create*(T: type gen_qbindingstorage_types.QBindingStorage): gen_qbindingstorage_types.QBindingStorage =
+  gen_qbindingstorage_types.QBindingStorage(h: fcQBindingStorage_new())
 
 proc delete*(self: gen_qbindingstorage_types.QBindingStorage) =
   fcQBindingStorage_delete(self.h)

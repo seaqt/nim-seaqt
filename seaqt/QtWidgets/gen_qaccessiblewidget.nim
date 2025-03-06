@@ -56,9 +56,6 @@ export
 
 type cQAccessibleWidget*{.exportc: "QAccessibleWidget", incompleteStruct.} = object
 
-proc fcQAccessibleWidget_new(o: pointer): ptr cQAccessibleWidget {.importc: "QAccessibleWidget_new".}
-proc fcQAccessibleWidget_new2(o: pointer, r: cint): ptr cQAccessibleWidget {.importc: "QAccessibleWidget_new2".}
-proc fcQAccessibleWidget_new3(o: pointer, r: cint, name: struct_miqt_string): ptr cQAccessibleWidget {.importc: "QAccessibleWidget_new3".}
 proc fcQAccessibleWidget_isValid(self: pointer, ): bool {.importc: "QAccessibleWidget_isValid".}
 proc fcQAccessibleWidget_window(self: pointer, ): pointer {.importc: "QAccessibleWidget_window".}
 proc fcQAccessibleWidget_childCount(self: pointer, ): cint {.importc: "QAccessibleWidget_childCount".}
@@ -77,18 +74,9 @@ proc fcQAccessibleWidget_interfaceCast(self: pointer, t: cint): pointer {.import
 proc fcQAccessibleWidget_actionNames(self: pointer, ): struct_miqt_array {.importc: "QAccessibleWidget_actionNames".}
 proc fcQAccessibleWidget_doAction(self: pointer, actionName: struct_miqt_string): void {.importc: "QAccessibleWidget_doAction".}
 proc fcQAccessibleWidget_keyBindingsForAction(self: pointer, actionName: struct_miqt_string): struct_miqt_array {.importc: "QAccessibleWidget_keyBindingsForAction".}
-
-
-func init*(T: type gen_qaccessiblewidget_types.QAccessibleWidget, h: ptr cQAccessibleWidget): gen_qaccessiblewidget_types.QAccessibleWidget =
-  T(h: h)
-proc create*(T: type gen_qaccessiblewidget_types.QAccessibleWidget, o: gen_qwidget_types.QWidget): gen_qaccessiblewidget_types.QAccessibleWidget =
-  gen_qaccessiblewidget_types.QAccessibleWidget.init(fcQAccessibleWidget_new(o.h))
-
-proc create*(T: type gen_qaccessiblewidget_types.QAccessibleWidget, o: gen_qwidget_types.QWidget, r: cint): gen_qaccessiblewidget_types.QAccessibleWidget =
-  gen_qaccessiblewidget_types.QAccessibleWidget.init(fcQAccessibleWidget_new2(o.h, cint(r)))
-
-proc create*(T: type gen_qaccessiblewidget_types.QAccessibleWidget, o: gen_qwidget_types.QWidget, r: cint, name: string): gen_qaccessiblewidget_types.QAccessibleWidget =
-  gen_qaccessiblewidget_types.QAccessibleWidget.init(fcQAccessibleWidget_new3(o.h, cint(r), struct_miqt_string(data: name, len: csize_t(len(name)))))
+proc fcQAccessibleWidget_new(o: pointer): ptr cQAccessibleWidget {.importc: "QAccessibleWidget_new".}
+proc fcQAccessibleWidget_new2(o: pointer, r: cint): ptr cQAccessibleWidget {.importc: "QAccessibleWidget_new2".}
+proc fcQAccessibleWidget_new3(o: pointer, r: cint, name: struct_miqt_string): ptr cQAccessibleWidget {.importc: "QAccessibleWidget_new3".}
 
 proc isValid*(self: gen_qaccessiblewidget_types.QAccessibleWidget, ): bool =
   fcQAccessibleWidget_isValid(self.h)
@@ -174,4 +162,16 @@ proc keyBindingsForAction*(self: gen_qaccessiblewidget_types.QAccessibleWidget, 
     c_free(vx_lv_ms.data)
     vx_ret[i] = vx_lvx_ret
   vx_ret
+
+proc create*(T: type gen_qaccessiblewidget_types.QAccessibleWidget,
+    o: gen_qwidget_types.QWidget): gen_qaccessiblewidget_types.QAccessibleWidget =
+  gen_qaccessiblewidget_types.QAccessibleWidget(h: fcQAccessibleWidget_new(o.h))
+
+proc create*(T: type gen_qaccessiblewidget_types.QAccessibleWidget,
+    o: gen_qwidget_types.QWidget, r: cint): gen_qaccessiblewidget_types.QAccessibleWidget =
+  gen_qaccessiblewidget_types.QAccessibleWidget(h: fcQAccessibleWidget_new2(o.h, cint(r)))
+
+proc create*(T: type gen_qaccessiblewidget_types.QAccessibleWidget,
+    o: gen_qwidget_types.QWidget, r: cint, name: string): gen_qaccessiblewidget_types.QAccessibleWidget =
+  gen_qaccessiblewidget_types.QAccessibleWidget(h: fcQAccessibleWidget_new3(o.h, cint(r), struct_miqt_string(data: name, len: csize_t(len(name)))))
 

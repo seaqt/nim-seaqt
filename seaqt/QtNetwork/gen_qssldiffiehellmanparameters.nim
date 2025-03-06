@@ -50,8 +50,6 @@ export
 
 type cQSslDiffieHellmanParameters*{.exportc: "QSslDiffieHellmanParameters", incompleteStruct.} = object
 
-proc fcQSslDiffieHellmanParameters_new(): ptr cQSslDiffieHellmanParameters {.importc: "QSslDiffieHellmanParameters_new".}
-proc fcQSslDiffieHellmanParameters_new2(other: pointer): ptr cQSslDiffieHellmanParameters {.importc: "QSslDiffieHellmanParameters_new2".}
 proc fcQSslDiffieHellmanParameters_defaultParameters(): pointer {.importc: "QSslDiffieHellmanParameters_defaultParameters".}
 proc fcQSslDiffieHellmanParameters_operatorAssign(self: pointer, other: pointer): void {.importc: "QSslDiffieHellmanParameters_operatorAssign".}
 proc fcQSslDiffieHellmanParameters_swap(self: pointer, other: pointer): void {.importc: "QSslDiffieHellmanParameters_swap".}
@@ -63,16 +61,9 @@ proc fcQSslDiffieHellmanParameters_error(self: pointer, ): cint {.importc: "QSsl
 proc fcQSslDiffieHellmanParameters_errorString(self: pointer, ): struct_miqt_string {.importc: "QSslDiffieHellmanParameters_errorString".}
 proc fcQSslDiffieHellmanParameters_fromEncoded2(encoded: struct_miqt_string, format: cint): pointer {.importc: "QSslDiffieHellmanParameters_fromEncoded2".}
 proc fcQSslDiffieHellmanParameters_fromEncoded22(device: pointer, format: cint): pointer {.importc: "QSslDiffieHellmanParameters_fromEncoded22".}
+proc fcQSslDiffieHellmanParameters_new(): ptr cQSslDiffieHellmanParameters {.importc: "QSslDiffieHellmanParameters_new".}
+proc fcQSslDiffieHellmanParameters_new2(other: pointer): ptr cQSslDiffieHellmanParameters {.importc: "QSslDiffieHellmanParameters_new2".}
 proc fcQSslDiffieHellmanParameters_delete(self: pointer) {.importc: "QSslDiffieHellmanParameters_delete".}
-
-
-func init*(T: type gen_qssldiffiehellmanparameters_types.QSslDiffieHellmanParameters, h: ptr cQSslDiffieHellmanParameters): gen_qssldiffiehellmanparameters_types.QSslDiffieHellmanParameters =
-  T(h: h)
-proc create*(T: type gen_qssldiffiehellmanparameters_types.QSslDiffieHellmanParameters, ): gen_qssldiffiehellmanparameters_types.QSslDiffieHellmanParameters =
-  gen_qssldiffiehellmanparameters_types.QSslDiffieHellmanParameters.init(fcQSslDiffieHellmanParameters_new())
-
-proc create*(T: type gen_qssldiffiehellmanparameters_types.QSslDiffieHellmanParameters, other: gen_qssldiffiehellmanparameters_types.QSslDiffieHellmanParameters): gen_qssldiffiehellmanparameters_types.QSslDiffieHellmanParameters =
-  gen_qssldiffiehellmanparameters_types.QSslDiffieHellmanParameters.init(fcQSslDiffieHellmanParameters_new2(other.h))
 
 proc defaultParameters*(_: type gen_qssldiffiehellmanparameters_types.QSslDiffieHellmanParameters, ): gen_qssldiffiehellmanparameters_types.QSslDiffieHellmanParameters =
   gen_qssldiffiehellmanparameters_types.QSslDiffieHellmanParameters(h: fcQSslDiffieHellmanParameters_defaultParameters())
@@ -109,6 +100,13 @@ proc fromEncoded*(_: type gen_qssldiffiehellmanparameters_types.QSslDiffieHellma
 
 proc fromEncoded*(_: type gen_qssldiffiehellmanparameters_types.QSslDiffieHellmanParameters, device: gen_qiodevice_types.QIODevice, format: cint): gen_qssldiffiehellmanparameters_types.QSslDiffieHellmanParameters =
   gen_qssldiffiehellmanparameters_types.QSslDiffieHellmanParameters(h: fcQSslDiffieHellmanParameters_fromEncoded22(device.h, cint(format)))
+
+proc create*(T: type gen_qssldiffiehellmanparameters_types.QSslDiffieHellmanParameters): gen_qssldiffiehellmanparameters_types.QSslDiffieHellmanParameters =
+  gen_qssldiffiehellmanparameters_types.QSslDiffieHellmanParameters(h: fcQSslDiffieHellmanParameters_new())
+
+proc create*(T: type gen_qssldiffiehellmanparameters_types.QSslDiffieHellmanParameters,
+    other: gen_qssldiffiehellmanparameters_types.QSslDiffieHellmanParameters): gen_qssldiffiehellmanparameters_types.QSslDiffieHellmanParameters =
+  gen_qssldiffiehellmanparameters_types.QSslDiffieHellmanParameters(h: fcQSslDiffieHellmanParameters_new2(other.h))
 
 proc delete*(self: gen_qssldiffiehellmanparameters_types.QSslDiffieHellmanParameters) =
   fcQSslDiffieHellmanParameters_delete(self.h)

@@ -78,10 +78,6 @@ export
 
 type cQTextStream*{.exportc: "QTextStream", incompleteStruct.} = object
 
-proc fcQTextStream_new(): ptr cQTextStream {.importc: "QTextStream_new".}
-proc fcQTextStream_new2(device: pointer): ptr cQTextStream {.importc: "QTextStream_new2".}
-proc fcQTextStream_new3(array: struct_miqt_string): ptr cQTextStream {.importc: "QTextStream_new3".}
-proc fcQTextStream_new4(array: struct_miqt_string, openMode: cint): ptr cQTextStream {.importc: "QTextStream_new4".}
 proc fcQTextStream_setEncoding(self: pointer, encoding: cint): void {.importc: "QTextStream_setEncoding".}
 proc fcQTextStream_encoding(self: pointer, ): cint {.importc: "QTextStream_encoding".}
 proc fcQTextStream_setAutoDetectUnicode(self: pointer, enabled: bool): void {.importc: "QTextStream_setAutoDetectUnicode".}
@@ -151,22 +147,11 @@ proc fcQTextStream_operatorShiftLeftWithArray(self: pointer, array: struct_miqt_
 proc fcQTextStream_operatorShiftLeftWithChar(self: pointer, c: cstring): pointer {.importc: "QTextStream_operatorShiftLeftWithChar".}
 proc fcQTextStream_operatorShiftLeftWithPtr(self: pointer, ptrVal: pointer): pointer {.importc: "QTextStream_operatorShiftLeftWithPtr".}
 proc fcQTextStream_readLine1(self: pointer, maxlen: clonglong): struct_miqt_string {.importc: "QTextStream_readLine1".}
+proc fcQTextStream_new(): ptr cQTextStream {.importc: "QTextStream_new".}
+proc fcQTextStream_new2(device: pointer): ptr cQTextStream {.importc: "QTextStream_new2".}
+proc fcQTextStream_new3(array: struct_miqt_string): ptr cQTextStream {.importc: "QTextStream_new3".}
+proc fcQTextStream_new4(array: struct_miqt_string, openMode: cint): ptr cQTextStream {.importc: "QTextStream_new4".}
 proc fcQTextStream_delete(self: pointer) {.importc: "QTextStream_delete".}
-
-
-func init*(T: type gen_qtextstream_types.QTextStream, h: ptr cQTextStream): gen_qtextstream_types.QTextStream =
-  T(h: h)
-proc create*(T: type gen_qtextstream_types.QTextStream, ): gen_qtextstream_types.QTextStream =
-  gen_qtextstream_types.QTextStream.init(fcQTextStream_new())
-
-proc create*(T: type gen_qtextstream_types.QTextStream, device: gen_qiodevice_types.QIODevice): gen_qtextstream_types.QTextStream =
-  gen_qtextstream_types.QTextStream.init(fcQTextStream_new2(device.h))
-
-proc create*(T: type gen_qtextstream_types.QTextStream, array: seq[byte]): gen_qtextstream_types.QTextStream =
-  gen_qtextstream_types.QTextStream.init(fcQTextStream_new3(struct_miqt_string(data: cast[cstring](if len(array) == 0: nil else: unsafeAddr array[0]), len: csize_t(len(array)))))
-
-proc create*(T: type gen_qtextstream_types.QTextStream, array: seq[byte], openMode: cint): gen_qtextstream_types.QTextStream =
-  gen_qtextstream_types.QTextStream.init(fcQTextStream_new4(struct_miqt_string(data: cast[cstring](if len(array) == 0: nil else: unsafeAddr array[0]), len: csize_t(len(array))), cint(openMode)))
 
 proc setEncoding*(self: gen_qtextstream_types.QTextStream, encoding: cint): void =
   fcQTextStream_setEncoding(self.h, cint(encoding))
@@ -389,6 +374,21 @@ proc readLine*(self: gen_qtextstream_types.QTextStream, maxlen: clonglong): stri
   let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
   c_free(v_ms.data)
   vx_ret
+
+proc create*(T: type gen_qtextstream_types.QTextStream): gen_qtextstream_types.QTextStream =
+  gen_qtextstream_types.QTextStream(h: fcQTextStream_new())
+
+proc create*(T: type gen_qtextstream_types.QTextStream,
+    device: gen_qiodevice_types.QIODevice): gen_qtextstream_types.QTextStream =
+  gen_qtextstream_types.QTextStream(h: fcQTextStream_new2(device.h))
+
+proc create*(T: type gen_qtextstream_types.QTextStream,
+    array: seq[byte]): gen_qtextstream_types.QTextStream =
+  gen_qtextstream_types.QTextStream(h: fcQTextStream_new3(struct_miqt_string(data: cast[cstring](if len(array) == 0: nil else: unsafeAddr array[0]), len: csize_t(len(array)))))
+
+proc create*(T: type gen_qtextstream_types.QTextStream,
+    array: seq[byte], openMode: cint): gen_qtextstream_types.QTextStream =
+  gen_qtextstream_types.QTextStream(h: fcQTextStream_new4(struct_miqt_string(data: cast[cstring](if len(array) == 0: nil else: unsafeAddr array[0]), len: csize_t(len(array))), cint(openMode)))
 
 proc delete*(self: gen_qtextstream_types.QTextStream) =
   fcQTextStream_delete(self.h)

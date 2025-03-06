@@ -40,17 +40,11 @@ export gen_qthreadstorage_types
 
 type cQThreadStorageData*{.exportc: "QThreadStorageData", incompleteStruct.} = object
 
-proc fcQThreadStorageData_new(param1: pointer): ptr cQThreadStorageData {.importc: "QThreadStorageData_new".}
 proc fcQThreadStorageData_get(self: pointer, ): pointer {.importc: "QThreadStorageData_get".}
 proc fcQThreadStorageData_set(self: pointer, p: pointer): pointer {.importc: "QThreadStorageData_set".}
 proc fcQThreadStorageData_finish(param1: pointer): void {.importc: "QThreadStorageData_finish".}
+proc fcQThreadStorageData_new(param1: pointer): ptr cQThreadStorageData {.importc: "QThreadStorageData_new".}
 proc fcQThreadStorageData_delete(self: pointer) {.importc: "QThreadStorageData_delete".}
-
-
-func init*(T: type gen_qthreadstorage_types.QThreadStorageData, h: ptr cQThreadStorageData): gen_qthreadstorage_types.QThreadStorageData =
-  T(h: h)
-proc create*(T: type gen_qthreadstorage_types.QThreadStorageData, param1: gen_qthreadstorage_types.QThreadStorageData): gen_qthreadstorage_types.QThreadStorageData =
-  gen_qthreadstorage_types.QThreadStorageData.init(fcQThreadStorageData_new(param1.h))
 
 proc get*(self: gen_qthreadstorage_types.QThreadStorageData, ): pointer =
   fcQThreadStorageData_get(self.h)
@@ -60,6 +54,10 @@ proc set*(self: gen_qthreadstorage_types.QThreadStorageData, p: pointer): pointe
 
 proc finish*(_: type gen_qthreadstorage_types.QThreadStorageData, param1: pointer): void =
   fcQThreadStorageData_finish(param1)
+
+proc create*(T: type gen_qthreadstorage_types.QThreadStorageData,
+    param1: gen_qthreadstorage_types.QThreadStorageData): gen_qthreadstorage_types.QThreadStorageData =
+  gen_qthreadstorage_types.QThreadStorageData(h: fcQThreadStorageData_new(param1.h))
 
 proc delete*(self: gen_qthreadstorage_types.QThreadStorageData) =
   fcQThreadStorageData_delete(self.h)

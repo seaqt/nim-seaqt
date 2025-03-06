@@ -59,25 +59,21 @@ export
 
 type cQGestureRecognizer*{.exportc: "QGestureRecognizer", incompleteStruct.} = object
 
-proc fcQGestureRecognizer_new(): ptr cQGestureRecognizer {.importc: "QGestureRecognizer_new".}
 proc fcQGestureRecognizer_create(self: pointer, target: pointer): pointer {.importc: "QGestureRecognizer_create".}
 proc fcQGestureRecognizer_recognize(self: pointer, state: pointer, watched: pointer, event: pointer): cint {.importc: "QGestureRecognizer_recognize".}
 proc fcQGestureRecognizer_reset(self: pointer, state: pointer): void {.importc: "QGestureRecognizer_reset".}
 proc fcQGestureRecognizer_registerRecognizer(recognizer: pointer): cint {.importc: "QGestureRecognizer_registerRecognizer".}
 proc fcQGestureRecognizer_unregisterRecognizer(typeVal: cint): void {.importc: "QGestureRecognizer_unregisterRecognizer".}
 proc fcQGestureRecognizer_operatorAssign(self: pointer, param1: pointer): void {.importc: "QGestureRecognizer_operatorAssign".}
-proc fQGestureRecognizer_virtualbase_create(self: pointer, target: pointer): pointer{.importc: "QGestureRecognizer_virtualbase_create".}
-proc fcQGestureRecognizer_override_virtual_create(self: pointer, slot: int) {.importc: "QGestureRecognizer_override_virtual_create".}
-proc fcQGestureRecognizer_override_virtual_recognize(self: pointer, slot: int) {.importc: "QGestureRecognizer_override_virtual_recognize".}
-proc fQGestureRecognizer_virtualbase_reset(self: pointer, state: pointer): void{.importc: "QGestureRecognizer_virtualbase_reset".}
-proc fcQGestureRecognizer_override_virtual_reset(self: pointer, slot: int) {.importc: "QGestureRecognizer_override_virtual_reset".}
+type cQGestureRecognizerVTable = object
+  destructor*: proc(vtbl: ptr cQGestureRecognizerVTable, self: ptr cQGestureRecognizer) {.cdecl, raises:[], gcsafe.}
+  create*: proc(vtbl, self: pointer, target: pointer): pointer {.cdecl, raises: [], gcsafe.}
+  recognize*: proc(vtbl, self: pointer, state: pointer, watched: pointer, event: pointer): cint {.cdecl, raises: [], gcsafe.}
+  reset*: proc(vtbl, self: pointer, state: pointer): void {.cdecl, raises: [], gcsafe.}
+proc fcQGestureRecognizer_virtualbase_create(self: pointer, target: pointer): pointer {.importc: "QGestureRecognizer_virtualbase_create".}
+proc fcQGestureRecognizer_virtualbase_reset(self: pointer, state: pointer): void {.importc: "QGestureRecognizer_virtualbase_reset".}
+proc fcQGestureRecognizer_new(vtbl: pointer, ): ptr cQGestureRecognizer {.importc: "QGestureRecognizer_new".}
 proc fcQGestureRecognizer_delete(self: pointer) {.importc: "QGestureRecognizer_delete".}
-
-
-func init*(T: type gen_qgesturerecognizer_types.QGestureRecognizer, h: ptr cQGestureRecognizer): gen_qgesturerecognizer_types.QGestureRecognizer =
-  T(h: h)
-proc create*(T: type gen_qgesturerecognizer_types.QGestureRecognizer, ): gen_qgesturerecognizer_types.QGestureRecognizer =
-  gen_qgesturerecognizer_types.QGestureRecognizer.init(fcQGestureRecognizer_new())
 
 proc create*(self: gen_qgesturerecognizer_types.QGestureRecognizer, target: gen_qobject_types.QObject): gen_qgesture_types.QGesture =
   gen_qgesture_types.QGesture(h: fcQGestureRecognizer_create(self.h, target.h))
@@ -97,61 +93,56 @@ proc unregisterRecognizer*(_: type gen_qgesturerecognizer_types.QGestureRecogniz
 proc operatorAssign*(self: gen_qgesturerecognizer_types.QGestureRecognizer, param1: gen_qgesturerecognizer_types.QGestureRecognizer): void =
   fcQGestureRecognizer_operatorAssign(self.h, param1.h)
 
+type QGestureRecognizercreateProc* = proc(self: QGestureRecognizer, target: gen_qobject_types.QObject): gen_qgesture_types.QGesture {.raises: [], gcsafe.}
+type QGestureRecognizerrecognizeProc* = proc(self: QGestureRecognizer, state: gen_qgesture_types.QGesture, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): cint {.raises: [], gcsafe.}
+type QGestureRecognizerresetProc* = proc(self: QGestureRecognizer, state: gen_qgesture_types.QGesture): void {.raises: [], gcsafe.}
+type QGestureRecognizerVTable* = object
+  vtbl: cQGestureRecognizerVTable
+  create*: QGestureRecognizercreateProc
+  recognize*: QGestureRecognizerrecognizeProc
+  reset*: QGestureRecognizerresetProc
 proc QGestureRecognizercreate*(self: gen_qgesturerecognizer_types.QGestureRecognizer, target: gen_qobject_types.QObject): gen_qgesture_types.QGesture =
-  gen_qgesture_types.QGesture(h: fQGestureRecognizer_virtualbase_create(self.h, target.h))
+  gen_qgesture_types.QGesture(h: fcQGestureRecognizer_virtualbase_create(self.h, target.h))
 
-type QGestureRecognizercreateProc* = proc(target: gen_qobject_types.QObject): gen_qgesture_types.QGesture
-proc oncreate*(self: gen_qgesturerecognizer_types.QGestureRecognizer, slot: QGestureRecognizercreateProc) =
-  # TODO check subclass
-  var tmp = new QGestureRecognizercreateProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQGestureRecognizer_override_virtual_create(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QGestureRecognizer_create(self: ptr cQGestureRecognizer, slot: int, target: pointer): pointer {.exportc: "miqt_exec_callback_QGestureRecognizer_create ".} =
-  var nimfunc = cast[ptr QGestureRecognizercreateProc](cast[pointer](slot))
+proc miqt_exec_callback_cQGestureRecognizer_create(vtbl: pointer, self: pointer, target: pointer): pointer {.cdecl.} =
+  let vtbl = cast[ptr QGestureRecognizerVTable](vtbl)
+  let self = QGestureRecognizer(h: self)
   let slotval1 = gen_qobject_types.QObject(h: target)
-
-
-  let virtualReturn = nimfunc[](slotval1 )
-
+  var virtualReturn = vtbl[].create(self, slotval1)
   virtualReturn.h
-type QGestureRecognizerrecognizeProc* = proc(state: gen_qgesture_types.QGesture, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): cint
-proc onrecognize*(self: gen_qgesturerecognizer_types.QGestureRecognizer, slot: QGestureRecognizerrecognizeProc) =
-  # TODO check subclass
-  var tmp = new QGestureRecognizerrecognizeProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQGestureRecognizer_override_virtual_recognize(self.h, cast[int](addr tmp[]))
 
-proc miqt_exec_callback_QGestureRecognizer_recognize(self: ptr cQGestureRecognizer, slot: int, state: pointer, watched: pointer, event: pointer): cint {.exportc: "miqt_exec_callback_QGestureRecognizer_recognize ".} =
-  var nimfunc = cast[ptr QGestureRecognizerrecognizeProc](cast[pointer](slot))
+proc miqt_exec_callback_cQGestureRecognizer_recognize(vtbl: pointer, self: pointer, state: pointer, watched: pointer, event: pointer): cint {.cdecl.} =
+  let vtbl = cast[ptr QGestureRecognizerVTable](vtbl)
+  let self = QGestureRecognizer(h: self)
   let slotval1 = gen_qgesture_types.QGesture(h: state)
-
   let slotval2 = gen_qobject_types.QObject(h: watched)
-
   let slotval3 = gen_qcoreevent_types.QEvent(h: event)
-
-
-  let virtualReturn = nimfunc[](slotval1, slotval2, slotval3 )
-
+  var virtualReturn = vtbl[].recognize(self, slotval1, slotval2, slotval3)
   cint(virtualReturn)
+
 proc QGestureRecognizerreset*(self: gen_qgesturerecognizer_types.QGestureRecognizer, state: gen_qgesture_types.QGesture): void =
-  fQGestureRecognizer_virtualbase_reset(self.h, state.h)
+  fcQGestureRecognizer_virtualbase_reset(self.h, state.h)
 
-type QGestureRecognizerresetProc* = proc(state: gen_qgesture_types.QGesture): void
-proc onreset*(self: gen_qgesturerecognizer_types.QGestureRecognizer, slot: QGestureRecognizerresetProc) =
-  # TODO check subclass
-  var tmp = new QGestureRecognizerresetProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQGestureRecognizer_override_virtual_reset(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QGestureRecognizer_reset(self: ptr cQGestureRecognizer, slot: int, state: pointer): void {.exportc: "miqt_exec_callback_QGestureRecognizer_reset ".} =
-  var nimfunc = cast[ptr QGestureRecognizerresetProc](cast[pointer](slot))
+proc miqt_exec_callback_cQGestureRecognizer_reset(vtbl: pointer, self: pointer, state: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QGestureRecognizerVTable](vtbl)
+  let self = QGestureRecognizer(h: self)
   let slotval1 = gen_qgesture_types.QGesture(h: state)
+  vtbl[].reset(self, slotval1)
 
+proc create*(T: type gen_qgesturerecognizer_types.QGestureRecognizer,
+    vtbl: ref QGestureRecognizerVTable = nil): gen_qgesturerecognizer_types.QGestureRecognizer =
+  let vtbl = if vtbl == nil: new QGestureRecognizerVTable else: vtbl
+  GC_ref(vtbl)
+  vtbl.vtbl.destructor = proc(vtbl: ptr cQGestureRecognizerVTable, _: ptr cQGestureRecognizer) {.cdecl.} =
+    let vtbl = cast[ref QGestureRecognizerVTable](vtbl)
+    GC_unref(vtbl)
+  if not isNil(vtbl.create):
+    vtbl[].vtbl.create = miqt_exec_callback_cQGestureRecognizer_create
+  if not isNil(vtbl.recognize):
+    vtbl[].vtbl.recognize = miqt_exec_callback_cQGestureRecognizer_recognize
+  if not isNil(vtbl.reset):
+    vtbl[].vtbl.reset = miqt_exec_callback_cQGestureRecognizer_reset
+  gen_qgesturerecognizer_types.QGestureRecognizer(h: fcQGestureRecognizer_new(addr(vtbl[]), ))
 
-  nimfunc[](slotval1)
 proc delete*(self: gen_qgesturerecognizer_types.QGestureRecognizer) =
   fcQGestureRecognizer_delete(self.h)

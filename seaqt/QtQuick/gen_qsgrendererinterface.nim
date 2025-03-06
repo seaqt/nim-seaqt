@@ -112,9 +112,6 @@ proc fcQSGRendererInterface_isApiRhiBased(api: cint): bool {.importc: "QSGRender
 proc fcQSGRendererInterface_operatorAssign(self: pointer, param1: pointer): void {.importc: "QSGRendererInterface_operatorAssign".}
 proc fcQSGRendererInterface_delete(self: pointer) {.importc: "QSGRendererInterface_delete".}
 
-
-func init*(T: type gen_qsgrendererinterface_types.QSGRendererInterface, h: ptr cQSGRendererInterface): gen_qsgrendererinterface_types.QSGRendererInterface =
-  T(h: h)
 proc graphicsApi*(self: gen_qsgrendererinterface_types.QSGRendererInterface, ): cint =
   cint(fcQSGRendererInterface_graphicsApi(self.h))
 

@@ -90,8 +90,6 @@ export gen_qaudioformat_types
 
 type cQAudioFormat*{.exportc: "QAudioFormat", incompleteStruct.} = object
 
-proc fcQAudioFormat_new(): ptr cQAudioFormat {.importc: "QAudioFormat_new".}
-proc fcQAudioFormat_new2(param1: pointer): ptr cQAudioFormat {.importc: "QAudioFormat_new2".}
 proc fcQAudioFormat_isValid(self: pointer, ): bool {.importc: "QAudioFormat_isValid".}
 proc fcQAudioFormat_setSampleRate(self: pointer, sampleRate: cint): void {.importc: "QAudioFormat_setSampleRate".}
 proc fcQAudioFormat_sampleRate(self: pointer, ): cint {.importc: "QAudioFormat_sampleRate".}
@@ -112,16 +110,9 @@ proc fcQAudioFormat_bytesPerFrame(self: pointer, ): cint {.importc: "QAudioForma
 proc fcQAudioFormat_bytesPerSample(self: pointer, ): cint {.importc: "QAudioFormat_bytesPerSample".}
 proc fcQAudioFormat_normalizedSampleValue(self: pointer, sample: pointer): float32 {.importc: "QAudioFormat_normalizedSampleValue".}
 proc fcQAudioFormat_defaultChannelConfigForChannelCount(channelCount: cint): cint {.importc: "QAudioFormat_defaultChannelConfigForChannelCount".}
+proc fcQAudioFormat_new(): ptr cQAudioFormat {.importc: "QAudioFormat_new".}
+proc fcQAudioFormat_new2(param1: pointer): ptr cQAudioFormat {.importc: "QAudioFormat_new2".}
 proc fcQAudioFormat_delete(self: pointer) {.importc: "QAudioFormat_delete".}
-
-
-func init*(T: type gen_qaudioformat_types.QAudioFormat, h: ptr cQAudioFormat): gen_qaudioformat_types.QAudioFormat =
-  T(h: h)
-proc create*(T: type gen_qaudioformat_types.QAudioFormat, ): gen_qaudioformat_types.QAudioFormat =
-  gen_qaudioformat_types.QAudioFormat.init(fcQAudioFormat_new())
-
-proc create*(T: type gen_qaudioformat_types.QAudioFormat, param1: gen_qaudioformat_types.QAudioFormat): gen_qaudioformat_types.QAudioFormat =
-  gen_qaudioformat_types.QAudioFormat.init(fcQAudioFormat_new2(param1.h))
 
 proc isValid*(self: gen_qaudioformat_types.QAudioFormat, ): bool =
   fcQAudioFormat_isValid(self.h)
@@ -182,6 +173,13 @@ proc normalizedSampleValue*(self: gen_qaudioformat_types.QAudioFormat, sample: p
 
 proc defaultChannelConfigForChannelCount*(_: type gen_qaudioformat_types.QAudioFormat, channelCount: cint): cint =
   cint(fcQAudioFormat_defaultChannelConfigForChannelCount(channelCount))
+
+proc create*(T: type gen_qaudioformat_types.QAudioFormat): gen_qaudioformat_types.QAudioFormat =
+  gen_qaudioformat_types.QAudioFormat(h: fcQAudioFormat_new())
+
+proc create*(T: type gen_qaudioformat_types.QAudioFormat,
+    param1: gen_qaudioformat_types.QAudioFormat): gen_qaudioformat_types.QAudioFormat =
+  gen_qaudioformat_types.QAudioFormat(h: fcQAudioFormat_new2(param1.h))
 
 proc delete*(self: gen_qaudioformat_types.QAudioFormat) =
   fcQAudioFormat_delete(self.h)

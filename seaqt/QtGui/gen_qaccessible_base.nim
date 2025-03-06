@@ -263,9 +263,6 @@ proc fcQAccessibleActivationObserver_accessibilityActiveChanged(self: pointer, a
 proc fcQAccessibleActivationObserver_operatorAssign(self: pointer, param1: pointer): void {.importc: "QAccessible__ActivationObserver_operatorAssign".}
 proc fcQAccessibleActivationObserver_delete(self: pointer) {.importc: "QAccessible__ActivationObserver_delete".}
 
-
-func init*(T: type gen_qaccessible_base_types.QAccessible, h: ptr cQAccessible): gen_qaccessible_base_types.QAccessible =
-  T(h: h)
 proc installActivationObserver*(_: type gen_qaccessible_base_types.QAccessible, param1: gen_qaccessible_base_types.QAccessibleActivationObserver): void =
   fcQAccessible_installActivationObserver(param1.h)
 
@@ -316,17 +313,11 @@ proc staticMetaObject*(_: type gen_qaccessible_base_types.QAccessible): gen_qobj
   gen_qobjectdefs_types.QMetaObject(h: fcQAccessible_staticMetaObject())
 proc delete*(self: gen_qaccessible_base_types.QAccessible) =
   fcQAccessible_delete(self.h)
-
-func init*(T: type gen_qaccessible_base_types.QAccessibleState, h: ptr cQAccessibleState): gen_qaccessible_base_types.QAccessibleState =
-  T(h: h)
-proc create*(T: type gen_qaccessible_base_types.QAccessibleState, ): gen_qaccessible_base_types.QAccessibleState =
-  gen_qaccessible_base_types.QAccessibleState.init(fcQAccessibleState_new())
+proc create*(T: type gen_qaccessible_base_types.QAccessibleState): gen_qaccessible_base_types.QAccessibleState =
+  gen_qaccessible_base_types.QAccessibleState(h: fcQAccessibleState_new())
 
 proc delete*(self: gen_qaccessible_base_types.QAccessibleState) =
   fcQAccessibleState_delete(self.h)
-
-func init*(T: type gen_qaccessible_base_types.QAccessibleActivationObserver, h: ptr cQAccessibleActivationObserver): gen_qaccessible_base_types.QAccessibleActivationObserver =
-  T(h: h)
 proc accessibilityActiveChanged*(self: gen_qaccessible_base_types.QAccessibleActivationObserver, active: bool): void =
   fcQAccessibleActivationObserver_accessibilityActiveChanged(self.h, active)
 

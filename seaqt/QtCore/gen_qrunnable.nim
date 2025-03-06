@@ -40,18 +40,14 @@ export gen_qrunnable_types
 
 type cQRunnable*{.exportc: "QRunnable", incompleteStruct.} = object
 
-proc fcQRunnable_new(): ptr cQRunnable {.importc: "QRunnable_new".}
 proc fcQRunnable_run(self: pointer, ): void {.importc: "QRunnable_run".}
 proc fcQRunnable_autoDelete(self: pointer, ): bool {.importc: "QRunnable_autoDelete".}
 proc fcQRunnable_setAutoDelete(self: pointer, autoDelete: bool): void {.importc: "QRunnable_setAutoDelete".}
-proc fcQRunnable_override_virtual_run(self: pointer, slot: int) {.importc: "QRunnable_override_virtual_run".}
+type cQRunnableVTable = object
+  destructor*: proc(vtbl: ptr cQRunnableVTable, self: ptr cQRunnable) {.cdecl, raises:[], gcsafe.}
+  run*: proc(vtbl, self: pointer, ): void {.cdecl, raises: [], gcsafe.}
+proc fcQRunnable_new(vtbl: pointer, ): ptr cQRunnable {.importc: "QRunnable_new".}
 proc fcQRunnable_delete(self: pointer) {.importc: "QRunnable_delete".}
-
-
-func init*(T: type gen_qrunnable_types.QRunnable, h: ptr cQRunnable): gen_qrunnable_types.QRunnable =
-  T(h: h)
-proc create*(T: type gen_qrunnable_types.QRunnable, ): gen_qrunnable_types.QRunnable =
-  gen_qrunnable_types.QRunnable.init(fcQRunnable_new())
 
 proc run*(self: gen_qrunnable_types.QRunnable, ): void =
   fcQRunnable_run(self.h)
@@ -62,17 +58,25 @@ proc autoDelete*(self: gen_qrunnable_types.QRunnable, ): bool =
 proc setAutoDelete*(self: gen_qrunnable_types.QRunnable, autoDelete: bool): void =
   fcQRunnable_setAutoDelete(self.h, autoDelete)
 
-type QRunnablerunProc* = proc(): void
-proc onrun*(self: gen_qrunnable_types.QRunnable, slot: QRunnablerunProc) =
-  # TODO check subclass
-  var tmp = new QRunnablerunProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQRunnable_override_virtual_run(self.h, cast[int](addr tmp[]))
+type QRunnablerunProc* = proc(self: QRunnable): void {.raises: [], gcsafe.}
+type QRunnableVTable* = object
+  vtbl: cQRunnableVTable
+  run*: QRunnablerunProc
+proc miqt_exec_callback_cQRunnable_run(vtbl: pointer, self: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QRunnableVTable](vtbl)
+  let self = QRunnable(h: self)
+  vtbl[].run(self)
 
-proc miqt_exec_callback_QRunnable_run(self: ptr cQRunnable, slot: int): void {.exportc: "miqt_exec_callback_QRunnable_run ".} =
-  var nimfunc = cast[ptr QRunnablerunProc](cast[pointer](slot))
+proc create*(T: type gen_qrunnable_types.QRunnable,
+    vtbl: ref QRunnableVTable = nil): gen_qrunnable_types.QRunnable =
+  let vtbl = if vtbl == nil: new QRunnableVTable else: vtbl
+  GC_ref(vtbl)
+  vtbl.vtbl.destructor = proc(vtbl: ptr cQRunnableVTable, _: ptr cQRunnable) {.cdecl.} =
+    let vtbl = cast[ref QRunnableVTable](vtbl)
+    GC_unref(vtbl)
+  if not isNil(vtbl.run):
+    vtbl[].vtbl.run = miqt_exec_callback_cQRunnable_run
+  gen_qrunnable_types.QRunnable(h: fcQRunnable_new(addr(vtbl[]), ))
 
-  nimfunc[]()
 proc delete*(self: gen_qrunnable_types.QRunnable) =
   fcQRunnable_delete(self.h)

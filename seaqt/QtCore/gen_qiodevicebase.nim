@@ -54,6 +54,3 @@ export gen_qiodevicebase_types
 type cQIODeviceBase*{.exportc: "QIODeviceBase", incompleteStruct.} = object
 
 
-
-func init*(T: type gen_qiodevicebase_types.QIODeviceBase, h: ptr cQIODeviceBase): gen_qiodevicebase_types.QIODeviceBase =
-  T(h: h)

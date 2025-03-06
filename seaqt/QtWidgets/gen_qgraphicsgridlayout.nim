@@ -52,8 +52,6 @@ export
 
 type cQGraphicsGridLayout*{.exportc: "QGraphicsGridLayout", incompleteStruct.} = object
 
-proc fcQGraphicsGridLayout_new(): ptr cQGraphicsGridLayout {.importc: "QGraphicsGridLayout_new".}
-proc fcQGraphicsGridLayout_new2(parent: pointer): ptr cQGraphicsGridLayout {.importc: "QGraphicsGridLayout_new2".}
 proc fcQGraphicsGridLayout_addItem(self: pointer, item: pointer, row: cint, column: cint, rowSpan: cint, columnSpan: cint): void {.importc: "QGraphicsGridLayout_addItem".}
 proc fcQGraphicsGridLayout_addItem2(self: pointer, item: pointer, row: cint, column: cint): void {.importc: "QGraphicsGridLayout_addItem2".}
 proc fcQGraphicsGridLayout_setHorizontalSpacing(self: pointer, spacing: float64): void {.importc: "QGraphicsGridLayout_setHorizontalSpacing".}
@@ -101,36 +99,31 @@ proc fcQGraphicsGridLayout_setGeometry(self: pointer, rect: pointer): void {.imp
 proc fcQGraphicsGridLayout_sizeHint(self: pointer, which: cint, constraint: pointer): pointer {.importc: "QGraphicsGridLayout_sizeHint".}
 proc fcQGraphicsGridLayout_addItem6(self: pointer, item: pointer, row: cint, column: cint, rowSpan: cint, columnSpan: cint, alignment: cint): void {.importc: "QGraphicsGridLayout_addItem6".}
 proc fcQGraphicsGridLayout_addItem4(self: pointer, item: pointer, row: cint, column: cint, alignment: cint): void {.importc: "QGraphicsGridLayout_addItem4".}
-proc fQGraphicsGridLayout_virtualbase_count(self: pointer, ): cint{.importc: "QGraphicsGridLayout_virtualbase_count".}
-proc fcQGraphicsGridLayout_override_virtual_count(self: pointer, slot: int) {.importc: "QGraphicsGridLayout_override_virtual_count".}
-proc fQGraphicsGridLayout_virtualbase_itemAtWithIndex(self: pointer, index: cint): pointer{.importc: "QGraphicsGridLayout_virtualbase_itemAtWithIndex".}
-proc fcQGraphicsGridLayout_override_virtual_itemAtWithIndex(self: pointer, slot: int) {.importc: "QGraphicsGridLayout_override_virtual_itemAtWithIndex".}
-proc fQGraphicsGridLayout_virtualbase_removeAt(self: pointer, index: cint): void{.importc: "QGraphicsGridLayout_virtualbase_removeAt".}
-proc fcQGraphicsGridLayout_override_virtual_removeAt(self: pointer, slot: int) {.importc: "QGraphicsGridLayout_override_virtual_removeAt".}
-proc fQGraphicsGridLayout_virtualbase_invalidate(self: pointer, ): void{.importc: "QGraphicsGridLayout_virtualbase_invalidate".}
-proc fcQGraphicsGridLayout_override_virtual_invalidate(self: pointer, slot: int) {.importc: "QGraphicsGridLayout_override_virtual_invalidate".}
-proc fQGraphicsGridLayout_virtualbase_setGeometry(self: pointer, rect: pointer): void{.importc: "QGraphicsGridLayout_virtualbase_setGeometry".}
-proc fcQGraphicsGridLayout_override_virtual_setGeometry(self: pointer, slot: int) {.importc: "QGraphicsGridLayout_override_virtual_setGeometry".}
-proc fQGraphicsGridLayout_virtualbase_sizeHint(self: pointer, which: cint, constraint: pointer): pointer{.importc: "QGraphicsGridLayout_virtualbase_sizeHint".}
-proc fcQGraphicsGridLayout_override_virtual_sizeHint(self: pointer, slot: int) {.importc: "QGraphicsGridLayout_override_virtual_sizeHint".}
-proc fQGraphicsGridLayout_virtualbase_getContentsMargins(self: pointer, left: ptr float64, top: ptr float64, right: ptr float64, bottom: ptr float64): void{.importc: "QGraphicsGridLayout_virtualbase_getContentsMargins".}
-proc fcQGraphicsGridLayout_override_virtual_getContentsMargins(self: pointer, slot: int) {.importc: "QGraphicsGridLayout_override_virtual_getContentsMargins".}
-proc fQGraphicsGridLayout_virtualbase_updateGeometry(self: pointer, ): void{.importc: "QGraphicsGridLayout_virtualbase_updateGeometry".}
-proc fcQGraphicsGridLayout_override_virtual_updateGeometry(self: pointer, slot: int) {.importc: "QGraphicsGridLayout_override_virtual_updateGeometry".}
-proc fQGraphicsGridLayout_virtualbase_widgetEvent(self: pointer, e: pointer): void{.importc: "QGraphicsGridLayout_virtualbase_widgetEvent".}
-proc fcQGraphicsGridLayout_override_virtual_widgetEvent(self: pointer, slot: int) {.importc: "QGraphicsGridLayout_override_virtual_widgetEvent".}
-proc fQGraphicsGridLayout_virtualbase_isEmpty(self: pointer, ): bool{.importc: "QGraphicsGridLayout_virtualbase_isEmpty".}
-proc fcQGraphicsGridLayout_override_virtual_isEmpty(self: pointer, slot: int) {.importc: "QGraphicsGridLayout_override_virtual_isEmpty".}
+type cQGraphicsGridLayoutVTable = object
+  destructor*: proc(vtbl: ptr cQGraphicsGridLayoutVTable, self: ptr cQGraphicsGridLayout) {.cdecl, raises:[], gcsafe.}
+  count*: proc(vtbl, self: pointer, ): cint {.cdecl, raises: [], gcsafe.}
+  itemAtWithIndex*: proc(vtbl, self: pointer, index: cint): pointer {.cdecl, raises: [], gcsafe.}
+  removeAt*: proc(vtbl, self: pointer, index: cint): void {.cdecl, raises: [], gcsafe.}
+  invalidate*: proc(vtbl, self: pointer, ): void {.cdecl, raises: [], gcsafe.}
+  setGeometry*: proc(vtbl, self: pointer, rect: pointer): void {.cdecl, raises: [], gcsafe.}
+  sizeHint*: proc(vtbl, self: pointer, which: cint, constraint: pointer): pointer {.cdecl, raises: [], gcsafe.}
+  getContentsMargins*: proc(vtbl, self: pointer, left: ptr float64, top: ptr float64, right: ptr float64, bottom: ptr float64): void {.cdecl, raises: [], gcsafe.}
+  updateGeometry*: proc(vtbl, self: pointer, ): void {.cdecl, raises: [], gcsafe.}
+  widgetEvent*: proc(vtbl, self: pointer, e: pointer): void {.cdecl, raises: [], gcsafe.}
+  isEmpty*: proc(vtbl, self: pointer, ): bool {.cdecl, raises: [], gcsafe.}
+proc fcQGraphicsGridLayout_virtualbase_count(self: pointer, ): cint {.importc: "QGraphicsGridLayout_virtualbase_count".}
+proc fcQGraphicsGridLayout_virtualbase_itemAtWithIndex(self: pointer, index: cint): pointer {.importc: "QGraphicsGridLayout_virtualbase_itemAtWithIndex".}
+proc fcQGraphicsGridLayout_virtualbase_removeAt(self: pointer, index: cint): void {.importc: "QGraphicsGridLayout_virtualbase_removeAt".}
+proc fcQGraphicsGridLayout_virtualbase_invalidate(self: pointer, ): void {.importc: "QGraphicsGridLayout_virtualbase_invalidate".}
+proc fcQGraphicsGridLayout_virtualbase_setGeometry(self: pointer, rect: pointer): void {.importc: "QGraphicsGridLayout_virtualbase_setGeometry".}
+proc fcQGraphicsGridLayout_virtualbase_sizeHint(self: pointer, which: cint, constraint: pointer): pointer {.importc: "QGraphicsGridLayout_virtualbase_sizeHint".}
+proc fcQGraphicsGridLayout_virtualbase_getContentsMargins(self: pointer, left: ptr float64, top: ptr float64, right: ptr float64, bottom: ptr float64): void {.importc: "QGraphicsGridLayout_virtualbase_getContentsMargins".}
+proc fcQGraphicsGridLayout_virtualbase_updateGeometry(self: pointer, ): void {.importc: "QGraphicsGridLayout_virtualbase_updateGeometry".}
+proc fcQGraphicsGridLayout_virtualbase_widgetEvent(self: pointer, e: pointer): void {.importc: "QGraphicsGridLayout_virtualbase_widgetEvent".}
+proc fcQGraphicsGridLayout_virtualbase_isEmpty(self: pointer, ): bool {.importc: "QGraphicsGridLayout_virtualbase_isEmpty".}
+proc fcQGraphicsGridLayout_new(vtbl: pointer, ): ptr cQGraphicsGridLayout {.importc: "QGraphicsGridLayout_new".}
+proc fcQGraphicsGridLayout_new2(vtbl: pointer, parent: pointer): ptr cQGraphicsGridLayout {.importc: "QGraphicsGridLayout_new2".}
 proc fcQGraphicsGridLayout_delete(self: pointer) {.importc: "QGraphicsGridLayout_delete".}
-
-
-func init*(T: type gen_qgraphicsgridlayout_types.QGraphicsGridLayout, h: ptr cQGraphicsGridLayout): gen_qgraphicsgridlayout_types.QGraphicsGridLayout =
-  T(h: h)
-proc create*(T: type gen_qgraphicsgridlayout_types.QGraphicsGridLayout, ): gen_qgraphicsgridlayout_types.QGraphicsGridLayout =
-  gen_qgraphicsgridlayout_types.QGraphicsGridLayout.init(fcQGraphicsGridLayout_new())
-
-proc create*(T: type gen_qgraphicsgridlayout_types.QGraphicsGridLayout, parent: gen_qgraphicslayoutitem_types.QGraphicsLayoutItem): gen_qgraphicsgridlayout_types.QGraphicsGridLayout =
-  gen_qgraphicsgridlayout_types.QGraphicsGridLayout.init(fcQGraphicsGridLayout_new2(parent.h))
 
 proc addItem*(self: gen_qgraphicsgridlayout_types.QGraphicsGridLayout, item: gen_qgraphicslayoutitem_types.QGraphicsLayoutItem, row: cint, column: cint, rowSpan: cint, columnSpan: cint): void =
   fcQGraphicsGridLayout_addItem(self.h, item.h, row, column, rowSpan, columnSpan)
@@ -273,183 +266,180 @@ proc addItem*(self: gen_qgraphicsgridlayout_types.QGraphicsGridLayout, item: gen
 proc addItem*(self: gen_qgraphicsgridlayout_types.QGraphicsGridLayout, item: gen_qgraphicslayoutitem_types.QGraphicsLayoutItem, row: cint, column: cint, alignment: cint): void =
   fcQGraphicsGridLayout_addItem4(self.h, item.h, row, column, cint(alignment))
 
+type QGraphicsGridLayoutcountProc* = proc(self: QGraphicsGridLayout): cint {.raises: [], gcsafe.}
+type QGraphicsGridLayoutitemAtWithIndexProc* = proc(self: QGraphicsGridLayout, index: cint): gen_qgraphicslayoutitem_types.QGraphicsLayoutItem {.raises: [], gcsafe.}
+type QGraphicsGridLayoutremoveAtProc* = proc(self: QGraphicsGridLayout, index: cint): void {.raises: [], gcsafe.}
+type QGraphicsGridLayoutinvalidateProc* = proc(self: QGraphicsGridLayout): void {.raises: [], gcsafe.}
+type QGraphicsGridLayoutsetGeometryProc* = proc(self: QGraphicsGridLayout, rect: gen_qrect_types.QRectF): void {.raises: [], gcsafe.}
+type QGraphicsGridLayoutsizeHintProc* = proc(self: QGraphicsGridLayout, which: cint, constraint: gen_qsize_types.QSizeF): gen_qsize_types.QSizeF {.raises: [], gcsafe.}
+type QGraphicsGridLayoutgetContentsMarginsProc* = proc(self: QGraphicsGridLayout, left: ptr float64, top: ptr float64, right: ptr float64, bottom: ptr float64): void {.raises: [], gcsafe.}
+type QGraphicsGridLayoutupdateGeometryProc* = proc(self: QGraphicsGridLayout): void {.raises: [], gcsafe.}
+type QGraphicsGridLayoutwidgetEventProc* = proc(self: QGraphicsGridLayout, e: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
+type QGraphicsGridLayoutisEmptyProc* = proc(self: QGraphicsGridLayout): bool {.raises: [], gcsafe.}
+type QGraphicsGridLayoutVTable* = object
+  vtbl: cQGraphicsGridLayoutVTable
+  count*: QGraphicsGridLayoutcountProc
+  itemAtWithIndex*: QGraphicsGridLayoutitemAtWithIndexProc
+  removeAt*: QGraphicsGridLayoutremoveAtProc
+  invalidate*: QGraphicsGridLayoutinvalidateProc
+  setGeometry*: QGraphicsGridLayoutsetGeometryProc
+  sizeHint*: QGraphicsGridLayoutsizeHintProc
+  getContentsMargins*: QGraphicsGridLayoutgetContentsMarginsProc
+  updateGeometry*: QGraphicsGridLayoutupdateGeometryProc
+  widgetEvent*: QGraphicsGridLayoutwidgetEventProc
+  isEmpty*: QGraphicsGridLayoutisEmptyProc
 proc QGraphicsGridLayoutcount*(self: gen_qgraphicsgridlayout_types.QGraphicsGridLayout, ): cint =
-  fQGraphicsGridLayout_virtualbase_count(self.h)
+  fcQGraphicsGridLayout_virtualbase_count(self.h)
 
-type QGraphicsGridLayoutcountProc* = proc(): cint
-proc oncount*(self: gen_qgraphicsgridlayout_types.QGraphicsGridLayout, slot: QGraphicsGridLayoutcountProc) =
-  # TODO check subclass
-  var tmp = new QGraphicsGridLayoutcountProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQGraphicsGridLayout_override_virtual_count(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QGraphicsGridLayout_count(self: ptr cQGraphicsGridLayout, slot: int): cint {.exportc: "miqt_exec_callback_QGraphicsGridLayout_count ".} =
-  var nimfunc = cast[ptr QGraphicsGridLayoutcountProc](cast[pointer](slot))
-
-  let virtualReturn = nimfunc[]( )
-
+proc miqt_exec_callback_cQGraphicsGridLayout_count(vtbl: pointer, self: pointer): cint {.cdecl.} =
+  let vtbl = cast[ptr QGraphicsGridLayoutVTable](vtbl)
+  let self = QGraphicsGridLayout(h: self)
+  var virtualReturn = vtbl[].count(self)
   virtualReturn
+
 proc QGraphicsGridLayoutitemAt*(self: gen_qgraphicsgridlayout_types.QGraphicsGridLayout, index: cint): gen_qgraphicslayoutitem_types.QGraphicsLayoutItem =
-  gen_qgraphicslayoutitem_types.QGraphicsLayoutItem(h: fQGraphicsGridLayout_virtualbase_itemAtWithIndex(self.h, index))
+  gen_qgraphicslayoutitem_types.QGraphicsLayoutItem(h: fcQGraphicsGridLayout_virtualbase_itemAtWithIndex(self.h, index))
 
-type QGraphicsGridLayoutitemAtWithIndexProc* = proc(index: cint): gen_qgraphicslayoutitem_types.QGraphicsLayoutItem
-proc onitemAt*(self: gen_qgraphicsgridlayout_types.QGraphicsGridLayout, slot: QGraphicsGridLayoutitemAtWithIndexProc) =
-  # TODO check subclass
-  var tmp = new QGraphicsGridLayoutitemAtWithIndexProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQGraphicsGridLayout_override_virtual_itemAtWithIndex(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QGraphicsGridLayout_itemAtWithIndex(self: ptr cQGraphicsGridLayout, slot: int, index: cint): pointer {.exportc: "miqt_exec_callback_QGraphicsGridLayout_itemAtWithIndex ".} =
-  var nimfunc = cast[ptr QGraphicsGridLayoutitemAtWithIndexProc](cast[pointer](slot))
+proc miqt_exec_callback_cQGraphicsGridLayout_itemAtWithIndex(vtbl: pointer, self: pointer, index: cint): pointer {.cdecl.} =
+  let vtbl = cast[ptr QGraphicsGridLayoutVTable](vtbl)
+  let self = QGraphicsGridLayout(h: self)
   let slotval1 = index
-
-
-  let virtualReturn = nimfunc[](slotval1 )
-
+  var virtualReturn = vtbl[].itemAtWithIndex(self, slotval1)
   virtualReturn.h
+
 proc QGraphicsGridLayoutremoveAt*(self: gen_qgraphicsgridlayout_types.QGraphicsGridLayout, index: cint): void =
-  fQGraphicsGridLayout_virtualbase_removeAt(self.h, index)
+  fcQGraphicsGridLayout_virtualbase_removeAt(self.h, index)
 
-type QGraphicsGridLayoutremoveAtProc* = proc(index: cint): void
-proc onremoveAt*(self: gen_qgraphicsgridlayout_types.QGraphicsGridLayout, slot: QGraphicsGridLayoutremoveAtProc) =
-  # TODO check subclass
-  var tmp = new QGraphicsGridLayoutremoveAtProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQGraphicsGridLayout_override_virtual_removeAt(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QGraphicsGridLayout_removeAt(self: ptr cQGraphicsGridLayout, slot: int, index: cint): void {.exportc: "miqt_exec_callback_QGraphicsGridLayout_removeAt ".} =
-  var nimfunc = cast[ptr QGraphicsGridLayoutremoveAtProc](cast[pointer](slot))
+proc miqt_exec_callback_cQGraphicsGridLayout_removeAt(vtbl: pointer, self: pointer, index: cint): void {.cdecl.} =
+  let vtbl = cast[ptr QGraphicsGridLayoutVTable](vtbl)
+  let self = QGraphicsGridLayout(h: self)
   let slotval1 = index
+  vtbl[].removeAt(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QGraphicsGridLayoutinvalidate*(self: gen_qgraphicsgridlayout_types.QGraphicsGridLayout, ): void =
-  fQGraphicsGridLayout_virtualbase_invalidate(self.h)
+  fcQGraphicsGridLayout_virtualbase_invalidate(self.h)
 
-type QGraphicsGridLayoutinvalidateProc* = proc(): void
-proc oninvalidate*(self: gen_qgraphicsgridlayout_types.QGraphicsGridLayout, slot: QGraphicsGridLayoutinvalidateProc) =
-  # TODO check subclass
-  var tmp = new QGraphicsGridLayoutinvalidateProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQGraphicsGridLayout_override_virtual_invalidate(self.h, cast[int](addr tmp[]))
+proc miqt_exec_callback_cQGraphicsGridLayout_invalidate(vtbl: pointer, self: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QGraphicsGridLayoutVTable](vtbl)
+  let self = QGraphicsGridLayout(h: self)
+  vtbl[].invalidate(self)
 
-proc miqt_exec_callback_QGraphicsGridLayout_invalidate(self: ptr cQGraphicsGridLayout, slot: int): void {.exportc: "miqt_exec_callback_QGraphicsGridLayout_invalidate ".} =
-  var nimfunc = cast[ptr QGraphicsGridLayoutinvalidateProc](cast[pointer](slot))
-
-  nimfunc[]()
 proc QGraphicsGridLayoutsetGeometry*(self: gen_qgraphicsgridlayout_types.QGraphicsGridLayout, rect: gen_qrect_types.QRectF): void =
-  fQGraphicsGridLayout_virtualbase_setGeometry(self.h, rect.h)
+  fcQGraphicsGridLayout_virtualbase_setGeometry(self.h, rect.h)
 
-type QGraphicsGridLayoutsetGeometryProc* = proc(rect: gen_qrect_types.QRectF): void
-proc onsetGeometry*(self: gen_qgraphicsgridlayout_types.QGraphicsGridLayout, slot: QGraphicsGridLayoutsetGeometryProc) =
-  # TODO check subclass
-  var tmp = new QGraphicsGridLayoutsetGeometryProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQGraphicsGridLayout_override_virtual_setGeometry(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QGraphicsGridLayout_setGeometry(self: ptr cQGraphicsGridLayout, slot: int, rect: pointer): void {.exportc: "miqt_exec_callback_QGraphicsGridLayout_setGeometry ".} =
-  var nimfunc = cast[ptr QGraphicsGridLayoutsetGeometryProc](cast[pointer](slot))
+proc miqt_exec_callback_cQGraphicsGridLayout_setGeometry(vtbl: pointer, self: pointer, rect: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QGraphicsGridLayoutVTable](vtbl)
+  let self = QGraphicsGridLayout(h: self)
   let slotval1 = gen_qrect_types.QRectF(h: rect)
+  vtbl[].setGeometry(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QGraphicsGridLayoutsizeHint*(self: gen_qgraphicsgridlayout_types.QGraphicsGridLayout, which: cint, constraint: gen_qsize_types.QSizeF): gen_qsize_types.QSizeF =
-  gen_qsize_types.QSizeF(h: fQGraphicsGridLayout_virtualbase_sizeHint(self.h, cint(which), constraint.h))
+  gen_qsize_types.QSizeF(h: fcQGraphicsGridLayout_virtualbase_sizeHint(self.h, cint(which), constraint.h))
 
-type QGraphicsGridLayoutsizeHintProc* = proc(which: cint, constraint: gen_qsize_types.QSizeF): gen_qsize_types.QSizeF
-proc onsizeHint*(self: gen_qgraphicsgridlayout_types.QGraphicsGridLayout, slot: QGraphicsGridLayoutsizeHintProc) =
-  # TODO check subclass
-  var tmp = new QGraphicsGridLayoutsizeHintProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQGraphicsGridLayout_override_virtual_sizeHint(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QGraphicsGridLayout_sizeHint(self: ptr cQGraphicsGridLayout, slot: int, which: cint, constraint: pointer): pointer {.exportc: "miqt_exec_callback_QGraphicsGridLayout_sizeHint ".} =
-  var nimfunc = cast[ptr QGraphicsGridLayoutsizeHintProc](cast[pointer](slot))
+proc miqt_exec_callback_cQGraphicsGridLayout_sizeHint(vtbl: pointer, self: pointer, which: cint, constraint: pointer): pointer {.cdecl.} =
+  let vtbl = cast[ptr QGraphicsGridLayoutVTable](vtbl)
+  let self = QGraphicsGridLayout(h: self)
   let slotval1 = cint(which)
-
   let slotval2 = gen_qsize_types.QSizeF(h: constraint)
-
-
-  let virtualReturn = nimfunc[](slotval1, slotval2 )
-
+  var virtualReturn = vtbl[].sizeHint(self, slotval1, slotval2)
   virtualReturn.h
+
 proc QGraphicsGridLayoutgetContentsMargins*(self: gen_qgraphicsgridlayout_types.QGraphicsGridLayout, left: ptr float64, top: ptr float64, right: ptr float64, bottom: ptr float64): void =
-  fQGraphicsGridLayout_virtualbase_getContentsMargins(self.h, left, top, right, bottom)
+  fcQGraphicsGridLayout_virtualbase_getContentsMargins(self.h, left, top, right, bottom)
 
-type QGraphicsGridLayoutgetContentsMarginsProc* = proc(left: ptr float64, top: ptr float64, right: ptr float64, bottom: ptr float64): void
-proc ongetContentsMargins*(self: gen_qgraphicsgridlayout_types.QGraphicsGridLayout, slot: QGraphicsGridLayoutgetContentsMarginsProc) =
-  # TODO check subclass
-  var tmp = new QGraphicsGridLayoutgetContentsMarginsProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQGraphicsGridLayout_override_virtual_getContentsMargins(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QGraphicsGridLayout_getContentsMargins(self: ptr cQGraphicsGridLayout, slot: int, left: ptr float64, top: ptr float64, right: ptr float64, bottom: ptr float64): void {.exportc: "miqt_exec_callback_QGraphicsGridLayout_getContentsMargins ".} =
-  var nimfunc = cast[ptr QGraphicsGridLayoutgetContentsMarginsProc](cast[pointer](slot))
+proc miqt_exec_callback_cQGraphicsGridLayout_getContentsMargins(vtbl: pointer, self: pointer, left: ptr float64, top: ptr float64, right: ptr float64, bottom: ptr float64): void {.cdecl.} =
+  let vtbl = cast[ptr QGraphicsGridLayoutVTable](vtbl)
+  let self = QGraphicsGridLayout(h: self)
   let slotval1 = left
-
   let slotval2 = top
-
   let slotval3 = right
-
   let slotval4 = bottom
+  vtbl[].getContentsMargins(self, slotval1, slotval2, slotval3, slotval4)
 
-
-  nimfunc[](slotval1, slotval2, slotval3, slotval4)
 proc QGraphicsGridLayoutupdateGeometry*(self: gen_qgraphicsgridlayout_types.QGraphicsGridLayout, ): void =
-  fQGraphicsGridLayout_virtualbase_updateGeometry(self.h)
+  fcQGraphicsGridLayout_virtualbase_updateGeometry(self.h)
 
-type QGraphicsGridLayoutupdateGeometryProc* = proc(): void
-proc onupdateGeometry*(self: gen_qgraphicsgridlayout_types.QGraphicsGridLayout, slot: QGraphicsGridLayoutupdateGeometryProc) =
-  # TODO check subclass
-  var tmp = new QGraphicsGridLayoutupdateGeometryProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQGraphicsGridLayout_override_virtual_updateGeometry(self.h, cast[int](addr tmp[]))
+proc miqt_exec_callback_cQGraphicsGridLayout_updateGeometry(vtbl: pointer, self: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QGraphicsGridLayoutVTable](vtbl)
+  let self = QGraphicsGridLayout(h: self)
+  vtbl[].updateGeometry(self)
 
-proc miqt_exec_callback_QGraphicsGridLayout_updateGeometry(self: ptr cQGraphicsGridLayout, slot: int): void {.exportc: "miqt_exec_callback_QGraphicsGridLayout_updateGeometry ".} =
-  var nimfunc = cast[ptr QGraphicsGridLayoutupdateGeometryProc](cast[pointer](slot))
-
-  nimfunc[]()
 proc QGraphicsGridLayoutwidgetEvent*(self: gen_qgraphicsgridlayout_types.QGraphicsGridLayout, e: gen_qcoreevent_types.QEvent): void =
-  fQGraphicsGridLayout_virtualbase_widgetEvent(self.h, e.h)
+  fcQGraphicsGridLayout_virtualbase_widgetEvent(self.h, e.h)
 
-type QGraphicsGridLayoutwidgetEventProc* = proc(e: gen_qcoreevent_types.QEvent): void
-proc onwidgetEvent*(self: gen_qgraphicsgridlayout_types.QGraphicsGridLayout, slot: QGraphicsGridLayoutwidgetEventProc) =
-  # TODO check subclass
-  var tmp = new QGraphicsGridLayoutwidgetEventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQGraphicsGridLayout_override_virtual_widgetEvent(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QGraphicsGridLayout_widgetEvent(self: ptr cQGraphicsGridLayout, slot: int, e: pointer): void {.exportc: "miqt_exec_callback_QGraphicsGridLayout_widgetEvent ".} =
-  var nimfunc = cast[ptr QGraphicsGridLayoutwidgetEventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQGraphicsGridLayout_widgetEvent(vtbl: pointer, self: pointer, e: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QGraphicsGridLayoutVTable](vtbl)
+  let self = QGraphicsGridLayout(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: e)
+  vtbl[].widgetEvent(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QGraphicsGridLayoutisEmpty*(self: gen_qgraphicsgridlayout_types.QGraphicsGridLayout, ): bool =
-  fQGraphicsGridLayout_virtualbase_isEmpty(self.h)
+  fcQGraphicsGridLayout_virtualbase_isEmpty(self.h)
 
-type QGraphicsGridLayoutisEmptyProc* = proc(): bool
-proc onisEmpty*(self: gen_qgraphicsgridlayout_types.QGraphicsGridLayout, slot: QGraphicsGridLayoutisEmptyProc) =
-  # TODO check subclass
-  var tmp = new QGraphicsGridLayoutisEmptyProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQGraphicsGridLayout_override_virtual_isEmpty(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QGraphicsGridLayout_isEmpty(self: ptr cQGraphicsGridLayout, slot: int): bool {.exportc: "miqt_exec_callback_QGraphicsGridLayout_isEmpty ".} =
-  var nimfunc = cast[ptr QGraphicsGridLayoutisEmptyProc](cast[pointer](slot))
-
-  let virtualReturn = nimfunc[]( )
-
+proc miqt_exec_callback_cQGraphicsGridLayout_isEmpty(vtbl: pointer, self: pointer): bool {.cdecl.} =
+  let vtbl = cast[ptr QGraphicsGridLayoutVTable](vtbl)
+  let self = QGraphicsGridLayout(h: self)
+  var virtualReturn = vtbl[].isEmpty(self)
   virtualReturn
+
+proc create*(T: type gen_qgraphicsgridlayout_types.QGraphicsGridLayout,
+    vtbl: ref QGraphicsGridLayoutVTable = nil): gen_qgraphicsgridlayout_types.QGraphicsGridLayout =
+  let vtbl = if vtbl == nil: new QGraphicsGridLayoutVTable else: vtbl
+  GC_ref(vtbl)
+  vtbl.vtbl.destructor = proc(vtbl: ptr cQGraphicsGridLayoutVTable, _: ptr cQGraphicsGridLayout) {.cdecl.} =
+    let vtbl = cast[ref QGraphicsGridLayoutVTable](vtbl)
+    GC_unref(vtbl)
+  if not isNil(vtbl.count):
+    vtbl[].vtbl.count = miqt_exec_callback_cQGraphicsGridLayout_count
+  if not isNil(vtbl.itemAtWithIndex):
+    vtbl[].vtbl.itemAtWithIndex = miqt_exec_callback_cQGraphicsGridLayout_itemAtWithIndex
+  if not isNil(vtbl.removeAt):
+    vtbl[].vtbl.removeAt = miqt_exec_callback_cQGraphicsGridLayout_removeAt
+  if not isNil(vtbl.invalidate):
+    vtbl[].vtbl.invalidate = miqt_exec_callback_cQGraphicsGridLayout_invalidate
+  if not isNil(vtbl.setGeometry):
+    vtbl[].vtbl.setGeometry = miqt_exec_callback_cQGraphicsGridLayout_setGeometry
+  if not isNil(vtbl.sizeHint):
+    vtbl[].vtbl.sizeHint = miqt_exec_callback_cQGraphicsGridLayout_sizeHint
+  if not isNil(vtbl.getContentsMargins):
+    vtbl[].vtbl.getContentsMargins = miqt_exec_callback_cQGraphicsGridLayout_getContentsMargins
+  if not isNil(vtbl.updateGeometry):
+    vtbl[].vtbl.updateGeometry = miqt_exec_callback_cQGraphicsGridLayout_updateGeometry
+  if not isNil(vtbl.widgetEvent):
+    vtbl[].vtbl.widgetEvent = miqt_exec_callback_cQGraphicsGridLayout_widgetEvent
+  if not isNil(vtbl.isEmpty):
+    vtbl[].vtbl.isEmpty = miqt_exec_callback_cQGraphicsGridLayout_isEmpty
+  gen_qgraphicsgridlayout_types.QGraphicsGridLayout(h: fcQGraphicsGridLayout_new(addr(vtbl[]), ))
+
+proc create*(T: type gen_qgraphicsgridlayout_types.QGraphicsGridLayout,
+    parent: gen_qgraphicslayoutitem_types.QGraphicsLayoutItem,
+    vtbl: ref QGraphicsGridLayoutVTable = nil): gen_qgraphicsgridlayout_types.QGraphicsGridLayout =
+  let vtbl = if vtbl == nil: new QGraphicsGridLayoutVTable else: vtbl
+  GC_ref(vtbl)
+  vtbl.vtbl.destructor = proc(vtbl: ptr cQGraphicsGridLayoutVTable, _: ptr cQGraphicsGridLayout) {.cdecl.} =
+    let vtbl = cast[ref QGraphicsGridLayoutVTable](vtbl)
+    GC_unref(vtbl)
+  if not isNil(vtbl.count):
+    vtbl[].vtbl.count = miqt_exec_callback_cQGraphicsGridLayout_count
+  if not isNil(vtbl.itemAtWithIndex):
+    vtbl[].vtbl.itemAtWithIndex = miqt_exec_callback_cQGraphicsGridLayout_itemAtWithIndex
+  if not isNil(vtbl.removeAt):
+    vtbl[].vtbl.removeAt = miqt_exec_callback_cQGraphicsGridLayout_removeAt
+  if not isNil(vtbl.invalidate):
+    vtbl[].vtbl.invalidate = miqt_exec_callback_cQGraphicsGridLayout_invalidate
+  if not isNil(vtbl.setGeometry):
+    vtbl[].vtbl.setGeometry = miqt_exec_callback_cQGraphicsGridLayout_setGeometry
+  if not isNil(vtbl.sizeHint):
+    vtbl[].vtbl.sizeHint = miqt_exec_callback_cQGraphicsGridLayout_sizeHint
+  if not isNil(vtbl.getContentsMargins):
+    vtbl[].vtbl.getContentsMargins = miqt_exec_callback_cQGraphicsGridLayout_getContentsMargins
+  if not isNil(vtbl.updateGeometry):
+    vtbl[].vtbl.updateGeometry = miqt_exec_callback_cQGraphicsGridLayout_updateGeometry
+  if not isNil(vtbl.widgetEvent):
+    vtbl[].vtbl.widgetEvent = miqt_exec_callback_cQGraphicsGridLayout_widgetEvent
+  if not isNil(vtbl.isEmpty):
+    vtbl[].vtbl.isEmpty = miqt_exec_callback_cQGraphicsGridLayout_isEmpty
+  gen_qgraphicsgridlayout_types.QGraphicsGridLayout(h: fcQGraphicsGridLayout_new2(addr(vtbl[]), parent.h))
+
 proc delete*(self: gen_qgraphicsgridlayout_types.QGraphicsGridLayout) =
   fcQGraphicsGridLayout_delete(self.h)

@@ -74,8 +74,6 @@ type cQMetaEnum*{.exportc: "QMetaEnum", incompleteStruct.} = object
 type cQMetaProperty*{.exportc: "QMetaProperty", incompleteStruct.} = object
 type cQMetaClassInfo*{.exportc: "QMetaClassInfo", incompleteStruct.} = object
 
-proc fcQMetaMethod_new(): ptr cQMetaMethod {.importc: "QMetaMethod_new".}
-proc fcQMetaMethod_new2(param1: pointer): ptr cQMetaMethod {.importc: "QMetaMethod_new2".}
 proc fcQMetaMethod_methodSignature(self: pointer, ): struct_miqt_string {.importc: "QMetaMethod_methodSignature".}
 proc fcQMetaMethod_name(self: pointer, ): struct_miqt_string {.importc: "QMetaMethod_name".}
 proc fcQMetaMethod_typeName(self: pointer, ): cstring {.importc: "QMetaMethod_typeName".}
@@ -164,9 +162,9 @@ proc fcQMetaMethod_invokeOnGadget82(self: pointer, gadget: pointer, val0: pointe
 proc fcQMetaMethod_invokeOnGadget92(self: pointer, gadget: pointer, val0: pointer, val1: pointer, val2: pointer, val3: pointer, val4: pointer, val5: pointer, val6: pointer, val7: pointer): bool {.importc: "QMetaMethod_invokeOnGadget92".}
 proc fcQMetaMethod_invokeOnGadget102(self: pointer, gadget: pointer, val0: pointer, val1: pointer, val2: pointer, val3: pointer, val4: pointer, val5: pointer, val6: pointer, val7: pointer, val8: pointer): bool {.importc: "QMetaMethod_invokeOnGadget102".}
 proc fcQMetaMethod_invokeOnGadget112(self: pointer, gadget: pointer, val0: pointer, val1: pointer, val2: pointer, val3: pointer, val4: pointer, val5: pointer, val6: pointer, val7: pointer, val8: pointer, val9: pointer): bool {.importc: "QMetaMethod_invokeOnGadget112".}
+proc fcQMetaMethod_new(): ptr cQMetaMethod {.importc: "QMetaMethod_new".}
+proc fcQMetaMethod_new2(param1: pointer): ptr cQMetaMethod {.importc: "QMetaMethod_new2".}
 proc fcQMetaMethod_delete(self: pointer) {.importc: "QMetaMethod_delete".}
-proc fcQMetaEnum_new(): ptr cQMetaEnum {.importc: "QMetaEnum_new".}
-proc fcQMetaEnum_new2(param1: pointer): ptr cQMetaEnum {.importc: "QMetaEnum_new2".}
 proc fcQMetaEnum_name(self: pointer, ): cstring {.importc: "QMetaEnum_name".}
 proc fcQMetaEnum_enumName(self: pointer, ): cstring {.importc: "QMetaEnum_enumName".}
 proc fcQMetaEnum_isFlag(self: pointer, ): bool {.importc: "QMetaEnum_isFlag".}
@@ -183,8 +181,9 @@ proc fcQMetaEnum_enclosingMetaObject(self: pointer, ): pointer {.importc: "QMeta
 proc fcQMetaEnum_isValid(self: pointer, ): bool {.importc: "QMetaEnum_isValid".}
 proc fcQMetaEnum_keyToValue2(self: pointer, key: cstring, ok: ptr bool): cint {.importc: "QMetaEnum_keyToValue2".}
 proc fcQMetaEnum_keysToValue2(self: pointer, keys: cstring, ok: ptr bool): cint {.importc: "QMetaEnum_keysToValue2".}
+proc fcQMetaEnum_new(): ptr cQMetaEnum {.importc: "QMetaEnum_new".}
+proc fcQMetaEnum_new2(param1: pointer): ptr cQMetaEnum {.importc: "QMetaEnum_new2".}
 proc fcQMetaEnum_delete(self: pointer) {.importc: "QMetaEnum_delete".}
-proc fcQMetaProperty_new(): ptr cQMetaProperty {.importc: "QMetaProperty_new".}
 proc fcQMetaProperty_name(self: pointer, ): cstring {.importc: "QMetaProperty_name".}
 proc fcQMetaProperty_typeName(self: pointer, ): cstring {.importc: "QMetaProperty_typeName".}
 proc fcQMetaProperty_typeX(self: pointer, ): cint {.importc: "QMetaProperty_type".}
@@ -222,21 +221,13 @@ proc fcQMetaProperty_hasStdCppSet(self: pointer, ): bool {.importc: "QMetaProper
 proc fcQMetaProperty_isAlias(self: pointer, ): bool {.importc: "QMetaProperty_isAlias".}
 proc fcQMetaProperty_isValid(self: pointer, ): bool {.importc: "QMetaProperty_isValid".}
 proc fcQMetaProperty_enclosingMetaObject(self: pointer, ): pointer {.importc: "QMetaProperty_enclosingMetaObject".}
+proc fcQMetaProperty_new(): ptr cQMetaProperty {.importc: "QMetaProperty_new".}
 proc fcQMetaProperty_delete(self: pointer) {.importc: "QMetaProperty_delete".}
-proc fcQMetaClassInfo_new(): ptr cQMetaClassInfo {.importc: "QMetaClassInfo_new".}
 proc fcQMetaClassInfo_name(self: pointer, ): cstring {.importc: "QMetaClassInfo_name".}
 proc fcQMetaClassInfo_value(self: pointer, ): cstring {.importc: "QMetaClassInfo_value".}
 proc fcQMetaClassInfo_enclosingMetaObject(self: pointer, ): pointer {.importc: "QMetaClassInfo_enclosingMetaObject".}
+proc fcQMetaClassInfo_new(): ptr cQMetaClassInfo {.importc: "QMetaClassInfo_new".}
 proc fcQMetaClassInfo_delete(self: pointer) {.importc: "QMetaClassInfo_delete".}
-
-
-func init*(T: type gen_qmetaobject_types.QMetaMethod, h: ptr cQMetaMethod): gen_qmetaobject_types.QMetaMethod =
-  T(h: h)
-proc create*(T: type gen_qmetaobject_types.QMetaMethod, ): gen_qmetaobject_types.QMetaMethod =
-  gen_qmetaobject_types.QMetaMethod.init(fcQMetaMethod_new())
-
-proc create*(T: type gen_qmetaobject_types.QMetaMethod, param1: gen_qmetaobject_types.QMetaMethod): gen_qmetaobject_types.QMetaMethod =
-  gen_qmetaobject_types.QMetaMethod.init(fcQMetaMethod_new2(param1.h))
 
 proc methodSignature*(self: gen_qmetaobject_types.QMetaMethod, ): seq[byte] =
   var v_bytearray = fcQMetaMethod_methodSignature(self.h)
@@ -527,17 +518,15 @@ proc invokeOnGadget*(self: gen_qmetaobject_types.QMetaMethod, gadget: pointer, v
 proc invokeOnGadget*(self: gen_qmetaobject_types.QMetaMethod, gadget: pointer, val0: gen_qobjectdefs_types.QGenericArgument, val1: gen_qobjectdefs_types.QGenericArgument, val2: gen_qobjectdefs_types.QGenericArgument, val3: gen_qobjectdefs_types.QGenericArgument, val4: gen_qobjectdefs_types.QGenericArgument, val5: gen_qobjectdefs_types.QGenericArgument, val6: gen_qobjectdefs_types.QGenericArgument, val7: gen_qobjectdefs_types.QGenericArgument, val8: gen_qobjectdefs_types.QGenericArgument, val9: gen_qobjectdefs_types.QGenericArgument): bool =
   fcQMetaMethod_invokeOnGadget112(self.h, gadget, val0.h, val1.h, val2.h, val3.h, val4.h, val5.h, val6.h, val7.h, val8.h, val9.h)
 
+proc create*(T: type gen_qmetaobject_types.QMetaMethod): gen_qmetaobject_types.QMetaMethod =
+  gen_qmetaobject_types.QMetaMethod(h: fcQMetaMethod_new())
+
+proc create*(T: type gen_qmetaobject_types.QMetaMethod,
+    param1: gen_qmetaobject_types.QMetaMethod): gen_qmetaobject_types.QMetaMethod =
+  gen_qmetaobject_types.QMetaMethod(h: fcQMetaMethod_new2(param1.h))
+
 proc delete*(self: gen_qmetaobject_types.QMetaMethod) =
   fcQMetaMethod_delete(self.h)
-
-func init*(T: type gen_qmetaobject_types.QMetaEnum, h: ptr cQMetaEnum): gen_qmetaobject_types.QMetaEnum =
-  T(h: h)
-proc create*(T: type gen_qmetaobject_types.QMetaEnum, ): gen_qmetaobject_types.QMetaEnum =
-  gen_qmetaobject_types.QMetaEnum.init(fcQMetaEnum_new())
-
-proc create*(T: type gen_qmetaobject_types.QMetaEnum, param1: gen_qmetaobject_types.QMetaEnum): gen_qmetaobject_types.QMetaEnum =
-  gen_qmetaobject_types.QMetaEnum.init(fcQMetaEnum_new2(param1.h))
-
 proc name*(self: gen_qmetaobject_types.QMetaEnum, ): cstring =
   (fcQMetaEnum_name(self.h))
 
@@ -589,14 +578,15 @@ proc keyToValue*(self: gen_qmetaobject_types.QMetaEnum, key: cstring, ok: ptr bo
 proc keysToValue*(self: gen_qmetaobject_types.QMetaEnum, keys: cstring, ok: ptr bool): cint =
   fcQMetaEnum_keysToValue2(self.h, keys, ok)
 
+proc create*(T: type gen_qmetaobject_types.QMetaEnum): gen_qmetaobject_types.QMetaEnum =
+  gen_qmetaobject_types.QMetaEnum(h: fcQMetaEnum_new())
+
+proc create*(T: type gen_qmetaobject_types.QMetaEnum,
+    param1: gen_qmetaobject_types.QMetaEnum): gen_qmetaobject_types.QMetaEnum =
+  gen_qmetaobject_types.QMetaEnum(h: fcQMetaEnum_new2(param1.h))
+
 proc delete*(self: gen_qmetaobject_types.QMetaEnum) =
   fcQMetaEnum_delete(self.h)
-
-func init*(T: type gen_qmetaobject_types.QMetaProperty, h: ptr cQMetaProperty): gen_qmetaobject_types.QMetaProperty =
-  T(h: h)
-proc create*(T: type gen_qmetaobject_types.QMetaProperty, ): gen_qmetaobject_types.QMetaProperty =
-  gen_qmetaobject_types.QMetaProperty.init(fcQMetaProperty_new())
-
 proc name*(self: gen_qmetaobject_types.QMetaProperty, ): cstring =
   (fcQMetaProperty_name(self.h))
 
@@ -708,14 +698,11 @@ proc isValid*(self: gen_qmetaobject_types.QMetaProperty, ): bool =
 proc enclosingMetaObject*(self: gen_qmetaobject_types.QMetaProperty, ): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQMetaProperty_enclosingMetaObject(self.h))
 
+proc create*(T: type gen_qmetaobject_types.QMetaProperty): gen_qmetaobject_types.QMetaProperty =
+  gen_qmetaobject_types.QMetaProperty(h: fcQMetaProperty_new())
+
 proc delete*(self: gen_qmetaobject_types.QMetaProperty) =
   fcQMetaProperty_delete(self.h)
-
-func init*(T: type gen_qmetaobject_types.QMetaClassInfo, h: ptr cQMetaClassInfo): gen_qmetaobject_types.QMetaClassInfo =
-  T(h: h)
-proc create*(T: type gen_qmetaobject_types.QMetaClassInfo, ): gen_qmetaobject_types.QMetaClassInfo =
-  gen_qmetaobject_types.QMetaClassInfo.init(fcQMetaClassInfo_new())
-
 proc name*(self: gen_qmetaobject_types.QMetaClassInfo, ): cstring =
   (fcQMetaClassInfo_name(self.h))
 
@@ -724,6 +711,9 @@ proc value*(self: gen_qmetaobject_types.QMetaClassInfo, ): cstring =
 
 proc enclosingMetaObject*(self: gen_qmetaobject_types.QMetaClassInfo, ): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQMetaClassInfo_enclosingMetaObject(self.h))
+
+proc create*(T: type gen_qmetaobject_types.QMetaClassInfo): gen_qmetaobject_types.QMetaClassInfo =
+  gen_qmetaobject_types.QMetaClassInfo(h: fcQMetaClassInfo_new())
 
 proc delete*(self: gen_qmetaobject_types.QMetaClassInfo) =
   fcQMetaClassInfo_delete(self.h)

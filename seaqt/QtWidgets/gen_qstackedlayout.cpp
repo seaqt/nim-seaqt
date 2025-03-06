@@ -23,647 +23,507 @@ extern "C" {
 
 void miqt_exec_callback_QStackedLayout_widgetRemoved(intptr_t, int);
 void miqt_exec_callback_QStackedLayout_currentChanged(intptr_t, int);
-QMetaObject* miqt_exec_callback_QStackedLayout_metaObject(const QStackedLayout*, intptr_t);
-void* miqt_exec_callback_QStackedLayout_metacast(QStackedLayout*, intptr_t, const char*);
-int miqt_exec_callback_QStackedLayout_metacall(QStackedLayout*, intptr_t, int, int, void**);
-int miqt_exec_callback_QStackedLayout_count(const QStackedLayout*, intptr_t);
-void miqt_exec_callback_QStackedLayout_addItem(QStackedLayout*, intptr_t, QLayoutItem*);
-QSize* miqt_exec_callback_QStackedLayout_sizeHint(const QStackedLayout*, intptr_t);
-QSize* miqt_exec_callback_QStackedLayout_minimumSize(const QStackedLayout*, intptr_t);
-QLayoutItem* miqt_exec_callback_QStackedLayout_itemAt(const QStackedLayout*, intptr_t, int);
-QLayoutItem* miqt_exec_callback_QStackedLayout_takeAt(QStackedLayout*, intptr_t, int);
-void miqt_exec_callback_QStackedLayout_setGeometry(QStackedLayout*, intptr_t, QRect*);
-bool miqt_exec_callback_QStackedLayout_hasHeightForWidth(const QStackedLayout*, intptr_t);
-int miqt_exec_callback_QStackedLayout_heightForWidth(const QStackedLayout*, intptr_t, int);
-int miqt_exec_callback_QStackedLayout_spacing(const QStackedLayout*, intptr_t);
-void miqt_exec_callback_QStackedLayout_setSpacing(QStackedLayout*, intptr_t, int);
-void miqt_exec_callback_QStackedLayout_invalidate(QStackedLayout*, intptr_t);
-QRect* miqt_exec_callback_QStackedLayout_geometry(const QStackedLayout*, intptr_t);
-int miqt_exec_callback_QStackedLayout_expandingDirections(const QStackedLayout*, intptr_t);
-QSize* miqt_exec_callback_QStackedLayout_maximumSize(const QStackedLayout*, intptr_t);
-int miqt_exec_callback_QStackedLayout_indexOf(const QStackedLayout*, intptr_t, QWidget*);
-bool miqt_exec_callback_QStackedLayout_isEmpty(const QStackedLayout*, intptr_t);
-int miqt_exec_callback_QStackedLayout_controlTypes(const QStackedLayout*, intptr_t);
-QLayoutItem* miqt_exec_callback_QStackedLayout_replaceWidget(QStackedLayout*, intptr_t, QWidget*, QWidget*, int);
-QLayout* miqt_exec_callback_QStackedLayout_layout(QStackedLayout*, intptr_t);
-void miqt_exec_callback_QStackedLayout_childEvent(QStackedLayout*, intptr_t, QChildEvent*);
-bool miqt_exec_callback_QStackedLayout_event(QStackedLayout*, intptr_t, QEvent*);
-bool miqt_exec_callback_QStackedLayout_eventFilter(QStackedLayout*, intptr_t, QObject*, QEvent*);
-void miqt_exec_callback_QStackedLayout_timerEvent(QStackedLayout*, intptr_t, QTimerEvent*);
-void miqt_exec_callback_QStackedLayout_customEvent(QStackedLayout*, intptr_t, QEvent*);
-void miqt_exec_callback_QStackedLayout_connectNotify(QStackedLayout*, intptr_t, QMetaMethod*);
-void miqt_exec_callback_QStackedLayout_disconnectNotify(QStackedLayout*, intptr_t, QMetaMethod*);
-int miqt_exec_callback_QStackedLayout_minimumHeightForWidth(const QStackedLayout*, intptr_t, int);
-QWidget* miqt_exec_callback_QStackedLayout_widget(const QStackedLayout*, intptr_t);
-QSpacerItem* miqt_exec_callback_QStackedLayout_spacerItem(QStackedLayout*, intptr_t);
 #ifdef __cplusplus
 } /* extern C */
 #endif
 
 class VirtualQStackedLayout final : public QStackedLayout {
+	struct QStackedLayout_VTable* vtbl;
 public:
 
-	VirtualQStackedLayout(QWidget* parent): QStackedLayout(parent) {};
-	VirtualQStackedLayout(): QStackedLayout() {};
-	VirtualQStackedLayout(QLayout* parentLayout): QStackedLayout(parentLayout) {};
+	VirtualQStackedLayout(struct QStackedLayout_VTable* vtbl, QWidget* parent): QStackedLayout(parent), vtbl(vtbl) {};
+	VirtualQStackedLayout(struct QStackedLayout_VTable* vtbl): QStackedLayout(), vtbl(vtbl) {};
+	VirtualQStackedLayout(struct QStackedLayout_VTable* vtbl, QLayout* parentLayout): QStackedLayout(parentLayout), vtbl(vtbl) {};
 
-	virtual ~VirtualQStackedLayout() override = default;
-
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__metaObject = 0;
+	virtual ~VirtualQStackedLayout() override { if(vtbl->destructor) vtbl->destructor(vtbl, this); }
 
 	// Subclass to allow providing a Go implementation
 	virtual const QMetaObject* metaObject() const override {
-		if (handle__metaObject == 0) {
+		if (vtbl->metaObject == 0) {
 			return QStackedLayout::metaObject();
 		}
-		
 
-		QMetaObject* callback_return_value = miqt_exec_callback_QStackedLayout_metaObject(this, handle__metaObject);
+
+		QMetaObject* callback_return_value = vtbl->metaObject(vtbl, this);
 
 		return callback_return_value;
 	}
 
 	friend QMetaObject* QStackedLayout_virtualbase_metaObject(const void* self);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__metacast = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void* qt_metacast(const char* param1) override {
-		if (handle__metacast == 0) {
+		if (vtbl->metacast == 0) {
 			return QStackedLayout::qt_metacast(param1);
 		}
-		
+
 		const char* sigval1 = (const char*) param1;
 
-		void* callback_return_value = miqt_exec_callback_QStackedLayout_metacast(this, handle__metacast, sigval1);
+		void* callback_return_value = vtbl->metacast(vtbl, this, sigval1);
 
 		return callback_return_value;
 	}
 
 	friend void* QStackedLayout_virtualbase_metacast(void* self, const char* param1);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__metacall = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual int qt_metacall(QMetaObject::Call param1, int param2, void** param3) override {
-		if (handle__metacall == 0) {
+		if (vtbl->metacall == 0) {
 			return QStackedLayout::qt_metacall(param1, param2, param3);
 		}
-		
+
 		QMetaObject::Call param1_ret = param1;
 		int sigval1 = static_cast<int>(param1_ret);
 		int sigval2 = param2;
 		void** sigval3 = param3;
 
-		int callback_return_value = miqt_exec_callback_QStackedLayout_metacall(this, handle__metacall, sigval1, sigval2, sigval3);
+		int callback_return_value = vtbl->metacall(vtbl, this, sigval1, sigval2, sigval3);
 
 		return static_cast<int>(callback_return_value);
 	}
 
 	friend int QStackedLayout_virtualbase_metacall(void* self, int param1, int param2, void** param3);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__count = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual int count() const override {
-		if (handle__count == 0) {
+		if (vtbl->count == 0) {
 			return QStackedLayout::count();
 		}
-		
 
-		int callback_return_value = miqt_exec_callback_QStackedLayout_count(this, handle__count);
+
+		int callback_return_value = vtbl->count(vtbl, this);
 
 		return static_cast<int>(callback_return_value);
 	}
 
 	friend int QStackedLayout_virtualbase_count(const void* self);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__addItem = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void addItem(QLayoutItem* item) override {
-		if (handle__addItem == 0) {
+		if (vtbl->addItem == 0) {
 			QStackedLayout::addItem(item);
 			return;
 		}
-		
+
 		QLayoutItem* sigval1 = item;
 
-		miqt_exec_callback_QStackedLayout_addItem(this, handle__addItem, sigval1);
+		vtbl->addItem(vtbl, this, sigval1);
 
-		
 	}
 
 	friend void QStackedLayout_virtualbase_addItem(void* self, QLayoutItem* item);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__sizeHint = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual QSize sizeHint() const override {
-		if (handle__sizeHint == 0) {
+		if (vtbl->sizeHint == 0) {
 			return QStackedLayout::sizeHint();
 		}
-		
 
-		QSize* callback_return_value = miqt_exec_callback_QStackedLayout_sizeHint(this, handle__sizeHint);
+
+		QSize* callback_return_value = vtbl->sizeHint(vtbl, this);
 
 		return *callback_return_value;
 	}
 
 	friend QSize* QStackedLayout_virtualbase_sizeHint(const void* self);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__minimumSize = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual QSize minimumSize() const override {
-		if (handle__minimumSize == 0) {
+		if (vtbl->minimumSize == 0) {
 			return QStackedLayout::minimumSize();
 		}
-		
 
-		QSize* callback_return_value = miqt_exec_callback_QStackedLayout_minimumSize(this, handle__minimumSize);
+
+		QSize* callback_return_value = vtbl->minimumSize(vtbl, this);
 
 		return *callback_return_value;
 	}
 
 	friend QSize* QStackedLayout_virtualbase_minimumSize(const void* self);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__itemAt = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual QLayoutItem* itemAt(int param1) const override {
-		if (handle__itemAt == 0) {
+		if (vtbl->itemAt == 0) {
 			return QStackedLayout::itemAt(param1);
 		}
-		
+
 		int sigval1 = param1;
 
-		QLayoutItem* callback_return_value = miqt_exec_callback_QStackedLayout_itemAt(this, handle__itemAt, sigval1);
+		QLayoutItem* callback_return_value = vtbl->itemAt(vtbl, this, sigval1);
 
 		return callback_return_value;
 	}
 
 	friend QLayoutItem* QStackedLayout_virtualbase_itemAt(const void* self, int param1);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__takeAt = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual QLayoutItem* takeAt(int param1) override {
-		if (handle__takeAt == 0) {
+		if (vtbl->takeAt == 0) {
 			return QStackedLayout::takeAt(param1);
 		}
-		
+
 		int sigval1 = param1;
 
-		QLayoutItem* callback_return_value = miqt_exec_callback_QStackedLayout_takeAt(this, handle__takeAt, sigval1);
+		QLayoutItem* callback_return_value = vtbl->takeAt(vtbl, this, sigval1);
 
 		return callback_return_value;
 	}
 
 	friend QLayoutItem* QStackedLayout_virtualbase_takeAt(void* self, int param1);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__setGeometry = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void setGeometry(const QRect& rect) override {
-		if (handle__setGeometry == 0) {
+		if (vtbl->setGeometry == 0) {
 			QStackedLayout::setGeometry(rect);
 			return;
 		}
-		
+
 		const QRect& rect_ret = rect;
 		// Cast returned reference into pointer
 		QRect* sigval1 = const_cast<QRect*>(&rect_ret);
 
-		miqt_exec_callback_QStackedLayout_setGeometry(this, handle__setGeometry, sigval1);
+		vtbl->setGeometry(vtbl, this, sigval1);
 
-		
 	}
 
 	friend void QStackedLayout_virtualbase_setGeometry(void* self, QRect* rect);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__hasHeightForWidth = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual bool hasHeightForWidth() const override {
-		if (handle__hasHeightForWidth == 0) {
+		if (vtbl->hasHeightForWidth == 0) {
 			return QStackedLayout::hasHeightForWidth();
 		}
-		
 
-		bool callback_return_value = miqt_exec_callback_QStackedLayout_hasHeightForWidth(this, handle__hasHeightForWidth);
+
+		bool callback_return_value = vtbl->hasHeightForWidth(vtbl, this);
 
 		return callback_return_value;
 	}
 
 	friend bool QStackedLayout_virtualbase_hasHeightForWidth(const void* self);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__heightForWidth = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual int heightForWidth(int width) const override {
-		if (handle__heightForWidth == 0) {
+		if (vtbl->heightForWidth == 0) {
 			return QStackedLayout::heightForWidth(width);
 		}
-		
+
 		int sigval1 = width;
 
-		int callback_return_value = miqt_exec_callback_QStackedLayout_heightForWidth(this, handle__heightForWidth, sigval1);
+		int callback_return_value = vtbl->heightForWidth(vtbl, this, sigval1);
 
 		return static_cast<int>(callback_return_value);
 	}
 
 	friend int QStackedLayout_virtualbase_heightForWidth(const void* self, int width);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__spacing = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual int spacing() const override {
-		if (handle__spacing == 0) {
+		if (vtbl->spacing == 0) {
 			return QStackedLayout::spacing();
 		}
-		
 
-		int callback_return_value = miqt_exec_callback_QStackedLayout_spacing(this, handle__spacing);
+
+		int callback_return_value = vtbl->spacing(vtbl, this);
 
 		return static_cast<int>(callback_return_value);
 	}
 
 	friend int QStackedLayout_virtualbase_spacing(const void* self);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__setSpacing = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void setSpacing(int spacing) override {
-		if (handle__setSpacing == 0) {
+		if (vtbl->setSpacing == 0) {
 			QStackedLayout::setSpacing(spacing);
 			return;
 		}
-		
+
 		int sigval1 = spacing;
 
-		miqt_exec_callback_QStackedLayout_setSpacing(this, handle__setSpacing, sigval1);
+		vtbl->setSpacing(vtbl, this, sigval1);
 
-		
 	}
 
 	friend void QStackedLayout_virtualbase_setSpacing(void* self, int spacing);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__invalidate = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void invalidate() override {
-		if (handle__invalidate == 0) {
+		if (vtbl->invalidate == 0) {
 			QStackedLayout::invalidate();
 			return;
 		}
-		
 
-		miqt_exec_callback_QStackedLayout_invalidate(this, handle__invalidate);
 
-		
+		vtbl->invalidate(vtbl, this);
+
 	}
 
 	friend void QStackedLayout_virtualbase_invalidate(void* self);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__geometry = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual QRect geometry() const override {
-		if (handle__geometry == 0) {
+		if (vtbl->geometry == 0) {
 			return QStackedLayout::geometry();
 		}
-		
 
-		QRect* callback_return_value = miqt_exec_callback_QStackedLayout_geometry(this, handle__geometry);
+
+		QRect* callback_return_value = vtbl->geometry(vtbl, this);
 
 		return *callback_return_value;
 	}
 
 	friend QRect* QStackedLayout_virtualbase_geometry(const void* self);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__expandingDirections = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual Qt::Orientations expandingDirections() const override {
-		if (handle__expandingDirections == 0) {
+		if (vtbl->expandingDirections == 0) {
 			return QStackedLayout::expandingDirections();
 		}
-		
 
-		int callback_return_value = miqt_exec_callback_QStackedLayout_expandingDirections(this, handle__expandingDirections);
+
+		int callback_return_value = vtbl->expandingDirections(vtbl, this);
 
 		return static_cast<Qt::Orientations>(callback_return_value);
 	}
 
 	friend int QStackedLayout_virtualbase_expandingDirections(const void* self);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__maximumSize = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual QSize maximumSize() const override {
-		if (handle__maximumSize == 0) {
+		if (vtbl->maximumSize == 0) {
 			return QStackedLayout::maximumSize();
 		}
-		
 
-		QSize* callback_return_value = miqt_exec_callback_QStackedLayout_maximumSize(this, handle__maximumSize);
+
+		QSize* callback_return_value = vtbl->maximumSize(vtbl, this);
 
 		return *callback_return_value;
 	}
 
 	friend QSize* QStackedLayout_virtualbase_maximumSize(const void* self);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__indexOf = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual int indexOf(const QWidget* param1) const override {
-		if (handle__indexOf == 0) {
+		if (vtbl->indexOf == 0) {
 			return QStackedLayout::indexOf(param1);
 		}
-		
+
 		QWidget* sigval1 = (QWidget*) param1;
 
-		int callback_return_value = miqt_exec_callback_QStackedLayout_indexOf(this, handle__indexOf, sigval1);
+		int callback_return_value = vtbl->indexOf(vtbl, this, sigval1);
 
 		return static_cast<int>(callback_return_value);
 	}
 
 	friend int QStackedLayout_virtualbase_indexOf(const void* self, QWidget* param1);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__isEmpty = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual bool isEmpty() const override {
-		if (handle__isEmpty == 0) {
+		if (vtbl->isEmpty == 0) {
 			return QStackedLayout::isEmpty();
 		}
-		
 
-		bool callback_return_value = miqt_exec_callback_QStackedLayout_isEmpty(this, handle__isEmpty);
+
+		bool callback_return_value = vtbl->isEmpty(vtbl, this);
 
 		return callback_return_value;
 	}
 
 	friend bool QStackedLayout_virtualbase_isEmpty(const void* self);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__controlTypes = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual QSizePolicy::ControlTypes controlTypes() const override {
-		if (handle__controlTypes == 0) {
+		if (vtbl->controlTypes == 0) {
 			return QStackedLayout::controlTypes();
 		}
-		
 
-		int callback_return_value = miqt_exec_callback_QStackedLayout_controlTypes(this, handle__controlTypes);
+
+		int callback_return_value = vtbl->controlTypes(vtbl, this);
 
 		return static_cast<QSizePolicy::ControlTypes>(callback_return_value);
 	}
 
 	friend int QStackedLayout_virtualbase_controlTypes(const void* self);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__replaceWidget = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual QLayoutItem* replaceWidget(QWidget* from, QWidget* to, Qt::FindChildOptions options) override {
-		if (handle__replaceWidget == 0) {
+		if (vtbl->replaceWidget == 0) {
 			return QStackedLayout::replaceWidget(from, to, options);
 		}
-		
+
 		QWidget* sigval1 = from;
 		QWidget* sigval2 = to;
 		Qt::FindChildOptions options_ret = options;
 		int sigval3 = static_cast<int>(options_ret);
 
-		QLayoutItem* callback_return_value = miqt_exec_callback_QStackedLayout_replaceWidget(this, handle__replaceWidget, sigval1, sigval2, sigval3);
+		QLayoutItem* callback_return_value = vtbl->replaceWidget(vtbl, this, sigval1, sigval2, sigval3);
 
 		return callback_return_value;
 	}
 
 	friend QLayoutItem* QStackedLayout_virtualbase_replaceWidget(void* self, QWidget* from, QWidget* to, int options);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__layout = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual QLayout* layout() override {
-		if (handle__layout == 0) {
+		if (vtbl->layout == 0) {
 			return QStackedLayout::layout();
 		}
-		
 
-		QLayout* callback_return_value = miqt_exec_callback_QStackedLayout_layout(this, handle__layout);
+
+		QLayout* callback_return_value = vtbl->layout(vtbl, this);
 
 		return callback_return_value;
 	}
 
 	friend QLayout* QStackedLayout_virtualbase_layout(void* self);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__childEvent = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void childEvent(QChildEvent* e) override {
-		if (handle__childEvent == 0) {
+		if (vtbl->childEvent == 0) {
 			QStackedLayout::childEvent(e);
 			return;
 		}
-		
+
 		QChildEvent* sigval1 = e;
 
-		miqt_exec_callback_QStackedLayout_childEvent(this, handle__childEvent, sigval1);
+		vtbl->childEvent(vtbl, this, sigval1);
 
-		
 	}
 
 	friend void QStackedLayout_virtualbase_childEvent(void* self, QChildEvent* e);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__event = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual bool event(QEvent* event) override {
-		if (handle__event == 0) {
+		if (vtbl->event == 0) {
 			return QStackedLayout::event(event);
 		}
-		
+
 		QEvent* sigval1 = event;
 
-		bool callback_return_value = miqt_exec_callback_QStackedLayout_event(this, handle__event, sigval1);
+		bool callback_return_value = vtbl->event(vtbl, this, sigval1);
 
 		return callback_return_value;
 	}
 
 	friend bool QStackedLayout_virtualbase_event(void* self, QEvent* event);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__eventFilter = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual bool eventFilter(QObject* watched, QEvent* event) override {
-		if (handle__eventFilter == 0) {
+		if (vtbl->eventFilter == 0) {
 			return QStackedLayout::eventFilter(watched, event);
 		}
-		
+
 		QObject* sigval1 = watched;
 		QEvent* sigval2 = event;
 
-		bool callback_return_value = miqt_exec_callback_QStackedLayout_eventFilter(this, handle__eventFilter, sigval1, sigval2);
+		bool callback_return_value = vtbl->eventFilter(vtbl, this, sigval1, sigval2);
 
 		return callback_return_value;
 	}
 
 	friend bool QStackedLayout_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__timerEvent = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void timerEvent(QTimerEvent* event) override {
-		if (handle__timerEvent == 0) {
+		if (vtbl->timerEvent == 0) {
 			QStackedLayout::timerEvent(event);
 			return;
 		}
-		
+
 		QTimerEvent* sigval1 = event;
 
-		miqt_exec_callback_QStackedLayout_timerEvent(this, handle__timerEvent, sigval1);
+		vtbl->timerEvent(vtbl, this, sigval1);
 
-		
 	}
 
 	friend void QStackedLayout_virtualbase_timerEvent(void* self, QTimerEvent* event);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__customEvent = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void customEvent(QEvent* event) override {
-		if (handle__customEvent == 0) {
+		if (vtbl->customEvent == 0) {
 			QStackedLayout::customEvent(event);
 			return;
 		}
-		
+
 		QEvent* sigval1 = event;
 
-		miqt_exec_callback_QStackedLayout_customEvent(this, handle__customEvent, sigval1);
+		vtbl->customEvent(vtbl, this, sigval1);
 
-		
 	}
 
 	friend void QStackedLayout_virtualbase_customEvent(void* self, QEvent* event);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__connectNotify = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void connectNotify(const QMetaMethod& signal) override {
-		if (handle__connectNotify == 0) {
+		if (vtbl->connectNotify == 0) {
 			QStackedLayout::connectNotify(signal);
 			return;
 		}
-		
+
 		const QMetaMethod& signal_ret = signal;
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
 
-		miqt_exec_callback_QStackedLayout_connectNotify(this, handle__connectNotify, sigval1);
+		vtbl->connectNotify(vtbl, this, sigval1);
 
-		
 	}
 
 	friend void QStackedLayout_virtualbase_connectNotify(void* self, QMetaMethod* signal);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__disconnectNotify = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void disconnectNotify(const QMetaMethod& signal) override {
-		if (handle__disconnectNotify == 0) {
+		if (vtbl->disconnectNotify == 0) {
 			QStackedLayout::disconnectNotify(signal);
 			return;
 		}
-		
+
 		const QMetaMethod& signal_ret = signal;
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
 
-		miqt_exec_callback_QStackedLayout_disconnectNotify(this, handle__disconnectNotify, sigval1);
+		vtbl->disconnectNotify(vtbl, this, sigval1);
 
-		
 	}
 
 	friend void QStackedLayout_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__minimumHeightForWidth = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual int minimumHeightForWidth(int param1) const override {
-		if (handle__minimumHeightForWidth == 0) {
+		if (vtbl->minimumHeightForWidth == 0) {
 			return QStackedLayout::minimumHeightForWidth(param1);
 		}
-		
+
 		int sigval1 = param1;
 
-		int callback_return_value = miqt_exec_callback_QStackedLayout_minimumHeightForWidth(this, handle__minimumHeightForWidth, sigval1);
+		int callback_return_value = vtbl->minimumHeightForWidth(vtbl, this, sigval1);
 
 		return static_cast<int>(callback_return_value);
 	}
 
 	friend int QStackedLayout_virtualbase_minimumHeightForWidth(const void* self, int param1);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__widget = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual QWidget* widget() const override {
-		if (handle__widget == 0) {
+		if (vtbl->widget == 0) {
 			return QStackedLayout::widget();
 		}
-		
 
-		QWidget* callback_return_value = miqt_exec_callback_QStackedLayout_widget(this, handle__widget);
+
+		QWidget* callback_return_value = vtbl->widget(vtbl, this);
 
 		return callback_return_value;
 	}
 
 	friend QWidget* QStackedLayout_virtualbase_widget(const void* self);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__spacerItem = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual QSpacerItem* spacerItem() override {
-		if (handle__spacerItem == 0) {
+		if (vtbl->spacerItem == 0) {
 			return QStackedLayout::spacerItem();
 		}
-		
 
-		QSpacerItem* callback_return_value = miqt_exec_callback_QStackedLayout_spacerItem(this, handle__spacerItem);
+
+		QSpacerItem* callback_return_value = vtbl->spacerItem(vtbl, this);
 
 		return callback_return_value;
 	}
@@ -682,16 +542,16 @@ public:
 	friend bool QStackedLayout_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
 };
 
-QStackedLayout* QStackedLayout_new(QWidget* parent) {
-	return new VirtualQStackedLayout(parent);
+QStackedLayout* QStackedLayout_new(struct QStackedLayout_VTable* vtbl, QWidget* parent) {
+	return new VirtualQStackedLayout(vtbl, parent);
 }
 
-QStackedLayout* QStackedLayout_new2() {
-	return new VirtualQStackedLayout();
+QStackedLayout* QStackedLayout_new2(struct QStackedLayout_VTable* vtbl) {
+	return new VirtualQStackedLayout(vtbl);
 }
 
-QStackedLayout* QStackedLayout_new3(QLayout* parentLayout) {
-	return new VirtualQStackedLayout(parentLayout);
+QStackedLayout* QStackedLayout_new3(struct QStackedLayout_VTable* vtbl, QLayout* parentLayout) {
+	return new VirtualQStackedLayout(vtbl, parentLayout);
 }
 
 void QStackedLayout_virtbase(QStackedLayout* src, QLayout** outptr_QLayout) {
@@ -838,30 +698,10 @@ struct miqt_string QStackedLayout_tr3(const char* s, const char* c, int n) {
 	return _ms;
 }
 
-bool QStackedLayout_override_virtual_metaObject(void* self, intptr_t slot) {
-	VirtualQStackedLayout* self_cast = dynamic_cast<VirtualQStackedLayout*>( (QStackedLayout*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__metaObject = slot;
-	return true;
-}
-
 QMetaObject* QStackedLayout_virtualbase_metaObject(const void* self) {
 
 	return (QMetaObject*) ( (const VirtualQStackedLayout*)(self) )->QStackedLayout::metaObject();
 
-}
-
-bool QStackedLayout_override_virtual_metacast(void* self, intptr_t slot) {
-	VirtualQStackedLayout* self_cast = dynamic_cast<VirtualQStackedLayout*>( (QStackedLayout*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__metacast = slot;
-	return true;
 }
 
 void* QStackedLayout_virtualbase_metacast(void* self, const char* param1) {
@@ -870,30 +710,10 @@ void* QStackedLayout_virtualbase_metacast(void* self, const char* param1) {
 
 }
 
-bool QStackedLayout_override_virtual_metacall(void* self, intptr_t slot) {
-	VirtualQStackedLayout* self_cast = dynamic_cast<VirtualQStackedLayout*>( (QStackedLayout*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__metacall = slot;
-	return true;
-}
-
 int QStackedLayout_virtualbase_metacall(void* self, int param1, int param2, void** param3) {
 
 	return ( (VirtualQStackedLayout*)(self) )->QStackedLayout::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 
-}
-
-bool QStackedLayout_override_virtual_count(void* self, intptr_t slot) {
-	VirtualQStackedLayout* self_cast = dynamic_cast<VirtualQStackedLayout*>( (QStackedLayout*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__count = slot;
-	return true;
 }
 
 int QStackedLayout_virtualbase_count(const void* self) {
@@ -902,30 +722,10 @@ int QStackedLayout_virtualbase_count(const void* self) {
 
 }
 
-bool QStackedLayout_override_virtual_addItem(void* self, intptr_t slot) {
-	VirtualQStackedLayout* self_cast = dynamic_cast<VirtualQStackedLayout*>( (QStackedLayout*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__addItem = slot;
-	return true;
-}
-
 void QStackedLayout_virtualbase_addItem(void* self, QLayoutItem* item) {
 
 	( (VirtualQStackedLayout*)(self) )->QStackedLayout::addItem(item);
 
-}
-
-bool QStackedLayout_override_virtual_sizeHint(void* self, intptr_t slot) {
-	VirtualQStackedLayout* self_cast = dynamic_cast<VirtualQStackedLayout*>( (QStackedLayout*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__sizeHint = slot;
-	return true;
 }
 
 QSize* QStackedLayout_virtualbase_sizeHint(const void* self) {
@@ -934,30 +734,10 @@ QSize* QStackedLayout_virtualbase_sizeHint(const void* self) {
 
 }
 
-bool QStackedLayout_override_virtual_minimumSize(void* self, intptr_t slot) {
-	VirtualQStackedLayout* self_cast = dynamic_cast<VirtualQStackedLayout*>( (QStackedLayout*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__minimumSize = slot;
-	return true;
-}
-
 QSize* QStackedLayout_virtualbase_minimumSize(const void* self) {
 
 	return new QSize(( (const VirtualQStackedLayout*)(self) )->QStackedLayout::minimumSize());
 
-}
-
-bool QStackedLayout_override_virtual_itemAt(void* self, intptr_t slot) {
-	VirtualQStackedLayout* self_cast = dynamic_cast<VirtualQStackedLayout*>( (QStackedLayout*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__itemAt = slot;
-	return true;
 }
 
 QLayoutItem* QStackedLayout_virtualbase_itemAt(const void* self, int param1) {
@@ -966,30 +746,10 @@ QLayoutItem* QStackedLayout_virtualbase_itemAt(const void* self, int param1) {
 
 }
 
-bool QStackedLayout_override_virtual_takeAt(void* self, intptr_t slot) {
-	VirtualQStackedLayout* self_cast = dynamic_cast<VirtualQStackedLayout*>( (QStackedLayout*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__takeAt = slot;
-	return true;
-}
-
 QLayoutItem* QStackedLayout_virtualbase_takeAt(void* self, int param1) {
 
 	return ( (VirtualQStackedLayout*)(self) )->QStackedLayout::takeAt(static_cast<int>(param1));
 
-}
-
-bool QStackedLayout_override_virtual_setGeometry(void* self, intptr_t slot) {
-	VirtualQStackedLayout* self_cast = dynamic_cast<VirtualQStackedLayout*>( (QStackedLayout*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__setGeometry = slot;
-	return true;
 }
 
 void QStackedLayout_virtualbase_setGeometry(void* self, QRect* rect) {
@@ -998,30 +758,10 @@ void QStackedLayout_virtualbase_setGeometry(void* self, QRect* rect) {
 
 }
 
-bool QStackedLayout_override_virtual_hasHeightForWidth(void* self, intptr_t slot) {
-	VirtualQStackedLayout* self_cast = dynamic_cast<VirtualQStackedLayout*>( (QStackedLayout*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__hasHeightForWidth = slot;
-	return true;
-}
-
 bool QStackedLayout_virtualbase_hasHeightForWidth(const void* self) {
 
 	return ( (const VirtualQStackedLayout*)(self) )->QStackedLayout::hasHeightForWidth();
 
-}
-
-bool QStackedLayout_override_virtual_heightForWidth(void* self, intptr_t slot) {
-	VirtualQStackedLayout* self_cast = dynamic_cast<VirtualQStackedLayout*>( (QStackedLayout*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__heightForWidth = slot;
-	return true;
 }
 
 int QStackedLayout_virtualbase_heightForWidth(const void* self, int width) {
@@ -1030,30 +770,10 @@ int QStackedLayout_virtualbase_heightForWidth(const void* self, int width) {
 
 }
 
-bool QStackedLayout_override_virtual_spacing(void* self, intptr_t slot) {
-	VirtualQStackedLayout* self_cast = dynamic_cast<VirtualQStackedLayout*>( (QStackedLayout*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__spacing = slot;
-	return true;
-}
-
 int QStackedLayout_virtualbase_spacing(const void* self) {
 
 	return ( (const VirtualQStackedLayout*)(self) )->QStackedLayout::spacing();
 
-}
-
-bool QStackedLayout_override_virtual_setSpacing(void* self, intptr_t slot) {
-	VirtualQStackedLayout* self_cast = dynamic_cast<VirtualQStackedLayout*>( (QStackedLayout*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__setSpacing = slot;
-	return true;
 }
 
 void QStackedLayout_virtualbase_setSpacing(void* self, int spacing) {
@@ -1062,46 +782,16 @@ void QStackedLayout_virtualbase_setSpacing(void* self, int spacing) {
 
 }
 
-bool QStackedLayout_override_virtual_invalidate(void* self, intptr_t slot) {
-	VirtualQStackedLayout* self_cast = dynamic_cast<VirtualQStackedLayout*>( (QStackedLayout*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__invalidate = slot;
-	return true;
-}
-
 void QStackedLayout_virtualbase_invalidate(void* self) {
 
 	( (VirtualQStackedLayout*)(self) )->QStackedLayout::invalidate();
 
 }
 
-bool QStackedLayout_override_virtual_geometry(void* self, intptr_t slot) {
-	VirtualQStackedLayout* self_cast = dynamic_cast<VirtualQStackedLayout*>( (QStackedLayout*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__geometry = slot;
-	return true;
-}
-
 QRect* QStackedLayout_virtualbase_geometry(const void* self) {
 
 	return new QRect(( (const VirtualQStackedLayout*)(self) )->QStackedLayout::geometry());
 
-}
-
-bool QStackedLayout_override_virtual_expandingDirections(void* self, intptr_t slot) {
-	VirtualQStackedLayout* self_cast = dynamic_cast<VirtualQStackedLayout*>( (QStackedLayout*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__expandingDirections = slot;
-	return true;
 }
 
 int QStackedLayout_virtualbase_expandingDirections(const void* self) {
@@ -1111,30 +801,10 @@ int QStackedLayout_virtualbase_expandingDirections(const void* self) {
 
 }
 
-bool QStackedLayout_override_virtual_maximumSize(void* self, intptr_t slot) {
-	VirtualQStackedLayout* self_cast = dynamic_cast<VirtualQStackedLayout*>( (QStackedLayout*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__maximumSize = slot;
-	return true;
-}
-
 QSize* QStackedLayout_virtualbase_maximumSize(const void* self) {
 
 	return new QSize(( (const VirtualQStackedLayout*)(self) )->QStackedLayout::maximumSize());
 
-}
-
-bool QStackedLayout_override_virtual_indexOf(void* self, intptr_t slot) {
-	VirtualQStackedLayout* self_cast = dynamic_cast<VirtualQStackedLayout*>( (QStackedLayout*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__indexOf = slot;
-	return true;
 }
 
 int QStackedLayout_virtualbase_indexOf(const void* self, QWidget* param1) {
@@ -1143,30 +813,10 @@ int QStackedLayout_virtualbase_indexOf(const void* self, QWidget* param1) {
 
 }
 
-bool QStackedLayout_override_virtual_isEmpty(void* self, intptr_t slot) {
-	VirtualQStackedLayout* self_cast = dynamic_cast<VirtualQStackedLayout*>( (QStackedLayout*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__isEmpty = slot;
-	return true;
-}
-
 bool QStackedLayout_virtualbase_isEmpty(const void* self) {
 
 	return ( (const VirtualQStackedLayout*)(self) )->QStackedLayout::isEmpty();
 
-}
-
-bool QStackedLayout_override_virtual_controlTypes(void* self, intptr_t slot) {
-	VirtualQStackedLayout* self_cast = dynamic_cast<VirtualQStackedLayout*>( (QStackedLayout*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__controlTypes = slot;
-	return true;
 }
 
 int QStackedLayout_virtualbase_controlTypes(const void* self) {
@@ -1176,30 +826,10 @@ int QStackedLayout_virtualbase_controlTypes(const void* self) {
 
 }
 
-bool QStackedLayout_override_virtual_replaceWidget(void* self, intptr_t slot) {
-	VirtualQStackedLayout* self_cast = dynamic_cast<VirtualQStackedLayout*>( (QStackedLayout*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__replaceWidget = slot;
-	return true;
-}
-
 QLayoutItem* QStackedLayout_virtualbase_replaceWidget(void* self, QWidget* from, QWidget* to, int options) {
 
 	return ( (VirtualQStackedLayout*)(self) )->QStackedLayout::replaceWidget(from, to, static_cast<Qt::FindChildOptions>(options));
 
-}
-
-bool QStackedLayout_override_virtual_layout(void* self, intptr_t slot) {
-	VirtualQStackedLayout* self_cast = dynamic_cast<VirtualQStackedLayout*>( (QStackedLayout*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__layout = slot;
-	return true;
 }
 
 QLayout* QStackedLayout_virtualbase_layout(void* self) {
@@ -1208,30 +838,10 @@ QLayout* QStackedLayout_virtualbase_layout(void* self) {
 
 }
 
-bool QStackedLayout_override_virtual_childEvent(void* self, intptr_t slot) {
-	VirtualQStackedLayout* self_cast = dynamic_cast<VirtualQStackedLayout*>( (QStackedLayout*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__childEvent = slot;
-	return true;
-}
-
 void QStackedLayout_virtualbase_childEvent(void* self, QChildEvent* e) {
 
 	( (VirtualQStackedLayout*)(self) )->QStackedLayout::childEvent(e);
 
-}
-
-bool QStackedLayout_override_virtual_event(void* self, intptr_t slot) {
-	VirtualQStackedLayout* self_cast = dynamic_cast<VirtualQStackedLayout*>( (QStackedLayout*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__event = slot;
-	return true;
 }
 
 bool QStackedLayout_virtualbase_event(void* self, QEvent* event) {
@@ -1240,30 +850,10 @@ bool QStackedLayout_virtualbase_event(void* self, QEvent* event) {
 
 }
 
-bool QStackedLayout_override_virtual_eventFilter(void* self, intptr_t slot) {
-	VirtualQStackedLayout* self_cast = dynamic_cast<VirtualQStackedLayout*>( (QStackedLayout*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__eventFilter = slot;
-	return true;
-}
-
 bool QStackedLayout_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event) {
 
 	return ( (VirtualQStackedLayout*)(self) )->QStackedLayout::eventFilter(watched, event);
 
-}
-
-bool QStackedLayout_override_virtual_timerEvent(void* self, intptr_t slot) {
-	VirtualQStackedLayout* self_cast = dynamic_cast<VirtualQStackedLayout*>( (QStackedLayout*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__timerEvent = slot;
-	return true;
 }
 
 void QStackedLayout_virtualbase_timerEvent(void* self, QTimerEvent* event) {
@@ -1272,30 +862,10 @@ void QStackedLayout_virtualbase_timerEvent(void* self, QTimerEvent* event) {
 
 }
 
-bool QStackedLayout_override_virtual_customEvent(void* self, intptr_t slot) {
-	VirtualQStackedLayout* self_cast = dynamic_cast<VirtualQStackedLayout*>( (QStackedLayout*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__customEvent = slot;
-	return true;
-}
-
 void QStackedLayout_virtualbase_customEvent(void* self, QEvent* event) {
 
 	( (VirtualQStackedLayout*)(self) )->QStackedLayout::customEvent(event);
 
-}
-
-bool QStackedLayout_override_virtual_connectNotify(void* self, intptr_t slot) {
-	VirtualQStackedLayout* self_cast = dynamic_cast<VirtualQStackedLayout*>( (QStackedLayout*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__connectNotify = slot;
-	return true;
 }
 
 void QStackedLayout_virtualbase_connectNotify(void* self, QMetaMethod* signal) {
@@ -1304,30 +874,10 @@ void QStackedLayout_virtualbase_connectNotify(void* self, QMetaMethod* signal) {
 
 }
 
-bool QStackedLayout_override_virtual_disconnectNotify(void* self, intptr_t slot) {
-	VirtualQStackedLayout* self_cast = dynamic_cast<VirtualQStackedLayout*>( (QStackedLayout*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__disconnectNotify = slot;
-	return true;
-}
-
 void QStackedLayout_virtualbase_disconnectNotify(void* self, QMetaMethod* signal) {
 
 	( (VirtualQStackedLayout*)(self) )->QStackedLayout::disconnectNotify(*signal);
 
-}
-
-bool QStackedLayout_override_virtual_minimumHeightForWidth(void* self, intptr_t slot) {
-	VirtualQStackedLayout* self_cast = dynamic_cast<VirtualQStackedLayout*>( (QStackedLayout*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__minimumHeightForWidth = slot;
-	return true;
 }
 
 int QStackedLayout_virtualbase_minimumHeightForWidth(const void* self, int param1) {
@@ -1336,30 +886,10 @@ int QStackedLayout_virtualbase_minimumHeightForWidth(const void* self, int param
 
 }
 
-bool QStackedLayout_override_virtual_widget(void* self, intptr_t slot) {
-	VirtualQStackedLayout* self_cast = dynamic_cast<VirtualQStackedLayout*>( (QStackedLayout*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__widget = slot;
-	return true;
-}
-
 QWidget* QStackedLayout_virtualbase_widget(const void* self) {
 
 	return ( (const VirtualQStackedLayout*)(self) )->QStackedLayout::widget();
 
-}
-
-bool QStackedLayout_override_virtual_spacerItem(void* self, intptr_t slot) {
-	VirtualQStackedLayout* self_cast = dynamic_cast<VirtualQStackedLayout*>( (QStackedLayout*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__spacerItem = slot;
-	return true;
 }
 
 QSpacerItem* QStackedLayout_virtualbase_spacerItem(void* self) {

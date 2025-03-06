@@ -83,8 +83,6 @@ type cQGraphicsBlurEffect*{.exportc: "QGraphicsBlurEffect", incompleteStruct.} =
 type cQGraphicsDropShadowEffect*{.exportc: "QGraphicsDropShadowEffect", incompleteStruct.} = object
 type cQGraphicsOpacityEffect*{.exportc: "QGraphicsOpacityEffect", incompleteStruct.} = object
 
-proc fcQGraphicsEffect_new(): ptr cQGraphicsEffect {.importc: "QGraphicsEffect_new".}
-proc fcQGraphicsEffect_new2(parent: pointer): ptr cQGraphicsEffect {.importc: "QGraphicsEffect_new2".}
 proc fcQGraphicsEffect_metaObject(self: pointer, ): pointer {.importc: "QGraphicsEffect_metaObject".}
 proc fcQGraphicsEffect_metacast(self: pointer, param1: cstring): pointer {.importc: "QGraphicsEffect_metacast".}
 proc fcQGraphicsEffect_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QGraphicsEffect_metacall".}
@@ -98,35 +96,37 @@ proc fcQGraphicsEffect_enabledChanged(self: pointer, enabled: bool): void {.impo
 proc fcQGraphicsEffect_connect_enabledChanged(self: pointer, slot: int) {.importc: "QGraphicsEffect_connect_enabledChanged".}
 proc fcQGraphicsEffect_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QGraphicsEffect_tr2".}
 proc fcQGraphicsEffect_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QGraphicsEffect_tr3".}
-proc fQGraphicsEffect_virtualbase_metaObject(self: pointer, ): pointer{.importc: "QGraphicsEffect_virtualbase_metaObject".}
-proc fcQGraphicsEffect_override_virtual_metaObject(self: pointer, slot: int) {.importc: "QGraphicsEffect_override_virtual_metaObject".}
-proc fQGraphicsEffect_virtualbase_metacast(self: pointer, param1: cstring): pointer{.importc: "QGraphicsEffect_virtualbase_metacast".}
-proc fcQGraphicsEffect_override_virtual_metacast(self: pointer, slot: int) {.importc: "QGraphicsEffect_override_virtual_metacast".}
-proc fQGraphicsEffect_virtualbase_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint{.importc: "QGraphicsEffect_virtualbase_metacall".}
-proc fcQGraphicsEffect_override_virtual_metacall(self: pointer, slot: int) {.importc: "QGraphicsEffect_override_virtual_metacall".}
-proc fQGraphicsEffect_virtualbase_boundingRectFor(self: pointer, sourceRect: pointer): pointer{.importc: "QGraphicsEffect_virtualbase_boundingRectFor".}
-proc fcQGraphicsEffect_override_virtual_boundingRectFor(self: pointer, slot: int) {.importc: "QGraphicsEffect_override_virtual_boundingRectFor".}
-proc fcQGraphicsEffect_override_virtual_draw(self: pointer, slot: int) {.importc: "QGraphicsEffect_override_virtual_draw".}
-proc fQGraphicsEffect_virtualbase_sourceChanged(self: pointer, flags: cint): void{.importc: "QGraphicsEffect_virtualbase_sourceChanged".}
-proc fcQGraphicsEffect_override_virtual_sourceChanged(self: pointer, slot: int) {.importc: "QGraphicsEffect_override_virtual_sourceChanged".}
-proc fQGraphicsEffect_virtualbase_event(self: pointer, event: pointer): bool{.importc: "QGraphicsEffect_virtualbase_event".}
-proc fcQGraphicsEffect_override_virtual_event(self: pointer, slot: int) {.importc: "QGraphicsEffect_override_virtual_event".}
-proc fQGraphicsEffect_virtualbase_eventFilter(self: pointer, watched: pointer, event: pointer): bool{.importc: "QGraphicsEffect_virtualbase_eventFilter".}
-proc fcQGraphicsEffect_override_virtual_eventFilter(self: pointer, slot: int) {.importc: "QGraphicsEffect_override_virtual_eventFilter".}
-proc fQGraphicsEffect_virtualbase_timerEvent(self: pointer, event: pointer): void{.importc: "QGraphicsEffect_virtualbase_timerEvent".}
-proc fcQGraphicsEffect_override_virtual_timerEvent(self: pointer, slot: int) {.importc: "QGraphicsEffect_override_virtual_timerEvent".}
-proc fQGraphicsEffect_virtualbase_childEvent(self: pointer, event: pointer): void{.importc: "QGraphicsEffect_virtualbase_childEvent".}
-proc fcQGraphicsEffect_override_virtual_childEvent(self: pointer, slot: int) {.importc: "QGraphicsEffect_override_virtual_childEvent".}
-proc fQGraphicsEffect_virtualbase_customEvent(self: pointer, event: pointer): void{.importc: "QGraphicsEffect_virtualbase_customEvent".}
-proc fcQGraphicsEffect_override_virtual_customEvent(self: pointer, slot: int) {.importc: "QGraphicsEffect_override_virtual_customEvent".}
-proc fQGraphicsEffect_virtualbase_connectNotify(self: pointer, signal: pointer): void{.importc: "QGraphicsEffect_virtualbase_connectNotify".}
-proc fcQGraphicsEffect_override_virtual_connectNotify(self: pointer, slot: int) {.importc: "QGraphicsEffect_override_virtual_connectNotify".}
-proc fQGraphicsEffect_virtualbase_disconnectNotify(self: pointer, signal: pointer): void{.importc: "QGraphicsEffect_virtualbase_disconnectNotify".}
-proc fcQGraphicsEffect_override_virtual_disconnectNotify(self: pointer, slot: int) {.importc: "QGraphicsEffect_override_virtual_disconnectNotify".}
+type cQGraphicsEffectVTable = object
+  destructor*: proc(vtbl: ptr cQGraphicsEffectVTable, self: ptr cQGraphicsEffect) {.cdecl, raises:[], gcsafe.}
+  metaObject*: proc(vtbl, self: pointer, ): pointer {.cdecl, raises: [], gcsafe.}
+  metacast*: proc(vtbl, self: pointer, param1: cstring): pointer {.cdecl, raises: [], gcsafe.}
+  metacall*: proc(vtbl, self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl, raises: [], gcsafe.}
+  boundingRectFor*: proc(vtbl, self: pointer, sourceRect: pointer): pointer {.cdecl, raises: [], gcsafe.}
+  draw*: proc(vtbl, self: pointer, painter: pointer): void {.cdecl, raises: [], gcsafe.}
+  sourceChanged*: proc(vtbl, self: pointer, flags: cint): void {.cdecl, raises: [], gcsafe.}
+  event*: proc(vtbl, self: pointer, event: pointer): bool {.cdecl, raises: [], gcsafe.}
+  eventFilter*: proc(vtbl, self: pointer, watched: pointer, event: pointer): bool {.cdecl, raises: [], gcsafe.}
+  timerEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  childEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  customEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  connectNotify*: proc(vtbl, self: pointer, signal: pointer): void {.cdecl, raises: [], gcsafe.}
+  disconnectNotify*: proc(vtbl, self: pointer, signal: pointer): void {.cdecl, raises: [], gcsafe.}
+proc fcQGraphicsEffect_virtualbase_metaObject(self: pointer, ): pointer {.importc: "QGraphicsEffect_virtualbase_metaObject".}
+proc fcQGraphicsEffect_virtualbase_metacast(self: pointer, param1: cstring): pointer {.importc: "QGraphicsEffect_virtualbase_metacast".}
+proc fcQGraphicsEffect_virtualbase_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QGraphicsEffect_virtualbase_metacall".}
+proc fcQGraphicsEffect_virtualbase_boundingRectFor(self: pointer, sourceRect: pointer): pointer {.importc: "QGraphicsEffect_virtualbase_boundingRectFor".}
+proc fcQGraphicsEffect_virtualbase_sourceChanged(self: pointer, flags: cint): void {.importc: "QGraphicsEffect_virtualbase_sourceChanged".}
+proc fcQGraphicsEffect_virtualbase_event(self: pointer, event: pointer): bool {.importc: "QGraphicsEffect_virtualbase_event".}
+proc fcQGraphicsEffect_virtualbase_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.importc: "QGraphicsEffect_virtualbase_eventFilter".}
+proc fcQGraphicsEffect_virtualbase_timerEvent(self: pointer, event: pointer): void {.importc: "QGraphicsEffect_virtualbase_timerEvent".}
+proc fcQGraphicsEffect_virtualbase_childEvent(self: pointer, event: pointer): void {.importc: "QGraphicsEffect_virtualbase_childEvent".}
+proc fcQGraphicsEffect_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QGraphicsEffect_virtualbase_customEvent".}
+proc fcQGraphicsEffect_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QGraphicsEffect_virtualbase_connectNotify".}
+proc fcQGraphicsEffect_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QGraphicsEffect_virtualbase_disconnectNotify".}
+proc fcQGraphicsEffect_new(vtbl: pointer, ): ptr cQGraphicsEffect {.importc: "QGraphicsEffect_new".}
+proc fcQGraphicsEffect_new2(vtbl: pointer, parent: pointer): ptr cQGraphicsEffect {.importc: "QGraphicsEffect_new2".}
 proc fcQGraphicsEffect_staticMetaObject(): pointer {.importc: "QGraphicsEffect_staticMetaObject".}
 proc fcQGraphicsEffect_delete(self: pointer) {.importc: "QGraphicsEffect_delete".}
-proc fcQGraphicsColorizeEffect_new(): ptr cQGraphicsColorizeEffect {.importc: "QGraphicsColorizeEffect_new".}
-proc fcQGraphicsColorizeEffect_new2(parent: pointer): ptr cQGraphicsColorizeEffect {.importc: "QGraphicsColorizeEffect_new2".}
 proc fcQGraphicsColorizeEffect_metaObject(self: pointer, ): pointer {.importc: "QGraphicsColorizeEffect_metaObject".}
 proc fcQGraphicsColorizeEffect_metacast(self: pointer, param1: cstring): pointer {.importc: "QGraphicsColorizeEffect_metacast".}
 proc fcQGraphicsColorizeEffect_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QGraphicsColorizeEffect_metacall".}
@@ -141,36 +141,38 @@ proc fcQGraphicsColorizeEffect_strengthChanged(self: pointer, strength: float64)
 proc fcQGraphicsColorizeEffect_connect_strengthChanged(self: pointer, slot: int) {.importc: "QGraphicsColorizeEffect_connect_strengthChanged".}
 proc fcQGraphicsColorizeEffect_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QGraphicsColorizeEffect_tr2".}
 proc fcQGraphicsColorizeEffect_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QGraphicsColorizeEffect_tr3".}
-proc fQGraphicsColorizeEffect_virtualbase_metaObject(self: pointer, ): pointer{.importc: "QGraphicsColorizeEffect_virtualbase_metaObject".}
-proc fcQGraphicsColorizeEffect_override_virtual_metaObject(self: pointer, slot: int) {.importc: "QGraphicsColorizeEffect_override_virtual_metaObject".}
-proc fQGraphicsColorizeEffect_virtualbase_metacast(self: pointer, param1: cstring): pointer{.importc: "QGraphicsColorizeEffect_virtualbase_metacast".}
-proc fcQGraphicsColorizeEffect_override_virtual_metacast(self: pointer, slot: int) {.importc: "QGraphicsColorizeEffect_override_virtual_metacast".}
-proc fQGraphicsColorizeEffect_virtualbase_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint{.importc: "QGraphicsColorizeEffect_virtualbase_metacall".}
-proc fcQGraphicsColorizeEffect_override_virtual_metacall(self: pointer, slot: int) {.importc: "QGraphicsColorizeEffect_override_virtual_metacall".}
-proc fQGraphicsColorizeEffect_virtualbase_draw(self: pointer, painter: pointer): void{.importc: "QGraphicsColorizeEffect_virtualbase_draw".}
-proc fcQGraphicsColorizeEffect_override_virtual_draw(self: pointer, slot: int) {.importc: "QGraphicsColorizeEffect_override_virtual_draw".}
-proc fQGraphicsColorizeEffect_virtualbase_boundingRectFor(self: pointer, sourceRect: pointer): pointer{.importc: "QGraphicsColorizeEffect_virtualbase_boundingRectFor".}
-proc fcQGraphicsColorizeEffect_override_virtual_boundingRectFor(self: pointer, slot: int) {.importc: "QGraphicsColorizeEffect_override_virtual_boundingRectFor".}
-proc fQGraphicsColorizeEffect_virtualbase_sourceChanged(self: pointer, flags: cint): void{.importc: "QGraphicsColorizeEffect_virtualbase_sourceChanged".}
-proc fcQGraphicsColorizeEffect_override_virtual_sourceChanged(self: pointer, slot: int) {.importc: "QGraphicsColorizeEffect_override_virtual_sourceChanged".}
-proc fQGraphicsColorizeEffect_virtualbase_event(self: pointer, event: pointer): bool{.importc: "QGraphicsColorizeEffect_virtualbase_event".}
-proc fcQGraphicsColorizeEffect_override_virtual_event(self: pointer, slot: int) {.importc: "QGraphicsColorizeEffect_override_virtual_event".}
-proc fQGraphicsColorizeEffect_virtualbase_eventFilter(self: pointer, watched: pointer, event: pointer): bool{.importc: "QGraphicsColorizeEffect_virtualbase_eventFilter".}
-proc fcQGraphicsColorizeEffect_override_virtual_eventFilter(self: pointer, slot: int) {.importc: "QGraphicsColorizeEffect_override_virtual_eventFilter".}
-proc fQGraphicsColorizeEffect_virtualbase_timerEvent(self: pointer, event: pointer): void{.importc: "QGraphicsColorizeEffect_virtualbase_timerEvent".}
-proc fcQGraphicsColorizeEffect_override_virtual_timerEvent(self: pointer, slot: int) {.importc: "QGraphicsColorizeEffect_override_virtual_timerEvent".}
-proc fQGraphicsColorizeEffect_virtualbase_childEvent(self: pointer, event: pointer): void{.importc: "QGraphicsColorizeEffect_virtualbase_childEvent".}
-proc fcQGraphicsColorizeEffect_override_virtual_childEvent(self: pointer, slot: int) {.importc: "QGraphicsColorizeEffect_override_virtual_childEvent".}
-proc fQGraphicsColorizeEffect_virtualbase_customEvent(self: pointer, event: pointer): void{.importc: "QGraphicsColorizeEffect_virtualbase_customEvent".}
-proc fcQGraphicsColorizeEffect_override_virtual_customEvent(self: pointer, slot: int) {.importc: "QGraphicsColorizeEffect_override_virtual_customEvent".}
-proc fQGraphicsColorizeEffect_virtualbase_connectNotify(self: pointer, signal: pointer): void{.importc: "QGraphicsColorizeEffect_virtualbase_connectNotify".}
-proc fcQGraphicsColorizeEffect_override_virtual_connectNotify(self: pointer, slot: int) {.importc: "QGraphicsColorizeEffect_override_virtual_connectNotify".}
-proc fQGraphicsColorizeEffect_virtualbase_disconnectNotify(self: pointer, signal: pointer): void{.importc: "QGraphicsColorizeEffect_virtualbase_disconnectNotify".}
-proc fcQGraphicsColorizeEffect_override_virtual_disconnectNotify(self: pointer, slot: int) {.importc: "QGraphicsColorizeEffect_override_virtual_disconnectNotify".}
+type cQGraphicsColorizeEffectVTable = object
+  destructor*: proc(vtbl: ptr cQGraphicsColorizeEffectVTable, self: ptr cQGraphicsColorizeEffect) {.cdecl, raises:[], gcsafe.}
+  metaObject*: proc(vtbl, self: pointer, ): pointer {.cdecl, raises: [], gcsafe.}
+  metacast*: proc(vtbl, self: pointer, param1: cstring): pointer {.cdecl, raises: [], gcsafe.}
+  metacall*: proc(vtbl, self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl, raises: [], gcsafe.}
+  draw*: proc(vtbl, self: pointer, painter: pointer): void {.cdecl, raises: [], gcsafe.}
+  boundingRectFor*: proc(vtbl, self: pointer, sourceRect: pointer): pointer {.cdecl, raises: [], gcsafe.}
+  sourceChanged*: proc(vtbl, self: pointer, flags: cint): void {.cdecl, raises: [], gcsafe.}
+  event*: proc(vtbl, self: pointer, event: pointer): bool {.cdecl, raises: [], gcsafe.}
+  eventFilter*: proc(vtbl, self: pointer, watched: pointer, event: pointer): bool {.cdecl, raises: [], gcsafe.}
+  timerEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  childEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  customEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  connectNotify*: proc(vtbl, self: pointer, signal: pointer): void {.cdecl, raises: [], gcsafe.}
+  disconnectNotify*: proc(vtbl, self: pointer, signal: pointer): void {.cdecl, raises: [], gcsafe.}
+proc fcQGraphicsColorizeEffect_virtualbase_metaObject(self: pointer, ): pointer {.importc: "QGraphicsColorizeEffect_virtualbase_metaObject".}
+proc fcQGraphicsColorizeEffect_virtualbase_metacast(self: pointer, param1: cstring): pointer {.importc: "QGraphicsColorizeEffect_virtualbase_metacast".}
+proc fcQGraphicsColorizeEffect_virtualbase_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QGraphicsColorizeEffect_virtualbase_metacall".}
+proc fcQGraphicsColorizeEffect_virtualbase_draw(self: pointer, painter: pointer): void {.importc: "QGraphicsColorizeEffect_virtualbase_draw".}
+proc fcQGraphicsColorizeEffect_virtualbase_boundingRectFor(self: pointer, sourceRect: pointer): pointer {.importc: "QGraphicsColorizeEffect_virtualbase_boundingRectFor".}
+proc fcQGraphicsColorizeEffect_virtualbase_sourceChanged(self: pointer, flags: cint): void {.importc: "QGraphicsColorizeEffect_virtualbase_sourceChanged".}
+proc fcQGraphicsColorizeEffect_virtualbase_event(self: pointer, event: pointer): bool {.importc: "QGraphicsColorizeEffect_virtualbase_event".}
+proc fcQGraphicsColorizeEffect_virtualbase_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.importc: "QGraphicsColorizeEffect_virtualbase_eventFilter".}
+proc fcQGraphicsColorizeEffect_virtualbase_timerEvent(self: pointer, event: pointer): void {.importc: "QGraphicsColorizeEffect_virtualbase_timerEvent".}
+proc fcQGraphicsColorizeEffect_virtualbase_childEvent(self: pointer, event: pointer): void {.importc: "QGraphicsColorizeEffect_virtualbase_childEvent".}
+proc fcQGraphicsColorizeEffect_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QGraphicsColorizeEffect_virtualbase_customEvent".}
+proc fcQGraphicsColorizeEffect_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QGraphicsColorizeEffect_virtualbase_connectNotify".}
+proc fcQGraphicsColorizeEffect_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QGraphicsColorizeEffect_virtualbase_disconnectNotify".}
+proc fcQGraphicsColorizeEffect_new(vtbl: pointer, ): ptr cQGraphicsColorizeEffect {.importc: "QGraphicsColorizeEffect_new".}
+proc fcQGraphicsColorizeEffect_new2(vtbl: pointer, parent: pointer): ptr cQGraphicsColorizeEffect {.importc: "QGraphicsColorizeEffect_new2".}
 proc fcQGraphicsColorizeEffect_staticMetaObject(): pointer {.importc: "QGraphicsColorizeEffect_staticMetaObject".}
 proc fcQGraphicsColorizeEffect_delete(self: pointer) {.importc: "QGraphicsColorizeEffect_delete".}
-proc fcQGraphicsBlurEffect_new(): ptr cQGraphicsBlurEffect {.importc: "QGraphicsBlurEffect_new".}
-proc fcQGraphicsBlurEffect_new2(parent: pointer): ptr cQGraphicsBlurEffect {.importc: "QGraphicsBlurEffect_new2".}
 proc fcQGraphicsBlurEffect_metaObject(self: pointer, ): pointer {.importc: "QGraphicsBlurEffect_metaObject".}
 proc fcQGraphicsBlurEffect_metacast(self: pointer, param1: cstring): pointer {.importc: "QGraphicsBlurEffect_metacast".}
 proc fcQGraphicsBlurEffect_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QGraphicsBlurEffect_metacall".}
@@ -186,36 +188,38 @@ proc fcQGraphicsBlurEffect_blurHintsChanged(self: pointer, hints: cint): void {.
 proc fcQGraphicsBlurEffect_connect_blurHintsChanged(self: pointer, slot: int) {.importc: "QGraphicsBlurEffect_connect_blurHintsChanged".}
 proc fcQGraphicsBlurEffect_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QGraphicsBlurEffect_tr2".}
 proc fcQGraphicsBlurEffect_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QGraphicsBlurEffect_tr3".}
-proc fQGraphicsBlurEffect_virtualbase_metaObject(self: pointer, ): pointer{.importc: "QGraphicsBlurEffect_virtualbase_metaObject".}
-proc fcQGraphicsBlurEffect_override_virtual_metaObject(self: pointer, slot: int) {.importc: "QGraphicsBlurEffect_override_virtual_metaObject".}
-proc fQGraphicsBlurEffect_virtualbase_metacast(self: pointer, param1: cstring): pointer{.importc: "QGraphicsBlurEffect_virtualbase_metacast".}
-proc fcQGraphicsBlurEffect_override_virtual_metacast(self: pointer, slot: int) {.importc: "QGraphicsBlurEffect_override_virtual_metacast".}
-proc fQGraphicsBlurEffect_virtualbase_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint{.importc: "QGraphicsBlurEffect_virtualbase_metacall".}
-proc fcQGraphicsBlurEffect_override_virtual_metacall(self: pointer, slot: int) {.importc: "QGraphicsBlurEffect_override_virtual_metacall".}
-proc fQGraphicsBlurEffect_virtualbase_boundingRectFor(self: pointer, rect: pointer): pointer{.importc: "QGraphicsBlurEffect_virtualbase_boundingRectFor".}
-proc fcQGraphicsBlurEffect_override_virtual_boundingRectFor(self: pointer, slot: int) {.importc: "QGraphicsBlurEffect_override_virtual_boundingRectFor".}
-proc fQGraphicsBlurEffect_virtualbase_draw(self: pointer, painter: pointer): void{.importc: "QGraphicsBlurEffect_virtualbase_draw".}
-proc fcQGraphicsBlurEffect_override_virtual_draw(self: pointer, slot: int) {.importc: "QGraphicsBlurEffect_override_virtual_draw".}
-proc fQGraphicsBlurEffect_virtualbase_sourceChanged(self: pointer, flags: cint): void{.importc: "QGraphicsBlurEffect_virtualbase_sourceChanged".}
-proc fcQGraphicsBlurEffect_override_virtual_sourceChanged(self: pointer, slot: int) {.importc: "QGraphicsBlurEffect_override_virtual_sourceChanged".}
-proc fQGraphicsBlurEffect_virtualbase_event(self: pointer, event: pointer): bool{.importc: "QGraphicsBlurEffect_virtualbase_event".}
-proc fcQGraphicsBlurEffect_override_virtual_event(self: pointer, slot: int) {.importc: "QGraphicsBlurEffect_override_virtual_event".}
-proc fQGraphicsBlurEffect_virtualbase_eventFilter(self: pointer, watched: pointer, event: pointer): bool{.importc: "QGraphicsBlurEffect_virtualbase_eventFilter".}
-proc fcQGraphicsBlurEffect_override_virtual_eventFilter(self: pointer, slot: int) {.importc: "QGraphicsBlurEffect_override_virtual_eventFilter".}
-proc fQGraphicsBlurEffect_virtualbase_timerEvent(self: pointer, event: pointer): void{.importc: "QGraphicsBlurEffect_virtualbase_timerEvent".}
-proc fcQGraphicsBlurEffect_override_virtual_timerEvent(self: pointer, slot: int) {.importc: "QGraphicsBlurEffect_override_virtual_timerEvent".}
-proc fQGraphicsBlurEffect_virtualbase_childEvent(self: pointer, event: pointer): void{.importc: "QGraphicsBlurEffect_virtualbase_childEvent".}
-proc fcQGraphicsBlurEffect_override_virtual_childEvent(self: pointer, slot: int) {.importc: "QGraphicsBlurEffect_override_virtual_childEvent".}
-proc fQGraphicsBlurEffect_virtualbase_customEvent(self: pointer, event: pointer): void{.importc: "QGraphicsBlurEffect_virtualbase_customEvent".}
-proc fcQGraphicsBlurEffect_override_virtual_customEvent(self: pointer, slot: int) {.importc: "QGraphicsBlurEffect_override_virtual_customEvent".}
-proc fQGraphicsBlurEffect_virtualbase_connectNotify(self: pointer, signal: pointer): void{.importc: "QGraphicsBlurEffect_virtualbase_connectNotify".}
-proc fcQGraphicsBlurEffect_override_virtual_connectNotify(self: pointer, slot: int) {.importc: "QGraphicsBlurEffect_override_virtual_connectNotify".}
-proc fQGraphicsBlurEffect_virtualbase_disconnectNotify(self: pointer, signal: pointer): void{.importc: "QGraphicsBlurEffect_virtualbase_disconnectNotify".}
-proc fcQGraphicsBlurEffect_override_virtual_disconnectNotify(self: pointer, slot: int) {.importc: "QGraphicsBlurEffect_override_virtual_disconnectNotify".}
+type cQGraphicsBlurEffectVTable = object
+  destructor*: proc(vtbl: ptr cQGraphicsBlurEffectVTable, self: ptr cQGraphicsBlurEffect) {.cdecl, raises:[], gcsafe.}
+  metaObject*: proc(vtbl, self: pointer, ): pointer {.cdecl, raises: [], gcsafe.}
+  metacast*: proc(vtbl, self: pointer, param1: cstring): pointer {.cdecl, raises: [], gcsafe.}
+  metacall*: proc(vtbl, self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl, raises: [], gcsafe.}
+  boundingRectFor*: proc(vtbl, self: pointer, rect: pointer): pointer {.cdecl, raises: [], gcsafe.}
+  draw*: proc(vtbl, self: pointer, painter: pointer): void {.cdecl, raises: [], gcsafe.}
+  sourceChanged*: proc(vtbl, self: pointer, flags: cint): void {.cdecl, raises: [], gcsafe.}
+  event*: proc(vtbl, self: pointer, event: pointer): bool {.cdecl, raises: [], gcsafe.}
+  eventFilter*: proc(vtbl, self: pointer, watched: pointer, event: pointer): bool {.cdecl, raises: [], gcsafe.}
+  timerEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  childEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  customEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  connectNotify*: proc(vtbl, self: pointer, signal: pointer): void {.cdecl, raises: [], gcsafe.}
+  disconnectNotify*: proc(vtbl, self: pointer, signal: pointer): void {.cdecl, raises: [], gcsafe.}
+proc fcQGraphicsBlurEffect_virtualbase_metaObject(self: pointer, ): pointer {.importc: "QGraphicsBlurEffect_virtualbase_metaObject".}
+proc fcQGraphicsBlurEffect_virtualbase_metacast(self: pointer, param1: cstring): pointer {.importc: "QGraphicsBlurEffect_virtualbase_metacast".}
+proc fcQGraphicsBlurEffect_virtualbase_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QGraphicsBlurEffect_virtualbase_metacall".}
+proc fcQGraphicsBlurEffect_virtualbase_boundingRectFor(self: pointer, rect: pointer): pointer {.importc: "QGraphicsBlurEffect_virtualbase_boundingRectFor".}
+proc fcQGraphicsBlurEffect_virtualbase_draw(self: pointer, painter: pointer): void {.importc: "QGraphicsBlurEffect_virtualbase_draw".}
+proc fcQGraphicsBlurEffect_virtualbase_sourceChanged(self: pointer, flags: cint): void {.importc: "QGraphicsBlurEffect_virtualbase_sourceChanged".}
+proc fcQGraphicsBlurEffect_virtualbase_event(self: pointer, event: pointer): bool {.importc: "QGraphicsBlurEffect_virtualbase_event".}
+proc fcQGraphicsBlurEffect_virtualbase_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.importc: "QGraphicsBlurEffect_virtualbase_eventFilter".}
+proc fcQGraphicsBlurEffect_virtualbase_timerEvent(self: pointer, event: pointer): void {.importc: "QGraphicsBlurEffect_virtualbase_timerEvent".}
+proc fcQGraphicsBlurEffect_virtualbase_childEvent(self: pointer, event: pointer): void {.importc: "QGraphicsBlurEffect_virtualbase_childEvent".}
+proc fcQGraphicsBlurEffect_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QGraphicsBlurEffect_virtualbase_customEvent".}
+proc fcQGraphicsBlurEffect_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QGraphicsBlurEffect_virtualbase_connectNotify".}
+proc fcQGraphicsBlurEffect_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QGraphicsBlurEffect_virtualbase_disconnectNotify".}
+proc fcQGraphicsBlurEffect_new(vtbl: pointer, ): ptr cQGraphicsBlurEffect {.importc: "QGraphicsBlurEffect_new".}
+proc fcQGraphicsBlurEffect_new2(vtbl: pointer, parent: pointer): ptr cQGraphicsBlurEffect {.importc: "QGraphicsBlurEffect_new2".}
 proc fcQGraphicsBlurEffect_staticMetaObject(): pointer {.importc: "QGraphicsBlurEffect_staticMetaObject".}
 proc fcQGraphicsBlurEffect_delete(self: pointer) {.importc: "QGraphicsBlurEffect_delete".}
-proc fcQGraphicsDropShadowEffect_new(): ptr cQGraphicsDropShadowEffect {.importc: "QGraphicsDropShadowEffect_new".}
-proc fcQGraphicsDropShadowEffect_new2(parent: pointer): ptr cQGraphicsDropShadowEffect {.importc: "QGraphicsDropShadowEffect_new2".}
 proc fcQGraphicsDropShadowEffect_metaObject(self: pointer, ): pointer {.importc: "QGraphicsDropShadowEffect_metaObject".}
 proc fcQGraphicsDropShadowEffect_metacast(self: pointer, param1: cstring): pointer {.importc: "QGraphicsDropShadowEffect_metacast".}
 proc fcQGraphicsDropShadowEffect_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QGraphicsDropShadowEffect_metacall".}
@@ -241,36 +245,38 @@ proc fcQGraphicsDropShadowEffect_colorChanged(self: pointer, color: pointer): vo
 proc fcQGraphicsDropShadowEffect_connect_colorChanged(self: pointer, slot: int) {.importc: "QGraphicsDropShadowEffect_connect_colorChanged".}
 proc fcQGraphicsDropShadowEffect_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QGraphicsDropShadowEffect_tr2".}
 proc fcQGraphicsDropShadowEffect_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QGraphicsDropShadowEffect_tr3".}
-proc fQGraphicsDropShadowEffect_virtualbase_metaObject(self: pointer, ): pointer{.importc: "QGraphicsDropShadowEffect_virtualbase_metaObject".}
-proc fcQGraphicsDropShadowEffect_override_virtual_metaObject(self: pointer, slot: int) {.importc: "QGraphicsDropShadowEffect_override_virtual_metaObject".}
-proc fQGraphicsDropShadowEffect_virtualbase_metacast(self: pointer, param1: cstring): pointer{.importc: "QGraphicsDropShadowEffect_virtualbase_metacast".}
-proc fcQGraphicsDropShadowEffect_override_virtual_metacast(self: pointer, slot: int) {.importc: "QGraphicsDropShadowEffect_override_virtual_metacast".}
-proc fQGraphicsDropShadowEffect_virtualbase_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint{.importc: "QGraphicsDropShadowEffect_virtualbase_metacall".}
-proc fcQGraphicsDropShadowEffect_override_virtual_metacall(self: pointer, slot: int) {.importc: "QGraphicsDropShadowEffect_override_virtual_metacall".}
-proc fQGraphicsDropShadowEffect_virtualbase_boundingRectFor(self: pointer, rect: pointer): pointer{.importc: "QGraphicsDropShadowEffect_virtualbase_boundingRectFor".}
-proc fcQGraphicsDropShadowEffect_override_virtual_boundingRectFor(self: pointer, slot: int) {.importc: "QGraphicsDropShadowEffect_override_virtual_boundingRectFor".}
-proc fQGraphicsDropShadowEffect_virtualbase_draw(self: pointer, painter: pointer): void{.importc: "QGraphicsDropShadowEffect_virtualbase_draw".}
-proc fcQGraphicsDropShadowEffect_override_virtual_draw(self: pointer, slot: int) {.importc: "QGraphicsDropShadowEffect_override_virtual_draw".}
-proc fQGraphicsDropShadowEffect_virtualbase_sourceChanged(self: pointer, flags: cint): void{.importc: "QGraphicsDropShadowEffect_virtualbase_sourceChanged".}
-proc fcQGraphicsDropShadowEffect_override_virtual_sourceChanged(self: pointer, slot: int) {.importc: "QGraphicsDropShadowEffect_override_virtual_sourceChanged".}
-proc fQGraphicsDropShadowEffect_virtualbase_event(self: pointer, event: pointer): bool{.importc: "QGraphicsDropShadowEffect_virtualbase_event".}
-proc fcQGraphicsDropShadowEffect_override_virtual_event(self: pointer, slot: int) {.importc: "QGraphicsDropShadowEffect_override_virtual_event".}
-proc fQGraphicsDropShadowEffect_virtualbase_eventFilter(self: pointer, watched: pointer, event: pointer): bool{.importc: "QGraphicsDropShadowEffect_virtualbase_eventFilter".}
-proc fcQGraphicsDropShadowEffect_override_virtual_eventFilter(self: pointer, slot: int) {.importc: "QGraphicsDropShadowEffect_override_virtual_eventFilter".}
-proc fQGraphicsDropShadowEffect_virtualbase_timerEvent(self: pointer, event: pointer): void{.importc: "QGraphicsDropShadowEffect_virtualbase_timerEvent".}
-proc fcQGraphicsDropShadowEffect_override_virtual_timerEvent(self: pointer, slot: int) {.importc: "QGraphicsDropShadowEffect_override_virtual_timerEvent".}
-proc fQGraphicsDropShadowEffect_virtualbase_childEvent(self: pointer, event: pointer): void{.importc: "QGraphicsDropShadowEffect_virtualbase_childEvent".}
-proc fcQGraphicsDropShadowEffect_override_virtual_childEvent(self: pointer, slot: int) {.importc: "QGraphicsDropShadowEffect_override_virtual_childEvent".}
-proc fQGraphicsDropShadowEffect_virtualbase_customEvent(self: pointer, event: pointer): void{.importc: "QGraphicsDropShadowEffect_virtualbase_customEvent".}
-proc fcQGraphicsDropShadowEffect_override_virtual_customEvent(self: pointer, slot: int) {.importc: "QGraphicsDropShadowEffect_override_virtual_customEvent".}
-proc fQGraphicsDropShadowEffect_virtualbase_connectNotify(self: pointer, signal: pointer): void{.importc: "QGraphicsDropShadowEffect_virtualbase_connectNotify".}
-proc fcQGraphicsDropShadowEffect_override_virtual_connectNotify(self: pointer, slot: int) {.importc: "QGraphicsDropShadowEffect_override_virtual_connectNotify".}
-proc fQGraphicsDropShadowEffect_virtualbase_disconnectNotify(self: pointer, signal: pointer): void{.importc: "QGraphicsDropShadowEffect_virtualbase_disconnectNotify".}
-proc fcQGraphicsDropShadowEffect_override_virtual_disconnectNotify(self: pointer, slot: int) {.importc: "QGraphicsDropShadowEffect_override_virtual_disconnectNotify".}
+type cQGraphicsDropShadowEffectVTable = object
+  destructor*: proc(vtbl: ptr cQGraphicsDropShadowEffectVTable, self: ptr cQGraphicsDropShadowEffect) {.cdecl, raises:[], gcsafe.}
+  metaObject*: proc(vtbl, self: pointer, ): pointer {.cdecl, raises: [], gcsafe.}
+  metacast*: proc(vtbl, self: pointer, param1: cstring): pointer {.cdecl, raises: [], gcsafe.}
+  metacall*: proc(vtbl, self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl, raises: [], gcsafe.}
+  boundingRectFor*: proc(vtbl, self: pointer, rect: pointer): pointer {.cdecl, raises: [], gcsafe.}
+  draw*: proc(vtbl, self: pointer, painter: pointer): void {.cdecl, raises: [], gcsafe.}
+  sourceChanged*: proc(vtbl, self: pointer, flags: cint): void {.cdecl, raises: [], gcsafe.}
+  event*: proc(vtbl, self: pointer, event: pointer): bool {.cdecl, raises: [], gcsafe.}
+  eventFilter*: proc(vtbl, self: pointer, watched: pointer, event: pointer): bool {.cdecl, raises: [], gcsafe.}
+  timerEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  childEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  customEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  connectNotify*: proc(vtbl, self: pointer, signal: pointer): void {.cdecl, raises: [], gcsafe.}
+  disconnectNotify*: proc(vtbl, self: pointer, signal: pointer): void {.cdecl, raises: [], gcsafe.}
+proc fcQGraphicsDropShadowEffect_virtualbase_metaObject(self: pointer, ): pointer {.importc: "QGraphicsDropShadowEffect_virtualbase_metaObject".}
+proc fcQGraphicsDropShadowEffect_virtualbase_metacast(self: pointer, param1: cstring): pointer {.importc: "QGraphicsDropShadowEffect_virtualbase_metacast".}
+proc fcQGraphicsDropShadowEffect_virtualbase_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QGraphicsDropShadowEffect_virtualbase_metacall".}
+proc fcQGraphicsDropShadowEffect_virtualbase_boundingRectFor(self: pointer, rect: pointer): pointer {.importc: "QGraphicsDropShadowEffect_virtualbase_boundingRectFor".}
+proc fcQGraphicsDropShadowEffect_virtualbase_draw(self: pointer, painter: pointer): void {.importc: "QGraphicsDropShadowEffect_virtualbase_draw".}
+proc fcQGraphicsDropShadowEffect_virtualbase_sourceChanged(self: pointer, flags: cint): void {.importc: "QGraphicsDropShadowEffect_virtualbase_sourceChanged".}
+proc fcQGraphicsDropShadowEffect_virtualbase_event(self: pointer, event: pointer): bool {.importc: "QGraphicsDropShadowEffect_virtualbase_event".}
+proc fcQGraphicsDropShadowEffect_virtualbase_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.importc: "QGraphicsDropShadowEffect_virtualbase_eventFilter".}
+proc fcQGraphicsDropShadowEffect_virtualbase_timerEvent(self: pointer, event: pointer): void {.importc: "QGraphicsDropShadowEffect_virtualbase_timerEvent".}
+proc fcQGraphicsDropShadowEffect_virtualbase_childEvent(self: pointer, event: pointer): void {.importc: "QGraphicsDropShadowEffect_virtualbase_childEvent".}
+proc fcQGraphicsDropShadowEffect_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QGraphicsDropShadowEffect_virtualbase_customEvent".}
+proc fcQGraphicsDropShadowEffect_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QGraphicsDropShadowEffect_virtualbase_connectNotify".}
+proc fcQGraphicsDropShadowEffect_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QGraphicsDropShadowEffect_virtualbase_disconnectNotify".}
+proc fcQGraphicsDropShadowEffect_new(vtbl: pointer, ): ptr cQGraphicsDropShadowEffect {.importc: "QGraphicsDropShadowEffect_new".}
+proc fcQGraphicsDropShadowEffect_new2(vtbl: pointer, parent: pointer): ptr cQGraphicsDropShadowEffect {.importc: "QGraphicsDropShadowEffect_new2".}
 proc fcQGraphicsDropShadowEffect_staticMetaObject(): pointer {.importc: "QGraphicsDropShadowEffect_staticMetaObject".}
 proc fcQGraphicsDropShadowEffect_delete(self: pointer) {.importc: "QGraphicsDropShadowEffect_delete".}
-proc fcQGraphicsOpacityEffect_new(): ptr cQGraphicsOpacityEffect {.importc: "QGraphicsOpacityEffect_new".}
-proc fcQGraphicsOpacityEffect_new2(parent: pointer): ptr cQGraphicsOpacityEffect {.importc: "QGraphicsOpacityEffect_new2".}
 proc fcQGraphicsOpacityEffect_metaObject(self: pointer, ): pointer {.importc: "QGraphicsOpacityEffect_metaObject".}
 proc fcQGraphicsOpacityEffect_metacast(self: pointer, param1: cstring): pointer {.importc: "QGraphicsOpacityEffect_metacast".}
 proc fcQGraphicsOpacityEffect_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QGraphicsOpacityEffect_metacall".}
@@ -285,43 +291,38 @@ proc fcQGraphicsOpacityEffect_opacityMaskChanged(self: pointer, mask: pointer): 
 proc fcQGraphicsOpacityEffect_connect_opacityMaskChanged(self: pointer, slot: int) {.importc: "QGraphicsOpacityEffect_connect_opacityMaskChanged".}
 proc fcQGraphicsOpacityEffect_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QGraphicsOpacityEffect_tr2".}
 proc fcQGraphicsOpacityEffect_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QGraphicsOpacityEffect_tr3".}
-proc fQGraphicsOpacityEffect_virtualbase_metaObject(self: pointer, ): pointer{.importc: "QGraphicsOpacityEffect_virtualbase_metaObject".}
-proc fcQGraphicsOpacityEffect_override_virtual_metaObject(self: pointer, slot: int) {.importc: "QGraphicsOpacityEffect_override_virtual_metaObject".}
-proc fQGraphicsOpacityEffect_virtualbase_metacast(self: pointer, param1: cstring): pointer{.importc: "QGraphicsOpacityEffect_virtualbase_metacast".}
-proc fcQGraphicsOpacityEffect_override_virtual_metacast(self: pointer, slot: int) {.importc: "QGraphicsOpacityEffect_override_virtual_metacast".}
-proc fQGraphicsOpacityEffect_virtualbase_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint{.importc: "QGraphicsOpacityEffect_virtualbase_metacall".}
-proc fcQGraphicsOpacityEffect_override_virtual_metacall(self: pointer, slot: int) {.importc: "QGraphicsOpacityEffect_override_virtual_metacall".}
-proc fQGraphicsOpacityEffect_virtualbase_draw(self: pointer, painter: pointer): void{.importc: "QGraphicsOpacityEffect_virtualbase_draw".}
-proc fcQGraphicsOpacityEffect_override_virtual_draw(self: pointer, slot: int) {.importc: "QGraphicsOpacityEffect_override_virtual_draw".}
-proc fQGraphicsOpacityEffect_virtualbase_boundingRectFor(self: pointer, sourceRect: pointer): pointer{.importc: "QGraphicsOpacityEffect_virtualbase_boundingRectFor".}
-proc fcQGraphicsOpacityEffect_override_virtual_boundingRectFor(self: pointer, slot: int) {.importc: "QGraphicsOpacityEffect_override_virtual_boundingRectFor".}
-proc fQGraphicsOpacityEffect_virtualbase_sourceChanged(self: pointer, flags: cint): void{.importc: "QGraphicsOpacityEffect_virtualbase_sourceChanged".}
-proc fcQGraphicsOpacityEffect_override_virtual_sourceChanged(self: pointer, slot: int) {.importc: "QGraphicsOpacityEffect_override_virtual_sourceChanged".}
-proc fQGraphicsOpacityEffect_virtualbase_event(self: pointer, event: pointer): bool{.importc: "QGraphicsOpacityEffect_virtualbase_event".}
-proc fcQGraphicsOpacityEffect_override_virtual_event(self: pointer, slot: int) {.importc: "QGraphicsOpacityEffect_override_virtual_event".}
-proc fQGraphicsOpacityEffect_virtualbase_eventFilter(self: pointer, watched: pointer, event: pointer): bool{.importc: "QGraphicsOpacityEffect_virtualbase_eventFilter".}
-proc fcQGraphicsOpacityEffect_override_virtual_eventFilter(self: pointer, slot: int) {.importc: "QGraphicsOpacityEffect_override_virtual_eventFilter".}
-proc fQGraphicsOpacityEffect_virtualbase_timerEvent(self: pointer, event: pointer): void{.importc: "QGraphicsOpacityEffect_virtualbase_timerEvent".}
-proc fcQGraphicsOpacityEffect_override_virtual_timerEvent(self: pointer, slot: int) {.importc: "QGraphicsOpacityEffect_override_virtual_timerEvent".}
-proc fQGraphicsOpacityEffect_virtualbase_childEvent(self: pointer, event: pointer): void{.importc: "QGraphicsOpacityEffect_virtualbase_childEvent".}
-proc fcQGraphicsOpacityEffect_override_virtual_childEvent(self: pointer, slot: int) {.importc: "QGraphicsOpacityEffect_override_virtual_childEvent".}
-proc fQGraphicsOpacityEffect_virtualbase_customEvent(self: pointer, event: pointer): void{.importc: "QGraphicsOpacityEffect_virtualbase_customEvent".}
-proc fcQGraphicsOpacityEffect_override_virtual_customEvent(self: pointer, slot: int) {.importc: "QGraphicsOpacityEffect_override_virtual_customEvent".}
-proc fQGraphicsOpacityEffect_virtualbase_connectNotify(self: pointer, signal: pointer): void{.importc: "QGraphicsOpacityEffect_virtualbase_connectNotify".}
-proc fcQGraphicsOpacityEffect_override_virtual_connectNotify(self: pointer, slot: int) {.importc: "QGraphicsOpacityEffect_override_virtual_connectNotify".}
-proc fQGraphicsOpacityEffect_virtualbase_disconnectNotify(self: pointer, signal: pointer): void{.importc: "QGraphicsOpacityEffect_virtualbase_disconnectNotify".}
-proc fcQGraphicsOpacityEffect_override_virtual_disconnectNotify(self: pointer, slot: int) {.importc: "QGraphicsOpacityEffect_override_virtual_disconnectNotify".}
+type cQGraphicsOpacityEffectVTable = object
+  destructor*: proc(vtbl: ptr cQGraphicsOpacityEffectVTable, self: ptr cQGraphicsOpacityEffect) {.cdecl, raises:[], gcsafe.}
+  metaObject*: proc(vtbl, self: pointer, ): pointer {.cdecl, raises: [], gcsafe.}
+  metacast*: proc(vtbl, self: pointer, param1: cstring): pointer {.cdecl, raises: [], gcsafe.}
+  metacall*: proc(vtbl, self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl, raises: [], gcsafe.}
+  draw*: proc(vtbl, self: pointer, painter: pointer): void {.cdecl, raises: [], gcsafe.}
+  boundingRectFor*: proc(vtbl, self: pointer, sourceRect: pointer): pointer {.cdecl, raises: [], gcsafe.}
+  sourceChanged*: proc(vtbl, self: pointer, flags: cint): void {.cdecl, raises: [], gcsafe.}
+  event*: proc(vtbl, self: pointer, event: pointer): bool {.cdecl, raises: [], gcsafe.}
+  eventFilter*: proc(vtbl, self: pointer, watched: pointer, event: pointer): bool {.cdecl, raises: [], gcsafe.}
+  timerEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  childEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  customEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  connectNotify*: proc(vtbl, self: pointer, signal: pointer): void {.cdecl, raises: [], gcsafe.}
+  disconnectNotify*: proc(vtbl, self: pointer, signal: pointer): void {.cdecl, raises: [], gcsafe.}
+proc fcQGraphicsOpacityEffect_virtualbase_metaObject(self: pointer, ): pointer {.importc: "QGraphicsOpacityEffect_virtualbase_metaObject".}
+proc fcQGraphicsOpacityEffect_virtualbase_metacast(self: pointer, param1: cstring): pointer {.importc: "QGraphicsOpacityEffect_virtualbase_metacast".}
+proc fcQGraphicsOpacityEffect_virtualbase_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QGraphicsOpacityEffect_virtualbase_metacall".}
+proc fcQGraphicsOpacityEffect_virtualbase_draw(self: pointer, painter: pointer): void {.importc: "QGraphicsOpacityEffect_virtualbase_draw".}
+proc fcQGraphicsOpacityEffect_virtualbase_boundingRectFor(self: pointer, sourceRect: pointer): pointer {.importc: "QGraphicsOpacityEffect_virtualbase_boundingRectFor".}
+proc fcQGraphicsOpacityEffect_virtualbase_sourceChanged(self: pointer, flags: cint): void {.importc: "QGraphicsOpacityEffect_virtualbase_sourceChanged".}
+proc fcQGraphicsOpacityEffect_virtualbase_event(self: pointer, event: pointer): bool {.importc: "QGraphicsOpacityEffect_virtualbase_event".}
+proc fcQGraphicsOpacityEffect_virtualbase_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.importc: "QGraphicsOpacityEffect_virtualbase_eventFilter".}
+proc fcQGraphicsOpacityEffect_virtualbase_timerEvent(self: pointer, event: pointer): void {.importc: "QGraphicsOpacityEffect_virtualbase_timerEvent".}
+proc fcQGraphicsOpacityEffect_virtualbase_childEvent(self: pointer, event: pointer): void {.importc: "QGraphicsOpacityEffect_virtualbase_childEvent".}
+proc fcQGraphicsOpacityEffect_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QGraphicsOpacityEffect_virtualbase_customEvent".}
+proc fcQGraphicsOpacityEffect_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QGraphicsOpacityEffect_virtualbase_connectNotify".}
+proc fcQGraphicsOpacityEffect_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QGraphicsOpacityEffect_virtualbase_disconnectNotify".}
+proc fcQGraphicsOpacityEffect_new(vtbl: pointer, ): ptr cQGraphicsOpacityEffect {.importc: "QGraphicsOpacityEffect_new".}
+proc fcQGraphicsOpacityEffect_new2(vtbl: pointer, parent: pointer): ptr cQGraphicsOpacityEffect {.importc: "QGraphicsOpacityEffect_new2".}
 proc fcQGraphicsOpacityEffect_staticMetaObject(): pointer {.importc: "QGraphicsOpacityEffect_staticMetaObject".}
 proc fcQGraphicsOpacityEffect_delete(self: pointer) {.importc: "QGraphicsOpacityEffect_delete".}
-
-
-func init*(T: type gen_qgraphicseffect_types.QGraphicsEffect, h: ptr cQGraphicsEffect): gen_qgraphicseffect_types.QGraphicsEffect =
-  T(h: h)
-proc create*(T: type gen_qgraphicseffect_types.QGraphicsEffect, ): gen_qgraphicseffect_types.QGraphicsEffect =
-  gen_qgraphicseffect_types.QGraphicsEffect.init(fcQGraphicsEffect_new())
-
-proc create*(T: type gen_qgraphicseffect_types.QGraphicsEffect, parent: gen_qobject_types.QObject): gen_qgraphicseffect_types.QGraphicsEffect =
-  gen_qgraphicseffect_types.QGraphicsEffect.init(fcQGraphicsEffect_new2(parent.h))
 
 proc metaObject*(self: gen_qgraphicseffect_types.QGraphicsEffect, ): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQGraphicsEffect_metaObject(self.h))
@@ -357,7 +358,7 @@ proc enabledChanged*(self: gen_qgraphicseffect_types.QGraphicsEffect, enabled: b
   fcQGraphicsEffect_enabledChanged(self.h, enabled)
 
 type QGraphicsEffectenabledChangedSlot* = proc(enabled: bool)
-proc miqt_exec_callback_QGraphicsEffect_enabledChanged(slot: int, enabled: bool) {.exportc.} =
+proc miqt_exec_callback_cQGraphicsEffect_enabledChanged(slot: int, enabled: bool) {.exportc: "miqt_exec_callback_QGraphicsEffect_enabledChanged".} =
   let nimfunc = cast[ptr QGraphicsEffectenabledChangedSlot](cast[pointer](slot))
   let slotval1 = enabled
 
@@ -381,253 +382,231 @@ proc tr*(_: type gen_qgraphicseffect_types.QGraphicsEffect, s: cstring, c: cstri
   c_free(v_ms.data)
   vx_ret
 
+type QGraphicsEffectmetaObjectProc* = proc(self: QGraphicsEffect): gen_qobjectdefs_types.QMetaObject {.raises: [], gcsafe.}
+type QGraphicsEffectmetacastProc* = proc(self: QGraphicsEffect, param1: cstring): pointer {.raises: [], gcsafe.}
+type QGraphicsEffectmetacallProc* = proc(self: QGraphicsEffect, param1: cint, param2: cint, param3: pointer): cint {.raises: [], gcsafe.}
+type QGraphicsEffectboundingRectForProc* = proc(self: QGraphicsEffect, sourceRect: gen_qrect_types.QRectF): gen_qrect_types.QRectF {.raises: [], gcsafe.}
+type QGraphicsEffectdrawProc* = proc(self: QGraphicsEffect, painter: gen_qpainter_types.QPainter): void {.raises: [], gcsafe.}
+type QGraphicsEffectsourceChangedProc* = proc(self: QGraphicsEffect, flags: cint): void {.raises: [], gcsafe.}
+type QGraphicsEffecteventProc* = proc(self: QGraphicsEffect, event: gen_qcoreevent_types.QEvent): bool {.raises: [], gcsafe.}
+type QGraphicsEffecteventFilterProc* = proc(self: QGraphicsEffect, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.raises: [], gcsafe.}
+type QGraphicsEffecttimerEventProc* = proc(self: QGraphicsEffect, event: gen_qcoreevent_types.QTimerEvent): void {.raises: [], gcsafe.}
+type QGraphicsEffectchildEventProc* = proc(self: QGraphicsEffect, event: gen_qcoreevent_types.QChildEvent): void {.raises: [], gcsafe.}
+type QGraphicsEffectcustomEventProc* = proc(self: QGraphicsEffect, event: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
+type QGraphicsEffectconnectNotifyProc* = proc(self: QGraphicsEffect, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
+type QGraphicsEffectdisconnectNotifyProc* = proc(self: QGraphicsEffect, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
+type QGraphicsEffectVTable* = object
+  vtbl: cQGraphicsEffectVTable
+  metaObject*: QGraphicsEffectmetaObjectProc
+  metacast*: QGraphicsEffectmetacastProc
+  metacall*: QGraphicsEffectmetacallProc
+  boundingRectFor*: QGraphicsEffectboundingRectForProc
+  draw*: QGraphicsEffectdrawProc
+  sourceChanged*: QGraphicsEffectsourceChangedProc
+  event*: QGraphicsEffecteventProc
+  eventFilter*: QGraphicsEffecteventFilterProc
+  timerEvent*: QGraphicsEffecttimerEventProc
+  childEvent*: QGraphicsEffectchildEventProc
+  customEvent*: QGraphicsEffectcustomEventProc
+  connectNotify*: QGraphicsEffectconnectNotifyProc
+  disconnectNotify*: QGraphicsEffectdisconnectNotifyProc
 proc QGraphicsEffectmetaObject*(self: gen_qgraphicseffect_types.QGraphicsEffect, ): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fQGraphicsEffect_virtualbase_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQGraphicsEffect_virtualbase_metaObject(self.h))
 
-type QGraphicsEffectmetaObjectProc* = proc(): gen_qobjectdefs_types.QMetaObject
-proc onmetaObject*(self: gen_qgraphicseffect_types.QGraphicsEffect, slot: QGraphicsEffectmetaObjectProc) =
-  # TODO check subclass
-  var tmp = new QGraphicsEffectmetaObjectProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQGraphicsEffect_override_virtual_metaObject(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QGraphicsEffect_metaObject(self: ptr cQGraphicsEffect, slot: int): pointer {.exportc: "miqt_exec_callback_QGraphicsEffect_metaObject ".} =
-  var nimfunc = cast[ptr QGraphicsEffectmetaObjectProc](cast[pointer](slot))
-
-  let virtualReturn = nimfunc[]( )
-
+proc miqt_exec_callback_cQGraphicsEffect_metaObject(vtbl: pointer, self: pointer): pointer {.cdecl.} =
+  let vtbl = cast[ptr QGraphicsEffectVTable](vtbl)
+  let self = QGraphicsEffect(h: self)
+  var virtualReturn = vtbl[].metaObject(self)
   virtualReturn.h
+
 proc QGraphicsEffectmetacast*(self: gen_qgraphicseffect_types.QGraphicsEffect, param1: cstring): pointer =
-  fQGraphicsEffect_virtualbase_metacast(self.h, param1)
+  fcQGraphicsEffect_virtualbase_metacast(self.h, param1)
 
-type QGraphicsEffectmetacastProc* = proc(param1: cstring): pointer
-proc onmetacast*(self: gen_qgraphicseffect_types.QGraphicsEffect, slot: QGraphicsEffectmetacastProc) =
-  # TODO check subclass
-  var tmp = new QGraphicsEffectmetacastProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQGraphicsEffect_override_virtual_metacast(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QGraphicsEffect_metacast(self: ptr cQGraphicsEffect, slot: int, param1: cstring): pointer {.exportc: "miqt_exec_callback_QGraphicsEffect_metacast ".} =
-  var nimfunc = cast[ptr QGraphicsEffectmetacastProc](cast[pointer](slot))
+proc miqt_exec_callback_cQGraphicsEffect_metacast(vtbl: pointer, self: pointer, param1: cstring): pointer {.cdecl.} =
+  let vtbl = cast[ptr QGraphicsEffectVTable](vtbl)
+  let self = QGraphicsEffect(h: self)
   let slotval1 = (param1)
-
-
-  let virtualReturn = nimfunc[](slotval1 )
-
+  var virtualReturn = vtbl[].metacast(self, slotval1)
   virtualReturn
+
 proc QGraphicsEffectmetacall*(self: gen_qgraphicseffect_types.QGraphicsEffect, param1: cint, param2: cint, param3: pointer): cint =
-  fQGraphicsEffect_virtualbase_metacall(self.h, cint(param1), param2, param3)
+  fcQGraphicsEffect_virtualbase_metacall(self.h, cint(param1), param2, param3)
 
-type QGraphicsEffectmetacallProc* = proc(param1: cint, param2: cint, param3: pointer): cint
-proc onmetacall*(self: gen_qgraphicseffect_types.QGraphicsEffect, slot: QGraphicsEffectmetacallProc) =
-  # TODO check subclass
-  var tmp = new QGraphicsEffectmetacallProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQGraphicsEffect_override_virtual_metacall(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QGraphicsEffect_metacall(self: ptr cQGraphicsEffect, slot: int, param1: cint, param2: cint, param3: pointer): cint {.exportc: "miqt_exec_callback_QGraphicsEffect_metacall ".} =
-  var nimfunc = cast[ptr QGraphicsEffectmetacallProc](cast[pointer](slot))
+proc miqt_exec_callback_cQGraphicsEffect_metacall(vtbl: pointer, self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
+  let vtbl = cast[ptr QGraphicsEffectVTable](vtbl)
+  let self = QGraphicsEffect(h: self)
   let slotval1 = cint(param1)
-
   let slotval2 = param2
-
   let slotval3 = param3
-
-
-  let virtualReturn = nimfunc[](slotval1, slotval2, slotval3 )
-
+  var virtualReturn = vtbl[].metacall(self, slotval1, slotval2, slotval3)
   virtualReturn
+
 proc QGraphicsEffectboundingRectFor*(self: gen_qgraphicseffect_types.QGraphicsEffect, sourceRect: gen_qrect_types.QRectF): gen_qrect_types.QRectF =
-  gen_qrect_types.QRectF(h: fQGraphicsEffect_virtualbase_boundingRectFor(self.h, sourceRect.h))
+  gen_qrect_types.QRectF(h: fcQGraphicsEffect_virtualbase_boundingRectFor(self.h, sourceRect.h))
 
-type QGraphicsEffectboundingRectForProc* = proc(sourceRect: gen_qrect_types.QRectF): gen_qrect_types.QRectF
-proc onboundingRectFor*(self: gen_qgraphicseffect_types.QGraphicsEffect, slot: QGraphicsEffectboundingRectForProc) =
-  # TODO check subclass
-  var tmp = new QGraphicsEffectboundingRectForProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQGraphicsEffect_override_virtual_boundingRectFor(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QGraphicsEffect_boundingRectFor(self: ptr cQGraphicsEffect, slot: int, sourceRect: pointer): pointer {.exportc: "miqt_exec_callback_QGraphicsEffect_boundingRectFor ".} =
-  var nimfunc = cast[ptr QGraphicsEffectboundingRectForProc](cast[pointer](slot))
+proc miqt_exec_callback_cQGraphicsEffect_boundingRectFor(vtbl: pointer, self: pointer, sourceRect: pointer): pointer {.cdecl.} =
+  let vtbl = cast[ptr QGraphicsEffectVTable](vtbl)
+  let self = QGraphicsEffect(h: self)
   let slotval1 = gen_qrect_types.QRectF(h: sourceRect)
-
-
-  let virtualReturn = nimfunc[](slotval1 )
-
+  var virtualReturn = vtbl[].boundingRectFor(self, slotval1)
   virtualReturn.h
-type QGraphicsEffectdrawProc* = proc(painter: gen_qpainter_types.QPainter): void
-proc ondraw*(self: gen_qgraphicseffect_types.QGraphicsEffect, slot: QGraphicsEffectdrawProc) =
-  # TODO check subclass
-  var tmp = new QGraphicsEffectdrawProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQGraphicsEffect_override_virtual_draw(self.h, cast[int](addr tmp[]))
 
-proc miqt_exec_callback_QGraphicsEffect_draw(self: ptr cQGraphicsEffect, slot: int, painter: pointer): void {.exportc: "miqt_exec_callback_QGraphicsEffect_draw ".} =
-  var nimfunc = cast[ptr QGraphicsEffectdrawProc](cast[pointer](slot))
+proc miqt_exec_callback_cQGraphicsEffect_draw(vtbl: pointer, self: pointer, painter: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QGraphicsEffectVTable](vtbl)
+  let self = QGraphicsEffect(h: self)
   let slotval1 = gen_qpainter_types.QPainter(h: painter)
+  vtbl[].draw(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QGraphicsEffectsourceChanged*(self: gen_qgraphicseffect_types.QGraphicsEffect, flags: cint): void =
-  fQGraphicsEffect_virtualbase_sourceChanged(self.h, cint(flags))
+  fcQGraphicsEffect_virtualbase_sourceChanged(self.h, cint(flags))
 
-type QGraphicsEffectsourceChangedProc* = proc(flags: cint): void
-proc onsourceChanged*(self: gen_qgraphicseffect_types.QGraphicsEffect, slot: QGraphicsEffectsourceChangedProc) =
-  # TODO check subclass
-  var tmp = new QGraphicsEffectsourceChangedProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQGraphicsEffect_override_virtual_sourceChanged(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QGraphicsEffect_sourceChanged(self: ptr cQGraphicsEffect, slot: int, flags: cint): void {.exportc: "miqt_exec_callback_QGraphicsEffect_sourceChanged ".} =
-  var nimfunc = cast[ptr QGraphicsEffectsourceChangedProc](cast[pointer](slot))
+proc miqt_exec_callback_cQGraphicsEffect_sourceChanged(vtbl: pointer, self: pointer, flags: cint): void {.cdecl.} =
+  let vtbl = cast[ptr QGraphicsEffectVTable](vtbl)
+  let self = QGraphicsEffect(h: self)
   let slotval1 = cint(flags)
+  vtbl[].sourceChanged(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QGraphicsEffectevent*(self: gen_qgraphicseffect_types.QGraphicsEffect, event: gen_qcoreevent_types.QEvent): bool =
-  fQGraphicsEffect_virtualbase_event(self.h, event.h)
+  fcQGraphicsEffect_virtualbase_event(self.h, event.h)
 
-type QGraphicsEffecteventProc* = proc(event: gen_qcoreevent_types.QEvent): bool
-proc onevent*(self: gen_qgraphicseffect_types.QGraphicsEffect, slot: QGraphicsEffecteventProc) =
-  # TODO check subclass
-  var tmp = new QGraphicsEffecteventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQGraphicsEffect_override_virtual_event(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QGraphicsEffect_event(self: ptr cQGraphicsEffect, slot: int, event: pointer): bool {.exportc: "miqt_exec_callback_QGraphicsEffect_event ".} =
-  var nimfunc = cast[ptr QGraphicsEffecteventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQGraphicsEffect_event(vtbl: pointer, self: pointer, event: pointer): bool {.cdecl.} =
+  let vtbl = cast[ptr QGraphicsEffectVTable](vtbl)
+  let self = QGraphicsEffect(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event)
-
-
-  let virtualReturn = nimfunc[](slotval1 )
-
+  var virtualReturn = vtbl[].event(self, slotval1)
   virtualReturn
+
 proc QGraphicsEffecteventFilter*(self: gen_qgraphicseffect_types.QGraphicsEffect, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool =
-  fQGraphicsEffect_virtualbase_eventFilter(self.h, watched.h, event.h)
+  fcQGraphicsEffect_virtualbase_eventFilter(self.h, watched.h, event.h)
 
-type QGraphicsEffecteventFilterProc* = proc(watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool
-proc oneventFilter*(self: gen_qgraphicseffect_types.QGraphicsEffect, slot: QGraphicsEffecteventFilterProc) =
-  # TODO check subclass
-  var tmp = new QGraphicsEffecteventFilterProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQGraphicsEffect_override_virtual_eventFilter(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QGraphicsEffect_eventFilter(self: ptr cQGraphicsEffect, slot: int, watched: pointer, event: pointer): bool {.exportc: "miqt_exec_callback_QGraphicsEffect_eventFilter ".} =
-  var nimfunc = cast[ptr QGraphicsEffecteventFilterProc](cast[pointer](slot))
+proc miqt_exec_callback_cQGraphicsEffect_eventFilter(vtbl: pointer, self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
+  let vtbl = cast[ptr QGraphicsEffectVTable](vtbl)
+  let self = QGraphicsEffect(h: self)
   let slotval1 = gen_qobject_types.QObject(h: watched)
-
   let slotval2 = gen_qcoreevent_types.QEvent(h: event)
-
-
-  let virtualReturn = nimfunc[](slotval1, slotval2 )
-
+  var virtualReturn = vtbl[].eventFilter(self, slotval1, slotval2)
   virtualReturn
+
 proc QGraphicsEffecttimerEvent*(self: gen_qgraphicseffect_types.QGraphicsEffect, event: gen_qcoreevent_types.QTimerEvent): void =
-  fQGraphicsEffect_virtualbase_timerEvent(self.h, event.h)
+  fcQGraphicsEffect_virtualbase_timerEvent(self.h, event.h)
 
-type QGraphicsEffecttimerEventProc* = proc(event: gen_qcoreevent_types.QTimerEvent): void
-proc ontimerEvent*(self: gen_qgraphicseffect_types.QGraphicsEffect, slot: QGraphicsEffecttimerEventProc) =
-  # TODO check subclass
-  var tmp = new QGraphicsEffecttimerEventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQGraphicsEffect_override_virtual_timerEvent(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QGraphicsEffect_timerEvent(self: ptr cQGraphicsEffect, slot: int, event: pointer): void {.exportc: "miqt_exec_callback_QGraphicsEffect_timerEvent ".} =
-  var nimfunc = cast[ptr QGraphicsEffecttimerEventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQGraphicsEffect_timerEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QGraphicsEffectVTable](vtbl)
+  let self = QGraphicsEffect(h: self)
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event)
+  vtbl[].timerEvent(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QGraphicsEffectchildEvent*(self: gen_qgraphicseffect_types.QGraphicsEffect, event: gen_qcoreevent_types.QChildEvent): void =
-  fQGraphicsEffect_virtualbase_childEvent(self.h, event.h)
+  fcQGraphicsEffect_virtualbase_childEvent(self.h, event.h)
 
-type QGraphicsEffectchildEventProc* = proc(event: gen_qcoreevent_types.QChildEvent): void
-proc onchildEvent*(self: gen_qgraphicseffect_types.QGraphicsEffect, slot: QGraphicsEffectchildEventProc) =
-  # TODO check subclass
-  var tmp = new QGraphicsEffectchildEventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQGraphicsEffect_override_virtual_childEvent(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QGraphicsEffect_childEvent(self: ptr cQGraphicsEffect, slot: int, event: pointer): void {.exportc: "miqt_exec_callback_QGraphicsEffect_childEvent ".} =
-  var nimfunc = cast[ptr QGraphicsEffectchildEventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQGraphicsEffect_childEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QGraphicsEffectVTable](vtbl)
+  let self = QGraphicsEffect(h: self)
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: event)
+  vtbl[].childEvent(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QGraphicsEffectcustomEvent*(self: gen_qgraphicseffect_types.QGraphicsEffect, event: gen_qcoreevent_types.QEvent): void =
-  fQGraphicsEffect_virtualbase_customEvent(self.h, event.h)
+  fcQGraphicsEffect_virtualbase_customEvent(self.h, event.h)
 
-type QGraphicsEffectcustomEventProc* = proc(event: gen_qcoreevent_types.QEvent): void
-proc oncustomEvent*(self: gen_qgraphicseffect_types.QGraphicsEffect, slot: QGraphicsEffectcustomEventProc) =
-  # TODO check subclass
-  var tmp = new QGraphicsEffectcustomEventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQGraphicsEffect_override_virtual_customEvent(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QGraphicsEffect_customEvent(self: ptr cQGraphicsEffect, slot: int, event: pointer): void {.exportc: "miqt_exec_callback_QGraphicsEffect_customEvent ".} =
-  var nimfunc = cast[ptr QGraphicsEffectcustomEventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQGraphicsEffect_customEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QGraphicsEffectVTable](vtbl)
+  let self = QGraphicsEffect(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  vtbl[].customEvent(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QGraphicsEffectconnectNotify*(self: gen_qgraphicseffect_types.QGraphicsEffect, signal: gen_qmetaobject_types.QMetaMethod): void =
-  fQGraphicsEffect_virtualbase_connectNotify(self.h, signal.h)
+  fcQGraphicsEffect_virtualbase_connectNotify(self.h, signal.h)
 
-type QGraphicsEffectconnectNotifyProc* = proc(signal: gen_qmetaobject_types.QMetaMethod): void
-proc onconnectNotify*(self: gen_qgraphicseffect_types.QGraphicsEffect, slot: QGraphicsEffectconnectNotifyProc) =
-  # TODO check subclass
-  var tmp = new QGraphicsEffectconnectNotifyProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQGraphicsEffect_override_virtual_connectNotify(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QGraphicsEffect_connectNotify(self: ptr cQGraphicsEffect, slot: int, signal: pointer): void {.exportc: "miqt_exec_callback_QGraphicsEffect_connectNotify ".} =
-  var nimfunc = cast[ptr QGraphicsEffectconnectNotifyProc](cast[pointer](slot))
+proc miqt_exec_callback_cQGraphicsEffect_connectNotify(vtbl: pointer, self: pointer, signal: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QGraphicsEffectVTable](vtbl)
+  let self = QGraphicsEffect(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  vtbl[].connectNotify(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QGraphicsEffectdisconnectNotify*(self: gen_qgraphicseffect_types.QGraphicsEffect, signal: gen_qmetaobject_types.QMetaMethod): void =
-  fQGraphicsEffect_virtualbase_disconnectNotify(self.h, signal.h)
+  fcQGraphicsEffect_virtualbase_disconnectNotify(self.h, signal.h)
 
-type QGraphicsEffectdisconnectNotifyProc* = proc(signal: gen_qmetaobject_types.QMetaMethod): void
-proc ondisconnectNotify*(self: gen_qgraphicseffect_types.QGraphicsEffect, slot: QGraphicsEffectdisconnectNotifyProc) =
-  # TODO check subclass
-  var tmp = new QGraphicsEffectdisconnectNotifyProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQGraphicsEffect_override_virtual_disconnectNotify(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QGraphicsEffect_disconnectNotify(self: ptr cQGraphicsEffect, slot: int, signal: pointer): void {.exportc: "miqt_exec_callback_QGraphicsEffect_disconnectNotify ".} =
-  var nimfunc = cast[ptr QGraphicsEffectdisconnectNotifyProc](cast[pointer](slot))
+proc miqt_exec_callback_cQGraphicsEffect_disconnectNotify(vtbl: pointer, self: pointer, signal: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QGraphicsEffectVTable](vtbl)
+  let self = QGraphicsEffect(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  vtbl[].disconnectNotify(self, slotval1)
 
+proc create*(T: type gen_qgraphicseffect_types.QGraphicsEffect,
+    vtbl: ref QGraphicsEffectVTable = nil): gen_qgraphicseffect_types.QGraphicsEffect =
+  let vtbl = if vtbl == nil: new QGraphicsEffectVTable else: vtbl
+  GC_ref(vtbl)
+  vtbl.vtbl.destructor = proc(vtbl: ptr cQGraphicsEffectVTable, _: ptr cQGraphicsEffect) {.cdecl.} =
+    let vtbl = cast[ref QGraphicsEffectVTable](vtbl)
+    GC_unref(vtbl)
+  if not isNil(vtbl.metaObject):
+    vtbl[].vtbl.metaObject = miqt_exec_callback_cQGraphicsEffect_metaObject
+  if not isNil(vtbl.metacast):
+    vtbl[].vtbl.metacast = miqt_exec_callback_cQGraphicsEffect_metacast
+  if not isNil(vtbl.metacall):
+    vtbl[].vtbl.metacall = miqt_exec_callback_cQGraphicsEffect_metacall
+  if not isNil(vtbl.boundingRectFor):
+    vtbl[].vtbl.boundingRectFor = miqt_exec_callback_cQGraphicsEffect_boundingRectFor
+  if not isNil(vtbl.draw):
+    vtbl[].vtbl.draw = miqt_exec_callback_cQGraphicsEffect_draw
+  if not isNil(vtbl.sourceChanged):
+    vtbl[].vtbl.sourceChanged = miqt_exec_callback_cQGraphicsEffect_sourceChanged
+  if not isNil(vtbl.event):
+    vtbl[].vtbl.event = miqt_exec_callback_cQGraphicsEffect_event
+  if not isNil(vtbl.eventFilter):
+    vtbl[].vtbl.eventFilter = miqt_exec_callback_cQGraphicsEffect_eventFilter
+  if not isNil(vtbl.timerEvent):
+    vtbl[].vtbl.timerEvent = miqt_exec_callback_cQGraphicsEffect_timerEvent
+  if not isNil(vtbl.childEvent):
+    vtbl[].vtbl.childEvent = miqt_exec_callback_cQGraphicsEffect_childEvent
+  if not isNil(vtbl.customEvent):
+    vtbl[].vtbl.customEvent = miqt_exec_callback_cQGraphicsEffect_customEvent
+  if not isNil(vtbl.connectNotify):
+    vtbl[].vtbl.connectNotify = miqt_exec_callback_cQGraphicsEffect_connectNotify
+  if not isNil(vtbl.disconnectNotify):
+    vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQGraphicsEffect_disconnectNotify
+  gen_qgraphicseffect_types.QGraphicsEffect(h: fcQGraphicsEffect_new(addr(vtbl[]), ))
 
-  nimfunc[](slotval1)
+proc create*(T: type gen_qgraphicseffect_types.QGraphicsEffect,
+    parent: gen_qobject_types.QObject,
+    vtbl: ref QGraphicsEffectVTable = nil): gen_qgraphicseffect_types.QGraphicsEffect =
+  let vtbl = if vtbl == nil: new QGraphicsEffectVTable else: vtbl
+  GC_ref(vtbl)
+  vtbl.vtbl.destructor = proc(vtbl: ptr cQGraphicsEffectVTable, _: ptr cQGraphicsEffect) {.cdecl.} =
+    let vtbl = cast[ref QGraphicsEffectVTable](vtbl)
+    GC_unref(vtbl)
+  if not isNil(vtbl.metaObject):
+    vtbl[].vtbl.metaObject = miqt_exec_callback_cQGraphicsEffect_metaObject
+  if not isNil(vtbl.metacast):
+    vtbl[].vtbl.metacast = miqt_exec_callback_cQGraphicsEffect_metacast
+  if not isNil(vtbl.metacall):
+    vtbl[].vtbl.metacall = miqt_exec_callback_cQGraphicsEffect_metacall
+  if not isNil(vtbl.boundingRectFor):
+    vtbl[].vtbl.boundingRectFor = miqt_exec_callback_cQGraphicsEffect_boundingRectFor
+  if not isNil(vtbl.draw):
+    vtbl[].vtbl.draw = miqt_exec_callback_cQGraphicsEffect_draw
+  if not isNil(vtbl.sourceChanged):
+    vtbl[].vtbl.sourceChanged = miqt_exec_callback_cQGraphicsEffect_sourceChanged
+  if not isNil(vtbl.event):
+    vtbl[].vtbl.event = miqt_exec_callback_cQGraphicsEffect_event
+  if not isNil(vtbl.eventFilter):
+    vtbl[].vtbl.eventFilter = miqt_exec_callback_cQGraphicsEffect_eventFilter
+  if not isNil(vtbl.timerEvent):
+    vtbl[].vtbl.timerEvent = miqt_exec_callback_cQGraphicsEffect_timerEvent
+  if not isNil(vtbl.childEvent):
+    vtbl[].vtbl.childEvent = miqt_exec_callback_cQGraphicsEffect_childEvent
+  if not isNil(vtbl.customEvent):
+    vtbl[].vtbl.customEvent = miqt_exec_callback_cQGraphicsEffect_customEvent
+  if not isNil(vtbl.connectNotify):
+    vtbl[].vtbl.connectNotify = miqt_exec_callback_cQGraphicsEffect_connectNotify
+  if not isNil(vtbl.disconnectNotify):
+    vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQGraphicsEffect_disconnectNotify
+  gen_qgraphicseffect_types.QGraphicsEffect(h: fcQGraphicsEffect_new2(addr(vtbl[]), parent.h))
+
 proc staticMetaObject*(_: type gen_qgraphicseffect_types.QGraphicsEffect): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQGraphicsEffect_staticMetaObject())
 proc delete*(self: gen_qgraphicseffect_types.QGraphicsEffect) =
   fcQGraphicsEffect_delete(self.h)
-
-func init*(T: type gen_qgraphicseffect_types.QGraphicsColorizeEffect, h: ptr cQGraphicsColorizeEffect): gen_qgraphicseffect_types.QGraphicsColorizeEffect =
-  T(h: h)
-proc create*(T: type gen_qgraphicseffect_types.QGraphicsColorizeEffect, ): gen_qgraphicseffect_types.QGraphicsColorizeEffect =
-  gen_qgraphicseffect_types.QGraphicsColorizeEffect.init(fcQGraphicsColorizeEffect_new())
-
-proc create*(T: type gen_qgraphicseffect_types.QGraphicsColorizeEffect, parent: gen_qobject_types.QObject): gen_qgraphicseffect_types.QGraphicsColorizeEffect =
-  gen_qgraphicseffect_types.QGraphicsColorizeEffect.init(fcQGraphicsColorizeEffect_new2(parent.h))
-
 proc metaObject*(self: gen_qgraphicseffect_types.QGraphicsColorizeEffect, ): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQGraphicsColorizeEffect_metaObject(self.h))
 
@@ -659,7 +638,7 @@ proc colorChanged*(self: gen_qgraphicseffect_types.QGraphicsColorizeEffect, colo
   fcQGraphicsColorizeEffect_colorChanged(self.h, color.h)
 
 type QGraphicsColorizeEffectcolorChangedSlot* = proc(color: gen_qcolor_types.QColor)
-proc miqt_exec_callback_QGraphicsColorizeEffect_colorChanged(slot: int, color: pointer) {.exportc.} =
+proc miqt_exec_callback_cQGraphicsColorizeEffect_colorChanged(slot: int, color: pointer) {.exportc: "miqt_exec_callback_QGraphicsColorizeEffect_colorChanged".} =
   let nimfunc = cast[ptr QGraphicsColorizeEffectcolorChangedSlot](cast[pointer](slot))
   let slotval1 = gen_qcolor_types.QColor(h: color)
 
@@ -675,7 +654,7 @@ proc strengthChanged*(self: gen_qgraphicseffect_types.QGraphicsColorizeEffect, s
   fcQGraphicsColorizeEffect_strengthChanged(self.h, strength)
 
 type QGraphicsColorizeEffectstrengthChangedSlot* = proc(strength: float64)
-proc miqt_exec_callback_QGraphicsColorizeEffect_strengthChanged(slot: int, strength: float64) {.exportc.} =
+proc miqt_exec_callback_cQGraphicsColorizeEffect_strengthChanged(slot: int, strength: float64) {.exportc: "miqt_exec_callback_QGraphicsColorizeEffect_strengthChanged".} =
   let nimfunc = cast[ptr QGraphicsColorizeEffectstrengthChangedSlot](cast[pointer](slot))
   let slotval1 = strength
 
@@ -699,256 +678,234 @@ proc tr*(_: type gen_qgraphicseffect_types.QGraphicsColorizeEffect, s: cstring, 
   c_free(v_ms.data)
   vx_ret
 
+type QGraphicsColorizeEffectmetaObjectProc* = proc(self: QGraphicsColorizeEffect): gen_qobjectdefs_types.QMetaObject {.raises: [], gcsafe.}
+type QGraphicsColorizeEffectmetacastProc* = proc(self: QGraphicsColorizeEffect, param1: cstring): pointer {.raises: [], gcsafe.}
+type QGraphicsColorizeEffectmetacallProc* = proc(self: QGraphicsColorizeEffect, param1: cint, param2: cint, param3: pointer): cint {.raises: [], gcsafe.}
+type QGraphicsColorizeEffectdrawProc* = proc(self: QGraphicsColorizeEffect, painter: gen_qpainter_types.QPainter): void {.raises: [], gcsafe.}
+type QGraphicsColorizeEffectboundingRectForProc* = proc(self: QGraphicsColorizeEffect, sourceRect: gen_qrect_types.QRectF): gen_qrect_types.QRectF {.raises: [], gcsafe.}
+type QGraphicsColorizeEffectsourceChangedProc* = proc(self: QGraphicsColorizeEffect, flags: cint): void {.raises: [], gcsafe.}
+type QGraphicsColorizeEffecteventProc* = proc(self: QGraphicsColorizeEffect, event: gen_qcoreevent_types.QEvent): bool {.raises: [], gcsafe.}
+type QGraphicsColorizeEffecteventFilterProc* = proc(self: QGraphicsColorizeEffect, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.raises: [], gcsafe.}
+type QGraphicsColorizeEffecttimerEventProc* = proc(self: QGraphicsColorizeEffect, event: gen_qcoreevent_types.QTimerEvent): void {.raises: [], gcsafe.}
+type QGraphicsColorizeEffectchildEventProc* = proc(self: QGraphicsColorizeEffect, event: gen_qcoreevent_types.QChildEvent): void {.raises: [], gcsafe.}
+type QGraphicsColorizeEffectcustomEventProc* = proc(self: QGraphicsColorizeEffect, event: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
+type QGraphicsColorizeEffectconnectNotifyProc* = proc(self: QGraphicsColorizeEffect, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
+type QGraphicsColorizeEffectdisconnectNotifyProc* = proc(self: QGraphicsColorizeEffect, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
+type QGraphicsColorizeEffectVTable* = object
+  vtbl: cQGraphicsColorizeEffectVTable
+  metaObject*: QGraphicsColorizeEffectmetaObjectProc
+  metacast*: QGraphicsColorizeEffectmetacastProc
+  metacall*: QGraphicsColorizeEffectmetacallProc
+  draw*: QGraphicsColorizeEffectdrawProc
+  boundingRectFor*: QGraphicsColorizeEffectboundingRectForProc
+  sourceChanged*: QGraphicsColorizeEffectsourceChangedProc
+  event*: QGraphicsColorizeEffecteventProc
+  eventFilter*: QGraphicsColorizeEffecteventFilterProc
+  timerEvent*: QGraphicsColorizeEffecttimerEventProc
+  childEvent*: QGraphicsColorizeEffectchildEventProc
+  customEvent*: QGraphicsColorizeEffectcustomEventProc
+  connectNotify*: QGraphicsColorizeEffectconnectNotifyProc
+  disconnectNotify*: QGraphicsColorizeEffectdisconnectNotifyProc
 proc QGraphicsColorizeEffectmetaObject*(self: gen_qgraphicseffect_types.QGraphicsColorizeEffect, ): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fQGraphicsColorizeEffect_virtualbase_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQGraphicsColorizeEffect_virtualbase_metaObject(self.h))
 
-type QGraphicsColorizeEffectmetaObjectProc* = proc(): gen_qobjectdefs_types.QMetaObject
-proc onmetaObject*(self: gen_qgraphicseffect_types.QGraphicsColorizeEffect, slot: QGraphicsColorizeEffectmetaObjectProc) =
-  # TODO check subclass
-  var tmp = new QGraphicsColorizeEffectmetaObjectProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQGraphicsColorizeEffect_override_virtual_metaObject(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QGraphicsColorizeEffect_metaObject(self: ptr cQGraphicsColorizeEffect, slot: int): pointer {.exportc: "miqt_exec_callback_QGraphicsColorizeEffect_metaObject ".} =
-  var nimfunc = cast[ptr QGraphicsColorizeEffectmetaObjectProc](cast[pointer](slot))
-
-  let virtualReturn = nimfunc[]( )
-
+proc miqt_exec_callback_cQGraphicsColorizeEffect_metaObject(vtbl: pointer, self: pointer): pointer {.cdecl.} =
+  let vtbl = cast[ptr QGraphicsColorizeEffectVTable](vtbl)
+  let self = QGraphicsColorizeEffect(h: self)
+  var virtualReturn = vtbl[].metaObject(self)
   virtualReturn.h
+
 proc QGraphicsColorizeEffectmetacast*(self: gen_qgraphicseffect_types.QGraphicsColorizeEffect, param1: cstring): pointer =
-  fQGraphicsColorizeEffect_virtualbase_metacast(self.h, param1)
+  fcQGraphicsColorizeEffect_virtualbase_metacast(self.h, param1)
 
-type QGraphicsColorizeEffectmetacastProc* = proc(param1: cstring): pointer
-proc onmetacast*(self: gen_qgraphicseffect_types.QGraphicsColorizeEffect, slot: QGraphicsColorizeEffectmetacastProc) =
-  # TODO check subclass
-  var tmp = new QGraphicsColorizeEffectmetacastProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQGraphicsColorizeEffect_override_virtual_metacast(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QGraphicsColorizeEffect_metacast(self: ptr cQGraphicsColorizeEffect, slot: int, param1: cstring): pointer {.exportc: "miqt_exec_callback_QGraphicsColorizeEffect_metacast ".} =
-  var nimfunc = cast[ptr QGraphicsColorizeEffectmetacastProc](cast[pointer](slot))
+proc miqt_exec_callback_cQGraphicsColorizeEffect_metacast(vtbl: pointer, self: pointer, param1: cstring): pointer {.cdecl.} =
+  let vtbl = cast[ptr QGraphicsColorizeEffectVTable](vtbl)
+  let self = QGraphicsColorizeEffect(h: self)
   let slotval1 = (param1)
-
-
-  let virtualReturn = nimfunc[](slotval1 )
-
+  var virtualReturn = vtbl[].metacast(self, slotval1)
   virtualReturn
+
 proc QGraphicsColorizeEffectmetacall*(self: gen_qgraphicseffect_types.QGraphicsColorizeEffect, param1: cint, param2: cint, param3: pointer): cint =
-  fQGraphicsColorizeEffect_virtualbase_metacall(self.h, cint(param1), param2, param3)
+  fcQGraphicsColorizeEffect_virtualbase_metacall(self.h, cint(param1), param2, param3)
 
-type QGraphicsColorizeEffectmetacallProc* = proc(param1: cint, param2: cint, param3: pointer): cint
-proc onmetacall*(self: gen_qgraphicseffect_types.QGraphicsColorizeEffect, slot: QGraphicsColorizeEffectmetacallProc) =
-  # TODO check subclass
-  var tmp = new QGraphicsColorizeEffectmetacallProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQGraphicsColorizeEffect_override_virtual_metacall(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QGraphicsColorizeEffect_metacall(self: ptr cQGraphicsColorizeEffect, slot: int, param1: cint, param2: cint, param3: pointer): cint {.exportc: "miqt_exec_callback_QGraphicsColorizeEffect_metacall ".} =
-  var nimfunc = cast[ptr QGraphicsColorizeEffectmetacallProc](cast[pointer](slot))
+proc miqt_exec_callback_cQGraphicsColorizeEffect_metacall(vtbl: pointer, self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
+  let vtbl = cast[ptr QGraphicsColorizeEffectVTable](vtbl)
+  let self = QGraphicsColorizeEffect(h: self)
   let slotval1 = cint(param1)
-
   let slotval2 = param2
-
   let slotval3 = param3
-
-
-  let virtualReturn = nimfunc[](slotval1, slotval2, slotval3 )
-
+  var virtualReturn = vtbl[].metacall(self, slotval1, slotval2, slotval3)
   virtualReturn
+
 proc QGraphicsColorizeEffectdraw*(self: gen_qgraphicseffect_types.QGraphicsColorizeEffect, painter: gen_qpainter_types.QPainter): void =
-  fQGraphicsColorizeEffect_virtualbase_draw(self.h, painter.h)
+  fcQGraphicsColorizeEffect_virtualbase_draw(self.h, painter.h)
 
-type QGraphicsColorizeEffectdrawProc* = proc(painter: gen_qpainter_types.QPainter): void
-proc ondraw*(self: gen_qgraphicseffect_types.QGraphicsColorizeEffect, slot: QGraphicsColorizeEffectdrawProc) =
-  # TODO check subclass
-  var tmp = new QGraphicsColorizeEffectdrawProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQGraphicsColorizeEffect_override_virtual_draw(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QGraphicsColorizeEffect_draw(self: ptr cQGraphicsColorizeEffect, slot: int, painter: pointer): void {.exportc: "miqt_exec_callback_QGraphicsColorizeEffect_draw ".} =
-  var nimfunc = cast[ptr QGraphicsColorizeEffectdrawProc](cast[pointer](slot))
+proc miqt_exec_callback_cQGraphicsColorizeEffect_draw(vtbl: pointer, self: pointer, painter: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QGraphicsColorizeEffectVTable](vtbl)
+  let self = QGraphicsColorizeEffect(h: self)
   let slotval1 = gen_qpainter_types.QPainter(h: painter)
+  vtbl[].draw(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QGraphicsColorizeEffectboundingRectFor*(self: gen_qgraphicseffect_types.QGraphicsColorizeEffect, sourceRect: gen_qrect_types.QRectF): gen_qrect_types.QRectF =
-  gen_qrect_types.QRectF(h: fQGraphicsColorizeEffect_virtualbase_boundingRectFor(self.h, sourceRect.h))
+  gen_qrect_types.QRectF(h: fcQGraphicsColorizeEffect_virtualbase_boundingRectFor(self.h, sourceRect.h))
 
-type QGraphicsColorizeEffectboundingRectForProc* = proc(sourceRect: gen_qrect_types.QRectF): gen_qrect_types.QRectF
-proc onboundingRectFor*(self: gen_qgraphicseffect_types.QGraphicsColorizeEffect, slot: QGraphicsColorizeEffectboundingRectForProc) =
-  # TODO check subclass
-  var tmp = new QGraphicsColorizeEffectboundingRectForProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQGraphicsColorizeEffect_override_virtual_boundingRectFor(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QGraphicsColorizeEffect_boundingRectFor(self: ptr cQGraphicsColorizeEffect, slot: int, sourceRect: pointer): pointer {.exportc: "miqt_exec_callback_QGraphicsColorizeEffect_boundingRectFor ".} =
-  var nimfunc = cast[ptr QGraphicsColorizeEffectboundingRectForProc](cast[pointer](slot))
+proc miqt_exec_callback_cQGraphicsColorizeEffect_boundingRectFor(vtbl: pointer, self: pointer, sourceRect: pointer): pointer {.cdecl.} =
+  let vtbl = cast[ptr QGraphicsColorizeEffectVTable](vtbl)
+  let self = QGraphicsColorizeEffect(h: self)
   let slotval1 = gen_qrect_types.QRectF(h: sourceRect)
-
-
-  let virtualReturn = nimfunc[](slotval1 )
-
+  var virtualReturn = vtbl[].boundingRectFor(self, slotval1)
   virtualReturn.h
+
 proc QGraphicsColorizeEffectsourceChanged*(self: gen_qgraphicseffect_types.QGraphicsColorizeEffect, flags: cint): void =
-  fQGraphicsColorizeEffect_virtualbase_sourceChanged(self.h, cint(flags))
+  fcQGraphicsColorizeEffect_virtualbase_sourceChanged(self.h, cint(flags))
 
-type QGraphicsColorizeEffectsourceChangedProc* = proc(flags: cint): void
-proc onsourceChanged*(self: gen_qgraphicseffect_types.QGraphicsColorizeEffect, slot: QGraphicsColorizeEffectsourceChangedProc) =
-  # TODO check subclass
-  var tmp = new QGraphicsColorizeEffectsourceChangedProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQGraphicsColorizeEffect_override_virtual_sourceChanged(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QGraphicsColorizeEffect_sourceChanged(self: ptr cQGraphicsColorizeEffect, slot: int, flags: cint): void {.exportc: "miqt_exec_callback_QGraphicsColorizeEffect_sourceChanged ".} =
-  var nimfunc = cast[ptr QGraphicsColorizeEffectsourceChangedProc](cast[pointer](slot))
+proc miqt_exec_callback_cQGraphicsColorizeEffect_sourceChanged(vtbl: pointer, self: pointer, flags: cint): void {.cdecl.} =
+  let vtbl = cast[ptr QGraphicsColorizeEffectVTable](vtbl)
+  let self = QGraphicsColorizeEffect(h: self)
   let slotval1 = cint(flags)
+  vtbl[].sourceChanged(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QGraphicsColorizeEffectevent*(self: gen_qgraphicseffect_types.QGraphicsColorizeEffect, event: gen_qcoreevent_types.QEvent): bool =
-  fQGraphicsColorizeEffect_virtualbase_event(self.h, event.h)
+  fcQGraphicsColorizeEffect_virtualbase_event(self.h, event.h)
 
-type QGraphicsColorizeEffecteventProc* = proc(event: gen_qcoreevent_types.QEvent): bool
-proc onevent*(self: gen_qgraphicseffect_types.QGraphicsColorizeEffect, slot: QGraphicsColorizeEffecteventProc) =
-  # TODO check subclass
-  var tmp = new QGraphicsColorizeEffecteventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQGraphicsColorizeEffect_override_virtual_event(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QGraphicsColorizeEffect_event(self: ptr cQGraphicsColorizeEffect, slot: int, event: pointer): bool {.exportc: "miqt_exec_callback_QGraphicsColorizeEffect_event ".} =
-  var nimfunc = cast[ptr QGraphicsColorizeEffecteventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQGraphicsColorizeEffect_event(vtbl: pointer, self: pointer, event: pointer): bool {.cdecl.} =
+  let vtbl = cast[ptr QGraphicsColorizeEffectVTable](vtbl)
+  let self = QGraphicsColorizeEffect(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event)
-
-
-  let virtualReturn = nimfunc[](slotval1 )
-
+  var virtualReturn = vtbl[].event(self, slotval1)
   virtualReturn
+
 proc QGraphicsColorizeEffecteventFilter*(self: gen_qgraphicseffect_types.QGraphicsColorizeEffect, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool =
-  fQGraphicsColorizeEffect_virtualbase_eventFilter(self.h, watched.h, event.h)
+  fcQGraphicsColorizeEffect_virtualbase_eventFilter(self.h, watched.h, event.h)
 
-type QGraphicsColorizeEffecteventFilterProc* = proc(watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool
-proc oneventFilter*(self: gen_qgraphicseffect_types.QGraphicsColorizeEffect, slot: QGraphicsColorizeEffecteventFilterProc) =
-  # TODO check subclass
-  var tmp = new QGraphicsColorizeEffecteventFilterProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQGraphicsColorizeEffect_override_virtual_eventFilter(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QGraphicsColorizeEffect_eventFilter(self: ptr cQGraphicsColorizeEffect, slot: int, watched: pointer, event: pointer): bool {.exportc: "miqt_exec_callback_QGraphicsColorizeEffect_eventFilter ".} =
-  var nimfunc = cast[ptr QGraphicsColorizeEffecteventFilterProc](cast[pointer](slot))
+proc miqt_exec_callback_cQGraphicsColorizeEffect_eventFilter(vtbl: pointer, self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
+  let vtbl = cast[ptr QGraphicsColorizeEffectVTable](vtbl)
+  let self = QGraphicsColorizeEffect(h: self)
   let slotval1 = gen_qobject_types.QObject(h: watched)
-
   let slotval2 = gen_qcoreevent_types.QEvent(h: event)
-
-
-  let virtualReturn = nimfunc[](slotval1, slotval2 )
-
+  var virtualReturn = vtbl[].eventFilter(self, slotval1, slotval2)
   virtualReturn
+
 proc QGraphicsColorizeEffecttimerEvent*(self: gen_qgraphicseffect_types.QGraphicsColorizeEffect, event: gen_qcoreevent_types.QTimerEvent): void =
-  fQGraphicsColorizeEffect_virtualbase_timerEvent(self.h, event.h)
+  fcQGraphicsColorizeEffect_virtualbase_timerEvent(self.h, event.h)
 
-type QGraphicsColorizeEffecttimerEventProc* = proc(event: gen_qcoreevent_types.QTimerEvent): void
-proc ontimerEvent*(self: gen_qgraphicseffect_types.QGraphicsColorizeEffect, slot: QGraphicsColorizeEffecttimerEventProc) =
-  # TODO check subclass
-  var tmp = new QGraphicsColorizeEffecttimerEventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQGraphicsColorizeEffect_override_virtual_timerEvent(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QGraphicsColorizeEffect_timerEvent(self: ptr cQGraphicsColorizeEffect, slot: int, event: pointer): void {.exportc: "miqt_exec_callback_QGraphicsColorizeEffect_timerEvent ".} =
-  var nimfunc = cast[ptr QGraphicsColorizeEffecttimerEventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQGraphicsColorizeEffect_timerEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QGraphicsColorizeEffectVTable](vtbl)
+  let self = QGraphicsColorizeEffect(h: self)
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event)
+  vtbl[].timerEvent(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QGraphicsColorizeEffectchildEvent*(self: gen_qgraphicseffect_types.QGraphicsColorizeEffect, event: gen_qcoreevent_types.QChildEvent): void =
-  fQGraphicsColorizeEffect_virtualbase_childEvent(self.h, event.h)
+  fcQGraphicsColorizeEffect_virtualbase_childEvent(self.h, event.h)
 
-type QGraphicsColorizeEffectchildEventProc* = proc(event: gen_qcoreevent_types.QChildEvent): void
-proc onchildEvent*(self: gen_qgraphicseffect_types.QGraphicsColorizeEffect, slot: QGraphicsColorizeEffectchildEventProc) =
-  # TODO check subclass
-  var tmp = new QGraphicsColorizeEffectchildEventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQGraphicsColorizeEffect_override_virtual_childEvent(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QGraphicsColorizeEffect_childEvent(self: ptr cQGraphicsColorizeEffect, slot: int, event: pointer): void {.exportc: "miqt_exec_callback_QGraphicsColorizeEffect_childEvent ".} =
-  var nimfunc = cast[ptr QGraphicsColorizeEffectchildEventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQGraphicsColorizeEffect_childEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QGraphicsColorizeEffectVTable](vtbl)
+  let self = QGraphicsColorizeEffect(h: self)
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: event)
+  vtbl[].childEvent(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QGraphicsColorizeEffectcustomEvent*(self: gen_qgraphicseffect_types.QGraphicsColorizeEffect, event: gen_qcoreevent_types.QEvent): void =
-  fQGraphicsColorizeEffect_virtualbase_customEvent(self.h, event.h)
+  fcQGraphicsColorizeEffect_virtualbase_customEvent(self.h, event.h)
 
-type QGraphicsColorizeEffectcustomEventProc* = proc(event: gen_qcoreevent_types.QEvent): void
-proc oncustomEvent*(self: gen_qgraphicseffect_types.QGraphicsColorizeEffect, slot: QGraphicsColorizeEffectcustomEventProc) =
-  # TODO check subclass
-  var tmp = new QGraphicsColorizeEffectcustomEventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQGraphicsColorizeEffect_override_virtual_customEvent(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QGraphicsColorizeEffect_customEvent(self: ptr cQGraphicsColorizeEffect, slot: int, event: pointer): void {.exportc: "miqt_exec_callback_QGraphicsColorizeEffect_customEvent ".} =
-  var nimfunc = cast[ptr QGraphicsColorizeEffectcustomEventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQGraphicsColorizeEffect_customEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QGraphicsColorizeEffectVTable](vtbl)
+  let self = QGraphicsColorizeEffect(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  vtbl[].customEvent(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QGraphicsColorizeEffectconnectNotify*(self: gen_qgraphicseffect_types.QGraphicsColorizeEffect, signal: gen_qmetaobject_types.QMetaMethod): void =
-  fQGraphicsColorizeEffect_virtualbase_connectNotify(self.h, signal.h)
+  fcQGraphicsColorizeEffect_virtualbase_connectNotify(self.h, signal.h)
 
-type QGraphicsColorizeEffectconnectNotifyProc* = proc(signal: gen_qmetaobject_types.QMetaMethod): void
-proc onconnectNotify*(self: gen_qgraphicseffect_types.QGraphicsColorizeEffect, slot: QGraphicsColorizeEffectconnectNotifyProc) =
-  # TODO check subclass
-  var tmp = new QGraphicsColorizeEffectconnectNotifyProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQGraphicsColorizeEffect_override_virtual_connectNotify(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QGraphicsColorizeEffect_connectNotify(self: ptr cQGraphicsColorizeEffect, slot: int, signal: pointer): void {.exportc: "miqt_exec_callback_QGraphicsColorizeEffect_connectNotify ".} =
-  var nimfunc = cast[ptr QGraphicsColorizeEffectconnectNotifyProc](cast[pointer](slot))
+proc miqt_exec_callback_cQGraphicsColorizeEffect_connectNotify(vtbl: pointer, self: pointer, signal: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QGraphicsColorizeEffectVTable](vtbl)
+  let self = QGraphicsColorizeEffect(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  vtbl[].connectNotify(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QGraphicsColorizeEffectdisconnectNotify*(self: gen_qgraphicseffect_types.QGraphicsColorizeEffect, signal: gen_qmetaobject_types.QMetaMethod): void =
-  fQGraphicsColorizeEffect_virtualbase_disconnectNotify(self.h, signal.h)
+  fcQGraphicsColorizeEffect_virtualbase_disconnectNotify(self.h, signal.h)
 
-type QGraphicsColorizeEffectdisconnectNotifyProc* = proc(signal: gen_qmetaobject_types.QMetaMethod): void
-proc ondisconnectNotify*(self: gen_qgraphicseffect_types.QGraphicsColorizeEffect, slot: QGraphicsColorizeEffectdisconnectNotifyProc) =
-  # TODO check subclass
-  var tmp = new QGraphicsColorizeEffectdisconnectNotifyProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQGraphicsColorizeEffect_override_virtual_disconnectNotify(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QGraphicsColorizeEffect_disconnectNotify(self: ptr cQGraphicsColorizeEffect, slot: int, signal: pointer): void {.exportc: "miqt_exec_callback_QGraphicsColorizeEffect_disconnectNotify ".} =
-  var nimfunc = cast[ptr QGraphicsColorizeEffectdisconnectNotifyProc](cast[pointer](slot))
+proc miqt_exec_callback_cQGraphicsColorizeEffect_disconnectNotify(vtbl: pointer, self: pointer, signal: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QGraphicsColorizeEffectVTable](vtbl)
+  let self = QGraphicsColorizeEffect(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  vtbl[].disconnectNotify(self, slotval1)
 
+proc create*(T: type gen_qgraphicseffect_types.QGraphicsColorizeEffect,
+    vtbl: ref QGraphicsColorizeEffectVTable = nil): gen_qgraphicseffect_types.QGraphicsColorizeEffect =
+  let vtbl = if vtbl == nil: new QGraphicsColorizeEffectVTable else: vtbl
+  GC_ref(vtbl)
+  vtbl.vtbl.destructor = proc(vtbl: ptr cQGraphicsColorizeEffectVTable, _: ptr cQGraphicsColorizeEffect) {.cdecl.} =
+    let vtbl = cast[ref QGraphicsColorizeEffectVTable](vtbl)
+    GC_unref(vtbl)
+  if not isNil(vtbl.metaObject):
+    vtbl[].vtbl.metaObject = miqt_exec_callback_cQGraphicsColorizeEffect_metaObject
+  if not isNil(vtbl.metacast):
+    vtbl[].vtbl.metacast = miqt_exec_callback_cQGraphicsColorizeEffect_metacast
+  if not isNil(vtbl.metacall):
+    vtbl[].vtbl.metacall = miqt_exec_callback_cQGraphicsColorizeEffect_metacall
+  if not isNil(vtbl.draw):
+    vtbl[].vtbl.draw = miqt_exec_callback_cQGraphicsColorizeEffect_draw
+  if not isNil(vtbl.boundingRectFor):
+    vtbl[].vtbl.boundingRectFor = miqt_exec_callback_cQGraphicsColorizeEffect_boundingRectFor
+  if not isNil(vtbl.sourceChanged):
+    vtbl[].vtbl.sourceChanged = miqt_exec_callback_cQGraphicsColorizeEffect_sourceChanged
+  if not isNil(vtbl.event):
+    vtbl[].vtbl.event = miqt_exec_callback_cQGraphicsColorizeEffect_event
+  if not isNil(vtbl.eventFilter):
+    vtbl[].vtbl.eventFilter = miqt_exec_callback_cQGraphicsColorizeEffect_eventFilter
+  if not isNil(vtbl.timerEvent):
+    vtbl[].vtbl.timerEvent = miqt_exec_callback_cQGraphicsColorizeEffect_timerEvent
+  if not isNil(vtbl.childEvent):
+    vtbl[].vtbl.childEvent = miqt_exec_callback_cQGraphicsColorizeEffect_childEvent
+  if not isNil(vtbl.customEvent):
+    vtbl[].vtbl.customEvent = miqt_exec_callback_cQGraphicsColorizeEffect_customEvent
+  if not isNil(vtbl.connectNotify):
+    vtbl[].vtbl.connectNotify = miqt_exec_callback_cQGraphicsColorizeEffect_connectNotify
+  if not isNil(vtbl.disconnectNotify):
+    vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQGraphicsColorizeEffect_disconnectNotify
+  gen_qgraphicseffect_types.QGraphicsColorizeEffect(h: fcQGraphicsColorizeEffect_new(addr(vtbl[]), ))
 
-  nimfunc[](slotval1)
+proc create*(T: type gen_qgraphicseffect_types.QGraphicsColorizeEffect,
+    parent: gen_qobject_types.QObject,
+    vtbl: ref QGraphicsColorizeEffectVTable = nil): gen_qgraphicseffect_types.QGraphicsColorizeEffect =
+  let vtbl = if vtbl == nil: new QGraphicsColorizeEffectVTable else: vtbl
+  GC_ref(vtbl)
+  vtbl.vtbl.destructor = proc(vtbl: ptr cQGraphicsColorizeEffectVTable, _: ptr cQGraphicsColorizeEffect) {.cdecl.} =
+    let vtbl = cast[ref QGraphicsColorizeEffectVTable](vtbl)
+    GC_unref(vtbl)
+  if not isNil(vtbl.metaObject):
+    vtbl[].vtbl.metaObject = miqt_exec_callback_cQGraphicsColorizeEffect_metaObject
+  if not isNil(vtbl.metacast):
+    vtbl[].vtbl.metacast = miqt_exec_callback_cQGraphicsColorizeEffect_metacast
+  if not isNil(vtbl.metacall):
+    vtbl[].vtbl.metacall = miqt_exec_callback_cQGraphicsColorizeEffect_metacall
+  if not isNil(vtbl.draw):
+    vtbl[].vtbl.draw = miqt_exec_callback_cQGraphicsColorizeEffect_draw
+  if not isNil(vtbl.boundingRectFor):
+    vtbl[].vtbl.boundingRectFor = miqt_exec_callback_cQGraphicsColorizeEffect_boundingRectFor
+  if not isNil(vtbl.sourceChanged):
+    vtbl[].vtbl.sourceChanged = miqt_exec_callback_cQGraphicsColorizeEffect_sourceChanged
+  if not isNil(vtbl.event):
+    vtbl[].vtbl.event = miqt_exec_callback_cQGraphicsColorizeEffect_event
+  if not isNil(vtbl.eventFilter):
+    vtbl[].vtbl.eventFilter = miqt_exec_callback_cQGraphicsColorizeEffect_eventFilter
+  if not isNil(vtbl.timerEvent):
+    vtbl[].vtbl.timerEvent = miqt_exec_callback_cQGraphicsColorizeEffect_timerEvent
+  if not isNil(vtbl.childEvent):
+    vtbl[].vtbl.childEvent = miqt_exec_callback_cQGraphicsColorizeEffect_childEvent
+  if not isNil(vtbl.customEvent):
+    vtbl[].vtbl.customEvent = miqt_exec_callback_cQGraphicsColorizeEffect_customEvent
+  if not isNil(vtbl.connectNotify):
+    vtbl[].vtbl.connectNotify = miqt_exec_callback_cQGraphicsColorizeEffect_connectNotify
+  if not isNil(vtbl.disconnectNotify):
+    vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQGraphicsColorizeEffect_disconnectNotify
+  gen_qgraphicseffect_types.QGraphicsColorizeEffect(h: fcQGraphicsColorizeEffect_new2(addr(vtbl[]), parent.h))
+
 proc staticMetaObject*(_: type gen_qgraphicseffect_types.QGraphicsColorizeEffect): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQGraphicsColorizeEffect_staticMetaObject())
 proc delete*(self: gen_qgraphicseffect_types.QGraphicsColorizeEffect) =
   fcQGraphicsColorizeEffect_delete(self.h)
-
-func init*(T: type gen_qgraphicseffect_types.QGraphicsBlurEffect, h: ptr cQGraphicsBlurEffect): gen_qgraphicseffect_types.QGraphicsBlurEffect =
-  T(h: h)
-proc create*(T: type gen_qgraphicseffect_types.QGraphicsBlurEffect, ): gen_qgraphicseffect_types.QGraphicsBlurEffect =
-  gen_qgraphicseffect_types.QGraphicsBlurEffect.init(fcQGraphicsBlurEffect_new())
-
-proc create*(T: type gen_qgraphicseffect_types.QGraphicsBlurEffect, parent: gen_qobject_types.QObject): gen_qgraphicseffect_types.QGraphicsBlurEffect =
-  gen_qgraphicseffect_types.QGraphicsBlurEffect.init(fcQGraphicsBlurEffect_new2(parent.h))
-
 proc metaObject*(self: gen_qgraphicseffect_types.QGraphicsBlurEffect, ): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQGraphicsBlurEffect_metaObject(self.h))
 
@@ -983,7 +940,7 @@ proc blurRadiusChanged*(self: gen_qgraphicseffect_types.QGraphicsBlurEffect, blu
   fcQGraphicsBlurEffect_blurRadiusChanged(self.h, blurRadius)
 
 type QGraphicsBlurEffectblurRadiusChangedSlot* = proc(blurRadius: float64)
-proc miqt_exec_callback_QGraphicsBlurEffect_blurRadiusChanged(slot: int, blurRadius: float64) {.exportc.} =
+proc miqt_exec_callback_cQGraphicsBlurEffect_blurRadiusChanged(slot: int, blurRadius: float64) {.exportc: "miqt_exec_callback_QGraphicsBlurEffect_blurRadiusChanged".} =
   let nimfunc = cast[ptr QGraphicsBlurEffectblurRadiusChangedSlot](cast[pointer](slot))
   let slotval1 = blurRadius
 
@@ -999,7 +956,7 @@ proc blurHintsChanged*(self: gen_qgraphicseffect_types.QGraphicsBlurEffect, hint
   fcQGraphicsBlurEffect_blurHintsChanged(self.h, cint(hints))
 
 type QGraphicsBlurEffectblurHintsChangedSlot* = proc(hints: cint)
-proc miqt_exec_callback_QGraphicsBlurEffect_blurHintsChanged(slot: int, hints: cint) {.exportc.} =
+proc miqt_exec_callback_cQGraphicsBlurEffect_blurHintsChanged(slot: int, hints: cint) {.exportc: "miqt_exec_callback_QGraphicsBlurEffect_blurHintsChanged".} =
   let nimfunc = cast[ptr QGraphicsBlurEffectblurHintsChangedSlot](cast[pointer](slot))
   let slotval1 = cint(hints)
 
@@ -1023,256 +980,234 @@ proc tr*(_: type gen_qgraphicseffect_types.QGraphicsBlurEffect, s: cstring, c: c
   c_free(v_ms.data)
   vx_ret
 
+type QGraphicsBlurEffectmetaObjectProc* = proc(self: QGraphicsBlurEffect): gen_qobjectdefs_types.QMetaObject {.raises: [], gcsafe.}
+type QGraphicsBlurEffectmetacastProc* = proc(self: QGraphicsBlurEffect, param1: cstring): pointer {.raises: [], gcsafe.}
+type QGraphicsBlurEffectmetacallProc* = proc(self: QGraphicsBlurEffect, param1: cint, param2: cint, param3: pointer): cint {.raises: [], gcsafe.}
+type QGraphicsBlurEffectboundingRectForProc* = proc(self: QGraphicsBlurEffect, rect: gen_qrect_types.QRectF): gen_qrect_types.QRectF {.raises: [], gcsafe.}
+type QGraphicsBlurEffectdrawProc* = proc(self: QGraphicsBlurEffect, painter: gen_qpainter_types.QPainter): void {.raises: [], gcsafe.}
+type QGraphicsBlurEffectsourceChangedProc* = proc(self: QGraphicsBlurEffect, flags: cint): void {.raises: [], gcsafe.}
+type QGraphicsBlurEffecteventProc* = proc(self: QGraphicsBlurEffect, event: gen_qcoreevent_types.QEvent): bool {.raises: [], gcsafe.}
+type QGraphicsBlurEffecteventFilterProc* = proc(self: QGraphicsBlurEffect, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.raises: [], gcsafe.}
+type QGraphicsBlurEffecttimerEventProc* = proc(self: QGraphicsBlurEffect, event: gen_qcoreevent_types.QTimerEvent): void {.raises: [], gcsafe.}
+type QGraphicsBlurEffectchildEventProc* = proc(self: QGraphicsBlurEffect, event: gen_qcoreevent_types.QChildEvent): void {.raises: [], gcsafe.}
+type QGraphicsBlurEffectcustomEventProc* = proc(self: QGraphicsBlurEffect, event: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
+type QGraphicsBlurEffectconnectNotifyProc* = proc(self: QGraphicsBlurEffect, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
+type QGraphicsBlurEffectdisconnectNotifyProc* = proc(self: QGraphicsBlurEffect, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
+type QGraphicsBlurEffectVTable* = object
+  vtbl: cQGraphicsBlurEffectVTable
+  metaObject*: QGraphicsBlurEffectmetaObjectProc
+  metacast*: QGraphicsBlurEffectmetacastProc
+  metacall*: QGraphicsBlurEffectmetacallProc
+  boundingRectFor*: QGraphicsBlurEffectboundingRectForProc
+  draw*: QGraphicsBlurEffectdrawProc
+  sourceChanged*: QGraphicsBlurEffectsourceChangedProc
+  event*: QGraphicsBlurEffecteventProc
+  eventFilter*: QGraphicsBlurEffecteventFilterProc
+  timerEvent*: QGraphicsBlurEffecttimerEventProc
+  childEvent*: QGraphicsBlurEffectchildEventProc
+  customEvent*: QGraphicsBlurEffectcustomEventProc
+  connectNotify*: QGraphicsBlurEffectconnectNotifyProc
+  disconnectNotify*: QGraphicsBlurEffectdisconnectNotifyProc
 proc QGraphicsBlurEffectmetaObject*(self: gen_qgraphicseffect_types.QGraphicsBlurEffect, ): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fQGraphicsBlurEffect_virtualbase_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQGraphicsBlurEffect_virtualbase_metaObject(self.h))
 
-type QGraphicsBlurEffectmetaObjectProc* = proc(): gen_qobjectdefs_types.QMetaObject
-proc onmetaObject*(self: gen_qgraphicseffect_types.QGraphicsBlurEffect, slot: QGraphicsBlurEffectmetaObjectProc) =
-  # TODO check subclass
-  var tmp = new QGraphicsBlurEffectmetaObjectProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQGraphicsBlurEffect_override_virtual_metaObject(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QGraphicsBlurEffect_metaObject(self: ptr cQGraphicsBlurEffect, slot: int): pointer {.exportc: "miqt_exec_callback_QGraphicsBlurEffect_metaObject ".} =
-  var nimfunc = cast[ptr QGraphicsBlurEffectmetaObjectProc](cast[pointer](slot))
-
-  let virtualReturn = nimfunc[]( )
-
+proc miqt_exec_callback_cQGraphicsBlurEffect_metaObject(vtbl: pointer, self: pointer): pointer {.cdecl.} =
+  let vtbl = cast[ptr QGraphicsBlurEffectVTable](vtbl)
+  let self = QGraphicsBlurEffect(h: self)
+  var virtualReturn = vtbl[].metaObject(self)
   virtualReturn.h
+
 proc QGraphicsBlurEffectmetacast*(self: gen_qgraphicseffect_types.QGraphicsBlurEffect, param1: cstring): pointer =
-  fQGraphicsBlurEffect_virtualbase_metacast(self.h, param1)
+  fcQGraphicsBlurEffect_virtualbase_metacast(self.h, param1)
 
-type QGraphicsBlurEffectmetacastProc* = proc(param1: cstring): pointer
-proc onmetacast*(self: gen_qgraphicseffect_types.QGraphicsBlurEffect, slot: QGraphicsBlurEffectmetacastProc) =
-  # TODO check subclass
-  var tmp = new QGraphicsBlurEffectmetacastProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQGraphicsBlurEffect_override_virtual_metacast(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QGraphicsBlurEffect_metacast(self: ptr cQGraphicsBlurEffect, slot: int, param1: cstring): pointer {.exportc: "miqt_exec_callback_QGraphicsBlurEffect_metacast ".} =
-  var nimfunc = cast[ptr QGraphicsBlurEffectmetacastProc](cast[pointer](slot))
+proc miqt_exec_callback_cQGraphicsBlurEffect_metacast(vtbl: pointer, self: pointer, param1: cstring): pointer {.cdecl.} =
+  let vtbl = cast[ptr QGraphicsBlurEffectVTable](vtbl)
+  let self = QGraphicsBlurEffect(h: self)
   let slotval1 = (param1)
-
-
-  let virtualReturn = nimfunc[](slotval1 )
-
+  var virtualReturn = vtbl[].metacast(self, slotval1)
   virtualReturn
+
 proc QGraphicsBlurEffectmetacall*(self: gen_qgraphicseffect_types.QGraphicsBlurEffect, param1: cint, param2: cint, param3: pointer): cint =
-  fQGraphicsBlurEffect_virtualbase_metacall(self.h, cint(param1), param2, param3)
+  fcQGraphicsBlurEffect_virtualbase_metacall(self.h, cint(param1), param2, param3)
 
-type QGraphicsBlurEffectmetacallProc* = proc(param1: cint, param2: cint, param3: pointer): cint
-proc onmetacall*(self: gen_qgraphicseffect_types.QGraphicsBlurEffect, slot: QGraphicsBlurEffectmetacallProc) =
-  # TODO check subclass
-  var tmp = new QGraphicsBlurEffectmetacallProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQGraphicsBlurEffect_override_virtual_metacall(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QGraphicsBlurEffect_metacall(self: ptr cQGraphicsBlurEffect, slot: int, param1: cint, param2: cint, param3: pointer): cint {.exportc: "miqt_exec_callback_QGraphicsBlurEffect_metacall ".} =
-  var nimfunc = cast[ptr QGraphicsBlurEffectmetacallProc](cast[pointer](slot))
+proc miqt_exec_callback_cQGraphicsBlurEffect_metacall(vtbl: pointer, self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
+  let vtbl = cast[ptr QGraphicsBlurEffectVTable](vtbl)
+  let self = QGraphicsBlurEffect(h: self)
   let slotval1 = cint(param1)
-
   let slotval2 = param2
-
   let slotval3 = param3
-
-
-  let virtualReturn = nimfunc[](slotval1, slotval2, slotval3 )
-
+  var virtualReturn = vtbl[].metacall(self, slotval1, slotval2, slotval3)
   virtualReturn
+
 proc QGraphicsBlurEffectboundingRectFor*(self: gen_qgraphicseffect_types.QGraphicsBlurEffect, rect: gen_qrect_types.QRectF): gen_qrect_types.QRectF =
-  gen_qrect_types.QRectF(h: fQGraphicsBlurEffect_virtualbase_boundingRectFor(self.h, rect.h))
+  gen_qrect_types.QRectF(h: fcQGraphicsBlurEffect_virtualbase_boundingRectFor(self.h, rect.h))
 
-type QGraphicsBlurEffectboundingRectForProc* = proc(rect: gen_qrect_types.QRectF): gen_qrect_types.QRectF
-proc onboundingRectFor*(self: gen_qgraphicseffect_types.QGraphicsBlurEffect, slot: QGraphicsBlurEffectboundingRectForProc) =
-  # TODO check subclass
-  var tmp = new QGraphicsBlurEffectboundingRectForProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQGraphicsBlurEffect_override_virtual_boundingRectFor(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QGraphicsBlurEffect_boundingRectFor(self: ptr cQGraphicsBlurEffect, slot: int, rect: pointer): pointer {.exportc: "miqt_exec_callback_QGraphicsBlurEffect_boundingRectFor ".} =
-  var nimfunc = cast[ptr QGraphicsBlurEffectboundingRectForProc](cast[pointer](slot))
+proc miqt_exec_callback_cQGraphicsBlurEffect_boundingRectFor(vtbl: pointer, self: pointer, rect: pointer): pointer {.cdecl.} =
+  let vtbl = cast[ptr QGraphicsBlurEffectVTable](vtbl)
+  let self = QGraphicsBlurEffect(h: self)
   let slotval1 = gen_qrect_types.QRectF(h: rect)
-
-
-  let virtualReturn = nimfunc[](slotval1 )
-
+  var virtualReturn = vtbl[].boundingRectFor(self, slotval1)
   virtualReturn.h
+
 proc QGraphicsBlurEffectdraw*(self: gen_qgraphicseffect_types.QGraphicsBlurEffect, painter: gen_qpainter_types.QPainter): void =
-  fQGraphicsBlurEffect_virtualbase_draw(self.h, painter.h)
+  fcQGraphicsBlurEffect_virtualbase_draw(self.h, painter.h)
 
-type QGraphicsBlurEffectdrawProc* = proc(painter: gen_qpainter_types.QPainter): void
-proc ondraw*(self: gen_qgraphicseffect_types.QGraphicsBlurEffect, slot: QGraphicsBlurEffectdrawProc) =
-  # TODO check subclass
-  var tmp = new QGraphicsBlurEffectdrawProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQGraphicsBlurEffect_override_virtual_draw(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QGraphicsBlurEffect_draw(self: ptr cQGraphicsBlurEffect, slot: int, painter: pointer): void {.exportc: "miqt_exec_callback_QGraphicsBlurEffect_draw ".} =
-  var nimfunc = cast[ptr QGraphicsBlurEffectdrawProc](cast[pointer](slot))
+proc miqt_exec_callback_cQGraphicsBlurEffect_draw(vtbl: pointer, self: pointer, painter: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QGraphicsBlurEffectVTable](vtbl)
+  let self = QGraphicsBlurEffect(h: self)
   let slotval1 = gen_qpainter_types.QPainter(h: painter)
+  vtbl[].draw(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QGraphicsBlurEffectsourceChanged*(self: gen_qgraphicseffect_types.QGraphicsBlurEffect, flags: cint): void =
-  fQGraphicsBlurEffect_virtualbase_sourceChanged(self.h, cint(flags))
+  fcQGraphicsBlurEffect_virtualbase_sourceChanged(self.h, cint(flags))
 
-type QGraphicsBlurEffectsourceChangedProc* = proc(flags: cint): void
-proc onsourceChanged*(self: gen_qgraphicseffect_types.QGraphicsBlurEffect, slot: QGraphicsBlurEffectsourceChangedProc) =
-  # TODO check subclass
-  var tmp = new QGraphicsBlurEffectsourceChangedProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQGraphicsBlurEffect_override_virtual_sourceChanged(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QGraphicsBlurEffect_sourceChanged(self: ptr cQGraphicsBlurEffect, slot: int, flags: cint): void {.exportc: "miqt_exec_callback_QGraphicsBlurEffect_sourceChanged ".} =
-  var nimfunc = cast[ptr QGraphicsBlurEffectsourceChangedProc](cast[pointer](slot))
+proc miqt_exec_callback_cQGraphicsBlurEffect_sourceChanged(vtbl: pointer, self: pointer, flags: cint): void {.cdecl.} =
+  let vtbl = cast[ptr QGraphicsBlurEffectVTable](vtbl)
+  let self = QGraphicsBlurEffect(h: self)
   let slotval1 = cint(flags)
+  vtbl[].sourceChanged(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QGraphicsBlurEffectevent*(self: gen_qgraphicseffect_types.QGraphicsBlurEffect, event: gen_qcoreevent_types.QEvent): bool =
-  fQGraphicsBlurEffect_virtualbase_event(self.h, event.h)
+  fcQGraphicsBlurEffect_virtualbase_event(self.h, event.h)
 
-type QGraphicsBlurEffecteventProc* = proc(event: gen_qcoreevent_types.QEvent): bool
-proc onevent*(self: gen_qgraphicseffect_types.QGraphicsBlurEffect, slot: QGraphicsBlurEffecteventProc) =
-  # TODO check subclass
-  var tmp = new QGraphicsBlurEffecteventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQGraphicsBlurEffect_override_virtual_event(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QGraphicsBlurEffect_event(self: ptr cQGraphicsBlurEffect, slot: int, event: pointer): bool {.exportc: "miqt_exec_callback_QGraphicsBlurEffect_event ".} =
-  var nimfunc = cast[ptr QGraphicsBlurEffecteventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQGraphicsBlurEffect_event(vtbl: pointer, self: pointer, event: pointer): bool {.cdecl.} =
+  let vtbl = cast[ptr QGraphicsBlurEffectVTable](vtbl)
+  let self = QGraphicsBlurEffect(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event)
-
-
-  let virtualReturn = nimfunc[](slotval1 )
-
+  var virtualReturn = vtbl[].event(self, slotval1)
   virtualReturn
+
 proc QGraphicsBlurEffecteventFilter*(self: gen_qgraphicseffect_types.QGraphicsBlurEffect, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool =
-  fQGraphicsBlurEffect_virtualbase_eventFilter(self.h, watched.h, event.h)
+  fcQGraphicsBlurEffect_virtualbase_eventFilter(self.h, watched.h, event.h)
 
-type QGraphicsBlurEffecteventFilterProc* = proc(watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool
-proc oneventFilter*(self: gen_qgraphicseffect_types.QGraphicsBlurEffect, slot: QGraphicsBlurEffecteventFilterProc) =
-  # TODO check subclass
-  var tmp = new QGraphicsBlurEffecteventFilterProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQGraphicsBlurEffect_override_virtual_eventFilter(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QGraphicsBlurEffect_eventFilter(self: ptr cQGraphicsBlurEffect, slot: int, watched: pointer, event: pointer): bool {.exportc: "miqt_exec_callback_QGraphicsBlurEffect_eventFilter ".} =
-  var nimfunc = cast[ptr QGraphicsBlurEffecteventFilterProc](cast[pointer](slot))
+proc miqt_exec_callback_cQGraphicsBlurEffect_eventFilter(vtbl: pointer, self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
+  let vtbl = cast[ptr QGraphicsBlurEffectVTable](vtbl)
+  let self = QGraphicsBlurEffect(h: self)
   let slotval1 = gen_qobject_types.QObject(h: watched)
-
   let slotval2 = gen_qcoreevent_types.QEvent(h: event)
-
-
-  let virtualReturn = nimfunc[](slotval1, slotval2 )
-
+  var virtualReturn = vtbl[].eventFilter(self, slotval1, slotval2)
   virtualReturn
+
 proc QGraphicsBlurEffecttimerEvent*(self: gen_qgraphicseffect_types.QGraphicsBlurEffect, event: gen_qcoreevent_types.QTimerEvent): void =
-  fQGraphicsBlurEffect_virtualbase_timerEvent(self.h, event.h)
+  fcQGraphicsBlurEffect_virtualbase_timerEvent(self.h, event.h)
 
-type QGraphicsBlurEffecttimerEventProc* = proc(event: gen_qcoreevent_types.QTimerEvent): void
-proc ontimerEvent*(self: gen_qgraphicseffect_types.QGraphicsBlurEffect, slot: QGraphicsBlurEffecttimerEventProc) =
-  # TODO check subclass
-  var tmp = new QGraphicsBlurEffecttimerEventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQGraphicsBlurEffect_override_virtual_timerEvent(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QGraphicsBlurEffect_timerEvent(self: ptr cQGraphicsBlurEffect, slot: int, event: pointer): void {.exportc: "miqt_exec_callback_QGraphicsBlurEffect_timerEvent ".} =
-  var nimfunc = cast[ptr QGraphicsBlurEffecttimerEventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQGraphicsBlurEffect_timerEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QGraphicsBlurEffectVTable](vtbl)
+  let self = QGraphicsBlurEffect(h: self)
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event)
+  vtbl[].timerEvent(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QGraphicsBlurEffectchildEvent*(self: gen_qgraphicseffect_types.QGraphicsBlurEffect, event: gen_qcoreevent_types.QChildEvent): void =
-  fQGraphicsBlurEffect_virtualbase_childEvent(self.h, event.h)
+  fcQGraphicsBlurEffect_virtualbase_childEvent(self.h, event.h)
 
-type QGraphicsBlurEffectchildEventProc* = proc(event: gen_qcoreevent_types.QChildEvent): void
-proc onchildEvent*(self: gen_qgraphicseffect_types.QGraphicsBlurEffect, slot: QGraphicsBlurEffectchildEventProc) =
-  # TODO check subclass
-  var tmp = new QGraphicsBlurEffectchildEventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQGraphicsBlurEffect_override_virtual_childEvent(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QGraphicsBlurEffect_childEvent(self: ptr cQGraphicsBlurEffect, slot: int, event: pointer): void {.exportc: "miqt_exec_callback_QGraphicsBlurEffect_childEvent ".} =
-  var nimfunc = cast[ptr QGraphicsBlurEffectchildEventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQGraphicsBlurEffect_childEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QGraphicsBlurEffectVTable](vtbl)
+  let self = QGraphicsBlurEffect(h: self)
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: event)
+  vtbl[].childEvent(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QGraphicsBlurEffectcustomEvent*(self: gen_qgraphicseffect_types.QGraphicsBlurEffect, event: gen_qcoreevent_types.QEvent): void =
-  fQGraphicsBlurEffect_virtualbase_customEvent(self.h, event.h)
+  fcQGraphicsBlurEffect_virtualbase_customEvent(self.h, event.h)
 
-type QGraphicsBlurEffectcustomEventProc* = proc(event: gen_qcoreevent_types.QEvent): void
-proc oncustomEvent*(self: gen_qgraphicseffect_types.QGraphicsBlurEffect, slot: QGraphicsBlurEffectcustomEventProc) =
-  # TODO check subclass
-  var tmp = new QGraphicsBlurEffectcustomEventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQGraphicsBlurEffect_override_virtual_customEvent(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QGraphicsBlurEffect_customEvent(self: ptr cQGraphicsBlurEffect, slot: int, event: pointer): void {.exportc: "miqt_exec_callback_QGraphicsBlurEffect_customEvent ".} =
-  var nimfunc = cast[ptr QGraphicsBlurEffectcustomEventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQGraphicsBlurEffect_customEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QGraphicsBlurEffectVTable](vtbl)
+  let self = QGraphicsBlurEffect(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  vtbl[].customEvent(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QGraphicsBlurEffectconnectNotify*(self: gen_qgraphicseffect_types.QGraphicsBlurEffect, signal: gen_qmetaobject_types.QMetaMethod): void =
-  fQGraphicsBlurEffect_virtualbase_connectNotify(self.h, signal.h)
+  fcQGraphicsBlurEffect_virtualbase_connectNotify(self.h, signal.h)
 
-type QGraphicsBlurEffectconnectNotifyProc* = proc(signal: gen_qmetaobject_types.QMetaMethod): void
-proc onconnectNotify*(self: gen_qgraphicseffect_types.QGraphicsBlurEffect, slot: QGraphicsBlurEffectconnectNotifyProc) =
-  # TODO check subclass
-  var tmp = new QGraphicsBlurEffectconnectNotifyProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQGraphicsBlurEffect_override_virtual_connectNotify(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QGraphicsBlurEffect_connectNotify(self: ptr cQGraphicsBlurEffect, slot: int, signal: pointer): void {.exportc: "miqt_exec_callback_QGraphicsBlurEffect_connectNotify ".} =
-  var nimfunc = cast[ptr QGraphicsBlurEffectconnectNotifyProc](cast[pointer](slot))
+proc miqt_exec_callback_cQGraphicsBlurEffect_connectNotify(vtbl: pointer, self: pointer, signal: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QGraphicsBlurEffectVTable](vtbl)
+  let self = QGraphicsBlurEffect(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  vtbl[].connectNotify(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QGraphicsBlurEffectdisconnectNotify*(self: gen_qgraphicseffect_types.QGraphicsBlurEffect, signal: gen_qmetaobject_types.QMetaMethod): void =
-  fQGraphicsBlurEffect_virtualbase_disconnectNotify(self.h, signal.h)
+  fcQGraphicsBlurEffect_virtualbase_disconnectNotify(self.h, signal.h)
 
-type QGraphicsBlurEffectdisconnectNotifyProc* = proc(signal: gen_qmetaobject_types.QMetaMethod): void
-proc ondisconnectNotify*(self: gen_qgraphicseffect_types.QGraphicsBlurEffect, slot: QGraphicsBlurEffectdisconnectNotifyProc) =
-  # TODO check subclass
-  var tmp = new QGraphicsBlurEffectdisconnectNotifyProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQGraphicsBlurEffect_override_virtual_disconnectNotify(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QGraphicsBlurEffect_disconnectNotify(self: ptr cQGraphicsBlurEffect, slot: int, signal: pointer): void {.exportc: "miqt_exec_callback_QGraphicsBlurEffect_disconnectNotify ".} =
-  var nimfunc = cast[ptr QGraphicsBlurEffectdisconnectNotifyProc](cast[pointer](slot))
+proc miqt_exec_callback_cQGraphicsBlurEffect_disconnectNotify(vtbl: pointer, self: pointer, signal: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QGraphicsBlurEffectVTable](vtbl)
+  let self = QGraphicsBlurEffect(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  vtbl[].disconnectNotify(self, slotval1)
 
+proc create*(T: type gen_qgraphicseffect_types.QGraphicsBlurEffect,
+    vtbl: ref QGraphicsBlurEffectVTable = nil): gen_qgraphicseffect_types.QGraphicsBlurEffect =
+  let vtbl = if vtbl == nil: new QGraphicsBlurEffectVTable else: vtbl
+  GC_ref(vtbl)
+  vtbl.vtbl.destructor = proc(vtbl: ptr cQGraphicsBlurEffectVTable, _: ptr cQGraphicsBlurEffect) {.cdecl.} =
+    let vtbl = cast[ref QGraphicsBlurEffectVTable](vtbl)
+    GC_unref(vtbl)
+  if not isNil(vtbl.metaObject):
+    vtbl[].vtbl.metaObject = miqt_exec_callback_cQGraphicsBlurEffect_metaObject
+  if not isNil(vtbl.metacast):
+    vtbl[].vtbl.metacast = miqt_exec_callback_cQGraphicsBlurEffect_metacast
+  if not isNil(vtbl.metacall):
+    vtbl[].vtbl.metacall = miqt_exec_callback_cQGraphicsBlurEffect_metacall
+  if not isNil(vtbl.boundingRectFor):
+    vtbl[].vtbl.boundingRectFor = miqt_exec_callback_cQGraphicsBlurEffect_boundingRectFor
+  if not isNil(vtbl.draw):
+    vtbl[].vtbl.draw = miqt_exec_callback_cQGraphicsBlurEffect_draw
+  if not isNil(vtbl.sourceChanged):
+    vtbl[].vtbl.sourceChanged = miqt_exec_callback_cQGraphicsBlurEffect_sourceChanged
+  if not isNil(vtbl.event):
+    vtbl[].vtbl.event = miqt_exec_callback_cQGraphicsBlurEffect_event
+  if not isNil(vtbl.eventFilter):
+    vtbl[].vtbl.eventFilter = miqt_exec_callback_cQGraphicsBlurEffect_eventFilter
+  if not isNil(vtbl.timerEvent):
+    vtbl[].vtbl.timerEvent = miqt_exec_callback_cQGraphicsBlurEffect_timerEvent
+  if not isNil(vtbl.childEvent):
+    vtbl[].vtbl.childEvent = miqt_exec_callback_cQGraphicsBlurEffect_childEvent
+  if not isNil(vtbl.customEvent):
+    vtbl[].vtbl.customEvent = miqt_exec_callback_cQGraphicsBlurEffect_customEvent
+  if not isNil(vtbl.connectNotify):
+    vtbl[].vtbl.connectNotify = miqt_exec_callback_cQGraphicsBlurEffect_connectNotify
+  if not isNil(vtbl.disconnectNotify):
+    vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQGraphicsBlurEffect_disconnectNotify
+  gen_qgraphicseffect_types.QGraphicsBlurEffect(h: fcQGraphicsBlurEffect_new(addr(vtbl[]), ))
 
-  nimfunc[](slotval1)
+proc create*(T: type gen_qgraphicseffect_types.QGraphicsBlurEffect,
+    parent: gen_qobject_types.QObject,
+    vtbl: ref QGraphicsBlurEffectVTable = nil): gen_qgraphicseffect_types.QGraphicsBlurEffect =
+  let vtbl = if vtbl == nil: new QGraphicsBlurEffectVTable else: vtbl
+  GC_ref(vtbl)
+  vtbl.vtbl.destructor = proc(vtbl: ptr cQGraphicsBlurEffectVTable, _: ptr cQGraphicsBlurEffect) {.cdecl.} =
+    let vtbl = cast[ref QGraphicsBlurEffectVTable](vtbl)
+    GC_unref(vtbl)
+  if not isNil(vtbl.metaObject):
+    vtbl[].vtbl.metaObject = miqt_exec_callback_cQGraphicsBlurEffect_metaObject
+  if not isNil(vtbl.metacast):
+    vtbl[].vtbl.metacast = miqt_exec_callback_cQGraphicsBlurEffect_metacast
+  if not isNil(vtbl.metacall):
+    vtbl[].vtbl.metacall = miqt_exec_callback_cQGraphicsBlurEffect_metacall
+  if not isNil(vtbl.boundingRectFor):
+    vtbl[].vtbl.boundingRectFor = miqt_exec_callback_cQGraphicsBlurEffect_boundingRectFor
+  if not isNil(vtbl.draw):
+    vtbl[].vtbl.draw = miqt_exec_callback_cQGraphicsBlurEffect_draw
+  if not isNil(vtbl.sourceChanged):
+    vtbl[].vtbl.sourceChanged = miqt_exec_callback_cQGraphicsBlurEffect_sourceChanged
+  if not isNil(vtbl.event):
+    vtbl[].vtbl.event = miqt_exec_callback_cQGraphicsBlurEffect_event
+  if not isNil(vtbl.eventFilter):
+    vtbl[].vtbl.eventFilter = miqt_exec_callback_cQGraphicsBlurEffect_eventFilter
+  if not isNil(vtbl.timerEvent):
+    vtbl[].vtbl.timerEvent = miqt_exec_callback_cQGraphicsBlurEffect_timerEvent
+  if not isNil(vtbl.childEvent):
+    vtbl[].vtbl.childEvent = miqt_exec_callback_cQGraphicsBlurEffect_childEvent
+  if not isNil(vtbl.customEvent):
+    vtbl[].vtbl.customEvent = miqt_exec_callback_cQGraphicsBlurEffect_customEvent
+  if not isNil(vtbl.connectNotify):
+    vtbl[].vtbl.connectNotify = miqt_exec_callback_cQGraphicsBlurEffect_connectNotify
+  if not isNil(vtbl.disconnectNotify):
+    vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQGraphicsBlurEffect_disconnectNotify
+  gen_qgraphicseffect_types.QGraphicsBlurEffect(h: fcQGraphicsBlurEffect_new2(addr(vtbl[]), parent.h))
+
 proc staticMetaObject*(_: type gen_qgraphicseffect_types.QGraphicsBlurEffect): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQGraphicsBlurEffect_staticMetaObject())
 proc delete*(self: gen_qgraphicseffect_types.QGraphicsBlurEffect) =
   fcQGraphicsBlurEffect_delete(self.h)
-
-func init*(T: type gen_qgraphicseffect_types.QGraphicsDropShadowEffect, h: ptr cQGraphicsDropShadowEffect): gen_qgraphicseffect_types.QGraphicsDropShadowEffect =
-  T(h: h)
-proc create*(T: type gen_qgraphicseffect_types.QGraphicsDropShadowEffect, ): gen_qgraphicseffect_types.QGraphicsDropShadowEffect =
-  gen_qgraphicseffect_types.QGraphicsDropShadowEffect.init(fcQGraphicsDropShadowEffect_new())
-
-proc create*(T: type gen_qgraphicseffect_types.QGraphicsDropShadowEffect, parent: gen_qobject_types.QObject): gen_qgraphicseffect_types.QGraphicsDropShadowEffect =
-  gen_qgraphicseffect_types.QGraphicsDropShadowEffect.init(fcQGraphicsDropShadowEffect_new2(parent.h))
-
 proc metaObject*(self: gen_qgraphicseffect_types.QGraphicsDropShadowEffect, ): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQGraphicsDropShadowEffect_metaObject(self.h))
 
@@ -1331,7 +1266,7 @@ proc offsetChanged*(self: gen_qgraphicseffect_types.QGraphicsDropShadowEffect, o
   fcQGraphicsDropShadowEffect_offsetChanged(self.h, offset.h)
 
 type QGraphicsDropShadowEffectoffsetChangedSlot* = proc(offset: gen_qpoint_types.QPointF)
-proc miqt_exec_callback_QGraphicsDropShadowEffect_offsetChanged(slot: int, offset: pointer) {.exportc.} =
+proc miqt_exec_callback_cQGraphicsDropShadowEffect_offsetChanged(slot: int, offset: pointer) {.exportc: "miqt_exec_callback_QGraphicsDropShadowEffect_offsetChanged".} =
   let nimfunc = cast[ptr QGraphicsDropShadowEffectoffsetChangedSlot](cast[pointer](slot))
   let slotval1 = gen_qpoint_types.QPointF(h: offset)
 
@@ -1347,7 +1282,7 @@ proc blurRadiusChanged*(self: gen_qgraphicseffect_types.QGraphicsDropShadowEffec
   fcQGraphicsDropShadowEffect_blurRadiusChanged(self.h, blurRadius)
 
 type QGraphicsDropShadowEffectblurRadiusChangedSlot* = proc(blurRadius: float64)
-proc miqt_exec_callback_QGraphicsDropShadowEffect_blurRadiusChanged(slot: int, blurRadius: float64) {.exportc.} =
+proc miqt_exec_callback_cQGraphicsDropShadowEffect_blurRadiusChanged(slot: int, blurRadius: float64) {.exportc: "miqt_exec_callback_QGraphicsDropShadowEffect_blurRadiusChanged".} =
   let nimfunc = cast[ptr QGraphicsDropShadowEffectblurRadiusChangedSlot](cast[pointer](slot))
   let slotval1 = blurRadius
 
@@ -1363,7 +1298,7 @@ proc colorChanged*(self: gen_qgraphicseffect_types.QGraphicsDropShadowEffect, co
   fcQGraphicsDropShadowEffect_colorChanged(self.h, color.h)
 
 type QGraphicsDropShadowEffectcolorChangedSlot* = proc(color: gen_qcolor_types.QColor)
-proc miqt_exec_callback_QGraphicsDropShadowEffect_colorChanged(slot: int, color: pointer) {.exportc.} =
+proc miqt_exec_callback_cQGraphicsDropShadowEffect_colorChanged(slot: int, color: pointer) {.exportc: "miqt_exec_callback_QGraphicsDropShadowEffect_colorChanged".} =
   let nimfunc = cast[ptr QGraphicsDropShadowEffectcolorChangedSlot](cast[pointer](slot))
   let slotval1 = gen_qcolor_types.QColor(h: color)
 
@@ -1387,256 +1322,234 @@ proc tr*(_: type gen_qgraphicseffect_types.QGraphicsDropShadowEffect, s: cstring
   c_free(v_ms.data)
   vx_ret
 
+type QGraphicsDropShadowEffectmetaObjectProc* = proc(self: QGraphicsDropShadowEffect): gen_qobjectdefs_types.QMetaObject {.raises: [], gcsafe.}
+type QGraphicsDropShadowEffectmetacastProc* = proc(self: QGraphicsDropShadowEffect, param1: cstring): pointer {.raises: [], gcsafe.}
+type QGraphicsDropShadowEffectmetacallProc* = proc(self: QGraphicsDropShadowEffect, param1: cint, param2: cint, param3: pointer): cint {.raises: [], gcsafe.}
+type QGraphicsDropShadowEffectboundingRectForProc* = proc(self: QGraphicsDropShadowEffect, rect: gen_qrect_types.QRectF): gen_qrect_types.QRectF {.raises: [], gcsafe.}
+type QGraphicsDropShadowEffectdrawProc* = proc(self: QGraphicsDropShadowEffect, painter: gen_qpainter_types.QPainter): void {.raises: [], gcsafe.}
+type QGraphicsDropShadowEffectsourceChangedProc* = proc(self: QGraphicsDropShadowEffect, flags: cint): void {.raises: [], gcsafe.}
+type QGraphicsDropShadowEffecteventProc* = proc(self: QGraphicsDropShadowEffect, event: gen_qcoreevent_types.QEvent): bool {.raises: [], gcsafe.}
+type QGraphicsDropShadowEffecteventFilterProc* = proc(self: QGraphicsDropShadowEffect, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.raises: [], gcsafe.}
+type QGraphicsDropShadowEffecttimerEventProc* = proc(self: QGraphicsDropShadowEffect, event: gen_qcoreevent_types.QTimerEvent): void {.raises: [], gcsafe.}
+type QGraphicsDropShadowEffectchildEventProc* = proc(self: QGraphicsDropShadowEffect, event: gen_qcoreevent_types.QChildEvent): void {.raises: [], gcsafe.}
+type QGraphicsDropShadowEffectcustomEventProc* = proc(self: QGraphicsDropShadowEffect, event: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
+type QGraphicsDropShadowEffectconnectNotifyProc* = proc(self: QGraphicsDropShadowEffect, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
+type QGraphicsDropShadowEffectdisconnectNotifyProc* = proc(self: QGraphicsDropShadowEffect, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
+type QGraphicsDropShadowEffectVTable* = object
+  vtbl: cQGraphicsDropShadowEffectVTable
+  metaObject*: QGraphicsDropShadowEffectmetaObjectProc
+  metacast*: QGraphicsDropShadowEffectmetacastProc
+  metacall*: QGraphicsDropShadowEffectmetacallProc
+  boundingRectFor*: QGraphicsDropShadowEffectboundingRectForProc
+  draw*: QGraphicsDropShadowEffectdrawProc
+  sourceChanged*: QGraphicsDropShadowEffectsourceChangedProc
+  event*: QGraphicsDropShadowEffecteventProc
+  eventFilter*: QGraphicsDropShadowEffecteventFilterProc
+  timerEvent*: QGraphicsDropShadowEffecttimerEventProc
+  childEvent*: QGraphicsDropShadowEffectchildEventProc
+  customEvent*: QGraphicsDropShadowEffectcustomEventProc
+  connectNotify*: QGraphicsDropShadowEffectconnectNotifyProc
+  disconnectNotify*: QGraphicsDropShadowEffectdisconnectNotifyProc
 proc QGraphicsDropShadowEffectmetaObject*(self: gen_qgraphicseffect_types.QGraphicsDropShadowEffect, ): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fQGraphicsDropShadowEffect_virtualbase_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQGraphicsDropShadowEffect_virtualbase_metaObject(self.h))
 
-type QGraphicsDropShadowEffectmetaObjectProc* = proc(): gen_qobjectdefs_types.QMetaObject
-proc onmetaObject*(self: gen_qgraphicseffect_types.QGraphicsDropShadowEffect, slot: QGraphicsDropShadowEffectmetaObjectProc) =
-  # TODO check subclass
-  var tmp = new QGraphicsDropShadowEffectmetaObjectProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQGraphicsDropShadowEffect_override_virtual_metaObject(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QGraphicsDropShadowEffect_metaObject(self: ptr cQGraphicsDropShadowEffect, slot: int): pointer {.exportc: "miqt_exec_callback_QGraphicsDropShadowEffect_metaObject ".} =
-  var nimfunc = cast[ptr QGraphicsDropShadowEffectmetaObjectProc](cast[pointer](slot))
-
-  let virtualReturn = nimfunc[]( )
-
+proc miqt_exec_callback_cQGraphicsDropShadowEffect_metaObject(vtbl: pointer, self: pointer): pointer {.cdecl.} =
+  let vtbl = cast[ptr QGraphicsDropShadowEffectVTable](vtbl)
+  let self = QGraphicsDropShadowEffect(h: self)
+  var virtualReturn = vtbl[].metaObject(self)
   virtualReturn.h
+
 proc QGraphicsDropShadowEffectmetacast*(self: gen_qgraphicseffect_types.QGraphicsDropShadowEffect, param1: cstring): pointer =
-  fQGraphicsDropShadowEffect_virtualbase_metacast(self.h, param1)
+  fcQGraphicsDropShadowEffect_virtualbase_metacast(self.h, param1)
 
-type QGraphicsDropShadowEffectmetacastProc* = proc(param1: cstring): pointer
-proc onmetacast*(self: gen_qgraphicseffect_types.QGraphicsDropShadowEffect, slot: QGraphicsDropShadowEffectmetacastProc) =
-  # TODO check subclass
-  var tmp = new QGraphicsDropShadowEffectmetacastProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQGraphicsDropShadowEffect_override_virtual_metacast(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QGraphicsDropShadowEffect_metacast(self: ptr cQGraphicsDropShadowEffect, slot: int, param1: cstring): pointer {.exportc: "miqt_exec_callback_QGraphicsDropShadowEffect_metacast ".} =
-  var nimfunc = cast[ptr QGraphicsDropShadowEffectmetacastProc](cast[pointer](slot))
+proc miqt_exec_callback_cQGraphicsDropShadowEffect_metacast(vtbl: pointer, self: pointer, param1: cstring): pointer {.cdecl.} =
+  let vtbl = cast[ptr QGraphicsDropShadowEffectVTable](vtbl)
+  let self = QGraphicsDropShadowEffect(h: self)
   let slotval1 = (param1)
-
-
-  let virtualReturn = nimfunc[](slotval1 )
-
+  var virtualReturn = vtbl[].metacast(self, slotval1)
   virtualReturn
+
 proc QGraphicsDropShadowEffectmetacall*(self: gen_qgraphicseffect_types.QGraphicsDropShadowEffect, param1: cint, param2: cint, param3: pointer): cint =
-  fQGraphicsDropShadowEffect_virtualbase_metacall(self.h, cint(param1), param2, param3)
+  fcQGraphicsDropShadowEffect_virtualbase_metacall(self.h, cint(param1), param2, param3)
 
-type QGraphicsDropShadowEffectmetacallProc* = proc(param1: cint, param2: cint, param3: pointer): cint
-proc onmetacall*(self: gen_qgraphicseffect_types.QGraphicsDropShadowEffect, slot: QGraphicsDropShadowEffectmetacallProc) =
-  # TODO check subclass
-  var tmp = new QGraphicsDropShadowEffectmetacallProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQGraphicsDropShadowEffect_override_virtual_metacall(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QGraphicsDropShadowEffect_metacall(self: ptr cQGraphicsDropShadowEffect, slot: int, param1: cint, param2: cint, param3: pointer): cint {.exportc: "miqt_exec_callback_QGraphicsDropShadowEffect_metacall ".} =
-  var nimfunc = cast[ptr QGraphicsDropShadowEffectmetacallProc](cast[pointer](slot))
+proc miqt_exec_callback_cQGraphicsDropShadowEffect_metacall(vtbl: pointer, self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
+  let vtbl = cast[ptr QGraphicsDropShadowEffectVTable](vtbl)
+  let self = QGraphicsDropShadowEffect(h: self)
   let slotval1 = cint(param1)
-
   let slotval2 = param2
-
   let slotval3 = param3
-
-
-  let virtualReturn = nimfunc[](slotval1, slotval2, slotval3 )
-
+  var virtualReturn = vtbl[].metacall(self, slotval1, slotval2, slotval3)
   virtualReturn
+
 proc QGraphicsDropShadowEffectboundingRectFor*(self: gen_qgraphicseffect_types.QGraphicsDropShadowEffect, rect: gen_qrect_types.QRectF): gen_qrect_types.QRectF =
-  gen_qrect_types.QRectF(h: fQGraphicsDropShadowEffect_virtualbase_boundingRectFor(self.h, rect.h))
+  gen_qrect_types.QRectF(h: fcQGraphicsDropShadowEffect_virtualbase_boundingRectFor(self.h, rect.h))
 
-type QGraphicsDropShadowEffectboundingRectForProc* = proc(rect: gen_qrect_types.QRectF): gen_qrect_types.QRectF
-proc onboundingRectFor*(self: gen_qgraphicseffect_types.QGraphicsDropShadowEffect, slot: QGraphicsDropShadowEffectboundingRectForProc) =
-  # TODO check subclass
-  var tmp = new QGraphicsDropShadowEffectboundingRectForProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQGraphicsDropShadowEffect_override_virtual_boundingRectFor(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QGraphicsDropShadowEffect_boundingRectFor(self: ptr cQGraphicsDropShadowEffect, slot: int, rect: pointer): pointer {.exportc: "miqt_exec_callback_QGraphicsDropShadowEffect_boundingRectFor ".} =
-  var nimfunc = cast[ptr QGraphicsDropShadowEffectboundingRectForProc](cast[pointer](slot))
+proc miqt_exec_callback_cQGraphicsDropShadowEffect_boundingRectFor(vtbl: pointer, self: pointer, rect: pointer): pointer {.cdecl.} =
+  let vtbl = cast[ptr QGraphicsDropShadowEffectVTable](vtbl)
+  let self = QGraphicsDropShadowEffect(h: self)
   let slotval1 = gen_qrect_types.QRectF(h: rect)
-
-
-  let virtualReturn = nimfunc[](slotval1 )
-
+  var virtualReturn = vtbl[].boundingRectFor(self, slotval1)
   virtualReturn.h
+
 proc QGraphicsDropShadowEffectdraw*(self: gen_qgraphicseffect_types.QGraphicsDropShadowEffect, painter: gen_qpainter_types.QPainter): void =
-  fQGraphicsDropShadowEffect_virtualbase_draw(self.h, painter.h)
+  fcQGraphicsDropShadowEffect_virtualbase_draw(self.h, painter.h)
 
-type QGraphicsDropShadowEffectdrawProc* = proc(painter: gen_qpainter_types.QPainter): void
-proc ondraw*(self: gen_qgraphicseffect_types.QGraphicsDropShadowEffect, slot: QGraphicsDropShadowEffectdrawProc) =
-  # TODO check subclass
-  var tmp = new QGraphicsDropShadowEffectdrawProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQGraphicsDropShadowEffect_override_virtual_draw(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QGraphicsDropShadowEffect_draw(self: ptr cQGraphicsDropShadowEffect, slot: int, painter: pointer): void {.exportc: "miqt_exec_callback_QGraphicsDropShadowEffect_draw ".} =
-  var nimfunc = cast[ptr QGraphicsDropShadowEffectdrawProc](cast[pointer](slot))
+proc miqt_exec_callback_cQGraphicsDropShadowEffect_draw(vtbl: pointer, self: pointer, painter: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QGraphicsDropShadowEffectVTable](vtbl)
+  let self = QGraphicsDropShadowEffect(h: self)
   let slotval1 = gen_qpainter_types.QPainter(h: painter)
+  vtbl[].draw(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QGraphicsDropShadowEffectsourceChanged*(self: gen_qgraphicseffect_types.QGraphicsDropShadowEffect, flags: cint): void =
-  fQGraphicsDropShadowEffect_virtualbase_sourceChanged(self.h, cint(flags))
+  fcQGraphicsDropShadowEffect_virtualbase_sourceChanged(self.h, cint(flags))
 
-type QGraphicsDropShadowEffectsourceChangedProc* = proc(flags: cint): void
-proc onsourceChanged*(self: gen_qgraphicseffect_types.QGraphicsDropShadowEffect, slot: QGraphicsDropShadowEffectsourceChangedProc) =
-  # TODO check subclass
-  var tmp = new QGraphicsDropShadowEffectsourceChangedProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQGraphicsDropShadowEffect_override_virtual_sourceChanged(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QGraphicsDropShadowEffect_sourceChanged(self: ptr cQGraphicsDropShadowEffect, slot: int, flags: cint): void {.exportc: "miqt_exec_callback_QGraphicsDropShadowEffect_sourceChanged ".} =
-  var nimfunc = cast[ptr QGraphicsDropShadowEffectsourceChangedProc](cast[pointer](slot))
+proc miqt_exec_callback_cQGraphicsDropShadowEffect_sourceChanged(vtbl: pointer, self: pointer, flags: cint): void {.cdecl.} =
+  let vtbl = cast[ptr QGraphicsDropShadowEffectVTable](vtbl)
+  let self = QGraphicsDropShadowEffect(h: self)
   let slotval1 = cint(flags)
+  vtbl[].sourceChanged(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QGraphicsDropShadowEffectevent*(self: gen_qgraphicseffect_types.QGraphicsDropShadowEffect, event: gen_qcoreevent_types.QEvent): bool =
-  fQGraphicsDropShadowEffect_virtualbase_event(self.h, event.h)
+  fcQGraphicsDropShadowEffect_virtualbase_event(self.h, event.h)
 
-type QGraphicsDropShadowEffecteventProc* = proc(event: gen_qcoreevent_types.QEvent): bool
-proc onevent*(self: gen_qgraphicseffect_types.QGraphicsDropShadowEffect, slot: QGraphicsDropShadowEffecteventProc) =
-  # TODO check subclass
-  var tmp = new QGraphicsDropShadowEffecteventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQGraphicsDropShadowEffect_override_virtual_event(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QGraphicsDropShadowEffect_event(self: ptr cQGraphicsDropShadowEffect, slot: int, event: pointer): bool {.exportc: "miqt_exec_callback_QGraphicsDropShadowEffect_event ".} =
-  var nimfunc = cast[ptr QGraphicsDropShadowEffecteventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQGraphicsDropShadowEffect_event(vtbl: pointer, self: pointer, event: pointer): bool {.cdecl.} =
+  let vtbl = cast[ptr QGraphicsDropShadowEffectVTable](vtbl)
+  let self = QGraphicsDropShadowEffect(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event)
-
-
-  let virtualReturn = nimfunc[](slotval1 )
-
+  var virtualReturn = vtbl[].event(self, slotval1)
   virtualReturn
+
 proc QGraphicsDropShadowEffecteventFilter*(self: gen_qgraphicseffect_types.QGraphicsDropShadowEffect, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool =
-  fQGraphicsDropShadowEffect_virtualbase_eventFilter(self.h, watched.h, event.h)
+  fcQGraphicsDropShadowEffect_virtualbase_eventFilter(self.h, watched.h, event.h)
 
-type QGraphicsDropShadowEffecteventFilterProc* = proc(watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool
-proc oneventFilter*(self: gen_qgraphicseffect_types.QGraphicsDropShadowEffect, slot: QGraphicsDropShadowEffecteventFilterProc) =
-  # TODO check subclass
-  var tmp = new QGraphicsDropShadowEffecteventFilterProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQGraphicsDropShadowEffect_override_virtual_eventFilter(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QGraphicsDropShadowEffect_eventFilter(self: ptr cQGraphicsDropShadowEffect, slot: int, watched: pointer, event: pointer): bool {.exportc: "miqt_exec_callback_QGraphicsDropShadowEffect_eventFilter ".} =
-  var nimfunc = cast[ptr QGraphicsDropShadowEffecteventFilterProc](cast[pointer](slot))
+proc miqt_exec_callback_cQGraphicsDropShadowEffect_eventFilter(vtbl: pointer, self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
+  let vtbl = cast[ptr QGraphicsDropShadowEffectVTable](vtbl)
+  let self = QGraphicsDropShadowEffect(h: self)
   let slotval1 = gen_qobject_types.QObject(h: watched)
-
   let slotval2 = gen_qcoreevent_types.QEvent(h: event)
-
-
-  let virtualReturn = nimfunc[](slotval1, slotval2 )
-
+  var virtualReturn = vtbl[].eventFilter(self, slotval1, slotval2)
   virtualReturn
+
 proc QGraphicsDropShadowEffecttimerEvent*(self: gen_qgraphicseffect_types.QGraphicsDropShadowEffect, event: gen_qcoreevent_types.QTimerEvent): void =
-  fQGraphicsDropShadowEffect_virtualbase_timerEvent(self.h, event.h)
+  fcQGraphicsDropShadowEffect_virtualbase_timerEvent(self.h, event.h)
 
-type QGraphicsDropShadowEffecttimerEventProc* = proc(event: gen_qcoreevent_types.QTimerEvent): void
-proc ontimerEvent*(self: gen_qgraphicseffect_types.QGraphicsDropShadowEffect, slot: QGraphicsDropShadowEffecttimerEventProc) =
-  # TODO check subclass
-  var tmp = new QGraphicsDropShadowEffecttimerEventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQGraphicsDropShadowEffect_override_virtual_timerEvent(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QGraphicsDropShadowEffect_timerEvent(self: ptr cQGraphicsDropShadowEffect, slot: int, event: pointer): void {.exportc: "miqt_exec_callback_QGraphicsDropShadowEffect_timerEvent ".} =
-  var nimfunc = cast[ptr QGraphicsDropShadowEffecttimerEventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQGraphicsDropShadowEffect_timerEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QGraphicsDropShadowEffectVTable](vtbl)
+  let self = QGraphicsDropShadowEffect(h: self)
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event)
+  vtbl[].timerEvent(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QGraphicsDropShadowEffectchildEvent*(self: gen_qgraphicseffect_types.QGraphicsDropShadowEffect, event: gen_qcoreevent_types.QChildEvent): void =
-  fQGraphicsDropShadowEffect_virtualbase_childEvent(self.h, event.h)
+  fcQGraphicsDropShadowEffect_virtualbase_childEvent(self.h, event.h)
 
-type QGraphicsDropShadowEffectchildEventProc* = proc(event: gen_qcoreevent_types.QChildEvent): void
-proc onchildEvent*(self: gen_qgraphicseffect_types.QGraphicsDropShadowEffect, slot: QGraphicsDropShadowEffectchildEventProc) =
-  # TODO check subclass
-  var tmp = new QGraphicsDropShadowEffectchildEventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQGraphicsDropShadowEffect_override_virtual_childEvent(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QGraphicsDropShadowEffect_childEvent(self: ptr cQGraphicsDropShadowEffect, slot: int, event: pointer): void {.exportc: "miqt_exec_callback_QGraphicsDropShadowEffect_childEvent ".} =
-  var nimfunc = cast[ptr QGraphicsDropShadowEffectchildEventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQGraphicsDropShadowEffect_childEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QGraphicsDropShadowEffectVTable](vtbl)
+  let self = QGraphicsDropShadowEffect(h: self)
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: event)
+  vtbl[].childEvent(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QGraphicsDropShadowEffectcustomEvent*(self: gen_qgraphicseffect_types.QGraphicsDropShadowEffect, event: gen_qcoreevent_types.QEvent): void =
-  fQGraphicsDropShadowEffect_virtualbase_customEvent(self.h, event.h)
+  fcQGraphicsDropShadowEffect_virtualbase_customEvent(self.h, event.h)
 
-type QGraphicsDropShadowEffectcustomEventProc* = proc(event: gen_qcoreevent_types.QEvent): void
-proc oncustomEvent*(self: gen_qgraphicseffect_types.QGraphicsDropShadowEffect, slot: QGraphicsDropShadowEffectcustomEventProc) =
-  # TODO check subclass
-  var tmp = new QGraphicsDropShadowEffectcustomEventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQGraphicsDropShadowEffect_override_virtual_customEvent(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QGraphicsDropShadowEffect_customEvent(self: ptr cQGraphicsDropShadowEffect, slot: int, event: pointer): void {.exportc: "miqt_exec_callback_QGraphicsDropShadowEffect_customEvent ".} =
-  var nimfunc = cast[ptr QGraphicsDropShadowEffectcustomEventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQGraphicsDropShadowEffect_customEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QGraphicsDropShadowEffectVTable](vtbl)
+  let self = QGraphicsDropShadowEffect(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  vtbl[].customEvent(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QGraphicsDropShadowEffectconnectNotify*(self: gen_qgraphicseffect_types.QGraphicsDropShadowEffect, signal: gen_qmetaobject_types.QMetaMethod): void =
-  fQGraphicsDropShadowEffect_virtualbase_connectNotify(self.h, signal.h)
+  fcQGraphicsDropShadowEffect_virtualbase_connectNotify(self.h, signal.h)
 
-type QGraphicsDropShadowEffectconnectNotifyProc* = proc(signal: gen_qmetaobject_types.QMetaMethod): void
-proc onconnectNotify*(self: gen_qgraphicseffect_types.QGraphicsDropShadowEffect, slot: QGraphicsDropShadowEffectconnectNotifyProc) =
-  # TODO check subclass
-  var tmp = new QGraphicsDropShadowEffectconnectNotifyProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQGraphicsDropShadowEffect_override_virtual_connectNotify(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QGraphicsDropShadowEffect_connectNotify(self: ptr cQGraphicsDropShadowEffect, slot: int, signal: pointer): void {.exportc: "miqt_exec_callback_QGraphicsDropShadowEffect_connectNotify ".} =
-  var nimfunc = cast[ptr QGraphicsDropShadowEffectconnectNotifyProc](cast[pointer](slot))
+proc miqt_exec_callback_cQGraphicsDropShadowEffect_connectNotify(vtbl: pointer, self: pointer, signal: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QGraphicsDropShadowEffectVTable](vtbl)
+  let self = QGraphicsDropShadowEffect(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  vtbl[].connectNotify(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QGraphicsDropShadowEffectdisconnectNotify*(self: gen_qgraphicseffect_types.QGraphicsDropShadowEffect, signal: gen_qmetaobject_types.QMetaMethod): void =
-  fQGraphicsDropShadowEffect_virtualbase_disconnectNotify(self.h, signal.h)
+  fcQGraphicsDropShadowEffect_virtualbase_disconnectNotify(self.h, signal.h)
 
-type QGraphicsDropShadowEffectdisconnectNotifyProc* = proc(signal: gen_qmetaobject_types.QMetaMethod): void
-proc ondisconnectNotify*(self: gen_qgraphicseffect_types.QGraphicsDropShadowEffect, slot: QGraphicsDropShadowEffectdisconnectNotifyProc) =
-  # TODO check subclass
-  var tmp = new QGraphicsDropShadowEffectdisconnectNotifyProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQGraphicsDropShadowEffect_override_virtual_disconnectNotify(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QGraphicsDropShadowEffect_disconnectNotify(self: ptr cQGraphicsDropShadowEffect, slot: int, signal: pointer): void {.exportc: "miqt_exec_callback_QGraphicsDropShadowEffect_disconnectNotify ".} =
-  var nimfunc = cast[ptr QGraphicsDropShadowEffectdisconnectNotifyProc](cast[pointer](slot))
+proc miqt_exec_callback_cQGraphicsDropShadowEffect_disconnectNotify(vtbl: pointer, self: pointer, signal: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QGraphicsDropShadowEffectVTable](vtbl)
+  let self = QGraphicsDropShadowEffect(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  vtbl[].disconnectNotify(self, slotval1)
 
+proc create*(T: type gen_qgraphicseffect_types.QGraphicsDropShadowEffect,
+    vtbl: ref QGraphicsDropShadowEffectVTable = nil): gen_qgraphicseffect_types.QGraphicsDropShadowEffect =
+  let vtbl = if vtbl == nil: new QGraphicsDropShadowEffectVTable else: vtbl
+  GC_ref(vtbl)
+  vtbl.vtbl.destructor = proc(vtbl: ptr cQGraphicsDropShadowEffectVTable, _: ptr cQGraphicsDropShadowEffect) {.cdecl.} =
+    let vtbl = cast[ref QGraphicsDropShadowEffectVTable](vtbl)
+    GC_unref(vtbl)
+  if not isNil(vtbl.metaObject):
+    vtbl[].vtbl.metaObject = miqt_exec_callback_cQGraphicsDropShadowEffect_metaObject
+  if not isNil(vtbl.metacast):
+    vtbl[].vtbl.metacast = miqt_exec_callback_cQGraphicsDropShadowEffect_metacast
+  if not isNil(vtbl.metacall):
+    vtbl[].vtbl.metacall = miqt_exec_callback_cQGraphicsDropShadowEffect_metacall
+  if not isNil(vtbl.boundingRectFor):
+    vtbl[].vtbl.boundingRectFor = miqt_exec_callback_cQGraphicsDropShadowEffect_boundingRectFor
+  if not isNil(vtbl.draw):
+    vtbl[].vtbl.draw = miqt_exec_callback_cQGraphicsDropShadowEffect_draw
+  if not isNil(vtbl.sourceChanged):
+    vtbl[].vtbl.sourceChanged = miqt_exec_callback_cQGraphicsDropShadowEffect_sourceChanged
+  if not isNil(vtbl.event):
+    vtbl[].vtbl.event = miqt_exec_callback_cQGraphicsDropShadowEffect_event
+  if not isNil(vtbl.eventFilter):
+    vtbl[].vtbl.eventFilter = miqt_exec_callback_cQGraphicsDropShadowEffect_eventFilter
+  if not isNil(vtbl.timerEvent):
+    vtbl[].vtbl.timerEvent = miqt_exec_callback_cQGraphicsDropShadowEffect_timerEvent
+  if not isNil(vtbl.childEvent):
+    vtbl[].vtbl.childEvent = miqt_exec_callback_cQGraphicsDropShadowEffect_childEvent
+  if not isNil(vtbl.customEvent):
+    vtbl[].vtbl.customEvent = miqt_exec_callback_cQGraphicsDropShadowEffect_customEvent
+  if not isNil(vtbl.connectNotify):
+    vtbl[].vtbl.connectNotify = miqt_exec_callback_cQGraphicsDropShadowEffect_connectNotify
+  if not isNil(vtbl.disconnectNotify):
+    vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQGraphicsDropShadowEffect_disconnectNotify
+  gen_qgraphicseffect_types.QGraphicsDropShadowEffect(h: fcQGraphicsDropShadowEffect_new(addr(vtbl[]), ))
 
-  nimfunc[](slotval1)
+proc create*(T: type gen_qgraphicseffect_types.QGraphicsDropShadowEffect,
+    parent: gen_qobject_types.QObject,
+    vtbl: ref QGraphicsDropShadowEffectVTable = nil): gen_qgraphicseffect_types.QGraphicsDropShadowEffect =
+  let vtbl = if vtbl == nil: new QGraphicsDropShadowEffectVTable else: vtbl
+  GC_ref(vtbl)
+  vtbl.vtbl.destructor = proc(vtbl: ptr cQGraphicsDropShadowEffectVTable, _: ptr cQGraphicsDropShadowEffect) {.cdecl.} =
+    let vtbl = cast[ref QGraphicsDropShadowEffectVTable](vtbl)
+    GC_unref(vtbl)
+  if not isNil(vtbl.metaObject):
+    vtbl[].vtbl.metaObject = miqt_exec_callback_cQGraphicsDropShadowEffect_metaObject
+  if not isNil(vtbl.metacast):
+    vtbl[].vtbl.metacast = miqt_exec_callback_cQGraphicsDropShadowEffect_metacast
+  if not isNil(vtbl.metacall):
+    vtbl[].vtbl.metacall = miqt_exec_callback_cQGraphicsDropShadowEffect_metacall
+  if not isNil(vtbl.boundingRectFor):
+    vtbl[].vtbl.boundingRectFor = miqt_exec_callback_cQGraphicsDropShadowEffect_boundingRectFor
+  if not isNil(vtbl.draw):
+    vtbl[].vtbl.draw = miqt_exec_callback_cQGraphicsDropShadowEffect_draw
+  if not isNil(vtbl.sourceChanged):
+    vtbl[].vtbl.sourceChanged = miqt_exec_callback_cQGraphicsDropShadowEffect_sourceChanged
+  if not isNil(vtbl.event):
+    vtbl[].vtbl.event = miqt_exec_callback_cQGraphicsDropShadowEffect_event
+  if not isNil(vtbl.eventFilter):
+    vtbl[].vtbl.eventFilter = miqt_exec_callback_cQGraphicsDropShadowEffect_eventFilter
+  if not isNil(vtbl.timerEvent):
+    vtbl[].vtbl.timerEvent = miqt_exec_callback_cQGraphicsDropShadowEffect_timerEvent
+  if not isNil(vtbl.childEvent):
+    vtbl[].vtbl.childEvent = miqt_exec_callback_cQGraphicsDropShadowEffect_childEvent
+  if not isNil(vtbl.customEvent):
+    vtbl[].vtbl.customEvent = miqt_exec_callback_cQGraphicsDropShadowEffect_customEvent
+  if not isNil(vtbl.connectNotify):
+    vtbl[].vtbl.connectNotify = miqt_exec_callback_cQGraphicsDropShadowEffect_connectNotify
+  if not isNil(vtbl.disconnectNotify):
+    vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQGraphicsDropShadowEffect_disconnectNotify
+  gen_qgraphicseffect_types.QGraphicsDropShadowEffect(h: fcQGraphicsDropShadowEffect_new2(addr(vtbl[]), parent.h))
+
 proc staticMetaObject*(_: type gen_qgraphicseffect_types.QGraphicsDropShadowEffect): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQGraphicsDropShadowEffect_staticMetaObject())
 proc delete*(self: gen_qgraphicseffect_types.QGraphicsDropShadowEffect) =
   fcQGraphicsDropShadowEffect_delete(self.h)
-
-func init*(T: type gen_qgraphicseffect_types.QGraphicsOpacityEffect, h: ptr cQGraphicsOpacityEffect): gen_qgraphicseffect_types.QGraphicsOpacityEffect =
-  T(h: h)
-proc create*(T: type gen_qgraphicseffect_types.QGraphicsOpacityEffect, ): gen_qgraphicseffect_types.QGraphicsOpacityEffect =
-  gen_qgraphicseffect_types.QGraphicsOpacityEffect.init(fcQGraphicsOpacityEffect_new())
-
-proc create*(T: type gen_qgraphicseffect_types.QGraphicsOpacityEffect, parent: gen_qobject_types.QObject): gen_qgraphicseffect_types.QGraphicsOpacityEffect =
-  gen_qgraphicseffect_types.QGraphicsOpacityEffect.init(fcQGraphicsOpacityEffect_new2(parent.h))
-
 proc metaObject*(self: gen_qgraphicseffect_types.QGraphicsOpacityEffect, ): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQGraphicsOpacityEffect_metaObject(self.h))
 
@@ -1668,7 +1581,7 @@ proc opacityChanged*(self: gen_qgraphicseffect_types.QGraphicsOpacityEffect, opa
   fcQGraphicsOpacityEffect_opacityChanged(self.h, opacity)
 
 type QGraphicsOpacityEffectopacityChangedSlot* = proc(opacity: float64)
-proc miqt_exec_callback_QGraphicsOpacityEffect_opacityChanged(slot: int, opacity: float64) {.exportc.} =
+proc miqt_exec_callback_cQGraphicsOpacityEffect_opacityChanged(slot: int, opacity: float64) {.exportc: "miqt_exec_callback_QGraphicsOpacityEffect_opacityChanged".} =
   let nimfunc = cast[ptr QGraphicsOpacityEffectopacityChangedSlot](cast[pointer](slot))
   let slotval1 = opacity
 
@@ -1684,7 +1597,7 @@ proc opacityMaskChanged*(self: gen_qgraphicseffect_types.QGraphicsOpacityEffect,
   fcQGraphicsOpacityEffect_opacityMaskChanged(self.h, mask.h)
 
 type QGraphicsOpacityEffectopacityMaskChangedSlot* = proc(mask: gen_qbrush_types.QBrush)
-proc miqt_exec_callback_QGraphicsOpacityEffect_opacityMaskChanged(slot: int, mask: pointer) {.exportc.} =
+proc miqt_exec_callback_cQGraphicsOpacityEffect_opacityMaskChanged(slot: int, mask: pointer) {.exportc: "miqt_exec_callback_QGraphicsOpacityEffect_opacityMaskChanged".} =
   let nimfunc = cast[ptr QGraphicsOpacityEffectopacityMaskChangedSlot](cast[pointer](slot))
   let slotval1 = gen_qbrush_types.QBrush(h: mask)
 
@@ -1708,243 +1621,230 @@ proc tr*(_: type gen_qgraphicseffect_types.QGraphicsOpacityEffect, s: cstring, c
   c_free(v_ms.data)
   vx_ret
 
+type QGraphicsOpacityEffectmetaObjectProc* = proc(self: QGraphicsOpacityEffect): gen_qobjectdefs_types.QMetaObject {.raises: [], gcsafe.}
+type QGraphicsOpacityEffectmetacastProc* = proc(self: QGraphicsOpacityEffect, param1: cstring): pointer {.raises: [], gcsafe.}
+type QGraphicsOpacityEffectmetacallProc* = proc(self: QGraphicsOpacityEffect, param1: cint, param2: cint, param3: pointer): cint {.raises: [], gcsafe.}
+type QGraphicsOpacityEffectdrawProc* = proc(self: QGraphicsOpacityEffect, painter: gen_qpainter_types.QPainter): void {.raises: [], gcsafe.}
+type QGraphicsOpacityEffectboundingRectForProc* = proc(self: QGraphicsOpacityEffect, sourceRect: gen_qrect_types.QRectF): gen_qrect_types.QRectF {.raises: [], gcsafe.}
+type QGraphicsOpacityEffectsourceChangedProc* = proc(self: QGraphicsOpacityEffect, flags: cint): void {.raises: [], gcsafe.}
+type QGraphicsOpacityEffecteventProc* = proc(self: QGraphicsOpacityEffect, event: gen_qcoreevent_types.QEvent): bool {.raises: [], gcsafe.}
+type QGraphicsOpacityEffecteventFilterProc* = proc(self: QGraphicsOpacityEffect, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.raises: [], gcsafe.}
+type QGraphicsOpacityEffecttimerEventProc* = proc(self: QGraphicsOpacityEffect, event: gen_qcoreevent_types.QTimerEvent): void {.raises: [], gcsafe.}
+type QGraphicsOpacityEffectchildEventProc* = proc(self: QGraphicsOpacityEffect, event: gen_qcoreevent_types.QChildEvent): void {.raises: [], gcsafe.}
+type QGraphicsOpacityEffectcustomEventProc* = proc(self: QGraphicsOpacityEffect, event: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
+type QGraphicsOpacityEffectconnectNotifyProc* = proc(self: QGraphicsOpacityEffect, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
+type QGraphicsOpacityEffectdisconnectNotifyProc* = proc(self: QGraphicsOpacityEffect, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
+type QGraphicsOpacityEffectVTable* = object
+  vtbl: cQGraphicsOpacityEffectVTable
+  metaObject*: QGraphicsOpacityEffectmetaObjectProc
+  metacast*: QGraphicsOpacityEffectmetacastProc
+  metacall*: QGraphicsOpacityEffectmetacallProc
+  draw*: QGraphicsOpacityEffectdrawProc
+  boundingRectFor*: QGraphicsOpacityEffectboundingRectForProc
+  sourceChanged*: QGraphicsOpacityEffectsourceChangedProc
+  event*: QGraphicsOpacityEffecteventProc
+  eventFilter*: QGraphicsOpacityEffecteventFilterProc
+  timerEvent*: QGraphicsOpacityEffecttimerEventProc
+  childEvent*: QGraphicsOpacityEffectchildEventProc
+  customEvent*: QGraphicsOpacityEffectcustomEventProc
+  connectNotify*: QGraphicsOpacityEffectconnectNotifyProc
+  disconnectNotify*: QGraphicsOpacityEffectdisconnectNotifyProc
 proc QGraphicsOpacityEffectmetaObject*(self: gen_qgraphicseffect_types.QGraphicsOpacityEffect, ): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fQGraphicsOpacityEffect_virtualbase_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQGraphicsOpacityEffect_virtualbase_metaObject(self.h))
 
-type QGraphicsOpacityEffectmetaObjectProc* = proc(): gen_qobjectdefs_types.QMetaObject
-proc onmetaObject*(self: gen_qgraphicseffect_types.QGraphicsOpacityEffect, slot: QGraphicsOpacityEffectmetaObjectProc) =
-  # TODO check subclass
-  var tmp = new QGraphicsOpacityEffectmetaObjectProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQGraphicsOpacityEffect_override_virtual_metaObject(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QGraphicsOpacityEffect_metaObject(self: ptr cQGraphicsOpacityEffect, slot: int): pointer {.exportc: "miqt_exec_callback_QGraphicsOpacityEffect_metaObject ".} =
-  var nimfunc = cast[ptr QGraphicsOpacityEffectmetaObjectProc](cast[pointer](slot))
-
-  let virtualReturn = nimfunc[]( )
-
+proc miqt_exec_callback_cQGraphicsOpacityEffect_metaObject(vtbl: pointer, self: pointer): pointer {.cdecl.} =
+  let vtbl = cast[ptr QGraphicsOpacityEffectVTable](vtbl)
+  let self = QGraphicsOpacityEffect(h: self)
+  var virtualReturn = vtbl[].metaObject(self)
   virtualReturn.h
+
 proc QGraphicsOpacityEffectmetacast*(self: gen_qgraphicseffect_types.QGraphicsOpacityEffect, param1: cstring): pointer =
-  fQGraphicsOpacityEffect_virtualbase_metacast(self.h, param1)
+  fcQGraphicsOpacityEffect_virtualbase_metacast(self.h, param1)
 
-type QGraphicsOpacityEffectmetacastProc* = proc(param1: cstring): pointer
-proc onmetacast*(self: gen_qgraphicseffect_types.QGraphicsOpacityEffect, slot: QGraphicsOpacityEffectmetacastProc) =
-  # TODO check subclass
-  var tmp = new QGraphicsOpacityEffectmetacastProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQGraphicsOpacityEffect_override_virtual_metacast(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QGraphicsOpacityEffect_metacast(self: ptr cQGraphicsOpacityEffect, slot: int, param1: cstring): pointer {.exportc: "miqt_exec_callback_QGraphicsOpacityEffect_metacast ".} =
-  var nimfunc = cast[ptr QGraphicsOpacityEffectmetacastProc](cast[pointer](slot))
+proc miqt_exec_callback_cQGraphicsOpacityEffect_metacast(vtbl: pointer, self: pointer, param1: cstring): pointer {.cdecl.} =
+  let vtbl = cast[ptr QGraphicsOpacityEffectVTable](vtbl)
+  let self = QGraphicsOpacityEffect(h: self)
   let slotval1 = (param1)
-
-
-  let virtualReturn = nimfunc[](slotval1 )
-
+  var virtualReturn = vtbl[].metacast(self, slotval1)
   virtualReturn
+
 proc QGraphicsOpacityEffectmetacall*(self: gen_qgraphicseffect_types.QGraphicsOpacityEffect, param1: cint, param2: cint, param3: pointer): cint =
-  fQGraphicsOpacityEffect_virtualbase_metacall(self.h, cint(param1), param2, param3)
+  fcQGraphicsOpacityEffect_virtualbase_metacall(self.h, cint(param1), param2, param3)
 
-type QGraphicsOpacityEffectmetacallProc* = proc(param1: cint, param2: cint, param3: pointer): cint
-proc onmetacall*(self: gen_qgraphicseffect_types.QGraphicsOpacityEffect, slot: QGraphicsOpacityEffectmetacallProc) =
-  # TODO check subclass
-  var tmp = new QGraphicsOpacityEffectmetacallProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQGraphicsOpacityEffect_override_virtual_metacall(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QGraphicsOpacityEffect_metacall(self: ptr cQGraphicsOpacityEffect, slot: int, param1: cint, param2: cint, param3: pointer): cint {.exportc: "miqt_exec_callback_QGraphicsOpacityEffect_metacall ".} =
-  var nimfunc = cast[ptr QGraphicsOpacityEffectmetacallProc](cast[pointer](slot))
+proc miqt_exec_callback_cQGraphicsOpacityEffect_metacall(vtbl: pointer, self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
+  let vtbl = cast[ptr QGraphicsOpacityEffectVTable](vtbl)
+  let self = QGraphicsOpacityEffect(h: self)
   let slotval1 = cint(param1)
-
   let slotval2 = param2
-
   let slotval3 = param3
-
-
-  let virtualReturn = nimfunc[](slotval1, slotval2, slotval3 )
-
+  var virtualReturn = vtbl[].metacall(self, slotval1, slotval2, slotval3)
   virtualReturn
+
 proc QGraphicsOpacityEffectdraw*(self: gen_qgraphicseffect_types.QGraphicsOpacityEffect, painter: gen_qpainter_types.QPainter): void =
-  fQGraphicsOpacityEffect_virtualbase_draw(self.h, painter.h)
+  fcQGraphicsOpacityEffect_virtualbase_draw(self.h, painter.h)
 
-type QGraphicsOpacityEffectdrawProc* = proc(painter: gen_qpainter_types.QPainter): void
-proc ondraw*(self: gen_qgraphicseffect_types.QGraphicsOpacityEffect, slot: QGraphicsOpacityEffectdrawProc) =
-  # TODO check subclass
-  var tmp = new QGraphicsOpacityEffectdrawProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQGraphicsOpacityEffect_override_virtual_draw(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QGraphicsOpacityEffect_draw(self: ptr cQGraphicsOpacityEffect, slot: int, painter: pointer): void {.exportc: "miqt_exec_callback_QGraphicsOpacityEffect_draw ".} =
-  var nimfunc = cast[ptr QGraphicsOpacityEffectdrawProc](cast[pointer](slot))
+proc miqt_exec_callback_cQGraphicsOpacityEffect_draw(vtbl: pointer, self: pointer, painter: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QGraphicsOpacityEffectVTable](vtbl)
+  let self = QGraphicsOpacityEffect(h: self)
   let slotval1 = gen_qpainter_types.QPainter(h: painter)
+  vtbl[].draw(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QGraphicsOpacityEffectboundingRectFor*(self: gen_qgraphicseffect_types.QGraphicsOpacityEffect, sourceRect: gen_qrect_types.QRectF): gen_qrect_types.QRectF =
-  gen_qrect_types.QRectF(h: fQGraphicsOpacityEffect_virtualbase_boundingRectFor(self.h, sourceRect.h))
+  gen_qrect_types.QRectF(h: fcQGraphicsOpacityEffect_virtualbase_boundingRectFor(self.h, sourceRect.h))
 
-type QGraphicsOpacityEffectboundingRectForProc* = proc(sourceRect: gen_qrect_types.QRectF): gen_qrect_types.QRectF
-proc onboundingRectFor*(self: gen_qgraphicseffect_types.QGraphicsOpacityEffect, slot: QGraphicsOpacityEffectboundingRectForProc) =
-  # TODO check subclass
-  var tmp = new QGraphicsOpacityEffectboundingRectForProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQGraphicsOpacityEffect_override_virtual_boundingRectFor(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QGraphicsOpacityEffect_boundingRectFor(self: ptr cQGraphicsOpacityEffect, slot: int, sourceRect: pointer): pointer {.exportc: "miqt_exec_callback_QGraphicsOpacityEffect_boundingRectFor ".} =
-  var nimfunc = cast[ptr QGraphicsOpacityEffectboundingRectForProc](cast[pointer](slot))
+proc miqt_exec_callback_cQGraphicsOpacityEffect_boundingRectFor(vtbl: pointer, self: pointer, sourceRect: pointer): pointer {.cdecl.} =
+  let vtbl = cast[ptr QGraphicsOpacityEffectVTable](vtbl)
+  let self = QGraphicsOpacityEffect(h: self)
   let slotval1 = gen_qrect_types.QRectF(h: sourceRect)
-
-
-  let virtualReturn = nimfunc[](slotval1 )
-
+  var virtualReturn = vtbl[].boundingRectFor(self, slotval1)
   virtualReturn.h
+
 proc QGraphicsOpacityEffectsourceChanged*(self: gen_qgraphicseffect_types.QGraphicsOpacityEffect, flags: cint): void =
-  fQGraphicsOpacityEffect_virtualbase_sourceChanged(self.h, cint(flags))
+  fcQGraphicsOpacityEffect_virtualbase_sourceChanged(self.h, cint(flags))
 
-type QGraphicsOpacityEffectsourceChangedProc* = proc(flags: cint): void
-proc onsourceChanged*(self: gen_qgraphicseffect_types.QGraphicsOpacityEffect, slot: QGraphicsOpacityEffectsourceChangedProc) =
-  # TODO check subclass
-  var tmp = new QGraphicsOpacityEffectsourceChangedProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQGraphicsOpacityEffect_override_virtual_sourceChanged(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QGraphicsOpacityEffect_sourceChanged(self: ptr cQGraphicsOpacityEffect, slot: int, flags: cint): void {.exportc: "miqt_exec_callback_QGraphicsOpacityEffect_sourceChanged ".} =
-  var nimfunc = cast[ptr QGraphicsOpacityEffectsourceChangedProc](cast[pointer](slot))
+proc miqt_exec_callback_cQGraphicsOpacityEffect_sourceChanged(vtbl: pointer, self: pointer, flags: cint): void {.cdecl.} =
+  let vtbl = cast[ptr QGraphicsOpacityEffectVTable](vtbl)
+  let self = QGraphicsOpacityEffect(h: self)
   let slotval1 = cint(flags)
+  vtbl[].sourceChanged(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QGraphicsOpacityEffectevent*(self: gen_qgraphicseffect_types.QGraphicsOpacityEffect, event: gen_qcoreevent_types.QEvent): bool =
-  fQGraphicsOpacityEffect_virtualbase_event(self.h, event.h)
+  fcQGraphicsOpacityEffect_virtualbase_event(self.h, event.h)
 
-type QGraphicsOpacityEffecteventProc* = proc(event: gen_qcoreevent_types.QEvent): bool
-proc onevent*(self: gen_qgraphicseffect_types.QGraphicsOpacityEffect, slot: QGraphicsOpacityEffecteventProc) =
-  # TODO check subclass
-  var tmp = new QGraphicsOpacityEffecteventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQGraphicsOpacityEffect_override_virtual_event(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QGraphicsOpacityEffect_event(self: ptr cQGraphicsOpacityEffect, slot: int, event: pointer): bool {.exportc: "miqt_exec_callback_QGraphicsOpacityEffect_event ".} =
-  var nimfunc = cast[ptr QGraphicsOpacityEffecteventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQGraphicsOpacityEffect_event(vtbl: pointer, self: pointer, event: pointer): bool {.cdecl.} =
+  let vtbl = cast[ptr QGraphicsOpacityEffectVTable](vtbl)
+  let self = QGraphicsOpacityEffect(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event)
-
-
-  let virtualReturn = nimfunc[](slotval1 )
-
+  var virtualReturn = vtbl[].event(self, slotval1)
   virtualReturn
+
 proc QGraphicsOpacityEffecteventFilter*(self: gen_qgraphicseffect_types.QGraphicsOpacityEffect, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool =
-  fQGraphicsOpacityEffect_virtualbase_eventFilter(self.h, watched.h, event.h)
+  fcQGraphicsOpacityEffect_virtualbase_eventFilter(self.h, watched.h, event.h)
 
-type QGraphicsOpacityEffecteventFilterProc* = proc(watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool
-proc oneventFilter*(self: gen_qgraphicseffect_types.QGraphicsOpacityEffect, slot: QGraphicsOpacityEffecteventFilterProc) =
-  # TODO check subclass
-  var tmp = new QGraphicsOpacityEffecteventFilterProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQGraphicsOpacityEffect_override_virtual_eventFilter(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QGraphicsOpacityEffect_eventFilter(self: ptr cQGraphicsOpacityEffect, slot: int, watched: pointer, event: pointer): bool {.exportc: "miqt_exec_callback_QGraphicsOpacityEffect_eventFilter ".} =
-  var nimfunc = cast[ptr QGraphicsOpacityEffecteventFilterProc](cast[pointer](slot))
+proc miqt_exec_callback_cQGraphicsOpacityEffect_eventFilter(vtbl: pointer, self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
+  let vtbl = cast[ptr QGraphicsOpacityEffectVTable](vtbl)
+  let self = QGraphicsOpacityEffect(h: self)
   let slotval1 = gen_qobject_types.QObject(h: watched)
-
   let slotval2 = gen_qcoreevent_types.QEvent(h: event)
-
-
-  let virtualReturn = nimfunc[](slotval1, slotval2 )
-
+  var virtualReturn = vtbl[].eventFilter(self, slotval1, slotval2)
   virtualReturn
+
 proc QGraphicsOpacityEffecttimerEvent*(self: gen_qgraphicseffect_types.QGraphicsOpacityEffect, event: gen_qcoreevent_types.QTimerEvent): void =
-  fQGraphicsOpacityEffect_virtualbase_timerEvent(self.h, event.h)
+  fcQGraphicsOpacityEffect_virtualbase_timerEvent(self.h, event.h)
 
-type QGraphicsOpacityEffecttimerEventProc* = proc(event: gen_qcoreevent_types.QTimerEvent): void
-proc ontimerEvent*(self: gen_qgraphicseffect_types.QGraphicsOpacityEffect, slot: QGraphicsOpacityEffecttimerEventProc) =
-  # TODO check subclass
-  var tmp = new QGraphicsOpacityEffecttimerEventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQGraphicsOpacityEffect_override_virtual_timerEvent(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QGraphicsOpacityEffect_timerEvent(self: ptr cQGraphicsOpacityEffect, slot: int, event: pointer): void {.exportc: "miqt_exec_callback_QGraphicsOpacityEffect_timerEvent ".} =
-  var nimfunc = cast[ptr QGraphicsOpacityEffecttimerEventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQGraphicsOpacityEffect_timerEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QGraphicsOpacityEffectVTable](vtbl)
+  let self = QGraphicsOpacityEffect(h: self)
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event)
+  vtbl[].timerEvent(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QGraphicsOpacityEffectchildEvent*(self: gen_qgraphicseffect_types.QGraphicsOpacityEffect, event: gen_qcoreevent_types.QChildEvent): void =
-  fQGraphicsOpacityEffect_virtualbase_childEvent(self.h, event.h)
+  fcQGraphicsOpacityEffect_virtualbase_childEvent(self.h, event.h)
 
-type QGraphicsOpacityEffectchildEventProc* = proc(event: gen_qcoreevent_types.QChildEvent): void
-proc onchildEvent*(self: gen_qgraphicseffect_types.QGraphicsOpacityEffect, slot: QGraphicsOpacityEffectchildEventProc) =
-  # TODO check subclass
-  var tmp = new QGraphicsOpacityEffectchildEventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQGraphicsOpacityEffect_override_virtual_childEvent(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QGraphicsOpacityEffect_childEvent(self: ptr cQGraphicsOpacityEffect, slot: int, event: pointer): void {.exportc: "miqt_exec_callback_QGraphicsOpacityEffect_childEvent ".} =
-  var nimfunc = cast[ptr QGraphicsOpacityEffectchildEventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQGraphicsOpacityEffect_childEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QGraphicsOpacityEffectVTable](vtbl)
+  let self = QGraphicsOpacityEffect(h: self)
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: event)
+  vtbl[].childEvent(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QGraphicsOpacityEffectcustomEvent*(self: gen_qgraphicseffect_types.QGraphicsOpacityEffect, event: gen_qcoreevent_types.QEvent): void =
-  fQGraphicsOpacityEffect_virtualbase_customEvent(self.h, event.h)
+  fcQGraphicsOpacityEffect_virtualbase_customEvent(self.h, event.h)
 
-type QGraphicsOpacityEffectcustomEventProc* = proc(event: gen_qcoreevent_types.QEvent): void
-proc oncustomEvent*(self: gen_qgraphicseffect_types.QGraphicsOpacityEffect, slot: QGraphicsOpacityEffectcustomEventProc) =
-  # TODO check subclass
-  var tmp = new QGraphicsOpacityEffectcustomEventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQGraphicsOpacityEffect_override_virtual_customEvent(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QGraphicsOpacityEffect_customEvent(self: ptr cQGraphicsOpacityEffect, slot: int, event: pointer): void {.exportc: "miqt_exec_callback_QGraphicsOpacityEffect_customEvent ".} =
-  var nimfunc = cast[ptr QGraphicsOpacityEffectcustomEventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQGraphicsOpacityEffect_customEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QGraphicsOpacityEffectVTable](vtbl)
+  let self = QGraphicsOpacityEffect(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  vtbl[].customEvent(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QGraphicsOpacityEffectconnectNotify*(self: gen_qgraphicseffect_types.QGraphicsOpacityEffect, signal: gen_qmetaobject_types.QMetaMethod): void =
-  fQGraphicsOpacityEffect_virtualbase_connectNotify(self.h, signal.h)
+  fcQGraphicsOpacityEffect_virtualbase_connectNotify(self.h, signal.h)
 
-type QGraphicsOpacityEffectconnectNotifyProc* = proc(signal: gen_qmetaobject_types.QMetaMethod): void
-proc onconnectNotify*(self: gen_qgraphicseffect_types.QGraphicsOpacityEffect, slot: QGraphicsOpacityEffectconnectNotifyProc) =
-  # TODO check subclass
-  var tmp = new QGraphicsOpacityEffectconnectNotifyProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQGraphicsOpacityEffect_override_virtual_connectNotify(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QGraphicsOpacityEffect_connectNotify(self: ptr cQGraphicsOpacityEffect, slot: int, signal: pointer): void {.exportc: "miqt_exec_callback_QGraphicsOpacityEffect_connectNotify ".} =
-  var nimfunc = cast[ptr QGraphicsOpacityEffectconnectNotifyProc](cast[pointer](slot))
+proc miqt_exec_callback_cQGraphicsOpacityEffect_connectNotify(vtbl: pointer, self: pointer, signal: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QGraphicsOpacityEffectVTable](vtbl)
+  let self = QGraphicsOpacityEffect(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  vtbl[].connectNotify(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QGraphicsOpacityEffectdisconnectNotify*(self: gen_qgraphicseffect_types.QGraphicsOpacityEffect, signal: gen_qmetaobject_types.QMetaMethod): void =
-  fQGraphicsOpacityEffect_virtualbase_disconnectNotify(self.h, signal.h)
+  fcQGraphicsOpacityEffect_virtualbase_disconnectNotify(self.h, signal.h)
 
-type QGraphicsOpacityEffectdisconnectNotifyProc* = proc(signal: gen_qmetaobject_types.QMetaMethod): void
-proc ondisconnectNotify*(self: gen_qgraphicseffect_types.QGraphicsOpacityEffect, slot: QGraphicsOpacityEffectdisconnectNotifyProc) =
-  # TODO check subclass
-  var tmp = new QGraphicsOpacityEffectdisconnectNotifyProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQGraphicsOpacityEffect_override_virtual_disconnectNotify(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QGraphicsOpacityEffect_disconnectNotify(self: ptr cQGraphicsOpacityEffect, slot: int, signal: pointer): void {.exportc: "miqt_exec_callback_QGraphicsOpacityEffect_disconnectNotify ".} =
-  var nimfunc = cast[ptr QGraphicsOpacityEffectdisconnectNotifyProc](cast[pointer](slot))
+proc miqt_exec_callback_cQGraphicsOpacityEffect_disconnectNotify(vtbl: pointer, self: pointer, signal: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QGraphicsOpacityEffectVTable](vtbl)
+  let self = QGraphicsOpacityEffect(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  vtbl[].disconnectNotify(self, slotval1)
 
+proc create*(T: type gen_qgraphicseffect_types.QGraphicsOpacityEffect,
+    vtbl: ref QGraphicsOpacityEffectVTable = nil): gen_qgraphicseffect_types.QGraphicsOpacityEffect =
+  let vtbl = if vtbl == nil: new QGraphicsOpacityEffectVTable else: vtbl
+  GC_ref(vtbl)
+  vtbl.vtbl.destructor = proc(vtbl: ptr cQGraphicsOpacityEffectVTable, _: ptr cQGraphicsOpacityEffect) {.cdecl.} =
+    let vtbl = cast[ref QGraphicsOpacityEffectVTable](vtbl)
+    GC_unref(vtbl)
+  if not isNil(vtbl.metaObject):
+    vtbl[].vtbl.metaObject = miqt_exec_callback_cQGraphicsOpacityEffect_metaObject
+  if not isNil(vtbl.metacast):
+    vtbl[].vtbl.metacast = miqt_exec_callback_cQGraphicsOpacityEffect_metacast
+  if not isNil(vtbl.metacall):
+    vtbl[].vtbl.metacall = miqt_exec_callback_cQGraphicsOpacityEffect_metacall
+  if not isNil(vtbl.draw):
+    vtbl[].vtbl.draw = miqt_exec_callback_cQGraphicsOpacityEffect_draw
+  if not isNil(vtbl.boundingRectFor):
+    vtbl[].vtbl.boundingRectFor = miqt_exec_callback_cQGraphicsOpacityEffect_boundingRectFor
+  if not isNil(vtbl.sourceChanged):
+    vtbl[].vtbl.sourceChanged = miqt_exec_callback_cQGraphicsOpacityEffect_sourceChanged
+  if not isNil(vtbl.event):
+    vtbl[].vtbl.event = miqt_exec_callback_cQGraphicsOpacityEffect_event
+  if not isNil(vtbl.eventFilter):
+    vtbl[].vtbl.eventFilter = miqt_exec_callback_cQGraphicsOpacityEffect_eventFilter
+  if not isNil(vtbl.timerEvent):
+    vtbl[].vtbl.timerEvent = miqt_exec_callback_cQGraphicsOpacityEffect_timerEvent
+  if not isNil(vtbl.childEvent):
+    vtbl[].vtbl.childEvent = miqt_exec_callback_cQGraphicsOpacityEffect_childEvent
+  if not isNil(vtbl.customEvent):
+    vtbl[].vtbl.customEvent = miqt_exec_callback_cQGraphicsOpacityEffect_customEvent
+  if not isNil(vtbl.connectNotify):
+    vtbl[].vtbl.connectNotify = miqt_exec_callback_cQGraphicsOpacityEffect_connectNotify
+  if not isNil(vtbl.disconnectNotify):
+    vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQGraphicsOpacityEffect_disconnectNotify
+  gen_qgraphicseffect_types.QGraphicsOpacityEffect(h: fcQGraphicsOpacityEffect_new(addr(vtbl[]), ))
 
-  nimfunc[](slotval1)
+proc create*(T: type gen_qgraphicseffect_types.QGraphicsOpacityEffect,
+    parent: gen_qobject_types.QObject,
+    vtbl: ref QGraphicsOpacityEffectVTable = nil): gen_qgraphicseffect_types.QGraphicsOpacityEffect =
+  let vtbl = if vtbl == nil: new QGraphicsOpacityEffectVTable else: vtbl
+  GC_ref(vtbl)
+  vtbl.vtbl.destructor = proc(vtbl: ptr cQGraphicsOpacityEffectVTable, _: ptr cQGraphicsOpacityEffect) {.cdecl.} =
+    let vtbl = cast[ref QGraphicsOpacityEffectVTable](vtbl)
+    GC_unref(vtbl)
+  if not isNil(vtbl.metaObject):
+    vtbl[].vtbl.metaObject = miqt_exec_callback_cQGraphicsOpacityEffect_metaObject
+  if not isNil(vtbl.metacast):
+    vtbl[].vtbl.metacast = miqt_exec_callback_cQGraphicsOpacityEffect_metacast
+  if not isNil(vtbl.metacall):
+    vtbl[].vtbl.metacall = miqt_exec_callback_cQGraphicsOpacityEffect_metacall
+  if not isNil(vtbl.draw):
+    vtbl[].vtbl.draw = miqt_exec_callback_cQGraphicsOpacityEffect_draw
+  if not isNil(vtbl.boundingRectFor):
+    vtbl[].vtbl.boundingRectFor = miqt_exec_callback_cQGraphicsOpacityEffect_boundingRectFor
+  if not isNil(vtbl.sourceChanged):
+    vtbl[].vtbl.sourceChanged = miqt_exec_callback_cQGraphicsOpacityEffect_sourceChanged
+  if not isNil(vtbl.event):
+    vtbl[].vtbl.event = miqt_exec_callback_cQGraphicsOpacityEffect_event
+  if not isNil(vtbl.eventFilter):
+    vtbl[].vtbl.eventFilter = miqt_exec_callback_cQGraphicsOpacityEffect_eventFilter
+  if not isNil(vtbl.timerEvent):
+    vtbl[].vtbl.timerEvent = miqt_exec_callback_cQGraphicsOpacityEffect_timerEvent
+  if not isNil(vtbl.childEvent):
+    vtbl[].vtbl.childEvent = miqt_exec_callback_cQGraphicsOpacityEffect_childEvent
+  if not isNil(vtbl.customEvent):
+    vtbl[].vtbl.customEvent = miqt_exec_callback_cQGraphicsOpacityEffect_customEvent
+  if not isNil(vtbl.connectNotify):
+    vtbl[].vtbl.connectNotify = miqt_exec_callback_cQGraphicsOpacityEffect_connectNotify
+  if not isNil(vtbl.disconnectNotify):
+    vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQGraphicsOpacityEffect_disconnectNotify
+  gen_qgraphicseffect_types.QGraphicsOpacityEffect(h: fcQGraphicsOpacityEffect_new2(addr(vtbl[]), parent.h))
+
 proc staticMetaObject*(_: type gen_qgraphicseffect_types.QGraphicsOpacityEffect): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQGraphicsOpacityEffect_staticMetaObject())
 proc delete*(self: gen_qgraphicseffect_types.QGraphicsOpacityEffect) =

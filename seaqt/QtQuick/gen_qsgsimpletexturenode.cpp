@@ -11,58 +11,50 @@
 extern "C" {
 #endif
 
-bool miqt_exec_callback_QSGSimpleTextureNode_isSubtreeBlocked(const QSGSimpleTextureNode*, intptr_t);
-void miqt_exec_callback_QSGSimpleTextureNode_preprocess(QSGSimpleTextureNode*, intptr_t);
 #ifdef __cplusplus
 } /* extern C */
 #endif
 
 class VirtualQSGSimpleTextureNode final : public QSGSimpleTextureNode {
+	struct QSGSimpleTextureNode_VTable* vtbl;
 public:
 
-	VirtualQSGSimpleTextureNode(): QSGSimpleTextureNode() {};
+	VirtualQSGSimpleTextureNode(struct QSGSimpleTextureNode_VTable* vtbl): QSGSimpleTextureNode(), vtbl(vtbl) {};
 
-	virtual ~VirtualQSGSimpleTextureNode() override = default;
-
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__isSubtreeBlocked = 0;
+	virtual ~VirtualQSGSimpleTextureNode() override { if(vtbl->destructor) vtbl->destructor(vtbl, this); }
 
 	// Subclass to allow providing a Go implementation
 	virtual bool isSubtreeBlocked() const override {
-		if (handle__isSubtreeBlocked == 0) {
+		if (vtbl->isSubtreeBlocked == 0) {
 			return QSGSimpleTextureNode::isSubtreeBlocked();
 		}
-		
 
-		bool callback_return_value = miqt_exec_callback_QSGSimpleTextureNode_isSubtreeBlocked(this, handle__isSubtreeBlocked);
+
+		bool callback_return_value = vtbl->isSubtreeBlocked(vtbl, this);
 
 		return callback_return_value;
 	}
 
 	friend bool QSGSimpleTextureNode_virtualbase_isSubtreeBlocked(const void* self);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__preprocess = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void preprocess() override {
-		if (handle__preprocess == 0) {
+		if (vtbl->preprocess == 0) {
 			QSGSimpleTextureNode::preprocess();
 			return;
 		}
-		
 
-		miqt_exec_callback_QSGSimpleTextureNode_preprocess(this, handle__preprocess);
 
-		
+		vtbl->preprocess(vtbl, this);
+
 	}
 
 	friend void QSGSimpleTextureNode_virtualbase_preprocess(void* self);
 
 };
 
-QSGSimpleTextureNode* QSGSimpleTextureNode_new() {
-	return new VirtualQSGSimpleTextureNode();
+QSGSimpleTextureNode* QSGSimpleTextureNode_new(struct QSGSimpleTextureNode_VTable* vtbl) {
+	return new VirtualQSGSimpleTextureNode(vtbl);
 }
 
 void QSGSimpleTextureNode_virtbase(QSGSimpleTextureNode* src, QSGGeometryNode** outptr_QSGGeometryNode) {
@@ -127,30 +119,10 @@ bool QSGSimpleTextureNode_ownsTexture(const QSGSimpleTextureNode* self) {
 	return self->ownsTexture();
 }
 
-bool QSGSimpleTextureNode_override_virtual_isSubtreeBlocked(void* self, intptr_t slot) {
-	VirtualQSGSimpleTextureNode* self_cast = dynamic_cast<VirtualQSGSimpleTextureNode*>( (QSGSimpleTextureNode*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__isSubtreeBlocked = slot;
-	return true;
-}
-
 bool QSGSimpleTextureNode_virtualbase_isSubtreeBlocked(const void* self) {
 
 	return ( (const VirtualQSGSimpleTextureNode*)(self) )->QSGSimpleTextureNode::isSubtreeBlocked();
 
-}
-
-bool QSGSimpleTextureNode_override_virtual_preprocess(void* self, intptr_t slot) {
-	VirtualQSGSimpleTextureNode* self_cast = dynamic_cast<VirtualQSGSimpleTextureNode*>( (QSGSimpleTextureNode*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__preprocess = slot;
-	return true;
 }
 
 void QSGSimpleTextureNode_virtualbase_preprocess(void* self) {

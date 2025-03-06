@@ -72,9 +72,6 @@ proc fcQWebEngineNotification_tr3(s: cstring, c: cstring, n: cint): struct_miqt_
 proc fcQWebEngineNotification_staticMetaObject(): pointer {.importc: "QWebEngineNotification_staticMetaObject".}
 proc fcQWebEngineNotification_delete(self: pointer) {.importc: "QWebEngineNotification_delete".}
 
-
-func init*(T: type gen_qwebenginenotification_types.QWebEngineNotification, h: ptr cQWebEngineNotification): gen_qwebenginenotification_types.QWebEngineNotification =
-  T(h: h)
 proc metaObject*(self: gen_qwebenginenotification_types.QWebEngineNotification, ): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQWebEngineNotification_metaObject(self.h))
 
@@ -139,7 +136,7 @@ proc closed*(self: gen_qwebenginenotification_types.QWebEngineNotification, ): v
   fcQWebEngineNotification_closed(self.h)
 
 type QWebEngineNotificationclosedSlot* = proc()
-proc miqt_exec_callback_QWebEngineNotification_closed(slot: int) {.exportc.} =
+proc miqt_exec_callback_cQWebEngineNotification_closed(slot: int) {.exportc: "miqt_exec_callback_QWebEngineNotification_closed".} =
   let nimfunc = cast[ptr QWebEngineNotificationclosedSlot](cast[pointer](slot))
   nimfunc[]()
 

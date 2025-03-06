@@ -120,9 +120,6 @@ proc fcQWebEngineContextMenuRequest_tr3(s: cstring, c: cstring, n: cint): struct
 proc fcQWebEngineContextMenuRequest_staticMetaObject(): pointer {.importc: "QWebEngineContextMenuRequest_staticMetaObject".}
 proc fcQWebEngineContextMenuRequest_delete(self: pointer) {.importc: "QWebEngineContextMenuRequest_delete".}
 
-
-func init*(T: type gen_qwebenginecontextmenurequest_types.QWebEngineContextMenuRequest, h: ptr cQWebEngineContextMenuRequest): gen_qwebenginecontextmenurequest_types.QWebEngineContextMenuRequest =
-  T(h: h)
 proc metaObject*(self: gen_qwebenginecontextmenurequest_types.QWebEngineContextMenuRequest, ): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQWebEngineContextMenuRequest_metaObject(self.h))
 

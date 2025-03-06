@@ -56,9 +56,6 @@ proc fcQTestQTouchEventSequence_move3(self: pointer, touchId: cint, pt: pointer,
 proc fcQTestQTouchEventSequence_release3(self: pointer, touchId: cint, pt: pointer, window: pointer): pointer {.importc: "QTest__QTouchEventSequence_release3".}
 proc fcQTestQTouchEventSequence_delete(self: pointer) {.importc: "QTest__QTouchEventSequence_delete".}
 
-
-func init*(T: type gen_qtestsupport_gui_types.QTestQTouchEventSequence, h: ptr cQTestQTouchEventSequence): gen_qtestsupport_gui_types.QTestQTouchEventSequence =
-  T(h: h)
 proc press*(self: gen_qtestsupport_gui_types.QTestQTouchEventSequence, touchId: cint, pt: gen_qpoint_types.QPoint): gen_qtestsupport_gui_types.QTestQTouchEventSequence =
   gen_qtestsupport_gui_types.QTestQTouchEventSequence(h: fcQTestQTouchEventSequence_press(self.h, touchId, pt.h))
 

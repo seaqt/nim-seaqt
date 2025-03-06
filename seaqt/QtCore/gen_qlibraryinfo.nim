@@ -70,9 +70,6 @@ proc fcQLibraryInfo_location(location: cint): struct_miqt_string {.importc: "QLi
 proc fcQLibraryInfo_platformPluginArguments(platformName: struct_miqt_string): struct_miqt_array {.importc: "QLibraryInfo_platformPluginArguments".}
 proc fcQLibraryInfo_delete(self: pointer) {.importc: "QLibraryInfo_delete".}
 
-
-func init*(T: type gen_qlibraryinfo_types.QLibraryInfo, h: ptr cQLibraryInfo): gen_qlibraryinfo_types.QLibraryInfo =
-  T(h: h)
 proc build*(_: type gen_qlibraryinfo_types.QLibraryInfo, ): cstring =
   (fcQLibraryInfo_build())
 

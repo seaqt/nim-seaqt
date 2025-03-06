@@ -121,9 +121,6 @@ export
 
 type cQVideoFrameFormat*{.exportc: "QVideoFrameFormat", incompleteStruct.} = object
 
-proc fcQVideoFrameFormat_new(): ptr cQVideoFrameFormat {.importc: "QVideoFrameFormat_new".}
-proc fcQVideoFrameFormat_new2(size: pointer, pixelFormat: cint): ptr cQVideoFrameFormat {.importc: "QVideoFrameFormat_new2".}
-proc fcQVideoFrameFormat_new3(format: pointer): ptr cQVideoFrameFormat {.importc: "QVideoFrameFormat_new3".}
 proc fcQVideoFrameFormat_swap(self: pointer, other: pointer): void {.importc: "QVideoFrameFormat_swap".}
 proc fcQVideoFrameFormat_detach(self: pointer, ): void {.importc: "QVideoFrameFormat_detach".}
 proc fcQVideoFrameFormat_operatorAssign(self: pointer, format: pointer): void {.importc: "QVideoFrameFormat_operatorAssign".}
@@ -160,19 +157,10 @@ proc fcQVideoFrameFormat_setMaxLuminance(self: pointer, lum: float32): void {.im
 proc fcQVideoFrameFormat_pixelFormatFromImageFormat(format: cint): cint {.importc: "QVideoFrameFormat_pixelFormatFromImageFormat".}
 proc fcQVideoFrameFormat_imageFormatFromPixelFormat(format: cint): cint {.importc: "QVideoFrameFormat_imageFormatFromPixelFormat".}
 proc fcQVideoFrameFormat_pixelFormatToString(pixelFormat: cint): struct_miqt_string {.importc: "QVideoFrameFormat_pixelFormatToString".}
+proc fcQVideoFrameFormat_new(): ptr cQVideoFrameFormat {.importc: "QVideoFrameFormat_new".}
+proc fcQVideoFrameFormat_new2(size: pointer, pixelFormat: cint): ptr cQVideoFrameFormat {.importc: "QVideoFrameFormat_new2".}
+proc fcQVideoFrameFormat_new3(format: pointer): ptr cQVideoFrameFormat {.importc: "QVideoFrameFormat_new3".}
 proc fcQVideoFrameFormat_delete(self: pointer) {.importc: "QVideoFrameFormat_delete".}
-
-
-func init*(T: type gen_qvideoframeformat_types.QVideoFrameFormat, h: ptr cQVideoFrameFormat): gen_qvideoframeformat_types.QVideoFrameFormat =
-  T(h: h)
-proc create*(T: type gen_qvideoframeformat_types.QVideoFrameFormat, ): gen_qvideoframeformat_types.QVideoFrameFormat =
-  gen_qvideoframeformat_types.QVideoFrameFormat.init(fcQVideoFrameFormat_new())
-
-proc create*(T: type gen_qvideoframeformat_types.QVideoFrameFormat, size: gen_qsize_types.QSize, pixelFormat: cint): gen_qvideoframeformat_types.QVideoFrameFormat =
-  gen_qvideoframeformat_types.QVideoFrameFormat.init(fcQVideoFrameFormat_new2(size.h, cint(pixelFormat)))
-
-proc create*(T: type gen_qvideoframeformat_types.QVideoFrameFormat, format: gen_qvideoframeformat_types.QVideoFrameFormat): gen_qvideoframeformat_types.QVideoFrameFormat =
-  gen_qvideoframeformat_types.QVideoFrameFormat.init(fcQVideoFrameFormat_new3(format.h))
 
 proc swap*(self: gen_qvideoframeformat_types.QVideoFrameFormat, other: gen_qvideoframeformat_types.QVideoFrameFormat): void =
   fcQVideoFrameFormat_swap(self.h, other.h)
@@ -290,6 +278,17 @@ proc pixelFormatToString*(_: type gen_qvideoframeformat_types.QVideoFrameFormat,
   let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
   c_free(v_ms.data)
   vx_ret
+
+proc create*(T: type gen_qvideoframeformat_types.QVideoFrameFormat): gen_qvideoframeformat_types.QVideoFrameFormat =
+  gen_qvideoframeformat_types.QVideoFrameFormat(h: fcQVideoFrameFormat_new())
+
+proc create*(T: type gen_qvideoframeformat_types.QVideoFrameFormat,
+    size: gen_qsize_types.QSize, pixelFormat: cint): gen_qvideoframeformat_types.QVideoFrameFormat =
+  gen_qvideoframeformat_types.QVideoFrameFormat(h: fcQVideoFrameFormat_new2(size.h, cint(pixelFormat)))
+
+proc create*(T: type gen_qvideoframeformat_types.QVideoFrameFormat,
+    format: gen_qvideoframeformat_types.QVideoFrameFormat): gen_qvideoframeformat_types.QVideoFrameFormat =
+  gen_qvideoframeformat_types.QVideoFrameFormat(h: fcQVideoFrameFormat_new3(format.h))
 
 proc delete*(self: gen_qvideoframeformat_types.QVideoFrameFormat) =
   fcQVideoFrameFormat_delete(self.h)

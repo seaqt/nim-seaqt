@@ -73,9 +73,6 @@ proc fcQArrayData_reallocateUnaligned(data: pointer, dataPointer: pointer, objec
 proc fcQArrayData_deallocate(data: pointer, objectSize: int64, alignment: int64): void {.importc: "QArrayData_deallocate".}
 proc fcQArrayData_delete(self: pointer) {.importc: "QArrayData_delete".}
 
-
-func init*(T: type gen_qarraydata_types.QArrayData, h: ptr cQArrayData): gen_qarraydata_types.QArrayData =
-  T(h: h)
 proc allocatedCapacity*(self: gen_qarraydata_types.QArrayData, ): int64 =
   fcQArrayData_allocatedCapacity(self.h)
 

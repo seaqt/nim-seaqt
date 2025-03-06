@@ -7,40 +7,36 @@
 extern "C" {
 #endif
 
-void miqt_exec_callback_QQmlPropertyValueSource_setTarget(QQmlPropertyValueSource*, intptr_t, QQmlProperty*);
 #ifdef __cplusplus
 } /* extern C */
 #endif
 
 class VirtualQQmlPropertyValueSource final : public QQmlPropertyValueSource {
+	struct QQmlPropertyValueSource_VTable* vtbl;
 public:
 
-	VirtualQQmlPropertyValueSource(): QQmlPropertyValueSource() {};
+	VirtualQQmlPropertyValueSource(struct QQmlPropertyValueSource_VTable* vtbl): QQmlPropertyValueSource(), vtbl(vtbl) {};
 
-	virtual ~VirtualQQmlPropertyValueSource() override = default;
-
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__setTarget = 0;
+	virtual ~VirtualQQmlPropertyValueSource() override { if(vtbl->destructor) vtbl->destructor(vtbl, this); }
 
 	// Subclass to allow providing a Go implementation
 	virtual void setTarget(const QQmlProperty& target) override {
-		if (handle__setTarget == 0) {
+		if (vtbl->setTarget == 0) {
 			return; // Pure virtual, there is no base we can call
 		}
-		
+
 		const QQmlProperty& target_ret = target;
 		// Cast returned reference into pointer
 		QQmlProperty* sigval1 = const_cast<QQmlProperty*>(&target_ret);
 
-		miqt_exec_callback_QQmlPropertyValueSource_setTarget(this, handle__setTarget, sigval1);
+		vtbl->setTarget(vtbl, this, sigval1);
 
-		
 	}
 
 };
 
-QQmlPropertyValueSource* QQmlPropertyValueSource_new() {
-	return new VirtualQQmlPropertyValueSource();
+QQmlPropertyValueSource* QQmlPropertyValueSource_new(struct QQmlPropertyValueSource_VTable* vtbl) {
+	return new VirtualQQmlPropertyValueSource(vtbl);
 }
 
 void QQmlPropertyValueSource_setTarget(QQmlPropertyValueSource* self, QQmlProperty* target) {
@@ -49,16 +45,6 @@ void QQmlPropertyValueSource_setTarget(QQmlPropertyValueSource* self, QQmlProper
 
 void QQmlPropertyValueSource_operatorAssign(QQmlPropertyValueSource* self, QQmlPropertyValueSource* param1) {
 	self->operator=(*param1);
-}
-
-bool QQmlPropertyValueSource_override_virtual_setTarget(void* self, intptr_t slot) {
-	VirtualQQmlPropertyValueSource* self_cast = dynamic_cast<VirtualQQmlPropertyValueSource*>( (QQmlPropertyValueSource*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__setTarget = slot;
-	return true;
 }
 
 void QQmlPropertyValueSource_delete(QQmlPropertyValueSource* self) {

@@ -52,10 +52,6 @@ export
 
 type cQFile*{.exportc: "QFile", incompleteStruct.} = object
 
-proc fcQFile_new(): ptr cQFile {.importc: "QFile_new".}
-proc fcQFile_new2(name: struct_miqt_string): ptr cQFile {.importc: "QFile_new2".}
-proc fcQFile_new3(parent: pointer): ptr cQFile {.importc: "QFile_new3".}
-proc fcQFile_new4(name: struct_miqt_string, parent: pointer): ptr cQFile {.importc: "QFile_new4".}
 proc fcQFile_metaObject(self: pointer, ): pointer {.importc: "QFile_metaObject".}
 proc fcQFile_metacast(self: pointer, param1: cstring): pointer {.importc: "QFile_metacast".}
 proc fcQFile_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QFile_metacall".}
@@ -92,85 +88,76 @@ proc fcQFile_setPermissions2(filename: struct_miqt_string, permissionSpec: cint)
 proc fcQFile_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QFile_tr2".}
 proc fcQFile_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QFile_tr3".}
 proc fcQFile_open33(self: pointer, fd: cint, ioFlags: cint, handleFlags: cint): bool {.importc: "QFile_open33".}
-proc fQFile_virtualbase_metaObject(self: pointer, ): pointer{.importc: "QFile_virtualbase_metaObject".}
-proc fcQFile_override_virtual_metaObject(self: pointer, slot: int) {.importc: "QFile_override_virtual_metaObject".}
-proc fQFile_virtualbase_metacast(self: pointer, param1: cstring): pointer{.importc: "QFile_virtualbase_metacast".}
-proc fcQFile_override_virtual_metacast(self: pointer, slot: int) {.importc: "QFile_override_virtual_metacast".}
-proc fQFile_virtualbase_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint{.importc: "QFile_virtualbase_metacall".}
-proc fcQFile_override_virtual_metacall(self: pointer, slot: int) {.importc: "QFile_override_virtual_metacall".}
-proc fQFile_virtualbase_fileName(self: pointer, ): struct_miqt_string{.importc: "QFile_virtualbase_fileName".}
-proc fcQFile_override_virtual_fileName(self: pointer, slot: int) {.importc: "QFile_override_virtual_fileName".}
-proc fQFile_virtualbase_open(self: pointer, flags: cint): bool{.importc: "QFile_virtualbase_open".}
-proc fcQFile_override_virtual_open(self: pointer, slot: int) {.importc: "QFile_override_virtual_open".}
-proc fQFile_virtualbase_size(self: pointer, ): clonglong{.importc: "QFile_virtualbase_size".}
-proc fcQFile_override_virtual_size(self: pointer, slot: int) {.importc: "QFile_override_virtual_size".}
-proc fQFile_virtualbase_resize(self: pointer, sz: clonglong): bool{.importc: "QFile_virtualbase_resize".}
-proc fcQFile_override_virtual_resize(self: pointer, slot: int) {.importc: "QFile_override_virtual_resize".}
-proc fQFile_virtualbase_permissions(self: pointer, ): cint{.importc: "QFile_virtualbase_permissions".}
-proc fcQFile_override_virtual_permissions(self: pointer, slot: int) {.importc: "QFile_override_virtual_permissions".}
-proc fQFile_virtualbase_setPermissions(self: pointer, permissionSpec: cint): bool{.importc: "QFile_virtualbase_setPermissions".}
-proc fcQFile_override_virtual_setPermissions(self: pointer, slot: int) {.importc: "QFile_override_virtual_setPermissions".}
-proc fQFile_virtualbase_close(self: pointer, ): void{.importc: "QFile_virtualbase_close".}
-proc fcQFile_override_virtual_close(self: pointer, slot: int) {.importc: "QFile_override_virtual_close".}
-proc fQFile_virtualbase_isSequential(self: pointer, ): bool{.importc: "QFile_virtualbase_isSequential".}
-proc fcQFile_override_virtual_isSequential(self: pointer, slot: int) {.importc: "QFile_override_virtual_isSequential".}
-proc fQFile_virtualbase_pos(self: pointer, ): clonglong{.importc: "QFile_virtualbase_pos".}
-proc fcQFile_override_virtual_pos(self: pointer, slot: int) {.importc: "QFile_override_virtual_pos".}
-proc fQFile_virtualbase_seek(self: pointer, offset: clonglong): bool{.importc: "QFile_virtualbase_seek".}
-proc fcQFile_override_virtual_seek(self: pointer, slot: int) {.importc: "QFile_override_virtual_seek".}
-proc fQFile_virtualbase_atEnd(self: pointer, ): bool{.importc: "QFile_virtualbase_atEnd".}
-proc fcQFile_override_virtual_atEnd(self: pointer, slot: int) {.importc: "QFile_override_virtual_atEnd".}
-proc fQFile_virtualbase_readData(self: pointer, data: cstring, maxlen: clonglong): clonglong{.importc: "QFile_virtualbase_readData".}
-proc fcQFile_override_virtual_readData(self: pointer, slot: int) {.importc: "QFile_override_virtual_readData".}
-proc fQFile_virtualbase_writeData(self: pointer, data: cstring, len: clonglong): clonglong{.importc: "QFile_virtualbase_writeData".}
-proc fcQFile_override_virtual_writeData(self: pointer, slot: int) {.importc: "QFile_override_virtual_writeData".}
-proc fQFile_virtualbase_readLineData(self: pointer, data: cstring, maxlen: clonglong): clonglong{.importc: "QFile_virtualbase_readLineData".}
-proc fcQFile_override_virtual_readLineData(self: pointer, slot: int) {.importc: "QFile_override_virtual_readLineData".}
-proc fQFile_virtualbase_reset(self: pointer, ): bool{.importc: "QFile_virtualbase_reset".}
-proc fcQFile_override_virtual_reset(self: pointer, slot: int) {.importc: "QFile_override_virtual_reset".}
-proc fQFile_virtualbase_bytesAvailable(self: pointer, ): clonglong{.importc: "QFile_virtualbase_bytesAvailable".}
-proc fcQFile_override_virtual_bytesAvailable(self: pointer, slot: int) {.importc: "QFile_override_virtual_bytesAvailable".}
-proc fQFile_virtualbase_bytesToWrite(self: pointer, ): clonglong{.importc: "QFile_virtualbase_bytesToWrite".}
-proc fcQFile_override_virtual_bytesToWrite(self: pointer, slot: int) {.importc: "QFile_override_virtual_bytesToWrite".}
-proc fQFile_virtualbase_canReadLine(self: pointer, ): bool{.importc: "QFile_virtualbase_canReadLine".}
-proc fcQFile_override_virtual_canReadLine(self: pointer, slot: int) {.importc: "QFile_override_virtual_canReadLine".}
-proc fQFile_virtualbase_waitForReadyRead(self: pointer, msecs: cint): bool{.importc: "QFile_virtualbase_waitForReadyRead".}
-proc fcQFile_override_virtual_waitForReadyRead(self: pointer, slot: int) {.importc: "QFile_override_virtual_waitForReadyRead".}
-proc fQFile_virtualbase_waitForBytesWritten(self: pointer, msecs: cint): bool{.importc: "QFile_virtualbase_waitForBytesWritten".}
-proc fcQFile_override_virtual_waitForBytesWritten(self: pointer, slot: int) {.importc: "QFile_override_virtual_waitForBytesWritten".}
-proc fQFile_virtualbase_skipData(self: pointer, maxSize: clonglong): clonglong{.importc: "QFile_virtualbase_skipData".}
-proc fcQFile_override_virtual_skipData(self: pointer, slot: int) {.importc: "QFile_override_virtual_skipData".}
-proc fQFile_virtualbase_event(self: pointer, event: pointer): bool{.importc: "QFile_virtualbase_event".}
-proc fcQFile_override_virtual_event(self: pointer, slot: int) {.importc: "QFile_override_virtual_event".}
-proc fQFile_virtualbase_eventFilter(self: pointer, watched: pointer, event: pointer): bool{.importc: "QFile_virtualbase_eventFilter".}
-proc fcQFile_override_virtual_eventFilter(self: pointer, slot: int) {.importc: "QFile_override_virtual_eventFilter".}
-proc fQFile_virtualbase_timerEvent(self: pointer, event: pointer): void{.importc: "QFile_virtualbase_timerEvent".}
-proc fcQFile_override_virtual_timerEvent(self: pointer, slot: int) {.importc: "QFile_override_virtual_timerEvent".}
-proc fQFile_virtualbase_childEvent(self: pointer, event: pointer): void{.importc: "QFile_virtualbase_childEvent".}
-proc fcQFile_override_virtual_childEvent(self: pointer, slot: int) {.importc: "QFile_override_virtual_childEvent".}
-proc fQFile_virtualbase_customEvent(self: pointer, event: pointer): void{.importc: "QFile_virtualbase_customEvent".}
-proc fcQFile_override_virtual_customEvent(self: pointer, slot: int) {.importc: "QFile_override_virtual_customEvent".}
-proc fQFile_virtualbase_connectNotify(self: pointer, signal: pointer): void{.importc: "QFile_virtualbase_connectNotify".}
-proc fcQFile_override_virtual_connectNotify(self: pointer, slot: int) {.importc: "QFile_override_virtual_connectNotify".}
-proc fQFile_virtualbase_disconnectNotify(self: pointer, signal: pointer): void{.importc: "QFile_virtualbase_disconnectNotify".}
-proc fcQFile_override_virtual_disconnectNotify(self: pointer, slot: int) {.importc: "QFile_override_virtual_disconnectNotify".}
+type cQFileVTable = object
+  destructor*: proc(vtbl: ptr cQFileVTable, self: ptr cQFile) {.cdecl, raises:[], gcsafe.}
+  metaObject*: proc(vtbl, self: pointer, ): pointer {.cdecl, raises: [], gcsafe.}
+  metacast*: proc(vtbl, self: pointer, param1: cstring): pointer {.cdecl, raises: [], gcsafe.}
+  metacall*: proc(vtbl, self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl, raises: [], gcsafe.}
+  fileName*: proc(vtbl, self: pointer, ): struct_miqt_string {.cdecl, raises: [], gcsafe.}
+  open*: proc(vtbl, self: pointer, flags: cint): bool {.cdecl, raises: [], gcsafe.}
+  size*: proc(vtbl, self: pointer, ): clonglong {.cdecl, raises: [], gcsafe.}
+  resize*: proc(vtbl, self: pointer, sz: clonglong): bool {.cdecl, raises: [], gcsafe.}
+  permissions*: proc(vtbl, self: pointer, ): cint {.cdecl, raises: [], gcsafe.}
+  setPermissions*: proc(vtbl, self: pointer, permissionSpec: cint): bool {.cdecl, raises: [], gcsafe.}
+  close*: proc(vtbl, self: pointer, ): void {.cdecl, raises: [], gcsafe.}
+  isSequential*: proc(vtbl, self: pointer, ): bool {.cdecl, raises: [], gcsafe.}
+  pos*: proc(vtbl, self: pointer, ): clonglong {.cdecl, raises: [], gcsafe.}
+  seek*: proc(vtbl, self: pointer, offset: clonglong): bool {.cdecl, raises: [], gcsafe.}
+  atEnd*: proc(vtbl, self: pointer, ): bool {.cdecl, raises: [], gcsafe.}
+  readData*: proc(vtbl, self: pointer, data: cstring, maxlen: clonglong): clonglong {.cdecl, raises: [], gcsafe.}
+  writeData*: proc(vtbl, self: pointer, data: cstring, len: clonglong): clonglong {.cdecl, raises: [], gcsafe.}
+  readLineData*: proc(vtbl, self: pointer, data: cstring, maxlen: clonglong): clonglong {.cdecl, raises: [], gcsafe.}
+  reset*: proc(vtbl, self: pointer, ): bool {.cdecl, raises: [], gcsafe.}
+  bytesAvailable*: proc(vtbl, self: pointer, ): clonglong {.cdecl, raises: [], gcsafe.}
+  bytesToWrite*: proc(vtbl, self: pointer, ): clonglong {.cdecl, raises: [], gcsafe.}
+  canReadLine*: proc(vtbl, self: pointer, ): bool {.cdecl, raises: [], gcsafe.}
+  waitForReadyRead*: proc(vtbl, self: pointer, msecs: cint): bool {.cdecl, raises: [], gcsafe.}
+  waitForBytesWritten*: proc(vtbl, self: pointer, msecs: cint): bool {.cdecl, raises: [], gcsafe.}
+  skipData*: proc(vtbl, self: pointer, maxSize: clonglong): clonglong {.cdecl, raises: [], gcsafe.}
+  event*: proc(vtbl, self: pointer, event: pointer): bool {.cdecl, raises: [], gcsafe.}
+  eventFilter*: proc(vtbl, self: pointer, watched: pointer, event: pointer): bool {.cdecl, raises: [], gcsafe.}
+  timerEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  childEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  customEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  connectNotify*: proc(vtbl, self: pointer, signal: pointer): void {.cdecl, raises: [], gcsafe.}
+  disconnectNotify*: proc(vtbl, self: pointer, signal: pointer): void {.cdecl, raises: [], gcsafe.}
+proc fcQFile_virtualbase_metaObject(self: pointer, ): pointer {.importc: "QFile_virtualbase_metaObject".}
+proc fcQFile_virtualbase_metacast(self: pointer, param1: cstring): pointer {.importc: "QFile_virtualbase_metacast".}
+proc fcQFile_virtualbase_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QFile_virtualbase_metacall".}
+proc fcQFile_virtualbase_fileName(self: pointer, ): struct_miqt_string {.importc: "QFile_virtualbase_fileName".}
+proc fcQFile_virtualbase_open(self: pointer, flags: cint): bool {.importc: "QFile_virtualbase_open".}
+proc fcQFile_virtualbase_size(self: pointer, ): clonglong {.importc: "QFile_virtualbase_size".}
+proc fcQFile_virtualbase_resize(self: pointer, sz: clonglong): bool {.importc: "QFile_virtualbase_resize".}
+proc fcQFile_virtualbase_permissions(self: pointer, ): cint {.importc: "QFile_virtualbase_permissions".}
+proc fcQFile_virtualbase_setPermissions(self: pointer, permissionSpec: cint): bool {.importc: "QFile_virtualbase_setPermissions".}
+proc fcQFile_virtualbase_close(self: pointer, ): void {.importc: "QFile_virtualbase_close".}
+proc fcQFile_virtualbase_isSequential(self: pointer, ): bool {.importc: "QFile_virtualbase_isSequential".}
+proc fcQFile_virtualbase_pos(self: pointer, ): clonglong {.importc: "QFile_virtualbase_pos".}
+proc fcQFile_virtualbase_seek(self: pointer, offset: clonglong): bool {.importc: "QFile_virtualbase_seek".}
+proc fcQFile_virtualbase_atEnd(self: pointer, ): bool {.importc: "QFile_virtualbase_atEnd".}
+proc fcQFile_virtualbase_readData(self: pointer, data: cstring, maxlen: clonglong): clonglong {.importc: "QFile_virtualbase_readData".}
+proc fcQFile_virtualbase_writeData(self: pointer, data: cstring, len: clonglong): clonglong {.importc: "QFile_virtualbase_writeData".}
+proc fcQFile_virtualbase_readLineData(self: pointer, data: cstring, maxlen: clonglong): clonglong {.importc: "QFile_virtualbase_readLineData".}
+proc fcQFile_virtualbase_reset(self: pointer, ): bool {.importc: "QFile_virtualbase_reset".}
+proc fcQFile_virtualbase_bytesAvailable(self: pointer, ): clonglong {.importc: "QFile_virtualbase_bytesAvailable".}
+proc fcQFile_virtualbase_bytesToWrite(self: pointer, ): clonglong {.importc: "QFile_virtualbase_bytesToWrite".}
+proc fcQFile_virtualbase_canReadLine(self: pointer, ): bool {.importc: "QFile_virtualbase_canReadLine".}
+proc fcQFile_virtualbase_waitForReadyRead(self: pointer, msecs: cint): bool {.importc: "QFile_virtualbase_waitForReadyRead".}
+proc fcQFile_virtualbase_waitForBytesWritten(self: pointer, msecs: cint): bool {.importc: "QFile_virtualbase_waitForBytesWritten".}
+proc fcQFile_virtualbase_skipData(self: pointer, maxSize: clonglong): clonglong {.importc: "QFile_virtualbase_skipData".}
+proc fcQFile_virtualbase_event(self: pointer, event: pointer): bool {.importc: "QFile_virtualbase_event".}
+proc fcQFile_virtualbase_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.importc: "QFile_virtualbase_eventFilter".}
+proc fcQFile_virtualbase_timerEvent(self: pointer, event: pointer): void {.importc: "QFile_virtualbase_timerEvent".}
+proc fcQFile_virtualbase_childEvent(self: pointer, event: pointer): void {.importc: "QFile_virtualbase_childEvent".}
+proc fcQFile_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QFile_virtualbase_customEvent".}
+proc fcQFile_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QFile_virtualbase_connectNotify".}
+proc fcQFile_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QFile_virtualbase_disconnectNotify".}
+proc fcQFile_new(vtbl: pointer, ): ptr cQFile {.importc: "QFile_new".}
+proc fcQFile_new2(vtbl: pointer, name: struct_miqt_string): ptr cQFile {.importc: "QFile_new2".}
+proc fcQFile_new3(vtbl: pointer, parent: pointer): ptr cQFile {.importc: "QFile_new3".}
+proc fcQFile_new4(vtbl: pointer, name: struct_miqt_string, parent: pointer): ptr cQFile {.importc: "QFile_new4".}
 proc fcQFile_staticMetaObject(): pointer {.importc: "QFile_staticMetaObject".}
 proc fcQFile_delete(self: pointer) {.importc: "QFile_delete".}
-
-
-func init*(T: type gen_qfile_types.QFile, h: ptr cQFile): gen_qfile_types.QFile =
-  T(h: h)
-proc create*(T: type gen_qfile_types.QFile, ): gen_qfile_types.QFile =
-  gen_qfile_types.QFile.init(fcQFile_new())
-
-proc create*(T: type gen_qfile_types.QFile, name: string): gen_qfile_types.QFile =
-  gen_qfile_types.QFile.init(fcQFile_new2(struct_miqt_string(data: name, len: csize_t(len(name)))))
-
-proc create*(T: type gen_qfile_types.QFile, parent: gen_qobject_types.QObject): gen_qfile_types.QFile =
-  gen_qfile_types.QFile.init(fcQFile_new3(parent.h))
-
-proc create*(T: type gen_qfile_types.QFile, name: string, parent: gen_qobject_types.QObject): gen_qfile_types.QFile =
-  gen_qfile_types.QFile.init(fcQFile_new4(struct_miqt_string(data: name, len: csize_t(len(name))), parent.h))
 
 proc metaObject*(self: gen_qfile_types.QFile, ): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQFile_metaObject(self.h))
@@ -307,574 +294,658 @@ proc tr*(_: type gen_qfile_types.QFile, s: cstring, c: cstring, n: cint): string
 proc open*(self: gen_qfile_types.QFile, fd: cint, ioFlags: cint, handleFlags: cint): bool =
   fcQFile_open33(self.h, fd, cint(ioFlags), cint(handleFlags))
 
+type QFilemetaObjectProc* = proc(self: QFile): gen_qobjectdefs_types.QMetaObject {.raises: [], gcsafe.}
+type QFilemetacastProc* = proc(self: QFile, param1: cstring): pointer {.raises: [], gcsafe.}
+type QFilemetacallProc* = proc(self: QFile, param1: cint, param2: cint, param3: pointer): cint {.raises: [], gcsafe.}
+type QFilefileNameProc* = proc(self: QFile): string {.raises: [], gcsafe.}
+type QFileopenProc* = proc(self: QFile, flags: cint): bool {.raises: [], gcsafe.}
+type QFilesizeProc* = proc(self: QFile): clonglong {.raises: [], gcsafe.}
+type QFileresizeProc* = proc(self: QFile, sz: clonglong): bool {.raises: [], gcsafe.}
+type QFilepermissionsProc* = proc(self: QFile): cint {.raises: [], gcsafe.}
+type QFilesetPermissionsProc* = proc(self: QFile, permissionSpec: cint): bool {.raises: [], gcsafe.}
+type QFilecloseProc* = proc(self: QFile): void {.raises: [], gcsafe.}
+type QFileisSequentialProc* = proc(self: QFile): bool {.raises: [], gcsafe.}
+type QFileposProc* = proc(self: QFile): clonglong {.raises: [], gcsafe.}
+type QFileseekProc* = proc(self: QFile, offset: clonglong): bool {.raises: [], gcsafe.}
+type QFileatEndProc* = proc(self: QFile): bool {.raises: [], gcsafe.}
+type QFilereadDataProc* = proc(self: QFile, data: cstring, maxlen: clonglong): clonglong {.raises: [], gcsafe.}
+type QFilewriteDataProc* = proc(self: QFile, data: cstring, len: clonglong): clonglong {.raises: [], gcsafe.}
+type QFilereadLineDataProc* = proc(self: QFile, data: cstring, maxlen: clonglong): clonglong {.raises: [], gcsafe.}
+type QFileresetProc* = proc(self: QFile): bool {.raises: [], gcsafe.}
+type QFilebytesAvailableProc* = proc(self: QFile): clonglong {.raises: [], gcsafe.}
+type QFilebytesToWriteProc* = proc(self: QFile): clonglong {.raises: [], gcsafe.}
+type QFilecanReadLineProc* = proc(self: QFile): bool {.raises: [], gcsafe.}
+type QFilewaitForReadyReadProc* = proc(self: QFile, msecs: cint): bool {.raises: [], gcsafe.}
+type QFilewaitForBytesWrittenProc* = proc(self: QFile, msecs: cint): bool {.raises: [], gcsafe.}
+type QFileskipDataProc* = proc(self: QFile, maxSize: clonglong): clonglong {.raises: [], gcsafe.}
+type QFileeventProc* = proc(self: QFile, event: gen_qcoreevent_types.QEvent): bool {.raises: [], gcsafe.}
+type QFileeventFilterProc* = proc(self: QFile, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.raises: [], gcsafe.}
+type QFiletimerEventProc* = proc(self: QFile, event: gen_qcoreevent_types.QTimerEvent): void {.raises: [], gcsafe.}
+type QFilechildEventProc* = proc(self: QFile, event: gen_qcoreevent_types.QChildEvent): void {.raises: [], gcsafe.}
+type QFilecustomEventProc* = proc(self: QFile, event: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
+type QFileconnectNotifyProc* = proc(self: QFile, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
+type QFiledisconnectNotifyProc* = proc(self: QFile, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
+type QFileVTable* = object
+  vtbl: cQFileVTable
+  metaObject*: QFilemetaObjectProc
+  metacast*: QFilemetacastProc
+  metacall*: QFilemetacallProc
+  fileName*: QFilefileNameProc
+  open*: QFileopenProc
+  size*: QFilesizeProc
+  resize*: QFileresizeProc
+  permissions*: QFilepermissionsProc
+  setPermissions*: QFilesetPermissionsProc
+  close*: QFilecloseProc
+  isSequential*: QFileisSequentialProc
+  pos*: QFileposProc
+  seek*: QFileseekProc
+  atEnd*: QFileatEndProc
+  readData*: QFilereadDataProc
+  writeData*: QFilewriteDataProc
+  readLineData*: QFilereadLineDataProc
+  reset*: QFileresetProc
+  bytesAvailable*: QFilebytesAvailableProc
+  bytesToWrite*: QFilebytesToWriteProc
+  canReadLine*: QFilecanReadLineProc
+  waitForReadyRead*: QFilewaitForReadyReadProc
+  waitForBytesWritten*: QFilewaitForBytesWrittenProc
+  skipData*: QFileskipDataProc
+  event*: QFileeventProc
+  eventFilter*: QFileeventFilterProc
+  timerEvent*: QFiletimerEventProc
+  childEvent*: QFilechildEventProc
+  customEvent*: QFilecustomEventProc
+  connectNotify*: QFileconnectNotifyProc
+  disconnectNotify*: QFiledisconnectNotifyProc
 proc QFilemetaObject*(self: gen_qfile_types.QFile, ): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fQFile_virtualbase_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQFile_virtualbase_metaObject(self.h))
 
-type QFilemetaObjectProc* = proc(): gen_qobjectdefs_types.QMetaObject
-proc onmetaObject*(self: gen_qfile_types.QFile, slot: QFilemetaObjectProc) =
-  # TODO check subclass
-  var tmp = new QFilemetaObjectProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQFile_override_virtual_metaObject(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QFile_metaObject(self: ptr cQFile, slot: int): pointer {.exportc: "miqt_exec_callback_QFile_metaObject ".} =
-  var nimfunc = cast[ptr QFilemetaObjectProc](cast[pointer](slot))
-
-  let virtualReturn = nimfunc[]( )
-
+proc miqt_exec_callback_cQFile_metaObject(vtbl: pointer, self: pointer): pointer {.cdecl.} =
+  let vtbl = cast[ptr QFileVTable](vtbl)
+  let self = QFile(h: self)
+  var virtualReturn = vtbl[].metaObject(self)
   virtualReturn.h
+
 proc QFilemetacast*(self: gen_qfile_types.QFile, param1: cstring): pointer =
-  fQFile_virtualbase_metacast(self.h, param1)
+  fcQFile_virtualbase_metacast(self.h, param1)
 
-type QFilemetacastProc* = proc(param1: cstring): pointer
-proc onmetacast*(self: gen_qfile_types.QFile, slot: QFilemetacastProc) =
-  # TODO check subclass
-  var tmp = new QFilemetacastProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQFile_override_virtual_metacast(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QFile_metacast(self: ptr cQFile, slot: int, param1: cstring): pointer {.exportc: "miqt_exec_callback_QFile_metacast ".} =
-  var nimfunc = cast[ptr QFilemetacastProc](cast[pointer](slot))
+proc miqt_exec_callback_cQFile_metacast(vtbl: pointer, self: pointer, param1: cstring): pointer {.cdecl.} =
+  let vtbl = cast[ptr QFileVTable](vtbl)
+  let self = QFile(h: self)
   let slotval1 = (param1)
-
-
-  let virtualReturn = nimfunc[](slotval1 )
-
+  var virtualReturn = vtbl[].metacast(self, slotval1)
   virtualReturn
+
 proc QFilemetacall*(self: gen_qfile_types.QFile, param1: cint, param2: cint, param3: pointer): cint =
-  fQFile_virtualbase_metacall(self.h, cint(param1), param2, param3)
+  fcQFile_virtualbase_metacall(self.h, cint(param1), param2, param3)
 
-type QFilemetacallProc* = proc(param1: cint, param2: cint, param3: pointer): cint
-proc onmetacall*(self: gen_qfile_types.QFile, slot: QFilemetacallProc) =
-  # TODO check subclass
-  var tmp = new QFilemetacallProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQFile_override_virtual_metacall(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QFile_metacall(self: ptr cQFile, slot: int, param1: cint, param2: cint, param3: pointer): cint {.exportc: "miqt_exec_callback_QFile_metacall ".} =
-  var nimfunc = cast[ptr QFilemetacallProc](cast[pointer](slot))
+proc miqt_exec_callback_cQFile_metacall(vtbl: pointer, self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
+  let vtbl = cast[ptr QFileVTable](vtbl)
+  let self = QFile(h: self)
   let slotval1 = cint(param1)
-
   let slotval2 = param2
-
   let slotval3 = param3
-
-
-  let virtualReturn = nimfunc[](slotval1, slotval2, slotval3 )
-
+  var virtualReturn = vtbl[].metacall(self, slotval1, slotval2, slotval3)
   virtualReturn
+
 proc QFilefileName*(self: gen_qfile_types.QFile, ): string =
-  let v_ms = fQFile_virtualbase_fileName(self.h)
+  let v_ms = fcQFile_virtualbase_fileName(self.h)
   let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
   c_free(v_ms.data)
   vx_ret
 
-type QFilefileNameProc* = proc(): string
-proc onfileName*(self: gen_qfile_types.QFile, slot: QFilefileNameProc) =
-  # TODO check subclass
-  var tmp = new QFilefileNameProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQFile_override_virtual_fileName(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QFile_fileName(self: ptr cQFile, slot: int): struct_miqt_string {.exportc: "miqt_exec_callback_QFile_fileName ".} =
-  var nimfunc = cast[ptr QFilefileNameProc](cast[pointer](slot))
-
-  let virtualReturn = nimfunc[]( )
-
+proc miqt_exec_callback_cQFile_fileName(vtbl: pointer, self: pointer): struct_miqt_string {.cdecl.} =
+  let vtbl = cast[ptr QFileVTable](vtbl)
+  let self = QFile(h: self)
+  var virtualReturn = vtbl[].fileName(self)
   struct_miqt_string(data: virtualReturn, len: csize_t(len(virtualReturn)))
+
 proc QFileopen*(self: gen_qfile_types.QFile, flags: cint): bool =
-  fQFile_virtualbase_open(self.h, cint(flags))
+  fcQFile_virtualbase_open(self.h, cint(flags))
 
-type QFileopenProc* = proc(flags: cint): bool
-proc onopen*(self: gen_qfile_types.QFile, slot: QFileopenProc) =
-  # TODO check subclass
-  var tmp = new QFileopenProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQFile_override_virtual_open(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QFile_open(self: ptr cQFile, slot: int, flags: cint): bool {.exportc: "miqt_exec_callback_QFile_open ".} =
-  var nimfunc = cast[ptr QFileopenProc](cast[pointer](slot))
+proc miqt_exec_callback_cQFile_open(vtbl: pointer, self: pointer, flags: cint): bool {.cdecl.} =
+  let vtbl = cast[ptr QFileVTable](vtbl)
+  let self = QFile(h: self)
   let slotval1 = cint(flags)
-
-
-  let virtualReturn = nimfunc[](slotval1 )
-
+  var virtualReturn = vtbl[].open(self, slotval1)
   virtualReturn
+
 proc QFilesize*(self: gen_qfile_types.QFile, ): clonglong =
-  fQFile_virtualbase_size(self.h)
+  fcQFile_virtualbase_size(self.h)
 
-type QFilesizeProc* = proc(): clonglong
-proc onsize*(self: gen_qfile_types.QFile, slot: QFilesizeProc) =
-  # TODO check subclass
-  var tmp = new QFilesizeProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQFile_override_virtual_size(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QFile_size(self: ptr cQFile, slot: int): clonglong {.exportc: "miqt_exec_callback_QFile_size ".} =
-  var nimfunc = cast[ptr QFilesizeProc](cast[pointer](slot))
-
-  let virtualReturn = nimfunc[]( )
-
+proc miqt_exec_callback_cQFile_size(vtbl: pointer, self: pointer): clonglong {.cdecl.} =
+  let vtbl = cast[ptr QFileVTable](vtbl)
+  let self = QFile(h: self)
+  var virtualReturn = vtbl[].size(self)
   virtualReturn
+
 proc QFileresize*(self: gen_qfile_types.QFile, sz: clonglong): bool =
-  fQFile_virtualbase_resize(self.h, sz)
+  fcQFile_virtualbase_resize(self.h, sz)
 
-type QFileresizeProc* = proc(sz: clonglong): bool
-proc onresize*(self: gen_qfile_types.QFile, slot: QFileresizeProc) =
-  # TODO check subclass
-  var tmp = new QFileresizeProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQFile_override_virtual_resize(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QFile_resize(self: ptr cQFile, slot: int, sz: clonglong): bool {.exportc: "miqt_exec_callback_QFile_resize ".} =
-  var nimfunc = cast[ptr QFileresizeProc](cast[pointer](slot))
+proc miqt_exec_callback_cQFile_resize(vtbl: pointer, self: pointer, sz: clonglong): bool {.cdecl.} =
+  let vtbl = cast[ptr QFileVTable](vtbl)
+  let self = QFile(h: self)
   let slotval1 = sz
-
-
-  let virtualReturn = nimfunc[](slotval1 )
-
+  var virtualReturn = vtbl[].resize(self, slotval1)
   virtualReturn
+
 proc QFilepermissions*(self: gen_qfile_types.QFile, ): cint =
-  cint(fQFile_virtualbase_permissions(self.h))
+  cint(fcQFile_virtualbase_permissions(self.h))
 
-type QFilepermissionsProc* = proc(): cint
-proc onpermissions*(self: gen_qfile_types.QFile, slot: QFilepermissionsProc) =
-  # TODO check subclass
-  var tmp = new QFilepermissionsProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQFile_override_virtual_permissions(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QFile_permissions(self: ptr cQFile, slot: int): cint {.exportc: "miqt_exec_callback_QFile_permissions ".} =
-  var nimfunc = cast[ptr QFilepermissionsProc](cast[pointer](slot))
-
-  let virtualReturn = nimfunc[]( )
-
+proc miqt_exec_callback_cQFile_permissions(vtbl: pointer, self: pointer): cint {.cdecl.} =
+  let vtbl = cast[ptr QFileVTable](vtbl)
+  let self = QFile(h: self)
+  var virtualReturn = vtbl[].permissions(self)
   cint(virtualReturn)
+
 proc QFilesetPermissions*(self: gen_qfile_types.QFile, permissionSpec: cint): bool =
-  fQFile_virtualbase_setPermissions(self.h, cint(permissionSpec))
+  fcQFile_virtualbase_setPermissions(self.h, cint(permissionSpec))
 
-type QFilesetPermissionsProc* = proc(permissionSpec: cint): bool
-proc onsetPermissions*(self: gen_qfile_types.QFile, slot: QFilesetPermissionsProc) =
-  # TODO check subclass
-  var tmp = new QFilesetPermissionsProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQFile_override_virtual_setPermissions(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QFile_setPermissions(self: ptr cQFile, slot: int, permissionSpec: cint): bool {.exportc: "miqt_exec_callback_QFile_setPermissions ".} =
-  var nimfunc = cast[ptr QFilesetPermissionsProc](cast[pointer](slot))
+proc miqt_exec_callback_cQFile_setPermissions(vtbl: pointer, self: pointer, permissionSpec: cint): bool {.cdecl.} =
+  let vtbl = cast[ptr QFileVTable](vtbl)
+  let self = QFile(h: self)
   let slotval1 = cint(permissionSpec)
-
-
-  let virtualReturn = nimfunc[](slotval1 )
-
+  var virtualReturn = vtbl[].setPermissions(self, slotval1)
   virtualReturn
+
 proc QFileclose*(self: gen_qfile_types.QFile, ): void =
-  fQFile_virtualbase_close(self.h)
+  fcQFile_virtualbase_close(self.h)
 
-type QFilecloseProc* = proc(): void
-proc onclose*(self: gen_qfile_types.QFile, slot: QFilecloseProc) =
-  # TODO check subclass
-  var tmp = new QFilecloseProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQFile_override_virtual_close(self.h, cast[int](addr tmp[]))
+proc miqt_exec_callback_cQFile_close(vtbl: pointer, self: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QFileVTable](vtbl)
+  let self = QFile(h: self)
+  vtbl[].close(self)
 
-proc miqt_exec_callback_QFile_close(self: ptr cQFile, slot: int): void {.exportc: "miqt_exec_callback_QFile_close ".} =
-  var nimfunc = cast[ptr QFilecloseProc](cast[pointer](slot))
-
-  nimfunc[]()
 proc QFileisSequential*(self: gen_qfile_types.QFile, ): bool =
-  fQFile_virtualbase_isSequential(self.h)
+  fcQFile_virtualbase_isSequential(self.h)
 
-type QFileisSequentialProc* = proc(): bool
-proc onisSequential*(self: gen_qfile_types.QFile, slot: QFileisSequentialProc) =
-  # TODO check subclass
-  var tmp = new QFileisSequentialProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQFile_override_virtual_isSequential(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QFile_isSequential(self: ptr cQFile, slot: int): bool {.exportc: "miqt_exec_callback_QFile_isSequential ".} =
-  var nimfunc = cast[ptr QFileisSequentialProc](cast[pointer](slot))
-
-  let virtualReturn = nimfunc[]( )
-
+proc miqt_exec_callback_cQFile_isSequential(vtbl: pointer, self: pointer): bool {.cdecl.} =
+  let vtbl = cast[ptr QFileVTable](vtbl)
+  let self = QFile(h: self)
+  var virtualReturn = vtbl[].isSequential(self)
   virtualReturn
+
 proc QFilepos*(self: gen_qfile_types.QFile, ): clonglong =
-  fQFile_virtualbase_pos(self.h)
+  fcQFile_virtualbase_pos(self.h)
 
-type QFileposProc* = proc(): clonglong
-proc onpos*(self: gen_qfile_types.QFile, slot: QFileposProc) =
-  # TODO check subclass
-  var tmp = new QFileposProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQFile_override_virtual_pos(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QFile_pos(self: ptr cQFile, slot: int): clonglong {.exportc: "miqt_exec_callback_QFile_pos ".} =
-  var nimfunc = cast[ptr QFileposProc](cast[pointer](slot))
-
-  let virtualReturn = nimfunc[]( )
-
+proc miqt_exec_callback_cQFile_pos(vtbl: pointer, self: pointer): clonglong {.cdecl.} =
+  let vtbl = cast[ptr QFileVTable](vtbl)
+  let self = QFile(h: self)
+  var virtualReturn = vtbl[].pos(self)
   virtualReturn
+
 proc QFileseek*(self: gen_qfile_types.QFile, offset: clonglong): bool =
-  fQFile_virtualbase_seek(self.h, offset)
+  fcQFile_virtualbase_seek(self.h, offset)
 
-type QFileseekProc* = proc(offset: clonglong): bool
-proc onseek*(self: gen_qfile_types.QFile, slot: QFileseekProc) =
-  # TODO check subclass
-  var tmp = new QFileseekProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQFile_override_virtual_seek(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QFile_seek(self: ptr cQFile, slot: int, offset: clonglong): bool {.exportc: "miqt_exec_callback_QFile_seek ".} =
-  var nimfunc = cast[ptr QFileseekProc](cast[pointer](slot))
+proc miqt_exec_callback_cQFile_seek(vtbl: pointer, self: pointer, offset: clonglong): bool {.cdecl.} =
+  let vtbl = cast[ptr QFileVTable](vtbl)
+  let self = QFile(h: self)
   let slotval1 = offset
-
-
-  let virtualReturn = nimfunc[](slotval1 )
-
+  var virtualReturn = vtbl[].seek(self, slotval1)
   virtualReturn
+
 proc QFileatEnd*(self: gen_qfile_types.QFile, ): bool =
-  fQFile_virtualbase_atEnd(self.h)
+  fcQFile_virtualbase_atEnd(self.h)
 
-type QFileatEndProc* = proc(): bool
-proc onatEnd*(self: gen_qfile_types.QFile, slot: QFileatEndProc) =
-  # TODO check subclass
-  var tmp = new QFileatEndProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQFile_override_virtual_atEnd(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QFile_atEnd(self: ptr cQFile, slot: int): bool {.exportc: "miqt_exec_callback_QFile_atEnd ".} =
-  var nimfunc = cast[ptr QFileatEndProc](cast[pointer](slot))
-
-  let virtualReturn = nimfunc[]( )
-
+proc miqt_exec_callback_cQFile_atEnd(vtbl: pointer, self: pointer): bool {.cdecl.} =
+  let vtbl = cast[ptr QFileVTable](vtbl)
+  let self = QFile(h: self)
+  var virtualReturn = vtbl[].atEnd(self)
   virtualReturn
+
 proc QFilereadData*(self: gen_qfile_types.QFile, data: cstring, maxlen: clonglong): clonglong =
-  fQFile_virtualbase_readData(self.h, data, maxlen)
+  fcQFile_virtualbase_readData(self.h, data, maxlen)
 
-type QFilereadDataProc* = proc(data: cstring, maxlen: clonglong): clonglong
-proc onreadData*(self: gen_qfile_types.QFile, slot: QFilereadDataProc) =
-  # TODO check subclass
-  var tmp = new QFilereadDataProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQFile_override_virtual_readData(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QFile_readData(self: ptr cQFile, slot: int, data: cstring, maxlen: clonglong): clonglong {.exportc: "miqt_exec_callback_QFile_readData ".} =
-  var nimfunc = cast[ptr QFilereadDataProc](cast[pointer](slot))
+proc miqt_exec_callback_cQFile_readData(vtbl: pointer, self: pointer, data: cstring, maxlen: clonglong): clonglong {.cdecl.} =
+  let vtbl = cast[ptr QFileVTable](vtbl)
+  let self = QFile(h: self)
   let slotval1 = (data)
-
   let slotval2 = maxlen
-
-
-  let virtualReturn = nimfunc[](slotval1, slotval2 )
-
+  var virtualReturn = vtbl[].readData(self, slotval1, slotval2)
   virtualReturn
+
 proc QFilewriteData*(self: gen_qfile_types.QFile, data: cstring, len: clonglong): clonglong =
-  fQFile_virtualbase_writeData(self.h, data, len)
+  fcQFile_virtualbase_writeData(self.h, data, len)
 
-type QFilewriteDataProc* = proc(data: cstring, len: clonglong): clonglong
-proc onwriteData*(self: gen_qfile_types.QFile, slot: QFilewriteDataProc) =
-  # TODO check subclass
-  var tmp = new QFilewriteDataProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQFile_override_virtual_writeData(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QFile_writeData(self: ptr cQFile, slot: int, data: cstring, len: clonglong): clonglong {.exportc: "miqt_exec_callback_QFile_writeData ".} =
-  var nimfunc = cast[ptr QFilewriteDataProc](cast[pointer](slot))
+proc miqt_exec_callback_cQFile_writeData(vtbl: pointer, self: pointer, data: cstring, len: clonglong): clonglong {.cdecl.} =
+  let vtbl = cast[ptr QFileVTable](vtbl)
+  let self = QFile(h: self)
   let slotval1 = (data)
-
   let slotval2 = len
-
-
-  let virtualReturn = nimfunc[](slotval1, slotval2 )
-
+  var virtualReturn = vtbl[].writeData(self, slotval1, slotval2)
   virtualReturn
+
 proc QFilereadLineData*(self: gen_qfile_types.QFile, data: cstring, maxlen: clonglong): clonglong =
-  fQFile_virtualbase_readLineData(self.h, data, maxlen)
+  fcQFile_virtualbase_readLineData(self.h, data, maxlen)
 
-type QFilereadLineDataProc* = proc(data: cstring, maxlen: clonglong): clonglong
-proc onreadLineData*(self: gen_qfile_types.QFile, slot: QFilereadLineDataProc) =
-  # TODO check subclass
-  var tmp = new QFilereadLineDataProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQFile_override_virtual_readLineData(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QFile_readLineData(self: ptr cQFile, slot: int, data: cstring, maxlen: clonglong): clonglong {.exportc: "miqt_exec_callback_QFile_readLineData ".} =
-  var nimfunc = cast[ptr QFilereadLineDataProc](cast[pointer](slot))
+proc miqt_exec_callback_cQFile_readLineData(vtbl: pointer, self: pointer, data: cstring, maxlen: clonglong): clonglong {.cdecl.} =
+  let vtbl = cast[ptr QFileVTable](vtbl)
+  let self = QFile(h: self)
   let slotval1 = (data)
-
   let slotval2 = maxlen
-
-
-  let virtualReturn = nimfunc[](slotval1, slotval2 )
-
+  var virtualReturn = vtbl[].readLineData(self, slotval1, slotval2)
   virtualReturn
+
 proc QFilereset*(self: gen_qfile_types.QFile, ): bool =
-  fQFile_virtualbase_reset(self.h)
+  fcQFile_virtualbase_reset(self.h)
 
-type QFileresetProc* = proc(): bool
-proc onreset*(self: gen_qfile_types.QFile, slot: QFileresetProc) =
-  # TODO check subclass
-  var tmp = new QFileresetProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQFile_override_virtual_reset(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QFile_reset(self: ptr cQFile, slot: int): bool {.exportc: "miqt_exec_callback_QFile_reset ".} =
-  var nimfunc = cast[ptr QFileresetProc](cast[pointer](slot))
-
-  let virtualReturn = nimfunc[]( )
-
+proc miqt_exec_callback_cQFile_reset(vtbl: pointer, self: pointer): bool {.cdecl.} =
+  let vtbl = cast[ptr QFileVTable](vtbl)
+  let self = QFile(h: self)
+  var virtualReturn = vtbl[].reset(self)
   virtualReturn
+
 proc QFilebytesAvailable*(self: gen_qfile_types.QFile, ): clonglong =
-  fQFile_virtualbase_bytesAvailable(self.h)
+  fcQFile_virtualbase_bytesAvailable(self.h)
 
-type QFilebytesAvailableProc* = proc(): clonglong
-proc onbytesAvailable*(self: gen_qfile_types.QFile, slot: QFilebytesAvailableProc) =
-  # TODO check subclass
-  var tmp = new QFilebytesAvailableProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQFile_override_virtual_bytesAvailable(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QFile_bytesAvailable(self: ptr cQFile, slot: int): clonglong {.exportc: "miqt_exec_callback_QFile_bytesAvailable ".} =
-  var nimfunc = cast[ptr QFilebytesAvailableProc](cast[pointer](slot))
-
-  let virtualReturn = nimfunc[]( )
-
+proc miqt_exec_callback_cQFile_bytesAvailable(vtbl: pointer, self: pointer): clonglong {.cdecl.} =
+  let vtbl = cast[ptr QFileVTable](vtbl)
+  let self = QFile(h: self)
+  var virtualReturn = vtbl[].bytesAvailable(self)
   virtualReturn
+
 proc QFilebytesToWrite*(self: gen_qfile_types.QFile, ): clonglong =
-  fQFile_virtualbase_bytesToWrite(self.h)
+  fcQFile_virtualbase_bytesToWrite(self.h)
 
-type QFilebytesToWriteProc* = proc(): clonglong
-proc onbytesToWrite*(self: gen_qfile_types.QFile, slot: QFilebytesToWriteProc) =
-  # TODO check subclass
-  var tmp = new QFilebytesToWriteProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQFile_override_virtual_bytesToWrite(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QFile_bytesToWrite(self: ptr cQFile, slot: int): clonglong {.exportc: "miqt_exec_callback_QFile_bytesToWrite ".} =
-  var nimfunc = cast[ptr QFilebytesToWriteProc](cast[pointer](slot))
-
-  let virtualReturn = nimfunc[]( )
-
+proc miqt_exec_callback_cQFile_bytesToWrite(vtbl: pointer, self: pointer): clonglong {.cdecl.} =
+  let vtbl = cast[ptr QFileVTable](vtbl)
+  let self = QFile(h: self)
+  var virtualReturn = vtbl[].bytesToWrite(self)
   virtualReturn
+
 proc QFilecanReadLine*(self: gen_qfile_types.QFile, ): bool =
-  fQFile_virtualbase_canReadLine(self.h)
+  fcQFile_virtualbase_canReadLine(self.h)
 
-type QFilecanReadLineProc* = proc(): bool
-proc oncanReadLine*(self: gen_qfile_types.QFile, slot: QFilecanReadLineProc) =
-  # TODO check subclass
-  var tmp = new QFilecanReadLineProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQFile_override_virtual_canReadLine(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QFile_canReadLine(self: ptr cQFile, slot: int): bool {.exportc: "miqt_exec_callback_QFile_canReadLine ".} =
-  var nimfunc = cast[ptr QFilecanReadLineProc](cast[pointer](slot))
-
-  let virtualReturn = nimfunc[]( )
-
+proc miqt_exec_callback_cQFile_canReadLine(vtbl: pointer, self: pointer): bool {.cdecl.} =
+  let vtbl = cast[ptr QFileVTable](vtbl)
+  let self = QFile(h: self)
+  var virtualReturn = vtbl[].canReadLine(self)
   virtualReturn
+
 proc QFilewaitForReadyRead*(self: gen_qfile_types.QFile, msecs: cint): bool =
-  fQFile_virtualbase_waitForReadyRead(self.h, msecs)
+  fcQFile_virtualbase_waitForReadyRead(self.h, msecs)
 
-type QFilewaitForReadyReadProc* = proc(msecs: cint): bool
-proc onwaitForReadyRead*(self: gen_qfile_types.QFile, slot: QFilewaitForReadyReadProc) =
-  # TODO check subclass
-  var tmp = new QFilewaitForReadyReadProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQFile_override_virtual_waitForReadyRead(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QFile_waitForReadyRead(self: ptr cQFile, slot: int, msecs: cint): bool {.exportc: "miqt_exec_callback_QFile_waitForReadyRead ".} =
-  var nimfunc = cast[ptr QFilewaitForReadyReadProc](cast[pointer](slot))
+proc miqt_exec_callback_cQFile_waitForReadyRead(vtbl: pointer, self: pointer, msecs: cint): bool {.cdecl.} =
+  let vtbl = cast[ptr QFileVTable](vtbl)
+  let self = QFile(h: self)
   let slotval1 = msecs
-
-
-  let virtualReturn = nimfunc[](slotval1 )
-
+  var virtualReturn = vtbl[].waitForReadyRead(self, slotval1)
   virtualReturn
+
 proc QFilewaitForBytesWritten*(self: gen_qfile_types.QFile, msecs: cint): bool =
-  fQFile_virtualbase_waitForBytesWritten(self.h, msecs)
+  fcQFile_virtualbase_waitForBytesWritten(self.h, msecs)
 
-type QFilewaitForBytesWrittenProc* = proc(msecs: cint): bool
-proc onwaitForBytesWritten*(self: gen_qfile_types.QFile, slot: QFilewaitForBytesWrittenProc) =
-  # TODO check subclass
-  var tmp = new QFilewaitForBytesWrittenProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQFile_override_virtual_waitForBytesWritten(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QFile_waitForBytesWritten(self: ptr cQFile, slot: int, msecs: cint): bool {.exportc: "miqt_exec_callback_QFile_waitForBytesWritten ".} =
-  var nimfunc = cast[ptr QFilewaitForBytesWrittenProc](cast[pointer](slot))
+proc miqt_exec_callback_cQFile_waitForBytesWritten(vtbl: pointer, self: pointer, msecs: cint): bool {.cdecl.} =
+  let vtbl = cast[ptr QFileVTable](vtbl)
+  let self = QFile(h: self)
   let slotval1 = msecs
-
-
-  let virtualReturn = nimfunc[](slotval1 )
-
+  var virtualReturn = vtbl[].waitForBytesWritten(self, slotval1)
   virtualReturn
+
 proc QFileskipData*(self: gen_qfile_types.QFile, maxSize: clonglong): clonglong =
-  fQFile_virtualbase_skipData(self.h, maxSize)
+  fcQFile_virtualbase_skipData(self.h, maxSize)
 
-type QFileskipDataProc* = proc(maxSize: clonglong): clonglong
-proc onskipData*(self: gen_qfile_types.QFile, slot: QFileskipDataProc) =
-  # TODO check subclass
-  var tmp = new QFileskipDataProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQFile_override_virtual_skipData(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QFile_skipData(self: ptr cQFile, slot: int, maxSize: clonglong): clonglong {.exportc: "miqt_exec_callback_QFile_skipData ".} =
-  var nimfunc = cast[ptr QFileskipDataProc](cast[pointer](slot))
+proc miqt_exec_callback_cQFile_skipData(vtbl: pointer, self: pointer, maxSize: clonglong): clonglong {.cdecl.} =
+  let vtbl = cast[ptr QFileVTable](vtbl)
+  let self = QFile(h: self)
   let slotval1 = maxSize
-
-
-  let virtualReturn = nimfunc[](slotval1 )
-
+  var virtualReturn = vtbl[].skipData(self, slotval1)
   virtualReturn
+
 proc QFileevent*(self: gen_qfile_types.QFile, event: gen_qcoreevent_types.QEvent): bool =
-  fQFile_virtualbase_event(self.h, event.h)
+  fcQFile_virtualbase_event(self.h, event.h)
 
-type QFileeventProc* = proc(event: gen_qcoreevent_types.QEvent): bool
-proc onevent*(self: gen_qfile_types.QFile, slot: QFileeventProc) =
-  # TODO check subclass
-  var tmp = new QFileeventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQFile_override_virtual_event(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QFile_event(self: ptr cQFile, slot: int, event: pointer): bool {.exportc: "miqt_exec_callback_QFile_event ".} =
-  var nimfunc = cast[ptr QFileeventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQFile_event(vtbl: pointer, self: pointer, event: pointer): bool {.cdecl.} =
+  let vtbl = cast[ptr QFileVTable](vtbl)
+  let self = QFile(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event)
-
-
-  let virtualReturn = nimfunc[](slotval1 )
-
+  var virtualReturn = vtbl[].event(self, slotval1)
   virtualReturn
+
 proc QFileeventFilter*(self: gen_qfile_types.QFile, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool =
-  fQFile_virtualbase_eventFilter(self.h, watched.h, event.h)
+  fcQFile_virtualbase_eventFilter(self.h, watched.h, event.h)
 
-type QFileeventFilterProc* = proc(watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool
-proc oneventFilter*(self: gen_qfile_types.QFile, slot: QFileeventFilterProc) =
-  # TODO check subclass
-  var tmp = new QFileeventFilterProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQFile_override_virtual_eventFilter(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QFile_eventFilter(self: ptr cQFile, slot: int, watched: pointer, event: pointer): bool {.exportc: "miqt_exec_callback_QFile_eventFilter ".} =
-  var nimfunc = cast[ptr QFileeventFilterProc](cast[pointer](slot))
+proc miqt_exec_callback_cQFile_eventFilter(vtbl: pointer, self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
+  let vtbl = cast[ptr QFileVTable](vtbl)
+  let self = QFile(h: self)
   let slotval1 = gen_qobject_types.QObject(h: watched)
-
   let slotval2 = gen_qcoreevent_types.QEvent(h: event)
-
-
-  let virtualReturn = nimfunc[](slotval1, slotval2 )
-
+  var virtualReturn = vtbl[].eventFilter(self, slotval1, slotval2)
   virtualReturn
+
 proc QFiletimerEvent*(self: gen_qfile_types.QFile, event: gen_qcoreevent_types.QTimerEvent): void =
-  fQFile_virtualbase_timerEvent(self.h, event.h)
+  fcQFile_virtualbase_timerEvent(self.h, event.h)
 
-type QFiletimerEventProc* = proc(event: gen_qcoreevent_types.QTimerEvent): void
-proc ontimerEvent*(self: gen_qfile_types.QFile, slot: QFiletimerEventProc) =
-  # TODO check subclass
-  var tmp = new QFiletimerEventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQFile_override_virtual_timerEvent(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QFile_timerEvent(self: ptr cQFile, slot: int, event: pointer): void {.exportc: "miqt_exec_callback_QFile_timerEvent ".} =
-  var nimfunc = cast[ptr QFiletimerEventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQFile_timerEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QFileVTable](vtbl)
+  let self = QFile(h: self)
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event)
+  vtbl[].timerEvent(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QFilechildEvent*(self: gen_qfile_types.QFile, event: gen_qcoreevent_types.QChildEvent): void =
-  fQFile_virtualbase_childEvent(self.h, event.h)
+  fcQFile_virtualbase_childEvent(self.h, event.h)
 
-type QFilechildEventProc* = proc(event: gen_qcoreevent_types.QChildEvent): void
-proc onchildEvent*(self: gen_qfile_types.QFile, slot: QFilechildEventProc) =
-  # TODO check subclass
-  var tmp = new QFilechildEventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQFile_override_virtual_childEvent(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QFile_childEvent(self: ptr cQFile, slot: int, event: pointer): void {.exportc: "miqt_exec_callback_QFile_childEvent ".} =
-  var nimfunc = cast[ptr QFilechildEventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQFile_childEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QFileVTable](vtbl)
+  let self = QFile(h: self)
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: event)
+  vtbl[].childEvent(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QFilecustomEvent*(self: gen_qfile_types.QFile, event: gen_qcoreevent_types.QEvent): void =
-  fQFile_virtualbase_customEvent(self.h, event.h)
+  fcQFile_virtualbase_customEvent(self.h, event.h)
 
-type QFilecustomEventProc* = proc(event: gen_qcoreevent_types.QEvent): void
-proc oncustomEvent*(self: gen_qfile_types.QFile, slot: QFilecustomEventProc) =
-  # TODO check subclass
-  var tmp = new QFilecustomEventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQFile_override_virtual_customEvent(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QFile_customEvent(self: ptr cQFile, slot: int, event: pointer): void {.exportc: "miqt_exec_callback_QFile_customEvent ".} =
-  var nimfunc = cast[ptr QFilecustomEventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQFile_customEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QFileVTable](vtbl)
+  let self = QFile(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  vtbl[].customEvent(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QFileconnectNotify*(self: gen_qfile_types.QFile, signal: gen_qmetaobject_types.QMetaMethod): void =
-  fQFile_virtualbase_connectNotify(self.h, signal.h)
+  fcQFile_virtualbase_connectNotify(self.h, signal.h)
 
-type QFileconnectNotifyProc* = proc(signal: gen_qmetaobject_types.QMetaMethod): void
-proc onconnectNotify*(self: gen_qfile_types.QFile, slot: QFileconnectNotifyProc) =
-  # TODO check subclass
-  var tmp = new QFileconnectNotifyProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQFile_override_virtual_connectNotify(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QFile_connectNotify(self: ptr cQFile, slot: int, signal: pointer): void {.exportc: "miqt_exec_callback_QFile_connectNotify ".} =
-  var nimfunc = cast[ptr QFileconnectNotifyProc](cast[pointer](slot))
+proc miqt_exec_callback_cQFile_connectNotify(vtbl: pointer, self: pointer, signal: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QFileVTable](vtbl)
+  let self = QFile(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  vtbl[].connectNotify(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QFiledisconnectNotify*(self: gen_qfile_types.QFile, signal: gen_qmetaobject_types.QMetaMethod): void =
-  fQFile_virtualbase_disconnectNotify(self.h, signal.h)
+  fcQFile_virtualbase_disconnectNotify(self.h, signal.h)
 
-type QFiledisconnectNotifyProc* = proc(signal: gen_qmetaobject_types.QMetaMethod): void
-proc ondisconnectNotify*(self: gen_qfile_types.QFile, slot: QFiledisconnectNotifyProc) =
-  # TODO check subclass
-  var tmp = new QFiledisconnectNotifyProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQFile_override_virtual_disconnectNotify(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QFile_disconnectNotify(self: ptr cQFile, slot: int, signal: pointer): void {.exportc: "miqt_exec_callback_QFile_disconnectNotify ".} =
-  var nimfunc = cast[ptr QFiledisconnectNotifyProc](cast[pointer](slot))
+proc miqt_exec_callback_cQFile_disconnectNotify(vtbl: pointer, self: pointer, signal: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QFileVTable](vtbl)
+  let self = QFile(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  vtbl[].disconnectNotify(self, slotval1)
 
+proc create*(T: type gen_qfile_types.QFile,
+    vtbl: ref QFileVTable = nil): gen_qfile_types.QFile =
+  let vtbl = if vtbl == nil: new QFileVTable else: vtbl
+  GC_ref(vtbl)
+  vtbl.vtbl.destructor = proc(vtbl: ptr cQFileVTable, _: ptr cQFile) {.cdecl.} =
+    let vtbl = cast[ref QFileVTable](vtbl)
+    GC_unref(vtbl)
+  if not isNil(vtbl.metaObject):
+    vtbl[].vtbl.metaObject = miqt_exec_callback_cQFile_metaObject
+  if not isNil(vtbl.metacast):
+    vtbl[].vtbl.metacast = miqt_exec_callback_cQFile_metacast
+  if not isNil(vtbl.metacall):
+    vtbl[].vtbl.metacall = miqt_exec_callback_cQFile_metacall
+  if not isNil(vtbl.fileName):
+    vtbl[].vtbl.fileName = miqt_exec_callback_cQFile_fileName
+  if not isNil(vtbl.open):
+    vtbl[].vtbl.open = miqt_exec_callback_cQFile_open
+  if not isNil(vtbl.size):
+    vtbl[].vtbl.size = miqt_exec_callback_cQFile_size
+  if not isNil(vtbl.resize):
+    vtbl[].vtbl.resize = miqt_exec_callback_cQFile_resize
+  if not isNil(vtbl.permissions):
+    vtbl[].vtbl.permissions = miqt_exec_callback_cQFile_permissions
+  if not isNil(vtbl.setPermissions):
+    vtbl[].vtbl.setPermissions = miqt_exec_callback_cQFile_setPermissions
+  if not isNil(vtbl.close):
+    vtbl[].vtbl.close = miqt_exec_callback_cQFile_close
+  if not isNil(vtbl.isSequential):
+    vtbl[].vtbl.isSequential = miqt_exec_callback_cQFile_isSequential
+  if not isNil(vtbl.pos):
+    vtbl[].vtbl.pos = miqt_exec_callback_cQFile_pos
+  if not isNil(vtbl.seek):
+    vtbl[].vtbl.seek = miqt_exec_callback_cQFile_seek
+  if not isNil(vtbl.atEnd):
+    vtbl[].vtbl.atEnd = miqt_exec_callback_cQFile_atEnd
+  if not isNil(vtbl.readData):
+    vtbl[].vtbl.readData = miqt_exec_callback_cQFile_readData
+  if not isNil(vtbl.writeData):
+    vtbl[].vtbl.writeData = miqt_exec_callback_cQFile_writeData
+  if not isNil(vtbl.readLineData):
+    vtbl[].vtbl.readLineData = miqt_exec_callback_cQFile_readLineData
+  if not isNil(vtbl.reset):
+    vtbl[].vtbl.reset = miqt_exec_callback_cQFile_reset
+  if not isNil(vtbl.bytesAvailable):
+    vtbl[].vtbl.bytesAvailable = miqt_exec_callback_cQFile_bytesAvailable
+  if not isNil(vtbl.bytesToWrite):
+    vtbl[].vtbl.bytesToWrite = miqt_exec_callback_cQFile_bytesToWrite
+  if not isNil(vtbl.canReadLine):
+    vtbl[].vtbl.canReadLine = miqt_exec_callback_cQFile_canReadLine
+  if not isNil(vtbl.waitForReadyRead):
+    vtbl[].vtbl.waitForReadyRead = miqt_exec_callback_cQFile_waitForReadyRead
+  if not isNil(vtbl.waitForBytesWritten):
+    vtbl[].vtbl.waitForBytesWritten = miqt_exec_callback_cQFile_waitForBytesWritten
+  if not isNil(vtbl.skipData):
+    vtbl[].vtbl.skipData = miqt_exec_callback_cQFile_skipData
+  if not isNil(vtbl.event):
+    vtbl[].vtbl.event = miqt_exec_callback_cQFile_event
+  if not isNil(vtbl.eventFilter):
+    vtbl[].vtbl.eventFilter = miqt_exec_callback_cQFile_eventFilter
+  if not isNil(vtbl.timerEvent):
+    vtbl[].vtbl.timerEvent = miqt_exec_callback_cQFile_timerEvent
+  if not isNil(vtbl.childEvent):
+    vtbl[].vtbl.childEvent = miqt_exec_callback_cQFile_childEvent
+  if not isNil(vtbl.customEvent):
+    vtbl[].vtbl.customEvent = miqt_exec_callback_cQFile_customEvent
+  if not isNil(vtbl.connectNotify):
+    vtbl[].vtbl.connectNotify = miqt_exec_callback_cQFile_connectNotify
+  if not isNil(vtbl.disconnectNotify):
+    vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQFile_disconnectNotify
+  gen_qfile_types.QFile(h: fcQFile_new(addr(vtbl[]), ))
 
-  nimfunc[](slotval1)
+proc create*(T: type gen_qfile_types.QFile,
+    name: string,
+    vtbl: ref QFileVTable = nil): gen_qfile_types.QFile =
+  let vtbl = if vtbl == nil: new QFileVTable else: vtbl
+  GC_ref(vtbl)
+  vtbl.vtbl.destructor = proc(vtbl: ptr cQFileVTable, _: ptr cQFile) {.cdecl.} =
+    let vtbl = cast[ref QFileVTable](vtbl)
+    GC_unref(vtbl)
+  if not isNil(vtbl.metaObject):
+    vtbl[].vtbl.metaObject = miqt_exec_callback_cQFile_metaObject
+  if not isNil(vtbl.metacast):
+    vtbl[].vtbl.metacast = miqt_exec_callback_cQFile_metacast
+  if not isNil(vtbl.metacall):
+    vtbl[].vtbl.metacall = miqt_exec_callback_cQFile_metacall
+  if not isNil(vtbl.fileName):
+    vtbl[].vtbl.fileName = miqt_exec_callback_cQFile_fileName
+  if not isNil(vtbl.open):
+    vtbl[].vtbl.open = miqt_exec_callback_cQFile_open
+  if not isNil(vtbl.size):
+    vtbl[].vtbl.size = miqt_exec_callback_cQFile_size
+  if not isNil(vtbl.resize):
+    vtbl[].vtbl.resize = miqt_exec_callback_cQFile_resize
+  if not isNil(vtbl.permissions):
+    vtbl[].vtbl.permissions = miqt_exec_callback_cQFile_permissions
+  if not isNil(vtbl.setPermissions):
+    vtbl[].vtbl.setPermissions = miqt_exec_callback_cQFile_setPermissions
+  if not isNil(vtbl.close):
+    vtbl[].vtbl.close = miqt_exec_callback_cQFile_close
+  if not isNil(vtbl.isSequential):
+    vtbl[].vtbl.isSequential = miqt_exec_callback_cQFile_isSequential
+  if not isNil(vtbl.pos):
+    vtbl[].vtbl.pos = miqt_exec_callback_cQFile_pos
+  if not isNil(vtbl.seek):
+    vtbl[].vtbl.seek = miqt_exec_callback_cQFile_seek
+  if not isNil(vtbl.atEnd):
+    vtbl[].vtbl.atEnd = miqt_exec_callback_cQFile_atEnd
+  if not isNil(vtbl.readData):
+    vtbl[].vtbl.readData = miqt_exec_callback_cQFile_readData
+  if not isNil(vtbl.writeData):
+    vtbl[].vtbl.writeData = miqt_exec_callback_cQFile_writeData
+  if not isNil(vtbl.readLineData):
+    vtbl[].vtbl.readLineData = miqt_exec_callback_cQFile_readLineData
+  if not isNil(vtbl.reset):
+    vtbl[].vtbl.reset = miqt_exec_callback_cQFile_reset
+  if not isNil(vtbl.bytesAvailable):
+    vtbl[].vtbl.bytesAvailable = miqt_exec_callback_cQFile_bytesAvailable
+  if not isNil(vtbl.bytesToWrite):
+    vtbl[].vtbl.bytesToWrite = miqt_exec_callback_cQFile_bytesToWrite
+  if not isNil(vtbl.canReadLine):
+    vtbl[].vtbl.canReadLine = miqt_exec_callback_cQFile_canReadLine
+  if not isNil(vtbl.waitForReadyRead):
+    vtbl[].vtbl.waitForReadyRead = miqt_exec_callback_cQFile_waitForReadyRead
+  if not isNil(vtbl.waitForBytesWritten):
+    vtbl[].vtbl.waitForBytesWritten = miqt_exec_callback_cQFile_waitForBytesWritten
+  if not isNil(vtbl.skipData):
+    vtbl[].vtbl.skipData = miqt_exec_callback_cQFile_skipData
+  if not isNil(vtbl.event):
+    vtbl[].vtbl.event = miqt_exec_callback_cQFile_event
+  if not isNil(vtbl.eventFilter):
+    vtbl[].vtbl.eventFilter = miqt_exec_callback_cQFile_eventFilter
+  if not isNil(vtbl.timerEvent):
+    vtbl[].vtbl.timerEvent = miqt_exec_callback_cQFile_timerEvent
+  if not isNil(vtbl.childEvent):
+    vtbl[].vtbl.childEvent = miqt_exec_callback_cQFile_childEvent
+  if not isNil(vtbl.customEvent):
+    vtbl[].vtbl.customEvent = miqt_exec_callback_cQFile_customEvent
+  if not isNil(vtbl.connectNotify):
+    vtbl[].vtbl.connectNotify = miqt_exec_callback_cQFile_connectNotify
+  if not isNil(vtbl.disconnectNotify):
+    vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQFile_disconnectNotify
+  gen_qfile_types.QFile(h: fcQFile_new2(addr(vtbl[]), struct_miqt_string(data: name, len: csize_t(len(name)))))
+
+proc create*(T: type gen_qfile_types.QFile,
+    parent: gen_qobject_types.QObject,
+    vtbl: ref QFileVTable = nil): gen_qfile_types.QFile =
+  let vtbl = if vtbl == nil: new QFileVTable else: vtbl
+  GC_ref(vtbl)
+  vtbl.vtbl.destructor = proc(vtbl: ptr cQFileVTable, _: ptr cQFile) {.cdecl.} =
+    let vtbl = cast[ref QFileVTable](vtbl)
+    GC_unref(vtbl)
+  if not isNil(vtbl.metaObject):
+    vtbl[].vtbl.metaObject = miqt_exec_callback_cQFile_metaObject
+  if not isNil(vtbl.metacast):
+    vtbl[].vtbl.metacast = miqt_exec_callback_cQFile_metacast
+  if not isNil(vtbl.metacall):
+    vtbl[].vtbl.metacall = miqt_exec_callback_cQFile_metacall
+  if not isNil(vtbl.fileName):
+    vtbl[].vtbl.fileName = miqt_exec_callback_cQFile_fileName
+  if not isNil(vtbl.open):
+    vtbl[].vtbl.open = miqt_exec_callback_cQFile_open
+  if not isNil(vtbl.size):
+    vtbl[].vtbl.size = miqt_exec_callback_cQFile_size
+  if not isNil(vtbl.resize):
+    vtbl[].vtbl.resize = miqt_exec_callback_cQFile_resize
+  if not isNil(vtbl.permissions):
+    vtbl[].vtbl.permissions = miqt_exec_callback_cQFile_permissions
+  if not isNil(vtbl.setPermissions):
+    vtbl[].vtbl.setPermissions = miqt_exec_callback_cQFile_setPermissions
+  if not isNil(vtbl.close):
+    vtbl[].vtbl.close = miqt_exec_callback_cQFile_close
+  if not isNil(vtbl.isSequential):
+    vtbl[].vtbl.isSequential = miqt_exec_callback_cQFile_isSequential
+  if not isNil(vtbl.pos):
+    vtbl[].vtbl.pos = miqt_exec_callback_cQFile_pos
+  if not isNil(vtbl.seek):
+    vtbl[].vtbl.seek = miqt_exec_callback_cQFile_seek
+  if not isNil(vtbl.atEnd):
+    vtbl[].vtbl.atEnd = miqt_exec_callback_cQFile_atEnd
+  if not isNil(vtbl.readData):
+    vtbl[].vtbl.readData = miqt_exec_callback_cQFile_readData
+  if not isNil(vtbl.writeData):
+    vtbl[].vtbl.writeData = miqt_exec_callback_cQFile_writeData
+  if not isNil(vtbl.readLineData):
+    vtbl[].vtbl.readLineData = miqt_exec_callback_cQFile_readLineData
+  if not isNil(vtbl.reset):
+    vtbl[].vtbl.reset = miqt_exec_callback_cQFile_reset
+  if not isNil(vtbl.bytesAvailable):
+    vtbl[].vtbl.bytesAvailable = miqt_exec_callback_cQFile_bytesAvailable
+  if not isNil(vtbl.bytesToWrite):
+    vtbl[].vtbl.bytesToWrite = miqt_exec_callback_cQFile_bytesToWrite
+  if not isNil(vtbl.canReadLine):
+    vtbl[].vtbl.canReadLine = miqt_exec_callback_cQFile_canReadLine
+  if not isNil(vtbl.waitForReadyRead):
+    vtbl[].vtbl.waitForReadyRead = miqt_exec_callback_cQFile_waitForReadyRead
+  if not isNil(vtbl.waitForBytesWritten):
+    vtbl[].vtbl.waitForBytesWritten = miqt_exec_callback_cQFile_waitForBytesWritten
+  if not isNil(vtbl.skipData):
+    vtbl[].vtbl.skipData = miqt_exec_callback_cQFile_skipData
+  if not isNil(vtbl.event):
+    vtbl[].vtbl.event = miqt_exec_callback_cQFile_event
+  if not isNil(vtbl.eventFilter):
+    vtbl[].vtbl.eventFilter = miqt_exec_callback_cQFile_eventFilter
+  if not isNil(vtbl.timerEvent):
+    vtbl[].vtbl.timerEvent = miqt_exec_callback_cQFile_timerEvent
+  if not isNil(vtbl.childEvent):
+    vtbl[].vtbl.childEvent = miqt_exec_callback_cQFile_childEvent
+  if not isNil(vtbl.customEvent):
+    vtbl[].vtbl.customEvent = miqt_exec_callback_cQFile_customEvent
+  if not isNil(vtbl.connectNotify):
+    vtbl[].vtbl.connectNotify = miqt_exec_callback_cQFile_connectNotify
+  if not isNil(vtbl.disconnectNotify):
+    vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQFile_disconnectNotify
+  gen_qfile_types.QFile(h: fcQFile_new3(addr(vtbl[]), parent.h))
+
+proc create*(T: type gen_qfile_types.QFile,
+    name: string, parent: gen_qobject_types.QObject,
+    vtbl: ref QFileVTable = nil): gen_qfile_types.QFile =
+  let vtbl = if vtbl == nil: new QFileVTable else: vtbl
+  GC_ref(vtbl)
+  vtbl.vtbl.destructor = proc(vtbl: ptr cQFileVTable, _: ptr cQFile) {.cdecl.} =
+    let vtbl = cast[ref QFileVTable](vtbl)
+    GC_unref(vtbl)
+  if not isNil(vtbl.metaObject):
+    vtbl[].vtbl.metaObject = miqt_exec_callback_cQFile_metaObject
+  if not isNil(vtbl.metacast):
+    vtbl[].vtbl.metacast = miqt_exec_callback_cQFile_metacast
+  if not isNil(vtbl.metacall):
+    vtbl[].vtbl.metacall = miqt_exec_callback_cQFile_metacall
+  if not isNil(vtbl.fileName):
+    vtbl[].vtbl.fileName = miqt_exec_callback_cQFile_fileName
+  if not isNil(vtbl.open):
+    vtbl[].vtbl.open = miqt_exec_callback_cQFile_open
+  if not isNil(vtbl.size):
+    vtbl[].vtbl.size = miqt_exec_callback_cQFile_size
+  if not isNil(vtbl.resize):
+    vtbl[].vtbl.resize = miqt_exec_callback_cQFile_resize
+  if not isNil(vtbl.permissions):
+    vtbl[].vtbl.permissions = miqt_exec_callback_cQFile_permissions
+  if not isNil(vtbl.setPermissions):
+    vtbl[].vtbl.setPermissions = miqt_exec_callback_cQFile_setPermissions
+  if not isNil(vtbl.close):
+    vtbl[].vtbl.close = miqt_exec_callback_cQFile_close
+  if not isNil(vtbl.isSequential):
+    vtbl[].vtbl.isSequential = miqt_exec_callback_cQFile_isSequential
+  if not isNil(vtbl.pos):
+    vtbl[].vtbl.pos = miqt_exec_callback_cQFile_pos
+  if not isNil(vtbl.seek):
+    vtbl[].vtbl.seek = miqt_exec_callback_cQFile_seek
+  if not isNil(vtbl.atEnd):
+    vtbl[].vtbl.atEnd = miqt_exec_callback_cQFile_atEnd
+  if not isNil(vtbl.readData):
+    vtbl[].vtbl.readData = miqt_exec_callback_cQFile_readData
+  if not isNil(vtbl.writeData):
+    vtbl[].vtbl.writeData = miqt_exec_callback_cQFile_writeData
+  if not isNil(vtbl.readLineData):
+    vtbl[].vtbl.readLineData = miqt_exec_callback_cQFile_readLineData
+  if not isNil(vtbl.reset):
+    vtbl[].vtbl.reset = miqt_exec_callback_cQFile_reset
+  if not isNil(vtbl.bytesAvailable):
+    vtbl[].vtbl.bytesAvailable = miqt_exec_callback_cQFile_bytesAvailable
+  if not isNil(vtbl.bytesToWrite):
+    vtbl[].vtbl.bytesToWrite = miqt_exec_callback_cQFile_bytesToWrite
+  if not isNil(vtbl.canReadLine):
+    vtbl[].vtbl.canReadLine = miqt_exec_callback_cQFile_canReadLine
+  if not isNil(vtbl.waitForReadyRead):
+    vtbl[].vtbl.waitForReadyRead = miqt_exec_callback_cQFile_waitForReadyRead
+  if not isNil(vtbl.waitForBytesWritten):
+    vtbl[].vtbl.waitForBytesWritten = miqt_exec_callback_cQFile_waitForBytesWritten
+  if not isNil(vtbl.skipData):
+    vtbl[].vtbl.skipData = miqt_exec_callback_cQFile_skipData
+  if not isNil(vtbl.event):
+    vtbl[].vtbl.event = miqt_exec_callback_cQFile_event
+  if not isNil(vtbl.eventFilter):
+    vtbl[].vtbl.eventFilter = miqt_exec_callback_cQFile_eventFilter
+  if not isNil(vtbl.timerEvent):
+    vtbl[].vtbl.timerEvent = miqt_exec_callback_cQFile_timerEvent
+  if not isNil(vtbl.childEvent):
+    vtbl[].vtbl.childEvent = miqt_exec_callback_cQFile_childEvent
+  if not isNil(vtbl.customEvent):
+    vtbl[].vtbl.customEvent = miqt_exec_callback_cQFile_customEvent
+  if not isNil(vtbl.connectNotify):
+    vtbl[].vtbl.connectNotify = miqt_exec_callback_cQFile_connectNotify
+  if not isNil(vtbl.disconnectNotify):
+    vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQFile_disconnectNotify
+  gen_qfile_types.QFile(h: fcQFile_new4(addr(vtbl[]), struct_miqt_string(data: name, len: csize_t(len(name))), parent.h))
+
 proc staticMetaObject*(_: type gen_qfile_types.QFile): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQFile_staticMetaObject())
 proc delete*(self: gen_qfile_types.QFile) =

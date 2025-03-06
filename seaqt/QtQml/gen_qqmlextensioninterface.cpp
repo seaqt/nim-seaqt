@@ -9,40 +9,34 @@
 extern "C" {
 #endif
 
-void miqt_exec_callback_QQmlTypesExtensionInterface_registerTypes(QQmlTypesExtensionInterface*, intptr_t, const char*);
-void miqt_exec_callback_QQmlExtensionInterface_initializeEngine(QQmlExtensionInterface*, intptr_t, QQmlEngine*, const char*);
-void miqt_exec_callback_QQmlExtensionInterface_registerTypes(QQmlExtensionInterface*, intptr_t, const char*);
 #ifdef __cplusplus
 } /* extern C */
 #endif
 
 class VirtualQQmlTypesExtensionInterface final : public QQmlTypesExtensionInterface {
+	struct QQmlTypesExtensionInterface_VTable* vtbl;
 public:
 
-	VirtualQQmlTypesExtensionInterface(const QQmlTypesExtensionInterface& param1): QQmlTypesExtensionInterface(param1) {};
+	VirtualQQmlTypesExtensionInterface(struct QQmlTypesExtensionInterface_VTable* vtbl, const QQmlTypesExtensionInterface& param1): QQmlTypesExtensionInterface(param1), vtbl(vtbl) {};
 
-	virtual ~VirtualQQmlTypesExtensionInterface() override = default;
-
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__registerTypes = 0;
+	virtual ~VirtualQQmlTypesExtensionInterface() override { if(vtbl->destructor) vtbl->destructor(vtbl, this); }
 
 	// Subclass to allow providing a Go implementation
 	virtual void registerTypes(const char* uri) override {
-		if (handle__registerTypes == 0) {
+		if (vtbl->registerTypes == 0) {
 			return; // Pure virtual, there is no base we can call
 		}
-		
+
 		const char* sigval1 = (const char*) uri;
 
-		miqt_exec_callback_QQmlTypesExtensionInterface_registerTypes(this, handle__registerTypes, sigval1);
+		vtbl->registerTypes(vtbl, this, sigval1);
 
-		
 	}
 
 };
 
-QQmlTypesExtensionInterface* QQmlTypesExtensionInterface_new(QQmlTypesExtensionInterface* param1) {
-	return new VirtualQQmlTypesExtensionInterface(*param1);
+QQmlTypesExtensionInterface* QQmlTypesExtensionInterface_new(struct QQmlTypesExtensionInterface_VTable* vtbl, QQmlTypesExtensionInterface* param1) {
+	return new VirtualQQmlTypesExtensionInterface(vtbl, *param1);
 }
 
 void QQmlTypesExtensionInterface_registerTypes(QQmlTypesExtensionInterface* self, const char* uri) {
@@ -53,64 +47,47 @@ void QQmlTypesExtensionInterface_operatorAssign(QQmlTypesExtensionInterface* sel
 	self->operator=(*param1);
 }
 
-bool QQmlTypesExtensionInterface_override_virtual_registerTypes(void* self, intptr_t slot) {
-	VirtualQQmlTypesExtensionInterface* self_cast = dynamic_cast<VirtualQQmlTypesExtensionInterface*>( (QQmlTypesExtensionInterface*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__registerTypes = slot;
-	return true;
-}
-
 void QQmlTypesExtensionInterface_delete(QQmlTypesExtensionInterface* self) {
 	delete self;
 }
 
 class VirtualQQmlExtensionInterface final : public QQmlExtensionInterface {
+	struct QQmlExtensionInterface_VTable* vtbl;
 public:
 
-	VirtualQQmlExtensionInterface(const QQmlExtensionInterface& param1): QQmlExtensionInterface(param1) {};
+	VirtualQQmlExtensionInterface(struct QQmlExtensionInterface_VTable* vtbl, const QQmlExtensionInterface& param1): QQmlExtensionInterface(param1), vtbl(vtbl) {};
 
-	virtual ~VirtualQQmlExtensionInterface() override = default;
-
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__initializeEngine = 0;
+	virtual ~VirtualQQmlExtensionInterface() override { if(vtbl->destructor) vtbl->destructor(vtbl, this); }
 
 	// Subclass to allow providing a Go implementation
 	virtual void initializeEngine(QQmlEngine* engine, const char* uri) override {
-		if (handle__initializeEngine == 0) {
+		if (vtbl->initializeEngine == 0) {
 			return; // Pure virtual, there is no base we can call
 		}
-		
+
 		QQmlEngine* sigval1 = engine;
 		const char* sigval2 = (const char*) uri;
 
-		miqt_exec_callback_QQmlExtensionInterface_initializeEngine(this, handle__initializeEngine, sigval1, sigval2);
+		vtbl->initializeEngine(vtbl, this, sigval1, sigval2);
 
-		
 	}
-
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__registerTypes = 0;
 
 	// Subclass to allow providing a Go implementation
 	virtual void registerTypes(const char* uri) override {
-		if (handle__registerTypes == 0) {
+		if (vtbl->registerTypes == 0) {
 			return; // Pure virtual, there is no base we can call
 		}
-		
+
 		const char* sigval1 = (const char*) uri;
 
-		miqt_exec_callback_QQmlExtensionInterface_registerTypes(this, handle__registerTypes, sigval1);
+		vtbl->registerTypes(vtbl, this, sigval1);
 
-		
 	}
 
 };
 
-QQmlExtensionInterface* QQmlExtensionInterface_new(QQmlExtensionInterface* param1) {
-	return new VirtualQQmlExtensionInterface(*param1);
+QQmlExtensionInterface* QQmlExtensionInterface_new(struct QQmlExtensionInterface_VTable* vtbl, QQmlExtensionInterface* param1) {
+	return new VirtualQQmlExtensionInterface(vtbl, *param1);
 }
 
 void QQmlExtensionInterface_virtbase(QQmlExtensionInterface* src, QQmlTypesExtensionInterface** outptr_QQmlTypesExtensionInterface) {
@@ -123,26 +100,6 @@ void QQmlExtensionInterface_initializeEngine(QQmlExtensionInterface* self, QQmlE
 
 void QQmlExtensionInterface_operatorAssign(QQmlExtensionInterface* self, QQmlExtensionInterface* param1) {
 	self->operator=(*param1);
-}
-
-bool QQmlExtensionInterface_override_virtual_initializeEngine(void* self, intptr_t slot) {
-	VirtualQQmlExtensionInterface* self_cast = dynamic_cast<VirtualQQmlExtensionInterface*>( (QQmlExtensionInterface*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__initializeEngine = slot;
-	return true;
-}
-
-bool QQmlExtensionInterface_override_virtual_registerTypes(void* self, intptr_t slot) {
-	VirtualQQmlExtensionInterface* self_cast = dynamic_cast<VirtualQQmlExtensionInterface*>( (QQmlExtensionInterface*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__registerTypes = slot;
-	return true;
 }
 
 void QQmlExtensionInterface_delete(QQmlExtensionInterface* self) {

@@ -259,18 +259,6 @@ type cQRadialGradient*{.exportc: "QRadialGradient", incompleteStruct.} = object
 type cQConicalGradient*{.exportc: "QConicalGradient", incompleteStruct.} = object
 type cQGradientQGradientData*{.exportc: "QGradient__QGradientData", incompleteStruct.} = object
 
-proc fcQBrush_new(): ptr cQBrush {.importc: "QBrush_new".}
-proc fcQBrush_new2(bs: cint): ptr cQBrush {.importc: "QBrush_new2".}
-proc fcQBrush_new3(color: pointer): ptr cQBrush {.importc: "QBrush_new3".}
-proc fcQBrush_new4(color: cint): ptr cQBrush {.importc: "QBrush_new4".}
-proc fcQBrush_new5(color: pointer, pixmap: pointer): ptr cQBrush {.importc: "QBrush_new5".}
-proc fcQBrush_new6(color: cint, pixmap: pointer): ptr cQBrush {.importc: "QBrush_new6".}
-proc fcQBrush_new7(pixmap: pointer): ptr cQBrush {.importc: "QBrush_new7".}
-proc fcQBrush_new8(image: pointer): ptr cQBrush {.importc: "QBrush_new8".}
-proc fcQBrush_new9(brush: pointer): ptr cQBrush {.importc: "QBrush_new9".}
-proc fcQBrush_new10(gradient: pointer): ptr cQBrush {.importc: "QBrush_new10".}
-proc fcQBrush_new11(color: pointer, bs: cint): ptr cQBrush {.importc: "QBrush_new11".}
-proc fcQBrush_new12(color: cint, bs: cint): ptr cQBrush {.importc: "QBrush_new12".}
 proc fcQBrush_operatorAssign(self: pointer, brush: pointer): void {.importc: "QBrush_operatorAssign".}
 proc fcQBrush_swap(self: pointer, other: pointer): void {.importc: "QBrush_swap".}
 proc fcQBrush_ToQVariant(self: pointer, ): pointer {.importc: "QBrush_ToQVariant".}
@@ -290,13 +278,22 @@ proc fcQBrush_isOpaque(self: pointer, ): bool {.importc: "QBrush_isOpaque".}
 proc fcQBrush_operatorEqual(self: pointer, b: pointer): bool {.importc: "QBrush_operatorEqual".}
 proc fcQBrush_operatorNotEqual(self: pointer, b: pointer): bool {.importc: "QBrush_operatorNotEqual".}
 proc fcQBrush_isDetached(self: pointer, ): bool {.importc: "QBrush_isDetached".}
+proc fcQBrush_new(): ptr cQBrush {.importc: "QBrush_new".}
+proc fcQBrush_new2(bs: cint): ptr cQBrush {.importc: "QBrush_new2".}
+proc fcQBrush_new3(color: pointer): ptr cQBrush {.importc: "QBrush_new3".}
+proc fcQBrush_new4(color: cint): ptr cQBrush {.importc: "QBrush_new4".}
+proc fcQBrush_new5(color: pointer, pixmap: pointer): ptr cQBrush {.importc: "QBrush_new5".}
+proc fcQBrush_new6(color: cint, pixmap: pointer): ptr cQBrush {.importc: "QBrush_new6".}
+proc fcQBrush_new7(pixmap: pointer): ptr cQBrush {.importc: "QBrush_new7".}
+proc fcQBrush_new8(image: pointer): ptr cQBrush {.importc: "QBrush_new8".}
+proc fcQBrush_new9(brush: pointer): ptr cQBrush {.importc: "QBrush_new9".}
+proc fcQBrush_new10(gradient: pointer): ptr cQBrush {.importc: "QBrush_new10".}
+proc fcQBrush_new11(color: pointer, bs: cint): ptr cQBrush {.importc: "QBrush_new11".}
+proc fcQBrush_new12(color: cint, bs: cint): ptr cQBrush {.importc: "QBrush_new12".}
 proc fcQBrush_delete(self: pointer) {.importc: "QBrush_delete".}
-proc fcQBrushData_new(param1: pointer): ptr cQBrushData {.importc: "QBrushData_new".}
 proc fcQBrushData_operatorAssign(self: pointer, param1: pointer): void {.importc: "QBrushData_operatorAssign".}
+proc fcQBrushData_new(param1: pointer): ptr cQBrushData {.importc: "QBrushData_new".}
 proc fcQBrushData_delete(self: pointer) {.importc: "QBrushData_delete".}
-proc fcQGradient_new(): ptr cQGradient {.importc: "QGradient_new".}
-proc fcQGradient_new2(param1: cint): ptr cQGradient {.importc: "QGradient_new2".}
-proc fcQGradient_new3(param1: pointer): ptr cQGradient {.importc: "QGradient_new3".}
 proc fcQGradient_typeX(self: pointer, ): cint {.importc: "QGradient_type".}
 proc fcQGradient_setSpread(self: pointer, spread: cint): void {.importc: "QGradient_setSpread".}
 proc fcQGradient_spread(self: pointer, ): cint {.importc: "QGradient_spread".}
@@ -309,27 +306,22 @@ proc fcQGradient_interpolationMode(self: pointer, ): cint {.importc: "QGradient_
 proc fcQGradient_setInterpolationMode(self: pointer, mode: cint): void {.importc: "QGradient_setInterpolationMode".}
 proc fcQGradient_operatorEqual(self: pointer, gradient: pointer): bool {.importc: "QGradient_operatorEqual".}
 proc fcQGradient_operatorNotEqual(self: pointer, other: pointer): bool {.importc: "QGradient_operatorNotEqual".}
+proc fcQGradient_new(): ptr cQGradient {.importc: "QGradient_new".}
+proc fcQGradient_new2(param1: cint): ptr cQGradient {.importc: "QGradient_new2".}
+proc fcQGradient_new3(param1: pointer): ptr cQGradient {.importc: "QGradient_new3".}
 proc fcQGradient_staticMetaObject(): pointer {.importc: "QGradient_staticMetaObject".}
 proc fcQGradient_delete(self: pointer) {.importc: "QGradient_delete".}
-proc fcQLinearGradient_new(): ptr cQLinearGradient {.importc: "QLinearGradient_new".}
-proc fcQLinearGradient_new2(start: pointer, finalStop: pointer): ptr cQLinearGradient {.importc: "QLinearGradient_new2".}
-proc fcQLinearGradient_new3(xStart: float64, yStart: float64, xFinalStop: float64, yFinalStop: float64): ptr cQLinearGradient {.importc: "QLinearGradient_new3".}
-proc fcQLinearGradient_new4(param1: pointer): ptr cQLinearGradient {.importc: "QLinearGradient_new4".}
 proc fcQLinearGradient_start(self: pointer, ): pointer {.importc: "QLinearGradient_start".}
 proc fcQLinearGradient_setStart(self: pointer, start: pointer): void {.importc: "QLinearGradient_setStart".}
 proc fcQLinearGradient_setStart2(self: pointer, x: float64, y: float64): void {.importc: "QLinearGradient_setStart2".}
 proc fcQLinearGradient_finalStop(self: pointer, ): pointer {.importc: "QLinearGradient_finalStop".}
 proc fcQLinearGradient_setFinalStop(self: pointer, stop: pointer): void {.importc: "QLinearGradient_setFinalStop".}
 proc fcQLinearGradient_setFinalStop2(self: pointer, x: float64, y: float64): void {.importc: "QLinearGradient_setFinalStop2".}
+proc fcQLinearGradient_new(): ptr cQLinearGradient {.importc: "QLinearGradient_new".}
+proc fcQLinearGradient_new2(start: pointer, finalStop: pointer): ptr cQLinearGradient {.importc: "QLinearGradient_new2".}
+proc fcQLinearGradient_new3(xStart: float64, yStart: float64, xFinalStop: float64, yFinalStop: float64): ptr cQLinearGradient {.importc: "QLinearGradient_new3".}
+proc fcQLinearGradient_new4(param1: pointer): ptr cQLinearGradient {.importc: "QLinearGradient_new4".}
 proc fcQLinearGradient_delete(self: pointer) {.importc: "QLinearGradient_delete".}
-proc fcQRadialGradient_new(): ptr cQRadialGradient {.importc: "QRadialGradient_new".}
-proc fcQRadialGradient_new2(center: pointer, radius: float64, focalPoint: pointer): ptr cQRadialGradient {.importc: "QRadialGradient_new2".}
-proc fcQRadialGradient_new3(cx: float64, cy: float64, radius: float64, fx: float64, fy: float64): ptr cQRadialGradient {.importc: "QRadialGradient_new3".}
-proc fcQRadialGradient_new4(center: pointer, radius: float64): ptr cQRadialGradient {.importc: "QRadialGradient_new4".}
-proc fcQRadialGradient_new5(cx: float64, cy: float64, radius: float64): ptr cQRadialGradient {.importc: "QRadialGradient_new5".}
-proc fcQRadialGradient_new6(center: pointer, centerRadius: float64, focalPoint: pointer, focalRadius: float64): ptr cQRadialGradient {.importc: "QRadialGradient_new6".}
-proc fcQRadialGradient_new7(cx: float64, cy: float64, centerRadius: float64, fx: float64, fy: float64, focalRadius: float64): ptr cQRadialGradient {.importc: "QRadialGradient_new7".}
-proc fcQRadialGradient_new8(param1: pointer): ptr cQRadialGradient {.importc: "QRadialGradient_new8".}
 proc fcQRadialGradient_center(self: pointer, ): pointer {.importc: "QRadialGradient_center".}
 proc fcQRadialGradient_setCenter(self: pointer, center: pointer): void {.importc: "QRadialGradient_setCenter".}
 proc fcQRadialGradient_setCenter2(self: pointer, x: float64, y: float64): void {.importc: "QRadialGradient_setCenter2".}
@@ -342,58 +334,27 @@ proc fcQRadialGradient_centerRadius(self: pointer, ): float64 {.importc: "QRadia
 proc fcQRadialGradient_setCenterRadius(self: pointer, radius: float64): void {.importc: "QRadialGradient_setCenterRadius".}
 proc fcQRadialGradient_focalRadius(self: pointer, ): float64 {.importc: "QRadialGradient_focalRadius".}
 proc fcQRadialGradient_setFocalRadius(self: pointer, radius: float64): void {.importc: "QRadialGradient_setFocalRadius".}
+proc fcQRadialGradient_new(): ptr cQRadialGradient {.importc: "QRadialGradient_new".}
+proc fcQRadialGradient_new2(center: pointer, radius: float64, focalPoint: pointer): ptr cQRadialGradient {.importc: "QRadialGradient_new2".}
+proc fcQRadialGradient_new3(cx: float64, cy: float64, radius: float64, fx: float64, fy: float64): ptr cQRadialGradient {.importc: "QRadialGradient_new3".}
+proc fcQRadialGradient_new4(center: pointer, radius: float64): ptr cQRadialGradient {.importc: "QRadialGradient_new4".}
+proc fcQRadialGradient_new5(cx: float64, cy: float64, radius: float64): ptr cQRadialGradient {.importc: "QRadialGradient_new5".}
+proc fcQRadialGradient_new6(center: pointer, centerRadius: float64, focalPoint: pointer, focalRadius: float64): ptr cQRadialGradient {.importc: "QRadialGradient_new6".}
+proc fcQRadialGradient_new7(cx: float64, cy: float64, centerRadius: float64, fx: float64, fy: float64, focalRadius: float64): ptr cQRadialGradient {.importc: "QRadialGradient_new7".}
+proc fcQRadialGradient_new8(param1: pointer): ptr cQRadialGradient {.importc: "QRadialGradient_new8".}
 proc fcQRadialGradient_delete(self: pointer) {.importc: "QRadialGradient_delete".}
-proc fcQConicalGradient_new(): ptr cQConicalGradient {.importc: "QConicalGradient_new".}
-proc fcQConicalGradient_new2(center: pointer, startAngle: float64): ptr cQConicalGradient {.importc: "QConicalGradient_new2".}
-proc fcQConicalGradient_new3(cx: float64, cy: float64, startAngle: float64): ptr cQConicalGradient {.importc: "QConicalGradient_new3".}
-proc fcQConicalGradient_new4(param1: pointer): ptr cQConicalGradient {.importc: "QConicalGradient_new4".}
 proc fcQConicalGradient_center(self: pointer, ): pointer {.importc: "QConicalGradient_center".}
 proc fcQConicalGradient_setCenter(self: pointer, center: pointer): void {.importc: "QConicalGradient_setCenter".}
 proc fcQConicalGradient_setCenter2(self: pointer, x: float64, y: float64): void {.importc: "QConicalGradient_setCenter2".}
 proc fcQConicalGradient_angle(self: pointer, ): float64 {.importc: "QConicalGradient_angle".}
 proc fcQConicalGradient_setAngle(self: pointer, angle: float64): void {.importc: "QConicalGradient_setAngle".}
+proc fcQConicalGradient_new(): ptr cQConicalGradient {.importc: "QConicalGradient_new".}
+proc fcQConicalGradient_new2(center: pointer, startAngle: float64): ptr cQConicalGradient {.importc: "QConicalGradient_new2".}
+proc fcQConicalGradient_new3(cx: float64, cy: float64, startAngle: float64): ptr cQConicalGradient {.importc: "QConicalGradient_new3".}
+proc fcQConicalGradient_new4(param1: pointer): ptr cQConicalGradient {.importc: "QConicalGradient_new4".}
 proc fcQConicalGradient_delete(self: pointer) {.importc: "QConicalGradient_delete".}
 proc fcQGradientQGradientData_new(param1: pointer): ptr cQGradientQGradientData {.importc: "QGradient__QGradientData_new".}
 proc fcQGradientQGradientData_delete(self: pointer) {.importc: "QGradient__QGradientData_delete".}
-
-
-func init*(T: type gen_qbrush_types.QBrush, h: ptr cQBrush): gen_qbrush_types.QBrush =
-  T(h: h)
-proc create*(T: type gen_qbrush_types.QBrush, ): gen_qbrush_types.QBrush =
-  gen_qbrush_types.QBrush.init(fcQBrush_new())
-
-proc create*(T: type gen_qbrush_types.QBrush, bs: cint): gen_qbrush_types.QBrush =
-  gen_qbrush_types.QBrush.init(fcQBrush_new2(cint(bs)))
-
-proc create*(T: type gen_qbrush_types.QBrush, color: gen_qcolor_types.QColor): gen_qbrush_types.QBrush =
-  gen_qbrush_types.QBrush.init(fcQBrush_new3(color.h))
-
-proc create2*(T: type gen_qbrush_types.QBrush, color: cint): gen_qbrush_types.QBrush =
-  gen_qbrush_types.QBrush.init(fcQBrush_new4(cint(color)))
-
-proc create*(T: type gen_qbrush_types.QBrush, color: gen_qcolor_types.QColor, pixmap: gen_qpixmap_types.QPixmap): gen_qbrush_types.QBrush =
-  gen_qbrush_types.QBrush.init(fcQBrush_new5(color.h, pixmap.h))
-
-proc create*(T: type gen_qbrush_types.QBrush, color: cint, pixmap: gen_qpixmap_types.QPixmap): gen_qbrush_types.QBrush =
-  gen_qbrush_types.QBrush.init(fcQBrush_new6(cint(color), pixmap.h))
-
-proc create*(T: type gen_qbrush_types.QBrush, pixmap: gen_qpixmap_types.QPixmap): gen_qbrush_types.QBrush =
-  gen_qbrush_types.QBrush.init(fcQBrush_new7(pixmap.h))
-
-proc create*(T: type gen_qbrush_types.QBrush, image: gen_qimage_types.QImage): gen_qbrush_types.QBrush =
-  gen_qbrush_types.QBrush.init(fcQBrush_new8(image.h))
-
-proc create*(T: type gen_qbrush_types.QBrush, brush: gen_qbrush_types.QBrush): gen_qbrush_types.QBrush =
-  gen_qbrush_types.QBrush.init(fcQBrush_new9(brush.h))
-
-proc create*(T: type gen_qbrush_types.QBrush, gradient: gen_qbrush_types.QGradient): gen_qbrush_types.QBrush =
-  gen_qbrush_types.QBrush.init(fcQBrush_new10(gradient.h))
-
-proc create*(T: type gen_qbrush_types.QBrush, color: gen_qcolor_types.QColor, bs: cint): gen_qbrush_types.QBrush =
-  gen_qbrush_types.QBrush.init(fcQBrush_new11(color.h, cint(bs)))
-
-proc create*(T: type gen_qbrush_types.QBrush, color: cint, bs: cint): gen_qbrush_types.QBrush =
-  gen_qbrush_types.QBrush.init(fcQBrush_new12(cint(color), cint(bs)))
 
 proc operatorAssign*(self: gen_qbrush_types.QBrush, brush: gen_qbrush_types.QBrush): void =
   fcQBrush_operatorAssign(self.h, brush.h)
@@ -452,31 +413,64 @@ proc operatorNotEqual*(self: gen_qbrush_types.QBrush, b: gen_qbrush_types.QBrush
 proc isDetached*(self: gen_qbrush_types.QBrush, ): bool =
   fcQBrush_isDetached(self.h)
 
+proc create*(T: type gen_qbrush_types.QBrush): gen_qbrush_types.QBrush =
+  gen_qbrush_types.QBrush(h: fcQBrush_new())
+
+proc create*(T: type gen_qbrush_types.QBrush,
+    bs: cint): gen_qbrush_types.QBrush =
+  gen_qbrush_types.QBrush(h: fcQBrush_new2(cint(bs)))
+
+proc create*(T: type gen_qbrush_types.QBrush,
+    color: gen_qcolor_types.QColor): gen_qbrush_types.QBrush =
+  gen_qbrush_types.QBrush(h: fcQBrush_new3(color.h))
+
+proc create2*(T: type gen_qbrush_types.QBrush,
+    color: cint): gen_qbrush_types.QBrush =
+  gen_qbrush_types.QBrush(h: fcQBrush_new4(cint(color)))
+
+proc create*(T: type gen_qbrush_types.QBrush,
+    color: gen_qcolor_types.QColor, pixmap: gen_qpixmap_types.QPixmap): gen_qbrush_types.QBrush =
+  gen_qbrush_types.QBrush(h: fcQBrush_new5(color.h, pixmap.h))
+
+proc create*(T: type gen_qbrush_types.QBrush,
+    color: cint, pixmap: gen_qpixmap_types.QPixmap): gen_qbrush_types.QBrush =
+  gen_qbrush_types.QBrush(h: fcQBrush_new6(cint(color), pixmap.h))
+
+proc create*(T: type gen_qbrush_types.QBrush,
+    pixmap: gen_qpixmap_types.QPixmap): gen_qbrush_types.QBrush =
+  gen_qbrush_types.QBrush(h: fcQBrush_new7(pixmap.h))
+
+proc create*(T: type gen_qbrush_types.QBrush,
+    image: gen_qimage_types.QImage): gen_qbrush_types.QBrush =
+  gen_qbrush_types.QBrush(h: fcQBrush_new8(image.h))
+
+proc create*(T: type gen_qbrush_types.QBrush,
+    brush: gen_qbrush_types.QBrush): gen_qbrush_types.QBrush =
+  gen_qbrush_types.QBrush(h: fcQBrush_new9(brush.h))
+
+proc create*(T: type gen_qbrush_types.QBrush,
+    gradient: gen_qbrush_types.QGradient): gen_qbrush_types.QBrush =
+  gen_qbrush_types.QBrush(h: fcQBrush_new10(gradient.h))
+
+proc create*(T: type gen_qbrush_types.QBrush,
+    color: gen_qcolor_types.QColor, bs: cint): gen_qbrush_types.QBrush =
+  gen_qbrush_types.QBrush(h: fcQBrush_new11(color.h, cint(bs)))
+
+proc create*(T: type gen_qbrush_types.QBrush,
+    color: cint, bs: cint): gen_qbrush_types.QBrush =
+  gen_qbrush_types.QBrush(h: fcQBrush_new12(cint(color), cint(bs)))
+
 proc delete*(self: gen_qbrush_types.QBrush) =
   fcQBrush_delete(self.h)
-
-func init*(T: type gen_qbrush_types.QBrushData, h: ptr cQBrushData): gen_qbrush_types.QBrushData =
-  T(h: h)
-proc create*(T: type gen_qbrush_types.QBrushData, param1: gen_qbrush_types.QBrushData): gen_qbrush_types.QBrushData =
-  gen_qbrush_types.QBrushData.init(fcQBrushData_new(param1.h))
-
 proc operatorAssign*(self: gen_qbrush_types.QBrushData, param1: gen_qbrush_types.QBrushData): void =
   fcQBrushData_operatorAssign(self.h, param1.h)
 
+proc create*(T: type gen_qbrush_types.QBrushData,
+    param1: gen_qbrush_types.QBrushData): gen_qbrush_types.QBrushData =
+  gen_qbrush_types.QBrushData(h: fcQBrushData_new(param1.h))
+
 proc delete*(self: gen_qbrush_types.QBrushData) =
   fcQBrushData_delete(self.h)
-
-func init*(T: type gen_qbrush_types.QGradient, h: ptr cQGradient): gen_qbrush_types.QGradient =
-  T(h: h)
-proc create*(T: type gen_qbrush_types.QGradient, ): gen_qbrush_types.QGradient =
-  gen_qbrush_types.QGradient.init(fcQGradient_new())
-
-proc create*(T: type gen_qbrush_types.QGradient, param1: cint): gen_qbrush_types.QGradient =
-  gen_qbrush_types.QGradient.init(fcQGradient_new2(cint(param1)))
-
-proc create*(T: type gen_qbrush_types.QGradient, param1: gen_qbrush_types.QGradient): gen_qbrush_types.QGradient =
-  gen_qbrush_types.QGradient.init(fcQGradient_new3(param1.h))
-
 proc typeX*(self: gen_qbrush_types.QGradient, ): cint =
   cint(fcQGradient_typeX(self.h))
 
@@ -533,25 +527,21 @@ proc operatorEqual*(self: gen_qbrush_types.QGradient, gradient: gen_qbrush_types
 proc operatorNotEqual*(self: gen_qbrush_types.QGradient, other: gen_qbrush_types.QGradient): bool =
   fcQGradient_operatorNotEqual(self.h, other.h)
 
+proc create*(T: type gen_qbrush_types.QGradient): gen_qbrush_types.QGradient =
+  gen_qbrush_types.QGradient(h: fcQGradient_new())
+
+proc create*(T: type gen_qbrush_types.QGradient,
+    param1: cint): gen_qbrush_types.QGradient =
+  gen_qbrush_types.QGradient(h: fcQGradient_new2(cint(param1)))
+
+proc create*(T: type gen_qbrush_types.QGradient,
+    param1: gen_qbrush_types.QGradient): gen_qbrush_types.QGradient =
+  gen_qbrush_types.QGradient(h: fcQGradient_new3(param1.h))
+
 proc staticMetaObject*(_: type gen_qbrush_types.QGradient): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQGradient_staticMetaObject())
 proc delete*(self: gen_qbrush_types.QGradient) =
   fcQGradient_delete(self.h)
-
-func init*(T: type gen_qbrush_types.QLinearGradient, h: ptr cQLinearGradient): gen_qbrush_types.QLinearGradient =
-  T(h: h)
-proc create*(T: type gen_qbrush_types.QLinearGradient, ): gen_qbrush_types.QLinearGradient =
-  gen_qbrush_types.QLinearGradient.init(fcQLinearGradient_new())
-
-proc create*(T: type gen_qbrush_types.QLinearGradient, start: gen_qpoint_types.QPointF, finalStop: gen_qpoint_types.QPointF): gen_qbrush_types.QLinearGradient =
-  gen_qbrush_types.QLinearGradient.init(fcQLinearGradient_new2(start.h, finalStop.h))
-
-proc create*(T: type gen_qbrush_types.QLinearGradient, xStart: float64, yStart: float64, xFinalStop: float64, yFinalStop: float64): gen_qbrush_types.QLinearGradient =
-  gen_qbrush_types.QLinearGradient.init(fcQLinearGradient_new3(xStart, yStart, xFinalStop, yFinalStop))
-
-proc create*(T: type gen_qbrush_types.QLinearGradient, param1: gen_qbrush_types.QLinearGradient): gen_qbrush_types.QLinearGradient =
-  gen_qbrush_types.QLinearGradient.init(fcQLinearGradient_new4(param1.h))
-
 proc start*(self: gen_qbrush_types.QLinearGradient, ): gen_qpoint_types.QPointF =
   gen_qpoint_types.QPointF(h: fcQLinearGradient_start(self.h))
 
@@ -570,35 +560,23 @@ proc setFinalStop*(self: gen_qbrush_types.QLinearGradient, stop: gen_qpoint_type
 proc setFinalStop*(self: gen_qbrush_types.QLinearGradient, x: float64, y: float64): void =
   fcQLinearGradient_setFinalStop2(self.h, x, y)
 
+proc create*(T: type gen_qbrush_types.QLinearGradient): gen_qbrush_types.QLinearGradient =
+  gen_qbrush_types.QLinearGradient(h: fcQLinearGradient_new())
+
+proc create*(T: type gen_qbrush_types.QLinearGradient,
+    start: gen_qpoint_types.QPointF, finalStop: gen_qpoint_types.QPointF): gen_qbrush_types.QLinearGradient =
+  gen_qbrush_types.QLinearGradient(h: fcQLinearGradient_new2(start.h, finalStop.h))
+
+proc create*(T: type gen_qbrush_types.QLinearGradient,
+    xStart: float64, yStart: float64, xFinalStop: float64, yFinalStop: float64): gen_qbrush_types.QLinearGradient =
+  gen_qbrush_types.QLinearGradient(h: fcQLinearGradient_new3(xStart, yStart, xFinalStop, yFinalStop))
+
+proc create*(T: type gen_qbrush_types.QLinearGradient,
+    param1: gen_qbrush_types.QLinearGradient): gen_qbrush_types.QLinearGradient =
+  gen_qbrush_types.QLinearGradient(h: fcQLinearGradient_new4(param1.h))
+
 proc delete*(self: gen_qbrush_types.QLinearGradient) =
   fcQLinearGradient_delete(self.h)
-
-func init*(T: type gen_qbrush_types.QRadialGradient, h: ptr cQRadialGradient): gen_qbrush_types.QRadialGradient =
-  T(h: h)
-proc create*(T: type gen_qbrush_types.QRadialGradient, ): gen_qbrush_types.QRadialGradient =
-  gen_qbrush_types.QRadialGradient.init(fcQRadialGradient_new())
-
-proc create*(T: type gen_qbrush_types.QRadialGradient, center: gen_qpoint_types.QPointF, radius: float64, focalPoint: gen_qpoint_types.QPointF): gen_qbrush_types.QRadialGradient =
-  gen_qbrush_types.QRadialGradient.init(fcQRadialGradient_new2(center.h, radius, focalPoint.h))
-
-proc create*(T: type gen_qbrush_types.QRadialGradient, cx: float64, cy: float64, radius: float64, fx: float64, fy: float64): gen_qbrush_types.QRadialGradient =
-  gen_qbrush_types.QRadialGradient.init(fcQRadialGradient_new3(cx, cy, radius, fx, fy))
-
-proc create*(T: type gen_qbrush_types.QRadialGradient, center: gen_qpoint_types.QPointF, radius: float64): gen_qbrush_types.QRadialGradient =
-  gen_qbrush_types.QRadialGradient.init(fcQRadialGradient_new4(center.h, radius))
-
-proc create*(T: type gen_qbrush_types.QRadialGradient, cx: float64, cy: float64, radius: float64): gen_qbrush_types.QRadialGradient =
-  gen_qbrush_types.QRadialGradient.init(fcQRadialGradient_new5(cx, cy, radius))
-
-proc create*(T: type gen_qbrush_types.QRadialGradient, center: gen_qpoint_types.QPointF, centerRadius: float64, focalPoint: gen_qpoint_types.QPointF, focalRadius: float64): gen_qbrush_types.QRadialGradient =
-  gen_qbrush_types.QRadialGradient.init(fcQRadialGradient_new6(center.h, centerRadius, focalPoint.h, focalRadius))
-
-proc create*(T: type gen_qbrush_types.QRadialGradient, cx: float64, cy: float64, centerRadius: float64, fx: float64, fy: float64, focalRadius: float64): gen_qbrush_types.QRadialGradient =
-  gen_qbrush_types.QRadialGradient.init(fcQRadialGradient_new7(cx, cy, centerRadius, fx, fy, focalRadius))
-
-proc create*(T: type gen_qbrush_types.QRadialGradient, param1: gen_qbrush_types.QRadialGradient): gen_qbrush_types.QRadialGradient =
-  gen_qbrush_types.QRadialGradient.init(fcQRadialGradient_new8(param1.h))
-
 proc center*(self: gen_qbrush_types.QRadialGradient, ): gen_qpoint_types.QPointF =
   gen_qpoint_types.QPointF(h: fcQRadialGradient_center(self.h))
 
@@ -635,23 +613,39 @@ proc focalRadius*(self: gen_qbrush_types.QRadialGradient, ): float64 =
 proc setFocalRadius*(self: gen_qbrush_types.QRadialGradient, radius: float64): void =
   fcQRadialGradient_setFocalRadius(self.h, radius)
 
+proc create*(T: type gen_qbrush_types.QRadialGradient): gen_qbrush_types.QRadialGradient =
+  gen_qbrush_types.QRadialGradient(h: fcQRadialGradient_new())
+
+proc create*(T: type gen_qbrush_types.QRadialGradient,
+    center: gen_qpoint_types.QPointF, radius: float64, focalPoint: gen_qpoint_types.QPointF): gen_qbrush_types.QRadialGradient =
+  gen_qbrush_types.QRadialGradient(h: fcQRadialGradient_new2(center.h, radius, focalPoint.h))
+
+proc create*(T: type gen_qbrush_types.QRadialGradient,
+    cx: float64, cy: float64, radius: float64, fx: float64, fy: float64): gen_qbrush_types.QRadialGradient =
+  gen_qbrush_types.QRadialGradient(h: fcQRadialGradient_new3(cx, cy, radius, fx, fy))
+
+proc create*(T: type gen_qbrush_types.QRadialGradient,
+    center: gen_qpoint_types.QPointF, radius: float64): gen_qbrush_types.QRadialGradient =
+  gen_qbrush_types.QRadialGradient(h: fcQRadialGradient_new4(center.h, radius))
+
+proc create*(T: type gen_qbrush_types.QRadialGradient,
+    cx: float64, cy: float64, radius: float64): gen_qbrush_types.QRadialGradient =
+  gen_qbrush_types.QRadialGradient(h: fcQRadialGradient_new5(cx, cy, radius))
+
+proc create*(T: type gen_qbrush_types.QRadialGradient,
+    center: gen_qpoint_types.QPointF, centerRadius: float64, focalPoint: gen_qpoint_types.QPointF, focalRadius: float64): gen_qbrush_types.QRadialGradient =
+  gen_qbrush_types.QRadialGradient(h: fcQRadialGradient_new6(center.h, centerRadius, focalPoint.h, focalRadius))
+
+proc create*(T: type gen_qbrush_types.QRadialGradient,
+    cx: float64, cy: float64, centerRadius: float64, fx: float64, fy: float64, focalRadius: float64): gen_qbrush_types.QRadialGradient =
+  gen_qbrush_types.QRadialGradient(h: fcQRadialGradient_new7(cx, cy, centerRadius, fx, fy, focalRadius))
+
+proc create*(T: type gen_qbrush_types.QRadialGradient,
+    param1: gen_qbrush_types.QRadialGradient): gen_qbrush_types.QRadialGradient =
+  gen_qbrush_types.QRadialGradient(h: fcQRadialGradient_new8(param1.h))
+
 proc delete*(self: gen_qbrush_types.QRadialGradient) =
   fcQRadialGradient_delete(self.h)
-
-func init*(T: type gen_qbrush_types.QConicalGradient, h: ptr cQConicalGradient): gen_qbrush_types.QConicalGradient =
-  T(h: h)
-proc create*(T: type gen_qbrush_types.QConicalGradient, ): gen_qbrush_types.QConicalGradient =
-  gen_qbrush_types.QConicalGradient.init(fcQConicalGradient_new())
-
-proc create*(T: type gen_qbrush_types.QConicalGradient, center: gen_qpoint_types.QPointF, startAngle: float64): gen_qbrush_types.QConicalGradient =
-  gen_qbrush_types.QConicalGradient.init(fcQConicalGradient_new2(center.h, startAngle))
-
-proc create*(T: type gen_qbrush_types.QConicalGradient, cx: float64, cy: float64, startAngle: float64): gen_qbrush_types.QConicalGradient =
-  gen_qbrush_types.QConicalGradient.init(fcQConicalGradient_new3(cx, cy, startAngle))
-
-proc create*(T: type gen_qbrush_types.QConicalGradient, param1: gen_qbrush_types.QConicalGradient): gen_qbrush_types.QConicalGradient =
-  gen_qbrush_types.QConicalGradient.init(fcQConicalGradient_new4(param1.h))
-
 proc center*(self: gen_qbrush_types.QConicalGradient, ): gen_qpoint_types.QPointF =
   gen_qpoint_types.QPointF(h: fcQConicalGradient_center(self.h))
 
@@ -667,13 +661,26 @@ proc angle*(self: gen_qbrush_types.QConicalGradient, ): float64 =
 proc setAngle*(self: gen_qbrush_types.QConicalGradient, angle: float64): void =
   fcQConicalGradient_setAngle(self.h, angle)
 
+proc create*(T: type gen_qbrush_types.QConicalGradient): gen_qbrush_types.QConicalGradient =
+  gen_qbrush_types.QConicalGradient(h: fcQConicalGradient_new())
+
+proc create*(T: type gen_qbrush_types.QConicalGradient,
+    center: gen_qpoint_types.QPointF, startAngle: float64): gen_qbrush_types.QConicalGradient =
+  gen_qbrush_types.QConicalGradient(h: fcQConicalGradient_new2(center.h, startAngle))
+
+proc create*(T: type gen_qbrush_types.QConicalGradient,
+    cx: float64, cy: float64, startAngle: float64): gen_qbrush_types.QConicalGradient =
+  gen_qbrush_types.QConicalGradient(h: fcQConicalGradient_new3(cx, cy, startAngle))
+
+proc create*(T: type gen_qbrush_types.QConicalGradient,
+    param1: gen_qbrush_types.QConicalGradient): gen_qbrush_types.QConicalGradient =
+  gen_qbrush_types.QConicalGradient(h: fcQConicalGradient_new4(param1.h))
+
 proc delete*(self: gen_qbrush_types.QConicalGradient) =
   fcQConicalGradient_delete(self.h)
-
-func init*(T: type gen_qbrush_types.QGradientQGradientData, h: ptr cQGradientQGradientData): gen_qbrush_types.QGradientQGradientData =
-  T(h: h)
-proc create*(T: type gen_qbrush_types.QGradientQGradientData, param1: gen_qbrush_types.QGradientQGradientData): gen_qbrush_types.QGradientQGradientData =
-  gen_qbrush_types.QGradientQGradientData.init(fcQGradientQGradientData_new(param1.h))
+proc create*(T: type gen_qbrush_types.QGradientQGradientData,
+    param1: gen_qbrush_types.QGradientQGradientData): gen_qbrush_types.QGradientQGradientData =
+  gen_qbrush_types.QGradientQGradientData(h: fcQGradientQGradientData_new(param1.h))
 
 proc delete*(self: gen_qbrush_types.QGradientQGradientData) =
   fcQGradientQGradientData_delete(self.h)

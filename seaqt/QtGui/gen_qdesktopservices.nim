@@ -51,9 +51,6 @@ proc fcQDesktopServices_setUrlHandler(scheme: struct_miqt_string, receiver: poin
 proc fcQDesktopServices_unsetUrlHandler(scheme: struct_miqt_string): void {.importc: "QDesktopServices_unsetUrlHandler".}
 proc fcQDesktopServices_delete(self: pointer) {.importc: "QDesktopServices_delete".}
 
-
-func init*(T: type gen_qdesktopservices_types.QDesktopServices, h: ptr cQDesktopServices): gen_qdesktopservices_types.QDesktopServices =
-  T(h: h)
 proc openUrl*(_: type gen_qdesktopservices_types.QDesktopServices, url: gen_qurl_types.QUrl): bool =
   fcQDesktopServices_openUrl(url.h)
 

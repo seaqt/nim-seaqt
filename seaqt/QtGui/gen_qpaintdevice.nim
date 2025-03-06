@@ -77,9 +77,6 @@ proc fcQPaintDevice_depth(self: pointer, ): cint {.importc: "QPaintDevice_depth"
 proc fcQPaintDevice_devicePixelRatioFScale(): float64 {.importc: "QPaintDevice_devicePixelRatioFScale".}
 proc fcQPaintDevice_delete(self: pointer) {.importc: "QPaintDevice_delete".}
 
-
-func init*(T: type gen_qpaintdevice_types.QPaintDevice, h: ptr cQPaintDevice): gen_qpaintdevice_types.QPaintDevice =
-  T(h: h)
 proc devType*(self: gen_qpaintdevice_types.QPaintDevice, ): cint =
   fcQPaintDevice_devType(self.h)
 

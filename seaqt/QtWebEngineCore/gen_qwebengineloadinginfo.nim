@@ -64,7 +64,6 @@ export
 
 type cQWebEngineLoadingInfo*{.exportc: "QWebEngineLoadingInfo", incompleteStruct.} = object
 
-proc fcQWebEngineLoadingInfo_new(other: pointer): ptr cQWebEngineLoadingInfo {.importc: "QWebEngineLoadingInfo_new".}
 proc fcQWebEngineLoadingInfo_operatorAssign(self: pointer, other: pointer): void {.importc: "QWebEngineLoadingInfo_operatorAssign".}
 proc fcQWebEngineLoadingInfo_url(self: pointer, ): pointer {.importc: "QWebEngineLoadingInfo_url".}
 proc fcQWebEngineLoadingInfo_isErrorPage(self: pointer, ): bool {.importc: "QWebEngineLoadingInfo_isErrorPage".}
@@ -72,14 +71,9 @@ proc fcQWebEngineLoadingInfo_status(self: pointer, ): cint {.importc: "QWebEngin
 proc fcQWebEngineLoadingInfo_errorString(self: pointer, ): struct_miqt_string {.importc: "QWebEngineLoadingInfo_errorString".}
 proc fcQWebEngineLoadingInfo_errorDomain(self: pointer, ): cint {.importc: "QWebEngineLoadingInfo_errorDomain".}
 proc fcQWebEngineLoadingInfo_errorCode(self: pointer, ): cint {.importc: "QWebEngineLoadingInfo_errorCode".}
+proc fcQWebEngineLoadingInfo_new(other: pointer): ptr cQWebEngineLoadingInfo {.importc: "QWebEngineLoadingInfo_new".}
 proc fcQWebEngineLoadingInfo_staticMetaObject(): pointer {.importc: "QWebEngineLoadingInfo_staticMetaObject".}
 proc fcQWebEngineLoadingInfo_delete(self: pointer) {.importc: "QWebEngineLoadingInfo_delete".}
-
-
-func init*(T: type gen_qwebengineloadinginfo_types.QWebEngineLoadingInfo, h: ptr cQWebEngineLoadingInfo): gen_qwebengineloadinginfo_types.QWebEngineLoadingInfo =
-  T(h: h)
-proc create*(T: type gen_qwebengineloadinginfo_types.QWebEngineLoadingInfo, other: gen_qwebengineloadinginfo_types.QWebEngineLoadingInfo): gen_qwebengineloadinginfo_types.QWebEngineLoadingInfo =
-  gen_qwebengineloadinginfo_types.QWebEngineLoadingInfo.init(fcQWebEngineLoadingInfo_new(other.h))
 
 proc operatorAssign*(self: gen_qwebengineloadinginfo_types.QWebEngineLoadingInfo, other: gen_qwebengineloadinginfo_types.QWebEngineLoadingInfo): void =
   fcQWebEngineLoadingInfo_operatorAssign(self.h, other.h)
@@ -104,6 +98,10 @@ proc errorDomain*(self: gen_qwebengineloadinginfo_types.QWebEngineLoadingInfo, )
 
 proc errorCode*(self: gen_qwebengineloadinginfo_types.QWebEngineLoadingInfo, ): cint =
   fcQWebEngineLoadingInfo_errorCode(self.h)
+
+proc create*(T: type gen_qwebengineloadinginfo_types.QWebEngineLoadingInfo,
+    other: gen_qwebengineloadinginfo_types.QWebEngineLoadingInfo): gen_qwebengineloadinginfo_types.QWebEngineLoadingInfo =
+  gen_qwebengineloadinginfo_types.QWebEngineLoadingInfo(h: fcQWebEngineLoadingInfo_new(other.h))
 
 proc staticMetaObject*(_: type gen_qwebengineloadinginfo_types.QWebEngineLoadingInfo): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQWebEngineLoadingInfo_staticMetaObject())

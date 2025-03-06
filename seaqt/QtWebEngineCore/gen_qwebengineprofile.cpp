@@ -26,218 +26,174 @@ extern "C" {
 #endif
 
 void miqt_exec_callback_QWebEngineProfile_downloadRequested(intptr_t, QWebEngineDownloadRequest*);
-QMetaObject* miqt_exec_callback_QWebEngineProfile_metaObject(const QWebEngineProfile*, intptr_t);
-void* miqt_exec_callback_QWebEngineProfile_metacast(QWebEngineProfile*, intptr_t, const char*);
-int miqt_exec_callback_QWebEngineProfile_metacall(QWebEngineProfile*, intptr_t, int, int, void**);
-bool miqt_exec_callback_QWebEngineProfile_event(QWebEngineProfile*, intptr_t, QEvent*);
-bool miqt_exec_callback_QWebEngineProfile_eventFilter(QWebEngineProfile*, intptr_t, QObject*, QEvent*);
-void miqt_exec_callback_QWebEngineProfile_timerEvent(QWebEngineProfile*, intptr_t, QTimerEvent*);
-void miqt_exec_callback_QWebEngineProfile_childEvent(QWebEngineProfile*, intptr_t, QChildEvent*);
-void miqt_exec_callback_QWebEngineProfile_customEvent(QWebEngineProfile*, intptr_t, QEvent*);
-void miqt_exec_callback_QWebEngineProfile_connectNotify(QWebEngineProfile*, intptr_t, QMetaMethod*);
-void miqt_exec_callback_QWebEngineProfile_disconnectNotify(QWebEngineProfile*, intptr_t, QMetaMethod*);
 #ifdef __cplusplus
 } /* extern C */
 #endif
 
 class VirtualQWebEngineProfile final : public QWebEngineProfile {
+	struct QWebEngineProfile_VTable* vtbl;
 public:
 
-	VirtualQWebEngineProfile(): QWebEngineProfile() {};
-	VirtualQWebEngineProfile(const QString& name): QWebEngineProfile(name) {};
-	VirtualQWebEngineProfile(QObject* parent): QWebEngineProfile(parent) {};
-	VirtualQWebEngineProfile(const QString& name, QObject* parent): QWebEngineProfile(name, parent) {};
+	VirtualQWebEngineProfile(struct QWebEngineProfile_VTable* vtbl): QWebEngineProfile(), vtbl(vtbl) {};
+	VirtualQWebEngineProfile(struct QWebEngineProfile_VTable* vtbl, const QString& name): QWebEngineProfile(name), vtbl(vtbl) {};
+	VirtualQWebEngineProfile(struct QWebEngineProfile_VTable* vtbl, QObject* parent): QWebEngineProfile(parent), vtbl(vtbl) {};
+	VirtualQWebEngineProfile(struct QWebEngineProfile_VTable* vtbl, const QString& name, QObject* parent): QWebEngineProfile(name, parent), vtbl(vtbl) {};
 
-	virtual ~VirtualQWebEngineProfile() override = default;
-
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__metaObject = 0;
+	virtual ~VirtualQWebEngineProfile() override { if(vtbl->destructor) vtbl->destructor(vtbl, this); }
 
 	// Subclass to allow providing a Go implementation
 	virtual const QMetaObject* metaObject() const override {
-		if (handle__metaObject == 0) {
+		if (vtbl->metaObject == 0) {
 			return QWebEngineProfile::metaObject();
 		}
-		
 
-		QMetaObject* callback_return_value = miqt_exec_callback_QWebEngineProfile_metaObject(this, handle__metaObject);
+
+		QMetaObject* callback_return_value = vtbl->metaObject(vtbl, this);
 
 		return callback_return_value;
 	}
 
 	friend QMetaObject* QWebEngineProfile_virtualbase_metaObject(const void* self);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__metacast = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void* qt_metacast(const char* param1) override {
-		if (handle__metacast == 0) {
+		if (vtbl->metacast == 0) {
 			return QWebEngineProfile::qt_metacast(param1);
 		}
-		
+
 		const char* sigval1 = (const char*) param1;
 
-		void* callback_return_value = miqt_exec_callback_QWebEngineProfile_metacast(this, handle__metacast, sigval1);
+		void* callback_return_value = vtbl->metacast(vtbl, this, sigval1);
 
 		return callback_return_value;
 	}
 
 	friend void* QWebEngineProfile_virtualbase_metacast(void* self, const char* param1);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__metacall = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual int qt_metacall(QMetaObject::Call param1, int param2, void** param3) override {
-		if (handle__metacall == 0) {
+		if (vtbl->metacall == 0) {
 			return QWebEngineProfile::qt_metacall(param1, param2, param3);
 		}
-		
+
 		QMetaObject::Call param1_ret = param1;
 		int sigval1 = static_cast<int>(param1_ret);
 		int sigval2 = param2;
 		void** sigval3 = param3;
 
-		int callback_return_value = miqt_exec_callback_QWebEngineProfile_metacall(this, handle__metacall, sigval1, sigval2, sigval3);
+		int callback_return_value = vtbl->metacall(vtbl, this, sigval1, sigval2, sigval3);
 
 		return static_cast<int>(callback_return_value);
 	}
 
 	friend int QWebEngineProfile_virtualbase_metacall(void* self, int param1, int param2, void** param3);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__event = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual bool event(QEvent* event) override {
-		if (handle__event == 0) {
+		if (vtbl->event == 0) {
 			return QWebEngineProfile::event(event);
 		}
-		
+
 		QEvent* sigval1 = event;
 
-		bool callback_return_value = miqt_exec_callback_QWebEngineProfile_event(this, handle__event, sigval1);
+		bool callback_return_value = vtbl->event(vtbl, this, sigval1);
 
 		return callback_return_value;
 	}
 
 	friend bool QWebEngineProfile_virtualbase_event(void* self, QEvent* event);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__eventFilter = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual bool eventFilter(QObject* watched, QEvent* event) override {
-		if (handle__eventFilter == 0) {
+		if (vtbl->eventFilter == 0) {
 			return QWebEngineProfile::eventFilter(watched, event);
 		}
-		
+
 		QObject* sigval1 = watched;
 		QEvent* sigval2 = event;
 
-		bool callback_return_value = miqt_exec_callback_QWebEngineProfile_eventFilter(this, handle__eventFilter, sigval1, sigval2);
+		bool callback_return_value = vtbl->eventFilter(vtbl, this, sigval1, sigval2);
 
 		return callback_return_value;
 	}
 
 	friend bool QWebEngineProfile_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__timerEvent = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void timerEvent(QTimerEvent* event) override {
-		if (handle__timerEvent == 0) {
+		if (vtbl->timerEvent == 0) {
 			QWebEngineProfile::timerEvent(event);
 			return;
 		}
-		
+
 		QTimerEvent* sigval1 = event;
 
-		miqt_exec_callback_QWebEngineProfile_timerEvent(this, handle__timerEvent, sigval1);
+		vtbl->timerEvent(vtbl, this, sigval1);
 
-		
 	}
 
 	friend void QWebEngineProfile_virtualbase_timerEvent(void* self, QTimerEvent* event);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__childEvent = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void childEvent(QChildEvent* event) override {
-		if (handle__childEvent == 0) {
+		if (vtbl->childEvent == 0) {
 			QWebEngineProfile::childEvent(event);
 			return;
 		}
-		
+
 		QChildEvent* sigval1 = event;
 
-		miqt_exec_callback_QWebEngineProfile_childEvent(this, handle__childEvent, sigval1);
+		vtbl->childEvent(vtbl, this, sigval1);
 
-		
 	}
 
 	friend void QWebEngineProfile_virtualbase_childEvent(void* self, QChildEvent* event);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__customEvent = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void customEvent(QEvent* event) override {
-		if (handle__customEvent == 0) {
+		if (vtbl->customEvent == 0) {
 			QWebEngineProfile::customEvent(event);
 			return;
 		}
-		
+
 		QEvent* sigval1 = event;
 
-		miqt_exec_callback_QWebEngineProfile_customEvent(this, handle__customEvent, sigval1);
+		vtbl->customEvent(vtbl, this, sigval1);
 
-		
 	}
 
 	friend void QWebEngineProfile_virtualbase_customEvent(void* self, QEvent* event);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__connectNotify = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void connectNotify(const QMetaMethod& signal) override {
-		if (handle__connectNotify == 0) {
+		if (vtbl->connectNotify == 0) {
 			QWebEngineProfile::connectNotify(signal);
 			return;
 		}
-		
+
 		const QMetaMethod& signal_ret = signal;
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
 
-		miqt_exec_callback_QWebEngineProfile_connectNotify(this, handle__connectNotify, sigval1);
+		vtbl->connectNotify(vtbl, this, sigval1);
 
-		
 	}
 
 	friend void QWebEngineProfile_virtualbase_connectNotify(void* self, QMetaMethod* signal);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__disconnectNotify = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void disconnectNotify(const QMetaMethod& signal) override {
-		if (handle__disconnectNotify == 0) {
+		if (vtbl->disconnectNotify == 0) {
 			QWebEngineProfile::disconnectNotify(signal);
 			return;
 		}
-		
+
 		const QMetaMethod& signal_ret = signal;
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
 
-		miqt_exec_callback_QWebEngineProfile_disconnectNotify(this, handle__disconnectNotify, sigval1);
+		vtbl->disconnectNotify(vtbl, this, sigval1);
 
-		
 	}
 
 	friend void QWebEngineProfile_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
@@ -249,22 +205,22 @@ public:
 	friend bool QWebEngineProfile_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
 };
 
-QWebEngineProfile* QWebEngineProfile_new() {
-	return new VirtualQWebEngineProfile();
+QWebEngineProfile* QWebEngineProfile_new(struct QWebEngineProfile_VTable* vtbl) {
+	return new VirtualQWebEngineProfile(vtbl);
 }
 
-QWebEngineProfile* QWebEngineProfile_new2(struct miqt_string name) {
+QWebEngineProfile* QWebEngineProfile_new2(struct QWebEngineProfile_VTable* vtbl, struct miqt_string name) {
 	QString name_QString = QString::fromUtf8(name.data, name.len);
-	return new VirtualQWebEngineProfile(name_QString);
+	return new VirtualQWebEngineProfile(vtbl, name_QString);
 }
 
-QWebEngineProfile* QWebEngineProfile_new3(QObject* parent) {
-	return new VirtualQWebEngineProfile(parent);
+QWebEngineProfile* QWebEngineProfile_new3(struct QWebEngineProfile_VTable* vtbl, QObject* parent) {
+	return new VirtualQWebEngineProfile(vtbl, parent);
 }
 
-QWebEngineProfile* QWebEngineProfile_new4(struct miqt_string name, QObject* parent) {
+QWebEngineProfile* QWebEngineProfile_new4(struct QWebEngineProfile_VTable* vtbl, struct miqt_string name, QObject* parent) {
 	QString name_QString = QString::fromUtf8(name.data, name.len);
-	return new VirtualQWebEngineProfile(name_QString, parent);
+	return new VirtualQWebEngineProfile(vtbl, name_QString, parent);
 }
 
 void QWebEngineProfile_virtbase(QWebEngineProfile* src, QObject** outptr_QObject) {
@@ -556,30 +512,10 @@ struct miqt_string QWebEngineProfile_tr3(const char* s, const char* c, int n) {
 	return _ms;
 }
 
-bool QWebEngineProfile_override_virtual_metaObject(void* self, intptr_t slot) {
-	VirtualQWebEngineProfile* self_cast = dynamic_cast<VirtualQWebEngineProfile*>( (QWebEngineProfile*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__metaObject = slot;
-	return true;
-}
-
 QMetaObject* QWebEngineProfile_virtualbase_metaObject(const void* self) {
 
 	return (QMetaObject*) ( (const VirtualQWebEngineProfile*)(self) )->QWebEngineProfile::metaObject();
 
-}
-
-bool QWebEngineProfile_override_virtual_metacast(void* self, intptr_t slot) {
-	VirtualQWebEngineProfile* self_cast = dynamic_cast<VirtualQWebEngineProfile*>( (QWebEngineProfile*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__metacast = slot;
-	return true;
 }
 
 void* QWebEngineProfile_virtualbase_metacast(void* self, const char* param1) {
@@ -588,30 +524,10 @@ void* QWebEngineProfile_virtualbase_metacast(void* self, const char* param1) {
 
 }
 
-bool QWebEngineProfile_override_virtual_metacall(void* self, intptr_t slot) {
-	VirtualQWebEngineProfile* self_cast = dynamic_cast<VirtualQWebEngineProfile*>( (QWebEngineProfile*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__metacall = slot;
-	return true;
-}
-
 int QWebEngineProfile_virtualbase_metacall(void* self, int param1, int param2, void** param3) {
 
 	return ( (VirtualQWebEngineProfile*)(self) )->QWebEngineProfile::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 
-}
-
-bool QWebEngineProfile_override_virtual_event(void* self, intptr_t slot) {
-	VirtualQWebEngineProfile* self_cast = dynamic_cast<VirtualQWebEngineProfile*>( (QWebEngineProfile*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__event = slot;
-	return true;
 }
 
 bool QWebEngineProfile_virtualbase_event(void* self, QEvent* event) {
@@ -620,30 +536,10 @@ bool QWebEngineProfile_virtualbase_event(void* self, QEvent* event) {
 
 }
 
-bool QWebEngineProfile_override_virtual_eventFilter(void* self, intptr_t slot) {
-	VirtualQWebEngineProfile* self_cast = dynamic_cast<VirtualQWebEngineProfile*>( (QWebEngineProfile*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__eventFilter = slot;
-	return true;
-}
-
 bool QWebEngineProfile_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event) {
 
 	return ( (VirtualQWebEngineProfile*)(self) )->QWebEngineProfile::eventFilter(watched, event);
 
-}
-
-bool QWebEngineProfile_override_virtual_timerEvent(void* self, intptr_t slot) {
-	VirtualQWebEngineProfile* self_cast = dynamic_cast<VirtualQWebEngineProfile*>( (QWebEngineProfile*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__timerEvent = slot;
-	return true;
 }
 
 void QWebEngineProfile_virtualbase_timerEvent(void* self, QTimerEvent* event) {
@@ -652,30 +548,10 @@ void QWebEngineProfile_virtualbase_timerEvent(void* self, QTimerEvent* event) {
 
 }
 
-bool QWebEngineProfile_override_virtual_childEvent(void* self, intptr_t slot) {
-	VirtualQWebEngineProfile* self_cast = dynamic_cast<VirtualQWebEngineProfile*>( (QWebEngineProfile*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__childEvent = slot;
-	return true;
-}
-
 void QWebEngineProfile_virtualbase_childEvent(void* self, QChildEvent* event) {
 
 	( (VirtualQWebEngineProfile*)(self) )->QWebEngineProfile::childEvent(event);
 
-}
-
-bool QWebEngineProfile_override_virtual_customEvent(void* self, intptr_t slot) {
-	VirtualQWebEngineProfile* self_cast = dynamic_cast<VirtualQWebEngineProfile*>( (QWebEngineProfile*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__customEvent = slot;
-	return true;
 }
 
 void QWebEngineProfile_virtualbase_customEvent(void* self, QEvent* event) {
@@ -684,30 +560,10 @@ void QWebEngineProfile_virtualbase_customEvent(void* self, QEvent* event) {
 
 }
 
-bool QWebEngineProfile_override_virtual_connectNotify(void* self, intptr_t slot) {
-	VirtualQWebEngineProfile* self_cast = dynamic_cast<VirtualQWebEngineProfile*>( (QWebEngineProfile*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__connectNotify = slot;
-	return true;
-}
-
 void QWebEngineProfile_virtualbase_connectNotify(void* self, QMetaMethod* signal) {
 
 	( (VirtualQWebEngineProfile*)(self) )->QWebEngineProfile::connectNotify(*signal);
 
-}
-
-bool QWebEngineProfile_override_virtual_disconnectNotify(void* self, intptr_t slot) {
-	VirtualQWebEngineProfile* self_cast = dynamic_cast<VirtualQWebEngineProfile*>( (QWebEngineProfile*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__disconnectNotify = slot;
-	return true;
 }
 
 void QWebEngineProfile_virtualbase_disconnectNotify(void* self, QMetaMethod* signal) {

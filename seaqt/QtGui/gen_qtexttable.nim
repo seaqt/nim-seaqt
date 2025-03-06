@@ -59,8 +59,6 @@ export
 type cQTextTableCell*{.exportc: "QTextTableCell", incompleteStruct.} = object
 type cQTextTable*{.exportc: "QTextTable", incompleteStruct.} = object
 
-proc fcQTextTableCell_new(): ptr cQTextTableCell {.importc: "QTextTableCell_new".}
-proc fcQTextTableCell_new2(o: pointer): ptr cQTextTableCell {.importc: "QTextTableCell_new2".}
 proc fcQTextTableCell_operatorAssign(self: pointer, o: pointer): void {.importc: "QTextTableCell_operatorAssign".}
 proc fcQTextTableCell_setFormat(self: pointer, format: pointer): void {.importc: "QTextTableCell_setFormat".}
 proc fcQTextTableCell_format(self: pointer, ): pointer {.importc: "QTextTableCell_format".}
@@ -78,8 +76,9 @@ proc fcQTextTableCell_operatorNotEqual(self: pointer, other: pointer): bool {.im
 proc fcQTextTableCell_begin(self: pointer, ): pointer {.importc: "QTextTableCell_begin".}
 proc fcQTextTableCell_endX(self: pointer, ): pointer {.importc: "QTextTableCell_end".}
 proc fcQTextTableCell_tableCellFormatIndex(self: pointer, ): cint {.importc: "QTextTableCell_tableCellFormatIndex".}
+proc fcQTextTableCell_new(): ptr cQTextTableCell {.importc: "QTextTableCell_new".}
+proc fcQTextTableCell_new2(o: pointer): ptr cQTextTableCell {.importc: "QTextTableCell_new2".}
 proc fcQTextTableCell_delete(self: pointer) {.importc: "QTextTableCell_delete".}
-proc fcQTextTable_new(doc: pointer): ptr cQTextTable {.importc: "QTextTable_new".}
 proc fcQTextTable_metaObject(self: pointer, ): pointer {.importc: "QTextTable_metaObject".}
 proc fcQTextTable_metacast(self: pointer, param1: cstring): pointer {.importc: "QTextTable_metacast".}
 proc fcQTextTable_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QTextTable_metacall".}
@@ -105,37 +104,31 @@ proc fcQTextTable_setFormat(self: pointer, format: pointer): void {.importc: "QT
 proc fcQTextTable_format(self: pointer, ): pointer {.importc: "QTextTable_format".}
 proc fcQTextTable_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QTextTable_tr2".}
 proc fcQTextTable_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QTextTable_tr3".}
-proc fQTextTable_virtualbase_metaObject(self: pointer, ): pointer{.importc: "QTextTable_virtualbase_metaObject".}
-proc fcQTextTable_override_virtual_metaObject(self: pointer, slot: int) {.importc: "QTextTable_override_virtual_metaObject".}
-proc fQTextTable_virtualbase_metacast(self: pointer, param1: cstring): pointer{.importc: "QTextTable_virtualbase_metacast".}
-proc fcQTextTable_override_virtual_metacast(self: pointer, slot: int) {.importc: "QTextTable_override_virtual_metacast".}
-proc fQTextTable_virtualbase_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint{.importc: "QTextTable_virtualbase_metacall".}
-proc fcQTextTable_override_virtual_metacall(self: pointer, slot: int) {.importc: "QTextTable_override_virtual_metacall".}
-proc fQTextTable_virtualbase_event(self: pointer, event: pointer): bool{.importc: "QTextTable_virtualbase_event".}
-proc fcQTextTable_override_virtual_event(self: pointer, slot: int) {.importc: "QTextTable_override_virtual_event".}
-proc fQTextTable_virtualbase_eventFilter(self: pointer, watched: pointer, event: pointer): bool{.importc: "QTextTable_virtualbase_eventFilter".}
-proc fcQTextTable_override_virtual_eventFilter(self: pointer, slot: int) {.importc: "QTextTable_override_virtual_eventFilter".}
-proc fQTextTable_virtualbase_timerEvent(self: pointer, event: pointer): void{.importc: "QTextTable_virtualbase_timerEvent".}
-proc fcQTextTable_override_virtual_timerEvent(self: pointer, slot: int) {.importc: "QTextTable_override_virtual_timerEvent".}
-proc fQTextTable_virtualbase_childEvent(self: pointer, event: pointer): void{.importc: "QTextTable_virtualbase_childEvent".}
-proc fcQTextTable_override_virtual_childEvent(self: pointer, slot: int) {.importc: "QTextTable_override_virtual_childEvent".}
-proc fQTextTable_virtualbase_customEvent(self: pointer, event: pointer): void{.importc: "QTextTable_virtualbase_customEvent".}
-proc fcQTextTable_override_virtual_customEvent(self: pointer, slot: int) {.importc: "QTextTable_override_virtual_customEvent".}
-proc fQTextTable_virtualbase_connectNotify(self: pointer, signal: pointer): void{.importc: "QTextTable_virtualbase_connectNotify".}
-proc fcQTextTable_override_virtual_connectNotify(self: pointer, slot: int) {.importc: "QTextTable_override_virtual_connectNotify".}
-proc fQTextTable_virtualbase_disconnectNotify(self: pointer, signal: pointer): void{.importc: "QTextTable_virtualbase_disconnectNotify".}
-proc fcQTextTable_override_virtual_disconnectNotify(self: pointer, slot: int) {.importc: "QTextTable_override_virtual_disconnectNotify".}
+type cQTextTableVTable = object
+  destructor*: proc(vtbl: ptr cQTextTableVTable, self: ptr cQTextTable) {.cdecl, raises:[], gcsafe.}
+  metaObject*: proc(vtbl, self: pointer, ): pointer {.cdecl, raises: [], gcsafe.}
+  metacast*: proc(vtbl, self: pointer, param1: cstring): pointer {.cdecl, raises: [], gcsafe.}
+  metacall*: proc(vtbl, self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl, raises: [], gcsafe.}
+  event*: proc(vtbl, self: pointer, event: pointer): bool {.cdecl, raises: [], gcsafe.}
+  eventFilter*: proc(vtbl, self: pointer, watched: pointer, event: pointer): bool {.cdecl, raises: [], gcsafe.}
+  timerEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  childEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  customEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  connectNotify*: proc(vtbl, self: pointer, signal: pointer): void {.cdecl, raises: [], gcsafe.}
+  disconnectNotify*: proc(vtbl, self: pointer, signal: pointer): void {.cdecl, raises: [], gcsafe.}
+proc fcQTextTable_virtualbase_metaObject(self: pointer, ): pointer {.importc: "QTextTable_virtualbase_metaObject".}
+proc fcQTextTable_virtualbase_metacast(self: pointer, param1: cstring): pointer {.importc: "QTextTable_virtualbase_metacast".}
+proc fcQTextTable_virtualbase_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QTextTable_virtualbase_metacall".}
+proc fcQTextTable_virtualbase_event(self: pointer, event: pointer): bool {.importc: "QTextTable_virtualbase_event".}
+proc fcQTextTable_virtualbase_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.importc: "QTextTable_virtualbase_eventFilter".}
+proc fcQTextTable_virtualbase_timerEvent(self: pointer, event: pointer): void {.importc: "QTextTable_virtualbase_timerEvent".}
+proc fcQTextTable_virtualbase_childEvent(self: pointer, event: pointer): void {.importc: "QTextTable_virtualbase_childEvent".}
+proc fcQTextTable_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QTextTable_virtualbase_customEvent".}
+proc fcQTextTable_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QTextTable_virtualbase_connectNotify".}
+proc fcQTextTable_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QTextTable_virtualbase_disconnectNotify".}
+proc fcQTextTable_new(vtbl: pointer, doc: pointer): ptr cQTextTable {.importc: "QTextTable_new".}
 proc fcQTextTable_staticMetaObject(): pointer {.importc: "QTextTable_staticMetaObject".}
 proc fcQTextTable_delete(self: pointer) {.importc: "QTextTable_delete".}
-
-
-func init*(T: type gen_qtexttable_types.QTextTableCell, h: ptr cQTextTableCell): gen_qtexttable_types.QTextTableCell =
-  T(h: h)
-proc create*(T: type gen_qtexttable_types.QTextTableCell, ): gen_qtexttable_types.QTextTableCell =
-  gen_qtexttable_types.QTextTableCell.init(fcQTextTableCell_new())
-
-proc create*(T: type gen_qtexttable_types.QTextTableCell, o: gen_qtexttable_types.QTextTableCell): gen_qtexttable_types.QTextTableCell =
-  gen_qtexttable_types.QTextTableCell.init(fcQTextTableCell_new2(o.h))
 
 proc operatorAssign*(self: gen_qtexttable_types.QTextTableCell, o: gen_qtexttable_types.QTextTableCell): void =
   fcQTextTableCell_operatorAssign(self.h, o.h)
@@ -188,14 +181,15 @@ proc endX*(self: gen_qtexttable_types.QTextTableCell, ): gen_qtextobject_types.Q
 proc tableCellFormatIndex*(self: gen_qtexttable_types.QTextTableCell, ): cint =
   fcQTextTableCell_tableCellFormatIndex(self.h)
 
+proc create*(T: type gen_qtexttable_types.QTextTableCell): gen_qtexttable_types.QTextTableCell =
+  gen_qtexttable_types.QTextTableCell(h: fcQTextTableCell_new())
+
+proc create*(T: type gen_qtexttable_types.QTextTableCell,
+    o: gen_qtexttable_types.QTextTableCell): gen_qtexttable_types.QTextTableCell =
+  gen_qtexttable_types.QTextTableCell(h: fcQTextTableCell_new2(o.h))
+
 proc delete*(self: gen_qtexttable_types.QTextTableCell) =
   fcQTextTableCell_delete(self.h)
-
-func init*(T: type gen_qtexttable_types.QTextTable, h: ptr cQTextTable): gen_qtexttable_types.QTextTable =
-  T(h: h)
-proc create*(T: type gen_qtexttable_types.QTextTable, doc: gen_qtextdocument_types.QTextDocument): gen_qtexttable_types.QTextTable =
-  gen_qtexttable_types.QTextTable.init(fcQTextTable_new(doc.h))
-
 proc metaObject*(self: gen_qtexttable_types.QTextTable, ): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQTextTable_metaObject(self.h))
 
@@ -280,190 +274,155 @@ proc tr*(_: type gen_qtexttable_types.QTextTable, s: cstring, c: cstring, n: cin
   c_free(v_ms.data)
   vx_ret
 
+type QTextTablemetaObjectProc* = proc(self: QTextTable): gen_qobjectdefs_types.QMetaObject {.raises: [], gcsafe.}
+type QTextTablemetacastProc* = proc(self: QTextTable, param1: cstring): pointer {.raises: [], gcsafe.}
+type QTextTablemetacallProc* = proc(self: QTextTable, param1: cint, param2: cint, param3: pointer): cint {.raises: [], gcsafe.}
+type QTextTableeventProc* = proc(self: QTextTable, event: gen_qcoreevent_types.QEvent): bool {.raises: [], gcsafe.}
+type QTextTableeventFilterProc* = proc(self: QTextTable, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.raises: [], gcsafe.}
+type QTextTabletimerEventProc* = proc(self: QTextTable, event: gen_qcoreevent_types.QTimerEvent): void {.raises: [], gcsafe.}
+type QTextTablechildEventProc* = proc(self: QTextTable, event: gen_qcoreevent_types.QChildEvent): void {.raises: [], gcsafe.}
+type QTextTablecustomEventProc* = proc(self: QTextTable, event: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
+type QTextTableconnectNotifyProc* = proc(self: QTextTable, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
+type QTextTabledisconnectNotifyProc* = proc(self: QTextTable, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
+type QTextTableVTable* = object
+  vtbl: cQTextTableVTable
+  metaObject*: QTextTablemetaObjectProc
+  metacast*: QTextTablemetacastProc
+  metacall*: QTextTablemetacallProc
+  event*: QTextTableeventProc
+  eventFilter*: QTextTableeventFilterProc
+  timerEvent*: QTextTabletimerEventProc
+  childEvent*: QTextTablechildEventProc
+  customEvent*: QTextTablecustomEventProc
+  connectNotify*: QTextTableconnectNotifyProc
+  disconnectNotify*: QTextTabledisconnectNotifyProc
 proc QTextTablemetaObject*(self: gen_qtexttable_types.QTextTable, ): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fQTextTable_virtualbase_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQTextTable_virtualbase_metaObject(self.h))
 
-type QTextTablemetaObjectProc* = proc(): gen_qobjectdefs_types.QMetaObject
-proc onmetaObject*(self: gen_qtexttable_types.QTextTable, slot: QTextTablemetaObjectProc) =
-  # TODO check subclass
-  var tmp = new QTextTablemetaObjectProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQTextTable_override_virtual_metaObject(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QTextTable_metaObject(self: ptr cQTextTable, slot: int): pointer {.exportc: "miqt_exec_callback_QTextTable_metaObject ".} =
-  var nimfunc = cast[ptr QTextTablemetaObjectProc](cast[pointer](slot))
-
-  let virtualReturn = nimfunc[]( )
-
+proc miqt_exec_callback_cQTextTable_metaObject(vtbl: pointer, self: pointer): pointer {.cdecl.} =
+  let vtbl = cast[ptr QTextTableVTable](vtbl)
+  let self = QTextTable(h: self)
+  var virtualReturn = vtbl[].metaObject(self)
   virtualReturn.h
+
 proc QTextTablemetacast*(self: gen_qtexttable_types.QTextTable, param1: cstring): pointer =
-  fQTextTable_virtualbase_metacast(self.h, param1)
+  fcQTextTable_virtualbase_metacast(self.h, param1)
 
-type QTextTablemetacastProc* = proc(param1: cstring): pointer
-proc onmetacast*(self: gen_qtexttable_types.QTextTable, slot: QTextTablemetacastProc) =
-  # TODO check subclass
-  var tmp = new QTextTablemetacastProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQTextTable_override_virtual_metacast(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QTextTable_metacast(self: ptr cQTextTable, slot: int, param1: cstring): pointer {.exportc: "miqt_exec_callback_QTextTable_metacast ".} =
-  var nimfunc = cast[ptr QTextTablemetacastProc](cast[pointer](slot))
+proc miqt_exec_callback_cQTextTable_metacast(vtbl: pointer, self: pointer, param1: cstring): pointer {.cdecl.} =
+  let vtbl = cast[ptr QTextTableVTable](vtbl)
+  let self = QTextTable(h: self)
   let slotval1 = (param1)
-
-
-  let virtualReturn = nimfunc[](slotval1 )
-
+  var virtualReturn = vtbl[].metacast(self, slotval1)
   virtualReturn
+
 proc QTextTablemetacall*(self: gen_qtexttable_types.QTextTable, param1: cint, param2: cint, param3: pointer): cint =
-  fQTextTable_virtualbase_metacall(self.h, cint(param1), param2, param3)
+  fcQTextTable_virtualbase_metacall(self.h, cint(param1), param2, param3)
 
-type QTextTablemetacallProc* = proc(param1: cint, param2: cint, param3: pointer): cint
-proc onmetacall*(self: gen_qtexttable_types.QTextTable, slot: QTextTablemetacallProc) =
-  # TODO check subclass
-  var tmp = new QTextTablemetacallProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQTextTable_override_virtual_metacall(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QTextTable_metacall(self: ptr cQTextTable, slot: int, param1: cint, param2: cint, param3: pointer): cint {.exportc: "miqt_exec_callback_QTextTable_metacall ".} =
-  var nimfunc = cast[ptr QTextTablemetacallProc](cast[pointer](slot))
+proc miqt_exec_callback_cQTextTable_metacall(vtbl: pointer, self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
+  let vtbl = cast[ptr QTextTableVTable](vtbl)
+  let self = QTextTable(h: self)
   let slotval1 = cint(param1)
-
   let slotval2 = param2
-
   let slotval3 = param3
-
-
-  let virtualReturn = nimfunc[](slotval1, slotval2, slotval3 )
-
+  var virtualReturn = vtbl[].metacall(self, slotval1, slotval2, slotval3)
   virtualReturn
+
 proc QTextTableevent*(self: gen_qtexttable_types.QTextTable, event: gen_qcoreevent_types.QEvent): bool =
-  fQTextTable_virtualbase_event(self.h, event.h)
+  fcQTextTable_virtualbase_event(self.h, event.h)
 
-type QTextTableeventProc* = proc(event: gen_qcoreevent_types.QEvent): bool
-proc onevent*(self: gen_qtexttable_types.QTextTable, slot: QTextTableeventProc) =
-  # TODO check subclass
-  var tmp = new QTextTableeventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQTextTable_override_virtual_event(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QTextTable_event(self: ptr cQTextTable, slot: int, event: pointer): bool {.exportc: "miqt_exec_callback_QTextTable_event ".} =
-  var nimfunc = cast[ptr QTextTableeventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQTextTable_event(vtbl: pointer, self: pointer, event: pointer): bool {.cdecl.} =
+  let vtbl = cast[ptr QTextTableVTable](vtbl)
+  let self = QTextTable(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event)
-
-
-  let virtualReturn = nimfunc[](slotval1 )
-
+  var virtualReturn = vtbl[].event(self, slotval1)
   virtualReturn
+
 proc QTextTableeventFilter*(self: gen_qtexttable_types.QTextTable, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool =
-  fQTextTable_virtualbase_eventFilter(self.h, watched.h, event.h)
+  fcQTextTable_virtualbase_eventFilter(self.h, watched.h, event.h)
 
-type QTextTableeventFilterProc* = proc(watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool
-proc oneventFilter*(self: gen_qtexttable_types.QTextTable, slot: QTextTableeventFilterProc) =
-  # TODO check subclass
-  var tmp = new QTextTableeventFilterProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQTextTable_override_virtual_eventFilter(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QTextTable_eventFilter(self: ptr cQTextTable, slot: int, watched: pointer, event: pointer): bool {.exportc: "miqt_exec_callback_QTextTable_eventFilter ".} =
-  var nimfunc = cast[ptr QTextTableeventFilterProc](cast[pointer](slot))
+proc miqt_exec_callback_cQTextTable_eventFilter(vtbl: pointer, self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
+  let vtbl = cast[ptr QTextTableVTable](vtbl)
+  let self = QTextTable(h: self)
   let slotval1 = gen_qobject_types.QObject(h: watched)
-
   let slotval2 = gen_qcoreevent_types.QEvent(h: event)
-
-
-  let virtualReturn = nimfunc[](slotval1, slotval2 )
-
+  var virtualReturn = vtbl[].eventFilter(self, slotval1, slotval2)
   virtualReturn
+
 proc QTextTabletimerEvent*(self: gen_qtexttable_types.QTextTable, event: gen_qcoreevent_types.QTimerEvent): void =
-  fQTextTable_virtualbase_timerEvent(self.h, event.h)
+  fcQTextTable_virtualbase_timerEvent(self.h, event.h)
 
-type QTextTabletimerEventProc* = proc(event: gen_qcoreevent_types.QTimerEvent): void
-proc ontimerEvent*(self: gen_qtexttable_types.QTextTable, slot: QTextTabletimerEventProc) =
-  # TODO check subclass
-  var tmp = new QTextTabletimerEventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQTextTable_override_virtual_timerEvent(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QTextTable_timerEvent(self: ptr cQTextTable, slot: int, event: pointer): void {.exportc: "miqt_exec_callback_QTextTable_timerEvent ".} =
-  var nimfunc = cast[ptr QTextTabletimerEventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQTextTable_timerEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QTextTableVTable](vtbl)
+  let self = QTextTable(h: self)
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event)
+  vtbl[].timerEvent(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QTextTablechildEvent*(self: gen_qtexttable_types.QTextTable, event: gen_qcoreevent_types.QChildEvent): void =
-  fQTextTable_virtualbase_childEvent(self.h, event.h)
+  fcQTextTable_virtualbase_childEvent(self.h, event.h)
 
-type QTextTablechildEventProc* = proc(event: gen_qcoreevent_types.QChildEvent): void
-proc onchildEvent*(self: gen_qtexttable_types.QTextTable, slot: QTextTablechildEventProc) =
-  # TODO check subclass
-  var tmp = new QTextTablechildEventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQTextTable_override_virtual_childEvent(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QTextTable_childEvent(self: ptr cQTextTable, slot: int, event: pointer): void {.exportc: "miqt_exec_callback_QTextTable_childEvent ".} =
-  var nimfunc = cast[ptr QTextTablechildEventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQTextTable_childEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QTextTableVTable](vtbl)
+  let self = QTextTable(h: self)
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: event)
+  vtbl[].childEvent(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QTextTablecustomEvent*(self: gen_qtexttable_types.QTextTable, event: gen_qcoreevent_types.QEvent): void =
-  fQTextTable_virtualbase_customEvent(self.h, event.h)
+  fcQTextTable_virtualbase_customEvent(self.h, event.h)
 
-type QTextTablecustomEventProc* = proc(event: gen_qcoreevent_types.QEvent): void
-proc oncustomEvent*(self: gen_qtexttable_types.QTextTable, slot: QTextTablecustomEventProc) =
-  # TODO check subclass
-  var tmp = new QTextTablecustomEventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQTextTable_override_virtual_customEvent(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QTextTable_customEvent(self: ptr cQTextTable, slot: int, event: pointer): void {.exportc: "miqt_exec_callback_QTextTable_customEvent ".} =
-  var nimfunc = cast[ptr QTextTablecustomEventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQTextTable_customEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QTextTableVTable](vtbl)
+  let self = QTextTable(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  vtbl[].customEvent(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QTextTableconnectNotify*(self: gen_qtexttable_types.QTextTable, signal: gen_qmetaobject_types.QMetaMethod): void =
-  fQTextTable_virtualbase_connectNotify(self.h, signal.h)
+  fcQTextTable_virtualbase_connectNotify(self.h, signal.h)
 
-type QTextTableconnectNotifyProc* = proc(signal: gen_qmetaobject_types.QMetaMethod): void
-proc onconnectNotify*(self: gen_qtexttable_types.QTextTable, slot: QTextTableconnectNotifyProc) =
-  # TODO check subclass
-  var tmp = new QTextTableconnectNotifyProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQTextTable_override_virtual_connectNotify(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QTextTable_connectNotify(self: ptr cQTextTable, slot: int, signal: pointer): void {.exportc: "miqt_exec_callback_QTextTable_connectNotify ".} =
-  var nimfunc = cast[ptr QTextTableconnectNotifyProc](cast[pointer](slot))
+proc miqt_exec_callback_cQTextTable_connectNotify(vtbl: pointer, self: pointer, signal: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QTextTableVTable](vtbl)
+  let self = QTextTable(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  vtbl[].connectNotify(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QTextTabledisconnectNotify*(self: gen_qtexttable_types.QTextTable, signal: gen_qmetaobject_types.QMetaMethod): void =
-  fQTextTable_virtualbase_disconnectNotify(self.h, signal.h)
+  fcQTextTable_virtualbase_disconnectNotify(self.h, signal.h)
 
-type QTextTabledisconnectNotifyProc* = proc(signal: gen_qmetaobject_types.QMetaMethod): void
-proc ondisconnectNotify*(self: gen_qtexttable_types.QTextTable, slot: QTextTabledisconnectNotifyProc) =
-  # TODO check subclass
-  var tmp = new QTextTabledisconnectNotifyProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQTextTable_override_virtual_disconnectNotify(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QTextTable_disconnectNotify(self: ptr cQTextTable, slot: int, signal: pointer): void {.exportc: "miqt_exec_callback_QTextTable_disconnectNotify ".} =
-  var nimfunc = cast[ptr QTextTabledisconnectNotifyProc](cast[pointer](slot))
+proc miqt_exec_callback_cQTextTable_disconnectNotify(vtbl: pointer, self: pointer, signal: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QTextTableVTable](vtbl)
+  let self = QTextTable(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  vtbl[].disconnectNotify(self, slotval1)
 
+proc create*(T: type gen_qtexttable_types.QTextTable,
+    doc: gen_qtextdocument_types.QTextDocument,
+    vtbl: ref QTextTableVTable = nil): gen_qtexttable_types.QTextTable =
+  let vtbl = if vtbl == nil: new QTextTableVTable else: vtbl
+  GC_ref(vtbl)
+  vtbl.vtbl.destructor = proc(vtbl: ptr cQTextTableVTable, _: ptr cQTextTable) {.cdecl.} =
+    let vtbl = cast[ref QTextTableVTable](vtbl)
+    GC_unref(vtbl)
+  if not isNil(vtbl.metaObject):
+    vtbl[].vtbl.metaObject = miqt_exec_callback_cQTextTable_metaObject
+  if not isNil(vtbl.metacast):
+    vtbl[].vtbl.metacast = miqt_exec_callback_cQTextTable_metacast
+  if not isNil(vtbl.metacall):
+    vtbl[].vtbl.metacall = miqt_exec_callback_cQTextTable_metacall
+  if not isNil(vtbl.event):
+    vtbl[].vtbl.event = miqt_exec_callback_cQTextTable_event
+  if not isNil(vtbl.eventFilter):
+    vtbl[].vtbl.eventFilter = miqt_exec_callback_cQTextTable_eventFilter
+  if not isNil(vtbl.timerEvent):
+    vtbl[].vtbl.timerEvent = miqt_exec_callback_cQTextTable_timerEvent
+  if not isNil(vtbl.childEvent):
+    vtbl[].vtbl.childEvent = miqt_exec_callback_cQTextTable_childEvent
+  if not isNil(vtbl.customEvent):
+    vtbl[].vtbl.customEvent = miqt_exec_callback_cQTextTable_customEvent
+  if not isNil(vtbl.connectNotify):
+    vtbl[].vtbl.connectNotify = miqt_exec_callback_cQTextTable_connectNotify
+  if not isNil(vtbl.disconnectNotify):
+    vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQTextTable_disconnectNotify
+  gen_qtexttable_types.QTextTable(h: fcQTextTable_new(addr(vtbl[]), doc.h))
 
-  nimfunc[](slotval1)
 proc staticMetaObject*(_: type gen_qtexttable_types.QTextTable): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQTextTable_staticMetaObject())
 proc delete*(self: gen_qtexttable_types.QTextTable) =

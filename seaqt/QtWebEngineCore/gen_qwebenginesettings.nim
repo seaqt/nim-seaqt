@@ -115,9 +115,6 @@ proc fcQWebEngineSettings_setUnknownUrlSchemePolicy(self: pointer, policy: cint)
 proc fcQWebEngineSettings_resetUnknownUrlSchemePolicy(self: pointer, ): void {.importc: "QWebEngineSettings_resetUnknownUrlSchemePolicy".}
 proc fcQWebEngineSettings_delete(self: pointer) {.importc: "QWebEngineSettings_delete".}
 
-
-func init*(T: type gen_qwebenginesettings_types.QWebEngineSettings, h: ptr cQWebEngineSettings): gen_qwebenginesettings_types.QWebEngineSettings =
-  T(h: h)
 proc setFontFamily*(self: gen_qwebenginesettings_types.QWebEngineSettings, which: cint, family: string): void =
   fcQWebEngineSettings_setFontFamily(self.h, cint(which), struct_miqt_string(data: family, len: csize_t(len(family))))
 

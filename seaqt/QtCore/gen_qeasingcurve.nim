@@ -98,9 +98,6 @@ export
 
 type cQEasingCurve*{.exportc: "QEasingCurve", incompleteStruct.} = object
 
-proc fcQEasingCurve_new(): ptr cQEasingCurve {.importc: "QEasingCurve_new".}
-proc fcQEasingCurve_new2(other: pointer): ptr cQEasingCurve {.importc: "QEasingCurve_new2".}
-proc fcQEasingCurve_new3(typeVal: cint): ptr cQEasingCurve {.importc: "QEasingCurve_new3".}
 proc fcQEasingCurve_operatorAssign(self: pointer, other: pointer): void {.importc: "QEasingCurve_operatorAssign".}
 proc fcQEasingCurve_swap(self: pointer, other: pointer): void {.importc: "QEasingCurve_swap".}
 proc fcQEasingCurve_operatorEqual(self: pointer, other: pointer): bool {.importc: "QEasingCurve_operatorEqual".}
@@ -117,20 +114,11 @@ proc fcQEasingCurve_toCubicSpline(self: pointer, ): struct_miqt_array {.importc:
 proc fcQEasingCurve_typeX(self: pointer, ): cint {.importc: "QEasingCurve_type".}
 proc fcQEasingCurve_setType(self: pointer, typeVal: cint): void {.importc: "QEasingCurve_setType".}
 proc fcQEasingCurve_valueForProgress(self: pointer, progress: float64): float64 {.importc: "QEasingCurve_valueForProgress".}
+proc fcQEasingCurve_new(): ptr cQEasingCurve {.importc: "QEasingCurve_new".}
+proc fcQEasingCurve_new2(other: pointer): ptr cQEasingCurve {.importc: "QEasingCurve_new2".}
+proc fcQEasingCurve_new3(typeVal: cint): ptr cQEasingCurve {.importc: "QEasingCurve_new3".}
 proc fcQEasingCurve_staticMetaObject(): pointer {.importc: "QEasingCurve_staticMetaObject".}
 proc fcQEasingCurve_delete(self: pointer) {.importc: "QEasingCurve_delete".}
-
-
-func init*(T: type gen_qeasingcurve_types.QEasingCurve, h: ptr cQEasingCurve): gen_qeasingcurve_types.QEasingCurve =
-  T(h: h)
-proc create*(T: type gen_qeasingcurve_types.QEasingCurve, ): gen_qeasingcurve_types.QEasingCurve =
-  gen_qeasingcurve_types.QEasingCurve.init(fcQEasingCurve_new())
-
-proc create*(T: type gen_qeasingcurve_types.QEasingCurve, other: gen_qeasingcurve_types.QEasingCurve): gen_qeasingcurve_types.QEasingCurve =
-  gen_qeasingcurve_types.QEasingCurve.init(fcQEasingCurve_new2(other.h))
-
-proc create*(T: type gen_qeasingcurve_types.QEasingCurve, typeVal: cint): gen_qeasingcurve_types.QEasingCurve =
-  gen_qeasingcurve_types.QEasingCurve.init(fcQEasingCurve_new3(cint(typeVal)))
 
 proc operatorAssign*(self: gen_qeasingcurve_types.QEasingCurve, other: gen_qeasingcurve_types.QEasingCurve): void =
   fcQEasingCurve_operatorAssign(self.h, other.h)
@@ -184,6 +172,17 @@ proc setType*(self: gen_qeasingcurve_types.QEasingCurve, typeVal: cint): void =
 
 proc valueForProgress*(self: gen_qeasingcurve_types.QEasingCurve, progress: float64): float64 =
   fcQEasingCurve_valueForProgress(self.h, progress)
+
+proc create*(T: type gen_qeasingcurve_types.QEasingCurve): gen_qeasingcurve_types.QEasingCurve =
+  gen_qeasingcurve_types.QEasingCurve(h: fcQEasingCurve_new())
+
+proc create*(T: type gen_qeasingcurve_types.QEasingCurve,
+    other: gen_qeasingcurve_types.QEasingCurve): gen_qeasingcurve_types.QEasingCurve =
+  gen_qeasingcurve_types.QEasingCurve(h: fcQEasingCurve_new2(other.h))
+
+proc create*(T: type gen_qeasingcurve_types.QEasingCurve,
+    typeVal: cint): gen_qeasingcurve_types.QEasingCurve =
+  gen_qeasingcurve_types.QEasingCurve(h: fcQEasingCurve_new3(cint(typeVal)))
 
 proc staticMetaObject*(_: type gen_qeasingcurve_types.QEasingCurve): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQEasingCurve_staticMetaObject())

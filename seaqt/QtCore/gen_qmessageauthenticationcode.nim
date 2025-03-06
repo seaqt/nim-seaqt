@@ -44,8 +44,6 @@ export
 
 type cQMessageAuthenticationCode*{.exportc: "QMessageAuthenticationCode", incompleteStruct.} = object
 
-proc fcQMessageAuthenticationCode_new(methodVal: cint): ptr cQMessageAuthenticationCode {.importc: "QMessageAuthenticationCode_new".}
-proc fcQMessageAuthenticationCode_new2(methodVal: cint, key: struct_miqt_string): ptr cQMessageAuthenticationCode {.importc: "QMessageAuthenticationCode_new2".}
 proc fcQMessageAuthenticationCode_reset(self: pointer, ): void {.importc: "QMessageAuthenticationCode_reset".}
 proc fcQMessageAuthenticationCode_setKey(self: pointer, key: struct_miqt_string): void {.importc: "QMessageAuthenticationCode_setKey".}
 proc fcQMessageAuthenticationCode_addData(self: pointer, data: cstring, length: int64): void {.importc: "QMessageAuthenticationCode_addData".}
@@ -53,16 +51,9 @@ proc fcQMessageAuthenticationCode_addDataWithData(self: pointer, data: struct_mi
 proc fcQMessageAuthenticationCode_addDataWithDevice(self: pointer, device: pointer): bool {.importc: "QMessageAuthenticationCode_addDataWithDevice".}
 proc fcQMessageAuthenticationCode_resultX(self: pointer, ): struct_miqt_string {.importc: "QMessageAuthenticationCode_result".}
 proc fcQMessageAuthenticationCode_hash(message: struct_miqt_string, key: struct_miqt_string, methodVal: cint): struct_miqt_string {.importc: "QMessageAuthenticationCode_hash".}
+proc fcQMessageAuthenticationCode_new(methodVal: cint): ptr cQMessageAuthenticationCode {.importc: "QMessageAuthenticationCode_new".}
+proc fcQMessageAuthenticationCode_new2(methodVal: cint, key: struct_miqt_string): ptr cQMessageAuthenticationCode {.importc: "QMessageAuthenticationCode_new2".}
 proc fcQMessageAuthenticationCode_delete(self: pointer) {.importc: "QMessageAuthenticationCode_delete".}
-
-
-func init*(T: type gen_qmessageauthenticationcode_types.QMessageAuthenticationCode, h: ptr cQMessageAuthenticationCode): gen_qmessageauthenticationcode_types.QMessageAuthenticationCode =
-  T(h: h)
-proc create*(T: type gen_qmessageauthenticationcode_types.QMessageAuthenticationCode, methodVal: cint): gen_qmessageauthenticationcode_types.QMessageAuthenticationCode =
-  gen_qmessageauthenticationcode_types.QMessageAuthenticationCode.init(fcQMessageAuthenticationCode_new(cint(methodVal)))
-
-proc create*(T: type gen_qmessageauthenticationcode_types.QMessageAuthenticationCode, methodVal: cint, key: seq[byte]): gen_qmessageauthenticationcode_types.QMessageAuthenticationCode =
-  gen_qmessageauthenticationcode_types.QMessageAuthenticationCode.init(fcQMessageAuthenticationCode_new2(cint(methodVal), struct_miqt_string(data: cast[cstring](if len(key) == 0: nil else: unsafeAddr key[0]), len: csize_t(len(key)))))
 
 proc reset*(self: gen_qmessageauthenticationcode_types.QMessageAuthenticationCode, ): void =
   fcQMessageAuthenticationCode_reset(self.h)
@@ -90,6 +81,14 @@ proc hash*(_: type gen_qmessageauthenticationcode_types.QMessageAuthenticationCo
   var vx_ret = @(toOpenArrayByte(v_bytearray.data, 0, int(v_bytearray.len)-1))
   c_free(v_bytearray.data)
   vx_ret
+
+proc create*(T: type gen_qmessageauthenticationcode_types.QMessageAuthenticationCode,
+    methodVal: cint): gen_qmessageauthenticationcode_types.QMessageAuthenticationCode =
+  gen_qmessageauthenticationcode_types.QMessageAuthenticationCode(h: fcQMessageAuthenticationCode_new(cint(methodVal)))
+
+proc create*(T: type gen_qmessageauthenticationcode_types.QMessageAuthenticationCode,
+    methodVal: cint, key: seq[byte]): gen_qmessageauthenticationcode_types.QMessageAuthenticationCode =
+  gen_qmessageauthenticationcode_types.QMessageAuthenticationCode(h: fcQMessageAuthenticationCode_new2(cint(methodVal), struct_miqt_string(data: cast[cstring](if len(key) == 0: nil else: unsafeAddr key[0]), len: csize_t(len(key)))))
 
 proc delete*(self: gen_qmessageauthenticationcode_types.QMessageAuthenticationCode) =
   fcQMessageAuthenticationCode_delete(self.h)

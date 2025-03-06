@@ -60,11 +60,6 @@ export
 
 type cQEventPoint*{.exportc: "QEventPoint", incompleteStruct.} = object
 
-proc fcQEventPoint_new(): ptr cQEventPoint {.importc: "QEventPoint_new".}
-proc fcQEventPoint_new2(pointId: cint, state: cint, scenePosition: pointer, globalPosition: pointer): ptr cQEventPoint {.importc: "QEventPoint_new2".}
-proc fcQEventPoint_new3(other: pointer): ptr cQEventPoint {.importc: "QEventPoint_new3".}
-proc fcQEventPoint_new4(id: cint): ptr cQEventPoint {.importc: "QEventPoint_new4".}
-proc fcQEventPoint_new5(id: cint, device: pointer): ptr cQEventPoint {.importc: "QEventPoint_new5".}
 proc fcQEventPoint_operatorAssign(self: pointer, other: pointer): void {.importc: "QEventPoint_operatorAssign".}
 proc fcQEventPoint_operatorEqual(self: pointer, other: pointer): bool {.importc: "QEventPoint_operatorEqual".}
 proc fcQEventPoint_operatorNotEqual(self: pointer, other: pointer): bool {.importc: "QEventPoint_operatorNotEqual".}
@@ -109,26 +104,13 @@ proc fcQEventPoint_ellipseDiameters(self: pointer, ): pointer {.importc: "QEvent
 proc fcQEventPoint_isAccepted(self: pointer, ): bool {.importc: "QEventPoint_isAccepted".}
 proc fcQEventPoint_setAccepted(self: pointer, ): void {.importc: "QEventPoint_setAccepted".}
 proc fcQEventPoint_setAccepted1(self: pointer, accepted: bool): void {.importc: "QEventPoint_setAccepted1".}
+proc fcQEventPoint_new(): ptr cQEventPoint {.importc: "QEventPoint_new".}
+proc fcQEventPoint_new2(pointId: cint, state: cint, scenePosition: pointer, globalPosition: pointer): ptr cQEventPoint {.importc: "QEventPoint_new2".}
+proc fcQEventPoint_new3(other: pointer): ptr cQEventPoint {.importc: "QEventPoint_new3".}
+proc fcQEventPoint_new4(id: cint): ptr cQEventPoint {.importc: "QEventPoint_new4".}
+proc fcQEventPoint_new5(id: cint, device: pointer): ptr cQEventPoint {.importc: "QEventPoint_new5".}
 proc fcQEventPoint_staticMetaObject(): pointer {.importc: "QEventPoint_staticMetaObject".}
 proc fcQEventPoint_delete(self: pointer) {.importc: "QEventPoint_delete".}
-
-
-func init*(T: type gen_qeventpoint_types.QEventPoint, h: ptr cQEventPoint): gen_qeventpoint_types.QEventPoint =
-  T(h: h)
-proc create*(T: type gen_qeventpoint_types.QEventPoint, ): gen_qeventpoint_types.QEventPoint =
-  gen_qeventpoint_types.QEventPoint.init(fcQEventPoint_new())
-
-proc create*(T: type gen_qeventpoint_types.QEventPoint, pointId: cint, state: cint, scenePosition: gen_qpoint_types.QPointF, globalPosition: gen_qpoint_types.QPointF): gen_qeventpoint_types.QEventPoint =
-  gen_qeventpoint_types.QEventPoint.init(fcQEventPoint_new2(pointId, cint(state), scenePosition.h, globalPosition.h))
-
-proc create*(T: type gen_qeventpoint_types.QEventPoint, other: gen_qeventpoint_types.QEventPoint): gen_qeventpoint_types.QEventPoint =
-  gen_qeventpoint_types.QEventPoint.init(fcQEventPoint_new3(other.h))
-
-proc create*(T: type gen_qeventpoint_types.QEventPoint, id: cint): gen_qeventpoint_types.QEventPoint =
-  gen_qeventpoint_types.QEventPoint.init(fcQEventPoint_new4(id))
-
-proc create*(T: type gen_qeventpoint_types.QEventPoint, id: cint, device: gen_qpointingdevice_types.QPointingDevice): gen_qeventpoint_types.QEventPoint =
-  gen_qeventpoint_types.QEventPoint.init(fcQEventPoint_new5(id, device.h))
 
 proc operatorAssign*(self: gen_qeventpoint_types.QEventPoint, other: gen_qeventpoint_types.QEventPoint): void =
   fcQEventPoint_operatorAssign(self.h, other.h)
@@ -261,6 +243,25 @@ proc setAccepted*(self: gen_qeventpoint_types.QEventPoint, ): void =
 
 proc setAccepted*(self: gen_qeventpoint_types.QEventPoint, accepted: bool): void =
   fcQEventPoint_setAccepted1(self.h, accepted)
+
+proc create*(T: type gen_qeventpoint_types.QEventPoint): gen_qeventpoint_types.QEventPoint =
+  gen_qeventpoint_types.QEventPoint(h: fcQEventPoint_new())
+
+proc create*(T: type gen_qeventpoint_types.QEventPoint,
+    pointId: cint, state: cint, scenePosition: gen_qpoint_types.QPointF, globalPosition: gen_qpoint_types.QPointF): gen_qeventpoint_types.QEventPoint =
+  gen_qeventpoint_types.QEventPoint(h: fcQEventPoint_new2(pointId, cint(state), scenePosition.h, globalPosition.h))
+
+proc create*(T: type gen_qeventpoint_types.QEventPoint,
+    other: gen_qeventpoint_types.QEventPoint): gen_qeventpoint_types.QEventPoint =
+  gen_qeventpoint_types.QEventPoint(h: fcQEventPoint_new3(other.h))
+
+proc create*(T: type gen_qeventpoint_types.QEventPoint,
+    id: cint): gen_qeventpoint_types.QEventPoint =
+  gen_qeventpoint_types.QEventPoint(h: fcQEventPoint_new4(id))
+
+proc create*(T: type gen_qeventpoint_types.QEventPoint,
+    id: cint, device: gen_qpointingdevice_types.QPointingDevice): gen_qeventpoint_types.QEventPoint =
+  gen_qeventpoint_types.QEventPoint(h: fcQEventPoint_new5(id, device.h))
 
 proc staticMetaObject*(_: type gen_qeventpoint_types.QEventPoint): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQEventPoint_staticMetaObject())

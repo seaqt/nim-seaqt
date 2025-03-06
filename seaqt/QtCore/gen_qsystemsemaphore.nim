@@ -55,9 +55,6 @@ export gen_qsystemsemaphore_types
 
 type cQSystemSemaphore*{.exportc: "QSystemSemaphore", incompleteStruct.} = object
 
-proc fcQSystemSemaphore_new(key: struct_miqt_string): ptr cQSystemSemaphore {.importc: "QSystemSemaphore_new".}
-proc fcQSystemSemaphore_new2(key: struct_miqt_string, initialValue: cint): ptr cQSystemSemaphore {.importc: "QSystemSemaphore_new2".}
-proc fcQSystemSemaphore_new3(key: struct_miqt_string, initialValue: cint, mode: cint): ptr cQSystemSemaphore {.importc: "QSystemSemaphore_new3".}
 proc fcQSystemSemaphore_tr(sourceText: cstring): struct_miqt_string {.importc: "QSystemSemaphore_tr".}
 proc fcQSystemSemaphore_setKey(self: pointer, key: struct_miqt_string): void {.importc: "QSystemSemaphore_setKey".}
 proc fcQSystemSemaphore_key(self: pointer, ): struct_miqt_string {.importc: "QSystemSemaphore_key".}
@@ -70,19 +67,10 @@ proc fcQSystemSemaphore_tr3(sourceText: cstring, disambiguation: cstring, n: cin
 proc fcQSystemSemaphore_setKey2(self: pointer, key: struct_miqt_string, initialValue: cint): void {.importc: "QSystemSemaphore_setKey2".}
 proc fcQSystemSemaphore_setKey3(self: pointer, key: struct_miqt_string, initialValue: cint, mode: cint): void {.importc: "QSystemSemaphore_setKey3".}
 proc fcQSystemSemaphore_release1(self: pointer, n: cint): bool {.importc: "QSystemSemaphore_release1".}
+proc fcQSystemSemaphore_new(key: struct_miqt_string): ptr cQSystemSemaphore {.importc: "QSystemSemaphore_new".}
+proc fcQSystemSemaphore_new2(key: struct_miqt_string, initialValue: cint): ptr cQSystemSemaphore {.importc: "QSystemSemaphore_new2".}
+proc fcQSystemSemaphore_new3(key: struct_miqt_string, initialValue: cint, mode: cint): ptr cQSystemSemaphore {.importc: "QSystemSemaphore_new3".}
 proc fcQSystemSemaphore_delete(self: pointer) {.importc: "QSystemSemaphore_delete".}
-
-
-func init*(T: type gen_qsystemsemaphore_types.QSystemSemaphore, h: ptr cQSystemSemaphore): gen_qsystemsemaphore_types.QSystemSemaphore =
-  T(h: h)
-proc create*(T: type gen_qsystemsemaphore_types.QSystemSemaphore, key: string): gen_qsystemsemaphore_types.QSystemSemaphore =
-  gen_qsystemsemaphore_types.QSystemSemaphore.init(fcQSystemSemaphore_new(struct_miqt_string(data: key, len: csize_t(len(key)))))
-
-proc create*(T: type gen_qsystemsemaphore_types.QSystemSemaphore, key: string, initialValue: cint): gen_qsystemsemaphore_types.QSystemSemaphore =
-  gen_qsystemsemaphore_types.QSystemSemaphore.init(fcQSystemSemaphore_new2(struct_miqt_string(data: key, len: csize_t(len(key))), initialValue))
-
-proc create*(T: type gen_qsystemsemaphore_types.QSystemSemaphore, key: string, initialValue: cint, mode: cint): gen_qsystemsemaphore_types.QSystemSemaphore =
-  gen_qsystemsemaphore_types.QSystemSemaphore.init(fcQSystemSemaphore_new3(struct_miqt_string(data: key, len: csize_t(len(key))), initialValue, cint(mode)))
 
 proc tr*(_: type gen_qsystemsemaphore_types.QSystemSemaphore, sourceText: cstring): string =
   let v_ms = fcQSystemSemaphore_tr(sourceText)
@@ -134,6 +122,18 @@ proc setKey*(self: gen_qsystemsemaphore_types.QSystemSemaphore, key: string, ini
 
 proc release*(self: gen_qsystemsemaphore_types.QSystemSemaphore, n: cint): bool =
   fcQSystemSemaphore_release1(self.h, n)
+
+proc create*(T: type gen_qsystemsemaphore_types.QSystemSemaphore,
+    key: string): gen_qsystemsemaphore_types.QSystemSemaphore =
+  gen_qsystemsemaphore_types.QSystemSemaphore(h: fcQSystemSemaphore_new(struct_miqt_string(data: key, len: csize_t(len(key)))))
+
+proc create*(T: type gen_qsystemsemaphore_types.QSystemSemaphore,
+    key: string, initialValue: cint): gen_qsystemsemaphore_types.QSystemSemaphore =
+  gen_qsystemsemaphore_types.QSystemSemaphore(h: fcQSystemSemaphore_new2(struct_miqt_string(data: key, len: csize_t(len(key))), initialValue))
+
+proc create*(T: type gen_qsystemsemaphore_types.QSystemSemaphore,
+    key: string, initialValue: cint, mode: cint): gen_qsystemsemaphore_types.QSystemSemaphore =
+  gen_qsystemsemaphore_types.QSystemSemaphore(h: fcQSystemSemaphore_new3(struct_miqt_string(data: key, len: csize_t(len(key))), initialValue, cint(mode)))
 
 proc delete*(self: gen_qsystemsemaphore_types.QSystemSemaphore) =
   fcQSystemSemaphore_delete(self.h)

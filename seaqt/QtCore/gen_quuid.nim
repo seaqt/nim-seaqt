@@ -70,10 +70,6 @@ export
 
 type cQUuid*{.exportc: "QUuid", incompleteStruct.} = object
 
-proc fcQUuid_new(): ptr cQUuid {.importc: "QUuid_new".}
-proc fcQUuid_new2(l: cuint, w1: cushort, w2: cushort, b1: uint8, b2: uint8, b3: uint8, b4: uint8, b5: uint8, b6: uint8, b7: uint8, b8: uint8): ptr cQUuid {.importc: "QUuid_new2".}
-proc fcQUuid_new3(string: pointer): ptr cQUuid {.importc: "QUuid_new3".}
-proc fcQUuid_new4(param1: pointer): ptr cQUuid {.importc: "QUuid_new4".}
 proc fcQUuid_fromString(string: pointer): pointer {.importc: "QUuid_fromString".}
 proc fcQUuid_toString(self: pointer, ): struct_miqt_string {.importc: "QUuid_toString".}
 proc fcQUuid_toByteArray(self: pointer, ): struct_miqt_string {.importc: "QUuid_toByteArray".}
@@ -93,22 +89,11 @@ proc fcQUuid_variant(self: pointer, ): cint {.importc: "QUuid_variant".}
 proc fcQUuid_version(self: pointer, ): cint {.importc: "QUuid_version".}
 proc fcQUuid_toString1(self: pointer, mode: cint): struct_miqt_string {.importc: "QUuid_toString1".}
 proc fcQUuid_toByteArray1(self: pointer, mode: cint): struct_miqt_string {.importc: "QUuid_toByteArray1".}
+proc fcQUuid_new(): ptr cQUuid {.importc: "QUuid_new".}
+proc fcQUuid_new2(l: cuint, w1: cushort, w2: cushort, b1: uint8, b2: uint8, b3: uint8, b4: uint8, b5: uint8, b6: uint8, b7: uint8, b8: uint8): ptr cQUuid {.importc: "QUuid_new2".}
+proc fcQUuid_new3(string: pointer): ptr cQUuid {.importc: "QUuid_new3".}
+proc fcQUuid_new4(param1: pointer): ptr cQUuid {.importc: "QUuid_new4".}
 proc fcQUuid_delete(self: pointer) {.importc: "QUuid_delete".}
-
-
-func init*(T: type gen_quuid_types.QUuid, h: ptr cQUuid): gen_quuid_types.QUuid =
-  T(h: h)
-proc create*(T: type gen_quuid_types.QUuid, ): gen_quuid_types.QUuid =
-  gen_quuid_types.QUuid.init(fcQUuid_new())
-
-proc create*(T: type gen_quuid_types.QUuid, l: cuint, w1: cushort, w2: cushort, b1: uint8, b2: uint8, b3: uint8, b4: uint8, b5: uint8, b6: uint8, b7: uint8, b8: uint8): gen_quuid_types.QUuid =
-  gen_quuid_types.QUuid.init(fcQUuid_new2(l, w1, w2, b1, b2, b3, b4, b5, b6, b7, b8))
-
-proc create*(T: type gen_quuid_types.QUuid, string: gen_qanystringview_types.QAnyStringView): gen_quuid_types.QUuid =
-  gen_quuid_types.QUuid.init(fcQUuid_new3(string.h))
-
-proc create*(T: type gen_quuid_types.QUuid, param1: gen_quuid_types.QUuid): gen_quuid_types.QUuid =
-  gen_quuid_types.QUuid.init(fcQUuid_new4(param1.h))
 
 proc fromString*(_: type gen_quuid_types.QUuid, string: gen_qanystringview_types.QAnyStringView): gen_quuid_types.QUuid =
   gen_quuid_types.QUuid(h: fcQUuid_fromString(string.h))
@@ -181,6 +166,21 @@ proc toByteArray*(self: gen_quuid_types.QUuid, mode: cint): seq[byte] =
   var vx_ret = @(toOpenArrayByte(v_bytearray.data, 0, int(v_bytearray.len)-1))
   c_free(v_bytearray.data)
   vx_ret
+
+proc create*(T: type gen_quuid_types.QUuid): gen_quuid_types.QUuid =
+  gen_quuid_types.QUuid(h: fcQUuid_new())
+
+proc create*(T: type gen_quuid_types.QUuid,
+    l: cuint, w1: cushort, w2: cushort, b1: uint8, b2: uint8, b3: uint8, b4: uint8, b5: uint8, b6: uint8, b7: uint8, b8: uint8): gen_quuid_types.QUuid =
+  gen_quuid_types.QUuid(h: fcQUuid_new2(l, w1, w2, b1, b2, b3, b4, b5, b6, b7, b8))
+
+proc create*(T: type gen_quuid_types.QUuid,
+    string: gen_qanystringview_types.QAnyStringView): gen_quuid_types.QUuid =
+  gen_quuid_types.QUuid(h: fcQUuid_new3(string.h))
+
+proc create*(T: type gen_quuid_types.QUuid,
+    param1: gen_quuid_types.QUuid): gen_quuid_types.QUuid =
+  gen_quuid_types.QUuid(h: fcQUuid_new4(param1.h))
 
 proc delete*(self: gen_quuid_types.QUuid) =
   fcQUuid_delete(self.h)

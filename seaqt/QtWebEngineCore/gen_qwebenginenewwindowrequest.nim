@@ -73,9 +73,6 @@ proc fcQWebEngineNewWindowRequest_tr3(s: cstring, c: cstring, n: cint): struct_m
 proc fcQWebEngineNewWindowRequest_staticMetaObject(): pointer {.importc: "QWebEngineNewWindowRequest_staticMetaObject".}
 proc fcQWebEngineNewWindowRequest_delete(self: pointer) {.importc: "QWebEngineNewWindowRequest_delete".}
 
-
-func init*(T: type gen_qwebenginenewwindowrequest_types.QWebEngineNewWindowRequest, h: ptr cQWebEngineNewWindowRequest): gen_qwebenginenewwindowrequest_types.QWebEngineNewWindowRequest =
-  T(h: h)
 proc metaObject*(self: gen_qwebenginenewwindowrequest_types.QWebEngineNewWindowRequest, ): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQWebEngineNewWindowRequest_metaObject(self.h))
 

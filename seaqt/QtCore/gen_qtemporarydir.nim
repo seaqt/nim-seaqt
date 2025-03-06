@@ -40,8 +40,6 @@ export gen_qtemporarydir_types
 
 type cQTemporaryDir*{.exportc: "QTemporaryDir", incompleteStruct.} = object
 
-proc fcQTemporaryDir_new(): ptr cQTemporaryDir {.importc: "QTemporaryDir_new".}
-proc fcQTemporaryDir_new2(templateName: struct_miqt_string): ptr cQTemporaryDir {.importc: "QTemporaryDir_new2".}
 proc fcQTemporaryDir_swap(self: pointer, other: pointer): void {.importc: "QTemporaryDir_swap".}
 proc fcQTemporaryDir_isValid(self: pointer, ): bool {.importc: "QTemporaryDir_isValid".}
 proc fcQTemporaryDir_errorString(self: pointer, ): struct_miqt_string {.importc: "QTemporaryDir_errorString".}
@@ -50,16 +48,9 @@ proc fcQTemporaryDir_setAutoRemove(self: pointer, b: bool): void {.importc: "QTe
 proc fcQTemporaryDir_remove(self: pointer, ): bool {.importc: "QTemporaryDir_remove".}
 proc fcQTemporaryDir_path(self: pointer, ): struct_miqt_string {.importc: "QTemporaryDir_path".}
 proc fcQTemporaryDir_filePath(self: pointer, fileName: struct_miqt_string): struct_miqt_string {.importc: "QTemporaryDir_filePath".}
+proc fcQTemporaryDir_new(): ptr cQTemporaryDir {.importc: "QTemporaryDir_new".}
+proc fcQTemporaryDir_new2(templateName: struct_miqt_string): ptr cQTemporaryDir {.importc: "QTemporaryDir_new2".}
 proc fcQTemporaryDir_delete(self: pointer) {.importc: "QTemporaryDir_delete".}
-
-
-func init*(T: type gen_qtemporarydir_types.QTemporaryDir, h: ptr cQTemporaryDir): gen_qtemporarydir_types.QTemporaryDir =
-  T(h: h)
-proc create*(T: type gen_qtemporarydir_types.QTemporaryDir, ): gen_qtemporarydir_types.QTemporaryDir =
-  gen_qtemporarydir_types.QTemporaryDir.init(fcQTemporaryDir_new())
-
-proc create*(T: type gen_qtemporarydir_types.QTemporaryDir, templateName: string): gen_qtemporarydir_types.QTemporaryDir =
-  gen_qtemporarydir_types.QTemporaryDir.init(fcQTemporaryDir_new2(struct_miqt_string(data: templateName, len: csize_t(len(templateName)))))
 
 proc swap*(self: gen_qtemporarydir_types.QTemporaryDir, other: gen_qtemporarydir_types.QTemporaryDir): void =
   fcQTemporaryDir_swap(self.h, other.h)
@@ -93,6 +84,13 @@ proc filePath*(self: gen_qtemporarydir_types.QTemporaryDir, fileName: string): s
   let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
   c_free(v_ms.data)
   vx_ret
+
+proc create*(T: type gen_qtemporarydir_types.QTemporaryDir): gen_qtemporarydir_types.QTemporaryDir =
+  gen_qtemporarydir_types.QTemporaryDir(h: fcQTemporaryDir_new())
+
+proc create*(T: type gen_qtemporarydir_types.QTemporaryDir,
+    templateName: string): gen_qtemporarydir_types.QTemporaryDir =
+  gen_qtemporarydir_types.QTemporaryDir(h: fcQTemporaryDir_new2(struct_miqt_string(data: templateName, len: csize_t(len(templateName)))))
 
 proc delete*(self: gen_qtemporarydir_types.QTemporaryDir) =
   fcQTemporaryDir_delete(self.h)

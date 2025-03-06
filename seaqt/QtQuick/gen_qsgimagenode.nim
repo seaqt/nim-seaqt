@@ -77,9 +77,6 @@ proc fcQSGImageNode_ownsTexture(self: pointer, ): bool {.importc: "QSGImageNode_
 proc fcQSGImageNode_rebuildGeometry(g: pointer, texture: pointer, rect: pointer, sourceRect: pointer, texCoordMode: cint): void {.importc: "QSGImageNode_rebuildGeometry".}
 proc fcQSGImageNode_delete(self: pointer) {.importc: "QSGImageNode_delete".}
 
-
-func init*(T: type gen_qsgimagenode_types.QSGImageNode, h: ptr cQSGImageNode): gen_qsgimagenode_types.QSGImageNode =
-  T(h: h)
 proc setRect*(self: gen_qsgimagenode_types.QSGImageNode, rect: gen_qrect_types.QRectF): void =
   fcQSGImageNode_setRect(self.h, rect.h)
 

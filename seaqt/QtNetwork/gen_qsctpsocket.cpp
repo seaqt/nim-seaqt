@@ -22,215 +22,148 @@
 extern "C" {
 #endif
 
-QMetaObject* miqt_exec_callback_QSctpSocket_metaObject(const QSctpSocket*, intptr_t);
-void* miqt_exec_callback_QSctpSocket_metacast(QSctpSocket*, intptr_t, const char*);
-int miqt_exec_callback_QSctpSocket_metacall(QSctpSocket*, intptr_t, int, int, void**);
-void miqt_exec_callback_QSctpSocket_close(QSctpSocket*, intptr_t);
-void miqt_exec_callback_QSctpSocket_disconnectFromHost(QSctpSocket*, intptr_t);
-long long miqt_exec_callback_QSctpSocket_readData(QSctpSocket*, intptr_t, char*, long long);
-long long miqt_exec_callback_QSctpSocket_readLineData(QSctpSocket*, intptr_t, char*, long long);
-void miqt_exec_callback_QSctpSocket_resume(QSctpSocket*, intptr_t);
-bool miqt_exec_callback_QSctpSocket_bind(QSctpSocket*, intptr_t, QHostAddress*, uint16_t, int);
-void miqt_exec_callback_QSctpSocket_connectToHost(QSctpSocket*, intptr_t, struct miqt_string, uint16_t, int, int);
-long long miqt_exec_callback_QSctpSocket_bytesAvailable(const QSctpSocket*, intptr_t);
-long long miqt_exec_callback_QSctpSocket_bytesToWrite(const QSctpSocket*, intptr_t);
-void miqt_exec_callback_QSctpSocket_setReadBufferSize(QSctpSocket*, intptr_t, long long);
-intptr_t miqt_exec_callback_QSctpSocket_socketDescriptor(const QSctpSocket*, intptr_t);
-bool miqt_exec_callback_QSctpSocket_setSocketDescriptor(QSctpSocket*, intptr_t, intptr_t, int, int);
-void miqt_exec_callback_QSctpSocket_setSocketOption(QSctpSocket*, intptr_t, int, QVariant*);
-QVariant* miqt_exec_callback_QSctpSocket_socketOption(QSctpSocket*, intptr_t, int);
-bool miqt_exec_callback_QSctpSocket_isSequential(const QSctpSocket*, intptr_t);
-bool miqt_exec_callback_QSctpSocket_waitForConnected(QSctpSocket*, intptr_t, int);
-bool miqt_exec_callback_QSctpSocket_waitForReadyRead(QSctpSocket*, intptr_t, int);
-bool miqt_exec_callback_QSctpSocket_waitForBytesWritten(QSctpSocket*, intptr_t, int);
-bool miqt_exec_callback_QSctpSocket_waitForDisconnected(QSctpSocket*, intptr_t, int);
-long long miqt_exec_callback_QSctpSocket_skipData(QSctpSocket*, intptr_t, long long);
-long long miqt_exec_callback_QSctpSocket_writeData(QSctpSocket*, intptr_t, const char*, long long);
-bool miqt_exec_callback_QSctpSocket_open(QSctpSocket*, intptr_t, int);
-long long miqt_exec_callback_QSctpSocket_pos(const QSctpSocket*, intptr_t);
-long long miqt_exec_callback_QSctpSocket_size(const QSctpSocket*, intptr_t);
-bool miqt_exec_callback_QSctpSocket_seek(QSctpSocket*, intptr_t, long long);
-bool miqt_exec_callback_QSctpSocket_atEnd(const QSctpSocket*, intptr_t);
-bool miqt_exec_callback_QSctpSocket_reset(QSctpSocket*, intptr_t);
-bool miqt_exec_callback_QSctpSocket_canReadLine(const QSctpSocket*, intptr_t);
-bool miqt_exec_callback_QSctpSocket_event(QSctpSocket*, intptr_t, QEvent*);
-bool miqt_exec_callback_QSctpSocket_eventFilter(QSctpSocket*, intptr_t, QObject*, QEvent*);
-void miqt_exec_callback_QSctpSocket_timerEvent(QSctpSocket*, intptr_t, QTimerEvent*);
-void miqt_exec_callback_QSctpSocket_childEvent(QSctpSocket*, intptr_t, QChildEvent*);
-void miqt_exec_callback_QSctpSocket_customEvent(QSctpSocket*, intptr_t, QEvent*);
-void miqt_exec_callback_QSctpSocket_connectNotify(QSctpSocket*, intptr_t, QMetaMethod*);
-void miqt_exec_callback_QSctpSocket_disconnectNotify(QSctpSocket*, intptr_t, QMetaMethod*);
 #ifdef __cplusplus
 } /* extern C */
 #endif
 
 class VirtualQSctpSocket final : public QSctpSocket {
+	struct QSctpSocket_VTable* vtbl;
 public:
 
-	VirtualQSctpSocket(): QSctpSocket() {};
-	VirtualQSctpSocket(QObject* parent): QSctpSocket(parent) {};
+	VirtualQSctpSocket(struct QSctpSocket_VTable* vtbl): QSctpSocket(), vtbl(vtbl) {};
+	VirtualQSctpSocket(struct QSctpSocket_VTable* vtbl, QObject* parent): QSctpSocket(parent), vtbl(vtbl) {};
 
-	virtual ~VirtualQSctpSocket() override = default;
-
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__metaObject = 0;
+	virtual ~VirtualQSctpSocket() override { if(vtbl->destructor) vtbl->destructor(vtbl, this); }
 
 	// Subclass to allow providing a Go implementation
 	virtual const QMetaObject* metaObject() const override {
-		if (handle__metaObject == 0) {
+		if (vtbl->metaObject == 0) {
 			return QSctpSocket::metaObject();
 		}
-		
 
-		QMetaObject* callback_return_value = miqt_exec_callback_QSctpSocket_metaObject(this, handle__metaObject);
+
+		QMetaObject* callback_return_value = vtbl->metaObject(vtbl, this);
 
 		return callback_return_value;
 	}
 
 	friend QMetaObject* QSctpSocket_virtualbase_metaObject(const void* self);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__metacast = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void* qt_metacast(const char* param1) override {
-		if (handle__metacast == 0) {
+		if (vtbl->metacast == 0) {
 			return QSctpSocket::qt_metacast(param1);
 		}
-		
+
 		const char* sigval1 = (const char*) param1;
 
-		void* callback_return_value = miqt_exec_callback_QSctpSocket_metacast(this, handle__metacast, sigval1);
+		void* callback_return_value = vtbl->metacast(vtbl, this, sigval1);
 
 		return callback_return_value;
 	}
 
 	friend void* QSctpSocket_virtualbase_metacast(void* self, const char* param1);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__metacall = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual int qt_metacall(QMetaObject::Call param1, int param2, void** param3) override {
-		if (handle__metacall == 0) {
+		if (vtbl->metacall == 0) {
 			return QSctpSocket::qt_metacall(param1, param2, param3);
 		}
-		
+
 		QMetaObject::Call param1_ret = param1;
 		int sigval1 = static_cast<int>(param1_ret);
 		int sigval2 = param2;
 		void** sigval3 = param3;
 
-		int callback_return_value = miqt_exec_callback_QSctpSocket_metacall(this, handle__metacall, sigval1, sigval2, sigval3);
+		int callback_return_value = vtbl->metacall(vtbl, this, sigval1, sigval2, sigval3);
 
 		return static_cast<int>(callback_return_value);
 	}
 
 	friend int QSctpSocket_virtualbase_metacall(void* self, int param1, int param2, void** param3);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__close = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void close() override {
-		if (handle__close == 0) {
+		if (vtbl->close == 0) {
 			QSctpSocket::close();
 			return;
 		}
-		
 
-		miqt_exec_callback_QSctpSocket_close(this, handle__close);
 
-		
+		vtbl->close(vtbl, this);
+
 	}
 
 	friend void QSctpSocket_virtualbase_close(void* self);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__disconnectFromHost = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void disconnectFromHost() override {
-		if (handle__disconnectFromHost == 0) {
+		if (vtbl->disconnectFromHost == 0) {
 			QSctpSocket::disconnectFromHost();
 			return;
 		}
-		
 
-		miqt_exec_callback_QSctpSocket_disconnectFromHost(this, handle__disconnectFromHost);
 
-		
+		vtbl->disconnectFromHost(vtbl, this);
+
 	}
 
 	friend void QSctpSocket_virtualbase_disconnectFromHost(void* self);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__readData = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual qint64 readData(char* data, qint64 maxlen) override {
-		if (handle__readData == 0) {
+		if (vtbl->readData == 0) {
 			return QSctpSocket::readData(data, maxlen);
 		}
-		
+
 		char* sigval1 = data;
 		qint64 maxlen_ret = maxlen;
 		long long sigval2 = static_cast<long long>(maxlen_ret);
 
-		long long callback_return_value = miqt_exec_callback_QSctpSocket_readData(this, handle__readData, sigval1, sigval2);
+		long long callback_return_value = vtbl->readData(vtbl, this, sigval1, sigval2);
 
 		return static_cast<qint64>(callback_return_value);
 	}
 
 	friend long long QSctpSocket_virtualbase_readData(void* self, char* data, long long maxlen);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__readLineData = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual qint64 readLineData(char* data, qint64 maxlen) override {
-		if (handle__readLineData == 0) {
+		if (vtbl->readLineData == 0) {
 			return QSctpSocket::readLineData(data, maxlen);
 		}
-		
+
 		char* sigval1 = data;
 		qint64 maxlen_ret = maxlen;
 		long long sigval2 = static_cast<long long>(maxlen_ret);
 
-		long long callback_return_value = miqt_exec_callback_QSctpSocket_readLineData(this, handle__readLineData, sigval1, sigval2);
+		long long callback_return_value = vtbl->readLineData(vtbl, this, sigval1, sigval2);
 
 		return static_cast<qint64>(callback_return_value);
 	}
 
 	friend long long QSctpSocket_virtualbase_readLineData(void* self, char* data, long long maxlen);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__resume = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void resume() override {
-		if (handle__resume == 0) {
+		if (vtbl->resume == 0) {
 			QSctpSocket::resume();
 			return;
 		}
-		
 
-		miqt_exec_callback_QSctpSocket_resume(this, handle__resume);
 
-		
+		vtbl->resume(vtbl, this);
+
 	}
 
 	friend void QSctpSocket_virtualbase_resume(void* self);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__bind = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual bool bind(const QHostAddress& address, quint16 port, QAbstractSocket::BindMode mode) override {
-		if (handle__bind == 0) {
+		if (vtbl->bind == 0) {
 			return QSctpSocket::bind(address, port, mode);
 		}
-		
+
 		const QHostAddress& address_ret = address;
 		// Cast returned reference into pointer
 		QHostAddress* sigval1 = const_cast<QHostAddress*>(&address_ret);
@@ -239,23 +172,20 @@ public:
 		QAbstractSocket::BindMode mode_ret = mode;
 		int sigval3 = static_cast<int>(mode_ret);
 
-		bool callback_return_value = miqt_exec_callback_QSctpSocket_bind(this, handle__bind, sigval1, sigval2, sigval3);
+		bool callback_return_value = vtbl->bind(vtbl, this, sigval1, sigval2, sigval3);
 
 		return callback_return_value;
 	}
 
 	friend bool QSctpSocket_virtualbase_bind(void* self, QHostAddress* address, uint16_t port, int mode);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__connectToHost = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void connectToHost(const QString& hostName, quint16 port, QIODeviceBase::OpenMode mode, QAbstractSocket::NetworkLayerProtocol protocol) override {
-		if (handle__connectToHost == 0) {
+		if (vtbl->connectToHost == 0) {
 			QSctpSocket::connectToHost(hostName, port, mode, protocol);
 			return;
 		}
-		
+
 		const QString hostName_ret = hostName;
 		// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 		QByteArray hostName_b = hostName_ret.toUtf8();
@@ -271,93 +201,76 @@ public:
 		QAbstractSocket::NetworkLayerProtocol protocol_ret = protocol;
 		int sigval4 = static_cast<int>(protocol_ret);
 
-		miqt_exec_callback_QSctpSocket_connectToHost(this, handle__connectToHost, sigval1, sigval2, sigval3, sigval4);
+		vtbl->connectToHost(vtbl, this, sigval1, sigval2, sigval3, sigval4);
 
-		
 	}
 
 	friend void QSctpSocket_virtualbase_connectToHost(void* self, struct miqt_string hostName, uint16_t port, int mode, int protocol);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__bytesAvailable = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual qint64 bytesAvailable() const override {
-		if (handle__bytesAvailable == 0) {
+		if (vtbl->bytesAvailable == 0) {
 			return QSctpSocket::bytesAvailable();
 		}
-		
 
-		long long callback_return_value = miqt_exec_callback_QSctpSocket_bytesAvailable(this, handle__bytesAvailable);
+
+		long long callback_return_value = vtbl->bytesAvailable(vtbl, this);
 
 		return static_cast<qint64>(callback_return_value);
 	}
 
 	friend long long QSctpSocket_virtualbase_bytesAvailable(const void* self);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__bytesToWrite = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual qint64 bytesToWrite() const override {
-		if (handle__bytesToWrite == 0) {
+		if (vtbl->bytesToWrite == 0) {
 			return QSctpSocket::bytesToWrite();
 		}
-		
 
-		long long callback_return_value = miqt_exec_callback_QSctpSocket_bytesToWrite(this, handle__bytesToWrite);
+
+		long long callback_return_value = vtbl->bytesToWrite(vtbl, this);
 
 		return static_cast<qint64>(callback_return_value);
 	}
 
 	friend long long QSctpSocket_virtualbase_bytesToWrite(const void* self);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__setReadBufferSize = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void setReadBufferSize(qint64 size) override {
-		if (handle__setReadBufferSize == 0) {
+		if (vtbl->setReadBufferSize == 0) {
 			QSctpSocket::setReadBufferSize(size);
 			return;
 		}
-		
+
 		qint64 size_ret = size;
 		long long sigval1 = static_cast<long long>(size_ret);
 
-		miqt_exec_callback_QSctpSocket_setReadBufferSize(this, handle__setReadBufferSize, sigval1);
+		vtbl->setReadBufferSize(vtbl, this, sigval1);
 
-		
 	}
 
 	friend void QSctpSocket_virtualbase_setReadBufferSize(void* self, long long size);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__socketDescriptor = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual qintptr socketDescriptor() const override {
-		if (handle__socketDescriptor == 0) {
+		if (vtbl->socketDescriptor == 0) {
 			return QSctpSocket::socketDescriptor();
 		}
-		
 
-		intptr_t callback_return_value = miqt_exec_callback_QSctpSocket_socketDescriptor(this, handle__socketDescriptor);
+
+		intptr_t callback_return_value = vtbl->socketDescriptor(vtbl, this);
 
 		return (qintptr)(callback_return_value);
 	}
 
 	friend intptr_t QSctpSocket_virtualbase_socketDescriptor(const void* self);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__setSocketDescriptor = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual bool setSocketDescriptor(qintptr socketDescriptor, QAbstractSocket::SocketState state, QIODeviceBase::OpenMode openMode) override {
-		if (handle__setSocketDescriptor == 0) {
+		if (vtbl->setSocketDescriptor == 0) {
 			return QSctpSocket::setSocketDescriptor(socketDescriptor, state, openMode);
 		}
-		
+
 		qintptr socketDescriptor_ret = socketDescriptor;
 		intptr_t sigval1 = (intptr_t)(socketDescriptor_ret);
 		QAbstractSocket::SocketState state_ret = state;
@@ -365,438 +278,363 @@ public:
 		QIODeviceBase::OpenMode openMode_ret = openMode;
 		int sigval3 = static_cast<int>(openMode_ret);
 
-		bool callback_return_value = miqt_exec_callback_QSctpSocket_setSocketDescriptor(this, handle__setSocketDescriptor, sigval1, sigval2, sigval3);
+		bool callback_return_value = vtbl->setSocketDescriptor(vtbl, this, sigval1, sigval2, sigval3);
 
 		return callback_return_value;
 	}
 
 	friend bool QSctpSocket_virtualbase_setSocketDescriptor(void* self, intptr_t socketDescriptor, int state, int openMode);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__setSocketOption = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void setSocketOption(QAbstractSocket::SocketOption option, const QVariant& value) override {
-		if (handle__setSocketOption == 0) {
+		if (vtbl->setSocketOption == 0) {
 			QSctpSocket::setSocketOption(option, value);
 			return;
 		}
-		
+
 		QAbstractSocket::SocketOption option_ret = option;
 		int sigval1 = static_cast<int>(option_ret);
 		const QVariant& value_ret = value;
 		// Cast returned reference into pointer
 		QVariant* sigval2 = const_cast<QVariant*>(&value_ret);
 
-		miqt_exec_callback_QSctpSocket_setSocketOption(this, handle__setSocketOption, sigval1, sigval2);
+		vtbl->setSocketOption(vtbl, this, sigval1, sigval2);
 
-		
 	}
 
 	friend void QSctpSocket_virtualbase_setSocketOption(void* self, int option, QVariant* value);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__socketOption = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual QVariant socketOption(QAbstractSocket::SocketOption option) override {
-		if (handle__socketOption == 0) {
+		if (vtbl->socketOption == 0) {
 			return QSctpSocket::socketOption(option);
 		}
-		
+
 		QAbstractSocket::SocketOption option_ret = option;
 		int sigval1 = static_cast<int>(option_ret);
 
-		QVariant* callback_return_value = miqt_exec_callback_QSctpSocket_socketOption(this, handle__socketOption, sigval1);
+		QVariant* callback_return_value = vtbl->socketOption(vtbl, this, sigval1);
 
 		return *callback_return_value;
 	}
 
 	friend QVariant* QSctpSocket_virtualbase_socketOption(void* self, int option);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__isSequential = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual bool isSequential() const override {
-		if (handle__isSequential == 0) {
+		if (vtbl->isSequential == 0) {
 			return QSctpSocket::isSequential();
 		}
-		
 
-		bool callback_return_value = miqt_exec_callback_QSctpSocket_isSequential(this, handle__isSequential);
+
+		bool callback_return_value = vtbl->isSequential(vtbl, this);
 
 		return callback_return_value;
 	}
 
 	friend bool QSctpSocket_virtualbase_isSequential(const void* self);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__waitForConnected = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual bool waitForConnected(int msecs) override {
-		if (handle__waitForConnected == 0) {
+		if (vtbl->waitForConnected == 0) {
 			return QSctpSocket::waitForConnected(msecs);
 		}
-		
+
 		int sigval1 = msecs;
 
-		bool callback_return_value = miqt_exec_callback_QSctpSocket_waitForConnected(this, handle__waitForConnected, sigval1);
+		bool callback_return_value = vtbl->waitForConnected(vtbl, this, sigval1);
 
 		return callback_return_value;
 	}
 
 	friend bool QSctpSocket_virtualbase_waitForConnected(void* self, int msecs);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__waitForReadyRead = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual bool waitForReadyRead(int msecs) override {
-		if (handle__waitForReadyRead == 0) {
+		if (vtbl->waitForReadyRead == 0) {
 			return QSctpSocket::waitForReadyRead(msecs);
 		}
-		
+
 		int sigval1 = msecs;
 
-		bool callback_return_value = miqt_exec_callback_QSctpSocket_waitForReadyRead(this, handle__waitForReadyRead, sigval1);
+		bool callback_return_value = vtbl->waitForReadyRead(vtbl, this, sigval1);
 
 		return callback_return_value;
 	}
 
 	friend bool QSctpSocket_virtualbase_waitForReadyRead(void* self, int msecs);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__waitForBytesWritten = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual bool waitForBytesWritten(int msecs) override {
-		if (handle__waitForBytesWritten == 0) {
+		if (vtbl->waitForBytesWritten == 0) {
 			return QSctpSocket::waitForBytesWritten(msecs);
 		}
-		
+
 		int sigval1 = msecs;
 
-		bool callback_return_value = miqt_exec_callback_QSctpSocket_waitForBytesWritten(this, handle__waitForBytesWritten, sigval1);
+		bool callback_return_value = vtbl->waitForBytesWritten(vtbl, this, sigval1);
 
 		return callback_return_value;
 	}
 
 	friend bool QSctpSocket_virtualbase_waitForBytesWritten(void* self, int msecs);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__waitForDisconnected = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual bool waitForDisconnected(int msecs) override {
-		if (handle__waitForDisconnected == 0) {
+		if (vtbl->waitForDisconnected == 0) {
 			return QSctpSocket::waitForDisconnected(msecs);
 		}
-		
+
 		int sigval1 = msecs;
 
-		bool callback_return_value = miqt_exec_callback_QSctpSocket_waitForDisconnected(this, handle__waitForDisconnected, sigval1);
+		bool callback_return_value = vtbl->waitForDisconnected(vtbl, this, sigval1);
 
 		return callback_return_value;
 	}
 
 	friend bool QSctpSocket_virtualbase_waitForDisconnected(void* self, int msecs);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__skipData = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual qint64 skipData(qint64 maxSize) override {
-		if (handle__skipData == 0) {
+		if (vtbl->skipData == 0) {
 			return QSctpSocket::skipData(maxSize);
 		}
-		
+
 		qint64 maxSize_ret = maxSize;
 		long long sigval1 = static_cast<long long>(maxSize_ret);
 
-		long long callback_return_value = miqt_exec_callback_QSctpSocket_skipData(this, handle__skipData, sigval1);
+		long long callback_return_value = vtbl->skipData(vtbl, this, sigval1);
 
 		return static_cast<qint64>(callback_return_value);
 	}
 
 	friend long long QSctpSocket_virtualbase_skipData(void* self, long long maxSize);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__writeData = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual qint64 writeData(const char* data, qint64 len) override {
-		if (handle__writeData == 0) {
+		if (vtbl->writeData == 0) {
 			return QSctpSocket::writeData(data, len);
 		}
-		
+
 		const char* sigval1 = (const char*) data;
 		qint64 len_ret = len;
 		long long sigval2 = static_cast<long long>(len_ret);
 
-		long long callback_return_value = miqt_exec_callback_QSctpSocket_writeData(this, handle__writeData, sigval1, sigval2);
+		long long callback_return_value = vtbl->writeData(vtbl, this, sigval1, sigval2);
 
 		return static_cast<qint64>(callback_return_value);
 	}
 
 	friend long long QSctpSocket_virtualbase_writeData(void* self, const char* data, long long len);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__open = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual bool open(QIODeviceBase::OpenMode mode) override {
-		if (handle__open == 0) {
+		if (vtbl->open == 0) {
 			return QSctpSocket::open(mode);
 		}
-		
+
 		QIODeviceBase::OpenMode mode_ret = mode;
 		int sigval1 = static_cast<int>(mode_ret);
 
-		bool callback_return_value = miqt_exec_callback_QSctpSocket_open(this, handle__open, sigval1);
+		bool callback_return_value = vtbl->open(vtbl, this, sigval1);
 
 		return callback_return_value;
 	}
 
 	friend bool QSctpSocket_virtualbase_open(void* self, int mode);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__pos = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual qint64 pos() const override {
-		if (handle__pos == 0) {
+		if (vtbl->pos == 0) {
 			return QSctpSocket::pos();
 		}
-		
 
-		long long callback_return_value = miqt_exec_callback_QSctpSocket_pos(this, handle__pos);
+
+		long long callback_return_value = vtbl->pos(vtbl, this);
 
 		return static_cast<qint64>(callback_return_value);
 	}
 
 	friend long long QSctpSocket_virtualbase_pos(const void* self);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__size = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual qint64 size() const override {
-		if (handle__size == 0) {
+		if (vtbl->size == 0) {
 			return QSctpSocket::size();
 		}
-		
 
-		long long callback_return_value = miqt_exec_callback_QSctpSocket_size(this, handle__size);
+
+		long long callback_return_value = vtbl->size(vtbl, this);
 
 		return static_cast<qint64>(callback_return_value);
 	}
 
 	friend long long QSctpSocket_virtualbase_size(const void* self);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__seek = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual bool seek(qint64 pos) override {
-		if (handle__seek == 0) {
+		if (vtbl->seek == 0) {
 			return QSctpSocket::seek(pos);
 		}
-		
+
 		qint64 pos_ret = pos;
 		long long sigval1 = static_cast<long long>(pos_ret);
 
-		bool callback_return_value = miqt_exec_callback_QSctpSocket_seek(this, handle__seek, sigval1);
+		bool callback_return_value = vtbl->seek(vtbl, this, sigval1);
 
 		return callback_return_value;
 	}
 
 	friend bool QSctpSocket_virtualbase_seek(void* self, long long pos);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__atEnd = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual bool atEnd() const override {
-		if (handle__atEnd == 0) {
+		if (vtbl->atEnd == 0) {
 			return QSctpSocket::atEnd();
 		}
-		
 
-		bool callback_return_value = miqt_exec_callback_QSctpSocket_atEnd(this, handle__atEnd);
+
+		bool callback_return_value = vtbl->atEnd(vtbl, this);
 
 		return callback_return_value;
 	}
 
 	friend bool QSctpSocket_virtualbase_atEnd(const void* self);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__reset = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual bool reset() override {
-		if (handle__reset == 0) {
+		if (vtbl->reset == 0) {
 			return QSctpSocket::reset();
 		}
-		
 
-		bool callback_return_value = miqt_exec_callback_QSctpSocket_reset(this, handle__reset);
+
+		bool callback_return_value = vtbl->reset(vtbl, this);
 
 		return callback_return_value;
 	}
 
 	friend bool QSctpSocket_virtualbase_reset(void* self);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__canReadLine = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual bool canReadLine() const override {
-		if (handle__canReadLine == 0) {
+		if (vtbl->canReadLine == 0) {
 			return QSctpSocket::canReadLine();
 		}
-		
 
-		bool callback_return_value = miqt_exec_callback_QSctpSocket_canReadLine(this, handle__canReadLine);
+
+		bool callback_return_value = vtbl->canReadLine(vtbl, this);
 
 		return callback_return_value;
 	}
 
 	friend bool QSctpSocket_virtualbase_canReadLine(const void* self);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__event = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual bool event(QEvent* event) override {
-		if (handle__event == 0) {
+		if (vtbl->event == 0) {
 			return QSctpSocket::event(event);
 		}
-		
+
 		QEvent* sigval1 = event;
 
-		bool callback_return_value = miqt_exec_callback_QSctpSocket_event(this, handle__event, sigval1);
+		bool callback_return_value = vtbl->event(vtbl, this, sigval1);
 
 		return callback_return_value;
 	}
 
 	friend bool QSctpSocket_virtualbase_event(void* self, QEvent* event);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__eventFilter = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual bool eventFilter(QObject* watched, QEvent* event) override {
-		if (handle__eventFilter == 0) {
+		if (vtbl->eventFilter == 0) {
 			return QSctpSocket::eventFilter(watched, event);
 		}
-		
+
 		QObject* sigval1 = watched;
 		QEvent* sigval2 = event;
 
-		bool callback_return_value = miqt_exec_callback_QSctpSocket_eventFilter(this, handle__eventFilter, sigval1, sigval2);
+		bool callback_return_value = vtbl->eventFilter(vtbl, this, sigval1, sigval2);
 
 		return callback_return_value;
 	}
 
 	friend bool QSctpSocket_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__timerEvent = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void timerEvent(QTimerEvent* event) override {
-		if (handle__timerEvent == 0) {
+		if (vtbl->timerEvent == 0) {
 			QSctpSocket::timerEvent(event);
 			return;
 		}
-		
+
 		QTimerEvent* sigval1 = event;
 
-		miqt_exec_callback_QSctpSocket_timerEvent(this, handle__timerEvent, sigval1);
+		vtbl->timerEvent(vtbl, this, sigval1);
 
-		
 	}
 
 	friend void QSctpSocket_virtualbase_timerEvent(void* self, QTimerEvent* event);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__childEvent = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void childEvent(QChildEvent* event) override {
-		if (handle__childEvent == 0) {
+		if (vtbl->childEvent == 0) {
 			QSctpSocket::childEvent(event);
 			return;
 		}
-		
+
 		QChildEvent* sigval1 = event;
 
-		miqt_exec_callback_QSctpSocket_childEvent(this, handle__childEvent, sigval1);
+		vtbl->childEvent(vtbl, this, sigval1);
 
-		
 	}
 
 	friend void QSctpSocket_virtualbase_childEvent(void* self, QChildEvent* event);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__customEvent = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void customEvent(QEvent* event) override {
-		if (handle__customEvent == 0) {
+		if (vtbl->customEvent == 0) {
 			QSctpSocket::customEvent(event);
 			return;
 		}
-		
+
 		QEvent* sigval1 = event;
 
-		miqt_exec_callback_QSctpSocket_customEvent(this, handle__customEvent, sigval1);
+		vtbl->customEvent(vtbl, this, sigval1);
 
-		
 	}
 
 	friend void QSctpSocket_virtualbase_customEvent(void* self, QEvent* event);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__connectNotify = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void connectNotify(const QMetaMethod& signal) override {
-		if (handle__connectNotify == 0) {
+		if (vtbl->connectNotify == 0) {
 			QSctpSocket::connectNotify(signal);
 			return;
 		}
-		
+
 		const QMetaMethod& signal_ret = signal;
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
 
-		miqt_exec_callback_QSctpSocket_connectNotify(this, handle__connectNotify, sigval1);
+		vtbl->connectNotify(vtbl, this, sigval1);
 
-		
 	}
 
 	friend void QSctpSocket_virtualbase_connectNotify(void* self, QMetaMethod* signal);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__disconnectNotify = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void disconnectNotify(const QMetaMethod& signal) override {
-		if (handle__disconnectNotify == 0) {
+		if (vtbl->disconnectNotify == 0) {
 			QSctpSocket::disconnectNotify(signal);
 			return;
 		}
-		
+
 		const QMetaMethod& signal_ret = signal;
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
 
-		miqt_exec_callback_QSctpSocket_disconnectNotify(this, handle__disconnectNotify, sigval1);
+		vtbl->disconnectNotify(vtbl, this, sigval1);
 
-		
 	}
 
 	friend void QSctpSocket_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
@@ -817,12 +655,12 @@ public:
 	friend bool QSctpSocket_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
 };
 
-QSctpSocket* QSctpSocket_new() {
-	return new VirtualQSctpSocket();
+QSctpSocket* QSctpSocket_new(struct QSctpSocket_VTable* vtbl) {
+	return new VirtualQSctpSocket(vtbl);
 }
 
-QSctpSocket* QSctpSocket_new2(QObject* parent) {
-	return new VirtualQSctpSocket(parent);
+QSctpSocket* QSctpSocket_new2(struct QSctpSocket_VTable* vtbl, QObject* parent) {
+	return new VirtualQSctpSocket(vtbl, parent);
 }
 
 void QSctpSocket_virtbase(QSctpSocket* src, QTcpSocket** outptr_QTcpSocket) {
@@ -902,30 +740,10 @@ struct miqt_string QSctpSocket_tr3(const char* s, const char* c, int n) {
 	return _ms;
 }
 
-bool QSctpSocket_override_virtual_metaObject(void* self, intptr_t slot) {
-	VirtualQSctpSocket* self_cast = dynamic_cast<VirtualQSctpSocket*>( (QSctpSocket*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__metaObject = slot;
-	return true;
-}
-
 QMetaObject* QSctpSocket_virtualbase_metaObject(const void* self) {
 
 	return (QMetaObject*) ( (const VirtualQSctpSocket*)(self) )->QSctpSocket::metaObject();
 
-}
-
-bool QSctpSocket_override_virtual_metacast(void* self, intptr_t slot) {
-	VirtualQSctpSocket* self_cast = dynamic_cast<VirtualQSctpSocket*>( (QSctpSocket*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__metacast = slot;
-	return true;
 }
 
 void* QSctpSocket_virtualbase_metacast(void* self, const char* param1) {
@@ -934,30 +752,10 @@ void* QSctpSocket_virtualbase_metacast(void* self, const char* param1) {
 
 }
 
-bool QSctpSocket_override_virtual_metacall(void* self, intptr_t slot) {
-	VirtualQSctpSocket* self_cast = dynamic_cast<VirtualQSctpSocket*>( (QSctpSocket*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__metacall = slot;
-	return true;
-}
-
 int QSctpSocket_virtualbase_metacall(void* self, int param1, int param2, void** param3) {
 
 	return ( (VirtualQSctpSocket*)(self) )->QSctpSocket::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 
-}
-
-bool QSctpSocket_override_virtual_close(void* self, intptr_t slot) {
-	VirtualQSctpSocket* self_cast = dynamic_cast<VirtualQSctpSocket*>( (QSctpSocket*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__close = slot;
-	return true;
 }
 
 void QSctpSocket_virtualbase_close(void* self) {
@@ -966,30 +764,10 @@ void QSctpSocket_virtualbase_close(void* self) {
 
 }
 
-bool QSctpSocket_override_virtual_disconnectFromHost(void* self, intptr_t slot) {
-	VirtualQSctpSocket* self_cast = dynamic_cast<VirtualQSctpSocket*>( (QSctpSocket*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__disconnectFromHost = slot;
-	return true;
-}
-
 void QSctpSocket_virtualbase_disconnectFromHost(void* self) {
 
 	( (VirtualQSctpSocket*)(self) )->QSctpSocket::disconnectFromHost();
 
-}
-
-bool QSctpSocket_override_virtual_readData(void* self, intptr_t slot) {
-	VirtualQSctpSocket* self_cast = dynamic_cast<VirtualQSctpSocket*>( (QSctpSocket*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__readData = slot;
-	return true;
 }
 
 long long QSctpSocket_virtualbase_readData(void* self, char* data, long long maxlen) {
@@ -999,31 +777,11 @@ long long QSctpSocket_virtualbase_readData(void* self, char* data, long long max
 
 }
 
-bool QSctpSocket_override_virtual_readLineData(void* self, intptr_t slot) {
-	VirtualQSctpSocket* self_cast = dynamic_cast<VirtualQSctpSocket*>( (QSctpSocket*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__readLineData = slot;
-	return true;
-}
-
 long long QSctpSocket_virtualbase_readLineData(void* self, char* data, long long maxlen) {
 
 	qint64 _ret = ( (VirtualQSctpSocket*)(self) )->QSctpSocket::readLineData(data, static_cast<qint64>(maxlen));
 	return static_cast<long long>(_ret);
 
-}
-
-bool QSctpSocket_override_virtual_resume(void* self, intptr_t slot) {
-	VirtualQSctpSocket* self_cast = dynamic_cast<VirtualQSctpSocket*>( (QSctpSocket*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__resume = slot;
-	return true;
 }
 
 void QSctpSocket_virtualbase_resume(void* self) {
@@ -1032,30 +790,10 @@ void QSctpSocket_virtualbase_resume(void* self) {
 
 }
 
-bool QSctpSocket_override_virtual_bind(void* self, intptr_t slot) {
-	VirtualQSctpSocket* self_cast = dynamic_cast<VirtualQSctpSocket*>( (QSctpSocket*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__bind = slot;
-	return true;
-}
-
 bool QSctpSocket_virtualbase_bind(void* self, QHostAddress* address, uint16_t port, int mode) {
 
 	return ( (VirtualQSctpSocket*)(self) )->QSctpSocket::bind(*address, static_cast<quint16>(port), static_cast<VirtualQSctpSocket::BindMode>(mode));
 
-}
-
-bool QSctpSocket_override_virtual_connectToHost(void* self, intptr_t slot) {
-	VirtualQSctpSocket* self_cast = dynamic_cast<VirtualQSctpSocket*>( (QSctpSocket*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__connectToHost = slot;
-	return true;
 }
 
 void QSctpSocket_virtualbase_connectToHost(void* self, struct miqt_string hostName, uint16_t port, int mode, int protocol) {
@@ -1065,31 +803,11 @@ void QSctpSocket_virtualbase_connectToHost(void* self, struct miqt_string hostNa
 
 }
 
-bool QSctpSocket_override_virtual_bytesAvailable(void* self, intptr_t slot) {
-	VirtualQSctpSocket* self_cast = dynamic_cast<VirtualQSctpSocket*>( (QSctpSocket*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__bytesAvailable = slot;
-	return true;
-}
-
 long long QSctpSocket_virtualbase_bytesAvailable(const void* self) {
 
 	qint64 _ret = ( (const VirtualQSctpSocket*)(self) )->QSctpSocket::bytesAvailable();
 	return static_cast<long long>(_ret);
 
-}
-
-bool QSctpSocket_override_virtual_bytesToWrite(void* self, intptr_t slot) {
-	VirtualQSctpSocket* self_cast = dynamic_cast<VirtualQSctpSocket*>( (QSctpSocket*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__bytesToWrite = slot;
-	return true;
 }
 
 long long QSctpSocket_virtualbase_bytesToWrite(const void* self) {
@@ -1099,30 +817,10 @@ long long QSctpSocket_virtualbase_bytesToWrite(const void* self) {
 
 }
 
-bool QSctpSocket_override_virtual_setReadBufferSize(void* self, intptr_t slot) {
-	VirtualQSctpSocket* self_cast = dynamic_cast<VirtualQSctpSocket*>( (QSctpSocket*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__setReadBufferSize = slot;
-	return true;
-}
-
 void QSctpSocket_virtualbase_setReadBufferSize(void* self, long long size) {
 
 	( (VirtualQSctpSocket*)(self) )->QSctpSocket::setReadBufferSize(static_cast<qint64>(size));
 
-}
-
-bool QSctpSocket_override_virtual_socketDescriptor(void* self, intptr_t slot) {
-	VirtualQSctpSocket* self_cast = dynamic_cast<VirtualQSctpSocket*>( (QSctpSocket*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__socketDescriptor = slot;
-	return true;
 }
 
 intptr_t QSctpSocket_virtualbase_socketDescriptor(const void* self) {
@@ -1132,30 +830,10 @@ intptr_t QSctpSocket_virtualbase_socketDescriptor(const void* self) {
 
 }
 
-bool QSctpSocket_override_virtual_setSocketDescriptor(void* self, intptr_t slot) {
-	VirtualQSctpSocket* self_cast = dynamic_cast<VirtualQSctpSocket*>( (QSctpSocket*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__setSocketDescriptor = slot;
-	return true;
-}
-
 bool QSctpSocket_virtualbase_setSocketDescriptor(void* self, intptr_t socketDescriptor, int state, int openMode) {
 
 	return ( (VirtualQSctpSocket*)(self) )->QSctpSocket::setSocketDescriptor((qintptr)(socketDescriptor), static_cast<VirtualQSctpSocket::SocketState>(state), static_cast<VirtualQSctpSocket::OpenMode>(openMode));
 
-}
-
-bool QSctpSocket_override_virtual_setSocketOption(void* self, intptr_t slot) {
-	VirtualQSctpSocket* self_cast = dynamic_cast<VirtualQSctpSocket*>( (QSctpSocket*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__setSocketOption = slot;
-	return true;
 }
 
 void QSctpSocket_virtualbase_setSocketOption(void* self, int option, QVariant* value) {
@@ -1164,30 +842,10 @@ void QSctpSocket_virtualbase_setSocketOption(void* self, int option, QVariant* v
 
 }
 
-bool QSctpSocket_override_virtual_socketOption(void* self, intptr_t slot) {
-	VirtualQSctpSocket* self_cast = dynamic_cast<VirtualQSctpSocket*>( (QSctpSocket*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__socketOption = slot;
-	return true;
-}
-
 QVariant* QSctpSocket_virtualbase_socketOption(void* self, int option) {
 
 	return new QVariant(( (VirtualQSctpSocket*)(self) )->QSctpSocket::socketOption(static_cast<VirtualQSctpSocket::SocketOption>(option)));
 
-}
-
-bool QSctpSocket_override_virtual_isSequential(void* self, intptr_t slot) {
-	VirtualQSctpSocket* self_cast = dynamic_cast<VirtualQSctpSocket*>( (QSctpSocket*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__isSequential = slot;
-	return true;
 }
 
 bool QSctpSocket_virtualbase_isSequential(const void* self) {
@@ -1196,30 +854,10 @@ bool QSctpSocket_virtualbase_isSequential(const void* self) {
 
 }
 
-bool QSctpSocket_override_virtual_waitForConnected(void* self, intptr_t slot) {
-	VirtualQSctpSocket* self_cast = dynamic_cast<VirtualQSctpSocket*>( (QSctpSocket*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__waitForConnected = slot;
-	return true;
-}
-
 bool QSctpSocket_virtualbase_waitForConnected(void* self, int msecs) {
 
 	return ( (VirtualQSctpSocket*)(self) )->QSctpSocket::waitForConnected(static_cast<int>(msecs));
 
-}
-
-bool QSctpSocket_override_virtual_waitForReadyRead(void* self, intptr_t slot) {
-	VirtualQSctpSocket* self_cast = dynamic_cast<VirtualQSctpSocket*>( (QSctpSocket*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__waitForReadyRead = slot;
-	return true;
 }
 
 bool QSctpSocket_virtualbase_waitForReadyRead(void* self, int msecs) {
@@ -1228,46 +866,16 @@ bool QSctpSocket_virtualbase_waitForReadyRead(void* self, int msecs) {
 
 }
 
-bool QSctpSocket_override_virtual_waitForBytesWritten(void* self, intptr_t slot) {
-	VirtualQSctpSocket* self_cast = dynamic_cast<VirtualQSctpSocket*>( (QSctpSocket*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__waitForBytesWritten = slot;
-	return true;
-}
-
 bool QSctpSocket_virtualbase_waitForBytesWritten(void* self, int msecs) {
 
 	return ( (VirtualQSctpSocket*)(self) )->QSctpSocket::waitForBytesWritten(static_cast<int>(msecs));
 
 }
 
-bool QSctpSocket_override_virtual_waitForDisconnected(void* self, intptr_t slot) {
-	VirtualQSctpSocket* self_cast = dynamic_cast<VirtualQSctpSocket*>( (QSctpSocket*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__waitForDisconnected = slot;
-	return true;
-}
-
 bool QSctpSocket_virtualbase_waitForDisconnected(void* self, int msecs) {
 
 	return ( (VirtualQSctpSocket*)(self) )->QSctpSocket::waitForDisconnected(static_cast<int>(msecs));
 
-}
-
-bool QSctpSocket_override_virtual_skipData(void* self, intptr_t slot) {
-	VirtualQSctpSocket* self_cast = dynamic_cast<VirtualQSctpSocket*>( (QSctpSocket*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__skipData = slot;
-	return true;
 }
 
 long long QSctpSocket_virtualbase_skipData(void* self, long long maxSize) {
@@ -1277,16 +885,6 @@ long long QSctpSocket_virtualbase_skipData(void* self, long long maxSize) {
 
 }
 
-bool QSctpSocket_override_virtual_writeData(void* self, intptr_t slot) {
-	VirtualQSctpSocket* self_cast = dynamic_cast<VirtualQSctpSocket*>( (QSctpSocket*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__writeData = slot;
-	return true;
-}
-
 long long QSctpSocket_virtualbase_writeData(void* self, const char* data, long long len) {
 
 	qint64 _ret = ( (VirtualQSctpSocket*)(self) )->QSctpSocket::writeData(data, static_cast<qint64>(len));
@@ -1294,30 +892,10 @@ long long QSctpSocket_virtualbase_writeData(void* self, const char* data, long l
 
 }
 
-bool QSctpSocket_override_virtual_open(void* self, intptr_t slot) {
-	VirtualQSctpSocket* self_cast = dynamic_cast<VirtualQSctpSocket*>( (QSctpSocket*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__open = slot;
-	return true;
-}
-
 bool QSctpSocket_virtualbase_open(void* self, int mode) {
 
 	return ( (VirtualQSctpSocket*)(self) )->QSctpSocket::open(static_cast<VirtualQSctpSocket::OpenMode>(mode));
 
-}
-
-bool QSctpSocket_override_virtual_pos(void* self, intptr_t slot) {
-	VirtualQSctpSocket* self_cast = dynamic_cast<VirtualQSctpSocket*>( (QSctpSocket*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__pos = slot;
-	return true;
 }
 
 long long QSctpSocket_virtualbase_pos(const void* self) {
@@ -1327,31 +905,11 @@ long long QSctpSocket_virtualbase_pos(const void* self) {
 
 }
 
-bool QSctpSocket_override_virtual_size(void* self, intptr_t slot) {
-	VirtualQSctpSocket* self_cast = dynamic_cast<VirtualQSctpSocket*>( (QSctpSocket*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__size = slot;
-	return true;
-}
-
 long long QSctpSocket_virtualbase_size(const void* self) {
 
 	qint64 _ret = ( (const VirtualQSctpSocket*)(self) )->QSctpSocket::size();
 	return static_cast<long long>(_ret);
 
-}
-
-bool QSctpSocket_override_virtual_seek(void* self, intptr_t slot) {
-	VirtualQSctpSocket* self_cast = dynamic_cast<VirtualQSctpSocket*>( (QSctpSocket*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__seek = slot;
-	return true;
 }
 
 bool QSctpSocket_virtualbase_seek(void* self, long long pos) {
@@ -1360,30 +918,10 @@ bool QSctpSocket_virtualbase_seek(void* self, long long pos) {
 
 }
 
-bool QSctpSocket_override_virtual_atEnd(void* self, intptr_t slot) {
-	VirtualQSctpSocket* self_cast = dynamic_cast<VirtualQSctpSocket*>( (QSctpSocket*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__atEnd = slot;
-	return true;
-}
-
 bool QSctpSocket_virtualbase_atEnd(const void* self) {
 
 	return ( (const VirtualQSctpSocket*)(self) )->QSctpSocket::atEnd();
 
-}
-
-bool QSctpSocket_override_virtual_reset(void* self, intptr_t slot) {
-	VirtualQSctpSocket* self_cast = dynamic_cast<VirtualQSctpSocket*>( (QSctpSocket*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__reset = slot;
-	return true;
 }
 
 bool QSctpSocket_virtualbase_reset(void* self) {
@@ -1392,30 +930,10 @@ bool QSctpSocket_virtualbase_reset(void* self) {
 
 }
 
-bool QSctpSocket_override_virtual_canReadLine(void* self, intptr_t slot) {
-	VirtualQSctpSocket* self_cast = dynamic_cast<VirtualQSctpSocket*>( (QSctpSocket*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__canReadLine = slot;
-	return true;
-}
-
 bool QSctpSocket_virtualbase_canReadLine(const void* self) {
 
 	return ( (const VirtualQSctpSocket*)(self) )->QSctpSocket::canReadLine();
 
-}
-
-bool QSctpSocket_override_virtual_event(void* self, intptr_t slot) {
-	VirtualQSctpSocket* self_cast = dynamic_cast<VirtualQSctpSocket*>( (QSctpSocket*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__event = slot;
-	return true;
 }
 
 bool QSctpSocket_virtualbase_event(void* self, QEvent* event) {
@@ -1424,30 +942,10 @@ bool QSctpSocket_virtualbase_event(void* self, QEvent* event) {
 
 }
 
-bool QSctpSocket_override_virtual_eventFilter(void* self, intptr_t slot) {
-	VirtualQSctpSocket* self_cast = dynamic_cast<VirtualQSctpSocket*>( (QSctpSocket*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__eventFilter = slot;
-	return true;
-}
-
 bool QSctpSocket_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event) {
 
 	return ( (VirtualQSctpSocket*)(self) )->QSctpSocket::eventFilter(watched, event);
 
-}
-
-bool QSctpSocket_override_virtual_timerEvent(void* self, intptr_t slot) {
-	VirtualQSctpSocket* self_cast = dynamic_cast<VirtualQSctpSocket*>( (QSctpSocket*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__timerEvent = slot;
-	return true;
 }
 
 void QSctpSocket_virtualbase_timerEvent(void* self, QTimerEvent* event) {
@@ -1456,30 +954,10 @@ void QSctpSocket_virtualbase_timerEvent(void* self, QTimerEvent* event) {
 
 }
 
-bool QSctpSocket_override_virtual_childEvent(void* self, intptr_t slot) {
-	VirtualQSctpSocket* self_cast = dynamic_cast<VirtualQSctpSocket*>( (QSctpSocket*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__childEvent = slot;
-	return true;
-}
-
 void QSctpSocket_virtualbase_childEvent(void* self, QChildEvent* event) {
 
 	( (VirtualQSctpSocket*)(self) )->QSctpSocket::childEvent(event);
 
-}
-
-bool QSctpSocket_override_virtual_customEvent(void* self, intptr_t slot) {
-	VirtualQSctpSocket* self_cast = dynamic_cast<VirtualQSctpSocket*>( (QSctpSocket*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__customEvent = slot;
-	return true;
 }
 
 void QSctpSocket_virtualbase_customEvent(void* self, QEvent* event) {
@@ -1488,30 +966,10 @@ void QSctpSocket_virtualbase_customEvent(void* self, QEvent* event) {
 
 }
 
-bool QSctpSocket_override_virtual_connectNotify(void* self, intptr_t slot) {
-	VirtualQSctpSocket* self_cast = dynamic_cast<VirtualQSctpSocket*>( (QSctpSocket*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__connectNotify = slot;
-	return true;
-}
-
 void QSctpSocket_virtualbase_connectNotify(void* self, QMetaMethod* signal) {
 
 	( (VirtualQSctpSocket*)(self) )->QSctpSocket::connectNotify(*signal);
 
-}
-
-bool QSctpSocket_override_virtual_disconnectNotify(void* self, intptr_t slot) {
-	VirtualQSctpSocket* self_cast = dynamic_cast<VirtualQSctpSocket*>( (QSctpSocket*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__disconnectNotify = slot;
-	return true;
 }
 
 void QSctpSocket_virtualbase_disconnectNotify(void* self, QMetaMethod* signal) {

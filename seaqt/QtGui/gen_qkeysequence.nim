@@ -133,19 +133,6 @@ export
 
 type cQKeySequence*{.exportc: "QKeySequence", incompleteStruct.} = object
 
-proc fcQKeySequence_new(): ptr cQKeySequence {.importc: "QKeySequence_new".}
-proc fcQKeySequence_new2(key: struct_miqt_string): ptr cQKeySequence {.importc: "QKeySequence_new2".}
-proc fcQKeySequence_new3(k1: cint): ptr cQKeySequence {.importc: "QKeySequence_new3".}
-proc fcQKeySequence_new4(k1: pointer): ptr cQKeySequence {.importc: "QKeySequence_new4".}
-proc fcQKeySequence_new5(ks: pointer): ptr cQKeySequence {.importc: "QKeySequence_new5".}
-proc fcQKeySequence_new6(key: cint): ptr cQKeySequence {.importc: "QKeySequence_new6".}
-proc fcQKeySequence_new7(key: struct_miqt_string, format: cint): ptr cQKeySequence {.importc: "QKeySequence_new7".}
-proc fcQKeySequence_new8(k1: cint, k2: cint): ptr cQKeySequence {.importc: "QKeySequence_new8".}
-proc fcQKeySequence_new9(k1: cint, k2: cint, k3: cint): ptr cQKeySequence {.importc: "QKeySequence_new9".}
-proc fcQKeySequence_new10(k1: cint, k2: cint, k3: cint, k4: cint): ptr cQKeySequence {.importc: "QKeySequence_new10".}
-proc fcQKeySequence_new11(k1: pointer, k2: pointer): ptr cQKeySequence {.importc: "QKeySequence_new11".}
-proc fcQKeySequence_new12(k1: pointer, k2: pointer, k3: pointer): ptr cQKeySequence {.importc: "QKeySequence_new12".}
-proc fcQKeySequence_new13(k1: pointer, k2: pointer, k3: pointer, k4: pointer): ptr cQKeySequence {.importc: "QKeySequence_new13".}
 proc fcQKeySequence_count(self: pointer, ): cint {.importc: "QKeySequence_count".}
 proc fcQKeySequence_isEmpty(self: pointer, ): bool {.importc: "QKeySequence_isEmpty".}
 proc fcQKeySequence_toString(self: pointer, ): struct_miqt_string {.importc: "QKeySequence_toString".}
@@ -170,50 +157,21 @@ proc fcQKeySequence_toString1(self: pointer, format: cint): struct_miqt_string {
 proc fcQKeySequence_fromString2(str: struct_miqt_string, format: cint): pointer {.importc: "QKeySequence_fromString2".}
 proc fcQKeySequence_listFromString2(str: struct_miqt_string, format: cint): struct_miqt_array {.importc: "QKeySequence_listFromString2".}
 proc fcQKeySequence_listToString2(list: struct_miqt_array, format: cint): struct_miqt_string {.importc: "QKeySequence_listToString2".}
+proc fcQKeySequence_new(): ptr cQKeySequence {.importc: "QKeySequence_new".}
+proc fcQKeySequence_new2(key: struct_miqt_string): ptr cQKeySequence {.importc: "QKeySequence_new2".}
+proc fcQKeySequence_new3(k1: cint): ptr cQKeySequence {.importc: "QKeySequence_new3".}
+proc fcQKeySequence_new4(k1: pointer): ptr cQKeySequence {.importc: "QKeySequence_new4".}
+proc fcQKeySequence_new5(ks: pointer): ptr cQKeySequence {.importc: "QKeySequence_new5".}
+proc fcQKeySequence_new6(key: cint): ptr cQKeySequence {.importc: "QKeySequence_new6".}
+proc fcQKeySequence_new7(key: struct_miqt_string, format: cint): ptr cQKeySequence {.importc: "QKeySequence_new7".}
+proc fcQKeySequence_new8(k1: cint, k2: cint): ptr cQKeySequence {.importc: "QKeySequence_new8".}
+proc fcQKeySequence_new9(k1: cint, k2: cint, k3: cint): ptr cQKeySequence {.importc: "QKeySequence_new9".}
+proc fcQKeySequence_new10(k1: cint, k2: cint, k3: cint, k4: cint): ptr cQKeySequence {.importc: "QKeySequence_new10".}
+proc fcQKeySequence_new11(k1: pointer, k2: pointer): ptr cQKeySequence {.importc: "QKeySequence_new11".}
+proc fcQKeySequence_new12(k1: pointer, k2: pointer, k3: pointer): ptr cQKeySequence {.importc: "QKeySequence_new12".}
+proc fcQKeySequence_new13(k1: pointer, k2: pointer, k3: pointer, k4: pointer): ptr cQKeySequence {.importc: "QKeySequence_new13".}
 proc fcQKeySequence_staticMetaObject(): pointer {.importc: "QKeySequence_staticMetaObject".}
 proc fcQKeySequence_delete(self: pointer) {.importc: "QKeySequence_delete".}
-
-
-func init*(T: type gen_qkeysequence_types.QKeySequence, h: ptr cQKeySequence): gen_qkeysequence_types.QKeySequence =
-  T(h: h)
-proc create*(T: type gen_qkeysequence_types.QKeySequence, ): gen_qkeysequence_types.QKeySequence =
-  gen_qkeysequence_types.QKeySequence.init(fcQKeySequence_new())
-
-proc create*(T: type gen_qkeysequence_types.QKeySequence, key: string): gen_qkeysequence_types.QKeySequence =
-  gen_qkeysequence_types.QKeySequence.init(fcQKeySequence_new2(struct_miqt_string(data: key, len: csize_t(len(key)))))
-
-proc create*(T: type gen_qkeysequence_types.QKeySequence, k1: cint): gen_qkeysequence_types.QKeySequence =
-  gen_qkeysequence_types.QKeySequence.init(fcQKeySequence_new3(k1))
-
-proc create*(T: type gen_qkeysequence_types.QKeySequence, k1: gen_qnamespace_types.QKeyCombination): gen_qkeysequence_types.QKeySequence =
-  gen_qkeysequence_types.QKeySequence.init(fcQKeySequence_new4(k1.h))
-
-proc create*(T: type gen_qkeysequence_types.QKeySequence, ks: gen_qkeysequence_types.QKeySequence): gen_qkeysequence_types.QKeySequence =
-  gen_qkeysequence_types.QKeySequence.init(fcQKeySequence_new5(ks.h))
-
-proc create2*(T: type gen_qkeysequence_types.QKeySequence, key: cint): gen_qkeysequence_types.QKeySequence =
-  gen_qkeysequence_types.QKeySequence.init(fcQKeySequence_new6(cint(key)))
-
-proc create*(T: type gen_qkeysequence_types.QKeySequence, key: string, format: cint): gen_qkeysequence_types.QKeySequence =
-  gen_qkeysequence_types.QKeySequence.init(fcQKeySequence_new7(struct_miqt_string(data: key, len: csize_t(len(key))), cint(format)))
-
-proc create*(T: type gen_qkeysequence_types.QKeySequence, k1: cint, k2: cint): gen_qkeysequence_types.QKeySequence =
-  gen_qkeysequence_types.QKeySequence.init(fcQKeySequence_new8(k1, k2))
-
-proc create*(T: type gen_qkeysequence_types.QKeySequence, k1: cint, k2: cint, k3: cint): gen_qkeysequence_types.QKeySequence =
-  gen_qkeysequence_types.QKeySequence.init(fcQKeySequence_new9(k1, k2, k3))
-
-proc create*(T: type gen_qkeysequence_types.QKeySequence, k1: cint, k2: cint, k3: cint, k4: cint): gen_qkeysequence_types.QKeySequence =
-  gen_qkeysequence_types.QKeySequence.init(fcQKeySequence_new10(k1, k2, k3, k4))
-
-proc create*(T: type gen_qkeysequence_types.QKeySequence, k1: gen_qnamespace_types.QKeyCombination, k2: gen_qnamespace_types.QKeyCombination): gen_qkeysequence_types.QKeySequence =
-  gen_qkeysequence_types.QKeySequence.init(fcQKeySequence_new11(k1.h, k2.h))
-
-proc create*(T: type gen_qkeysequence_types.QKeySequence, k1: gen_qnamespace_types.QKeyCombination, k2: gen_qnamespace_types.QKeyCombination, k3: gen_qnamespace_types.QKeyCombination): gen_qkeysequence_types.QKeySequence =
-  gen_qkeysequence_types.QKeySequence.init(fcQKeySequence_new12(k1.h, k2.h, k3.h))
-
-proc create*(T: type gen_qkeysequence_types.QKeySequence, k1: gen_qnamespace_types.QKeyCombination, k2: gen_qnamespace_types.QKeyCombination, k3: gen_qnamespace_types.QKeyCombination, k4: gen_qnamespace_types.QKeyCombination): gen_qkeysequence_types.QKeySequence =
-  gen_qkeysequence_types.QKeySequence.init(fcQKeySequence_new13(k1.h, k2.h, k3.h, k4.h))
 
 proc count*(self: gen_qkeysequence_types.QKeySequence, ): cint =
   fcQKeySequence_count(self.h)
@@ -321,6 +279,57 @@ proc listToString*(_: type gen_qkeysequence_types.QKeySequence, list: seq[gen_qk
   let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
   c_free(v_ms.data)
   vx_ret
+
+proc create*(T: type gen_qkeysequence_types.QKeySequence): gen_qkeysequence_types.QKeySequence =
+  gen_qkeysequence_types.QKeySequence(h: fcQKeySequence_new())
+
+proc create*(T: type gen_qkeysequence_types.QKeySequence,
+    key: string): gen_qkeysequence_types.QKeySequence =
+  gen_qkeysequence_types.QKeySequence(h: fcQKeySequence_new2(struct_miqt_string(data: key, len: csize_t(len(key)))))
+
+proc create*(T: type gen_qkeysequence_types.QKeySequence,
+    k1: cint): gen_qkeysequence_types.QKeySequence =
+  gen_qkeysequence_types.QKeySequence(h: fcQKeySequence_new3(k1))
+
+proc create*(T: type gen_qkeysequence_types.QKeySequence,
+    k1: gen_qnamespace_types.QKeyCombination): gen_qkeysequence_types.QKeySequence =
+  gen_qkeysequence_types.QKeySequence(h: fcQKeySequence_new4(k1.h))
+
+proc create*(T: type gen_qkeysequence_types.QKeySequence,
+    ks: gen_qkeysequence_types.QKeySequence): gen_qkeysequence_types.QKeySequence =
+  gen_qkeysequence_types.QKeySequence(h: fcQKeySequence_new5(ks.h))
+
+proc create2*(T: type gen_qkeysequence_types.QKeySequence,
+    key: cint): gen_qkeysequence_types.QKeySequence =
+  gen_qkeysequence_types.QKeySequence(h: fcQKeySequence_new6(cint(key)))
+
+proc create*(T: type gen_qkeysequence_types.QKeySequence,
+    key: string, format: cint): gen_qkeysequence_types.QKeySequence =
+  gen_qkeysequence_types.QKeySequence(h: fcQKeySequence_new7(struct_miqt_string(data: key, len: csize_t(len(key))), cint(format)))
+
+proc create*(T: type gen_qkeysequence_types.QKeySequence,
+    k1: cint, k2: cint): gen_qkeysequence_types.QKeySequence =
+  gen_qkeysequence_types.QKeySequence(h: fcQKeySequence_new8(k1, k2))
+
+proc create*(T: type gen_qkeysequence_types.QKeySequence,
+    k1: cint, k2: cint, k3: cint): gen_qkeysequence_types.QKeySequence =
+  gen_qkeysequence_types.QKeySequence(h: fcQKeySequence_new9(k1, k2, k3))
+
+proc create*(T: type gen_qkeysequence_types.QKeySequence,
+    k1: cint, k2: cint, k3: cint, k4: cint): gen_qkeysequence_types.QKeySequence =
+  gen_qkeysequence_types.QKeySequence(h: fcQKeySequence_new10(k1, k2, k3, k4))
+
+proc create*(T: type gen_qkeysequence_types.QKeySequence,
+    k1: gen_qnamespace_types.QKeyCombination, k2: gen_qnamespace_types.QKeyCombination): gen_qkeysequence_types.QKeySequence =
+  gen_qkeysequence_types.QKeySequence(h: fcQKeySequence_new11(k1.h, k2.h))
+
+proc create*(T: type gen_qkeysequence_types.QKeySequence,
+    k1: gen_qnamespace_types.QKeyCombination, k2: gen_qnamespace_types.QKeyCombination, k3: gen_qnamespace_types.QKeyCombination): gen_qkeysequence_types.QKeySequence =
+  gen_qkeysequence_types.QKeySequence(h: fcQKeySequence_new12(k1.h, k2.h, k3.h))
+
+proc create*(T: type gen_qkeysequence_types.QKeySequence,
+    k1: gen_qnamespace_types.QKeyCombination, k2: gen_qnamespace_types.QKeyCombination, k3: gen_qnamespace_types.QKeyCombination, k4: gen_qnamespace_types.QKeyCombination): gen_qkeysequence_types.QKeySequence =
+  gen_qkeysequence_types.QKeySequence(h: fcQKeySequence_new13(k1.h, k2.h, k3.h, k4.h))
 
 proc staticMetaObject*(_: type gen_qkeysequence_types.QKeySequence): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQKeySequence_staticMetaObject())

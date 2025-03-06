@@ -21,138 +21,79 @@ extern "C" {
 #endif
 
 void miqt_exec_callback_QValidator_changed(intptr_t);
-QMetaObject* miqt_exec_callback_QValidator_metaObject(const QValidator*, intptr_t);
-void* miqt_exec_callback_QValidator_metacast(QValidator*, intptr_t, const char*);
-int miqt_exec_callback_QValidator_metacall(QValidator*, intptr_t, int, int, void**);
-int miqt_exec_callback_QValidator_validate(const QValidator*, intptr_t, struct miqt_string, int*);
-void miqt_exec_callback_QValidator_fixup(const QValidator*, intptr_t, struct miqt_string);
-bool miqt_exec_callback_QValidator_event(QValidator*, intptr_t, QEvent*);
-bool miqt_exec_callback_QValidator_eventFilter(QValidator*, intptr_t, QObject*, QEvent*);
-void miqt_exec_callback_QValidator_timerEvent(QValidator*, intptr_t, QTimerEvent*);
-void miqt_exec_callback_QValidator_childEvent(QValidator*, intptr_t, QChildEvent*);
-void miqt_exec_callback_QValidator_customEvent(QValidator*, intptr_t, QEvent*);
-void miqt_exec_callback_QValidator_connectNotify(QValidator*, intptr_t, QMetaMethod*);
-void miqt_exec_callback_QValidator_disconnectNotify(QValidator*, intptr_t, QMetaMethod*);
 void miqt_exec_callback_QIntValidator_bottomChanged(intptr_t, int);
 void miqt_exec_callback_QIntValidator_topChanged(intptr_t, int);
-QMetaObject* miqt_exec_callback_QIntValidator_metaObject(const QIntValidator*, intptr_t);
-void* miqt_exec_callback_QIntValidator_metacast(QIntValidator*, intptr_t, const char*);
-int miqt_exec_callback_QIntValidator_metacall(QIntValidator*, intptr_t, int, int, void**);
-int miqt_exec_callback_QIntValidator_validate(const QIntValidator*, intptr_t, struct miqt_string, int*);
-void miqt_exec_callback_QIntValidator_fixup(const QIntValidator*, intptr_t, struct miqt_string);
-bool miqt_exec_callback_QIntValidator_event(QIntValidator*, intptr_t, QEvent*);
-bool miqt_exec_callback_QIntValidator_eventFilter(QIntValidator*, intptr_t, QObject*, QEvent*);
-void miqt_exec_callback_QIntValidator_timerEvent(QIntValidator*, intptr_t, QTimerEvent*);
-void miqt_exec_callback_QIntValidator_childEvent(QIntValidator*, intptr_t, QChildEvent*);
-void miqt_exec_callback_QIntValidator_customEvent(QIntValidator*, intptr_t, QEvent*);
-void miqt_exec_callback_QIntValidator_connectNotify(QIntValidator*, intptr_t, QMetaMethod*);
-void miqt_exec_callback_QIntValidator_disconnectNotify(QIntValidator*, intptr_t, QMetaMethod*);
 void miqt_exec_callback_QDoubleValidator_bottomChanged(intptr_t, double);
 void miqt_exec_callback_QDoubleValidator_topChanged(intptr_t, double);
 void miqt_exec_callback_QDoubleValidator_decimalsChanged(intptr_t, int);
 void miqt_exec_callback_QDoubleValidator_notationChanged(intptr_t, int);
-QMetaObject* miqt_exec_callback_QDoubleValidator_metaObject(const QDoubleValidator*, intptr_t);
-void* miqt_exec_callback_QDoubleValidator_metacast(QDoubleValidator*, intptr_t, const char*);
-int miqt_exec_callback_QDoubleValidator_metacall(QDoubleValidator*, intptr_t, int, int, void**);
-int miqt_exec_callback_QDoubleValidator_validate(const QDoubleValidator*, intptr_t, struct miqt_string, int*);
-void miqt_exec_callback_QDoubleValidator_fixup(const QDoubleValidator*, intptr_t, struct miqt_string);
-bool miqt_exec_callback_QDoubleValidator_event(QDoubleValidator*, intptr_t, QEvent*);
-bool miqt_exec_callback_QDoubleValidator_eventFilter(QDoubleValidator*, intptr_t, QObject*, QEvent*);
-void miqt_exec_callback_QDoubleValidator_timerEvent(QDoubleValidator*, intptr_t, QTimerEvent*);
-void miqt_exec_callback_QDoubleValidator_childEvent(QDoubleValidator*, intptr_t, QChildEvent*);
-void miqt_exec_callback_QDoubleValidator_customEvent(QDoubleValidator*, intptr_t, QEvent*);
-void miqt_exec_callback_QDoubleValidator_connectNotify(QDoubleValidator*, intptr_t, QMetaMethod*);
-void miqt_exec_callback_QDoubleValidator_disconnectNotify(QDoubleValidator*, intptr_t, QMetaMethod*);
 void miqt_exec_callback_QRegularExpressionValidator_regularExpressionChanged(intptr_t, QRegularExpression*);
-QMetaObject* miqt_exec_callback_QRegularExpressionValidator_metaObject(const QRegularExpressionValidator*, intptr_t);
-void* miqt_exec_callback_QRegularExpressionValidator_metacast(QRegularExpressionValidator*, intptr_t, const char*);
-int miqt_exec_callback_QRegularExpressionValidator_metacall(QRegularExpressionValidator*, intptr_t, int, int, void**);
-int miqt_exec_callback_QRegularExpressionValidator_validate(const QRegularExpressionValidator*, intptr_t, struct miqt_string, int*);
-void miqt_exec_callback_QRegularExpressionValidator_fixup(const QRegularExpressionValidator*, intptr_t, struct miqt_string);
-bool miqt_exec_callback_QRegularExpressionValidator_event(QRegularExpressionValidator*, intptr_t, QEvent*);
-bool miqt_exec_callback_QRegularExpressionValidator_eventFilter(QRegularExpressionValidator*, intptr_t, QObject*, QEvent*);
-void miqt_exec_callback_QRegularExpressionValidator_timerEvent(QRegularExpressionValidator*, intptr_t, QTimerEvent*);
-void miqt_exec_callback_QRegularExpressionValidator_childEvent(QRegularExpressionValidator*, intptr_t, QChildEvent*);
-void miqt_exec_callback_QRegularExpressionValidator_customEvent(QRegularExpressionValidator*, intptr_t, QEvent*);
-void miqt_exec_callback_QRegularExpressionValidator_connectNotify(QRegularExpressionValidator*, intptr_t, QMetaMethod*);
-void miqt_exec_callback_QRegularExpressionValidator_disconnectNotify(QRegularExpressionValidator*, intptr_t, QMetaMethod*);
 #ifdef __cplusplus
 } /* extern C */
 #endif
 
 class VirtualQValidator final : public QValidator {
+	struct QValidator_VTable* vtbl;
 public:
 
-	VirtualQValidator(): QValidator() {};
-	VirtualQValidator(QObject* parent): QValidator(parent) {};
+	VirtualQValidator(struct QValidator_VTable* vtbl): QValidator(), vtbl(vtbl) {};
+	VirtualQValidator(struct QValidator_VTable* vtbl, QObject* parent): QValidator(parent), vtbl(vtbl) {};
 
-	virtual ~VirtualQValidator() override = default;
-
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__metaObject = 0;
+	virtual ~VirtualQValidator() override { if(vtbl->destructor) vtbl->destructor(vtbl, this); }
 
 	// Subclass to allow providing a Go implementation
 	virtual const QMetaObject* metaObject() const override {
-		if (handle__metaObject == 0) {
+		if (vtbl->metaObject == 0) {
 			return QValidator::metaObject();
 		}
-		
 
-		QMetaObject* callback_return_value = miqt_exec_callback_QValidator_metaObject(this, handle__metaObject);
+
+		QMetaObject* callback_return_value = vtbl->metaObject(vtbl, this);
 
 		return callback_return_value;
 	}
 
 	friend QMetaObject* QValidator_virtualbase_metaObject(const void* self);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__metacast = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void* qt_metacast(const char* param1) override {
-		if (handle__metacast == 0) {
+		if (vtbl->metacast == 0) {
 			return QValidator::qt_metacast(param1);
 		}
-		
+
 		const char* sigval1 = (const char*) param1;
 
-		void* callback_return_value = miqt_exec_callback_QValidator_metacast(this, handle__metacast, sigval1);
+		void* callback_return_value = vtbl->metacast(vtbl, this, sigval1);
 
 		return callback_return_value;
 	}
 
 	friend void* QValidator_virtualbase_metacast(void* self, const char* param1);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__metacall = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual int qt_metacall(QMetaObject::Call param1, int param2, void** param3) override {
-		if (handle__metacall == 0) {
+		if (vtbl->metacall == 0) {
 			return QValidator::qt_metacall(param1, param2, param3);
 		}
-		
+
 		QMetaObject::Call param1_ret = param1;
 		int sigval1 = static_cast<int>(param1_ret);
 		int sigval2 = param2;
 		void** sigval3 = param3;
 
-		int callback_return_value = miqt_exec_callback_QValidator_metacall(this, handle__metacall, sigval1, sigval2, sigval3);
+		int callback_return_value = vtbl->metacall(vtbl, this, sigval1, sigval2, sigval3);
 
 		return static_cast<int>(callback_return_value);
 	}
 
 	friend int QValidator_virtualbase_metacall(void* self, int param1, int param2, void** param3);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__validate = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual QValidator::State validate(QString& param1, int& param2) const override {
-		if (handle__validate == 0) {
+		if (vtbl->validate == 0) {
 			return (QValidator::State)(0); // Pure virtual, there is no base we can call
 		}
-		
+
 		QString param1_ret = param1;
 		// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 		QByteArray param1_b = param1_ret.toUtf8();
@@ -163,21 +104,18 @@ public:
 		struct miqt_string sigval1 = param1_ms;
 		int* sigval2 = &param2;
 
-		int callback_return_value = miqt_exec_callback_QValidator_validate(this, handle__validate, sigval1, sigval2);
+		int callback_return_value = vtbl->validate(vtbl, this, sigval1, sigval2);
 
 		return static_cast<QValidator::State>(callback_return_value);
 	}
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__fixup = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void fixup(QString& param1) const override {
-		if (handle__fixup == 0) {
+		if (vtbl->fixup == 0) {
 			QValidator::fixup(param1);
 			return;
 		}
-		
+
 		QString param1_ret = param1;
 		// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 		QByteArray param1_b = param1_ret.toUtf8();
@@ -187,145 +125,118 @@ public:
 		memcpy(param1_ms.data, param1_b.data(), param1_ms.len);
 		struct miqt_string sigval1 = param1_ms;
 
-		miqt_exec_callback_QValidator_fixup(this, handle__fixup, sigval1);
+		vtbl->fixup(vtbl, this, sigval1);
 
-		
 	}
 
 	friend void QValidator_virtualbase_fixup(const void* self, struct miqt_string param1);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__event = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual bool event(QEvent* event) override {
-		if (handle__event == 0) {
+		if (vtbl->event == 0) {
 			return QValidator::event(event);
 		}
-		
+
 		QEvent* sigval1 = event;
 
-		bool callback_return_value = miqt_exec_callback_QValidator_event(this, handle__event, sigval1);
+		bool callback_return_value = vtbl->event(vtbl, this, sigval1);
 
 		return callback_return_value;
 	}
 
 	friend bool QValidator_virtualbase_event(void* self, QEvent* event);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__eventFilter = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual bool eventFilter(QObject* watched, QEvent* event) override {
-		if (handle__eventFilter == 0) {
+		if (vtbl->eventFilter == 0) {
 			return QValidator::eventFilter(watched, event);
 		}
-		
+
 		QObject* sigval1 = watched;
 		QEvent* sigval2 = event;
 
-		bool callback_return_value = miqt_exec_callback_QValidator_eventFilter(this, handle__eventFilter, sigval1, sigval2);
+		bool callback_return_value = vtbl->eventFilter(vtbl, this, sigval1, sigval2);
 
 		return callback_return_value;
 	}
 
 	friend bool QValidator_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__timerEvent = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void timerEvent(QTimerEvent* event) override {
-		if (handle__timerEvent == 0) {
+		if (vtbl->timerEvent == 0) {
 			QValidator::timerEvent(event);
 			return;
 		}
-		
+
 		QTimerEvent* sigval1 = event;
 
-		miqt_exec_callback_QValidator_timerEvent(this, handle__timerEvent, sigval1);
+		vtbl->timerEvent(vtbl, this, sigval1);
 
-		
 	}
 
 	friend void QValidator_virtualbase_timerEvent(void* self, QTimerEvent* event);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__childEvent = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void childEvent(QChildEvent* event) override {
-		if (handle__childEvent == 0) {
+		if (vtbl->childEvent == 0) {
 			QValidator::childEvent(event);
 			return;
 		}
-		
+
 		QChildEvent* sigval1 = event;
 
-		miqt_exec_callback_QValidator_childEvent(this, handle__childEvent, sigval1);
+		vtbl->childEvent(vtbl, this, sigval1);
 
-		
 	}
 
 	friend void QValidator_virtualbase_childEvent(void* self, QChildEvent* event);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__customEvent = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void customEvent(QEvent* event) override {
-		if (handle__customEvent == 0) {
+		if (vtbl->customEvent == 0) {
 			QValidator::customEvent(event);
 			return;
 		}
-		
+
 		QEvent* sigval1 = event;
 
-		miqt_exec_callback_QValidator_customEvent(this, handle__customEvent, sigval1);
+		vtbl->customEvent(vtbl, this, sigval1);
 
-		
 	}
 
 	friend void QValidator_virtualbase_customEvent(void* self, QEvent* event);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__connectNotify = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void connectNotify(const QMetaMethod& signal) override {
-		if (handle__connectNotify == 0) {
+		if (vtbl->connectNotify == 0) {
 			QValidator::connectNotify(signal);
 			return;
 		}
-		
+
 		const QMetaMethod& signal_ret = signal;
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
 
-		miqt_exec_callback_QValidator_connectNotify(this, handle__connectNotify, sigval1);
+		vtbl->connectNotify(vtbl, this, sigval1);
 
-		
 	}
 
 	friend void QValidator_virtualbase_connectNotify(void* self, QMetaMethod* signal);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__disconnectNotify = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void disconnectNotify(const QMetaMethod& signal) override {
-		if (handle__disconnectNotify == 0) {
+		if (vtbl->disconnectNotify == 0) {
 			QValidator::disconnectNotify(signal);
 			return;
 		}
-		
+
 		const QMetaMethod& signal_ret = signal;
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
 
-		miqt_exec_callback_QValidator_disconnectNotify(this, handle__disconnectNotify, sigval1);
+		vtbl->disconnectNotify(vtbl, this, sigval1);
 
-		
 	}
 
 	friend void QValidator_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
@@ -337,12 +248,12 @@ public:
 	friend bool QValidator_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
 };
 
-QValidator* QValidator_new() {
-	return new VirtualQValidator();
+QValidator* QValidator_new(struct QValidator_VTable* vtbl) {
+	return new VirtualQValidator(vtbl);
 }
 
-QValidator* QValidator_new2(QObject* parent) {
-	return new VirtualQValidator(parent);
+QValidator* QValidator_new2(struct QValidator_VTable* vtbl, QObject* parent) {
+	return new VirtualQValidator(vtbl, parent);
 }
 
 void QValidator_virtbase(QValidator* src, QObject** outptr_QObject) {
@@ -423,30 +334,10 @@ struct miqt_string QValidator_tr3(const char* s, const char* c, int n) {
 	return _ms;
 }
 
-bool QValidator_override_virtual_metaObject(void* self, intptr_t slot) {
-	VirtualQValidator* self_cast = dynamic_cast<VirtualQValidator*>( (QValidator*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__metaObject = slot;
-	return true;
-}
-
 QMetaObject* QValidator_virtualbase_metaObject(const void* self) {
 
 	return (QMetaObject*) ( (const VirtualQValidator*)(self) )->QValidator::metaObject();
 
-}
-
-bool QValidator_override_virtual_metacast(void* self, intptr_t slot) {
-	VirtualQValidator* self_cast = dynamic_cast<VirtualQValidator*>( (QValidator*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__metacast = slot;
-	return true;
 }
 
 void* QValidator_virtualbase_metacast(void* self, const char* param1) {
@@ -455,40 +346,10 @@ void* QValidator_virtualbase_metacast(void* self, const char* param1) {
 
 }
 
-bool QValidator_override_virtual_metacall(void* self, intptr_t slot) {
-	VirtualQValidator* self_cast = dynamic_cast<VirtualQValidator*>( (QValidator*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__metacall = slot;
-	return true;
-}
-
 int QValidator_virtualbase_metacall(void* self, int param1, int param2, void** param3) {
 
 	return ( (VirtualQValidator*)(self) )->QValidator::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 
-}
-
-bool QValidator_override_virtual_validate(void* self, intptr_t slot) {
-	VirtualQValidator* self_cast = dynamic_cast<VirtualQValidator*>( (QValidator*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__validate = slot;
-	return true;
-}
-
-bool QValidator_override_virtual_fixup(void* self, intptr_t slot) {
-	VirtualQValidator* self_cast = dynamic_cast<VirtualQValidator*>( (QValidator*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__fixup = slot;
-	return true;
 }
 
 void QValidator_virtualbase_fixup(const void* self, struct miqt_string param1) {
@@ -498,30 +359,10 @@ void QValidator_virtualbase_fixup(const void* self, struct miqt_string param1) {
 
 }
 
-bool QValidator_override_virtual_event(void* self, intptr_t slot) {
-	VirtualQValidator* self_cast = dynamic_cast<VirtualQValidator*>( (QValidator*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__event = slot;
-	return true;
-}
-
 bool QValidator_virtualbase_event(void* self, QEvent* event) {
 
 	return ( (VirtualQValidator*)(self) )->QValidator::event(event);
 
-}
-
-bool QValidator_override_virtual_eventFilter(void* self, intptr_t slot) {
-	VirtualQValidator* self_cast = dynamic_cast<VirtualQValidator*>( (QValidator*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__eventFilter = slot;
-	return true;
 }
 
 bool QValidator_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event) {
@@ -530,30 +371,10 @@ bool QValidator_virtualbase_eventFilter(void* self, QObject* watched, QEvent* ev
 
 }
 
-bool QValidator_override_virtual_timerEvent(void* self, intptr_t slot) {
-	VirtualQValidator* self_cast = dynamic_cast<VirtualQValidator*>( (QValidator*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__timerEvent = slot;
-	return true;
-}
-
 void QValidator_virtualbase_timerEvent(void* self, QTimerEvent* event) {
 
 	( (VirtualQValidator*)(self) )->QValidator::timerEvent(event);
 
-}
-
-bool QValidator_override_virtual_childEvent(void* self, intptr_t slot) {
-	VirtualQValidator* self_cast = dynamic_cast<VirtualQValidator*>( (QValidator*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__childEvent = slot;
-	return true;
 }
 
 void QValidator_virtualbase_childEvent(void* self, QChildEvent* event) {
@@ -562,46 +383,16 @@ void QValidator_virtualbase_childEvent(void* self, QChildEvent* event) {
 
 }
 
-bool QValidator_override_virtual_customEvent(void* self, intptr_t slot) {
-	VirtualQValidator* self_cast = dynamic_cast<VirtualQValidator*>( (QValidator*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__customEvent = slot;
-	return true;
-}
-
 void QValidator_virtualbase_customEvent(void* self, QEvent* event) {
 
 	( (VirtualQValidator*)(self) )->QValidator::customEvent(event);
 
 }
 
-bool QValidator_override_virtual_connectNotify(void* self, intptr_t slot) {
-	VirtualQValidator* self_cast = dynamic_cast<VirtualQValidator*>( (QValidator*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__connectNotify = slot;
-	return true;
-}
-
 void QValidator_virtualbase_connectNotify(void* self, QMetaMethod* signal) {
 
 	( (VirtualQValidator*)(self) )->QValidator::connectNotify(*signal);
 
-}
-
-bool QValidator_override_virtual_disconnectNotify(void* self, intptr_t slot) {
-	VirtualQValidator* self_cast = dynamic_cast<VirtualQValidator*>( (QValidator*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__disconnectNotify = slot;
-	return true;
 }
 
 void QValidator_virtualbase_disconnectNotify(void* self, QMetaMethod* signal) {
@@ -668,80 +459,69 @@ void QValidator_delete(QValidator* self) {
 }
 
 class VirtualQIntValidator final : public QIntValidator {
+	struct QIntValidator_VTable* vtbl;
 public:
 
-	VirtualQIntValidator(): QIntValidator() {};
-	VirtualQIntValidator(int bottom, int top): QIntValidator(bottom, top) {};
-	VirtualQIntValidator(QObject* parent): QIntValidator(parent) {};
-	VirtualQIntValidator(int bottom, int top, QObject* parent): QIntValidator(bottom, top, parent) {};
+	VirtualQIntValidator(struct QIntValidator_VTable* vtbl): QIntValidator(), vtbl(vtbl) {};
+	VirtualQIntValidator(struct QIntValidator_VTable* vtbl, int bottom, int top): QIntValidator(bottom, top), vtbl(vtbl) {};
+	VirtualQIntValidator(struct QIntValidator_VTable* vtbl, QObject* parent): QIntValidator(parent), vtbl(vtbl) {};
+	VirtualQIntValidator(struct QIntValidator_VTable* vtbl, int bottom, int top, QObject* parent): QIntValidator(bottom, top, parent), vtbl(vtbl) {};
 
-	virtual ~VirtualQIntValidator() override = default;
-
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__metaObject = 0;
+	virtual ~VirtualQIntValidator() override { if(vtbl->destructor) vtbl->destructor(vtbl, this); }
 
 	// Subclass to allow providing a Go implementation
 	virtual const QMetaObject* metaObject() const override {
-		if (handle__metaObject == 0) {
+		if (vtbl->metaObject == 0) {
 			return QIntValidator::metaObject();
 		}
-		
 
-		QMetaObject* callback_return_value = miqt_exec_callback_QIntValidator_metaObject(this, handle__metaObject);
+
+		QMetaObject* callback_return_value = vtbl->metaObject(vtbl, this);
 
 		return callback_return_value;
 	}
 
 	friend QMetaObject* QIntValidator_virtualbase_metaObject(const void* self);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__metacast = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void* qt_metacast(const char* param1) override {
-		if (handle__metacast == 0) {
+		if (vtbl->metacast == 0) {
 			return QIntValidator::qt_metacast(param1);
 		}
-		
+
 		const char* sigval1 = (const char*) param1;
 
-		void* callback_return_value = miqt_exec_callback_QIntValidator_metacast(this, handle__metacast, sigval1);
+		void* callback_return_value = vtbl->metacast(vtbl, this, sigval1);
 
 		return callback_return_value;
 	}
 
 	friend void* QIntValidator_virtualbase_metacast(void* self, const char* param1);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__metacall = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual int qt_metacall(QMetaObject::Call param1, int param2, void** param3) override {
-		if (handle__metacall == 0) {
+		if (vtbl->metacall == 0) {
 			return QIntValidator::qt_metacall(param1, param2, param3);
 		}
-		
+
 		QMetaObject::Call param1_ret = param1;
 		int sigval1 = static_cast<int>(param1_ret);
 		int sigval2 = param2;
 		void** sigval3 = param3;
 
-		int callback_return_value = miqt_exec_callback_QIntValidator_metacall(this, handle__metacall, sigval1, sigval2, sigval3);
+		int callback_return_value = vtbl->metacall(vtbl, this, sigval1, sigval2, sigval3);
 
 		return static_cast<int>(callback_return_value);
 	}
 
 	friend int QIntValidator_virtualbase_metacall(void* self, int param1, int param2, void** param3);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__validate = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual QValidator::State validate(QString& param1, int& param2) const override {
-		if (handle__validate == 0) {
+		if (vtbl->validate == 0) {
 			return QIntValidator::validate(param1, param2);
 		}
-		
+
 		QString param1_ret = param1;
 		// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 		QByteArray param1_b = param1_ret.toUtf8();
@@ -752,23 +532,20 @@ public:
 		struct miqt_string sigval1 = param1_ms;
 		int* sigval2 = &param2;
 
-		int callback_return_value = miqt_exec_callback_QIntValidator_validate(this, handle__validate, sigval1, sigval2);
+		int callback_return_value = vtbl->validate(vtbl, this, sigval1, sigval2);
 
 		return static_cast<QValidator::State>(callback_return_value);
 	}
 
 	friend int QIntValidator_virtualbase_validate(const void* self, struct miqt_string param1, int* param2);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__fixup = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void fixup(QString& input) const override {
-		if (handle__fixup == 0) {
+		if (vtbl->fixup == 0) {
 			QIntValidator::fixup(input);
 			return;
 		}
-		
+
 		QString input_ret = input;
 		// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 		QByteArray input_b = input_ret.toUtf8();
@@ -778,145 +555,118 @@ public:
 		memcpy(input_ms.data, input_b.data(), input_ms.len);
 		struct miqt_string sigval1 = input_ms;
 
-		miqt_exec_callback_QIntValidator_fixup(this, handle__fixup, sigval1);
+		vtbl->fixup(vtbl, this, sigval1);
 
-		
 	}
 
 	friend void QIntValidator_virtualbase_fixup(const void* self, struct miqt_string input);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__event = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual bool event(QEvent* event) override {
-		if (handle__event == 0) {
+		if (vtbl->event == 0) {
 			return QIntValidator::event(event);
 		}
-		
+
 		QEvent* sigval1 = event;
 
-		bool callback_return_value = miqt_exec_callback_QIntValidator_event(this, handle__event, sigval1);
+		bool callback_return_value = vtbl->event(vtbl, this, sigval1);
 
 		return callback_return_value;
 	}
 
 	friend bool QIntValidator_virtualbase_event(void* self, QEvent* event);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__eventFilter = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual bool eventFilter(QObject* watched, QEvent* event) override {
-		if (handle__eventFilter == 0) {
+		if (vtbl->eventFilter == 0) {
 			return QIntValidator::eventFilter(watched, event);
 		}
-		
+
 		QObject* sigval1 = watched;
 		QEvent* sigval2 = event;
 
-		bool callback_return_value = miqt_exec_callback_QIntValidator_eventFilter(this, handle__eventFilter, sigval1, sigval2);
+		bool callback_return_value = vtbl->eventFilter(vtbl, this, sigval1, sigval2);
 
 		return callback_return_value;
 	}
 
 	friend bool QIntValidator_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__timerEvent = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void timerEvent(QTimerEvent* event) override {
-		if (handle__timerEvent == 0) {
+		if (vtbl->timerEvent == 0) {
 			QIntValidator::timerEvent(event);
 			return;
 		}
-		
+
 		QTimerEvent* sigval1 = event;
 
-		miqt_exec_callback_QIntValidator_timerEvent(this, handle__timerEvent, sigval1);
+		vtbl->timerEvent(vtbl, this, sigval1);
 
-		
 	}
 
 	friend void QIntValidator_virtualbase_timerEvent(void* self, QTimerEvent* event);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__childEvent = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void childEvent(QChildEvent* event) override {
-		if (handle__childEvent == 0) {
+		if (vtbl->childEvent == 0) {
 			QIntValidator::childEvent(event);
 			return;
 		}
-		
+
 		QChildEvent* sigval1 = event;
 
-		miqt_exec_callback_QIntValidator_childEvent(this, handle__childEvent, sigval1);
+		vtbl->childEvent(vtbl, this, sigval1);
 
-		
 	}
 
 	friend void QIntValidator_virtualbase_childEvent(void* self, QChildEvent* event);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__customEvent = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void customEvent(QEvent* event) override {
-		if (handle__customEvent == 0) {
+		if (vtbl->customEvent == 0) {
 			QIntValidator::customEvent(event);
 			return;
 		}
-		
+
 		QEvent* sigval1 = event;
 
-		miqt_exec_callback_QIntValidator_customEvent(this, handle__customEvent, sigval1);
+		vtbl->customEvent(vtbl, this, sigval1);
 
-		
 	}
 
 	friend void QIntValidator_virtualbase_customEvent(void* self, QEvent* event);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__connectNotify = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void connectNotify(const QMetaMethod& signal) override {
-		if (handle__connectNotify == 0) {
+		if (vtbl->connectNotify == 0) {
 			QIntValidator::connectNotify(signal);
 			return;
 		}
-		
+
 		const QMetaMethod& signal_ret = signal;
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
 
-		miqt_exec_callback_QIntValidator_connectNotify(this, handle__connectNotify, sigval1);
+		vtbl->connectNotify(vtbl, this, sigval1);
 
-		
 	}
 
 	friend void QIntValidator_virtualbase_connectNotify(void* self, QMetaMethod* signal);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__disconnectNotify = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void disconnectNotify(const QMetaMethod& signal) override {
-		if (handle__disconnectNotify == 0) {
+		if (vtbl->disconnectNotify == 0) {
 			QIntValidator::disconnectNotify(signal);
 			return;
 		}
-		
+
 		const QMetaMethod& signal_ret = signal;
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
 
-		miqt_exec_callback_QIntValidator_disconnectNotify(this, handle__disconnectNotify, sigval1);
+		vtbl->disconnectNotify(vtbl, this, sigval1);
 
-		
 	}
 
 	friend void QIntValidator_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
@@ -928,20 +678,20 @@ public:
 	friend bool QIntValidator_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
 };
 
-QIntValidator* QIntValidator_new() {
-	return new VirtualQIntValidator();
+QIntValidator* QIntValidator_new(struct QIntValidator_VTable* vtbl) {
+	return new VirtualQIntValidator(vtbl);
 }
 
-QIntValidator* QIntValidator_new2(int bottom, int top) {
-	return new VirtualQIntValidator(static_cast<int>(bottom), static_cast<int>(top));
+QIntValidator* QIntValidator_new2(struct QIntValidator_VTable* vtbl, int bottom, int top) {
+	return new VirtualQIntValidator(vtbl, static_cast<int>(bottom), static_cast<int>(top));
 }
 
-QIntValidator* QIntValidator_new3(QObject* parent) {
-	return new VirtualQIntValidator(parent);
+QIntValidator* QIntValidator_new3(struct QIntValidator_VTable* vtbl, QObject* parent) {
+	return new VirtualQIntValidator(vtbl, parent);
 }
 
-QIntValidator* QIntValidator_new4(int bottom, int top, QObject* parent) {
-	return new VirtualQIntValidator(static_cast<int>(bottom), static_cast<int>(top), parent);
+QIntValidator* QIntValidator_new4(struct QIntValidator_VTable* vtbl, int bottom, int top, QObject* parent) {
+	return new VirtualQIntValidator(vtbl, static_cast<int>(bottom), static_cast<int>(top), parent);
 }
 
 void QIntValidator_virtbase(QIntValidator* src, QValidator** outptr_QValidator) {
@@ -1046,30 +796,10 @@ struct miqt_string QIntValidator_tr3(const char* s, const char* c, int n) {
 	return _ms;
 }
 
-bool QIntValidator_override_virtual_metaObject(void* self, intptr_t slot) {
-	VirtualQIntValidator* self_cast = dynamic_cast<VirtualQIntValidator*>( (QIntValidator*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__metaObject = slot;
-	return true;
-}
-
 QMetaObject* QIntValidator_virtualbase_metaObject(const void* self) {
 
 	return (QMetaObject*) ( (const VirtualQIntValidator*)(self) )->QIntValidator::metaObject();
 
-}
-
-bool QIntValidator_override_virtual_metacast(void* self, intptr_t slot) {
-	VirtualQIntValidator* self_cast = dynamic_cast<VirtualQIntValidator*>( (QIntValidator*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__metacast = slot;
-	return true;
 }
 
 void* QIntValidator_virtualbase_metacast(void* self, const char* param1) {
@@ -1078,30 +808,10 @@ void* QIntValidator_virtualbase_metacast(void* self, const char* param1) {
 
 }
 
-bool QIntValidator_override_virtual_metacall(void* self, intptr_t slot) {
-	VirtualQIntValidator* self_cast = dynamic_cast<VirtualQIntValidator*>( (QIntValidator*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__metacall = slot;
-	return true;
-}
-
 int QIntValidator_virtualbase_metacall(void* self, int param1, int param2, void** param3) {
 
 	return ( (VirtualQIntValidator*)(self) )->QIntValidator::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 
-}
-
-bool QIntValidator_override_virtual_validate(void* self, intptr_t slot) {
-	VirtualQIntValidator* self_cast = dynamic_cast<VirtualQIntValidator*>( (QIntValidator*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__validate = slot;
-	return true;
 }
 
 int QIntValidator_virtualbase_validate(const void* self, struct miqt_string param1, int* param2) {
@@ -1112,31 +822,11 @@ int QIntValidator_virtualbase_validate(const void* self, struct miqt_string para
 
 }
 
-bool QIntValidator_override_virtual_fixup(void* self, intptr_t slot) {
-	VirtualQIntValidator* self_cast = dynamic_cast<VirtualQIntValidator*>( (QIntValidator*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__fixup = slot;
-	return true;
-}
-
 void QIntValidator_virtualbase_fixup(const void* self, struct miqt_string input) {
 	QString input_QString = QString::fromUtf8(input.data, input.len);
 
 	( (const VirtualQIntValidator*)(self) )->QIntValidator::fixup(input_QString);
 
-}
-
-bool QIntValidator_override_virtual_event(void* self, intptr_t slot) {
-	VirtualQIntValidator* self_cast = dynamic_cast<VirtualQIntValidator*>( (QIntValidator*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__event = slot;
-	return true;
 }
 
 bool QIntValidator_virtualbase_event(void* self, QEvent* event) {
@@ -1145,30 +835,10 @@ bool QIntValidator_virtualbase_event(void* self, QEvent* event) {
 
 }
 
-bool QIntValidator_override_virtual_eventFilter(void* self, intptr_t slot) {
-	VirtualQIntValidator* self_cast = dynamic_cast<VirtualQIntValidator*>( (QIntValidator*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__eventFilter = slot;
-	return true;
-}
-
 bool QIntValidator_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event) {
 
 	return ( (VirtualQIntValidator*)(self) )->QIntValidator::eventFilter(watched, event);
 
-}
-
-bool QIntValidator_override_virtual_timerEvent(void* self, intptr_t slot) {
-	VirtualQIntValidator* self_cast = dynamic_cast<VirtualQIntValidator*>( (QIntValidator*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__timerEvent = slot;
-	return true;
 }
 
 void QIntValidator_virtualbase_timerEvent(void* self, QTimerEvent* event) {
@@ -1177,30 +847,10 @@ void QIntValidator_virtualbase_timerEvent(void* self, QTimerEvent* event) {
 
 }
 
-bool QIntValidator_override_virtual_childEvent(void* self, intptr_t slot) {
-	VirtualQIntValidator* self_cast = dynamic_cast<VirtualQIntValidator*>( (QIntValidator*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__childEvent = slot;
-	return true;
-}
-
 void QIntValidator_virtualbase_childEvent(void* self, QChildEvent* event) {
 
 	( (VirtualQIntValidator*)(self) )->QIntValidator::childEvent(event);
 
-}
-
-bool QIntValidator_override_virtual_customEvent(void* self, intptr_t slot) {
-	VirtualQIntValidator* self_cast = dynamic_cast<VirtualQIntValidator*>( (QIntValidator*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__customEvent = slot;
-	return true;
 }
 
 void QIntValidator_virtualbase_customEvent(void* self, QEvent* event) {
@@ -1209,30 +859,10 @@ void QIntValidator_virtualbase_customEvent(void* self, QEvent* event) {
 
 }
 
-bool QIntValidator_override_virtual_connectNotify(void* self, intptr_t slot) {
-	VirtualQIntValidator* self_cast = dynamic_cast<VirtualQIntValidator*>( (QIntValidator*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__connectNotify = slot;
-	return true;
-}
-
 void QIntValidator_virtualbase_connectNotify(void* self, QMetaMethod* signal) {
 
 	( (VirtualQIntValidator*)(self) )->QIntValidator::connectNotify(*signal);
 
-}
-
-bool QIntValidator_override_virtual_disconnectNotify(void* self, intptr_t slot) {
-	VirtualQIntValidator* self_cast = dynamic_cast<VirtualQIntValidator*>( (QIntValidator*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__disconnectNotify = slot;
-	return true;
 }
 
 void QIntValidator_virtualbase_disconnectNotify(void* self, QMetaMethod* signal) {
@@ -1299,80 +929,69 @@ void QIntValidator_delete(QIntValidator* self) {
 }
 
 class VirtualQDoubleValidator final : public QDoubleValidator {
+	struct QDoubleValidator_VTable* vtbl;
 public:
 
-	VirtualQDoubleValidator(): QDoubleValidator() {};
-	VirtualQDoubleValidator(double bottom, double top, int decimals): QDoubleValidator(bottom, top, decimals) {};
-	VirtualQDoubleValidator(QObject* parent): QDoubleValidator(parent) {};
-	VirtualQDoubleValidator(double bottom, double top, int decimals, QObject* parent): QDoubleValidator(bottom, top, decimals, parent) {};
+	VirtualQDoubleValidator(struct QDoubleValidator_VTable* vtbl): QDoubleValidator(), vtbl(vtbl) {};
+	VirtualQDoubleValidator(struct QDoubleValidator_VTable* vtbl, double bottom, double top, int decimals): QDoubleValidator(bottom, top, decimals), vtbl(vtbl) {};
+	VirtualQDoubleValidator(struct QDoubleValidator_VTable* vtbl, QObject* parent): QDoubleValidator(parent), vtbl(vtbl) {};
+	VirtualQDoubleValidator(struct QDoubleValidator_VTable* vtbl, double bottom, double top, int decimals, QObject* parent): QDoubleValidator(bottom, top, decimals, parent), vtbl(vtbl) {};
 
-	virtual ~VirtualQDoubleValidator() override = default;
-
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__metaObject = 0;
+	virtual ~VirtualQDoubleValidator() override { if(vtbl->destructor) vtbl->destructor(vtbl, this); }
 
 	// Subclass to allow providing a Go implementation
 	virtual const QMetaObject* metaObject() const override {
-		if (handle__metaObject == 0) {
+		if (vtbl->metaObject == 0) {
 			return QDoubleValidator::metaObject();
 		}
-		
 
-		QMetaObject* callback_return_value = miqt_exec_callback_QDoubleValidator_metaObject(this, handle__metaObject);
+
+		QMetaObject* callback_return_value = vtbl->metaObject(vtbl, this);
 
 		return callback_return_value;
 	}
 
 	friend QMetaObject* QDoubleValidator_virtualbase_metaObject(const void* self);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__metacast = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void* qt_metacast(const char* param1) override {
-		if (handle__metacast == 0) {
+		if (vtbl->metacast == 0) {
 			return QDoubleValidator::qt_metacast(param1);
 		}
-		
+
 		const char* sigval1 = (const char*) param1;
 
-		void* callback_return_value = miqt_exec_callback_QDoubleValidator_metacast(this, handle__metacast, sigval1);
+		void* callback_return_value = vtbl->metacast(vtbl, this, sigval1);
 
 		return callback_return_value;
 	}
 
 	friend void* QDoubleValidator_virtualbase_metacast(void* self, const char* param1);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__metacall = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual int qt_metacall(QMetaObject::Call param1, int param2, void** param3) override {
-		if (handle__metacall == 0) {
+		if (vtbl->metacall == 0) {
 			return QDoubleValidator::qt_metacall(param1, param2, param3);
 		}
-		
+
 		QMetaObject::Call param1_ret = param1;
 		int sigval1 = static_cast<int>(param1_ret);
 		int sigval2 = param2;
 		void** sigval3 = param3;
 
-		int callback_return_value = miqt_exec_callback_QDoubleValidator_metacall(this, handle__metacall, sigval1, sigval2, sigval3);
+		int callback_return_value = vtbl->metacall(vtbl, this, sigval1, sigval2, sigval3);
 
 		return static_cast<int>(callback_return_value);
 	}
 
 	friend int QDoubleValidator_virtualbase_metacall(void* self, int param1, int param2, void** param3);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__validate = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual QValidator::State validate(QString& param1, int& param2) const override {
-		if (handle__validate == 0) {
+		if (vtbl->validate == 0) {
 			return QDoubleValidator::validate(param1, param2);
 		}
-		
+
 		QString param1_ret = param1;
 		// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 		QByteArray param1_b = param1_ret.toUtf8();
@@ -1383,23 +1002,20 @@ public:
 		struct miqt_string sigval1 = param1_ms;
 		int* sigval2 = &param2;
 
-		int callback_return_value = miqt_exec_callback_QDoubleValidator_validate(this, handle__validate, sigval1, sigval2);
+		int callback_return_value = vtbl->validate(vtbl, this, sigval1, sigval2);
 
 		return static_cast<QValidator::State>(callback_return_value);
 	}
 
 	friend int QDoubleValidator_virtualbase_validate(const void* self, struct miqt_string param1, int* param2);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__fixup = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void fixup(QString& input) const override {
-		if (handle__fixup == 0) {
+		if (vtbl->fixup == 0) {
 			QDoubleValidator::fixup(input);
 			return;
 		}
-		
+
 		QString input_ret = input;
 		// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 		QByteArray input_b = input_ret.toUtf8();
@@ -1409,145 +1025,118 @@ public:
 		memcpy(input_ms.data, input_b.data(), input_ms.len);
 		struct miqt_string sigval1 = input_ms;
 
-		miqt_exec_callback_QDoubleValidator_fixup(this, handle__fixup, sigval1);
+		vtbl->fixup(vtbl, this, sigval1);
 
-		
 	}
 
 	friend void QDoubleValidator_virtualbase_fixup(const void* self, struct miqt_string input);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__event = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual bool event(QEvent* event) override {
-		if (handle__event == 0) {
+		if (vtbl->event == 0) {
 			return QDoubleValidator::event(event);
 		}
-		
+
 		QEvent* sigval1 = event;
 
-		bool callback_return_value = miqt_exec_callback_QDoubleValidator_event(this, handle__event, sigval1);
+		bool callback_return_value = vtbl->event(vtbl, this, sigval1);
 
 		return callback_return_value;
 	}
 
 	friend bool QDoubleValidator_virtualbase_event(void* self, QEvent* event);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__eventFilter = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual bool eventFilter(QObject* watched, QEvent* event) override {
-		if (handle__eventFilter == 0) {
+		if (vtbl->eventFilter == 0) {
 			return QDoubleValidator::eventFilter(watched, event);
 		}
-		
+
 		QObject* sigval1 = watched;
 		QEvent* sigval2 = event;
 
-		bool callback_return_value = miqt_exec_callback_QDoubleValidator_eventFilter(this, handle__eventFilter, sigval1, sigval2);
+		bool callback_return_value = vtbl->eventFilter(vtbl, this, sigval1, sigval2);
 
 		return callback_return_value;
 	}
 
 	friend bool QDoubleValidator_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__timerEvent = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void timerEvent(QTimerEvent* event) override {
-		if (handle__timerEvent == 0) {
+		if (vtbl->timerEvent == 0) {
 			QDoubleValidator::timerEvent(event);
 			return;
 		}
-		
+
 		QTimerEvent* sigval1 = event;
 
-		miqt_exec_callback_QDoubleValidator_timerEvent(this, handle__timerEvent, sigval1);
+		vtbl->timerEvent(vtbl, this, sigval1);
 
-		
 	}
 
 	friend void QDoubleValidator_virtualbase_timerEvent(void* self, QTimerEvent* event);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__childEvent = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void childEvent(QChildEvent* event) override {
-		if (handle__childEvent == 0) {
+		if (vtbl->childEvent == 0) {
 			QDoubleValidator::childEvent(event);
 			return;
 		}
-		
+
 		QChildEvent* sigval1 = event;
 
-		miqt_exec_callback_QDoubleValidator_childEvent(this, handle__childEvent, sigval1);
+		vtbl->childEvent(vtbl, this, sigval1);
 
-		
 	}
 
 	friend void QDoubleValidator_virtualbase_childEvent(void* self, QChildEvent* event);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__customEvent = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void customEvent(QEvent* event) override {
-		if (handle__customEvent == 0) {
+		if (vtbl->customEvent == 0) {
 			QDoubleValidator::customEvent(event);
 			return;
 		}
-		
+
 		QEvent* sigval1 = event;
 
-		miqt_exec_callback_QDoubleValidator_customEvent(this, handle__customEvent, sigval1);
+		vtbl->customEvent(vtbl, this, sigval1);
 
-		
 	}
 
 	friend void QDoubleValidator_virtualbase_customEvent(void* self, QEvent* event);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__connectNotify = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void connectNotify(const QMetaMethod& signal) override {
-		if (handle__connectNotify == 0) {
+		if (vtbl->connectNotify == 0) {
 			QDoubleValidator::connectNotify(signal);
 			return;
 		}
-		
+
 		const QMetaMethod& signal_ret = signal;
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
 
-		miqt_exec_callback_QDoubleValidator_connectNotify(this, handle__connectNotify, sigval1);
+		vtbl->connectNotify(vtbl, this, sigval1);
 
-		
 	}
 
 	friend void QDoubleValidator_virtualbase_connectNotify(void* self, QMetaMethod* signal);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__disconnectNotify = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void disconnectNotify(const QMetaMethod& signal) override {
-		if (handle__disconnectNotify == 0) {
+		if (vtbl->disconnectNotify == 0) {
 			QDoubleValidator::disconnectNotify(signal);
 			return;
 		}
-		
+
 		const QMetaMethod& signal_ret = signal;
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
 
-		miqt_exec_callback_QDoubleValidator_disconnectNotify(this, handle__disconnectNotify, sigval1);
+		vtbl->disconnectNotify(vtbl, this, sigval1);
 
-		
 	}
 
 	friend void QDoubleValidator_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
@@ -1559,20 +1148,20 @@ public:
 	friend bool QDoubleValidator_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
 };
 
-QDoubleValidator* QDoubleValidator_new() {
-	return new VirtualQDoubleValidator();
+QDoubleValidator* QDoubleValidator_new(struct QDoubleValidator_VTable* vtbl) {
+	return new VirtualQDoubleValidator(vtbl);
 }
 
-QDoubleValidator* QDoubleValidator_new2(double bottom, double top, int decimals) {
-	return new VirtualQDoubleValidator(static_cast<double>(bottom), static_cast<double>(top), static_cast<int>(decimals));
+QDoubleValidator* QDoubleValidator_new2(struct QDoubleValidator_VTable* vtbl, double bottom, double top, int decimals) {
+	return new VirtualQDoubleValidator(vtbl, static_cast<double>(bottom), static_cast<double>(top), static_cast<int>(decimals));
 }
 
-QDoubleValidator* QDoubleValidator_new3(QObject* parent) {
-	return new VirtualQDoubleValidator(parent);
+QDoubleValidator* QDoubleValidator_new3(struct QDoubleValidator_VTable* vtbl, QObject* parent) {
+	return new VirtualQDoubleValidator(vtbl, parent);
 }
 
-QDoubleValidator* QDoubleValidator_new4(double bottom, double top, int decimals, QObject* parent) {
-	return new VirtualQDoubleValidator(static_cast<double>(bottom), static_cast<double>(top), static_cast<int>(decimals), parent);
+QDoubleValidator* QDoubleValidator_new4(struct QDoubleValidator_VTable* vtbl, double bottom, double top, int decimals, QObject* parent) {
+	return new VirtualQDoubleValidator(vtbl, static_cast<double>(bottom), static_cast<double>(top), static_cast<int>(decimals), parent);
 }
 
 void QDoubleValidator_virtbase(QDoubleValidator* src, QValidator** outptr_QValidator) {
@@ -1721,30 +1310,10 @@ struct miqt_string QDoubleValidator_tr3(const char* s, const char* c, int n) {
 	return _ms;
 }
 
-bool QDoubleValidator_override_virtual_metaObject(void* self, intptr_t slot) {
-	VirtualQDoubleValidator* self_cast = dynamic_cast<VirtualQDoubleValidator*>( (QDoubleValidator*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__metaObject = slot;
-	return true;
-}
-
 QMetaObject* QDoubleValidator_virtualbase_metaObject(const void* self) {
 
 	return (QMetaObject*) ( (const VirtualQDoubleValidator*)(self) )->QDoubleValidator::metaObject();
 
-}
-
-bool QDoubleValidator_override_virtual_metacast(void* self, intptr_t slot) {
-	VirtualQDoubleValidator* self_cast = dynamic_cast<VirtualQDoubleValidator*>( (QDoubleValidator*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__metacast = slot;
-	return true;
 }
 
 void* QDoubleValidator_virtualbase_metacast(void* self, const char* param1) {
@@ -1753,30 +1322,10 @@ void* QDoubleValidator_virtualbase_metacast(void* self, const char* param1) {
 
 }
 
-bool QDoubleValidator_override_virtual_metacall(void* self, intptr_t slot) {
-	VirtualQDoubleValidator* self_cast = dynamic_cast<VirtualQDoubleValidator*>( (QDoubleValidator*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__metacall = slot;
-	return true;
-}
-
 int QDoubleValidator_virtualbase_metacall(void* self, int param1, int param2, void** param3) {
 
 	return ( (VirtualQDoubleValidator*)(self) )->QDoubleValidator::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 
-}
-
-bool QDoubleValidator_override_virtual_validate(void* self, intptr_t slot) {
-	VirtualQDoubleValidator* self_cast = dynamic_cast<VirtualQDoubleValidator*>( (QDoubleValidator*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__validate = slot;
-	return true;
 }
 
 int QDoubleValidator_virtualbase_validate(const void* self, struct miqt_string param1, int* param2) {
@@ -1787,31 +1336,11 @@ int QDoubleValidator_virtualbase_validate(const void* self, struct miqt_string p
 
 }
 
-bool QDoubleValidator_override_virtual_fixup(void* self, intptr_t slot) {
-	VirtualQDoubleValidator* self_cast = dynamic_cast<VirtualQDoubleValidator*>( (QDoubleValidator*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__fixup = slot;
-	return true;
-}
-
 void QDoubleValidator_virtualbase_fixup(const void* self, struct miqt_string input) {
 	QString input_QString = QString::fromUtf8(input.data, input.len);
 
 	( (const VirtualQDoubleValidator*)(self) )->QDoubleValidator::fixup(input_QString);
 
-}
-
-bool QDoubleValidator_override_virtual_event(void* self, intptr_t slot) {
-	VirtualQDoubleValidator* self_cast = dynamic_cast<VirtualQDoubleValidator*>( (QDoubleValidator*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__event = slot;
-	return true;
 }
 
 bool QDoubleValidator_virtualbase_event(void* self, QEvent* event) {
@@ -1820,30 +1349,10 @@ bool QDoubleValidator_virtualbase_event(void* self, QEvent* event) {
 
 }
 
-bool QDoubleValidator_override_virtual_eventFilter(void* self, intptr_t slot) {
-	VirtualQDoubleValidator* self_cast = dynamic_cast<VirtualQDoubleValidator*>( (QDoubleValidator*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__eventFilter = slot;
-	return true;
-}
-
 bool QDoubleValidator_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event) {
 
 	return ( (VirtualQDoubleValidator*)(self) )->QDoubleValidator::eventFilter(watched, event);
 
-}
-
-bool QDoubleValidator_override_virtual_timerEvent(void* self, intptr_t slot) {
-	VirtualQDoubleValidator* self_cast = dynamic_cast<VirtualQDoubleValidator*>( (QDoubleValidator*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__timerEvent = slot;
-	return true;
 }
 
 void QDoubleValidator_virtualbase_timerEvent(void* self, QTimerEvent* event) {
@@ -1852,30 +1361,10 @@ void QDoubleValidator_virtualbase_timerEvent(void* self, QTimerEvent* event) {
 
 }
 
-bool QDoubleValidator_override_virtual_childEvent(void* self, intptr_t slot) {
-	VirtualQDoubleValidator* self_cast = dynamic_cast<VirtualQDoubleValidator*>( (QDoubleValidator*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__childEvent = slot;
-	return true;
-}
-
 void QDoubleValidator_virtualbase_childEvent(void* self, QChildEvent* event) {
 
 	( (VirtualQDoubleValidator*)(self) )->QDoubleValidator::childEvent(event);
 
-}
-
-bool QDoubleValidator_override_virtual_customEvent(void* self, intptr_t slot) {
-	VirtualQDoubleValidator* self_cast = dynamic_cast<VirtualQDoubleValidator*>( (QDoubleValidator*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__customEvent = slot;
-	return true;
 }
 
 void QDoubleValidator_virtualbase_customEvent(void* self, QEvent* event) {
@@ -1884,30 +1373,10 @@ void QDoubleValidator_virtualbase_customEvent(void* self, QEvent* event) {
 
 }
 
-bool QDoubleValidator_override_virtual_connectNotify(void* self, intptr_t slot) {
-	VirtualQDoubleValidator* self_cast = dynamic_cast<VirtualQDoubleValidator*>( (QDoubleValidator*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__connectNotify = slot;
-	return true;
-}
-
 void QDoubleValidator_virtualbase_connectNotify(void* self, QMetaMethod* signal) {
 
 	( (VirtualQDoubleValidator*)(self) )->QDoubleValidator::connectNotify(*signal);
 
-}
-
-bool QDoubleValidator_override_virtual_disconnectNotify(void* self, intptr_t slot) {
-	VirtualQDoubleValidator* self_cast = dynamic_cast<VirtualQDoubleValidator*>( (QDoubleValidator*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__disconnectNotify = slot;
-	return true;
 }
 
 void QDoubleValidator_virtualbase_disconnectNotify(void* self, QMetaMethod* signal) {
@@ -1974,80 +1443,69 @@ void QDoubleValidator_delete(QDoubleValidator* self) {
 }
 
 class VirtualQRegularExpressionValidator final : public QRegularExpressionValidator {
+	struct QRegularExpressionValidator_VTable* vtbl;
 public:
 
-	VirtualQRegularExpressionValidator(): QRegularExpressionValidator() {};
-	VirtualQRegularExpressionValidator(const QRegularExpression& re): QRegularExpressionValidator(re) {};
-	VirtualQRegularExpressionValidator(QObject* parent): QRegularExpressionValidator(parent) {};
-	VirtualQRegularExpressionValidator(const QRegularExpression& re, QObject* parent): QRegularExpressionValidator(re, parent) {};
+	VirtualQRegularExpressionValidator(struct QRegularExpressionValidator_VTable* vtbl): QRegularExpressionValidator(), vtbl(vtbl) {};
+	VirtualQRegularExpressionValidator(struct QRegularExpressionValidator_VTable* vtbl, const QRegularExpression& re): QRegularExpressionValidator(re), vtbl(vtbl) {};
+	VirtualQRegularExpressionValidator(struct QRegularExpressionValidator_VTable* vtbl, QObject* parent): QRegularExpressionValidator(parent), vtbl(vtbl) {};
+	VirtualQRegularExpressionValidator(struct QRegularExpressionValidator_VTable* vtbl, const QRegularExpression& re, QObject* parent): QRegularExpressionValidator(re, parent), vtbl(vtbl) {};
 
-	virtual ~VirtualQRegularExpressionValidator() override = default;
-
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__metaObject = 0;
+	virtual ~VirtualQRegularExpressionValidator() override { if(vtbl->destructor) vtbl->destructor(vtbl, this); }
 
 	// Subclass to allow providing a Go implementation
 	virtual const QMetaObject* metaObject() const override {
-		if (handle__metaObject == 0) {
+		if (vtbl->metaObject == 0) {
 			return QRegularExpressionValidator::metaObject();
 		}
-		
 
-		QMetaObject* callback_return_value = miqt_exec_callback_QRegularExpressionValidator_metaObject(this, handle__metaObject);
+
+		QMetaObject* callback_return_value = vtbl->metaObject(vtbl, this);
 
 		return callback_return_value;
 	}
 
 	friend QMetaObject* QRegularExpressionValidator_virtualbase_metaObject(const void* self);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__metacast = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void* qt_metacast(const char* param1) override {
-		if (handle__metacast == 0) {
+		if (vtbl->metacast == 0) {
 			return QRegularExpressionValidator::qt_metacast(param1);
 		}
-		
+
 		const char* sigval1 = (const char*) param1;
 
-		void* callback_return_value = miqt_exec_callback_QRegularExpressionValidator_metacast(this, handle__metacast, sigval1);
+		void* callback_return_value = vtbl->metacast(vtbl, this, sigval1);
 
 		return callback_return_value;
 	}
 
 	friend void* QRegularExpressionValidator_virtualbase_metacast(void* self, const char* param1);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__metacall = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual int qt_metacall(QMetaObject::Call param1, int param2, void** param3) override {
-		if (handle__metacall == 0) {
+		if (vtbl->metacall == 0) {
 			return QRegularExpressionValidator::qt_metacall(param1, param2, param3);
 		}
-		
+
 		QMetaObject::Call param1_ret = param1;
 		int sigval1 = static_cast<int>(param1_ret);
 		int sigval2 = param2;
 		void** sigval3 = param3;
 
-		int callback_return_value = miqt_exec_callback_QRegularExpressionValidator_metacall(this, handle__metacall, sigval1, sigval2, sigval3);
+		int callback_return_value = vtbl->metacall(vtbl, this, sigval1, sigval2, sigval3);
 
 		return static_cast<int>(callback_return_value);
 	}
 
 	friend int QRegularExpressionValidator_virtualbase_metacall(void* self, int param1, int param2, void** param3);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__validate = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual QValidator::State validate(QString& input, int& pos) const override {
-		if (handle__validate == 0) {
+		if (vtbl->validate == 0) {
 			return QRegularExpressionValidator::validate(input, pos);
 		}
-		
+
 		QString input_ret = input;
 		// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 		QByteArray input_b = input_ret.toUtf8();
@@ -2058,23 +1516,20 @@ public:
 		struct miqt_string sigval1 = input_ms;
 		int* sigval2 = &pos;
 
-		int callback_return_value = miqt_exec_callback_QRegularExpressionValidator_validate(this, handle__validate, sigval1, sigval2);
+		int callback_return_value = vtbl->validate(vtbl, this, sigval1, sigval2);
 
 		return static_cast<QValidator::State>(callback_return_value);
 	}
 
 	friend int QRegularExpressionValidator_virtualbase_validate(const void* self, struct miqt_string input, int* pos);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__fixup = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void fixup(QString& param1) const override {
-		if (handle__fixup == 0) {
+		if (vtbl->fixup == 0) {
 			QRegularExpressionValidator::fixup(param1);
 			return;
 		}
-		
+
 		QString param1_ret = param1;
 		// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 		QByteArray param1_b = param1_ret.toUtf8();
@@ -2084,145 +1539,118 @@ public:
 		memcpy(param1_ms.data, param1_b.data(), param1_ms.len);
 		struct miqt_string sigval1 = param1_ms;
 
-		miqt_exec_callback_QRegularExpressionValidator_fixup(this, handle__fixup, sigval1);
+		vtbl->fixup(vtbl, this, sigval1);
 
-		
 	}
 
 	friend void QRegularExpressionValidator_virtualbase_fixup(const void* self, struct miqt_string param1);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__event = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual bool event(QEvent* event) override {
-		if (handle__event == 0) {
+		if (vtbl->event == 0) {
 			return QRegularExpressionValidator::event(event);
 		}
-		
+
 		QEvent* sigval1 = event;
 
-		bool callback_return_value = miqt_exec_callback_QRegularExpressionValidator_event(this, handle__event, sigval1);
+		bool callback_return_value = vtbl->event(vtbl, this, sigval1);
 
 		return callback_return_value;
 	}
 
 	friend bool QRegularExpressionValidator_virtualbase_event(void* self, QEvent* event);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__eventFilter = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual bool eventFilter(QObject* watched, QEvent* event) override {
-		if (handle__eventFilter == 0) {
+		if (vtbl->eventFilter == 0) {
 			return QRegularExpressionValidator::eventFilter(watched, event);
 		}
-		
+
 		QObject* sigval1 = watched;
 		QEvent* sigval2 = event;
 
-		bool callback_return_value = miqt_exec_callback_QRegularExpressionValidator_eventFilter(this, handle__eventFilter, sigval1, sigval2);
+		bool callback_return_value = vtbl->eventFilter(vtbl, this, sigval1, sigval2);
 
 		return callback_return_value;
 	}
 
 	friend bool QRegularExpressionValidator_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__timerEvent = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void timerEvent(QTimerEvent* event) override {
-		if (handle__timerEvent == 0) {
+		if (vtbl->timerEvent == 0) {
 			QRegularExpressionValidator::timerEvent(event);
 			return;
 		}
-		
+
 		QTimerEvent* sigval1 = event;
 
-		miqt_exec_callback_QRegularExpressionValidator_timerEvent(this, handle__timerEvent, sigval1);
+		vtbl->timerEvent(vtbl, this, sigval1);
 
-		
 	}
 
 	friend void QRegularExpressionValidator_virtualbase_timerEvent(void* self, QTimerEvent* event);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__childEvent = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void childEvent(QChildEvent* event) override {
-		if (handle__childEvent == 0) {
+		if (vtbl->childEvent == 0) {
 			QRegularExpressionValidator::childEvent(event);
 			return;
 		}
-		
+
 		QChildEvent* sigval1 = event;
 
-		miqt_exec_callback_QRegularExpressionValidator_childEvent(this, handle__childEvent, sigval1);
+		vtbl->childEvent(vtbl, this, sigval1);
 
-		
 	}
 
 	friend void QRegularExpressionValidator_virtualbase_childEvent(void* self, QChildEvent* event);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__customEvent = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void customEvent(QEvent* event) override {
-		if (handle__customEvent == 0) {
+		if (vtbl->customEvent == 0) {
 			QRegularExpressionValidator::customEvent(event);
 			return;
 		}
-		
+
 		QEvent* sigval1 = event;
 
-		miqt_exec_callback_QRegularExpressionValidator_customEvent(this, handle__customEvent, sigval1);
+		vtbl->customEvent(vtbl, this, sigval1);
 
-		
 	}
 
 	friend void QRegularExpressionValidator_virtualbase_customEvent(void* self, QEvent* event);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__connectNotify = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void connectNotify(const QMetaMethod& signal) override {
-		if (handle__connectNotify == 0) {
+		if (vtbl->connectNotify == 0) {
 			QRegularExpressionValidator::connectNotify(signal);
 			return;
 		}
-		
+
 		const QMetaMethod& signal_ret = signal;
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
 
-		miqt_exec_callback_QRegularExpressionValidator_connectNotify(this, handle__connectNotify, sigval1);
+		vtbl->connectNotify(vtbl, this, sigval1);
 
-		
 	}
 
 	friend void QRegularExpressionValidator_virtualbase_connectNotify(void* self, QMetaMethod* signal);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__disconnectNotify = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void disconnectNotify(const QMetaMethod& signal) override {
-		if (handle__disconnectNotify == 0) {
+		if (vtbl->disconnectNotify == 0) {
 			QRegularExpressionValidator::disconnectNotify(signal);
 			return;
 		}
-		
+
 		const QMetaMethod& signal_ret = signal;
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
 
-		miqt_exec_callback_QRegularExpressionValidator_disconnectNotify(this, handle__disconnectNotify, sigval1);
+		vtbl->disconnectNotify(vtbl, this, sigval1);
 
-		
 	}
 
 	friend void QRegularExpressionValidator_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
@@ -2234,20 +1662,20 @@ public:
 	friend bool QRegularExpressionValidator_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
 };
 
-QRegularExpressionValidator* QRegularExpressionValidator_new() {
-	return new VirtualQRegularExpressionValidator();
+QRegularExpressionValidator* QRegularExpressionValidator_new(struct QRegularExpressionValidator_VTable* vtbl) {
+	return new VirtualQRegularExpressionValidator(vtbl);
 }
 
-QRegularExpressionValidator* QRegularExpressionValidator_new2(QRegularExpression* re) {
-	return new VirtualQRegularExpressionValidator(*re);
+QRegularExpressionValidator* QRegularExpressionValidator_new2(struct QRegularExpressionValidator_VTable* vtbl, QRegularExpression* re) {
+	return new VirtualQRegularExpressionValidator(vtbl, *re);
 }
 
-QRegularExpressionValidator* QRegularExpressionValidator_new3(QObject* parent) {
-	return new VirtualQRegularExpressionValidator(parent);
+QRegularExpressionValidator* QRegularExpressionValidator_new3(struct QRegularExpressionValidator_VTable* vtbl, QObject* parent) {
+	return new VirtualQRegularExpressionValidator(vtbl, parent);
 }
 
-QRegularExpressionValidator* QRegularExpressionValidator_new4(QRegularExpression* re, QObject* parent) {
-	return new VirtualQRegularExpressionValidator(*re, parent);
+QRegularExpressionValidator* QRegularExpressionValidator_new4(struct QRegularExpressionValidator_VTable* vtbl, QRegularExpression* re, QObject* parent) {
+	return new VirtualQRegularExpressionValidator(vtbl, *re, parent);
 }
 
 void QRegularExpressionValidator_virtbase(QRegularExpressionValidator* src, QValidator** outptr_QValidator) {
@@ -2326,30 +1754,10 @@ struct miqt_string QRegularExpressionValidator_tr3(const char* s, const char* c,
 	return _ms;
 }
 
-bool QRegularExpressionValidator_override_virtual_metaObject(void* self, intptr_t slot) {
-	VirtualQRegularExpressionValidator* self_cast = dynamic_cast<VirtualQRegularExpressionValidator*>( (QRegularExpressionValidator*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__metaObject = slot;
-	return true;
-}
-
 QMetaObject* QRegularExpressionValidator_virtualbase_metaObject(const void* self) {
 
 	return (QMetaObject*) ( (const VirtualQRegularExpressionValidator*)(self) )->QRegularExpressionValidator::metaObject();
 
-}
-
-bool QRegularExpressionValidator_override_virtual_metacast(void* self, intptr_t slot) {
-	VirtualQRegularExpressionValidator* self_cast = dynamic_cast<VirtualQRegularExpressionValidator*>( (QRegularExpressionValidator*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__metacast = slot;
-	return true;
 }
 
 void* QRegularExpressionValidator_virtualbase_metacast(void* self, const char* param1) {
@@ -2358,30 +1766,10 @@ void* QRegularExpressionValidator_virtualbase_metacast(void* self, const char* p
 
 }
 
-bool QRegularExpressionValidator_override_virtual_metacall(void* self, intptr_t slot) {
-	VirtualQRegularExpressionValidator* self_cast = dynamic_cast<VirtualQRegularExpressionValidator*>( (QRegularExpressionValidator*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__metacall = slot;
-	return true;
-}
-
 int QRegularExpressionValidator_virtualbase_metacall(void* self, int param1, int param2, void** param3) {
 
 	return ( (VirtualQRegularExpressionValidator*)(self) )->QRegularExpressionValidator::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 
-}
-
-bool QRegularExpressionValidator_override_virtual_validate(void* self, intptr_t slot) {
-	VirtualQRegularExpressionValidator* self_cast = dynamic_cast<VirtualQRegularExpressionValidator*>( (QRegularExpressionValidator*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__validate = slot;
-	return true;
 }
 
 int QRegularExpressionValidator_virtualbase_validate(const void* self, struct miqt_string input, int* pos) {
@@ -2392,31 +1780,11 @@ int QRegularExpressionValidator_virtualbase_validate(const void* self, struct mi
 
 }
 
-bool QRegularExpressionValidator_override_virtual_fixup(void* self, intptr_t slot) {
-	VirtualQRegularExpressionValidator* self_cast = dynamic_cast<VirtualQRegularExpressionValidator*>( (QRegularExpressionValidator*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__fixup = slot;
-	return true;
-}
-
 void QRegularExpressionValidator_virtualbase_fixup(const void* self, struct miqt_string param1) {
 	QString param1_QString = QString::fromUtf8(param1.data, param1.len);
 
 	( (const VirtualQRegularExpressionValidator*)(self) )->QRegularExpressionValidator::fixup(param1_QString);
 
-}
-
-bool QRegularExpressionValidator_override_virtual_event(void* self, intptr_t slot) {
-	VirtualQRegularExpressionValidator* self_cast = dynamic_cast<VirtualQRegularExpressionValidator*>( (QRegularExpressionValidator*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__event = slot;
-	return true;
 }
 
 bool QRegularExpressionValidator_virtualbase_event(void* self, QEvent* event) {
@@ -2425,30 +1793,10 @@ bool QRegularExpressionValidator_virtualbase_event(void* self, QEvent* event) {
 
 }
 
-bool QRegularExpressionValidator_override_virtual_eventFilter(void* self, intptr_t slot) {
-	VirtualQRegularExpressionValidator* self_cast = dynamic_cast<VirtualQRegularExpressionValidator*>( (QRegularExpressionValidator*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__eventFilter = slot;
-	return true;
-}
-
 bool QRegularExpressionValidator_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event) {
 
 	return ( (VirtualQRegularExpressionValidator*)(self) )->QRegularExpressionValidator::eventFilter(watched, event);
 
-}
-
-bool QRegularExpressionValidator_override_virtual_timerEvent(void* self, intptr_t slot) {
-	VirtualQRegularExpressionValidator* self_cast = dynamic_cast<VirtualQRegularExpressionValidator*>( (QRegularExpressionValidator*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__timerEvent = slot;
-	return true;
 }
 
 void QRegularExpressionValidator_virtualbase_timerEvent(void* self, QTimerEvent* event) {
@@ -2457,30 +1805,10 @@ void QRegularExpressionValidator_virtualbase_timerEvent(void* self, QTimerEvent*
 
 }
 
-bool QRegularExpressionValidator_override_virtual_childEvent(void* self, intptr_t slot) {
-	VirtualQRegularExpressionValidator* self_cast = dynamic_cast<VirtualQRegularExpressionValidator*>( (QRegularExpressionValidator*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__childEvent = slot;
-	return true;
-}
-
 void QRegularExpressionValidator_virtualbase_childEvent(void* self, QChildEvent* event) {
 
 	( (VirtualQRegularExpressionValidator*)(self) )->QRegularExpressionValidator::childEvent(event);
 
-}
-
-bool QRegularExpressionValidator_override_virtual_customEvent(void* self, intptr_t slot) {
-	VirtualQRegularExpressionValidator* self_cast = dynamic_cast<VirtualQRegularExpressionValidator*>( (QRegularExpressionValidator*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__customEvent = slot;
-	return true;
 }
 
 void QRegularExpressionValidator_virtualbase_customEvent(void* self, QEvent* event) {
@@ -2489,30 +1817,10 @@ void QRegularExpressionValidator_virtualbase_customEvent(void* self, QEvent* eve
 
 }
 
-bool QRegularExpressionValidator_override_virtual_connectNotify(void* self, intptr_t slot) {
-	VirtualQRegularExpressionValidator* self_cast = dynamic_cast<VirtualQRegularExpressionValidator*>( (QRegularExpressionValidator*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__connectNotify = slot;
-	return true;
-}
-
 void QRegularExpressionValidator_virtualbase_connectNotify(void* self, QMetaMethod* signal) {
 
 	( (VirtualQRegularExpressionValidator*)(self) )->QRegularExpressionValidator::connectNotify(*signal);
 
-}
-
-bool QRegularExpressionValidator_override_virtual_disconnectNotify(void* self, intptr_t slot) {
-	VirtualQRegularExpressionValidator* self_cast = dynamic_cast<VirtualQRegularExpressionValidator*>( (QRegularExpressionValidator*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__disconnectNotify = slot;
-	return true;
 }
 
 void QRegularExpressionValidator_virtualbase_disconnectNotify(void* self, QMetaMethod* signal) {

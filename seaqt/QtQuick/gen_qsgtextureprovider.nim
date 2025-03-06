@@ -60,9 +60,6 @@ proc fcQSGTextureProvider_tr3(s: cstring, c: cstring, n: cint): struct_miqt_stri
 proc fcQSGTextureProvider_staticMetaObject(): pointer {.importc: "QSGTextureProvider_staticMetaObject".}
 proc fcQSGTextureProvider_delete(self: pointer) {.importc: "QSGTextureProvider_delete".}
 
-
-func init*(T: type gen_qsgtextureprovider_types.QSGTextureProvider, h: ptr cQSGTextureProvider): gen_qsgtextureprovider_types.QSGTextureProvider =
-  T(h: h)
 proc metaObject*(self: gen_qsgtextureprovider_types.QSGTextureProvider, ): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQSGTextureProvider_metaObject(self.h))
 
@@ -85,7 +82,7 @@ proc textureChanged*(self: gen_qsgtextureprovider_types.QSGTextureProvider, ): v
   fcQSGTextureProvider_textureChanged(self.h)
 
 type QSGTextureProvidertextureChangedSlot* = proc()
-proc miqt_exec_callback_QSGTextureProvider_textureChanged(slot: int) {.exportc.} =
+proc miqt_exec_callback_cQSGTextureProvider_textureChanged(slot: int) {.exportc: "miqt_exec_callback_QSGTextureProvider_textureChanged".} =
   let nimfunc = cast[ptr QSGTextureProvidertextureChangedSlot](cast[pointer](slot))
   nimfunc[]()
 

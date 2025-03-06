@@ -44,8 +44,6 @@ export
 
 type cQMimeType*{.exportc: "QMimeType", incompleteStruct.} = object
 
-proc fcQMimeType_new(): ptr cQMimeType {.importc: "QMimeType_new".}
-proc fcQMimeType_new2(other: pointer): ptr cQMimeType {.importc: "QMimeType_new2".}
 proc fcQMimeType_operatorAssign(self: pointer, other: pointer): void {.importc: "QMimeType_operatorAssign".}
 proc fcQMimeType_swap(self: pointer, other: pointer): void {.importc: "QMimeType_swap".}
 proc fcQMimeType_operatorEqual(self: pointer, other: pointer): bool {.importc: "QMimeType_operatorEqual".}
@@ -64,17 +62,10 @@ proc fcQMimeType_suffixes(self: pointer, ): struct_miqt_array {.importc: "QMimeT
 proc fcQMimeType_preferredSuffix(self: pointer, ): struct_miqt_string {.importc: "QMimeType_preferredSuffix".}
 proc fcQMimeType_inherits(self: pointer, mimeTypeName: struct_miqt_string): bool {.importc: "QMimeType_inherits".}
 proc fcQMimeType_filterString(self: pointer, ): struct_miqt_string {.importc: "QMimeType_filterString".}
+proc fcQMimeType_new(): ptr cQMimeType {.importc: "QMimeType_new".}
+proc fcQMimeType_new2(other: pointer): ptr cQMimeType {.importc: "QMimeType_new2".}
 proc fcQMimeType_staticMetaObject(): pointer {.importc: "QMimeType_staticMetaObject".}
 proc fcQMimeType_delete(self: pointer) {.importc: "QMimeType_delete".}
-
-
-func init*(T: type gen_qmimetype_types.QMimeType, h: ptr cQMimeType): gen_qmimetype_types.QMimeType =
-  T(h: h)
-proc create*(T: type gen_qmimetype_types.QMimeType, ): gen_qmimetype_types.QMimeType =
-  gen_qmimetype_types.QMimeType.init(fcQMimeType_new())
-
-proc create*(T: type gen_qmimetype_types.QMimeType, other: gen_qmimetype_types.QMimeType): gen_qmimetype_types.QMimeType =
-  gen_qmimetype_types.QMimeType.init(fcQMimeType_new2(other.h))
 
 proc operatorAssign*(self: gen_qmimetype_types.QMimeType, other: gen_qmimetype_types.QMimeType): void =
   fcQMimeType_operatorAssign(self.h, other.h)
@@ -187,6 +178,13 @@ proc filterString*(self: gen_qmimetype_types.QMimeType, ): string =
   let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
   c_free(v_ms.data)
   vx_ret
+
+proc create*(T: type gen_qmimetype_types.QMimeType): gen_qmimetype_types.QMimeType =
+  gen_qmimetype_types.QMimeType(h: fcQMimeType_new())
+
+proc create*(T: type gen_qmimetype_types.QMimeType,
+    other: gen_qmimetype_types.QMimeType): gen_qmimetype_types.QMimeType =
+  gen_qmimetype_types.QMimeType(h: fcQMimeType_new2(other.h))
 
 proc staticMetaObject*(_: type gen_qmimetype_types.QMimeType): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQMimeType_staticMetaObject())

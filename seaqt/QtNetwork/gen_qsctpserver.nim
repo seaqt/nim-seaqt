@@ -56,8 +56,6 @@ export
 
 type cQSctpServer*{.exportc: "QSctpServer", incompleteStruct.} = object
 
-proc fcQSctpServer_new(): ptr cQSctpServer {.importc: "QSctpServer_new".}
-proc fcQSctpServer_new2(parent: pointer): ptr cQSctpServer {.importc: "QSctpServer_new2".}
 proc fcQSctpServer_metaObject(self: pointer, ): pointer {.importc: "QSctpServer_metaObject".}
 proc fcQSctpServer_metacast(self: pointer, param1: cstring): pointer {.importc: "QSctpServer_metacast".}
 proc fcQSctpServer_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QSctpServer_metacall".}
@@ -67,43 +65,38 @@ proc fcQSctpServer_maximumChannelCount(self: pointer, ): cint {.importc: "QSctpS
 proc fcQSctpServer_nextPendingDatagramConnection(self: pointer, ): pointer {.importc: "QSctpServer_nextPendingDatagramConnection".}
 proc fcQSctpServer_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QSctpServer_tr2".}
 proc fcQSctpServer_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QSctpServer_tr3".}
-proc fQSctpServer_virtualbase_metaObject(self: pointer, ): pointer{.importc: "QSctpServer_virtualbase_metaObject".}
-proc fcQSctpServer_override_virtual_metaObject(self: pointer, slot: int) {.importc: "QSctpServer_override_virtual_metaObject".}
-proc fQSctpServer_virtualbase_metacast(self: pointer, param1: cstring): pointer{.importc: "QSctpServer_virtualbase_metacast".}
-proc fcQSctpServer_override_virtual_metacast(self: pointer, slot: int) {.importc: "QSctpServer_override_virtual_metacast".}
-proc fQSctpServer_virtualbase_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint{.importc: "QSctpServer_virtualbase_metacall".}
-proc fcQSctpServer_override_virtual_metacall(self: pointer, slot: int) {.importc: "QSctpServer_override_virtual_metacall".}
-proc fQSctpServer_virtualbase_incomingConnection(self: pointer, handle: uint): void{.importc: "QSctpServer_virtualbase_incomingConnection".}
-proc fcQSctpServer_override_virtual_incomingConnection(self: pointer, slot: int) {.importc: "QSctpServer_override_virtual_incomingConnection".}
-proc fQSctpServer_virtualbase_hasPendingConnections(self: pointer, ): bool{.importc: "QSctpServer_virtualbase_hasPendingConnections".}
-proc fcQSctpServer_override_virtual_hasPendingConnections(self: pointer, slot: int) {.importc: "QSctpServer_override_virtual_hasPendingConnections".}
-proc fQSctpServer_virtualbase_nextPendingConnection(self: pointer, ): pointer{.importc: "QSctpServer_virtualbase_nextPendingConnection".}
-proc fcQSctpServer_override_virtual_nextPendingConnection(self: pointer, slot: int) {.importc: "QSctpServer_override_virtual_nextPendingConnection".}
-proc fQSctpServer_virtualbase_event(self: pointer, event: pointer): bool{.importc: "QSctpServer_virtualbase_event".}
-proc fcQSctpServer_override_virtual_event(self: pointer, slot: int) {.importc: "QSctpServer_override_virtual_event".}
-proc fQSctpServer_virtualbase_eventFilter(self: pointer, watched: pointer, event: pointer): bool{.importc: "QSctpServer_virtualbase_eventFilter".}
-proc fcQSctpServer_override_virtual_eventFilter(self: pointer, slot: int) {.importc: "QSctpServer_override_virtual_eventFilter".}
-proc fQSctpServer_virtualbase_timerEvent(self: pointer, event: pointer): void{.importc: "QSctpServer_virtualbase_timerEvent".}
-proc fcQSctpServer_override_virtual_timerEvent(self: pointer, slot: int) {.importc: "QSctpServer_override_virtual_timerEvent".}
-proc fQSctpServer_virtualbase_childEvent(self: pointer, event: pointer): void{.importc: "QSctpServer_virtualbase_childEvent".}
-proc fcQSctpServer_override_virtual_childEvent(self: pointer, slot: int) {.importc: "QSctpServer_override_virtual_childEvent".}
-proc fQSctpServer_virtualbase_customEvent(self: pointer, event: pointer): void{.importc: "QSctpServer_virtualbase_customEvent".}
-proc fcQSctpServer_override_virtual_customEvent(self: pointer, slot: int) {.importc: "QSctpServer_override_virtual_customEvent".}
-proc fQSctpServer_virtualbase_connectNotify(self: pointer, signal: pointer): void{.importc: "QSctpServer_virtualbase_connectNotify".}
-proc fcQSctpServer_override_virtual_connectNotify(self: pointer, slot: int) {.importc: "QSctpServer_override_virtual_connectNotify".}
-proc fQSctpServer_virtualbase_disconnectNotify(self: pointer, signal: pointer): void{.importc: "QSctpServer_virtualbase_disconnectNotify".}
-proc fcQSctpServer_override_virtual_disconnectNotify(self: pointer, slot: int) {.importc: "QSctpServer_override_virtual_disconnectNotify".}
+type cQSctpServerVTable = object
+  destructor*: proc(vtbl: ptr cQSctpServerVTable, self: ptr cQSctpServer) {.cdecl, raises:[], gcsafe.}
+  metaObject*: proc(vtbl, self: pointer, ): pointer {.cdecl, raises: [], gcsafe.}
+  metacast*: proc(vtbl, self: pointer, param1: cstring): pointer {.cdecl, raises: [], gcsafe.}
+  metacall*: proc(vtbl, self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl, raises: [], gcsafe.}
+  incomingConnection*: proc(vtbl, self: pointer, handle: uint): void {.cdecl, raises: [], gcsafe.}
+  hasPendingConnections*: proc(vtbl, self: pointer, ): bool {.cdecl, raises: [], gcsafe.}
+  nextPendingConnection*: proc(vtbl, self: pointer, ): pointer {.cdecl, raises: [], gcsafe.}
+  event*: proc(vtbl, self: pointer, event: pointer): bool {.cdecl, raises: [], gcsafe.}
+  eventFilter*: proc(vtbl, self: pointer, watched: pointer, event: pointer): bool {.cdecl, raises: [], gcsafe.}
+  timerEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  childEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  customEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  connectNotify*: proc(vtbl, self: pointer, signal: pointer): void {.cdecl, raises: [], gcsafe.}
+  disconnectNotify*: proc(vtbl, self: pointer, signal: pointer): void {.cdecl, raises: [], gcsafe.}
+proc fcQSctpServer_virtualbase_metaObject(self: pointer, ): pointer {.importc: "QSctpServer_virtualbase_metaObject".}
+proc fcQSctpServer_virtualbase_metacast(self: pointer, param1: cstring): pointer {.importc: "QSctpServer_virtualbase_metacast".}
+proc fcQSctpServer_virtualbase_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QSctpServer_virtualbase_metacall".}
+proc fcQSctpServer_virtualbase_incomingConnection(self: pointer, handle: uint): void {.importc: "QSctpServer_virtualbase_incomingConnection".}
+proc fcQSctpServer_virtualbase_hasPendingConnections(self: pointer, ): bool {.importc: "QSctpServer_virtualbase_hasPendingConnections".}
+proc fcQSctpServer_virtualbase_nextPendingConnection(self: pointer, ): pointer {.importc: "QSctpServer_virtualbase_nextPendingConnection".}
+proc fcQSctpServer_virtualbase_event(self: pointer, event: pointer): bool {.importc: "QSctpServer_virtualbase_event".}
+proc fcQSctpServer_virtualbase_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.importc: "QSctpServer_virtualbase_eventFilter".}
+proc fcQSctpServer_virtualbase_timerEvent(self: pointer, event: pointer): void {.importc: "QSctpServer_virtualbase_timerEvent".}
+proc fcQSctpServer_virtualbase_childEvent(self: pointer, event: pointer): void {.importc: "QSctpServer_virtualbase_childEvent".}
+proc fcQSctpServer_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QSctpServer_virtualbase_customEvent".}
+proc fcQSctpServer_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QSctpServer_virtualbase_connectNotify".}
+proc fcQSctpServer_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QSctpServer_virtualbase_disconnectNotify".}
+proc fcQSctpServer_new(vtbl: pointer, ): ptr cQSctpServer {.importc: "QSctpServer_new".}
+proc fcQSctpServer_new2(vtbl: pointer, parent: pointer): ptr cQSctpServer {.importc: "QSctpServer_new2".}
 proc fcQSctpServer_staticMetaObject(): pointer {.importc: "QSctpServer_staticMetaObject".}
 proc fcQSctpServer_delete(self: pointer) {.importc: "QSctpServer_delete".}
-
-
-func init*(T: type gen_qsctpserver_types.QSctpServer, h: ptr cQSctpServer): gen_qsctpserver_types.QSctpServer =
-  T(h: h)
-proc create*(T: type gen_qsctpserver_types.QSctpServer, ): gen_qsctpserver_types.QSctpServer =
-  gen_qsctpserver_types.QSctpServer.init(fcQSctpServer_new())
-
-proc create*(T: type gen_qsctpserver_types.QSctpServer, parent: gen_qobject_types.QObject): gen_qsctpserver_types.QSctpServer =
-  gen_qsctpserver_types.QSctpServer.init(fcQSctpServer_new2(parent.h))
 
 proc metaObject*(self: gen_qsctpserver_types.QSctpServer, ): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQSctpServer_metaObject(self.h))
@@ -141,241 +134,229 @@ proc tr*(_: type gen_qsctpserver_types.QSctpServer, s: cstring, c: cstring, n: c
   c_free(v_ms.data)
   vx_ret
 
+type QSctpServermetaObjectProc* = proc(self: QSctpServer): gen_qobjectdefs_types.QMetaObject {.raises: [], gcsafe.}
+type QSctpServermetacastProc* = proc(self: QSctpServer, param1: cstring): pointer {.raises: [], gcsafe.}
+type QSctpServermetacallProc* = proc(self: QSctpServer, param1: cint, param2: cint, param3: pointer): cint {.raises: [], gcsafe.}
+type QSctpServerincomingConnectionProc* = proc(self: QSctpServer, handle: uint): void {.raises: [], gcsafe.}
+type QSctpServerhasPendingConnectionsProc* = proc(self: QSctpServer): bool {.raises: [], gcsafe.}
+type QSctpServernextPendingConnectionProc* = proc(self: QSctpServer): gen_qtcpsocket_types.QTcpSocket {.raises: [], gcsafe.}
+type QSctpServereventProc* = proc(self: QSctpServer, event: gen_qcoreevent_types.QEvent): bool {.raises: [], gcsafe.}
+type QSctpServereventFilterProc* = proc(self: QSctpServer, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.raises: [], gcsafe.}
+type QSctpServertimerEventProc* = proc(self: QSctpServer, event: gen_qcoreevent_types.QTimerEvent): void {.raises: [], gcsafe.}
+type QSctpServerchildEventProc* = proc(self: QSctpServer, event: gen_qcoreevent_types.QChildEvent): void {.raises: [], gcsafe.}
+type QSctpServercustomEventProc* = proc(self: QSctpServer, event: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
+type QSctpServerconnectNotifyProc* = proc(self: QSctpServer, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
+type QSctpServerdisconnectNotifyProc* = proc(self: QSctpServer, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
+type QSctpServerVTable* = object
+  vtbl: cQSctpServerVTable
+  metaObject*: QSctpServermetaObjectProc
+  metacast*: QSctpServermetacastProc
+  metacall*: QSctpServermetacallProc
+  incomingConnection*: QSctpServerincomingConnectionProc
+  hasPendingConnections*: QSctpServerhasPendingConnectionsProc
+  nextPendingConnection*: QSctpServernextPendingConnectionProc
+  event*: QSctpServereventProc
+  eventFilter*: QSctpServereventFilterProc
+  timerEvent*: QSctpServertimerEventProc
+  childEvent*: QSctpServerchildEventProc
+  customEvent*: QSctpServercustomEventProc
+  connectNotify*: QSctpServerconnectNotifyProc
+  disconnectNotify*: QSctpServerdisconnectNotifyProc
 proc QSctpServermetaObject*(self: gen_qsctpserver_types.QSctpServer, ): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fQSctpServer_virtualbase_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQSctpServer_virtualbase_metaObject(self.h))
 
-type QSctpServermetaObjectProc* = proc(): gen_qobjectdefs_types.QMetaObject
-proc onmetaObject*(self: gen_qsctpserver_types.QSctpServer, slot: QSctpServermetaObjectProc) =
-  # TODO check subclass
-  var tmp = new QSctpServermetaObjectProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQSctpServer_override_virtual_metaObject(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QSctpServer_metaObject(self: ptr cQSctpServer, slot: int): pointer {.exportc: "miqt_exec_callback_QSctpServer_metaObject ".} =
-  var nimfunc = cast[ptr QSctpServermetaObjectProc](cast[pointer](slot))
-
-  let virtualReturn = nimfunc[]( )
-
+proc miqt_exec_callback_cQSctpServer_metaObject(vtbl: pointer, self: pointer): pointer {.cdecl.} =
+  let vtbl = cast[ptr QSctpServerVTable](vtbl)
+  let self = QSctpServer(h: self)
+  var virtualReturn = vtbl[].metaObject(self)
   virtualReturn.h
+
 proc QSctpServermetacast*(self: gen_qsctpserver_types.QSctpServer, param1: cstring): pointer =
-  fQSctpServer_virtualbase_metacast(self.h, param1)
+  fcQSctpServer_virtualbase_metacast(self.h, param1)
 
-type QSctpServermetacastProc* = proc(param1: cstring): pointer
-proc onmetacast*(self: gen_qsctpserver_types.QSctpServer, slot: QSctpServermetacastProc) =
-  # TODO check subclass
-  var tmp = new QSctpServermetacastProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQSctpServer_override_virtual_metacast(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QSctpServer_metacast(self: ptr cQSctpServer, slot: int, param1: cstring): pointer {.exportc: "miqt_exec_callback_QSctpServer_metacast ".} =
-  var nimfunc = cast[ptr QSctpServermetacastProc](cast[pointer](slot))
+proc miqt_exec_callback_cQSctpServer_metacast(vtbl: pointer, self: pointer, param1: cstring): pointer {.cdecl.} =
+  let vtbl = cast[ptr QSctpServerVTable](vtbl)
+  let self = QSctpServer(h: self)
   let slotval1 = (param1)
-
-
-  let virtualReturn = nimfunc[](slotval1 )
-
+  var virtualReturn = vtbl[].metacast(self, slotval1)
   virtualReturn
+
 proc QSctpServermetacall*(self: gen_qsctpserver_types.QSctpServer, param1: cint, param2: cint, param3: pointer): cint =
-  fQSctpServer_virtualbase_metacall(self.h, cint(param1), param2, param3)
+  fcQSctpServer_virtualbase_metacall(self.h, cint(param1), param2, param3)
 
-type QSctpServermetacallProc* = proc(param1: cint, param2: cint, param3: pointer): cint
-proc onmetacall*(self: gen_qsctpserver_types.QSctpServer, slot: QSctpServermetacallProc) =
-  # TODO check subclass
-  var tmp = new QSctpServermetacallProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQSctpServer_override_virtual_metacall(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QSctpServer_metacall(self: ptr cQSctpServer, slot: int, param1: cint, param2: cint, param3: pointer): cint {.exportc: "miqt_exec_callback_QSctpServer_metacall ".} =
-  var nimfunc = cast[ptr QSctpServermetacallProc](cast[pointer](slot))
+proc miqt_exec_callback_cQSctpServer_metacall(vtbl: pointer, self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
+  let vtbl = cast[ptr QSctpServerVTable](vtbl)
+  let self = QSctpServer(h: self)
   let slotval1 = cint(param1)
-
   let slotval2 = param2
-
   let slotval3 = param3
-
-
-  let virtualReturn = nimfunc[](slotval1, slotval2, slotval3 )
-
+  var virtualReturn = vtbl[].metacall(self, slotval1, slotval2, slotval3)
   virtualReturn
+
 proc QSctpServerincomingConnection*(self: gen_qsctpserver_types.QSctpServer, handle: uint): void =
-  fQSctpServer_virtualbase_incomingConnection(self.h, handle)
+  fcQSctpServer_virtualbase_incomingConnection(self.h, handle)
 
-type QSctpServerincomingConnectionProc* = proc(handle: uint): void
-proc onincomingConnection*(self: gen_qsctpserver_types.QSctpServer, slot: QSctpServerincomingConnectionProc) =
-  # TODO check subclass
-  var tmp = new QSctpServerincomingConnectionProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQSctpServer_override_virtual_incomingConnection(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QSctpServer_incomingConnection(self: ptr cQSctpServer, slot: int, handle: uint): void {.exportc: "miqt_exec_callback_QSctpServer_incomingConnection ".} =
-  var nimfunc = cast[ptr QSctpServerincomingConnectionProc](cast[pointer](slot))
+proc miqt_exec_callback_cQSctpServer_incomingConnection(vtbl: pointer, self: pointer, handle: uint): void {.cdecl.} =
+  let vtbl = cast[ptr QSctpServerVTable](vtbl)
+  let self = QSctpServer(h: self)
   let slotval1 = handle
+  vtbl[].incomingConnection(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QSctpServerhasPendingConnections*(self: gen_qsctpserver_types.QSctpServer, ): bool =
-  fQSctpServer_virtualbase_hasPendingConnections(self.h)
+  fcQSctpServer_virtualbase_hasPendingConnections(self.h)
 
-type QSctpServerhasPendingConnectionsProc* = proc(): bool
-proc onhasPendingConnections*(self: gen_qsctpserver_types.QSctpServer, slot: QSctpServerhasPendingConnectionsProc) =
-  # TODO check subclass
-  var tmp = new QSctpServerhasPendingConnectionsProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQSctpServer_override_virtual_hasPendingConnections(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QSctpServer_hasPendingConnections(self: ptr cQSctpServer, slot: int): bool {.exportc: "miqt_exec_callback_QSctpServer_hasPendingConnections ".} =
-  var nimfunc = cast[ptr QSctpServerhasPendingConnectionsProc](cast[pointer](slot))
-
-  let virtualReturn = nimfunc[]( )
-
+proc miqt_exec_callback_cQSctpServer_hasPendingConnections(vtbl: pointer, self: pointer): bool {.cdecl.} =
+  let vtbl = cast[ptr QSctpServerVTable](vtbl)
+  let self = QSctpServer(h: self)
+  var virtualReturn = vtbl[].hasPendingConnections(self)
   virtualReturn
+
 proc QSctpServernextPendingConnection*(self: gen_qsctpserver_types.QSctpServer, ): gen_qtcpsocket_types.QTcpSocket =
-  gen_qtcpsocket_types.QTcpSocket(h: fQSctpServer_virtualbase_nextPendingConnection(self.h))
+  gen_qtcpsocket_types.QTcpSocket(h: fcQSctpServer_virtualbase_nextPendingConnection(self.h))
 
-type QSctpServernextPendingConnectionProc* = proc(): gen_qtcpsocket_types.QTcpSocket
-proc onnextPendingConnection*(self: gen_qsctpserver_types.QSctpServer, slot: QSctpServernextPendingConnectionProc) =
-  # TODO check subclass
-  var tmp = new QSctpServernextPendingConnectionProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQSctpServer_override_virtual_nextPendingConnection(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QSctpServer_nextPendingConnection(self: ptr cQSctpServer, slot: int): pointer {.exportc: "miqt_exec_callback_QSctpServer_nextPendingConnection ".} =
-  var nimfunc = cast[ptr QSctpServernextPendingConnectionProc](cast[pointer](slot))
-
-  let virtualReturn = nimfunc[]( )
-
+proc miqt_exec_callback_cQSctpServer_nextPendingConnection(vtbl: pointer, self: pointer): pointer {.cdecl.} =
+  let vtbl = cast[ptr QSctpServerVTable](vtbl)
+  let self = QSctpServer(h: self)
+  var virtualReturn = vtbl[].nextPendingConnection(self)
   virtualReturn.h
+
 proc QSctpServerevent*(self: gen_qsctpserver_types.QSctpServer, event: gen_qcoreevent_types.QEvent): bool =
-  fQSctpServer_virtualbase_event(self.h, event.h)
+  fcQSctpServer_virtualbase_event(self.h, event.h)
 
-type QSctpServereventProc* = proc(event: gen_qcoreevent_types.QEvent): bool
-proc onevent*(self: gen_qsctpserver_types.QSctpServer, slot: QSctpServereventProc) =
-  # TODO check subclass
-  var tmp = new QSctpServereventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQSctpServer_override_virtual_event(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QSctpServer_event(self: ptr cQSctpServer, slot: int, event: pointer): bool {.exportc: "miqt_exec_callback_QSctpServer_event ".} =
-  var nimfunc = cast[ptr QSctpServereventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQSctpServer_event(vtbl: pointer, self: pointer, event: pointer): bool {.cdecl.} =
+  let vtbl = cast[ptr QSctpServerVTable](vtbl)
+  let self = QSctpServer(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event)
-
-
-  let virtualReturn = nimfunc[](slotval1 )
-
+  var virtualReturn = vtbl[].event(self, slotval1)
   virtualReturn
+
 proc QSctpServereventFilter*(self: gen_qsctpserver_types.QSctpServer, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool =
-  fQSctpServer_virtualbase_eventFilter(self.h, watched.h, event.h)
+  fcQSctpServer_virtualbase_eventFilter(self.h, watched.h, event.h)
 
-type QSctpServereventFilterProc* = proc(watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool
-proc oneventFilter*(self: gen_qsctpserver_types.QSctpServer, slot: QSctpServereventFilterProc) =
-  # TODO check subclass
-  var tmp = new QSctpServereventFilterProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQSctpServer_override_virtual_eventFilter(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QSctpServer_eventFilter(self: ptr cQSctpServer, slot: int, watched: pointer, event: pointer): bool {.exportc: "miqt_exec_callback_QSctpServer_eventFilter ".} =
-  var nimfunc = cast[ptr QSctpServereventFilterProc](cast[pointer](slot))
+proc miqt_exec_callback_cQSctpServer_eventFilter(vtbl: pointer, self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
+  let vtbl = cast[ptr QSctpServerVTable](vtbl)
+  let self = QSctpServer(h: self)
   let slotval1 = gen_qobject_types.QObject(h: watched)
-
   let slotval2 = gen_qcoreevent_types.QEvent(h: event)
-
-
-  let virtualReturn = nimfunc[](slotval1, slotval2 )
-
+  var virtualReturn = vtbl[].eventFilter(self, slotval1, slotval2)
   virtualReturn
+
 proc QSctpServertimerEvent*(self: gen_qsctpserver_types.QSctpServer, event: gen_qcoreevent_types.QTimerEvent): void =
-  fQSctpServer_virtualbase_timerEvent(self.h, event.h)
+  fcQSctpServer_virtualbase_timerEvent(self.h, event.h)
 
-type QSctpServertimerEventProc* = proc(event: gen_qcoreevent_types.QTimerEvent): void
-proc ontimerEvent*(self: gen_qsctpserver_types.QSctpServer, slot: QSctpServertimerEventProc) =
-  # TODO check subclass
-  var tmp = new QSctpServertimerEventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQSctpServer_override_virtual_timerEvent(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QSctpServer_timerEvent(self: ptr cQSctpServer, slot: int, event: pointer): void {.exportc: "miqt_exec_callback_QSctpServer_timerEvent ".} =
-  var nimfunc = cast[ptr QSctpServertimerEventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQSctpServer_timerEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QSctpServerVTable](vtbl)
+  let self = QSctpServer(h: self)
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event)
+  vtbl[].timerEvent(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QSctpServerchildEvent*(self: gen_qsctpserver_types.QSctpServer, event: gen_qcoreevent_types.QChildEvent): void =
-  fQSctpServer_virtualbase_childEvent(self.h, event.h)
+  fcQSctpServer_virtualbase_childEvent(self.h, event.h)
 
-type QSctpServerchildEventProc* = proc(event: gen_qcoreevent_types.QChildEvent): void
-proc onchildEvent*(self: gen_qsctpserver_types.QSctpServer, slot: QSctpServerchildEventProc) =
-  # TODO check subclass
-  var tmp = new QSctpServerchildEventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQSctpServer_override_virtual_childEvent(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QSctpServer_childEvent(self: ptr cQSctpServer, slot: int, event: pointer): void {.exportc: "miqt_exec_callback_QSctpServer_childEvent ".} =
-  var nimfunc = cast[ptr QSctpServerchildEventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQSctpServer_childEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QSctpServerVTable](vtbl)
+  let self = QSctpServer(h: self)
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: event)
+  vtbl[].childEvent(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QSctpServercustomEvent*(self: gen_qsctpserver_types.QSctpServer, event: gen_qcoreevent_types.QEvent): void =
-  fQSctpServer_virtualbase_customEvent(self.h, event.h)
+  fcQSctpServer_virtualbase_customEvent(self.h, event.h)
 
-type QSctpServercustomEventProc* = proc(event: gen_qcoreevent_types.QEvent): void
-proc oncustomEvent*(self: gen_qsctpserver_types.QSctpServer, slot: QSctpServercustomEventProc) =
-  # TODO check subclass
-  var tmp = new QSctpServercustomEventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQSctpServer_override_virtual_customEvent(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QSctpServer_customEvent(self: ptr cQSctpServer, slot: int, event: pointer): void {.exportc: "miqt_exec_callback_QSctpServer_customEvent ".} =
-  var nimfunc = cast[ptr QSctpServercustomEventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQSctpServer_customEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QSctpServerVTable](vtbl)
+  let self = QSctpServer(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  vtbl[].customEvent(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QSctpServerconnectNotify*(self: gen_qsctpserver_types.QSctpServer, signal: gen_qmetaobject_types.QMetaMethod): void =
-  fQSctpServer_virtualbase_connectNotify(self.h, signal.h)
+  fcQSctpServer_virtualbase_connectNotify(self.h, signal.h)
 
-type QSctpServerconnectNotifyProc* = proc(signal: gen_qmetaobject_types.QMetaMethod): void
-proc onconnectNotify*(self: gen_qsctpserver_types.QSctpServer, slot: QSctpServerconnectNotifyProc) =
-  # TODO check subclass
-  var tmp = new QSctpServerconnectNotifyProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQSctpServer_override_virtual_connectNotify(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QSctpServer_connectNotify(self: ptr cQSctpServer, slot: int, signal: pointer): void {.exportc: "miqt_exec_callback_QSctpServer_connectNotify ".} =
-  var nimfunc = cast[ptr QSctpServerconnectNotifyProc](cast[pointer](slot))
+proc miqt_exec_callback_cQSctpServer_connectNotify(vtbl: pointer, self: pointer, signal: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QSctpServerVTable](vtbl)
+  let self = QSctpServer(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  vtbl[].connectNotify(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QSctpServerdisconnectNotify*(self: gen_qsctpserver_types.QSctpServer, signal: gen_qmetaobject_types.QMetaMethod): void =
-  fQSctpServer_virtualbase_disconnectNotify(self.h, signal.h)
+  fcQSctpServer_virtualbase_disconnectNotify(self.h, signal.h)
 
-type QSctpServerdisconnectNotifyProc* = proc(signal: gen_qmetaobject_types.QMetaMethod): void
-proc ondisconnectNotify*(self: gen_qsctpserver_types.QSctpServer, slot: QSctpServerdisconnectNotifyProc) =
-  # TODO check subclass
-  var tmp = new QSctpServerdisconnectNotifyProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQSctpServer_override_virtual_disconnectNotify(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QSctpServer_disconnectNotify(self: ptr cQSctpServer, slot: int, signal: pointer): void {.exportc: "miqt_exec_callback_QSctpServer_disconnectNotify ".} =
-  var nimfunc = cast[ptr QSctpServerdisconnectNotifyProc](cast[pointer](slot))
+proc miqt_exec_callback_cQSctpServer_disconnectNotify(vtbl: pointer, self: pointer, signal: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QSctpServerVTable](vtbl)
+  let self = QSctpServer(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  vtbl[].disconnectNotify(self, slotval1)
 
+proc create*(T: type gen_qsctpserver_types.QSctpServer,
+    vtbl: ref QSctpServerVTable = nil): gen_qsctpserver_types.QSctpServer =
+  let vtbl = if vtbl == nil: new QSctpServerVTable else: vtbl
+  GC_ref(vtbl)
+  vtbl.vtbl.destructor = proc(vtbl: ptr cQSctpServerVTable, _: ptr cQSctpServer) {.cdecl.} =
+    let vtbl = cast[ref QSctpServerVTable](vtbl)
+    GC_unref(vtbl)
+  if not isNil(vtbl.metaObject):
+    vtbl[].vtbl.metaObject = miqt_exec_callback_cQSctpServer_metaObject
+  if not isNil(vtbl.metacast):
+    vtbl[].vtbl.metacast = miqt_exec_callback_cQSctpServer_metacast
+  if not isNil(vtbl.metacall):
+    vtbl[].vtbl.metacall = miqt_exec_callback_cQSctpServer_metacall
+  if not isNil(vtbl.incomingConnection):
+    vtbl[].vtbl.incomingConnection = miqt_exec_callback_cQSctpServer_incomingConnection
+  if not isNil(vtbl.hasPendingConnections):
+    vtbl[].vtbl.hasPendingConnections = miqt_exec_callback_cQSctpServer_hasPendingConnections
+  if not isNil(vtbl.nextPendingConnection):
+    vtbl[].vtbl.nextPendingConnection = miqt_exec_callback_cQSctpServer_nextPendingConnection
+  if not isNil(vtbl.event):
+    vtbl[].vtbl.event = miqt_exec_callback_cQSctpServer_event
+  if not isNil(vtbl.eventFilter):
+    vtbl[].vtbl.eventFilter = miqt_exec_callback_cQSctpServer_eventFilter
+  if not isNil(vtbl.timerEvent):
+    vtbl[].vtbl.timerEvent = miqt_exec_callback_cQSctpServer_timerEvent
+  if not isNil(vtbl.childEvent):
+    vtbl[].vtbl.childEvent = miqt_exec_callback_cQSctpServer_childEvent
+  if not isNil(vtbl.customEvent):
+    vtbl[].vtbl.customEvent = miqt_exec_callback_cQSctpServer_customEvent
+  if not isNil(vtbl.connectNotify):
+    vtbl[].vtbl.connectNotify = miqt_exec_callback_cQSctpServer_connectNotify
+  if not isNil(vtbl.disconnectNotify):
+    vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQSctpServer_disconnectNotify
+  gen_qsctpserver_types.QSctpServer(h: fcQSctpServer_new(addr(vtbl[]), ))
 
-  nimfunc[](slotval1)
+proc create*(T: type gen_qsctpserver_types.QSctpServer,
+    parent: gen_qobject_types.QObject,
+    vtbl: ref QSctpServerVTable = nil): gen_qsctpserver_types.QSctpServer =
+  let vtbl = if vtbl == nil: new QSctpServerVTable else: vtbl
+  GC_ref(vtbl)
+  vtbl.vtbl.destructor = proc(vtbl: ptr cQSctpServerVTable, _: ptr cQSctpServer) {.cdecl.} =
+    let vtbl = cast[ref QSctpServerVTable](vtbl)
+    GC_unref(vtbl)
+  if not isNil(vtbl.metaObject):
+    vtbl[].vtbl.metaObject = miqt_exec_callback_cQSctpServer_metaObject
+  if not isNil(vtbl.metacast):
+    vtbl[].vtbl.metacast = miqt_exec_callback_cQSctpServer_metacast
+  if not isNil(vtbl.metacall):
+    vtbl[].vtbl.metacall = miqt_exec_callback_cQSctpServer_metacall
+  if not isNil(vtbl.incomingConnection):
+    vtbl[].vtbl.incomingConnection = miqt_exec_callback_cQSctpServer_incomingConnection
+  if not isNil(vtbl.hasPendingConnections):
+    vtbl[].vtbl.hasPendingConnections = miqt_exec_callback_cQSctpServer_hasPendingConnections
+  if not isNil(vtbl.nextPendingConnection):
+    vtbl[].vtbl.nextPendingConnection = miqt_exec_callback_cQSctpServer_nextPendingConnection
+  if not isNil(vtbl.event):
+    vtbl[].vtbl.event = miqt_exec_callback_cQSctpServer_event
+  if not isNil(vtbl.eventFilter):
+    vtbl[].vtbl.eventFilter = miqt_exec_callback_cQSctpServer_eventFilter
+  if not isNil(vtbl.timerEvent):
+    vtbl[].vtbl.timerEvent = miqt_exec_callback_cQSctpServer_timerEvent
+  if not isNil(vtbl.childEvent):
+    vtbl[].vtbl.childEvent = miqt_exec_callback_cQSctpServer_childEvent
+  if not isNil(vtbl.customEvent):
+    vtbl[].vtbl.customEvent = miqt_exec_callback_cQSctpServer_customEvent
+  if not isNil(vtbl.connectNotify):
+    vtbl[].vtbl.connectNotify = miqt_exec_callback_cQSctpServer_connectNotify
+  if not isNil(vtbl.disconnectNotify):
+    vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQSctpServer_disconnectNotify
+  gen_qsctpserver_types.QSctpServer(h: fcQSctpServer_new2(addr(vtbl[]), parent.h))
+
 proc staticMetaObject*(_: type gen_qsctpserver_types.QSctpServer): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQSctpServer_staticMetaObject())
 proc delete*(self: gen_qsctpserver_types.QSctpServer) =

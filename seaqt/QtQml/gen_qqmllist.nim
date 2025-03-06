@@ -50,14 +50,6 @@ export
 
 type cQQmlListReference*{.exportc: "QQmlListReference", incompleteStruct.} = object
 
-proc fcQQmlListReference_new(): ptr cQQmlListReference {.importc: "QQmlListReference_new".}
-proc fcQQmlListReference_new2(variant: pointer): ptr cQQmlListReference {.importc: "QQmlListReference_new2".}
-proc fcQQmlListReference_new3(o: pointer, property: cstring): ptr cQQmlListReference {.importc: "QQmlListReference_new3".}
-proc fcQQmlListReference_new4(variant: pointer): ptr cQQmlListReference {.importc: "QQmlListReference_new4".}
-proc fcQQmlListReference_new5(o: pointer, property: cstring): ptr cQQmlListReference {.importc: "QQmlListReference_new5".}
-proc fcQQmlListReference_new6(param1: pointer): ptr cQQmlListReference {.importc: "QQmlListReference_new6".}
-proc fcQQmlListReference_new7(variant: pointer, engine: pointer): ptr cQQmlListReference {.importc: "QQmlListReference_new7".}
-proc fcQQmlListReference_new8(o: pointer, property: cstring, engine: pointer): ptr cQQmlListReference {.importc: "QQmlListReference_new8".}
 proc fcQQmlListReference_operatorAssign(self: pointer, param1: pointer): void {.importc: "QQmlListReference_operatorAssign".}
 proc fcQQmlListReference_isValid(self: pointer, ): bool {.importc: "QQmlListReference_isValid".}
 proc fcQQmlListReference_objectX(self: pointer, ): pointer {.importc: "QQmlListReference_object".}
@@ -78,34 +70,15 @@ proc fcQQmlListReference_size(self: pointer, ): int64 {.importc: "QQmlListRefere
 proc fcQQmlListReference_replace(self: pointer, param1: int64, param2: pointer): bool {.importc: "QQmlListReference_replace".}
 proc fcQQmlListReference_removeLast(self: pointer, ): bool {.importc: "QQmlListReference_removeLast".}
 proc fcQQmlListReference_operatorEqual(self: pointer, other: pointer): bool {.importc: "QQmlListReference_operatorEqual".}
+proc fcQQmlListReference_new(): ptr cQQmlListReference {.importc: "QQmlListReference_new".}
+proc fcQQmlListReference_new2(variant: pointer): ptr cQQmlListReference {.importc: "QQmlListReference_new2".}
+proc fcQQmlListReference_new3(o: pointer, property: cstring): ptr cQQmlListReference {.importc: "QQmlListReference_new3".}
+proc fcQQmlListReference_new4(variant: pointer): ptr cQQmlListReference {.importc: "QQmlListReference_new4".}
+proc fcQQmlListReference_new5(o: pointer, property: cstring): ptr cQQmlListReference {.importc: "QQmlListReference_new5".}
+proc fcQQmlListReference_new6(param1: pointer): ptr cQQmlListReference {.importc: "QQmlListReference_new6".}
+proc fcQQmlListReference_new7(variant: pointer, engine: pointer): ptr cQQmlListReference {.importc: "QQmlListReference_new7".}
+proc fcQQmlListReference_new8(o: pointer, property: cstring, engine: pointer): ptr cQQmlListReference {.importc: "QQmlListReference_new8".}
 proc fcQQmlListReference_delete(self: pointer) {.importc: "QQmlListReference_delete".}
-
-
-func init*(T: type gen_qqmllist_types.QQmlListReference, h: ptr cQQmlListReference): gen_qqmllist_types.QQmlListReference =
-  T(h: h)
-proc create*(T: type gen_qqmllist_types.QQmlListReference, ): gen_qqmllist_types.QQmlListReference =
-  gen_qqmllist_types.QQmlListReference.init(fcQQmlListReference_new())
-
-proc create*(T: type gen_qqmllist_types.QQmlListReference, variant: gen_qvariant_types.QVariant): gen_qqmllist_types.QQmlListReference =
-  gen_qqmllist_types.QQmlListReference.init(fcQQmlListReference_new2(variant.h))
-
-proc create*(T: type gen_qqmllist_types.QQmlListReference, o: gen_qobject_types.QObject, property: cstring): gen_qqmllist_types.QQmlListReference =
-  gen_qqmllist_types.QQmlListReference.init(fcQQmlListReference_new3(o.h, property))
-
-proc create2*(T: type gen_qqmllist_types.QQmlListReference, variant: gen_qvariant_types.QVariant): gen_qqmllist_types.QQmlListReference =
-  gen_qqmllist_types.QQmlListReference.init(fcQQmlListReference_new4(variant.h))
-
-proc create2*(T: type gen_qqmllist_types.QQmlListReference, o: gen_qobject_types.QObject, property: cstring): gen_qqmllist_types.QQmlListReference =
-  gen_qqmllist_types.QQmlListReference.init(fcQQmlListReference_new5(o.h, property))
-
-proc create*(T: type gen_qqmllist_types.QQmlListReference, param1: gen_qqmllist_types.QQmlListReference): gen_qqmllist_types.QQmlListReference =
-  gen_qqmllist_types.QQmlListReference.init(fcQQmlListReference_new6(param1.h))
-
-proc create*(T: type gen_qqmllist_types.QQmlListReference, variant: gen_qvariant_types.QVariant, engine: gen_qqmlengine_types.QQmlEngine): gen_qqmllist_types.QQmlListReference =
-  gen_qqmllist_types.QQmlListReference.init(fcQQmlListReference_new7(variant.h, engine.h))
-
-proc create*(T: type gen_qqmllist_types.QQmlListReference, o: gen_qobject_types.QObject, property: cstring, engine: gen_qqmlengine_types.QQmlEngine): gen_qqmllist_types.QQmlListReference =
-  gen_qqmllist_types.QQmlListReference.init(fcQQmlListReference_new8(o.h, property, engine.h))
 
 proc operatorAssign*(self: gen_qqmllist_types.QQmlListReference, param1: gen_qqmllist_types.QQmlListReference): void =
   fcQQmlListReference_operatorAssign(self.h, param1.h)
@@ -166,6 +139,37 @@ proc removeLast*(self: gen_qqmllist_types.QQmlListReference, ): bool =
 
 proc operatorEqual*(self: gen_qqmllist_types.QQmlListReference, other: gen_qqmllist_types.QQmlListReference): bool =
   fcQQmlListReference_operatorEqual(self.h, other.h)
+
+proc create*(T: type gen_qqmllist_types.QQmlListReference): gen_qqmllist_types.QQmlListReference =
+  gen_qqmllist_types.QQmlListReference(h: fcQQmlListReference_new())
+
+proc create*(T: type gen_qqmllist_types.QQmlListReference,
+    variant: gen_qvariant_types.QVariant): gen_qqmllist_types.QQmlListReference =
+  gen_qqmllist_types.QQmlListReference(h: fcQQmlListReference_new2(variant.h))
+
+proc create*(T: type gen_qqmllist_types.QQmlListReference,
+    o: gen_qobject_types.QObject, property: cstring): gen_qqmllist_types.QQmlListReference =
+  gen_qqmllist_types.QQmlListReference(h: fcQQmlListReference_new3(o.h, property))
+
+proc create2*(T: type gen_qqmllist_types.QQmlListReference,
+    variant: gen_qvariant_types.QVariant): gen_qqmllist_types.QQmlListReference =
+  gen_qqmllist_types.QQmlListReference(h: fcQQmlListReference_new4(variant.h))
+
+proc create2*(T: type gen_qqmllist_types.QQmlListReference,
+    o: gen_qobject_types.QObject, property: cstring): gen_qqmllist_types.QQmlListReference =
+  gen_qqmllist_types.QQmlListReference(h: fcQQmlListReference_new5(o.h, property))
+
+proc create*(T: type gen_qqmllist_types.QQmlListReference,
+    param1: gen_qqmllist_types.QQmlListReference): gen_qqmllist_types.QQmlListReference =
+  gen_qqmllist_types.QQmlListReference(h: fcQQmlListReference_new6(param1.h))
+
+proc create*(T: type gen_qqmllist_types.QQmlListReference,
+    variant: gen_qvariant_types.QVariant, engine: gen_qqmlengine_types.QQmlEngine): gen_qqmllist_types.QQmlListReference =
+  gen_qqmllist_types.QQmlListReference(h: fcQQmlListReference_new7(variant.h, engine.h))
+
+proc create*(T: type gen_qqmllist_types.QQmlListReference,
+    o: gen_qobject_types.QObject, property: cstring, engine: gen_qqmlengine_types.QQmlEngine): gen_qqmllist_types.QQmlListReference =
+  gen_qqmllist_types.QQmlListReference(h: fcQQmlListReference_new8(o.h, property, engine.h))
 
 proc delete*(self: gen_qqmllist_types.QQmlListReference) =
   fcQQmlListReference_delete(self.h)

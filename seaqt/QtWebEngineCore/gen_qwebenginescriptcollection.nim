@@ -55,9 +55,6 @@ proc fcQWebEngineScriptCollection_clear(self: pointer, ): void {.importc: "QWebE
 proc fcQWebEngineScriptCollection_toList(self: pointer, ): struct_miqt_array {.importc: "QWebEngineScriptCollection_toList".}
 proc fcQWebEngineScriptCollection_delete(self: pointer) {.importc: "QWebEngineScriptCollection_delete".}
 
-
-func init*(T: type gen_qwebenginescriptcollection_types.QWebEngineScriptCollection, h: ptr cQWebEngineScriptCollection): gen_qwebenginescriptcollection_types.QWebEngineScriptCollection =
-  T(h: h)
 proc isEmpty*(self: gen_qwebenginescriptcollection_types.QWebEngineScriptCollection, ): bool =
   fcQWebEngineScriptCollection_isEmpty(self.h)
 

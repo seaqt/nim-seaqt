@@ -47,22 +47,17 @@ proc fcQSharedData_delete(self: pointer) {.importc: "QSharedData_delete".}
 proc fcQAdoptSharedDataTag_new(): ptr cQAdoptSharedDataTag {.importc: "QAdoptSharedDataTag_new".}
 proc fcQAdoptSharedDataTag_delete(self: pointer) {.importc: "QAdoptSharedDataTag_delete".}
 
+proc create*(T: type gen_qshareddata_types.QSharedData): gen_qshareddata_types.QSharedData =
+  gen_qshareddata_types.QSharedData(h: fcQSharedData_new())
 
-func init*(T: type gen_qshareddata_types.QSharedData, h: ptr cQSharedData): gen_qshareddata_types.QSharedData =
-  T(h: h)
-proc create*(T: type gen_qshareddata_types.QSharedData, ): gen_qshareddata_types.QSharedData =
-  gen_qshareddata_types.QSharedData.init(fcQSharedData_new())
-
-proc create*(T: type gen_qshareddata_types.QSharedData, param1: gen_qshareddata_types.QSharedData): gen_qshareddata_types.QSharedData =
-  gen_qshareddata_types.QSharedData.init(fcQSharedData_new2(param1.h))
+proc create*(T: type gen_qshareddata_types.QSharedData,
+    param1: gen_qshareddata_types.QSharedData): gen_qshareddata_types.QSharedData =
+  gen_qshareddata_types.QSharedData(h: fcQSharedData_new2(param1.h))
 
 proc delete*(self: gen_qshareddata_types.QSharedData) =
   fcQSharedData_delete(self.h)
-
-func init*(T: type gen_qshareddata_types.QAdoptSharedDataTag, h: ptr cQAdoptSharedDataTag): gen_qshareddata_types.QAdoptSharedDataTag =
-  T(h: h)
-proc create*(T: type gen_qshareddata_types.QAdoptSharedDataTag, ): gen_qshareddata_types.QAdoptSharedDataTag =
-  gen_qshareddata_types.QAdoptSharedDataTag.init(fcQAdoptSharedDataTag_new())
+proc create*(T: type gen_qshareddata_types.QAdoptSharedDataTag): gen_qshareddata_types.QAdoptSharedDataTag =
+  gen_qshareddata_types.QAdoptSharedDataTag(h: fcQAdoptSharedDataTag_new())
 
 proc delete*(self: gen_qshareddata_types.QAdoptSharedDataTag) =
   fcQAdoptSharedDataTag_delete(self.h)

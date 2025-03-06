@@ -44,9 +44,6 @@ proc fcQScopedPointerPodDeleter_cleanup(pointer: pointer): void {.importc: "QSco
 proc fcQScopedPointerPodDeleter_operatorCall(self: pointer, pointer: pointer): void {.importc: "QScopedPointerPodDeleter_operatorCall".}
 proc fcQScopedPointerPodDeleter_delete(self: pointer) {.importc: "QScopedPointerPodDeleter_delete".}
 
-
-func init*(T: type gen_qscopedpointer_types.QScopedPointerPodDeleter, h: ptr cQScopedPointerPodDeleter): gen_qscopedpointer_types.QScopedPointerPodDeleter =
-  T(h: h)
 proc cleanup*(_: type gen_qscopedpointer_types.QScopedPointerPodDeleter, pointer: pointer): void =
   fcQScopedPointerPodDeleter_cleanup(pointer)
 

@@ -51,9 +51,6 @@ proc fcQWebEngineClientCertificateStore_certificates(self: pointer, ): struct_mi
 proc fcQWebEngineClientCertificateStore_remove(self: pointer, certificate: pointer): void {.importc: "QWebEngineClientCertificateStore_remove".}
 proc fcQWebEngineClientCertificateStore_clear(self: pointer, ): void {.importc: "QWebEngineClientCertificateStore_clear".}
 
-
-func init*(T: type gen_qwebengineclientcertificatestore_types.QWebEngineClientCertificateStore, h: ptr cQWebEngineClientCertificateStore): gen_qwebengineclientcertificatestore_types.QWebEngineClientCertificateStore =
-  T(h: h)
 proc add*(self: gen_qwebengineclientcertificatestore_types.QWebEngineClientCertificateStore, certificate: gen_qsslcertificate_types.QSslCertificate, privateKey: gen_qsslkey_types.QSslKey): void =
   fcQWebEngineClientCertificateStore_add(self.h, certificate.h, privateKey.h)
 

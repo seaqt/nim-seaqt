@@ -48,20 +48,28 @@ typedef struct QSizeF QSizeF;
 typedef struct QWidget QWidget;
 #endif
 
-QGraphicsSceneEvent* QGraphicsSceneEvent_new(int type);
+struct QGraphicsSceneEvent_VTable {
+	void (*destructor)(struct QGraphicsSceneEvent_VTable* vtbl, QGraphicsSceneEvent* self);
+	void (*setAccepted)(struct QGraphicsSceneEvent_VTable* vtbl, QGraphicsSceneEvent* self, bool accepted);
+	QEvent* (*clone)(struct QGraphicsSceneEvent_VTable* vtbl, const QGraphicsSceneEvent* self);
+};
+QGraphicsSceneEvent* QGraphicsSceneEvent_new(struct QGraphicsSceneEvent_VTable* vtbl, int type);
 void QGraphicsSceneEvent_virtbase(QGraphicsSceneEvent* src, QEvent** outptr_QEvent);
 QWidget* QGraphicsSceneEvent_widget(const QGraphicsSceneEvent* self);
 void QGraphicsSceneEvent_setWidget(QGraphicsSceneEvent* self, QWidget* widget);
 unsigned long long QGraphicsSceneEvent_timestamp(const QGraphicsSceneEvent* self);
 void QGraphicsSceneEvent_setTimestamp(QGraphicsSceneEvent* self, unsigned long long ts);
-bool QGraphicsSceneEvent_override_virtual_setAccepted(void* self, intptr_t slot);
 void QGraphicsSceneEvent_virtualbase_setAccepted(void* self, bool accepted);
-bool QGraphicsSceneEvent_override_virtual_clone(void* self, intptr_t slot);
 QEvent* QGraphicsSceneEvent_virtualbase_clone(const void* self);
 void QGraphicsSceneEvent_delete(QGraphicsSceneEvent* self);
 
-QGraphicsSceneMouseEvent* QGraphicsSceneMouseEvent_new();
-QGraphicsSceneMouseEvent* QGraphicsSceneMouseEvent_new2(int type);
+struct QGraphicsSceneMouseEvent_VTable {
+	void (*destructor)(struct QGraphicsSceneMouseEvent_VTable* vtbl, QGraphicsSceneMouseEvent* self);
+	void (*setAccepted)(struct QGraphicsSceneMouseEvent_VTable* vtbl, QGraphicsSceneMouseEvent* self, bool accepted);
+	QEvent* (*clone)(struct QGraphicsSceneMouseEvent_VTable* vtbl, const QGraphicsSceneMouseEvent* self);
+};
+QGraphicsSceneMouseEvent* QGraphicsSceneMouseEvent_new(struct QGraphicsSceneMouseEvent_VTable* vtbl);
+QGraphicsSceneMouseEvent* QGraphicsSceneMouseEvent_new2(struct QGraphicsSceneMouseEvent_VTable* vtbl, int type);
 void QGraphicsSceneMouseEvent_virtbase(QGraphicsSceneMouseEvent* src, QGraphicsSceneEvent** outptr_QGraphicsSceneEvent);
 QPointF* QGraphicsSceneMouseEvent_pos(const QGraphicsSceneMouseEvent* self);
 void QGraphicsSceneMouseEvent_setPos(QGraphicsSceneMouseEvent* self, QPointF* pos);
@@ -91,14 +99,17 @@ int QGraphicsSceneMouseEvent_source(const QGraphicsSceneMouseEvent* self);
 void QGraphicsSceneMouseEvent_setSource(QGraphicsSceneMouseEvent* self, int source);
 int QGraphicsSceneMouseEvent_flags(const QGraphicsSceneMouseEvent* self);
 void QGraphicsSceneMouseEvent_setFlags(QGraphicsSceneMouseEvent* self, int flags);
-bool QGraphicsSceneMouseEvent_override_virtual_setAccepted(void* self, intptr_t slot);
 void QGraphicsSceneMouseEvent_virtualbase_setAccepted(void* self, bool accepted);
-bool QGraphicsSceneMouseEvent_override_virtual_clone(void* self, intptr_t slot);
 QEvent* QGraphicsSceneMouseEvent_virtualbase_clone(const void* self);
 void QGraphicsSceneMouseEvent_delete(QGraphicsSceneMouseEvent* self);
 
-QGraphicsSceneWheelEvent* QGraphicsSceneWheelEvent_new();
-QGraphicsSceneWheelEvent* QGraphicsSceneWheelEvent_new2(int type);
+struct QGraphicsSceneWheelEvent_VTable {
+	void (*destructor)(struct QGraphicsSceneWheelEvent_VTable* vtbl, QGraphicsSceneWheelEvent* self);
+	void (*setAccepted)(struct QGraphicsSceneWheelEvent_VTable* vtbl, QGraphicsSceneWheelEvent* self, bool accepted);
+	QEvent* (*clone)(struct QGraphicsSceneWheelEvent_VTable* vtbl, const QGraphicsSceneWheelEvent* self);
+};
+QGraphicsSceneWheelEvent* QGraphicsSceneWheelEvent_new(struct QGraphicsSceneWheelEvent_VTable* vtbl);
+QGraphicsSceneWheelEvent* QGraphicsSceneWheelEvent_new2(struct QGraphicsSceneWheelEvent_VTable* vtbl, int type);
 void QGraphicsSceneWheelEvent_virtbase(QGraphicsSceneWheelEvent* src, QGraphicsSceneEvent** outptr_QGraphicsSceneEvent);
 QPointF* QGraphicsSceneWheelEvent_pos(const QGraphicsSceneWheelEvent* self);
 void QGraphicsSceneWheelEvent_setPos(QGraphicsSceneWheelEvent* self, QPointF* pos);
@@ -120,14 +131,17 @@ QPoint* QGraphicsSceneWheelEvent_pixelDelta(const QGraphicsSceneWheelEvent* self
 void QGraphicsSceneWheelEvent_setPixelDelta(QGraphicsSceneWheelEvent* self, QPoint* delta);
 bool QGraphicsSceneWheelEvent_isInverted(const QGraphicsSceneWheelEvent* self);
 void QGraphicsSceneWheelEvent_setInverted(QGraphicsSceneWheelEvent* self, bool inverted);
-bool QGraphicsSceneWheelEvent_override_virtual_setAccepted(void* self, intptr_t slot);
 void QGraphicsSceneWheelEvent_virtualbase_setAccepted(void* self, bool accepted);
-bool QGraphicsSceneWheelEvent_override_virtual_clone(void* self, intptr_t slot);
 QEvent* QGraphicsSceneWheelEvent_virtualbase_clone(const void* self);
 void QGraphicsSceneWheelEvent_delete(QGraphicsSceneWheelEvent* self);
 
-QGraphicsSceneContextMenuEvent* QGraphicsSceneContextMenuEvent_new();
-QGraphicsSceneContextMenuEvent* QGraphicsSceneContextMenuEvent_new2(int type);
+struct QGraphicsSceneContextMenuEvent_VTable {
+	void (*destructor)(struct QGraphicsSceneContextMenuEvent_VTable* vtbl, QGraphicsSceneContextMenuEvent* self);
+	void (*setAccepted)(struct QGraphicsSceneContextMenuEvent_VTable* vtbl, QGraphicsSceneContextMenuEvent* self, bool accepted);
+	QEvent* (*clone)(struct QGraphicsSceneContextMenuEvent_VTable* vtbl, const QGraphicsSceneContextMenuEvent* self);
+};
+QGraphicsSceneContextMenuEvent* QGraphicsSceneContextMenuEvent_new(struct QGraphicsSceneContextMenuEvent_VTable* vtbl);
+QGraphicsSceneContextMenuEvent* QGraphicsSceneContextMenuEvent_new2(struct QGraphicsSceneContextMenuEvent_VTable* vtbl, int type);
 void QGraphicsSceneContextMenuEvent_virtbase(QGraphicsSceneContextMenuEvent* src, QGraphicsSceneEvent** outptr_QGraphicsSceneEvent);
 QPointF* QGraphicsSceneContextMenuEvent_pos(const QGraphicsSceneContextMenuEvent* self);
 void QGraphicsSceneContextMenuEvent_setPos(QGraphicsSceneContextMenuEvent* self, QPointF* pos);
@@ -139,14 +153,17 @@ int QGraphicsSceneContextMenuEvent_modifiers(const QGraphicsSceneContextMenuEven
 void QGraphicsSceneContextMenuEvent_setModifiers(QGraphicsSceneContextMenuEvent* self, int modifiers);
 int QGraphicsSceneContextMenuEvent_reason(const QGraphicsSceneContextMenuEvent* self);
 void QGraphicsSceneContextMenuEvent_setReason(QGraphicsSceneContextMenuEvent* self, int reason);
-bool QGraphicsSceneContextMenuEvent_override_virtual_setAccepted(void* self, intptr_t slot);
 void QGraphicsSceneContextMenuEvent_virtualbase_setAccepted(void* self, bool accepted);
-bool QGraphicsSceneContextMenuEvent_override_virtual_clone(void* self, intptr_t slot);
 QEvent* QGraphicsSceneContextMenuEvent_virtualbase_clone(const void* self);
 void QGraphicsSceneContextMenuEvent_delete(QGraphicsSceneContextMenuEvent* self);
 
-QGraphicsSceneHoverEvent* QGraphicsSceneHoverEvent_new();
-QGraphicsSceneHoverEvent* QGraphicsSceneHoverEvent_new2(int type);
+struct QGraphicsSceneHoverEvent_VTable {
+	void (*destructor)(struct QGraphicsSceneHoverEvent_VTable* vtbl, QGraphicsSceneHoverEvent* self);
+	void (*setAccepted)(struct QGraphicsSceneHoverEvent_VTable* vtbl, QGraphicsSceneHoverEvent* self, bool accepted);
+	QEvent* (*clone)(struct QGraphicsSceneHoverEvent_VTable* vtbl, const QGraphicsSceneHoverEvent* self);
+};
+QGraphicsSceneHoverEvent* QGraphicsSceneHoverEvent_new(struct QGraphicsSceneHoverEvent_VTable* vtbl);
+QGraphicsSceneHoverEvent* QGraphicsSceneHoverEvent_new2(struct QGraphicsSceneHoverEvent_VTable* vtbl, int type);
 void QGraphicsSceneHoverEvent_virtbase(QGraphicsSceneHoverEvent* src, QGraphicsSceneEvent** outptr_QGraphicsSceneEvent);
 QPointF* QGraphicsSceneHoverEvent_pos(const QGraphicsSceneHoverEvent* self);
 void QGraphicsSceneHoverEvent_setPos(QGraphicsSceneHoverEvent* self, QPointF* pos);
@@ -162,27 +179,33 @@ QPoint* QGraphicsSceneHoverEvent_lastScreenPos(const QGraphicsSceneHoverEvent* s
 void QGraphicsSceneHoverEvent_setLastScreenPos(QGraphicsSceneHoverEvent* self, QPoint* pos);
 int QGraphicsSceneHoverEvent_modifiers(const QGraphicsSceneHoverEvent* self);
 void QGraphicsSceneHoverEvent_setModifiers(QGraphicsSceneHoverEvent* self, int modifiers);
-bool QGraphicsSceneHoverEvent_override_virtual_setAccepted(void* self, intptr_t slot);
 void QGraphicsSceneHoverEvent_virtualbase_setAccepted(void* self, bool accepted);
-bool QGraphicsSceneHoverEvent_override_virtual_clone(void* self, intptr_t slot);
 QEvent* QGraphicsSceneHoverEvent_virtualbase_clone(const void* self);
 void QGraphicsSceneHoverEvent_delete(QGraphicsSceneHoverEvent* self);
 
-QGraphicsSceneHelpEvent* QGraphicsSceneHelpEvent_new();
-QGraphicsSceneHelpEvent* QGraphicsSceneHelpEvent_new2(int type);
+struct QGraphicsSceneHelpEvent_VTable {
+	void (*destructor)(struct QGraphicsSceneHelpEvent_VTable* vtbl, QGraphicsSceneHelpEvent* self);
+	void (*setAccepted)(struct QGraphicsSceneHelpEvent_VTable* vtbl, QGraphicsSceneHelpEvent* self, bool accepted);
+	QEvent* (*clone)(struct QGraphicsSceneHelpEvent_VTable* vtbl, const QGraphicsSceneHelpEvent* self);
+};
+QGraphicsSceneHelpEvent* QGraphicsSceneHelpEvent_new(struct QGraphicsSceneHelpEvent_VTable* vtbl);
+QGraphicsSceneHelpEvent* QGraphicsSceneHelpEvent_new2(struct QGraphicsSceneHelpEvent_VTable* vtbl, int type);
 void QGraphicsSceneHelpEvent_virtbase(QGraphicsSceneHelpEvent* src, QGraphicsSceneEvent** outptr_QGraphicsSceneEvent);
 QPointF* QGraphicsSceneHelpEvent_scenePos(const QGraphicsSceneHelpEvent* self);
 void QGraphicsSceneHelpEvent_setScenePos(QGraphicsSceneHelpEvent* self, QPointF* pos);
 QPoint* QGraphicsSceneHelpEvent_screenPos(const QGraphicsSceneHelpEvent* self);
 void QGraphicsSceneHelpEvent_setScreenPos(QGraphicsSceneHelpEvent* self, QPoint* pos);
-bool QGraphicsSceneHelpEvent_override_virtual_setAccepted(void* self, intptr_t slot);
 void QGraphicsSceneHelpEvent_virtualbase_setAccepted(void* self, bool accepted);
-bool QGraphicsSceneHelpEvent_override_virtual_clone(void* self, intptr_t slot);
 QEvent* QGraphicsSceneHelpEvent_virtualbase_clone(const void* self);
 void QGraphicsSceneHelpEvent_delete(QGraphicsSceneHelpEvent* self);
 
-QGraphicsSceneDragDropEvent* QGraphicsSceneDragDropEvent_new();
-QGraphicsSceneDragDropEvent* QGraphicsSceneDragDropEvent_new2(int type);
+struct QGraphicsSceneDragDropEvent_VTable {
+	void (*destructor)(struct QGraphicsSceneDragDropEvent_VTable* vtbl, QGraphicsSceneDragDropEvent* self);
+	void (*setAccepted)(struct QGraphicsSceneDragDropEvent_VTable* vtbl, QGraphicsSceneDragDropEvent* self, bool accepted);
+	QEvent* (*clone)(struct QGraphicsSceneDragDropEvent_VTable* vtbl, const QGraphicsSceneDragDropEvent* self);
+};
+QGraphicsSceneDragDropEvent* QGraphicsSceneDragDropEvent_new(struct QGraphicsSceneDragDropEvent_VTable* vtbl);
+QGraphicsSceneDragDropEvent* QGraphicsSceneDragDropEvent_new2(struct QGraphicsSceneDragDropEvent_VTable* vtbl, int type);
 void QGraphicsSceneDragDropEvent_virtbase(QGraphicsSceneDragDropEvent* src, QGraphicsSceneEvent** outptr_QGraphicsSceneEvent);
 QPointF* QGraphicsSceneDragDropEvent_pos(const QGraphicsSceneDragDropEvent* self);
 void QGraphicsSceneDragDropEvent_setPos(QGraphicsSceneDragDropEvent* self, QPointF* pos);
@@ -205,33 +228,37 @@ QWidget* QGraphicsSceneDragDropEvent_source(const QGraphicsSceneDragDropEvent* s
 void QGraphicsSceneDragDropEvent_setSource(QGraphicsSceneDragDropEvent* self, QWidget* source);
 QMimeData* QGraphicsSceneDragDropEvent_mimeData(const QGraphicsSceneDragDropEvent* self);
 void QGraphicsSceneDragDropEvent_setMimeData(QGraphicsSceneDragDropEvent* self, QMimeData* data);
-bool QGraphicsSceneDragDropEvent_override_virtual_setAccepted(void* self, intptr_t slot);
 void QGraphicsSceneDragDropEvent_virtualbase_setAccepted(void* self, bool accepted);
-bool QGraphicsSceneDragDropEvent_override_virtual_clone(void* self, intptr_t slot);
 QEvent* QGraphicsSceneDragDropEvent_virtualbase_clone(const void* self);
 void QGraphicsSceneDragDropEvent_delete(QGraphicsSceneDragDropEvent* self);
 
-QGraphicsSceneResizeEvent* QGraphicsSceneResizeEvent_new();
+struct QGraphicsSceneResizeEvent_VTable {
+	void (*destructor)(struct QGraphicsSceneResizeEvent_VTable* vtbl, QGraphicsSceneResizeEvent* self);
+	void (*setAccepted)(struct QGraphicsSceneResizeEvent_VTable* vtbl, QGraphicsSceneResizeEvent* self, bool accepted);
+	QEvent* (*clone)(struct QGraphicsSceneResizeEvent_VTable* vtbl, const QGraphicsSceneResizeEvent* self);
+};
+QGraphicsSceneResizeEvent* QGraphicsSceneResizeEvent_new(struct QGraphicsSceneResizeEvent_VTable* vtbl);
 void QGraphicsSceneResizeEvent_virtbase(QGraphicsSceneResizeEvent* src, QGraphicsSceneEvent** outptr_QGraphicsSceneEvent);
 QSizeF* QGraphicsSceneResizeEvent_oldSize(const QGraphicsSceneResizeEvent* self);
 void QGraphicsSceneResizeEvent_setOldSize(QGraphicsSceneResizeEvent* self, QSizeF* size);
 QSizeF* QGraphicsSceneResizeEvent_newSize(const QGraphicsSceneResizeEvent* self);
 void QGraphicsSceneResizeEvent_setNewSize(QGraphicsSceneResizeEvent* self, QSizeF* size);
-bool QGraphicsSceneResizeEvent_override_virtual_setAccepted(void* self, intptr_t slot);
 void QGraphicsSceneResizeEvent_virtualbase_setAccepted(void* self, bool accepted);
-bool QGraphicsSceneResizeEvent_override_virtual_clone(void* self, intptr_t slot);
 QEvent* QGraphicsSceneResizeEvent_virtualbase_clone(const void* self);
 void QGraphicsSceneResizeEvent_delete(QGraphicsSceneResizeEvent* self);
 
-QGraphicsSceneMoveEvent* QGraphicsSceneMoveEvent_new();
+struct QGraphicsSceneMoveEvent_VTable {
+	void (*destructor)(struct QGraphicsSceneMoveEvent_VTable* vtbl, QGraphicsSceneMoveEvent* self);
+	void (*setAccepted)(struct QGraphicsSceneMoveEvent_VTable* vtbl, QGraphicsSceneMoveEvent* self, bool accepted);
+	QEvent* (*clone)(struct QGraphicsSceneMoveEvent_VTable* vtbl, const QGraphicsSceneMoveEvent* self);
+};
+QGraphicsSceneMoveEvent* QGraphicsSceneMoveEvent_new(struct QGraphicsSceneMoveEvent_VTable* vtbl);
 void QGraphicsSceneMoveEvent_virtbase(QGraphicsSceneMoveEvent* src, QGraphicsSceneEvent** outptr_QGraphicsSceneEvent);
 QPointF* QGraphicsSceneMoveEvent_oldPos(const QGraphicsSceneMoveEvent* self);
 void QGraphicsSceneMoveEvent_setOldPos(QGraphicsSceneMoveEvent* self, QPointF* pos);
 QPointF* QGraphicsSceneMoveEvent_newPos(const QGraphicsSceneMoveEvent* self);
 void QGraphicsSceneMoveEvent_setNewPos(QGraphicsSceneMoveEvent* self, QPointF* pos);
-bool QGraphicsSceneMoveEvent_override_virtual_setAccepted(void* self, intptr_t slot);
 void QGraphicsSceneMoveEvent_virtualbase_setAccepted(void* self, bool accepted);
-bool QGraphicsSceneMoveEvent_override_virtual_clone(void* self, intptr_t slot);
 QEvent* QGraphicsSceneMoveEvent_virtualbase_clone(const void* self);
 void QGraphicsSceneMoveEvent_delete(QGraphicsSceneMoveEvent* self);
 

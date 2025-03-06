@@ -56,8 +56,6 @@ export
 type cQNetworkCacheMetaData*{.exportc: "QNetworkCacheMetaData", incompleteStruct.} = object
 type cQAbstractNetworkCache*{.exportc: "QAbstractNetworkCache", incompleteStruct.} = object
 
-proc fcQNetworkCacheMetaData_new(): ptr cQNetworkCacheMetaData {.importc: "QNetworkCacheMetaData_new".}
-proc fcQNetworkCacheMetaData_new2(other: pointer): ptr cQNetworkCacheMetaData {.importc: "QNetworkCacheMetaData_new2".}
 proc fcQNetworkCacheMetaData_operatorAssign(self: pointer, other: pointer): void {.importc: "QNetworkCacheMetaData_operatorAssign".}
 proc fcQNetworkCacheMetaData_swap(self: pointer, other: pointer): void {.importc: "QNetworkCacheMetaData_swap".}
 proc fcQNetworkCacheMetaData_operatorEqual(self: pointer, other: pointer): bool {.importc: "QNetworkCacheMetaData_operatorEqual".}
@@ -75,6 +73,8 @@ proc fcQNetworkCacheMetaData_saveToDisk(self: pointer, ): bool {.importc: "QNetw
 proc fcQNetworkCacheMetaData_setSaveToDisk(self: pointer, allow: bool): void {.importc: "QNetworkCacheMetaData_setSaveToDisk".}
 proc fcQNetworkCacheMetaData_attributes(self: pointer, ): struct_miqt_map {.importc: "QNetworkCacheMetaData_attributes".}
 proc fcQNetworkCacheMetaData_setAttributes(self: pointer, attributes: struct_miqt_map): void {.importc: "QNetworkCacheMetaData_setAttributes".}
+proc fcQNetworkCacheMetaData_new(): ptr cQNetworkCacheMetaData {.importc: "QNetworkCacheMetaData_new".}
+proc fcQNetworkCacheMetaData_new2(other: pointer): ptr cQNetworkCacheMetaData {.importc: "QNetworkCacheMetaData_new2".}
 proc fcQNetworkCacheMetaData_delete(self: pointer) {.importc: "QNetworkCacheMetaData_delete".}
 proc fcQAbstractNetworkCache_metaObject(self: pointer, ): pointer {.importc: "QAbstractNetworkCache_metaObject".}
 proc fcQAbstractNetworkCache_metacast(self: pointer, param1: cstring): pointer {.importc: "QAbstractNetworkCache_metacast".}
@@ -92,15 +92,6 @@ proc fcQAbstractNetworkCache_tr2(s: cstring, c: cstring): struct_miqt_string {.i
 proc fcQAbstractNetworkCache_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QAbstractNetworkCache_tr3".}
 proc fcQAbstractNetworkCache_staticMetaObject(): pointer {.importc: "QAbstractNetworkCache_staticMetaObject".}
 proc fcQAbstractNetworkCache_delete(self: pointer) {.importc: "QAbstractNetworkCache_delete".}
-
-
-func init*(T: type gen_qabstractnetworkcache_types.QNetworkCacheMetaData, h: ptr cQNetworkCacheMetaData): gen_qabstractnetworkcache_types.QNetworkCacheMetaData =
-  T(h: h)
-proc create*(T: type gen_qabstractnetworkcache_types.QNetworkCacheMetaData, ): gen_qabstractnetworkcache_types.QNetworkCacheMetaData =
-  gen_qabstractnetworkcache_types.QNetworkCacheMetaData.init(fcQNetworkCacheMetaData_new())
-
-proc create*(T: type gen_qabstractnetworkcache_types.QNetworkCacheMetaData, other: gen_qabstractnetworkcache_types.QNetworkCacheMetaData): gen_qabstractnetworkcache_types.QNetworkCacheMetaData =
-  gen_qabstractnetworkcache_types.QNetworkCacheMetaData.init(fcQNetworkCacheMetaData_new2(other.h))
 
 proc operatorAssign*(self: gen_qabstractnetworkcache_types.QNetworkCacheMetaData, other: gen_qabstractnetworkcache_types.QNetworkCacheMetaData): void =
   fcQNetworkCacheMetaData_operatorAssign(self.h, other.h)
@@ -197,11 +188,15 @@ proc setAttributes*(self: gen_qabstractnetworkcache_types.QNetworkCacheMetaData,
 
   fcQNetworkCacheMetaData_setAttributes(self.h, struct_miqt_map(len: csize_t(len(attributes)),keys: if len(attributes) == 0: nil else: addr(attributes_Keys_CArray[0]), values: if len(attributes) == 0: nil else: addr(attributes_Values_CArray[0]),))
 
+proc create*(T: type gen_qabstractnetworkcache_types.QNetworkCacheMetaData): gen_qabstractnetworkcache_types.QNetworkCacheMetaData =
+  gen_qabstractnetworkcache_types.QNetworkCacheMetaData(h: fcQNetworkCacheMetaData_new())
+
+proc create*(T: type gen_qabstractnetworkcache_types.QNetworkCacheMetaData,
+    other: gen_qabstractnetworkcache_types.QNetworkCacheMetaData): gen_qabstractnetworkcache_types.QNetworkCacheMetaData =
+  gen_qabstractnetworkcache_types.QNetworkCacheMetaData(h: fcQNetworkCacheMetaData_new2(other.h))
+
 proc delete*(self: gen_qabstractnetworkcache_types.QNetworkCacheMetaData) =
   fcQNetworkCacheMetaData_delete(self.h)
-
-func init*(T: type gen_qabstractnetworkcache_types.QAbstractNetworkCache, h: ptr cQAbstractNetworkCache): gen_qabstractnetworkcache_types.QAbstractNetworkCache =
-  T(h: h)
 proc metaObject*(self: gen_qabstractnetworkcache_types.QAbstractNetworkCache, ): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQAbstractNetworkCache_metaObject(self.h))
 

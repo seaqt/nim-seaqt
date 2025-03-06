@@ -65,9 +65,6 @@ proc fcQToolTip_showText4(pos: pointer, text: struct_miqt_string, w: pointer, re
 proc fcQToolTip_showText5(pos: pointer, text: struct_miqt_string, w: pointer, rect: pointer, msecShowTime: cint): void {.importc: "QToolTip_showText5".}
 proc fcQToolTip_delete(self: pointer) {.importc: "QToolTip_delete".}
 
-
-func init*(T: type gen_qtooltip_types.QToolTip, h: ptr cQToolTip): gen_qtooltip_types.QToolTip =
-  T(h: h)
 proc showText*(_: type gen_qtooltip_types.QToolTip, pos: gen_qpoint_types.QPoint, text: string): void =
   fcQToolTip_showText(pos.h, struct_miqt_string(data: text, len: csize_t(len(text))))
 

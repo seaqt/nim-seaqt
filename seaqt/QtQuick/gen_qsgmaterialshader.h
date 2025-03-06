@@ -38,7 +38,12 @@ typedef struct QSGMaterialShader__GraphicsPipelineState QSGMaterialShader__Graph
 typedef struct QSGMaterialShader__RenderState QSGMaterialShader__RenderState;
 #endif
 
-QSGMaterialShader* QSGMaterialShader_new();
+struct QSGMaterialShader_VTable {
+	void (*destructor)(struct QSGMaterialShader_VTable* vtbl, QSGMaterialShader* self);
+	bool (*updateUniformData)(struct QSGMaterialShader_VTable* vtbl, QSGMaterialShader* self, QSGMaterialShader__RenderState* state, QSGMaterial* newMaterial, QSGMaterial* oldMaterial);
+	bool (*updateGraphicsPipelineState)(struct QSGMaterialShader_VTable* vtbl, QSGMaterialShader* self, QSGMaterialShader__RenderState* state, QSGMaterialShader__GraphicsPipelineState* ps, QSGMaterial* newMaterial, QSGMaterial* oldMaterial);
+};
+QSGMaterialShader* QSGMaterialShader_new(struct QSGMaterialShader_VTable* vtbl);
 bool QSGMaterialShader_updateUniformData(QSGMaterialShader* self, QSGMaterialShader__RenderState* state, QSGMaterial* newMaterial, QSGMaterial* oldMaterial);
 bool QSGMaterialShader_updateGraphicsPipelineState(QSGMaterialShader* self, QSGMaterialShader__RenderState* state, QSGMaterialShader__GraphicsPipelineState* ps, QSGMaterial* newMaterial, QSGMaterial* oldMaterial);
 int QSGMaterialShader_flags(const QSGMaterialShader* self);
@@ -46,9 +51,7 @@ void QSGMaterialShader_setFlag(QSGMaterialShader* self, int flags);
 void QSGMaterialShader_setFlags(QSGMaterialShader* self, int flags);
 int QSGMaterialShader_combinedImageSamplerCount(const QSGMaterialShader* self, int binding);
 void QSGMaterialShader_setFlag2(QSGMaterialShader* self, int flags, bool on);
-bool QSGMaterialShader_override_virtual_updateUniformData(void* self, intptr_t slot);
 bool QSGMaterialShader_virtualbase_updateUniformData(void* self, QSGMaterialShader__RenderState* state, QSGMaterial* newMaterial, QSGMaterial* oldMaterial);
-bool QSGMaterialShader_override_virtual_updateGraphicsPipelineState(void* self, intptr_t slot);
 bool QSGMaterialShader_virtualbase_updateGraphicsPipelineState(void* self, QSGMaterialShader__RenderState* state, QSGMaterialShader__GraphicsPipelineState* ps, QSGMaterial* newMaterial, QSGMaterial* oldMaterial);
 void QSGMaterialShader_protectedbase_setShaderFileName(bool* _dynamic_cast_ok, void* self, int stage, struct miqt_string filename);
 void QSGMaterialShader_protectedbase_setShader(bool* _dynamic_cast_ok, void* self, int stage, const QShader* shader);

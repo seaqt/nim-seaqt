@@ -111,9 +111,6 @@ proc fcQScroller_grabGesture2(target: pointer, gestureType: cint): cint {.import
 proc fcQScroller_handleInput3(self: pointer, input: cint, position: pointer, timestamp: clonglong): bool {.importc: "QScroller_handleInput3".}
 proc fcQScroller_staticMetaObject(): pointer {.importc: "QScroller_staticMetaObject".}
 
-
-func init*(T: type gen_qscroller_types.QScroller, h: ptr cQScroller): gen_qscroller_types.QScroller =
-  T(h: h)
 proc metaObject*(self: gen_qscroller_types.QScroller, ): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQScroller_metaObject(self.h))
 
@@ -221,7 +218,7 @@ proc stateChanged*(self: gen_qscroller_types.QScroller, newstate: cint): void =
   fcQScroller_stateChanged(self.h, cint(newstate))
 
 type QScrollerstateChangedSlot* = proc(newstate: cint)
-proc miqt_exec_callback_QScroller_stateChanged(slot: int, newstate: cint) {.exportc.} =
+proc miqt_exec_callback_cQScroller_stateChanged(slot: int, newstate: cint) {.exportc: "miqt_exec_callback_QScroller_stateChanged".} =
   let nimfunc = cast[ptr QScrollerstateChangedSlot](cast[pointer](slot))
   let slotval1 = cint(newstate)
 
@@ -237,7 +234,7 @@ proc scrollerPropertiesChanged*(self: gen_qscroller_types.QScroller, param1: gen
   fcQScroller_scrollerPropertiesChanged(self.h, param1.h)
 
 type QScrollerscrollerPropertiesChangedSlot* = proc(param1: gen_qscrollerproperties_types.QScrollerProperties)
-proc miqt_exec_callback_QScroller_scrollerPropertiesChanged(slot: int, param1: pointer) {.exportc.} =
+proc miqt_exec_callback_cQScroller_scrollerPropertiesChanged(slot: int, param1: pointer) {.exportc: "miqt_exec_callback_QScroller_scrollerPropertiesChanged".} =
   let nimfunc = cast[ptr QScrollerscrollerPropertiesChangedSlot](cast[pointer](slot))
   let slotval1 = gen_qscrollerproperties_types.QScrollerProperties(h: param1)
 

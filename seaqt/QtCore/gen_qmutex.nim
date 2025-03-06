@@ -42,29 +42,23 @@ type cQBasicMutex*{.exportc: "QBasicMutex", incompleteStruct.} = object
 type cQMutex*{.exportc: "QMutex", incompleteStruct.} = object
 type cQRecursiveMutex*{.exportc: "QRecursiveMutex", incompleteStruct.} = object
 
-proc fcQBasicMutex_new(): ptr cQBasicMutex {.importc: "QBasicMutex_new".}
 proc fcQBasicMutex_lock(self: pointer, ): void {.importc: "QBasicMutex_lock".}
 proc fcQBasicMutex_unlock(self: pointer, ): void {.importc: "QBasicMutex_unlock".}
 proc fcQBasicMutex_tryLock(self: pointer, ): bool {.importc: "QBasicMutex_tryLock".}
 proc fcQBasicMutex_tryLock2(self: pointer, ): bool {.importc: "QBasicMutex_tryLock2".}
+proc fcQBasicMutex_new(): ptr cQBasicMutex {.importc: "QBasicMutex_new".}
 proc fcQBasicMutex_delete(self: pointer) {.importc: "QBasicMutex_delete".}
-proc fcQMutex_new(): ptr cQMutex {.importc: "QMutex_new".}
 proc fcQMutex_tryLock(self: pointer, ): bool {.importc: "QMutex_tryLock".}
 proc fcQMutex_tryLockWithTimeout(self: pointer, timeout: cint): bool {.importc: "QMutex_tryLockWithTimeout".}
+proc fcQMutex_new(): ptr cQMutex {.importc: "QMutex_new".}
 proc fcQMutex_delete(self: pointer) {.importc: "QMutex_delete".}
-proc fcQRecursiveMutex_new(): ptr cQRecursiveMutex {.importc: "QRecursiveMutex_new".}
 proc fcQRecursiveMutex_lock(self: pointer, ): void {.importc: "QRecursiveMutex_lock".}
 proc fcQRecursiveMutex_tryLock(self: pointer, ): bool {.importc: "QRecursiveMutex_tryLock".}
 proc fcQRecursiveMutex_unlock(self: pointer, ): void {.importc: "QRecursiveMutex_unlock".}
 proc fcQRecursiveMutex_tryLock2(self: pointer, ): bool {.importc: "QRecursiveMutex_tryLock2".}
 proc fcQRecursiveMutex_tryLock1(self: pointer, timeout: cint): bool {.importc: "QRecursiveMutex_tryLock1".}
+proc fcQRecursiveMutex_new(): ptr cQRecursiveMutex {.importc: "QRecursiveMutex_new".}
 proc fcQRecursiveMutex_delete(self: pointer) {.importc: "QRecursiveMutex_delete".}
-
-
-func init*(T: type gen_qmutex_types.QBasicMutex, h: ptr cQBasicMutex): gen_qmutex_types.QBasicMutex =
-  T(h: h)
-proc create*(T: type gen_qmutex_types.QBasicMutex, ): gen_qmutex_types.QBasicMutex =
-  gen_qmutex_types.QBasicMutex.init(fcQBasicMutex_new())
 
 proc lock*(self: gen_qmutex_types.QBasicMutex, ): void =
   fcQBasicMutex_lock(self.h)
@@ -78,28 +72,22 @@ proc tryLock*(self: gen_qmutex_types.QBasicMutex, ): bool =
 proc tryLock2*(self: gen_qmutex_types.QBasicMutex, ): bool =
   fcQBasicMutex_tryLock2(self.h)
 
+proc create*(T: type gen_qmutex_types.QBasicMutex): gen_qmutex_types.QBasicMutex =
+  gen_qmutex_types.QBasicMutex(h: fcQBasicMutex_new())
+
 proc delete*(self: gen_qmutex_types.QBasicMutex) =
   fcQBasicMutex_delete(self.h)
-
-func init*(T: type gen_qmutex_types.QMutex, h: ptr cQMutex): gen_qmutex_types.QMutex =
-  T(h: h)
-proc create*(T: type gen_qmutex_types.QMutex, ): gen_qmutex_types.QMutex =
-  gen_qmutex_types.QMutex.init(fcQMutex_new())
-
 proc tryLock*(self: gen_qmutex_types.QMutex, ): bool =
   fcQMutex_tryLock(self.h)
 
 proc tryLock*(self: gen_qmutex_types.QMutex, timeout: cint): bool =
   fcQMutex_tryLockWithTimeout(self.h, timeout)
 
+proc create*(T: type gen_qmutex_types.QMutex): gen_qmutex_types.QMutex =
+  gen_qmutex_types.QMutex(h: fcQMutex_new())
+
 proc delete*(self: gen_qmutex_types.QMutex) =
   fcQMutex_delete(self.h)
-
-func init*(T: type gen_qmutex_types.QRecursiveMutex, h: ptr cQRecursiveMutex): gen_qmutex_types.QRecursiveMutex =
-  T(h: h)
-proc create*(T: type gen_qmutex_types.QRecursiveMutex, ): gen_qmutex_types.QRecursiveMutex =
-  gen_qmutex_types.QRecursiveMutex.init(fcQRecursiveMutex_new())
-
 proc lock*(self: gen_qmutex_types.QRecursiveMutex, ): void =
   fcQRecursiveMutex_lock(self.h)
 
@@ -114,6 +102,9 @@ proc tryLock2*(self: gen_qmutex_types.QRecursiveMutex, ): bool =
 
 proc tryLock*(self: gen_qmutex_types.QRecursiveMutex, timeout: cint): bool =
   fcQRecursiveMutex_tryLock1(self.h, timeout)
+
+proc create*(T: type gen_qmutex_types.QRecursiveMutex): gen_qmutex_types.QRecursiveMutex =
+  gen_qmutex_types.QRecursiveMutex(h: fcQRecursiveMutex_new())
 
 proc delete*(self: gen_qmutex_types.QRecursiveMutex) =
   fcQRecursiveMutex_delete(self.h)

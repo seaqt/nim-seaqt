@@ -52,15 +52,6 @@ export
 
 type cQCursor*{.exportc: "QCursor", incompleteStruct.} = object
 
-proc fcQCursor_new(): ptr cQCursor {.importc: "QCursor_new".}
-proc fcQCursor_new2(shape: cint): ptr cQCursor {.importc: "QCursor_new2".}
-proc fcQCursor_new3(bitmap: pointer, mask: pointer): ptr cQCursor {.importc: "QCursor_new3".}
-proc fcQCursor_new4(pixmap: pointer): ptr cQCursor {.importc: "QCursor_new4".}
-proc fcQCursor_new5(cursor: pointer): ptr cQCursor {.importc: "QCursor_new5".}
-proc fcQCursor_new6(bitmap: pointer, mask: pointer, hotX: cint): ptr cQCursor {.importc: "QCursor_new6".}
-proc fcQCursor_new7(bitmap: pointer, mask: pointer, hotX: cint, hotY: cint): ptr cQCursor {.importc: "QCursor_new7".}
-proc fcQCursor_new8(pixmap: pointer, hotX: cint): ptr cQCursor {.importc: "QCursor_new8".}
-proc fcQCursor_new9(pixmap: pointer, hotX: cint, hotY: cint): ptr cQCursor {.importc: "QCursor_new9".}
 proc fcQCursor_operatorAssign(self: pointer, cursor: pointer): void {.importc: "QCursor_operatorAssign".}
 proc fcQCursor_swap(self: pointer, other: pointer): void {.importc: "QCursor_swap".}
 proc fcQCursor_ToQVariant(self: pointer, ): pointer {.importc: "QCursor_ToQVariant".}
@@ -78,37 +69,16 @@ proc fcQCursor_setPos(x: cint, y: cint): void {.importc: "QCursor_setPos".}
 proc fcQCursor_setPos2(screen: pointer, x: cint, y: cint): void {.importc: "QCursor_setPos2".}
 proc fcQCursor_setPosWithQPoint(p: pointer): void {.importc: "QCursor_setPosWithQPoint".}
 proc fcQCursor_setPos3(screen: pointer, p: pointer): void {.importc: "QCursor_setPos3".}
+proc fcQCursor_new(): ptr cQCursor {.importc: "QCursor_new".}
+proc fcQCursor_new2(shape: cint): ptr cQCursor {.importc: "QCursor_new2".}
+proc fcQCursor_new3(bitmap: pointer, mask: pointer): ptr cQCursor {.importc: "QCursor_new3".}
+proc fcQCursor_new4(pixmap: pointer): ptr cQCursor {.importc: "QCursor_new4".}
+proc fcQCursor_new5(cursor: pointer): ptr cQCursor {.importc: "QCursor_new5".}
+proc fcQCursor_new6(bitmap: pointer, mask: pointer, hotX: cint): ptr cQCursor {.importc: "QCursor_new6".}
+proc fcQCursor_new7(bitmap: pointer, mask: pointer, hotX: cint, hotY: cint): ptr cQCursor {.importc: "QCursor_new7".}
+proc fcQCursor_new8(pixmap: pointer, hotX: cint): ptr cQCursor {.importc: "QCursor_new8".}
+proc fcQCursor_new9(pixmap: pointer, hotX: cint, hotY: cint): ptr cQCursor {.importc: "QCursor_new9".}
 proc fcQCursor_delete(self: pointer) {.importc: "QCursor_delete".}
-
-
-func init*(T: type gen_qcursor_types.QCursor, h: ptr cQCursor): gen_qcursor_types.QCursor =
-  T(h: h)
-proc create*(T: type gen_qcursor_types.QCursor, ): gen_qcursor_types.QCursor =
-  gen_qcursor_types.QCursor.init(fcQCursor_new())
-
-proc create*(T: type gen_qcursor_types.QCursor, shape: cint): gen_qcursor_types.QCursor =
-  gen_qcursor_types.QCursor.init(fcQCursor_new2(cint(shape)))
-
-proc create*(T: type gen_qcursor_types.QCursor, bitmap: gen_qbitmap_types.QBitmap, mask: gen_qbitmap_types.QBitmap): gen_qcursor_types.QCursor =
-  gen_qcursor_types.QCursor.init(fcQCursor_new3(bitmap.h, mask.h))
-
-proc create*(T: type gen_qcursor_types.QCursor, pixmap: gen_qpixmap_types.QPixmap): gen_qcursor_types.QCursor =
-  gen_qcursor_types.QCursor.init(fcQCursor_new4(pixmap.h))
-
-proc create*(T: type gen_qcursor_types.QCursor, cursor: gen_qcursor_types.QCursor): gen_qcursor_types.QCursor =
-  gen_qcursor_types.QCursor.init(fcQCursor_new5(cursor.h))
-
-proc create*(T: type gen_qcursor_types.QCursor, bitmap: gen_qbitmap_types.QBitmap, mask: gen_qbitmap_types.QBitmap, hotX: cint): gen_qcursor_types.QCursor =
-  gen_qcursor_types.QCursor.init(fcQCursor_new6(bitmap.h, mask.h, hotX))
-
-proc create*(T: type gen_qcursor_types.QCursor, bitmap: gen_qbitmap_types.QBitmap, mask: gen_qbitmap_types.QBitmap, hotX: cint, hotY: cint): gen_qcursor_types.QCursor =
-  gen_qcursor_types.QCursor.init(fcQCursor_new7(bitmap.h, mask.h, hotX, hotY))
-
-proc create*(T: type gen_qcursor_types.QCursor, pixmap: gen_qpixmap_types.QPixmap, hotX: cint): gen_qcursor_types.QCursor =
-  gen_qcursor_types.QCursor.init(fcQCursor_new8(pixmap.h, hotX))
-
-proc create*(T: type gen_qcursor_types.QCursor, pixmap: gen_qpixmap_types.QPixmap, hotX: cint, hotY: cint): gen_qcursor_types.QCursor =
-  gen_qcursor_types.QCursor.init(fcQCursor_new9(pixmap.h, hotX, hotY))
 
 proc operatorAssign*(self: gen_qcursor_types.QCursor, cursor: gen_qcursor_types.QCursor): void =
   fcQCursor_operatorAssign(self.h, cursor.h)
@@ -160,6 +130,41 @@ proc setPos*(_: type gen_qcursor_types.QCursor, p: gen_qpoint_types.QPoint): voi
 
 proc setPos*(_: type gen_qcursor_types.QCursor, screen: gen_qscreen_types.QScreen, p: gen_qpoint_types.QPoint): void =
   fcQCursor_setPos3(screen.h, p.h)
+
+proc create*(T: type gen_qcursor_types.QCursor): gen_qcursor_types.QCursor =
+  gen_qcursor_types.QCursor(h: fcQCursor_new())
+
+proc create*(T: type gen_qcursor_types.QCursor,
+    shape: cint): gen_qcursor_types.QCursor =
+  gen_qcursor_types.QCursor(h: fcQCursor_new2(cint(shape)))
+
+proc create*(T: type gen_qcursor_types.QCursor,
+    bitmap: gen_qbitmap_types.QBitmap, mask: gen_qbitmap_types.QBitmap): gen_qcursor_types.QCursor =
+  gen_qcursor_types.QCursor(h: fcQCursor_new3(bitmap.h, mask.h))
+
+proc create*(T: type gen_qcursor_types.QCursor,
+    pixmap: gen_qpixmap_types.QPixmap): gen_qcursor_types.QCursor =
+  gen_qcursor_types.QCursor(h: fcQCursor_new4(pixmap.h))
+
+proc create*(T: type gen_qcursor_types.QCursor,
+    cursor: gen_qcursor_types.QCursor): gen_qcursor_types.QCursor =
+  gen_qcursor_types.QCursor(h: fcQCursor_new5(cursor.h))
+
+proc create*(T: type gen_qcursor_types.QCursor,
+    bitmap: gen_qbitmap_types.QBitmap, mask: gen_qbitmap_types.QBitmap, hotX: cint): gen_qcursor_types.QCursor =
+  gen_qcursor_types.QCursor(h: fcQCursor_new6(bitmap.h, mask.h, hotX))
+
+proc create*(T: type gen_qcursor_types.QCursor,
+    bitmap: gen_qbitmap_types.QBitmap, mask: gen_qbitmap_types.QBitmap, hotX: cint, hotY: cint): gen_qcursor_types.QCursor =
+  gen_qcursor_types.QCursor(h: fcQCursor_new7(bitmap.h, mask.h, hotX, hotY))
+
+proc create*(T: type gen_qcursor_types.QCursor,
+    pixmap: gen_qpixmap_types.QPixmap, hotX: cint): gen_qcursor_types.QCursor =
+  gen_qcursor_types.QCursor(h: fcQCursor_new8(pixmap.h, hotX))
+
+proc create*(T: type gen_qcursor_types.QCursor,
+    pixmap: gen_qpixmap_types.QPixmap, hotX: cint, hotY: cint): gen_qcursor_types.QCursor =
+  gen_qcursor_types.QCursor(h: fcQCursor_new9(pixmap.h, hotX, hotY))
 
 proc delete*(self: gen_qcursor_types.QCursor) =
   fcQCursor_delete(self.h)

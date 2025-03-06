@@ -44,11 +44,6 @@ export
 
 type cQAnyStringView*{.exportc: "QAnyStringView", incompleteStruct.} = object
 
-proc fcQAnyStringView_new(): ptr cQAnyStringView {.importc: "QAnyStringView_new".}
-proc fcQAnyStringView_new2(str: struct_miqt_string): ptr cQAnyStringView {.importc: "QAnyStringView_new2".}
-proc fcQAnyStringView_new3(str: struct_miqt_string): ptr cQAnyStringView {.importc: "QAnyStringView_new3".}
-proc fcQAnyStringView_new4(c: pointer): ptr cQAnyStringView {.importc: "QAnyStringView_new4".}
-proc fcQAnyStringView_new5(param1: pointer): ptr cQAnyStringView {.importc: "QAnyStringView_new5".}
 proc fcQAnyStringView_toString(self: pointer, ): struct_miqt_string {.importc: "QAnyStringView_toString".}
 proc fcQAnyStringView_size(self: pointer, ): int64 {.importc: "QAnyStringView_size".}
 proc fcQAnyStringView_data(self: pointer, ): pointer {.importc: "QAnyStringView_data".}
@@ -62,25 +57,12 @@ proc fcQAnyStringView_isNull(self: pointer, ): bool {.importc: "QAnyStringView_i
 proc fcQAnyStringView_isEmpty(self: pointer, ): bool {.importc: "QAnyStringView_isEmpty".}
 proc fcQAnyStringView_length(self: pointer, ): int64 {.importc: "QAnyStringView_length".}
 proc fcQAnyStringView_compare3(lhs: pointer, rhs: pointer, cs: cint): cint {.importc: "QAnyStringView_compare3".}
+proc fcQAnyStringView_new(): ptr cQAnyStringView {.importc: "QAnyStringView_new".}
+proc fcQAnyStringView_new2(str: struct_miqt_string): ptr cQAnyStringView {.importc: "QAnyStringView_new2".}
+proc fcQAnyStringView_new3(str: struct_miqt_string): ptr cQAnyStringView {.importc: "QAnyStringView_new3".}
+proc fcQAnyStringView_new4(c: pointer): ptr cQAnyStringView {.importc: "QAnyStringView_new4".}
+proc fcQAnyStringView_new5(param1: pointer): ptr cQAnyStringView {.importc: "QAnyStringView_new5".}
 proc fcQAnyStringView_delete(self: pointer) {.importc: "QAnyStringView_delete".}
-
-
-func init*(T: type gen_qanystringview_types.QAnyStringView, h: ptr cQAnyStringView): gen_qanystringview_types.QAnyStringView =
-  T(h: h)
-proc create*(T: type gen_qanystringview_types.QAnyStringView, ): gen_qanystringview_types.QAnyStringView =
-  gen_qanystringview_types.QAnyStringView.init(fcQAnyStringView_new())
-
-proc create*(T: type gen_qanystringview_types.QAnyStringView, str: seq[byte]): gen_qanystringview_types.QAnyStringView =
-  gen_qanystringview_types.QAnyStringView.init(fcQAnyStringView_new2(struct_miqt_string(data: cast[cstring](if len(str) == 0: nil else: unsafeAddr str[0]), len: csize_t(len(str)))))
-
-proc create*(T: type gen_qanystringview_types.QAnyStringView, str: string): gen_qanystringview_types.QAnyStringView =
-  gen_qanystringview_types.QAnyStringView.init(fcQAnyStringView_new3(struct_miqt_string(data: str, len: csize_t(len(str)))))
-
-proc create*(T: type gen_qanystringview_types.QAnyStringView, c: gen_qchar_types.QChar): gen_qanystringview_types.QAnyStringView =
-  gen_qanystringview_types.QAnyStringView.init(fcQAnyStringView_new4(c.h))
-
-proc create*(T: type gen_qanystringview_types.QAnyStringView, param1: gen_qanystringview_types.QAnyStringView): gen_qanystringview_types.QAnyStringView =
-  gen_qanystringview_types.QAnyStringView.init(fcQAnyStringView_new5(param1.h))
 
 proc toString*(self: gen_qanystringview_types.QAnyStringView, ): string =
   let v_ms = fcQAnyStringView_toString(self.h)
@@ -123,6 +105,25 @@ proc length*(self: gen_qanystringview_types.QAnyStringView, ): int64 =
 
 proc compare*(_: type gen_qanystringview_types.QAnyStringView, lhs: gen_qanystringview_types.QAnyStringView, rhs: gen_qanystringview_types.QAnyStringView, cs: cint): cint =
   fcQAnyStringView_compare3(lhs.h, rhs.h, cint(cs))
+
+proc create*(T: type gen_qanystringview_types.QAnyStringView): gen_qanystringview_types.QAnyStringView =
+  gen_qanystringview_types.QAnyStringView(h: fcQAnyStringView_new())
+
+proc create*(T: type gen_qanystringview_types.QAnyStringView,
+    str: seq[byte]): gen_qanystringview_types.QAnyStringView =
+  gen_qanystringview_types.QAnyStringView(h: fcQAnyStringView_new2(struct_miqt_string(data: cast[cstring](if len(str) == 0: nil else: unsafeAddr str[0]), len: csize_t(len(str)))))
+
+proc create*(T: type gen_qanystringview_types.QAnyStringView,
+    str: string): gen_qanystringview_types.QAnyStringView =
+  gen_qanystringview_types.QAnyStringView(h: fcQAnyStringView_new3(struct_miqt_string(data: str, len: csize_t(len(str)))))
+
+proc create*(T: type gen_qanystringview_types.QAnyStringView,
+    c: gen_qchar_types.QChar): gen_qanystringview_types.QAnyStringView =
+  gen_qanystringview_types.QAnyStringView(h: fcQAnyStringView_new4(c.h))
+
+proc create*(T: type gen_qanystringview_types.QAnyStringView,
+    param1: gen_qanystringview_types.QAnyStringView): gen_qanystringview_types.QAnyStringView =
+  gen_qanystringview_types.QAnyStringView(h: fcQAnyStringView_new5(param1.h))
 
 proc delete*(self: gen_qanystringview_types.QAnyStringView) =
   fcQAnyStringView_delete(self.h)

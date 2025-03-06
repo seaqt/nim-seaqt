@@ -40,18 +40,14 @@ export gen_qqmlparserstatus_types
 
 type cQQmlParserStatus*{.exportc: "QQmlParserStatus", incompleteStruct.} = object
 
-proc fcQQmlParserStatus_new(): ptr cQQmlParserStatus {.importc: "QQmlParserStatus_new".}
 proc fcQQmlParserStatus_classBegin(self: pointer, ): void {.importc: "QQmlParserStatus_classBegin".}
 proc fcQQmlParserStatus_componentComplete(self: pointer, ): void {.importc: "QQmlParserStatus_componentComplete".}
-proc fcQQmlParserStatus_override_virtual_classBegin(self: pointer, slot: int) {.importc: "QQmlParserStatus_override_virtual_classBegin".}
-proc fcQQmlParserStatus_override_virtual_componentComplete(self: pointer, slot: int) {.importc: "QQmlParserStatus_override_virtual_componentComplete".}
+type cQQmlParserStatusVTable = object
+  destructor*: proc(vtbl: ptr cQQmlParserStatusVTable, self: ptr cQQmlParserStatus) {.cdecl, raises:[], gcsafe.}
+  classBegin*: proc(vtbl, self: pointer, ): void {.cdecl, raises: [], gcsafe.}
+  componentComplete*: proc(vtbl, self: pointer, ): void {.cdecl, raises: [], gcsafe.}
+proc fcQQmlParserStatus_new(vtbl: pointer, ): ptr cQQmlParserStatus {.importc: "QQmlParserStatus_new".}
 proc fcQQmlParserStatus_delete(self: pointer) {.importc: "QQmlParserStatus_delete".}
-
-
-func init*(T: type gen_qqmlparserstatus_types.QQmlParserStatus, h: ptr cQQmlParserStatus): gen_qqmlparserstatus_types.QQmlParserStatus =
-  T(h: h)
-proc create*(T: type gen_qqmlparserstatus_types.QQmlParserStatus, ): gen_qqmlparserstatus_types.QQmlParserStatus =
-  gen_qqmlparserstatus_types.QQmlParserStatus.init(fcQQmlParserStatus_new())
 
 proc classBegin*(self: gen_qqmlparserstatus_types.QQmlParserStatus, ): void =
   fcQQmlParserStatus_classBegin(self.h)
@@ -59,29 +55,34 @@ proc classBegin*(self: gen_qqmlparserstatus_types.QQmlParserStatus, ): void =
 proc componentComplete*(self: gen_qqmlparserstatus_types.QQmlParserStatus, ): void =
   fcQQmlParserStatus_componentComplete(self.h)
 
-type QQmlParserStatusclassBeginProc* = proc(): void
-proc onclassBegin*(self: gen_qqmlparserstatus_types.QQmlParserStatus, slot: QQmlParserStatusclassBeginProc) =
-  # TODO check subclass
-  var tmp = new QQmlParserStatusclassBeginProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQQmlParserStatus_override_virtual_classBegin(self.h, cast[int](addr tmp[]))
+type QQmlParserStatusclassBeginProc* = proc(self: QQmlParserStatus): void {.raises: [], gcsafe.}
+type QQmlParserStatuscomponentCompleteProc* = proc(self: QQmlParserStatus): void {.raises: [], gcsafe.}
+type QQmlParserStatusVTable* = object
+  vtbl: cQQmlParserStatusVTable
+  classBegin*: QQmlParserStatusclassBeginProc
+  componentComplete*: QQmlParserStatuscomponentCompleteProc
+proc miqt_exec_callback_cQQmlParserStatus_classBegin(vtbl: pointer, self: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QQmlParserStatusVTable](vtbl)
+  let self = QQmlParserStatus(h: self)
+  vtbl[].classBegin(self)
 
-proc miqt_exec_callback_QQmlParserStatus_classBegin(self: ptr cQQmlParserStatus, slot: int): void {.exportc: "miqt_exec_callback_QQmlParserStatus_classBegin ".} =
-  var nimfunc = cast[ptr QQmlParserStatusclassBeginProc](cast[pointer](slot))
+proc miqt_exec_callback_cQQmlParserStatus_componentComplete(vtbl: pointer, self: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QQmlParserStatusVTable](vtbl)
+  let self = QQmlParserStatus(h: self)
+  vtbl[].componentComplete(self)
 
-  nimfunc[]()
-type QQmlParserStatuscomponentCompleteProc* = proc(): void
-proc oncomponentComplete*(self: gen_qqmlparserstatus_types.QQmlParserStatus, slot: QQmlParserStatuscomponentCompleteProc) =
-  # TODO check subclass
-  var tmp = new QQmlParserStatuscomponentCompleteProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQQmlParserStatus_override_virtual_componentComplete(self.h, cast[int](addr tmp[]))
+proc create*(T: type gen_qqmlparserstatus_types.QQmlParserStatus,
+    vtbl: ref QQmlParserStatusVTable = nil): gen_qqmlparserstatus_types.QQmlParserStatus =
+  let vtbl = if vtbl == nil: new QQmlParserStatusVTable else: vtbl
+  GC_ref(vtbl)
+  vtbl.vtbl.destructor = proc(vtbl: ptr cQQmlParserStatusVTable, _: ptr cQQmlParserStatus) {.cdecl.} =
+    let vtbl = cast[ref QQmlParserStatusVTable](vtbl)
+    GC_unref(vtbl)
+  if not isNil(vtbl.classBegin):
+    vtbl[].vtbl.classBegin = miqt_exec_callback_cQQmlParserStatus_classBegin
+  if not isNil(vtbl.componentComplete):
+    vtbl[].vtbl.componentComplete = miqt_exec_callback_cQQmlParserStatus_componentComplete
+  gen_qqmlparserstatus_types.QQmlParserStatus(h: fcQQmlParserStatus_new(addr(vtbl[]), ))
 
-proc miqt_exec_callback_QQmlParserStatus_componentComplete(self: ptr cQQmlParserStatus, slot: int): void {.exportc: "miqt_exec_callback_QQmlParserStatus_componentComplete ".} =
-  var nimfunc = cast[ptr QQmlParserStatuscomponentCompleteProc](cast[pointer](slot))
-
-  nimfunc[]()
 proc delete*(self: gen_qqmlparserstatus_types.QQmlParserStatus) =
   fcQQmlParserStatus_delete(self.h)

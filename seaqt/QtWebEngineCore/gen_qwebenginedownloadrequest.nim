@@ -142,9 +142,6 @@ proc fcQWebEngineDownloadRequest_tr3(s: cstring, c: cstring, n: cint): struct_mi
 proc fcQWebEngineDownloadRequest_staticMetaObject(): pointer {.importc: "QWebEngineDownloadRequest_staticMetaObject".}
 proc fcQWebEngineDownloadRequest_delete(self: pointer) {.importc: "QWebEngineDownloadRequest_delete".}
 
-
-func init*(T: type gen_qwebenginedownloadrequest_types.QWebEngineDownloadRequest, h: ptr cQWebEngineDownloadRequest): gen_qwebenginedownloadrequest_types.QWebEngineDownloadRequest =
-  T(h: h)
 proc metaObject*(self: gen_qwebenginedownloadrequest_types.QWebEngineDownloadRequest, ): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQWebEngineDownloadRequest_metaObject(self.h))
 
@@ -248,7 +245,7 @@ proc stateChanged*(self: gen_qwebenginedownloadrequest_types.QWebEngineDownloadR
   fcQWebEngineDownloadRequest_stateChanged(self.h, cint(state))
 
 type QWebEngineDownloadRequeststateChangedSlot* = proc(state: cint)
-proc miqt_exec_callback_QWebEngineDownloadRequest_stateChanged(slot: int, state: cint) {.exportc.} =
+proc miqt_exec_callback_cQWebEngineDownloadRequest_stateChanged(slot: int, state: cint) {.exportc: "miqt_exec_callback_QWebEngineDownloadRequest_stateChanged".} =
   let nimfunc = cast[ptr QWebEngineDownloadRequeststateChangedSlot](cast[pointer](slot))
   let slotval1 = cint(state)
 
@@ -264,7 +261,7 @@ proc savePageFormatChanged*(self: gen_qwebenginedownloadrequest_types.QWebEngine
   fcQWebEngineDownloadRequest_savePageFormatChanged(self.h)
 
 type QWebEngineDownloadRequestsavePageFormatChangedSlot* = proc()
-proc miqt_exec_callback_QWebEngineDownloadRequest_savePageFormatChanged(slot: int) {.exportc.} =
+proc miqt_exec_callback_cQWebEngineDownloadRequest_savePageFormatChanged(slot: int) {.exportc: "miqt_exec_callback_QWebEngineDownloadRequest_savePageFormatChanged".} =
   let nimfunc = cast[ptr QWebEngineDownloadRequestsavePageFormatChangedSlot](cast[pointer](slot))
   nimfunc[]()
 
@@ -278,7 +275,7 @@ proc receivedBytesChanged*(self: gen_qwebenginedownloadrequest_types.QWebEngineD
   fcQWebEngineDownloadRequest_receivedBytesChanged(self.h)
 
 type QWebEngineDownloadRequestreceivedBytesChangedSlot* = proc()
-proc miqt_exec_callback_QWebEngineDownloadRequest_receivedBytesChanged(slot: int) {.exportc.} =
+proc miqt_exec_callback_cQWebEngineDownloadRequest_receivedBytesChanged(slot: int) {.exportc: "miqt_exec_callback_QWebEngineDownloadRequest_receivedBytesChanged".} =
   let nimfunc = cast[ptr QWebEngineDownloadRequestreceivedBytesChangedSlot](cast[pointer](slot))
   nimfunc[]()
 
@@ -292,7 +289,7 @@ proc totalBytesChanged*(self: gen_qwebenginedownloadrequest_types.QWebEngineDown
   fcQWebEngineDownloadRequest_totalBytesChanged(self.h)
 
 type QWebEngineDownloadRequesttotalBytesChangedSlot* = proc()
-proc miqt_exec_callback_QWebEngineDownloadRequest_totalBytesChanged(slot: int) {.exportc.} =
+proc miqt_exec_callback_cQWebEngineDownloadRequest_totalBytesChanged(slot: int) {.exportc: "miqt_exec_callback_QWebEngineDownloadRequest_totalBytesChanged".} =
   let nimfunc = cast[ptr QWebEngineDownloadRequesttotalBytesChangedSlot](cast[pointer](slot))
   nimfunc[]()
 
@@ -306,7 +303,7 @@ proc interruptReasonChanged*(self: gen_qwebenginedownloadrequest_types.QWebEngin
   fcQWebEngineDownloadRequest_interruptReasonChanged(self.h)
 
 type QWebEngineDownloadRequestinterruptReasonChangedSlot* = proc()
-proc miqt_exec_callback_QWebEngineDownloadRequest_interruptReasonChanged(slot: int) {.exportc.} =
+proc miqt_exec_callback_cQWebEngineDownloadRequest_interruptReasonChanged(slot: int) {.exportc: "miqt_exec_callback_QWebEngineDownloadRequest_interruptReasonChanged".} =
   let nimfunc = cast[ptr QWebEngineDownloadRequestinterruptReasonChangedSlot](cast[pointer](slot))
   nimfunc[]()
 
@@ -320,7 +317,7 @@ proc isFinishedChanged*(self: gen_qwebenginedownloadrequest_types.QWebEngineDown
   fcQWebEngineDownloadRequest_isFinishedChanged(self.h)
 
 type QWebEngineDownloadRequestisFinishedChangedSlot* = proc()
-proc miqt_exec_callback_QWebEngineDownloadRequest_isFinishedChanged(slot: int) {.exportc.} =
+proc miqt_exec_callback_cQWebEngineDownloadRequest_isFinishedChanged(slot: int) {.exportc: "miqt_exec_callback_QWebEngineDownloadRequest_isFinishedChanged".} =
   let nimfunc = cast[ptr QWebEngineDownloadRequestisFinishedChangedSlot](cast[pointer](slot))
   nimfunc[]()
 
@@ -334,7 +331,7 @@ proc isPausedChanged*(self: gen_qwebenginedownloadrequest_types.QWebEngineDownlo
   fcQWebEngineDownloadRequest_isPausedChanged(self.h)
 
 type QWebEngineDownloadRequestisPausedChangedSlot* = proc()
-proc miqt_exec_callback_QWebEngineDownloadRequest_isPausedChanged(slot: int) {.exportc.} =
+proc miqt_exec_callback_cQWebEngineDownloadRequest_isPausedChanged(slot: int) {.exportc: "miqt_exec_callback_QWebEngineDownloadRequest_isPausedChanged".} =
   let nimfunc = cast[ptr QWebEngineDownloadRequestisPausedChangedSlot](cast[pointer](slot))
   nimfunc[]()
 
@@ -348,7 +345,7 @@ proc downloadDirectoryChanged*(self: gen_qwebenginedownloadrequest_types.QWebEng
   fcQWebEngineDownloadRequest_downloadDirectoryChanged(self.h)
 
 type QWebEngineDownloadRequestdownloadDirectoryChangedSlot* = proc()
-proc miqt_exec_callback_QWebEngineDownloadRequest_downloadDirectoryChanged(slot: int) {.exportc.} =
+proc miqt_exec_callback_cQWebEngineDownloadRequest_downloadDirectoryChanged(slot: int) {.exportc: "miqt_exec_callback_QWebEngineDownloadRequest_downloadDirectoryChanged".} =
   let nimfunc = cast[ptr QWebEngineDownloadRequestdownloadDirectoryChangedSlot](cast[pointer](slot))
   nimfunc[]()
 
@@ -362,7 +359,7 @@ proc downloadFileNameChanged*(self: gen_qwebenginedownloadrequest_types.QWebEngi
   fcQWebEngineDownloadRequest_downloadFileNameChanged(self.h)
 
 type QWebEngineDownloadRequestdownloadFileNameChangedSlot* = proc()
-proc miqt_exec_callback_QWebEngineDownloadRequest_downloadFileNameChanged(slot: int) {.exportc.} =
+proc miqt_exec_callback_cQWebEngineDownloadRequest_downloadFileNameChanged(slot: int) {.exportc: "miqt_exec_callback_QWebEngineDownloadRequest_downloadFileNameChanged".} =
   let nimfunc = cast[ptr QWebEngineDownloadRequestdownloadFileNameChangedSlot](cast[pointer](slot))
   nimfunc[]()
 

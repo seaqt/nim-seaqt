@@ -76,9 +76,6 @@ export
 type cQVideoFrame*{.exportc: "QVideoFrame", incompleteStruct.} = object
 type cQVideoFramePaintOptions*{.exportc: "QVideoFrame__PaintOptions", incompleteStruct.} = object
 
-proc fcQVideoFrame_new(): ptr cQVideoFrame {.importc: "QVideoFrame_new".}
-proc fcQVideoFrame_new2(format: pointer): ptr cQVideoFrame {.importc: "QVideoFrame_new2".}
-proc fcQVideoFrame_new3(other: pointer): ptr cQVideoFrame {.importc: "QVideoFrame_new3".}
 proc fcQVideoFrame_swap(self: pointer, other: pointer): void {.importc: "QVideoFrame_swap".}
 proc fcQVideoFrame_operatorAssign(self: pointer, other: pointer): void {.importc: "QVideoFrame_operatorAssign".}
 proc fcQVideoFrame_operatorEqual(self: pointer, other: pointer): bool {.importc: "QVideoFrame_operatorEqual".}
@@ -113,20 +110,11 @@ proc fcQVideoFrame_toImage(self: pointer, ): pointer {.importc: "QVideoFrame_toI
 proc fcQVideoFrame_subtitleText(self: pointer, ): struct_miqt_string {.importc: "QVideoFrame_subtitleText".}
 proc fcQVideoFrame_setSubtitleText(self: pointer, text: struct_miqt_string): void {.importc: "QVideoFrame_setSubtitleText".}
 proc fcQVideoFrame_paint(self: pointer, painter: pointer, rect: pointer, options: pointer): void {.importc: "QVideoFrame_paint".}
+proc fcQVideoFrame_new(): ptr cQVideoFrame {.importc: "QVideoFrame_new".}
+proc fcQVideoFrame_new2(format: pointer): ptr cQVideoFrame {.importc: "QVideoFrame_new2".}
+proc fcQVideoFrame_new3(other: pointer): ptr cQVideoFrame {.importc: "QVideoFrame_new3".}
 proc fcQVideoFrame_delete(self: pointer) {.importc: "QVideoFrame_delete".}
 proc fcQVideoFramePaintOptions_delete(self: pointer) {.importc: "QVideoFrame__PaintOptions_delete".}
-
-
-func init*(T: type gen_qvideoframe_types.QVideoFrame, h: ptr cQVideoFrame): gen_qvideoframe_types.QVideoFrame =
-  T(h: h)
-proc create*(T: type gen_qvideoframe_types.QVideoFrame, ): gen_qvideoframe_types.QVideoFrame =
-  gen_qvideoframe_types.QVideoFrame.init(fcQVideoFrame_new())
-
-proc create*(T: type gen_qvideoframe_types.QVideoFrame, format: gen_qvideoframeformat_types.QVideoFrameFormat): gen_qvideoframe_types.QVideoFrame =
-  gen_qvideoframe_types.QVideoFrame.init(fcQVideoFrame_new2(format.h))
-
-proc create*(T: type gen_qvideoframe_types.QVideoFrame, other: gen_qvideoframe_types.QVideoFrame): gen_qvideoframe_types.QVideoFrame =
-  gen_qvideoframe_types.QVideoFrame.init(fcQVideoFrame_new3(other.h))
 
 proc swap*(self: gen_qvideoframe_types.QVideoFrame, other: gen_qvideoframe_types.QVideoFrame): void =
   fcQVideoFrame_swap(self.h, other.h)
@@ -233,10 +221,18 @@ proc setSubtitleText*(self: gen_qvideoframe_types.QVideoFrame, text: string): vo
 proc paint*(self: gen_qvideoframe_types.QVideoFrame, painter: gen_qpainter_types.QPainter, rect: gen_qrect_types.QRectF, options: gen_qvideoframe_types.QVideoFramePaintOptions): void =
   fcQVideoFrame_paint(self.h, painter.h, rect.h, options.h)
 
+proc create*(T: type gen_qvideoframe_types.QVideoFrame): gen_qvideoframe_types.QVideoFrame =
+  gen_qvideoframe_types.QVideoFrame(h: fcQVideoFrame_new())
+
+proc create*(T: type gen_qvideoframe_types.QVideoFrame,
+    format: gen_qvideoframeformat_types.QVideoFrameFormat): gen_qvideoframe_types.QVideoFrame =
+  gen_qvideoframe_types.QVideoFrame(h: fcQVideoFrame_new2(format.h))
+
+proc create*(T: type gen_qvideoframe_types.QVideoFrame,
+    other: gen_qvideoframe_types.QVideoFrame): gen_qvideoframe_types.QVideoFrame =
+  gen_qvideoframe_types.QVideoFrame(h: fcQVideoFrame_new3(other.h))
+
 proc delete*(self: gen_qvideoframe_types.QVideoFrame) =
   fcQVideoFrame_delete(self.h)
-
-func init*(T: type gen_qvideoframe_types.QVideoFramePaintOptions, h: ptr cQVideoFramePaintOptions): gen_qvideoframe_types.QVideoFramePaintOptions =
-  T(h: h)
 proc delete*(self: gen_qvideoframe_types.QVideoFramePaintOptions) =
   fcQVideoFramePaintOptions_delete(self.h)

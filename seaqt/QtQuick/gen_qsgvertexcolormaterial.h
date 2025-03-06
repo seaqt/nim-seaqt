@@ -26,16 +26,19 @@ typedef struct QSGMaterialType QSGMaterialType;
 typedef struct QSGVertexColorMaterial QSGVertexColorMaterial;
 #endif
 
-QSGVertexColorMaterial* QSGVertexColorMaterial_new();
+struct QSGVertexColorMaterial_VTable {
+	void (*destructor)(struct QSGVertexColorMaterial_VTable* vtbl, QSGVertexColorMaterial* self);
+	int (*compare)(struct QSGVertexColorMaterial_VTable* vtbl, const QSGVertexColorMaterial* self, QSGMaterial* other);
+	QSGMaterialType* (*type)(struct QSGVertexColorMaterial_VTable* vtbl, const QSGVertexColorMaterial* self);
+	QSGMaterialShader* (*createShader)(struct QSGVertexColorMaterial_VTable* vtbl, const QSGVertexColorMaterial* self, int renderMode);
+};
+QSGVertexColorMaterial* QSGVertexColorMaterial_new(struct QSGVertexColorMaterial_VTable* vtbl);
 void QSGVertexColorMaterial_virtbase(QSGVertexColorMaterial* src, QSGMaterial** outptr_QSGMaterial);
 int QSGVertexColorMaterial_compare(const QSGVertexColorMaterial* self, QSGMaterial* other);
 QSGMaterialType* QSGVertexColorMaterial_type(const QSGVertexColorMaterial* self);
 QSGMaterialShader* QSGVertexColorMaterial_createShader(const QSGVertexColorMaterial* self, int renderMode);
-bool QSGVertexColorMaterial_override_virtual_compare(void* self, intptr_t slot);
 int QSGVertexColorMaterial_virtualbase_compare(const void* self, QSGMaterial* other);
-bool QSGVertexColorMaterial_override_virtual_type(void* self, intptr_t slot);
 QSGMaterialType* QSGVertexColorMaterial_virtualbase_type(const void* self);
-bool QSGVertexColorMaterial_override_virtual_createShader(void* self, intptr_t slot);
 QSGMaterialShader* QSGVertexColorMaterial_virtualbase_createShader(const void* self, int renderMode);
 void QSGVertexColorMaterial_delete(QSGVertexColorMaterial* self);
 

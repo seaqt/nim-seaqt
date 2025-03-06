@@ -58,7 +58,6 @@ proc fcQAccessibleObject_objectX(self: pointer, ): pointer {.importc: "QAccessib
 proc fcQAccessibleObject_rect(self: pointer, ): pointer {.importc: "QAccessibleObject_rect".}
 proc fcQAccessibleObject_setText(self: pointer, t: cint, text: struct_miqt_string): void {.importc: "QAccessibleObject_setText".}
 proc fcQAccessibleObject_childAt(self: pointer, x: cint, y: cint): pointer {.importc: "QAccessibleObject_childAt".}
-proc fcQAccessibleApplication_new(): ptr cQAccessibleApplication {.importc: "QAccessibleApplication_new".}
 proc fcQAccessibleApplication_window(self: pointer, ): pointer {.importc: "QAccessibleApplication_window".}
 proc fcQAccessibleApplication_childCount(self: pointer, ): cint {.importc: "QAccessibleApplication_childCount".}
 proc fcQAccessibleApplication_indexOfChild(self: pointer, param1: pointer): cint {.importc: "QAccessibleApplication_indexOfChild".}
@@ -68,11 +67,9 @@ proc fcQAccessibleApplication_child(self: pointer, index: cint): pointer {.impor
 proc fcQAccessibleApplication_text(self: pointer, t: cint): struct_miqt_string {.importc: "QAccessibleApplication_text".}
 proc fcQAccessibleApplication_role(self: pointer, ): cint {.importc: "QAccessibleApplication_role".}
 proc fcQAccessibleApplication_state(self: pointer, ): pointer {.importc: "QAccessibleApplication_state".}
+proc fcQAccessibleApplication_new(): ptr cQAccessibleApplication {.importc: "QAccessibleApplication_new".}
 proc fcQAccessibleApplication_delete(self: pointer) {.importc: "QAccessibleApplication_delete".}
 
-
-func init*(T: type gen_qaccessibleobject_types.QAccessibleObject, h: ptr cQAccessibleObject): gen_qaccessibleobject_types.QAccessibleObject =
-  T(h: h)
 proc isValid*(self: gen_qaccessibleobject_types.QAccessibleObject, ): bool =
   fcQAccessibleObject_isValid(self.h)
 
@@ -87,12 +84,6 @@ proc setText*(self: gen_qaccessibleobject_types.QAccessibleObject, t: cint, text
 
 proc childAt*(self: gen_qaccessibleobject_types.QAccessibleObject, x: cint, y: cint): gen_qaccessible_types.QAccessibleInterface =
   gen_qaccessible_types.QAccessibleInterface(h: fcQAccessibleObject_childAt(self.h, x, y))
-
-
-func init*(T: type gen_qaccessibleobject_types.QAccessibleApplication, h: ptr cQAccessibleApplication): gen_qaccessibleobject_types.QAccessibleApplication =
-  T(h: h)
-proc create*(T: type gen_qaccessibleobject_types.QAccessibleApplication, ): gen_qaccessibleobject_types.QAccessibleApplication =
-  gen_qaccessibleobject_types.QAccessibleApplication.init(fcQAccessibleApplication_new())
 
 proc window*(self: gen_qaccessibleobject_types.QAccessibleApplication, ): gen_qwindow_types.QWindow =
   gen_qwindow_types.QWindow(h: fcQAccessibleApplication_window(self.h))
@@ -123,6 +114,9 @@ proc role*(self: gen_qaccessibleobject_types.QAccessibleApplication, ): cint =
 
 proc state*(self: gen_qaccessibleobject_types.QAccessibleApplication, ): gen_qaccessible_base_types.QAccessibleState =
   gen_qaccessible_base_types.QAccessibleState(h: fcQAccessibleApplication_state(self.h))
+
+proc create*(T: type gen_qaccessibleobject_types.QAccessibleApplication): gen_qaccessibleobject_types.QAccessibleApplication =
+  gen_qaccessibleobject_types.QAccessibleApplication(h: fcQAccessibleApplication_new())
 
 proc delete*(self: gen_qaccessibleobject_types.QAccessibleApplication) =
   fcQAccessibleApplication_delete(self.h)

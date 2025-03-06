@@ -44,8 +44,6 @@ export
 
 type cQQmlScriptString*{.exportc: "QQmlScriptString", incompleteStruct.} = object
 
-proc fcQQmlScriptString_new(): ptr cQQmlScriptString {.importc: "QQmlScriptString_new".}
-proc fcQQmlScriptString_new2(param1: pointer): ptr cQQmlScriptString {.importc: "QQmlScriptString_new2".}
 proc fcQQmlScriptString_operatorAssign(self: pointer, param1: pointer): void {.importc: "QQmlScriptString_operatorAssign".}
 proc fcQQmlScriptString_operatorEqual(self: pointer, param1: pointer): bool {.importc: "QQmlScriptString_operatorEqual".}
 proc fcQQmlScriptString_operatorNotEqual(self: pointer, param1: pointer): bool {.importc: "QQmlScriptString_operatorNotEqual".}
@@ -55,17 +53,10 @@ proc fcQQmlScriptString_isNullLiteral(self: pointer, ): bool {.importc: "QQmlScr
 proc fcQQmlScriptString_stringLiteral(self: pointer, ): struct_miqt_string {.importc: "QQmlScriptString_stringLiteral".}
 proc fcQQmlScriptString_numberLiteral(self: pointer, ok: ptr bool): float64 {.importc: "QQmlScriptString_numberLiteral".}
 proc fcQQmlScriptString_booleanLiteral(self: pointer, ok: ptr bool): bool {.importc: "QQmlScriptString_booleanLiteral".}
+proc fcQQmlScriptString_new(): ptr cQQmlScriptString {.importc: "QQmlScriptString_new".}
+proc fcQQmlScriptString_new2(param1: pointer): ptr cQQmlScriptString {.importc: "QQmlScriptString_new2".}
 proc fcQQmlScriptString_staticMetaObject(): pointer {.importc: "QQmlScriptString_staticMetaObject".}
 proc fcQQmlScriptString_delete(self: pointer) {.importc: "QQmlScriptString_delete".}
-
-
-func init*(T: type gen_qqmlscriptstring_types.QQmlScriptString, h: ptr cQQmlScriptString): gen_qqmlscriptstring_types.QQmlScriptString =
-  T(h: h)
-proc create*(T: type gen_qqmlscriptstring_types.QQmlScriptString, ): gen_qqmlscriptstring_types.QQmlScriptString =
-  gen_qqmlscriptstring_types.QQmlScriptString.init(fcQQmlScriptString_new())
-
-proc create*(T: type gen_qqmlscriptstring_types.QQmlScriptString, param1: gen_qqmlscriptstring_types.QQmlScriptString): gen_qqmlscriptstring_types.QQmlScriptString =
-  gen_qqmlscriptstring_types.QQmlScriptString.init(fcQQmlScriptString_new2(param1.h))
 
 proc operatorAssign*(self: gen_qqmlscriptstring_types.QQmlScriptString, param1: gen_qqmlscriptstring_types.QQmlScriptString): void =
   fcQQmlScriptString_operatorAssign(self.h, param1.h)
@@ -96,6 +87,13 @@ proc numberLiteral*(self: gen_qqmlscriptstring_types.QQmlScriptString, ok: ptr b
 
 proc booleanLiteral*(self: gen_qqmlscriptstring_types.QQmlScriptString, ok: ptr bool): bool =
   fcQQmlScriptString_booleanLiteral(self.h, ok)
+
+proc create*(T: type gen_qqmlscriptstring_types.QQmlScriptString): gen_qqmlscriptstring_types.QQmlScriptString =
+  gen_qqmlscriptstring_types.QQmlScriptString(h: fcQQmlScriptString_new())
+
+proc create*(T: type gen_qqmlscriptstring_types.QQmlScriptString,
+    param1: gen_qqmlscriptstring_types.QQmlScriptString): gen_qqmlscriptstring_types.QQmlScriptString =
+  gen_qqmlscriptstring_types.QQmlScriptString(h: fcQQmlScriptString_new2(param1.h))
 
 proc staticMetaObject*(_: type gen_qqmlscriptstring_types.QQmlScriptString): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQQmlScriptString_staticMetaObject())

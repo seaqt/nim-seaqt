@@ -47,7 +47,6 @@ export gen_qlockfile_types
 
 type cQLockFile*{.exportc: "QLockFile", incompleteStruct.} = object
 
-proc fcQLockFile_new(fileName: struct_miqt_string): ptr cQLockFile {.importc: "QLockFile_new".}
 proc fcQLockFile_fileName(self: pointer, ): struct_miqt_string {.importc: "QLockFile_fileName".}
 proc fcQLockFile_lock(self: pointer, ): bool {.importc: "QLockFile_lock".}
 proc fcQLockFile_tryLock(self: pointer, ): bool {.importc: "QLockFile_tryLock".}
@@ -58,13 +57,8 @@ proc fcQLockFile_isLocked(self: pointer, ): bool {.importc: "QLockFile_isLocked"
 proc fcQLockFile_removeStaleLockFile(self: pointer, ): bool {.importc: "QLockFile_removeStaleLockFile".}
 proc fcQLockFile_error(self: pointer, ): cint {.importc: "QLockFile_error".}
 proc fcQLockFile_tryLock1(self: pointer, timeout: cint): bool {.importc: "QLockFile_tryLock1".}
+proc fcQLockFile_new(fileName: struct_miqt_string): ptr cQLockFile {.importc: "QLockFile_new".}
 proc fcQLockFile_delete(self: pointer) {.importc: "QLockFile_delete".}
-
-
-func init*(T: type gen_qlockfile_types.QLockFile, h: ptr cQLockFile): gen_qlockfile_types.QLockFile =
-  T(h: h)
-proc create*(T: type gen_qlockfile_types.QLockFile, fileName: string): gen_qlockfile_types.QLockFile =
-  gen_qlockfile_types.QLockFile.init(fcQLockFile_new(struct_miqt_string(data: fileName, len: csize_t(len(fileName)))))
 
 proc fileName*(self: gen_qlockfile_types.QLockFile, ): string =
   let v_ms = fcQLockFile_fileName(self.h)
@@ -98,6 +92,10 @@ proc error*(self: gen_qlockfile_types.QLockFile, ): cint =
 
 proc tryLock*(self: gen_qlockfile_types.QLockFile, timeout: cint): bool =
   fcQLockFile_tryLock1(self.h, timeout)
+
+proc create*(T: type gen_qlockfile_types.QLockFile,
+    fileName: string): gen_qlockfile_types.QLockFile =
+  gen_qlockfile_types.QLockFile(h: fcQLockFile_new(struct_miqt_string(data: fileName, len: csize_t(len(fileName)))))
 
 proc delete*(self: gen_qlockfile_types.QLockFile) =
   fcQLockFile_delete(self.h)

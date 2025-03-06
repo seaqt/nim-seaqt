@@ -42,8 +42,5 @@ type cQSGMaterialType*{.exportc: "QSGMaterialType", incompleteStruct.} = object
 
 proc fcQSGMaterialType_delete(self: pointer) {.importc: "QSGMaterialType_delete".}
 
-
-func init*(T: type gen_qsgmaterialtype_types.QSGMaterialType, h: ptr cQSGMaterialType): gen_qsgmaterialtype_types.QSGMaterialType =
-  T(h: h)
 proc delete*(self: gen_qsgmaterialtype_types.QSGMaterialType) =
   fcQSGMaterialType_delete(self.h)

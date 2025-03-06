@@ -94,7 +94,6 @@ export
 
 type cQFontDatabase*{.exportc: "QFontDatabase", incompleteStruct.} = object
 
-proc fcQFontDatabase_new(): ptr cQFontDatabase {.importc: "QFontDatabase_new".}
 proc fcQFontDatabase_standardSizes(): struct_miqt_array {.importc: "QFontDatabase_standardSizes".}
 proc fcQFontDatabase_writingSystems(): struct_miqt_array {.importc: "QFontDatabase_writingSystems".}
 proc fcQFontDatabase_writingSystemsWithFamily(family: struct_miqt_string): struct_miqt_array {.importc: "QFontDatabase_writingSystemsWithFamily".}
@@ -128,14 +127,9 @@ proc fcQFontDatabase_isBitmapScalable2(family: struct_miqt_string, style: struct
 proc fcQFontDatabase_isSmoothlyScalable2(family: struct_miqt_string, style: struct_miqt_string): bool {.importc: "QFontDatabase_isSmoothlyScalable2".}
 proc fcQFontDatabase_isScalable2(family: struct_miqt_string, style: struct_miqt_string): bool {.importc: "QFontDatabase_isScalable2".}
 proc fcQFontDatabase_isFixedPitch2(family: struct_miqt_string, style: struct_miqt_string): bool {.importc: "QFontDatabase_isFixedPitch2".}
+proc fcQFontDatabase_new(): ptr cQFontDatabase {.importc: "QFontDatabase_new".}
 proc fcQFontDatabase_staticMetaObject(): pointer {.importc: "QFontDatabase_staticMetaObject".}
 proc fcQFontDatabase_delete(self: pointer) {.importc: "QFontDatabase_delete".}
-
-
-func init*(T: type gen_qfontdatabase_types.QFontDatabase, h: ptr cQFontDatabase): gen_qfontdatabase_types.QFontDatabase =
-  T(h: h)
-proc create*(T: type gen_qfontdatabase_types.QFontDatabase, ): gen_qfontdatabase_types.QFontDatabase =
-  gen_qfontdatabase_types.QFontDatabase.init(fcQFontDatabase_new())
 
 proc standardSizes*(_: type gen_qfontdatabase_types.QFontDatabase, ): seq[cint] =
   var v_ma = fcQFontDatabase_standardSizes()
@@ -309,6 +303,9 @@ proc isScalable*(_: type gen_qfontdatabase_types.QFontDatabase, family: string, 
 
 proc isFixedPitch*(_: type gen_qfontdatabase_types.QFontDatabase, family: string, style: string): bool =
   fcQFontDatabase_isFixedPitch2(struct_miqt_string(data: family, len: csize_t(len(family))), struct_miqt_string(data: style, len: csize_t(len(style))))
+
+proc create*(T: type gen_qfontdatabase_types.QFontDatabase): gen_qfontdatabase_types.QFontDatabase =
+  gen_qfontdatabase_types.QFontDatabase(h: fcQFontDatabase_new())
 
 proc staticMetaObject*(_: type gen_qfontdatabase_types.QFontDatabase): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQFontDatabase_staticMetaObject())

@@ -45,12 +45,6 @@ export
 type cQVersionNumber*{.exportc: "QVersionNumber", incompleteStruct.} = object
 type cQTypeRevision*{.exportc: "QTypeRevision", incompleteStruct.} = object
 
-proc fcQVersionNumber_new(): ptr cQVersionNumber {.importc: "QVersionNumber_new".}
-proc fcQVersionNumber_new2(seg: struct_miqt_array): ptr cQVersionNumber {.importc: "QVersionNumber_new2".}
-proc fcQVersionNumber_new3(maj: cint): ptr cQVersionNumber {.importc: "QVersionNumber_new3".}
-proc fcQVersionNumber_new4(maj: cint, min: cint): ptr cQVersionNumber {.importc: "QVersionNumber_new4".}
-proc fcQVersionNumber_new5(maj: cint, min: cint, mic: cint): ptr cQVersionNumber {.importc: "QVersionNumber_new5".}
-proc fcQVersionNumber_new6(param1: pointer): ptr cQVersionNumber {.importc: "QVersionNumber_new6".}
 proc fcQVersionNumber_isNull(self: pointer, ): bool {.importc: "QVersionNumber_isNull".}
 proc fcQVersionNumber_isNormalized(self: pointer, ): bool {.importc: "QVersionNumber_isNormalized".}
 proc fcQVersionNumber_majorVersion(self: pointer, ): cint {.importc: "QVersionNumber_majorVersion".}
@@ -66,41 +60,22 @@ proc fcQVersionNumber_commonPrefix(v1: pointer, v2: pointer): pointer {.importc:
 proc fcQVersionNumber_toString(self: pointer, ): struct_miqt_string {.importc: "QVersionNumber_toString".}
 proc fcQVersionNumber_fromString(string: pointer): pointer {.importc: "QVersionNumber_fromString".}
 proc fcQVersionNumber_fromString2(string: pointer, suffixIndex: ptr int64): pointer {.importc: "QVersionNumber_fromString2".}
+proc fcQVersionNumber_new(): ptr cQVersionNumber {.importc: "QVersionNumber_new".}
+proc fcQVersionNumber_new2(seg: struct_miqt_array): ptr cQVersionNumber {.importc: "QVersionNumber_new2".}
+proc fcQVersionNumber_new3(maj: cint): ptr cQVersionNumber {.importc: "QVersionNumber_new3".}
+proc fcQVersionNumber_new4(maj: cint, min: cint): ptr cQVersionNumber {.importc: "QVersionNumber_new4".}
+proc fcQVersionNumber_new5(maj: cint, min: cint, mic: cint): ptr cQVersionNumber {.importc: "QVersionNumber_new5".}
+proc fcQVersionNumber_new6(param1: pointer): ptr cQVersionNumber {.importc: "QVersionNumber_new6".}
 proc fcQVersionNumber_delete(self: pointer) {.importc: "QVersionNumber_delete".}
-proc fcQTypeRevision_new(): ptr cQTypeRevision {.importc: "QTypeRevision_new".}
-proc fcQTypeRevision_new2(param1: pointer): ptr cQTypeRevision {.importc: "QTypeRevision_new2".}
 proc fcQTypeRevision_zero(): pointer {.importc: "QTypeRevision_zero".}
 proc fcQTypeRevision_hasMajorVersion(self: pointer, ): bool {.importc: "QTypeRevision_hasMajorVersion".}
 proc fcQTypeRevision_majorVersion(self: pointer, ): uint8 {.importc: "QTypeRevision_majorVersion".}
 proc fcQTypeRevision_hasMinorVersion(self: pointer, ): bool {.importc: "QTypeRevision_hasMinorVersion".}
 proc fcQTypeRevision_minorVersion(self: pointer, ): uint8 {.importc: "QTypeRevision_minorVersion".}
 proc fcQTypeRevision_isValid(self: pointer, ): bool {.importc: "QTypeRevision_isValid".}
+proc fcQTypeRevision_new(): ptr cQTypeRevision {.importc: "QTypeRevision_new".}
+proc fcQTypeRevision_new2(param1: pointer): ptr cQTypeRevision {.importc: "QTypeRevision_new2".}
 proc fcQTypeRevision_delete(self: pointer) {.importc: "QTypeRevision_delete".}
-
-
-func init*(T: type gen_qversionnumber_types.QVersionNumber, h: ptr cQVersionNumber): gen_qversionnumber_types.QVersionNumber =
-  T(h: h)
-proc create*(T: type gen_qversionnumber_types.QVersionNumber, ): gen_qversionnumber_types.QVersionNumber =
-  gen_qversionnumber_types.QVersionNumber.init(fcQVersionNumber_new())
-
-proc create*(T: type gen_qversionnumber_types.QVersionNumber, seg: seq[cint]): gen_qversionnumber_types.QVersionNumber =
-  var seg_CArray = newSeq[cint](len(seg))
-  for i in 0..<len(seg):
-    seg_CArray[i] = seg[i]
-
-  gen_qversionnumber_types.QVersionNumber.init(fcQVersionNumber_new2(struct_miqt_array(len: csize_t(len(seg)), data: if len(seg) == 0: nil else: addr(seg_CArray[0]))))
-
-proc create*(T: type gen_qversionnumber_types.QVersionNumber, maj: cint): gen_qversionnumber_types.QVersionNumber =
-  gen_qversionnumber_types.QVersionNumber.init(fcQVersionNumber_new3(maj))
-
-proc create*(T: type gen_qversionnumber_types.QVersionNumber, maj: cint, min: cint): gen_qversionnumber_types.QVersionNumber =
-  gen_qversionnumber_types.QVersionNumber.init(fcQVersionNumber_new4(maj, min))
-
-proc create*(T: type gen_qversionnumber_types.QVersionNumber, maj: cint, min: cint, mic: cint): gen_qversionnumber_types.QVersionNumber =
-  gen_qversionnumber_types.QVersionNumber.init(fcQVersionNumber_new5(maj, min, mic))
-
-proc create*(T: type gen_qversionnumber_types.QVersionNumber, param1: gen_qversionnumber_types.QVersionNumber): gen_qversionnumber_types.QVersionNumber =
-  gen_qversionnumber_types.QVersionNumber.init(fcQVersionNumber_new6(param1.h))
 
 proc isNull*(self: gen_qversionnumber_types.QVersionNumber, ): bool =
   fcQVersionNumber_isNull(self.h)
@@ -155,17 +130,35 @@ proc fromString*(_: type gen_qversionnumber_types.QVersionNumber, string: gen_qa
 proc fromString*(_: type gen_qversionnumber_types.QVersionNumber, string: gen_qanystringview_types.QAnyStringView, suffixIndex: ptr int64): gen_qversionnumber_types.QVersionNumber =
   gen_qversionnumber_types.QVersionNumber(h: fcQVersionNumber_fromString2(string.h, suffixIndex))
 
+proc create*(T: type gen_qversionnumber_types.QVersionNumber): gen_qversionnumber_types.QVersionNumber =
+  gen_qversionnumber_types.QVersionNumber(h: fcQVersionNumber_new())
+
+proc create*(T: type gen_qversionnumber_types.QVersionNumber,
+    seg: seq[cint]): gen_qversionnumber_types.QVersionNumber =
+  var seg_CArray = newSeq[cint](len(seg))
+  for i in 0..<len(seg):
+    seg_CArray[i] = seg[i]
+
+  gen_qversionnumber_types.QVersionNumber(h: fcQVersionNumber_new2(struct_miqt_array(len: csize_t(len(seg)), data: if len(seg) == 0: nil else: addr(seg_CArray[0]))))
+
+proc create*(T: type gen_qversionnumber_types.QVersionNumber,
+    maj: cint): gen_qversionnumber_types.QVersionNumber =
+  gen_qversionnumber_types.QVersionNumber(h: fcQVersionNumber_new3(maj))
+
+proc create*(T: type gen_qversionnumber_types.QVersionNumber,
+    maj: cint, min: cint): gen_qversionnumber_types.QVersionNumber =
+  gen_qversionnumber_types.QVersionNumber(h: fcQVersionNumber_new4(maj, min))
+
+proc create*(T: type gen_qversionnumber_types.QVersionNumber,
+    maj: cint, min: cint, mic: cint): gen_qversionnumber_types.QVersionNumber =
+  gen_qversionnumber_types.QVersionNumber(h: fcQVersionNumber_new5(maj, min, mic))
+
+proc create*(T: type gen_qversionnumber_types.QVersionNumber,
+    param1: gen_qversionnumber_types.QVersionNumber): gen_qversionnumber_types.QVersionNumber =
+  gen_qversionnumber_types.QVersionNumber(h: fcQVersionNumber_new6(param1.h))
+
 proc delete*(self: gen_qversionnumber_types.QVersionNumber) =
   fcQVersionNumber_delete(self.h)
-
-func init*(T: type gen_qversionnumber_types.QTypeRevision, h: ptr cQTypeRevision): gen_qversionnumber_types.QTypeRevision =
-  T(h: h)
-proc create*(T: type gen_qversionnumber_types.QTypeRevision, ): gen_qversionnumber_types.QTypeRevision =
-  gen_qversionnumber_types.QTypeRevision.init(fcQTypeRevision_new())
-
-proc create*(T: type gen_qversionnumber_types.QTypeRevision, param1: gen_qversionnumber_types.QTypeRevision): gen_qversionnumber_types.QTypeRevision =
-  gen_qversionnumber_types.QTypeRevision.init(fcQTypeRevision_new2(param1.h))
-
 proc zero*(_: type gen_qversionnumber_types.QTypeRevision, ): gen_qversionnumber_types.QTypeRevision =
   gen_qversionnumber_types.QTypeRevision(h: fcQTypeRevision_zero())
 
@@ -183,6 +176,13 @@ proc minorVersion*(self: gen_qversionnumber_types.QTypeRevision, ): uint8 =
 
 proc isValid*(self: gen_qversionnumber_types.QTypeRevision, ): bool =
   fcQTypeRevision_isValid(self.h)
+
+proc create*(T: type gen_qversionnumber_types.QTypeRevision): gen_qversionnumber_types.QTypeRevision =
+  gen_qversionnumber_types.QTypeRevision(h: fcQTypeRevision_new())
+
+proc create*(T: type gen_qversionnumber_types.QTypeRevision,
+    param1: gen_qversionnumber_types.QTypeRevision): gen_qversionnumber_types.QTypeRevision =
+  gen_qversionnumber_types.QTypeRevision(h: fcQTypeRevision_new2(param1.h))
 
 proc delete*(self: gen_qversionnumber_types.QTypeRevision) =
   fcQTypeRevision_delete(self.h)

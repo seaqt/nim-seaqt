@@ -50,903 +50,683 @@ extern "C" {
 #endif
 
 void miqt_exec_callback_QMdiArea_subWindowActivated(intptr_t, QMdiSubWindow*);
-QMetaObject* miqt_exec_callback_QMdiArea_metaObject(const QMdiArea*, intptr_t);
-void* miqt_exec_callback_QMdiArea_metacast(QMdiArea*, intptr_t, const char*);
-int miqt_exec_callback_QMdiArea_metacall(QMdiArea*, intptr_t, int, int, void**);
-QSize* miqt_exec_callback_QMdiArea_sizeHint(const QMdiArea*, intptr_t);
-QSize* miqt_exec_callback_QMdiArea_minimumSizeHint(const QMdiArea*, intptr_t);
-void miqt_exec_callback_QMdiArea_setupViewport(QMdiArea*, intptr_t, QWidget*);
-bool miqt_exec_callback_QMdiArea_event(QMdiArea*, intptr_t, QEvent*);
-bool miqt_exec_callback_QMdiArea_eventFilter(QMdiArea*, intptr_t, QObject*, QEvent*);
-void miqt_exec_callback_QMdiArea_paintEvent(QMdiArea*, intptr_t, QPaintEvent*);
-void miqt_exec_callback_QMdiArea_childEvent(QMdiArea*, intptr_t, QChildEvent*);
-void miqt_exec_callback_QMdiArea_resizeEvent(QMdiArea*, intptr_t, QResizeEvent*);
-void miqt_exec_callback_QMdiArea_timerEvent(QMdiArea*, intptr_t, QTimerEvent*);
-void miqt_exec_callback_QMdiArea_showEvent(QMdiArea*, intptr_t, QShowEvent*);
-bool miqt_exec_callback_QMdiArea_viewportEvent(QMdiArea*, intptr_t, QEvent*);
-void miqt_exec_callback_QMdiArea_scrollContentsBy(QMdiArea*, intptr_t, int, int);
-void miqt_exec_callback_QMdiArea_mousePressEvent(QMdiArea*, intptr_t, QMouseEvent*);
-void miqt_exec_callback_QMdiArea_mouseReleaseEvent(QMdiArea*, intptr_t, QMouseEvent*);
-void miqt_exec_callback_QMdiArea_mouseDoubleClickEvent(QMdiArea*, intptr_t, QMouseEvent*);
-void miqt_exec_callback_QMdiArea_mouseMoveEvent(QMdiArea*, intptr_t, QMouseEvent*);
-void miqt_exec_callback_QMdiArea_wheelEvent(QMdiArea*, intptr_t, QWheelEvent*);
-void miqt_exec_callback_QMdiArea_contextMenuEvent(QMdiArea*, intptr_t, QContextMenuEvent*);
-void miqt_exec_callback_QMdiArea_dragEnterEvent(QMdiArea*, intptr_t, QDragEnterEvent*);
-void miqt_exec_callback_QMdiArea_dragMoveEvent(QMdiArea*, intptr_t, QDragMoveEvent*);
-void miqt_exec_callback_QMdiArea_dragLeaveEvent(QMdiArea*, intptr_t, QDragLeaveEvent*);
-void miqt_exec_callback_QMdiArea_dropEvent(QMdiArea*, intptr_t, QDropEvent*);
-void miqt_exec_callback_QMdiArea_keyPressEvent(QMdiArea*, intptr_t, QKeyEvent*);
-QSize* miqt_exec_callback_QMdiArea_viewportSizeHint(const QMdiArea*, intptr_t);
-void miqt_exec_callback_QMdiArea_changeEvent(QMdiArea*, intptr_t, QEvent*);
-void miqt_exec_callback_QMdiArea_initStyleOption(const QMdiArea*, intptr_t, QStyleOptionFrame*);
-int miqt_exec_callback_QMdiArea_devType(const QMdiArea*, intptr_t);
-void miqt_exec_callback_QMdiArea_setVisible(QMdiArea*, intptr_t, bool);
-int miqt_exec_callback_QMdiArea_heightForWidth(const QMdiArea*, intptr_t, int);
-bool miqt_exec_callback_QMdiArea_hasHeightForWidth(const QMdiArea*, intptr_t);
-QPaintEngine* miqt_exec_callback_QMdiArea_paintEngine(const QMdiArea*, intptr_t);
-void miqt_exec_callback_QMdiArea_keyReleaseEvent(QMdiArea*, intptr_t, QKeyEvent*);
-void miqt_exec_callback_QMdiArea_focusInEvent(QMdiArea*, intptr_t, QFocusEvent*);
-void miqt_exec_callback_QMdiArea_focusOutEvent(QMdiArea*, intptr_t, QFocusEvent*);
-void miqt_exec_callback_QMdiArea_enterEvent(QMdiArea*, intptr_t, QEnterEvent*);
-void miqt_exec_callback_QMdiArea_leaveEvent(QMdiArea*, intptr_t, QEvent*);
-void miqt_exec_callback_QMdiArea_moveEvent(QMdiArea*, intptr_t, QMoveEvent*);
-void miqt_exec_callback_QMdiArea_closeEvent(QMdiArea*, intptr_t, QCloseEvent*);
-void miqt_exec_callback_QMdiArea_tabletEvent(QMdiArea*, intptr_t, QTabletEvent*);
-void miqt_exec_callback_QMdiArea_actionEvent(QMdiArea*, intptr_t, QActionEvent*);
-void miqt_exec_callback_QMdiArea_hideEvent(QMdiArea*, intptr_t, QHideEvent*);
-bool miqt_exec_callback_QMdiArea_nativeEvent(QMdiArea*, intptr_t, struct miqt_string, void*, intptr_t*);
-int miqt_exec_callback_QMdiArea_metric(const QMdiArea*, intptr_t, int);
-void miqt_exec_callback_QMdiArea_initPainter(const QMdiArea*, intptr_t, QPainter*);
-QPaintDevice* miqt_exec_callback_QMdiArea_redirected(const QMdiArea*, intptr_t, QPoint*);
-QPainter* miqt_exec_callback_QMdiArea_sharedPainter(const QMdiArea*, intptr_t);
-void miqt_exec_callback_QMdiArea_inputMethodEvent(QMdiArea*, intptr_t, QInputMethodEvent*);
-QVariant* miqt_exec_callback_QMdiArea_inputMethodQuery(const QMdiArea*, intptr_t, int);
-bool miqt_exec_callback_QMdiArea_focusNextPrevChild(QMdiArea*, intptr_t, bool);
-void miqt_exec_callback_QMdiArea_customEvent(QMdiArea*, intptr_t, QEvent*);
-void miqt_exec_callback_QMdiArea_connectNotify(QMdiArea*, intptr_t, QMetaMethod*);
-void miqt_exec_callback_QMdiArea_disconnectNotify(QMdiArea*, intptr_t, QMetaMethod*);
 #ifdef __cplusplus
 } /* extern C */
 #endif
 
 class VirtualQMdiArea final : public QMdiArea {
+	struct QMdiArea_VTable* vtbl;
 public:
 
-	VirtualQMdiArea(QWidget* parent): QMdiArea(parent) {};
-	VirtualQMdiArea(): QMdiArea() {};
+	VirtualQMdiArea(struct QMdiArea_VTable* vtbl, QWidget* parent): QMdiArea(parent), vtbl(vtbl) {};
+	VirtualQMdiArea(struct QMdiArea_VTable* vtbl): QMdiArea(), vtbl(vtbl) {};
 
-	virtual ~VirtualQMdiArea() override = default;
-
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__metaObject = 0;
+	virtual ~VirtualQMdiArea() override { if(vtbl->destructor) vtbl->destructor(vtbl, this); }
 
 	// Subclass to allow providing a Go implementation
 	virtual const QMetaObject* metaObject() const override {
-		if (handle__metaObject == 0) {
+		if (vtbl->metaObject == 0) {
 			return QMdiArea::metaObject();
 		}
-		
 
-		QMetaObject* callback_return_value = miqt_exec_callback_QMdiArea_metaObject(this, handle__metaObject);
+
+		QMetaObject* callback_return_value = vtbl->metaObject(vtbl, this);
 
 		return callback_return_value;
 	}
 
 	friend QMetaObject* QMdiArea_virtualbase_metaObject(const void* self);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__metacast = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void* qt_metacast(const char* param1) override {
-		if (handle__metacast == 0) {
+		if (vtbl->metacast == 0) {
 			return QMdiArea::qt_metacast(param1);
 		}
-		
+
 		const char* sigval1 = (const char*) param1;
 
-		void* callback_return_value = miqt_exec_callback_QMdiArea_metacast(this, handle__metacast, sigval1);
+		void* callback_return_value = vtbl->metacast(vtbl, this, sigval1);
 
 		return callback_return_value;
 	}
 
 	friend void* QMdiArea_virtualbase_metacast(void* self, const char* param1);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__metacall = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual int qt_metacall(QMetaObject::Call param1, int param2, void** param3) override {
-		if (handle__metacall == 0) {
+		if (vtbl->metacall == 0) {
 			return QMdiArea::qt_metacall(param1, param2, param3);
 		}
-		
+
 		QMetaObject::Call param1_ret = param1;
 		int sigval1 = static_cast<int>(param1_ret);
 		int sigval2 = param2;
 		void** sigval3 = param3;
 
-		int callback_return_value = miqt_exec_callback_QMdiArea_metacall(this, handle__metacall, sigval1, sigval2, sigval3);
+		int callback_return_value = vtbl->metacall(vtbl, this, sigval1, sigval2, sigval3);
 
 		return static_cast<int>(callback_return_value);
 	}
 
 	friend int QMdiArea_virtualbase_metacall(void* self, int param1, int param2, void** param3);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__sizeHint = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual QSize sizeHint() const override {
-		if (handle__sizeHint == 0) {
+		if (vtbl->sizeHint == 0) {
 			return QMdiArea::sizeHint();
 		}
-		
 
-		QSize* callback_return_value = miqt_exec_callback_QMdiArea_sizeHint(this, handle__sizeHint);
+
+		QSize* callback_return_value = vtbl->sizeHint(vtbl, this);
 
 		return *callback_return_value;
 	}
 
 	friend QSize* QMdiArea_virtualbase_sizeHint(const void* self);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__minimumSizeHint = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual QSize minimumSizeHint() const override {
-		if (handle__minimumSizeHint == 0) {
+		if (vtbl->minimumSizeHint == 0) {
 			return QMdiArea::minimumSizeHint();
 		}
-		
 
-		QSize* callback_return_value = miqt_exec_callback_QMdiArea_minimumSizeHint(this, handle__minimumSizeHint);
+
+		QSize* callback_return_value = vtbl->minimumSizeHint(vtbl, this);
 
 		return *callback_return_value;
 	}
 
 	friend QSize* QMdiArea_virtualbase_minimumSizeHint(const void* self);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__setupViewport = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void setupViewport(QWidget* viewport) override {
-		if (handle__setupViewport == 0) {
+		if (vtbl->setupViewport == 0) {
 			QMdiArea::setupViewport(viewport);
 			return;
 		}
-		
+
 		QWidget* sigval1 = viewport;
 
-		miqt_exec_callback_QMdiArea_setupViewport(this, handle__setupViewport, sigval1);
+		vtbl->setupViewport(vtbl, this, sigval1);
 
-		
 	}
 
 	friend void QMdiArea_virtualbase_setupViewport(void* self, QWidget* viewport);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__event = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual bool event(QEvent* event) override {
-		if (handle__event == 0) {
+		if (vtbl->event == 0) {
 			return QMdiArea::event(event);
 		}
-		
+
 		QEvent* sigval1 = event;
 
-		bool callback_return_value = miqt_exec_callback_QMdiArea_event(this, handle__event, sigval1);
+		bool callback_return_value = vtbl->event(vtbl, this, sigval1);
 
 		return callback_return_value;
 	}
 
 	friend bool QMdiArea_virtualbase_event(void* self, QEvent* event);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__eventFilter = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual bool eventFilter(QObject* object, QEvent* event) override {
-		if (handle__eventFilter == 0) {
+		if (vtbl->eventFilter == 0) {
 			return QMdiArea::eventFilter(object, event);
 		}
-		
+
 		QObject* sigval1 = object;
 		QEvent* sigval2 = event;
 
-		bool callback_return_value = miqt_exec_callback_QMdiArea_eventFilter(this, handle__eventFilter, sigval1, sigval2);
+		bool callback_return_value = vtbl->eventFilter(vtbl, this, sigval1, sigval2);
 
 		return callback_return_value;
 	}
 
 	friend bool QMdiArea_virtualbase_eventFilter(void* self, QObject* object, QEvent* event);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__paintEvent = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void paintEvent(QPaintEvent* paintEvent) override {
-		if (handle__paintEvent == 0) {
+		if (vtbl->paintEvent == 0) {
 			QMdiArea::paintEvent(paintEvent);
 			return;
 		}
-		
+
 		QPaintEvent* sigval1 = paintEvent;
 
-		miqt_exec_callback_QMdiArea_paintEvent(this, handle__paintEvent, sigval1);
+		vtbl->paintEvent(vtbl, this, sigval1);
 
-		
 	}
 
 	friend void QMdiArea_virtualbase_paintEvent(void* self, QPaintEvent* paintEvent);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__childEvent = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void childEvent(QChildEvent* childEvent) override {
-		if (handle__childEvent == 0) {
+		if (vtbl->childEvent == 0) {
 			QMdiArea::childEvent(childEvent);
 			return;
 		}
-		
+
 		QChildEvent* sigval1 = childEvent;
 
-		miqt_exec_callback_QMdiArea_childEvent(this, handle__childEvent, sigval1);
+		vtbl->childEvent(vtbl, this, sigval1);
 
-		
 	}
 
 	friend void QMdiArea_virtualbase_childEvent(void* self, QChildEvent* childEvent);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__resizeEvent = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void resizeEvent(QResizeEvent* resizeEvent) override {
-		if (handle__resizeEvent == 0) {
+		if (vtbl->resizeEvent == 0) {
 			QMdiArea::resizeEvent(resizeEvent);
 			return;
 		}
-		
+
 		QResizeEvent* sigval1 = resizeEvent;
 
-		miqt_exec_callback_QMdiArea_resizeEvent(this, handle__resizeEvent, sigval1);
+		vtbl->resizeEvent(vtbl, this, sigval1);
 
-		
 	}
 
 	friend void QMdiArea_virtualbase_resizeEvent(void* self, QResizeEvent* resizeEvent);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__timerEvent = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void timerEvent(QTimerEvent* timerEvent) override {
-		if (handle__timerEvent == 0) {
+		if (vtbl->timerEvent == 0) {
 			QMdiArea::timerEvent(timerEvent);
 			return;
 		}
-		
+
 		QTimerEvent* sigval1 = timerEvent;
 
-		miqt_exec_callback_QMdiArea_timerEvent(this, handle__timerEvent, sigval1);
+		vtbl->timerEvent(vtbl, this, sigval1);
 
-		
 	}
 
 	friend void QMdiArea_virtualbase_timerEvent(void* self, QTimerEvent* timerEvent);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__showEvent = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void showEvent(QShowEvent* showEvent) override {
-		if (handle__showEvent == 0) {
+		if (vtbl->showEvent == 0) {
 			QMdiArea::showEvent(showEvent);
 			return;
 		}
-		
+
 		QShowEvent* sigval1 = showEvent;
 
-		miqt_exec_callback_QMdiArea_showEvent(this, handle__showEvent, sigval1);
+		vtbl->showEvent(vtbl, this, sigval1);
 
-		
 	}
 
 	friend void QMdiArea_virtualbase_showEvent(void* self, QShowEvent* showEvent);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__viewportEvent = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual bool viewportEvent(QEvent* event) override {
-		if (handle__viewportEvent == 0) {
+		if (vtbl->viewportEvent == 0) {
 			return QMdiArea::viewportEvent(event);
 		}
-		
+
 		QEvent* sigval1 = event;
 
-		bool callback_return_value = miqt_exec_callback_QMdiArea_viewportEvent(this, handle__viewportEvent, sigval1);
+		bool callback_return_value = vtbl->viewportEvent(vtbl, this, sigval1);
 
 		return callback_return_value;
 	}
 
 	friend bool QMdiArea_virtualbase_viewportEvent(void* self, QEvent* event);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__scrollContentsBy = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void scrollContentsBy(int dx, int dy) override {
-		if (handle__scrollContentsBy == 0) {
+		if (vtbl->scrollContentsBy == 0) {
 			QMdiArea::scrollContentsBy(dx, dy);
 			return;
 		}
-		
+
 		int sigval1 = dx;
 		int sigval2 = dy;
 
-		miqt_exec_callback_QMdiArea_scrollContentsBy(this, handle__scrollContentsBy, sigval1, sigval2);
+		vtbl->scrollContentsBy(vtbl, this, sigval1, sigval2);
 
-		
 	}
 
 	friend void QMdiArea_virtualbase_scrollContentsBy(void* self, int dx, int dy);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__mousePressEvent = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void mousePressEvent(QMouseEvent* param1) override {
-		if (handle__mousePressEvent == 0) {
+		if (vtbl->mousePressEvent == 0) {
 			QMdiArea::mousePressEvent(param1);
 			return;
 		}
-		
+
 		QMouseEvent* sigval1 = param1;
 
-		miqt_exec_callback_QMdiArea_mousePressEvent(this, handle__mousePressEvent, sigval1);
+		vtbl->mousePressEvent(vtbl, this, sigval1);
 
-		
 	}
 
 	friend void QMdiArea_virtualbase_mousePressEvent(void* self, QMouseEvent* param1);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__mouseReleaseEvent = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void mouseReleaseEvent(QMouseEvent* param1) override {
-		if (handle__mouseReleaseEvent == 0) {
+		if (vtbl->mouseReleaseEvent == 0) {
 			QMdiArea::mouseReleaseEvent(param1);
 			return;
 		}
-		
+
 		QMouseEvent* sigval1 = param1;
 
-		miqt_exec_callback_QMdiArea_mouseReleaseEvent(this, handle__mouseReleaseEvent, sigval1);
+		vtbl->mouseReleaseEvent(vtbl, this, sigval1);
 
-		
 	}
 
 	friend void QMdiArea_virtualbase_mouseReleaseEvent(void* self, QMouseEvent* param1);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__mouseDoubleClickEvent = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void mouseDoubleClickEvent(QMouseEvent* param1) override {
-		if (handle__mouseDoubleClickEvent == 0) {
+		if (vtbl->mouseDoubleClickEvent == 0) {
 			QMdiArea::mouseDoubleClickEvent(param1);
 			return;
 		}
-		
+
 		QMouseEvent* sigval1 = param1;
 
-		miqt_exec_callback_QMdiArea_mouseDoubleClickEvent(this, handle__mouseDoubleClickEvent, sigval1);
+		vtbl->mouseDoubleClickEvent(vtbl, this, sigval1);
 
-		
 	}
 
 	friend void QMdiArea_virtualbase_mouseDoubleClickEvent(void* self, QMouseEvent* param1);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__mouseMoveEvent = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void mouseMoveEvent(QMouseEvent* param1) override {
-		if (handle__mouseMoveEvent == 0) {
+		if (vtbl->mouseMoveEvent == 0) {
 			QMdiArea::mouseMoveEvent(param1);
 			return;
 		}
-		
+
 		QMouseEvent* sigval1 = param1;
 
-		miqt_exec_callback_QMdiArea_mouseMoveEvent(this, handle__mouseMoveEvent, sigval1);
+		vtbl->mouseMoveEvent(vtbl, this, sigval1);
 
-		
 	}
 
 	friend void QMdiArea_virtualbase_mouseMoveEvent(void* self, QMouseEvent* param1);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__wheelEvent = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void wheelEvent(QWheelEvent* param1) override {
-		if (handle__wheelEvent == 0) {
+		if (vtbl->wheelEvent == 0) {
 			QMdiArea::wheelEvent(param1);
 			return;
 		}
-		
+
 		QWheelEvent* sigval1 = param1;
 
-		miqt_exec_callback_QMdiArea_wheelEvent(this, handle__wheelEvent, sigval1);
+		vtbl->wheelEvent(vtbl, this, sigval1);
 
-		
 	}
 
 	friend void QMdiArea_virtualbase_wheelEvent(void* self, QWheelEvent* param1);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__contextMenuEvent = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void contextMenuEvent(QContextMenuEvent* param1) override {
-		if (handle__contextMenuEvent == 0) {
+		if (vtbl->contextMenuEvent == 0) {
 			QMdiArea::contextMenuEvent(param1);
 			return;
 		}
-		
+
 		QContextMenuEvent* sigval1 = param1;
 
-		miqt_exec_callback_QMdiArea_contextMenuEvent(this, handle__contextMenuEvent, sigval1);
+		vtbl->contextMenuEvent(vtbl, this, sigval1);
 
-		
 	}
 
 	friend void QMdiArea_virtualbase_contextMenuEvent(void* self, QContextMenuEvent* param1);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__dragEnterEvent = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void dragEnterEvent(QDragEnterEvent* param1) override {
-		if (handle__dragEnterEvent == 0) {
+		if (vtbl->dragEnterEvent == 0) {
 			QMdiArea::dragEnterEvent(param1);
 			return;
 		}
-		
+
 		QDragEnterEvent* sigval1 = param1;
 
-		miqt_exec_callback_QMdiArea_dragEnterEvent(this, handle__dragEnterEvent, sigval1);
+		vtbl->dragEnterEvent(vtbl, this, sigval1);
 
-		
 	}
 
 	friend void QMdiArea_virtualbase_dragEnterEvent(void* self, QDragEnterEvent* param1);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__dragMoveEvent = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void dragMoveEvent(QDragMoveEvent* param1) override {
-		if (handle__dragMoveEvent == 0) {
+		if (vtbl->dragMoveEvent == 0) {
 			QMdiArea::dragMoveEvent(param1);
 			return;
 		}
-		
+
 		QDragMoveEvent* sigval1 = param1;
 
-		miqt_exec_callback_QMdiArea_dragMoveEvent(this, handle__dragMoveEvent, sigval1);
+		vtbl->dragMoveEvent(vtbl, this, sigval1);
 
-		
 	}
 
 	friend void QMdiArea_virtualbase_dragMoveEvent(void* self, QDragMoveEvent* param1);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__dragLeaveEvent = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void dragLeaveEvent(QDragLeaveEvent* param1) override {
-		if (handle__dragLeaveEvent == 0) {
+		if (vtbl->dragLeaveEvent == 0) {
 			QMdiArea::dragLeaveEvent(param1);
 			return;
 		}
-		
+
 		QDragLeaveEvent* sigval1 = param1;
 
-		miqt_exec_callback_QMdiArea_dragLeaveEvent(this, handle__dragLeaveEvent, sigval1);
+		vtbl->dragLeaveEvent(vtbl, this, sigval1);
 
-		
 	}
 
 	friend void QMdiArea_virtualbase_dragLeaveEvent(void* self, QDragLeaveEvent* param1);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__dropEvent = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void dropEvent(QDropEvent* param1) override {
-		if (handle__dropEvent == 0) {
+		if (vtbl->dropEvent == 0) {
 			QMdiArea::dropEvent(param1);
 			return;
 		}
-		
+
 		QDropEvent* sigval1 = param1;
 
-		miqt_exec_callback_QMdiArea_dropEvent(this, handle__dropEvent, sigval1);
+		vtbl->dropEvent(vtbl, this, sigval1);
 
-		
 	}
 
 	friend void QMdiArea_virtualbase_dropEvent(void* self, QDropEvent* param1);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__keyPressEvent = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void keyPressEvent(QKeyEvent* param1) override {
-		if (handle__keyPressEvent == 0) {
+		if (vtbl->keyPressEvent == 0) {
 			QMdiArea::keyPressEvent(param1);
 			return;
 		}
-		
+
 		QKeyEvent* sigval1 = param1;
 
-		miqt_exec_callback_QMdiArea_keyPressEvent(this, handle__keyPressEvent, sigval1);
+		vtbl->keyPressEvent(vtbl, this, sigval1);
 
-		
 	}
 
 	friend void QMdiArea_virtualbase_keyPressEvent(void* self, QKeyEvent* param1);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__viewportSizeHint = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual QSize viewportSizeHint() const override {
-		if (handle__viewportSizeHint == 0) {
+		if (vtbl->viewportSizeHint == 0) {
 			return QMdiArea::viewportSizeHint();
 		}
-		
 
-		QSize* callback_return_value = miqt_exec_callback_QMdiArea_viewportSizeHint(this, handle__viewportSizeHint);
+
+		QSize* callback_return_value = vtbl->viewportSizeHint(vtbl, this);
 
 		return *callback_return_value;
 	}
 
 	friend QSize* QMdiArea_virtualbase_viewportSizeHint(const void* self);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__changeEvent = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void changeEvent(QEvent* param1) override {
-		if (handle__changeEvent == 0) {
+		if (vtbl->changeEvent == 0) {
 			QMdiArea::changeEvent(param1);
 			return;
 		}
-		
+
 		QEvent* sigval1 = param1;
 
-		miqt_exec_callback_QMdiArea_changeEvent(this, handle__changeEvent, sigval1);
+		vtbl->changeEvent(vtbl, this, sigval1);
 
-		
 	}
 
 	friend void QMdiArea_virtualbase_changeEvent(void* self, QEvent* param1);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__initStyleOption = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void initStyleOption(QStyleOptionFrame* option) const override {
-		if (handle__initStyleOption == 0) {
+		if (vtbl->initStyleOption == 0) {
 			QMdiArea::initStyleOption(option);
 			return;
 		}
-		
+
 		QStyleOptionFrame* sigval1 = option;
 
-		miqt_exec_callback_QMdiArea_initStyleOption(this, handle__initStyleOption, sigval1);
+		vtbl->initStyleOption(vtbl, this, sigval1);
 
-		
 	}
 
 	friend void QMdiArea_virtualbase_initStyleOption(const void* self, QStyleOptionFrame* option);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__devType = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual int devType() const override {
-		if (handle__devType == 0) {
+		if (vtbl->devType == 0) {
 			return QMdiArea::devType();
 		}
-		
 
-		int callback_return_value = miqt_exec_callback_QMdiArea_devType(this, handle__devType);
+
+		int callback_return_value = vtbl->devType(vtbl, this);
 
 		return static_cast<int>(callback_return_value);
 	}
 
 	friend int QMdiArea_virtualbase_devType(const void* self);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__setVisible = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void setVisible(bool visible) override {
-		if (handle__setVisible == 0) {
+		if (vtbl->setVisible == 0) {
 			QMdiArea::setVisible(visible);
 			return;
 		}
-		
+
 		bool sigval1 = visible;
 
-		miqt_exec_callback_QMdiArea_setVisible(this, handle__setVisible, sigval1);
+		vtbl->setVisible(vtbl, this, sigval1);
 
-		
 	}
 
 	friend void QMdiArea_virtualbase_setVisible(void* self, bool visible);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__heightForWidth = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual int heightForWidth(int param1) const override {
-		if (handle__heightForWidth == 0) {
+		if (vtbl->heightForWidth == 0) {
 			return QMdiArea::heightForWidth(param1);
 		}
-		
+
 		int sigval1 = param1;
 
-		int callback_return_value = miqt_exec_callback_QMdiArea_heightForWidth(this, handle__heightForWidth, sigval1);
+		int callback_return_value = vtbl->heightForWidth(vtbl, this, sigval1);
 
 		return static_cast<int>(callback_return_value);
 	}
 
 	friend int QMdiArea_virtualbase_heightForWidth(const void* self, int param1);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__hasHeightForWidth = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual bool hasHeightForWidth() const override {
-		if (handle__hasHeightForWidth == 0) {
+		if (vtbl->hasHeightForWidth == 0) {
 			return QMdiArea::hasHeightForWidth();
 		}
-		
 
-		bool callback_return_value = miqt_exec_callback_QMdiArea_hasHeightForWidth(this, handle__hasHeightForWidth);
+
+		bool callback_return_value = vtbl->hasHeightForWidth(vtbl, this);
 
 		return callback_return_value;
 	}
 
 	friend bool QMdiArea_virtualbase_hasHeightForWidth(const void* self);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__paintEngine = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual QPaintEngine* paintEngine() const override {
-		if (handle__paintEngine == 0) {
+		if (vtbl->paintEngine == 0) {
 			return QMdiArea::paintEngine();
 		}
-		
 
-		QPaintEngine* callback_return_value = miqt_exec_callback_QMdiArea_paintEngine(this, handle__paintEngine);
+
+		QPaintEngine* callback_return_value = vtbl->paintEngine(vtbl, this);
 
 		return callback_return_value;
 	}
 
 	friend QPaintEngine* QMdiArea_virtualbase_paintEngine(const void* self);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__keyReleaseEvent = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void keyReleaseEvent(QKeyEvent* event) override {
-		if (handle__keyReleaseEvent == 0) {
+		if (vtbl->keyReleaseEvent == 0) {
 			QMdiArea::keyReleaseEvent(event);
 			return;
 		}
-		
+
 		QKeyEvent* sigval1 = event;
 
-		miqt_exec_callback_QMdiArea_keyReleaseEvent(this, handle__keyReleaseEvent, sigval1);
+		vtbl->keyReleaseEvent(vtbl, this, sigval1);
 
-		
 	}
 
 	friend void QMdiArea_virtualbase_keyReleaseEvent(void* self, QKeyEvent* event);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__focusInEvent = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void focusInEvent(QFocusEvent* event) override {
-		if (handle__focusInEvent == 0) {
+		if (vtbl->focusInEvent == 0) {
 			QMdiArea::focusInEvent(event);
 			return;
 		}
-		
+
 		QFocusEvent* sigval1 = event;
 
-		miqt_exec_callback_QMdiArea_focusInEvent(this, handle__focusInEvent, sigval1);
+		vtbl->focusInEvent(vtbl, this, sigval1);
 
-		
 	}
 
 	friend void QMdiArea_virtualbase_focusInEvent(void* self, QFocusEvent* event);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__focusOutEvent = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void focusOutEvent(QFocusEvent* event) override {
-		if (handle__focusOutEvent == 0) {
+		if (vtbl->focusOutEvent == 0) {
 			QMdiArea::focusOutEvent(event);
 			return;
 		}
-		
+
 		QFocusEvent* sigval1 = event;
 
-		miqt_exec_callback_QMdiArea_focusOutEvent(this, handle__focusOutEvent, sigval1);
+		vtbl->focusOutEvent(vtbl, this, sigval1);
 
-		
 	}
 
 	friend void QMdiArea_virtualbase_focusOutEvent(void* self, QFocusEvent* event);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__enterEvent = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void enterEvent(QEnterEvent* event) override {
-		if (handle__enterEvent == 0) {
+		if (vtbl->enterEvent == 0) {
 			QMdiArea::enterEvent(event);
 			return;
 		}
-		
+
 		QEnterEvent* sigval1 = event;
 
-		miqt_exec_callback_QMdiArea_enterEvent(this, handle__enterEvent, sigval1);
+		vtbl->enterEvent(vtbl, this, sigval1);
 
-		
 	}
 
 	friend void QMdiArea_virtualbase_enterEvent(void* self, QEnterEvent* event);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__leaveEvent = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void leaveEvent(QEvent* event) override {
-		if (handle__leaveEvent == 0) {
+		if (vtbl->leaveEvent == 0) {
 			QMdiArea::leaveEvent(event);
 			return;
 		}
-		
+
 		QEvent* sigval1 = event;
 
-		miqt_exec_callback_QMdiArea_leaveEvent(this, handle__leaveEvent, sigval1);
+		vtbl->leaveEvent(vtbl, this, sigval1);
 
-		
 	}
 
 	friend void QMdiArea_virtualbase_leaveEvent(void* self, QEvent* event);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__moveEvent = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void moveEvent(QMoveEvent* event) override {
-		if (handle__moveEvent == 0) {
+		if (vtbl->moveEvent == 0) {
 			QMdiArea::moveEvent(event);
 			return;
 		}
-		
+
 		QMoveEvent* sigval1 = event;
 
-		miqt_exec_callback_QMdiArea_moveEvent(this, handle__moveEvent, sigval1);
+		vtbl->moveEvent(vtbl, this, sigval1);
 
-		
 	}
 
 	friend void QMdiArea_virtualbase_moveEvent(void* self, QMoveEvent* event);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__closeEvent = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void closeEvent(QCloseEvent* event) override {
-		if (handle__closeEvent == 0) {
+		if (vtbl->closeEvent == 0) {
 			QMdiArea::closeEvent(event);
 			return;
 		}
-		
+
 		QCloseEvent* sigval1 = event;
 
-		miqt_exec_callback_QMdiArea_closeEvent(this, handle__closeEvent, sigval1);
+		vtbl->closeEvent(vtbl, this, sigval1);
 
-		
 	}
 
 	friend void QMdiArea_virtualbase_closeEvent(void* self, QCloseEvent* event);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__tabletEvent = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void tabletEvent(QTabletEvent* event) override {
-		if (handle__tabletEvent == 0) {
+		if (vtbl->tabletEvent == 0) {
 			QMdiArea::tabletEvent(event);
 			return;
 		}
-		
+
 		QTabletEvent* sigval1 = event;
 
-		miqt_exec_callback_QMdiArea_tabletEvent(this, handle__tabletEvent, sigval1);
+		vtbl->tabletEvent(vtbl, this, sigval1);
 
-		
 	}
 
 	friend void QMdiArea_virtualbase_tabletEvent(void* self, QTabletEvent* event);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__actionEvent = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void actionEvent(QActionEvent* event) override {
-		if (handle__actionEvent == 0) {
+		if (vtbl->actionEvent == 0) {
 			QMdiArea::actionEvent(event);
 			return;
 		}
-		
+
 		QActionEvent* sigval1 = event;
 
-		miqt_exec_callback_QMdiArea_actionEvent(this, handle__actionEvent, sigval1);
+		vtbl->actionEvent(vtbl, this, sigval1);
 
-		
 	}
 
 	friend void QMdiArea_virtualbase_actionEvent(void* self, QActionEvent* event);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__hideEvent = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void hideEvent(QHideEvent* event) override {
-		if (handle__hideEvent == 0) {
+		if (vtbl->hideEvent == 0) {
 			QMdiArea::hideEvent(event);
 			return;
 		}
-		
+
 		QHideEvent* sigval1 = event;
 
-		miqt_exec_callback_QMdiArea_hideEvent(this, handle__hideEvent, sigval1);
+		vtbl->hideEvent(vtbl, this, sigval1);
 
-		
 	}
 
 	friend void QMdiArea_virtualbase_hideEvent(void* self, QHideEvent* event);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__nativeEvent = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual bool nativeEvent(const QByteArray& eventType, void* message, qintptr* result) override {
-		if (handle__nativeEvent == 0) {
+		if (vtbl->nativeEvent == 0) {
 			return QMdiArea::nativeEvent(eventType, message, result);
 		}
-		
+
 		const QByteArray eventType_qb = eventType;
 		struct miqt_string eventType_ms;
 		eventType_ms.len = eventType_qb.length();
@@ -957,199 +737,164 @@ public:
 		qintptr* result_ret = result;
 		intptr_t* sigval3 = (intptr_t*)(result_ret);
 
-		bool callback_return_value = miqt_exec_callback_QMdiArea_nativeEvent(this, handle__nativeEvent, sigval1, sigval2, sigval3);
+		bool callback_return_value = vtbl->nativeEvent(vtbl, this, sigval1, sigval2, sigval3);
 
 		return callback_return_value;
 	}
 
 	friend bool QMdiArea_virtualbase_nativeEvent(void* self, struct miqt_string eventType, void* message, intptr_t* result);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__metric = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual int metric(QPaintDevice::PaintDeviceMetric param1) const override {
-		if (handle__metric == 0) {
+		if (vtbl->metric == 0) {
 			return QMdiArea::metric(param1);
 		}
-		
+
 		QPaintDevice::PaintDeviceMetric param1_ret = param1;
 		int sigval1 = static_cast<int>(param1_ret);
 
-		int callback_return_value = miqt_exec_callback_QMdiArea_metric(this, handle__metric, sigval1);
+		int callback_return_value = vtbl->metric(vtbl, this, sigval1);
 
 		return static_cast<int>(callback_return_value);
 	}
 
 	friend int QMdiArea_virtualbase_metric(const void* self, int param1);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__initPainter = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void initPainter(QPainter* painter) const override {
-		if (handle__initPainter == 0) {
+		if (vtbl->initPainter == 0) {
 			QMdiArea::initPainter(painter);
 			return;
 		}
-		
+
 		QPainter* sigval1 = painter;
 
-		miqt_exec_callback_QMdiArea_initPainter(this, handle__initPainter, sigval1);
+		vtbl->initPainter(vtbl, this, sigval1);
 
-		
 	}
 
 	friend void QMdiArea_virtualbase_initPainter(const void* self, QPainter* painter);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__redirected = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual QPaintDevice* redirected(QPoint* offset) const override {
-		if (handle__redirected == 0) {
+		if (vtbl->redirected == 0) {
 			return QMdiArea::redirected(offset);
 		}
-		
+
 		QPoint* sigval1 = offset;
 
-		QPaintDevice* callback_return_value = miqt_exec_callback_QMdiArea_redirected(this, handle__redirected, sigval1);
+		QPaintDevice* callback_return_value = vtbl->redirected(vtbl, this, sigval1);
 
 		return callback_return_value;
 	}
 
 	friend QPaintDevice* QMdiArea_virtualbase_redirected(const void* self, QPoint* offset);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__sharedPainter = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual QPainter* sharedPainter() const override {
-		if (handle__sharedPainter == 0) {
+		if (vtbl->sharedPainter == 0) {
 			return QMdiArea::sharedPainter();
 		}
-		
 
-		QPainter* callback_return_value = miqt_exec_callback_QMdiArea_sharedPainter(this, handle__sharedPainter);
+
+		QPainter* callback_return_value = vtbl->sharedPainter(vtbl, this);
 
 		return callback_return_value;
 	}
 
 	friend QPainter* QMdiArea_virtualbase_sharedPainter(const void* self);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__inputMethodEvent = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void inputMethodEvent(QInputMethodEvent* param1) override {
-		if (handle__inputMethodEvent == 0) {
+		if (vtbl->inputMethodEvent == 0) {
 			QMdiArea::inputMethodEvent(param1);
 			return;
 		}
-		
+
 		QInputMethodEvent* sigval1 = param1;
 
-		miqt_exec_callback_QMdiArea_inputMethodEvent(this, handle__inputMethodEvent, sigval1);
+		vtbl->inputMethodEvent(vtbl, this, sigval1);
 
-		
 	}
 
 	friend void QMdiArea_virtualbase_inputMethodEvent(void* self, QInputMethodEvent* param1);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__inputMethodQuery = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual QVariant inputMethodQuery(Qt::InputMethodQuery param1) const override {
-		if (handle__inputMethodQuery == 0) {
+		if (vtbl->inputMethodQuery == 0) {
 			return QMdiArea::inputMethodQuery(param1);
 		}
-		
+
 		Qt::InputMethodQuery param1_ret = param1;
 		int sigval1 = static_cast<int>(param1_ret);
 
-		QVariant* callback_return_value = miqt_exec_callback_QMdiArea_inputMethodQuery(this, handle__inputMethodQuery, sigval1);
+		QVariant* callback_return_value = vtbl->inputMethodQuery(vtbl, this, sigval1);
 
 		return *callback_return_value;
 	}
 
 	friend QVariant* QMdiArea_virtualbase_inputMethodQuery(const void* self, int param1);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__focusNextPrevChild = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual bool focusNextPrevChild(bool next) override {
-		if (handle__focusNextPrevChild == 0) {
+		if (vtbl->focusNextPrevChild == 0) {
 			return QMdiArea::focusNextPrevChild(next);
 		}
-		
+
 		bool sigval1 = next;
 
-		bool callback_return_value = miqt_exec_callback_QMdiArea_focusNextPrevChild(this, handle__focusNextPrevChild, sigval1);
+		bool callback_return_value = vtbl->focusNextPrevChild(vtbl, this, sigval1);
 
 		return callback_return_value;
 	}
 
 	friend bool QMdiArea_virtualbase_focusNextPrevChild(void* self, bool next);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__customEvent = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void customEvent(QEvent* event) override {
-		if (handle__customEvent == 0) {
+		if (vtbl->customEvent == 0) {
 			QMdiArea::customEvent(event);
 			return;
 		}
-		
+
 		QEvent* sigval1 = event;
 
-		miqt_exec_callback_QMdiArea_customEvent(this, handle__customEvent, sigval1);
+		vtbl->customEvent(vtbl, this, sigval1);
 
-		
 	}
 
 	friend void QMdiArea_virtualbase_customEvent(void* self, QEvent* event);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__connectNotify = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void connectNotify(const QMetaMethod& signal) override {
-		if (handle__connectNotify == 0) {
+		if (vtbl->connectNotify == 0) {
 			QMdiArea::connectNotify(signal);
 			return;
 		}
-		
+
 		const QMetaMethod& signal_ret = signal;
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
 
-		miqt_exec_callback_QMdiArea_connectNotify(this, handle__connectNotify, sigval1);
+		vtbl->connectNotify(vtbl, this, sigval1);
 
-		
 	}
 
 	friend void QMdiArea_virtualbase_connectNotify(void* self, QMetaMethod* signal);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__disconnectNotify = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void disconnectNotify(const QMetaMethod& signal) override {
-		if (handle__disconnectNotify == 0) {
+		if (vtbl->disconnectNotify == 0) {
 			QMdiArea::disconnectNotify(signal);
 			return;
 		}
-		
+
 		const QMetaMethod& signal_ret = signal;
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
 
-		miqt_exec_callback_QMdiArea_disconnectNotify(this, handle__disconnectNotify, sigval1);
+		vtbl->disconnectNotify(vtbl, this, sigval1);
 
-		
 	}
 
 	friend void QMdiArea_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
@@ -1169,12 +914,12 @@ public:
 	friend bool QMdiArea_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
 };
 
-QMdiArea* QMdiArea_new(QWidget* parent) {
-	return new VirtualQMdiArea(parent);
+QMdiArea* QMdiArea_new(struct QMdiArea_VTable* vtbl, QWidget* parent) {
+	return new VirtualQMdiArea(vtbl, parent);
 }
 
-QMdiArea* QMdiArea_new2() {
-	return new VirtualQMdiArea();
+QMdiArea* QMdiArea_new2(struct QMdiArea_VTable* vtbl) {
+	return new VirtualQMdiArea(vtbl);
 }
 
 void QMdiArea_virtbase(QMdiArea* src, QAbstractScrollArea** outptr_QAbstractScrollArea) {
@@ -1399,30 +1144,10 @@ void QMdiArea_setOption2(QMdiArea* self, int option, bool on) {
 	self->setOption(static_cast<QMdiArea::AreaOption>(option), on);
 }
 
-bool QMdiArea_override_virtual_metaObject(void* self, intptr_t slot) {
-	VirtualQMdiArea* self_cast = dynamic_cast<VirtualQMdiArea*>( (QMdiArea*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__metaObject = slot;
-	return true;
-}
-
 QMetaObject* QMdiArea_virtualbase_metaObject(const void* self) {
 
 	return (QMetaObject*) ( (const VirtualQMdiArea*)(self) )->QMdiArea::metaObject();
 
-}
-
-bool QMdiArea_override_virtual_metacast(void* self, intptr_t slot) {
-	VirtualQMdiArea* self_cast = dynamic_cast<VirtualQMdiArea*>( (QMdiArea*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__metacast = slot;
-	return true;
 }
 
 void* QMdiArea_virtualbase_metacast(void* self, const char* param1) {
@@ -1431,30 +1156,10 @@ void* QMdiArea_virtualbase_metacast(void* self, const char* param1) {
 
 }
 
-bool QMdiArea_override_virtual_metacall(void* self, intptr_t slot) {
-	VirtualQMdiArea* self_cast = dynamic_cast<VirtualQMdiArea*>( (QMdiArea*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__metacall = slot;
-	return true;
-}
-
 int QMdiArea_virtualbase_metacall(void* self, int param1, int param2, void** param3) {
 
 	return ( (VirtualQMdiArea*)(self) )->QMdiArea::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 
-}
-
-bool QMdiArea_override_virtual_sizeHint(void* self, intptr_t slot) {
-	VirtualQMdiArea* self_cast = dynamic_cast<VirtualQMdiArea*>( (QMdiArea*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__sizeHint = slot;
-	return true;
 }
 
 QSize* QMdiArea_virtualbase_sizeHint(const void* self) {
@@ -1463,30 +1168,10 @@ QSize* QMdiArea_virtualbase_sizeHint(const void* self) {
 
 }
 
-bool QMdiArea_override_virtual_minimumSizeHint(void* self, intptr_t slot) {
-	VirtualQMdiArea* self_cast = dynamic_cast<VirtualQMdiArea*>( (QMdiArea*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__minimumSizeHint = slot;
-	return true;
-}
-
 QSize* QMdiArea_virtualbase_minimumSizeHint(const void* self) {
 
 	return new QSize(( (const VirtualQMdiArea*)(self) )->QMdiArea::minimumSizeHint());
 
-}
-
-bool QMdiArea_override_virtual_setupViewport(void* self, intptr_t slot) {
-	VirtualQMdiArea* self_cast = dynamic_cast<VirtualQMdiArea*>( (QMdiArea*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__setupViewport = slot;
-	return true;
 }
 
 void QMdiArea_virtualbase_setupViewport(void* self, QWidget* viewport) {
@@ -1495,30 +1180,10 @@ void QMdiArea_virtualbase_setupViewport(void* self, QWidget* viewport) {
 
 }
 
-bool QMdiArea_override_virtual_event(void* self, intptr_t slot) {
-	VirtualQMdiArea* self_cast = dynamic_cast<VirtualQMdiArea*>( (QMdiArea*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__event = slot;
-	return true;
-}
-
 bool QMdiArea_virtualbase_event(void* self, QEvent* event) {
 
 	return ( (VirtualQMdiArea*)(self) )->QMdiArea::event(event);
 
-}
-
-bool QMdiArea_override_virtual_eventFilter(void* self, intptr_t slot) {
-	VirtualQMdiArea* self_cast = dynamic_cast<VirtualQMdiArea*>( (QMdiArea*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__eventFilter = slot;
-	return true;
 }
 
 bool QMdiArea_virtualbase_eventFilter(void* self, QObject* object, QEvent* event) {
@@ -1527,30 +1192,10 @@ bool QMdiArea_virtualbase_eventFilter(void* self, QObject* object, QEvent* event
 
 }
 
-bool QMdiArea_override_virtual_paintEvent(void* self, intptr_t slot) {
-	VirtualQMdiArea* self_cast = dynamic_cast<VirtualQMdiArea*>( (QMdiArea*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__paintEvent = slot;
-	return true;
-}
-
 void QMdiArea_virtualbase_paintEvent(void* self, QPaintEvent* paintEvent) {
 
 	( (VirtualQMdiArea*)(self) )->QMdiArea::paintEvent(paintEvent);
 
-}
-
-bool QMdiArea_override_virtual_childEvent(void* self, intptr_t slot) {
-	VirtualQMdiArea* self_cast = dynamic_cast<VirtualQMdiArea*>( (QMdiArea*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__childEvent = slot;
-	return true;
 }
 
 void QMdiArea_virtualbase_childEvent(void* self, QChildEvent* childEvent) {
@@ -1559,30 +1204,10 @@ void QMdiArea_virtualbase_childEvent(void* self, QChildEvent* childEvent) {
 
 }
 
-bool QMdiArea_override_virtual_resizeEvent(void* self, intptr_t slot) {
-	VirtualQMdiArea* self_cast = dynamic_cast<VirtualQMdiArea*>( (QMdiArea*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__resizeEvent = slot;
-	return true;
-}
-
 void QMdiArea_virtualbase_resizeEvent(void* self, QResizeEvent* resizeEvent) {
 
 	( (VirtualQMdiArea*)(self) )->QMdiArea::resizeEvent(resizeEvent);
 
-}
-
-bool QMdiArea_override_virtual_timerEvent(void* self, intptr_t slot) {
-	VirtualQMdiArea* self_cast = dynamic_cast<VirtualQMdiArea*>( (QMdiArea*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__timerEvent = slot;
-	return true;
 }
 
 void QMdiArea_virtualbase_timerEvent(void* self, QTimerEvent* timerEvent) {
@@ -1591,30 +1216,10 @@ void QMdiArea_virtualbase_timerEvent(void* self, QTimerEvent* timerEvent) {
 
 }
 
-bool QMdiArea_override_virtual_showEvent(void* self, intptr_t slot) {
-	VirtualQMdiArea* self_cast = dynamic_cast<VirtualQMdiArea*>( (QMdiArea*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__showEvent = slot;
-	return true;
-}
-
 void QMdiArea_virtualbase_showEvent(void* self, QShowEvent* showEvent) {
 
 	( (VirtualQMdiArea*)(self) )->QMdiArea::showEvent(showEvent);
 
-}
-
-bool QMdiArea_override_virtual_viewportEvent(void* self, intptr_t slot) {
-	VirtualQMdiArea* self_cast = dynamic_cast<VirtualQMdiArea*>( (QMdiArea*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__viewportEvent = slot;
-	return true;
 }
 
 bool QMdiArea_virtualbase_viewportEvent(void* self, QEvent* event) {
@@ -1623,30 +1228,10 @@ bool QMdiArea_virtualbase_viewportEvent(void* self, QEvent* event) {
 
 }
 
-bool QMdiArea_override_virtual_scrollContentsBy(void* self, intptr_t slot) {
-	VirtualQMdiArea* self_cast = dynamic_cast<VirtualQMdiArea*>( (QMdiArea*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__scrollContentsBy = slot;
-	return true;
-}
-
 void QMdiArea_virtualbase_scrollContentsBy(void* self, int dx, int dy) {
 
 	( (VirtualQMdiArea*)(self) )->QMdiArea::scrollContentsBy(static_cast<int>(dx), static_cast<int>(dy));
 
-}
-
-bool QMdiArea_override_virtual_mousePressEvent(void* self, intptr_t slot) {
-	VirtualQMdiArea* self_cast = dynamic_cast<VirtualQMdiArea*>( (QMdiArea*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__mousePressEvent = slot;
-	return true;
 }
 
 void QMdiArea_virtualbase_mousePressEvent(void* self, QMouseEvent* param1) {
@@ -1655,30 +1240,10 @@ void QMdiArea_virtualbase_mousePressEvent(void* self, QMouseEvent* param1) {
 
 }
 
-bool QMdiArea_override_virtual_mouseReleaseEvent(void* self, intptr_t slot) {
-	VirtualQMdiArea* self_cast = dynamic_cast<VirtualQMdiArea*>( (QMdiArea*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__mouseReleaseEvent = slot;
-	return true;
-}
-
 void QMdiArea_virtualbase_mouseReleaseEvent(void* self, QMouseEvent* param1) {
 
 	( (VirtualQMdiArea*)(self) )->QMdiArea::mouseReleaseEvent(param1);
 
-}
-
-bool QMdiArea_override_virtual_mouseDoubleClickEvent(void* self, intptr_t slot) {
-	VirtualQMdiArea* self_cast = dynamic_cast<VirtualQMdiArea*>( (QMdiArea*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__mouseDoubleClickEvent = slot;
-	return true;
 }
 
 void QMdiArea_virtualbase_mouseDoubleClickEvent(void* self, QMouseEvent* param1) {
@@ -1687,30 +1252,10 @@ void QMdiArea_virtualbase_mouseDoubleClickEvent(void* self, QMouseEvent* param1)
 
 }
 
-bool QMdiArea_override_virtual_mouseMoveEvent(void* self, intptr_t slot) {
-	VirtualQMdiArea* self_cast = dynamic_cast<VirtualQMdiArea*>( (QMdiArea*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__mouseMoveEvent = slot;
-	return true;
-}
-
 void QMdiArea_virtualbase_mouseMoveEvent(void* self, QMouseEvent* param1) {
 
 	( (VirtualQMdiArea*)(self) )->QMdiArea::mouseMoveEvent(param1);
 
-}
-
-bool QMdiArea_override_virtual_wheelEvent(void* self, intptr_t slot) {
-	VirtualQMdiArea* self_cast = dynamic_cast<VirtualQMdiArea*>( (QMdiArea*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__wheelEvent = slot;
-	return true;
 }
 
 void QMdiArea_virtualbase_wheelEvent(void* self, QWheelEvent* param1) {
@@ -1719,30 +1264,10 @@ void QMdiArea_virtualbase_wheelEvent(void* self, QWheelEvent* param1) {
 
 }
 
-bool QMdiArea_override_virtual_contextMenuEvent(void* self, intptr_t slot) {
-	VirtualQMdiArea* self_cast = dynamic_cast<VirtualQMdiArea*>( (QMdiArea*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__contextMenuEvent = slot;
-	return true;
-}
-
 void QMdiArea_virtualbase_contextMenuEvent(void* self, QContextMenuEvent* param1) {
 
 	( (VirtualQMdiArea*)(self) )->QMdiArea::contextMenuEvent(param1);
 
-}
-
-bool QMdiArea_override_virtual_dragEnterEvent(void* self, intptr_t slot) {
-	VirtualQMdiArea* self_cast = dynamic_cast<VirtualQMdiArea*>( (QMdiArea*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__dragEnterEvent = slot;
-	return true;
 }
 
 void QMdiArea_virtualbase_dragEnterEvent(void* self, QDragEnterEvent* param1) {
@@ -1751,30 +1276,10 @@ void QMdiArea_virtualbase_dragEnterEvent(void* self, QDragEnterEvent* param1) {
 
 }
 
-bool QMdiArea_override_virtual_dragMoveEvent(void* self, intptr_t slot) {
-	VirtualQMdiArea* self_cast = dynamic_cast<VirtualQMdiArea*>( (QMdiArea*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__dragMoveEvent = slot;
-	return true;
-}
-
 void QMdiArea_virtualbase_dragMoveEvent(void* self, QDragMoveEvent* param1) {
 
 	( (VirtualQMdiArea*)(self) )->QMdiArea::dragMoveEvent(param1);
 
-}
-
-bool QMdiArea_override_virtual_dragLeaveEvent(void* self, intptr_t slot) {
-	VirtualQMdiArea* self_cast = dynamic_cast<VirtualQMdiArea*>( (QMdiArea*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__dragLeaveEvent = slot;
-	return true;
 }
 
 void QMdiArea_virtualbase_dragLeaveEvent(void* self, QDragLeaveEvent* param1) {
@@ -1783,30 +1288,10 @@ void QMdiArea_virtualbase_dragLeaveEvent(void* self, QDragLeaveEvent* param1) {
 
 }
 
-bool QMdiArea_override_virtual_dropEvent(void* self, intptr_t slot) {
-	VirtualQMdiArea* self_cast = dynamic_cast<VirtualQMdiArea*>( (QMdiArea*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__dropEvent = slot;
-	return true;
-}
-
 void QMdiArea_virtualbase_dropEvent(void* self, QDropEvent* param1) {
 
 	( (VirtualQMdiArea*)(self) )->QMdiArea::dropEvent(param1);
 
-}
-
-bool QMdiArea_override_virtual_keyPressEvent(void* self, intptr_t slot) {
-	VirtualQMdiArea* self_cast = dynamic_cast<VirtualQMdiArea*>( (QMdiArea*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__keyPressEvent = slot;
-	return true;
 }
 
 void QMdiArea_virtualbase_keyPressEvent(void* self, QKeyEvent* param1) {
@@ -1815,30 +1300,10 @@ void QMdiArea_virtualbase_keyPressEvent(void* self, QKeyEvent* param1) {
 
 }
 
-bool QMdiArea_override_virtual_viewportSizeHint(void* self, intptr_t slot) {
-	VirtualQMdiArea* self_cast = dynamic_cast<VirtualQMdiArea*>( (QMdiArea*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__viewportSizeHint = slot;
-	return true;
-}
-
 QSize* QMdiArea_virtualbase_viewportSizeHint(const void* self) {
 
 	return new QSize(( (const VirtualQMdiArea*)(self) )->QMdiArea::viewportSizeHint());
 
-}
-
-bool QMdiArea_override_virtual_changeEvent(void* self, intptr_t slot) {
-	VirtualQMdiArea* self_cast = dynamic_cast<VirtualQMdiArea*>( (QMdiArea*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__changeEvent = slot;
-	return true;
 }
 
 void QMdiArea_virtualbase_changeEvent(void* self, QEvent* param1) {
@@ -1847,30 +1312,10 @@ void QMdiArea_virtualbase_changeEvent(void* self, QEvent* param1) {
 
 }
 
-bool QMdiArea_override_virtual_initStyleOption(void* self, intptr_t slot) {
-	VirtualQMdiArea* self_cast = dynamic_cast<VirtualQMdiArea*>( (QMdiArea*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__initStyleOption = slot;
-	return true;
-}
-
 void QMdiArea_virtualbase_initStyleOption(const void* self, QStyleOptionFrame* option) {
 
 	( (const VirtualQMdiArea*)(self) )->QMdiArea::initStyleOption(option);
 
-}
-
-bool QMdiArea_override_virtual_devType(void* self, intptr_t slot) {
-	VirtualQMdiArea* self_cast = dynamic_cast<VirtualQMdiArea*>( (QMdiArea*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__devType = slot;
-	return true;
 }
 
 int QMdiArea_virtualbase_devType(const void* self) {
@@ -1879,30 +1324,10 @@ int QMdiArea_virtualbase_devType(const void* self) {
 
 }
 
-bool QMdiArea_override_virtual_setVisible(void* self, intptr_t slot) {
-	VirtualQMdiArea* self_cast = dynamic_cast<VirtualQMdiArea*>( (QMdiArea*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__setVisible = slot;
-	return true;
-}
-
 void QMdiArea_virtualbase_setVisible(void* self, bool visible) {
 
 	( (VirtualQMdiArea*)(self) )->QMdiArea::setVisible(visible);
 
-}
-
-bool QMdiArea_override_virtual_heightForWidth(void* self, intptr_t slot) {
-	VirtualQMdiArea* self_cast = dynamic_cast<VirtualQMdiArea*>( (QMdiArea*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__heightForWidth = slot;
-	return true;
 }
 
 int QMdiArea_virtualbase_heightForWidth(const void* self, int param1) {
@@ -1911,30 +1336,10 @@ int QMdiArea_virtualbase_heightForWidth(const void* self, int param1) {
 
 }
 
-bool QMdiArea_override_virtual_hasHeightForWidth(void* self, intptr_t slot) {
-	VirtualQMdiArea* self_cast = dynamic_cast<VirtualQMdiArea*>( (QMdiArea*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__hasHeightForWidth = slot;
-	return true;
-}
-
 bool QMdiArea_virtualbase_hasHeightForWidth(const void* self) {
 
 	return ( (const VirtualQMdiArea*)(self) )->QMdiArea::hasHeightForWidth();
 
-}
-
-bool QMdiArea_override_virtual_paintEngine(void* self, intptr_t slot) {
-	VirtualQMdiArea* self_cast = dynamic_cast<VirtualQMdiArea*>( (QMdiArea*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__paintEngine = slot;
-	return true;
 }
 
 QPaintEngine* QMdiArea_virtualbase_paintEngine(const void* self) {
@@ -1943,30 +1348,10 @@ QPaintEngine* QMdiArea_virtualbase_paintEngine(const void* self) {
 
 }
 
-bool QMdiArea_override_virtual_keyReleaseEvent(void* self, intptr_t slot) {
-	VirtualQMdiArea* self_cast = dynamic_cast<VirtualQMdiArea*>( (QMdiArea*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__keyReleaseEvent = slot;
-	return true;
-}
-
 void QMdiArea_virtualbase_keyReleaseEvent(void* self, QKeyEvent* event) {
 
 	( (VirtualQMdiArea*)(self) )->QMdiArea::keyReleaseEvent(event);
 
-}
-
-bool QMdiArea_override_virtual_focusInEvent(void* self, intptr_t slot) {
-	VirtualQMdiArea* self_cast = dynamic_cast<VirtualQMdiArea*>( (QMdiArea*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__focusInEvent = slot;
-	return true;
 }
 
 void QMdiArea_virtualbase_focusInEvent(void* self, QFocusEvent* event) {
@@ -1975,30 +1360,10 @@ void QMdiArea_virtualbase_focusInEvent(void* self, QFocusEvent* event) {
 
 }
 
-bool QMdiArea_override_virtual_focusOutEvent(void* self, intptr_t slot) {
-	VirtualQMdiArea* self_cast = dynamic_cast<VirtualQMdiArea*>( (QMdiArea*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__focusOutEvent = slot;
-	return true;
-}
-
 void QMdiArea_virtualbase_focusOutEvent(void* self, QFocusEvent* event) {
 
 	( (VirtualQMdiArea*)(self) )->QMdiArea::focusOutEvent(event);
 
-}
-
-bool QMdiArea_override_virtual_enterEvent(void* self, intptr_t slot) {
-	VirtualQMdiArea* self_cast = dynamic_cast<VirtualQMdiArea*>( (QMdiArea*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__enterEvent = slot;
-	return true;
 }
 
 void QMdiArea_virtualbase_enterEvent(void* self, QEnterEvent* event) {
@@ -2007,30 +1372,10 @@ void QMdiArea_virtualbase_enterEvent(void* self, QEnterEvent* event) {
 
 }
 
-bool QMdiArea_override_virtual_leaveEvent(void* self, intptr_t slot) {
-	VirtualQMdiArea* self_cast = dynamic_cast<VirtualQMdiArea*>( (QMdiArea*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__leaveEvent = slot;
-	return true;
-}
-
 void QMdiArea_virtualbase_leaveEvent(void* self, QEvent* event) {
 
 	( (VirtualQMdiArea*)(self) )->QMdiArea::leaveEvent(event);
 
-}
-
-bool QMdiArea_override_virtual_moveEvent(void* self, intptr_t slot) {
-	VirtualQMdiArea* self_cast = dynamic_cast<VirtualQMdiArea*>( (QMdiArea*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__moveEvent = slot;
-	return true;
 }
 
 void QMdiArea_virtualbase_moveEvent(void* self, QMoveEvent* event) {
@@ -2039,30 +1384,10 @@ void QMdiArea_virtualbase_moveEvent(void* self, QMoveEvent* event) {
 
 }
 
-bool QMdiArea_override_virtual_closeEvent(void* self, intptr_t slot) {
-	VirtualQMdiArea* self_cast = dynamic_cast<VirtualQMdiArea*>( (QMdiArea*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__closeEvent = slot;
-	return true;
-}
-
 void QMdiArea_virtualbase_closeEvent(void* self, QCloseEvent* event) {
 
 	( (VirtualQMdiArea*)(self) )->QMdiArea::closeEvent(event);
 
-}
-
-bool QMdiArea_override_virtual_tabletEvent(void* self, intptr_t slot) {
-	VirtualQMdiArea* self_cast = dynamic_cast<VirtualQMdiArea*>( (QMdiArea*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__tabletEvent = slot;
-	return true;
 }
 
 void QMdiArea_virtualbase_tabletEvent(void* self, QTabletEvent* event) {
@@ -2071,46 +1396,16 @@ void QMdiArea_virtualbase_tabletEvent(void* self, QTabletEvent* event) {
 
 }
 
-bool QMdiArea_override_virtual_actionEvent(void* self, intptr_t slot) {
-	VirtualQMdiArea* self_cast = dynamic_cast<VirtualQMdiArea*>( (QMdiArea*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__actionEvent = slot;
-	return true;
-}
-
 void QMdiArea_virtualbase_actionEvent(void* self, QActionEvent* event) {
 
 	( (VirtualQMdiArea*)(self) )->QMdiArea::actionEvent(event);
 
 }
 
-bool QMdiArea_override_virtual_hideEvent(void* self, intptr_t slot) {
-	VirtualQMdiArea* self_cast = dynamic_cast<VirtualQMdiArea*>( (QMdiArea*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__hideEvent = slot;
-	return true;
-}
-
 void QMdiArea_virtualbase_hideEvent(void* self, QHideEvent* event) {
 
 	( (VirtualQMdiArea*)(self) )->QMdiArea::hideEvent(event);
 
-}
-
-bool QMdiArea_override_virtual_nativeEvent(void* self, intptr_t slot) {
-	VirtualQMdiArea* self_cast = dynamic_cast<VirtualQMdiArea*>( (QMdiArea*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__nativeEvent = slot;
-	return true;
 }
 
 bool QMdiArea_virtualbase_nativeEvent(void* self, struct miqt_string eventType, void* message, intptr_t* result) {
@@ -2120,30 +1415,10 @@ bool QMdiArea_virtualbase_nativeEvent(void* self, struct miqt_string eventType, 
 
 }
 
-bool QMdiArea_override_virtual_metric(void* self, intptr_t slot) {
-	VirtualQMdiArea* self_cast = dynamic_cast<VirtualQMdiArea*>( (QMdiArea*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__metric = slot;
-	return true;
-}
-
 int QMdiArea_virtualbase_metric(const void* self, int param1) {
 
 	return ( (const VirtualQMdiArea*)(self) )->QMdiArea::metric(static_cast<VirtualQMdiArea::PaintDeviceMetric>(param1));
 
-}
-
-bool QMdiArea_override_virtual_initPainter(void* self, intptr_t slot) {
-	VirtualQMdiArea* self_cast = dynamic_cast<VirtualQMdiArea*>( (QMdiArea*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__initPainter = slot;
-	return true;
 }
 
 void QMdiArea_virtualbase_initPainter(const void* self, QPainter* painter) {
@@ -2152,30 +1427,10 @@ void QMdiArea_virtualbase_initPainter(const void* self, QPainter* painter) {
 
 }
 
-bool QMdiArea_override_virtual_redirected(void* self, intptr_t slot) {
-	VirtualQMdiArea* self_cast = dynamic_cast<VirtualQMdiArea*>( (QMdiArea*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__redirected = slot;
-	return true;
-}
-
 QPaintDevice* QMdiArea_virtualbase_redirected(const void* self, QPoint* offset) {
 
 	return ( (const VirtualQMdiArea*)(self) )->QMdiArea::redirected(offset);
 
-}
-
-bool QMdiArea_override_virtual_sharedPainter(void* self, intptr_t slot) {
-	VirtualQMdiArea* self_cast = dynamic_cast<VirtualQMdiArea*>( (QMdiArea*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__sharedPainter = slot;
-	return true;
 }
 
 QPainter* QMdiArea_virtualbase_sharedPainter(const void* self) {
@@ -2184,30 +1439,10 @@ QPainter* QMdiArea_virtualbase_sharedPainter(const void* self) {
 
 }
 
-bool QMdiArea_override_virtual_inputMethodEvent(void* self, intptr_t slot) {
-	VirtualQMdiArea* self_cast = dynamic_cast<VirtualQMdiArea*>( (QMdiArea*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__inputMethodEvent = slot;
-	return true;
-}
-
 void QMdiArea_virtualbase_inputMethodEvent(void* self, QInputMethodEvent* param1) {
 
 	( (VirtualQMdiArea*)(self) )->QMdiArea::inputMethodEvent(param1);
 
-}
-
-bool QMdiArea_override_virtual_inputMethodQuery(void* self, intptr_t slot) {
-	VirtualQMdiArea* self_cast = dynamic_cast<VirtualQMdiArea*>( (QMdiArea*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__inputMethodQuery = slot;
-	return true;
 }
 
 QVariant* QMdiArea_virtualbase_inputMethodQuery(const void* self, int param1) {
@@ -2216,30 +1451,10 @@ QVariant* QMdiArea_virtualbase_inputMethodQuery(const void* self, int param1) {
 
 }
 
-bool QMdiArea_override_virtual_focusNextPrevChild(void* self, intptr_t slot) {
-	VirtualQMdiArea* self_cast = dynamic_cast<VirtualQMdiArea*>( (QMdiArea*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__focusNextPrevChild = slot;
-	return true;
-}
-
 bool QMdiArea_virtualbase_focusNextPrevChild(void* self, bool next) {
 
 	return ( (VirtualQMdiArea*)(self) )->QMdiArea::focusNextPrevChild(next);
 
-}
-
-bool QMdiArea_override_virtual_customEvent(void* self, intptr_t slot) {
-	VirtualQMdiArea* self_cast = dynamic_cast<VirtualQMdiArea*>( (QMdiArea*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__customEvent = slot;
-	return true;
 }
 
 void QMdiArea_virtualbase_customEvent(void* self, QEvent* event) {
@@ -2248,30 +1463,10 @@ void QMdiArea_virtualbase_customEvent(void* self, QEvent* event) {
 
 }
 
-bool QMdiArea_override_virtual_connectNotify(void* self, intptr_t slot) {
-	VirtualQMdiArea* self_cast = dynamic_cast<VirtualQMdiArea*>( (QMdiArea*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__connectNotify = slot;
-	return true;
-}
-
 void QMdiArea_virtualbase_connectNotify(void* self, QMetaMethod* signal) {
 
 	( (VirtualQMdiArea*)(self) )->QMdiArea::connectNotify(*signal);
 
-}
-
-bool QMdiArea_override_virtual_disconnectNotify(void* self, intptr_t slot) {
-	VirtualQMdiArea* self_cast = dynamic_cast<VirtualQMdiArea*>( (QMdiArea*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__disconnectNotify = slot;
-	return true;
 }
 
 void QMdiArea_virtualbase_disconnectNotify(void* self, QMetaMethod* signal) {

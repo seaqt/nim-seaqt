@@ -44,8 +44,6 @@ export
 
 type cQFontInfo*{.exportc: "QFontInfo", incompleteStruct.} = object
 
-proc fcQFontInfo_new(param1: pointer): ptr cQFontInfo {.importc: "QFontInfo_new".}
-proc fcQFontInfo_new2(param1: pointer): ptr cQFontInfo {.importc: "QFontInfo_new2".}
 proc fcQFontInfo_operatorAssign(self: pointer, param1: pointer): void {.importc: "QFontInfo_operatorAssign".}
 proc fcQFontInfo_swap(self: pointer, other: pointer): void {.importc: "QFontInfo_swap".}
 proc fcQFontInfo_family(self: pointer, ): struct_miqt_string {.importc: "QFontInfo_family".}
@@ -64,16 +62,9 @@ proc fcQFontInfo_fixedPitch(self: pointer, ): bool {.importc: "QFontInfo_fixedPi
 proc fcQFontInfo_styleHint(self: pointer, ): cint {.importc: "QFontInfo_styleHint".}
 proc fcQFontInfo_legacyWeight(self: pointer, ): cint {.importc: "QFontInfo_legacyWeight".}
 proc fcQFontInfo_exactMatch(self: pointer, ): bool {.importc: "QFontInfo_exactMatch".}
+proc fcQFontInfo_new(param1: pointer): ptr cQFontInfo {.importc: "QFontInfo_new".}
+proc fcQFontInfo_new2(param1: pointer): ptr cQFontInfo {.importc: "QFontInfo_new2".}
 proc fcQFontInfo_delete(self: pointer) {.importc: "QFontInfo_delete".}
-
-
-func init*(T: type gen_qfontinfo_types.QFontInfo, h: ptr cQFontInfo): gen_qfontinfo_types.QFontInfo =
-  T(h: h)
-proc create*(T: type gen_qfontinfo_types.QFontInfo, param1: gen_qfont_types.QFont): gen_qfontinfo_types.QFontInfo =
-  gen_qfontinfo_types.QFontInfo.init(fcQFontInfo_new(param1.h))
-
-proc create*(T: type gen_qfontinfo_types.QFontInfo, param1: gen_qfontinfo_types.QFontInfo): gen_qfontinfo_types.QFontInfo =
-  gen_qfontinfo_types.QFontInfo.init(fcQFontInfo_new2(param1.h))
 
 proc operatorAssign*(self: gen_qfontinfo_types.QFontInfo, param1: gen_qfontinfo_types.QFontInfo): void =
   fcQFontInfo_operatorAssign(self.h, param1.h)
@@ -134,6 +125,14 @@ proc legacyWeight*(self: gen_qfontinfo_types.QFontInfo, ): cint =
 
 proc exactMatch*(self: gen_qfontinfo_types.QFontInfo, ): bool =
   fcQFontInfo_exactMatch(self.h)
+
+proc create*(T: type gen_qfontinfo_types.QFontInfo,
+    param1: gen_qfont_types.QFont): gen_qfontinfo_types.QFontInfo =
+  gen_qfontinfo_types.QFontInfo(h: fcQFontInfo_new(param1.h))
+
+proc create*(T: type gen_qfontinfo_types.QFontInfo,
+    param1: gen_qfontinfo_types.QFontInfo): gen_qfontinfo_types.QFontInfo =
+  gen_qfontinfo_types.QFontInfo(h: fcQFontInfo_new2(param1.h))
 
 proc delete*(self: gen_qfontinfo_types.QFontInfo) =
   fcQFontInfo_delete(self.h)

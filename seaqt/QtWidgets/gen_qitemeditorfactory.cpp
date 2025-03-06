@@ -9,8 +9,6 @@
 extern "C" {
 #endif
 
-QWidget* miqt_exec_callback_QItemEditorFactory_createEditor(const QItemEditorFactory*, intptr_t, int, QWidget*);
-struct miqt_string miqt_exec_callback_QItemEditorFactory_valuePropertyName(const QItemEditorFactory*, intptr_t, int);
 #ifdef __cplusplus
 } /* extern C */
 #endif
@@ -37,44 +35,39 @@ void QItemEditorCreatorBase_delete(QItemEditorCreatorBase* self) {
 }
 
 class VirtualQItemEditorFactory final : public QItemEditorFactory {
+	struct QItemEditorFactory_VTable* vtbl;
 public:
 
-	VirtualQItemEditorFactory(): QItemEditorFactory() {};
-	VirtualQItemEditorFactory(const QItemEditorFactory& param1): QItemEditorFactory(param1) {};
+	VirtualQItemEditorFactory(struct QItemEditorFactory_VTable* vtbl): QItemEditorFactory(), vtbl(vtbl) {};
+	VirtualQItemEditorFactory(struct QItemEditorFactory_VTable* vtbl, const QItemEditorFactory& param1): QItemEditorFactory(param1), vtbl(vtbl) {};
 
-	virtual ~VirtualQItemEditorFactory() override = default;
-
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__createEditor = 0;
+	virtual ~VirtualQItemEditorFactory() override { if(vtbl->destructor) vtbl->destructor(vtbl, this); }
 
 	// Subclass to allow providing a Go implementation
 	virtual QWidget* createEditor(int userType, QWidget* parent) const override {
-		if (handle__createEditor == 0) {
+		if (vtbl->createEditor == 0) {
 			return QItemEditorFactory::createEditor(userType, parent);
 		}
-		
+
 		int sigval1 = userType;
 		QWidget* sigval2 = parent;
 
-		QWidget* callback_return_value = miqt_exec_callback_QItemEditorFactory_createEditor(this, handle__createEditor, sigval1, sigval2);
+		QWidget* callback_return_value = vtbl->createEditor(vtbl, this, sigval1, sigval2);
 
 		return callback_return_value;
 	}
 
 	friend QWidget* QItemEditorFactory_virtualbase_createEditor(const void* self, int userType, QWidget* parent);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__valuePropertyName = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual QByteArray valuePropertyName(int userType) const override {
-		if (handle__valuePropertyName == 0) {
+		if (vtbl->valuePropertyName == 0) {
 			return QItemEditorFactory::valuePropertyName(userType);
 		}
-		
+
 		int sigval1 = userType;
 
-		struct miqt_string callback_return_value = miqt_exec_callback_QItemEditorFactory_valuePropertyName(this, handle__valuePropertyName, sigval1);
+		struct miqt_string callback_return_value = vtbl->valuePropertyName(vtbl, this, sigval1);
 		QByteArray callback_return_value_QByteArray(callback_return_value.data, callback_return_value.len);
 
 		return callback_return_value_QByteArray;
@@ -84,12 +77,12 @@ public:
 
 };
 
-QItemEditorFactory* QItemEditorFactory_new() {
-	return new VirtualQItemEditorFactory();
+QItemEditorFactory* QItemEditorFactory_new(struct QItemEditorFactory_VTable* vtbl) {
+	return new VirtualQItemEditorFactory(vtbl);
 }
 
-QItemEditorFactory* QItemEditorFactory_new2(QItemEditorFactory* param1) {
-	return new VirtualQItemEditorFactory(*param1);
+QItemEditorFactory* QItemEditorFactory_new2(struct QItemEditorFactory_VTable* vtbl, QItemEditorFactory* param1) {
+	return new VirtualQItemEditorFactory(vtbl, *param1);
 }
 
 QWidget* QItemEditorFactory_createEditor(const QItemEditorFactory* self, int userType, QWidget* parent) {
@@ -117,30 +110,10 @@ void QItemEditorFactory_setDefaultFactory(QItemEditorFactory* factory) {
 	QItemEditorFactory::setDefaultFactory(factory);
 }
 
-bool QItemEditorFactory_override_virtual_createEditor(void* self, intptr_t slot) {
-	VirtualQItemEditorFactory* self_cast = dynamic_cast<VirtualQItemEditorFactory*>( (QItemEditorFactory*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__createEditor = slot;
-	return true;
-}
-
 QWidget* QItemEditorFactory_virtualbase_createEditor(const void* self, int userType, QWidget* parent) {
 
 	return ( (const VirtualQItemEditorFactory*)(self) )->QItemEditorFactory::createEditor(static_cast<int>(userType), parent);
 
-}
-
-bool QItemEditorFactory_override_virtual_valuePropertyName(void* self, intptr_t slot) {
-	VirtualQItemEditorFactory* self_cast = dynamic_cast<VirtualQItemEditorFactory*>( (QItemEditorFactory*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__valuePropertyName = slot;
-	return true;
 }
 
 struct miqt_string QItemEditorFactory_virtualbase_valuePropertyName(const void* self, int userType) {

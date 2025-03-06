@@ -68,9 +68,6 @@ proc fcQPagedPaintDevice_setPageRanges(self: pointer, ranges: pointer): void {.i
 proc fcQPagedPaintDevice_pageRanges(self: pointer, ): pointer {.importc: "QPagedPaintDevice_pageRanges".}
 proc fcQPagedPaintDevice_delete(self: pointer) {.importc: "QPagedPaintDevice_delete".}
 
-
-func init*(T: type gen_qpagedpaintdevice_types.QPagedPaintDevice, h: ptr cQPagedPaintDevice): gen_qpagedpaintdevice_types.QPagedPaintDevice =
-  T(h: h)
 proc newPage*(self: gen_qpagedpaintdevice_types.QPagedPaintDevice, ): bool =
   fcQPagedPaintDevice_newPage(self.h)
 

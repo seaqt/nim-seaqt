@@ -126,9 +126,6 @@ proc fcQFileDevice_map3(self: pointer, offset: clonglong, size: clonglong, flags
 proc fcQFileDevice_staticMetaObject(): pointer {.importc: "QFileDevice_staticMetaObject".}
 proc fcQFileDevice_delete(self: pointer) {.importc: "QFileDevice_delete".}
 
-
-func init*(T: type gen_qfiledevice_types.QFileDevice, h: ptr cQFileDevice): gen_qfiledevice_types.QFileDevice =
-  T(h: h)
 proc metaObject*(self: gen_qfiledevice_types.QFileDevice, ): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQFileDevice_metaObject(self.h))
 

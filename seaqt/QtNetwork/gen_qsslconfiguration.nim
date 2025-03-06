@@ -60,8 +60,6 @@ export
 
 type cQSslConfiguration*{.exportc: "QSslConfiguration", incompleteStruct.} = object
 
-proc fcQSslConfiguration_new(): ptr cQSslConfiguration {.importc: "QSslConfiguration_new".}
-proc fcQSslConfiguration_new2(other: pointer): ptr cQSslConfiguration {.importc: "QSslConfiguration_new2".}
 proc fcQSslConfiguration_operatorAssign(self: pointer, other: pointer): void {.importc: "QSslConfiguration_operatorAssign".}
 proc fcQSslConfiguration_swap(self: pointer, other: pointer): void {.importc: "QSslConfiguration_swap".}
 proc fcQSslConfiguration_operatorEqual(self: pointer, other: pointer): bool {.importc: "QSslConfiguration_operatorEqual".}
@@ -126,16 +124,9 @@ proc fcQSslConfiguration_nextNegotiatedProtocol(self: pointer, ): struct_miqt_st
 proc fcQSslConfiguration_nextProtocolNegotiationStatus(self: pointer, ): cint {.importc: "QSslConfiguration_nextProtocolNegotiationStatus".}
 proc fcQSslConfiguration_addCaCertificates2(self: pointer, path: struct_miqt_string, format: cint): bool {.importc: "QSslConfiguration_addCaCertificates2".}
 proc fcQSslConfiguration_addCaCertificates3(self: pointer, path: struct_miqt_string, format: cint, syntax: cint): bool {.importc: "QSslConfiguration_addCaCertificates3".}
+proc fcQSslConfiguration_new(): ptr cQSslConfiguration {.importc: "QSslConfiguration_new".}
+proc fcQSslConfiguration_new2(other: pointer): ptr cQSslConfiguration {.importc: "QSslConfiguration_new2".}
 proc fcQSslConfiguration_delete(self: pointer) {.importc: "QSslConfiguration_delete".}
-
-
-func init*(T: type gen_qsslconfiguration_types.QSslConfiguration, h: ptr cQSslConfiguration): gen_qsslconfiguration_types.QSslConfiguration =
-  T(h: h)
-proc create*(T: type gen_qsslconfiguration_types.QSslConfiguration, ): gen_qsslconfiguration_types.QSslConfiguration =
-  gen_qsslconfiguration_types.QSslConfiguration.init(fcQSslConfiguration_new())
-
-proc create*(T: type gen_qsslconfiguration_types.QSslConfiguration, other: gen_qsslconfiguration_types.QSslConfiguration): gen_qsslconfiguration_types.QSslConfiguration =
-  gen_qsslconfiguration_types.QSslConfiguration.init(fcQSslConfiguration_new2(other.h))
 
 proc operatorAssign*(self: gen_qsslconfiguration_types.QSslConfiguration, other: gen_qsslconfiguration_types.QSslConfiguration): void =
   fcQSslConfiguration_operatorAssign(self.h, other.h)
@@ -409,6 +400,13 @@ proc addCaCertificates*(self: gen_qsslconfiguration_types.QSslConfiguration, pat
 
 proc addCaCertificates*(self: gen_qsslconfiguration_types.QSslConfiguration, path: string, format: cint, syntax: cint): bool =
   fcQSslConfiguration_addCaCertificates3(self.h, struct_miqt_string(data: path, len: csize_t(len(path))), cint(format), cint(syntax))
+
+proc create*(T: type gen_qsslconfiguration_types.QSslConfiguration): gen_qsslconfiguration_types.QSslConfiguration =
+  gen_qsslconfiguration_types.QSslConfiguration(h: fcQSslConfiguration_new())
+
+proc create*(T: type gen_qsslconfiguration_types.QSslConfiguration,
+    other: gen_qsslconfiguration_types.QSslConfiguration): gen_qsslconfiguration_types.QSslConfiguration =
+  gen_qsslconfiguration_types.QSslConfiguration(h: fcQSslConfiguration_new2(other.h))
 
 proc delete*(self: gen_qsslconfiguration_types.QSslConfiguration) =
   fcQSslConfiguration_delete(self.h)

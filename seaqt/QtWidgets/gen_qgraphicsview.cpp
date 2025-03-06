@@ -56,969 +56,737 @@ extern "C" {
 #endif
 
 void miqt_exec_callback_QGraphicsView_rubberBandChanged(intptr_t, QRect*, QPointF*, QPointF*);
-QMetaObject* miqt_exec_callback_QGraphicsView_metaObject(const QGraphicsView*, intptr_t);
-void* miqt_exec_callback_QGraphicsView_metacast(QGraphicsView*, intptr_t, const char*);
-int miqt_exec_callback_QGraphicsView_metacall(QGraphicsView*, intptr_t, int, int, void**);
-QSize* miqt_exec_callback_QGraphicsView_sizeHint(const QGraphicsView*, intptr_t);
-QVariant* miqt_exec_callback_QGraphicsView_inputMethodQuery(const QGraphicsView*, intptr_t, int);
-void miqt_exec_callback_QGraphicsView_setupViewport(QGraphicsView*, intptr_t, QWidget*);
-bool miqt_exec_callback_QGraphicsView_event(QGraphicsView*, intptr_t, QEvent*);
-bool miqt_exec_callback_QGraphicsView_viewportEvent(QGraphicsView*, intptr_t, QEvent*);
-void miqt_exec_callback_QGraphicsView_contextMenuEvent(QGraphicsView*, intptr_t, QContextMenuEvent*);
-void miqt_exec_callback_QGraphicsView_dragEnterEvent(QGraphicsView*, intptr_t, QDragEnterEvent*);
-void miqt_exec_callback_QGraphicsView_dragLeaveEvent(QGraphicsView*, intptr_t, QDragLeaveEvent*);
-void miqt_exec_callback_QGraphicsView_dragMoveEvent(QGraphicsView*, intptr_t, QDragMoveEvent*);
-void miqt_exec_callback_QGraphicsView_dropEvent(QGraphicsView*, intptr_t, QDropEvent*);
-void miqt_exec_callback_QGraphicsView_focusInEvent(QGraphicsView*, intptr_t, QFocusEvent*);
-bool miqt_exec_callback_QGraphicsView_focusNextPrevChild(QGraphicsView*, intptr_t, bool);
-void miqt_exec_callback_QGraphicsView_focusOutEvent(QGraphicsView*, intptr_t, QFocusEvent*);
-void miqt_exec_callback_QGraphicsView_keyPressEvent(QGraphicsView*, intptr_t, QKeyEvent*);
-void miqt_exec_callback_QGraphicsView_keyReleaseEvent(QGraphicsView*, intptr_t, QKeyEvent*);
-void miqt_exec_callback_QGraphicsView_mouseDoubleClickEvent(QGraphicsView*, intptr_t, QMouseEvent*);
-void miqt_exec_callback_QGraphicsView_mousePressEvent(QGraphicsView*, intptr_t, QMouseEvent*);
-void miqt_exec_callback_QGraphicsView_mouseMoveEvent(QGraphicsView*, intptr_t, QMouseEvent*);
-void miqt_exec_callback_QGraphicsView_mouseReleaseEvent(QGraphicsView*, intptr_t, QMouseEvent*);
-void miqt_exec_callback_QGraphicsView_wheelEvent(QGraphicsView*, intptr_t, QWheelEvent*);
-void miqt_exec_callback_QGraphicsView_paintEvent(QGraphicsView*, intptr_t, QPaintEvent*);
-void miqt_exec_callback_QGraphicsView_resizeEvent(QGraphicsView*, intptr_t, QResizeEvent*);
-void miqt_exec_callback_QGraphicsView_scrollContentsBy(QGraphicsView*, intptr_t, int, int);
-void miqt_exec_callback_QGraphicsView_showEvent(QGraphicsView*, intptr_t, QShowEvent*);
-void miqt_exec_callback_QGraphicsView_inputMethodEvent(QGraphicsView*, intptr_t, QInputMethodEvent*);
-void miqt_exec_callback_QGraphicsView_drawBackground(QGraphicsView*, intptr_t, QPainter*, QRectF*);
-void miqt_exec_callback_QGraphicsView_drawForeground(QGraphicsView*, intptr_t, QPainter*, QRectF*);
-QSize* miqt_exec_callback_QGraphicsView_minimumSizeHint(const QGraphicsView*, intptr_t);
-bool miqt_exec_callback_QGraphicsView_eventFilter(QGraphicsView*, intptr_t, QObject*, QEvent*);
-QSize* miqt_exec_callback_QGraphicsView_viewportSizeHint(const QGraphicsView*, intptr_t);
-void miqt_exec_callback_QGraphicsView_changeEvent(QGraphicsView*, intptr_t, QEvent*);
-void miqt_exec_callback_QGraphicsView_initStyleOption(const QGraphicsView*, intptr_t, QStyleOptionFrame*);
-int miqt_exec_callback_QGraphicsView_devType(const QGraphicsView*, intptr_t);
-void miqt_exec_callback_QGraphicsView_setVisible(QGraphicsView*, intptr_t, bool);
-int miqt_exec_callback_QGraphicsView_heightForWidth(const QGraphicsView*, intptr_t, int);
-bool miqt_exec_callback_QGraphicsView_hasHeightForWidth(const QGraphicsView*, intptr_t);
-QPaintEngine* miqt_exec_callback_QGraphicsView_paintEngine(const QGraphicsView*, intptr_t);
-void miqt_exec_callback_QGraphicsView_enterEvent(QGraphicsView*, intptr_t, QEnterEvent*);
-void miqt_exec_callback_QGraphicsView_leaveEvent(QGraphicsView*, intptr_t, QEvent*);
-void miqt_exec_callback_QGraphicsView_moveEvent(QGraphicsView*, intptr_t, QMoveEvent*);
-void miqt_exec_callback_QGraphicsView_closeEvent(QGraphicsView*, intptr_t, QCloseEvent*);
-void miqt_exec_callback_QGraphicsView_tabletEvent(QGraphicsView*, intptr_t, QTabletEvent*);
-void miqt_exec_callback_QGraphicsView_actionEvent(QGraphicsView*, intptr_t, QActionEvent*);
-void miqt_exec_callback_QGraphicsView_hideEvent(QGraphicsView*, intptr_t, QHideEvent*);
-bool miqt_exec_callback_QGraphicsView_nativeEvent(QGraphicsView*, intptr_t, struct miqt_string, void*, intptr_t*);
-int miqt_exec_callback_QGraphicsView_metric(const QGraphicsView*, intptr_t, int);
-void miqt_exec_callback_QGraphicsView_initPainter(const QGraphicsView*, intptr_t, QPainter*);
-QPaintDevice* miqt_exec_callback_QGraphicsView_redirected(const QGraphicsView*, intptr_t, QPoint*);
-QPainter* miqt_exec_callback_QGraphicsView_sharedPainter(const QGraphicsView*, intptr_t);
-void miqt_exec_callback_QGraphicsView_timerEvent(QGraphicsView*, intptr_t, QTimerEvent*);
-void miqt_exec_callback_QGraphicsView_childEvent(QGraphicsView*, intptr_t, QChildEvent*);
-void miqt_exec_callback_QGraphicsView_customEvent(QGraphicsView*, intptr_t, QEvent*);
-void miqt_exec_callback_QGraphicsView_connectNotify(QGraphicsView*, intptr_t, QMetaMethod*);
-void miqt_exec_callback_QGraphicsView_disconnectNotify(QGraphicsView*, intptr_t, QMetaMethod*);
 #ifdef __cplusplus
 } /* extern C */
 #endif
 
 class VirtualQGraphicsView final : public QGraphicsView {
+	struct QGraphicsView_VTable* vtbl;
 public:
 
-	VirtualQGraphicsView(QWidget* parent): QGraphicsView(parent) {};
-	VirtualQGraphicsView(): QGraphicsView() {};
-	VirtualQGraphicsView(QGraphicsScene* scene): QGraphicsView(scene) {};
-	VirtualQGraphicsView(QGraphicsScene* scene, QWidget* parent): QGraphicsView(scene, parent) {};
+	VirtualQGraphicsView(struct QGraphicsView_VTable* vtbl, QWidget* parent): QGraphicsView(parent), vtbl(vtbl) {};
+	VirtualQGraphicsView(struct QGraphicsView_VTable* vtbl): QGraphicsView(), vtbl(vtbl) {};
+	VirtualQGraphicsView(struct QGraphicsView_VTable* vtbl, QGraphicsScene* scene): QGraphicsView(scene), vtbl(vtbl) {};
+	VirtualQGraphicsView(struct QGraphicsView_VTable* vtbl, QGraphicsScene* scene, QWidget* parent): QGraphicsView(scene, parent), vtbl(vtbl) {};
 
-	virtual ~VirtualQGraphicsView() override = default;
-
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__metaObject = 0;
+	virtual ~VirtualQGraphicsView() override { if(vtbl->destructor) vtbl->destructor(vtbl, this); }
 
 	// Subclass to allow providing a Go implementation
 	virtual const QMetaObject* metaObject() const override {
-		if (handle__metaObject == 0) {
+		if (vtbl->metaObject == 0) {
 			return QGraphicsView::metaObject();
 		}
-		
 
-		QMetaObject* callback_return_value = miqt_exec_callback_QGraphicsView_metaObject(this, handle__metaObject);
+
+		QMetaObject* callback_return_value = vtbl->metaObject(vtbl, this);
 
 		return callback_return_value;
 	}
 
 	friend QMetaObject* QGraphicsView_virtualbase_metaObject(const void* self);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__metacast = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void* qt_metacast(const char* param1) override {
-		if (handle__metacast == 0) {
+		if (vtbl->metacast == 0) {
 			return QGraphicsView::qt_metacast(param1);
 		}
-		
+
 		const char* sigval1 = (const char*) param1;
 
-		void* callback_return_value = miqt_exec_callback_QGraphicsView_metacast(this, handle__metacast, sigval1);
+		void* callback_return_value = vtbl->metacast(vtbl, this, sigval1);
 
 		return callback_return_value;
 	}
 
 	friend void* QGraphicsView_virtualbase_metacast(void* self, const char* param1);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__metacall = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual int qt_metacall(QMetaObject::Call param1, int param2, void** param3) override {
-		if (handle__metacall == 0) {
+		if (vtbl->metacall == 0) {
 			return QGraphicsView::qt_metacall(param1, param2, param3);
 		}
-		
+
 		QMetaObject::Call param1_ret = param1;
 		int sigval1 = static_cast<int>(param1_ret);
 		int sigval2 = param2;
 		void** sigval3 = param3;
 
-		int callback_return_value = miqt_exec_callback_QGraphicsView_metacall(this, handle__metacall, sigval1, sigval2, sigval3);
+		int callback_return_value = vtbl->metacall(vtbl, this, sigval1, sigval2, sigval3);
 
 		return static_cast<int>(callback_return_value);
 	}
 
 	friend int QGraphicsView_virtualbase_metacall(void* self, int param1, int param2, void** param3);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__sizeHint = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual QSize sizeHint() const override {
-		if (handle__sizeHint == 0) {
+		if (vtbl->sizeHint == 0) {
 			return QGraphicsView::sizeHint();
 		}
-		
 
-		QSize* callback_return_value = miqt_exec_callback_QGraphicsView_sizeHint(this, handle__sizeHint);
+
+		QSize* callback_return_value = vtbl->sizeHint(vtbl, this);
 
 		return *callback_return_value;
 	}
 
 	friend QSize* QGraphicsView_virtualbase_sizeHint(const void* self);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__inputMethodQuery = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual QVariant inputMethodQuery(Qt::InputMethodQuery query) const override {
-		if (handle__inputMethodQuery == 0) {
+		if (vtbl->inputMethodQuery == 0) {
 			return QGraphicsView::inputMethodQuery(query);
 		}
-		
+
 		Qt::InputMethodQuery query_ret = query;
 		int sigval1 = static_cast<int>(query_ret);
 
-		QVariant* callback_return_value = miqt_exec_callback_QGraphicsView_inputMethodQuery(this, handle__inputMethodQuery, sigval1);
+		QVariant* callback_return_value = vtbl->inputMethodQuery(vtbl, this, sigval1);
 
 		return *callback_return_value;
 	}
 
 	friend QVariant* QGraphicsView_virtualbase_inputMethodQuery(const void* self, int query);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__setupViewport = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void setupViewport(QWidget* widget) override {
-		if (handle__setupViewport == 0) {
+		if (vtbl->setupViewport == 0) {
 			QGraphicsView::setupViewport(widget);
 			return;
 		}
-		
+
 		QWidget* sigval1 = widget;
 
-		miqt_exec_callback_QGraphicsView_setupViewport(this, handle__setupViewport, sigval1);
+		vtbl->setupViewport(vtbl, this, sigval1);
 
-		
 	}
 
 	friend void QGraphicsView_virtualbase_setupViewport(void* self, QWidget* widget);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__event = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual bool event(QEvent* event) override {
-		if (handle__event == 0) {
+		if (vtbl->event == 0) {
 			return QGraphicsView::event(event);
 		}
-		
+
 		QEvent* sigval1 = event;
 
-		bool callback_return_value = miqt_exec_callback_QGraphicsView_event(this, handle__event, sigval1);
+		bool callback_return_value = vtbl->event(vtbl, this, sigval1);
 
 		return callback_return_value;
 	}
 
 	friend bool QGraphicsView_virtualbase_event(void* self, QEvent* event);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__viewportEvent = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual bool viewportEvent(QEvent* event) override {
-		if (handle__viewportEvent == 0) {
+		if (vtbl->viewportEvent == 0) {
 			return QGraphicsView::viewportEvent(event);
 		}
-		
+
 		QEvent* sigval1 = event;
 
-		bool callback_return_value = miqt_exec_callback_QGraphicsView_viewportEvent(this, handle__viewportEvent, sigval1);
+		bool callback_return_value = vtbl->viewportEvent(vtbl, this, sigval1);
 
 		return callback_return_value;
 	}
 
 	friend bool QGraphicsView_virtualbase_viewportEvent(void* self, QEvent* event);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__contextMenuEvent = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void contextMenuEvent(QContextMenuEvent* event) override {
-		if (handle__contextMenuEvent == 0) {
+		if (vtbl->contextMenuEvent == 0) {
 			QGraphicsView::contextMenuEvent(event);
 			return;
 		}
-		
+
 		QContextMenuEvent* sigval1 = event;
 
-		miqt_exec_callback_QGraphicsView_contextMenuEvent(this, handle__contextMenuEvent, sigval1);
+		vtbl->contextMenuEvent(vtbl, this, sigval1);
 
-		
 	}
 
 	friend void QGraphicsView_virtualbase_contextMenuEvent(void* self, QContextMenuEvent* event);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__dragEnterEvent = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void dragEnterEvent(QDragEnterEvent* event) override {
-		if (handle__dragEnterEvent == 0) {
+		if (vtbl->dragEnterEvent == 0) {
 			QGraphicsView::dragEnterEvent(event);
 			return;
 		}
-		
+
 		QDragEnterEvent* sigval1 = event;
 
-		miqt_exec_callback_QGraphicsView_dragEnterEvent(this, handle__dragEnterEvent, sigval1);
+		vtbl->dragEnterEvent(vtbl, this, sigval1);
 
-		
 	}
 
 	friend void QGraphicsView_virtualbase_dragEnterEvent(void* self, QDragEnterEvent* event);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__dragLeaveEvent = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void dragLeaveEvent(QDragLeaveEvent* event) override {
-		if (handle__dragLeaveEvent == 0) {
+		if (vtbl->dragLeaveEvent == 0) {
 			QGraphicsView::dragLeaveEvent(event);
 			return;
 		}
-		
+
 		QDragLeaveEvent* sigval1 = event;
 
-		miqt_exec_callback_QGraphicsView_dragLeaveEvent(this, handle__dragLeaveEvent, sigval1);
+		vtbl->dragLeaveEvent(vtbl, this, sigval1);
 
-		
 	}
 
 	friend void QGraphicsView_virtualbase_dragLeaveEvent(void* self, QDragLeaveEvent* event);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__dragMoveEvent = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void dragMoveEvent(QDragMoveEvent* event) override {
-		if (handle__dragMoveEvent == 0) {
+		if (vtbl->dragMoveEvent == 0) {
 			QGraphicsView::dragMoveEvent(event);
 			return;
 		}
-		
+
 		QDragMoveEvent* sigval1 = event;
 
-		miqt_exec_callback_QGraphicsView_dragMoveEvent(this, handle__dragMoveEvent, sigval1);
+		vtbl->dragMoveEvent(vtbl, this, sigval1);
 
-		
 	}
 
 	friend void QGraphicsView_virtualbase_dragMoveEvent(void* self, QDragMoveEvent* event);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__dropEvent = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void dropEvent(QDropEvent* event) override {
-		if (handle__dropEvent == 0) {
+		if (vtbl->dropEvent == 0) {
 			QGraphicsView::dropEvent(event);
 			return;
 		}
-		
+
 		QDropEvent* sigval1 = event;
 
-		miqt_exec_callback_QGraphicsView_dropEvent(this, handle__dropEvent, sigval1);
+		vtbl->dropEvent(vtbl, this, sigval1);
 
-		
 	}
 
 	friend void QGraphicsView_virtualbase_dropEvent(void* self, QDropEvent* event);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__focusInEvent = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void focusInEvent(QFocusEvent* event) override {
-		if (handle__focusInEvent == 0) {
+		if (vtbl->focusInEvent == 0) {
 			QGraphicsView::focusInEvent(event);
 			return;
 		}
-		
+
 		QFocusEvent* sigval1 = event;
 
-		miqt_exec_callback_QGraphicsView_focusInEvent(this, handle__focusInEvent, sigval1);
+		vtbl->focusInEvent(vtbl, this, sigval1);
 
-		
 	}
 
 	friend void QGraphicsView_virtualbase_focusInEvent(void* self, QFocusEvent* event);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__focusNextPrevChild = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual bool focusNextPrevChild(bool next) override {
-		if (handle__focusNextPrevChild == 0) {
+		if (vtbl->focusNextPrevChild == 0) {
 			return QGraphicsView::focusNextPrevChild(next);
 		}
-		
+
 		bool sigval1 = next;
 
-		bool callback_return_value = miqt_exec_callback_QGraphicsView_focusNextPrevChild(this, handle__focusNextPrevChild, sigval1);
+		bool callback_return_value = vtbl->focusNextPrevChild(vtbl, this, sigval1);
 
 		return callback_return_value;
 	}
 
 	friend bool QGraphicsView_virtualbase_focusNextPrevChild(void* self, bool next);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__focusOutEvent = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void focusOutEvent(QFocusEvent* event) override {
-		if (handle__focusOutEvent == 0) {
+		if (vtbl->focusOutEvent == 0) {
 			QGraphicsView::focusOutEvent(event);
 			return;
 		}
-		
+
 		QFocusEvent* sigval1 = event;
 
-		miqt_exec_callback_QGraphicsView_focusOutEvent(this, handle__focusOutEvent, sigval1);
+		vtbl->focusOutEvent(vtbl, this, sigval1);
 
-		
 	}
 
 	friend void QGraphicsView_virtualbase_focusOutEvent(void* self, QFocusEvent* event);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__keyPressEvent = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void keyPressEvent(QKeyEvent* event) override {
-		if (handle__keyPressEvent == 0) {
+		if (vtbl->keyPressEvent == 0) {
 			QGraphicsView::keyPressEvent(event);
 			return;
 		}
-		
+
 		QKeyEvent* sigval1 = event;
 
-		miqt_exec_callback_QGraphicsView_keyPressEvent(this, handle__keyPressEvent, sigval1);
+		vtbl->keyPressEvent(vtbl, this, sigval1);
 
-		
 	}
 
 	friend void QGraphicsView_virtualbase_keyPressEvent(void* self, QKeyEvent* event);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__keyReleaseEvent = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void keyReleaseEvent(QKeyEvent* event) override {
-		if (handle__keyReleaseEvent == 0) {
+		if (vtbl->keyReleaseEvent == 0) {
 			QGraphicsView::keyReleaseEvent(event);
 			return;
 		}
-		
+
 		QKeyEvent* sigval1 = event;
 
-		miqt_exec_callback_QGraphicsView_keyReleaseEvent(this, handle__keyReleaseEvent, sigval1);
+		vtbl->keyReleaseEvent(vtbl, this, sigval1);
 
-		
 	}
 
 	friend void QGraphicsView_virtualbase_keyReleaseEvent(void* self, QKeyEvent* event);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__mouseDoubleClickEvent = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void mouseDoubleClickEvent(QMouseEvent* event) override {
-		if (handle__mouseDoubleClickEvent == 0) {
+		if (vtbl->mouseDoubleClickEvent == 0) {
 			QGraphicsView::mouseDoubleClickEvent(event);
 			return;
 		}
-		
+
 		QMouseEvent* sigval1 = event;
 
-		miqt_exec_callback_QGraphicsView_mouseDoubleClickEvent(this, handle__mouseDoubleClickEvent, sigval1);
+		vtbl->mouseDoubleClickEvent(vtbl, this, sigval1);
 
-		
 	}
 
 	friend void QGraphicsView_virtualbase_mouseDoubleClickEvent(void* self, QMouseEvent* event);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__mousePressEvent = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void mousePressEvent(QMouseEvent* event) override {
-		if (handle__mousePressEvent == 0) {
+		if (vtbl->mousePressEvent == 0) {
 			QGraphicsView::mousePressEvent(event);
 			return;
 		}
-		
+
 		QMouseEvent* sigval1 = event;
 
-		miqt_exec_callback_QGraphicsView_mousePressEvent(this, handle__mousePressEvent, sigval1);
+		vtbl->mousePressEvent(vtbl, this, sigval1);
 
-		
 	}
 
 	friend void QGraphicsView_virtualbase_mousePressEvent(void* self, QMouseEvent* event);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__mouseMoveEvent = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void mouseMoveEvent(QMouseEvent* event) override {
-		if (handle__mouseMoveEvent == 0) {
+		if (vtbl->mouseMoveEvent == 0) {
 			QGraphicsView::mouseMoveEvent(event);
 			return;
 		}
-		
+
 		QMouseEvent* sigval1 = event;
 
-		miqt_exec_callback_QGraphicsView_mouseMoveEvent(this, handle__mouseMoveEvent, sigval1);
+		vtbl->mouseMoveEvent(vtbl, this, sigval1);
 
-		
 	}
 
 	friend void QGraphicsView_virtualbase_mouseMoveEvent(void* self, QMouseEvent* event);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__mouseReleaseEvent = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void mouseReleaseEvent(QMouseEvent* event) override {
-		if (handle__mouseReleaseEvent == 0) {
+		if (vtbl->mouseReleaseEvent == 0) {
 			QGraphicsView::mouseReleaseEvent(event);
 			return;
 		}
-		
+
 		QMouseEvent* sigval1 = event;
 
-		miqt_exec_callback_QGraphicsView_mouseReleaseEvent(this, handle__mouseReleaseEvent, sigval1);
+		vtbl->mouseReleaseEvent(vtbl, this, sigval1);
 
-		
 	}
 
 	friend void QGraphicsView_virtualbase_mouseReleaseEvent(void* self, QMouseEvent* event);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__wheelEvent = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void wheelEvent(QWheelEvent* event) override {
-		if (handle__wheelEvent == 0) {
+		if (vtbl->wheelEvent == 0) {
 			QGraphicsView::wheelEvent(event);
 			return;
 		}
-		
+
 		QWheelEvent* sigval1 = event;
 
-		miqt_exec_callback_QGraphicsView_wheelEvent(this, handle__wheelEvent, sigval1);
+		vtbl->wheelEvent(vtbl, this, sigval1);
 
-		
 	}
 
 	friend void QGraphicsView_virtualbase_wheelEvent(void* self, QWheelEvent* event);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__paintEvent = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void paintEvent(QPaintEvent* event) override {
-		if (handle__paintEvent == 0) {
+		if (vtbl->paintEvent == 0) {
 			QGraphicsView::paintEvent(event);
 			return;
 		}
-		
+
 		QPaintEvent* sigval1 = event;
 
-		miqt_exec_callback_QGraphicsView_paintEvent(this, handle__paintEvent, sigval1);
+		vtbl->paintEvent(vtbl, this, sigval1);
 
-		
 	}
 
 	friend void QGraphicsView_virtualbase_paintEvent(void* self, QPaintEvent* event);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__resizeEvent = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void resizeEvent(QResizeEvent* event) override {
-		if (handle__resizeEvent == 0) {
+		if (vtbl->resizeEvent == 0) {
 			QGraphicsView::resizeEvent(event);
 			return;
 		}
-		
+
 		QResizeEvent* sigval1 = event;
 
-		miqt_exec_callback_QGraphicsView_resizeEvent(this, handle__resizeEvent, sigval1);
+		vtbl->resizeEvent(vtbl, this, sigval1);
 
-		
 	}
 
 	friend void QGraphicsView_virtualbase_resizeEvent(void* self, QResizeEvent* event);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__scrollContentsBy = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void scrollContentsBy(int dx, int dy) override {
-		if (handle__scrollContentsBy == 0) {
+		if (vtbl->scrollContentsBy == 0) {
 			QGraphicsView::scrollContentsBy(dx, dy);
 			return;
 		}
-		
+
 		int sigval1 = dx;
 		int sigval2 = dy;
 
-		miqt_exec_callback_QGraphicsView_scrollContentsBy(this, handle__scrollContentsBy, sigval1, sigval2);
+		vtbl->scrollContentsBy(vtbl, this, sigval1, sigval2);
 
-		
 	}
 
 	friend void QGraphicsView_virtualbase_scrollContentsBy(void* self, int dx, int dy);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__showEvent = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void showEvent(QShowEvent* event) override {
-		if (handle__showEvent == 0) {
+		if (vtbl->showEvent == 0) {
 			QGraphicsView::showEvent(event);
 			return;
 		}
-		
+
 		QShowEvent* sigval1 = event;
 
-		miqt_exec_callback_QGraphicsView_showEvent(this, handle__showEvent, sigval1);
+		vtbl->showEvent(vtbl, this, sigval1);
 
-		
 	}
 
 	friend void QGraphicsView_virtualbase_showEvent(void* self, QShowEvent* event);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__inputMethodEvent = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void inputMethodEvent(QInputMethodEvent* event) override {
-		if (handle__inputMethodEvent == 0) {
+		if (vtbl->inputMethodEvent == 0) {
 			QGraphicsView::inputMethodEvent(event);
 			return;
 		}
-		
+
 		QInputMethodEvent* sigval1 = event;
 
-		miqt_exec_callback_QGraphicsView_inputMethodEvent(this, handle__inputMethodEvent, sigval1);
+		vtbl->inputMethodEvent(vtbl, this, sigval1);
 
-		
 	}
 
 	friend void QGraphicsView_virtualbase_inputMethodEvent(void* self, QInputMethodEvent* event);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__drawBackground = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void drawBackground(QPainter* painter, const QRectF& rect) override {
-		if (handle__drawBackground == 0) {
+		if (vtbl->drawBackground == 0) {
 			QGraphicsView::drawBackground(painter, rect);
 			return;
 		}
-		
+
 		QPainter* sigval1 = painter;
 		const QRectF& rect_ret = rect;
 		// Cast returned reference into pointer
 		QRectF* sigval2 = const_cast<QRectF*>(&rect_ret);
 
-		miqt_exec_callback_QGraphicsView_drawBackground(this, handle__drawBackground, sigval1, sigval2);
+		vtbl->drawBackground(vtbl, this, sigval1, sigval2);
 
-		
 	}
 
 	friend void QGraphicsView_virtualbase_drawBackground(void* self, QPainter* painter, QRectF* rect);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__drawForeground = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void drawForeground(QPainter* painter, const QRectF& rect) override {
-		if (handle__drawForeground == 0) {
+		if (vtbl->drawForeground == 0) {
 			QGraphicsView::drawForeground(painter, rect);
 			return;
 		}
-		
+
 		QPainter* sigval1 = painter;
 		const QRectF& rect_ret = rect;
 		// Cast returned reference into pointer
 		QRectF* sigval2 = const_cast<QRectF*>(&rect_ret);
 
-		miqt_exec_callback_QGraphicsView_drawForeground(this, handle__drawForeground, sigval1, sigval2);
+		vtbl->drawForeground(vtbl, this, sigval1, sigval2);
 
-		
 	}
 
 	friend void QGraphicsView_virtualbase_drawForeground(void* self, QPainter* painter, QRectF* rect);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__minimumSizeHint = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual QSize minimumSizeHint() const override {
-		if (handle__minimumSizeHint == 0) {
+		if (vtbl->minimumSizeHint == 0) {
 			return QGraphicsView::minimumSizeHint();
 		}
-		
 
-		QSize* callback_return_value = miqt_exec_callback_QGraphicsView_minimumSizeHint(this, handle__minimumSizeHint);
+
+		QSize* callback_return_value = vtbl->minimumSizeHint(vtbl, this);
 
 		return *callback_return_value;
 	}
 
 	friend QSize* QGraphicsView_virtualbase_minimumSizeHint(const void* self);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__eventFilter = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual bool eventFilter(QObject* param1, QEvent* param2) override {
-		if (handle__eventFilter == 0) {
+		if (vtbl->eventFilter == 0) {
 			return QGraphicsView::eventFilter(param1, param2);
 		}
-		
+
 		QObject* sigval1 = param1;
 		QEvent* sigval2 = param2;
 
-		bool callback_return_value = miqt_exec_callback_QGraphicsView_eventFilter(this, handle__eventFilter, sigval1, sigval2);
+		bool callback_return_value = vtbl->eventFilter(vtbl, this, sigval1, sigval2);
 
 		return callback_return_value;
 	}
 
 	friend bool QGraphicsView_virtualbase_eventFilter(void* self, QObject* param1, QEvent* param2);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__viewportSizeHint = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual QSize viewportSizeHint() const override {
-		if (handle__viewportSizeHint == 0) {
+		if (vtbl->viewportSizeHint == 0) {
 			return QGraphicsView::viewportSizeHint();
 		}
-		
 
-		QSize* callback_return_value = miqt_exec_callback_QGraphicsView_viewportSizeHint(this, handle__viewportSizeHint);
+
+		QSize* callback_return_value = vtbl->viewportSizeHint(vtbl, this);
 
 		return *callback_return_value;
 	}
 
 	friend QSize* QGraphicsView_virtualbase_viewportSizeHint(const void* self);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__changeEvent = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void changeEvent(QEvent* param1) override {
-		if (handle__changeEvent == 0) {
+		if (vtbl->changeEvent == 0) {
 			QGraphicsView::changeEvent(param1);
 			return;
 		}
-		
+
 		QEvent* sigval1 = param1;
 
-		miqt_exec_callback_QGraphicsView_changeEvent(this, handle__changeEvent, sigval1);
+		vtbl->changeEvent(vtbl, this, sigval1);
 
-		
 	}
 
 	friend void QGraphicsView_virtualbase_changeEvent(void* self, QEvent* param1);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__initStyleOption = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void initStyleOption(QStyleOptionFrame* option) const override {
-		if (handle__initStyleOption == 0) {
+		if (vtbl->initStyleOption == 0) {
 			QGraphicsView::initStyleOption(option);
 			return;
 		}
-		
+
 		QStyleOptionFrame* sigval1 = option;
 
-		miqt_exec_callback_QGraphicsView_initStyleOption(this, handle__initStyleOption, sigval1);
+		vtbl->initStyleOption(vtbl, this, sigval1);
 
-		
 	}
 
 	friend void QGraphicsView_virtualbase_initStyleOption(const void* self, QStyleOptionFrame* option);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__devType = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual int devType() const override {
-		if (handle__devType == 0) {
+		if (vtbl->devType == 0) {
 			return QGraphicsView::devType();
 		}
-		
 
-		int callback_return_value = miqt_exec_callback_QGraphicsView_devType(this, handle__devType);
+
+		int callback_return_value = vtbl->devType(vtbl, this);
 
 		return static_cast<int>(callback_return_value);
 	}
 
 	friend int QGraphicsView_virtualbase_devType(const void* self);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__setVisible = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void setVisible(bool visible) override {
-		if (handle__setVisible == 0) {
+		if (vtbl->setVisible == 0) {
 			QGraphicsView::setVisible(visible);
 			return;
 		}
-		
+
 		bool sigval1 = visible;
 
-		miqt_exec_callback_QGraphicsView_setVisible(this, handle__setVisible, sigval1);
+		vtbl->setVisible(vtbl, this, sigval1);
 
-		
 	}
 
 	friend void QGraphicsView_virtualbase_setVisible(void* self, bool visible);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__heightForWidth = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual int heightForWidth(int param1) const override {
-		if (handle__heightForWidth == 0) {
+		if (vtbl->heightForWidth == 0) {
 			return QGraphicsView::heightForWidth(param1);
 		}
-		
+
 		int sigval1 = param1;
 
-		int callback_return_value = miqt_exec_callback_QGraphicsView_heightForWidth(this, handle__heightForWidth, sigval1);
+		int callback_return_value = vtbl->heightForWidth(vtbl, this, sigval1);
 
 		return static_cast<int>(callback_return_value);
 	}
 
 	friend int QGraphicsView_virtualbase_heightForWidth(const void* self, int param1);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__hasHeightForWidth = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual bool hasHeightForWidth() const override {
-		if (handle__hasHeightForWidth == 0) {
+		if (vtbl->hasHeightForWidth == 0) {
 			return QGraphicsView::hasHeightForWidth();
 		}
-		
 
-		bool callback_return_value = miqt_exec_callback_QGraphicsView_hasHeightForWidth(this, handle__hasHeightForWidth);
+
+		bool callback_return_value = vtbl->hasHeightForWidth(vtbl, this);
 
 		return callback_return_value;
 	}
 
 	friend bool QGraphicsView_virtualbase_hasHeightForWidth(const void* self);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__paintEngine = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual QPaintEngine* paintEngine() const override {
-		if (handle__paintEngine == 0) {
+		if (vtbl->paintEngine == 0) {
 			return QGraphicsView::paintEngine();
 		}
-		
 
-		QPaintEngine* callback_return_value = miqt_exec_callback_QGraphicsView_paintEngine(this, handle__paintEngine);
+
+		QPaintEngine* callback_return_value = vtbl->paintEngine(vtbl, this);
 
 		return callback_return_value;
 	}
 
 	friend QPaintEngine* QGraphicsView_virtualbase_paintEngine(const void* self);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__enterEvent = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void enterEvent(QEnterEvent* event) override {
-		if (handle__enterEvent == 0) {
+		if (vtbl->enterEvent == 0) {
 			QGraphicsView::enterEvent(event);
 			return;
 		}
-		
+
 		QEnterEvent* sigval1 = event;
 
-		miqt_exec_callback_QGraphicsView_enterEvent(this, handle__enterEvent, sigval1);
+		vtbl->enterEvent(vtbl, this, sigval1);
 
-		
 	}
 
 	friend void QGraphicsView_virtualbase_enterEvent(void* self, QEnterEvent* event);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__leaveEvent = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void leaveEvent(QEvent* event) override {
-		if (handle__leaveEvent == 0) {
+		if (vtbl->leaveEvent == 0) {
 			QGraphicsView::leaveEvent(event);
 			return;
 		}
-		
+
 		QEvent* sigval1 = event;
 
-		miqt_exec_callback_QGraphicsView_leaveEvent(this, handle__leaveEvent, sigval1);
+		vtbl->leaveEvent(vtbl, this, sigval1);
 
-		
 	}
 
 	friend void QGraphicsView_virtualbase_leaveEvent(void* self, QEvent* event);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__moveEvent = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void moveEvent(QMoveEvent* event) override {
-		if (handle__moveEvent == 0) {
+		if (vtbl->moveEvent == 0) {
 			QGraphicsView::moveEvent(event);
 			return;
 		}
-		
+
 		QMoveEvent* sigval1 = event;
 
-		miqt_exec_callback_QGraphicsView_moveEvent(this, handle__moveEvent, sigval1);
+		vtbl->moveEvent(vtbl, this, sigval1);
 
-		
 	}
 
 	friend void QGraphicsView_virtualbase_moveEvent(void* self, QMoveEvent* event);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__closeEvent = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void closeEvent(QCloseEvent* event) override {
-		if (handle__closeEvent == 0) {
+		if (vtbl->closeEvent == 0) {
 			QGraphicsView::closeEvent(event);
 			return;
 		}
-		
+
 		QCloseEvent* sigval1 = event;
 
-		miqt_exec_callback_QGraphicsView_closeEvent(this, handle__closeEvent, sigval1);
+		vtbl->closeEvent(vtbl, this, sigval1);
 
-		
 	}
 
 	friend void QGraphicsView_virtualbase_closeEvent(void* self, QCloseEvent* event);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__tabletEvent = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void tabletEvent(QTabletEvent* event) override {
-		if (handle__tabletEvent == 0) {
+		if (vtbl->tabletEvent == 0) {
 			QGraphicsView::tabletEvent(event);
 			return;
 		}
-		
+
 		QTabletEvent* sigval1 = event;
 
-		miqt_exec_callback_QGraphicsView_tabletEvent(this, handle__tabletEvent, sigval1);
+		vtbl->tabletEvent(vtbl, this, sigval1);
 
-		
 	}
 
 	friend void QGraphicsView_virtualbase_tabletEvent(void* self, QTabletEvent* event);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__actionEvent = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void actionEvent(QActionEvent* event) override {
-		if (handle__actionEvent == 0) {
+		if (vtbl->actionEvent == 0) {
 			QGraphicsView::actionEvent(event);
 			return;
 		}
-		
+
 		QActionEvent* sigval1 = event;
 
-		miqt_exec_callback_QGraphicsView_actionEvent(this, handle__actionEvent, sigval1);
+		vtbl->actionEvent(vtbl, this, sigval1);
 
-		
 	}
 
 	friend void QGraphicsView_virtualbase_actionEvent(void* self, QActionEvent* event);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__hideEvent = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void hideEvent(QHideEvent* event) override {
-		if (handle__hideEvent == 0) {
+		if (vtbl->hideEvent == 0) {
 			QGraphicsView::hideEvent(event);
 			return;
 		}
-		
+
 		QHideEvent* sigval1 = event;
 
-		miqt_exec_callback_QGraphicsView_hideEvent(this, handle__hideEvent, sigval1);
+		vtbl->hideEvent(vtbl, this, sigval1);
 
-		
 	}
 
 	friend void QGraphicsView_virtualbase_hideEvent(void* self, QHideEvent* event);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__nativeEvent = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual bool nativeEvent(const QByteArray& eventType, void* message, qintptr* result) override {
-		if (handle__nativeEvent == 0) {
+		if (vtbl->nativeEvent == 0) {
 			return QGraphicsView::nativeEvent(eventType, message, result);
 		}
-		
+
 		const QByteArray eventType_qb = eventType;
 		struct miqt_string eventType_ms;
 		eventType_ms.len = eventType_qb.length();
@@ -1029,181 +797,148 @@ public:
 		qintptr* result_ret = result;
 		intptr_t* sigval3 = (intptr_t*)(result_ret);
 
-		bool callback_return_value = miqt_exec_callback_QGraphicsView_nativeEvent(this, handle__nativeEvent, sigval1, sigval2, sigval3);
+		bool callback_return_value = vtbl->nativeEvent(vtbl, this, sigval1, sigval2, sigval3);
 
 		return callback_return_value;
 	}
 
 	friend bool QGraphicsView_virtualbase_nativeEvent(void* self, struct miqt_string eventType, void* message, intptr_t* result);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__metric = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual int metric(QPaintDevice::PaintDeviceMetric param1) const override {
-		if (handle__metric == 0) {
+		if (vtbl->metric == 0) {
 			return QGraphicsView::metric(param1);
 		}
-		
+
 		QPaintDevice::PaintDeviceMetric param1_ret = param1;
 		int sigval1 = static_cast<int>(param1_ret);
 
-		int callback_return_value = miqt_exec_callback_QGraphicsView_metric(this, handle__metric, sigval1);
+		int callback_return_value = vtbl->metric(vtbl, this, sigval1);
 
 		return static_cast<int>(callback_return_value);
 	}
 
 	friend int QGraphicsView_virtualbase_metric(const void* self, int param1);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__initPainter = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void initPainter(QPainter* painter) const override {
-		if (handle__initPainter == 0) {
+		if (vtbl->initPainter == 0) {
 			QGraphicsView::initPainter(painter);
 			return;
 		}
-		
+
 		QPainter* sigval1 = painter;
 
-		miqt_exec_callback_QGraphicsView_initPainter(this, handle__initPainter, sigval1);
+		vtbl->initPainter(vtbl, this, sigval1);
 
-		
 	}
 
 	friend void QGraphicsView_virtualbase_initPainter(const void* self, QPainter* painter);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__redirected = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual QPaintDevice* redirected(QPoint* offset) const override {
-		if (handle__redirected == 0) {
+		if (vtbl->redirected == 0) {
 			return QGraphicsView::redirected(offset);
 		}
-		
+
 		QPoint* sigval1 = offset;
 
-		QPaintDevice* callback_return_value = miqt_exec_callback_QGraphicsView_redirected(this, handle__redirected, sigval1);
+		QPaintDevice* callback_return_value = vtbl->redirected(vtbl, this, sigval1);
 
 		return callback_return_value;
 	}
 
 	friend QPaintDevice* QGraphicsView_virtualbase_redirected(const void* self, QPoint* offset);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__sharedPainter = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual QPainter* sharedPainter() const override {
-		if (handle__sharedPainter == 0) {
+		if (vtbl->sharedPainter == 0) {
 			return QGraphicsView::sharedPainter();
 		}
-		
 
-		QPainter* callback_return_value = miqt_exec_callback_QGraphicsView_sharedPainter(this, handle__sharedPainter);
+
+		QPainter* callback_return_value = vtbl->sharedPainter(vtbl, this);
 
 		return callback_return_value;
 	}
 
 	friend QPainter* QGraphicsView_virtualbase_sharedPainter(const void* self);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__timerEvent = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void timerEvent(QTimerEvent* event) override {
-		if (handle__timerEvent == 0) {
+		if (vtbl->timerEvent == 0) {
 			QGraphicsView::timerEvent(event);
 			return;
 		}
-		
+
 		QTimerEvent* sigval1 = event;
 
-		miqt_exec_callback_QGraphicsView_timerEvent(this, handle__timerEvent, sigval1);
+		vtbl->timerEvent(vtbl, this, sigval1);
 
-		
 	}
 
 	friend void QGraphicsView_virtualbase_timerEvent(void* self, QTimerEvent* event);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__childEvent = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void childEvent(QChildEvent* event) override {
-		if (handle__childEvent == 0) {
+		if (vtbl->childEvent == 0) {
 			QGraphicsView::childEvent(event);
 			return;
 		}
-		
+
 		QChildEvent* sigval1 = event;
 
-		miqt_exec_callback_QGraphicsView_childEvent(this, handle__childEvent, sigval1);
+		vtbl->childEvent(vtbl, this, sigval1);
 
-		
 	}
 
 	friend void QGraphicsView_virtualbase_childEvent(void* self, QChildEvent* event);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__customEvent = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void customEvent(QEvent* event) override {
-		if (handle__customEvent == 0) {
+		if (vtbl->customEvent == 0) {
 			QGraphicsView::customEvent(event);
 			return;
 		}
-		
+
 		QEvent* sigval1 = event;
 
-		miqt_exec_callback_QGraphicsView_customEvent(this, handle__customEvent, sigval1);
+		vtbl->customEvent(vtbl, this, sigval1);
 
-		
 	}
 
 	friend void QGraphicsView_virtualbase_customEvent(void* self, QEvent* event);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__connectNotify = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void connectNotify(const QMetaMethod& signal) override {
-		if (handle__connectNotify == 0) {
+		if (vtbl->connectNotify == 0) {
 			QGraphicsView::connectNotify(signal);
 			return;
 		}
-		
+
 		const QMetaMethod& signal_ret = signal;
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
 
-		miqt_exec_callback_QGraphicsView_connectNotify(this, handle__connectNotify, sigval1);
+		vtbl->connectNotify(vtbl, this, sigval1);
 
-		
 	}
 
 	friend void QGraphicsView_virtualbase_connectNotify(void* self, QMetaMethod* signal);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__disconnectNotify = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void disconnectNotify(const QMetaMethod& signal) override {
-		if (handle__disconnectNotify == 0) {
+		if (vtbl->disconnectNotify == 0) {
 			QGraphicsView::disconnectNotify(signal);
 			return;
 		}
-		
+
 		const QMetaMethod& signal_ret = signal;
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
 
-		miqt_exec_callback_QGraphicsView_disconnectNotify(this, handle__disconnectNotify, sigval1);
+		vtbl->disconnectNotify(vtbl, this, sigval1);
 
-		
 	}
 
 	friend void QGraphicsView_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
@@ -1223,20 +958,20 @@ public:
 	friend bool QGraphicsView_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
 };
 
-QGraphicsView* QGraphicsView_new(QWidget* parent) {
-	return new VirtualQGraphicsView(parent);
+QGraphicsView* QGraphicsView_new(struct QGraphicsView_VTable* vtbl, QWidget* parent) {
+	return new VirtualQGraphicsView(vtbl, parent);
 }
 
-QGraphicsView* QGraphicsView_new2() {
-	return new VirtualQGraphicsView();
+QGraphicsView* QGraphicsView_new2(struct QGraphicsView_VTable* vtbl) {
+	return new VirtualQGraphicsView(vtbl);
 }
 
-QGraphicsView* QGraphicsView_new3(QGraphicsScene* scene) {
-	return new VirtualQGraphicsView(scene);
+QGraphicsView* QGraphicsView_new3(struct QGraphicsView_VTable* vtbl, QGraphicsScene* scene) {
+	return new VirtualQGraphicsView(vtbl, scene);
 }
 
-QGraphicsView* QGraphicsView_new4(QGraphicsScene* scene, QWidget* parent) {
-	return new VirtualQGraphicsView(scene, parent);
+QGraphicsView* QGraphicsView_new4(struct QGraphicsView_VTable* vtbl, QGraphicsScene* scene, QWidget* parent) {
+	return new VirtualQGraphicsView(vtbl, scene, parent);
 }
 
 void QGraphicsView_virtbase(QGraphicsView* src, QAbstractScrollArea** outptr_QAbstractScrollArea) {
@@ -1761,30 +1496,10 @@ void QGraphicsView_invalidateScene2(QGraphicsView* self, QRectF* rect, int layer
 	self->invalidateScene(*rect, static_cast<QGraphicsScene::SceneLayers>(layers));
 }
 
-bool QGraphicsView_override_virtual_metaObject(void* self, intptr_t slot) {
-	VirtualQGraphicsView* self_cast = dynamic_cast<VirtualQGraphicsView*>( (QGraphicsView*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__metaObject = slot;
-	return true;
-}
-
 QMetaObject* QGraphicsView_virtualbase_metaObject(const void* self) {
 
 	return (QMetaObject*) ( (const VirtualQGraphicsView*)(self) )->QGraphicsView::metaObject();
 
-}
-
-bool QGraphicsView_override_virtual_metacast(void* self, intptr_t slot) {
-	VirtualQGraphicsView* self_cast = dynamic_cast<VirtualQGraphicsView*>( (QGraphicsView*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__metacast = slot;
-	return true;
 }
 
 void* QGraphicsView_virtualbase_metacast(void* self, const char* param1) {
@@ -1793,30 +1508,10 @@ void* QGraphicsView_virtualbase_metacast(void* self, const char* param1) {
 
 }
 
-bool QGraphicsView_override_virtual_metacall(void* self, intptr_t slot) {
-	VirtualQGraphicsView* self_cast = dynamic_cast<VirtualQGraphicsView*>( (QGraphicsView*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__metacall = slot;
-	return true;
-}
-
 int QGraphicsView_virtualbase_metacall(void* self, int param1, int param2, void** param3) {
 
 	return ( (VirtualQGraphicsView*)(self) )->QGraphicsView::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 
-}
-
-bool QGraphicsView_override_virtual_sizeHint(void* self, intptr_t slot) {
-	VirtualQGraphicsView* self_cast = dynamic_cast<VirtualQGraphicsView*>( (QGraphicsView*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__sizeHint = slot;
-	return true;
 }
 
 QSize* QGraphicsView_virtualbase_sizeHint(const void* self) {
@@ -1825,30 +1520,10 @@ QSize* QGraphicsView_virtualbase_sizeHint(const void* self) {
 
 }
 
-bool QGraphicsView_override_virtual_inputMethodQuery(void* self, intptr_t slot) {
-	VirtualQGraphicsView* self_cast = dynamic_cast<VirtualQGraphicsView*>( (QGraphicsView*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__inputMethodQuery = slot;
-	return true;
-}
-
 QVariant* QGraphicsView_virtualbase_inputMethodQuery(const void* self, int query) {
 
 	return new QVariant(( (const VirtualQGraphicsView*)(self) )->QGraphicsView::inputMethodQuery(static_cast<Qt::InputMethodQuery>(query)));
 
-}
-
-bool QGraphicsView_override_virtual_setupViewport(void* self, intptr_t slot) {
-	VirtualQGraphicsView* self_cast = dynamic_cast<VirtualQGraphicsView*>( (QGraphicsView*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__setupViewport = slot;
-	return true;
 }
 
 void QGraphicsView_virtualbase_setupViewport(void* self, QWidget* widget) {
@@ -1857,30 +1532,10 @@ void QGraphicsView_virtualbase_setupViewport(void* self, QWidget* widget) {
 
 }
 
-bool QGraphicsView_override_virtual_event(void* self, intptr_t slot) {
-	VirtualQGraphicsView* self_cast = dynamic_cast<VirtualQGraphicsView*>( (QGraphicsView*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__event = slot;
-	return true;
-}
-
 bool QGraphicsView_virtualbase_event(void* self, QEvent* event) {
 
 	return ( (VirtualQGraphicsView*)(self) )->QGraphicsView::event(event);
 
-}
-
-bool QGraphicsView_override_virtual_viewportEvent(void* self, intptr_t slot) {
-	VirtualQGraphicsView* self_cast = dynamic_cast<VirtualQGraphicsView*>( (QGraphicsView*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__viewportEvent = slot;
-	return true;
 }
 
 bool QGraphicsView_virtualbase_viewportEvent(void* self, QEvent* event) {
@@ -1889,30 +1544,10 @@ bool QGraphicsView_virtualbase_viewportEvent(void* self, QEvent* event) {
 
 }
 
-bool QGraphicsView_override_virtual_contextMenuEvent(void* self, intptr_t slot) {
-	VirtualQGraphicsView* self_cast = dynamic_cast<VirtualQGraphicsView*>( (QGraphicsView*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__contextMenuEvent = slot;
-	return true;
-}
-
 void QGraphicsView_virtualbase_contextMenuEvent(void* self, QContextMenuEvent* event) {
 
 	( (VirtualQGraphicsView*)(self) )->QGraphicsView::contextMenuEvent(event);
 
-}
-
-bool QGraphicsView_override_virtual_dragEnterEvent(void* self, intptr_t slot) {
-	VirtualQGraphicsView* self_cast = dynamic_cast<VirtualQGraphicsView*>( (QGraphicsView*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__dragEnterEvent = slot;
-	return true;
 }
 
 void QGraphicsView_virtualbase_dragEnterEvent(void* self, QDragEnterEvent* event) {
@@ -1921,30 +1556,10 @@ void QGraphicsView_virtualbase_dragEnterEvent(void* self, QDragEnterEvent* event
 
 }
 
-bool QGraphicsView_override_virtual_dragLeaveEvent(void* self, intptr_t slot) {
-	VirtualQGraphicsView* self_cast = dynamic_cast<VirtualQGraphicsView*>( (QGraphicsView*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__dragLeaveEvent = slot;
-	return true;
-}
-
 void QGraphicsView_virtualbase_dragLeaveEvent(void* self, QDragLeaveEvent* event) {
 
 	( (VirtualQGraphicsView*)(self) )->QGraphicsView::dragLeaveEvent(event);
 
-}
-
-bool QGraphicsView_override_virtual_dragMoveEvent(void* self, intptr_t slot) {
-	VirtualQGraphicsView* self_cast = dynamic_cast<VirtualQGraphicsView*>( (QGraphicsView*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__dragMoveEvent = slot;
-	return true;
 }
 
 void QGraphicsView_virtualbase_dragMoveEvent(void* self, QDragMoveEvent* event) {
@@ -1953,30 +1568,10 @@ void QGraphicsView_virtualbase_dragMoveEvent(void* self, QDragMoveEvent* event) 
 
 }
 
-bool QGraphicsView_override_virtual_dropEvent(void* self, intptr_t slot) {
-	VirtualQGraphicsView* self_cast = dynamic_cast<VirtualQGraphicsView*>( (QGraphicsView*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__dropEvent = slot;
-	return true;
-}
-
 void QGraphicsView_virtualbase_dropEvent(void* self, QDropEvent* event) {
 
 	( (VirtualQGraphicsView*)(self) )->QGraphicsView::dropEvent(event);
 
-}
-
-bool QGraphicsView_override_virtual_focusInEvent(void* self, intptr_t slot) {
-	VirtualQGraphicsView* self_cast = dynamic_cast<VirtualQGraphicsView*>( (QGraphicsView*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__focusInEvent = slot;
-	return true;
 }
 
 void QGraphicsView_virtualbase_focusInEvent(void* self, QFocusEvent* event) {
@@ -1985,30 +1580,10 @@ void QGraphicsView_virtualbase_focusInEvent(void* self, QFocusEvent* event) {
 
 }
 
-bool QGraphicsView_override_virtual_focusNextPrevChild(void* self, intptr_t slot) {
-	VirtualQGraphicsView* self_cast = dynamic_cast<VirtualQGraphicsView*>( (QGraphicsView*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__focusNextPrevChild = slot;
-	return true;
-}
-
 bool QGraphicsView_virtualbase_focusNextPrevChild(void* self, bool next) {
 
 	return ( (VirtualQGraphicsView*)(self) )->QGraphicsView::focusNextPrevChild(next);
 
-}
-
-bool QGraphicsView_override_virtual_focusOutEvent(void* self, intptr_t slot) {
-	VirtualQGraphicsView* self_cast = dynamic_cast<VirtualQGraphicsView*>( (QGraphicsView*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__focusOutEvent = slot;
-	return true;
 }
 
 void QGraphicsView_virtualbase_focusOutEvent(void* self, QFocusEvent* event) {
@@ -2017,30 +1592,10 @@ void QGraphicsView_virtualbase_focusOutEvent(void* self, QFocusEvent* event) {
 
 }
 
-bool QGraphicsView_override_virtual_keyPressEvent(void* self, intptr_t slot) {
-	VirtualQGraphicsView* self_cast = dynamic_cast<VirtualQGraphicsView*>( (QGraphicsView*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__keyPressEvent = slot;
-	return true;
-}
-
 void QGraphicsView_virtualbase_keyPressEvent(void* self, QKeyEvent* event) {
 
 	( (VirtualQGraphicsView*)(self) )->QGraphicsView::keyPressEvent(event);
 
-}
-
-bool QGraphicsView_override_virtual_keyReleaseEvent(void* self, intptr_t slot) {
-	VirtualQGraphicsView* self_cast = dynamic_cast<VirtualQGraphicsView*>( (QGraphicsView*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__keyReleaseEvent = slot;
-	return true;
 }
 
 void QGraphicsView_virtualbase_keyReleaseEvent(void* self, QKeyEvent* event) {
@@ -2049,30 +1604,10 @@ void QGraphicsView_virtualbase_keyReleaseEvent(void* self, QKeyEvent* event) {
 
 }
 
-bool QGraphicsView_override_virtual_mouseDoubleClickEvent(void* self, intptr_t slot) {
-	VirtualQGraphicsView* self_cast = dynamic_cast<VirtualQGraphicsView*>( (QGraphicsView*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__mouseDoubleClickEvent = slot;
-	return true;
-}
-
 void QGraphicsView_virtualbase_mouseDoubleClickEvent(void* self, QMouseEvent* event) {
 
 	( (VirtualQGraphicsView*)(self) )->QGraphicsView::mouseDoubleClickEvent(event);
 
-}
-
-bool QGraphicsView_override_virtual_mousePressEvent(void* self, intptr_t slot) {
-	VirtualQGraphicsView* self_cast = dynamic_cast<VirtualQGraphicsView*>( (QGraphicsView*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__mousePressEvent = slot;
-	return true;
 }
 
 void QGraphicsView_virtualbase_mousePressEvent(void* self, QMouseEvent* event) {
@@ -2081,30 +1616,10 @@ void QGraphicsView_virtualbase_mousePressEvent(void* self, QMouseEvent* event) {
 
 }
 
-bool QGraphicsView_override_virtual_mouseMoveEvent(void* self, intptr_t slot) {
-	VirtualQGraphicsView* self_cast = dynamic_cast<VirtualQGraphicsView*>( (QGraphicsView*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__mouseMoveEvent = slot;
-	return true;
-}
-
 void QGraphicsView_virtualbase_mouseMoveEvent(void* self, QMouseEvent* event) {
 
 	( (VirtualQGraphicsView*)(self) )->QGraphicsView::mouseMoveEvent(event);
 
-}
-
-bool QGraphicsView_override_virtual_mouseReleaseEvent(void* self, intptr_t slot) {
-	VirtualQGraphicsView* self_cast = dynamic_cast<VirtualQGraphicsView*>( (QGraphicsView*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__mouseReleaseEvent = slot;
-	return true;
 }
 
 void QGraphicsView_virtualbase_mouseReleaseEvent(void* self, QMouseEvent* event) {
@@ -2113,30 +1628,10 @@ void QGraphicsView_virtualbase_mouseReleaseEvent(void* self, QMouseEvent* event)
 
 }
 
-bool QGraphicsView_override_virtual_wheelEvent(void* self, intptr_t slot) {
-	VirtualQGraphicsView* self_cast = dynamic_cast<VirtualQGraphicsView*>( (QGraphicsView*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__wheelEvent = slot;
-	return true;
-}
-
 void QGraphicsView_virtualbase_wheelEvent(void* self, QWheelEvent* event) {
 
 	( (VirtualQGraphicsView*)(self) )->QGraphicsView::wheelEvent(event);
 
-}
-
-bool QGraphicsView_override_virtual_paintEvent(void* self, intptr_t slot) {
-	VirtualQGraphicsView* self_cast = dynamic_cast<VirtualQGraphicsView*>( (QGraphicsView*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__paintEvent = slot;
-	return true;
 }
 
 void QGraphicsView_virtualbase_paintEvent(void* self, QPaintEvent* event) {
@@ -2145,30 +1640,10 @@ void QGraphicsView_virtualbase_paintEvent(void* self, QPaintEvent* event) {
 
 }
 
-bool QGraphicsView_override_virtual_resizeEvent(void* self, intptr_t slot) {
-	VirtualQGraphicsView* self_cast = dynamic_cast<VirtualQGraphicsView*>( (QGraphicsView*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__resizeEvent = slot;
-	return true;
-}
-
 void QGraphicsView_virtualbase_resizeEvent(void* self, QResizeEvent* event) {
 
 	( (VirtualQGraphicsView*)(self) )->QGraphicsView::resizeEvent(event);
 
-}
-
-bool QGraphicsView_override_virtual_scrollContentsBy(void* self, intptr_t slot) {
-	VirtualQGraphicsView* self_cast = dynamic_cast<VirtualQGraphicsView*>( (QGraphicsView*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__scrollContentsBy = slot;
-	return true;
 }
 
 void QGraphicsView_virtualbase_scrollContentsBy(void* self, int dx, int dy) {
@@ -2177,30 +1652,10 @@ void QGraphicsView_virtualbase_scrollContentsBy(void* self, int dx, int dy) {
 
 }
 
-bool QGraphicsView_override_virtual_showEvent(void* self, intptr_t slot) {
-	VirtualQGraphicsView* self_cast = dynamic_cast<VirtualQGraphicsView*>( (QGraphicsView*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__showEvent = slot;
-	return true;
-}
-
 void QGraphicsView_virtualbase_showEvent(void* self, QShowEvent* event) {
 
 	( (VirtualQGraphicsView*)(self) )->QGraphicsView::showEvent(event);
 
-}
-
-bool QGraphicsView_override_virtual_inputMethodEvent(void* self, intptr_t slot) {
-	VirtualQGraphicsView* self_cast = dynamic_cast<VirtualQGraphicsView*>( (QGraphicsView*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__inputMethodEvent = slot;
-	return true;
 }
 
 void QGraphicsView_virtualbase_inputMethodEvent(void* self, QInputMethodEvent* event) {
@@ -2209,30 +1664,10 @@ void QGraphicsView_virtualbase_inputMethodEvent(void* self, QInputMethodEvent* e
 
 }
 
-bool QGraphicsView_override_virtual_drawBackground(void* self, intptr_t slot) {
-	VirtualQGraphicsView* self_cast = dynamic_cast<VirtualQGraphicsView*>( (QGraphicsView*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__drawBackground = slot;
-	return true;
-}
-
 void QGraphicsView_virtualbase_drawBackground(void* self, QPainter* painter, QRectF* rect) {
 
 	( (VirtualQGraphicsView*)(self) )->QGraphicsView::drawBackground(painter, *rect);
 
-}
-
-bool QGraphicsView_override_virtual_drawForeground(void* self, intptr_t slot) {
-	VirtualQGraphicsView* self_cast = dynamic_cast<VirtualQGraphicsView*>( (QGraphicsView*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__drawForeground = slot;
-	return true;
 }
 
 void QGraphicsView_virtualbase_drawForeground(void* self, QPainter* painter, QRectF* rect) {
@@ -2241,30 +1676,10 @@ void QGraphicsView_virtualbase_drawForeground(void* self, QPainter* painter, QRe
 
 }
 
-bool QGraphicsView_override_virtual_minimumSizeHint(void* self, intptr_t slot) {
-	VirtualQGraphicsView* self_cast = dynamic_cast<VirtualQGraphicsView*>( (QGraphicsView*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__minimumSizeHint = slot;
-	return true;
-}
-
 QSize* QGraphicsView_virtualbase_minimumSizeHint(const void* self) {
 
 	return new QSize(( (const VirtualQGraphicsView*)(self) )->QGraphicsView::minimumSizeHint());
 
-}
-
-bool QGraphicsView_override_virtual_eventFilter(void* self, intptr_t slot) {
-	VirtualQGraphicsView* self_cast = dynamic_cast<VirtualQGraphicsView*>( (QGraphicsView*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__eventFilter = slot;
-	return true;
 }
 
 bool QGraphicsView_virtualbase_eventFilter(void* self, QObject* param1, QEvent* param2) {
@@ -2273,30 +1688,10 @@ bool QGraphicsView_virtualbase_eventFilter(void* self, QObject* param1, QEvent* 
 
 }
 
-bool QGraphicsView_override_virtual_viewportSizeHint(void* self, intptr_t slot) {
-	VirtualQGraphicsView* self_cast = dynamic_cast<VirtualQGraphicsView*>( (QGraphicsView*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__viewportSizeHint = slot;
-	return true;
-}
-
 QSize* QGraphicsView_virtualbase_viewportSizeHint(const void* self) {
 
 	return new QSize(( (const VirtualQGraphicsView*)(self) )->QGraphicsView::viewportSizeHint());
 
-}
-
-bool QGraphicsView_override_virtual_changeEvent(void* self, intptr_t slot) {
-	VirtualQGraphicsView* self_cast = dynamic_cast<VirtualQGraphicsView*>( (QGraphicsView*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__changeEvent = slot;
-	return true;
 }
 
 void QGraphicsView_virtualbase_changeEvent(void* self, QEvent* param1) {
@@ -2305,30 +1700,10 @@ void QGraphicsView_virtualbase_changeEvent(void* self, QEvent* param1) {
 
 }
 
-bool QGraphicsView_override_virtual_initStyleOption(void* self, intptr_t slot) {
-	VirtualQGraphicsView* self_cast = dynamic_cast<VirtualQGraphicsView*>( (QGraphicsView*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__initStyleOption = slot;
-	return true;
-}
-
 void QGraphicsView_virtualbase_initStyleOption(const void* self, QStyleOptionFrame* option) {
 
 	( (const VirtualQGraphicsView*)(self) )->QGraphicsView::initStyleOption(option);
 
-}
-
-bool QGraphicsView_override_virtual_devType(void* self, intptr_t slot) {
-	VirtualQGraphicsView* self_cast = dynamic_cast<VirtualQGraphicsView*>( (QGraphicsView*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__devType = slot;
-	return true;
 }
 
 int QGraphicsView_virtualbase_devType(const void* self) {
@@ -2337,30 +1712,10 @@ int QGraphicsView_virtualbase_devType(const void* self) {
 
 }
 
-bool QGraphicsView_override_virtual_setVisible(void* self, intptr_t slot) {
-	VirtualQGraphicsView* self_cast = dynamic_cast<VirtualQGraphicsView*>( (QGraphicsView*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__setVisible = slot;
-	return true;
-}
-
 void QGraphicsView_virtualbase_setVisible(void* self, bool visible) {
 
 	( (VirtualQGraphicsView*)(self) )->QGraphicsView::setVisible(visible);
 
-}
-
-bool QGraphicsView_override_virtual_heightForWidth(void* self, intptr_t slot) {
-	VirtualQGraphicsView* self_cast = dynamic_cast<VirtualQGraphicsView*>( (QGraphicsView*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__heightForWidth = slot;
-	return true;
 }
 
 int QGraphicsView_virtualbase_heightForWidth(const void* self, int param1) {
@@ -2369,30 +1724,10 @@ int QGraphicsView_virtualbase_heightForWidth(const void* self, int param1) {
 
 }
 
-bool QGraphicsView_override_virtual_hasHeightForWidth(void* self, intptr_t slot) {
-	VirtualQGraphicsView* self_cast = dynamic_cast<VirtualQGraphicsView*>( (QGraphicsView*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__hasHeightForWidth = slot;
-	return true;
-}
-
 bool QGraphicsView_virtualbase_hasHeightForWidth(const void* self) {
 
 	return ( (const VirtualQGraphicsView*)(self) )->QGraphicsView::hasHeightForWidth();
 
-}
-
-bool QGraphicsView_override_virtual_paintEngine(void* self, intptr_t slot) {
-	VirtualQGraphicsView* self_cast = dynamic_cast<VirtualQGraphicsView*>( (QGraphicsView*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__paintEngine = slot;
-	return true;
 }
 
 QPaintEngine* QGraphicsView_virtualbase_paintEngine(const void* self) {
@@ -2401,30 +1736,10 @@ QPaintEngine* QGraphicsView_virtualbase_paintEngine(const void* self) {
 
 }
 
-bool QGraphicsView_override_virtual_enterEvent(void* self, intptr_t slot) {
-	VirtualQGraphicsView* self_cast = dynamic_cast<VirtualQGraphicsView*>( (QGraphicsView*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__enterEvent = slot;
-	return true;
-}
-
 void QGraphicsView_virtualbase_enterEvent(void* self, QEnterEvent* event) {
 
 	( (VirtualQGraphicsView*)(self) )->QGraphicsView::enterEvent(event);
 
-}
-
-bool QGraphicsView_override_virtual_leaveEvent(void* self, intptr_t slot) {
-	VirtualQGraphicsView* self_cast = dynamic_cast<VirtualQGraphicsView*>( (QGraphicsView*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__leaveEvent = slot;
-	return true;
 }
 
 void QGraphicsView_virtualbase_leaveEvent(void* self, QEvent* event) {
@@ -2433,30 +1748,10 @@ void QGraphicsView_virtualbase_leaveEvent(void* self, QEvent* event) {
 
 }
 
-bool QGraphicsView_override_virtual_moveEvent(void* self, intptr_t slot) {
-	VirtualQGraphicsView* self_cast = dynamic_cast<VirtualQGraphicsView*>( (QGraphicsView*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__moveEvent = slot;
-	return true;
-}
-
 void QGraphicsView_virtualbase_moveEvent(void* self, QMoveEvent* event) {
 
 	( (VirtualQGraphicsView*)(self) )->QGraphicsView::moveEvent(event);
 
-}
-
-bool QGraphicsView_override_virtual_closeEvent(void* self, intptr_t slot) {
-	VirtualQGraphicsView* self_cast = dynamic_cast<VirtualQGraphicsView*>( (QGraphicsView*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__closeEvent = slot;
-	return true;
 }
 
 void QGraphicsView_virtualbase_closeEvent(void* self, QCloseEvent* event) {
@@ -2465,30 +1760,10 @@ void QGraphicsView_virtualbase_closeEvent(void* self, QCloseEvent* event) {
 
 }
 
-bool QGraphicsView_override_virtual_tabletEvent(void* self, intptr_t slot) {
-	VirtualQGraphicsView* self_cast = dynamic_cast<VirtualQGraphicsView*>( (QGraphicsView*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__tabletEvent = slot;
-	return true;
-}
-
 void QGraphicsView_virtualbase_tabletEvent(void* self, QTabletEvent* event) {
 
 	( (VirtualQGraphicsView*)(self) )->QGraphicsView::tabletEvent(event);
 
-}
-
-bool QGraphicsView_override_virtual_actionEvent(void* self, intptr_t slot) {
-	VirtualQGraphicsView* self_cast = dynamic_cast<VirtualQGraphicsView*>( (QGraphicsView*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__actionEvent = slot;
-	return true;
 }
 
 void QGraphicsView_virtualbase_actionEvent(void* self, QActionEvent* event) {
@@ -2497,30 +1772,10 @@ void QGraphicsView_virtualbase_actionEvent(void* self, QActionEvent* event) {
 
 }
 
-bool QGraphicsView_override_virtual_hideEvent(void* self, intptr_t slot) {
-	VirtualQGraphicsView* self_cast = dynamic_cast<VirtualQGraphicsView*>( (QGraphicsView*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__hideEvent = slot;
-	return true;
-}
-
 void QGraphicsView_virtualbase_hideEvent(void* self, QHideEvent* event) {
 
 	( (VirtualQGraphicsView*)(self) )->QGraphicsView::hideEvent(event);
 
-}
-
-bool QGraphicsView_override_virtual_nativeEvent(void* self, intptr_t slot) {
-	VirtualQGraphicsView* self_cast = dynamic_cast<VirtualQGraphicsView*>( (QGraphicsView*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__nativeEvent = slot;
-	return true;
 }
 
 bool QGraphicsView_virtualbase_nativeEvent(void* self, struct miqt_string eventType, void* message, intptr_t* result) {
@@ -2530,30 +1785,10 @@ bool QGraphicsView_virtualbase_nativeEvent(void* self, struct miqt_string eventT
 
 }
 
-bool QGraphicsView_override_virtual_metric(void* self, intptr_t slot) {
-	VirtualQGraphicsView* self_cast = dynamic_cast<VirtualQGraphicsView*>( (QGraphicsView*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__metric = slot;
-	return true;
-}
-
 int QGraphicsView_virtualbase_metric(const void* self, int param1) {
 
 	return ( (const VirtualQGraphicsView*)(self) )->QGraphicsView::metric(static_cast<VirtualQGraphicsView::PaintDeviceMetric>(param1));
 
-}
-
-bool QGraphicsView_override_virtual_initPainter(void* self, intptr_t slot) {
-	VirtualQGraphicsView* self_cast = dynamic_cast<VirtualQGraphicsView*>( (QGraphicsView*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__initPainter = slot;
-	return true;
 }
 
 void QGraphicsView_virtualbase_initPainter(const void* self, QPainter* painter) {
@@ -2562,30 +1797,10 @@ void QGraphicsView_virtualbase_initPainter(const void* self, QPainter* painter) 
 
 }
 
-bool QGraphicsView_override_virtual_redirected(void* self, intptr_t slot) {
-	VirtualQGraphicsView* self_cast = dynamic_cast<VirtualQGraphicsView*>( (QGraphicsView*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__redirected = slot;
-	return true;
-}
-
 QPaintDevice* QGraphicsView_virtualbase_redirected(const void* self, QPoint* offset) {
 
 	return ( (const VirtualQGraphicsView*)(self) )->QGraphicsView::redirected(offset);
 
-}
-
-bool QGraphicsView_override_virtual_sharedPainter(void* self, intptr_t slot) {
-	VirtualQGraphicsView* self_cast = dynamic_cast<VirtualQGraphicsView*>( (QGraphicsView*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__sharedPainter = slot;
-	return true;
 }
 
 QPainter* QGraphicsView_virtualbase_sharedPainter(const void* self) {
@@ -2594,30 +1809,10 @@ QPainter* QGraphicsView_virtualbase_sharedPainter(const void* self) {
 
 }
 
-bool QGraphicsView_override_virtual_timerEvent(void* self, intptr_t slot) {
-	VirtualQGraphicsView* self_cast = dynamic_cast<VirtualQGraphicsView*>( (QGraphicsView*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__timerEvent = slot;
-	return true;
-}
-
 void QGraphicsView_virtualbase_timerEvent(void* self, QTimerEvent* event) {
 
 	( (VirtualQGraphicsView*)(self) )->QGraphicsView::timerEvent(event);
 
-}
-
-bool QGraphicsView_override_virtual_childEvent(void* self, intptr_t slot) {
-	VirtualQGraphicsView* self_cast = dynamic_cast<VirtualQGraphicsView*>( (QGraphicsView*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__childEvent = slot;
-	return true;
 }
 
 void QGraphicsView_virtualbase_childEvent(void* self, QChildEvent* event) {
@@ -2626,46 +1821,16 @@ void QGraphicsView_virtualbase_childEvent(void* self, QChildEvent* event) {
 
 }
 
-bool QGraphicsView_override_virtual_customEvent(void* self, intptr_t slot) {
-	VirtualQGraphicsView* self_cast = dynamic_cast<VirtualQGraphicsView*>( (QGraphicsView*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__customEvent = slot;
-	return true;
-}
-
 void QGraphicsView_virtualbase_customEvent(void* self, QEvent* event) {
 
 	( (VirtualQGraphicsView*)(self) )->QGraphicsView::customEvent(event);
 
 }
 
-bool QGraphicsView_override_virtual_connectNotify(void* self, intptr_t slot) {
-	VirtualQGraphicsView* self_cast = dynamic_cast<VirtualQGraphicsView*>( (QGraphicsView*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__connectNotify = slot;
-	return true;
-}
-
 void QGraphicsView_virtualbase_connectNotify(void* self, QMetaMethod* signal) {
 
 	( (VirtualQGraphicsView*)(self) )->QGraphicsView::connectNotify(*signal);
 
-}
-
-bool QGraphicsView_override_virtual_disconnectNotify(void* self, intptr_t slot) {
-	VirtualQGraphicsView* self_cast = dynamic_cast<VirtualQGraphicsView*>( (QGraphicsView*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__disconnectNotify = slot;
-	return true;
 }
 
 void QGraphicsView_virtualbase_disconnectNotify(void* self, QMetaMethod* signal) {

@@ -59,10 +59,6 @@ export
 
 type cQStringListModel*{.exportc: "QStringListModel", incompleteStruct.} = object
 
-proc fcQStringListModel_new(): ptr cQStringListModel {.importc: "QStringListModel_new".}
-proc fcQStringListModel_new2(strings: struct_miqt_array): ptr cQStringListModel {.importc: "QStringListModel_new2".}
-proc fcQStringListModel_new3(parent: pointer): ptr cQStringListModel {.importc: "QStringListModel_new3".}
-proc fcQStringListModel_new4(strings: struct_miqt_array, parent: pointer): ptr cQStringListModel {.importc: "QStringListModel_new4".}
 proc fcQStringListModel_metaObject(self: pointer, ): pointer {.importc: "QStringListModel_metaObject".}
 proc fcQStringListModel_metacast(self: pointer, param1: cstring): pointer {.importc: "QStringListModel_metacast".}
 proc fcQStringListModel_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QStringListModel_metacall".}
@@ -84,119 +80,102 @@ proc fcQStringListModel_setStringList(self: pointer, strings: struct_miqt_array)
 proc fcQStringListModel_supportedDropActions(self: pointer, ): cint {.importc: "QStringListModel_supportedDropActions".}
 proc fcQStringListModel_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QStringListModel_tr2".}
 proc fcQStringListModel_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QStringListModel_tr3".}
-proc fQStringListModel_virtualbase_metaObject(self: pointer, ): pointer{.importc: "QStringListModel_virtualbase_metaObject".}
-proc fcQStringListModel_override_virtual_metaObject(self: pointer, slot: int) {.importc: "QStringListModel_override_virtual_metaObject".}
-proc fQStringListModel_virtualbase_metacast(self: pointer, param1: cstring): pointer{.importc: "QStringListModel_virtualbase_metacast".}
-proc fcQStringListModel_override_virtual_metacast(self: pointer, slot: int) {.importc: "QStringListModel_override_virtual_metacast".}
-proc fQStringListModel_virtualbase_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint{.importc: "QStringListModel_virtualbase_metacall".}
-proc fcQStringListModel_override_virtual_metacall(self: pointer, slot: int) {.importc: "QStringListModel_override_virtual_metacall".}
-proc fQStringListModel_virtualbase_rowCount(self: pointer, parent: pointer): cint{.importc: "QStringListModel_virtualbase_rowCount".}
-proc fcQStringListModel_override_virtual_rowCount(self: pointer, slot: int) {.importc: "QStringListModel_override_virtual_rowCount".}
-proc fQStringListModel_virtualbase_sibling(self: pointer, row: cint, column: cint, idx: pointer): pointer{.importc: "QStringListModel_virtualbase_sibling".}
-proc fcQStringListModel_override_virtual_sibling(self: pointer, slot: int) {.importc: "QStringListModel_override_virtual_sibling".}
-proc fQStringListModel_virtualbase_data(self: pointer, index: pointer, role: cint): pointer{.importc: "QStringListModel_virtualbase_data".}
-proc fcQStringListModel_override_virtual_data(self: pointer, slot: int) {.importc: "QStringListModel_override_virtual_data".}
-proc fQStringListModel_virtualbase_setData(self: pointer, index: pointer, value: pointer, role: cint): bool{.importc: "QStringListModel_virtualbase_setData".}
-proc fcQStringListModel_override_virtual_setData(self: pointer, slot: int) {.importc: "QStringListModel_override_virtual_setData".}
-proc fQStringListModel_virtualbase_clearItemData(self: pointer, index: pointer): bool{.importc: "QStringListModel_virtualbase_clearItemData".}
-proc fcQStringListModel_override_virtual_clearItemData(self: pointer, slot: int) {.importc: "QStringListModel_override_virtual_clearItemData".}
-proc fQStringListModel_virtualbase_flags(self: pointer, index: pointer): cint{.importc: "QStringListModel_virtualbase_flags".}
-proc fcQStringListModel_override_virtual_flags(self: pointer, slot: int) {.importc: "QStringListModel_override_virtual_flags".}
-proc fQStringListModel_virtualbase_insertRows(self: pointer, row: cint, count: cint, parent: pointer): bool{.importc: "QStringListModel_virtualbase_insertRows".}
-proc fcQStringListModel_override_virtual_insertRows(self: pointer, slot: int) {.importc: "QStringListModel_override_virtual_insertRows".}
-proc fQStringListModel_virtualbase_removeRows(self: pointer, row: cint, count: cint, parent: pointer): bool{.importc: "QStringListModel_virtualbase_removeRows".}
-proc fcQStringListModel_override_virtual_removeRows(self: pointer, slot: int) {.importc: "QStringListModel_override_virtual_removeRows".}
-proc fQStringListModel_virtualbase_moveRows(self: pointer, sourceParent: pointer, sourceRow: cint, count: cint, destinationParent: pointer, destinationChild: cint): bool{.importc: "QStringListModel_virtualbase_moveRows".}
-proc fcQStringListModel_override_virtual_moveRows(self: pointer, slot: int) {.importc: "QStringListModel_override_virtual_moveRows".}
-proc fQStringListModel_virtualbase_itemData(self: pointer, index: pointer): struct_miqt_map{.importc: "QStringListModel_virtualbase_itemData".}
-proc fcQStringListModel_override_virtual_itemData(self: pointer, slot: int) {.importc: "QStringListModel_override_virtual_itemData".}
-proc fQStringListModel_virtualbase_setItemData(self: pointer, index: pointer, roles: struct_miqt_map): bool{.importc: "QStringListModel_virtualbase_setItemData".}
-proc fcQStringListModel_override_virtual_setItemData(self: pointer, slot: int) {.importc: "QStringListModel_override_virtual_setItemData".}
-proc fQStringListModel_virtualbase_sort(self: pointer, column: cint, order: cint): void{.importc: "QStringListModel_virtualbase_sort".}
-proc fcQStringListModel_override_virtual_sort(self: pointer, slot: int) {.importc: "QStringListModel_override_virtual_sort".}
-proc fQStringListModel_virtualbase_supportedDropActions(self: pointer, ): cint{.importc: "QStringListModel_virtualbase_supportedDropActions".}
-proc fcQStringListModel_override_virtual_supportedDropActions(self: pointer, slot: int) {.importc: "QStringListModel_override_virtual_supportedDropActions".}
-proc fQStringListModel_virtualbase_index(self: pointer, row: cint, column: cint, parent: pointer): pointer{.importc: "QStringListModel_virtualbase_index".}
-proc fcQStringListModel_override_virtual_index(self: pointer, slot: int) {.importc: "QStringListModel_override_virtual_index".}
-proc fQStringListModel_virtualbase_dropMimeData(self: pointer, data: pointer, action: cint, row: cint, column: cint, parent: pointer): bool{.importc: "QStringListModel_virtualbase_dropMimeData".}
-proc fcQStringListModel_override_virtual_dropMimeData(self: pointer, slot: int) {.importc: "QStringListModel_override_virtual_dropMimeData".}
-proc fQStringListModel_virtualbase_headerData(self: pointer, section: cint, orientation: cint, role: cint): pointer{.importc: "QStringListModel_virtualbase_headerData".}
-proc fcQStringListModel_override_virtual_headerData(self: pointer, slot: int) {.importc: "QStringListModel_override_virtual_headerData".}
-proc fQStringListModel_virtualbase_setHeaderData(self: pointer, section: cint, orientation: cint, value: pointer, role: cint): bool{.importc: "QStringListModel_virtualbase_setHeaderData".}
-proc fcQStringListModel_override_virtual_setHeaderData(self: pointer, slot: int) {.importc: "QStringListModel_override_virtual_setHeaderData".}
-proc fQStringListModel_virtualbase_mimeTypes(self: pointer, ): struct_miqt_array{.importc: "QStringListModel_virtualbase_mimeTypes".}
-proc fcQStringListModel_override_virtual_mimeTypes(self: pointer, slot: int) {.importc: "QStringListModel_override_virtual_mimeTypes".}
-proc fQStringListModel_virtualbase_mimeData(self: pointer, indexes: struct_miqt_array): pointer{.importc: "QStringListModel_virtualbase_mimeData".}
-proc fcQStringListModel_override_virtual_mimeData(self: pointer, slot: int) {.importc: "QStringListModel_override_virtual_mimeData".}
-proc fQStringListModel_virtualbase_canDropMimeData(self: pointer, data: pointer, action: cint, row: cint, column: cint, parent: pointer): bool{.importc: "QStringListModel_virtualbase_canDropMimeData".}
-proc fcQStringListModel_override_virtual_canDropMimeData(self: pointer, slot: int) {.importc: "QStringListModel_override_virtual_canDropMimeData".}
-proc fQStringListModel_virtualbase_supportedDragActions(self: pointer, ): cint{.importc: "QStringListModel_virtualbase_supportedDragActions".}
-proc fcQStringListModel_override_virtual_supportedDragActions(self: pointer, slot: int) {.importc: "QStringListModel_override_virtual_supportedDragActions".}
-proc fQStringListModel_virtualbase_insertColumns(self: pointer, column: cint, count: cint, parent: pointer): bool{.importc: "QStringListModel_virtualbase_insertColumns".}
-proc fcQStringListModel_override_virtual_insertColumns(self: pointer, slot: int) {.importc: "QStringListModel_override_virtual_insertColumns".}
-proc fQStringListModel_virtualbase_removeColumns(self: pointer, column: cint, count: cint, parent: pointer): bool{.importc: "QStringListModel_virtualbase_removeColumns".}
-proc fcQStringListModel_override_virtual_removeColumns(self: pointer, slot: int) {.importc: "QStringListModel_override_virtual_removeColumns".}
-proc fQStringListModel_virtualbase_moveColumns(self: pointer, sourceParent: pointer, sourceColumn: cint, count: cint, destinationParent: pointer, destinationChild: cint): bool{.importc: "QStringListModel_virtualbase_moveColumns".}
-proc fcQStringListModel_override_virtual_moveColumns(self: pointer, slot: int) {.importc: "QStringListModel_override_virtual_moveColumns".}
-proc fQStringListModel_virtualbase_fetchMore(self: pointer, parent: pointer): void{.importc: "QStringListModel_virtualbase_fetchMore".}
-proc fcQStringListModel_override_virtual_fetchMore(self: pointer, slot: int) {.importc: "QStringListModel_override_virtual_fetchMore".}
-proc fQStringListModel_virtualbase_canFetchMore(self: pointer, parent: pointer): bool{.importc: "QStringListModel_virtualbase_canFetchMore".}
-proc fcQStringListModel_override_virtual_canFetchMore(self: pointer, slot: int) {.importc: "QStringListModel_override_virtual_canFetchMore".}
-proc fQStringListModel_virtualbase_buddy(self: pointer, index: pointer): pointer{.importc: "QStringListModel_virtualbase_buddy".}
-proc fcQStringListModel_override_virtual_buddy(self: pointer, slot: int) {.importc: "QStringListModel_override_virtual_buddy".}
-proc fQStringListModel_virtualbase_match(self: pointer, start: pointer, role: cint, value: pointer, hits: cint, flags: cint): struct_miqt_array{.importc: "QStringListModel_virtualbase_match".}
-proc fcQStringListModel_override_virtual_match(self: pointer, slot: int) {.importc: "QStringListModel_override_virtual_match".}
-proc fQStringListModel_virtualbase_span(self: pointer, index: pointer): pointer{.importc: "QStringListModel_virtualbase_span".}
-proc fcQStringListModel_override_virtual_span(self: pointer, slot: int) {.importc: "QStringListModel_override_virtual_span".}
-proc fQStringListModel_virtualbase_roleNames(self: pointer, ): struct_miqt_map{.importc: "QStringListModel_virtualbase_roleNames".}
-proc fcQStringListModel_override_virtual_roleNames(self: pointer, slot: int) {.importc: "QStringListModel_override_virtual_roleNames".}
-proc fQStringListModel_virtualbase_multiData(self: pointer, index: pointer, roleDataSpan: pointer): void{.importc: "QStringListModel_virtualbase_multiData".}
-proc fcQStringListModel_override_virtual_multiData(self: pointer, slot: int) {.importc: "QStringListModel_override_virtual_multiData".}
-proc fQStringListModel_virtualbase_submit(self: pointer, ): bool{.importc: "QStringListModel_virtualbase_submit".}
-proc fcQStringListModel_override_virtual_submit(self: pointer, slot: int) {.importc: "QStringListModel_override_virtual_submit".}
-proc fQStringListModel_virtualbase_revert(self: pointer, ): void{.importc: "QStringListModel_virtualbase_revert".}
-proc fcQStringListModel_override_virtual_revert(self: pointer, slot: int) {.importc: "QStringListModel_override_virtual_revert".}
-proc fQStringListModel_virtualbase_resetInternalData(self: pointer, ): void{.importc: "QStringListModel_virtualbase_resetInternalData".}
-proc fcQStringListModel_override_virtual_resetInternalData(self: pointer, slot: int) {.importc: "QStringListModel_override_virtual_resetInternalData".}
-proc fQStringListModel_virtualbase_event(self: pointer, event: pointer): bool{.importc: "QStringListModel_virtualbase_event".}
-proc fcQStringListModel_override_virtual_event(self: pointer, slot: int) {.importc: "QStringListModel_override_virtual_event".}
-proc fQStringListModel_virtualbase_eventFilter(self: pointer, watched: pointer, event: pointer): bool{.importc: "QStringListModel_virtualbase_eventFilter".}
-proc fcQStringListModel_override_virtual_eventFilter(self: pointer, slot: int) {.importc: "QStringListModel_override_virtual_eventFilter".}
-proc fQStringListModel_virtualbase_timerEvent(self: pointer, event: pointer): void{.importc: "QStringListModel_virtualbase_timerEvent".}
-proc fcQStringListModel_override_virtual_timerEvent(self: pointer, slot: int) {.importc: "QStringListModel_override_virtual_timerEvent".}
-proc fQStringListModel_virtualbase_childEvent(self: pointer, event: pointer): void{.importc: "QStringListModel_virtualbase_childEvent".}
-proc fcQStringListModel_override_virtual_childEvent(self: pointer, slot: int) {.importc: "QStringListModel_override_virtual_childEvent".}
-proc fQStringListModel_virtualbase_customEvent(self: pointer, event: pointer): void{.importc: "QStringListModel_virtualbase_customEvent".}
-proc fcQStringListModel_override_virtual_customEvent(self: pointer, slot: int) {.importc: "QStringListModel_override_virtual_customEvent".}
-proc fQStringListModel_virtualbase_connectNotify(self: pointer, signal: pointer): void{.importc: "QStringListModel_virtualbase_connectNotify".}
-proc fcQStringListModel_override_virtual_connectNotify(self: pointer, slot: int) {.importc: "QStringListModel_override_virtual_connectNotify".}
-proc fQStringListModel_virtualbase_disconnectNotify(self: pointer, signal: pointer): void{.importc: "QStringListModel_virtualbase_disconnectNotify".}
-proc fcQStringListModel_override_virtual_disconnectNotify(self: pointer, slot: int) {.importc: "QStringListModel_override_virtual_disconnectNotify".}
+type cQStringListModelVTable = object
+  destructor*: proc(vtbl: ptr cQStringListModelVTable, self: ptr cQStringListModel) {.cdecl, raises:[], gcsafe.}
+  metaObject*: proc(vtbl, self: pointer, ): pointer {.cdecl, raises: [], gcsafe.}
+  metacast*: proc(vtbl, self: pointer, param1: cstring): pointer {.cdecl, raises: [], gcsafe.}
+  metacall*: proc(vtbl, self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl, raises: [], gcsafe.}
+  rowCount*: proc(vtbl, self: pointer, parent: pointer): cint {.cdecl, raises: [], gcsafe.}
+  sibling*: proc(vtbl, self: pointer, row: cint, column: cint, idx: pointer): pointer {.cdecl, raises: [], gcsafe.}
+  data*: proc(vtbl, self: pointer, index: pointer, role: cint): pointer {.cdecl, raises: [], gcsafe.}
+  setData*: proc(vtbl, self: pointer, index: pointer, value: pointer, role: cint): bool {.cdecl, raises: [], gcsafe.}
+  clearItemData*: proc(vtbl, self: pointer, index: pointer): bool {.cdecl, raises: [], gcsafe.}
+  flags*: proc(vtbl, self: pointer, index: pointer): cint {.cdecl, raises: [], gcsafe.}
+  insertRows*: proc(vtbl, self: pointer, row: cint, count: cint, parent: pointer): bool {.cdecl, raises: [], gcsafe.}
+  removeRows*: proc(vtbl, self: pointer, row: cint, count: cint, parent: pointer): bool {.cdecl, raises: [], gcsafe.}
+  moveRows*: proc(vtbl, self: pointer, sourceParent: pointer, sourceRow: cint, count: cint, destinationParent: pointer, destinationChild: cint): bool {.cdecl, raises: [], gcsafe.}
+  itemData*: proc(vtbl, self: pointer, index: pointer): struct_miqt_map {.cdecl, raises: [], gcsafe.}
+  setItemData*: proc(vtbl, self: pointer, index: pointer, roles: struct_miqt_map): bool {.cdecl, raises: [], gcsafe.}
+  sort*: proc(vtbl, self: pointer, column: cint, order: cint): void {.cdecl, raises: [], gcsafe.}
+  supportedDropActions*: proc(vtbl, self: pointer, ): cint {.cdecl, raises: [], gcsafe.}
+  index*: proc(vtbl, self: pointer, row: cint, column: cint, parent: pointer): pointer {.cdecl, raises: [], gcsafe.}
+  dropMimeData*: proc(vtbl, self: pointer, data: pointer, action: cint, row: cint, column: cint, parent: pointer): bool {.cdecl, raises: [], gcsafe.}
+  headerData*: proc(vtbl, self: pointer, section: cint, orientation: cint, role: cint): pointer {.cdecl, raises: [], gcsafe.}
+  setHeaderData*: proc(vtbl, self: pointer, section: cint, orientation: cint, value: pointer, role: cint): bool {.cdecl, raises: [], gcsafe.}
+  mimeTypes*: proc(vtbl, self: pointer, ): struct_miqt_array {.cdecl, raises: [], gcsafe.}
+  mimeData*: proc(vtbl, self: pointer, indexes: struct_miqt_array): pointer {.cdecl, raises: [], gcsafe.}
+  canDropMimeData*: proc(vtbl, self: pointer, data: pointer, action: cint, row: cint, column: cint, parent: pointer): bool {.cdecl, raises: [], gcsafe.}
+  supportedDragActions*: proc(vtbl, self: pointer, ): cint {.cdecl, raises: [], gcsafe.}
+  insertColumns*: proc(vtbl, self: pointer, column: cint, count: cint, parent: pointer): bool {.cdecl, raises: [], gcsafe.}
+  removeColumns*: proc(vtbl, self: pointer, column: cint, count: cint, parent: pointer): bool {.cdecl, raises: [], gcsafe.}
+  moveColumns*: proc(vtbl, self: pointer, sourceParent: pointer, sourceColumn: cint, count: cint, destinationParent: pointer, destinationChild: cint): bool {.cdecl, raises: [], gcsafe.}
+  fetchMore*: proc(vtbl, self: pointer, parent: pointer): void {.cdecl, raises: [], gcsafe.}
+  canFetchMore*: proc(vtbl, self: pointer, parent: pointer): bool {.cdecl, raises: [], gcsafe.}
+  buddy*: proc(vtbl, self: pointer, index: pointer): pointer {.cdecl, raises: [], gcsafe.}
+  match*: proc(vtbl, self: pointer, start: pointer, role: cint, value: pointer, hits: cint, flags: cint): struct_miqt_array {.cdecl, raises: [], gcsafe.}
+  span*: proc(vtbl, self: pointer, index: pointer): pointer {.cdecl, raises: [], gcsafe.}
+  roleNames*: proc(vtbl, self: pointer, ): struct_miqt_map {.cdecl, raises: [], gcsafe.}
+  multiData*: proc(vtbl, self: pointer, index: pointer, roleDataSpan: pointer): void {.cdecl, raises: [], gcsafe.}
+  submit*: proc(vtbl, self: pointer, ): bool {.cdecl, raises: [], gcsafe.}
+  revert*: proc(vtbl, self: pointer, ): void {.cdecl, raises: [], gcsafe.}
+  resetInternalData*: proc(vtbl, self: pointer, ): void {.cdecl, raises: [], gcsafe.}
+  event*: proc(vtbl, self: pointer, event: pointer): bool {.cdecl, raises: [], gcsafe.}
+  eventFilter*: proc(vtbl, self: pointer, watched: pointer, event: pointer): bool {.cdecl, raises: [], gcsafe.}
+  timerEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  childEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  customEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  connectNotify*: proc(vtbl, self: pointer, signal: pointer): void {.cdecl, raises: [], gcsafe.}
+  disconnectNotify*: proc(vtbl, self: pointer, signal: pointer): void {.cdecl, raises: [], gcsafe.}
+proc fcQStringListModel_virtualbase_metaObject(self: pointer, ): pointer {.importc: "QStringListModel_virtualbase_metaObject".}
+proc fcQStringListModel_virtualbase_metacast(self: pointer, param1: cstring): pointer {.importc: "QStringListModel_virtualbase_metacast".}
+proc fcQStringListModel_virtualbase_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QStringListModel_virtualbase_metacall".}
+proc fcQStringListModel_virtualbase_rowCount(self: pointer, parent: pointer): cint {.importc: "QStringListModel_virtualbase_rowCount".}
+proc fcQStringListModel_virtualbase_sibling(self: pointer, row: cint, column: cint, idx: pointer): pointer {.importc: "QStringListModel_virtualbase_sibling".}
+proc fcQStringListModel_virtualbase_data(self: pointer, index: pointer, role: cint): pointer {.importc: "QStringListModel_virtualbase_data".}
+proc fcQStringListModel_virtualbase_setData(self: pointer, index: pointer, value: pointer, role: cint): bool {.importc: "QStringListModel_virtualbase_setData".}
+proc fcQStringListModel_virtualbase_clearItemData(self: pointer, index: pointer): bool {.importc: "QStringListModel_virtualbase_clearItemData".}
+proc fcQStringListModel_virtualbase_flags(self: pointer, index: pointer): cint {.importc: "QStringListModel_virtualbase_flags".}
+proc fcQStringListModel_virtualbase_insertRows(self: pointer, row: cint, count: cint, parent: pointer): bool {.importc: "QStringListModel_virtualbase_insertRows".}
+proc fcQStringListModel_virtualbase_removeRows(self: pointer, row: cint, count: cint, parent: pointer): bool {.importc: "QStringListModel_virtualbase_removeRows".}
+proc fcQStringListModel_virtualbase_moveRows(self: pointer, sourceParent: pointer, sourceRow: cint, count: cint, destinationParent: pointer, destinationChild: cint): bool {.importc: "QStringListModel_virtualbase_moveRows".}
+proc fcQStringListModel_virtualbase_itemData(self: pointer, index: pointer): struct_miqt_map {.importc: "QStringListModel_virtualbase_itemData".}
+proc fcQStringListModel_virtualbase_setItemData(self: pointer, index: pointer, roles: struct_miqt_map): bool {.importc: "QStringListModel_virtualbase_setItemData".}
+proc fcQStringListModel_virtualbase_sort(self: pointer, column: cint, order: cint): void {.importc: "QStringListModel_virtualbase_sort".}
+proc fcQStringListModel_virtualbase_supportedDropActions(self: pointer, ): cint {.importc: "QStringListModel_virtualbase_supportedDropActions".}
+proc fcQStringListModel_virtualbase_index(self: pointer, row: cint, column: cint, parent: pointer): pointer {.importc: "QStringListModel_virtualbase_index".}
+proc fcQStringListModel_virtualbase_dropMimeData(self: pointer, data: pointer, action: cint, row: cint, column: cint, parent: pointer): bool {.importc: "QStringListModel_virtualbase_dropMimeData".}
+proc fcQStringListModel_virtualbase_headerData(self: pointer, section: cint, orientation: cint, role: cint): pointer {.importc: "QStringListModel_virtualbase_headerData".}
+proc fcQStringListModel_virtualbase_setHeaderData(self: pointer, section: cint, orientation: cint, value: pointer, role: cint): bool {.importc: "QStringListModel_virtualbase_setHeaderData".}
+proc fcQStringListModel_virtualbase_mimeTypes(self: pointer, ): struct_miqt_array {.importc: "QStringListModel_virtualbase_mimeTypes".}
+proc fcQStringListModel_virtualbase_mimeData(self: pointer, indexes: struct_miqt_array): pointer {.importc: "QStringListModel_virtualbase_mimeData".}
+proc fcQStringListModel_virtualbase_canDropMimeData(self: pointer, data: pointer, action: cint, row: cint, column: cint, parent: pointer): bool {.importc: "QStringListModel_virtualbase_canDropMimeData".}
+proc fcQStringListModel_virtualbase_supportedDragActions(self: pointer, ): cint {.importc: "QStringListModel_virtualbase_supportedDragActions".}
+proc fcQStringListModel_virtualbase_insertColumns(self: pointer, column: cint, count: cint, parent: pointer): bool {.importc: "QStringListModel_virtualbase_insertColumns".}
+proc fcQStringListModel_virtualbase_removeColumns(self: pointer, column: cint, count: cint, parent: pointer): bool {.importc: "QStringListModel_virtualbase_removeColumns".}
+proc fcQStringListModel_virtualbase_moveColumns(self: pointer, sourceParent: pointer, sourceColumn: cint, count: cint, destinationParent: pointer, destinationChild: cint): bool {.importc: "QStringListModel_virtualbase_moveColumns".}
+proc fcQStringListModel_virtualbase_fetchMore(self: pointer, parent: pointer): void {.importc: "QStringListModel_virtualbase_fetchMore".}
+proc fcQStringListModel_virtualbase_canFetchMore(self: pointer, parent: pointer): bool {.importc: "QStringListModel_virtualbase_canFetchMore".}
+proc fcQStringListModel_virtualbase_buddy(self: pointer, index: pointer): pointer {.importc: "QStringListModel_virtualbase_buddy".}
+proc fcQStringListModel_virtualbase_match(self: pointer, start: pointer, role: cint, value: pointer, hits: cint, flags: cint): struct_miqt_array {.importc: "QStringListModel_virtualbase_match".}
+proc fcQStringListModel_virtualbase_span(self: pointer, index: pointer): pointer {.importc: "QStringListModel_virtualbase_span".}
+proc fcQStringListModel_virtualbase_roleNames(self: pointer, ): struct_miqt_map {.importc: "QStringListModel_virtualbase_roleNames".}
+proc fcQStringListModel_virtualbase_multiData(self: pointer, index: pointer, roleDataSpan: pointer): void {.importc: "QStringListModel_virtualbase_multiData".}
+proc fcQStringListModel_virtualbase_submit(self: pointer, ): bool {.importc: "QStringListModel_virtualbase_submit".}
+proc fcQStringListModel_virtualbase_revert(self: pointer, ): void {.importc: "QStringListModel_virtualbase_revert".}
+proc fcQStringListModel_virtualbase_resetInternalData(self: pointer, ): void {.importc: "QStringListModel_virtualbase_resetInternalData".}
+proc fcQStringListModel_virtualbase_event(self: pointer, event: pointer): bool {.importc: "QStringListModel_virtualbase_event".}
+proc fcQStringListModel_virtualbase_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.importc: "QStringListModel_virtualbase_eventFilter".}
+proc fcQStringListModel_virtualbase_timerEvent(self: pointer, event: pointer): void {.importc: "QStringListModel_virtualbase_timerEvent".}
+proc fcQStringListModel_virtualbase_childEvent(self: pointer, event: pointer): void {.importc: "QStringListModel_virtualbase_childEvent".}
+proc fcQStringListModel_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QStringListModel_virtualbase_customEvent".}
+proc fcQStringListModel_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QStringListModel_virtualbase_connectNotify".}
+proc fcQStringListModel_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QStringListModel_virtualbase_disconnectNotify".}
+proc fcQStringListModel_new(vtbl: pointer, ): ptr cQStringListModel {.importc: "QStringListModel_new".}
+proc fcQStringListModel_new2(vtbl: pointer, strings: struct_miqt_array): ptr cQStringListModel {.importc: "QStringListModel_new2".}
+proc fcQStringListModel_new3(vtbl: pointer, parent: pointer): ptr cQStringListModel {.importc: "QStringListModel_new3".}
+proc fcQStringListModel_new4(vtbl: pointer, strings: struct_miqt_array, parent: pointer): ptr cQStringListModel {.importc: "QStringListModel_new4".}
 proc fcQStringListModel_staticMetaObject(): pointer {.importc: "QStringListModel_staticMetaObject".}
 proc fcQStringListModel_delete(self: pointer) {.importc: "QStringListModel_delete".}
-
-
-func init*(T: type gen_qstringlistmodel_types.QStringListModel, h: ptr cQStringListModel): gen_qstringlistmodel_types.QStringListModel =
-  T(h: h)
-proc create*(T: type gen_qstringlistmodel_types.QStringListModel, ): gen_qstringlistmodel_types.QStringListModel =
-  gen_qstringlistmodel_types.QStringListModel.init(fcQStringListModel_new())
-
-proc create*(T: type gen_qstringlistmodel_types.QStringListModel, strings: seq[string]): gen_qstringlistmodel_types.QStringListModel =
-  var strings_CArray = newSeq[struct_miqt_string](len(strings))
-  for i in 0..<len(strings):
-    strings_CArray[i] = struct_miqt_string(data: strings[i], len: csize_t(len(strings[i])))
-
-  gen_qstringlistmodel_types.QStringListModel.init(fcQStringListModel_new2(struct_miqt_array(len: csize_t(len(strings)), data: if len(strings) == 0: nil else: addr(strings_CArray[0]))))
-
-proc create*(T: type gen_qstringlistmodel_types.QStringListModel, parent: gen_qobject_types.QObject): gen_qstringlistmodel_types.QStringListModel =
-  gen_qstringlistmodel_types.QStringListModel.init(fcQStringListModel_new3(parent.h))
-
-proc create*(T: type gen_qstringlistmodel_types.QStringListModel, strings: seq[string], parent: gen_qobject_types.QObject): gen_qstringlistmodel_types.QStringListModel =
-  var strings_CArray = newSeq[struct_miqt_string](len(strings))
-  for i in 0..<len(strings):
-    strings_CArray[i] = struct_miqt_string(data: strings[i], len: csize_t(len(strings[i])))
-
-  gen_qstringlistmodel_types.QStringListModel.init(fcQStringListModel_new4(struct_miqt_array(len: csize_t(len(strings)), data: if len(strings) == 0: nil else: addr(strings_CArray[0])), parent.h))
 
 proc metaObject*(self: gen_qstringlistmodel_types.QStringListModel, ): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQStringListModel_metaObject(self.h))
@@ -300,264 +279,232 @@ proc tr*(_: type gen_qstringlistmodel_types.QStringListModel, s: cstring, c: cst
   c_free(v_ms.data)
   vx_ret
 
+type QStringListModelmetaObjectProc* = proc(self: QStringListModel): gen_qobjectdefs_types.QMetaObject {.raises: [], gcsafe.}
+type QStringListModelmetacastProc* = proc(self: QStringListModel, param1: cstring): pointer {.raises: [], gcsafe.}
+type QStringListModelmetacallProc* = proc(self: QStringListModel, param1: cint, param2: cint, param3: pointer): cint {.raises: [], gcsafe.}
+type QStringListModelrowCountProc* = proc(self: QStringListModel, parent: gen_qabstractitemmodel_types.QModelIndex): cint {.raises: [], gcsafe.}
+type QStringListModelsiblingProc* = proc(self: QStringListModel, row: cint, column: cint, idx: gen_qabstractitemmodel_types.QModelIndex): gen_qabstractitemmodel_types.QModelIndex {.raises: [], gcsafe.}
+type QStringListModeldataProc* = proc(self: QStringListModel, index: gen_qabstractitemmodel_types.QModelIndex, role: cint): gen_qvariant_types.QVariant {.raises: [], gcsafe.}
+type QStringListModelsetDataProc* = proc(self: QStringListModel, index: gen_qabstractitemmodel_types.QModelIndex, value: gen_qvariant_types.QVariant, role: cint): bool {.raises: [], gcsafe.}
+type QStringListModelclearItemDataProc* = proc(self: QStringListModel, index: gen_qabstractitemmodel_types.QModelIndex): bool {.raises: [], gcsafe.}
+type QStringListModelflagsProc* = proc(self: QStringListModel, index: gen_qabstractitemmodel_types.QModelIndex): cint {.raises: [], gcsafe.}
+type QStringListModelinsertRowsProc* = proc(self: QStringListModel, row: cint, count: cint, parent: gen_qabstractitemmodel_types.QModelIndex): bool {.raises: [], gcsafe.}
+type QStringListModelremoveRowsProc* = proc(self: QStringListModel, row: cint, count: cint, parent: gen_qabstractitemmodel_types.QModelIndex): bool {.raises: [], gcsafe.}
+type QStringListModelmoveRowsProc* = proc(self: QStringListModel, sourceParent: gen_qabstractitemmodel_types.QModelIndex, sourceRow: cint, count: cint, destinationParent: gen_qabstractitemmodel_types.QModelIndex, destinationChild: cint): bool {.raises: [], gcsafe.}
+type QStringListModelitemDataProc* = proc(self: QStringListModel, index: gen_qabstractitemmodel_types.QModelIndex): Table[cint,gen_qvariant_types.QVariant] {.raises: [], gcsafe.}
+type QStringListModelsetItemDataProc* = proc(self: QStringListModel, index: gen_qabstractitemmodel_types.QModelIndex, roles: Table[cint,gen_qvariant_types.QVariant]): bool {.raises: [], gcsafe.}
+type QStringListModelsortProc* = proc(self: QStringListModel, column: cint, order: cint): void {.raises: [], gcsafe.}
+type QStringListModelsupportedDropActionsProc* = proc(self: QStringListModel): cint {.raises: [], gcsafe.}
+type QStringListModelindexProc* = proc(self: QStringListModel, row: cint, column: cint, parent: gen_qabstractitemmodel_types.QModelIndex): gen_qabstractitemmodel_types.QModelIndex {.raises: [], gcsafe.}
+type QStringListModeldropMimeDataProc* = proc(self: QStringListModel, data: gen_qmimedata_types.QMimeData, action: cint, row: cint, column: cint, parent: gen_qabstractitemmodel_types.QModelIndex): bool {.raises: [], gcsafe.}
+type QStringListModelheaderDataProc* = proc(self: QStringListModel, section: cint, orientation: cint, role: cint): gen_qvariant_types.QVariant {.raises: [], gcsafe.}
+type QStringListModelsetHeaderDataProc* = proc(self: QStringListModel, section: cint, orientation: cint, value: gen_qvariant_types.QVariant, role: cint): bool {.raises: [], gcsafe.}
+type QStringListModelmimeTypesProc* = proc(self: QStringListModel): seq[string] {.raises: [], gcsafe.}
+type QStringListModelmimeDataProc* = proc(self: QStringListModel, indexes: seq[gen_qabstractitemmodel_types.QModelIndex]): gen_qmimedata_types.QMimeData {.raises: [], gcsafe.}
+type QStringListModelcanDropMimeDataProc* = proc(self: QStringListModel, data: gen_qmimedata_types.QMimeData, action: cint, row: cint, column: cint, parent: gen_qabstractitemmodel_types.QModelIndex): bool {.raises: [], gcsafe.}
+type QStringListModelsupportedDragActionsProc* = proc(self: QStringListModel): cint {.raises: [], gcsafe.}
+type QStringListModelinsertColumnsProc* = proc(self: QStringListModel, column: cint, count: cint, parent: gen_qabstractitemmodel_types.QModelIndex): bool {.raises: [], gcsafe.}
+type QStringListModelremoveColumnsProc* = proc(self: QStringListModel, column: cint, count: cint, parent: gen_qabstractitemmodel_types.QModelIndex): bool {.raises: [], gcsafe.}
+type QStringListModelmoveColumnsProc* = proc(self: QStringListModel, sourceParent: gen_qabstractitemmodel_types.QModelIndex, sourceColumn: cint, count: cint, destinationParent: gen_qabstractitemmodel_types.QModelIndex, destinationChild: cint): bool {.raises: [], gcsafe.}
+type QStringListModelfetchMoreProc* = proc(self: QStringListModel, parent: gen_qabstractitemmodel_types.QModelIndex): void {.raises: [], gcsafe.}
+type QStringListModelcanFetchMoreProc* = proc(self: QStringListModel, parent: gen_qabstractitemmodel_types.QModelIndex): bool {.raises: [], gcsafe.}
+type QStringListModelbuddyProc* = proc(self: QStringListModel, index: gen_qabstractitemmodel_types.QModelIndex): gen_qabstractitemmodel_types.QModelIndex {.raises: [], gcsafe.}
+type QStringListModelmatchProc* = proc(self: QStringListModel, start: gen_qabstractitemmodel_types.QModelIndex, role: cint, value: gen_qvariant_types.QVariant, hits: cint, flags: cint): seq[gen_qabstractitemmodel_types.QModelIndex] {.raises: [], gcsafe.}
+type QStringListModelspanProc* = proc(self: QStringListModel, index: gen_qabstractitemmodel_types.QModelIndex): gen_qsize_types.QSize {.raises: [], gcsafe.}
+type QStringListModelroleNamesProc* = proc(self: QStringListModel): Table[cint,seq[byte]] {.raises: [], gcsafe.}
+type QStringListModelmultiDataProc* = proc(self: QStringListModel, index: gen_qabstractitemmodel_types.QModelIndex, roleDataSpan: gen_qabstractitemmodel_types.QModelRoleDataSpan): void {.raises: [], gcsafe.}
+type QStringListModelsubmitProc* = proc(self: QStringListModel): bool {.raises: [], gcsafe.}
+type QStringListModelrevertProc* = proc(self: QStringListModel): void {.raises: [], gcsafe.}
+type QStringListModelresetInternalDataProc* = proc(self: QStringListModel): void {.raises: [], gcsafe.}
+type QStringListModeleventProc* = proc(self: QStringListModel, event: gen_qcoreevent_types.QEvent): bool {.raises: [], gcsafe.}
+type QStringListModeleventFilterProc* = proc(self: QStringListModel, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.raises: [], gcsafe.}
+type QStringListModeltimerEventProc* = proc(self: QStringListModel, event: gen_qcoreevent_types.QTimerEvent): void {.raises: [], gcsafe.}
+type QStringListModelchildEventProc* = proc(self: QStringListModel, event: gen_qcoreevent_types.QChildEvent): void {.raises: [], gcsafe.}
+type QStringListModelcustomEventProc* = proc(self: QStringListModel, event: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
+type QStringListModelconnectNotifyProc* = proc(self: QStringListModel, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
+type QStringListModeldisconnectNotifyProc* = proc(self: QStringListModel, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
+type QStringListModelVTable* = object
+  vtbl: cQStringListModelVTable
+  metaObject*: QStringListModelmetaObjectProc
+  metacast*: QStringListModelmetacastProc
+  metacall*: QStringListModelmetacallProc
+  rowCount*: QStringListModelrowCountProc
+  sibling*: QStringListModelsiblingProc
+  data*: QStringListModeldataProc
+  setData*: QStringListModelsetDataProc
+  clearItemData*: QStringListModelclearItemDataProc
+  flags*: QStringListModelflagsProc
+  insertRows*: QStringListModelinsertRowsProc
+  removeRows*: QStringListModelremoveRowsProc
+  moveRows*: QStringListModelmoveRowsProc
+  itemData*: QStringListModelitemDataProc
+  setItemData*: QStringListModelsetItemDataProc
+  sort*: QStringListModelsortProc
+  supportedDropActions*: QStringListModelsupportedDropActionsProc
+  index*: QStringListModelindexProc
+  dropMimeData*: QStringListModeldropMimeDataProc
+  headerData*: QStringListModelheaderDataProc
+  setHeaderData*: QStringListModelsetHeaderDataProc
+  mimeTypes*: QStringListModelmimeTypesProc
+  mimeData*: QStringListModelmimeDataProc
+  canDropMimeData*: QStringListModelcanDropMimeDataProc
+  supportedDragActions*: QStringListModelsupportedDragActionsProc
+  insertColumns*: QStringListModelinsertColumnsProc
+  removeColumns*: QStringListModelremoveColumnsProc
+  moveColumns*: QStringListModelmoveColumnsProc
+  fetchMore*: QStringListModelfetchMoreProc
+  canFetchMore*: QStringListModelcanFetchMoreProc
+  buddy*: QStringListModelbuddyProc
+  match*: QStringListModelmatchProc
+  span*: QStringListModelspanProc
+  roleNames*: QStringListModelroleNamesProc
+  multiData*: QStringListModelmultiDataProc
+  submit*: QStringListModelsubmitProc
+  revert*: QStringListModelrevertProc
+  resetInternalData*: QStringListModelresetInternalDataProc
+  event*: QStringListModeleventProc
+  eventFilter*: QStringListModeleventFilterProc
+  timerEvent*: QStringListModeltimerEventProc
+  childEvent*: QStringListModelchildEventProc
+  customEvent*: QStringListModelcustomEventProc
+  connectNotify*: QStringListModelconnectNotifyProc
+  disconnectNotify*: QStringListModeldisconnectNotifyProc
 proc QStringListModelmetaObject*(self: gen_qstringlistmodel_types.QStringListModel, ): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fQStringListModel_virtualbase_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQStringListModel_virtualbase_metaObject(self.h))
 
-type QStringListModelmetaObjectProc* = proc(): gen_qobjectdefs_types.QMetaObject
-proc onmetaObject*(self: gen_qstringlistmodel_types.QStringListModel, slot: QStringListModelmetaObjectProc) =
-  # TODO check subclass
-  var tmp = new QStringListModelmetaObjectProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQStringListModel_override_virtual_metaObject(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QStringListModel_metaObject(self: ptr cQStringListModel, slot: int): pointer {.exportc: "miqt_exec_callback_QStringListModel_metaObject ".} =
-  var nimfunc = cast[ptr QStringListModelmetaObjectProc](cast[pointer](slot))
-
-  let virtualReturn = nimfunc[]( )
-
+proc miqt_exec_callback_cQStringListModel_metaObject(vtbl: pointer, self: pointer): pointer {.cdecl.} =
+  let vtbl = cast[ptr QStringListModelVTable](vtbl)
+  let self = QStringListModel(h: self)
+  var virtualReturn = vtbl[].metaObject(self)
   virtualReturn.h
+
 proc QStringListModelmetacast*(self: gen_qstringlistmodel_types.QStringListModel, param1: cstring): pointer =
-  fQStringListModel_virtualbase_metacast(self.h, param1)
+  fcQStringListModel_virtualbase_metacast(self.h, param1)
 
-type QStringListModelmetacastProc* = proc(param1: cstring): pointer
-proc onmetacast*(self: gen_qstringlistmodel_types.QStringListModel, slot: QStringListModelmetacastProc) =
-  # TODO check subclass
-  var tmp = new QStringListModelmetacastProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQStringListModel_override_virtual_metacast(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QStringListModel_metacast(self: ptr cQStringListModel, slot: int, param1: cstring): pointer {.exportc: "miqt_exec_callback_QStringListModel_metacast ".} =
-  var nimfunc = cast[ptr QStringListModelmetacastProc](cast[pointer](slot))
+proc miqt_exec_callback_cQStringListModel_metacast(vtbl: pointer, self: pointer, param1: cstring): pointer {.cdecl.} =
+  let vtbl = cast[ptr QStringListModelVTable](vtbl)
+  let self = QStringListModel(h: self)
   let slotval1 = (param1)
-
-
-  let virtualReturn = nimfunc[](slotval1 )
-
+  var virtualReturn = vtbl[].metacast(self, slotval1)
   virtualReturn
+
 proc QStringListModelmetacall*(self: gen_qstringlistmodel_types.QStringListModel, param1: cint, param2: cint, param3: pointer): cint =
-  fQStringListModel_virtualbase_metacall(self.h, cint(param1), param2, param3)
+  fcQStringListModel_virtualbase_metacall(self.h, cint(param1), param2, param3)
 
-type QStringListModelmetacallProc* = proc(param1: cint, param2: cint, param3: pointer): cint
-proc onmetacall*(self: gen_qstringlistmodel_types.QStringListModel, slot: QStringListModelmetacallProc) =
-  # TODO check subclass
-  var tmp = new QStringListModelmetacallProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQStringListModel_override_virtual_metacall(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QStringListModel_metacall(self: ptr cQStringListModel, slot: int, param1: cint, param2: cint, param3: pointer): cint {.exportc: "miqt_exec_callback_QStringListModel_metacall ".} =
-  var nimfunc = cast[ptr QStringListModelmetacallProc](cast[pointer](slot))
+proc miqt_exec_callback_cQStringListModel_metacall(vtbl: pointer, self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
+  let vtbl = cast[ptr QStringListModelVTable](vtbl)
+  let self = QStringListModel(h: self)
   let slotval1 = cint(param1)
-
   let slotval2 = param2
-
   let slotval3 = param3
-
-
-  let virtualReturn = nimfunc[](slotval1, slotval2, slotval3 )
-
+  var virtualReturn = vtbl[].metacall(self, slotval1, slotval2, slotval3)
   virtualReturn
+
 proc QStringListModelrowCount*(self: gen_qstringlistmodel_types.QStringListModel, parent: gen_qabstractitemmodel_types.QModelIndex): cint =
-  fQStringListModel_virtualbase_rowCount(self.h, parent.h)
+  fcQStringListModel_virtualbase_rowCount(self.h, parent.h)
 
-type QStringListModelrowCountProc* = proc(parent: gen_qabstractitemmodel_types.QModelIndex): cint
-proc onrowCount*(self: gen_qstringlistmodel_types.QStringListModel, slot: QStringListModelrowCountProc) =
-  # TODO check subclass
-  var tmp = new QStringListModelrowCountProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQStringListModel_override_virtual_rowCount(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QStringListModel_rowCount(self: ptr cQStringListModel, slot: int, parent: pointer): cint {.exportc: "miqt_exec_callback_QStringListModel_rowCount ".} =
-  var nimfunc = cast[ptr QStringListModelrowCountProc](cast[pointer](slot))
+proc miqt_exec_callback_cQStringListModel_rowCount(vtbl: pointer, self: pointer, parent: pointer): cint {.cdecl.} =
+  let vtbl = cast[ptr QStringListModelVTable](vtbl)
+  let self = QStringListModel(h: self)
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: parent)
-
-
-  let virtualReturn = nimfunc[](slotval1 )
-
+  var virtualReturn = vtbl[].rowCount(self, slotval1)
   virtualReturn
+
 proc QStringListModelsibling*(self: gen_qstringlistmodel_types.QStringListModel, row: cint, column: cint, idx: gen_qabstractitemmodel_types.QModelIndex): gen_qabstractitemmodel_types.QModelIndex =
-  gen_qabstractitemmodel_types.QModelIndex(h: fQStringListModel_virtualbase_sibling(self.h, row, column, idx.h))
+  gen_qabstractitemmodel_types.QModelIndex(h: fcQStringListModel_virtualbase_sibling(self.h, row, column, idx.h))
 
-type QStringListModelsiblingProc* = proc(row: cint, column: cint, idx: gen_qabstractitemmodel_types.QModelIndex): gen_qabstractitemmodel_types.QModelIndex
-proc onsibling*(self: gen_qstringlistmodel_types.QStringListModel, slot: QStringListModelsiblingProc) =
-  # TODO check subclass
-  var tmp = new QStringListModelsiblingProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQStringListModel_override_virtual_sibling(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QStringListModel_sibling(self: ptr cQStringListModel, slot: int, row: cint, column: cint, idx: pointer): pointer {.exportc: "miqt_exec_callback_QStringListModel_sibling ".} =
-  var nimfunc = cast[ptr QStringListModelsiblingProc](cast[pointer](slot))
+proc miqt_exec_callback_cQStringListModel_sibling(vtbl: pointer, self: pointer, row: cint, column: cint, idx: pointer): pointer {.cdecl.} =
+  let vtbl = cast[ptr QStringListModelVTable](vtbl)
+  let self = QStringListModel(h: self)
   let slotval1 = row
-
   let slotval2 = column
-
   let slotval3 = gen_qabstractitemmodel_types.QModelIndex(h: idx)
-
-
-  let virtualReturn = nimfunc[](slotval1, slotval2, slotval3 )
-
+  var virtualReturn = vtbl[].sibling(self, slotval1, slotval2, slotval3)
   virtualReturn.h
+
 proc QStringListModeldata*(self: gen_qstringlistmodel_types.QStringListModel, index: gen_qabstractitemmodel_types.QModelIndex, role: cint): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fQStringListModel_virtualbase_data(self.h, index.h, role))
+  gen_qvariant_types.QVariant(h: fcQStringListModel_virtualbase_data(self.h, index.h, role))
 
-type QStringListModeldataProc* = proc(index: gen_qabstractitemmodel_types.QModelIndex, role: cint): gen_qvariant_types.QVariant
-proc ondata*(self: gen_qstringlistmodel_types.QStringListModel, slot: QStringListModeldataProc) =
-  # TODO check subclass
-  var tmp = new QStringListModeldataProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQStringListModel_override_virtual_data(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QStringListModel_data(self: ptr cQStringListModel, slot: int, index: pointer, role: cint): pointer {.exportc: "miqt_exec_callback_QStringListModel_data ".} =
-  var nimfunc = cast[ptr QStringListModeldataProc](cast[pointer](slot))
+proc miqt_exec_callback_cQStringListModel_data(vtbl: pointer, self: pointer, index: pointer, role: cint): pointer {.cdecl.} =
+  let vtbl = cast[ptr QStringListModelVTable](vtbl)
+  let self = QStringListModel(h: self)
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index)
-
   let slotval2 = role
-
-
-  let virtualReturn = nimfunc[](slotval1, slotval2 )
-
+  var virtualReturn = vtbl[].data(self, slotval1, slotval2)
   virtualReturn.h
+
 proc QStringListModelsetData*(self: gen_qstringlistmodel_types.QStringListModel, index: gen_qabstractitemmodel_types.QModelIndex, value: gen_qvariant_types.QVariant, role: cint): bool =
-  fQStringListModel_virtualbase_setData(self.h, index.h, value.h, role)
+  fcQStringListModel_virtualbase_setData(self.h, index.h, value.h, role)
 
-type QStringListModelsetDataProc* = proc(index: gen_qabstractitemmodel_types.QModelIndex, value: gen_qvariant_types.QVariant, role: cint): bool
-proc onsetData*(self: gen_qstringlistmodel_types.QStringListModel, slot: QStringListModelsetDataProc) =
-  # TODO check subclass
-  var tmp = new QStringListModelsetDataProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQStringListModel_override_virtual_setData(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QStringListModel_setData(self: ptr cQStringListModel, slot: int, index: pointer, value: pointer, role: cint): bool {.exportc: "miqt_exec_callback_QStringListModel_setData ".} =
-  var nimfunc = cast[ptr QStringListModelsetDataProc](cast[pointer](slot))
+proc miqt_exec_callback_cQStringListModel_setData(vtbl: pointer, self: pointer, index: pointer, value: pointer, role: cint): bool {.cdecl.} =
+  let vtbl = cast[ptr QStringListModelVTable](vtbl)
+  let self = QStringListModel(h: self)
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index)
-
   let slotval2 = gen_qvariant_types.QVariant(h: value)
-
   let slotval3 = role
-
-
-  let virtualReturn = nimfunc[](slotval1, slotval2, slotval3 )
-
+  var virtualReturn = vtbl[].setData(self, slotval1, slotval2, slotval3)
   virtualReturn
+
 proc QStringListModelclearItemData*(self: gen_qstringlistmodel_types.QStringListModel, index: gen_qabstractitemmodel_types.QModelIndex): bool =
-  fQStringListModel_virtualbase_clearItemData(self.h, index.h)
+  fcQStringListModel_virtualbase_clearItemData(self.h, index.h)
 
-type QStringListModelclearItemDataProc* = proc(index: gen_qabstractitemmodel_types.QModelIndex): bool
-proc onclearItemData*(self: gen_qstringlistmodel_types.QStringListModel, slot: QStringListModelclearItemDataProc) =
-  # TODO check subclass
-  var tmp = new QStringListModelclearItemDataProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQStringListModel_override_virtual_clearItemData(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QStringListModel_clearItemData(self: ptr cQStringListModel, slot: int, index: pointer): bool {.exportc: "miqt_exec_callback_QStringListModel_clearItemData ".} =
-  var nimfunc = cast[ptr QStringListModelclearItemDataProc](cast[pointer](slot))
+proc miqt_exec_callback_cQStringListModel_clearItemData(vtbl: pointer, self: pointer, index: pointer): bool {.cdecl.} =
+  let vtbl = cast[ptr QStringListModelVTable](vtbl)
+  let self = QStringListModel(h: self)
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index)
-
-
-  let virtualReturn = nimfunc[](slotval1 )
-
+  var virtualReturn = vtbl[].clearItemData(self, slotval1)
   virtualReturn
+
 proc QStringListModelflags*(self: gen_qstringlistmodel_types.QStringListModel, index: gen_qabstractitemmodel_types.QModelIndex): cint =
-  cint(fQStringListModel_virtualbase_flags(self.h, index.h))
+  cint(fcQStringListModel_virtualbase_flags(self.h, index.h))
 
-type QStringListModelflagsProc* = proc(index: gen_qabstractitemmodel_types.QModelIndex): cint
-proc onflags*(self: gen_qstringlistmodel_types.QStringListModel, slot: QStringListModelflagsProc) =
-  # TODO check subclass
-  var tmp = new QStringListModelflagsProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQStringListModel_override_virtual_flags(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QStringListModel_flags(self: ptr cQStringListModel, slot: int, index: pointer): cint {.exportc: "miqt_exec_callback_QStringListModel_flags ".} =
-  var nimfunc = cast[ptr QStringListModelflagsProc](cast[pointer](slot))
+proc miqt_exec_callback_cQStringListModel_flags(vtbl: pointer, self: pointer, index: pointer): cint {.cdecl.} =
+  let vtbl = cast[ptr QStringListModelVTable](vtbl)
+  let self = QStringListModel(h: self)
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index)
-
-
-  let virtualReturn = nimfunc[](slotval1 )
-
+  var virtualReturn = vtbl[].flags(self, slotval1)
   cint(virtualReturn)
+
 proc QStringListModelinsertRows*(self: gen_qstringlistmodel_types.QStringListModel, row: cint, count: cint, parent: gen_qabstractitemmodel_types.QModelIndex): bool =
-  fQStringListModel_virtualbase_insertRows(self.h, row, count, parent.h)
+  fcQStringListModel_virtualbase_insertRows(self.h, row, count, parent.h)
 
-type QStringListModelinsertRowsProc* = proc(row: cint, count: cint, parent: gen_qabstractitemmodel_types.QModelIndex): bool
-proc oninsertRows*(self: gen_qstringlistmodel_types.QStringListModel, slot: QStringListModelinsertRowsProc) =
-  # TODO check subclass
-  var tmp = new QStringListModelinsertRowsProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQStringListModel_override_virtual_insertRows(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QStringListModel_insertRows(self: ptr cQStringListModel, slot: int, row: cint, count: cint, parent: pointer): bool {.exportc: "miqt_exec_callback_QStringListModel_insertRows ".} =
-  var nimfunc = cast[ptr QStringListModelinsertRowsProc](cast[pointer](slot))
+proc miqt_exec_callback_cQStringListModel_insertRows(vtbl: pointer, self: pointer, row: cint, count: cint, parent: pointer): bool {.cdecl.} =
+  let vtbl = cast[ptr QStringListModelVTable](vtbl)
+  let self = QStringListModel(h: self)
   let slotval1 = row
-
   let slotval2 = count
-
   let slotval3 = gen_qabstractitemmodel_types.QModelIndex(h: parent)
-
-
-  let virtualReturn = nimfunc[](slotval1, slotval2, slotval3 )
-
+  var virtualReturn = vtbl[].insertRows(self, slotval1, slotval2, slotval3)
   virtualReturn
+
 proc QStringListModelremoveRows*(self: gen_qstringlistmodel_types.QStringListModel, row: cint, count: cint, parent: gen_qabstractitemmodel_types.QModelIndex): bool =
-  fQStringListModel_virtualbase_removeRows(self.h, row, count, parent.h)
+  fcQStringListModel_virtualbase_removeRows(self.h, row, count, parent.h)
 
-type QStringListModelremoveRowsProc* = proc(row: cint, count: cint, parent: gen_qabstractitemmodel_types.QModelIndex): bool
-proc onremoveRows*(self: gen_qstringlistmodel_types.QStringListModel, slot: QStringListModelremoveRowsProc) =
-  # TODO check subclass
-  var tmp = new QStringListModelremoveRowsProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQStringListModel_override_virtual_removeRows(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QStringListModel_removeRows(self: ptr cQStringListModel, slot: int, row: cint, count: cint, parent: pointer): bool {.exportc: "miqt_exec_callback_QStringListModel_removeRows ".} =
-  var nimfunc = cast[ptr QStringListModelremoveRowsProc](cast[pointer](slot))
+proc miqt_exec_callback_cQStringListModel_removeRows(vtbl: pointer, self: pointer, row: cint, count: cint, parent: pointer): bool {.cdecl.} =
+  let vtbl = cast[ptr QStringListModelVTable](vtbl)
+  let self = QStringListModel(h: self)
   let slotval1 = row
-
   let slotval2 = count
-
   let slotval3 = gen_qabstractitemmodel_types.QModelIndex(h: parent)
-
-
-  let virtualReturn = nimfunc[](slotval1, slotval2, slotval3 )
-
+  var virtualReturn = vtbl[].removeRows(self, slotval1, slotval2, slotval3)
   virtualReturn
+
 proc QStringListModelmoveRows*(self: gen_qstringlistmodel_types.QStringListModel, sourceParent: gen_qabstractitemmodel_types.QModelIndex, sourceRow: cint, count: cint, destinationParent: gen_qabstractitemmodel_types.QModelIndex, destinationChild: cint): bool =
-  fQStringListModel_virtualbase_moveRows(self.h, sourceParent.h, sourceRow, count, destinationParent.h, destinationChild)
+  fcQStringListModel_virtualbase_moveRows(self.h, sourceParent.h, sourceRow, count, destinationParent.h, destinationChild)
 
-type QStringListModelmoveRowsProc* = proc(sourceParent: gen_qabstractitemmodel_types.QModelIndex, sourceRow: cint, count: cint, destinationParent: gen_qabstractitemmodel_types.QModelIndex, destinationChild: cint): bool
-proc onmoveRows*(self: gen_qstringlistmodel_types.QStringListModel, slot: QStringListModelmoveRowsProc) =
-  # TODO check subclass
-  var tmp = new QStringListModelmoveRowsProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQStringListModel_override_virtual_moveRows(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QStringListModel_moveRows(self: ptr cQStringListModel, slot: int, sourceParent: pointer, sourceRow: cint, count: cint, destinationParent: pointer, destinationChild: cint): bool {.exportc: "miqt_exec_callback_QStringListModel_moveRows ".} =
-  var nimfunc = cast[ptr QStringListModelmoveRowsProc](cast[pointer](slot))
+proc miqt_exec_callback_cQStringListModel_moveRows(vtbl: pointer, self: pointer, sourceParent: pointer, sourceRow: cint, count: cint, destinationParent: pointer, destinationChild: cint): bool {.cdecl.} =
+  let vtbl = cast[ptr QStringListModelVTable](vtbl)
+  let self = QStringListModel(h: self)
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: sourceParent)
-
   let slotval2 = sourceRow
-
   let slotval3 = count
-
   let slotval4 = gen_qabstractitemmodel_types.QModelIndex(h: destinationParent)
-
   let slotval5 = destinationChild
-
-
-  let virtualReturn = nimfunc[](slotval1, slotval2, slotval3, slotval4, slotval5 )
-
+  var virtualReturn = vtbl[].moveRows(self, slotval1, slotval2, slotval3, slotval4, slotval5)
   virtualReturn
+
 proc QStringListModelitemData*(self: gen_qstringlistmodel_types.QStringListModel, index: gen_qabstractitemmodel_types.QModelIndex): Table[cint,gen_qvariant_types.QVariant] =
-  var v_mm = fQStringListModel_virtualbase_itemData(self.h, index.h)
+  var v_mm = fcQStringListModel_virtualbase_itemData(self.h, index.h)
   var vx_ret: Table[cint, gen_qvariant_types.QVariant]
   var v_Keys = cast[ptr UncheckedArray[cint]](v_mm.keys)
   var v_Values = cast[ptr UncheckedArray[pointer]](v_mm.values)
@@ -569,20 +516,11 @@ proc QStringListModelitemData*(self: gen_qstringlistmodel_types.QStringListModel
     vx_ret[v_entry_Key] = v_entry_Value
   vx_ret
 
-type QStringListModelitemDataProc* = proc(index: gen_qabstractitemmodel_types.QModelIndex): Table[cint,gen_qvariant_types.QVariant]
-proc onitemData*(self: gen_qstringlistmodel_types.QStringListModel, slot: QStringListModelitemDataProc) =
-  # TODO check subclass
-  var tmp = new QStringListModelitemDataProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQStringListModel_override_virtual_itemData(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QStringListModel_itemData(self: ptr cQStringListModel, slot: int, index: pointer): struct_miqt_map {.exportc: "miqt_exec_callback_QStringListModel_itemData ".} =
-  var nimfunc = cast[ptr QStringListModelitemDataProc](cast[pointer](slot))
+proc miqt_exec_callback_cQStringListModel_itemData(vtbl: pointer, self: pointer, index: pointer): struct_miqt_map {.cdecl.} =
+  let vtbl = cast[ptr QStringListModelVTable](vtbl)
+  let self = QStringListModel(h: self)
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index)
-
-
-  let virtualReturn = nimfunc[](slotval1 )
+  var virtualReturn = vtbl[].itemData(self, slotval1)
   var virtualReturn_Keys_CArray = newSeq[cint](len(virtualReturn))
   var virtualReturn_Values_CArray = newSeq[pointer](len(virtualReturn))
   var virtualReturn_ctr = 0
@@ -591,8 +529,8 @@ proc miqt_exec_callback_QStringListModel_itemData(self: ptr cQStringListModel, s
     virtualReturn_Values_CArray[virtualReturn_ctr] = virtualReturn_v.h
     virtualReturn_ctr += 1
 
-
   struct_miqt_map(len: csize_t(len(virtualReturn)),keys: if len(virtualReturn) == 0: nil else: addr(virtualReturn_Keys_CArray[0]), values: if len(virtualReturn) == 0: nil else: addr(virtualReturn_Values_CArray[0]),)
+
 proc QStringListModelsetItemData*(self: gen_qstringlistmodel_types.QStringListModel, index: gen_qabstractitemmodel_types.QModelIndex, roles: Table[cint,gen_qvariant_types.QVariant]): bool =
   var roles_Keys_CArray = newSeq[cint](len(roles))
   var roles_Values_CArray = newSeq[pointer](len(roles))
@@ -602,20 +540,12 @@ proc QStringListModelsetItemData*(self: gen_qstringlistmodel_types.QStringListMo
     roles_Values_CArray[roles_ctr] = roles_v.h
     roles_ctr += 1
 
-  fQStringListModel_virtualbase_setItemData(self.h, index.h, struct_miqt_map(len: csize_t(len(roles)),keys: if len(roles) == 0: nil else: addr(roles_Keys_CArray[0]), values: if len(roles) == 0: nil else: addr(roles_Values_CArray[0]),))
+  fcQStringListModel_virtualbase_setItemData(self.h, index.h, struct_miqt_map(len: csize_t(len(roles)),keys: if len(roles) == 0: nil else: addr(roles_Keys_CArray[0]), values: if len(roles) == 0: nil else: addr(roles_Values_CArray[0]),))
 
-type QStringListModelsetItemDataProc* = proc(index: gen_qabstractitemmodel_types.QModelIndex, roles: Table[cint,gen_qvariant_types.QVariant]): bool
-proc onsetItemData*(self: gen_qstringlistmodel_types.QStringListModel, slot: QStringListModelsetItemDataProc) =
-  # TODO check subclass
-  var tmp = new QStringListModelsetItemDataProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQStringListModel_override_virtual_setItemData(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QStringListModel_setItemData(self: ptr cQStringListModel, slot: int, index: pointer, roles: struct_miqt_map): bool {.exportc: "miqt_exec_callback_QStringListModel_setItemData ".} =
-  var nimfunc = cast[ptr QStringListModelsetItemDataProc](cast[pointer](slot))
+proc miqt_exec_callback_cQStringListModel_setItemData(vtbl: pointer, self: pointer, index: pointer, roles: struct_miqt_map): bool {.cdecl.} =
+  let vtbl = cast[ptr QStringListModelVTable](vtbl)
+  let self = QStringListModel(h: self)
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index)
-
   var vroles_mm = roles
   var vrolesx_ret: Table[cint, gen_qvariant_types.QVariant]
   var vroles_Keys = cast[ptr UncheckedArray[cint]](vroles_mm.keys)
@@ -627,147 +557,81 @@ proc miqt_exec_callback_QStringListModel_setItemData(self: ptr cQStringListModel
 
     vrolesx_ret[vroles_entry_Key] = vroles_entry_Value
   let slotval2 = vrolesx_ret
-
-
-  let virtualReturn = nimfunc[](slotval1, slotval2 )
-
+  var virtualReturn = vtbl[].setItemData(self, slotval1, slotval2)
   virtualReturn
+
 proc QStringListModelsort*(self: gen_qstringlistmodel_types.QStringListModel, column: cint, order: cint): void =
-  fQStringListModel_virtualbase_sort(self.h, column, cint(order))
+  fcQStringListModel_virtualbase_sort(self.h, column, cint(order))
 
-type QStringListModelsortProc* = proc(column: cint, order: cint): void
-proc onsort*(self: gen_qstringlistmodel_types.QStringListModel, slot: QStringListModelsortProc) =
-  # TODO check subclass
-  var tmp = new QStringListModelsortProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQStringListModel_override_virtual_sort(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QStringListModel_sort(self: ptr cQStringListModel, slot: int, column: cint, order: cint): void {.exportc: "miqt_exec_callback_QStringListModel_sort ".} =
-  var nimfunc = cast[ptr QStringListModelsortProc](cast[pointer](slot))
+proc miqt_exec_callback_cQStringListModel_sort(vtbl: pointer, self: pointer, column: cint, order: cint): void {.cdecl.} =
+  let vtbl = cast[ptr QStringListModelVTable](vtbl)
+  let self = QStringListModel(h: self)
   let slotval1 = column
-
   let slotval2 = cint(order)
+  vtbl[].sort(self, slotval1, slotval2)
 
-
-  nimfunc[](slotval1, slotval2)
 proc QStringListModelsupportedDropActions*(self: gen_qstringlistmodel_types.QStringListModel, ): cint =
-  cint(fQStringListModel_virtualbase_supportedDropActions(self.h))
+  cint(fcQStringListModel_virtualbase_supportedDropActions(self.h))
 
-type QStringListModelsupportedDropActionsProc* = proc(): cint
-proc onsupportedDropActions*(self: gen_qstringlistmodel_types.QStringListModel, slot: QStringListModelsupportedDropActionsProc) =
-  # TODO check subclass
-  var tmp = new QStringListModelsupportedDropActionsProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQStringListModel_override_virtual_supportedDropActions(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QStringListModel_supportedDropActions(self: ptr cQStringListModel, slot: int): cint {.exportc: "miqt_exec_callback_QStringListModel_supportedDropActions ".} =
-  var nimfunc = cast[ptr QStringListModelsupportedDropActionsProc](cast[pointer](slot))
-
-  let virtualReturn = nimfunc[]( )
-
+proc miqt_exec_callback_cQStringListModel_supportedDropActions(vtbl: pointer, self: pointer): cint {.cdecl.} =
+  let vtbl = cast[ptr QStringListModelVTable](vtbl)
+  let self = QStringListModel(h: self)
+  var virtualReturn = vtbl[].supportedDropActions(self)
   cint(virtualReturn)
+
 proc QStringListModelindex*(self: gen_qstringlistmodel_types.QStringListModel, row: cint, column: cint, parent: gen_qabstractitemmodel_types.QModelIndex): gen_qabstractitemmodel_types.QModelIndex =
-  gen_qabstractitemmodel_types.QModelIndex(h: fQStringListModel_virtualbase_index(self.h, row, column, parent.h))
+  gen_qabstractitemmodel_types.QModelIndex(h: fcQStringListModel_virtualbase_index(self.h, row, column, parent.h))
 
-type QStringListModelindexProc* = proc(row: cint, column: cint, parent: gen_qabstractitemmodel_types.QModelIndex): gen_qabstractitemmodel_types.QModelIndex
-proc onindex*(self: gen_qstringlistmodel_types.QStringListModel, slot: QStringListModelindexProc) =
-  # TODO check subclass
-  var tmp = new QStringListModelindexProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQStringListModel_override_virtual_index(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QStringListModel_index(self: ptr cQStringListModel, slot: int, row: cint, column: cint, parent: pointer): pointer {.exportc: "miqt_exec_callback_QStringListModel_index ".} =
-  var nimfunc = cast[ptr QStringListModelindexProc](cast[pointer](slot))
+proc miqt_exec_callback_cQStringListModel_index(vtbl: pointer, self: pointer, row: cint, column: cint, parent: pointer): pointer {.cdecl.} =
+  let vtbl = cast[ptr QStringListModelVTable](vtbl)
+  let self = QStringListModel(h: self)
   let slotval1 = row
-
   let slotval2 = column
-
   let slotval3 = gen_qabstractitemmodel_types.QModelIndex(h: parent)
-
-
-  let virtualReturn = nimfunc[](slotval1, slotval2, slotval3 )
-
+  var virtualReturn = vtbl[].index(self, slotval1, slotval2, slotval3)
   virtualReturn.h
+
 proc QStringListModeldropMimeData*(self: gen_qstringlistmodel_types.QStringListModel, data: gen_qmimedata_types.QMimeData, action: cint, row: cint, column: cint, parent: gen_qabstractitemmodel_types.QModelIndex): bool =
-  fQStringListModel_virtualbase_dropMimeData(self.h, data.h, cint(action), row, column, parent.h)
+  fcQStringListModel_virtualbase_dropMimeData(self.h, data.h, cint(action), row, column, parent.h)
 
-type QStringListModeldropMimeDataProc* = proc(data: gen_qmimedata_types.QMimeData, action: cint, row: cint, column: cint, parent: gen_qabstractitemmodel_types.QModelIndex): bool
-proc ondropMimeData*(self: gen_qstringlistmodel_types.QStringListModel, slot: QStringListModeldropMimeDataProc) =
-  # TODO check subclass
-  var tmp = new QStringListModeldropMimeDataProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQStringListModel_override_virtual_dropMimeData(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QStringListModel_dropMimeData(self: ptr cQStringListModel, slot: int, data: pointer, action: cint, row: cint, column: cint, parent: pointer): bool {.exportc: "miqt_exec_callback_QStringListModel_dropMimeData ".} =
-  var nimfunc = cast[ptr QStringListModeldropMimeDataProc](cast[pointer](slot))
+proc miqt_exec_callback_cQStringListModel_dropMimeData(vtbl: pointer, self: pointer, data: pointer, action: cint, row: cint, column: cint, parent: pointer): bool {.cdecl.} =
+  let vtbl = cast[ptr QStringListModelVTable](vtbl)
+  let self = QStringListModel(h: self)
   let slotval1 = gen_qmimedata_types.QMimeData(h: data)
-
   let slotval2 = cint(action)
-
   let slotval3 = row
-
   let slotval4 = column
-
   let slotval5 = gen_qabstractitemmodel_types.QModelIndex(h: parent)
-
-
-  let virtualReturn = nimfunc[](slotval1, slotval2, slotval3, slotval4, slotval5 )
-
+  var virtualReturn = vtbl[].dropMimeData(self, slotval1, slotval2, slotval3, slotval4, slotval5)
   virtualReturn
+
 proc QStringListModelheaderData*(self: gen_qstringlistmodel_types.QStringListModel, section: cint, orientation: cint, role: cint): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fQStringListModel_virtualbase_headerData(self.h, section, cint(orientation), role))
+  gen_qvariant_types.QVariant(h: fcQStringListModel_virtualbase_headerData(self.h, section, cint(orientation), role))
 
-type QStringListModelheaderDataProc* = proc(section: cint, orientation: cint, role: cint): gen_qvariant_types.QVariant
-proc onheaderData*(self: gen_qstringlistmodel_types.QStringListModel, slot: QStringListModelheaderDataProc) =
-  # TODO check subclass
-  var tmp = new QStringListModelheaderDataProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQStringListModel_override_virtual_headerData(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QStringListModel_headerData(self: ptr cQStringListModel, slot: int, section: cint, orientation: cint, role: cint): pointer {.exportc: "miqt_exec_callback_QStringListModel_headerData ".} =
-  var nimfunc = cast[ptr QStringListModelheaderDataProc](cast[pointer](slot))
+proc miqt_exec_callback_cQStringListModel_headerData(vtbl: pointer, self: pointer, section: cint, orientation: cint, role: cint): pointer {.cdecl.} =
+  let vtbl = cast[ptr QStringListModelVTable](vtbl)
+  let self = QStringListModel(h: self)
   let slotval1 = section
-
   let slotval2 = cint(orientation)
-
   let slotval3 = role
-
-
-  let virtualReturn = nimfunc[](slotval1, slotval2, slotval3 )
-
+  var virtualReturn = vtbl[].headerData(self, slotval1, slotval2, slotval3)
   virtualReturn.h
+
 proc QStringListModelsetHeaderData*(self: gen_qstringlistmodel_types.QStringListModel, section: cint, orientation: cint, value: gen_qvariant_types.QVariant, role: cint): bool =
-  fQStringListModel_virtualbase_setHeaderData(self.h, section, cint(orientation), value.h, role)
+  fcQStringListModel_virtualbase_setHeaderData(self.h, section, cint(orientation), value.h, role)
 
-type QStringListModelsetHeaderDataProc* = proc(section: cint, orientation: cint, value: gen_qvariant_types.QVariant, role: cint): bool
-proc onsetHeaderData*(self: gen_qstringlistmodel_types.QStringListModel, slot: QStringListModelsetHeaderDataProc) =
-  # TODO check subclass
-  var tmp = new QStringListModelsetHeaderDataProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQStringListModel_override_virtual_setHeaderData(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QStringListModel_setHeaderData(self: ptr cQStringListModel, slot: int, section: cint, orientation: cint, value: pointer, role: cint): bool {.exportc: "miqt_exec_callback_QStringListModel_setHeaderData ".} =
-  var nimfunc = cast[ptr QStringListModelsetHeaderDataProc](cast[pointer](slot))
+proc miqt_exec_callback_cQStringListModel_setHeaderData(vtbl: pointer, self: pointer, section: cint, orientation: cint, value: pointer, role: cint): bool {.cdecl.} =
+  let vtbl = cast[ptr QStringListModelVTable](vtbl)
+  let self = QStringListModel(h: self)
   let slotval1 = section
-
   let slotval2 = cint(orientation)
-
   let slotval3 = gen_qvariant_types.QVariant(h: value)
-
   let slotval4 = role
-
-
-  let virtualReturn = nimfunc[](slotval1, slotval2, slotval3, slotval4 )
-
+  var virtualReturn = vtbl[].setHeaderData(self, slotval1, slotval2, slotval3, slotval4)
   virtualReturn
+
 proc QStringListModelmimeTypes*(self: gen_qstringlistmodel_types.QStringListModel, ): seq[string] =
-  var v_ma = fQStringListModel_virtualbase_mimeTypes(self.h)
+  var v_ma = fcQStringListModel_virtualbase_mimeTypes(self.h)
   var vx_ret = newSeq[string](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[struct_miqt_string]](v_ma.data)
   for i in 0 ..< v_ma.len:
@@ -777,281 +641,160 @@ proc QStringListModelmimeTypes*(self: gen_qstringlistmodel_types.QStringListMode
     vx_ret[i] = vx_lvx_ret
   vx_ret
 
-type QStringListModelmimeTypesProc* = proc(): seq[string]
-proc onmimeTypes*(self: gen_qstringlistmodel_types.QStringListModel, slot: QStringListModelmimeTypesProc) =
-  # TODO check subclass
-  var tmp = new QStringListModelmimeTypesProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQStringListModel_override_virtual_mimeTypes(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QStringListModel_mimeTypes(self: ptr cQStringListModel, slot: int): struct_miqt_array {.exportc: "miqt_exec_callback_QStringListModel_mimeTypes ".} =
-  var nimfunc = cast[ptr QStringListModelmimeTypesProc](cast[pointer](slot))
-
-  let virtualReturn = nimfunc[]( )
+proc miqt_exec_callback_cQStringListModel_mimeTypes(vtbl: pointer, self: pointer): struct_miqt_array {.cdecl.} =
+  let vtbl = cast[ptr QStringListModelVTable](vtbl)
+  let self = QStringListModel(h: self)
+  var virtualReturn = vtbl[].mimeTypes(self)
   var virtualReturn_CArray = newSeq[struct_miqt_string](len(virtualReturn))
   for i in 0..<len(virtualReturn):
     virtualReturn_CArray[i] = struct_miqt_string(data: virtualReturn[i], len: csize_t(len(virtualReturn[i])))
 
-
   struct_miqt_array(len: csize_t(len(virtualReturn)), data: if len(virtualReturn) == 0: nil else: addr(virtualReturn_CArray[0]))
+
 proc QStringListModelmimeData*(self: gen_qstringlistmodel_types.QStringListModel, indexes: seq[gen_qabstractitemmodel_types.QModelIndex]): gen_qmimedata_types.QMimeData =
   var indexes_CArray = newSeq[pointer](len(indexes))
   for i in 0..<len(indexes):
     indexes_CArray[i] = indexes[i].h
 
-  gen_qmimedata_types.QMimeData(h: fQStringListModel_virtualbase_mimeData(self.h, struct_miqt_array(len: csize_t(len(indexes)), data: if len(indexes) == 0: nil else: addr(indexes_CArray[0]))))
+  gen_qmimedata_types.QMimeData(h: fcQStringListModel_virtualbase_mimeData(self.h, struct_miqt_array(len: csize_t(len(indexes)), data: if len(indexes) == 0: nil else: addr(indexes_CArray[0]))))
 
-type QStringListModelmimeDataProc* = proc(indexes: seq[gen_qabstractitemmodel_types.QModelIndex]): gen_qmimedata_types.QMimeData
-proc onmimeData*(self: gen_qstringlistmodel_types.QStringListModel, slot: QStringListModelmimeDataProc) =
-  # TODO check subclass
-  var tmp = new QStringListModelmimeDataProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQStringListModel_override_virtual_mimeData(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QStringListModel_mimeData(self: ptr cQStringListModel, slot: int, indexes: struct_miqt_array): pointer {.exportc: "miqt_exec_callback_QStringListModel_mimeData ".} =
-  var nimfunc = cast[ptr QStringListModelmimeDataProc](cast[pointer](slot))
+proc miqt_exec_callback_cQStringListModel_mimeData(vtbl: pointer, self: pointer, indexes: struct_miqt_array): pointer {.cdecl.} =
+  let vtbl = cast[ptr QStringListModelVTable](vtbl)
+  let self = QStringListModel(h: self)
   var vindexes_ma = indexes
   var vindexesx_ret = newSeq[gen_qabstractitemmodel_types.QModelIndex](int(vindexes_ma.len))
   let vindexes_outCast = cast[ptr UncheckedArray[pointer]](vindexes_ma.data)
   for i in 0 ..< vindexes_ma.len:
     vindexesx_ret[i] = gen_qabstractitemmodel_types.QModelIndex(h: vindexes_outCast[i])
   let slotval1 = vindexesx_ret
-
-
-  let virtualReturn = nimfunc[](slotval1 )
-
+  var virtualReturn = vtbl[].mimeData(self, slotval1)
   virtualReturn.h
+
 proc QStringListModelcanDropMimeData*(self: gen_qstringlistmodel_types.QStringListModel, data: gen_qmimedata_types.QMimeData, action: cint, row: cint, column: cint, parent: gen_qabstractitemmodel_types.QModelIndex): bool =
-  fQStringListModel_virtualbase_canDropMimeData(self.h, data.h, cint(action), row, column, parent.h)
+  fcQStringListModel_virtualbase_canDropMimeData(self.h, data.h, cint(action), row, column, parent.h)
 
-type QStringListModelcanDropMimeDataProc* = proc(data: gen_qmimedata_types.QMimeData, action: cint, row: cint, column: cint, parent: gen_qabstractitemmodel_types.QModelIndex): bool
-proc oncanDropMimeData*(self: gen_qstringlistmodel_types.QStringListModel, slot: QStringListModelcanDropMimeDataProc) =
-  # TODO check subclass
-  var tmp = new QStringListModelcanDropMimeDataProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQStringListModel_override_virtual_canDropMimeData(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QStringListModel_canDropMimeData(self: ptr cQStringListModel, slot: int, data: pointer, action: cint, row: cint, column: cint, parent: pointer): bool {.exportc: "miqt_exec_callback_QStringListModel_canDropMimeData ".} =
-  var nimfunc = cast[ptr QStringListModelcanDropMimeDataProc](cast[pointer](slot))
+proc miqt_exec_callback_cQStringListModel_canDropMimeData(vtbl: pointer, self: pointer, data: pointer, action: cint, row: cint, column: cint, parent: pointer): bool {.cdecl.} =
+  let vtbl = cast[ptr QStringListModelVTable](vtbl)
+  let self = QStringListModel(h: self)
   let slotval1 = gen_qmimedata_types.QMimeData(h: data)
-
   let slotval2 = cint(action)
-
   let slotval3 = row
-
   let slotval4 = column
-
   let slotval5 = gen_qabstractitemmodel_types.QModelIndex(h: parent)
-
-
-  let virtualReturn = nimfunc[](slotval1, slotval2, slotval3, slotval4, slotval5 )
-
+  var virtualReturn = vtbl[].canDropMimeData(self, slotval1, slotval2, slotval3, slotval4, slotval5)
   virtualReturn
+
 proc QStringListModelsupportedDragActions*(self: gen_qstringlistmodel_types.QStringListModel, ): cint =
-  cint(fQStringListModel_virtualbase_supportedDragActions(self.h))
+  cint(fcQStringListModel_virtualbase_supportedDragActions(self.h))
 
-type QStringListModelsupportedDragActionsProc* = proc(): cint
-proc onsupportedDragActions*(self: gen_qstringlistmodel_types.QStringListModel, slot: QStringListModelsupportedDragActionsProc) =
-  # TODO check subclass
-  var tmp = new QStringListModelsupportedDragActionsProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQStringListModel_override_virtual_supportedDragActions(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QStringListModel_supportedDragActions(self: ptr cQStringListModel, slot: int): cint {.exportc: "miqt_exec_callback_QStringListModel_supportedDragActions ".} =
-  var nimfunc = cast[ptr QStringListModelsupportedDragActionsProc](cast[pointer](slot))
-
-  let virtualReturn = nimfunc[]( )
-
+proc miqt_exec_callback_cQStringListModel_supportedDragActions(vtbl: pointer, self: pointer): cint {.cdecl.} =
+  let vtbl = cast[ptr QStringListModelVTable](vtbl)
+  let self = QStringListModel(h: self)
+  var virtualReturn = vtbl[].supportedDragActions(self)
   cint(virtualReturn)
+
 proc QStringListModelinsertColumns*(self: gen_qstringlistmodel_types.QStringListModel, column: cint, count: cint, parent: gen_qabstractitemmodel_types.QModelIndex): bool =
-  fQStringListModel_virtualbase_insertColumns(self.h, column, count, parent.h)
+  fcQStringListModel_virtualbase_insertColumns(self.h, column, count, parent.h)
 
-type QStringListModelinsertColumnsProc* = proc(column: cint, count: cint, parent: gen_qabstractitemmodel_types.QModelIndex): bool
-proc oninsertColumns*(self: gen_qstringlistmodel_types.QStringListModel, slot: QStringListModelinsertColumnsProc) =
-  # TODO check subclass
-  var tmp = new QStringListModelinsertColumnsProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQStringListModel_override_virtual_insertColumns(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QStringListModel_insertColumns(self: ptr cQStringListModel, slot: int, column: cint, count: cint, parent: pointer): bool {.exportc: "miqt_exec_callback_QStringListModel_insertColumns ".} =
-  var nimfunc = cast[ptr QStringListModelinsertColumnsProc](cast[pointer](slot))
+proc miqt_exec_callback_cQStringListModel_insertColumns(vtbl: pointer, self: pointer, column: cint, count: cint, parent: pointer): bool {.cdecl.} =
+  let vtbl = cast[ptr QStringListModelVTable](vtbl)
+  let self = QStringListModel(h: self)
   let slotval1 = column
-
   let slotval2 = count
-
   let slotval3 = gen_qabstractitemmodel_types.QModelIndex(h: parent)
-
-
-  let virtualReturn = nimfunc[](slotval1, slotval2, slotval3 )
-
+  var virtualReturn = vtbl[].insertColumns(self, slotval1, slotval2, slotval3)
   virtualReturn
+
 proc QStringListModelremoveColumns*(self: gen_qstringlistmodel_types.QStringListModel, column: cint, count: cint, parent: gen_qabstractitemmodel_types.QModelIndex): bool =
-  fQStringListModel_virtualbase_removeColumns(self.h, column, count, parent.h)
+  fcQStringListModel_virtualbase_removeColumns(self.h, column, count, parent.h)
 
-type QStringListModelremoveColumnsProc* = proc(column: cint, count: cint, parent: gen_qabstractitemmodel_types.QModelIndex): bool
-proc onremoveColumns*(self: gen_qstringlistmodel_types.QStringListModel, slot: QStringListModelremoveColumnsProc) =
-  # TODO check subclass
-  var tmp = new QStringListModelremoveColumnsProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQStringListModel_override_virtual_removeColumns(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QStringListModel_removeColumns(self: ptr cQStringListModel, slot: int, column: cint, count: cint, parent: pointer): bool {.exportc: "miqt_exec_callback_QStringListModel_removeColumns ".} =
-  var nimfunc = cast[ptr QStringListModelremoveColumnsProc](cast[pointer](slot))
+proc miqt_exec_callback_cQStringListModel_removeColumns(vtbl: pointer, self: pointer, column: cint, count: cint, parent: pointer): bool {.cdecl.} =
+  let vtbl = cast[ptr QStringListModelVTable](vtbl)
+  let self = QStringListModel(h: self)
   let slotval1 = column
-
   let slotval2 = count
-
   let slotval3 = gen_qabstractitemmodel_types.QModelIndex(h: parent)
-
-
-  let virtualReturn = nimfunc[](slotval1, slotval2, slotval3 )
-
+  var virtualReturn = vtbl[].removeColumns(self, slotval1, slotval2, slotval3)
   virtualReturn
+
 proc QStringListModelmoveColumns*(self: gen_qstringlistmodel_types.QStringListModel, sourceParent: gen_qabstractitemmodel_types.QModelIndex, sourceColumn: cint, count: cint, destinationParent: gen_qabstractitemmodel_types.QModelIndex, destinationChild: cint): bool =
-  fQStringListModel_virtualbase_moveColumns(self.h, sourceParent.h, sourceColumn, count, destinationParent.h, destinationChild)
+  fcQStringListModel_virtualbase_moveColumns(self.h, sourceParent.h, sourceColumn, count, destinationParent.h, destinationChild)
 
-type QStringListModelmoveColumnsProc* = proc(sourceParent: gen_qabstractitemmodel_types.QModelIndex, sourceColumn: cint, count: cint, destinationParent: gen_qabstractitemmodel_types.QModelIndex, destinationChild: cint): bool
-proc onmoveColumns*(self: gen_qstringlistmodel_types.QStringListModel, slot: QStringListModelmoveColumnsProc) =
-  # TODO check subclass
-  var tmp = new QStringListModelmoveColumnsProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQStringListModel_override_virtual_moveColumns(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QStringListModel_moveColumns(self: ptr cQStringListModel, slot: int, sourceParent: pointer, sourceColumn: cint, count: cint, destinationParent: pointer, destinationChild: cint): bool {.exportc: "miqt_exec_callback_QStringListModel_moveColumns ".} =
-  var nimfunc = cast[ptr QStringListModelmoveColumnsProc](cast[pointer](slot))
+proc miqt_exec_callback_cQStringListModel_moveColumns(vtbl: pointer, self: pointer, sourceParent: pointer, sourceColumn: cint, count: cint, destinationParent: pointer, destinationChild: cint): bool {.cdecl.} =
+  let vtbl = cast[ptr QStringListModelVTable](vtbl)
+  let self = QStringListModel(h: self)
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: sourceParent)
-
   let slotval2 = sourceColumn
-
   let slotval3 = count
-
   let slotval4 = gen_qabstractitemmodel_types.QModelIndex(h: destinationParent)
-
   let slotval5 = destinationChild
-
-
-  let virtualReturn = nimfunc[](slotval1, slotval2, slotval3, slotval4, slotval5 )
-
+  var virtualReturn = vtbl[].moveColumns(self, slotval1, slotval2, slotval3, slotval4, slotval5)
   virtualReturn
+
 proc QStringListModelfetchMore*(self: gen_qstringlistmodel_types.QStringListModel, parent: gen_qabstractitemmodel_types.QModelIndex): void =
-  fQStringListModel_virtualbase_fetchMore(self.h, parent.h)
+  fcQStringListModel_virtualbase_fetchMore(self.h, parent.h)
 
-type QStringListModelfetchMoreProc* = proc(parent: gen_qabstractitemmodel_types.QModelIndex): void
-proc onfetchMore*(self: gen_qstringlistmodel_types.QStringListModel, slot: QStringListModelfetchMoreProc) =
-  # TODO check subclass
-  var tmp = new QStringListModelfetchMoreProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQStringListModel_override_virtual_fetchMore(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QStringListModel_fetchMore(self: ptr cQStringListModel, slot: int, parent: pointer): void {.exportc: "miqt_exec_callback_QStringListModel_fetchMore ".} =
-  var nimfunc = cast[ptr QStringListModelfetchMoreProc](cast[pointer](slot))
+proc miqt_exec_callback_cQStringListModel_fetchMore(vtbl: pointer, self: pointer, parent: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QStringListModelVTable](vtbl)
+  let self = QStringListModel(h: self)
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: parent)
+  vtbl[].fetchMore(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QStringListModelcanFetchMore*(self: gen_qstringlistmodel_types.QStringListModel, parent: gen_qabstractitemmodel_types.QModelIndex): bool =
-  fQStringListModel_virtualbase_canFetchMore(self.h, parent.h)
+  fcQStringListModel_virtualbase_canFetchMore(self.h, parent.h)
 
-type QStringListModelcanFetchMoreProc* = proc(parent: gen_qabstractitemmodel_types.QModelIndex): bool
-proc oncanFetchMore*(self: gen_qstringlistmodel_types.QStringListModel, slot: QStringListModelcanFetchMoreProc) =
-  # TODO check subclass
-  var tmp = new QStringListModelcanFetchMoreProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQStringListModel_override_virtual_canFetchMore(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QStringListModel_canFetchMore(self: ptr cQStringListModel, slot: int, parent: pointer): bool {.exportc: "miqt_exec_callback_QStringListModel_canFetchMore ".} =
-  var nimfunc = cast[ptr QStringListModelcanFetchMoreProc](cast[pointer](slot))
+proc miqt_exec_callback_cQStringListModel_canFetchMore(vtbl: pointer, self: pointer, parent: pointer): bool {.cdecl.} =
+  let vtbl = cast[ptr QStringListModelVTable](vtbl)
+  let self = QStringListModel(h: self)
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: parent)
-
-
-  let virtualReturn = nimfunc[](slotval1 )
-
+  var virtualReturn = vtbl[].canFetchMore(self, slotval1)
   virtualReturn
+
 proc QStringListModelbuddy*(self: gen_qstringlistmodel_types.QStringListModel, index: gen_qabstractitemmodel_types.QModelIndex): gen_qabstractitemmodel_types.QModelIndex =
-  gen_qabstractitemmodel_types.QModelIndex(h: fQStringListModel_virtualbase_buddy(self.h, index.h))
+  gen_qabstractitemmodel_types.QModelIndex(h: fcQStringListModel_virtualbase_buddy(self.h, index.h))
 
-type QStringListModelbuddyProc* = proc(index: gen_qabstractitemmodel_types.QModelIndex): gen_qabstractitemmodel_types.QModelIndex
-proc onbuddy*(self: gen_qstringlistmodel_types.QStringListModel, slot: QStringListModelbuddyProc) =
-  # TODO check subclass
-  var tmp = new QStringListModelbuddyProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQStringListModel_override_virtual_buddy(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QStringListModel_buddy(self: ptr cQStringListModel, slot: int, index: pointer): pointer {.exportc: "miqt_exec_callback_QStringListModel_buddy ".} =
-  var nimfunc = cast[ptr QStringListModelbuddyProc](cast[pointer](slot))
+proc miqt_exec_callback_cQStringListModel_buddy(vtbl: pointer, self: pointer, index: pointer): pointer {.cdecl.} =
+  let vtbl = cast[ptr QStringListModelVTable](vtbl)
+  let self = QStringListModel(h: self)
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index)
-
-
-  let virtualReturn = nimfunc[](slotval1 )
-
+  var virtualReturn = vtbl[].buddy(self, slotval1)
   virtualReturn.h
+
 proc QStringListModelmatch*(self: gen_qstringlistmodel_types.QStringListModel, start: gen_qabstractitemmodel_types.QModelIndex, role: cint, value: gen_qvariant_types.QVariant, hits: cint, flags: cint): seq[gen_qabstractitemmodel_types.QModelIndex] =
-  var v_ma = fQStringListModel_virtualbase_match(self.h, start.h, role, value.h, hits, cint(flags))
+  var v_ma = fcQStringListModel_virtualbase_match(self.h, start.h, role, value.h, hits, cint(flags))
   var vx_ret = newSeq[gen_qabstractitemmodel_types.QModelIndex](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
     vx_ret[i] = gen_qabstractitemmodel_types.QModelIndex(h: v_outCast[i])
   vx_ret
 
-type QStringListModelmatchProc* = proc(start: gen_qabstractitemmodel_types.QModelIndex, role: cint, value: gen_qvariant_types.QVariant, hits: cint, flags: cint): seq[gen_qabstractitemmodel_types.QModelIndex]
-proc onmatch*(self: gen_qstringlistmodel_types.QStringListModel, slot: QStringListModelmatchProc) =
-  # TODO check subclass
-  var tmp = new QStringListModelmatchProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQStringListModel_override_virtual_match(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QStringListModel_match(self: ptr cQStringListModel, slot: int, start: pointer, role: cint, value: pointer, hits: cint, flags: cint): struct_miqt_array {.exportc: "miqt_exec_callback_QStringListModel_match ".} =
-  var nimfunc = cast[ptr QStringListModelmatchProc](cast[pointer](slot))
+proc miqt_exec_callback_cQStringListModel_match(vtbl: pointer, self: pointer, start: pointer, role: cint, value: pointer, hits: cint, flags: cint): struct_miqt_array {.cdecl.} =
+  let vtbl = cast[ptr QStringListModelVTable](vtbl)
+  let self = QStringListModel(h: self)
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: start)
-
   let slotval2 = role
-
   let slotval3 = gen_qvariant_types.QVariant(h: value)
-
   let slotval4 = hits
-
   let slotval5 = cint(flags)
-
-
-  let virtualReturn = nimfunc[](slotval1, slotval2, slotval3, slotval4, slotval5 )
+  var virtualReturn = vtbl[].match(self, slotval1, slotval2, slotval3, slotval4, slotval5)
   var virtualReturn_CArray = newSeq[pointer](len(virtualReturn))
   for i in 0..<len(virtualReturn):
     virtualReturn_CArray[i] = virtualReturn[i].h
 
-
   struct_miqt_array(len: csize_t(len(virtualReturn)), data: if len(virtualReturn) == 0: nil else: addr(virtualReturn_CArray[0]))
+
 proc QStringListModelspan*(self: gen_qstringlistmodel_types.QStringListModel, index: gen_qabstractitemmodel_types.QModelIndex): gen_qsize_types.QSize =
-  gen_qsize_types.QSize(h: fQStringListModel_virtualbase_span(self.h, index.h))
+  gen_qsize_types.QSize(h: fcQStringListModel_virtualbase_span(self.h, index.h))
 
-type QStringListModelspanProc* = proc(index: gen_qabstractitemmodel_types.QModelIndex): gen_qsize_types.QSize
-proc onspan*(self: gen_qstringlistmodel_types.QStringListModel, slot: QStringListModelspanProc) =
-  # TODO check subclass
-  var tmp = new QStringListModelspanProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQStringListModel_override_virtual_span(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QStringListModel_span(self: ptr cQStringListModel, slot: int, index: pointer): pointer {.exportc: "miqt_exec_callback_QStringListModel_span ".} =
-  var nimfunc = cast[ptr QStringListModelspanProc](cast[pointer](slot))
+proc miqt_exec_callback_cQStringListModel_span(vtbl: pointer, self: pointer, index: pointer): pointer {.cdecl.} =
+  let vtbl = cast[ptr QStringListModelVTable](vtbl)
+  let self = QStringListModel(h: self)
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index)
-
-
-  let virtualReturn = nimfunc[](slotval1 )
-
+  var virtualReturn = vtbl[].span(self, slotval1)
   virtualReturn.h
+
 proc QStringListModelroleNames*(self: gen_qstringlistmodel_types.QStringListModel, ): Table[cint,seq[byte]] =
-  var v_mm = fQStringListModel_virtualbase_roleNames(self.h)
+  var v_mm = fcQStringListModel_virtualbase_roleNames(self.h)
   var vx_ret: Table[cint, seq[byte]]
   var v_Keys = cast[ptr UncheckedArray[cint]](v_mm.keys)
   var v_Values = cast[ptr UncheckedArray[struct_miqt_string]](v_mm.values)
@@ -1066,18 +809,10 @@ proc QStringListModelroleNames*(self: gen_qstringlistmodel_types.QStringListMode
     vx_ret[v_entry_Key] = v_entry_Value
   vx_ret
 
-type QStringListModelroleNamesProc* = proc(): Table[cint,seq[byte]]
-proc onroleNames*(self: gen_qstringlistmodel_types.QStringListModel, slot: QStringListModelroleNamesProc) =
-  # TODO check subclass
-  var tmp = new QStringListModelroleNamesProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQStringListModel_override_virtual_roleNames(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QStringListModel_roleNames(self: ptr cQStringListModel, slot: int): struct_miqt_map {.exportc: "miqt_exec_callback_QStringListModel_roleNames ".} =
-  var nimfunc = cast[ptr QStringListModelroleNamesProc](cast[pointer](slot))
-
-  let virtualReturn = nimfunc[]( )
+proc miqt_exec_callback_cQStringListModel_roleNames(vtbl: pointer, self: pointer): struct_miqt_map {.cdecl.} =
+  let vtbl = cast[ptr QStringListModelVTable](vtbl)
+  let self = QStringListModel(h: self)
+  var virtualReturn = vtbl[].roleNames(self)
   var virtualReturn_Keys_CArray = newSeq[cint](len(virtualReturn))
   var virtualReturn_Values_CArray = newSeq[struct_miqt_string](len(virtualReturn))
   var virtualReturn_ctr = 0
@@ -1086,199 +821,508 @@ proc miqt_exec_callback_QStringListModel_roleNames(self: ptr cQStringListModel, 
     virtualReturn_Values_CArray[virtualReturn_ctr] = struct_miqt_string(data: cast[cstring](if len(virtualReturn_v) == 0: nil else: unsafeAddr virtualReturn_v[0]), len: csize_t(len(virtualReturn_v)))
     virtualReturn_ctr += 1
 
-
   struct_miqt_map(len: csize_t(len(virtualReturn)),keys: if len(virtualReturn) == 0: nil else: addr(virtualReturn_Keys_CArray[0]), values: if len(virtualReturn) == 0: nil else: addr(virtualReturn_Values_CArray[0]),)
+
 proc QStringListModelmultiData*(self: gen_qstringlistmodel_types.QStringListModel, index: gen_qabstractitemmodel_types.QModelIndex, roleDataSpan: gen_qabstractitemmodel_types.QModelRoleDataSpan): void =
-  fQStringListModel_virtualbase_multiData(self.h, index.h, roleDataSpan.h)
+  fcQStringListModel_virtualbase_multiData(self.h, index.h, roleDataSpan.h)
 
-type QStringListModelmultiDataProc* = proc(index: gen_qabstractitemmodel_types.QModelIndex, roleDataSpan: gen_qabstractitemmodel_types.QModelRoleDataSpan): void
-proc onmultiData*(self: gen_qstringlistmodel_types.QStringListModel, slot: QStringListModelmultiDataProc) =
-  # TODO check subclass
-  var tmp = new QStringListModelmultiDataProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQStringListModel_override_virtual_multiData(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QStringListModel_multiData(self: ptr cQStringListModel, slot: int, index: pointer, roleDataSpan: pointer): void {.exportc: "miqt_exec_callback_QStringListModel_multiData ".} =
-  var nimfunc = cast[ptr QStringListModelmultiDataProc](cast[pointer](slot))
+proc miqt_exec_callback_cQStringListModel_multiData(vtbl: pointer, self: pointer, index: pointer, roleDataSpan: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QStringListModelVTable](vtbl)
+  let self = QStringListModel(h: self)
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index)
-
   let slotval2 = gen_qabstractitemmodel_types.QModelRoleDataSpan(h: roleDataSpan)
+  vtbl[].multiData(self, slotval1, slotval2)
 
-
-  nimfunc[](slotval1, slotval2)
 proc QStringListModelsubmit*(self: gen_qstringlistmodel_types.QStringListModel, ): bool =
-  fQStringListModel_virtualbase_submit(self.h)
+  fcQStringListModel_virtualbase_submit(self.h)
 
-type QStringListModelsubmitProc* = proc(): bool
-proc onsubmit*(self: gen_qstringlistmodel_types.QStringListModel, slot: QStringListModelsubmitProc) =
-  # TODO check subclass
-  var tmp = new QStringListModelsubmitProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQStringListModel_override_virtual_submit(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QStringListModel_submit(self: ptr cQStringListModel, slot: int): bool {.exportc: "miqt_exec_callback_QStringListModel_submit ".} =
-  var nimfunc = cast[ptr QStringListModelsubmitProc](cast[pointer](slot))
-
-  let virtualReturn = nimfunc[]( )
-
+proc miqt_exec_callback_cQStringListModel_submit(vtbl: pointer, self: pointer): bool {.cdecl.} =
+  let vtbl = cast[ptr QStringListModelVTable](vtbl)
+  let self = QStringListModel(h: self)
+  var virtualReturn = vtbl[].submit(self)
   virtualReturn
+
 proc QStringListModelrevert*(self: gen_qstringlistmodel_types.QStringListModel, ): void =
-  fQStringListModel_virtualbase_revert(self.h)
+  fcQStringListModel_virtualbase_revert(self.h)
 
-type QStringListModelrevertProc* = proc(): void
-proc onrevert*(self: gen_qstringlistmodel_types.QStringListModel, slot: QStringListModelrevertProc) =
-  # TODO check subclass
-  var tmp = new QStringListModelrevertProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQStringListModel_override_virtual_revert(self.h, cast[int](addr tmp[]))
+proc miqt_exec_callback_cQStringListModel_revert(vtbl: pointer, self: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QStringListModelVTable](vtbl)
+  let self = QStringListModel(h: self)
+  vtbl[].revert(self)
 
-proc miqt_exec_callback_QStringListModel_revert(self: ptr cQStringListModel, slot: int): void {.exportc: "miqt_exec_callback_QStringListModel_revert ".} =
-  var nimfunc = cast[ptr QStringListModelrevertProc](cast[pointer](slot))
-
-  nimfunc[]()
 proc QStringListModelresetInternalData*(self: gen_qstringlistmodel_types.QStringListModel, ): void =
-  fQStringListModel_virtualbase_resetInternalData(self.h)
+  fcQStringListModel_virtualbase_resetInternalData(self.h)
 
-type QStringListModelresetInternalDataProc* = proc(): void
-proc onresetInternalData*(self: gen_qstringlistmodel_types.QStringListModel, slot: QStringListModelresetInternalDataProc) =
-  # TODO check subclass
-  var tmp = new QStringListModelresetInternalDataProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQStringListModel_override_virtual_resetInternalData(self.h, cast[int](addr tmp[]))
+proc miqt_exec_callback_cQStringListModel_resetInternalData(vtbl: pointer, self: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QStringListModelVTable](vtbl)
+  let self = QStringListModel(h: self)
+  vtbl[].resetInternalData(self)
 
-proc miqt_exec_callback_QStringListModel_resetInternalData(self: ptr cQStringListModel, slot: int): void {.exportc: "miqt_exec_callback_QStringListModel_resetInternalData ".} =
-  var nimfunc = cast[ptr QStringListModelresetInternalDataProc](cast[pointer](slot))
-
-  nimfunc[]()
 proc QStringListModelevent*(self: gen_qstringlistmodel_types.QStringListModel, event: gen_qcoreevent_types.QEvent): bool =
-  fQStringListModel_virtualbase_event(self.h, event.h)
+  fcQStringListModel_virtualbase_event(self.h, event.h)
 
-type QStringListModeleventProc* = proc(event: gen_qcoreevent_types.QEvent): bool
-proc onevent*(self: gen_qstringlistmodel_types.QStringListModel, slot: QStringListModeleventProc) =
-  # TODO check subclass
-  var tmp = new QStringListModeleventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQStringListModel_override_virtual_event(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QStringListModel_event(self: ptr cQStringListModel, slot: int, event: pointer): bool {.exportc: "miqt_exec_callback_QStringListModel_event ".} =
-  var nimfunc = cast[ptr QStringListModeleventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQStringListModel_event(vtbl: pointer, self: pointer, event: pointer): bool {.cdecl.} =
+  let vtbl = cast[ptr QStringListModelVTable](vtbl)
+  let self = QStringListModel(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event)
-
-
-  let virtualReturn = nimfunc[](slotval1 )
-
+  var virtualReturn = vtbl[].event(self, slotval1)
   virtualReturn
+
 proc QStringListModeleventFilter*(self: gen_qstringlistmodel_types.QStringListModel, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool =
-  fQStringListModel_virtualbase_eventFilter(self.h, watched.h, event.h)
+  fcQStringListModel_virtualbase_eventFilter(self.h, watched.h, event.h)
 
-type QStringListModeleventFilterProc* = proc(watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool
-proc oneventFilter*(self: gen_qstringlistmodel_types.QStringListModel, slot: QStringListModeleventFilterProc) =
-  # TODO check subclass
-  var tmp = new QStringListModeleventFilterProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQStringListModel_override_virtual_eventFilter(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QStringListModel_eventFilter(self: ptr cQStringListModel, slot: int, watched: pointer, event: pointer): bool {.exportc: "miqt_exec_callback_QStringListModel_eventFilter ".} =
-  var nimfunc = cast[ptr QStringListModeleventFilterProc](cast[pointer](slot))
+proc miqt_exec_callback_cQStringListModel_eventFilter(vtbl: pointer, self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
+  let vtbl = cast[ptr QStringListModelVTable](vtbl)
+  let self = QStringListModel(h: self)
   let slotval1 = gen_qobject_types.QObject(h: watched)
-
   let slotval2 = gen_qcoreevent_types.QEvent(h: event)
-
-
-  let virtualReturn = nimfunc[](slotval1, slotval2 )
-
+  var virtualReturn = vtbl[].eventFilter(self, slotval1, slotval2)
   virtualReturn
+
 proc QStringListModeltimerEvent*(self: gen_qstringlistmodel_types.QStringListModel, event: gen_qcoreevent_types.QTimerEvent): void =
-  fQStringListModel_virtualbase_timerEvent(self.h, event.h)
+  fcQStringListModel_virtualbase_timerEvent(self.h, event.h)
 
-type QStringListModeltimerEventProc* = proc(event: gen_qcoreevent_types.QTimerEvent): void
-proc ontimerEvent*(self: gen_qstringlistmodel_types.QStringListModel, slot: QStringListModeltimerEventProc) =
-  # TODO check subclass
-  var tmp = new QStringListModeltimerEventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQStringListModel_override_virtual_timerEvent(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QStringListModel_timerEvent(self: ptr cQStringListModel, slot: int, event: pointer): void {.exportc: "miqt_exec_callback_QStringListModel_timerEvent ".} =
-  var nimfunc = cast[ptr QStringListModeltimerEventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQStringListModel_timerEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QStringListModelVTable](vtbl)
+  let self = QStringListModel(h: self)
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event)
+  vtbl[].timerEvent(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QStringListModelchildEvent*(self: gen_qstringlistmodel_types.QStringListModel, event: gen_qcoreevent_types.QChildEvent): void =
-  fQStringListModel_virtualbase_childEvent(self.h, event.h)
+  fcQStringListModel_virtualbase_childEvent(self.h, event.h)
 
-type QStringListModelchildEventProc* = proc(event: gen_qcoreevent_types.QChildEvent): void
-proc onchildEvent*(self: gen_qstringlistmodel_types.QStringListModel, slot: QStringListModelchildEventProc) =
-  # TODO check subclass
-  var tmp = new QStringListModelchildEventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQStringListModel_override_virtual_childEvent(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QStringListModel_childEvent(self: ptr cQStringListModel, slot: int, event: pointer): void {.exportc: "miqt_exec_callback_QStringListModel_childEvent ".} =
-  var nimfunc = cast[ptr QStringListModelchildEventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQStringListModel_childEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QStringListModelVTable](vtbl)
+  let self = QStringListModel(h: self)
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: event)
+  vtbl[].childEvent(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QStringListModelcustomEvent*(self: gen_qstringlistmodel_types.QStringListModel, event: gen_qcoreevent_types.QEvent): void =
-  fQStringListModel_virtualbase_customEvent(self.h, event.h)
+  fcQStringListModel_virtualbase_customEvent(self.h, event.h)
 
-type QStringListModelcustomEventProc* = proc(event: gen_qcoreevent_types.QEvent): void
-proc oncustomEvent*(self: gen_qstringlistmodel_types.QStringListModel, slot: QStringListModelcustomEventProc) =
-  # TODO check subclass
-  var tmp = new QStringListModelcustomEventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQStringListModel_override_virtual_customEvent(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QStringListModel_customEvent(self: ptr cQStringListModel, slot: int, event: pointer): void {.exportc: "miqt_exec_callback_QStringListModel_customEvent ".} =
-  var nimfunc = cast[ptr QStringListModelcustomEventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQStringListModel_customEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QStringListModelVTable](vtbl)
+  let self = QStringListModel(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  vtbl[].customEvent(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QStringListModelconnectNotify*(self: gen_qstringlistmodel_types.QStringListModel, signal: gen_qmetaobject_types.QMetaMethod): void =
-  fQStringListModel_virtualbase_connectNotify(self.h, signal.h)
+  fcQStringListModel_virtualbase_connectNotify(self.h, signal.h)
 
-type QStringListModelconnectNotifyProc* = proc(signal: gen_qmetaobject_types.QMetaMethod): void
-proc onconnectNotify*(self: gen_qstringlistmodel_types.QStringListModel, slot: QStringListModelconnectNotifyProc) =
-  # TODO check subclass
-  var tmp = new QStringListModelconnectNotifyProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQStringListModel_override_virtual_connectNotify(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QStringListModel_connectNotify(self: ptr cQStringListModel, slot: int, signal: pointer): void {.exportc: "miqt_exec_callback_QStringListModel_connectNotify ".} =
-  var nimfunc = cast[ptr QStringListModelconnectNotifyProc](cast[pointer](slot))
+proc miqt_exec_callback_cQStringListModel_connectNotify(vtbl: pointer, self: pointer, signal: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QStringListModelVTable](vtbl)
+  let self = QStringListModel(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  vtbl[].connectNotify(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QStringListModeldisconnectNotify*(self: gen_qstringlistmodel_types.QStringListModel, signal: gen_qmetaobject_types.QMetaMethod): void =
-  fQStringListModel_virtualbase_disconnectNotify(self.h, signal.h)
+  fcQStringListModel_virtualbase_disconnectNotify(self.h, signal.h)
 
-type QStringListModeldisconnectNotifyProc* = proc(signal: gen_qmetaobject_types.QMetaMethod): void
-proc ondisconnectNotify*(self: gen_qstringlistmodel_types.QStringListModel, slot: QStringListModeldisconnectNotifyProc) =
-  # TODO check subclass
-  var tmp = new QStringListModeldisconnectNotifyProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQStringListModel_override_virtual_disconnectNotify(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QStringListModel_disconnectNotify(self: ptr cQStringListModel, slot: int, signal: pointer): void {.exportc: "miqt_exec_callback_QStringListModel_disconnectNotify ".} =
-  var nimfunc = cast[ptr QStringListModeldisconnectNotifyProc](cast[pointer](slot))
+proc miqt_exec_callback_cQStringListModel_disconnectNotify(vtbl: pointer, self: pointer, signal: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QStringListModelVTable](vtbl)
+  let self = QStringListModel(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  vtbl[].disconnectNotify(self, slotval1)
 
+proc create*(T: type gen_qstringlistmodel_types.QStringListModel,
+    vtbl: ref QStringListModelVTable = nil): gen_qstringlistmodel_types.QStringListModel =
+  let vtbl = if vtbl == nil: new QStringListModelVTable else: vtbl
+  GC_ref(vtbl)
+  vtbl.vtbl.destructor = proc(vtbl: ptr cQStringListModelVTable, _: ptr cQStringListModel) {.cdecl.} =
+    let vtbl = cast[ref QStringListModelVTable](vtbl)
+    GC_unref(vtbl)
+  if not isNil(vtbl.metaObject):
+    vtbl[].vtbl.metaObject = miqt_exec_callback_cQStringListModel_metaObject
+  if not isNil(vtbl.metacast):
+    vtbl[].vtbl.metacast = miqt_exec_callback_cQStringListModel_metacast
+  if not isNil(vtbl.metacall):
+    vtbl[].vtbl.metacall = miqt_exec_callback_cQStringListModel_metacall
+  if not isNil(vtbl.rowCount):
+    vtbl[].vtbl.rowCount = miqt_exec_callback_cQStringListModel_rowCount
+  if not isNil(vtbl.sibling):
+    vtbl[].vtbl.sibling = miqt_exec_callback_cQStringListModel_sibling
+  if not isNil(vtbl.data):
+    vtbl[].vtbl.data = miqt_exec_callback_cQStringListModel_data
+  if not isNil(vtbl.setData):
+    vtbl[].vtbl.setData = miqt_exec_callback_cQStringListModel_setData
+  if not isNil(vtbl.clearItemData):
+    vtbl[].vtbl.clearItemData = miqt_exec_callback_cQStringListModel_clearItemData
+  if not isNil(vtbl.flags):
+    vtbl[].vtbl.flags = miqt_exec_callback_cQStringListModel_flags
+  if not isNil(vtbl.insertRows):
+    vtbl[].vtbl.insertRows = miqt_exec_callback_cQStringListModel_insertRows
+  if not isNil(vtbl.removeRows):
+    vtbl[].vtbl.removeRows = miqt_exec_callback_cQStringListModel_removeRows
+  if not isNil(vtbl.moveRows):
+    vtbl[].vtbl.moveRows = miqt_exec_callback_cQStringListModel_moveRows
+  if not isNil(vtbl.itemData):
+    vtbl[].vtbl.itemData = miqt_exec_callback_cQStringListModel_itemData
+  if not isNil(vtbl.setItemData):
+    vtbl[].vtbl.setItemData = miqt_exec_callback_cQStringListModel_setItemData
+  if not isNil(vtbl.sort):
+    vtbl[].vtbl.sort = miqt_exec_callback_cQStringListModel_sort
+  if not isNil(vtbl.supportedDropActions):
+    vtbl[].vtbl.supportedDropActions = miqt_exec_callback_cQStringListModel_supportedDropActions
+  if not isNil(vtbl.index):
+    vtbl[].vtbl.index = miqt_exec_callback_cQStringListModel_index
+  if not isNil(vtbl.dropMimeData):
+    vtbl[].vtbl.dropMimeData = miqt_exec_callback_cQStringListModel_dropMimeData
+  if not isNil(vtbl.headerData):
+    vtbl[].vtbl.headerData = miqt_exec_callback_cQStringListModel_headerData
+  if not isNil(vtbl.setHeaderData):
+    vtbl[].vtbl.setHeaderData = miqt_exec_callback_cQStringListModel_setHeaderData
+  if not isNil(vtbl.mimeTypes):
+    vtbl[].vtbl.mimeTypes = miqt_exec_callback_cQStringListModel_mimeTypes
+  if not isNil(vtbl.mimeData):
+    vtbl[].vtbl.mimeData = miqt_exec_callback_cQStringListModel_mimeData
+  if not isNil(vtbl.canDropMimeData):
+    vtbl[].vtbl.canDropMimeData = miqt_exec_callback_cQStringListModel_canDropMimeData
+  if not isNil(vtbl.supportedDragActions):
+    vtbl[].vtbl.supportedDragActions = miqt_exec_callback_cQStringListModel_supportedDragActions
+  if not isNil(vtbl.insertColumns):
+    vtbl[].vtbl.insertColumns = miqt_exec_callback_cQStringListModel_insertColumns
+  if not isNil(vtbl.removeColumns):
+    vtbl[].vtbl.removeColumns = miqt_exec_callback_cQStringListModel_removeColumns
+  if not isNil(vtbl.moveColumns):
+    vtbl[].vtbl.moveColumns = miqt_exec_callback_cQStringListModel_moveColumns
+  if not isNil(vtbl.fetchMore):
+    vtbl[].vtbl.fetchMore = miqt_exec_callback_cQStringListModel_fetchMore
+  if not isNil(vtbl.canFetchMore):
+    vtbl[].vtbl.canFetchMore = miqt_exec_callback_cQStringListModel_canFetchMore
+  if not isNil(vtbl.buddy):
+    vtbl[].vtbl.buddy = miqt_exec_callback_cQStringListModel_buddy
+  if not isNil(vtbl.match):
+    vtbl[].vtbl.match = miqt_exec_callback_cQStringListModel_match
+  if not isNil(vtbl.span):
+    vtbl[].vtbl.span = miqt_exec_callback_cQStringListModel_span
+  if not isNil(vtbl.roleNames):
+    vtbl[].vtbl.roleNames = miqt_exec_callback_cQStringListModel_roleNames
+  if not isNil(vtbl.multiData):
+    vtbl[].vtbl.multiData = miqt_exec_callback_cQStringListModel_multiData
+  if not isNil(vtbl.submit):
+    vtbl[].vtbl.submit = miqt_exec_callback_cQStringListModel_submit
+  if not isNil(vtbl.revert):
+    vtbl[].vtbl.revert = miqt_exec_callback_cQStringListModel_revert
+  if not isNil(vtbl.resetInternalData):
+    vtbl[].vtbl.resetInternalData = miqt_exec_callback_cQStringListModel_resetInternalData
+  if not isNil(vtbl.event):
+    vtbl[].vtbl.event = miqt_exec_callback_cQStringListModel_event
+  if not isNil(vtbl.eventFilter):
+    vtbl[].vtbl.eventFilter = miqt_exec_callback_cQStringListModel_eventFilter
+  if not isNil(vtbl.timerEvent):
+    vtbl[].vtbl.timerEvent = miqt_exec_callback_cQStringListModel_timerEvent
+  if not isNil(vtbl.childEvent):
+    vtbl[].vtbl.childEvent = miqt_exec_callback_cQStringListModel_childEvent
+  if not isNil(vtbl.customEvent):
+    vtbl[].vtbl.customEvent = miqt_exec_callback_cQStringListModel_customEvent
+  if not isNil(vtbl.connectNotify):
+    vtbl[].vtbl.connectNotify = miqt_exec_callback_cQStringListModel_connectNotify
+  if not isNil(vtbl.disconnectNotify):
+    vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQStringListModel_disconnectNotify
+  gen_qstringlistmodel_types.QStringListModel(h: fcQStringListModel_new(addr(vtbl[]), ))
 
-  nimfunc[](slotval1)
+proc create*(T: type gen_qstringlistmodel_types.QStringListModel,
+    strings: seq[string],
+    vtbl: ref QStringListModelVTable = nil): gen_qstringlistmodel_types.QStringListModel =
+  var strings_CArray = newSeq[struct_miqt_string](len(strings))
+  for i in 0..<len(strings):
+    strings_CArray[i] = struct_miqt_string(data: strings[i], len: csize_t(len(strings[i])))
+
+  let vtbl = if vtbl == nil: new QStringListModelVTable else: vtbl
+  GC_ref(vtbl)
+  vtbl.vtbl.destructor = proc(vtbl: ptr cQStringListModelVTable, _: ptr cQStringListModel) {.cdecl.} =
+    let vtbl = cast[ref QStringListModelVTable](vtbl)
+    GC_unref(vtbl)
+  if not isNil(vtbl.metaObject):
+    vtbl[].vtbl.metaObject = miqt_exec_callback_cQStringListModel_metaObject
+  if not isNil(vtbl.metacast):
+    vtbl[].vtbl.metacast = miqt_exec_callback_cQStringListModel_metacast
+  if not isNil(vtbl.metacall):
+    vtbl[].vtbl.metacall = miqt_exec_callback_cQStringListModel_metacall
+  if not isNil(vtbl.rowCount):
+    vtbl[].vtbl.rowCount = miqt_exec_callback_cQStringListModel_rowCount
+  if not isNil(vtbl.sibling):
+    vtbl[].vtbl.sibling = miqt_exec_callback_cQStringListModel_sibling
+  if not isNil(vtbl.data):
+    vtbl[].vtbl.data = miqt_exec_callback_cQStringListModel_data
+  if not isNil(vtbl.setData):
+    vtbl[].vtbl.setData = miqt_exec_callback_cQStringListModel_setData
+  if not isNil(vtbl.clearItemData):
+    vtbl[].vtbl.clearItemData = miqt_exec_callback_cQStringListModel_clearItemData
+  if not isNil(vtbl.flags):
+    vtbl[].vtbl.flags = miqt_exec_callback_cQStringListModel_flags
+  if not isNil(vtbl.insertRows):
+    vtbl[].vtbl.insertRows = miqt_exec_callback_cQStringListModel_insertRows
+  if not isNil(vtbl.removeRows):
+    vtbl[].vtbl.removeRows = miqt_exec_callback_cQStringListModel_removeRows
+  if not isNil(vtbl.moveRows):
+    vtbl[].vtbl.moveRows = miqt_exec_callback_cQStringListModel_moveRows
+  if not isNil(vtbl.itemData):
+    vtbl[].vtbl.itemData = miqt_exec_callback_cQStringListModel_itemData
+  if not isNil(vtbl.setItemData):
+    vtbl[].vtbl.setItemData = miqt_exec_callback_cQStringListModel_setItemData
+  if not isNil(vtbl.sort):
+    vtbl[].vtbl.sort = miqt_exec_callback_cQStringListModel_sort
+  if not isNil(vtbl.supportedDropActions):
+    vtbl[].vtbl.supportedDropActions = miqt_exec_callback_cQStringListModel_supportedDropActions
+  if not isNil(vtbl.index):
+    vtbl[].vtbl.index = miqt_exec_callback_cQStringListModel_index
+  if not isNil(vtbl.dropMimeData):
+    vtbl[].vtbl.dropMimeData = miqt_exec_callback_cQStringListModel_dropMimeData
+  if not isNil(vtbl.headerData):
+    vtbl[].vtbl.headerData = miqt_exec_callback_cQStringListModel_headerData
+  if not isNil(vtbl.setHeaderData):
+    vtbl[].vtbl.setHeaderData = miqt_exec_callback_cQStringListModel_setHeaderData
+  if not isNil(vtbl.mimeTypes):
+    vtbl[].vtbl.mimeTypes = miqt_exec_callback_cQStringListModel_mimeTypes
+  if not isNil(vtbl.mimeData):
+    vtbl[].vtbl.mimeData = miqt_exec_callback_cQStringListModel_mimeData
+  if not isNil(vtbl.canDropMimeData):
+    vtbl[].vtbl.canDropMimeData = miqt_exec_callback_cQStringListModel_canDropMimeData
+  if not isNil(vtbl.supportedDragActions):
+    vtbl[].vtbl.supportedDragActions = miqt_exec_callback_cQStringListModel_supportedDragActions
+  if not isNil(vtbl.insertColumns):
+    vtbl[].vtbl.insertColumns = miqt_exec_callback_cQStringListModel_insertColumns
+  if not isNil(vtbl.removeColumns):
+    vtbl[].vtbl.removeColumns = miqt_exec_callback_cQStringListModel_removeColumns
+  if not isNil(vtbl.moveColumns):
+    vtbl[].vtbl.moveColumns = miqt_exec_callback_cQStringListModel_moveColumns
+  if not isNil(vtbl.fetchMore):
+    vtbl[].vtbl.fetchMore = miqt_exec_callback_cQStringListModel_fetchMore
+  if not isNil(vtbl.canFetchMore):
+    vtbl[].vtbl.canFetchMore = miqt_exec_callback_cQStringListModel_canFetchMore
+  if not isNil(vtbl.buddy):
+    vtbl[].vtbl.buddy = miqt_exec_callback_cQStringListModel_buddy
+  if not isNil(vtbl.match):
+    vtbl[].vtbl.match = miqt_exec_callback_cQStringListModel_match
+  if not isNil(vtbl.span):
+    vtbl[].vtbl.span = miqt_exec_callback_cQStringListModel_span
+  if not isNil(vtbl.roleNames):
+    vtbl[].vtbl.roleNames = miqt_exec_callback_cQStringListModel_roleNames
+  if not isNil(vtbl.multiData):
+    vtbl[].vtbl.multiData = miqt_exec_callback_cQStringListModel_multiData
+  if not isNil(vtbl.submit):
+    vtbl[].vtbl.submit = miqt_exec_callback_cQStringListModel_submit
+  if not isNil(vtbl.revert):
+    vtbl[].vtbl.revert = miqt_exec_callback_cQStringListModel_revert
+  if not isNil(vtbl.resetInternalData):
+    vtbl[].vtbl.resetInternalData = miqt_exec_callback_cQStringListModel_resetInternalData
+  if not isNil(vtbl.event):
+    vtbl[].vtbl.event = miqt_exec_callback_cQStringListModel_event
+  if not isNil(vtbl.eventFilter):
+    vtbl[].vtbl.eventFilter = miqt_exec_callback_cQStringListModel_eventFilter
+  if not isNil(vtbl.timerEvent):
+    vtbl[].vtbl.timerEvent = miqt_exec_callback_cQStringListModel_timerEvent
+  if not isNil(vtbl.childEvent):
+    vtbl[].vtbl.childEvent = miqt_exec_callback_cQStringListModel_childEvent
+  if not isNil(vtbl.customEvent):
+    vtbl[].vtbl.customEvent = miqt_exec_callback_cQStringListModel_customEvent
+  if not isNil(vtbl.connectNotify):
+    vtbl[].vtbl.connectNotify = miqt_exec_callback_cQStringListModel_connectNotify
+  if not isNil(vtbl.disconnectNotify):
+    vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQStringListModel_disconnectNotify
+  gen_qstringlistmodel_types.QStringListModel(h: fcQStringListModel_new2(addr(vtbl[]), struct_miqt_array(len: csize_t(len(strings)), data: if len(strings) == 0: nil else: addr(strings_CArray[0]))))
+
+proc create*(T: type gen_qstringlistmodel_types.QStringListModel,
+    parent: gen_qobject_types.QObject,
+    vtbl: ref QStringListModelVTable = nil): gen_qstringlistmodel_types.QStringListModel =
+  let vtbl = if vtbl == nil: new QStringListModelVTable else: vtbl
+  GC_ref(vtbl)
+  vtbl.vtbl.destructor = proc(vtbl: ptr cQStringListModelVTable, _: ptr cQStringListModel) {.cdecl.} =
+    let vtbl = cast[ref QStringListModelVTable](vtbl)
+    GC_unref(vtbl)
+  if not isNil(vtbl.metaObject):
+    vtbl[].vtbl.metaObject = miqt_exec_callback_cQStringListModel_metaObject
+  if not isNil(vtbl.metacast):
+    vtbl[].vtbl.metacast = miqt_exec_callback_cQStringListModel_metacast
+  if not isNil(vtbl.metacall):
+    vtbl[].vtbl.metacall = miqt_exec_callback_cQStringListModel_metacall
+  if not isNil(vtbl.rowCount):
+    vtbl[].vtbl.rowCount = miqt_exec_callback_cQStringListModel_rowCount
+  if not isNil(vtbl.sibling):
+    vtbl[].vtbl.sibling = miqt_exec_callback_cQStringListModel_sibling
+  if not isNil(vtbl.data):
+    vtbl[].vtbl.data = miqt_exec_callback_cQStringListModel_data
+  if not isNil(vtbl.setData):
+    vtbl[].vtbl.setData = miqt_exec_callback_cQStringListModel_setData
+  if not isNil(vtbl.clearItemData):
+    vtbl[].vtbl.clearItemData = miqt_exec_callback_cQStringListModel_clearItemData
+  if not isNil(vtbl.flags):
+    vtbl[].vtbl.flags = miqt_exec_callback_cQStringListModel_flags
+  if not isNil(vtbl.insertRows):
+    vtbl[].vtbl.insertRows = miqt_exec_callback_cQStringListModel_insertRows
+  if not isNil(vtbl.removeRows):
+    vtbl[].vtbl.removeRows = miqt_exec_callback_cQStringListModel_removeRows
+  if not isNil(vtbl.moveRows):
+    vtbl[].vtbl.moveRows = miqt_exec_callback_cQStringListModel_moveRows
+  if not isNil(vtbl.itemData):
+    vtbl[].vtbl.itemData = miqt_exec_callback_cQStringListModel_itemData
+  if not isNil(vtbl.setItemData):
+    vtbl[].vtbl.setItemData = miqt_exec_callback_cQStringListModel_setItemData
+  if not isNil(vtbl.sort):
+    vtbl[].vtbl.sort = miqt_exec_callback_cQStringListModel_sort
+  if not isNil(vtbl.supportedDropActions):
+    vtbl[].vtbl.supportedDropActions = miqt_exec_callback_cQStringListModel_supportedDropActions
+  if not isNil(vtbl.index):
+    vtbl[].vtbl.index = miqt_exec_callback_cQStringListModel_index
+  if not isNil(vtbl.dropMimeData):
+    vtbl[].vtbl.dropMimeData = miqt_exec_callback_cQStringListModel_dropMimeData
+  if not isNil(vtbl.headerData):
+    vtbl[].vtbl.headerData = miqt_exec_callback_cQStringListModel_headerData
+  if not isNil(vtbl.setHeaderData):
+    vtbl[].vtbl.setHeaderData = miqt_exec_callback_cQStringListModel_setHeaderData
+  if not isNil(vtbl.mimeTypes):
+    vtbl[].vtbl.mimeTypes = miqt_exec_callback_cQStringListModel_mimeTypes
+  if not isNil(vtbl.mimeData):
+    vtbl[].vtbl.mimeData = miqt_exec_callback_cQStringListModel_mimeData
+  if not isNil(vtbl.canDropMimeData):
+    vtbl[].vtbl.canDropMimeData = miqt_exec_callback_cQStringListModel_canDropMimeData
+  if not isNil(vtbl.supportedDragActions):
+    vtbl[].vtbl.supportedDragActions = miqt_exec_callback_cQStringListModel_supportedDragActions
+  if not isNil(vtbl.insertColumns):
+    vtbl[].vtbl.insertColumns = miqt_exec_callback_cQStringListModel_insertColumns
+  if not isNil(vtbl.removeColumns):
+    vtbl[].vtbl.removeColumns = miqt_exec_callback_cQStringListModel_removeColumns
+  if not isNil(vtbl.moveColumns):
+    vtbl[].vtbl.moveColumns = miqt_exec_callback_cQStringListModel_moveColumns
+  if not isNil(vtbl.fetchMore):
+    vtbl[].vtbl.fetchMore = miqt_exec_callback_cQStringListModel_fetchMore
+  if not isNil(vtbl.canFetchMore):
+    vtbl[].vtbl.canFetchMore = miqt_exec_callback_cQStringListModel_canFetchMore
+  if not isNil(vtbl.buddy):
+    vtbl[].vtbl.buddy = miqt_exec_callback_cQStringListModel_buddy
+  if not isNil(vtbl.match):
+    vtbl[].vtbl.match = miqt_exec_callback_cQStringListModel_match
+  if not isNil(vtbl.span):
+    vtbl[].vtbl.span = miqt_exec_callback_cQStringListModel_span
+  if not isNil(vtbl.roleNames):
+    vtbl[].vtbl.roleNames = miqt_exec_callback_cQStringListModel_roleNames
+  if not isNil(vtbl.multiData):
+    vtbl[].vtbl.multiData = miqt_exec_callback_cQStringListModel_multiData
+  if not isNil(vtbl.submit):
+    vtbl[].vtbl.submit = miqt_exec_callback_cQStringListModel_submit
+  if not isNil(vtbl.revert):
+    vtbl[].vtbl.revert = miqt_exec_callback_cQStringListModel_revert
+  if not isNil(vtbl.resetInternalData):
+    vtbl[].vtbl.resetInternalData = miqt_exec_callback_cQStringListModel_resetInternalData
+  if not isNil(vtbl.event):
+    vtbl[].vtbl.event = miqt_exec_callback_cQStringListModel_event
+  if not isNil(vtbl.eventFilter):
+    vtbl[].vtbl.eventFilter = miqt_exec_callback_cQStringListModel_eventFilter
+  if not isNil(vtbl.timerEvent):
+    vtbl[].vtbl.timerEvent = miqt_exec_callback_cQStringListModel_timerEvent
+  if not isNil(vtbl.childEvent):
+    vtbl[].vtbl.childEvent = miqt_exec_callback_cQStringListModel_childEvent
+  if not isNil(vtbl.customEvent):
+    vtbl[].vtbl.customEvent = miqt_exec_callback_cQStringListModel_customEvent
+  if not isNil(vtbl.connectNotify):
+    vtbl[].vtbl.connectNotify = miqt_exec_callback_cQStringListModel_connectNotify
+  if not isNil(vtbl.disconnectNotify):
+    vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQStringListModel_disconnectNotify
+  gen_qstringlistmodel_types.QStringListModel(h: fcQStringListModel_new3(addr(vtbl[]), parent.h))
+
+proc create*(T: type gen_qstringlistmodel_types.QStringListModel,
+    strings: seq[string], parent: gen_qobject_types.QObject,
+    vtbl: ref QStringListModelVTable = nil): gen_qstringlistmodel_types.QStringListModel =
+  var strings_CArray = newSeq[struct_miqt_string](len(strings))
+  for i in 0..<len(strings):
+    strings_CArray[i] = struct_miqt_string(data: strings[i], len: csize_t(len(strings[i])))
+
+  let vtbl = if vtbl == nil: new QStringListModelVTable else: vtbl
+  GC_ref(vtbl)
+  vtbl.vtbl.destructor = proc(vtbl: ptr cQStringListModelVTable, _: ptr cQStringListModel) {.cdecl.} =
+    let vtbl = cast[ref QStringListModelVTable](vtbl)
+    GC_unref(vtbl)
+  if not isNil(vtbl.metaObject):
+    vtbl[].vtbl.metaObject = miqt_exec_callback_cQStringListModel_metaObject
+  if not isNil(vtbl.metacast):
+    vtbl[].vtbl.metacast = miqt_exec_callback_cQStringListModel_metacast
+  if not isNil(vtbl.metacall):
+    vtbl[].vtbl.metacall = miqt_exec_callback_cQStringListModel_metacall
+  if not isNil(vtbl.rowCount):
+    vtbl[].vtbl.rowCount = miqt_exec_callback_cQStringListModel_rowCount
+  if not isNil(vtbl.sibling):
+    vtbl[].vtbl.sibling = miqt_exec_callback_cQStringListModel_sibling
+  if not isNil(vtbl.data):
+    vtbl[].vtbl.data = miqt_exec_callback_cQStringListModel_data
+  if not isNil(vtbl.setData):
+    vtbl[].vtbl.setData = miqt_exec_callback_cQStringListModel_setData
+  if not isNil(vtbl.clearItemData):
+    vtbl[].vtbl.clearItemData = miqt_exec_callback_cQStringListModel_clearItemData
+  if not isNil(vtbl.flags):
+    vtbl[].vtbl.flags = miqt_exec_callback_cQStringListModel_flags
+  if not isNil(vtbl.insertRows):
+    vtbl[].vtbl.insertRows = miqt_exec_callback_cQStringListModel_insertRows
+  if not isNil(vtbl.removeRows):
+    vtbl[].vtbl.removeRows = miqt_exec_callback_cQStringListModel_removeRows
+  if not isNil(vtbl.moveRows):
+    vtbl[].vtbl.moveRows = miqt_exec_callback_cQStringListModel_moveRows
+  if not isNil(vtbl.itemData):
+    vtbl[].vtbl.itemData = miqt_exec_callback_cQStringListModel_itemData
+  if not isNil(vtbl.setItemData):
+    vtbl[].vtbl.setItemData = miqt_exec_callback_cQStringListModel_setItemData
+  if not isNil(vtbl.sort):
+    vtbl[].vtbl.sort = miqt_exec_callback_cQStringListModel_sort
+  if not isNil(vtbl.supportedDropActions):
+    vtbl[].vtbl.supportedDropActions = miqt_exec_callback_cQStringListModel_supportedDropActions
+  if not isNil(vtbl.index):
+    vtbl[].vtbl.index = miqt_exec_callback_cQStringListModel_index
+  if not isNil(vtbl.dropMimeData):
+    vtbl[].vtbl.dropMimeData = miqt_exec_callback_cQStringListModel_dropMimeData
+  if not isNil(vtbl.headerData):
+    vtbl[].vtbl.headerData = miqt_exec_callback_cQStringListModel_headerData
+  if not isNil(vtbl.setHeaderData):
+    vtbl[].vtbl.setHeaderData = miqt_exec_callback_cQStringListModel_setHeaderData
+  if not isNil(vtbl.mimeTypes):
+    vtbl[].vtbl.mimeTypes = miqt_exec_callback_cQStringListModel_mimeTypes
+  if not isNil(vtbl.mimeData):
+    vtbl[].vtbl.mimeData = miqt_exec_callback_cQStringListModel_mimeData
+  if not isNil(vtbl.canDropMimeData):
+    vtbl[].vtbl.canDropMimeData = miqt_exec_callback_cQStringListModel_canDropMimeData
+  if not isNil(vtbl.supportedDragActions):
+    vtbl[].vtbl.supportedDragActions = miqt_exec_callback_cQStringListModel_supportedDragActions
+  if not isNil(vtbl.insertColumns):
+    vtbl[].vtbl.insertColumns = miqt_exec_callback_cQStringListModel_insertColumns
+  if not isNil(vtbl.removeColumns):
+    vtbl[].vtbl.removeColumns = miqt_exec_callback_cQStringListModel_removeColumns
+  if not isNil(vtbl.moveColumns):
+    vtbl[].vtbl.moveColumns = miqt_exec_callback_cQStringListModel_moveColumns
+  if not isNil(vtbl.fetchMore):
+    vtbl[].vtbl.fetchMore = miqt_exec_callback_cQStringListModel_fetchMore
+  if not isNil(vtbl.canFetchMore):
+    vtbl[].vtbl.canFetchMore = miqt_exec_callback_cQStringListModel_canFetchMore
+  if not isNil(vtbl.buddy):
+    vtbl[].vtbl.buddy = miqt_exec_callback_cQStringListModel_buddy
+  if not isNil(vtbl.match):
+    vtbl[].vtbl.match = miqt_exec_callback_cQStringListModel_match
+  if not isNil(vtbl.span):
+    vtbl[].vtbl.span = miqt_exec_callback_cQStringListModel_span
+  if not isNil(vtbl.roleNames):
+    vtbl[].vtbl.roleNames = miqt_exec_callback_cQStringListModel_roleNames
+  if not isNil(vtbl.multiData):
+    vtbl[].vtbl.multiData = miqt_exec_callback_cQStringListModel_multiData
+  if not isNil(vtbl.submit):
+    vtbl[].vtbl.submit = miqt_exec_callback_cQStringListModel_submit
+  if not isNil(vtbl.revert):
+    vtbl[].vtbl.revert = miqt_exec_callback_cQStringListModel_revert
+  if not isNil(vtbl.resetInternalData):
+    vtbl[].vtbl.resetInternalData = miqt_exec_callback_cQStringListModel_resetInternalData
+  if not isNil(vtbl.event):
+    vtbl[].vtbl.event = miqt_exec_callback_cQStringListModel_event
+  if not isNil(vtbl.eventFilter):
+    vtbl[].vtbl.eventFilter = miqt_exec_callback_cQStringListModel_eventFilter
+  if not isNil(vtbl.timerEvent):
+    vtbl[].vtbl.timerEvent = miqt_exec_callback_cQStringListModel_timerEvent
+  if not isNil(vtbl.childEvent):
+    vtbl[].vtbl.childEvent = miqt_exec_callback_cQStringListModel_childEvent
+  if not isNil(vtbl.customEvent):
+    vtbl[].vtbl.customEvent = miqt_exec_callback_cQStringListModel_customEvent
+  if not isNil(vtbl.connectNotify):
+    vtbl[].vtbl.connectNotify = miqt_exec_callback_cQStringListModel_connectNotify
+  if not isNil(vtbl.disconnectNotify):
+    vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQStringListModel_disconnectNotify
+  gen_qstringlistmodel_types.QStringListModel(h: fcQStringListModel_new4(addr(vtbl[]), struct_miqt_array(len: csize_t(len(strings)), data: if len(strings) == 0: nil else: addr(strings_CArray[0])), parent.h))
+
 proc staticMetaObject*(_: type gen_qstringlistmodel_types.QStringListModel): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQStringListModel_staticMetaObject())
 proc delete*(self: gen_qstringlistmodel_types.QStringListModel) =

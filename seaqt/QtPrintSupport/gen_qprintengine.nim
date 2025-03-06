@@ -88,9 +88,6 @@ proc fcQPrintEngine_printerState(self: pointer, ): cint {.importc: "QPrintEngine
 proc fcQPrintEngine_operatorAssign(self: pointer, param1: pointer): void {.importc: "QPrintEngine_operatorAssign".}
 proc fcQPrintEngine_delete(self: pointer) {.importc: "QPrintEngine_delete".}
 
-
-func init*(T: type gen_qprintengine_types.QPrintEngine, h: ptr cQPrintEngine): gen_qprintengine_types.QPrintEngine =
-  T(h: h)
 proc setProperty*(self: gen_qprintengine_types.QPrintEngine, key: cint, value: gen_qvariant_types.QVariant): void =
   fcQPrintEngine_setProperty(self.h, cint(key), value.h)
 

@@ -52,8 +52,6 @@ export
 
 type cQBuffer*{.exportc: "QBuffer", incompleteStruct.} = object
 
-proc fcQBuffer_new(): ptr cQBuffer {.importc: "QBuffer_new".}
-proc fcQBuffer_new2(parent: pointer): ptr cQBuffer {.importc: "QBuffer_new2".}
 proc fcQBuffer_metaObject(self: pointer, ): pointer {.importc: "QBuffer_metaObject".}
 proc fcQBuffer_metacast(self: pointer, param1: cstring): pointer {.importc: "QBuffer_metacast".}
 proc fcQBuffer_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QBuffer_metacall".}
@@ -72,71 +70,66 @@ proc fcQBuffer_atEnd(self: pointer, ): bool {.importc: "QBuffer_atEnd".}
 proc fcQBuffer_canReadLine(self: pointer, ): bool {.importc: "QBuffer_canReadLine".}
 proc fcQBuffer_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QBuffer_tr2".}
 proc fcQBuffer_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QBuffer_tr3".}
-proc fQBuffer_virtualbase_metaObject(self: pointer, ): pointer{.importc: "QBuffer_virtualbase_metaObject".}
-proc fcQBuffer_override_virtual_metaObject(self: pointer, slot: int) {.importc: "QBuffer_override_virtual_metaObject".}
-proc fQBuffer_virtualbase_metacast(self: pointer, param1: cstring): pointer{.importc: "QBuffer_virtualbase_metacast".}
-proc fcQBuffer_override_virtual_metacast(self: pointer, slot: int) {.importc: "QBuffer_override_virtual_metacast".}
-proc fQBuffer_virtualbase_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint{.importc: "QBuffer_virtualbase_metacall".}
-proc fcQBuffer_override_virtual_metacall(self: pointer, slot: int) {.importc: "QBuffer_override_virtual_metacall".}
-proc fQBuffer_virtualbase_open(self: pointer, openMode: cint): bool{.importc: "QBuffer_virtualbase_open".}
-proc fcQBuffer_override_virtual_open(self: pointer, slot: int) {.importc: "QBuffer_override_virtual_open".}
-proc fQBuffer_virtualbase_close(self: pointer, ): void{.importc: "QBuffer_virtualbase_close".}
-proc fcQBuffer_override_virtual_close(self: pointer, slot: int) {.importc: "QBuffer_override_virtual_close".}
-proc fQBuffer_virtualbase_size(self: pointer, ): clonglong{.importc: "QBuffer_virtualbase_size".}
-proc fcQBuffer_override_virtual_size(self: pointer, slot: int) {.importc: "QBuffer_override_virtual_size".}
-proc fQBuffer_virtualbase_pos(self: pointer, ): clonglong{.importc: "QBuffer_virtualbase_pos".}
-proc fcQBuffer_override_virtual_pos(self: pointer, slot: int) {.importc: "QBuffer_override_virtual_pos".}
-proc fQBuffer_virtualbase_seek(self: pointer, off: clonglong): bool{.importc: "QBuffer_virtualbase_seek".}
-proc fcQBuffer_override_virtual_seek(self: pointer, slot: int) {.importc: "QBuffer_override_virtual_seek".}
-proc fQBuffer_virtualbase_atEnd(self: pointer, ): bool{.importc: "QBuffer_virtualbase_atEnd".}
-proc fcQBuffer_override_virtual_atEnd(self: pointer, slot: int) {.importc: "QBuffer_override_virtual_atEnd".}
-proc fQBuffer_virtualbase_canReadLine(self: pointer, ): bool{.importc: "QBuffer_virtualbase_canReadLine".}
-proc fcQBuffer_override_virtual_canReadLine(self: pointer, slot: int) {.importc: "QBuffer_override_virtual_canReadLine".}
-proc fQBuffer_virtualbase_connectNotify(self: pointer, param1: pointer): void{.importc: "QBuffer_virtualbase_connectNotify".}
-proc fcQBuffer_override_virtual_connectNotify(self: pointer, slot: int) {.importc: "QBuffer_override_virtual_connectNotify".}
-proc fQBuffer_virtualbase_disconnectNotify(self: pointer, param1: pointer): void{.importc: "QBuffer_virtualbase_disconnectNotify".}
-proc fcQBuffer_override_virtual_disconnectNotify(self: pointer, slot: int) {.importc: "QBuffer_override_virtual_disconnectNotify".}
-proc fQBuffer_virtualbase_readData(self: pointer, data: cstring, maxlen: clonglong): clonglong{.importc: "QBuffer_virtualbase_readData".}
-proc fcQBuffer_override_virtual_readData(self: pointer, slot: int) {.importc: "QBuffer_override_virtual_readData".}
-proc fQBuffer_virtualbase_writeData(self: pointer, data: cstring, len: clonglong): clonglong{.importc: "QBuffer_virtualbase_writeData".}
-proc fcQBuffer_override_virtual_writeData(self: pointer, slot: int) {.importc: "QBuffer_override_virtual_writeData".}
-proc fQBuffer_virtualbase_isSequential(self: pointer, ): bool{.importc: "QBuffer_virtualbase_isSequential".}
-proc fcQBuffer_override_virtual_isSequential(self: pointer, slot: int) {.importc: "QBuffer_override_virtual_isSequential".}
-proc fQBuffer_virtualbase_reset(self: pointer, ): bool{.importc: "QBuffer_virtualbase_reset".}
-proc fcQBuffer_override_virtual_reset(self: pointer, slot: int) {.importc: "QBuffer_override_virtual_reset".}
-proc fQBuffer_virtualbase_bytesAvailable(self: pointer, ): clonglong{.importc: "QBuffer_virtualbase_bytesAvailable".}
-proc fcQBuffer_override_virtual_bytesAvailable(self: pointer, slot: int) {.importc: "QBuffer_override_virtual_bytesAvailable".}
-proc fQBuffer_virtualbase_bytesToWrite(self: pointer, ): clonglong{.importc: "QBuffer_virtualbase_bytesToWrite".}
-proc fcQBuffer_override_virtual_bytesToWrite(self: pointer, slot: int) {.importc: "QBuffer_override_virtual_bytesToWrite".}
-proc fQBuffer_virtualbase_waitForReadyRead(self: pointer, msecs: cint): bool{.importc: "QBuffer_virtualbase_waitForReadyRead".}
-proc fcQBuffer_override_virtual_waitForReadyRead(self: pointer, slot: int) {.importc: "QBuffer_override_virtual_waitForReadyRead".}
-proc fQBuffer_virtualbase_waitForBytesWritten(self: pointer, msecs: cint): bool{.importc: "QBuffer_virtualbase_waitForBytesWritten".}
-proc fcQBuffer_override_virtual_waitForBytesWritten(self: pointer, slot: int) {.importc: "QBuffer_override_virtual_waitForBytesWritten".}
-proc fQBuffer_virtualbase_readLineData(self: pointer, data: cstring, maxlen: clonglong): clonglong{.importc: "QBuffer_virtualbase_readLineData".}
-proc fcQBuffer_override_virtual_readLineData(self: pointer, slot: int) {.importc: "QBuffer_override_virtual_readLineData".}
-proc fQBuffer_virtualbase_skipData(self: pointer, maxSize: clonglong): clonglong{.importc: "QBuffer_virtualbase_skipData".}
-proc fcQBuffer_override_virtual_skipData(self: pointer, slot: int) {.importc: "QBuffer_override_virtual_skipData".}
-proc fQBuffer_virtualbase_event(self: pointer, event: pointer): bool{.importc: "QBuffer_virtualbase_event".}
-proc fcQBuffer_override_virtual_event(self: pointer, slot: int) {.importc: "QBuffer_override_virtual_event".}
-proc fQBuffer_virtualbase_eventFilter(self: pointer, watched: pointer, event: pointer): bool{.importc: "QBuffer_virtualbase_eventFilter".}
-proc fcQBuffer_override_virtual_eventFilter(self: pointer, slot: int) {.importc: "QBuffer_override_virtual_eventFilter".}
-proc fQBuffer_virtualbase_timerEvent(self: pointer, event: pointer): void{.importc: "QBuffer_virtualbase_timerEvent".}
-proc fcQBuffer_override_virtual_timerEvent(self: pointer, slot: int) {.importc: "QBuffer_override_virtual_timerEvent".}
-proc fQBuffer_virtualbase_childEvent(self: pointer, event: pointer): void{.importc: "QBuffer_virtualbase_childEvent".}
-proc fcQBuffer_override_virtual_childEvent(self: pointer, slot: int) {.importc: "QBuffer_override_virtual_childEvent".}
-proc fQBuffer_virtualbase_customEvent(self: pointer, event: pointer): void{.importc: "QBuffer_virtualbase_customEvent".}
-proc fcQBuffer_override_virtual_customEvent(self: pointer, slot: int) {.importc: "QBuffer_override_virtual_customEvent".}
+type cQBufferVTable = object
+  destructor*: proc(vtbl: ptr cQBufferVTable, self: ptr cQBuffer) {.cdecl, raises:[], gcsafe.}
+  metaObject*: proc(vtbl, self: pointer, ): pointer {.cdecl, raises: [], gcsafe.}
+  metacast*: proc(vtbl, self: pointer, param1: cstring): pointer {.cdecl, raises: [], gcsafe.}
+  metacall*: proc(vtbl, self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl, raises: [], gcsafe.}
+  open*: proc(vtbl, self: pointer, openMode: cint): bool {.cdecl, raises: [], gcsafe.}
+  close*: proc(vtbl, self: pointer, ): void {.cdecl, raises: [], gcsafe.}
+  size*: proc(vtbl, self: pointer, ): clonglong {.cdecl, raises: [], gcsafe.}
+  pos*: proc(vtbl, self: pointer, ): clonglong {.cdecl, raises: [], gcsafe.}
+  seek*: proc(vtbl, self: pointer, off: clonglong): bool {.cdecl, raises: [], gcsafe.}
+  atEnd*: proc(vtbl, self: pointer, ): bool {.cdecl, raises: [], gcsafe.}
+  canReadLine*: proc(vtbl, self: pointer, ): bool {.cdecl, raises: [], gcsafe.}
+  connectNotify*: proc(vtbl, self: pointer, param1: pointer): void {.cdecl, raises: [], gcsafe.}
+  disconnectNotify*: proc(vtbl, self: pointer, param1: pointer): void {.cdecl, raises: [], gcsafe.}
+  readData*: proc(vtbl, self: pointer, data: cstring, maxlen: clonglong): clonglong {.cdecl, raises: [], gcsafe.}
+  writeData*: proc(vtbl, self: pointer, data: cstring, len: clonglong): clonglong {.cdecl, raises: [], gcsafe.}
+  isSequential*: proc(vtbl, self: pointer, ): bool {.cdecl, raises: [], gcsafe.}
+  reset*: proc(vtbl, self: pointer, ): bool {.cdecl, raises: [], gcsafe.}
+  bytesAvailable*: proc(vtbl, self: pointer, ): clonglong {.cdecl, raises: [], gcsafe.}
+  bytesToWrite*: proc(vtbl, self: pointer, ): clonglong {.cdecl, raises: [], gcsafe.}
+  waitForReadyRead*: proc(vtbl, self: pointer, msecs: cint): bool {.cdecl, raises: [], gcsafe.}
+  waitForBytesWritten*: proc(vtbl, self: pointer, msecs: cint): bool {.cdecl, raises: [], gcsafe.}
+  readLineData*: proc(vtbl, self: pointer, data: cstring, maxlen: clonglong): clonglong {.cdecl, raises: [], gcsafe.}
+  skipData*: proc(vtbl, self: pointer, maxSize: clonglong): clonglong {.cdecl, raises: [], gcsafe.}
+  event*: proc(vtbl, self: pointer, event: pointer): bool {.cdecl, raises: [], gcsafe.}
+  eventFilter*: proc(vtbl, self: pointer, watched: pointer, event: pointer): bool {.cdecl, raises: [], gcsafe.}
+  timerEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  childEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  customEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+proc fcQBuffer_virtualbase_metaObject(self: pointer, ): pointer {.importc: "QBuffer_virtualbase_metaObject".}
+proc fcQBuffer_virtualbase_metacast(self: pointer, param1: cstring): pointer {.importc: "QBuffer_virtualbase_metacast".}
+proc fcQBuffer_virtualbase_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QBuffer_virtualbase_metacall".}
+proc fcQBuffer_virtualbase_open(self: pointer, openMode: cint): bool {.importc: "QBuffer_virtualbase_open".}
+proc fcQBuffer_virtualbase_close(self: pointer, ): void {.importc: "QBuffer_virtualbase_close".}
+proc fcQBuffer_virtualbase_size(self: pointer, ): clonglong {.importc: "QBuffer_virtualbase_size".}
+proc fcQBuffer_virtualbase_pos(self: pointer, ): clonglong {.importc: "QBuffer_virtualbase_pos".}
+proc fcQBuffer_virtualbase_seek(self: pointer, off: clonglong): bool {.importc: "QBuffer_virtualbase_seek".}
+proc fcQBuffer_virtualbase_atEnd(self: pointer, ): bool {.importc: "QBuffer_virtualbase_atEnd".}
+proc fcQBuffer_virtualbase_canReadLine(self: pointer, ): bool {.importc: "QBuffer_virtualbase_canReadLine".}
+proc fcQBuffer_virtualbase_connectNotify(self: pointer, param1: pointer): void {.importc: "QBuffer_virtualbase_connectNotify".}
+proc fcQBuffer_virtualbase_disconnectNotify(self: pointer, param1: pointer): void {.importc: "QBuffer_virtualbase_disconnectNotify".}
+proc fcQBuffer_virtualbase_readData(self: pointer, data: cstring, maxlen: clonglong): clonglong {.importc: "QBuffer_virtualbase_readData".}
+proc fcQBuffer_virtualbase_writeData(self: pointer, data: cstring, len: clonglong): clonglong {.importc: "QBuffer_virtualbase_writeData".}
+proc fcQBuffer_virtualbase_isSequential(self: pointer, ): bool {.importc: "QBuffer_virtualbase_isSequential".}
+proc fcQBuffer_virtualbase_reset(self: pointer, ): bool {.importc: "QBuffer_virtualbase_reset".}
+proc fcQBuffer_virtualbase_bytesAvailable(self: pointer, ): clonglong {.importc: "QBuffer_virtualbase_bytesAvailable".}
+proc fcQBuffer_virtualbase_bytesToWrite(self: pointer, ): clonglong {.importc: "QBuffer_virtualbase_bytesToWrite".}
+proc fcQBuffer_virtualbase_waitForReadyRead(self: pointer, msecs: cint): bool {.importc: "QBuffer_virtualbase_waitForReadyRead".}
+proc fcQBuffer_virtualbase_waitForBytesWritten(self: pointer, msecs: cint): bool {.importc: "QBuffer_virtualbase_waitForBytesWritten".}
+proc fcQBuffer_virtualbase_readLineData(self: pointer, data: cstring, maxlen: clonglong): clonglong {.importc: "QBuffer_virtualbase_readLineData".}
+proc fcQBuffer_virtualbase_skipData(self: pointer, maxSize: clonglong): clonglong {.importc: "QBuffer_virtualbase_skipData".}
+proc fcQBuffer_virtualbase_event(self: pointer, event: pointer): bool {.importc: "QBuffer_virtualbase_event".}
+proc fcQBuffer_virtualbase_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.importc: "QBuffer_virtualbase_eventFilter".}
+proc fcQBuffer_virtualbase_timerEvent(self: pointer, event: pointer): void {.importc: "QBuffer_virtualbase_timerEvent".}
+proc fcQBuffer_virtualbase_childEvent(self: pointer, event: pointer): void {.importc: "QBuffer_virtualbase_childEvent".}
+proc fcQBuffer_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QBuffer_virtualbase_customEvent".}
+proc fcQBuffer_new(vtbl: pointer, ): ptr cQBuffer {.importc: "QBuffer_new".}
+proc fcQBuffer_new2(vtbl: pointer, parent: pointer): ptr cQBuffer {.importc: "QBuffer_new2".}
 proc fcQBuffer_staticMetaObject(): pointer {.importc: "QBuffer_staticMetaObject".}
 proc fcQBuffer_delete(self: pointer) {.importc: "QBuffer_delete".}
-
-
-func init*(T: type gen_qbuffer_types.QBuffer, h: ptr cQBuffer): gen_qbuffer_types.QBuffer =
-  T(h: h)
-proc create*(T: type gen_qbuffer_types.QBuffer, ): gen_qbuffer_types.QBuffer =
-  gen_qbuffer_types.QBuffer.init(fcQBuffer_new())
-
-proc create*(T: type gen_qbuffer_types.QBuffer, parent: gen_qobject_types.QObject): gen_qbuffer_types.QBuffer =
-  gen_qbuffer_types.QBuffer.init(fcQBuffer_new2(parent.h))
 
 proc metaObject*(self: gen_qbuffer_types.QBuffer, ): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQBuffer_metaObject(self.h))
@@ -210,499 +203,449 @@ proc tr*(_: type gen_qbuffer_types.QBuffer, s: cstring, c: cstring, n: cint): st
   c_free(v_ms.data)
   vx_ret
 
+type QBuffermetaObjectProc* = proc(self: QBuffer): gen_qobjectdefs_types.QMetaObject {.raises: [], gcsafe.}
+type QBuffermetacastProc* = proc(self: QBuffer, param1: cstring): pointer {.raises: [], gcsafe.}
+type QBuffermetacallProc* = proc(self: QBuffer, param1: cint, param2: cint, param3: pointer): cint {.raises: [], gcsafe.}
+type QBufferopenProc* = proc(self: QBuffer, openMode: cint): bool {.raises: [], gcsafe.}
+type QBuffercloseProc* = proc(self: QBuffer): void {.raises: [], gcsafe.}
+type QBuffersizeProc* = proc(self: QBuffer): clonglong {.raises: [], gcsafe.}
+type QBufferposProc* = proc(self: QBuffer): clonglong {.raises: [], gcsafe.}
+type QBufferseekProc* = proc(self: QBuffer, off: clonglong): bool {.raises: [], gcsafe.}
+type QBufferatEndProc* = proc(self: QBuffer): bool {.raises: [], gcsafe.}
+type QBuffercanReadLineProc* = proc(self: QBuffer): bool {.raises: [], gcsafe.}
+type QBufferconnectNotifyProc* = proc(self: QBuffer, param1: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
+type QBufferdisconnectNotifyProc* = proc(self: QBuffer, param1: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
+type QBufferreadDataProc* = proc(self: QBuffer, data: cstring, maxlen: clonglong): clonglong {.raises: [], gcsafe.}
+type QBufferwriteDataProc* = proc(self: QBuffer, data: cstring, len: clonglong): clonglong {.raises: [], gcsafe.}
+type QBufferisSequentialProc* = proc(self: QBuffer): bool {.raises: [], gcsafe.}
+type QBufferresetProc* = proc(self: QBuffer): bool {.raises: [], gcsafe.}
+type QBufferbytesAvailableProc* = proc(self: QBuffer): clonglong {.raises: [], gcsafe.}
+type QBufferbytesToWriteProc* = proc(self: QBuffer): clonglong {.raises: [], gcsafe.}
+type QBufferwaitForReadyReadProc* = proc(self: QBuffer, msecs: cint): bool {.raises: [], gcsafe.}
+type QBufferwaitForBytesWrittenProc* = proc(self: QBuffer, msecs: cint): bool {.raises: [], gcsafe.}
+type QBufferreadLineDataProc* = proc(self: QBuffer, data: cstring, maxlen: clonglong): clonglong {.raises: [], gcsafe.}
+type QBufferskipDataProc* = proc(self: QBuffer, maxSize: clonglong): clonglong {.raises: [], gcsafe.}
+type QBuffereventProc* = proc(self: QBuffer, event: gen_qcoreevent_types.QEvent): bool {.raises: [], gcsafe.}
+type QBuffereventFilterProc* = proc(self: QBuffer, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.raises: [], gcsafe.}
+type QBuffertimerEventProc* = proc(self: QBuffer, event: gen_qcoreevent_types.QTimerEvent): void {.raises: [], gcsafe.}
+type QBufferchildEventProc* = proc(self: QBuffer, event: gen_qcoreevent_types.QChildEvent): void {.raises: [], gcsafe.}
+type QBuffercustomEventProc* = proc(self: QBuffer, event: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
+type QBufferVTable* = object
+  vtbl: cQBufferVTable
+  metaObject*: QBuffermetaObjectProc
+  metacast*: QBuffermetacastProc
+  metacall*: QBuffermetacallProc
+  open*: QBufferopenProc
+  close*: QBuffercloseProc
+  size*: QBuffersizeProc
+  pos*: QBufferposProc
+  seek*: QBufferseekProc
+  atEnd*: QBufferatEndProc
+  canReadLine*: QBuffercanReadLineProc
+  connectNotify*: QBufferconnectNotifyProc
+  disconnectNotify*: QBufferdisconnectNotifyProc
+  readData*: QBufferreadDataProc
+  writeData*: QBufferwriteDataProc
+  isSequential*: QBufferisSequentialProc
+  reset*: QBufferresetProc
+  bytesAvailable*: QBufferbytesAvailableProc
+  bytesToWrite*: QBufferbytesToWriteProc
+  waitForReadyRead*: QBufferwaitForReadyReadProc
+  waitForBytesWritten*: QBufferwaitForBytesWrittenProc
+  readLineData*: QBufferreadLineDataProc
+  skipData*: QBufferskipDataProc
+  event*: QBuffereventProc
+  eventFilter*: QBuffereventFilterProc
+  timerEvent*: QBuffertimerEventProc
+  childEvent*: QBufferchildEventProc
+  customEvent*: QBuffercustomEventProc
 proc QBuffermetaObject*(self: gen_qbuffer_types.QBuffer, ): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fQBuffer_virtualbase_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQBuffer_virtualbase_metaObject(self.h))
 
-type QBuffermetaObjectProc* = proc(): gen_qobjectdefs_types.QMetaObject
-proc onmetaObject*(self: gen_qbuffer_types.QBuffer, slot: QBuffermetaObjectProc) =
-  # TODO check subclass
-  var tmp = new QBuffermetaObjectProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQBuffer_override_virtual_metaObject(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QBuffer_metaObject(self: ptr cQBuffer, slot: int): pointer {.exportc: "miqt_exec_callback_QBuffer_metaObject ".} =
-  var nimfunc = cast[ptr QBuffermetaObjectProc](cast[pointer](slot))
-
-  let virtualReturn = nimfunc[]( )
-
+proc miqt_exec_callback_cQBuffer_metaObject(vtbl: pointer, self: pointer): pointer {.cdecl.} =
+  let vtbl = cast[ptr QBufferVTable](vtbl)
+  let self = QBuffer(h: self)
+  var virtualReturn = vtbl[].metaObject(self)
   virtualReturn.h
+
 proc QBuffermetacast*(self: gen_qbuffer_types.QBuffer, param1: cstring): pointer =
-  fQBuffer_virtualbase_metacast(self.h, param1)
+  fcQBuffer_virtualbase_metacast(self.h, param1)
 
-type QBuffermetacastProc* = proc(param1: cstring): pointer
-proc onmetacast*(self: gen_qbuffer_types.QBuffer, slot: QBuffermetacastProc) =
-  # TODO check subclass
-  var tmp = new QBuffermetacastProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQBuffer_override_virtual_metacast(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QBuffer_metacast(self: ptr cQBuffer, slot: int, param1: cstring): pointer {.exportc: "miqt_exec_callback_QBuffer_metacast ".} =
-  var nimfunc = cast[ptr QBuffermetacastProc](cast[pointer](slot))
+proc miqt_exec_callback_cQBuffer_metacast(vtbl: pointer, self: pointer, param1: cstring): pointer {.cdecl.} =
+  let vtbl = cast[ptr QBufferVTable](vtbl)
+  let self = QBuffer(h: self)
   let slotval1 = (param1)
-
-
-  let virtualReturn = nimfunc[](slotval1 )
-
+  var virtualReturn = vtbl[].metacast(self, slotval1)
   virtualReturn
+
 proc QBuffermetacall*(self: gen_qbuffer_types.QBuffer, param1: cint, param2: cint, param3: pointer): cint =
-  fQBuffer_virtualbase_metacall(self.h, cint(param1), param2, param3)
+  fcQBuffer_virtualbase_metacall(self.h, cint(param1), param2, param3)
 
-type QBuffermetacallProc* = proc(param1: cint, param2: cint, param3: pointer): cint
-proc onmetacall*(self: gen_qbuffer_types.QBuffer, slot: QBuffermetacallProc) =
-  # TODO check subclass
-  var tmp = new QBuffermetacallProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQBuffer_override_virtual_metacall(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QBuffer_metacall(self: ptr cQBuffer, slot: int, param1: cint, param2: cint, param3: pointer): cint {.exportc: "miqt_exec_callback_QBuffer_metacall ".} =
-  var nimfunc = cast[ptr QBuffermetacallProc](cast[pointer](slot))
+proc miqt_exec_callback_cQBuffer_metacall(vtbl: pointer, self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
+  let vtbl = cast[ptr QBufferVTable](vtbl)
+  let self = QBuffer(h: self)
   let slotval1 = cint(param1)
-
   let slotval2 = param2
-
   let slotval3 = param3
-
-
-  let virtualReturn = nimfunc[](slotval1, slotval2, slotval3 )
-
+  var virtualReturn = vtbl[].metacall(self, slotval1, slotval2, slotval3)
   virtualReturn
+
 proc QBufferopen*(self: gen_qbuffer_types.QBuffer, openMode: cint): bool =
-  fQBuffer_virtualbase_open(self.h, cint(openMode))
+  fcQBuffer_virtualbase_open(self.h, cint(openMode))
 
-type QBufferopenProc* = proc(openMode: cint): bool
-proc onopen*(self: gen_qbuffer_types.QBuffer, slot: QBufferopenProc) =
-  # TODO check subclass
-  var tmp = new QBufferopenProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQBuffer_override_virtual_open(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QBuffer_open(self: ptr cQBuffer, slot: int, openMode: cint): bool {.exportc: "miqt_exec_callback_QBuffer_open ".} =
-  var nimfunc = cast[ptr QBufferopenProc](cast[pointer](slot))
+proc miqt_exec_callback_cQBuffer_open(vtbl: pointer, self: pointer, openMode: cint): bool {.cdecl.} =
+  let vtbl = cast[ptr QBufferVTable](vtbl)
+  let self = QBuffer(h: self)
   let slotval1 = cint(openMode)
-
-
-  let virtualReturn = nimfunc[](slotval1 )
-
+  var virtualReturn = vtbl[].open(self, slotval1)
   virtualReturn
+
 proc QBufferclose*(self: gen_qbuffer_types.QBuffer, ): void =
-  fQBuffer_virtualbase_close(self.h)
+  fcQBuffer_virtualbase_close(self.h)
 
-type QBuffercloseProc* = proc(): void
-proc onclose*(self: gen_qbuffer_types.QBuffer, slot: QBuffercloseProc) =
-  # TODO check subclass
-  var tmp = new QBuffercloseProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQBuffer_override_virtual_close(self.h, cast[int](addr tmp[]))
+proc miqt_exec_callback_cQBuffer_close(vtbl: pointer, self: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QBufferVTable](vtbl)
+  let self = QBuffer(h: self)
+  vtbl[].close(self)
 
-proc miqt_exec_callback_QBuffer_close(self: ptr cQBuffer, slot: int): void {.exportc: "miqt_exec_callback_QBuffer_close ".} =
-  var nimfunc = cast[ptr QBuffercloseProc](cast[pointer](slot))
-
-  nimfunc[]()
 proc QBuffersize*(self: gen_qbuffer_types.QBuffer, ): clonglong =
-  fQBuffer_virtualbase_size(self.h)
+  fcQBuffer_virtualbase_size(self.h)
 
-type QBuffersizeProc* = proc(): clonglong
-proc onsize*(self: gen_qbuffer_types.QBuffer, slot: QBuffersizeProc) =
-  # TODO check subclass
-  var tmp = new QBuffersizeProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQBuffer_override_virtual_size(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QBuffer_size(self: ptr cQBuffer, slot: int): clonglong {.exportc: "miqt_exec_callback_QBuffer_size ".} =
-  var nimfunc = cast[ptr QBuffersizeProc](cast[pointer](slot))
-
-  let virtualReturn = nimfunc[]( )
-
+proc miqt_exec_callback_cQBuffer_size(vtbl: pointer, self: pointer): clonglong {.cdecl.} =
+  let vtbl = cast[ptr QBufferVTable](vtbl)
+  let self = QBuffer(h: self)
+  var virtualReturn = vtbl[].size(self)
   virtualReturn
+
 proc QBufferpos*(self: gen_qbuffer_types.QBuffer, ): clonglong =
-  fQBuffer_virtualbase_pos(self.h)
+  fcQBuffer_virtualbase_pos(self.h)
 
-type QBufferposProc* = proc(): clonglong
-proc onpos*(self: gen_qbuffer_types.QBuffer, slot: QBufferposProc) =
-  # TODO check subclass
-  var tmp = new QBufferposProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQBuffer_override_virtual_pos(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QBuffer_pos(self: ptr cQBuffer, slot: int): clonglong {.exportc: "miqt_exec_callback_QBuffer_pos ".} =
-  var nimfunc = cast[ptr QBufferposProc](cast[pointer](slot))
-
-  let virtualReturn = nimfunc[]( )
-
+proc miqt_exec_callback_cQBuffer_pos(vtbl: pointer, self: pointer): clonglong {.cdecl.} =
+  let vtbl = cast[ptr QBufferVTable](vtbl)
+  let self = QBuffer(h: self)
+  var virtualReturn = vtbl[].pos(self)
   virtualReturn
+
 proc QBufferseek*(self: gen_qbuffer_types.QBuffer, off: clonglong): bool =
-  fQBuffer_virtualbase_seek(self.h, off)
+  fcQBuffer_virtualbase_seek(self.h, off)
 
-type QBufferseekProc* = proc(off: clonglong): bool
-proc onseek*(self: gen_qbuffer_types.QBuffer, slot: QBufferseekProc) =
-  # TODO check subclass
-  var tmp = new QBufferseekProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQBuffer_override_virtual_seek(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QBuffer_seek(self: ptr cQBuffer, slot: int, off: clonglong): bool {.exportc: "miqt_exec_callback_QBuffer_seek ".} =
-  var nimfunc = cast[ptr QBufferseekProc](cast[pointer](slot))
+proc miqt_exec_callback_cQBuffer_seek(vtbl: pointer, self: pointer, off: clonglong): bool {.cdecl.} =
+  let vtbl = cast[ptr QBufferVTable](vtbl)
+  let self = QBuffer(h: self)
   let slotval1 = off
-
-
-  let virtualReturn = nimfunc[](slotval1 )
-
+  var virtualReturn = vtbl[].seek(self, slotval1)
   virtualReturn
+
 proc QBufferatEnd*(self: gen_qbuffer_types.QBuffer, ): bool =
-  fQBuffer_virtualbase_atEnd(self.h)
+  fcQBuffer_virtualbase_atEnd(self.h)
 
-type QBufferatEndProc* = proc(): bool
-proc onatEnd*(self: gen_qbuffer_types.QBuffer, slot: QBufferatEndProc) =
-  # TODO check subclass
-  var tmp = new QBufferatEndProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQBuffer_override_virtual_atEnd(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QBuffer_atEnd(self: ptr cQBuffer, slot: int): bool {.exportc: "miqt_exec_callback_QBuffer_atEnd ".} =
-  var nimfunc = cast[ptr QBufferatEndProc](cast[pointer](slot))
-
-  let virtualReturn = nimfunc[]( )
-
+proc miqt_exec_callback_cQBuffer_atEnd(vtbl: pointer, self: pointer): bool {.cdecl.} =
+  let vtbl = cast[ptr QBufferVTable](vtbl)
+  let self = QBuffer(h: self)
+  var virtualReturn = vtbl[].atEnd(self)
   virtualReturn
+
 proc QBuffercanReadLine*(self: gen_qbuffer_types.QBuffer, ): bool =
-  fQBuffer_virtualbase_canReadLine(self.h)
+  fcQBuffer_virtualbase_canReadLine(self.h)
 
-type QBuffercanReadLineProc* = proc(): bool
-proc oncanReadLine*(self: gen_qbuffer_types.QBuffer, slot: QBuffercanReadLineProc) =
-  # TODO check subclass
-  var tmp = new QBuffercanReadLineProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQBuffer_override_virtual_canReadLine(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QBuffer_canReadLine(self: ptr cQBuffer, slot: int): bool {.exportc: "miqt_exec_callback_QBuffer_canReadLine ".} =
-  var nimfunc = cast[ptr QBuffercanReadLineProc](cast[pointer](slot))
-
-  let virtualReturn = nimfunc[]( )
-
+proc miqt_exec_callback_cQBuffer_canReadLine(vtbl: pointer, self: pointer): bool {.cdecl.} =
+  let vtbl = cast[ptr QBufferVTable](vtbl)
+  let self = QBuffer(h: self)
+  var virtualReturn = vtbl[].canReadLine(self)
   virtualReturn
+
 proc QBufferconnectNotify*(self: gen_qbuffer_types.QBuffer, param1: gen_qmetaobject_types.QMetaMethod): void =
-  fQBuffer_virtualbase_connectNotify(self.h, param1.h)
+  fcQBuffer_virtualbase_connectNotify(self.h, param1.h)
 
-type QBufferconnectNotifyProc* = proc(param1: gen_qmetaobject_types.QMetaMethod): void
-proc onconnectNotify*(self: gen_qbuffer_types.QBuffer, slot: QBufferconnectNotifyProc) =
-  # TODO check subclass
-  var tmp = new QBufferconnectNotifyProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQBuffer_override_virtual_connectNotify(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QBuffer_connectNotify(self: ptr cQBuffer, slot: int, param1: pointer): void {.exportc: "miqt_exec_callback_QBuffer_connectNotify ".} =
-  var nimfunc = cast[ptr QBufferconnectNotifyProc](cast[pointer](slot))
+proc miqt_exec_callback_cQBuffer_connectNotify(vtbl: pointer, self: pointer, param1: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QBufferVTable](vtbl)
+  let self = QBuffer(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: param1)
+  vtbl[].connectNotify(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QBufferdisconnectNotify*(self: gen_qbuffer_types.QBuffer, param1: gen_qmetaobject_types.QMetaMethod): void =
-  fQBuffer_virtualbase_disconnectNotify(self.h, param1.h)
+  fcQBuffer_virtualbase_disconnectNotify(self.h, param1.h)
 
-type QBufferdisconnectNotifyProc* = proc(param1: gen_qmetaobject_types.QMetaMethod): void
-proc ondisconnectNotify*(self: gen_qbuffer_types.QBuffer, slot: QBufferdisconnectNotifyProc) =
-  # TODO check subclass
-  var tmp = new QBufferdisconnectNotifyProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQBuffer_override_virtual_disconnectNotify(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QBuffer_disconnectNotify(self: ptr cQBuffer, slot: int, param1: pointer): void {.exportc: "miqt_exec_callback_QBuffer_disconnectNotify ".} =
-  var nimfunc = cast[ptr QBufferdisconnectNotifyProc](cast[pointer](slot))
+proc miqt_exec_callback_cQBuffer_disconnectNotify(vtbl: pointer, self: pointer, param1: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QBufferVTable](vtbl)
+  let self = QBuffer(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: param1)
+  vtbl[].disconnectNotify(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QBufferreadData*(self: gen_qbuffer_types.QBuffer, data: cstring, maxlen: clonglong): clonglong =
-  fQBuffer_virtualbase_readData(self.h, data, maxlen)
+  fcQBuffer_virtualbase_readData(self.h, data, maxlen)
 
-type QBufferreadDataProc* = proc(data: cstring, maxlen: clonglong): clonglong
-proc onreadData*(self: gen_qbuffer_types.QBuffer, slot: QBufferreadDataProc) =
-  # TODO check subclass
-  var tmp = new QBufferreadDataProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQBuffer_override_virtual_readData(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QBuffer_readData(self: ptr cQBuffer, slot: int, data: cstring, maxlen: clonglong): clonglong {.exportc: "miqt_exec_callback_QBuffer_readData ".} =
-  var nimfunc = cast[ptr QBufferreadDataProc](cast[pointer](slot))
+proc miqt_exec_callback_cQBuffer_readData(vtbl: pointer, self: pointer, data: cstring, maxlen: clonglong): clonglong {.cdecl.} =
+  let vtbl = cast[ptr QBufferVTable](vtbl)
+  let self = QBuffer(h: self)
   let slotval1 = (data)
-
   let slotval2 = maxlen
-
-
-  let virtualReturn = nimfunc[](slotval1, slotval2 )
-
+  var virtualReturn = vtbl[].readData(self, slotval1, slotval2)
   virtualReturn
+
 proc QBufferwriteData*(self: gen_qbuffer_types.QBuffer, data: cstring, len: clonglong): clonglong =
-  fQBuffer_virtualbase_writeData(self.h, data, len)
+  fcQBuffer_virtualbase_writeData(self.h, data, len)
 
-type QBufferwriteDataProc* = proc(data: cstring, len: clonglong): clonglong
-proc onwriteData*(self: gen_qbuffer_types.QBuffer, slot: QBufferwriteDataProc) =
-  # TODO check subclass
-  var tmp = new QBufferwriteDataProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQBuffer_override_virtual_writeData(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QBuffer_writeData(self: ptr cQBuffer, slot: int, data: cstring, len: clonglong): clonglong {.exportc: "miqt_exec_callback_QBuffer_writeData ".} =
-  var nimfunc = cast[ptr QBufferwriteDataProc](cast[pointer](slot))
+proc miqt_exec_callback_cQBuffer_writeData(vtbl: pointer, self: pointer, data: cstring, len: clonglong): clonglong {.cdecl.} =
+  let vtbl = cast[ptr QBufferVTable](vtbl)
+  let self = QBuffer(h: self)
   let slotval1 = (data)
-
   let slotval2 = len
-
-
-  let virtualReturn = nimfunc[](slotval1, slotval2 )
-
+  var virtualReturn = vtbl[].writeData(self, slotval1, slotval2)
   virtualReturn
+
 proc QBufferisSequential*(self: gen_qbuffer_types.QBuffer, ): bool =
-  fQBuffer_virtualbase_isSequential(self.h)
+  fcQBuffer_virtualbase_isSequential(self.h)
 
-type QBufferisSequentialProc* = proc(): bool
-proc onisSequential*(self: gen_qbuffer_types.QBuffer, slot: QBufferisSequentialProc) =
-  # TODO check subclass
-  var tmp = new QBufferisSequentialProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQBuffer_override_virtual_isSequential(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QBuffer_isSequential(self: ptr cQBuffer, slot: int): bool {.exportc: "miqt_exec_callback_QBuffer_isSequential ".} =
-  var nimfunc = cast[ptr QBufferisSequentialProc](cast[pointer](slot))
-
-  let virtualReturn = nimfunc[]( )
-
+proc miqt_exec_callback_cQBuffer_isSequential(vtbl: pointer, self: pointer): bool {.cdecl.} =
+  let vtbl = cast[ptr QBufferVTable](vtbl)
+  let self = QBuffer(h: self)
+  var virtualReturn = vtbl[].isSequential(self)
   virtualReturn
+
 proc QBufferreset*(self: gen_qbuffer_types.QBuffer, ): bool =
-  fQBuffer_virtualbase_reset(self.h)
+  fcQBuffer_virtualbase_reset(self.h)
 
-type QBufferresetProc* = proc(): bool
-proc onreset*(self: gen_qbuffer_types.QBuffer, slot: QBufferresetProc) =
-  # TODO check subclass
-  var tmp = new QBufferresetProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQBuffer_override_virtual_reset(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QBuffer_reset(self: ptr cQBuffer, slot: int): bool {.exportc: "miqt_exec_callback_QBuffer_reset ".} =
-  var nimfunc = cast[ptr QBufferresetProc](cast[pointer](slot))
-
-  let virtualReturn = nimfunc[]( )
-
+proc miqt_exec_callback_cQBuffer_reset(vtbl: pointer, self: pointer): bool {.cdecl.} =
+  let vtbl = cast[ptr QBufferVTable](vtbl)
+  let self = QBuffer(h: self)
+  var virtualReturn = vtbl[].reset(self)
   virtualReturn
+
 proc QBufferbytesAvailable*(self: gen_qbuffer_types.QBuffer, ): clonglong =
-  fQBuffer_virtualbase_bytesAvailable(self.h)
+  fcQBuffer_virtualbase_bytesAvailable(self.h)
 
-type QBufferbytesAvailableProc* = proc(): clonglong
-proc onbytesAvailable*(self: gen_qbuffer_types.QBuffer, slot: QBufferbytesAvailableProc) =
-  # TODO check subclass
-  var tmp = new QBufferbytesAvailableProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQBuffer_override_virtual_bytesAvailable(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QBuffer_bytesAvailable(self: ptr cQBuffer, slot: int): clonglong {.exportc: "miqt_exec_callback_QBuffer_bytesAvailable ".} =
-  var nimfunc = cast[ptr QBufferbytesAvailableProc](cast[pointer](slot))
-
-  let virtualReturn = nimfunc[]( )
-
+proc miqt_exec_callback_cQBuffer_bytesAvailable(vtbl: pointer, self: pointer): clonglong {.cdecl.} =
+  let vtbl = cast[ptr QBufferVTable](vtbl)
+  let self = QBuffer(h: self)
+  var virtualReturn = vtbl[].bytesAvailable(self)
   virtualReturn
+
 proc QBufferbytesToWrite*(self: gen_qbuffer_types.QBuffer, ): clonglong =
-  fQBuffer_virtualbase_bytesToWrite(self.h)
+  fcQBuffer_virtualbase_bytesToWrite(self.h)
 
-type QBufferbytesToWriteProc* = proc(): clonglong
-proc onbytesToWrite*(self: gen_qbuffer_types.QBuffer, slot: QBufferbytesToWriteProc) =
-  # TODO check subclass
-  var tmp = new QBufferbytesToWriteProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQBuffer_override_virtual_bytesToWrite(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QBuffer_bytesToWrite(self: ptr cQBuffer, slot: int): clonglong {.exportc: "miqt_exec_callback_QBuffer_bytesToWrite ".} =
-  var nimfunc = cast[ptr QBufferbytesToWriteProc](cast[pointer](slot))
-
-  let virtualReturn = nimfunc[]( )
-
+proc miqt_exec_callback_cQBuffer_bytesToWrite(vtbl: pointer, self: pointer): clonglong {.cdecl.} =
+  let vtbl = cast[ptr QBufferVTable](vtbl)
+  let self = QBuffer(h: self)
+  var virtualReturn = vtbl[].bytesToWrite(self)
   virtualReturn
+
 proc QBufferwaitForReadyRead*(self: gen_qbuffer_types.QBuffer, msecs: cint): bool =
-  fQBuffer_virtualbase_waitForReadyRead(self.h, msecs)
+  fcQBuffer_virtualbase_waitForReadyRead(self.h, msecs)
 
-type QBufferwaitForReadyReadProc* = proc(msecs: cint): bool
-proc onwaitForReadyRead*(self: gen_qbuffer_types.QBuffer, slot: QBufferwaitForReadyReadProc) =
-  # TODO check subclass
-  var tmp = new QBufferwaitForReadyReadProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQBuffer_override_virtual_waitForReadyRead(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QBuffer_waitForReadyRead(self: ptr cQBuffer, slot: int, msecs: cint): bool {.exportc: "miqt_exec_callback_QBuffer_waitForReadyRead ".} =
-  var nimfunc = cast[ptr QBufferwaitForReadyReadProc](cast[pointer](slot))
+proc miqt_exec_callback_cQBuffer_waitForReadyRead(vtbl: pointer, self: pointer, msecs: cint): bool {.cdecl.} =
+  let vtbl = cast[ptr QBufferVTable](vtbl)
+  let self = QBuffer(h: self)
   let slotval1 = msecs
-
-
-  let virtualReturn = nimfunc[](slotval1 )
-
+  var virtualReturn = vtbl[].waitForReadyRead(self, slotval1)
   virtualReturn
+
 proc QBufferwaitForBytesWritten*(self: gen_qbuffer_types.QBuffer, msecs: cint): bool =
-  fQBuffer_virtualbase_waitForBytesWritten(self.h, msecs)
+  fcQBuffer_virtualbase_waitForBytesWritten(self.h, msecs)
 
-type QBufferwaitForBytesWrittenProc* = proc(msecs: cint): bool
-proc onwaitForBytesWritten*(self: gen_qbuffer_types.QBuffer, slot: QBufferwaitForBytesWrittenProc) =
-  # TODO check subclass
-  var tmp = new QBufferwaitForBytesWrittenProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQBuffer_override_virtual_waitForBytesWritten(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QBuffer_waitForBytesWritten(self: ptr cQBuffer, slot: int, msecs: cint): bool {.exportc: "miqt_exec_callback_QBuffer_waitForBytesWritten ".} =
-  var nimfunc = cast[ptr QBufferwaitForBytesWrittenProc](cast[pointer](slot))
+proc miqt_exec_callback_cQBuffer_waitForBytesWritten(vtbl: pointer, self: pointer, msecs: cint): bool {.cdecl.} =
+  let vtbl = cast[ptr QBufferVTable](vtbl)
+  let self = QBuffer(h: self)
   let slotval1 = msecs
-
-
-  let virtualReturn = nimfunc[](slotval1 )
-
+  var virtualReturn = vtbl[].waitForBytesWritten(self, slotval1)
   virtualReturn
+
 proc QBufferreadLineData*(self: gen_qbuffer_types.QBuffer, data: cstring, maxlen: clonglong): clonglong =
-  fQBuffer_virtualbase_readLineData(self.h, data, maxlen)
+  fcQBuffer_virtualbase_readLineData(self.h, data, maxlen)
 
-type QBufferreadLineDataProc* = proc(data: cstring, maxlen: clonglong): clonglong
-proc onreadLineData*(self: gen_qbuffer_types.QBuffer, slot: QBufferreadLineDataProc) =
-  # TODO check subclass
-  var tmp = new QBufferreadLineDataProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQBuffer_override_virtual_readLineData(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QBuffer_readLineData(self: ptr cQBuffer, slot: int, data: cstring, maxlen: clonglong): clonglong {.exportc: "miqt_exec_callback_QBuffer_readLineData ".} =
-  var nimfunc = cast[ptr QBufferreadLineDataProc](cast[pointer](slot))
+proc miqt_exec_callback_cQBuffer_readLineData(vtbl: pointer, self: pointer, data: cstring, maxlen: clonglong): clonglong {.cdecl.} =
+  let vtbl = cast[ptr QBufferVTable](vtbl)
+  let self = QBuffer(h: self)
   let slotval1 = (data)
-
   let slotval2 = maxlen
-
-
-  let virtualReturn = nimfunc[](slotval1, slotval2 )
-
+  var virtualReturn = vtbl[].readLineData(self, slotval1, slotval2)
   virtualReturn
+
 proc QBufferskipData*(self: gen_qbuffer_types.QBuffer, maxSize: clonglong): clonglong =
-  fQBuffer_virtualbase_skipData(self.h, maxSize)
+  fcQBuffer_virtualbase_skipData(self.h, maxSize)
 
-type QBufferskipDataProc* = proc(maxSize: clonglong): clonglong
-proc onskipData*(self: gen_qbuffer_types.QBuffer, slot: QBufferskipDataProc) =
-  # TODO check subclass
-  var tmp = new QBufferskipDataProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQBuffer_override_virtual_skipData(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QBuffer_skipData(self: ptr cQBuffer, slot: int, maxSize: clonglong): clonglong {.exportc: "miqt_exec_callback_QBuffer_skipData ".} =
-  var nimfunc = cast[ptr QBufferskipDataProc](cast[pointer](slot))
+proc miqt_exec_callback_cQBuffer_skipData(vtbl: pointer, self: pointer, maxSize: clonglong): clonglong {.cdecl.} =
+  let vtbl = cast[ptr QBufferVTable](vtbl)
+  let self = QBuffer(h: self)
   let slotval1 = maxSize
-
-
-  let virtualReturn = nimfunc[](slotval1 )
-
+  var virtualReturn = vtbl[].skipData(self, slotval1)
   virtualReturn
+
 proc QBufferevent*(self: gen_qbuffer_types.QBuffer, event: gen_qcoreevent_types.QEvent): bool =
-  fQBuffer_virtualbase_event(self.h, event.h)
+  fcQBuffer_virtualbase_event(self.h, event.h)
 
-type QBuffereventProc* = proc(event: gen_qcoreevent_types.QEvent): bool
-proc onevent*(self: gen_qbuffer_types.QBuffer, slot: QBuffereventProc) =
-  # TODO check subclass
-  var tmp = new QBuffereventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQBuffer_override_virtual_event(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QBuffer_event(self: ptr cQBuffer, slot: int, event: pointer): bool {.exportc: "miqt_exec_callback_QBuffer_event ".} =
-  var nimfunc = cast[ptr QBuffereventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQBuffer_event(vtbl: pointer, self: pointer, event: pointer): bool {.cdecl.} =
+  let vtbl = cast[ptr QBufferVTable](vtbl)
+  let self = QBuffer(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event)
-
-
-  let virtualReturn = nimfunc[](slotval1 )
-
+  var virtualReturn = vtbl[].event(self, slotval1)
   virtualReturn
+
 proc QBuffereventFilter*(self: gen_qbuffer_types.QBuffer, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool =
-  fQBuffer_virtualbase_eventFilter(self.h, watched.h, event.h)
+  fcQBuffer_virtualbase_eventFilter(self.h, watched.h, event.h)
 
-type QBuffereventFilterProc* = proc(watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool
-proc oneventFilter*(self: gen_qbuffer_types.QBuffer, slot: QBuffereventFilterProc) =
-  # TODO check subclass
-  var tmp = new QBuffereventFilterProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQBuffer_override_virtual_eventFilter(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QBuffer_eventFilter(self: ptr cQBuffer, slot: int, watched: pointer, event: pointer): bool {.exportc: "miqt_exec_callback_QBuffer_eventFilter ".} =
-  var nimfunc = cast[ptr QBuffereventFilterProc](cast[pointer](slot))
+proc miqt_exec_callback_cQBuffer_eventFilter(vtbl: pointer, self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
+  let vtbl = cast[ptr QBufferVTable](vtbl)
+  let self = QBuffer(h: self)
   let slotval1 = gen_qobject_types.QObject(h: watched)
-
   let slotval2 = gen_qcoreevent_types.QEvent(h: event)
-
-
-  let virtualReturn = nimfunc[](slotval1, slotval2 )
-
+  var virtualReturn = vtbl[].eventFilter(self, slotval1, slotval2)
   virtualReturn
+
 proc QBuffertimerEvent*(self: gen_qbuffer_types.QBuffer, event: gen_qcoreevent_types.QTimerEvent): void =
-  fQBuffer_virtualbase_timerEvent(self.h, event.h)
+  fcQBuffer_virtualbase_timerEvent(self.h, event.h)
 
-type QBuffertimerEventProc* = proc(event: gen_qcoreevent_types.QTimerEvent): void
-proc ontimerEvent*(self: gen_qbuffer_types.QBuffer, slot: QBuffertimerEventProc) =
-  # TODO check subclass
-  var tmp = new QBuffertimerEventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQBuffer_override_virtual_timerEvent(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QBuffer_timerEvent(self: ptr cQBuffer, slot: int, event: pointer): void {.exportc: "miqt_exec_callback_QBuffer_timerEvent ".} =
-  var nimfunc = cast[ptr QBuffertimerEventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQBuffer_timerEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QBufferVTable](vtbl)
+  let self = QBuffer(h: self)
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event)
+  vtbl[].timerEvent(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QBufferchildEvent*(self: gen_qbuffer_types.QBuffer, event: gen_qcoreevent_types.QChildEvent): void =
-  fQBuffer_virtualbase_childEvent(self.h, event.h)
+  fcQBuffer_virtualbase_childEvent(self.h, event.h)
 
-type QBufferchildEventProc* = proc(event: gen_qcoreevent_types.QChildEvent): void
-proc onchildEvent*(self: gen_qbuffer_types.QBuffer, slot: QBufferchildEventProc) =
-  # TODO check subclass
-  var tmp = new QBufferchildEventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQBuffer_override_virtual_childEvent(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QBuffer_childEvent(self: ptr cQBuffer, slot: int, event: pointer): void {.exportc: "miqt_exec_callback_QBuffer_childEvent ".} =
-  var nimfunc = cast[ptr QBufferchildEventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQBuffer_childEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QBufferVTable](vtbl)
+  let self = QBuffer(h: self)
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: event)
+  vtbl[].childEvent(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QBuffercustomEvent*(self: gen_qbuffer_types.QBuffer, event: gen_qcoreevent_types.QEvent): void =
-  fQBuffer_virtualbase_customEvent(self.h, event.h)
+  fcQBuffer_virtualbase_customEvent(self.h, event.h)
 
-type QBuffercustomEventProc* = proc(event: gen_qcoreevent_types.QEvent): void
-proc oncustomEvent*(self: gen_qbuffer_types.QBuffer, slot: QBuffercustomEventProc) =
-  # TODO check subclass
-  var tmp = new QBuffercustomEventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQBuffer_override_virtual_customEvent(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QBuffer_customEvent(self: ptr cQBuffer, slot: int, event: pointer): void {.exportc: "miqt_exec_callback_QBuffer_customEvent ".} =
-  var nimfunc = cast[ptr QBuffercustomEventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQBuffer_customEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QBufferVTable](vtbl)
+  let self = QBuffer(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  vtbl[].customEvent(self, slotval1)
 
+proc create*(T: type gen_qbuffer_types.QBuffer,
+    vtbl: ref QBufferVTable = nil): gen_qbuffer_types.QBuffer =
+  let vtbl = if vtbl == nil: new QBufferVTable else: vtbl
+  GC_ref(vtbl)
+  vtbl.vtbl.destructor = proc(vtbl: ptr cQBufferVTable, _: ptr cQBuffer) {.cdecl.} =
+    let vtbl = cast[ref QBufferVTable](vtbl)
+    GC_unref(vtbl)
+  if not isNil(vtbl.metaObject):
+    vtbl[].vtbl.metaObject = miqt_exec_callback_cQBuffer_metaObject
+  if not isNil(vtbl.metacast):
+    vtbl[].vtbl.metacast = miqt_exec_callback_cQBuffer_metacast
+  if not isNil(vtbl.metacall):
+    vtbl[].vtbl.metacall = miqt_exec_callback_cQBuffer_metacall
+  if not isNil(vtbl.open):
+    vtbl[].vtbl.open = miqt_exec_callback_cQBuffer_open
+  if not isNil(vtbl.close):
+    vtbl[].vtbl.close = miqt_exec_callback_cQBuffer_close
+  if not isNil(vtbl.size):
+    vtbl[].vtbl.size = miqt_exec_callback_cQBuffer_size
+  if not isNil(vtbl.pos):
+    vtbl[].vtbl.pos = miqt_exec_callback_cQBuffer_pos
+  if not isNil(vtbl.seek):
+    vtbl[].vtbl.seek = miqt_exec_callback_cQBuffer_seek
+  if not isNil(vtbl.atEnd):
+    vtbl[].vtbl.atEnd = miqt_exec_callback_cQBuffer_atEnd
+  if not isNil(vtbl.canReadLine):
+    vtbl[].vtbl.canReadLine = miqt_exec_callback_cQBuffer_canReadLine
+  if not isNil(vtbl.connectNotify):
+    vtbl[].vtbl.connectNotify = miqt_exec_callback_cQBuffer_connectNotify
+  if not isNil(vtbl.disconnectNotify):
+    vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQBuffer_disconnectNotify
+  if not isNil(vtbl.readData):
+    vtbl[].vtbl.readData = miqt_exec_callback_cQBuffer_readData
+  if not isNil(vtbl.writeData):
+    vtbl[].vtbl.writeData = miqt_exec_callback_cQBuffer_writeData
+  if not isNil(vtbl.isSequential):
+    vtbl[].vtbl.isSequential = miqt_exec_callback_cQBuffer_isSequential
+  if not isNil(vtbl.reset):
+    vtbl[].vtbl.reset = miqt_exec_callback_cQBuffer_reset
+  if not isNil(vtbl.bytesAvailable):
+    vtbl[].vtbl.bytesAvailable = miqt_exec_callback_cQBuffer_bytesAvailable
+  if not isNil(vtbl.bytesToWrite):
+    vtbl[].vtbl.bytesToWrite = miqt_exec_callback_cQBuffer_bytesToWrite
+  if not isNil(vtbl.waitForReadyRead):
+    vtbl[].vtbl.waitForReadyRead = miqt_exec_callback_cQBuffer_waitForReadyRead
+  if not isNil(vtbl.waitForBytesWritten):
+    vtbl[].vtbl.waitForBytesWritten = miqt_exec_callback_cQBuffer_waitForBytesWritten
+  if not isNil(vtbl.readLineData):
+    vtbl[].vtbl.readLineData = miqt_exec_callback_cQBuffer_readLineData
+  if not isNil(vtbl.skipData):
+    vtbl[].vtbl.skipData = miqt_exec_callback_cQBuffer_skipData
+  if not isNil(vtbl.event):
+    vtbl[].vtbl.event = miqt_exec_callback_cQBuffer_event
+  if not isNil(vtbl.eventFilter):
+    vtbl[].vtbl.eventFilter = miqt_exec_callback_cQBuffer_eventFilter
+  if not isNil(vtbl.timerEvent):
+    vtbl[].vtbl.timerEvent = miqt_exec_callback_cQBuffer_timerEvent
+  if not isNil(vtbl.childEvent):
+    vtbl[].vtbl.childEvent = miqt_exec_callback_cQBuffer_childEvent
+  if not isNil(vtbl.customEvent):
+    vtbl[].vtbl.customEvent = miqt_exec_callback_cQBuffer_customEvent
+  gen_qbuffer_types.QBuffer(h: fcQBuffer_new(addr(vtbl[]), ))
 
-  nimfunc[](slotval1)
+proc create*(T: type gen_qbuffer_types.QBuffer,
+    parent: gen_qobject_types.QObject,
+    vtbl: ref QBufferVTable = nil): gen_qbuffer_types.QBuffer =
+  let vtbl = if vtbl == nil: new QBufferVTable else: vtbl
+  GC_ref(vtbl)
+  vtbl.vtbl.destructor = proc(vtbl: ptr cQBufferVTable, _: ptr cQBuffer) {.cdecl.} =
+    let vtbl = cast[ref QBufferVTable](vtbl)
+    GC_unref(vtbl)
+  if not isNil(vtbl.metaObject):
+    vtbl[].vtbl.metaObject = miqt_exec_callback_cQBuffer_metaObject
+  if not isNil(vtbl.metacast):
+    vtbl[].vtbl.metacast = miqt_exec_callback_cQBuffer_metacast
+  if not isNil(vtbl.metacall):
+    vtbl[].vtbl.metacall = miqt_exec_callback_cQBuffer_metacall
+  if not isNil(vtbl.open):
+    vtbl[].vtbl.open = miqt_exec_callback_cQBuffer_open
+  if not isNil(vtbl.close):
+    vtbl[].vtbl.close = miqt_exec_callback_cQBuffer_close
+  if not isNil(vtbl.size):
+    vtbl[].vtbl.size = miqt_exec_callback_cQBuffer_size
+  if not isNil(vtbl.pos):
+    vtbl[].vtbl.pos = miqt_exec_callback_cQBuffer_pos
+  if not isNil(vtbl.seek):
+    vtbl[].vtbl.seek = miqt_exec_callback_cQBuffer_seek
+  if not isNil(vtbl.atEnd):
+    vtbl[].vtbl.atEnd = miqt_exec_callback_cQBuffer_atEnd
+  if not isNil(vtbl.canReadLine):
+    vtbl[].vtbl.canReadLine = miqt_exec_callback_cQBuffer_canReadLine
+  if not isNil(vtbl.connectNotify):
+    vtbl[].vtbl.connectNotify = miqt_exec_callback_cQBuffer_connectNotify
+  if not isNil(vtbl.disconnectNotify):
+    vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQBuffer_disconnectNotify
+  if not isNil(vtbl.readData):
+    vtbl[].vtbl.readData = miqt_exec_callback_cQBuffer_readData
+  if not isNil(vtbl.writeData):
+    vtbl[].vtbl.writeData = miqt_exec_callback_cQBuffer_writeData
+  if not isNil(vtbl.isSequential):
+    vtbl[].vtbl.isSequential = miqt_exec_callback_cQBuffer_isSequential
+  if not isNil(vtbl.reset):
+    vtbl[].vtbl.reset = miqt_exec_callback_cQBuffer_reset
+  if not isNil(vtbl.bytesAvailable):
+    vtbl[].vtbl.bytesAvailable = miqt_exec_callback_cQBuffer_bytesAvailable
+  if not isNil(vtbl.bytesToWrite):
+    vtbl[].vtbl.bytesToWrite = miqt_exec_callback_cQBuffer_bytesToWrite
+  if not isNil(vtbl.waitForReadyRead):
+    vtbl[].vtbl.waitForReadyRead = miqt_exec_callback_cQBuffer_waitForReadyRead
+  if not isNil(vtbl.waitForBytesWritten):
+    vtbl[].vtbl.waitForBytesWritten = miqt_exec_callback_cQBuffer_waitForBytesWritten
+  if not isNil(vtbl.readLineData):
+    vtbl[].vtbl.readLineData = miqt_exec_callback_cQBuffer_readLineData
+  if not isNil(vtbl.skipData):
+    vtbl[].vtbl.skipData = miqt_exec_callback_cQBuffer_skipData
+  if not isNil(vtbl.event):
+    vtbl[].vtbl.event = miqt_exec_callback_cQBuffer_event
+  if not isNil(vtbl.eventFilter):
+    vtbl[].vtbl.eventFilter = miqt_exec_callback_cQBuffer_eventFilter
+  if not isNil(vtbl.timerEvent):
+    vtbl[].vtbl.timerEvent = miqt_exec_callback_cQBuffer_timerEvent
+  if not isNil(vtbl.childEvent):
+    vtbl[].vtbl.childEvent = miqt_exec_callback_cQBuffer_childEvent
+  if not isNil(vtbl.customEvent):
+    vtbl[].vtbl.customEvent = miqt_exec_callback_cQBuffer_customEvent
+  gen_qbuffer_types.QBuffer(h: fcQBuffer_new2(addr(vtbl[]), parent.h))
+
 proc staticMetaObject*(_: type gen_qbuffer_types.QBuffer): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQBuffer_staticMetaObject())
 proc delete*(self: gen_qbuffer_types.QBuffer) =

@@ -56,7 +56,6 @@ export
 
 type cQCommandLineParser*{.exportc: "QCommandLineParser", incompleteStruct.} = object
 
-proc fcQCommandLineParser_new(): ptr cQCommandLineParser {.importc: "QCommandLineParser_new".}
 proc fcQCommandLineParser_tr(sourceText: cstring): struct_miqt_string {.importc: "QCommandLineParser_tr".}
 proc fcQCommandLineParser_setSingleDashWordOptionMode(self: pointer, parsingMode: cint): void {.importc: "QCommandLineParser_setSingleDashWordOptionMode".}
 proc fcQCommandLineParser_setOptionsAfterPositionalArgumentsMode(self: pointer, mode: cint): void {.importc: "QCommandLineParser_setOptionsAfterPositionalArgumentsMode".}
@@ -88,13 +87,8 @@ proc fcQCommandLineParser_tr2(sourceText: cstring, disambiguation: cstring): str
 proc fcQCommandLineParser_tr3(sourceText: cstring, disambiguation: cstring, n: cint): struct_miqt_string {.importc: "QCommandLineParser_tr3".}
 proc fcQCommandLineParser_addPositionalArgument3(self: pointer, name: struct_miqt_string, description: struct_miqt_string, syntax: struct_miqt_string): void {.importc: "QCommandLineParser_addPositionalArgument3".}
 proc fcQCommandLineParser_showHelp1(self: pointer, exitCode: cint): void {.importc: "QCommandLineParser_showHelp1".}
+proc fcQCommandLineParser_new(): ptr cQCommandLineParser {.importc: "QCommandLineParser_new".}
 proc fcQCommandLineParser_delete(self: pointer) {.importc: "QCommandLineParser_delete".}
-
-
-func init*(T: type gen_qcommandlineparser_types.QCommandLineParser, h: ptr cQCommandLineParser): gen_qcommandlineparser_types.QCommandLineParser =
-  T(h: h)
-proc create*(T: type gen_qcommandlineparser_types.QCommandLineParser, ): gen_qcommandlineparser_types.QCommandLineParser =
-  gen_qcommandlineparser_types.QCommandLineParser.init(fcQCommandLineParser_new())
 
 proc tr*(_: type gen_qcommandlineparser_types.QCommandLineParser, sourceText: cstring): string =
   let v_ms = fcQCommandLineParser_tr(sourceText)
@@ -264,6 +258,9 @@ proc addPositionalArgument*(self: gen_qcommandlineparser_types.QCommandLineParse
 
 proc showHelp*(self: gen_qcommandlineparser_types.QCommandLineParser, exitCode: cint): void =
   fcQCommandLineParser_showHelp1(self.h, exitCode)
+
+proc create*(T: type gen_qcommandlineparser_types.QCommandLineParser): gen_qcommandlineparser_types.QCommandLineParser =
+  gen_qcommandlineparser_types.QCommandLineParser(h: fcQCommandLineParser_new())
 
 proc delete*(self: gen_qcommandlineparser_types.QCommandLineParser) =
   fcQCommandLineParser_delete(self.h)

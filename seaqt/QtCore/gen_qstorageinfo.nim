@@ -44,10 +44,6 @@ export
 
 type cQStorageInfo*{.exportc: "QStorageInfo", incompleteStruct.} = object
 
-proc fcQStorageInfo_new(): ptr cQStorageInfo {.importc: "QStorageInfo_new".}
-proc fcQStorageInfo_new2(path: struct_miqt_string): ptr cQStorageInfo {.importc: "QStorageInfo_new2".}
-proc fcQStorageInfo_new3(dir: pointer): ptr cQStorageInfo {.importc: "QStorageInfo_new3".}
-proc fcQStorageInfo_new4(other: pointer): ptr cQStorageInfo {.importc: "QStorageInfo_new4".}
 proc fcQStorageInfo_operatorAssign(self: pointer, other: pointer): void {.importc: "QStorageInfo_operatorAssign".}
 proc fcQStorageInfo_swap(self: pointer, other: pointer): void {.importc: "QStorageInfo_swap".}
 proc fcQStorageInfo_setPath(self: pointer, path: struct_miqt_string): void {.importc: "QStorageInfo_setPath".}
@@ -68,22 +64,11 @@ proc fcQStorageInfo_isValid(self: pointer, ): bool {.importc: "QStorageInfo_isVa
 proc fcQStorageInfo_refresh(self: pointer, ): void {.importc: "QStorageInfo_refresh".}
 proc fcQStorageInfo_mountedVolumes(): struct_miqt_array {.importc: "QStorageInfo_mountedVolumes".}
 proc fcQStorageInfo_root(): pointer {.importc: "QStorageInfo_root".}
+proc fcQStorageInfo_new(): ptr cQStorageInfo {.importc: "QStorageInfo_new".}
+proc fcQStorageInfo_new2(path: struct_miqt_string): ptr cQStorageInfo {.importc: "QStorageInfo_new2".}
+proc fcQStorageInfo_new3(dir: pointer): ptr cQStorageInfo {.importc: "QStorageInfo_new3".}
+proc fcQStorageInfo_new4(other: pointer): ptr cQStorageInfo {.importc: "QStorageInfo_new4".}
 proc fcQStorageInfo_delete(self: pointer) {.importc: "QStorageInfo_delete".}
-
-
-func init*(T: type gen_qstorageinfo_types.QStorageInfo, h: ptr cQStorageInfo): gen_qstorageinfo_types.QStorageInfo =
-  T(h: h)
-proc create*(T: type gen_qstorageinfo_types.QStorageInfo, ): gen_qstorageinfo_types.QStorageInfo =
-  gen_qstorageinfo_types.QStorageInfo.init(fcQStorageInfo_new())
-
-proc create*(T: type gen_qstorageinfo_types.QStorageInfo, path: string): gen_qstorageinfo_types.QStorageInfo =
-  gen_qstorageinfo_types.QStorageInfo.init(fcQStorageInfo_new2(struct_miqt_string(data: path, len: csize_t(len(path)))))
-
-proc create*(T: type gen_qstorageinfo_types.QStorageInfo, dir: gen_qdir_types.QDir): gen_qstorageinfo_types.QStorageInfo =
-  gen_qstorageinfo_types.QStorageInfo.init(fcQStorageInfo_new3(dir.h))
-
-proc create*(T: type gen_qstorageinfo_types.QStorageInfo, other: gen_qstorageinfo_types.QStorageInfo): gen_qstorageinfo_types.QStorageInfo =
-  gen_qstorageinfo_types.QStorageInfo.init(fcQStorageInfo_new4(other.h))
 
 proc operatorAssign*(self: gen_qstorageinfo_types.QStorageInfo, other: gen_qstorageinfo_types.QStorageInfo): void =
   fcQStorageInfo_operatorAssign(self.h, other.h)
@@ -167,6 +152,21 @@ proc mountedVolumes*(_: type gen_qstorageinfo_types.QStorageInfo, ): seq[gen_qst
 
 proc root*(_: type gen_qstorageinfo_types.QStorageInfo, ): gen_qstorageinfo_types.QStorageInfo =
   gen_qstorageinfo_types.QStorageInfo(h: fcQStorageInfo_root())
+
+proc create*(T: type gen_qstorageinfo_types.QStorageInfo): gen_qstorageinfo_types.QStorageInfo =
+  gen_qstorageinfo_types.QStorageInfo(h: fcQStorageInfo_new())
+
+proc create*(T: type gen_qstorageinfo_types.QStorageInfo,
+    path: string): gen_qstorageinfo_types.QStorageInfo =
+  gen_qstorageinfo_types.QStorageInfo(h: fcQStorageInfo_new2(struct_miqt_string(data: path, len: csize_t(len(path)))))
+
+proc create*(T: type gen_qstorageinfo_types.QStorageInfo,
+    dir: gen_qdir_types.QDir): gen_qstorageinfo_types.QStorageInfo =
+  gen_qstorageinfo_types.QStorageInfo(h: fcQStorageInfo_new3(dir.h))
+
+proc create*(T: type gen_qstorageinfo_types.QStorageInfo,
+    other: gen_qstorageinfo_types.QStorageInfo): gen_qstorageinfo_types.QStorageInfo =
+  gen_qstorageinfo_types.QStorageInfo(h: fcQStorageInfo_new4(other.h))
 
 proc delete*(self: gen_qstorageinfo_types.QStorageInfo) =
   fcQStorageInfo_delete(self.h)

@@ -40,21 +40,12 @@ export gen_qhashfunctions_types
 
 type cQHashSeed*{.exportc: "QHashSeed", incompleteStruct.} = object
 
-proc fcQHashSeed_new(): ptr cQHashSeed {.importc: "QHashSeed_new".}
-proc fcQHashSeed_new2(d: csize_t): ptr cQHashSeed {.importc: "QHashSeed_new2".}
 proc fcQHashSeed_globalSeed(): pointer {.importc: "QHashSeed_globalSeed".}
 proc fcQHashSeed_setDeterministicGlobalSeed(): void {.importc: "QHashSeed_setDeterministicGlobalSeed".}
 proc fcQHashSeed_resetRandomGlobalSeed(): void {.importc: "QHashSeed_resetRandomGlobalSeed".}
+proc fcQHashSeed_new(): ptr cQHashSeed {.importc: "QHashSeed_new".}
+proc fcQHashSeed_new2(d: csize_t): ptr cQHashSeed {.importc: "QHashSeed_new2".}
 proc fcQHashSeed_delete(self: pointer) {.importc: "QHashSeed_delete".}
-
-
-func init*(T: type gen_qhashfunctions_types.QHashSeed, h: ptr cQHashSeed): gen_qhashfunctions_types.QHashSeed =
-  T(h: h)
-proc create*(T: type gen_qhashfunctions_types.QHashSeed, ): gen_qhashfunctions_types.QHashSeed =
-  gen_qhashfunctions_types.QHashSeed.init(fcQHashSeed_new())
-
-proc create*(T: type gen_qhashfunctions_types.QHashSeed, d: csize_t): gen_qhashfunctions_types.QHashSeed =
-  gen_qhashfunctions_types.QHashSeed.init(fcQHashSeed_new2(d))
 
 proc globalSeed*(_: type gen_qhashfunctions_types.QHashSeed, ): gen_qhashfunctions_types.QHashSeed =
   gen_qhashfunctions_types.QHashSeed(h: fcQHashSeed_globalSeed())
@@ -64,6 +55,13 @@ proc setDeterministicGlobalSeed*(_: type gen_qhashfunctions_types.QHashSeed, ): 
 
 proc resetRandomGlobalSeed*(_: type gen_qhashfunctions_types.QHashSeed, ): void =
   fcQHashSeed_resetRandomGlobalSeed()
+
+proc create*(T: type gen_qhashfunctions_types.QHashSeed): gen_qhashfunctions_types.QHashSeed =
+  gen_qhashfunctions_types.QHashSeed(h: fcQHashSeed_new())
+
+proc create*(T: type gen_qhashfunctions_types.QHashSeed,
+    d: csize_t): gen_qhashfunctions_types.QHashSeed =
+  gen_qhashfunctions_types.QHashSeed(h: fcQHashSeed_new2(d))
 
 proc delete*(self: gen_qhashfunctions_types.QHashSeed) =
   fcQHashSeed_delete(self.h)

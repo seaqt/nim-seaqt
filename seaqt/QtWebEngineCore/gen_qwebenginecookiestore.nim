@@ -70,13 +70,10 @@ proc fcQWebEngineCookieStore_setCookie2(self: pointer, cookie: pointer, origin: 
 proc fcQWebEngineCookieStore_deleteCookie2(self: pointer, cookie: pointer, origin: pointer): void {.importc: "QWebEngineCookieStore_deleteCookie2".}
 proc fcQWebEngineCookieStore_staticMetaObject(): pointer {.importc: "QWebEngineCookieStore_staticMetaObject".}
 proc fcQWebEngineCookieStore_delete(self: pointer) {.importc: "QWebEngineCookieStore_delete".}
-proc fcQWebEngineCookieStoreFilterRequest_new(param1: pointer): ptr cQWebEngineCookieStoreFilterRequest {.importc: "QWebEngineCookieStore__FilterRequest_new".}
 proc fcQWebEngineCookieStoreFilterRequest_operatorAssign(self: pointer, param1: pointer): void {.importc: "QWebEngineCookieStore__FilterRequest_operatorAssign".}
+proc fcQWebEngineCookieStoreFilterRequest_new(param1: pointer): ptr cQWebEngineCookieStoreFilterRequest {.importc: "QWebEngineCookieStore__FilterRequest_new".}
 proc fcQWebEngineCookieStoreFilterRequest_delete(self: pointer) {.importc: "QWebEngineCookieStore__FilterRequest_delete".}
 
-
-func init*(T: type gen_qwebenginecookiestore_types.QWebEngineCookieStore, h: ptr cQWebEngineCookieStore): gen_qwebenginecookiestore_types.QWebEngineCookieStore =
-  T(h: h)
 proc metaObject*(self: gen_qwebenginecookiestore_types.QWebEngineCookieStore, ): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQWebEngineCookieStore_metaObject(self.h))
 
@@ -111,7 +108,7 @@ proc cookieAdded*(self: gen_qwebenginecookiestore_types.QWebEngineCookieStore, c
   fcQWebEngineCookieStore_cookieAdded(self.h, cookie.h)
 
 type QWebEngineCookieStorecookieAddedSlot* = proc(cookie: gen_qnetworkcookie_types.QNetworkCookie)
-proc miqt_exec_callback_QWebEngineCookieStore_cookieAdded(slot: int, cookie: pointer) {.exportc.} =
+proc miqt_exec_callback_cQWebEngineCookieStore_cookieAdded(slot: int, cookie: pointer) {.exportc: "miqt_exec_callback_QWebEngineCookieStore_cookieAdded".} =
   let nimfunc = cast[ptr QWebEngineCookieStorecookieAddedSlot](cast[pointer](slot))
   let slotval1 = gen_qnetworkcookie_types.QNetworkCookie(h: cookie)
 
@@ -127,7 +124,7 @@ proc cookieRemoved*(self: gen_qwebenginecookiestore_types.QWebEngineCookieStore,
   fcQWebEngineCookieStore_cookieRemoved(self.h, cookie.h)
 
 type QWebEngineCookieStorecookieRemovedSlot* = proc(cookie: gen_qnetworkcookie_types.QNetworkCookie)
-proc miqt_exec_callback_QWebEngineCookieStore_cookieRemoved(slot: int, cookie: pointer) {.exportc.} =
+proc miqt_exec_callback_cQWebEngineCookieStore_cookieRemoved(slot: int, cookie: pointer) {.exportc: "miqt_exec_callback_QWebEngineCookieStore_cookieRemoved".} =
   let nimfunc = cast[ptr QWebEngineCookieStorecookieRemovedSlot](cast[pointer](slot))
   let slotval1 = gen_qnetworkcookie_types.QNetworkCookie(h: cookie)
 
@@ -161,14 +158,12 @@ proc staticMetaObject*(_: type gen_qwebenginecookiestore_types.QWebEngineCookieS
   gen_qobjectdefs_types.QMetaObject(h: fcQWebEngineCookieStore_staticMetaObject())
 proc delete*(self: gen_qwebenginecookiestore_types.QWebEngineCookieStore) =
   fcQWebEngineCookieStore_delete(self.h)
-
-func init*(T: type gen_qwebenginecookiestore_types.QWebEngineCookieStoreFilterRequest, h: ptr cQWebEngineCookieStoreFilterRequest): gen_qwebenginecookiestore_types.QWebEngineCookieStoreFilterRequest =
-  T(h: h)
-proc create*(T: type gen_qwebenginecookiestore_types.QWebEngineCookieStoreFilterRequest, param1: gen_qwebenginecookiestore_types.QWebEngineCookieStoreFilterRequest): gen_qwebenginecookiestore_types.QWebEngineCookieStoreFilterRequest =
-  gen_qwebenginecookiestore_types.QWebEngineCookieStoreFilterRequest.init(fcQWebEngineCookieStoreFilterRequest_new(param1.h))
-
 proc operatorAssign*(self: gen_qwebenginecookiestore_types.QWebEngineCookieStoreFilterRequest, param1: gen_qwebenginecookiestore_types.QWebEngineCookieStoreFilterRequest): void =
   fcQWebEngineCookieStoreFilterRequest_operatorAssign(self.h, param1.h)
+
+proc create*(T: type gen_qwebenginecookiestore_types.QWebEngineCookieStoreFilterRequest,
+    param1: gen_qwebenginecookiestore_types.QWebEngineCookieStoreFilterRequest): gen_qwebenginecookiestore_types.QWebEngineCookieStoreFilterRequest =
+  gen_qwebenginecookiestore_types.QWebEngineCookieStoreFilterRequest(h: fcQWebEngineCookieStoreFilterRequest_new(param1.h))
 
 proc delete*(self: gen_qwebenginecookiestore_types.QWebEngineCookieStoreFilterRequest) =
   fcQWebEngineCookieStoreFilterRequest_delete(self.h)

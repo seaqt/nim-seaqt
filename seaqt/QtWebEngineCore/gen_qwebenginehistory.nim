@@ -64,7 +64,6 @@ type cQWebEngineHistoryItem*{.exportc: "QWebEngineHistoryItem", incompleteStruct
 type cQWebEngineHistoryModel*{.exportc: "QWebEngineHistoryModel", incompleteStruct.} = object
 type cQWebEngineHistory*{.exportc: "QWebEngineHistory", incompleteStruct.} = object
 
-proc fcQWebEngineHistoryItem_new(other: pointer): ptr cQWebEngineHistoryItem {.importc: "QWebEngineHistoryItem_new".}
 proc fcQWebEngineHistoryItem_operatorAssign(self: pointer, other: pointer): void {.importc: "QWebEngineHistoryItem_operatorAssign".}
 proc fcQWebEngineHistoryItem_originalUrl(self: pointer, ): pointer {.importc: "QWebEngineHistoryItem_originalUrl".}
 proc fcQWebEngineHistoryItem_url(self: pointer, ): pointer {.importc: "QWebEngineHistoryItem_url".}
@@ -73,6 +72,7 @@ proc fcQWebEngineHistoryItem_lastVisited(self: pointer, ): pointer {.importc: "Q
 proc fcQWebEngineHistoryItem_iconUrl(self: pointer, ): pointer {.importc: "QWebEngineHistoryItem_iconUrl".}
 proc fcQWebEngineHistoryItem_isValid(self: pointer, ): bool {.importc: "QWebEngineHistoryItem_isValid".}
 proc fcQWebEngineHistoryItem_swap(self: pointer, other: pointer): void {.importc: "QWebEngineHistoryItem_swap".}
+proc fcQWebEngineHistoryItem_new(other: pointer): ptr cQWebEngineHistoryItem {.importc: "QWebEngineHistoryItem_new".}
 proc fcQWebEngineHistoryItem_delete(self: pointer) {.importc: "QWebEngineHistoryItem_delete".}
 proc fcQWebEngineHistoryModel_metaObject(self: pointer, ): pointer {.importc: "QWebEngineHistoryModel_metaObject".}
 proc fcQWebEngineHistoryModel_metacast(self: pointer, param1: cstring): pointer {.importc: "QWebEngineHistoryModel_metacast".}
@@ -111,12 +111,6 @@ proc fcQWebEngineHistory_tr2(s: cstring, c: cstring): struct_miqt_string {.impor
 proc fcQWebEngineHistory_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QWebEngineHistory_tr3".}
 proc fcQWebEngineHistory_staticMetaObject(): pointer {.importc: "QWebEngineHistory_staticMetaObject".}
 
-
-func init*(T: type gen_qwebenginehistory_types.QWebEngineHistoryItem, h: ptr cQWebEngineHistoryItem): gen_qwebenginehistory_types.QWebEngineHistoryItem =
-  T(h: h)
-proc create*(T: type gen_qwebenginehistory_types.QWebEngineHistoryItem, other: gen_qwebenginehistory_types.QWebEngineHistoryItem): gen_qwebenginehistory_types.QWebEngineHistoryItem =
-  gen_qwebenginehistory_types.QWebEngineHistoryItem.init(fcQWebEngineHistoryItem_new(other.h))
-
 proc operatorAssign*(self: gen_qwebenginehistory_types.QWebEngineHistoryItem, other: gen_qwebenginehistory_types.QWebEngineHistoryItem): void =
   fcQWebEngineHistoryItem_operatorAssign(self.h, other.h)
 
@@ -144,11 +138,12 @@ proc isValid*(self: gen_qwebenginehistory_types.QWebEngineHistoryItem, ): bool =
 proc swap*(self: gen_qwebenginehistory_types.QWebEngineHistoryItem, other: gen_qwebenginehistory_types.QWebEngineHistoryItem): void =
   fcQWebEngineHistoryItem_swap(self.h, other.h)
 
+proc create*(T: type gen_qwebenginehistory_types.QWebEngineHistoryItem,
+    other: gen_qwebenginehistory_types.QWebEngineHistoryItem): gen_qwebenginehistory_types.QWebEngineHistoryItem =
+  gen_qwebenginehistory_types.QWebEngineHistoryItem(h: fcQWebEngineHistoryItem_new(other.h))
+
 proc delete*(self: gen_qwebenginehistory_types.QWebEngineHistoryItem) =
   fcQWebEngineHistoryItem_delete(self.h)
-
-func init*(T: type gen_qwebenginehistory_types.QWebEngineHistoryModel, h: ptr cQWebEngineHistoryModel): gen_qwebenginehistory_types.QWebEngineHistoryModel =
-  T(h: h)
 proc metaObject*(self: gen_qwebenginehistory_types.QWebEngineHistoryModel, ): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQWebEngineHistoryModel_metaObject(self.h))
 
@@ -203,9 +198,6 @@ proc tr*(_: type gen_qwebenginehistory_types.QWebEngineHistoryModel, s: cstring,
 
 proc staticMetaObject*(_: type gen_qwebenginehistory_types.QWebEngineHistoryModel): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQWebEngineHistoryModel_staticMetaObject())
-
-func init*(T: type gen_qwebenginehistory_types.QWebEngineHistory, h: ptr cQWebEngineHistory): gen_qwebenginehistory_types.QWebEngineHistory =
-  T(h: h)
 proc metaObject*(self: gen_qwebenginehistory_types.QWebEngineHistory, ): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQWebEngineHistory_metaObject(self.h))
 

@@ -206,69 +206,83 @@ proc fcQAccessibleHyperlinkInterface_endIndex(self: pointer, ): cint {.importc: 
 proc fcQAccessibleHyperlinkInterface_isValid(self: pointer, ): bool {.importc: "QAccessibleHyperlinkInterface_isValid".}
 proc fcQAccessibleHyperlinkInterface_operatorAssign(self: pointer, param1: pointer): void {.importc: "QAccessibleHyperlinkInterface_operatorAssign".}
 proc fcQAccessibleHyperlinkInterface_delete(self: pointer) {.importc: "QAccessibleHyperlinkInterface_delete".}
-proc fcQAccessibleEvent_new(obj: pointer, typ: cint): ptr cQAccessibleEvent {.importc: "QAccessibleEvent_new".}
-proc fcQAccessibleEvent_new2(iface: pointer, typ: cint): ptr cQAccessibleEvent {.importc: "QAccessibleEvent_new2".}
 proc fcQAccessibleEvent_typeX(self: pointer, ): cint {.importc: "QAccessibleEvent_type".}
 proc fcQAccessibleEvent_objectX(self: pointer, ): pointer {.importc: "QAccessibleEvent_object".}
 proc fcQAccessibleEvent_uniqueId(self: pointer, ): cuint {.importc: "QAccessibleEvent_uniqueId".}
 proc fcQAccessibleEvent_setChild(self: pointer, chld: cint): void {.importc: "QAccessibleEvent_setChild".}
 proc fcQAccessibleEvent_child(self: pointer, ): cint {.importc: "QAccessibleEvent_child".}
 proc fcQAccessibleEvent_accessibleInterface(self: pointer, ): pointer {.importc: "QAccessibleEvent_accessibleInterface".}
-proc fQAccessibleEvent_virtualbase_accessibleInterface(self: pointer, ): pointer{.importc: "QAccessibleEvent_virtualbase_accessibleInterface".}
-proc fcQAccessibleEvent_override_virtual_accessibleInterface(self: pointer, slot: int) {.importc: "QAccessibleEvent_override_virtual_accessibleInterface".}
+type cQAccessibleEventVTable = object
+  destructor*: proc(vtbl: ptr cQAccessibleEventVTable, self: ptr cQAccessibleEvent) {.cdecl, raises:[], gcsafe.}
+  accessibleInterface*: proc(vtbl, self: pointer, ): pointer {.cdecl, raises: [], gcsafe.}
+proc fcQAccessibleEvent_virtualbase_accessibleInterface(self: pointer, ): pointer {.importc: "QAccessibleEvent_virtualbase_accessibleInterface".}
+proc fcQAccessibleEvent_new(vtbl: pointer, obj: pointer, typ: cint): ptr cQAccessibleEvent {.importc: "QAccessibleEvent_new".}
+proc fcQAccessibleEvent_new2(vtbl: pointer, iface: pointer, typ: cint): ptr cQAccessibleEvent {.importc: "QAccessibleEvent_new2".}
 proc fcQAccessibleEvent_delete(self: pointer) {.importc: "QAccessibleEvent_delete".}
-proc fcQAccessibleStateChangeEvent_new(obj: pointer, state: pointer): ptr cQAccessibleStateChangeEvent {.importc: "QAccessibleStateChangeEvent_new".}
-proc fcQAccessibleStateChangeEvent_new2(iface: pointer, state: pointer): ptr cQAccessibleStateChangeEvent {.importc: "QAccessibleStateChangeEvent_new2".}
 proc fcQAccessibleStateChangeEvent_changedStates(self: pointer, ): pointer {.importc: "QAccessibleStateChangeEvent_changedStates".}
-proc fQAccessibleStateChangeEvent_virtualbase_accessibleInterface(self: pointer, ): pointer{.importc: "QAccessibleStateChangeEvent_virtualbase_accessibleInterface".}
-proc fcQAccessibleStateChangeEvent_override_virtual_accessibleInterface(self: pointer, slot: int) {.importc: "QAccessibleStateChangeEvent_override_virtual_accessibleInterface".}
+type cQAccessibleStateChangeEventVTable = object
+  destructor*: proc(vtbl: ptr cQAccessibleStateChangeEventVTable, self: ptr cQAccessibleStateChangeEvent) {.cdecl, raises:[], gcsafe.}
+  accessibleInterface*: proc(vtbl, self: pointer, ): pointer {.cdecl, raises: [], gcsafe.}
+proc fcQAccessibleStateChangeEvent_virtualbase_accessibleInterface(self: pointer, ): pointer {.importc: "QAccessibleStateChangeEvent_virtualbase_accessibleInterface".}
+proc fcQAccessibleStateChangeEvent_new(vtbl: pointer, obj: pointer, state: pointer): ptr cQAccessibleStateChangeEvent {.importc: "QAccessibleStateChangeEvent_new".}
+proc fcQAccessibleStateChangeEvent_new2(vtbl: pointer, iface: pointer, state: pointer): ptr cQAccessibleStateChangeEvent {.importc: "QAccessibleStateChangeEvent_new2".}
 proc fcQAccessibleStateChangeEvent_delete(self: pointer) {.importc: "QAccessibleStateChangeEvent_delete".}
-proc fcQAccessibleTextCursorEvent_new(obj: pointer, cursorPos: cint): ptr cQAccessibleTextCursorEvent {.importc: "QAccessibleTextCursorEvent_new".}
-proc fcQAccessibleTextCursorEvent_new2(iface: pointer, cursorPos: cint): ptr cQAccessibleTextCursorEvent {.importc: "QAccessibleTextCursorEvent_new2".}
 proc fcQAccessibleTextCursorEvent_setCursorPosition(self: pointer, position: cint): void {.importc: "QAccessibleTextCursorEvent_setCursorPosition".}
 proc fcQAccessibleTextCursorEvent_cursorPosition(self: pointer, ): cint {.importc: "QAccessibleTextCursorEvent_cursorPosition".}
-proc fQAccessibleTextCursorEvent_virtualbase_accessibleInterface(self: pointer, ): pointer{.importc: "QAccessibleTextCursorEvent_virtualbase_accessibleInterface".}
-proc fcQAccessibleTextCursorEvent_override_virtual_accessibleInterface(self: pointer, slot: int) {.importc: "QAccessibleTextCursorEvent_override_virtual_accessibleInterface".}
+type cQAccessibleTextCursorEventVTable = object
+  destructor*: proc(vtbl: ptr cQAccessibleTextCursorEventVTable, self: ptr cQAccessibleTextCursorEvent) {.cdecl, raises:[], gcsafe.}
+  accessibleInterface*: proc(vtbl, self: pointer, ): pointer {.cdecl, raises: [], gcsafe.}
+proc fcQAccessibleTextCursorEvent_virtualbase_accessibleInterface(self: pointer, ): pointer {.importc: "QAccessibleTextCursorEvent_virtualbase_accessibleInterface".}
+proc fcQAccessibleTextCursorEvent_new(vtbl: pointer, obj: pointer, cursorPos: cint): ptr cQAccessibleTextCursorEvent {.importc: "QAccessibleTextCursorEvent_new".}
+proc fcQAccessibleTextCursorEvent_new2(vtbl: pointer, iface: pointer, cursorPos: cint): ptr cQAccessibleTextCursorEvent {.importc: "QAccessibleTextCursorEvent_new2".}
 proc fcQAccessibleTextCursorEvent_delete(self: pointer) {.importc: "QAccessibleTextCursorEvent_delete".}
-proc fcQAccessibleTextSelectionEvent_new(obj: pointer, start: cint, endVal: cint): ptr cQAccessibleTextSelectionEvent {.importc: "QAccessibleTextSelectionEvent_new".}
-proc fcQAccessibleTextSelectionEvent_new2(iface: pointer, start: cint, endVal: cint): ptr cQAccessibleTextSelectionEvent {.importc: "QAccessibleTextSelectionEvent_new2".}
 proc fcQAccessibleTextSelectionEvent_setSelection(self: pointer, start: cint, endVal: cint): void {.importc: "QAccessibleTextSelectionEvent_setSelection".}
 proc fcQAccessibleTextSelectionEvent_selectionStart(self: pointer, ): cint {.importc: "QAccessibleTextSelectionEvent_selectionStart".}
 proc fcQAccessibleTextSelectionEvent_selectionEnd(self: pointer, ): cint {.importc: "QAccessibleTextSelectionEvent_selectionEnd".}
-proc fQAccessibleTextSelectionEvent_virtualbase_accessibleInterface(self: pointer, ): pointer{.importc: "QAccessibleTextSelectionEvent_virtualbase_accessibleInterface".}
-proc fcQAccessibleTextSelectionEvent_override_virtual_accessibleInterface(self: pointer, slot: int) {.importc: "QAccessibleTextSelectionEvent_override_virtual_accessibleInterface".}
+type cQAccessibleTextSelectionEventVTable = object
+  destructor*: proc(vtbl: ptr cQAccessibleTextSelectionEventVTable, self: ptr cQAccessibleTextSelectionEvent) {.cdecl, raises:[], gcsafe.}
+  accessibleInterface*: proc(vtbl, self: pointer, ): pointer {.cdecl, raises: [], gcsafe.}
+proc fcQAccessibleTextSelectionEvent_virtualbase_accessibleInterface(self: pointer, ): pointer {.importc: "QAccessibleTextSelectionEvent_virtualbase_accessibleInterface".}
+proc fcQAccessibleTextSelectionEvent_new(vtbl: pointer, obj: pointer, start: cint, endVal: cint): ptr cQAccessibleTextSelectionEvent {.importc: "QAccessibleTextSelectionEvent_new".}
+proc fcQAccessibleTextSelectionEvent_new2(vtbl: pointer, iface: pointer, start: cint, endVal: cint): ptr cQAccessibleTextSelectionEvent {.importc: "QAccessibleTextSelectionEvent_new2".}
 proc fcQAccessibleTextSelectionEvent_delete(self: pointer) {.importc: "QAccessibleTextSelectionEvent_delete".}
-proc fcQAccessibleTextInsertEvent_new(obj: pointer, position: cint, text: struct_miqt_string): ptr cQAccessibleTextInsertEvent {.importc: "QAccessibleTextInsertEvent_new".}
-proc fcQAccessibleTextInsertEvent_new2(iface: pointer, position: cint, text: struct_miqt_string): ptr cQAccessibleTextInsertEvent {.importc: "QAccessibleTextInsertEvent_new2".}
 proc fcQAccessibleTextInsertEvent_textInserted(self: pointer, ): struct_miqt_string {.importc: "QAccessibleTextInsertEvent_textInserted".}
 proc fcQAccessibleTextInsertEvent_changePosition(self: pointer, ): cint {.importc: "QAccessibleTextInsertEvent_changePosition".}
-proc fQAccessibleTextInsertEvent_virtualbase_accessibleInterface(self: pointer, ): pointer{.importc: "QAccessibleTextInsertEvent_virtualbase_accessibleInterface".}
-proc fcQAccessibleTextInsertEvent_override_virtual_accessibleInterface(self: pointer, slot: int) {.importc: "QAccessibleTextInsertEvent_override_virtual_accessibleInterface".}
+type cQAccessibleTextInsertEventVTable = object
+  destructor*: proc(vtbl: ptr cQAccessibleTextInsertEventVTable, self: ptr cQAccessibleTextInsertEvent) {.cdecl, raises:[], gcsafe.}
+  accessibleInterface*: proc(vtbl, self: pointer, ): pointer {.cdecl, raises: [], gcsafe.}
+proc fcQAccessibleTextInsertEvent_virtualbase_accessibleInterface(self: pointer, ): pointer {.importc: "QAccessibleTextInsertEvent_virtualbase_accessibleInterface".}
+proc fcQAccessibleTextInsertEvent_new(vtbl: pointer, obj: pointer, position: cint, text: struct_miqt_string): ptr cQAccessibleTextInsertEvent {.importc: "QAccessibleTextInsertEvent_new".}
+proc fcQAccessibleTextInsertEvent_new2(vtbl: pointer, iface: pointer, position: cint, text: struct_miqt_string): ptr cQAccessibleTextInsertEvent {.importc: "QAccessibleTextInsertEvent_new2".}
 proc fcQAccessibleTextInsertEvent_delete(self: pointer) {.importc: "QAccessibleTextInsertEvent_delete".}
-proc fcQAccessibleTextRemoveEvent_new(obj: pointer, position: cint, text: struct_miqt_string): ptr cQAccessibleTextRemoveEvent {.importc: "QAccessibleTextRemoveEvent_new".}
-proc fcQAccessibleTextRemoveEvent_new2(iface: pointer, position: cint, text: struct_miqt_string): ptr cQAccessibleTextRemoveEvent {.importc: "QAccessibleTextRemoveEvent_new2".}
 proc fcQAccessibleTextRemoveEvent_textRemoved(self: pointer, ): struct_miqt_string {.importc: "QAccessibleTextRemoveEvent_textRemoved".}
 proc fcQAccessibleTextRemoveEvent_changePosition(self: pointer, ): cint {.importc: "QAccessibleTextRemoveEvent_changePosition".}
-proc fQAccessibleTextRemoveEvent_virtualbase_accessibleInterface(self: pointer, ): pointer{.importc: "QAccessibleTextRemoveEvent_virtualbase_accessibleInterface".}
-proc fcQAccessibleTextRemoveEvent_override_virtual_accessibleInterface(self: pointer, slot: int) {.importc: "QAccessibleTextRemoveEvent_override_virtual_accessibleInterface".}
+type cQAccessibleTextRemoveEventVTable = object
+  destructor*: proc(vtbl: ptr cQAccessibleTextRemoveEventVTable, self: ptr cQAccessibleTextRemoveEvent) {.cdecl, raises:[], gcsafe.}
+  accessibleInterface*: proc(vtbl, self: pointer, ): pointer {.cdecl, raises: [], gcsafe.}
+proc fcQAccessibleTextRemoveEvent_virtualbase_accessibleInterface(self: pointer, ): pointer {.importc: "QAccessibleTextRemoveEvent_virtualbase_accessibleInterface".}
+proc fcQAccessibleTextRemoveEvent_new(vtbl: pointer, obj: pointer, position: cint, text: struct_miqt_string): ptr cQAccessibleTextRemoveEvent {.importc: "QAccessibleTextRemoveEvent_new".}
+proc fcQAccessibleTextRemoveEvent_new2(vtbl: pointer, iface: pointer, position: cint, text: struct_miqt_string): ptr cQAccessibleTextRemoveEvent {.importc: "QAccessibleTextRemoveEvent_new2".}
 proc fcQAccessibleTextRemoveEvent_delete(self: pointer) {.importc: "QAccessibleTextRemoveEvent_delete".}
-proc fcQAccessibleTextUpdateEvent_new(obj: pointer, position: cint, oldText: struct_miqt_string, text: struct_miqt_string): ptr cQAccessibleTextUpdateEvent {.importc: "QAccessibleTextUpdateEvent_new".}
-proc fcQAccessibleTextUpdateEvent_new2(iface: pointer, position: cint, oldText: struct_miqt_string, text: struct_miqt_string): ptr cQAccessibleTextUpdateEvent {.importc: "QAccessibleTextUpdateEvent_new2".}
 proc fcQAccessibleTextUpdateEvent_textRemoved(self: pointer, ): struct_miqt_string {.importc: "QAccessibleTextUpdateEvent_textRemoved".}
 proc fcQAccessibleTextUpdateEvent_textInserted(self: pointer, ): struct_miqt_string {.importc: "QAccessibleTextUpdateEvent_textInserted".}
 proc fcQAccessibleTextUpdateEvent_changePosition(self: pointer, ): cint {.importc: "QAccessibleTextUpdateEvent_changePosition".}
-proc fQAccessibleTextUpdateEvent_virtualbase_accessibleInterface(self: pointer, ): pointer{.importc: "QAccessibleTextUpdateEvent_virtualbase_accessibleInterface".}
-proc fcQAccessibleTextUpdateEvent_override_virtual_accessibleInterface(self: pointer, slot: int) {.importc: "QAccessibleTextUpdateEvent_override_virtual_accessibleInterface".}
+type cQAccessibleTextUpdateEventVTable = object
+  destructor*: proc(vtbl: ptr cQAccessibleTextUpdateEventVTable, self: ptr cQAccessibleTextUpdateEvent) {.cdecl, raises:[], gcsafe.}
+  accessibleInterface*: proc(vtbl, self: pointer, ): pointer {.cdecl, raises: [], gcsafe.}
+proc fcQAccessibleTextUpdateEvent_virtualbase_accessibleInterface(self: pointer, ): pointer {.importc: "QAccessibleTextUpdateEvent_virtualbase_accessibleInterface".}
+proc fcQAccessibleTextUpdateEvent_new(vtbl: pointer, obj: pointer, position: cint, oldText: struct_miqt_string, text: struct_miqt_string): ptr cQAccessibleTextUpdateEvent {.importc: "QAccessibleTextUpdateEvent_new".}
+proc fcQAccessibleTextUpdateEvent_new2(vtbl: pointer, iface: pointer, position: cint, oldText: struct_miqt_string, text: struct_miqt_string): ptr cQAccessibleTextUpdateEvent {.importc: "QAccessibleTextUpdateEvent_new2".}
 proc fcQAccessibleTextUpdateEvent_delete(self: pointer) {.importc: "QAccessibleTextUpdateEvent_delete".}
-proc fcQAccessibleValueChangeEvent_new(obj: pointer, val: pointer): ptr cQAccessibleValueChangeEvent {.importc: "QAccessibleValueChangeEvent_new".}
-proc fcQAccessibleValueChangeEvent_new2(iface: pointer, val: pointer): ptr cQAccessibleValueChangeEvent {.importc: "QAccessibleValueChangeEvent_new2".}
 proc fcQAccessibleValueChangeEvent_setValue(self: pointer, val: pointer): void {.importc: "QAccessibleValueChangeEvent_setValue".}
 proc fcQAccessibleValueChangeEvent_value(self: pointer, ): pointer {.importc: "QAccessibleValueChangeEvent_value".}
-proc fQAccessibleValueChangeEvent_virtualbase_accessibleInterface(self: pointer, ): pointer{.importc: "QAccessibleValueChangeEvent_virtualbase_accessibleInterface".}
-proc fcQAccessibleValueChangeEvent_override_virtual_accessibleInterface(self: pointer, slot: int) {.importc: "QAccessibleValueChangeEvent_override_virtual_accessibleInterface".}
+type cQAccessibleValueChangeEventVTable = object
+  destructor*: proc(vtbl: ptr cQAccessibleValueChangeEventVTable, self: ptr cQAccessibleValueChangeEvent) {.cdecl, raises:[], gcsafe.}
+  accessibleInterface*: proc(vtbl, self: pointer, ): pointer {.cdecl, raises: [], gcsafe.}
+proc fcQAccessibleValueChangeEvent_virtualbase_accessibleInterface(self: pointer, ): pointer {.importc: "QAccessibleValueChangeEvent_virtualbase_accessibleInterface".}
+proc fcQAccessibleValueChangeEvent_new(vtbl: pointer, obj: pointer, val: pointer): ptr cQAccessibleValueChangeEvent {.importc: "QAccessibleValueChangeEvent_new".}
+proc fcQAccessibleValueChangeEvent_new2(vtbl: pointer, iface: pointer, val: pointer): ptr cQAccessibleValueChangeEvent {.importc: "QAccessibleValueChangeEvent_new2".}
 proc fcQAccessibleValueChangeEvent_delete(self: pointer) {.importc: "QAccessibleValueChangeEvent_delete".}
-proc fcQAccessibleTableModelChangeEvent_new(obj: pointer, changeType: cint): ptr cQAccessibleTableModelChangeEvent {.importc: "QAccessibleTableModelChangeEvent_new".}
-proc fcQAccessibleTableModelChangeEvent_new2(iface: pointer, changeType: cint): ptr cQAccessibleTableModelChangeEvent {.importc: "QAccessibleTableModelChangeEvent_new2".}
 proc fcQAccessibleTableModelChangeEvent_setModelChangeType(self: pointer, changeType: cint): void {.importc: "QAccessibleTableModelChangeEvent_setModelChangeType".}
 proc fcQAccessibleTableModelChangeEvent_modelChangeType(self: pointer, ): cint {.importc: "QAccessibleTableModelChangeEvent_modelChangeType".}
 proc fcQAccessibleTableModelChangeEvent_setFirstRow(self: pointer, row: cint): void {.importc: "QAccessibleTableModelChangeEvent_setFirstRow".}
@@ -279,13 +293,14 @@ proc fcQAccessibleTableModelChangeEvent_firstRow(self: pointer, ): cint {.import
 proc fcQAccessibleTableModelChangeEvent_firstColumn(self: pointer, ): cint {.importc: "QAccessibleTableModelChangeEvent_firstColumn".}
 proc fcQAccessibleTableModelChangeEvent_lastRow(self: pointer, ): cint {.importc: "QAccessibleTableModelChangeEvent_lastRow".}
 proc fcQAccessibleTableModelChangeEvent_lastColumn(self: pointer, ): cint {.importc: "QAccessibleTableModelChangeEvent_lastColumn".}
-proc fQAccessibleTableModelChangeEvent_virtualbase_accessibleInterface(self: pointer, ): pointer{.importc: "QAccessibleTableModelChangeEvent_virtualbase_accessibleInterface".}
-proc fcQAccessibleTableModelChangeEvent_override_virtual_accessibleInterface(self: pointer, slot: int) {.importc: "QAccessibleTableModelChangeEvent_override_virtual_accessibleInterface".}
+type cQAccessibleTableModelChangeEventVTable = object
+  destructor*: proc(vtbl: ptr cQAccessibleTableModelChangeEventVTable, self: ptr cQAccessibleTableModelChangeEvent) {.cdecl, raises:[], gcsafe.}
+  accessibleInterface*: proc(vtbl, self: pointer, ): pointer {.cdecl, raises: [], gcsafe.}
+proc fcQAccessibleTableModelChangeEvent_virtualbase_accessibleInterface(self: pointer, ): pointer {.importc: "QAccessibleTableModelChangeEvent_virtualbase_accessibleInterface".}
+proc fcQAccessibleTableModelChangeEvent_new(vtbl: pointer, obj: pointer, changeType: cint): ptr cQAccessibleTableModelChangeEvent {.importc: "QAccessibleTableModelChangeEvent_new".}
+proc fcQAccessibleTableModelChangeEvent_new2(vtbl: pointer, iface: pointer, changeType: cint): ptr cQAccessibleTableModelChangeEvent {.importc: "QAccessibleTableModelChangeEvent_new2".}
 proc fcQAccessibleTableModelChangeEvent_delete(self: pointer) {.importc: "QAccessibleTableModelChangeEvent_delete".}
 
-
-func init*(T: type gen_qaccessible_types.QAccessibleInterface, h: ptr cQAccessibleInterface): gen_qaccessible_types.QAccessibleInterface =
-  T(h: h)
 proc isValid*(self: gen_qaccessible_types.QAccessibleInterface, ): bool =
   fcQAccessibleInterface_isValid(self.h)
 
@@ -382,9 +397,6 @@ proc virtualHook*(self: gen_qaccessible_types.QAccessibleInterface, id: cint, da
 proc interfaceCast*(self: gen_qaccessible_types.QAccessibleInterface, param1: cint): pointer =
   fcQAccessibleInterface_interfaceCast(self.h, cint(param1))
 
-
-func init*(T: type gen_qaccessible_types.QAccessibleTextInterface, h: ptr cQAccessibleTextInterface): gen_qaccessible_types.QAccessibleTextInterface =
-  T(h: h)
 proc selection*(self: gen_qaccessible_types.QAccessibleTextInterface, selectionIndex: cint, startOffset: ptr cint, endOffset: ptr cint): void =
   fcQAccessibleTextInterface_selection(self.h, selectionIndex, startOffset, endOffset)
 
@@ -453,9 +465,6 @@ proc operatorAssign*(self: gen_qaccessible_types.QAccessibleTextInterface, param
 
 proc delete*(self: gen_qaccessible_types.QAccessibleTextInterface) =
   fcQAccessibleTextInterface_delete(self.h)
-
-func init*(T: type gen_qaccessible_types.QAccessibleEditableTextInterface, h: ptr cQAccessibleEditableTextInterface): gen_qaccessible_types.QAccessibleEditableTextInterface =
-  T(h: h)
 proc deleteText*(self: gen_qaccessible_types.QAccessibleEditableTextInterface, startOffset: cint, endOffset: cint): void =
   fcQAccessibleEditableTextInterface_deleteText(self.h, startOffset, endOffset)
 
@@ -470,9 +479,6 @@ proc operatorAssign*(self: gen_qaccessible_types.QAccessibleEditableTextInterfac
 
 proc delete*(self: gen_qaccessible_types.QAccessibleEditableTextInterface) =
   fcQAccessibleEditableTextInterface_delete(self.h)
-
-func init*(T: type gen_qaccessible_types.QAccessibleValueInterface, h: ptr cQAccessibleValueInterface): gen_qaccessible_types.QAccessibleValueInterface =
-  T(h: h)
 proc currentValue*(self: gen_qaccessible_types.QAccessibleValueInterface, ): gen_qvariant_types.QVariant =
   gen_qvariant_types.QVariant(h: fcQAccessibleValueInterface_currentValue(self.h))
 
@@ -493,9 +499,6 @@ proc operatorAssign*(self: gen_qaccessible_types.QAccessibleValueInterface, para
 
 proc delete*(self: gen_qaccessible_types.QAccessibleValueInterface) =
   fcQAccessibleValueInterface_delete(self.h)
-
-func init*(T: type gen_qaccessible_types.QAccessibleTableCellInterface, h: ptr cQAccessibleTableCellInterface): gen_qaccessible_types.QAccessibleTableCellInterface =
-  T(h: h)
 proc isSelected*(self: gen_qaccessible_types.QAccessibleTableCellInterface, ): bool =
   fcQAccessibleTableCellInterface_isSelected(self.h)
 
@@ -535,9 +538,6 @@ proc operatorAssign*(self: gen_qaccessible_types.QAccessibleTableCellInterface, 
 
 proc delete*(self: gen_qaccessible_types.QAccessibleTableCellInterface) =
   fcQAccessibleTableCellInterface_delete(self.h)
-
-func init*(T: type gen_qaccessible_types.QAccessibleTableInterface, h: ptr cQAccessibleTableInterface): gen_qaccessible_types.QAccessibleTableInterface =
-  T(h: h)
 proc caption*(self: gen_qaccessible_types.QAccessibleTableInterface, ): gen_qaccessible_types.QAccessibleInterface =
   gen_qaccessible_types.QAccessibleInterface(h: fcQAccessibleTableInterface_caption(self.h))
 
@@ -621,9 +621,6 @@ proc modelChange*(self: gen_qaccessible_types.QAccessibleTableInterface, event: 
 
 proc delete*(self: gen_qaccessible_types.QAccessibleTableInterface) =
   fcQAccessibleTableInterface_delete(self.h)
-
-func init*(T: type gen_qaccessible_types.QAccessibleActionInterface, h: ptr cQAccessibleActionInterface): gen_qaccessible_types.QAccessibleActionInterface =
-  T(h: h)
 proc tr*(_: type gen_qaccessible_types.QAccessibleActionInterface, sourceText: cstring): string =
   let v_ms = fcQAccessibleActionInterface_tr(sourceText)
   let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
@@ -756,9 +753,6 @@ proc tr*(_: type gen_qaccessible_types.QAccessibleActionInterface, sourceText: c
 
 proc delete*(self: gen_qaccessible_types.QAccessibleActionInterface) =
   fcQAccessibleActionInterface_delete(self.h)
-
-func init*(T: type gen_qaccessible_types.QAccessibleImageInterface, h: ptr cQAccessibleImageInterface): gen_qaccessible_types.QAccessibleImageInterface =
-  T(h: h)
 proc imageDescription*(self: gen_qaccessible_types.QAccessibleImageInterface, ): string =
   let v_ms = fcQAccessibleImageInterface_imageDescription(self.h)
   let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
@@ -776,9 +770,6 @@ proc operatorAssign*(self: gen_qaccessible_types.QAccessibleImageInterface, para
 
 proc delete*(self: gen_qaccessible_types.QAccessibleImageInterface) =
   fcQAccessibleImageInterface_delete(self.h)
-
-func init*(T: type gen_qaccessible_types.QAccessibleHyperlinkInterface, h: ptr cQAccessibleHyperlinkInterface): gen_qaccessible_types.QAccessibleHyperlinkInterface =
-  T(h: h)
 proc anchor*(self: gen_qaccessible_types.QAccessibleHyperlinkInterface, ): string =
   let v_ms = fcQAccessibleHyperlinkInterface_anchor(self.h)
   let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
@@ -805,15 +796,6 @@ proc operatorAssign*(self: gen_qaccessible_types.QAccessibleHyperlinkInterface, 
 
 proc delete*(self: gen_qaccessible_types.QAccessibleHyperlinkInterface) =
   fcQAccessibleHyperlinkInterface_delete(self.h)
-
-func init*(T: type gen_qaccessible_types.QAccessibleEvent, h: ptr cQAccessibleEvent): gen_qaccessible_types.QAccessibleEvent =
-  T(h: h)
-proc create*(T: type gen_qaccessible_types.QAccessibleEvent, obj: gen_qobject_types.QObject, typ: cint): gen_qaccessible_types.QAccessibleEvent =
-  gen_qaccessible_types.QAccessibleEvent.init(fcQAccessibleEvent_new(obj.h, cint(typ)))
-
-proc create*(T: type gen_qaccessible_types.QAccessibleEvent, iface: gen_qaccessible_types.QAccessibleInterface, typ: cint): gen_qaccessible_types.QAccessibleEvent =
-  gen_qaccessible_types.QAccessibleEvent.init(fcQAccessibleEvent_new2(iface.h, cint(typ)))
-
 proc typeX*(self: gen_qaccessible_types.QAccessibleEvent, ): cint =
   cint(fcQAccessibleEvent_typeX(self.h))
 
@@ -832,99 +814,132 @@ proc child*(self: gen_qaccessible_types.QAccessibleEvent, ): cint =
 proc accessibleInterface*(self: gen_qaccessible_types.QAccessibleEvent, ): gen_qaccessible_types.QAccessibleInterface =
   gen_qaccessible_types.QAccessibleInterface(h: fcQAccessibleEvent_accessibleInterface(self.h))
 
+type QAccessibleEventaccessibleInterfaceProc* = proc(self: QAccessibleEvent): gen_qaccessible_types.QAccessibleInterface {.raises: [], gcsafe.}
+type QAccessibleEventVTable* = object
+  vtbl: cQAccessibleEventVTable
+  accessibleInterface*: QAccessibleEventaccessibleInterfaceProc
 proc QAccessibleEventaccessibleInterface*(self: gen_qaccessible_types.QAccessibleEvent, ): gen_qaccessible_types.QAccessibleInterface =
-  gen_qaccessible_types.QAccessibleInterface(h: fQAccessibleEvent_virtualbase_accessibleInterface(self.h))
+  gen_qaccessible_types.QAccessibleInterface(h: fcQAccessibleEvent_virtualbase_accessibleInterface(self.h))
 
-type QAccessibleEventaccessibleInterfaceProc* = proc(): gen_qaccessible_types.QAccessibleInterface
-proc onaccessibleInterface*(self: gen_qaccessible_types.QAccessibleEvent, slot: QAccessibleEventaccessibleInterfaceProc) =
-  # TODO check subclass
-  var tmp = new QAccessibleEventaccessibleInterfaceProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQAccessibleEvent_override_virtual_accessibleInterface(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QAccessibleEvent_accessibleInterface(self: ptr cQAccessibleEvent, slot: int): pointer {.exportc: "miqt_exec_callback_QAccessibleEvent_accessibleInterface ".} =
-  var nimfunc = cast[ptr QAccessibleEventaccessibleInterfaceProc](cast[pointer](slot))
-
-  let virtualReturn = nimfunc[]( )
-
+proc miqt_exec_callback_cQAccessibleEvent_accessibleInterface(vtbl: pointer, self: pointer): pointer {.cdecl.} =
+  let vtbl = cast[ptr QAccessibleEventVTable](vtbl)
+  let self = QAccessibleEvent(h: self)
+  var virtualReturn = vtbl[].accessibleInterface(self)
   virtualReturn.h
+
+proc create*(T: type gen_qaccessible_types.QAccessibleEvent,
+    obj: gen_qobject_types.QObject, typ: cint,
+    vtbl: ref QAccessibleEventVTable = nil): gen_qaccessible_types.QAccessibleEvent =
+  let vtbl = if vtbl == nil: new QAccessibleEventVTable else: vtbl
+  GC_ref(vtbl)
+  vtbl.vtbl.destructor = proc(vtbl: ptr cQAccessibleEventVTable, _: ptr cQAccessibleEvent) {.cdecl.} =
+    let vtbl = cast[ref QAccessibleEventVTable](vtbl)
+    GC_unref(vtbl)
+  if not isNil(vtbl.accessibleInterface):
+    vtbl[].vtbl.accessibleInterface = miqt_exec_callback_cQAccessibleEvent_accessibleInterface
+  gen_qaccessible_types.QAccessibleEvent(h: fcQAccessibleEvent_new(addr(vtbl[]), obj.h, cint(typ)))
+
+proc create*(T: type gen_qaccessible_types.QAccessibleEvent,
+    iface: gen_qaccessible_types.QAccessibleInterface, typ: cint,
+    vtbl: ref QAccessibleEventVTable = nil): gen_qaccessible_types.QAccessibleEvent =
+  let vtbl = if vtbl == nil: new QAccessibleEventVTable else: vtbl
+  GC_ref(vtbl)
+  vtbl.vtbl.destructor = proc(vtbl: ptr cQAccessibleEventVTable, _: ptr cQAccessibleEvent) {.cdecl.} =
+    let vtbl = cast[ref QAccessibleEventVTable](vtbl)
+    GC_unref(vtbl)
+  if not isNil(vtbl.accessibleInterface):
+    vtbl[].vtbl.accessibleInterface = miqt_exec_callback_cQAccessibleEvent_accessibleInterface
+  gen_qaccessible_types.QAccessibleEvent(h: fcQAccessibleEvent_new2(addr(vtbl[]), iface.h, cint(typ)))
+
 proc delete*(self: gen_qaccessible_types.QAccessibleEvent) =
   fcQAccessibleEvent_delete(self.h)
-
-func init*(T: type gen_qaccessible_types.QAccessibleStateChangeEvent, h: ptr cQAccessibleStateChangeEvent): gen_qaccessible_types.QAccessibleStateChangeEvent =
-  T(h: h)
-proc create*(T: type gen_qaccessible_types.QAccessibleStateChangeEvent, obj: gen_qobject_types.QObject, state: gen_qaccessible_base_types.QAccessibleState): gen_qaccessible_types.QAccessibleStateChangeEvent =
-  gen_qaccessible_types.QAccessibleStateChangeEvent.init(fcQAccessibleStateChangeEvent_new(obj.h, state.h))
-
-proc create*(T: type gen_qaccessible_types.QAccessibleStateChangeEvent, iface: gen_qaccessible_types.QAccessibleInterface, state: gen_qaccessible_base_types.QAccessibleState): gen_qaccessible_types.QAccessibleStateChangeEvent =
-  gen_qaccessible_types.QAccessibleStateChangeEvent.init(fcQAccessibleStateChangeEvent_new2(iface.h, state.h))
-
 proc changedStates*(self: gen_qaccessible_types.QAccessibleStateChangeEvent, ): gen_qaccessible_base_types.QAccessibleState =
   gen_qaccessible_base_types.QAccessibleState(h: fcQAccessibleStateChangeEvent_changedStates(self.h))
 
+type QAccessibleStateChangeEventaccessibleInterfaceProc* = proc(self: QAccessibleStateChangeEvent): gen_qaccessible_types.QAccessibleInterface {.raises: [], gcsafe.}
+type QAccessibleStateChangeEventVTable* = object
+  vtbl: cQAccessibleStateChangeEventVTable
+  accessibleInterface*: QAccessibleStateChangeEventaccessibleInterfaceProc
 proc QAccessibleStateChangeEventaccessibleInterface*(self: gen_qaccessible_types.QAccessibleStateChangeEvent, ): gen_qaccessible_types.QAccessibleInterface =
-  gen_qaccessible_types.QAccessibleInterface(h: fQAccessibleStateChangeEvent_virtualbase_accessibleInterface(self.h))
+  gen_qaccessible_types.QAccessibleInterface(h: fcQAccessibleStateChangeEvent_virtualbase_accessibleInterface(self.h))
 
-type QAccessibleStateChangeEventaccessibleInterfaceProc* = proc(): gen_qaccessible_types.QAccessibleInterface
-proc onaccessibleInterface*(self: gen_qaccessible_types.QAccessibleStateChangeEvent, slot: QAccessibleStateChangeEventaccessibleInterfaceProc) =
-  # TODO check subclass
-  var tmp = new QAccessibleStateChangeEventaccessibleInterfaceProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQAccessibleStateChangeEvent_override_virtual_accessibleInterface(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QAccessibleStateChangeEvent_accessibleInterface(self: ptr cQAccessibleStateChangeEvent, slot: int): pointer {.exportc: "miqt_exec_callback_QAccessibleStateChangeEvent_accessibleInterface ".} =
-  var nimfunc = cast[ptr QAccessibleStateChangeEventaccessibleInterfaceProc](cast[pointer](slot))
-
-  let virtualReturn = nimfunc[]( )
-
+proc miqt_exec_callback_cQAccessibleStateChangeEvent_accessibleInterface(vtbl: pointer, self: pointer): pointer {.cdecl.} =
+  let vtbl = cast[ptr QAccessibleStateChangeEventVTable](vtbl)
+  let self = QAccessibleStateChangeEvent(h: self)
+  var virtualReturn = vtbl[].accessibleInterface(self)
   virtualReturn.h
+
+proc create*(T: type gen_qaccessible_types.QAccessibleStateChangeEvent,
+    obj: gen_qobject_types.QObject, state: gen_qaccessible_base_types.QAccessibleState,
+    vtbl: ref QAccessibleStateChangeEventVTable = nil): gen_qaccessible_types.QAccessibleStateChangeEvent =
+  let vtbl = if vtbl == nil: new QAccessibleStateChangeEventVTable else: vtbl
+  GC_ref(vtbl)
+  vtbl.vtbl.destructor = proc(vtbl: ptr cQAccessibleStateChangeEventVTable, _: ptr cQAccessibleStateChangeEvent) {.cdecl.} =
+    let vtbl = cast[ref QAccessibleStateChangeEventVTable](vtbl)
+    GC_unref(vtbl)
+  if not isNil(vtbl.accessibleInterface):
+    vtbl[].vtbl.accessibleInterface = miqt_exec_callback_cQAccessibleStateChangeEvent_accessibleInterface
+  gen_qaccessible_types.QAccessibleStateChangeEvent(h: fcQAccessibleStateChangeEvent_new(addr(vtbl[]), obj.h, state.h))
+
+proc create*(T: type gen_qaccessible_types.QAccessibleStateChangeEvent,
+    iface: gen_qaccessible_types.QAccessibleInterface, state: gen_qaccessible_base_types.QAccessibleState,
+    vtbl: ref QAccessibleStateChangeEventVTable = nil): gen_qaccessible_types.QAccessibleStateChangeEvent =
+  let vtbl = if vtbl == nil: new QAccessibleStateChangeEventVTable else: vtbl
+  GC_ref(vtbl)
+  vtbl.vtbl.destructor = proc(vtbl: ptr cQAccessibleStateChangeEventVTable, _: ptr cQAccessibleStateChangeEvent) {.cdecl.} =
+    let vtbl = cast[ref QAccessibleStateChangeEventVTable](vtbl)
+    GC_unref(vtbl)
+  if not isNil(vtbl.accessibleInterface):
+    vtbl[].vtbl.accessibleInterface = miqt_exec_callback_cQAccessibleStateChangeEvent_accessibleInterface
+  gen_qaccessible_types.QAccessibleStateChangeEvent(h: fcQAccessibleStateChangeEvent_new2(addr(vtbl[]), iface.h, state.h))
+
 proc delete*(self: gen_qaccessible_types.QAccessibleStateChangeEvent) =
   fcQAccessibleStateChangeEvent_delete(self.h)
-
-func init*(T: type gen_qaccessible_types.QAccessibleTextCursorEvent, h: ptr cQAccessibleTextCursorEvent): gen_qaccessible_types.QAccessibleTextCursorEvent =
-  T(h: h)
-proc create*(T: type gen_qaccessible_types.QAccessibleTextCursorEvent, obj: gen_qobject_types.QObject, cursorPos: cint): gen_qaccessible_types.QAccessibleTextCursorEvent =
-  gen_qaccessible_types.QAccessibleTextCursorEvent.init(fcQAccessibleTextCursorEvent_new(obj.h, cursorPos))
-
-proc create*(T: type gen_qaccessible_types.QAccessibleTextCursorEvent, iface: gen_qaccessible_types.QAccessibleInterface, cursorPos: cint): gen_qaccessible_types.QAccessibleTextCursorEvent =
-  gen_qaccessible_types.QAccessibleTextCursorEvent.init(fcQAccessibleTextCursorEvent_new2(iface.h, cursorPos))
-
 proc setCursorPosition*(self: gen_qaccessible_types.QAccessibleTextCursorEvent, position: cint): void =
   fcQAccessibleTextCursorEvent_setCursorPosition(self.h, position)
 
 proc cursorPosition*(self: gen_qaccessible_types.QAccessibleTextCursorEvent, ): cint =
   fcQAccessibleTextCursorEvent_cursorPosition(self.h)
 
+type QAccessibleTextCursorEventaccessibleInterfaceProc* = proc(self: QAccessibleTextCursorEvent): gen_qaccessible_types.QAccessibleInterface {.raises: [], gcsafe.}
+type QAccessibleTextCursorEventVTable* = object
+  vtbl: cQAccessibleTextCursorEventVTable
+  accessibleInterface*: QAccessibleTextCursorEventaccessibleInterfaceProc
 proc QAccessibleTextCursorEventaccessibleInterface*(self: gen_qaccessible_types.QAccessibleTextCursorEvent, ): gen_qaccessible_types.QAccessibleInterface =
-  gen_qaccessible_types.QAccessibleInterface(h: fQAccessibleTextCursorEvent_virtualbase_accessibleInterface(self.h))
+  gen_qaccessible_types.QAccessibleInterface(h: fcQAccessibleTextCursorEvent_virtualbase_accessibleInterface(self.h))
 
-type QAccessibleTextCursorEventaccessibleInterfaceProc* = proc(): gen_qaccessible_types.QAccessibleInterface
-proc onaccessibleInterface*(self: gen_qaccessible_types.QAccessibleTextCursorEvent, slot: QAccessibleTextCursorEventaccessibleInterfaceProc) =
-  # TODO check subclass
-  var tmp = new QAccessibleTextCursorEventaccessibleInterfaceProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQAccessibleTextCursorEvent_override_virtual_accessibleInterface(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QAccessibleTextCursorEvent_accessibleInterface(self: ptr cQAccessibleTextCursorEvent, slot: int): pointer {.exportc: "miqt_exec_callback_QAccessibleTextCursorEvent_accessibleInterface ".} =
-  var nimfunc = cast[ptr QAccessibleTextCursorEventaccessibleInterfaceProc](cast[pointer](slot))
-
-  let virtualReturn = nimfunc[]( )
-
+proc miqt_exec_callback_cQAccessibleTextCursorEvent_accessibleInterface(vtbl: pointer, self: pointer): pointer {.cdecl.} =
+  let vtbl = cast[ptr QAccessibleTextCursorEventVTable](vtbl)
+  let self = QAccessibleTextCursorEvent(h: self)
+  var virtualReturn = vtbl[].accessibleInterface(self)
   virtualReturn.h
+
+proc create*(T: type gen_qaccessible_types.QAccessibleTextCursorEvent,
+    obj: gen_qobject_types.QObject, cursorPos: cint,
+    vtbl: ref QAccessibleTextCursorEventVTable = nil): gen_qaccessible_types.QAccessibleTextCursorEvent =
+  let vtbl = if vtbl == nil: new QAccessibleTextCursorEventVTable else: vtbl
+  GC_ref(vtbl)
+  vtbl.vtbl.destructor = proc(vtbl: ptr cQAccessibleTextCursorEventVTable, _: ptr cQAccessibleTextCursorEvent) {.cdecl.} =
+    let vtbl = cast[ref QAccessibleTextCursorEventVTable](vtbl)
+    GC_unref(vtbl)
+  if not isNil(vtbl.accessibleInterface):
+    vtbl[].vtbl.accessibleInterface = miqt_exec_callback_cQAccessibleTextCursorEvent_accessibleInterface
+  gen_qaccessible_types.QAccessibleTextCursorEvent(h: fcQAccessibleTextCursorEvent_new(addr(vtbl[]), obj.h, cursorPos))
+
+proc create*(T: type gen_qaccessible_types.QAccessibleTextCursorEvent,
+    iface: gen_qaccessible_types.QAccessibleInterface, cursorPos: cint,
+    vtbl: ref QAccessibleTextCursorEventVTable = nil): gen_qaccessible_types.QAccessibleTextCursorEvent =
+  let vtbl = if vtbl == nil: new QAccessibleTextCursorEventVTable else: vtbl
+  GC_ref(vtbl)
+  vtbl.vtbl.destructor = proc(vtbl: ptr cQAccessibleTextCursorEventVTable, _: ptr cQAccessibleTextCursorEvent) {.cdecl.} =
+    let vtbl = cast[ref QAccessibleTextCursorEventVTable](vtbl)
+    GC_unref(vtbl)
+  if not isNil(vtbl.accessibleInterface):
+    vtbl[].vtbl.accessibleInterface = miqt_exec_callback_cQAccessibleTextCursorEvent_accessibleInterface
+  gen_qaccessible_types.QAccessibleTextCursorEvent(h: fcQAccessibleTextCursorEvent_new2(addr(vtbl[]), iface.h, cursorPos))
+
 proc delete*(self: gen_qaccessible_types.QAccessibleTextCursorEvent) =
   fcQAccessibleTextCursorEvent_delete(self.h)
-
-func init*(T: type gen_qaccessible_types.QAccessibleTextSelectionEvent, h: ptr cQAccessibleTextSelectionEvent): gen_qaccessible_types.QAccessibleTextSelectionEvent =
-  T(h: h)
-proc create*(T: type gen_qaccessible_types.QAccessibleTextSelectionEvent, obj: gen_qobject_types.QObject, start: cint, endVal: cint): gen_qaccessible_types.QAccessibleTextSelectionEvent =
-  gen_qaccessible_types.QAccessibleTextSelectionEvent.init(fcQAccessibleTextSelectionEvent_new(obj.h, start, endVal))
-
-proc create*(T: type gen_qaccessible_types.QAccessibleTextSelectionEvent, iface: gen_qaccessible_types.QAccessibleInterface, start: cint, endVal: cint): gen_qaccessible_types.QAccessibleTextSelectionEvent =
-  gen_qaccessible_types.QAccessibleTextSelectionEvent.init(fcQAccessibleTextSelectionEvent_new2(iface.h, start, endVal))
-
 proc setSelection*(self: gen_qaccessible_types.QAccessibleTextSelectionEvent, start: cint, endVal: cint): void =
   fcQAccessibleTextSelectionEvent_setSelection(self.h, start, endVal)
 
@@ -934,34 +949,45 @@ proc selectionStart*(self: gen_qaccessible_types.QAccessibleTextSelectionEvent, 
 proc selectionEnd*(self: gen_qaccessible_types.QAccessibleTextSelectionEvent, ): cint =
   fcQAccessibleTextSelectionEvent_selectionEnd(self.h)
 
+type QAccessibleTextSelectionEventaccessibleInterfaceProc* = proc(self: QAccessibleTextSelectionEvent): gen_qaccessible_types.QAccessibleInterface {.raises: [], gcsafe.}
+type QAccessibleTextSelectionEventVTable* = object
+  vtbl: cQAccessibleTextSelectionEventVTable
+  accessibleInterface*: QAccessibleTextSelectionEventaccessibleInterfaceProc
 proc QAccessibleTextSelectionEventaccessibleInterface*(self: gen_qaccessible_types.QAccessibleTextSelectionEvent, ): gen_qaccessible_types.QAccessibleInterface =
-  gen_qaccessible_types.QAccessibleInterface(h: fQAccessibleTextSelectionEvent_virtualbase_accessibleInterface(self.h))
+  gen_qaccessible_types.QAccessibleInterface(h: fcQAccessibleTextSelectionEvent_virtualbase_accessibleInterface(self.h))
 
-type QAccessibleTextSelectionEventaccessibleInterfaceProc* = proc(): gen_qaccessible_types.QAccessibleInterface
-proc onaccessibleInterface*(self: gen_qaccessible_types.QAccessibleTextSelectionEvent, slot: QAccessibleTextSelectionEventaccessibleInterfaceProc) =
-  # TODO check subclass
-  var tmp = new QAccessibleTextSelectionEventaccessibleInterfaceProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQAccessibleTextSelectionEvent_override_virtual_accessibleInterface(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QAccessibleTextSelectionEvent_accessibleInterface(self: ptr cQAccessibleTextSelectionEvent, slot: int): pointer {.exportc: "miqt_exec_callback_QAccessibleTextSelectionEvent_accessibleInterface ".} =
-  var nimfunc = cast[ptr QAccessibleTextSelectionEventaccessibleInterfaceProc](cast[pointer](slot))
-
-  let virtualReturn = nimfunc[]( )
-
+proc miqt_exec_callback_cQAccessibleTextSelectionEvent_accessibleInterface(vtbl: pointer, self: pointer): pointer {.cdecl.} =
+  let vtbl = cast[ptr QAccessibleTextSelectionEventVTable](vtbl)
+  let self = QAccessibleTextSelectionEvent(h: self)
+  var virtualReturn = vtbl[].accessibleInterface(self)
   virtualReturn.h
+
+proc create*(T: type gen_qaccessible_types.QAccessibleTextSelectionEvent,
+    obj: gen_qobject_types.QObject, start: cint, endVal: cint,
+    vtbl: ref QAccessibleTextSelectionEventVTable = nil): gen_qaccessible_types.QAccessibleTextSelectionEvent =
+  let vtbl = if vtbl == nil: new QAccessibleTextSelectionEventVTable else: vtbl
+  GC_ref(vtbl)
+  vtbl.vtbl.destructor = proc(vtbl: ptr cQAccessibleTextSelectionEventVTable, _: ptr cQAccessibleTextSelectionEvent) {.cdecl.} =
+    let vtbl = cast[ref QAccessibleTextSelectionEventVTable](vtbl)
+    GC_unref(vtbl)
+  if not isNil(vtbl.accessibleInterface):
+    vtbl[].vtbl.accessibleInterface = miqt_exec_callback_cQAccessibleTextSelectionEvent_accessibleInterface
+  gen_qaccessible_types.QAccessibleTextSelectionEvent(h: fcQAccessibleTextSelectionEvent_new(addr(vtbl[]), obj.h, start, endVal))
+
+proc create*(T: type gen_qaccessible_types.QAccessibleTextSelectionEvent,
+    iface: gen_qaccessible_types.QAccessibleInterface, start: cint, endVal: cint,
+    vtbl: ref QAccessibleTextSelectionEventVTable = nil): gen_qaccessible_types.QAccessibleTextSelectionEvent =
+  let vtbl = if vtbl == nil: new QAccessibleTextSelectionEventVTable else: vtbl
+  GC_ref(vtbl)
+  vtbl.vtbl.destructor = proc(vtbl: ptr cQAccessibleTextSelectionEventVTable, _: ptr cQAccessibleTextSelectionEvent) {.cdecl.} =
+    let vtbl = cast[ref QAccessibleTextSelectionEventVTable](vtbl)
+    GC_unref(vtbl)
+  if not isNil(vtbl.accessibleInterface):
+    vtbl[].vtbl.accessibleInterface = miqt_exec_callback_cQAccessibleTextSelectionEvent_accessibleInterface
+  gen_qaccessible_types.QAccessibleTextSelectionEvent(h: fcQAccessibleTextSelectionEvent_new2(addr(vtbl[]), iface.h, start, endVal))
+
 proc delete*(self: gen_qaccessible_types.QAccessibleTextSelectionEvent) =
   fcQAccessibleTextSelectionEvent_delete(self.h)
-
-func init*(T: type gen_qaccessible_types.QAccessibleTextInsertEvent, h: ptr cQAccessibleTextInsertEvent): gen_qaccessible_types.QAccessibleTextInsertEvent =
-  T(h: h)
-proc create*(T: type gen_qaccessible_types.QAccessibleTextInsertEvent, obj: gen_qobject_types.QObject, position: cint, text: string): gen_qaccessible_types.QAccessibleTextInsertEvent =
-  gen_qaccessible_types.QAccessibleTextInsertEvent.init(fcQAccessibleTextInsertEvent_new(obj.h, position, struct_miqt_string(data: text, len: csize_t(len(text)))))
-
-proc create*(T: type gen_qaccessible_types.QAccessibleTextInsertEvent, iface: gen_qaccessible_types.QAccessibleInterface, position: cint, text: string): gen_qaccessible_types.QAccessibleTextInsertEvent =
-  gen_qaccessible_types.QAccessibleTextInsertEvent.init(fcQAccessibleTextInsertEvent_new2(iface.h, position, struct_miqt_string(data: text, len: csize_t(len(text)))))
-
 proc textInserted*(self: gen_qaccessible_types.QAccessibleTextInsertEvent, ): string =
   let v_ms = fcQAccessibleTextInsertEvent_textInserted(self.h)
   let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
@@ -971,34 +997,45 @@ proc textInserted*(self: gen_qaccessible_types.QAccessibleTextInsertEvent, ): st
 proc changePosition*(self: gen_qaccessible_types.QAccessibleTextInsertEvent, ): cint =
   fcQAccessibleTextInsertEvent_changePosition(self.h)
 
+type QAccessibleTextInsertEventaccessibleInterfaceProc* = proc(self: QAccessibleTextInsertEvent): gen_qaccessible_types.QAccessibleInterface {.raises: [], gcsafe.}
+type QAccessibleTextInsertEventVTable* = object
+  vtbl: cQAccessibleTextInsertEventVTable
+  accessibleInterface*: QAccessibleTextInsertEventaccessibleInterfaceProc
 proc QAccessibleTextInsertEventaccessibleInterface*(self: gen_qaccessible_types.QAccessibleTextInsertEvent, ): gen_qaccessible_types.QAccessibleInterface =
-  gen_qaccessible_types.QAccessibleInterface(h: fQAccessibleTextInsertEvent_virtualbase_accessibleInterface(self.h))
+  gen_qaccessible_types.QAccessibleInterface(h: fcQAccessibleTextInsertEvent_virtualbase_accessibleInterface(self.h))
 
-type QAccessibleTextInsertEventaccessibleInterfaceProc* = proc(): gen_qaccessible_types.QAccessibleInterface
-proc onaccessibleInterface*(self: gen_qaccessible_types.QAccessibleTextInsertEvent, slot: QAccessibleTextInsertEventaccessibleInterfaceProc) =
-  # TODO check subclass
-  var tmp = new QAccessibleTextInsertEventaccessibleInterfaceProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQAccessibleTextInsertEvent_override_virtual_accessibleInterface(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QAccessibleTextInsertEvent_accessibleInterface(self: ptr cQAccessibleTextInsertEvent, slot: int): pointer {.exportc: "miqt_exec_callback_QAccessibleTextInsertEvent_accessibleInterface ".} =
-  var nimfunc = cast[ptr QAccessibleTextInsertEventaccessibleInterfaceProc](cast[pointer](slot))
-
-  let virtualReturn = nimfunc[]( )
-
+proc miqt_exec_callback_cQAccessibleTextInsertEvent_accessibleInterface(vtbl: pointer, self: pointer): pointer {.cdecl.} =
+  let vtbl = cast[ptr QAccessibleTextInsertEventVTable](vtbl)
+  let self = QAccessibleTextInsertEvent(h: self)
+  var virtualReturn = vtbl[].accessibleInterface(self)
   virtualReturn.h
+
+proc create*(T: type gen_qaccessible_types.QAccessibleTextInsertEvent,
+    obj: gen_qobject_types.QObject, position: cint, text: string,
+    vtbl: ref QAccessibleTextInsertEventVTable = nil): gen_qaccessible_types.QAccessibleTextInsertEvent =
+  let vtbl = if vtbl == nil: new QAccessibleTextInsertEventVTable else: vtbl
+  GC_ref(vtbl)
+  vtbl.vtbl.destructor = proc(vtbl: ptr cQAccessibleTextInsertEventVTable, _: ptr cQAccessibleTextInsertEvent) {.cdecl.} =
+    let vtbl = cast[ref QAccessibleTextInsertEventVTable](vtbl)
+    GC_unref(vtbl)
+  if not isNil(vtbl.accessibleInterface):
+    vtbl[].vtbl.accessibleInterface = miqt_exec_callback_cQAccessibleTextInsertEvent_accessibleInterface
+  gen_qaccessible_types.QAccessibleTextInsertEvent(h: fcQAccessibleTextInsertEvent_new(addr(vtbl[]), obj.h, position, struct_miqt_string(data: text, len: csize_t(len(text)))))
+
+proc create*(T: type gen_qaccessible_types.QAccessibleTextInsertEvent,
+    iface: gen_qaccessible_types.QAccessibleInterface, position: cint, text: string,
+    vtbl: ref QAccessibleTextInsertEventVTable = nil): gen_qaccessible_types.QAccessibleTextInsertEvent =
+  let vtbl = if vtbl == nil: new QAccessibleTextInsertEventVTable else: vtbl
+  GC_ref(vtbl)
+  vtbl.vtbl.destructor = proc(vtbl: ptr cQAccessibleTextInsertEventVTable, _: ptr cQAccessibleTextInsertEvent) {.cdecl.} =
+    let vtbl = cast[ref QAccessibleTextInsertEventVTable](vtbl)
+    GC_unref(vtbl)
+  if not isNil(vtbl.accessibleInterface):
+    vtbl[].vtbl.accessibleInterface = miqt_exec_callback_cQAccessibleTextInsertEvent_accessibleInterface
+  gen_qaccessible_types.QAccessibleTextInsertEvent(h: fcQAccessibleTextInsertEvent_new2(addr(vtbl[]), iface.h, position, struct_miqt_string(data: text, len: csize_t(len(text)))))
+
 proc delete*(self: gen_qaccessible_types.QAccessibleTextInsertEvent) =
   fcQAccessibleTextInsertEvent_delete(self.h)
-
-func init*(T: type gen_qaccessible_types.QAccessibleTextRemoveEvent, h: ptr cQAccessibleTextRemoveEvent): gen_qaccessible_types.QAccessibleTextRemoveEvent =
-  T(h: h)
-proc create*(T: type gen_qaccessible_types.QAccessibleTextRemoveEvent, obj: gen_qobject_types.QObject, position: cint, text: string): gen_qaccessible_types.QAccessibleTextRemoveEvent =
-  gen_qaccessible_types.QAccessibleTextRemoveEvent.init(fcQAccessibleTextRemoveEvent_new(obj.h, position, struct_miqt_string(data: text, len: csize_t(len(text)))))
-
-proc create*(T: type gen_qaccessible_types.QAccessibleTextRemoveEvent, iface: gen_qaccessible_types.QAccessibleInterface, position: cint, text: string): gen_qaccessible_types.QAccessibleTextRemoveEvent =
-  gen_qaccessible_types.QAccessibleTextRemoveEvent.init(fcQAccessibleTextRemoveEvent_new2(iface.h, position, struct_miqt_string(data: text, len: csize_t(len(text)))))
-
 proc textRemoved*(self: gen_qaccessible_types.QAccessibleTextRemoveEvent, ): string =
   let v_ms = fcQAccessibleTextRemoveEvent_textRemoved(self.h)
   let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
@@ -1008,34 +1045,45 @@ proc textRemoved*(self: gen_qaccessible_types.QAccessibleTextRemoveEvent, ): str
 proc changePosition*(self: gen_qaccessible_types.QAccessibleTextRemoveEvent, ): cint =
   fcQAccessibleTextRemoveEvent_changePosition(self.h)
 
+type QAccessibleTextRemoveEventaccessibleInterfaceProc* = proc(self: QAccessibleTextRemoveEvent): gen_qaccessible_types.QAccessibleInterface {.raises: [], gcsafe.}
+type QAccessibleTextRemoveEventVTable* = object
+  vtbl: cQAccessibleTextRemoveEventVTable
+  accessibleInterface*: QAccessibleTextRemoveEventaccessibleInterfaceProc
 proc QAccessibleTextRemoveEventaccessibleInterface*(self: gen_qaccessible_types.QAccessibleTextRemoveEvent, ): gen_qaccessible_types.QAccessibleInterface =
-  gen_qaccessible_types.QAccessibleInterface(h: fQAccessibleTextRemoveEvent_virtualbase_accessibleInterface(self.h))
+  gen_qaccessible_types.QAccessibleInterface(h: fcQAccessibleTextRemoveEvent_virtualbase_accessibleInterface(self.h))
 
-type QAccessibleTextRemoveEventaccessibleInterfaceProc* = proc(): gen_qaccessible_types.QAccessibleInterface
-proc onaccessibleInterface*(self: gen_qaccessible_types.QAccessibleTextRemoveEvent, slot: QAccessibleTextRemoveEventaccessibleInterfaceProc) =
-  # TODO check subclass
-  var tmp = new QAccessibleTextRemoveEventaccessibleInterfaceProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQAccessibleTextRemoveEvent_override_virtual_accessibleInterface(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QAccessibleTextRemoveEvent_accessibleInterface(self: ptr cQAccessibleTextRemoveEvent, slot: int): pointer {.exportc: "miqt_exec_callback_QAccessibleTextRemoveEvent_accessibleInterface ".} =
-  var nimfunc = cast[ptr QAccessibleTextRemoveEventaccessibleInterfaceProc](cast[pointer](slot))
-
-  let virtualReturn = nimfunc[]( )
-
+proc miqt_exec_callback_cQAccessibleTextRemoveEvent_accessibleInterface(vtbl: pointer, self: pointer): pointer {.cdecl.} =
+  let vtbl = cast[ptr QAccessibleTextRemoveEventVTable](vtbl)
+  let self = QAccessibleTextRemoveEvent(h: self)
+  var virtualReturn = vtbl[].accessibleInterface(self)
   virtualReturn.h
+
+proc create*(T: type gen_qaccessible_types.QAccessibleTextRemoveEvent,
+    obj: gen_qobject_types.QObject, position: cint, text: string,
+    vtbl: ref QAccessibleTextRemoveEventVTable = nil): gen_qaccessible_types.QAccessibleTextRemoveEvent =
+  let vtbl = if vtbl == nil: new QAccessibleTextRemoveEventVTable else: vtbl
+  GC_ref(vtbl)
+  vtbl.vtbl.destructor = proc(vtbl: ptr cQAccessibleTextRemoveEventVTable, _: ptr cQAccessibleTextRemoveEvent) {.cdecl.} =
+    let vtbl = cast[ref QAccessibleTextRemoveEventVTable](vtbl)
+    GC_unref(vtbl)
+  if not isNil(vtbl.accessibleInterface):
+    vtbl[].vtbl.accessibleInterface = miqt_exec_callback_cQAccessibleTextRemoveEvent_accessibleInterface
+  gen_qaccessible_types.QAccessibleTextRemoveEvent(h: fcQAccessibleTextRemoveEvent_new(addr(vtbl[]), obj.h, position, struct_miqt_string(data: text, len: csize_t(len(text)))))
+
+proc create*(T: type gen_qaccessible_types.QAccessibleTextRemoveEvent,
+    iface: gen_qaccessible_types.QAccessibleInterface, position: cint, text: string,
+    vtbl: ref QAccessibleTextRemoveEventVTable = nil): gen_qaccessible_types.QAccessibleTextRemoveEvent =
+  let vtbl = if vtbl == nil: new QAccessibleTextRemoveEventVTable else: vtbl
+  GC_ref(vtbl)
+  vtbl.vtbl.destructor = proc(vtbl: ptr cQAccessibleTextRemoveEventVTable, _: ptr cQAccessibleTextRemoveEvent) {.cdecl.} =
+    let vtbl = cast[ref QAccessibleTextRemoveEventVTable](vtbl)
+    GC_unref(vtbl)
+  if not isNil(vtbl.accessibleInterface):
+    vtbl[].vtbl.accessibleInterface = miqt_exec_callback_cQAccessibleTextRemoveEvent_accessibleInterface
+  gen_qaccessible_types.QAccessibleTextRemoveEvent(h: fcQAccessibleTextRemoveEvent_new2(addr(vtbl[]), iface.h, position, struct_miqt_string(data: text, len: csize_t(len(text)))))
+
 proc delete*(self: gen_qaccessible_types.QAccessibleTextRemoveEvent) =
   fcQAccessibleTextRemoveEvent_delete(self.h)
-
-func init*(T: type gen_qaccessible_types.QAccessibleTextUpdateEvent, h: ptr cQAccessibleTextUpdateEvent): gen_qaccessible_types.QAccessibleTextUpdateEvent =
-  T(h: h)
-proc create*(T: type gen_qaccessible_types.QAccessibleTextUpdateEvent, obj: gen_qobject_types.QObject, position: cint, oldText: string, text: string): gen_qaccessible_types.QAccessibleTextUpdateEvent =
-  gen_qaccessible_types.QAccessibleTextUpdateEvent.init(fcQAccessibleTextUpdateEvent_new(obj.h, position, struct_miqt_string(data: oldText, len: csize_t(len(oldText))), struct_miqt_string(data: text, len: csize_t(len(text)))))
-
-proc create*(T: type gen_qaccessible_types.QAccessibleTextUpdateEvent, iface: gen_qaccessible_types.QAccessibleInterface, position: cint, oldText: string, text: string): gen_qaccessible_types.QAccessibleTextUpdateEvent =
-  gen_qaccessible_types.QAccessibleTextUpdateEvent.init(fcQAccessibleTextUpdateEvent_new2(iface.h, position, struct_miqt_string(data: oldText, len: csize_t(len(oldText))), struct_miqt_string(data: text, len: csize_t(len(text)))))
-
 proc textRemoved*(self: gen_qaccessible_types.QAccessibleTextUpdateEvent, ): string =
   let v_ms = fcQAccessibleTextUpdateEvent_textRemoved(self.h)
   let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
@@ -1051,68 +1099,90 @@ proc textInserted*(self: gen_qaccessible_types.QAccessibleTextUpdateEvent, ): st
 proc changePosition*(self: gen_qaccessible_types.QAccessibleTextUpdateEvent, ): cint =
   fcQAccessibleTextUpdateEvent_changePosition(self.h)
 
+type QAccessibleTextUpdateEventaccessibleInterfaceProc* = proc(self: QAccessibleTextUpdateEvent): gen_qaccessible_types.QAccessibleInterface {.raises: [], gcsafe.}
+type QAccessibleTextUpdateEventVTable* = object
+  vtbl: cQAccessibleTextUpdateEventVTable
+  accessibleInterface*: QAccessibleTextUpdateEventaccessibleInterfaceProc
 proc QAccessibleTextUpdateEventaccessibleInterface*(self: gen_qaccessible_types.QAccessibleTextUpdateEvent, ): gen_qaccessible_types.QAccessibleInterface =
-  gen_qaccessible_types.QAccessibleInterface(h: fQAccessibleTextUpdateEvent_virtualbase_accessibleInterface(self.h))
+  gen_qaccessible_types.QAccessibleInterface(h: fcQAccessibleTextUpdateEvent_virtualbase_accessibleInterface(self.h))
 
-type QAccessibleTextUpdateEventaccessibleInterfaceProc* = proc(): gen_qaccessible_types.QAccessibleInterface
-proc onaccessibleInterface*(self: gen_qaccessible_types.QAccessibleTextUpdateEvent, slot: QAccessibleTextUpdateEventaccessibleInterfaceProc) =
-  # TODO check subclass
-  var tmp = new QAccessibleTextUpdateEventaccessibleInterfaceProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQAccessibleTextUpdateEvent_override_virtual_accessibleInterface(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QAccessibleTextUpdateEvent_accessibleInterface(self: ptr cQAccessibleTextUpdateEvent, slot: int): pointer {.exportc: "miqt_exec_callback_QAccessibleTextUpdateEvent_accessibleInterface ".} =
-  var nimfunc = cast[ptr QAccessibleTextUpdateEventaccessibleInterfaceProc](cast[pointer](slot))
-
-  let virtualReturn = nimfunc[]( )
-
+proc miqt_exec_callback_cQAccessibleTextUpdateEvent_accessibleInterface(vtbl: pointer, self: pointer): pointer {.cdecl.} =
+  let vtbl = cast[ptr QAccessibleTextUpdateEventVTable](vtbl)
+  let self = QAccessibleTextUpdateEvent(h: self)
+  var virtualReturn = vtbl[].accessibleInterface(self)
   virtualReturn.h
+
+proc create*(T: type gen_qaccessible_types.QAccessibleTextUpdateEvent,
+    obj: gen_qobject_types.QObject, position: cint, oldText: string, text: string,
+    vtbl: ref QAccessibleTextUpdateEventVTable = nil): gen_qaccessible_types.QAccessibleTextUpdateEvent =
+  let vtbl = if vtbl == nil: new QAccessibleTextUpdateEventVTable else: vtbl
+  GC_ref(vtbl)
+  vtbl.vtbl.destructor = proc(vtbl: ptr cQAccessibleTextUpdateEventVTable, _: ptr cQAccessibleTextUpdateEvent) {.cdecl.} =
+    let vtbl = cast[ref QAccessibleTextUpdateEventVTable](vtbl)
+    GC_unref(vtbl)
+  if not isNil(vtbl.accessibleInterface):
+    vtbl[].vtbl.accessibleInterface = miqt_exec_callback_cQAccessibleTextUpdateEvent_accessibleInterface
+  gen_qaccessible_types.QAccessibleTextUpdateEvent(h: fcQAccessibleTextUpdateEvent_new(addr(vtbl[]), obj.h, position, struct_miqt_string(data: oldText, len: csize_t(len(oldText))), struct_miqt_string(data: text, len: csize_t(len(text)))))
+
+proc create*(T: type gen_qaccessible_types.QAccessibleTextUpdateEvent,
+    iface: gen_qaccessible_types.QAccessibleInterface, position: cint, oldText: string, text: string,
+    vtbl: ref QAccessibleTextUpdateEventVTable = nil): gen_qaccessible_types.QAccessibleTextUpdateEvent =
+  let vtbl = if vtbl == nil: new QAccessibleTextUpdateEventVTable else: vtbl
+  GC_ref(vtbl)
+  vtbl.vtbl.destructor = proc(vtbl: ptr cQAccessibleTextUpdateEventVTable, _: ptr cQAccessibleTextUpdateEvent) {.cdecl.} =
+    let vtbl = cast[ref QAccessibleTextUpdateEventVTable](vtbl)
+    GC_unref(vtbl)
+  if not isNil(vtbl.accessibleInterface):
+    vtbl[].vtbl.accessibleInterface = miqt_exec_callback_cQAccessibleTextUpdateEvent_accessibleInterface
+  gen_qaccessible_types.QAccessibleTextUpdateEvent(h: fcQAccessibleTextUpdateEvent_new2(addr(vtbl[]), iface.h, position, struct_miqt_string(data: oldText, len: csize_t(len(oldText))), struct_miqt_string(data: text, len: csize_t(len(text)))))
+
 proc delete*(self: gen_qaccessible_types.QAccessibleTextUpdateEvent) =
   fcQAccessibleTextUpdateEvent_delete(self.h)
-
-func init*(T: type gen_qaccessible_types.QAccessibleValueChangeEvent, h: ptr cQAccessibleValueChangeEvent): gen_qaccessible_types.QAccessibleValueChangeEvent =
-  T(h: h)
-proc create*(T: type gen_qaccessible_types.QAccessibleValueChangeEvent, obj: gen_qobject_types.QObject, val: gen_qvariant_types.QVariant): gen_qaccessible_types.QAccessibleValueChangeEvent =
-  gen_qaccessible_types.QAccessibleValueChangeEvent.init(fcQAccessibleValueChangeEvent_new(obj.h, val.h))
-
-proc create*(T: type gen_qaccessible_types.QAccessibleValueChangeEvent, iface: gen_qaccessible_types.QAccessibleInterface, val: gen_qvariant_types.QVariant): gen_qaccessible_types.QAccessibleValueChangeEvent =
-  gen_qaccessible_types.QAccessibleValueChangeEvent.init(fcQAccessibleValueChangeEvent_new2(iface.h, val.h))
-
 proc setValue*(self: gen_qaccessible_types.QAccessibleValueChangeEvent, val: gen_qvariant_types.QVariant): void =
   fcQAccessibleValueChangeEvent_setValue(self.h, val.h)
 
 proc value*(self: gen_qaccessible_types.QAccessibleValueChangeEvent, ): gen_qvariant_types.QVariant =
   gen_qvariant_types.QVariant(h: fcQAccessibleValueChangeEvent_value(self.h))
 
+type QAccessibleValueChangeEventaccessibleInterfaceProc* = proc(self: QAccessibleValueChangeEvent): gen_qaccessible_types.QAccessibleInterface {.raises: [], gcsafe.}
+type QAccessibleValueChangeEventVTable* = object
+  vtbl: cQAccessibleValueChangeEventVTable
+  accessibleInterface*: QAccessibleValueChangeEventaccessibleInterfaceProc
 proc QAccessibleValueChangeEventaccessibleInterface*(self: gen_qaccessible_types.QAccessibleValueChangeEvent, ): gen_qaccessible_types.QAccessibleInterface =
-  gen_qaccessible_types.QAccessibleInterface(h: fQAccessibleValueChangeEvent_virtualbase_accessibleInterface(self.h))
+  gen_qaccessible_types.QAccessibleInterface(h: fcQAccessibleValueChangeEvent_virtualbase_accessibleInterface(self.h))
 
-type QAccessibleValueChangeEventaccessibleInterfaceProc* = proc(): gen_qaccessible_types.QAccessibleInterface
-proc onaccessibleInterface*(self: gen_qaccessible_types.QAccessibleValueChangeEvent, slot: QAccessibleValueChangeEventaccessibleInterfaceProc) =
-  # TODO check subclass
-  var tmp = new QAccessibleValueChangeEventaccessibleInterfaceProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQAccessibleValueChangeEvent_override_virtual_accessibleInterface(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QAccessibleValueChangeEvent_accessibleInterface(self: ptr cQAccessibleValueChangeEvent, slot: int): pointer {.exportc: "miqt_exec_callback_QAccessibleValueChangeEvent_accessibleInterface ".} =
-  var nimfunc = cast[ptr QAccessibleValueChangeEventaccessibleInterfaceProc](cast[pointer](slot))
-
-  let virtualReturn = nimfunc[]( )
-
+proc miqt_exec_callback_cQAccessibleValueChangeEvent_accessibleInterface(vtbl: pointer, self: pointer): pointer {.cdecl.} =
+  let vtbl = cast[ptr QAccessibleValueChangeEventVTable](vtbl)
+  let self = QAccessibleValueChangeEvent(h: self)
+  var virtualReturn = vtbl[].accessibleInterface(self)
   virtualReturn.h
+
+proc create*(T: type gen_qaccessible_types.QAccessibleValueChangeEvent,
+    obj: gen_qobject_types.QObject, val: gen_qvariant_types.QVariant,
+    vtbl: ref QAccessibleValueChangeEventVTable = nil): gen_qaccessible_types.QAccessibleValueChangeEvent =
+  let vtbl = if vtbl == nil: new QAccessibleValueChangeEventVTable else: vtbl
+  GC_ref(vtbl)
+  vtbl.vtbl.destructor = proc(vtbl: ptr cQAccessibleValueChangeEventVTable, _: ptr cQAccessibleValueChangeEvent) {.cdecl.} =
+    let vtbl = cast[ref QAccessibleValueChangeEventVTable](vtbl)
+    GC_unref(vtbl)
+  if not isNil(vtbl.accessibleInterface):
+    vtbl[].vtbl.accessibleInterface = miqt_exec_callback_cQAccessibleValueChangeEvent_accessibleInterface
+  gen_qaccessible_types.QAccessibleValueChangeEvent(h: fcQAccessibleValueChangeEvent_new(addr(vtbl[]), obj.h, val.h))
+
+proc create*(T: type gen_qaccessible_types.QAccessibleValueChangeEvent,
+    iface: gen_qaccessible_types.QAccessibleInterface, val: gen_qvariant_types.QVariant,
+    vtbl: ref QAccessibleValueChangeEventVTable = nil): gen_qaccessible_types.QAccessibleValueChangeEvent =
+  let vtbl = if vtbl == nil: new QAccessibleValueChangeEventVTable else: vtbl
+  GC_ref(vtbl)
+  vtbl.vtbl.destructor = proc(vtbl: ptr cQAccessibleValueChangeEventVTable, _: ptr cQAccessibleValueChangeEvent) {.cdecl.} =
+    let vtbl = cast[ref QAccessibleValueChangeEventVTable](vtbl)
+    GC_unref(vtbl)
+  if not isNil(vtbl.accessibleInterface):
+    vtbl[].vtbl.accessibleInterface = miqt_exec_callback_cQAccessibleValueChangeEvent_accessibleInterface
+  gen_qaccessible_types.QAccessibleValueChangeEvent(h: fcQAccessibleValueChangeEvent_new2(addr(vtbl[]), iface.h, val.h))
+
 proc delete*(self: gen_qaccessible_types.QAccessibleValueChangeEvent) =
   fcQAccessibleValueChangeEvent_delete(self.h)
-
-func init*(T: type gen_qaccessible_types.QAccessibleTableModelChangeEvent, h: ptr cQAccessibleTableModelChangeEvent): gen_qaccessible_types.QAccessibleTableModelChangeEvent =
-  T(h: h)
-proc create*(T: type gen_qaccessible_types.QAccessibleTableModelChangeEvent, obj: gen_qobject_types.QObject, changeType: cint): gen_qaccessible_types.QAccessibleTableModelChangeEvent =
-  gen_qaccessible_types.QAccessibleTableModelChangeEvent.init(fcQAccessibleTableModelChangeEvent_new(obj.h, cint(changeType)))
-
-proc create*(T: type gen_qaccessible_types.QAccessibleTableModelChangeEvent, iface: gen_qaccessible_types.QAccessibleInterface, changeType: cint): gen_qaccessible_types.QAccessibleTableModelChangeEvent =
-  gen_qaccessible_types.QAccessibleTableModelChangeEvent.init(fcQAccessibleTableModelChangeEvent_new2(iface.h, cint(changeType)))
-
 proc setModelChangeType*(self: gen_qaccessible_types.QAccessibleTableModelChangeEvent, changeType: cint): void =
   fcQAccessibleTableModelChangeEvent_setModelChangeType(self.h, cint(changeType))
 
@@ -1143,22 +1213,42 @@ proc lastRow*(self: gen_qaccessible_types.QAccessibleTableModelChangeEvent, ): c
 proc lastColumn*(self: gen_qaccessible_types.QAccessibleTableModelChangeEvent, ): cint =
   fcQAccessibleTableModelChangeEvent_lastColumn(self.h)
 
+type QAccessibleTableModelChangeEventaccessibleInterfaceProc* = proc(self: QAccessibleTableModelChangeEvent): gen_qaccessible_types.QAccessibleInterface {.raises: [], gcsafe.}
+type QAccessibleTableModelChangeEventVTable* = object
+  vtbl: cQAccessibleTableModelChangeEventVTable
+  accessibleInterface*: QAccessibleTableModelChangeEventaccessibleInterfaceProc
 proc QAccessibleTableModelChangeEventaccessibleInterface*(self: gen_qaccessible_types.QAccessibleTableModelChangeEvent, ): gen_qaccessible_types.QAccessibleInterface =
-  gen_qaccessible_types.QAccessibleInterface(h: fQAccessibleTableModelChangeEvent_virtualbase_accessibleInterface(self.h))
+  gen_qaccessible_types.QAccessibleInterface(h: fcQAccessibleTableModelChangeEvent_virtualbase_accessibleInterface(self.h))
 
-type QAccessibleTableModelChangeEventaccessibleInterfaceProc* = proc(): gen_qaccessible_types.QAccessibleInterface
-proc onaccessibleInterface*(self: gen_qaccessible_types.QAccessibleTableModelChangeEvent, slot: QAccessibleTableModelChangeEventaccessibleInterfaceProc) =
-  # TODO check subclass
-  var tmp = new QAccessibleTableModelChangeEventaccessibleInterfaceProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQAccessibleTableModelChangeEvent_override_virtual_accessibleInterface(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QAccessibleTableModelChangeEvent_accessibleInterface(self: ptr cQAccessibleTableModelChangeEvent, slot: int): pointer {.exportc: "miqt_exec_callback_QAccessibleTableModelChangeEvent_accessibleInterface ".} =
-  var nimfunc = cast[ptr QAccessibleTableModelChangeEventaccessibleInterfaceProc](cast[pointer](slot))
-
-  let virtualReturn = nimfunc[]( )
-
+proc miqt_exec_callback_cQAccessibleTableModelChangeEvent_accessibleInterface(vtbl: pointer, self: pointer): pointer {.cdecl.} =
+  let vtbl = cast[ptr QAccessibleTableModelChangeEventVTable](vtbl)
+  let self = QAccessibleTableModelChangeEvent(h: self)
+  var virtualReturn = vtbl[].accessibleInterface(self)
   virtualReturn.h
+
+proc create*(T: type gen_qaccessible_types.QAccessibleTableModelChangeEvent,
+    obj: gen_qobject_types.QObject, changeType: cint,
+    vtbl: ref QAccessibleTableModelChangeEventVTable = nil): gen_qaccessible_types.QAccessibleTableModelChangeEvent =
+  let vtbl = if vtbl == nil: new QAccessibleTableModelChangeEventVTable else: vtbl
+  GC_ref(vtbl)
+  vtbl.vtbl.destructor = proc(vtbl: ptr cQAccessibleTableModelChangeEventVTable, _: ptr cQAccessibleTableModelChangeEvent) {.cdecl.} =
+    let vtbl = cast[ref QAccessibleTableModelChangeEventVTable](vtbl)
+    GC_unref(vtbl)
+  if not isNil(vtbl.accessibleInterface):
+    vtbl[].vtbl.accessibleInterface = miqt_exec_callback_cQAccessibleTableModelChangeEvent_accessibleInterface
+  gen_qaccessible_types.QAccessibleTableModelChangeEvent(h: fcQAccessibleTableModelChangeEvent_new(addr(vtbl[]), obj.h, cint(changeType)))
+
+proc create*(T: type gen_qaccessible_types.QAccessibleTableModelChangeEvent,
+    iface: gen_qaccessible_types.QAccessibleInterface, changeType: cint,
+    vtbl: ref QAccessibleTableModelChangeEventVTable = nil): gen_qaccessible_types.QAccessibleTableModelChangeEvent =
+  let vtbl = if vtbl == nil: new QAccessibleTableModelChangeEventVTable else: vtbl
+  GC_ref(vtbl)
+  vtbl.vtbl.destructor = proc(vtbl: ptr cQAccessibleTableModelChangeEventVTable, _: ptr cQAccessibleTableModelChangeEvent) {.cdecl.} =
+    let vtbl = cast[ref QAccessibleTableModelChangeEventVTable](vtbl)
+    GC_unref(vtbl)
+  if not isNil(vtbl.accessibleInterface):
+    vtbl[].vtbl.accessibleInterface = miqt_exec_callback_cQAccessibleTableModelChangeEvent_accessibleInterface
+  gen_qaccessible_types.QAccessibleTableModelChangeEvent(h: fcQAccessibleTableModelChangeEvent_new2(addr(vtbl[]), iface.h, cint(changeType)))
+
 proc delete*(self: gen_qaccessible_types.QAccessibleTableModelChangeEvent) =
   fcQAccessibleTableModelChangeEvent_delete(self.h)

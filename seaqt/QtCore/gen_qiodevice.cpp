@@ -23,536 +23,423 @@ void miqt_exec_callback_QIODevice_bytesWritten(intptr_t, long long);
 void miqt_exec_callback_QIODevice_channelBytesWritten(intptr_t, int, long long);
 void miqt_exec_callback_QIODevice_aboutToClose(intptr_t);
 void miqt_exec_callback_QIODevice_readChannelFinished(intptr_t);
-QMetaObject* miqt_exec_callback_QIODevice_metaObject(const QIODevice*, intptr_t);
-void* miqt_exec_callback_QIODevice_metacast(QIODevice*, intptr_t, const char*);
-int miqt_exec_callback_QIODevice_metacall(QIODevice*, intptr_t, int, int, void**);
-bool miqt_exec_callback_QIODevice_isSequential(const QIODevice*, intptr_t);
-bool miqt_exec_callback_QIODevice_open(QIODevice*, intptr_t, int);
-void miqt_exec_callback_QIODevice_close(QIODevice*, intptr_t);
-long long miqt_exec_callback_QIODevice_pos(const QIODevice*, intptr_t);
-long long miqt_exec_callback_QIODevice_size(const QIODevice*, intptr_t);
-bool miqt_exec_callback_QIODevice_seek(QIODevice*, intptr_t, long long);
-bool miqt_exec_callback_QIODevice_atEnd(const QIODevice*, intptr_t);
-bool miqt_exec_callback_QIODevice_reset(QIODevice*, intptr_t);
-long long miqt_exec_callback_QIODevice_bytesAvailable(const QIODevice*, intptr_t);
-long long miqt_exec_callback_QIODevice_bytesToWrite(const QIODevice*, intptr_t);
-bool miqt_exec_callback_QIODevice_canReadLine(const QIODevice*, intptr_t);
-bool miqt_exec_callback_QIODevice_waitForReadyRead(QIODevice*, intptr_t, int);
-bool miqt_exec_callback_QIODevice_waitForBytesWritten(QIODevice*, intptr_t, int);
-long long miqt_exec_callback_QIODevice_readData(QIODevice*, intptr_t, char*, long long);
-long long miqt_exec_callback_QIODevice_readLineData(QIODevice*, intptr_t, char*, long long);
-long long miqt_exec_callback_QIODevice_skipData(QIODevice*, intptr_t, long long);
-long long miqt_exec_callback_QIODevice_writeData(QIODevice*, intptr_t, const char*, long long);
-bool miqt_exec_callback_QIODevice_event(QIODevice*, intptr_t, QEvent*);
-bool miqt_exec_callback_QIODevice_eventFilter(QIODevice*, intptr_t, QObject*, QEvent*);
-void miqt_exec_callback_QIODevice_timerEvent(QIODevice*, intptr_t, QTimerEvent*);
-void miqt_exec_callback_QIODevice_childEvent(QIODevice*, intptr_t, QChildEvent*);
-void miqt_exec_callback_QIODevice_customEvent(QIODevice*, intptr_t, QEvent*);
-void miqt_exec_callback_QIODevice_connectNotify(QIODevice*, intptr_t, QMetaMethod*);
-void miqt_exec_callback_QIODevice_disconnectNotify(QIODevice*, intptr_t, QMetaMethod*);
 #ifdef __cplusplus
 } /* extern C */
 #endif
 
 class VirtualQIODevice final : public QIODevice {
+	struct QIODevice_VTable* vtbl;
 public:
 
-	VirtualQIODevice(): QIODevice() {};
-	VirtualQIODevice(QObject* parent): QIODevice(parent) {};
+	VirtualQIODevice(struct QIODevice_VTable* vtbl): QIODevice(), vtbl(vtbl) {};
+	VirtualQIODevice(struct QIODevice_VTable* vtbl, QObject* parent): QIODevice(parent), vtbl(vtbl) {};
 
-	virtual ~VirtualQIODevice() override = default;
-
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__metaObject = 0;
+	virtual ~VirtualQIODevice() override { if(vtbl->destructor) vtbl->destructor(vtbl, this); }
 
 	// Subclass to allow providing a Go implementation
 	virtual const QMetaObject* metaObject() const override {
-		if (handle__metaObject == 0) {
+		if (vtbl->metaObject == 0) {
 			return QIODevice::metaObject();
 		}
-		
 
-		QMetaObject* callback_return_value = miqt_exec_callback_QIODevice_metaObject(this, handle__metaObject);
+
+		QMetaObject* callback_return_value = vtbl->metaObject(vtbl, this);
 
 		return callback_return_value;
 	}
 
 	friend QMetaObject* QIODevice_virtualbase_metaObject(const void* self);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__metacast = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void* qt_metacast(const char* param1) override {
-		if (handle__metacast == 0) {
+		if (vtbl->metacast == 0) {
 			return QIODevice::qt_metacast(param1);
 		}
-		
+
 		const char* sigval1 = (const char*) param1;
 
-		void* callback_return_value = miqt_exec_callback_QIODevice_metacast(this, handle__metacast, sigval1);
+		void* callback_return_value = vtbl->metacast(vtbl, this, sigval1);
 
 		return callback_return_value;
 	}
 
 	friend void* QIODevice_virtualbase_metacast(void* self, const char* param1);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__metacall = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual int qt_metacall(QMetaObject::Call param1, int param2, void** param3) override {
-		if (handle__metacall == 0) {
+		if (vtbl->metacall == 0) {
 			return QIODevice::qt_metacall(param1, param2, param3);
 		}
-		
+
 		QMetaObject::Call param1_ret = param1;
 		int sigval1 = static_cast<int>(param1_ret);
 		int sigval2 = param2;
 		void** sigval3 = param3;
 
-		int callback_return_value = miqt_exec_callback_QIODevice_metacall(this, handle__metacall, sigval1, sigval2, sigval3);
+		int callback_return_value = vtbl->metacall(vtbl, this, sigval1, sigval2, sigval3);
 
 		return static_cast<int>(callback_return_value);
 	}
 
 	friend int QIODevice_virtualbase_metacall(void* self, int param1, int param2, void** param3);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__isSequential = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual bool isSequential() const override {
-		if (handle__isSequential == 0) {
+		if (vtbl->isSequential == 0) {
 			return QIODevice::isSequential();
 		}
-		
 
-		bool callback_return_value = miqt_exec_callback_QIODevice_isSequential(this, handle__isSequential);
+
+		bool callback_return_value = vtbl->isSequential(vtbl, this);
 
 		return callback_return_value;
 	}
 
 	friend bool QIODevice_virtualbase_isSequential(const void* self);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__open = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual bool open(QIODeviceBase::OpenMode mode) override {
-		if (handle__open == 0) {
+		if (vtbl->open == 0) {
 			return QIODevice::open(mode);
 		}
-		
+
 		QIODeviceBase::OpenMode mode_ret = mode;
 		int sigval1 = static_cast<int>(mode_ret);
 
-		bool callback_return_value = miqt_exec_callback_QIODevice_open(this, handle__open, sigval1);
+		bool callback_return_value = vtbl->open(vtbl, this, sigval1);
 
 		return callback_return_value;
 	}
 
 	friend bool QIODevice_virtualbase_open(void* self, int mode);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__close = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void close() override {
-		if (handle__close == 0) {
+		if (vtbl->close == 0) {
 			QIODevice::close();
 			return;
 		}
-		
 
-		miqt_exec_callback_QIODevice_close(this, handle__close);
 
-		
+		vtbl->close(vtbl, this);
+
 	}
 
 	friend void QIODevice_virtualbase_close(void* self);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__pos = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual qint64 pos() const override {
-		if (handle__pos == 0) {
+		if (vtbl->pos == 0) {
 			return QIODevice::pos();
 		}
-		
 
-		long long callback_return_value = miqt_exec_callback_QIODevice_pos(this, handle__pos);
+
+		long long callback_return_value = vtbl->pos(vtbl, this);
 
 		return static_cast<qint64>(callback_return_value);
 	}
 
 	friend long long QIODevice_virtualbase_pos(const void* self);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__size = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual qint64 size() const override {
-		if (handle__size == 0) {
+		if (vtbl->size == 0) {
 			return QIODevice::size();
 		}
-		
 
-		long long callback_return_value = miqt_exec_callback_QIODevice_size(this, handle__size);
+
+		long long callback_return_value = vtbl->size(vtbl, this);
 
 		return static_cast<qint64>(callback_return_value);
 	}
 
 	friend long long QIODevice_virtualbase_size(const void* self);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__seek = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual bool seek(qint64 pos) override {
-		if (handle__seek == 0) {
+		if (vtbl->seek == 0) {
 			return QIODevice::seek(pos);
 		}
-		
+
 		qint64 pos_ret = pos;
 		long long sigval1 = static_cast<long long>(pos_ret);
 
-		bool callback_return_value = miqt_exec_callback_QIODevice_seek(this, handle__seek, sigval1);
+		bool callback_return_value = vtbl->seek(vtbl, this, sigval1);
 
 		return callback_return_value;
 	}
 
 	friend bool QIODevice_virtualbase_seek(void* self, long long pos);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__atEnd = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual bool atEnd() const override {
-		if (handle__atEnd == 0) {
+		if (vtbl->atEnd == 0) {
 			return QIODevice::atEnd();
 		}
-		
 
-		bool callback_return_value = miqt_exec_callback_QIODevice_atEnd(this, handle__atEnd);
+
+		bool callback_return_value = vtbl->atEnd(vtbl, this);
 
 		return callback_return_value;
 	}
 
 	friend bool QIODevice_virtualbase_atEnd(const void* self);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__reset = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual bool reset() override {
-		if (handle__reset == 0) {
+		if (vtbl->reset == 0) {
 			return QIODevice::reset();
 		}
-		
 
-		bool callback_return_value = miqt_exec_callback_QIODevice_reset(this, handle__reset);
+
+		bool callback_return_value = vtbl->reset(vtbl, this);
 
 		return callback_return_value;
 	}
 
 	friend bool QIODevice_virtualbase_reset(void* self);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__bytesAvailable = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual qint64 bytesAvailable() const override {
-		if (handle__bytesAvailable == 0) {
+		if (vtbl->bytesAvailable == 0) {
 			return QIODevice::bytesAvailable();
 		}
-		
 
-		long long callback_return_value = miqt_exec_callback_QIODevice_bytesAvailable(this, handle__bytesAvailable);
+
+		long long callback_return_value = vtbl->bytesAvailable(vtbl, this);
 
 		return static_cast<qint64>(callback_return_value);
 	}
 
 	friend long long QIODevice_virtualbase_bytesAvailable(const void* self);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__bytesToWrite = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual qint64 bytesToWrite() const override {
-		if (handle__bytesToWrite == 0) {
+		if (vtbl->bytesToWrite == 0) {
 			return QIODevice::bytesToWrite();
 		}
-		
 
-		long long callback_return_value = miqt_exec_callback_QIODevice_bytesToWrite(this, handle__bytesToWrite);
+
+		long long callback_return_value = vtbl->bytesToWrite(vtbl, this);
 
 		return static_cast<qint64>(callback_return_value);
 	}
 
 	friend long long QIODevice_virtualbase_bytesToWrite(const void* self);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__canReadLine = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual bool canReadLine() const override {
-		if (handle__canReadLine == 0) {
+		if (vtbl->canReadLine == 0) {
 			return QIODevice::canReadLine();
 		}
-		
 
-		bool callback_return_value = miqt_exec_callback_QIODevice_canReadLine(this, handle__canReadLine);
+
+		bool callback_return_value = vtbl->canReadLine(vtbl, this);
 
 		return callback_return_value;
 	}
 
 	friend bool QIODevice_virtualbase_canReadLine(const void* self);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__waitForReadyRead = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual bool waitForReadyRead(int msecs) override {
-		if (handle__waitForReadyRead == 0) {
+		if (vtbl->waitForReadyRead == 0) {
 			return QIODevice::waitForReadyRead(msecs);
 		}
-		
+
 		int sigval1 = msecs;
 
-		bool callback_return_value = miqt_exec_callback_QIODevice_waitForReadyRead(this, handle__waitForReadyRead, sigval1);
+		bool callback_return_value = vtbl->waitForReadyRead(vtbl, this, sigval1);
 
 		return callback_return_value;
 	}
 
 	friend bool QIODevice_virtualbase_waitForReadyRead(void* self, int msecs);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__waitForBytesWritten = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual bool waitForBytesWritten(int msecs) override {
-		if (handle__waitForBytesWritten == 0) {
+		if (vtbl->waitForBytesWritten == 0) {
 			return QIODevice::waitForBytesWritten(msecs);
 		}
-		
+
 		int sigval1 = msecs;
 
-		bool callback_return_value = miqt_exec_callback_QIODevice_waitForBytesWritten(this, handle__waitForBytesWritten, sigval1);
+		bool callback_return_value = vtbl->waitForBytesWritten(vtbl, this, sigval1);
 
 		return callback_return_value;
 	}
 
 	friend bool QIODevice_virtualbase_waitForBytesWritten(void* self, int msecs);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__readData = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual qint64 readData(char* data, qint64 maxlen) override {
-		if (handle__readData == 0) {
+		if (vtbl->readData == 0) {
 			return 0; // Pure virtual, there is no base we can call
 		}
-		
+
 		char* sigval1 = data;
 		qint64 maxlen_ret = maxlen;
 		long long sigval2 = static_cast<long long>(maxlen_ret);
 
-		long long callback_return_value = miqt_exec_callback_QIODevice_readData(this, handle__readData, sigval1, sigval2);
+		long long callback_return_value = vtbl->readData(vtbl, this, sigval1, sigval2);
 
 		return static_cast<qint64>(callback_return_value);
 	}
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__readLineData = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual qint64 readLineData(char* data, qint64 maxlen) override {
-		if (handle__readLineData == 0) {
+		if (vtbl->readLineData == 0) {
 			return QIODevice::readLineData(data, maxlen);
 		}
-		
+
 		char* sigval1 = data;
 		qint64 maxlen_ret = maxlen;
 		long long sigval2 = static_cast<long long>(maxlen_ret);
 
-		long long callback_return_value = miqt_exec_callback_QIODevice_readLineData(this, handle__readLineData, sigval1, sigval2);
+		long long callback_return_value = vtbl->readLineData(vtbl, this, sigval1, sigval2);
 
 		return static_cast<qint64>(callback_return_value);
 	}
 
 	friend long long QIODevice_virtualbase_readLineData(void* self, char* data, long long maxlen);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__skipData = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual qint64 skipData(qint64 maxSize) override {
-		if (handle__skipData == 0) {
+		if (vtbl->skipData == 0) {
 			return QIODevice::skipData(maxSize);
 		}
-		
+
 		qint64 maxSize_ret = maxSize;
 		long long sigval1 = static_cast<long long>(maxSize_ret);
 
-		long long callback_return_value = miqt_exec_callback_QIODevice_skipData(this, handle__skipData, sigval1);
+		long long callback_return_value = vtbl->skipData(vtbl, this, sigval1);
 
 		return static_cast<qint64>(callback_return_value);
 	}
 
 	friend long long QIODevice_virtualbase_skipData(void* self, long long maxSize);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__writeData = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual qint64 writeData(const char* data, qint64 len) override {
-		if (handle__writeData == 0) {
+		if (vtbl->writeData == 0) {
 			return 0; // Pure virtual, there is no base we can call
 		}
-		
+
 		const char* sigval1 = (const char*) data;
 		qint64 len_ret = len;
 		long long sigval2 = static_cast<long long>(len_ret);
 
-		long long callback_return_value = miqt_exec_callback_QIODevice_writeData(this, handle__writeData, sigval1, sigval2);
+		long long callback_return_value = vtbl->writeData(vtbl, this, sigval1, sigval2);
 
 		return static_cast<qint64>(callback_return_value);
 	}
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__event = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual bool event(QEvent* event) override {
-		if (handle__event == 0) {
+		if (vtbl->event == 0) {
 			return QIODevice::event(event);
 		}
-		
+
 		QEvent* sigval1 = event;
 
-		bool callback_return_value = miqt_exec_callback_QIODevice_event(this, handle__event, sigval1);
+		bool callback_return_value = vtbl->event(vtbl, this, sigval1);
 
 		return callback_return_value;
 	}
 
 	friend bool QIODevice_virtualbase_event(void* self, QEvent* event);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__eventFilter = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual bool eventFilter(QObject* watched, QEvent* event) override {
-		if (handle__eventFilter == 0) {
+		if (vtbl->eventFilter == 0) {
 			return QIODevice::eventFilter(watched, event);
 		}
-		
+
 		QObject* sigval1 = watched;
 		QEvent* sigval2 = event;
 
-		bool callback_return_value = miqt_exec_callback_QIODevice_eventFilter(this, handle__eventFilter, sigval1, sigval2);
+		bool callback_return_value = vtbl->eventFilter(vtbl, this, sigval1, sigval2);
 
 		return callback_return_value;
 	}
 
 	friend bool QIODevice_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__timerEvent = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void timerEvent(QTimerEvent* event) override {
-		if (handle__timerEvent == 0) {
+		if (vtbl->timerEvent == 0) {
 			QIODevice::timerEvent(event);
 			return;
 		}
-		
+
 		QTimerEvent* sigval1 = event;
 
-		miqt_exec_callback_QIODevice_timerEvent(this, handle__timerEvent, sigval1);
+		vtbl->timerEvent(vtbl, this, sigval1);
 
-		
 	}
 
 	friend void QIODevice_virtualbase_timerEvent(void* self, QTimerEvent* event);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__childEvent = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void childEvent(QChildEvent* event) override {
-		if (handle__childEvent == 0) {
+		if (vtbl->childEvent == 0) {
 			QIODevice::childEvent(event);
 			return;
 		}
-		
+
 		QChildEvent* sigval1 = event;
 
-		miqt_exec_callback_QIODevice_childEvent(this, handle__childEvent, sigval1);
+		vtbl->childEvent(vtbl, this, sigval1);
 
-		
 	}
 
 	friend void QIODevice_virtualbase_childEvent(void* self, QChildEvent* event);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__customEvent = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void customEvent(QEvent* event) override {
-		if (handle__customEvent == 0) {
+		if (vtbl->customEvent == 0) {
 			QIODevice::customEvent(event);
 			return;
 		}
-		
+
 		QEvent* sigval1 = event;
 
-		miqt_exec_callback_QIODevice_customEvent(this, handle__customEvent, sigval1);
+		vtbl->customEvent(vtbl, this, sigval1);
 
-		
 	}
 
 	friend void QIODevice_virtualbase_customEvent(void* self, QEvent* event);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__connectNotify = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void connectNotify(const QMetaMethod& signal) override {
-		if (handle__connectNotify == 0) {
+		if (vtbl->connectNotify == 0) {
 			QIODevice::connectNotify(signal);
 			return;
 		}
-		
+
 		const QMetaMethod& signal_ret = signal;
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
 
-		miqt_exec_callback_QIODevice_connectNotify(this, handle__connectNotify, sigval1);
+		vtbl->connectNotify(vtbl, this, sigval1);
 
-		
 	}
 
 	friend void QIODevice_virtualbase_connectNotify(void* self, QMetaMethod* signal);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__disconnectNotify = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void disconnectNotify(const QMetaMethod& signal) override {
-		if (handle__disconnectNotify == 0) {
+		if (vtbl->disconnectNotify == 0) {
 			QIODevice::disconnectNotify(signal);
 			return;
 		}
-		
+
 		const QMetaMethod& signal_ret = signal;
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
 
-		miqt_exec_callback_QIODevice_disconnectNotify(this, handle__disconnectNotify, sigval1);
+		vtbl->disconnectNotify(vtbl, this, sigval1);
 
-		
 	}
 
 	friend void QIODevice_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
@@ -566,12 +453,12 @@ public:
 	friend bool QIODevice_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
 };
 
-QIODevice* QIODevice_new() {
-	return new VirtualQIODevice();
+QIODevice* QIODevice_new(struct QIODevice_VTable* vtbl) {
+	return new VirtualQIODevice(vtbl);
 }
 
-QIODevice* QIODevice_new2(QObject* parent) {
-	return new VirtualQIODevice(parent);
+QIODevice* QIODevice_new2(struct QIODevice_VTable* vtbl, QObject* parent) {
+	return new VirtualQIODevice(vtbl, parent);
 }
 
 void QIODevice_virtbase(QIODevice* src, QObject** outptr_QObject, QIODeviceBase** outptr_QIODeviceBase) {
@@ -915,30 +802,10 @@ struct miqt_string QIODevice_readLine1(QIODevice* self, long long maxlen) {
 	return _ms;
 }
 
-bool QIODevice_override_virtual_metaObject(void* self, intptr_t slot) {
-	VirtualQIODevice* self_cast = dynamic_cast<VirtualQIODevice*>( (QIODevice*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__metaObject = slot;
-	return true;
-}
-
 QMetaObject* QIODevice_virtualbase_metaObject(const void* self) {
 
 	return (QMetaObject*) ( (const VirtualQIODevice*)(self) )->QIODevice::metaObject();
 
-}
-
-bool QIODevice_override_virtual_metacast(void* self, intptr_t slot) {
-	VirtualQIODevice* self_cast = dynamic_cast<VirtualQIODevice*>( (QIODevice*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__metacast = slot;
-	return true;
 }
 
 void* QIODevice_virtualbase_metacast(void* self, const char* param1) {
@@ -947,30 +814,10 @@ void* QIODevice_virtualbase_metacast(void* self, const char* param1) {
 
 }
 
-bool QIODevice_override_virtual_metacall(void* self, intptr_t slot) {
-	VirtualQIODevice* self_cast = dynamic_cast<VirtualQIODevice*>( (QIODevice*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__metacall = slot;
-	return true;
-}
-
 int QIODevice_virtualbase_metacall(void* self, int param1, int param2, void** param3) {
 
 	return ( (VirtualQIODevice*)(self) )->QIODevice::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 
-}
-
-bool QIODevice_override_virtual_isSequential(void* self, intptr_t slot) {
-	VirtualQIODevice* self_cast = dynamic_cast<VirtualQIODevice*>( (QIODevice*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__isSequential = slot;
-	return true;
 }
 
 bool QIODevice_virtualbase_isSequential(const void* self) {
@@ -979,46 +826,16 @@ bool QIODevice_virtualbase_isSequential(const void* self) {
 
 }
 
-bool QIODevice_override_virtual_open(void* self, intptr_t slot) {
-	VirtualQIODevice* self_cast = dynamic_cast<VirtualQIODevice*>( (QIODevice*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__open = slot;
-	return true;
-}
-
 bool QIODevice_virtualbase_open(void* self, int mode) {
 
 	return ( (VirtualQIODevice*)(self) )->QIODevice::open(static_cast<VirtualQIODevice::OpenMode>(mode));
 
 }
 
-bool QIODevice_override_virtual_close(void* self, intptr_t slot) {
-	VirtualQIODevice* self_cast = dynamic_cast<VirtualQIODevice*>( (QIODevice*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__close = slot;
-	return true;
-}
-
 void QIODevice_virtualbase_close(void* self) {
 
 	( (VirtualQIODevice*)(self) )->QIODevice::close();
 
-}
-
-bool QIODevice_override_virtual_pos(void* self, intptr_t slot) {
-	VirtualQIODevice* self_cast = dynamic_cast<VirtualQIODevice*>( (QIODevice*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__pos = slot;
-	return true;
 }
 
 long long QIODevice_virtualbase_pos(const void* self) {
@@ -1028,31 +845,11 @@ long long QIODevice_virtualbase_pos(const void* self) {
 
 }
 
-bool QIODevice_override_virtual_size(void* self, intptr_t slot) {
-	VirtualQIODevice* self_cast = dynamic_cast<VirtualQIODevice*>( (QIODevice*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__size = slot;
-	return true;
-}
-
 long long QIODevice_virtualbase_size(const void* self) {
 
 	qint64 _ret = ( (const VirtualQIODevice*)(self) )->QIODevice::size();
 	return static_cast<long long>(_ret);
 
-}
-
-bool QIODevice_override_virtual_seek(void* self, intptr_t slot) {
-	VirtualQIODevice* self_cast = dynamic_cast<VirtualQIODevice*>( (QIODevice*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__seek = slot;
-	return true;
 }
 
 bool QIODevice_virtualbase_seek(void* self, long long pos) {
@@ -1061,46 +858,16 @@ bool QIODevice_virtualbase_seek(void* self, long long pos) {
 
 }
 
-bool QIODevice_override_virtual_atEnd(void* self, intptr_t slot) {
-	VirtualQIODevice* self_cast = dynamic_cast<VirtualQIODevice*>( (QIODevice*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__atEnd = slot;
-	return true;
-}
-
 bool QIODevice_virtualbase_atEnd(const void* self) {
 
 	return ( (const VirtualQIODevice*)(self) )->QIODevice::atEnd();
 
 }
 
-bool QIODevice_override_virtual_reset(void* self, intptr_t slot) {
-	VirtualQIODevice* self_cast = dynamic_cast<VirtualQIODevice*>( (QIODevice*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__reset = slot;
-	return true;
-}
-
 bool QIODevice_virtualbase_reset(void* self) {
 
 	return ( (VirtualQIODevice*)(self) )->QIODevice::reset();
 
-}
-
-bool QIODevice_override_virtual_bytesAvailable(void* self, intptr_t slot) {
-	VirtualQIODevice* self_cast = dynamic_cast<VirtualQIODevice*>( (QIODevice*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__bytesAvailable = slot;
-	return true;
 }
 
 long long QIODevice_virtualbase_bytesAvailable(const void* self) {
@@ -1110,31 +877,11 @@ long long QIODevice_virtualbase_bytesAvailable(const void* self) {
 
 }
 
-bool QIODevice_override_virtual_bytesToWrite(void* self, intptr_t slot) {
-	VirtualQIODevice* self_cast = dynamic_cast<VirtualQIODevice*>( (QIODevice*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__bytesToWrite = slot;
-	return true;
-}
-
 long long QIODevice_virtualbase_bytesToWrite(const void* self) {
 
 	qint64 _ret = ( (const VirtualQIODevice*)(self) )->QIODevice::bytesToWrite();
 	return static_cast<long long>(_ret);
 
-}
-
-bool QIODevice_override_virtual_canReadLine(void* self, intptr_t slot) {
-	VirtualQIODevice* self_cast = dynamic_cast<VirtualQIODevice*>( (QIODevice*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__canReadLine = slot;
-	return true;
 }
 
 bool QIODevice_virtualbase_canReadLine(const void* self) {
@@ -1143,56 +890,16 @@ bool QIODevice_virtualbase_canReadLine(const void* self) {
 
 }
 
-bool QIODevice_override_virtual_waitForReadyRead(void* self, intptr_t slot) {
-	VirtualQIODevice* self_cast = dynamic_cast<VirtualQIODevice*>( (QIODevice*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__waitForReadyRead = slot;
-	return true;
-}
-
 bool QIODevice_virtualbase_waitForReadyRead(void* self, int msecs) {
 
 	return ( (VirtualQIODevice*)(self) )->QIODevice::waitForReadyRead(static_cast<int>(msecs));
 
 }
 
-bool QIODevice_override_virtual_waitForBytesWritten(void* self, intptr_t slot) {
-	VirtualQIODevice* self_cast = dynamic_cast<VirtualQIODevice*>( (QIODevice*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__waitForBytesWritten = slot;
-	return true;
-}
-
 bool QIODevice_virtualbase_waitForBytesWritten(void* self, int msecs) {
 
 	return ( (VirtualQIODevice*)(self) )->QIODevice::waitForBytesWritten(static_cast<int>(msecs));
 
-}
-
-bool QIODevice_override_virtual_readData(void* self, intptr_t slot) {
-	VirtualQIODevice* self_cast = dynamic_cast<VirtualQIODevice*>( (QIODevice*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__readData = slot;
-	return true;
-}
-
-bool QIODevice_override_virtual_readLineData(void* self, intptr_t slot) {
-	VirtualQIODevice* self_cast = dynamic_cast<VirtualQIODevice*>( (QIODevice*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__readLineData = slot;
-	return true;
 }
 
 long long QIODevice_virtualbase_readLineData(void* self, char* data, long long maxlen) {
@@ -1202,41 +909,11 @@ long long QIODevice_virtualbase_readLineData(void* self, char* data, long long m
 
 }
 
-bool QIODevice_override_virtual_skipData(void* self, intptr_t slot) {
-	VirtualQIODevice* self_cast = dynamic_cast<VirtualQIODevice*>( (QIODevice*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__skipData = slot;
-	return true;
-}
-
 long long QIODevice_virtualbase_skipData(void* self, long long maxSize) {
 
 	qint64 _ret = ( (VirtualQIODevice*)(self) )->QIODevice::skipData(static_cast<qint64>(maxSize));
 	return static_cast<long long>(_ret);
 
-}
-
-bool QIODevice_override_virtual_writeData(void* self, intptr_t slot) {
-	VirtualQIODevice* self_cast = dynamic_cast<VirtualQIODevice*>( (QIODevice*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__writeData = slot;
-	return true;
-}
-
-bool QIODevice_override_virtual_event(void* self, intptr_t slot) {
-	VirtualQIODevice* self_cast = dynamic_cast<VirtualQIODevice*>( (QIODevice*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__event = slot;
-	return true;
 }
 
 bool QIODevice_virtualbase_event(void* self, QEvent* event) {
@@ -1245,30 +922,10 @@ bool QIODevice_virtualbase_event(void* self, QEvent* event) {
 
 }
 
-bool QIODevice_override_virtual_eventFilter(void* self, intptr_t slot) {
-	VirtualQIODevice* self_cast = dynamic_cast<VirtualQIODevice*>( (QIODevice*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__eventFilter = slot;
-	return true;
-}
-
 bool QIODevice_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event) {
 
 	return ( (VirtualQIODevice*)(self) )->QIODevice::eventFilter(watched, event);
 
-}
-
-bool QIODevice_override_virtual_timerEvent(void* self, intptr_t slot) {
-	VirtualQIODevice* self_cast = dynamic_cast<VirtualQIODevice*>( (QIODevice*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__timerEvent = slot;
-	return true;
 }
 
 void QIODevice_virtualbase_timerEvent(void* self, QTimerEvent* event) {
@@ -1277,30 +934,10 @@ void QIODevice_virtualbase_timerEvent(void* self, QTimerEvent* event) {
 
 }
 
-bool QIODevice_override_virtual_childEvent(void* self, intptr_t slot) {
-	VirtualQIODevice* self_cast = dynamic_cast<VirtualQIODevice*>( (QIODevice*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__childEvent = slot;
-	return true;
-}
-
 void QIODevice_virtualbase_childEvent(void* self, QChildEvent* event) {
 
 	( (VirtualQIODevice*)(self) )->QIODevice::childEvent(event);
 
-}
-
-bool QIODevice_override_virtual_customEvent(void* self, intptr_t slot) {
-	VirtualQIODevice* self_cast = dynamic_cast<VirtualQIODevice*>( (QIODevice*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__customEvent = slot;
-	return true;
 }
 
 void QIODevice_virtualbase_customEvent(void* self, QEvent* event) {
@@ -1309,30 +946,10 @@ void QIODevice_virtualbase_customEvent(void* self, QEvent* event) {
 
 }
 
-bool QIODevice_override_virtual_connectNotify(void* self, intptr_t slot) {
-	VirtualQIODevice* self_cast = dynamic_cast<VirtualQIODevice*>( (QIODevice*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__connectNotify = slot;
-	return true;
-}
-
 void QIODevice_virtualbase_connectNotify(void* self, QMetaMethod* signal) {
 
 	( (VirtualQIODevice*)(self) )->QIODevice::connectNotify(*signal);
 
-}
-
-bool QIODevice_override_virtual_disconnectNotify(void* self, intptr_t slot) {
-	VirtualQIODevice* self_cast = dynamic_cast<VirtualQIODevice*>( (QIODevice*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__disconnectNotify = slot;
-	return true;
 }
 
 void QIODevice_virtualbase_disconnectNotify(void* self, QMetaMethod* signal) {

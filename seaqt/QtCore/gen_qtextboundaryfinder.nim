@@ -60,12 +60,6 @@ export
 
 type cQTextBoundaryFinder*{.exportc: "QTextBoundaryFinder", incompleteStruct.} = object
 
-proc fcQTextBoundaryFinder_new(): ptr cQTextBoundaryFinder {.importc: "QTextBoundaryFinder_new".}
-proc fcQTextBoundaryFinder_new2(other: pointer): ptr cQTextBoundaryFinder {.importc: "QTextBoundaryFinder_new2".}
-proc fcQTextBoundaryFinder_new3(typeVal: cint, string: struct_miqt_string): ptr cQTextBoundaryFinder {.importc: "QTextBoundaryFinder_new3".}
-proc fcQTextBoundaryFinder_new4(typeVal: cint, chars: pointer, length: int64): ptr cQTextBoundaryFinder {.importc: "QTextBoundaryFinder_new4".}
-proc fcQTextBoundaryFinder_new5(typeVal: cint, chars: pointer, length: int64, buffer: ptr uint8): ptr cQTextBoundaryFinder {.importc: "QTextBoundaryFinder_new5".}
-proc fcQTextBoundaryFinder_new6(typeVal: cint, chars: pointer, length: int64, buffer: ptr uint8, bufferSize: int64): ptr cQTextBoundaryFinder {.importc: "QTextBoundaryFinder_new6".}
 proc fcQTextBoundaryFinder_operatorAssign(self: pointer, other: pointer): void {.importc: "QTextBoundaryFinder_operatorAssign".}
 proc fcQTextBoundaryFinder_isValid(self: pointer, ): bool {.importc: "QTextBoundaryFinder_isValid".}
 proc fcQTextBoundaryFinder_typeX(self: pointer, ): cint {.importc: "QTextBoundaryFinder_type".}
@@ -78,28 +72,13 @@ proc fcQTextBoundaryFinder_toNextBoundary(self: pointer, ): int64 {.importc: "QT
 proc fcQTextBoundaryFinder_toPreviousBoundary(self: pointer, ): int64 {.importc: "QTextBoundaryFinder_toPreviousBoundary".}
 proc fcQTextBoundaryFinder_isAtBoundary(self: pointer, ): bool {.importc: "QTextBoundaryFinder_isAtBoundary".}
 proc fcQTextBoundaryFinder_boundaryReasons(self: pointer, ): cint {.importc: "QTextBoundaryFinder_boundaryReasons".}
+proc fcQTextBoundaryFinder_new(): ptr cQTextBoundaryFinder {.importc: "QTextBoundaryFinder_new".}
+proc fcQTextBoundaryFinder_new2(other: pointer): ptr cQTextBoundaryFinder {.importc: "QTextBoundaryFinder_new2".}
+proc fcQTextBoundaryFinder_new3(typeVal: cint, string: struct_miqt_string): ptr cQTextBoundaryFinder {.importc: "QTextBoundaryFinder_new3".}
+proc fcQTextBoundaryFinder_new4(typeVal: cint, chars: pointer, length: int64): ptr cQTextBoundaryFinder {.importc: "QTextBoundaryFinder_new4".}
+proc fcQTextBoundaryFinder_new5(typeVal: cint, chars: pointer, length: int64, buffer: ptr uint8): ptr cQTextBoundaryFinder {.importc: "QTextBoundaryFinder_new5".}
+proc fcQTextBoundaryFinder_new6(typeVal: cint, chars: pointer, length: int64, buffer: ptr uint8, bufferSize: int64): ptr cQTextBoundaryFinder {.importc: "QTextBoundaryFinder_new6".}
 proc fcQTextBoundaryFinder_delete(self: pointer) {.importc: "QTextBoundaryFinder_delete".}
-
-
-func init*(T: type gen_qtextboundaryfinder_types.QTextBoundaryFinder, h: ptr cQTextBoundaryFinder): gen_qtextboundaryfinder_types.QTextBoundaryFinder =
-  T(h: h)
-proc create*(T: type gen_qtextboundaryfinder_types.QTextBoundaryFinder, ): gen_qtextboundaryfinder_types.QTextBoundaryFinder =
-  gen_qtextboundaryfinder_types.QTextBoundaryFinder.init(fcQTextBoundaryFinder_new())
-
-proc create*(T: type gen_qtextboundaryfinder_types.QTextBoundaryFinder, other: gen_qtextboundaryfinder_types.QTextBoundaryFinder): gen_qtextboundaryfinder_types.QTextBoundaryFinder =
-  gen_qtextboundaryfinder_types.QTextBoundaryFinder.init(fcQTextBoundaryFinder_new2(other.h))
-
-proc create*(T: type gen_qtextboundaryfinder_types.QTextBoundaryFinder, typeVal: cint, string: string): gen_qtextboundaryfinder_types.QTextBoundaryFinder =
-  gen_qtextboundaryfinder_types.QTextBoundaryFinder.init(fcQTextBoundaryFinder_new3(cint(typeVal), struct_miqt_string(data: string, len: csize_t(len(string)))))
-
-proc create*(T: type gen_qtextboundaryfinder_types.QTextBoundaryFinder, typeVal: cint, chars: gen_qchar_types.QChar, length: int64): gen_qtextboundaryfinder_types.QTextBoundaryFinder =
-  gen_qtextboundaryfinder_types.QTextBoundaryFinder.init(fcQTextBoundaryFinder_new4(cint(typeVal), chars.h, length))
-
-proc create*(T: type gen_qtextboundaryfinder_types.QTextBoundaryFinder, typeVal: cint, chars: gen_qchar_types.QChar, length: int64, buffer: ptr uint8): gen_qtextboundaryfinder_types.QTextBoundaryFinder =
-  gen_qtextboundaryfinder_types.QTextBoundaryFinder.init(fcQTextBoundaryFinder_new5(cint(typeVal), chars.h, length, buffer))
-
-proc create*(T: type gen_qtextboundaryfinder_types.QTextBoundaryFinder, typeVal: cint, chars: gen_qchar_types.QChar, length: int64, buffer: ptr uint8, bufferSize: int64): gen_qtextboundaryfinder_types.QTextBoundaryFinder =
-  gen_qtextboundaryfinder_types.QTextBoundaryFinder.init(fcQTextBoundaryFinder_new6(cint(typeVal), chars.h, length, buffer, bufferSize))
 
 proc operatorAssign*(self: gen_qtextboundaryfinder_types.QTextBoundaryFinder, other: gen_qtextboundaryfinder_types.QTextBoundaryFinder): void =
   fcQTextBoundaryFinder_operatorAssign(self.h, other.h)
@@ -139,6 +118,29 @@ proc isAtBoundary*(self: gen_qtextboundaryfinder_types.QTextBoundaryFinder, ): b
 
 proc boundaryReasons*(self: gen_qtextboundaryfinder_types.QTextBoundaryFinder, ): cint =
   cint(fcQTextBoundaryFinder_boundaryReasons(self.h))
+
+proc create*(T: type gen_qtextboundaryfinder_types.QTextBoundaryFinder): gen_qtextboundaryfinder_types.QTextBoundaryFinder =
+  gen_qtextboundaryfinder_types.QTextBoundaryFinder(h: fcQTextBoundaryFinder_new())
+
+proc create*(T: type gen_qtextboundaryfinder_types.QTextBoundaryFinder,
+    other: gen_qtextboundaryfinder_types.QTextBoundaryFinder): gen_qtextboundaryfinder_types.QTextBoundaryFinder =
+  gen_qtextboundaryfinder_types.QTextBoundaryFinder(h: fcQTextBoundaryFinder_new2(other.h))
+
+proc create*(T: type gen_qtextboundaryfinder_types.QTextBoundaryFinder,
+    typeVal: cint, string: string): gen_qtextboundaryfinder_types.QTextBoundaryFinder =
+  gen_qtextboundaryfinder_types.QTextBoundaryFinder(h: fcQTextBoundaryFinder_new3(cint(typeVal), struct_miqt_string(data: string, len: csize_t(len(string)))))
+
+proc create*(T: type gen_qtextboundaryfinder_types.QTextBoundaryFinder,
+    typeVal: cint, chars: gen_qchar_types.QChar, length: int64): gen_qtextboundaryfinder_types.QTextBoundaryFinder =
+  gen_qtextboundaryfinder_types.QTextBoundaryFinder(h: fcQTextBoundaryFinder_new4(cint(typeVal), chars.h, length))
+
+proc create*(T: type gen_qtextboundaryfinder_types.QTextBoundaryFinder,
+    typeVal: cint, chars: gen_qchar_types.QChar, length: int64, buffer: ptr uint8): gen_qtextboundaryfinder_types.QTextBoundaryFinder =
+  gen_qtextboundaryfinder_types.QTextBoundaryFinder(h: fcQTextBoundaryFinder_new5(cint(typeVal), chars.h, length, buffer))
+
+proc create*(T: type gen_qtextboundaryfinder_types.QTextBoundaryFinder,
+    typeVal: cint, chars: gen_qchar_types.QChar, length: int64, buffer: ptr uint8, bufferSize: int64): gen_qtextboundaryfinder_types.QTextBoundaryFinder =
+  gen_qtextboundaryfinder_types.QTextBoundaryFinder(h: fcQTextBoundaryFinder_new6(cint(typeVal), chars.h, length, buffer, bufferSize))
 
 proc delete*(self: gen_qtextboundaryfinder_types.QTextBoundaryFinder) =
   fcQTextBoundaryFinder_delete(self.h)

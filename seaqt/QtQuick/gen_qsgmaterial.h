@@ -24,18 +24,21 @@ typedef struct QSGMaterialShader QSGMaterialShader;
 typedef struct QSGMaterialType QSGMaterialType;
 #endif
 
-QSGMaterial* QSGMaterial_new();
+struct QSGMaterial_VTable {
+	void (*destructor)(struct QSGMaterial_VTable* vtbl, QSGMaterial* self);
+	QSGMaterialType* (*type)(struct QSGMaterial_VTable* vtbl, const QSGMaterial* self);
+	QSGMaterialShader* (*createShader)(struct QSGMaterial_VTable* vtbl, const QSGMaterial* self, int renderMode);
+	int (*compare)(struct QSGMaterial_VTable* vtbl, const QSGMaterial* self, QSGMaterial* other);
+};
+QSGMaterial* QSGMaterial_new(struct QSGMaterial_VTable* vtbl);
 QSGMaterialType* QSGMaterial_type(const QSGMaterial* self);
 QSGMaterialShader* QSGMaterial_createShader(const QSGMaterial* self, int renderMode);
 int QSGMaterial_compare(const QSGMaterial* self, QSGMaterial* other);
 int QSGMaterial_flags(const QSGMaterial* self);
 void QSGMaterial_setFlag(QSGMaterial* self, int flags);
 void QSGMaterial_setFlag2(QSGMaterial* self, int flags, bool on);
-bool QSGMaterial_override_virtual_type(void* self, intptr_t slot);
 QSGMaterialType* QSGMaterial_virtualbase_type(const void* self);
-bool QSGMaterial_override_virtual_createShader(void* self, intptr_t slot);
 QSGMaterialShader* QSGMaterial_virtualbase_createShader(const void* self, int renderMode);
-bool QSGMaterial_override_virtual_compare(void* self, intptr_t slot);
 int QSGMaterial_virtualbase_compare(const void* self, QSGMaterial* other);
 void QSGMaterial_delete(QSGMaterial* self);
 

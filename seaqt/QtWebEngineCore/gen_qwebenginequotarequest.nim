@@ -46,25 +46,16 @@ export
 
 type cQWebEngineQuotaRequest*{.exportc: "QWebEngineQuotaRequest", incompleteStruct.} = object
 
-proc fcQWebEngineQuotaRequest_new(): ptr cQWebEngineQuotaRequest {.importc: "QWebEngineQuotaRequest_new".}
-proc fcQWebEngineQuotaRequest_new2(param1: pointer): ptr cQWebEngineQuotaRequest {.importc: "QWebEngineQuotaRequest_new2".}
 proc fcQWebEngineQuotaRequest_accept(self: pointer, ): void {.importc: "QWebEngineQuotaRequest_accept".}
 proc fcQWebEngineQuotaRequest_reject(self: pointer, ): void {.importc: "QWebEngineQuotaRequest_reject".}
 proc fcQWebEngineQuotaRequest_origin(self: pointer, ): pointer {.importc: "QWebEngineQuotaRequest_origin".}
 proc fcQWebEngineQuotaRequest_requestedSize(self: pointer, ): clonglong {.importc: "QWebEngineQuotaRequest_requestedSize".}
 proc fcQWebEngineQuotaRequest_operatorEqual(self: pointer, that: pointer): bool {.importc: "QWebEngineQuotaRequest_operatorEqual".}
 proc fcQWebEngineQuotaRequest_operatorNotEqual(self: pointer, that: pointer): bool {.importc: "QWebEngineQuotaRequest_operatorNotEqual".}
+proc fcQWebEngineQuotaRequest_new(): ptr cQWebEngineQuotaRequest {.importc: "QWebEngineQuotaRequest_new".}
+proc fcQWebEngineQuotaRequest_new2(param1: pointer): ptr cQWebEngineQuotaRequest {.importc: "QWebEngineQuotaRequest_new2".}
 proc fcQWebEngineQuotaRequest_staticMetaObject(): pointer {.importc: "QWebEngineQuotaRequest_staticMetaObject".}
 proc fcQWebEngineQuotaRequest_delete(self: pointer) {.importc: "QWebEngineQuotaRequest_delete".}
-
-
-func init*(T: type gen_qwebenginequotarequest_types.QWebEngineQuotaRequest, h: ptr cQWebEngineQuotaRequest): gen_qwebenginequotarequest_types.QWebEngineQuotaRequest =
-  T(h: h)
-proc create*(T: type gen_qwebenginequotarequest_types.QWebEngineQuotaRequest, ): gen_qwebenginequotarequest_types.QWebEngineQuotaRequest =
-  gen_qwebenginequotarequest_types.QWebEngineQuotaRequest.init(fcQWebEngineQuotaRequest_new())
-
-proc create*(T: type gen_qwebenginequotarequest_types.QWebEngineQuotaRequest, param1: gen_qwebenginequotarequest_types.QWebEngineQuotaRequest): gen_qwebenginequotarequest_types.QWebEngineQuotaRequest =
-  gen_qwebenginequotarequest_types.QWebEngineQuotaRequest.init(fcQWebEngineQuotaRequest_new2(param1.h))
 
 proc accept*(self: gen_qwebenginequotarequest_types.QWebEngineQuotaRequest, ): void =
   fcQWebEngineQuotaRequest_accept(self.h)
@@ -83,6 +74,13 @@ proc operatorEqual*(self: gen_qwebenginequotarequest_types.QWebEngineQuotaReques
 
 proc operatorNotEqual*(self: gen_qwebenginequotarequest_types.QWebEngineQuotaRequest, that: gen_qwebenginequotarequest_types.QWebEngineQuotaRequest): bool =
   fcQWebEngineQuotaRequest_operatorNotEqual(self.h, that.h)
+
+proc create*(T: type gen_qwebenginequotarequest_types.QWebEngineQuotaRequest): gen_qwebenginequotarequest_types.QWebEngineQuotaRequest =
+  gen_qwebenginequotarequest_types.QWebEngineQuotaRequest(h: fcQWebEngineQuotaRequest_new())
+
+proc create*(T: type gen_qwebenginequotarequest_types.QWebEngineQuotaRequest,
+    param1: gen_qwebenginequotarequest_types.QWebEngineQuotaRequest): gen_qwebenginequotarequest_types.QWebEngineQuotaRequest =
+  gen_qwebenginequotarequest_types.QWebEngineQuotaRequest(h: fcQWebEngineQuotaRequest_new2(param1.h))
 
 proc staticMetaObject*(_: type gen_qwebenginequotarequest_types.QWebEngineQuotaRequest): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQWebEngineQuotaRequest_staticMetaObject())

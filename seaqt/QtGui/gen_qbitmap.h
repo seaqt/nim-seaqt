@@ -38,13 +38,22 @@ typedef struct QTransform QTransform;
 typedef struct QVariant QVariant;
 #endif
 
-QBitmap* QBitmap_new();
-QBitmap* QBitmap_new2(QPixmap* param1);
-QBitmap* QBitmap_new3(int w, int h);
-QBitmap* QBitmap_new4(QSize* param1);
-QBitmap* QBitmap_new5(struct miqt_string fileName);
-QBitmap* QBitmap_new6(QBitmap* param1);
-QBitmap* QBitmap_new7(struct miqt_string fileName, const char* format);
+struct QBitmap_VTable {
+	void (*destructor)(struct QBitmap_VTable* vtbl, QBitmap* self);
+	int (*devType)(struct QBitmap_VTable* vtbl, const QBitmap* self);
+	QPaintEngine* (*paintEngine)(struct QBitmap_VTable* vtbl, const QBitmap* self);
+	int (*metric)(struct QBitmap_VTable* vtbl, const QBitmap* self, int param1);
+	void (*initPainter)(struct QBitmap_VTable* vtbl, const QBitmap* self, QPainter* painter);
+	QPaintDevice* (*redirected)(struct QBitmap_VTable* vtbl, const QBitmap* self, QPoint* offset);
+	QPainter* (*sharedPainter)(struct QBitmap_VTable* vtbl, const QBitmap* self);
+};
+QBitmap* QBitmap_new(struct QBitmap_VTable* vtbl);
+QBitmap* QBitmap_new2(struct QBitmap_VTable* vtbl, QPixmap* param1);
+QBitmap* QBitmap_new3(struct QBitmap_VTable* vtbl, int w, int h);
+QBitmap* QBitmap_new4(struct QBitmap_VTable* vtbl, QSize* param1);
+QBitmap* QBitmap_new5(struct QBitmap_VTable* vtbl, struct miqt_string fileName);
+QBitmap* QBitmap_new6(struct QBitmap_VTable* vtbl, QBitmap* param1);
+QBitmap* QBitmap_new7(struct QBitmap_VTable* vtbl, struct miqt_string fileName, const char* format);
 void QBitmap_virtbase(QBitmap* src, QPixmap** outptr_QPixmap);
 void QBitmap_operatorAssign(QBitmap* self, QPixmap* param1);
 void QBitmap_swap(QBitmap* self, QBitmap* other);
@@ -57,17 +66,11 @@ QBitmap* QBitmap_transformed(const QBitmap* self, QTransform* matrix);
 void QBitmap_operatorAssignWithQBitmap(QBitmap* self, QBitmap* param1);
 QBitmap* QBitmap_fromImage2(QImage* image, int flags);
 QBitmap* QBitmap_fromData3(QSize* size, const unsigned char* bits, int monoFormat);
-bool QBitmap_override_virtual_devType(void* self, intptr_t slot);
 int QBitmap_virtualbase_devType(const void* self);
-bool QBitmap_override_virtual_paintEngine(void* self, intptr_t slot);
 QPaintEngine* QBitmap_virtualbase_paintEngine(const void* self);
-bool QBitmap_override_virtual_metric(void* self, intptr_t slot);
 int QBitmap_virtualbase_metric(const void* self, int param1);
-bool QBitmap_override_virtual_initPainter(void* self, intptr_t slot);
 void QBitmap_virtualbase_initPainter(const void* self, QPainter* painter);
-bool QBitmap_override_virtual_redirected(void* self, intptr_t slot);
 QPaintDevice* QBitmap_virtualbase_redirected(const void* self, QPoint* offset);
-bool QBitmap_override_virtual_sharedPainter(void* self, intptr_t slot);
 QPainter* QBitmap_virtualbase_sharedPainter(const void* self);
 void QBitmap_delete(QBitmap* self);
 

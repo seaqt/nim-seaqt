@@ -46,12 +46,6 @@ export
 
 type cQQuaternion*{.exportc: "QQuaternion", incompleteStruct.} = object
 
-proc fcQQuaternion_new(): ptr cQQuaternion {.importc: "QQuaternion_new".}
-proc fcQQuaternion_new2(param1: cint): ptr cQQuaternion {.importc: "QQuaternion_new2".}
-proc fcQQuaternion_new3(scalar: float32, xpos: float32, ypos: float32, zpos: float32): ptr cQQuaternion {.importc: "QQuaternion_new3".}
-proc fcQQuaternion_new4(scalar: float32, vector: pointer): ptr cQQuaternion {.importc: "QQuaternion_new4".}
-proc fcQQuaternion_new5(vector: pointer): ptr cQQuaternion {.importc: "QQuaternion_new5".}
-proc fcQQuaternion_new6(param1: pointer): ptr cQQuaternion {.importc: "QQuaternion_new6".}
 proc fcQQuaternion_isNull(self: pointer, ): bool {.importc: "QQuaternion_isNull".}
 proc fcQQuaternion_isIdentity(self: pointer, ): bool {.importc: "QQuaternion_isIdentity".}
 proc fcQQuaternion_vector(self: pointer, ): pointer {.importc: "QQuaternion_vector".}
@@ -94,28 +88,13 @@ proc fcQQuaternion_fromDirection(direction: pointer, up: pointer): pointer {.imp
 proc fcQQuaternion_rotationTo(fromVal: pointer, to: pointer): pointer {.importc: "QQuaternion_rotationTo".}
 proc fcQQuaternion_slerp(q1: pointer, q2: pointer, t: float32): pointer {.importc: "QQuaternion_slerp".}
 proc fcQQuaternion_nlerp(q1: pointer, q2: pointer, t: float32): pointer {.importc: "QQuaternion_nlerp".}
+proc fcQQuaternion_new(): ptr cQQuaternion {.importc: "QQuaternion_new".}
+proc fcQQuaternion_new2(param1: cint): ptr cQQuaternion {.importc: "QQuaternion_new2".}
+proc fcQQuaternion_new3(scalar: float32, xpos: float32, ypos: float32, zpos: float32): ptr cQQuaternion {.importc: "QQuaternion_new3".}
+proc fcQQuaternion_new4(scalar: float32, vector: pointer): ptr cQQuaternion {.importc: "QQuaternion_new4".}
+proc fcQQuaternion_new5(vector: pointer): ptr cQQuaternion {.importc: "QQuaternion_new5".}
+proc fcQQuaternion_new6(param1: pointer): ptr cQQuaternion {.importc: "QQuaternion_new6".}
 proc fcQQuaternion_delete(self: pointer) {.importc: "QQuaternion_delete".}
-
-
-func init*(T: type gen_qquaternion_types.QQuaternion, h: ptr cQQuaternion): gen_qquaternion_types.QQuaternion =
-  T(h: h)
-proc create*(T: type gen_qquaternion_types.QQuaternion, ): gen_qquaternion_types.QQuaternion =
-  gen_qquaternion_types.QQuaternion.init(fcQQuaternion_new())
-
-proc create*(T: type gen_qquaternion_types.QQuaternion, param1: cint): gen_qquaternion_types.QQuaternion =
-  gen_qquaternion_types.QQuaternion.init(fcQQuaternion_new2(cint(param1)))
-
-proc create*(T: type gen_qquaternion_types.QQuaternion, scalar: float32, xpos: float32, ypos: float32, zpos: float32): gen_qquaternion_types.QQuaternion =
-  gen_qquaternion_types.QQuaternion.init(fcQQuaternion_new3(scalar, xpos, ypos, zpos))
-
-proc create*(T: type gen_qquaternion_types.QQuaternion, scalar: float32, vector: gen_qvectornd_types.QVector3D): gen_qquaternion_types.QQuaternion =
-  gen_qquaternion_types.QQuaternion.init(fcQQuaternion_new4(scalar, vector.h))
-
-proc create*(T: type gen_qquaternion_types.QQuaternion, vector: gen_qvectornd_types.QVector4D): gen_qquaternion_types.QQuaternion =
-  gen_qquaternion_types.QQuaternion.init(fcQQuaternion_new5(vector.h))
-
-proc create*(T: type gen_qquaternion_types.QQuaternion, param1: gen_qquaternion_types.QQuaternion): gen_qquaternion_types.QQuaternion =
-  gen_qquaternion_types.QQuaternion.init(fcQQuaternion_new6(param1.h))
 
 proc isNull*(self: gen_qquaternion_types.QQuaternion, ): bool =
   fcQQuaternion_isNull(self.h)
@@ -242,6 +221,29 @@ proc slerp*(_: type gen_qquaternion_types.QQuaternion, q1: gen_qquaternion_types
 
 proc nlerp*(_: type gen_qquaternion_types.QQuaternion, q1: gen_qquaternion_types.QQuaternion, q2: gen_qquaternion_types.QQuaternion, t: float32): gen_qquaternion_types.QQuaternion =
   gen_qquaternion_types.QQuaternion(h: fcQQuaternion_nlerp(q1.h, q2.h, t))
+
+proc create*(T: type gen_qquaternion_types.QQuaternion): gen_qquaternion_types.QQuaternion =
+  gen_qquaternion_types.QQuaternion(h: fcQQuaternion_new())
+
+proc create*(T: type gen_qquaternion_types.QQuaternion,
+    param1: cint): gen_qquaternion_types.QQuaternion =
+  gen_qquaternion_types.QQuaternion(h: fcQQuaternion_new2(cint(param1)))
+
+proc create*(T: type gen_qquaternion_types.QQuaternion,
+    scalar: float32, xpos: float32, ypos: float32, zpos: float32): gen_qquaternion_types.QQuaternion =
+  gen_qquaternion_types.QQuaternion(h: fcQQuaternion_new3(scalar, xpos, ypos, zpos))
+
+proc create*(T: type gen_qquaternion_types.QQuaternion,
+    scalar: float32, vector: gen_qvectornd_types.QVector3D): gen_qquaternion_types.QQuaternion =
+  gen_qquaternion_types.QQuaternion(h: fcQQuaternion_new4(scalar, vector.h))
+
+proc create*(T: type gen_qquaternion_types.QQuaternion,
+    vector: gen_qvectornd_types.QVector4D): gen_qquaternion_types.QQuaternion =
+  gen_qquaternion_types.QQuaternion(h: fcQQuaternion_new5(vector.h))
+
+proc create*(T: type gen_qquaternion_types.QQuaternion,
+    param1: gen_qquaternion_types.QQuaternion): gen_qquaternion_types.QQuaternion =
+  gen_qquaternion_types.QQuaternion(h: fcQQuaternion_new6(param1.h))
 
 proc delete*(self: gen_qquaternion_types.QQuaternion) =
   fcQQuaternion_delete(self.h)

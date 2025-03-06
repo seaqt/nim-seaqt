@@ -73,21 +73,21 @@ type cQUntypedBindable*{.exportc: "QUntypedBindable", incompleteStruct.} = objec
 proc fcQPropertyBindingSourceLocation_new(): ptr cQPropertyBindingSourceLocation {.importc: "QPropertyBindingSourceLocation_new".}
 proc fcQPropertyBindingSourceLocation_new2(param1: pointer): ptr cQPropertyBindingSourceLocation {.importc: "QPropertyBindingSourceLocation_new2".}
 proc fcQPropertyBindingSourceLocation_delete(self: pointer) {.importc: "QPropertyBindingSourceLocation_delete".}
-proc fcQPropertyBindingError_new(): ptr cQPropertyBindingError {.importc: "QPropertyBindingError_new".}
-proc fcQPropertyBindingError_new2(typeVal: cint): ptr cQPropertyBindingError {.importc: "QPropertyBindingError_new2".}
-proc fcQPropertyBindingError_new3(other: pointer): ptr cQPropertyBindingError {.importc: "QPropertyBindingError_new3".}
-proc fcQPropertyBindingError_new4(typeVal: cint, description: struct_miqt_string): ptr cQPropertyBindingError {.importc: "QPropertyBindingError_new4".}
 proc fcQPropertyBindingError_operatorAssign(self: pointer, other: pointer): void {.importc: "QPropertyBindingError_operatorAssign".}
 proc fcQPropertyBindingError_hasError(self: pointer, ): bool {.importc: "QPropertyBindingError_hasError".}
 proc fcQPropertyBindingError_typeX(self: pointer, ): cint {.importc: "QPropertyBindingError_type".}
 proc fcQPropertyBindingError_description(self: pointer, ): struct_miqt_string {.importc: "QPropertyBindingError_description".}
+proc fcQPropertyBindingError_new(): ptr cQPropertyBindingError {.importc: "QPropertyBindingError_new".}
+proc fcQPropertyBindingError_new2(typeVal: cint): ptr cQPropertyBindingError {.importc: "QPropertyBindingError_new2".}
+proc fcQPropertyBindingError_new3(other: pointer): ptr cQPropertyBindingError {.importc: "QPropertyBindingError_new3".}
+proc fcQPropertyBindingError_new4(typeVal: cint, description: struct_miqt_string): ptr cQPropertyBindingError {.importc: "QPropertyBindingError_new4".}
 proc fcQPropertyBindingError_delete(self: pointer) {.importc: "QPropertyBindingError_delete".}
-proc fcQUntypedPropertyBinding_new(): ptr cQUntypedPropertyBinding {.importc: "QUntypedPropertyBinding_new".}
-proc fcQUntypedPropertyBinding_new2(other: pointer): ptr cQUntypedPropertyBinding {.importc: "QUntypedPropertyBinding_new2".}
 proc fcQUntypedPropertyBinding_operatorAssign(self: pointer, other: pointer): void {.importc: "QUntypedPropertyBinding_operatorAssign".}
 proc fcQUntypedPropertyBinding_isNull(self: pointer, ): bool {.importc: "QUntypedPropertyBinding_isNull".}
 proc fcQUntypedPropertyBinding_error(self: pointer, ): pointer {.importc: "QUntypedPropertyBinding_error".}
 proc fcQUntypedPropertyBinding_valueMetaType(self: pointer, ): pointer {.importc: "QUntypedPropertyBinding_valueMetaType".}
+proc fcQUntypedPropertyBinding_new(): ptr cQUntypedPropertyBinding {.importc: "QUntypedPropertyBinding_new".}
+proc fcQUntypedPropertyBinding_new2(other: pointer): ptr cQUntypedPropertyBinding {.importc: "QUntypedPropertyBinding_new2".}
 proc fcQUntypedPropertyBinding_delete(self: pointer) {.importc: "QUntypedPropertyBinding_delete".}
 proc fcQPropertyObserverBase_new(): ptr cQPropertyObserverBase {.importc: "QPropertyObserverBase_new".}
 proc fcQPropertyObserverBase_new2(param1: pointer): ptr cQPropertyObserverBase {.importc: "QPropertyObserverBase_new2".}
@@ -96,8 +96,6 @@ proc fcQPropertyObserver_new(): ptr cQPropertyObserver {.importc: "QPropertyObse
 proc fcQPropertyObserver_delete(self: pointer) {.importc: "QPropertyObserver_delete".}
 proc fcQPropertyNotifier_new(): ptr cQPropertyNotifier {.importc: "QPropertyNotifier_new".}
 proc fcQPropertyNotifier_delete(self: pointer) {.importc: "QPropertyNotifier_delete".}
-proc fcQUntypedBindable_new(): ptr cQUntypedBindable {.importc: "QUntypedBindable_new".}
-proc fcQUntypedBindable_new2(param1: pointer): ptr cQUntypedBindable {.importc: "QUntypedBindable_new2".}
 proc fcQUntypedBindable_isValid(self: pointer, ): bool {.importc: "QUntypedBindable_isValid".}
 proc fcQUntypedBindable_isBindable(self: pointer, ): bool {.importc: "QUntypedBindable_isBindable".}
 proc fcQUntypedBindable_isReadOnly(self: pointer, ): bool {.importc: "QUntypedBindable_isReadOnly".}
@@ -109,34 +107,19 @@ proc fcQUntypedBindable_setBinding(self: pointer, binding: pointer): bool {.impo
 proc fcQUntypedBindable_hasBinding(self: pointer, ): bool {.importc: "QUntypedBindable_hasBinding".}
 proc fcQUntypedBindable_metaType(self: pointer, ): pointer {.importc: "QUntypedBindable_metaType".}
 proc fcQUntypedBindable_makeBinding1(self: pointer, location: pointer): pointer {.importc: "QUntypedBindable_makeBinding1".}
+proc fcQUntypedBindable_new(): ptr cQUntypedBindable {.importc: "QUntypedBindable_new".}
+proc fcQUntypedBindable_new2(param1: pointer): ptr cQUntypedBindable {.importc: "QUntypedBindable_new2".}
 proc fcQUntypedBindable_delete(self: pointer) {.importc: "QUntypedBindable_delete".}
 
+proc create*(T: type gen_qproperty_types.QPropertyBindingSourceLocation): gen_qproperty_types.QPropertyBindingSourceLocation =
+  gen_qproperty_types.QPropertyBindingSourceLocation(h: fcQPropertyBindingSourceLocation_new())
 
-func init*(T: type gen_qproperty_types.QPropertyBindingSourceLocation, h: ptr cQPropertyBindingSourceLocation): gen_qproperty_types.QPropertyBindingSourceLocation =
-  T(h: h)
-proc create*(T: type gen_qproperty_types.QPropertyBindingSourceLocation, ): gen_qproperty_types.QPropertyBindingSourceLocation =
-  gen_qproperty_types.QPropertyBindingSourceLocation.init(fcQPropertyBindingSourceLocation_new())
-
-proc create*(T: type gen_qproperty_types.QPropertyBindingSourceLocation, param1: gen_qproperty_types.QPropertyBindingSourceLocation): gen_qproperty_types.QPropertyBindingSourceLocation =
-  gen_qproperty_types.QPropertyBindingSourceLocation.init(fcQPropertyBindingSourceLocation_new2(param1.h))
+proc create*(T: type gen_qproperty_types.QPropertyBindingSourceLocation,
+    param1: gen_qproperty_types.QPropertyBindingSourceLocation): gen_qproperty_types.QPropertyBindingSourceLocation =
+  gen_qproperty_types.QPropertyBindingSourceLocation(h: fcQPropertyBindingSourceLocation_new2(param1.h))
 
 proc delete*(self: gen_qproperty_types.QPropertyBindingSourceLocation) =
   fcQPropertyBindingSourceLocation_delete(self.h)
-
-func init*(T: type gen_qproperty_types.QPropertyBindingError, h: ptr cQPropertyBindingError): gen_qproperty_types.QPropertyBindingError =
-  T(h: h)
-proc create*(T: type gen_qproperty_types.QPropertyBindingError, ): gen_qproperty_types.QPropertyBindingError =
-  gen_qproperty_types.QPropertyBindingError.init(fcQPropertyBindingError_new())
-
-proc create*(T: type gen_qproperty_types.QPropertyBindingError, typeVal: cint): gen_qproperty_types.QPropertyBindingError =
-  gen_qproperty_types.QPropertyBindingError.init(fcQPropertyBindingError_new2(cint(typeVal)))
-
-proc create*(T: type gen_qproperty_types.QPropertyBindingError, other: gen_qproperty_types.QPropertyBindingError): gen_qproperty_types.QPropertyBindingError =
-  gen_qproperty_types.QPropertyBindingError.init(fcQPropertyBindingError_new3(other.h))
-
-proc create*(T: type gen_qproperty_types.QPropertyBindingError, typeVal: cint, description: string): gen_qproperty_types.QPropertyBindingError =
-  gen_qproperty_types.QPropertyBindingError.init(fcQPropertyBindingError_new4(cint(typeVal), struct_miqt_string(data: description, len: csize_t(len(description)))))
-
 proc operatorAssign*(self: gen_qproperty_types.QPropertyBindingError, other: gen_qproperty_types.QPropertyBindingError): void =
   fcQPropertyBindingError_operatorAssign(self.h, other.h)
 
@@ -152,17 +135,23 @@ proc description*(self: gen_qproperty_types.QPropertyBindingError, ): string =
   c_free(v_ms.data)
   vx_ret
 
+proc create*(T: type gen_qproperty_types.QPropertyBindingError): gen_qproperty_types.QPropertyBindingError =
+  gen_qproperty_types.QPropertyBindingError(h: fcQPropertyBindingError_new())
+
+proc create*(T: type gen_qproperty_types.QPropertyBindingError,
+    typeVal: cint): gen_qproperty_types.QPropertyBindingError =
+  gen_qproperty_types.QPropertyBindingError(h: fcQPropertyBindingError_new2(cint(typeVal)))
+
+proc create*(T: type gen_qproperty_types.QPropertyBindingError,
+    other: gen_qproperty_types.QPropertyBindingError): gen_qproperty_types.QPropertyBindingError =
+  gen_qproperty_types.QPropertyBindingError(h: fcQPropertyBindingError_new3(other.h))
+
+proc create*(T: type gen_qproperty_types.QPropertyBindingError,
+    typeVal: cint, description: string): gen_qproperty_types.QPropertyBindingError =
+  gen_qproperty_types.QPropertyBindingError(h: fcQPropertyBindingError_new4(cint(typeVal), struct_miqt_string(data: description, len: csize_t(len(description)))))
+
 proc delete*(self: gen_qproperty_types.QPropertyBindingError) =
   fcQPropertyBindingError_delete(self.h)
-
-func init*(T: type gen_qproperty_types.QUntypedPropertyBinding, h: ptr cQUntypedPropertyBinding): gen_qproperty_types.QUntypedPropertyBinding =
-  T(h: h)
-proc create*(T: type gen_qproperty_types.QUntypedPropertyBinding, ): gen_qproperty_types.QUntypedPropertyBinding =
-  gen_qproperty_types.QUntypedPropertyBinding.init(fcQUntypedPropertyBinding_new())
-
-proc create*(T: type gen_qproperty_types.QUntypedPropertyBinding, other: gen_qproperty_types.QUntypedPropertyBinding): gen_qproperty_types.QUntypedPropertyBinding =
-  gen_qproperty_types.QUntypedPropertyBinding.init(fcQUntypedPropertyBinding_new2(other.h))
-
 proc operatorAssign*(self: gen_qproperty_types.QUntypedPropertyBinding, other: gen_qproperty_types.QUntypedPropertyBinding): void =
   fcQUntypedPropertyBinding_operatorAssign(self.h, other.h)
 
@@ -175,44 +164,34 @@ proc error*(self: gen_qproperty_types.QUntypedPropertyBinding, ): gen_qproperty_
 proc valueMetaType*(self: gen_qproperty_types.QUntypedPropertyBinding, ): gen_qmetatype_types.QMetaType =
   gen_qmetatype_types.QMetaType(h: fcQUntypedPropertyBinding_valueMetaType(self.h))
 
+proc create*(T: type gen_qproperty_types.QUntypedPropertyBinding): gen_qproperty_types.QUntypedPropertyBinding =
+  gen_qproperty_types.QUntypedPropertyBinding(h: fcQUntypedPropertyBinding_new())
+
+proc create*(T: type gen_qproperty_types.QUntypedPropertyBinding,
+    other: gen_qproperty_types.QUntypedPropertyBinding): gen_qproperty_types.QUntypedPropertyBinding =
+  gen_qproperty_types.QUntypedPropertyBinding(h: fcQUntypedPropertyBinding_new2(other.h))
+
 proc delete*(self: gen_qproperty_types.QUntypedPropertyBinding) =
   fcQUntypedPropertyBinding_delete(self.h)
+proc create*(T: type gen_qproperty_types.QPropertyObserverBase): gen_qproperty_types.QPropertyObserverBase =
+  gen_qproperty_types.QPropertyObserverBase(h: fcQPropertyObserverBase_new())
 
-func init*(T: type gen_qproperty_types.QPropertyObserverBase, h: ptr cQPropertyObserverBase): gen_qproperty_types.QPropertyObserverBase =
-  T(h: h)
-proc create*(T: type gen_qproperty_types.QPropertyObserverBase, ): gen_qproperty_types.QPropertyObserverBase =
-  gen_qproperty_types.QPropertyObserverBase.init(fcQPropertyObserverBase_new())
-
-proc create*(T: type gen_qproperty_types.QPropertyObserverBase, param1: gen_qproperty_types.QPropertyObserverBase): gen_qproperty_types.QPropertyObserverBase =
-  gen_qproperty_types.QPropertyObserverBase.init(fcQPropertyObserverBase_new2(param1.h))
+proc create*(T: type gen_qproperty_types.QPropertyObserverBase,
+    param1: gen_qproperty_types.QPropertyObserverBase): gen_qproperty_types.QPropertyObserverBase =
+  gen_qproperty_types.QPropertyObserverBase(h: fcQPropertyObserverBase_new2(param1.h))
 
 proc delete*(self: gen_qproperty_types.QPropertyObserverBase) =
   fcQPropertyObserverBase_delete(self.h)
-
-func init*(T: type gen_qproperty_types.QPropertyObserver, h: ptr cQPropertyObserver): gen_qproperty_types.QPropertyObserver =
-  T(h: h)
-proc create*(T: type gen_qproperty_types.QPropertyObserver, ): gen_qproperty_types.QPropertyObserver =
-  gen_qproperty_types.QPropertyObserver.init(fcQPropertyObserver_new())
+proc create*(T: type gen_qproperty_types.QPropertyObserver): gen_qproperty_types.QPropertyObserver =
+  gen_qproperty_types.QPropertyObserver(h: fcQPropertyObserver_new())
 
 proc delete*(self: gen_qproperty_types.QPropertyObserver) =
   fcQPropertyObserver_delete(self.h)
-
-func init*(T: type gen_qproperty_types.QPropertyNotifier, h: ptr cQPropertyNotifier): gen_qproperty_types.QPropertyNotifier =
-  T(h: h)
-proc create*(T: type gen_qproperty_types.QPropertyNotifier, ): gen_qproperty_types.QPropertyNotifier =
-  gen_qproperty_types.QPropertyNotifier.init(fcQPropertyNotifier_new())
+proc create*(T: type gen_qproperty_types.QPropertyNotifier): gen_qproperty_types.QPropertyNotifier =
+  gen_qproperty_types.QPropertyNotifier(h: fcQPropertyNotifier_new())
 
 proc delete*(self: gen_qproperty_types.QPropertyNotifier) =
   fcQPropertyNotifier_delete(self.h)
-
-func init*(T: type gen_qproperty_types.QUntypedBindable, h: ptr cQUntypedBindable): gen_qproperty_types.QUntypedBindable =
-  T(h: h)
-proc create*(T: type gen_qproperty_types.QUntypedBindable, ): gen_qproperty_types.QUntypedBindable =
-  gen_qproperty_types.QUntypedBindable.init(fcQUntypedBindable_new())
-
-proc create*(T: type gen_qproperty_types.QUntypedBindable, param1: gen_qproperty_types.QUntypedBindable): gen_qproperty_types.QUntypedBindable =
-  gen_qproperty_types.QUntypedBindable.init(fcQUntypedBindable_new2(param1.h))
-
 proc isValid*(self: gen_qproperty_types.QUntypedBindable, ): bool =
   fcQUntypedBindable_isValid(self.h)
 
@@ -245,6 +224,13 @@ proc metaType*(self: gen_qproperty_types.QUntypedBindable, ): gen_qmetatype_type
 
 proc makeBinding*(self: gen_qproperty_types.QUntypedBindable, location: gen_qproperty_types.QPropertyBindingSourceLocation): gen_qproperty_types.QUntypedPropertyBinding =
   gen_qproperty_types.QUntypedPropertyBinding(h: fcQUntypedBindable_makeBinding1(self.h, location.h))
+
+proc create*(T: type gen_qproperty_types.QUntypedBindable): gen_qproperty_types.QUntypedBindable =
+  gen_qproperty_types.QUntypedBindable(h: fcQUntypedBindable_new())
+
+proc create*(T: type gen_qproperty_types.QUntypedBindable,
+    param1: gen_qproperty_types.QUntypedBindable): gen_qproperty_types.QUntypedBindable =
+  gen_qproperty_types.QUntypedBindable(h: fcQUntypedBindable_new2(param1.h))
 
 proc delete*(self: gen_qproperty_types.QUntypedBindable) =
   fcQUntypedBindable_delete(self.h)

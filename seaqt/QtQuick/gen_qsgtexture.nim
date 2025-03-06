@@ -75,7 +75,6 @@ export
 type cQSGTexture*{.exportc: "QSGTexture", incompleteStruct.} = object
 type cQSGDynamicTexture*{.exportc: "QSGDynamicTexture", incompleteStruct.} = object
 
-proc fcQSGTexture_new(): ptr cQSGTexture {.importc: "QSGTexture_new".}
 proc fcQSGTexture_metaObject(self: pointer, ): pointer {.importc: "QSGTexture_metaObject".}
 proc fcQSGTexture_metacast(self: pointer, param1: cstring): pointer {.importc: "QSGTexture_metacast".}
 proc fcQSGTexture_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QSGTexture_metacall".}
@@ -99,37 +98,39 @@ proc fcQSGTexture_verticalWrapMode(self: pointer, ): cint {.importc: "QSGTexture
 proc fcQSGTexture_convertToNormalizedSourceRect(self: pointer, rect: pointer): pointer {.importc: "QSGTexture_convertToNormalizedSourceRect".}
 proc fcQSGTexture_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QSGTexture_tr2".}
 proc fcQSGTexture_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QSGTexture_tr3".}
-proc fQSGTexture_virtualbase_metaObject(self: pointer, ): pointer{.importc: "QSGTexture_virtualbase_metaObject".}
-proc fcQSGTexture_override_virtual_metaObject(self: pointer, slot: int) {.importc: "QSGTexture_override_virtual_metaObject".}
-proc fQSGTexture_virtualbase_metacast(self: pointer, param1: cstring): pointer{.importc: "QSGTexture_virtualbase_metacast".}
-proc fcQSGTexture_override_virtual_metacast(self: pointer, slot: int) {.importc: "QSGTexture_override_virtual_metacast".}
-proc fQSGTexture_virtualbase_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint{.importc: "QSGTexture_virtualbase_metacall".}
-proc fcQSGTexture_override_virtual_metacall(self: pointer, slot: int) {.importc: "QSGTexture_override_virtual_metacall".}
-proc fcQSGTexture_override_virtual_comparisonKey(self: pointer, slot: int) {.importc: "QSGTexture_override_virtual_comparisonKey".}
-proc fcQSGTexture_override_virtual_textureSize(self: pointer, slot: int) {.importc: "QSGTexture_override_virtual_textureSize".}
-proc fcQSGTexture_override_virtual_hasAlphaChannel(self: pointer, slot: int) {.importc: "QSGTexture_override_virtual_hasAlphaChannel".}
-proc fcQSGTexture_override_virtual_hasMipmaps(self: pointer, slot: int) {.importc: "QSGTexture_override_virtual_hasMipmaps".}
-proc fQSGTexture_virtualbase_normalizedTextureSubRect(self: pointer, ): pointer{.importc: "QSGTexture_virtualbase_normalizedTextureSubRect".}
-proc fcQSGTexture_override_virtual_normalizedTextureSubRect(self: pointer, slot: int) {.importc: "QSGTexture_override_virtual_normalizedTextureSubRect".}
-proc fQSGTexture_virtualbase_isAtlasTexture(self: pointer, ): bool{.importc: "QSGTexture_virtualbase_isAtlasTexture".}
-proc fcQSGTexture_override_virtual_isAtlasTexture(self: pointer, slot: int) {.importc: "QSGTexture_override_virtual_isAtlasTexture".}
-proc fQSGTexture_virtualbase_event(self: pointer, event: pointer): bool{.importc: "QSGTexture_virtualbase_event".}
-proc fcQSGTexture_override_virtual_event(self: pointer, slot: int) {.importc: "QSGTexture_override_virtual_event".}
-proc fQSGTexture_virtualbase_eventFilter(self: pointer, watched: pointer, event: pointer): bool{.importc: "QSGTexture_virtualbase_eventFilter".}
-proc fcQSGTexture_override_virtual_eventFilter(self: pointer, slot: int) {.importc: "QSGTexture_override_virtual_eventFilter".}
-proc fQSGTexture_virtualbase_timerEvent(self: pointer, event: pointer): void{.importc: "QSGTexture_virtualbase_timerEvent".}
-proc fcQSGTexture_override_virtual_timerEvent(self: pointer, slot: int) {.importc: "QSGTexture_override_virtual_timerEvent".}
-proc fQSGTexture_virtualbase_childEvent(self: pointer, event: pointer): void{.importc: "QSGTexture_virtualbase_childEvent".}
-proc fcQSGTexture_override_virtual_childEvent(self: pointer, slot: int) {.importc: "QSGTexture_override_virtual_childEvent".}
-proc fQSGTexture_virtualbase_customEvent(self: pointer, event: pointer): void{.importc: "QSGTexture_virtualbase_customEvent".}
-proc fcQSGTexture_override_virtual_customEvent(self: pointer, slot: int) {.importc: "QSGTexture_override_virtual_customEvent".}
-proc fQSGTexture_virtualbase_connectNotify(self: pointer, signal: pointer): void{.importc: "QSGTexture_virtualbase_connectNotify".}
-proc fcQSGTexture_override_virtual_connectNotify(self: pointer, slot: int) {.importc: "QSGTexture_override_virtual_connectNotify".}
-proc fQSGTexture_virtualbase_disconnectNotify(self: pointer, signal: pointer): void{.importc: "QSGTexture_virtualbase_disconnectNotify".}
-proc fcQSGTexture_override_virtual_disconnectNotify(self: pointer, slot: int) {.importc: "QSGTexture_override_virtual_disconnectNotify".}
+type cQSGTextureVTable = object
+  destructor*: proc(vtbl: ptr cQSGTextureVTable, self: ptr cQSGTexture) {.cdecl, raises:[], gcsafe.}
+  metaObject*: proc(vtbl, self: pointer, ): pointer {.cdecl, raises: [], gcsafe.}
+  metacast*: proc(vtbl, self: pointer, param1: cstring): pointer {.cdecl, raises: [], gcsafe.}
+  metacall*: proc(vtbl, self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl, raises: [], gcsafe.}
+  comparisonKey*: proc(vtbl, self: pointer, ): clonglong {.cdecl, raises: [], gcsafe.}
+  textureSize*: proc(vtbl, self: pointer, ): pointer {.cdecl, raises: [], gcsafe.}
+  hasAlphaChannel*: proc(vtbl, self: pointer, ): bool {.cdecl, raises: [], gcsafe.}
+  hasMipmaps*: proc(vtbl, self: pointer, ): bool {.cdecl, raises: [], gcsafe.}
+  normalizedTextureSubRect*: proc(vtbl, self: pointer, ): pointer {.cdecl, raises: [], gcsafe.}
+  isAtlasTexture*: proc(vtbl, self: pointer, ): bool {.cdecl, raises: [], gcsafe.}
+  event*: proc(vtbl, self: pointer, event: pointer): bool {.cdecl, raises: [], gcsafe.}
+  eventFilter*: proc(vtbl, self: pointer, watched: pointer, event: pointer): bool {.cdecl, raises: [], gcsafe.}
+  timerEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  childEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  customEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  connectNotify*: proc(vtbl, self: pointer, signal: pointer): void {.cdecl, raises: [], gcsafe.}
+  disconnectNotify*: proc(vtbl, self: pointer, signal: pointer): void {.cdecl, raises: [], gcsafe.}
+proc fcQSGTexture_virtualbase_metaObject(self: pointer, ): pointer {.importc: "QSGTexture_virtualbase_metaObject".}
+proc fcQSGTexture_virtualbase_metacast(self: pointer, param1: cstring): pointer {.importc: "QSGTexture_virtualbase_metacast".}
+proc fcQSGTexture_virtualbase_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QSGTexture_virtualbase_metacall".}
+proc fcQSGTexture_virtualbase_normalizedTextureSubRect(self: pointer, ): pointer {.importc: "QSGTexture_virtualbase_normalizedTextureSubRect".}
+proc fcQSGTexture_virtualbase_isAtlasTexture(self: pointer, ): bool {.importc: "QSGTexture_virtualbase_isAtlasTexture".}
+proc fcQSGTexture_virtualbase_event(self: pointer, event: pointer): bool {.importc: "QSGTexture_virtualbase_event".}
+proc fcQSGTexture_virtualbase_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.importc: "QSGTexture_virtualbase_eventFilter".}
+proc fcQSGTexture_virtualbase_timerEvent(self: pointer, event: pointer): void {.importc: "QSGTexture_virtualbase_timerEvent".}
+proc fcQSGTexture_virtualbase_childEvent(self: pointer, event: pointer): void {.importc: "QSGTexture_virtualbase_childEvent".}
+proc fcQSGTexture_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QSGTexture_virtualbase_customEvent".}
+proc fcQSGTexture_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QSGTexture_virtualbase_connectNotify".}
+proc fcQSGTexture_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QSGTexture_virtualbase_disconnectNotify".}
+proc fcQSGTexture_new(vtbl: pointer, ): ptr cQSGTexture {.importc: "QSGTexture_new".}
 proc fcQSGTexture_staticMetaObject(): pointer {.importc: "QSGTexture_staticMetaObject".}
 proc fcQSGTexture_delete(self: pointer) {.importc: "QSGTexture_delete".}
-proc fcQSGDynamicTexture_new(): ptr cQSGDynamicTexture {.importc: "QSGDynamicTexture_new".}
 proc fcQSGDynamicTexture_metaObject(self: pointer, ): pointer {.importc: "QSGDynamicTexture_metaObject".}
 proc fcQSGDynamicTexture_metacast(self: pointer, param1: cstring): pointer {.importc: "QSGDynamicTexture_metacast".}
 proc fcQSGDynamicTexture_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QSGDynamicTexture_metacall".}
@@ -137,43 +138,40 @@ proc fcQSGDynamicTexture_tr(s: cstring): struct_miqt_string {.importc: "QSGDynam
 proc fcQSGDynamicTexture_updateTexture(self: pointer, ): bool {.importc: "QSGDynamicTexture_updateTexture".}
 proc fcQSGDynamicTexture_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QSGDynamicTexture_tr2".}
 proc fcQSGDynamicTexture_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QSGDynamicTexture_tr3".}
-proc fQSGDynamicTexture_virtualbase_metaObject(self: pointer, ): pointer{.importc: "QSGDynamicTexture_virtualbase_metaObject".}
-proc fcQSGDynamicTexture_override_virtual_metaObject(self: pointer, slot: int) {.importc: "QSGDynamicTexture_override_virtual_metaObject".}
-proc fQSGDynamicTexture_virtualbase_metacast(self: pointer, param1: cstring): pointer{.importc: "QSGDynamicTexture_virtualbase_metacast".}
-proc fcQSGDynamicTexture_override_virtual_metacast(self: pointer, slot: int) {.importc: "QSGDynamicTexture_override_virtual_metacast".}
-proc fQSGDynamicTexture_virtualbase_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint{.importc: "QSGDynamicTexture_virtualbase_metacall".}
-proc fcQSGDynamicTexture_override_virtual_metacall(self: pointer, slot: int) {.importc: "QSGDynamicTexture_override_virtual_metacall".}
-proc fcQSGDynamicTexture_override_virtual_updateTexture(self: pointer, slot: int) {.importc: "QSGDynamicTexture_override_virtual_updateTexture".}
-proc fcQSGDynamicTexture_override_virtual_comparisonKey(self: pointer, slot: int) {.importc: "QSGDynamicTexture_override_virtual_comparisonKey".}
-proc fcQSGDynamicTexture_override_virtual_textureSize(self: pointer, slot: int) {.importc: "QSGDynamicTexture_override_virtual_textureSize".}
-proc fcQSGDynamicTexture_override_virtual_hasAlphaChannel(self: pointer, slot: int) {.importc: "QSGDynamicTexture_override_virtual_hasAlphaChannel".}
-proc fcQSGDynamicTexture_override_virtual_hasMipmaps(self: pointer, slot: int) {.importc: "QSGDynamicTexture_override_virtual_hasMipmaps".}
-proc fQSGDynamicTexture_virtualbase_normalizedTextureSubRect(self: pointer, ): pointer{.importc: "QSGDynamicTexture_virtualbase_normalizedTextureSubRect".}
-proc fcQSGDynamicTexture_override_virtual_normalizedTextureSubRect(self: pointer, slot: int) {.importc: "QSGDynamicTexture_override_virtual_normalizedTextureSubRect".}
-proc fQSGDynamicTexture_virtualbase_isAtlasTexture(self: pointer, ): bool{.importc: "QSGDynamicTexture_virtualbase_isAtlasTexture".}
-proc fcQSGDynamicTexture_override_virtual_isAtlasTexture(self: pointer, slot: int) {.importc: "QSGDynamicTexture_override_virtual_isAtlasTexture".}
-proc fQSGDynamicTexture_virtualbase_event(self: pointer, event: pointer): bool{.importc: "QSGDynamicTexture_virtualbase_event".}
-proc fcQSGDynamicTexture_override_virtual_event(self: pointer, slot: int) {.importc: "QSGDynamicTexture_override_virtual_event".}
-proc fQSGDynamicTexture_virtualbase_eventFilter(self: pointer, watched: pointer, event: pointer): bool{.importc: "QSGDynamicTexture_virtualbase_eventFilter".}
-proc fcQSGDynamicTexture_override_virtual_eventFilter(self: pointer, slot: int) {.importc: "QSGDynamicTexture_override_virtual_eventFilter".}
-proc fQSGDynamicTexture_virtualbase_timerEvent(self: pointer, event: pointer): void{.importc: "QSGDynamicTexture_virtualbase_timerEvent".}
-proc fcQSGDynamicTexture_override_virtual_timerEvent(self: pointer, slot: int) {.importc: "QSGDynamicTexture_override_virtual_timerEvent".}
-proc fQSGDynamicTexture_virtualbase_childEvent(self: pointer, event: pointer): void{.importc: "QSGDynamicTexture_virtualbase_childEvent".}
-proc fcQSGDynamicTexture_override_virtual_childEvent(self: pointer, slot: int) {.importc: "QSGDynamicTexture_override_virtual_childEvent".}
-proc fQSGDynamicTexture_virtualbase_customEvent(self: pointer, event: pointer): void{.importc: "QSGDynamicTexture_virtualbase_customEvent".}
-proc fcQSGDynamicTexture_override_virtual_customEvent(self: pointer, slot: int) {.importc: "QSGDynamicTexture_override_virtual_customEvent".}
-proc fQSGDynamicTexture_virtualbase_connectNotify(self: pointer, signal: pointer): void{.importc: "QSGDynamicTexture_virtualbase_connectNotify".}
-proc fcQSGDynamicTexture_override_virtual_connectNotify(self: pointer, slot: int) {.importc: "QSGDynamicTexture_override_virtual_connectNotify".}
-proc fQSGDynamicTexture_virtualbase_disconnectNotify(self: pointer, signal: pointer): void{.importc: "QSGDynamicTexture_virtualbase_disconnectNotify".}
-proc fcQSGDynamicTexture_override_virtual_disconnectNotify(self: pointer, slot: int) {.importc: "QSGDynamicTexture_override_virtual_disconnectNotify".}
+type cQSGDynamicTextureVTable = object
+  destructor*: proc(vtbl: ptr cQSGDynamicTextureVTable, self: ptr cQSGDynamicTexture) {.cdecl, raises:[], gcsafe.}
+  metaObject*: proc(vtbl, self: pointer, ): pointer {.cdecl, raises: [], gcsafe.}
+  metacast*: proc(vtbl, self: pointer, param1: cstring): pointer {.cdecl, raises: [], gcsafe.}
+  metacall*: proc(vtbl, self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl, raises: [], gcsafe.}
+  updateTexture*: proc(vtbl, self: pointer, ): bool {.cdecl, raises: [], gcsafe.}
+  comparisonKey*: proc(vtbl, self: pointer, ): clonglong {.cdecl, raises: [], gcsafe.}
+  textureSize*: proc(vtbl, self: pointer, ): pointer {.cdecl, raises: [], gcsafe.}
+  hasAlphaChannel*: proc(vtbl, self: pointer, ): bool {.cdecl, raises: [], gcsafe.}
+  hasMipmaps*: proc(vtbl, self: pointer, ): bool {.cdecl, raises: [], gcsafe.}
+  normalizedTextureSubRect*: proc(vtbl, self: pointer, ): pointer {.cdecl, raises: [], gcsafe.}
+  isAtlasTexture*: proc(vtbl, self: pointer, ): bool {.cdecl, raises: [], gcsafe.}
+  event*: proc(vtbl, self: pointer, event: pointer): bool {.cdecl, raises: [], gcsafe.}
+  eventFilter*: proc(vtbl, self: pointer, watched: pointer, event: pointer): bool {.cdecl, raises: [], gcsafe.}
+  timerEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  childEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  customEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  connectNotify*: proc(vtbl, self: pointer, signal: pointer): void {.cdecl, raises: [], gcsafe.}
+  disconnectNotify*: proc(vtbl, self: pointer, signal: pointer): void {.cdecl, raises: [], gcsafe.}
+proc fcQSGDynamicTexture_virtualbase_metaObject(self: pointer, ): pointer {.importc: "QSGDynamicTexture_virtualbase_metaObject".}
+proc fcQSGDynamicTexture_virtualbase_metacast(self: pointer, param1: cstring): pointer {.importc: "QSGDynamicTexture_virtualbase_metacast".}
+proc fcQSGDynamicTexture_virtualbase_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QSGDynamicTexture_virtualbase_metacall".}
+proc fcQSGDynamicTexture_virtualbase_normalizedTextureSubRect(self: pointer, ): pointer {.importc: "QSGDynamicTexture_virtualbase_normalizedTextureSubRect".}
+proc fcQSGDynamicTexture_virtualbase_isAtlasTexture(self: pointer, ): bool {.importc: "QSGDynamicTexture_virtualbase_isAtlasTexture".}
+proc fcQSGDynamicTexture_virtualbase_event(self: pointer, event: pointer): bool {.importc: "QSGDynamicTexture_virtualbase_event".}
+proc fcQSGDynamicTexture_virtualbase_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.importc: "QSGDynamicTexture_virtualbase_eventFilter".}
+proc fcQSGDynamicTexture_virtualbase_timerEvent(self: pointer, event: pointer): void {.importc: "QSGDynamicTexture_virtualbase_timerEvent".}
+proc fcQSGDynamicTexture_virtualbase_childEvent(self: pointer, event: pointer): void {.importc: "QSGDynamicTexture_virtualbase_childEvent".}
+proc fcQSGDynamicTexture_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QSGDynamicTexture_virtualbase_customEvent".}
+proc fcQSGDynamicTexture_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QSGDynamicTexture_virtualbase_connectNotify".}
+proc fcQSGDynamicTexture_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QSGDynamicTexture_virtualbase_disconnectNotify".}
+proc fcQSGDynamicTexture_new(vtbl: pointer, ): ptr cQSGDynamicTexture {.importc: "QSGDynamicTexture_new".}
 proc fcQSGDynamicTexture_staticMetaObject(): pointer {.importc: "QSGDynamicTexture_staticMetaObject".}
 proc fcQSGDynamicTexture_delete(self: pointer) {.importc: "QSGDynamicTexture_delete".}
-
-
-func init*(T: type gen_qsgtexture_types.QSGTexture, h: ptr cQSGTexture): gen_qsgtexture_types.QSGTexture =
-  T(h: h)
-proc create*(T: type gen_qsgtexture_types.QSGTexture, ): gen_qsgtexture_types.QSGTexture =
-  gen_qsgtexture_types.QSGTexture.init(fcQSGTexture_new())
 
 proc metaObject*(self: gen_qsgtexture_types.QSGTexture, ): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQSGTexture_metaObject(self.h))
@@ -253,290 +251,224 @@ proc tr*(_: type gen_qsgtexture_types.QSGTexture, s: cstring, c: cstring, n: cin
   c_free(v_ms.data)
   vx_ret
 
+type QSGTexturemetaObjectProc* = proc(self: QSGTexture): gen_qobjectdefs_types.QMetaObject {.raises: [], gcsafe.}
+type QSGTexturemetacastProc* = proc(self: QSGTexture, param1: cstring): pointer {.raises: [], gcsafe.}
+type QSGTexturemetacallProc* = proc(self: QSGTexture, param1: cint, param2: cint, param3: pointer): cint {.raises: [], gcsafe.}
+type QSGTexturecomparisonKeyProc* = proc(self: QSGTexture): clonglong {.raises: [], gcsafe.}
+type QSGTexturetextureSizeProc* = proc(self: QSGTexture): gen_qsize_types.QSize {.raises: [], gcsafe.}
+type QSGTexturehasAlphaChannelProc* = proc(self: QSGTexture): bool {.raises: [], gcsafe.}
+type QSGTexturehasMipmapsProc* = proc(self: QSGTexture): bool {.raises: [], gcsafe.}
+type QSGTexturenormalizedTextureSubRectProc* = proc(self: QSGTexture): gen_qrect_types.QRectF {.raises: [], gcsafe.}
+type QSGTextureisAtlasTextureProc* = proc(self: QSGTexture): bool {.raises: [], gcsafe.}
+type QSGTextureeventProc* = proc(self: QSGTexture, event: gen_qcoreevent_types.QEvent): bool {.raises: [], gcsafe.}
+type QSGTextureeventFilterProc* = proc(self: QSGTexture, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.raises: [], gcsafe.}
+type QSGTexturetimerEventProc* = proc(self: QSGTexture, event: gen_qcoreevent_types.QTimerEvent): void {.raises: [], gcsafe.}
+type QSGTexturechildEventProc* = proc(self: QSGTexture, event: gen_qcoreevent_types.QChildEvent): void {.raises: [], gcsafe.}
+type QSGTexturecustomEventProc* = proc(self: QSGTexture, event: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
+type QSGTextureconnectNotifyProc* = proc(self: QSGTexture, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
+type QSGTexturedisconnectNotifyProc* = proc(self: QSGTexture, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
+type QSGTextureVTable* = object
+  vtbl: cQSGTextureVTable
+  metaObject*: QSGTexturemetaObjectProc
+  metacast*: QSGTexturemetacastProc
+  metacall*: QSGTexturemetacallProc
+  comparisonKey*: QSGTexturecomparisonKeyProc
+  textureSize*: QSGTexturetextureSizeProc
+  hasAlphaChannel*: QSGTexturehasAlphaChannelProc
+  hasMipmaps*: QSGTexturehasMipmapsProc
+  normalizedTextureSubRect*: QSGTexturenormalizedTextureSubRectProc
+  isAtlasTexture*: QSGTextureisAtlasTextureProc
+  event*: QSGTextureeventProc
+  eventFilter*: QSGTextureeventFilterProc
+  timerEvent*: QSGTexturetimerEventProc
+  childEvent*: QSGTexturechildEventProc
+  customEvent*: QSGTexturecustomEventProc
+  connectNotify*: QSGTextureconnectNotifyProc
+  disconnectNotify*: QSGTexturedisconnectNotifyProc
 proc QSGTexturemetaObject*(self: gen_qsgtexture_types.QSGTexture, ): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fQSGTexture_virtualbase_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQSGTexture_virtualbase_metaObject(self.h))
 
-type QSGTexturemetaObjectProc* = proc(): gen_qobjectdefs_types.QMetaObject
-proc onmetaObject*(self: gen_qsgtexture_types.QSGTexture, slot: QSGTexturemetaObjectProc) =
-  # TODO check subclass
-  var tmp = new QSGTexturemetaObjectProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQSGTexture_override_virtual_metaObject(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QSGTexture_metaObject(self: ptr cQSGTexture, slot: int): pointer {.exportc: "miqt_exec_callback_QSGTexture_metaObject ".} =
-  var nimfunc = cast[ptr QSGTexturemetaObjectProc](cast[pointer](slot))
-
-  let virtualReturn = nimfunc[]( )
-
+proc miqt_exec_callback_cQSGTexture_metaObject(vtbl: pointer, self: pointer): pointer {.cdecl.} =
+  let vtbl = cast[ptr QSGTextureVTable](vtbl)
+  let self = QSGTexture(h: self)
+  var virtualReturn = vtbl[].metaObject(self)
   virtualReturn.h
+
 proc QSGTexturemetacast*(self: gen_qsgtexture_types.QSGTexture, param1: cstring): pointer =
-  fQSGTexture_virtualbase_metacast(self.h, param1)
+  fcQSGTexture_virtualbase_metacast(self.h, param1)
 
-type QSGTexturemetacastProc* = proc(param1: cstring): pointer
-proc onmetacast*(self: gen_qsgtexture_types.QSGTexture, slot: QSGTexturemetacastProc) =
-  # TODO check subclass
-  var tmp = new QSGTexturemetacastProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQSGTexture_override_virtual_metacast(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QSGTexture_metacast(self: ptr cQSGTexture, slot: int, param1: cstring): pointer {.exportc: "miqt_exec_callback_QSGTexture_metacast ".} =
-  var nimfunc = cast[ptr QSGTexturemetacastProc](cast[pointer](slot))
+proc miqt_exec_callback_cQSGTexture_metacast(vtbl: pointer, self: pointer, param1: cstring): pointer {.cdecl.} =
+  let vtbl = cast[ptr QSGTextureVTable](vtbl)
+  let self = QSGTexture(h: self)
   let slotval1 = (param1)
-
-
-  let virtualReturn = nimfunc[](slotval1 )
-
+  var virtualReturn = vtbl[].metacast(self, slotval1)
   virtualReturn
+
 proc QSGTexturemetacall*(self: gen_qsgtexture_types.QSGTexture, param1: cint, param2: cint, param3: pointer): cint =
-  fQSGTexture_virtualbase_metacall(self.h, cint(param1), param2, param3)
+  fcQSGTexture_virtualbase_metacall(self.h, cint(param1), param2, param3)
 
-type QSGTexturemetacallProc* = proc(param1: cint, param2: cint, param3: pointer): cint
-proc onmetacall*(self: gen_qsgtexture_types.QSGTexture, slot: QSGTexturemetacallProc) =
-  # TODO check subclass
-  var tmp = new QSGTexturemetacallProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQSGTexture_override_virtual_metacall(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QSGTexture_metacall(self: ptr cQSGTexture, slot: int, param1: cint, param2: cint, param3: pointer): cint {.exportc: "miqt_exec_callback_QSGTexture_metacall ".} =
-  var nimfunc = cast[ptr QSGTexturemetacallProc](cast[pointer](slot))
+proc miqt_exec_callback_cQSGTexture_metacall(vtbl: pointer, self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
+  let vtbl = cast[ptr QSGTextureVTable](vtbl)
+  let self = QSGTexture(h: self)
   let slotval1 = cint(param1)
-
   let slotval2 = param2
-
   let slotval3 = param3
-
-
-  let virtualReturn = nimfunc[](slotval1, slotval2, slotval3 )
-
+  var virtualReturn = vtbl[].metacall(self, slotval1, slotval2, slotval3)
   virtualReturn
-type QSGTexturecomparisonKeyProc* = proc(): clonglong
-proc oncomparisonKey*(self: gen_qsgtexture_types.QSGTexture, slot: QSGTexturecomparisonKeyProc) =
-  # TODO check subclass
-  var tmp = new QSGTexturecomparisonKeyProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQSGTexture_override_virtual_comparisonKey(self.h, cast[int](addr tmp[]))
 
-proc miqt_exec_callback_QSGTexture_comparisonKey(self: ptr cQSGTexture, slot: int): clonglong {.exportc: "miqt_exec_callback_QSGTexture_comparisonKey ".} =
-  var nimfunc = cast[ptr QSGTexturecomparisonKeyProc](cast[pointer](slot))
-
-  let virtualReturn = nimfunc[]( )
-
+proc miqt_exec_callback_cQSGTexture_comparisonKey(vtbl: pointer, self: pointer): clonglong {.cdecl.} =
+  let vtbl = cast[ptr QSGTextureVTable](vtbl)
+  let self = QSGTexture(h: self)
+  var virtualReturn = vtbl[].comparisonKey(self)
   virtualReturn
-type QSGTexturetextureSizeProc* = proc(): gen_qsize_types.QSize
-proc ontextureSize*(self: gen_qsgtexture_types.QSGTexture, slot: QSGTexturetextureSizeProc) =
-  # TODO check subclass
-  var tmp = new QSGTexturetextureSizeProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQSGTexture_override_virtual_textureSize(self.h, cast[int](addr tmp[]))
 
-proc miqt_exec_callback_QSGTexture_textureSize(self: ptr cQSGTexture, slot: int): pointer {.exportc: "miqt_exec_callback_QSGTexture_textureSize ".} =
-  var nimfunc = cast[ptr QSGTexturetextureSizeProc](cast[pointer](slot))
-
-  let virtualReturn = nimfunc[]( )
-
+proc miqt_exec_callback_cQSGTexture_textureSize(vtbl: pointer, self: pointer): pointer {.cdecl.} =
+  let vtbl = cast[ptr QSGTextureVTable](vtbl)
+  let self = QSGTexture(h: self)
+  var virtualReturn = vtbl[].textureSize(self)
   virtualReturn.h
-type QSGTexturehasAlphaChannelProc* = proc(): bool
-proc onhasAlphaChannel*(self: gen_qsgtexture_types.QSGTexture, slot: QSGTexturehasAlphaChannelProc) =
-  # TODO check subclass
-  var tmp = new QSGTexturehasAlphaChannelProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQSGTexture_override_virtual_hasAlphaChannel(self.h, cast[int](addr tmp[]))
 
-proc miqt_exec_callback_QSGTexture_hasAlphaChannel(self: ptr cQSGTexture, slot: int): bool {.exportc: "miqt_exec_callback_QSGTexture_hasAlphaChannel ".} =
-  var nimfunc = cast[ptr QSGTexturehasAlphaChannelProc](cast[pointer](slot))
-
-  let virtualReturn = nimfunc[]( )
-
+proc miqt_exec_callback_cQSGTexture_hasAlphaChannel(vtbl: pointer, self: pointer): bool {.cdecl.} =
+  let vtbl = cast[ptr QSGTextureVTable](vtbl)
+  let self = QSGTexture(h: self)
+  var virtualReturn = vtbl[].hasAlphaChannel(self)
   virtualReturn
-type QSGTexturehasMipmapsProc* = proc(): bool
-proc onhasMipmaps*(self: gen_qsgtexture_types.QSGTexture, slot: QSGTexturehasMipmapsProc) =
-  # TODO check subclass
-  var tmp = new QSGTexturehasMipmapsProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQSGTexture_override_virtual_hasMipmaps(self.h, cast[int](addr tmp[]))
 
-proc miqt_exec_callback_QSGTexture_hasMipmaps(self: ptr cQSGTexture, slot: int): bool {.exportc: "miqt_exec_callback_QSGTexture_hasMipmaps ".} =
-  var nimfunc = cast[ptr QSGTexturehasMipmapsProc](cast[pointer](slot))
-
-  let virtualReturn = nimfunc[]( )
-
+proc miqt_exec_callback_cQSGTexture_hasMipmaps(vtbl: pointer, self: pointer): bool {.cdecl.} =
+  let vtbl = cast[ptr QSGTextureVTable](vtbl)
+  let self = QSGTexture(h: self)
+  var virtualReturn = vtbl[].hasMipmaps(self)
   virtualReturn
+
 proc QSGTexturenormalizedTextureSubRect*(self: gen_qsgtexture_types.QSGTexture, ): gen_qrect_types.QRectF =
-  gen_qrect_types.QRectF(h: fQSGTexture_virtualbase_normalizedTextureSubRect(self.h))
+  gen_qrect_types.QRectF(h: fcQSGTexture_virtualbase_normalizedTextureSubRect(self.h))
 
-type QSGTexturenormalizedTextureSubRectProc* = proc(): gen_qrect_types.QRectF
-proc onnormalizedTextureSubRect*(self: gen_qsgtexture_types.QSGTexture, slot: QSGTexturenormalizedTextureSubRectProc) =
-  # TODO check subclass
-  var tmp = new QSGTexturenormalizedTextureSubRectProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQSGTexture_override_virtual_normalizedTextureSubRect(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QSGTexture_normalizedTextureSubRect(self: ptr cQSGTexture, slot: int): pointer {.exportc: "miqt_exec_callback_QSGTexture_normalizedTextureSubRect ".} =
-  var nimfunc = cast[ptr QSGTexturenormalizedTextureSubRectProc](cast[pointer](slot))
-
-  let virtualReturn = nimfunc[]( )
-
+proc miqt_exec_callback_cQSGTexture_normalizedTextureSubRect(vtbl: pointer, self: pointer): pointer {.cdecl.} =
+  let vtbl = cast[ptr QSGTextureVTable](vtbl)
+  let self = QSGTexture(h: self)
+  var virtualReturn = vtbl[].normalizedTextureSubRect(self)
   virtualReturn.h
+
 proc QSGTextureisAtlasTexture*(self: gen_qsgtexture_types.QSGTexture, ): bool =
-  fQSGTexture_virtualbase_isAtlasTexture(self.h)
+  fcQSGTexture_virtualbase_isAtlasTexture(self.h)
 
-type QSGTextureisAtlasTextureProc* = proc(): bool
-proc onisAtlasTexture*(self: gen_qsgtexture_types.QSGTexture, slot: QSGTextureisAtlasTextureProc) =
-  # TODO check subclass
-  var tmp = new QSGTextureisAtlasTextureProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQSGTexture_override_virtual_isAtlasTexture(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QSGTexture_isAtlasTexture(self: ptr cQSGTexture, slot: int): bool {.exportc: "miqt_exec_callback_QSGTexture_isAtlasTexture ".} =
-  var nimfunc = cast[ptr QSGTextureisAtlasTextureProc](cast[pointer](slot))
-
-  let virtualReturn = nimfunc[]( )
-
+proc miqt_exec_callback_cQSGTexture_isAtlasTexture(vtbl: pointer, self: pointer): bool {.cdecl.} =
+  let vtbl = cast[ptr QSGTextureVTable](vtbl)
+  let self = QSGTexture(h: self)
+  var virtualReturn = vtbl[].isAtlasTexture(self)
   virtualReturn
+
 proc QSGTextureevent*(self: gen_qsgtexture_types.QSGTexture, event: gen_qcoreevent_types.QEvent): bool =
-  fQSGTexture_virtualbase_event(self.h, event.h)
+  fcQSGTexture_virtualbase_event(self.h, event.h)
 
-type QSGTextureeventProc* = proc(event: gen_qcoreevent_types.QEvent): bool
-proc onevent*(self: gen_qsgtexture_types.QSGTexture, slot: QSGTextureeventProc) =
-  # TODO check subclass
-  var tmp = new QSGTextureeventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQSGTexture_override_virtual_event(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QSGTexture_event(self: ptr cQSGTexture, slot: int, event: pointer): bool {.exportc: "miqt_exec_callback_QSGTexture_event ".} =
-  var nimfunc = cast[ptr QSGTextureeventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQSGTexture_event(vtbl: pointer, self: pointer, event: pointer): bool {.cdecl.} =
+  let vtbl = cast[ptr QSGTextureVTable](vtbl)
+  let self = QSGTexture(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event)
-
-
-  let virtualReturn = nimfunc[](slotval1 )
-
+  var virtualReturn = vtbl[].event(self, slotval1)
   virtualReturn
+
 proc QSGTextureeventFilter*(self: gen_qsgtexture_types.QSGTexture, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool =
-  fQSGTexture_virtualbase_eventFilter(self.h, watched.h, event.h)
+  fcQSGTexture_virtualbase_eventFilter(self.h, watched.h, event.h)
 
-type QSGTextureeventFilterProc* = proc(watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool
-proc oneventFilter*(self: gen_qsgtexture_types.QSGTexture, slot: QSGTextureeventFilterProc) =
-  # TODO check subclass
-  var tmp = new QSGTextureeventFilterProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQSGTexture_override_virtual_eventFilter(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QSGTexture_eventFilter(self: ptr cQSGTexture, slot: int, watched: pointer, event: pointer): bool {.exportc: "miqt_exec_callback_QSGTexture_eventFilter ".} =
-  var nimfunc = cast[ptr QSGTextureeventFilterProc](cast[pointer](slot))
+proc miqt_exec_callback_cQSGTexture_eventFilter(vtbl: pointer, self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
+  let vtbl = cast[ptr QSGTextureVTable](vtbl)
+  let self = QSGTexture(h: self)
   let slotval1 = gen_qobject_types.QObject(h: watched)
-
   let slotval2 = gen_qcoreevent_types.QEvent(h: event)
-
-
-  let virtualReturn = nimfunc[](slotval1, slotval2 )
-
+  var virtualReturn = vtbl[].eventFilter(self, slotval1, slotval2)
   virtualReturn
+
 proc QSGTexturetimerEvent*(self: gen_qsgtexture_types.QSGTexture, event: gen_qcoreevent_types.QTimerEvent): void =
-  fQSGTexture_virtualbase_timerEvent(self.h, event.h)
+  fcQSGTexture_virtualbase_timerEvent(self.h, event.h)
 
-type QSGTexturetimerEventProc* = proc(event: gen_qcoreevent_types.QTimerEvent): void
-proc ontimerEvent*(self: gen_qsgtexture_types.QSGTexture, slot: QSGTexturetimerEventProc) =
-  # TODO check subclass
-  var tmp = new QSGTexturetimerEventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQSGTexture_override_virtual_timerEvent(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QSGTexture_timerEvent(self: ptr cQSGTexture, slot: int, event: pointer): void {.exportc: "miqt_exec_callback_QSGTexture_timerEvent ".} =
-  var nimfunc = cast[ptr QSGTexturetimerEventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQSGTexture_timerEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QSGTextureVTable](vtbl)
+  let self = QSGTexture(h: self)
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event)
+  vtbl[].timerEvent(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QSGTexturechildEvent*(self: gen_qsgtexture_types.QSGTexture, event: gen_qcoreevent_types.QChildEvent): void =
-  fQSGTexture_virtualbase_childEvent(self.h, event.h)
+  fcQSGTexture_virtualbase_childEvent(self.h, event.h)
 
-type QSGTexturechildEventProc* = proc(event: gen_qcoreevent_types.QChildEvent): void
-proc onchildEvent*(self: gen_qsgtexture_types.QSGTexture, slot: QSGTexturechildEventProc) =
-  # TODO check subclass
-  var tmp = new QSGTexturechildEventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQSGTexture_override_virtual_childEvent(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QSGTexture_childEvent(self: ptr cQSGTexture, slot: int, event: pointer): void {.exportc: "miqt_exec_callback_QSGTexture_childEvent ".} =
-  var nimfunc = cast[ptr QSGTexturechildEventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQSGTexture_childEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QSGTextureVTable](vtbl)
+  let self = QSGTexture(h: self)
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: event)
+  vtbl[].childEvent(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QSGTexturecustomEvent*(self: gen_qsgtexture_types.QSGTexture, event: gen_qcoreevent_types.QEvent): void =
-  fQSGTexture_virtualbase_customEvent(self.h, event.h)
+  fcQSGTexture_virtualbase_customEvent(self.h, event.h)
 
-type QSGTexturecustomEventProc* = proc(event: gen_qcoreevent_types.QEvent): void
-proc oncustomEvent*(self: gen_qsgtexture_types.QSGTexture, slot: QSGTexturecustomEventProc) =
-  # TODO check subclass
-  var tmp = new QSGTexturecustomEventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQSGTexture_override_virtual_customEvent(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QSGTexture_customEvent(self: ptr cQSGTexture, slot: int, event: pointer): void {.exportc: "miqt_exec_callback_QSGTexture_customEvent ".} =
-  var nimfunc = cast[ptr QSGTexturecustomEventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQSGTexture_customEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QSGTextureVTable](vtbl)
+  let self = QSGTexture(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  vtbl[].customEvent(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QSGTextureconnectNotify*(self: gen_qsgtexture_types.QSGTexture, signal: gen_qmetaobject_types.QMetaMethod): void =
-  fQSGTexture_virtualbase_connectNotify(self.h, signal.h)
+  fcQSGTexture_virtualbase_connectNotify(self.h, signal.h)
 
-type QSGTextureconnectNotifyProc* = proc(signal: gen_qmetaobject_types.QMetaMethod): void
-proc onconnectNotify*(self: gen_qsgtexture_types.QSGTexture, slot: QSGTextureconnectNotifyProc) =
-  # TODO check subclass
-  var tmp = new QSGTextureconnectNotifyProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQSGTexture_override_virtual_connectNotify(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QSGTexture_connectNotify(self: ptr cQSGTexture, slot: int, signal: pointer): void {.exportc: "miqt_exec_callback_QSGTexture_connectNotify ".} =
-  var nimfunc = cast[ptr QSGTextureconnectNotifyProc](cast[pointer](slot))
+proc miqt_exec_callback_cQSGTexture_connectNotify(vtbl: pointer, self: pointer, signal: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QSGTextureVTable](vtbl)
+  let self = QSGTexture(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  vtbl[].connectNotify(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QSGTexturedisconnectNotify*(self: gen_qsgtexture_types.QSGTexture, signal: gen_qmetaobject_types.QMetaMethod): void =
-  fQSGTexture_virtualbase_disconnectNotify(self.h, signal.h)
+  fcQSGTexture_virtualbase_disconnectNotify(self.h, signal.h)
 
-type QSGTexturedisconnectNotifyProc* = proc(signal: gen_qmetaobject_types.QMetaMethod): void
-proc ondisconnectNotify*(self: gen_qsgtexture_types.QSGTexture, slot: QSGTexturedisconnectNotifyProc) =
-  # TODO check subclass
-  var tmp = new QSGTexturedisconnectNotifyProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQSGTexture_override_virtual_disconnectNotify(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QSGTexture_disconnectNotify(self: ptr cQSGTexture, slot: int, signal: pointer): void {.exportc: "miqt_exec_callback_QSGTexture_disconnectNotify ".} =
-  var nimfunc = cast[ptr QSGTexturedisconnectNotifyProc](cast[pointer](slot))
+proc miqt_exec_callback_cQSGTexture_disconnectNotify(vtbl: pointer, self: pointer, signal: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QSGTextureVTable](vtbl)
+  let self = QSGTexture(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  vtbl[].disconnectNotify(self, slotval1)
 
+proc create*(T: type gen_qsgtexture_types.QSGTexture,
+    vtbl: ref QSGTextureVTable = nil): gen_qsgtexture_types.QSGTexture =
+  let vtbl = if vtbl == nil: new QSGTextureVTable else: vtbl
+  GC_ref(vtbl)
+  vtbl.vtbl.destructor = proc(vtbl: ptr cQSGTextureVTable, _: ptr cQSGTexture) {.cdecl.} =
+    let vtbl = cast[ref QSGTextureVTable](vtbl)
+    GC_unref(vtbl)
+  if not isNil(vtbl.metaObject):
+    vtbl[].vtbl.metaObject = miqt_exec_callback_cQSGTexture_metaObject
+  if not isNil(vtbl.metacast):
+    vtbl[].vtbl.metacast = miqt_exec_callback_cQSGTexture_metacast
+  if not isNil(vtbl.metacall):
+    vtbl[].vtbl.metacall = miqt_exec_callback_cQSGTexture_metacall
+  if not isNil(vtbl.comparisonKey):
+    vtbl[].vtbl.comparisonKey = miqt_exec_callback_cQSGTexture_comparisonKey
+  if not isNil(vtbl.textureSize):
+    vtbl[].vtbl.textureSize = miqt_exec_callback_cQSGTexture_textureSize
+  if not isNil(vtbl.hasAlphaChannel):
+    vtbl[].vtbl.hasAlphaChannel = miqt_exec_callback_cQSGTexture_hasAlphaChannel
+  if not isNil(vtbl.hasMipmaps):
+    vtbl[].vtbl.hasMipmaps = miqt_exec_callback_cQSGTexture_hasMipmaps
+  if not isNil(vtbl.normalizedTextureSubRect):
+    vtbl[].vtbl.normalizedTextureSubRect = miqt_exec_callback_cQSGTexture_normalizedTextureSubRect
+  if not isNil(vtbl.isAtlasTexture):
+    vtbl[].vtbl.isAtlasTexture = miqt_exec_callback_cQSGTexture_isAtlasTexture
+  if not isNil(vtbl.event):
+    vtbl[].vtbl.event = miqt_exec_callback_cQSGTexture_event
+  if not isNil(vtbl.eventFilter):
+    vtbl[].vtbl.eventFilter = miqt_exec_callback_cQSGTexture_eventFilter
+  if not isNil(vtbl.timerEvent):
+    vtbl[].vtbl.timerEvent = miqt_exec_callback_cQSGTexture_timerEvent
+  if not isNil(vtbl.childEvent):
+    vtbl[].vtbl.childEvent = miqt_exec_callback_cQSGTexture_childEvent
+  if not isNil(vtbl.customEvent):
+    vtbl[].vtbl.customEvent = miqt_exec_callback_cQSGTexture_customEvent
+  if not isNil(vtbl.connectNotify):
+    vtbl[].vtbl.connectNotify = miqt_exec_callback_cQSGTexture_connectNotify
+  if not isNil(vtbl.disconnectNotify):
+    vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQSGTexture_disconnectNotify
+  gen_qsgtexture_types.QSGTexture(h: fcQSGTexture_new(addr(vtbl[]), ))
 
-  nimfunc[](slotval1)
 proc staticMetaObject*(_: type gen_qsgtexture_types.QSGTexture): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQSGTexture_staticMetaObject())
 proc delete*(self: gen_qsgtexture_types.QSGTexture) =
   fcQSGTexture_delete(self.h)
-
-func init*(T: type gen_qsgtexture_types.QSGDynamicTexture, h: ptr cQSGDynamicTexture): gen_qsgtexture_types.QSGDynamicTexture =
-  T(h: h)
-proc create*(T: type gen_qsgtexture_types.QSGDynamicTexture, ): gen_qsgtexture_types.QSGDynamicTexture =
-  gen_qsgtexture_types.QSGDynamicTexture.init(fcQSGDynamicTexture_new())
-
 proc metaObject*(self: gen_qsgtexture_types.QSGDynamicTexture, ): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQSGDynamicTexture_metaObject(self.h))
 
@@ -567,294 +499,230 @@ proc tr*(_: type gen_qsgtexture_types.QSGDynamicTexture, s: cstring, c: cstring,
   c_free(v_ms.data)
   vx_ret
 
+type QSGDynamicTexturemetaObjectProc* = proc(self: QSGDynamicTexture): gen_qobjectdefs_types.QMetaObject {.raises: [], gcsafe.}
+type QSGDynamicTexturemetacastProc* = proc(self: QSGDynamicTexture, param1: cstring): pointer {.raises: [], gcsafe.}
+type QSGDynamicTexturemetacallProc* = proc(self: QSGDynamicTexture, param1: cint, param2: cint, param3: pointer): cint {.raises: [], gcsafe.}
+type QSGDynamicTextureupdateTextureProc* = proc(self: QSGDynamicTexture): bool {.raises: [], gcsafe.}
+type QSGDynamicTexturecomparisonKeyProc* = proc(self: QSGDynamicTexture): clonglong {.raises: [], gcsafe.}
+type QSGDynamicTexturetextureSizeProc* = proc(self: QSGDynamicTexture): gen_qsize_types.QSize {.raises: [], gcsafe.}
+type QSGDynamicTexturehasAlphaChannelProc* = proc(self: QSGDynamicTexture): bool {.raises: [], gcsafe.}
+type QSGDynamicTexturehasMipmapsProc* = proc(self: QSGDynamicTexture): bool {.raises: [], gcsafe.}
+type QSGDynamicTexturenormalizedTextureSubRectProc* = proc(self: QSGDynamicTexture): gen_qrect_types.QRectF {.raises: [], gcsafe.}
+type QSGDynamicTextureisAtlasTextureProc* = proc(self: QSGDynamicTexture): bool {.raises: [], gcsafe.}
+type QSGDynamicTextureeventProc* = proc(self: QSGDynamicTexture, event: gen_qcoreevent_types.QEvent): bool {.raises: [], gcsafe.}
+type QSGDynamicTextureeventFilterProc* = proc(self: QSGDynamicTexture, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.raises: [], gcsafe.}
+type QSGDynamicTexturetimerEventProc* = proc(self: QSGDynamicTexture, event: gen_qcoreevent_types.QTimerEvent): void {.raises: [], gcsafe.}
+type QSGDynamicTexturechildEventProc* = proc(self: QSGDynamicTexture, event: gen_qcoreevent_types.QChildEvent): void {.raises: [], gcsafe.}
+type QSGDynamicTexturecustomEventProc* = proc(self: QSGDynamicTexture, event: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
+type QSGDynamicTextureconnectNotifyProc* = proc(self: QSGDynamicTexture, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
+type QSGDynamicTexturedisconnectNotifyProc* = proc(self: QSGDynamicTexture, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
+type QSGDynamicTextureVTable* = object
+  vtbl: cQSGDynamicTextureVTable
+  metaObject*: QSGDynamicTexturemetaObjectProc
+  metacast*: QSGDynamicTexturemetacastProc
+  metacall*: QSGDynamicTexturemetacallProc
+  updateTexture*: QSGDynamicTextureupdateTextureProc
+  comparisonKey*: QSGDynamicTexturecomparisonKeyProc
+  textureSize*: QSGDynamicTexturetextureSizeProc
+  hasAlphaChannel*: QSGDynamicTexturehasAlphaChannelProc
+  hasMipmaps*: QSGDynamicTexturehasMipmapsProc
+  normalizedTextureSubRect*: QSGDynamicTexturenormalizedTextureSubRectProc
+  isAtlasTexture*: QSGDynamicTextureisAtlasTextureProc
+  event*: QSGDynamicTextureeventProc
+  eventFilter*: QSGDynamicTextureeventFilterProc
+  timerEvent*: QSGDynamicTexturetimerEventProc
+  childEvent*: QSGDynamicTexturechildEventProc
+  customEvent*: QSGDynamicTexturecustomEventProc
+  connectNotify*: QSGDynamicTextureconnectNotifyProc
+  disconnectNotify*: QSGDynamicTexturedisconnectNotifyProc
 proc QSGDynamicTexturemetaObject*(self: gen_qsgtexture_types.QSGDynamicTexture, ): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fQSGDynamicTexture_virtualbase_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQSGDynamicTexture_virtualbase_metaObject(self.h))
 
-type QSGDynamicTexturemetaObjectProc* = proc(): gen_qobjectdefs_types.QMetaObject
-proc onmetaObject*(self: gen_qsgtexture_types.QSGDynamicTexture, slot: QSGDynamicTexturemetaObjectProc) =
-  # TODO check subclass
-  var tmp = new QSGDynamicTexturemetaObjectProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQSGDynamicTexture_override_virtual_metaObject(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QSGDynamicTexture_metaObject(self: ptr cQSGDynamicTexture, slot: int): pointer {.exportc: "miqt_exec_callback_QSGDynamicTexture_metaObject ".} =
-  var nimfunc = cast[ptr QSGDynamicTexturemetaObjectProc](cast[pointer](slot))
-
-  let virtualReturn = nimfunc[]( )
-
+proc miqt_exec_callback_cQSGDynamicTexture_metaObject(vtbl: pointer, self: pointer): pointer {.cdecl.} =
+  let vtbl = cast[ptr QSGDynamicTextureVTable](vtbl)
+  let self = QSGDynamicTexture(h: self)
+  var virtualReturn = vtbl[].metaObject(self)
   virtualReturn.h
+
 proc QSGDynamicTexturemetacast*(self: gen_qsgtexture_types.QSGDynamicTexture, param1: cstring): pointer =
-  fQSGDynamicTexture_virtualbase_metacast(self.h, param1)
+  fcQSGDynamicTexture_virtualbase_metacast(self.h, param1)
 
-type QSGDynamicTexturemetacastProc* = proc(param1: cstring): pointer
-proc onmetacast*(self: gen_qsgtexture_types.QSGDynamicTexture, slot: QSGDynamicTexturemetacastProc) =
-  # TODO check subclass
-  var tmp = new QSGDynamicTexturemetacastProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQSGDynamicTexture_override_virtual_metacast(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QSGDynamicTexture_metacast(self: ptr cQSGDynamicTexture, slot: int, param1: cstring): pointer {.exportc: "miqt_exec_callback_QSGDynamicTexture_metacast ".} =
-  var nimfunc = cast[ptr QSGDynamicTexturemetacastProc](cast[pointer](slot))
+proc miqt_exec_callback_cQSGDynamicTexture_metacast(vtbl: pointer, self: pointer, param1: cstring): pointer {.cdecl.} =
+  let vtbl = cast[ptr QSGDynamicTextureVTable](vtbl)
+  let self = QSGDynamicTexture(h: self)
   let slotval1 = (param1)
-
-
-  let virtualReturn = nimfunc[](slotval1 )
-
+  var virtualReturn = vtbl[].metacast(self, slotval1)
   virtualReturn
+
 proc QSGDynamicTexturemetacall*(self: gen_qsgtexture_types.QSGDynamicTexture, param1: cint, param2: cint, param3: pointer): cint =
-  fQSGDynamicTexture_virtualbase_metacall(self.h, cint(param1), param2, param3)
+  fcQSGDynamicTexture_virtualbase_metacall(self.h, cint(param1), param2, param3)
 
-type QSGDynamicTexturemetacallProc* = proc(param1: cint, param2: cint, param3: pointer): cint
-proc onmetacall*(self: gen_qsgtexture_types.QSGDynamicTexture, slot: QSGDynamicTexturemetacallProc) =
-  # TODO check subclass
-  var tmp = new QSGDynamicTexturemetacallProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQSGDynamicTexture_override_virtual_metacall(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QSGDynamicTexture_metacall(self: ptr cQSGDynamicTexture, slot: int, param1: cint, param2: cint, param3: pointer): cint {.exportc: "miqt_exec_callback_QSGDynamicTexture_metacall ".} =
-  var nimfunc = cast[ptr QSGDynamicTexturemetacallProc](cast[pointer](slot))
+proc miqt_exec_callback_cQSGDynamicTexture_metacall(vtbl: pointer, self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
+  let vtbl = cast[ptr QSGDynamicTextureVTable](vtbl)
+  let self = QSGDynamicTexture(h: self)
   let slotval1 = cint(param1)
-
   let slotval2 = param2
-
   let slotval3 = param3
-
-
-  let virtualReturn = nimfunc[](slotval1, slotval2, slotval3 )
-
+  var virtualReturn = vtbl[].metacall(self, slotval1, slotval2, slotval3)
   virtualReturn
-type QSGDynamicTextureupdateTextureProc* = proc(): bool
-proc onupdateTexture*(self: gen_qsgtexture_types.QSGDynamicTexture, slot: QSGDynamicTextureupdateTextureProc) =
-  # TODO check subclass
-  var tmp = new QSGDynamicTextureupdateTextureProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQSGDynamicTexture_override_virtual_updateTexture(self.h, cast[int](addr tmp[]))
 
-proc miqt_exec_callback_QSGDynamicTexture_updateTexture(self: ptr cQSGDynamicTexture, slot: int): bool {.exportc: "miqt_exec_callback_QSGDynamicTexture_updateTexture ".} =
-  var nimfunc = cast[ptr QSGDynamicTextureupdateTextureProc](cast[pointer](slot))
-
-  let virtualReturn = nimfunc[]( )
-
+proc miqt_exec_callback_cQSGDynamicTexture_updateTexture(vtbl: pointer, self: pointer): bool {.cdecl.} =
+  let vtbl = cast[ptr QSGDynamicTextureVTable](vtbl)
+  let self = QSGDynamicTexture(h: self)
+  var virtualReturn = vtbl[].updateTexture(self)
   virtualReturn
-type QSGDynamicTexturecomparisonKeyProc* = proc(): clonglong
-proc oncomparisonKey*(self: gen_qsgtexture_types.QSGDynamicTexture, slot: QSGDynamicTexturecomparisonKeyProc) =
-  # TODO check subclass
-  var tmp = new QSGDynamicTexturecomparisonKeyProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQSGDynamicTexture_override_virtual_comparisonKey(self.h, cast[int](addr tmp[]))
 
-proc miqt_exec_callback_QSGDynamicTexture_comparisonKey(self: ptr cQSGDynamicTexture, slot: int): clonglong {.exportc: "miqt_exec_callback_QSGDynamicTexture_comparisonKey ".} =
-  var nimfunc = cast[ptr QSGDynamicTexturecomparisonKeyProc](cast[pointer](slot))
-
-  let virtualReturn = nimfunc[]( )
-
+proc miqt_exec_callback_cQSGDynamicTexture_comparisonKey(vtbl: pointer, self: pointer): clonglong {.cdecl.} =
+  let vtbl = cast[ptr QSGDynamicTextureVTable](vtbl)
+  let self = QSGDynamicTexture(h: self)
+  var virtualReturn = vtbl[].comparisonKey(self)
   virtualReturn
-type QSGDynamicTexturetextureSizeProc* = proc(): gen_qsize_types.QSize
-proc ontextureSize*(self: gen_qsgtexture_types.QSGDynamicTexture, slot: QSGDynamicTexturetextureSizeProc) =
-  # TODO check subclass
-  var tmp = new QSGDynamicTexturetextureSizeProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQSGDynamicTexture_override_virtual_textureSize(self.h, cast[int](addr tmp[]))
 
-proc miqt_exec_callback_QSGDynamicTexture_textureSize(self: ptr cQSGDynamicTexture, slot: int): pointer {.exportc: "miqt_exec_callback_QSGDynamicTexture_textureSize ".} =
-  var nimfunc = cast[ptr QSGDynamicTexturetextureSizeProc](cast[pointer](slot))
-
-  let virtualReturn = nimfunc[]( )
-
+proc miqt_exec_callback_cQSGDynamicTexture_textureSize(vtbl: pointer, self: pointer): pointer {.cdecl.} =
+  let vtbl = cast[ptr QSGDynamicTextureVTable](vtbl)
+  let self = QSGDynamicTexture(h: self)
+  var virtualReturn = vtbl[].textureSize(self)
   virtualReturn.h
-type QSGDynamicTexturehasAlphaChannelProc* = proc(): bool
-proc onhasAlphaChannel*(self: gen_qsgtexture_types.QSGDynamicTexture, slot: QSGDynamicTexturehasAlphaChannelProc) =
-  # TODO check subclass
-  var tmp = new QSGDynamicTexturehasAlphaChannelProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQSGDynamicTexture_override_virtual_hasAlphaChannel(self.h, cast[int](addr tmp[]))
 
-proc miqt_exec_callback_QSGDynamicTexture_hasAlphaChannel(self: ptr cQSGDynamicTexture, slot: int): bool {.exportc: "miqt_exec_callback_QSGDynamicTexture_hasAlphaChannel ".} =
-  var nimfunc = cast[ptr QSGDynamicTexturehasAlphaChannelProc](cast[pointer](slot))
-
-  let virtualReturn = nimfunc[]( )
-
+proc miqt_exec_callback_cQSGDynamicTexture_hasAlphaChannel(vtbl: pointer, self: pointer): bool {.cdecl.} =
+  let vtbl = cast[ptr QSGDynamicTextureVTable](vtbl)
+  let self = QSGDynamicTexture(h: self)
+  var virtualReturn = vtbl[].hasAlphaChannel(self)
   virtualReturn
-type QSGDynamicTexturehasMipmapsProc* = proc(): bool
-proc onhasMipmaps*(self: gen_qsgtexture_types.QSGDynamicTexture, slot: QSGDynamicTexturehasMipmapsProc) =
-  # TODO check subclass
-  var tmp = new QSGDynamicTexturehasMipmapsProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQSGDynamicTexture_override_virtual_hasMipmaps(self.h, cast[int](addr tmp[]))
 
-proc miqt_exec_callback_QSGDynamicTexture_hasMipmaps(self: ptr cQSGDynamicTexture, slot: int): bool {.exportc: "miqt_exec_callback_QSGDynamicTexture_hasMipmaps ".} =
-  var nimfunc = cast[ptr QSGDynamicTexturehasMipmapsProc](cast[pointer](slot))
-
-  let virtualReturn = nimfunc[]( )
-
+proc miqt_exec_callback_cQSGDynamicTexture_hasMipmaps(vtbl: pointer, self: pointer): bool {.cdecl.} =
+  let vtbl = cast[ptr QSGDynamicTextureVTable](vtbl)
+  let self = QSGDynamicTexture(h: self)
+  var virtualReturn = vtbl[].hasMipmaps(self)
   virtualReturn
+
 proc QSGDynamicTexturenormalizedTextureSubRect*(self: gen_qsgtexture_types.QSGDynamicTexture, ): gen_qrect_types.QRectF =
-  gen_qrect_types.QRectF(h: fQSGDynamicTexture_virtualbase_normalizedTextureSubRect(self.h))
+  gen_qrect_types.QRectF(h: fcQSGDynamicTexture_virtualbase_normalizedTextureSubRect(self.h))
 
-type QSGDynamicTexturenormalizedTextureSubRectProc* = proc(): gen_qrect_types.QRectF
-proc onnormalizedTextureSubRect*(self: gen_qsgtexture_types.QSGDynamicTexture, slot: QSGDynamicTexturenormalizedTextureSubRectProc) =
-  # TODO check subclass
-  var tmp = new QSGDynamicTexturenormalizedTextureSubRectProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQSGDynamicTexture_override_virtual_normalizedTextureSubRect(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QSGDynamicTexture_normalizedTextureSubRect(self: ptr cQSGDynamicTexture, slot: int): pointer {.exportc: "miqt_exec_callback_QSGDynamicTexture_normalizedTextureSubRect ".} =
-  var nimfunc = cast[ptr QSGDynamicTexturenormalizedTextureSubRectProc](cast[pointer](slot))
-
-  let virtualReturn = nimfunc[]( )
-
+proc miqt_exec_callback_cQSGDynamicTexture_normalizedTextureSubRect(vtbl: pointer, self: pointer): pointer {.cdecl.} =
+  let vtbl = cast[ptr QSGDynamicTextureVTable](vtbl)
+  let self = QSGDynamicTexture(h: self)
+  var virtualReturn = vtbl[].normalizedTextureSubRect(self)
   virtualReturn.h
+
 proc QSGDynamicTextureisAtlasTexture*(self: gen_qsgtexture_types.QSGDynamicTexture, ): bool =
-  fQSGDynamicTexture_virtualbase_isAtlasTexture(self.h)
+  fcQSGDynamicTexture_virtualbase_isAtlasTexture(self.h)
 
-type QSGDynamicTextureisAtlasTextureProc* = proc(): bool
-proc onisAtlasTexture*(self: gen_qsgtexture_types.QSGDynamicTexture, slot: QSGDynamicTextureisAtlasTextureProc) =
-  # TODO check subclass
-  var tmp = new QSGDynamicTextureisAtlasTextureProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQSGDynamicTexture_override_virtual_isAtlasTexture(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QSGDynamicTexture_isAtlasTexture(self: ptr cQSGDynamicTexture, slot: int): bool {.exportc: "miqt_exec_callback_QSGDynamicTexture_isAtlasTexture ".} =
-  var nimfunc = cast[ptr QSGDynamicTextureisAtlasTextureProc](cast[pointer](slot))
-
-  let virtualReturn = nimfunc[]( )
-
+proc miqt_exec_callback_cQSGDynamicTexture_isAtlasTexture(vtbl: pointer, self: pointer): bool {.cdecl.} =
+  let vtbl = cast[ptr QSGDynamicTextureVTable](vtbl)
+  let self = QSGDynamicTexture(h: self)
+  var virtualReturn = vtbl[].isAtlasTexture(self)
   virtualReturn
+
 proc QSGDynamicTextureevent*(self: gen_qsgtexture_types.QSGDynamicTexture, event: gen_qcoreevent_types.QEvent): bool =
-  fQSGDynamicTexture_virtualbase_event(self.h, event.h)
+  fcQSGDynamicTexture_virtualbase_event(self.h, event.h)
 
-type QSGDynamicTextureeventProc* = proc(event: gen_qcoreevent_types.QEvent): bool
-proc onevent*(self: gen_qsgtexture_types.QSGDynamicTexture, slot: QSGDynamicTextureeventProc) =
-  # TODO check subclass
-  var tmp = new QSGDynamicTextureeventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQSGDynamicTexture_override_virtual_event(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QSGDynamicTexture_event(self: ptr cQSGDynamicTexture, slot: int, event: pointer): bool {.exportc: "miqt_exec_callback_QSGDynamicTexture_event ".} =
-  var nimfunc = cast[ptr QSGDynamicTextureeventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQSGDynamicTexture_event(vtbl: pointer, self: pointer, event: pointer): bool {.cdecl.} =
+  let vtbl = cast[ptr QSGDynamicTextureVTable](vtbl)
+  let self = QSGDynamicTexture(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event)
-
-
-  let virtualReturn = nimfunc[](slotval1 )
-
+  var virtualReturn = vtbl[].event(self, slotval1)
   virtualReturn
+
 proc QSGDynamicTextureeventFilter*(self: gen_qsgtexture_types.QSGDynamicTexture, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool =
-  fQSGDynamicTexture_virtualbase_eventFilter(self.h, watched.h, event.h)
+  fcQSGDynamicTexture_virtualbase_eventFilter(self.h, watched.h, event.h)
 
-type QSGDynamicTextureeventFilterProc* = proc(watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool
-proc oneventFilter*(self: gen_qsgtexture_types.QSGDynamicTexture, slot: QSGDynamicTextureeventFilterProc) =
-  # TODO check subclass
-  var tmp = new QSGDynamicTextureeventFilterProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQSGDynamicTexture_override_virtual_eventFilter(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QSGDynamicTexture_eventFilter(self: ptr cQSGDynamicTexture, slot: int, watched: pointer, event: pointer): bool {.exportc: "miqt_exec_callback_QSGDynamicTexture_eventFilter ".} =
-  var nimfunc = cast[ptr QSGDynamicTextureeventFilterProc](cast[pointer](slot))
+proc miqt_exec_callback_cQSGDynamicTexture_eventFilter(vtbl: pointer, self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
+  let vtbl = cast[ptr QSGDynamicTextureVTable](vtbl)
+  let self = QSGDynamicTexture(h: self)
   let slotval1 = gen_qobject_types.QObject(h: watched)
-
   let slotval2 = gen_qcoreevent_types.QEvent(h: event)
-
-
-  let virtualReturn = nimfunc[](slotval1, slotval2 )
-
+  var virtualReturn = vtbl[].eventFilter(self, slotval1, slotval2)
   virtualReturn
+
 proc QSGDynamicTexturetimerEvent*(self: gen_qsgtexture_types.QSGDynamicTexture, event: gen_qcoreevent_types.QTimerEvent): void =
-  fQSGDynamicTexture_virtualbase_timerEvent(self.h, event.h)
+  fcQSGDynamicTexture_virtualbase_timerEvent(self.h, event.h)
 
-type QSGDynamicTexturetimerEventProc* = proc(event: gen_qcoreevent_types.QTimerEvent): void
-proc ontimerEvent*(self: gen_qsgtexture_types.QSGDynamicTexture, slot: QSGDynamicTexturetimerEventProc) =
-  # TODO check subclass
-  var tmp = new QSGDynamicTexturetimerEventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQSGDynamicTexture_override_virtual_timerEvent(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QSGDynamicTexture_timerEvent(self: ptr cQSGDynamicTexture, slot: int, event: pointer): void {.exportc: "miqt_exec_callback_QSGDynamicTexture_timerEvent ".} =
-  var nimfunc = cast[ptr QSGDynamicTexturetimerEventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQSGDynamicTexture_timerEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QSGDynamicTextureVTable](vtbl)
+  let self = QSGDynamicTexture(h: self)
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event)
+  vtbl[].timerEvent(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QSGDynamicTexturechildEvent*(self: gen_qsgtexture_types.QSGDynamicTexture, event: gen_qcoreevent_types.QChildEvent): void =
-  fQSGDynamicTexture_virtualbase_childEvent(self.h, event.h)
+  fcQSGDynamicTexture_virtualbase_childEvent(self.h, event.h)
 
-type QSGDynamicTexturechildEventProc* = proc(event: gen_qcoreevent_types.QChildEvent): void
-proc onchildEvent*(self: gen_qsgtexture_types.QSGDynamicTexture, slot: QSGDynamicTexturechildEventProc) =
-  # TODO check subclass
-  var tmp = new QSGDynamicTexturechildEventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQSGDynamicTexture_override_virtual_childEvent(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QSGDynamicTexture_childEvent(self: ptr cQSGDynamicTexture, slot: int, event: pointer): void {.exportc: "miqt_exec_callback_QSGDynamicTexture_childEvent ".} =
-  var nimfunc = cast[ptr QSGDynamicTexturechildEventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQSGDynamicTexture_childEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QSGDynamicTextureVTable](vtbl)
+  let self = QSGDynamicTexture(h: self)
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: event)
+  vtbl[].childEvent(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QSGDynamicTexturecustomEvent*(self: gen_qsgtexture_types.QSGDynamicTexture, event: gen_qcoreevent_types.QEvent): void =
-  fQSGDynamicTexture_virtualbase_customEvent(self.h, event.h)
+  fcQSGDynamicTexture_virtualbase_customEvent(self.h, event.h)
 
-type QSGDynamicTexturecustomEventProc* = proc(event: gen_qcoreevent_types.QEvent): void
-proc oncustomEvent*(self: gen_qsgtexture_types.QSGDynamicTexture, slot: QSGDynamicTexturecustomEventProc) =
-  # TODO check subclass
-  var tmp = new QSGDynamicTexturecustomEventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQSGDynamicTexture_override_virtual_customEvent(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QSGDynamicTexture_customEvent(self: ptr cQSGDynamicTexture, slot: int, event: pointer): void {.exportc: "miqt_exec_callback_QSGDynamicTexture_customEvent ".} =
-  var nimfunc = cast[ptr QSGDynamicTexturecustomEventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQSGDynamicTexture_customEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QSGDynamicTextureVTable](vtbl)
+  let self = QSGDynamicTexture(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  vtbl[].customEvent(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QSGDynamicTextureconnectNotify*(self: gen_qsgtexture_types.QSGDynamicTexture, signal: gen_qmetaobject_types.QMetaMethod): void =
-  fQSGDynamicTexture_virtualbase_connectNotify(self.h, signal.h)
+  fcQSGDynamicTexture_virtualbase_connectNotify(self.h, signal.h)
 
-type QSGDynamicTextureconnectNotifyProc* = proc(signal: gen_qmetaobject_types.QMetaMethod): void
-proc onconnectNotify*(self: gen_qsgtexture_types.QSGDynamicTexture, slot: QSGDynamicTextureconnectNotifyProc) =
-  # TODO check subclass
-  var tmp = new QSGDynamicTextureconnectNotifyProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQSGDynamicTexture_override_virtual_connectNotify(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QSGDynamicTexture_connectNotify(self: ptr cQSGDynamicTexture, slot: int, signal: pointer): void {.exportc: "miqt_exec_callback_QSGDynamicTexture_connectNotify ".} =
-  var nimfunc = cast[ptr QSGDynamicTextureconnectNotifyProc](cast[pointer](slot))
+proc miqt_exec_callback_cQSGDynamicTexture_connectNotify(vtbl: pointer, self: pointer, signal: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QSGDynamicTextureVTable](vtbl)
+  let self = QSGDynamicTexture(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  vtbl[].connectNotify(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QSGDynamicTexturedisconnectNotify*(self: gen_qsgtexture_types.QSGDynamicTexture, signal: gen_qmetaobject_types.QMetaMethod): void =
-  fQSGDynamicTexture_virtualbase_disconnectNotify(self.h, signal.h)
+  fcQSGDynamicTexture_virtualbase_disconnectNotify(self.h, signal.h)
 
-type QSGDynamicTexturedisconnectNotifyProc* = proc(signal: gen_qmetaobject_types.QMetaMethod): void
-proc ondisconnectNotify*(self: gen_qsgtexture_types.QSGDynamicTexture, slot: QSGDynamicTexturedisconnectNotifyProc) =
-  # TODO check subclass
-  var tmp = new QSGDynamicTexturedisconnectNotifyProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQSGDynamicTexture_override_virtual_disconnectNotify(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QSGDynamicTexture_disconnectNotify(self: ptr cQSGDynamicTexture, slot: int, signal: pointer): void {.exportc: "miqt_exec_callback_QSGDynamicTexture_disconnectNotify ".} =
-  var nimfunc = cast[ptr QSGDynamicTexturedisconnectNotifyProc](cast[pointer](slot))
+proc miqt_exec_callback_cQSGDynamicTexture_disconnectNotify(vtbl: pointer, self: pointer, signal: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QSGDynamicTextureVTable](vtbl)
+  let self = QSGDynamicTexture(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  vtbl[].disconnectNotify(self, slotval1)
 
+proc create*(T: type gen_qsgtexture_types.QSGDynamicTexture,
+    vtbl: ref QSGDynamicTextureVTable = nil): gen_qsgtexture_types.QSGDynamicTexture =
+  let vtbl = if vtbl == nil: new QSGDynamicTextureVTable else: vtbl
+  GC_ref(vtbl)
+  vtbl.vtbl.destructor = proc(vtbl: ptr cQSGDynamicTextureVTable, _: ptr cQSGDynamicTexture) {.cdecl.} =
+    let vtbl = cast[ref QSGDynamicTextureVTable](vtbl)
+    GC_unref(vtbl)
+  if not isNil(vtbl.metaObject):
+    vtbl[].vtbl.metaObject = miqt_exec_callback_cQSGDynamicTexture_metaObject
+  if not isNil(vtbl.metacast):
+    vtbl[].vtbl.metacast = miqt_exec_callback_cQSGDynamicTexture_metacast
+  if not isNil(vtbl.metacall):
+    vtbl[].vtbl.metacall = miqt_exec_callback_cQSGDynamicTexture_metacall
+  if not isNil(vtbl.updateTexture):
+    vtbl[].vtbl.updateTexture = miqt_exec_callback_cQSGDynamicTexture_updateTexture
+  if not isNil(vtbl.comparisonKey):
+    vtbl[].vtbl.comparisonKey = miqt_exec_callback_cQSGDynamicTexture_comparisonKey
+  if not isNil(vtbl.textureSize):
+    vtbl[].vtbl.textureSize = miqt_exec_callback_cQSGDynamicTexture_textureSize
+  if not isNil(vtbl.hasAlphaChannel):
+    vtbl[].vtbl.hasAlphaChannel = miqt_exec_callback_cQSGDynamicTexture_hasAlphaChannel
+  if not isNil(vtbl.hasMipmaps):
+    vtbl[].vtbl.hasMipmaps = miqt_exec_callback_cQSGDynamicTexture_hasMipmaps
+  if not isNil(vtbl.normalizedTextureSubRect):
+    vtbl[].vtbl.normalizedTextureSubRect = miqt_exec_callback_cQSGDynamicTexture_normalizedTextureSubRect
+  if not isNil(vtbl.isAtlasTexture):
+    vtbl[].vtbl.isAtlasTexture = miqt_exec_callback_cQSGDynamicTexture_isAtlasTexture
+  if not isNil(vtbl.event):
+    vtbl[].vtbl.event = miqt_exec_callback_cQSGDynamicTexture_event
+  if not isNil(vtbl.eventFilter):
+    vtbl[].vtbl.eventFilter = miqt_exec_callback_cQSGDynamicTexture_eventFilter
+  if not isNil(vtbl.timerEvent):
+    vtbl[].vtbl.timerEvent = miqt_exec_callback_cQSGDynamicTexture_timerEvent
+  if not isNil(vtbl.childEvent):
+    vtbl[].vtbl.childEvent = miqt_exec_callback_cQSGDynamicTexture_childEvent
+  if not isNil(vtbl.customEvent):
+    vtbl[].vtbl.customEvent = miqt_exec_callback_cQSGDynamicTexture_customEvent
+  if not isNil(vtbl.connectNotify):
+    vtbl[].vtbl.connectNotify = miqt_exec_callback_cQSGDynamicTexture_connectNotify
+  if not isNil(vtbl.disconnectNotify):
+    vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQSGDynamicTexture_disconnectNotify
+  gen_qsgtexture_types.QSGDynamicTexture(h: fcQSGDynamicTexture_new(addr(vtbl[]), ))
 
-  nimfunc[](slotval1)
 proc staticMetaObject*(_: type gen_qsgtexture_types.QSGDynamicTexture): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQSGDynamicTexture_staticMetaObject())
 proc delete*(self: gen_qsgtexture_types.QSGDynamicTexture) =

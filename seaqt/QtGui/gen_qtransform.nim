@@ -63,11 +63,6 @@ export
 
 type cQTransform*{.exportc: "QTransform", incompleteStruct.} = object
 
-proc fcQTransform_new(param1: cint): ptr cQTransform {.importc: "QTransform_new".}
-proc fcQTransform_new2(): ptr cQTransform {.importc: "QTransform_new2".}
-proc fcQTransform_new3(h11: float64, h12: float64, h13: float64, h21: float64, h22: float64, h23: float64, h31: float64, h32: float64, h33: float64): ptr cQTransform {.importc: "QTransform_new3".}
-proc fcQTransform_new4(h11: float64, h12: float64, h21: float64, h22: float64, dx: float64, dy: float64): ptr cQTransform {.importc: "QTransform_new4".}
-proc fcQTransform_new5(other: pointer): ptr cQTransform {.importc: "QTransform_new5".}
 proc fcQTransform_operatorAssign(self: pointer, param1: pointer): void {.importc: "QTransform_operatorAssign".}
 proc fcQTransform_isAffine(self: pointer, ): bool {.importc: "QTransform_isAffine".}
 proc fcQTransform_isIdentity(self: pointer, ): bool {.importc: "QTransform_isIdentity".}
@@ -122,25 +117,12 @@ proc fcQTransform_fromScale(dx: float64, dy: float64): pointer {.importc: "QTran
 proc fcQTransform_inverted1(self: pointer, invertible: ptr bool): pointer {.importc: "QTransform_inverted1".}
 proc fcQTransform_rotate2(self: pointer, a: float64, axis: cint): pointer {.importc: "QTransform_rotate2".}
 proc fcQTransform_rotateRadians2(self: pointer, a: float64, axis: cint): pointer {.importc: "QTransform_rotateRadians2".}
+proc fcQTransform_new(param1: cint): ptr cQTransform {.importc: "QTransform_new".}
+proc fcQTransform_new2(): ptr cQTransform {.importc: "QTransform_new2".}
+proc fcQTransform_new3(h11: float64, h12: float64, h13: float64, h21: float64, h22: float64, h23: float64, h31: float64, h32: float64, h33: float64): ptr cQTransform {.importc: "QTransform_new3".}
+proc fcQTransform_new4(h11: float64, h12: float64, h21: float64, h22: float64, dx: float64, dy: float64): ptr cQTransform {.importc: "QTransform_new4".}
+proc fcQTransform_new5(other: pointer): ptr cQTransform {.importc: "QTransform_new5".}
 proc fcQTransform_delete(self: pointer) {.importc: "QTransform_delete".}
-
-
-func init*(T: type gen_qtransform_types.QTransform, h: ptr cQTransform): gen_qtransform_types.QTransform =
-  T(h: h)
-proc create*(T: type gen_qtransform_types.QTransform, param1: cint): gen_qtransform_types.QTransform =
-  gen_qtransform_types.QTransform.init(fcQTransform_new(cint(param1)))
-
-proc create*(T: type gen_qtransform_types.QTransform, ): gen_qtransform_types.QTransform =
-  gen_qtransform_types.QTransform.init(fcQTransform_new2())
-
-proc create*(T: type gen_qtransform_types.QTransform, h11: float64, h12: float64, h13: float64, h21: float64, h22: float64, h23: float64, h31: float64, h32: float64, h33: float64): gen_qtransform_types.QTransform =
-  gen_qtransform_types.QTransform.init(fcQTransform_new3(h11, h12, h13, h21, h22, h23, h31, h32, h33))
-
-proc create*(T: type gen_qtransform_types.QTransform, h11: float64, h12: float64, h21: float64, h22: float64, dx: float64, dy: float64): gen_qtransform_types.QTransform =
-  gen_qtransform_types.QTransform.init(fcQTransform_new4(h11, h12, h21, h22, dx, dy))
-
-proc create*(T: type gen_qtransform_types.QTransform, other: gen_qtransform_types.QTransform): gen_qtransform_types.QTransform =
-  gen_qtransform_types.QTransform.init(fcQTransform_new5(other.h))
 
 proc operatorAssign*(self: gen_qtransform_types.QTransform, param1: gen_qtransform_types.QTransform): void =
   fcQTransform_operatorAssign(self.h, param1.h)
@@ -303,6 +285,25 @@ proc rotate*(self: gen_qtransform_types.QTransform, a: float64, axis: cint): gen
 
 proc rotateRadians*(self: gen_qtransform_types.QTransform, a: float64, axis: cint): gen_qtransform_types.QTransform =
   gen_qtransform_types.QTransform(h: fcQTransform_rotateRadians2(self.h, a, cint(axis)))
+
+proc create*(T: type gen_qtransform_types.QTransform,
+    param1: cint): gen_qtransform_types.QTransform =
+  gen_qtransform_types.QTransform(h: fcQTransform_new(cint(param1)))
+
+proc create*(T: type gen_qtransform_types.QTransform): gen_qtransform_types.QTransform =
+  gen_qtransform_types.QTransform(h: fcQTransform_new2())
+
+proc create*(T: type gen_qtransform_types.QTransform,
+    h11: float64, h12: float64, h13: float64, h21: float64, h22: float64, h23: float64, h31: float64, h32: float64, h33: float64): gen_qtransform_types.QTransform =
+  gen_qtransform_types.QTransform(h: fcQTransform_new3(h11, h12, h13, h21, h22, h23, h31, h32, h33))
+
+proc create*(T: type gen_qtransform_types.QTransform,
+    h11: float64, h12: float64, h21: float64, h22: float64, dx: float64, dy: float64): gen_qtransform_types.QTransform =
+  gen_qtransform_types.QTransform(h: fcQTransform_new4(h11, h12, h21, h22, dx, dy))
+
+proc create*(T: type gen_qtransform_types.QTransform,
+    other: gen_qtransform_types.QTransform): gen_qtransform_types.QTransform =
+  gen_qtransform_types.QTransform(h: fcQTransform_new5(other.h))
 
 proc delete*(self: gen_qtransform_types.QTransform) =
   fcQTransform_delete(self.h)

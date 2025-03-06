@@ -44,15 +44,9 @@ type cQNativeInterfaceQSGVulkanTexture*{.exportc: "QNativeInterface__QSGVulkanTe
 proc fcQNativeInterfaceQSGOpenGLTexture_new(): ptr cQNativeInterfaceQSGOpenGLTexture {.importc: "QNativeInterface__QSGOpenGLTexture_new".}
 proc fcQNativeInterfaceQSGVulkanTexture_new(): ptr cQNativeInterfaceQSGVulkanTexture {.importc: "QNativeInterface__QSGVulkanTexture_new".}
 
+proc create*(T: type gen_qsgtexture_platform_types.QNativeInterfaceQSGOpenGLTexture): gen_qsgtexture_platform_types.QNativeInterfaceQSGOpenGLTexture =
+  gen_qsgtexture_platform_types.QNativeInterfaceQSGOpenGLTexture(h: fcQNativeInterfaceQSGOpenGLTexture_new())
 
-func init*(T: type gen_qsgtexture_platform_types.QNativeInterfaceQSGOpenGLTexture, h: ptr cQNativeInterfaceQSGOpenGLTexture): gen_qsgtexture_platform_types.QNativeInterfaceQSGOpenGLTexture =
-  T(h: h)
-proc create*(T: type gen_qsgtexture_platform_types.QNativeInterfaceQSGOpenGLTexture, ): gen_qsgtexture_platform_types.QNativeInterfaceQSGOpenGLTexture =
-  gen_qsgtexture_platform_types.QNativeInterfaceQSGOpenGLTexture.init(fcQNativeInterfaceQSGOpenGLTexture_new())
-
-
-func init*(T: type gen_qsgtexture_platform_types.QNativeInterfaceQSGVulkanTexture, h: ptr cQNativeInterfaceQSGVulkanTexture): gen_qsgtexture_platform_types.QNativeInterfaceQSGVulkanTexture =
-  T(h: h)
-proc create*(T: type gen_qsgtexture_platform_types.QNativeInterfaceQSGVulkanTexture, ): gen_qsgtexture_platform_types.QNativeInterfaceQSGVulkanTexture =
-  gen_qsgtexture_platform_types.QNativeInterfaceQSGVulkanTexture.init(fcQNativeInterfaceQSGVulkanTexture_new())
+proc create*(T: type gen_qsgtexture_platform_types.QNativeInterfaceQSGVulkanTexture): gen_qsgtexture_platform_types.QNativeInterfaceQSGVulkanTexture =
+  gen_qsgtexture_platform_types.QNativeInterfaceQSGVulkanTexture(h: fcQNativeInterfaceQSGVulkanTexture_new())
 

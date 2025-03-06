@@ -164,9 +164,6 @@ export
 
 type cQMetaType*{.exportc: "QMetaType", incompleteStruct.} = object
 
-proc fcQMetaType_new(typeVal: cint): ptr cQMetaType {.importc: "QMetaType_new".}
-proc fcQMetaType_new2(): ptr cQMetaType {.importc: "QMetaType_new2".}
-proc fcQMetaType_new3(param1: pointer): ptr cQMetaType {.importc: "QMetaType_new3".}
 proc fcQMetaType_registerNormalizedTypedef(normalizedTypeName: struct_miqt_string, typeVal: pointer): void {.importc: "QMetaType_registerNormalizedTypedef".}
 proc fcQMetaType_typeX(typeName: cstring): cint {.importc: "QMetaType_type".}
 proc fcQMetaType_typeWithTypeName(typeName: struct_miqt_string): cint {.importc: "QMetaType_typeWithTypeName".}
@@ -221,19 +218,10 @@ proc fcQMetaType_create22(typeVal: cint, copy: pointer): pointer {.importc: "QMe
 proc fcQMetaType_id1(self: pointer, param1: cint): cint {.importc: "QMetaType_id1".}
 proc fcQMetaType_create1(self: pointer, copy: pointer): pointer {.importc: "QMetaType_create1".}
 proc fcQMetaType_construct2(self: pointer, where: pointer, copy: pointer): pointer {.importc: "QMetaType_construct2".}
+proc fcQMetaType_new(typeVal: cint): ptr cQMetaType {.importc: "QMetaType_new".}
+proc fcQMetaType_new2(): ptr cQMetaType {.importc: "QMetaType_new2".}
+proc fcQMetaType_new3(param1: pointer): ptr cQMetaType {.importc: "QMetaType_new3".}
 proc fcQMetaType_delete(self: pointer) {.importc: "QMetaType_delete".}
-
-
-func init*(T: type gen_qmetatype_types.QMetaType, h: ptr cQMetaType): gen_qmetatype_types.QMetaType =
-  T(h: h)
-proc create*(T: type gen_qmetatype_types.QMetaType, typeVal: cint): gen_qmetatype_types.QMetaType =
-  gen_qmetatype_types.QMetaType.init(fcQMetaType_new(typeVal))
-
-proc create*(T: type gen_qmetatype_types.QMetaType, ): gen_qmetatype_types.QMetaType =
-  gen_qmetatype_types.QMetaType.init(fcQMetaType_new2())
-
-proc create*(T: type gen_qmetatype_types.QMetaType, param1: gen_qmetatype_types.QMetaType): gen_qmetatype_types.QMetaType =
-  gen_qmetatype_types.QMetaType.init(fcQMetaType_new3(param1.h))
 
 proc registerNormalizedTypedef*(_: type gen_qmetatype_types.QMetaType, normalizedTypeName: seq[byte], typeVal: gen_qmetatype_types.QMetaType): void =
   fcQMetaType_registerNormalizedTypedef(struct_miqt_string(data: cast[cstring](if len(normalizedTypeName) == 0: nil else: unsafeAddr normalizedTypeName[0]), len: csize_t(len(normalizedTypeName))), typeVal.h)
@@ -396,6 +384,17 @@ proc create*(self: gen_qmetatype_types.QMetaType, copy: pointer): pointer =
 
 proc construct*(self: gen_qmetatype_types.QMetaType, where: pointer, copy: pointer): pointer =
   fcQMetaType_construct2(self.h, where, copy)
+
+proc create*(T: type gen_qmetatype_types.QMetaType,
+    typeVal: cint): gen_qmetatype_types.QMetaType =
+  gen_qmetatype_types.QMetaType(h: fcQMetaType_new(typeVal))
+
+proc create*(T: type gen_qmetatype_types.QMetaType): gen_qmetatype_types.QMetaType =
+  gen_qmetatype_types.QMetaType(h: fcQMetaType_new2())
+
+proc create*(T: type gen_qmetatype_types.QMetaType,
+    param1: gen_qmetatype_types.QMetaType): gen_qmetatype_types.QMetaType =
+  gen_qmetatype_types.QMetaType(h: fcQMetaType_new3(param1.h))
 
 proc delete*(self: gen_qmetatype_types.QMetaType) =
   fcQMetaType_delete(self.h)

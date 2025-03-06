@@ -56,8 +56,6 @@ export
 
 type cQGlyphRun*{.exportc: "QGlyphRun", incompleteStruct.} = object
 
-proc fcQGlyphRun_new(): ptr cQGlyphRun {.importc: "QGlyphRun_new".}
-proc fcQGlyphRun_new2(other: pointer): ptr cQGlyphRun {.importc: "QGlyphRun_new2".}
 proc fcQGlyphRun_operatorAssign(self: pointer, other: pointer): void {.importc: "QGlyphRun_operatorAssign".}
 proc fcQGlyphRun_swap(self: pointer, other: pointer): void {.importc: "QGlyphRun_swap".}
 proc fcQGlyphRun_rawFont(self: pointer, ): pointer {.importc: "QGlyphRun_rawFont".}
@@ -85,16 +83,9 @@ proc fcQGlyphRun_setBoundingRect(self: pointer, boundingRect: pointer): void {.i
 proc fcQGlyphRun_boundingRect(self: pointer, ): pointer {.importc: "QGlyphRun_boundingRect".}
 proc fcQGlyphRun_isEmpty(self: pointer, ): bool {.importc: "QGlyphRun_isEmpty".}
 proc fcQGlyphRun_setFlag2(self: pointer, flag: cint, enabled: bool): void {.importc: "QGlyphRun_setFlag2".}
+proc fcQGlyphRun_new(): ptr cQGlyphRun {.importc: "QGlyphRun_new".}
+proc fcQGlyphRun_new2(other: pointer): ptr cQGlyphRun {.importc: "QGlyphRun_new2".}
 proc fcQGlyphRun_delete(self: pointer) {.importc: "QGlyphRun_delete".}
-
-
-func init*(T: type gen_qglyphrun_types.QGlyphRun, h: ptr cQGlyphRun): gen_qglyphrun_types.QGlyphRun =
-  T(h: h)
-proc create*(T: type gen_qglyphrun_types.QGlyphRun, ): gen_qglyphrun_types.QGlyphRun =
-  gen_qglyphrun_types.QGlyphRun.init(fcQGlyphRun_new())
-
-proc create*(T: type gen_qglyphrun_types.QGlyphRun, other: gen_qglyphrun_types.QGlyphRun): gen_qglyphrun_types.QGlyphRun =
-  gen_qglyphrun_types.QGlyphRun.init(fcQGlyphRun_new2(other.h))
 
 proc operatorAssign*(self: gen_qglyphrun_types.QGlyphRun, other: gen_qglyphrun_types.QGlyphRun): void =
   fcQGlyphRun_operatorAssign(self.h, other.h)
@@ -194,6 +185,13 @@ proc isEmpty*(self: gen_qglyphrun_types.QGlyphRun, ): bool =
 
 proc setFlag*(self: gen_qglyphrun_types.QGlyphRun, flag: cint, enabled: bool): void =
   fcQGlyphRun_setFlag2(self.h, cint(flag), enabled)
+
+proc create*(T: type gen_qglyphrun_types.QGlyphRun): gen_qglyphrun_types.QGlyphRun =
+  gen_qglyphrun_types.QGlyphRun(h: fcQGlyphRun_new())
+
+proc create*(T: type gen_qglyphrun_types.QGlyphRun,
+    other: gen_qglyphrun_types.QGlyphRun): gen_qglyphrun_types.QGlyphRun =
+  gen_qglyphrun_types.QGlyphRun(h: fcQGlyphRun_new2(other.h))
 
 proc delete*(self: gen_qglyphrun_types.QGlyphRun) =
   fcQGlyphRun_delete(self.h)

@@ -50,7 +50,6 @@ export
 
 type cQColormap*{.exportc: "QColormap", incompleteStruct.} = object
 
-proc fcQColormap_new(colormap: pointer): ptr cQColormap {.importc: "QColormap_new".}
 proc fcQColormap_initialize(): void {.importc: "QColormap_initialize".}
 proc fcQColormap_cleanup(): void {.importc: "QColormap_cleanup".}
 proc fcQColormap_instance(): pointer {.importc: "QColormap_instance".}
@@ -62,13 +61,8 @@ proc fcQColormap_pixel(self: pointer, color: pointer): cuint {.importc: "QColorm
 proc fcQColormap_colorAt(self: pointer, pixel: cuint): pointer {.importc: "QColormap_colorAt".}
 proc fcQColormap_colormap(self: pointer, ): struct_miqt_array {.importc: "QColormap_colormap".}
 proc fcQColormap_instance1(screen: cint): pointer {.importc: "QColormap_instance1".}
+proc fcQColormap_new(colormap: pointer): ptr cQColormap {.importc: "QColormap_new".}
 proc fcQColormap_delete(self: pointer) {.importc: "QColormap_delete".}
-
-
-func init*(T: type gen_qcolormap_types.QColormap, h: ptr cQColormap): gen_qcolormap_types.QColormap =
-  T(h: h)
-proc create*(T: type gen_qcolormap_types.QColormap, colormap: gen_qcolormap_types.QColormap): gen_qcolormap_types.QColormap =
-  gen_qcolormap_types.QColormap.init(fcQColormap_new(colormap.h))
 
 proc initialize*(_: type gen_qcolormap_types.QColormap, ): void =
   fcQColormap_initialize()
@@ -107,6 +101,10 @@ proc colormap*(self: gen_qcolormap_types.QColormap, ): seq[gen_qcolor_types.QCol
 
 proc instance*(_: type gen_qcolormap_types.QColormap, screen: cint): gen_qcolormap_types.QColormap =
   gen_qcolormap_types.QColormap(h: fcQColormap_instance1(screen))
+
+proc create*(T: type gen_qcolormap_types.QColormap,
+    colormap: gen_qcolormap_types.QColormap): gen_qcolormap_types.QColormap =
+  gen_qcolormap_types.QColormap(h: fcQColormap_new(colormap.h))
 
 proc delete*(self: gen_qcolormap_types.QColormap) =
   fcQColormap_delete(self.h)

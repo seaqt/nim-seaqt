@@ -62,24 +62,15 @@ export
 
 type cQOcspResponse*{.exportc: "QOcspResponse", incompleteStruct.} = object
 
-proc fcQOcspResponse_new(): ptr cQOcspResponse {.importc: "QOcspResponse_new".}
-proc fcQOcspResponse_new2(other: pointer): ptr cQOcspResponse {.importc: "QOcspResponse_new2".}
 proc fcQOcspResponse_operatorAssign(self: pointer, other: pointer): void {.importc: "QOcspResponse_operatorAssign".}
 proc fcQOcspResponse_certificateStatus(self: pointer, ): cint {.importc: "QOcspResponse_certificateStatus".}
 proc fcQOcspResponse_revocationReason(self: pointer, ): cint {.importc: "QOcspResponse_revocationReason".}
 proc fcQOcspResponse_responder(self: pointer, ): pointer {.importc: "QOcspResponse_responder".}
 proc fcQOcspResponse_subject(self: pointer, ): pointer {.importc: "QOcspResponse_subject".}
 proc fcQOcspResponse_swap(self: pointer, other: pointer): void {.importc: "QOcspResponse_swap".}
+proc fcQOcspResponse_new(): ptr cQOcspResponse {.importc: "QOcspResponse_new".}
+proc fcQOcspResponse_new2(other: pointer): ptr cQOcspResponse {.importc: "QOcspResponse_new2".}
 proc fcQOcspResponse_delete(self: pointer) {.importc: "QOcspResponse_delete".}
-
-
-func init*(T: type gen_qocspresponse_types.QOcspResponse, h: ptr cQOcspResponse): gen_qocspresponse_types.QOcspResponse =
-  T(h: h)
-proc create*(T: type gen_qocspresponse_types.QOcspResponse, ): gen_qocspresponse_types.QOcspResponse =
-  gen_qocspresponse_types.QOcspResponse.init(fcQOcspResponse_new())
-
-proc create*(T: type gen_qocspresponse_types.QOcspResponse, other: gen_qocspresponse_types.QOcspResponse): gen_qocspresponse_types.QOcspResponse =
-  gen_qocspresponse_types.QOcspResponse.init(fcQOcspResponse_new2(other.h))
 
 proc operatorAssign*(self: gen_qocspresponse_types.QOcspResponse, other: gen_qocspresponse_types.QOcspResponse): void =
   fcQOcspResponse_operatorAssign(self.h, other.h)
@@ -98,6 +89,13 @@ proc subject*(self: gen_qocspresponse_types.QOcspResponse, ): gen_qsslcertificat
 
 proc swap*(self: gen_qocspresponse_types.QOcspResponse, other: gen_qocspresponse_types.QOcspResponse): void =
   fcQOcspResponse_swap(self.h, other.h)
+
+proc create*(T: type gen_qocspresponse_types.QOcspResponse): gen_qocspresponse_types.QOcspResponse =
+  gen_qocspresponse_types.QOcspResponse(h: fcQOcspResponse_new())
+
+proc create*(T: type gen_qocspresponse_types.QOcspResponse,
+    other: gen_qocspresponse_types.QOcspResponse): gen_qocspresponse_types.QOcspResponse =
+  gen_qocspresponse_types.QOcspResponse(h: fcQOcspResponse_new2(other.h))
 
 proc delete*(self: gen_qocspresponse_types.QOcspResponse) =
   fcQOcspResponse_delete(self.h)

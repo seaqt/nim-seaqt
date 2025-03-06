@@ -42,9 +42,7 @@ type cQStringTokenizerBaseBase*{.exportc: "QStringTokenizerBaseBase", incomplete
 
 proc fcQStringTokenizerBaseBase_new(param1: pointer): ptr cQStringTokenizerBaseBase {.importc: "QStringTokenizerBaseBase_new".}
 
-
-func init*(T: type gen_qstringtokenizer_types.QStringTokenizerBaseBase, h: ptr cQStringTokenizerBaseBase): gen_qstringtokenizer_types.QStringTokenizerBaseBase =
-  T(h: h)
-proc create*(T: type gen_qstringtokenizer_types.QStringTokenizerBaseBase, param1: gen_qstringtokenizer_types.QStringTokenizerBaseBase): gen_qstringtokenizer_types.QStringTokenizerBaseBase =
-  gen_qstringtokenizer_types.QStringTokenizerBaseBase.init(fcQStringTokenizerBaseBase_new(param1.h))
+proc create*(T: type gen_qstringtokenizer_types.QStringTokenizerBaseBase,
+    param1: gen_qstringtokenizer_types.QStringTokenizerBaseBase): gen_qstringtokenizer_types.QStringTokenizerBaseBase =
+  gen_qstringtokenizer_types.QStringTokenizerBaseBase(h: fcQStringTokenizerBaseBase_new(param1.h))
 

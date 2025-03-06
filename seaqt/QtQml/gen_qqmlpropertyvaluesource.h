@@ -22,10 +22,13 @@ typedef struct QQmlProperty QQmlProperty;
 typedef struct QQmlPropertyValueSource QQmlPropertyValueSource;
 #endif
 
-QQmlPropertyValueSource* QQmlPropertyValueSource_new();
+struct QQmlPropertyValueSource_VTable {
+	void (*destructor)(struct QQmlPropertyValueSource_VTable* vtbl, QQmlPropertyValueSource* self);
+	void (*setTarget)(struct QQmlPropertyValueSource_VTable* vtbl, QQmlPropertyValueSource* self, QQmlProperty* target);
+};
+QQmlPropertyValueSource* QQmlPropertyValueSource_new(struct QQmlPropertyValueSource_VTable* vtbl);
 void QQmlPropertyValueSource_setTarget(QQmlPropertyValueSource* self, QQmlProperty* target);
 void QQmlPropertyValueSource_operatorAssign(QQmlPropertyValueSource* self, QQmlPropertyValueSource* param1);
-bool QQmlPropertyValueSource_override_virtual_setTarget(void* self, intptr_t slot);
 void QQmlPropertyValueSource_virtualbase_setTarget(void* self, QQmlProperty* target);
 void QQmlPropertyValueSource_delete(QQmlPropertyValueSource* self);
 

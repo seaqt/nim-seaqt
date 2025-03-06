@@ -66,18 +66,18 @@ type cQGraphicsSceneDragDropEvent*{.exportc: "QGraphicsSceneDragDropEvent", inco
 type cQGraphicsSceneResizeEvent*{.exportc: "QGraphicsSceneResizeEvent", incompleteStruct.} = object
 type cQGraphicsSceneMoveEvent*{.exportc: "QGraphicsSceneMoveEvent", incompleteStruct.} = object
 
-proc fcQGraphicsSceneEvent_new(typeVal: cint): ptr cQGraphicsSceneEvent {.importc: "QGraphicsSceneEvent_new".}
 proc fcQGraphicsSceneEvent_widget(self: pointer, ): pointer {.importc: "QGraphicsSceneEvent_widget".}
 proc fcQGraphicsSceneEvent_setWidget(self: pointer, widget: pointer): void {.importc: "QGraphicsSceneEvent_setWidget".}
 proc fcQGraphicsSceneEvent_timestamp(self: pointer, ): culonglong {.importc: "QGraphicsSceneEvent_timestamp".}
 proc fcQGraphicsSceneEvent_setTimestamp(self: pointer, ts: culonglong): void {.importc: "QGraphicsSceneEvent_setTimestamp".}
-proc fQGraphicsSceneEvent_virtualbase_setAccepted(self: pointer, accepted: bool): void{.importc: "QGraphicsSceneEvent_virtualbase_setAccepted".}
-proc fcQGraphicsSceneEvent_override_virtual_setAccepted(self: pointer, slot: int) {.importc: "QGraphicsSceneEvent_override_virtual_setAccepted".}
-proc fQGraphicsSceneEvent_virtualbase_clone(self: pointer, ): pointer{.importc: "QGraphicsSceneEvent_virtualbase_clone".}
-proc fcQGraphicsSceneEvent_override_virtual_clone(self: pointer, slot: int) {.importc: "QGraphicsSceneEvent_override_virtual_clone".}
+type cQGraphicsSceneEventVTable = object
+  destructor*: proc(vtbl: ptr cQGraphicsSceneEventVTable, self: ptr cQGraphicsSceneEvent) {.cdecl, raises:[], gcsafe.}
+  setAccepted*: proc(vtbl, self: pointer, accepted: bool): void {.cdecl, raises: [], gcsafe.}
+  clone*: proc(vtbl, self: pointer, ): pointer {.cdecl, raises: [], gcsafe.}
+proc fcQGraphicsSceneEvent_virtualbase_setAccepted(self: pointer, accepted: bool): void {.importc: "QGraphicsSceneEvent_virtualbase_setAccepted".}
+proc fcQGraphicsSceneEvent_virtualbase_clone(self: pointer, ): pointer {.importc: "QGraphicsSceneEvent_virtualbase_clone".}
+proc fcQGraphicsSceneEvent_new(vtbl: pointer, typeVal: cint): ptr cQGraphicsSceneEvent {.importc: "QGraphicsSceneEvent_new".}
 proc fcQGraphicsSceneEvent_delete(self: pointer) {.importc: "QGraphicsSceneEvent_delete".}
-proc fcQGraphicsSceneMouseEvent_new(): ptr cQGraphicsSceneMouseEvent {.importc: "QGraphicsSceneMouseEvent_new".}
-proc fcQGraphicsSceneMouseEvent_new2(typeVal: cint): ptr cQGraphicsSceneMouseEvent {.importc: "QGraphicsSceneMouseEvent_new2".}
 proc fcQGraphicsSceneMouseEvent_pos(self: pointer, ): pointer {.importc: "QGraphicsSceneMouseEvent_pos".}
 proc fcQGraphicsSceneMouseEvent_setPos(self: pointer, pos: pointer): void {.importc: "QGraphicsSceneMouseEvent_setPos".}
 proc fcQGraphicsSceneMouseEvent_scenePos(self: pointer, ): pointer {.importc: "QGraphicsSceneMouseEvent_scenePos".}
@@ -106,13 +106,15 @@ proc fcQGraphicsSceneMouseEvent_source(self: pointer, ): cint {.importc: "QGraph
 proc fcQGraphicsSceneMouseEvent_setSource(self: pointer, source: cint): void {.importc: "QGraphicsSceneMouseEvent_setSource".}
 proc fcQGraphicsSceneMouseEvent_flags(self: pointer, ): cint {.importc: "QGraphicsSceneMouseEvent_flags".}
 proc fcQGraphicsSceneMouseEvent_setFlags(self: pointer, flags: cint): void {.importc: "QGraphicsSceneMouseEvent_setFlags".}
-proc fQGraphicsSceneMouseEvent_virtualbase_setAccepted(self: pointer, accepted: bool): void{.importc: "QGraphicsSceneMouseEvent_virtualbase_setAccepted".}
-proc fcQGraphicsSceneMouseEvent_override_virtual_setAccepted(self: pointer, slot: int) {.importc: "QGraphicsSceneMouseEvent_override_virtual_setAccepted".}
-proc fQGraphicsSceneMouseEvent_virtualbase_clone(self: pointer, ): pointer{.importc: "QGraphicsSceneMouseEvent_virtualbase_clone".}
-proc fcQGraphicsSceneMouseEvent_override_virtual_clone(self: pointer, slot: int) {.importc: "QGraphicsSceneMouseEvent_override_virtual_clone".}
+type cQGraphicsSceneMouseEventVTable = object
+  destructor*: proc(vtbl: ptr cQGraphicsSceneMouseEventVTable, self: ptr cQGraphicsSceneMouseEvent) {.cdecl, raises:[], gcsafe.}
+  setAccepted*: proc(vtbl, self: pointer, accepted: bool): void {.cdecl, raises: [], gcsafe.}
+  clone*: proc(vtbl, self: pointer, ): pointer {.cdecl, raises: [], gcsafe.}
+proc fcQGraphicsSceneMouseEvent_virtualbase_setAccepted(self: pointer, accepted: bool): void {.importc: "QGraphicsSceneMouseEvent_virtualbase_setAccepted".}
+proc fcQGraphicsSceneMouseEvent_virtualbase_clone(self: pointer, ): pointer {.importc: "QGraphicsSceneMouseEvent_virtualbase_clone".}
+proc fcQGraphicsSceneMouseEvent_new(vtbl: pointer, ): ptr cQGraphicsSceneMouseEvent {.importc: "QGraphicsSceneMouseEvent_new".}
+proc fcQGraphicsSceneMouseEvent_new2(vtbl: pointer, typeVal: cint): ptr cQGraphicsSceneMouseEvent {.importc: "QGraphicsSceneMouseEvent_new2".}
 proc fcQGraphicsSceneMouseEvent_delete(self: pointer) {.importc: "QGraphicsSceneMouseEvent_delete".}
-proc fcQGraphicsSceneWheelEvent_new(): ptr cQGraphicsSceneWheelEvent {.importc: "QGraphicsSceneWheelEvent_new".}
-proc fcQGraphicsSceneWheelEvent_new2(typeVal: cint): ptr cQGraphicsSceneWheelEvent {.importc: "QGraphicsSceneWheelEvent_new2".}
 proc fcQGraphicsSceneWheelEvent_pos(self: pointer, ): pointer {.importc: "QGraphicsSceneWheelEvent_pos".}
 proc fcQGraphicsSceneWheelEvent_setPos(self: pointer, pos: pointer): void {.importc: "QGraphicsSceneWheelEvent_setPos".}
 proc fcQGraphicsSceneWheelEvent_scenePos(self: pointer, ): pointer {.importc: "QGraphicsSceneWheelEvent_scenePos".}
@@ -133,13 +135,15 @@ proc fcQGraphicsSceneWheelEvent_pixelDelta(self: pointer, ): pointer {.importc: 
 proc fcQGraphicsSceneWheelEvent_setPixelDelta(self: pointer, delta: pointer): void {.importc: "QGraphicsSceneWheelEvent_setPixelDelta".}
 proc fcQGraphicsSceneWheelEvent_isInverted(self: pointer, ): bool {.importc: "QGraphicsSceneWheelEvent_isInverted".}
 proc fcQGraphicsSceneWheelEvent_setInverted(self: pointer, inverted: bool): void {.importc: "QGraphicsSceneWheelEvent_setInverted".}
-proc fQGraphicsSceneWheelEvent_virtualbase_setAccepted(self: pointer, accepted: bool): void{.importc: "QGraphicsSceneWheelEvent_virtualbase_setAccepted".}
-proc fcQGraphicsSceneWheelEvent_override_virtual_setAccepted(self: pointer, slot: int) {.importc: "QGraphicsSceneWheelEvent_override_virtual_setAccepted".}
-proc fQGraphicsSceneWheelEvent_virtualbase_clone(self: pointer, ): pointer{.importc: "QGraphicsSceneWheelEvent_virtualbase_clone".}
-proc fcQGraphicsSceneWheelEvent_override_virtual_clone(self: pointer, slot: int) {.importc: "QGraphicsSceneWheelEvent_override_virtual_clone".}
+type cQGraphicsSceneWheelEventVTable = object
+  destructor*: proc(vtbl: ptr cQGraphicsSceneWheelEventVTable, self: ptr cQGraphicsSceneWheelEvent) {.cdecl, raises:[], gcsafe.}
+  setAccepted*: proc(vtbl, self: pointer, accepted: bool): void {.cdecl, raises: [], gcsafe.}
+  clone*: proc(vtbl, self: pointer, ): pointer {.cdecl, raises: [], gcsafe.}
+proc fcQGraphicsSceneWheelEvent_virtualbase_setAccepted(self: pointer, accepted: bool): void {.importc: "QGraphicsSceneWheelEvent_virtualbase_setAccepted".}
+proc fcQGraphicsSceneWheelEvent_virtualbase_clone(self: pointer, ): pointer {.importc: "QGraphicsSceneWheelEvent_virtualbase_clone".}
+proc fcQGraphicsSceneWheelEvent_new(vtbl: pointer, ): ptr cQGraphicsSceneWheelEvent {.importc: "QGraphicsSceneWheelEvent_new".}
+proc fcQGraphicsSceneWheelEvent_new2(vtbl: pointer, typeVal: cint): ptr cQGraphicsSceneWheelEvent {.importc: "QGraphicsSceneWheelEvent_new2".}
 proc fcQGraphicsSceneWheelEvent_delete(self: pointer) {.importc: "QGraphicsSceneWheelEvent_delete".}
-proc fcQGraphicsSceneContextMenuEvent_new(): ptr cQGraphicsSceneContextMenuEvent {.importc: "QGraphicsSceneContextMenuEvent_new".}
-proc fcQGraphicsSceneContextMenuEvent_new2(typeVal: cint): ptr cQGraphicsSceneContextMenuEvent {.importc: "QGraphicsSceneContextMenuEvent_new2".}
 proc fcQGraphicsSceneContextMenuEvent_pos(self: pointer, ): pointer {.importc: "QGraphicsSceneContextMenuEvent_pos".}
 proc fcQGraphicsSceneContextMenuEvent_setPos(self: pointer, pos: pointer): void {.importc: "QGraphicsSceneContextMenuEvent_setPos".}
 proc fcQGraphicsSceneContextMenuEvent_scenePos(self: pointer, ): pointer {.importc: "QGraphicsSceneContextMenuEvent_scenePos".}
@@ -150,13 +154,15 @@ proc fcQGraphicsSceneContextMenuEvent_modifiers(self: pointer, ): cint {.importc
 proc fcQGraphicsSceneContextMenuEvent_setModifiers(self: pointer, modifiers: cint): void {.importc: "QGraphicsSceneContextMenuEvent_setModifiers".}
 proc fcQGraphicsSceneContextMenuEvent_reason(self: pointer, ): cint {.importc: "QGraphicsSceneContextMenuEvent_reason".}
 proc fcQGraphicsSceneContextMenuEvent_setReason(self: pointer, reason: cint): void {.importc: "QGraphicsSceneContextMenuEvent_setReason".}
-proc fQGraphicsSceneContextMenuEvent_virtualbase_setAccepted(self: pointer, accepted: bool): void{.importc: "QGraphicsSceneContextMenuEvent_virtualbase_setAccepted".}
-proc fcQGraphicsSceneContextMenuEvent_override_virtual_setAccepted(self: pointer, slot: int) {.importc: "QGraphicsSceneContextMenuEvent_override_virtual_setAccepted".}
-proc fQGraphicsSceneContextMenuEvent_virtualbase_clone(self: pointer, ): pointer{.importc: "QGraphicsSceneContextMenuEvent_virtualbase_clone".}
-proc fcQGraphicsSceneContextMenuEvent_override_virtual_clone(self: pointer, slot: int) {.importc: "QGraphicsSceneContextMenuEvent_override_virtual_clone".}
+type cQGraphicsSceneContextMenuEventVTable = object
+  destructor*: proc(vtbl: ptr cQGraphicsSceneContextMenuEventVTable, self: ptr cQGraphicsSceneContextMenuEvent) {.cdecl, raises:[], gcsafe.}
+  setAccepted*: proc(vtbl, self: pointer, accepted: bool): void {.cdecl, raises: [], gcsafe.}
+  clone*: proc(vtbl, self: pointer, ): pointer {.cdecl, raises: [], gcsafe.}
+proc fcQGraphicsSceneContextMenuEvent_virtualbase_setAccepted(self: pointer, accepted: bool): void {.importc: "QGraphicsSceneContextMenuEvent_virtualbase_setAccepted".}
+proc fcQGraphicsSceneContextMenuEvent_virtualbase_clone(self: pointer, ): pointer {.importc: "QGraphicsSceneContextMenuEvent_virtualbase_clone".}
+proc fcQGraphicsSceneContextMenuEvent_new(vtbl: pointer, ): ptr cQGraphicsSceneContextMenuEvent {.importc: "QGraphicsSceneContextMenuEvent_new".}
+proc fcQGraphicsSceneContextMenuEvent_new2(vtbl: pointer, typeVal: cint): ptr cQGraphicsSceneContextMenuEvent {.importc: "QGraphicsSceneContextMenuEvent_new2".}
 proc fcQGraphicsSceneContextMenuEvent_delete(self: pointer) {.importc: "QGraphicsSceneContextMenuEvent_delete".}
-proc fcQGraphicsSceneHoverEvent_new(): ptr cQGraphicsSceneHoverEvent {.importc: "QGraphicsSceneHoverEvent_new".}
-proc fcQGraphicsSceneHoverEvent_new2(typeVal: cint): ptr cQGraphicsSceneHoverEvent {.importc: "QGraphicsSceneHoverEvent_new2".}
 proc fcQGraphicsSceneHoverEvent_pos(self: pointer, ): pointer {.importc: "QGraphicsSceneHoverEvent_pos".}
 proc fcQGraphicsSceneHoverEvent_setPos(self: pointer, pos: pointer): void {.importc: "QGraphicsSceneHoverEvent_setPos".}
 proc fcQGraphicsSceneHoverEvent_scenePos(self: pointer, ): pointer {.importc: "QGraphicsSceneHoverEvent_scenePos".}
@@ -171,24 +177,28 @@ proc fcQGraphicsSceneHoverEvent_lastScreenPos(self: pointer, ): pointer {.import
 proc fcQGraphicsSceneHoverEvent_setLastScreenPos(self: pointer, pos: pointer): void {.importc: "QGraphicsSceneHoverEvent_setLastScreenPos".}
 proc fcQGraphicsSceneHoverEvent_modifiers(self: pointer, ): cint {.importc: "QGraphicsSceneHoverEvent_modifiers".}
 proc fcQGraphicsSceneHoverEvent_setModifiers(self: pointer, modifiers: cint): void {.importc: "QGraphicsSceneHoverEvent_setModifiers".}
-proc fQGraphicsSceneHoverEvent_virtualbase_setAccepted(self: pointer, accepted: bool): void{.importc: "QGraphicsSceneHoverEvent_virtualbase_setAccepted".}
-proc fcQGraphicsSceneHoverEvent_override_virtual_setAccepted(self: pointer, slot: int) {.importc: "QGraphicsSceneHoverEvent_override_virtual_setAccepted".}
-proc fQGraphicsSceneHoverEvent_virtualbase_clone(self: pointer, ): pointer{.importc: "QGraphicsSceneHoverEvent_virtualbase_clone".}
-proc fcQGraphicsSceneHoverEvent_override_virtual_clone(self: pointer, slot: int) {.importc: "QGraphicsSceneHoverEvent_override_virtual_clone".}
+type cQGraphicsSceneHoverEventVTable = object
+  destructor*: proc(vtbl: ptr cQGraphicsSceneHoverEventVTable, self: ptr cQGraphicsSceneHoverEvent) {.cdecl, raises:[], gcsafe.}
+  setAccepted*: proc(vtbl, self: pointer, accepted: bool): void {.cdecl, raises: [], gcsafe.}
+  clone*: proc(vtbl, self: pointer, ): pointer {.cdecl, raises: [], gcsafe.}
+proc fcQGraphicsSceneHoverEvent_virtualbase_setAccepted(self: pointer, accepted: bool): void {.importc: "QGraphicsSceneHoverEvent_virtualbase_setAccepted".}
+proc fcQGraphicsSceneHoverEvent_virtualbase_clone(self: pointer, ): pointer {.importc: "QGraphicsSceneHoverEvent_virtualbase_clone".}
+proc fcQGraphicsSceneHoverEvent_new(vtbl: pointer, ): ptr cQGraphicsSceneHoverEvent {.importc: "QGraphicsSceneHoverEvent_new".}
+proc fcQGraphicsSceneHoverEvent_new2(vtbl: pointer, typeVal: cint): ptr cQGraphicsSceneHoverEvent {.importc: "QGraphicsSceneHoverEvent_new2".}
 proc fcQGraphicsSceneHoverEvent_delete(self: pointer) {.importc: "QGraphicsSceneHoverEvent_delete".}
-proc fcQGraphicsSceneHelpEvent_new(): ptr cQGraphicsSceneHelpEvent {.importc: "QGraphicsSceneHelpEvent_new".}
-proc fcQGraphicsSceneHelpEvent_new2(typeVal: cint): ptr cQGraphicsSceneHelpEvent {.importc: "QGraphicsSceneHelpEvent_new2".}
 proc fcQGraphicsSceneHelpEvent_scenePos(self: pointer, ): pointer {.importc: "QGraphicsSceneHelpEvent_scenePos".}
 proc fcQGraphicsSceneHelpEvent_setScenePos(self: pointer, pos: pointer): void {.importc: "QGraphicsSceneHelpEvent_setScenePos".}
 proc fcQGraphicsSceneHelpEvent_screenPos(self: pointer, ): pointer {.importc: "QGraphicsSceneHelpEvent_screenPos".}
 proc fcQGraphicsSceneHelpEvent_setScreenPos(self: pointer, pos: pointer): void {.importc: "QGraphicsSceneHelpEvent_setScreenPos".}
-proc fQGraphicsSceneHelpEvent_virtualbase_setAccepted(self: pointer, accepted: bool): void{.importc: "QGraphicsSceneHelpEvent_virtualbase_setAccepted".}
-proc fcQGraphicsSceneHelpEvent_override_virtual_setAccepted(self: pointer, slot: int) {.importc: "QGraphicsSceneHelpEvent_override_virtual_setAccepted".}
-proc fQGraphicsSceneHelpEvent_virtualbase_clone(self: pointer, ): pointer{.importc: "QGraphicsSceneHelpEvent_virtualbase_clone".}
-proc fcQGraphicsSceneHelpEvent_override_virtual_clone(self: pointer, slot: int) {.importc: "QGraphicsSceneHelpEvent_override_virtual_clone".}
+type cQGraphicsSceneHelpEventVTable = object
+  destructor*: proc(vtbl: ptr cQGraphicsSceneHelpEventVTable, self: ptr cQGraphicsSceneHelpEvent) {.cdecl, raises:[], gcsafe.}
+  setAccepted*: proc(vtbl, self: pointer, accepted: bool): void {.cdecl, raises: [], gcsafe.}
+  clone*: proc(vtbl, self: pointer, ): pointer {.cdecl, raises: [], gcsafe.}
+proc fcQGraphicsSceneHelpEvent_virtualbase_setAccepted(self: pointer, accepted: bool): void {.importc: "QGraphicsSceneHelpEvent_virtualbase_setAccepted".}
+proc fcQGraphicsSceneHelpEvent_virtualbase_clone(self: pointer, ): pointer {.importc: "QGraphicsSceneHelpEvent_virtualbase_clone".}
+proc fcQGraphicsSceneHelpEvent_new(vtbl: pointer, ): ptr cQGraphicsSceneHelpEvent {.importc: "QGraphicsSceneHelpEvent_new".}
+proc fcQGraphicsSceneHelpEvent_new2(vtbl: pointer, typeVal: cint): ptr cQGraphicsSceneHelpEvent {.importc: "QGraphicsSceneHelpEvent_new2".}
 proc fcQGraphicsSceneHelpEvent_delete(self: pointer) {.importc: "QGraphicsSceneHelpEvent_delete".}
-proc fcQGraphicsSceneDragDropEvent_new(): ptr cQGraphicsSceneDragDropEvent {.importc: "QGraphicsSceneDragDropEvent_new".}
-proc fcQGraphicsSceneDragDropEvent_new2(typeVal: cint): ptr cQGraphicsSceneDragDropEvent {.importc: "QGraphicsSceneDragDropEvent_new2".}
 proc fcQGraphicsSceneDragDropEvent_pos(self: pointer, ): pointer {.importc: "QGraphicsSceneDragDropEvent_pos".}
 proc fcQGraphicsSceneDragDropEvent_setPos(self: pointer, pos: pointer): void {.importc: "QGraphicsSceneDragDropEvent_setPos".}
 proc fcQGraphicsSceneDragDropEvent_scenePos(self: pointer, ): pointer {.importc: "QGraphicsSceneDragDropEvent_scenePos".}
@@ -210,37 +220,39 @@ proc fcQGraphicsSceneDragDropEvent_source(self: pointer, ): pointer {.importc: "
 proc fcQGraphicsSceneDragDropEvent_setSource(self: pointer, source: pointer): void {.importc: "QGraphicsSceneDragDropEvent_setSource".}
 proc fcQGraphicsSceneDragDropEvent_mimeData(self: pointer, ): pointer {.importc: "QGraphicsSceneDragDropEvent_mimeData".}
 proc fcQGraphicsSceneDragDropEvent_setMimeData(self: pointer, data: pointer): void {.importc: "QGraphicsSceneDragDropEvent_setMimeData".}
-proc fQGraphicsSceneDragDropEvent_virtualbase_setAccepted(self: pointer, accepted: bool): void{.importc: "QGraphicsSceneDragDropEvent_virtualbase_setAccepted".}
-proc fcQGraphicsSceneDragDropEvent_override_virtual_setAccepted(self: pointer, slot: int) {.importc: "QGraphicsSceneDragDropEvent_override_virtual_setAccepted".}
-proc fQGraphicsSceneDragDropEvent_virtualbase_clone(self: pointer, ): pointer{.importc: "QGraphicsSceneDragDropEvent_virtualbase_clone".}
-proc fcQGraphicsSceneDragDropEvent_override_virtual_clone(self: pointer, slot: int) {.importc: "QGraphicsSceneDragDropEvent_override_virtual_clone".}
+type cQGraphicsSceneDragDropEventVTable = object
+  destructor*: proc(vtbl: ptr cQGraphicsSceneDragDropEventVTable, self: ptr cQGraphicsSceneDragDropEvent) {.cdecl, raises:[], gcsafe.}
+  setAccepted*: proc(vtbl, self: pointer, accepted: bool): void {.cdecl, raises: [], gcsafe.}
+  clone*: proc(vtbl, self: pointer, ): pointer {.cdecl, raises: [], gcsafe.}
+proc fcQGraphicsSceneDragDropEvent_virtualbase_setAccepted(self: pointer, accepted: bool): void {.importc: "QGraphicsSceneDragDropEvent_virtualbase_setAccepted".}
+proc fcQGraphicsSceneDragDropEvent_virtualbase_clone(self: pointer, ): pointer {.importc: "QGraphicsSceneDragDropEvent_virtualbase_clone".}
+proc fcQGraphicsSceneDragDropEvent_new(vtbl: pointer, ): ptr cQGraphicsSceneDragDropEvent {.importc: "QGraphicsSceneDragDropEvent_new".}
+proc fcQGraphicsSceneDragDropEvent_new2(vtbl: pointer, typeVal: cint): ptr cQGraphicsSceneDragDropEvent {.importc: "QGraphicsSceneDragDropEvent_new2".}
 proc fcQGraphicsSceneDragDropEvent_delete(self: pointer) {.importc: "QGraphicsSceneDragDropEvent_delete".}
-proc fcQGraphicsSceneResizeEvent_new(): ptr cQGraphicsSceneResizeEvent {.importc: "QGraphicsSceneResizeEvent_new".}
 proc fcQGraphicsSceneResizeEvent_oldSize(self: pointer, ): pointer {.importc: "QGraphicsSceneResizeEvent_oldSize".}
 proc fcQGraphicsSceneResizeEvent_setOldSize(self: pointer, size: pointer): void {.importc: "QGraphicsSceneResizeEvent_setOldSize".}
 proc fcQGraphicsSceneResizeEvent_newSize(self: pointer, ): pointer {.importc: "QGraphicsSceneResizeEvent_newSize".}
 proc fcQGraphicsSceneResizeEvent_setNewSize(self: pointer, size: pointer): void {.importc: "QGraphicsSceneResizeEvent_setNewSize".}
-proc fQGraphicsSceneResizeEvent_virtualbase_setAccepted(self: pointer, accepted: bool): void{.importc: "QGraphicsSceneResizeEvent_virtualbase_setAccepted".}
-proc fcQGraphicsSceneResizeEvent_override_virtual_setAccepted(self: pointer, slot: int) {.importc: "QGraphicsSceneResizeEvent_override_virtual_setAccepted".}
-proc fQGraphicsSceneResizeEvent_virtualbase_clone(self: pointer, ): pointer{.importc: "QGraphicsSceneResizeEvent_virtualbase_clone".}
-proc fcQGraphicsSceneResizeEvent_override_virtual_clone(self: pointer, slot: int) {.importc: "QGraphicsSceneResizeEvent_override_virtual_clone".}
+type cQGraphicsSceneResizeEventVTable = object
+  destructor*: proc(vtbl: ptr cQGraphicsSceneResizeEventVTable, self: ptr cQGraphicsSceneResizeEvent) {.cdecl, raises:[], gcsafe.}
+  setAccepted*: proc(vtbl, self: pointer, accepted: bool): void {.cdecl, raises: [], gcsafe.}
+  clone*: proc(vtbl, self: pointer, ): pointer {.cdecl, raises: [], gcsafe.}
+proc fcQGraphicsSceneResizeEvent_virtualbase_setAccepted(self: pointer, accepted: bool): void {.importc: "QGraphicsSceneResizeEvent_virtualbase_setAccepted".}
+proc fcQGraphicsSceneResizeEvent_virtualbase_clone(self: pointer, ): pointer {.importc: "QGraphicsSceneResizeEvent_virtualbase_clone".}
+proc fcQGraphicsSceneResizeEvent_new(vtbl: pointer, ): ptr cQGraphicsSceneResizeEvent {.importc: "QGraphicsSceneResizeEvent_new".}
 proc fcQGraphicsSceneResizeEvent_delete(self: pointer) {.importc: "QGraphicsSceneResizeEvent_delete".}
-proc fcQGraphicsSceneMoveEvent_new(): ptr cQGraphicsSceneMoveEvent {.importc: "QGraphicsSceneMoveEvent_new".}
 proc fcQGraphicsSceneMoveEvent_oldPos(self: pointer, ): pointer {.importc: "QGraphicsSceneMoveEvent_oldPos".}
 proc fcQGraphicsSceneMoveEvent_setOldPos(self: pointer, pos: pointer): void {.importc: "QGraphicsSceneMoveEvent_setOldPos".}
 proc fcQGraphicsSceneMoveEvent_newPos(self: pointer, ): pointer {.importc: "QGraphicsSceneMoveEvent_newPos".}
 proc fcQGraphicsSceneMoveEvent_setNewPos(self: pointer, pos: pointer): void {.importc: "QGraphicsSceneMoveEvent_setNewPos".}
-proc fQGraphicsSceneMoveEvent_virtualbase_setAccepted(self: pointer, accepted: bool): void{.importc: "QGraphicsSceneMoveEvent_virtualbase_setAccepted".}
-proc fcQGraphicsSceneMoveEvent_override_virtual_setAccepted(self: pointer, slot: int) {.importc: "QGraphicsSceneMoveEvent_override_virtual_setAccepted".}
-proc fQGraphicsSceneMoveEvent_virtualbase_clone(self: pointer, ): pointer{.importc: "QGraphicsSceneMoveEvent_virtualbase_clone".}
-proc fcQGraphicsSceneMoveEvent_override_virtual_clone(self: pointer, slot: int) {.importc: "QGraphicsSceneMoveEvent_override_virtual_clone".}
+type cQGraphicsSceneMoveEventVTable = object
+  destructor*: proc(vtbl: ptr cQGraphicsSceneMoveEventVTable, self: ptr cQGraphicsSceneMoveEvent) {.cdecl, raises:[], gcsafe.}
+  setAccepted*: proc(vtbl, self: pointer, accepted: bool): void {.cdecl, raises: [], gcsafe.}
+  clone*: proc(vtbl, self: pointer, ): pointer {.cdecl, raises: [], gcsafe.}
+proc fcQGraphicsSceneMoveEvent_virtualbase_setAccepted(self: pointer, accepted: bool): void {.importc: "QGraphicsSceneMoveEvent_virtualbase_setAccepted".}
+proc fcQGraphicsSceneMoveEvent_virtualbase_clone(self: pointer, ): pointer {.importc: "QGraphicsSceneMoveEvent_virtualbase_clone".}
+proc fcQGraphicsSceneMoveEvent_new(vtbl: pointer, ): ptr cQGraphicsSceneMoveEvent {.importc: "QGraphicsSceneMoveEvent_new".}
 proc fcQGraphicsSceneMoveEvent_delete(self: pointer) {.importc: "QGraphicsSceneMoveEvent_delete".}
-
-
-func init*(T: type gen_qgraphicssceneevent_types.QGraphicsSceneEvent, h: ptr cQGraphicsSceneEvent): gen_qgraphicssceneevent_types.QGraphicsSceneEvent =
-  T(h: h)
-proc create*(T: type gen_qgraphicssceneevent_types.QGraphicsSceneEvent, typeVal: cint): gen_qgraphicssceneevent_types.QGraphicsSceneEvent =
-  gen_qgraphicssceneevent_types.QGraphicsSceneEvent.init(fcQGraphicsSceneEvent_new(cint(typeVal)))
 
 proc widget*(self: gen_qgraphicssceneevent_types.QGraphicsSceneEvent, ): gen_qwidget_types.QWidget =
   gen_qwidget_types.QWidget(h: fcQGraphicsSceneEvent_widget(self.h))
@@ -254,51 +266,46 @@ proc timestamp*(self: gen_qgraphicssceneevent_types.QGraphicsSceneEvent, ): culo
 proc setTimestamp*(self: gen_qgraphicssceneevent_types.QGraphicsSceneEvent, ts: culonglong): void =
   fcQGraphicsSceneEvent_setTimestamp(self.h, ts)
 
+type QGraphicsSceneEventsetAcceptedProc* = proc(self: QGraphicsSceneEvent, accepted: bool): void {.raises: [], gcsafe.}
+type QGraphicsSceneEventcloneProc* = proc(self: QGraphicsSceneEvent): gen_qcoreevent_types.QEvent {.raises: [], gcsafe.}
+type QGraphicsSceneEventVTable* = object
+  vtbl: cQGraphicsSceneEventVTable
+  setAccepted*: QGraphicsSceneEventsetAcceptedProc
+  clone*: QGraphicsSceneEventcloneProc
 proc QGraphicsSceneEventsetAccepted*(self: gen_qgraphicssceneevent_types.QGraphicsSceneEvent, accepted: bool): void =
-  fQGraphicsSceneEvent_virtualbase_setAccepted(self.h, accepted)
+  fcQGraphicsSceneEvent_virtualbase_setAccepted(self.h, accepted)
 
-type QGraphicsSceneEventsetAcceptedProc* = proc(accepted: bool): void
-proc onsetAccepted*(self: gen_qgraphicssceneevent_types.QGraphicsSceneEvent, slot: QGraphicsSceneEventsetAcceptedProc) =
-  # TODO check subclass
-  var tmp = new QGraphicsSceneEventsetAcceptedProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQGraphicsSceneEvent_override_virtual_setAccepted(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QGraphicsSceneEvent_setAccepted(self: ptr cQGraphicsSceneEvent, slot: int, accepted: bool): void {.exportc: "miqt_exec_callback_QGraphicsSceneEvent_setAccepted ".} =
-  var nimfunc = cast[ptr QGraphicsSceneEventsetAcceptedProc](cast[pointer](slot))
+proc miqt_exec_callback_cQGraphicsSceneEvent_setAccepted(vtbl: pointer, self: pointer, accepted: bool): void {.cdecl.} =
+  let vtbl = cast[ptr QGraphicsSceneEventVTable](vtbl)
+  let self = QGraphicsSceneEvent(h: self)
   let slotval1 = accepted
+  vtbl[].setAccepted(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QGraphicsSceneEventclone*(self: gen_qgraphicssceneevent_types.QGraphicsSceneEvent, ): gen_qcoreevent_types.QEvent =
-  gen_qcoreevent_types.QEvent(h: fQGraphicsSceneEvent_virtualbase_clone(self.h))
+  gen_qcoreevent_types.QEvent(h: fcQGraphicsSceneEvent_virtualbase_clone(self.h))
 
-type QGraphicsSceneEventcloneProc* = proc(): gen_qcoreevent_types.QEvent
-proc onclone*(self: gen_qgraphicssceneevent_types.QGraphicsSceneEvent, slot: QGraphicsSceneEventcloneProc) =
-  # TODO check subclass
-  var tmp = new QGraphicsSceneEventcloneProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQGraphicsSceneEvent_override_virtual_clone(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QGraphicsSceneEvent_clone(self: ptr cQGraphicsSceneEvent, slot: int): pointer {.exportc: "miqt_exec_callback_QGraphicsSceneEvent_clone ".} =
-  var nimfunc = cast[ptr QGraphicsSceneEventcloneProc](cast[pointer](slot))
-
-  let virtualReturn = nimfunc[]( )
-
+proc miqt_exec_callback_cQGraphicsSceneEvent_clone(vtbl: pointer, self: pointer): pointer {.cdecl.} =
+  let vtbl = cast[ptr QGraphicsSceneEventVTable](vtbl)
+  let self = QGraphicsSceneEvent(h: self)
+  var virtualReturn = vtbl[].clone(self)
   virtualReturn.h
+
+proc create*(T: type gen_qgraphicssceneevent_types.QGraphicsSceneEvent,
+    typeVal: cint,
+    vtbl: ref QGraphicsSceneEventVTable = nil): gen_qgraphicssceneevent_types.QGraphicsSceneEvent =
+  let vtbl = if vtbl == nil: new QGraphicsSceneEventVTable else: vtbl
+  GC_ref(vtbl)
+  vtbl.vtbl.destructor = proc(vtbl: ptr cQGraphicsSceneEventVTable, _: ptr cQGraphicsSceneEvent) {.cdecl.} =
+    let vtbl = cast[ref QGraphicsSceneEventVTable](vtbl)
+    GC_unref(vtbl)
+  if not isNil(vtbl.setAccepted):
+    vtbl[].vtbl.setAccepted = miqt_exec_callback_cQGraphicsSceneEvent_setAccepted
+  if not isNil(vtbl.clone):
+    vtbl[].vtbl.clone = miqt_exec_callback_cQGraphicsSceneEvent_clone
+  gen_qgraphicssceneevent_types.QGraphicsSceneEvent(h: fcQGraphicsSceneEvent_new(addr(vtbl[]), cint(typeVal)))
+
 proc delete*(self: gen_qgraphicssceneevent_types.QGraphicsSceneEvent) =
   fcQGraphicsSceneEvent_delete(self.h)
-
-func init*(T: type gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent, h: ptr cQGraphicsSceneMouseEvent): gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent =
-  T(h: h)
-proc create*(T: type gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent, ): gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent =
-  gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent.init(fcQGraphicsSceneMouseEvent_new())
-
-proc create*(T: type gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent, typeVal: cint): gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent =
-  gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent.init(fcQGraphicsSceneMouseEvent_new2(cint(typeVal)))
-
 proc pos*(self: gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent, ): gen_qpoint_types.QPointF =
   gen_qpoint_types.QPointF(h: fcQGraphicsSceneMouseEvent_pos(self.h))
 
@@ -383,51 +390,59 @@ proc flags*(self: gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent, ): cin
 proc setFlags*(self: gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent, flags: cint): void =
   fcQGraphicsSceneMouseEvent_setFlags(self.h, cint(flags))
 
+type QGraphicsSceneMouseEventsetAcceptedProc* = proc(self: QGraphicsSceneMouseEvent, accepted: bool): void {.raises: [], gcsafe.}
+type QGraphicsSceneMouseEventcloneProc* = proc(self: QGraphicsSceneMouseEvent): gen_qcoreevent_types.QEvent {.raises: [], gcsafe.}
+type QGraphicsSceneMouseEventVTable* = object
+  vtbl: cQGraphicsSceneMouseEventVTable
+  setAccepted*: QGraphicsSceneMouseEventsetAcceptedProc
+  clone*: QGraphicsSceneMouseEventcloneProc
 proc QGraphicsSceneMouseEventsetAccepted*(self: gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent, accepted: bool): void =
-  fQGraphicsSceneMouseEvent_virtualbase_setAccepted(self.h, accepted)
+  fcQGraphicsSceneMouseEvent_virtualbase_setAccepted(self.h, accepted)
 
-type QGraphicsSceneMouseEventsetAcceptedProc* = proc(accepted: bool): void
-proc onsetAccepted*(self: gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent, slot: QGraphicsSceneMouseEventsetAcceptedProc) =
-  # TODO check subclass
-  var tmp = new QGraphicsSceneMouseEventsetAcceptedProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQGraphicsSceneMouseEvent_override_virtual_setAccepted(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QGraphicsSceneMouseEvent_setAccepted(self: ptr cQGraphicsSceneMouseEvent, slot: int, accepted: bool): void {.exportc: "miqt_exec_callback_QGraphicsSceneMouseEvent_setAccepted ".} =
-  var nimfunc = cast[ptr QGraphicsSceneMouseEventsetAcceptedProc](cast[pointer](slot))
+proc miqt_exec_callback_cQGraphicsSceneMouseEvent_setAccepted(vtbl: pointer, self: pointer, accepted: bool): void {.cdecl.} =
+  let vtbl = cast[ptr QGraphicsSceneMouseEventVTable](vtbl)
+  let self = QGraphicsSceneMouseEvent(h: self)
   let slotval1 = accepted
+  vtbl[].setAccepted(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QGraphicsSceneMouseEventclone*(self: gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent, ): gen_qcoreevent_types.QEvent =
-  gen_qcoreevent_types.QEvent(h: fQGraphicsSceneMouseEvent_virtualbase_clone(self.h))
+  gen_qcoreevent_types.QEvent(h: fcQGraphicsSceneMouseEvent_virtualbase_clone(self.h))
 
-type QGraphicsSceneMouseEventcloneProc* = proc(): gen_qcoreevent_types.QEvent
-proc onclone*(self: gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent, slot: QGraphicsSceneMouseEventcloneProc) =
-  # TODO check subclass
-  var tmp = new QGraphicsSceneMouseEventcloneProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQGraphicsSceneMouseEvent_override_virtual_clone(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QGraphicsSceneMouseEvent_clone(self: ptr cQGraphicsSceneMouseEvent, slot: int): pointer {.exportc: "miqt_exec_callback_QGraphicsSceneMouseEvent_clone ".} =
-  var nimfunc = cast[ptr QGraphicsSceneMouseEventcloneProc](cast[pointer](slot))
-
-  let virtualReturn = nimfunc[]( )
-
+proc miqt_exec_callback_cQGraphicsSceneMouseEvent_clone(vtbl: pointer, self: pointer): pointer {.cdecl.} =
+  let vtbl = cast[ptr QGraphicsSceneMouseEventVTable](vtbl)
+  let self = QGraphicsSceneMouseEvent(h: self)
+  var virtualReturn = vtbl[].clone(self)
   virtualReturn.h
+
+proc create*(T: type gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent,
+    vtbl: ref QGraphicsSceneMouseEventVTable = nil): gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent =
+  let vtbl = if vtbl == nil: new QGraphicsSceneMouseEventVTable else: vtbl
+  GC_ref(vtbl)
+  vtbl.vtbl.destructor = proc(vtbl: ptr cQGraphicsSceneMouseEventVTable, _: ptr cQGraphicsSceneMouseEvent) {.cdecl.} =
+    let vtbl = cast[ref QGraphicsSceneMouseEventVTable](vtbl)
+    GC_unref(vtbl)
+  if not isNil(vtbl.setAccepted):
+    vtbl[].vtbl.setAccepted = miqt_exec_callback_cQGraphicsSceneMouseEvent_setAccepted
+  if not isNil(vtbl.clone):
+    vtbl[].vtbl.clone = miqt_exec_callback_cQGraphicsSceneMouseEvent_clone
+  gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent(h: fcQGraphicsSceneMouseEvent_new(addr(vtbl[]), ))
+
+proc create*(T: type gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent,
+    typeVal: cint,
+    vtbl: ref QGraphicsSceneMouseEventVTable = nil): gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent =
+  let vtbl = if vtbl == nil: new QGraphicsSceneMouseEventVTable else: vtbl
+  GC_ref(vtbl)
+  vtbl.vtbl.destructor = proc(vtbl: ptr cQGraphicsSceneMouseEventVTable, _: ptr cQGraphicsSceneMouseEvent) {.cdecl.} =
+    let vtbl = cast[ref QGraphicsSceneMouseEventVTable](vtbl)
+    GC_unref(vtbl)
+  if not isNil(vtbl.setAccepted):
+    vtbl[].vtbl.setAccepted = miqt_exec_callback_cQGraphicsSceneMouseEvent_setAccepted
+  if not isNil(vtbl.clone):
+    vtbl[].vtbl.clone = miqt_exec_callback_cQGraphicsSceneMouseEvent_clone
+  gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent(h: fcQGraphicsSceneMouseEvent_new2(addr(vtbl[]), cint(typeVal)))
+
 proc delete*(self: gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent) =
   fcQGraphicsSceneMouseEvent_delete(self.h)
-
-func init*(T: type gen_qgraphicssceneevent_types.QGraphicsSceneWheelEvent, h: ptr cQGraphicsSceneWheelEvent): gen_qgraphicssceneevent_types.QGraphicsSceneWheelEvent =
-  T(h: h)
-proc create*(T: type gen_qgraphicssceneevent_types.QGraphicsSceneWheelEvent, ): gen_qgraphicssceneevent_types.QGraphicsSceneWheelEvent =
-  gen_qgraphicssceneevent_types.QGraphicsSceneWheelEvent.init(fcQGraphicsSceneWheelEvent_new())
-
-proc create*(T: type gen_qgraphicssceneevent_types.QGraphicsSceneWheelEvent, typeVal: cint): gen_qgraphicssceneevent_types.QGraphicsSceneWheelEvent =
-  gen_qgraphicssceneevent_types.QGraphicsSceneWheelEvent.init(fcQGraphicsSceneWheelEvent_new2(cint(typeVal)))
-
 proc pos*(self: gen_qgraphicssceneevent_types.QGraphicsSceneWheelEvent, ): gen_qpoint_types.QPointF =
   gen_qpoint_types.QPointF(h: fcQGraphicsSceneWheelEvent_pos(self.h))
 
@@ -488,51 +503,59 @@ proc isInverted*(self: gen_qgraphicssceneevent_types.QGraphicsSceneWheelEvent, )
 proc setInverted*(self: gen_qgraphicssceneevent_types.QGraphicsSceneWheelEvent, inverted: bool): void =
   fcQGraphicsSceneWheelEvent_setInverted(self.h, inverted)
 
+type QGraphicsSceneWheelEventsetAcceptedProc* = proc(self: QGraphicsSceneWheelEvent, accepted: bool): void {.raises: [], gcsafe.}
+type QGraphicsSceneWheelEventcloneProc* = proc(self: QGraphicsSceneWheelEvent): gen_qcoreevent_types.QEvent {.raises: [], gcsafe.}
+type QGraphicsSceneWheelEventVTable* = object
+  vtbl: cQGraphicsSceneWheelEventVTable
+  setAccepted*: QGraphicsSceneWheelEventsetAcceptedProc
+  clone*: QGraphicsSceneWheelEventcloneProc
 proc QGraphicsSceneWheelEventsetAccepted*(self: gen_qgraphicssceneevent_types.QGraphicsSceneWheelEvent, accepted: bool): void =
-  fQGraphicsSceneWheelEvent_virtualbase_setAccepted(self.h, accepted)
+  fcQGraphicsSceneWheelEvent_virtualbase_setAccepted(self.h, accepted)
 
-type QGraphicsSceneWheelEventsetAcceptedProc* = proc(accepted: bool): void
-proc onsetAccepted*(self: gen_qgraphicssceneevent_types.QGraphicsSceneWheelEvent, slot: QGraphicsSceneWheelEventsetAcceptedProc) =
-  # TODO check subclass
-  var tmp = new QGraphicsSceneWheelEventsetAcceptedProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQGraphicsSceneWheelEvent_override_virtual_setAccepted(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QGraphicsSceneWheelEvent_setAccepted(self: ptr cQGraphicsSceneWheelEvent, slot: int, accepted: bool): void {.exportc: "miqt_exec_callback_QGraphicsSceneWheelEvent_setAccepted ".} =
-  var nimfunc = cast[ptr QGraphicsSceneWheelEventsetAcceptedProc](cast[pointer](slot))
+proc miqt_exec_callback_cQGraphicsSceneWheelEvent_setAccepted(vtbl: pointer, self: pointer, accepted: bool): void {.cdecl.} =
+  let vtbl = cast[ptr QGraphicsSceneWheelEventVTable](vtbl)
+  let self = QGraphicsSceneWheelEvent(h: self)
   let slotval1 = accepted
+  vtbl[].setAccepted(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QGraphicsSceneWheelEventclone*(self: gen_qgraphicssceneevent_types.QGraphicsSceneWheelEvent, ): gen_qcoreevent_types.QEvent =
-  gen_qcoreevent_types.QEvent(h: fQGraphicsSceneWheelEvent_virtualbase_clone(self.h))
+  gen_qcoreevent_types.QEvent(h: fcQGraphicsSceneWheelEvent_virtualbase_clone(self.h))
 
-type QGraphicsSceneWheelEventcloneProc* = proc(): gen_qcoreevent_types.QEvent
-proc onclone*(self: gen_qgraphicssceneevent_types.QGraphicsSceneWheelEvent, slot: QGraphicsSceneWheelEventcloneProc) =
-  # TODO check subclass
-  var tmp = new QGraphicsSceneWheelEventcloneProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQGraphicsSceneWheelEvent_override_virtual_clone(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QGraphicsSceneWheelEvent_clone(self: ptr cQGraphicsSceneWheelEvent, slot: int): pointer {.exportc: "miqt_exec_callback_QGraphicsSceneWheelEvent_clone ".} =
-  var nimfunc = cast[ptr QGraphicsSceneWheelEventcloneProc](cast[pointer](slot))
-
-  let virtualReturn = nimfunc[]( )
-
+proc miqt_exec_callback_cQGraphicsSceneWheelEvent_clone(vtbl: pointer, self: pointer): pointer {.cdecl.} =
+  let vtbl = cast[ptr QGraphicsSceneWheelEventVTable](vtbl)
+  let self = QGraphicsSceneWheelEvent(h: self)
+  var virtualReturn = vtbl[].clone(self)
   virtualReturn.h
+
+proc create*(T: type gen_qgraphicssceneevent_types.QGraphicsSceneWheelEvent,
+    vtbl: ref QGraphicsSceneWheelEventVTable = nil): gen_qgraphicssceneevent_types.QGraphicsSceneWheelEvent =
+  let vtbl = if vtbl == nil: new QGraphicsSceneWheelEventVTable else: vtbl
+  GC_ref(vtbl)
+  vtbl.vtbl.destructor = proc(vtbl: ptr cQGraphicsSceneWheelEventVTable, _: ptr cQGraphicsSceneWheelEvent) {.cdecl.} =
+    let vtbl = cast[ref QGraphicsSceneWheelEventVTable](vtbl)
+    GC_unref(vtbl)
+  if not isNil(vtbl.setAccepted):
+    vtbl[].vtbl.setAccepted = miqt_exec_callback_cQGraphicsSceneWheelEvent_setAccepted
+  if not isNil(vtbl.clone):
+    vtbl[].vtbl.clone = miqt_exec_callback_cQGraphicsSceneWheelEvent_clone
+  gen_qgraphicssceneevent_types.QGraphicsSceneWheelEvent(h: fcQGraphicsSceneWheelEvent_new(addr(vtbl[]), ))
+
+proc create*(T: type gen_qgraphicssceneevent_types.QGraphicsSceneWheelEvent,
+    typeVal: cint,
+    vtbl: ref QGraphicsSceneWheelEventVTable = nil): gen_qgraphicssceneevent_types.QGraphicsSceneWheelEvent =
+  let vtbl = if vtbl == nil: new QGraphicsSceneWheelEventVTable else: vtbl
+  GC_ref(vtbl)
+  vtbl.vtbl.destructor = proc(vtbl: ptr cQGraphicsSceneWheelEventVTable, _: ptr cQGraphicsSceneWheelEvent) {.cdecl.} =
+    let vtbl = cast[ref QGraphicsSceneWheelEventVTable](vtbl)
+    GC_unref(vtbl)
+  if not isNil(vtbl.setAccepted):
+    vtbl[].vtbl.setAccepted = miqt_exec_callback_cQGraphicsSceneWheelEvent_setAccepted
+  if not isNil(vtbl.clone):
+    vtbl[].vtbl.clone = miqt_exec_callback_cQGraphicsSceneWheelEvent_clone
+  gen_qgraphicssceneevent_types.QGraphicsSceneWheelEvent(h: fcQGraphicsSceneWheelEvent_new2(addr(vtbl[]), cint(typeVal)))
+
 proc delete*(self: gen_qgraphicssceneevent_types.QGraphicsSceneWheelEvent) =
   fcQGraphicsSceneWheelEvent_delete(self.h)
-
-func init*(T: type gen_qgraphicssceneevent_types.QGraphicsSceneContextMenuEvent, h: ptr cQGraphicsSceneContextMenuEvent): gen_qgraphicssceneevent_types.QGraphicsSceneContextMenuEvent =
-  T(h: h)
-proc create*(T: type gen_qgraphicssceneevent_types.QGraphicsSceneContextMenuEvent, ): gen_qgraphicssceneevent_types.QGraphicsSceneContextMenuEvent =
-  gen_qgraphicssceneevent_types.QGraphicsSceneContextMenuEvent.init(fcQGraphicsSceneContextMenuEvent_new())
-
-proc create*(T: type gen_qgraphicssceneevent_types.QGraphicsSceneContextMenuEvent, typeVal: cint): gen_qgraphicssceneevent_types.QGraphicsSceneContextMenuEvent =
-  gen_qgraphicssceneevent_types.QGraphicsSceneContextMenuEvent.init(fcQGraphicsSceneContextMenuEvent_new2(cint(typeVal)))
-
 proc pos*(self: gen_qgraphicssceneevent_types.QGraphicsSceneContextMenuEvent, ): gen_qpoint_types.QPointF =
   gen_qpoint_types.QPointF(h: fcQGraphicsSceneContextMenuEvent_pos(self.h))
 
@@ -563,51 +586,59 @@ proc reason*(self: gen_qgraphicssceneevent_types.QGraphicsSceneContextMenuEvent,
 proc setReason*(self: gen_qgraphicssceneevent_types.QGraphicsSceneContextMenuEvent, reason: cint): void =
   fcQGraphicsSceneContextMenuEvent_setReason(self.h, cint(reason))
 
+type QGraphicsSceneContextMenuEventsetAcceptedProc* = proc(self: QGraphicsSceneContextMenuEvent, accepted: bool): void {.raises: [], gcsafe.}
+type QGraphicsSceneContextMenuEventcloneProc* = proc(self: QGraphicsSceneContextMenuEvent): gen_qcoreevent_types.QEvent {.raises: [], gcsafe.}
+type QGraphicsSceneContextMenuEventVTable* = object
+  vtbl: cQGraphicsSceneContextMenuEventVTable
+  setAccepted*: QGraphicsSceneContextMenuEventsetAcceptedProc
+  clone*: QGraphicsSceneContextMenuEventcloneProc
 proc QGraphicsSceneContextMenuEventsetAccepted*(self: gen_qgraphicssceneevent_types.QGraphicsSceneContextMenuEvent, accepted: bool): void =
-  fQGraphicsSceneContextMenuEvent_virtualbase_setAccepted(self.h, accepted)
+  fcQGraphicsSceneContextMenuEvent_virtualbase_setAccepted(self.h, accepted)
 
-type QGraphicsSceneContextMenuEventsetAcceptedProc* = proc(accepted: bool): void
-proc onsetAccepted*(self: gen_qgraphicssceneevent_types.QGraphicsSceneContextMenuEvent, slot: QGraphicsSceneContextMenuEventsetAcceptedProc) =
-  # TODO check subclass
-  var tmp = new QGraphicsSceneContextMenuEventsetAcceptedProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQGraphicsSceneContextMenuEvent_override_virtual_setAccepted(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QGraphicsSceneContextMenuEvent_setAccepted(self: ptr cQGraphicsSceneContextMenuEvent, slot: int, accepted: bool): void {.exportc: "miqt_exec_callback_QGraphicsSceneContextMenuEvent_setAccepted ".} =
-  var nimfunc = cast[ptr QGraphicsSceneContextMenuEventsetAcceptedProc](cast[pointer](slot))
+proc miqt_exec_callback_cQGraphicsSceneContextMenuEvent_setAccepted(vtbl: pointer, self: pointer, accepted: bool): void {.cdecl.} =
+  let vtbl = cast[ptr QGraphicsSceneContextMenuEventVTable](vtbl)
+  let self = QGraphicsSceneContextMenuEvent(h: self)
   let slotval1 = accepted
+  vtbl[].setAccepted(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QGraphicsSceneContextMenuEventclone*(self: gen_qgraphicssceneevent_types.QGraphicsSceneContextMenuEvent, ): gen_qcoreevent_types.QEvent =
-  gen_qcoreevent_types.QEvent(h: fQGraphicsSceneContextMenuEvent_virtualbase_clone(self.h))
+  gen_qcoreevent_types.QEvent(h: fcQGraphicsSceneContextMenuEvent_virtualbase_clone(self.h))
 
-type QGraphicsSceneContextMenuEventcloneProc* = proc(): gen_qcoreevent_types.QEvent
-proc onclone*(self: gen_qgraphicssceneevent_types.QGraphicsSceneContextMenuEvent, slot: QGraphicsSceneContextMenuEventcloneProc) =
-  # TODO check subclass
-  var tmp = new QGraphicsSceneContextMenuEventcloneProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQGraphicsSceneContextMenuEvent_override_virtual_clone(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QGraphicsSceneContextMenuEvent_clone(self: ptr cQGraphicsSceneContextMenuEvent, slot: int): pointer {.exportc: "miqt_exec_callback_QGraphicsSceneContextMenuEvent_clone ".} =
-  var nimfunc = cast[ptr QGraphicsSceneContextMenuEventcloneProc](cast[pointer](slot))
-
-  let virtualReturn = nimfunc[]( )
-
+proc miqt_exec_callback_cQGraphicsSceneContextMenuEvent_clone(vtbl: pointer, self: pointer): pointer {.cdecl.} =
+  let vtbl = cast[ptr QGraphicsSceneContextMenuEventVTable](vtbl)
+  let self = QGraphicsSceneContextMenuEvent(h: self)
+  var virtualReturn = vtbl[].clone(self)
   virtualReturn.h
+
+proc create*(T: type gen_qgraphicssceneevent_types.QGraphicsSceneContextMenuEvent,
+    vtbl: ref QGraphicsSceneContextMenuEventVTable = nil): gen_qgraphicssceneevent_types.QGraphicsSceneContextMenuEvent =
+  let vtbl = if vtbl == nil: new QGraphicsSceneContextMenuEventVTable else: vtbl
+  GC_ref(vtbl)
+  vtbl.vtbl.destructor = proc(vtbl: ptr cQGraphicsSceneContextMenuEventVTable, _: ptr cQGraphicsSceneContextMenuEvent) {.cdecl.} =
+    let vtbl = cast[ref QGraphicsSceneContextMenuEventVTable](vtbl)
+    GC_unref(vtbl)
+  if not isNil(vtbl.setAccepted):
+    vtbl[].vtbl.setAccepted = miqt_exec_callback_cQGraphicsSceneContextMenuEvent_setAccepted
+  if not isNil(vtbl.clone):
+    vtbl[].vtbl.clone = miqt_exec_callback_cQGraphicsSceneContextMenuEvent_clone
+  gen_qgraphicssceneevent_types.QGraphicsSceneContextMenuEvent(h: fcQGraphicsSceneContextMenuEvent_new(addr(vtbl[]), ))
+
+proc create*(T: type gen_qgraphicssceneevent_types.QGraphicsSceneContextMenuEvent,
+    typeVal: cint,
+    vtbl: ref QGraphicsSceneContextMenuEventVTable = nil): gen_qgraphicssceneevent_types.QGraphicsSceneContextMenuEvent =
+  let vtbl = if vtbl == nil: new QGraphicsSceneContextMenuEventVTable else: vtbl
+  GC_ref(vtbl)
+  vtbl.vtbl.destructor = proc(vtbl: ptr cQGraphicsSceneContextMenuEventVTable, _: ptr cQGraphicsSceneContextMenuEvent) {.cdecl.} =
+    let vtbl = cast[ref QGraphicsSceneContextMenuEventVTable](vtbl)
+    GC_unref(vtbl)
+  if not isNil(vtbl.setAccepted):
+    vtbl[].vtbl.setAccepted = miqt_exec_callback_cQGraphicsSceneContextMenuEvent_setAccepted
+  if not isNil(vtbl.clone):
+    vtbl[].vtbl.clone = miqt_exec_callback_cQGraphicsSceneContextMenuEvent_clone
+  gen_qgraphicssceneevent_types.QGraphicsSceneContextMenuEvent(h: fcQGraphicsSceneContextMenuEvent_new2(addr(vtbl[]), cint(typeVal)))
+
 proc delete*(self: gen_qgraphicssceneevent_types.QGraphicsSceneContextMenuEvent) =
   fcQGraphicsSceneContextMenuEvent_delete(self.h)
-
-func init*(T: type gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent, h: ptr cQGraphicsSceneHoverEvent): gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent =
-  T(h: h)
-proc create*(T: type gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent, ): gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent =
-  gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent.init(fcQGraphicsSceneHoverEvent_new())
-
-proc create*(T: type gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent, typeVal: cint): gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent =
-  gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent.init(fcQGraphicsSceneHoverEvent_new2(cint(typeVal)))
-
 proc pos*(self: gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent, ): gen_qpoint_types.QPointF =
   gen_qpoint_types.QPointF(h: fcQGraphicsSceneHoverEvent_pos(self.h))
 
@@ -650,51 +681,59 @@ proc modifiers*(self: gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent, ):
 proc setModifiers*(self: gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent, modifiers: cint): void =
   fcQGraphicsSceneHoverEvent_setModifiers(self.h, cint(modifiers))
 
+type QGraphicsSceneHoverEventsetAcceptedProc* = proc(self: QGraphicsSceneHoverEvent, accepted: bool): void {.raises: [], gcsafe.}
+type QGraphicsSceneHoverEventcloneProc* = proc(self: QGraphicsSceneHoverEvent): gen_qcoreevent_types.QEvent {.raises: [], gcsafe.}
+type QGraphicsSceneHoverEventVTable* = object
+  vtbl: cQGraphicsSceneHoverEventVTable
+  setAccepted*: QGraphicsSceneHoverEventsetAcceptedProc
+  clone*: QGraphicsSceneHoverEventcloneProc
 proc QGraphicsSceneHoverEventsetAccepted*(self: gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent, accepted: bool): void =
-  fQGraphicsSceneHoverEvent_virtualbase_setAccepted(self.h, accepted)
+  fcQGraphicsSceneHoverEvent_virtualbase_setAccepted(self.h, accepted)
 
-type QGraphicsSceneHoverEventsetAcceptedProc* = proc(accepted: bool): void
-proc onsetAccepted*(self: gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent, slot: QGraphicsSceneHoverEventsetAcceptedProc) =
-  # TODO check subclass
-  var tmp = new QGraphicsSceneHoverEventsetAcceptedProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQGraphicsSceneHoverEvent_override_virtual_setAccepted(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QGraphicsSceneHoverEvent_setAccepted(self: ptr cQGraphicsSceneHoverEvent, slot: int, accepted: bool): void {.exportc: "miqt_exec_callback_QGraphicsSceneHoverEvent_setAccepted ".} =
-  var nimfunc = cast[ptr QGraphicsSceneHoverEventsetAcceptedProc](cast[pointer](slot))
+proc miqt_exec_callback_cQGraphicsSceneHoverEvent_setAccepted(vtbl: pointer, self: pointer, accepted: bool): void {.cdecl.} =
+  let vtbl = cast[ptr QGraphicsSceneHoverEventVTable](vtbl)
+  let self = QGraphicsSceneHoverEvent(h: self)
   let slotval1 = accepted
+  vtbl[].setAccepted(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QGraphicsSceneHoverEventclone*(self: gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent, ): gen_qcoreevent_types.QEvent =
-  gen_qcoreevent_types.QEvent(h: fQGraphicsSceneHoverEvent_virtualbase_clone(self.h))
+  gen_qcoreevent_types.QEvent(h: fcQGraphicsSceneHoverEvent_virtualbase_clone(self.h))
 
-type QGraphicsSceneHoverEventcloneProc* = proc(): gen_qcoreevent_types.QEvent
-proc onclone*(self: gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent, slot: QGraphicsSceneHoverEventcloneProc) =
-  # TODO check subclass
-  var tmp = new QGraphicsSceneHoverEventcloneProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQGraphicsSceneHoverEvent_override_virtual_clone(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QGraphicsSceneHoverEvent_clone(self: ptr cQGraphicsSceneHoverEvent, slot: int): pointer {.exportc: "miqt_exec_callback_QGraphicsSceneHoverEvent_clone ".} =
-  var nimfunc = cast[ptr QGraphicsSceneHoverEventcloneProc](cast[pointer](slot))
-
-  let virtualReturn = nimfunc[]( )
-
+proc miqt_exec_callback_cQGraphicsSceneHoverEvent_clone(vtbl: pointer, self: pointer): pointer {.cdecl.} =
+  let vtbl = cast[ptr QGraphicsSceneHoverEventVTable](vtbl)
+  let self = QGraphicsSceneHoverEvent(h: self)
+  var virtualReturn = vtbl[].clone(self)
   virtualReturn.h
+
+proc create*(T: type gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent,
+    vtbl: ref QGraphicsSceneHoverEventVTable = nil): gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent =
+  let vtbl = if vtbl == nil: new QGraphicsSceneHoverEventVTable else: vtbl
+  GC_ref(vtbl)
+  vtbl.vtbl.destructor = proc(vtbl: ptr cQGraphicsSceneHoverEventVTable, _: ptr cQGraphicsSceneHoverEvent) {.cdecl.} =
+    let vtbl = cast[ref QGraphicsSceneHoverEventVTable](vtbl)
+    GC_unref(vtbl)
+  if not isNil(vtbl.setAccepted):
+    vtbl[].vtbl.setAccepted = miqt_exec_callback_cQGraphicsSceneHoverEvent_setAccepted
+  if not isNil(vtbl.clone):
+    vtbl[].vtbl.clone = miqt_exec_callback_cQGraphicsSceneHoverEvent_clone
+  gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent(h: fcQGraphicsSceneHoverEvent_new(addr(vtbl[]), ))
+
+proc create*(T: type gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent,
+    typeVal: cint,
+    vtbl: ref QGraphicsSceneHoverEventVTable = nil): gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent =
+  let vtbl = if vtbl == nil: new QGraphicsSceneHoverEventVTable else: vtbl
+  GC_ref(vtbl)
+  vtbl.vtbl.destructor = proc(vtbl: ptr cQGraphicsSceneHoverEventVTable, _: ptr cQGraphicsSceneHoverEvent) {.cdecl.} =
+    let vtbl = cast[ref QGraphicsSceneHoverEventVTable](vtbl)
+    GC_unref(vtbl)
+  if not isNil(vtbl.setAccepted):
+    vtbl[].vtbl.setAccepted = miqt_exec_callback_cQGraphicsSceneHoverEvent_setAccepted
+  if not isNil(vtbl.clone):
+    vtbl[].vtbl.clone = miqt_exec_callback_cQGraphicsSceneHoverEvent_clone
+  gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent(h: fcQGraphicsSceneHoverEvent_new2(addr(vtbl[]), cint(typeVal)))
+
 proc delete*(self: gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent) =
   fcQGraphicsSceneHoverEvent_delete(self.h)
-
-func init*(T: type gen_qgraphicssceneevent_types.QGraphicsSceneHelpEvent, h: ptr cQGraphicsSceneHelpEvent): gen_qgraphicssceneevent_types.QGraphicsSceneHelpEvent =
-  T(h: h)
-proc create*(T: type gen_qgraphicssceneevent_types.QGraphicsSceneHelpEvent, ): gen_qgraphicssceneevent_types.QGraphicsSceneHelpEvent =
-  gen_qgraphicssceneevent_types.QGraphicsSceneHelpEvent.init(fcQGraphicsSceneHelpEvent_new())
-
-proc create*(T: type gen_qgraphicssceneevent_types.QGraphicsSceneHelpEvent, typeVal: cint): gen_qgraphicssceneevent_types.QGraphicsSceneHelpEvent =
-  gen_qgraphicssceneevent_types.QGraphicsSceneHelpEvent.init(fcQGraphicsSceneHelpEvent_new2(cint(typeVal)))
-
 proc scenePos*(self: gen_qgraphicssceneevent_types.QGraphicsSceneHelpEvent, ): gen_qpoint_types.QPointF =
   gen_qpoint_types.QPointF(h: fcQGraphicsSceneHelpEvent_scenePos(self.h))
 
@@ -707,51 +746,59 @@ proc screenPos*(self: gen_qgraphicssceneevent_types.QGraphicsSceneHelpEvent, ): 
 proc setScreenPos*(self: gen_qgraphicssceneevent_types.QGraphicsSceneHelpEvent, pos: gen_qpoint_types.QPoint): void =
   fcQGraphicsSceneHelpEvent_setScreenPos(self.h, pos.h)
 
+type QGraphicsSceneHelpEventsetAcceptedProc* = proc(self: QGraphicsSceneHelpEvent, accepted: bool): void {.raises: [], gcsafe.}
+type QGraphicsSceneHelpEventcloneProc* = proc(self: QGraphicsSceneHelpEvent): gen_qcoreevent_types.QEvent {.raises: [], gcsafe.}
+type QGraphicsSceneHelpEventVTable* = object
+  vtbl: cQGraphicsSceneHelpEventVTable
+  setAccepted*: QGraphicsSceneHelpEventsetAcceptedProc
+  clone*: QGraphicsSceneHelpEventcloneProc
 proc QGraphicsSceneHelpEventsetAccepted*(self: gen_qgraphicssceneevent_types.QGraphicsSceneHelpEvent, accepted: bool): void =
-  fQGraphicsSceneHelpEvent_virtualbase_setAccepted(self.h, accepted)
+  fcQGraphicsSceneHelpEvent_virtualbase_setAccepted(self.h, accepted)
 
-type QGraphicsSceneHelpEventsetAcceptedProc* = proc(accepted: bool): void
-proc onsetAccepted*(self: gen_qgraphicssceneevent_types.QGraphicsSceneHelpEvent, slot: QGraphicsSceneHelpEventsetAcceptedProc) =
-  # TODO check subclass
-  var tmp = new QGraphicsSceneHelpEventsetAcceptedProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQGraphicsSceneHelpEvent_override_virtual_setAccepted(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QGraphicsSceneHelpEvent_setAccepted(self: ptr cQGraphicsSceneHelpEvent, slot: int, accepted: bool): void {.exportc: "miqt_exec_callback_QGraphicsSceneHelpEvent_setAccepted ".} =
-  var nimfunc = cast[ptr QGraphicsSceneHelpEventsetAcceptedProc](cast[pointer](slot))
+proc miqt_exec_callback_cQGraphicsSceneHelpEvent_setAccepted(vtbl: pointer, self: pointer, accepted: bool): void {.cdecl.} =
+  let vtbl = cast[ptr QGraphicsSceneHelpEventVTable](vtbl)
+  let self = QGraphicsSceneHelpEvent(h: self)
   let slotval1 = accepted
+  vtbl[].setAccepted(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QGraphicsSceneHelpEventclone*(self: gen_qgraphicssceneevent_types.QGraphicsSceneHelpEvent, ): gen_qcoreevent_types.QEvent =
-  gen_qcoreevent_types.QEvent(h: fQGraphicsSceneHelpEvent_virtualbase_clone(self.h))
+  gen_qcoreevent_types.QEvent(h: fcQGraphicsSceneHelpEvent_virtualbase_clone(self.h))
 
-type QGraphicsSceneHelpEventcloneProc* = proc(): gen_qcoreevent_types.QEvent
-proc onclone*(self: gen_qgraphicssceneevent_types.QGraphicsSceneHelpEvent, slot: QGraphicsSceneHelpEventcloneProc) =
-  # TODO check subclass
-  var tmp = new QGraphicsSceneHelpEventcloneProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQGraphicsSceneHelpEvent_override_virtual_clone(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QGraphicsSceneHelpEvent_clone(self: ptr cQGraphicsSceneHelpEvent, slot: int): pointer {.exportc: "miqt_exec_callback_QGraphicsSceneHelpEvent_clone ".} =
-  var nimfunc = cast[ptr QGraphicsSceneHelpEventcloneProc](cast[pointer](slot))
-
-  let virtualReturn = nimfunc[]( )
-
+proc miqt_exec_callback_cQGraphicsSceneHelpEvent_clone(vtbl: pointer, self: pointer): pointer {.cdecl.} =
+  let vtbl = cast[ptr QGraphicsSceneHelpEventVTable](vtbl)
+  let self = QGraphicsSceneHelpEvent(h: self)
+  var virtualReturn = vtbl[].clone(self)
   virtualReturn.h
+
+proc create*(T: type gen_qgraphicssceneevent_types.QGraphicsSceneHelpEvent,
+    vtbl: ref QGraphicsSceneHelpEventVTable = nil): gen_qgraphicssceneevent_types.QGraphicsSceneHelpEvent =
+  let vtbl = if vtbl == nil: new QGraphicsSceneHelpEventVTable else: vtbl
+  GC_ref(vtbl)
+  vtbl.vtbl.destructor = proc(vtbl: ptr cQGraphicsSceneHelpEventVTable, _: ptr cQGraphicsSceneHelpEvent) {.cdecl.} =
+    let vtbl = cast[ref QGraphicsSceneHelpEventVTable](vtbl)
+    GC_unref(vtbl)
+  if not isNil(vtbl.setAccepted):
+    vtbl[].vtbl.setAccepted = miqt_exec_callback_cQGraphicsSceneHelpEvent_setAccepted
+  if not isNil(vtbl.clone):
+    vtbl[].vtbl.clone = miqt_exec_callback_cQGraphicsSceneHelpEvent_clone
+  gen_qgraphicssceneevent_types.QGraphicsSceneHelpEvent(h: fcQGraphicsSceneHelpEvent_new(addr(vtbl[]), ))
+
+proc create*(T: type gen_qgraphicssceneevent_types.QGraphicsSceneHelpEvent,
+    typeVal: cint,
+    vtbl: ref QGraphicsSceneHelpEventVTable = nil): gen_qgraphicssceneevent_types.QGraphicsSceneHelpEvent =
+  let vtbl = if vtbl == nil: new QGraphicsSceneHelpEventVTable else: vtbl
+  GC_ref(vtbl)
+  vtbl.vtbl.destructor = proc(vtbl: ptr cQGraphicsSceneHelpEventVTable, _: ptr cQGraphicsSceneHelpEvent) {.cdecl.} =
+    let vtbl = cast[ref QGraphicsSceneHelpEventVTable](vtbl)
+    GC_unref(vtbl)
+  if not isNil(vtbl.setAccepted):
+    vtbl[].vtbl.setAccepted = miqt_exec_callback_cQGraphicsSceneHelpEvent_setAccepted
+  if not isNil(vtbl.clone):
+    vtbl[].vtbl.clone = miqt_exec_callback_cQGraphicsSceneHelpEvent_clone
+  gen_qgraphicssceneevent_types.QGraphicsSceneHelpEvent(h: fcQGraphicsSceneHelpEvent_new2(addr(vtbl[]), cint(typeVal)))
+
 proc delete*(self: gen_qgraphicssceneevent_types.QGraphicsSceneHelpEvent) =
   fcQGraphicsSceneHelpEvent_delete(self.h)
-
-func init*(T: type gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent, h: ptr cQGraphicsSceneDragDropEvent): gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent =
-  T(h: h)
-proc create*(T: type gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent, ): gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent =
-  gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent.init(fcQGraphicsSceneDragDropEvent_new())
-
-proc create*(T: type gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent, typeVal: cint): gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent =
-  gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent.init(fcQGraphicsSceneDragDropEvent_new2(cint(typeVal)))
-
 proc pos*(self: gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent, ): gen_qpoint_types.QPointF =
   gen_qpoint_types.QPointF(h: fcQGraphicsSceneDragDropEvent_pos(self.h))
 
@@ -815,48 +862,59 @@ proc mimeData*(self: gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent, 
 proc setMimeData*(self: gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent, data: gen_qmimedata_types.QMimeData): void =
   fcQGraphicsSceneDragDropEvent_setMimeData(self.h, data.h)
 
+type QGraphicsSceneDragDropEventsetAcceptedProc* = proc(self: QGraphicsSceneDragDropEvent, accepted: bool): void {.raises: [], gcsafe.}
+type QGraphicsSceneDragDropEventcloneProc* = proc(self: QGraphicsSceneDragDropEvent): gen_qcoreevent_types.QEvent {.raises: [], gcsafe.}
+type QGraphicsSceneDragDropEventVTable* = object
+  vtbl: cQGraphicsSceneDragDropEventVTable
+  setAccepted*: QGraphicsSceneDragDropEventsetAcceptedProc
+  clone*: QGraphicsSceneDragDropEventcloneProc
 proc QGraphicsSceneDragDropEventsetAccepted*(self: gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent, accepted: bool): void =
-  fQGraphicsSceneDragDropEvent_virtualbase_setAccepted(self.h, accepted)
+  fcQGraphicsSceneDragDropEvent_virtualbase_setAccepted(self.h, accepted)
 
-type QGraphicsSceneDragDropEventsetAcceptedProc* = proc(accepted: bool): void
-proc onsetAccepted*(self: gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent, slot: QGraphicsSceneDragDropEventsetAcceptedProc) =
-  # TODO check subclass
-  var tmp = new QGraphicsSceneDragDropEventsetAcceptedProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQGraphicsSceneDragDropEvent_override_virtual_setAccepted(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QGraphicsSceneDragDropEvent_setAccepted(self: ptr cQGraphicsSceneDragDropEvent, slot: int, accepted: bool): void {.exportc: "miqt_exec_callback_QGraphicsSceneDragDropEvent_setAccepted ".} =
-  var nimfunc = cast[ptr QGraphicsSceneDragDropEventsetAcceptedProc](cast[pointer](slot))
+proc miqt_exec_callback_cQGraphicsSceneDragDropEvent_setAccepted(vtbl: pointer, self: pointer, accepted: bool): void {.cdecl.} =
+  let vtbl = cast[ptr QGraphicsSceneDragDropEventVTable](vtbl)
+  let self = QGraphicsSceneDragDropEvent(h: self)
   let slotval1 = accepted
+  vtbl[].setAccepted(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QGraphicsSceneDragDropEventclone*(self: gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent, ): gen_qcoreevent_types.QEvent =
-  gen_qcoreevent_types.QEvent(h: fQGraphicsSceneDragDropEvent_virtualbase_clone(self.h))
+  gen_qcoreevent_types.QEvent(h: fcQGraphicsSceneDragDropEvent_virtualbase_clone(self.h))
 
-type QGraphicsSceneDragDropEventcloneProc* = proc(): gen_qcoreevent_types.QEvent
-proc onclone*(self: gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent, slot: QGraphicsSceneDragDropEventcloneProc) =
-  # TODO check subclass
-  var tmp = new QGraphicsSceneDragDropEventcloneProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQGraphicsSceneDragDropEvent_override_virtual_clone(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QGraphicsSceneDragDropEvent_clone(self: ptr cQGraphicsSceneDragDropEvent, slot: int): pointer {.exportc: "miqt_exec_callback_QGraphicsSceneDragDropEvent_clone ".} =
-  var nimfunc = cast[ptr QGraphicsSceneDragDropEventcloneProc](cast[pointer](slot))
-
-  let virtualReturn = nimfunc[]( )
-
+proc miqt_exec_callback_cQGraphicsSceneDragDropEvent_clone(vtbl: pointer, self: pointer): pointer {.cdecl.} =
+  let vtbl = cast[ptr QGraphicsSceneDragDropEventVTable](vtbl)
+  let self = QGraphicsSceneDragDropEvent(h: self)
+  var virtualReturn = vtbl[].clone(self)
   virtualReturn.h
+
+proc create*(T: type gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent,
+    vtbl: ref QGraphicsSceneDragDropEventVTable = nil): gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent =
+  let vtbl = if vtbl == nil: new QGraphicsSceneDragDropEventVTable else: vtbl
+  GC_ref(vtbl)
+  vtbl.vtbl.destructor = proc(vtbl: ptr cQGraphicsSceneDragDropEventVTable, _: ptr cQGraphicsSceneDragDropEvent) {.cdecl.} =
+    let vtbl = cast[ref QGraphicsSceneDragDropEventVTable](vtbl)
+    GC_unref(vtbl)
+  if not isNil(vtbl.setAccepted):
+    vtbl[].vtbl.setAccepted = miqt_exec_callback_cQGraphicsSceneDragDropEvent_setAccepted
+  if not isNil(vtbl.clone):
+    vtbl[].vtbl.clone = miqt_exec_callback_cQGraphicsSceneDragDropEvent_clone
+  gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent(h: fcQGraphicsSceneDragDropEvent_new(addr(vtbl[]), ))
+
+proc create*(T: type gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent,
+    typeVal: cint,
+    vtbl: ref QGraphicsSceneDragDropEventVTable = nil): gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent =
+  let vtbl = if vtbl == nil: new QGraphicsSceneDragDropEventVTable else: vtbl
+  GC_ref(vtbl)
+  vtbl.vtbl.destructor = proc(vtbl: ptr cQGraphicsSceneDragDropEventVTable, _: ptr cQGraphicsSceneDragDropEvent) {.cdecl.} =
+    let vtbl = cast[ref QGraphicsSceneDragDropEventVTable](vtbl)
+    GC_unref(vtbl)
+  if not isNil(vtbl.setAccepted):
+    vtbl[].vtbl.setAccepted = miqt_exec_callback_cQGraphicsSceneDragDropEvent_setAccepted
+  if not isNil(vtbl.clone):
+    vtbl[].vtbl.clone = miqt_exec_callback_cQGraphicsSceneDragDropEvent_clone
+  gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent(h: fcQGraphicsSceneDragDropEvent_new2(addr(vtbl[]), cint(typeVal)))
+
 proc delete*(self: gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent) =
   fcQGraphicsSceneDragDropEvent_delete(self.h)
-
-func init*(T: type gen_qgraphicssceneevent_types.QGraphicsSceneResizeEvent, h: ptr cQGraphicsSceneResizeEvent): gen_qgraphicssceneevent_types.QGraphicsSceneResizeEvent =
-  T(h: h)
-proc create*(T: type gen_qgraphicssceneevent_types.QGraphicsSceneResizeEvent, ): gen_qgraphicssceneevent_types.QGraphicsSceneResizeEvent =
-  gen_qgraphicssceneevent_types.QGraphicsSceneResizeEvent.init(fcQGraphicsSceneResizeEvent_new())
-
 proc oldSize*(self: gen_qgraphicssceneevent_types.QGraphicsSceneResizeEvent, ): gen_qsize_types.QSizeF =
   gen_qsize_types.QSizeF(h: fcQGraphicsSceneResizeEvent_oldSize(self.h))
 
@@ -869,48 +927,45 @@ proc newSize*(self: gen_qgraphicssceneevent_types.QGraphicsSceneResizeEvent, ): 
 proc setNewSize*(self: gen_qgraphicssceneevent_types.QGraphicsSceneResizeEvent, size: gen_qsize_types.QSizeF): void =
   fcQGraphicsSceneResizeEvent_setNewSize(self.h, size.h)
 
+type QGraphicsSceneResizeEventsetAcceptedProc* = proc(self: QGraphicsSceneResizeEvent, accepted: bool): void {.raises: [], gcsafe.}
+type QGraphicsSceneResizeEventcloneProc* = proc(self: QGraphicsSceneResizeEvent): gen_qcoreevent_types.QEvent {.raises: [], gcsafe.}
+type QGraphicsSceneResizeEventVTable* = object
+  vtbl: cQGraphicsSceneResizeEventVTable
+  setAccepted*: QGraphicsSceneResizeEventsetAcceptedProc
+  clone*: QGraphicsSceneResizeEventcloneProc
 proc QGraphicsSceneResizeEventsetAccepted*(self: gen_qgraphicssceneevent_types.QGraphicsSceneResizeEvent, accepted: bool): void =
-  fQGraphicsSceneResizeEvent_virtualbase_setAccepted(self.h, accepted)
+  fcQGraphicsSceneResizeEvent_virtualbase_setAccepted(self.h, accepted)
 
-type QGraphicsSceneResizeEventsetAcceptedProc* = proc(accepted: bool): void
-proc onsetAccepted*(self: gen_qgraphicssceneevent_types.QGraphicsSceneResizeEvent, slot: QGraphicsSceneResizeEventsetAcceptedProc) =
-  # TODO check subclass
-  var tmp = new QGraphicsSceneResizeEventsetAcceptedProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQGraphicsSceneResizeEvent_override_virtual_setAccepted(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QGraphicsSceneResizeEvent_setAccepted(self: ptr cQGraphicsSceneResizeEvent, slot: int, accepted: bool): void {.exportc: "miqt_exec_callback_QGraphicsSceneResizeEvent_setAccepted ".} =
-  var nimfunc = cast[ptr QGraphicsSceneResizeEventsetAcceptedProc](cast[pointer](slot))
+proc miqt_exec_callback_cQGraphicsSceneResizeEvent_setAccepted(vtbl: pointer, self: pointer, accepted: bool): void {.cdecl.} =
+  let vtbl = cast[ptr QGraphicsSceneResizeEventVTable](vtbl)
+  let self = QGraphicsSceneResizeEvent(h: self)
   let slotval1 = accepted
+  vtbl[].setAccepted(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QGraphicsSceneResizeEventclone*(self: gen_qgraphicssceneevent_types.QGraphicsSceneResizeEvent, ): gen_qcoreevent_types.QEvent =
-  gen_qcoreevent_types.QEvent(h: fQGraphicsSceneResizeEvent_virtualbase_clone(self.h))
+  gen_qcoreevent_types.QEvent(h: fcQGraphicsSceneResizeEvent_virtualbase_clone(self.h))
 
-type QGraphicsSceneResizeEventcloneProc* = proc(): gen_qcoreevent_types.QEvent
-proc onclone*(self: gen_qgraphicssceneevent_types.QGraphicsSceneResizeEvent, slot: QGraphicsSceneResizeEventcloneProc) =
-  # TODO check subclass
-  var tmp = new QGraphicsSceneResizeEventcloneProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQGraphicsSceneResizeEvent_override_virtual_clone(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QGraphicsSceneResizeEvent_clone(self: ptr cQGraphicsSceneResizeEvent, slot: int): pointer {.exportc: "miqt_exec_callback_QGraphicsSceneResizeEvent_clone ".} =
-  var nimfunc = cast[ptr QGraphicsSceneResizeEventcloneProc](cast[pointer](slot))
-
-  let virtualReturn = nimfunc[]( )
-
+proc miqt_exec_callback_cQGraphicsSceneResizeEvent_clone(vtbl: pointer, self: pointer): pointer {.cdecl.} =
+  let vtbl = cast[ptr QGraphicsSceneResizeEventVTable](vtbl)
+  let self = QGraphicsSceneResizeEvent(h: self)
+  var virtualReturn = vtbl[].clone(self)
   virtualReturn.h
+
+proc create*(T: type gen_qgraphicssceneevent_types.QGraphicsSceneResizeEvent,
+    vtbl: ref QGraphicsSceneResizeEventVTable = nil): gen_qgraphicssceneevent_types.QGraphicsSceneResizeEvent =
+  let vtbl = if vtbl == nil: new QGraphicsSceneResizeEventVTable else: vtbl
+  GC_ref(vtbl)
+  vtbl.vtbl.destructor = proc(vtbl: ptr cQGraphicsSceneResizeEventVTable, _: ptr cQGraphicsSceneResizeEvent) {.cdecl.} =
+    let vtbl = cast[ref QGraphicsSceneResizeEventVTable](vtbl)
+    GC_unref(vtbl)
+  if not isNil(vtbl.setAccepted):
+    vtbl[].vtbl.setAccepted = miqt_exec_callback_cQGraphicsSceneResizeEvent_setAccepted
+  if not isNil(vtbl.clone):
+    vtbl[].vtbl.clone = miqt_exec_callback_cQGraphicsSceneResizeEvent_clone
+  gen_qgraphicssceneevent_types.QGraphicsSceneResizeEvent(h: fcQGraphicsSceneResizeEvent_new(addr(vtbl[]), ))
+
 proc delete*(self: gen_qgraphicssceneevent_types.QGraphicsSceneResizeEvent) =
   fcQGraphicsSceneResizeEvent_delete(self.h)
-
-func init*(T: type gen_qgraphicssceneevent_types.QGraphicsSceneMoveEvent, h: ptr cQGraphicsSceneMoveEvent): gen_qgraphicssceneevent_types.QGraphicsSceneMoveEvent =
-  T(h: h)
-proc create*(T: type gen_qgraphicssceneevent_types.QGraphicsSceneMoveEvent, ): gen_qgraphicssceneevent_types.QGraphicsSceneMoveEvent =
-  gen_qgraphicssceneevent_types.QGraphicsSceneMoveEvent.init(fcQGraphicsSceneMoveEvent_new())
-
 proc oldPos*(self: gen_qgraphicssceneevent_types.QGraphicsSceneMoveEvent, ): gen_qpoint_types.QPointF =
   gen_qpoint_types.QPointF(h: fcQGraphicsSceneMoveEvent_oldPos(self.h))
 
@@ -923,39 +978,42 @@ proc newPos*(self: gen_qgraphicssceneevent_types.QGraphicsSceneMoveEvent, ): gen
 proc setNewPos*(self: gen_qgraphicssceneevent_types.QGraphicsSceneMoveEvent, pos: gen_qpoint_types.QPointF): void =
   fcQGraphicsSceneMoveEvent_setNewPos(self.h, pos.h)
 
+type QGraphicsSceneMoveEventsetAcceptedProc* = proc(self: QGraphicsSceneMoveEvent, accepted: bool): void {.raises: [], gcsafe.}
+type QGraphicsSceneMoveEventcloneProc* = proc(self: QGraphicsSceneMoveEvent): gen_qcoreevent_types.QEvent {.raises: [], gcsafe.}
+type QGraphicsSceneMoveEventVTable* = object
+  vtbl: cQGraphicsSceneMoveEventVTable
+  setAccepted*: QGraphicsSceneMoveEventsetAcceptedProc
+  clone*: QGraphicsSceneMoveEventcloneProc
 proc QGraphicsSceneMoveEventsetAccepted*(self: gen_qgraphicssceneevent_types.QGraphicsSceneMoveEvent, accepted: bool): void =
-  fQGraphicsSceneMoveEvent_virtualbase_setAccepted(self.h, accepted)
+  fcQGraphicsSceneMoveEvent_virtualbase_setAccepted(self.h, accepted)
 
-type QGraphicsSceneMoveEventsetAcceptedProc* = proc(accepted: bool): void
-proc onsetAccepted*(self: gen_qgraphicssceneevent_types.QGraphicsSceneMoveEvent, slot: QGraphicsSceneMoveEventsetAcceptedProc) =
-  # TODO check subclass
-  var tmp = new QGraphicsSceneMoveEventsetAcceptedProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQGraphicsSceneMoveEvent_override_virtual_setAccepted(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QGraphicsSceneMoveEvent_setAccepted(self: ptr cQGraphicsSceneMoveEvent, slot: int, accepted: bool): void {.exportc: "miqt_exec_callback_QGraphicsSceneMoveEvent_setAccepted ".} =
-  var nimfunc = cast[ptr QGraphicsSceneMoveEventsetAcceptedProc](cast[pointer](slot))
+proc miqt_exec_callback_cQGraphicsSceneMoveEvent_setAccepted(vtbl: pointer, self: pointer, accepted: bool): void {.cdecl.} =
+  let vtbl = cast[ptr QGraphicsSceneMoveEventVTable](vtbl)
+  let self = QGraphicsSceneMoveEvent(h: self)
   let slotval1 = accepted
+  vtbl[].setAccepted(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QGraphicsSceneMoveEventclone*(self: gen_qgraphicssceneevent_types.QGraphicsSceneMoveEvent, ): gen_qcoreevent_types.QEvent =
-  gen_qcoreevent_types.QEvent(h: fQGraphicsSceneMoveEvent_virtualbase_clone(self.h))
+  gen_qcoreevent_types.QEvent(h: fcQGraphicsSceneMoveEvent_virtualbase_clone(self.h))
 
-type QGraphicsSceneMoveEventcloneProc* = proc(): gen_qcoreevent_types.QEvent
-proc onclone*(self: gen_qgraphicssceneevent_types.QGraphicsSceneMoveEvent, slot: QGraphicsSceneMoveEventcloneProc) =
-  # TODO check subclass
-  var tmp = new QGraphicsSceneMoveEventcloneProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQGraphicsSceneMoveEvent_override_virtual_clone(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QGraphicsSceneMoveEvent_clone(self: ptr cQGraphicsSceneMoveEvent, slot: int): pointer {.exportc: "miqt_exec_callback_QGraphicsSceneMoveEvent_clone ".} =
-  var nimfunc = cast[ptr QGraphicsSceneMoveEventcloneProc](cast[pointer](slot))
-
-  let virtualReturn = nimfunc[]( )
-
+proc miqt_exec_callback_cQGraphicsSceneMoveEvent_clone(vtbl: pointer, self: pointer): pointer {.cdecl.} =
+  let vtbl = cast[ptr QGraphicsSceneMoveEventVTable](vtbl)
+  let self = QGraphicsSceneMoveEvent(h: self)
+  var virtualReturn = vtbl[].clone(self)
   virtualReturn.h
+
+proc create*(T: type gen_qgraphicssceneevent_types.QGraphicsSceneMoveEvent,
+    vtbl: ref QGraphicsSceneMoveEventVTable = nil): gen_qgraphicssceneevent_types.QGraphicsSceneMoveEvent =
+  let vtbl = if vtbl == nil: new QGraphicsSceneMoveEventVTable else: vtbl
+  GC_ref(vtbl)
+  vtbl.vtbl.destructor = proc(vtbl: ptr cQGraphicsSceneMoveEventVTable, _: ptr cQGraphicsSceneMoveEvent) {.cdecl.} =
+    let vtbl = cast[ref QGraphicsSceneMoveEventVTable](vtbl)
+    GC_unref(vtbl)
+  if not isNil(vtbl.setAccepted):
+    vtbl[].vtbl.setAccepted = miqt_exec_callback_cQGraphicsSceneMoveEvent_setAccepted
+  if not isNil(vtbl.clone):
+    vtbl[].vtbl.clone = miqt_exec_callback_cQGraphicsSceneMoveEvent_clone
+  gen_qgraphicssceneevent_types.QGraphicsSceneMoveEvent(h: fcQGraphicsSceneMoveEvent_new(addr(vtbl[]), ))
+
 proc delete*(self: gen_qgraphicssceneevent_types.QGraphicsSceneMoveEvent) =
   fcQGraphicsSceneMoveEvent_delete(self.h)

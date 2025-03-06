@@ -45,8 +45,6 @@ export
 
 type cQAuthenticator*{.exportc: "QAuthenticator", incompleteStruct.} = object
 
-proc fcQAuthenticator_new(): ptr cQAuthenticator {.importc: "QAuthenticator_new".}
-proc fcQAuthenticator_new2(other: pointer): ptr cQAuthenticator {.importc: "QAuthenticator_new2".}
 proc fcQAuthenticator_operatorAssign(self: pointer, other: pointer): void {.importc: "QAuthenticator_operatorAssign".}
 proc fcQAuthenticator_operatorEqual(self: pointer, other: pointer): bool {.importc: "QAuthenticator_operatorEqual".}
 proc fcQAuthenticator_operatorNotEqual(self: pointer, other: pointer): bool {.importc: "QAuthenticator_operatorNotEqual".}
@@ -61,16 +59,9 @@ proc fcQAuthenticator_options(self: pointer, ): struct_miqt_map {.importc: "QAut
 proc fcQAuthenticator_setOption(self: pointer, opt: struct_miqt_string, value: pointer): void {.importc: "QAuthenticator_setOption".}
 proc fcQAuthenticator_isNull(self: pointer, ): bool {.importc: "QAuthenticator_isNull".}
 proc fcQAuthenticator_detach(self: pointer, ): void {.importc: "QAuthenticator_detach".}
+proc fcQAuthenticator_new(): ptr cQAuthenticator {.importc: "QAuthenticator_new".}
+proc fcQAuthenticator_new2(other: pointer): ptr cQAuthenticator {.importc: "QAuthenticator_new2".}
 proc fcQAuthenticator_delete(self: pointer) {.importc: "QAuthenticator_delete".}
-
-
-func init*(T: type gen_qauthenticator_types.QAuthenticator, h: ptr cQAuthenticator): gen_qauthenticator_types.QAuthenticator =
-  T(h: h)
-proc create*(T: type gen_qauthenticator_types.QAuthenticator, ): gen_qauthenticator_types.QAuthenticator =
-  gen_qauthenticator_types.QAuthenticator.init(fcQAuthenticator_new())
-
-proc create*(T: type gen_qauthenticator_types.QAuthenticator, other: gen_qauthenticator_types.QAuthenticator): gen_qauthenticator_types.QAuthenticator =
-  gen_qauthenticator_types.QAuthenticator.init(fcQAuthenticator_new2(other.h))
 
 proc operatorAssign*(self: gen_qauthenticator_types.QAuthenticator, other: gen_qauthenticator_types.QAuthenticator): void =
   fcQAuthenticator_operatorAssign(self.h, other.h)
@@ -135,6 +126,13 @@ proc isNull*(self: gen_qauthenticator_types.QAuthenticator, ): bool =
 
 proc detach*(self: gen_qauthenticator_types.QAuthenticator, ): void =
   fcQAuthenticator_detach(self.h)
+
+proc create*(T: type gen_qauthenticator_types.QAuthenticator): gen_qauthenticator_types.QAuthenticator =
+  gen_qauthenticator_types.QAuthenticator(h: fcQAuthenticator_new())
+
+proc create*(T: type gen_qauthenticator_types.QAuthenticator,
+    other: gen_qauthenticator_types.QAuthenticator): gen_qauthenticator_types.QAuthenticator =
+  gen_qauthenticator_types.QAuthenticator(h: fcQAuthenticator_new2(other.h))
 
 proc delete*(self: gen_qauthenticator_types.QAuthenticator) =
   fcQAuthenticator_delete(self.h)

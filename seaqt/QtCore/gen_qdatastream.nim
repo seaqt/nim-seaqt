@@ -104,9 +104,6 @@ export
 
 type cQDataStream*{.exportc: "QDataStream", incompleteStruct.} = object
 
-proc fcQDataStream_new(): ptr cQDataStream {.importc: "QDataStream_new".}
-proc fcQDataStream_new2(param1: pointer): ptr cQDataStream {.importc: "QDataStream_new2".}
-proc fcQDataStream_new3(param1: struct_miqt_string): ptr cQDataStream {.importc: "QDataStream_new3".}
 proc fcQDataStream_device(self: pointer, ): pointer {.importc: "QDataStream_device".}
 proc fcQDataStream_setDevice(self: pointer, device: pointer): void {.importc: "QDataStream_setDevice".}
 proc fcQDataStream_atEnd(self: pointer, ): bool {.importc: "QDataStream_atEnd".}
@@ -155,19 +152,10 @@ proc fcQDataStream_commitTransaction(self: pointer, ): bool {.importc: "QDataStr
 proc fcQDataStream_rollbackTransaction(self: pointer, ): void {.importc: "QDataStream_rollbackTransaction".}
 proc fcQDataStream_abortTransaction(self: pointer, ): void {.importc: "QDataStream_abortTransaction".}
 proc fcQDataStream_isDeviceTransactionStarted(self: pointer, ): bool {.importc: "QDataStream_isDeviceTransactionStarted".}
+proc fcQDataStream_new(): ptr cQDataStream {.importc: "QDataStream_new".}
+proc fcQDataStream_new2(param1: pointer): ptr cQDataStream {.importc: "QDataStream_new2".}
+proc fcQDataStream_new3(param1: struct_miqt_string): ptr cQDataStream {.importc: "QDataStream_new3".}
 proc fcQDataStream_delete(self: pointer) {.importc: "QDataStream_delete".}
-
-
-func init*(T: type gen_qdatastream_types.QDataStream, h: ptr cQDataStream): gen_qdatastream_types.QDataStream =
-  T(h: h)
-proc create*(T: type gen_qdatastream_types.QDataStream, ): gen_qdatastream_types.QDataStream =
-  gen_qdatastream_types.QDataStream.init(fcQDataStream_new())
-
-proc create*(T: type gen_qdatastream_types.QDataStream, param1: gen_qiodevice_types.QIODevice): gen_qdatastream_types.QDataStream =
-  gen_qdatastream_types.QDataStream.init(fcQDataStream_new2(param1.h))
-
-proc create*(T: type gen_qdatastream_types.QDataStream, param1: seq[byte]): gen_qdatastream_types.QDataStream =
-  gen_qdatastream_types.QDataStream.init(fcQDataStream_new3(struct_miqt_string(data: cast[cstring](if len(param1) == 0: nil else: unsafeAddr param1[0]), len: csize_t(len(param1)))))
 
 proc device*(self: gen_qdatastream_types.QDataStream, ): gen_qiodevice_types.QIODevice =
   gen_qiodevice_types.QIODevice(h: fcQDataStream_device(self.h))
@@ -312,6 +300,17 @@ proc abortTransaction*(self: gen_qdatastream_types.QDataStream, ): void =
 
 proc isDeviceTransactionStarted*(self: gen_qdatastream_types.QDataStream, ): bool =
   fcQDataStream_isDeviceTransactionStarted(self.h)
+
+proc create*(T: type gen_qdatastream_types.QDataStream): gen_qdatastream_types.QDataStream =
+  gen_qdatastream_types.QDataStream(h: fcQDataStream_new())
+
+proc create*(T: type gen_qdatastream_types.QDataStream,
+    param1: gen_qiodevice_types.QIODevice): gen_qdatastream_types.QDataStream =
+  gen_qdatastream_types.QDataStream(h: fcQDataStream_new2(param1.h))
+
+proc create*(T: type gen_qdatastream_types.QDataStream,
+    param1: seq[byte]): gen_qdatastream_types.QDataStream =
+  gen_qdatastream_types.QDataStream(h: fcQDataStream_new3(struct_miqt_string(data: cast[cstring](if len(param1) == 0: nil else: unsafeAddr param1[0]), len: csize_t(len(param1)))))
 
 proc delete*(self: gen_qdatastream_types.QDataStream) =
   fcQDataStream_delete(self.h)

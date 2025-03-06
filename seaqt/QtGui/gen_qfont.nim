@@ -153,17 +153,6 @@ export
 
 type cQFont*{.exportc: "QFont", incompleteStruct.} = object
 
-proc fcQFont_new(): ptr cQFont {.importc: "QFont_new".}
-proc fcQFont_new2(family: struct_miqt_string): ptr cQFont {.importc: "QFont_new2".}
-proc fcQFont_new3(families: struct_miqt_array): ptr cQFont {.importc: "QFont_new3".}
-proc fcQFont_new4(font: pointer, pd: pointer): ptr cQFont {.importc: "QFont_new4".}
-proc fcQFont_new5(font: pointer): ptr cQFont {.importc: "QFont_new5".}
-proc fcQFont_new6(family: struct_miqt_string, pointSize: cint): ptr cQFont {.importc: "QFont_new6".}
-proc fcQFont_new7(family: struct_miqt_string, pointSize: cint, weight: cint): ptr cQFont {.importc: "QFont_new7".}
-proc fcQFont_new8(family: struct_miqt_string, pointSize: cint, weight: cint, italic: bool): ptr cQFont {.importc: "QFont_new8".}
-proc fcQFont_new9(families: struct_miqt_array, pointSize: cint): ptr cQFont {.importc: "QFont_new9".}
-proc fcQFont_new10(families: struct_miqt_array, pointSize: cint, weight: cint): ptr cQFont {.importc: "QFont_new10".}
-proc fcQFont_new11(families: struct_miqt_array, pointSize: cint, weight: cint, italic: bool): ptr cQFont {.importc: "QFont_new11".}
 proc fcQFont_swap(self: pointer, other: pointer): void {.importc: "QFont_swap".}
 proc fcQFont_family(self: pointer, ): struct_miqt_string {.importc: "QFont_family".}
 proc fcQFont_setFamily(self: pointer, family: struct_miqt_string): void {.importc: "QFont_setFamily".}
@@ -236,60 +225,19 @@ proc fcQFont_setResolveMask(self: pointer, mask: cuint): void {.importc: "QFont_
 proc fcQFont_setLegacyWeight(self: pointer, legacyWeight: cint): void {.importc: "QFont_setLegacyWeight".}
 proc fcQFont_legacyWeight(self: pointer, ): cint {.importc: "QFont_legacyWeight".}
 proc fcQFont_setStyleHint2(self: pointer, param1: cint, param2: cint): void {.importc: "QFont_setStyleHint2".}
+proc fcQFont_new(): ptr cQFont {.importc: "QFont_new".}
+proc fcQFont_new2(family: struct_miqt_string): ptr cQFont {.importc: "QFont_new2".}
+proc fcQFont_new3(families: struct_miqt_array): ptr cQFont {.importc: "QFont_new3".}
+proc fcQFont_new4(font: pointer, pd: pointer): ptr cQFont {.importc: "QFont_new4".}
+proc fcQFont_new5(font: pointer): ptr cQFont {.importc: "QFont_new5".}
+proc fcQFont_new6(family: struct_miqt_string, pointSize: cint): ptr cQFont {.importc: "QFont_new6".}
+proc fcQFont_new7(family: struct_miqt_string, pointSize: cint, weight: cint): ptr cQFont {.importc: "QFont_new7".}
+proc fcQFont_new8(family: struct_miqt_string, pointSize: cint, weight: cint, italic: bool): ptr cQFont {.importc: "QFont_new8".}
+proc fcQFont_new9(families: struct_miqt_array, pointSize: cint): ptr cQFont {.importc: "QFont_new9".}
+proc fcQFont_new10(families: struct_miqt_array, pointSize: cint, weight: cint): ptr cQFont {.importc: "QFont_new10".}
+proc fcQFont_new11(families: struct_miqt_array, pointSize: cint, weight: cint, italic: bool): ptr cQFont {.importc: "QFont_new11".}
 proc fcQFont_staticMetaObject(): pointer {.importc: "QFont_staticMetaObject".}
 proc fcQFont_delete(self: pointer) {.importc: "QFont_delete".}
-
-
-func init*(T: type gen_qfont_types.QFont, h: ptr cQFont): gen_qfont_types.QFont =
-  T(h: h)
-proc create*(T: type gen_qfont_types.QFont, ): gen_qfont_types.QFont =
-  gen_qfont_types.QFont.init(fcQFont_new())
-
-proc create*(T: type gen_qfont_types.QFont, family: string): gen_qfont_types.QFont =
-  gen_qfont_types.QFont.init(fcQFont_new2(struct_miqt_string(data: family, len: csize_t(len(family)))))
-
-proc create*(T: type gen_qfont_types.QFont, families: seq[string]): gen_qfont_types.QFont =
-  var families_CArray = newSeq[struct_miqt_string](len(families))
-  for i in 0..<len(families):
-    families_CArray[i] = struct_miqt_string(data: families[i], len: csize_t(len(families[i])))
-
-  gen_qfont_types.QFont.init(fcQFont_new3(struct_miqt_array(len: csize_t(len(families)), data: if len(families) == 0: nil else: addr(families_CArray[0]))))
-
-proc create*(T: type gen_qfont_types.QFont, font: gen_qfont_types.QFont, pd: gen_qpaintdevice_types.QPaintDevice): gen_qfont_types.QFont =
-  gen_qfont_types.QFont.init(fcQFont_new4(font.h, pd.h))
-
-proc create*(T: type gen_qfont_types.QFont, font: gen_qfont_types.QFont): gen_qfont_types.QFont =
-  gen_qfont_types.QFont.init(fcQFont_new5(font.h))
-
-proc create*(T: type gen_qfont_types.QFont, family: string, pointSize: cint): gen_qfont_types.QFont =
-  gen_qfont_types.QFont.init(fcQFont_new6(struct_miqt_string(data: family, len: csize_t(len(family))), pointSize))
-
-proc create*(T: type gen_qfont_types.QFont, family: string, pointSize: cint, weight: cint): gen_qfont_types.QFont =
-  gen_qfont_types.QFont.init(fcQFont_new7(struct_miqt_string(data: family, len: csize_t(len(family))), pointSize, weight))
-
-proc create*(T: type gen_qfont_types.QFont, family: string, pointSize: cint, weight: cint, italic: bool): gen_qfont_types.QFont =
-  gen_qfont_types.QFont.init(fcQFont_new8(struct_miqt_string(data: family, len: csize_t(len(family))), pointSize, weight, italic))
-
-proc create*(T: type gen_qfont_types.QFont, families: seq[string], pointSize: cint): gen_qfont_types.QFont =
-  var families_CArray = newSeq[struct_miqt_string](len(families))
-  for i in 0..<len(families):
-    families_CArray[i] = struct_miqt_string(data: families[i], len: csize_t(len(families[i])))
-
-  gen_qfont_types.QFont.init(fcQFont_new9(struct_miqt_array(len: csize_t(len(families)), data: if len(families) == 0: nil else: addr(families_CArray[0])), pointSize))
-
-proc create*(T: type gen_qfont_types.QFont, families: seq[string], pointSize: cint, weight: cint): gen_qfont_types.QFont =
-  var families_CArray = newSeq[struct_miqt_string](len(families))
-  for i in 0..<len(families):
-    families_CArray[i] = struct_miqt_string(data: families[i], len: csize_t(len(families[i])))
-
-  gen_qfont_types.QFont.init(fcQFont_new10(struct_miqt_array(len: csize_t(len(families)), data: if len(families) == 0: nil else: addr(families_CArray[0])), pointSize, weight))
-
-proc create*(T: type gen_qfont_types.QFont, families: seq[string], pointSize: cint, weight: cint, italic: bool): gen_qfont_types.QFont =
-  var families_CArray = newSeq[struct_miqt_string](len(families))
-  for i in 0..<len(families):
-    families_CArray[i] = struct_miqt_string(data: families[i], len: csize_t(len(families[i])))
-
-  gen_qfont_types.QFont.init(fcQFont_new11(struct_miqt_array(len: csize_t(len(families)), data: if len(families) == 0: nil else: addr(families_CArray[0])), pointSize, weight, italic))
 
 proc swap*(self: gen_qfont_types.QFont, other: gen_qfont_types.QFont): void =
   fcQFont_swap(self.h, other.h)
@@ -556,6 +504,65 @@ proc legacyWeight*(self: gen_qfont_types.QFont, ): cint =
 
 proc setStyleHint*(self: gen_qfont_types.QFont, param1: cint, param2: cint): void =
   fcQFont_setStyleHint2(self.h, cint(param1), cint(param2))
+
+proc create*(T: type gen_qfont_types.QFont): gen_qfont_types.QFont =
+  gen_qfont_types.QFont(h: fcQFont_new())
+
+proc create*(T: type gen_qfont_types.QFont,
+    family: string): gen_qfont_types.QFont =
+  gen_qfont_types.QFont(h: fcQFont_new2(struct_miqt_string(data: family, len: csize_t(len(family)))))
+
+proc create*(T: type gen_qfont_types.QFont,
+    families: seq[string]): gen_qfont_types.QFont =
+  var families_CArray = newSeq[struct_miqt_string](len(families))
+  for i in 0..<len(families):
+    families_CArray[i] = struct_miqt_string(data: families[i], len: csize_t(len(families[i])))
+
+  gen_qfont_types.QFont(h: fcQFont_new3(struct_miqt_array(len: csize_t(len(families)), data: if len(families) == 0: nil else: addr(families_CArray[0]))))
+
+proc create*(T: type gen_qfont_types.QFont,
+    font: gen_qfont_types.QFont, pd: gen_qpaintdevice_types.QPaintDevice): gen_qfont_types.QFont =
+  gen_qfont_types.QFont(h: fcQFont_new4(font.h, pd.h))
+
+proc create*(T: type gen_qfont_types.QFont,
+    font: gen_qfont_types.QFont): gen_qfont_types.QFont =
+  gen_qfont_types.QFont(h: fcQFont_new5(font.h))
+
+proc create*(T: type gen_qfont_types.QFont,
+    family: string, pointSize: cint): gen_qfont_types.QFont =
+  gen_qfont_types.QFont(h: fcQFont_new6(struct_miqt_string(data: family, len: csize_t(len(family))), pointSize))
+
+proc create*(T: type gen_qfont_types.QFont,
+    family: string, pointSize: cint, weight: cint): gen_qfont_types.QFont =
+  gen_qfont_types.QFont(h: fcQFont_new7(struct_miqt_string(data: family, len: csize_t(len(family))), pointSize, weight))
+
+proc create*(T: type gen_qfont_types.QFont,
+    family: string, pointSize: cint, weight: cint, italic: bool): gen_qfont_types.QFont =
+  gen_qfont_types.QFont(h: fcQFont_new8(struct_miqt_string(data: family, len: csize_t(len(family))), pointSize, weight, italic))
+
+proc create*(T: type gen_qfont_types.QFont,
+    families: seq[string], pointSize: cint): gen_qfont_types.QFont =
+  var families_CArray = newSeq[struct_miqt_string](len(families))
+  for i in 0..<len(families):
+    families_CArray[i] = struct_miqt_string(data: families[i], len: csize_t(len(families[i])))
+
+  gen_qfont_types.QFont(h: fcQFont_new9(struct_miqt_array(len: csize_t(len(families)), data: if len(families) == 0: nil else: addr(families_CArray[0])), pointSize))
+
+proc create*(T: type gen_qfont_types.QFont,
+    families: seq[string], pointSize: cint, weight: cint): gen_qfont_types.QFont =
+  var families_CArray = newSeq[struct_miqt_string](len(families))
+  for i in 0..<len(families):
+    families_CArray[i] = struct_miqt_string(data: families[i], len: csize_t(len(families[i])))
+
+  gen_qfont_types.QFont(h: fcQFont_new10(struct_miqt_array(len: csize_t(len(families)), data: if len(families) == 0: nil else: addr(families_CArray[0])), pointSize, weight))
+
+proc create*(T: type gen_qfont_types.QFont,
+    families: seq[string], pointSize: cint, weight: cint, italic: bool): gen_qfont_types.QFont =
+  var families_CArray = newSeq[struct_miqt_string](len(families))
+  for i in 0..<len(families):
+    families_CArray[i] = struct_miqt_string(data: families[i], len: csize_t(len(families[i])))
+
+  gen_qfont_types.QFont(h: fcQFont_new11(struct_miqt_array(len: csize_t(len(families)), data: if len(families) == 0: nil else: addr(families_CArray[0])), pointSize, weight, italic))
 
 proc staticMetaObject*(_: type gen_qfont_types.QFont): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQFont_staticMetaObject())

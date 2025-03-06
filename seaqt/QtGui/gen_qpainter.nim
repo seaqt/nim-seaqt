@@ -139,8 +139,6 @@ export
 type cQPainter*{.exportc: "QPainter", incompleteStruct.} = object
 type cQPainterPixmapFragment*{.exportc: "QPainter__PixmapFragment", incompleteStruct.} = object
 
-proc fcQPainter_new(): ptr cQPainter {.importc: "QPainter_new".}
-proc fcQPainter_new2(param1: pointer): ptr cQPainter {.importc: "QPainter_new2".}
 proc fcQPainter_device(self: pointer, ): pointer {.importc: "QPainter_device".}
 proc fcQPainter_begin(self: pointer, param1: pointer): bool {.importc: "QPainter_begin".}
 proc fcQPainter_endX(self: pointer, ): bool {.importc: "QPainter_end".}
@@ -360,6 +358,8 @@ proc fcQPainter_drawText32(self: pointer, r: pointer, text: struct_miqt_string, 
 proc fcQPainter_boundingRect32(self: pointer, rect: pointer, text: struct_miqt_string, o: pointer): pointer {.importc: "QPainter_boundingRect32".}
 proc fcQPainter_setRenderHint2(self: pointer, hint: cint, on: bool): void {.importc: "QPainter_setRenderHint2".}
 proc fcQPainter_setRenderHints2(self: pointer, hints: cint, on: bool): void {.importc: "QPainter_setRenderHints2".}
+proc fcQPainter_new(): ptr cQPainter {.importc: "QPainter_new".}
+proc fcQPainter_new2(param1: pointer): ptr cQPainter {.importc: "QPainter_new2".}
 proc fcQPainter_staticMetaObject(): pointer {.importc: "QPainter_staticMetaObject".}
 proc fcQPainter_delete(self: pointer) {.importc: "QPainter_delete".}
 proc fcQPainterPixmapFragment_create(pos: pointer, sourceRect: pointer): pointer {.importc: "QPainter__PixmapFragment_create".}
@@ -368,15 +368,6 @@ proc fcQPainterPixmapFragment_create4(pos: pointer, sourceRect: pointer, scaleX:
 proc fcQPainterPixmapFragment_create5(pos: pointer, sourceRect: pointer, scaleX: float64, scaleY: float64, rotation: float64): pointer {.importc: "QPainter__PixmapFragment_create5".}
 proc fcQPainterPixmapFragment_create6(pos: pointer, sourceRect: pointer, scaleX: float64, scaleY: float64, rotation: float64, opacity: float64): pointer {.importc: "QPainter__PixmapFragment_create6".}
 proc fcQPainterPixmapFragment_delete(self: pointer) {.importc: "QPainter__PixmapFragment_delete".}
-
-
-func init*(T: type gen_qpainter_types.QPainter, h: ptr cQPainter): gen_qpainter_types.QPainter =
-  T(h: h)
-proc create*(T: type gen_qpainter_types.QPainter, ): gen_qpainter_types.QPainter =
-  gen_qpainter_types.QPainter.init(fcQPainter_new())
-
-proc create*(T: type gen_qpainter_types.QPainter, param1: gen_qpaintdevice_types.QPaintDevice): gen_qpainter_types.QPainter =
-  gen_qpainter_types.QPainter.init(fcQPainter_new2(param1.h))
 
 proc device*(self: gen_qpainter_types.QPainter, ): gen_qpaintdevice_types.QPaintDevice =
   gen_qpaintdevice_types.QPaintDevice(h: fcQPainter_device(self.h))
@@ -1059,13 +1050,17 @@ proc setRenderHint*(self: gen_qpainter_types.QPainter, hint: cint, on: bool): vo
 proc setRenderHints*(self: gen_qpainter_types.QPainter, hints: cint, on: bool): void =
   fcQPainter_setRenderHints2(self.h, cint(hints), on)
 
+proc create*(T: type gen_qpainter_types.QPainter): gen_qpainter_types.QPainter =
+  gen_qpainter_types.QPainter(h: fcQPainter_new())
+
+proc create*(T: type gen_qpainter_types.QPainter,
+    param1: gen_qpaintdevice_types.QPaintDevice): gen_qpainter_types.QPainter =
+  gen_qpainter_types.QPainter(h: fcQPainter_new2(param1.h))
+
 proc staticMetaObject*(_: type gen_qpainter_types.QPainter): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQPainter_staticMetaObject())
 proc delete*(self: gen_qpainter_types.QPainter) =
   fcQPainter_delete(self.h)
-
-func init*(T: type gen_qpainter_types.QPainterPixmapFragment, h: ptr cQPainterPixmapFragment): gen_qpainter_types.QPainterPixmapFragment =
-  T(h: h)
 proc create*(_: type gen_qpainter_types.QPainterPixmapFragment, pos: gen_qpoint_types.QPointF, sourceRect: gen_qrect_types.QRectF): gen_qpainter_types.QPainterPixmapFragment =
   gen_qpainter_types.QPainterPixmapFragment(h: fcQPainterPixmapFragment_create(pos.h, sourceRect.h))
 

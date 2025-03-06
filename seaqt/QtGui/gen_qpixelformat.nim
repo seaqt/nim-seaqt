@@ -99,11 +99,6 @@ export gen_qpixelformat_types
 
 type cQPixelFormat*{.exportc: "QPixelFormat", incompleteStruct.} = object
 
-proc fcQPixelFormat_new(): ptr cQPixelFormat {.importc: "QPixelFormat_new".}
-proc fcQPixelFormat_new2(colorModel: cint, firstSize: uint8, secondSize: uint8, thirdSize: uint8, fourthSize: uint8, fifthSize: uint8, alphaSize: uint8, alphaUsage: cint, alphaPosition: cint, premultiplied: cint, typeInterpretation: cint): ptr cQPixelFormat {.importc: "QPixelFormat_new2".}
-proc fcQPixelFormat_new3(param1: pointer): ptr cQPixelFormat {.importc: "QPixelFormat_new3".}
-proc fcQPixelFormat_new4(colorModel: cint, firstSize: uint8, secondSize: uint8, thirdSize: uint8, fourthSize: uint8, fifthSize: uint8, alphaSize: uint8, alphaUsage: cint, alphaPosition: cint, premultiplied: cint, typeInterpretation: cint, byteOrder: cint): ptr cQPixelFormat {.importc: "QPixelFormat_new4".}
-proc fcQPixelFormat_new5(colorModel: cint, firstSize: uint8, secondSize: uint8, thirdSize: uint8, fourthSize: uint8, fifthSize: uint8, alphaSize: uint8, alphaUsage: cint, alphaPosition: cint, premultiplied: cint, typeInterpretation: cint, byteOrder: cint, subEnum: uint8): ptr cQPixelFormat {.importc: "QPixelFormat_new5".}
 proc fcQPixelFormat_colorModel(self: pointer, ): cint {.importc: "QPixelFormat_colorModel".}
 proc fcQPixelFormat_channelCount(self: pointer, ): uint8 {.importc: "QPixelFormat_channelCount".}
 proc fcQPixelFormat_redSize(self: pointer, ): uint8 {.importc: "QPixelFormat_redSize".}
@@ -126,25 +121,12 @@ proc fcQPixelFormat_typeInterpretation(self: pointer, ): cint {.importc: "QPixel
 proc fcQPixelFormat_byteOrder(self: pointer, ): cint {.importc: "QPixelFormat_byteOrder".}
 proc fcQPixelFormat_yuvLayout(self: pointer, ): cint {.importc: "QPixelFormat_yuvLayout".}
 proc fcQPixelFormat_subEnum(self: pointer, ): uint8 {.importc: "QPixelFormat_subEnum".}
+proc fcQPixelFormat_new(): ptr cQPixelFormat {.importc: "QPixelFormat_new".}
+proc fcQPixelFormat_new2(colorModel: cint, firstSize: uint8, secondSize: uint8, thirdSize: uint8, fourthSize: uint8, fifthSize: uint8, alphaSize: uint8, alphaUsage: cint, alphaPosition: cint, premultiplied: cint, typeInterpretation: cint): ptr cQPixelFormat {.importc: "QPixelFormat_new2".}
+proc fcQPixelFormat_new3(param1: pointer): ptr cQPixelFormat {.importc: "QPixelFormat_new3".}
+proc fcQPixelFormat_new4(colorModel: cint, firstSize: uint8, secondSize: uint8, thirdSize: uint8, fourthSize: uint8, fifthSize: uint8, alphaSize: uint8, alphaUsage: cint, alphaPosition: cint, premultiplied: cint, typeInterpretation: cint, byteOrder: cint): ptr cQPixelFormat {.importc: "QPixelFormat_new4".}
+proc fcQPixelFormat_new5(colorModel: cint, firstSize: uint8, secondSize: uint8, thirdSize: uint8, fourthSize: uint8, fifthSize: uint8, alphaSize: uint8, alphaUsage: cint, alphaPosition: cint, premultiplied: cint, typeInterpretation: cint, byteOrder: cint, subEnum: uint8): ptr cQPixelFormat {.importc: "QPixelFormat_new5".}
 proc fcQPixelFormat_delete(self: pointer) {.importc: "QPixelFormat_delete".}
-
-
-func init*(T: type gen_qpixelformat_types.QPixelFormat, h: ptr cQPixelFormat): gen_qpixelformat_types.QPixelFormat =
-  T(h: h)
-proc create*(T: type gen_qpixelformat_types.QPixelFormat, ): gen_qpixelformat_types.QPixelFormat =
-  gen_qpixelformat_types.QPixelFormat.init(fcQPixelFormat_new())
-
-proc create*(T: type gen_qpixelformat_types.QPixelFormat, colorModel: cint, firstSize: uint8, secondSize: uint8, thirdSize: uint8, fourthSize: uint8, fifthSize: uint8, alphaSize: uint8, alphaUsage: cint, alphaPosition: cint, premultiplied: cint, typeInterpretation: cint): gen_qpixelformat_types.QPixelFormat =
-  gen_qpixelformat_types.QPixelFormat.init(fcQPixelFormat_new2(cint(colorModel), firstSize, secondSize, thirdSize, fourthSize, fifthSize, alphaSize, cint(alphaUsage), cint(alphaPosition), cint(premultiplied), cint(typeInterpretation)))
-
-proc create*(T: type gen_qpixelformat_types.QPixelFormat, param1: gen_qpixelformat_types.QPixelFormat): gen_qpixelformat_types.QPixelFormat =
-  gen_qpixelformat_types.QPixelFormat.init(fcQPixelFormat_new3(param1.h))
-
-proc create*(T: type gen_qpixelformat_types.QPixelFormat, colorModel: cint, firstSize: uint8, secondSize: uint8, thirdSize: uint8, fourthSize: uint8, fifthSize: uint8, alphaSize: uint8, alphaUsage: cint, alphaPosition: cint, premultiplied: cint, typeInterpretation: cint, byteOrder: cint): gen_qpixelformat_types.QPixelFormat =
-  gen_qpixelformat_types.QPixelFormat.init(fcQPixelFormat_new4(cint(colorModel), firstSize, secondSize, thirdSize, fourthSize, fifthSize, alphaSize, cint(alphaUsage), cint(alphaPosition), cint(premultiplied), cint(typeInterpretation), cint(byteOrder)))
-
-proc create*(T: type gen_qpixelformat_types.QPixelFormat, colorModel: cint, firstSize: uint8, secondSize: uint8, thirdSize: uint8, fourthSize: uint8, fifthSize: uint8, alphaSize: uint8, alphaUsage: cint, alphaPosition: cint, premultiplied: cint, typeInterpretation: cint, byteOrder: cint, subEnum: uint8): gen_qpixelformat_types.QPixelFormat =
-  gen_qpixelformat_types.QPixelFormat.init(fcQPixelFormat_new5(cint(colorModel), firstSize, secondSize, thirdSize, fourthSize, fifthSize, alphaSize, cint(alphaUsage), cint(alphaPosition), cint(premultiplied), cint(typeInterpretation), cint(byteOrder), subEnum))
 
 proc colorModel*(self: gen_qpixelformat_types.QPixelFormat, ): cint =
   cint(fcQPixelFormat_colorModel(self.h))
@@ -211,6 +193,25 @@ proc yuvLayout*(self: gen_qpixelformat_types.QPixelFormat, ): cint =
 
 proc subEnum*(self: gen_qpixelformat_types.QPixelFormat, ): uint8 =
   fcQPixelFormat_subEnum(self.h)
+
+proc create*(T: type gen_qpixelformat_types.QPixelFormat): gen_qpixelformat_types.QPixelFormat =
+  gen_qpixelformat_types.QPixelFormat(h: fcQPixelFormat_new())
+
+proc create*(T: type gen_qpixelformat_types.QPixelFormat,
+    colorModel: cint, firstSize: uint8, secondSize: uint8, thirdSize: uint8, fourthSize: uint8, fifthSize: uint8, alphaSize: uint8, alphaUsage: cint, alphaPosition: cint, premultiplied: cint, typeInterpretation: cint): gen_qpixelformat_types.QPixelFormat =
+  gen_qpixelformat_types.QPixelFormat(h: fcQPixelFormat_new2(cint(colorModel), firstSize, secondSize, thirdSize, fourthSize, fifthSize, alphaSize, cint(alphaUsage), cint(alphaPosition), cint(premultiplied), cint(typeInterpretation)))
+
+proc create*(T: type gen_qpixelformat_types.QPixelFormat,
+    param1: gen_qpixelformat_types.QPixelFormat): gen_qpixelformat_types.QPixelFormat =
+  gen_qpixelformat_types.QPixelFormat(h: fcQPixelFormat_new3(param1.h))
+
+proc create*(T: type gen_qpixelformat_types.QPixelFormat,
+    colorModel: cint, firstSize: uint8, secondSize: uint8, thirdSize: uint8, fourthSize: uint8, fifthSize: uint8, alphaSize: uint8, alphaUsage: cint, alphaPosition: cint, premultiplied: cint, typeInterpretation: cint, byteOrder: cint): gen_qpixelformat_types.QPixelFormat =
+  gen_qpixelformat_types.QPixelFormat(h: fcQPixelFormat_new4(cint(colorModel), firstSize, secondSize, thirdSize, fourthSize, fifthSize, alphaSize, cint(alphaUsage), cint(alphaPosition), cint(premultiplied), cint(typeInterpretation), cint(byteOrder)))
+
+proc create*(T: type gen_qpixelformat_types.QPixelFormat,
+    colorModel: cint, firstSize: uint8, secondSize: uint8, thirdSize: uint8, fourthSize: uint8, fifthSize: uint8, alphaSize: uint8, alphaUsage: cint, alphaPosition: cint, premultiplied: cint, typeInterpretation: cint, byteOrder: cint, subEnum: uint8): gen_qpixelformat_types.QPixelFormat =
+  gen_qpixelformat_types.QPixelFormat(h: fcQPixelFormat_new5(cint(colorModel), firstSize, secondSize, thirdSize, fourthSize, fifthSize, alphaSize, cint(alphaUsage), cint(alphaPosition), cint(premultiplied), cint(typeInterpretation), cint(byteOrder), subEnum))
 
 proc delete*(self: gen_qpixelformat_types.QPixelFormat) =
   fcQPixelFormat_delete(self.h)

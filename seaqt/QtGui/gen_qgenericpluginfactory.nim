@@ -48,9 +48,6 @@ proc fcQGenericPluginFactory_keys(): struct_miqt_array {.importc: "QGenericPlugi
 proc fcQGenericPluginFactory_create(param1: struct_miqt_string, param2: struct_miqt_string): pointer {.importc: "QGenericPluginFactory_create".}
 proc fcQGenericPluginFactory_delete(self: pointer) {.importc: "QGenericPluginFactory_delete".}
 
-
-func init*(T: type gen_qgenericpluginfactory_types.QGenericPluginFactory, h: ptr cQGenericPluginFactory): gen_qgenericpluginfactory_types.QGenericPluginFactory =
-  T(h: h)
 proc keys*(_: type gen_qgenericpluginfactory_types.QGenericPluginFactory, ): seq[string] =
   var v_ma = fcQGenericPluginFactory_keys()
   var vx_ret = newSeq[string](int(v_ma.len))

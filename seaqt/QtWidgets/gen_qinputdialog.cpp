@@ -50,844 +50,635 @@ void miqt_exec_callback_QInputDialog_intValueChanged(intptr_t, int);
 void miqt_exec_callback_QInputDialog_intValueSelected(intptr_t, int);
 void miqt_exec_callback_QInputDialog_doubleValueChanged(intptr_t, double);
 void miqt_exec_callback_QInputDialog_doubleValueSelected(intptr_t, double);
-QMetaObject* miqt_exec_callback_QInputDialog_metaObject(const QInputDialog*, intptr_t);
-void* miqt_exec_callback_QInputDialog_metacast(QInputDialog*, intptr_t, const char*);
-int miqt_exec_callback_QInputDialog_metacall(QInputDialog*, intptr_t, int, int, void**);
-QSize* miqt_exec_callback_QInputDialog_minimumSizeHint(const QInputDialog*, intptr_t);
-QSize* miqt_exec_callback_QInputDialog_sizeHint(const QInputDialog*, intptr_t);
-void miqt_exec_callback_QInputDialog_setVisible(QInputDialog*, intptr_t, bool);
-void miqt_exec_callback_QInputDialog_done(QInputDialog*, intptr_t, int);
-void miqt_exec_callback_QInputDialog_open(QInputDialog*, intptr_t);
-int miqt_exec_callback_QInputDialog_exec(QInputDialog*, intptr_t);
-void miqt_exec_callback_QInputDialog_accept(QInputDialog*, intptr_t);
-void miqt_exec_callback_QInputDialog_reject(QInputDialog*, intptr_t);
-void miqt_exec_callback_QInputDialog_keyPressEvent(QInputDialog*, intptr_t, QKeyEvent*);
-void miqt_exec_callback_QInputDialog_closeEvent(QInputDialog*, intptr_t, QCloseEvent*);
-void miqt_exec_callback_QInputDialog_showEvent(QInputDialog*, intptr_t, QShowEvent*);
-void miqt_exec_callback_QInputDialog_resizeEvent(QInputDialog*, intptr_t, QResizeEvent*);
-void miqt_exec_callback_QInputDialog_contextMenuEvent(QInputDialog*, intptr_t, QContextMenuEvent*);
-bool miqt_exec_callback_QInputDialog_eventFilter(QInputDialog*, intptr_t, QObject*, QEvent*);
-int miqt_exec_callback_QInputDialog_devType(const QInputDialog*, intptr_t);
-int miqt_exec_callback_QInputDialog_heightForWidth(const QInputDialog*, intptr_t, int);
-bool miqt_exec_callback_QInputDialog_hasHeightForWidth(const QInputDialog*, intptr_t);
-QPaintEngine* miqt_exec_callback_QInputDialog_paintEngine(const QInputDialog*, intptr_t);
-bool miqt_exec_callback_QInputDialog_event(QInputDialog*, intptr_t, QEvent*);
-void miqt_exec_callback_QInputDialog_mousePressEvent(QInputDialog*, intptr_t, QMouseEvent*);
-void miqt_exec_callback_QInputDialog_mouseReleaseEvent(QInputDialog*, intptr_t, QMouseEvent*);
-void miqt_exec_callback_QInputDialog_mouseDoubleClickEvent(QInputDialog*, intptr_t, QMouseEvent*);
-void miqt_exec_callback_QInputDialog_mouseMoveEvent(QInputDialog*, intptr_t, QMouseEvent*);
-void miqt_exec_callback_QInputDialog_wheelEvent(QInputDialog*, intptr_t, QWheelEvent*);
-void miqt_exec_callback_QInputDialog_keyReleaseEvent(QInputDialog*, intptr_t, QKeyEvent*);
-void miqt_exec_callback_QInputDialog_focusInEvent(QInputDialog*, intptr_t, QFocusEvent*);
-void miqt_exec_callback_QInputDialog_focusOutEvent(QInputDialog*, intptr_t, QFocusEvent*);
-void miqt_exec_callback_QInputDialog_enterEvent(QInputDialog*, intptr_t, QEnterEvent*);
-void miqt_exec_callback_QInputDialog_leaveEvent(QInputDialog*, intptr_t, QEvent*);
-void miqt_exec_callback_QInputDialog_paintEvent(QInputDialog*, intptr_t, QPaintEvent*);
-void miqt_exec_callback_QInputDialog_moveEvent(QInputDialog*, intptr_t, QMoveEvent*);
-void miqt_exec_callback_QInputDialog_tabletEvent(QInputDialog*, intptr_t, QTabletEvent*);
-void miqt_exec_callback_QInputDialog_actionEvent(QInputDialog*, intptr_t, QActionEvent*);
-void miqt_exec_callback_QInputDialog_dragEnterEvent(QInputDialog*, intptr_t, QDragEnterEvent*);
-void miqt_exec_callback_QInputDialog_dragMoveEvent(QInputDialog*, intptr_t, QDragMoveEvent*);
-void miqt_exec_callback_QInputDialog_dragLeaveEvent(QInputDialog*, intptr_t, QDragLeaveEvent*);
-void miqt_exec_callback_QInputDialog_dropEvent(QInputDialog*, intptr_t, QDropEvent*);
-void miqt_exec_callback_QInputDialog_hideEvent(QInputDialog*, intptr_t, QHideEvent*);
-bool miqt_exec_callback_QInputDialog_nativeEvent(QInputDialog*, intptr_t, struct miqt_string, void*, intptr_t*);
-void miqt_exec_callback_QInputDialog_changeEvent(QInputDialog*, intptr_t, QEvent*);
-int miqt_exec_callback_QInputDialog_metric(const QInputDialog*, intptr_t, int);
-void miqt_exec_callback_QInputDialog_initPainter(const QInputDialog*, intptr_t, QPainter*);
-QPaintDevice* miqt_exec_callback_QInputDialog_redirected(const QInputDialog*, intptr_t, QPoint*);
-QPainter* miqt_exec_callback_QInputDialog_sharedPainter(const QInputDialog*, intptr_t);
-void miqt_exec_callback_QInputDialog_inputMethodEvent(QInputDialog*, intptr_t, QInputMethodEvent*);
-QVariant* miqt_exec_callback_QInputDialog_inputMethodQuery(const QInputDialog*, intptr_t, int);
-bool miqt_exec_callback_QInputDialog_focusNextPrevChild(QInputDialog*, intptr_t, bool);
-void miqt_exec_callback_QInputDialog_timerEvent(QInputDialog*, intptr_t, QTimerEvent*);
-void miqt_exec_callback_QInputDialog_childEvent(QInputDialog*, intptr_t, QChildEvent*);
-void miqt_exec_callback_QInputDialog_customEvent(QInputDialog*, intptr_t, QEvent*);
-void miqt_exec_callback_QInputDialog_connectNotify(QInputDialog*, intptr_t, QMetaMethod*);
-void miqt_exec_callback_QInputDialog_disconnectNotify(QInputDialog*, intptr_t, QMetaMethod*);
 #ifdef __cplusplus
 } /* extern C */
 #endif
 
 class VirtualQInputDialog final : public QInputDialog {
+	struct QInputDialog_VTable* vtbl;
 public:
 
-	VirtualQInputDialog(QWidget* parent): QInputDialog(parent) {};
-	VirtualQInputDialog(): QInputDialog() {};
-	VirtualQInputDialog(QWidget* parent, Qt::WindowFlags flags): QInputDialog(parent, flags) {};
+	VirtualQInputDialog(struct QInputDialog_VTable* vtbl, QWidget* parent): QInputDialog(parent), vtbl(vtbl) {};
+	VirtualQInputDialog(struct QInputDialog_VTable* vtbl): QInputDialog(), vtbl(vtbl) {};
+	VirtualQInputDialog(struct QInputDialog_VTable* vtbl, QWidget* parent, Qt::WindowFlags flags): QInputDialog(parent, flags), vtbl(vtbl) {};
 
-	virtual ~VirtualQInputDialog() override = default;
-
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__metaObject = 0;
+	virtual ~VirtualQInputDialog() override { if(vtbl->destructor) vtbl->destructor(vtbl, this); }
 
 	// Subclass to allow providing a Go implementation
 	virtual const QMetaObject* metaObject() const override {
-		if (handle__metaObject == 0) {
+		if (vtbl->metaObject == 0) {
 			return QInputDialog::metaObject();
 		}
-		
 
-		QMetaObject* callback_return_value = miqt_exec_callback_QInputDialog_metaObject(this, handle__metaObject);
+
+		QMetaObject* callback_return_value = vtbl->metaObject(vtbl, this);
 
 		return callback_return_value;
 	}
 
 	friend QMetaObject* QInputDialog_virtualbase_metaObject(const void* self);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__metacast = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void* qt_metacast(const char* param1) override {
-		if (handle__metacast == 0) {
+		if (vtbl->metacast == 0) {
 			return QInputDialog::qt_metacast(param1);
 		}
-		
+
 		const char* sigval1 = (const char*) param1;
 
-		void* callback_return_value = miqt_exec_callback_QInputDialog_metacast(this, handle__metacast, sigval1);
+		void* callback_return_value = vtbl->metacast(vtbl, this, sigval1);
 
 		return callback_return_value;
 	}
 
 	friend void* QInputDialog_virtualbase_metacast(void* self, const char* param1);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__metacall = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual int qt_metacall(QMetaObject::Call param1, int param2, void** param3) override {
-		if (handle__metacall == 0) {
+		if (vtbl->metacall == 0) {
 			return QInputDialog::qt_metacall(param1, param2, param3);
 		}
-		
+
 		QMetaObject::Call param1_ret = param1;
 		int sigval1 = static_cast<int>(param1_ret);
 		int sigval2 = param2;
 		void** sigval3 = param3;
 
-		int callback_return_value = miqt_exec_callback_QInputDialog_metacall(this, handle__metacall, sigval1, sigval2, sigval3);
+		int callback_return_value = vtbl->metacall(vtbl, this, sigval1, sigval2, sigval3);
 
 		return static_cast<int>(callback_return_value);
 	}
 
 	friend int QInputDialog_virtualbase_metacall(void* self, int param1, int param2, void** param3);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__minimumSizeHint = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual QSize minimumSizeHint() const override {
-		if (handle__minimumSizeHint == 0) {
+		if (vtbl->minimumSizeHint == 0) {
 			return QInputDialog::minimumSizeHint();
 		}
-		
 
-		QSize* callback_return_value = miqt_exec_callback_QInputDialog_minimumSizeHint(this, handle__minimumSizeHint);
+
+		QSize* callback_return_value = vtbl->minimumSizeHint(vtbl, this);
 
 		return *callback_return_value;
 	}
 
 	friend QSize* QInputDialog_virtualbase_minimumSizeHint(const void* self);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__sizeHint = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual QSize sizeHint() const override {
-		if (handle__sizeHint == 0) {
+		if (vtbl->sizeHint == 0) {
 			return QInputDialog::sizeHint();
 		}
-		
 
-		QSize* callback_return_value = miqt_exec_callback_QInputDialog_sizeHint(this, handle__sizeHint);
+
+		QSize* callback_return_value = vtbl->sizeHint(vtbl, this);
 
 		return *callback_return_value;
 	}
 
 	friend QSize* QInputDialog_virtualbase_sizeHint(const void* self);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__setVisible = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void setVisible(bool visible) override {
-		if (handle__setVisible == 0) {
+		if (vtbl->setVisible == 0) {
 			QInputDialog::setVisible(visible);
 			return;
 		}
-		
+
 		bool sigval1 = visible;
 
-		miqt_exec_callback_QInputDialog_setVisible(this, handle__setVisible, sigval1);
+		vtbl->setVisible(vtbl, this, sigval1);
 
-		
 	}
 
 	friend void QInputDialog_virtualbase_setVisible(void* self, bool visible);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__done = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void done(int result) override {
-		if (handle__done == 0) {
+		if (vtbl->done == 0) {
 			QInputDialog::done(result);
 			return;
 		}
-		
+
 		int sigval1 = result;
 
-		miqt_exec_callback_QInputDialog_done(this, handle__done, sigval1);
+		vtbl->done(vtbl, this, sigval1);
 
-		
 	}
 
 	friend void QInputDialog_virtualbase_done(void* self, int result);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__open = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void open() override {
-		if (handle__open == 0) {
+		if (vtbl->open == 0) {
 			QInputDialog::open();
 			return;
 		}
-		
 
-		miqt_exec_callback_QInputDialog_open(this, handle__open);
 
-		
+		vtbl->open(vtbl, this);
+
 	}
 
 	friend void QInputDialog_virtualbase_open(void* self);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__exec = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual int exec() override {
-		if (handle__exec == 0) {
+		if (vtbl->exec == 0) {
 			return QInputDialog::exec();
 		}
-		
 
-		int callback_return_value = miqt_exec_callback_QInputDialog_exec(this, handle__exec);
+
+		int callback_return_value = vtbl->exec(vtbl, this);
 
 		return static_cast<int>(callback_return_value);
 	}
 
 	friend int QInputDialog_virtualbase_exec(void* self);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__accept = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void accept() override {
-		if (handle__accept == 0) {
+		if (vtbl->accept == 0) {
 			QInputDialog::accept();
 			return;
 		}
-		
 
-		miqt_exec_callback_QInputDialog_accept(this, handle__accept);
 
-		
+		vtbl->accept(vtbl, this);
+
 	}
 
 	friend void QInputDialog_virtualbase_accept(void* self);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__reject = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void reject() override {
-		if (handle__reject == 0) {
+		if (vtbl->reject == 0) {
 			QInputDialog::reject();
 			return;
 		}
-		
 
-		miqt_exec_callback_QInputDialog_reject(this, handle__reject);
 
-		
+		vtbl->reject(vtbl, this);
+
 	}
 
 	friend void QInputDialog_virtualbase_reject(void* self);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__keyPressEvent = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void keyPressEvent(QKeyEvent* param1) override {
-		if (handle__keyPressEvent == 0) {
+		if (vtbl->keyPressEvent == 0) {
 			QInputDialog::keyPressEvent(param1);
 			return;
 		}
-		
+
 		QKeyEvent* sigval1 = param1;
 
-		miqt_exec_callback_QInputDialog_keyPressEvent(this, handle__keyPressEvent, sigval1);
+		vtbl->keyPressEvent(vtbl, this, sigval1);
 
-		
 	}
 
 	friend void QInputDialog_virtualbase_keyPressEvent(void* self, QKeyEvent* param1);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__closeEvent = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void closeEvent(QCloseEvent* param1) override {
-		if (handle__closeEvent == 0) {
+		if (vtbl->closeEvent == 0) {
 			QInputDialog::closeEvent(param1);
 			return;
 		}
-		
+
 		QCloseEvent* sigval1 = param1;
 
-		miqt_exec_callback_QInputDialog_closeEvent(this, handle__closeEvent, sigval1);
+		vtbl->closeEvent(vtbl, this, sigval1);
 
-		
 	}
 
 	friend void QInputDialog_virtualbase_closeEvent(void* self, QCloseEvent* param1);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__showEvent = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void showEvent(QShowEvent* param1) override {
-		if (handle__showEvent == 0) {
+		if (vtbl->showEvent == 0) {
 			QInputDialog::showEvent(param1);
 			return;
 		}
-		
+
 		QShowEvent* sigval1 = param1;
 
-		miqt_exec_callback_QInputDialog_showEvent(this, handle__showEvent, sigval1);
+		vtbl->showEvent(vtbl, this, sigval1);
 
-		
 	}
 
 	friend void QInputDialog_virtualbase_showEvent(void* self, QShowEvent* param1);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__resizeEvent = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void resizeEvent(QResizeEvent* param1) override {
-		if (handle__resizeEvent == 0) {
+		if (vtbl->resizeEvent == 0) {
 			QInputDialog::resizeEvent(param1);
 			return;
 		}
-		
+
 		QResizeEvent* sigval1 = param1;
 
-		miqt_exec_callback_QInputDialog_resizeEvent(this, handle__resizeEvent, sigval1);
+		vtbl->resizeEvent(vtbl, this, sigval1);
 
-		
 	}
 
 	friend void QInputDialog_virtualbase_resizeEvent(void* self, QResizeEvent* param1);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__contextMenuEvent = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void contextMenuEvent(QContextMenuEvent* param1) override {
-		if (handle__contextMenuEvent == 0) {
+		if (vtbl->contextMenuEvent == 0) {
 			QInputDialog::contextMenuEvent(param1);
 			return;
 		}
-		
+
 		QContextMenuEvent* sigval1 = param1;
 
-		miqt_exec_callback_QInputDialog_contextMenuEvent(this, handle__contextMenuEvent, sigval1);
+		vtbl->contextMenuEvent(vtbl, this, sigval1);
 
-		
 	}
 
 	friend void QInputDialog_virtualbase_contextMenuEvent(void* self, QContextMenuEvent* param1);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__eventFilter = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual bool eventFilter(QObject* param1, QEvent* param2) override {
-		if (handle__eventFilter == 0) {
+		if (vtbl->eventFilter == 0) {
 			return QInputDialog::eventFilter(param1, param2);
 		}
-		
+
 		QObject* sigval1 = param1;
 		QEvent* sigval2 = param2;
 
-		bool callback_return_value = miqt_exec_callback_QInputDialog_eventFilter(this, handle__eventFilter, sigval1, sigval2);
+		bool callback_return_value = vtbl->eventFilter(vtbl, this, sigval1, sigval2);
 
 		return callback_return_value;
 	}
 
 	friend bool QInputDialog_virtualbase_eventFilter(void* self, QObject* param1, QEvent* param2);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__devType = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual int devType() const override {
-		if (handle__devType == 0) {
+		if (vtbl->devType == 0) {
 			return QInputDialog::devType();
 		}
-		
 
-		int callback_return_value = miqt_exec_callback_QInputDialog_devType(this, handle__devType);
+
+		int callback_return_value = vtbl->devType(vtbl, this);
 
 		return static_cast<int>(callback_return_value);
 	}
 
 	friend int QInputDialog_virtualbase_devType(const void* self);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__heightForWidth = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual int heightForWidth(int param1) const override {
-		if (handle__heightForWidth == 0) {
+		if (vtbl->heightForWidth == 0) {
 			return QInputDialog::heightForWidth(param1);
 		}
-		
+
 		int sigval1 = param1;
 
-		int callback_return_value = miqt_exec_callback_QInputDialog_heightForWidth(this, handle__heightForWidth, sigval1);
+		int callback_return_value = vtbl->heightForWidth(vtbl, this, sigval1);
 
 		return static_cast<int>(callback_return_value);
 	}
 
 	friend int QInputDialog_virtualbase_heightForWidth(const void* self, int param1);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__hasHeightForWidth = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual bool hasHeightForWidth() const override {
-		if (handle__hasHeightForWidth == 0) {
+		if (vtbl->hasHeightForWidth == 0) {
 			return QInputDialog::hasHeightForWidth();
 		}
-		
 
-		bool callback_return_value = miqt_exec_callback_QInputDialog_hasHeightForWidth(this, handle__hasHeightForWidth);
+
+		bool callback_return_value = vtbl->hasHeightForWidth(vtbl, this);
 
 		return callback_return_value;
 	}
 
 	friend bool QInputDialog_virtualbase_hasHeightForWidth(const void* self);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__paintEngine = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual QPaintEngine* paintEngine() const override {
-		if (handle__paintEngine == 0) {
+		if (vtbl->paintEngine == 0) {
 			return QInputDialog::paintEngine();
 		}
-		
 
-		QPaintEngine* callback_return_value = miqt_exec_callback_QInputDialog_paintEngine(this, handle__paintEngine);
+
+		QPaintEngine* callback_return_value = vtbl->paintEngine(vtbl, this);
 
 		return callback_return_value;
 	}
 
 	friend QPaintEngine* QInputDialog_virtualbase_paintEngine(const void* self);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__event = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual bool event(QEvent* event) override {
-		if (handle__event == 0) {
+		if (vtbl->event == 0) {
 			return QInputDialog::event(event);
 		}
-		
+
 		QEvent* sigval1 = event;
 
-		bool callback_return_value = miqt_exec_callback_QInputDialog_event(this, handle__event, sigval1);
+		bool callback_return_value = vtbl->event(vtbl, this, sigval1);
 
 		return callback_return_value;
 	}
 
 	friend bool QInputDialog_virtualbase_event(void* self, QEvent* event);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__mousePressEvent = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void mousePressEvent(QMouseEvent* event) override {
-		if (handle__mousePressEvent == 0) {
+		if (vtbl->mousePressEvent == 0) {
 			QInputDialog::mousePressEvent(event);
 			return;
 		}
-		
+
 		QMouseEvent* sigval1 = event;
 
-		miqt_exec_callback_QInputDialog_mousePressEvent(this, handle__mousePressEvent, sigval1);
+		vtbl->mousePressEvent(vtbl, this, sigval1);
 
-		
 	}
 
 	friend void QInputDialog_virtualbase_mousePressEvent(void* self, QMouseEvent* event);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__mouseReleaseEvent = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void mouseReleaseEvent(QMouseEvent* event) override {
-		if (handle__mouseReleaseEvent == 0) {
+		if (vtbl->mouseReleaseEvent == 0) {
 			QInputDialog::mouseReleaseEvent(event);
 			return;
 		}
-		
+
 		QMouseEvent* sigval1 = event;
 
-		miqt_exec_callback_QInputDialog_mouseReleaseEvent(this, handle__mouseReleaseEvent, sigval1);
+		vtbl->mouseReleaseEvent(vtbl, this, sigval1);
 
-		
 	}
 
 	friend void QInputDialog_virtualbase_mouseReleaseEvent(void* self, QMouseEvent* event);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__mouseDoubleClickEvent = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void mouseDoubleClickEvent(QMouseEvent* event) override {
-		if (handle__mouseDoubleClickEvent == 0) {
+		if (vtbl->mouseDoubleClickEvent == 0) {
 			QInputDialog::mouseDoubleClickEvent(event);
 			return;
 		}
-		
+
 		QMouseEvent* sigval1 = event;
 
-		miqt_exec_callback_QInputDialog_mouseDoubleClickEvent(this, handle__mouseDoubleClickEvent, sigval1);
+		vtbl->mouseDoubleClickEvent(vtbl, this, sigval1);
 
-		
 	}
 
 	friend void QInputDialog_virtualbase_mouseDoubleClickEvent(void* self, QMouseEvent* event);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__mouseMoveEvent = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void mouseMoveEvent(QMouseEvent* event) override {
-		if (handle__mouseMoveEvent == 0) {
+		if (vtbl->mouseMoveEvent == 0) {
 			QInputDialog::mouseMoveEvent(event);
 			return;
 		}
-		
+
 		QMouseEvent* sigval1 = event;
 
-		miqt_exec_callback_QInputDialog_mouseMoveEvent(this, handle__mouseMoveEvent, sigval1);
+		vtbl->mouseMoveEvent(vtbl, this, sigval1);
 
-		
 	}
 
 	friend void QInputDialog_virtualbase_mouseMoveEvent(void* self, QMouseEvent* event);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__wheelEvent = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void wheelEvent(QWheelEvent* event) override {
-		if (handle__wheelEvent == 0) {
+		if (vtbl->wheelEvent == 0) {
 			QInputDialog::wheelEvent(event);
 			return;
 		}
-		
+
 		QWheelEvent* sigval1 = event;
 
-		miqt_exec_callback_QInputDialog_wheelEvent(this, handle__wheelEvent, sigval1);
+		vtbl->wheelEvent(vtbl, this, sigval1);
 
-		
 	}
 
 	friend void QInputDialog_virtualbase_wheelEvent(void* self, QWheelEvent* event);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__keyReleaseEvent = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void keyReleaseEvent(QKeyEvent* event) override {
-		if (handle__keyReleaseEvent == 0) {
+		if (vtbl->keyReleaseEvent == 0) {
 			QInputDialog::keyReleaseEvent(event);
 			return;
 		}
-		
+
 		QKeyEvent* sigval1 = event;
 
-		miqt_exec_callback_QInputDialog_keyReleaseEvent(this, handle__keyReleaseEvent, sigval1);
+		vtbl->keyReleaseEvent(vtbl, this, sigval1);
 
-		
 	}
 
 	friend void QInputDialog_virtualbase_keyReleaseEvent(void* self, QKeyEvent* event);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__focusInEvent = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void focusInEvent(QFocusEvent* event) override {
-		if (handle__focusInEvent == 0) {
+		if (vtbl->focusInEvent == 0) {
 			QInputDialog::focusInEvent(event);
 			return;
 		}
-		
+
 		QFocusEvent* sigval1 = event;
 
-		miqt_exec_callback_QInputDialog_focusInEvent(this, handle__focusInEvent, sigval1);
+		vtbl->focusInEvent(vtbl, this, sigval1);
 
-		
 	}
 
 	friend void QInputDialog_virtualbase_focusInEvent(void* self, QFocusEvent* event);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__focusOutEvent = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void focusOutEvent(QFocusEvent* event) override {
-		if (handle__focusOutEvent == 0) {
+		if (vtbl->focusOutEvent == 0) {
 			QInputDialog::focusOutEvent(event);
 			return;
 		}
-		
+
 		QFocusEvent* sigval1 = event;
 
-		miqt_exec_callback_QInputDialog_focusOutEvent(this, handle__focusOutEvent, sigval1);
+		vtbl->focusOutEvent(vtbl, this, sigval1);
 
-		
 	}
 
 	friend void QInputDialog_virtualbase_focusOutEvent(void* self, QFocusEvent* event);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__enterEvent = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void enterEvent(QEnterEvent* event) override {
-		if (handle__enterEvent == 0) {
+		if (vtbl->enterEvent == 0) {
 			QInputDialog::enterEvent(event);
 			return;
 		}
-		
+
 		QEnterEvent* sigval1 = event;
 
-		miqt_exec_callback_QInputDialog_enterEvent(this, handle__enterEvent, sigval1);
+		vtbl->enterEvent(vtbl, this, sigval1);
 
-		
 	}
 
 	friend void QInputDialog_virtualbase_enterEvent(void* self, QEnterEvent* event);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__leaveEvent = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void leaveEvent(QEvent* event) override {
-		if (handle__leaveEvent == 0) {
+		if (vtbl->leaveEvent == 0) {
 			QInputDialog::leaveEvent(event);
 			return;
 		}
-		
+
 		QEvent* sigval1 = event;
 
-		miqt_exec_callback_QInputDialog_leaveEvent(this, handle__leaveEvent, sigval1);
+		vtbl->leaveEvent(vtbl, this, sigval1);
 
-		
 	}
 
 	friend void QInputDialog_virtualbase_leaveEvent(void* self, QEvent* event);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__paintEvent = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void paintEvent(QPaintEvent* event) override {
-		if (handle__paintEvent == 0) {
+		if (vtbl->paintEvent == 0) {
 			QInputDialog::paintEvent(event);
 			return;
 		}
-		
+
 		QPaintEvent* sigval1 = event;
 
-		miqt_exec_callback_QInputDialog_paintEvent(this, handle__paintEvent, sigval1);
+		vtbl->paintEvent(vtbl, this, sigval1);
 
-		
 	}
 
 	friend void QInputDialog_virtualbase_paintEvent(void* self, QPaintEvent* event);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__moveEvent = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void moveEvent(QMoveEvent* event) override {
-		if (handle__moveEvent == 0) {
+		if (vtbl->moveEvent == 0) {
 			QInputDialog::moveEvent(event);
 			return;
 		}
-		
+
 		QMoveEvent* sigval1 = event;
 
-		miqt_exec_callback_QInputDialog_moveEvent(this, handle__moveEvent, sigval1);
+		vtbl->moveEvent(vtbl, this, sigval1);
 
-		
 	}
 
 	friend void QInputDialog_virtualbase_moveEvent(void* self, QMoveEvent* event);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__tabletEvent = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void tabletEvent(QTabletEvent* event) override {
-		if (handle__tabletEvent == 0) {
+		if (vtbl->tabletEvent == 0) {
 			QInputDialog::tabletEvent(event);
 			return;
 		}
-		
+
 		QTabletEvent* sigval1 = event;
 
-		miqt_exec_callback_QInputDialog_tabletEvent(this, handle__tabletEvent, sigval1);
+		vtbl->tabletEvent(vtbl, this, sigval1);
 
-		
 	}
 
 	friend void QInputDialog_virtualbase_tabletEvent(void* self, QTabletEvent* event);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__actionEvent = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void actionEvent(QActionEvent* event) override {
-		if (handle__actionEvent == 0) {
+		if (vtbl->actionEvent == 0) {
 			QInputDialog::actionEvent(event);
 			return;
 		}
-		
+
 		QActionEvent* sigval1 = event;
 
-		miqt_exec_callback_QInputDialog_actionEvent(this, handle__actionEvent, sigval1);
+		vtbl->actionEvent(vtbl, this, sigval1);
 
-		
 	}
 
 	friend void QInputDialog_virtualbase_actionEvent(void* self, QActionEvent* event);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__dragEnterEvent = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void dragEnterEvent(QDragEnterEvent* event) override {
-		if (handle__dragEnterEvent == 0) {
+		if (vtbl->dragEnterEvent == 0) {
 			QInputDialog::dragEnterEvent(event);
 			return;
 		}
-		
+
 		QDragEnterEvent* sigval1 = event;
 
-		miqt_exec_callback_QInputDialog_dragEnterEvent(this, handle__dragEnterEvent, sigval1);
+		vtbl->dragEnterEvent(vtbl, this, sigval1);
 
-		
 	}
 
 	friend void QInputDialog_virtualbase_dragEnterEvent(void* self, QDragEnterEvent* event);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__dragMoveEvent = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void dragMoveEvent(QDragMoveEvent* event) override {
-		if (handle__dragMoveEvent == 0) {
+		if (vtbl->dragMoveEvent == 0) {
 			QInputDialog::dragMoveEvent(event);
 			return;
 		}
-		
+
 		QDragMoveEvent* sigval1 = event;
 
-		miqt_exec_callback_QInputDialog_dragMoveEvent(this, handle__dragMoveEvent, sigval1);
+		vtbl->dragMoveEvent(vtbl, this, sigval1);
 
-		
 	}
 
 	friend void QInputDialog_virtualbase_dragMoveEvent(void* self, QDragMoveEvent* event);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__dragLeaveEvent = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void dragLeaveEvent(QDragLeaveEvent* event) override {
-		if (handle__dragLeaveEvent == 0) {
+		if (vtbl->dragLeaveEvent == 0) {
 			QInputDialog::dragLeaveEvent(event);
 			return;
 		}
-		
+
 		QDragLeaveEvent* sigval1 = event;
 
-		miqt_exec_callback_QInputDialog_dragLeaveEvent(this, handle__dragLeaveEvent, sigval1);
+		vtbl->dragLeaveEvent(vtbl, this, sigval1);
 
-		
 	}
 
 	friend void QInputDialog_virtualbase_dragLeaveEvent(void* self, QDragLeaveEvent* event);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__dropEvent = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void dropEvent(QDropEvent* event) override {
-		if (handle__dropEvent == 0) {
+		if (vtbl->dropEvent == 0) {
 			QInputDialog::dropEvent(event);
 			return;
 		}
-		
+
 		QDropEvent* sigval1 = event;
 
-		miqt_exec_callback_QInputDialog_dropEvent(this, handle__dropEvent, sigval1);
+		vtbl->dropEvent(vtbl, this, sigval1);
 
-		
 	}
 
 	friend void QInputDialog_virtualbase_dropEvent(void* self, QDropEvent* event);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__hideEvent = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void hideEvent(QHideEvent* event) override {
-		if (handle__hideEvent == 0) {
+		if (vtbl->hideEvent == 0) {
 			QInputDialog::hideEvent(event);
 			return;
 		}
-		
+
 		QHideEvent* sigval1 = event;
 
-		miqt_exec_callback_QInputDialog_hideEvent(this, handle__hideEvent, sigval1);
+		vtbl->hideEvent(vtbl, this, sigval1);
 
-		
 	}
 
 	friend void QInputDialog_virtualbase_hideEvent(void* self, QHideEvent* event);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__nativeEvent = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual bool nativeEvent(const QByteArray& eventType, void* message, qintptr* result) override {
-		if (handle__nativeEvent == 0) {
+		if (vtbl->nativeEvent == 0) {
 			return QInputDialog::nativeEvent(eventType, message, result);
 		}
-		
+
 		const QByteArray eventType_qb = eventType;
 		struct miqt_string eventType_ms;
 		eventType_ms.len = eventType_qb.length();
@@ -898,256 +689,209 @@ public:
 		qintptr* result_ret = result;
 		intptr_t* sigval3 = (intptr_t*)(result_ret);
 
-		bool callback_return_value = miqt_exec_callback_QInputDialog_nativeEvent(this, handle__nativeEvent, sigval1, sigval2, sigval3);
+		bool callback_return_value = vtbl->nativeEvent(vtbl, this, sigval1, sigval2, sigval3);
 
 		return callback_return_value;
 	}
 
 	friend bool QInputDialog_virtualbase_nativeEvent(void* self, struct miqt_string eventType, void* message, intptr_t* result);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__changeEvent = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void changeEvent(QEvent* param1) override {
-		if (handle__changeEvent == 0) {
+		if (vtbl->changeEvent == 0) {
 			QInputDialog::changeEvent(param1);
 			return;
 		}
-		
+
 		QEvent* sigval1 = param1;
 
-		miqt_exec_callback_QInputDialog_changeEvent(this, handle__changeEvent, sigval1);
+		vtbl->changeEvent(vtbl, this, sigval1);
 
-		
 	}
 
 	friend void QInputDialog_virtualbase_changeEvent(void* self, QEvent* param1);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__metric = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual int metric(QPaintDevice::PaintDeviceMetric param1) const override {
-		if (handle__metric == 0) {
+		if (vtbl->metric == 0) {
 			return QInputDialog::metric(param1);
 		}
-		
+
 		QPaintDevice::PaintDeviceMetric param1_ret = param1;
 		int sigval1 = static_cast<int>(param1_ret);
 
-		int callback_return_value = miqt_exec_callback_QInputDialog_metric(this, handle__metric, sigval1);
+		int callback_return_value = vtbl->metric(vtbl, this, sigval1);
 
 		return static_cast<int>(callback_return_value);
 	}
 
 	friend int QInputDialog_virtualbase_metric(const void* self, int param1);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__initPainter = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void initPainter(QPainter* painter) const override {
-		if (handle__initPainter == 0) {
+		if (vtbl->initPainter == 0) {
 			QInputDialog::initPainter(painter);
 			return;
 		}
-		
+
 		QPainter* sigval1 = painter;
 
-		miqt_exec_callback_QInputDialog_initPainter(this, handle__initPainter, sigval1);
+		vtbl->initPainter(vtbl, this, sigval1);
 
-		
 	}
 
 	friend void QInputDialog_virtualbase_initPainter(const void* self, QPainter* painter);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__redirected = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual QPaintDevice* redirected(QPoint* offset) const override {
-		if (handle__redirected == 0) {
+		if (vtbl->redirected == 0) {
 			return QInputDialog::redirected(offset);
 		}
-		
+
 		QPoint* sigval1 = offset;
 
-		QPaintDevice* callback_return_value = miqt_exec_callback_QInputDialog_redirected(this, handle__redirected, sigval1);
+		QPaintDevice* callback_return_value = vtbl->redirected(vtbl, this, sigval1);
 
 		return callback_return_value;
 	}
 
 	friend QPaintDevice* QInputDialog_virtualbase_redirected(const void* self, QPoint* offset);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__sharedPainter = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual QPainter* sharedPainter() const override {
-		if (handle__sharedPainter == 0) {
+		if (vtbl->sharedPainter == 0) {
 			return QInputDialog::sharedPainter();
 		}
-		
 
-		QPainter* callback_return_value = miqt_exec_callback_QInputDialog_sharedPainter(this, handle__sharedPainter);
+
+		QPainter* callback_return_value = vtbl->sharedPainter(vtbl, this);
 
 		return callback_return_value;
 	}
 
 	friend QPainter* QInputDialog_virtualbase_sharedPainter(const void* self);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__inputMethodEvent = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void inputMethodEvent(QInputMethodEvent* param1) override {
-		if (handle__inputMethodEvent == 0) {
+		if (vtbl->inputMethodEvent == 0) {
 			QInputDialog::inputMethodEvent(param1);
 			return;
 		}
-		
+
 		QInputMethodEvent* sigval1 = param1;
 
-		miqt_exec_callback_QInputDialog_inputMethodEvent(this, handle__inputMethodEvent, sigval1);
+		vtbl->inputMethodEvent(vtbl, this, sigval1);
 
-		
 	}
 
 	friend void QInputDialog_virtualbase_inputMethodEvent(void* self, QInputMethodEvent* param1);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__inputMethodQuery = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual QVariant inputMethodQuery(Qt::InputMethodQuery param1) const override {
-		if (handle__inputMethodQuery == 0) {
+		if (vtbl->inputMethodQuery == 0) {
 			return QInputDialog::inputMethodQuery(param1);
 		}
-		
+
 		Qt::InputMethodQuery param1_ret = param1;
 		int sigval1 = static_cast<int>(param1_ret);
 
-		QVariant* callback_return_value = miqt_exec_callback_QInputDialog_inputMethodQuery(this, handle__inputMethodQuery, sigval1);
+		QVariant* callback_return_value = vtbl->inputMethodQuery(vtbl, this, sigval1);
 
 		return *callback_return_value;
 	}
 
 	friend QVariant* QInputDialog_virtualbase_inputMethodQuery(const void* self, int param1);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__focusNextPrevChild = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual bool focusNextPrevChild(bool next) override {
-		if (handle__focusNextPrevChild == 0) {
+		if (vtbl->focusNextPrevChild == 0) {
 			return QInputDialog::focusNextPrevChild(next);
 		}
-		
+
 		bool sigval1 = next;
 
-		bool callback_return_value = miqt_exec_callback_QInputDialog_focusNextPrevChild(this, handle__focusNextPrevChild, sigval1);
+		bool callback_return_value = vtbl->focusNextPrevChild(vtbl, this, sigval1);
 
 		return callback_return_value;
 	}
 
 	friend bool QInputDialog_virtualbase_focusNextPrevChild(void* self, bool next);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__timerEvent = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void timerEvent(QTimerEvent* event) override {
-		if (handle__timerEvent == 0) {
+		if (vtbl->timerEvent == 0) {
 			QInputDialog::timerEvent(event);
 			return;
 		}
-		
+
 		QTimerEvent* sigval1 = event;
 
-		miqt_exec_callback_QInputDialog_timerEvent(this, handle__timerEvent, sigval1);
+		vtbl->timerEvent(vtbl, this, sigval1);
 
-		
 	}
 
 	friend void QInputDialog_virtualbase_timerEvent(void* self, QTimerEvent* event);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__childEvent = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void childEvent(QChildEvent* event) override {
-		if (handle__childEvent == 0) {
+		if (vtbl->childEvent == 0) {
 			QInputDialog::childEvent(event);
 			return;
 		}
-		
+
 		QChildEvent* sigval1 = event;
 
-		miqt_exec_callback_QInputDialog_childEvent(this, handle__childEvent, sigval1);
+		vtbl->childEvent(vtbl, this, sigval1);
 
-		
 	}
 
 	friend void QInputDialog_virtualbase_childEvent(void* self, QChildEvent* event);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__customEvent = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void customEvent(QEvent* event) override {
-		if (handle__customEvent == 0) {
+		if (vtbl->customEvent == 0) {
 			QInputDialog::customEvent(event);
 			return;
 		}
-		
+
 		QEvent* sigval1 = event;
 
-		miqt_exec_callback_QInputDialog_customEvent(this, handle__customEvent, sigval1);
+		vtbl->customEvent(vtbl, this, sigval1);
 
-		
 	}
 
 	friend void QInputDialog_virtualbase_customEvent(void* self, QEvent* event);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__connectNotify = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void connectNotify(const QMetaMethod& signal) override {
-		if (handle__connectNotify == 0) {
+		if (vtbl->connectNotify == 0) {
 			QInputDialog::connectNotify(signal);
 			return;
 		}
-		
+
 		const QMetaMethod& signal_ret = signal;
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
 
-		miqt_exec_callback_QInputDialog_connectNotify(this, handle__connectNotify, sigval1);
+		vtbl->connectNotify(vtbl, this, sigval1);
 
-		
 	}
 
 	friend void QInputDialog_virtualbase_connectNotify(void* self, QMetaMethod* signal);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__disconnectNotify = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void disconnectNotify(const QMetaMethod& signal) override {
-		if (handle__disconnectNotify == 0) {
+		if (vtbl->disconnectNotify == 0) {
 			QInputDialog::disconnectNotify(signal);
 			return;
 		}
-		
+
 		const QMetaMethod& signal_ret = signal;
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
 
-		miqt_exec_callback_QInputDialog_disconnectNotify(this, handle__disconnectNotify, sigval1);
+		vtbl->disconnectNotify(vtbl, this, sigval1);
 
-		
 	}
 
 	friend void QInputDialog_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
@@ -1165,16 +909,16 @@ public:
 	friend bool QInputDialog_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
 };
 
-QInputDialog* QInputDialog_new(QWidget* parent) {
-	return new VirtualQInputDialog(parent);
+QInputDialog* QInputDialog_new(struct QInputDialog_VTable* vtbl, QWidget* parent) {
+	return new VirtualQInputDialog(vtbl, parent);
 }
 
-QInputDialog* QInputDialog_new2() {
-	return new VirtualQInputDialog();
+QInputDialog* QInputDialog_new2(struct QInputDialog_VTable* vtbl) {
+	return new VirtualQInputDialog(vtbl);
 }
 
-QInputDialog* QInputDialog_new3(QWidget* parent, int flags) {
-	return new VirtualQInputDialog(parent, static_cast<Qt::WindowFlags>(flags));
+QInputDialog* QInputDialog_new3(struct QInputDialog_VTable* vtbl, QWidget* parent, int flags) {
+	return new VirtualQInputDialog(vtbl, parent, static_cast<Qt::WindowFlags>(flags));
 }
 
 void QInputDialog_virtbase(QInputDialog* src, QDialog** outptr_QDialog) {
@@ -1907,30 +1651,10 @@ double QInputDialog_getDouble10(QWidget* parent, struct miqt_string title, struc
 	return QInputDialog::getDouble(parent, title_QString, label_QString, static_cast<double>(value), static_cast<double>(minValue), static_cast<double>(maxValue), static_cast<int>(decimals), ok, static_cast<Qt::WindowFlags>(flags), static_cast<double>(step));
 }
 
-bool QInputDialog_override_virtual_metaObject(void* self, intptr_t slot) {
-	VirtualQInputDialog* self_cast = dynamic_cast<VirtualQInputDialog*>( (QInputDialog*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__metaObject = slot;
-	return true;
-}
-
 QMetaObject* QInputDialog_virtualbase_metaObject(const void* self) {
 
 	return (QMetaObject*) ( (const VirtualQInputDialog*)(self) )->QInputDialog::metaObject();
 
-}
-
-bool QInputDialog_override_virtual_metacast(void* self, intptr_t slot) {
-	VirtualQInputDialog* self_cast = dynamic_cast<VirtualQInputDialog*>( (QInputDialog*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__metacast = slot;
-	return true;
 }
 
 void* QInputDialog_virtualbase_metacast(void* self, const char* param1) {
@@ -1939,30 +1663,10 @@ void* QInputDialog_virtualbase_metacast(void* self, const char* param1) {
 
 }
 
-bool QInputDialog_override_virtual_metacall(void* self, intptr_t slot) {
-	VirtualQInputDialog* self_cast = dynamic_cast<VirtualQInputDialog*>( (QInputDialog*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__metacall = slot;
-	return true;
-}
-
 int QInputDialog_virtualbase_metacall(void* self, int param1, int param2, void** param3) {
 
 	return ( (VirtualQInputDialog*)(self) )->QInputDialog::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 
-}
-
-bool QInputDialog_override_virtual_minimumSizeHint(void* self, intptr_t slot) {
-	VirtualQInputDialog* self_cast = dynamic_cast<VirtualQInputDialog*>( (QInputDialog*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__minimumSizeHint = slot;
-	return true;
 }
 
 QSize* QInputDialog_virtualbase_minimumSizeHint(const void* self) {
@@ -1971,30 +1675,10 @@ QSize* QInputDialog_virtualbase_minimumSizeHint(const void* self) {
 
 }
 
-bool QInputDialog_override_virtual_sizeHint(void* self, intptr_t slot) {
-	VirtualQInputDialog* self_cast = dynamic_cast<VirtualQInputDialog*>( (QInputDialog*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__sizeHint = slot;
-	return true;
-}
-
 QSize* QInputDialog_virtualbase_sizeHint(const void* self) {
 
 	return new QSize(( (const VirtualQInputDialog*)(self) )->QInputDialog::sizeHint());
 
-}
-
-bool QInputDialog_override_virtual_setVisible(void* self, intptr_t slot) {
-	VirtualQInputDialog* self_cast = dynamic_cast<VirtualQInputDialog*>( (QInputDialog*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__setVisible = slot;
-	return true;
 }
 
 void QInputDialog_virtualbase_setVisible(void* self, bool visible) {
@@ -2003,30 +1687,10 @@ void QInputDialog_virtualbase_setVisible(void* self, bool visible) {
 
 }
 
-bool QInputDialog_override_virtual_done(void* self, intptr_t slot) {
-	VirtualQInputDialog* self_cast = dynamic_cast<VirtualQInputDialog*>( (QInputDialog*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__done = slot;
-	return true;
-}
-
 void QInputDialog_virtualbase_done(void* self, int result) {
 
 	( (VirtualQInputDialog*)(self) )->QInputDialog::done(static_cast<int>(result));
 
-}
-
-bool QInputDialog_override_virtual_open(void* self, intptr_t slot) {
-	VirtualQInputDialog* self_cast = dynamic_cast<VirtualQInputDialog*>( (QInputDialog*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__open = slot;
-	return true;
 }
 
 void QInputDialog_virtualbase_open(void* self) {
@@ -2035,30 +1699,10 @@ void QInputDialog_virtualbase_open(void* self) {
 
 }
 
-bool QInputDialog_override_virtual_exec(void* self, intptr_t slot) {
-	VirtualQInputDialog* self_cast = dynamic_cast<VirtualQInputDialog*>( (QInputDialog*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__exec = slot;
-	return true;
-}
-
 int QInputDialog_virtualbase_exec(void* self) {
 
 	return ( (VirtualQInputDialog*)(self) )->QInputDialog::exec();
 
-}
-
-bool QInputDialog_override_virtual_accept(void* self, intptr_t slot) {
-	VirtualQInputDialog* self_cast = dynamic_cast<VirtualQInputDialog*>( (QInputDialog*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__accept = slot;
-	return true;
 }
 
 void QInputDialog_virtualbase_accept(void* self) {
@@ -2067,30 +1711,10 @@ void QInputDialog_virtualbase_accept(void* self) {
 
 }
 
-bool QInputDialog_override_virtual_reject(void* self, intptr_t slot) {
-	VirtualQInputDialog* self_cast = dynamic_cast<VirtualQInputDialog*>( (QInputDialog*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__reject = slot;
-	return true;
-}
-
 void QInputDialog_virtualbase_reject(void* self) {
 
 	( (VirtualQInputDialog*)(self) )->QInputDialog::reject();
 
-}
-
-bool QInputDialog_override_virtual_keyPressEvent(void* self, intptr_t slot) {
-	VirtualQInputDialog* self_cast = dynamic_cast<VirtualQInputDialog*>( (QInputDialog*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__keyPressEvent = slot;
-	return true;
 }
 
 void QInputDialog_virtualbase_keyPressEvent(void* self, QKeyEvent* param1) {
@@ -2099,30 +1723,10 @@ void QInputDialog_virtualbase_keyPressEvent(void* self, QKeyEvent* param1) {
 
 }
 
-bool QInputDialog_override_virtual_closeEvent(void* self, intptr_t slot) {
-	VirtualQInputDialog* self_cast = dynamic_cast<VirtualQInputDialog*>( (QInputDialog*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__closeEvent = slot;
-	return true;
-}
-
 void QInputDialog_virtualbase_closeEvent(void* self, QCloseEvent* param1) {
 
 	( (VirtualQInputDialog*)(self) )->QInputDialog::closeEvent(param1);
 
-}
-
-bool QInputDialog_override_virtual_showEvent(void* self, intptr_t slot) {
-	VirtualQInputDialog* self_cast = dynamic_cast<VirtualQInputDialog*>( (QInputDialog*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__showEvent = slot;
-	return true;
 }
 
 void QInputDialog_virtualbase_showEvent(void* self, QShowEvent* param1) {
@@ -2131,30 +1735,10 @@ void QInputDialog_virtualbase_showEvent(void* self, QShowEvent* param1) {
 
 }
 
-bool QInputDialog_override_virtual_resizeEvent(void* self, intptr_t slot) {
-	VirtualQInputDialog* self_cast = dynamic_cast<VirtualQInputDialog*>( (QInputDialog*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__resizeEvent = slot;
-	return true;
-}
-
 void QInputDialog_virtualbase_resizeEvent(void* self, QResizeEvent* param1) {
 
 	( (VirtualQInputDialog*)(self) )->QInputDialog::resizeEvent(param1);
 
-}
-
-bool QInputDialog_override_virtual_contextMenuEvent(void* self, intptr_t slot) {
-	VirtualQInputDialog* self_cast = dynamic_cast<VirtualQInputDialog*>( (QInputDialog*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__contextMenuEvent = slot;
-	return true;
 }
 
 void QInputDialog_virtualbase_contextMenuEvent(void* self, QContextMenuEvent* param1) {
@@ -2163,30 +1747,10 @@ void QInputDialog_virtualbase_contextMenuEvent(void* self, QContextMenuEvent* pa
 
 }
 
-bool QInputDialog_override_virtual_eventFilter(void* self, intptr_t slot) {
-	VirtualQInputDialog* self_cast = dynamic_cast<VirtualQInputDialog*>( (QInputDialog*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__eventFilter = slot;
-	return true;
-}
-
 bool QInputDialog_virtualbase_eventFilter(void* self, QObject* param1, QEvent* param2) {
 
 	return ( (VirtualQInputDialog*)(self) )->QInputDialog::eventFilter(param1, param2);
 
-}
-
-bool QInputDialog_override_virtual_devType(void* self, intptr_t slot) {
-	VirtualQInputDialog* self_cast = dynamic_cast<VirtualQInputDialog*>( (QInputDialog*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__devType = slot;
-	return true;
 }
 
 int QInputDialog_virtualbase_devType(const void* self) {
@@ -2195,30 +1759,10 @@ int QInputDialog_virtualbase_devType(const void* self) {
 
 }
 
-bool QInputDialog_override_virtual_heightForWidth(void* self, intptr_t slot) {
-	VirtualQInputDialog* self_cast = dynamic_cast<VirtualQInputDialog*>( (QInputDialog*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__heightForWidth = slot;
-	return true;
-}
-
 int QInputDialog_virtualbase_heightForWidth(const void* self, int param1) {
 
 	return ( (const VirtualQInputDialog*)(self) )->QInputDialog::heightForWidth(static_cast<int>(param1));
 
-}
-
-bool QInputDialog_override_virtual_hasHeightForWidth(void* self, intptr_t slot) {
-	VirtualQInputDialog* self_cast = dynamic_cast<VirtualQInputDialog*>( (QInputDialog*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__hasHeightForWidth = slot;
-	return true;
 }
 
 bool QInputDialog_virtualbase_hasHeightForWidth(const void* self) {
@@ -2227,30 +1771,10 @@ bool QInputDialog_virtualbase_hasHeightForWidth(const void* self) {
 
 }
 
-bool QInputDialog_override_virtual_paintEngine(void* self, intptr_t slot) {
-	VirtualQInputDialog* self_cast = dynamic_cast<VirtualQInputDialog*>( (QInputDialog*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__paintEngine = slot;
-	return true;
-}
-
 QPaintEngine* QInputDialog_virtualbase_paintEngine(const void* self) {
 
 	return ( (const VirtualQInputDialog*)(self) )->QInputDialog::paintEngine();
 
-}
-
-bool QInputDialog_override_virtual_event(void* self, intptr_t slot) {
-	VirtualQInputDialog* self_cast = dynamic_cast<VirtualQInputDialog*>( (QInputDialog*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__event = slot;
-	return true;
 }
 
 bool QInputDialog_virtualbase_event(void* self, QEvent* event) {
@@ -2259,30 +1783,10 @@ bool QInputDialog_virtualbase_event(void* self, QEvent* event) {
 
 }
 
-bool QInputDialog_override_virtual_mousePressEvent(void* self, intptr_t slot) {
-	VirtualQInputDialog* self_cast = dynamic_cast<VirtualQInputDialog*>( (QInputDialog*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__mousePressEvent = slot;
-	return true;
-}
-
 void QInputDialog_virtualbase_mousePressEvent(void* self, QMouseEvent* event) {
 
 	( (VirtualQInputDialog*)(self) )->QInputDialog::mousePressEvent(event);
 
-}
-
-bool QInputDialog_override_virtual_mouseReleaseEvent(void* self, intptr_t slot) {
-	VirtualQInputDialog* self_cast = dynamic_cast<VirtualQInputDialog*>( (QInputDialog*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__mouseReleaseEvent = slot;
-	return true;
 }
 
 void QInputDialog_virtualbase_mouseReleaseEvent(void* self, QMouseEvent* event) {
@@ -2291,30 +1795,10 @@ void QInputDialog_virtualbase_mouseReleaseEvent(void* self, QMouseEvent* event) 
 
 }
 
-bool QInputDialog_override_virtual_mouseDoubleClickEvent(void* self, intptr_t slot) {
-	VirtualQInputDialog* self_cast = dynamic_cast<VirtualQInputDialog*>( (QInputDialog*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__mouseDoubleClickEvent = slot;
-	return true;
-}
-
 void QInputDialog_virtualbase_mouseDoubleClickEvent(void* self, QMouseEvent* event) {
 
 	( (VirtualQInputDialog*)(self) )->QInputDialog::mouseDoubleClickEvent(event);
 
-}
-
-bool QInputDialog_override_virtual_mouseMoveEvent(void* self, intptr_t slot) {
-	VirtualQInputDialog* self_cast = dynamic_cast<VirtualQInputDialog*>( (QInputDialog*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__mouseMoveEvent = slot;
-	return true;
 }
 
 void QInputDialog_virtualbase_mouseMoveEvent(void* self, QMouseEvent* event) {
@@ -2323,30 +1807,10 @@ void QInputDialog_virtualbase_mouseMoveEvent(void* self, QMouseEvent* event) {
 
 }
 
-bool QInputDialog_override_virtual_wheelEvent(void* self, intptr_t slot) {
-	VirtualQInputDialog* self_cast = dynamic_cast<VirtualQInputDialog*>( (QInputDialog*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__wheelEvent = slot;
-	return true;
-}
-
 void QInputDialog_virtualbase_wheelEvent(void* self, QWheelEvent* event) {
 
 	( (VirtualQInputDialog*)(self) )->QInputDialog::wheelEvent(event);
 
-}
-
-bool QInputDialog_override_virtual_keyReleaseEvent(void* self, intptr_t slot) {
-	VirtualQInputDialog* self_cast = dynamic_cast<VirtualQInputDialog*>( (QInputDialog*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__keyReleaseEvent = slot;
-	return true;
 }
 
 void QInputDialog_virtualbase_keyReleaseEvent(void* self, QKeyEvent* event) {
@@ -2355,30 +1819,10 @@ void QInputDialog_virtualbase_keyReleaseEvent(void* self, QKeyEvent* event) {
 
 }
 
-bool QInputDialog_override_virtual_focusInEvent(void* self, intptr_t slot) {
-	VirtualQInputDialog* self_cast = dynamic_cast<VirtualQInputDialog*>( (QInputDialog*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__focusInEvent = slot;
-	return true;
-}
-
 void QInputDialog_virtualbase_focusInEvent(void* self, QFocusEvent* event) {
 
 	( (VirtualQInputDialog*)(self) )->QInputDialog::focusInEvent(event);
 
-}
-
-bool QInputDialog_override_virtual_focusOutEvent(void* self, intptr_t slot) {
-	VirtualQInputDialog* self_cast = dynamic_cast<VirtualQInputDialog*>( (QInputDialog*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__focusOutEvent = slot;
-	return true;
 }
 
 void QInputDialog_virtualbase_focusOutEvent(void* self, QFocusEvent* event) {
@@ -2387,30 +1831,10 @@ void QInputDialog_virtualbase_focusOutEvent(void* self, QFocusEvent* event) {
 
 }
 
-bool QInputDialog_override_virtual_enterEvent(void* self, intptr_t slot) {
-	VirtualQInputDialog* self_cast = dynamic_cast<VirtualQInputDialog*>( (QInputDialog*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__enterEvent = slot;
-	return true;
-}
-
 void QInputDialog_virtualbase_enterEvent(void* self, QEnterEvent* event) {
 
 	( (VirtualQInputDialog*)(self) )->QInputDialog::enterEvent(event);
 
-}
-
-bool QInputDialog_override_virtual_leaveEvent(void* self, intptr_t slot) {
-	VirtualQInputDialog* self_cast = dynamic_cast<VirtualQInputDialog*>( (QInputDialog*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__leaveEvent = slot;
-	return true;
 }
 
 void QInputDialog_virtualbase_leaveEvent(void* self, QEvent* event) {
@@ -2419,30 +1843,10 @@ void QInputDialog_virtualbase_leaveEvent(void* self, QEvent* event) {
 
 }
 
-bool QInputDialog_override_virtual_paintEvent(void* self, intptr_t slot) {
-	VirtualQInputDialog* self_cast = dynamic_cast<VirtualQInputDialog*>( (QInputDialog*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__paintEvent = slot;
-	return true;
-}
-
 void QInputDialog_virtualbase_paintEvent(void* self, QPaintEvent* event) {
 
 	( (VirtualQInputDialog*)(self) )->QInputDialog::paintEvent(event);
 
-}
-
-bool QInputDialog_override_virtual_moveEvent(void* self, intptr_t slot) {
-	VirtualQInputDialog* self_cast = dynamic_cast<VirtualQInputDialog*>( (QInputDialog*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__moveEvent = slot;
-	return true;
 }
 
 void QInputDialog_virtualbase_moveEvent(void* self, QMoveEvent* event) {
@@ -2451,30 +1855,10 @@ void QInputDialog_virtualbase_moveEvent(void* self, QMoveEvent* event) {
 
 }
 
-bool QInputDialog_override_virtual_tabletEvent(void* self, intptr_t slot) {
-	VirtualQInputDialog* self_cast = dynamic_cast<VirtualQInputDialog*>( (QInputDialog*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__tabletEvent = slot;
-	return true;
-}
-
 void QInputDialog_virtualbase_tabletEvent(void* self, QTabletEvent* event) {
 
 	( (VirtualQInputDialog*)(self) )->QInputDialog::tabletEvent(event);
 
-}
-
-bool QInputDialog_override_virtual_actionEvent(void* self, intptr_t slot) {
-	VirtualQInputDialog* self_cast = dynamic_cast<VirtualQInputDialog*>( (QInputDialog*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__actionEvent = slot;
-	return true;
 }
 
 void QInputDialog_virtualbase_actionEvent(void* self, QActionEvent* event) {
@@ -2483,30 +1867,10 @@ void QInputDialog_virtualbase_actionEvent(void* self, QActionEvent* event) {
 
 }
 
-bool QInputDialog_override_virtual_dragEnterEvent(void* self, intptr_t slot) {
-	VirtualQInputDialog* self_cast = dynamic_cast<VirtualQInputDialog*>( (QInputDialog*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__dragEnterEvent = slot;
-	return true;
-}
-
 void QInputDialog_virtualbase_dragEnterEvent(void* self, QDragEnterEvent* event) {
 
 	( (VirtualQInputDialog*)(self) )->QInputDialog::dragEnterEvent(event);
 
-}
-
-bool QInputDialog_override_virtual_dragMoveEvent(void* self, intptr_t slot) {
-	VirtualQInputDialog* self_cast = dynamic_cast<VirtualQInputDialog*>( (QInputDialog*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__dragMoveEvent = slot;
-	return true;
 }
 
 void QInputDialog_virtualbase_dragMoveEvent(void* self, QDragMoveEvent* event) {
@@ -2515,30 +1879,10 @@ void QInputDialog_virtualbase_dragMoveEvent(void* self, QDragMoveEvent* event) {
 
 }
 
-bool QInputDialog_override_virtual_dragLeaveEvent(void* self, intptr_t slot) {
-	VirtualQInputDialog* self_cast = dynamic_cast<VirtualQInputDialog*>( (QInputDialog*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__dragLeaveEvent = slot;
-	return true;
-}
-
 void QInputDialog_virtualbase_dragLeaveEvent(void* self, QDragLeaveEvent* event) {
 
 	( (VirtualQInputDialog*)(self) )->QInputDialog::dragLeaveEvent(event);
 
-}
-
-bool QInputDialog_override_virtual_dropEvent(void* self, intptr_t slot) {
-	VirtualQInputDialog* self_cast = dynamic_cast<VirtualQInputDialog*>( (QInputDialog*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__dropEvent = slot;
-	return true;
 }
 
 void QInputDialog_virtualbase_dropEvent(void* self, QDropEvent* event) {
@@ -2547,30 +1891,10 @@ void QInputDialog_virtualbase_dropEvent(void* self, QDropEvent* event) {
 
 }
 
-bool QInputDialog_override_virtual_hideEvent(void* self, intptr_t slot) {
-	VirtualQInputDialog* self_cast = dynamic_cast<VirtualQInputDialog*>( (QInputDialog*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__hideEvent = slot;
-	return true;
-}
-
 void QInputDialog_virtualbase_hideEvent(void* self, QHideEvent* event) {
 
 	( (VirtualQInputDialog*)(self) )->QInputDialog::hideEvent(event);
 
-}
-
-bool QInputDialog_override_virtual_nativeEvent(void* self, intptr_t slot) {
-	VirtualQInputDialog* self_cast = dynamic_cast<VirtualQInputDialog*>( (QInputDialog*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__nativeEvent = slot;
-	return true;
 }
 
 bool QInputDialog_virtualbase_nativeEvent(void* self, struct miqt_string eventType, void* message, intptr_t* result) {
@@ -2580,30 +1904,10 @@ bool QInputDialog_virtualbase_nativeEvent(void* self, struct miqt_string eventTy
 
 }
 
-bool QInputDialog_override_virtual_changeEvent(void* self, intptr_t slot) {
-	VirtualQInputDialog* self_cast = dynamic_cast<VirtualQInputDialog*>( (QInputDialog*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__changeEvent = slot;
-	return true;
-}
-
 void QInputDialog_virtualbase_changeEvent(void* self, QEvent* param1) {
 
 	( (VirtualQInputDialog*)(self) )->QInputDialog::changeEvent(param1);
 
-}
-
-bool QInputDialog_override_virtual_metric(void* self, intptr_t slot) {
-	VirtualQInputDialog* self_cast = dynamic_cast<VirtualQInputDialog*>( (QInputDialog*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__metric = slot;
-	return true;
 }
 
 int QInputDialog_virtualbase_metric(const void* self, int param1) {
@@ -2612,30 +1916,10 @@ int QInputDialog_virtualbase_metric(const void* self, int param1) {
 
 }
 
-bool QInputDialog_override_virtual_initPainter(void* self, intptr_t slot) {
-	VirtualQInputDialog* self_cast = dynamic_cast<VirtualQInputDialog*>( (QInputDialog*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__initPainter = slot;
-	return true;
-}
-
 void QInputDialog_virtualbase_initPainter(const void* self, QPainter* painter) {
 
 	( (const VirtualQInputDialog*)(self) )->QInputDialog::initPainter(painter);
 
-}
-
-bool QInputDialog_override_virtual_redirected(void* self, intptr_t slot) {
-	VirtualQInputDialog* self_cast = dynamic_cast<VirtualQInputDialog*>( (QInputDialog*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__redirected = slot;
-	return true;
 }
 
 QPaintDevice* QInputDialog_virtualbase_redirected(const void* self, QPoint* offset) {
@@ -2644,30 +1928,10 @@ QPaintDevice* QInputDialog_virtualbase_redirected(const void* self, QPoint* offs
 
 }
 
-bool QInputDialog_override_virtual_sharedPainter(void* self, intptr_t slot) {
-	VirtualQInputDialog* self_cast = dynamic_cast<VirtualQInputDialog*>( (QInputDialog*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__sharedPainter = slot;
-	return true;
-}
-
 QPainter* QInputDialog_virtualbase_sharedPainter(const void* self) {
 
 	return ( (const VirtualQInputDialog*)(self) )->QInputDialog::sharedPainter();
 
-}
-
-bool QInputDialog_override_virtual_inputMethodEvent(void* self, intptr_t slot) {
-	VirtualQInputDialog* self_cast = dynamic_cast<VirtualQInputDialog*>( (QInputDialog*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__inputMethodEvent = slot;
-	return true;
 }
 
 void QInputDialog_virtualbase_inputMethodEvent(void* self, QInputMethodEvent* param1) {
@@ -2676,30 +1940,10 @@ void QInputDialog_virtualbase_inputMethodEvent(void* self, QInputMethodEvent* pa
 
 }
 
-bool QInputDialog_override_virtual_inputMethodQuery(void* self, intptr_t slot) {
-	VirtualQInputDialog* self_cast = dynamic_cast<VirtualQInputDialog*>( (QInputDialog*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__inputMethodQuery = slot;
-	return true;
-}
-
 QVariant* QInputDialog_virtualbase_inputMethodQuery(const void* self, int param1) {
 
 	return new QVariant(( (const VirtualQInputDialog*)(self) )->QInputDialog::inputMethodQuery(static_cast<Qt::InputMethodQuery>(param1)));
 
-}
-
-bool QInputDialog_override_virtual_focusNextPrevChild(void* self, intptr_t slot) {
-	VirtualQInputDialog* self_cast = dynamic_cast<VirtualQInputDialog*>( (QInputDialog*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__focusNextPrevChild = slot;
-	return true;
 }
 
 bool QInputDialog_virtualbase_focusNextPrevChild(void* self, bool next) {
@@ -2708,30 +1952,10 @@ bool QInputDialog_virtualbase_focusNextPrevChild(void* self, bool next) {
 
 }
 
-bool QInputDialog_override_virtual_timerEvent(void* self, intptr_t slot) {
-	VirtualQInputDialog* self_cast = dynamic_cast<VirtualQInputDialog*>( (QInputDialog*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__timerEvent = slot;
-	return true;
-}
-
 void QInputDialog_virtualbase_timerEvent(void* self, QTimerEvent* event) {
 
 	( (VirtualQInputDialog*)(self) )->QInputDialog::timerEvent(event);
 
-}
-
-bool QInputDialog_override_virtual_childEvent(void* self, intptr_t slot) {
-	VirtualQInputDialog* self_cast = dynamic_cast<VirtualQInputDialog*>( (QInputDialog*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__childEvent = slot;
-	return true;
 }
 
 void QInputDialog_virtualbase_childEvent(void* self, QChildEvent* event) {
@@ -2740,46 +1964,16 @@ void QInputDialog_virtualbase_childEvent(void* self, QChildEvent* event) {
 
 }
 
-bool QInputDialog_override_virtual_customEvent(void* self, intptr_t slot) {
-	VirtualQInputDialog* self_cast = dynamic_cast<VirtualQInputDialog*>( (QInputDialog*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__customEvent = slot;
-	return true;
-}
-
 void QInputDialog_virtualbase_customEvent(void* self, QEvent* event) {
 
 	( (VirtualQInputDialog*)(self) )->QInputDialog::customEvent(event);
 
 }
 
-bool QInputDialog_override_virtual_connectNotify(void* self, intptr_t slot) {
-	VirtualQInputDialog* self_cast = dynamic_cast<VirtualQInputDialog*>( (QInputDialog*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__connectNotify = slot;
-	return true;
-}
-
 void QInputDialog_virtualbase_connectNotify(void* self, QMetaMethod* signal) {
 
 	( (VirtualQInputDialog*)(self) )->QInputDialog::connectNotify(*signal);
 
-}
-
-bool QInputDialog_override_virtual_disconnectNotify(void* self, intptr_t slot) {
-	VirtualQInputDialog* self_cast = dynamic_cast<VirtualQInputDialog*>( (QInputDialog*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__disconnectNotify = slot;
-	return true;
 }
 
 void QInputDialog_virtualbase_disconnectNotify(void* self, QMetaMethod* signal) {
